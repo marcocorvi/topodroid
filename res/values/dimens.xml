@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="default_textsize" >22</string>
-  <string name="default_buttonsize" >3</string>
+  <string name="default_textsize" translatable="false">22</string>
+  <string name="default_buttonsize" translatable="false">3</string>
 
 <!-- MATERIAL
   <dimen name="activity_horizontal_margin">16dp</dimen>
   <dimen name="activity_vertical_margin">16dp</dimen>
   <dimen name="nav_drawer_width">260dp</dimen>
 -->
-  <dimen name="size">14sp</dimen>
+  <!-- dimen name="size">14sp</dimen -->
   <dimen name="sizeplus">16sp</dimen>
 
   <dimen name="titlesize">18sp</dimen>
@@ -35,13 +35,13 @@
   <dimen name="marginhuge">40dp</dimen>
 
   <dimen name="dividersmall">2dp</dimen>
-  <dimen name="divider">5dp</dimen>
+  <!-- dimen name="divider">5dp</dimen -->
   <dimen name="dividerbig">10dp</dimen>
 
-  <string name="dimxp" >1.6f</string>
-  <string name="dimxl" >2.2f</string>
-  <string name="dimyl" >1.9f</string>
-  <!-- string name="dimpd" >2</string -->
-  <string name="dimmx" >5</string>
-  <string name="dimmy" >2</string>
+  <string name="dimxp" translatable="false">1.6f</string>
+  <string name="dimxl" translatable="false">2.2f</string>
+  <string name="dimyl" translatable="false">1.9f</string>
+  <!-- string name="dimpd" translatable="false">2</string -->
+  <string name="dimmx" translatable="false">5</string>
+  <string name="dimmy" translatable="false">2</string>
 </resources>

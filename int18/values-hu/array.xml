@@ -146,6 +146,8 @@
      <item name="back2">Hátrafelé mérés, segédpontok</item>
      <item name="toporobot">TopoRobot</item>
   </string-array>
+
+<!--
   <string-array name="surveyStationsB">
      <item name="no">Nincs</item>
      <item name="for">Segédpontok, előremérés</item>
@@ -175,6 +177,7 @@
      <item name="for2">Előremérés, segédpontok</item>
      <item name="back2">Hátrafelé mérés, segédpontok</item>
   </string-array>
+-->
 
   <string-array name="pickerType">
      <item name="recent">Utoljára használt</item>

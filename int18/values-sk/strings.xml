@@ -15,6 +15,7 @@
     <string name="setup_buttonsize_title">TopoDroid nastavenie. Veľkosť tlačidiel</string>
     <string name="setup_drawingunit_title">TopoDroid nastavenie. Veľkosť ikon</string>
     <string name="setup_done_title">TopoDroid nastavenie. Koniec</string>
+    <!-- TODO string name="setup_buttonsample">Button size</string -->
 
     <string name="setup_textsize">Nastavte veľkosť textu.\nMožete to zmeniť aj neskôr v nastaveniach cez hlavné menu.</string>
     <string name="setup_buttonsize">Nastavte veľkosť tlačidiel.\nMožete to zmeniť aj neskôr v nastaveniach cez hlavné menu.</string>
@@ -320,7 +321,9 @@
     <string name="menu_color">VYČISTIŤ FARBU</string>
     <string name="menu_delete">VYMAZAŤ</string>
     <string name="menu_detach">ODPOJIŤ</string>
-    <string name="menu_display">ZOBRAZIŤ</string>
+    <!-- UNUSED string name="menu_display">ZOBRAZIŤ</string -->
+    <!-- TODO string name="menu_show_deleted">SHOW DELETED</string -->
+    <!-- TODO string name="menu_hide_deleted">HIDE DELETED</string -->
     <string name="menu_distox">DISTOX</string>
     <string name="menu_export">EXPORTOVAŤ</string>
     <string name="menu_firmware">FIRMWARE</string>

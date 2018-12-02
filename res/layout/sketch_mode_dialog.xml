@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
   style="@style/base_padding"
-  android:layout_width="fill_parent" 
+  android:layout_width="match_parent" 
   android:layout_height="wrap_content"
   android:orientation="vertical"
   >
@@ -9,7 +9,7 @@
 
     <RadioGroup 
       android:id="@+id/sketch_mode"
-      android:layout_width="fill_parent" 
+      android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:orientation="vertical" 
       >
@@ -36,19 +36,19 @@
     </RadioGroup>
 
     <CheckBox android:id="@+id/sketch_mode_splays"
-        android:layout_width="fill_parent" 
+        android:layout_width="match_parent" 
         style="@style/button_default"
 	android:text="@string/splays_show"
       />
 
     <CheckBox android:id="@+id/sketch_mode_foresurface"
-        android:layout_width="fill_parent" 
+        android:layout_width="match_parent" 
         style="@style/button_default"
 	android:text="@string/foresurface_show"
       />
 
     <LinearLayout 
-      android:layout_width="fill_parent" 
+      android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
       android:layout_marginTop="@dimen/marginvbig"

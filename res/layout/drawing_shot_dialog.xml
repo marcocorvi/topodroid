@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
   style="@style/base_padding"
-  android:layout_width="fill_parent" 
+  android:layout_width="match_parent" 
   android:layout_height="wrap_content"
   android:orientation="vertical"
   >
    					  
   <TextView
     android:id="@+id/shot_label"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content" 
     android:textSize="@dimen/textsizebig"
   />
 
   <LinearLayout 
     android:id="@+id/layout1"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@id/shot_label"
     android:orientation="horizontal"
@@ -45,13 +45,13 @@
   <EditText android:id="@+id/shot_comment"
     style="@style/edit_text_light"
     android:layout_marginTop="@dimen/margintiny"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_below="@id/layout1"
     />
 
   <LinearLayout android:id="@+id/layout2"
     android:layout_marginTop="@dimen/marginv"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:layout_below="@id/shot_comment"
     android:orientation="horizontal" 
@@ -82,7 +82,7 @@
 
   <SeekBar android:id="@+id/stretchbar"
     style="@style/lvrseekbar"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="20sp" 
     android:layout_marginTop="@dimen/marginv"
     android:layout_below="@id/layout2"
@@ -93,7 +93,7 @@
       				  
   <LinearLayout android:id="@+id/layout3"
     android:layout_marginTop="@dimen/marginv"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:layout_below="@id/stretchbar"
     android:orientation="horizontal" 
@@ -119,7 +119,7 @@
   <!-- TODO comment -->
   <LinearLayout android:id="@+id/layout3b"
     android:layout_marginTop="@dimen/marginv"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:layout_below="@id/layout3"
     android:orientation="horizontal" 
@@ -135,7 +135,7 @@
 
   <LinearLayout android:id="@+id/layout4"
     android:layout_marginTop="@dimen/marginv"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:layout_below="@id/layout3b"
     android:orientation="horizontal" 

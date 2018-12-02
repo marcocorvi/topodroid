@@ -9,7 +9,7 @@
      <item name="both">join with both ends</item>
      <item name="continue">continue</item>
   </string-array>
-  <string-array name="lineContinueValue" translatale="false"> <!-- must agree with DrawingWindow.CONT_XXX -->
+  <string-array name="lineContinueValue" translatable="false"> <!-- must agree with DrawingWindow.CONT_XXX -->
      <item name="none">0</item>
      <item name="start">1</item>
      <item name="end">2</item>
@@ -156,7 +156,7 @@
      <item name="diving">diving</item>
   </string-array>
 
-  <string-array name="importDatamodeValue"> <!-- see SurveyInfo.DATAMODE_xxx -->
+  <string-array name="importDatamodeValue" translatable="false"> <!-- see SurveyInfo.DATAMODE_xxx -->
      <item name="normal">0</item>
      <item name="diving">1</item>
   </string-array>
@@ -302,7 +302,7 @@
      <item name="huge">2</item>
   </string-array>
 
-  <string-array name="logStream" translatale="false">
+  <string-array name="logStream" translatable="false">
      <item name="android">System log</item>
      <item name="file">File log</item>
   </string-array>

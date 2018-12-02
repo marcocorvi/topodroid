@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
   style="@style/base_padding"
-  android:layout_width="fill_parent" 
+  android:layout_width="match_parent" 
   android:layout_height="wrap_content"
   android:orientation="vertical"
   >
    					  
   <TextView android:id="@+id/coords"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content" 
   />
 
   <LinearLayout 
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/marginv"
     android:orientation="horizontal" 
@@ -33,7 +33,7 @@
   </LinearLayout>
 
   <LinearLayout 
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/marginv"
     android:orientation="horizontal" 
@@ -54,7 +54,7 @@
   </LinearLayout>
 
   <LinearLayout 
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/marginv"
     android:orientation="horizontal" 
@@ -75,7 +75,7 @@
   </LinearLayout>
 
   <LinearLayout 
-      android:layout_width="fill_parent" 
+      android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/marginh"
       android:orientation="horizontal" 
@@ -95,7 +95,7 @@
   </LinearLayout>
 
   <LinearLayout 
-      android:layout_width="fill_parent" 
+      android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/marginv"
       android:orientation="horizontal" 
@@ -123,7 +123,7 @@
     </LinearLayout>
 
     <LinearLayout android:id="@+id/layout_xsection"
-      android:layout_width="fill_parent" 
+      android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/marginv"
       android:orientation="horizontal" 
@@ -134,13 +134,13 @@
       />
       <EditText android:id="@+id/nick"
         style="@style/edit_text_light"
-        android:layout_width="fill_parent" 
+        android:layout_width="match_parent" 
         android:hint="@string/section_name"
       />
     </LinearLayout>
 
     <LinearLayout android:id="@+id/layout_xsection_data"
-      android:layout_width="fill_parent" 
+      android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/marginv"
       android:orientation="horizontal" 
@@ -166,7 +166,7 @@
     </LinearLayout>
 
     <LinearLayout 
-      android:layout_width="fill_parent" 
+      android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:gravity="right"
       android:orientation="horizontal" 

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:orientation="vertical"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
   >
   <LinearLayout android:id="@+id/layout1"
         android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
     >
     <EditText android:id="@+id/name"
         style="@style/edit_text"
@@ -27,9 +27,8 @@
 
     <LinearLayout android:id="@+id/layout2"
         android:orientation="horizontal"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/splays"
 	android:layout_marginTop="@dimen/marginv"
 	android:layout_marginBottom="@dimen/marginv"
       >

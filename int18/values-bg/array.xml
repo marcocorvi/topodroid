@@ -127,7 +127,7 @@
      <item name="toporobot">TopoRobot</item>
   </string-array>
 
-
+<!--
   <string-array name="surveyStationsB">
      <item name="no">Изключени</item>
      <item name="for">Странични, права отсечка</item>
@@ -157,6 +157,7 @@
      <item name="for2">Права отсечка, странични</item>
      <item name="back2">Обратна отсечка, странични</item>
   </string-array>
+-->
 
   <string-array name="pickerType">
      <item name="recent">Последни използвани</item>

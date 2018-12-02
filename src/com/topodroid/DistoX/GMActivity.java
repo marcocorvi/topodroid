@@ -47,7 +47,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
 // import android.view.Menu;
-import android.view.MenuItem;
+// import android.view.MenuItem;
 
 // import android.graphics.Bitmap;
 // import android.graphics.BitmapFactory;
@@ -75,10 +75,6 @@ public class GMActivity extends Activity
   private int mAlgo;            // calibration algorithm
 
   private ListView mList;                  // display list
-
-  private MenuItem mMIoptions;
-  private MenuItem mMIdisplay;
-  private MenuItem mMIhelp;
 
   private CalibCBlockAdapter mDataAdapter;  // adapter for the list of GM's
 
@@ -117,10 +113,11 @@ public class GMActivity extends Activity
                      };
 
   static final private int[] menus = {
-                        R.string.menu_display,
+                        R.string.menu_show_deleted,
                         R.string.menu_validate,
                         R.string.menu_options, 
-                        R.string.menu_help
+                        R.string.menu_help,
+			R.string.menu_hide_deleted
                      };
 
   static final private int[] help_icons = {
@@ -1099,13 +1096,18 @@ public class GMActivity extends Activity
     // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
     mMenuAdapter = new ArrayAdapter<>(this, R.layout.menu );
 
-    mMenuAdapter.add( res.getString( menus[0] ) );
+    fillMenus( res );
+    mMenu.setAdapter( mMenuAdapter );
+    mMenu.invalidate();
+  }
+
+  private void fillMenus( Resources res )
+  {
+    mMenuAdapter.clear();
+    mMenuAdapter.add( res.getString( (mBlkStatus == 0)? menus[0] : menus[4] ) );
     if ( TDLevel.overAdvanced ) mMenuAdapter.add( res.getString( menus[1] ) );
     mMenuAdapter.add( res.getString( menus[2] ) );
     mMenuAdapter.add( res.getString( menus[3] ) );
-    
-    mMenu.setAdapter( mMenuAdapter );
-    mMenu.invalidate();
   }
 
   private boolean closeMenu()
@@ -1126,6 +1128,7 @@ public class GMActivity extends Activity
     int p = 0;
     if ( p++ == pos ) { // DISPLAY
       mBlkStatus = 1 - mBlkStatus;       // 0 --> 1;  1 --> 0
+      fillMenus( getResources() );
       updateDisplay( );
     } else if ( TDLevel.overAdvanced && p++ == pos ) { // VALIDATE
       List< String > list = mApp_mDData.selectDeviceCalibs( TDInstance.device.mAddress );

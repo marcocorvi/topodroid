@@ -21,12 +21,12 @@
       android:id="@+id/drawingSurface"
       />
     <LinearLayout
-      android:layout_width="fill_parent"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="vertical"
       >
       <RelativeLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
@@ -44,12 +44,12 @@
         </LinearLayout>
 
         <LinearLayout
-          android:layout_width="fill_parent"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_toLeftOf="@id/right"
           >
           <com.topodroid.DistoX.HorizontalListView android:id="@+id/listview"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             />
         </LinearLayout>

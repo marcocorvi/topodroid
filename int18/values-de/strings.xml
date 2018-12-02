@@ -15,6 +15,7 @@
     <string name="setup_buttonsize_title">TopoDroid setup. Knopfgröße</string>
     <string name="setup_drawingunit_title">TopoDroid setup. Icongröße</string>
     <string name="setup_done_title">TopoDroid setup. Fertig</string>
+    <!-- TODO string name="setup_buttonsample">Button size</string -->
 
     <string name="setup_textsize">Definiert die Textgröße.\nKann später über das Einstellungsmenü geändert werden.</string>
     <string name="setup_buttonsize">Definiert die Knopfgröße.\nKann später über das Einstellungsmenü geändert werden.</string>
@@ -326,7 +327,9 @@
     <string name="menu_color">FARBE ENTF</string>
     <string name="menu_delete">LÖSCHEN</string>
     <string name="menu_detach">TRENNEN</string>
-    <string name="menu_display">ANZEIGEN</string>
+    <!-- UNUSED string name="menu_display">ANZEIGEN</string -->
+    <!-- TODO string name="menu_show_deleted">SHOW DELETED</string -->
+    <!-- TODO string name="menu_hide_deleted">HIDE DELETED</string -->
     <string name="menu_distox">DISTOX</string>
     <string name="menu_export">EXPORTIEREN</string>
     <string name="menu_firmware">FIRMWARE</string>

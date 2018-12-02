@@ -3,13 +3,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
      android:id="@+id/td_layout"
      android:orientation="vertical"
-     android:layout_width="fill_parent"
-     android:layout_height="fill_parent"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
      >
 
      <LinearLayout android:id="@+id/layout_cbd"
       android:orientation="horizontal"
-      android:layout_width="fill_parent"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/marginv"
       >
@@ -21,7 +21,7 @@
           android:text="@string/button_change"
        />
       <TextView android:id="@+id/cbd_text"
-         android:layout_width="fill_parent"
+         android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:textSize="@dimen/textsizebig"
       />
@@ -37,7 +37,7 @@
     />
 
     <LinearLayout 
-      android:layout_width="fill_parent" 
+      android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
       android:layout_marginTop="@dimen/marginvbig"
@@ -60,7 +60,7 @@
 
     <ListView android:id="@+id/cwd_list"
           style="@style/list_top"
-          android:layout_width="fill_parent"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginTop="@dimen/marginvbig"
     />

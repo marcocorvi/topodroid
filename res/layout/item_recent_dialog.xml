@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
       android:orientation="vertical"
-      android:layout_width="fill_parent"
-      android:layout_height="fill_parent"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
       >
 
       <LinearLayout 
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="@dimen/marginv"
@@ -19,7 +19,7 @@
 	    android:text="@string/minus_plus"
         />
         <SeekBar android:id="@+id/seekbar"
-           android:layout_width="fill_parent"
+           android:layout_width="match_parent"
 	   android:layout_height="20sp" 
            android:max="360"
            android:background="#666666"
@@ -28,7 +28,7 @@
       </LinearLayout>
 
       <LinearLayout android:id="@+id/layout_point"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/marginv"
         android:layout_marginBottom="@dimen/marginv"
@@ -72,7 +72,7 @@
       </LinearLayout>
 
       <LinearLayout android:id="@+id/layout_line"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/marginv"
         android:layout_marginBottom="@dimen/marginv"
@@ -116,7 +116,7 @@
       </LinearLayout>
 
       <LinearLayout android:id="@+id/layout_area"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/marginv"
         android:layout_marginBottom="@dimen/marginv"

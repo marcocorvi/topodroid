@@ -11,7 +11,7 @@
   <EditText android:id="@+id/edit_name" 
     style="@style/edit_text"
     android:layout_marginTop="@dimen/margintiny"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:hint="@string/station"
     android:nextFocusDown="@+id/edit_long"
   />
@@ -40,7 +40,7 @@
 
   <LinearLayout android:id="@+id/layout2"
       android:layout_below="@id/layout1"
-      android:layout_width="fill_parent" 
+      android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal"
       >
@@ -62,7 +62,7 @@
   		
   <LinearLayout android:id="@+id/layout3a"
       android:layout_below="@id/layout2"
-      android:layout_width="fill_parent" 
+      android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal"
       android:layout_marginTop="@dimen/margintiny"
@@ -87,7 +87,7 @@
   		
   <LinearLayout android:id="@+id/layout3b"
       android:layout_below="@id/layout3a"
-      android:layout_width="fill_parent" 
+      android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal"
       android:layout_marginTop="@dimen/margintiny"
@@ -117,14 +117,14 @@
       style="@style/edit_text_light"
       android:layout_below="@id/layout3b"
       android:layout_marginTop="@dimen/margintiny"
-      android:layout_width="fill_parent"
+      android:layout_width="match_parent"
       android:hint="@string/comment"
       android:nextFocusDown="@id/top"
   />
 
   <LinearLayout android:id="@+id/layout4"
       android:layout_below="@id/edit_comment"
-      android:layout_width="fill_parent" 
+      android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
       android:layout_marginTop="@dimen/marginvbig"
@@ -143,7 +143,7 @@
 	android:text="@string/proj4"
         />
       <LinearLayout 
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="right"
         >

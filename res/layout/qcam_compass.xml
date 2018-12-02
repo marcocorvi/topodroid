@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:orientation="vertical" 
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
   android:id="@+id/layout">
   <com.topodroid.DistoX.QCamDrawingSurface
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:id="@+id/drawingSurface"
   />
   
-  <LinearLayout
-    android:layout_width="fill_parent"
+  <RelativeLayout
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_alignParentBottom="true"
@@ -24,7 +24,7 @@
       android:textSize="@dimen/textsizehuge"
       />
     <LinearLayout android:id="@+id/layout4"
-      android:layout_width="fill_parent"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="vertical"
       android:layout_marginRight="@dimen/marginh"
@@ -49,7 +49,7 @@
               android:layout_marginBottom="@dimen/marginv"
               />
 -->
-          </LinearLayout>
-        </LinearLayout>
+    </LinearLayout>
+  </RelativeLayout>
 
 </RelativeLayout>

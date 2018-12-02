@@ -10,8 +10,8 @@
   
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
      android:orientation="vertical"
-     android:layout_width="fill_parent"
-     android:layout_height="fill_parent"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
      >
 
   <LinearLayout android:id="@+id/layout1"
@@ -22,7 +22,7 @@
       android:layout_marginBottom="@dimen/marginv"
     >
     <SeekBar android:id="@+id/seekbar"
-      android:layout_width="fill_parent"
+      android:layout_width="match_parent"
       android:layout_height="20dp" 
       android:layout_marginLeft="@dimen/marginsmall"
       android:layout_marginRight="@dimen/marginsmall"
@@ -69,7 +69,7 @@
   <RelativeLayout android:id="@+id/layout0"
      android:orientation="vertical"
      android:layout_width="match_parent"
-     android:layout_height="fill_parent"
+     android:layout_height="match_parent"
      android:layout_below="@id/layout1"
      >
     <com.topodroid.DistoX.ProjectionSurface

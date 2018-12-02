@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
     android:id="@+id/top"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="0dp"
@@ -80,7 +80,7 @@
       />
 
     <LinearLayout android:id="@+id/layout3"
-      android:layout_width="fill_parent" 
+      android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:layout_below="@id/cb_splay"
       android:orientation="horizontal"

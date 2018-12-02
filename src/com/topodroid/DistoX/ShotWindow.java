@@ -250,7 +250,7 @@ public class ShotWindow extends Activity
   public void setRefAzimuthButton()
   {
     if ( ! TDLevel.overNormal ) return;
-    if ( BTN_AZIMUTH - boff >= mButton1.length ) return;
+    if ( BTN_AZIMUTH - boff >= mNrButton1 ) return;
     if ( TDAzimuth.mFixedExtend == 0 ) {
       // android.graphics.Matrix m = new android.graphics.Matrix();
       // m.postRotate( TDAzimuth.mRefAzimuth - 90 );
@@ -956,8 +956,8 @@ public class ShotWindow extends Activity
     } else {
       boff = 0;
     }
-    mButton1 = new Button[ mNrButton1 + 1 ];
-    for ( int k=0; k < mNrButton1; ++k ) {
+    mButton1 = new Button[ mNrButton1 + 1 ]; // last is empty-button
+    for ( int k=0; k < mNrButton1; ++k ) { 
       int kk = k+boff;
       mButton1[k] = MyButton.getButton( this, this, izons[kk] );
     }

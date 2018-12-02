@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:orientation="vertical"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
   >
   <LinearLayout 
     android:orientation="horizontal"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     >
     <Button android:id="@+id/item_point"
@@ -44,7 +44,7 @@
   </LinearLayout>
 
   <LinearLayout 
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/marginv"
     android:orientation="horizontal"
@@ -57,7 +57,7 @@
 	android:text="@string/minus_plus"
     />
     <SeekBar android:id="@+id/seekbar"
-       android:layout_width="fill_parent"
+       android:layout_width="match_parent"
        android:layout_height="20sp" 
        android:max="360"
        android:background="#666666"
@@ -67,7 +67,7 @@
 
 
   <!-- LinearLayout android:id="@+id/layout2"  UNUSED
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/marginv"
     android:layout_marginBottom="@dimen/marginv"
@@ -78,7 +78,7 @@
   </LinearLayout -->
 
   <GridView android:id="@+id/item_grid"
-      android:layout_width="fill_parent"
+      android:layout_width="match_parent"
       android:layout_height="0dp"
       android:transcriptMode="alwaysScroll"
       android:layout_weight="1"
@@ -90,7 +90,7 @@
   />
 
   <GridView android:id="@+id/item_grid_line"
-      android:layout_width="fill_parent"
+      android:layout_width="match_parent"
       android:layout_height="0dp"
       android:transcriptMode="alwaysScroll"
       android:layout_weight="1"
@@ -102,7 +102,7 @@
   />
 
   <GridView android:id="@+id/item_grid_area"
-      android:layout_width="fill_parent"
+      android:layout_width="match_parent"
       android:layout_height="0dp"
       android:transcriptMode="alwaysScroll"
       android:layout_weight="1"

@@ -15,6 +15,7 @@
     <string name="setup_buttonsize_title">Настройка TopoDroid. Размер кнопок</string>
     <string name="setup_drawingunit_title">Настройка TopoDroid. Размер значков</string>
     <string name="setup_done_title">Настройка TopoDroid. Готово</string>
+    <!-- TODO string name="setup_buttonsample">Button size</string -->
 
     <string name="setup_textsize">Set the text size.\nВы всегда можете изменить это позже через главное меню настроек.</string>
     <string name="setup_buttonsize">Set the button size.\nВы всегда можете изменить это позже через главное меню настроек.</string>
@@ -247,7 +248,7 @@
     <string name="in">внутренний</string>
     <!-- UNUSED string name="none">none</string -->
     <!-- UNUSED string name="barrier_add">Скрыть нитку хода после этого пикета</string -->
-    <string name="hide_from">Скрыть нитку хода до ... от</string>
+    <string name="hide_from">Скрыть нитку хода до &#8230; от</string>
     <!-- UNUSED string name="barrier_del">Показать нитку хода после этого пикета</string -->
     <!-- UNUSED string name="hidden_add">Скрыть нитку хода до этого пикета</string -->
     <!-- UNUSED string name="hidden_del">Показать нитку хода до этого пикета</string -->
@@ -319,7 +320,9 @@
     <string name="menu_clear">ОЧИСТИТЬ</string>
     <string name="menu_delete">Удалить</string>
     <string name="menu_detach">Отсоединить</string>
-    <string name="menu_display">Показать</string>
+    <!-- UNUSED string name="menu_display">Показать</string -->
+    <!-- TODO string name="menu_show_deleted">SHOW DELETED</string -->
+    <!-- TODO string name="menu_hide_deleted">HIDE DELETED</string -->
     <!-- OK string name="menu_distox">DISTOX</string -->
     <string name="menu_export">Экспорт</string>
     <string name="menu_firmware">Прошивка</string>

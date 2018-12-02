@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
   android:id="@+id/top"
-  android:layout_width="fill_parent" 
+  android:layout_width="match_parent" 
   android:layout_height="wrap_content"
   android:orientation="vertical"
   android:padding="0dp"
@@ -9,7 +9,7 @@
 
   <LinearLayout 
     android:id="@+id/layout0"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:paddingBottom="@dimen/paddingv"
@@ -35,7 +35,7 @@
   <LinearLayout 
     android:id="@+id/layout1"
     android:layout_below="@id/layout0"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:paddingBottom="@dimen/paddingv"
@@ -61,7 +61,7 @@
 
   <LinearLayout android:id="@+id/layout2"
     android:layout_below="@id/layout1"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:paddingBottom="@dimen/paddingv"
@@ -86,7 +86,7 @@
 
   <LinearLayout android:id="@+id/layout3"
     android:layout_below="@id/layout2"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:paddingBottom="@dimen/paddingv"
@@ -111,7 +111,7 @@
 
   <LinearLayout android:id="@+id/layout4"
     android:layout_below="@id/layout3"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:paddingBottom="@dimen/paddingv"
@@ -137,7 +137,7 @@
    					  
   <LinearLayout android:id="@+id/layout5"
     android:layout_below="@id/layout4"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:paddingBottom="@dimen/paddingv"
@@ -168,7 +168,7 @@
   </LinearLayout>
    					  
   <LinearLayout android:id="@+id/layout6"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_below="@id/layout5"
@@ -188,13 +188,13 @@
    					  
   <LinearLayout android:id="@+id/layout7"
     android:layout_below="@id/layout6"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_marginTop="@dimen/marginvbig"
     > 
     <TextView android:id="@+id/fix_cs_coords" 
-      android:layout_width="fill_parent" 
+      android:layout_width="match_parent" 
       android:layout_height="wrap_content" 
       android:singleLine="true" 
     />
@@ -202,7 +202,7 @@
    					  
   <LinearLayout android:id="@+id/layout8"
     android:layout_below="@id/layout7"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_marginTop="@dimen/marginvbig"

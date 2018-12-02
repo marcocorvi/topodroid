@@ -15,6 +15,7 @@
     <string name="setup_buttonsize_title">TopoDroid настройки. Размер бутони</string>
     <string name="setup_drawingunit_title">TopoDroid настройки. Размер икони</string>
     <string name="setup_done_title">TopoDroid настройки. Готово</string>
+    <!-- TODO string name="setup_buttonsample">Button size</string -->
 
     <string name="setup_textsize">Настройка на размера на текста.\nМоже да го промените по-късно от настройките.</string>
     <string name="setup_buttonsize">Настройка на размера на бутоните.\nМоже да го промените по-късно от настройките.</string>
@@ -316,7 +317,9 @@
     <string name="menu_color">Изчистване цвят</string>
     <string name="menu_delete">Изтриване</string>
     <string name="menu_detach">Прек. на връзката</string>
-    <string name="menu_display">Дисплей</string>
+    <!-- UNUSED string name="menu_display">Дисплей</string -->
+    <!-- TODO string name="menu_show_deleted">SHOW DELETED</string -->
+    <!-- TODO string name="menu_hide_deleted">HIDE DELETED</string -->
     <string name="menu_distox">DistoX</string>
     <string name="menu_export">Експортиране</string>
     <string name="menu_firmware">Фърмуер</string>

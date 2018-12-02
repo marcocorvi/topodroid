@@ -16,6 +16,7 @@
     <!-- TODO string name="setup_buttonsize_title">TopoDroid setup. Button size</string -->
     <!-- TODO string name="setup_drawingunit_title">TopoDroid setup. Icons size</string -->
     <!-- TODO string name="setup_done_title">TopoDroid setup. Done</string -->
+    <!-- TODO string name="setup_buttonsample">Button size</string -->
 
     <!-- TODO string name="setup_textsize">Set the text size.\nYou can always change this later thru the main window settings.</string -->
     <!-- TODO string name="setup_buttonsize">Set the button size.\nYou can always change this later thru the main window settings.</string -->
@@ -316,7 +317,9 @@
     <string name="menu_color">EFFACER COULEUR</string>
     <string name="menu_delete">SUPPRIMER</string>
     <string name="menu_detach">DÉCONNECTER</string>
-    <string name="menu_display">AFFICHAGE</string>
+    <!-- UNUSED string name="menu_display">AFFICHAGE</string -->
+    <!-- TODO string name="menu_show_deleted">SHOW DELETED</string -->
+    <!-- TODO string name="menu_hide_deleted">HIDE DELETED</string -->
     <string name="menu_distox">DISTOX</string>
     <string name="menu_export">EXPORTER</string>
     <string name="menu_firmware">FIRMWARE</string>

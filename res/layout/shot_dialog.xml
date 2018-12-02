@@ -7,14 +7,14 @@
   >
 
   <!-- TextView android:id="@+id/shot_data"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" 
         android:textSize="@dimen/textsizebig"
         android:text="@string/shot_info"
         / -->
   
   <LinearLayout android:id="@+id/layout1"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/marginv"
     android:orientation="horizontal"
@@ -47,7 +47,7 @@
 
   <TextView android:id="@+id/shot_extra"
     android:layout_below="@id/layout1"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content" 
     android:textSize="@dimen/textsizebig"
     android:text="@string/shot_info"
@@ -55,7 +55,7 @@
 
   <LinearLayout android:id="@+id/layout2"
     android:layout_below="@id/shot_extra"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal" 
     android:layout_marginTop="@dimen/margintiny"
@@ -122,14 +122,14 @@
     android:layout_below="@id/layout3"
     android:maxLines="1" 
     android:layout_marginTop="@dimen/margintiny"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:scrollHorizontally="true"
     android:hint="@string/shot_note"
     />
 
   <LinearLayout android:id="@+id/layout5"
     android:layout_below="@id/shot_comment"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal" 
     >
@@ -157,14 +157,14 @@
 
   <LinearLayout android:id="@+id/layout4"
     android:layout_below="@id/layout5"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/marginv"
     android:layout_marginBottom="@dimen/marginv"
     android:orientation="horizontal" 
     >
     <com.topodroid.DistoX.HorizontalListView android:id="@+id/listview"
-      android:layout_width="fill_parent"
+      android:layout_width="match_parent"
       android:layout_marginTop="@dimen/marginv"
       android:layout_marginBottom="@dimen/marginv"
       android:layout_height="50dp"
@@ -174,7 +174,7 @@
 <!--
   <LinearLayout android:id="@+id/layout8"
     android:layout_below="@id/layout4"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="50sp"
     android:paddingLeft="@dimen/paddingh"
     android:paddingRight="@dimen/paddingh"
@@ -201,7 +201,7 @@
       />
     </RadioGroup>
     <!- - LinearLayout 
-      android:layout_width="fill_parent" 
+      android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
       android:gravity="right"
@@ -217,7 +217,7 @@
 
   <LinearLayout android:id="@+id/layout10"
     android:layout_below="@id/layout8"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="50sp"
     android:paddingLeft="@dimen/paddingh"
     android:paddingRight="@dimen/paddingh"
@@ -266,7 +266,7 @@
 
   <LinearLayout android:id="@+id/layout9"
     android:layout_below="@id/layout10"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="50sp"
     android:paddingLeft="@dimen/paddingh"
     android:paddingRight="@dimen/paddingh"

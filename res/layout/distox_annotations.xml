@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
   style="@style/base_padding"
-  android:layout_width="fill_parent" 
+  android:layout_width="match_parent" 
   android:layout_height="wrap_content"
   android:orientation="vertical"
   >
 
     <!-- TextView android:id="@+id/note_title"
         android:layout_marginTop="@dimen/margintiny"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" 
         android:text=""
         / -->
 
     <ScrollView
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         >
       <EditText android:id="@+id/note_text"
         style="@style/edit_text_light"
         android:layout_marginTop="@dimen/margintiny"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minLines="8"
         android:gravity="top|left"
@@ -34,7 +34,7 @@
     </ScrollView>
    					  
     <LinearLayout 
-      android:layout_width="fill_parent" 
+      android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
       android:gravity="right"

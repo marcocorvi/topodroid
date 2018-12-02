@@ -12,7 +12,7 @@
 
     <!-- TextView android:id="@+id/shot_info" 
         android:layout_marginBottom="@dimen/marginv"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/shot_info"
         android:textSize="@dimen/textsizebig"
@@ -20,7 +20,7 @@
 
     <LinearLayout 
       android:id="@+id/layout1"
-      android:layout_width="fill_parent" 
+      android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:layout_alignParentTop="true"
       android:orientation="horizontal" 
@@ -51,7 +51,7 @@
 
     <LinearLayout 
       android:id="@+id/layout2"
-      android:layout_width="fill_parent" 
+      android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:layout_below="@id/layout1"
       android:layout_marginTop="@dimen/marginv"
@@ -99,7 +99,7 @@
 
     <LinearLayout 
       android:id="@+id/shot_backsight"
-      android:layout_width="fill_parent" 
+      android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:layout_below="@id/layout2"
       android:layout_marginTop="@dimen/marginv"
@@ -145,7 +145,7 @@
 
     <LinearLayout 
       android:id="@+id/layout3"
-      android:layout_width="fill_parent" 
+      android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:layout_below="@id/shot_backsight"
       android:layout_marginTop="@dimen/marginv"
@@ -222,7 +222,7 @@
     <LinearLayout 
       android:id="@+id/layout4"
       android:layout_below="@id/radio5"
-      android:layout_width="fill_parent" 
+      android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:paddingLeft="@dimen/marginnormal"
       android:paddingRight="@dimen/marginnormal"
@@ -262,7 +262,7 @@
 
     <LinearLayout android:id="@+id/layout6"
       android:layout_below="@id/layout4"
-      android:layout_width="fill_parent" 
+      android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
       android:layout_marginTop="@dimen/marginvbig"

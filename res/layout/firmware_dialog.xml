@@ -28,7 +28,7 @@
     style="@style/edit_text_light"
     android:id="@+id/firmware_file"
     android:hint="@string/firmware_file"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
   />
 
@@ -45,7 +45,7 @@
     >
     <TextView android:id="@+id/firmware_text"
       android:text="@string/firmware_text"
-      android:layout_width="fill_parent"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="vertical"
       android:autoLink="all"

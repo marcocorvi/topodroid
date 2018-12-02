@@ -11,7 +11,7 @@
     <LinearLayout 
        android:id="@+id/layout1"
        android:layout_marginTop="@dimen/margintiny"
-       android:layout_width="fill_parent" 
+       android:layout_width="match_parent" 
        android:layout_height="wrap_content"
        android:orientation="horizontal"
        >
@@ -38,7 +38,7 @@
        android:id="@+id/layout2"
        android:layout_below="@id/layout1"
        android:layout_marginTop="@dimen/marginv"
-       android:layout_width="fill_parent" 
+       android:layout_width="match_parent" 
        android:layout_height="wrap_content"
        android:orientation="horizontal"
        >
@@ -52,7 +52,7 @@
 
       <EditText android:id="@+id/edit_plot_start"
          style="@style/edit_text"
-         android:layout_width="fill_parent"
+         android:layout_width="match_parent"
          android:hint="@string/plot_start"
          android:scrollHorizontally="true" />
    		
@@ -66,7 +66,7 @@
 
     <LinearLayout android:id="@+id/layout4"
       android:layout_below="@id/layout2"
-      android:layout_width="fill_parent" 
+      android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
       android:layout_marginTop="@dimen/marginvbig"
@@ -97,7 +97,7 @@
 
     <LinearLayout android:id="@+id/layout5"
       android:layout_below="@id/layout4"
-      android:layout_width="fill_parent" 
+      android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:layout_gravity="right"
       android:orientation="horizontal" 

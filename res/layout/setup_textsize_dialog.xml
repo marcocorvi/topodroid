@@ -21,7 +21,7 @@
     />
 
   <!-- SeekBar android:id="@+id/seekbar"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="20dp" 
     android:layout_marginLeft="@dimen/marginsmall"
     android:layout_marginRight="@dimen/marginsmall"

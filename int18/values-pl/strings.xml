@@ -15,6 +15,7 @@
     <string name="setup_buttonsize_title">Konfiguracja TopoDroid. Rozmiar przycisku</string>
     <string name="setup_drawingunit_title">Konfiguracja TopoDroid. Rozmiar ikon</string>
     <string name="setup_done_title">Konfiguracja TopoDroid. Gotowe</string>
+    <!-- TODO string name="setup_buttonsample">Button size</string -->
 
     <string name="setup_textsize">Ustaw rozmiar tekstu.\nZawsze możesz to zmienić później poprzez ustawienia głównego okna.</string>
     <string name="setup_buttonsize">Ustaw rozmiar przycisku.\nYou can always change this later through the main window settings.</string>
@@ -320,7 +321,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="menu_color">CLEAR COLOR</string>
     <string name="menu_delete">DELETE</string>
     <string name="menu_detach">DISCONNECT</string>
-    <string name="menu_display">DISPLAY</string>
+    <!-- UNUSED string name="menu_display">DISPLAY</string -->
+    <!-- TODO string name="menu_show_deleted">SHOW DELETED</string -->
+    <!-- TODO string name="menu_hide_deleted">HIDE DELETED</string -->
     <string name="menu_distox">DISTOX</string>
     <string name="menu_export">EXPORT</string>
     <string name="menu_firmware">FIRMWARE</string>

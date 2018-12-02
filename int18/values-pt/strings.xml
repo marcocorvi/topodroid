@@ -15,6 +15,7 @@
     <string name="setup_buttonsize_title">Configuração TopoDroid. Tamanho dos botões</string>
     <string name="setup_drawingunit_title">Configuração TopoDroid. Tamanho dos ícones</string>
     <string name="setup_done_title">Configuração TopoDroid. Fim</string>
+    <!-- TODO string name="setup_buttonsample">Button size</string -->
 
     <string name="setup_textsize">Defina o tamanho do texto.\nPode ser alterado depois na janela principal de configurações.</string>
     <string name="setup_buttonsize">Defina o tamanho dos botões.\nPode ser alterado depois na janela principal de configurações.</string>
@@ -315,7 +316,9 @@
     <string name="menu_color">VOLTAR PARA COR PADRÃO</string>
     <string name="menu_delete">APAGAR</string>
     <string name="menu_detach">DESCONECTAR</string>
-    <string name="menu_display">DISPLAY</string>
+    <!-- UNUSED string name="menu_display">DISPLAY</string -->
+    <!-- TODO string name="menu_show_deleted">SHOW DELETED</string -->
+    <!-- TODO string name="menu_hide_deleted">HIDE DELETED</string -->
     <string name="menu_distox">DISTOX</string>
     <string name="menu_export">EXPORTAR</string>
     <string name="menu_firmware">FIRMWARE</string>

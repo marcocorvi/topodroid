@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
-      android:debuggable="true"
       android:installLocation="auto"
       android:versionCode="401050"
       android:versionName="4.1.1u"
     >
+    <!-- android:debuggable="true" -->
     <!-- FIXME-23 -->
     <uses-sdk
        android:minSdkVersion="16"
@@ -51,10 +51,10 @@
           android:allowBackup="false"
 	  android:icon="@drawable/icon4"
 	  android:largeHeap="true"
-	  android:extractNativeLibs="false"
 	  ><!-- FIXME-23
 	  android:largeHeap="true"
           -->
+	  <!-- android:extractNativeLibs="false" -->
           <!-- android:largeHeap="true"  post Gingerbread large memory -->
           <!-- android:debuggable="false" -->
 

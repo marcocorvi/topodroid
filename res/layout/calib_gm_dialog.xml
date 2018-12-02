@@ -7,7 +7,7 @@
 
   <LinearLayout 
     android:id="@+id/layout1"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/marginvbig"
     android:orientation="horizontal"
@@ -36,7 +36,7 @@
 
   <TextView android:id="@+id/gm_error"
     android:layout_below="@id/layout1"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content" 
     android:textSize="@dimen/textsizebig"
     android:layout_marginTop="@dimen/margintiny"
@@ -46,13 +46,13 @@
     style="@style/edit_number"
     android:layout_below="@id/gm_error"
     android:maxLines="1" 
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_marginTop="@dimen/margintiny"
   />
    		
   <LinearLayout android:id="@+id/layout2"
     android:layout_below="@id/gm_name"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal" 
     android:layout_marginTop="@dimen/marginhuge" 
@@ -61,7 +61,7 @@
 
   <LinearLayout android:id="@+id/layout3"
     android:layout_below="@id/layout2"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal" 
     android:layout_marginTop="@dimen/marginvbig" 

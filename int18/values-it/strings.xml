@@ -15,6 +15,7 @@
     <string name="setup_buttonsize_title">Configura TopoDroid. Dimensione pulsanti</string>
     <string name="setup_drawingunit_title">Configura TopoDroid. Dimensione Icone</string>
     <string name="setup_done_title">Configura TopoDroid. Fatto</string>
+    <!-- TODO string name="setup_buttonsample">Button size</string -->
 
     <string name="setup_textsize">Imposta la dimensione testo.\nPuoi sempre cambiarla in seguito dalla finestra di configurazione.</string>
     <string name="setup_buttonsize">Imposta la dimensione pulsanti.\nPuoi sempre cambiarla in seguito dalla finestra di configurazione..</string>
@@ -173,7 +174,7 @@
     <!-- UNUSED string name="sketch_saving">Salvataggio disegno &#8230; attendi &#8230;</string -->
     <string name="MT_points_none">Punto GPS mancante</string>
 
-    <string name="pleasewait">Attendere...</string>
+    <string name="pleasewait">Attendere &#8230;</string>
     <string name="processing">elaborazione &#8230;</string>
 
     <!-- UNUSED string name="head_tail">Memoria: </string -->
@@ -316,7 +317,9 @@
     <string name="menu_color">PULISCI COLORE</string>
     <string name="menu_delete">ELIMINA</string>
     <string name="menu_detach">SCONNETTI</string>
-    <!-- OK string name="menu_display">DISPLAY</string -->
+    <!-- UNUSED string name="menu_display">DISPLAY</string -->
+    <!-- TODO string name="menu_show_deleted">SHOW DELETED</string -->
+    <!-- TODO string name="menu_hide_deleted">HIDE DELETED</string -->
     <!-- OK string name="menu_distox">DISTOX</string -->
     <string name="menu_export">ESPORTA</string>
     <!-- OK string name="menu_firmware">FIRMWARE</string -->

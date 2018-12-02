@@ -157,6 +157,8 @@
      <item name="back2">Visée inverse, cheminement en premier</item>
      <item name="toporobot">TopoRobot</item>
   </string-array>
+
+<!--
   <string-array name="surveyStationsB">
      <item name="no">Désactivé</item>
      <item name="for">Visée normale, visées latérales en premier</item>
@@ -186,7 +188,7 @@
      <item name="for2">Visée normale, cheminement en premier</item>
      <item name="back2">Visée inverse, cheminement en premier</item>
   </string-array>
- 
+-->
 
    <string-array name="pickerType">
      <item name="recent">Plus récentes</item>

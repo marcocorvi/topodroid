@@ -123,6 +123,8 @@
      <item name="back2">Visual inversa + radiales destino</item>
      <item name="toporobot">TopoRobot</item>
   </string-array>
+
+<!--
   <string-array name="surveyStationsB">
      <item name="no">Nada</item>
      <item name="for">Radiales origen + visual directa</item>
@@ -152,6 +154,7 @@
      <item name="for2">Visual directa + radiales origen</item>
      <item name="back2">Visual inversa + radiales destino</item>
   </string-array>
+-->
 
   <string-array name="pickerType">
      <item name="recent">Más reciente</item>

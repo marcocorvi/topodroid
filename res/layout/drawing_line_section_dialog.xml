@@ -2,24 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
   android:id="@+id/content_view"
   style="@style/base_padding"
-  android:layout_width="fill_parent" 
-  android:layout_height="fill_parent"
+  android:layout_width="match_parent" 
+  android:layout_height="match_parent"
   android:orientation="vertical"
   >
    					  
   <TextView android:id="@+id/line_options"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
   />
 
   <!-- CheckBox android:id="@+id/line_reversed"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:text="@string/reversed"
   / -->
 
   <ImageView android:id="@+id/line_image"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="80sp" 
     android:layout_marginTop="@dimen/marginvbig"
     android:scaleType="fitCenter"
@@ -27,25 +27,25 @@
   />
 
   <TextView android:id="@+id/line_azimuth"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/marginv"
   />
   <TextView android:id="@+id/line_date"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/marginv"
   />
   
   <EditText android:id="@+id/line_nick"
     style="@style/edit_text"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_marginTop="@dimen/marginv"
     android:hint="@string/section_name"
   />
 
   <LinearLayout android:id="@+id/button_list"
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal" 
     android:layout_marginTop="@dimen/marginv"
@@ -74,7 +74,7 @@
   </LinearLayout>
 
   <!-- LinearLayout 
-    android:layout_width="fill_parent" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/marginv"
     android:orientation="horizontal" 

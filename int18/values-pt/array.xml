@@ -126,6 +126,8 @@
      <item name="back2">Visada anterior, auxiliares (EDTC)</item>
      <item name="toporobot">TopoRobot</item>
   </string-array>
+
+<!--
   <string-array name="surveyStationsB">
      <item name="no">Não</item>
      <item name="for">Auxiliares (EDTC), próxima visada</item>
@@ -155,6 +157,7 @@
      <item name="for2">Próxima visada, auxiliares (EDTC)</item>
      <item name="back2">Visada anterior, auxiliares (EDTC)</item>
   </string-array>
+-->
 
   <string-array name="pickerType">
      <item name="recent">Mais recentes</item>

@@ -149,6 +149,7 @@
      <item name="toporobot">TopoRobot</item>
   </string-array>
 
+<!--
   <string-array name="surveyStationsB">
      <item name="no">Nie</item>
      <item name="for">Domiary, w pomiary w przód</item>
@@ -178,6 +179,7 @@
      <item name="for2">Pomiary w przód, domiary</item>
      <item name="back2">Pomiary w tył, domiary</item>
   </string-array>
+-->
 
   <string-array name="pickerType">
      <item name="recent">Najnowszy</item>

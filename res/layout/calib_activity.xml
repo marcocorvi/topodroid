@@ -2,12 +2,12 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
      android:orientation="vertical"
-     android:layout_width="fill_parent"
-     android:layout_height="fill_parent"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
      >
    					  
     <RelativeLayout
-      android:layout_width="fill_parent"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
       >
@@ -25,12 +25,12 @@
       </LinearLayout>
 
       <!-- LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@id/right"
         -->
         <com.topodroid.DistoX.HorizontalListView android:id="@+id/listview"
-          android:layout_width="fill_parent"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_toLeftOf="@id/right"
         />
@@ -47,13 +47,13 @@
 
     <LinearLayout 
      android:orientation="vertical"
-     android:layout_width="fill_parent"
-     android:layout_height="fill_parent"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
      >
     <EditText android:id="@+id/calib_name" 
       style="@style/edit_text_light"
       android:layout_marginTop="@dimen/margintiny"
-      android:layout_width="fill_parent"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content" 
       android:singleLine="true"
       android:hint="@string/name"
@@ -61,7 +61,7 @@
      		
     <Button android:id="@+id/calib_date" 
       android:layout_marginTop="@dimen/margintiny"
-      android:layout_width="fill_parent"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content" 
       android:singleLine="true"
       android:scrollHorizontally="true"
@@ -69,7 +69,7 @@
 
     <!-- TextView android:id="@+id/calib_device" 
           android:layout_marginTop="@dimen/margintiny"
-          android:layout_width="fill_parent"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content" 
           android:singleLine="true"
           android:inputType="none"
@@ -79,7 +79,7 @@
       style="@style/edit_text_light"
       android:maxLines="1" 
       android:layout_marginTop="@dimen/margintiny"
-      android:layout_width="fill_parent"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content" 
       android:singleLine="true"
       android:hint="@string/description"
@@ -93,7 +93,7 @@
     />
     <RadioGroup 
       android:id="@+id/calib_algo"
-      android:layout_width="fill_parent" 
+      android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
       >
