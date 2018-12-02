@@ -15,7 +15,7 @@
     <string name="setup_buttonsize_title">Настройка TopoDroid. Размер кнопок</string>
     <string name="setup_drawingunit_title">Настройка TopoDroid. Размер значков</string>
     <string name="setup_done_title">Настройка TopoDroid. Готово</string>
-    <!-- TODO string name="setup_buttonsample">Button size</string -->
+    <string name="setup_buttonsample">Размер кнопок</string>
 
     <string name="setup_textsize">Set the text size.\nВы всегда можете изменить это позже через главное меню настроек.</string>
     <string name="setup_buttonsize">Set the button size.\nВы всегда можете изменить это позже через главное меню настроек.</string>
@@ -321,8 +321,8 @@
     <string name="menu_delete">Удалить</string>
     <string name="menu_detach">Отсоединить</string>
     <!-- UNUSED string name="menu_display">Показать</string -->
-    <!-- TODO string name="menu_show_deleted">SHOW DELETED</string -->
-    <!-- TODO string name="menu_hide_deleted">HIDE DELETED</string -->
+    <string name="menu_show_deleted">ПОКАЗАТЬ УДАЛЕННЫЕ</string>
+    <string name="menu_hide_deleted">СКРЫТЬ УДАЛЕННЫЕ</string>
     <!-- OK string name="menu_distox">DISTOX</string -->
     <string name="menu_export">Экспорт</string>
     <string name="menu_firmware">Прошивка</string>
