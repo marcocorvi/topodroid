@@ -51,8 +51,8 @@ class DrawingLineDialog extends MyDialog
   private Button mBtnCancel;
 
   private MyCheckBox mReversed;
-  private MyCheckBox mBtnSharp;
-  private MyCheckBox mBtnReduce;
+  private MyCheckBox mBtnSharp;  // sharp reduce and rock are mutully exclusive
+  private MyStateBox mBtnReduce;
   private MyCheckBox mBtnRock;
   private MyCheckBox mBtnClose;
 
@@ -119,7 +119,8 @@ class DrawingLineDialog extends MyDialog
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
     mReversed  = new MyCheckBox( mContext, size, R.drawable.iz_reverse_ok, R.drawable.iz_reverse_no );
     mBtnSharp  = new MyCheckBox( mContext, size, R.drawable.iz_sharp_ok, R.drawable.iz_sharp_no );
-    mBtnReduce = new MyCheckBox( mContext, size, R.drawable.iz_reduce_ok,  R.drawable.iz_reduce_no  );
+    // mBtnReduce = new MyCheckBox( mContext, size, R.drawable.iz_reduce_ok,  R.drawable.iz_reduce_no  );
+    mBtnReduce = new MyStateBox( mContext, R.drawable.iz_reduce_no,  R.drawable.iz_reduce_ok, R.drawable.iz_reduce_ok2 );
     mBtnRock   = new MyCheckBox( mContext, size, R.drawable.iz_rock_ok,  R.drawable.iz_rock_no  );
     mBtnClose  = new MyCheckBox( mContext, size, R.drawable.iz_close_ok, R.drawable.iz_close_no );
     mReversed.setChecked( mLine.isReversed() );
@@ -165,19 +166,22 @@ class DrawingLineDialog extends MyDialog
       return;
     } else if ( b == mBtnSharp ) {
       if ( mBtnSharp.toggleState() ) {
-	mBtnReduce.setState( false );
+	mBtnReduce.setState( 0 );  // false
         mBtnRock.setState( false );
       }
       return;
     } else if ( b == mBtnReduce ) {
-      if ( mBtnReduce.toggleState() ) {
+      int reduce = (mBtnReduce.getState() + 1) % 3;
+      mBtnReduce.setState( reduce );
+      // if ( mBtnReduce.toggleState() )
+      if ( reduce > 0 ) {
 	mBtnSharp.setState( false );
         mBtnRock.setState( false );
       }
       return;
     } else if ( b == mBtnRock ) {
       if ( mBtnRock.toggleState() ) {
-	mBtnReduce.setState( false );
+	mBtnReduce.setState( 0 );
         mBtnSharp.setState( false );
       }
       return;
@@ -195,15 +199,15 @@ class DrawingLineDialog extends MyDialog
 
       mLine.setReversed( mReversed.isChecked() );
 
+      int reduce = mBtnReduce.getState();
       if ( mBtnSharp.isChecked() ) {
         mParent.sharpenLine( mLine );
-      } 
-      if ( mBtnReduce.isChecked() ) {
-        mParent.reduceLine( mLine );
-      }
-      if ( mBtnRock.isChecked() ) {
+      } else if ( reduce > 0 ) {
+	mParent.reduceLine( mLine, reduce );
+      } else if ( mBtnRock.isChecked() ) {
         mParent.rockLine( mLine );
       }
+
       if ( mBtnClose.isChecked() ) {
         mParent.closeLine( mLine );
         mLine.setClosed( true );

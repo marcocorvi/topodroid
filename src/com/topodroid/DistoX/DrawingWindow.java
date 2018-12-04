@@ -2534,9 +2534,9 @@ public class DrawingWindow extends ItemDrawer
       modified();
     }
 
-    void reduceLine( DrawingLinePath line )
+    void reduceLine( DrawingLinePath line, int decimation )
     {
-      mDrawingSurface.reducePointLine( line );
+      mDrawingSurface.reducePointLine( line, decimation );
       modified();
     }
 
@@ -2552,9 +2552,9 @@ public class DrawingWindow extends ItemDrawer
       modified();
     }
 
-    void reduceArea( DrawingAreaPath area )
+    void reduceArea( DrawingAreaPath area, int decimation )
     {
-      mDrawingSurface.reducePointLine( area );
+      mDrawingSurface.reducePointLine( area, decimation );
       modified();
     }
 

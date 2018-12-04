@@ -236,23 +236,29 @@ class DrawingPointLinePath extends DrawingPath
     retracePath();
   }
 
-  void makeReduce()
+  // @param decimation   log-decimation (must be >= 1)
+  //                     1: keep one point every 2
+  //                     2: keep one point every 4
+  void makeReduce( int decimation )
   {
-    if ( mSize > 2 ) {
-      int size = 1;
-      LinePoint prev = mFirst;
-      LinePoint pt = prev.mNext;
-      while ( pt != mLast && pt != null ) {
-        LinePoint next = pt.mNext; // pt.mNext != null because pt < mLast
-        prev.mNext = next;
-        next.mPrev = prev; 
-        ++ size;
-        prev = next;
-        pt = prev.mNext;
-      }
-      if ( pt == mLast ) ++ size; // for the mLast point
-      mSize = size;     
-    }    
+    while ( decimation > 0 ) {
+      if ( mSize > 2 ) {
+        int size = 1;  // keep first point 
+        LinePoint prev = mFirst;
+        LinePoint pt = prev.mNext;
+        while ( pt != mLast && pt != null ) {
+          LinePoint next = pt.mNext; // pt.mNext != null because pt < mLast
+          prev.mNext = next;
+          next.mPrev = prev; 
+          ++ size;
+          prev = next;
+          pt = prev.mNext;
+        }
+        if ( pt == mLast ) ++ size; // for the mLast point
+        mSize = size;     
+      }    
+      -- decimation;
+    }
     retracePath();
   }
 

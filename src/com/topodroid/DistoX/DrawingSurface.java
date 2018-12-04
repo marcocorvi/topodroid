@@ -279,7 +279,7 @@ class DrawingSurface extends SurfaceView
   }
 
   void sharpenPointLine( DrawingPointLinePath line ) { commandManager.sharpenPointLine( line ); }
-  void reducePointLine( DrawingPointLinePath line ) { commandManager.reducePointLine( line ); }
+  void reducePointLine( DrawingPointLinePath line, int decimation ) { commandManager.reducePointLine( line, decimation ); }
   void rockPointLine( DrawingPointLinePath line ) { commandManager.rockPointLine( line ); }
   void closePointLine( DrawingPointLinePath line ) { commandManager.closePointLine( line ); }
 

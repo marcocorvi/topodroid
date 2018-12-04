@@ -934,14 +934,16 @@ class DrawingCommandManager
     // checkLines();
   }
 
-  void reducePointLine( DrawingPointLinePath line ) 
+  // @param decimation   log-decimation 
+  void reducePointLine( DrawingPointLinePath line, int decimation ) 
   {
+    if ( decimation <= 0 ) return;
     synchronized( TDPath.mSelectionLock ) {
       mSelection.removePath( line );
       clearSelected();
     }
     synchronized( mCurrentStack ) {
-      line.makeReduce( );
+      line.makeReduce( decimation );
     }
     synchronized( TDPath.mSelectionLock ) {
       mSelection.insertPath( line );

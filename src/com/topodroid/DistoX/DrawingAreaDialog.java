@@ -46,7 +46,7 @@ class DrawingAreaDialog extends MyDialog
   private Button mBtnOk;
   private Button mBtnCancel;
 
-  private MyCheckBox mBtnReduce;
+  private MyStateBox mBtnReduce;
 
   DrawingAreaDialog( Context context, DrawingWindow parent, DrawingAreaPath line )
   {
@@ -80,7 +80,8 @@ class DrawingAreaDialog extends MyDialog
     // NOTE area do not have options
 
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
-    mBtnReduce = new MyCheckBox( mContext, size, R.drawable.iz_reduce_ok,  R.drawable.iz_reduce_no  );
+    mBtnReduce = new MyStateBox( mContext, R.drawable.iz_reduce_no,  R.drawable.iz_reduce_ok, R.drawable.iz_reduce_ok2 );
+    mBtnReduce.setOnClickListener( this );
 
     LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 0, 10, 20, 10 );
 
@@ -108,14 +109,17 @@ class DrawingAreaDialog extends MyDialog
     if ( b == mBtnOk ) {
       if ( mType != mArea.mAreaType ) mArea.setAreaType( mType );
 
-      if ( mBtnReduce.isChecked() ) {
-        mParent.reduceArea( mArea );
-      }
+      int reduce = mBtnReduce.getState();
+      if ( reduce > 0 ) mParent.reduceArea( mArea, reduce );
 
       mArea.setVisible( mCBvisible.isChecked() );
       if ( mOrientable ) {
         mArea.setOrientation( mOrientationWidget.mOrient );
       }
+    } else if ( b == mBtnReduce ) {
+      int reduce = ( mBtnReduce.getState() + 1 ) % 3;
+      mBtnReduce.setState( reduce );
+      return;
     // } else if ( b == mBtnCancel ) {
     //   /* nothing */
     }
