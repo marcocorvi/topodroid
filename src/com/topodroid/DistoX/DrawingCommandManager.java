@@ -42,7 +42,7 @@ import java.io.DataOutputStream;
 
 // import java.util.Locale;
 
-// import android.util.Log;
+import android.util.Log;
 
 /**
  */
@@ -82,6 +82,82 @@ class DrawingCommandManager
   private Matrix mMatrix;
   private float  mScale; // current zoom: value of 1 pl in scene space
   private boolean mLandscape = false;
+
+  // PATH_MULTISELECT
+  private int mMultiselection = -1;  // current multiselection type (DRAWING_PATH_POINT / LINE / AREA
+  List< DrawingPath > mMultiselected;
+
+  boolean isMultiselection() { return mMultiselection > 0; }
+  int getMultiselection() { return mMultiselection; }
+
+  void resetMultiselection()
+  {
+    // Log.v("DistoX", "reset Multi Selection" );
+    mMultiselection = -1;
+    synchronized( TDPath.mSelectionLock ) { mMultiselected.clear(); }
+  }
+
+  boolean startMultiselection()
+  {
+    // resetMultiselection();
+    if ( mMultiselection > 0 ) return false;
+    SelectionPoint sp = mSelected.mHotItem;
+    if ( sp == null ) return false;
+    DrawingPath path = sp.mItem;
+    if ( path == null ) return false;
+    int type = path.mType;
+    if ( type < DrawingPath.DRAWING_PATH_POINT || type > DrawingPath.DRAWING_PATH_AREA ) return false;
+    mMultiselection = type;
+    addMultiselection( path );
+    // Log.v("DistoX", "start Multi Selection " + mMultiselection + " " + mMultiselected.size() );
+    return true;
+  }
+
+  private void addMultiselection( DrawingPath path )
+  {
+    if ( path.mType == mMultiselection ) {
+      synchronized( TDPath.mSelectionLock ) { mMultiselected.add( path ); }
+    }
+    // Log.v("DistoX", "add Multi Selection " + mMultiselection + " " + mMultiselected.size() );
+  }
+
+  // MULTISELECTION ACTIONS
+
+  // this clears the Multiselected
+  void deleteMultiselection()
+  {
+    mMultiselection = -1;
+    synchronized ( TDPath.mSelectionLock ) {
+      for ( DrawingPath path : mMultiselected ) {
+        mSelection.removePath( path );
+      }
+      synchronized( mCurrentStack ) {
+        for ( DrawingPath path : mMultiselected ) {
+          mCurrentStack.remove( path );
+        }
+      }
+      mMultiselected.clear();
+    }
+  }
+
+  void decimateMultiselection()
+  {
+    synchronized ( TDPath.mSelectionLock ) {
+      for ( DrawingPath path : mMultiselected ) {
+        mSelection.removePath( path );
+      }
+      synchronized( mCurrentStack ) {
+        for ( DrawingPath path : mMultiselected ) {
+          DrawingPointLinePath line = (DrawingPointLinePath)path;
+          line.makeReduce( 1 );
+        }
+      }
+      for ( DrawingPath path : mMultiselected ) {
+        mSelection.insertPath( path );
+      }
+    }
+  }
+  // end PATH_MULTISELECT
 
   // DrawingPath              getNorth()        { return mNorthLine;    }
 
@@ -339,6 +415,8 @@ class DrawingCommandManager
     mRedoStack    = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
     // mHighlight = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mStations     = Collections.synchronizedList(new ArrayList<DrawingStationName>());
+    // PATH_MULTISELECT
+    mMultiselected = Collections.synchronizedList( new ArrayList< DrawingPath >());
 
     // mGridStack1   = new ArrayList<DrawingPath>();
     // mGridStack10  = new ArrayList<DrawingPath>();
@@ -374,11 +452,20 @@ class DrawingCommandManager
   //                                   + mCurrentStack.toArray().length );
   // }
 
-  // void clearSelected() { synchronized( TDPath.mSelectedLock ) { mSelected.clear(); } }
-  void clearSelected() { synchronized( TDPath.mSelectionLock ) { mSelected.clear(); } }
+  void clearSelected()
+  { 
+    // Log.v("DistoX", "clear selected");
+    synchronized( TDPath.mSelectionLock ) {
+      mSelected.clear();
+      // PATH_MULTISELECT
+      mMultiselected.clear();
+      mMultiselection  = -1;
+    }
+  }
 
   void clearReferences()
   {
+    // Log.v("DistoX", "clear references");
     synchronized( mGridStack1 ) {
       mNorthLine       = null;
       mFirstReference  = null;
@@ -395,16 +482,19 @@ class DrawingCommandManager
     synchronized( TDPath.mXSectionsLock   ) { mXSectionOutlines.clear(); }
     synchronized( mStations )    { mStations.clear(); }
     clearSelected();
-    synchronized( TDPath.mSelectionLock )   { mSelection.clearReferencePoints(); }
+    synchronized( TDPath.mSelectionLock ) {
+      mSelection.clearReferencePoints();
+    }
   }
 
   private void clearSketchItems()
   {
-    synchronized( TDPath.mSelectionLock )    { mSelection.clearSelectionPoints(); }
+    // Log.v("DistoX", "clear sketch items");
+    synchronized( TDPath.mSelectionLock ) { mSelection.clearSelectionPoints(); }
     synchronized( mCurrentStack ) { mCurrentStack.clear(); }
     synchronized( mUserStations ) { mUserStations.clear(); }
     mRedoStack.clear();
-    mSelected.clear();
+    clearSelected();
     mDisplayPoints = false;
   }
 
@@ -1712,7 +1802,35 @@ class DrawingCommandManager
       }
       // synchronized( TDPath.mSelectedLock ) {
       synchronized( TDPath.mSelectionLock ) {
-        if ( mSelected.mPoints.size() > 0 ) { // FIXME SELECTION
+	// PATH_SELECTION
+	if ( mMultiselection == DrawingPath.DRAWING_PATH_POINT ) {
+          float radius = 4*TDSetting.mDotRadius/zoom;
+          Path path = new Path();
+	  for ( DrawingPath item : mMultiselected ) {
+            float x = item.cx;
+            float y = item.cy;
+            path.addCircle( x, y, radius, Path.Direction.CCW );
+          }
+          path.transform( mMatrix );
+          canvas.drawPath( path, BrushManager.fixedYellowPaint );
+	} else if ( mMultiselection == DrawingPath.DRAWING_PATH_LINE || mMultiselection == DrawingPath.DRAWING_PATH_LINE ) {
+          Path path = new Path();
+	  for ( DrawingPath item : mMultiselected ) {
+	    DrawingPointLinePath line = (DrawingPointLinePath) item;
+            LinePoint lp = line.mFirst;
+            path.moveTo( lp.x, lp.y );
+            for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
+              if ( lp.has_cp ) {
+                path.cubicTo( lp.x1, lp.y1, lp.x2, lp.y2, lp.x, lp.y );
+              } else {
+                path.lineTo( lp.x, lp.y );
+              }
+            }
+	  }
+          path.transform( mMatrix );
+          canvas.drawPath( path, BrushManager.fixedYellowPaint );
+	  // end PATH_SELECTION
+	} else if ( mSelected.mPoints.size() > 0 ) { // FIXME SELECTION
           float radius = 4*TDSetting.mDotRadius/zoom;
           Path path;
           SelectionPoint sp = mSelected.mHotItem;
@@ -2009,6 +2127,19 @@ class DrawingCommandManager
       }
     }
     return mSelected;
+  }
+    
+  void addItemAt( float x, float y, float zoom, float size )
+  {
+    float radius = TDSetting.mCloseCutoff + size/zoom; // TDSetting.mSelectness / zoom;
+    // Log.v( "DistoX", "getItemAt " + x + " " + y + " zoom " + zoom + " mode " + mode + " size " + size + " " + radius );
+    synchronized ( TDPath.mSelectionLock ) {
+      mSelected.clear();
+      mSelection.selectAt( mSelected, x, y, radius, mMultiselection );
+      for ( SelectionPoint sp : mSelected.mPoints ) {
+        addMultiselection( sp.mItem );
+      }
+    }
   }
 
   void splitHotItem()

@@ -278,6 +278,16 @@ class DrawingSurface extends SurfaceView
     commandManager.addEraseCommand( cmd );
   }
 
+  // PATH_MULTISELECTION
+  int getMultiselection() { return commandManager.getMultiselection(); }
+  boolean isMultiselection() { return commandManager.isMultiselection(); }
+  boolean startMultiselection() { return commandManager.startMultiselection(); }
+
+  void resetMultiselection() { commandManager.resetMultiselection(); }
+  void deleteMultiselection() { commandManager.deleteMultiselection(); }
+  void decimateMultiselection() { commandManager.decimateMultiselection(); }
+  // end PATH_MULTISELECTION
+
   void sharpenPointLine( DrawingPointLinePath line ) { commandManager.sharpenPointLine( line ); }
   void reducePointLine( DrawingPointLinePath line, int decimation ) { commandManager.reducePointLine( line, decimation ); }
   void rockPointLine( DrawingPointLinePath line ) { commandManager.rockPointLine( line ); }
@@ -538,6 +548,12 @@ class DrawingSurface extends SurfaceView
   SelectionSet getItemsAt( float x, float y, float zoom, int mode, float size ) 
   { 
     return commandManager.getItemsAt( x, y, zoom, mode, size, mSplayStationsOn, mSplayStationsOff );
+  }
+
+  // add item to multiselection
+  void addItemAt( float x, float y, float zoom, float size ) 
+  { 
+    commandManager.addItemAt( x, y, zoom, size );
   }
 
   // set line range at the hot-item

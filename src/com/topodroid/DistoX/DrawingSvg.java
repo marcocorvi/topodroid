@@ -149,25 +149,26 @@ class DrawingSvg
 
             StringWriter sw4 = new StringWriter();
             PrintWriter pw4  = new PrintWriter(sw4);
-            // if ( sh.mType == DrawingPath.DRAWING_PATH_FIXED ) {
-              NumStation f = num.getStation( blk.mFrom );
-              NumStation t = num.getStation( blk.mTo );
+            pw4.format("  <path stroke-width=\"%.2f\" stroke=\"black\" d=\"", TDSetting.mSvgShotStroke );
+            // // if ( sh.mType == DrawingPath.DRAWING_PATH_FIXED ) {
+            //   NumStation f = num.getStation( blk.mFrom );
+            //   NumStation t = num.getStation( blk.mTo );
  
-              pw4.format("  <path stroke-width=\"%.2f\" stroke=\"black\" d=\"", TDSetting.mSvgShotStroke );
-              if ( type == PlotInfo.PLOT_PLAN ) {
-                float x  = xoff + DrawingUtil.toSceneX( f.e, f.s ); 
-                float y  = yoff + DrawingUtil.toSceneY( f.e, f.s );
-                float x1 = xoff + DrawingUtil.toSceneX( t.e, t.s );
-                float y1 = yoff + DrawingUtil.toSceneY( t.e, t.s );
-                pw4.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x1, y1 );
-              } else if ( PlotInfo.isProfile( type ) ) { // FIXME OK PROFILE
-                float x  = xoff + DrawingUtil.toSceneX( f.h, f.v );
-                float y  = yoff + DrawingUtil.toSceneY( f.h, f.v );
-                float x1 = xoff + DrawingUtil.toSceneX( t.h, t.v );
-                float y1 = yoff + DrawingUtil.toSceneY( t.h, t.v );
-                pw4.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x1, y1 );
-              }
-            // }
+            //   if ( type == PlotInfo.PLOT_PLAN ) {
+            //     float x  = xoff + DrawingUtil.toSceneX( f.e, f.s ); 
+            //     float y  = yoff + DrawingUtil.toSceneY( f.e, f.s );
+            //     float x1 = xoff + DrawingUtil.toSceneX( t.e, t.s );
+            //     float y1 = yoff + DrawingUtil.toSceneY( t.e, t.s );
+            //     pw4.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x1, y1 );
+            //   } else if ( PlotInfo.isProfile( type ) ) { // FIXME OK PROFILE
+            //     float x  = xoff + DrawingUtil.toSceneX( f.h, f.v );
+            //     float y  = yoff + DrawingUtil.toSceneY( f.h, f.v );
+            //     float x1 = xoff + DrawingUtil.toSceneX( t.h, t.v );
+            //     float y1 = yoff + DrawingUtil.toSceneY( t.h, t.v );
+            //     pw4.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x1, y1 );
+            //   }
+            // // }
+            pw4.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
             out.write( sw4.getBuffer().toString() );
             out.flush();
           }

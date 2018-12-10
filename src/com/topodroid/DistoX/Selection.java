@@ -379,7 +379,6 @@ class Selection
     return stations.contains( station );
   }
 
-
   private void bucketSelectAt(float x,float y,float radius,int mode,SelectionSet sel,boolean legs,boolean splays,boolean stations,
 		              ArrayList<String> splays_on, ArrayList<String> splays_off )
   {
@@ -446,6 +445,22 @@ class Selection
       }
     }
   }
+ 
+  // select by type
+  private void bucketSelectAt(float x,float y,float radius,int type, SelectionSet sel )
+  {
+    // Log.v("DistoX", "bucket select at " + x + " " + y + " R " + radius + " buckets " + mBuckets.size() );
+    for ( SelectionBucket bucket : mBuckets ) {
+      if ( bucket.contains( x, y, radius, radius ) ) {
+        for ( SelectionPoint sp : bucket.mPoints ) {
+          if ( sp.type() == type && sp.distance( x, y ) < radius ) {
+            // Log.v("DistoX", "pt " + sp.mPoint.x + " " + sp.mPoint.y + " dist " + sp.getDistance() );
+            sel.addPoint( sp );
+          }
+        }
+      }
+    } 
+  }
   
   SelectionPoint  selectOnItemAt( DrawingPath item, float x, float y, float radius )
   {
@@ -455,13 +470,14 @@ class Selection
   void selectAt( SelectionSet sel, float x, float y, float radius, int mode, boolean legs, boolean splays, boolean stations,
 		 ArrayList<String> splays_on, ArrayList<String> splays_off )
   {
-    // Log.v( "DistoX", "selection select at " + x + " " + y + " pts " + mPoints.size() + " " + legs + " " + splays + " " + stations + " radius " + radius );
-
     bucketSelectAt( x, y, radius, mode, sel, legs, splays, stations, splays_on, splays_off );
-    // Log.v("DistoX", "bucketSelect size " + sel.size() );
-
-    // if ( sel.size() > 0 ) return;
   }
+
+  void selectAt( SelectionSet sel, float x, float y, float radius, int type )
+  {
+    bucketSelectAt( x, y, radius, type, sel );
+  }
+
 
   private SelectionBucket getBucket( float x, float y )
   {

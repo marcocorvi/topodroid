@@ -361,6 +361,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="popup_curve_pt">Smoothen segment</string>
     <string name="popup_remove_pt">Remove point</string>
     <string name="popup_append_line">Attach to line</string>
+    <string name="popup_multiselect">Multiselection</string>
+    <string name="popup_delete">Delete</string>
+    <string name="popup_decimate">Decimate</string>
 
     <string name="popup_erase_all">Erase all</string>
     <string name="popup_erase_point">Erase points</string>

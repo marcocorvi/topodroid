@@ -679,6 +679,7 @@ public class DrawingWindow extends ItemDrawer
   {
     mDrawingSurface.resetFixedPaint( mApp, BrushManager.fixedShotPaint );
   }
+
   
   // used for the North line
   private void addFixedSpecial( float x1, float y1, float x2, float y2 ) // float xoff, float yoff )
@@ -2324,14 +2325,21 @@ public class DrawingWindow extends ItemDrawer
     private void doSelectAt( float x, float y, float size )
     {
       if ( mLandscape ) { float t=x; x=-y; y=t; }
-      // Log.v("DistoX", "select at: edit-range " + mDoEditRange + " mode " + mMode );
+      // Log.v("DistoX", "select at: edit-range " + mDoEditRange + " mode " + mMode + " At " + x + " " + y );
       if ( mMode == MODE_EDIT ) {
-        if ( TDLevel.overExpert && mDoEditRange > 0 ) {
-          // mDoEditRange = false;
-          // mButton3[ BTN_BORDER ].setBackgroundDrawable( mBMedit_no );
-          if ( mDrawingSurface.setRangeAt( x, y, mZoom, mDoEditRange, size ) ) {
-            mMode = MODE_SHIFT;
-            return;
+        if ( TDLevel.overExpert ) {
+	  // PATH_MULTISELECTION
+          // if ( mDrawingSurface.isMultiselection() ) {
+          //   mDrawingSurface.addItemAt( x, y, mZoom, size );
+	  //   return;
+          // }
+          if ( mDoEditRange > 0 ) {
+            // mDoEditRange = false;
+            // mButton3[ BTN_BORDER ].setBackgroundDrawable( mBMedit_no );
+            if ( mDrawingSurface.setRangeAt( x, y, mZoom, mDoEditRange, size ) ) {
+              mMode = MODE_SHIFT;
+              return;
+            }
           }
         } 
         // float d0 = TopoDroidApp.mCloseCutoff + TopoDroidApp.mSelectness / mZoom;
@@ -2747,7 +2755,6 @@ public class DrawingWindow extends ItemDrawer
     dismissPopups();
     checkZoomBtnsCtrl();
 
-
     MotionEventWrap event = MotionEventWrap.wrap(rawEvent);
     // TDLog.Log( TDLog.LOG_INPUT, "Drawing Activity onTouch() " );
     // dumpEvent( event );
@@ -2804,6 +2811,7 @@ public class DrawingWindow extends ItemDrawer
       return true;
     }
 
+    // Log.v("DistoX", "on touch up. mode " + mMode + " " + mTouchMode );
     if ( mTouchMode == MODE_ZOOM || mTouchMode == MODE_ROTATE ) {
       mTouchMode = MODE_MOVE;
     } else {
@@ -3051,7 +3059,12 @@ public class DrawingWindow extends ItemDrawer
           if ( Math.abs(mStartX - xc) < TDSetting.mPointingRadius
             && Math.abs(mStartY - yc) < TDSetting.mPointingRadius ) {
             // mEditMove = false;
-            clearSelected();
+	    // PATH_MULTISELECTION
+	    if ( mDrawingSurface.isMultiselection() ) {
+	      // TODO
+	    } else {
+              clearSelected();
+	    }
           }
         }
         mShiftMove = false;
@@ -3087,6 +3100,7 @@ public class DrawingWindow extends ItemDrawer
   {
     mDrawingSurface.endEraser();
     float d0 = TDSetting.mCloseCutoff + mSelectSize / mZoom;
+    // Log.v("DistoX", "on touch down. mode " + mMode + " " + mTouchMode );
 
     // TDLog.Log( TDLog.LOG_PLOT, "DOWN at X " + xc + " [" +mBorderInnerLeft + " " + mBorderInnerRight + "] Y " 
     //                                          + yc + " / " + mBorderBottom );
@@ -3162,19 +3176,25 @@ public class DrawingWindow extends ItemDrawer
       mShiftMove = true; // whether to move canvas in point-shift mode
       mStartX = xc;
       mStartY = yc;
-      SelectionPoint pt = mDrawingSurface.hotItem();
-      if ( pt != null ) {
-        if ( mLandscape ) {
-          if ( pt.distance( -ys, xs ) < d0 ) {
-            mShiftMove = false;
-            mStartX = xs;  // save start position
-            mStartY = ys;
-          }
-        } else {
-          if ( pt.distance( xs, ys ) < d0 ) {
-            mShiftMove = false;
-            mStartX = xs;  // save start position
-            mStartY = ys;
+      // PATH_MULTISELECTION
+      if ( mDrawingSurface.isMultiselection() ) {
+        // Log.v("DistoX", "on touch down add item at " + xs + " " + ys );
+        mDrawingSurface.addItemAt( xs, ys, mZoom, mSelectSize );
+      } else {
+        SelectionPoint pt = mDrawingSurface.hotItem();
+        if ( pt != null ) {
+          if ( mLandscape ) {
+            if ( pt.distance( -ys, xs ) < d0 ) {
+              mShiftMove = false;
+              mStartX = xs;  // save start position
+              mStartY = ys;
+            }
+          } else {
+            if ( pt.distance( xs, ys ) < d0 ) {
+              mShiftMove = false;
+              mStartX = xs;  // save start position
+              mStartY = ys;
+            }
           }
         }
       }
@@ -3231,15 +3251,18 @@ public class DrawingWindow extends ItemDrawer
                || (mMode == MODE_SHIFT && mShiftMove) ) {
         moveCanvas( x_shift, y_shift );
       } else if ( mMode == MODE_SHIFT ) {
-        // mDrawingSurface.shiftHotItem( xs - mStartX, ys - mStartY, mEditRadius * 10 / mZoom );
-        if ( mLandscape ) {
-          mDrawingSurface.shiftHotItem( -ys + mStartY, xs - mStartX );
-        } else {
-          mDrawingSurface.shiftHotItem( xs - mStartX, ys - mStartY );
-        }
-        mStartX = xs;
-        mStartY = ys;
-        modified();
+        // PATH_MULTISELECTION
+        if ( ! mDrawingSurface.isMultiselection() ) {
+          // mDrawingSurface.shiftHotItem( xs - mStartX, ys - mStartY, mEditRadius * 10 / mZoom );
+          if ( mLandscape ) {
+            mDrawingSurface.shiftHotItem( -ys + mStartY, xs - mStartX );
+          } else {
+            mDrawingSurface.shiftHotItem( xs - mStartX, ys - mStartY );
+          }
+          mStartX = xs;
+          mStartY = ys;
+          modified();
+	}
       } else if ( mMode == MODE_ERASE ) {
         if ( mEraseCommand != null ) {
           mDrawingSurface.setEraser( xc, yc, mEraseSize );
@@ -4006,24 +4029,9 @@ public class DrawingWindow extends ItemDrawer
 
       // ----- MOVE POINT TO THE NEAREST CLOSE POINT
       //
-      String text = getString(R.string.popup_join_pt);
-      int len = text.length();
-      Button myTextView0 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
-        new View.OnClickListener( ) {
-          public void onClick(View v) {
-            if ( mHotItemType == DrawingPath.DRAWING_PATH_POINT ||
-                 mHotItemType == DrawingPath.DRAWING_PATH_LINE ||
-                 mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // move to nearest point POINT/LINE/AREA
-              if ( mDrawingSurface.moveHotItemToNearestPoint() ) {
-                modified();
-              } else {
-                TDToast.make( R.string.failed_snap_to_point );
-              }
-            }
-            dismissPopupEdit();
-          }
-        } );
-  
+      String text;
+      int len = 0; 
+      Button myTextView0 = null;
       Button myTextView1 = null;
       Button myTextView2 = null;
       Button myTextView3 = null;
@@ -4031,188 +4039,270 @@ public class DrawingWindow extends ItemDrawer
       Button myTextView5 = null;
       Button myTextView6 = null;
       Button myTextView7 = null;
-      // ----- SNAP LINE to splays AREA BORDER to close line
-      //
-      if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE ) {
-        text = getString( R.string.popup_snap_to_splays );
-        if ( len < text.length() ) len = text.length();
-        myTextView1 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
-          new View.OnClickListener( ) {
-            public void onClick(View v) {
-              if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE ) { // snap to nearest splays
-                switch ( mDrawingSurface.snapHotItemToNearestSplays( TDSetting.mCloseCutoff + 3*mSelectSize / mZoom ) ) {
-                  case 0:  // normal
-                    modified();
-                    break;
-                  case -1:
-                  case -2:
-                  case -3: // no splay close enough
-                    TDToast.make( R.string.failed_snap_to_splays );
-                    break;
-                  default:
-                    break;
-                }
-              }
-              dismissPopupEdit();
-            }
-          } );
-      } else if ( mHotItemType == DrawingPath.DRAWING_PATH_AREA ) {
-        text = getString( R.string.popup_snap_ln );
-        if ( len < text.length() ) len = text.length();
-        myTextView1 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
-          new View.OnClickListener( ) {
-            public void onClick(View v) {
-              if ( mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // snap to nearest line
-                switch ( mDrawingSurface.snapHotItemToNearestLine() ) {
-                  case 1:  // single point copy
-                  case 0:  // normal
-                  case -1: // no hot point
-                  case -2: // not snapping area border
-                    modified();
-                    break;
-                  case -3: // no line close enough
-                    TDToast.make( R.string.failed_snap_to_line );
-                    break;
-                  default:
-                    break;
-                }
-              }
-              dismissPopupEdit();
-            }
-          } );
-      } 
+      Button myTextView8 = null; // PATH_MULTISELECTION
 
-      if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) {
-        // ----- DUPLICATE LINE/AREA POINT
-        //
-        text = getString(R.string.popup_split_pt);
-        if ( len > text.length() ) len = text.length();
-        myTextView2 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
+      if ( mDrawingSurface.isMultiselection() ) {
+        // ----- REMOVE MULTISELECTION ITEMS
+        text = getString(R.string.popup_delete);
+        if ( len < text.length() ) len = text.length();
+        myTextView0 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
           new View.OnClickListener( ) {
             public void onClick(View v) {
-              if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // split point LINE/AREA
-                mDrawingSurface.splitHotItem();
+              mDrawingSurface.deleteMultiselection();
+              modified();
+              dismissPopupEdit();
+            }
+          } );
+
+	if ( mDrawingSurface.getMultiselection() != DrawingPath.DRAWING_PATH_POINT ) {
+	  // DECIMATE
+          text = getString(R.string.popup_decimate);
+          if ( len < text.length() ) len = text.length();
+          myTextView1 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
+            new View.OnClickListener( ) {
+              public void onClick(View v) {
+                mDrawingSurface.decimateMultiselection();
                 modified();
+                dismissPopupEdit();
               }
-              dismissPopupEdit();
-            }
-          } );
+            } );
+	}
 
-        // ----- REMOVE LINE/AREA POINT
-        //
-        text = getString(R.string.popup_remove_pt);
+	// CLEAR MULTISELECTION
+        text = getString(R.string.popup_multiselect);
         if ( len < text.length() ) len = text.length();
-        myTextView6 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
+        myTextView8 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
           new View.OnClickListener( ) {
             public void onClick(View v) {
-              if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // remove pt
-                SelectionPoint sp = mDrawingSurface.hotItem();
-                if ( sp != null && ( sp.type() == DrawingPath.DRAWING_PATH_LINE || sp.type() == DrawingPath.DRAWING_PATH_AREA ) ) {
-                  DrawingPointLinePath line = (DrawingPointLinePath)sp.mItem;
-                  if ( line.size() > 2 ) {
-                    removeLinePoint( line, sp.mPoint, sp );
-                    line.retracePath();
-                    modified();
-                  }
-                }
-              }
+              mDrawingSurface.resetMultiselection();
               dismissPopupEdit();
-            }
+	    }
           } );
 
-        // ----- MAKE LINE/AREA SEGMENT STRAIGHT
-        //
-        text = getString(R.string.popup_sharp_pt);
+      } else {
+        text = getString(R.string.popup_join_pt);
         if ( len < text.length() ) len = text.length();
-        myTextView4 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
+        myTextView0 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
           new View.OnClickListener( ) {
             public void onClick(View v) {
-              if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) {
-                // make segment straight LINE/AREA
-                SelectionPoint sp = mDrawingSurface.hotItem();
-                if ( sp != null && ( sp.type() == DrawingPath.DRAWING_PATH_LINE || sp.type() == DrawingPath.DRAWING_PATH_AREA ) ) {
-                  sp.mPoint.has_cp = false;
-                  DrawingPointLinePath line = (DrawingPointLinePath)sp.mItem;
-                  line.retracePath();
-                  modified();
-                }
-              }
-              dismissPopupEdit();
-            }
-          } );
-
-        // ----- MAKE LINE/AREA SEGMENT SMOOTH (CURVED, WITH CONTROL POINTS)
-        //
-        text = getString(R.string.popup_curve_pt);
-        if ( len < text.length() ) len = text.length();
-        myTextView5 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
-          new View.OnClickListener( ) {
-            public void onClick(View v) {
-              if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) {
-                // make segment curved LINE/AREA
-                SelectionPoint sp = mDrawingSurface.hotItem();
-                if ( sp != null && ( sp.type() == DrawingPath.DRAWING_PATH_LINE || sp.type() == DrawingPath.DRAWING_PATH_AREA ) ) {
-                  LinePoint lp0 = sp.mPoint;
-                  LinePoint lp2 = lp0.mPrev; 
-                  if ( ! lp0.has_cp && lp2 != null ) {
-                    float dx = (lp0.x - lp2.x)/3;
-                    float dy = (lp0.y - lp2.y)/3;
-                    if ( Math.abs(dx) > 0.01 || Math.abs(dy) > 0.01 ) {
-                      lp0.x1 = lp2.x + dx;
-                      lp0.y1 = lp2.y + dy;
-                      lp0.x2 = lp0.x - dx;
-                      lp0.y2 = lp0.y - dy;
-                      lp0.has_cp = true;
-                      DrawingPointLinePath line = (DrawingPointLinePath)sp.mItem;
-                      line.retracePath();
-                    }
-                  }
-                  modified();
-                }
-              }
-              dismissPopupEdit();
-            }
-          } );
-
-      }
-
-      if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE ) {
-        // ----- CUT LINE AT SELECTED POINT AND SPLIT IT IN TWO LINES
-        //
-        text = getString(R.string.popup_split_ln);
-        if ( len < text.length() ) len = text.length();
-        myTextView3 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
-          new View.OnClickListener( ) {
-            public void onClick(View v) {
-              if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE ) { // split-line LINE
-                SelectionPoint sp = mDrawingSurface.hotItem();
-                if ( sp != null && sp.type() == DrawingPath.DRAWING_PATH_LINE ) {
-                  splitLine( (DrawingLinePath)(sp.mItem), sp.mPoint );
-                  modified();
-                }
-              }
-              dismissPopupEdit();
-            }
-          } );
-
-        // ATTACH LINE TO LINE
-        text = getString(R.string.popup_append_line);
-        if ( len < text.length() ) len = text.length();
-        myTextView7 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
-          new View.OnClickListener( ) {
-            public void onClick(View v) {
-              if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE ) {
-                if ( mDrawingSurface.appendHotItemToNearestLine() ) {
+              if ( mHotItemType == DrawingPath.DRAWING_PATH_POINT ||
+                   mHotItemType == DrawingPath.DRAWING_PATH_LINE ||
+                   mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // move to nearest point POINT/LINE/AREA
+                if ( mDrawingSurface.moveHotItemToNearestPoint() ) {
                   modified();
                 } else {
-                  TDToast.make( R.string.failed_append_to_line );
+                  TDToast.make( R.string.failed_snap_to_point );
                 }
               }
               dismissPopupEdit();
             }
           } );
+  
+        // ----- SNAP LINE to splays AREA BORDER to close line
+        //
+        if ( TDLevel.overExpert ) {
+          if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE ) {
+            text = getString( R.string.popup_snap_to_splays );
+            if ( len < text.length() ) len = text.length();
+            myTextView1 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
+              new View.OnClickListener( ) {
+                public void onClick(View v) {
+                  if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE ) { // snap to nearest splays
+                    switch ( mDrawingSurface.snapHotItemToNearestSplays( TDSetting.mCloseCutoff + 3*mSelectSize / mZoom ) ) {
+                      case 0:  // normal
+                        modified();
+                        break;
+                      case -1:
+                      case -2:
+                      case -3: // no splay close enough
+                        TDToast.make( R.string.failed_snap_to_splays );
+                        break;
+                      default:
+                        break;
+                    }
+                  }
+                  dismissPopupEdit();
+                }
+              } );
+          } else if ( mHotItemType == DrawingPath.DRAWING_PATH_AREA ) {
+            text = getString( R.string.popup_snap_ln );
+            if ( len < text.length() ) len = text.length();
+            myTextView1 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
+              new View.OnClickListener( ) {
+                public void onClick(View v) {
+                  if ( mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // snap to nearest line
+                    switch ( mDrawingSurface.snapHotItemToNearestLine() ) {
+                      case 1:  // single point copy
+                      case 0:  // normal
+                      case -1: // no hot point
+                      case -2: // not snapping area border
+                        modified();
+                        break;
+                      case -3: // no line close enough
+                        TDToast.make( R.string.failed_snap_to_line );
+                        break;
+                      default:
+                        break;
+                    }
+                  }
+                  dismissPopupEdit();
+                }
+              } );
+          } 
+        }
+
+        if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) {
+          // ----- DUPLICATE LINE/AREA POINT
+          //
+          text = getString(R.string.popup_split_pt);
+          if ( len > text.length() ) len = text.length();
+          myTextView2 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
+            new View.OnClickListener( ) {
+              public void onClick(View v) {
+                if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // split point LINE/AREA
+                  mDrawingSurface.splitHotItem();
+                  modified();
+                }
+                dismissPopupEdit();
+              }
+            } );
+
+          // ----- REMOVE LINE/AREA POINT
+          //
+          text = getString(R.string.popup_remove_pt);
+          if ( len < text.length() ) len = text.length();
+          myTextView6 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
+            new View.OnClickListener( ) {
+              public void onClick(View v) {
+                if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // remove pt
+                  SelectionPoint sp = mDrawingSurface.hotItem();
+                  if ( sp != null && ( sp.type() == DrawingPath.DRAWING_PATH_LINE || sp.type() == DrawingPath.DRAWING_PATH_AREA ) ) {
+                    DrawingPointLinePath line = (DrawingPointLinePath)sp.mItem;
+                    if ( line.size() > 2 ) {
+                      removeLinePoint( line, sp.mPoint, sp );
+                      line.retracePath();
+                      modified();
+                    }
+                  }
+                }
+                dismissPopupEdit();
+              }
+            } );
+
+          if ( TDLevel.overExpert ) {
+            // ----- MAKE LINE/AREA SEGMENT STRAIGHT
+            text = getString(R.string.popup_sharp_pt);
+            if ( len < text.length() ) len = text.length();
+            myTextView4 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
+              new View.OnClickListener( ) {
+                public void onClick(View v) {
+                  if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) {
+                    // make segment straight LINE/AREA
+                    SelectionPoint sp = mDrawingSurface.hotItem();
+                    if ( sp != null && ( sp.type() == DrawingPath.DRAWING_PATH_LINE || sp.type() == DrawingPath.DRAWING_PATH_AREA ) ) {
+                      sp.mPoint.has_cp = false;
+                      DrawingPointLinePath line = (DrawingPointLinePath)sp.mItem;
+                      line.retracePath();
+                      modified();
+                    }
+                  }
+                  dismissPopupEdit();
+                }
+              } );
+
+            // ----- MAKE LINE/AREA SEGMENT SMOOTH (CURVED, WITH CONTROL POINTS)
+            text = getString(R.string.popup_curve_pt);
+            if ( len < text.length() ) len = text.length();
+            myTextView5 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
+              new View.OnClickListener( ) {
+                public void onClick(View v) {
+                  if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) {
+                    // make segment curved LINE/AREA
+                    SelectionPoint sp = mDrawingSurface.hotItem();
+                    if ( sp != null && ( sp.type() == DrawingPath.DRAWING_PATH_LINE || sp.type() == DrawingPath.DRAWING_PATH_AREA ) ) {
+                      LinePoint lp0 = sp.mPoint;
+                      LinePoint lp2 = lp0.mPrev; 
+                      if ( ! lp0.has_cp && lp2 != null ) {
+                        float dx = (lp0.x - lp2.x)/3;
+                        float dy = (lp0.y - lp2.y)/3;
+                        if ( Math.abs(dx) > 0.01 || Math.abs(dy) > 0.01 ) {
+                          lp0.x1 = lp2.x + dx;
+                          lp0.y1 = lp2.y + dy;
+                          lp0.x2 = lp0.x - dx;
+                          lp0.y2 = lp0.y - dy;
+                          lp0.has_cp = true;
+                          DrawingPointLinePath line = (DrawingPointLinePath)sp.mItem;
+                          line.retracePath();
+                        }
+                      }
+                      modified();
+                    }
+                  }
+                  dismissPopupEdit();
+                }
+              } );
+
+          }
+        }
+
+        if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE ) {
+          // ----- CUT LINE AT SELECTED POINT AND SPLIT IT IN TWO LINES
+          text = getString(R.string.popup_split_ln);
+          if ( len < text.length() ) len = text.length();
+          myTextView3 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
+            new View.OnClickListener( ) {
+              public void onClick(View v) {
+                if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE ) { // split-line LINE
+                  SelectionPoint sp = mDrawingSurface.hotItem();
+                  if ( sp != null && sp.type() == DrawingPath.DRAWING_PATH_LINE ) {
+                    splitLine( (DrawingLinePath)(sp.mItem), sp.mPoint );
+                    modified();
+                  }
+                }
+                dismissPopupEdit();
+              }
+            } );
+
+          // ATTACH LINE TO LINE
+          if ( TDLevel.overExpert ) {
+            text = getString(R.string.popup_append_line);
+            if ( len < text.length() ) len = text.length();
+            myTextView7 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
+              new View.OnClickListener( ) {
+                public void onClick(View v) {
+                  if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE ) {
+                    if ( mDrawingSurface.appendHotItemToNearestLine() ) {
+                      modified();
+                    } else {
+                      TDToast.make( R.string.failed_append_to_line );
+                    }
+                  }
+                  dismissPopupEdit();
+                }
+              } );
+          }
+        }
+
+        // PATH_MULTISELECTION
+        if ( TDLevel.overExpert ) {
+          if (    mHotItemType == DrawingPath.DRAWING_PATH_POINT
+               || mHotItemType == DrawingPath.DRAWING_PATH_LINE 
+               || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) {
+            text = getString(R.string.popup_multiselect);
+            if ( len < text.length() ) len = text.length();
+            myTextView8 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
+            new View.OnClickListener( ) {
+              public void onClick(View v) {
+                // Log.v("DistoX", "start multi selection");
+                mDrawingSurface.startMultiselection();
+                dismissPopupEdit();
+              }
+            } );
+          }
+        }
+
       }
- 
+
       FontMetrics fm = myTextView0.getPaint().getFontMetrics();
       // Log.v("DistoX", "font metrics TOP " + fm.top + " ASC. " + fm.ascent + " BOT " + fm.bottom + " LEAD " + fm.leading ); 
       int w = (int)( Math.abs( ( len + 1 ) * fm.ascent ) * 0.6);
@@ -4226,6 +4316,7 @@ public class DrawingWindow extends ItemDrawer
       if ( myTextView5 != null ) myTextView5.setWidth( w );
       if ( myTextView6 != null ) myTextView6.setWidth( w );
       if ( myTextView7 != null ) myTextView7.setWidth( w ); // APPEND LINE TO LINE
+      if ( myTextView8 != null ) myTextView8.setWidth( w ); // PATH_MULTISELECTION
       
       mPopupEdit = new PopupWindow( popup_layout, w, h ); 
       // mPopupEdit = new PopupWindow( popup_layout, popup_layout.getHeight(), popup_layout.getWidth() );
@@ -4493,6 +4584,8 @@ public class DrawingWindow extends ItemDrawer
       if ( ( b == mButton2[0] && mMode == MODE_DRAW ) || 
            ( b == mButton5[1] && mMode == MODE_ERASE ) || 
            ( b == mButton3[2] && ( mMode == MODE_EDIT || mMode == MODE_SHIFT ) ) ) { 
+	// PATH_MULTISELECTION
+        if ( mDrawingSurface.isMultiselection() ) mDrawingSurface.resetMultiselection();
         setMode( MODE_MOVE );
       } else if ( b == mButton1[0] || b == mButton3[0] || b == mButton5[0] ) { // 0 --> DRAW
         setMode( MODE_DRAW );
