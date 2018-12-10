@@ -1,5 +1,6 @@
 symbol point
 name flowstone-floor
+name-ru натечный_пол
 name-ro cruste-podea
 th_name flowstone:floor
 orientation no

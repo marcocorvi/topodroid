@@ -15,7 +15,7 @@
     <string name="setup_buttonsize_title">TopoDroid nastavenie. Veľkosť tlačidiel</string>
     <string name="setup_drawingunit_title">TopoDroid nastavenie. Veľkosť ikon</string>
     <string name="setup_done_title">TopoDroid nastavenie. Koniec</string>
-    <!-- TODO string name="setup_buttonsample">Button size</string -->
+    <string name="setup_buttonsample">Vzorka tlačidiel</string>
 
     <string name="setup_textsize">Nastavte veľkosť textu.\nMožete to zmeniť aj neskôr v nastaveniach cez hlavné menu.</string>
     <string name="setup_buttonsize">Nastavte veľkosť tlačidiel.\nMožete to zmeniť aj neskôr v nastaveniach cez hlavné menu.</string>
@@ -69,7 +69,7 @@
     <string name="failed_snap_to_line">V blízkosti nie je žiadny bod z čiary "na prichytenie" ku Hranici Oblasti</string>
     <string name="failed_snap_to_point">V blízkosti nie je žiadny bod "na prichytenie" k Bodu</string>
     <string name="failed_snap_to_splays">V blízkosti nie je pomocná zámera na "prichytenie" ku Čiare</string>
-    <!-- TODO string name="failed_append_to_line">Failed to append to another line</string -->
+    <string name="failed_append_to_line">Nedá sa pripojiť k ďalšej Čiare</string>
 
     <string name="calibration_title">Kalibrácia nástrojov</string>
     <string name="calibration_length">Dĺžka</string>
@@ -322,8 +322,8 @@
     <string name="menu_delete">VYMAZAŤ</string>
     <string name="menu_detach">ODPOJIŤ</string>
     <!-- UNUSED string name="menu_display">ZOBRAZIŤ</string -->
-    <!-- TODO string name="menu_show_deleted">SHOW DELETED</string -->
-    <!-- TODO string name="menu_hide_deleted">HIDE DELETED</string -->
+    <string name="menu_show_deleted">ZOBRAZIŤ VYMAZANÉ</string>
+    <string name="menu_hide_deleted">SKRYŤ VYMAZANÉ</string>
     <string name="menu_distox">DISTOX</string>
     <string name="menu_export">EXPORTOVAŤ</string>
     <string name="menu_firmware">FIRMWARE</string>
@@ -360,7 +360,7 @@
     <string name="popup_sharp_pt">Vyrovnať segment</string>
     <string name="popup_curve_pt">Vyhladiť segment</string>
     <string name="popup_remove_pt">Odstrániť bod</string>
-    <!-- TODO string name="popup_append_line">Append to line</string -->
+    <string name="popup_append_line">Pripojiť ku Čiare</string>
 
     <string name="popup_erase_all">Vymazať všetko</string>
     <string name="popup_erase_point">Vymazať body</string>
@@ -576,6 +576,7 @@
     <string name="button_back"      >Späť </string>
     <string name="button_cancel"    >Zrušiť   </string>
     <string name="button_change"    >Zmena   </string>
+    <string name="button_clipboard" >Schránka </string>
     <string name="button_close"     >Zavrieť    </string>
     <string name="button_create"    >Vytvoriť     </string>
     <string name="button_color"     >Farba</string>
@@ -762,7 +763,7 @@
     <!-- UNUSED string name="help_contour">Editovať obrysy</string -->
     <string name="help_current_station">Uložené meračské body</string>
     <string name="help_azimuth">Smerová orientácia</string>
-    <!-- TODO string name="help_refresh">Refresh display</string -->
+    <string name="help_refresh">Obnoviť zobrazenie</string>
     <string name="help_device">DistoX</string>
     <string name="help_add_topodroid">Začať nové Mapovanie</string>
     <string name="help_import">Importovať zip súbor alebo meračský súbor</string>
@@ -965,7 +966,6 @@
   <string name="pref_cat_drawing">NASTAVENIE KRESLENIA</string>
   <string name="pref_cat_import_export">NASTAVENIE IMPORT/EXPORT</string>
   <string name="pref_cat_exportimport">IMPORT</string>
-  <!-- DO NOT TRANSLATE
   <string name="pref_cat_exportsvx" translatable="false">Survex</string>
   <string name="pref_cat_exportth"  translatable="false">Therion</string>
   <string name="pref_cat_exportdat" translatable="false">Compass</string>
@@ -973,8 +973,7 @@
   <string name="pref_cat_exportdxf" translatable="false">DXF</string>
   <string name="pref_cat_exportpng" translatable="false">PNG</string>
   <string name="pref_cat_exportkml" translatable="false">KML/GeoJSON</string>
-  -->
-
+ 
   <string name="pref_cat_calib">NASTAVENIE KALIBRÁCIE</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->  
   <string name="pref_cat_device">NASTAVENIE DISTOX</string>
@@ -1190,8 +1189,8 @@
   <string name="pref_shot_timer_summary">Sekundy pred meraním zámery smeru pomocou senzorov mobilu</string>
   <string name="pref_beep_volume_title">Nastavenie hlasitosti</string>
   <string name="pref_beep_volume_summary">Percento hlasitosti pípania</string>
-  <!-- TODO string name="pref_extend_frac_title">Fractional extend</string -->
-  <!-- TODO string name="pref_extend_frac_summary">Whether "extend" can have a decimal part</string -->
+  <string name="pref_extend_frac_title">Desatinná Smerová orientácia</string>
+  <string name="pref_extend_frac_summary">Určuje či Smerová orientácia môže mať desatinné čiarky. Pri zaškrtnutí povolí horizontálny posun meračských bodov v Režime Editácie v Rozvinutom reze</string>
   <string name="pref_drawing_unit_title">Veľkosť Symbolov Bod</string>
   <string name="pref_drawing_unit_summary">Mierka veľkosti Symbolov BOD</string>
   <string name="pref_unscaled_points_title">Približovanie Symbolov Bod</string>
@@ -1316,7 +1315,6 @@
   <string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x weight</string>
   <string name="pref_algo_min_delta_title">Min-algo delta</string>
   <string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string>
-
 <!-- LOG STRINGS MUST NOT BE TRANSLATED (they are used to communicate with developers to solve problems)
   <string name="pref_log_stream_summary" translatable="false">Log output stream</string>
   <string name="pref_log_stream_title" translatable="false">Log stream</string>
@@ -1350,7 +1348,6 @@
   <string name="pref_log_therion" translatable="false">Therion</string>
   <string name="pref_log_units" translatable="false">Units</string>
   <string name="pref_log_zip" translatable="false">ZIP</string>
--->
 
   <!-- UNUSED string name="line_bezier">Bezier</string -->
   <!-- UNUSED string name="line_fine">fine</string -->
