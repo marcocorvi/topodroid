@@ -1049,7 +1049,7 @@ public class SketchWindow extends ItemDrawer
     SketchFixedPath path = null;
     if ( splay ) {
       path = new SketchFixedPath( DrawingPath.DRAWING_PATH_SPLAY, blk,
-                                  BrushManager.fixedSplayPaint,
+                                  BrushManager.paintSplayXB,
                                   null );
     } else {
       path = new SketchFixedPath( DrawingPath.DRAWING_PATH_FIXED, blk,

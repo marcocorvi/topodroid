@@ -45,7 +45,7 @@ class DrawingShotDialog extends MyDialog
   private TextView mLabel;
   private Button mBtnOK;
   private Button mBtnCancel;
-  private Button mBtnColor;
+  private Button mBtnColor;  // user-set color (tester level)
   private EditText mETfrom;
   private EditText mETto;
   private EditText mETcomment;
@@ -341,7 +341,7 @@ class DrawingShotDialog extends MyDialog
 
     Button b = (Button)view;
 
-    if ( b == mBtnColor ) {
+    if ( TDLevel.overExpert && b == mBtnColor ) {
       new MyColorPicker( mContext, this, mColor ).show();
       return;
     } else if ( b == mRBleft ) {

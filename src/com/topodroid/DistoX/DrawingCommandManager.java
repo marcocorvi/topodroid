@@ -483,7 +483,7 @@ class DrawingCommandManager
   //     if ( p.mType == DrawingPath.DRAWING_PATH_FIXED ) {
   //       p.mPaint = BrushManager.fixedShotPaint;
   //     } else {
-  //       p.mPaint = BrushManager.fixedSplayPaint;
+  //       p.mPaint = BrushManager.paintSplayXB;
   //     }
   //   }
   //   mHighlight.clear();

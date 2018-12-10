@@ -35,7 +35,9 @@ class TDInstance
   static int distoType() { return (device == null)? 0 : device.mType; }
   static String distoAddress() { return (device == null)? null : device.mAddress; }
   static boolean isDeviceAddress( String addr ) { return device != null && device.mAddress.equals( addr ); }
-  static boolean isDeviceZeroAddress( ) { return ( device == null || device.mAddress.equals( Device.ZERO_ADDRESS ) ); }
+  // FIXME VitualDistoX
+  // static boolean isDeviceZeroAddress( ) { return ( device == null || device.mAddress.equals( Device.ZERO_ADDRESS ) ); }
+  static boolean isDeviceZeroAddress( ) { return ( device == null ); }
 
   static String recentPlot = null;
   static long   recentPlotType = PlotInfo.PLOT_PLAN;

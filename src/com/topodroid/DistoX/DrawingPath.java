@@ -51,7 +51,7 @@ class DrawingPath extends RectF
 
   Path mPath;
   Path mTransformedPath;
-  Paint mPaint;
+  Paint mPaint;          // drawing path paint
   int mType;
   String mOptions;
   float x1, y1, x2, y2; // endpoint scene coords  (not private just to write the scrap scale using mNorthLine )
@@ -390,57 +390,75 @@ class DrawingPath extends RectF
   void setSplayPaintPlan( DBlock blk, float extend, Paint h_paint, Paint v_paint )
   {
     if ( blk == null ) {
-      mPaint = BrushManager.fixedSplayPaint;
+      mPaint = BrushManager.paintSplayXB;
+      return;
+    }
+    // if ( blk.isHighlighted() ) {
+    //   mPaint = BrushManager.highlightPaint;
+    //   return;
+    // }
+    if ( TDLevel.overAdvanced ) {
+      if ( blk.isCommented() ) { // FIXME_COMMENTED
+        mPaint = BrushManager.paintSplayComment;
+        return;
+      } 
+      if ( TDLevel.overAdvanced && blk.isXSplay() ) {
+        mPaint = BrushManager.paintSplayLRUD;
+        return;
+      } 
+      if ( blk.isHSplay() ) {
+        mPaint = h_paint;
+        return;
+      } 
+      if ( blk.isVSplay() ) {
+        mPaint = v_paint;
+        return;
+      } 
+    }
+    if (extend >= 0 && extend < TDSetting.mCosHorizSplay) {
+      mPaint = BrushManager.paintSplayXBdot;
+    } else if (extend < 0 && extend > -TDSetting.mCosHorizSplay) {
+      mPaint = BrushManager.paintSplayXBdash;
     } else {
-     // if ( blk.isHighlighted() ) {
-     //   mPaint = BrushManager.highlightPaint;
-     // } else
-     if ( blk.isCommented() ) { // FIXME_COMMENTED
-       mPaint = BrushManager.fixedSplay0Paint;
-     } else if ( blk.isXSplay() ) {
-       mPaint = BrushManager.fixedGreenPaint;
-     } else if ( blk.isHSplay() ) {
-       mPaint = h_paint;
-     } else if ( blk.isVSplay() ) {
-       mPaint = v_paint;
-     } else {
-       if (extend >= 0 && extend < TDSetting.mCosHorizSplay) {
-         mPaint = BrushManager.fixedSplay4Paint;
-       } else if (extend < 0 && extend > -TDSetting.mCosHorizSplay) {
-         mPaint = BrushManager.fixedSplay3Paint;
-       } else {
-         mPaint = BrushManager.fixedSplayPaint;
-       }
-     }
-   }
- }
+      mPaint = BrushManager.paintSplayXB;
+    }
+  }
   
   // setSplayClino is used for the profile view
   void setSplayPaintProfile( DBlock blk, Paint h_paint, Paint v_paint )
   {
     if ( blk == null ) {
-      mPaint= BrushManager.fixedSplayPaint;
-    } else {
-      // if ( blk.isHighlighted() ) {
-      //   mPaint = BrushManager.highlightPaint;
-      // } else
+      mPaint= BrushManager.paintSplayXB;
+      return;
+    } 
+    // if ( blk.isHighlighted() ) {
+    //   mPaint = BrushManager.highlightPaint;
+    //   return;
+    // } 
+    if ( TDLevel.overAdvanced ) {
       if ( blk.isCommented() ) { // FIXME_COMMENTED
-        mPaint= BrushManager.fixedSplay0Paint;
-      } else if ( blk.isXSplay() ) {
-        mPaint= BrushManager.fixedGreenPaint;
-      } else if ( blk.isHSplay() ) {
-        mPaint = h_paint;
-      } else if ( blk.isVSplay() ) {
-        mPaint = v_paint;
-      } else {
-        if (blk.mClino > TDSetting.mVertSplay) {
-          mPaint= BrushManager.fixedSplay4Paint;
-        } else if (blk.mClino < -TDSetting.mVertSplay) {
-          mPaint= BrushManager.fixedSplay3Paint;
-        } else {
-          mPaint= BrushManager.fixedSplayPaint;
-        }
+        mPaint= BrushManager.paintSplayComment;
+        return;
       }
+      if ( blk.isXSplay() ) {
+        mPaint= BrushManager.paintSplayLRUD;
+        return;
+      }
+      if ( blk.isHSplay() ) {
+        mPaint = h_paint;
+        return;
+      }
+      if ( blk.isVSplay() ) {
+        mPaint = v_paint;
+	return;
+      } 
+    }
+    if (blk.mClino > TDSetting.mVertSplay) {
+      mPaint= BrushManager.paintSplayXBdot;
+    } else if (blk.mClino < -TDSetting.mVertSplay) {
+      mPaint= BrushManager.paintSplayXBdash;
+    } else {
+      mPaint= BrushManager.paintSplayXB;
     }
   }
 
@@ -456,19 +474,21 @@ class DrawingPath extends RectF
       if ( mBlock.isRecent( ) ) { // if ( mBlock.isTimeRecent( System.currentTimeMillis()/1000 ) ) 
         // if ( mBlock.isPlainSplay() && BrushManager.lightBluePaint != null ) {
         //   canvas.drawPath( path, BrushManager.lightBluePaint );
-        // } else if ( mBlock.isXSplay() && BrushManager.fixedSplay2Paint != null ) {
-        //   canvas.drawPath( path, BrushManager.fixedSplay2Paint );
+        // } else if ( mBlock.isXSplay() && BrushManager.paintSplayXViewed != null ) {
+        //   canvas.drawPath( path, BrushManager.paintSplayXViewed );
         // }
         // if ( BrushManager.lightBluePaint != null ) {
           canvas.drawPath( path, BrushManager.lightBluePaint );
           return;
 	// }
       }
-      Paint paint = mBlock.getPaint();
-      if ( paint != null ) {
-        canvas.drawPath( path, paint );
-        return;
-      } 
+      if ( TDLevel.overExpert ) { // splay user-color only at tester level
+        Paint paint = mBlock.getPaint();
+        if ( paint != null ) {
+          canvas.drawPath( path, paint );
+          return;
+        }
+      }
     } 
     if ( mPaint != null ) canvas.drawPath( path, mPaint );
   }

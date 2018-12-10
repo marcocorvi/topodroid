@@ -255,11 +255,11 @@ public class OverviewWindow extends ItemDrawer
       if ( splay ) {
         dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
         if ( blk.mClino > TDSetting.mVertSplay ) {
-          dpath.setPathPaint( BrushManager.fixedSplay4Paint );
+          dpath.setPathPaint( BrushManager.paintSplayXBdot );
         } else if ( blk.mClino < -TDSetting.mVertSplay ) {
-          dpath.setPathPaint( BrushManager.fixedSplay3Paint );
+          dpath.setPathPaint( BrushManager.paintSplayXBdash );
         } else {
-          dpath.setPathPaint( BrushManager.fixedSplayPaint );
+          dpath.setPathPaint( BrushManager.paintSplayXB );
         }
       } else {
         dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );

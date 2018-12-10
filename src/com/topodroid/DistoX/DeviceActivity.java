@@ -289,9 +289,9 @@ public class DeviceActivity extends Activity
     // TDLog.Debug("device activity update list" );
     // mList.setAdapter( mArrayAdapter );
     mArrayAdapter.clear();
-    if ( TDLevel.overTester ) { // FIXME VirtualDistoX
-      mArrayAdapter.add( "X000" );
-    }
+    // if ( TDLevel.overTester ) { // FIXME VirtualDistoX
+    //   mArrayAdapter.add( "X000" );
+    // }
     if ( mApp.mBTAdapter != null ) {
       Set<BluetoothDevice> device_set = mApp.mBTAdapter.getBondedDevices(); // get paired devices
       if ( device_set.isEmpty() ) {
@@ -348,8 +348,10 @@ public class DeviceActivity extends Activity
       StringBuffer buf = new StringBuffer( item );
       int k = buf.lastIndexOf(" ");
       String[] vals = item.toString().split(" ", 3 );
-      String address = ( vals[0].equals("X000") )? Device.ZERO_ADDRESS : vals[2];
-      // String address = vals[2]; // FIXME VirtualDistoX
+
+      // FIXME VirtualDistoX
+      // String address = ( vals[0].equals("X000") )? Device.ZERO_ADDRESS : vals[2];
+      String address = vals[2];
 
       // if ( vals.length != 3 ) { TODO } // FIXME
       // Log.v("DistoX", "Addr/Name <" + vals[2] + ">");

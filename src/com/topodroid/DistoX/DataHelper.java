@@ -3234,7 +3234,7 @@ class DataHelper extends DataSetObservable
    String getNextSectionId( long sid )
    {
      int max = 0; 
-     if ( myDB == null ) return "xxo"; // FIXME null
+     if ( myDB == null ) return "xx0"; // FIXME null
      // Log.v( TopoDroidApp.TAG, "getNextSectionId sid " + sid + " prefix " + prefix );
      Cursor cursor = myDB.query( PLOT_TABLE, 
                  new String[] { "id", "type", "name" },

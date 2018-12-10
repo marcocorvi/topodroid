@@ -210,7 +210,8 @@ public class TopoDroidApp extends Application
   // static int distoType() { return (mDevice == null)? 0 : mDevice.mType; }
   // static String distoAddress() { return (mDevice == null)? null : mDevice.mAddress; }
 
-  VirtualDistoX mVirtualDistoX = new VirtualDistoX();
+  // FIXME VirtualDistoX
+  // VirtualDistoX mVirtualDistoX = new VirtualDistoX();
 
   // -------------------------------------------------------------------------------------
   // static SIZE methods
@@ -342,9 +343,9 @@ public class TopoDroidApp extends Application
         } else if ( model == Device.DISTO_X310 ) {
           mDData.updateDeviceModel( device.mAddress, "DistoX-0000" );
           device.mType = model;
-        } else if ( model == Device.DISTO_X000 ) {
-          mDData.updateDeviceModel( device.mAddress, "DistoX0" );
-          device.mType = model;
+        // } else if ( model == Device.DISTO_X000 ) { // FIXME VirtualDistoX
+        //   mDData.updateDeviceModel( device.mAddress, "DistoX0" );
+        //   device.mType = model;
         }
       }
     }
@@ -503,11 +504,11 @@ public class TopoDroidApp extends Application
       mComm.disconnectRemoteDevice( );
       mComm = null;
     }
-    if ( TDInstance.isDeviceAddress( Device.ZERO_ADDRESS ) ) {
-      mComm = new VirtualDistoXComm( this, mVirtualDistoX );
-    } else { 
+    // if ( TDInstance.isDeviceAddress( Device.ZERO_ADDRESS ) ) { // FIXME VirtualDistoX
+    //   mComm = new VirtualDistoXComm( this, mVirtualDistoX );
+    // } else { 
       mComm = new DistoXComm( this );
-    }
+    // }
   }
 
   @Override
@@ -1068,17 +1069,17 @@ public class TopoDroidApp extends Application
   { 
     // Log.v("DistoX", "VD TDapp set device address " + address );
     if ( address == null ) {
-      if ( mVirtualDistoX != null ) mVirtualDistoX.stopServer( this );
+      // if ( mVirtualDistoX != null ) mVirtualDistoX.stopServer( this ); // FIXME VirtualDistoX
       TDInstance.device = null;
       address = TDString.EMPTY;
-    } else if ( address.equals( Device.ZERO_ADDRESS )  ) {
-      if ( mVirtualDistoX != null ) mVirtualDistoX.startServer( this );
-      // boolean create = ( TDInstance.device == null || ! address.equals( TDInstance.device.mAddress ) );
-      boolean create = ( ! TDInstance.isDeviceAddress( address ) );
-      TDInstance.device = new Device( address, "DistoX0", "X000", null );
-      if ( create ) createComm();
+    // } else if ( address.equals( Device.ZERO_ADDRESS )  ) { // FIXME VirtualDistoX
+    //   if ( mVirtualDistoX != null ) mVirtualDistoX.startServer( this );
+    //   // boolean create = ( TDInstance.device == null || ! address.equals( TDInstance.device.mAddress ) );
+    //   boolean create = ( ! TDInstance.isDeviceAddress( address ) );
+    //   TDInstance.device = new Device( address, "DistoX0", "X000", null );
+    //   if ( create ) createComm();
     } else {
-      if ( mVirtualDistoX != null ) mVirtualDistoX.stopServer( this );
+      // if ( mVirtualDistoX != null ) mVirtualDistoX.stopServer( this ); // FIXME VirtualDistoX
       // boolean create = ( TDInstance.device == null || TDInstance.device.mAddress.equals( Device.ZERO_ADDRESS ) );
       boolean create = TDInstance.isDeviceZeroAddress();
       TDInstance.device = mDData.getDevice( address );

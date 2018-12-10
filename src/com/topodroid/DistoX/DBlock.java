@@ -47,7 +47,7 @@ class DBlock
   // private int    mPos;     // position in the list
   int    mVisible; // whether is visible in the list
   boolean mMultiSelected; // whether the block is in multiselect list
-  private Paint mPaint;
+  private Paint mPaint;   // user-set block color
 
   long   mId;
   long   mTime;

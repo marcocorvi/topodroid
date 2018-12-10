@@ -81,9 +81,9 @@ class DeviceSelectDialog extends MyDialog
   {
     ListItemAdapter array_adapter = new ListItemAdapter( mContext, R.layout.message );
     // mArrayAdapter.clear();
-    if ( TDLevel.overTester ) { // FIXME VirtualDistoX
-      array_adapter.add( "X000" );
-    }
+    // if ( TDLevel.overTester ) { // FIXME VirtualDistoX
+    //   array_adapter.add( "X000" );
+    // }
     ArrayList<Device> devices = TopoDroidApp.mDData.getDevices();
     for ( Device device : devices ) {
       // String addr  = device.mAddress;
@@ -104,8 +104,11 @@ class DeviceSelectDialog extends MyDialog
     StringBuffer buf = new StringBuffer( item );
     int k = buf.lastIndexOf(" ");
     String[] vals = item.toString().split(" ", 3 );
-    String address = ( vals[0].equals("X000") )? Device.ZERO_ADDRESS : vals[2];
-    // String address = vals[2]; // FIXME VirtualDistoX
+
+    // FIXME VirtualDistoX
+    // String address = ( vals[0].equals("X000") )? Device.ZERO_ADDRESS : vals[2];
+    String address = vals[2];
+
     mApp.setDevice( address );
     mLister.setTheTitle();
     mDownloader.toggleDownload();

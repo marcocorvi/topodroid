@@ -747,26 +747,26 @@ public class DrawingWindow extends ItemDrawer
       dpath.setPathPaint( paint );
     } else if ( blue ) {
       if ( blk.isXSplay() ) {
-        dpath.setPathPaint( BrushManager.fixedGreenPaint );    // GREEN
+        dpath.setPathPaint( BrushManager.paintSplayLRUD );    // GREEN
       } else if ( a > TDSetting.mSectionSplay ) {
-        dpath.setPathPaint( BrushManager.fixedSplay24Paint );  // BLUE dashed-4  -- -- -- --
+        dpath.setPathPaint( BrushManager.paintSplayXVdot );  // BLUE dashed-4  -- -- -- --
       } else if ( a < -TDSetting.mSectionSplay ) {
-        dpath.setPathPaint( BrushManager.fixedSplay23Paint );  // BLUE dashed-3  --- --- ---
+        dpath.setPathPaint( BrushManager.paintSplayXVdash );  // BLUE dashed-3  --- --- ---
       } else {
-        dpath.setPathPaint( BrushManager.fixedSplay2Paint );   // BLUE
+        dpath.setPathPaint( BrushManager.paintSplayXViewed );   // BLUE
       }
     } else {
       if ( blk.isXSplay() ) {
-        dpath.setPathPaint( BrushManager.fixedGreenPaint );    // GREEN
+        dpath.setPathPaint( BrushManager.paintSplayLRUD );    // GREEN
       } else if ( a > TDSetting.mSectionSplay ) {
-        dpath.setPathPaint( BrushManager.fixedSplay4Paint );   // LIGHT_BLUE dashed-4
+        dpath.setPathPaint( BrushManager.paintSplayXBdot );   // LIGHT_BLUE dashed-4
       } else if ( a < -TDSetting.mSectionSplay ) {
-        dpath.setPathPaint( BrushManager.fixedSplay3Paint );   // LIGHT_BLUE dashed-3
+        dpath.setPathPaint( BrushManager.paintSplayXBdash );   // LIGHT_BLUE dashed-3
       } else {
-        dpath.setPathPaint( BrushManager.fixedSplayPaint );    // LIGHT_BLUE
+        dpath.setPathPaint( BrushManager.paintSplayXB );    // LIGHT_BLUE
       }
     }
-    // dpath.setPathPaint( blue? BrushManager.fixedSplay2Paint : BrushManager.fixedSplayPaint );
+    // dpath.setPathPaint( blue? BrushManager.paintSplayXViewed : BrushManager.paintSplayXB );
     // DrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
     DrawingUtil.makePath( dpath, x1, y1, x2, y2 );
     mDrawingSurface.addFixedPath( dpath, true, false ); // true SPLAY false SELECTABLE

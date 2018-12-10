@@ -115,16 +115,16 @@ class BrushManager
   static Paint darkBluePaint   = null;
   static Paint lightBluePaint  = null;
   static Paint fixedRedPaint   = null;
-  static Paint fixedGreenPaint  = null;
+  static Paint paintSplayLRUD  = null;
   static Paint fixedYellowPaint  = null;
   static Paint fixedOrangePaint  = null;
-  static Paint fixedSplayPaint = null;
-  static Paint fixedSplay0Paint = null;  // commented splay
-  static Paint fixedSplay2Paint = null;  // cross-section splay2 (at viewed station)
-  static Paint fixedSplay3Paint = null;  // dash splay
-  static Paint fixedSplay4Paint = null;  // dot splay
-  static Paint fixedSplay23Paint = null;  // blue dash splay
-  static Paint fixedSplay24Paint = null;  // blue dot splay
+  static Paint paintSplayXB = null;
+  static Paint paintSplayComment = null;  // commented splay
+  static Paint paintSplayXViewed = null;  // cross-section splay2 (at viewed station)
+  static Paint paintSplayXBdash = null;  // dash splay
+  static Paint paintSplayXBdot = null;  // dot splay
+  static Paint paintSplayXVdash = null;  // blue dash splay
+  static Paint paintSplayXVdot = null;  // blue dot splay
   static Paint fixedGridPaint  = null;
   static Paint fixedGrid10Paint  = null;
   static Paint fixedGrid100Paint  = null;
@@ -223,31 +223,31 @@ class BrushManager
       lightBluePaint   = makePaint( 0xff66ccff,           WIDTH_CURRENT, Paint.Style.STROKE);
       fixedRedPaint    = makePaint( TDColor.FIXED_RED,    WIDTH_CURRENT, Paint.Style.STROKE);
       fixedYellowPaint = makePaint( TDColor.FIXED_YELLOW, WIDTH_CURRENT, Paint.Style.STROKE);
-      fixedGreenPaint  = makePaint( TDColor.GREEN,        WIDTH_CURRENT, Paint.Style.STROKE);
+      paintSplayLRUD  = makePaint( TDColor.GREEN,        WIDTH_CURRENT, Paint.Style.STROKE);
       fixedOrangePaint = makePaint( TDColor.FIXED_ORANGE, WIDTH_CURRENT, Paint.Style.STROKE);
-      fixedSplayPaint  = makePaint( TDColor.LIGHT_BLUE,   WIDTH_CURRENT, Paint.Style.STROKE);
-      fixedSplay0Paint = makePaint( TDColor.VERYDARK_GRAY,WIDTH_CURRENT, Paint.Style.STROKE);
-      fixedSplay2Paint = makePaint( TDColor.BLUE,         WIDTH_CURRENT, Paint.Style.STROKE);
-      fixedSplay3Paint = makePaint( TDColor.LIGHT_BLUE,   WIDTH_CURRENT, Paint.Style.STROKE);
+      paintSplayXB  = makePaint( TDColor.LIGHT_BLUE,   WIDTH_CURRENT, Paint.Style.STROKE);
+      paintSplayComment = makePaint( TDColor.VERYDARK_GRAY,WIDTH_CURRENT, Paint.Style.STROKE);
+      paintSplayXViewed = makePaint( TDColor.BLUE,         WIDTH_CURRENT, Paint.Style.STROKE);
+      paintSplayXBdash = makePaint( TDColor.LIGHT_BLUE,   WIDTH_CURRENT, Paint.Style.STROKE);
 
       float[] x = new float[2];
       x[0] = 24; // FIXME
       x[1] =  8;
       DashPathEffect dash3 = new DashPathEffect( x, 0 );
-      fixedSplay3Paint.setPathEffect( dash3 );
+      paintSplayXBdash.setPathEffect( dash3 );
 
-      fixedSplay23Paint = makePaint( TDColor.BLUE,        WIDTH_CURRENT, Paint.Style.STROKE);
-      fixedSplay23Paint.setPathEffect( dash3 );
+      paintSplayXVdash = makePaint( TDColor.BLUE,        WIDTH_CURRENT, Paint.Style.STROKE);
+      paintSplayXVdash.setPathEffect( dash3 );
 
-      fixedSplay4Paint  = makePaint( TDColor.LIGHT_BLUE,  WIDTH_CURRENT, Paint.Style.STROKE);
+      paintSplayXBdot  = makePaint( TDColor.LIGHT_BLUE,  WIDTH_CURRENT, Paint.Style.STROKE);
       // float[] x = new float[2];
       x[0] = 14; // FIXME
       x[1] =  8; 
       DashPathEffect dash4 = new DashPathEffect( x, 0 );
-      fixedSplay4Paint.setPathEffect( dash4 );
+      paintSplayXBdot.setPathEffect( dash4 );
 
-      fixedSplay24Paint  = makePaint( TDColor.BLUE,       WIDTH_CURRENT, Paint.Style.STROKE);
-      fixedSplay24Paint.setPathEffect( dash4 );
+      paintSplayXVdot  = makePaint( TDColor.BLUE,       WIDTH_CURRENT, Paint.Style.STROKE);
+      paintSplayXVdot.setPathEffect( dash4 );
 
       fixedGridPaint    = makePaint( TDColor.DARK_GRID,   WIDTH_FIXED, Paint.Style.STROKE);
       fixedGrid10Paint  = makePaint( TDColor.GRID,        WIDTH_FIXED, Paint.Style.STROKE);
@@ -281,8 +281,8 @@ class BrushManager
     if (lightBluePaint != null)   lightBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
     if (darkBluePaint != null)    darkBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
     if (deepBluePaint != null)    deepBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
-    if (fixedSplayPaint != null)  fixedSplayPaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
-    if (fixedSplay2Paint != null) fixedSplay2Paint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
+    if (paintSplayXB != null)  paintSplayXB.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
+    if (paintSplayXViewed != null) paintSplayXViewed.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
   }
 
   static void setTextSizes()

@@ -249,7 +249,8 @@ class DistoXProtocol
         // double r = (mBuffer[7] & 0xff);
         double r = r7;
 
-        if ( mDeviceType == Device.DISTO_A3 || mDeviceType == Device.DISTO_X000) {
+        // if ( mDeviceType == Device.DISTO_A3 || mDeviceType == Device.DISTO_X000) // FIXME VirtualDistoX
+        if ( mDeviceType == Device.DISTO_A3 ) {
           mDistance = d / 1000.0;
         } else if ( mDeviceType == Device.DISTO_X310 ) {
           if ( d < 99999 ) {
@@ -325,7 +326,8 @@ class DistoXProtocol
 
   int readPacket( boolean no_timeout )
   {
-    int min_available = ( mDeviceType == Device.DISTO_X000)? 8 : 1; // FIXME 8 should work in every case
+    // int min_available = ( mDeviceType == Device.DISTO_X000)? 8 : 1; // FIXME 8 should work in every case // FIXME VirtualDistoX
+    int min_available = 1; // FIXME 8 should work in every case
 
     TDLog.Log( TDLog.LOG_PROTO, "Protocol read packet no-timeout " + (no_timeout?"no":"yes") );
     // Log.v( "DistoX", "VD Proto read packet no-timeout " + (no_timeout?"no":"yes") );
