@@ -68,9 +68,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="missing_title">MISSING SYMBOLS</string -->
     <!-- UNUSED string name="missing_warning">The following drawing tools are missing.\n</string -->
 
-    <string name="failed_snap_to_line">\?Brak bliskich linii, aby przyciągnąć granicę obszaru</string>
-    <string name="failed_snap_to_point">\?Brak bliskiego punktu, aby się doczepić</string>
-    <string name="failed_snap_to_splays">\?Brak bliskiego domiaru, aby się doczepić</string>
+    <string name="failed_snap_to_line">\Brak bliskich linii, aby przyciągnąć granicę obszaru</string>
+    <string name="failed_snap_to_point">\Brak bliskiego punktu, aby się doczepić</string>
+    <string name="failed_snap_to_splays">\Brak bliskiego domiaru, aby się doczepić</string>
     <!-- TODO string name="failed_append_to_line">Failed to append to another line</string -->
 
     <string name="calibration_title">Kalibracja przyrządów</string>
@@ -101,7 +101,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="calib_ave_std">Dokładność: %1$.4f ± %2$.4f stopni</string>
     <string name="calib_precision">Precyzja</string>
     <string name="calib_iter">Iteracje: %1$d</string>
-    <string name="calib_reset">Zresetować kalibrację?</string>
+    <string name="calib_reset">Zresetować kalibrację ?</string>
     
     <string name="algorithm">Algorytm:</string>
     <string name="auto">auto</string>
@@ -148,7 +148,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="external_prompt">Enter measurement</string -->
     <string name="splay_at_to">LRUD na punkcie docelowym</string>
     <string name="lrud">LRUD</string>
-    <string name="strike_dip">\??Strike %1$.0f ??Dip %2$.0f</string>
+    <string name="strike_dip">\Strike %1$.0f Dip %2$.0f</string>
 
     <string name="few_data">Za mało danych</string>
     <string name="few_iter">Błąd: za dużo iteracji</string>
@@ -354,46 +354,46 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="menu_validate">SPRAWDŹ</string>
     <string name="menu_zoom_fit">DOPASUJ POWIĘKSZENIE</string>
 
-    <string name="popup_join_pt">Snap to nearby point</string>
-    <string name="popup_snap_ln">Snap to nearby line</string>
-    <string name="popup_snap_to_splays">Snap to nearby splays</string>
-    <string name="popup_split_pt">Duplicate point</string>
-    <string name="popup_split_ln">Cut line at point</string>
-    <string name="popup_sharp_pt">Straighten segment</string>
-    <string name="popup_curve_pt">Smoothen segment</string>
-    <string name="popup_remove_pt">Remove point</string>
+    <string name="popup_join_pt">Przyciąg do najbliższego punktu</string>
+    <string name="popup_snap_ln">Przyciągnij do najbliższej linii</string>
+    <string name="popup_snap_to_splays">Przyciągnij do najbliższego domiaru</string>
+    <string name="popup_split_pt">Zduplikowany punkt</string>
+    <string name="popup_split_ln">Utnij linię w punkcie</string>
+    <string name="popup_sharp_pt">Wyprostuj segment</string>
+    <string name="popup_curve_pt">Wygładź segment</string>
+    <string name="popup_remove_pt">Usuń punkt</string>
     <!-- TODO string name="popup_append_line">Append to line</string -->
 
-    <string name="popup_erase_all">Erase all</string>
-    <string name="popup_erase_point">Erase points</string>
-    <string name="popup_erase_line">Erase lines</string>
-    <string name="popup_erase_area">Erase areas</string>
+    <string name="popup_erase_all">Wyczyść wszystko</string>
+    <string name="popup_erase_point">Wyczyść punkty</string>
+    <string name="popup_erase_line">Wyczyść linie</string>
+    <string name="popup_erase_area">Wyczyść powierzchnie</string>
 
-    <string name="popup_select_all">Select all</string>
-    <string name="popup_select_point">Select points</string>
-    <string name="popup_select_line">Select lines</string>
-    <string name="popup_select_area">Select areas</string>
-    <string name="popup_select_shot">Select shots</string>
-    <string name="popup_select_station">Select stations</string>
+    <string name="popup_select_all">Wybierz wszystko</string>
+    <string name="popup_select_point">Wybierz punkty</string>
+    <string name="popup_select_line">Wybierz linie</string>
+    <string name="popup_select_area">Wybierz powierzchnie</string>
+    <string name="popup_select_shot">Wybierz pomiar</string>
+    <string name="popup_select_station">Wybierz stacje</string>
 
-    <string name="popup_cont_none">None</string>
-    <string name="popup_cont_start">Start point</string>
-    <string name="popup_cont_end">End point</string>
-    <string name="popup_cont_both">Both points</string>
-    <string name="popup_cont_continue">Continue</string>
+    <string name="popup_cont_none">Żaden</string>
+    <string name="popup_cont_start">Punkt startowy</string>
+    <string name="popup_cont_end">Punkt końcowy</string>
+    <string name="popup_cont_both">Oba punkty</string>
+    <string name="popup_cont_continue">Kontynuuj</string>
 
     <!-- UNUSED string name="connected_none">Not connected</string -->
     <!-- UNUSED string name="connected_already">Already connected</string -->
 
-    <string name="not_available">BT not available</string>
-    <string name="not_enabled">BT not enabled</string>
+    <string name="not_available">BT niedostępny</string>
+    <string name="not_enabled">BT niewłączony</string>
 
     <!-- UNUSED string name="not_implemented">Not implemented yet</string -->
-    <string name="null_bitmap">Cannot create image [OOM error]</string>
-    <string name="photo">photo</string>
-    <string name="photo_camera">Camera App</string>
-    <string name="photo_comment_prompt">Enter the photo comment</string>
-    <string name="photo_azimuth_clino">Azimuth: %1$.1f Clino %2$.1f</string>
+    <string name="null_bitmap">Nie można utworzyć obrazu [OOM error]</string>
+    <string name="photo">zdjęcie</string>
+    <string name="photo_camera">Aplikacja aparat</string>
+    <string name="photo_comment_prompt">Dodaj komentarz zdjęcia</string>
+    <string name="photo_azimuth_clino">Azymut: %1$.1f Upad %2$.1f</string>
     <!-- UNUSED string name="photo_name">station/name</string -->
     <!-- UNUSED string name="photo_photo">photo</string -->
     <!-- UNUSED string name="photo_sensor">sensor</string -->
@@ -402,66 +402,66 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="photo_shot">add shot</string -->
     <!-- UNUSED string name="photo_survey">split survey</string -->
     <!-- UNUSED string name="picture_no_station">Station name required</string -->
-    <string name="plot_delete">Delete sketch ?</string>
-    <string name="item_delete">Delete item %1$s ?</string>
-    <string name="splay_delete">Delete splay %1$s ?</string>
-    <string name="plot_duplicate_name">Duplicate sketch name</string>
-    <string name="plot_dangling">Dangling sketch</string>
+    <string name="plot_delete">Usunąć szkic ?</string>
+    <string name="item_delete">Usunąć pozycję %1$s ?</string>
+    <string name="splay_delete">Usunąć domiar %1$s ?</string>
+    <string name="plot_duplicate_name">Zduplikoana nazwa szkicu</string>
+    <string name="plot_dangling">Zawieszony szkic</string>
     <!-- UNUSED string name="plot_name">Sketch name</string -->
-    <string name="plot_new">New sketch</string>
-    <string name="plot_not_found">Sketch not found</string>
+    <string name="plot_new">Nowy szkic</string>
+    <string name="plot_not_found">Nie znaleziono szkicu</string>
     <!-- UNUSED string name="plot_null_name">Missing sketch name</string -->
     <!-- UNUSED string name="plot_null_start">Missing base station</string -->
     <!-- UNUSED string name="plot_recover">Reload sketch from backup?</string -->
-    <string name="plot_start">Origin station</string>
+    <string name="plot_start">Stacja początkowa</string>
     <!-- UNUSED string name="plot_view">Viewed station</string -->
-    <string name="read_fail_with_code">Read failure: error code </string>
-    <string name="read_failed">Failed DistoX-read</string>
-    <string name="swap_hotbit_ok">Swapped data hot bit</string>
+    <string name="read_fail_with_code">Błąd odczytu: error code </string>
+    <string name="read_failed">Błąd odczytu DistoX</string>
+    <string name="swap_hotbit_ok">Zamieniono dane</string>
     <!-- UNUSED string name="reading_file_failed">Failed file-read</string -->
 
-    <string name="saved_file_1">Saved file %1$s</string>
-    <string name="saved_file_2">Saved file %1$s Scale %2$.2f</string>
-    <string name="saving_">Saving </string>
-    <string name="saving_file_failed">Failed file-save</string>
+    <string name="saved_file_1">Zapisano plik %1$s</string>
+    <string name="saved_file_2">Zapisano plik %1$s Skala %2$.2f</string>
+    <string name="saving_">Zapisywanie </string>
+    <string name="saving_file_failed">Błąd zapisu pliku</string>
     <!-- UNUSED string name="scrap_name">sketch name</string -->
-    <string name="splay">splay</string>
-    <string name="too_many_leg_intersection">Section line crosses many legs</string>
+    <string name="splay">domiar</string>
+    <string name="too_many_leg_intersection">Linia przekroju przecina wiele pomiarów</string>
     <!-- UNUSED string name="too_many_legs_xsection">Too many legs for X-section</string -->
     <!-- UNUSED string name="converted_tdr2th2">Converted sketches binary files to th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Overwrite th2 sketch files ?</string -->
-    <string name="section_area">Section area: %1$.1f</string>
-    <string name="section_name">section comment</string>
-    <string name="scrap_outline">Sketch outline</string>
+    <string name="section_area">Obszar przekroju: %1$.1f</string>
+    <string name="section_name">Komentarz przekroju</string>
+    <string name="scrap_outline">Zarys szkicu</string>
 
     <!-- UNUSED string name="sensor">sensor</string -->
-    <string name="sensor_gravity">gravity</string>
+    <string name="sensor_gravity">grawitacja</string>
     <!-- UNUSED string name="sensor_humidity">humidity</string -->
-    <string name="sensor_light">light</string>
-    <string name="sensor_magnetic_field">magnetic field</string>
+    <string name="sensor_light">światło</string>
+    <string name="sensor_magnetic_field">pole magnetyczne</string>
     <!-- UNUSED string name="sensor_orientation">orientation</string -->
-    <string name="sensor_pressure">pressure</string>
-    <string name="sensor_temperature">temperature</string>
-    <string name="sensor_extern">external</string>
-    <string name="sensor_type">type</string>
-    <string name="sensor_value">value</string>
-    <string name="sensor_comment">comment</string>
+    <string name="sensor_pressure">ciśnienie</string>
+    <string name="sensor_temperature">temperatura</string>
+    <string name="sensor_extern">zewnętrzny</string>
+    <string name="sensor_type">typ</string>
+    <string name="sensor_value">wartość</string>
+    <string name="sensor_comment">komentarz</string>
     <!-- UNUSED string name="insufficient_data">insufficient sensor data</string -->
 
     <!-- UNUSED string name="shot_clino">clino</string -->
     <!-- UNUSED string name="shot_compass">compass</string -->
-    <string name="shot_delete">Delete shot ?</string>
-    <string name="shots_delete">Delete shots ?</string>
-    <string name="shot_check">Mark shot as check-shot?</string>
-    <string name="shot_from">from</string>
-    <string name="shot_info">Enter shot data</string>
+    <string name="shot_delete">Usunąć pomiar ?</string>
+    <string name="shots_delete">Usunąć pomiary ?</string>
+    <string name="shot_check">Zaznaczyć pomiar jako sprawdzający ?</string>
+    <string name="shot_from">z</string>
+    <string name="shot_info">Wprowadz dane pomiaru</string>
     <!-- UNUSED string name="shot_length">length</string -->
-    <string name="shot_note">note</string>
-    <string name="shot_not_found">Found no shot</string>
-    <string name="shot_reverse">reverse</string>
-    <string name="shot_to">to</string>
+    <string name="shot_note">uwaga</string>
+    <string name="shot_not_found">Nie znaleziono pomiaru</string>
+    <string name="shot_reverse">wsteczny</string>
+    <string name="shot_to">do</string>
 
-    <string name="make_surface">Surface exists. Replace it?</string>
+    <string name="make_surface">Powierzhcnia istnieje. Zastąpić?</string>
 
     <string name="sketch3d_name">name</string>
     <string name="sketch3d_new">New model</string>
