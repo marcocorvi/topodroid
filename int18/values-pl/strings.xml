@@ -184,9 +184,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="head_tail_store_failed">Błąd zapisu pamięci DistoX</string>
     <!-- UNUSED string name="pairing_failed">Pairing failed</string -->
 
-    <string name="datamode_normal">Normal data-mode</string>
-    <string name="datamode_diving">Diving data-mode</string>
-    <string name="illegal_data_value">Illegal data value</string>
+    <string name="datamode_normal">Normalny tryb danych</string>
+    <string name="datamode_diving">Nurkowy tryb danych</string>
+    <string name="illegal_data_value">Sprzeczne wartości danych</string>
 
     <string name="photo_title">Zdjęcie</string>
     <string name="photo_text">Dodaj opis zdjęcia</string>
@@ -463,37 +463,37 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
     <string name="make_surface">Powierzhcnia istnieje. Zastąpić?</string>
 
-    <string name="sketch3d_name">name</string>
-    <string name="sketch3d_new">New model</string>
-    <string name="sketch3d_next">next station</string>
-    <string name="sketch3d_loading">loading model &#8230;</string>
+    <string name="sketch3d_name">nazwa</string>
+    <string name="sketch3d_new">Nowy model</string>
+    <string name="sketch3d_next">kolejna stacja</string>
+    <string name="sketch3d_loading">ładowanie modelu &#8230;</string>
     <!-- UNUSED string name="sketch3d_null_name">Missing 3D sketch name</string -->
     <!-- UNUSED string name="sketch3d_null_next">Missing 3D sketch next station</string -->
     <!-- UNUSED string name="sketch3d_null_start">Missing 3D sketch base station</string -->
     <!-- UNUSED string name="sketch3d_start">base station</string -->
 
-    <string name="station">station</string>
-    <string name="station_ask">Insert station in sketch?</string>
-    <string name="station_del">Remove station from sketch?</string>
-    <string name="station_set">Continue survey from here?</string>
+    <string name="station">stacja</string>
+    <string name="station_ask">Wstawić stację do szkicu?</string>
+    <string name="station_del">Usunąć stację ze szkicu?</string>
+    <string name="station_set">Kontynuować pomiar tutaj?</string>
     <!-- UNUSED string name="station_base">reference station</string -->
     <!-- UNUSED string name="station_next">next station</string -->
     <!-- UNUSED string name="station_viewed">viewed station</string -->
-    <string name="survey_exists">Survey already exists</string>
+    <string name="survey_exists">Pomiar już istnieje</string>
     <!-- UNUSED string name="survey_date">yyyy.mm.dd</string -->
-    <string name="survey_delete">Delete survey ?</string>
-    <string name="survey_split">Split survey ?</string>
-    <string name="survey_not_attached">WARNING: unattached shots</string>
-    <string name="survey_not_extend">WARNING: unset shot extends</string>
-    <string name="survey_not_attached_extend">WARNING: unattached shots and unset extends</string>
-    <string name="survey_no_data_reduction">WARNING: no data reduction</string>
-    <string name="saturated_coeffs">WARNING: saturated calibration coefficients</string>
-    <string name="out_of_memory">WARNING: out of memory !</string>
-    <string name="disk_io_error">CRITICAL: disk i/o error !</string>
+    <string name="survey_delete">Usunąć pomiar ?</string>
+    <string name="survey_split">Rozdzielić pomiar ?</string>
+    <string name="survey_not_attached">UWAGA: nieprzyłączone strzały</string>
+    <string name="survey_not_extend">Uwaga: nieosadzony rozciągnięty strzał</string>
+    <string name="survey_not_attached_extend">UWAGA: nieprzyłączone i nieosadzone strzały</string>
+    <string name="survey_no_data_reduction">UWAGA: brak redukcji danych</string>
+    <string name="saturated_coeffs">UWAGA: nasycone współczynniki kalibracji</string>
+    <string name="out_of_memory">UWAGA: koniec pamięci !</string>
+    <string name="disk_io_error">KRYTYCZNY: błąd I/O !</string>
 
-    <string name="toporobot_warning">TopoRobot policy is exterimental !</string>
-    <string name="anomaly_warning">Magnatic anomaly compensation is expert !</string>
-    <string name="tripod_warning">Tripod policy is advanced !</string>
+    <string name="toporobot_warning">zasady TopoRobot są eksperymentalne !</string>
+    <string name="anomaly_warning">Kompensacja magnetyczna jest eksperymentalna !</string>
+    <string name="tripod_warning">Zasady Tripod są zaawansowane !</string>
 
 
     <string name="cannot_rename">Cannot rename survey</string>
