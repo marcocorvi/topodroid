@@ -68,7 +68,7 @@ class SketchNewShotDialog extends MyDialog
     mParent = parent;
     mApp    = app;
     mData   = TopoDroidApp.mData;
-    mShots  = mApp.mShotWindow;
+    mShots  = TopoDroidApp.mShotWindow;
     mFrom   = name;
     mBlk    = null;
     if ( mFrom == null || mFrom.length() == 0 ) {

@@ -616,7 +616,6 @@
     <string name="button_rename"    >Umbenennen    </string>
     <string name="button_renumber"  >Neu nummerieren</string>
     <string name="button_bedding"   >Streichen und Fallen</string>
-    <string name="button_highlight" >Zeigen</string>
     <string name="button_replace"   >Ersetzen   </string>
     <string name="button_reset"     >Zurücksetzen</string>
     <string name="button_left"      >LINKS</string>
@@ -941,6 +940,7 @@
     <string name="title_settings_edit">Einstellungen: Elemente Bearbeiten</string>
     <string name="title_settings_device">Einstellungen: Gerät</string>
     <string name="title_settings_calib">Einstellungen: Kalibrierung</string>
+    <!-- TODO string name="title_settings_geek">TopoDroid geek flags settings</string -->
     <string name="title_settings_log">Einstellungen: Log</string>
 
     <string name="title_shift">Verschieben</string>
@@ -979,8 +979,9 @@
 
   <string name="pref_cat_calib">Kalibrierung</string>
   <string name="pref_cat_device">Verbindung</string>
+  <!-- TODO string name="pref_cat_geek">GEEK FLAGS</string -->
   <string name="pref_cat_sketch">3D-Modell</string>
-  <string name="pref_cat_log">Log Optionen</string>
+  <!-- UNUSED string name="pref_cat_log">Log Optionen</string -->
 
   <string name="pref_locale_title">Sprache</string>
   <string name="pref_locale_summary">Auswahl der Sprache</string>
@@ -1121,6 +1122,8 @@
   <string name="pref_section_splay_message">Grenzwert in Querschnitten ab welchem Hilfslinien gestrichelt dargestellt werden</string>
   <string name="pref_data_backup_title">Auto-Datenexport</string>
   <string name="pref_data_backup_summary">Automatischer Datenexport beim Verlassen (benötigt ein Standard Exportformat)</string>
+  <!-- TODO string name="pref_fixed_origin_title">Sketch origin</string -->
+  <!-- TODO string name="pref_fixed_origin_summary">Fixed sketch origin</string -->
   <string name="pref_shared_xsections_title">Querschn. Sichtbarkeit</string>
   <string name="pref_shared_xsections_summary">Querschnitte nur auf einer oder auf allen Skizzen</string>
   <string name="xsections_shared">Auf allen Skizzen</string>
@@ -1163,8 +1166,8 @@
   <string name="pref_vthr_title">Vertikale Messlinien</string>
   <string name="pref_vthr_summary">Winkelgrenzwert für vertikale Darstellung von Messlinien</string>
 
-  <string name="pref_plan_vthr_title">Hilfslinien vertikaler Grenzwert</string>
-  <string name="pref_plan_vthr_message">Winkelgrenzwert für Anzeige der Hilfslinien auf Plan</string>
+  <!-- UNUSED string name="pref_plan_vthr_title">Hilfslinien vertikaler Grenzwert</string -->
+  <!-- UNUSED string name="pref_plan_vthr_message">Winkelgrenzwert für Anzeige der Hilfslinien auf Plan</string -->
   <string name="pref_init_station_title">Name Startmesspunkt</string>
   <string name="pref_init_station_summary">Standard Startmesspunkt</string>
   <string name="pref_station_names_title">Messpunktnamen</string>
@@ -1190,6 +1193,8 @@
   <string name="pref_beep_volume_summary">Lautstärke des Pieptones bei Messung von Topodroid</string>
   <!-- TODO string name="pref_extend_frac_title">Fractional extend</string -->
   <!-- TODO string name="pref_extend_frac_summary">Whether "extend" can have a decimal part</string -->
+  <!-- TODO string name="pref_recent_shot_title">Recent shots</string -->
+  <!-- TODO string name="pref_recent_shot_summary">Whether to highlight recent shots</string -->
   <string name="pref_drawing_unit_title">Punktsymbole Massstab</string>
   <string name="pref_drawing_unit_summary">Massstab der Punktsymbole</string>
   <string name="pref_unscaled_points_title">Punkte nicht zoomen</string>
@@ -1222,6 +1227,14 @@
   <string name="pref_dot_radius_message">Größe der Punkte während dem bearbeiten einer Linie</string>
   <string name="pref_line_thickness_title">Liniendicke</string>
   <string name="pref_line_thickness_summary">Dicke der gezeichneten Linien</string>
+  <!-- TODO string name="pref_linesnap_title">Line/Area snap</string -->
+  <!-- TODO string name="pref_linesnap_summary">Enable line/area snap action</string -->
+  <!-- TODO string name="pref_linecurve_title">Smooth/Straigten segment</string -->
+  <!-- TODO string name="pref_linecurve_summary">Smooth/Straighten line segment action</string -->
+  <!-- TODO string name="pref_path_multiselect_title">Path multiselection</string -->
+  <!-- TODO string name="pref_path_multiselect_summary">Path multiselection action</string -->
+  <!-- TODO string name="pref_plane_interpolation_title">Plane interpolation</string -->
+  <!-- TODO string name="pref_plane_interpolation_summary">Plane interpolation action</string -->
   <string name="pref_fixed_thickness_title">Liniendicke Messstrecke</string>
   <string name="pref_fixed_thickness_summary">Liniendicke der Messstrecken</string>
   <!-- UNUSED string name="pref_device_title">Device</string -->
@@ -1280,8 +1293,8 @@
   <!-- NO string name="pref_sketchSectionStep_summary">Distance between sections</string -->
   <!-- NO string name="pref_sketchDeltaExtrude_title">Extrude delta</string -->
   <!-- NO string name="pref_sketchDeltaExtrude_summary">Extrude delta</string -->
-  <!-- NO string name="pref_sketchCompassReadings_title">Compass readings</string -->
-  <!-- NO string name="pref_sketchCompassReadings_summary">Number of readings to average</string -->
+  <!-- UNUSED string name="pref_sketchCompassReadings_title">Compass readings</string -->
+  <!-- UNUSED string name="pref_sketchCompassReadings_summary">Number of readings to average</string -->
 
   <string name="pref_unit_length_title">Längeneinheit</string>
   <string name="pref_unit_length_summary">Masseinheit für Längen</string>

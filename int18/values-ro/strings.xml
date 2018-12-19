@@ -602,7 +602,6 @@
     <string name="button_rename"    >Redenumește</string>
     <string name="button_renumber"  >Renumerotează</string>
     <string name="button_bedding"   >Strat geologic</string>
-    <string name="button_highlight" >Evidențiază</string>
     <string name="button_replace"   >Înlocuiește</string>
     <string name="button_reset"     >Resetează  </string>
     <string name="button_left"      >STÂNGA</string>
@@ -933,6 +932,7 @@
     <!-- TODO string name="title_settings_edit">TopoDroid editing settings</string -->
     <!-- TODO string name="title_settings_device">TopoDroid device settings</string -->
     <!-- TODO string name="title_settings_calib">TopoDroid calibration settings</string -->
+    <!-- TODO string name="title_settings_geek">TopoDroid geek flags settings</string -->
     <!-- TODO string name="title_settings_log">TopoDroid log settings</string -->
 
     <string name="title_shift">Mutare~</string>
@@ -965,8 +965,9 @@
   <string name="pref_cat_calib">CALIBRĂRI</string>
   <!-- UNUSED string name="pref_cat_min_algo">ALGO MIN</string -->
   <string name="pref_cat_device">Dispozitive</string>
+  <!-- TODO string name="pref_cat_geek">GEEK FLAGS</string -->
   <string name="pref_cat_sketch">MODELE 3D</string>
-  <string name="pref_cat_log">JURNALE</string>
+  <!-- UNUSED string name="pref_cat_log">JURNALE</string -->
 
   <string name="pref_locale_title">Limbă</string>
   <string name="pref_locale_summary">Limbă</string>
@@ -1107,6 +1108,8 @@
   <string name="pref_section_splay_message">Radierile peste acest unghi făcut cu secțiunea plana sunt desenate cu linie întreruptă</string>
   <string name="pref_data_backup_title">Export automat date</string>
   <string name="pref_data_backup_summary">Export datelor se face automat (e nevoie de format implicit definit)</string>
+  <!-- TODO string name="pref_fixed_origin_title">Sketch origin</string -->
+  <!-- TODO string name="pref_fixed_origin_summary">Fixed sketch origin</string -->
   <string name="pref_shared_xsections_title">Secțiuni-X (trans.) comune</string>
   <string name="pref_shared_xsections_summary">Secțiunile-X (transversale) definite la stații comune între schițe</string>
   <string name="xsections_shared">Secțiuni-X (trans.) comune</string>
@@ -1149,8 +1152,8 @@
   <string name="pref_vthr_title">Limită viză verticală</string>
   <string name="pref_vthr_summary">Limită înclinare viză între LRUD/WENS~</string>
 
-  <string name="pref_plan_vthr_title">Limită radiere în vizualizare plan</string>
-  <string name="pref_plan_vthr_message">Ascunde radierile cu înclinație mare în vizualizarea în plan orizontal</string>
+  <!-- UNUSED string name="pref_plan_vthr_title">Limită radiere în vizualizare plan</string -->
+  <!-- UNUSED string name="pref_plan_vthr_message">Ascunde radierile cu înclinație mare în vizualizarea în plan orizontal</string -->
   <string name="pref_init_station_title">Numele inițial al stației</string>
   <string name="pref_init_station_summary">Numele inițial implicit al stației</string>
   <string name="pref_station_names_title">Numele stațiilor</string>
@@ -1176,6 +1179,8 @@
   <string name="pref_beep_volume_summary">Procentaj volum sunet de avertizare timer</string>
   <!-- TODO string name="pref_extend_frac_title">Fractional extend</string -->
   <!-- TODO string name="pref_extend_frac_summary">Whether "extend" can have a decimal part</string -->
+  <!-- TODO string name="pref_recent_shot_title">Recent shots</string -->
+  <!-- TODO string name="pref_recent_shot_summary">Whether to highlight recent shots</string -->
   <string name="pref_drawing_unit_title">Scară unelte punct</string>
   <string name="pref_drawing_unit_summary">Scara uneltelor de desenare tip punct</string>
   <string name="pref_unscaled_points_title">Simboluri puncte ne-scalate</string>
@@ -1208,6 +1213,14 @@
   <string name="pref_dot_radius_message">Mărimea punctelor verzi</string>
   <string name="pref_line_thickness_title">Lățimea liniei</string>
   <string name="pref_line_thickness_summary">Lățimea liniei de desen</string>
+  <!-- TODO string name="pref_linesnap_title">Line/Area snap</string -->
+  <!-- TODO string name="pref_linesnap_summary">Enable line/area snap action</string -->
+  <!-- TODO string name="pref_linecurve_title">Smooth/Straigten segment</string -->
+  <!-- TODO string name="pref_linecurve_summary">Smooth/Straighten line segment action</string -->
+  <!-- TODO string name="pref_path_multiselect_title">Path multiselection</string -->
+  <!-- TODO string name="pref_path_multiselect_summary">Path multiselection action</string -->
+  <!-- TODO string name="pref_plane_interpolation_title">Plane interpolation</string -->
+  <!-- TODO string name="pref_plane_interpolation_summary">Plane interpolation action</string -->
   <string name="pref_fixed_thickness_title">Lățime linie cartare</string>
   <string name="pref_fixed_thickness_summary">Lățimea liniei de cartare</string>
   <!-- UNUSED string name="pref_device_title">Dispoziv</string -->
@@ -1266,8 +1279,8 @@
   <!-- UNUSED string name="pref_sketchSectionStep_summary">Distanța dintre secțiuni</string -->
   <string name="pref_sketchDeltaExtrude_title">Scară extruziune~</string>
   <string name="pref_sketchDeltaExtrude_summary">Factor scară extruziune~</string>
-  <string name="pref_sketchCompassReadings_title">Citiri compas</string>
-  <string name="pref_sketchCompassReadings_summary">Număr de citiri pentru mediere</string>
+  <!-- UNUSED string name="pref_sketchCompassReadings_title">Citiri compas</string -->
+  <!-- UNUSED string name="pref_sketchCompassReadings_summary">Număr de citiri pentru mediere</string -->
   <string name="pref_sketchModelType_title">Tip model</string>
   <string name="pref_sketchModelType_summary">Model reconstrucție pereți</string>
 

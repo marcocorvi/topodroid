@@ -14,6 +14,6 @@ package com.topodroid.DistoX;
 interface IAudioInserter
 {
     void deletedAudio( long bid );
-    void startRecordAudio( long bid );
+    // void startRecordAudio( long bid );
     void stopRecordAudio( long bid );
 }

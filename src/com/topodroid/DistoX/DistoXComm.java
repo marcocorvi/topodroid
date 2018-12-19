@@ -21,6 +21,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 import java.util.List;
 // import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
@@ -757,30 +758,36 @@ class DistoXComm extends TopoDroidComm
             while ( mRfcommThread != null ) {
               TopoDroidUtil.slowDown( 100 );
             }
-            ret = nReadPackets;
+            ret = nReadPackets.get();
 	  }
         } else {
           // FIXME asyncTask ?
-          // nReadPackets = 0; // done in RfcommThread cstr
+          // nReadPackets.get() = 0; // done in RfcommThread cstr
+	  int packets = nReadPackets.get();
           startRfcommThread( to_read, lister );
-          while ( mRfcommThread != null && nReadPackets < to_read ) {
-            if ( nReadPackets != prev_read ) {
-              // TDLog.Log( TDLog.LOG_COMM, "download data: read " + nReadPackets + " / " + to_read );
-              prev_read = nReadPackets;
+          while ( mRfcommThread != null ) {
+	    packets = nReadPackets.get();
+	    if ( packets >= to_read ) break;
+            if ( packets != prev_read ) {
+              // TDLog.Log( TDLog.LOG_COMM, "download data: read " + packets + " / " + to_read );
+              prev_read = packets;
             }
             TopoDroidUtil.slowDown( 100 );
           }
-          // TDLog.Log( TDLog.LOG_COMM, "download done: read " + nReadPackets );
-          ret = nReadPackets;
+	  packets = nReadPackets.get();
+	  if ( packets > to_read ) {
+            TDLog.Log( TDLog.LOG_COMM, "download done: read " + packets + " expected " + to_read );
+	  }
+          ret = packets;
         }
       } else {
         startRfcommThread( -1, lister );
         while ( mRfcommThread != null ) {
           TopoDroidUtil.slowDown( 100 );
         }
-        // TDLog.Log( TDLog.LOG_COMM, "download done: read " + nReadPackets );
+        // TDLog.Log( TDLog.LOG_COMM, "download done: read " + nReadPackets.get() );
         // cancelRfcommThread(); // called by closeSocket() which is called by destroySocket()
-        ret = nReadPackets;
+        ret = nReadPackets.get();
       }
     } else {
       TDLog.Error( "download data: fail to connect socket");

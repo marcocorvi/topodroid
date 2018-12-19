@@ -613,7 +613,6 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="button_rename"    >Rename    </string>
     <string name="button_renumber"  >Renumber</string>
     <string name="button_bedding"   >Bedding plane</string>
-    <string name="button_highlight" >Highlight</string>
     <string name="button_replace"   >Replace   </string>
     <string name="button_reset"     >Reset     </string>
     <string name="button_left"      >LEFT</string>
@@ -945,6 +944,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_settings_edit">TopoDroid editing settings</string>
     <string name="title_settings_device">TopoDroid device settings</string>
     <string name="title_settings_calib">TopoDroid calibration settings</string>
+    <!-- TODO string name="title_settings_geek">TopoDroid geek flags settings</string -->
     <string name="title_settings_log">TopoDroid log settings</string>
 
     <string name="title_shift">Shift</string>
@@ -980,8 +980,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_cat_calib">CALIBRATIONS</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
   <string name="pref_cat_device">DEVICES</string>
+  <!-- TODO string name="pref_cat_geek">GEEK FLAGS</string -->
   <string name="pref_cat_sketch">3D MODELS</string>
-  <string name="pref_cat_log">LOGS</string>
+  <!-- UNUSED string name="pref_cat_log">LOGS</string -->
 
   <string name="pref_locale_title">Language</string>
   <string name="pref_locale_summary">App language</string>
@@ -1125,6 +1126,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_section_splay_message">Splays over this angle with the section plane are dashed</string>
   <string name="pref_data_backup_title">Data auto-export</string>
   <string name="pref_data_backup_summary">Automatic data export (need default format)</string>
+  <!-- TODO string name="pref_fixed_origin_title">Sketch origin</string -->
+  <!-- TODO string name="pref_fixed_origin_summary">Fixed sketch origin</string -->
   <string name="pref_shared_xsections_title">Shared x-sections</string>
   <string name="pref_shared_xsections_summary">At-station x-sections shared among sketches</string>
   <string name="xsections_shared">Shared X-sections</string>
@@ -1167,8 +1170,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_vthr_title">Leg vertical threshold</string>
   <string name="pref_vthr_summary">Vertical LRUD/WENS threshold</string>
 
-  <string name="pref_plan_vthr_title">Splay plan-view threshold</string>
-  <string name="pref_plan_vthr_message">Hide splays with high inclination in the plan-view</string>
+  <!-- UNUSED string name="pref_plan_vthr_title">Splay plan-view threshold</string -->
+  <!-- UNUSED string name="pref_plan_vthr_message">Hide splays with high inclination in the plan-view</string -->
   <string name="pref_init_station_title">Initial station name</string>
   <string name="pref_init_station_summary">Default initial station name</string>
   <string name="pref_station_names_title">Station names</string>
@@ -1194,6 +1197,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_beep_volume_summary">Percent timer-beep volume</string>
   <!-- TODO string name="pref_extend_frac_title">Fractional extend</string -->
   <!-- TODO string name="pref_extend_frac_summary">Whether "extend" can have a decimal part</string -->
+  <!-- TODO string name="pref_recent_shot_title">Recent shots</string -->
+  <!-- TODO string name="pref_recent_shot_summary">Whether to highlight recent shots</string -->
   <string name="pref_drawing_unit_title">Point tools scale</string>
   <string name="pref_drawing_unit_summary">Scale of the point tools</string>
   <string name="pref_unscaled_points_title">Non-zoomed point icons</string>
@@ -1226,6 +1231,14 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_dot_radius_message">Size of the green dots</string>
   <string name="pref_line_thickness_title">Line width</string>
   <string name="pref_line_thickness_summary">Drawing line width</string>
+  <!-- TODO string name="pref_linesnap_title">Line/Area snap</string -->
+  <!-- TODO string name="pref_linesnap_summary">Enable line/area snap action</string -->
+  <!-- TODO string name="pref_linecurve_title">Smooth/Straigten segment</string -->
+  <!-- TODO string name="pref_linecurve_summary">Smooth/Straighten line segment action</string -->
+  <!-- TODO string name="pref_path_multiselect_title">Path multiselection</string -->
+  <!-- TODO string name="pref_path_multiselect_summary">Path multiselection action</string -->
+  <!-- TODO string name="pref_plane_interpolation_title">Plane interpolation</string -->
+  <!-- TODO string name="pref_plane_interpolation_summary">Plane interpolation action</string -->
   <string name="pref_fixed_thickness_title">Survey line width</string>
   <string name="pref_fixed_thickness_summary">Survey line width</string>
   <!-- UNUSED string name="pref_device_title">Device</string -->
@@ -1284,8 +1297,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <!-- UNUSED string name="pref_sketchSectionStep_summary">Distance between sections</string -->
   <string name="pref_sketchDeltaExtrude_title">Extrude scale</string>
   <string name="pref_sketchDeltaExtrude_summary">Extrude scale factor</string>
-  <string name="pref_sketchCompassReadings_title">Compass readings</string>
-  <string name="pref_sketchCompassReadings_summary">Number of readings to average</string>
+  <!-- UNUSED string name="pref_sketchCompassReadings_title">Compass readings</string -->
+  <!-- UNUSED string name="pref_sketchCompassReadings_summary">Number of readings to average</string -->
   <string name="pref_sketchModelType_title">Model type</string>
   <string name="pref_sketchModelType_summary">Model wall reconstruction</string>
 

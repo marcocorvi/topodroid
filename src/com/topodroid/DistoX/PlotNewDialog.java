@@ -75,13 +75,19 @@ class PlotNewDialog extends MyDialog
 
     mEditName.setText( String.format(Locale.US, "%d", mIndex ) );
     // if current station is set:
-    if ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING ) {
-      String station = mApp.getFirstStation();
-      if ( station != null ) mEditStart.setText( station );
+    String station = null;
+    if ( TDSetting.mFixedOrigin ) {
+      station = mApp.getFirstPlotOrigin( );
+      if ( station == null ) station = mApp.getFirstStation();
     } else {
-      String station = mApp.getCurrentOrLastStation();
-      if ( station != null ) mEditStart.setText( station );
+      if ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING ) {
+        station = mApp.getFirstStation();
+      } else {
+	station = mApp.getCurrentOrLastStation();
+      }
     }
+    if ( station == null ) station = TDSetting.mInitStation;
+    if ( station != null ) mEditStart.setText( station );
     mEditStart.setOnLongClickListener( this );
 
     mBtnOK = (Button) findViewById(R.id.button_ok );

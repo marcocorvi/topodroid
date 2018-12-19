@@ -33,7 +33,7 @@ class TDPrefHelper
   }
 
   SharedPreferences getSharedPrefs() { return mPrefs; }
-  TopoDroidApp      getApp() { return mApp; }
+  // TopoDroidApp      getApp() { return mApp; }
 
   // boolean has( String name )
   // {

@@ -44,6 +44,11 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
     @Override
     protected Boolean doInBackground(Void... arg0)
     {
+      return exec();
+    }
+
+    boolean exec()
+    {
       try {
         filename = TDPath.getPngFileWithExt( mFullName );
         TDPath.checkPath( filename );

@@ -95,7 +95,7 @@ class PlotRenameDialog extends MyDialog
 
     if ( b == mBtnRename ) {
       String name = mEtName.getText().toString();
-      INewPlot maker = mApp.mShotWindow; // FIXME
+      INewPlot maker = TopoDroidApp.mShotWindow; // FIXME
       if ( maker.hasSurveyPlot( name ) ) {
         mEtName.setError( mContext.getResources().getString( R.string.plot_duplicate_name ) );
         return;
@@ -122,7 +122,7 @@ class PlotRenameDialog extends MyDialog
 
   private boolean handleSplit( boolean warning )
   {
-    INewPlot maker = mApp.mShotWindow; // FIXME
+    INewPlot maker = TopoDroidApp.mShotWindow; // FIXME
     String name = mEtName.getText().toString();
     if ( maker.hasSurveyPlot( name ) ) {
       mEtName.setError( mContext.getResources().getString( R.string.plot_duplicate_name ) );

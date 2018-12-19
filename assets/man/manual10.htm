@@ -66,7 +66,7 @@ The second to the right button applies only to drawing items and has a drop-down
 or lines (except "section" lines) [L], or areas [A].
 <ul style="margin-top=0">
 <li><i>Snap to nearby point</i> [P,L,A]: move the point to coincide with the closest nearby point (no action if there is no nearby point)</li>
-<li><i>Snap to nearby splays/line</i> [L:T]. Lines are deformed to pass through the splay endpoints that are close enough. For areas the point is moved to coincide with the closest line point, and the pieces of the area border before and after it are replaced with pieces of border that follow the line path</li>
+<li><i>Snap to nearby splays/line</i> [L:T]. Lines are deformed to pass through the splay endpoints that are close enough. For areas the point is moved to coincide with the closest line point, and the pieces of the area border before and after it are replaced with pieces of border that follow the line path. It requires the proper setting enabled</li>
 <li><i>duplicate</i> the point [L:A]. The new point is inserted "after" the selected point. It is added to the selection set, and you can select it with the Prev-Next buttons</li>
 <li><i>Cut</i> [L] the line at the point, thus making two lines</li>
 <li><i>Straighten</i> [L:T] the line segment removing the control points</li>
@@ -76,14 +76,15 @@ or lines (except "section" lines) [L], or areas [A].
 <li>enter <i>multiselection</i> mode [P,L,A:T]
 </ul><br><p>
 
-In multiselection mode [T] the actions are
+<h4>Multiselection mode [T]</h4>
+This mode allows to select several objects of the same class (point/line/area) and act on them all:
 <ul style="margin-top=0">
 <li><i>Delete</i> the selected items [P,L,A]</li>
 <li><i>Reduce</i> the number of points of the selected items [L,A]</li>
 <li><i>Exit</i> multiselection mode</li>
 </ul><br><p>
 
-<h4>Range selection modes</h4>
+<h4>Range selection</h4>
 Lines and areas points can be selected individually (point selection mode) or as a range.
 To select a range on a line, the last button in the "edit" button-bar must be on.
 You select first one endpoint of the range, then the other endpoint.

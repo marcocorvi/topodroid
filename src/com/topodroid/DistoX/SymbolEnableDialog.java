@@ -102,7 +102,7 @@ class SymbolEnableDialog extends MyDialog
     if ( ! createAdapters() ) dismiss();
 
     // mList.setAdapter( mPointAdapter );
-    updateList( -1, mType );
+    updateList( /* -1, */ mType );
   }
 
   private boolean createAdapters()
@@ -140,44 +140,50 @@ class SymbolEnableDialog extends MyDialog
     return true;
   }
 
-  private void updateList( int old_type, int new_type )
+  private void updateList( /* int old_type, */ int new_type )
   {
     // Log.v( TopoDroidApp.TAG, "Symbol-Enable dialog ... updateList type " + mType );
-    switch ( old_type ) {
-      case Symbol.POINT:
-        mBTpoint.setTextColor( TDColor.WHITE );
-        break;
-      case Symbol.LINE:
-        mBTline.setTextColor( TDColor.WHITE );
-        break;
-      case Symbol.AREA:
-        mBTarea.setTextColor( TDColor.WHITE );
-        break;
-    }
+    // switch ( old_type ) {
+    //   case Symbol.POINT:
+    //     mBTpoint.setTextColor( TDColor.SYMBOL_TAB );
+    //     break;
+    //   case Symbol.LINE:
+    //     mBTline.setTextColor( TDColor.SYMBOL_TAB );
+    //     break;
+    //   case Symbol.AREA:
+    //     mBTarea.setTextColor( TDColor.SYMBOL_TAB );
+    //     break;
+    // }
     switch ( new_type ) {
       case Symbol.POINT:
         if ( TDLevel.overBasic ) {
           mList.setAdapter( mPointAdapter );
-          mBTpoint.getBackground().setColorFilter( TDColor.LIGHT_BLUE, PorterDuff.Mode.LIGHTEN );
-          mBTline.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
-          mBTarea.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
-          mBTpoint.setTextColor( TDColor.VERYDARK_GRAY );
+          // mBTpoint.getBackground().setColorFilter( TDColor.LIGHT_BLUE, PorterDuff.Mode.LIGHTEN );
+          // mBTline.getBackground().setColorFilter(  TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
+          // mBTarea.getBackground().setColorFilter(  TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
+          mBTpoint.setTextColor( TDColor.WHITE );
+          mBTline.setTextColor(  TDColor.SYMBOL_TAB );
+          mBTarea.setTextColor(  TDColor.SYMBOL_TAB );
         }
         break;
       case Symbol.LINE:
         mList.setAdapter( mLineAdapter );
-        mBTpoint.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
-        mBTline.getBackground().setColorFilter( TDColor.LIGHT_BLUE, PorterDuff.Mode.LIGHTEN );
-        mBTarea.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
-        mBTline.setTextColor( TDColor.VERYDARK_GRAY );
+        // mBTpoint.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
+        // mBTline.getBackground().setColorFilter(  TDColor.LIGHT_BLUE, PorterDuff.Mode.LIGHTEN );
+        // mBTarea.getBackground().setColorFilter(  TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
+        mBTpoint.setTextColor( TDColor.SYMBOL_TAB );
+        mBTline.setTextColor(  TDColor.WHITE );
+        mBTarea.setTextColor(  TDColor.SYMBOL_TAB );
         break;
       case Symbol.AREA:
         if ( TDLevel.overBasic ) {
           mList.setAdapter( mAreaAdapter );
-          mBTpoint.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
-          mBTline.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
-          mBTarea.getBackground().setColorFilter( TDColor.LIGHT_BLUE, PorterDuff.Mode.LIGHTEN );
-          mBTarea.setTextColor( TDColor.VERYDARK_GRAY );
+          // mBTpoint.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
+          // mBTline.getBackground().setColorFilter(  TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
+          // mBTarea.getBackground().setColorFilter(  TDColor.LIGHT_BLUE, PorterDuff.Mode.LIGHTEN );
+          mBTpoint.setTextColor( TDColor.SYMBOL_TAB );
+          mBTline.setTextColor(  TDColor.SYMBOL_TAB );
+          mBTarea.setTextColor(  TDColor.WHITE );
         }
         break;
     }
@@ -221,7 +227,7 @@ class SymbolEnableDialog extends MyDialog
         break;
     }
     if ( type >= 0 && type != mType ) {
-      updateList( mType, type );
+      updateList( /* mType, */ type );
     }
     // dismiss();
   }

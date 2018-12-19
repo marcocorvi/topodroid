@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -37,7 +38,7 @@ class TopoDroidComm
 
 // -----------------------------------------------------------
 
-  protected volatile int nReadPackets;
+  protected AtomicInteger nReadPackets;
 
   public boolean isConnected() { return mBTConnected; }
 
@@ -66,7 +67,7 @@ class TopoDroidComm
       toRead = to_read;
       mProto = protocol;
       mLister = lister;
-      nReadPackets = 0; // reset nr of read packets
+      nReadPackets = new AtomicInteger( 0 ); // reset nr of read packets
       // mLastShotId = 0;
       // TDLog.Log( TDLog.LOG_COMM, "RFcomm thread cstr ToRead " + toRead );
     }
@@ -77,8 +78,8 @@ class TopoDroidComm
       doWork = true;
 
       // TDLog.Log( TDLog.LOG_COMM, "RFcomm thread running ... to_read " + toRead );
-      while ( doWork && nReadPackets != toRead ) {
-        // TDLog.Log( TDLog.LOG_COMM, "RFcomm loop: read " + nReadPackets + " to-read " + toRead );
+      while ( doWork && nReadPackets.get() != toRead ) {
+        // TDLog.Log( TDLog.LOG_COMM, "RFcomm loop: read " + nReadPackets.get() + " to-read " + toRead );
         
         int res = mProto.readPacket( toRead >= 0 );
         // TDLog.Log( TDLog.LOG_COMM, "RFcomm readPacket returns " + res );
@@ -99,7 +100,7 @@ class TopoDroidComm
           // }
           doWork = false;
         } else if ( res == DistoXProtocol.DISTOX_PACKET_DATA ) {
-          ++nReadPackets;
+          nReadPackets.incrementAndGet();
           double d = mProto.mDistance;
           double b = mProto.mBearing;
           double c = mProto.mClino;
@@ -131,11 +132,11 @@ class TopoDroidComm
           // }
         } else if ( res == DistoXProtocol.DISTOX_PACKET_G ) {
           TDLog.Log( TDLog.LOG_COMM, "Comm G PACKET" );
-          ++nReadPackets;
+          nReadPackets.incrementAndGet();
           hasG = true;
         } else if ( res == DistoXProtocol.DISTOX_PACKET_M ) {
           TDLog.Log( TDLog.LOG_COMM, "Comm M PACKET" );
-          ++nReadPackets;
+          nReadPackets.incrementAndGet();
           // get G and M from mProto and save them to store
           TDLog.Log( TDLog.LOG_COMM, "G " + mProto.mGX + " " + mProto.mGY + " " + mProto.mGZ + " M " + mProto.mMX + " " + mProto.mMY + " " + mProto.mMZ );
           long cblk = TopoDroidApp.mDData.insertGM( TDInstance.cid, mProto.mGX, mProto.mGY, mProto.mGZ, mProto.mMX, mProto.mMY, mProto.mMZ );
@@ -147,10 +148,10 @@ class TopoDroidComm
             mLister.sendMessage(msg);
           }
           if ( ! hasG ) {
-            TDLog.Error( "data without G packet " + nReadPackets );
-            mApp.mActivity.runOnUiThread( new Runnable() {
+            TDLog.Error( "data without G packet " + nReadPackets.get() );
+            TopoDroidApp.mActivity.runOnUiThread( new Runnable() {
               public void run() {
-                TDToast.makeBG("data without G: " + nReadPackets, TDColor.FIXED_RED );
+                TDToast.makeBG("data without G: " + nReadPackets.get(), TDColor.FIXED_RED );
               }
             } );
           }
@@ -180,7 +181,7 @@ class TopoDroidComm
           //   // mTail = (int)( reply[2] | ( (int)(reply[3]) << 8 ) );
           // }
         } else if ( res == DistoXProtocol.DISTOX_PACKET_VECTOR ) {
-          ++nReadPackets;  // vector packet do count
+          nReadPackets.incrementAndGet();  // vector packet do count
           double acc  = mProto.mAcceleration;
           double mag  = mProto.mMagnetic;
           double dip  = mProto.mDip;

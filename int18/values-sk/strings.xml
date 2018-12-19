@@ -612,7 +612,6 @@
     <string name="button_rename"    >Premenovať    </string>
     <string name="button_renumber"  >Prečíslovať</string>
     <string name="button_bedding"   >Rovina (uhol)</string>
-    <string name="button_highlight" >Zvýrazniť</string>
     <string name="button_replace"   >Vymeniť</string>
     <string name="button_reset"     >Resetovať   </string>
     <string name="button_left"      >Vľavo</string>
@@ -944,6 +943,7 @@
     <string name="title_settings_edit">TopoDroid nastavenia Editácie</string>
     <string name="title_settings_device">TopoDroid nastavenia DistoX</string>
     <string name="title_settings_calib">TopoDroid nastavenia Kalibrácie</string>
+    <!-- TODO string name="title_settings_geek">TopoDroid geek flags settings</string -->
     <string name="title_settings_log">TopoDroid nastavenia Log-u</string>
 
     <string name="title_shift">Posunúť</string>
@@ -977,8 +977,9 @@
   <string name="pref_cat_calib">NASTAVENIE KALIBRÁCIE</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->  
   <string name="pref_cat_device">NASTAVENIE DISTOX</string>
+  <!-- TODO string name="pref_cat_geek">GEEK FLAGS</string -->
   <string name="pref_cat_sketch">3D MODELY</string>
-  <string name="pref_cat_log">NASTAVENIE ZÁZNAMU</string>
+  <!-- UNUSED string name="pref_cat_log">NASTAVENIE ZÁZNAMU</string -->
 
   <string name="pref_locale_title">Jazyk</string>
   <string name="pref_locale_summary">Výber Jazyka aplikácie</string>
@@ -1122,6 +1123,8 @@
   <string name="pref_section_splay_message">Pomocné zámery zvierajúce väčší ako tento uhol sú v reze čiarkované</string>
   <string name="pref_data_backup_title">Automatické exportovanie</string>
   <string name="pref_data_backup_summary">Automatický export údajov (vyžaduje predvolený formát)</string>
+  <!-- TODO string name="pref_fixed_origin_title">Sketch origin</string -->
+  <!-- TODO string name="pref_fixed_origin_summary">Fixed sketch origin</string -->
   <string name="pref_shared_xsections_title">Zdielané priečne rezy</string>
   <string name="pref_shared_xsections_summary">Predvolené nastavenie, či pri založení mapovania majú byť Priečne rezy zdielané medzi nákresmi. Nezaškrtnuté = zdielané</string>
   <string name="xsections_shared">Zdielané priečne rezy medzi nákresmi</string>
@@ -1164,8 +1167,8 @@
   <string name="pref_vthr_title">Hodnota hlavnej zámery</string>
   <string name="pref_vthr_summary">Prah sklonu hlavnej zámery medzi LRUD / WENS - Therion "vthreshold"</string>
 
-  <string name="pref_plan_vthr_title">Skrytie pomoc.zámery-pôdorys</string>
-  <string name="pref_plan_vthr_message">Skryje pomocné zámery s vyšším sklonom ako daná hodnota v pôdoryse</string>
+  <!-- UNUSED string name="pref_plan_vthr_title">Skrytie pomoc.zámery-pôdorys</string -->
+  <!-- UNUSED string name="pref_plan_vthr_message">Skryje pomocné zámery s vyšším sklonom ako daná hodnota v pôdoryse</string -->
   <string name="pref_init_station_title">Počiatočný meračský bod</string>
   <string name="pref_init_station_summary">Predvolené číslo počiatočného meračského bodu</string>
   <string name="pref_station_names_title">Názvy meračských bodov</string>
@@ -1191,6 +1194,8 @@
   <string name="pref_beep_volume_summary">Percento hlasitosti pípania</string>
   <string name="pref_extend_frac_title">Desatinná Smerová orientácia</string>
   <string name="pref_extend_frac_summary">Určuje či Smerová orientácia môže mať desatinné čiarky. Pri zaškrtnutí povolí horizontálny posun meračských bodov v Režime Editácie v Rozvinutom reze</string>
+  <!-- TODO string name="pref_recent_shot_title">Recent shots</string -->
+  <!-- TODO string name="pref_recent_shot_summary">Whether to highlight recent shots</string -->
   <string name="pref_drawing_unit_title">Veľkosť Symbolov Bod</string>
   <string name="pref_drawing_unit_summary">Mierka veľkosti Symbolov BOD</string>
   <string name="pref_unscaled_points_title">Približovanie Symbolov Bod</string>
@@ -1223,6 +1228,14 @@
   <string name="pref_dot_radius_message">Veľkosť zelených bodov výberu v Režime Editácie pri kreslení</string>
   <string name="pref_line_thickness_title">Hrúbka Symbolu Čiary</string>
   <string name="pref_line_thickness_summary">Výber Hrúbky nakreslenej čiary</string>
+  <!-- TODO string name="pref_linesnap_title">Line/Area snap</string -->
+  <!-- TODO string name="pref_linesnap_summary">Enable line/area snap action</string -->
+  <!-- TODO string name="pref_linecurve_title">Smooth/Straigten segment</string -->
+  <!-- TODO string name="pref_linecurve_summary">Smooth/Straighten line segment action</string -->
+  <!-- TODO string name="pref_path_multiselect_title">Path multiselection</string -->
+  <!-- TODO string name="pref_path_multiselect_summary">Path multiselection action</string -->
+  <!-- TODO string name="pref_plane_interpolation_title">Plane interpolation</string -->
+  <!-- TODO string name="pref_plane_interpolation_summary">Plane interpolation action</string -->
   <string name="pref_fixed_thickness_title">Šírka meračskej zámery</string>
   <string name="pref_fixed_thickness_summary">Hrúbka meračskej zámery v nákrese</string>
   <!-- UNUSED string name="pref_device_title">Zariadenie</string -->
@@ -1281,8 +1294,8 @@
   <!-- UNUSED string name="pref_sketchSectionStep_summary">Vzdialenosť medzi sekciami</string -->
   <string name="pref_sketchDeltaExtrude_title">Extrude mierka</string>
   <string name="pref_sketchDeltaExtrude_summary">Extrude mierka</string>
-  <string name="pref_sketchCompassReadings_title">Čítania kompasu</string>
-  <string name="pref_sketchCompassReadings_summary">Počet čítaní na výpočet priemeru</string>
+  <!-- UNUSED string name="pref_sketchCompassReadings_title">Čítania kompasu</string -->
+  <!-- UNUSED string name="pref_sketchCompassReadings_summary">Počet čítaní na výpočet priemeru</string -->
   <string name="pref_sketchModelType_title">Typ modelu</string>
   <string name="pref_sketchModelType_summary">Model rekonštrukcie steny</string>	
 

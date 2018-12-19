@@ -233,6 +233,7 @@ class DBlock
   //   - its time is no more than 10 seconds before the given time
   boolean isRecent( )
   {
+    if ( ! TDSetting.mShotRecent ) return false;
     if ( TDSetting.isConnectionModeContinuous() ) return isTimeRecent( System.currentTimeMillis()/1000 );
     return mId >= TDInstance.secondLastShotId;
   }

@@ -238,7 +238,9 @@ public class MainWindow extends Activity
         (new ImportDialog( mActivity, this, mApp )).show();
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // PALETTE
         BrushManager.makePaths( mApp, getResources() );
-        (new SymbolEnableDialog( mActivity )).show();
+        SymbolEnableDialog dlg = new SymbolEnableDialog( mActivity );
+	dlg.anchorTop();
+	dlg.show();
 
       // FIXME THMANAGER
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // THERION MANAGER ThManager
@@ -439,7 +441,7 @@ public class MainWindow extends Activity
     setContentView(R.layout.topodroid_activity);
     mApp = (TopoDroidApp) getApplication();
     mActivity = this;
-    mApp.mActivity = this;
+    TopoDroidApp.mActivity = this;
     mApp_mData       = TopoDroidApp.mData;
     // mApp_mCosurvey   = TopoDroidApp.mCosurvey; // IF_COSURVEY
     mApp_mCheckPerms = TopoDroidApp.mCheckPerms;

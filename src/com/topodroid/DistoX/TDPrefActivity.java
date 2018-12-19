@@ -67,7 +67,10 @@ public class TDPrefActivity extends Activity
   static final int PREF_PLOT_DRAW          = 23; 
   static final int PREF_PLOT_ERASE         = 24; 
   static final int PREF_PLOT_EDIT          = 25; 
-  static final int PREF_CATEGORY_LOG       = 26; // this must be the last
+  static final int PREF_CATEGORY_GEEK      = 26; 
+  static final int PREF_GEEK_LINE          = 27; 
+  static final int PREF_GEEK_DEVICE        = 28; 
+  static final int PREF_CATEGORY_LOG       = 29; // this must be the last
 
   static int[] mTitleRes = {
     R.string.title_settings_main,     // 0
@@ -96,6 +99,9 @@ public class TDPrefActivity extends Activity
     R.string.title_settings_draw,
     R.string.title_settings_erase,
     R.string.title_settings_edit,
+    R.string.title_settings_geek,
+    R.string.title_settings_line,     // 27
+    R.string.title_settings_device,
     R.string.title_settings_log 
   };
 
@@ -178,39 +184,42 @@ public class TDPrefActivity extends Activity
     LayoutInflater li = (LayoutInflater)getSystemService( Context.LAYOUT_INFLATER_SERVICE );
 
     mPrefs = null;
-    Resources res = getResources();
+    // Resources res = getResources();
     TDPrefHelper hlp = TopoDroidApp.mPrefHlp;
 
-    // Log.v("DistoX", "Pref create. category " + mPrefCategory );
+    Log.v("DistoX", "***** Pref create. category " + mPrefCategory );
     switch ( mPrefCategory ) {
-      case PREF_CATEGORY_ALL:       mPrefs = TDPref.makeMainPrefs( res, hlp );   break;
-      case PREF_CATEGORY_SURVEY:    mPrefs = TDPref.makeSurveyPrefs( res, hlp ); break;
-      case PREF_CATEGORY_PLOT:      mPrefs = TDPref.makePlotPrefs( res, hlp );   break;
-      case PREF_CATEGORY_CALIB:     mPrefs = TDPref.makeCalibPrefs( res, hlp );  break;
-      case PREF_CATEGORY_DEVICE:    mPrefs = TDPref.makeDevicePrefs( res, hlp ); break;
-      case PREF_CATEGORY_EXPORT:    mPrefs = TDPref.makeExportPrefs( res, hlp ); break;
-      case PREF_CATEGORY_IMPORT:    mPrefs = TDPref.makeImportPrefs( res, hlp ); break;
-      case PREF_CATEGORY_SVX:       mPrefs = TDPref.makeSvxPrefs( res, hlp ); break;
-      case PREF_CATEGORY_TH:        mPrefs = TDPref.makeThPrefs( res, hlp ); break;
-      case PREF_CATEGORY_DAT:       mPrefs = TDPref.makeDatPrefs( res, hlp ); break;
-      case PREF_CATEGORY_SVG:       mPrefs = TDPref.makeSvgPrefs( res, hlp ); break;
-      case PREF_CATEGORY_DXF:       mPrefs = TDPref.makeDxfPrefs( res, hlp ); break;
-      case PREF_CATEGORY_PNG:       mPrefs = TDPref.makePngPrefs( res, hlp ); break;
-      case PREF_CATEGORY_KML:       mPrefs = TDPref.makeKmlPrefs( res, hlp ); break;
-      case PREF_SHOT_DATA:          mPrefs = TDPref.makeShotPrefs( res, hlp );   break;
-      case PREF_SHOT_UNITS:         mPrefs = TDPref.makeUnitsPrefs( res, hlp );  break;
-      case PREF_ACCURACY:           mPrefs = TDPref.makeAccuracyPrefs( res, hlp ); break;
-      case PREF_LOCATION:           mPrefs = TDPref.makeLocationPrefs( res, hlp ); break;
-      case PREF_PLOT_SCREEN:        mPrefs = TDPref.makeScreenPrefs( res, hlp ); break;
-      case PREF_TOOL_LINE:          mPrefs = TDPref.makeLinePrefs( res, hlp );   break;
-      case PREF_TOOL_POINT:         mPrefs = TDPref.makePointPrefs( res, hlp );  break;
-      case PREF_PLOT_WALLS:         mPrefs = TDPref.makeWallsPrefs( res, hlp );  break;
-      case PREF_PLOT_DRAW:          mPrefs = TDPref.makeDrawPrefs( res, hlp );   break;
-      case PREF_PLOT_ERASE:         mPrefs = TDPref.makeErasePrefs( res, hlp );  break;
-      case PREF_PLOT_EDIT:          mPrefs = TDPref.makeEditPrefs( res, hlp );   break;
-      case PREF_CATEGORY_SKETCH:    mPrefs = TDPref.makeSketchPrefs( res, hlp ); break;
-      case PREF_CATEGORY_LOG:       mPrefs = TDPref.makeLogPrefs( res, hlp );    break;
-      default:                      mPrefs = TDPref.makeMainPrefs( res, hlp );   break;
+      case PREF_CATEGORY_ALL:       mPrefs = TDPref.makeMainPrefs(     this, hlp ); break;
+      case PREF_CATEGORY_SURVEY:    mPrefs = TDPref.makeSurveyPrefs(   this, hlp ); break;
+      case PREF_CATEGORY_PLOT:      mPrefs = TDPref.makePlotPrefs(     this, hlp ); break;
+      case PREF_CATEGORY_CALIB:     mPrefs = TDPref.makeCalibPrefs(    this, hlp ); break;
+      case PREF_CATEGORY_DEVICE:    mPrefs = TDPref.makeDevicePrefs(   this, hlp ); break;
+      case PREF_CATEGORY_EXPORT:    mPrefs = TDPref.makeExportPrefs(   this, hlp ); break;
+      case PREF_CATEGORY_IMPORT:    mPrefs = TDPref.makeImportPrefs(   this, hlp ); break;
+      case PREF_CATEGORY_SVX:       mPrefs = TDPref.makeSvxPrefs(      this, hlp ); break;
+      case PREF_CATEGORY_TH:        mPrefs = TDPref.makeThPrefs(       this, hlp ); break;
+      case PREF_CATEGORY_DAT:       mPrefs = TDPref.makeDatPrefs(      this, hlp ); break;
+      case PREF_CATEGORY_SVG:       mPrefs = TDPref.makeSvgPrefs(      this, hlp ); break;
+      case PREF_CATEGORY_DXF:       mPrefs = TDPref.makeDxfPrefs(      this, hlp ); break;
+      case PREF_CATEGORY_PNG:       mPrefs = TDPref.makePngPrefs(      this, hlp ); break;
+      case PREF_CATEGORY_KML:       mPrefs = TDPref.makeKmlPrefs(      this, hlp ); break;
+      case PREF_SHOT_DATA:          mPrefs = TDPref.makeShotPrefs(     this, hlp ); break;
+      case PREF_SHOT_UNITS:         mPrefs = TDPref.makeUnitsPrefs(    this, hlp ); break;
+      case PREF_ACCURACY:           mPrefs = TDPref.makeAccuracyPrefs( this, hlp ); break;
+      case PREF_LOCATION:           mPrefs = TDPref.makeLocationPrefs( this, hlp ); break;
+      case PREF_PLOT_SCREEN:        mPrefs = TDPref.makeScreenPrefs(   this, hlp ); break;
+      case PREF_TOOL_LINE:          mPrefs = TDPref.makeLinePrefs(     this, hlp ); break;
+      case PREF_TOOL_POINT:         mPrefs = TDPref.makePointPrefs(    this, hlp ); break;
+      case PREF_PLOT_WALLS:         mPrefs = TDPref.makeWallsPrefs(    this, hlp ); break;
+      case PREF_PLOT_DRAW:          mPrefs = TDPref.makeDrawPrefs(     this, hlp ); break;
+      case PREF_PLOT_ERASE:         mPrefs = TDPref.makeErasePrefs(    this, hlp ); break;
+      case PREF_PLOT_EDIT:          mPrefs = TDPref.makeEditPrefs(     this, hlp ); break;
+      case PREF_CATEGORY_GEEK:      mPrefs = TDPref.makeGeekPrefs(     this, hlp ); break;
+      case PREF_GEEK_LINE:          mPrefs = TDPref.makeGeekLinePrefs( this, hlp ); break;
+      case PREF_GEEK_DEVICE:        mPrefs = TDPref.makeGeekDevicePrefs( this, hlp ); break;
+      case PREF_CATEGORY_SKETCH:    mPrefs = TDPref.makeSketchPrefs(   this, hlp ); break;
+      case PREF_CATEGORY_LOG:       mPrefs = TDPref.makeLogPrefs(      this, hlp ); break;
+      default:                      mPrefs = TDPref.makeMainPrefs(     this, hlp ); break;
     }
     int cnt = 0;
     if ( mPrefs != null ) {
@@ -241,8 +250,9 @@ public class TDPrefActivity extends Activity
       linkPreference( "DISTOX_SURVEY_PREF", PREF_CATEGORY_SURVEY );
       linkPreference( "DISTOX_PLOT_PREF",   PREF_CATEGORY_PLOT );
       linkPreference( "DISTOX_EXPORT_PREF", PREF_CATEGORY_EXPORT );
-      linkPreference( "DISTOX_SKETCH_PREF", PREF_CATEGORY_SKETCH );
       linkPreference( "DISTOX_DEVICE_PREF", PREF_CATEGORY_DEVICE );
+      linkPreference( "DISTOX_GEEK_PREF",   PREF_CATEGORY_GEEK );
+      // linkPreference( "DISTOX_SKETCH_PREF", PREF_CATEGORY_SKETCH );
     } else if (mPrefCategory == PREF_CATEGORY_IMPORT ) {
       mPtCmapPref = findPreference( "DISTOX_PT_CMAP" );
       if ( mPtCmapPref != null ) {
@@ -258,25 +268,30 @@ public class TDPrefActivity extends Activity
       }
     } else if (mPrefCategory == PREF_CATEGORY_EXPORT ) {
       linkPreference( "DISTOX_EXPORT_IMPORT_PREF",  PREF_CATEGORY_IMPORT );
-      linkPreference( "DISTOX_EXPORT_SVX_PREF",  PREF_CATEGORY_SVX );
-      linkPreference( "DISTOX_EXPORT_TH_PREF",   PREF_CATEGORY_TH );
-      linkPreference( "DISTOX_EXPORT_DAT_PREF",  PREF_CATEGORY_DAT );
-      linkPreference( "DISTOX_EXPORT_SVG_PREF",  PREF_CATEGORY_SVG );
-      linkPreference( "DISTOX_EXPORT_DXF_PREF",  PREF_CATEGORY_DXF );
-      linkPreference( "DISTOX_EXPORT_PNG_PREF",  PREF_CATEGORY_PNG );
-      linkPreference( "DISTOX_EXPORT_KML_PREF",  PREF_CATEGORY_KML );
+      linkPreference( "DISTOX_EXPORT_SVX_PREF",     PREF_CATEGORY_SVX );
+      linkPreference( "DISTOX_EXPORT_TH_PREF",      PREF_CATEGORY_TH );
+      linkPreference( "DISTOX_EXPORT_DAT_PREF",     PREF_CATEGORY_DAT );
+      linkPreference( "DISTOX_EXPORT_SVG_PREF",     PREF_CATEGORY_SVG );
+      linkPreference( "DISTOX_EXPORT_DXF_PREF",     PREF_CATEGORY_DXF );
+      linkPreference( "DISTOX_EXPORT_PNG_PREF",     PREF_CATEGORY_PNG );
+      linkPreference( "DISTOX_EXPORT_KML_PREF",     PREF_CATEGORY_KML );
     } else if (mPrefCategory == PREF_CATEGORY_SURVEY ) {
-      linkPreference( "DISTOX_LOCATION_SCREEN", PREF_LOCATION );
-      linkPreference( "DISTOX_ACCURACY_SCREEN", PREF_ACCURACY );
-      linkPreference( "DISTOX_SHOT_UNITS_SCREEN", PREF_SHOT_UNITS );
-      linkPreference( "DISTOX_SHOT_DATA_SCREEN", PREF_SHOT_DATA );
+      linkPreference( "DISTOX_LOCATION_SCREEN",     PREF_LOCATION );
+      linkPreference( "DISTOX_ACCURACY_SCREEN",     PREF_ACCURACY );
+      linkPreference( "DISTOX_SHOT_UNITS_SCREEN",   PREF_SHOT_UNITS );
+      linkPreference( "DISTOX_SHOT_DATA_SCREEN",    PREF_SHOT_DATA );
     } else if (mPrefCategory == PREF_CATEGORY_PLOT ) {
-      linkPreference( "DISTOX_PLOT_SCREEN", PREF_PLOT_SCREEN );
-      linkPreference( "DISTOX_TOOL_LINE",   PREF_TOOL_LINE );
-      linkPreference( "DISTOX_TOOL_POINT",  PREF_TOOL_POINT );
-      linkPreference( "DISTOX_PLOT_WALLS",  PREF_PLOT_WALLS );
+      linkPreference( "DISTOX_PLOT_SCREEN",         PREF_PLOT_SCREEN );
+      linkPreference( "DISTOX_TOOL_LINE",           PREF_TOOL_LINE );
+      linkPreference( "DISTOX_TOOL_POINT",          PREF_TOOL_POINT );
+      // linkPreference( "DISTOX_PLOT_WALLS",          PREF_PLOT_WALLS );
     } else if (mPrefCategory == PREF_CATEGORY_DEVICE ) {
-      linkPreference( "DISTOX_CALIB_PREF", PREF_CATEGORY_CALIB );
+      linkPreference( "DISTOX_CALIB_PREF",          PREF_CATEGORY_CALIB );
+    } else if (mPrefCategory == PREF_CATEGORY_GEEK ) {
+      linkPreference( "DISTOX_GEEK_LINE",           PREF_GEEK_LINE );
+      linkPreference( "DISTOX_PLOT_WALLS",          PREF_PLOT_WALLS );
+      linkPreference( "DISTOX_GEEK_DEVICE",         PREF_GEEK_DEVICE );
+      linkPreference( "DISTOX_SKETCH_PREF",         PREF_CATEGORY_SKETCH );
     }
 
     return true;

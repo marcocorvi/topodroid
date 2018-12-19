@@ -602,7 +602,6 @@
     <!-- TODO string name="button_rename"    >Rename    </string -->
     <!-- TODO string name="button_renumber"  >Renumber</string -->
     <!-- TODO string name="button_bedding"   >Bedding plane</string -->
-    <!-- TODO string name="button_highlight" >Highlight</string -->
     <string name="button_replace"   >Заміна   </string>
     <string name="button_reset"     >Скидання     </string>
     <string name="button_left"      >ЛІВО</string>
@@ -926,6 +925,7 @@
     <!-- TODO string name="title_settings_edit">TopoDroid editing settings</string -->
     <!-- TODO string name="title_settings_device">TopoDroid device settings</string -->
     <!-- TODO string name="title_settings_calib">TopoDroid calibration settings</string -->
+    <!-- TODO string name="title_settings_geek">TopoDroid geek flags settings</string -->
     <!-- TODO string name="title_settings_log">TopoDroid log settings</string -->
 
     <string name="title_shift">Зсув</string>
@@ -957,8 +957,9 @@
 
   <string name="pref_cat_calib">Налаштування Калібрування</string>
   <string name="pref_cat_device">Налаштування Пристрою</string>
+  <!-- TODO string name="pref_cat_geek">GEEK FLAGS</string -->
   <string name="pref_cat_sketch">Налаштування Абрису</string>
-  <string name="pref_cat_log">налаштування журнала</string>
+  <!-- UNUSED string name="pref_cat_log">налаштування журнала</string -->
 
   <string name="pref_locale_title">Мова</string>
   <string name="pref_locale_summary">Мова</string>
@@ -1101,6 +1102,8 @@
   <!-- TODO string name="pref_section_splay_message">Over this angle with the section plane, splays are dashed</string -->
   <!-- TODO string name="pref_data_backup_title">Data auto-export</string -->
   <!-- TODO string name="pref_data_backup_summary">Automatic data export (need default format)</string -->
+  <!-- TODO string name="pref_fixed_origin_title">Sketch origin</string -->
+  <!-- TODO string name="pref_fixed_origin_summary">Fixed sketch origin</string -->
   <!-- TODO string name="pref_shared_xsections_title">Shared x-sections</string -->
   <!-- TODO string name="pref_shared_xsections_summary">At-station x-sections shared among sketches</string -->
   <!-- TODO string name="xsections_shared">Shared X-sections</string -->
@@ -1143,8 +1146,8 @@
   <string name="pref_vthr_title">Поріг вертикальності для відрізків</string>
   <string name="pref_vthr_summary">Допустимий кут відрізка між ЛПВН/ЗВСЮ</string>
 
-  <string name="pref_plan_vthr_title">Поріг кута бок. замірів в плані</string>
-  <string name="pref_plan_vthr_message">Поріг кута  бок. замірів які відображаються в плані</string>
+  <!-- UNUSED string name="pref_plan_vthr_title">Поріг кута бок. замірів в плані</string -->
+  <!-- UNUSED string name="pref_plan_vthr_message">Поріг кута  бок. замірів які відображаються в плані</string -->
   <string name="pref_init_station_title">Початковий пікет</string>
   <string name="pref_init_station_summary">Початковий пікет за замовчанням</string>
   <string name="pref_station_names_title">Номери пікетов</string>
@@ -1170,6 +1173,8 @@
   <string name="pref_beep_volume_summary">Відсотки гучності сигналу таймера</string>
   <!-- TODO string name="pref_extend_frac_title">Fractional extend</string -->
   <!-- TODO string name="pref_extend_frac_summary">Whether "extend" can have a decimal part</string -->
+  <!-- TODO string name="pref_recent_shot_title">Recent shots</string -->
+  <!-- TODO string name="pref_recent_shot_summary">Whether to highlight recent shots</string -->
   <string name="pref_drawing_unit_title">Розмір символів точок</string>
   <string name="pref_drawing_unit_summary">Базовий розмір символів точок [потрібен перезапуск програми]</string>
   <string name="pref_unscaled_points_title">Не-масштабовані значки точок</string>
@@ -1202,6 +1207,14 @@
   <string name="pref_dot_radius_message">Розмір зелених точок</string>
   <string name="pref_line_thickness_title">Товщина ліній</string>
   <string name="pref_line_thickness_summary">Товщина ліній</string>
+  <!-- TODO string name="pref_linesnap_title">Line/Area snap</string -->
+  <!-- TODO string name="pref_linesnap_summary">Enable line/area snap action</string -->
+  <!-- TODO string name="pref_linecurve_title">Smooth/Straigten segment</string -->
+  <!-- TODO string name="pref_linecurve_summary">Smooth/Straighten line segment action</string -->
+  <!-- TODO string name="pref_path_multiselect_title">Path multiselection</string -->
+  <!-- TODO string name="pref_path_multiselect_summary">Path multiselection action</string -->
+  <!-- TODO string name="pref_plane_interpolation_title">Plane interpolation</string -->
+  <!-- TODO string name="pref_plane_interpolation_summary">Plane interpolation action</string -->
   <string name="pref_fixed_thickness_title">Товщина нитки ходу</string>
   <string name="pref_fixed_thickness_summary">Товщина нитки ходу</string>
   <!-- UNUSED string name="pref_device_title">Устройство</string -->
@@ -1260,8 +1273,8 @@
   <!-- UNUSED string name="pref_sketchSectionStep_summary">Відстань між перерізами</string -->
   <string name="pref_sketchDeltaExtrude_title">Масштаб вирізки</string>
   <string name="pref_sketchDeltaExtrude_summary">Масштаб вирізок</string>
-  <string name="pref_sketchCompassReadings_title">Значення азимута</string>
-  <string name="pref_sketchCompassReadings_summary">К-сть осредняемих значеннь азимутів</string>
+  <!-- UNUSED string name="pref_sketchCompassReadings_title">Значення азимута</string -->
+  <!-- UNUSED string name="pref_sketchCompassReadings_summary">К-сть осредняемих значеннь азимутів</string -->
 
   <string name="pref_unit_length_title">Одиниці виміру довжини</string>
   <string name="pref_unit_length_summary">Показати одиниці довжини</string>

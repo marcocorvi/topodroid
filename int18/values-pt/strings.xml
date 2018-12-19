@@ -597,7 +597,6 @@
     <string name="button_rename"    >Renomear  </string>
     <!-- TODO string name="button_renumber"  >Renumber</string -->
     <!-- TODO string name="button_bedding"   >Bedding plane</string -->
-    <!-- TODO string name="button_highlight" >Highlight</string -->
     <string name="button_replace"   >Substituir</string>
     <string name="button_reset"     >Reiniciar </string>
     <string name="button_left"      >ESQUERDA</string>
@@ -921,6 +920,7 @@
     <!-- TODO string name="title_settings_edit">TopoDroid editing settings</string -->
     <!-- TODO string name="title_settings_device">TopoDroid device settings</string -->
     <!-- TODO string name="title_settings_calib">TopoDroid calibration settings</string -->
+    <!-- TODO string name="title_settings_geek">TopoDroid geek flags settings</string -->
     <!-- TODO string name="title_settings_log">TopoDroid log settings</string -->
 
     <string name="title_shift">Deslocar</string>
@@ -952,8 +952,9 @@
 
   <string name="pref_cat_calib">CALIBRAÇÕES</string>
   <string name="pref_cat_device">DISPOSITIVOS</string>
+  <!-- TODO string name="pref_cat_geek">GEEK FLAGS</string -->
   <string name="pref_cat_sketch">MODELOS 3D</string>
-  <string name="pref_cat_log">LOGS</string>
+  <!-- UNUSED string name="pref_cat_log">LOGS</string -->
 
   <string name="pref_locale_title">Língua</string>
   <string name="pref_locale_summary">Língua</string>
@@ -1095,6 +1096,8 @@
   <string name="pref_section_splay_message">Acima deste ângulo com o plano do corte, a medida auxiliar será pontilhada</string>
   <string name="pref_data_backup_title">Exportação automática</string>
   <string name="pref_data_backup_summary">Exportação automática de dados (exige definição de formato padrão)</string>
+  <!-- TODO string name="pref_fixed_origin_title">Sketch origin</string -->
+  <!-- TODO string name="pref_fixed_origin_summary">Fixed sketch origin</string -->
   <string name="pref_shared_xsections_title">Cortes X compartilhados</string>
   <string name="pref_shared_xsections_summary">Cortes X em bases compartilhados entre croquis</string>
   <string name="xsections_shared">Cortes X compartilhados</string>
@@ -1136,8 +1139,8 @@
   <string name="pref_ethr_summary">Ângulo máximo a partir dos 90° para considerar como vertical uma medida auxiliar [deg]</string>
   <string name="pref_vthr_title">Limite vertical medidas</string>
   <string name="pref_vthr_summary">Limite inclinação vertical de medidas para definição EDTC/NSLO</string>
-  <string name="pref_plan_vthr_title">Limite medida planta baixa</string>
-  <string name="pref_plan_vthr_message">Esconder medidas auxiliares com grande inclinação na visualização da planta baixa</string>
+  <!-- UNUSED string name="pref_plan_vthr_title">Limite medida planta baixa</string -->
+  <!-- UNUSED string name="pref_plan_vthr_message">Esconder medidas auxiliares com grande inclinação na visualização da planta baixa</string -->
   <string name="pref_init_station_title">Nome base inicial</string>
   <string name="pref_init_station_summary">Nome padrão da base inicial</string>
   <string name="pref_station_names_title">Nomes bases</string>
@@ -1163,6 +1166,8 @@
   <string name="pref_beep_volume_summary">Percentual de volume do bip do temporizador</string>
   <!-- TODO string name="pref_extend_frac_title">Fractional extend</string -->
   <!-- TODO string name="pref_extend_frac_summary">Whether "extend" can have a decimal part</string -->
+  <!-- TODO string name="pref_recent_shot_title">Recent shots</string -->
+  <!-- TODO string name="pref_recent_shot_summary">Whether to highlight recent shots</string -->
   <string name="pref_drawing_unit_title">Escala símbolos pontos</string>
   <string name="pref_drawing_unit_summary">Escala dos símbolos dos pontos</string>
   <string name="pref_unscaled_points_title">Ícones pontos sem zoom</string>
@@ -1195,6 +1200,14 @@
   <string name="pref_dot_radius_message">Raio dos pontos verdes</string>
   <string name="pref_line_thickness_title">Espessura linha</string>
   <string name="pref_line_thickness_summary">Espessura das linhas do desenho</string>
+  <!-- TODO string name="pref_linesnap_title">Line/Area snap</string -->
+  <!-- TODO string name="pref_linesnap_summary">Enable line/area snap action</string -->
+  <!-- TODO string name="pref_linecurve_title">Smooth/Straigten segment</string -->
+  <!-- TODO string name="pref_linecurve_summary">Smooth/Straighten line segment action</string -->
+  <!-- TODO string name="pref_path_multiselect_title">Path multiselection</string -->
+  <!-- TODO string name="pref_path_multiselect_summary">Path multiselection action</string -->
+  <!-- TODO string name="pref_plane_interpolation_title">Plane interpolation</string -->
+  <!-- TODO string name="pref_plane_interpolation_summary">Plane interpolation action</string -->
   <string name="pref_fixed_thickness_title">Espessura linha trena</string>
   <string name="pref_fixed_thickness_summary">Espessura das linhas de trena</string>
   <!-- UNUSED string name="pref_device_title">Dispositivo</string -->
@@ -1253,8 +1266,8 @@
   <!-- UNUSED string name="pref_sketchSectionStep_summary">Distância entre cortes</string -->
   <string name="pref_sketchDeltaExtrude_title">Escala extrusão</string>
   <string name="pref_sketchDeltaExtrude_summary">Fator escala de extrusão</string>
-  <string name="pref_sketchCompassReadings_title">Leituras bússola</string>
-  <string name="pref_sketchCompassReadings_summary">Número de leituras para fazer a média</string>
+  <!-- UNUSED string name="pref_sketchCompassReadings_title">Leituras bússola</string -->
+  <!-- UNUSED string name="pref_sketchCompassReadings_summary">Número de leituras para fazer a média</string -->
 
   <string name="pref_unit_length_title">Unidade distâncias</string>
   <string name="pref_unit_length_summary">Unidade para visualização de distâncias</string>

@@ -44,9 +44,9 @@ class ProjectionCommandManager
   // private List<DrawingPath>    mGridStack10;
   // private List<DrawingPath>    mGridStack100;
 
-  private List<DrawingPath>        mLegsStack;
-  private List<DrawingPath>        mSplaysStack;
-  private List<DrawingStationName> mStations;  // survey stations
+  private final List<DrawingPath>        mLegsStack;
+  private final List<DrawingPath>        mSplaysStack;
+  private final List<DrawingStationName> mStations;  // survey stations
 
   private boolean mDisplayPoints;
 
@@ -182,6 +182,7 @@ class ProjectionCommandManager
     }
   }  
   
+  // this is empty but it is called by ProjectionSurface
   void addGrid( DrawingPath path, int k )
   { 
     // if ( mGridStack1 == null ) return;

@@ -134,8 +134,10 @@ A long tap on the delete button removes the selected line/area point [N].<br>
   <li><i>Number of recent tools</i> to display in the recent tool picker [3, <u>4</u>, 5, or 6]</li>
   <li><i>Side drag</i>: enable panning by side-drag</li>
   <li><i>Zoom controls</i>: specifies whether and how zoom controls are displayed on multitouch devices [B]. The zoom controls can be hidden, displayed only for a short interval when the user tap the lower part of the screen in the middle, or shown all the time</li>
-  <li><i>Midline check</i>: check if all the legs are attached to the midline</li>
-  <li><i>xtherion areas</i> save sketch th2 files with an extra point in area borders</li>
+  <li><i>Midline check</i>: check if all the legs are attached to the midline [disabled]</li>
+  <li><i>Extend check</i>: check if all the legs have the "extend" definedi [enabled]</li>
+  <li><i>Horizontal x-sections</i> leg-clino threshold (profile view).</li>
+  <!-- li><i>xtherion areas</i> save sketch th2 files with an extra point in area borders</li -->
   <li><i>POINT TOOLS</i>
     <ul style="margin-top:0; margin-bottom:0">
     <li><i>Non-zoomed point</i>: point items stay of fixed size when zooming</li>
@@ -144,34 +146,35 @@ A long tap on the delete button removes the selected line/area point [N].<br>
     </ul>
   <li><i>LINE TOOLS</i>
     <ul style="margin-top:0; margin-bottom:0">
-    <li>Line <i>tracing style</i>: fine, normal, coarse, or "splines" (interpolated-curve)</li>
+    <li>Line <i>style</i>: fine, normal, coarse, or "splines" (interpolated-curve)</li>
     <li>Line <i>default join value</i>: none, start, end, both, "continue"</li>
-    <li>Line <i>thickness</i></li>
+    <li><i>Width</i> of the lines (NB wall-lines are twice as wide) [1 px]</li>
     <li><i>Direction tick length</i> for x-section lines [5 px]</li>
     <li>Line <i>point spacing</i>: distance between line points in normal style [5 px] </li>
-    <li><i>Bezier accuracy</i> determines the number of base points in the interpolating spline. The smaller the more points [1.0]</li>
-    <li><i>Bezier corner</i>. Even a spline should have corners, when there is a sharp turn at a point. Small values (0.2) make the corner sharper. Large values (20.0) make them rounded.</li>
+    <li>Area <i>border</i> default visibility</li>
     </ul>
   </li>
   <li><i>SKETCH ITEMS</i>
     <ul style="margin-top:0; margin-bottom:0">
-  <li><i>Splay plan-view threshold</i>: splay shots with inclination above this threshold are hidden in the plan-view [80 deg.]</li>
-  <li><i>Splay dash coherence</i>: splay shots dashed coherently between plan and profile views [yes]</li>
-  <li><i>Splay dash clino threshold</i>: splay shots with inclination above this threshold are dashed, in plan view [50 deg.]</li>
-  <li><i>Splay dash azimuth threshold</i>: splay shots with azimuth off more than this threshold are dashed, in profile view [60 deg.]</li>
-  <li><i>Splay dash angle threshold</i>: splay shots making an angle smaller than this threshold are dashed, in x-sections [60 deg.]</li>
-  <li><i>X-section H-threshold</i>: the inclination angle above which a x-section is horizontal. (Below it x-section are vertical).</li>
-    <li>Survey line <i>thickness</i> (midline/splay)</li>
+    <li><i>Splay plan-view threshold</i>: splay shots with inclination above this threshold are hidden in the plan-view [80 deg.]</li>
+    <li><i>X-section H-threshold</i>: the inclination angle above which a x-section is horizontal. (Below it x-section are vertical).</li>
+    <li>Survey line <i>width</i> (midline/splay)</li>
     <li>Station name <i>text size</i> [18 pt] [N]</li>
     <li>Size of <i>green dots</i> displayed in <b>edit</b> mode [5 px] [A]</li>
     <li><i>Selection</i> radius for fine-editing a sketch; [16 px] [A]</li>
     <li>Radius of <i>pointing</i>: to select you must not move the finger more than this [A]</li>
-    <li><i>Eraser size</i></li>
+    <li>Base size of the <i>eraser</i></li>
     <li><i>Shift sensitivity</i>: maximum stepping when moving a sketch [60 px] [E]. Increase it if sketch shifting is jaggy</li>
     </ul>
   </li>
-  <li><i>AUTO WALLS [E]</i> <a href="page_walls.htm">settings</a></li>
-</ul>
+</ul><br><p>
+
+<a href="page_geek.htm">Geek settings</a>:
+<i>Leg vertical threshold</i>,
+<i>Bezier interpolation accuracy, and corner threshold</i>,
+<i>Pointwise actions flags (Line/Area snap, Smooth/Straighten segment, multiselection)</i>,
+<i>Splay dashing (coherence, plan minimum clino, profile and x-section minimum angles)</i>,
+<i>Backup number and interval</i>, <i>Auto-walls settings</i>.<br><p>
 
 <h4>Sketch cache</h4>
 Once opened the sketches are kept in memory, in a cache. This speeds up switching between the shot-list window and the sketch window, as the sketch do not need to be read from file. The sketch cache is cleared when the survey is closed.<br><p>

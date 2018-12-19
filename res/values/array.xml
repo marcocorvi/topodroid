@@ -215,6 +215,7 @@
      <item name="csurvey">cSurvey</item>
      <item name="dxf">DXF</item>
      <item name="svg">SVG</item>
+     <item name="shp">SHP</item>
      <item name="png">PNG</item>
   </string-array>
   <string-array name="exportPlotValue" translatable="false">
@@ -223,6 +224,7 @@
      <item name="csurvey">7</item>
      <item name="dxf">6</item>
      <item name="svg">13</item>
+     <item name="shp">23</item>
      <item name="png">12</item>
   </string-array>
 

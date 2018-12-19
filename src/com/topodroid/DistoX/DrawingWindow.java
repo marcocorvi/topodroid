@@ -716,7 +716,7 @@ public class DrawingWindow extends ItemDrawer
       if ( blk != null ) {
 	if ( blk.isMultiBad() ) {
           dpath.setPathPaint( BrushManager.fixedOrangePaint );
-        } else if ( mApp.mShotWindow != null && mApp.mShotWindow.isBlockMagneticBad( blk ) ) {
+        } else if ( TopoDroidApp.mShotWindow != null && TopoDroidApp.mShotWindow.isBlockMagneticBad( blk ) ) {
           dpath.setPathPaint( BrushManager.fixedRedPaint );
         } else if ( blk.isRecent( ) ) { // if ( TDSetting.isConnectionModeBatch() && blk.isTimeRecent( System.currentTimeMillis()/1000 ) )
           dpath.setPathPaint( BrushManager.fixedBluePaint );
@@ -2464,7 +2464,7 @@ public class DrawingWindow extends ItemDrawer
     {
       mDrawingSurface.deleteSplay( p, sp ); 
       mApp_mData.deleteShot( blk.mId, TDInstance.sid, TDStatus.DELETED, true );
-      mApp.mShotWindow.updateDisplay(); // FIXME ???
+      TopoDroidApp.mShotWindow.updateDisplay(); // FIXME ???
     }
 
     void deletePoint( DrawingPointPath point ) 
@@ -3561,10 +3561,10 @@ public class DrawingWindow extends ItemDrawer
       deletePoint( audio ); // if audio == null doesn't do anything
     }
 
-    public void startRecordAudio( long bid )
-    {
-      // nothing
-    }
+    // public void startRecordAudio( long bid )
+    // {
+    //   // nothing
+    // }
 
     public void stopRecordAudio( long bid )
     {
@@ -3725,20 +3725,9 @@ public class DrawingWindow extends ItemDrawer
       }
     }
 
-    void toggleStationSplays( String st_name, boolean on, boolean off )
-    {
-      mDrawingSurface.toggleStationSplays( st_name, on, off );
-    }
-
-    boolean isStationSplaysOn( String st_name )
-    {
-      return mDrawingSurface.isStationSplaysOn( st_name );
-    }
-
-    boolean isStationSplaysOff( String st_name )
-    {
-      return mDrawingSurface.isStationSplaysOff( st_name );
-    }
+    void toggleStationSplays( String st_name, boolean on, boolean off ) { mDrawingSurface.toggleStationSplays( st_name, on, off ); }
+    boolean isStationSplaysOn( String st_name ) { return mDrawingSurface.isStationSplaysOn( st_name ); }
+    boolean isStationSplaysOff( String st_name ) { return mDrawingSurface.isStationSplaysOff( st_name ); }
 
     void toggleStationHidden( String st_name, boolean is_hidden )
     {
@@ -4042,6 +4031,7 @@ public class DrawingWindow extends ItemDrawer
       Button myTextView8 = null; // PATH_MULTISELECTION
 
       if ( mDrawingSurface.isMultiselection() ) {
+        int type = mDrawingSurface.getMultiselectionType();
         // ----- REMOVE MULTISELECTION ITEMS
         text = getString(R.string.popup_delete);
         if ( len < text.length() ) len = text.length();
@@ -4054,8 +4044,8 @@ public class DrawingWindow extends ItemDrawer
             }
           } );
 
-	if ( mDrawingSurface.getMultiselection() != DrawingPath.DRAWING_PATH_POINT ) {
-	  // DECIMATE
+	if ( type != DrawingPath.DRAWING_PATH_POINT ) { // DRAWING_PATH_LINE or DRAWING_PATH_AREA
+          // DECIMATE
           text = getString(R.string.popup_decimate);
           if ( len < text.length() ) len = text.length();
           myTextView1 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
@@ -4066,7 +4056,21 @@ public class DrawingWindow extends ItemDrawer
                 dismissPopupEdit();
               }
             } );
-	}
+        }
+
+	if ( type == DrawingPath.DRAWING_PATH_LINE ) {
+          // JOIN
+          text = getString(R.string.popup_join);
+          if ( len < text.length() ) len = text.length();
+          myTextView2 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
+            new View.OnClickListener( ) {
+              public void onClick(View v) {
+                mDrawingSurface.joinMultiselection( TDSetting.mSelectness/2 );
+                modified();
+                dismissPopupEdit();
+              }
+            } );
+        }
 
 	// CLEAR MULTISELECTION
         text = getString(R.string.popup_multiselect);
@@ -4087,8 +4091,8 @@ public class DrawingWindow extends ItemDrawer
             public void onClick(View v) {
               if ( mHotItemType == DrawingPath.DRAWING_PATH_POINT ||
                    mHotItemType == DrawingPath.DRAWING_PATH_LINE ||
-                   mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // move to nearest point POINT/LINE/AREA
-                if ( mDrawingSurface.moveHotItemToNearestPoint() ) {
+                   mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // SNAP to nearest point POINT/LINE/AREA
+                if ( mDrawingSurface.moveHotItemToNearestPoint( TDSetting.mSelectness/2 ) ) {
                   modified();
                 } else {
                   TDToast.make( R.string.failed_snap_to_point );
@@ -4100,14 +4104,14 @@ public class DrawingWindow extends ItemDrawer
   
         // ----- SNAP LINE to splays AREA BORDER to close line
         //
-        if ( TDLevel.overExpert ) {
+        if ( TDLevel.overExpert && TDSetting.mLineSnap ) {
           if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE ) {
             text = getString( R.string.popup_snap_to_splays );
             if ( len < text.length() ) len = text.length();
             myTextView1 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
               new View.OnClickListener( ) {
                 public void onClick(View v) {
-                  if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE ) { // snap to nearest splays
+                  // if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE ) { // SNAP to nearest splays [LINE] 
                     switch ( mDrawingSurface.snapHotItemToNearestSplays( TDSetting.mCloseCutoff + 3*mSelectSize / mZoom ) ) {
                       case 0:  // normal
                         modified();
@@ -4120,7 +4124,7 @@ public class DrawingWindow extends ItemDrawer
                       default:
                         break;
                     }
-                  }
+                  // }
                   dismissPopupEdit();
                 }
               } );
@@ -4130,7 +4134,7 @@ public class DrawingWindow extends ItemDrawer
             myTextView1 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
               new View.OnClickListener( ) {
                 public void onClick(View v) {
-                  if ( mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // snap to nearest line
+                  // if ( mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // SNAP to nearest line [AREA]
                     switch ( mDrawingSurface.snapHotItemToNearestLine() ) {
                       case 1:  // single point copy
                       case 0:  // normal
@@ -4144,7 +4148,7 @@ public class DrawingWindow extends ItemDrawer
                       default:
                         break;
                     }
-                  }
+                  // }
                   dismissPopupEdit();
                 }
               } );
@@ -4189,7 +4193,7 @@ public class DrawingWindow extends ItemDrawer
               }
             } );
 
-          if ( TDLevel.overExpert ) {
+          if ( TDLevel.overExpert && TDSetting.mLineCurve ) {
             // ----- MAKE LINE/AREA SEGMENT STRAIGHT
             text = getString(R.string.popup_sharp_pt);
             if ( len < text.length() ) len = text.length();
@@ -4284,7 +4288,7 @@ public class DrawingWindow extends ItemDrawer
         }
 
         // PATH_MULTISELECTION
-        if ( TDLevel.overExpert ) {
+        if ( TDLevel.overExpert && TDSetting.mPathMultiselect ) {
           if (    mHotItemType == DrawingPath.DRAWING_PATH_POINT
                || mHotItemType == DrawingPath.DRAWING_PATH_LINE 
                || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) {
@@ -4398,7 +4402,7 @@ public class DrawingWindow extends ItemDrawer
         computeReferences( mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, true );
       }
       resetReference( mPlot2 );
-      if ( mApp.mShotWindow != null ) {
+      if ( TopoDroidApp.mShotWindow != null ) {
         // mApp.mShotWindow.mRecentPlotType = mType;
         TDInstance.recentPlotType = mType;
       } else {
@@ -4418,7 +4422,7 @@ public class DrawingWindow extends ItemDrawer
         computeReferences( mPlot1.type, mPlot1.name, TopoDroidApp.mScaleFactor, true );
       }
       resetReference( mPlot1 );
-      if ( mApp.mShotWindow != null ) {
+      if ( TopoDroidApp.mShotWindow != null ) {
         // mApp.mShotWindow.mRecentPlotType = mType;
         TDInstance.recentPlotType = mType;
       } else {
@@ -4912,37 +4916,39 @@ public class DrawingWindow extends ItemDrawer
 
     // --------------------------------------------------------------------------
 
-    private void savePng( long type, boolean toast )
+    private void savePng( long type ) // , boolean toast )
     {
       if ( PlotInfo.isAnySection( type ) ) { 
 	String fullname = mFullName3;
         DrawingCommandManager manager = mDrawingSurface.getManager( type );
-        doSavePng( manager, type, fullname, toast );
+        doSavePng( manager, type, fullname ); // , toast );
       } else {
 	String fullname1 = mFullName1;
 	String fullname2 = mFullName2;
         // Nota Bene OK for projected profile (to check)
         DrawingCommandManager manager1 = mDrawingSurface.getManager( PlotInfo.PLOT_PLAN );
         DrawingCommandManager manager2 = mDrawingSurface.getManager( PlotInfo.PLOT_EXTENDED );
-        doSavePng( manager1, (int)PlotInfo.PLOT_PLAN, fullname1, toast );
-        doSavePng( manager2, (int)PlotInfo.PLOT_EXTENDED, fullname2, toast );
+        doSavePng( manager1, (int)PlotInfo.PLOT_PLAN, fullname1 ); // , toast );
+        doSavePng( manager2, (int)PlotInfo.PLOT_EXTENDED, fullname2 ); // , toast );
       }
     }
 
-    private void doSavePng( DrawingCommandManager manager, long type, final String filename, boolean toast )
+    private void doSavePng( DrawingCommandManager manager, long type, final String filename ) // , boolean toast )
     {
       if ( manager == null ) {
-	if ( toast ) TDToast.make( R.string.null_bitmap );
+	// if ( toast ) 
+	  TDToast.make( R.string.null_bitmap );
 	return;
       }
       Bitmap bitmap = manager.getBitmap( );
       if ( bitmap == null ) {
-        if ( toast ) TDToast.make( R.string.null_bitmap );
+        // if ( toast )
+	  TDToast.make( R.string.null_bitmap );
 	return;
       }
       float scale = manager.getBitmapScale();
       String format = getResources().getString( R.string.saved_file_2 );
-      new ExportBitmapToFile( format, bitmap, scale, filename, toast ).execute();
+      new ExportBitmapToFile( format, bitmap, scale, filename, true /* toast */ ).execute();
     }
 
     // used also by SavePlotFileTask
@@ -4953,7 +4959,7 @@ public class DrawingWindow extends ItemDrawer
 
     // used to save "dxf", "svg"
     // called only by doExport
-    private void saveWithExt( long type, String ext, boolean toast )
+    private void saveWithExt( long type, String ext ) // , boolean toast )
     {
       DistoXNum num = mNum;
       TDLog.Log( TDLog.LOG_IO, "export plot type " + type + " with extension " + ext );
@@ -4961,17 +4967,17 @@ public class DrawingWindow extends ItemDrawer
 	DrawingCommandManager manager = mDrawingSurface.getManager( type );
 	String fullname = mFullName3;
         if ( "csx".equals( ext ) ) {
-          doSavePng( manager, type, fullname, toast );
+          doSavePng( manager, type, fullname ); // , toast );
         } else {
-          doSaveWithExt( num, /* mDrawingUtil, */ manager, type, fullname, ext, toast );
+          doSaveWithExt( num, /* mDrawingUtil, */ manager, type, fullname, ext, true ); // toast );
         }
       } else {
 	DrawingCommandManager manager1 = mDrawingSurface.getManager( mPlot1.type );
 	DrawingCommandManager manager2 = mDrawingSurface.getManager( mPlot2.type );
 	String fullname1 = mFullName1;
 	String fullname2 = mFullName2;
-        doSaveWithExt( num, /* mDrawingUtil, */ manager1, mPlot1.type, fullname1, ext, toast );
-        doSaveWithExt( num, /* mDrawingUtil, */ manager2, mPlot2.type, fullname2, ext, toast );
+        doSaveWithExt( num, /* mDrawingUtil, */ manager1, mPlot1.type, fullname1, ext, true); // toast );
+        doSaveWithExt( num, /* mDrawingUtil, */ manager2, mPlot2.type, fullname2, ext, true); // toast );
       }
     }
 
@@ -5198,7 +5204,7 @@ public class DrawingWindow extends ItemDrawer
   public void updateBlockList( DBlock blk ) 
   {
     // Log.v("DistoX", "Drawing window: update Block List block id " + blk.mId + ": " + blk.mFrom + " - " + blk.mTo ); // DATA_DOWNLOAD
-    mApp.mShotWindow.updateBlockList( blk ); // FIXME_EXTEND this is needed to update sketch splays immediately on download
+    TopoDroidApp.mShotWindow.updateBlockList( blk ); // FIXME_EXTEND this is needed to update sketch splays immediately on download
     updateDisplay( /* true, true */ );
   }
 
@@ -5206,7 +5212,7 @@ public class DrawingWindow extends ItemDrawer
   public void updateBlockList( long blk_id )
   {
     // Log.v("DistoX", "Drawing window: update Block List block id " + blk_id ); // DATA_DOWNLOAD
-    mApp.mShotWindow.updateBlockList( blk_id ); // FIXME_EXTEND this is needed to update sketch splays immediately on download
+    TopoDroidApp.mShotWindow.updateBlockList( blk_id ); // FIXME_EXTEND this is needed to update sketch splays immediately on download
     updateDisplay( /* true, true */ );
   }
 
@@ -5424,9 +5430,10 @@ public class DrawingWindow extends ItemDrawer
 	  }
           break;
         } // else fall-through and savePng
-      case TDConst.DISTOX_EXPORT_PNG: savePng( mType, true ); break;
-      case TDConst.DISTOX_EXPORT_DXF: saveWithExt( mType, "dxf", true ); break;
-      case TDConst.DISTOX_EXPORT_SVG: saveWithExt( mType, "svg", true ); break;
+      case TDConst.DISTOX_EXPORT_PNG: savePng( mType ); break; // , true ); break;
+      case TDConst.DISTOX_EXPORT_DXF: saveWithExt( mType, "dxf" ); break; // , true ); break;
+      case TDConst.DISTOX_EXPORT_SVG: saveWithExt( mType, "svg" ); break; // , true ); break;
+      case TDConst.DISTOX_EXPORT_SHP: saveWithExt( mType, "shp" ); break; // , true ); break;
     }
   }
 

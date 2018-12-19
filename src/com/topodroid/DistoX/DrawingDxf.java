@@ -976,34 +976,35 @@ class DrawingDxf
             
             StringWriter sw4 = new StringWriter();
             PrintWriter pw4  = new PrintWriter(sw4);
-            // if ( sh.mType == DrawingPath.DRAWING_PATH_FIXED ) {
-              NumStation f = num.getStation( blk.mFrom );
-              NumStation t = num.getStation( blk.mTo );
- 
-              printString( pw4, 0, "LINE" );
-              handle = inc(handle);
-                          printAcDb( pw4, handle, AcDbEntity, AcDbLine );
-              printString( pw4, 8, "LEG" );
-              // printInt( pw4, 39, 2 );         // line thickness
+            printString( pw4, 0, "LINE" );
+            handle = inc(handle);
+                        printAcDb( pw4, handle, AcDbEntity, AcDbLine );
+            printString( pw4, 8, "LEG" );
+            // printInt( pw4, 39, 2 );         // line thickness
 
-              if ( type == PlotInfo.PLOT_PLAN ) {
-                float x0 = scale *( xoff + DrawingUtil.toSceneX( f.e, f.s ) );
-                float y0 = scale *( yoff + DrawingUtil.toSceneY( f.e, f.s ) );
-                float x1 = scale *( xoff + DrawingUtil.toSceneX( t.e, t.s ) );
-                float y1 = scale *( yoff + DrawingUtil.toSceneY( t.e, t.s ) );
-                printXYZ( pw4, x0, -y0, 0.0f, 0 );
-                printXYZ( pw4, x1, -y1, 0.0f, 1 );
-              } else if ( PlotInfo.isProfile( type ) ) {
-                float x0 = scale *( xoff + DrawingUtil.toSceneX( f.h, f.v ) );
-                float y0 = scale *( yoff + DrawingUtil.toSceneY( f.h, f.v ) );
-                float x1 = scale *( xoff + DrawingUtil.toSceneX( t.h, t.v ) );
-                float y1 = scale *( yoff + DrawingUtil.toSceneY( t.h, t.v ) );
-                printXYZ( pw4, x0, -y0, 0.0f, 0 );
-                printXYZ( pw4, x1, -y1, 0.0f, 1 );
-              // } else if ( type == PlotInfo.PLOT_SECTION ) {
-              //   /* nothing */
-              }
-            // }
+            // // if ( sh.mType == DrawingPath.DRAWING_PATH_FIXED ) {
+            //   NumStation f = num.getStation( blk.mFrom );
+            //   NumStation t = num.getStation( blk.mTo );
+            //   if ( type == PlotInfo.PLOT_PLAN ) {
+            //     float x0 = scale *( xoff + DrawingUtil.toSceneX( f.e, f.s ) );
+            //     float y0 = scale *( yoff + DrawingUtil.toSceneY( f.e, f.s ) );
+            //     float x1 = scale *( xoff + DrawingUtil.toSceneX( t.e, t.s ) );
+            //     float y1 = scale *( yoff + DrawingUtil.toSceneY( t.e, t.s ) );
+            //     printXYZ( pw4, x0, -y0, 0.0f, 0 );
+            //     printXYZ( pw4, x1, -y1, 0.0f, 1 );
+            //   } else if ( PlotInfo.isProfile( type ) ) {
+            //     float x0 = scale *( xoff + DrawingUtil.toSceneX( f.h, f.v ) );
+            //     float y0 = scale *( yoff + DrawingUtil.toSceneY( f.h, f.v ) );
+            //     float x1 = scale *( xoff + DrawingUtil.toSceneX( t.h, t.v ) );
+            //     float y1 = scale *( yoff + DrawingUtil.toSceneY( t.h, t.v ) );
+            //     printXYZ( pw4, x0, -y0, 0.0f, 0 );
+            //     printXYZ( pw4, x1, -y1, 0.0f, 1 );
+            //   // } else if ( type == PlotInfo.PLOT_SECTION ) {
+            //   //   /* nothing */
+            //   }
+            // // }
+            printXYZ( pw4, scale*(xoff + sh.x1), -scale*(yoff + sh.y1), 0.0f, 0 );
+            printXYZ( pw4, scale*(xoff + sh.x2), -scale*(yoff + sh.y2), 0.0f, 1 );
             out.write( sw4.getBuffer().toString() );
             out.flush();
           }

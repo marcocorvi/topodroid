@@ -412,6 +412,7 @@ class ProjectionDialog extends MyDialog
     if ( edit_text ) updateEditText();
   }
 
+  // empty but called by ProjectionSurface
   void setSize( int w, int h )
   {
     // mOffset.x = w/2;

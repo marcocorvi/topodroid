@@ -598,7 +598,6 @@
     <!-- TODO string name="button_rename"    >Rename    </string -->
     <!-- TODO string name="button_renumber"  >Renumber</string -->
     <!-- TODO string name="button_bedding"   >Bedding plane</string -->
-    <!-- TODO string name="button_highlight" >Highlight</string -->
     <!-- TODO string name="button_replace"   >Replace   </string -->
     <string name="button_reset"     >重置     </string>
     <string name="button_left"      >左</string>
@@ -920,6 +919,7 @@
     <!-- TODO string name="title_settings_edit">TopoDroid editing settings</string -->
     <!-- TODO string name="title_settings_device">TopoDroid device settings</string -->
     <!-- TODO string name="title_settings_calib">TopoDroid calibration settings</string -->
+    <!-- TODO string name="title_settings_geek">TopoDroid geek flags settings</string -->
     <!-- TODO string name="title_settings_log">TopoDroid log settings</string -->
 
     <string name="title_shift">转换</string>
@@ -951,8 +951,9 @@
 
   <string name="pref_cat_calib">校准设置</string>
   <string name="pref_cat_device">设备设置</string>
+  <!-- TODO string name="pref_cat_geek">GEEK FLAGS</string -->
   <!-- NO string name="pref_cat_sketch">3D模式设置</string -->
-  <string name="pref_cat_log">日志设定</string>
+  <!-- UNUSED string name="pref_cat_log">日志设定</string -->
 
   <string name="pref_locale_title">语言</string>
   <string name="pref_locale_summary">语言</string>
@@ -1094,6 +1095,8 @@
   <!-- TODO string name="pref_section_splay_message">Over this angle with the section plane, splays are dashed</string -->
   <!-- TODO string name="pref_data_backup_title">Data auto-export</string -->
   <!-- TODO string name="pref_data_backup_summary">Automatic data export (need default format)</string -->
+  <!-- TODO string name="pref_fixed_origin_title">Sketch origin</string -->
+  <!-- TODO string name="pref_fixed_origin_summary">Fixed sketch origin</string -->
   <!-- TODO string name="pref_shared_xsections_title">Shared x-sections</string -->
   <!-- TODO string name="pref_shared_xsections_summary">At-station x-sections shared among sketches</string -->
   <!-- TODO string name="xsections_shared">Shared X-sections</string -->
@@ -1136,8 +1139,8 @@
   <string name="pref_vthr_title">主线垂直极限值</string>
   <string name="pref_vthr_summary">主线在LRSD/WENS倾斜的临界值</string>
 
-  <string name="pref_plan_vthr_title">平面视图侧线的极限值</string>
-  <string name="pref_plan_vthr_message">在平面视图中隐藏高斜度的侧线</string>
+  <!-- UNUSED string name="pref_plan_vthr_title">平面视图侧线的极限值</string -->
+  <!-- UNUSED string name="pref_plan_vthr_message">在平面视图中隐藏高斜度的侧线</string -->
   <string name="pref_init_station_title">起始测量点的名称</string>
   <string name="pref_init_station_summary">默认起始测量点名称</string>
   <string name="pref_station_names_title">测量点名称</string>
@@ -1163,6 +1166,8 @@
   <string name="pref_beep_volume_summary">定时器嗡鸣声百分比</string>
   <!-- TODO string name="pref_extend_frac_title">Fractional extend</string -->
   <!-- TODO string name="pref_extend_frac_summary">Whether "extend" can have a decimal part</string -->
+  <!-- TODO string name="pref_recent_shot_title">Recent shots</string -->
+  <!-- TODO string name="pref_recent_shot_summary">Whether to highlight recent shots</string -->
   <string name="pref_drawing_unit_title">绘点工具大小</string>
   <string name="pref_drawing_unit_summary">绘点工具大小</string>
   <string name="pref_unscaled_points_title">非缩放点图标</string>
@@ -1195,6 +1200,14 @@
   <string name="pref_dot_radius_message">绿色点大小</string>
   <string name="pref_line_thickness_title">线宽</string>
   <string name="pref_line_thickness_summary">绘图线宽</string>
+  <!-- TODO string name="pref_linesnap_title">Line/Area snap</string -->
+  <!-- TODO string name="pref_linesnap_summary">Enable line/area snap action</string -->
+  <!-- TODO string name="pref_linecurve_title">Smooth/Straigten segment</string -->
+  <!-- TODO string name="pref_linecurve_summary">Smooth/Straighten line segment action</string -->
+  <!-- TODO string name="pref_path_multiselect_title">Path multiselection</string -->
+  <!-- TODO string name="pref_path_multiselect_summary">Path multiselection action</string -->
+  <!-- TODO string name="pref_plane_interpolation_title">Plane interpolation</string -->
+  <!-- TODO string name="pref_plane_interpolation_summary">Plane interpolation action</string -->
   <string name="pref_fixed_thickness_title">测量线线宽</string>
   <string name="pref_fixed_thickness_summary">测量线线宽</string>
   <!-- UNUSED string name="pref_device_title">设备</string -->
@@ -1253,8 +1266,8 @@
   <!-- UNUSED string name="pref_sketchSectionStep_summary">截面间的距离</string -->
   <string name="pref_sketchDeltaExtrude_title">拉伸比例</string>
   <string name="pref_sketchDeltaExtrude_summary">拉伸比例系数</string>
-  <string name="pref_sketchCompassReadings_title">方位角读取</string>
-  <string name="pref_sketchCompassReadings_summary">读取的平均值</string>
+  <!-- UNUSED string name="pref_sketchCompassReadings_title">方位角读取</string -->
+  <!-- UNUSED string name="pref_sketchCompassReadings_summary">读取的平均值</string -->
 
   <string name="pref_unit_length_title">长度单位</string>
   <string name="pref_unit_length_summary">显示长度单位</string>

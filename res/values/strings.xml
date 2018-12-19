@@ -364,6 +364,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="popup_multiselect">Multiselection</string>
     <string name="popup_delete">Delete</string>
     <string name="popup_decimate">Decimate</string>
+    <string name="popup_join">Join</string>
 
     <string name="popup_erase_all">Erase all</string>
     <string name="popup_erase_point">Erase points</string>
@@ -615,7 +616,6 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="button_rename"    >Rename    </string>
     <string name="button_renumber"  >Renumber</string>
     <string name="button_bedding"   >Bedding plane</string>
-    <string name="button_highlight" >Highlight</string>
     <string name="button_replace"   >Replace   </string>
     <string name="button_reset"     >Reset     </string>
     <string name="button_left"      >LEFT</string>
@@ -947,6 +947,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_settings_edit">TopoDroid editing settings</string>
     <string name="title_settings_device">TopoDroid device settings</string>
     <string name="title_settings_calib">TopoDroid calibration settings</string>
+    <string name="title_settings_geek">TopoDroid geek flags settings</string>
     <string name="title_settings_log">TopoDroid log settings</string>
 
     <string name="title_shift">Shift</string>
@@ -980,8 +981,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_cat_calib">CALIBRATIONS</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
   <string name="pref_cat_device">DEVICES</string>
+  <string name="pref_cat_geek">GEEK FLAGS</string>
   <string name="pref_cat_sketch">3D MODELS</string>
-  <string name="pref_cat_log">LOGS</string>
+  <!-- UNUSED string name="pref_cat_log">LOGS</string -->
 
   <string name="pref_locale_title">Language</string>
   <string name="pref_locale_summary">App language</string>
@@ -1069,13 +1071,13 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <!-- UNUSED string name="pref_comm_retry_title">Connection retry</string -->
   <!-- UNUSED string name="pref_comm_retry_summary">Connection retries number</string -->
   <!-- UNUSED string name="pref_comm_retry_dialogtitle">Connection retries number</string -->
-  <string name="pref_wait_laser_title">Laser pause [ms]</string>
+  <string name="pref_wait_laser_title">Laser pause</string>
   <string name="pref_wait_laser_summary">Pause after turning laser on [ms]</string>
-  <string name="pref_wait_shot_title">Shot pause [ms]</string>
+  <string name="pref_wait_shot_title">Shot pause</string>
   <string name="pref_wait_shot_summary">Pause after measuring [ms]</string>
-  <string name="pref_wait_data_title">Data pause [ms]</string>
+  <string name="pref_wait_data_title">Data pause</string>
   <string name="pref_wait_data_summary">Pause after a data download [ms]</string>
-  <string name="pref_wait_conn_title">Data ready wait delay [ms]</string>
+  <string name="pref_wait_conn_title">Data ready wait delay</string>
   <string name="pref_wait_conn_summary">Delay waiting for data to be ready [ms]</string>
   <string name="pref_conn_mode_title">Data connection mode</string>
   <string name="pref_conn_mode_summary">Mode of DistoX-connection for data download</string>
@@ -1115,7 +1117,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_min_shift_message">Maximum shift speed [pxl/step]</string>
   <string name="pref_pointing_title">Pointing tolerance</string>
   <string name="pref_pointing_message">Touch-down/lift-up tolerance for point selection</string>
-  <string name="pref_dash_splay_title">Splay dash coherence</string>
+  <string name="pref_dash_splay_title">Dash coherence</string>
   <string name="pref_dash_splay_message">Splays dashed coherently between plan and profile</string>
   <string name="pref_vert_splay_title">Splay dash clino-threshold</string>
   <string name="pref_vert_splay_message">Splays clino over threshold are dashed</string>
@@ -1125,6 +1127,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_section_splay_message">Splays over this angle with the section plane are dashed</string>
   <string name="pref_data_backup_title">Data auto-export</string>
   <string name="pref_data_backup_summary">Automatic data export (need default format)</string>
+  <string name="pref_fixed_origin_title">Sketch origin</string>
+  <string name="pref_fixed_origin_summary">Fixed sketch origin</string>
   <string name="pref_shared_xsections_title">Shared x-sections</string>
   <string name="pref_shared_xsections_summary">At-station x-sections shared among sketches</string>
   <string name="xsections_shared">Shared X-sections</string>
@@ -1167,8 +1171,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_vthr_title">Leg vertical threshold</string>
   <string name="pref_vthr_summary">Vertical LRUD/WENS threshold</string>
 
-  <string name="pref_plan_vthr_title">Splay plan-view threshold</string>
-  <string name="pref_plan_vthr_message">Hide splays with high inclination in the plan-view</string>
+  <!-- UNUSED string name="pref_plan_vthr_title">Splay plan-view threshold</string -->
+  <!-- UNUSED string name="pref_plan_vthr_message">Hide splays with high inclination in the plan-view</string -->
   <string name="pref_init_station_title">Initial station name</string>
   <string name="pref_init_station_summary">Default initial station name</string>
   <string name="pref_station_names_title">Station names</string>
@@ -1194,6 +1198,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_beep_volume_summary">Percent timer-beep volume</string>
   <string name="pref_extend_frac_title">Fractional extend</string>
   <string name="pref_extend_frac_summary">Whether "extend" can have a decimal part</string>
+  <string name="pref_recent_shot_title">Recent shots</string>
+  <string name="pref_recent_shot_summary">Whether to highlight recent shots</string>
   <string name="pref_drawing_unit_title">Point tools scale</string>
   <string name="pref_drawing_unit_summary">Scale of the point tools</string>
   <string name="pref_unscaled_points_title">Non-zoomed point icons</string>
@@ -1226,6 +1232,14 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_dot_radius_message">Size of the green dots</string>
   <string name="pref_line_thickness_title">Line width</string>
   <string name="pref_line_thickness_summary">Drawing line width</string>
+  <string name="pref_linesnap_title">Line/Area snap</string>
+  <string name="pref_linesnap_summary">Enable line/area snap action</string>
+  <string name="pref_linecurve_title">Smooth/Straigten segment</string>
+  <string name="pref_linecurve_summary">Smooth/Straighten line segment action</string>
+  <string name="pref_path_multiselect_title">Path multiselection</string>
+  <string name="pref_path_multiselect_summary">Path multiselection action</string>
+  <string name="pref_plane_interpolation_title">Plane interpolation</string>
+  <string name="pref_plane_interpolation_summary">Plane interpolation action</string>
   <string name="pref_fixed_thickness_title">Survey line width</string>
   <string name="pref_fixed_thickness_summary">Survey line width</string>
   <!-- UNUSED string name="pref_device_title">Device</string -->
@@ -1284,8 +1298,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <!-- UNUSED string name="pref_sketchSectionStep_summary">Distance between sections</string -->
   <string name="pref_sketchDeltaExtrude_title">Extrude scale</string>
   <string name="pref_sketchDeltaExtrude_summary">Extrude scale factor</string>
-  <string name="pref_sketchCompassReadings_title">Compass readings</string>
-  <string name="pref_sketchCompassReadings_summary">Number of readings to average</string>
+  <!-- UNUSED string name="pref_sketchCompassReadings_title">Compass readings</string -->
+  <!-- UNUSED string name="pref_sketchCompassReadings_summary">Number of readings to average</string -->
   <string name="pref_sketchModelType_title">Model type</string>
   <string name="pref_sketchModelType_summary">Model wall reconstruction</string>
 
@@ -1302,7 +1316,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_walls_plan_thr_title">Splay plan clino</string>
   <string name="pref_walls_plan_thr_summary">Maximum splay clino for plan walls [deg]</string>
   <string name="pref_walls_extended_thr_title">Splay profile clino</string>
-  <string name="pref_walls_extended_thr_summary">Maximum splay clino for profile walls [deg]</string>
+  <string name="pref_walls_extended_thr_summary">Minimum splay clino for profile walls [deg]</string>
   <string name="pref_walls_xclose_title">Separation</string>
   <string name="pref_walls_xclose_summary">Minimum separation of wall points along the shot [m]</string>
   <string name="pref_walls_concave_title">Concavity</string>
@@ -1346,7 +1360,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_log_ptopo" translatable="false">PocketTopo</string>
   <string name="pref_log_sensor" translatable="false">Sensors</string>
   <string name="pref_log_shot" translatable="false">Shots</string>
-  <string name="pref_log_sync" translatable="false">Cosurveying</string>
+  <!-- UNUSED string name="pref_log_sync" translatable="false">Cosurveying</string -->
   <string name="pref_log_survey" translatable="false">Surveys</string>
   <string name="pref_log_therion" translatable="false">Therion</string>
   <string name="pref_log_units" translatable="false">Units</string>

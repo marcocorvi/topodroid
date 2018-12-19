@@ -43,7 +43,12 @@ class FixedAdapter extends ArrayAdapter< FixedInfo >
     View v = convertView;
     if ( v == null ) {
       LayoutInflater li = (LayoutInflater)context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-      v = li.inflate( R.layout.row, parent, false ); // may produce NullPointerException
+      try {
+        v = li.inflate( R.layout.row, parent, false ); // may produce NullPointerException
+      } catch ( NullPointerException e ) {
+        TDLog.Error("Fixed adapter inflate view: null pointer");
+	return null;
+      }
     }
 
     FixedInfo b = items.get( pos );

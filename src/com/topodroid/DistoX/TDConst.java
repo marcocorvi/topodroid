@@ -94,6 +94,7 @@ class TDConst
       "cSurvey",
       "DXF",
       "SVG",
+      "SHP",
       "PNG"
   };
   static final private int[] mPlotExportIndex = {
@@ -101,6 +102,7 @@ class TDConst
     DISTOX_EXPORT_CSX,
     DISTOX_EXPORT_DXF,
     DISTOX_EXPORT_SVG,
+    DISTOX_EXPORT_SHP,
     DISTOX_EXPORT_PNG
   };
 

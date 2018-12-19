@@ -36,7 +36,7 @@ class UserManDownload extends AsyncTask< String, Integer, Integer >
   // private static UserManDownload running = null; // WARNING do not place context in a static field
   private static boolean running = false; 
 
-  UserManDownload( Context context, String url )
+  UserManDownload( /* Context context, */ String url )
   {
     // mContext = context;
     mUrl     = url;

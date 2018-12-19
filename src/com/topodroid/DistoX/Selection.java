@@ -369,18 +369,7 @@ class Selection
     return ret;
   }
 
-  private boolean containsStation( DrawingPath p, ArrayList<String> stations ) 
-  {
-    if ( stations == null ) return false;
-    DBlock blk = p.mBlock;
-    if ( blk == null ) return false;
-    String station = blk.mFrom;
-    if ( station == null || station.length() == 0 ) return false;
-    return stations.contains( station );
-  }
-
-  private void bucketSelectAt(float x,float y,float radius,int mode,SelectionSet sel,boolean legs,boolean splays,boolean stations,
-		              ArrayList<String> splays_on, ArrayList<String> splays_off )
+  private void bucketSelectAt(float x,float y,float radius,int mode,SelectionSet sel,boolean legs,boolean splays,boolean stations, DrawingStationSplay station_splay )
   {
     // Log.v("DistoX", "bucket select at " + x + " " + y + " R " + radius + " buckets " + mBuckets.size() );
     if ( mode == Drawing.FILTER_ALL ) {
@@ -391,11 +380,11 @@ class Selection
             // if ( !splays && sp.type() == DrawingPath.DRAWING_PATH_SPLAY ) continue;
             if ( !stations && (    sp.type() == DrawingPath.DRAWING_PATH_STATION 
                                 || sp.type() == DrawingPath.DRAWING_PATH_NAME ) ) continue;
-            if ( sp.type() == DrawingPath.DRAWING_PATH_SPLAY ) {
-	      if ( splays ) {
-                if ( containsStation( sp.mItem, splays_off ) ) continue;
+            if ( sp.type() == DrawingPath.DRAWING_PATH_SPLAY && station_splay != null ) {
+              if ( splays ) {
+                if ( station_splay.isStationOFF( sp.mItem ) ) continue;
 	      } else {
-                if ( ! containsStation( sp.mItem, splays_on ) ) continue;
+                if ( ! station_splay.isStationON( sp.mItem ) ) continue;
 	      }
 	    }
             if ( sp.distance( x, y ) < radius ) {
@@ -467,10 +456,9 @@ class Selection
     return bucketSelectOnItemAt( item, x, y, radius );
   }
 
-  void selectAt( SelectionSet sel, float x, float y, float radius, int mode, boolean legs, boolean splays, boolean stations,
-		 ArrayList<String> splays_on, ArrayList<String> splays_off )
+  void selectAt( SelectionSet sel, float x, float y, float radius, int mode, boolean legs, boolean splays, boolean stations, DrawingStationSplay station_splay )
   {
-    bucketSelectAt( x, y, radius, mode, sel, legs, splays, stations, splays_on, splays_off );
+    bucketSelectAt( x, y, radius, mode, sel, legs, splays, stations, station_splay );
   }
 
   void selectAt( SelectionSet sel, float x, float y, float radius, int type )

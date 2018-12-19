@@ -82,6 +82,8 @@ class TDColor
   static final int CONNECTED    = FIXED_RED;
   static final int COMPUTE      = VIOLET;
   static final int NAME_COLOR   = 0xff66cc99;
+  // static final int PREF_TEXT    = 0xff33ccff;
+  static final int SYMBOL_TAB   = 0xff80cbc4;
 
   static final int TRANSPARENT  = 0x00000000;
 }

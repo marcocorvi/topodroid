@@ -752,12 +752,14 @@ class TDExporter
 
     try {
       // TDLog.Log( TDLog.LOG_IO, "export SHP " + filename );
-      TDPath.checkPath( filename );
+      // TDPath.checkPath( filename );
+      File dir = new File( filename );
+      if ( ! dir.exists() ) dir.mkdir();
       
       int nr = 0;
       if ( TDSetting.mKmlStations ) {
         for ( DistoXNum num : nums ) {
-          String filepath = filename + "-stations-" + nr;
+          String filepath = filename + "/stations-" + nr;
           ++ nr;
           List<NumStation> stations = num.getStations();
           // Log.v("DistoX", "SHP export " + filepath + " stations " + stations.size() );
@@ -769,7 +771,7 @@ class TDExporter
 
       nr = 0;
       for ( DistoXNum num : nums ) {
-        String filepath = filename + "-shots-" + nr;
+        String filepath = filename + "/shots-" + nr;
         ++ nr;
         List<NumShot> shots = num.getShots();
         List<NumSplay> splays = ( TDSetting.mKmlSplays ? num.getSplays() : null );

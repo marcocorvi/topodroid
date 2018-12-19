@@ -2242,14 +2242,14 @@ public class SketchWindow extends ItemDrawer
   @Override
   public void updateBlockList( DBlock blk )
   {
-    mApp.mShotWindow.updateBlockList( blk );
+    TopoDroidApp.mShotWindow.updateBlockList( blk );
     // FIXME FIXME updateDisplay( true, true );
   }
 
   @Override
   public void updateBlockList( long blk_id )
   {
-    mApp.mShotWindow.updateBlockList( blk_id );
+    TopoDroidApp.mShotWindow.updateBlockList( blk_id );
     // FIXME FIXME updateDisplay( true, true );
   }
 

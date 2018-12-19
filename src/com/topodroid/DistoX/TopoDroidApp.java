@@ -91,8 +91,7 @@ import android.bluetooth.BluetoothDevice;
 public class TopoDroidApp extends Application
 {
   // static final String EMPTY = "";
-
-  static TDPrefHelper mPrefHlp = null;
+  static private TopoDroidApp thisApp = null;
 
   static final String SYMBOL_VERSION = "35";
   static String VERSION = "0.0.0"; 
@@ -197,6 +196,7 @@ public class TopoDroidApp extends Application
   static DataHelper mData = null;         // database 
   static DeviceHelper mDData = null;      // device/calib database
 
+  static TDPrefHelper mPrefHlp      = null;
   static SurveyWindow mSurveyWindow = null;
   static ShotWindow   mShotWindow   = null;
   // static DrawingWindow mDrawingWindow = null; // FIXME currently not used
@@ -326,11 +326,11 @@ public class TopoDroidApp extends Application
 
   // ----------------------------------------------------------------
 
-  @Override
+  @Override 
   public void onTerminate()
   {
     super.onTerminate();
-    // Log.v(TAG, "onTerminate app");
+    thisApp = null;
   }
 
   static void setDeviceModel( Device device, int model )
@@ -476,8 +476,6 @@ public class TopoDroidApp extends Application
 
   // ---------------------------------------------------------
 
-  // TDPrefHelper getPrefHelper() { return mPrefHlp; }
-
   void startupStep2()
   {
     // ***** LOG FRAMEWORK
@@ -487,7 +485,7 @@ public class TopoDroidApp extends Application
 
     PtCmapActivity.setMap( mPrefHlp.getString( "DISTOX_PT_CMAP", null ) );
 
-    TDSetting.loadSecondaryPreferences( this, mPrefHlp );
+    TDSetting.loadSecondaryPreferences( /* this, */ mPrefHlp );
     checkAutoPairing();
 
     // if ( TDLog.LOG_DEBUG ) {
@@ -516,6 +514,7 @@ public class TopoDroidApp extends Application
   {
     super.onCreate();
 
+    thisApp = this;
     TDInstance.setContext( getApplicationContext() );
 
     // require large memory pre Honeycomb
@@ -571,7 +570,7 @@ public class TopoDroidApp extends Application
 
       // TDLog.Profile("TDApp prefs");
       // LOADING THE SETTINGS IS RATHER EXPENSIVE !!!
-      TDSetting.loadPrimaryPreferences( this, mPrefHlp );
+      TDSetting.loadPrimaryPreferences( /* this, */ getResources(),  mPrefHlp );
 
       // TDLog.Profile("TDApp BT");
       mBTAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -1123,6 +1122,8 @@ public class TopoDroidApp extends Application
   String getCurrentOrLastStation( ) { return StationName.getCurrentOrLastStation( mData, TDInstance.sid); }
   String getFirstStation( ) { return StationName.getFirstStation( mData, TDInstance.sid); }
   private void resetCurrentOrLastStation( ) { StationName.resetCurrentOrLastStation( mData, TDInstance.sid); }
+  String getFirstPlotOrigin() { return ( TDInstance.sid < 0 )? null : mData.getFirstPlotOrigin( TDInstance.sid ); }
+
 
   // static long trobotmillis = 0L; // TROBOT_MILLIS
 
@@ -1737,14 +1738,13 @@ public class TopoDroidApp extends Application
   // @param azimuth clino : projected profile azimuth / section plane direction 
   // @param parent parent plot name
   // NOTE field "hide" is overloaded for x_sections with the parent plot name
-  long insert2dSection( long sid, String name, long type, String from, String to, float azimuth, float clino,
-                        String parent, String nickname )
+  long insert2dSection( long sid, String name, long type, String from, String to, float azimuth, float clino, String parent, String nickname )
   {
     // FIXME COSURVEY 2d sections are not forwarded
     // 0 0 mScaleFactor : offset and zoom
     String hide = ( parent == null )? TDString.EMPTY : parent;
     String nick = ( nickname == null )? TDString.EMPTY : nickname;
-    return mData.insertPlot( sid, -1L, name, type, 0L, from, to, 0, 0, TopoDroidApp.mScaleFactor, azimuth, clino, hide, nick, 0, false );
+    return mData.insertPlot( sid, -1L, name, type, 0L, from, to, 0, 0, mScaleFactor, azimuth, clino, hide, nick, 0, false );
   }
 
   // @param ctx       context
@@ -1909,15 +1909,17 @@ public class TopoDroidApp extends Application
 
   // ---------------------------------------------------------------
   // DISTOX PAIRING
+  // cannot be static because register/unregister are not static
 
-  PairingRequest mPairingRequest = null;
+  static PairingRequest mPairingRequest = null;
 
-  void checkAutoPairing()
+  static void checkAutoPairing()
   {
+    if ( thisApp == null ) return;
     if ( TDSetting.mAutoPair ) {
-      startPairingRequest();
+      thisApp.startPairingRequest();
     } else {
-      stopPairingRequest();
+      thisApp.stopPairingRequest();
     }
   }
 

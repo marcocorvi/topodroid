@@ -28,7 +28,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     private final DrawingCommandManager mCommand;
     private final DistoXNum mNum;
     private long mType;
-    private String mFullName;
+    private String mFullName; // "survey-plotX" name ;
     private String mExt; // extension
     private String filename = null;
     private boolean mToast;
@@ -59,21 +59,27 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
           filename = TDPath.getDxfFileWithExt( mFullName );
         } else if ( mExt.equals("svg") ) {
           filename = TDPath.getSvgFileWithExt( mFullName );
+        } else if ( mExt.equals("shp") ) {
+          filename = TDPath.getShpBasepath( mFullName );
         }
         // Log.v("DistoX", "Export to File: " + filename );
         if ( filename != null ) {
           // final FileOutputStream out = new FileOutputStream( filename );
           TDLog.Log( TDLog.LOG_IO, "export plot to file " + filename );
-          TDPath.checkPath( filename );
-          final FileWriter fw = new FileWriter( filename );
-          BufferedWriter bw = new BufferedWriter( fw );
-          if ( mExt.equals("dxf") ) {
-            DrawingDxf.write( bw, mNum, /* mUtil, */ mCommand, mType );
-          } else if ( mExt.equals("svg") ) {
-            DrawingSvg.write( bw, mNum, /* mUtil, */ mCommand, mType );
-          }
-          fw.flush();
-          fw.close();
+          if ( mExt.equals("shp") ) { 
+	    DrawingShp.write( filename, mCommand, mType );
+	  } else {
+            TDPath.checkPath( filename );
+            final FileWriter fw = new FileWriter( filename );
+            BufferedWriter bw = new BufferedWriter( fw );
+            if ( mExt.equals("dxf") ) {
+              DrawingDxf.write( bw, mNum, /* mUtil, */ mCommand, mType );
+            } else if ( mExt.equals("svg") ) {
+              DrawingSvg.write( bw, mNum, /* mUtil, */ mCommand, mType );
+            }
+            fw.flush();
+            fw.close();
+	  }
           return true;
         }
       } catch (Exception e) {

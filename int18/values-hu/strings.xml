@@ -600,7 +600,6 @@
     <string name="button_rename"    >Átnevez    </string>
     <!-- TODO string name="button_renumber"  >Renumber</string -->
     <!-- TODO string name="button_bedding"   >Bedding plane</string -->
-    <!-- TODO string name="button_highlight" >Highlight</string -->
     <string name="button_replace"   >Cserél   </string>
     <string name="button_reset"     >Visszaállít</string>
     <string name="button_left"      >BAL</string>
@@ -921,6 +920,7 @@
     <!-- TODO string name="title_settings_edit">TopoDroid editing settings</string -->
     <!-- TODO string name="title_settings_device">TopoDroid device settings</string -->
     <!-- TODO string name="title_settings_calib">TopoDroid calibration settings</string -->
+    <!-- TODO string name="title_settings_geek">TopoDroid geek flags settings</string -->
     <!-- TODO string name="title_settings_log">TopoDroid log settings</string -->
 
     <string name="title_shift">Váltás</string>
@@ -952,8 +952,9 @@
 
   <string name="pref_cat_calib">KALIBRÁCIÓK</string>
   <string name="pref_cat_device">ESZKÖZÖK</string>
+  <!-- TODO string name="pref_cat_geek">GEEK FLAGS</string -->
   <string name="pref_cat_sketch">3D MODELLEK</string>
-  <string name="pref_cat_log">NAPLÓZÁSOK</string>
+  <!-- UNUSED string name="pref_cat_log">NAPLÓZÁSOK</string -->
 
   <string name="pref_locale_title">Nyelv</string>
   <string name="pref_locale_summary">Nyelv</string>
@@ -1094,6 +1095,8 @@
   <!-- TODO string name="pref_section_splay_message">Over this angle with the section plane, splays are dashed</string -->
   <!-- TODO string name="pref_data_backup_title">Data auto-export</string -->
   <!-- TODO string name="pref_data_backup_summary">Automatic data export (need default format)</string -->
+  <!-- TODO string name="pref_fixed_origin_title">Sketch origin</string -->
+  <!-- TODO string name="pref_fixed_origin_summary">Fixed sketch origin</string -->
   <string name="pref_shared_xsections_title">Megosztott keresztszelvények</string>
   <string name="pref_shared_xsections_summary">Az adott mérési pont keresztszelvényei több vázlatban közösek</string>
   <string name="xsections_shared">Megosztott keresztszelvények</string>
@@ -1135,8 +1138,8 @@
   <string name="pref_vthr_title">Poligon függőleges küszöbértéke </string>
   <string name="pref_vthr_summary">Poligon lejtszögének küszöbértéke BJFL és NyKÉD között</string>
 
-  <string name="pref_plan_vthr_title">Segédmérések alaprajzi vetületének küszöbértéke</string>
-  <string name="pref_plan_vthr_message">Magas lejtszögértékű segédmérések elrejtése az alaprajzi vetületen</string>
+  <!-- UNUSED string name="pref_plan_vthr_title">Segédmérések alaprajzi vetületének küszöbértéke</string -->
+  <!-- UNUSED string name="pref_plan_vthr_message">Magas lejtszögértékű segédmérések elrejtése az alaprajzi vetületen</string -->
   <string name="pref_init_station_title">Kezdőpont neve</string>
   <string name="pref_init_station_summary">Alapértelmezett Kezdőpont név</string>
   <string name="pref_station_names_title">Mérési pontok nevei</string>
@@ -1162,6 +1165,8 @@
   <string name="pref_beep_volume_summary">Időzítő csipogásának hány százalékos a hangereje</string>
   <!-- TODO string name="pref_extend_frac_title">Fractional extend</string -->
   <!-- TODO string name="pref_extend_frac_summary">Whether "extend" can have a decimal part</string -->
+  <!-- TODO string name="pref_recent_shot_title">Recent shots</string -->
+  <!-- TODO string name="pref_recent_shot_summary">Whether to highlight recent shots</string -->
   <string name="pref_drawing_unit_title">Pont eszközök méretaránya</string>
   <string name="pref_drawing_unit_summary">Pont eszközök méretaránya</string>
   <string name="pref_unscaled_points_title">Pont jelkulcsok nem nagyíthatóak</string>
@@ -1194,6 +1199,14 @@
   <string name="pref_dot_radius_message">Zöld pontok mérete</string>
   <string name="pref_line_thickness_title">Vonalvastagság</string>
   <string name="pref_line_thickness_summary">Rajzolt vonal vastagsága</string>
+  <!-- TODO string name="pref_linesnap_title">Line/Area snap</string -->
+  <!-- TODO string name="pref_linesnap_summary">Enable line/area snap action</string -->
+  <!-- TODO string name="pref_linecurve_title">Smooth/Straigten segment</string -->
+  <!-- TODO string name="pref_linecurve_summary">Smooth/Straighten line segment action</string -->
+  <!-- TODO string name="pref_path_multiselect_title">Path multiselection</string -->
+  <!-- TODO string name="pref_path_multiselect_summary">Path multiselection action</string -->
+  <!-- TODO string name="pref_plane_interpolation_title">Plane interpolation</string -->
+  <!-- TODO string name="pref_plane_interpolation_summary">Plane interpolation action</string -->
   <string name="pref_fixed_thickness_title">Poligonvonal vastagsága</string>
   <string name="pref_fixed_thickness_summary">Poligonvonal vastagsága</string>
   <!-- UNUSED string name="pref_device_title">Device</string -->
@@ -1252,8 +1265,8 @@
   <!-- UNUSED string name="pref_sketchSectionStep_summary">Szelvények távolsága</string -->
   <string name="pref_sketchDeltaExtrude_title">Kihúzás mértéke</string>
   <string name="pref_sketchDeltaExtrude_summary">Kihúzási tényező</string>
-  <string name="pref_sketchCompassReadings_title">Tájoló leolvasások</string>
-  <string name="pref_sketchCompassReadings_summary">Leolvasások száma az átlagoláshoz</string>
+  <!-- UNUSED string name="pref_sketchCompassReadings_title">Tájoló leolvasások</string -->
+  <!-- UNUSED string name="pref_sketchCompassReadings_summary">Leolvasások száma az átlagoláshoz</string -->
 
   <string name="pref_unit_length_title">Hossz mértékegysége</string>
   <string name="pref_unit_length_summary">Hosszak megjelenítési egysége</string>

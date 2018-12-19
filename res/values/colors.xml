@@ -22,6 +22,7 @@
     <color name="pref_divider">#ff666666</color>
     <color name="pref_text">#ff33ccff</color>
     <color name="pref_category">#ff6699ff</color>
+    <color name="symbol_tab">#ff80cbc4</color>
 
     <color name="seekbar">#cccccccc</color>
 

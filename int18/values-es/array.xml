@@ -71,6 +71,7 @@
      <item name="csurvey">cSurvey</item>
      <item name="dxf">DXF</item>
      <item name="svg">SVG</item>
+     <item name="shp">SHP</item>
      <item name="png">PNG</item>
   </string-array>
 

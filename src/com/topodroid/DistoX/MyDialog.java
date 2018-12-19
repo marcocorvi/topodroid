@@ -21,7 +21,9 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 // import android.view.View.OnKeyListener;
 import android.view.KeyEvent;
+import android.view.Gravity;
 import android.view.Window;
+import android.view.WindowManager;
 
 class MyDialog extends Dialog
                       // implements View.OnClickListener
@@ -36,6 +38,14 @@ class MyDialog extends Dialog
     if ( help_resource != 0 ) {
       mHelpPage = mContext.getResources().getString( help_resource );
     }
+  }
+
+  void anchorTop()
+  {
+    Window wnd = getWindow();
+    WindowManager.LayoutParams wlp = wnd.getAttributes();
+    wlp.gravity = Gravity.TOP;
+    wnd.setAttributes( wlp );
   }
 
   // utility method for derived classes

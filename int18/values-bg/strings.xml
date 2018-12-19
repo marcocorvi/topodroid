@@ -600,7 +600,6 @@
     <string name="button_rename"    >Преименуване</string>
     <string name="button_renumber"  >Преномериране</string>
     <!-- TODO string name="button_bedding"   >Bedding plane</string -->
-    <!-- TODO string name="button_highlight" >Highlight</string -->
     <string name="button_replace"   >Подмяна   </string>
     <string name="button_reset"     >Нулиране   </string>
     <string name="button_left"      >Наляво</string>
@@ -923,6 +922,7 @@
     <!-- TODO string name="title_settings_edit">TopoDroid editing settings</string -->
     <!-- TODO string name="title_settings_device">TopoDroid device settings</string -->
     <!-- TODO string name="title_settings_calib">TopoDroid calibration settings</string -->
+    <!-- TODO string name="title_settings_geek">TopoDroid geek flags settings</string -->
     <!-- TODO string name="title_settings_log">TopoDroid log settings</string -->
 
     <string name="title_shift">Изместване</string>
@@ -954,8 +954,9 @@
 
   <string name="pref_cat_calib">Настройки Калибрация</string>
   <string name="pref_cat_device">Настройки DistoX</string>
+  <!-- TODO string name="pref_cat_geek">GEEK FLAGS</string -->
   <string name="pref_cat_sketch">Настройки 3D модел</string>
-  <string name="pref_cat_log">Настройки Лог файл</string>
+  <!-- UNUSED string name="pref_cat_log">Настройки Лог файл</string -->
 
   <string name="pref_locale_title">Език</string>
   <string name="pref_locale_summary">Език</string>
@@ -1092,6 +1093,8 @@
   <string name="pref_section_splay_message">Пунктирани, ако ъгъла от равнината е по-голям</string>
   <string name="pref_data_backup_title">Автоматично експортиране на измервания</string>
   <string name="pref_data_backup_summary">Автоматично експортиране на измервания (необходим е зададен формат)</string>
+  <!-- TODO string name="pref_fixed_origin_title">Sketch origin</string -->
+  <!-- TODO string name="pref_fixed_origin_summary">Fixed sketch origin</string -->
   <string name="pref_lrud_vertical_title">Мин. наклон Горе/Долу</string>
   <string name="pref_lrud_vertical_summary">Минимален наклон на стр. изм. Горе/Долу</string>
   <string name="pref_lrud_horizontal_title">Макс. наклон Ляво/Дясно</string>
@@ -1138,8 +1141,8 @@
   <string name="pref_vthr_title">Вертикална граница на отсечка</string>
   <string name="pref_vthr_summary">Граница за считане на мерки за Ляво/Дясно/Горе/Долу или Зап/Изт/Сев/Юг</string>
 
-  <string name="pref_plan_vthr_title">Скриване на наклонени измервания</string>
-  <string name="pref_plan_vthr_message">Странични измервания с по-голям наклон не се показват в скицата на плана</string>
+  <!-- UNUSED string name="pref_plan_vthr_title">Скриване на наклонени измервания</string -->
+  <!-- UNUSED string name="pref_plan_vthr_message">Странични измервания с по-голям наклон не се показват в скицата на плана</string -->
   <string name="pref_init_station_title">Начален репер</string>
   <string name="pref_init_station_summary">Име на първия репер в картировката</string>
   <string name="pref_station_names_title">Именоване на реперите</string>
@@ -1165,6 +1168,8 @@
   <string name="pref_beep_volume_summary">Сила на звука в проценти при измерване с таймер</string>
   <!-- TODO string name="pref_extend_frac_title">Fractional extend</string -->
   <!-- TODO string name="pref_extend_frac_summary">Whether "extend" can have a decimal part</string -->
+  <!-- TODO string name="pref_recent_shot_title">Recent shots</string -->
+  <!-- TODO string name="pref_recent_shot_summary">Whether to highlight recent shots</string -->
   <string name="pref_drawing_unit_title">Размер на елемент "точка"</string>
   <string name="pref_drawing_unit_summary">Размер на нарисуван елемент тип "точка"</string>
   <string name="pref_unscaled_points_title">Фиксиран размер на точките</string>
@@ -1197,6 +1202,14 @@
   <string name="pref_dot_radius_message">Размер на зелена точка при избор на елементи в скицата</string>
   <string name="pref_line_thickness_title">Широчина на линия</string>
   <string name="pref_line_thickness_summary">Широчина на линията за рисуване</string>
+  <!-- TODO string name="pref_linesnap_title">Line/Area snap</string -->
+  <!-- TODO string name="pref_linesnap_summary">Enable line/area snap action</string -->
+  <!-- TODO string name="pref_linecurve_title">Smooth/Straigten segment</string -->
+  <!-- TODO string name="pref_linecurve_summary">Smooth/Straighten line segment action</string -->
+  <!-- TODO string name="pref_path_multiselect_title">Path multiselection</string -->
+  <!-- TODO string name="pref_path_multiselect_summary">Path multiselection action</string -->
+  <!-- TODO string name="pref_plane_interpolation_title">Plane interpolation</string -->
+  <!-- TODO string name="pref_plane_interpolation_summary">Plane interpolation action</string -->
   <string name="pref_fixed_thickness_title">Широчина на линия от антената</string>
   <string name="pref_fixed_thickness_summary">Широчина на линия от антената</string>
   <!-- UNUSED string name="pref_device_title">Устройство</string -->
@@ -1255,8 +1268,8 @@
   <!-- UNUSED string name="pref_sketchSectionStep_summary">Разстояние между секциите</string -->
   <string name="pref_sketchDeltaExtrude_title">Екструд. мащаб</string>
   <string name="pref_sketchDeltaExtrude_summary">Мащабиращ фактор за екструдиране</string>
-  <string name="pref_sketchCompassReadings_title">Отчет на компаса</string>
-  <string name="pref_sketchCompassReadings_summary">Брой отчитания за усредняване</string>
+  <!-- UNUSED string name="pref_sketchCompassReadings_title">Отчет на компаса</string -->
+  <!-- UNUSED string name="pref_sketchCompassReadings_summary">Брой отчитания за усредняване</string -->
 
   <string name="pref_unit_length_title">Мерни единици за дължина</string>
   <string name="pref_unit_length_summary">Мерни единици за дължина</string>

@@ -597,7 +597,6 @@
     <string name="button_rename"    >Renombrar </string>
     <!-- TODO string name="button_renumber"  >Renumber</string -->
     <!-- TODO string name="button_bedding"   >Bedding plane</string -->
-    <!-- TODO string name="button_highlight" >Highlight</string -->
     <string name="button_replace"   >Reemplazar</string>
     <string name="button_reset"     >Resetear  </string>
     <string name="button_left"      >Izquierdo</string>
@@ -923,6 +922,7 @@
     <!-- TODO string name="title_settings_edit">TopoDroid editing settings</string -->
     <!-- TODO string name="title_settings_device">TopoDroid device settings</string -->
     <!-- TODO string name="title_settings_calib">TopoDroid calibration settings</string -->
+    <!-- TODO string name="title_settings_geek">TopoDroid geek flags settings</string -->
     <!-- TODO string name="title_settings_log">TopoDroid log settings</string -->
 
     <string name="title_shift">Cambio</string>
@@ -960,8 +960,9 @@
 
   <string name="pref_cat_calib">Ajustes de calibración</string>
   <string name="pref_cat_device">Ajustes de distoX</string>
+  <!-- TODO string name="pref_cat_geek">GEEK FLAGS</string -->
   <!-- NO string name="pref_cat_sketch">Opciones de dibujo</string -->
-  <string name="pref_cat_log">Ajustes de dibujo</string>
+  <!-- UNUSED string name="pref_cat_log">Ajustes de dibujo</string -->
 
 
   <string name="pref_locale_title">Idioma</string>
@@ -1103,6 +1104,8 @@
   <!-- TODO string name="pref_section_splay_message">Over this angle with the section plane, splays are dashed</string -->
   <string name="pref_data_backup_title">Autoexportación de datos</string>
   <string name="pref_data_backup_summary">Exportación automática de datos (necesita formato predeterminado)</string>
+  <!-- TODO string name="pref_fixed_origin_title">Sketch origin</string -->
+  <!-- TODO string name="pref_fixed_origin_summary">Fixed sketch origin</string -->
   <string name="pref_shared_xsections_title">Secciones x compartidas</string>
   <string name="pref_shared_xsections_summary">At-estación x-secciones compartidas entre dibujos</string>
   <string name="xsections_shared">Secciones-X compartidas</string>
@@ -1145,8 +1148,8 @@
   <string name="pref_vthr_title">Precisión toma vertical</string>
   <string name="pref_vthr_summary">Cáculo del límite de la toma vertical</string>
 
-  <string name="pref_plan_vthr_title">Límite visual vertical</string>
-  <string name="pref_plan_vthr_message">límite vertical de la visual en planta</string>
+  <!-- UNUSED string name="pref_plan_vthr_title">Límite visual vertical</string -->
+  <!-- UNUSED string name="pref_plan_vthr_message">límite vertical de la visual en planta</string -->
   <string name="pref_init_station_title">Estación de inicio</string>
   <string name="pref_init_station_summary">Estación inicio por defecto</string>
   <string name="pref_station_names_title">Nombre de estación</string>
@@ -1172,6 +1175,8 @@
   <string name="pref_beep_volume_summary">Nivel %% del volumen del pitido del contador</string>
   <!-- TODO string name="pref_extend_frac_title">Fractional extend</string -->
   <!-- TODO string name="pref_extend_frac_summary">Whether "extend" can have a decimal part</string -->
+  <!-- TODO string name="pref_recent_shot_title">Recent shots</string -->
+  <!-- TODO string name="pref_recent_shot_summary">Whether to highlight recent shots</string -->
   <string name="pref_drawing_unit_title">Tamaño de los símbolos</string>
   <string name="pref_drawing_unit_summary">Escala de símbolos del dibujo</string>
   <string name="pref_unscaled_points_title">Símbolos de punto sin zoom</string>
@@ -1204,6 +1209,14 @@
   <string name="pref_dot_radius_message">Tamaño de los puntos verdes (Nodos)</string>
   <string name="pref_line_thickness_title">Grosor de la línea</string>
   <string name="pref_line_thickness_summary">Grosor de la línea</string>
+  <!-- TODO string name="pref_linesnap_title">Line/Area snap</string -->
+  <!-- TODO string name="pref_linesnap_summary">Enable line/area snap action</string -->
+  <!-- TODO string name="pref_linecurve_title">Smooth/Straigten segment</string -->
+  <!-- TODO string name="pref_linecurve_summary">Smooth/Straighten line segment action</string -->
+  <!-- TODO string name="pref_path_multiselect_title">Path multiselection</string -->
+  <!-- TODO string name="pref_path_multiselect_summary">Path multiselection action</string -->
+  <!-- TODO string name="pref_plane_interpolation_title">Plane interpolation</string -->
+  <!-- TODO string name="pref_plane_interpolation_summary">Plane interpolation action</string -->
   <string name="pref_fixed_thickness_title">Grosor de la línea topografía</string>
   <string name="pref_fixed_thickness_summary">Grosor de la línea topografía</string>
   <!-- UNUSED string name="pref_device_title">Dispositivo</string -->
@@ -1262,8 +1275,8 @@
   <!-- UNUSED string name="pref_sketchSectionStep_summary">Distancia entre las secciones</string -->
   <string name="pref_sketchDeltaExtrude_title">Extrusión delta</string>
   <string name="pref_sketchDeltaExtrude_summary">Extrusión delta</string>
-  <string name="pref_sketchCompassReadings_title">Lecturas de la brújula</string>
-  <string name="pref_sketchCompassReadings_summary">Promedio de lecturas</string>
+  <!-- UNUSED string name="pref_sketchCompassReadings_title">Lecturas de la brújula</string -->
+  <!-- UNUSED string name="pref_sketchCompassReadings_summary">Promedio de lecturas</string -->
 
   <string name="pref_unit_length_title">Unidades de longitud</string>
   <string name="pref_unit_length_summary">Visualizar unidades de longitud</string>

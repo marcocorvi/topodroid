@@ -84,49 +84,50 @@ class DrawingCommandManager
   private boolean mLandscape = false;
 
   // PATH_MULTISELECT
-  private int mMultiselection = -1;  // current multiselection type (DRAWING_PATH_POINT / LINE / AREA
+  private int mMultiselectionType = -1;  // current multiselection type (DRAWING_PATH_POINT / LINE / AREA
   List< DrawingPath > mMultiselected;
-
-  boolean isMultiselection() { return mMultiselection > 0; }
-  int getMultiselection() { return mMultiselection; }
+  boolean isMultiselection = false; 
+  int getMultiselectionType() { return mMultiselectionType; }
 
   void resetMultiselection()
   {
     // Log.v("DistoX", "reset Multi Selection" );
-    mMultiselection = -1;
+    mMultiselectionType  = -1;
+    isMultiselection = false;
     synchronized( TDPath.mSelectionLock ) { mMultiselected.clear(); }
   }
 
-  boolean startMultiselection()
+  void startMultiselection()
   {
     // resetMultiselection();
-    if ( mMultiselection > 0 ) return false;
+    if ( isMultiselection ) return; // false;
     SelectionPoint sp = mSelected.mHotItem;
-    if ( sp == null ) return false;
+    if ( sp == null ) return; // false;
     DrawingPath path = sp.mItem;
-    if ( path == null ) return false;
+    if ( path == null ) return; // false;
     int type = path.mType;
-    if ( type < DrawingPath.DRAWING_PATH_POINT || type > DrawingPath.DRAWING_PATH_AREA ) return false;
-    mMultiselection = type;
+    if ( type < DrawingPath.DRAWING_PATH_POINT || type > DrawingPath.DRAWING_PATH_AREA ) return; // false;
+    mMultiselectionType   = type;
+    isMultiselection = true;
     addMultiselection( path );
-    // Log.v("DistoX", "start Multi Selection " + mMultiselection + " " + mMultiselected.size() );
-    return true;
+    // Log.v("DistoX", "start Multi Selection " + mMultiselectionType + " " + mMultiselected.size() );
+    // return true;
   }
 
   private void addMultiselection( DrawingPath path )
   {
-    if ( path.mType == mMultiselection ) {
+    if ( path.mType == mMultiselectionType ) {
       synchronized( TDPath.mSelectionLock ) { mMultiselected.add( path ); }
     }
-    // Log.v("DistoX", "add Multi Selection " + mMultiselection + " " + mMultiselected.size() );
+    // Log.v("DistoX", "add Multi Selection " + mMultiselectionType + " " + mMultiselected.size() );
   }
 
   // MULTISELECTION ACTIONS
-
-  // this clears the Multiselected
   void deleteMultiselection()
   {
-    mMultiselection = -1;
+    // if ( ! isMultiselection ) return;
+    mMultiselectionType  = -1;
+    isMultiselection = false;
     synchronized ( TDPath.mSelectionLock ) {
       for ( DrawingPath path : mMultiselected ) {
         mSelection.removePath( path );
@@ -142,6 +143,7 @@ class DrawingCommandManager
 
   void decimateMultiselection()
   {
+    // if ( ! isMultiselection ) return;
     synchronized ( TDPath.mSelectionLock ) {
       for ( DrawingPath path : mMultiselected ) {
         mSelection.removePath( path );
@@ -154,6 +156,52 @@ class DrawingCommandManager
       }
       for ( DrawingPath path : mMultiselected ) {
         mSelection.insertPath( path );
+      }
+    }
+  }
+
+  void joinMultiselection( float dmin )
+  {
+    // if ( ! isMultiselection ) return;
+    synchronized ( TDPath.mSelectionLock ) {
+      synchronized( mCurrentStack ) {
+	int k0 = mMultiselected.size();
+        for ( int k1=0; k1<k0; ++k1 ) {
+          DrawingPointLinePath l1 = (DrawingPointLinePath)( mMultiselected.get(k1) );
+	  LinePoint lp0 = null;
+	  LinePoint lp9 = null;
+	  float d0 = dmin;
+          float d9 = dmin;
+          for ( int k2=k1+1; k2<k0; ++k2 ) {
+            DrawingPointLinePath l2 = (DrawingPointLinePath)( mMultiselected.get(k2) );
+            float d1 = l1.mFirst.distance( l2.mFirst ); // distance from first
+            float d2 = l1.mFirst.distance( l2.mLast );  // distance from last
+	    if ( d1 < d2 ) {
+              if ( d1 < d0 ) { d0 = d1; lp0 = l2.mFirst; }
+	    } else {
+              if ( d2 < d0 ) { d0 = d2; lp0 = l2.mLast; }
+            }
+            d1 = l1.mLast.distance( l2.mFirst );
+            d2 = l1.mLast.distance( l2.mLast );
+	    if ( d1 < d2 ) {
+              if ( d1 < d9 ) { d9 = d1; lp9 = l2.mFirst; }
+	    } else {
+              if ( d2 < d9 ) { d9 = d2; lp9 = l2.mLast; }
+            }
+	  }
+	  boolean retrace = false;
+	  if ( lp0 != null ) {
+            l1.mFirst.shiftBy( lp0.x - l1.mFirst.x, lp0.y - l1.mFirst.y );
+	    retrace = true;
+	  }
+	  if ( lp9 != null ) {
+            l1.mLast.shiftBy( lp9.x - l1.mLast.x, lp9.y - l1.mLast.y );
+	    retrace = true;
+	  }
+	  if ( retrace ) {
+            l1.retracePath();
+	  }
+        }
       }
     }
   }
@@ -459,7 +507,8 @@ class DrawingCommandManager
       mSelected.clear();
       // PATH_MULTISELECT
       mMultiselected.clear();
-      mMultiselection  = -1;
+      mMultiselectionType  = -1;
+      isMultiselection = false;
     }
   }
 
@@ -698,12 +747,12 @@ class DrawingCommandManager
    *
    * N.B. mSelection cannot be null here
    */
-  int eraseAt( float x, float y, float zoom, EraseCommand eraseCmd, int erase_mode, float erase_size ) 
+  void eraseAt( float x, float y, float zoom, EraseCommand eraseCmd, int erase_mode, float erase_size ) 
   {
     SelectionSet sel = new SelectionSet();
     float erase_radius = TDSetting.mCloseCutoff + erase_size / zoom;
-    mSelection.selectAt( sel, x, y, erase_radius, Drawing.FILTER_ALL, false, false, false, null, null );
-    int ret = 0;
+    mSelection.selectAt( sel, x, y, erase_radius, Drawing.FILTER_ALL, false, false, false, null );
+    // int ret = 0;
     if ( sel.size() > 0 ) {
       synchronized( mCurrentStack ) {
         for ( SelectionPoint pt : sel.mPoints ) {
@@ -722,8 +771,8 @@ class DrawingCommandManager
               int size = line.size();
               if ( size <= 2 || ( size == 3 && pt.mPoint == first.mNext ) ) // 2-point line OR erase midpoint of a 3-point line 
               {
-                TDLog.Log( TDLog.LOG_PLOT, remove_line );
-                ret = 2; 
+                // TDLog.Log( TDLog.LOG_PLOT, remove_line );
+                // ret = 2; 
                 eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
                 mCurrentStack.remove( path );
                 synchronized ( TDPath.mSelectionLock ) {
@@ -732,8 +781,8 @@ class DrawingCommandManager
               } 
               else if ( pt.mPoint == first ) // erase first point of the multi-point line (2016-05-14)
               {
-                TDLog.Log( TDLog.LOG_PLOT, remove_line_first );
-                ret = 3;
+                // TDLog.Log( TDLog.LOG_PLOT, remove_line_first );
+                // ret = 3;
                 eraseCmd.addAction( EraseAction.ERASE_MODIFY, path );
                 // LinePoint lp = points.get(0);
                 LinePoint lp = first;
@@ -746,8 +795,8 @@ class DrawingCommandManager
               }
               else if ( pt.mPoint == first.mNext ) // erase second point of the multi-point line
               {
-                TDLog.Log( TDLog.LOG_PLOT, remove_line_second );
-                ret = 3;
+                // TDLog.Log( TDLog.LOG_PLOT, remove_line_second );
+                // ret = 3;
                 eraseCmd.addAction( EraseAction.ERASE_MODIFY, path );
                 // LinePoint lp = points.get(0);
                 LinePoint lp = first;
@@ -761,8 +810,8 @@ class DrawingCommandManager
               } 
               else if ( pt.mPoint == last.mPrev ) // erase second-to-last of multi-point line
               {
-                TDLog.Log( TDLog.LOG_PLOT, remove_line_last );
-                ret = 4;
+                // TDLog.Log( TDLog.LOG_PLOT, remove_line_last );
+                // ret = 4;
                 eraseCmd.addAction( EraseAction.ERASE_MODIFY, path );
                 // LinePoint lp = points.get(size-1);
                 LinePoint lp = last;
@@ -774,8 +823,8 @@ class DrawingCommandManager
                 }
                 line.retracePath();
               } else { // erase a point in the middle of multi-point line
-                TDLog.Log( TDLog.LOG_PLOT, remove_line_middle );
-                ret = 5;
+                // TDLog.Log( TDLog.LOG_PLOT, remove_line_middle );
+                // ret = 5;
                 doSplitLine( line, pt.mPoint, eraseCmd );
                 break; // IMPORTANT break the for-loop
               }
@@ -784,16 +833,16 @@ class DrawingCommandManager
             if ( erase_mode == Drawing.FILTER_ALL || erase_mode == Drawing.FILTER_AREA ) {
               DrawingAreaPath area = (DrawingAreaPath)path;
               if ( area.size() <= 3 ) {
-                TDLog.Log( TDLog.LOG_PLOT, remove_area );
-                ret = 6;
+                // TDLog.Log( TDLog.LOG_PLOT, remove_area );
+                // ret = 6;
                 eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
                 mCurrentStack.remove( path );
                 synchronized ( TDPath.mSelectionLock ) {
                   mSelection.removePath( path );
                 }
               } else {
-                TDLog.Log( TDLog.LOG_PLOT, remove_area_point );
-                ret = 7;
+                // TDLog.Log( TDLog.LOG_PLOT, remove_area_point );
+                // ret = 7;
                 eraseCmd.addAction( EraseAction.ERASE_MODIFY, path );
                 doRemoveLinePoint( area, pt.mPoint, pt );
                 area.retracePath();
@@ -801,7 +850,7 @@ class DrawingCommandManager
             }
           } else if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
             if ( erase_mode == Drawing.FILTER_ALL || erase_mode == Drawing.FILTER_POINT ) {
-              ret = 1;
+              // ret = 1;
               eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
               mCurrentStack.remove( path );
               synchronized ( TDPath.mSelectionLock ) {
@@ -813,7 +862,7 @@ class DrawingCommandManager
       }
     }
     // checkLines();
-    return ret;
+    // return ret;
   }
 
   /* Split the line at the point lp
@@ -1245,7 +1294,7 @@ class DrawingCommandManager
     // checkLines();
   }
 
-  boolean deleteSectionPoint( String scrap_name, EraseCommand cmd )
+  void deleteSectionPoint( String scrap_name, EraseCommand cmd )
   {
     int index = BrushManager.mPointLib.mPointSectionIndex;
     synchronized( mCurrentStack ) {
@@ -1258,7 +1307,7 @@ class DrawingCommandManager
               // FIXME GET_OPTION
               if ( scrap_name.equals( dpp.getOption( "-scrap" ) ) ) {
                 deletePath( path, cmd );
-                return true;
+                return; // true;
               }
               // String vals[] = dpp.mOptions.split(" ");
               // int len = vals.length;
@@ -1273,7 +1322,7 @@ class DrawingCommandManager
         }
       }
     }
-    return false;
+    // return false;
   }
 
   private void union( RectF b0, RectF b1 )
@@ -1563,21 +1612,8 @@ class DrawingCommandManager
     // checkLines();
   }
 
-  // check whether an array of stations name contains the FROM station of the path's block
-  // used to decide whether to display splays
-  // @param p         drawing path 
-  // @param stations  array of station names
-  private boolean containsStation( DrawingPath p, ArrayList<String> stations ) 
-  {
-    DBlock blk = p.mBlock;
-    if ( blk == null ) return false;
-    String station = blk.mFrom;
-    if ( station == null || station.length() == 0 ) return false;
-    return stations.contains( station );
-  }
-
   // N.B. doneHandler is not used
-  void executeAll( Canvas canvas, float zoom, ArrayList<String> splays_on, ArrayList<String> splays_off )
+  void executeAll( Canvas canvas, float zoom, DrawingStationSplay station_splay )
   {
     if ( canvas == null ) {
       TDLog.Error( "drawing executeAll: null canvas");
@@ -1665,13 +1701,13 @@ class DrawingCommandManager
           final Iterator i = mSplaysStack.iterator();
           while ( i.hasNext() ){
             final DrawingPath path = (DrawingPath) i.next();
-	    if ( ! containsStation( path, splays_off ) ) path.draw( canvas, mMatrix, mScale, mBBox );
+	    if ( ! station_splay.isStationOFF( path ) ) path.draw( canvas, mMatrix, mScale, mBBox );
 	  }
-	} else if ( latest || splays_on.size() > 0 ) { // draw the splays-on and/or the lastest
+	} else if ( latest || station_splay.hasSplaysON() ) { // draw the splays-on and/or the lastest
           final Iterator i = mSplaysStack.iterator();
           while ( i.hasNext() ){
             final DrawingPath path = (DrawingPath) i.next();
-            if ( containsStation( path, splays_on ) || path.isBlockRecent() ) path.draw( canvas, mMatrix, mScale, mBBox );
+            if ( station_splay.isStationON( path ) || path.isBlockRecent() ) path.draw( canvas, mMatrix, mScale, mBBox );
 	  }
 	}
       }
@@ -1768,9 +1804,9 @@ class DrawingCommandManager
 	      if ( type == DrawingPath.DRAWING_PATH_SPLAY ) {
 		// FIXME_LATEST latest splays
                 if ( splays ) {
-                  if ( containsStation( pt.mItem, splays_off ) ) continue;
+                  if ( station_splay.isStationOFF( pt.mItem ) ) continue;
 		} else {
-                  if ( ! containsStation( pt.mItem, splays_on ) ) continue;
+                  if ( ! station_splay.isStationON( pt.mItem ) ) continue;
 		}
 	      }
               Path path = new Path();
@@ -1803,29 +1839,28 @@ class DrawingCommandManager
       // synchronized( TDPath.mSelectedLock ) {
       synchronized( TDPath.mSelectionLock ) {
 	// PATH_SELECTION
-	if ( mMultiselection == DrawingPath.DRAWING_PATH_POINT ) {
-          float radius = 4*TDSetting.mDotRadius/zoom;
+	if ( isMultiselection ) {
           Path path = new Path();
-	  for ( DrawingPath item : mMultiselected ) {
-            float x = item.cx;
-            float y = item.cy;
-            path.addCircle( x, y, radius, Path.Direction.CCW );
-          }
-          path.transform( mMatrix );
-          canvas.drawPath( path, BrushManager.fixedYellowPaint );
-	} else if ( mMultiselection == DrawingPath.DRAWING_PATH_LINE || mMultiselection == DrawingPath.DRAWING_PATH_LINE ) {
-          Path path = new Path();
-	  for ( DrawingPath item : mMultiselected ) {
-	    DrawingPointLinePath line = (DrawingPointLinePath) item;
-            LinePoint lp = line.mFirst;
-            path.moveTo( lp.x, lp.y );
-            for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
-              if ( lp.has_cp ) {
-                path.cubicTo( lp.x1, lp.y1, lp.x2, lp.y2, lp.x, lp.y );
-              } else {
-                path.lineTo( lp.x, lp.y );
-              }
+	  if ( mMultiselectionType == DrawingPath.DRAWING_PATH_POINT ) {
+            float radius = 4*TDSetting.mDotRadius/zoom;
+	    for ( DrawingPath item : mMultiselected ) {
+              float x = item.cx;
+              float y = item.cy;
+              path.addCircle( x, y, radius, Path.Direction.CCW );
             }
+	  } else { // if ( mMultiselectionType == DrawingPath.DRAWING_PATH_LINE || mMultiselectionType == DrawingPath.DRAWING_PATH_LINE ) 
+	    for ( DrawingPath item : mMultiselected ) {
+	      DrawingPointLinePath line = (DrawingPointLinePath) item;
+              LinePoint lp = line.mFirst;
+              path.moveTo( lp.x, lp.y );
+              for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
+                if ( lp.has_cp ) {
+                  path.cubicTo( lp.x1, lp.y1, lp.x2, lp.y2, lp.x, lp.y );
+                } else {
+                  path.lineTo( lp.x, lp.y );
+                }
+              }
+	    }
 	  }
           path.transform( mMatrix );
           canvas.drawPath( path, BrushManager.fixedYellowPaint );
@@ -2108,7 +2143,7 @@ class DrawingCommandManager
   }
 
     
-  SelectionSet getItemsAt( float x, float y, float zoom, int mode, float size, ArrayList<String> splays_on, ArrayList<String> splays_off )
+  SelectionSet getItemsAt( float x, float y, float zoom, int mode, float size, DrawingStationSplay station_splay )
   {
     float radius = TDSetting.mCloseCutoff + size/zoom; // TDSetting.mSelectness / zoom;
     // Log.v( "DistoX", "getItemAt " + x + " " + y + " zoom " + zoom + " mode " + mode + " size " + size + " " + radius );
@@ -2120,7 +2155,7 @@ class DrawingCommandManager
     synchronized ( TDPath.mSelectionLock ) {
       mSelected.clear();
       // FIXME_LATEST latests splays are not considered in the selection
-      mSelection.selectAt( mSelected, x, y, radius, mode, legs, splays, stations, splays_on, splays_off );
+      mSelection.selectAt( mSelected, x, y, radius, mode, legs, splays, stations, station_splay ); 
       if ( mSelected.mPoints.size() > 0 ) {
         // Log.v("DistoX", "seleceted " + mSelected.mPoints.size() + " points " );
         mSelected.nextHotItem();
@@ -2135,7 +2170,7 @@ class DrawingCommandManager
     // Log.v( "DistoX", "getItemAt " + x + " " + y + " zoom " + zoom + " mode " + mode + " size " + size + " " + radius );
     synchronized ( TDPath.mSelectionLock ) {
       mSelected.clear();
-      mSelection.selectAt( mSelected, x, y, radius, mMultiselection );
+      mSelection.selectAt( mSelected, x, y, radius, mMultiselectionType );
       for ( SelectionPoint sp : mSelected.mPoints ) {
         addMultiselection( sp.mItem );
       }
@@ -2179,7 +2214,7 @@ class DrawingCommandManager
   //   return TDMath.abs( (q.x-p0.x)*y01 - (q.y-p0.y)*x01 ) / TDMath.sqrt( x01*x01 + y01*y01 );
   // }
       
-  boolean moveHotItemToNearestPoint()
+  boolean moveHotItemToNearestPoint( float dmin )
   {
     SelectionPoint sp = mSelected.mHotItem;
     if ( sp == null ) return false;
@@ -2194,7 +2229,7 @@ class DrawingCommandManager
     } else {
       return false;
     }
-    SelectionPoint spmin = mSelection.getNearestPoint( sp, x, y, 10f );
+    SelectionPoint spmin = mSelection.getNearestPoint( sp, x, y, dmin );
 
     if ( spmin != null ) {
       if ( spmin.type() == DrawingPath.DRAWING_PATH_LINE || spmin.type() == DrawingPath.DRAWING_PATH_AREA ) {
@@ -2285,7 +2320,7 @@ class DrawingCommandManager
   //       -1 no hot item
   //       -2 not line
   //       -3 no splay
-  int snapHotItemToNearestSplays( float dthr )
+  int snapHotItemToNearestSplays( float dthr, DrawingStationSplay station_splay )
   {
     SelectionPoint sp = mSelected.mHotItem;
     if ( sp == null ) return -1;
@@ -2294,9 +2329,16 @@ class DrawingCommandManager
     DrawingPath item = sp.mItem;
     DrawingLinePath line = (DrawingLinePath)item;
 
+    boolean splays = (mDisplayMode & DisplayMode.DISPLAY_SPLAY  ) != 0;
+    boolean latest = (mDisplayMode & DisplayMode.DISPLAY_LATEST ) != 0;
     // nearby splays are the splays that get close enough (dthr) to the line
     ArrayList< NearbySplay > nearby_splays = new ArrayList<>();
     for ( DrawingPath fxd : mSplaysStack ) {
+      if ( splays ) {
+	if ( station_splay.isStationOFF( fxd ) ) continue;
+      } else {
+	if ( ! ( station_splay.isStationON( fxd ) || ( latest && fxd.isBlockRecent() ) ) ) continue;
+      }
       float x = fxd.x2;
       float y = fxd.y2;
       float dmin = dthr;

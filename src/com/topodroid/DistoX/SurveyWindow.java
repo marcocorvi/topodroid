@@ -199,7 +199,7 @@ public class SurveyWindow extends Activity
 
     mApp = (TopoDroidApp)getApplication();
     mApp_mData = TopoDroidApp.mData;
-    mApp.mSurveyWindow = this;
+    TopoDroidApp.mSurveyWindow = this;
     mActivity = this;
     mNameColor = getResources().getColor( R.color.textfixed );
 
@@ -478,6 +478,7 @@ public class SurveyWindow extends Activity
   {
     if ( TDInstance.sid < 0 ) return;
     String survey = TDInstance.survey;
+    TDPath.deleteShpDirs( survey, mApp_mData.selectPlotNames( TDInstance.sid ) );
     TDPath.deleteSurveyFiles( survey );
 
     for ( int status = 0; status < 2; ++status ) {

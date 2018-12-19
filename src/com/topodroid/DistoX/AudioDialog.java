@@ -195,7 +195,7 @@ class AudioDialog extends MyDialog
   private void startRec()
   {
     try {
-      if ( mParent != null ) mParent.startRecordAudio( mBid );
+      // if ( mParent != null ) mParent.startRecordAudio( mBid ); // startRecordAudio has empty implementation
       mMR = new MediaRecorder();
       mMR.setAudioSource(MediaRecorder.AudioSource.MIC);
       mMR.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);

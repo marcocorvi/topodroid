@@ -61,7 +61,11 @@ class ShotDisplayDialog extends MyDialog
 
         mCBids.setChecked(     mParent.getShowIds() );
         mCBsplay.setChecked( ! mParent.mFlagSplay );
-        mCBlatest.setChecked(  mParent.mFlagLatest );
+	if ( TDSetting.mShotRecent ) {
+          mCBlatest.setChecked(  mParent.mFlagLatest );
+	} else {
+	  mCBlatest.setVisibility( View.GONE );
+	}
         mCBblank.setChecked( ! mParent.mFlagBlank );
         mCBleg.setChecked(   ! mParent.mFlagLeg );
 
@@ -97,7 +101,7 @@ class ShotDisplayDialog extends MyDialog
     {
       mParent.setShowIds( mCBids.isChecked() );
       mParent.mFlagSplay = ! mCBsplay.isChecked();
-      mParent.mFlagLatest =  mCBlatest.isChecked();
+      if ( TDSetting.mShotRecent ) mParent.mFlagLatest =  mCBlatest.isChecked();
       mParent.mFlagBlank = ! mCBblank.isChecked();
       mParent.mFlagLeg   = ! mCBleg.isChecked();
       mParent.updateDisplay( );

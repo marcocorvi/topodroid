@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+/* ---- IF_COSURVEY
+ 
 import java.util.Set;
 // import java.util.List;
 // import java.util.ArrayList;
@@ -39,7 +41,6 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import android.bluetooth.BluetoothDevice;
 
-/* ---- IF_COSURVEY
 
 class ConnectDialog extends MyDialog
                            implements View.OnClickListener

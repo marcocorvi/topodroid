@@ -12,7 +12,7 @@
 package com.topodroid.DistoX;
 
 import android.content.Context;
-import android.content.res.Resources;
+// import android.content.res.Resources;
 
 import android.widget.TextView;
 import android.widget.EditText;
@@ -44,6 +44,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
 		      , OnKeyListener
 {
   TDPrefHelper helper = null;
+  Context context;
 
   static final int FORWARD  = 0;
   static final int BUTTON   = 1;
@@ -78,12 +79,13 @@ class TDPref implements AdapterView.OnItemSelectedListener
   View mView = null;
   EditText mEdittext = null;
 
-  private TDPref( int cat, String nm, int wt, int tit, int sum, int lvl, int pt, String val, String def_val, Resources res, TDPrefHelper hlp )
+  private TDPref( int cat, String nm, int wt, int tit, int sum, int lvl, int pt, String val, String def_val, Context ctx, TDPrefHelper hlp )
   {
     name  = nm;
     wtype = wt;
-    title   = res.getString( tit );
-    summary = (sum >= 0)? res.getString( sum ) : null;
+    context = ctx;
+    title   = ctx.getResources().getString( tit );
+    summary = (sum >= 0)? ctx.getResources().getString( sum ) : null;
     level = lvl;
     ptype = pt;
     value = val;
@@ -262,37 +264,37 @@ class TDPref implements AdapterView.OnItemSelectedListener
   // -------------------------------------------------------------------------
   // creators
   
-  static private TDPref makeFwd( int cat, String nm, int tit, int lvl, Resources res, TDPrefHelper hlp )
+  static private TDPref makeFwd( int cat, String nm, int tit, int lvl, Context ctx, TDPrefHelper hlp )
   { 
-    return new TDPref( cat, nm, FORWARD, tit, -1, lvl, PREF, null, null, res, hlp );
+    return new TDPref( cat, nm, FORWARD, tit, -1, lvl, PREF, null, null, ctx, hlp );
   }
 
-  static private TDPref makeBtn( int cat, String nm, int tit, int sum, int lvl, String def_val, Resources res, TDPrefHelper hlp )
+  static private TDPref makeBtn( int cat, String nm, int tit, int sum, int lvl, String def_val, Context ctx, TDPrefHelper hlp )
   { 
     String val = hlp.getString( nm, def_val );
-    return new TDPref( cat, nm, BUTTON, tit, sum, lvl, PREF, val, def_val, res, hlp );
+    return new TDPref( cat, nm, BUTTON, tit, sum, lvl, PREF, val, def_val, ctx, hlp );
   }
 
-  static private TDPref makeCbx( int cat, String nm, int tit, int sum, int lvl, boolean def_val, Resources res, TDPrefHelper hlp )
+  static private TDPref makeCbx( int cat, String nm, int tit, int sum, int lvl, boolean def_val, Context ctx, TDPrefHelper hlp )
   { 
     boolean val = hlp.getBoolean( nm, def_val );
-    TDPref ret = new TDPref( cat, nm, CHECKBOX, tit, sum, lvl, BOOLEAN, (val? "true" : "false"), (def_val? "true" : "false"), res, hlp );
+    TDPref ret = new TDPref( cat, nm, CHECKBOX, tit, sum, lvl, BOOLEAN, (val? "true" : "false"), (def_val? "true" : "false"), ctx, hlp );
     ret.bvalue = val;
     return ret;
   }
 
-  static private TDPref makeCbx( int cat, String nm, int tit, int sum, int lvl, String def_str, Resources res, TDPrefHelper hlp )
+  static private TDPref makeCbx( int cat, String nm, int tit, int sum, int lvl, String def_str, Context ctx, TDPrefHelper hlp )
   { 
     boolean val = hlp.getBoolean( nm, def_str.startsWith("t") );
-    TDPref ret = new TDPref( cat, nm, CHECKBOX, tit, sum, lvl, BOOLEAN, (val? "true" : "false"), def_str, res, hlp );
+    TDPref ret = new TDPref( cat, nm, CHECKBOX, tit, sum, lvl, BOOLEAN, (val? "true" : "false"), def_str, ctx, hlp );
     ret.bvalue = val;
     return ret;
   }
 
-  static private TDPref makeEdt( int cat, String nm, int tit, int sum, int lvl, String def_val, int pt, Resources res, TDPrefHelper hlp )
+  static private TDPref makeEdt( int cat, String nm, int tit, int sum, int lvl, String def_val, int pt, Context ctx, TDPrefHelper hlp )
   { 
     String val = hlp.getString( nm, def_val );
-    TDPref ret = new TDPref( cat, nm, EDITTEXT, tit, sum, lvl, pt, val, def_val, res, hlp );
+    TDPref ret = new TDPref( cat, nm, EDITTEXT, tit, sum, lvl, pt, val, def_val, ctx, hlp );
     try {
       if ( pt == INTEGER ) {
         ret.ivalue = Integer.parseInt( ret.value );
@@ -303,10 +305,10 @@ class TDPref implements AdapterView.OnItemSelectedListener
     return ret;
   }
 
-  // static private TDPref makeEdt( int cat, String nm, int tit, int sum, int lvl, int idef, int pt, Resources res, TDPrefHelper hlp)
+  // static private TDPref makeEdt( int cat, String nm, int tit, int sum, int lvl, int idef, int pt, Context ctx, TDPrefHelper hlp)
   // { 
-  //   String val = hlp.getString( nm, res.getString(idef) );
-  //   TDPref ret = new TDPref( cat, nm, EDITTEXT, tit, sum, lvl, pt, val, res, hlp );
+  //   String val = hlp.getString( nm, ctx.getString(idef) );
+  //   TDPref ret = new TDPref( cat, nm, EDITTEXT, tit, sum, lvl, pt, val, ctx, hlp );
   //   // Log.v("DistoX", "EditText value " + ret.value );
   //   if ( pt == INTEGER ) {
   //     ret.ivalue = Integer.parseInt( ret.value );
@@ -316,13 +318,13 @@ class TDPref implements AdapterView.OnItemSelectedListener
   //   return ret;
   // }
 
-  static private TDPref makeLst( int cat, String nm, int tit, int sum, int lvl, String def_val, int opts, int vals, Resources res, TDPrefHelper hlp )
+  static private TDPref makeLst( int cat, String nm, int tit, int sum, int lvl, String def_val, int opts, int vals, Context ctx, TDPrefHelper hlp )
   { 
-    String val = hlp.getString( nm, def_val ); // options stores the selected value
-    String[] options = res.getStringArray( opts );
-    String[] values  = res.getStringArray( vals );
+    String val = hlp.getString( nm, def_val ); // options stoctx the selected value
+    String[] options = ctx.getResources().getStringArray( opts );
+    String[] values  = ctx.getResources().getStringArray( vals );
     // String opt = getOptionFromValue( val, options, values );
-    TDPref ret = new TDPref( cat, nm, LIST, tit, sum, lvl, OPTIONS, val, def_val, res, hlp );
+    TDPref ret = new TDPref( cat, nm, LIST, tit, sum, lvl, OPTIONS, val, def_val, ctx, hlp );
     ret.options = options;
     ret.values  = values;
     int idx = ret.makeLstIndex( );
@@ -330,13 +332,13 @@ class TDPref implements AdapterView.OnItemSelectedListener
     return ret;
   }
 
-  static private TDPref makeLst( int cat, String nm, int tit, int sum, int lvl, int idef, int opts, int vals, Resources res, TDPrefHelper hlp )
+  static private TDPref makeLst( int cat, String nm, int tit, int sum, int lvl, int idef, int opts, int vals, Context ctx, TDPrefHelper hlp )
   { 
-    String val = hlp.getString( nm, res.getString(idef) ); // options stores the selected value
-    String[] options = res.getStringArray( opts );
-    String[] values  = res.getStringArray( vals );
+    String val = hlp.getString( nm, ctx.getResources().getString(idef) ); // options stores the selected value
+    String[] options = ctx.getResources().getStringArray( opts );
+    String[] values  = ctx.getResources().getStringArray( vals );
     // String opt = getOptionFromValue( val, options, values );
-    TDPref ret = new TDPref( cat, nm, LIST, tit, sum, lvl, OPTIONS, val, values[0], res, hlp );
+    TDPref ret = new TDPref( cat, nm, LIST, tit, sum, lvl, OPTIONS, val, values[0], ctx, hlp );
     ret.options = options;
     ret.values  = values;
     int idx = ret.makeLstIndex( );
@@ -429,204 +431,168 @@ class TDPref implements AdapterView.OnItemSelectedListener
   static final int T = 4;
   static final int D = 5;
 
-  static TDPref[] makeMainPrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makeMainPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_CATEGORY_ALL;
     String[] key = TDPrefKey.MAIN;
     int[] tit = TDPrefKey.MAINtitle;
     int[] dsc = TDPrefKey.MAINdesc;
     String[] def = TDPrefKey.MAINdef;
-    TDPref[] ret = new TDPref[ 13 ];
-    ret[ 0] = makeBtn( cat, key[ 0], tit[ 0], dsc[ 0], N, def[ 0], res, hlp );
-    ret[ 1] = makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], B, def[ 1], INTEGER, res, hlp );
-    ret[ 2] = makeLst( cat, key[ 2], tit[ 2], dsc[ 2], B, def[ 2], R.array.sizeButtons, R.array.sizeButtonsValue, res, hlp );
-    ret[ 3] = makeLst( cat, key[ 3], tit[ 3], dsc[ 3], B, def[ 3], R.array.extraButtons, R.array.extraButtonsValue, res, hlp );
-    ret[ 4] = makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], B, def[ 4], res, hlp );
-    ret[ 5] = makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5], res, hlp );
-    ret[ 6] = makeLst( cat, key[ 6], tit[ 6], dsc[ 6], A, def[ 6], R.array.localUserMan, R.array.localUserManValue, res, hlp );
-    ret[ 7] = makeLst( cat, key[ 7], tit[ 7], dsc[ 7], N, def[ 7], R.array.locale, R.array.localeValue, res, hlp );
-    // ret[ 8] = makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], D, def[ 8], res, hlp ); // IF_COSURVEY
-    ret[ 8] = makeFwd( cat, key[ 8], tit[ 8],          B,          res, hlp );
-    ret[ 9] = makeFwd( cat, key[ 9], tit[ 9],          B,          res, hlp );
-    ret[10] = makeFwd( cat, key[10], tit[10],          B,          res, hlp );
-    ret[11] = makeFwd( cat, key[11], tit[11],          D,          res, hlp );
-    ret[12] = makeFwd( cat, key[12], tit[12],          B,          res, hlp );
-    return ret;
+    return new TDPref[ ] {
+      makeBtn( cat, key[ 0], tit[ 0], dsc[ 0], N, def[ 0], ctx, hlp ),
+      makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], B, def[ 1], INTEGER, ctx, hlp ),
+      makeLst( cat, key[ 2], tit[ 2], dsc[ 2], B, def[ 2], R.array.sizeButtons, R.array.sizeButtonsValue, ctx, hlp ),
+      makeLst( cat, key[ 3], tit[ 3], dsc[ 3], B, def[ 3], R.array.extraButtons, R.array.extraButtonsValue, ctx, hlp ),
+      makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], B, def[ 4], ctx, hlp ),
+      makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5], ctx, hlp ),
+      makeLst( cat, key[ 6], tit[ 6], dsc[ 6], A, def[ 6], R.array.localUserMan, R.array.localUserManValue, ctx, hlp ),
+      makeLst( cat, key[ 7], tit[ 7], dsc[ 7], N, def[ 7], R.array.locale, R.array.localeValue, ctx, hlp ),
+      // makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], D, def[ 8], ctx, hlp ), // IF_COSURVEY
+      makeFwd( cat, key[ 8], tit[ 8],          B,          ctx, hlp ),
+      makeFwd( cat, key[ 9], tit[ 9],          B,          ctx, hlp ),
+      makeFwd( cat, key[10], tit[10],          B,          ctx, hlp ),
+      makeFwd( cat, key[11], tit[11],          B,          ctx, hlp ),
+      makeFwd( cat, key[12], tit[12],          T,          ctx, hlp ),    // GEEK
+      // makeFwd( cat, key[13], tit[13],          D,          ctx, hlp )  // SKETCH
+    };
   }
 
-  static TDPref[] makeSurveyPrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makeSurveyPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_CATEGORY_SURVEY;
     String[] key = TDPrefKey.SURVEY;
     int[] tit = TDPrefKey.SURVEYtitle;
     int[] dsc = TDPrefKey.SURVEYdesc;
     String[] def = TDPrefKey.SURVEYdef;
-    TDPref[] ret = new TDPref[ 11 ];
-    ret[ 0] = makeEdt( cat, key[ 0], tit[ 0], dsc[0], B, def[0], STRING, res, hlp );
-    ret[ 1] = makeLst( cat, key[ 1], tit[ 1], dsc[1], B, def[1], R.array.surveyStations, R.array.surveyStationsValue, res, hlp );
-    ret[ 2] = makeLst( cat, key[ 2], tit[ 2], dsc[2], B, def[2], R.array.stationNames, R.array.stationNamesValue, res, hlp );
-    ret[ 3] = makeEdt( cat, key[ 3], tit[ 3], dsc[3], B, def[3], STRING, res, hlp );
-    ret[ 4] = makeEdt( cat, key[ 4], tit[ 4], dsc[4], A, def[4], INTEGER, res, hlp );
-    ret[ 5] = makeCbx( cat, key[ 5], tit[ 5], dsc[5], B, def[5], res, hlp );
-    ret[ 6] = makeCbx( cat, key[ 6], tit[ 6], dsc[6], B, def[6], res, hlp );
-    ret[ 7] = makeFwd( cat, key[ 7], tit[ 7],         B,         res, hlp );
-    ret[ 8] = makeFwd( cat, key[ 8], tit[ 8],         B,         res, hlp );
-    ret[ 9] = makeFwd( cat, key[ 9], tit[ 9],         N,         res, hlp );
-    ret[10] = makeFwd( cat, key[10], tit[10],         A,         res, hlp );
-    return ret;
+    return new TDPref[ ] {
+      makeEdt( cat, key[ 0], tit[ 0], dsc[0], B, def[0], STRING, ctx, hlp ),
+      makeLst( cat, key[ 1], tit[ 1], dsc[1], B, def[1], R.array.surveyStations, R.array.surveyStationsValue, ctx, hlp ),
+      makeLst( cat, key[ 2], tit[ 2], dsc[2], B, def[2], R.array.stationNames, R.array.stationNamesValue, ctx, hlp ),
+      makeEdt( cat, key[ 3], tit[ 3], dsc[3], B, def[3], STRING, ctx, hlp ),
+      makeEdt( cat, key[ 4], tit[ 4], dsc[4], A, def[4], INTEGER, ctx, hlp ),
+      makeCbx( cat, key[ 5], tit[ 5], dsc[5], B, def[5], ctx, hlp ),
+      makeCbx( cat, key[ 6], tit[ 6], dsc[6], B, def[6], ctx, hlp ),
+      makeCbx( cat, key[ 7], tit[ 7], dsc[7], B, def[7], ctx, hlp ),
+      makeFwd( cat, key[ 8], tit[ 8],         B,         ctx, hlp ),
+      makeFwd( cat, key[ 9], tit[ 9],         B,         ctx, hlp ),
+      makeFwd( cat, key[10], tit[10],         N,         ctx, hlp ),
+      makeFwd( cat, key[11], tit[11],         A,         ctx, hlp )
+    };
   }
 
-  static TDPref[] makePlotPrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makePlotPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_CATEGORY_PLOT;
     String[] key = TDPrefKey.PLOT;
     int[] tit = TDPrefKey.PLOTtitle;
     int[] dsc = TDPrefKey.PLOTdesc;
     String[] def = TDPrefKey.PLOTdef;
-    TDPref[] ret = new TDPref[ 12 ];
-    int k = 0;
-    ret[ 0] = makeLst( cat, key[ 0], tit[ 0], dsc[0], B, def[0], R.array.pickerType, R.array.pickerTypeValue, res, hlp );
-    ret[ 1] = makeLst( cat, key[ 1], tit[ 1], dsc[1], N, def[1], R.array.recentNr, R.array.recentNr, res, hlp );
-    ret[ 2] = makeCbx( cat, key[ 2], tit[ 2], dsc[2], B, def[2], res, hlp );
-    ret[ 3] = makeLst( cat, key[ 3], tit[ 3], dsc[3], B, def[3], R.array.zoomCtrl, R.array.zoomCtrlValue, res, hlp );
-    // r[ ] = makeLst( cat, key[  ], tit[  ], dsc[ ], X, def[ ], R.array.sectionStations, R.array.sectionStationsValue, res, hlp );
-    ret[ 4] = makeCbx( cat, key[ 4], tit[ 4], dsc[4], A, def[4], res, hlp );
-    ret[ 5] = makeCbx( cat, key[ 5], tit[ 5], dsc[5], A, def[5], res, hlp );
-    ret[ 6] = makeLst( cat, key[ 6], tit[ 6], dsc[6], A, def[6], R.array.backupNumber, R.array.backupNumberValue, res, hlp );
-    ret[ 7] = makeEdt( cat, key[ 7], tit[ 7], dsc[7], A, def[7], INTEGER, res, hlp );
-    ret[ 8] = makeFwd( cat, key[ 8], tit[ 8],         B,         res, hlp );
-    ret[ 9] = makeFwd( cat, key[ 9], tit[ 9],         N,         res, hlp );
-    ret[10] = makeFwd( cat, key[10], tit[10],         B,         res, hlp );
-    ret[11] = makeFwd( cat, key[11], tit[11],         T,         res, hlp );
-    return ret;
+    return new TDPref[ ] {
+      makeLst( cat, key[ 0], tit[ 0], dsc[0], B, def[0], R.array.pickerType, R.array.pickerTypeValue, ctx, hlp ),
+      makeLst( cat, key[ 1], tit[ 1], dsc[1], N, def[1], R.array.recentNr, R.array.recentNr, ctx, hlp ),
+      makeCbx( cat, key[ 2], tit[ 2], dsc[2], B, def[2], ctx, hlp ),
+      makeLst( cat, key[ 3], tit[ 3], dsc[3], B, def[3], R.array.zoomCtrl, R.array.zoomCtrlValue, ctx, hlp ),
+      // makeLst( cat, key[  ], tit[  ], dsc[ ], X, def[ ], R.array.sectionStations, R.array.sectionStationsValue, ctx, hlp ),
+      makeEdt( cat, key[ 4], tit[ 4], dsc[4], T, def[4], FLOAT,   ctx, hlp ), // X-SECTION H-THRESHOLD
+      makeCbx( cat, key[ 5], tit[ 5], dsc[5], A, def[5], ctx, hlp ), // CHECK-MIDLINE
+      makeCbx( cat, key[ 6], tit[ 6], dsc[6], A, def[6], ctx, hlp ), // CHECK-EXTEND
+      makeFwd( cat, key[ 7], tit[ 7],         B,         ctx, hlp ),
+      makeFwd( cat, key[ 8], tit[ 8],         N,         ctx, hlp ),
+      makeFwd( cat, key[ 9], tit[ 9],         B,         ctx, hlp )
+      // makeFwd( cat, key[11], tit[11],         T,         ctx, hlp ), // PLOT_WALLS
+    };
   }
 
-  static TDPref[] makeCalibPrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makeCalibPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_CATEGORY_CALIB;
     String[] key = TDPrefKey.CALIB;
     int[] tit = TDPrefKey.CALIBtitle;
     int[] dsc = TDPrefKey.CALIBdesc;
     String[] def = TDPrefKey.CALIBdef;
-    TDPref[] ret = new TDPref[ 11 ];
-    ret[ 0] = makeLst( cat, key[ 0], tit[ 0], dsc[ 0], A, def[ 0], R.array.groupBy, R.array.groupByValue, res, hlp );
-    ret[ 1] = makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], A, def[ 1], FLOAT, res, hlp );
-    ret[ 2] = makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], B, def[ 2], FLOAT, res, hlp );
-    ret[ 3] = makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], B, def[ 3], INTEGER, res, hlp );
-    ret[ 4] = makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], A, def[ 4], res, hlp );
-    // r[ ] = makeCbx( cat, key[  ], tit[  ], dsc[  ], X, def[  ], res, hlp );
-    ret[ 5] = makeLst( cat, key[ 5], tit[ 5], dsc[ 5], A, def[ 5], R.array.rawCData, R.array.rawCDataValue, res, hlp );
-    ret[ 6] = makeLst( cat, key[ 6], tit[ 6], dsc[ 6], E, def[ 6], R.array.calibAlgo, R.array.calibAlgoValue, res, hlp );
-    ret[ 7] = makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], D, def[ 7], FLOAT, res, hlp );
-    ret[ 8] = makeEdt( cat, key[ 8], tit[ 8], dsc[ 8], D, def[ 8], FLOAT, res, hlp );
-    ret[ 9] = makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], D, def[ 9], FLOAT, res, hlp );
-    ret[10] = makeEdt( cat, key[10], tit[10], dsc[10], D, def[10], FLOAT, res, hlp );
-    return ret; 
+    return new TDPref[ ] {
+      makeLst( cat, key[ 0], tit[ 0], dsc[ 0], A, def[ 0], R.array.groupBy, R.array.groupByValue, ctx, hlp ),
+      makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], A, def[ 1], FLOAT, ctx, hlp ),
+      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], B, def[ 2], FLOAT, ctx, hlp ),
+      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], B, def[ 3], INTEGER, ctx, hlp ),
+      makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], A, def[ 4], ctx, hlp ),
+    // r[ ] = makeCbx( cat, key[  ], tit[  ], dsc[  ], X, def[  ], ctx, hlp );
+      makeLst( cat, key[ 5], tit[ 5], dsc[ 5], A, def[ 5], R.array.rawCData, R.array.rawCDataValue, ctx, hlp ),
+      makeLst( cat, key[ 6], tit[ 6], dsc[ 6], E, def[ 6], R.array.calibAlgo, R.array.calibAlgoValue, ctx, hlp ),
+      makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], D, def[ 7], FLOAT, ctx, hlp ),
+      makeEdt( cat, key[ 8], tit[ 8], dsc[ 8], D, def[ 8], FLOAT, ctx, hlp ),
+      makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], D, def[ 9], FLOAT, ctx, hlp ),
+      makeEdt( cat, key[10], tit[10], dsc[10], D, def[10], FLOAT, ctx, hlp )
+    };
   }
 
-  static TDPref[] makeDevicePrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makeDevicePrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_CATEGORY_DEVICE;
     String[] key = TDPrefKey.DEVICE;
     int[] tit = TDPrefKey.DEVICEtitle;
     int[] dsc = TDPrefKey.DEVICEdesc;
     String[] def = TDPrefKey.DEVICEdef;
-    TDPref[] ret = new TDPref[ 13 ];
-    // r[ ] = makeEdt( cat, key[  ], tit[  ], dsc[  ], X, def[  ], STRING,  res, hlp );
-    // r[ ] = makeLst( cat, key[  ], tit[  ], dsc[  ], X, def[  ], R.array.deviceType, R.array.deviceTypeValue, res, hlp );
-    ret[ 0] = makeLst( cat, key[ 0], tit[ 0], dsc[ 0], N, def[ 0], R.array.deviceBT, R.array.deviceBTValue, res, hlp );
-    ret[ 1] = makeLst( cat, key[ 1], tit[ 1], dsc[ 1], B, def[ 1], R.array.connMode, R.array.connModeValue, res, hlp );
-    ret[ 2] = makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], B, def[ 2],          res, hlp );
-    ret[ 3] = makeCbx( cat, key[ 3], tit[ 3], dsc[ 3], B, def[ 3],          res, hlp );
-    ret[ 4] = makeLst( cat, key[ 4], tit[ 4], dsc[ 4], B, def[ 4], R.array.sockType, R.array.sockTypeValue, res, hlp );
-    // r[ ] = makeEdt( cat, key[  ], tit[  ], dsc[  ], X, def[  ], INTEGER, res, hlp );
-    ret[ 5] = makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], N, def[ 5],          res, hlp );
-    ret[ 6] = makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], E, def[ 6], INTEGER, res, hlp );
-    ret[ 7] = makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7],          res, hlp );
-    ret[ 8] = makeEdt( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8], INTEGER, res, hlp );
-    ret[ 9] = makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9], INTEGER, res, hlp );
-    ret[10] = makeEdt( cat, key[10], tit[10], dsc[10], A, def[10], INTEGER, res, hlp );
-    ret[11] = makeEdt( cat, key[11], tit[11], dsc[11], A, def[11], INTEGER, res, hlp );
-    ret[12] = makeFwd( cat, key[12], tit[12],          B,                   res, hlp );
-    return ret;
+    return new TDPref[ ] {
+      // makeEdt( cat, key[  ], tit[  ], dsc[  ], X, def[  ], STRING,  ctx, hlp ),
+      // makeLst( cat, key[  ], tit[  ], dsc[  ], X, def[  ], R.array.deviceType, R.array.deviceTypeValue, ctx, hlp ),
+      makeLst( cat, key[ 0], tit[ 0], dsc[ 0], N, def[ 0], R.array.deviceBT, R.array.deviceBTValue, ctx, hlp ),
+      makeLst( cat, key[ 1], tit[ 1], dsc[ 1], B, def[ 1], R.array.connMode, R.array.connModeValue, ctx, hlp ),
+      makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], B, def[ 2],          ctx, hlp ),
+      makeCbx( cat, key[ 3], tit[ 3], dsc[ 3], B, def[ 3],          ctx, hlp ),
+      makeLst( cat, key[ 4], tit[ 4], dsc[ 4], B, def[ 4], R.array.sockType, R.array.sockTypeValue, ctx, hlp ),
+      // makeEdt( cat, key[  ], tit[  ], dsc[  ], X, def[  ], INTEGER, ctx, hlp ),
+      makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], N, def[ 5],          ctx, hlp ),
+      makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], A, def[ 6],          ctx, hlp ),
+      // makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], E, def[ 7], INTEGER, ctx, hlp ),
+      // makeEdt( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8], INTEGER, ctx, hlp ),
+      // makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9], INTEGER, ctx, hlp ),
+      // makeEdt( cat, key[10], tit[10], dsc[10], A, def[10], INTEGER, ctx, hlp ),
+      // makeEdt( cat, key[11], tit[11], dsc[11], A, def[11], INTEGER, ctx, hlp ),
+      makeFwd( cat, key[12], tit[12],          B,                   ctx, hlp )
+    };
   }
 
-  static TDPref[] makeExportPrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makeExportPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_CATEGORY_EXPORT;
     String[] key = TDPrefKey.EXPORT;
     int[] tit = TDPrefKey.EXPORTtitle;
     int[] dsc = TDPrefKey.EXPORTdesc;
     String[] def = TDPrefKey.EXPORTdef;
-    TDPref[] ret = new TDPref[ 14 ];
-    // ret[ 0] = makeBtn( cat, key[ 0], tit[ 0], dsc[ 0], B, def[ 0],         res, hlp );
-    // ret[ 1] = makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], A, def[ 1],         res, hlp );
-    // ret[ 2] = makeLst( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2], R.array.importDatamode, R.array.importDatamodeValue, res, hlp );
-    ret[ 0] = makeLst( cat, key[ 0], tit[ 0], dsc[ 0], B, def[ 0], R.array.exportShots, R.array.exportShotsValue, res, hlp );
-    ret[ 1] = makeLst( cat, key[ 1], tit[ 1], dsc[ 1], B, def[ 1], R.array.exportPlot, R.array.exportPlotValue, res, hlp );
-
-    // ret[ 5] = makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], A, def[ 5],         res, hlp );
-    // ret[ 6] = makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], N, def[ 6],         res, hlp );
-    // // r  ] = makeCbx( cat, key[  ], tit[  ], dsc[  ], X, def[  ],         res, hlp );
-    // ret[ 7] = makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7],         res, hlp );
-
-    // ret[ 8] = makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], B, def[ 8],         res, hlp );
-    // ret[ 9] = makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9],         res, hlp );
-    // ret[10] = makeCbx( cat, key[10], tit[10], dsc[10], N, def[10],         res, hlp );
-                                                                
-    ret[2] = makeEdt( cat, key[2], tit[2], dsc[2], A, def[2], FLOAT,  res, hlp );
-    ret[3] = makeEdt( cat, key[3], tit[3], dsc[3], A, def[3], FLOAT,  res, hlp );
-    ret[4] = makeEdt( cat, key[4], tit[4], dsc[4], A, def[4], FLOAT,  res, hlp );
-    // ret[5] = makeLst( cat, key[5], tit[5], dsc[5], N, def[5], R.array.survexEol, R.array.survexEolValue, res, hlp );
-    // ret[6] = makeCbx( cat, key[6], tit[6], dsc[6], A, def[6],         res, hlp );
-    // ret[7] = makeCbx( cat, key[7], tit[7], dsc[7], A, def[7],         res, hlp );
-    ret[5] = makeEdt( cat, key[5], tit[5], dsc[5], E, def[5], FLOAT,  res, hlp );
-    // ret[18] = makeCbx( cat, key[18], tit[18], dsc[18], N, def[18],         res, hlp );
-    // ret[19] = makeCbx( cat, key[19], tit[19], dsc[19], E, def[19],         res, hlp );
-    // // r  ] = makeCbx( cat, key[  ], tit[  ], dsc[  ], X, def[  ],         res, hlp );
-    // ret[20] = makeEdt( cat, key[20], tit[20], dsc[20], A, def[20], FLOAT,  res, hlp );
-    // ret[21] = makeEdt( cat, key[21], tit[21], dsc[21], A, def[21], FLOAT,  res, hlp );
-    // ret[22] = makeEdt( cat, key[22], tit[22], dsc[22], A, def[22], FLOAT,  res, hlp );
-    // ret[23] = makeEdt( cat, key[23], tit[23], dsc[23], A, def[23], FLOAT,  res, hlp );
-    // ret[24] = makeEdt( cat, key[24], tit[24], dsc[24], A, def[24], FLOAT,  res, hlp );
-    // ret[25] = makeEdt( cat, key[25], tit[25], dsc[25], A, def[25], FLOAT,  res, hlp );
-
-    // ret[18] = makeCbx( cat, key[18], tit[18], dsc[18], N, def[18],         res, hlp );
-    // ret[19] = makeCbx( cat, key[19], tit[19], dsc[19], N, def[19],         res, hlp );
-
-    // ret[20] = makeEdt( cat, key[20], tit[20], dsc[20], N, def[20], FLOAT,  res, hlp );
-    // ret[21] = makeEdt( cat, key[21], tit[21], dsc[21], N, def[21], STRING, res, hlp );
-
-    // // r  ] = makeEdt( cat, key[  ]  tit[  ], dsc[  ], X, def[  ], FLOAT,  res, hlp );
-    // ret[22] = makeCbx( cat, key[22], tit[22], dsc[22], N, def[22],         res, hlp );
-    // ret[23] = makeLst( cat, key[23], tit[23], dsc[23], E, def[23], R.array.acadVersion, R.array.acadVersionValue, res, hlp );
-
-    ret[ 6] = makeFwd( cat, key[ 6], tit[ 6],          N,                   res, hlp );
-    ret[ 7] = makeFwd( cat, key[ 7], tit[ 7],          N,                   res, hlp );
-    ret[ 8] = makeFwd( cat, key[ 8], tit[ 8],          N,                   res, hlp );
-    ret[ 9] = makeFwd( cat, key[ 9], tit[ 9],          N,                   res, hlp );
-    ret[10] = makeFwd( cat, key[10], tit[10],          N,                   res, hlp );
-    ret[11] = makeFwd( cat, key[11], tit[11],          N,                   res, hlp );
-    ret[12] = makeFwd( cat, key[12], tit[12],          N,                   res, hlp );
-    ret[13] = makeFwd( cat, key[13], tit[13],          N,                   res, hlp );
-    return ret;
+    return new TDPref[ ] {
+      makeLst( cat, key[ 0], tit[ 0], dsc[ 0], B, def[ 0], R.array.exportShots, R.array.exportShotsValue, ctx, hlp ),
+      makeLst( cat, key[ 1], tit[ 1], dsc[ 1], B, def[ 1], R.array.exportPlot, R.array.exportPlotValue, ctx, hlp ),
+      makeEdt( cat, key[2], tit[2], dsc[2], A, def[2], FLOAT,  ctx, hlp ),
+      makeEdt( cat, key[3], tit[3], dsc[3], A, def[3], FLOAT,  ctx, hlp ),
+      makeEdt( cat, key[4], tit[4], dsc[4], A, def[4], FLOAT,  ctx, hlp ),
+      makeEdt( cat, key[5], tit[5], dsc[5], E, def[5], FLOAT,  ctx, hlp ),
+      makeFwd( cat, key[ 6], tit[ 6],          N,                   ctx, hlp ),
+      makeFwd( cat, key[ 7], tit[ 7],          N,                   ctx, hlp ),
+      makeFwd( cat, key[ 8], tit[ 8],          N,                   ctx, hlp ),
+      makeFwd( cat, key[ 9], tit[ 9],          N,                   ctx, hlp ),
+      makeFwd( cat, key[10], tit[10],          N,                   ctx, hlp ),
+      makeFwd( cat, key[11], tit[11],          N,                   ctx, hlp ),
+      makeFwd( cat, key[12], tit[12],          N,                   ctx, hlp ),
+      makeFwd( cat, key[13], tit[13],          N,                   ctx, hlp )
+    };
   }
 
-  static TDPref[] makeImportPrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makeImportPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_CATEGORY_IMPORT;
     String[] key = TDPrefKey.EXPORT_import;
     int[] tit = TDPrefKey.EXPORT_importtitle;
     int[] dsc = TDPrefKey.EXPORT_importdesc;
     String[] def = TDPrefKey.EXPORT_importdef;
-    TDPref[] ret = new TDPref[ 3 ];
-    ret[ 0] = makeBtn( cat, key[ 0], tit[ 0], dsc[ 0], B, def[ 0],         res, hlp );
-    ret[ 1] = makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], A, def[ 1],         res, hlp );
-    ret[ 2] = makeLst( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2], R.array.importDatamode, R.array.importDatamodeValue, res, hlp );
-    return ret;
+    return new TDPref[ ] {
+      makeBtn( cat, key[ 0], tit[ 0], dsc[ 0], B, def[ 0],         ctx, hlp ),
+      makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], A, def[ 1],         ctx, hlp ),
+      makeLst( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2], R.array.importDatamode, R.array.importDatamodeValue, ctx, hlp )
+    };
   }
 
-  static TDPref[] makeSvxPrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makeSvxPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_CATEGORY_SVX;
     String[] key = TDPrefKey.EXPORT_SVX;
@@ -634,13 +600,13 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] dsc = TDPrefKey.EXPORT_SVXdesc;
     String[] def = TDPrefKey.EXPORT_SVXdef;
     return new TDPref[ ] {
-      makeLst( cat, key[0], tit[0], dsc[0], N, def[0], R.array.survexEol, R.array.survexEolValue, res, hlp ),
-      makeCbx( cat, key[1], tit[1], dsc[1], A, def[1],         res, hlp ),
-      makeCbx( cat, key[2], tit[2], dsc[2], A, def[2],         res, hlp )
+      makeLst( cat, key[0], tit[0], dsc[0], N, def[0], R.array.survexEol, R.array.survexEolValue, ctx, hlp ),
+      makeCbx( cat, key[1], tit[1], dsc[1], A, def[1],         ctx, hlp ),
+      makeCbx( cat, key[2], tit[2], dsc[2], A, def[2],         ctx, hlp )
     };
   }
 
-  static TDPref[] makeThPrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makeThPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_CATEGORY_TH;
     String[] key = TDPrefKey.EXPORT_TH;
@@ -648,15 +614,15 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] dsc = TDPrefKey.EXPORT_THdesc;
     String[] def = TDPrefKey.EXPORT_THdef;
     return new TDPref[ ] {
-      makeCbx( cat, key[0], tit[0], dsc[0], A, def[0], res, hlp ),
-      makeCbx( cat, key[1], tit[1], dsc[1], N, def[1], res, hlp ),
-      // makeCbx( cat, key[ ], tit[ ], dsc[ ], X, def[ ], res, hlp ),
-      makeCbx( cat, key[2], tit[2], dsc[2], A, def[2], res, hlp ),
-      makeCbx( cat, key[3], tit[3], dsc[3], A, def[3], res, hlp )
+      makeCbx( cat, key[0], tit[0], dsc[0], A, def[0], ctx, hlp ),
+      makeCbx( cat, key[1], tit[1], dsc[1], N, def[1], ctx, hlp ),
+      // makeCbx( cat, key[ ], tit[ ], dsc[ ], X, def[ ], ctx, hlp ),
+      makeCbx( cat, key[2], tit[2], dsc[2], A, def[2], ctx, hlp ),
+      makeCbx( cat, key[3], tit[3], dsc[3], A, def[3], ctx, hlp )
     };
   }
 
-  static TDPref[] makeDatPrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makeDatPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_CATEGORY_DAT;
     String[] key = TDPrefKey.EXPORT_DAT;
@@ -664,13 +630,13 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] dsc = TDPrefKey.EXPORT_DATdesc;
     String[] def = TDPrefKey.EXPORT_DATdef;
     return new TDPref[ ] {
-      makeCbx( cat, key[0], tit[0], dsc[0], B, def[0], res, hlp ),
-      makeCbx( cat, key[1], tit[1], dsc[1], A, def[1], res, hlp ),
-      makeCbx( cat, key[2], tit[2], dsc[2], N, def[2], res, hlp )
+      makeCbx( cat, key[0], tit[0], dsc[0], B, def[0], ctx, hlp ),
+      makeCbx( cat, key[1], tit[1], dsc[1], A, def[1], ctx, hlp ),
+      makeCbx( cat, key[2], tit[2], dsc[2], N, def[2], ctx, hlp )
     };
   }
 
-  static TDPref[] makeSvgPrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makeSvgPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_CATEGORY_SVG;
     String[] key = TDPrefKey.EXPORT_SVG;
@@ -678,20 +644,20 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] dsc = TDPrefKey.EXPORT_SVGdesc;
     String[] def = TDPrefKey.EXPORT_SVGdef;
     return new TDPref[ ] {
-      makeCbx( cat, key[0], tit[0], dsc[0], N, def[0],         res, hlp ),
-      makeCbx( cat, key[1], tit[1], dsc[1], E, def[1],         res, hlp ),
-      makeCbx( cat, key[2], tit[2], dsc[2], E, def[2],         res, hlp ),
-      // makeCbx( cat, key[ ], tit[ ], dsc[ ], X, def[ ],         res, hlp ),
-      makeEdt( cat, key[3], tit[3], dsc[3], A, def[3], FLOAT,  res, hlp ),
-      makeEdt( cat, key[4], tit[4], dsc[4], A, def[4], FLOAT,  res, hlp ),
-      makeEdt( cat, key[5], tit[5], dsc[5], A, def[5], FLOAT,  res, hlp ),
-      makeEdt( cat, key[6], tit[6], dsc[6], A, def[6], FLOAT,  res, hlp ),
-      makeEdt( cat, key[7], tit[7], dsc[7], A, def[7], FLOAT,  res, hlp ),
-      makeEdt( cat, key[8], tit[8], dsc[8], A, def[8], FLOAT,  res, hlp )
+      makeCbx( cat, key[0], tit[0], dsc[0], N, def[0],         ctx, hlp ),
+      makeCbx( cat, key[1], tit[1], dsc[1], E, def[1],         ctx, hlp ),
+      makeCbx( cat, key[2], tit[2], dsc[2], E, def[2],         ctx, hlp ),
+      // makeCbx( cat, key[ ], tit[ ], dsc[ ], X, def[ ],         ctx, hlp ),
+      makeEdt( cat, key[3], tit[3], dsc[3], A, def[3], FLOAT,  ctx, hlp ),
+      makeEdt( cat, key[4], tit[4], dsc[4], A, def[4], FLOAT,  ctx, hlp ),
+      makeEdt( cat, key[5], tit[5], dsc[5], A, def[5], FLOAT,  ctx, hlp ),
+      makeEdt( cat, key[6], tit[6], dsc[6], A, def[6], FLOAT,  ctx, hlp ),
+      makeEdt( cat, key[7], tit[7], dsc[7], A, def[7], FLOAT,  ctx, hlp ),
+      makeEdt( cat, key[8], tit[8], dsc[8], A, def[8], FLOAT,  ctx, hlp )
     };
   }
 
-  static TDPref[] makeDxfPrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makeDxfPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_CATEGORY_DXF;
     String[] key = TDPrefKey.EXPORT_DXF;
@@ -699,13 +665,13 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] dsc = TDPrefKey.EXPORT_DXFdesc;
     String[] def = TDPrefKey.EXPORT_DXFdef;
     return new TDPref[ ] {
-      // makeEdt( cat, key[ ]  tit[ ], dsc[ ], X, def[ ], FLOAT,  res, hlp ),
-      makeCbx( cat, key[0], tit[0], dsc[0], N, def[0],         res, hlp ),
-      makeLst( cat, key[1], tit[1], dsc[1], E, def[1], R.array.acadVersion, R.array.acadVersionValue, res, hlp )
+      // makeEdt( cat, key[ ]  tit[ ], dsc[ ], X, def[ ], FLOAT,  ctx, hlp ),
+      makeCbx( cat, key[0], tit[0], dsc[0], N, def[0],         ctx, hlp ),
+      makeLst( cat, key[1], tit[1], dsc[1], E, def[1], R.array.acadVersion, R.array.acadVersionValue, ctx, hlp )
     };
   }
 
-  static TDPref[] makePngPrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makePngPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_CATEGORY_PNG;
     String[] key = TDPrefKey.EXPORT_PNG;
@@ -713,12 +679,12 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] dsc = TDPrefKey.EXPORT_PNGdesc;
     String[] def = TDPrefKey.EXPORT_PNGdef;
     return new TDPref[ ] {
-      makeEdt( cat, key[0], tit[0], dsc[0], N, def[0], FLOAT,  res, hlp ),
-      makeEdt( cat, key[1], tit[1], dsc[1], N, def[1], STRING, res, hlp )
+      makeEdt( cat, key[0], tit[0], dsc[0], N, def[0], FLOAT,  ctx, hlp ),
+      makeEdt( cat, key[1], tit[1], dsc[1], N, def[1], STRING, ctx, hlp )
     };
   }
 
-  static TDPref[] makeKmlPrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makeKmlPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_CATEGORY_KML;
     String[] key = TDPrefKey.EXPORT_KML;
@@ -726,13 +692,13 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] dsc = TDPrefKey.EXPORT_KMLdesc;
     String[] def = TDPrefKey.EXPORT_KMLdef;
     return new TDPref[ ] {
-      makeCbx( cat, key[0], tit[0], dsc[0], N, def[0],         res, hlp ),
-      makeCbx( cat, key[1], tit[1], dsc[1], E, def[1],         res, hlp )
+      makeCbx( cat, key[0], tit[0], dsc[0], N, def[0],         ctx, hlp ),
+      makeCbx( cat, key[1], tit[1], dsc[1], E, def[1],         ctx, hlp )
     };
   }
 
 
-  static TDPref[] makeShotPrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makeShotPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_SHOT_DATA;
     String[] key = TDPrefKey.DATA;
@@ -740,26 +706,27 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] dsc = TDPrefKey.DATAdesc;
     String[] def = TDPrefKey.DATAdef;
     return new TDPref[ ] {
-      makeEdt( cat, key[ 0], tit[ 0], dsc[ 0], B, def[ 0], FLOAT,   res, hlp ),
-      makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], B, def[ 1], FLOAT,   res, hlp ),
-      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], B, def[ 2], FLOAT,   res, hlp ),
-      makeLst( cat, key[ 3], tit[ 3], dsc[ 3], A, def[ 3], R.array.legShots, R.array.legShotsValue, res, hlp ),
-      makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], E, def[ 4], INTEGER, res, hlp ),
-      makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], E, def[ 5],          res, hlp ),
-      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], N, def[ 6], FLOAT,   res, hlp ),
-      makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], N, def[ 7], FLOAT,   res, hlp ),
-      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], N, def[ 8],          res, hlp ),
-      makeLst( cat, key[ 9], tit[ 9], dsc[ 9], E, def[ 9], R.array.loopClosure, R.array.loopClosureValue, res, hlp ),
-      makeCbx( cat, key[10], tit[10], dsc[10], A, def[10],          res, hlp ),
-      makeCbx( cat, key[11], tit[11], dsc[11], A, def[11],          res, hlp ),
-      // makeCbx( cat, key[  ], tit[  ], dsc[  ], X, def[  ],          res, hlp ),
-      makeEdt( cat, key[12], tit[12], dsc[12], A, def[12], INTEGER, res, hlp ),
-      makeEdt( cat, key[13], tit[13], dsc[13], A, def[13], INTEGER, res, hlp ),
-      makeCbx( cat, key[14], tit[14], dsc[14], T, def[14],          res, hlp )
+      makeEdt( cat, key[ 0], tit[ 0], dsc[ 0], B, def[ 0], FLOAT,   ctx, hlp ), // CLOSE_DISTANCE
+      makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], B, def[ 1], FLOAT,   ctx, hlp ), // MAX_SHOT_LENGTH
+      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], B, def[ 2], FLOAT,   ctx, hlp ), // MIN_LEG_LENGTH
+      makeLst( cat, key[ 3], tit[ 3], dsc[ 3], A, def[ 3], R.array.legShots, R.array.legShotsValue, ctx, hlp ),
+      makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], T, def[ 4], INTEGER, ctx, hlp ), // RECENT_TIMEOUT
+      makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5],          ctx, hlp ), // BACKSHOT DistoX
+      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], N, def[ 6], FLOAT,   ctx, hlp ), // EXTEND_THRS
+      makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], N, def[ 7], FLOAT,   ctx, hlp ),
+      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], N, def[ 8],          ctx, hlp ), // AZIMUTH_MANUAL
+      makeLst( cat, key[ 9], tit[ 9], dsc[ 9], E, def[ 9], R.array.loopClosure, R.array.loopClosureValue, ctx, hlp ),
+      makeCbx( cat, key[10], tit[10], dsc[10], A, def[10],          ctx, hlp ), // PREV_NEXT
+      makeCbx( cat, key[11], tit[11], dsc[11], A, def[11],          ctx, hlp ), // BACKSIGHT
+      // makeCbx( cat, key[  ], tit[  ], dsc[  ], X, def[  ],          ctx, hlp ), // MAG ANOMALY
+      makeEdt( cat, key[12], tit[12], dsc[12], T, def[12], INTEGER, ctx, hlp ), // TIMER
+      makeEdt( cat, key[13], tit[13], dsc[13], T, def[13], INTEGER, ctx, hlp ), // VOLUME
+      // makeCbx( cat, key[14], tit[14], dsc[14], T, def[14],          ctx, hlp ), // EXTEND_FRAC
+      // makeCbx( cat, key[15], tit[15], dsc[15], T, def[15],          ctx, hlp )  // RECENT_SHOT
     };
   }
 
-  static TDPref[] makeUnitsPrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makeUnitsPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_SHOT_UNITS;
     String[] key = TDPrefKey.UNITS;
@@ -769,13 +736,13 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] arr = TDPrefKey.UNITSarr;
     int[] val = TDPrefKey.UNITSval;
     return new TDPref[ ] {
-      makeLst( cat, key[0], tit[0], dsc[0], B, def[0], arr[0], val[0], res, hlp ),
-      makeLst( cat, key[1], tit[1], dsc[1], B, def[1], arr[1], val[1], res, hlp ),
-      makeLst( cat, key[2], tit[2], dsc[2], B, def[2], arr[2], val[2], res, hlp )
+      makeLst( cat, key[0], tit[0], dsc[0], B, def[0], arr[0], val[0], ctx, hlp ), // LENGTH
+      makeLst( cat, key[1], tit[1], dsc[1], B, def[1], arr[1], val[1], ctx, hlp ), // ANGLE
+      makeLst( cat, key[2], tit[2], dsc[2], B, def[2], arr[2], val[2], ctx, hlp )  // GRID
     };
   }
 
-  static TDPref[] makeAccuracyPrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makeAccuracyPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_ACCURACY;
     String[] key = TDPrefKey.ACCURACY;
@@ -783,13 +750,13 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] dsc = TDPrefKey.ACCURACYdesc;
     String[] def = TDPrefKey.ACCURACYdef;
     return new TDPref[ ] {
-      makeEdt( cat, key[0], tit[0], dsc[0], A, def[0], FLOAT, res, hlp ),
-      makeEdt( cat, key[1], tit[1], dsc[1], A, def[1], FLOAT, res, hlp ),
-      makeEdt( cat, key[2], tit[2], dsc[2], A, def[2], FLOAT, res, hlp )
+      makeEdt( cat, key[0], tit[0], dsc[0], A, def[0], FLOAT, ctx, hlp ),
+      makeEdt( cat, key[1], tit[1], dsc[1], A, def[1], FLOAT, ctx, hlp ),
+      makeEdt( cat, key[2], tit[2], dsc[2], A, def[2], FLOAT, ctx, hlp )
     };
   }
 
-  static TDPref[] makeLocationPrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makeLocationPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_LOCATION;
     String[] key = TDPrefKey.LOCATION;
@@ -797,12 +764,12 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] dsc = TDPrefKey.LOCATIONdesc;
     String[] def = TDPrefKey.LOCATIONdef;
     return new TDPref[ ] {
-      makeLst( cat, key[0], tit[0], dsc[0], N, def[0], R.array.unitLocation, R.array.unitLocationValue, res, hlp ),
-      makeEdt( cat, key[1], tit[1], dsc[1], A, def[1], STRING, res, hlp )
+      makeLst( cat, key[0], tit[0], dsc[0], N, def[0], R.array.unitLocation, R.array.unitLocationValue, ctx, hlp ),
+      makeEdt( cat, key[1], tit[1], dsc[1], A, def[1], STRING, ctx, hlp )
     };
   }
 
-  static TDPref[] makeScreenPrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makeScreenPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_PLOT_SCREEN;
     String[] key = TDPrefKey.SCREEN;
@@ -810,23 +777,23 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] dsc = TDPrefKey.SCREENdesc;
     String[] def = TDPrefKey.SCREENdef;
     return new TDPref[ ] {
-      makeEdt( cat, key[ 0], tit[ 0], dsc[ 0], B, def[ 0], FLOAT,   res, hlp ),
-      makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], B, def[ 1], FLOAT,   res, hlp ),
-      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], N, def[ 2], FLOAT,   res, hlp ),
-      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], B, def[ 3], INTEGER, res, hlp ),
-      makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], B, def[ 4], INTEGER, res, hlp ),
-      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], E, def[ 5], INTEGER, res, hlp ),
-      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], E, def[ 6], INTEGER, res, hlp ),
-      makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7], INTEGER, res, hlp ),
-      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8],          res, hlp ),
-      makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9], FLOAT,   res, hlp ),
-      makeEdt( cat, key[10], tit[10], dsc[10], A, def[10], FLOAT,   res, hlp ),
-      makeEdt( cat, key[11], tit[11], dsc[11], A, def[11], FLOAT,   res, hlp ),
-      makeEdt( cat, key[12], tit[12], dsc[12], A, def[12], FLOAT,   res, hlp )
+      makeEdt( cat, key[ 0], tit[ 0], dsc[ 0], B, def[ 0], FLOAT,   ctx, hlp ),
+      makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], B, def[ 1], FLOAT,   ctx, hlp ),
+      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], N, def[ 2], FLOAT,   ctx, hlp ),
+      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], B, def[ 3], INTEGER, ctx, hlp ),
+      makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], B, def[ 4], INTEGER, ctx, hlp ),
+      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], E, def[ 5], INTEGER, ctx, hlp ),
+      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], E, def[ 6], INTEGER, ctx, hlp ),
+      // makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7], INTEGER, ctx, hlp ),
+      // makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], T, def[ 8],          ctx, hlp ),
+      // makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9], FLOAT,   ctx, hlp ),
+      // makeEdt( cat, key[10], tit[10], dsc[10], T, def[10], FLOAT,   ctx, hlp ),
+      // makeEdt( cat, key[11], tit[11], dsc[11], T, def[11], FLOAT,   ctx, hlp ),
+      // makeEdt( cat, key[12], tit[12], dsc[12], T, def[12], FLOAT,   ctx, hlp )
     };
   }
 
-  static TDPref[] makeLinePrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makeLinePrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_TOOL_LINE;
     String[] key = TDPrefKey.LINE;
@@ -834,20 +801,22 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] dsc    = TDPrefKey.LINEdesc;
     String[] def = TDPrefKey.LINEdef;
     return new TDPref[ ] {
-      makeEdt( cat, key[0], tit[ 0], dsc[ 0], N, def[ 0], FLOAT,   res, hlp ),
-      makeLst( cat, key[1], tit[ 1], dsc[ 1], N, def[ 1], R.array.lineStyle, R.array.lineStyleValue, res, hlp ),
-      makeEdt( cat, key[2], tit[ 2], dsc[ 2], N, def[ 2], INTEGER, res, hlp ),
-      makeEdt( cat, key[3], tit[ 3], dsc[ 3], A, def[ 3], FLOAT,   res, hlp ),
-      makeEdt( cat, key[4], tit[ 4], dsc[ 4], A, def[ 4], FLOAT,   res, hlp ),
-      makeCbx( cat, key[5], tit[ 5], dsc[ 5], A, def[ 5],          res, hlp ),
-      makeLst( cat, key[6], tit[ 6], dsc[ 6], E, def[ 6], R.array.lineContinue, R.array.lineContinueValue, res, hlp ),
-      makeCbx( cat, key[7], tit[ 7], dsc[ 7], N, def[ 7],          res, hlp ),
-      makeEdt( cat, key[8], tit[ 8], dsc[ 8], N, def[ 8], FLOAT,   res, hlp ),
-      makeEdt( cat, key[9], tit[ 9], dsc[ 9], N, def[ 9], FLOAT,   res, hlp )
+      makeEdt( cat, key[ 0], tit[ 0], dsc[ 0], N, def[ 0], FLOAT,   ctx, hlp ),
+      makeLst( cat, key[ 1], tit[ 1], dsc[ 1], N, def[ 1], R.array.lineStyle, R.array.lineStyleValue, ctx, hlp ),
+      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], N, def[ 2], INTEGER, ctx, hlp ),
+      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], A, def[ 3], FLOAT,   ctx, hlp ),
+      makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], A, def[ 4],          ctx, hlp ),
+      makeLst( cat, key[ 5], tit[ 5], dsc[ 5], E, def[ 5], R.array.lineContinue, R.array.lineContinueValue, ctx, hlp ),
+      makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], N, def[ 6],          ctx, hlp ),
+      // makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], T, def[ 7], FLOAT,   ctx, hlp ),
+      // makeEdt( cat, key[ 8], tit[ 8], dsc[ 8], T, def[ 8], FLOAT,   ctx, hlp ),
+      // makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9], FLOAT,   ctx, hlp ),
+      // makeCbx( cat, key[10], tit[10], dsc[10], T, def[10],          ctx, hlp ),
+      // makeCbx( cat, key[11], tit[11], dsc[11], T, def[11],          ctx, hlp )
     };
   }
 
-  static TDPref[] makePointPrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makePointPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_TOOL_POINT;
     String[] key = TDPrefKey.POINT;
@@ -855,13 +824,13 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] dsc    = TDPrefKey.POINTdesc;
     String[] def = TDPrefKey.POINTdef;
     return new TDPref[ ] {
-      makeCbx( cat, key[0], tit[0], dsc[0], N, def[0],        res, hlp ),
-      makeEdt( cat, key[1], tit[1], dsc[1], B, def[1], FLOAT, res, hlp ),
-      makeEdt( cat, key[2], tit[2], dsc[2], B, def[2], FLOAT, res, hlp ) 
+      makeCbx( cat, key[0], tit[0], dsc[0], N, def[0],        ctx, hlp ),
+      makeEdt( cat, key[1], tit[1], dsc[1], B, def[1], FLOAT, ctx, hlp ),
+      makeEdt( cat, key[2], tit[2], dsc[2], B, def[2], FLOAT, ctx, hlp ) 
     };
   }
 
-  static TDPref[] makeWallsPrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makeWallsPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_PLOT_WALLS;
     String[] key = TDPrefKey.WALLS;
@@ -869,16 +838,16 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] dsc    = TDPrefKey.WALLSdesc;
     String[] def = TDPrefKey.WALLSdef;
     return new TDPref[ ] {
-      makeLst( cat, key[0], tit[0],  dsc[0], T, def[0], R.array.wallsType, R.array.wallsTypeValue, res, hlp ),
-      makeEdt( cat, key[1], tit[1],  dsc[1], T, def[1], INTEGER, res, hlp ),
-      makeEdt( cat, key[2], tit[2],  dsc[2], T, def[2], INTEGER, res, hlp ),
-      makeEdt( cat, key[3], tit[3],  dsc[3], T, def[3], FLOAT,   res, hlp ),
-      makeEdt( cat, key[4], tit[4],  dsc[4], T, def[4], FLOAT,   res, hlp ),
-      makeEdt( cat, key[5], tit[5],  dsc[5], T, def[5], FLOAT,   res, hlp )
+      makeLst( cat, key[0], tit[0],  dsc[0], T, def[0], R.array.wallsType, R.array.wallsTypeValue, ctx, hlp ),
+      makeEdt( cat, key[1], tit[1],  dsc[1], T, def[1], INTEGER, ctx, hlp ),
+      makeEdt( cat, key[2], tit[2],  dsc[2], T, def[2], INTEGER, ctx, hlp ),
+      makeEdt( cat, key[3], tit[3],  dsc[3], T, def[3], FLOAT,   ctx, hlp ),
+      makeEdt( cat, key[4], tit[4],  dsc[4], T, def[4], FLOAT,   ctx, hlp ),
+      makeEdt( cat, key[5], tit[5],  dsc[5], T, def[5], FLOAT,   ctx, hlp )
     };
   }
 
-  static TDPref[] makeDrawPrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makeDrawPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_PLOT_DRAW;
     String[] key = TDPrefKey.DRAW;
@@ -886,23 +855,23 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] dsc    = TDPrefKey.DRAWdesc;
     String[] def = TDPrefKey.DRAWdef;
     return new TDPref[ ] {
-      makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], N, def[ 0],          res, hlp ),
-      makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], B, def[ 1], FLOAT,   res, hlp ),
-      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], B, def[ 2], FLOAT,   res, hlp ),
-      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], N, def[ 3], FLOAT,   res, hlp ),
-      makeLst( cat, key[ 4], tit[ 4], dsc[ 4], N, def[ 4], R.array.lineStyle, R.array.lineStyleValue, res, hlp ),
-      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], N, def[ 5], INTEGER, res, hlp ),
-      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], A, def[ 6], FLOAT,   res, hlp ),
-      makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7], FLOAT,   res, hlp ),
-      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8],          res, hlp ),
-      makeLst( cat, key[ 9], tit[ 9], dsc[ 9], E, def[ 9], R.array.lineContinue, R.array.lineContinueValue, res, hlp ),
-      makeCbx( cat, key[10], tit[10], dsc[10], N, def[10],          res, hlp ),
-      makeEdt( cat, key[11], tit[11], dsc[11], N, def[11], FLOAT,   res, hlp ),
-      makeEdt( cat, key[12], tit[12], dsc[12], N, def[12], FLOAT,   res, hlp ) 
+      makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], N, def[ 0],          ctx, hlp ),
+      makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], B, def[ 1], FLOAT,   ctx, hlp ),
+      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], B, def[ 2], FLOAT,   ctx, hlp ),
+      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], N, def[ 3], FLOAT,   ctx, hlp ),
+      makeLst( cat, key[ 4], tit[ 4], dsc[ 4], N, def[ 4], R.array.lineStyle, R.array.lineStyleValue, ctx, hlp ),
+      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], N, def[ 5], INTEGER, ctx, hlp ),
+      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], A, def[ 6], FLOAT,   ctx, hlp ),
+      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7],          ctx, hlp ),
+      makeLst( cat, key[ 8], tit[ 8], dsc[ 8], E, def[ 8], R.array.lineContinue, R.array.lineContinueValue, ctx, hlp ),
+      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], N, def[ 9],          ctx, hlp ),
+      // makeEdt( cat, key[10], tit[10], dsc[10], A, def[10], FLOAT,   ctx, hlp ),
+      // makeEdt( cat, key[11], tit[11], dsc[11], N, def[11], FLOAT,   ctx, hlp ),
+      // makeEdt( cat, key[12], tit[12], dsc[12], N, def[12], FLOAT,   ctx, hlp ) 
     };
   }
 
-  static TDPref[] makeErasePrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makeErasePrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_PLOT_ERASE;
     String[] key = TDPrefKey.ERASE;
@@ -910,13 +879,13 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] dsc    = TDPrefKey.ERASEdesc;
     String[] def = TDPrefKey.ERASEdef;
     return new TDPref[ ] {
-      makeEdt( cat, key[0], tit[0], dsc[0], B, def[0], INTEGER, res, hlp ),
-      makeEdt( cat, key[1], tit[1], dsc[1], B, def[1], INTEGER, res, hlp ),
-      makeEdt( cat, key[2], tit[2], dsc[2], E, def[2], INTEGER, res, hlp )
+      makeEdt( cat, key[0], tit[0], dsc[0], B, def[0], INTEGER, ctx, hlp ),
+      makeEdt( cat, key[1], tit[1], dsc[1], B, def[1], INTEGER, ctx, hlp ),
+      makeEdt( cat, key[2], tit[2], dsc[2], E, def[2], INTEGER, ctx, hlp )
     };
   }
 
-  static TDPref[] makeEditPrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makeEditPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_PLOT_EDIT;
     String[] key = TDPrefKey.EDIT;
@@ -924,14 +893,73 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] dsc    = TDPrefKey.EDITdesc;
     String[] def = TDPrefKey.EDITdef;
     return new TDPref[ ] {
-      makeEdt( cat, key[0], tit[0], dsc[0], N, def[0], FLOAT,   res, hlp ),
-      makeEdt( cat, key[1], tit[1], dsc[1], B, def[1], INTEGER, res, hlp ),
-      makeEdt( cat, key[2], tit[2], dsc[2], E, def[2], INTEGER, res, hlp ),
-      makeEdt( cat, key[3], tit[3], dsc[3], E, def[3], INTEGER, res, hlp )
+      makeEdt( cat, key[0], tit[0], dsc[0], N, def[0], FLOAT,   ctx, hlp ),
+      makeEdt( cat, key[1], tit[1], dsc[1], B, def[1], INTEGER, ctx, hlp ),
+      makeEdt( cat, key[2], tit[2], dsc[2], E, def[2], INTEGER, ctx, hlp ),
+      makeEdt( cat, key[3], tit[3], dsc[3], E, def[3], INTEGER, ctx, hlp )
     };
   }
 
-  static TDPref[] makeSketchPrefs( Resources res, TDPrefHelper hlp )
+
+  static TDPref[] makeGeekDevicePrefs( Context ctx, TDPrefHelper hlp )
+  {
+    int cat = TDPrefActivity.PREF_GEEK_DEVICE;
+    String[] key = TDPrefKey.GEEKDEVICE;
+    int[] tit    = TDPrefKey.GEEKDEVICEtitle;
+    int[] dsc    = TDPrefKey.GEEKDEVICEdesc;
+    String[] def = TDPrefKey.GEEKDEVICEdef;
+    return new TDPref[ ] {
+      makeEdt( cat, key[0], tit[0], dsc[0], E, def[0], INTEGER, ctx, hlp ),
+      makeEdt( cat, key[1], tit[1], dsc[1], A, def[1], INTEGER, ctx, hlp ),
+      makeEdt( cat, key[2], tit[2], dsc[2], A, def[2], INTEGER, ctx, hlp ),
+      makeEdt( cat, key[3], tit[3], dsc[3], A, def[3], INTEGER, ctx, hlp ),
+      makeEdt( cat, key[4], tit[4], dsc[4], A, def[4], INTEGER, ctx, hlp )
+    };
+  }
+
+  static TDPref[] makeGeekLinePrefs( Context ctx, TDPrefHelper hlp )
+  {
+    int cat = TDPrefActivity.PREF_GEEK_LINE;
+    String[] key = TDPrefKey.GEEKLINE;
+    int[] tit    = TDPrefKey.GEEKLINEtitle;
+    int[] dsc    = TDPrefKey.GEEKLINEdesc;
+    String[] def = TDPrefKey.GEEKLINEdef;
+    return new TDPref[ ] {
+      makeEdt( cat, key[ 0], tit[ 0], dsc[ 0], T, def[ 0], FLOAT,   ctx, hlp ), // REDUCE ANGLE
+      makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], T, def[ 1], FLOAT,   ctx, hlp ), // BEZIER ACCUR.
+      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2], FLOAT,   ctx, hlp ), //        CORNER
+      makeCbx( cat, key[ 3], tit[ 3], dsc[ 3], T, def[ 3],          ctx, hlp ), // SNAP
+      makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], T, def[ 4],          ctx, hlp ), // CURVE
+      makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5],          ctx, hlp )  // PATH MULTISELECT
+    };
+  }
+
+  static TDPref[] makeGeekPrefs( Context ctx, TDPrefHelper hlp )
+  {
+    int cat = TDPrefActivity.PREF_CATEGORY_GEEK;
+    String[] key = TDPrefKey.GEEK;
+    int[] tit    = TDPrefKey.GEEKtitle;
+    int[] dsc    = TDPrefKey.GEEKdesc;
+    String[] def = TDPrefKey.GEEKdef;
+    return new TDPref[ ] {
+      makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], T, def[ 0],          ctx, hlp ), // EXTEND_FRAC
+      makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], T, def[ 1],          ctx, hlp ), // RECENT_SHOT
+      makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2],          ctx, hlp ), // BEDDING PLANE
+      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], A, def[ 3], INTEGER, ctx, hlp ), // MAX CLINO SPLAY-PLAN
+      makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], T, def[ 4],          ctx, hlp ), // DASH COHERENCE
+      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5], FLOAT,   ctx, hlp ), // DASH PLAN
+      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], T, def[ 6], FLOAT,   ctx, hlp ), // DASH PROFILE
+      makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], T, def[ 7], FLOAT,   ctx, hlp ), // DASH X-SCETION
+      makeLst( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8], R.array.backupNumber, R.array.backupNumberValue, ctx, hlp ),
+      makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9], INTEGER, ctx, hlp ),
+      makeFwd( cat, key[10], tit[10],          T,          ctx, hlp ), // GEEK_LINE
+      makeFwd( cat, key[11], tit[11],          T,          ctx, hlp ), // PLOT_WALLS
+      makeFwd( cat, key[12], tit[12],          T,          ctx, hlp ), // GEEK_DEVICE
+      makeFwd( cat, key[13], tit[13],          D,          ctx, hlp )  // SKETCH
+    };
+  }
+
+  static TDPref[] makeSketchPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_CATEGORY_SKETCH;
     String[] key = TDPrefKey.SKETCH;
@@ -939,53 +967,53 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] dsc    = TDPrefKey.SKETCHdesc;
     String[] def = TDPrefKey.SKETCHdef;
     return new TDPref[ ] {
-      // makeCbx( cat, key[ ], tit[ ], dsc[ ], X, def[ ],          res, hlp ),
-      makeLst( cat, key[0], tit[0], dsc[0], D, def[0], R.array.modelType, R.array.modelTypeValue, res, hlp ),
-      makeEdt( cat, key[1], tit[1], dsc[1], D, def[1], FLOAT,   res, hlp ),
-      // makeEdt( cat, key[ ], tit[ ], dsc[ ], X, def[ ], FLOAT,   res, hlp ),
-      // makeEdt( cat, key[ ], tit[ ], dsc[ ], X, def[ ], FLOAT,   res, hlp ),
-      makeEdt( cat, key[2], tit[2], dsc[2], D, def[2], FLOAT,   res, hlp ),
-      // makeEdt( cat, key[ ], tit[ ], dsc[ ], X, def[ ], INTEGER, res, hlp ) 
+      // makeCbx( cat, key[ ], tit[ ], dsc[ ], X, def[ ],          ctx, hlp ),
+      makeLst( cat, key[0], tit[0], dsc[0], D, def[0], R.array.modelType, R.array.modelTypeValue, ctx, hlp ),
+      makeEdt( cat, key[1], tit[1], dsc[1], D, def[1], FLOAT,   ctx, hlp ),
+      // makeEdt( cat, key[ ], tit[ ], dsc[ ], X, def[ ], FLOAT,   ctx, hlp ),
+      // makeEdt( cat, key[ ], tit[ ], dsc[ ], X, def[ ], FLOAT,   ctx, hlp ),
+      makeEdt( cat, key[2], tit[2], dsc[2], D, def[2], FLOAT,   ctx, hlp )
+      // makeEdt( cat, key[ ], tit[ ], dsc[ ], X, def[ ], INTEGER, ctx, hlp ) 
     };
   }
 
-  static TDPref[] makeLogPrefs( Resources res, TDPrefHelper hlp )
+  static TDPref[] makeLogPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_CATEGORY_LOG;
     String[] key = TDPrefKey.LOG;
     int[] tit    = TDPrefKey.LOGtitle;
     return new TDPref[ ] {
-      makeLst( cat, key[0], R.string.pref_log_stream_title, R.string.pref_log_stream_summary, T, "0", R.array.logStream, R.array.logStreamValue, res, hlp ),
-      makeCbx( cat, key[ 1], tit[ 0], -1, T, false, res, hlp ),
-      makeCbx( cat, key[ 2], tit[ 1], -1, T, false, res, hlp ),
-      makeCbx( cat, key[ 3], tit[ 2], -1, T, true,  res, hlp ),
-      makeCbx( cat, key[ 4], tit[ 3], -1, T, false, res, hlp ),
-      makeCbx( cat, key[ 5], tit[ 4], -1, T, false, res, hlp ),
-      makeCbx( cat, key[ 6], tit[ 5], -1, T, false, res, hlp ),
-      makeCbx( cat, key[ 7], tit[ 6], -1, T, false, res, hlp ),
-      makeCbx( cat, key[ 8], tit[ 7], -1, T, false, res, hlp ),
-      makeCbx( cat, key[ 9], tit[ 8], -1, T, false, res, hlp ),
-      makeCbx( cat, key[10], tit[ 9], -1, T, false, res, hlp ),
-      makeCbx( cat, key[11], tit[10], -1, T, false, res, hlp ),
-      makeCbx( cat, key[12], tit[11], -1, T, false, res, hlp ),
-      makeCbx( cat, key[13], tit[12], -1, T, false, res, hlp ),
-      makeCbx( cat, key[14], tit[13], -1, T, false, res, hlp ),
-      makeCbx( cat, key[15], tit[14], -1, T, false, res, hlp ),
-      makeCbx( cat, key[16], tit[15], -1, T, false, res, hlp ),
-      makeCbx( cat, key[17], tit[16], -1, T, false, res, hlp ),
-      makeCbx( cat, key[18], tit[17], -1, T, false, res, hlp ),
-      makeCbx( cat, key[19], tit[18], -1, T, false, res, hlp ),
-      makeCbx( cat, key[20], tit[19], -1, T, false, res, hlp ),
-      makeCbx( cat, key[21], tit[20], -1, T, false, res, hlp ),
-      makeCbx( cat, key[22], tit[21], -1, T, false, res, hlp ),
-      makeCbx( cat, key[23], tit[22], -1, T, false, res, hlp ),
-      makeCbx( cat, key[24], tit[23], -1, T, false, res, hlp ),
-      makeCbx( cat, key[25], tit[24], -1, T, false, res, hlp ),
-      makeCbx( cat, key[26], tit[25], -1, T, false, res, hlp ),
-      makeCbx( cat, key[27], tit[26], -1, T, false, res, hlp ),
-      makeCbx( cat, key[28], tit[27], -1, T, false, res, hlp ),
-      makeCbx( cat, key[29], tit[28], -1, T, false, res, hlp ) 
-      // makeCbx( cat, key[30], tit[29], -1, T, false, res, hlp )  // DISTOX_LOG_SYNC
+      makeLst( cat, key[0], R.string.pref_log_stream_title, R.string.pref_log_stream_summary, T, "0", R.array.logStream, R.array.logStreamValue, ctx, hlp ),
+      makeCbx( cat, key[ 1], tit[ 0], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[ 2], tit[ 1], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[ 3], tit[ 2], -1, T, true,  ctx, hlp ),
+      makeCbx( cat, key[ 4], tit[ 3], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[ 5], tit[ 4], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[ 6], tit[ 5], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[ 7], tit[ 6], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[ 8], tit[ 7], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[ 9], tit[ 8], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[10], tit[ 9], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[11], tit[10], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[12], tit[11], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[13], tit[12], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[14], tit[13], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[15], tit[14], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[16], tit[15], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[17], tit[16], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[18], tit[17], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[19], tit[18], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[20], tit[19], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[21], tit[20], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[22], tit[21], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[23], tit[22], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[24], tit[23], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[25], tit[24], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[26], tit[25], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[27], tit[26], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[28], tit[27], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[29], tit[28], -1, T, false, ctx, hlp ) 
+      // makeCbx( cat, key[30], tit[29], -1, T, false, ctx, hlp )  // DISTOX_LOG_SYNC
     };
   }
 

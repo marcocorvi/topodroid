@@ -29,8 +29,9 @@ class TDPrefKey
     "DISTOX_EXPORT_PREF",   // 9  FORWARD
     "DISTOX_SURVEY_PREF",   //    FORWARD
     "DISTOX_PLOT_PREF",     //    FORWARD
-    "DISTOX_SKETCH_PREF",   //    FORWARD
     "DISTOX_DEVICE_PREF",   // 13 FORWARD
+    "DISTOX_GEEK_PREF",     // 13 FORWARD
+    // "DISTOX_SKETCH_PREF",   //    FORWARD
     null
   };
 
@@ -47,8 +48,10 @@ class TDPrefKey
     R.string.pref_cat_import_export,
     R.string.pref_cat_survey,
     R.string.pref_cat_drawing,
-    R.string.pref_cat_sketch,
-    R.string.pref_cat_device
+    R.string.pref_cat_device,
+    R.string.pref_cat_geek,
+    // R.string.pref_cat_sketch,
+    -1
   };
 
   static int[] MAINdesc = {
@@ -65,6 +68,8 @@ class TDPrefKey
     -1,
     -1,
     -1,
+    -1,
+    // -1,
     -1
   };
 
@@ -82,23 +87,26 @@ class TDPrefKey
      "",
      "",
      "",
-     ""
+     "",
+     // "",
+     null
   };
 
   // ----------------------------------------------------------------------------------------------------
 
-  static String[] SURVEY = { // [11] 
+  static String[] SURVEY = { // [12] 
     "DISTOX_TEAM",              // 0 * // default team
     "DISTOX_SURVEY_STATION",    // 1   // DISTOX_SURVEY_STATIONS must not be used
     "DISTOX_STATION_NAMES", // station names: 0 alphanumeric, 1 numbers
     "DISTOX_INIT_STATION",      // 3 * // default initial station name
     "DISTOX_THUMBNAIL",                // size of photo thumbnails
     "DISTOX_DATA_BACKUP", //
-    "DISTOX_SHARED_XSECTIONS",  // 6 // whether at-station X-sections are shared among plots
-    "DISTOX_SHOT_UNITS_SCREEN", // 7  FORWARD
+    "DISTOX_FIXED_ORIGIN",
+    "DISTOX_SHARED_XSECTIONS",  // 7 // whether at-station X-sections are shared among plots
+    "DISTOX_SHOT_UNITS_SCREEN", // 8  FORWARD
     "DISTOX_SHOT_DATA_SCREEN",  //    FORWARD
     "DISTOX_LOCATION_SCREEN",   //    FORWARD
-    "DISTOX_ACCURACY_SCREEN",   // 10 FORWARD
+    "DISTOX_ACCURACY_SCREEN",   // 11 FORWARD
     null
   };
 
@@ -109,6 +117,7 @@ class TDPrefKey
     R.string.pref_init_station_title,
     R.string.pref_thumbnail_title,
     R.string.pref_data_backup_title,
+    R.string.pref_fixed_origin_title,
     R.string.pref_shared_xsections_title,
     R.string.pref_shot_units_title,
     R.string.pref_shot_data_title,
@@ -123,6 +132,7 @@ class TDPrefKey
     R.string.pref_init_station_summary,
     R.string.pref_thumbnail_summary,  
     R.string.pref_data_backup_summary,
+    R.string.pref_fixed_origin_summary,
     R.string.pref_shared_xsections_summary,
     -1,
     -1,
@@ -138,6 +148,7 @@ class TDPrefKey
     "200",
     FALSE,
     FALSE,
+    FALSE,
     "",
     "",
     "",
@@ -151,14 +162,15 @@ class TDPrefKey
     "DISTOX_SIDE_DRAG",           // whether to enable side-drag
     "DISTOX_ZOOM_CTRL",           // whether to have zoom-ctrl (no, temp., always)
     // "DISTOX_SECTION_STATIONS",
+    "DISTOX_HTHRESHOLD",      // if clino is over thr, H_SECTION is horizontal (has north arrow)
     "DISTOX_CHECK_ATTACHED", // 4 // whether to check all shots are connected
     "DISTOX_CHECK_EXTEND",        // whether leg extends are all set
-    "DISTOX_BACKUP_NUMBER",       // number of plot backups
-    "DISTOX_BACKUP_INTERVAL",// 7 // minimum interval between plot backups [60 s]
+    // "DISTOX_BACKUP_NUMBER",       // number of plot backups
+    // "DISTOX_BACKUP_INTERVAL",// 7 // minimum interval between plot backups [60 s]
     "DISTOX_TOOL_POINT",     // 8  FORWARD
     "DISTOX_TOOL_LINE",      //    FORWARD
     "DISTOX_PLOT_SCREEN",    //    FORWARD
-    "DISTOX_PLOT_WALLS",     // 11 FORWARD
+    // "DISTOX_PLOT_WALLS",     // 11 FORWARD
     null
   };
 
@@ -168,14 +180,16 @@ class TDPrefKey
     R.string.pref_side_drag_title,
     R.string.pref_zoom_controls_title,
     // R.string.pref_section_stations_title,
+    R.string.pref_hthr_title,
     R.string.pref_checkAttached_title,
     R.string.pref_checkExtend_title,
-    R.string.pref_backup_number_title,
-    R.string.pref_backup_interval_title,
+    // R.string.pref_backup_number_title,
+    // R.string.pref_backup_interval_title,
     R.string.pref_tool_point_title,
     R.string.pref_tool_line_title,
     R.string.pref_plot_screen_title,
-    R.string.pref_plot_walls_title
+    // R.string.pref_plot_walls_title,
+    -1
   };
 
   static int[] PLOTdesc = {
@@ -184,13 +198,15 @@ class TDPrefKey
     R.string.pref_side_drag_summary,
     R.string.pref_zoom_controls_summary,
     // R.string.pref_section_stations_summary,
+    R.string.pref_hthr_summary,
     R.string.pref_checkAttached_summary,
     R.string.pref_checkExtend_summary,
-    R.string.pref_backup_number_summary,
-    R.string.pref_backup_interval_summary,
+    // R.string.pref_backup_number_summary,
+    // R.string.pref_backup_interval_summary,
     -1,
     -1,
     -1,
+    // -1,
     -1
   };
 
@@ -200,14 +216,16 @@ class TDPrefKey
     TRUE, 
     TDString.ONE,
     // TDString.THREE,
+    "70",
     FALSE,
     TRUE,
-    TDString.FIVE,
-    TDString.SIXTY,
+    // TDString.FIVE,
+    // TDString.SIXTY,
     TDString.EMPTY,
     TDString.EMPTY,
     TDString.EMPTY,
-    TDString.EMPTY
+    // TDString.EMPTY,
+    null
   };
 
   // ------------------------------------------------------------------------------
@@ -283,12 +301,12 @@ class TDPrefKey
     "DISTOX_SOCK_TYPE",            // socket type
     // "DISTOX_COMM_RETRY",        // number of socket connection attempts
     "DISTOX_Z6_WORKAROUND",   // 5 // whether to enable Z6 workaround
-    "DISTOX_SOCKET_DELAY",         // delay before a socket-connection attempt
-    "DISTOX_AUTO_PAIR",       // 7 // whether to auto-pair the discovered DistoX
-    "DISTOX_WAIT_DATA",       // 8 // msec wait after a data/vector packet
-    "DISTOX_WAIT_CONN",            // msec wait after getting "NO PACKET"
-    "DISTOX_WAIT_LASER",           // msec wait after command "laser ON"
-    "DISTOX_WAIT_SHOT",       // 11 // msec wait after command "take shot"
+    "DISTOX_AUTO_PAIR",       // 6 // whether to auto-pair the discovered DistoX
+    // "DISTOX_SOCKET_DELAY",         // delay before a socket-connection attempt
+    // "DISTOX_WAIT_DATA",       // 8 // msec wait after a data/vector packet
+    // "DISTOX_WAIT_CONN",            // msec wait after getting "NO PACKET"
+    // "DISTOX_WAIT_LASER",           // msec wait after command "laser ON"
+    // "DISTOX_WAIT_SHOT",       // 11 // msec wait after command "take shot"
     "DISTOX_CALIB_PREF",      // 12 FORWARD
     null
   };
@@ -303,13 +321,14 @@ class TDPrefKey
     R.string.pref_sock_type_title,
     // R.string.pref_comm_retry_title,
     R.string.pref_z6_workaround_title,
-    R.string.pref_socket_delay_title,
     R.string.pref_auto_pair_title,
-    R.string.pref_wait_data_title,
-    R.string.pref_wait_conn_title,
-    R.string.pref_wait_laser_title,
-    R.string.pref_wait_shot_title,
-    R.string.pref_cat_calib
+    // R.string.pref_socket_delay_title,
+    // R.string.pref_wait_data_title,
+    // R.string.pref_wait_conn_title,
+    // R.string.pref_wait_laser_title,
+    // R.string.pref_wait_shot_title,
+    R.string.pref_cat_calib,
+    -1
   };
 
   static int[] DEVICEdesc = {
@@ -322,12 +341,13 @@ class TDPrefKey
     R.string.pref_sock_type_summary,
     // R.string.pref_comm_retry_summary,
     R.string.pref_z6_workaround_summary,
-    R.string.pref_socket_delay_summary,
     R.string.pref_auto_pair_summary,
-    R.string.pref_wait_data_summary,
-    R.string.pref_wait_conn_summary,
-    R.string.pref_wait_laser_summary,
-    R.string.pref_wait_shot_summary,
+    // R.string.pref_socket_delay_summary,
+    // R.string.pref_wait_data_summary,
+    // R.string.pref_wait_conn_summary,
+    // R.string.pref_wait_laser_summary,
+    // R.string.pref_wait_shot_summary,
+    -1,
     -1
   };
 
@@ -341,12 +361,12 @@ class TDPrefKey
     TDString.ZERO,
     // TDString.ONE,
     TRUE,
-    TDString.ZERO,
     TRUE,
-    "250",
-    "500",
-    "1000",
-    "2000",
+    // TDString.ZERO,
+    // "250",
+    // "500",
+    // "1000",
+    // "2000",
     TDString.EMPTY
   };
 
@@ -770,7 +790,8 @@ class TDPrefKey
     // "DISTOX_MAG_ANOMALY",        // whether to compensate magnetic anomaly
     "DISTOX_SHOT_TIMER",      // 12 // bearing-clino timer [1/10 s]
     "DISTOX_BEEP_VOLUME",     // 13 // bearing-clino beep volume [%]
-    "DISTOX_EXTEND_FRAC",     // 14 // fractional extend
+    // "DISTOX_EXTEND_FRAC",     // 14 // fractional extend
+    // "DISTOX_RECENT_SHOT",     // 15 // highlight recent shots
     null
   };
 
@@ -790,7 +811,9 @@ class TDPrefKey
     // R.string.pref_mag_anomaly_title,
     R.string.pref_shot_timer_title,
     R.string.pref_beep_volume_title,
-    R.string.pref_extend_frac_title
+    // R.string.pref_extend_frac_title,
+    // R.string.pref_recent_shot_title,
+    -1
   };
 
   static int[] DATAdesc = {
@@ -809,13 +832,15 @@ class TDPrefKey
     // R.string.pref_mag_anomaly_summary,
     R.string.pref_shot_timer_summary,
     R.string.pref_beep_volume_summary,
-    R.string.pref_extend_frac_summary
+    // R.string.pref_extend_frac_summary,
+    // R.string.pref_recent_shot_summary,
+    -1
   };
 
   static String[] DATAdef = {
     "0.05",
     TDString.FIFTY,
-    "0.5",
+    TDString.ZERO,
     TDString.THREE,
     "30",
     FALSE,
@@ -828,7 +853,9 @@ class TDPrefKey
     // FALSE,
     TDString.TEN,
     TDString.FIFTY,
-    FALSE
+    // FALSE,
+    // FALSE,
+    null
   };
 
   // ------------------------------------------------------------------------------
@@ -927,12 +954,12 @@ class TDPrefKey
     "DISTOX_ERASENESS",            // "erase" radius // "erase" radius
     "DISTOX_MIN_SHIFT",            // maximum amount for a shift (to avoid jumps)
     "DISTOX_POINTING",        // 6 // "size" of a "point touch" (max distance between down and up)
-    "DISTOX_SPLAY_VERT_THRS",      // splays with clino over mSplayVertThrs are not displayed in plan view
-    "DISTOX_DASH_SPLAY",           // whether dash-splay are coherent between plan and profile
-    "DISTOX_VERT_SPLAY",      // 9 // splays with clino over this are shown with dashed/dotted line
-    "DISTOX_HORIZ_SPLAY",          // splays off-azimuth over this are shown with dashed/dotted line
-    "DISTOX_SECTION_SPLAY",        // splays with angle over this are shown with dashed/dotted line
-    "DISTOX_HTHRESHOLD",      // 12 // if clino is over thr, H_SECTION is horizontal (has north arrow)
+    // "DISTOX_SPLAY_VERT_THRS",      // splays with clino over mSplayVertThrs are not displayed in plan view
+    // "DISTOX_DASH_SPLAY",           // whether dash-splay are coherent between plan and profile
+    // "DISTOX_VERT_SPLAY",      // 9 // splays with clino over this are shown with dashed/dotted line
+    // "DISTOX_HORIZ_SPLAY",          // splays off-azimuth over this are shown with dashed/dotted line
+    // "DISTOX_SECTION_SPLAY",        // splays with angle over this are shown with dashed/dotted line
+    // "DISTOX_HTHRESHOLD",      // 12 // if clino is over thr, H_SECTION is horizontal (has north arrow)
     null
   };
 
@@ -944,12 +971,13 @@ class TDPrefKey
     R.string.pref_eraseness_title,
     R.string.pref_min_shift_title,
     R.string.pref_pointing_title,
-    R.string.pref_vthr_title,
-    R.string.pref_dash_splay_title,
-    R.string.pref_vert_splay_title,
-    R.string.pref_horiz_splay_title,
-    R.string.pref_section_splay_title,
-    R.string.pref_hthr_title
+    // R.string.pref_vthr_title,
+    // R.string.pref_dash_splay_title,
+    // R.string.pref_vert_splay_title,
+    // R.string.pref_horiz_splay_title,
+    // R.string.pref_section_splay_title,
+    // R.string.pref_hthr_title,
+    -1
   };
 
   static int[] SCREENdesc = {
@@ -960,12 +988,13 @@ class TDPrefKey
     R.string.pref_eraseness_message,
     R.string.pref_min_shift_message,
     R.string.pref_pointing_message, 
-    R.string.pref_vthr_summary,      
-    R.string.pref_dash_splay_message, 
-    R.string.pref_vert_splay_message,  
-    R.string.pref_horiz_splay_message,  
-    R.string.pref_section_splay_message, 
-    R.string.pref_hthr_summary
+    // R.string.pref_vthr_summary,      
+    // R.string.pref_dash_splay_message, 
+    // R.string.pref_vert_splay_message,  
+    // R.string.pref_horiz_splay_message,  
+    // R.string.pref_section_splay_message, 
+    // R.string.pref_hthr_summary,
+    -1
   };
 
   static String[] SCREENdef = {
@@ -976,27 +1005,30 @@ class TDPrefKey
     "36",
     TDString.SIXTY,
     TDString.TWENTYFOUR,
-    "80",
-    TRUE,
-    TDString.FIFTY,
-    TDString.SIXTY,
-    TDString.SIXTY,
-    "70"
+    // "80",
+    // TRUE,
+    // TDString.FIFTY,
+    // TDString.SIXTY,
+    // TDString.SIXTY,
+    // "70",
+    null
   };
 
 
   // ------------------------------------------------------------------------------
-  static String[] LINE = { // [10]
+  static String[] LINE = { // [11]
     "DISTOX_LINE_THICKNESS",  // 0 // thickness of normal lines (walls are twice)
     "DISTOX_LINE_STYLE",           // line style: 0 bezier, 1 fine, 2 normal, 3 coarse
     "DISTOX_LINE_SEGMENT",         // minimum distance between consecutive points on a line
     "DISTOX_ARROW_LENGTH",    // 3 // length of the tick at the first line-point (when applicable)
-    "DISTOX_REDUCE_ANGLE",         // "rock" reducing lines: maximal angle
     "DISTOX_AUTO_SECTION_PT",      // whether to add section point when tracing a section line
     "DISTOX_LINE_CONTINUE",   // 6 // default line continuation set
     "DISTOX_AREA_BORDER",          // area border visibility
-    "DISTOX_LINE_ACCURACY",        // Bezier interpolator param:
-    "DISTOX_LINE_CORNER",     // 9 // Bezier interpolator param:
+    // "DISTOX_REDUCE_ANGLE",         // "rock" reducing lines: maximal angle
+    // "DISTOX_LINE_ACCURACY",        // Bezier interpolator param:
+    // "DISTOX_LINE_CORNER",     // 9 // Bezier interpolator param:
+    // "DISTOX_LINE_SNAP",       // whether to show line-snap action
+    // "DISTOX_LINE_CURVE",      // whether to show line- smooth/straighten action
     null
   };
 
@@ -1005,12 +1037,15 @@ class TDPrefKey
     R.string.pref_linestyle_title,
     R.string.pref_segment_title,
     R.string.pref_arrow_length_title,
-    R.string.pref_reduce_angle_title, 
     R.string.pref_auto_section_pt_title,
     R.string.pref_linecontinue_title,
     R.string.pref_area_border_title,
-    R.string.pref_lineacc_title, 
-    R.string.pref_linecorner_title
+    // R.string.pref_reduce_angle_title, 
+    // R.string.pref_lineacc_title, 
+    // R.string.pref_linecorner_title,
+    // R.string.pref_linesnap_title,
+    // R.string.pref_linecurve_title,
+    -1
   };
 
   static int[] LINEdesc = {
@@ -1018,12 +1053,15 @@ class TDPrefKey
     R.string.pref_linestyle_summary,
     R.string.pref_segment_message,
     R.string.pref_arrow_length_message,
-    R.string.pref_reduce_angle_summary,
     R.string.pref_auto_section_pt_summary,
     R.string.pref_linecontinue_summary,
     R.string.pref_area_border_summary,
-    R.string.pref_lineacc_summary,
-    R.string.pref_linecorner_summary
+    // R.string.pref_reduce_angle_summary,
+    // R.string.pref_lineacc_summary,
+    // R.string.pref_linecorner_summary,
+    // R.string.pref_linesnap_summary,
+    // R.string.pref_linecurve_summary,
+    -1
   };
 
   static String[] LINEdef = {
@@ -1031,12 +1069,15 @@ class TDPrefKey
     TDString.TWO,
     TDString.TEN,
     "8",
-    "45",
     TRUE,
     TDString.ZERO,
     TRUE,
-    "1.0",
-    "20.0"
+    // "45",
+    // "1.0",
+    // "20.0",
+    // FALSE,
+    // FALSE
+    null
   };
 
   // ------------------------------------------------------------------------------
@@ -1113,12 +1154,12 @@ class TDPrefKey
     "DISTOX_LINE_STYLE",            // line style: 0 bezier, 1 fine, 2 normal, 3 coarse
     "DISTOX_LINE_SEGMENT",    // 5
     "DISTOX_ARROW_LENGTH",          // length of the tick at the first line-point (when applicable)
-    "DISTOX_REDUCE_ANGLE",          // "rock" reducing lines: maximal angle
-    "DISTOX_AUTO_SECTION_PT", // 8  // whether to add section point when tracing a section line
+    "DISTOX_AUTO_SECTION_PT", // 7  // whether to add section point when tracing a section line
     "DISTOX_LINE_CONTINUE",         // default line continuation set
     "DISTOX_AREA_BORDER",           // area border visibility
-    "DISTOX_LINE_ACCURACY",   // 11 // Bezier interpolator param:
-    "DISTOX_LINE_CORNER",     // 12 // Bezier interpolator param:
+    // "DISTOX_REDUCE_ANGLE",    // 10 // "rock" reducing lines: maximal angle
+    // "DISTOX_LINE_ACCURACY",   // 11 // Bezier interpolator param:
+    // "DISTOX_LINE_CORNER",     // 12 // Bezier interpolator param:
     null
   };
 
@@ -1130,12 +1171,13 @@ class TDPrefKey
     R.string.pref_linestyle_title,
     R.string.pref_segment_title,
     R.string.pref_arrow_length_title,
-    R.string.pref_reduce_angle_title,
     R.string.pref_auto_section_pt_title,
     R.string.pref_linecontinue_title,
     R.string.pref_area_border_title,
-    R.string.pref_lineacc_title,
-    R.string.pref_linecorner_title
+    // R.string.pref_reduce_angle_title,
+    // R.string.pref_lineacc_title,
+    // R.string.pref_linecorner_title
+    -1
   };
 
   static int[] DRAWdesc = {
@@ -1146,12 +1188,13 @@ class TDPrefKey
     R.string.pref_linestyle_summary,
     R.string.pref_segment_message,
     R.string.pref_arrow_length_message,
-    R.string.pref_reduce_angle_summary,
     R.string.pref_auto_section_pt_summary,
     R.string.pref_linecontinue_summary,
     R.string.pref_area_border_summary,
-    R.string.pref_lineacc_summary,  
-    R.string.pref_linecorner_summary
+    // R.string.pref_reduce_angle_summary,
+    // R.string.pref_lineacc_summary,  
+    // R.string.pref_linecorner_summary
+    -1
   };
 
   static String[] DRAWdef = {
@@ -1162,12 +1205,13 @@ class TDPrefKey
     TDString.TWO,
     TDString.TEN,
     "8",
-    "45",
     FALSE,
     TDString.ZERO,
     TRUE,
-    "1.0",
-    "20.0"
+    // "45",
+    // "1.0",
+    // "20.0"
+    null
   };
 
   // ------------------------------------------------------------------------------
@@ -1224,6 +1268,161 @@ class TDPrefKey
     TDString.TWENTYFOUR,
     TDString.SIXTY,
     TDString.TWENTYFOUR
+  };
+
+
+  // ------------------------------------------------------------------------------
+  static String[] GEEKLINE = {
+    "DISTOX_REDUCE_ANGLE",    // "rock" reducing lines: maximal angle
+    "DISTOX_LINE_ACCURACY",   // Bezier interpolator param:
+    "DISTOX_LINE_CORNER",     // Bezier interpolator param:
+    "DISTOX_LINE_SNAP",       // whether to show line-snap action
+    "DISTOX_LINE_CURVE",      // whether to show line- smooth/straighten action
+    "DISTOX_PATH_MULTISELECT",// path multiselection
+    null
+  };
+
+  static int[] GEEKLINEtitle = {
+    R.string.pref_reduce_angle_title,
+    R.string.pref_lineacc_title,  
+    R.string.pref_linecorner_title,
+    R.string.pref_linesnap_title,
+    R.string.pref_linecurve_title,
+    R.string.pref_path_multiselect_title,
+    -1
+  };
+
+  static int[] GEEKLINEdesc = {
+    R.string.pref_reduce_angle_summary,
+    R.string.pref_lineacc_summary,  
+    R.string.pref_linecorner_summary,
+    R.string.pref_linesnap_summary,
+    R.string.pref_linecurve_summary,
+    R.string.pref_path_multiselect_title,
+    -1
+  };
+
+  static String[] GEEKLINEdef = {
+    "45",
+    "1.0",
+    "20.0",
+    FALSE,
+    FALSE,
+    FALSE,
+    null
+  };
+
+  static String[] GEEK = {
+    "DISTOX_EXTEND_FRAC",     // fractional extend
+    "DISTOX_RECENT_SHOT",     // highlight recent shots
+    "DISTOX_BEDDING",         // splays bed plane interpolation
+    "DISTOX_SPLAY_VERT_THRS", // splays with clino over mSplayVertThrs are not displayed in plan view
+    "DISTOX_DASH_SPLAY",      // whether dash-splay are coherent between plan and profile
+    "DISTOX_VERT_SPLAY",      // splays with clino over this are shown with dashed/dotted line
+    "DISTOX_HORIZ_SPLAY",     // splays off-azimuth over this are shown with dashed/dotted line
+    "DISTOX_SECTION_SPLAY",   // splays with angle over this are shown with dashed/dotted line
+    // "DISTOX_HTHRESHOLD",      // if clino is over thr, H_SECTION is horizontal (has north arrow)
+    "DISTOX_BACKUP_NUMBER",   // number of plot backups
+    "DISTOX_BACKUP_INTERVAL", // minimum interval between plot backups [60 s]
+    "DISTOX_GEEK_LINE",       // FORWARD
+    "DISTOX_PLOT_WALLS",      // FORWARD
+    "DISTOX_GEEK_DEVICE",     // FORWARD
+    "DISTOX_SKETCH_PREF",     // FORWARD
+    null
+  };
+
+  static int[] GEEKtitle = {
+    R.string.pref_extend_frac_title,
+    R.string.pref_recent_shot_title,
+    R.string.pref_plane_interpolation_title,
+    R.string.pref_vthr_title,
+    R.string.pref_dash_splay_title,
+    R.string.pref_vert_splay_title,
+    R.string.pref_horiz_splay_title,
+    R.string.pref_section_splay_title,
+    // R.string.pref_hthr_title,
+    R.string.pref_backup_number_title,
+    R.string.pref_backup_interval_title,
+    R.string.pref_tool_line_title,
+    R.string.pref_plot_walls_title,
+    R.string.pref_cat_device,
+    R.string.pref_cat_sketch,
+    -1
+  };
+
+  static int[] GEEKdesc = {
+    R.string.pref_extend_frac_summary,
+    R.string.pref_recent_shot_summary,
+    R.string.pref_plane_interpolation_summary,
+    R.string.pref_vthr_summary,      
+    R.string.pref_dash_splay_message, 
+    R.string.pref_vert_splay_message,  
+    R.string.pref_horiz_splay_message,  
+    R.string.pref_section_splay_message, 
+    // R.string.pref_hthr_summary,
+    R.string.pref_backup_number_summary,
+    R.string.pref_backup_interval_summary,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1
+  };
+
+  static String[] GEEKdef = {
+    FALSE,
+    FALSE,
+    FALSE,
+    "80",
+    TRUE,
+    TDString.FIFTY,
+    TDString.SIXTY,
+    TDString.SIXTY,
+    // "70",
+    TDString.FIVE,
+    TDString.SIXTY,
+    TDString.EMPTY,
+    TDString.EMPTY,
+    TDString.EMPTY,
+    TDString.EMPTY,
+    null
+  };
+
+  // -------------------------------------------------------------------------------
+  static String[] GEEKDEVICE = {
+    "DISTOX_SOCKET_DELAY",         // delay before a socket-connection attempt
+    "DISTOX_WAIT_DATA",       // 8 // msec wait after a data/vector packet
+    "DISTOX_WAIT_CONN",            // msec wait after getting "NO PACKET"
+    "DISTOX_WAIT_LASER",           // msec wait after command "laser ON"
+    "DISTOX_WAIT_SHOT",       // 11 // msec wait after command "take shot"
+    null
+  };
+
+  static int[] GEEKDEVICEtitle = {
+    R.string.pref_socket_delay_title,
+    R.string.pref_wait_data_title,
+    R.string.pref_wait_conn_title,
+    R.string.pref_wait_laser_title,
+    R.string.pref_wait_shot_title,
+    -1
+  };
+
+  static int[] GEEKDEVICEdesc = {
+    R.string.pref_socket_delay_summary,
+    R.string.pref_wait_data_summary,
+    R.string.pref_wait_conn_summary,
+    R.string.pref_wait_laser_summary,
+    R.string.pref_wait_shot_summary,
+    -1
+  };
+
+  static String[] GEEKDEVICEdef = {
+    TDString.ZERO,
+    "250",
+    "500",
+    "1000",
+    "2000",
+    null
   };
 
   // ------------------------------------------------------------------------------

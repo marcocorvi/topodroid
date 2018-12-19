@@ -7,9 +7,9 @@
   <Button
     android:layout_width="match_parent"
     android:layout_height="2dp"
-    android:layout_alignParentLeft="true"
     android:background="@color/pref_divider"
     />
+    <!-- android:layout_alignParentLeft="true" -->
 
   <LinearLayout 
     android:layout_width="match_parent" 
@@ -29,11 +29,11 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginRight="10dp"
-      android:layout_alignParentRight="true"
       android:gravity="right"
       android:layout_gravity="right"
       android:orientation="horizontal"
       >
+      <!-- android:layout_alignParentRight="true" -->
       <EditText android:id="@+id/edittext"
         android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -43,7 +43,8 @@
         android:singleLine="true"
         android:typeface="monospace"
         android:padding="@dimen/padding"
-        android:gravity="right"
+	android:gravity="right"
+	android:inputType="number"
       />
     </LinearLayout>
   </LinearLayout>

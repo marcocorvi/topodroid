@@ -159,14 +159,17 @@ class MultishotDialog extends MyDialog
       ((LinearLayout) findViewById( R.id.layout_splays )).setVisibility( View.GONE );
     }
 
-    String from = mBlk.mFrom;
-    boolean bedding = ( mBlks.size() > 1 && from != null && from.length() > 0 );
-    if ( bedding ) {
-      for ( DBlock blk : mBlks ) {
-        if ( ! from.equals( blk.mFrom ) ) {
-	  bedding = false;
-	  break;
-	}
+    boolean bedding = false;
+    if ( TDSetting.mBedding ) {
+      String from = mBlk.mFrom;
+      bedding = ( mBlks.size() > 1 && from != null && from.length() > 0 );
+      if ( bedding ) {
+        for ( DBlock blk : mBlks ) {
+          if ( ! from.equals( blk.mFrom ) ) {
+            bedding = false;
+            break;
+          }
+        }
       }
     }
     if ( bedding ) {

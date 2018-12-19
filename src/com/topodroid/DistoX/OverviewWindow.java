@@ -272,11 +272,11 @@ public class OverviewWindow extends ItemDrawer
 
     // --------------------------------------------------------------------------------------
 
-    @Override
-    public void setTheTitle()
-    {
-      // setTitle( res.getString( R.string.title_move ) );
-    }
+    // @Override // overridden method is empty
+    // public void setTheTitle()
+    // {
+    //   // setTitle( res.getString( R.string.title_move ) );
+    // }
 
     // private void AlertMissingSymbols()
     // {
@@ -536,11 +536,11 @@ public class OverviewWindow extends ItemDrawer
       doPause();
     }
 
-    @Override
-    protected synchronized void onStart()
-    {
-      super.onStart();
-    }
+    // @Override // only calls super method
+    // protected synchronized void onStart()
+    // {
+    //   super.onStart();
+    // }
 
     @Override
     protected synchronized void onStop()

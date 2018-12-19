@@ -419,6 +419,7 @@ public class ShotWindow extends Activity
     // Log.v("DistoX", "process shot list");
     DBlock prev = null;
     boolean prev_is_leg = false;
+    boolean check_recent = TDSetting.mShotRecent && mFlagLatest;
     for ( DBlock item : list ) {
       DBlock cur = item;
       // int t = cur.type();
@@ -475,7 +476,7 @@ public class ShotWindow extends Activity
             //   if ( st.equals( cur.mFrom ) ) { skip = false; break; }
             // }
             // if ( skip ) continue;
-            if ( ! ( showSplaysContains( cur.mFrom ) || ( mFlagLatest && cur.isRecent() ) ) ) continue;
+            if ( ! ( showSplaysContains( cur.mFrom ) || ( check_recent && cur.isRecent() ) ) ) continue;
           }
         } else { // cur.isMainLeg() // t == DBlock.BLOCK_MAIN_LEG
           prev = cur;
@@ -786,18 +787,18 @@ public class ShotWindow extends Activity
     long old_sid = TDInstance.sid;
     long old_id  = mShotId;
     // Log.v( TopoDroidApp.TAG, "split survey " + old_sid + " " + old_id );
-    if ( mApp.mShotWindow != null ) {
+    if ( TopoDroidApp.mShotWindow != null ) {
       if ( TDSetting.mDataBackup ) {
         TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false ); // try_save
       }
-      mApp.mShotWindow.finish();
-      mApp.mShotWindow = null;
+      TopoDroidApp.mShotWindow.finish();
+      TopoDroidApp.mShotWindow = null;
     }
-    if ( mApp.mSurveyWindow != null ) {
-      mApp.mSurveyWindow.finish();
-      mApp.mSurveyWindow = null;
+    if ( TopoDroidApp.mSurveyWindow != null ) {
+      TopoDroidApp.mSurveyWindow.finish();
+      TopoDroidApp.mSurveyWindow = null;
     }
-    mApp.mActivity.startSplitSurvey( old_sid, old_id ); // SPLIT SURVEY
+    TopoDroidApp.mActivity.startSplitSurvey( old_sid, old_id ); // SPLIT SURVEY
   }
 
   void doDeleteShot( long id, DBlock blk, int status, boolean leg )
@@ -927,7 +928,7 @@ public class ShotWindow extends Activity
     setContentView( R.layout.shot_activity );
     mApp = (TopoDroidApp) getApplication();
     mApp_mData = TopoDroidApp.mData;
-    mApp.mShotWindow = this; // FIXME
+    TopoDroidApp.mShotWindow = this; // FIXME
     mDataDownloader = mApp.mDataDownloader; // new DataDownloader( this, mApp );
     mActivity = this;
     mOnOpenDialog = false;

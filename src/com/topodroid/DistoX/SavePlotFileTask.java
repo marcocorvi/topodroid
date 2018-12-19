@@ -39,8 +39,8 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   // private final DrawingUtil mUtil;
   private final DrawingCommandManager mManager;
   private List<DrawingPath> mPaths;
-  private String mFullName;
-  private int mType;    // plot type
+  private String mFullName; // file fullname, or shp basepath
+  private int mType;        // plot type
   private int mProjDir;
   private int mSuffix;
   private int mRotate;  // nr. backups to rotate
@@ -137,6 +137,11 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
               mParent.get().doSaveWithExt( mNum, /* mUtil, */ mManager, mType, mFullName, "svg", false );
 	    }
             break;
+          case TDConst.DISTOX_EXPORT_SHP:
+	    if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
+              mParent.get().doSaveWithExt( mNum, /* mUtil, */ mManager, mType, mFullName, "shp", false );
+	    }
+            break;
           case TDConst.DISTOX_EXPORT_CSX: // IMPORTANT CSX must come before PNG
             if ( PlotInfo.isSketch2D( mType ) ) {
 	      if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
@@ -156,7 +161,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
                 float scale = mManager.getBitmapScale();
                 if (scale > 0) {
                   // FIXME execute must be called from the main thread, current thread is working thread
-                  new ExportBitmapToFile( mFormat, bitmap, scale, mFullName, false ).execute();
+                  (new ExportBitmapToFile( mFormat, bitmap, scale, mFullName, false )).exec();
                 } else {
                   TDLog.Error( "cannot save PNG: negative scale" );
                   ret1 = false;

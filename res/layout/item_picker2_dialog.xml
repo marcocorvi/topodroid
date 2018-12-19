@@ -5,27 +5,34 @@
   android:layout_height="match_parent"
   >
   <LinearLayout 
+    style="?android:attr/buttonBarStyle"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     >
     <Button android:id="@+id/item_point"
+      style="?android:attr/buttonBarButtonStyle"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/POINT"
       android:textSize="@dimen/textsizehead"
+      android:textColor="@color/symbol_tab"
     />
     <Button android:id="@+id/item_line"
+      style="?android:attr/buttonBarButtonStyle"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/LINE"
       android:textSize="@dimen/textsizehead"
+      android:textColor="@color/symbol_tab"
     />
     <Button android:id="@+id/item_area"
+      style="?android:attr/buttonBarButtonStyle"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/AREA"
       android:textSize="@dimen/textsizehead"
+      android:textColor="@color/symbol_tab"
     />
       <!-- Button android:id="@+id/item_left"
         android:layout_width="wrap_content" 
