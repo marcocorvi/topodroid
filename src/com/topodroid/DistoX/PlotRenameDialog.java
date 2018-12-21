@@ -73,16 +73,16 @@ class PlotRenameDialog extends MyDialog
     mBtnRename.setOnClickListener( this );
     mBtnBack.setOnClickListener( this );
     mBtnDelete.setOnClickListener( this );
-    if ( TDLevel.overExpert ) {
+    if ( TDLevel.overExpert && TDSetting.mPlotSplit ) {
       // mBtnMerge.setOnClickListener( this );
       mBtnSplit.setOnClickListener( this );
       mBtnSplit.setOnLongClickListener( this );
-      mEtStation.setInputType( android.text.InputType.TYPE_NULL );
+      // mEtStation.setInputType( android.text.InputType.TYPE_NULL );
     } else {
       mCBcopy.setVisibility( View.GONE );
       mBtnSplit.setVisibility( View.GONE );
       // mBtnMerge.setVisibility( View.GONE );
-      mEtStation.setInputType( android.text.InputType.TYPE_NULL );
+      // mEtStation.setInputType( android.text.InputType.TYPE_NULL );
     }
   }
 
@@ -105,7 +105,7 @@ class PlotRenameDialog extends MyDialog
       /* nothing */
     } else if ( b == mBtnDelete ) {
       mParent.askDelete();
-    } else if ( b == mBtnSplit ) {
+    } else if ( TDSetting.mPlotSplit && b == mBtnSplit ) {
       if ( ! handleSplit( true ) ) return;
     // } else if ( b == mBtnMerge ) {
     //   mParent.mergePlot();
@@ -129,10 +129,10 @@ class PlotRenameDialog extends MyDialog
       return false;
     }
     String station = mEtStation.getText().toString();
-    if ( warning && ! maker.hasSurveyStation( station ) ) {
-      mEtStation.setError( mContext.getResources().getString( R.string.error_station_non_existing ) );
-      return false;
-    }
+    // if ( warning && ! maker.hasSurveyStation( station ) ) {
+    //   mEtStation.setError( mContext.getResources().getString( R.string.error_station_non_existing ) );
+    //   return false;
+    // }
     mParent.splitPlot( name, station, ! mCBcopy.isChecked() ); // not mCBcopy == remove
     return true;
   }

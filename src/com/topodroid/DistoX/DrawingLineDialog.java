@@ -53,7 +53,7 @@ class DrawingLineDialog extends MyDialog
   private MyCheckBox mReversed;
   private MyCheckBox mBtnSharp;  // sharp reduce and rock are mutully exclusive
   private MyStateBox mBtnReduce;
-  private MyCheckBox mBtnRock;
+  private MyCheckBox mBtnRock = null;
   private MyCheckBox mBtnClose;
 
   DrawingLineDialog( Context context, DrawingWindow parent, DrawingLinePath line, LinePoint lp )
@@ -121,7 +121,6 @@ class DrawingLineDialog extends MyDialog
     mBtnSharp  = new MyCheckBox( mContext, size, R.drawable.iz_sharp_ok, R.drawable.iz_sharp_no );
     // mBtnReduce = new MyCheckBox( mContext, size, R.drawable.iz_reduce_ok,  R.drawable.iz_reduce_no  );
     mBtnReduce = new MyStateBox( mContext, R.drawable.iz_reduce_no,  R.drawable.iz_reduce_ok, R.drawable.iz_reduce_ok2 );
-    mBtnRock   = new MyCheckBox( mContext, size, R.drawable.iz_rock_ok,  R.drawable.iz_rock_no  );
     mBtnClose  = new MyCheckBox( mContext, size, R.drawable.iz_close_ok, R.drawable.iz_close_no );
     mReversed.setChecked( mLine.isReversed() );
     mBtnClose.setChecked( mLine.isPathClosed() );
@@ -132,12 +131,15 @@ class DrawingLineDialog extends MyDialog
     layout3.addView( mReversed, lp );
     layout3.addView( mBtnSharp, lp );
     layout3.addView( mBtnReduce, lp );
-    layout3.addView( mBtnRock, lp );
+    if ( TDLevel.overAdvanced && TDSetting.mLineStraight ) {
+      mBtnRock = new MyCheckBox( mContext, size, R.drawable.iz_rock_ok,  R.drawable.iz_rock_no  );
+      layout3.addView( mBtnRock, lp );
+      mBtnRock.setOnClickListener( this );
+    }
     layout3.addView( mBtnClose, lp );
 
     mBtnSharp.setOnClickListener( this );
     mBtnReduce.setOnClickListener( this );
-    mBtnRock.setOnClickListener( this );
 
     // TODO sharp reduce rock must be exclusive
   }
@@ -167,7 +169,7 @@ class DrawingLineDialog extends MyDialog
     } else if ( b == mBtnSharp ) {
       if ( mBtnSharp.toggleState() ) {
 	mBtnReduce.setState( 0 );  // false
-        mBtnRock.setState( false );
+        if ( mBtnRock != null ) mBtnRock.setState( false );
       }
       return;
     } else if ( b == mBtnReduce ) {
@@ -176,10 +178,10 @@ class DrawingLineDialog extends MyDialog
       // if ( mBtnReduce.toggleState() )
       if ( reduce > 0 ) {
 	mBtnSharp.setState( false );
-        mBtnRock.setState( false );
+        if ( mBtnRock != null ) mBtnRock.setState( false );
       }
       return;
-    } else if ( b == mBtnRock ) {
+    } else if ( mBtnRock != null && b == mBtnRock ) {
       if ( mBtnRock.toggleState() ) {
 	mBtnReduce.setState( 0 );
         mBtnSharp.setState( false );
@@ -204,7 +206,7 @@ class DrawingLineDialog extends MyDialog
         mParent.sharpenLine( mLine );
       } else if ( reduce > 0 ) {
 	mParent.reduceLine( mLine, reduce );
-      } else if ( mBtnRock.isChecked() ) {
+      } else if ( mBtnRock != null && mBtnRock.isChecked() ) {
         mParent.rockLine( mLine );
       }
 

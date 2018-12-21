@@ -327,9 +327,15 @@ class TDSetting
   static boolean mAreaBorder     = true;
   static boolean mLineSnap       = false;
   static boolean mLineCurve      = false;
+  static boolean mLineStraight   = false;
   static boolean mPathMultiselect = false;
 
   static boolean mBedding        = false;
+  static boolean mSplayClasses   = false;
+  static boolean mDivingMode     = false;
+
+  static boolean mPlotSplit      = false;
+  static boolean mPlotShift      = false;
 
   static float mSvgPointStroke   = 0.1f;
   static float mSvgLabelStroke   = 0.3f;
@@ -801,19 +807,26 @@ class TDSetting
     // mExtendFrac    = prefs.getBoolean(         keyData[14], bool(defData[14]) ); // DISTOX_EXTEND_FRAC
     // mShotRecent    = prefs.getBoolean(         keyData[15], bool(defData[15]) ); // DISTOX_RECENT_SHOT
 
-    String[] keyGeek = TDPrefKey.GEEK;
-    String[] defGeek = TDPrefKey.GEEKdef;
-    mExtendFrac    = prefs.getBoolean( keyGeek[ 0], bool(defGeek[ 0]) );  // DISTOX_EXTEND_FRAC
-    mShotRecent    = prefs.getBoolean( keyGeek[ 1], bool(defGeek[ 1]) );  // DISTOX_RECENT_SHOT
-    mBedding       = prefs.getBoolean( keyGeek[ 2], bool(defGeek[ 2]) );  // DISTOX_BEDDING
-    mSplayVertThrs  = tryFloat( prefs, keyGeek[ 3],      defGeek[ 3]  ); // DISTOX_SPLAY_VERT_THRS
-    mDashSplay     = prefs.getBoolean( keyGeek[ 4], bool(defGeek[ 4]) ); // DISTOX_DASH_SPLAY
-    mVertSplay      = tryFloat( prefs, keyGeek[ 5],      defGeek[ 5] );  // DISTOX_VERT_SPLAY
-    mHorizSplay     = tryFloat( prefs, keyGeek[ 6],      defGeek[ 6] );  // DISTOX_HORIZ_SPLAY
-    mCosHorizSplay = TDMath.cosd( mHorizSplay );
-    mSectionSplay   = tryFloat( prefs, keyGeek[ 7],      defGeek[ 7] );  // DISTOX_SECTION_SPLAY
-    mBackupNumber   = tryInt( prefs,   keyGeek[ 8],      defGeek[ 8] );  // DISTOX_BACKUP_NUMBER
-    mBackupInterval = tryInt( prefs,   keyGeek[ 9],      defGeek[ 9] );  // DISTOX_BACKUP_INTERVAL
+    String[] keyGShot = TDPrefKey.GEEKSHOT;
+    String[] defGShot = TDPrefKey.GEEKSHOTdef;
+    mDivingMode    = prefs.getBoolean( keyGShot[ 0], bool(defGShot[ 0]) ); // DISTOX_DIVING_MODE
+    mShotRecent    = prefs.getBoolean( keyGShot[ 1], bool(defGShot[ 1]) ); // DISTOX_RECENT_SHOT
+    mSplayClasses  = prefs.getBoolean( keyGShot[ 2], bool(defGShot[ 2]) ); // DISTOX_SPLAY_CLASSES
+    mExtendFrac    = prefs.getBoolean( keyGShot[ 3], bool(defGShot[ 3]) ); // DISTOX_EXTEND_FRAC
+    mBedding       = prefs.getBoolean( keyGShot[ 4], bool(defGShot[ 4]) ); // DISTOX_BEDDING
+
+    String[] keyGPlot = TDPrefKey.GEEKPLOT;
+    String[] defGPlot = TDPrefKey.GEEKPLOTdef;
+    mPlotShift     = prefs.getBoolean( keyGPlot[ 0], bool(defGPlot[ 0]) ); // DISTOX_PLOT_SHIFT
+    mPlotSplit     = prefs.getBoolean( keyGPlot[ 1], bool(defGPlot[ 1]) ); // DISTOX_PLOT_SPLIT
+    mSplayVertThrs  = tryFloat( prefs, keyGPlot[ 2],      defGPlot[ 2]  ); // DISTOX_SPLAY_VERT_THRS
+    mDashSplay     = prefs.getBoolean( keyGPlot[ 3], bool(defGPlot[ 3]) ); // DISTOX_DASH_SPLAY
+    mVertSplay      = tryFloat( prefs, keyGPlot[ 4],      defGPlot[ 4] );  // DISTOX_VERT_SPLAY
+    mHorizSplay     = tryFloat( prefs, keyGPlot[ 5],      defGPlot[ 5] );  // DISTOX_HORIZ_SPLAY
+    mCosHorizSplay = TDMath.cosd( mHorizSplay );  
+    mSectionSplay   = tryFloat( prefs, keyGPlot[ 6],      defGPlot[ 6] );  // DISTOX_SECTION_SPLAY
+    mBackupNumber   = tryInt( prefs,   keyGPlot[ 7],      defGPlot[ 7] );  // DISTOX_BACKUP_NUMBER
+    mBackupInterval = tryInt( prefs,   keyGPlot[ 8],      defGPlot[ 8] );  // DISTOX_BACKUP_INTERVAL
 
     String[] keyGLine = TDPrefKey.GEEKLINE;
     String[] defGLine = TDPrefKey.GEEKLINEdef;
@@ -822,7 +835,8 @@ class TDSetting
     mLineCorner    = tryFloat( prefs,  keyGLine[ 2],      defGLine[ 2] );   // DISTOX_LINE_CORNER
     mLineSnap      = prefs.getBoolean( keyGLine[ 3], bool(defGLine[ 3]) );  // DISTOX_LINE_SNAP
     mLineCurve     = prefs.getBoolean( keyGLine[ 4], bool(defGLine[ 4]) );  // DISTOX_LINE_CURVE
-    mPathMultiselect = prefs.getBoolean( keyGLine[ 5], bool(defGLine[ 5]) );  // DISTOX_PATH_MULTISELECT
+    mLineStraight  = prefs.getBoolean( keyGLine[ 5], bool(defGLine[ 5]) );  // DISTOX_LINE_STRAIGHT
+    mPathMultiselect = prefs.getBoolean( keyGLine[ 6], bool(defGLine[ 6]) );  // DISTOX_PATH_MULTISELECT
 
     String[] keyUnits = TDPrefKey.UNITS;
     String[] defUnits = TDPrefKey.UNITSdef;
@@ -922,6 +936,7 @@ class TDSetting
       case TDPrefActivity.PREF_CATEGORY_PLOT:   return updatePrefPlot( hlp, k, v );
       case TDPrefActivity.PREF_CATEGORY_CALIB:  return updatePrefCalib( hlp, k, v );
       case TDPrefActivity.PREF_CATEGORY_DEVICE: return updatePrefDevice( hlp, k, v );
+      case TDPrefActivity.PREF_CATEGORY_SKETCH: return updatePrefSketch( hlp, k, v );
       case TDPrefActivity.PREF_CATEGORY_EXPORT: return updatePrefExport( hlp, k, v );
       case TDPrefActivity.PREF_CATEGORY_IMPORT: return updatePrefImport( hlp, k, v );
       case TDPrefActivity.PREF_CATEGORY_SVX:    return updatePrefSvx( hlp, k, v );
@@ -942,7 +957,11 @@ class TDSetting
       case TDPrefActivity.PREF_PLOT_DRAW:       return updatePrefDraw( hlp, k, v );
       case TDPrefActivity.PREF_PLOT_ERASE:      return updatePrefErase( hlp, k, v );
       case TDPrefActivity.PREF_PLOT_EDIT:       return updatePrefEdit( hlp, k, v );
-      case TDPrefActivity.PREF_CATEGORY_SKETCH: return updatePrefSketch( hlp, k, v );
+      case TDPrefActivity.PREF_CATEGORY_GEEK:   return null; // no pref
+      case TDPrefActivity.PREF_GEEK_SHOT:       return updatePrefGeekShot( hlp, k, v );
+      case TDPrefActivity.PREF_GEEK_PLOT:       return updatePrefGeekPlot( hlp, k, v );
+      case TDPrefActivity.PREF_GEEK_LINE:       return updatePrefGeekLine( hlp, k, v );
+      case TDPrefActivity.PREF_GEEK_DEVICE:     return updatePrefGeekDevice( hlp, k, v );
       case TDPrefActivity.PREF_CATEGORY_LOG:    return updatePrefLog( hlp, k, v );
       default:
         TDLog.Error("DistoXPref. unhandled setting, cat " + cat + " key " + k + " val <" + v + ">" );
@@ -1160,47 +1179,68 @@ class TDSetting
   }
 
   // ------------------------------------------------------------------------------------------
-  private static String updatePrefGeek( TDPrefHelper hlp, String k, String v )
+  private static String updatePrefGeekShot( TDPrefHelper hlp, String k, String v )
   {
     String ret = null;
     // Log.v("DistoX", "update pref data: " + k );
-    String[] key = TDPrefKey.GEEK;
-    String[] def = TDPrefKey.GEEKdef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_EXTEND_FRAC
-      mExtendFrac = tryBooleanValue( hlp, k, v, bool(def[0]) );
+    String[] key = TDPrefKey.GEEKSHOT;
+    String[] def = TDPrefKey.GEEKSHOTdef;
+    if ( k.equals( key[ 0 ] ) ) { // DISTOX_DIVING_MODE
+      mDivingMode   = tryBooleanValue( hlp, k, v, bool(def[0]) );
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_RECENT_SHOT
-      mShotRecent = tryBooleanValue( hlp, k, v, bool(def[1]) );
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_RECENT_SHOT
-      mBedding = tryBooleanValue( hlp, k, v, bool(def[ 2]) );
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_SPLAY_VERT_THRS
-      mSplayVertThrs = tryFloatValue( hlp, k, v, def[ 3] );
+      mShotRecent   = tryBooleanValue( hlp, k, v, bool(def[1]) );
+    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_SPLAY_CLASSES
+      mSplayClasses = tryBooleanValue( hlp, k, v, bool(def[ 2]) );
+    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_EXTEND_FRAC
+      mExtendFrac   = tryBooleanValue( hlp, k, v, bool(def[ 3]) );
+    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_BEDDING
+      mBedding      = tryBooleanValue( hlp, k, v, bool(def[ 4]) );
+    } else {
+      TDLog.Error("missing GEEK_SHOT key: " + k );
+    }
+    if ( ret != null ) hlp.update( k, ret );
+    return ret;
+  }
+
+  private static String updatePrefGeekPlot( TDPrefHelper hlp, String k, String v )
+  {
+    String ret = null;
+    // Log.v("DistoX", "update pref data: " + k );
+    String[] key = TDPrefKey.GEEKPLOT;
+    String[] def = TDPrefKey.GEEKPLOTdef;
+    if ( k.equals( key[ 0 ] ) ) { // DISTOX_PLOT_SHIFT
+      mPlotShift    = tryBooleanValue( hlp, k, v, bool(def[0]) );
+    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_PLOT_SPLIT
+      mPlotSplit = tryBooleanValue( hlp, k, v, bool(def[ 1]) );
+    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_SPLAY_VERT_THRS
+      mSplayVertThrs = tryFloatValue( hlp, k, v, def[ 2] );
       if ( mSplayVertThrs <  0 ) { mSplayVertThrs =  0; ret = TDString.ZERO; }
       if ( mSplayVertThrs > 91 ) { mSplayVertThrs = 91; ret = TDString.NINETYONE; }
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_DASH_SPLAY (bool)
-      mDashSplay = tryBooleanValue( hlp, k, v, bool(def[ 4]) );      
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_VERT_SPLAY
-      mVertSplay   = tryFloatValue( hlp, k, v, def[ 5] );
+    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_DASH_SPLAY (bool)
+      mDashSplay = tryBooleanValue( hlp, k, v, bool(def[ 3]) );      
+    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_VERT_SPLAY
+      mVertSplay   = tryFloatValue( hlp, k, v, def[ 4] );
       if ( mVertSplay <  0 ) { mVertSplay =  0; ret = TDString.ZERO; }
       if ( mVertSplay > 91 ) { mVertSplay = 91; ret = TDString.NINETYONE; }
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_HORIZ_SPLAY
-      mHorizSplay  = tryFloatValue( hlp, k, v, def[ 6] );
+    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_HORIZ_SPLAY
+      mHorizSplay  = tryFloatValue( hlp, k, v, def[ 5] );
       if ( mHorizSplay <  0 ) { mHorizSplay =  0; ret = TDString.ZERO; }
       if ( mHorizSplay > 91 ) { mHorizSplay = 91; ret = TDString.NINETYONE; }
       mCosHorizSplay = TDMath.cosd( mHorizSplay );
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_SECTION_SPLAY
-      mSectionSplay = tryFloatValue( hlp, k, v, def[ 7] );
+    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_SECTION_SPLAY
+      mSectionSplay = tryFloatValue( hlp, k, v, def[ 6] );
       if ( mSectionSplay <  0 ) { mSectionSplay =  0; ret = TDString.ZERO; }
       if ( mSectionSplay > 91 ) { mSectionSplay = 91; ret = TDString.NINETYONE; }
-    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_BACKUP_NUMBER
-      mBackupNumber  = tryIntValue( hlp, k, v, def[ 8] ); 
+    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_BACKUP_NUMBER
+      mBackupNumber  = tryIntValue( hlp, k, v, def[ 7] ); 
       if ( mBackupNumber <  4 ) { mBackupNumber =  4; ret = Integer.toString( mBackupNumber ); }
       if ( mBackupNumber > 10 ) { mBackupNumber = 10; ret = Integer.toString( mBackupNumber ); }
-    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_BACKUP_INTERVAL
-      mBackupInterval = tryIntValue( hlp, k, v, def[ 9] );  
+    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_BACKUP_INTERVAL
+      mBackupInterval = tryIntValue( hlp, k, v, def[ 8] );  
       if ( mBackupInterval <  10 ) { mBackupInterval =  10; ret = Integer.toString( mBackupInterval ); }
       if ( mBackupInterval > 600 ) { mBackupInterval = 600; ret = Integer.toString( mBackupInterval ); }
     } else {
-      TDLog.Error("missing DATA key: " + k );
+      TDLog.Error("missing GEEK_PLOT key: " + k );
     }
     if ( ret != null ) hlp.update( k, ret );
     return ret;
@@ -1253,8 +1293,10 @@ class TDSetting
       mLineSnap = tryBooleanValue(          hlp, k, v, bool(def[3]) );
     } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_LINE_CURVE (bool)
       mLineCurve = tryBooleanValue(         hlp, k, v, bool(def[4]) );
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_PATH_MULTISELECT (bool)
-      mPathMultiselect = tryBooleanValue(         hlp, k, v, bool(def[5]) );
+    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_LINE_STRAIGHT
+      mLineStraight = tryBooleanValue(         hlp, k, v, bool(def[5]) );
+    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_PATH_MULTISELECT (bool)
+      mPathMultiselect = tryBooleanValue(         hlp, k, v, bool(def[6]) );
 
     } else {
       TDLog.Error("missing DEVICE key: " + k );

@@ -19,9 +19,10 @@ import java.io.DataInputStream;
 import java.io.IOException;
 // import java.io.FileNotFoundException;
 
+import android.util.Log;
+
 class FirmwareUtils 
 {
-
   static final private byte[] signature = {
     (byte)0x03, (byte)0x48, (byte)0x85, (byte)0x46, (byte)0x03, (byte)0xf0, (byte)0x34, (byte)0xf8,
     (byte)0x00, (byte)0x48, (byte)0x00, (byte)0x47, (byte)0xf5, (byte)0x08, (byte)0x00, (byte)0x08,
@@ -33,10 +34,10 @@ class FirmwareUtils
     (byte)0x00, (byte)0xf0, (byte)0x30, (byte)0xf8, (byte)0x00, (byte)0x1b, (byte)0x49, (byte)0x1b
   };
 
-  //                                   2.1   2.2   2.3   2.4   2.5  2.5c
-  // signatures differ in bytes 7- 6  f834  f83a  f990  fa0a  fb7e  fc10
-  //                             -12  08d5  08d5  08d5  08d5  08f5  08d5
-  //                           17-16  0c40  0c40  0c50  0c30  0c40  0c48
+  //                                   2.1   2.2   2.3   2.4   2.5  2.5c  2.4c
+  // signatures differ in bytes 7- 6  f834  f83a  f990  fa0a  fb7e  fc10  fe94
+  //                             -12  08d5  08d5  08d5  08d5  08f5  08d5  08f5
+  //                           17-16  0c40  0c40  0c50  0c30  0c40  0c48  0c38
 
   // static boolean areCompatible( int hw, int fw )
   // {
@@ -53,9 +54,10 @@ class FirmwareUtils
   //
   static int readFirmwareFirmware( File fp )
   {
+    FileInputStream fis = null;
     try {
       // TDLog.Log( TDLog.LOG_IO, "read firmware file " + file.getPath() );
-      FileInputStream fis = new FileInputStream( fp );
+      fis = new FileInputStream( fp );
       DataInputStream dis = new DataInputStream( fis );
       if ( dis.skipBytes( 2048 ) != 2048 ) {
         // Log.v("DistoX", "failed skip");
@@ -79,6 +81,10 @@ class FirmwareUtils
           return 22;
         }
         return -200;
+        //                                   2.1   2.2   2.3   2.4   2.5  2.5c  2.4c
+        // signatures differ in bytes 7- 6  f834  f83a  f990  fa0a  fb7e  fc10  fe94
+        //                             -12  08d5  08d5  08d5  08d5  08f5  08d5  08f5
+        //                           17-16  0c40  0c40  0c50  0c30  0c40  0c48  0c38
       } else if ( buf[7] == (byte)0xf9 ) {
         return ( buf[6] == (byte)0x90 && buf[16] == (byte)0x50 && buf[12] == (byte)0xf5 )? 23 : -230;
       } else if ( buf[7] == (byte)0xfa ) {
@@ -87,12 +93,58 @@ class FirmwareUtils
         return ( buf[6] == (byte)0x7e && buf[16] == (byte)0x40 && buf[12] == (byte)0xd5 )? 25 : -250;
       } else if ( buf[7] == (byte)0xfc ) {     
         return ( buf[6] == (byte)0x10 && buf[16] == (byte)0x48 && buf[12] == (byte)0xd5 )? 250 : -2500;
+      } else if ( buf[7] == (byte)0xfe ) {     
+        return ( buf[6] == (byte)0x94 && buf[16] == (byte)0x38 && buf[12] == (byte)0xf5 )? 240 : -2400;
       } else {
         return -7;
       }
     } catch ( IOException e ) {
+    } finally {
+      try {
+        if ( fis != null ) fis.close();
+      } catch ( IOException e ) { }
     }
     return 0;
+  }
+
+  static boolean firmwareChecksum( int fw_version, File fp )
+  {
+    int len = 0;
+    switch ( fw_version ) {
+      case 21:  len = 15220; break;
+      case 22:  len = 15232; break;
+      case 23:  len = 15952; break;
+      case 24:  len = 16224; break;
+      case 25:  len = 17496; break;
+      case 240: len = 16504; break;
+      case 250: len = 17792; break;
+    }
+    if ( len == 0 ) return false; // bad formware version
+    len /= 4; // number of int to read
+
+    int check = 0;
+    try {
+      // TDLog.Log( TDLog.LOG_IO, "read firmware file " + file.getPath() );
+      FileInputStream fis = new FileInputStream( fp );
+      DataInputStream dis = new DataInputStream( fis );
+      for ( ; len > 0; --len ) {
+        check ^= dis.readInt();
+      }
+      fis.close();
+    } catch ( IOException e ) {
+      return false;
+    }
+    // Log.v("DistoX", "check " + fw_version + ": " + String.format("%08x", check) );
+    switch ( fw_version ) {
+      case 21:  return ( check == 0xf58b194b );
+      case 22:  return ( check == 0x4d66d466 );
+      case 23:  return ( check == 0x6523596a );
+      case 24:  return ( check == 0x0f8a2bc1 );
+      case 25:  return ( check == 0x463c0306 );
+      case 240: return ( check == 0xfddd95a0 );
+      case 250: return ( check == 0x1ecb8dc0 );
+    }
+    return false;
   }
 
   // static int readFirmwareAddress( DataInputStream  dis, DataOutputStream dos )

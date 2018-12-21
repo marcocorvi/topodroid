@@ -79,7 +79,7 @@ class ScrapOutlineDialog extends MyDialog
     mBtnClear = (Button) findViewById(R.id.btn_clear);
     mBtnClear.setOnClickListener( this );
     mBtnMerge = (Button) findViewById(R.id.btn_merge);
-    if ( TDLevel.overExpert ) {
+    if ( TDLevel.overExpert && TDSetting.mPlotSplit ) {
       mBtnMerge.setOnClickListener( this );
     } else {
       mBtnMerge.setVisibility( View.GONE );
@@ -106,7 +106,7 @@ class ScrapOutlineDialog extends MyDialog
     Button b = (Button) v;
     if ( b == mBtnClear ) {
       mParent.addScrap( null );
-    } else if ( b == mBtnMerge ) {
+    } else if ( TDSetting.mPlotSplit && b == mBtnMerge ) {
       mParent.mergeOutlineScrap( );
     } else if ( b == mBtnBack ) {
       /* nothing */

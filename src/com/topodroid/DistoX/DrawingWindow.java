@@ -333,7 +333,7 @@ public class DrawingWindow extends ItemDrawer
 
   private boolean mEditMove;    // whether moving the selected point
   private boolean mShiftMove;   // whether to move the canvas in point-shift mode
-  boolean mShiftDrawing;        // whether to shift the drawing
+  boolean mShiftDrawing;        // whether to shift the drawing (this is set only thru the DrawingModeDialog)
   private EraseCommand mEraseCommand = null;
 
   private int mHotItemType     = -1;
@@ -6028,23 +6028,24 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  void mergePlot()
-  {
-    List<PlotInfo> plots = mApp_mData.selectAllPlotsWithType( TDInstance.sid, TDStatus.NORMAL, mType );
-    if ( plots.size() <= 1 ) { // nothing to merge in
-      return;
-    }
-    for ( PlotInfo plt : plots ) {
-      if ( plt.name.equals( mName ) ) {
-        plots.remove( plt );
-        break;
-      }
-    }
-    new PlotMergeDialog( mActivity, this, plots ).show();
-  }
+  // void mergePlot()
+  // {
+  //   List<PlotInfo> plots = mApp_mData.selectAllPlotsWithType( TDInstance.sid, TDStatus.NORMAL, mType );
+  //   if ( plots.size() <= 1 ) { // nothing to merge in
+  //     return;
+  //   }
+  //   for ( PlotInfo plt : plots ) {
+  //     if ( plt.name.equals( mName ) ) {
+  //       plots.remove( plt );
+  //       break;
+  //     }
+  //   }
+  //   new PlotMergeDialog( mActivity, this, plots ).show();
+  // }
 
-  // called anly with mType PLOT_PLAN or PLOT_EXTENDED
-  void doMergePlot( PlotInfo plt )
+  // called by PlotMergeDialog or privately
+  // called only with mType PLOT_PLAN or PLOT_EXTENDED
+  private void doMergePlot( PlotInfo plt )
   {
     if ( plt.type != mType ) return;
     NumStation st1 = mNum.getStation( plt.start );

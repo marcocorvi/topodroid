@@ -140,14 +140,10 @@ class FirmwareDialog extends MyDialog
             TDLog.Error( "inexistent upload firmware file " + filename );
             return;    
           }
-          int fw = FirmwareUtils.readFirmwareFirmware( fp );
+          int fw = FirmwareUtils.readFirmwareFirmware( fp ); // gueass firmware version
           TDLog.LogFile( "Detected Firmware version " + fw );
-          // int hw = mApp.readFirmwareHardware();
-          // TDLog.LogFile( "Firmware version " + fw + " Hardware version " + hw );
-          // // Log.v( "DistoX", "HW " + hw + " FW " + fw );
-          // // TDToast.make( "HARDWARE " + hw );
-          // askUpload( filename, areCompatible(hw,fw) );
-          askUpload( filename, (fw == 21 || fw == 22 || fw == 23 || fw == 24 || fw == 25 || fw == 250 ) );
+	  boolean check = (fw > 0) && FirmwareUtils.firmwareChecksum( fw, fp );
+          askUpload( filename, fw, check );
         }
         break;
     }
@@ -169,10 +165,12 @@ class FirmwareDialog extends MyDialog
     );
   }
 
-  private void askUpload( final String filename, final boolean compatible )
+  // @param fw   firmware version
+  private void askUpload( final String filename, int fw, boolean check )
   {
-    TDLog.LogFile( "FW/HW compatibility " + (compatible? "yes" : "no") );
-    String title = mParent.getResources().getString( compatible? R.string.ask_upload : R.string.ask_upload_not_compatible );
+    boolean compatible = (fw == 21 || fw == 22 || fw == 23 || fw == 24 || fw == 25 || fw == 240 || fw == 250 );
+    TDLog.LogFile( "FW/HW compatible " + compatible + " FW check " + check );
+    String title = mParent.getResources().getString( (compatible && check)? R.string.ask_upload : R.string.ask_upload_not_compatible );
     TopoDroidAlertDialog.makeAlert( mContext, mParent.getResources(), title,
       new DialogInterface.OnClickListener() {
         @Override

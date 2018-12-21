@@ -12,11 +12,28 @@
        android:layout_marginTop="@dimen/marginv"
        />
 
-    <EditText android:id="@+id/et_station" 
-       style="@style/edit_text_light"
-       android:layout_width="match_parent" 
+    <LinearLayout 
+       android:layout_width="wrap_content" 
+       android:layout_height="wrap_content"
+       android:layout_gravity="right"
+       android:orientation="horizontal"
        android:layout_marginTop="@dimen/marginv"
-       />
+       >
+      <TextView 
+        android:layout_width="0sp" 
+        android:layout_height="wrap_content"
+        android:layout_weight="40"
+        android:text="R.string.plot_start"
+        />
+
+      <EditText android:id="@+id/et_station" 
+        style="@style/edit_text_light"
+        android:layout_width="0sp" 
+        android:layout_height="wrap_content"
+	android:layout_weight="60"
+	android:inputType="none"
+        />
+    </LinearLayout>
 
     <LinearLayout 
        android:layout_width="wrap_content" 

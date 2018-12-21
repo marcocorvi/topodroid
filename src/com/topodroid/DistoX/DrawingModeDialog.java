@@ -82,7 +82,7 @@ class DrawingModeDialog extends MyDialog
 	} else {
           mCBlatest.setVisibility( View.GONE );
 	}
-        if ( mParent != null && TDLevel.overAdvanced ) {
+        if ( /* mParent != null && */ TDLevel.overAdvanced && TDSetting.mPlotShift ) {
           mCBfixed.setChecked( mParent.mShiftDrawing );
         } else {
           mCBfixed.setVisibility( View.GONE );
@@ -105,7 +105,7 @@ class DrawingModeDialog extends MyDialog
           if ( mParent != null && ! mParent.isAnySection() ) {
             if ( mCBsplay.isChecked() )   mode |= DisplayMode.DISPLAY_SPLAY;
             if ( TDSetting.mShotRecent && mCBlatest.isChecked() )  mode |= DisplayMode.DISPLAY_LATEST;
-            if ( /* mParent != null && */ TDLevel.overAdvanced ) {
+            if ( /* mParent != null && */ TDLevel.overAdvanced && TDSetting.mPlotShift ) {
               mParent.mShiftDrawing = mCBfixed.isChecked();
             }
           }

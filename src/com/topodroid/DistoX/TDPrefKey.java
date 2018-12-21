@@ -1278,6 +1278,7 @@ class TDPrefKey
     "DISTOX_LINE_CORNER",     // Bezier interpolator param:
     "DISTOX_LINE_SNAP",       // whether to show line-snap action
     "DISTOX_LINE_CURVE",      // whether to show line- smooth/straighten action
+    "DISTOX_LINE_STRAIGHT",   // whetter to show lines straighten button
     "DISTOX_PATH_MULTISELECT",// path multiselection
     null
   };
@@ -1288,6 +1289,7 @@ class TDPrefKey
     R.string.pref_linecorner_title,
     R.string.pref_linesnap_title,
     R.string.pref_linecurve_title,
+    R.string.pref_linestraight_title,
     R.string.pref_path_multiselect_title,
     -1
   };
@@ -1298,6 +1300,7 @@ class TDPrefKey
     R.string.pref_linecorner_summary,
     R.string.pref_linesnap_summary,
     R.string.pref_linecurve_summary,
+    R.string.pref_linestraight_summary,
     R.string.pref_path_multiselect_title,
     -1
   };
@@ -1309,13 +1312,49 @@ class TDPrefKey
     FALSE,
     FALSE,
     FALSE,
+    FALSE,
     null
   };
 
-  static String[] GEEK = {
-    "DISTOX_EXTEND_FRAC",     // fractional extend
+  static String[] GEEKSHOT = {
+    "DISTOX_DIVING_MODE",     // enable diving mode
     "DISTOX_RECENT_SHOT",     // highlight recent shots
+    "DISTOX_SPLAY_CLASSES",   // splay classes
+    "DISTOX_EXTEND_FRAC",     // fractional extend
     "DISTOX_BEDDING",         // splays bed plane interpolation
+    null
+  };
+
+  static int[] GEEKSHOTtitle = {
+    R.string.pref_diving_mode_title,
+    R.string.pref_recent_shot_title,
+    R.string.pref_splay_classes_title,
+    R.string.pref_extend_frac_title,
+    R.string.pref_plane_interpolation_title,
+    -1
+  };
+
+  static int[] GEEKSHOTdesc = {
+    R.string.pref_diving_mode_summary,
+    R.string.pref_recent_shot_summary,
+    R.string.pref_plane_interpolation_summary,
+    R.string.pref_extend_frac_summary,
+    R.string.pref_splay_classes_summary,
+    -1
+  };
+
+  static String[] GEEKSHOTdef = {
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    null
+  };
+
+  static String[] GEEKPLOT = {
+    "DISTOX_PLOT_SHIFT",      // plot shift and scale
+    "DISTOX_PLOT_SPLIT",      // plot split and merge
     "DISTOX_SPLAY_VERT_THRS", // splays with clino over mSplayVertThrs are not displayed in plan view
     "DISTOX_DASH_SPLAY",      // whether dash-splay are coherent between plan and profile
     "DISTOX_VERT_SPLAY",      // splays with clino over this are shown with dashed/dotted line
@@ -1324,17 +1363,12 @@ class TDPrefKey
     // "DISTOX_HTHRESHOLD",      // if clino is over thr, H_SECTION is horizontal (has north arrow)
     "DISTOX_BACKUP_NUMBER",   // number of plot backups
     "DISTOX_BACKUP_INTERVAL", // minimum interval between plot backups [60 s]
-    "DISTOX_GEEK_LINE",       // FORWARD
-    "DISTOX_PLOT_WALLS",      // FORWARD
-    "DISTOX_GEEK_DEVICE",     // FORWARD
-    "DISTOX_SKETCH_PREF",     // FORWARD
     null
   };
 
-  static int[] GEEKtitle = {
-    R.string.pref_extend_frac_title,
-    R.string.pref_recent_shot_title,
-    R.string.pref_plane_interpolation_title,
+  static int[] GEEKPLOTtitle = {
+    R.string.pref_plot_shift_title,
+    R.string.pref_plot_split_title,
     R.string.pref_vthr_title,
     R.string.pref_dash_splay_title,
     R.string.pref_vert_splay_title,
@@ -1343,17 +1377,12 @@ class TDPrefKey
     // R.string.pref_hthr_title,
     R.string.pref_backup_number_title,
     R.string.pref_backup_interval_title,
-    R.string.pref_tool_line_title,
-    R.string.pref_plot_walls_title,
-    R.string.pref_cat_device,
-    R.string.pref_cat_sketch,
     -1
   };
 
-  static int[] GEEKdesc = {
-    R.string.pref_extend_frac_summary,
-    R.string.pref_recent_shot_summary,
-    R.string.pref_plane_interpolation_summary,
+  static int[] GEEKPLOTdesc = {
+    R.string.pref_plot_shift_summary,
+    R.string.pref_plot_split_summary,
     R.string.pref_vthr_summary,      
     R.string.pref_dash_splay_message, 
     R.string.pref_vert_splay_message,  
@@ -1362,15 +1391,10 @@ class TDPrefKey
     // R.string.pref_hthr_summary,
     R.string.pref_backup_number_summary,
     R.string.pref_backup_interval_summary,
-    -1,
-    -1,
-    -1,
-    -1,
     -1
   };
 
-  static String[] GEEKdef = {
-    FALSE,
+  static String[] GEEKPLOTdef = {
     FALSE,
     FALSE,
     "80",
@@ -1381,6 +1405,43 @@ class TDPrefKey
     // "70",
     TDString.FIVE,
     TDString.SIXTY,
+    null
+  };
+
+
+  static String[] GEEK = {
+    "DISTOX_GEEK_SHOT",       // FORWARD
+    "DISTOX_GEEK_PLOT",       // FORWARD
+    "DISTOX_GEEK_LINE",       // FORWARD
+    "DISTOX_PLOT_WALLS",      // FORWARD
+    "DISTOX_GEEK_DEVICE",     // FORWARD
+    "DISTOX_SKETCH_PREF",     // FORWARD
+    null
+  };
+
+  static int[] GEEKtitle = {
+    R.string.pref_cat_survey,
+    R.string.pref_cat_drawing,
+    R.string.pref_tool_line_title,
+    R.string.pref_plot_walls_title,
+    R.string.pref_cat_device,
+    R.string.pref_cat_sketch,
+    -1
+  };
+
+  static int[] GEEKdesc = {
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1
+  };
+
+  static String[] GEEKdef = {
+    TDString.EMPTY,
+    TDString.EMPTY,
     TDString.EMPTY,
     TDString.EMPTY,
     TDString.EMPTY,

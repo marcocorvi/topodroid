@@ -52,6 +52,9 @@ class MultishotDialog extends MyDialog
   private List<DBlock> mBlks;
   private DBlock mBlk = null;
 
+  private boolean mColoring = false;
+  private boolean mBedding  = false;
+
   private Pattern mPattern; // name pattern
 
   // private TextView mTVdata;
@@ -142,14 +145,17 @@ class MultishotDialog extends MyDialog
     //   ((LinearLayout) findViewById( R.id.layout_renumber )).setVisibility( View.GONE );
     // }
 
-    boolean highlight = true;
-    for ( DBlock blk : mBlks ) {
-      if ( blk.mTo != null && blk.mTo.length() > 0 ) {
-        highlight = false;
-        break;
+    mColoring = false;
+    if ( TDLevel.overExpert && TDSetting.mSplayClasses ) {
+      mColoring = true;
+      for ( DBlock blk : mBlks ) {
+        if ( blk.mTo != null && blk.mTo.length() > 0 ) {
+          mColoring = false;
+          break;
+        }
       }
     }
-    if ( highlight ) {
+    if ( mColoring ) {
       // mButtonHighlight.setOnClickListener( this ); FIXME_HIGHIGHT
       mButtonColor.setOnClickListener( this );
       mButtonSplays.setOnClickListener( this );
@@ -159,20 +165,20 @@ class MultishotDialog extends MyDialog
       ((LinearLayout) findViewById( R.id.layout_splays )).setVisibility( View.GONE );
     }
 
-    boolean bedding = false;
-    if ( TDSetting.mBedding ) {
+    mBedding = false;
+    if ( TDLevel.overExpert && TDSetting.mBedding ) {
       String from = mBlk.mFrom;
-      bedding = ( mBlks.size() > 1 && from != null && from.length() > 0 );
-      if ( bedding ) {
+      mBedding = ( mBlks.size() > 1 && from != null && from.length() > 0 );
+      if ( mBedding ) {
         for ( DBlock blk : mBlks ) {
           if ( ! from.equals( blk.mFrom ) ) {
-            bedding = false;
+            mBedding = false;
             break;
           }
         }
       }
     }
-    if ( bedding ) {
+    if ( mBedding ) {
       mButtonBedding.setOnClickListener( this );
     } else {
       ((LinearLayout) findViewById( R.id.layout_bedding )).setVisibility( View.GONE );
@@ -215,21 +221,23 @@ class MultishotDialog extends MyDialog
     //   mParent.highlightBlocks( mBlks );
     } else if ( b == mButtonSwap ) {
       mParent.swapBlocksName( mBlks );
-    } else if ( b == mButtonColor ) {
-      hide();
-      (new MyColorPicker( mContext, this, 0 )).show();
-      return;
-    } else if ( b == mButtonSplays ) {
-      int leg_type = LegType.NORMAL;
-      if ( ((RadioButton)findViewById( R.id.rb_xsplay )).isChecked() ) {
-        leg_type = LegType.XSPLAY;
-      } else if ( ((RadioButton)findViewById( R.id.rb_hsplay )).isChecked() ) {
-        leg_type = LegType.HSPLAY;
-      } else if ( ((RadioButton)findViewById( R.id.rb_vsplay )).isChecked() ) {
-        leg_type = LegType.VSPLAY;
+    } else if ( mColoring ) {
+      if ( b == mButtonColor ) {
+        hide();
+        (new MyColorPicker( mContext, this, 0 )).show();
+        return;
+      } else if ( b == mButtonSplays ) {
+        int leg_type = LegType.NORMAL;
+        if ( ((RadioButton)findViewById( R.id.rb_xsplay )).isChecked() ) {
+          leg_type = LegType.XSPLAY;
+        } else if ( ((RadioButton)findViewById( R.id.rb_hsplay )).isChecked() ) {
+          leg_type = LegType.HSPLAY;
+        } else if ( ((RadioButton)findViewById( R.id.rb_vsplay )).isChecked() ) {
+          leg_type = LegType.VSPLAY;
+        }
+        mParent.updateSplaysLegType( mBlks, leg_type );
       }
-      mParent.updateSplaysLegType( mBlks, leg_type );
-    } else if ( b == mButtonBedding ) {
+    } else if ( mBedding && b == mButtonBedding ) {
       mTVstrikeDip.setText( mParent.computeBedding( mBlks ) );
       return;
     // } else {

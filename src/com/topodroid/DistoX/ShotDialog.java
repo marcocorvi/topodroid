@@ -93,12 +93,6 @@ class ShotDialog extends MyDialog
   private CheckBox mRBright;
   // private CheckBox mRBignore;
 
-  // private Spinner mFlag;
-  // private Spinner mExtend;
-  // ArrayAdapter< CharSequence > mExtendAdapter;
-  // ArrayAdapter< CharSequence > mFlagAdapter;
-
-  // private Button   mButtonDrop;
   private Button   mButtonOK;
   private Button   mButtonSave;
   private Button   mButtonMore;
@@ -108,29 +102,8 @@ class ShotDialog extends MyDialog
   private Button   mButtonNext;
   private Button mButtonReverse;
 
-  // private MyCheckBox mBTphoto;
-  // private MyCheckBox mBTsensor;
-  // private MyCheckBox mBTshot;
-  // private MyCheckBox mBTsurvey;
-  // private MyCheckBox mBTdelete;
-
-  // private RadioButton mRBfrom;
-  // private RadioButton mRBto;
-  // private Button mButtonLRUD;
-
-  // private EditText mETleft;
-  // private EditText mETright;
-  // private EditText mETup;
-  // private EditText mETdown;
-
-  // private CheckBox mCBdeleteLeg;
-
   private String shot_from;
   private String shot_to;
-  // private boolean shot_secleg;
-  // private boolean shot_backleg;
-  // private boolean shot_xsplay;
-  // private String shot_data;
   private String shot_distance;
   private String shot_bearing;
   private String shot_clino;
@@ -266,7 +239,7 @@ class ShotDialog extends MyDialog
       if ( DBlock.isDuplicate(shot_flag) )      { mRBdup.setState(  true ); }
       else if ( DBlock.isSurface(shot_flag) )   { mRBsurf.setState( true ); }
       else if ( DBlock.isCommented(shot_flag) ) { mRBcmtd.setState( true ); } // FIXME_COMMENTED
-      else if ( TDLevel.overExpert ) {
+      else if ( mRBsplay != null ) {
         if ( DBlock.isNoProfile(shot_flag) )   { mRBsplay.setState( 1 ); }
         else if ( DBlock.isNoPlan(shot_flag) ) { mRBsplay.setState( 2 ); }
       }
@@ -420,7 +393,7 @@ class ShotDialog extends MyDialog
     //   }
     //   mCBxSplay.setOnClickListener( this );
     // }
-    if ( TDLevel.overAdvanced ) {
+    if ( TDLevel.overAdvanced && TDSetting.mSplayClasses ) {
       mCBxSplay = new MyCheckBox( mContext, size, R.drawable.iz_xsplays_ok, R.drawable.iz_ysplays_no );
       mCBxSplay.setOnClickListener( this );
       nr_buttons ++;
@@ -432,11 +405,11 @@ class ShotDialog extends MyDialog
       nr_buttons ++;
     }
 
-    if ( TDLevel.overExpert ) {
+    if ( TDLevel.overExpert && TDSetting.mSplayClasses ) {
       mRBsplay = new MyStateBox( mContext, R.drawable.iz_plan_profile, R.drawable.iz_plan, R.drawable.iz_extended );
       mRBsplay.setOnClickListener( this );
       nr_buttons ++;
-    }
+    } // else mRBsplay = null;
     // mCBhighlight = new MyCheckBox( mContext, size, R.drawable.iz_highlight_ok, R.drawable.iz_highlight_no );
 
     mButton = new Button[nr_buttons];
@@ -570,7 +543,7 @@ class ShotDialog extends MyDialog
       if ( mRBdup.isChecked() )       { shot_flag = DBlock.FLAG_DUPLICATE; }
       else if ( mRBsurf.isChecked() ) { shot_flag = DBlock.FLAG_SURFACE; }
       else if ( mRBcmtd.isChecked() ) { shot_flag = DBlock.FLAG_COMMENTED; } // FIXME_COMMENTED
-      else if ( TDLevel.overExpert ) {
+      else if ( mRBsplay != null ) {
         if ( mRBsplay.getState() == 1 )      { shot_flag = DBlock.FLAG_NO_PROFILE; }
         else if ( mRBsplay.getState() == 2 ) { shot_flag = DBlock.FLAG_NO_PLAN; }
       }
@@ -735,25 +708,25 @@ class ShotDialog extends MyDialog
         if ( mCBxSplay != null ) mCBxSplay.setState( false );
       }
 
-    } else if ( TDLevel.overNormal && b == mRBdup ) {
+    } else if ( mRBdup != null  && b == mRBdup ) {
       if ( mRBdup.toggleState() ) {
         mRBsurf.setState( false );
         mRBcmtd.setState( false ); // FIXME_COMMENTED
-        if ( TDLevel.overExpert ) mRBsplay.setState( 0 );
+        if ( mRBsplay != null ) mRBsplay.setState( 0 );
       }
-    } else if ( TDLevel.overNormal && b == mRBsurf ) {
+    } else if ( mRBsurf != null  && b == mRBsurf ) {
       if ( mRBsurf.toggleState() ) {
         mRBdup.setState( false );
         mRBcmtd.setState( false ); // FIXME_COMMENTED
-        if ( TDLevel.overExpert ) mRBsplay.setState( 0 );
+        if ( mRBsplay != null ) mRBsplay.setState( 0 );
       }
-    } else if ( TDLevel.overNormal && b == mRBcmtd ) { // FIXME_COMMENTED
+    } else if ( mRBcmtd != null  && b == mRBcmtd ) { // FIXME_COMMENTED
       if ( mRBcmtd.toggleState() ) {
         mRBdup.setState( false );
         mRBsurf.setState( false );
         if ( TDLevel.overExpert ) mRBsplay.setState( 0 );
       }
-    } else if ( TDLevel.overExpert && b == mRBsplay ) {
+    } else if ( mRBsplay != null && b == mRBsplay ) {
       mRBsplay.setState( ( mRBsplay.getState() + 1 ) % 3 );
       if ( mRBsplay.getState() > 0 ) {
         mRBdup.setState( false );

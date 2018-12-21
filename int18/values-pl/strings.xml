@@ -1235,10 +1235,14 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <!-- TODO string name="pref_linesnap_summary">Enable line/area snap action</string -->
   <!-- TODO string name="pref_linecurve_title">Smooth/Straigten segment</string -->
   <!-- TODO string name="pref_linecurve_summary">Smooth/Straighten line segment action</string -->
+  <!-- TODO string name="pref_linestraight_title">Straigten lines</string -->
+  <!-- TODO string name="pref_linestraight_summary">Straighten whole line action</string -->
   <!-- TODO string name="pref_path_multiselect_title">Path multiselection</string -->
   <!-- TODO string name="pref_path_multiselect_summary">Path multiselection action</string -->
   <!-- TODO string name="pref_plane_interpolation_title">Plane interpolation</string -->
   <!-- TODO string name="pref_plane_interpolation_summary">Plane interpolation action</string -->
+  <!-- TODO string name="pref_plot_split_title">Sketch split/merge</string -->
+  <!-- TODO string name="pref_plot_split_summary">Sketch split and merge actions</string -->
   <string name="pref_fixed_thickness_title">Survey line width</string>
   <string name="pref_fixed_thickness_summary">Survey line width</string>
   <!-- UNUSED string name="pref_device_title">Device</string -->
@@ -1267,6 +1271,12 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_swapLR_summary">Swap LR in Compass export</string>
   <string name="pref_LRExtend_title">Estimate Left/Right extend</string>
   <string name="pref_LRExtend_summary">Estimate LR extend (Compass/VisualTopo import)</string>
+  <!-- TODO string name="pref_diving_mode_title">Diving mode</string -->
+  <!-- TODO string name="pref_diving_mode_summary">Enable diving mode</string -->
+  <!-- TODO string name="pref_splay_classes_title">Splay classes</string -->
+  <!-- TODO string name="pref_splay_classes_summary">Enable splay classes and coloring</string -->
+  <!-- TODO string name="pref_plot_shift_title">Sketch shift/scale</string -->
+  <!-- TODO string name="pref_plot_shift_summary">Enable sketch shift and scale</string -->
 
   <string name="pref_picker_type_title">Drawing tool picker</string>
   <string name="pref_picker_type_summary">Drawing tool picker type</string>

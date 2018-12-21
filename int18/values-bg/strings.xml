@@ -1206,10 +1206,14 @@
   <!-- TODO string name="pref_linesnap_summary">Enable line/area snap action</string -->
   <!-- TODO string name="pref_linecurve_title">Smooth/Straigten segment</string -->
   <!-- TODO string name="pref_linecurve_summary">Smooth/Straighten line segment action</string -->
+  <!-- TODO string name="pref_linestraight_title">Straigten lines</string -->
+  <!-- TODO string name="pref_linestraight_summary">Straighten whole line action</string -->
   <!-- TODO string name="pref_path_multiselect_title">Path multiselection</string -->
   <!-- TODO string name="pref_path_multiselect_summary">Path multiselection action</string -->
   <!-- TODO string name="pref_plane_interpolation_title">Plane interpolation</string -->
   <!-- TODO string name="pref_plane_interpolation_summary">Plane interpolation action</string -->
+  <!-- TODO string name="pref_plot_split_title">Sketch split/merge</string -->
+  <!-- TODO string name="pref_plot_split_summary">Sketch split and merge actions</string -->
   <string name="pref_fixed_thickness_title">Широчина на линия от антената</string>
   <string name="pref_fixed_thickness_summary">Широчина на линия от антената</string>
   <!-- UNUSED string name="pref_device_title">Устройство</string -->
@@ -1238,6 +1242,12 @@
   <string name="pref_swapLR_summary">Размяна на измервания LR в Compass експорт</string>
   <string name="pref_LRExtend_title">Приблизително Ляво/Дясно при импорт</string>
   <string name="pref_LRExtend_summary">Приблизителна оценка на Ляво/Дясно (импорт от Compass/VisualTopo)</string>
+  <!-- TODO string name="pref_diving_mode_title">Diving mode</string -->
+  <!-- TODO string name="pref_diving_mode_summary">Enable diving mode</string -->
+  <!-- TODO string name="pref_splay_classes_title">Splay classes</string -->
+  <!-- TODO string name="pref_splay_classes_summary">Enable splay classes and coloring</string -->
+  <!-- TODO string name="pref_plot_shift_title">Sketch shift/scale</string -->
+  <!-- TODO string name="pref_plot_shift_summary">Enable sketch shift and scale</string -->
 
   <string name="pref_picker_type_title">Избор на инструмент за рисуване</string>
   <string name="pref_picker_type_summary">Избор на инструмент за рисуване</string>

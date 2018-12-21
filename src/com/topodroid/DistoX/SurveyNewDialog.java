@@ -94,7 +94,7 @@ class SurveyNewDialog extends MyDialog
     mCBxsections = (CheckBox) findViewById(R.id.survey_xsections);
     mCBxsections.setChecked( TDSetting.mSharedXSections );
     mCBdatamode  = (CheckBox) findViewById(R.id.survey_datamode);
-    if ( ! TDLevel.overExpert ) mCBdatamode.setVisibility( View.GONE );
+    if ( ! ( TDLevel.overExpert && TDSetting.mDivingMode ) ) mCBdatamode.setVisibility( View.GONE );
 
     mEditDecl.setOnFocusChangeListener( new OnFocusChangeListener() {
       @Override
@@ -216,8 +216,9 @@ class SurveyNewDialog extends MyDialog
 
     int xsections = mCBxsections.isChecked() ? SurveyInfo.XSECTION_PRIVATE
                                              : SurveyInfo.XSECTION_SHARED;
-    int datamode  = mCBdatamode.isChecked() ? SurveyInfo.DATAMODE_DIVING
-                                            : SurveyInfo.DATAMODE_NORMAL;
+
+    int datamode  = SurveyInfo.DATAMODE_NORMAL;
+    if ( TDLevel.overExpert && TDSetting.mDivingMode && mCBdatamode.isChecked() ) datamode = SurveyInfo.DATAMODE_DIVING;
 
     long sid = mApp.setSurveyFromName( name, datamode, true, true ); // save survey name: tell app to set it into the database
     if ( sid <= 0 ) {

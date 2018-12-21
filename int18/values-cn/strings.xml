@@ -1204,10 +1204,14 @@
   <!-- TODO string name="pref_linesnap_summary">Enable line/area snap action</string -->
   <!-- TODO string name="pref_linecurve_title">Smooth/Straigten segment</string -->
   <!-- TODO string name="pref_linecurve_summary">Smooth/Straighten line segment action</string -->
+  <!-- TODO string name="pref_linestraight_title">Straigten lines</string -->
+  <!-- TODO string name="pref_linestraight_summary">Straighten whole line action</string -->
   <!-- TODO string name="pref_path_multiselect_title">Path multiselection</string -->
   <!-- TODO string name="pref_path_multiselect_summary">Path multiselection action</string -->
   <!-- TODO string name="pref_plane_interpolation_title">Plane interpolation</string -->
   <!-- TODO string name="pref_plane_interpolation_summary">Plane interpolation action</string -->
+  <!-- TODO string name="pref_plot_split_title">Sketch split/merge</string -->
+  <!-- TODO string name="pref_plot_split_summary">Sketch split and merge actions</string -->
   <string name="pref_fixed_thickness_title">测量线线宽</string>
   <string name="pref_fixed_thickness_summary">测量线线宽</string>
   <!-- UNUSED string name="pref_device_title">设备</string -->
@@ -1236,6 +1240,12 @@
   <string name="pref_swapLR_summary">在Compass输出中调换LR</string>
   <string name="pref_LRExtend_title">估测左/右延展</string>
   <string name="pref_LRExtend_summary">估测左/右延展 (Compass/VisualTopo 输入)</string>
+  <!-- TODO string name="pref_diving_mode_title">Diving mode</string -->
+  <!-- TODO string name="pref_diving_mode_summary">Enable diving mode</string -->
+  <!-- TODO string name="pref_splay_classes_title">Splay classes</string -->
+  <!-- TODO string name="pref_splay_classes_summary">Enable splay classes and coloring</string -->
+  <!-- TODO string name="pref_plot_shift_title">Sketch shift/scale</string -->
+  <!-- TODO string name="pref_plot_shift_summary">Enable sketch shift and scale</string -->
 
   <string name="pref_picker_type_title">绘图工具选取</string>
   <string name="pref_picker_type_summary">绘图工具选取显示类型</string>
