@@ -933,7 +933,7 @@
     <string name="title_settings_edit">TopoDroid  настройки редактирования</string>
     <string name="title_settings_device">TopoDroid  настройки приборов DistoX</string>
     <string name="title_settings_calib">TopoDroid  настройки калибровки</string>
-    <!-- TODO string name="title_settings_geek">TopoDroid geek flags settings</string -->
+    <string name="title_settings_geek">TopoDroid Спец настройки программы</string>
     <string name="title_settings_log">TopoDroid  настройки журнала</string>
 
     <string name="title_shift">Сдвиг</string>
@@ -966,7 +966,7 @@
   <string name="pref_cat_calib">НАСТРОЙКИ КАЛИБРОВКИ</string>
   <!-- UNUSED string name="pref_cat_min_algo">АЛГОРИТМ МИНИМИЗАЦИИ</string -->
   <string name="pref_cat_device">НАСТРОЙКИ УСТРОЙСТВ DistoX</string>
-  <!-- TODO string name="pref_cat_geek">GEEK FLAGS</string -->
+  <string name="pref_cat_geek">СПЕЦ НАСТРОЙКИ</string>
   <string name="pref_cat_sketch">НАСТРОЙКИ АБРИСА</string>
   <!-- UNUSED string name="pref_cat_log">НАСТРОЙКИ ЖУРНАЛА</string -->
   <!-- OK string name="pref_hide_help_title">Скрыть помощь</string -->
@@ -1113,8 +1113,8 @@
   <string name="pref_section_splay_message">Боковые замеры с углом к плоскости сечения больше заданого значения показаны пунктиром</string>
   <string name="pref_data_backup_title">Авто-экспорт данных</string>
   <string name="pref_data_backup_summary">Автоматический экспорт данных (требуется установить формат по умолчанию)</string>
-  <!-- TODO string name="pref_fixed_origin_title">Sketch origin</string -->
-  <!-- TODO string name="pref_fixed_origin_summary">Fixed sketch origin</string -->
+  <string name="pref_fixed_origin_title">Точка отсчета абрисов</string>
+  <string name="pref_fixed_origin_summary">Зафиксировать точку отсчета координат абриса</string>
   <string name="pref_shared_xsections_title">Общий поперечный разрез</string>
   <string name="pref_shared_xsections_summary">Поперечные разреы на пикете общие для плана и разреза</string>
   <string name="xsections_shared">Общие поперечные разреы</string>
@@ -1185,8 +1185,8 @@
   <string name="pref_beep_volume_summary">Проценты громкости сигнала таймера</string>
   <string name="pref_extend_frac_title">Неполная развертка</string>
   <string name="pref_extend_frac_summary">В случае когда значение "развертки" имеет десятичную часть.</string>
-  <!-- TODO string name="pref_recent_shot_title">Recent shots</string -->
-  <!-- TODO string name="pref_recent_shot_summary">Whether to highlight recent shots</string -->
+  <string name="pref_recent_shot_title">Недавние замеры</string>
+  <string name="pref_recent_shot_summary">Выделять последние замеры</string>
   <string name="pref_drawing_unit_title">Размер символов точек</string>
   <string name="pref_drawing_unit_summary">Базовый размер символов точек [требуется перезапуск программы]</string>
   <string name="pref_unscaled_points_title">Немасштабируемые значки точек</string>
@@ -1219,16 +1219,16 @@
   <string name="pref_dot_radius_message">Размер зеленых точек подсветки при поточечном редактировании</string>
   <string name="pref_line_thickness_title">Толщина линий</string>
   <string name="pref_line_thickness_summary">Толщина линий</string>
-  <!-- TODO string name="pref_linesnap_title">Line/Area snap</string -->
-  <!-- TODO string name="pref_linesnap_summary">Enable line/area snap action</string -->
-  <!-- TODO string name="pref_linecurve_title">Smooth/Straigten segment</string -->
-  <!-- TODO string name="pref_linecurve_summary">Smooth/Straighten line segment action</string -->
+  <string name="pref_linesnap_title">Привязать линию/область</string>
+  <string name="pref_linesnap_summary">Включить привязку линий/областей</string>
+  <string name="pref_linecurve_title">Сгладить/Спрямить сегмент</string>
+  <string name="pref_linecurve_summary">Сгладить/Спрямить часть линии</string>
   <!-- TODO string name="pref_linestraight_title">Straigten lines</string -->
   <!-- TODO string name="pref_linestraight_summary">Straighten whole line action</string -->
-  <!-- TODO string name="pref_path_multiselect_title">Path multiselection</string -->
-  <!-- TODO string name="pref_path_multiselect_summary">Path multiselection action</string -->
-  <!-- TODO string name="pref_plane_interpolation_title">Plane interpolation</string -->
-  <!-- TODO string name="pref_plane_interpolation_summary">Plane interpolation action</string -->
+  <string name="pref_path_multiselect_title">Выбор нескольких линий</string>
+  <string name="pref_path_multiselect_summary">Одновременный выбор нескольких линий</string>
+  <string name="pref_plane_interpolation_title">Плоская интерполяцтя</string>
+  <string name="pref_plane_interpolation_summary">Выполнить простую интерполяцию</string>
   <!-- TODO string name="pref_plot_split_title">Sketch split/merge</string -->
   <!-- TODO string name="pref_plot_split_summary">Sketch split and merge actions</string -->
   <string name="pref_fixed_thickness_title">Толщина нитки хода</string>
