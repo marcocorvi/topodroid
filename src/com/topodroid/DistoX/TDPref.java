@@ -946,9 +946,10 @@ class TDPref implements AdapterView.OnItemSelectedListener
     return new TDPref[ ] {
       makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], T, def[ 0],          ctx, hlp ), // DIVING_MODE
       makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], T, def[ 1],          ctx, hlp ), // RECENT_SHOT
-      makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2],          ctx, hlp ), // BEDDING PLANE
-      makeCbx( cat, key[ 3], tit[ 3], dsc[ 3], T, def[ 3],          ctx, hlp ), // SPLAY CLASSES
-      makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], T, def[ 4],          ctx, hlp )  // EXTEND FRAC
+      makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2],          ctx, hlp ), // SPLAY CLASSES
+      makeCbx( cat, key[ 3], tit[ 3], dsc[ 3], T, def[ 3],          ctx, hlp ), // SPLAY COLOR
+      makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], T, def[ 4],          ctx, hlp ), // EXTEND FRAC
+      makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5],          ctx, hlp )  // BEDDING PLANE
     };
   }
 

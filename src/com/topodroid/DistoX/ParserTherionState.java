@@ -14,6 +14,8 @@ package com.topodroid.DistoX;
 
 class ParserTherionState
 {
+  ParserTherionState mParent;
+
   boolean in_centerline;
   boolean in_data;
   boolean in_survey;
@@ -23,19 +25,13 @@ class ParserTherionState
   boolean in_line;
   boolean in_area;
 
-  float mUnitLen;
-  float mUnitBer;
-  float mUnitCln;
-  float mZeroLen;
-  float mZeroBer;
-  float mZeroCln;
-  float mScaleLen;
-  float mScaleBer;
-  float mScaleCln;
-  float mUnitLeft,  mScaleLeft;
-  float mUnitRight, mScaleRight;
-  float mUnitUp,    mScaleUp;
-  float mUnitDown,  mScaleDown;
+  float mUnitLen,   mScaleLen,   mZeroLen;
+  float mUnitBer,   mScaleBer,   mZeroBer;
+  float mUnitCln,   mScaleCln,   mZeroCln;
+  // float mUnitLeft,  mScaleLeft,  mZeroLeft;
+  // float mUnitRight, mScaleRight, mZeroRight;
+  // float mUnitUp,    mScaleUp,    mZeroUp;
+  // float mUnitDown,  mScaleDown,  mZeroDown;
   float mDeclination;
   boolean mDuplicate;
   boolean mSurface;
@@ -48,17 +44,13 @@ class ParserTherionState
 
   ParserTherionState()
   {
-    mUnitLen = 1.0f;
-    mUnitBer = 1.0f;
-    mUnitCln = 1.0f;
-    mZeroLen = 0.0f;
-    mZeroBer = 0.0f;
-    mZeroCln = 0.0f;
-    mScaleLen = 1.0f;
-    mScaleBer = 1.0f;
-    mScaleCln = 1.0f;
-    mUnitLeft = mUnitRight = mUnitUp = mUnitDown = 1.0f;
-    mScaleLeft = mScaleRight = mScaleUp = mScaleDown = 1.0f;
+    mParent = null;
+    mUnitLen   = mUnitBer    = mUnitCln   = 1.0f;
+    mZeroLen   = mZeroBer    = mZeroCln   = 0.0f;
+    mScaleLen  = mScaleBer   = mScaleCln  = 1.0f;
+    // mUnitLeft  = mUnitRight  = mUnitUp  = mUnitDown  = 1.0f;
+    // mScaleLeft = mScaleRight = mScaleUp = mScaleDown = 1.0f;
+    // mZeroLeft  = mZeroRight  = mZeroUp  = mZeroDown  = 0.0f;
     mDeclination= 0.0f;
     mDuplicate = false;
     mSurface   = false;
@@ -79,6 +71,8 @@ class ParserTherionState
 
   ParserTherionState( ParserTherionState state )
   {
+    mParent  = state;
+
     mUnitLen = state.mUnitLen;
     mUnitBer = state.mUnitBer;
     mUnitCln = state.mUnitCln;
@@ -89,14 +83,18 @@ class ParserTherionState
     mScaleBer = state.mScaleBer;
     mScaleCln = state.mScaleCln;
 
-    mUnitLeft   = state.mUnitLeft;
-    mUnitRight  = state.mUnitRight;
-    mUnitUp     = state.mUnitUp;
-    mUnitDown   = state.mUnitDown;
-    mScaleLeft  = state.mScaleLeft;
-    mScaleRight = state.mScaleRight;
-    mScaleUp    = state.mScaleUp;
-    mScaleDown  = state.mScaleDown;
+    // mUnitLeft   = state.mUnitLeft;
+    // mUnitRight  = state.mUnitRight;
+    // mUnitUp     = state.mUnitUp;
+    // mUnitDown   = state.mUnitDown;
+    // mScaleLeft  = state.mScaleLeft;
+    // mScaleRight = state.mScaleRight;
+    // mScaleUp    = state.mScaleUp;
+    // mScaleDown  = state.mScaleDown;
+    // mZeroLeft   = state.mZeroLeft;
+    // mZeroRight  = state.mZeroRight;
+    // mZeroUp     = state.mZeroUp;
+    // mZeroDown   = state.mZeroDown;
 
     mDeclination= state.mDeclination;
     mDuplicate = state.mDuplicate;

@@ -332,6 +332,7 @@ class TDSetting
 
   static boolean mBedding        = false;
   static boolean mSplayClasses   = false;
+  static boolean mSplayColor     = false;
   static boolean mDivingMode     = false;
 
   static boolean mPlotSplit      = false;
@@ -812,8 +813,9 @@ class TDSetting
     mDivingMode    = prefs.getBoolean( keyGShot[ 0], bool(defGShot[ 0]) ); // DISTOX_DIVING_MODE
     mShotRecent    = prefs.getBoolean( keyGShot[ 1], bool(defGShot[ 1]) ); // DISTOX_RECENT_SHOT
     mSplayClasses  = prefs.getBoolean( keyGShot[ 2], bool(defGShot[ 2]) ); // DISTOX_SPLAY_CLASSES
-    mExtendFrac    = prefs.getBoolean( keyGShot[ 3], bool(defGShot[ 3]) ); // DISTOX_EXTEND_FRAC
-    mBedding       = prefs.getBoolean( keyGShot[ 4], bool(defGShot[ 4]) ); // DISTOX_BEDDING
+    mSplayColor    = prefs.getBoolean( keyGShot[ 3], bool(defGShot[ 3]) ); // DISTOX_SPLAY_CLASSES
+    mExtendFrac    = prefs.getBoolean( keyGShot[ 4], bool(defGShot[ 4]) ); // DISTOX_EXTEND_FRAC
+    mBedding       = prefs.getBoolean( keyGShot[ 5], bool(defGShot[ 5]) ); // DISTOX_BEDDING
 
     String[] keyGPlot = TDPrefKey.GEEKPLOT;
     String[] defGPlot = TDPrefKey.GEEKPLOTdef;
@@ -1191,10 +1193,12 @@ class TDSetting
       mShotRecent   = tryBooleanValue( hlp, k, v, bool(def[1]) );
     } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_SPLAY_CLASSES
       mSplayClasses = tryBooleanValue( hlp, k, v, bool(def[ 2]) );
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_EXTEND_FRAC
-      mExtendFrac   = tryBooleanValue( hlp, k, v, bool(def[ 3]) );
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_BEDDING
-      mBedding      = tryBooleanValue( hlp, k, v, bool(def[ 4]) );
+    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_SPLAY_COLOR
+      mSplayColor   = tryBooleanValue( hlp, k, v, bool(def[ 3]) );
+    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_EXTEND_FRAC
+      mExtendFrac   = tryBooleanValue( hlp, k, v, bool(def[ 4]) );
+    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_BEDDING
+      mBedding      = tryBooleanValue( hlp, k, v, bool(def[ 5]) );
     } else {
       TDLog.Error("missing GEEK_SHOT key: " + k );
     }

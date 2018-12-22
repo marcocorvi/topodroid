@@ -115,6 +115,8 @@ public class SurveyWindow extends Activity
   private Context mContext;
   private Activity mActivity = null;
 
+  private boolean mSplayColor;
+
   private EditText mTextName;
   private Button   mEditDate;
   private EditText mEditTeam;
@@ -160,8 +162,11 @@ public class SurveyWindow extends Activity
 
 // -------------------------------------------------------------------
   
+  // called only once by onCreate
   boolean updateDisplay()
   {
+    mSplayColor = TDLevel.overExpert && TDSetting.mSplayClasses;
+
     // TDLog.Log( TDLog.LOG_SURVEY, "app SID " + TDInstance.sid );
     if ( TDInstance.sid < 0 ) return false;
     SurveyInfo info = TopoDroidApp.getSurveyInfo();
@@ -186,7 +191,11 @@ public class SurveyWindow extends Activity
     setDeclination( info.declination );
 
     mTVxsections.setText( (mXSections == SurveyInfo.XSECTION_SHARED)? R.string.xsections_shared : R.string.xsections_private );
-    mTVdatamode.setText( (mDatamode == SurveyInfo.DATAMODE_NORMAL)? R.string.datamode_normal : R.string.datamode_diving );
+    if ( TDSetting.mDivingMode ) {
+      mTVdatamode.setText( (mDatamode == SurveyInfo.DATAMODE_NORMAL)? R.string.datamode_normal : R.string.datamode_diving );
+    } else {
+      mTVdatamode.setVisibility( View.GONE );
+    }
     return true;
   }
 
@@ -538,6 +547,7 @@ public class SurveyWindow extends Activity
   }
   // ---------------------------------------------------------
 
+  // called after updateDisplay
   private void setMenuAdapter( Resources res )
   {
     // HOVER
@@ -548,7 +558,7 @@ public class SurveyWindow extends Activity
     mMenuAdapter.add( res.getString( menus[1] ) );
     if ( TDLevel.overExpert   ) mMenuAdapter.add( res.getString( menus[2] ) );
     if ( TDLevel.overNormal   ) mMenuAdapter.add( res.getString( menus[3] ) );
-    if ( TDLevel.overExpert   ) mMenuAdapter.add( res.getString( menus[4] ) );
+    if ( mSplayColor          ) mMenuAdapter.add( res.getString( menus[4] ) );
     if ( TDLevel.overAdvanced ) mMenuAdapter.add( res.getString( menus[5] ) );
     if ( TDLevel.overAdvanced ) mMenuAdapter.add( res.getString( menus[6] ) );
     mMenuAdapter.add( res.getString( menus[7] ) );
@@ -580,7 +590,7 @@ public class SurveyWindow extends Activity
       new SurveyRenameDialog( mActivity, this ).show();
     } else if ( TDLevel.overNormal && p++ == pos ) { // DELETE
       askDelete();
-    } else if ( TDLevel.overExpert && p++ == pos ) { // CLEAR COLOR
+    } else if ( mSplayColor && p++ == pos ) { // CLEAR COLOR
       mApp_mData.resetShotColor( TDInstance.sid );
     } else if ( TDLevel.overAdvanced && p++ == pos ) { // INSTRUMENTS CALIBRATION
       new SurveyCalibrationDialog( mActivity, mApp ).show();

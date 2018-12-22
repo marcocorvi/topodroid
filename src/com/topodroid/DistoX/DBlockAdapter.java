@@ -306,7 +306,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       // }
       tvLength.setTextColor( col );
 
-      if ( b.isRecent( ) ) { // if ( b.isTimeRecent( System.currentTimeMillis()/1000 ) )
+      if ( b.isRecent( ) ) { 
 	// b.mWasRecent = true;
         tvFrom.setBackgroundColor( TDColor.DARK_GREEN );
         tvTo.setBackgroundColor( TDColor.DARK_GREEN );

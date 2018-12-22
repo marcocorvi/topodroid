@@ -718,7 +718,7 @@ public class DrawingWindow extends ItemDrawer
           dpath.setPathPaint( BrushManager.fixedOrangePaint );
         } else if ( TopoDroidApp.mShotWindow != null && TopoDroidApp.mShotWindow.isBlockMagneticBad( blk ) ) {
           dpath.setPathPaint( BrushManager.fixedRedPaint );
-        } else if ( blk.isRecent( ) ) { // if ( TDSetting.isConnectionModeBatch() && blk.isTimeRecent( System.currentTimeMillis()/1000 ) )
+        } else if ( /* TDSetting.mSplayColor && */ blk.isRecent( ) ) { 
           dpath.setPathPaint( BrushManager.fixedBluePaint );
 	}
       }

@@ -35,7 +35,7 @@ class ImportTherionTask extends ImportTask
 
       sid = mApp.get().setSurveyFromName( str[1], SurveyInfo.DATAMODE_NORMAL, false, false ); // IMPORT TH no update, no forward
       app_data.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle, false );
-      app_data.updateSurveyDeclination( sid, parser.mDeclination, false );
+      app_data.updateSurveyDeclination( sid, parser.surveyDeclination(), false );
       app_data.updateSurveyInitStation( sid, parser.initStation(), false );
 
       ArrayList< ParserShot > shots  = parser.getShots();

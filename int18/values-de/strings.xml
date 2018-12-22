@@ -1271,6 +1271,8 @@
   <!-- TODO string name="pref_diving_mode_summary">Enable diving mode</string -->
   <!-- TODO string name="pref_splay_classes_title">Splay classes</string -->
   <!-- TODO string name="pref_splay_classes_summary">Enable splay classes and coloring</string -->
+  <!-- TODO string name="pref_splay_color_title">Splay coloring</string -->
+  <!-- TODO string name="pref_splay_color_summary">Enable splay coloring</string -->
   <!-- TODO string name="pref_plot_shift_title">Sketch shift/scale</string -->
   <!-- TODO string name="pref_plot_shift_summary">Enable sketch shift and scale</string -->
 

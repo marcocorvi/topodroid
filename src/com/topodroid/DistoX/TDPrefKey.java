@@ -1320,6 +1320,7 @@ class TDPrefKey
     "DISTOX_DIVING_MODE",     // enable diving mode
     "DISTOX_RECENT_SHOT",     // highlight recent shots
     "DISTOX_SPLAY_CLASSES",   // splay classes
+    "DISTOX_SPLAY_COLOR",     // splay color
     "DISTOX_EXTEND_FRAC",     // fractional extend
     "DISTOX_BEDDING",         // splays bed plane interpolation
     null
@@ -1329,6 +1330,7 @@ class TDPrefKey
     R.string.pref_diving_mode_title,
     R.string.pref_recent_shot_title,
     R.string.pref_splay_classes_title,
+    R.string.pref_splay_color_title,
     R.string.pref_extend_frac_title,
     R.string.pref_plane_interpolation_title,
     -1
@@ -1337,13 +1339,15 @@ class TDPrefKey
   static int[] GEEKSHOTdesc = {
     R.string.pref_diving_mode_summary,
     R.string.pref_recent_shot_summary,
-    R.string.pref_plane_interpolation_summary,
-    R.string.pref_extend_frac_summary,
     R.string.pref_splay_classes_summary,
+    R.string.pref_splay_color_summary,
+    R.string.pref_extend_frac_summary,
+    R.string.pref_plane_interpolation_summary,
     -1
   };
 
   static String[] GEEKSHOTdef = {
+    FALSE,
     FALSE,
     FALSE,
     FALSE,

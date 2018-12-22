@@ -1622,7 +1622,7 @@ class DrawingCommandManager
 
     boolean legs     = (mDisplayMode & DisplayMode.DISPLAY_LEG     ) != 0;
     boolean splays   = (mDisplayMode & DisplayMode.DISPLAY_SPLAY   ) != 0;
-    boolean latest   = (mDisplayMode & DisplayMode.DISPLAY_LATEST  ) != 0;
+    boolean latest   = ( (mDisplayMode & DisplayMode.DISPLAY_LATEST  ) != 0 ) && TDSetting.mShotRecent;
     boolean stations = (mDisplayMode & DisplayMode.DISPLAY_STATION ) != 0;
     boolean grids    = (mDisplayMode & DisplayMode.DISPLAY_GRID    ) != 0;
     boolean outline  = (mDisplayMode & DisplayMode.DISPLAY_OUTLINE ) != 0;

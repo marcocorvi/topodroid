@@ -471,22 +471,17 @@ class DrawingPath extends RectF
   {
     if (    mType == DRAWING_PATH_SPLAY  // FIXME_X_SPLAY
          && mBlock != null ) {
-      if ( mBlock.isRecent( ) ) { // if ( mBlock.isTimeRecent( System.currentTimeMillis()/1000 ) ) 
-        // if ( mBlock.isPlainSplay() && BrushManager.lightBluePaint != null ) {
-        //   canvas.drawPath( path, BrushManager.lightBluePaint );
-        // } else if ( mBlock.isXSplay() && BrushManager.paintSplayXViewed != null ) {
-        //   canvas.drawPath( path, BrushManager.paintSplayXViewed );
-        // }
-        // if ( BrushManager.lightBluePaint != null ) {
+      if ( TDSetting.mSplayColor ) {
+        if ( mBlock.isRecent( ) ) { 
           canvas.drawPath( path, BrushManager.lightBluePaint );
           return;
-	// }
-      }
-      if ( TDLevel.overExpert ) { // splay user-color only at tester level
-        Paint paint = mBlock.getPaint();
-        if ( paint != null ) {
-          canvas.drawPath( path, paint );
-          return;
+        }
+        if ( TDLevel.overExpert ) { // splay user-color only at tester level
+          Paint paint = mBlock.getPaint();
+          if ( paint != null ) {
+            canvas.drawPath( path, paint );
+            return;
+          }
         }
       }
     } 

@@ -23,6 +23,9 @@ import java.util.regex.Pattern;
 // import android.util.Log;
 
 // TODO this class can be made extend ImportParser
+//
+// units, calibrate, sd supported quantities:
+//   length tape bearing compass gradient clino counter depth x y z position easting dx northing dy altitude dz
 
 class ParserTherion
 {
@@ -41,20 +44,18 @@ class ParserTherion
   String mDate = null;  // survey date
   private String mTeam = TDString.EMPTY;
   String mTitle = TDString.EMPTY;
-  float  mDeclination = 0.0f; // one-survey declination
+  private float   mDeclination = 0.0f; // one-survey declination
   private boolean mApplyDeclination = false;
  
-  private Stack< ParserTherionState > mStates; // states stack (LIFO)
-
-  private void pushState( ParserTherionState state )
-  {
-    mStates.push( state );
-  }
-
-  private ParserTherionState popState()
-  {
-    return mStates.pop();
-  }
+  // private Stack< ParserTherionState > mStates; // states stack (LIFO)
+  // private void pushState( ParserTherionState state )
+  // {
+  //   mStates.push( state );
+  // }
+  // private ParserTherionState popState()
+  // {
+  //   return mStates.pop();
+  // }
 
 
   /** fix station:
@@ -111,15 +112,18 @@ class ParserTherion
     return TDString.ZERO;
   }
 
+  float surveyDeclination( ) { return mDeclination; }
+  // ---------------------------------------------------------
+
   ParserTherion( String filename, boolean apply_declination ) throws ParserException
   {
     fixes    = new ArrayList<>();
     stations = new ArrayList<>();
     shots    = new ArrayList<>();
     splays   = new ArrayList<>();
-    mStates  = new Stack< ParserTherionState >();
+    // mStates  = new Stack< ParserTherionState >();
     mApplyDeclination = apply_declination;
-    ParserTherionState state = new ParserTherionState();
+    ParserTherionState state = new ParserTherionState(); // root of the linked list of states
     readFile( filename, "", state );
   }
 
@@ -261,7 +265,7 @@ class ParserTherion
               survey_pos[ks] = path.length(); // set current survey pos in pathname
               path = path + "." + vals[1];    // add survey name to path
               ++ks;
-              pushState( state );
+              // pushState( state );
               state = new ParserTherionState( state );
               state.mSurveyLevel ++;
               state.in_survey= true;
@@ -274,17 +278,21 @@ class ParserTherion
               // parse survey options
               for ( int j=2; j<vals_len; ++j ) {
                 if ( vals[j].equals("-declination") && j+1 < vals_len ) {
-                  try {
-                    state.mDeclination = Float.parseFloat( vals[j+1] );
-                    ++j;
-                    if ( j+1 < vals_len ) { // FIXME check for units
-                      state.mDeclination *= parseAngleUnit( vals[j+1] );
+		  if ( vals[j+1].equals("-") ) { // declination reset
+                    state.mDeclination = ( state.mParent == null )? 0 : state.mParent.mDeclination;
+		  } else {
+                    try {
+                      state.mDeclination = Float.parseFloat( vals[j+1] );
                       ++j;
+                      if ( j+1 < vals_len ) { // FIXME check for units
+                        state.mDeclination *= parseAngleUnit( vals[j+1] );
+                        ++j;
+                      }
+                      if ( ! mApplyDeclination ) mDeclination = state.mDeclination;
+                    } catch ( NumberFormatException e ) {
+                      TDLog.Error( "therion parser error: -declination " + line );
                     }
-                    if ( ! mApplyDeclination ) mDeclination = state.mDeclination;
-                  } catch ( NumberFormatException e ) {
-                    TDLog.Error( "therion parser error: -declination " + line );
-                  }
+		  }
                 } else if ( vals[j].equals("-title") && j+1 < vals_len ) {
                   for ( ++j; j<vals_len; ++j ) {
                     if ( vals[j].length() == 0 ) continue;
@@ -316,7 +324,8 @@ class ParserTherion
               if ( cmd.equals("endcenterline") || cmd.equals("endcentreline") ) {
                 // state.in_data = false;
                 // state.in_centerline = false;
-                state = popState();
+                // state = popState();
+                if ( state.mParent != null ) state = state.mParent;
 
               } else if ( cmd.equals("date") ) {
                 String date = vals[1];
@@ -336,30 +345,40 @@ class ParserTherion
                 boolean clen = false;
                 boolean cber = false;
                 boolean ccln = false;
-                for ( int k=1; k<vals_len - 1; ++k ) {
-                  if ( vals[k].equals("length") || vals[k].equals("tape") ) clen = true;
+		int k = 1;
+                for ( ; k<vals_len - 1; ++k ) {
+                  if ( vals[k].equals("length") || vals[k].equals("tape") )     clen = true;
                   if ( vals[k].equals("compass") || vals[k].equals("bearing") ) cber = true;
-                  if ( vals[k].equals("clino") || vals[k].equals("gradient") ) ccln = true;
+                  if ( vals[k].equals("clino") || vals[k].equals("gradient") )  ccln = true;
                 }
                 float zero = 0.0f;
                 float scale = 1.0f;
-                try {
-                  scale = Float.parseFloat( vals[vals_len-1] );
-                  zero  = Float.parseFloat( vals[vals_len-2] );
-                } catch ( NumberFormatException e ) {
-                  TDLog.Error( "therion parser error: scale/zero " + line );
-                  zero  = scale;
+		int kk = 1;
+                while ( kk<vals_len-1 ) {
+		  try { // try to read the "scale" float (next val)
+		    ++kk;
+                    zero = Float.parseFloat( vals[kk] );
+		    break;
+                  } catch ( NumberFormatException e ) { }
+		}
+                while ( kk<vals_len-1 ) {
+		  try { // try to read the "zero" float (next val)
+		    ++kk;
+                    scale  = Float.parseFloat( vals[kk] );
+		    break;
+                  } catch ( NumberFormatException e ) { }
                 }
+
                 if ( clen ) {
-                  state.mZeroLen = zero;
+                  state.mZeroLen  = zero;
                   state.mScaleLen = scale;
                 }
                 if ( cber ) {
-                  state.mZeroBer = zero;
+                  state.mZeroBer  = zero;
                   state.mScaleBer = scale;
                 }
                 if ( ccln ) {
-                  state.mZeroCln = zero;
+                  state.mZeroCln  = zero;
                   state.mScaleCln = scale;
                 }
               } else if ( cmd.equals("units") ) { // units quantity_list [factor] unit
@@ -374,10 +393,6 @@ class ParserTherion
                   if ( vals[k].equals("length")  || vals[k].equals("tape") )     ulen = true;
                   if ( vals[k].equals("compass") || vals[k].equals("bearing") )  uber = true;
                   if ( vals[k].equals("clino")   || vals[k].equals("gradient") ) ucln = true;
-                  if ( vals[k].equals("left") )  uleft = true;
-                  if ( vals[k].equals("right") ) uright = true;
-                  if ( vals[k].equals("up") )    uup = true;
-                  if ( vals[k].equals("down") )  udown = true;
                 }
                 float factor = 1.0f;
                 try {
@@ -388,10 +403,6 @@ class ParserTherion
                 if ( ulen || uleft || uright || uup || udown ) {
                   float len = factor * parseLengthUnit( vals[vals_len-1] );
                   if ( ulen )   state.mUnitLen   = len;
-                  if ( uleft )  state.mUnitLeft  = len;
-                  if ( uright ) state.mUnitRight = len;
-                  if ( uup )    state.mUnitUp    = len;
-                  if ( udown )  state.mUnitDown  = len;
                 } 
                 if ( uber || ucln ) {
                   float angle = factor * parseAngleUnit( vals[vals_len-1] );
@@ -404,16 +415,20 @@ class ParserTherion
                 // ignore
               } else if ( cmd.equals("declination") ) { 
                 if ( 1 < vals_len ) {
-                  try {
-                    float declination = Float.parseFloat( vals[1] );
-                    if ( 2 < vals_len ) {
+		  if ( vals[1].equals("-") ) { // declination reset
+                    state.mDeclination = ( state.mParent == null )? 0 : state.mParent.mDeclination;
+		  } else {
+                    try {
+                      float declination = Float.parseFloat( vals[1] );
+                      if ( 2 < vals_len ) {
                       declination *= parseAngleUnit( vals[2] );
+                      }
+                      state.mDeclination = declination;
+                      if ( ! mApplyDeclination ) mDeclination = state.mDeclination;
+                    } catch ( NumberFormatException e ) {
+                      TDLog.Error( "therion parser error: declination " + line );
                     }
-                    state.mDeclination = declination;
-                    if ( ! mApplyDeclination ) mDeclination = state.mDeclination;
-                  } catch ( NumberFormatException e ) {
-                    TDLog.Error( "therion parser error: declination " + line );
-                  }
+		  }
                 }      
               } else if ( cmd.equals("instrument") ) {
                 // ignore
@@ -527,10 +542,11 @@ class ParserTherion
                 // ignore
 
               } else if ( cmd.equals("group") ) {
-                pushState( state );
+                // pushState( state );
                 state = new ParserTherionState( state );
               } else if ( cmd.equals("endgroup") ) {
-                state = popState();
+                // state = popState();
+                if ( state.mParent != null ) state = state.mParent;
 
               } else if ( cmd.equals("walls") ) {
                 // ignore
@@ -615,34 +631,36 @@ class ParserTherion
                     float ber  = Float.parseFloat( vals[jCompass] );
                     float cln  = Float.parseFloat( vals[jClino] );
 
-                    len = state.mZeroLen + (len*state.mUnitLen) / state.mScaleLen;
-                    if ( mApplyDeclination ) {
-                      ber = state.mZeroBer + (ber*state.mUnitBer + state.mDeclination) / state.mScaleBer;
-                    } else {
-                      ber = state.mZeroBer + (ber*state.mUnitBer) / state.mScaleBer;
-                    }
-                    cln = state.mZeroCln + (cln*state.mUnitCln) / state.mScaleCln;
+		    // measure = (read - zero)*scale
+		    float zLen = state.mZeroLen;
+		    float sLen = state.mScaleLen * state.mUnitLen;
+
+                    len = (len - zLen) * sLen;
+                    ber = (ber - state.mZeroBer) * state.mScaleBer * state.mUnitBer;
+                    if ( mApplyDeclination ) ber += state.mDeclination;
+		    if ( ber < 0 ) { ber += 360; } else if ( ber >= 360 ) { ber -= 360; }
+                    cln = (cln - state.mZeroCln) * state.mScaleCln * state.mUnitCln;
 
                     float dist, b;
                     if ( jLeft >= 0 && jLeft < sz ) {
-                      dist = Float.parseFloat( vals[jLeft] ) * state.mUnitLeft / state.mScaleLeft;
+                      dist = (Float.parseFloat( vals[jLeft] ) - zLen) * sLen;
                       b = ber - 90; if ( b < 0 ) b += 360;
                       shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, TDString.EMPTY,
                                  dist, b, 0, 0.0f, state.mExtend, 2, state.mDuplicate, state.mSurface, false, "" ) );
                     }
                     if ( jRight >= 0 && jRight < sz ) {
-                      dist = Float.parseFloat( vals[jRight] ) * state.mUnitRight / state.mScaleRight;
+                      dist = (Float.parseFloat( vals[jRight] ) - zLen) * sLen;
                       b = ber + 90; if ( b >= 360 ) b -= 360;
                       shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, TDString.EMPTY,
                                  dist, b, 0, 0.0f, state.mExtend, 2, state.mDuplicate, state.mSurface, false, "" ) );
                     }
                     if ( jUp >= 0 && jUp < sz ) {
-                      dist = Float.parseFloat( vals[jUp] ) * state.mUnitUp / state.mScaleUp;
+                      dist = (Float.parseFloat( vals[jUp] ) - zLen) * sLen;
                       shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, TDString.EMPTY,
                                  dist, 0, 90, 0.0f, state.mExtend, 2, state.mDuplicate, state.mSurface, false, "" ) );
                     }
                     if ( jDown >= 0 && jDown < sz ) {
-                      dist = Float.parseFloat( vals[jDown] ) * state.mUnitDown / state.mScaleDown;
+                      dist = (Float.parseFloat( vals[jDown] ) - zLen) * sLen;
                       shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, TDString.EMPTY,
                                  dist, 0, -90, 0.0f, state.mExtend, 2, state.mDuplicate, state.mSurface, false, "" ) );
                     }
@@ -669,12 +687,13 @@ class ParserTherion
                 // FIXME other data types
               }            
             } else if ( cmd.equals("centerline") || cmd.equals("centreline") ) {
-              pushState( state );
+              // pushState( state );
               state = new ParserTherionState( state );
               state.in_centerline = true;
               state.in_data = false;
             } else if ( cmd.equals("endsurvey") ) {
-              state = popState();
+              // state = popState();
+              if ( state.mParent != null ) state = state.mParent;
               --ks;
               path = path.substring(survey_pos[ks]); // return to previous survey_pos in path
               state.in_survey = ( ks > 0 );
