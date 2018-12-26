@@ -677,29 +677,29 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
 <!-- FIXME_SKETCH_3D -->    
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
-    <string name="title_sketch_new">New 3D sketch</string>
+    <string name="title_sketch_new">Nowy szkic 3D</string>
     <!-- UNUSED string name="title_sketch_edit">Edit 3D surface</string -->
-    <string name="title_sketch_shot">New shot</string>
-    <string name="title_sketch_refs">View mode</string>
+    <string name="title_sketch_shot">Nowy strzał</string>
+    <string name="title_sketch_refs">Tryb widoku</string>
     <!-- UNUSED string name="title_sketch_section_type">Sections type</string -->
     <!-- UNUSED string name="title_sketch_select">Select item</string -->
 
-    <string name="sketch_mode_single">Single shot</string>
-    <string name="sketch_mode_ngbh">Nearby shots</string>
-    <string name="sketch_mode_all">All shots</string>
-    <string name="sketch_mode_none">No surface</string>
-    <string name="sketch_delete">Delete 3D model ?</string>
-    <string name="sketch_clear">Clear 3D model ?</string>
+    <string name="sketch_mode_single">Pojedynczy strzał</string>
+    <string name="sketch_mode_ngbh">Bliskie strzały</string>
+    <string name="sketch_mode_all">Wszystkie strzały</string>
+    <string name="sketch_mode_none">Brak powierzchni</string>
+    <string name="sketch_delete">Usunać model 3D ?</string>
+    <string name="sketch_clear">Wyczyścić model 3D ?</string>
     <!-- UNUSED string name="sketch_no_split">No refinement. Decrease side max. length to refine further.</string -->
 
-    <string name="length">Length [m]</string>
-    <string name="azimuth">Azimuth [deg]</string>
-    <string name="clino">Clino [deg]</string>
+    <string name="length">Długość [m]</string>
+    <string name="azimuth">Azymut [deg]</string>
+    <string name="clino">Upad [deg]</string>
 
-    <string name="orientation">orientation</string>
-    <string name="contents">contents</string>
-    <string name="error_distribution">error distribution</string>
-    <string name="angle_distribution">angular distribution</string>
+    <string name="orientation">orientacja</string>
+    <string name="contents">zawartość</string>
+    <string name="error_distribution">rozkład błędów</string>
+    <string name="angle_distribution">rozkład kątowy</string>
 
     <!-- UNUSED string name="btn_head">head</string -->
     <!-- UNUSED string name="btn_stretch">Stretch</string -->
@@ -707,7 +707,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="btn_erase">erase</string -->
     <!-- UNUSED string name="btn_cut">cut</string -->
     <!-- UNUSED string name="btn_vertical">Vert.</string -->
-    <string name="btn_horizontal">Horiz.</string>
+    <string name="btn_horizontal">Horyz.</string>
 
     <!-- select buttin labels -->
     <!-- UNUSED string name="btn_section">Section</string -->
