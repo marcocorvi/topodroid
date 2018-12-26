@@ -508,7 +508,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="undelete_shot">Pomiary</string>
     <string name="undelete_overshoot">Niecelne pomiary</string>
     <string name="undelete_check">Sprawdzenie</string>
-    <string name="undelete_plot">Szkice/string>
+    <string name="undelete_plot">Szkice</string>
     <string name="delete_whole_leg">Usunąć cały pomiar</string>
     <string name="visible_border">widoczna granica</string>
     <!-- UNUSED string name="vthreshold">vert. threshold</string -->
