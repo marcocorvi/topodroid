@@ -3174,6 +3174,7 @@ public class DrawingWindow extends ItemDrawer
 
     } else if ( mMode == MODE_SHIFT ) {
       mShiftMove = true; // whether to move canvas in point-shift mode
+                         // false if moving the hot point
       mStartX = xc;
       mStartY = yc;
       // PATH_MULTISELECTION
@@ -3184,13 +3185,13 @@ public class DrawingWindow extends ItemDrawer
         SelectionPoint pt = mDrawingSurface.hotItem();
         if ( pt != null ) {
           if ( mLandscape ) {
-            if ( pt.distance( -ys, xs ) < d0 ) {
+            if ( pt.distance( -ys, xs ) < d0*4 ) {
               mShiftMove = false;
               mStartX = xs;  // save start position
               mStartY = ys;
             }
           } else {
-            if ( pt.distance( xs, ys ) < d0 ) {
+            if ( pt.distance( xs, ys ) < d0*4 ) {
               mShiftMove = false;
               mStartX = xs;  // save start position
               mStartY = ys;
@@ -3251,7 +3252,7 @@ public class DrawingWindow extends ItemDrawer
                || (mMode == MODE_SHIFT && mShiftMove) ) {
         moveCanvas( x_shift, y_shift );
       } else if ( mMode == MODE_SHIFT ) {
-        // PATH_MULTISELECTION
+        // if NOT PATH_MULTISELECTION
         if ( ! mDrawingSurface.isMultiselection() ) {
           // mDrawingSurface.shiftHotItem( xs - mStartX, ys - mStartY, mEditRadius * 10 / mZoom );
           if ( mLandscape ) {
