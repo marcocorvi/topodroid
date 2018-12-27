@@ -1114,7 +1114,7 @@
   <string name="pref_eraseness_title">Rozsah veľkosti gumy</string>
   <string name="pref_eraseness_message">Prednastavená veľkosť nástroja na vymazávanie (guma)</string>
   <string name="pref_min_shift_title">Citlivosť posunu</string>
-  <string name="pref_min_shift_message">Maximálna rýchlosť posunu náčrtu - zvýšiť hodnotu pri "sekaní"</string>
+  <string name="pref_min_shift_message">Maximálna rýchlosť posunu nákresu - zvýšiť hodnotu pri "sekaní"</string>
   <string name="pref_pointing_title">Tolerancia bodov</string>
   <string name="pref_pointing_message">Pri výbere bodov sa nesmie hýbať prstom viac ako toto nastavenie</string>
   <string name="pref_dash_splay_title">Vzťah čiarkovaných zámer</string>
