@@ -1199,7 +1199,7 @@
   <string name="pref_extend_frac_title">Desatinná Smerová orientácia</string>
   <string name="pref_extend_frac_summary">Určuje či Smerová orientácia môže mať desatinné čiarky. Pri zaškrtnutí povolí horizontálny posun meračských bodov v Režime Editácie v Rozvinutom reze</string>
   <string name="pref_recent_shot_title">Posledne merané zámery</string>
-  <string name="pref_recent_shot_summary"Zvýrazní posledne merané zámery/string>
+  <string name="pref_recent_shot_summary"Povolí možnosť zvýraznenia posledne zameraných zámer</string>
   <string name="pref_drawing_unit_title">Veľkosť Symbolov Bod</string>
   <string name="pref_drawing_unit_summary">Mierka veľkosti Symbolov BOD</string>
   <string name="pref_unscaled_points_title">Približovanie Symbolov Bod</string>
