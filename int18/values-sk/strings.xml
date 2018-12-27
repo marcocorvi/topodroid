@@ -1232,8 +1232,8 @@
   <string name="pref_dot_radius_message">Veľkosť zelených bodov výberu v Režime Editácie pri kreslení</string>
   <string name="pref_line_thickness_title">Hrúbka Symbolu Čiary</string>
   <string name="pref_line_thickness_summary">Výber Hrúbky nakreslenej čiary</string>
-  <string name="pref_linesnap_title">Prichytávanie na Čiary/Plochy</string>
-  <string name="pref_linesnap_summary">Povolí prichytávanie na Čiary/Plochy</string>
+  <string name="pref_linesnap_title">Prichytávanie na Čiary/Oblasti</string>
+  <string name="pref_linesnap_summary">Povolí prichytávanie na Čiary/Oblasti</string>
   <string name="pref_linecurve_title">Vyhladiť/Vyrovnať segmenty</string>
   <string name="pref_linecurve_summary">Povolí vyhladiť/vyrovnať segmenty Čiary</string>
   <string name="pref_linestraight_title">Vyrovnanie Čiar</string>
