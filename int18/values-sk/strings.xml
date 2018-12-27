@@ -497,7 +497,7 @@
     <string name="anomaly_warning">Kompenzácia magnetickej anomálie je pre expertov!</string>
     <string name="tripod_warning">Politika STATÍV-STENA je pre pokročilých !</string>
 	
-    
+    <string name="empty_clipboard">Prázdna schránka</string>
     <string name="cannot_rename">Nedá sa premenovať názov mapovania</string>
     <string name="declination">Magnetická deklinácia</string>
     <string name="description">Popis</string>
