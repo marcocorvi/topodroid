@@ -183,7 +183,7 @@
     <!-- UNUSED string name="pairing_failed">Pairing failed</string -->
  
     <string name="datamode_normal">Normálny data-mód</string>
-    <string name="datamode_diving">Ptápačský data-mód</string>	
+    <string name="datamode_diving">Potápačský data-mód</string>	
     <string name="illegal_data_value">Nesprávne hodnoty údajov</string>
 
     <string name="photo_title">FOTO</string>
@@ -943,7 +943,7 @@
     <string name="title_settings_edit">TopoDroid nastavenia Editácie</string>
     <string name="title_settings_device">TopoDroid nastavenia DistoX</string>
     <string name="title_settings_calib">TopoDroid nastavenia Kalibrácie</string>
-    <!-- TODO string name="title_settings_geek">TopoDroid geek flags settings</string -->
+    <string name="title_settings_geek">TopoDroid Špeciálne nastavenia</string>
     <string name="title_settings_log">TopoDroid nastavenia Log-u</string>
 
     <string name="title_shift">Posunúť</string>
@@ -977,7 +977,7 @@
   <string name="pref_cat_calib">NASTAVENIE KALIBRÁCIE</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->  
   <string name="pref_cat_device">NASTAVENIE DISTOX</string>
-  <!-- TODO string name="pref_cat_geek">GEEK FLAGS</string -->
+  <string name="pref_cat_geek">ŠPECIÁLNE NASTAVENIA</string>
   <string name="pref_cat_sketch">3D MODELY</string>
   <!-- UNUSED string name="pref_cat_log">NASTAVENIE ZÁZNAMU</string -->
 
@@ -1194,8 +1194,8 @@
   <string name="pref_beep_volume_summary">Percento hlasitosti pípania</string>
   <string name="pref_extend_frac_title">Desatinná Smerová orientácia</string>
   <string name="pref_extend_frac_summary">Určuje či Smerová orientácia môže mať desatinné čiarky. Pri zaškrtnutí povolí horizontálny posun meračských bodov v Režime Editácie v Rozvinutom reze</string>
-  <!-- TODO string name="pref_recent_shot_title">Recent shots</string -->
-  <!-- TODO string name="pref_recent_shot_summary">Whether to highlight recent shots</string -->
+  <string name="pref_recent_shot_title">Posledne merané zámery</string>
+  <string name="pref_recent_shot_summary"Zvýrazní posledne merané zámery/string>
   <string name="pref_drawing_unit_title">Veľkosť Symbolov Bod</string>
   <string name="pref_drawing_unit_summary">Mierka veľkosti Symbolov BOD</string>
   <string name="pref_unscaled_points_title">Približovanie Symbolov Bod</string>
@@ -1268,14 +1268,14 @@
   <string name="pref_swapLR_summary">v programe Compass</string>
   <string name="pref_LRExtend_title">Odhadnúť Smerovú orientáciu</string>
   <string name="pref_LRExtend_summary">Odhadnúť Smerovú orientáciu vľavo/vpravo (len pre import Compass VisualTopo)</string>
-  <!-- TODO string name="pref_diving_mode_title">Diving mode</string -->
-  <!-- TODO string name="pref_diving_mode_summary">Enable diving mode</string -->
-  <!-- TODO string name="pref_splay_classes_title">Splay classes</string -->
-  <!-- TODO string name="pref_splay_classes_summary">Enable splay classes and coloring</string -->
-  <!-- TODO string name="pref_splay_color_title">Splay coloring</string -->
-  <!-- TODO string name="pref_splay_color_summary">Enable splay coloring</string -->
-  <!-- TODO string name="pref_plot_shift_title">Sketch shift/scale</string -->
-  <!-- TODO string name="pref_plot_shift_summary">Enable sketch shift and scale</string -->
+  <string name="pref_diving_mode_title">Potápačský mód</string>
+  <string name="pref_diving_mode_summary">Povolí potápačský mód</string>
+  <string name="pref_splay_classes_title">Splay classes</string>
+  <string name="pref_splay_classes_summary">Enable splay classes</string>
+  <string name="pref_splay_color_title">Splay coloring</string>
+  <string name="pref_splay_color_summary">Enable splay coloring</string>
+  <string name="pref_plot_shift_title">Sketch shift/scale</string>
+  <string name="pref_plot_shift_summary">Enable sketch shift and scale</string>
 
   <string name="pref_picker_type_title">Paleta v režime kreslenia</string>
   <string name="pref_picker_type_summary">Spôsob zobrazenia výberu z Palety v režime kreslenia</string>
