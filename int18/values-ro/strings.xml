@@ -313,6 +313,7 @@
     <!-- UNUSED string name="menu_attach">CONECTEAZĂ</string -->
     <!-- UNUSED string name="menu_attached">Conectat</string -->
     <!-- UNUSED string name="menu_ready">Pregătit</string -->
+    <!-- TODO string name="menu_backups">CLEAR BACKUPS</string -->
     <string name="menu_calib_check">VERIFICARE CALIBRARE</string>
     <string name="menu_close">ÎNCHIDE</string>
     <string name="menu_clear">CURĂȚĂ</string>
@@ -564,6 +565,7 @@
     <string name="ask_reset">Resetează memoria DistoX?</string>
     <!-- UNUSED string name="ask_close_survey">Închide cartarea?</string -->
     <string name="ask_gps_service">Definește serviciul GPS?</string>
+    <!-- TODO string name="ask_backups_clear">Delete sketch backups?</string -->
 
     <!-- UNUSED string name="button_add"       >Adaugă    </string -->
     <string name="button_back"      >Înapoi    </string>
@@ -744,6 +746,7 @@
     <string name="help_measure_type">Mod măsuratoare: punct fix sau polilinie</string>
     <string name="help_measure_undo">Șterge ultimul punct al poliliniei</string>
     
+    <!-- TODO string name="help_backups">Delete sketch backups</string -->
     <string name="help_calib_check">Măsurători verificare-calibrare</string>
     <string name="help_close">Închide fereastra</string>
     <string name="help_coeff">Arată coeficienții calibrării</string>
@@ -1239,6 +1242,8 @@
   <string name="pref_backup_number_summary">Numărul de copii de rezervă pentru schițe</string>
   <string name="pref_backup_interval_title">Interval de efectuare copii de rezervă(backup)</string>
   <string name="pref_backup_interval_summary">Interval minim între efectuarea a 2 copii de rezervă(backup-uri) [s]</string>
+  <!-- TODO string name="pref_backups_clear_title">Backups clear</string -->
+  <!-- TODO string name="pref_backups_clear_summary">Enable sketch backups clear menu</string -->
   <!-- UNUSED string name="pref_xtherion_areas_title">suprafețe xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Salvează suprafețele ca xtherion</string -->
   <string name="pref_therion_splays_title">Radieri Therion</string>

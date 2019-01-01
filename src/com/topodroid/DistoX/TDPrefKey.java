@@ -1367,6 +1367,7 @@ class TDPrefKey
     // "DISTOX_HTHRESHOLD",      // if clino is over thr, H_SECTION is horizontal (has north arrow)
     "DISTOX_BACKUP_NUMBER",   // number of plot backups
     "DISTOX_BACKUP_INTERVAL", // minimum interval between plot backups [60 s]
+    "DISTOX_BACKUPS_CLEAR",
     null
   };
 
@@ -1381,6 +1382,7 @@ class TDPrefKey
     // R.string.pref_hthr_title,
     R.string.pref_backup_number_title,
     R.string.pref_backup_interval_title,
+    R.string.pref_backups_clear_title,
     -1
   };
 
@@ -1395,6 +1397,7 @@ class TDPrefKey
     // R.string.pref_hthr_summary,
     R.string.pref_backup_number_summary,
     R.string.pref_backup_interval_summary,
+    R.string.pref_backups_clear_summary,
     -1
   };
 
@@ -1409,6 +1412,7 @@ class TDPrefKey
     // "70",
     TDString.FIVE,
     TDString.SIXTY,
+    FALSE,
     null
   };
 

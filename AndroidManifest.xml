@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="401055"
-      android:versionName="4.1.1z"
+      android:versionCode="401056"
+      android:versionName="4.1.1A"
     >
     <!-- android:debuggable="true" -->
     <!-- FIXME-23 -->

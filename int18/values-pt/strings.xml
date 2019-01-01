@@ -310,6 +310,7 @@
     <!-- UNUSED string name="menu_attach">CONECTAR</string -->
     <!-- UNUSED string name="menu_attached">Conectado</string -->
     <!-- UNUSED string name="menu_ready">Pronto</string -->
+    <!-- TODO string name="menu_backups">CLEAR BACKUPS</string -->
     <string name="menu_calib_check">VERIF. CALIB.</string>
     <string name="menu_close">FECHAR</string>
     <string name="menu_clear">LIMPAR</string>
@@ -557,6 +558,7 @@
     <string name="ask_reset">Reiniciar memória da DistoX?</string>
     <!-- UNUSED string name="ask_close_survey">Fechar mapa?</string -->
     <string name="ask_gps_service">Configurar o serviço GPS?</string>
+    <!-- TODO string name="ask_backups_clear">Delete sketch backups?</string -->
 
     <!-- UNUSED string name="button_add"       >Novo       </string -->
     <string name="button_back"      >Voltar     </string>
@@ -738,6 +740,7 @@
     <string name="help_measure_type">Modo de medição: ponto fixo ou linha com diversos pontos</string>
     <string name="help_measure_undo">Descartar o último ponto da polilinha</string>
     
+    <!-- TODO string name="help_backups">Delete sketch backups</string -->
     <string name="help_calib_check">Medidas de verificação de calibração</string>
     <string name="help_close">Fechar janela</string>
     <string name="help_coeff">Mostrar coeficientes de calibração</string>
@@ -1226,6 +1229,8 @@
   <string name="pref_backup_number_summary">Quantidade de backups do croqui</string>
   <string name="pref_backup_interval_title">Intervalos backup</string>
   <string name="pref_backup_interval_summary">Intervalo mínimo entre dois backups [s]</string>
+  <!-- TODO string name="pref_backups_clear_title">Backups clear</string -->
+  <!-- TODO string name="pref_backups_clear_summary">Enable sketch backups clear menu</string -->
   <!-- UNUSED string name="pref_xtherion_areas_title">Áreas xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Salvar áreas como o xtherion</string -->
   <string name="pref_therion_splays_title">Medidas auxiliares Therion</string>

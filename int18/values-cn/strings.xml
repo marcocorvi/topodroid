@@ -310,6 +310,7 @@
     <!-- UNUSED string name="menu_attach">连接</string -->
     <!-- UNUSED string name="menu_attached">连接</string -->
     <!-- UNUSED string name="menu_ready">就绪</string -->
+    <!-- TODO string name="menu_backups">CLEAR BACKUPS</string -->
     <!-- TODO string name="menu_calib_check">CALIBR. CHECK</string -->
     <string name="menu_close">关闭</string>
     <!-- TODO string name="menu_clear">CLEAR</string -->
@@ -558,6 +559,7 @@
     <string name="ask_reset">重置 DistoX 存储器?</string>
     <!-- UNUSED string name="ask_close_survey">关闭测量?</string -->
     <!-- TODO string name="ask_gps_service">Set GPS service?</string -->
+    <!-- TODO string name="ask_backups_clear">Delete sketch backups?</string -->
 
     <!-- UNUSED string name="button_add"       >添加       </string -->
     <string name="button_back"      >返回      </string>
@@ -737,6 +739,7 @@
     <!-- TODO string name="help_measure_type">Measuring mode: fixed point or polyline</string -->
     <!-- TODO string name="help_measure_undo">Drop the last polyline point</string -->
     
+    <!-- TODO string name="help_backups">Delete sketch backups</string -->
     <!-- TODO string name="help_calib_check">Calibration-check shots</string -->
     <string name="help_close">关闭窗口</string>
     <string name="help_coeff">显示校准系数</string>
@@ -1226,6 +1229,8 @@
   <string name="pref_backup_number_summary">草图文件数字备份</string>
   <string name="pref_backup_interval_title">备份间隔</string>
   <string name="pref_backup_interval_summary">两个备份之间的最小间隔 [s]</string>
+  <!-- TODO string name="pref_backups_clear_title">Backups clear</string -->
+  <!-- TODO string name="pref_backups_clear_summary">Enable sketch backups clear menu</string -->
   <!-- UNUSED string name="pref_xtherion_areas_title">xtherion 区域</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">保存 xtherion 区域</string -->
   <string name="pref_therion_splays_title">Therion 侧线</string>

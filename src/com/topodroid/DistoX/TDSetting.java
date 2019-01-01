@@ -314,6 +314,7 @@ class TDSetting
   static boolean mAutoSectionPt = false;
   static int   mBackupNumber   = 5;
   static int   mBackupInterval = 60;
+  static boolean mBackupsClear = false;
   static boolean mFixedOrigin     = false; 
   static boolean mSharedXSections = false; // default value
   // static boolean mPlotCache       = true;  // default value
@@ -603,6 +604,10 @@ class TDSetting
     int level = Integer.parseInt( prefs.getString( keyMain[3], defMain[3] ) ); // DISTOX_EXTRA_BUTTONS choice: 0, 1, 2, 3
     setActivityBooleans( prefs, level );
 
+    String[] keyGPlot = TDPrefKey.GEEKPLOT;
+    String[] defGPlot = TDPrefKey.GEEKPLOTdef;
+    setBackupsClear( prefs.getBoolean( keyGPlot[ 9], bool(defGPlot[ 9]) ) ); // DISTOX_BACKUPS_CLEAR
+
     setTextSize( tryInt(    prefs,     keyMain[1], defMain[1] ) );      // DISTOX_TEXT_SIZE
     setSizeButtons( tryInt( prefs,     keyMain[2], defMain[2] ) );      // DISTOX_SIZE_BUTTONS
     mKeyboard      = prefs.getBoolean( keyMain[4], bool(defMain[4]) );  // DISTOX_MKEYBOARD
@@ -829,6 +834,7 @@ class TDSetting
     mSectionSplay   = tryFloat( prefs, keyGPlot[ 6],      defGPlot[ 6] );  // DISTOX_SECTION_SPLAY
     mBackupNumber   = tryInt( prefs,   keyGPlot[ 7],      defGPlot[ 7] );  // DISTOX_BACKUP_NUMBER
     mBackupInterval = tryInt( prefs,   keyGPlot[ 8],      defGPlot[ 8] );  // DISTOX_BACKUP_INTERVAL
+    // setBackupsClear( prefs.getBoolean( keyGPlot[ 9], bool(defGPlot[ 9]) ) ); // DISTOX_BACKUPS_CLEAR primary
 
     String[] keyGLine = TDPrefKey.GEEKLINE;
     String[] defGLine = TDPrefKey.GEEKLINEdef;
@@ -1243,6 +1249,8 @@ class TDSetting
       mBackupInterval = tryIntValue( hlp, k, v, def[ 8] );  
       if ( mBackupInterval <  10 ) { mBackupInterval =  10; ret = Integer.toString( mBackupInterval ); }
       if ( mBackupInterval > 600 ) { mBackupInterval = 600; ret = Integer.toString( mBackupInterval ); }
+    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_BACKUPS_CLEAR
+      setBackupsClear( tryBooleanValue( hlp, k, v, bool(def[ 9]) ) );
     } else {
       TDLog.Error("missing GEEK_PLOT key: " + k );
     }
@@ -2049,6 +2057,16 @@ class TDSetting
     if ( len > 40 ) { len = 40; ret = "40"; }
     mArrowLength = len;
     return ret;
+  }
+
+  private static void setBackupsClear( boolean b )
+  {
+    mBackupsClear = b;
+    if ( TopoDroidApp.mActivity != null ) {
+      TopoDroidApp.mActivity.resetButtonBar();
+      // FIXME TOOLBAR TopoDroidApp.mActivity.resetToolbar();
+      TopoDroidApp.mActivity.setMenuAdapter( TDInstance.context.getResources() );
+    }
   }
 
   private static void setActivityBooleans( SharedPreferences prefs, int level )

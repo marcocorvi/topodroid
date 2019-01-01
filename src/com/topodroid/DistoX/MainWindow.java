@@ -11,7 +11,9 @@
  */
 package com.topodroid.DistoX;
 
-// import java.io.File;
+import java.io.File;
+import java.io.FileFilter;
+
 // import java.io.IOException;
 // import java.io.FileNotFoundException;
 // import java.io.EOFException;
@@ -26,7 +28,7 @@ package com.topodroid.DistoX;
 import java.util.List;
 // import java.util.ArrayList;
 
-// import android.os.AsyncTask;
+import android.os.AsyncTask;
 // import android.os.Debug;
 
 // import java.lang.Long;
@@ -87,7 +89,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 // import android.graphics.Color;
 // import android.graphics.PorterDuff;
 
-// import android.util.Log;
+import android.util.Log;
 
 /*
   Method m = device.getClass().getMethod( "createRfcommSocket", new Class[] (int.class) );
@@ -131,7 +133,8 @@ public class MainWindow extends Activity
   private static final int[] menus = {
                           R.string.menu_palette,
                           R.string.menu_logs,
-                          R.string.menu_join_survey,
+			  R.string.menu_backups,
+                          // R.string.menu_join_survey,
 			  // R.string.menu_updates, // UPDATES
                           R.string.menu_about,
                           R.string.menu_options,
@@ -149,7 +152,8 @@ public class MainWindow extends Activity
   private static final int[] help_menus = {
                           R.string.help_symbol,
                           R.string.help_log,
-                          R.string.help_join_survey,
+			  R.string.help_backups,
+                          // R.string.help_join_survey,
                           // R.string.help_updates, // UPDATES
                           R.string.help_info_topodroid,
                           R.string.help_prefs,
@@ -383,6 +387,7 @@ public class MainWindow extends Activity
 
     if ( TDLevel.overNormal )   mMenuAdapter.add( res.getString( menus[0] ) ); // PALETTE
     if ( TDLevel.overAdvanced ) mMenuAdapter.add( res.getString( menus[1] ) ); // LOGS
+    if ( TDLevel.overExpert && TDSetting.mBackupsClear ) mMenuAdapter.add( res.getString( menus[2] ) ); // CLEAR_BACKUPS
     // if ( TDLevel.overExpert && mApp_mCosurvey ) mMenuAdapter.add( res.getString( menus[2] ) ); // IF_COSURVEY
     // if ( TDLevel.overExpert )   mMenuAdapter.add( res.getString( menus[3] ) ); // UPDATES
     mMenuAdapter.add( res.getString( menus[3] ) ); // ABOUT
@@ -415,6 +420,12 @@ public class MainWindow extends Activity
         intent = new Intent( mActivity, TDPrefActivity.class );
         intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_LOG );
         startActivity( intent );
+      } else if ( TDLevel.overExpert && TDSetting.mBackupsClear && p++ == pos ) { // CLEAR_BACKUPS
+        TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.ask_backups_clear,
+          new DialogInterface.OnClickListener() {
+            @Override public void onClick( DialogInterface dialog, int btn ) { doBackupsClear(); }
+          }
+        );
       // } else if ( TDLevel.overExpert && mApp_mCosurvey && p++ == pos ) {  // IF_COSURVEY
       //   (new ConnectDialog( mActivity, mApp )).show();
       // } else if ( TDLevel.overExpert && p++ == pos ) {  // UPDATES
@@ -548,6 +559,26 @@ public class MainWindow extends Activity
       loader.start();
     }
     setTheTitle();
+  }
+
+  void doBackupsClear()
+  {
+    Thread cleaner = new Thread() {
+      @Override
+      public void run() { 
+        File dir = TDPath.getTdrDir();
+	File[] files = dir.listFiles( new FileFilter() { 
+	  public boolean accept( File f ) { 
+            return f.getName().matches( ".*tdr.bck.?" );
+	  }
+	} );
+	for ( File f : files ) {
+          f.delete();
+	}
+      }
+    };
+    cleaner.setPriority( Thread.MIN_PRIORITY );
+    cleaner.start();
   }
 
   private int mNrButton1 = 5;

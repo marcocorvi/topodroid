@@ -311,6 +311,7 @@
     <!-- UNUSED string name="menu_attach">CONNETTI</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
+    <!-- TODO string name="menu_backups">CLEAR BACKUPS</string -->
     <string name="menu_calib_check">VERIFICA CALIBR.</string>
     <string name="menu_close">CHIUDI</string>
     <string name="menu_clear">PULISCI</string>
@@ -560,6 +561,7 @@
     <string name="ask_reset">Resettare memoria DistoX?</string>
     <!-- UNUSED string name="ask_close_survey">Chiudere rilievo?</string -->
     <string name="ask_gps_service">Impostare il servizio GPS?</string>
+    <!-- TODO string name="ask_backups_clear">Delete sketch backups?</string -->
 
     <!-- UNUSED string name="button_add"       >Inserisci </string -->
     <string name="button_back"      >Indietro  </string>
@@ -739,6 +741,7 @@
     <string name="help_measure_type">Metodo misura: punti fissi o polilinea</string>
     <string name="help_measure_undo">Cancella l\'ultimo punto della polilinea</string>
     
+    <!-- TODO string name="help_backups">Delete sketch backups</string -->
     <string name="help_calib_check">Tiri di controllo calib.</string>
     <string name="help_close">Chiusura finestra</string>
     <string name="help_coeff">Coefficienti della calibrazione</string>
@@ -1232,6 +1235,8 @@
   <string name="pref_backup_number_summary">Numero di backup di sketch file</string>
   <string name="pref_backup_interval_title">Intervallo di backup</string>
   <string name="pref_backup_interval_summary">Intervallo minimo tra 2 backup [s]</string>
+  <!-- TODO string name="pref_backups_clear_title">Backups clear</string -->
+  <!-- TODO string name="pref_backups_clear_summary">Enable sketch backups clear menu</string -->
   <!-- UNUSED string name="pref_xtherion_areas_title">Aree xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Salva le aree in modo xtherion</string -->
   <string name="pref_therion_splays_title">Splay Therion</string>

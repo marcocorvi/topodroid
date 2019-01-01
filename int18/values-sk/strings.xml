@@ -315,6 +315,7 @@
     <!-- UNUSED string name="menu_attach">PRIPOJIŤ</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
+    <!-- TODO string name="menu_backups">CLEAR BACKUPS</string -->
     <string name="menu_calib_check">KALIB. KONTROLA</string>
     <string name="menu_close">ZATVORIŤ</string>
     <string name="menu_clear">VYČISTIŤ</string>
@@ -571,6 +572,7 @@
     <string name="ask_reset">Resetovať pamäť DistoX?</string>
     <!-- UNUSED string name="ask_close_survey">Chiudere rilievo?</string -->
     <string name="ask_gps_service">Nastaviť službu GPS?</string>
+    <!-- TODO string name="ask_backups_clear">Delete sketch backups?</string -->
 
     <!-- UNUSED string name="button_add"       >Pridať </string -->
     <string name="button_back"      >Späť </string>
@@ -754,6 +756,7 @@
     <string name="help_measure_type">Metódy merania: jednotlivo / viacnásobne</string>
     <string name="help_measure_undo">Späť</string>
     
+    <!-- TODO string name="help_backups">Delete sketch backups</string -->
     <string name="help_calib_check">Kalibrácia - Kontrolné merania</string>
     <string name="help_close">Zavrieť okno</string>
     <string name="help_coeff">Ukázať Kalibračné koeficienty vybranej kalibrácie</string>
@@ -1254,6 +1257,8 @@
   <string name="pref_backup_number_summary">Výber počtu záloh dát programu</string>
   <string name="pref_backup_interval_title">Čas intervalu zálohovania dát</string>
   <string name="pref_backup_interval_summary">Minimálny interval medzi 2 zálohami [s]</string>
+  <!-- TODO string name="pref_backups_clear_title">Backups clear</string -->
+  <!-- TODO string name="pref_backups_clear_summary">Enable sketch backups clear menu</string -->
   <!-- UNUSED string name="pref_xtherion_areas_title">Aree xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Salva le aree in modo xtherion</string -->
   <string name="pref_therion_splays_title">Therion pomocné zámery</string>

@@ -317,6 +317,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="menu_attach">CONNECT</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
+    <!-- TODO string name="menu_backups">CLEAR BACKUPS</string -->
     <string name="menu_calib_check">Test kalibracji</string>
     <string name="menu_close">ZAMKNIJ</string>
     <string name="menu_clear">WYCZYŚĆ</string>
@@ -573,6 +574,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="ask_reset">Zresetować pamięć DistoX?</string>
     <!-- UNUSED string name="ask_close_survey">Close survey?</string -->
     <string name="ask_gps_service">Ustawić usługę GPS?</string>
+    <!-- TODO string name="ask_backups_clear">Delete sketch backups?</string -->
 
     <!-- UNUSED string name="button_add"       >Add       </string -->
     <string name="button_back"      >Powrót      </string>
@@ -755,6 +757,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_measure_type">Tryb pomiaru: stały punkt albo polilinia</string>
     <string name="help_measure_undo">Upuść ostatni punkt polilinii</string>
     
+    <!-- TODO string name="help_backups">Delete sketch backups</string -->
     <string name="help_calib_check">Sprawdz strzały kalibracyjne</string>
     <string name="help_close">Zamknij okno</string>
     <string name="help_coeff">Pokaż współczynniki kalibracji</string>
@@ -1257,6 +1260,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_backup_number_summary">Number of sketch files backups</string>
   <string name="pref_backup_interval_title">Backup interval</string>
   <string name="pref_backup_interval_summary">Minimum interval between two backups [s]</string>
+  <!-- TODO string name="pref_backups_clear_title">Backups clear</string -->
+  <!-- TODO string name="pref_backups_clear_summary">Enable sketch backups clear menu</string -->
   <!-- UNUSED string name="pref_xtherion_areas_title">xtherion areas</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Save areas a la xtherion</string -->
   <string name="pref_therion_splays_title">Therion splays</string>

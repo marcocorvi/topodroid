@@ -294,6 +294,8 @@ class TDPath
   // static boolean hasPltDir() { return (new File( PATH_PLT )).exists(); }
   // static boolean hasSvgDir() { return (new File( PATH_SVG )).exists(); }
 
+  static File getTdrDir() { return new File( PATH_TDR ); }
+
   static String getDirFile( String name )    { return PATH_BASE + name; }
   static String getImportFile( String name ) { return PATH_IMPORT + name; }
   static String getZipFile( String name )    { return PATH_ZIP + name; }

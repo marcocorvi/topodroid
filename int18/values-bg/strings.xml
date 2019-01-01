@@ -311,6 +311,7 @@
     <!-- UNUSED string name="menu_attach">Свързване</string -->
     <!-- UNUSED string name="menu_attached">connected</string -->
     <!-- UNUSED string name="menu_ready">ready</string -->
+    <!-- TODO string name="menu_backups">CLEAR BACKUPS</string -->
     <string name="menu_calib_check">Проверка калибрация</string>
     <string name="menu_close">Затваряне</string>
     <string name="menu_clear">Изчистване</string>
@@ -560,6 +561,7 @@
     <string name="ask_reset">Изчистване на паметта на DistoX?</string>
     <!-- UNUSED string name="ask_close_survey">Затваряне на картировката?</string -->
     <string name="ask_gps_service">Избор на GPS услуга?</string>
+    <!-- TODO string name="ask_backups_clear">Delete sketch backups?</string -->
 
     <!-- UNUSED string name="button_add"       >Добавяне  </string -->
     <string name="button_back"      >Обратно   </string>
@@ -740,6 +742,7 @@
     <string name="help_measure_type">Режим измерване: фиксирана точка или поли-линия</string>
     <!-- TODO string name="help_measure_undo">Drop the last polyline point</string -->
 
+    <!-- TODO string name="help_backups">Delete sketch backups</string -->
     <string name="help_calib_check">Контролни измервания</string>
     <string name="help_close">Затваряне на прозореца</string>
     <string name="help_coeff">Показване на коеф. на калибрация</string>
@@ -1228,6 +1231,8 @@
   <string name="pref_backup_number_summary">Брой резервни архиви на скица</string>
   <string name="pref_backup_interval_title">Интервал на архивиране</string>
   <string name="pref_backup_interval_summary">Минимален интервал между два архива на скица [s]</string>
+  <!-- TODO string name="pref_backups_clear_title">Backups clear</string -->
+  <!-- TODO string name="pref_backups_clear_summary">Enable sketch backups clear menu</string -->
   <!-- UNUSED string name="pref_xtherion_areas_title">Площи експорт в xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Затваряне на площта с допълнителна точка</string -->
   <string name="pref_therion_splays_title">Therion странични измервания</string>

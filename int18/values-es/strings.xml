@@ -310,6 +310,7 @@
     <!-- UNUSED string name="menu_attach">Conectar</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
+    <!-- TODO string name="menu_backups">CLEAR BACKUPS</string -->
     <string name="menu_calib_check">Verificar calibración</string>
     <string name="menu_close">Cerrar</string>
     <!-- TODO string name="menu_clear">CLEAR</string -->
@@ -557,6 +558,7 @@
     <string name="ask_reset">¿Quiere reiniciar la memoria DistoX?</string>
     <!-- UNUSED string name="ask_close_survey">Â¿Cerrar Topografía?</string -->
     <string name="ask_gps_service">¿Quiere establecer el servicio de GPS?</string>
+    <!-- TODO string name="ask_backups_clear">Delete sketch backups?</string -->
 
     <!-- UNUSED string name="button_add"       >Añadir    </string -->
     <string name="button_back"      >Atrás     </string>
@@ -738,6 +740,7 @@
     <string name="split_nothing">Nada para dividir</string>
     <string name="copy_items">Copiar elementos</string>
 
+    <!-- TODO string name="help_backups">Delete sketch backups</string -->
     <string name="help_calib_check">Calibración: compruebe las tomas</string>
     <string name="help_close">Cerrar ventana</string>
     <string name="help_coeff">Mostrar coeficientes de calibración</string>
@@ -1235,6 +1238,8 @@
   <string name="pref_backup_number_summary">Número de copias de seguridad de los archivos de dibujo</string>
   <string name="pref_backup_interval_title">Intervalo de copia de seguridad</string>
   <string name="pref_backup_interval_summary">Intervalo mínimo entre dos copias de seguridad [s]</string>
+  <!-- TODO string name="pref_backups_clear_title">Backups clear</string -->
+  <!-- TODO string name="pref_backups_clear_summary">Enable sketch backups clear menu</string -->
   <!-- UNUSED string name="pref_xtherion_areas_title">Áreas Xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Guardar áreas a xtherion</string -->
   <string name="pref_therion_splays_title">Radiales therion</string>
