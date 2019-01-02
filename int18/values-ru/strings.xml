@@ -313,7 +313,7 @@
     <!-- UNUSED string name="menu_attach">СОЕДИНИТЬ</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
-    <!-- TODO string name="menu_backups">CLEAR BACKUPS</string -->
+    <string name="menu_backups">ОЧИСТИТЬ БЭКАП</string>
     <string name="menu_calib_check">КОНТРОЛЬ КАЛИБ.</string>
     <string name="menu_close">ЗАКРЫТЬ</string>
     <!-- DUP string name="menu_clear">ОЧИСТИТЬ</string -->
@@ -565,7 +565,7 @@
     <string name="ask_reset">Сбросить память DistoX?</string>
     <!-- UNUSED string name="ask_close_survey">Закрыть съёмку?</string -->
     <string name="ask_gps_service">Включить сервис GPS?</string>
-    <!-- TODO string name="ask_backups_clear">Delete sketch backups?</string -->
+    <string name="ask_backups_clear">Удалить резервные копии абрисов?</string>
 
     <!-- UNUSED string name="button_add"       >Добавить  </string -->
     <string name="button_back"      >Назад     </string>
@@ -747,7 +747,7 @@
     <string name="help_measure_type">Режим измерений: по прямой или ломаной</string>
     <string name="help_measure_undo">Удалить последнюю точку полилинии</string>
     
-    <!-- TODO string name="help_backups">Delete sketch backups</string -->
+    <string name="help_backups">Удалить резервные копии абрисов</string>
     <string name="help_calib_check">Контрольные замеры</string>
     <string name="help_close">Закрыть Окно</string>
     <string name="help_coeff">Показать коэффициенты калибровки</string>
@@ -1248,8 +1248,8 @@
   <string name="pref_backup_number_summary">Количество резервных копий абрисов</string>
   <string name="pref_backup_interval_title">Интервал сохранения</string>
   <string name="pref_backup_interval_summary">Минимальный временной интервал между резервным копированием абрисов [с]</string>
-  <!-- TODO string name="pref_backups_clear_title">Backups clear</string -->
-  <!-- TODO string name="pref_backups_clear_summary">Enable sketch backups clear menu</string -->
+  <string name="pref_backups_clear_title">Очистить бэкапы</string>
+  <string name="pref_backups_clear_summary">Включить меню очистки резервных копии абрисов</string>
   <!-- UNUSED string name="pref_xtherion_areas_title">Области xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Сохранить области как в xtherion</string -->
   <string name="pref_therion_splays_title">Боковые замеры в абрисе Therion</string>
@@ -1268,8 +1268,8 @@
   <string name="pref_diving_mode_summary">Включить режим подводной съёмки</string>
   <string name="pref_splay_classes_title">Классы сплеев</string>
   <string name="pref_splay_classes_summary">Включить разделение сплеев на классы (показаны разным цветом)</string>
-  <!-- TODO string name="pref_splay_color_title">Splay coloring</string -->
-  <!-- TODO string name="pref_splay_color_summary">Enable splay coloring</string -->
+  <string name="pref_splay_color_title">Цвета сплеев</string>
+  <string name="pref_splay_color_summary">Включить цвета сплеев</string>
   <string name="pref_plot_shift_title">Сдвиг и скалирование абриса</string>
   <string name="pref_plot_shift_summary">Включить режим смещения и масштабирования абриса относительно нитки</string>
 
