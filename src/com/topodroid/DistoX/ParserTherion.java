@@ -160,8 +160,9 @@ class ParserTherion
                        throws ParserException
   {
     String path = basepath;   // survey pathname(s)
-    int[] survey_pos = new int[50]; // current survey pos in the pathname FIXME max 50 levels
-    int ks = 0;                     // survey index
+    int ks = 0;               // survey index
+    int ksmax = 20;
+    int[] survey_pos = new int[ksmax]; // current survey pos in the pathname
 
     int jFrom    = 0;
     int jTo      = 1;
@@ -265,6 +266,12 @@ class ParserTherion
               survey_pos[ks] = path.length(); // set current survey pos in pathname
               path = path + "." + vals[1];    // add survey name to path
               ++ks;
+	      if ( ks >= ksmax ) {
+		ksmax += 10;
+                int[] tmp = new int[ksmax];
+		for ( int k=0; k<ks; ++k ) tmp[k] = survey_pos[k];
+		survey_pos = tmp;
+	      }
               // pushState( state );
               state = new ParserTherionState( state );
               state.mSurveyLevel ++;
@@ -694,7 +701,11 @@ class ParserTherion
             } else if ( cmd.equals("endsurvey") ) {
               // state = popState();
               if ( state.mParent != null ) state = state.mParent;
-              --ks;
+	      if ( ks > 0 ) {
+                --ks;
+              } else {
+                TDLog.Error("ParserTherion: endsurvey out of survey");
+	      }
               path = path.substring(survey_pos[ks]); // return to previous survey_pos in path
               state.in_survey = ( ks > 0 );
             }
