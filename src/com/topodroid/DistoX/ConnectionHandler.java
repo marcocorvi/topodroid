@@ -11,9 +11,9 @@
  */
 package com.topodroid.DistoX;
 
-import android.os.Handler;
-import android.os.Message;
-import android.os.Bundle;
+// import android.os.Handler;
+// import android.os.Message;
+// import android.os.Bundle;
 
 // import android.content.Intent;
 
@@ -21,10 +21,11 @@ import android.os.Bundle;
 
 // import java.util.ArrayList;
 // import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.Locale;
+// import java.util.Locale;
 
 // import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
+//
+//  import android.bluetooth.BluetoothDevice;
 
 /* ---- IF_COSURVEY
 

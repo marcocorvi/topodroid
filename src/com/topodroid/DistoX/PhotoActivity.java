@@ -38,7 +38,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 // import android.preference.PreferenceManager;
 
-import android.util.Log;
+// import android.util.Log;
 
 public class PhotoActivity extends Activity
                            implements OnItemClickListener, ILister

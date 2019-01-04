@@ -277,7 +277,7 @@ class CalibAlgoMin extends CalibAlgo
           ++ i;
         }
         if ( c > 0 ) {
-          xx.timesEqual( 1/c );
+          xx.timesEqual( 1/(float)c );
           gmx /= c;
           for (int j=first; j<i; ++j ) {
             if ( group[j] > 0 ) {
@@ -317,7 +317,7 @@ class CalibAlgoMin extends CalibAlgo
           ++ i;
         }
         if ( c > 0 ) {
-          xx.timesEqual( 1/c );
+          xx.timesEqual( 1/(float)c );
           gmx /= c;
           for (int j=first; j<i; ++j ) {
             if ( group[j] > 0 ) {
@@ -359,7 +359,7 @@ class CalibAlgoMin extends CalibAlgo
           ++ i;
         }
         if ( c > 0 ) {
-          xx.timesEqual( 1/c );
+          xx.timesEqual( 1/(float)c );
           gmx /= c;
           for (int j=first; j<i; ++j ) {
             if ( group[j] > 0 ) {
@@ -399,7 +399,7 @@ class CalibAlgoMin extends CalibAlgo
           ++ i;
         }
         if ( c > 0 ) {
-          xx.timesEqual( 1/c );
+          xx.timesEqual( 1/(float)c );
           gmx /= c;
           for (int j=first; j<i; ++j ) {
             if ( group[j] > 0 ) {

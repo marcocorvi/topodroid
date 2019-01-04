@@ -19,7 +19,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 // import java.io.FileNotFoundException;
 
-import android.util.Log;
+// import android.util.Log;
 
 class FirmwareUtils 
 {

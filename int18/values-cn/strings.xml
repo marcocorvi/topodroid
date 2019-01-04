@@ -329,7 +329,7 @@
     <string name="menu_rename">重命名</string>
     <string name="menu_switch">切换/关闭</string>
     <string name="menu_help">帮助</string>
-    <string name="menu_join_survey">联合测量</string>
+    <!-- UNUSED string name="menu_join_survey">联合测量</string -->
     <string name="menu_logs">日志设定</string>
     <string name="menu_manual_calibration">校准</string>
     <string name="menu_options">设置</string>
@@ -556,7 +556,7 @@
     <string name="distox_err_connected">设备已连接</string>
 
     <!-- UNUSED string name="ask_close">关闭 TopoDroid?</string -->
-    <string name="ask_reset">重置 DistoX 存储器?</string>
+    <!-- UNUSED string name="ask_reset">重置 DistoX 存储器?</string -->
     <!-- UNUSED string name="ask_close_survey">关闭测量?</string -->
     <!-- TODO string name="ask_gps_service">Set GPS service?</string -->
     <!-- TODO string name="ask_backups_clear">Delete sketch backups?</string -->
@@ -757,7 +757,7 @@
     <!-- UNUSED string name="help_database">数据库查看软件 (SQliteViewer)</string -->
     <string name="help_prefs">编辑参考选项</string>
     <string name="help_log">启用/停用登录设置</string>
-    <string name="help_join_survey">加入测量</string>
+    <!-- UNUSED string name="help_join_survey">加入测量</string -->
     <string name="help_info_topodroid">TopoDroid信息</string>
     <string name="help_download">下载数据</string>
     <!-- UNUSED string name="help_splay">自动分配测量点到侧线</string -->
@@ -886,7 +886,7 @@
     <string name="title_photo">照片/测量</string>
     <string name="title_photo_comment">照片注释</string>
     <string name="title_plot_save">输出草图</string>
-    <!-- TODO string name="title_plot_merge">Merge-in sketch</string -->
+    <!-- UNUSED string name="title_plot_merge">Merge-in sketch</string -->
     <string name="title_plot_reload">重装草图</string>
     <string name="title_profile_flip">剖面草图 ?</string>
     <string name="title_projection">投影轮廓方位 %1$d</string>

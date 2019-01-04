@@ -82,7 +82,7 @@ import android.graphics.RectF;
 import android.net.Uri;
 
 // import android.util.SparseArray;
-import android.util.Log;
+// import android.util.Log;
 
 /**
  */
@@ -3932,7 +3932,7 @@ public class DrawingWindow extends ItemDrawer
      * @param modes ...
      * @param nr    number of modes
      * @param code  code of the filter-listener 
-     * @param dismiss
+     * @param dismiss if dismiss is JOIN don't make popup
      */
     private void makePopupJoin( View b, int[] modes, int nr, final int code, int dismiss )
     {
@@ -3969,7 +3969,7 @@ public class DrawingWindow extends ItemDrawer
      * @param modes ...
      * @param nr    number of modes
      * @param code  code of the filter-listener 
-     * @param dismiss
+     * @param dismiss if dismiss is FILTER don't make popup
      */
     private void makePopupFilter( View b, int[] modes, int nr, final int code, int dismiss )
     {

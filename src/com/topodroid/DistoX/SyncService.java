@@ -8,6 +8,8 @@
  */
 package com.topodroid.DistoX;
 
+/* ----- IF_COSURVEY
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -23,8 +25,6 @@ import android.os.Handler;
 import android.os.Message;
 
 import android.util.Log;
-
-/* ---- IF_COSURVEY
 
 class SyncService
 {

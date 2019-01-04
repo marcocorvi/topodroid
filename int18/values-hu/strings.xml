@@ -330,7 +330,7 @@
     <string name="menu_rename">ÁTNEVEZ</string>
     <string name="menu_switch">ÁTKAPCSOL/</string>
     <string name="menu_help">SÚGÓ</string>
-    <string name="menu_join_survey">EGYÜTTES FELMÉRÉS</string>
+    <!-- UNUSED string name="menu_join_survey">EGYÜTTES FELMÉRÉS</string -->
     <string name="menu_logs">EMLÉKEZTETŐK</string>
     <string name="menu_manual_calibration">KALIBRÁCIÓ</string>
     <string name="menu_options">BEÁLLÍTÁSOK</string>
@@ -558,7 +558,7 @@
     <string name="distox_err_connected">Az eszköz már kapcsolatban</string>
 
     <!-- UNUSED string name="ask_close">Close TopoDroid?</string -->
-    <string name="ask_reset">Visszaállítja a DistoX memóriáját? (Reset)</string>
+    <!-- UNUSED string name="ask_reset">Visszaállítja a DistoX memóriáját? (Reset)</string -->
     <!-- UNUSED string name="ask_close_survey">Close survey?</string -->
     <string name="ask_gps_service">Bekapcsolja a GPS-t?</string>
     <!-- TODO string name="ask_backups_clear">Delete sketch backups?</string -->
@@ -760,7 +760,7 @@
     <!-- UNUSED string name="help_database">Database viewer app (SQliteViewer)</string -->
     <string name="help_prefs">Preferenciák szerkesztése</string>
     <string name="help_log">Naplózási beállítások engedélyezése/tiltása</string>
-    <string name="help_join_survey">Együttes felmérés</string>
+    <!-- UNUSED string name="help_join_survey">Együttes felmérés</string -->
     <string name="help_info_topodroid">TopoDroid információk</string>
     <string name="help_download">Adatok letöltése</string>
     <!-- UNUSED string name="help_splay">Assign stations to splays automatically</string -->
@@ -887,7 +887,7 @@
     <string name="title_photo">Fénykép/Méretek</string>
     <string name="title_photo_comment">Fénykép magyarázat</string>
     <string name="title_plot_save">Vázlat exportálása</string>
-    <string name="title_plot_merge">Vázlatban egyesít</string>
+    <!-- UNUSED string name="title_plot_merge">Vázlatban egyesít</string -->
     <string name="title_plot_reload">Vázlat újratöltése</string>
     <string name="title_profile_flip">Nézeti vázlat 180 fokos forgatása</string>
     <string name="title_projection">Vetített oldalnézet irányszöge %1$d</string>

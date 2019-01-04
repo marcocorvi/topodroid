@@ -14,7 +14,7 @@ package com.topodroid.DistoX;
 import java.util.ArrayList;
 // import java.util.List;
 
-import android.util.Log;
+// import android.util.Log;
 
 class TriShot
 {

@@ -25,7 +25,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Shader.TileMode;
 
-import android.util.Log;
+// import android.util.Log;
 
 class SymbolArea extends Symbol
 {

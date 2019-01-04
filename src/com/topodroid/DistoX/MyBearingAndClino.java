@@ -110,13 +110,13 @@ class MyBearingAndClino implements IBearingAndClino
     int w = bitmap.getWidth();
     int h = bitmap.getHeight();
     if ( orientation == 6 ) {
-      m.setRotate(  90f, w/2, h/2 );
+      m.setRotate(  90f, (float)w/2, (float)h/2 );
       // image.setRotation(  90 ); // requires API level 14
     } else if ( orientation == 3 ) {
-      m.setRotate( 180f, w/2, h/2 );
+      m.setRotate( 180f, (float)w/2, (float)h/2 );
       // image.setRotation( 180 );
     } else if ( orientation == 8 ) {
-      m.setRotate( 270f, w/2, h/2 );
+      m.setRotate( 270f, (float)w/2, (float)h/2 );
       // image.setRotation( 270 );
     } else {
       image.setImageBitmap( bitmap );

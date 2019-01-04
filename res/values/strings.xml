@@ -334,7 +334,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="menu_rename">RENAME</string>
     <string name="menu_switch">SWITCH/CLOSE</string>
     <string name="menu_help">HELP</string>
-    <string name="menu_join_survey">CO-SURVEY</string>
+    <!-- UNUSED string name="menu_join_survey">CO-SURVEY</string -->
     <string name="menu_logs">LOGS</string>
     <string name="menu_manual_calibration">CALIBRATION</string>
     <string name="menu_options">SETTINGS</string>
@@ -573,7 +573,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="distox_err_connected">Device already connected</string>
 
     <!-- UNUSED string name="ask_close">Close TopoDroid?</string -->
-    <string name="ask_reset">Reset DistoX memory?</string>
+    <!-- UNUSED string name="ask_reset">Reset DistoX memory?</string -->
     <!-- UNUSED string name="ask_close_survey">Close survey?</string -->
     <string name="ask_gps_service">Set GPS service?</string>
     <string name="ask_backups_clear">Delete sketch backups?</string>
@@ -778,7 +778,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="help_database">Database viewer app (SQliteViewer)</string -->
     <string name="help_prefs">Preferences</string>
     <string name="help_log">Logging preferences</string>
-    <string name="help_join_survey">Joint surveying</string>
+    <!-- UNUSED string name="help_join_survey">Joint surveying</string -->
     <string name="help_info_topodroid">TopoDroid info</string>
     <string name="help_download">Data download</string>
     <!-- UNUSED string name="help_splay">Assign stations to splays automatically</string -->
@@ -914,7 +914,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_photo">More shot edit</string>
     <string name="title_photo_comment">Photo comment</string>
     <string name="title_plot_save">Export sketch</string>
-    <string name="title_plot_merge">Merge sketch in</string>
+    <!-- UNUSED string name="title_plot_merge">Merge sketch in</string -->
     <string name="title_plot_reload">Reload sketch</string>
     <string name="title_profile_flip">Flip profile sketch ?</string>
     <string name="title_projection">Projected profile azimuth %1$d</string>

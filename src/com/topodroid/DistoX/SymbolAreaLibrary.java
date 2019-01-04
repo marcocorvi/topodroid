@@ -26,7 +26,7 @@ import android.graphics.BitmapShader;
 import android.graphics.Shader.TileMode;
 import android.content.res.Resources;
 
-import android.util.Log;
+// import android.util.Log;
 
 class SymbolAreaLibrary extends SymbolLibrary
 {

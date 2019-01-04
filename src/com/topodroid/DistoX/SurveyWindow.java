@@ -45,7 +45,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 // import android.widget.Toast;
 
-import android.util.Log;
+// import android.util.Log;
 
 import android.view.View;
 import android.view.View.OnFocusChangeListener;

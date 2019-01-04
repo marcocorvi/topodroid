@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import android.util.Log;
+// import android.util.Log;
 
 class DBlockAdapter extends ArrayAdapter< DBlock >
                           implements OnLongClickListener

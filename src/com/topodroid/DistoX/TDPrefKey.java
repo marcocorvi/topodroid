@@ -1301,7 +1301,7 @@ class TDPrefKey
     R.string.pref_linesnap_summary,
     R.string.pref_linecurve_summary,
     R.string.pref_linestraight_summary,
-    R.string.pref_path_multiselect_title,
+    R.string.pref_path_multiselect_summary,
     -1
   };
 

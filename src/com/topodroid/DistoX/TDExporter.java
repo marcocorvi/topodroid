@@ -44,7 +44,7 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.HashMap;
 
-import android.util.Log;
+// import android.util.Log;
 import android.util.Base64;
 
 class TDExporter

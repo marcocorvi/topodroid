@@ -20,7 +20,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.ExifInterface;
 
-import android.util.Log;
+// import android.util.Log;
 
 class TDImage
 {

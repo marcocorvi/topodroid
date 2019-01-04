@@ -23,7 +23,7 @@ import android.graphics.Paint;
 import android.graphics.Point;
 // import android.util.FloatMath;
 
-import android.util.Log;
+// import android.util.Log;
 
 class DrawingScaleReference
 {
@@ -120,7 +120,7 @@ class DrawingScaleReference
     {
       float canvasUnit = DrawingUtil.SCALE_FIX * zoom; /* Length of 1 unit at zoom */
 
-      float arrowlen = canvas.getWidth() / 10;
+      float arrowlen = (float)canvas.getWidth() / 10;
       float arrowtip = arrowlen / 5;
 
 

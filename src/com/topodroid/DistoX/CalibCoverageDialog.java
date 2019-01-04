@@ -341,7 +341,7 @@ class CalibCoverageDialog extends MyDialog
   private void fillImage( ) // image is 90 * 180 * 4
   {
     int H1 = HEIGHT;     // 180
-    float H2 = H1 / 2;   // 90
+    float H2 = (float)H1 / 2;   // 90
     // int W2 = WIDTH / 2 + DELTA_W;  // 180 + 20
     for (int j0=0; j0<=H1; ++j0) {
       float j = j0 - H2; 

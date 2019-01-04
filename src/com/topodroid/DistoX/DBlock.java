@@ -20,7 +20,7 @@ import android.view.View;
 
 import android.graphics.Paint; // custom paint
 
-import android.util.Log;
+// import android.util.Log;
 
 class DBlock
 {

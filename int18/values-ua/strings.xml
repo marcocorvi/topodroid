@@ -332,7 +332,7 @@
     <string name="menu_rename">ПЕРЕЙМЕНУВАТИ</string>
     <string name="menu_switch">ПЕРЕКЛЮЧИТИ/ЗАКРИТИ</string>
     <string name="menu_help">Допомога</string>
-    <string name="menu_join_survey">СПІЛ. ЗЙОМКА</string>
+    <!-- UNUSED string name="menu_join_survey">СПІЛ. ЗЙОМКА</string -->
     <string name="menu_logs">Журнал</string>
     <string name="menu_manual_calibration">ПОПРАВКИ</string>
     <string name="menu_options">НАЛАШТУВАННЯ</string>
@@ -560,7 +560,7 @@
     <string name="distox_err_connected">Прилад уже підключений</string>
 
     <!-- UNUSED string name="ask_close">Закрити TopoDroid?</string -->
-    <string name="ask_reset">Скидання пам\'яті DistoX?</string>
+    <!-- UNUSED string name="ask_reset">Скидання пам\'яті DistoX?</string -->
     <!-- UNUSED string name="ask_close_survey">Закрити зйомку?</string -->
     <string name="ask_gps_service">Включить сервіс GPS?</string>
     <!-- TODO string name="ask_backups_clear">Delete sketch backups?</string -->
@@ -762,7 +762,7 @@
     <!-- UNUSED string name="help_database">Перегляд бази данних (SQliteViewer)</string -->
     <string name="help_prefs">Змінити налаштування</string>
     <string name="help_log">Вкл/Викл налаштування журналу</string>
-    <string name="help_join_survey">Спільна топосъёмка</string>
+    <!-- UNUSED string name="help_join_survey">Спільна топосъёмка</string -->
     <string name="help_info_topodroid">відомості про TopoDroid</string>
     <string name="help_download">Завантажити дані з DistoX</string>
     <!-- UNUSED string name="help_splay">Автоматично присвоювати номер пікета боковим замірам</string -->
@@ -892,7 +892,7 @@
     <string name="title_photo">Фото/Заміри</string>
     <string name="title_photo_comment">Опис Фото</string>
     <string name="title_plot_save">Зберегти абрис як</string>
-    <!-- TODO string name="title_plot_merge">Merge-in sketch</string -->
+    <!-- UNUSED string name="title_plot_merge">Merge-in sketch</string -->
     <string name="title_plot_reload">Перезавантажити абрис</string>
     <string name="title_profile_flip">Розвернути розріз?</string>
     <string name="title_projection">Проекція розрізу на азимут %1$d</string>

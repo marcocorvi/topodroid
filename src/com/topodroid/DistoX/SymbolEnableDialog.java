@@ -25,7 +25,7 @@ import android.content.Context;
 
 // import android.view.Window;
 
-import android.graphics.*;
+// import android.graphics.*;
 import android.view.View;
 // import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;

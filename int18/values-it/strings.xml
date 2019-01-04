@@ -330,7 +330,7 @@
     <string name="menu_rename">RINOMINA</string>
     <string name="menu_switch">CAMBIA/CHIUDI</string>
     <string name="menu_help">AIUTO</string>
-    <string name="menu_join_survey">CO-RILIEVO</string> <!-- rilievo cooperativo -->
+    <!-- UNUSED string name="menu_join_survey">CO-RILIEVO</string --> <!-- rilievo cooperativo -->
     <!-- OK string name="menu_logs">LOGS</string -->
     <string name="menu_manual_calibration">Calibrazione</string>
     <string name="menu_options">OPZIONI</string>
@@ -558,7 +558,7 @@
     <string name="distox_err_connected">DistoX già connesso</string>
 
     <!-- UNUSED string name="ask_close">Uscire da TopoDroid?</string -->
-    <string name="ask_reset">Resettare memoria DistoX?</string>
+    <!-- UNUSED string name="ask_reset">Resettare memoria DistoX?</string -->
     <!-- UNUSED string name="ask_close_survey">Chiudere rilievo?</string -->
     <string name="ask_gps_service">Impostare il servizio GPS?</string>
     <!-- TODO string name="ask_backups_clear">Delete sketch backups?</string -->
@@ -759,7 +759,7 @@
     <!-- UNUSED string name="help_database">App database (SQliteViewer)</string -->
     <string name="help_prefs">Preferenze</string>
     <string name="help_log">Attiva/disattiva opzioni di log</string>
-    <!-- OK string name="help_join_survey">Join surveying</string -->
+    <!-- UNUSED string name="help_join_survey">Join surveying</string -->
     <string name="help_info_topodroid">Info TopoDroid</string>
     <string name="help_download">Scarica dati</string>
     <!-- UNUSED string name="help_splay">Assegna capisaldi agli splay automaticamente</string -->
@@ -888,7 +888,7 @@
     <string name="title_photo">Foto/Misurazione</string>
     <string name="title_photo_comment">Commento foto</string>
     <string name="title_plot_save">Salva disegno come </string>
-    <string name="title_plot_merge">Fondere disegno</string>
+    <!-- UNUSED string name="title_plot_merge">Fondere disegno</string -->
     <string name="title_plot_reload">Ricarica disegno</string>
     <string name="title_profile_flip">Capovolgo il profilo del disegno?</string>
     <string name="title_projection">Proiezione azimutale profilo %1$d</string>

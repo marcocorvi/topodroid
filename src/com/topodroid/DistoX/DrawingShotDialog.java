@@ -17,7 +17,7 @@ import android.os.Bundle;
 import android.content.Context;
 // import android.content.Intent;
 
-import android.graphics.Paint;
+// import android.graphics.Paint;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 
@@ -35,7 +35,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 // import android.text.InputType;
 import android.inputmethodservice.KeyboardView;
 
-import android.util.Log;
+// import android.util.Log;
 
 class DrawingShotDialog extends MyDialog
                                implements View.OnClickListener

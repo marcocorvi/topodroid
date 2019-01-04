@@ -333,7 +333,7 @@
     <string name="menu_rename">ПЕРЕИМЕНОВАТЬ</string>
     <string name="menu_switch">ЗАКРЫТЬ/ПЕРЕКЛЮЧИТЬ</string>
     <string name="menu_help">Помощь</string>
-    <string name="menu_join_survey">СОВМ. СЪЕМКА</string>
+    <!-- UNUSED string name="menu_join_survey">СОВМ. СЪЕМКА</string -->
     <string name="menu_logs">Журнал</string>
     <string name="menu_manual_calibration">ПОПРАВКИ</string>
     <string name="menu_options">НАСТРОЙКИ</string>
@@ -562,7 +562,7 @@
     <string name="distox_err_connected">Прибор уже подключен</string>
 
     <!-- UNUSED string name="ask_close">Закрыть TopoDroid?</string -->
-    <string name="ask_reset">Сбросить память DistoX?</string>
+    <!-- UNUSED string name="ask_reset">Сбросить память DistoX?</string -->
     <!-- UNUSED string name="ask_close_survey">Закрыть съёмку?</string -->
     <string name="ask_gps_service">Включить сервис GPS?</string>
     <string name="ask_backups_clear">Удалить резервные копии абрисов?</string>
@@ -765,7 +765,7 @@
     <!-- UNUSED string name="help_database">Просмотр базы данных (SQliteViewer)</string -->
     <string name="help_prefs">Изменить настройки</string>
     <string name="help_log">Вкл/Выкл настройки журнала</string>
-    <string name="help_join_survey">Совместная топосъёмка</string>
+    <!-- UNUSED string name="help_join_survey">Совместная топосъёмка</string -->
     <string name="help_info_topodroid">Сведения о TopoDroid</string>
     <string name="help_download">Загрузить данные с DistoX</string>
     <!-- UNUSED string name="help_splay">Автоматически присваивать номер пикет боковым измерениям</string -->
@@ -900,7 +900,7 @@
     <string name="title_photo">Фото/Измерения</string>
     <string name="title_photo_comment">Описание Фото</string>
     <string name="title_plot_save">Сохранить абрис как</string>
-    <string name="title_plot_merge">Присоединить к абрису</string>
+    <!-- UNUSED string name="title_plot_merge">Присоединить к абрису</string -->
     <string name="title_plot_reload">Перезагрузить абрис</string>
     <string name="title_profile_flip">Развернуть разрез ?</string>
     <string name="title_projection">Проекция разреза на вертикальную плоскость Аз. %1$d</string>

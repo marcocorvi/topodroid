@@ -16,10 +16,10 @@ import android.content.Context;
 
 import android.widget.TextView;
 import android.widget.EditText;
-import android.widget.Button;
+// import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
-import android.widget.LinearLayout;
+// import android.widget.LinearLayout;
 import android.widget.AdapterView;
 // import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -30,10 +30,10 @@ import android.view.LayoutInflater;
 import android.view.View.OnKeyListener;
 import android.view.KeyEvent;
 
-import android.text.InputType;
+// import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.Editable;
-import android.text.method.KeyListener; 
+// import android.text.method.KeyListener;
 
 import android.util.Log;
 

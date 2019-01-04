@@ -13,12 +13,12 @@ package com.topodroid.DistoX;
 
 import java.lang.ref.WeakReference;
 
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.io.IOException;
+// import java.io.FileWriter;
+// import java.io.PrintWriter;
+// import java.io.IOException;
 
 // import java.util.List;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 // import android.app.Activity;
 import android.os.AsyncTask;

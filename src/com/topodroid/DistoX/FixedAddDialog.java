@@ -29,8 +29,8 @@ import android.view.View;
 // import android.view.KeyEvent;
 
 import android.text.ClipboardManager;
-import android.content.ClipData;
-import android.content.ClipDescription;
+// import android.content.ClipData;
+// import android.content.ClipDescription;
 
 import android.inputmethodservice.KeyboardView;
 // import android.widget.Toast;

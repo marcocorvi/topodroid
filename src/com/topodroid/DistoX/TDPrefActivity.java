@@ -13,12 +13,12 @@ package com.topodroid.DistoX;
 
 import android.content.Intent;
 import android.content.Context;
-import android.content.res.Resources;
+// import android.content.res.Resources;
 import android.os.Bundle;
 import android.app.Activity;
 
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
+// import android.widget.ScrollView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.LayoutInflater;

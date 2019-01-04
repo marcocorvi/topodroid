@@ -334,7 +334,7 @@
     <string name="menu_rename">PREMENOVAŤ</string>
     <string name="menu_switch">PREPNÚŤ/ZATVORIŤ</string>
     <string name="menu_help">POMOC</string>
-    <string name="menu_join_survey">SPOLOČNÝ PRIESKUM</string> <!-- rilievo cooperativo -->
+    <!-- UNUSED string name="menu_join_survey">SPOLOČNÝ PRIESKUM</string --> <!-- rilievo cooperativo -->
     <string name="menu_logs">ZÁZNAM PROGRAMU</string>
     <string name="menu_manual_calibration">KALIBRÁCIA</string>
     <string name="menu_options">NASTAVENIA</string>
@@ -573,7 +573,7 @@
     <string name="distox_err_connected">DistoX je už pripojené</string>
 
     <!-- UNUSED string name="ask_close">Uscire da TopoDroid?</string -->
-    <string name="ask_reset">Resetovať pamäť DistoX?</string>
+    <!-- UNUSED string name="ask_reset">Resetovať pamäť DistoX?</string -->
     <!-- UNUSED string name="ask_close_survey">Chiudere rilievo?</string -->
     <string name="ask_gps_service">Nastaviť službu GPS?</string>
     <!-- TODO string name="ask_backups_clear">Delete sketch backups?</string -->
@@ -778,7 +778,7 @@
     <!-- UNUSED string name="help_database">App database (SQliteViewer)</string -->
     <string name="help_prefs">Nastavenia</string>
     <string name="help_log">Nastaviť možnosti záznamu log-u</string>
-    <string name="help_join_survey">Spoločné mapovanie viacerými DistoX</string>
+    <!-- UNUSED string name="help_join_survey">Spoločné mapovanie viacerými DistoX</string -->
     <string name="help_info_topodroid">Informácie o TopoDroide</string>
     <string name="help_download">Stiahnuť kalibračné dáta z DistaX</string>
     <!-- UNUSED string name="help_splay">Assegna capisaldi agli splay automaticamente</string -->
@@ -914,7 +914,7 @@
     <string name="title_photo">Rozšírené možnosti</string>
     <string name="title_photo_comment">Fotografia</string>
     <string name="title_plot_save">Exportovať nákres </string>
-    <string name="title_plot_merge">Zlúčiť nákresy</string>
+    <!-- UNUSED string name="title_plot_merge">Zlúčiť nákresy</string -->
     <string name="title_plot_reload">Znovu načítať nákres</string>
     <string name="title_profile_flip">Otočiť zrkadlovo nákres profilu?</string>
     <string name="title_projection">Azimut Priemetu %1$d</string>

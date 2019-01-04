@@ -13,7 +13,7 @@ package com.topodroid.DistoX;
 
 import android.os.AsyncTask;
  
-import android.util.Log;
+// import android.util.Log;
 
 class DeviceX310TakeShot extends AsyncTask<Integer, Integer, Integer >
 {

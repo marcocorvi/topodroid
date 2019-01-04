@@ -330,7 +330,7 @@
     <string name="menu_rename">RENOMMER</string>
     <string name="menu_switch">BASCULER/FERMER</string>
     <string name="menu_help">AIDE</string>
-    <string name="menu_join_survey">CO-RELEVÉ-TOPO</string>
+    <!-- UNUSED string name="menu_join_survey">CO-RELEVÉ-TOPO</string -->
     <string name="menu_logs">JOURNALISATION</string>
     <string name="menu_manual_calibration">CALIBRATION</string>
     <string name="menu_options">OPTIONS</string>
@@ -557,7 +557,7 @@
     <string name="distox_err_connected">Périphérique déjà connecté</string>
 
      <!-- UNUSED string name="ask_close">Quitter TopoDroid?</string -->
-     <string name="ask_reset">Réinitialiser la mémoire du DistoX ?</string>
+     <!-- UNUSED string name="ask_reset">Réinitialiser la mémoire du DistoX ?</string -->
      <!-- UNUSED string name="ask_close_survey">Quitter le relevé ?</string -->
     <string name="ask_gps_service">Activer le service GPS ?</string>
     <!-- TODO string name="ask_backups_clear">Delete sketch backups?</string -->
@@ -757,7 +757,7 @@
     <!-- UNUSED string name="help_database">Application Database viewer (SQliteViewer)</string -->
     <string name="help_prefs">Modifie les préférences</string>
     <string name="help_log">Active/désactive les options de journalisation</string>
-    <string name="help_join_survey">Joindre les relevés</string>
+    <!-- UNUSED string name="help_join_survey">Joindre les relevés</string -->
     <string name="help_info_topodroid">Infos TopoDroid</string>
     <string name="help_download">Télécharge les données</string>
     <!-- UNUSED string name="help_splay">Affecte automatiquement les stations aux visées latérales</string -->
@@ -885,7 +885,7 @@
     <string name="title_photo">Photo/Mesures</string>
     <string name="title_photo_comment">Commentaire photo</string>
     <string name="title_plot_save">Enregistrer le croquis sous</string>
-    <string name="title_plot_merge">Fusionner Esquisse</string>
+    <!-- UNUSED string name="title_plot_merge">Fusionner Esquisse</string -->
     <string name="title_plot_reload">Recharger le croquis</string>
     <string name="title_profile_flip">Basculer la coupe ?</string>
     <string name="title_projection">Azimut coupe projetée %1$d</string>

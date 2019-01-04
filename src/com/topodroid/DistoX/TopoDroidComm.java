@@ -23,7 +23,7 @@ import android.os.Message;
 // import android.content.IntentFilter;
 // import android.content.BroadcastReceiver;
 
-import android.util.Log;
+// import android.util.Log;
 
 class TopoDroidComm
 {

@@ -332,7 +332,7 @@
     <string name="menu_rename">REDENUMEȘTE</string>
     <string name="menu_switch">SCHIMBĂ/ÎNCHIDE</string>
     <string name="menu_help">AJUTOR</string>
-    <string name="menu_join_survey">CO-TOPOGRAFIAZĂ</string>
+    <!-- UNUSED string name="menu_join_survey">CO-TOPOGRAFIAZĂ</string -->
     <string name="menu_logs">JURNALE</string>
     <string name="menu_manual_calibration">CALIBRARE</string>
     <string name="menu_options">SETĂRI</string>
@@ -562,7 +562,7 @@
     <string name="distox_err_connected">Dispozivul este deja conectat</string>
 
     <!-- UNUSED string name="ask_close">Închide TopoDroid?</string -->
-    <string name="ask_reset">Resetează memoria DistoX?</string>
+    <!-- UNUSED string name="ask_reset">Resetează memoria DistoX?</string -->
     <!-- UNUSED string name="ask_close_survey">Închide cartarea?</string -->
     <string name="ask_gps_service">Definește serviciul GPS?</string>
     <!-- TODO string name="ask_backups_clear">Delete sketch backups?</string -->
@@ -764,7 +764,7 @@
     <!-- UNUSED string name="help_database">Aplicația de viz. a bazei de date (SQliteViewer)</string -->
     <string name="help_prefs">Preferințe</string>
     <string name="help_log">Preferințe înregistrare jurnal</string>
-    <string name="help_join_survey">Cartare în paralel</string>
+    <!-- UNUSED string name="help_join_survey">Cartare în paralel</string -->
     <string name="help_info_topodroid">Informații TopoDroid</string>
     <string name="help_download">Descarcare date</string>
     <!-- UNUSED string name="help_splay">Atribuirea automată a stațiilor la radieri</string -->
@@ -899,7 +899,7 @@
     <string name="title_photo">Foto/Măsurători</string>
     <string name="title_photo_comment">Comentariu fotografie</string>
     <string name="title_plot_save">Exportă schița</string>
-    <string name="title_plot_merge">Îmbină schița</string>
+    <!-- UNUSED string name="title_plot_merge">Îmbină schița</string -->
     <string name="title_plot_reload">Reîncarcă schița</string>
     <string name="title_profile_flip">Întoarce schița profil ?</string>
     <string name="title_projection"> Azimutul profilului proiectat %1$d</string>

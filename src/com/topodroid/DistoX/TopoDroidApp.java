@@ -80,11 +80,11 @@ import android.graphics.BitmapFactory;
 
 // import android.net.Uri;
 
-import android.util.Log;
+// import android.util.Log;
 import android.util.DisplayMetrics;
 
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
+// import android.bluetooth.BluetoothDevice;
 
 // import android.widget.Toast;
 

@@ -42,7 +42,7 @@ import java.io.DataOutputStream;
 
 // import java.util.Locale;
 
-import android.util.Log;
+// import android.util.Log;
 
 /**
  */
@@ -731,7 +731,7 @@ class DrawingCommandManager
   final static String remove_area = "remove area completely";
 
   /** 
-   * @return result code:
+   * return result code:
    *    0  no erasing
    *    1  point erased
    *    2  line complete erase

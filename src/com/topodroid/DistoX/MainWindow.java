@@ -28,7 +28,7 @@ import java.io.FileFilter;
 import java.util.List;
 // import java.util.ArrayList;
 
-import android.os.AsyncTask;
+// import android.os.AsyncTask;
 // import android.os.Debug;
 
 // import java.lang.Long;
@@ -89,7 +89,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 // import android.graphics.Color;
 // import android.graphics.PorterDuff;
 
-import android.util.Log;
+// import android.util.Log;
 
 /*
   Method m = device.getClass().getMethod( "createRfcommSocket", new Class[] (int.class) );

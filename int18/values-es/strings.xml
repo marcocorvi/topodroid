@@ -329,7 +329,7 @@
     <string name="menu_rename">Renombrar</string>
     <string name="menu_switch">Cerrar/Cambiar</string>
     <string name="menu_help">Ayuda</string>
-    <string name="menu_join_survey">Unir topografías</string>
+    <!-- UNUSED string name="menu_join_survey">Unir topografías</string -->
     <string name="menu_logs">Registros</string>
     <string name="menu_manual_calibration">Calibración</string>
     <string name="menu_options">Ajustes</string>
@@ -555,7 +555,7 @@
     <string name="distox_err_connected">Dispositivo conectado con éxito</string>
 
     <!-- UNUSED string name="ask_close">¿Cerrar TopoDroid?</string -->
-    <string name="ask_reset">¿Quiere reiniciar la memoria DistoX?</string>
+    <!-- UNUSED string name="ask_reset">¿Quiere reiniciar la memoria DistoX?</string -->
     <!-- UNUSED string name="ask_close_survey">Â¿Cerrar Topografía?</string -->
     <string name="ask_gps_service">¿Quiere establecer el servicio de GPS?</string>
     <!-- TODO string name="ask_backups_clear">Delete sketch backups?</string -->
@@ -758,7 +758,7 @@
     <!-- UNUSED string name="help_database">Aplicación Database viewer(SQliteViewer)</string -->
     <string name="help_prefs">Editar preferencias</string>
     <string name="help_log">Activar/desactivar las opciones de registro</string>
-    <string name="help_join_survey">Unir dos topografías</string>
+    <!-- UNUSED string name="help_join_survey">Unir dos topografías</string -->
     <string name="help_info_topodroid">Info TopoDroid</string>
     <string name="help_download">Descargar datos</string>
     <!-- UNUSED string name="help_splay">Asignar Tomas laterales automáticamente</string -->
@@ -889,7 +889,7 @@
     <string name="title_photo">Foto/Medidas</string>
     <string name="title_photo_comment">Comentario Foto</string>
     <string name="title_plot_save">Guardar dibujo como</string>
-    <string name="title_plot_merge">Combinar dibujo</string>
+    <!-- UNUSED string name="title_plot_merge">Combinar dibujo</string -->
     <string name="title_plot_reload">Actualizar dibujo</string>
     <string name="title_profile_flip">¿Quiere cambiar al alzado del dibujo?</string>
     <string name="title_projection">Perfil de proyeccción de brújula %1$d</string>

@@ -30,7 +30,7 @@ import android.view.View;
 // import android.view.View.OnKeyListener;
 // import android.view.KeyEvent;
 
-import android.util.Log;
+// import android.util.Log;
 
 class PhotoEditDialog extends MyDialog
                       implements View.OnClickListener

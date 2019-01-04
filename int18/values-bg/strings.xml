@@ -330,7 +330,7 @@
     <string name="menu_rename">Преименуване</string>
     <string name="menu_switch">Смяна/затваряне</string>
     <string name="menu_help">Помощ</string>
-    <string name="menu_join_survey">Ко-картиране</string>
+    <!-- UNUSED string name="menu_join_survey">Ко-картиране</string -->
     <string name="menu_logs">Лог файлове</string>
     <string name="menu_manual_calibration">Калибрация инстр.</string>
     <string name="menu_options">Настройки</string>
@@ -558,7 +558,7 @@
     <string name="distox_err_connected">Устройството е вече свързано</string>
 
     <!-- UNUSED string name="ask_close">Затваряне на TopoDroid?</string -->
-    <string name="ask_reset">Изчистване на паметта на DistoX?</string>
+    <!-- UNUSED string name="ask_reset">Изчистване на паметта на DistoX?</string -->
     <!-- UNUSED string name="ask_close_survey">Затваряне на картировката?</string -->
     <string name="ask_gps_service">Избор на GPS услуга?</string>
     <!-- TODO string name="ask_backups_clear">Delete sketch backups?</string -->
@@ -760,7 +760,7 @@
     <!-- UNUSED string name="help_database">Програма за преглеждане на базата данни (SQliteViewer)</string -->
     <string name="help_prefs">Настройки</string>
     <string name="help_log">Включване/изключване на лог файловете</string>
-    <string name="help_join_survey">Едновременно картиране с две приложения TopoDroid</string>
+    <!-- UNUSED string name="help_join_survey">Едновременно картиране с две приложения TopoDroid</string -->
     <string name="help_info_topodroid">Информация за TopoDroid</string>
     <string name="help_download">Сваляне на данни</string>
     <!-- UNUSED string name="help_splay">Автоматично определяне на репери за страничните отсечки</string -->
@@ -889,7 +889,7 @@
     <string name="title_photo">Снимки/Измервания</string>
     <string name="title_photo_comment">Коментар за снимка</string>
     <string name="title_plot_save">Запис на скица като</string>
-    <string name="title_plot_merge">Сливане на скици</string>
+    <!-- UNUSED string name="title_plot_merge">Сливане на скици</string -->
     <string name="title_plot_reload">Препрочитане на скица</string>
     <string name="title_profile_flip">Обръщане на разреза?</string>
     <string name="title_projection">Азимут на проектиран разрез %1$d</string>

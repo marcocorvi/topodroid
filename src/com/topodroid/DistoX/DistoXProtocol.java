@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-import java.lang.ref.WeakReference;
+// import java.lang.ref.WeakReference;
 
 import java.io.IOException;
 import java.io.EOFException;

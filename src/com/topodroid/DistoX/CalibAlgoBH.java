@@ -27,7 +27,7 @@ import java.lang.Math;
 // import java.util.Locale;
 
 // used by logCoeff
-import android.util.Log;
+// import android.util.Log;
 
 class CalibAlgoBH extends CalibAlgo
 {

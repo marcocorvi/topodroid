@@ -340,7 +340,7 @@
     <string name="menu_rename">UMBENENNEN</string>
     <string name="menu_switch">WECHSELN/SCHLIEßEN</string>
     <string name="menu_help">HILFE</string>
-    <string name="menu_join_survey">CO-VERMESSUNG</string>
+    <!-- UNUSED string name="menu_join_survey">CO-VERMESSUNG</string -->
     <string name="menu_logs">LOGS</string>
     <string name="menu_manual_calibration">KALIBRIERUNG</string>
     <string name="menu_options">EINSTELLUNGEN</string>
@@ -574,7 +574,7 @@
     <string name="distox_err_connected">Gerät bereits verbunden</string>
 
     <!-- UNUSED string name="ask_close">TopoDroid beenden?</string -->
-    <string name="ask_reset">DistoX zurücksetzen?</string>
+    <!-- UNUSED string name="ask_reset">DistoX zurücksetzen?</string -->
     <!-- UNUSED string name="ask_close_survey">Vermessung schließen?</string -->
     <string name="ask_gps_service">GPS aktiveren?</string>
     <!-- TODO string name="ask_backups_clear">Delete sketch backups?</string -->
@@ -776,7 +776,7 @@
     <!-- UNUSED string name="help_database">Databanken App (SQliteViewer)</string -->
     <string name="help_prefs">Einstellungen bearbeiten</string>
     <string name="help_log">Logging-Einstellungen aktivieren</string>
-    <string name="help_join_survey">Vermessungen verbinden</string>
+    <!-- UNUSED string name="help_join_survey">Vermessungen verbinden</string -->
     <string name="help_info_topodroid">TopoDroid Nachrichten</string>
     <string name="help_download">Daten herunterladen</string>
     <!-- UNUSED string name="help_splay">Die Messpunkte automatisch zuweisen</string -->
@@ -907,7 +907,7 @@
     <string name="title_photo">Foto/Messungen</string>
     <string name="title_photo_comment">Foto Kommentar</string>
     <string name="title_plot_save">Skizze speichern als</string>
-    <string name="title_plot_merge">Skizze einfügen</string>
+    <!-- UNUSED string name="title_plot_merge">Skizze einfügen</string -->
     <string name="title_plot_reload">Skizzenbackup wiederherstellen</string>
     <string name="title_profile_flip">Seitenansicht spiegeln?</string>
     <string name="title_projection">Projiziertes Profil Azimut %1$d</string>

@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 /* ---- IF_COSURVEY
 

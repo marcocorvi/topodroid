@@ -70,7 +70,7 @@
   <string name="PhotoEditDialog" translatable="false">page_photo_edit.htm</string>
   <string name="PhotoSensorsDialog" translatable="false">page_shot_edit2.htm</string>
   <string name="PlotListDialog" translatable="false">page_plot_list.htm</string>
-  <string name="PlotMergeDialog" translatable="false">page_plot_merge.htm</string>
+  <!-- string name="PlotMergeDialog" translatable="false">page_plot_merge.htm</string -->
   <string name="PlotNewDialog" translatable="false">page_new_plot.htm</string>
   <string name="PlotRecoverDialog" translatable="false">page_backup.htm</string>
   <string name="PlotRenameDialog" translatable="false">page_plot_rename.htm</string>

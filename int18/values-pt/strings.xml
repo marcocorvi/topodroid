@@ -329,7 +329,7 @@
     <string name="menu_rename">RENOMEAR</string>
     <string name="menu_switch">TROCAR/FECHAR</string>
     <string name="menu_help">AJUDA</string>
-    <string name="menu_join_survey">TOPOGRAFIA COLABORATIVA</string>
+    <!-- UNUSED string name="menu_join_survey">TOPOGRAFIA COLABORATIVA</string -->
     <string name="menu_logs">LOGS</string>
     <string name="menu_manual_calibration">CALIBRAÇÃO</string>
     <string name="menu_options">CONFIGURAÇÕES</string>
@@ -555,7 +555,7 @@
     <string name="distox_err_connected">Dispositivo já conectado</string>
 
     <!-- UNUSED string name="ask_close">Fechar TopoDroid?</string -->
-    <string name="ask_reset">Reiniciar memória da DistoX?</string>
+    <!-- UNUSED string name="ask_reset">Reiniciar memória da DistoX?</string -->
     <!-- UNUSED string name="ask_close_survey">Fechar mapa?</string -->
     <string name="ask_gps_service">Configurar o serviço GPS?</string>
     <!-- TODO string name="ask_backups_clear">Delete sketch backups?</string -->
@@ -758,7 +758,7 @@
     <!-- UNUSED string name="help_database">App Visualizador de banco de dados (SQliteViewer)</string -->
     <string name="help_prefs">Editar preferências</string>
     <string name="help_log">Ativar/desativar configurações de log</string>
-    <string name="help_join_survey">topo colaborativa</string>
+    <!-- UNUSED string name="help_join_survey">topo colaborativa</string -->
     <string name="help_info_topodroid">Informações sobre o TopoDroid</string>
     <string name="help_download">Download de dados</string>
     <!-- UNUSED string name="help_splay">Atribuir bases à visadas auxiliares automaticamente</string -->
@@ -887,7 +887,7 @@
     <string name="title_photo">Foto/Medições</string>
     <string name="title_photo_comment">Comentário da foto</string>
     <string name="title_plot_save">Exportar croqui</string>
-    <string name="title_plot_merge">Mesclar croqui</string>
+    <!-- UNUSED string name="title_plot_merge">Mesclar croqui</string -->
     <string name="title_plot_reload">Recarregar croqui</string>
     <string name="title_profile_flip">Virar o corte?</string>
     <string name="title_projection">Azimute do corte projetado %1$d</string>
