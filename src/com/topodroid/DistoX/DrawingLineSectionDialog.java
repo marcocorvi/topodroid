@@ -36,7 +36,7 @@ class DrawingLineSectionDialog extends MyDialog
 {
   private DrawingLinePath mLine;
   private DrawingWindow mParent;
-  private TopoDroidApp    mApp;
+  // private TopoDroidApp    mApp; // unused
 
   // private TextView mTVtype;
   private TextView mTVoptions;
@@ -74,12 +74,13 @@ class DrawingLineSectionDialog extends MyDialog
 
   
   DrawingLineSectionDialog( Context context,
-                            DrawingWindow parent, TopoDroidApp app, boolean h_section, boolean exists, String id,
+                            DrawingWindow parent, // TopoDroidApp app, 
+                            boolean h_section, boolean exists, String id,
                             DrawingLinePath line, String from, String to, float azimuth, float clino, float tt0 )
   {
     super( context, R.string.DrawingLineSectionDialog );
     mParent = parent;
-    mApp  = app;
+    // mApp  = app;
     mExists = exists;      // whether the section exists or it is being created
     mHSection = h_section; // if the line has "-id" the h_section is taken from the PlotInfo
     mLine = line;

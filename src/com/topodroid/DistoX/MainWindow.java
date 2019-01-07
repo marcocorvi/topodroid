@@ -239,7 +239,7 @@ public class MainWindow extends Activity
         mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true, true ); // new-survey dialog: tell app to clear survey name and id
         (new SurveyNewDialog( mActivity, this, -1, -1 )).show(); 
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // IMPORT
-        (new ImportDialog( mActivity, this, mApp )).show();
+        (new ImportDialog( mActivity, this /*, mApp */ )).show();
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // PALETTE
         BrushManager.makePaths( mApp, getResources() );
         SymbolEnableDialog dlg = new SymbolEnableDialog( mActivity );

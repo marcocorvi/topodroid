@@ -23,7 +23,7 @@ import android.graphics.RectF;
 // import android.graphics.Path.Direction;
 // import android.os.Handler;
 
-import java.util.Iterator;
+// import java.util.Iterator;
 import java.util.List;
 // import java.util.Map;
 // import java.util.concurrent.ConcurrentHashMap;
@@ -331,10 +331,8 @@ class DrawingCommandManager
   private void flipXAxes( List<DrawingPath> paths )
   {
     final float z = 1/mScale;
-    final Iterator i1 = paths.iterator();
-    while ( i1.hasNext() ){
-      final DrawingPath drawingPath = (DrawingPath) i1.next();
-      drawingPath.flipXAxis( z );
+    for ( DrawingPath path : paths ) {
+      path.flipXAxis( z );
     }
   }
 
@@ -361,9 +359,7 @@ class DrawingCommandManager
     if ( mCurrentStack != null ) {
       Selection selection = new Selection();
       synchronized( mCurrentStack ) {
-        final Iterator i = mCurrentStack.iterator();
-        while ( i.hasNext() ){
-          final ICanvasCommand cmd = (ICanvasCommand) i.next();
+        for ( ICanvasCommand cmd : mCurrentStack ) {
           if ( cmd.commandType() == 0 ) {
             cmd.flipXAxis(z);
             DrawingPath path = (DrawingPath)cmd;
@@ -398,9 +394,7 @@ class DrawingCommandManager
     // }
     if ( mCurrentStack != null ){
       synchronized( mCurrentStack ) {
-        final Iterator i = mCurrentStack.iterator();
-        while ( i.hasNext() ){
-          final ICanvasCommand cmd = (ICanvasCommand) i.next();
+        for ( ICanvasCommand cmd : mCurrentStack ) {
           cmd.shiftPathBy( x, y );
         }
       }
@@ -429,9 +423,7 @@ class DrawingCommandManager
 
     if ( mCurrentStack != null ){
       synchronized( mCurrentStack ) {
-        final Iterator i = mCurrentStack.iterator();
-        while ( i.hasNext() ){
-          final ICanvasCommand cmd = (ICanvasCommand) i.next();
+        for ( ICanvasCommand cmd : mCurrentStack ) {
           cmd.scalePathBy( z, m );
         }
       }
@@ -666,12 +658,10 @@ class DrawingCommandManager
     mMatrix.postScale( s, s );
 
     synchronized ( mCurrentStack ) {
-      final Iterator i = mCurrentStack.iterator();
-      while ( i.hasNext() ){
-        final ICanvasCommand c = (ICanvasCommand) i.next();
+      for ( ICanvasCommand c : mCurrentStack ) {
         if ( c.commandType() == 0 ) {
           DrawingPath path = (DrawingPath)c;
-	  path.mLandscape = landscape;
+          path.mLandscape = landscape;
           if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
             DrawingAreaPath area = (DrawingAreaPath)path;
             area.shiftShaderBy( dx, dy, s );
@@ -999,9 +989,7 @@ class DrawingCommandManager
   {
     ArrayList<DrawingPath> paths = new ArrayList<>();
     synchronized( mCurrentStack ) {
-      final Iterator i = mCurrentStack.iterator();
-      while ( i.hasNext() ){
-        final ICanvasCommand c = (ICanvasCommand) i.next();
+      for ( ICanvasCommand c : mCurrentStack ) {
         if ( c.commandType() == 0 ) {
           DrawingPath p = (DrawingPath)c;
           if ( isInside( p.getX(), p.getY(), border ) ) {
@@ -1046,9 +1034,7 @@ class DrawingCommandManager
       int index = BrushManager.mPointLib.mPointSectionIndex;
       if ( index >= 0 ) {
         ArrayList<DrawingPath> todo = new ArrayList<>();
-        final Iterator i = mCurrentStack.iterator();
-        while ( i.hasNext() ){
-          final ICanvasCommand c = (ICanvasCommand) i.next();
+        for ( ICanvasCommand c : mCurrentStack ) {
           if ( c.commandType() == 0 ) {
             DrawingPath p = (DrawingPath)c;
             if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
@@ -1136,9 +1122,7 @@ class DrawingCommandManager
   {
     if( mLegsStack != null ) { 
       synchronized( mLegsStack ) {
-        final Iterator i = mLegsStack.iterator();
-        while ( i.hasNext() ){
-          final DrawingPath path = (DrawingPath) i.next();
+        for ( DrawingPath path : mLegsStack ) {
           if ( path.mBlock == null || ( ! path.mBlock.mMultiBad ) ) {
             path.setPathPaint( paint );
           }
@@ -1148,20 +1132,18 @@ class DrawingCommandManager
     }
     if( mSplaysStack != null ) { 
       synchronized( mSplaysStack ) {
-        final Iterator i = mSplaysStack.iterator();
-        while ( i.hasNext() ){
-          final DrawingPath path = (DrawingPath) i.next();
+        for ( DrawingPath path : mSplaysStack ) {
           if ( path.mBlock == null || ( ! path.mBlock.mMultiBad ) ) {
             // path.setPathPaint( paint );
-	    if ( profile ) {
-	      if ( TDSetting.mDashSplay ) {
+	        if ( profile ) {
+	          if ( TDSetting.mDashSplay ) {
                 path.setSplayPaintPlan( path.mBlock, path.mExtend, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-	      } else {
+	          } else {
                 path.setSplayPaintProfile( path.mBlock, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-	      }
-	    } else {
+	          }
+	        } else {
               path.setSplayPaintPlan( path.mBlock, path.mExtend, BrushManager.deepBluePaint, BrushManager.darkBluePaint );
-	    }
+	        }
           }
         }
 	// highlightsSplays( app ); // FIXME_HIGHLIGHT
@@ -1343,10 +1325,8 @@ class DrawingCommandManager
     RectF b = new RectF();
     if( mSplaysStack != null ) { 
       synchronized( mSplaysStack ) {
-        final Iterator i = mSplaysStack.iterator();
-        while ( i.hasNext() ){
-          final DrawingPath drawingPath = (DrawingPath) i.next();
-          drawingPath.computeBounds( b, true );
+        for ( DrawingPath path : mSplaysStack ) {
+          path.computeBounds( b, true );
           // bounds.union( b );
           union( bounds, b );
         }
@@ -1354,10 +1334,8 @@ class DrawingCommandManager
     }
     if( mLegsStack != null ) { 
       synchronized( mLegsStack ) {
-        final Iterator i = mLegsStack.iterator();
-        while ( i.hasNext() ){
-          final DrawingPath drawingPath = (DrawingPath) i.next();
-          drawingPath.computeBounds( b, true );
+        for ( DrawingPath path : mLegsStack ) {
+          path.computeBounds( b, true );
           // bounds.union( b );
           union( bounds, b );
         }
@@ -1366,9 +1344,7 @@ class DrawingCommandManager
 
     if( mCurrentStack != null ){
       synchronized( mCurrentStack ) {
-        final Iterator i = mCurrentStack.iterator();
-        while ( i.hasNext() ){
-          final ICanvasCommand cmd = (ICanvasCommand) i.next();
+        for ( ICanvasCommand cmd : mCurrentStack ) {
           cmd.computeBounds( b, true );
           // bounds.union( b );
           union( bounds, b );
@@ -1434,39 +1410,29 @@ class DrawingCommandManager
     mat.postScale( mBitmapScale, mBitmapScale );
     if ( mGridStack1 != null ) {
       synchronized( mGridStack1 ) {
-        final Iterator i1 = mGridStack1.iterator();
-        while ( i1.hasNext() ){
-          final DrawingPath drawingPath = (DrawingPath) i1.next();
-          drawingPath.draw( c, mat, sca, null );
+        for ( DrawingPath p1 : mGridStack1 ) {
+          p1.draw( c, mat, sca, null );
         }
-        final Iterator i10 = mGridStack10.iterator();
-        while ( i10.hasNext() ){
-          final DrawingPath drawingPath = (DrawingPath) i10.next();
-          drawingPath.draw( c, mat, sca, null );
+        for ( DrawingPath p10 : mGridStack10 ) {
+          p10.draw( c, mat, sca, null );
         }
-        final Iterator i100 = mGridStack100.iterator();
-        while ( i100.hasNext() ){
-          final DrawingPath drawingPath = (DrawingPath) i100.next();
-          drawingPath.draw( c, mat, sca, null );
+        for ( DrawingPath p100 : mGridStack100 ) {
+          p100.draw( c, mat, sca, null );
         }
         if ( mNorthLine != null ) mNorthLine.draw( c, mat, sca, null );
       }
     }
     if ( mSplaysStack != null ) {
       synchronized( mSplaysStack ) {
-        final Iterator i = mSplaysStack.iterator();
-        while ( i.hasNext() ){
-          final DrawingPath drawingPath = (DrawingPath) i.next();
-          drawingPath.draw( c, mat, sca, null );
+        for ( DrawingPath path : mSplaysStack ) {
+          path.draw( c, mat, sca, null );
         }
       }
     }
     if ( mLegsStack != null ) {
       synchronized( mLegsStack ) {
-        final Iterator i = mLegsStack.iterator();
-        while ( i.hasNext() ){
-          final DrawingPath drawingPath = (DrawingPath) i.next();
-          drawingPath.draw( c, mat, sca, null );
+        for ( DrawingPath path : mLegsStack ) {
+          path.draw( c, mat, sca, null );
         }
       }
     }
@@ -1481,9 +1447,7 @@ class DrawingCommandManager
 
     if( mCurrentStack != null ){
       synchronized( mCurrentStack ) {
-        final Iterator i = mCurrentStack.iterator();
-        while ( i.hasNext() ){
-          final ICanvasCommand cmd = (ICanvasCommand) i.next();
+        for ( ICanvasCommand cmd : mCurrentStack ) {
           cmd.draw( c, mat, sca, null );
         }
       }
@@ -1566,9 +1530,7 @@ class DrawingCommandManager
 
     DrawingLinePath ret = null;
     synchronized( mCurrentStack ) {
-      final Iterator i = mCurrentStack.iterator();
-      while ( i.hasNext() ){
-        ICanvasCommand cmd = (ICanvasCommand) i.next();
+      for ( ICanvasCommand cmd : mCurrentStack ) {
         if ( cmd.commandType() != 0 ) continue; // FIXME EraseCommand
 
         final DrawingPath drawingPath = (DrawingPath)cmd;
@@ -1660,23 +1622,17 @@ class DrawingCommandManager
     if( grids && mGridStack1 != null ) {
       synchronized( mGridStack1 ) {
         if ( mScale < 1 ) {
-          final Iterator i1 = mGridStack1.iterator();
-          while ( i1.hasNext() ){
-            final DrawingPath drawingPath = (DrawingPath) i1.next();
-            drawingPath.draw( canvas, mMatrix, mScale, mBBox );
+          for ( DrawingPath p1 : mGridStack1 ) {
+            p1.draw( canvas, mMatrix, mScale, mBBox );
           }
         }
         if ( mScale < 10 ) {
-          final Iterator i10 = mGridStack10.iterator();
-          while ( i10.hasNext() ){
-            final DrawingPath drawingPath = (DrawingPath) i10.next();
-            drawingPath.draw( canvas, mMatrix, mScale, mBBox );
+          for ( DrawingPath p10 : mGridStack10 ) {
+            p10.draw( canvas, mMatrix, mScale, mBBox );
           }
         }
-        final Iterator i100 = mGridStack100.iterator();
-        while ( i100.hasNext() ){
-          final DrawingPath drawingPath = (DrawingPath) i100.next();
-          drawingPath.draw( canvas, mMatrix, mScale, mBBox );
+        for ( DrawingPath p100 : mGridStack100 ) {
+          p100.draw( canvas, mMatrix, mScale, mBBox );
         }
         if ( mNorthLine != null ) mNorthLine.draw( canvas, mMatrix, mScale, mBBox );
         if(scaleRef && (mScaleRef != null)) {
@@ -1687,10 +1643,8 @@ class DrawingCommandManager
 
     if ( legs && mLegsStack != null ) {
       synchronized( mLegsStack ) {
-        final Iterator i = mLegsStack.iterator();
-        while ( i.hasNext() ){
-          final DrawingPath path = (DrawingPath) i.next();
-          path.draw( canvas, mMatrix, mScale, mBBox );
+        for ( DrawingPath leg: mLegsStack ) {
+          leg.draw( canvas, mMatrix, mScale, mBBox );
         }
       }
     }
@@ -1698,34 +1652,26 @@ class DrawingCommandManager
     if ( mSplaysStack != null ) {
       synchronized( mSplaysStack ) {
         if ( splays ) { // draw all splays except the splays-off
-          final Iterator i = mSplaysStack.iterator();
-          while ( i.hasNext() ){
-            final DrawingPath path = (DrawingPath) i.next();
-	    if ( ! station_splay.isStationOFF( path ) ) path.draw( canvas, mMatrix, mScale, mBBox );
-	  }
-	} else if ( latest || station_splay.hasSplaysON() ) { // draw the splays-on and/or the lastest
-          final Iterator i = mSplaysStack.iterator();
-          while ( i.hasNext() ){
-            final DrawingPath path = (DrawingPath) i.next();
+          for ( DrawingPath path : mSplaysStack ) {
+	        if ( ! station_splay.isStationOFF( path ) ) path.draw( canvas, mMatrix, mScale, mBBox );
+	      }
+        } else if ( latest || station_splay.hasSplaysON() ) { // draw the splays-on and/or the lastest
+          for ( DrawingPath path : mSplaysStack ) {
             if ( station_splay.isStationON( path ) || path.isBlockRecent() ) path.draw( canvas, mMatrix, mScale, mBBox );
-	  }
-	}
+	      }
+	    }
       }
     }
     if ( mScrap != null && mScrap.size() > 0 ) {
       synchronized( mScrap )  {
-        final Iterator i = mScrap.iterator();
-        while ( i.hasNext() ){
-          final DrawingLinePath path = (DrawingLinePath) i.next();
+        for (DrawingLinePath path : mScrap ) {
           path.draw( canvas, mMatrix, mScale, null /* mBBox */ );
         }
       }
     }
     if ( mXSectionOutlines != null && mXSectionOutlines.size() > 0 ) {
       synchronized( TDPath.mXSectionsLock )  {
-        final Iterator i = mXSectionOutlines.iterator();
-        while ( i.hasNext() ){
-          final DrawingOutlinePath path = (DrawingOutlinePath) i.next();
+        for ( DrawingOutlinePath path : mXSectionOutlines ) {
           path.mPath.draw( canvas, mMatrix, mScale, null /* mBBox */ );
         }
       }
@@ -1733,9 +1679,7 @@ class DrawingCommandManager
  
     if ( stations && mStations != null ) {  
       synchronized( mStations ) {
-        final Iterator i = mStations.iterator();
-        while ( i.hasNext() ){
-          final DrawingStationName st = (DrawingStationName) i.next();
+        for ( DrawingStationName st : mStations ) {
           st.draw( canvas, mMatrix, mScale, mBBox );
         }
       }
@@ -1744,9 +1688,7 @@ class DrawingCommandManager
     if ( mCurrentStack != null ){
       synchronized( mCurrentStack ) {
         if ( outline ) {
-          final Iterator i = mCurrentStack.iterator();
-          while ( i.hasNext() ){
-            final ICanvasCommand cmd = (ICanvasCommand) i.next();
+          for ( ICanvasCommand cmd : mCurrentStack  ) {
             if ( cmd.commandType() == 0 ) {
               DrawingPath path = (DrawingPath)cmd;
               if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
@@ -1758,9 +1700,7 @@ class DrawingCommandManager
             }
           }
         } else {
-          final Iterator i = mCurrentStack.iterator();
-          while ( i.hasNext() ){
-            final ICanvasCommand cmd = (ICanvasCommand) i.next();
+          for ( ICanvasCommand cmd : mCurrentStack  ) {
             if ( cmd.commandType() == 0 ) {
               cmd.draw( canvas, mMatrix, mScale, mBBox );
               DrawingPath path = (DrawingPath)cmd;
@@ -2884,9 +2824,7 @@ class DrawingCommandManager
     float xmin=1000000f, xmax=-1000000f, 
           ymin=1000000f, ymax=-1000000f;
     synchronized( mCurrentStack ) {
-      final Iterator i = mCurrentStack.iterator();
-      while ( i.hasNext() ) {
-        final ICanvasCommand cmd = (ICanvasCommand) i.next();
+      for ( ICanvasCommand cmd : mCurrentStack ) {
         if ( cmd.commandType() != 0 ) continue;
         DrawingPath p = (DrawingPath) cmd;
         // RectF bbox = p.mBBox;
@@ -2927,9 +2865,7 @@ class DrawingCommandManager
   DrawingAudioPath getAudioPoint( long bid )
   {
     synchronized( mCurrentStack ) {
-      final Iterator i = mCurrentStack.iterator();
-      while ( i.hasNext() ){
-        final ICanvasCommand cmd = (ICanvasCommand) i.next();
+      for ( ICanvasCommand cmd : mCurrentStack ) {
         if ( cmd.commandType() == 0 ) {
           DrawingPath path = (DrawingPath)cmd;
           if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
@@ -3018,9 +2954,7 @@ class DrawingCommandManager
   { 
     if ( mXSectionOutlines == null || mXSectionOutlines.size() == 0 ) return false;
     synchronized( TDPath.mXSectionsLock )  {
-      final Iterator i = mXSectionOutlines.iterator();
-      while ( i.hasNext() ){
-        final DrawingOutlinePath path = (DrawingOutlinePath) i.next();
+      for ( DrawingOutlinePath path : mXSectionOutlines ) {
         if ( path.isScrap( name ) ) return true;
       }
     }
@@ -3038,9 +2972,7 @@ class DrawingCommandManager
   {
     List<DrawingOutlinePath> xsection_outlines = Collections.synchronizedList(new ArrayList<DrawingOutlinePath>());
     synchronized( TDPath.mXSectionsLock ) {
-      final Iterator i = mXSectionOutlines.iterator();
-      while ( i.hasNext() ) {
-        final DrawingOutlinePath path = (DrawingOutlinePath) i.next();
+      for ( DrawingOutlinePath path : mXSectionOutlines  ) {
         if ( ! path.isScrap( name ) ) xsection_outlines.add( path );
       }
       mXSectionOutlines.clear(); // not necessary
@@ -3051,9 +2983,7 @@ class DrawingCommandManager
   private void shiftXSectionOutline( String name, float dx, float dy )
   {
     synchronized( TDPath.mXSectionsLock ) {
-      final Iterator i = mXSectionOutlines.iterator();
-      while ( i.hasNext() ) {
-        final DrawingOutlinePath path = (DrawingOutlinePath) i.next();
+      for ( DrawingOutlinePath path : mXSectionOutlines ) {
         if ( path.isScrap( name ) ) path.mPath.shiftBy( dx, dy );
       }
     }

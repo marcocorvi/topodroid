@@ -322,7 +322,7 @@ class CalibAlgo
   private static void coeffToBA( byte[] coeff, Vector b, Matrix a, int off )
   {
     long v;
-    long c0 = (int)(coeff[off+ 0]); if ( c0 < 0 ) c0 = 256+c0;
+    long c0 = (int)(coeff[off/*+ 0*/]); if ( c0 < 0 ) c0 = 256+c0;
     long c1 = (int)(coeff[off+ 1]); if ( c1 < 0 ) c1 = 256+c1;
     v = c0 + (c1<<8 );
     if ( v > TopoDroidUtil.ZERO ) v = v - TopoDroidUtil.NEG;
@@ -480,7 +480,7 @@ class CalibAlgo
     group[idx] = group0;
 
     if ( TDLog.LOG_CALIB ) {
-      TDLog.Log( TDLog.LOG_CALIB, 
+      TDLog.DoLog(
         String.format(Locale.US, "Add %d G %d %d %d M %d %d %d Grp %d", idx, gx, gy, gz, mx, my, mz, group0 ) );
     }
     idx ++;
@@ -515,7 +515,7 @@ class CalibAlgo
   protected void LogMatrixVector( String msg, Matrix m1, Vector v1 ) 
   {
     if ( ! TDLog.LOG_CALIB ) return;
-    TDLog.Log( TDLog.LOG_CALIB,
+    TDLog.DoLog(
       msg + String.format(Locale.US,
        " M: %8.4f %8.4f %8.4f V: %8.4f\n    %8.4f %8.4f %8.4f   %8.4f\n    %8.4f %8.4f %8.4f   %8.4f",
        m1.x.x, m1.x.y, m1.x.z, v1.x, 
@@ -526,7 +526,7 @@ class CalibAlgo
   protected void LogVectors( String msg, long group, Vector v1, Vector v2 )
   {
     if ( ! TDLog.LOG_CALIB ) return;
-    TDLog.Log( TDLog.LOG_CALIB,
+    TDLog.DoLog(
       msg + String.format(Locale.US,
       " %3d V1 %8.4f %8.4f %8.4f\n    V2 %8.4f %8.4f %8.4f", group, v1.x, v1.y, v1.z, v2.x, v2.y, v2.z ) ); 
   }
@@ -534,8 +534,7 @@ class CalibAlgo
   protected void LogSC( String msg, float s, float c )
   {
     if ( ! TDLog.LOG_CALIB ) return;
-    TDLog.Log( TDLog.LOG_CALIB, 
-      msg + String.format(Locale.US, " S %8.4f C %8.4f", s, c ) ); 
+    TDLog.DoLog( msg + String.format(Locale.US, " S %8.4f C %8.4f", s, c ) );
   }
 
 /* ============================================================ */

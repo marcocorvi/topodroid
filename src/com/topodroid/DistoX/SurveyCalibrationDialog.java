@@ -36,15 +36,15 @@ class SurveyCalibrationDialog extends MyDialog
   private EditText mETazimuth;
   private EditText mETclino;
   private Button mBTok;
-  private Button mBTback;
+  // private Button mBTback;
   private CheckBox mCBlrud;
 
-  private final TopoDroidApp mApp;
+  // private final TopoDroidApp mApp;
 
-  SurveyCalibrationDialog( Context context, TopoDroidApp app )
+  SurveyCalibrationDialog( Context context /*, TopoDroidApp app */ )
   {
     super( context, R.string.SurveyCalibrationDialog );
-    mApp    = app;
+    // mApp    = app;
   }
 
 
@@ -67,8 +67,9 @@ class SurveyCalibrationDialog extends MyDialog
 
     mBTok = (Button) findViewById( R.id.button_ok );
     mBTok.setOnClickListener( this );
-    mBTback = (Button) findViewById( R.id.button_back );
-    mBTback.setOnClickListener( this );
+    // mBTback = (Button) findViewById( R.id.button_back );
+    // mBTback.setOnClickListener( this );
+    ( (Button) findViewById( R.id.button_back ) ).setOnClickListener( this );
   }
 
   @Override

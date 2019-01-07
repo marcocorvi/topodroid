@@ -37,7 +37,7 @@ class SymbolReload extends MyDialog
 
   private Button mBtnInstall;
   private Button mBtnReplace;
-  private Button mBtnCancel;
+  // private Button mBtnCancel;
 
   private CheckBox mCBspeleo;
   private CheckBox mCBextra;
@@ -80,11 +80,13 @@ class SymbolReload extends MyDialog
     mCBbio    = (CheckBox) findViewById( R.id.ckb_bio    );
     mCBkarst  = (CheckBox) findViewById( R.id.ckb_karst  );
 
-    mBtnCancel  = (Button) findViewById( R.id.button_cancel );
     mBtnInstall = (Button) findViewById( R.id.button_add );
     mBtnReplace = (Button) findViewById( R.id.button_replace );
-    mBtnCancel.setOnClickListener( this );
     mBtnReplace.setOnClickListener( this );
+    // mBtnCancel  = (Button) findViewById( R.id.button_cancel );
+    // mBtnCancel.setOnClickListener( this );
+    ( (Button) findViewById( R.id.button_cancel ) ).setOnClickListener( this );
+
     if ( ! mAll ) {
       mCBspeleo.setChecked( true );
       mCBspeleo.setVisibility( View.GONE );

@@ -61,7 +61,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class SensorListActivity extends Activity
                                 implements OnItemClickListener
 {
-  private TopoDroidApp mApp;
+  // private TopoDroidApp mApp;
 
   private ListView mList;
   // private int mListPos = -1;
@@ -129,7 +129,7 @@ public class SensorListActivity extends Activity
     super.onCreate( savedInstanceState );
     setContentView(R.layout.sensor_list_activity);
     
-    mApp = (TopoDroidApp) getApplication();
+    // mApp = (TopoDroidApp) getApplication();
     mDataAdapter = new SensorAdapter( this, R.layout.row, new ArrayList< SensorInfo >() );
 
     mList = (ListView) findViewById(R.id.list);

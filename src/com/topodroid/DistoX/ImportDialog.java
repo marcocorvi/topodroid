@@ -41,18 +41,18 @@ class ImportDialog extends MyDialog
                           implements OnItemClickListener
                           , OnClickListener
 { 
-  private final TopoDroidApp app;
+  // private final TopoDroidApp mApp;
   private final MainWindow mParent;
 
   private ArrayAdapter<String> mArrayAdapter;
   private ListView mList;
-  private Button mBtnCancel;
+  // private Button mBtnCancel;
 
-  ImportDialog( Context context, MainWindow parent, TopoDroidApp _app )
+  ImportDialog( Context context, MainWindow parent /* , TopoDroidApp app */ )
   {
     super( context, R.string.ImportDialog );
     mParent  = parent;
-    app = _app;
+    // mApp = app;
   }
 
   @Override
@@ -66,8 +66,9 @@ class ImportDialog extends MyDialog
     mList.setOnItemClickListener( this );
     mList.setDividerHeight( 2 );
 
-    mBtnCancel = (Button)findViewById( R.id.button_cancel );
-    mBtnCancel.setOnClickListener( this );
+    // mBtnCancel = (Button)findViewById( R.id.button_cancel );
+    // mBtnCancel.setOnClickListener( this );
+    ( (Button)findViewById( R.id.button_cancel ) ).setOnClickListener( this );
 
     File[] files = TDPath.getImportFiles();
     ArrayList<String> names = new ArrayList<>();

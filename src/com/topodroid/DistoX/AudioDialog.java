@@ -50,7 +50,7 @@ class AudioDialog extends MyDialog
   private MyStateBox mBtnDelete;
 
   private Button mBtnConfirm;
-  private Button mBtnClose;
+  // private Button mBtnClose;
 
   private final IAudioInserter mParent;
   private final long mBid;
@@ -85,8 +85,9 @@ class AudioDialog extends MyDialog
     LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 10, 10, 20, 20 );
 
     // mBtnDelete = (Button) findViewById( R.id.audio_delete );
-    mBtnClose = (Button) findViewById( R.id.audio_close );
-    mBtnClose.setOnClickListener( this );
+    // mBtnClose = (Button) findViewById( R.id.audio_close );
+    // mBtnClose.setOnClickListener( this );
+    ( (Button) findViewById( R.id.audio_close ) ).setOnClickListener( this );
 
     mBtnRec    = new MyStateBox( mContext, R.drawable.iz_audio_rec, R.drawable.iz_audio_rec_on );
     mBtnPlay   = new MyStateBox( mContext, R.drawable.iz_audio_play_off, R.drawable.iz_audio_play, R.drawable.iz_audio_stop );

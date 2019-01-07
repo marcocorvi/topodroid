@@ -86,7 +86,7 @@ class HelpDialog extends MyDialog
   private void createAdapter()
   {
     // Log.v("DistoX", "HELP create adapter mNr0 " + mNr0 );
-    mAdapter = new HelpAdapter( mContext, this, R.layout.item, new ArrayList<HelpEntry>() );
+    mAdapter = new HelpAdapter( mContext, /* this, */ R.layout.item, new ArrayList<HelpEntry>() );
     // int np = mIcons.length;
     for ( int i=0; i<mNr0; ++i ) {
       mAdapter.add( new HelpEntry( mContext, mIcons[i], mIconTexts[i], false ) );

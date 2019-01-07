@@ -28,8 +28,8 @@ class TopoDroidAbout extends Dialog
                      // implements OnClickListener
 {
   // private Button mBTok;
-  private Context mContext;
-  private MainWindow mParent;
+  // private Context mContext;
+  // private MainWindow mParent;
   private int mSetup;
 
   int nextSetup() { return mSetup + 1; }
@@ -37,8 +37,8 @@ class TopoDroidAbout extends Dialog
   TopoDroidAbout( Context context, MainWindow parent, int setup )
   {
     super( context );
-    mContext = context;
-    mParent  = parent;
+    // mContext = context;
+    // mParent  = parent;
     mSetup   = setup;
     setContentView(R.layout.welcome);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );

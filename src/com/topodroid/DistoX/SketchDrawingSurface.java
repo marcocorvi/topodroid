@@ -50,8 +50,8 @@ class SketchDrawingSurface extends SurfaceView
   volatile boolean isDrawing = true;
   private DrawingPath mPreviewPath;
   // private SurfaceHolder mHolder; // canvas holder
-  private final Context mContext;
-  private AttributeSet mAttrs;
+  // private final Context mContext;
+  // private AttributeSet mAttrs;
   private int mWidth;            // canvas width
   private int mHeight;           // canvas height
 
@@ -71,8 +71,8 @@ class SketchDrawingSurface extends SurfaceView
     mHeight = 0;
 
     mDrawThread = null;
-    mContext = context;
-    mAttrs   = attrs;
+    // mContext = context;
+    // mAttrs   = attrs;
     // mHolder = getHolder();
     // mHolder.addCallback(this);
     getHolder().addCallback(this);

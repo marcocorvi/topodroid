@@ -209,7 +209,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="fmt_error_m">Błąd %1$.1f m</string>
     <string name="fmt_h_geoid">wys. geoidy %1$.0f m</string>
     <string name="fmt_h_ellipsoid">wys. elipsoidy %1$.0f m</string>
-    <string name="depth_error">Uwaga. Błąd danych głębkości</string>
+    <!-- UNUSED string name="depth_error">Uwaga. Błąd danych głębkości</string -->
 
     <string name="error_azimuth_required">Wymagany azymut</string>
     <string name="error_length_required">Wymagana długość</string>

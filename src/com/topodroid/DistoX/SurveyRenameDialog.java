@@ -31,7 +31,7 @@ class SurveyRenameDialog extends MyDialog
 {
   private EditText mEtName;
   private Button   mBtnOK;
-  private Button   mBtnBack;
+  // private Button   mBtnBack;
 
   private final SurveyWindow mParent;
 
@@ -49,10 +49,10 @@ class SurveyRenameDialog extends MyDialog
     initLayout(R.layout.survey_rename_dialog, R.string.title_survey_rename );
     
     mBtnOK   = (Button) findViewById(R.id.btn_ok );
-    mBtnBack = (Button) findViewById(R.id.btn_back );
-
     mBtnOK.setOnClickListener( this );
-    mBtnBack.setOnClickListener( this );
+    // mBtnBack = (Button) findViewById(R.id.btn_back );
+    // mBtnBack.setOnClickListener( this );
+    ( (Button) findViewById(R.id.btn_back ) ).setOnClickListener( this );
 
     mEtName = (EditText) findViewById( R.id.et_name );
     mEtName.setText( TDInstance.survey );

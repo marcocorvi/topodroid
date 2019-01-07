@@ -39,7 +39,7 @@ import android.hardware.SensorManager;
 public class SensorActivity extends Activity
                             implements View.OnClickListener
 { 
-  private TopoDroidApp app;
+  // private TopoDroidApp mApp;
   private SensorManager mSensorManager;
   private float[] mValues;
   private float mAlpha = 0.85f;
@@ -68,7 +68,7 @@ public class SensorActivity extends Activity
   {
     super.onCreate( savedInstanceState );
     setContentView(R.layout.sensor_activity);
-    app = (TopoDroidApp) getApplication();
+    // mApp = (TopoDroidApp) getApplication();
     mSensorManager = (SensorManager)getSystemService( Context.SENSOR_SERVICE );
 
     mValues = new float[3];

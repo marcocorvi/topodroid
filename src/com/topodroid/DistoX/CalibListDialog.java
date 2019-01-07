@@ -35,7 +35,7 @@ class CalibListDialog extends MyDialog
                              // , OnItemLongClickListener
 {
   private DeviceActivity mParent;
-  private TopoDroidApp mApp;
+  // private TopoDroidApp mApp; // unused
   private ArrayAdapter<String> mArrayAdapter;
   // private ListItemAdapter mArrayAdapter;
   private Button mBtnNew;
@@ -45,11 +45,11 @@ class CalibListDialog extends MyDialog
 
   private ListView mList;
 
-  CalibListDialog( Context context, DeviceActivity parent, TopoDroidApp app )
+  CalibListDialog( Context context, DeviceActivity parent /*, TopoDroidApp app */ )
   {
     super( context, R.string.CalibListDialog );
     mParent = parent;
-    mApp = app;
+    // mApp = app;
   }
 
   @Override

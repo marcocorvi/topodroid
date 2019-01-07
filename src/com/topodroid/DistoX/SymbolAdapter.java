@@ -30,14 +30,14 @@ import android.view.LayoutInflater;
 class SymbolAdapter extends ArrayAdapter< EnableSymbol >
 {
   private ArrayList< EnableSymbol > mItems;
-  private Context mContext;
+  // private Context mContext;
   // private Activity mActivity;
   private LayoutInflater mLayoutInflater;
 
   SymbolAdapter( Context ctx, int id, ArrayList< EnableSymbol > items )
   {
     super( ctx, id, items );
-    mContext = ctx;
+    // mContext = ctx;
     // mActivity = ctx;
     mLayoutInflater = (LayoutInflater)ctx.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
 

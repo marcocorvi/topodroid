@@ -42,7 +42,7 @@ class StationSearchDialog extends MyDialog
   private String mStation;
 
   private Button mBtnSearch;
-  private Button mBtnCancel;
+  // private Button mBtnCancel;
 
   private CheckBox mBtnSplays;
 
@@ -70,10 +70,10 @@ class StationSearchDialog extends MyDialog
     // mBtnSplays.setVisibility( View.GONE ); 
 
     mBtnSearch = (Button) findViewById(R.id.btn_search);
-    mBtnCancel = (Button) findViewById(R.id.btn_cancel);
-
     mBtnSearch.setOnClickListener( this ); // SEARCH
-    mBtnCancel.setOnClickListener( this ); // CANCEL
+    // mBtnCancel = (Button) findViewById(R.id.btn_cancel);
+    // mBtnCancel.setOnClickListener( this ); // CANCEL
+    ( (Button) findViewById(R.id.btn_cancel) ).setOnClickListener( this ); // CANCEL
 
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), 
                                 R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );

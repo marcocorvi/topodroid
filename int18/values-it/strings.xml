@@ -205,7 +205,7 @@
     <string name="fmt_error_m">Errore %1$.1f m</string>
     <string name="fmt_h_geoid">Errore %1$.0f m</string>
     <string name="fmt_h_ellipsoid">Errore %1$.0f m</string>
-    <string name="depth_error">WARNING. Errore nella profondita\' dei dati</string>
+    <!-- UNUSED string name="depth_error">WARNING. Errore nella profondita\' dei dati</string -->
 
     <string name="error_azimuth_required">Azimuth mancante</string>
     <string name="error_length_required">Lunghezza mancante</string>

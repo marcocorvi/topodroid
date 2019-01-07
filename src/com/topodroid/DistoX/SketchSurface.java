@@ -1364,8 +1364,8 @@ class SketchSurface extends SketchShot
       int n1 = n * npts;
       int n2 = (n+1) * npts;
       k = 0;
-      addTriangle( idx[n1+npts-1], idx[n2+npts-1], idx[n1+0] );
-      addTriangle( idx[n1+0],      idx[n2+npts-1], idx[n2+0] );
+      addTriangle( idx[n1+npts-1], idx[n2+npts-1], idx[n1/*+0*/] );
+      addTriangle( idx[n1/*+0*/],  idx[n2+npts-1], idx[n2/*+0*/] );
       for ( ++k; k<npts; ++k ) {
         addTriangle( idx[n1+k-1], idx[n2+k-1], idx[n1+k] );
         addTriangle( idx[n1+k],   idx[n2+k-1], idx[n2+k] );

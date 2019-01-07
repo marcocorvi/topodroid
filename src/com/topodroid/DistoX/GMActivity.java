@@ -117,8 +117,9 @@ public class GMActivity extends Activity
                         R.string.menu_validate,
                         R.string.menu_options, 
                         R.string.menu_help,
-			R.string.menu_hide_deleted
+			R.string.menu_hide_deleted     // alternate 0
                      };
+  static final int menus_length = 4;
 
   static final private int[] help_icons = {
                         R.string.help_toggle,
@@ -245,7 +246,7 @@ public class GMActivity extends Activity
   {
     String address = TDInstance.distoAddress();
     if ( address == null ) return;
-    Long cid = mApp_mDData.getCalibCID( name, address );
+    long cid = mApp_mDData.getCalibCID( name, address );
     if ( cid < 0 ) {
       return;
     }
@@ -1149,7 +1150,7 @@ public class GMActivity extends Activity
       intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_CALIB );
       startActivity( intent );
     } else if ( p++ == pos ) { // HELP
-      new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, menus.length, getResources().getString( HELP_PAGE ) ).show();
+      new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, menus_length, getResources().getString( HELP_PAGE ) ).show();
     }
   }
 

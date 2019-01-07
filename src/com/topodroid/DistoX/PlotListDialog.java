@@ -178,7 +178,7 @@ class PlotListDialog extends MyDialog
     // FIXME_SKETCH_3D
     } else if ( TopoDroidApp.mSketches && b == mBtnSketch3dNew ) {
       if ( mParent != null ) {
-        new Sketch3dNewDialog( mContext, mParent, mApp ).show();
+        new Sketch3dNewDialog( mContext, mParent /*, mApp */ ).show();
       }
     // END_SKETCH_3D //
 

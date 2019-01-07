@@ -43,7 +43,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class PhotoActivity extends Activity
                            implements OnItemClickListener, ILister
 {
-  private TopoDroidApp mApp;
+  // private TopoDroidApp mApp;
   private DataHelper mApp_mData;
 
   private ListView mList;
@@ -152,7 +152,7 @@ public class PhotoActivity extends Activity
   {
     super.onCreate( savedInstanceState );
     setContentView(R.layout.main_photo);
-    mApp = (TopoDroidApp) getApplication();
+    // mApp = (TopoDroidApp) getApplication();
     mApp_mData = TopoDroidApp.mData;
     mDataAdapter = new PhotoAdapter( this, R.layout.row, new ArrayList<PhotoInfo>() );
 

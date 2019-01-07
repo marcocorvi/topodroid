@@ -91,8 +91,8 @@ class SymbolPointLibrary extends SymbolLibrary
 
   // ========================================================================
 
-  final private String p_label = "moveTo 0 3 lineTo 0 -6 lineTo -3 -6 lineTo 3 -6"; // "T" shape
-  final private String p_user = "addCircle 0 0 6";                                  // "o" shape
+  static final private String p_label = "moveTo 0 3 lineTo 0 -6 lineTo -3 -6 lineTo 3 -6"; // "T" shape
+  static final private String p_user = "addCircle 0 0 6";                                  // "o" shape
 
   private void loadSystemPoints( Resources res )
   {

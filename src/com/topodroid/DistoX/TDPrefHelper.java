@@ -22,14 +22,14 @@ import android.content.Context;
 class TDPrefHelper
 {
   private SharedPreferences mPrefs;
-  private Context mCtx;
-  private TopoDroidApp mApp;
+  // private Context mContext;
+  // private TopoDroidApp mApp;
 
-  TDPrefHelper( Context ctx, TopoDroidApp app )
+  TDPrefHelper( Context ctx /*, TopoDroidApp app */ )
   {
-    mCtx   = ctx;
-    mApp   = app;
-    mPrefs = PreferenceManager.getDefaultSharedPreferences( mCtx );
+    // mContext = ctx;
+    // mApp   = app;
+    mPrefs = PreferenceManager.getDefaultSharedPreferences( ctx );
   }
 
   SharedPreferences getSharedPrefs() { return mPrefs; }

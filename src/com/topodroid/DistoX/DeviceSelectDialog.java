@@ -46,7 +46,7 @@ class DeviceSelectDialog extends MyDialog
   private final ILister mLister;
 
   private ListView mList;
-  private Button  mBtnCancel;
+  // private Button  mBtnCancel;
 
   // ---------------------------------------------------------------
   DeviceSelectDialog( Context context, TopoDroidApp app, DataDownloader downloader, ILister lister )
@@ -67,8 +67,9 @@ class DeviceSelectDialog extends MyDialog
     // Log.v("DistoX", "device select dialog init layout");
     initLayout( R.layout.device_select_dialog, R.string.title_device_select );
 
-    mBtnCancel = (Button) findViewById( R.id.button_cancel );
-    mBtnCancel.setOnClickListener( this );
+    // mBtnCancel = (Button) findViewById( R.id.button_cancel );
+    // mBtnCancel.setOnClickListener( this );
+    ( (Button) findViewById( R.id.button_cancel ) ).setOnClickListener( this );
 
     mList = (ListView) findViewById(R.id.dev_list);
     mList.setOnItemClickListener( this );

@@ -66,9 +66,9 @@ class DrawingSurface extends SurfaceView
   public volatile boolean isDrawing = true;
   private DrawingPath mPreviewPath;
   // private SurfaceHolder mHolder; // canvas holder
-  private final Context mContext;
+  // private final Context mContext;
+  // private AttributeSet mAttrs;
   private IZoomer mZoomer = null;
-  private AttributeSet mAttrs;
   private int mWidth;            // canvas width
   private int mHeight;           // canvas height
   private long mType; 
@@ -196,8 +196,8 @@ class DrawingSurface extends SurfaceView
     mHeight = 0;
 
     mDrawThread = null;
-    mContext = context;
-    mAttrs   = attrs;
+    // mContext = context;
+    // mAttrs   = attrs;
     // mHolder = getHolder();
     // mHolder.addCallback(this);
     getHolder().addCallback(this);

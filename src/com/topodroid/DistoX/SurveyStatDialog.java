@@ -32,16 +32,16 @@ import android.widget.ImageView;
 class SurveyStatDialog extends MyDialog
                               implements View.OnClickListener
 {
-  private TextView mTextLeg;
-  private TextView mTextDuplicate;
-  private TextView mTextSurface;
-  private TextView mTextSplay;
-  private TextView mTextStation;
-  private TextView mTextLoop;
-  private TextView mTextComponent;
-  private TextView mTextStddevM;
-  private TextView mTextStddevG;
-  private TextView mTextStddevD;
+  // private TextView mTextLeg;
+  // private TextView mTextDuplicate;
+  // private TextView mTextSurface;
+  // private TextView mTextSplay;
+  // private TextView mTextStation;
+  // private TextView mTextLoop;
+  // private TextView mTextComponent;
+  // private TextView mTextStddevM;
+  // private TextView mTextStddevG;
+  // private TextView mTextStddevD;
 
   private ImageView histG;
   private ImageView histM;
@@ -49,7 +49,7 @@ class SurveyStatDialog extends MyDialog
  
   private SurveyStat mStat;
 
-  private Button mBtnBack;
+  // private Button mBtnBack;
 
   SurveyStatDialog( Context context, SurveyStat stat )
   {
@@ -70,16 +70,16 @@ class SurveyStatDialog extends MyDialog
       String unit_str = TDSetting.mUnitLengthStr;
 
       // TDLog.Log(TDLog.LOG_STAT, " SurveyStat onCreate");
-      mTextLeg       = (TextView) findViewById(R.id.stat_leg);
-      mTextDuplicate = (TextView) findViewById(R.id.stat_duplicate);
-      mTextSurface   = (TextView) findViewById(R.id.stat_surface);
-      mTextSplay     = (TextView) findViewById(R.id.stat_splay);
-      mTextStation   = (TextView) findViewById(R.id.stat_station);
-      mTextLoop      = (TextView) findViewById(R.id.stat_loop);
-      mTextComponent = (TextView) findViewById(R.id.stat_component);
-      mTextStddevM   = (TextView) findViewById(R.id.stat_stddev_m);
-      mTextStddevG   = (TextView) findViewById(R.id.stat_stddev_g);
-      mTextStddevD   = (TextView) findViewById(R.id.stat_stddev_dip);
+      TextView mTextLeg       = (TextView) findViewById(R.id.stat_leg);
+      TextView mTextDuplicate = (TextView) findViewById(R.id.stat_duplicate);
+      TextView mTextSurface   = (TextView) findViewById(R.id.stat_surface);
+      TextView mTextSplay     = (TextView) findViewById(R.id.stat_splay);
+      TextView mTextStation   = (TextView) findViewById(R.id.stat_station);
+      TextView mTextLoop      = (TextView) findViewById(R.id.stat_loop);
+      TextView mTextComponent = (TextView) findViewById(R.id.stat_component);
+      TextView mTextStddevM   = (TextView) findViewById(R.id.stat_stddev_m);
+      TextView mTextStddevG   = (TextView) findViewById(R.id.stat_stddev_g);
+      TextView mTextStddevD   = (TextView) findViewById(R.id.stat_stddev_dip);
 
       histG = (ImageView) findViewById( R.id.histogramG );
       histM = (ImageView) findViewById( R.id.histogramM );
@@ -95,8 +95,9 @@ class SurveyStatDialog extends MyDialog
       histD.setImageBitmap( makeHistogramBitmap( mStat.D, mStat.nrMGD, mStat.averageD, d,
                             400, 100, 40, TDColor.BLUE ) );
 
-      mBtnBack = (Button) findViewById(R.id.btn_back);
-      mBtnBack.setOnClickListener( this );
+      // mBtnBack = (Button) findViewById(R.id.btn_back);
+      // mBtnBack.setOnClickListener( this );
+      ( (Button) findViewById(R.id.btn_back) ).setOnClickListener( this );
 
       mTextLeg.setText( String.format( res.getString(R.string.stat_leg),
                         mStat.countLeg, mStat.lengthLeg * unit, mStat.extLength * unit, mStat.planLength * unit, unit_str ) );

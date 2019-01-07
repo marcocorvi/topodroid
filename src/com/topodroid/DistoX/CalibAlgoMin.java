@@ -130,7 +130,7 @@ class CalibAlgoMin extends CalibAlgo
   {
     float sum = 0;
     for (int i=0; i<idx; i+=4 ) {
-      float x1 = G(i+0).x;
+      float x1 = G(i/*+0*/).x;
       float x2 = G(i+1).x;
       float x3 = G(i+2).x;
       float x4 = G(i+3).x;
@@ -144,7 +144,7 @@ class CalibAlgoMin extends CalibAlgo
   {
     float sum = 0;
     for (int i=0; i<idx; i+=4 ) {
-      float x1 = M(i+0).x;
+      float x1 = M(i/*+0*/).x;
       float x2 = M(i+1).x;
       float x3 = M(i+2).x;
       float x4 = M(i+3).x;

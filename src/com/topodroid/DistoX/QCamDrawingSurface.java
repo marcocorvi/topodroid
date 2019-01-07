@@ -49,7 +49,7 @@ public class QCamDrawingSurface extends SurfaceView
                                 implements SurfaceHolder.Callback 
 {
   private static final String TAG = "DistoX";
-  private final Context mContext;
+  // private final Context mContext;
   QCamCompass mQCam;
 
   private Boolean mDoDraw;
@@ -107,7 +107,7 @@ public class QCamDrawingSurface extends SurfaceView
   public QCamDrawingSurface(Context context, AttributeSet attrs)
   {
     super(context, attrs);
-    mContext = context;
+    // mContext = context;
     // Log.v( TAG, "QCamDrawingSurface cstr" );
     mHolder = getHolder();
     mHolder.addCallback(this);

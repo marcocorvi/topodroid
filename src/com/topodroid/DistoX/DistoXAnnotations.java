@@ -39,7 +39,7 @@ class DistoXAnnotations extends MyDialog // Activity
   // private TextView mTVtitle;
   private EditText mETtext;
   private Button   mButtonOK;
-  private Button   mButtonCancel;
+  // private Button   mButtonCancel;
   private String   mFilename;
   private String   mTitle;
 
@@ -107,7 +107,7 @@ class DistoXAnnotations extends MyDialog // Activity
     // mTVtitle  = (TextView) findViewById(R.id.note_title );
     mETtext   = (EditText) findViewById(R.id.note_text );
     mButtonOK = (Button) findViewById(R.id.button_ok );
-    mButtonCancel = (Button) findViewById(R.id.button_cancel );
+    // mButtonCancel = (Button) findViewById(R.id.button_cancel );
 
     // Bundle extras = getIntent().getExtras();
     // String title  = extras.getString( TopoDroidApp.TOPODROID_SURVEY );
@@ -118,7 +118,8 @@ class DistoXAnnotations extends MyDialog // Activity
     load();
 
     mButtonOK.setOnClickListener( this );
-    mButtonCancel.setOnClickListener( this );
+    // mButtonCancel.setOnClickListener( this );
+    ( (Button) findViewById(R.id.button_cancel ) ).setOnClickListener( this );
   }
 
   @Override

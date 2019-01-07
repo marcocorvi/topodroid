@@ -28,12 +28,12 @@ import android.widget.Button;
 class DeviceNameDialog extends MyDialog
                        implements View.OnClickListener
 {
-  private TextView mTVmodel;
-  private TextView mTVaddress;
-  private TextView mTVname;
+  // private TextView mTVmodel;
+  // private TextView mTVaddress;
+  // private TextView mTVname;
   private EditText mETnickname;
   private Button mBTok;
-  private Button mBTback;
+  // private Button mBTback;
 
   private final DeviceActivity mParent;
   private final Device mDevice;
@@ -53,9 +53,9 @@ class DeviceNameDialog extends MyDialog
 
     initLayout( R.layout.device_name_dialog, R.string.device_info );
 
-    mTVmodel = (TextView) findViewById( R.id.tv_model );
-    mTVname = (TextView) findViewById( R.id.tv_name );
-    mTVaddress = (TextView) findViewById( R.id.tv_address );
+    TextView mTVmodel = (TextView) findViewById( R.id.tv_model );
+    TextView mTVname = (TextView) findViewById( R.id.tv_name );
+    TextView mTVaddress = (TextView) findViewById( R.id.tv_address );
     mETnickname = (EditText) findViewById( R.id.tv_nickname );
 
     // setTitle( mParent.getResources().getString( R.string.device_info ) );
@@ -69,8 +69,9 @@ class DeviceNameDialog extends MyDialog
 
     mBTok = (Button) findViewById( R.id.button_ok );
     mBTok.setOnClickListener( this );
-    mBTback = (Button) findViewById( R.id.button_cancel );
-    mBTback.setOnClickListener( this );
+    // mBTback = (Button) findViewById( R.id.button_cancel );
+    // mBTback.setOnClickListener( this );
+    ((Button)findViewById( R.id.button_cancel ) ).setOnClickListener( this );
   }
 
   @Override

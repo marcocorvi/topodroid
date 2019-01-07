@@ -41,13 +41,13 @@ class PlotRenameDialog extends MyDialog
   private CheckBox mCBcopy;
 
   private final DrawingWindow mParent;
-  private final TopoDroidApp mApp;
+  // private final TopoDroidApp mApp;
 
-  PlotRenameDialog( Context context, DrawingWindow parent, TopoDroidApp app )
+  PlotRenameDialog( Context context, DrawingWindow parent /*, TopoDroidApp app */ )
   {
     super( context, R.string.PlotRenameDialog );
     mParent = parent;
-    mApp    = app;
+    // mApp    = app;
   }
 
 // -------------------------------------------------------------------

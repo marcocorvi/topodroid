@@ -167,16 +167,16 @@ class DataHelper extends DataSetObservable
   // DATABASE
 
   private final Context mContext;
-  private final TopoDroidApp mApp;
+  // private final TopoDroidApp mApp; // unused
 
   public SQLiteDatabase getDb() { return myDB; }
 
 
   // public DataHelper( Context context, TopoDroidApp app, DataListenerSet listeners ) // IF_COSURVEY
-  public DataHelper( Context context, TopoDroidApp app )
+  public DataHelper( Context context /* , TopoDroidApp app */ )
   {
     mContext = context;
-    mApp     = app;
+    // mApp     = app;
     // mListeners = listeners; // IF_COSURVEY
     openDatabase();
   }

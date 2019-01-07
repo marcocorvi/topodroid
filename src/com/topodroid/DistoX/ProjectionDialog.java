@@ -68,7 +68,7 @@ class ProjectionDialog extends MyDialog
 {
   private View mZoomView;
 
-  private final TopoDroidApp mApp;
+  // private final TopoDroidApp mApp;
   private final ShotWindow mParent;
   // private final DrawingUtil mDrawingUtil;
 
@@ -120,7 +120,7 @@ class ProjectionDialog extends MyDialog
     mName   = name;
     mFrom   = from;
     mAzimuth = 0;
-    mApp     = mParent.getApp();
+    // mApp     = mParent.getApp();
   }
 
   private void updateEditText()
@@ -522,7 +522,7 @@ class ProjectionDialog extends MyDialog
       }
    }
 
-   private boolean pointerDown = false;
+   // private boolean pointerDown = false;
 
    public boolean onTouch( View view, MotionEvent rawEvent )
    {
@@ -540,7 +540,7 @@ class ProjectionDialog extends MyDialog
         mTouchMode = DrawingWindow.MODE_ZOOM;
         oldDist = spacing( event );
         saveEventPoint( event );
-        pointerDown = true;
+        // pointerDown = true;
         return true;
       } else if ( action == MotionEvent.ACTION_POINTER_UP) {
         int np = event.getPointerCount();

@@ -40,7 +40,7 @@ class UndeleteDialog extends MyDialog
   private final DataHelper mData;
   private final ShotWindow mParent;
 
-  private Button mBtnCancel;
+  // private Button mBtnCancel;
   private Button mBtnStatus;
 
   // ArrayAdapter< String >  mArrayAdapter;
@@ -115,8 +115,10 @@ class UndeleteDialog extends MyDialog
     mList.setOnItemClickListener( this );
     mList.setDividerHeight( 2 );
 
-    mBtnCancel = (Button) findViewById( R.id.button_cancel );
-    mBtnCancel.setOnClickListener( this );
+    // mBtnCancel = (Button) findViewById( R.id.button_cancel );
+    // mBtnCancel.setOnClickListener( this );
+    ( (Button) findViewById( R.id.button_cancel ) ).setOnClickListener( this );
+
     mBtnStatus = (Button) findViewById( R.id.button_status );
     mBtnStatus.setOnClickListener( this );
 

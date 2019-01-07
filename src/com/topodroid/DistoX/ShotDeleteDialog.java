@@ -33,8 +33,8 @@ class ShotDeleteDialog extends MyDialog
   private final ShotWindow mParent;
   private DBlock mBlk;
 
-  private TextView mTVstations;
-  private TextView mTVdata;
+  // private TextView mTVstations;
+  // private TextView mTVdata;
   private Button   mButtonDelete;
   private CheckBox mCBleg;
   // private Button   mButtonCancel;
@@ -67,8 +67,8 @@ class ShotDeleteDialog extends MyDialog
     mCBleg = (CheckBox) findViewById( R.id.leg );
     mCBleg.setChecked( false );
 
-    mTVstations = (TextView) findViewById( R.id.shot_shot_stations );
-    mTVdata = (TextView) findViewById( R.id.shot_shot_data );
+    TextView mTVstations = (TextView) findViewById( R.id.shot_shot_stations );
+    TextView mTVdata = (TextView) findViewById( R.id.shot_shot_data );
     mTVstations.setText( mBlk.Name() );
     if ( TDInstance.datamode == SurveyInfo.DATAMODE_NORMAL ) {
       mTVdata.setText( mBlk.dataStringNormal( mContext.getResources().getString(R.string.shot_data) ) );

@@ -37,7 +37,7 @@ class PhotoCommentDialog extends MyDialog
   private EditText mETcomment;     // photo comment
   private Button   mButtonOK;
   private CheckBox mCamera;        // whether to use camera app
-  private Button   mButtonCancel;
+  // private Button   mButtonCancel;
   private boolean  cameraCheck;
 
   /**
@@ -64,14 +64,15 @@ class PhotoCommentDialog extends MyDialog
 
     mETcomment = (EditText) findViewById(R.id.photo_comment_comment);
     mButtonOK  = (Button) findViewById(R.id.photo_comment_ok );
-    mButtonCancel = (Button) findViewById(R.id.photo_comment_cancel );
     mCamera    = (CheckBox) findViewById(R.id.photo_camera );
     if ( ! cameraCheck ) {
       mCamera.setVisibility( View.GONE );
     }
 
     mButtonOK.setOnClickListener( this );
-    mButtonCancel.setOnClickListener( this );
+    // mButtonCancel = (Button) findViewById(R.id.photo_comment_cancel );
+    // mButtonCancel.setOnClickListener( this );
+    ( (Button) findViewById(R.id.photo_comment_cancel ) ).setOnClickListener( this );
   }
 
   @Override

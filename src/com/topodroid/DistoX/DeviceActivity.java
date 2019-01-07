@@ -466,7 +466,7 @@ public class DeviceActivity extends Activity
       if ( TDInstance.device == null ) {
         TDToast.make( R.string.no_device_address );
       } else {
-        (new CalibListDialog( this, this, mApp )).show();
+        (new CalibListDialog( this, this /*, mApp */ )).show();
       }
 
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {    // INFO TDLevel.overNormal

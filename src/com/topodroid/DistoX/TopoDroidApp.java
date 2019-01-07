@@ -535,7 +535,7 @@ public class TopoDroidApp extends Application
       e.printStackTrace();
     }
 
-    mPrefHlp    = new TDPrefHelper( this, this );
+    mPrefHlp    = new TDPrefHelper( this /*, this */ );
 
     mWelcomeScreen = mPrefHlp.getBoolean( "DISTOX_WELCOME_SCREEN", true ); // default: WelcomeScreen = true
     if ( mWelcomeScreen ) {
@@ -563,8 +563,8 @@ public class TopoDroidApp extends Application
       // mDData = new DeviceHelper( this, this, null ); 
       //
       // ---- ELSE ----
-      mData  = new DataHelper( this, this ); 
-      mDData = new DeviceHelper( this, this );
+      mData  = new DataHelper( this /*, this */ ); 
+      mDData = new DeviceHelper( this /*, this */ );
 
       // mStationName = new StationName();
 

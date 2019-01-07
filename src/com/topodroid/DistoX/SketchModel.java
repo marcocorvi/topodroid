@@ -13,7 +13,7 @@ package com.topodroid.DistoX;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Iterator;
+// import java.util.Iterator;
 import java.util.Collections;
 import java.util.Locale;
 
@@ -547,9 +547,7 @@ class SketchModel
   {
     if ( mFixedStack != null ) {
       synchronized( mFixedStack ) {
-        final Iterator i = mFixedStack.iterator();
-        while ( i.hasNext() ) {
-          final SketchFixedPath fixed = (SketchFixedPath) i.next();
+        for ( SketchFixedPath fixed : mFixedStack ) {
           if ( mDisplaySplays || ! fixed.isSplay() ) {
             if ( mInfo.isConnectedTo(fixed, mDisplayMode) ) {
               fixed.draw( canvas, mMatrix, mInfo, mActivityMode );
@@ -574,9 +572,7 @@ class SketchModel
     if ( mDisplayMode != SketchDef.DISPLAY_NONE ) {
       if ( mSurfaces != null ) {
         synchronized( mSurfaces ) {
-          final Iterator i = mSurfaces.iterator();
-          while ( i.hasNext() ) {
-            final SketchSurface surface = (SketchSurface) i.next();
+          for ( SketchSurface surface : mSurfaces ) {
             if ( mInfo.isConnectedTo(surface, mDisplayMode) ) {
               surface.draw( canvas, mMatrix, mInfo, mActivityMode, mDisplayForeSurface );
             }
@@ -602,9 +598,7 @@ class SketchModel
 
       if ( mJoins != null ) {
         synchronized( mJoins ) {
-          final Iterator i = mJoins.iterator();
-          while ( i.hasNext() ) {
-            final SketchSurface surface = (SketchSurface) i.next();
+          for ( SketchSurface surface : mJoins ) {
             if ( mInfo.isConnectedTo(surface, mDisplayMode) ) {
               surface.draw( canvas, mMatrix, mInfo, mActivityMode, mDisplayForeSurface );
             }
@@ -614,9 +608,7 @@ class SketchModel
 
       if ( mPaths != null ) {
         synchronized( mPaths ) {
-          final Iterator i = mPaths.iterator();
-          while ( i.hasNext() ) {
-            final SketchPath path = (SketchPath) i.next();
+          for ( SketchPath path : mPaths ) {
             if ( path.mType == DrawingPath.DRAWING_PATH_LINE || path.mType == DrawingPath.DRAWING_PATH_AREA ) {
               SketchLinePath line = ( SketchLinePath ) path;
               if ( mInfo.isConnectedTo(line, mDisplayMode) ) {

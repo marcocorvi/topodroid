@@ -66,7 +66,7 @@ class ShpObject
   // @param yy year [four digit]
   // @param mm month [1..12]
   // @param dd day [1..31]
-  ShpObject( int typ, String pth ) throws IOException
+  ShpObject( int typ, String pth ) // throws IOException
   { 
     geomType  = typ;
     nr    = 0;
@@ -349,7 +349,7 @@ class ShpObject
     }
   }
 
-  private void writeDBaseEOF( )  throws IOException
+  private void writeDBaseEOF( ) // throws IOException
   {
     dbfBuffer.put( (byte)0x1a );
     // drain( dbfBuffer, dbfChannel );

@@ -172,6 +172,19 @@ class TDLog
     }
   }
 
+  static void DoLog( String msg )
+  {
+    if ( msg != null ) {
+      mMillis = System.currentTimeMillis() % 600000;
+      if ( mLogStream == 0 || mLog == null ) {
+        Log.v( TAG, mMillis + " " + msg );
+      } else {
+        mLog.format( "%d: %s\n", mMillis, msg );
+        // mLog.flush(); // autoflush ?
+      }
+    }
+  }
+
   static void LogStackTrace( Exception e )
   {
     StackTraceElement[] trace = e.getStackTrace();

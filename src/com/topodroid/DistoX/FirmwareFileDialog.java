@@ -41,7 +41,7 @@ class FirmwareFileDialog extends MyDialog
   // private TopoDroidApp mApp; // UNUSED
   private final FirmwareDialog mParent;
 
-  private ArrayAdapter<String> mArrayAdapter;
+  // private ArrayAdapter<String> mArrayAdapter;
   private ListView mList;
   // private TextView mTVfile;
 
@@ -59,7 +59,6 @@ class FirmwareFileDialog extends MyDialog
 
     initLayout( R.layout.firmware_file_dialog, R.string.firmware_file_title );
 
-    mArrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
 
     mList = (ListView) findViewById( R.id.list );
     mList.setOnItemClickListener( this );
@@ -84,6 +83,7 @@ class FirmwareFileDialog extends MyDialog
           public int compare( String s1, String s2 ) { return s1.compareToIgnoreCase( s2 ); }
       };
       Collections.sort( names, cmp );
+      ArrayAdapter<String> mArrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
       for ( int k=0; k<names.size(); ++k ) {
         mArrayAdapter.add( names.get(k) );
       }

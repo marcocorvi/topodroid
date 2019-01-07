@@ -37,10 +37,10 @@ class DrawingStationDialog extends MyDialog
                                   implements View.OnClickListener
                                   , IBearingAndClino
 {
-    private TextView mLabel;
-    private TextView mBarrierLabel;
-    private TextView mHiddenLabel;
-    private TextView mCoords;
+    // private TextView mLabel;
+    // private TextView mBarrierLabel;
+    // private TextView mHiddenLabel;
+    // private TextView mCoords;
     private Button mBtnOK;
     private Button mBtnSet;
     private Button mBtnBarrier;
@@ -65,14 +65,15 @@ class DrawingStationDialog extends MyDialog
     private boolean mIsBarrier;
     private boolean mIsHidden;
     private boolean mSensors;
-    private boolean mGlobalXSections;
+    // private boolean mGlobalXSections; // unused
     private float mBearing;
     private float mClino;
     private List<DBlock> mBlk;
 
     DrawingStationDialog( Context context, DrawingWindow parent, DrawingStationName station,
                                  DrawingStationPath path,
-                                 boolean is_barrier, boolean is_hidden, boolean global_xsections, List<DBlock> blk )
+                                 boolean is_barrier, boolean is_hidden, // boolean global_xsections,
+				 List<DBlock> blk )
     {
       super( context, R.string.DrawingStationDialog );
       mParent   = parent;
@@ -81,7 +82,7 @@ class DrawingStationDialog extends MyDialog
       mStationName = mStation.name();
       mIsBarrier = is_barrier; 
       mIsHidden  = is_hidden; 
-      mGlobalXSections = global_xsections;
+      // mGlobalXSections = global_xsections;
       mBlk       = blk;
     }
 
@@ -93,10 +94,10 @@ class DrawingStationDialog extends MyDialog
       String title = mContext.getResources().getString(R.string.STATION) + " " + mStationName;
       initLayout( R.layout.drawing_station_dialog, title );
 
-      mLabel        = (TextView) findViewById(R.id.station_text);
-      mBarrierLabel = (TextView) findViewById(R.id.barrier_text);
-      mHiddenLabel  = (TextView) findViewById(R.id.hidden_text);
-      mCoords       = (TextView) findViewById(R.id.coords);
+      TextView mLabel        = (TextView) findViewById(R.id.station_text);
+      TextView mBarrierLabel = (TextView) findViewById(R.id.barrier_text);
+      TextView mHiddenLabel  = (TextView) findViewById(R.id.hidden_text);
+      TextView mCoords       = (TextView) findViewById(R.id.coords);
       mCoords.setText( mStation.getCoordsString() );
 
       mBtnBarrier  = (Button) findViewById(R.id.btn_break );

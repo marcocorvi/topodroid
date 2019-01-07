@@ -3085,7 +3085,8 @@ public class DrawingWindow extends ItemDrawer
             if ( sn != null ) {
               boolean barrier = mNum.isBarrier( sn.mName );
               boolean hidden  = mNum.isHidden( sn.mName );
-              // new DrawingStationDialog( mActivity, this, sn, barrier, hidden, TDInstance.xsections ).show();
+              List< DBlock > legs = mApp_mData.selectShotsAt( TDInstance.sid, sn.name(), true ); // select "independent" legs
+              // new DrawingStationDialog( mActivity, this, sn, barrier, hidden, // TDInstance.xsections, // legs ).show();
               openXSection( sn, sn.mName, mType );
             }
           }
@@ -3436,7 +3437,7 @@ public class DrawingWindow extends ItemDrawer
       }
 
       // Log.v("DistoX", "line section dialog TT " + tt );
-      new DrawingLineSectionDialog( mActivity, this, mApp, h_section, false, section_id, currentLine, from, to, azimuth, clino, tt ).show();
+      new DrawingLineSectionDialog( mActivity, this, /* mApp, */ h_section, false, section_id, currentLine, from, to, azimuth, clino, tt ).show();
 
     } else { // many legs in profile view
       TDToast.make( R.string.too_many_leg_intersection );
@@ -4706,13 +4707,13 @@ public class DrawingWindow extends ItemDrawer
               boolean barrier = mNum.isBarrier( sn.name() );
               boolean hidden  = mNum.isHidden( sn.name() );
               List< DBlock > legs = mApp_mData.selectShotsAt( TDInstance.sid, sn.name(), true ); // select "independent" legs
-              new DrawingStationDialog( mActivity, this, sn, path, barrier, hidden, TDInstance.xsections, legs ).show();
+              new DrawingStationDialog( mActivity, this, sn, path, barrier, hidden, /* TDInstance.xsections, */ legs ).show();
               break;
             case DrawingPath.DRAWING_PATH_POINT:
               DrawingPointPath point = (DrawingPointPath)(sp.mItem);
               // Log.v("DistoX", "edit point type " + point.mPointType );
               if ( BrushManager.isPointPhoto( point.mPointType ) ) {
-                new DrawingPhotoEditDialog( mActivity, this, mApp, (DrawingPhotoPath)point ).show();
+                new DrawingPhotoEditDialog( mActivity, this, /* mApp, */ (DrawingPhotoPath)point ).show();
               } else if ( BrushManager.isPointAudio( point.mPointType ) ) {
                 if ( audioCheck ) {
                   DrawingAudioPath audio = (DrawingAudioPath)point;
@@ -4733,7 +4734,7 @@ public class DrawingWindow extends ItemDrawer
                 boolean h_section = PlotInfo.isProfile( mType ); // not really necessary
                 String id = line.getOption( "-id" );
                 if ( id != null ) {
-                  new DrawingLineSectionDialog( mActivity, this, mApp, h_section, true, id, line, null, null, 0, 0, -1 ).show();
+                  new DrawingLineSectionDialog( mActivity, this, /* mApp, */ h_section, true, id, line, null, null, 0, 0, -1 ).show();
                 } else {
                   TDLog.Error("edit section line with null id" );
                 }
@@ -5380,7 +5381,7 @@ public class DrawingWindow extends ItemDrawer
 	}
       } else if ( TDLevel.overAdvanced && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // RENAME/DELETE
         //   askDelete();
-        (new PlotRenameDialog( mActivity, this, mApp )).show();
+        (new PlotRenameDialog( mActivity, this /*, mApp */ )).show();
 
       } else if ( p++ == pos ) { // PALETTE
         BrushManager.makePaths( mApp, getResources() );

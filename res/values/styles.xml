@@ -14,12 +14,19 @@
      limitations under the License.
 -->
 
+
 <!--suppress AndroidDomInspection -->
 <resources>
+  <style name="titleBackground">
+    <item name="android:background">#333333</item>
+  </style>
+
+
     <!-- FIXME-23 style name="Theme.FullScreen" parent="@android:Theme.Material.NoActionBar" -->
     <!-- FIXME-16 style name="Theme.FullScreen" parent="@android:Theme.Black" -->
     <style name="Theme.FullScreen" parent="@android:style/Theme.Material.NoActionBar">
       <item name="android:windowNoTitle">false</item>
+      <!-- item name="android:windowTitleBackgroundStyle">@style/titleBackground</item -->
       <item name="android:windowTitleSize">40dp</item>
       <item name="android:windowTitleStyle">@style/titleTextStyle</item>
       <item name="android:windowFullscreen">true</item>

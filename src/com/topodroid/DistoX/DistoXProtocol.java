@@ -229,7 +229,7 @@ class DistoXProtocol
   {
     byte type = (byte)(mBuffer[0] & 0x3f);
     if ( TDLog.LOG_PROTO ) {
-      TDLog.Log( TDLog.LOG_PROTO,
+      TDLog.DoLog(
         "handle packet type " + type + " " + 
         String.format("%02x %02x %02x %02x %02x %02x %02x %02x", mBuffer[0], mBuffer[1], mBuffer[2],
         mBuffer[3], mBuffer[4], mBuffer[5], mBuffer[6], mBuffer[7] ) );
@@ -266,7 +266,7 @@ class DistoXProtocol
         mRoll = r * 180.0 / 128.0;
 
         if ( TDLog.LOG_PROTO ) {
-          TDLog.Log( TDLog.LOG_PROTO, "Proto packet data " + 
+          TDLog.DoLog( "Proto packet data " +
             String.format(Locale.US, " %7.2f %6.1f %6.1f", mDistance, mBearing, mClino ) );
         }
 
@@ -365,7 +365,7 @@ class DistoXProtocol
         { 
           mAcknowledge[0] = (byte)(( mBuffer[0] & 0x80 ) | 0x55);
           if ( TDLog.LOG_PROTO ) {
-            TDLog.Log( TDLog.LOG_PROTO,
+            TDLog.DoLog(
               "read packet byte " + String.format(" %02x", mBuffer[0] ) + " ... writing ack" );
           }
           mOut.write( mAcknowledge, 0, 1 );
@@ -427,7 +427,7 @@ class DistoXProtocol
 
       // DEBUG
       if ( TDLog.LOG_PROTO ) {
-        TDLog.Log( TDLog.LOG_PROTO, 
+        TDLog.DoLog(
           "Proto readToRead Head-Tail " + 
           String.format("%02x%02x-%02x%02x", mBuffer[4], mBuffer[3], mBuffer[6], mBuffer[5] )
           + " " + head + " - " + tail + " = " + ret );

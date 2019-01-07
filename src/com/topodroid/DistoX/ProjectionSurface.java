@@ -43,7 +43,7 @@ public class ProjectionSurface extends SurfaceView
     private DrawThread mDrawThread;
     private volatile boolean isDrawing = true;
     private SurfaceHolder mHolder = null; // canvas holder
-    private final Context mContext;
+    // private final Context mContext;
     // private IZoomer mZoomer = null;
     // private AttributeSet mAttrs;
     private int mWidth;            // canvas width
@@ -72,7 +72,7 @@ public class ProjectionSurface extends SurfaceView
       mHeight = 0;
 
       mDrawThread = null;
-      mContext = context;
+      // mContext = context;
       // mAttrs   = attrs;
       mHolder = getHolder();
       mHolder.addCallback(this);

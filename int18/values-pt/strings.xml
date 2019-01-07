@@ -204,7 +204,7 @@
     <string name="fmt_error_m">Erro: %1$.1f m</string>
     <string name="fmt_h_geoid">Erro (geóide): %1$.0f m</string>
     <string name="fmt_h_ellipsoid">Erro (elipsóide): %1$.0f m</string>
-    <!-- TODO string name="depth_error">Waring. Data depth error</string -->
+    <!-- UNUSED string name="depth_error">Waring. Data depth error</string -->
 
     <string name="error_azimuth_required">Azimute exigido</string>
     <string name="error_length_required">Comprimento exigido</string>

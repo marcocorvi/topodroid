@@ -27,7 +27,7 @@ import android.os.Bundle;
 // import android.os.Handler;
 // import android.os.Message;
 
-import android.content.Context;
+// import android.content.Context;
 import android.content.Intent;
 import android.content.DialogInterface;
 import android.content.ActivityNotFoundException;
@@ -112,7 +112,7 @@ public class SurveyWindow extends Activity
   // private static int icons00[];
 
   // private ShotWindow mParent;
-  private Context mContext;
+  // private Context mContext;
   private Activity mActivity = null;
 
   private boolean mSplayColor;
@@ -143,7 +143,7 @@ public class SurveyWindow extends Activity
 
   private TopoDroidApp mApp;
   private DataHelper   mApp_mData;
-  private boolean mustOpen;
+  // private boolean mustOpen; // unused
   private int mNameColor;
 
   // String getSurveyName() { return TDInstance.survey; }
@@ -212,16 +212,17 @@ public class SurveyWindow extends Activity
     mActivity = this;
     mNameColor = getResources().getColor( R.color.textfixed );
 
-    mContext = this;
-    mustOpen = false;
+    // mContext = this;
+    // mustOpen = false;
     // oldSid = -1L;
     // oldId  = -1L;
-    Bundle extras = getIntent().getExtras();
-    if ( extras != null ) {
-      if ( extras.getInt( TDTag.TOPODROID_SURVEY ) == 1 ) mustOpen = true;
-      // oldSid = extras.getLong( TDTag.TOPODROID_OLDSID );
-      // oldId  = extras.getLong( TDTag.TOPODROID_OLDID );
-    }
+
+    // Bundle extras = getIntent().getExtras();
+    // if ( extras != null ) {
+    //   if ( extras.getInt( TDTag.TOPODROID_SURVEY ) == 1 ) mustOpen = true;
+    //   // oldSid = extras.getLong( TDTag.TOPODROID_OLDSID );
+    //   // oldId  = extras.getLong( TDTag.TOPODROID_OLDID );
+    // }
 
     setContentView(R.layout.survey_activity);
     setTitle( R.string.title_survey );
@@ -593,7 +594,7 @@ public class SurveyWindow extends Activity
     } else if ( mSplayColor && p++ == pos ) { // CLEAR COLOR
       mApp_mData.resetShotColor( TDInstance.sid );
     } else if ( TDLevel.overAdvanced && p++ == pos ) { // INSTRUMENTS CALIBRATION
-      new SurveyCalibrationDialog( mActivity, mApp ).show();
+      new SurveyCalibrationDialog( mActivity /*, mApp */ ).show();
     } else if ( TDLevel.overAdvanced && p++ == pos ) { // CALIBRATION CHECK SHOTS
       List< DBlock > shots = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.CHECK );
       if ( shots.size() == 0 ) {

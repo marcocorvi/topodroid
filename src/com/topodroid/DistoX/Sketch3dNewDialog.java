@@ -29,7 +29,7 @@ import android.view.View;
 class Sketch3dNewDialog extends MyDialog
                                implements View.OnClickListener
 {
-  private final TopoDroidApp mApp;
+  // private final TopoDroidApp mApp;
   private INewPlot mMaker;
 
   private EditText mEditName;
@@ -39,10 +39,10 @@ class Sketch3dNewDialog extends MyDialog
   private Button   mBtnOK;
   // private Button   mBtnCancel;
 
-  Sketch3dNewDialog( Context context, INewPlot maker, TopoDroidApp app )
+  Sketch3dNewDialog( Context context, INewPlot maker /*, TopoDroidApp app */ )
   {
     super( context, R.string.Sketch3dNewDialog );
-    mApp    = app;
+    // mApp    = app;
     mMaker  = maker;
   }
 

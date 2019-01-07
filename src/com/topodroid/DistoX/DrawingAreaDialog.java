@@ -44,7 +44,7 @@ class DrawingAreaDialog extends MyDialog
   private OrientationWidget mOrientationWidget; 
 
   private Button mBtnOk;
-  private Button mBtnCancel;
+  // private Button mBtnCancel;
 
   private MyStateBox mBtnReduce;
 
@@ -89,9 +89,10 @@ class DrawingAreaDialog extends MyDialog
     layout3.addView( mBtnReduce, lp );
 
     mBtnOk = (Button) findViewById( R.id.button_ok );
-    mBtnCancel = (Button) findViewById( R.id.button_cancel );
     mBtnOk.setOnClickListener( this );
-    mBtnCancel.setOnClickListener( this );
+    // mBtnCancel = (Button) findViewById( R.id.button_cancel );
+    // mBtnCancel.setOnClickListener( this );
+    ( (Button) findViewById( R.id.button_cancel ) ).setOnClickListener( this );
   }
 
   @Override

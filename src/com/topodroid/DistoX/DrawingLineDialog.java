@@ -48,7 +48,7 @@ class DrawingLineDialog extends MyDialog
   // private RadioButton mBtnOutlineNone;
 
   private Button mBtnOk;
-  private Button mBtnCancel;
+  // private Button mBtnCancel;
 
   private MyCheckBox mReversed;
   private MyCheckBox mBtnSharp;  // sharp reduce and rock are mutully exclusive
@@ -112,9 +112,10 @@ class DrawingLineDialog extends MyDialog
     mBtnOutlineIn.setOnClickListener( this );
 
     mBtnOk = (Button) findViewById( R.id.button_ok );
-    mBtnCancel = (Button) findViewById( R.id.button_cancel );
     mBtnOk.setOnClickListener( this );
-    mBtnCancel.setOnClickListener( this );
+    // mBtnCancel = (Button) findViewById( R.id.button_cancel );
+    // mBtnCancel.setOnClickListener( this );
+    ( (Button) findViewById( R.id.button_cancel ) ).setOnClickListener( this );
 
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
     mReversed  = new MyCheckBox( mContext, size, R.drawable.iz_reverse_ok, R.drawable.iz_reverse_no );

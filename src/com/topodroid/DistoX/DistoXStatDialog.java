@@ -39,29 +39,29 @@ class DistoXStatDialog extends MyDialog
     private float mAzimuth;
     private SurveyStat mStat;
 
-    private TextView mTextOrigin;
-    private TextView mTextAzimuth;
-    private TextView mTextLength;
-    private TextView mTextExtLen;
-    private TextView mTextProjLen;
-    private TextView mTextWENS;
-    private TextView mTextZminmax;
-    private TextView mTextStations;
-    private TextView mTextShots;
-    private TextView mTextSplays;
+    // private TextView mTextOrigin;
+    // private TextView mTextAzimuth;
+    // private TextView mTextLength;
+    // private TextView mTextExtLen;
+    // private TextView mTextProjLen;
+    // private TextView mTextWENS;
+    // private TextView mTextZminmax;
+    // private TextView mTextStations;
+    // private TextView mTextShots;
+    // private TextView mTextSplays;
     private ListView mList;
     
-    private TextView mTextLeg;
-    private TextView mTextDuplicate;
-    private TextView mTextSurface;
-    private TextView mTextSplay;
-    private TextView mTextStation;
-    private TextView mTextLoop;
-    private TextView mTextComponent;
-    private TextView mTextAngleErr;
+    // private TextView mTextLeg;
+    // private TextView mTextDuplicate;
+    // private TextView mTextSurface;
+    // private TextView mTextSplay;
+    // private TextView mTextStation;
+    // private TextView mTextLoop;
+    // private TextView mTextComponent;
+    // private TextView mTextAngleErr;
 
 
-    private Button mBtnBack;
+    // private Button mBtnBack;
 
     DistoXStatDialog( Context context, DistoXNum num, String origin, float azimuth, SurveyStat stat )
     {
@@ -83,26 +83,26 @@ class DistoXStatDialog extends MyDialog
         float unit = TDSetting.mUnitLength;
         String unit_str = TDSetting.mUnitLengthStr;
 
-        mTextOrigin   = (TextView) findViewById(R.id.text_stat_origin);
-        mTextAzimuth  = (TextView) findViewById(R.id.text_stat_azimuth);
-        mTextLength   = (TextView) findViewById(R.id.text_stat_length);
-        mTextExtLen   = (TextView) findViewById(R.id.text_stat_extlen);
-        mTextProjLen  = (TextView) findViewById(R.id.text_stat_projlen);
-        mTextWENS     = (TextView) findViewById(R.id.text_stat_wens);
-        mTextZminmax  = (TextView) findViewById(R.id.text_stat_zminmax);
-        mTextStations = (TextView) findViewById(R.id.text_stat_stations);
-        mTextShots    = (TextView) findViewById(R.id.text_stat_shots);
-        mTextSplays   = (TextView) findViewById(R.id.text_stat_splays);
+        TextView mTextOrigin   = (TextView) findViewById(R.id.text_stat_origin);
+        TextView mTextAzimuth  = (TextView) findViewById(R.id.text_stat_azimuth);
+        TextView mTextLength   = (TextView) findViewById(R.id.text_stat_length);
+        TextView mTextExtLen   = (TextView) findViewById(R.id.text_stat_extlen);
+        TextView mTextProjLen  = (TextView) findViewById(R.id.text_stat_projlen);
+        TextView mTextWENS     = (TextView) findViewById(R.id.text_stat_wens);
+        TextView mTextZminmax  = (TextView) findViewById(R.id.text_stat_zminmax);
+        TextView mTextStations = (TextView) findViewById(R.id.text_stat_stations);
+        TextView mTextShots    = (TextView) findViewById(R.id.text_stat_shots);
+        TextView mTextSplays   = (TextView) findViewById(R.id.text_stat_splays);
 
-        mTextLeg       = (TextView) findViewById(R.id.stat_leg);
-        mTextDuplicate = (TextView) findViewById(R.id.stat_duplicate);
-        mTextSurface   = (TextView) findViewById(R.id.stat_surface);
-        mTextSplay     = (TextView) findViewById(R.id.stat_splay);
-        mTextStation   = (TextView) findViewById(R.id.stat_station);
-        mTextLoop      = (TextView) findViewById(R.id.stat_loop);
-        mTextComponent = (TextView) findViewById(R.id.stat_component);
+        TextView mTextLeg       = (TextView) findViewById(R.id.stat_leg);
+        TextView mTextDuplicate = (TextView) findViewById(R.id.stat_duplicate);
+        TextView mTextSurface   = (TextView) findViewById(R.id.stat_surface);
+        TextView mTextSplay     = (TextView) findViewById(R.id.stat_splay);
+        TextView mTextStation   = (TextView) findViewById(R.id.stat_station);
+        TextView mTextLoop      = (TextView) findViewById(R.id.stat_loop);
+        TextView mTextComponent = (TextView) findViewById(R.id.stat_component);
 
-        mTextAngleErr  = (TextView) findViewById(R.id.text_stat_angle_error);
+        TextView mTextAngleErr  = (TextView) findViewById(R.id.text_stat_angle_error);
 
         mTextLeg.setText( String.format( res.getString(R.string.stat_leg),
                           mStat.countLeg, mStat.lengthLeg * unit, mStat.extLength * unit, mStat.planLength * unit, unit_str ) );
@@ -130,8 +130,9 @@ class DistoXStatDialog extends MyDialog
           mList.setAdapter( new ArrayAdapter<>( mContext, R.layout.row, cls ) );
         }
 
-        mBtnBack = (Button) findViewById(R.id.btn_back);
-        mBtnBack.setOnClickListener( this );
+        // mBtnBack = (Button) findViewById(R.id.btn_back);
+        // mBtnBack.setOnClickListener( this );
+        ( (Button) findViewById(R.id.btn_back) ).setOnClickListener( this );
 
         mTextOrigin.setText( String.format( res.getString(R.string.stat_origin), mOrigin ) );
 

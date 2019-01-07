@@ -40,10 +40,10 @@ import android.view.View;
 class DrawingPhotoEditDialog extends MyDialog
                              implements View.OnClickListener
 {
-  private final TopoDroidApp  mApp;
+  // private final TopoDroidApp  mApp;
   private final DrawingWindow mParent;
   private DrawingPhotoPath mPhoto;
-  private String mFilename;
+  // private String mFilename;
 
   private EditText mETcomment;  // photo comment
   // private ImageView mIVimage;   // photo image
@@ -66,13 +66,13 @@ class DrawingPhotoEditDialog extends MyDialog
   /**
    * @param context   context
    */
-  DrawingPhotoEditDialog( Context context, DrawingWindow parent, TopoDroidApp app, DrawingPhotoPath photo )
+  DrawingPhotoEditDialog( Context context, DrawingWindow parent, /* TopoDroidApp app, */ DrawingPhotoPath photo )
   {
     super( context, R.string.DrawingPhotoEditDialog );
     mParent = parent;
-    mApp    = app;
+    // mApp    = app;
     mPhoto  = photo;
-    mFilename = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhoto.mId) );
+    String mFilename = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhoto.mId) );
     // TDLog.Log(TDLog.LOG_PHOTO, "DrawingPhotoEditDialog " + mFilename);
     
     mTdImage = new TDImage( mFilename );

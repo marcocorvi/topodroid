@@ -42,7 +42,7 @@ class DrawingShotDialog extends MyDialog
                                , View.OnLongClickListener
 			       , MyColorPicker.IColorChanged
 {
-  private TextView mLabel;
+  // private TextView mLabel;
   private Button mBtnOK;
   private Button mBtnCancel;
   private Button mBtnColor;  // user-set color (tester level)
@@ -104,7 +104,7 @@ class DrawingShotDialog extends MyDialog
     initLayout( R.layout.drawing_shot_dialog,
       String.format( mContext.getResources().getString( R.string.shot_title ), mBlock.mFrom, mBlock.mTo ) );
 
-    mLabel     = (TextView) findViewById(R.id.shot_label);
+    TextView mLabel     = (TextView) findViewById(R.id.shot_label);
     mETfrom    = (EditText) findViewById(R.id.shot_from );
     mETto      = (EditText) findViewById(R.id.shot_to );
     mETcomment = (EditText) findViewById(R.id.shot_comment );

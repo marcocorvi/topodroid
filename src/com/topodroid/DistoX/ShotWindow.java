@@ -1224,7 +1224,7 @@ public class ShotWindow extends Activity
         new PlotListDialog( mActivity, this, mApp, null ).show();
       }
     } else if ( b == mButton1[ BTN_MANUAL - boff ] ) {
-      new SurveyCalibrationDialog( mActivity, mApp ).show();
+      new SurveyCalibrationDialog( mActivity /*, mApp */ ).show();
     } else if ( b == mButton1[ BTN_SEARCH - boff ] ) { // next search pos
       jumpToPos( mSearch.nextPos() );
     }

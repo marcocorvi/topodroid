@@ -80,15 +80,15 @@ class DeviceHelper extends DataSetObservable
   // DATABASE
 
   private final Context mContext;
-  private final TopoDroidApp mApp;
+  // private final TopoDroidApp mApp; // unused
 
   SQLiteDatabase getDb() { return myDB; }
 
   // DeviceHelper( Context context, TopoDroidApp app, ArrayList<DataListener> listeners ) // IF_COSURVEY
-  DeviceHelper( Context context, TopoDroidApp app )
+  DeviceHelper( Context context /* , TopoDroidApp app */ )
   {
     mContext = context;
-    mApp     = app;
+    // mApp     = app;
     // mListeners = listeners; // IF_COSURVEY
     openDatabase();
   }

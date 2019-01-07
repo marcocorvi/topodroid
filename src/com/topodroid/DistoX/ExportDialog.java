@@ -35,7 +35,7 @@ class ExportDialog extends MyDialog
                           implements AdapterView.OnItemSelectedListener, View.OnClickListener
 {
   private Button   mBtnOk;
-  private Button   mBtnBack;
+  // private Button   mBtnBack;
 
   private IExporter mParent;
   private String[]  mTypes;
@@ -65,9 +65,10 @@ class ExportDialog extends MyDialog
     spin.setAdapter( adapter );
 
     mBtnOk   = (Button) findViewById(R.id.button_ok );
-    mBtnBack = (Button) findViewById(R.id.button_back );
     mBtnOk.setOnClickListener( this );
-    mBtnBack.setOnClickListener( this );
+    // mBtnBack = (Button) findViewById(R.id.button_back );
+    // mBtnBack.setOnClickListener( this );
+    ( (Button) findViewById(R.id.button_back ) ).setOnClickListener( this );
 
     // Bundle extras = getIntent().getExtras();
     // String title  = extras.getString( TopoDroidApp.TOPODROID_SURVEY );

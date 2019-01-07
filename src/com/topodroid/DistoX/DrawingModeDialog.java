@@ -82,7 +82,7 @@ class DrawingModeDialog extends MyDialog
 	} else {
           mCBlatest.setVisibility( View.GONE );
 	}
-        if ( /* mParent != null && */ TDLevel.overAdvanced && TDSetting.mPlotShift ) {
+        if ( mParent != null && TDLevel.overAdvanced && TDSetting.mPlotShift ) {
           mCBfixed.setChecked( mParent.mShiftDrawing );
         } else {
           mCBfixed.setVisibility( View.GONE );

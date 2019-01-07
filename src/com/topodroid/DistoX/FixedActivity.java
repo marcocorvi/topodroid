@@ -80,7 +80,7 @@ public class FixedActivity extends Activity
                                     , OnItemClickListener
 {
   private Context mContext;
-  private TopoDroidApp mApp;
+  // private TopoDroidApp mApp; // unused
   private ListView mList;
   private FixedAdapter mFixedAdapter;
 
@@ -115,7 +115,7 @@ public class FixedActivity extends Activity
   {
     super.onCreate(savedInstanceState);
 
-    mApp = (TopoDroidApp)getApplication();
+    // mApp = (TopoDroidApp)getApplication();
     mContext = this;
 
     hasGps = FeatureChecker.checkLocation( mContext );
