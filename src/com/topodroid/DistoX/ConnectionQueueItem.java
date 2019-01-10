@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+/* ---- IF_COSURVEY
+ 
 class ConnectionQueueItem
 {
   byte[] mData;
@@ -47,3 +49,5 @@ class ConnectionQueueItem
   boolean hasId( byte id ) { return id == mData[0]; }
 
 }
+
+*/

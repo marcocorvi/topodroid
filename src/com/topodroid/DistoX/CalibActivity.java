@@ -114,14 +114,14 @@ public class CalibActivity extends Activity
     mButton1[1].setEnabled( isSaved );   // OPEN
     if ( 2 < mNrButton1 ) mButton1[2].setEnabled( isSaved ); // COEFF_READ
     if ( isSaved ) {
-      mButton1[1].setBackgroundDrawable( mBMopen );
+      mButton1[1].setBackground( mBMopen );
       if ( 2 < mNrButton1 ) {
-        mButton1[2].setBackgroundDrawable( mBMread );
+        mButton1[2].setBackground( mBMread );
       }
     } else {
-      mButton1[1].setBackgroundDrawable( mBMopen_no );
+      mButton1[1].setBackground( mBMopen_no );
       if ( 2 < mNrButton1 ) {
-        mButton1[2].setBackgroundDrawable( mBMread_no );
+        mButton1[2].setBackground( mBMread_no );
       }
     }
   }
@@ -223,7 +223,7 @@ public class CalibActivity extends Activity
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
-    mImage.setBackgroundDrawable( MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
+    mImage.setBackground( MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
 
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter( res );
@@ -467,7 +467,7 @@ public class CalibActivity extends Activity
       startActivity( intent );
 
     } else if ( p++ == pos ) { // HELP
-      new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, menus.length, getResources().getString( HELP_PAGE )).show();
+      new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE )).show();
     }
   }
 

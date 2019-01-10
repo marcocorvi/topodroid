@@ -48,8 +48,8 @@ class DrawingUtil
     
   // int toBoundX( float x, float y ) { return Math.round(x); } 
   // int toBoundY( float x, float y ) { return Math.round(y); }
-  static int toBoundX( float x, float y ) { return Math.round(x); } 
-  static int toBoundY( float x, float y ) { return Math.round(y); }
+  static private int toBoundX( float x, float y ) { return Math.round(x); }
+  static private int toBoundY( float x, float y ) { return Math.round(y); }
 
   static
   void makePath( DrawingPath dpath, float xx1, float yy1, float xx2, float yy2 )

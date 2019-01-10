@@ -68,7 +68,7 @@ class MyCheckBox extends CompoundButton
       @Override
       public void onCheckedChanged( CompoundButton b, boolean status )
       {
-        b.setBackgroundDrawable( MyButton.getButtonBackground( mContext, mContext.getResources(), (status ? mIdOn : mIdOff) ) );
+        b.setBackground( MyButton.getButtonBackground( mContext, mContext.getResources(), (status ? mIdOn : mIdOff) ) );
       }
     } );
 
@@ -82,7 +82,7 @@ class MyCheckBox extends CompoundButton
       }
     } );
 
-    this.setBackgroundDrawable( MyButton.getButtonBackground( mContext, mContext.getResources(), (mState ? mIdOn : mIdOff) ) );
+    this.setBackground( MyButton.getButtonBackground( mContext, mContext.getResources(), (mState ? mIdOn : mIdOff) ) );
   }
 
   @Override
@@ -97,7 +97,7 @@ class MyCheckBox extends CompoundButton
   public void setState( boolean state )
   {
     mState = state;
-    this.setBackgroundDrawable( MyButton.getButtonBackground( mContext, mContext.getResources(), (mState ? mIdOn : mIdOff) ) );
+    this.setBackground( MyButton.getButtonBackground( mContext, mContext.getResources(), (mState ? mIdOn : mIdOff) ) );
   }
 
 }

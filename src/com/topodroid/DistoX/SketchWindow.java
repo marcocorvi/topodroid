@@ -886,7 +886,7 @@ public class SketchWindow extends ItemDrawer
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
-    mImage.setBackgroundDrawable( MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
+    mImage.setBackground( MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter( res );
     closeMenu();
@@ -907,22 +907,22 @@ public class SketchWindow extends ItemDrawer
       // FIXME mSketchSurface.setSelectMode( mSelectMode );
       switch ( mSelectMode ) {
         case Drawing.FILTER_ALL:
-          mButton4[ BTN_SELECT_MODE ].setBackgroundDrawable( mBMselectAll );
+          mButton4[ BTN_SELECT_MODE ].setBackground( mBMselectAll );
           break;
         case Drawing.FILTER_POINT:
-          mButton4[ BTN_SELECT_MODE ].setBackgroundDrawable( mBMselectPoint );
+          mButton4[ BTN_SELECT_MODE ].setBackground( mBMselectPoint );
           break;
         case Drawing.FILTER_LINE:
-          mButton4[ BTN_SELECT_MODE ].setBackgroundDrawable( mBMselectLine );
+          mButton4[ BTN_SELECT_MODE ].setBackground( mBMselectLine );
           break;
         case Drawing.FILTER_AREA:
-          mButton4[ BTN_SELECT_MODE ].setBackgroundDrawable( mBMselectArea );
+          mButton4[ BTN_SELECT_MODE ].setBackground( mBMselectArea );
           break;
         case Drawing.FILTER_SHOT:
-          mButton4[ BTN_SELECT_MODE ].setBackgroundDrawable( mBMselectShot );
+          mButton4[ BTN_SELECT_MODE ].setBackground( mBMselectShot );
           break;
         case Drawing.FILTER_STATION:
-          mButton4[ BTN_SELECT_MODE ].setBackgroundDrawable( mBMselectStation );
+          mButton4[ BTN_SELECT_MODE ].setBackground( mBMselectStation );
           break;
       }
     }
@@ -934,15 +934,15 @@ public class SketchWindow extends ItemDrawer
     switch ( mSelectScale ) {
       case Drawing.SCALE_SMALL:
         mSelectSize = 0.5f * TDSetting.mSelectness;
-        mButton4[ BTN_SELECT_SIZE ].setBackgroundDrawable( mBMsmall );
+        mButton4[ BTN_SELECT_SIZE ].setBackground( mBMsmall );
         break;
       case Drawing.SCALE_MEDIUM:
         mSelectSize = 1.0f * TDSetting.mSelectness;
-        mButton4[ BTN_SELECT_SIZE ].setBackgroundDrawable( mBMmedium );
+        mButton4[ BTN_SELECT_SIZE ].setBackground( mBMmedium );
         break;
       case Drawing.SCALE_LARGE:
         mSelectSize = 2.0f * TDSetting.mSelectness;
-        mButton4[ BTN_SELECT_SIZE ].setBackgroundDrawable( mBMlarge );
+        mButton4[ BTN_SELECT_SIZE ].setBackground( mBMlarge );
         break;
     }
   }
@@ -2062,7 +2062,7 @@ public class SketchWindow extends ItemDrawer
       mActivity.startActivity( optionsIntent );
     } else if ( p++ == pos ) { // HELP
       int nn = mNrButton1 + mNrButton2 - GREEN_BTN + /* mNrButton3 - GREEN_BTN */ + mNrButton4 - GREEN_BTN;
-      new HelpDialog(mActivity, izons, menus, help_icons, help_menus, nn, menus.length, getResources().getString( HELP_PAGE ) ).show();
+      new HelpDialog(mActivity, izons, menus, help_icons, help_menus, nn, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
     }
   }
 
@@ -2374,7 +2374,7 @@ public class SketchWindow extends ItemDrawer
   public void enableBluetoothButton( boolean enable )
   {
     // TODO
-    // mButton1[BTN_BLUETOOTH].setBackgroundDrawable( enable ? mBMbluetooth : mBMbluetooth_no );
+    // mButton1[BTN_BLUETOOTH].setBackground( enable ? mBMbluetooth : mBMbluetooth_no );
     // mButton1[BTN_BLUETOOTH].setEnabled( enable );
   }
 

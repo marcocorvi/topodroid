@@ -376,7 +376,7 @@ public class OverviewWindow extends ItemDrawer
     private Button     mImage;
     // HOVER
     // MyMenuAdapter mMenuAdapter;
-    private ArrayAdapter< String > mMenuAdapter;
+    // private ArrayAdapter< String > mMenuAdapter;
     private boolean onMenu;
 
     private List<DBlock> mBlockList = null;
@@ -505,7 +505,7 @@ public class OverviewWindow extends ItemDrawer
 
       mImage = (Button) findViewById( R.id.handle );
       mImage.setOnClickListener( this );
-      mImage.setBackgroundDrawable( MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
+      mImage.setBackground( MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
       mMenu = (ListView) findViewById( R.id.menu );
       setMenuAdapter( res );
       closeMenu();
@@ -1004,7 +1004,7 @@ public class OverviewWindow extends ItemDrawer
         // saveReference( mPlot1, mPid1 );
         // mPid  = mPid2;
         mType = PlotInfo.mPlot2.type; 
-        mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMextend );
+        mButton1[ BTN_PLOT ].setBackground( mBMextend );
         mOverviewSurface.setManager( DrawingSurface.DRAWING_PLAN, (int)mType ); 
         resetReference( mPlot2 );
       } else if ( mType == PlotInfo.PLOT_EXTENDED ) { // PROJECTED not supported on overview
@@ -1012,7 +1012,7 @@ public class OverviewWindow extends ItemDrawer
         // mPid  = mPid1;
         // mName = mName1;
         mType = mPlot1.type;
-        mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMplan );
+        mButton1[ BTN_PLOT ].setBackground( mBMplan );
         mOverviewSurface.setManager( DrawingSurface.DRAWING_PROFILE, (int)mType );
         resetReference( mPlot1 );
       }
@@ -1023,11 +1023,11 @@ public class OverviewWindow extends ItemDrawer
     {
       mOnMeasure = measure;
       if ( mOnMeasure == MEASURE_OFF ) {
-        mButton1[IC_SELECT].setBackgroundDrawable( mBMselect );
+        mButton1[IC_SELECT].setBackground( mBMselect );
         mOverviewSurface.setFirstReference( null );
         mOverviewSurface.setSecondReference( null );
       } else if ( mOnMeasure == MEASURE_START ) {
-        mButton1[IC_SELECT].setBackgroundDrawable( mBMselectOn );
+        mButton1[IC_SELECT].setBackground( mBMselectOn );
         mDDtotal = 0;
         mTotal = 0;
         mOverviewSurface.setSecondReference( null );
@@ -1109,7 +1109,7 @@ public class OverviewWindow extends ItemDrawer
   private void toggleIsContinue( )
   {
     mIsContinue = ! mIsContinue;
-    mButton1[IC_CONTINUE].setBackgroundDrawable( mIsContinue? mBMcontinueOn : mBMcontinueNo );
+    mButton1[IC_CONTINUE].setBackground( mIsContinue? mBMcontinueOn : mBMcontinueNo );
   }
 
 
@@ -1148,7 +1148,7 @@ public class OverviewWindow extends ItemDrawer
   {
     // HOVER
     // mMenuAdapter = new MyMenuAdapter( mActivity, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
-    mMenuAdapter = new ArrayAdapter<>(mActivity, R.layout.menu );
+    ArrayAdapter< String > mMenuAdapter = new ArrayAdapter<>(mActivity, R.layout.menu );
 
     mMenuAdapter.add( res.getString( menus[0] ) );
     mMenuAdapter.add( res.getString( menus[1] ) );
@@ -1176,7 +1176,7 @@ public class OverviewWindow extends ItemDrawer
       intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_PLOT );
       mActivity.startActivity( intent );
     } else if ( p++ == pos ) { // HELP
-      new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, menus.length, getResources().getString( HELP_PAGE ) ).show();
+      new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
     }
   }
 

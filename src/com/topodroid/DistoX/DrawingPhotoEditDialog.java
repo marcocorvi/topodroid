@@ -41,7 +41,7 @@ class DrawingPhotoEditDialog extends MyDialog
                              implements View.OnClickListener
 {
   // private final TopoDroidApp  mApp;
-  private final DrawingWindow mParent;
+  // private final DrawingWindow mParent;
   private DrawingPhotoPath mPhoto;
   // private String mFilename;
 
@@ -66,10 +66,10 @@ class DrawingPhotoEditDialog extends MyDialog
   /**
    * @param context   context
    */
-  DrawingPhotoEditDialog( Context context, DrawingWindow parent, /* TopoDroidApp app, */ DrawingPhotoPath photo )
+  DrawingPhotoEditDialog( Context context, /* DrawingWindow parent, TopoDroidApp app, */ DrawingPhotoPath photo )
   {
     super( context, R.string.DrawingPhotoEditDialog );
-    mParent = parent;
+    // mParent = parent;
     // mApp    = app;
     mPhoto  = photo;
     String mFilename = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhoto.mId) );

@@ -31,15 +31,6 @@ class ParserTherion
 {
   // final static private String EMPTY = "";
 
-  final static private int DATA_NONE       = 0;
-  final static private int DATA_NORMAL     = 1;
-  final static private int DATA_TOPOFIL    = 2;
-  final static private int DATA_CARTESIAN  = 3;
-  final static private int DATA_CYLPOLAR   = 4;
-  final static private int DATA_DIVING     = 5;
-  final static private int DATA_DIMENSION  = 6;
-  final static private int DATA_NOSURVEY   = 7;
-
   String mName = null;  // survey name
   String mDate = null;  // survey date
   private String mTeam = TDString.EMPTY;
@@ -292,7 +283,7 @@ class ParserTherion
                       state.mDeclination = Float.parseFloat( vals[j+1] );
                       ++j;
                       if ( j+1 < vals_len ) { // FIXME check for units
-                        state.mDeclination *= parseAngleUnit( vals[j+1] );
+                        state.mDeclination *= ParserUtil.parseAngleUnit( vals[j+1] );
                         ++j;
                       }
                       if ( ! mApplyDeclination ) mDeclination = state.mDeclination;
@@ -408,11 +399,11 @@ class ParserTherion
                   TDLog.Debug( "therion parser: units without factor " + line ); // this is OK
                 }
                 if ( ulen || uleft || uright || uup || udown ) {
-                  float len = factor * parseLengthUnit( vals[vals_len-1] );
+                  float len = factor * ParserUtil.parseLengthUnit( vals[vals_len-1] );
                   if ( ulen )   state.mUnitLen   = len;
                 } 
                 if ( uber || ucln ) {
-                  float angle = factor * parseAngleUnit( vals[vals_len-1] );
+                  float angle = factor * ParserUtil.parseAngleUnit( vals[vals_len-1] );
                   if ( uber ) state.mUnitBer = angle;
                   if ( ucln ) state.mUnitCln = angle;
                 }
@@ -428,7 +419,7 @@ class ParserTherion
                     try {
                       float declination = Float.parseFloat( vals[1] );
                       if ( 2 < vals_len ) {
-                      declination *= parseAngleUnit( vals[2] );
+                      declination *= ParserUtil.parseAngleUnit( vals[2] );
                       }
                       state.mDeclination = declination;
                       if ( ! mApplyDeclination ) mDeclination = state.mDeclination;
@@ -561,7 +552,7 @@ class ParserTherion
                 // ignore
               } else if ( cmd.equals("extend") ) { 
                 if ( vals_len == 2 ) {
-                  state.mExtend = parseExtend( vals[1], state.mExtend );
+                  state.mExtend = ParserUtil.parseExtend( vals[1], state.mExtend );
                 } else { // not implemented "extend value station [station]
                 }
               } else if ( cmd.equals("station_names") ) {
@@ -584,7 +575,7 @@ class ParserTherion
               } else if ( cmd.equals("data") ) {
                 // data normal from to length compass clino ...
                 if ( vals[1].equals("normal") ) {
-                  state.data_type = DATA_NORMAL;
+                  state.data_type = ParserUtil.DATA_NORMAL;
                   jFrom = jTo = jLength = jCompass = jClino = -1;
                   jLeft = jUp = jRight  = jDown = -1;
                   int j0 = 0;
@@ -614,22 +605,22 @@ class ParserTherion
                   state.in_data = (jFrom >= 0) && (jTo >= 0) && (jLength >= 0) && (jCompass >= 0) && (jClino >= 0);
                 // TODO other style syntax
                 } else if ( vals[1].equals("topofil") ) {
-                  state.data_type = DATA_TOPOFIL;
+                  state.data_type = ParserUtil.DATA_TOPOFIL;
                 } else if ( vals[1].equals("diving") ) {
-                  state.data_type = DATA_DIVING;
+                  state.data_type = ParserUtil.DATA_DIVING;
                 } else if ( vals[1].equals("cartesian") ) {
-                  state.data_type = DATA_CARTESIAN;
+                  state.data_type = ParserUtil.DATA_CARTESIAN;
                 } else if ( vals[1].equals("cylpolar") ) {
-                  state.data_type = DATA_CYLPOLAR;
+                  state.data_type = ParserUtil.DATA_CYLPOLAR;
                 } else if ( vals[1].equals("dimensions") ) {
-                  state.data_type = DATA_DIMENSION;
+                  state.data_type = ParserUtil.DATA_DIMENSION;
                 } else if ( vals[1].equals("nosurvey") ) {
-                  state.data_type = DATA_NOSURVEY;
+                  state.data_type = ParserUtil.DATA_NOSURVEY;
                 } else {
-                  state.data_type = DATA_NONE;
+                  state.data_type = ParserUtil.DATA_NONE;
                 }
               } else if ( state.in_data && vals_len >= 5 ) {
-                if ( state.data_type == DATA_NORMAL ) {
+                if ( state.data_type == ParserUtil.DATA_NORMAL ) {
                   try {
                     int sz = vals.length;
                     String from = vals[jFrom];
@@ -724,45 +715,5 @@ class ParserTherion
     // Log.v( TopoDroidApp.TAG, "ParserTherion shots "+ shots.size() + " splays "+ splays.size() +" fixes "+  fixes.size() );
   }
 
-  private float parseAngleUnit( String unit )
-  {
-    // not handled "percent"
-    if ( unit.startsWith("min") ) return 1/60.0f;
-    if ( unit.startsWith("grad") ) return (float)TopoDroidUtil.GRAD2DEG;
-    if ( unit.startsWith("mil") ) return (float)TopoDroidUtil.GRAD2DEG;
-    // if ( unit.startsWith("deg") ) return 1.0f;
-    return 1.0f;
-  }
 
-  private float parseLengthUnit( String unit )
-  {
-    if ( unit.startsWith("c") ) return 0.01f; // cm centimeter
-    if ( unit.startsWith("f") ) return (float)TopoDroidUtil.FT2M; // ft feet
-    if ( unit.startsWith("i") ) return (float)TopoDroidUtil.IN2M; // in inch
-    if ( unit.startsWith("milli") || unit.equals("mm") ) return 0.001f; // mm millimeter
-    if ( unit.startsWith("y") ) return (float)TopoDroidUtil.YD2M; // yd yard
-    // if ( unit.startsWith("m") ) return 1.0f;
-    return 1.0f;
-  }
-
-  private int parseExtend( String extend, int old_extend )
-  {
-    // skip: hide, start
-    if ( extend.equals("hide") || extend.equals("start") ) {
-      return old_extend;
-    }
-    if ( extend.equals("left") || extend.equals("reverse") ) {
-      return DBlock.EXTEND_LEFT;
-    } 
-    if ( extend.startsWith("vert") ) {
-      return DBlock.EXTEND_VERT;
-    }
-    if ( extend.startsWith("ignore") ) {
-      return DBlock.EXTEND_IGNORE;
-    }
-    // if ( extend.equals("right") || extend.equals("normal") ) {
-    //   return DBlock.EXTEND_RIGHT;
-    // } 
-    return DBlock.EXTEND_RIGHT;
-  }
 }

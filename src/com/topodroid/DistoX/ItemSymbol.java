@@ -160,7 +160,7 @@ class ItemSymbol
     } else {
       mButton.setBackgroundColor( checked? TDColor.DARK_GRAY : TDColor.BLACK ); 
       // if ( checked ) {
-      //   mButton.setBackgroundDrawable( BrushManager.mSymbolHighlight );
+      //   mButton.setBackground( BrushManager.mSymbolHighlight );
       // } else {
       //   mButton.setBackgroundColor( TDColor.BLACK ); 
       // }

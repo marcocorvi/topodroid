@@ -373,8 +373,8 @@ public class DrawingWindow extends ItemDrawer
   private int mMode         = MODE_MOVE;
   private int mTouchMode    = MODE_MOVE;
   private int mContinueLine = CONT_NONE;
-  private float mDownX;
-  private float mDownY;
+  // private float mDownX;
+  // private float mDownY;
   private float mSaveX;
   private float mSaveY;
   private float mSave0X;
@@ -390,7 +390,7 @@ public class DrawingWindow extends ItemDrawer
   // STATUS items
 
   private String mName;   // current-plot name
-  String mName1;          // first name (PLAN)
+  private String mName1;          // first name (PLAN)
   private String mName2;          // second name (EXTENDED/PROJECTED)
   private String mName3;          // third name (SECTION)
   private String mFullName1;      // accessible by the SaveThread
@@ -512,7 +512,7 @@ public class DrawingWindow extends ItemDrawer
   private Button     mImage;
   // HOVER
   // MyMenuAdapter mMenuAdapter;
-  private ArrayAdapter< String > mMenuAdapter;
+  // private ArrayAdapter< String > mMenuAdapter;
   private boolean onMenu;
 
   private int mNrSaveTh2Task = 0; // current number of save tasks
@@ -903,7 +903,7 @@ public class DrawingWindow extends ItemDrawer
     resetModified();
   }
 
-  static private Handler saveHandler = null;
+  // static private Handler saveHandler = null;
 
   String getOrigin() { return mPlot1.start; }
 
@@ -943,6 +943,7 @@ public class DrawingWindow extends ItemDrawer
   {
     if ( psd1 == null ) return;
     int r = ( rotate == 0 )? 0 : psd1.rotate;
+    Handler saveHandler = null;
 
     // Log.v("DistoX", "start save Th2 task. type " + type + " suffix " + suffix 
     //                 + " maxTasks " + maxTasks + " rotate " + rotate ); 
@@ -1207,11 +1208,11 @@ public class DrawingWindow extends ItemDrawer
       // Bitmap bm1 = Bitmap.createScaledBitmap( mBMdial, mButtonSize, mButtonSize, true );
       // Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, mButtonSize, mButtonSize, m, true);
       Bitmap bm2 = mDialBitmap.getBitmap( TDAzimuth.mRefAzimuth, mButtonSize );
-      mButton1[BTN_DIAL].setBackgroundDrawable( new BitmapDrawable( getResources(), bm2 ) );
+      mButton1[BTN_DIAL].setBackground( new BitmapDrawable( getResources(), bm2 ) );
     } else if ( TDAzimuth.mFixedExtend == -1L ) {
-      mButton1[BTN_DIAL].setBackgroundDrawable( mBMleft );
+      mButton1[BTN_DIAL].setBackground( mBMleft );
     } else {
-      mButton1[BTN_DIAL].setBackgroundDrawable( mBMright );
+      mButton1[BTN_DIAL].setBackground( mBMright );
     } 
   }
 
@@ -1264,15 +1265,15 @@ public class DrawingWindow extends ItemDrawer
       mHotItemType = -1;
       mActivity.setTitle( title );
     }
-    mButton3[ BTN_JOIN ].setBackgroundDrawable( bm );
-    mButton3[ BTN_DELETE ].setBackgroundDrawable( deletable ? mBMdelete_on : mBMdelete_off );
+    mButton3[ BTN_JOIN ].setBackground( bm );
+    mButton3[ BTN_DELETE ].setBackground( deletable ? mBMdelete_on : mBMdelete_off );
   }
 
   private void setButton3PrevNext( )
   {
     if ( mHasSelected ) {
-      mButton3[ BTN_SELECT_PREV ].setBackgroundDrawable( mBMprev );
-      mButton3[ BTN_SELECT_NEXT ].setBackgroundDrawable( mBMnext );
+      mButton3[ BTN_SELECT_PREV ].setBackground( mBMprev );
+      mButton3[ BTN_SELECT_NEXT ].setBackground( mBMnext );
     } else {
       setButtonFilterMode( mSelectMode, Drawing.CODE_SELECT );
       setButtonSelectSize( mSelectScale );
@@ -1287,22 +1288,22 @@ public class DrawingWindow extends ItemDrawer
       mButton2[ BTN_CONT ].setVisibility( View.VISIBLE );
       switch ( mContinueLine ) {
         case CONT_NONE:
-          mButton2[ BTN_CONT ].setBackgroundDrawable( mBMcont_none  );
+          mButton2[ BTN_CONT ].setBackground( mBMcont_none  );
           break;
         case CONT_START:
-          mButton2[ BTN_CONT ].setBackgroundDrawable( mBMcont_start  );
+          mButton2[ BTN_CONT ].setBackground( mBMcont_start  );
           break;
         case CONT_END:
-          mButton2[ BTN_CONT ].setBackgroundDrawable( mBMcont_end   );
+          mButton2[ BTN_CONT ].setBackground( mBMcont_end   );
           break;
         case CONT_BOTH:
-          mButton2[ BTN_CONT ].setBackgroundDrawable( mBMcont_both  );
+          mButton2[ BTN_CONT ].setBackground( mBMcont_both  );
           break;
         case CONT_CONTINUE:
-          mButton2[ BTN_CONT ].setBackgroundDrawable( mBMcont_continue  );
+          mButton2[ BTN_CONT ].setBackground( mBMcont_continue  );
           break;
         case CONT_OFF:
-          mButton2[ BTN_CONT ].setBackgroundDrawable( mBMcont_off  );
+          mButton2[ BTN_CONT ].setBackground( mBMcont_off  );
       }
     } else {
       mButton2[ BTN_CONT ].setVisibility( View.GONE );
@@ -1320,16 +1321,16 @@ public class DrawingWindow extends ItemDrawer
       mEraseMode = filter_mode;
       switch ( mEraseMode ) {
         case Drawing.FILTER_ALL:
-          mButton5[ BTN_ERASE_MODE ].setBackgroundDrawable( mBMeraseAll );
+          mButton5[ BTN_ERASE_MODE ].setBackground( mBMeraseAll );
           break;
         case Drawing.FILTER_POINT:
-          mButton5[ BTN_ERASE_MODE ].setBackgroundDrawable( mBMerasePoint );
+          mButton5[ BTN_ERASE_MODE ].setBackground( mBMerasePoint );
           break;
         case Drawing.FILTER_LINE:
-          mButton5[ BTN_ERASE_MODE ].setBackgroundDrawable( mBMeraseLine );
+          mButton5[ BTN_ERASE_MODE ].setBackground( mBMeraseLine );
           break;
         case Drawing.FILTER_AREA:
-          mButton5[ BTN_ERASE_MODE ].setBackgroundDrawable( mBMeraseArea );
+          mButton5[ BTN_ERASE_MODE ].setBackground( mBMeraseArea );
           break;
       }
     } else if ( code == Drawing.CODE_SELECT ) {
@@ -1337,22 +1338,22 @@ public class DrawingWindow extends ItemDrawer
       mDrawingSurface.setSelectMode( mSelectMode );
       switch ( mSelectMode ) {
         case Drawing.FILTER_ALL:
-          mButton3[ BTN_SELECT_MODE ].setBackgroundDrawable( mBMselectAll );
+          mButton3[ BTN_SELECT_MODE ].setBackground( mBMselectAll );
           break;
         case Drawing.FILTER_POINT:
-          mButton3[ BTN_SELECT_MODE ].setBackgroundDrawable( mBMselectPoint );
+          mButton3[ BTN_SELECT_MODE ].setBackground( mBMselectPoint );
           break;
         case Drawing.FILTER_LINE:
-          mButton3[ BTN_SELECT_MODE ].setBackgroundDrawable( mBMselectLine );
+          mButton3[ BTN_SELECT_MODE ].setBackground( mBMselectLine );
           break;
         case Drawing.FILTER_AREA:
-          mButton3[ BTN_SELECT_MODE ].setBackgroundDrawable( mBMselectArea );
+          mButton3[ BTN_SELECT_MODE ].setBackground( mBMselectArea );
           break;
         case Drawing.FILTER_SHOT:
-          mButton3[ BTN_SELECT_MODE ].setBackgroundDrawable( mBMselectShot );
+          mButton3[ BTN_SELECT_MODE ].setBackground( mBMselectShot );
           break;
         case Drawing.FILTER_STATION:
-          mButton3[ BTN_SELECT_MODE ].setBackgroundDrawable( mBMselectStation );
+          mButton3[ BTN_SELECT_MODE ].setBackground( mBMselectStation );
           break;
       }
     }
@@ -1364,22 +1365,22 @@ public class DrawingWindow extends ItemDrawer
     switch ( mEraseScale ) {
       case Drawing.SCALE_SMALL:
         mEraseSize = 0.5f * TDSetting.mEraseness;
-        mButton5[ BTN_ERASE_SIZE ].setBackgroundDrawable( mBMsmall );
+        mButton5[ BTN_ERASE_SIZE ].setBackground( mBMsmall );
         break;
       case Drawing.SCALE_MEDIUM:
         mEraseSize = 1.0f * TDSetting.mEraseness;
-        mButton5[ BTN_ERASE_SIZE ].setBackgroundDrawable( mBMmedium );
+        mButton5[ BTN_ERASE_SIZE ].setBackground( mBMmedium );
         break;
       case Drawing.SCALE_LARGE:
         mEraseSize = 2.0f * TDSetting.mEraseness;
-        mButton5[ BTN_ERASE_SIZE ].setBackgroundDrawable( mBMlarge );
+        mButton5[ BTN_ERASE_SIZE ].setBackground( mBMlarge );
         break;
     }
   }
 
   private void setButtonDelete( boolean on ) 
   {
-    mButton3[ BTN_DELETE ].setBackgroundDrawable( on ? mBMdelete_on : mBMdelete_off );
+    mButton3[ BTN_DELETE ].setBackground( on ? mBMdelete_on : mBMdelete_off );
   }
 
   private void setButtonSelectSize( int scale )
@@ -1388,15 +1389,15 @@ public class DrawingWindow extends ItemDrawer
     switch ( mSelectScale ) {
       case Drawing.SCALE_SMALL:
         mSelectSize = 0.5f * TDSetting.mSelectness;
-        mButton3[ BTN_SELECT_NEXT ].setBackgroundDrawable( mBMsmall );
+        mButton3[ BTN_SELECT_NEXT ].setBackground( mBMsmall );
         break;
       case Drawing.SCALE_MEDIUM:
         mSelectSize = 1.0f * TDSetting.mSelectness;
-        mButton3[ BTN_SELECT_NEXT ].setBackgroundDrawable( mBMmedium );
+        mButton3[ BTN_SELECT_NEXT ].setBackground( mBMmedium );
         break;
       case Drawing.SCALE_LARGE:
         mSelectSize = 2.0f * TDSetting.mSelectness;
-        mButton3[ BTN_SELECT_NEXT ].setBackgroundDrawable( mBMlarge );
+        mButton3[ BTN_SELECT_NEXT ].setBackground( mBMlarge );
         break;
     }
   }
@@ -1473,22 +1474,22 @@ public class DrawingWindow extends ItemDrawer
     mApp.mSplayMode = mode;
     switch ( mode ) {
       case 0:
-        mButton1[ BTN_PLOT ].setBackgroundDrawable( mApp.mShowSectionSplays? mBMsplayNone : mBMsplayNoneBlack );
+        mButton1[ BTN_PLOT ].setBackground( mApp.mShowSectionSplays? mBMsplayNone : mBMsplayNoneBlack );
         if ( PlotInfo.isSection( mType ) ) mDrawingSurface.hideStationSplays( mTo );
         mDrawingSurface.hideStationSplays( mFrom );
         break;
       case 1:
-        mButton1[ BTN_PLOT ].setBackgroundDrawable( mApp.mShowSectionSplays? mBMsplayFront : mBMsplayFrontBlack );
+        mButton1[ BTN_PLOT ].setBackground( mApp.mShowSectionSplays? mBMsplayFront : mBMsplayFrontBlack );
         if ( PlotInfo.isSection( mType ) ) mDrawingSurface.showStationSplays( mTo );
         mDrawingSurface.hideStationSplays( mFrom );
         break;
       case 2:
-        mButton1[ BTN_PLOT ].setBackgroundDrawable( mApp.mShowSectionSplays? mBMsplayBoth : mBMsplayBothBlack );
+        mButton1[ BTN_PLOT ].setBackground( mApp.mShowSectionSplays? mBMsplayBoth : mBMsplayBothBlack );
         if ( PlotInfo.isSection( mType ) ) mDrawingSurface.showStationSplays( mTo );
         mDrawingSurface.showStationSplays( mFrom );
         break;
       case 3:
-        mButton1[ BTN_PLOT ].setBackgroundDrawable( mApp.mShowSectionSplays? mBMsplayBack : mBMsplayBackBlack );
+        mButton1[ BTN_PLOT ].setBackground( mApp.mShowSectionSplays? mBMsplayBack : mBMsplayBackBlack );
         if ( PlotInfo.isSection( mType ) ) mDrawingSurface.hideStationSplays( mTo );
         mDrawingSurface.showStationSplays( mFrom );
         break;
@@ -1692,7 +1693,7 @@ public class DrawingWindow extends ItemDrawer
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
     // mImage.setBackgroundResource( icons00[ IC_MENU ] );
-    mImage.setBackgroundDrawable( MyButton.getButtonBackground( mApp, getResources(), izons[IC_MENU] ) );
+    mImage.setBackground( MyButton.getButtonBackground( mApp, getResources(), izons[IC_MENU] ) );
     mMenu = (ListView) findViewById( R.id.menu );
     // HOVER
     mMenu.setOnItemClickListener( this );
@@ -2335,7 +2336,7 @@ public class DrawingWindow extends ItemDrawer
           // }
           if ( mDoEditRange > 0 ) {
             // mDoEditRange = false;
-            // mButton3[ BTN_BORDER ].setBackgroundDrawable( mBMedit_no );
+            // mButton3[ BTN_BORDER ].setBackground( mBMedit_no );
             if ( mDrawingSurface.setRangeAt( x, y, mZoom, mDoEditRange, size ) ) {
               mMode = MODE_SHIFT;
               return;
@@ -2467,7 +2468,7 @@ public class DrawingWindow extends ItemDrawer
       TopoDroidApp.mShotWindow.updateDisplay(); // FIXME ???
     }
 
-    void deletePoint( DrawingPointPath point ) 
+    void deletePoint( DrawingPointPath point )
     {
       if ( point == null ) return;
       mDrawingSurface.deletePath( point ); 
@@ -2596,7 +2597,7 @@ public class DrawingWindow extends ItemDrawer
   }
   */
 
-  float spacing( MotionEventWrap ev )
+  private float spacing( MotionEventWrap ev )
   {
     int np = ev.getPointerCount();
     if ( np < 2 ) return 0.0f;
@@ -2605,7 +2606,7 @@ public class DrawingWindow extends ItemDrawer
     return (float)Math.sqrt(x*x + y*y);
   }
 
-  void saveEventPoint( MotionEventWrap ev )
+  private void saveEventPoint( MotionEventWrap ev )
   {
     int np = ev.getPointerCount();
     if ( np >= 1 ) {
@@ -3150,8 +3151,8 @@ public class DrawingWindow extends ItemDrawer
       setTheTitle( );
       mSaveX = xc; // FIXME-000
       mSaveY = yc;
-      mDownX = xc;
-      mDownY = yc;
+      // mDownX = xc;
+      // mDownY = yc;
       return false;
 
     } else if ( mMode == MODE_ERASE ) {
@@ -4387,7 +4388,7 @@ public class DrawingWindow extends ItemDrawer
       mPid  = mPid3;
       mName = mName3;
       mType = mPlot3.type;
-      // mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMextend );
+      // mButton1[ BTN_PLOT ].setBackground( mBMextend );
       mDrawingSurface.setManager( DrawingSurface.DRAWING_SECTION, (int)mType );
       resetReference( mPlot3 );
     } 
@@ -4398,7 +4399,7 @@ public class DrawingWindow extends ItemDrawer
       mPid  = mPid2;
       mName = mName2;
       mType = mPlot2.type;
-      mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMextend );
+      mButton1[ BTN_PLOT ].setBackground( mBMextend );
       mDrawingSurface.setManager( DrawingSurface.DRAWING_PROFILE, (int)mType );
       if ( compute && mNum != null ) {
         computeReferences( mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, true );
@@ -4418,7 +4419,7 @@ public class DrawingWindow extends ItemDrawer
       mPid  = mPid1;
       mName = mName1;
       mType = mPlot1.type;
-      mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMplan );
+      mButton1[ BTN_PLOT ].setBackground( mBMplan );
       mDrawingSurface.setManager( DrawingSurface.DRAWING_PLAN, (int)mType );
       if ( compute && mNum != null ) {
         computeReferences( mPlot1.type, mPlot1.name, TopoDroidApp.mScaleFactor, true );
@@ -4713,7 +4714,7 @@ public class DrawingWindow extends ItemDrawer
               DrawingPointPath point = (DrawingPointPath)(sp.mItem);
               // Log.v("DistoX", "edit point type " + point.mPointType );
               if ( BrushManager.isPointPhoto( point.mPointType ) ) {
-                new DrawingPhotoEditDialog( mActivity, this, /* mApp, */ (DrawingPhotoPath)point ).show();
+                new DrawingPhotoEditDialog( mActivity, /* this, mApp, */ (DrawingPhotoPath)point ).show();
               } else if ( BrushManager.isPointAudio( point.mPointType ) ) {
                 if ( audioCheck ) {
                   DrawingAudioPath audio = (DrawingAudioPath)point;
@@ -4794,13 +4795,13 @@ public class DrawingWindow extends ItemDrawer
         if ( BTN_BORDER < mButton3.length ) {
           switch ( mDoEditRange ) {
             case 0:
-              mButton3[ BTN_BORDER ].setBackgroundDrawable( mBMedit_no );
+              mButton3[ BTN_BORDER ].setBackground( mBMedit_no );
               break;
             case 1:
-              mButton3[ BTN_BORDER ].setBackgroundDrawable( mBMedit_ok );
+              mButton3[ BTN_BORDER ].setBackground( mBMedit_ok );
               break;
             case 2:
-              mButton3[ BTN_BORDER ].setBackgroundDrawable( mBMedit_box );
+              mButton3[ BTN_BORDER ].setBackground( mBMedit_box );
               break;
           }
         }
@@ -5008,7 +5009,7 @@ public class DrawingWindow extends ItemDrawer
     // }
 
 
-  static private Handler th2Handler = null;
+  // static private Handler th2Handler = null;
 
   // called (indirectly) only by ExportDialog: save as th2 even if there are missing symbols
   // no backup_rotate (rotate = 0)
@@ -5017,6 +5018,7 @@ public class DrawingWindow extends ItemDrawer
   {
     DrawingCommandManager manager = mDrawingSurface.getManager( type );
     if ( manager == null ) return;
+    Handler th2Handler = null;
 
     int suffix = PlotSave.EXPORT;
     int azimuth = 0;
@@ -5253,7 +5255,7 @@ public class DrawingWindow extends ItemDrawer
 
   private void setMenuAdapter( Resources res, long type )
   {
-    mMenuAdapter = new ArrayAdapter<>(mActivity, R.layout.menu );
+    ArrayAdapter< String > mMenuAdapter = new ArrayAdapter<>(mActivity, R.layout.menu );
     // HOVER
     // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
 
@@ -5534,28 +5536,28 @@ public class DrawingWindow extends ItemDrawer
   public void setConnectionStatus( int status )
   { 
     if ( TDInstance.device == null ) {
-      mButton1[ BTN_DOWNLOAD ].setBackgroundDrawable( mBMadd );
-      mButton1[ BTN_BLUETOOTH ].setBackgroundDrawable( mBMbluetooth_no );
+      mButton1[ BTN_DOWNLOAD ].setBackground( mBMadd );
+      mButton1[ BTN_BLUETOOTH ].setBackground( mBMbluetooth_no );
     } else {
       switch ( status ) {
         case 1:
-          mButton1[ BTN_DOWNLOAD ].setBackgroundDrawable( mBMdownload_on );
-          mButton1[ BTN_BLUETOOTH ].setBackgroundDrawable( mBMbluetooth_no );
+          mButton1[ BTN_DOWNLOAD ].setBackground( mBMdownload_on );
+          mButton1[ BTN_BLUETOOTH ].setBackground( mBMbluetooth_no );
           break;
         case 2:
-          mButton1[ BTN_DOWNLOAD ].setBackgroundDrawable( mBMdownload_wait );
-          mButton1[ BTN_BLUETOOTH ].setBackgroundDrawable( mBMbluetooth_no );
+          mButton1[ BTN_DOWNLOAD ].setBackground( mBMdownload_wait );
+          mButton1[ BTN_BLUETOOTH ].setBackground( mBMbluetooth_no );
           break;
         default:
-          mButton1[ BTN_DOWNLOAD ].setBackgroundDrawable( mBMdownload );
-          mButton1[ BTN_BLUETOOTH ].setBackgroundDrawable( mBMbluetooth );
+          mButton1[ BTN_DOWNLOAD ].setBackground( mBMdownload );
+          mButton1[ BTN_BLUETOOTH ].setBackground( mBMbluetooth );
       }
     }
   }
 
   public void enableBluetoothButton( boolean enable )
   {
-    mButton1[BTN_BLUETOOTH].setBackgroundDrawable( enable ? mBMbluetooth : mBMbluetooth_no );
+    mButton1[BTN_BLUETOOTH].setBackground( enable ? mBMbluetooth : mBMbluetooth_no );
     mButton1[BTN_BLUETOOTH].setEnabled( enable );
   }
 

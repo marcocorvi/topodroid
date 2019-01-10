@@ -113,9 +113,9 @@ class DeviceHelper extends DataSetObservable
         return;
       }
 
-      while ( myDB.isDbLockedByOtherThreads() ) {
-        TopoDroidUtil.slowDown( 200 );
-      }
+      // while ( myDB.isDbLockedByOtherThreads() ) {
+      //   TopoDroidUtil.slowDown( 200 );
+      // }
 
       //noinspection SyntaxError
       updateConfig = myDB.compileStatement( "UPDATE configs SET value=? WHERE key=?" );
@@ -1064,7 +1064,7 @@ class DeviceHelper extends DataSetObservable
       @SuppressWarnings("SyntaxError")
       private void createTables(SQLiteDatabase db )
       {
-         db.setLockingEnabled( false );
+         // db.setLockingEnabled( false );
          db.beginTransaction();
          try {
            db.execSQL( 
@@ -1125,7 +1125,7 @@ class DeviceHelper extends DataSetObservable
          } catch ( SQLException e ) { TDLog.Error( "createTables exception " + e.toString() );
          } finally {
            db.endTransaction();
-           db.setLockingEnabled( true );
+           // db.setLockingEnabled( true );
          }
       }
 

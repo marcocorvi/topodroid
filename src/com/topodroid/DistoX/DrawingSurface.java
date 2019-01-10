@@ -75,13 +75,13 @@ class DrawingSurface extends SurfaceView
 
   static private DrawingCommandManager commandManager = null; 
 
-  static DrawingCommandManager mCommandManager1 = null; 
-  static DrawingCommandManager mCommandManager2 = null; 
-  static DrawingCommandManager mCommandManager3 = null;
+  static private DrawingCommandManager mCommandManager1 = null;
+  static private DrawingCommandManager mCommandManager2 = null;
+  static private DrawingCommandManager mCommandManager3 = null;
 
   // private ArrayList< String > mSplayStationsOn;  // stations where to show splays
   // private ArrayList< String > mSplayStationsOff; // stations where not to show splays
-  DrawingStationSplay mStationSplay;
+  private DrawingStationSplay mStationSplay;
 
   public boolean isDrawing() { return isDrawing; }
 

@@ -259,12 +259,12 @@ public class ShotWindow extends Activity
         // Bitmap bm1 = Bitmap.createScaledBitmap( mBMdial, mButtonSize, mButtonSize, true );
         // Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, mButtonSize, mButtonSize, m, true);
 	Bitmap bm2 = mDialBitmap.getBitmap( TDAzimuth.mRefAzimuth, mButtonSize );
-        mButton1[ BTN_AZIMUTH - boff ].setBackgroundDrawable( new BitmapDrawable( getResources(), bm2 ) );
+        mButton1[ BTN_AZIMUTH - boff ].setBackground( new BitmapDrawable( getResources(), bm2 ) );
       }
     } else if ( TDAzimuth.mFixedExtend == -1L ) {
-      mButton1[ BTN_AZIMUTH - boff ].setBackgroundDrawable( mBMleft );
+      mButton1[ BTN_AZIMUTH - boff ].setBackground( mBMleft );
     } else {
-      mButton1[ BTN_AZIMUTH - boff ].setBackgroundDrawable( mBMright );
+      mButton1[ BTN_AZIMUTH - boff ].setBackground( mBMright );
     } 
   }
 
@@ -682,7 +682,7 @@ public class ShotWindow extends Activity
       mActivity.startActivity( intent );
     } else if ( p++ == pos ) { // HELP
       // int nn = mNrButton1; //  + ( TDLevel.overNormal ?  mNrButton2 : 0 );
-      new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, menus.length, getResources().getString( HELP_PAGE ) ).show();
+      new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
     }
   }
 
@@ -1024,7 +1024,7 @@ public class ShotWindow extends Activity
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
-    mImage.setBackgroundDrawable( MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
+    mImage.setBackground( MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
 
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter( getResources() );
@@ -1046,7 +1046,7 @@ public class ShotWindow extends Activity
   // {
   //   mApp.mEnableZip = enabled;
   //   mButton1[ BTN_PLOT - boff ].setEnabled( enabled ); // FIXME SKETCH BUTTON 
-  //   mButton1[ BTN_PLOT - boff ].setBackgroundDrawable( enabled ? mBMplot : mBMplot_no );
+  //   mButton1[ BTN_PLOT - boff ].setBackground( enabled ? mBMplot : mBMplot_no );
   // }
 
   // @Override
@@ -2059,22 +2059,22 @@ public class ShotWindow extends Activity
     if ( diving ) return;
     if ( TDInstance.device == null ) {
       // mButton1[ BTN_DOWNLOAD ].setVisibility( View.GONE );
-      mButton1[BTN_DOWNLOAD].setBackgroundDrawable( mBMdownload_no );
-      mButton1[BTN_BLUETOOTH].setBackgroundDrawable( mBMbluetooth_no );
+      mButton1[BTN_DOWNLOAD].setBackground( mBMdownload_no );
+      mButton1[BTN_BLUETOOTH].setBackground( mBMbluetooth_no );
     } else {
       // mButton1[ BTN_DOWNLOAD ].setVisibility( View.VISIBLE );
       switch ( status ) {
         case 1:
-          mButton1[BTN_DOWNLOAD].setBackgroundDrawable( mBMdownload_on );
-          mButton1[BTN_BLUETOOTH].setBackgroundDrawable( mBMbluetooth_no );
+          mButton1[BTN_DOWNLOAD].setBackground( mBMdownload_on );
+          mButton1[BTN_BLUETOOTH].setBackground( mBMbluetooth_no );
           break;
         case 2:
-          mButton1[BTN_DOWNLOAD].setBackgroundDrawable( mBMdownload_wait );
-          mButton1[BTN_BLUETOOTH].setBackgroundDrawable( mBMbluetooth_no );
+          mButton1[BTN_DOWNLOAD].setBackground( mBMdownload_wait );
+          mButton1[BTN_BLUETOOTH].setBackground( mBMbluetooth_no );
           break;
         default:
-          mButton1[BTN_DOWNLOAD].setBackgroundDrawable( mBMdownload );
-          mButton1[BTN_BLUETOOTH].setBackgroundDrawable( mBMbluetooth );
+          mButton1[BTN_DOWNLOAD].setBackground( mBMdownload );
+          mButton1[BTN_BLUETOOTH].setBackground( mBMbluetooth );
       }
     }
   }
@@ -2082,7 +2082,7 @@ public class ShotWindow extends Activity
   public void enableBluetoothButton( boolean enable )
   {
     if ( diving ) return;
-    mButton1[BTN_BLUETOOTH].setBackgroundDrawable( enable ? mBMbluetooth : mBMbluetooth_no );
+    mButton1[BTN_BLUETOOTH].setBackground( enable ? mBMbluetooth : mBMbluetooth_no );
     mButton1[BTN_BLUETOOTH].setEnabled( enable );
   }
 

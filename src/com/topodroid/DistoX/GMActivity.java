@@ -119,7 +119,6 @@ public class GMActivity extends Activity
                         R.string.menu_help,
 			R.string.menu_hide_deleted     // alternate 0
                      };
-  static final int menus_length = 4;
 
   static final private int[] help_icons = {
                         R.string.help_toggle,
@@ -566,8 +565,8 @@ public class GMActivity extends Activity
         TDToast.make( mApp.DistoXConnectionError[ -nr ] );
       }
     }
-    mButton1[BTN_DOWNLOAD].setBackgroundDrawable( mBMdownload );
-    // mButton1[BTN_BT].setBackgroundDrawable( mBMbluetooth );
+    mButton1[BTN_DOWNLOAD].setBackground( mBMdownload );
+    // mButton1[BTN_BT].setBackground( mBMbluetooth );
     // mButton1[BTN_BT].setEnabled( true );
     // mButton1[BTN_TOGGLE].setEnabled( true );
     enableButtons( true );
@@ -741,7 +740,7 @@ public class GMActivity extends Activity
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
-    mImage.setBackgroundDrawable( MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
+    mImage.setBackground( MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter( res );
     onMenu = true;
@@ -765,11 +764,11 @@ public class GMActivity extends Activity
     mEnableWrite = enable;
     // if ( TDLevel.overBasic ) {
     //   mButton1[BTN_COVER].setEnabled( enable );
-    //   mButton1[BTN_COVER].setBackgroundDrawable( ( enable ? mBMcover : mBMcover_no ) );
+    //   mButton1[BTN_COVER].setBackground( ( enable ? mBMcover : mBMcover_no ) );
     // }
     if ( TDLevel.overNormal ) {
       mButton1[BTN_WRITE].setEnabled( enable );
-      mButton1[BTN_WRITE].setBackgroundDrawable( ( enable ? mBMwrite : mBMwrite_no ) );
+      mButton1[BTN_WRITE].setBackground( ( enable ? mBMwrite : mBMwrite_no ) );
     }
   }
 
@@ -782,22 +781,22 @@ public class GMActivity extends Activity
     mButton1[BTN_BT].setEnabled( enable );
     // if ( TDLevel.overBasic ) {
     //   mButton1[BTN_COVER].setEnabled( enable2 );
-    //   mButton1[BTN_COVER].setBackgroundDrawable( ( enable2 ? mBMcover : mBMcover_no ) );
+    //   mButton1[BTN_COVER].setBackground( ( enable2 ? mBMcover : mBMcover_no ) );
     // }
     if ( TDLevel.overNormal ) {
       mButton1[BTN_READ].setEnabled( enable );
-      mButton1[BTN_READ].setBackgroundDrawable( ( enable ? mBMread : mBMread_no ) );
+      mButton1[BTN_READ].setBackground( ( enable ? mBMread : mBMread_no ) );
       mButton1[BTN_WRITE].setEnabled( enable2 );
-      mButton1[BTN_WRITE].setBackgroundDrawable( ( enable2 ? mBMwrite : mBMwrite_no ) );
+      mButton1[BTN_WRITE].setBackground( ( enable2 ? mBMwrite : mBMwrite_no ) );
     }
     if ( enable ) {
       setTitleColor( TDColor.TITLE_NORMAL );
-      mButton1[BTN_TOGGLE].setBackgroundDrawable( mBMtoggle );
-      mButton1[BTN_BT].setBackgroundDrawable( mBMbluetooth );
+      mButton1[BTN_TOGGLE].setBackground( mBMtoggle );
+      mButton1[BTN_BT].setBackground( mBMbluetooth );
     } else {
       setTitleColor( TDColor.CONNECTED );
-      mButton1[BTN_TOGGLE].setBackgroundDrawable( mBMtoggle_no );
-      mButton1[BTN_BT].setBackgroundDrawable( mBMbluetooth_no );
+      mButton1[BTN_TOGGLE].setBackground( mBMtoggle_no );
+      mButton1[BTN_BT].setBackground( mBMbluetooth_no );
     }
   }
 
@@ -813,7 +812,7 @@ public class GMActivity extends Activity
 
   public void enableBluetoothButton( boolean enable )
   {
-    mButton1[BTN_BT].setBackgroundDrawable( enable ? mBMbluetooth : mBMbluetooth_no );
+    mButton1[BTN_BT].setBackground( enable ? mBMbluetooth : mBMbluetooth_no );
     mButton1[BTN_BT].setEnabled( enable );
   }
 
@@ -867,7 +866,7 @@ public class GMActivity extends Activity
         setTitleColor( TDColor.CONNECTED );
         ListerHandler handler = new ListerHandler( this ); // FIXME_LISTER
         new DataDownloadTask( mApp, handler, this ).execute();
-        mButton1[ BTN_DOWNLOAD ].setBackgroundDrawable( mBMdownload_on );
+        mButton1[ BTN_DOWNLOAD ].setBackground( mBMdownload_on );
         enableButtons( false );
       }
 
@@ -1150,7 +1149,7 @@ public class GMActivity extends Activity
       intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_CALIB );
       startActivity( intent );
     } else if ( p++ == pos ) { // HELP
-      new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, menus_length, getResources().getString( HELP_PAGE ) ).show();
+      new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
     }
   }
 

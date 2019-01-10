@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+/* ---- IF_COSURVEY
+ 
 class ConnectionQueue
 {
   private int mSize;
@@ -91,5 +93,6 @@ class ConnectionQueue
     mSize = 0;
   }
 
-
 }
+
+*/

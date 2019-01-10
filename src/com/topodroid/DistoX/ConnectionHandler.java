@@ -11,9 +11,11 @@
  */
 package com.topodroid.DistoX;
 
-// import android.os.Handler;
-// import android.os.Message;
-// import android.os.Bundle;
+/* ---- IF_COSURVEY
+ 
+import android.os.Handler;
+import android.os.Message;
+import android.os.Bundle;
 
 // import android.content.Intent;
 
@@ -21,13 +23,11 @@ package com.topodroid.DistoX;
 
 // import java.util.ArrayList;
 // import java.util.concurrent.ConcurrentLinkedQueue;
-// import java.util.Locale;
+import java.util.Locale;
 
 // import android.bluetooth.BluetoothAdapter;
-//
-//  import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothDevice;
 
-/* ---- IF_COSURVEY
 
 class ConnectionHandler extends Handler
                         implements DataListener

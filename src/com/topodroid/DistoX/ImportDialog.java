@@ -44,7 +44,7 @@ class ImportDialog extends MyDialog
   // private final TopoDroidApp mApp;
   private final MainWindow mParent;
 
-  private ArrayAdapter<String> mArrayAdapter;
+  // private ArrayAdapter<String> mArrayAdapter;
   private ListView mList;
   // private Button mBtnCancel;
 
@@ -61,7 +61,7 @@ class ImportDialog extends MyDialog
     super.onCreate( savedInstanceState );
     initLayout( R.layout.import_dialog, R.string.import_title );
 
-    mArrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
+    ArrayAdapter<String> mArrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
     mList = (ListView) findViewById(R.id.list);
     mList.setOnItemClickListener( this );
     mList.setDividerHeight( 2 );

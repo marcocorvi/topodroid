@@ -23,8 +23,8 @@ import android.widget.LinearLayout;
 
 class HelpEntry
 {
-  private Button   mButton   = null;
-  private TextView mTextView = null;
+  // private Button   mButton   = null;
+  // private TextView mTextView = null;
   LinearLayout mView;
 
   /**
@@ -34,8 +34,8 @@ class HelpEntry
    */
   HelpEntry( Context context, int icon, int text, boolean is_text )
   {
-    mButton   = new Button( context );
-    mTextView = new TextView( context );
+    Button mButton   = new Button( context );
+    TextView mTextView = new TextView( context );
 
     if ( is_text ) {
       mButton.setText( icon );
@@ -43,7 +43,7 @@ class HelpEntry
       mButton.setTextColor( 0xff33ccff ); // FIXME color/menu_foreground
     } else {
       // int size = TopoDroidApp.getDefaultSize( context );
-      mButton.setBackgroundDrawable( MyButton.getButtonBackground( context, context.getResources(), icon ) );
+      mButton.setBackground( MyButton.getButtonBackground( context, context.getResources(), icon ) );
     }
     mTextView.setText( text );
 

@@ -36,7 +36,7 @@ class DrawingDxf
   private static boolean mVersion13 = false;
   private static boolean doHandle   = true;
 
-  static int inc( int h ) { ++h; if ( h == 0x0105 ) ++h; return h; }
+  static private int inc( int h ) { ++h; if ( h == 0x0105 ) ++h; return h; }
 
   static final private float POINT_SCALE   = 10.0f; // scale of point icons: only ACAD_6
   // the next three are for text

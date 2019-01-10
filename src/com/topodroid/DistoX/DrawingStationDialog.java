@@ -220,8 +220,7 @@ class DrawingStationDialog extends MyDialog
               mBtnInverse.setVisibility( View.GONE );
             }
             mBtnXDelete.setText( "" );
-            mBtnXDelete.setBackgroundDrawable(
-              MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_compass ) );
+            mBtnXDelete.setBackground( MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_compass ) );
             mSensors = true;
             mBtnXSection.setBackgroundColor( TDColor.MID_GRAY );
             // if ( mGlobalXSections ) {

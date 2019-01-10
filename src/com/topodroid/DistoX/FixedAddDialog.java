@@ -196,11 +196,11 @@ class FixedAddDialog extends MyDialog
       boolean toast = true;
       if ( cm != null ) {
         CharSequence text = cm.getText();
-	if ( text != null ) {
+        if ( text != null ) {
           String str = text.toString();
           String[] val = str.split(",");
           if ( val.length > 1 ) {
-	    toast = false;
+            toast = false;
             mETlng.setText( val[0] );
             mETlat.setText( val[1] );
             if ( val.length > 2 ) mEThell.setText( val[2] );

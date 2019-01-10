@@ -73,12 +73,12 @@ class ParserTherionState
   {
     mParent  = state;
 
-    mUnitLen = state.mUnitLen;
-    mUnitBer = state.mUnitBer;
-    mUnitCln = state.mUnitCln;
-    mZeroLen = state.mZeroLen;
-    mZeroBer = state.mZeroBer;
-    mZeroCln = state.mZeroCln;
+    mUnitLen  = state.mUnitLen;
+    mUnitBer  = state.mUnitBer;
+    mUnitCln  = state.mUnitCln;
+    mZeroLen  = state.mZeroLen;
+    mZeroBer  = state.mZeroBer;
+    mZeroCln  = state.mZeroCln;
     mScaleLen = state.mScaleLen;
     mScaleBer = state.mScaleBer;
     mScaleCln = state.mScaleCln;

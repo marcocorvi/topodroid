@@ -200,9 +200,9 @@ class DataHelper extends DataSetObservable
           return;
         }
 
-        while ( myDB.isDbLockedByOtherThreads() ) {
-          TopoDroidUtil.slowDown( 200 );
-        }
+        // while ( myDB.isDbLockedByOtherThreads() ) {
+        //   TopoDroidUtil.slowDown( 200 );
+        // }
 
         // updateConfig = myDB.compileStatement( "UPDATE configs SET value=? WHERE key=?" );
 
@@ -924,7 +924,7 @@ class DataHelper extends DataSetObservable
     String[] clause = new String[]{ Long.toString( sid ) };
 
     try {
-      myDB.setLockingEnabled( false );
+      // myDB.setLockingEnabled( false );
       myDB.beginTransaction();
       myDB.delete( PHOTO_TABLE,   WHERE_SID, clause );
       myDB.delete( AUDIO_TABLE,   WHERE_SID, clause );
@@ -938,7 +938,7 @@ class DataHelper extends DataSetObservable
     } catch ( SQLiteException e ) { logError("survey delete", e);
     } finally {
       myDB.endTransaction();
-      myDB.setLockingEnabled( true );
+      // myDB.setLockingEnabled( true );
     }
   }
   
@@ -1300,7 +1300,7 @@ class DataHelper extends DataSetObservable
     final int stretchCol  = ih.getColumnIndex( "stretch" );
     try {
       // myDB.execSQL("PRAGMA synchronous=OFF");
-      myDB.setLockingEnabled( false );
+      // myDB.setLockingEnabled( false );
       myDB.beginTransaction();
       for ( ParserShot s : shots ) {
         ih.prepareForInsert();
@@ -1337,7 +1337,7 @@ class DataHelper extends DataSetObservable
     } finally {
       ih.close(); // FIXME this was before endTransaction
       myDB.endTransaction();
-      myDB.setLockingEnabled( true );
+      // myDB.setLockingEnabled( true );
       // myDB.execSQL("PRAGMA synchronous=NORMAL");
     }
     /* ---- IF_COSURVEY
@@ -1720,7 +1720,7 @@ class DataHelper extends DataSetObservable
 
   // return the new-shot id
   // called by ConnectionHandler too
-  long doInsertShot( long sid, long id, long millis, long color, String from, String to, 
+  private long doInsertShot( long sid, long id, long millis, long color, String from, String to,
                           double d, double b, double c, double r, 
                           long extend, double stretch, long flag, long leg, long status, long shot_type,
                           String comment, boolean forward )
@@ -4807,7 +4807,7 @@ class DataHelper extends DataSetObservable
       private void createTables( SQLiteDatabase db )
       {
          try {
-           db.setLockingEnabled( false );
+           // db.setLockingEnabled( false );
            db.beginTransaction();
            db.execSQL( 
                create_table + CONFIG_TABLE
@@ -5003,8 +5003,8 @@ class DataHelper extends DataSetObservable
            db.endTransaction();
          // } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
          } catch ( SQLException e ) { TDLog.Error( "createTables exception: " + e.getMessage() );
-         } finally {
-           db.setLockingEnabled( true );
+         // } finally {
+           // db.setLockingEnabled( true );
          }
       }
 

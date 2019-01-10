@@ -84,7 +84,7 @@ class DBlock
   static final private int BLOCK_H_SPLAY    = 7; // FIXME_H_SPLAY horizontal splay
   static final private int BLOCK_V_SPLAY    = 8; // FIXME_V_SPLAY vertical splay
 
-  static final long[] legOfBlockType = {
+  static final private long[] legOfBlockType = {
     LegType.NORMAL,
     LegType.NORMAL,
     LegType.EXTRA,

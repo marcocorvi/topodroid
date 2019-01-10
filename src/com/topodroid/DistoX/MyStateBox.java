@@ -60,7 +60,7 @@ class MyStateBox extends CompoundButton
   {
     if ( s >= 0 && s < mBG.length ) {
       mState = s;
-      setBackgroundDrawable( mBG[mState] );
+      setBackground( mBG[mState] );
     }
   }
 

@@ -97,7 +97,7 @@ class QCamCompass extends Dialog
   {
     buttonSave.setEnabled( enable );
     // buttonSave.setVisibility( enable? View.VISIBLE : View.GONE );
-    buttonSave.setBackgroundDrawable( enable? mBDsaveok : mBDsaveoff );
+    buttonSave.setBackground( enable? mBDsaveok : mBDsaveoff );
   }
 
 
@@ -141,7 +141,7 @@ class QCamCompass extends Dialog
 
     if ( mWithBox ) {
       QCamBox box = new QCamBox( mContext );
-      addContentView( box, new LayoutParams( LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT ) );
+      addContentView( box, new LayoutParams( LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT ) );
     }
   }
 
@@ -158,7 +158,7 @@ class QCamCompass extends Dialog
     // take snapshot
     mHasShot = mSurface.takePicture( mOrientation );
     enableButtonSave( true );
-    buttonClick.setBackgroundDrawable( mHasShot ? mBDcamera : mBDcameraRed );
+    buttonClick.setBackground( mHasShot ? mBDcamera : mBDcameraRed );
     // buttonClick.setText( mContext.getString( mHasShot ? R.string.button_redo : R.string.button_eval ) );
   }
 
@@ -172,7 +172,7 @@ class QCamCompass extends Dialog
     if ( b == buttonClick ) {
       if ( mHasShot ) {
         mHasShot = false;
-        buttonClick.setBackgroundDrawable( mBDcameraRed );
+        buttonClick.setBackground( mBDcameraRed );
         // buttonClick.setText( mContext.getString( R.string.button_eval ) );
         mSurface.start();
         enableButtons( true );

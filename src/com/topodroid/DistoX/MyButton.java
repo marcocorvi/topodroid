@@ -72,7 +72,7 @@ class MyButton
     Button ret = new Button( ctx );
     ret.setPadding(10,0,10,0);
     ret.setOnClickListener( click );
-    ret.setBackgroundDrawable( getButtonBackground( ctx, ctx.getResources(), res_id ) );
+    ret.setBackground( getButtonBackground( ctx, ctx.getResources(), res_id ) );
     return ret;
   }
 

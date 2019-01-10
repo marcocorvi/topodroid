@@ -353,6 +353,9 @@ public class MainWindow extends Activity
     } else if ( filename.endsWith(".tro") || filename.endsWith(".TRO") ) {
       String filepath = TDPath.getImportFile( filename );
       new ImportVisualTopoTask( this ).execute( filepath ); 
+    } else if ( filename.endsWith(".svx") || filename.endsWith(".SVX") ) {
+      String filepath = TDPath.getImportFile( filename );
+      new ImportSurvexTask( this ).execute( filepath ); 
     } else if ( filename.endsWith(".csn") || filename.endsWith(".CSN") ) { // CaveSniper text file
       String filepath = TDPath.getImportFile( filename );
       new ImportCaveSniperTask( this ).execute( filepath ); 
@@ -437,7 +440,7 @@ public class MainWindow extends Activity
         intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_ALL );
         startActivity( intent );
       } else if ( p++ == pos ) { // HELP
-        new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, menus.length, getResources().getString( HELP_PAGE )).show();
+        new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE )).show();
       }
     // }
     // updateDisplay();
@@ -594,7 +597,7 @@ public class MainWindow extends Activity
     if ( TDLevel.overExpert ) mNrButton1 ++; // TH MANAGER
     mButton1 = new Button[ mNrButton1 + 1 ];
 
-    mImage.setBackgroundDrawable( MyButton.getButtonBackground( mApp, getResources(), R.drawable.iz_menu ) );
+    mImage.setBackground( MyButton.getButtonBackground( mApp, getResources(), R.drawable.iz_menu ) );
     for (int k=0; k < mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( mActivity, this, izons[k] );
       // mButton1[k].setElevation(40);
@@ -625,7 +628,7 @@ public class MainWindow extends Activity
   //   }
 
   //   mImage = MyButton.getButton( mActivity, this, R.drawable.ic_menu );
-  //   mImage.setBackgroundDrawable( MyButton.getButtonBackground( mApp, getResources(), R.drawable.iz_menu ) );
+  //   mImage.setBackground( MyButton.getButtonBackground( mApp, getResources(), R.drawable.iz_menu ) );
   //   mToolbar.addView( mImage, params );
   // }
 

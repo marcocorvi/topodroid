@@ -274,7 +274,7 @@ public class DeviceActivity extends Activity
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
-    mImage.setBackgroundDrawable( MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
+    mImage.setBackground( MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
 
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter( res );
@@ -405,17 +405,17 @@ public class DeviceActivity extends Activity
     }
     if ( enable ) {
       setTitleColor( TDColor.TITLE_NORMAL );
-      mButton1[IDX_TOGGLE].setBackgroundDrawable( mBMtoggle );
-      mButton1[IDX_CALIB].setBackgroundDrawable( mBMcalib );
+      mButton1[IDX_TOGGLE].setBackground( mBMtoggle );
+      mButton1[IDX_CALIB].setBackground( mBMcalib );
       if ( TDLevel.overNormal ) {
-        mButton1[IDX_READ].setBackgroundDrawable( mBMread);
+        mButton1[IDX_READ].setBackground( mBMread);
       }
     } else {
       setTitleColor( TDColor.CONNECTED );
-      mButton1[IDX_TOGGLE].setBackgroundDrawable( mBMtoggle_no );
-      mButton1[IDX_CALIB].setBackgroundDrawable( mBMcalib_no );
+      mButton1[IDX_TOGGLE].setBackground( mBMtoggle_no );
+      mButton1[IDX_CALIB].setBackground( mBMcalib_no );
       if ( TDLevel.overNormal ) {
-        mButton1[IDX_READ].setBackgroundDrawable( mBMread_no );
+        mButton1[IDX_READ].setBackground( mBMread_no );
       }
     }
   }
