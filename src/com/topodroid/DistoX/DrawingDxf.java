@@ -482,6 +482,8 @@ class DrawingDxf
     ymin *= scale;
     ymax *= scale;
 
+    int p_style = 0;
+
     // Log.v("DistoX", "DXF X " + xmin + " " + xmax + " Y " + ymin + " " + ymax );
 
     try {
@@ -598,6 +600,42 @@ class DrawingDxf
           }
           writeEndTable( out );
         }
+
+        if ( mVersion13 ) {
+	  int nr_styles = 2;
+          handle = inc(handle); writeBeginTable( out, "STYLE", handle, nr_styles );  // 2 styles
+          {
+            writeString( out, 0, "STYLE" );
+            handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbTextStyleTableRecord" );
+            writeString( out, 2, standard );  // name
+            writeInt( out, 70, 0 );           // flag (1: shape, 4:vert text, ... )
+            writeString( out, 40, zero );     // text-height: not fixed
+            writeString( out, 41, one  );
+            writeString( out, 50, zero  );
+            writeInt( out, 71, 0 );
+            writeString( out, 42, two_n_half  );
+            writeString( out, 3, "txt" );  // fonts
+            writeString( out, 4, empty );
+
+            writeString( out, 0, "STYLE" );
+            handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbTextStyleTableRecord" );
+	    p_style = handle;
+            writeString( out, 2, style_dejavu );  // name
+            writeInt( out, 70, 0 );               // flag
+            writeString( out, 40, zero );
+            writeString( out, 41, one  );
+            writeString( out, 50, zero  );
+            writeInt( out, 71, 0 );
+            writeString( out, 42, two_n_half  );
+            writeString( out, 3, "Sans Serif.ttf" );  // fonts
+            writeString( out, 4, empty );
+            writeString( out, 1001, "ACAD" );
+            writeString( out, 1000, "DejaVu Sans" );
+            writeInt( out, 1071, 0 );
+          }
+          writeEndTable( out );
+        }
+
         if ( mVersion13 ) { handle = inc(handle); } else { handle = 5; }
 	int ltypeowner = handle;
 	int ltypenr    = mVersion13 ? 5 : 1; // linetype number
@@ -661,8 +699,8 @@ class DrawingDxf
             writeString( out, 40, one ); // pattern length
             writeString( out, 49, half );  writeInt( out, 74, 0 ); // segment
             writeString( out, 49, "-0.2" ); writeInt( out, 74, 2 ); // embedded text
-	      // writeInt( out, 75, 0 );   // SHAPE number FIXME
-	      // writeInt( out, 340, 1 );  // STYLE pointer FIXME
+	      writeInt( out, 75, 0 );   // SHAPE number must be 0
+	      writeInt( out, 340, p_style );  // STYLE pointer FIXME
 	      writeString( out, 46, "0.1" );  // scale
 	      writeString( out, 50, zero );   // rotation
 	      writeString( out, 44, "-0.1" ); // X offset
@@ -758,40 +796,6 @@ class DrawingDxf
           out.write( sw2.getBuffer().toString() );
         }
         writeEndTable( out );
-
-        if ( mVersion13 ) {
-	  int nr_styles = 2;
-          handle = inc(handle); writeBeginTable( out, "STYLE", handle, nr_styles );  // 2 styles
-          {
-            writeString( out, 0, "STYLE" );
-            handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbTextStyleTableRecord" );
-            writeString( out, 2, standard );  // name
-            writeInt( out, 70, 0 );              // flag
-            writeString( out, 40, zero );
-            writeString( out, 41, one  );
-            writeString( out, 50, zero  );
-            writeInt( out, 71, 0 );
-            writeString( out, 42, two_n_half  );
-            writeString( out, 3, "txt" );  // fonts
-            writeString( out, 4, empty );
-
-            writeString( out, 0, "STYLE" );
-            handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbTextStyleTableRecord" );
-            writeString( out, 2, style_dejavu );  // name
-            writeInt( out, 70, 0 );              // flag
-            writeString( out, 40, zero );
-            writeString( out, 41, one  );
-            writeString( out, 50, zero  );
-            writeInt( out, 71, 0 );
-            writeString( out, 42, two_n_half  );
-            writeString( out, 3, "Sans Serif.ttf" );  // fonts
-            writeString( out, 4, empty );
-            writeString( out, 1001, "ACAD" );
-            writeString( out, 1000, "DejaVu Sans" );
-            writeInt( out, 1071, 0 );
-          }
-          writeEndTable( out );
-        }
 
         handle = inc(handle);
         writeBeginTable( out, "VIEW", handle, 0 ); // no VIEW
