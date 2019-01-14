@@ -31,9 +31,7 @@ class ParserVisualTopo extends ImportParser
   ParserVisualTopo( String filename, boolean apply_declination ) throws ParserException
   {
     super( apply_declination );
-    int pos = filename.lastIndexOf( '/' ); ++pos;
-    int ext = filename.lastIndexOf( '.' ); if ( ext < 0 ) ext = filename.length();
-    mName = filename.substring( pos, ext );
+    mName = extractName( filename );
     readFile( filename );
   }
 

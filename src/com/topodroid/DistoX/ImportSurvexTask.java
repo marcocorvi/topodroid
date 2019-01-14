@@ -33,7 +33,7 @@ class ImportSurvexTask extends ImportTask
       ParserSurvex parser = new ParserSurvex( str[0], true ); // apply_declination = true
       if ( mApp.get() == null ) return -1L;
 
-      sid = mApp.get().setSurveyFromName( str[1], SurveyInfo.DATAMODE_NORMAL, false, false ); // IMPORT TH no update, no forward
+      sid = mApp.get().setSurveyFromName( parser.mName, SurveyInfo.DATAMODE_NORMAL, false, false );
       app_data.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle, false );
       app_data.updateSurveyDeclination( sid, parser.surveyDeclination(), false );
       app_data.updateSurveyInitStation( sid, parser.initStation(), false );

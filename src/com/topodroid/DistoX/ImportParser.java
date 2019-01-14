@@ -102,5 +102,12 @@ class ImportParser
   {
   }
 
+  protected String extractName( String filename )
+  {
+    int pos = filename.lastIndexOf( '/' );
+    if ( pos < 0 ) { pos = 0; } else { ++pos; }
+    int ext = filename.lastIndexOf( '.' ); if ( ext < 0 ) ext = filename.length();
+    return filename.substring( pos, ext );
+  }
 
 }

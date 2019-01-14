@@ -450,7 +450,7 @@ class TDPath
 
   static File[] getImportFiles() 
   { 
-    return getFiles( PATH_IMPORT, new String[] { TH, TOP, DAT, TRO, CSN } );
+    return getFiles( PATH_IMPORT, new String[] { TH, TOP, DAT, TRO, CSN, SVX } );
   }
 
   static File[] getZipFiles() { return getFiles( PATH_ZIP, new String[] { ZIP } ); }

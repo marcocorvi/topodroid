@@ -28,17 +28,10 @@ import java.util.regex.Pattern;
 // units, calibrate, sd supported quantities:
 //   length tape bearing compass gradient clino counter depth x y z declination
 
-class ParserSurvex
+class ParserSurvex extends ImportParser
 {
   // final static private String EMPTY = "";
 
-  String mName  = null; // survey name
-  String mDate  = null; // survey date
-  String mTitle = null; // survey desc
-  private String mTeam = TDString.EMPTY;
-  private float   mDeclination = 0.0f; // one-survey declination
-  private boolean mApplyDeclination = false;
- 
   // private Stack< ParserSurvexState > mStates; // states stack (LIFO)
   // private void pushState( ParserSurvexState state )
   // {
@@ -70,8 +63,6 @@ class ParserSurvex
 
   private ArrayList< Fix > fixes;
   private ArrayList< String > stations;
-  private ArrayList< ParserShot > shots;   // centerline shots
-  private ArrayList< ParserShot > splays;  // splay shots
   private HashMap<String,String> aliases;  // station aliases
 
   // public int getShotNumber()    { return shots.size(); }
@@ -106,31 +97,30 @@ class ParserSurvex
 
   ParserSurvex( String filename, boolean apply_declination ) throws ParserException
   {
+    super( apply_declination );
+    mName = extractName( filename );
     fixes    = new ArrayList<>();
     stations = new ArrayList<>();
-    shots    = new ArrayList<>();
-    splays   = new ArrayList<>();
     aliases  = new HashMap<>();
     // mStates  = new Stack< ParserSurvexState >();
-    mApplyDeclination = apply_declination;
     ParserSurvexState state = new ParserSurvexState("."); // root of the linked list of states
     readFile( filename, state );
   }
 
-  private String nextLine( BufferedReader br ) throws IOException
-  {
-    StringBuilder ret = new StringBuilder();
-    {
-      String line = br.readLine();
-      if ( line == null ) return null; // EOF
-      while ( line != null && line.endsWith( "\\" ) ) {
-        ret.append( line.replace( '\\', ' ' ) ); // FIXME
-        line = br.readLine();
-      }
-      if ( line != null ) ret.append( line );
-    }
-    return ret.toString();
-  }
+  // private String nextLine( BufferedReader br ) throws IOException // from ImportParser
+  // {
+  //   StringBuilder ret = new StringBuilder();
+  //   {
+  //     String line = br.readLine();
+  //     if ( line == null ) return null; // EOF
+  //     while ( line != null && line.endsWith( "\\" ) ) {
+  //       ret.append( line.replace( '\\', ' ' ) ); // FIXME
+  //       line = br.readLine();
+  //     }
+  //     if ( line != null ) ret.append( line );
+  //   }
+  //   return ret.toString();
+  // }
 
   // station fullname:  cave.survey.station
   // private String extractStationName( String fullname )
@@ -149,7 +139,6 @@ class ParserSurvex
    */
   private void readFile( String filename, ParserSurvexState state ) throws ParserException
   {
-    if ( mName == null ) mName = filename;
     boolean in_station = true;
     String from = null;
     String to;
@@ -692,6 +681,7 @@ class ParserSurvex
 
   private String checkAlias( String name )
   {
+    if ( name.equals(".") || name.equals("..") || name.equals("-") ) return "";
     if ( aliases.containsKey( name ) ) return aliases.get( name );
     return name;
   }

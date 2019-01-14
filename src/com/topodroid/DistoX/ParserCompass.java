@@ -33,6 +33,7 @@ class ParserCompass extends ImportParser
   {
     super( apply_declination );
     // Log.v("DistoX", "Parser Compass <" + filename + ">" );
+    // mName = survey name is read from the file
     readFile( filename );
   }
 
