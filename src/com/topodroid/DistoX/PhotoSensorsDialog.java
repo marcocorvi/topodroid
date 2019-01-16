@@ -93,7 +93,7 @@ class PhotoSensorsDialog extends MyDialog
 
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
 
-    audioCheck = FeatureChecker.checkMicrophone( mContext );
+    audioCheck = TDandroid.checkMicrophone( mContext );
 
     LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
     layout4.setMinimumHeight( size + 20 );

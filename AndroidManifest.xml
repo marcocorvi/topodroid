@@ -8,7 +8,7 @@
     <!-- android:debuggable="true" -->
     <!-- FIXME-23 -->
     <uses-sdk
-       android:minSdkVersion="21"
+       android:minSdkVersion="8"
        android:targetSdkVersion="26"
     />
     <!--  FIXME-16 -->

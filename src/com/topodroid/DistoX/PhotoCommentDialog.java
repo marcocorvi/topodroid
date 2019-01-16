@@ -57,7 +57,7 @@ class PhotoCommentDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
 
-    cameraCheck = FeatureChecker.checkCamera( mContext );
+    cameraCheck = TDandroid.checkCamera( mContext );
     // TDLog.Log(  TDLog.LOG_PHOTO, "PhotoCommentDialog onCreate" );
     initLayout(R.layout.photo_comment_dialog, R.string.title_photo_comment );
     

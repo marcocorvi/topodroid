@@ -543,7 +543,7 @@ public class TopoDroidApp extends Application
     }
     mSetupScreen = mPrefHlp.getBoolean( "DISTOX_SETUP_SCREEN", true ); // default: SetupScreen = true
 
-    mCheckPerms = FeatureChecker.checkPermissions( this );
+    mCheckPerms = TDandroid.checkPermissions( this );
 
     if ( mCheckPerms >= 0 ) {
       // TDLog.Profile("TDApp paths");

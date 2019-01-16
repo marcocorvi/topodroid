@@ -45,6 +45,7 @@
         android:padding="@dimen/padding"
 	android:gravity="right"
 	android:inputType="number"
+	android:background="@color/edit_background"
       />
     </LinearLayout>
   </LinearLayout>

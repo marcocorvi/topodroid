@@ -97,7 +97,7 @@ class FixedGpsDialog extends MyDialog
   {
     super(context, R.string.FixedGpsDialog );
     mParent = parent;
-    if ( FeatureChecker.checkLocation( context ) ) { // CHECK_PERMISSIONS
+    if ( TDandroid.checkLocation( context ) ) { // CHECK_PERMISSIONS
       locManager = (LocationManager) mContext.getSystemService( Context.LOCATION_SERVICE );
       if ( locManager != null ) {
         mStatus = locManager.getGpsStatus( null );

@@ -90,7 +90,7 @@ class DrawingLineSectionDialog extends MyDialog
     mAzimuth = azimuth;
     mClino = clino;
     mTT = tt0;
-    hasPhoto = FeatureChecker.checkCamera( context );
+    hasPhoto = TDandroid.checkCamera( context );
 
     // read section id from the line options
     mId = mLine.getOption( "-id" );

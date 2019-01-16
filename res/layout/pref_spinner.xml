@@ -38,7 +38,8 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/padding"
 	android:gravity="right"
-        android:textColor="@color/textfixed"
+	android:textColor="@color/textfixed"
+	android:background="@color/spinner_background"
       />
       <!-- FIXME-16
 	android:background="#00000000"

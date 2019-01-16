@@ -11,7 +11,6 @@
  */
 package com.topodroid.DistoX;
 
-import java.lang.reflect.Method;
 
 import java.io.File;
 // import java.io.IOException;
@@ -27,11 +26,12 @@ import java.util.ArrayList;
 // import java.util.Stack;
 import java.util.Locale;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-/* FIXME-23 */
-import android.os.StrictMode;
+// /* fixme-23 */
+// import java.lang.reflect.Method;
+// import android.os.Build;
+// import android.os.StrictMode;
 
 // import android.os.Parcelable;
 // import android.os.Debug;
@@ -709,15 +709,16 @@ public class ShotWindow extends Activity
                        this,
                        false, false).show();  // false = with_box, false=with_delay
     } else {
-      boolean ok = true;
-      /* FIXME-23 */
-      if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ) { // build version 24
-        try {
-          Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposed");
-          m.invoke( null );
-        } catch ( Exception e ) { ok = false; }
-      }
-      /* */
+      boolean ok = TDandroid.checkStrictMode();
+      // boolean ok = true;
+      // /* fixme-23 */
+      // if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ) { // build version 24
+      //   try {
+      //     Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposed");
+      //     m.invoke( null );
+      //   } catch ( Exception e ) { ok = false; }
+      // }
+      // /* */
       if ( ok ) {
         try {
           Uri outfileuri = Uri.fromFile( imagefile );

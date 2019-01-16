@@ -657,7 +657,7 @@ class TDSetting
     mRecentNr   = tryInt( prefs,       keyPlot[1],      defPlot[1] );  // DISTOX_RECENT_NR choice: 3, 4, 5, 6
     mSideDrag   = prefs.getBoolean(    keyPlot[2], bool(defPlot[2]) ); // DISTOX_SIDE_DRAG
     // setZoomControls( prefs.getBoolean( keyPlot[], bool(defPlot[]) ) ); // DISTOX_ZOOM_CONTROLS
-    setZoomControls( prefs.getString(  keyPlot[3],      defPlot[3] ), FeatureChecker.checkMultitouch( TDInstance.context ) ); // DISTOX_ZOOM_CTRL
+    setZoomControls( prefs.getString(  keyPlot[3],      defPlot[3] ), TDandroid.checkMultitouch( TDInstance.context ) ); // DISTOX_ZOOM_CTRL
     // mSectionStations  = tryInt( prefs, keyPlot[], "3");      // DISTOX_SECTION_STATIONS
     mHThreshold    = tryFloat( prefs,  keyPlot[4],      defPlot[4] );  // DISTOX_HTHRESHOLD
     mCheckAttached = prefs.getBoolean( keyPlot[5], bool(defPlot[5]) ); // DISTOX_CHECK_ATTACHED
@@ -1070,7 +1070,7 @@ class TDSetting
       mSideDrag = tryBooleanValue( hlp, k, v, bool(def[2]) );
     } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_ZOOM_CTRL (choice)
       // setZoomControls( tryBooleanValue( hlp, k, bool(def[3]) ) );
-      setZoomControls( tryStringValue( hlp, k, v, def[3] ), FeatureChecker.checkMultitouch( TDInstance.context ) );
+      setZoomControls( tryStringValue( hlp, k, v, def[3] ), TDandroid.checkMultitouch( TDInstance.context ) );
     // } else if ( k.equals( key[ ? ] ) ) {  // DISTOX_SECTION_STATIONS
     //   mSectionStations = tryIntValue( hlp, k, v, def[ ] );
     } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_HTHRESHOLD
@@ -2138,20 +2138,12 @@ class TDSetting
   //   editor.apply();
   // }
 
-  // centralize api-23 changes
-  static void applyEditor( Editor editor )
-  {
-    // FIXME-23
-    editor.apply(); 
-    // FIXME-16 editor.commit();
-  }
-  
   static private void setPreference( SharedPreferences sp, String name, String value )
   {
     // Log.v("DistoXPref", "TDSetting set pref " + name + " " + value );
     Editor editor = sp.edit();
     editor.putString( name, value );
-    applyEditor( editor );
+    TDandroid.applyEditor( editor );
   }
 
   static private void setPreference( SharedPreferences sp, String name, boolean value )
@@ -2159,7 +2151,7 @@ class TDSetting
     // Log.v("DistoXPref", "TDSetting set b-pref " + name + " " + value );
     Editor editor = sp.edit();
     editor.putBoolean( name, value );
-    applyEditor( editor );
+    TDandroid.applyEditor( editor );
   }
 
   static void setPreference( SharedPreferences sp, String name, long value )
@@ -2167,7 +2159,7 @@ class TDSetting
     // Log.v("DistoXPref", "TDSetting set l-pref " + name + " " + value );
     Editor editor = sp.edit();
     editor.putLong( name, value );
-    applyEditor( editor );
+    TDandroid.applyEditor( editor );
   }
 
   static long getLongPreference( SharedPreferences sp, String name, long def_value )
@@ -2181,7 +2173,7 @@ class TDSetting
   {
     int idx = Integer.parseInt( man ); // no throw
     if ( idx > 0 && idx < 5 ) { 
-      if ( download && FeatureChecker.checkInternet( TDInstance.context ) ) { // download user manual 
+      if ( download && TDandroid.checkInternet( TDInstance.context ) ) { // download user manual 
        	int[] res = {
 	         0,
 	         R.string.user_man_fr,

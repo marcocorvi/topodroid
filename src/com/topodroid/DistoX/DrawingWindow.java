@@ -11,7 +11,6 @@
  */
 package com.topodroid.DistoX;
 
-import java.lang.reflect.Method;
 
 
 import java.io.File;
@@ -34,12 +33,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-/* FIXME-23 */
-import android.os.StrictMode;
+// /* fixme-23 */
+// import android.os.Build;
+// import android.os.StrictMode;
+// import java.lang.reflect.Method;
 
 // import android.view.Menu;
 // import android.view.SubMenu;
@@ -1646,7 +1646,7 @@ public class DrawingWindow extends ItemDrawer
 
     mFormatClosure = getResources().getString(R.string.format_closure );
 
-    audioCheck = FeatureChecker.checkMicrophone( mActivity );
+    audioCheck = TDandroid.checkMicrophone( mActivity );
 
     mZoomBtnsCtrlOn = (TDSetting.mZoomCtrl > 1);  // do before setting content
     mPointScale = DrawingPointPath.SCALE_M;
@@ -1657,7 +1657,7 @@ public class DrawingWindow extends ItemDrawer
     // int width = dm widthPixels;
     int width = getResources().getDisplayMetrics().widthPixels;
 
-    // mIsNotMultitouch = ! FeatureChecker.checkMultitouch( this );
+    // mIsNotMultitouch = ! TDandroid.checkMultitouch( this );
 
     setContentView(R.layout.drawing_activity);
     mDataDownloader   = mApp.mDataDownloader; // new DataDownloader( this, mApp );
@@ -3486,22 +3486,23 @@ public class DrawingWindow extends ItemDrawer
 
     private void doTakePhoto( File imagefile, boolean insert, long pid )
     {
-      if ( FeatureChecker.checkCamera( mApp ) ) { // hasPhoto
+      if ( TDandroid.checkCamera( mApp ) ) { // hasPhoto
         new QCamCompass( this,
               	         (new MyBearingAndClino( mApp, imagefile )),
                          // this, pid, // pid non-negative if notify azimuth/clino // DO NOT USE THIS
           	         ( insert ? this : null), // ImageInserter
           	         true, false).show();  // true = with_box, false=with_delay
       } else {
-	boolean ok = true;
-	/* FIXME-23 */
-        if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ) { // build version 24
-          try {
-            Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposed");
-	    m.invoke( null );
-	  } catch ( Exception e ) { ok = false; }
-	}
-	/* */
+	boolean ok = TDandroid.checkStrictMode();
+	// boolean ok = true;
+	// /* fixme-23 */
+        // if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ) { // build version 24
+        //   try {
+        //     Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposed");
+	//     m.invoke( null );
+	//   } catch ( Exception e ) { ok = false; }
+	// }
+	// /* */
 	if ( ok ) {
           try {
             Uri outfileuri = Uri.fromFile( imagefile );

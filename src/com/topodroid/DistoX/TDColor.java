@@ -58,25 +58,14 @@ class TDColor
   static final int BACK_VIOLET  = 0x66b66dff; // transparent violet
   static final int LIGHT_YELLOW = 0xffffff9f;
 
-  /* FIXME-23 */
-  static final int TITLE_NORMAL  = 0xff6699ff; // FIXED_BLUE same as in values/styles.xml
-  static final int TITLE_NORMAL2 = 0xff99ccff; 
-  static final int TITLE_BACKSHOT   = 0xff0099cc; // DARK BLUE
-  static final int TITLE_BACKSIGHT  = 0xffb66dff; // VIOLET
-  static final int TITLE_TRIPOD     = 0xffff6db6; // PINK
-  static final int TITLE_TOPOROBOT  = 0xffdbd100; // ORANGE
-  static final int TITLE_ANOMALY    = 0xffff3333; // BRIGHT RED
+  static final int TITLE_NORMAL     = TDandroid.TITLE_NORMAL; // FIXED_BLUE same as in values/styles.xml
+  static final int TITLE_NORMAL2    = TDandroid.TITLE_NORMAL2; 
+  static final int TITLE_BACKSHOT   = TDandroid.TITLE_BACKSHOT; // DARK BLUE
+  static final int TITLE_BACKSIGHT  = TDandroid.TITLE_BACKSIGHT; // VIOLET
+  static final int TITLE_TRIPOD     = TDandroid.TITLE_TRIPOD; // PINK
+  static final int TITLE_TOPOROBOT  = TDandroid.TITLE_TOPOROBOT; // ORANGE
+  static final int TITLE_ANOMALY    = TDandroid.TITLE_ANOMALY; // BRIGHT RED
   
-  /* FIXME-16 
-  static final int TITLE_NORMAL  = 0xff3366cc; // FIXED_BLUE same as in values/styles.xml
-  static final int TITLE_NORMAL2 = 0xff6699cc; 
-  static final int TITLE_BACKSHOT   = 0xff0066cc; // DARK BLUE
-  static final int TITLE_BACKSIGHT  = 0xffb66dff; // VIOLET
-  static final int TITLE_TRIPOD     = 0xffff6db6; // PINK
-  static final int TITLE_TOPOROBOT  = 0xffdbd100; // ORANGE
-  static final int TITLE_ANOMALY    = 0xffff3333; // BRIGHT RED
-  */
-
   static final int NORMAL       = WHITE;
   static final int NORMAL2      = LIGHT_GRAY;
   static final int CONNECTED    = FIXED_RED;

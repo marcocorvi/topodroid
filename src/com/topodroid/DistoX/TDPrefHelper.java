@@ -47,7 +47,7 @@ class TDPrefHelper
     // Log.v("DistoXPref", "TDPrefHelper set pref " + name + " " + value );
     SharedPreferences.Editor editor = mPrefs.edit();
     editor.putString( name, value );
-    applyEditor( editor );
+    TDandroid.applyEditor( editor );
   }
 
   void update( String name1, String value1, String name2, String value2 )
@@ -56,7 +56,7 @@ class TDPrefHelper
     SharedPreferences.Editor editor = mPrefs.edit();
     editor.putString( name1, value1 );
     editor.putString( name2, value2 );
-    applyEditor( editor );
+    TDandroid.applyEditor( editor );
   }
 
   void update( String name1, String value1, String name2, String value2, String name3, String value3 )
@@ -66,7 +66,7 @@ class TDPrefHelper
     editor.putString( name1, value1 );
     editor.putString( name2, value2 );
     editor.putString( name3, value3 );
-    applyEditor( editor );
+    TDandroid.applyEditor( editor );
   }
 
   // unused
@@ -77,7 +77,7 @@ class TDPrefHelper
   //   for ( int k = 0; k < name.length; ++k ) {
   //     editor.putString( name[k], value[k] );
   //   }
-  //   applyEditor( editor );
+  //   TDandroid.applyEditor( editor );
   // }
 
   void update( String name, boolean value )
@@ -85,7 +85,7 @@ class TDPrefHelper
     // Log.v("DistoXPref", "TDPrefHelper set b-pref " + name + " " + value );
     SharedPreferences.Editor editor = mPrefs.edit();
     editor.putBoolean( name, value );
-    applyEditor( editor );
+    TDandroid.applyEditor( editor );
   }
 
   void update( String name, long value )
@@ -93,16 +93,16 @@ class TDPrefHelper
     // Log.v("DistoXPref", "TDPrefHelper set l-pref " + name + " " + value );
     SharedPreferences.Editor editor = mPrefs.edit();
     editor.putLong( name, value );
-    applyEditor( editor );
+    TDandroid.applyEditor( editor );
   }
 
   // =============================================================
 
-  static void applyEditor( Editor editor )
-  {
-    // FIXME-23 
-    editor.apply(); 
-    // FIXME-16 editor.commit();
-  }
+  // static void applyEditor( Editor editor )
+  // {
+  //   // fixme-23 
+  //   editor.apply(); 
+  //   // fixme-16 editor.commit();
+  // }
   
 }

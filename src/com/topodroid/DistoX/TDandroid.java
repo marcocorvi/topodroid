@@ -1,65 +1,35 @@
-/* @file FeatureChecker.java
+/* @file TDandroid.java
  *
  * @author marco corvi
- * @date june 2017
+ * @date jan 2019
  *
- * @brief TopoDroid feature checker
+ * @brief TopoDroid android versions specifics
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
 package com.topodroid.DistoX;
+ 
+import android.content.SharedPreferences.Editor;
 
-import android.os.Build;
 // import android.os.Build.VERSION_CODES;
 import android.app.Activity;
 import android.content.Context;
+/* FIXME-23 */
+import android.os.StrictMode;
+import java.lang.reflect.Method;
+import android.os.Build;
 import android.content.pm.PackageManager;
-// import android.content.pm.FeatureInfo;
+/* FIXME-16
+  // nothing
+*/
 
-// import android.util.Log;
-
-class FeatureChecker
+class TDandroid
 {
-  // boolean hasBluetooth       = false;
-  // boolean hasCamera          = false;
-  // boolean hasCameraAutofocus = false;
-  // boolean hasLocation        = false;
-  // boolean hasLocationGps     = false;
-  // boolean hasMicrophone      = false;
-  // boolean hasTouchscreen     = false;
-  // boolean hasScreenPortrait  = false;
-
-  // FeatureChecker()
-  // {
-  //   FeatureInfo[] features = PackageManager.getSystemAvailableFeatures();
-  //   for ( FeatureInfo f : features ) {
-  //     if ( f.name != null ) {
-  //       if ( f.name.equals("android.hardware.bluetooth") ) {
-  //         hasBluetooth = true;
-  //       } else if ( f.name.equals("android.hardware.camera") ) {
-  //         hasCamera = true;
-  //       } else if ( f.name.equals("android.hardware.camera.autofocus") ) {
-  //         hasCameraAutofocus = true;
-  //       } else if ( f.name.equals("android.hardware.location") ) {
-  //         hasLocation = true;
-  //       } else if ( f.name.equals("android.hardware.location.gps") ) {
-  //         hasLocationGps = true;
-  //       } else if ( f.name.equals("android.hardware.microphone") ) {
-  //         hasMicrophone = true;
-  //       } else if ( f.name.equals("android.hardware.touchscreen") ) {
-  //         hasTouchscreen = true;
-  //       } else if ( f.name.equals("android.hardware.screen.portrait") ) {
-  //         hasScreenPortrait = true;
-  //       }
-  //     }
-  //   }
-  // }
-
   /** permissions string codes
    */ 
-  static final private String[] perms = {
+  static final String[] perms = {
       android.Manifest.permission.BLUETOOTH,            // Bluetooth permissions are normal - no need to request at runtime
       android.Manifest.permission.BLUETOOTH_ADMIN,
       // android.Manifest.permission.INTERNET,
@@ -70,12 +40,76 @@ class FeatureChecker
       android.Manifest.permission.RECORD_AUDIO
   };
 
-  static final private int NR_PERMS_D = 3;
-  static final private int NR_PERMS   = 6;
+  static final int NR_PERMS_D = 3;
+  static final int NR_PERMS   = 6;
 
   /** app specific code - for callback in MainWindow
    */
   static final int REQUEST_PERMISSIONS = 1;
+
+  // private static boolean MustRestart = false; // whether need to restart app
+  // static boolean[] GrantedPermission = { false, false, false, false, false, false };
+/* FIXME-23 */
+  static final int TITLE_NORMAL     = 0xff6699ff; // FIXED_BLUE same as in values/styles.xml
+  static final int TITLE_NORMAL2    = 0xff99ccff; 
+  static final int TITLE_BACKSHOT   = 0xff0099cc; // DARK BLUE
+  static final int TITLE_BACKSIGHT  = 0xffb66dff; // VIOLET
+  static final int TITLE_TRIPOD     = 0xffff6db6; // PINK
+  static final int TITLE_TOPOROBOT  = 0xffdbd100; // ORANGE
+  static final int TITLE_ANOMALY    = 0xffff3333; // BRIGHT RED
+
+  static void applyEditor( Editor editor )
+  {
+    editor.apply(); 
+  }
+
+  static boolean MustRestart = false; // whether need to restart app
+  static boolean[] GrantedPermission = { false, false, false, false, false, false };
+
+  static void createPermissions( Context context, Activity activity )
+  {
+    // TDLog.Log( LOG_PERM, "create permissions" );
+    MustRestart = false;
+    if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.M ) return;
+
+    for ( int k=0; k<NR_PERMS; ++k ) { // check whether the app has the six permissions
+      GrantedPermission[k] = ( context.checkSelfPermission( perms[k] ) == PackageManager.PERMISSION_GRANTED );
+      if ( ! GrantedPermission[k] ) MustRestart = true;
+    }
+    // Log.v("DistoXX", "FC must restart " + MustRestart );
+    if ( MustRestart ) { // if a permission has not been granted request it
+      activity.requestPermissions( perms, REQUEST_PERMISSIONS );
+      android.os.Process.killProcess( android.os.Process.myPid() );
+      System.exit( 1 );
+    }
+  }
+
+  static boolean checkStrictMode()
+  {
+    boolean ret = true;
+    if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ) { // build version 24
+      try {
+        Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposed");
+        m.invoke( null );
+      } catch ( Exception e ) { ret = false; }
+    }
+    return ret;
+  }
+/* */
+  
+/* FIXME-16 
+  static final int TITLE_NORMAL     = 0xff3366cc; // FIXED_BLUE same as in values/styles.xml
+  static final int TITLE_NORMAL2    = 0xff6699cc; 
+  static final int TITLE_BACKSHOT   = 0xff0066cc; // DARK BLUE
+  static final int TITLE_BACKSIGHT  = 0xffb66dff; // VIOLET
+  static final int TITLE_TRIPOD     = 0xffff6db6; // PINK
+  static final int TITLE_TOPOROBOT  = 0xffdbd100; // ORANGE
+  static final int TITLE_ANOMALY    = 0xffff3333; // BRIGHT RED
+
+  static void applyEditor( Editor editor )
+  {
+    editor.commit();
+  }
 
   private static boolean MustRestart = false; // whether need to restart app
   static boolean[] GrantedPermission = { false, false, false, false, false, false };
@@ -84,26 +118,22 @@ class FeatureChecker
   {
     // TDLog.Log( LOG_PERM, "create permissions" );
     MustRestart = false;
-    // FIXME-23
-    if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.M ) return;
-    // FIXME-16 // nothing
 
     for ( int k=0; k<NR_PERMS; ++k ) { // check whether the app has the six permissions
-      // FIXME-23
-      GrantedPermission[k] = ( context.checkSelfPermission( perms[k] ) == PackageManager.PERMISSION_GRANTED );
-      // FIXME-16 GrantedPermission[k] = true;
+      GrantedPermission[k] = true;
       // Log.v("DistoXX", "FC perm " + k + " granted " + GrantedPermission[k] );
       if ( ! GrantedPermission[k] ) MustRestart = true;
     }
     // Log.v("DistoXX", "FC must restart " + MustRestart );
     if ( MustRestart ) { // if a permission has not been granted request it
-      /* FIXME-23 */
-      activity.requestPermissions( perms, REQUEST_PERMISSIONS );
-      android.os.Process.killProcess( android.os.Process.myPid() );
-      System.exit( 1 );
-      /* */
+      // nothing
     }
   }
+
+  static boolean checkStrictMode() { return true; }
+
+/* */
+
 
   /** check whether the running app has the needed permissions
    * @return 0 ok
@@ -180,4 +210,6 @@ class FeatureChecker
     // TDLog.Log( LOG_PERM, "check internet" );
     return ( context.checkCallingOrSelfPermission( android.Manifest.permission.INTERNET ) == PackageManager.PERMISSION_GRANTED );
   }
+
 }
+  

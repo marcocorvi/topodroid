@@ -297,7 +297,7 @@ class ProjectionDialog extends MyDialog
     // int width = dm widthPixels;
     int width = mContext.getResources().getDisplayMetrics().widthPixels;
 
-    // mIsNotMultitouch = ! FeatureChecker.checkMultitouch( this );
+    // mIsNotMultitouch = ! TDandroid.checkMultitouch( this );
 
     setContentView( R.layout.projection_dialog );
     mSeekBar   = (SeekBar) findViewById(R.id.seekbar );

@@ -102,7 +102,7 @@ class ShotNewDialog extends MyDialog
     mAt      = at;
     mTimer   = null;
     mJpegData = null;
-    cameraCheck = FeatureChecker.checkCamera( mApp );
+    cameraCheck = TDandroid.checkCamera( mApp );
     diving = (TDInstance.datamode == SurveyInfo.DATAMODE_DIVING);
   }
 

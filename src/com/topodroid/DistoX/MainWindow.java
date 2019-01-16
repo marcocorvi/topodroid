@@ -460,7 +460,7 @@ public class MainWindow extends Activity
     // mApp_mCosurvey   = TopoDroidApp.mCosurvey; // IF_COSURVEY
     mApp_mCheckPerms = TopoDroidApp.mCheckPerms;
 
-    FeatureChecker.createPermissions( mApp, mActivity );
+    TDandroid.createPermissions( mApp, mActivity );
 
     // mArrayAdapter = new ArrayAdapter<>( this, R.layout.message );
     mArrayAdapter = new ListItemAdapter( this, R.layout.message );
@@ -855,16 +855,16 @@ public class MainWindow extends Activity
   public void onRequestPermissionsResult( int code, final String[] perms, int[] results )
   {
     // TDLog.Log(TDLog.LOG_PERM, "MAIN req code " + code + " results length " + results.length );
-    if ( code == FeatureChecker.REQUEST_PERMISSIONS ) {
+    if ( code == TDandroid.REQUEST_PERMISSIONS ) {
       if ( results.length > 0 ) {
 	for ( int k = 0; k < results.length; ++ k ) {
-	  FeatureChecker.GrantedPermission[k] = ( results[k] == PackageManager.PERMISSION_GRANTED );
+	  TDandroid.GrantedPermission[k] = ( results[k] == PackageManager.PERMISSION_GRANTED );
 	  // Log.v("DistoXX", "MAIN perm " + k + " perms " + perms[k] + " result " + results[k] );
 	}
       }
     }
-    // Log.v("DistoXX", "MAIN must restart " + FeatureChecker.MustRestart );
-    // if ( ! FeatureChecker.MustRestart ) {
+    // Log.v("DistoXX", "MAIN must restart " + TDandroid.MustRestart );
+    // if ( ! TDandroid.MustRestart ) {
     //   TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.perm_required,
     //     new DialogInterface.OnClickListener() {
     //       @Override public void onClick( DialogInterface dialog, int btn ) { finish(); }

@@ -118,7 +118,7 @@ public class FixedActivity extends Activity
     // mApp = (TopoDroidApp)getApplication();
     mContext = this;
 
-    hasGps = FeatureChecker.checkLocation( mContext );
+    hasGps = TDandroid.checkLocation( mContext );
 
     // Bundle extras = getIntent().getExtras();
     // if ( extras != null ) {
