@@ -14,7 +14,7 @@
   <string name="CalibActivity" translatable="false">manual04.htm</string>
   <string name="GMActivity" translatable="false">manual05.htm</string>
   <string name="SurveyWindow" translatable="false">manual08.htm</string>
-  <string name="ShotWindow" translatable="false">manual07.htm</string>
+  <string name="ShotWindow" translatable="false">manual06.htm</string>
   <string name="DrawingWindow" translatable="false">manual09.htm</string>
   <string name="OverviewWindow" translatable="false">manual12.htm</string>
   <string name="CWDActivity" translatable="false">page_cwd.htm</string>

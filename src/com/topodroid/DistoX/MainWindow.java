@@ -14,43 +14,20 @@ package com.topodroid.DistoX;
 import java.io.File;
 import java.io.FileFilter;
 
-// import java.io.IOException;
-// import java.io.FileNotFoundException;
-// import java.io.EOFException;
-// import java.io.DataInputStream;
-// import java.io.DataOutputStream;
-// import java.io.FileInputStream;
-// import java.io.PrintWriter;
-// import java.io.BufferedReader;
-// import java.io.FileReader;
-// import java.io.FileWriter;
-// import java.util.UUID;
 import java.util.List;
 // import java.util.ArrayList;
-
-// import android.os.AsyncTask;
-// import android.os.Debug;
-
-// import java.lang.Long;
-// import java.lang.reflect.Method;
-// import java.lang.reflect.InvocationTargetException;
 
 // import android.app.Application;
 import android.app.Activity;
 import android.app.Dialog;
 
 import android.content.ActivityNotFoundException;
-// import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.os.Handler;
 // import android.os.Message;
 // import android.os.Parcelable;
 
 import android.bluetooth.BluetoothAdapter;
-// import android.bluetooth.BluetoothServerSocket;
-// import android.bluetooth.BluetoothSocket;
-
-// import android.location.LocationManager;
 
 import android.content.Context;
 import android.content.Intent;
@@ -83,13 +60,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 // import android.preference.PreferenceManager;
 
-// import android.view.Menu;
-// import android.view.MenuItem;
-
-// import android.graphics.Color;
-// import android.graphics.PorterDuff;
-
-// import android.util.Log;
+import android.util.Log;
 
 /*
   Method m = device.getClass().getMethod( "createRfcommSocket", new Class[] (int.class) );
@@ -570,17 +541,19 @@ public class MainWindow extends Activity
       @Override
       public void run() { 
         File dir = TDPath.getTdrDir();
+	// Log.v("DistoXX", "clear tdr backups from " + dir.getPath() );
 	File[] files = dir.listFiles( new FileFilter() { 
 	  public boolean accept( File f ) { 
             return f.getName().matches( ".*tdr.bck.?" );
 	  }
 	} );
 	for ( File f : files ) {
+	  // Log.v("DistoXX", "delete file " + f.getPath() );
           f.delete();
 	}
       }
     };
-    cleaner.setPriority( Thread.MIN_PRIORITY );
+    // cleaner.setPriority( Thread.MIN_PRIORITY );
     cleaner.start();
   }
 

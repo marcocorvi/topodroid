@@ -61,6 +61,8 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
           filename = TDPath.getSvgFileWithExt( mFullName );
         } else if ( mExt.equals("shp") ) {
           filename = TDPath.getShpBasepath( mFullName );
+        } else if ( mExt.equals("xvi") ) {
+          filename = TDPath.getXviFileWithExt( mFullName );
         }
         // Log.v("DistoX", "Export to File: " + filename );
         if ( filename != null ) {
@@ -76,6 +78,8 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
               DrawingDxf.write( bw, mNum, /* mUtil, */ mCommand, mType );
             } else if ( mExt.equals("svg") ) {
               DrawingSvg.write( bw, mNum, /* mUtil, */ mCommand, mType );
+            } else if ( mExt.equals("xvi") ) {
+              DrawingXvi.write( bw, mNum, /* mUtil, */ mCommand, mType );
             }
             fw.flush();
             fw.close();

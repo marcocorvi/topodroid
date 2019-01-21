@@ -142,6 +142,11 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
               mParent.get().doSaveWithExt( mNum, /* mUtil, */ mManager, mType, mFullName, "shp", false );
 	    }
             break;
+          case TDConst.DISTOX_EXPORT_XVI:
+	    if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
+              mParent.get().doSaveWithExt( mNum, /* mUtil, */ mManager, mType, mFullName, "xvi", false );
+	    }
+            break;
           case TDConst.DISTOX_EXPORT_CSX: // IMPORTANT CSX must come before PNG
             if ( PlotInfo.isSketch2D( mType ) ) {
 	      if ( mParent.get() != null && ! mParent.get().isFinishing() ) {

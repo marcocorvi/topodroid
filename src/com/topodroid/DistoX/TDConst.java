@@ -42,6 +42,7 @@ class TDConst
   static final int DISTOX_EXPORT_TRB = 21; // TopoRobot
   static final int DISTOX_EXPORT_JSON = 22; // GeoJSON
   static final int DISTOX_EXPORT_SHP = 23; // Shapefile
+  static final int DISTOX_EXPORT_XVI = 24; // Shapefile
 
   static final int DISTOX_EXPORT_ZIP = 30;
 
@@ -95,7 +96,8 @@ class TDConst
       "DXF",
       "SVG",
       "SHP",
-      "PNG"
+      "PNG",
+      "XVI"
   };
   static final private int[] mPlotExportIndex = {
     DISTOX_EXPORT_TH2,
@@ -103,7 +105,8 @@ class TDConst
     DISTOX_EXPORT_DXF,
     DISTOX_EXPORT_SVG,
     DISTOX_EXPORT_SHP,
-    DISTOX_EXPORT_PNG
+    DISTOX_EXPORT_PNG,
+    DISTOX_EXPORT_XVI
   };
 
   static final String[] mCalibExportTypes = { "CSV" };

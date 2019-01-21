@@ -51,7 +51,7 @@ class DrawingPointPath extends DrawingPath
   // float mYpos;
   int mPointType;
   protected int mScale;       //! symbol scale
-  double mOrientation;
+  double mOrientation;   // orientation [degrees]
   String mPointText;
 
   @Override

@@ -42,6 +42,7 @@ class SymbolPoint extends Symbol
   String mName;
   String mDxf; // PRIVATE
   String mSvg;
+  String mXvi;
 
   int mHasText;         // whether the point has a text (1), value (2), or none (0)
   boolean mOrientable; // PRIVATE
@@ -322,6 +323,7 @@ class SymbolPoint extends Symbol
           + "  11\n1.0\n  21\n0.0\n  31\n0.0\n"; // 1 mm long
     mCsx = "";
     mSvg = "";
+    mXvi = "";
   }
 
   /* Make the path from its stringn description
@@ -342,6 +344,8 @@ class SymbolPoint extends Symbol
     PrintWriter pv2  = new PrintWriter( sv2 ); // CSX circle writer
     StringWriter sv3 = new StringWriter();
     PrintWriter pv3  = new PrintWriter( sv3 ); // SVG circle writer
+    StringWriter sv4 = new StringWriter();
+    PrintWriter pv4  = new PrintWriter( sv4 ); // XVI writer: Lines / Cubics
 
     float x00=0, y00=0;  // last drawn point1
     String pname = "P_" + mThName.replace(':', '-');
@@ -380,9 +384,11 @@ class SymbolPoint extends Symbol
             DrawingDxf.printString( pw, 8, pname );
             DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbLine" );
             DrawingDxf.printXYZ( pw, x00, -y00, 0.0f, 0 ); // prev point
+	    pv4.format(Locale.US, "L %.2f %.2f", x00, y00 );
             x00 = x0 * dxfScale;
             y00 = y0 * dxfScale;
             DrawingDxf.printXYZ( pw, x00, -y00, 0.0f, 1 ); // current point
+	    pv4.format(Locale.US, " %.2f %.2f ", x00, y00 );
             
             pv1.format(Locale.US, "L %.2f %.2f ", x00*csxScale, y00*csxScale );
           }
@@ -408,6 +414,7 @@ class SymbolPoint extends Symbol
           if ( k < s ) { 
             y2 = Float.parseFloat( vals[k] ); 
             mPath.cubicTo( x0*unit, y0*unit, x1*unit, y1*unit, x2*unit, y2*unit );
+	    pv4.format(Locale.US, "C %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f ", x00, y00, x0*dxfScale, y0*dxfScale, x1*dxfScale, y1*dxfScale, x2*dxfScale, y2*dxfScale );
 
             x00 /= dxfScale;
             y00 /= dxfScale;
@@ -573,6 +580,11 @@ class SymbolPoint extends Symbol
             DrawingDxf.printXYZ( pw, x0*dxfScale, -y0*dxfScale, 0.0f, 0 );
             DrawingDxf.printFloat( pw, 40, x1*dxfScale );
 
+	    pv4.format(Locale.US, "C %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f ", 
+              (x0-x1)*dxfScale, y0*dxfScale, (x0-x1)*dxfScale, (y0-x1)*dxfScale, (x0+x1)*dxfScale, (y0-x1)*dxfScale, (x0+x1)*dxfScale, y0*dxfScale );
+	    pv4.format(Locale.US, "C %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f ", 
+              (x0-x1)*dxfScale, y0*dxfScale, (x0-x1)*dxfScale, (y0+x1)*dxfScale, (x0+x1)*dxfScale, (y0+x1)*dxfScale, (x0+x1)*dxfScale, y0*dxfScale );
+
             pv2.format(Locale.US,
               "&lt;circle cx=&quot;%.2f&quot; cy=&quot;%.2f&quot; r=&quot;%.2f&quot; /&gt;",
               x0*csxdxfScale, y0*csxdxfScale, x1*csxdxfScale );
@@ -631,6 +643,8 @@ class SymbolPoint extends Symbol
             DrawingDxf.printFloat( pw, 50, x2 );                                         // ANGLES
             DrawingDxf.printFloat( pw, 51, x2+y2 );
 
+	    // TODO arcTo for XVI
+
             float cx = (x1+x0)/2;
             float cy = (y1+y0)/2;
             float rx = (x1-x0)/2;
@@ -653,6 +667,7 @@ class SymbolPoint extends Symbol
     mDxf = sw.getBuffer().toString();
     mCsx = "&lt;path d=&quot;" + sv1.getBuffer().toString() + "&quot; /&gt;" + sv2.getBuffer().toString();
     mSvg = "<path d=\"" + sv1.getBuffer().toString() + "\"/> " + sv3.getBuffer().toString();
+    mXvi = sv4.getBuffer().toString();
   }
 
   static Paint makePaint( int color, Paint.Style style )

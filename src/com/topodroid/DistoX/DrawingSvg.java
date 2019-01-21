@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date mar 2013
  *
- * @brief TopoDroid drawing: dxf export
+ * @brief TopoDroid drawing: svg export
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.

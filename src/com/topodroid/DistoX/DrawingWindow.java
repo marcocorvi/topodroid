@@ -5439,6 +5439,7 @@ public class DrawingWindow extends ItemDrawer
       case TDConst.DISTOX_EXPORT_DXF: saveWithExt( mType, "dxf" ); break; // , true ); break;
       case TDConst.DISTOX_EXPORT_SVG: saveWithExt( mType, "svg" ); break; // , true ); break;
       case TDConst.DISTOX_EXPORT_SHP: saveWithExt( mType, "shp" ); break; // , true ); break;
+      case TDConst.DISTOX_EXPORT_XVI: saveWithExt( mType, "xvi" ); break; // , true ); break;
     }
   }
 

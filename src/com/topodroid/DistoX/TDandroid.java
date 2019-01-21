@@ -97,7 +97,7 @@ class TDandroid
   }
 /* */
   
-/* FIXME-16 
+/* FIXME-16 FIXME-8 
   static final int TITLE_NORMAL     = 0xff3366cc; // FIXED_BLUE same as in values/styles.xml
   static final int TITLE_NORMAL2    = 0xff6699cc; 
   static final int TITLE_BACKSHOT   = 0xff0066cc; // DARK BLUE

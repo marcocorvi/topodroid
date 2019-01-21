@@ -1,0 +1,28 @@
+encoding  utf-8
+symbol point
+name mud-crack
+th_name u:mud-crack
+orientation no
+color 0xff9933
+csurvey 6 6 80
+path
+  moveTo 0 0
+  lineTo 1.75 1
+  lineTo 1.75 3
+  lineTo 0 4
+  lineTo -1.75 3
+  lineTo -1.75 1
+  lineTo -3.5 0
+  lineTo -3.5 -2
+  lineTo -1.75 -3
+  lineTo 0 -2
+  lineTo 1.75 -3
+  lineTo 3.5 -2
+  lineTo 3.5 0
+  lineTo 1.75 1
+  moveTo 0 -2
+  lineTo 0 0
+  lineTo -1.75 1
+endpath
+endsymbol
+

@@ -2,20 +2,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="401058"
-      android:versionName="4.1.1C"
+      android:versionCode="401059"
+      android:versionName="4.1.1D"
     >
     <!-- android:debuggable="true" -->
-    <!-- FIXME-23 -->
+    <!-- Android SDK dependencies:
+	 (1) edit src/com/topodroid/DistoX/TDandroid.java
+         (2) set the slink save/values to the proper save/values-vXX
+         (3) set min and target here
+             FIXME-23 : min 21 target 26 
+             FIXME-16 : min 8  target 16
+             FIXME-08 : min 8  target  8
+    -->
     <uses-sdk
-       android:minSdkVersion="8"
+       android:minSdkVersion="21"
        android:targetSdkVersion="26"
     />
-    <!--  FIXME-16 -->
-    <!-- uses-sdk
-       android:minSdkVersion="8"
-       android:targetSdkVersion="8"
-    / -->
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.BLUETOOTH" />

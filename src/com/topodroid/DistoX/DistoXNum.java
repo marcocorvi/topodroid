@@ -285,6 +285,9 @@ class DistoXNum
   /** shortest-path algo
    * @param s1  first station
    * @param s2  second station
+   *
+   * FIXME this can take too long:
+   * <init>:268 -- computeNum:1008 -- shortestPath:308, for ( NymShot e : mShots )
    */
   private NumShortpath shortestPath( NumStation s1, NumStation s2 )
   {
