@@ -1020,6 +1020,8 @@
   <string name="pref_leg_shots_summary">Minimale Anzahl Messungen zur Erkennung als Messzug</string>
   <string name="pref_recent_timeout_title">Zeitdauer neue Daten</string>
   <string name="pref_recent_timeout_summary">Zeit nach welcher Daten nicht mehr als \'neu\' markiert werden</string>
+  <!-- TODO string name="pref_triple_shot_title">Leg-shot bell</string -->
+  <!-- TODO string name="pref_triple_shot_summary">Sound feedback on leg-shot recognition</string -->
   <string name="pref_station_prefix_title">Compass: Prefix</string>
   <string name="pref_station_prefix_summary">Exportiere Messpunkt Prefix (compass)</string>
   <string name="pref_compass_splays_title">Compass: Hilfszüge</string>

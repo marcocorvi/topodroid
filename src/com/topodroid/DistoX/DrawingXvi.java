@@ -39,17 +39,18 @@ class DrawingXvi
   static final private int POINT_SCALE  = 10;
   static final private int POINT_RADIUS = 10;
   static final private int RADIUS = 3;
-  // float SCALE_FIX = util.SCALE_FIX; // 20.0f
+  static final private float SCALE = 5; // util.SCALE_FIX; // 20.0f
+  static final private float CELL  = 20; // 1 meter
+  static final private float POINT = 20;
 
   // X_orig Y_orig X_cell 0.0 0.0 Y_cell X_nr Y_nr
   private static void printXviGrid( BufferedWriter out, float x1, float y1, float x2, float y2, float xoff, float yoff )
   {
-    float cell = 20; // this makes 1 m cells
-    int nx = (int)((x2-x1)/cell);
-    int ny = (int)((y2-y1)/cell);
+    int nx = (int)((x2-x1)/CELL);
+    int ny = (int)((y2-y1)/CELL);
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
-    pw.format(Locale.US, "set XVIgrid { %.2f %.2f %.2f 0.0 0.0 %.2f %d %d }\n\n", xoff+x1, yoff-y2, cell, cell, nx, ny );
+    pw.format(Locale.US, "set XVIgrid { %.2f %.2f %.2f 0.0 0.0 %.2f %d %d }\n\n", SCALE*(xoff+x1), SCALE*(yoff-y2), SCALE*CELL, SCALE*CELL, nx, ny );
     try {
       out.write( sw.getBuffer().toString() );
       out.flush();
@@ -81,7 +82,7 @@ class DrawingXvi
 
     try {
       // header
-      out.write( "set XVIgrids {1.0 m}\n");
+      out.write( "set XVIgrids {1.0 m}\n\n");
 
       // ***** FIXME TODO POINT SYMBOLS
       // {
@@ -138,7 +139,7 @@ class DrawingXvi
         for ( DrawingPath sh : plot.getLegs() ) {
           DBlock blk = sh.mBlock;
           if ( blk == null ) continue;
-          pw4.format(Locale.US, "  { %.2f %.2f %.2f %.2f }\n", xoff+sh.x1, yoff-sh.y1, xoff+sh.x2, yoff-sh.y2 );
+          pw4.format(Locale.US, "  { %.2f %.2f %.2f %.2f }\n", SCALE*(xoff+sh.x1), SCALE*(yoff-sh.y1), SCALE*(xoff+sh.x2), SCALE*(yoff-sh.y2) );
         }
         out.write( sw4.getBuffer().toString() );
         out.flush();
@@ -149,7 +150,7 @@ class DrawingXvi
           for ( DrawingPath sh : plot.getSplays() ) {
             DBlock blk = sh.mBlock;
             if ( blk == null ) continue;
-            pw41.format(Locale.US, "  { %.2f %.2f %.2f %.2f }\n", xoff+sh.x1, yoff-sh.y1, xoff+sh.x2, yoff-sh.y2 );
+            pw41.format(Locale.US, "  { %.2f %.2f %.2f %.2f }\n", SCALE*(xoff+sh.x1), SCALE*(yoff-sh.y1), SCALE*(xoff+sh.x2), SCALE*(yoff-sh.y2) );
           }
           out.write( sw41.getBuffer().toString() );
         }
@@ -205,31 +206,31 @@ class DrawingXvi
 
   static private void toXvi( PrintWriter pw, DrawingStationName name, float xoff, float yoff )
   {
-    pw.format(Locale.US, "  { %.2f %.2f %s }\n", xoff+name.cx, yoff-name.cy, name.name() );
+    pw.format(Locale.US, "  { %.2f %.2f %s }\n", SCALE*(xoff+name.cx), SCALE*(yoff-name.cy), name.name() );
   }
 
   static private void toXvi( PrintWriter pw, DrawingStationPath st, float xoff, float yoff )
   {
-    pw.format(Locale.US, "  { %.2f %.2f %s }\n", xoff+st.cx, yoff-st.cy, st.name() );
+    pw.format(Locale.US, "  { %.2f %.2f %s }\n", SCALE*(xoff+st.cx), SCALE*(yoff-st.cy), st.name() );
   }
 
   static private void toXviPointLine( PrintWriter pw, DrawingPointLinePath lp, String color, float xoff, float yoff, boolean closed )
   {
     float bezier_step = TDSetting.getBezierStep();
     LinePoint p = lp.mFirst;
-    float x0 = xoff+p.x;
-    float y0 = yoff-p.y;
+    float x0 = SCALE*(xoff+p.x);
+    float y0 = SCALE*(yoff-p.y);
     float x00 = x0;
     float y00 = y0;
     for ( p = p.mNext; p != null; p = p.mNext ) { 
       pw.format(Locale.US, "  { %s %.2f %.2f", color, x0, y0 );
-      float x3 = xoff+p.x;
-      float y3 = yoff-p.y;
+      float x3 = SCALE*(xoff+p.x);
+      float y3 = SCALE*(yoff-p.y);
       if ( p.has_cp ) { // FIXME this converts the cubic with a thickly interpolated polyline
-        float x1 = xoff + p.x1;
-        float y1 = yoff - p.y1;
-        float x2 = xoff + p.x2;
-        float y2 = yoff - p.y2;
+        float x1 = SCALE*(xoff + p.x1);
+        float y1 = SCALE*(yoff - p.y1);
+        float x2 = SCALE*(xoff + p.x2);
+        float y2 = SCALE*(yoff - p.y2);
         pw.format(Locale.US, " %.2f %.2f %.2f %.2f", x1, y1, x2, y2 );
       } 
       pw.format(Locale.US, " %.2f %.2f }\n", x3, y3 );
@@ -273,10 +274,10 @@ class DrawingXvi
     SymbolPoint sp = (SymbolPoint)BrushManager.mPointLib.getSymbolByIndex( idx );
     String path = ( sp == null )? null : sp.mXvi;
     if ( path == null ) {
-      float x1 = xof - 5;
-      float y1 = yof - 5;
-      float x2 = xof + 5;
-      float y2 = yof + 5;
+      float x1 = SCALE*(xof - 5);
+      float y1 = SCALE*(yof - 5);
+      float x2 = SCALE*(xof + 5);
+      float y2 = SCALE*(yof + 5);
       pw.format("  { %s %.2f %.2f %.2f %.2f }\n", color, x1, y1, x2, y2 );
       pw.format("  { %s %.2f %.2f %.2f %.2f }\n", color, x2, y1, x1, y2 );
     } else {
@@ -292,33 +293,33 @@ class DrawingXvi
       // C x0 y0 x1 y1 x2 y2 x3 y3
       for ( int k=0; k<len; ++k ) {
         if ( vals[k].equals("L") ) {
-	  ++k; x0 = Float.parseFloat(vals[k]) * 20;
-	  ++k; y0 = Float.parseFloat(vals[k]) * 20;
+	  ++k; x0 = Float.parseFloat(vals[k]) * POINT;
+	  ++k; y0 = Float.parseFloat(vals[k]) * POINT;
 	  x00 = x0 * ca - y0 * sa;
 	  y00 = y0 * ca + x0 * sa;
-	  ++k; x0 = Float.parseFloat(vals[k]) * 20;
-	  ++k; y0 = Float.parseFloat(vals[k]) * 20;
+	  ++k; x0 = Float.parseFloat(vals[k]) * POINT;
+	  ++k; y0 = Float.parseFloat(vals[k]) * POINT;
 	  x01 = x0 * ca - y0 * sa;
 	  y01 = y0 * ca + x0 * sa;
-	  pw.format(Locale.US, "  { %s %.2f %.2f %.2f %.2f }\n", color, xof+x00, yof-y00, xof+x01, yof-y01 );
+	  pw.format(Locale.US, "  { %s %.2f %.2f %.2f %.2f }\n", color, SCALE*(xof+x00), SCALE*(yof-y00), SCALE*(xof+x01), SCALE*(yof-y01) );
 	} else if ( vals[k].equals("C") ) {
-	  ++k; x0 = Float.parseFloat(vals[k]) * 20;
-	  ++k; y0 = Float.parseFloat(vals[k]) * 20;
+	  ++k; x0 = Float.parseFloat(vals[k]) * POINT;
+	  ++k; y0 = Float.parseFloat(vals[k]) * POINT;
 	  x00 = x0 * ca - y0 * sa;
 	  y00 = y0 * ca + x0 * sa;
-	  ++k; x0 = Float.parseFloat(vals[k]) * 20;
-	  ++k; y0 = Float.parseFloat(vals[k]) * 20;
+	  ++k; x0 = Float.parseFloat(vals[k]) * POINT;
+	  ++k; y0 = Float.parseFloat(vals[k]) * POINT;
 	  x01 = x0 * ca - y0 * sa;
 	  y01 = y0 * ca + x0 * sa;
-	  ++k; x0 = Float.parseFloat(vals[k]) * 20;
-	  ++k; y0 = Float.parseFloat(vals[k]) * 20;
+	  ++k; x0 = Float.parseFloat(vals[k]) * POINT;
+	  ++k; y0 = Float.parseFloat(vals[k]) * POINT;
 	  x02 = x0 * ca - y0 * sa;
 	  y02 = y0 * ca + x0 * sa;
-	  ++k; x0 = Float.parseFloat(vals[k]) * 20;
-	  ++k; y0 = Float.parseFloat(vals[k]) * 20;
+	  ++k; x0 = Float.parseFloat(vals[k]) * POINT;
+	  ++k; y0 = Float.parseFloat(vals[k]) * POINT;
 	  x03 = x0 * ca - y0 * sa;
 	  y03 = y0 * ca + x0 * sa;
-	  pw.format(Locale.US, "  { %s %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f }\n", color, xof+x00, yof-y00, xof+x01, yof-y01, xof+x02, yof-y02, xof+x03, yof-y03 );
+	  pw.format(Locale.US, "  { %s %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f }\n", color, SCALE*(xof+x00), SCALE*(yof-y00), SCALE*(xof+x01), SCALE*(yof-y01), SCALE*(xof+x02), SCALE*(yof-y02), SCALE*(xof+x03), SCALE*(yof-y03) );
 	} else {
 	  TDLog.Error("error xvi format point " + name );
 	}

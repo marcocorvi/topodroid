@@ -332,6 +332,7 @@ class TDSetting
   static boolean mPathMultiselect = false;
 
   static boolean mBedding        = false;
+  static boolean mTripleShot     = false;
   static boolean mSplayClasses   = false;
   static boolean mSplayColor     = false;
   static boolean mDivingMode     = false;
@@ -821,6 +822,7 @@ class TDSetting
     mSplayColor    = prefs.getBoolean( keyGShot[ 3], bool(defGShot[ 3]) ); // DISTOX_SPLAY_CLASSES
     mExtendFrac    = prefs.getBoolean( keyGShot[ 4], bool(defGShot[ 4]) ); // DISTOX_EXTEND_FRAC
     mBedding       = prefs.getBoolean( keyGShot[ 5], bool(defGShot[ 5]) ); // DISTOX_BEDDING
+    mTripleShot    = prefs.getBoolean( keyGShot[ 6], bool(defGShot[ 6]) ); // DISTOX_TRIPLE_SHOT
 
     String[] keyGPlot = TDPrefKey.GEEKPLOT;
     String[] defGPlot = TDPrefKey.GEEKPLOTdef;
@@ -1205,6 +1207,8 @@ class TDSetting
       mExtendFrac   = tryBooleanValue( hlp, k, v, bool(def[ 4]) );
     } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_BEDDING
       mBedding      = tryBooleanValue( hlp, k, v, bool(def[ 5]) );
+    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_TRIPLE_SHOT
+      mTripleShot   = tryBooleanValue( hlp, k, v, bool(def[ 6]) );
     } else {
       TDLog.Error("missing GEEK_SHOT key: " + k );
     }

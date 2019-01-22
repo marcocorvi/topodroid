@@ -19,6 +19,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.ArrayList;
 
+import android.media.AudioManager;
+import android.media.ToneGenerator;
+
+import android.util.Log;
+
 class StationName
 {
   // ----------------------------------------------------------------
@@ -33,6 +38,18 @@ class StationName
     } 
     mCurrentStationName = name;
     return true;
+  }
+
+  static void ringTheBell()
+  {
+    // Log.v("DistoXX", "bell ...");
+    // (new BellTask()).execute();
+    int duration = 200; // ms
+    ToneGenerator toneG = new ToneGenerator( AudioManager.STREAM_ALARM, ToneGenerator.MAX_VOLUME ); // TDSetting.mBeepVolume );
+    // for ( int i=0; i<2; ++i ) {
+      toneG.startTone( ToneGenerator.TONE_PROP_PROMPT, duration ); 
+      // TopoDroidUtil.slowDown( duration );
+    // }
   }
 
   // unused
@@ -290,6 +307,7 @@ class StationName
               nrLegShots ++;  // one more centerline shot
             }
             if ( nrLegShots == TDSetting.mMinNrLegShots ) {
+              if ( TDSetting.mTripleShot ) ringTheBell();
               mCurrentStationName = null;
               // Log.v("DistoX", "P " + prev.mId + " " + from + "-" + back + "-" + next + " " + station + " flip=" + (flip?"y":"n") );
               String prev_from = from;
@@ -572,6 +590,7 @@ class StationName
               nrLegShots ++;  // one more centerline shot
             }
             if ( nrLegShots == TDSetting.mMinNrLegShots ) {
+              if ( TDSetting.mTripleShot ) ringTheBell();
               mCurrentStationName = null;
               String prev_from = from;
               String prev_to   = to;
@@ -799,6 +818,7 @@ class StationName
               nrLegShots ++;  // one more centerline shot
             }
             if ( nrLegShots == TDSetting.mMinNrLegShots ) {
+              if ( TDSetting.mTripleShot ) ringTheBell();
               mCurrentStationName = null;
               // Log.v( "DistoX", "PREV " + prev.mId + " nrLegShots " + nrLegShots + " set PREV " + from + "-" + to );
               setBlockName( data_helper, sid, prev, from, to );
@@ -1000,6 +1020,7 @@ class StationName
               nrLegShots ++;  // one more centerline shot
             }
             if ( nrLegShots == TDSetting.mMinNrLegShots ) {
+              if ( TDSetting.mTripleShot ) ringTheBell();
               mCurrentStationName = null;
               // Log.v( "DistoX", "PREV " + prev.mId + " nrLegShots " + nrLegShots + " set PREV " + from + "-" + to );
               prev.setBlockName( from, to );
@@ -1081,6 +1102,7 @@ class StationName
               nrLegShots ++;  // one more centerline shot
             }
             if ( nrLegShots == TDSetting.mMinNrLegShots ) {
+              if ( TDSetting.mTripleShot ) ringTheBell();
               mCurrentStationName = null;
               // Log.v("DistoX", "P " + prev.mId + " " + from + "-" + back + "-" + next + " " + station + " flip=" + (flip?"y":"n") );
               String prev_from = back; // measuring FROM ==> BACK but DistoX reports BACK --> FROM
@@ -1197,6 +1219,7 @@ class StationName
               nrLegShots ++;  // one more centerline shot
             }
             if ( nrLegShots == TDSetting.mMinNrLegShots ) {
+              if ( TDSetting.mTripleShot ) ringTheBell();
               mCurrentStationName = null;
               String prev_from = from;
               String prev_to   = to;
@@ -1317,6 +1340,7 @@ class StationName
               nrLegShots ++;  // one more centerline shot
             }
             if ( nrLegShots == TDSetting.mMinNrLegShots ) {
+              if ( TDSetting.mTripleShot ) ringTheBell();
               mCurrentStationName = null;
               // Log.v( "DistoX", "PREV " + prev.mId + " nrLegShots " + nrLegShots + " set PREV " + from + "-" + to );
               setBlockName( data_helper, sid, prev, to, from );

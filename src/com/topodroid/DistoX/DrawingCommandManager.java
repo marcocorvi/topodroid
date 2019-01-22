@@ -11,6 +11,9 @@
  */
 package com.topodroid.DistoX;
 
+import android.content.res.Configuration;
+import android.app.Activity;
+
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Bitmap;
@@ -638,21 +641,29 @@ class DrawingCommandManager
    */
   void setTransform( float dx, float dy, float s, boolean landscape )
   {
+    int orientation = TDInstance.context.getResources().getConfiguration().orientation;
+    float hh = TopoDroidApp.mDisplayHeight;
+    float ww = TopoDroidApp.mDisplayWidth;
+    if ( orientation == Configuration.ORIENTATION_LANDSCAPE ) {
+      ww = TopoDroidApp.mDisplayHeight;
+      hh = TopoDroidApp.mDisplayWidth;
+    }
+
     mLandscape = landscape;
     mScale  = 1 / s;
     mMatrix = new Matrix();
     if ( landscape ) {
-      mBBox.left   = - mScale * TopoDroidApp.mDisplayHeight + dy;      // scene coords
+      mBBox.left   = - mScale * hh + dy;      // scene coords
       mBBox.right  =   dy; 
       mBBox.top    = - dx;
-      mBBox.bottom =   mScale * TopoDroidApp.mDisplayWidth - dx;
+      mBBox.bottom =   mScale * ww - dx;
       mMatrix.postRotate(-90,0,0);
       mMatrix.postTranslate( dx, dy );
     } else {
       mBBox.left   = - dx;      // scene coords
-      mBBox.right  = mScale * TopoDroidApp.mDisplayWidth - dx; 
+      mBBox.right  = mScale * ww - dx; 
       mBBox.top    = - dy;
-      mBBox.bottom = mScale * TopoDroidApp.mDisplayHeight - dy;
+      mBBox.bottom = mScale * hh - dy;
       mMatrix.postTranslate( dx, dy );
     }
     mMatrix.postScale( s, s );

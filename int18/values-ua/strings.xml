@@ -999,6 +999,8 @@
   <string name="pref_leg_shots_summary">Мінімальна к-сть повторюваних замірів на відрізку</string>
   <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
   <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent</string -->
+  <!-- TODO string name="pref_triple_shot_title">Leg-shot bell</string -->
+  <!-- TODO string name="pref_triple_shot_summary">Sound feedback on leg-shot recognition</string -->
   <string name="pref_station_prefix_title">Експортувати префікси пікетов</string>
   <string name="pref_station_prefix_summary">Експортувати префікси пікетів для cSurvey</string>
   <!-- TODO string name="pref_compass_splays_title">Compass splays</string -->

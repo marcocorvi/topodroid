@@ -1323,6 +1323,7 @@ class TDPrefKey
     "DISTOX_SPLAY_COLOR",     // splay color
     "DISTOX_EXTEND_FRAC",     // fractional extend
     "DISTOX_BEDDING",         // splays bed plane interpolation
+    "DISTOX_TRIPLE_SHOT",     // triple shot bell
     null
   };
 
@@ -1333,6 +1334,7 @@ class TDPrefKey
     R.string.pref_splay_color_title,
     R.string.pref_extend_frac_title,
     R.string.pref_plane_interpolation_title,
+    R.string.pref_triple_shot_title,
     -1
   };
 
@@ -1343,10 +1345,12 @@ class TDPrefKey
     R.string.pref_splay_color_summary,
     R.string.pref_extend_frac_summary,
     R.string.pref_plane_interpolation_summary,
+    R.string.pref_triple_shot_summary,
     -1
   };
 
   static String[] GEEKSHOTdef = {
+    FALSE,
     FALSE,
     FALSE,
     FALSE,

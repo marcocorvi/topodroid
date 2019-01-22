@@ -992,6 +992,8 @@
   <string name="pref_leg_shots_summary">每条主线最少的测量次数</string>
   <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
   <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent</string -->
+  <!-- TODO string name="pref_triple_shot_title">Leg-shot bell</string -->
+  <!-- TODO string name="pref_triple_shot_summary">Sound feedback on leg-shot recognition</string -->
   <string name="pref_station_prefix_title">cSurvey 测量点名称前缀</string>
   <string name="pref_station_prefix_summary">输出cSurvey测量点名称前缀</string>
   <!-- TODO string name="pref_compass_splays_title">Compass splays</string -->
