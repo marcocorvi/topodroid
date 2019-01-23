@@ -43,6 +43,52 @@ class DrawingXvi
   static final private float CELL  = 20; // 1 meter
   static final private float POINT = 20;
 
+  static final private int[] CHAR_any = { 0,0,2,0 };
+  static final private int[] CHAR_plus = { 1,1,1,3, 0,2,2,2 };
+  static final private int[] CHAR_minus = { 0,2,2,2 };
+  static final private int[] CHAR_question = { 1,0,1,2, 0,3,0,4, 0,4,2,4, 1,2,2,3, 2,3,2,4 };
+
+  static final private int[][] GLYPH_AZ = {
+    { 0,0,0,4, 0,4,2,4, 2,4,2,0, 0,2,2,2 }, // A
+    { 0,0,0,4, 0,4,2,3, 0,2,2,2, 0,0,2,0, 2,3,2,0 },
+    { 0,0,0,4, 0,4,2,4, 0,0,2,0 },
+    { 0,0,0,4, 0,4,2,3, 2,3,2,0, 0,0,2,0 },
+    { 0,0,0,4, 0,4,2,4, 0,2,2,2, 0,0,2,0 }, // E
+    { 0,0,0,4, 0,4,2,4, 0,2,2,2 },
+    { 0,0,0,4, 0,4,2,4, 0,0,2,0, 2,0,2,2, 1,2,2,2 }, // G
+    { 0,0,0,4, 0,2,2,2, 2,0,2,4},
+    { 0,0,0,4 },
+    { 0,0,1,0, 1,0,1,4, 0,4,2,4 },  // J
+    { 0,0,0,4, 0,2,2,3, 0,2,2,0 },
+    { 0,0,0,4, 0,0,2,0 },
+    { 0,0,0,4, 0,4,1,2, 1,2,2,4, 2,4,2,0 },
+    { 0,0,0,4, 0,4,2,0, 2,4,2,0 },
+    { 0,0,0,4, 0,4,2,4, 0,0,2,0, 2,4,2,0 }, // O
+    { 0,0,0,4, 0,4,2,4, 0,2,2,2, 2,4,2,2, },
+    { 0,0,0,4, 0,4,2,4, 0,0,1,0, 1,0,2,1, 2,1,2,4, 1,1,2,0 },
+    { 0,0,0,4, 0,4,2,4, 2,4,2,2, 0,2,2,2, 0,2,2,0 },
+    { 0,2,0,4, 0,4,2,4, 0,2,2,2, 0,0,2,0, 2,0,2,2 }, // S
+    { 1,0,1,4, 0,4,2,4 },
+    { 0,0,0,4, 0,0,2,0, 2,4,2,0 },
+    { 0,4,1,0, 1,0,2,4 },
+    { 0,0,0,4, 0,0,1,2, 1,2,2,0, 2,0,2,4 }, // W
+    { 0,0,2,4, 0,4,2,0 },
+    { 0,4,1,2, 1,0,1,2, 1,2,2,4 },
+    { 0,4,2,4, 0,0,2,4, 0,0,2,0 }
+  };
+  static final private int[][] GLYPH_01 = {
+    { 0,0,0,4, 0,4,2,4, 0,0,2,0, 2,4,2,0 }, // 0
+    { 1,0,1,4, 1,3,1,4 },
+    { 2,4,2,3, 0,0,0,1, 0,4,2,4, 0,1,2,3, 0,0,2,0 }, // 2
+    { 0,4,2,4, 0,2,2,2, 0,0,2,0, 2,4,2,0 },
+    { 1,4,0,1, 1,0,1,4, 0,1,2,1 },
+    { 0,2,1,4, 1,4,2,4, 0,2,2,2, 0,0,2,0, 2,0,2,2 }, // 5
+    { 0,0,0,4, 0,2,2,2, 0,0,2,0, 2,0,2,2 },
+    { 0,4,2,4, 0,0,2,4 },
+    { 0,0,0,4, 0,4,2,4, 0,2,2,2, 0,0,2,0, 2,4,2,0},
+    { 0,2,2,2, 0,4,2,4, 0,2,0,4, 2,4,2,0 } // 9
+  };
+
   // X_orig Y_orig X_cell 0.0 0.0 Y_cell X_nr Y_nr
   private static void printXviGrid( BufferedWriter out, float x1, float y1, float x2, float y2, float xoff, float yoff )
   {
@@ -264,20 +310,51 @@ class DrawingXvi
   static private void toXvi( PrintWriter pw, DrawingPointPath point, float xoff, float yoff )
   {
     int idx = point.mPointType;
-    if ( idx == BrushManager.mPointLib.mPointSectionIndex ) return;
-
     float xof = xoff + point.cx;
     float yof = yoff - point.cy;
+    float x1, y1, x2, y2;
+
+    if ( idx == BrushManager.mPointLib.mPointSectionIndex ) return;
+    if ( idx == BrushManager.mPointLib.mPointLabelIndex ) {
+      String label = point.getPointText().toUpperCase();
+      int len = label.length();
+      int pos = 0;
+      for ( int k = 0; k < len; ++k ) {
+        char ch = label.charAt( k );
+	int[] glyph = CHAR_any;
+	if ( ch >= 'A' && ch <= 'Z' ) {
+	  glyph = GLYPH_AZ[ ch - 'A' ];
+	} else if ( ch >= '0' && ch <= '9' ) {
+	  glyph = GLYPH_01[ ch - '0' ];
+	} else if ( ch == '-' ) {
+	  glyph = CHAR_minus;
+	} else if ( ch == '+' ) {
+	  glyph = CHAR_plus;
+	} else if ( ch == '?' ) {
+	  glyph = CHAR_question;
+	}
+	int j = 0;
+	while ( j < glyph.length ) {
+          x1 = SCALE*(xof + 3 * (pos + glyph[j])); ++j;
+          y1 = SCALE*(yof + 3 * glyph[j] ); ++j;
+          x2 = SCALE*(xof + 3 * (pos + glyph[j])); ++j;
+          y2 = SCALE*(yof + 3 * glyph[j] ); ++j;
+          pw.format("  { black %.2f %.2f %.2f %.2f }\n", x1, y1, x2, y2 );
+	}
+	pos += 1 + glyph[j-2];
+      }	
+      return;
+    }
 
     String color = "blue";
     String name = BrushManager.mPointLib.getSymbolThName( idx );
     SymbolPoint sp = (SymbolPoint)BrushManager.mPointLib.getSymbolByIndex( idx );
     String path = ( sp == null )? null : sp.mXvi;
     if ( path == null ) {
-      float x1 = SCALE*(xof - 5);
-      float y1 = SCALE*(yof - 5);
-      float x2 = SCALE*(xof + 5);
-      float y2 = SCALE*(yof + 5);
+      x1 = SCALE*(xof - 5);
+      y1 = SCALE*(yof - 5);
+      x2 = SCALE*(xof + 5);
+      y2 = SCALE*(yof + 5);
       pw.format("  { %s %.2f %.2f %.2f %.2f }\n", color, x1, y1, x2, y2 );
       pw.format("  { %s %.2f %.2f %.2f %.2f }\n", color, x2, y1, x1, y2 );
     } else {

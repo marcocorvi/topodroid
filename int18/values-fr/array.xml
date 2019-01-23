@@ -2,13 +2,13 @@
 
 <resources>
 
-  <!-- TODO string-array name="lineContinue">
-     <item name="none">none</item>
-     <item name="start">join with start point</item>
-     <item name="end">join with end point</item>
-     <item name="both">join with both ends</item>
-     <item name="continue">continue</item>
-  </string-array -->
+  <string-array name="lineContinue">
+     <item name="none">Aucune</item>
+     <item name="start">Joindre au point initial</item>
+     <item name="end">Joindre au point terminal</item>
+     <item name="both">Réunir les deux points</item>
+     <item name="continue">Continuer</item>
+  </string-array>
   <string-array name="unitGrid">
      <item name="meter">Mètres</item>
      <item name="yard">Yards</item>
@@ -32,7 +32,7 @@
   <string-array name="wallsType">
      <item name="none">Aucun</item>
      <item name="convex">Convexe</item>
-     <item name="delaunay">TODO</item>
+     <item name="delaunay">Delaunay</item>
   </string-array>
 
 
@@ -50,7 +50,7 @@
   
 
   <string-array name="stationNames">
-     <item name="alpha">Alphanumerique</item>
+     <item name="alpha">Alphanumérique</item>
      <item name="number">Numérique</item>
   </string-array>
  
@@ -100,7 +100,7 @@
      <item name="normal">Normal</item>
      <item name="advanced">Avancé</item>
      <item name="expert">Expérimental</item>
-     <item name="tester">Tester</item>
+     <item name="tester">Testeur</item>
      <!-- item name="complete">Complete</item -->
   </string-array>
  
@@ -123,7 +123,7 @@
   <string-array name="connMode">
      <item name="batch">À la demande</item>
      <item name="continuous">Continue</item>
-     <item name="multi">Multi</item>
+     <item name="multi">Multiple</item>
   </string-array>
  
 
@@ -149,11 +149,11 @@
 
   <string-array name="surveyStations">
      <item name="no">Désactivé</item>
-     <item name="for">Visée normale, visées latérales en premier</item>
-     <item name="back">Visée inverse, visées latérales en premier</item>
+     <item name="for">Visée normale, visées latérales d\'habillage en premier</item>
+     <item name="back">Visée inverse, visées latérales d\'habillage en premier</item>
      <item name="backsight">Visée Arrière, Backsight</item>
      <item name="tripod">Tripod</item>
-     <item name="anomaly">Magn. anomaly</item>
+     <item name="anomaly">Anomalie magnétique</item>
      <item name="for2">Visée normale, cheminement en premier</item>
      <item name="back2">Visée inverse, cheminement en premier</item>
      <item name="toporobot">TopoRobot</item>
@@ -195,7 +195,7 @@
      <item name="recent">Plus récentes</item>
      <item name="list">Liste</item>
      <item name="grid">Grille</item>
-     <item name="grid3">Triple grid</item>
+     <item name="grid3">Triple grille</item>
    </string-array>
 
 
@@ -256,8 +256,8 @@
 
   <string-array name="rawCData">
      <item name="none">Aucune</item>
-     <item name="dec">Decimale</item>
-     <item name="hex">Hexa</item>
+     <item name="dec">Décimale</item>
+     <item name="hex">Hexadécimale</item>
   </string-array>
 
 </resources>

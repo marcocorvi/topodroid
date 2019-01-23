@@ -758,15 +758,15 @@ class DistoXComm extends TopoDroidComm
             while ( mRfcommThread != null ) {
               TopoDroidUtil.slowDown( 100 );
             }
-            ret = nReadPackets.get();
+            ret = (nReadPackets == null)? 0 : nReadPackets.get();
 	  }
         } else {
           // FIXME asyncTask ?
           // nReadPackets.get() = 0; // done in RfcommThread cstr
-	  int packets = nReadPackets.get();
+	  int packets = (nReadPackets == null) ? 0 : nReadPackets.get();
           startRfcommThread( to_read, lister );
           while ( mRfcommThread != null ) {
-	    packets = nReadPackets.get();
+	    packets = (nReadPackets == null)? 0 : nReadPackets.get();
 	    if ( packets >= to_read ) break;
             if ( packets != prev_read ) {
               // TDLog.Log( TDLog.LOG_COMM, "download data: read " + packets + " / " + to_read );
@@ -774,7 +774,7 @@ class DistoXComm extends TopoDroidComm
             }
             TopoDroidUtil.slowDown( 100 );
           }
-	  packets = nReadPackets.get();
+	  packets = (nReadPackets == null)? 0 : nReadPackets.get();
 	  if ( packets > to_read ) {
             TDLog.Log( TDLog.LOG_COMM, "download done: read " + packets + " expected " + to_read );
 	  }
@@ -787,7 +787,7 @@ class DistoXComm extends TopoDroidComm
         }
         // TDLog.Log( TDLog.LOG_COMM, "download done: read " + nReadPackets.get() );
         // cancelRfcommThread(); // called by closeSocket() which is called by destroySocket()
-        ret = nReadPackets.get();
+        ret = (nReadPackets == null)? 0 : nReadPackets.get();
       }
     } else {
       TDLog.Error( "download data: fail to connect socket");

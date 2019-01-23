@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="401059"
-      android:versionName="4.1.1D"
+      android:versionCode="401060"
+      android:versionName="4.1.1E"
     >
     <!-- android:debuggable="true" -->
     <!-- Android SDK dependencies:
@@ -15,7 +15,7 @@
              FIXME-08 : min 8  target  8
     -->
     <uses-sdk
-       android:minSdkVersion="21"
+       android:minSdkVersion="16"
        android:targetSdkVersion="26"
     />
 
