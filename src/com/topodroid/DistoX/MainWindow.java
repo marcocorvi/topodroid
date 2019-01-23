@@ -570,7 +570,7 @@ public class MainWindow extends Activity
     if ( TDLevel.overExpert ) mNrButton1 ++; // TH MANAGER
     mButton1 = new Button[ mNrButton1 + 1 ];
 
-    mImage.setBackground( MyButton.getButtonBackground( mApp, getResources(), R.drawable.iz_menu ) );
+    TDandroid.setButtonBackground( mImage, MyButton.getButtonBackground( mApp, getResources(), R.drawable.iz_menu ) );
     for (int k=0; k < mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( mActivity, this, izons[k] );
       // mButton1[k].setElevation(40);
@@ -601,7 +601,7 @@ public class MainWindow extends Activity
   //   }
 
   //   mImage = MyButton.getButton( mActivity, this, R.drawable.ic_menu );
-  //   mImage.setBackground( MyButton.getButtonBackground( mApp, getResources(), R.drawable.iz_menu ) );
+  //   TDandroid.setButtonBackground( mImage, MyButton.getButtonBackground( mApp, getResources(), R.drawable.iz_menu ) );
   //   mToolbar.addView( mImage, params );
   // }
 
@@ -846,6 +846,8 @@ public class MainWindow extends Activity
     // }
   }
   /* */
+  /* FIXME-16 FIXME-8 nothing */
+  
 
   // ----------------------------------------------------------------------------
   // setup

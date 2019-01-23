@@ -509,6 +509,9 @@ class ItemPickerDialog extends MyDialog
           mSelectedPoint = is.mIndex;
           // mParent.get().pointSelected( is.mIndex, false ); // mPointAdapter.getSelectedItem() );
           setSeekBarProgress();
+          mBTpoint.setTextColor( TDColor.SYMBOL_ON );
+          // mBTline.setTextColor(  TDColor.SYMBOL_TAB );
+          // mBTarea.setTextColor(  TDColor.SYMBOL_TAB );
         }
         break;
       case Symbol.LINE: 
@@ -521,6 +524,9 @@ class ItemPickerDialog extends MyDialog
           } else {
           }
           mSeekBar.setEnabled( false );
+          // mBTpoint.setTextColor( TDColor.SYMBOL_TAB );
+          mBTline.setTextColor(  TDColor.SYMBOL_ON );
+          // mBTarea.setTextColor(  TDColor.SYMBOL_TAB );
         }
         break;
       case Symbol.AREA: 
@@ -531,6 +537,9 @@ class ItemPickerDialog extends MyDialog
           mSelectedArea = is.mIndex;
           // mParent.get().areaSelected( is.mIndex, false ); // mAreaAdapter.getSelectedItem() );
           setSeekBarProgress();
+          // mBTpoint.setTextColor( TDColor.SYMBOL_TAB );
+          // mBTline.setTextColor(  TDColor.SYMBOL_TAB );
+          mBTarea.setTextColor(  TDColor.SYMBOL_ON );
         }
         break;
     }
@@ -549,6 +558,9 @@ class ItemPickerDialog extends MyDialog
           // mParent.get().pointSelected( mSelectedPoint, false );
           // mSeekBar.setEnabled( BrushManager.mPointLib.isPointOrientable( mSelectedPoint ) );
           if ( mPointAdapter != null ) setTypeAndItem( mItemType, mPointAdapter.getSelectedPos() );
+          mBTpoint.setTextColor( TDColor.SYMBOL_ON );
+          mBTline.setTextColor(  TDColor.SYMBOL_TAB );
+          mBTarea.setTextColor(  TDColor.SYMBOL_TAB );
         }
         break;
       case Symbol.LINE: 
@@ -557,12 +569,18 @@ class ItemPickerDialog extends MyDialog
         // } else {
         // }
         if ( mLineAdapter != null ) setTypeAndItem( mItemType, mLineAdapter.getSelectedPos() );
+        mBTpoint.setTextColor( TDColor.SYMBOL_TAB );
+        mBTline.setTextColor(  TDColor.SYMBOL_ON );
+        mBTarea.setTextColor(  TDColor.SYMBOL_TAB );
         break;
       case Symbol.AREA: 
         // if ( TDLevel.overBasic ) 
         {
           // mParent.get().areaSelected( mSelectedArea, false );
           if ( mAreaAdapter != null ) setTypeAndItem( mItemType, mAreaAdapter.getSelectedPos() );
+          mBTpoint.setTextColor( TDColor.SYMBOL_TAB );
+          mBTline.setTextColor(  TDColor.SYMBOL_TAB );
+          mBTarea.setTextColor(  TDColor.SYMBOL_ON );
         }
         break;
     }

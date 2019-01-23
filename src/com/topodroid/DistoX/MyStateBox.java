@@ -60,7 +60,7 @@ class MyStateBox extends CompoundButton
   {
     if ( s >= 0 && s < mBG.length ) {
       mState = s;
-      setBackground( mBG[mState] );
+      TDandroid.setButtonBackground( this, mBG[mState] );
     }
   }
 

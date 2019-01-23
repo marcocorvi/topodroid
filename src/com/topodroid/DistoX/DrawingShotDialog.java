@@ -144,7 +144,7 @@ class DrawingShotDialog extends MyDialog
 	  Bitmap bitmap =  MyButton.getLVRseekbarBackGround( mContext, (int)(TopoDroidApp.mDisplayWidth), (int)(20) );
 	  if ( bitmap != null ) {
 	    BitmapDrawable background = new BitmapDrawable( mContext.getResources(), bitmap );
-            mStretchBar.setBackground( background ); 
+            TDandroid.setSeekBarBackground( mStretchBar, background ); 
 	  }
           mStretchBar.setProgress( (int)(150 + 100 * mIntExtend + 100 * mStretch ) );
           mStretchBar.setOnSeekBarChangeListener( new OnSeekBarChangeListener() {

@@ -259,12 +259,12 @@ public class ShotWindow extends Activity
         // Bitmap bm1 = Bitmap.createScaledBitmap( mBMdial, mButtonSize, mButtonSize, true );
         // Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, mButtonSize, mButtonSize, m, true);
 	Bitmap bm2 = mDialBitmap.getBitmap( TDAzimuth.mRefAzimuth, mButtonSize );
-        mButton1[ BTN_AZIMUTH - boff ].setBackground( new BitmapDrawable( getResources(), bm2 ) );
+        TDandroid.setButtonBackground( mButton1[ BTN_AZIMUTH - boff ], new BitmapDrawable( getResources(), bm2 ) );
       }
     } else if ( TDAzimuth.mFixedExtend == -1L ) {
-      mButton1[ BTN_AZIMUTH - boff ].setBackground( mBMleft );
+      TDandroid.setButtonBackground( mButton1[ BTN_AZIMUTH - boff ], mBMleft );
     } else {
-      mButton1[ BTN_AZIMUTH - boff ].setBackground( mBMright );
+      TDandroid.setButtonBackground( mButton1[ BTN_AZIMUTH - boff ], mBMright );
     } 
   }
 
@@ -1025,7 +1025,7 @@ public class ShotWindow extends Activity
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
-    mImage.setBackground( MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
+    TDandroid.setButtonBackground( mImage, MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
 
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter( getResources() );
@@ -1047,7 +1047,7 @@ public class ShotWindow extends Activity
   // {
   //   mApp.mEnableZip = enabled;
   //   mButton1[ BTN_PLOT - boff ].setEnabled( enabled ); // FIXME SKETCH BUTTON 
-  //   mButton1[ BTN_PLOT - boff ].setBackground( enabled ? mBMplot : mBMplot_no );
+  //   TDandroid.setButtonBackground( mButton1[ BTN_PLOT - boff ], (enabled ? mBMplot : mBMplot_no) );
   // }
 
   // @Override
@@ -2060,22 +2060,22 @@ public class ShotWindow extends Activity
     if ( diving ) return;
     if ( TDInstance.device == null ) {
       // mButton1[ BTN_DOWNLOAD ].setVisibility( View.GONE );
-      mButton1[BTN_DOWNLOAD].setBackground( mBMdownload_no );
-      mButton1[BTN_BLUETOOTH].setBackground( mBMbluetooth_no );
+      TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload_no );
+      TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], mBMbluetooth_no );
     } else {
       // mButton1[ BTN_DOWNLOAD ].setVisibility( View.VISIBLE );
       switch ( status ) {
         case 1:
-          mButton1[BTN_DOWNLOAD].setBackground( mBMdownload_on );
-          mButton1[BTN_BLUETOOTH].setBackground( mBMbluetooth_no );
+          TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload_on );
+          TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], mBMbluetooth_no );
           break;
         case 2:
-          mButton1[BTN_DOWNLOAD].setBackground( mBMdownload_wait );
-          mButton1[BTN_BLUETOOTH].setBackground( mBMbluetooth_no );
+          TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload_wait );
+          TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], mBMbluetooth_no );
           break;
         default:
-          mButton1[BTN_DOWNLOAD].setBackground( mBMdownload );
-          mButton1[BTN_BLUETOOTH].setBackground( mBMbluetooth );
+          TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload );
+          TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], mBMbluetooth );
       }
     }
   }
@@ -2083,7 +2083,7 @@ public class ShotWindow extends Activity
   public void enableBluetoothButton( boolean enable )
   {
     if ( diving ) return;
-    mButton1[BTN_BLUETOOTH].setBackground( enable ? mBMbluetooth : mBMbluetooth_no );
+    TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], (enable ? mBMbluetooth : mBMbluetooth_no) );
     mButton1[BTN_BLUETOOTH].setEnabled( enable );
   }
 

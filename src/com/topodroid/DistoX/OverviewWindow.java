@@ -505,7 +505,7 @@ public class OverviewWindow extends ItemDrawer
 
       mImage = (Button) findViewById( R.id.handle );
       mImage.setOnClickListener( this );
-      mImage.setBackground( MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
+      TDandroid.setButtonBackground( mImage, MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
       mMenu = (ListView) findViewById( R.id.menu );
       setMenuAdapter( res );
       closeMenu();
@@ -1004,7 +1004,7 @@ public class OverviewWindow extends ItemDrawer
         // saveReference( mPlot1, mPid1 );
         // mPid  = mPid2;
         mType = PlotInfo.mPlot2.type; 
-        mButton1[ BTN_PLOT ].setBackground( mBMextend );
+        TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], mBMextend );
         mOverviewSurface.setManager( DrawingSurface.DRAWING_PLAN, (int)mType ); 
         resetReference( mPlot2 );
       } else if ( mType == PlotInfo.PLOT_EXTENDED ) { // PROJECTED not supported on overview
@@ -1012,7 +1012,7 @@ public class OverviewWindow extends ItemDrawer
         // mPid  = mPid1;
         // mName = mName1;
         mType = mPlot1.type;
-        mButton1[ BTN_PLOT ].setBackground( mBMplan );
+        TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], mBMplan );
         mOverviewSurface.setManager( DrawingSurface.DRAWING_PROFILE, (int)mType );
         resetReference( mPlot1 );
       }
@@ -1023,11 +1023,11 @@ public class OverviewWindow extends ItemDrawer
     {
       mOnMeasure = measure;
       if ( mOnMeasure == MEASURE_OFF ) {
-        mButton1[IC_SELECT].setBackground( mBMselect );
+        TDandroid.setButtonBackground( mButton1[IC_SELECT], mBMselect );
         mOverviewSurface.setFirstReference( null );
         mOverviewSurface.setSecondReference( null );
       } else if ( mOnMeasure == MEASURE_START ) {
-        mButton1[IC_SELECT].setBackground( mBMselectOn );
+        TDandroid.setButtonBackground( mButton1[IC_SELECT], mBMselectOn );
         mDDtotal = 0;
         mTotal = 0;
         mOverviewSurface.setSecondReference( null );
@@ -1109,7 +1109,7 @@ public class OverviewWindow extends ItemDrawer
   private void toggleIsContinue( )
   {
     mIsContinue = ! mIsContinue;
-    mButton1[IC_CONTINUE].setBackground( mIsContinue? mBMcontinueOn : mBMcontinueNo );
+    TDandroid.setButtonBackground( mButton1[IC_CONTINUE], (mIsContinue? mBMcontinueOn : mBMcontinueNo) );
   }
 
 

@@ -114,14 +114,14 @@ public class CalibActivity extends Activity
     mButton1[1].setEnabled( isSaved );   // OPEN
     if ( 2 < mNrButton1 ) mButton1[2].setEnabled( isSaved ); // COEFF_READ
     if ( isSaved ) {
-      mButton1[1].setBackground( mBMopen );
+      TDandroid.setButtonBackground( mButton1[1], mBMopen );
       if ( 2 < mNrButton1 ) {
-        mButton1[2].setBackground( mBMread );
+        TDandroid.setButtonBackground( mButton1[2], mBMread );
       }
     } else {
-      mButton1[1].setBackground( mBMopen_no );
+      TDandroid.setButtonBackground( mButton1[1], mBMopen_no );
       if ( 2 < mNrButton1 ) {
-        mButton1[2].setBackground( mBMread_no );
+        TDandroid.setButtonBackground( mButton1[2], mBMread_no );
       }
     }
   }
@@ -223,7 +223,7 @@ public class CalibActivity extends Activity
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
-    mImage.setBackground( MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
+    TDandroid.setButtonBackground( mImage, MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
 
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter( res );

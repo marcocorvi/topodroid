@@ -77,7 +77,7 @@ class AzimuthDialDialog extends MyDialog
   private void updateView()
   {
     Bitmap bm2 = mDialBitmap.getBitmap( mAzimuth, 96 );
-    mBTazimuth.setBackground( new BitmapDrawable( mContext.getResources(), bm2 ) );
+    TDandroid.setButtonBackground( mBTazimuth, new BitmapDrawable( mContext.getResources(), bm2 ) );
   }
 
   private void updateEditText() { mETazimuth.setText( String.format(Locale.US, "%d", (int)mAzimuth ) ); }

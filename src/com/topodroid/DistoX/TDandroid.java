@@ -16,14 +16,22 @@ import android.content.SharedPreferences.Editor;
 // import android.os.Build.VERSION_CODES;
 import android.app.Activity;
 import android.content.Context;
-/* FIXME-23 */
-import android.os.StrictMode;
 import java.lang.reflect.Method;
 import android.os.Build;
 import android.content.pm.PackageManager;
+/* FIXME-23 */
+import android.os.StrictMode;
+/* */
 /* FIXME-16
-  // nothing
-*/
+import android.os.StrictMode;
+/* */
+/* FIXME-8 nothing */
+
+import android.hardware.Sensor;
+import android.widget.Button;
+import android.widget.SeekBar;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 
 class TDandroid
 {
@@ -50,6 +58,8 @@ class TDandroid
   // private static boolean MustRestart = false; // whether need to restart app
   // static boolean[] GrantedPermission = { false, false, false, false, false, false };
 /* FIXME-23 */
+  static final int TEMPERATURE      = Sensor.TYPE_AMBIENT_TEMPERATURE; // API >= 14
+
   static final int TITLE_NORMAL     = 0xff6699ff; // FIXED_BLUE same as in values/styles.xml
   static final int TITLE_NORMAL2    = 0xff99ccff; 
   static final int TITLE_BACKSHOT   = 0xff0099cc; // DARK BLUE
@@ -95,9 +105,14 @@ class TDandroid
     }
     return ret;
   }
+
+  static void setButtonBackground( Button btn, BitmapDrawable drawable ) { btn.setBackground( drawable ); }
+  static void setSeekBarBackground( SeekBar btn, BitmapDrawable drawable ) { btn.setBackground( drawable ); }
 /* */
   
-/* FIXME-16 FIXME-8 
+/* FIXME-16
+  static final int TEMPERATURE      = Sensor.TYPE_AMBIENT_TEMPERATURE;
+
   static final int TITLE_NORMAL     = 0xff3366cc; // FIXED_BLUE same as in values/styles.xml
   static final int TITLE_NORMAL2    = 0xff6699cc; 
   static final int TITLE_BACKSHOT   = 0xff0066cc; // DARK BLUE
@@ -132,6 +147,49 @@ class TDandroid
 
   static boolean checkStrictMode() { return true; }
 
+  static void setButtonBackground( Button btn, BitmapDrawable drawable ) { btn.setBackground( drawable ); }
+  static void setSeekBarBackground( SeekBar btn, BitmapDrawable drawable ) { btn.setBackground( drawable ); }
+/* */
+  
+/* FIXME-8 
+  static final int TEMPERATURE      = Sensor.TYPE_TEMPERATURE;
+
+  static final int TITLE_NORMAL     = 0xff3366cc; // FIXED_BLUE same as in values/styles.xml
+  static final int TITLE_NORMAL2    = 0xff6699cc; 
+  static final int TITLE_BACKSHOT   = 0xff0066cc; // DARK BLUE
+  static final int TITLE_BACKSIGHT  = 0xffb66dff; // VIOLET
+  static final int TITLE_TRIPOD     = 0xffff6db6; // PINK
+  static final int TITLE_TOPOROBOT  = 0xffdbd100; // ORANGE
+  static final int TITLE_ANOMALY    = 0xffff3333; // BRIGHT RED
+
+  static void applyEditor( Editor editor )
+  {
+    editor.commit();
+  }
+
+  private static boolean MustRestart = false; // whether need to restart app
+  static boolean[] GrantedPermission = { false, false, false, false, false, false };
+
+  static void createPermissions( Context context, Activity activity )
+  {
+    // TDLog.Log( LOG_PERM, "create permissions" );
+    MustRestart = false;
+
+    for ( int k=0; k<NR_PERMS; ++k ) { // check whether the app has the six permissions
+      GrantedPermission[k] = true;
+      // Log.v("DistoXX", "FC perm " + k + " granted " + GrantedPermission[k] );
+      if ( ! GrantedPermission[k] ) MustRestart = true;
+    }
+    // Log.v("DistoXX", "FC must restart " + MustRestart );
+    if ( MustRestart ) { // if a permission has not been granted request it
+      // nothing
+    }
+  }
+
+  static boolean checkStrictMode() { return true; }
+
+  static void setButtonBackground( Button btn, BitmapDrawable drawable ) { btn.setBackgroundDrawable( drawable ); }
+  static void setSeekBarBackground( SeekBar btn, BitmapDrawable drawable ) { btn.setBackgroundDrawable( drawable ); }
 /* */
 
 

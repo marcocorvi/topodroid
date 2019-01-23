@@ -565,8 +565,8 @@ public class GMActivity extends Activity
         TDToast.make( mApp.DistoXConnectionError[ -nr ] );
       }
     }
-    mButton1[BTN_DOWNLOAD].setBackground( mBMdownload );
-    // mButton1[BTN_BT].setBackground( mBMbluetooth );
+    TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload );
+    // TDandroid.setButtonBackground( mButton1[BTN_BT], mBMbluetooth );
     // mButton1[BTN_BT].setEnabled( true );
     // mButton1[BTN_TOGGLE].setEnabled( true );
     enableButtons( true );
@@ -740,7 +740,7 @@ public class GMActivity extends Activity
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
-    mImage.setBackground( MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
+    TDandroid.setButtonBackground( mImage, MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter( res );
     onMenu = true;
@@ -764,11 +764,11 @@ public class GMActivity extends Activity
     mEnableWrite = enable;
     // if ( TDLevel.overBasic ) {
     //   mButton1[BTN_COVER].setEnabled( enable );
-    //   mButton1[BTN_COVER].setBackground( ( enable ? mBMcover : mBMcover_no ) );
+    //   TDandroid.setButtonBackground( mButton1[BTN_COVER], ( enable ? mBMcover : mBMcover_no ) );
     // }
     if ( TDLevel.overNormal ) {
       mButton1[BTN_WRITE].setEnabled( enable );
-      mButton1[BTN_WRITE].setBackground( ( enable ? mBMwrite : mBMwrite_no ) );
+      TDandroid.setButtonBackground( mButton1[BTN_WRITE], ( enable ? mBMwrite : mBMwrite_no ) );
     }
   }
 
@@ -781,22 +781,22 @@ public class GMActivity extends Activity
     mButton1[BTN_BT].setEnabled( enable );
     // if ( TDLevel.overBasic ) {
     //   mButton1[BTN_COVER].setEnabled( enable2 );
-    //   mButton1[BTN_COVER].setBackground( ( enable2 ? mBMcover : mBMcover_no ) );
+    //   TDandroid.setButtonBackground( mButton1[BTN_COVER], ( enable2 ? mBMcover : mBMcover_no ) );
     // }
     if ( TDLevel.overNormal ) {
       mButton1[BTN_READ].setEnabled( enable );
-      mButton1[BTN_READ].setBackground( ( enable ? mBMread : mBMread_no ) );
+      TDandroid.setButtonBackground( mButton1[BTN_READ], ( enable ? mBMread : mBMread_no ) );
       mButton1[BTN_WRITE].setEnabled( enable2 );
-      mButton1[BTN_WRITE].setBackground( ( enable2 ? mBMwrite : mBMwrite_no ) );
+      TDandroid.setButtonBackground( mButton1[BTN_WRITE], ( enable2 ? mBMwrite : mBMwrite_no ) );
     }
     if ( enable ) {
       setTitleColor( TDColor.TITLE_NORMAL );
-      mButton1[BTN_TOGGLE].setBackground( mBMtoggle );
-      mButton1[BTN_BT].setBackground( mBMbluetooth );
+      TDandroid.setButtonBackground( mButton1[BTN_TOGGLE], mBMtoggle );
+      TDandroid.setButtonBackground( mButton1[BTN_BT], mBMbluetooth );
     } else {
       setTitleColor( TDColor.CONNECTED );
-      mButton1[BTN_TOGGLE].setBackground( mBMtoggle_no );
-      mButton1[BTN_BT].setBackground( mBMbluetooth_no );
+      TDandroid.setButtonBackground( mButton1[BTN_TOGGLE], mBMtoggle_no );
+      TDandroid.setButtonBackground( mButton1[BTN_BT], mBMbluetooth_no );
     }
   }
 
@@ -812,7 +812,7 @@ public class GMActivity extends Activity
 
   public void enableBluetoothButton( boolean enable )
   {
-    mButton1[BTN_BT].setBackground( enable ? mBMbluetooth : mBMbluetooth_no );
+    TDandroid.setButtonBackground( mButton1[BTN_BT], enable ? mBMbluetooth : mBMbluetooth_no );
     mButton1[BTN_BT].setEnabled( enable );
   }
 
@@ -866,7 +866,7 @@ public class GMActivity extends Activity
         setTitleColor( TDColor.CONNECTED );
         ListerHandler handler = new ListerHandler( this ); // FIXME_LISTER
         new DataDownloadTask( mApp, handler, this ).execute();
-        mButton1[ BTN_DOWNLOAD ].setBackground( mBMdownload_on );
+        TDandroid.setButtonBackground( mButton1[ BTN_DOWNLOAD ], mBMdownload_on );
         enableButtons( false );
       }
 

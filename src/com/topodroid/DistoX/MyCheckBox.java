@@ -68,7 +68,7 @@ class MyCheckBox extends CompoundButton
       @Override
       public void onCheckedChanged( CompoundButton b, boolean status )
       {
-        b.setBackground( MyButton.getButtonBackground( mContext, mContext.getResources(), (status ? mIdOn : mIdOff) ) );
+        TDandroid.setButtonBackground( b, MyButton.getButtonBackground( mContext, mContext.getResources(), (status ? mIdOn : mIdOff) ) );
       }
     } );
 
@@ -82,7 +82,7 @@ class MyCheckBox extends CompoundButton
       }
     } );
 
-    this.setBackground( MyButton.getButtonBackground( mContext, mContext.getResources(), (mState ? mIdOn : mIdOff) ) );
+    TDandroid.setButtonBackground( this, MyButton.getButtonBackground( mContext, mContext.getResources(), (mState ? mIdOn : mIdOff) ) );
   }
 
   @Override
@@ -97,7 +97,7 @@ class MyCheckBox extends CompoundButton
   public void setState( boolean state )
   {
     mState = state;
-    this.setBackground( MyButton.getButtonBackground( mContext, mContext.getResources(), (mState ? mIdOn : mIdOff) ) );
+    TDandroid.setButtonBackground( this, MyButton.getButtonBackground( mContext, mContext.getResources(), (mState ? mIdOn : mIdOff) ) );
   }
 
 }

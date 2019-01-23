@@ -107,8 +107,7 @@ public class SensorActivity extends Activity
       mRBMagnetic.setEnabled( false );
     }
 
-    // sl = mSensorManager.getSensorList( Sensor.TYPE_TEMPERATURE );
-    sl = mSensorManager.getSensorList( Sensor.TYPE_AMBIENT_TEMPERATURE ); // Android >= API_14
+    sl = mSensorManager.getSensorList( TDandroid.TEMPERATURE ); // Android >= API_14
     if ( sl.size() > 0 ) {
       mRBTemperature.setOnClickListener( this );
       mSensor.addAll( sl ); // for ( Sensor s : sl ) mSensor.add( s );
@@ -165,8 +164,7 @@ public class SensorActivity extends Activity
       mSensorType = Sensor.TYPE_MAGNETIC_FIELD;
       mETtype.setText( R.string.sensor_magnetic_field );
     } else if ( mRBTemperature != null && mRBTemperature.isChecked() ) {
-      // mSensorType = Sensor.TYPE_TEMPERATURE;
-      mSensorType = Sensor.TYPE_AMBIENT_TEMPERATURE; // Android >= API_14
+      mSensorType = TDandroid.TEMPERATURE;
       mETtype.setText( R.string.sensor_temperature );
     } else if ( mRBPressure != null && mRBPressure.isChecked() ) {
       mSensorType = Sensor.TYPE_PRESSURE;
@@ -215,8 +213,7 @@ public class SensorActivity extends Activity
         switch ( mSensorType ) {
           case Sensor.TYPE_LIGHT:
           // case Sensor.TYPE_PROXIMITY:
-          // case Sensor.TYPE_TEMPERATURE:
-          case Sensor.TYPE_AMBIENT_TEMPERATURE: // Android >= API_14
+          case TDandroid.TEMPERATURE:
           case Sensor.TYPE_PRESSURE:
           // case Sensor.TYPE_RELATIVE_HUMIDITY:
             if ( mFirst ) {

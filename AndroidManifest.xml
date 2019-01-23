@@ -2,17 +2,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="401060"
-      android:versionName="4.1.1E"
+      android:versionCode="401061"
+      android:versionName="4.1.2"
     >
     <!-- android:debuggable="true" -->
     <!-- Android SDK dependencies:
 	 (1) edit src/com/topodroid/DistoX/TDandroid.java
+	     edit TopoDroidApp.java 
+             edit MainWindow.java
          (2) set the slink save/values to the proper save/values-vXX
-         (3) set min and target here
+	 (3) set min and target here
              FIXME-23 : min 21 target 26 
              FIXME-16 : min 8  target 16
-             FIXME-08 : min 8  target  8
+	     FIXME-8 : min 8  target  8
+         (4) edit project.properties
+         (5) change slinks in res/layout
+             item_picker_dialog.xml
+	     item_picker2_dialog.xml
+             symbol_enable_dialog.xml
     -->
     <uses-sdk
        android:minSdkVersion="16"
@@ -52,10 +59,12 @@
           android:allowBackup="false"
 	  android:icon="@drawable/icon4"
 	  android:largeHeap="true"
-	  ><!-- FIXME-23
-	  android:largeHeap="true"
-          android:screenOrientation="portrait"
-          -->
+	  ><!-- FIXME-23 android:largeHeap="true"
+                FIXME-16 android:largeHeap="true"
+                FIXME-8 nothing
+	  -->
+	  <!-- android:screenOrientation="portrait" -->
+      
 	  <!-- android:extractNativeLibs="false" -->
           <!-- android:largeHeap="true"  post Gingerbread large memory -->
           <!-- android:debuggable="false" -->

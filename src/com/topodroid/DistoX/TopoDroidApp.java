@@ -675,6 +675,7 @@ public class TopoDroidApp extends Application
     // mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
     Resources res = TDInstance.context.getResources();
     DisplayMetrics dm = res.getDisplayMetrics();
+    /* FIXME-23 */
     if ( android.os.Build.VERSION.SDK_INT >= 17 ) {
       Configuration conf = new Configuration( res.getConfiguration() );
       conf.setLocale( mLocale );
@@ -685,6 +686,12 @@ public class TopoDroidApp extends Application
       conf.locale = mLocale; 
       res.updateConfiguration( conf, dm );
     }
+    /* */
+    /* FIXME-16 FIXME-8 
+      Configuration conf = res.getConfiguration();
+      conf.locale = mLocale; 
+      res.updateConfiguration( conf, dm );
+    /* */
     return TDInstance.context;
   }
 

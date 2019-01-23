@@ -161,7 +161,7 @@ class SymbolEnableDialog extends MyDialog
           // mBTpoint.getBackground().setColorFilter( TDColor.LIGHT_BLUE, PorterDuff.Mode.LIGHTEN );
           // mBTline.getBackground().setColorFilter(  TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
           // mBTarea.getBackground().setColorFilter(  TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
-          mBTpoint.setTextColor( TDColor.WHITE );
+          mBTpoint.setTextColor( TDColor.SYMBOL_ON );
           mBTline.setTextColor(  TDColor.SYMBOL_TAB );
           mBTarea.setTextColor(  TDColor.SYMBOL_TAB );
         }
@@ -172,7 +172,7 @@ class SymbolEnableDialog extends MyDialog
         // mBTline.getBackground().setColorFilter(  TDColor.LIGHT_BLUE, PorterDuff.Mode.LIGHTEN );
         // mBTarea.getBackground().setColorFilter(  TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
         mBTpoint.setTextColor( TDColor.SYMBOL_TAB );
-        mBTline.setTextColor(  TDColor.WHITE );
+        mBTline.setTextColor(  TDColor.SYMBOL_ON );
         mBTarea.setTextColor(  TDColor.SYMBOL_TAB );
         break;
       case Symbol.AREA:
@@ -183,7 +183,7 @@ class SymbolEnableDialog extends MyDialog
           // mBTarea.getBackground().setColorFilter(  TDColor.LIGHT_BLUE, PorterDuff.Mode.LIGHTEN );
           mBTpoint.setTextColor( TDColor.SYMBOL_TAB );
           mBTline.setTextColor(  TDColor.SYMBOL_TAB );
-          mBTarea.setTextColor(  TDColor.WHITE );
+          mBTarea.setTextColor(  TDColor.SYMBOL_ON );
         }
         break;
     }
