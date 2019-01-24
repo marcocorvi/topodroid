@@ -1011,8 +1011,8 @@
   <string name="pref_leg_shots_summary">Количество одинаковых повторяющихся замеров на отрезке между пикетами</string>
   <string name="pref_recent_timeout_title">Время свежести замеров</string>
   <string name="pref_recent_timeout_summary">Отрезок времени после скачивания в течении которого данные выделены на абрисе как новые. [с]</string>
-  <!-- TODO string name="pref_triple_shot_title">Leg-shot bell</string -->
-  <!-- TODO string name="pref_triple_shot_summary">Sound feedback on leg-shot recognition</string -->
+  <string name="pref_triple_shot_title">Сигнал одинаковых измерений</string>
+  <string name="pref_triple_shot_summary">Звуковой сингал при получении нескольких одинаковых замеров между пикетами.</string>
   <string name="pref_station_prefix_title">Экспортировать пикеты с префиксом </string>
   <string name="pref_station_prefix_summary">Добавлять префикс к номерам пикетов при экспорте в формат [Compass]</string>
   <string name="pref_compass_splays_title">Боковые замеры в Compass</string>
