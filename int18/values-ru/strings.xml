@@ -1256,6 +1256,8 @@
   <!-- UNUSED string name="pref_xtherion_areas_summary">Сохранить области как в xtherion</string -->
   <string name="pref_therion_splays_title">Боковые замеры в абрисе Therion</string>
   <string name="pref_therion_splays_summary">Добавить линии сплеев u:splay в экспортрованный абрис .th2</string>
+  <!-- TODO string name="pref_th2_scale_title">Therion scale</string -->
+  <!-- TODO string name="pref_th2_scale_summary">Scale of th2/xvi export</string -->
   <string name="pref_autoStations_title">Точки пикетов в абрисе Therion</string>
   <string name="pref_autoStations_summary">Добавлять точки пикетов в экспортированный абрис .th2</string>
   <string name="pref_loopClosure_title">Закрывать петли</string>

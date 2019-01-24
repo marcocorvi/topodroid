@@ -1756,7 +1756,7 @@ public class DrawingWindow extends ItemDrawer
     // // mDrawingUtil = mLandscape ? (new DrawingUtilLandscape()) : ( new DrawingUtilPortrait());
     // mDrawingUtil = new DrawingUtilPortrait();
 
-    if ( mMoveTo.length() == 0 ) mMoveTo = null;
+    if ( mMoveTo != null && mMoveTo.length() == 0 ) mMoveTo = null; // test for Xiaomi readmi note
     mSectionName  = null; // resetStatus
     mShiftDrawing = false;
     mContinueLine = TDSetting.mContinueLine;

@@ -32,8 +32,6 @@ import java.util.Locale;
  */
 class DrawingPointPath extends DrawingPath
 {
-  private static final float toTherion = TDConst.TO_THERION;
-
   static final int SCALE_NONE = -3; // used to force scaling
   static final int SCALE_XS = -2;
   static final int SCALE_S  = -1;
@@ -380,7 +378,7 @@ class DrawingPointPath extends DrawingPath
     PrintWriter pw  = new PrintWriter(sw);
 
     String th_name = BrushManager.mPointLib.getSymbolThName(mPointType);
-    pw.format(Locale.US, "point %.2f %.2f %s", cx*toTherion, -cy*toTherion, th_name );
+    pw.format(Locale.US, "point %.2f %.2f %s", cx*TDSetting.mToTherion, -cy*TDSetting.mToTherion, th_name );
     toTherionOrientation( pw );
     // FIXME SECTION_RENAME
     // if ( mPointType != BrushManager.mPointLib.mPointSectionIndex )

@@ -32,8 +32,6 @@ import android.util.Base64;
  */
 class DrawingPhotoPath extends DrawingPointPath
 {
-  private static final float toTherion = TDConst.TO_THERION;
-
   long mId; // id of the photo 
   // private Paint paint;
 
@@ -98,7 +96,7 @@ class DrawingPhotoPath extends DrawingPointPath
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
     pw.format(Locale.US, "point %.2f %.2f photo -text \"%s\" -photo %d.jpg ",
-         cx*toTherion, -cy*toTherion, ((mPointText==null)?"":mPointText), (int)mId );
+         cx*TDSetting.mToTherion, -cy*TDSetting.mToTherion, ((mPointText==null)?"":mPointText), (int)mId );
     toTherionOrientation( pw );
     toTherionOptions( pw );
     pw.format("\n");

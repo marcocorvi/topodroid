@@ -601,11 +601,13 @@ class TDPrefKey
     R.string.pref_survex_eol_title,
     R.string.pref_survex_splay_title,
     R.string.pref_survex_lrud_title,
+    -1
   };
   static int[] EXPORT_SVXdesc = {
     R.string.pref_survex_eol_summary,
     R.string.pref_survex_splay_summary,
     R.string.pref_survex_lrud_summary,
+    -1
   };
   static String[] EXPORT_SVXdef = {
     "lf",
@@ -614,11 +616,13 @@ class TDPrefKey
   };
 
   static String[] EXPORT_TH = { // [8]
-    "DISTOX_THERION_MAPS",         // whether to put map commands before centerline in therion
-    "DISTOX_AUTO_STATIONS",   // 6 // whether to add stations to thetion th2 exports
+    "DISTOX_THERION_MAPS",     // whether to put map commands before centerline in therion
+    "DISTOX_AUTO_STATIONS",    // whether to add stations to thetion th2 exports
     // "DISTOX_XTHERION_AREAS",    // save areas a-la xtherion
-    "DISTOX_THERION_SPLAYS",  // 7 // whether to add u:splay lines to Therion th2 export
-    "DISTOX_SURVEX_LRUD"            // whether to add LRUD to Survex export
+    "DISTOX_THERION_SPLAYS",   // whether to add u:splay lines to Therion th2 export
+    "DISTOX_SURVEX_LRUD",      // whether to add LRUD to Survex export
+    "DISTOX_SVG_GRID",         // whether to export grid in SVG/DXF/XVI
+    "DISTOX_TH2_SCALE"         // th2/xvi scale
   };
   static int[] EXPORT_THtitle = {
     R.string.pref_therion_maps_title,
@@ -626,6 +630,9 @@ class TDPrefKey
     // R.string.pref_xtherion_areas_title,
     R.string.pref_therion_splays_title,
     R.string.pref_survex_lrud_title,
+    R.string.pref_svg_grid_title,
+    R.string.pref_th2_scale_title,
+    -1
   };
   static int[] EXPORT_THdesc = {
     R.string.pref_therion_maps_summary,
@@ -633,13 +640,18 @@ class TDPrefKey
     // R.string.pref_xtherion_areas_summary,
     R.string.pref_therion_splays_summary,
     R.string.pref_survex_lrud_summary,
+    R.string.pref_svg_grid_summary,
+    R.string.pref_th2_scale_summary,
+    -1
   };
   static String[] EXPORT_THdef = {
     FALSE,
     TRUE,
     // FALSE,
     FALSE,
-    FALSE
+    FALSE,
+    TRUE,
+    "100"
   };
 
   // ------------------------------------------------------------------------------
@@ -667,6 +679,7 @@ class TDPrefKey
     R.string.pref_svg_gridstroke_title,
     R.string.pref_svg_shotstroke_title,
     R.string.pref_svg_linedirstroke_title,
+    -1
   };
   static int[] EXPORT_SVGdesc = {
     R.string.pref_svg_grid_summary,
@@ -679,6 +692,7 @@ class TDPrefKey
     R.string.pref_svg_gridstroke_summary,
     R.string.pref_svg_shotstroke_summary,
     R.string.pref_svg_linedirstroke_summary,
+    -1
   };
   static String[] EXPORT_SVGdef = {
     FALSE,

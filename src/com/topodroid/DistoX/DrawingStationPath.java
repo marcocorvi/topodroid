@@ -31,8 +31,6 @@ import java.io.IOException;
  */
 class DrawingStationPath extends DrawingPath
 {
-  private static final float toTherion = TDConst.TO_THERION;
-
   // float mXpos, mYpos;         // X-Y station position (scene): use cx, cy
   private int mScale;         //! symbol scale
   private String mName;       // station name
@@ -121,8 +119,8 @@ class DrawingStationPath extends DrawingPath
   @Override
   public String toTherion( )
   {
-    // return String.format(Locale.US, "point %.2f %.2f station -name %s\n", mXpos*toTherion, -mYpos*toTherion, mName );
-    return String.format(Locale.US, "point %.2f %.2f station -name %s\n", cx*toTherion, -cy*toTherion, mName );
+    // return String.format(Locale.US, "point %.2f %.2f station -name %s\n", mXpos*TDSetting.mToTherion, -mYpos*TDSetting.mToTherion, mName );
+    return String.format(Locale.US, "point %.2f %.2f station -name %s\n", cx*TDSetting.mToTherion, -cy*TDSetting.mToTherion, mName );
   }
 
   @Override

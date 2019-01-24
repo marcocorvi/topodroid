@@ -1239,6 +1239,8 @@
   <!-- UNUSED string name="pref_xtherion_areas_summary">Затваряне на площта с допълнителна точка</string -->
   <string name="pref_therion_splays_title">Therion странични измервания</string>
   <string name="pref_therion_splays_summary">Експортиране на u:splay в th2 скиците</string>
+  <!-- TODO string name="pref_th2_scale_title">Therion scale</string -->
+  <!-- TODO string name="pref_th2_scale_summary">Scale of th2/xvi export</string -->
   <string name="pref_autoStations_title">Репери в скицата</string>
   <string name="pref_autoStations_summary">Добавяне на реперите автоматично</string>
   <string name="pref_loopClosure_title">Затваряне на полигони</string>

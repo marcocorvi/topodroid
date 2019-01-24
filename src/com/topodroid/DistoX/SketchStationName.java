@@ -28,7 +28,7 @@ import android.graphics.Matrix;
  */
 class SketchStationName extends SketchPath
 {
-  private static float toTherion = 1.0f; // TDConst.TO_THERION;
+  private static float toTherion = 1.0f; // TDSetting.mToTherion;
 
   String mName;   // station name
   float x, y, z;  // world coordinates

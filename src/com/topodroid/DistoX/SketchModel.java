@@ -929,9 +929,9 @@ class SketchModel
                 while ( ! line.equals( "endvertex" ) ) {
                   String[] pt = line.split( "\\s+" );
                   int i = Integer.parseInt( pt[0] );
-                  x =   Float.parseFloat( pt[1] ); // / TDConst.TO_THERION;
-                  y = - Float.parseFloat( pt[2] ); // / TDConst.TO_THERION;
-                  z = - Float.parseFloat( pt[3] ); // / TDConst.TO_THERION;
+                  x =   Float.parseFloat( pt[1] ); // / TDSetting.mToTherion;
+                  y = - Float.parseFloat( pt[2] ); // / TDSetting.mToTherion;
+                  z = - Float.parseFloat( pt[3] ); // / TDSetting.mToTherion;
                   i1 = surface.addVertex( i, x, y, z );
                   line = readLine( br );
                 }
@@ -999,13 +999,13 @@ class SketchModel
           // String options = null;
           x = y = z = 0.0f;
           if ( ++k < vals.length ) {
-            x =   Float.parseFloat( vals[k] ); // / TDConst.TO_THERION; // th3 has east
+            x =   Float.parseFloat( vals[k] ); // / TDSetting.mToTherion; // th3 has east
           }
           if ( ++k < vals.length ) {
-            y = - Float.parseFloat( vals[k] ); // / TDConst.TO_THERION;   // north
+            y = - Float.parseFloat( vals[k] ); // / TDSetting.mToTherion;   // north
           }
           if ( ++k < vals.length ) {
-            z = - Float.parseFloat( vals[k] ); // / TDConst.TO_THERION; // pos-Z
+            z = - Float.parseFloat( vals[k] ); // / TDSetting.mToTherion; // pos-Z
           }
           if ( ++k < vals.length ) {
             type = vals[k];
@@ -1025,13 +1025,13 @@ class SketchModel
                   if ( vals[k].equals("-orientation") ) {
                     x = y = z = 0.0f;
                     if ( ++k < vals.length ) {
-                      x =   Float.parseFloat( vals[k] ); // / TDConst.TO_THERION; 
+                      x =   Float.parseFloat( vals[k] ); // / TDSetting.mToTherion; 
                     }
                     if ( ++k < vals.length ) {
-                      y = - Float.parseFloat( vals[k] ); // / TDConst.TO_THERION;
+                      y = - Float.parseFloat( vals[k] ); // / TDSetting.mToTherion;
                     }
                     if ( ++k < vals.length ) {
-                      z = - Float.parseFloat( vals[k] ); // / TDConst.TO_THERION;
+                      z = - Float.parseFloat( vals[k] ); // / TDSetting.mToTherion;
                     }
                     path.setOrientation( new Vector(x,y,z), mInfo );
                   }
@@ -1106,9 +1106,9 @@ class SketchModel
               // if ( options != null ) path.mOptions = options;
 
               String[] pt = line.split( "\\s+" );
-              x =   Float.parseFloat( pt[0] ); // / TDConst.TO_THERION;
-              y = - Float.parseFloat( pt[1] ); // / TDConst.TO_THERION;
-              z = - Float.parseFloat( pt[2] ); // / TDConst.TO_THERION;
+              x =   Float.parseFloat( pt[0] ); // / TDSetting.mToTherion;
+              y = - Float.parseFloat( pt[1] ); // / TDSetting.mToTherion;
+              z = - Float.parseFloat( pt[2] ); // / TDSetting.mToTherion;
 
               path.addLinePoint( x, y, z );
               while ( (line = readLine( br )) != null ) {
@@ -1121,20 +1121,20 @@ class SketchModel
                 if ( path != null ) {
                   String[] vals2 = line.split( " " );
                   if ( vals2.length == 3 ) {
-                    x  =   Float.parseFloat( vals2[0] ); // / TDConst.TO_THERION;
-                    y  = - Float.parseFloat( vals2[1] ); // / TDConst.TO_THERION;
-                    z  = - Float.parseFloat( vals2[2] ); // / TDConst.TO_THERION;
+                    x  =   Float.parseFloat( vals2[0] ); // / TDSetting.mToTherion;
+                    y  = - Float.parseFloat( vals2[1] ); // / TDSetting.mToTherion;
+                    z  = - Float.parseFloat( vals2[2] ); // / TDSetting.mToTherion;
                     path.addLinePoint( x, y, z );
                   } else if ( vals2.length == 9 ) {
-                    x1 =   Float.parseFloat( vals2[0] ); // / TDConst.TO_THERION;
-                    y1 = - Float.parseFloat( vals2[1] ); // / TDConst.TO_THERION;
-                    z1 = - Float.parseFloat( vals2[2] ); // / TDConst.TO_THERION;
-                    x2 =   Float.parseFloat( vals2[3] ); // / TDConst.TO_THERION;
-                    y2 = - Float.parseFloat( vals2[4] ); // / TDConst.TO_THERION;
-                    z2 = - Float.parseFloat( vals2[5] ); // / TDConst.TO_THERION;
-                    x  =   Float.parseFloat( vals2[6] ); // / TDConst.TO_THERION;
-                    y  = - Float.parseFloat( vals2[7] ); // / TDConst.TO_THERION;
-                    z  = - Float.parseFloat( vals2[8] ); // / TDConst.TO_THERION;
+                    x1 =   Float.parseFloat( vals2[0] ); // / TDSetting.mToTherion;
+                    y1 = - Float.parseFloat( vals2[1] ); // / TDSetting.mToTherion;
+                    z1 = - Float.parseFloat( vals2[2] ); // / TDSetting.mToTherion;
+                    x2 =   Float.parseFloat( vals2[3] ); // / TDSetting.mToTherion;
+                    y2 = - Float.parseFloat( vals2[4] ); // / TDSetting.mToTherion;
+                    z2 = - Float.parseFloat( vals2[5] ); // / TDSetting.mToTherion;
+                    x  =   Float.parseFloat( vals2[6] ); // / TDSetting.mToTherion;
+                    y  = - Float.parseFloat( vals2[7] ); // / TDSetting.mToTherion;
+                    z  = - Float.parseFloat( vals2[8] ); // / TDSetting.mToTherion;
                     // path.addPoint3( x1, y1, z1, x2, y2, z2, x, y, z, false );
                   }
                 }

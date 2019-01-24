@@ -121,6 +121,7 @@ class TDSetting
   static boolean mAutoStations  = true;  // whether to add stations automatically to scrap therion files
   static boolean mTherionSplays = false; // whether to add splay segments to auto stations
   static boolean mCompassSplays = true;  // whether to add splays to Compass export
+  static float   mToTherion = 2; // 200/scale
 
   static float mBitmapScale = 1.5f;
   static float mBezierStep  = 0.2f;
@@ -756,6 +757,8 @@ class TDSetting
     mAutoStations      = prefs.getBoolean( keyExpTh[1], bool(defExpTh[1]) ); // DISTOX_AUTO_STATIONS 
     // mXTherionAreas  = prefs.getBoolean( keyExpTh[ ], bool(defExpTh[ ]) ); // DISTOX_XTHERION_AREAS
     mTherionSplays     = prefs.getBoolean( keyExpTh[2], bool(defExpTh[2]) ); // DISTOX_THERION_SPLAYS
+    int scale = tryInt( prefs, keyExpTh[5], defExpTh[5] );  // DISTOX_TH2_SCALE
+    mToTherion = 200.0f / scale;
     // mSurvexLRUD        =   prefs.getBoolean(   keyExpTh[3], bool(defExpTh[3]) ); // DISTOX_SURVEX_LRUD
 
     String[] keyExpDat = TDPrefKey.EXPORT_DAT;
@@ -1460,6 +1463,15 @@ class TDSetting
       mTherionSplays    = tryBooleanValue( hlp, k, v, bool(def[ 2]) );   
     } else if ( k.equals( key[3] ) ) { // DISTOX_SURVEX_LRUD (bool)
       mSurvexLRUD       = tryBooleanValue( hlp, k, v, bool(def[3]) );
+    } else if ( k.equals( key[4] ) ) { // DISTOX_SVG_GRID (bool)
+      mSvgGrid = tryBooleanValue( hlp, k, v, bool(def[4]) );
+    } else if ( k.equals( key[5] ) ) { // DISTOX_TH2_SCALE (bool)
+      int scale = tryIntValue( hlp, k, v, def[5] );
+      if ( scale >= 40 && scale <= 2000 ) {
+	mToTherion = 200.0f/scale;
+      } else {
+        return String.format("%d", (int)(200/mToTherion) );
+      }
     } else {
       TDLog.Error("missing EXPORT TH key: " + k );
     }

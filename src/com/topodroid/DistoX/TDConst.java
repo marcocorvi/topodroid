@@ -131,8 +131,6 @@ class TDConst
   static final int DDMMSS = 0;
   static final int DEGREE = 1;
 
-  static final float TO_THERION = 5.0f;  // therion export scale-factor
-
   static final int NUMBER                 = InputType.TYPE_CLASS_NUMBER;
   static final int NUMBER_DECIMAL         = NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL;
   static final int NUMBER_SIGNED          = NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED;

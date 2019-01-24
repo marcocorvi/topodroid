@@ -1237,6 +1237,8 @@
   <!-- UNUSED string name="pref_xtherion_areas_summary">保存 xtherion 区域</string -->
   <string name="pref_therion_splays_title">Therion 侧线</string>
   <string name="pref_therion_splays_summary">添加 u:splay 侧线线条到 th2文件</string>
+  <!-- TODO string name="pref_th2_scale_title">Therion scale</string -->
+  <!-- TODO string name="pref_th2_scale_summary">Scale of th2/xvi export</string -->
   <string name="pref_autoStations_title">Therion 测量点</string>
   <string name="pref_autoStations_summary">自动添加测量点到Therion文件</string>
   <string name="pref_loopClosure_title">闭合圈测</string>

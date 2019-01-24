@@ -39,7 +39,6 @@ class DrawingXvi
   static final private int POINT_SCALE  = 10;
   static final private int POINT_RADIUS = 10;
   static final private int RADIUS = 3;
-  static final private float SCALE = 5; // util.SCALE_FIX; // 20.0f
   static final private float CELL  = 20; // 1 meter
   static final private float POINT = 20;
 
@@ -96,7 +95,8 @@ class DrawingXvi
     int ny = (int)((y2-y1)/CELL);
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
-    pw.format(Locale.US, "set XVIgrid { %.2f %.2f %.2f 0.0 0.0 %.2f %d %d }\n\n", SCALE*(xoff+x1), SCALE*(yoff-y2), SCALE*CELL, SCALE*CELL, nx, ny );
+    pw.format(Locale.US, "set XVIgrid { %.2f %.2f %.2f 0.0 0.0 %.2f %d %d }\n\n",
+              TDSetting.mToTherion*(xoff+x1), TDSetting.mToTherion*(yoff-y2), TDSetting.mToTherion*CELL, TDSetting.mToTherion*CELL, nx, ny );
     try {
       out.write( sw.getBuffer().toString() );
       out.flush();
@@ -185,7 +185,8 @@ class DrawingXvi
         for ( DrawingPath sh : plot.getLegs() ) {
           DBlock blk = sh.mBlock;
           if ( blk == null ) continue;
-          pw4.format(Locale.US, "  { %.2f %.2f %.2f %.2f }\n", SCALE*(xoff+sh.x1), SCALE*(yoff-sh.y1), SCALE*(xoff+sh.x2), SCALE*(yoff-sh.y2) );
+          pw4.format(Locale.US, "  { %.2f %.2f %.2f %.2f }\n",
+                     TDSetting.mToTherion*(xoff+sh.x1), TDSetting.mToTherion*(yoff-sh.y1), TDSetting.mToTherion*(xoff+sh.x2), TDSetting.mToTherion*(yoff-sh.y2) );
         }
         out.write( sw4.getBuffer().toString() );
         out.flush();
@@ -196,7 +197,8 @@ class DrawingXvi
           for ( DrawingPath sh : plot.getSplays() ) {
             DBlock blk = sh.mBlock;
             if ( blk == null ) continue;
-            pw41.format(Locale.US, "  { %.2f %.2f %.2f %.2f }\n", SCALE*(xoff+sh.x1), SCALE*(yoff-sh.y1), SCALE*(xoff+sh.x2), SCALE*(yoff-sh.y2) );
+            pw41.format(Locale.US, "  { %.2f %.2f %.2f %.2f }\n",
+                        TDSetting.mToTherion*(xoff+sh.x1), TDSetting.mToTherion*(yoff-sh.y1), TDSetting.mToTherion*(xoff+sh.x2), TDSetting.mToTherion*(yoff-sh.y2) );
           }
           out.write( sw41.getBuffer().toString() );
         }
@@ -252,31 +254,31 @@ class DrawingXvi
 
   static private void toXvi( PrintWriter pw, DrawingStationName name, float xoff, float yoff )
   {
-    pw.format(Locale.US, "  { %.2f %.2f %s }\n", SCALE*(xoff+name.cx), SCALE*(yoff-name.cy), name.name() );
+    pw.format(Locale.US, "  { %.2f %.2f %s }\n", TDSetting.mToTherion*(xoff+name.cx), TDSetting.mToTherion*(yoff-name.cy), name.name() );
   }
 
   static private void toXvi( PrintWriter pw, DrawingStationPath st, float xoff, float yoff )
   {
-    pw.format(Locale.US, "  { %.2f %.2f %s }\n", SCALE*(xoff+st.cx), SCALE*(yoff-st.cy), st.name() );
+    pw.format(Locale.US, "  { %.2f %.2f %s }\n", TDSetting.mToTherion*(xoff+st.cx), TDSetting.mToTherion*(yoff-st.cy), st.name() );
   }
 
   static private void toXviPointLine( PrintWriter pw, DrawingPointLinePath lp, String color, float xoff, float yoff, boolean closed )
   {
     float bezier_step = TDSetting.getBezierStep();
     LinePoint p = lp.mFirst;
-    float x0 = SCALE*(xoff+p.x);
-    float y0 = SCALE*(yoff-p.y);
+    float x0 = TDSetting.mToTherion*(xoff+p.x);
+    float y0 = TDSetting.mToTherion*(yoff-p.y);
     float x00 = x0;
     float y00 = y0;
     for ( p = p.mNext; p != null; p = p.mNext ) { 
       pw.format(Locale.US, "  { %s %.2f %.2f", color, x0, y0 );
-      float x3 = SCALE*(xoff+p.x);
-      float y3 = SCALE*(yoff-p.y);
+      float x3 = TDSetting.mToTherion*(xoff+p.x);
+      float y3 = TDSetting.mToTherion*(yoff-p.y);
       if ( p.has_cp ) { // FIXME this converts the cubic with a thickly interpolated polyline
-        float x1 = SCALE*(xoff + p.x1);
-        float y1 = SCALE*(yoff - p.y1);
-        float x2 = SCALE*(xoff + p.x2);
-        float y2 = SCALE*(yoff - p.y2);
+        float x1 = TDSetting.mToTherion*(xoff + p.x1);
+        float y1 = TDSetting.mToTherion*(yoff - p.y1);
+        float x2 = TDSetting.mToTherion*(xoff + p.x2);
+        float y2 = TDSetting.mToTherion*(yoff - p.y2);
         pw.format(Locale.US, " %.2f %.2f %.2f %.2f", x1, y1, x2, y2 );
       } 
       pw.format(Locale.US, " %.2f %.2f }\n", x3, y3 );
@@ -335,10 +337,10 @@ class DrawingXvi
 	}
 	int j = 0;
 	while ( j < glyph.length ) {
-          x1 = SCALE*(xof + 3 * (pos + glyph[j])); ++j;
-          y1 = SCALE*(yof + 3 * glyph[j] ); ++j;
-          x2 = SCALE*(xof + 3 * (pos + glyph[j])); ++j;
-          y2 = SCALE*(yof + 3 * glyph[j] ); ++j;
+          x1 = TDSetting.mToTherion*(xof + 3 * (pos + glyph[j])); ++j;
+          y1 = TDSetting.mToTherion*(yof + 3 * glyph[j] ); ++j;
+          x2 = TDSetting.mToTherion*(xof + 3 * (pos + glyph[j])); ++j;
+          y2 = TDSetting.mToTherion*(yof + 3 * glyph[j] ); ++j;
           pw.format("  { black %.2f %.2f %.2f %.2f }\n", x1, y1, x2, y2 );
 	}
 	pos += 1 + glyph[j-2];
@@ -351,10 +353,10 @@ class DrawingXvi
     SymbolPoint sp = (SymbolPoint)BrushManager.mPointLib.getSymbolByIndex( idx );
     String path = ( sp == null )? null : sp.mXvi;
     if ( path == null ) {
-      x1 = SCALE*(xof - 5);
-      y1 = SCALE*(yof - 5);
-      x2 = SCALE*(xof + 5);
-      y2 = SCALE*(yof + 5);
+      x1 = TDSetting.mToTherion*(xof - 5);
+      y1 = TDSetting.mToTherion*(yof - 5);
+      x2 = TDSetting.mToTherion*(xof + 5);
+      y2 = TDSetting.mToTherion*(yof + 5);
       pw.format("  { %s %.2f %.2f %.2f %.2f }\n", color, x1, y1, x2, y2 );
       pw.format("  { %s %.2f %.2f %.2f %.2f }\n", color, x2, y1, x1, y2 );
     } else {
@@ -378,7 +380,8 @@ class DrawingXvi
 	  ++k; y0 = Float.parseFloat(vals[k]) * POINT;
 	  x01 = x0 * ca - y0 * sa;
 	  y01 = y0 * ca + x0 * sa;
-	  pw.format(Locale.US, "  { %s %.2f %.2f %.2f %.2f }\n", color, SCALE*(xof+x00), SCALE*(yof-y00), SCALE*(xof+x01), SCALE*(yof-y01) );
+	  pw.format(Locale.US, "  { %s %.2f %.2f %.2f %.2f }\n",
+                    color, TDSetting.mToTherion*(xof+x00), TDSetting.mToTherion*(yof-y00), TDSetting.mToTherion*(xof+x01), TDSetting.mToTherion*(yof-y01) );
 	} else if ( vals[k].equals("C") ) {
 	  ++k; x0 = Float.parseFloat(vals[k]) * POINT;
 	  ++k; y0 = Float.parseFloat(vals[k]) * POINT;
@@ -396,7 +399,9 @@ class DrawingXvi
 	  ++k; y0 = Float.parseFloat(vals[k]) * POINT;
 	  x03 = x0 * ca - y0 * sa;
 	  y03 = y0 * ca + x0 * sa;
-	  pw.format(Locale.US, "  { %s %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f }\n", color, SCALE*(xof+x00), SCALE*(yof-y00), SCALE*(xof+x01), SCALE*(yof-y01), SCALE*(xof+x02), SCALE*(yof-y02), SCALE*(xof+x03), SCALE*(yof-y03) );
+	  pw.format(Locale.US, "  { %s %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f }\n", color,
+                    TDSetting.mToTherion*(xof+x00), TDSetting.mToTherion*(yof-y00), TDSetting.mToTherion*(xof+x01), TDSetting.mToTherion*(yof-y01),
+                    TDSetting.mToTherion*(xof+x02), TDSetting.mToTherion*(yof-y02), TDSetting.mToTherion*(xof+x03), TDSetting.mToTherion*(yof-y03) );
 	} else {
 	  TDLog.Error("error xvi format point " + name );
 	}

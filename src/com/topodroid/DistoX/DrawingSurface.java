@@ -252,7 +252,8 @@ class DrawingSurface extends SurfaceView
    */
   public void setTransform( float dx, float dy, float s, boolean landscape )
   {
-    commandManager.setTransform( dx, dy, s, landscape );
+    if ( commandManager != null ) // test for Xiaomi readmi note
+      commandManager.setTransform( dx, dy, s, landscape );
   }
 
   void splitLine( DrawingLinePath line, LinePoint lp ) { commandManager.splitLine( line, lp ); }

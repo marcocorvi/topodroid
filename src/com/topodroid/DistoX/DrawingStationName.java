@@ -28,8 +28,6 @@ import android.graphics.Matrix;
 
 class DrawingStationName extends DrawingPointPath
 {
-  private static final float toTherion = TDConst.TO_THERION;
-
   private String mName; // station name
   private NumStation mStation;
   // float mX;     // scene coordinates (cx, cy)
@@ -166,7 +164,7 @@ class DrawingStationName extends DrawingPointPath
   public String toTherion( )
   {
     if ( mStation == null ) return null; // FIXME
-    return String.format(Locale.US, "point %.2f %.2f station -name \"%s\"", cx*toTherion, -cy*toTherion, mName );
+    return String.format(Locale.US, "point %.2f %.2f station -name \"%s\"", cx*TDSetting.mToTherion, -cy*TDSetting.mToTherion, mName );
   }
 
   @Override

@@ -33,8 +33,6 @@ import android.graphics.Matrix;
 
 class LinePoint extends Point2D
 {
-  private static final float toTherion = TDConst.TO_THERION;
-
   // public float x, y; // inherited from PointF
   float x1, y1;    // first control point (to the right of the previous LinePoint)
   float x2, y2;    // second control point (to the left of this LinePoint)
@@ -212,11 +210,11 @@ class LinePoint extends Point2D
   {
       if ( has_cp ) {
         pw.format(Locale.US, "  %.2f %.2f %.2f %.2f %.2f %.2f\n",
-          x1*toTherion, -y1*toTherion,
-          x2*toTherion, -y2*toTherion,
-          x*toTherion,  -y*toTherion );
+          x1*TDSetting.mToTherion, -y1*TDSetting.mToTherion,
+          x2*TDSetting.mToTherion, -y2*TDSetting.mToTherion,
+          x*TDSetting.mToTherion,  -y*TDSetting.mToTherion );
       } else {
-        pw.format(Locale.US, "  %.2f %.2f\n", x*toTherion, -y*toTherion );
+        pw.format(Locale.US, "  %.2f %.2f\n", x*TDSetting.mToTherion, -y*TDSetting.mToTherion );
       }
   }
 

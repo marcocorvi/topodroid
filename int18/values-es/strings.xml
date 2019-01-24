@@ -1246,6 +1246,8 @@
   <!-- UNUSED string name="pref_xtherion_areas_summary">Guardar áreas a xtherion</string -->
   <string name="pref_therion_splays_title">Radiales therion</string>
   <string name="pref_therion_splays_summary">Añadir líneas en la pantalla de archivo Th2</string>
+  <!-- TODO string name="pref_th2_scale_title">Therion scale</string -->
+  <!-- TODO string name="pref_th2_scale_summary">Scale of th2/xvi export</string -->
   <string name="pref_autoStations_title">Estaciones automáticas</string>
   <string name="pref_autoStations_summary">Añadir estación automáticamente</string>
   <string name="pref_loopClosure_title">Cierre de bucle</string>

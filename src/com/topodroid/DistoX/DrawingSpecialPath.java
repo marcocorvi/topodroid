@@ -32,8 +32,6 @@ import java.io.IOException;
  */
 class DrawingSpecialPath extends DrawingPath
 {
-  // private static float toTherion = TDConst.TO_THERION;
-  
   static final int SPECIAL_ANY = 0; // generic
   static final int SPECIAL_DOT = 1; // leg x-section dot reference
 

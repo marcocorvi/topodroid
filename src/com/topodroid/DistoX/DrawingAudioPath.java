@@ -32,8 +32,6 @@ import android.util.Base64;
  */
 class DrawingAudioPath extends DrawingPointPath
 {
-  private static final float toTherion = TDConst.TO_THERION;
-
   long mId;
   // private Paint paint;
   
@@ -94,7 +92,7 @@ class DrawingAudioPath extends DrawingPointPath
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
     pw.format(Locale.US, "point %.2f %.2f audio -text \"%s\" -audio \"%d.wav\" ",
-         cx*toTherion, -cy*toTherion, ((mPointText==null)?"":mPointText), (int)mId );
+         cx*TDSetting.mToTherion, -cy*TDSetting.mToTherion, ((mPointText==null)?"":mPointText), (int)mId );
     toTherionOrientation( pw );
     toTherionOptions( pw );
     pw.format("\n");

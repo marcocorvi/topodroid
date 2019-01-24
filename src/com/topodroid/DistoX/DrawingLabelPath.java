@@ -31,9 +31,6 @@ import java.util.Locale;
  */
 class DrawingLabelPath extends DrawingPointPath
 {
-  private static final float toTherion = TDConst.TO_THERION;
-  // private Paint paint;
-
   DrawingLabelPath( String text, float off_x, float off_y, int scale, String options )
   {
     super( BrushManager.mPointLib.mPointLabelIndex, off_x, off_y, scale, text, options );
@@ -173,7 +170,7 @@ class DrawingLabelPath extends DrawingPointPath
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
-    pw.format(Locale.US, "point %.2f %.2f label -text \"%s\"", cx*toTherion, -cy*toTherion, mPointText );
+    pw.format(Locale.US, "point %.2f %.2f label -text \"%s\"", cx*TDSetting.mToTherion, -cy*TDSetting.mToTherion, mPointText );
     toTherionOrientation( pw );
     toTherionOptions( pw );
     pw.format("\n");

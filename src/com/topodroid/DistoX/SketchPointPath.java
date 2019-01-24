@@ -31,7 +31,7 @@ import java.util.Locale;
 class SketchPointPath extends SketchPath
 {
   // static final String TAG = "DistoX";
-  private static final float toTherion = 1.0f; // TDConst.TO_THERION;
+  private static final float toTherion = 1.0f; // TDSetting.mToTherion;
 
   static final int SCALE_NONE = -3; // used to force scaling
   static final int SCALE_XS = -2;

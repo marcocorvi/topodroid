@@ -42,8 +42,7 @@ import android.graphics.RectF;
 
 class DrawingIO
 {
-  private static final float toTherion = TDConst.TO_THERION;
-  private static final float oneMeter  = DrawingUtil.SCALE_FIX * toTherion;
+  // private static final float toTherion = TDSetting.mToTherion;
 
   private static String readLine( BufferedReader br )
   {
@@ -151,8 +150,8 @@ class DrawingIO
               String options = null;
 
               try {
-                x = dx + Float.parseFloat( vals[1] ) / TDConst.TO_THERION;
-                y = dy - Float.parseFloat( vals[2] ) / TDConst.TO_THERION;
+                x = dx + Float.parseFloat( vals[1] ) / TDSetting.mToTherion;
+                y = dy - Float.parseFloat( vals[2] ) / TDSetting.mToTherion;
               } catch ( NumberFormatException e ) {
                 TDLog.Error( "Therion Point error (number fmt) <" + line + ">" );
                 continue;
@@ -271,8 +270,8 @@ class DrawingIO
                 if ( ! line.equals( "endline" ) ) { 
                   String[] pt = line.split( "\\s+" );
                   try {
-                    x = dx + Float.parseFloat( pt[0] ) / TDConst.TO_THERION;
-                    y = dy - Float.parseFloat( pt[1] ) / TDConst.TO_THERION;
+                    x = dx + Float.parseFloat( pt[0] ) / TDSetting.mToTherion;
+                    y = dy - Float.parseFloat( pt[1] ) / TDSetting.mToTherion;
                   } catch ( NumberFormatException e ) {
                     TDLog.Error( "Therion Line error (number fmt) <" + line + ">" );
                     continue;
@@ -314,8 +313,8 @@ class DrawingIO
                     String[] pt2 = line.split( " " );
                     if ( pt2.length == 2 ) {
                       try {
-                        x = dx + Float.parseFloat( pt2[0] ) / TDConst.TO_THERION;
-                        y = dy - Float.parseFloat( pt2[1] ) / TDConst.TO_THERION;
+                        x = dx + Float.parseFloat( pt2[0] ) / TDSetting.mToTherion;
+                        y = dy - Float.parseFloat( pt2[1] ) / TDSetting.mToTherion;
                         path.addPoint( x, y );
                         // TDLog.Log( TDLog.LOG_DEBUG, "area pt " + x + " " + y);
                       } catch ( NumberFormatException e ) {
@@ -327,12 +326,12 @@ class DrawingIO
                       }
                     } else if ( pt2.length == 6 ) {
                       try {
-                        x1 = dx + Float.parseFloat( pt2[0] ) / TDConst.TO_THERION;
-                        y1 = dy - Float.parseFloat( pt2[1] ) / TDConst.TO_THERION;
-                        x2 = dx + Float.parseFloat( pt2[2] ) / TDConst.TO_THERION;
-                        y2 = dy - Float.parseFloat( pt2[3] ) / TDConst.TO_THERION;
-                        x  = dx + Float.parseFloat( pt2[4] ) / TDConst.TO_THERION;
-                        y  = dy - Float.parseFloat( pt2[5] ) / TDConst.TO_THERION;
+                        x1 = dx + Float.parseFloat( pt2[0] ) / TDSetting.mToTherion;
+                        y1 = dy - Float.parseFloat( pt2[1] ) / TDSetting.mToTherion;
+                        x2 = dx + Float.parseFloat( pt2[2] ) / TDSetting.mToTherion;
+                        y2 = dy - Float.parseFloat( pt2[3] ) / TDSetting.mToTherion;
+                        x  = dx + Float.parseFloat( pt2[4] ) / TDSetting.mToTherion;
+                        y  = dy - Float.parseFloat( pt2[5] ) / TDSetting.mToTherion;
                         path.addPoint3( x1, y1, x2, y2, x, y );
                         // TDLog.Log( TDLog.LOG_DEBUG, "area pt " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + x + " " + y);
                       } catch ( NumberFormatException e ) {
@@ -407,8 +406,8 @@ class DrawingIO
                   // TDLog.Log( TDLog.LOG_PLOT, "  line start point: <" + line + ">");
                   String[] pt0 = line.split( "\\s+" );
                   try {
-                    x = dx + Float.parseFloat( pt0[0] ) / TDConst.TO_THERION;
-                    y = dy - Float.parseFloat( pt0[1] ) / TDConst.TO_THERION;
+                    x = dx + Float.parseFloat( pt0[0] ) / TDSetting.mToTherion;
+                    y = dy - Float.parseFloat( pt0[1] ) / TDSetting.mToTherion;
                     path.addStartPoint( x, y );
                   } catch ( NumberFormatException e ) {
                     TDLog.Error( "Therion Line X-Y error (1) <" + line + ">" );
@@ -438,8 +437,8 @@ class DrawingIO
                       String[] pt = line.split( " " );
                       if ( pt.length == 2 ) {
                         try {
-                          x = dx + Float.parseFloat( pt[0] ) / TDConst.TO_THERION;
-                          y = dy - Float.parseFloat( pt[1] ) / TDConst.TO_THERION;
+                          x = dx + Float.parseFloat( pt[0] ) / TDSetting.mToTherion;
+                          y = dy - Float.parseFloat( pt[1] ) / TDSetting.mToTherion;
                           path.addPoint( x, y );
                         } catch ( NumberFormatException e ) {
                           TDLog.Error( "Therion Line X-Y error (3) <" + line + ">" );
@@ -450,12 +449,12 @@ class DrawingIO
                         }
                       } else if ( pt.length == 6 ) {
                         try {
-                          x1 = dx + Float.parseFloat( pt[0] ) / TDConst.TO_THERION;
-                          y1 = dy - Float.parseFloat( pt[1] ) / TDConst.TO_THERION;
-                          x2 = dx + Float.parseFloat( pt[2] ) / TDConst.TO_THERION;
-                          y2 = dy - Float.parseFloat( pt[3] ) / TDConst.TO_THERION;
-                          x  = dx + Float.parseFloat( pt[4] ) / TDConst.TO_THERION;
-                          y  = dy - Float.parseFloat( pt[5] ) / TDConst.TO_THERION;
+                          x1 = dx + Float.parseFloat( pt[0] ) / TDSetting.mToTherion;
+                          y1 = dy - Float.parseFloat( pt[1] ) / TDSetting.mToTherion;
+                          x2 = dx + Float.parseFloat( pt[2] ) / TDSetting.mToTherion;
+                          y2 = dy - Float.parseFloat( pt[3] ) / TDSetting.mToTherion;
+                          x  = dx + Float.parseFloat( pt[4] ) / TDSetting.mToTherion;
+                          y  = dy - Float.parseFloat( pt[5] ) / TDSetting.mToTherion;
                           path.addPoint3( x1, y1, x2, y2, x, y );
                         } catch ( NumberFormatException e ) {
                           TDLog.Error( "Therion Line X-Y error (5) <" + line + ">" );
@@ -1065,6 +1064,7 @@ class DrawingIO
          int type, String scrap_name, String proj_name, int project_dir,
          boolean do_north, float x1, float y1, float x2, float y2 ) throws IOException
   {
+    float oneMeter  = DrawingUtil.SCALE_FIX * TDSetting.mToTherion;
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
     if (    type == PlotInfo.PLOT_SECTION
@@ -1072,7 +1072,7 @@ class DrawingIO
          || type == PlotInfo.PLOT_X_SECTION ) {
       if ( do_north ) { // H_SECTION (horizontal section) : north line is 5 m long
         pw.format("scrap %s -projection %s -scale [%.0f %.0f %.0f %.0f 0 5 0 0 m]", scrap_name, proj_name, 
-          x1*toTherion, -y1*toTherion, x2*toTherion, -y2*toTherion );
+          x1*TDSetting.mToTherion, -y1*TDSetting.mToTherion, x2*TDSetting.mToTherion, -y2*TDSetting.mToTherion );
       } else {
         pw.format("scrap %s -projection %s -scale [0 0 %.0f 0 0 0 1 0 m]", scrap_name, proj_name, oneMeter );
       }
@@ -1156,7 +1156,7 @@ class DrawingIO
       out.newLine();
 
       if ( TDSetting.mTherionSplays ) {
-        float th = TDConst.TO_THERION;
+        float th = TDSetting.mToTherion;
         StringWriter sw = new StringWriter();
         PrintWriter pw  = new PrintWriter(sw);
 	       synchronized( splays ) {
@@ -1191,7 +1191,7 @@ class DrawingIO
  * this was to export splays by the station instead of all of them
  *
             if ( TDSetting.mTherionSplays ) {
-              float th = TDConst.TO_THERION;
+              float th = TDSetting.mToTherion;
               float x = st.cx * th;
               float y = - st.cy * th;
               th *= DrawingUtil.SCALE_FIX;
