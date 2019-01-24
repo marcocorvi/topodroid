@@ -1232,7 +1232,7 @@
   <string name="pref_linestraight_summary">Спрямить всю линию целиком</string>
   <string name="pref_path_multiselect_title">Выбор нескольких линий</string>
   <string name="pref_path_multiselect_summary">Одновременный выбор нескольких линий</string>
-  <string name="pref_plane_interpolation_title">Плоская интерполяцтя</string>
+  <string name="pref_plane_interpolation_title">Плоская интерполяция</string>
   <string name="pref_plane_interpolation_summary">Выполнить простую интерполяцию</string>
   <string name="pref_plot_split_title">Разделить/Склеить абрис</string>
   <string name="pref_plot_split_summary">Разделить абрис на куски или склеить несколько абрисов в один</string>
