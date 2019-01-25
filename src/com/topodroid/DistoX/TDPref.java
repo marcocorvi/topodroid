@@ -786,6 +786,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], B, def[ 4], INTEGER, ctx, hlp ),
       makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], E, def[ 5], INTEGER, ctx, hlp ),
       makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], E, def[ 6], INTEGER, ctx, hlp ),
+      makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], T, def[ 7], INTEGER, ctx, hlp )  // SPLAY ALPHA
       // makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7], INTEGER, ctx, hlp ),
       // makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], T, def[ 8],          ctx, hlp ),
       // makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9], FLOAT,   ctx, hlp ),
@@ -973,7 +974,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], T, def[ 6], FLOAT,   ctx, hlp ), // DASH X-SCETION
       makeLst( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7], R.array.backupNumber, R.array.backupNumberValue, ctx, hlp ),
       makeEdt( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8], INTEGER, ctx, hlp ), // BACKUP INTERVAL
-      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9],          ctx, hlp )  // BACKUPS CLEAR
+      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9],          ctx, hlp ), // BACKUPS CLEAR
     };
   }
   static TDPref[] makeGeekPrefs( Context ctx, TDPrefHelper hlp )

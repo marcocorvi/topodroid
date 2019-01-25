@@ -57,6 +57,7 @@ class TDColor
   static final int BACK_GREEN   = 0x66009292; // transparent green
   static final int BACK_VIOLET  = 0x66b66dff; // transparent violet
   static final int LIGHT_YELLOW = 0xffffff9f;
+  static final int MID_BLUE     = 0xff5992d7;
 
   static final int TITLE_NORMAL     = TDandroid.TITLE_NORMAL; // FIXED_BLUE same as in values/styles.xml
   static final int TITLE_NORMAL2    = TDandroid.TITLE_NORMAL2; 
@@ -76,5 +77,10 @@ class TDColor
   static final int SYMBOL_ON    = 0xffb6dbff; // LIGHT_BLUE
 
   static final int TRANSPARENT  = 0x00000000;
+
+  static final int SPLAY_LIGHT   = BLUE;
+  static final int SPLAY_NORMAL  = MID_BLUE;
+  static final int SPLAY_LRUD    = GREEN;
+  static final int SPLAY_COMMENT = VERYDARK_GRAY;
 }
   

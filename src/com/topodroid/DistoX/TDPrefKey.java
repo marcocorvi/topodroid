@@ -968,6 +968,7 @@ class TDPrefKey
     "DISTOX_ERASENESS",            // "erase" radius // "erase" radius
     "DISTOX_MIN_SHIFT",            // maximum amount for a shift (to avoid jumps)
     "DISTOX_POINTING",        // 6 // "size" of a "point touch" (max distance between down and up)
+    "DISTOX_SPLAY_ALPHA",
     // "DISTOX_SPLAY_VERT_THRS",      // splays with clino over mSplayVertThrs are not displayed in plan view
     // "DISTOX_DASH_SPLAY",           // whether dash-splay are coherent between plan and profile
     // "DISTOX_VERT_SPLAY",      // 9 // splays with clino over this are shown with dashed/dotted line
@@ -985,6 +986,7 @@ class TDPrefKey
     R.string.pref_eraseness_title,
     R.string.pref_min_shift_title,
     R.string.pref_pointing_title,
+    R.string.pref_splay_alpha_title,
     // R.string.pref_vthr_title,
     // R.string.pref_dash_splay_title,
     // R.string.pref_vert_splay_title,
@@ -1002,6 +1004,7 @@ class TDPrefKey
     R.string.pref_eraseness_message,
     R.string.pref_min_shift_message,
     R.string.pref_pointing_message, 
+    R.string.pref_splay_alpha_summary,
     // R.string.pref_vthr_summary,      
     // R.string.pref_dash_splay_message, 
     // R.string.pref_vert_splay_message,  
@@ -1019,6 +1022,7 @@ class TDPrefKey
     "36",
     TDString.SIXTY,
     TDString.TWENTYFOUR,
+    "80",
     // "80",
     // TRUE,
     // TDString.FIFTY,

@@ -1264,6 +1264,8 @@
   <!-- TODO string name="pref_splay_color_summary">Enable splay coloring</string -->
   <!-- TODO string name="pref_plot_shift_title">Sketch shift/scale</string -->
   <!-- TODO string name="pref_plot_shift_summary">Enable sketch shift and scale</string -->
+  <!-- TODO string name="pref_splay_alpha_title">Splay transparency</string -->
+  <!-- TODO string name="pref_splay_alpha_summary">Splay transparency [0: transparent, 100: opaque]</string -->
 
   <string name="pref_picker_type_title">Вид меню і рисования</string>
   <string name="pref_picker_type_summary">Тип меню инструментов рисования</string>

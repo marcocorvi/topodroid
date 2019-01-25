@@ -1289,6 +1289,8 @@
   <string name="pref_splay_color_summary">Povolí výber ľubovoľných farieb pre pomocné zámery</string>
   <string name="pref_plot_shift_title">Nákres posun/zmena mierky</string>
   <string name="pref_plot_shift_summary">Povolí posun a zmenu mierky krezby v nákrese po povolení Bočného Posuvu vo Výbere možností zobrazenia</string>
+  <!-- TODO string name="pref_splay_alpha_title">Splay transparency</string -->
+  <!-- TODO string name="pref_splay_alpha_summary">Splay transparency [0: transparent, 100: opaque]</string -->
 
   <string name="pref_picker_type_title">Paleta v režime kreslenia</string>
   <string name="pref_picker_type_summary">Spôsob zobrazenia výberu z Palety v režime kreslenia</string>

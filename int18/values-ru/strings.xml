@@ -1276,6 +1276,8 @@
   <string name="pref_splay_color_summary">Включить цвета сплеев</string>
   <string name="pref_plot_shift_title">Сдвиг и скалирование абриса</string>
   <string name="pref_plot_shift_summary">Включить режим смещения и масштабирования абриса относительно нитки</string>
+  <!-- TODO string name="pref_splay_alpha_title">Splay transparency</string -->
+  <!-- TODO string name="pref_splay_alpha_summary">Splay transparency [0: transparent, 100: opaque]</string -->
 
   <string name="pref_picker_type_title">Вид меню инструментов рисования</string>
   <string name="pref_picker_type_summary">Тип меню инструментов рисования</string>

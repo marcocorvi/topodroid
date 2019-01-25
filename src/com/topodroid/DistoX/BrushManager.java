@@ -115,9 +115,9 @@ class BrushManager
   static Paint darkBluePaint   = null;
   static Paint lightBluePaint  = null;
   static Paint fixedRedPaint   = null;
-  static Paint paintSplayLRUD  = null;
   static Paint fixedYellowPaint  = null;
   static Paint fixedOrangePaint  = null;
+  static Paint paintSplayLRUD  = null;
   static Paint paintSplayXB = null;
   static Paint paintSplayComment = null;  // commented splay
   static Paint paintSplayXViewed = null;  // cross-section splay2 (at viewed station)
@@ -209,6 +209,20 @@ class BrushManager
     return paint;
   }
 
+  // alpha in [0,100]
+  static void setSplayAlpha( int alpha )
+  {
+    alpha = (alpha * 255)/100;
+    if ( paintSplayLRUD    != null ) paintSplayLRUD.setAlpha( alpha );
+    if ( paintSplayXB      != null ) paintSplayXB.setAlpha( alpha );
+    if ( paintSplayComment != null ) paintSplayComment.setAlpha( alpha );  // commented splay
+    if ( paintSplayXViewed != null ) paintSplayXViewed.setAlpha( alpha );  // cross-section splay2 (at viewed station)
+    if ( paintSplayXBdash  != null ) paintSplayXBdash.setAlpha( alpha );  // dash splay
+    if ( paintSplayXBdot   != null ) paintSplayXBdot.setAlpha( alpha );  // dot splay
+    if ( paintSplayXVdash  != null ) paintSplayXVdash.setAlpha( alpha );  // blue dash splay
+    if ( paintSplayXVdot   != null ) paintSplayXVdot.setAlpha( alpha );  // blue dot splay
+  }
+
   static void doMakePaths()
   {
     if ( ! doneMakePaths ) {
@@ -223,12 +237,12 @@ class BrushManager
       lightBluePaint   = makePaint( 0xff66ccff,           WIDTH_CURRENT, Paint.Style.STROKE);
       fixedRedPaint    = makePaint( TDColor.FIXED_RED,    WIDTH_CURRENT, Paint.Style.STROKE);
       fixedYellowPaint = makePaint( TDColor.FIXED_YELLOW, WIDTH_CURRENT, Paint.Style.STROKE);
-      paintSplayLRUD  = makePaint( TDColor.GREEN,        WIDTH_CURRENT, Paint.Style.STROKE);
       fixedOrangePaint = makePaint( TDColor.FIXED_ORANGE, WIDTH_CURRENT, Paint.Style.STROKE);
-      paintSplayXB  = makePaint( TDColor.LIGHT_BLUE,   WIDTH_CURRENT, Paint.Style.STROKE);
-      paintSplayComment = makePaint( TDColor.VERYDARK_GRAY,WIDTH_CURRENT, Paint.Style.STROKE);
-      paintSplayXViewed = makePaint( TDColor.BLUE,         WIDTH_CURRENT, Paint.Style.STROKE);
-      paintSplayXBdash = makePaint( TDColor.LIGHT_BLUE,   WIDTH_CURRENT, Paint.Style.STROKE);
+      paintSplayLRUD    = makePaint( TDColor.SPLAY_LRUD,    WIDTH_CURRENT, Paint.Style.STROKE);
+      paintSplayXB      = makePaint( TDColor.SPLAY_LIGHT,   WIDTH_CURRENT, Paint.Style.STROKE);
+      paintSplayComment = makePaint( TDColor.SPLAY_COMMENT,WIDTH_CURRENT, Paint.Style.STROKE);
+      paintSplayXViewed = makePaint( TDColor.SPLAY_NORMAL,         WIDTH_CURRENT, Paint.Style.STROKE);
+      paintSplayXBdash  = makePaint( TDColor.SPLAY_LIGHT,   WIDTH_CURRENT, Paint.Style.STROKE);
 
       float[] x = new float[2];
       x[0] = 24; // FIXME
@@ -236,17 +250,17 @@ class BrushManager
       DashPathEffect dash3 = new DashPathEffect( x, 0 );
       paintSplayXBdash.setPathEffect( dash3 );
 
-      paintSplayXVdash = makePaint( TDColor.BLUE,        WIDTH_CURRENT, Paint.Style.STROKE);
+      paintSplayXVdash = makePaint( TDColor.SPLAY_NORMAL,        WIDTH_CURRENT, Paint.Style.STROKE);
       paintSplayXVdash.setPathEffect( dash3 );
 
-      paintSplayXBdot  = makePaint( TDColor.LIGHT_BLUE,  WIDTH_CURRENT, Paint.Style.STROKE);
+      paintSplayXBdot  = makePaint( TDColor.SPLAY_LIGHT,  WIDTH_CURRENT, Paint.Style.STROKE);
       // float[] x = new float[2];
       x[0] = 14; // FIXME
       x[1] =  8; 
       DashPathEffect dash4 = new DashPathEffect( x, 0 );
       paintSplayXBdot.setPathEffect( dash4 );
 
-      paintSplayXVdot  = makePaint( TDColor.BLUE,       WIDTH_CURRENT, Paint.Style.STROKE);
+      paintSplayXVdot  = makePaint( TDColor.SPLAY_NORMAL,       WIDTH_CURRENT, Paint.Style.STROKE);
       paintSplayXVdot.setPathEffect( dash4 );
 
       fixedGridPaint    = makePaint( TDColor.DARK_GRID,   WIDTH_FIXED, Paint.Style.STROKE);
@@ -270,18 +284,19 @@ class BrushManager
       mSectionPaint = makePaint( TDColor.ORANGE, 2 * WIDTH_FIXED, Paint.Style.FILL_AND_STROKE );
       doneMakePaths = true;
     }
+    setSplayAlpha( TDSetting.mSplayAlpha );
     setStrokeWidths();
     setTextSizes();
   }
 
   static void setStrokeWidths()
   {
-    if (fixedShotPaint != null)   fixedShotPaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
-    if (fixedBluePaint != null)   fixedBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
-    if (lightBluePaint != null)   lightBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
-    if (darkBluePaint != null)    darkBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
-    if (deepBluePaint != null)    deepBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
-    if (paintSplayXB != null)  paintSplayXB.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
+    if (fixedShotPaint != null)    fixedShotPaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
+    if (fixedBluePaint != null)    fixedBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
+    if (lightBluePaint != null)    lightBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
+    if (darkBluePaint != null)     darkBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
+    if (deepBluePaint != null)     deepBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
+    if (paintSplayXB != null)      paintSplayXB.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
     if (paintSplayXViewed != null) paintSplayXViewed.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
   }
 

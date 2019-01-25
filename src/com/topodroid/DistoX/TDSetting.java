@@ -121,7 +121,8 @@ class TDSetting
   static boolean mAutoStations  = true;  // whether to add stations automatically to scrap therion files
   static boolean mTherionSplays = false; // whether to add splay segments to auto stations
   static boolean mCompassSplays = true;  // whether to add splays to Compass export
-  static float   mToTherion = 2; // 200/scale
+  static final float THERION_SCALE = 196.8503937f; // 200 * 39.3700787402 / 40;
+  static float   mToTherion = THERION_SCALE / 100;
 
   static float mBitmapScale = 1.5f;
   static float mBezierStep  = 0.2f;
@@ -244,6 +245,7 @@ class TDSetting
   static float   mCosHorizSplay = TDMath.cosd( mHorizSplay );
   static float   mSectionSplay  = 60;
   static int     mStationNames  = 0;        // type of station names (0: alpha, 1: number)
+  static int     mSplayAlpha    = 80;       // splay alpha [default 80 out of 100]
 
   static final int LOOP_NONE      = 0;
   static final int LOOP_CYCLES    = 1;
@@ -758,7 +760,7 @@ class TDSetting
     // mXTherionAreas  = prefs.getBoolean( keyExpTh[ ], bool(defExpTh[ ]) ); // DISTOX_XTHERION_AREAS
     mTherionSplays     = prefs.getBoolean( keyExpTh[2], bool(defExpTh[2]) ); // DISTOX_THERION_SPLAYS
     int scale = tryInt( prefs, keyExpTh[5], defExpTh[5] );  // DISTOX_TH2_SCALE
-    mToTherion = 200.0f / scale;
+    mToTherion = THERION_SCALE / scale;
     // mSurvexLRUD        =   prefs.getBoolean(   keyExpTh[3], bool(defExpTh[3]) ); // DISTOX_SURVEX_LRUD
 
     String[] keyExpDat = TDPrefKey.EXPORT_DAT;
@@ -891,6 +893,8 @@ class TDSetting
     mEraseness      = tryFloat( prefs, keyScreen[ 4],      defScreen[ 4] );  // DISTOX_ERASENESS
     mMinShift       = tryInt(   prefs, keyScreen[ 5],      defScreen[ 5] );  // DISTOX_MIN_SHIFT
     mPointingRadius = tryInt(   prefs, keyScreen[ 6],      defScreen[ 6] );  // DISTOX_POINTING
+    mSplayAlpha     = tryInt(   prefs, keyScreen[ 7],      defScreen[ 7] );  // DISTOX_SPLAY_ALPHA
+    BrushManager.setSplayAlpha( mSplayAlpha );
     // mSplayVertThrs  = tryFloat( prefs, keyScreen[ 7],      defScreen[ 7]  ); // DISTOX_SPLAY_VERT_THRS
     // mDashSplay     = prefs.getBoolean( keyScreen[ 8], bool(defScreen[ 8]) ); // DISTOX_DASH_SPLAY
     // mVertSplay      = tryFloat( prefs, keyScreen[ 9],      defScreen[ 9] );  // DISTOX_VERT_SPLAY
@@ -1451,6 +1455,7 @@ class TDSetting
   private static String updatePrefTh( TDPrefHelper hlp, String k, String v )
   {
     // Log.v("DistoX", "update pref TH: " + k );
+    String ret = null;
     String[] key = TDPrefKey.EXPORT_TH;
     String[] def = TDPrefKey.EXPORT_THdef;
     if ( k.equals( key[ 0 ] ) ) { // DISTOX_THERION_MAPS (bool)
@@ -1467,15 +1472,14 @@ class TDSetting
       mSvgGrid = tryBooleanValue( hlp, k, v, bool(def[4]) );
     } else if ( k.equals( key[5] ) ) { // DISTOX_TH2_SCALE (bool)
       int scale = tryIntValue( hlp, k, v, def[5] );
-      if ( scale >= 40 && scale <= 2000 ) {
-	mToTherion = 200.0f/scale;
-      } else {
-        return String.format("%d", (int)(200/mToTherion) );
-      }
+      if ( scale < 40 ) { scale = 40; ret = "40"; }
+      if ( scale > 2000 ) { scale = 2000; ret = "2000"; }
+      mToTherion = THERION_SCALE / scale;
     } else {
       TDLog.Error("missing EXPORT TH key: " + k );
     }
-    return null;
+    if ( ret != null ) hlp.update( k, ret );
+    return ret;
   }
 
   private static String updatePrefDat( TDPrefHelper hlp, String k, String v )
@@ -1753,6 +1757,11 @@ class TDSetting
       ret = setMinShift( tryIntValue(  hlp, k, v, def[5] ) );
     } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_POINTING
       ret = setPointingRadius( tryIntValue( hlp, k, v, def[6] ) );
+    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_SPLAY_ALPHA
+      mSplayAlpha = tryIntValue( hlp, k, v, def[ 7] ); 
+      if ( mSplayAlpha < 0 ) { mSplayAlpha = 0; ret = Float.toString(mSplayAlpha); }
+      if ( mSplayAlpha > 100 ) { mSplayAlpha = 100; ret = Float.toString(mSplayAlpha); }
+      BrushManager.setSplayAlpha( mSplayAlpha );
     // } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_SPLAY_VERT_THRS
     //   mSplayVertThrs = tryFloatValue( hlp, k, v, def[7] );
     //   if ( mSplayVertThrs <  0 ) { mSplayVertThrs =  0; ret = TDString.ZERO; }
