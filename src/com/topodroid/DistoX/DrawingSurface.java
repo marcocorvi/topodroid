@@ -670,52 +670,62 @@ class DrawingSurface extends SurfaceView
 
   // called by OverviewWindow
   // @pre th2 != null
-  boolean addloadTherion( String th2, float xdelta, float ydelta, SymbolsPalette missingSymbols )
-  {
-    SymbolsPalette localPalette = preparePalette();
-    if ( (new File(th2)).exists() ) {
-      return DrawingIO.doLoadTherion( this, th2, xdelta, ydelta, missingSymbols, localPalette );
-    }
-    return false;
-  }
+  // boolean addloadTherion( String th2, float xdelta, float ydelta, SymbolsPalette missingSymbols )
+  // {
+  //   SymbolsPalette localPalette = preparePalette();
+  //   if ( (new File(th2)).exists() ) {
+  //     return DrawingIO.doLoadTherion( this, th2, xdelta, ydelta, missingSymbols, localPalette );
+  //   }
+  //   return false;
+  // }
 
   // called by OverviewWindow
   // @pre tdr != null
-  boolean addloadDataStream( String tdr, String th2, float xdelta, float ydelta, SymbolsPalette missingSymbols )
+  boolean addloadDataStream( String tdr, /* String th2, */ float xdelta, float ydelta, SymbolsPalette missingSymbols, String plotName )
   {
+    boolean ret = false;
     SymbolsPalette localPalette = preparePalette();
     if ( (new File(tdr)).exists() ) {
-      return DrawingIO.doLoadDataStream( this, tdr, xdelta, ydelta, missingSymbols, localPalette, null, false );
-    } else if ( th2 != null && (new File(th2)).exists() ) {
-      return DrawingIO.doLoadTherion( this, th2, xdelta, ydelta, missingSymbols, localPalette );
+      ret = DrawingIO.doLoadDataStream( this, tdr, xdelta, ydelta, missingSymbols, localPalette, null, false, plotName );
+    // } else if ( th2 != null && (new File(th2)).exists() ) {
+    //   return DrawingIO.doLoadTherion( this, th2, xdelta, ydelta, missingSymbols, localPalette );
     }
-    return false;
+    return ret;
   }
 
   // @note th21 can be null
-  boolean modeloadTherion( String th21, SymbolsPalette missingSymbols )
-  {
-    SymbolsPalette localPalette = preparePalette();
-    if ( missingSymbols != null ) missingSymbols.resetSymbolLists();
-    return DrawingIO.doLoadTherion( this, th21, 0, 0, missingSymbols, localPalette );
-  }
+  // boolean modeloadTherion( String th21, SymbolsPalette missingSymbols )
+  // {
+  //   SymbolsPalette localPalette = preparePalette();
+  //   if ( missingSymbols != null ) missingSymbols.resetSymbolLists();
+  //   return DrawingIO.doLoadTherion( this, th21, 0, 0, missingSymbols, localPalette );
+  // }
 
   // FIXME 
   // WITH VERSION 3.0 support for TH2 fallback will be dropped
   // @note tdr1 and tdr2 can be null
   // @note th21 is not used if tdr1 == null
-  boolean modeloadDataStream( String tdr1, String th21, SymbolsPalette missingSymbols )
+  // called only by DrawingWindow
+  boolean modeloadDataStream( String tdr1, /* String th21, */ SymbolsPalette missingSymbols )
   {
+    boolean ret = false;
     SymbolsPalette localPalette = preparePalette();
     if ( missingSymbols != null ) missingSymbols.resetSymbolLists();
     if ( tdr1 != null ) {
       if ( (new File( tdr1 )).exists() ) {
-        return DrawingIO.doLoadDataStream( this, tdr1, 0, 0, missingSymbols, localPalette, null, false );
-      } else if ( th21 != null && (new File(th21)).exists() ) {
-        return DrawingIO.doLoadTherion( this, th21, 0, 0, missingSymbols, localPalette );
+        ret = DrawingIO.doLoadDataStream( this, tdr1, 0, 0, missingSymbols, localPalette, null, false, null ); // no plot_name
+      // } else if ( th21 != null && (new File(th21)).exists() ) {
+      //   return DrawingIO.doLoadTherion( this, th21, 0, 0, missingSymbols, localPalette );
       }
     }
-    return true;
+    return ret;
+  }
+
+  void linkSections() { commandManager.linkSections(); }
+  void linkAllSections() 
+  {
+    mCommandManager1.linkSections();
+    mCommandManager2.linkSections();
   }
 
   // -----------------------------------------------------------------------------

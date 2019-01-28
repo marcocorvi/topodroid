@@ -33,16 +33,16 @@ import java.io.IOException;
 
 import java.util.List;
 import java.util.ArrayList;
+import android.util.ArraySet;
 // import java.util.HashMap;
 import java.util.Locale;
 
 import android.graphics.RectF;
 
-// import android.util.Log;
+import android.util.Log;
 
 class DrawingIO
 {
-  // private static final float toTherion = TDSetting.mToTherion;
 
   private static String readLine( BufferedReader br )
   {
@@ -60,427 +60,430 @@ class DrawingIO
     return line;
   } 
 
-  static boolean doLoadTherion( DrawingSurface surface,
-                                String filename,
-                                float dx, float dy,
-                                SymbolsPalette missingSymbols,
-                                SymbolsPalette localPalette )
-  {
-    float x, y, x1, y1, x2, y2;
-    boolean is_not_section = true;
+  /* NOTE therion th2 files can no longer be supported because therionscale is not fixed
+   */
+  // static boolean doLoadTherion( DrawingSurface surface,
+  //                               String filename,
+  //                               float dx, float dy,
+  //                               SymbolsPalette missingSymbols,
+  //                               SymbolsPalette localPalette )
+  // {
+  //   float x, y, x1, y1, x2, y2;
+  //   boolean is_not_section = true;
+  //   float toTherion = TDSetting.mToTherion;
 
-    // TDLog.Log( TDLog.LOG_PLOT, "Load Therion file " + filename + " delta " + dx + " " + dy );
-    // BrushManager.makePaths( );
-    BrushManager.resetPointOrientations();
+  //   // TDLog.Log( TDLog.LOG_PLOT, "Load Therion file " + filename + " delta " + dx + " " + dy );
+  //   // BrushManager.makePaths( );
+  //   BrushManager.resetPointOrientations();
 
-    // TDLog.Log( TDLog.LOG_PLOT, "after reset 0: " + BrushManager.mOrientation[0]
-    //                      + " 7: " + BrushManager.mOrientation[7] );
+  //   // TDLog.Log( TDLog.LOG_PLOT, "after reset 0: " + BrushManager.mOrientation[0]
+  //   //                      + " 7: " + BrushManager.mOrientation[7] );
 
-    // Log.v("DistoX", "drawing I/O load therion " + filename );
-    // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
-    {
-      try {
-        TDLog.Log( TDLog.LOG_IO, "load plot from Therion file " + filename );
-        FileReader fr = new FileReader( filename );
-        BufferedReader br = new BufferedReader( fr );
-        String line = null;
-        while ( (line = readLine(br)) != null ) {
-          int comment = line.indexOf('#');
-          if ( comment == 0 ) {
-            if ( line.startsWith( "#P " ) ) { // POINT PALETTE
-              if ( localPalette != null ) {
-                localPalette.mPalettePoint.clear();
-                localPalette.addPointFilename( "user" );
-                String[] syms = line.split( " " );
-                for ( int k=1; k<syms.length; ++k ) {
-                  if ( syms[k].length() > 0 && ! syms[k].equals("user") ) localPalette.addPointFilename( syms[k] );
-                }
-                BrushManager.mPointLib.makeEnabledListFromPalette( localPalette );
-              }
-            } else if ( line.startsWith( "#L " ) ) { // LINE PALETTE
-              if ( localPalette != null ) {
-                localPalette.mPaletteLine.clear();
-                localPalette.addLineFilename("user");
-                String[] syms = line.split( " " );
-                for ( int k=1; k<syms.length; ++k ) {
-                  if ( syms[k].length() > 0 && ! syms[k].equals("user") ) localPalette.addLineFilename( syms[k] );
-                }
-                BrushManager.mLineLib.makeEnabledListFromPalette( localPalette );
-              }
-            } else if ( line.startsWith( "#A " ) ) { // AREA PALETTE
-              if ( localPalette != null ) {
-                localPalette.mPaletteArea.clear();
-                localPalette.addAreaFilename("user");
-                String[] syms = line.split( " " );
-                for ( int k=1; k<syms.length; ++k ) {
-                  if ( syms[k].length() > 0 && ! syms[k].equals("user") ) localPalette.addAreaFilename( syms[k] );
-                }
-                BrushManager.mAreaLib.makeEnabledListFromPalette( localPalette );
-              }
-            }
-            continue;
-          } else if (comment > 0 ) {
-            line = line.substring( 0, comment );
-          }
-          if ( line.length() == 0 /* || line.charAt(0) == '#' */ ) {
-            continue;
-          }
+  //   // Log.v("DistoX", "drawing I/O load therion " + filename );
+  //   // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
+  //   {
+  //     try {
+  //       TDLog.Log( TDLog.LOG_IO, "load plot from Therion file " + filename );
+  //       FileReader fr = new FileReader( filename );
+  //       BufferedReader br = new BufferedReader( fr );
+  //       String line = null;
+  //       while ( (line = readLine(br)) != null ) {
+  //         int comment = line.indexOf('#');
+  //         if ( comment == 0 ) {
+  //           if ( line.startsWith( "#P " ) ) { // POINT PALETTE
+  //             if ( localPalette != null ) {
+  //               localPalette.mPalettePoint.clear();
+  //               localPalette.addPointFilename( "user" );
+  //               String[] syms = line.split( " " );
+  //               for ( int k=1; k<syms.length; ++k ) {
+  //                 if ( syms[k].length() > 0 && ! syms[k].equals("user") ) localPalette.addPointFilename( syms[k] );
+  //               }
+  //               BrushManager.mPointLib.makeEnabledListFromPalette( localPalette );
+  //             }
+  //           } else if ( line.startsWith( "#L " ) ) { // LINE PALETTE
+  //             if ( localPalette != null ) {
+  //               localPalette.mPaletteLine.clear();
+  //               localPalette.addLineFilename("user");
+  //               String[] syms = line.split( " " );
+  //               for ( int k=1; k<syms.length; ++k ) {
+  //                 if ( syms[k].length() > 0 && ! syms[k].equals("user") ) localPalette.addLineFilename( syms[k] );
+  //               }
+  //               BrushManager.mLineLib.makeEnabledListFromPalette( localPalette );
+  //             }
+  //           } else if ( line.startsWith( "#A " ) ) { // AREA PALETTE
+  //             if ( localPalette != null ) {
+  //               localPalette.mPaletteArea.clear();
+  //               localPalette.addAreaFilename("user");
+  //               String[] syms = line.split( " " );
+  //               for ( int k=1; k<syms.length; ++k ) {
+  //                 if ( syms[k].length() > 0 && ! syms[k].equals("user") ) localPalette.addAreaFilename( syms[k] );
+  //               }
+  //               BrushManager.mAreaLib.makeEnabledListFromPalette( localPalette );
+  //             }
+  //           }
+  //           continue;
+  //         } else if (comment > 0 ) {
+  //           line = line.substring( 0, comment );
+  //         }
+  //         if ( line.length() == 0 /* || line.charAt(0) == '#' */ ) {
+  //           continue;
+  //         }
 
-          // TDLog.Log( TDLog.LOG_PLOT, "  line: >>" + line + "<<");
-          line = line.replaceAll("\\s+", " ");
-          String[] vals = line.split( " " );
-          if ( vals.length == 0 ) continue;
-          if ( vals[0].equals( "scrap" ) ) {
-            if ( vals.length < 4 ) {
-              TDLog.Error( "bad scrap cmd: " + line );
-            } else {
-              // String name = vals[1];
-              // skip "-projection" vals[2]
-              is_not_section = ! vals[3].equals("none");
-            }
-          } else if ( vals[0].equals( "point" ) ) {
-            // ****** THERION POINT ********************************** point X Y type [options]
-            if ( vals.length < 4 ) {
-              TDLog.Error( "bad point cmd: " + line );
-            } else {
-              int ptType = BrushManager.mPointLib.mSymbolNr;
-              boolean has_orientation = false;
-              float orientation = 0.0f;
-              int scale = DrawingPointPath.SCALE_M;
-              String options = null;
+  //         // TDLog.Log( TDLog.LOG_PLOT, "  line: >>" + line + "<<");
+  //         line = line.replaceAll("\\s+", " ");
+  //         String[] vals = line.split( " " );
+  //         if ( vals.length == 0 ) continue;
+  //         if ( vals[0].equals( "scrap" ) ) {
+  //           if ( vals.length < 4 ) {
+  //             TDLog.Error( "bad scrap cmd: " + line );
+  //           } else {
+  //             // String name = vals[1];
+  //             // skip "-projection" vals[2]
+  //             is_not_section = ! vals[3].equals("none");
+  //           }
+  //         } else if ( vals[0].equals( "point" ) ) {
+  //           // ****** THERION POINT ********************************** point X Y type [options]
+  //           if ( vals.length < 4 ) {
+  //             TDLog.Error( "bad point cmd: " + line );
+  //           } else {
+  //             int ptType = BrushManager.mPointLib.mSymbolNr;
+  //             boolean has_orientation = false;
+  //             float orientation = 0.0f;
+  //             int scale = DrawingPointPath.SCALE_M;
+  //             String options = null;
 
-              try {
-                x = dx + Float.parseFloat( vals[1] ) / TDSetting.mToTherion;
-                y = dy - Float.parseFloat( vals[2] ) / TDSetting.mToTherion;
-              } catch ( NumberFormatException e ) {
-                TDLog.Error( "Therion Point error (number fmt) <" + line + ">" );
-                continue;
-              }
-              String type = vals[3];
-              String label_text = null;
-              int k = 4;
-              if ( type.equals( "station" ) ) {
-                if ( ! TDSetting.mAutoStations ) {
-                  if ( vals.length > k+1 && vals[k].equals( "-name" ) ) {
-                    String name = vals[k+1];
-                    DrawingStationPath station_path = new DrawingStationPath( name, x, y, scale );
-                    surface.addDrawingPath( station_path );
-                  }
-                }
-                continue;
-              }
-              while ( vals.length > k ) { 
-                if ( vals[k].equals( "-orientation" ) ) {
-                  try {
-                    orientation = Float.parseFloat( vals[k+1] );
-                    has_orientation = true;
-                  } catch ( NumberFormatException e ) {
-                    TDLog.Error( "Therion Point orientation error : " + line );
-                  }
-                  k += 2;
-                } else if ( vals[k].equals( "-scale" ) ) {
-                  // FIXME assert (vals.length > k+1 );
-                  if ( vals[k+1].equals("xs") ) {
-                    scale = DrawingPointPath.SCALE_XS;
-                  } else if ( vals[k+1].equals("s") ) {
-                    scale = DrawingPointPath.SCALE_S;
-                  } else if ( vals[k+1].equals("l") ) {
-                    scale = DrawingPointPath.SCALE_L;
-                  } else if ( vals[k+1].equals("xl") ) {
-                    scale = DrawingPointPath.SCALE_XL;
-                  } 
-                  k += 2;
-                } else if ( vals[k].equals( "-text" ) ) {
-                  // FIXME assert (vals.length > k+1 );
-                  label_text = vals[k+1];
-                  k += 2;
-                  if ( label_text.startsWith( "\"" ) ) {
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(label_text);
-                    while ( k < vals.length ) {
-                      sb.append(" ").append(vals[k]);
-                      // label_text = label_text + " " + vals[k];
-                      if ( vals[k].endsWith( "\"" ) ) break;
-                      ++ k;
-                    }
-                    label_text = sb.toString().replaceAll( "\"", "" );
-                    ++ k;
-                  }
-                } else {
-                  options = TopoDroidUtil.concat( vals, k );
-                  k = vals.length;
-                }
-              }
+  //             try {
+  //               x = dx + Float.parseFloat( vals[1] ) / toTherion;
+  //               y = dy - Float.parseFloat( vals[2] ) / toTherion;
+  //             } catch ( NumberFormatException e ) {
+  //               TDLog.Error( "Therion Point error (number fmt) <" + line + ">" );
+  //               continue;
+  //             }
+  //             String type = vals[3];
+  //             String label_text = null;
+  //             int k = 4;
+  //             if ( type.equals( "station" ) ) {
+  //               if ( ! TDSetting.mAutoStations ) {
+  //                 if ( vals.length > k+1 && vals[k].equals( "-name" ) ) {
+  //                   String name = vals[k+1];
+  //                   DrawingStationPath station_path = new DrawingStationPath( name, x, y, scale );
+  //                   surface.addDrawingPath( station_path );
+  //                 }
+  //               }
+  //               continue;
+  //             }
+  //             while ( vals.length > k ) { 
+  //               if ( vals[k].equals( "-orientation" ) ) {
+  //                 try {
+  //                   orientation = Float.parseFloat( vals[k+1] );
+  //                   has_orientation = true;
+  //                 } catch ( NumberFormatException e ) {
+  //                   TDLog.Error( "Therion Point orientation error : " + line );
+  //                 }
+  //                 k += 2;
+  //               } else if ( vals[k].equals( "-scale" ) ) {
+  //                 // FIXME assert (vals.length > k+1 );
+  //                 if ( vals[k+1].equals("xs") ) {
+  //                   scale = DrawingPointPath.SCALE_XS;
+  //                 } else if ( vals[k+1].equals("s") ) {
+  //                   scale = DrawingPointPath.SCALE_S;
+  //                 } else if ( vals[k+1].equals("l") ) {
+  //                   scale = DrawingPointPath.SCALE_L;
+  //                 } else if ( vals[k+1].equals("xl") ) {
+  //                   scale = DrawingPointPath.SCALE_XL;
+  //                 } 
+  //                 k += 2;
+  //               } else if ( vals[k].equals( "-text" ) ) {
+  //                 // FIXME assert (vals.length > k+1 );
+  //                 label_text = vals[k+1];
+  //                 k += 2;
+  //                 if ( label_text.startsWith( "\"" ) ) {
+  //                   StringBuilder sb = new StringBuilder();
+  //                   sb.append(label_text);
+  //                   while ( k < vals.length ) {
+  //                     sb.append(" ").append(vals[k]);
+  //                     // label_text = label_text + " " + vals[k];
+  //                     if ( vals[k].endsWith( "\"" ) ) break;
+  //                     ++ k;
+  //                   }
+  //                   label_text = sb.toString().replaceAll( "\"", "" );
+  //                   ++ k;
+  //                 }
+  //               } else {
+  //                 options = TopoDroidUtil.concat( vals, k );
+  //                 k = vals.length;
+  //               }
+  //             }
 
-              BrushManager.mPointLib.tryLoadMissingPoint( type );
-              // map pre 3.1.1 thnames to 3.1.1 names
-              String thname = type;
-              if ( thname.equals( "user" ) )        { thname = "u:user"; }
-              else if ( thname.equals( "danger" ) ) { thname = "u:danger"; }
-              else if ( thname.equals( "archeo" ) ) { thname = "archeo-material"; }
-              ptType = BrushManager.mPointLib.getSymbolIndexByThName( thname );
-              // Log.v("DistoX", "type " + type + " thname " + thname + " " + ptType );
-              if ( ptType < 0 ) {
-                if ( missingSymbols != null ) missingSymbols.addPointFilename( type ); // add "type" to the missing point-types
-                ptType = 0; // SymbolPointLibrary.mPointUserIndex; // FIXME
-                // continue;
-              }
+  //             BrushManager.mPointLib.tryLoadMissingPoint( type );
+  //             // map pre 3.1.1 thnames to 3.1.1 names
+  //             String thname = type;
+  //             if ( thname.equals( "user" ) )        { thname = "u:user"; }
+  //             else if ( thname.equals( "danger" ) ) { thname = "u:danger"; }
+  //             else if ( thname.equals( "archeo" ) ) { thname = "archeo-material"; }
+  //             ptType = BrushManager.mPointLib.getSymbolIndexByThName( thname );
+  //             // Log.v("DistoX", "type " + type + " thname " + thname + " " + ptType );
+  //             if ( ptType < 0 ) {
+  //               if ( missingSymbols != null ) missingSymbols.addPointFilename( type ); // add "type" to the missing point-types
+  //               ptType = 0; // SymbolPointLibrary.mPointUserIndex; // FIXME
+  //               // continue;
+  //             }
 
-              if ( ptType == BrushManager.mPointLib.mPointLabelIndex ) {
-                if ( label_text != null ) {
-                  // "danger" is no longer mapped on a label 
-                  // if ( label_text.equals( "!" ) ) {    // "danger" point
-                  //   DrawingPointPath path = new DrawingPointPath( BrushManager.mPointLib.mPointDangerIndex, x, y, scale, text, options );
-                  //   surface.addDrawingPath( path );
-                  // } else {                             // regular label
-                    DrawingLabelPath path = new DrawingLabelPath( label_text, x, y, scale, options );
-                    if ( has_orientation ) {
-                      path.setOrientation( orientation );
-                    }
-                    surface.addDrawingPath( path );
-                  // }
-                }
-              } else if ( has_orientation && BrushManager.mPointLib.isSymbolOrientable(ptType) ) {
-                // TDLog.Log( TDLog.LOG_PLOT, "[2] point " + ptType + " has orientation " + orientation );
-                BrushManager.rotateGradPoint( ptType, orientation );
-                DrawingPointPath path = new DrawingPointPath( ptType, x, y, scale, label_text, options );
-                surface.addDrawingPath( path );
-                BrushManager.rotateGradPoint( ptType, -orientation );
-              } else {
-                DrawingPointPath path = new DrawingPointPath( ptType, x, y, scale, label_text, options );
-                surface.addDrawingPath( path );
-              }
-            }
-          } else if ( vals[0].equals( "line" ) ) {
-            // ********* THERION LINES ************************************************************
-            if ( vals.length < 2 ) {
-              TDLog.Error( "bad line cmd: " + line );
-            } else {
-              if ( vals.length >= 6 && vals[1].equals( "border" ) && vals[2].equals( "-id" ) ) { // THERION AREAS
-                boolean visible = true;
-                // TDLog.Log( TDLog.LOG_PLOT, "area id " + vals[3] );
-                if ( vals.length >= 8 && vals[6].equals("-visibility") && vals[7].equals("off") ) {
-                  visible = false;
-                }
-                int arType = BrushManager.mAreaLib.mSymbolNr;
-                DrawingAreaPath path = new DrawingAreaPath( arType, vals[3], visible );
+  //             if ( ptType == BrushManager.mPointLib.mPointLabelIndex ) {
+  //               if ( label_text != null ) {
+  //                 // "danger" is no longer mapped on a label 
+  //                 // if ( label_text.equals( "!" ) ) {    // "danger" point
+  //                 //   DrawingPointPath path = new DrawingPointPath( BrushManager.mPointLib.mPointDangerIndex, x, y, scale, text, options );
+  //                 //   surface.addDrawingPath( path );
+  //                 // } else {                             // regular label
+  //                   DrawingLabelPath path = new DrawingLabelPath( label_text, x, y, scale, options );
+  //                   if ( has_orientation ) {
+  //                     path.setOrientation( orientation );
+  //                   }
+  //                   surface.addDrawingPath( path );
+  //                 // }
+  //               }
+  //             } else if ( has_orientation && BrushManager.mPointLib.isSymbolOrientable(ptType) ) {
+  //               // TDLog.Log( TDLog.LOG_PLOT, "[2] point " + ptType + " has orientation " + orientation );
+  //               BrushManager.rotateGradPoint( ptType, orientation );
+  //               DrawingPointPath path = new DrawingPointPath( ptType, x, y, scale, label_text, options );
+  //               surface.addDrawingPath( path );
+  //               BrushManager.rotateGradPoint( ptType, -orientation );
+  //             } else {
+  //               DrawingPointPath path = new DrawingPointPath( ptType, x, y, scale, label_text, options );
+  //               surface.addDrawingPath( path );
+  //             }
+  //           }
+  //         } else if ( vals[0].equals( "line" ) ) {
+  //           // ********* THERION LINES ************************************************************
+  //           if ( vals.length < 2 ) {
+  //             TDLog.Error( "bad line cmd: " + line );
+  //           } else {
+  //             if ( vals.length >= 6 && vals[1].equals( "border" ) && vals[2].equals( "-id" ) ) { // THERION AREAS
+  //               boolean visible = true;
+  //               // TDLog.Log( TDLog.LOG_PLOT, "area id " + vals[3] );
+  //               if ( vals.length >= 8 && vals[6].equals("-visibility") && vals[7].equals("off") ) {
+  //                 visible = false;
+  //               }
+  //               int arType = BrushManager.mAreaLib.mSymbolNr;
+  //               DrawingAreaPath path = new DrawingAreaPath( arType, vals[3], visible );
 
-                // TODO insert new area-path
-                line = readLine( br );
-                if ( ! line.equals( "endline" ) ) { 
-                  String[] pt = line.split( "\\s+" );
-                  try {
-                    x = dx + Float.parseFloat( pt[0] ) / TDSetting.mToTherion;
-                    y = dy - Float.parseFloat( pt[1] ) / TDSetting.mToTherion;
-                  } catch ( NumberFormatException e ) {
-                    TDLog.Error( "Therion Line error (number fmt) <" + line + ">" );
-                    continue;
-                  }
-                  path.addStartPoint( x, y );
+  //               // TODO insert new area-path
+  //               line = readLine( br );
+  //               if ( ! line.equals( "endline" ) ) { 
+  //                 String[] pt = line.split( "\\s+" );
+  //                 try {
+  //                   x = dx + Float.parseFloat( pt[0] ) / toTherion;
+  //                   y = dy - Float.parseFloat( pt[1] ) / toTherion;
+  //                 } catch ( NumberFormatException e ) {
+  //                   TDLog.Error( "Therion Line error (number fmt) <" + line + ">" );
+  //                   continue;
+  //                 }
+  //                 path.addStartPoint( x, y );
 
-                  while ( (line = readLine( br )) != null ) {
-                    if ( line.equals( "endline" ) ) {
-                      line = readLine( br ); // area statement
-                      String[] vals2 = line.split( " " );
-                      if ( vals2.length >= 2 ) {
-                        BrushManager.mAreaLib.tryLoadMissingArea( vals2[1] );
-                        String thname = vals2[1];
-                        if ( thname.equals( "user" ) ) { thname = "u:user"; }
-                        arType = BrushManager.mAreaLib.getSymbolIndexByThName( thname );
-                        if ( arType < 0 ) {
-                          if ( missingSymbols != null ) missingSymbols.addAreaFilename( vals2[1] );
-                          arType = 0; // SymbolAreaLibrary.mAreaUserIndex; // FIXME
-                          // continue;
-                        }
-                        // TDLog.Log(TDLog.LOG_PLOT, "set area type " + arType + " " + vals2[1]);
-                        double orientation = 0;
-                        if ( vals2.length >= 4 && vals2[2].equals("#orientation") ) {
-                          try {
-                            orientation = Double.parseDouble( vals2[3] );
-                          } catch ( NumberFormatException e ) { 
-                            TDLog.Error( "Therion Area orientation error <" + line + ">" );
-                          }
-                        }
-                        path.setAreaType( arType );
-                        path.setOrientation( orientation );
-                        surface.addDrawingPath( path );
-                      }
-                      line = readLine( br ); // skip two lines
-                      line = readLine( br );
-                      break;
-                    }
-                    // TDLog.Log( TDLog.LOG_DEBUG, "  line point: >>" + line + "<<");
-                    String[] pt2 = line.split( " " );
-                    if ( pt2.length == 2 ) {
-                      try {
-                        x = dx + Float.parseFloat( pt2[0] ) / TDSetting.mToTherion;
-                        y = dy - Float.parseFloat( pt2[1] ) / TDSetting.mToTherion;
-                        path.addPoint( x, y );
-                        // TDLog.Log( TDLog.LOG_DEBUG, "area pt " + x + " " + y);
-                      } catch ( NumberFormatException e ) {
-                        TDLog.Error( "Therion Line X-Y error (10) <" + line + ">" );
-                        continue;
-                      } catch ( ArrayIndexOutOfBoundsException e ) {
-                        TDLog.Error( "Therion Line X-Y error (11) " + line );
-                        continue;
-                      }
-                    } else if ( pt2.length == 6 ) {
-                      try {
-                        x1 = dx + Float.parseFloat( pt2[0] ) / TDSetting.mToTherion;
-                        y1 = dy - Float.parseFloat( pt2[1] ) / TDSetting.mToTherion;
-                        x2 = dx + Float.parseFloat( pt2[2] ) / TDSetting.mToTherion;
-                        y2 = dy - Float.parseFloat( pt2[3] ) / TDSetting.mToTherion;
-                        x  = dx + Float.parseFloat( pt2[4] ) / TDSetting.mToTherion;
-                        y  = dy - Float.parseFloat( pt2[5] ) / TDSetting.mToTherion;
-                        path.addPoint3( x1, y1, x2, y2, x, y );
-                        // TDLog.Log( TDLog.LOG_DEBUG, "area pt " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + x + " " + y);
-                      } catch ( NumberFormatException e ) {
-                        TDLog.Error( "Therion Line X-Y error (12) <" + line + ">" );
-                        continue;
-                      } catch ( ArrayIndexOutOfBoundsException e ) {
-                        TDLog.Error( "Therion Line X-Y error (13) " + line );
-                        continue;
-                      }
-                    }
-                  }
-                }
-              } else { // ********* regular lines
-                // FIXME assert (vals.length > 1 );
-                // TDLog.Log( TDLog.LOG_PLOT, "line type " + vals[1] );
-                boolean closed = false;
-                boolean reversed = false;
-                int outline = DrawingLinePath.OUTLINE_UNDEF;
-                String options = null;
-               
-                String type = vals[1];
-                for (int index = 2; index < vals.length; ++index ) {
-                  if ( vals[index] == null || vals[index].length() == 0 ) {
-                    continue;
-                  }
-                  if ( vals[index].equals( "-close" ) ) {
-                    ++ index;
-                    if ( vals.length > index && vals[index].equals( "on" ) ) {
-                      closed = true;
-                    }
-                  } else if ( vals[index].equals( "-reverse" ) ) {
-                    ++ index;
-                    if ( vals.length > index && vals[index].equals( "on" ) ) {
-                      reversed = true;
-                    }
-                  } else if ( vals[index].equals( "-outline" ) ) {
-                    ++ index;
-                    if ( vals.length > index ) {
-                      if ( vals[index].equals( "out" ) ) { outline = DrawingLinePath.OUTLINE_OUT; }
-                      else if ( vals[index].equals( "in" ) ) { outline = DrawingLinePath.OUTLINE_IN; }
-                      else if ( vals[index].equals( "none" ) ) { outline = DrawingLinePath.OUTLINE_NONE; }
-                    }
-                  } else {
-                    if ( options == null ) {
-                      options = vals[index];
-                    } else {
-                      options += " " + vals[index];
-                    }
-                  } 
-                }
-                
-                int lnType = BrushManager.mLineLib.mSymbolNr;
-                DrawingLinePath path = null;
-                BrushManager.mLineLib.tryLoadMissingLine( type );
-                String thname = type;
-                if ( thname.equals( "user" ) ) { thname = "u:user"; }
-                lnType = BrushManager.mLineLib.getSymbolIndexByThName( thname );
-                if ( lnType < 0 ) {
-                  if ( missingSymbols != null ) missingSymbols.addLineFilename( type );
-                  lnType = 0; // SymbolLineLibrary.mLineUserIndex; // FIXME
-                  // continue;
-                }
-                // TODO insert new line-path
-                line = readLine( br );
-                if ( ! line.equals( "endline" ) ) { 
-                  path = new DrawingLinePath( lnType );
-                  path.setClosed( closed );
-                  path.setReversed( reversed );
-                  if ( outline != DrawingLinePath.OUTLINE_UNDEF ) path.mOutline = outline;
-                  if ( options != null ) path.setOptions( options );
+  //                 while ( (line = readLine( br )) != null ) {
+  //                   if ( line.equals( "endline" ) ) {
+  //                     line = readLine( br ); // area statement
+  //                     String[] vals2 = line.split( " " );
+  //                     if ( vals2.length >= 2 ) {
+  //                       BrushManager.mAreaLib.tryLoadMissingArea( vals2[1] );
+  //                       String thname = vals2[1];
+  //                       if ( thname.equals( "user" ) ) { thname = "u:user"; }
+  //                       arType = BrushManager.mAreaLib.getSymbolIndexByThName( thname );
+  //                       if ( arType < 0 ) {
+  //                         if ( missingSymbols != null ) missingSymbols.addAreaFilename( vals2[1] );
+  //                         arType = 0; // SymbolAreaLibrary.mAreaUserIndex; // FIXME
+  //                         // continue;
+  //                       }
+  //                       // TDLog.Log(TDLog.LOG_PLOT, "set area type " + arType + " " + vals2[1]);
+  //                       double orientation = 0;
+  //                       if ( vals2.length >= 4 && vals2[2].equals("#orientation") ) {
+  //                         try {
+  //                           orientation = Double.parseDouble( vals2[3] );
+  //                         } catch ( NumberFormatException e ) { 
+  //                           TDLog.Error( "Therion Area orientation error <" + line + ">" );
+  //                         }
+  //                       }
+  //                       path.setAreaType( arType );
+  //                       path.setOrientation( orientation );
+  //                       surface.addDrawingPath( path );
+  //                     }
+  //                     line = readLine( br ); // skip two lines
+  //                     line = readLine( br );
+  //                     break;
+  //                   }
+  //                   // TDLog.Log( TDLog.LOG_DEBUG, "  line point: >>" + line + "<<");
+  //                   String[] pt2 = line.split( " " );
+  //                   if ( pt2.length == 2 ) {
+  //                     try {
+  //                       x = dx + Float.parseFloat( pt2[0] ) / toTherion;
+  //                       y = dy - Float.parseFloat( pt2[1] ) / toTherion;
+  //                       path.addPoint( x, y );
+  //                       // TDLog.Log( TDLog.LOG_DEBUG, "area pt " + x + " " + y);
+  //                     } catch ( NumberFormatException e ) {
+  //                       TDLog.Error( "Therion Line X-Y error (10) <" + line + ">" );
+  //                       continue;
+  //                     } catch ( ArrayIndexOutOfBoundsException e ) {
+  //                       TDLog.Error( "Therion Line X-Y error (11) " + line );
+  //                       continue;
+  //                     }
+  //                   } else if ( pt2.length == 6 ) {
+  //                     try {
+  //                       x1 = dx + Float.parseFloat( pt2[0] ) / toTherion;
+  //                       y1 = dy - Float.parseFloat( pt2[1] ) / toTherion;
+  //                       x2 = dx + Float.parseFloat( pt2[2] ) / toTherion;
+  //                       y2 = dy - Float.parseFloat( pt2[3] ) / toTherion;
+  //                       x  = dx + Float.parseFloat( pt2[4] ) / toTherion;
+  //                       y  = dy - Float.parseFloat( pt2[5] ) / toTherion;
+  //                       path.addPoint3( x1, y1, x2, y2, x, y );
+  //                       // TDLog.Log( TDLog.LOG_DEBUG, "area pt " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + x + " " + y);
+  //                     } catch ( NumberFormatException e ) {
+  //                       TDLog.Error( "Therion Line X-Y error (12) <" + line + ">" );
+  //                       continue;
+  //                     } catch ( ArrayIndexOutOfBoundsException e ) {
+  //                       TDLog.Error( "Therion Line X-Y error (13) " + line );
+  //                       continue;
+  //                     }
+  //                   }
+  //                 }
+  //               }
+  //             } else { // ********* regular lines
+  //               // FIXME assert (vals.length > 1 );
+  //               // TDLog.Log( TDLog.LOG_PLOT, "line type " + vals[1] );
+  //               boolean closed = false;
+  //               boolean reversed = false;
+  //               int outline = DrawingLinePath.OUTLINE_UNDEF;
+  //               String options = null;
+  //              
+  //               String type = vals[1];
+  //               for (int index = 2; index < vals.length; ++index ) {
+  //                 if ( vals[index] == null || vals[index].length() == 0 ) {
+  //                   continue;
+  //                 }
+  //                 if ( vals[index].equals( "-close" ) ) {
+  //                   ++ index;
+  //                   if ( vals.length > index && vals[index].equals( "on" ) ) {
+  //                     closed = true;
+  //                   }
+  //                 } else if ( vals[index].equals( "-reverse" ) ) {
+  //                   ++ index;
+  //                   if ( vals.length > index && vals[index].equals( "on" ) ) {
+  //                     reversed = true;
+  //                   }
+  //                 } else if ( vals[index].equals( "-outline" ) ) {
+  //                   ++ index;
+  //                   if ( vals.length > index ) {
+  //                     if ( vals[index].equals( "out" ) ) { outline = DrawingLinePath.OUTLINE_OUT; }
+  //                     else if ( vals[index].equals( "in" ) ) { outline = DrawingLinePath.OUTLINE_IN; }
+  //                     else if ( vals[index].equals( "none" ) ) { outline = DrawingLinePath.OUTLINE_NONE; }
+  //                   }
+  //                 } else {
+  //                   if ( options == null ) {
+  //                     options = vals[index];
+  //                   } else {
+  //                     options += " " + vals[index];
+  //                   }
+  //                 } 
+  //               }
+  //               
+  //               int lnType = BrushManager.mLineLib.mSymbolNr;
+  //               DrawingLinePath path = null;
+  //               BrushManager.mLineLib.tryLoadMissingLine( type );
+  //               String thname = type;
+  //               if ( thname.equals( "user" ) ) { thname = "u:user"; }
+  //               lnType = BrushManager.mLineLib.getSymbolIndexByThName( thname );
+  //               if ( lnType < 0 ) {
+  //                 if ( missingSymbols != null ) missingSymbols.addLineFilename( type );
+  //                 lnType = 0; // SymbolLineLibrary.mLineUserIndex; // FIXME
+  //                 // continue;
+  //               }
+  //               // TODO insert new line-path
+  //               line = readLine( br );
+  //               if ( ! line.equals( "endline" ) ) { 
+  //                 path = new DrawingLinePath( lnType );
+  //                 path.setClosed( closed );
+  //                 path.setReversed( reversed );
+  //                 if ( outline != DrawingLinePath.OUTLINE_UNDEF ) path.mOutline = outline;
+  //                 if ( options != null ) path.setOptions( options );
 
-                  // TDLog.Log( TDLog.LOG_PLOT, "  line start point: <" + line + ">");
-                  String[] pt0 = line.split( "\\s+" );
-                  try {
-                    x = dx + Float.parseFloat( pt0[0] ) / TDSetting.mToTherion;
-                    y = dy - Float.parseFloat( pt0[1] ) / TDSetting.mToTherion;
-                    path.addStartPoint( x, y );
-                  } catch ( NumberFormatException e ) {
-                    TDLog.Error( "Therion Line X-Y error (1) <" + line + ">" );
-                    continue;
-                  } catch ( ArrayIndexOutOfBoundsException e ) {
-                    TDLog.Error( "Therion Line X-Y error (2) " + line );
-                    continue;
-                  }
-                  // Log.v( "DistoX", "  line start point: <" + line + "> " + x + " " + y );
-                  while ( (line = readLine( br )) != null ) {
-                    if ( line.contains( "l-size" ) ) continue;
-                    if ( line.equals( "endline" ) ) {
-                      if ( path != null ) {
-                        if ( type.equals("section") ) { // section line only in non-section scraps
-                          if ( is_not_section ) {
-                            path.makeStraight( );
-                          }
-                        } else {
-                          path.computeUnitNormal(); // for section-line already done by makeStraight
-                        } 
-                        surface.addDrawingPath( path );
-                      }
-                      break;
-                    }
-                    if ( path != null ) {
-                      // TDLog.Log( TDLog.LOG_PLOT, "  line point: >>" + line + "<<");
-                      String[] pt = line.split( " " );
-                      if ( pt.length == 2 ) {
-                        try {
-                          x = dx + Float.parseFloat( pt[0] ) / TDSetting.mToTherion;
-                          y = dy - Float.parseFloat( pt[1] ) / TDSetting.mToTherion;
-                          path.addPoint( x, y );
-                        } catch ( NumberFormatException e ) {
-                          TDLog.Error( "Therion Line X-Y error (3) <" + line + ">" );
-                          continue;
-                        } catch ( ArrayIndexOutOfBoundsException e ) {
-                          TDLog.Error( "Therion Line X-Y error (4) " + line );
-                          continue;
-                        }
-                      } else if ( pt.length == 6 ) {
-                        try {
-                          x1 = dx + Float.parseFloat( pt[0] ) / TDSetting.mToTherion;
-                          y1 = dy - Float.parseFloat( pt[1] ) / TDSetting.mToTherion;
-                          x2 = dx + Float.parseFloat( pt[2] ) / TDSetting.mToTherion;
-                          y2 = dy - Float.parseFloat( pt[3] ) / TDSetting.mToTherion;
-                          x  = dx + Float.parseFloat( pt[4] ) / TDSetting.mToTherion;
-                          y  = dy - Float.parseFloat( pt[5] ) / TDSetting.mToTherion;
-                          path.addPoint3( x1, y1, x2, y2, x, y );
-                        } catch ( NumberFormatException e ) {
-                          TDLog.Error( "Therion Line X-Y error (5) <" + line + ">" );
-                          continue;
-                        } catch ( ArrayIndexOutOfBoundsException e ) {
-                          TDLog.Error( "Therion Line X-Y error (6) " + line );
-                          continue;
-                        }
-                      }
-                    }
-                  } // end while ( line-points )
-                }
-              }
-            }
-          }
-        }
-      } catch ( FileNotFoundException e ) {
-        // this is OK
-      // } catch ( IOException e ) {
-      //   e.printStackTrace();
-      }
-    }
-    // remove repeated names
+  //                 // TDLog.Log( TDLog.LOG_PLOT, "  line start point: <" + line + ">");
+  //                 String[] pt0 = line.split( "\\s+" );
+  //                 try {
+  //                   x = dx + Float.parseFloat( pt0[0] ) / toTherion;
+  //                   y = dy - Float.parseFloat( pt0[1] ) / toTherion;
+  //                   path.addStartPoint( x, y );
+  //                 } catch ( NumberFormatException e ) {
+  //                   TDLog.Error( "Therion Line X-Y error (1) <" + line + ">" );
+  //                   continue;
+  //                 } catch ( ArrayIndexOutOfBoundsException e ) {
+  //                   TDLog.Error( "Therion Line X-Y error (2) " + line );
+  //                   continue;
+  //                 }
+  //                 // Log.v( "DistoX", "  line start point: <" + line + "> " + x + " " + y );
+  //                 while ( (line = readLine( br )) != null ) {
+  //                   if ( line.contains( "l-size" ) ) continue;
+  //                   if ( line.equals( "endline" ) ) {
+  //                     if ( path != null ) {
+  //                       if ( type.equals("section") ) { // section line only in non-section scraps
+  //                         if ( is_not_section ) {
+  //                           path.makeStraight( );
+  //                         }
+  //                       } else {
+  //                         path.computeUnitNormal(); // for section-line already done by makeStraight
+  //                       } 
+  //                       surface.addDrawingPath( path );
+  //                     }
+  //                     break;
+  //                   }
+  //                   if ( path != null ) {
+  //                     // TDLog.Log( TDLog.LOG_PLOT, "  line point: >>" + line + "<<");
+  //                     String[] pt = line.split( " " );
+  //                     if ( pt.length == 2 ) {
+  //                       try {
+  //                         x = dx + Float.parseFloat( pt[0] ) / toTherion;
+  //                         y = dy - Float.parseFloat( pt[1] ) / toTherion;
+  //                         path.addPoint( x, y );
+  //                       } catch ( NumberFormatException e ) {
+  //                         TDLog.Error( "Therion Line X-Y error (3) <" + line + ">" );
+  //                         continue;
+  //                       } catch ( ArrayIndexOutOfBoundsException e ) {
+  //                         TDLog.Error( "Therion Line X-Y error (4) " + line );
+  //                         continue;
+  //                       }
+  //                     } else if ( pt.length == 6 ) {
+  //                       try {
+  //                         x1 = dx + Float.parseFloat( pt[0] ) / toTherion;
+  //                         y1 = dy - Float.parseFloat( pt[1] ) / toTherion;
+  //                         x2 = dx + Float.parseFloat( pt[2] ) / toTherion;
+  //                         y2 = dy - Float.parseFloat( pt[3] ) / toTherion;
+  //                         x  = dx + Float.parseFloat( pt[4] ) / toTherion;
+  //                         y  = dy - Float.parseFloat( pt[5] ) / toTherion;
+  //                         path.addPoint3( x1, y1, x2, y2, x, y );
+  //                       } catch ( NumberFormatException e ) {
+  //                         TDLog.Error( "Therion Line X-Y error (5) <" + line + ">" );
+  //                         continue;
+  //                       } catch ( ArrayIndexOutOfBoundsException e ) {
+  //                         TDLog.Error( "Therion Line X-Y error (6) " + line );
+  //                         continue;
+  //                       }
+  //                     }
+  //                   }
+  //                 } // end while ( line-points )
+  //               }
+  //             }
+  //           }
+  //         }
+  //       }
+  //     } catch ( FileNotFoundException e ) {
+  //       // this is OK
+  //     // } catch ( IOException e ) {
+  //     //   e.printStackTrace();
+  //     }
+  //   }
+  //   // remove repeated names
 
-    return (missingSymbols == null ) || missingSymbols.isOK();
-  }
+  //   return (missingSymbols == null ) || missingSymbols.isOK();
+  // }
 
   // =========================================================================
   // EXPORT 
@@ -490,13 +493,13 @@ class DrawingIO
   // which calls the full method exportTherion with the list of sketch items
   //
   // FIXME DataHelper and SID are necessary to export splays by the station
-  static void exportTherion( DrawingCommandManager manager, int type, File file, String fullname, String projname, int proj_dir )
+  static void exportTherion( DrawingCommandManager manager, int type, File file, String fullname, String projname, int proj_dir, boolean multiscrap )
   {
     TDLog.Log( TDLog.LOG_IO, "export Therion file " + file.getPath() );
     try {
       FileWriter fw = new FileWriter( file );
       BufferedWriter bw = new BufferedWriter( fw );
-      manager.exportTherion( type, bw, fullname, projname, proj_dir );
+      manager.exportTherion( type, bw, fullname, projname, proj_dir, multiscrap );
       bw.flush();
       bw.close();
     } catch ( IOException e ) {
@@ -626,8 +629,12 @@ class DrawingIO
                                    SymbolsPalette missingSymbols,
                                    SymbolsPalette localPalette,
                                    RectF bbox,
-				   boolean complete )
+				   boolean complete,
+				   String plotName )
   {
+    // Log.v("DistoXX", "load data stream file " + filename );
+    // if ( plotName != null ) Log.v("DistoXX", "load data stream " + plotName );
+
     int version = 0;
     boolean in_scrap = false;
     // BrushManager.makePaths( );
@@ -762,6 +769,8 @@ class DrawingIO
               break;
           } 
           if ( path != null && in_scrap ) {
+            // if ( plotName != null ) 
+	      path.mPlotName = plotName;
             if ( what == 'U' ) {
               surface.addDrawingStationPath( (DrawingStationPath)path );
             } else {
@@ -1105,7 +1114,7 @@ class DrawingIO
   {
     try { 
       exportTherionHeader1( out, type, bbox );
-      exportTherionHeader2( out );
+      // exportTherionHeader2( out );
       if ( north != null ) { 
         exportTherionHeader3( out, type, scrap_name, proj_name, 0, true, north.x1, north.y1, north.x2, north.y2 );
       } else {
@@ -1156,7 +1165,7 @@ class DrawingIO
       out.newLine();
 
       if ( TDSetting.mTherionSplays ) {
-        float th = TDSetting.mToTherion;
+        float toTherion = TDSetting.mToTherion;
         StringWriter sw = new StringWriter();
         PrintWriter pw  = new PrintWriter(sw);
 	       synchronized( splays ) {
@@ -1165,7 +1174,7 @@ class DrawingIO
             // if ( bbox.top  > splay.bottom || bbox.bottom < splay.top  ) continue;
             if ( splay.intersects( bbox ) ) {
               pw.format("line u:splay -visibility off\n");
-              pw.format( Locale.US, "  %.2f %.2f\n  %.2f %.2f\n", splay.x1*th, -splay.y1*th, splay.x2*th, -splay.y2*th );
+              pw.format( Locale.US, "  %.2f %.2f\n  %.2f %.2f\n", splay.x1*toTherion, -splay.y1*toTherion, splay.x2*toTherion, -splay.y2*toTherion );
               pw.format("endline\n");
             }
           }
@@ -1242,6 +1251,145 @@ class DrawingIO
     }
   }
 
+  // FIXME DataHelper and SID are necessary to export splays by the station
+  static void exportTherionMultiScrap( int type, BufferedWriter out, String proj_name, int project_dir,
+        // RectF bbox,
+        // DrawingPath north, // no x-section
+        final List<ICanvasCommand> cstack,
+        final List<DrawingStationPath> userstations,
+        final List<DrawingStationName> stations,
+        final List<DrawingPath> splays )
+  {
+    ArraySet<String> plots = new ArraySet<String>();
+    float xmin=1000000f, xmax=-1000000f, 
+          ymin=1000000f, ymax=-1000000f;
+    // Log.v("DistoXX", "export multiscrap type " + type + " proj " + proj_name );
+    synchronized( cstack ) {
+      for ( ICanvasCommand cmd : cstack ) {
+        if ( cmd.commandType() != 0 ) continue;
+        DrawingPath p = (DrawingPath) cmd;
+        // RectF bbox = p.mBBox;
+        if ( p.left   < xmin ) xmin = p.left;
+        if ( p.right  > xmax ) xmax = p.right;
+        if ( p.top    < ymin ) ymin = p.top;
+        if ( p.bottom > ymax ) ymax = p.bottom;
+
+	if ( p.mPlotName != null ) {
+	  plots.add( p.mPlotName );
+	}
+      }
+      RectF bbox = new RectF( xmin, ymin, xmax, ymax ); // left top right bottom
+
+      // Log.v("DistoXX", "export th2 multiscrap nr. " + plots.size() + " cstack " + cstack.size() );
+      // Log.v("DistoXX", "export th2 multiscrap bbox X " + xmin + " " + xmax  + " Y " + ymin + " " + ymax );
+
+      try { 
+        exportTherionHeader1( out, type, bbox );
+        // exportTherionHeader2( out );
+        for ( String plot : plots ) {
+          // if ( north != null ) { 
+          //   exportTherionHeader3( out, type, scrap_name, proj_name, 0, true, north.x1, north.y1, north.x2, north.y2 );
+          // } else {
+            exportTherionHeader3( out, type, plot, proj_name, project_dir, false, 0, 0, 0, 0 );
+          // }
+
+          synchronized( cstack ) {
+            for ( ICanvasCommand cmd : cstack ) {
+              if ( cmd.commandType() != 0 ) continue;
+              DrawingPath p = (DrawingPath) cmd;
+              if ( ! plot.equals( p.mPlotName ) ) continue;
+              if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
+                DrawingPointPath pp = (DrawingPointPath)p;
+                String pp_str = pp.toTherion();
+                if ( pp_str != null ) {
+                  out.write( pp_str );
+                  out.newLine();
+                }
+              } else if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) { // should never happen
+                // if ( ! TDSetting.mAutoStations ) {
+                //   DrawingStationPath st = (DrawingStationPath)p;
+                //   String st_str = st.toTherion();
+                //   if ( st_str != null ) {
+                //     out.write( st_str );
+                //     out.newLine();
+                //   }
+                // }
+              } else if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
+                DrawingLinePath lp = (DrawingLinePath)p;
+                if ( lp.size() > 1 ) {
+                  String lp_str = lp.toTherion();
+                  if ( lp_str != null ) {
+                    out.write( lp_str );
+                    out.newLine();
+                  }
+                }
+              } else if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
+                DrawingAreaPath ap = (DrawingAreaPath)p;
+                if ( ap.size() > 2 ) {
+                  String ap_str = ap.toTherion();
+                  if ( ap_str != null ) {
+                    out.write( ap_str );
+                    out.newLine();
+                  }
+                }
+              }
+            }
+            out.newLine();
+          }
+
+          // if ( TDSetting.mTherionSplays ) {
+          //   float toTherion = TDSetting.mToTherion;
+          //   StringWriter sw = new StringWriter();
+          //   PrintWriter pw  = new PrintWriter(sw);
+          //          synchronized( splays ) {
+          //     for ( DrawingPath splay : splays ) {
+          //       // if ( bbox.left > splay.right  || bbox.right  < splay.left ) continue;
+          //       // if ( bbox.top  > splay.bottom || bbox.bottom < splay.top  ) continue;
+          //       if ( splay.intersects( bbox ) ) {
+          //         pw.format("line u:splay -visibility off\n");
+          //         pw.format( Locale.US, "  %.2f %.2f\n  %.2f %.2f\n", splay.x1*toTherion, -splay.y1*toTherion, splay.x2*toTherion, -splay.y2*toTherion );
+          //         pw.format("endline\n");
+          //       }
+          //     }
+          //   }
+          //   out.write( sw.toString() );
+          //   out.newLine();
+          // }
+
+          // if ( TDSetting.mAutoStations ) {
+          //   synchronized( stations ) {
+          //     for ( DrawingStationName st : stations ) {
+          //       NumStation station = st.station();
+          //       if ( station != null && station.barriered() ) continue;
+          //       // FIXME if station is in the convex hull (bbox) of the lines
+          //       if ( bbox.left > st.cx || bbox.right  < st.cx ) continue;
+          //       if ( bbox.top  > st.cy || bbox.bottom < st.cy ) continue;
+          //       String st_str = st.toTherion();
+          //       if ( st_str != null ) {
+          //         out.write( st_str );
+          //         out.newLine();
+          //       }
+          //     }
+          //   }
+          // } else {
+            synchronized( userstations ) {
+              for ( DrawingStationPath sp : userstations ) {
+                String sp_str = sp.toTherion();
+                if ( sp_str != null ) {
+                  out.write( sp_str );
+                  out.newLine();
+                }
+              }
+            }
+          // }
+          exportTherionClose( out );
+        }
+      } catch ( IOException e ) {
+        e.printStackTrace();
+      }
+    }
+  }
+
   static public void dataStream2Therion( File file, BufferedWriter out, RectF bbox, boolean endscrap )
   {
     int version = 0;
@@ -1286,7 +1434,7 @@ class DrawingIO
                   north_y2 = dis.readFloat();
                 }
                 exportTherionHeader1( out, type, bbox );
-                exportTherionHeader2( out, points, lines, areas );
+                // exportTherionHeader2( out, points, lines, areas );
                 String proj = PlotInfo.projName[ type ];
                 if ( do_north ) { 
                   exportTherionHeader3( out, type, name, proj, 0, true, north_x1, north_y1, north_x2, north_y2 );

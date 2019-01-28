@@ -45,20 +45,22 @@ class DrawingPointPath extends DrawingPath
   static String scaleToStringUC( int scale ) 
   { return ( scale >= SCALE_XS && scale <= SCALE_XL )? SCALE_STR_UC[ scale+2 ] : "-"; }
 
-  // float mXpos;             // scene coords
+  // float mXpos;        // scene coords
   // float mYpos;
   int mPointType;
-  protected int mScale;       //! symbol scale
+  protected int mScale;  //! symbol scale
   double mOrientation;   // orientation [degrees]
   String mPointText;
+  IDrawingLink mLink;    // linked drawing item
 
-  @Override
-  DrawingPath copy()
-  {
-    DrawingPointPath ret = new DrawingPointPath( mPointType, cx, cy, mScale, mPointText, mOptions );
-    copyTo( ret );
-    return ret;
-  }
+  // FIXME-COPYPATH
+  // @Override
+  // DrawingPath copyPath()
+  // {
+  //   DrawingPointPath ret = new DrawingPointPath( mPointType, cx, cy, mScale, mPointText, mOptions );
+  //   copyTo( ret );
+  //   return ret;
+  // }
 
   // FIXME SECTION_RENAME
   DrawingPointPath fixScrap( String survey_name )
@@ -73,7 +75,6 @@ class DrawingPointPath extends DrawingPath
     }
     return this;
   }
-
 
   // String getTextFromOptions( String options )
   // {
@@ -117,6 +118,7 @@ class DrawingPointPath extends DrawingPath
     setPathPaint( BrushManager.mPointLib.getSymbolPaint( mPointType ) );
     mScale = scale;
     resetPath( 1.0f );
+    mLink = null;
     // Log.v( TopoDroidApp.TAG, "Point cstr " + type + " orientation " + mOrientation );
   }
 
@@ -246,6 +248,7 @@ class DrawingPointPath extends DrawingPath
     // bottom *= z;
   }
 
+  void setLink( IDrawingLink link ) { mLink = link; }
 
   // N.B. canvas is guaranteed ! null
   @Override
@@ -263,6 +266,18 @@ class DrawingPointPath extends DrawingPath
       }
       mTransformedPath.transform( matrix );
       drawPath( mTransformedPath, canvas );
+      if ( mLink != null ) {
+        Path link = new Path();
+        link.moveTo( cx, cy );
+	link.lineTo( mLink.getLinkX(), mLink.getLinkY() );
+        if ( mLandscape ) {
+	  Matrix rot = new Matrix();
+	  rot.postRotate( 90, cx, cy );
+	  link.transform( rot );
+	}
+        link.transform( matrix );
+        canvas.drawPath( link, BrushManager.fixedOrangePaint );
+      }
     }
   }
 

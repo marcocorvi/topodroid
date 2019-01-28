@@ -45,7 +45,7 @@ import java.io.DataOutputStream;
 
 // import java.util.Locale;
 
-// import android.util.Log;
+import android.util.Log;
 
 /**
  */
@@ -1256,7 +1256,6 @@ class DrawingCommandManager
   void addCommand( DrawingPath path )
   {
     // TDLog.Log( TDLog.LOG_PLOT, "addCommand stack size  " + mCurrentStack.size() );
-    // TDLog.Log( TDLog.LOG_PLOT, "addCommand path " + path.toString() );
     // Log.v("DistoX", "add command type " + path.mType + " " + path.left + " " + path.top + " " 
     //        + mBBox.left + " " + mBBox.top + " " + mBBox.right + " " + mBBox.bottom );
 
@@ -1527,7 +1526,8 @@ class DrawingCommandManager
 
   private int currentStackLength()
   {
-    return mCurrentStack.toArray().length;
+    // return mCurrentStack.toArray().length;
+    return mCurrentStack.size();
   }
 
   // line points are scene-coords
@@ -1966,7 +1966,8 @@ class DrawingCommandManager
 
   boolean hasMoreUndo()
   {
-    return  mCurrentStack.toArray().length > 0;
+    // return  mCurrentStack.toArray().length > 0;
+    return  mCurrentStack.size() > 0;
   }
 
   public void redo()
@@ -2849,10 +2850,16 @@ class DrawingCommandManager
   }
 
   // FIXME DataHelper and SID are necessary to export splays by the station
-  void exportTherion( int type, BufferedWriter out, String scrap_name, String proj_name, int proj_dir )
+  void exportTherion( int type, BufferedWriter out, String scrap_name, String proj_name, int proj_dir, boolean multiscrap )
   {
-    RectF bbox = computeBBox();
-    DrawingIO.exportTherion( type, out, scrap_name, proj_name, proj_dir, bbox, mNorthLine, mCurrentStack, mUserStations, mStations, mSplaysStack );
+    if ( multiscrap ) {
+      // Log.v("DistoXX", "multi scrap export stack size " + mCurrentStack.size() );
+      // BBox computed by export multiscrap
+      DrawingIO.exportTherionMultiScrap( type, out, proj_name, proj_dir, /* bbox, mNorthLine, */ mCurrentStack, mUserStations, mStations, mSplaysStack );
+    } else {
+      RectF bbox = computeBBox();
+      DrawingIO.exportTherion( type, out, scrap_name, proj_name, proj_dir, bbox, mNorthLine, mCurrentStack, mUserStations, mStations, mSplaysStack );
+    }
   }
    
   void exportDataStream( int type, DataOutputStream dos, String scrap_name, int proj_dir )
@@ -2942,6 +2949,53 @@ class DrawingCommandManager
     return ret / 2;
   }
 
+  void linkSections()
+  {
+    synchronized( mCurrentStack ) {
+      for ( ICanvasCommand cmd : mCurrentStack ) {
+        if ( cmd.commandType() != 0 ) continue; 
+        DrawingPath p = (DrawingPath)cmd;
+        if ( p.mType != DrawingPath.DRAWING_PATH_POINT ) continue;
+        DrawingPointPath pt = (DrawingPointPath)p;
+        if ( pt.mPointType != BrushManager.mPointLib.mPointSectionIndex ) continue;
+	// get the line/station
+	String scrap = p.getOption("-scrap");
+	// Log.v("DistoXX", "section point scrap " + scrap );
+	int pos = scrap.lastIndexOf( "-xx" );
+	if ( pos > 0 ) {
+          String id = scrap.substring(pos+1); // line id
+	  if ( id != null && id.length() > 0 ) {
+            for ( ICanvasCommand cmd2 : mCurrentStack ) {
+              if ( cmd2.commandType() != 0 ) continue; 
+              DrawingPath p2 = (DrawingPath)cmd2;
+              if ( p2.mType != DrawingPath.DRAWING_PATH_LINE ) continue;
+              DrawingLinePath ln = (DrawingLinePath)p2;
+              if ( ln.mLineType != BrushManager.mLineLib.mLineSectionIndex ) continue;
+	      if ( id.equals( ln.getOption("-id") ) ) {
+                pt.setLink( ln );
+	        break;
+	      }
+	    }
+	  }
+	} else {
+          pos = scrap.lastIndexOf( "-xs-" );
+	  if ( pos < 0 ) pos = scrap.lastIndexOf( "-xh-" );
+	  if ( pos > 0 ) {
+            String name = scrap.substring(pos+4);
+	    if ( name != null && name.length() > 0 ) {
+	      // Log.v("DistoXX", "section station " + name );
+	      for ( DrawingStationName st : mStations ) {
+                if ( name.equals( st.name() ) ) {
+                  pt.setLink( st );
+	          break;
+		}
+	      }
+	    }
+	  }
+	}
+      }
+    }
+  }
 
   void clearScrapOutline() { synchronized( mScrap ) { mScrap.clear(); } }
 

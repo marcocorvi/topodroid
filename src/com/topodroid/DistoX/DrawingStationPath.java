@@ -30,18 +30,20 @@ import java.io.IOException;
  * station points do not shift (!)
  */
 class DrawingStationPath extends DrawingPath
+                         implements IDrawingLink
 {
   // float mXpos, mYpos;         // X-Y station position (scene): use cx, cy
   private int mScale;         //! symbol scale
   private String mName;       // station name
 
-  @Override
-  DrawingPath copy()
-  {
-    DrawingStationPath ret = new DrawingStationPath( mName, cx, cy, mScale );
-    copyTo( ret );
-    return ret;
-  }
+  // FIXME-COPYPATH
+  // @Override
+  // DrawingPath copyPath()
+  // {
+  //   DrawingStationPath ret = new DrawingStationPath( mName, cx, cy, mScale );
+  //   copyTo( ret );
+  //   return ret;
+  // }
 
 
   public DrawingStationPath( String name, float x, float y, int scale )
@@ -85,6 +87,10 @@ class DrawingStationPath extends DrawingPath
   }
 
   String name() { return mName; }
+
+  // @implements IDrawingLink
+  public float getLinkX() { return cx; }
+  public float getLinkY() { return cy; }
 
   private void setScale( int scale )
   {

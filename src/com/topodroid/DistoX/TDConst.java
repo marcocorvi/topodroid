@@ -109,6 +109,19 @@ class TDConst
     DISTOX_EXPORT_XVI
   };
 
+  static final String[] mOverviewExportTypes = {
+      "Therion",
+      "DXF",
+      "SVG",
+      "SHP"
+  };
+  static final private int[] mOverviewExportIndex = {
+    DISTOX_EXPORT_TH2,
+    DISTOX_EXPORT_DXF,
+    DISTOX_EXPORT_SVG,
+    DISTOX_EXPORT_SHP
+  };
+
   static final String[] mCalibExportTypes = { "CSV" };
   static final private int[] mCalibExportIndex = { DISTOX_EXPORT_CSV };
 
@@ -125,6 +138,7 @@ class TDConst
 
   static int surveyExportIndex( String type ) { return exportIndex( type, mSurveyExportTypes, mSurveyExportIndex ); }
   static int plotExportIndex( String type ) { return exportIndex( type, mPlotExportTypes, mPlotExportIndex ); }
+  static int overviewExportIndex( String type ) { return exportIndex( type, mOverviewExportTypes, mOverviewExportIndex ); }
   static int calibExportIndex( String type ) { return exportIndex( type, mCalibExportTypes, mCalibExportIndex ); }
   static int sketchExportIndex( String type ) { return exportIndex( type, mSketchExportTypes, mSketchExportIndex ); }
 

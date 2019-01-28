@@ -2174,11 +2174,11 @@ public class DrawingWindow extends ItemDrawer
     {
       // Log.v("DistoX", "load files()" );
       
-      String filename1  = null;
+      // String filename1  = null;
       String filename1b = null;
-      String filename2  = null;
+      // String filename2  = null;
       String filename2b = null;
-      String filename3  = null;
+      // String filename3  = null;
       String filename3b = null;
 
       if ( PlotInfo.isSketch2D( type ) ) {
@@ -2191,16 +2191,16 @@ public class DrawingWindow extends ItemDrawer
         mPid2  = mPlot2.id;
         // Log.v("DistoX", "Plot2 type " + mPlot2.type + " azimuth " + mPlot2.azimuth );
         mPid = mPid1;
-        filename1  = TDPath.getTh2FileWithExt( mFullName1 );
+        // filename1  = TDPath.getTh2FileWithExt( mFullName1 );
         filename1b = TDPath.getTdrFileWithExt( mFullName1 );
-        filename2  = TDPath.getTh2FileWithExt( mFullName2 );
+        // filename2  = TDPath.getTh2FileWithExt( mFullName2 );
         filename2b = TDPath.getTdrFileWithExt( mFullName2 );
       } else {
         // Log.v( "DistoX", "load files type " + type + " " + mName3 );
         mPlot3 = mApp_mData.getPlotInfo( mSid, mName3 );
 	if ( mPlot3 == null ) return false;
         mPid3  = mPlot3.id;
-        filename3  = TDPath.getTh2FileWithExt( mFullName3 );
+        // filename3  = TDPath.getTh2FileWithExt( mFullName3 );
         filename3b = TDPath.getTdrFileWithExt( mFullName3 );
       }
 
@@ -2225,12 +2225,12 @@ public class DrawingWindow extends ItemDrawer
 
         if ( ! mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, mFullName1, false ) ) {
           // mAllSymbols =
-          mDrawingSurface.modeloadDataStream( filename1b, filename1, missingSymbols );
+          mDrawingSurface.modeloadDataStream( filename1b, /* filename1, */ missingSymbols );
           DrawingSurface.addManagerToCache( mFullName1 );
         }
         if ( ! mDrawingSurface.resetManager( DrawingSurface.DRAWING_PROFILE, mFullName2, PlotInfo.isExtended(mPlot2.type) ) ) {
           // mAllSymbols = mAllSymbols &&
-          mDrawingSurface.modeloadDataStream( filename2b, filename2, missingSymbols );
+          mDrawingSurface.modeloadDataStream( filename2b, /* filename2, */ missingSymbols );
           DrawingSurface.addManagerToCache( mFullName2 );
         }
         
@@ -2247,11 +2247,12 @@ public class DrawingWindow extends ItemDrawer
         doMoveTo();
 
         mDrawingSurface.setStationXSections( xsection_plan, xsection_ext, mPlot2.type );
+	mDrawingSurface.linkAllSections();
       } else {
         mTo = ( PlotInfo.isSection( type ) )? mPlot3.view : "";
         mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null, false );
         // mAllSymbols =
-        mDrawingSurface.modeloadDataStream( filename3b, filename3, missingSymbols );
+        mDrawingSurface.modeloadDataStream( filename3b, /* filename3, */ missingSymbols );
         mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)type );
       }
 
@@ -2825,11 +2826,10 @@ public class DrawingWindow extends ItemDrawer
           mDrawingSurface.resetPreviewPath();
 
           if ( mSymbol == Symbol.LINE ) {
-            if (    ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2
-                 || ( mPointCnt % mLinePointStep ) > 0 ) {
+            if (    ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2 || ( mPointCnt % mLinePointStep ) > 0 ) {
               if ( mCurrentLinePath != null ) mCurrentLinePath.addPoint( xs, ys );
             }
-    	       if ( mLandscape ) mCurrentLinePath.landscapeToPortrait();
+            if ( mLandscape ) mCurrentLinePath.landscapeToPortrait();
           } else if ( mSymbol == Symbol.AREA ) {
             // Log.v("DistoX",
             //       "DX " + (xs - mCurrentAreaPath.mFirst.x) + " DY " + (ys - mCurrentAreaPath.mFirst.y ) );
@@ -3434,6 +3434,7 @@ public class DrawingWindow extends ItemDrawer
                                                         x5, y5, DrawingPointPath.SCALE_M, 
                                                         null, // no text 
                                                         scrap_option );
+	section_pt.setLink( currentLine );
         mDrawingSurface.addDrawingPath( section_pt );
       }
 
@@ -3708,6 +3709,7 @@ public class DrawingWindow extends ItemDrawer
 	  DrawingPointPath section_pt = new DrawingPointPath( BrushManager.mPointLib.mPointSectionIndex,
 							    x5, y5, DrawingPointPath.SCALE_M, 
 							    null, scrap_option ); // no text
+	  section_pt.setLink( st );
 	  mDrawingSurface.addDrawingPath( section_pt );
         }
       } else {
@@ -5457,23 +5459,25 @@ public class DrawingWindow extends ItemDrawer
     float y = mOffset.y;
     float z = mZoom;
     String tdr  = TDPath.getTdrFile( filename );
-    String th2  = TDPath.getTh2File( filename );
+    // String th2  = TDPath.getTh2File( filename );
     TDLog.Log( TDLog.LOG_IO, "reload tdr " + filename + " file " + tdr );
     // Log.v("DistoX", "recover " + type + " <" + filename + "> TRD " + tdr + " TH2 " + th2 );
     if ( type == PlotInfo.PLOT_PLAN ) {
       mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, null, false );
-      mDrawingSurface.modeloadDataStream( tdr, th2, null ); // no missing symbols
+      mDrawingSurface.modeloadDataStream( tdr, /* th2, */ null ); // no missing symbols
+      mDrawingSurface.linkSections();
       DrawingSurface.addManagerToCache( mFullName1 );
       setPlotType1( true );
     } else if ( PlotInfo.isProfile( type ) ) {
       mDrawingSurface.resetManager( DrawingSurface.DRAWING_PROFILE, null, PlotInfo.isExtended(type) );
-      mDrawingSurface.modeloadDataStream( tdr, th2, null );
+      mDrawingSurface.modeloadDataStream( tdr, /* th2, */ null );
+      mDrawingSurface.linkSections();
       DrawingSurface.addManagerToCache( mFullName2 );
       // now switch to extended view FIXME-VIEW
       setPlotType2( true );
     } else {
       mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null, false );
-      mDrawingSurface.modeloadDataStream( tdr, th2, null );
+      mDrawingSurface.modeloadDataStream( tdr, /* th2, */ null );
       // DrawingSurface.addManagerToCache( mFullName2 ); // sections are not cached
       setPlotType3( );
       DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
@@ -6073,7 +6077,7 @@ public class DrawingWindow extends ItemDrawer
     ydelta *= DrawingUtil.SCALE_FIX;
     String fullName = TDInstance.survey + "-" + plt.name;
     String tdr = TDPath.getTdrFileWithExt( fullName );
-    boolean ret = mDrawingSurface.addloadDataStream( tdr, null, xdelta, ydelta, null );
+    boolean ret = mDrawingSurface.addloadDataStream( tdr, /* null, */ xdelta, ydelta, null, null ); // do not save plot name in paths
   }
 
   // remove: whether to remove the paths from the current plot

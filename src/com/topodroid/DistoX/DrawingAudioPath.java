@@ -35,13 +35,14 @@ class DrawingAudioPath extends DrawingPointPath
   long mId;
   // private Paint paint;
   
-  @Override
-  DrawingPath copy()
-  {
-    DrawingAudioPath ret = new DrawingAudioPath( cx, cy, mScale, mOptions, mId );
-    copyTo( ret );
-    return ret;
-  }
+  // FIXME-COPYPATH
+  // @Override
+  // DrawingPath copyPath()
+  // {
+  //   DrawingAudioPath ret = new DrawingAudioPath( cx, cy, mScale, mOptions, mId );
+  //   copyTo( ret );
+  //   return ret;
+  // }
 
   DrawingAudioPath( float off_x, float off_y, int scale, String options, long id )
   {

@@ -28,8 +28,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.Matrix;
 
 import android.os.Bundle;
-// import android.os.Handler;
-// import android.os.Message;
+import android.os.Handler;
+import android.os.Message;
 import android.view.MotionEvent;
 import android.view.View;
 // import android.widget.LinearLayout;
@@ -60,7 +60,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import java.util.List;
 import java.util.ArrayList;
 
-// import android.util.Log;
+import android.util.Log;
 
 /**
  */
@@ -70,6 +70,7 @@ public class OverviewWindow extends ItemDrawer
                                       , OnItemClickListener
                                       , OnZoomListener
                                       , IZoomer
+				      , IExporter
 {
   private static final int[] izons = {
                         R.drawable.iz_measure,       // 0
@@ -86,6 +87,7 @@ public class OverviewWindow extends ItemDrawer
 
   private static final int[] menus = {
                         R.string.menu_close,
+			R.string.menu_export,
                         R.string.menu_options,
                         R.string.menu_help
                      };
@@ -99,6 +101,7 @@ public class OverviewWindow extends ItemDrawer
                       };
   private static final int[] help_menus = {
                         R.string.help_close,
+			R.string.help_save_plot,
                         R.string.help_prefs,
                         R.string.help_help
                       };
@@ -126,21 +129,21 @@ public class OverviewWindow extends ItemDrawer
   private float mBorderBottom     = 4096;
     
 
-    private TopoDroidApp mApp;
-    private DataHelper mData;
-    // private DrawingUtil mDrawingUtil;
+  private TopoDroidApp mApp;
+  private DataHelper mData;
+  // private DrawingUtil mDrawingUtil;
 
-    // long getSID() { return TDInstance.sid; }
-    // String getSurvey() { return TDInstance.survey; }
-    // private static BezierInterpolator mBezierInterpolator = new BezierInterpolator();
-    private DrawingSurface  mOverviewSurface;
+  // long getSID() { return TDInstance.sid; }
+  // String getSurvey() { return TDInstance.survey; }
+  // private static BezierInterpolator mBezierInterpolator = new BezierInterpolator();
+  private DrawingSurface  mOverviewSurface;
 
-    private DistoXNum mNum;
-    private Path mCrossPath;
-    private Path mCirclePath;
+  private DistoXNum mNum;
+  private Path mCrossPath;
+  private Path mCirclePath;
 
-    String mName1;  // first name (PLAN)
-    String mName2;  // second name (EXTENDED)
+  // String mName1;  // first name (PLAN)
+  // String mName2;  // second name (EXTENDED)
 
   private boolean mZoomBtnsCtrlOn = false;
   private ZoomButtonsController mZoomBtnsCtrl = null;
@@ -277,19 +280,6 @@ public class OverviewWindow extends ItemDrawer
     // {
     //   // setTitle( res.getString( R.string.title_move ) );
     // }
-
-    // private void AlertMissingSymbols()
-    // {
-    //   TopoDroidAlertDialog.makeAlert( mActivity, getResources(), R.string.missing_symbols,
-    //     new DialogInterface.OnClickListener() {
-    //       @Override
-    //       public void onClick( DialogInterface dialog, int btn ) {
-    //         mAllSymbols = true;
-    //       }
-    //     }
-    //   );
-    // }
-
 
   private void computeReferences( int type,
                                   // float xoff, float yoff,
@@ -638,12 +628,12 @@ public class OverviewWindow extends ItemDrawer
 
         // now try to load drawings from therion file
         String fullName = TDInstance.survey + "-" + plot.name;
-        // TDLog.Log( TDLog.LOG_DEBUG, "load th2 file " + fullName );
+        // Log.v( "DistoXX", "load tdr file " + fullName );
 
-        String th2 = TDPath.getTh2FileWithExt( fullName );
+        // String th2 = TDPath.getTh2FileWithExt( fullName );
         // if ( TDSetting.mBinaryTh2 ) { // TDR BINARY
           String tdr = TDPath.getTdrFileWithExt( fullName );
-          mOverviewSurface.addloadDataStream( tdr, th2, xdelta, ydelta, null );
+          mOverviewSurface.addloadDataStream( tdr, /* th2, */ xdelta, ydelta, null, fullName ); // save plot name in paths
         // } else {
         //   // FIXME_OVER N.B. this loads the drawing on DrawingSurface.mCommandManager3
         //   mOverviewSurface.addloadTherion( th2, xdelta, ydelta, null ); // ignore missing symbols
@@ -661,6 +651,46 @@ public class OverviewWindow extends ItemDrawer
       // // resetZoom();
       // resetReference( mPlot1 );
    }
+
+   // called only by export menu
+   private void saveWithExt( final String ext )
+   {
+     DistoXNum num = mNum;
+     final String filename = TDInstance.survey + ( (mType == PlotInfo.PLOT_PLAN )? "-p" : "-s" );
+     // TDLog.Log( TDLog.LOG_IO, "export plot type " + mType + " with extension " + ext );
+     // Log.v( "DistoXX", "export th2 file " + filename );
+     DrawingCommandManager manager = mOverviewSurface.getManager( DrawingSurface.DRAWING_OVERVIEW );
+
+     if ( ext.equals("th2") ) {
+       Handler th2Handler = new Handler() {
+          @Override public void handleMessage(Message msg) {
+            if (msg.what == 661 ) {
+              TDToast.make( String.format( getString(R.string.saved_file_1), (filename + "." + ext) ) );
+            } else {
+              TDToast.make( R.string.saving_file_failed );
+            }
+          }
+       };
+       // parent can be null because this is user-requested EXPORT
+       // azimuth = 0
+       // rotate  = 0
+       (new SavePlotFileTask( this, null, th2Handler, mNum, manager, filename, mType, 0, PlotSave.OVERVIEW, 0 )).execute();
+     } else {
+       (new ExportPlotToFile( this, mNum, manager, mType, filename, ext, true )).execute();
+     }
+   }
+
+  // interface IExporter
+  public void doExport( String export_type )
+  {
+    int index = TDConst.plotExportIndex( export_type );
+    switch ( index ) {
+      case TDConst.DISTOX_EXPORT_TH2: saveWithExt( "th2" ); break;
+      case TDConst.DISTOX_EXPORT_DXF: saveWithExt( "dxf" ); break; 
+      case TDConst.DISTOX_EXPORT_SVG: saveWithExt( "svg" ); break;
+      case TDConst.DISTOX_EXPORT_SHP: saveWithExt( "shp" ); break;
+    }
+  }
 
    // private void saveReference( PlotInfo plot, long pid )
    // {
@@ -1153,8 +1183,9 @@ public class OverviewWindow extends ItemDrawer
     ArrayAdapter< String > mMenuAdapter = new ArrayAdapter<>(mActivity, R.layout.menu );
 
     mMenuAdapter.add( res.getString( menus[0] ) );
-    mMenuAdapter.add( res.getString( menus[1] ) );
+    if ( TDLevel.overExpert ) mMenuAdapter.add( res.getString( menus[1] ) );
     mMenuAdapter.add( res.getString( menus[2] ) );
+    mMenuAdapter.add( res.getString( menus[3] ) );
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
   }
@@ -1173,6 +1204,9 @@ public class OverviewWindow extends ItemDrawer
     int p = 0;
     if ( p++ == pos ) { // CLOSE
       super.onBackPressed();
+    } else if ( TDLevel.overExpert && p++ == pos ) { // EXPORT THERION
+      new ExportDialog( mActivity, this, TDConst.mOverviewExportTypes, R.string.title_plot_save ).show();
+      // saveWithExt( "th2" );
     } else if ( p++ == pos ) { // OPTIONS
       Intent intent = new Intent( mActivity, TDPrefActivity.class );
       intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_PLOT );

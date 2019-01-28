@@ -48,15 +48,16 @@ class DrawingLinePath extends DrawingPointLinePath
   int mOutline; 
   private boolean mReversed;
 
-  @Override 
-  DrawingPath copy()
-  {
-    DrawingLinePath ret = new DrawingLinePath( mLineType );
-    copyTo( ret );
-    ret.mOutline = mOutline;
-    ret.mReversed = mReversed;
-    return ret;
-  }
+  // FIXME-COPYPATH
+  // @Override 
+  // DrawingPath copyPath()
+  // {
+  //   DrawingLinePath ret = new DrawingLinePath( mLineType );
+  //   copyTo( ret );
+  //   ret.mOutline = mOutline;
+  //   ret.mReversed = mReversed;
+  //   return ret;
+  // }
 
   DrawingLinePath( int line_type )
   {

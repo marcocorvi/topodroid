@@ -54,13 +54,14 @@ class DrawingAreaPath extends DrawingPointLinePath
   // boolean mVisible; // visible border in DrawingPointLinePath
   private Shader mLocalShader = null;
 
-  @Override
-  DrawingPath copy()
-  {
-    DrawingAreaPath ret = new DrawingAreaPath( mAreaType, mAreaCnt, mPrefix, isVisible() );
-    copyTo( ret );
-    return ret;
-  }
+  // FIXME-COPYPATH
+  // @Override
+  // DrawingPath copyPath()
+  // {
+  //   DrawingAreaPath ret = new DrawingAreaPath( mAreaType, mAreaCnt, mPrefix, isVisible() );
+  //   copyTo( ret );
+  //   return ret;
+  // }
 
   DrawingAreaPath( int type, int cnt, String prefix, boolean visible )
   {

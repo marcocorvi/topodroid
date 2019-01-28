@@ -27,6 +27,7 @@ import android.graphics.Matrix;
 // import android.util.Log;
 
 class DrawingStationName extends DrawingPointPath
+                         implements IDrawingLink
 {
   private String mName; // station name
   private NumStation mStation;
@@ -84,6 +85,10 @@ class DrawingStationName extends DrawingPointPath
 
   String name() { return mName; }
   NumStation station() { return mStation; }
+
+  // @implements IDrawingLink
+  public float getLinkX() { return cx; }
+  public float getLinkY() { return cy; }
 
   // FIXME OK PROFILE
   void setXSection( float azimuth, float clino, long type )

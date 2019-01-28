@@ -31,6 +31,7 @@ import java.io.PrintWriter;
 /**
  */
 class DrawingPointLinePath extends DrawingPath
+                           implements IDrawingLink
 {
   private boolean mVisible; // visible line
   private boolean mClosed;
@@ -44,21 +45,22 @@ class DrawingPointLinePath extends DrawingPath
 
   int size() { return mSize; }
 
-  @Override
-  DrawingPath copy()
-  {
-    DrawingPointLinePath ret = new DrawingPointLinePath( mType, mVisible, mClosed );
-    copyTo( ret );
-    return ret;
-  }
-
-  @Override
-  protected void copyTo( DrawingPath p )
-  {
-    DrawingPointLinePath path = (DrawingPointLinePath)p;
-    super.copyTo( path );
-    path.append( this );
-  }
+  // FIXME-COPYPATH
+  // @Override
+  // DrawingPath copyPath()
+  // {
+  //   DrawingPointLinePath ret = new DrawingPointLinePath( mType, mVisible, mClosed );
+  //   copyTo( ret );
+  //   return ret;
+  // }
+  //
+  // @Override
+  // protected void copyTo( DrawingPath p )
+  // {
+  //   DrawingPointLinePath path = (DrawingPointLinePath)p;
+  //   super.copyTo( path );
+  //   path.append( this );
+  // }
 
   /* DEBUG
    * counts how many points this line overlaps with another line
@@ -76,6 +78,10 @@ class DrawingPointLinePath extends DrawingPath
     }
     return ret;
   }
+
+  // @implements IDrawingLink
+  public float getLinkX( ) { return mLast.x; }
+  public float getLinkY( ) { return mLast.y; }
 
   @Override
   float getX() { return (left+right)/2; }

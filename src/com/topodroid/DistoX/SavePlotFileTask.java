@@ -27,7 +27,7 @@ import android.os.Handler;
 import android.graphics.Bitmap;
 // import android.graphics.Bitmap.CompressFormat;
 
-// import android.util.Log;
+import android.util.Log;
 
 class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
 {
@@ -117,14 +117,14 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
       if ( mSuffix == PlotSave.EXPORT ) {
         if ( mManager != null ) {
           File file2 = new File( TDPath.getTh2FileWithExt( mFullName ) );
-          DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotInfo.projName[ mType ], mProjDir );
+          DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotInfo.projName[ mType ], mProjDir, false ); // single scrap
         }
       } else if ( mSuffix == PlotSave.SAVE ) {
         switch ( TDSetting.mExportPlotFormat ) { // auto-export format
           case TDConst.DISTOX_EXPORT_TH2:
             if ( mManager != null ) {
               File file2 = new File( TDPath.getTh2FileWithExt( mFullName ) );
-              DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotInfo.projName[ mType ], mProjDir );
+              DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotInfo.projName[ mType ], mProjDir, false );
             }
             break;
           case TDConst.DISTOX_EXPORT_DXF:
@@ -175,6 +175,11 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
             }
             break;
         }
+      } else if ( mSuffix == PlotSave.OVERVIEW ) {
+	Log.v("DistoXX", "save plot file OVERVIEW");
+        File file = new File( TDPath.getTh2FileWithExt( mFullName ) );
+        DrawingIO.exportTherion( mManager, mType, file, mFullName, PlotInfo.projName[ mType ], mProjDir, true ); // multi-scrap
+	return true;
       }
       
       // second pass: save

@@ -60,38 +60,41 @@ class DrawingPath extends RectF
   boolean mLandscape; // whether the canvas is in landscape presentation mode or not
   float mExtend;  // extend value for splays (= cos of angle between splay and leg)
                   // x-sections: angle between splay and plane-normal
+  String mPlotName; // path full plotname, ie,survey-plot (only for Overview window)
 
   protected float cx, cy; // midpoint scene coords
   // RectF mBBox;   // path boundig box (scene coords)
   
-  // overridable
-  DrawingPath copy()
-  {
-    DrawingPath ret = new DrawingPath( mType, mBlock );
-    copyTo( ret );
-    return ret;
-  }
-
-  // copy utility
-  protected void copyTo( DrawingPath ret )
-  {
-    ret.left    = left; // RectF
-    ret.right   = right;
-    ret.bottom  = bottom;
-    ret.top     = top; 
-    ret.mOptions   = mOptions;
-    ret.mPaint     = mPaint;
-    ret.mLandscape = mLandscape;
-    ret.mExtend    = mExtend;
-    ret.x1 = x1;
-    ret.y1 = y1;
-    ret.x2 = x2;
-    ret.y2 = y2;
-    ret.cx = cx;
-    ret.cy = cy;
-    mPath = null;
-    mTransformedPath = null;
-  }
+  // FIXME-COPYPATH
+  // // overridable
+  // DrawingPath copyPath()
+  // {
+  //   DrawingPath ret = new DrawingPath( mType, mBlock );
+  //   copyTo( ret );
+  //   return ret;
+  // }
+  // 
+  // // copy utility
+  // protected void copyTo( DrawingPath ret )
+  // {
+  //   ret.left    = left; // RectF
+  //   ret.right   = right;
+  //   ret.bottom  = bottom;
+  //   ret.top     = top; 
+  //   ret.mOptions   = mOptions;
+  //   ret.mPaint     = mPaint;
+  //   ret.mLandscape = mLandscape;
+  //   ret.mExtend    = mExtend;
+  //   ret.mPlotName  = mPlotName;
+  //   ret.x1 = x1;
+  //   ret.y1 = y1;
+  //   ret.x2 = x2;
+  //   ret.y2 = y2;
+  //   ret.cx = cx;
+  //   ret.cy = cy;
+  //   mPath = null;
+  //   mTransformedPath = null;
+  // }
 
   DrawingPath( int type, DBlock blk )
   {
@@ -106,6 +109,7 @@ class DrawingPath extends RectF
     // dx = dy = 1.0f;
     mLandscape = false;
     mExtend = 1;
+    mPlotName = null;
   }
 
   // boolean isDeletable( ) 

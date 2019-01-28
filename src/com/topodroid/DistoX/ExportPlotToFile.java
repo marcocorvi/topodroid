@@ -63,6 +63,8 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
           filename = TDPath.getShpBasepath( mFullName );
         } else if ( mExt.equals("xvi") ) {
           filename = TDPath.getXviFileWithExt( mFullName );
+	} else { // unexpected extension
+	  return false;
         }
         // Log.v("DistoX", "Export to File: " + filename );
         if ( filename != null ) {

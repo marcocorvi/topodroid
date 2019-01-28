@@ -19,7 +19,7 @@ class PlotSave
   final static int HANDLER  = 2;
   final static int TOGGLE   = 4; 
   final static int MODIFIED = 5; 
-  final static int OVERVIEW = 6; 
+  final static int OVERVIEW = 6; // used by OverviewWindow to save whole th2
   final static int CREATE   = 7; 
 
 }
