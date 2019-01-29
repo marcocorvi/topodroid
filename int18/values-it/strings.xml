@@ -454,9 +454,10 @@
     <string name="shot_reverse">inverso</string>
     <string name="shot_to">a</string>
 
-    <!-- NO string name="make_surface">Surface exists. Replace it?</string -->
-
+    <!-- UNUSED FIXME_SKETCH_3D
+    <string name="make_surface">Surface exists. Replace it?</string>
     <string name="sketch3d_name">model name</string>
+    -->
     <!-- NO string name="sketch3d_new">New 3D sketch</string -->
     <!-- NO string name="sketch3d_next">next station</string -->
     <!-- NO string name="sketch3d_null_name">Missing 3D sketch name</string -->
@@ -664,21 +665,25 @@
 
     <string name="symbol_reload">Strumenti Disegno</string>
 
-<!-- FIXME_SKETCH_3D -->    
+<!-- FIXME_SKETCH_3D
+    <string name="title_sketch_shot">Nuovo tiro</string>
+    <string name="title_sketch_refs">Modo di visualizzazione</string>
+-->    
     <!-- OK string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
     <!-- NO string name="title_sketch_new">New 3D sketch</string -->
     <!-- UNUSED string name="title_sketch_edit">Edit 3D surface</string -->
-    <string name="title_sketch_shot">Nuovo tiro</string>
-    <string name="title_sketch_refs">Modo di visualizzazione</string>
     <!-- UNUSED string name="title_sketch_section_type">Tipo di sezioni</string -->
     <!-- UNUSED string name="title_sketch_select">Seleziona un oggetto</string -->
 
     <!-- select button labels -->
+<!-- FIXME_SKETCH_3D
     <string name="sketch_mode_single">Tiro singolo</string>
     <string name="sketch_mode_ngbh">Tiri vicini</string>
     <string name="sketch_mode_all">Tutti i tiri</string>
     <string name="sketch_delete">Cancella modello 3D ?</string>
+-->    
     <!-- UNUSED string name="sketch_no_split">Nessun raffinamento. Diminuire lato max. Lunghezza da raffinare ulteriormente.</string -->
+
     <string name="length">Lunghezza [m]</string>
     <string name="azimuth">Azimut [deg]</string>
     <string name="clino">Inclinazione [deg]</string>
@@ -706,16 +711,17 @@
     <!-- UNUSED string name="btn_surface">surface</string -->
 
     <!-- UNUSED string name="station_next">NEXT</string -->
-    <string name="no_shot_between_stations">Nessun tiro tra i capisaldi</string>
     <!-- UNUSED string name="few_line_points">La linea ha troppo pochi punti</string -->
+<!-- FIXME_SKETCH_3D
+    <string name="no_shot_between_stations">Nessun tiro tra i capisaldi</string>
     <string name="line_delete">Elimina linea</string>
-    <string name="flip_shots">Capovolgi battute</string>
-    <string name="split_nothing">Nulla da dividere</string>
-    <string name="copy_items">Copia elemento</string>
-
     <string name="menu_head">CIMA</string>
+-->
     <!-- UNUSED string name="menu_save_th2">SAVE TH2</string -->
 <!-- END_SKETCH_3D -->    
+    <string name="split_nothing">Nulla da dividere</string>
+    <string name="flip_shots">Capovolgi battute</string>
+    <string name="copy_items">Copia elemento</string>
 
     <string name="man_preface">Prefazione</string>
     <string name="man_intro">1. Introduzione</string>
@@ -835,13 +841,14 @@
     <string name="help_cover">Distribuzione angolare dati calibrazione</string>
     <string name="help_compute">Calcola calibrazione</string>
     <string name="help_write">Scrivi calibrazione sul DistoX</string>
-<!-- FIXME_SKETCH_3D -->
-    <!-- UNUSED string name="help_refs_model">View mode</string -->
+<!-- FIXME_SKETCH_3D
     <string name="help_one_model">Fit 3d model to view</string>
     <string name="help_surface">Make surface</string>
     <string name="help_save_model">Export 3D model</string>
     <string name="help_trash_model">Delete 3D model</string>
     <string name="help_head_model">Orient 3D model</string>
+-->
+    <!-- UNUSED string name="help_refs_model">View mode</string -->
     <!-- UNUSED string name="help_erase_model">Erase region</string -->
     <!-- UNUSED string name="help_cut_model">Cut region</string -->
     <!-- UNUSED string name="help_stretch_model">Stretch region</string -->
@@ -1002,7 +1009,7 @@
   <string name="pref_leg_shots_title">Misure per battuta</string>
   <string name="pref_leg_shots_summary">Minimo numero di misure per tiro di poligonale</string>
   <string name="pref_recent_timeout_title">Dati Timeout recenti</string>
-  <string name="pref_recent_timeout_summary">Timeout dopo dopo i quali un dato non e\' piu\' recente</string>
+  <string name="pref_recent_timeout_summary">Timeout dopo i quali un dato non e\' piu\' recente</string>
   <!-- TODO string name="pref_triple_shot_title">Leg-shot bell</string -->
   <!-- TODO string name="pref_triple_shot_summary">Sound feedback on leg-shot recognition</string -->
   <string name="pref_station_prefix_title">Esporta il prefisso dei caposaldi</string>
@@ -1289,15 +1296,17 @@
   <string name="pref_auto_section_pt_title">Punti sezione</string>
   <string name="pref_auto_section_pt_summary">Aggiungi un punto di sezione alle linee di sezione</string>
 
-  <!-- UNUSED string name="pref_sketchUsesSplays_title">Sketch splays</string -->
-  <!-- UNUSED string name="pref_sketchUsesSplays_summary">Sketch surface uses splays</string -->
+<!-- FIXME_SKETCH_3D
   <string name="pref_sketchLineStep_title">Line step</string>
   <string name="pref_sketchLineStep_summary">Distance between line points</string>
+  <string name="pref_sketchDeltaExtrude_title">Extrude delta</string>
+  <string name="pref_sketchDeltaExtrude_summary">Extrude delta</string>
+-->
+  <!-- UNUSED string name="pref_sketchUsesSplays_title">Sketch splays</string -->
+  <!-- UNUSED string name="pref_sketchUsesSplays_summary">Sketch surface uses splays</string -->
   <!-- UNUSED string name="pref_sketchBorderStep_title">Border step</string -->
   <!-- UNUSED string name="pref_sketchBorderStep_summary">Distance between edit-line points</string -->
   <!-- UNUSED string name="pref_sketchSectionStep_summary">Distance between sections</string -->
-  <string name="pref_sketchDeltaExtrude_title">Extrude delta</string>
-  <string name="pref_sketchDeltaExtrude_summary">Extrude delta</string>
   <!-- UNUSED string name="pref_sketchCompassReadings_title">Compass readings</string -->
   <!-- UNUSED string name="pref_sketchCompassReadings_summary">Number of readings to average</string -->
 

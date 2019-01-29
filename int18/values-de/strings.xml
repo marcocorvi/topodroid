@@ -464,8 +464,9 @@
     <string name="shot_reverse">Richtung umkehren</string>
     <string name="shot_to">bis</string>
 
+    <!-- UNUSED FIXME_SKETCH_3D
     <string name="make_surface">Oberfläche existiert. Ersetzen?</string>
-<!-- NOT USED -->
+     -->
     <!-- NO string name="sketch3d_name">Name</string -->
     <!-- NO string name="sketch3d_new">Neue 3D Skizze</string -->
     <!-- NO string name="sketch3d_next">nächster Messpunkt</string -->
@@ -723,16 +724,17 @@
     <!-- UNUSED string name="btn_surface">surface</string -->
 
     <!-- UNUSED string name="station_next">NEXT</string -->
-    <string name="no_shot_between_stations">no_shot_between_stations</string>
     <!-- UNUSED string name="few_line_points">Line has too few points</string -->
+<!-- FIXME_SKETCH_3D
+    <string name="no_shot_between_stations">no_shot_between_stations</string>
     <string name="line_delete">line_delete</string>
-    <string name="flip_shots">Flip shots</string>
-    <string name="split_nothing">Nichts aufzuteilen</string>
-    <string name="copy_items">Kopieren</string>
-
     <string name="menu_head">HEAD</string>
+-->
     <!-- UNUSED string name="menu_save_th2">SAVE TH2</string -->
 <!-- END_SKETCH_3D -->
+    <string name="split_nothing">Nichts aufzuteilen</string>
+    <string name="flip_shots">Flip shots</string>
+    <string name="copy_items">Kopieren</string>
 
     <string name="man_preface">Einführung</string>
     <string name="man_intro">1. Einleitung</string>
@@ -854,13 +856,14 @@
     <string name="help_compute">Kalibrierungs-Koeffizienten berechnen</string>
     <string name="help_write">Kalibrierungs-Koeffizienten auf den DistoX speichern</string>
 
-<!-- FIXME_SKETCH_3D -->
-    <!-- UNUSED string name="help_refs_model">View mode</string -->
+<!-- FIXME_SKETCH_3D
     <string name="help_one_model">3D-Modell einpassen</string>
     <string name="help_surface">Oberfläche erzeugen</string>
     <string name="help_save_model">3D-Modell exportieren</string>
     <string name="help_trash_model">3D-Modell löschen</string>
     <string name="help_head_model">3D-Modell drehen</string>
+-->
+    <!-- UNUSED string name="help_refs_model">View mode</string -->
     <!-- UNUSED string name="help_erase_model">Erase region</string -->
     <!-- UNUSED string name="help_cut_model">Region ausschneiden</string -->
     <!-- UNUSED string name="help_stretch_model">Region zeichnen</string -->
@@ -1309,7 +1312,7 @@
   <string name="pref_area_border_summary">Linie um Flächen herum anzeigen</string>
   <string name="pref_auto_section_pt_title">Querschnittspunkte</string>
   <string name="pref_auto_section_pt_summary">Querschnittspunkt zu Querschnitten hinzufügen</string>
-  <!-- Experimental 3D Drawing Feature: -->
+<!-- Experimental 3D Drawing Feature: -->
   <!-- NO string name="pref_sketchUsesSplays_title">Sketch splays</string -->
   <!-- NO string name="pref_sketchUsesSplays_summary">Sketch surface uses splays</string -->
   <!-- NO string name="pref_sketchLineStep_title">Max side</string -->

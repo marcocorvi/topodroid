@@ -910,12 +910,14 @@ public class TopoDroidApp extends Application
           TopoDroidUtil.renameFile( TDPath.getSurveyPlotCsxFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotCsxFile( name, p.name ) );
         }
       }
+      /* FIXME_SKETCH_3D *
       { // rename sketch files: th3
         List< Sketch3dInfo > sketches = mData.selectAllSketches( sid );
         for ( Sketch3dInfo s : sketches ) {
           TopoDroidUtil.renameFile( TDPath.getSurveySketchOutFile( TDInstance.survey, s.name ), TDPath.getSurveySketchOutFile( name, s.name ) );
         }
       }
+       * FIXME_SKETCH_3D */
       // rename exported files: csv csx dat dxf kml plt srv svx th top tro 
         TopoDroidUtil.renameFile( TDPath.getSurveyThFile( TDInstance.survey ), TDPath.getSurveyThFile( name ) );
         TopoDroidUtil.renameFile( TDPath.getSurveyCsvFile( TDInstance.survey ), TDPath.getSurveyCsvFile( name ) );

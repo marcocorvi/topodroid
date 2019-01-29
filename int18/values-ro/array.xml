@@ -267,10 +267,10 @@
      <item name="hex">Hexazecimal</item>
   </string-array>
 
-  <string-array name="modelType">
+  <!-- UNUSED string-array name="modelType">
      <item name="none">Nici unul</item>
      <item name="convexhull">Convex Hull</item>
      <item name="powercrust">Powercrust</item>
-  </string-array>
+  </string-array -->
 
 </resources>

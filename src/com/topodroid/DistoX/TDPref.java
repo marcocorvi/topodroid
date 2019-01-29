@@ -453,7 +453,6 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeFwd( cat, key[10], tit[10],          B,          ctx, hlp ),
       makeFwd( cat, key[11], tit[11],          B,          ctx, hlp ),
       makeFwd( cat, key[12], tit[12],          T,          ctx, hlp ),    // GEEK
-      // makeFwd( cat, key[13], tit[13],          D,          ctx, hlp )  // SKETCH
     };
   }
 
@@ -991,11 +990,12 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeFwd( cat, key[2], tit[2],          T,          ctx, hlp ), // GEEK_PLOT
       makeFwd( cat, key[3], tit[3],          T,          ctx, hlp ), // GEEK_LINE
       makeFwd( cat, key[4], tit[4],          T,          ctx, hlp ), // PLOT_WALLS
-      makeFwd( cat, key[5], tit[5],          T,          ctx, hlp ), // GEEK_DEVICE
-      makeFwd( cat, key[6], tit[6],          D,          ctx, hlp )  // SKETCH
+      makeFwd( cat, key[5], tit[5],          T,          ctx, hlp )  // GEEK_DEVICE
+      // makeFwd( cat, key[6], tit[6],          D,          ctx, hlp )  // SKETCH // FIXME_SKETCH_3D
     };
   }
 
+  /* FIXME_SKETCH_3D *
   static TDPref[] makeSketchPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_CATEGORY_SKETCH;
@@ -1013,6 +1013,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
       // makeEdt( cat, key[ ], tit[ ], dsc[ ], X, def[ ], INTEGER, ctx, hlp ) 
     };
   }
+  * END_SKETCH_3D */
 
   static TDPref[] makeLogPrefs( Context ctx, TDPrefHelper hlp )
   {

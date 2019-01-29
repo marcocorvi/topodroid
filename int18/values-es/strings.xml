@@ -453,7 +453,6 @@
     <string name="shot_to">Toma hasta</string>
 <!-- NOT USED -->
     <!-- UNUSED string name="make_surface">Ya existe en superficie ¿Reemplazar?</string -->
-
     <!-- UNUSED string name="sketch3d_name">Nombre</string -->
     <!-- UNUSED string name="sketch3d_new">Nuevo dibujo 3D</string -->
     <!-- UNUSED string name="sketch3d_next">Falta nombre de dibujo 3D</string -->
@@ -664,19 +663,22 @@
     <string name="length">Longitud [m]</string>
     <string name="azimuth">Rumbo [deg]</string>
 
-<!-- DO NOT CHANGE THIS LINE. FIXME_SKETCH_3D -->    
+<!-- FIXME_SKETCH_3D
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
     <string name="title_sketch_new">Nuevo dibujo 3D</string>
-    <!-- UNUSED string name="title_sketch_edit">Editar la superficie 3D</string -->
     <string name="title_sketch_shot">Nueva toma</string>
     <string name="title_sketch_refs">Modo de vista</string>
+-->
+    <!-- UNUSED string name="title_sketch_edit">Editar la superficie 3D</string -->
     <!-- UNUSED string name="title_sketch_section_type">Tipo de secciones</string -->
     <!-- UNUSED string name="title_sketch_select">Seleccione un elemento</string -->
 
+<!-- FIXME_SKETCH_3D
     <string name="sketch_mode_single">Una sola toma</string>
     <string name="sketch_mode_ngbh">Tomas cercanas</string>
     <string name="sketch_mode_all">Todas las tomas</string>
     <string name="sketch_delete">¿Quiere eliminar modelo 3D?</string>
+-->
     <!-- UNUSED string name="sketch_no_split">Sin refinamiento. Disminución lateral máx. Longitud para refinar más.</string -->
     <string name="clino">Clino [deg]</string>
 
@@ -705,9 +707,17 @@
 
     <!-- UNUSED string name="station_next">NEXT</string -->
 
+    <!-- UNUSED string name="few_line_points">La línea tiene muy pocos puntos</string -->
+<!-- FIXME_SKETCH_3D
+    <string name="no_shot_between_stations">No hay tomas entre estaciones</string>
+    <string name="line_delete">Eliminar línea</string>
     <string name="menu_head">CABEZA</string>
+-->
     <!-- UNUSED string name="menu_save_th2">GUARDAR TH2</string -->
 <!-- DO NOT CHANGE THIS LINE. END_SKETCH_3D -->    
+    <string name="split_nothing">Nada para dividir</string>
+    <string name="flip_shots">Tomas contínuas</string>
+    <string name="copy_items">Copiar elementos</string>
 
     <string name="man_preface"> Prefacio </string>
     <string name="man_intro">1. Introducción </string>
@@ -733,13 +743,6 @@
     <string name="help_measure_type">Modo de medición: punto fijo o polilínea</string>
     <!-- TODO string name="help_measure_undo">Drop the last polyline point</string -->
     
-    <string name="no_shot_between_stations">No hay tomas entre estaciones</string>
-    <!-- UNUSED string name="few_line_points">La línea tiene muy pocos puntos</string -->
-    <string name="line_delete">Eliminar línea</string>
-    <string name="flip_shots">Tomas contínuas</string>
-    <string name="split_nothing">Nada para dividir</string>
-    <string name="copy_items">Copiar elementos</string>
-
     <!-- TODO string name="help_backups">Delete sketch backups</string -->
     <string name="help_calib_check">Calibración: compruebe las tomas</string>
     <string name="help_close">Cerrar ventana</string>
@@ -836,13 +839,14 @@
     <string name="help_write">Enviar calibración a DistoX</string>
 
 
-<!-- DO NOT CHANGE THIS LINE. FIXME_SKETCH_3D -->
-    <!-- UNUSED string name="help_refs_model">View mode</string -->
+<!-- DO NOT CHANGE THIS LINE. FIXME_SKETCH_3D
     <string name="help_one_model">Ajustar el modelo 3D para visualizar</string>
     <string name="help_surface">Hacer superficie</string>
     <string name="help_save_model">Exportar modelo 3D</string>
     <string name="help_trash_model">Eliminar modelo 3D</string>
     <string name="help_head_model">Orientar modelo 3D</string>
+-->
+    <!-- UNUSED string name="help_refs_model">View mode</string -->
     <!-- UNUSED string name="help_erase_model">Borrar región</string -->
     <!-- UNUSED string name="help_cut_model">Cortar región</string -->
     <!-- UNUSED string name="help_stretch_model">Alargar región</string -->
@@ -1292,16 +1296,18 @@
   <string name="pref_auto_section_pt_title">Punto de sección</string>
   <string name="pref_auto_section_pt_summary">Añadir punto de la sección a las líneas de sección</string>
 
-  <!-- UNUSED string name="pref_sketchUsesSplays_title">Tomas radiales en el dibujo</string -->
-  <!-- UNUSED string name="pref_sketchUsesSplays_summary">Utilizar tomas radiales en el dibujo</string -->
+<!-- FIXME_SKETCH_3D
   <string name="pref_sketchLineStep_title">Paso de la línea</string>
   <string name="pref_sketchLineStep_summary">Distancia entre puntos de la línea</string>
+  <string name="pref_sketchDeltaExtrude_title">Extrusión delta</string>
+  <string name="pref_sketchDeltaExtrude_summary">Extrusión delta</string>
+-->
+  <!-- UNUSED string name="pref_sketchUsesSplays_title">Tomas radiales en el dibujo</string -->
+  <!-- UNUSED string name="pref_sketchUsesSplays_summary">Utilizar tomas radiales en el dibujo</string -->
   <!-- UNUSED string name="pref_sketchBorderStep_title">Paso borde</string -->
   <!-- UNUSED string name="pref_sketchBorderStep_summary">Distancia entre puntos de edición de la línea</string -->
   <!-- UNUSED string name="pref_sketchSectionStep_title">Sección paso</string -->
   <!-- UNUSED string name="pref_sketchSectionStep_summary">Distancia entre las secciones</string -->
-  <string name="pref_sketchDeltaExtrude_title">Extrusión delta</string>
-  <string name="pref_sketchDeltaExtrude_summary">Extrusión delta</string>
   <!-- UNUSED string name="pref_sketchCompassReadings_title">Lecturas de la brújula</string -->
   <!-- UNUSED string name="pref_sketchCompassReadings_summary">Promedio de lecturas</string -->
 

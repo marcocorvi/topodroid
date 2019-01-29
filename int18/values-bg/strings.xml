@@ -454,11 +454,12 @@
     <string name="shot_reverse">обръщане</string>
     <string name="shot_to">до</string>
 
+    <!-- UNUSED FIXME_SKETCH_3D
     <string name="make_surface">Повърхността съществува. Заместване?</string>
-
     <string name="sketch3d_name">Име</string>
     <string name="sketch3d_new">Нов 3D модел</string>
     <string name="sketch3d_next">Следващ репер</string>
+    -->
     <!-- UNUSED string name="sketch3d_null_name">Липсва име на 3D модела</string -->
     <!-- UNUSED string name="sketch3d_null_next">Липсва следващ репер на 3D модела</string -->
     <!-- UNUSED string name="sketch3d_null_start">Липсва начален репер на 3D модела</string -->
@@ -664,19 +665,22 @@
 
     <string name="symbol_reload">Символи за рисуване</string>
 
-<!-- FIXME_SKETCH_3D -->
+<!-- FIXME_SKETCH_3D
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
-    <!-- NO string name="title_sketch_new">New 3D sketch</string -->
-    <!-- UNUSED string name="title_sketch_edit">Редакт. 3D повърхност</string -->
     <string name="title_sketch_shot">Нова отсечка</string>
     <string name="title_sketch_refs">Изглед</string>
+-->
+    <!-- NO string name="title_sketch_new">New 3D sketch</string -->
+    <!-- UNUSED string name="title_sketch_edit">Редакт. 3D повърхност</string -->
     <!-- UNUSED string name="title_sketch_section_type">Тип сечение</string -->
     <!-- UNUSED string name="title_sketch_select">Избор на елемент</string -->
 
+<!-- FIXME_SKETCH_3D
     <string name="sketch_mode_single">Единична отсечка</string>
     <string name="sketch_mode_ngbh">Близки отсечки</string>
     <string name="sketch_mode_all">Всички отсечки</string>
     <string name="sketch_delete">Изтриване на 3D модел?</string>
+-->
     <!-- UNUSED string name="sketch_no_split">Невъзможно изчистване. Намалете макс. дължина на страната за допълнително изчистване.</string -->
 
     <string name="length">Дължина [метри]</string>
@@ -707,16 +711,17 @@
     <!-- UNUSED string name="btn_surface">Повърхност</string -->
 
     <!-- UNUSED string name="station_next">Следваща</string -->
-    <string name="no_shot_between_stations">Няма отсечка м/у реперите</string>
     <!-- UNUSED string name="few_line_points">Линията има твърде малко точки</string -->
+<!-- FIXME_SKETCH_3D
+    <string name="no_shot_between_stations">Няма отсечка м/у реперите</string>
     <string name="line_delete">Изтр. на линия</string>
-    <string name="flip_shots">Обръщане на отсечките</string>
-    <string name="split_nothing">Няма какво да се раздели</string>
-    <string name="copy_items">Копиране на елементи</string>
-
     <string name="menu_head">Начало</string>
+-->
     <!-- UNUSED string name="menu_save_th2">Запис на TH2</string -->
 <!-- END_SKETCH_3D -->
+    <string name="split_nothing">Няма какво да се раздели</string>
+    <string name="flip_shots">Обръщане на отсечките</string>
+    <string name="copy_items">Копиране на елементи</string>
 
     <!-- TODO string name="man_preface">Preface</string -->
     <!-- TODO string name="man_intro">1. Introduction</string -->
@@ -836,13 +841,14 @@
     <string name="help_cover">Показване на ъгловото разпределение на калибрацията</string>
     <string name="help_compute">Изчисляване на калибрация</string>
     <string name="help_write">Запис на калибр. коефициенти в DistoX</string>
-<!-- FIXME_SKETCH_3D -->
-    <!-- UNUSED string name="help_refs_model">Режим преглед</string -->
+<!-- FIXME_SKETCH_3D
     <string name="help_one_model">Оразмеряване на 3d модела към екрана</string>
     <string name="help_surface">Повърхност</string>
     <string name="help_save_model">Експортиране на 3D модел</string>
     <string name="help_trash_model">Изтриване на 3D модел</string>
     <string name="help_head_model">Ориентиране на 3D модел</string>
+-->
+    <!-- UNUSED string name="help_refs_model">Режим преглед</string -->
     <!-- UNUSED string name="help_erase_model">Изтриване на регион</string -->
     <!-- UNUSED string name="help_cut_model">Отрязване на регион</string -->
     <!-- UNUSED string name="help_stretch_model">Разтягане на регион</string -->
@@ -1285,16 +1291,18 @@
   <string name="pref_auto_section_pt_title">Точки "сечение"</string>
   <string name="pref_auto_section_pt_summary">Добавяне на точки "сечение" към линиите</string>
 
-  <!-- UNUSED string name="pref_sketchUsesSplays_title">Изобразяване на страничните отсечки</string -->
-  <!-- UNUSED string name="pref_sketchUsesSplays_summary">Повърхността използва страничните измервания</string -->
+<!-- FIXME_SKETCH_3D
   <string name="pref_sketchLineStep_title">Максимална страна</string>
   <string name="pref_sketchLineStep_summary">Максимален размер на страна на триъгълник (метри)</string>
+  <string name="pref_sketchDeltaExtrude_title">Екструд. мащаб</string>
+  <string name="pref_sketchDeltaExtrude_summary">Мащабиращ фактор за екструдиране</string>
+-->
+  <!-- UNUSED string name="pref_sketchUsesSplays_title">Изобразяване на страничните отсечки</string -->
+  <!-- UNUSED string name="pref_sketchUsesSplays_summary">Повърхността използва страничните измервания</string -->
   <!-- UNUSED string name="pref_sketchBorderStep_title">Стъпка</string -->
   <!-- UNUSED string name="pref_sketchBorderStep_summary">Разстояние между точки в линията</string -->
   <!-- UNUSED string name="pref_sketchSectionStep_title">Стъпка в секцията</string -->
   <!-- UNUSED string name="pref_sketchSectionStep_summary">Разстояние между секциите</string -->
-  <string name="pref_sketchDeltaExtrude_title">Екструд. мащаб</string>
-  <string name="pref_sketchDeltaExtrude_summary">Мащабиращ фактор за екструдиране</string>
   <!-- UNUSED string name="pref_sketchCompassReadings_title">Отчет на компаса</string -->
   <!-- UNUSED string name="pref_sketchCompassReadings_summary">Брой отчитания за усредняване</string -->
 

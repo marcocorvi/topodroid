@@ -31,12 +31,13 @@
       android:layout_marginRight="@dimen/marginhsmall"
     />
 
-    <!-- FIXME_SKETCH_3D -->
+    <!-- FIXME_SKETCH_3D 
     <Button android:id="@+id/sketch3d_new"
       style="@style/button_default"
       android:text="@string/sketch3d_new"
       android:layout_marginRight="@dimen/marginhsmall"
     />
+    -->
 
     <LinearLayout 
       android:layout_width="match_parent" 

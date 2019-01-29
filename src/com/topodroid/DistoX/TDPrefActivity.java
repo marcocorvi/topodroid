@@ -223,7 +223,7 @@ public class TDPrefActivity extends Activity
       case PREF_GEEK_PLOT:          mPrefs = TDPref.makeGeekPlotPrefs( this, hlp ); break;
       case PREF_GEEK_LINE:          mPrefs = TDPref.makeGeekLinePrefs( this, hlp ); break;
       case PREF_GEEK_DEVICE:        mPrefs = TDPref.makeGeekDevicePrefs( this, hlp ); break;
-      case PREF_CATEGORY_SKETCH:    mPrefs = TDPref.makeSketchPrefs(   this, hlp ); break;
+      // case PREF_CATEGORY_SKETCH:    mPrefs = TDPref.makeSketchPrefs(   this, hlp ); break; // FIXME_SKETCH_3D
       case PREF_CATEGORY_LOG:       mPrefs = TDPref.makeLogPrefs(      this, hlp ); break;
       default:                      mPrefs = TDPref.makeMainPrefs(     this, hlp ); break;
     }
@@ -258,7 +258,6 @@ public class TDPrefActivity extends Activity
       linkPreference( "DISTOX_EXPORT_PREF", PREF_CATEGORY_EXPORT );
       linkPreference( "DISTOX_DEVICE_PREF", PREF_CATEGORY_DEVICE );
       linkPreference( "DISTOX_GEEK_PREF",   PREF_CATEGORY_GEEK );
-      // linkPreference( "DISTOX_SKETCH_PREF", PREF_CATEGORY_SKETCH );
     } else if (mPrefCategory == PREF_CATEGORY_IMPORT ) {
       mPtCmapPref = findPreference( "DISTOX_PT_CMAP" );
       if ( mPtCmapPref != null ) {
@@ -299,7 +298,7 @@ public class TDPrefActivity extends Activity
       linkPreference( "DISTOX_GEEK_LINE",           PREF_GEEK_LINE );
       linkPreference( "DISTOX_PLOT_WALLS",          PREF_PLOT_WALLS );
       linkPreference( "DISTOX_GEEK_DEVICE",         PREF_GEEK_DEVICE );
-      linkPreference( "DISTOX_SKETCH_PREF",         PREF_CATEGORY_SKETCH );
+      // linkPreference( "DISTOX_SKETCH_PREF",         PREF_CATEGORY_SKETCH ); // FIXME_SKETCH_3D
     }
 
     return true;

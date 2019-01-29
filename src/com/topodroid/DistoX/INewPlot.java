@@ -16,8 +16,9 @@ interface INewPlot
   // void makeNewPlot( String name, long type, String start, String view );
   void makeNewPlot( String name, String start, boolean extended, int project );
 
-  // FIXME_SKETCH_3D
+  /* FIXME_SKETCH_3D *
   void makeNewSketch3d(  String name, String start, String next );
+   * END_SKETCH_3D */
 
   boolean hasSurveyPlot( String name );
 

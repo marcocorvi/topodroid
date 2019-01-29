@@ -1450,7 +1450,7 @@ class TDPrefKey
     "DISTOX_GEEK_LINE",       // FORWARD
     "DISTOX_PLOT_WALLS",      // FORWARD
     "DISTOX_GEEK_DEVICE",     // FORWARD
-    "DISTOX_SKETCH_PREF",     // FORWARD
+    // "DISTOX_SKETCH_PREF",     // FORWARD FIXME_SKETCH_3D
     null
   };
 
@@ -1461,7 +1461,7 @@ class TDPrefKey
     R.string.pref_tool_line_title,
     R.string.pref_plot_walls_title,
     R.string.pref_cat_device,
-    R.string.pref_cat_sketch,
+    // R.string.pref_cat_sketch,
     -1
   };
 
@@ -1472,7 +1472,7 @@ class TDPrefKey
     -1,
     -1,
     -1,
-    -1,
+    // -1,
     -1
   };
 
@@ -1483,7 +1483,7 @@ class TDPrefKey
     TDString.EMPTY,
     TDString.EMPTY,
     TDString.EMPTY,
-    TDString.EMPTY,
+    // TDString.EMPTY,
     null
   };
 
@@ -1525,6 +1525,7 @@ class TDPrefKey
   };
 
   // ------------------------------------------------------------------------------
+  /* FIXME_SKETCH_3D
   static String[] SKETCH = { // [3] 
     // "DISTOX_SKETCH_USES_SPLAYS",
     "DISTOX_SKETCH_MODEL_TYPE",
@@ -1565,6 +1566,7 @@ class TDPrefKey
     TDString.FIFTY
     // TDString.FOUR
   };
+  // END_SKETCH_3D */
 
   // ------------------------------------------------------------------------------
   static String[] LOG = {

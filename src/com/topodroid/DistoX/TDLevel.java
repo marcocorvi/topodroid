@@ -12,7 +12,7 @@
 package com.topodroid.DistoX;
 
 import android.content.Context;
-import android.provider.Settings.Secure;
+// import android.provider.Settings.Secure;
 
 class TDLevel
 {
@@ -36,16 +36,19 @@ class TDLevel
   static void setLevel( Context ctx, int level )
   {
     mLevel = level;
-    if ( mAndroidId == null ) {
-      mAndroidId = Secure.getString( ctx.getContentResolver(), Secure.ANDROID_ID );
-      mDeveloper = "8c894b79b6dce351".equals( mAndroidId );
-      // "e5582eda21cafac3" // Nexus-4
-    }
+
+    // FIXME_DEVELOPER
+    // if ( mAndroidId == null ) {
+    //   mAndroidId = Secure.getString( ctx.getContentResolver(), Secure.ANDROID_ID );
+    //   mDeveloper = "8c894b79b6dce351".equals( mAndroidId );
+    //   // "e5582eda21cafac3" // Nexus-4
+    // }
     overBasic    = mLevel > BASIC;
     overNormal   = mLevel > NORMAL;
     overAdvanced = mLevel > ADVANCED;
     overExpert   = mLevel > EXPERT;
     // overTester  = mLevel > TESTER;
-    if ( overExpert && mDeveloper ) overTester = true;
+    // FIXME_DEVELOPER
+    // if ( overExpert && mDeveloper ) overTester = true;
   }
 }

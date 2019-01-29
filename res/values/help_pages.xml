@@ -5,7 +5,7 @@
   <string name="PtCmapActivity" translatable="false">page_pt_cmap.htm</string>
   <string name="SensorActivity" translatable="false">page_sensors.htm</string>
   <string name="SensorListActivity" translatable="false">page_sensors_list.htm</string>
-  <string name="SketchWindow" translatable="false">page_todo.htm</string>
+  <!-- FIXME_SKETCH_3D string name="SketchWindow" translatable="false">page_todo.htm</string -->
 
   <string name="FixedActivity" translatable="false">page_fixed_list.htm</string>
 
@@ -82,9 +82,9 @@
   <string name="ShotDialog" translatable="false">page_shot_edit1.htm</string>
   <string name="ShotDisplayDialog" translatable="false">page_displaymode.htm</string>
   <string name="ShotNewDialog" translatable="false">page_man_data.htm</string>
-  <string name="Sketch3dNewDialog" translatable="false">page_todo.htm</string>
-  <string name="SketchModeDialog" translatable="false">page_todo.htm</string>
-  <string name="SketchNewShotDialog" translatable="false">page_todo.htm</string>
+  <!-- FIXME_SKETCH_3D string name="Sketch3dNewDialog" translatable="false">page_todo.htm</string -->
+  <!-- FIXME_SKETCH_3D string name="SketchModeDialog" translatable="false">page_todo.htm</string -->
+  <!-- FIXME_SKETCH_3D string name="SketchNewShotDialog" translatable="false">page_todo.htm</string -->
   <string name="SurveyCalibrationDialog" translatable="false">page_survey_calib.htm</string>
   <string name="SurveyNewDialog" translatable="false">page_new_survey.htm</string>
   <string name="SurveyRenameDialog" translatable="false">page_survey_rename.htm</string>

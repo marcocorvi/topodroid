@@ -50,11 +50,6 @@
      <item name="diving">Potápanie</item>
   </string-array>
     
-  <string-array name="importDatamodeValue"> <!-- see SurveyInfo.DATAMODE_xxx -->
-     <item name="normal">0</item>
-     <item name="diving">1</item>
-  </string-array>
-
   <string-array name="exportShots">
      <item name="none">Žiadny</item>
      <item name="therion">Therion</item>

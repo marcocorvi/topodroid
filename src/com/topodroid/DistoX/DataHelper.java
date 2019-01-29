@@ -111,10 +111,10 @@ class DataHelper extends DataSetObservable
   private SQLiteStatement updatePlotAzimuthClinoStmt = null;
   private SQLiteStatement updatePlotNickStmt = null;
 
-// FIXME_SKETCH_3D
+/* FIXME_SKETCH_3D *
   private SQLiteStatement updateSketchStmt = null;
   // private SQLiteStatement deleteSketchStmt = null;
-// END_SKETCH_3D
+ * END_SKETCH_3D */
   // private SQLiteStatement updatePhotoStmt = null;
   // private SQLiteStatement updateSensorStmt = null;
 
@@ -661,7 +661,9 @@ class DataHelper extends DataSetObservable
       updatePlotNickStmt = myDB.compileStatement( "UPDATE plots set nick=? WHERE surveyId=? AND id=?" );
       // dropPlotStmt    = myDB.compileStatement( "DELETE FROM plots WHERE surveyId=? AND id=?" );
 
+      /* FIXME_SKETCH_3D
       updateSketchStmt = myDB.compileStatement( "UPDATE sketches set st1=?, st2=?, xoffsettop=?, yoffsettop=?, zoomtop=?, xoffsetside=?, yoffsetside=?, zoomside=?, xoffset3d=?, yoffset3d=?, zoom3d=?, east=?, south=?, vert=?, azimuth=?, clino=? WHERE surveyId=? AND id=?" );
+       * END_SKETCH_3D */
 
       // deleteSketchStmt = myDB.compileStatement( "UPDATE sketches set status=1 WHERE surveyId=? AND id=?" );
       // updatePhotoStmt  = myDB.compileStatement( "UPDATE photos set comment=? WHERE surveyId=? AND id=?" );
@@ -1539,6 +1541,7 @@ class DataHelper extends DataSetObservable
     }
   }
 
+  /* FIXME_SKETCH_3D *
   private void transferSketches( String old_survey_name, String new_survey_name, long sid, long old_sid, String station )
   {
     if ( myDB == null ) return;
@@ -1554,6 +1557,7 @@ class DataHelper extends DataSetObservable
       }
     }
   }
+   * END_SKETCH_3D */
 
   void transferShots( long sid, long old_sid, long old_id )
   {
@@ -1593,7 +1597,7 @@ class DataHelper extends DataSetObservable
           myDB.update( STATION_TABLE, vals0, WHERE_SID_NAME, where0 );
 
           transferPlots( old_survey.name, new_survey.name, sid, old_sid, blk.mFrom );
-          transferSketches( old_survey.name, new_survey.name, sid, old_sid, blk.mFrom );
+          // transferSketches( old_survey.name, new_survey.name, sid, old_sid, blk.mFrom ); // FIXME_SKETCH_3D
         }
         if ( blk.mTo.length() > 0 ) {
           List< FixedInfo > fixeds = selectFixedAtStation( old_sid, blk.mTo );
@@ -1605,7 +1609,7 @@ class DataHelper extends DataSetObservable
           myDB.update( STATION_TABLE, vals0, WHERE_SID_NAME, where0 ); 
           
           transferPlots( old_survey.name, new_survey.name, sid, old_sid, blk.mTo );
-          transferSketches( old_survey.name, new_survey.name, sid, old_sid, blk.mFrom );
+          // transferSketches( old_survey.name, new_survey.name, sid, old_sid, blk.mFrom ); // FIXME_SKETCH_3D
         }
 
         ContentValues cv = new ContentValues();
@@ -3953,7 +3957,7 @@ class DataHelper extends DataSetObservable
 
 // -------------------------------------------------------------------------------
 // SKETCH_3D
-/* FIXME BEGIN SKETCH_3D */
+/* FIXME_SKETCH_3D *
   void updateSketch( long sketch_id, long sid,
                             String st1, String st2,
                             double xofftop, double yofftop, double zoomtop,
@@ -4031,7 +4035,8 @@ class DataHelper extends DataSetObservable
        } while (cursor.moveToNext());
      }
      // TDLog.Log( TDLog.LOG_DB, "select All Sketch list size " + list.size() );
-     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+     if ( // cursor != null && 
+          !cursor.isClosed()) cursor.close();
      return list;
    }
 
@@ -4091,7 +4096,8 @@ class DataHelper extends DataSetObservable
          sketch.azimuth = (float)( cursor.getDouble(16) );
          sketch.clino   = (float)( cursor.getDouble(17) );
        }
-       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+       if ( // cursor != null && 
+            !cursor.isClosed()) cursor.close();
      }
      return sketch;
    }
@@ -4177,7 +4183,7 @@ class DataHelper extends DataSetObservable
      if ( ! doInsert( SKETCH_TABLE, cv, "sketch insert" ) ) return -1L;
      return id;
    }
-/* END SKETCH_3D */
+ * END SKETCH_3D */
       
    // ----------------------------------------------------------------------
    // SERIALIZATION of surveys TO FILE
@@ -4289,6 +4295,7 @@ class DataHelper extends DataSetObservable
          } while (cursor.moveToNext());
        }
        if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+       /* FIXME_SKETCH_3D *
        cursor = myDB.query( SKETCH_TABLE, 
                             new String[] { "id", "name", "status", "start", "st1", "st2", "xoffsettop", "yoffsettop", "zoomtop", "xoffsetside", "yoffsetside", "zoomside", "xoffset3d", "yoffset3d", "zoom3d", "east", "south", "vert", "azimuth", "clino" },
                             "surveyId=?", new String[] { Long.toString( sid ) },
@@ -4322,7 +4329,9 @@ class DataHelper extends DataSetObservable
                     );
          } while (cursor.moveToNext());
        }
-       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+       if ( // cursor != null && 
+            !cursor.isClosed()) cursor.close();
+       * END_SKETCH_3D */
 
        cursor = myDB.query( SHOT_TABLE, 
                             new String[] { "id", "fStation", "tStation", "distance", "bearing", "clino", "roll",
@@ -4566,8 +4575,8 @@ class DataHelper extends DataSetObservable
                // TDLog.Log( TDLog.LOG_DB, "loadFromFile plot " + sid + " " + id + " " + start + " " + name );
                // Log.v( "DistoX_DB", "loadFromFile plot " + sid + " " + id + " " + start + " " + name + " success " + success );
    
-/* FIXME   BEGIN SKETCH_3D */
              }
+/* FIXME_SKETCH_3D *
 	     else if ( table.equals(SKETCH_TABLE) ) // -------------- SKETCHES
 	     {
                name         = scanline1.stringValue( );
@@ -4593,8 +4602,8 @@ class DataHelper extends DataSetObservable
                cv = makeSketch3dContentValues( sid, id, name, status, start, st1, st2, xofft, yofft, zoomt,
 		     xoffs, yoffs, zooms, xoff3, yoff3, zoom3, east, south, vert, azimuth, clino );
                myDB.insert( SKETCH_TABLE, null, cv ); 
-/* END SK  ETCH_3D */
              }
+ * END_SKETCH_3D */
 	     else if ( table.equals(SHOT_TABLE) ) // ------------ SHOTS
              {
                String from = scanline1.stringValue( );

@@ -119,7 +119,7 @@ class Archiver
       String pathname;
       zos = new ZipOutputStream( new BufferedOutputStream( new FileOutputStream( zipname ) ) );
 
-/* FIXME BEGIN SKETCH_3D */
+/* FIXME_SKETCH_3D *
       List< Sketch3dInfo > sketches  = app_data.selectAllSketches( TDInstance.sid, TDStatus.NORMAL );
       for ( Sketch3dInfo skt : sketches ) {
         addEntry( zos, new File( TDPath.getSurveySketchOutFile( survey, skt.name ) ) );
@@ -128,7 +128,7 @@ class Archiver
       for ( Sketch3dInfo skt : sketches ) {
         addEntry( zos, new File( TDPath.getSurveySketchOutFile( survey, skt.name ) ) );
       }
-/* END SKETCH_3D */
+/* END_SKETCH_3D */
 
       List< PlotInfo > plots  = app_data.selectAllPlots( TDInstance.sid, TDStatus.NORMAL );
       for ( PlotInfo plt : plots ) {
@@ -307,8 +307,10 @@ class Archiver
             pathname = TDPath.getThFile( ze.getName() );
           } else if ( ze.getName().endsWith( TDPath.TH2 ) ) {
             pathname = TDPath.getTh2File( ze.getName() );
+	  /* FIXME_SKETCH_3D *
           } else if ( ze.getName().endsWith( TDPath.TH3 ) ) {
             pathname = TDPath.getTh3File( ze.getName() );
+	  * END_SKETCH_3D */
           } else if ( ze.getName().endsWith( TDPath.TDR ) ) {
             pathname = TDPath.getTdrFile( ze.getName() );
           } else if ( ze.getName().endsWith( TDPath.TDR3 ) ) {

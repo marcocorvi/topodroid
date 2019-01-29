@@ -353,13 +353,14 @@ class TDSetting
   static float mSvgShotStroke    = 0.5f;
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-  // 3D
+  /* FIXME_SKETCH_3D *
   static int   mSketchModelType = 1;
   static float mSketchSideSize;
   static float mDeltaExtrude;
   // static boolean mSketchUsesSplays; // whether 3D models surfaces use splays
   // static float mSketchBorderStep;
   // static float mSketchSectionStep;
+   * END_SKETCH_3D */
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // DATA ACCURACY
@@ -936,6 +937,7 @@ class TDSetting
     mWallsXStep       = tryFloat( prefs, keyWalls[4], defWalls[4] ); // DISTOX_WALLS_XSTEP
     mWallsConcave     = tryFloat( prefs, keyWalls[5], defWalls[5] ); // DISTOX_WALLS_CONCAVE
 
+    /* FIXME_SKETCH_3D *
     String[] keySketch = TDPrefKey.SKETCH;
     String[] defSketch = TDPrefKey.SKETCHdef;
     // mSketchUsesSplays  = prefs.getBoolean( keySketch[], bool(defSketch[]) );    
@@ -945,6 +947,7 @@ class TDSetting
     // mSketchSectionStep = Float.parseFloat( prefs.getString( keySketch[], defSketch[] );
     mDeltaExtrude   = tryFloat( prefs, keySketch[2], defSketch[2]  );  // DISTOX_DELTA_EXTRUDE
     // mCompassReadings  = tryInt( prefs, keySketch[3], defSketch[] ); // DISTOX_COMPASS_READING 
+     * END_SKETCH_3D */
 
   }
 
@@ -960,7 +963,7 @@ class TDSetting
       case TDPrefActivity.PREF_CATEGORY_PLOT:   return updatePrefPlot( hlp, k, v );
       case TDPrefActivity.PREF_CATEGORY_CALIB:  return updatePrefCalib( hlp, k, v );
       case TDPrefActivity.PREF_CATEGORY_DEVICE: return updatePrefDevice( hlp, k, v );
-      case TDPrefActivity.PREF_CATEGORY_SKETCH: return updatePrefSketch( hlp, k, v );
+      // case TDPrefActivity.PREF_CATEGORY_SKETCH: return updatePrefSketch( hlp, k, v ); // FIXME_SKETCH_3D
       case TDPrefActivity.PREF_CATEGORY_EXPORT: return updatePrefExport( hlp, k, v );
       case TDPrefActivity.PREF_CATEGORY_IMPORT: return updatePrefImport( hlp, k, v );
       case TDPrefActivity.PREF_CATEGORY_SVX:    return updatePrefSvx( hlp, k, v );
@@ -1981,6 +1984,7 @@ class TDSetting
     return ret;
   }
 
+  /* FIXME_SKETCH_3D *
   private static String updatePrefSketch( TDPrefHelper hlp, String k, String v )
   {
     String ret = null;
@@ -2010,6 +2014,7 @@ class TDSetting
     if ( ret != null ) hlp.update( k, ret );
     return ret;
   }
+  * END_SKETCH_3D */
  
   // @param k   key
   // @param v   value (either "true" of "false" for checkboxes)

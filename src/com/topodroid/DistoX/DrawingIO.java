@@ -33,7 +33,7 @@ import java.io.IOException;
 
 import java.util.List;
 import java.util.ArrayList;
-import android.util.ArraySet;
+// import android.util.ArraySet; // API 23
 // import java.util.HashMap;
 import java.util.Locale;
 
@@ -1260,7 +1260,11 @@ class DrawingIO
         final List<DrawingStationName> stations,
         final List<DrawingPath> splays )
   {
-    ArraySet<String> plots = new ArraySet<String>();
+    // ArraySet<String> plots = new ArraySet<String>(); // need API-23
+    int NPLOTS = 8;
+    int nplots = 0;
+    String[] plots = new String[NPLOTS];
+
     float xmin=1000000f, xmax=-1000000f, 
           ymin=1000000f, ymax=-1000000f;
     // Log.v("DistoXX", "export multiscrap type " + type + " proj " + proj_name );
@@ -1275,7 +1279,16 @@ class DrawingIO
         if ( p.bottom > ymax ) ymax = p.bottom;
 
 	if ( p.mPlotName != null ) {
-	  plots.add( p.mPlotName );
+	  int k=0;
+	  for ( ; k<nplots; ++k ) if ( plots[k].equals( p.mPlotName ) ) break;
+	  if ( k == nplots ) {
+	    if ( nplots == NPLOTS ) {
+              NPLOTS += 8;
+              String[] tmp = new String[NPLOTS];
+	      for ( int j=0; j<nplots; ++j ) tmp[j] = plots[j];
+	    }
+	    plots[k] = p.mPlotName;
+	  }
 	}
       }
       RectF bbox = new RectF( xmin, ymin, xmax, ymax ); // left top right bottom
@@ -1286,7 +1299,8 @@ class DrawingIO
       try { 
         exportTherionHeader1( out, type, bbox );
         // exportTherionHeader2( out );
-        for ( String plot : plots ) {
+        for ( int k=0; k<nplots; ++k ) {
+          String plot = plots[k]; 
           // if ( north != null ) { 
           //   exportTherionHeader3( out, type, scrap_name, proj_name, 0, true, north.x1, north.y1, north.x2, north.y2 );
           // } else {

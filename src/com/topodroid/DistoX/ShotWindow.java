@@ -1046,7 +1046,7 @@ public class ShotWindow extends Activity
   // void enableSketchButton( boolean enabled )
   // {
   //   mApp.mEnableZip = enabled;
-  //   mButton1[ BTN_PLOT - boff ].setEnabled( enabled ); // FIXME SKETCH BUTTON 
+  //   mButton1[ BTN_PLOT - boff ].setEnabled( enabled ); // FIXME PLOT BUTTON 
   //   TDandroid.setButtonBackground( mButton1[ BTN_PLOT - boff ], (enabled ? mBMplot : mBMplot_no) );
   // }
 
@@ -1296,7 +1296,7 @@ public class ShotWindow extends Activity
       }
       if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // DISPLAY 
         new ShotDisplayDialog( mActivity, this ).show();
-      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // SKETCH
+      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // PLOT LIST
         new PlotListDialog( mActivity, this, mApp, null ).show();
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // NOTE
         if ( TDInstance.survey != null ) {
@@ -1449,7 +1449,7 @@ public class ShotWindow extends Activity
     // updateDisplay( );
   }
 
-/* FIXME BEGIN SKETCH_3D */
+/* FIXME_SKETCH_3D 
   public void makeNewSketch3d( String name, String st1, String st2 )
   {
     // FIXME xoffset yoffset, east south and vert (downwards)
@@ -1501,7 +1501,7 @@ public class ShotWindow extends Activity
     sketchIntent.putExtra( TDTag.TOPODROID_SKETCH_NAME, name );
     startActivity( sketchIntent );
   }
-/* END SKETCH_3D */
+ * END_SKETCH_3D */
 
   // called either by a long-tap on plot button 
   //        or a highlights
@@ -1518,14 +1518,14 @@ public class ShotWindow extends Activity
       } else {
         TDInstance.setRecentPlot( null, 0L );
       }
-/* FIXME BEGIN SKETCH_3D */
+/* FIXME_SKETCH_3D *
     } else {
       Sketch3dInfo sketch = mApp_mData.getSketch3dInfo( TDInstance.sid, name );
       if ( sketch != null ) {
         startSketchWindow( sketch.name );
         return;
       }
-/* END SKETCH_3D */
+ * END_SKETCH_3D */
     }
     TDToast.make( R.string.plot_not_found );
   }

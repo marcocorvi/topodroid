@@ -501,13 +501,15 @@ public class SurveyWindow extends Activity
       }
     }
 
-    // TODO delete 3D-files
+    /* FIXME_SKETCH_3D *
+    // delete 3D files
     for ( int status = 0; status < 2; ++status ) {
       List< Sketch3dInfo > sketches = mApp_mData.selectAllSketches( TDInstance.sid, status );
       if ( sketches.size() > 0 ) {
         TDPath.deleteSurvey3dFiles( survey, sketches );
       }
     }
+     * FIXME_SKETCH_3D */
 
     TDPath.deleteSurveyOverviewFiles( survey );
 

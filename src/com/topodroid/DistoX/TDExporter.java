@@ -496,7 +496,7 @@ class TDExporter
       }
       pw.format("  </trigpoints>\n");
 
-      // ============= SKETCHES
+      // ============= PLOTS
       if ( psd1 != null ) {
         DrawingWindow.exportAsCsx( sid, pw, survey, cave, branch /*, session */, psd1, psd2 );
       } else {

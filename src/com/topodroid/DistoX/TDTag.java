@@ -30,10 +30,10 @@ class TDTag
   static final String TOPODROID_PLOT_LANDSCAPE = "plot_landscape";
   static final String TOPODROID_HELP_PAGE    = "help_page";
 
-  // FIXME_SKETCH_3D
+  /* FIXME_SKETCH_3D *
   static final String TOPODROID_SKETCH_ID   = "sketch_id";
   static final String TOPODROID_SKETCH_NAME = "sketch_name";
-  // END_SKETCH_3D
+   * END_SKETCH_3D */
 
   static final String TOPODROID_SURVEY      = "survey";
   static final String TOPODROID_OLDSID      = "old_sid";    // SurveyWindow

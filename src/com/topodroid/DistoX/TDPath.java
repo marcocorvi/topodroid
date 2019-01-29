@@ -653,6 +653,7 @@ class TDPath
     }
   }
 
+  /* FIXME_SKETCH_3D *
   static void deleteSurvey3dFiles( String survey, List< Sketch3dInfo > sketches )
   {
     if ( hasTh3Dir() ) {
@@ -666,4 +667,5 @@ class TDPath
       }
     }
   }
+   * END_SKETCH_3D */
 }

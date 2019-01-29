@@ -266,10 +266,10 @@
      <item name="hex">Szesnastkowy</item>
   </string-array>
 
-  <string-array name="modelType">
+  <!-- UNUSED string-array name="modelType">
      <item name="none">Żaden</item>
      <item name="convexhull">Kadłub wypukły</item>
      <item name="powercrust">Skorupa</item>
-  </string-array>
+  </string-array -->
 
 </resources>
