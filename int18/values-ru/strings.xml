@@ -1004,6 +1004,10 @@
   <string name="pref_size_buttons_title">Размер кнопок</string>
   <string name="pref_size_buttons_summary">Размер кнопок на панели инструментов</string>
   <!-- UNUSED string name="pref_size_buttons_message">Введите размер кнопок панели инструментов [pixels]</string -->
+  <!-- TODO string name="pref_with_sensors_title">Sensors</string -->
+  <!-- TODO string name="pref_with_sensors_summary">Enable "sensors" data</string -->
+  <!-- TODO string name="pref_palettes_title">Palettes</string -->
+  <!-- TODO string name="pref_palettes_summary">Enable additional palettes</string -->
 
   <string name="pref_bezier_step_title">Макс. расстояние между точками</string>
   <string name="pref_bezier_step_summary">Маскисмальное расстояние между точками при апроксимации кривых полилиниями [м]</string>

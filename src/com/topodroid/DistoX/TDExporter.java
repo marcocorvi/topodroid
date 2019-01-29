@@ -755,6 +755,8 @@ class TDExporter
       // TDPath.checkPath( filename );
       File dir = new File( filename );
       if ( ! dir.exists() ) dir.mkdir();
+
+      ArrayList<File> files = new ArrayList<File>();
       
       int nr = 0;
       if ( TDSetting.mKmlStations ) {
@@ -763,7 +765,7 @@ class TDExporter
           ++ nr;
           List<NumStation> stations = num.getStations();
           // Log.v("DistoX", "SHP export " + filepath + " stations " + stations.size() );
-          ShpPointz shp = new ShpPointz( filepath );
+          ShpPointz shp = new ShpPointz( filepath, files );
           shp.setYYMMDD( info.date );
           success |= shp.writeStations( stations ); 
         }
@@ -776,7 +778,7 @@ class TDExporter
         List<NumShot> shots = num.getShots();
         List<NumSplay> splays = ( TDSetting.mKmlSplays ? num.getSplays() : null );
         // Log.v("DistoX", "SHP export " + filepath + " shots " + shots.size() );
-        ShpPolylinez shp = new ShpPolylinez( filepath );
+        ShpPolylinez shp = new ShpPolylinez( filepath, files );
         shp.setYYMMDD( info.date );
         success |= shp.writeShots( shots, splays );
       }
@@ -788,11 +790,16 @@ class TDExporter
       //     ++ nr;
       //     List<NumSplay> splays = num.getSplays();
       //     // Log.v("DistoX", "SHP export " + filepath + " splays " + splays.size() );
-      //     ShpPolylinez shp = new ShpPolylinez( filepath );
+      //     ShpPolylinez shp = new ShpPolylinez( filepath, files );
       //     shp.setYYMMDD( info.date );
       //     shp.writeSplays( splays );
       //   }
       // }
+
+      Archiver zipper = new Archiver( );
+      zipper.compressFiles( filename + ".shz", files );
+      TDPath.deleteDir( filename ); // delete temporary shapedir
+
     } catch ( IOException e ) {
       TDLog.Error( "Failed SHP export: " + e.getMessage() );
       return null;

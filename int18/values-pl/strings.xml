@@ -1016,6 +1016,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_extra_buttons_summary">Poziom włączonych funkcji</string>
   <string name="pref_size_buttons_title">Rozmiar przycisków</string>
   <string name="pref_size_buttons_summary">Rozmiar przycisków paska akcji</string>
+  <!-- TODO string name="pref_with_sensors_title">Sensors</string -->
+  <!-- TODO string name="pref_with_sensors_summary">Enable "sensors" data</string -->
+  <!-- TODO string name="pref_palettes_title">Palettes</string -->
+  <!-- TODO string name="pref_palettes_summary">Enable additional palettes</string -->
 
   <string name="pref_bezier_step_title">Odstępy między punktami</string>
   <string name="pref_bezier_step_summary">Max. odstęp między punktami (przybliżenie krzywych) [m]</string>

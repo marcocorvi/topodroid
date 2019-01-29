@@ -986,6 +986,10 @@
   <string name="pref_extra_buttons_summary">Nível de recursos habilitados</string>
   <string name="pref_size_buttons_title">Tamanho botões</string>
   <string name="pref_size_buttons_summary">Tamanho dos botões da barra de ações</string>
+  <!-- TODO string name="pref_with_sensors_title">Sensors</string -->
+  <!-- TODO string name="pref_with_sensors_summary">Enable "sensors" data</string -->
+  <!-- TODO string name="pref_palettes_title">Palettes</string -->
+  <!-- TODO string name="pref_palettes_summary">Enable additional palettes</string -->
   <!-- UNUSED string name="pref_size_buttons_message">Defina o tamanho dos botões da barra de ações [pixels]</string -->
 
   <string name="pref_bezier_step_title">Espaçamento pontos</string>

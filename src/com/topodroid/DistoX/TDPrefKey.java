@@ -1342,6 +1342,7 @@ class TDPrefKey
     "DISTOX_EXTEND_FRAC",     // fractional extend
     "DISTOX_BEDDING",         // splays bed plane interpolation
     "DISTOX_TRIPLE_SHOT",     // triple shot bell
+    "DISTOX_WITH_SENSORS",    // using sensors
     null
   };
 
@@ -1353,6 +1354,7 @@ class TDPrefKey
     R.string.pref_extend_frac_title,
     R.string.pref_plane_interpolation_title,
     R.string.pref_triple_shot_title,
+    R.string.pref_with_sensors_title,
     -1
   };
 
@@ -1364,10 +1366,12 @@ class TDPrefKey
     R.string.pref_extend_frac_summary,
     R.string.pref_plane_interpolation_summary,
     R.string.pref_triple_shot_summary,
+    R.string.pref_with_sensors_summary,
     -1
   };
 
   static String[] GEEKSHOTdef = {
+    FALSE,
     FALSE,
     FALSE,
     FALSE,
@@ -1440,6 +1444,7 @@ class TDPrefKey
 
 
   static String[] GEEK = {
+    "DISTOX_PALETTES",
     "DISTOX_GEEK_SHOT",       // FORWARD
     "DISTOX_GEEK_PLOT",       // FORWARD
     "DISTOX_GEEK_LINE",       // FORWARD
@@ -1450,6 +1455,7 @@ class TDPrefKey
   };
 
   static int[] GEEKtitle = {
+    R.string.pref_palettes_title,
     R.string.pref_cat_survey,
     R.string.pref_cat_drawing,
     R.string.pref_tool_line_title,
@@ -1460,6 +1466,7 @@ class TDPrefKey
   };
 
   static int[] GEEKdesc = {
+    R.string.pref_palettes_summary,
     -1,
     -1,
     -1,
@@ -1470,6 +1477,7 @@ class TDPrefKey
   };
 
   static String[] GEEKdef = {
+    FALSE,
     TDString.EMPTY,
     TDString.EMPTY,
     TDString.EMPTY,

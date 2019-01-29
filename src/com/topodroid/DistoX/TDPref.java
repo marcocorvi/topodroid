@@ -953,7 +953,8 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeCbx( cat, key[ 3], tit[ 3], dsc[ 3], T, def[ 3],          ctx, hlp ), // SPLAY COLOR
       makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], T, def[ 4],          ctx, hlp ), // EXTEND FRAC
       makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5],          ctx, hlp ), // BEDDING PLANE
-      makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], T, def[ 6],          ctx, hlp )  // TRIPLE SHOT BELL
+      makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], A, def[ 6],          ctx, hlp ), // TRIPLE SHOT BELL
+      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7],          ctx, hlp )  // WITH SENSORS
     };
   }
 
@@ -974,7 +975,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], T, def[ 6], FLOAT,   ctx, hlp ), // DASH X-SCETION
       makeLst( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7], R.array.backupNumber, R.array.backupNumberValue, ctx, hlp ),
       makeEdt( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8], INTEGER, ctx, hlp ), // BACKUP INTERVAL
-      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9],          ctx, hlp ), // BACKUPS CLEAR
+      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9],          ctx, hlp )  // BACKUPS CLEAR
     };
   }
   static TDPref[] makeGeekPrefs( Context ctx, TDPrefHelper hlp )
@@ -985,12 +986,13 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] dsc    = TDPrefKey.GEEKdesc;
     String[] def = TDPrefKey.GEEKdef;
     return new TDPref[ ] {
-      makeFwd( cat, key[0], tit[0],          T,          ctx, hlp ), // GEEK_SHOT
-      makeFwd( cat, key[1], tit[1],          T,          ctx, hlp ), // GEEK_PLOT
-      makeFwd( cat, key[2], tit[2],          T,          ctx, hlp ), // GEEK_LINE
-      makeFwd( cat, key[3], tit[3],          T,          ctx, hlp ), // PLOT_WALLS
-      makeFwd( cat, key[4], tit[4],          T,          ctx, hlp ), // GEEK_DEVICE
-      makeFwd( cat, key[5], tit[5],          D,          ctx, hlp )  // SKETCH
+      makeCbx( cat, key[0], tit[0], dsc[0],  T, def[0],  ctx, hlp ), // PALETTES
+      makeFwd( cat, key[1], tit[1],          T,          ctx, hlp ), // GEEK_SHOT
+      makeFwd( cat, key[2], tit[2],          T,          ctx, hlp ), // GEEK_PLOT
+      makeFwd( cat, key[3], tit[3],          T,          ctx, hlp ), // GEEK_LINE
+      makeFwd( cat, key[4], tit[4],          T,          ctx, hlp ), // PLOT_WALLS
+      makeFwd( cat, key[5], tit[5],          T,          ctx, hlp ), // GEEK_DEVICE
+      makeFwd( cat, key[6], tit[6],          D,          ctx, hlp )  // SKETCH
     };
   }
 

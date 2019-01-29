@@ -991,7 +991,10 @@
   <string name="pref_extra_buttons_summary">Рівень підключеного функціоналу</string>
   <string name="pref_size_buttons_title">Розмір кнопок</string>
   <string name="pref_size_buttons_summary">Розмір кнопок панелі інструментів</string>
-  <!-- UNUSED string name="pref_size_buttons_message">Введіть Розмір кнопок панелі инструментів [pixels]</string -->
+  <!-- TODO string name="pref_with_sensors_title">Sensors</string -->
+  <!-- TODO string name="pref_with_sensors_summary">Enable "sensors" data</string -->
+  <!-- TODO string name="pref_palettes_title">Palettes</string -->
+  <!-- TODO string name="pref_palettes_summary">Enable additional palettes</string -->
 
   <!-- TODO string name="pref_bezier_step_title">Point spacing</string -->
   <!-- TODO string name="pref_bezier_step_summary">Distance between points on an export line [m]</string -->

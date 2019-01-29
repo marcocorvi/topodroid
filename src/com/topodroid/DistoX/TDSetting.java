@@ -266,6 +266,7 @@ class TDSetting
   static float mExtendThr = 10;             // extend vertically splays in [90-30, 90+30] of the leg
 
   static int mThumbSize = 200;               // thumbnail size
+  static boolean mWithSensors = false;       // whether sensors are enabled
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // SKETCH DRAWING
@@ -296,6 +297,7 @@ class TDSetting
   static final int PICKER_GRID_3 = 3;
   static int mPickerType = PICKER_RECENT;
   static int mRecentNr    = 4;        // nr. most recent symbols
+  static boolean mPalettes = false;   // extra tools palettes
 
   static final int LINE_STYLE_BEZIER = 0;  // drawing line styles
   static final private int LINE_STYLE_ONE    = 1;
@@ -608,6 +610,10 @@ class TDSetting
     int level = Integer.parseInt( prefs.getString( keyMain[3], defMain[3] ) ); // DISTOX_EXTRA_BUTTONS choice: 0, 1, 2, 3
     setActivityBooleans( prefs, level );
 
+    String[] keyGeek = TDPrefKey.GEEK;
+    String[] defGeek = TDPrefKey.GEEKdef;
+    setPalettes( prefs.getBoolean( keyGeek[0], bool(defGeek[0]) ) ); // DISTOX_PALETTES
+
     String[] keyGPlot = TDPrefKey.GEEKPLOT;
     String[] defGPlot = TDPrefKey.GEEKPLOTdef;
     setBackupsClear( prefs.getBoolean( keyGPlot[ 9], bool(defGPlot[ 9]) ) ); // DISTOX_BACKUPS_CLEAR
@@ -828,6 +834,7 @@ class TDSetting
     mExtendFrac    = prefs.getBoolean( keyGShot[ 4], bool(defGShot[ 4]) ); // DISTOX_EXTEND_FRAC
     mBedding       = prefs.getBoolean( keyGShot[ 5], bool(defGShot[ 5]) ); // DISTOX_BEDDING
     mTripleShot    = prefs.getBoolean( keyGShot[ 6], bool(defGShot[ 6]) ); // DISTOX_TRIPLE_SHOT
+    mWithSensors   = prefs.getBoolean( keyGShot[ 7], bool(defGShot[ 7]) ); // DISTOX_WITH_SENSORS
 
     String[] keyGPlot = TDPrefKey.GEEKPLOT;
     String[] defGPlot = TDPrefKey.GEEKPLOTdef;
@@ -974,7 +981,7 @@ class TDSetting
       case TDPrefActivity.PREF_PLOT_DRAW:       return updatePrefDraw( hlp, k, v );
       case TDPrefActivity.PREF_PLOT_ERASE:      return updatePrefErase( hlp, k, v );
       case TDPrefActivity.PREF_PLOT_EDIT:       return updatePrefEdit( hlp, k, v );
-      case TDPrefActivity.PREF_CATEGORY_GEEK:   return null; // no pref
+      case TDPrefActivity.PREF_CATEGORY_GEEK:   return updatePrefGeek( hlp, k, v);
       case TDPrefActivity.PREF_GEEK_SHOT:       return updatePrefGeekShot( hlp, k, v );
       case TDPrefActivity.PREF_GEEK_PLOT:       return updatePrefGeekPlot( hlp, k, v );
       case TDPrefActivity.PREF_GEEK_LINE:       return updatePrefGeekLine( hlp, k, v );
@@ -1196,6 +1203,20 @@ class TDSetting
   }
 
   // ------------------------------------------------------------------------------------------
+  private static String updatePrefGeek( TDPrefHelper hlp, String k, String v )
+  {
+    String ret = null;
+    // Log.v("DistoX", "update pref data: " + k );
+    String[] key = TDPrefKey.GEEK;
+    String[] def = TDPrefKey.GEEKdef;
+    if ( k.equals( key[ 0 ] ) ) { // DISTOX_PALETTES
+      setPalettes( tryBooleanValue( hlp, k, v, bool(def[0]) ) );
+    } else {
+      TDLog.Error("missing GEEK key: " + k );
+    }
+    // if ( ret != null ) hlp.update( k, ret );
+    return ret;
+  }
   private static String updatePrefGeekShot( TDPrefHelper hlp, String k, String v )
   {
     String ret = null;
@@ -1216,6 +1237,8 @@ class TDSetting
       mBedding      = tryBooleanValue( hlp, k, v, bool(def[ 5]) );
     } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_TRIPLE_SHOT
       mTripleShot   = tryBooleanValue( hlp, k, v, bool(def[ 6]) );
+    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_WITH_SENSORS
+      mWithSensors  = tryBooleanValue( hlp, k, v, bool(def[ 7]) );
     } else {
       TDLog.Error("missing GEEK_SHOT key: " + k );
     }
@@ -2086,11 +2109,25 @@ class TDSetting
 
   private static void setBackupsClear( boolean b )
   {
-    mBackupsClear = b;
-    if ( TopoDroidApp.mActivity != null ) {
-      TopoDroidApp.mActivity.resetButtonBar();
-      // FIXME TOOLBAR TopoDroidApp.mActivity.resetToolbar();
-      TopoDroidApp.mActivity.setMenuAdapter( TDInstance.context.getResources() );
+    if ( mBackupsClear != b ) {
+      mBackupsClear = b;
+      if ( TopoDroidApp.mActivity != null ) {
+        TopoDroidApp.mActivity.resetButtonBar();
+        // FIXME TOOLBAR TopoDroidApp.mActivity.resetToolbar();
+        TopoDroidApp.mActivity.setMenuAdapter( TDInstance.context.getResources() );
+      }
+    }
+  }
+
+  private static void setPalettes( boolean b )
+  {
+    if ( mPalettes != b ) {
+      mPalettes = b;
+      if ( TopoDroidApp.mActivity != null ) {
+        // TopoDroidApp.mActivity.resetButtonBar();
+        // FIXME TOOLBAR TopoDroidApp.mActivity.resetToolbar();
+        TopoDroidApp.mActivity.setMenuAdapter( TDInstance.context.getResources() );
+      }
     }
   }
 

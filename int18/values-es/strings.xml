@@ -995,6 +995,10 @@
   <string name="pref_extra_buttons_summary">Habilitar botones opcionales ventana principal</string>
   <string name="pref_size_buttons_title">Tamaño botones</string>
   <string name="pref_size_buttons_summary">Introduzca el tamaño de los botones de la barra [pixels]</string>
+  <!-- TODO string name="pref_with_sensors_title">Sensors</string -->
+  <!-- TODO string name="pref_with_sensors_summary">Enable "sensors" data</string -->
+  <!-- TODO string name="pref_palettes_title">Palettes</string -->
+  <!-- TODO string name="pref_palettes_summary">Enable additional palettes</string -->
 
   <!-- TODO string name="pref_bezier_step_title">Point spacing</string -->
   <!-- TODO string name="pref_bezier_step_summary">Distance between points on an export line [m]</string -->

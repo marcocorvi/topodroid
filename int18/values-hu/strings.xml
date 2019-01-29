@@ -986,6 +986,10 @@
   <string name="pref_extra_buttons_summary">Engedélyezett funkciók minősítése</string>
   <string name="pref_size_buttons_title">Gombok mérete</string>
   <string name="pref_size_buttons_summary">Fejléc gombok mérete</string>
+  <!-- TODO string name="pref_with_sensors_title">Sensors</string -->
+  <!-- TODO string name="pref_with_sensors_summary">Enable "sensors" data</string -->
+  <!-- TODO string name="pref_palettes_title">Palettes</string -->
+  <!-- TODO string name="pref_palettes_summary">Enable additional palettes</string -->
 
   <!-- TODO string name="pref_bezier_step_title">Point spacing</string -->
   <!-- TODO string name="pref_bezier_step_summary">Distance between points on an export line [m]</string -->

@@ -56,14 +56,14 @@ class PhotoSensorsDialog extends MyDialog
   private CheckBox mCBleg = null;
 
   // private MyCheckBox mButtonPlot;
-  private MyCheckBox mButtonPhoto = null;
-  private MyCheckBox mButtonAudio = null;
-  private MyCheckBox mButtonSensor;
-  private MyCheckBox mButtonShot;
+  private MyCheckBox mButtonPhoto  = null;
+  private MyCheckBox mButtonAudio  = null;
+  private MyCheckBox mButtonSensor = null;
+  private MyCheckBox mButtonShot   = null;
   private MyCheckBox mButtonSurvey = null;
 
-  private MyCheckBox mButtonDelete;
-  private MyCheckBox mButtonCheck = null;
+  private MyCheckBox mButtonDelete = null;
+  private MyCheckBox mButtonCheck  = null;
 
   private HorizontalListView mListView;
   private HorizontalButtonView mButtonView;
@@ -111,30 +111,46 @@ class PhotoSensorsDialog extends MyDialog
     mBTlrud  = (Button)findViewById( R.id.btn_ok );
 
     int nr_buttons = 5; // ( mBlk.type() == DBlock.BLOCK_MAIN_LEG )? 7 : 6;
+    mButton = new Button[nr_buttons];
+    int pos = 0;
+
     // mButtonPlot   = new MyCheckBox( mContext, size, R.drawable.iz_plot, R.drawable.iz_plot ); 
+    // mButtonPlot.setOnClickListener( this );
+    
     mButtonPhoto  = new MyCheckBox( mContext, size, R.drawable.iz_camera, R.drawable.iz_camera ); 
+    mButton[pos++] = mButtonPhoto;
+    mButtonPhoto.setOnClickListener( this );
+
     if ( audioCheck ) {
       mButtonAudio = new MyCheckBox( mContext, size, R.drawable.iz_audio, R.drawable.iz_audio ); 
       mButtonAudio.setOnClickListener( this );
+      mButton[pos++] = mButtonAudio;
     } else {
-      -- nr_buttons;
-    }
-    mButtonSensor = new MyCheckBox( mContext, size, R.drawable.iz_sensor, R.drawable.iz_sensor ); 
-    mButtonShot   = new MyCheckBox( mContext, size, R.drawable.iz_add_leg, R.drawable.iz_add_leg );
-    if ( TDLevel.overAdvanced ) {
-      mButtonSurvey = new MyCheckBox( mContext, size, R.drawable.iz_split, R.drawable.iz_split );
-      mButtonSurvey.setOnClickListener( this );
-    } else {
+      // mButtonAudio = null;
       -- nr_buttons;
     }
 
-    mButton = new Button[nr_buttons];
-    int pos = 0;
-    mButton[pos++] = mButtonPhoto;
-    if ( audioCheck ) mButton[pos++] = mButtonAudio;
-    mButton[pos++] = mButtonSensor;
+    if ( TDSetting.mWithSensors ) {
+      mButtonSensor = new MyCheckBox( mContext, size, R.drawable.iz_sensor, R.drawable.iz_sensor ); 
+      mButtonSensor.setOnClickListener( this );
+      mButton[pos++] = mButtonSensor;
+    } else {
+      // mButtonSensor = null;
+      -- nr_buttons;
+    }
+
+    mButtonShot   = new MyCheckBox( mContext, size, R.drawable.iz_add_leg, R.drawable.iz_add_leg );
+    mButtonShot.setOnClickListener( this );
     mButton[pos++] = mButtonShot;
-    if ( mButtonSurvey != null ) mButton[pos++] = mButtonSurvey;
+
+    if ( TDLevel.overAdvanced ) {
+      mButtonSurvey = new MyCheckBox( mContext, size, R.drawable.iz_split, R.drawable.iz_split );
+      mButtonSurvey.setOnClickListener( this );
+      mButton[pos++] = mButtonSurvey;
+    } else {
+      // mButtonSurvey = null;
+      -- nr_buttons;
+    }
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
     // mListView.setEmptyPlacholder( true );
@@ -208,11 +224,6 @@ class PhotoSensorsDialog extends MyDialog
       mBTlrud.setVisibility( View.GONE );
     }
 
-    // mButtonPlot.setOnClickListener( this );
-    mButtonPhoto.setOnClickListener( this );
-    mButtonSensor.setOnClickListener( this );
-    // mButtonExternal.setOnClickListener( this );
-    mButtonShot.setOnClickListener( this );
 
   }
 
@@ -254,10 +265,10 @@ class PhotoSensorsDialog extends MyDialog
     } else if ( b == mButtonPhoto ) {       // PHOTO
       mParent.askPhotoComment( );
       dismiss();
-    } else if ( audioCheck && b == mButtonAudio ) {       // AUDIO
+    } else if ( mButtonAudio != null && b == mButtonAudio ) {  // AUDIO
       mParent.startAudio( mBlk );
       dismiss();
-    } else if ( b == mButtonSensor ) { // SENSOIR
+    } else if ( mButtonSensor != null && b == mButtonSensor ) { // SENSOIR
       mParent.askSensor( );
       dismiss();
     // } else if ( b == mButtonExternal ) {

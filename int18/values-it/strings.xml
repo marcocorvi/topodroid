@@ -992,6 +992,10 @@
   <string name="pref_extra_buttons_summary">Seleziona il livello di comandi</string>
   <string name="pref_size_buttons_title">Dimensione bottoni</string>
   <string name="pref_size_buttons_summary">Dimensione bottoni barra superiore [pixels]</string>
+  <!-- TODO string name="pref_with_sensors_title">Sensors</string -->
+  <!-- TODO string name="pref_with_sensors_summary">Enable "sensors" data</string -->
+  <!-- TODO string name="pref_palettes_title">Palettes</string -->
+  <!-- TODO string name="pref_palettes_summary">Enable additional palettes</string -->
 
   <string name="pref_bezier_step_title">Spaziatura punti</string>
   <string name="pref_bezier_step_summary">Distanza tra punti in una linea di export [m]</string>

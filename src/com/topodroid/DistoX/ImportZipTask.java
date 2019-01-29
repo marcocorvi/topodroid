@@ -26,10 +26,10 @@ class ImportZipTask extends ImportTask
   protected Long doInBackground( String... str )
   {
     String filename = str[0];
-    if ( mApp.get() == null ) return -6L;
-    Archiver archiver = new Archiver( mApp.get() );
-
-    int ret = archiver.unArchive( TDPath.getZipFile( filename ), filename.replace(".zip", ""));
+    TopoDroidApp app = mApp.get();
+    if ( app == null ) return -6L;
+    Archiver archiver = new Archiver( );
+    int ret = archiver.unArchive( app, TDPath.getZipFile( filename ), filename.replace(".zip", ""));
     return (long)ret;
   }
 

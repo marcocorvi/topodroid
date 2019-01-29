@@ -48,6 +48,7 @@ class TDPath
   final static String SHP = ".shp"; // shapefile
   final static String SHX = ".shx";
   final static String DBF = ".dbf";
+  final static String SHPZIP = ".shz"; // shapefile zip
   final static String SRV = ".srv";
   final static String SUR = ".sur";
   final static String SVG = ".svg";
@@ -305,12 +306,11 @@ class TDPath
   static String getZipFile( String name )    { return PATH_ZIP + name; }
   static String getTdrFile( String name )    { return PATH_TDR + name; }
   static String getTdr3File( String name )   { return PATH_TDR3 + name; }
-  static String getTh2File( String name )    { return PATH_TH2 + name; }
-  static String getTh3File( String name )    { return PATH_TH3 + name; }
 
-  static String getThFile( String name )     { return PATH_TH + name; }
   static String getCaveFile( String name )   { return PATH_CAVE + name; }
   static String getCavFile( String name )    { return PATH_CAV + name; }
+  static String getCsvFile( String name )    { return PATH_CSV + name; }
+  static String getCsxFile( String name )    { return PATH_CSX + name; }
   static String getDatFile( String name )    { return PATH_DAT + name; }
   static String getGrtFile( String name )    { return PATH_GRT + name; }
   static String getGtxFile( String name )    { return PATH_GTX + name; }
@@ -318,19 +318,21 @@ class TDPath
   static String getKmlFile( String name )    { return PATH_KML + name; }
   static String getJsonFile( String name )   { return PATH_JSON + name; }
   static String getPltFile( String name )    { return PATH_PLT + name; }
+  static String getPngFile( String name )    { return PATH_PNG + name; }
   static String getSrvFile( String name )    { return PATH_SRV + name; }
   static String getSurFile( String name )    { return PATH_SUR + name; }
   static String getSvgFile( String name )    { return PATH_SVG + name; }
   static String getSvxFile( String name )    { return PATH_SVX + name; }
-  static String getCsvFile( String name )    { return PATH_CSV + name; }
-  static String getCsxFile( String name )    { return PATH_CSX + name; }
-  static String getDumpFile( String name )   { return PATH_DUMP + name; }
+  static String getShzFile( String name )    { return PATH_SHP + name; }
+  static String getThFile( String name )     { return PATH_TH + name; }
+  static String getTh2File( String name )    { return PATH_TH2 + name; }
+  static String getTh3File( String name )    { return PATH_TH3 + name; }
   static String getTopFile( String name )    { return PATH_TOP + name; }
   static String getTrbFile( String name )    { return PATH_TRB + name; }
   static String getTroFile( String name )    { return PATH_TRO + name; }
-  static String getPngFile( String name )    { return PATH_PNG + name; }
   static String getXviFile( String name )    { return PATH_XVI + name; }
 
+  static String getDumpFile( String name )   { return PATH_DUMP + name; }
   static String getBinFile( String name )    { return PATH_BIN + name; }
   static String getCCsvFile( String name )   { return PATH_CCSV + name; }
   static String getManFile( String name )    { return PATH_MAN + name; }
@@ -352,6 +354,8 @@ class TDPath
   static String getSurveyPlotPngFile( String survey, String name ) { return PATH_PNG + survey + "-" + name + PNG ; }
   static String getSurveyPlotXviFile( String survey, String name ) { return PATH_XVI + survey + "-" + name + XVI ; }
   static String getSurveyPlotCsxFile( String survey, String name ) { return PATH_CSX + survey + "-" + name + CSX ; }
+  // static String getSurveyPlotShpDir( String survey, String name ) { return PATH_SHP + survey + "-" + name ; }
+  static String getSurveyPlotShzFile( String survey, String name ) { return PATH_SHP + survey + "-" + name + SHPZIP ; }
 
   static String getSurveySketchInFile( String survey, String name ) { return PATH_TH3 + survey + "-" + name + TH3 ; }
   static String getSurveySketchOutFile( String survey, String name ) { return PATH_TDR3 + survey + "-" + name + TDR3 ; }
@@ -380,6 +384,8 @@ class TDPath
   static String getSvgFileWithExt( String name ) { return getFile( PATH_SVG, name, SVG ); }
   static String getXviFileWithExt( String name ) { return getFile( PATH_XVI, name, XVI ); }
   static String getPngFileWithExt( String name ) { return getFile( PATH_PNG, name, PNG ); }
+
+  static String getShzFileWithExt( String name ) { return getFile( PATH_SHP, name, SHPZIP ); }
   static String getShpBasepath( String name )    { return getPath( PATH_SHP, name ); }
   static String getShpPath( String name )        { return PATH_SHP + name; }
 
@@ -399,6 +405,7 @@ class TDPath
   static String getSurveyKmlFile( String survey ) { return getFile( PATH_KML, survey, KML ); }
   static String getSurveyJsonFile( String survey ) { return getFile( PATH_JSON, survey, JSON ); }
   static String getSurveyPltFile( String survey ) { return getFile( PATH_PLT, survey, PLT ); }
+  static String getSurveyShzFile( String survey ) { return getFile( PATH_SHP, survey, SHPZIP ); }
   static String getSurveySrvFile( String survey ) { return getFile( PATH_SRV, survey, SRV ); }
   static String getSurveySurFile( String survey ) { return getFile( PATH_SUR, survey, SUR ); }
   static String getSurveySvxFile( String survey ) { return getFile( PATH_SVX, survey, SVX ); }
@@ -495,61 +502,6 @@ class TDPath
   static void checkBinDir()  { checkDirs( PATH_BIN ); }
   // static void checkManDir() { checkDirs( PATH_MAN ); }
 
-  static void deleteSurveyFiles( String survey )
-  {
-    File imagedir = new File( getSurveyPhotoDir( survey ) );
-    if ( imagedir.exists() ) {
-      File[] fs = imagedir.listFiles();
-      for ( File f : fs ) if ( ! f.delete() ) TDLog.Error("File delete error");
-      if ( ! imagedir.delete() ) TDLog.Error("Dir delete error");
-    }
-
-    TopoDroidUtil.deleteFile( getSurveyNoteFile( survey ) );
-    
-    // TopoDroidUtil.deleteFile( getSurveyTlxFile( survey ) );
-
-    TopoDroidUtil.deleteFile( getThFile(  survey + TH  ) );
-    TopoDroidUtil.deleteFile( getCsvFile( survey + CSV ) );
-    TopoDroidUtil.deleteFile( getCsxFile( survey + CSX ) );
-    TopoDroidUtil.deleteFile( getCaveFile( survey + CAVE ) );
-    TopoDroidUtil.deleteFile( getCavFile( survey + CAV ) );
-    TopoDroidUtil.deleteFile( getDatFile( survey + DAT ) );
-    TopoDroidUtil.deleteFile( getGrtFile( survey + GRT ) );
-    TopoDroidUtil.deleteFile( getGtxFile( survey + GTX ) );
-    TopoDroidUtil.deleteFile( getDxfFile( survey + DXF ) );
-    TopoDroidUtil.deleteFile( getKmlFile( survey + KML ) );
-    TopoDroidUtil.deleteFile( getJsonFile( survey + JSON ) );
-    TopoDroidUtil.deleteFile( getPltFile( survey + PLT ) );
-    TopoDroidUtil.deleteFile( getSvxFile( survey + SVX ) );
-    // deleteShpFiles( survey ); // SHP stations/shots/splays shp/shx/dbf
-    TopoDroidUtil.deleteFile( getSrvFile( survey + SRV ) );
-    TopoDroidUtil.deleteFile( getSurFile( survey + SUR ) );
-    TopoDroidUtil.deleteFile( getTopFile( survey + TOP ) );
-    TopoDroidUtil.deleteFile( getTroFile( survey + TRO ) );
-    TopoDroidUtil.deleteFile( getTrbFile( survey + TRB ) );
-  }
-
-  static private void deleteShpFiles( String survey )
-  {
-    File dir = new File( getShpPath( survey ) );
-    if ( dir.exists() ) {
-      for ( String filename : dir.list() ) {
-	(new File( dir, filename )).delete();
-      }
-      dir.delete();
-    }
-  } 
-
-  static void deleteShpDirs( String survey, List<String> plots ) 
-  {
-    deleteShpFiles( survey );
-    if ( plots != null ) {
-      for ( String plot : plots ) {
-        deleteShpFiles( survey + "-" + plot );
-      }
-    }
-  }
-
   static void rotateBackups( String filename, int rotate ) // filename has suffix BCK_SUFFIX
   {
     if ( rotate <= 0 ) return;
@@ -578,14 +530,12 @@ class TDPath
     }
   }
 
-  static void deletePlotFileWithBackups( String filename )
+  static void deleteDir( String dirname )
   {
-    TopoDroidUtil.deleteFile( filename );
-    String filepath = filename + TDPath.BCK_SUFFIX;
-    TopoDroidUtil.deleteFile( filepath );
-    for ( int i = 0; i < NR_BACKUP; ++i ) {
-      filepath = filename + TDPath.BCK_SUFFIX + Integer.toString(i);
-      TopoDroidUtil.deleteFile( filepath );
+    File dir = new File( dirname );
+    if ( dir.exists() ) {
+      for ( File file : dir.listFiles() ) if ( file.isFile() ) file.delete();
+      dir.delete();
     }
   }
 
@@ -594,11 +544,92 @@ class TDPath
     TopoDroidUtil.deleteFile( filename );
   }
 
+  static void deleteSurveyFiles( String survey )
+  {
+    File imagedir = new File( getSurveyPhotoDir( survey ) );
+    if ( imagedir.exists() ) {
+      File[] fs = imagedir.listFiles();
+      for ( File f : fs ) if ( ! f.delete() ) TDLog.Error("File delete error");
+      if ( ! imagedir.delete() ) TDLog.Error("Dir delete error");
+    }
+
+    TopoDroidUtil.deleteFile( getSurveyNoteFile( survey ) );
+    
+    // TopoDroidUtil.deleteFile( getSurveyTlxFile( survey ) );
+
+    TopoDroidUtil.deleteFile( getCsvFile( survey + CSV ) );
+    TopoDroidUtil.deleteFile( getCsxFile( survey + CSX ) );
+    TopoDroidUtil.deleteFile( getCaveFile( survey + CAVE ) );
+    TopoDroidUtil.deleteFile( getCavFile( survey + CAV ) );
+    TopoDroidUtil.deleteFile( getDatFile( survey + DAT ) );
+    TopoDroidUtil.deleteFile( getGrtFile( survey + GRT ) );
+    TopoDroidUtil.deleteFile( getGtxFile( survey + GTX ) );
+    TopoDroidUtil.deleteFile( getDxfFile( survey + DXF ) );
+    TopoDroidUtil.deleteFile( getKmlFile( survey + KML ) );
+    TopoDroidUtil.deleteFile( getJsonFile( survey + JSON ) );
+    TopoDroidUtil.deleteFile( getPltFile( survey + PLT ) );
+    TopoDroidUtil.deleteFile( getShzFile( survey + SHPZIP ) );
+    // deleteShpFiles( survey ); // SHP stations/shots/splays shp/shx/dbf
+    TopoDroidUtil.deleteFile( getSrvFile( survey + SRV ) );
+    TopoDroidUtil.deleteFile( getSurFile( survey + SUR ) );
+    TopoDroidUtil.deleteFile( getSvgFile( survey + SVX ) );
+    TopoDroidUtil.deleteFile( getSvxFile( survey + SVX ) );
+    TopoDroidUtil.deleteFile( getThFile(  survey + TH  ) );
+    TopoDroidUtil.deleteFile( getTopFile( survey + TOP ) );
+    TopoDroidUtil.deleteFile( getTroFile( survey + TRO ) );
+    TopoDroidUtil.deleteFile( getTrbFile( survey + TRB ) );
+  }
+
+  static void deleteSurveyOverviewFiles( String survey )
+  {
+    TopoDroidUtil.deleteFile( getTh2File( survey + "-p" + TH2  ) );
+    TopoDroidUtil.deleteFile( getDxfFile( survey + "-p" + DXF ) );
+    TopoDroidUtil.deleteFile( getSvgFile( survey + "-p" + SVX ) );
+    TopoDroidUtil.deleteFile( getShzFile( survey + "-p" + SHPZIP ) );
+
+    TopoDroidUtil.deleteFile( getTh2File( survey + "-s" + TH2  ) );
+    TopoDroidUtil.deleteFile( getDxfFile( survey + "-s" + DXF ) );
+    TopoDroidUtil.deleteFile( getSvgFile( survey + "-s" + SVX ) );
+    TopoDroidUtil.deleteFile( getShzFile( survey + "-s" + SHPZIP ) );
+  }
+
+  // static private void deleteShpFiles( String survey )
+  // {
+  //   File dir = new File( getShpPath( survey ) );
+  //   if ( dir.exists() ) {
+  //     for ( String filename : dir.list() ) {
+  //       (new File( dir, filename )).delete();
+  //     }
+  //     dir.delete();
+  //   }
+  // } 
+
+  // static void deleteShpDirs( String survey, List<String> plots ) 
+  // {
+  //   deleteShpFiles( survey );
+  //   if ( plots != null ) {
+  //     for ( String plot : plots ) {
+  //       deleteShpFiles( survey + "-" + plot );
+  //     }
+  //   }
+  // }
+
   static void deleteBackups( String filename ) // filename has suffix BCK_SUFFIX
   {
     TopoDroidUtil.deleteFile( filename );
     for ( int i=NR_BACKUP-1; i>=0; --i ) {
       TopoDroidUtil.deleteFile( filename + Integer.toString(i) );
+    }
+  }
+
+  static void deletePlotFileWithBackups( String filename )
+  {
+    TopoDroidUtil.deleteFile( filename );
+    String filepath = filename + TDPath.BCK_SUFFIX;
+    TopoDroidUtil.deleteFile( filepath );
+    for ( int i = 0; i < NR_BACKUP; ++i ) {
+      filepath = filename + TDPath.BCK_SUFFIX + Integer.toString(i);
+      TopoDroidUtil.deleteFile( filepath );
     }
   }
 
@@ -617,6 +648,8 @@ class TDPath
       TopoDroidUtil.deleteFile( getSurveyPlotDxfFile( survey, p.name ) );
       TopoDroidUtil.deleteFile( getSurveyPlotSvgFile( survey, p.name ) );
       // TopoDroidUtil.deleteFile( getSurveyPlotHtmFile( survey, p.name ) ); // SVG in HTML
+      TopoDroidUtil.deleteFile( getSurveyPlotShzFile( survey, p.name ) );
+      TopoDroidUtil.deleteFile( getSurveyPlotXviFile( survey, p.name ) );
     }
   }
 

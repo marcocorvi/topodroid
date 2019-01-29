@@ -16,7 +16,7 @@
  */
 package com.topodroid.DistoX;
 
-// import java.io.File;
+import java.io.File;
 import java.io.FileOutputStream;
 // import java.io.FileNotFoundException;
 import java.io.IOException;   
@@ -63,14 +63,17 @@ class ShpObject
   FileOutputStream shxFos;
   FileOutputStream dbfFos;
 
+  List<File> mFiles; // list of files to which append my files
+
   // @param yy year [four digit]
   // @param mm month [1..12]
   // @param dd day [1..31]
-  ShpObject( int typ, String pth ) // throws IOException
+  ShpObject( int typ, String pth, List<File> files ) // throws IOException
   { 
     geomType  = typ;
     nr    = 0;
     path  = pth;
+    mFiles = files;
     setYYMMDD( TopoDroidUtil.currentDate() );
   }
 
@@ -83,6 +86,11 @@ class ShpObject
       shpChannel = shpFos.getChannel();
       shxChannel = shxFos.getChannel();
       dbfChannel = dbfFos.getChannel();
+      if ( mFiles != null ) {
+        mFiles.add( new File( path + ".shp" ) );
+        mFiles.add( new File( path + ".shx" ) );
+        mFiles.add( new File( path + ".dbf" ) );
+      }
     } catch ( IOException e ) {
       TDLog.Error("output streams " + e.getMessage() );
       throw e;
@@ -400,9 +408,9 @@ class ShpObject
 
 class ShpPointz extends ShpObject
 {
-  ShpPointz( String path ) throws IOException
+  ShpPointz( String path, List<File> files ) throws IOException
   {
-    super( SHP_POINTZ, path );
+    super( SHP_POINTZ, path, files );
   }
 
   // write headers for POINTZ
@@ -481,9 +489,9 @@ class ShpPointz extends ShpObject
 
 class ShpPolylinez extends ShpObject
 {
-  ShpPolylinez( String path ) throws IOException
+  ShpPolylinez( String path, List<File> files ) throws IOException
   {
-    super( SHP_POLYLINEZ, path );
+    super( SHP_POLYLINEZ, path, files );
   }
 
   boolean writeShots( List<NumShot> lns, List<NumSplay> lms ) throws IOException
@@ -667,9 +675,9 @@ class ShpPolylinez extends ShpObject
 
 class ShpPoint extends ShpObject
 {
-  ShpPoint( String path ) throws IOException
+  ShpPoint( String path, List<File> files ) throws IOException
   {
-    super( SHP_POINT, path );
+    super( SHP_POINT, path, files );
   }
 
   // write headers for POINT
@@ -749,9 +757,9 @@ class ShpPoint extends ShpObject
 
 class ShpStation extends ShpObject
 {
-  ShpStation( String path ) throws IOException
+  ShpStation( String path, List<File> files ) throws IOException
   {
-    super( SHP_POINT, path );
+    super( SHP_POINT, path, files );
   }
 
   // write headers for POINT
@@ -832,9 +840,9 @@ class ShpPolyline extends ShpObject
   // int mPathType; 
 
   // @param path_type   either DRAWING_PATH_LINE or DRAWING_PATH_AREA
-  ShpPolyline( String path, int path_type ) throws IOException
+  ShpPolyline( String path, int path_type, List<File> files ) throws IOException
   {
-    super( ( (path_type == DrawingPath.DRAWING_PATH_LINE)? SHP_POLYLINE : SHP_POLYGON ), path );
+    super( ( (path_type == DrawingPath.DRAWING_PATH_LINE)? SHP_POLYLINE : SHP_POLYGON ), path, files );
     // mPathType = path_type;
   }
 
@@ -981,9 +989,9 @@ class ShpPolyline extends ShpObject
 // This class handles shots: les and splays
 class ShpSegment extends ShpObject
 {
-  ShpSegment( String path ) throws IOException
+  ShpSegment( String path, List<File> files ) throws IOException
   {
-    super( SHP_POLYLINE, path );
+    super( SHP_POLYLINE, path, files );
   }
 
   boolean writeSegments( List<DrawingPath> sgms, float x0, float y0, float scale ) throws IOException

@@ -32,22 +32,20 @@ import java.util.List;
 // import android.content.Context;
 // import android.content.Intent;
 
-// import android.util.Log;
+import android.util.Log;
 
 
 class Archiver
 {
-  private final TopoDroidApp mApp;
-  private final DataHelper app_data;
-  private static final int BUF_SIZE = 2048;
+  // private final TopoDroidApp mApp;
+  private static final int BUF_SIZE = 4096;
   private byte[] data; // = new byte[ BUF_SIZE ];
 
   String zipname;
 
-  Archiver( TopoDroidApp app )
+  Archiver( ) // TopoDroidApp app
   {
-    mApp = app;
-    app_data = TopoDroidApp.mData;
+    // mApp = app;
     data = new byte[ BUF_SIZE ];
   }
 
@@ -58,6 +56,7 @@ class Archiver
     BufferedInputStream bis = null;
     try { 
       // TDLog.Log( TDLog.LOG_IO, "zip add file " + name.getPath() );
+      Log.v( "DistoXX", "zip add file " + name.getPath() );
       bis = new BufferedInputStream( new FileInputStream( name ), BUF_SIZE );
       ZipEntry entry = new ZipEntry( name.getName() );
       int cnt;
@@ -77,9 +76,35 @@ class Archiver
     return ret;
   }
 
-  boolean archive( )
+  private void addDirectory( ZipOutputStream zos, File dir )
+  {
+    if ( ! dir.exists() ) return;
+    Log.v( "DistoXX", "zip add dir " + dir.getPath() );
+    for ( File file : dir.listFiles() ) {
+      if ( file.isFile() ) addEntry( zos, file );
+    }
+  }
+
+  void compressFiles( String zipname, List<File> files )
+  {
+    ZipOutputStream zos = null;
+    try {
+      zos = new ZipOutputStream( new BufferedOutputStream( new FileOutputStream( zipname ) ) );
+      for ( File file : files ) addEntry( zos, file );
+      // for ( File file : files ) TopoDroidUtil.deleteFile( file );
+    } catch ( FileNotFoundException e ) {
+    // } catch ( IOException e ) {
+    //   // FIXME
+    } finally {
+      if ( zos != null ) try { zos.close(); } catch ( IOException e ) { TDLog.Error("ZIP compress close error"); }
+    }
+  }
+
+  boolean archive( TopoDroidApp mApp )
   {
     if ( TDInstance.sid < 0 ) return false;
+    DataHelper app_data = TopoDroidApp.mData;
+    // if ( app_data == null ) return false;
     
     // File temp = null;
     String survey = TDInstance.survey;
@@ -112,31 +137,47 @@ class Archiver
         addEntry( zos, new File( TDPath.getSurveyPlotDxfFile( survey, plt.name ) ) );
         addEntry( zos, new File( TDPath.getSurveyPlotSvgFile( survey, plt.name ) ) );
         // addEntry( zos, new File( TDPath.getSurveyPlotHtmFile( survey, plt.name ) ) ); // SVG in HTML
+        addEntry( zos, new File( TDPath.getSurveyPlotXviFile( survey, plt.name ) ) );
         addEntry( zos, new File( TDPath.getSurveyPlotPngFile( survey, plt.name ) ) );
         if ( plt.type == PlotInfo.PLOT_PLAN ) {
           addEntry( zos, new File( TDPath.getSurveyCsxFile( survey, plt.name ) ) );
         }
+	addEntry( zos, new File( TDPath.getSurveyPlotShzFile( survey, plt.name ) ) );
       }
+
+      // try overview exports
+      addEntry( zos, new File( TDPath.getSurveyPlotTh2File( survey, "p" ) ) );
+      addEntry( zos, new File( TDPath.getSurveyPlotDxfFile( survey, "p" ) ) );
+      addEntry( zos, new File( TDPath.getSurveyPlotSvgFile( survey, "p" ) ) );
+      addEntry( zos, new File( TDPath.getSurveyPlotXviFile( survey, "p" ) ) );
+      addEntry( zos, new File( TDPath.getSurveyPlotShzFile( survey, "p" ) ) ); // zipped shp
+
+      addEntry( zos, new File( TDPath.getSurveyPlotTh2File( survey, "s" ) ) );
+      addEntry( zos, new File( TDPath.getSurveyPlotDxfFile( survey, "s" ) ) );
+      addEntry( zos, new File( TDPath.getSurveyPlotSvgFile( survey, "s" ) ) );
+      addEntry( zos, new File( TDPath.getSurveyPlotXviFile( survey, "s" ) ) );
+      addEntry( zos, new File( TDPath.getSurveyPlotShzFile( survey, "s" ) ) ); // zipped shp
 
       plots  = app_data.selectAllPlots( TDInstance.sid, TDStatus.DELETED );
       for ( PlotInfo plt : plots ) {
         addEntry( zos, new File( TDPath.getSurveyPlotTdrFile( survey, plt.name ) ) );
       }
 
-      List< PhotoInfo > photos = app_data.selectAllPhotos( TDInstance.sid, TDStatus.NORMAL );
-      for ( PhotoInfo pht : photos ) {
-        addEntry( zos, new File( TDPath.getSurveyJpgFile( survey, Long.toString(pht.id) ) ) );
-      }
+      addDirectory( zos, new File( TDPath.getSurveyPhotoDir( survey ) ) );
+      // List< PhotoInfo > photos = app_data.selectAllPhotos( TDInstance.sid, TDStatus.NORMAL );
+      // for ( PhotoInfo pht : photos ) {
+      //   addEntry( zos, new File( TDPath.getSurveyJpgFile( survey, Long.toString(pht.id) ) ) );
+      // }
+      // photos = app_data.selectAllPhotos( TDInstance.sid, TDStatus.DELETED );
+      // for ( PhotoInfo pht : photos ) {
+      //   addEntry( zos, new File( TDPath.getSurveyJpgFile( survey, Long.toString(pht.id) ) ) );
+      // }
 
-      photos = app_data.selectAllPhotos( TDInstance.sid, TDStatus.DELETED );
-      for ( PhotoInfo pht : photos ) {
-        addEntry( zos, new File( TDPath.getSurveyJpgFile( survey, Long.toString(pht.id) ) ) );
-      }
-
-      List< AudioInfo > audios = app_data.selectAllAudios( TDInstance.sid );
-      for ( AudioInfo audio : audios ) {
-        addEntry( zos, new File( TDPath.getSurveyAudioFile( survey, Long.toString( audio.shotid ) ) ) );
-      }
+      addDirectory( zos, new File( TDPath.getSurveyAudioDir( survey ) ) );
+      // List< AudioInfo > audios = app_data.selectAllAudios( TDInstance.sid );
+      // for ( AudioInfo audio : audios ) {
+      //   addEntry( zos, new File( TDPath.getSurveyAudioFile( survey, Long.toString( audio.shotid ) ) ) );
+      // }
 
       addEntry( zos, new File( TDPath.getSurveyThFile( survey ) ) );
       addEntry( zos, new File( TDPath.getSurveyCsvFile( survey ) ) );
@@ -150,12 +191,14 @@ class Archiver
       addEntry( zos, new File( TDPath.getSurveyKmlFile( survey ) ) );
       addEntry( zos, new File( TDPath.getSurveyJsonFile( survey ) ) );
       addEntry( zos, new File( TDPath.getSurveyPltFile( survey ) ) );
+      addEntry( zos, new File( TDPath.getSurveyShzFile( survey ) ) );
       addEntry( zos, new File( TDPath.getSurveySrvFile( survey ) ) );
       addEntry( zos, new File( TDPath.getSurveySurFile( survey ) ) );
       addEntry( zos, new File( TDPath.getSurveySvxFile( survey ) ) );
       addEntry( zos, new File( TDPath.getSurveyTroFile( survey ) ) );
       addEntry( zos, new File( TDPath.getSurveyTrbFile( survey ) ) );
       addEntry( zos, new File( TDPath.getSurveyTopFile( survey ) ) );
+      addDirectory( zos, new File( TDPath.getShpPath( survey ) ) );
 
       addEntry( zos, new File( TDPath.getSurveyNoteFile( survey ) ) );
  
@@ -179,11 +222,12 @@ class Archiver
     return ret;
   }
 
-  int unArchive( String filename, String surveyname )
+  int unArchive( TopoDroidApp mApp, String filename, String surveyname )
   {
     boolean sql_success = false;
     int ok_manifest = -2;
     String pathname;
+    DataHelper app_data = TopoDroidApp.mData;
     try {
       // byte buffer[] = new byte[36768];
       byte[] buffer = new byte[4096];
@@ -216,6 +260,7 @@ class Archiver
           TopoDroidUtil.makeDir( TDPath.getDirFile( ze.getName() ) );
         } else {
           TDLog.Log( TDLog.LOG_ZIP, "Zip entry \"" + ze.getName() + "\"" );
+	  Log.v("DistoXX", "Zip entry " + ze.getName() );
           boolean sql = false;
           pathname = null;
           if ( ze.getName().equals( "manifest" ) ) {
@@ -255,6 +300,8 @@ class Archiver
             pathname = TDPath.getSurFile( ze.getName() );
           } else if ( ze.getName().endsWith( TDPath.SVX ) ) {
             pathname = TDPath.getSvxFile( ze.getName() );
+          } else if ( ze.getName().endsWith( TDPath.SHPZIP ) ) {
+            pathname = TDPath.getShzFile( ze.getName() );
 
           } else if ( ze.getName().endsWith( TDPath.TH ) ) {
             pathname = TDPath.getThFile( ze.getName() );
@@ -273,6 +320,8 @@ class Archiver
             pathname = TDPath.getTroFile( ze.getName() );
           } else if ( ze.getName().endsWith( TDPath.TOP ) ) {
             pathname = TDPath.getTopFile( ze.getName() );
+          } else if ( ze.getName().endsWith( TDPath.XVI ) ) {
+            pathname = TDPath.getXviFile( ze.getName() );
 
           } else if ( ze.getName().endsWith( TDPath.TXT ) ) {
             pathname = TDPath.getNoteFile( ze.getName() );

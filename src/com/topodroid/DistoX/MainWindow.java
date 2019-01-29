@@ -351,7 +351,10 @@ public class MainWindow extends Activity
   private ArrayAdapter< String > mMenuAdapter;
   
   // FIXME TOOLBAR Toolbar mToolbar;
-
+  
+  private boolean mWithPalettes = false;
+  private boolean mWithLogs     = false;
+  private boolean mWithBackupsClear = false;
 
   void setMenuAdapter( Resources res )
   {
@@ -359,7 +362,11 @@ public class MainWindow extends Activity
     // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
     mMenuAdapter = new ArrayAdapter<>(mActivity, R.layout.menu );
 
-    if ( TDLevel.overNormal )   mMenuAdapter.add( res.getString( menus[0] ) ); // PALETTE
+    mWithPalettes = TDLevel.overNormal && TDSetting.mPalettes;
+    mWithLogs     = TDLevel.overAdvanced;
+    mWithBackupsClear = TDLevel.overExpert && TDSetting.mBackupsClear;
+
+    if ( mWithPalettes ) mMenuAdapter.add( res.getString( menus[0] ) ); // PALETTE
     if ( TDLevel.overAdvanced ) mMenuAdapter.add( res.getString( menus[1] ) ); // LOGS
     if ( TDLevel.overExpert && TDSetting.mBackupsClear ) mMenuAdapter.add( res.getString( menus[2] ) ); // CLEAR_BACKUPS
     // if ( TDLevel.overExpert && mApp_mCosurvey ) mMenuAdapter.add( res.getString( menus[2] ) ); // IF_COSURVEY
@@ -385,16 +392,15 @@ public class MainWindow extends Activity
     // TDToast.make(item.toString() );
     int p = 0;
       Intent intent;
-      if ( TDLevel.overNormal && p++ == pos ) { // PALETTE EXTRA SYMBOLS
+      if ( mWithPalettes && p++ == pos ) { // PALETTE EXTRA SYMBOLS
         // BrushManager.makePaths( getResources() );
         // (new SymbolEnableDialog( mActivity )).show();
-
         (new SymbolReload( mActivity, mApp, TDLevel.overExpert )).show();
-      } else if ( TDLevel.overAdvanced && p++ == pos ) { // LOGS
+      } else if ( mWithLogs && p++ == pos ) { // LOGS
         intent = new Intent( mActivity, TDPrefActivity.class );
         intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_LOG );
         startActivity( intent );
-      } else if ( TDLevel.overExpert && TDSetting.mBackupsClear && p++ == pos ) { // CLEAR_BACKUPS
+      } else if ( mWithBackupsClear && p++ == pos ) { // CLEAR_BACKUPS
         TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.ask_backups_clear,
           new DialogInterface.OnClickListener() {
             @Override public void onClick( DialogInterface dialog, int btn ) { doBackupsClear(); }

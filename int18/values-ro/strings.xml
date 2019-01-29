@@ -999,6 +999,10 @@
   <string name="pref_extra_buttons_summary">Nivelul funcțiilor activate</string>
   <string name="pref_size_buttons_title">Mărimea butoanelor</string>
   <string name="pref_size_buttons_summary">Mărimea butoanelor de pe bara de acțiune</string>
+  <!-- TODO string name="pref_with_sensors_title">Sensors</string -->
+  <!-- TODO string name="pref_with_sensors_summary">Enable "sensors" data</string -->
+  <!-- TODO string name="pref_palettes_title">Palettes</string -->
+  <!-- TODO string name="pref_palettes_summary">Enable additional palettes</string -->
 
   <string name="pref_bezier_step_title">Spațierea punctelor</string>
   <string name="pref_bezier_step_summary">Distanța între puncte pe o linie export [m]</string>

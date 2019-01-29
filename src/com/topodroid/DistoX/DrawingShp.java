@@ -42,12 +42,15 @@ class DrawingShp
     float scale = 1.0f/DrawingUtil.SCALE_FIX; // TDSetting.mDxfScale; 
     float xoff = 0;
     float yoff = 0;
+    File dir   = null;
     try {
-      File dir = new File( basepath );
+      dir = new File( basepath );
       if ( ! dir.exists() && ! dir.mkdir() ) {
-	TDLog.Error("mkdir error");
-	return false;
+        TDLog.Error("mkdir error");
+        return false;
       }
+      ArrayList<File> files = new ArrayList<File>();
+
       // centerline data: shepafile of segments (fields: type, fron, to)
       // xoff+sh.x1, yoff+sh.y1  --  xoff+sh.x2, yoff+sh.y2
       ArrayList<DrawingPath> shots = new ArrayList<DrawingPath>();
@@ -59,7 +62,8 @@ class DrawingShp
           if ( sh.mBlock != null ) shots.add( sh );
         }
       }
-      ShpSegment shp_shot = new ShpSegment( basepath + "/shot" );
+      ShpSegment shp_shot = new ShpSegment( basepath + "/shot", files );
+
       shp_shot.writeSegments( shots, xoff, yoff, scale );
 
       // points shapefile
@@ -77,24 +81,34 @@ class DrawingShp
           areas.add( (DrawingAreaPath)path );
         }
       }
-      ShpPoint shp_point = new ShpPoint( basepath + "/point" );
+      ShpPoint shp_point = new ShpPoint( basepath + "/point", files );
       shp_point.writePoints( points, xoff, yoff, scale );
-      ShpPolyline shp_line = new ShpPolyline( basepath + "/line", DrawingPath.DRAWING_PATH_LINE );
+      ShpPolyline shp_line = new ShpPolyline( basepath + "/line", DrawingPath.DRAWING_PATH_LINE, files );
       shp_line.writeLines( lines, xoff, yoff, scale );
-      ShpPolyline shp_area = new ShpPolyline( basepath + "/area", DrawingPath.DRAWING_PATH_AREA );
+      ShpPolyline shp_area = new ShpPolyline( basepath + "/area", DrawingPath.DRAWING_PATH_AREA, files );
       shp_area.writeAreas( areas, xoff, yoff, scale );
 
       // stations: xoff+name.cx, yoff+name.cy
       List<DrawingStationName> stations = plot.getStations();
-      ShpStation shp_station = new ShpStation( basepath + "/station" );
+      ShpStation shp_station = new ShpStation( basepath + "/station", files );
       shp_station.writeStations( stations, xoff, yoff, scale );
 
       // Log.v("DistoX", "SHP export stations " + stations.size() + " points " + points.size() );
       
+      Archiver zipper = new Archiver( );
+      zipper.compressFiles( basepath + ".shz", files );
+      TDPath.deleteDir( basepath ); // delete temporary shapedir
 
     } catch ( IOException e ) {
       TDLog.Error( "SHP io-exception " + e.getMessage() );
       return false;
+    } finally {
+      if ( dir != null && dir.exists() ) {
+        for ( File file : dir.listFiles() ) {
+          if ( file.isFile() ) file.delete();
+        }
+	dir.delete();
+      }
     }
     return true;
   }

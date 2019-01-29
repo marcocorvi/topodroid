@@ -1017,6 +1017,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_extra_buttons_summary">Level of enabled features</string>
   <string name="pref_size_buttons_title">Buttons size</string>
   <string name="pref_size_buttons_summary">Size of action-bar buttons</string>
+  <string name="pref_with_sensors_title">Sensors</string>
+  <string name="pref_with_sensors_summary">Enable "sensors" data</string>
+  <string name="pref_palettes_title">Palettes</string>
+  <string name="pref_palettes_summary">Enable additional palettes</string>
 
   <string name="pref_bezier_step_title">Point spacing</string>
   <string name="pref_bezier_step_summary">Max. point spacing (polyline approx. of curves) [m]</string>

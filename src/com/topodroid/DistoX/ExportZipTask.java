@@ -20,10 +20,12 @@ class ExportZipTask extends AsyncTask< Void, Void, Boolean >
 {
   private Archiver mArchiver;
   private String   mSaved;
+  private TopoDroidApp mApp;
   
   ExportZipTask( Context context, TopoDroidApp app )
   {
-    mArchiver = new Archiver( app );
+    mApp   = app;
+    mArchiver = new Archiver( );
     mSaved    = context.getResources().getString( R.string.zip_saved );
   }
 
@@ -31,7 +33,7 @@ class ExportZipTask extends AsyncTask< Void, Void, Boolean >
   protected Boolean doInBackground( Void... arg )
   {
     TopoDroidApp.doExportDataSync( TDSetting.mExportShotsFormat );
-    return mArchiver.archive( );
+    return mArchiver.archive( mApp );
   }
 
   // @Override

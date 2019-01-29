@@ -984,6 +984,10 @@
   <string name="pref_extra_buttons_summary">Active des options supplémentaires</string>
   <string name="pref_size_buttons_title">Taille des boutons</string>
   <string name="pref_size_buttons_summary">Taille de la barre d\'action des boutons [pixels]</string>
+  <!-- TODO string name="pref_with_sensors_title">Sensors</string -->
+  <!-- TODO string name="pref_with_sensors_summary">Enable "sensors" data</string -->
+  <!-- TODO string name="pref_palettes_title">Palettes</string -->
+  <!-- TODO string name="pref_palettes_summary">Enable additional palettes</string -->
 
   <string name="pref_bezier_step_title">Espacement des points</string>
   <string name="pref_bezier_step_summary">Distance entre les points lors de l\'export ligne [m]</string>

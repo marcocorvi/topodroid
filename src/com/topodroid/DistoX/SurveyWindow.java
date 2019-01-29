@@ -269,6 +269,8 @@ public class SurveyWindow extends Activity
     Resources res = getResources();
     mNrButton1 = TDLevel.overNormal ? 6 
                : TDLevel.overBasic ? 3 : 2;
+    if ( ! TDSetting.mWithSensors ) mNrButton1 --;
+
     mButton1 = new Button[ mNrButton1 + 1 ];
     for ( int k=0; k < mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( mActivity, this, izons[k] );
@@ -345,7 +347,8 @@ public class SurveyWindow extends Activity
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // PHOTO CAMERA
       mActivity.startActivity( new Intent( mActivity, PhotoActivity.class ) );
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // SENSORS DATA
-      mActivity.startActivity( new Intent( mActivity, SensorListActivity.class ) );
+      // if ( TDSetting.mWithSensors )
+        mActivity.startActivity( new Intent( mActivity, SensorListActivity.class ) );
     }
   }
 
@@ -362,8 +365,8 @@ public class SurveyWindow extends Activity
 
     (new ExportZipTask( getApplicationContext(), mApp )).execute();
     // TopoDroidApp.doExportDataSync( TDSetting.mExportShotsFormat );
-    // Archiver archiver = new Archiver( mApp );
-    // if ( archiver.archive( ) ) {
+    // Archiver archiver = new Archiver( );
+    // if ( archiver.archive( mApp ) ) {
     //   String msg = getResources().getString( R.string.zip_saved ) + " " + archiver.zipname;
     //   TDToast.make( msg );
     // } else {
@@ -488,7 +491,7 @@ public class SurveyWindow extends Activity
   {
     if ( TDInstance.sid < 0 ) return;
     String survey = TDInstance.survey;
-    TDPath.deleteShpDirs( survey, mApp_mData.selectPlotNames( TDInstance.sid ) );
+    // TDPath.deleteShpDirs( survey, mApp_mData.selectPlotNames( TDInstance.sid ) );
     TDPath.deleteSurveyFiles( survey );
 
     for ( int status = 0; status < 2; ++status ) {
@@ -505,6 +508,8 @@ public class SurveyWindow extends Activity
         TDPath.deleteSurvey3dFiles( survey, sketches );
       }
     }
+
+    TDPath.deleteSurveyOverviewFiles( survey );
 
     mApp_mData.doDeleteSurvey( TDInstance.sid );
     mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, false, false ); // tell app to clear survey name and id
