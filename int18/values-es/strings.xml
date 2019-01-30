@@ -662,24 +662,6 @@
 
     <string name="length">Longitud [m]</string>
     <string name="azimuth">Rumbo [deg]</string>
-
-<!-- FIXME_SKETCH_3D
-    <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
-    <string name="title_sketch_new">Nuevo dibujo 3D</string>
-    <string name="title_sketch_shot">Nueva toma</string>
-    <string name="title_sketch_refs">Modo de vista</string>
--->
-    <!-- UNUSED string name="title_sketch_edit">Editar la superficie 3D</string -->
-    <!-- UNUSED string name="title_sketch_section_type">Tipo de secciones</string -->
-    <!-- UNUSED string name="title_sketch_select">Seleccione un elemento</string -->
-
-<!-- FIXME_SKETCH_3D
-    <string name="sketch_mode_single">Una sola toma</string>
-    <string name="sketch_mode_ngbh">Tomas cercanas</string>
-    <string name="sketch_mode_all">Todas las tomas</string>
-    <string name="sketch_delete">¿Quiere eliminar modelo 3D?</string>
--->
-    <!-- UNUSED string name="sketch_no_split">Sin refinamiento. Disminución lateral máx. Longitud para refinar más.</string -->
     <string name="clino">Clino [deg]</string>
 
     <string name="orientation">Orientación</string>
@@ -687,34 +669,9 @@
     <string name="error_distribution">Error distribucción</string>
     <string name="angle_distribution">Distribucción angular</string>
 
-    <!-- UNUSED string name="btn_head">head</string -->
-    <!-- UNUSED string name="btn_stretch">Stretch</string -->
-    <!-- UNUSED string name="btn_extrude">Extrude</string -->
-    <!-- UNUSED string name="btn_erase">erase</string -->
-    <!-- UNUSED string name="btn_cut">cut</string -->
-    <!-- UNUSED string name="btn_vertical">Vertical</string -->
     <string name="btn_horizontal">Horizontal</string>
 
-    <!-- select buttin labels -->
-    <!-- UNUSED string name="btn_section">Section</string -->
-    <!-- UNUSED string name="btn_step">Step</string -->
-    <!-- UNUSED string name="btn_shot">Shot</string -->
-    <!-- UNUSED string name="btn_join">Join</string -->
-
-    <!-- UNUSED string name="button_redraw">Redraw</string -->
-    <!-- UNUSED string name="button_erase">Erase</string -->
-    <!-- UNUSED string name="btn_surface">surface</string -->
-
-    <!-- UNUSED string name="station_next">NEXT</string -->
-
-    <!-- UNUSED string name="few_line_points">La línea tiene muy pocos puntos</string -->
-<!-- FIXME_SKETCH_3D
-    <string name="no_shot_between_stations">No hay tomas entre estaciones</string>
-    <string name="line_delete">Eliminar línea</string>
-    <string name="menu_head">CABEZA</string>
--->
     <!-- UNUSED string name="menu_save_th2">GUARDAR TH2</string -->
-<!-- DO NOT CHANGE THIS LINE. END_SKETCH_3D -->    
     <string name="split_nothing">Nada para dividir</string>
     <string name="flip_shots">Tomas contínuas</string>
     <string name="copy_items">Copiar elementos</string>
@@ -837,24 +794,6 @@
     <string name="help_cover">Distribución del ángulo de visualización de los datos de calibración</string>
     <string name="help_compute">Cálculo de calibración</string>
     <string name="help_write">Enviar calibración a DistoX</string>
-
-
-<!-- DO NOT CHANGE THIS LINE. FIXME_SKETCH_3D
-    <string name="help_one_model">Ajustar el modelo 3D para visualizar</string>
-    <string name="help_surface">Hacer superficie</string>
-    <string name="help_save_model">Exportar modelo 3D</string>
-    <string name="help_trash_model">Eliminar modelo 3D</string>
-    <string name="help_head_model">Orientar modelo 3D</string>
--->
-    <!-- UNUSED string name="help_refs_model">View mode</string -->
-    <!-- UNUSED string name="help_erase_model">Borrar región</string -->
-    <!-- UNUSED string name="help_cut_model">Cortar región</string -->
-    <!-- UNUSED string name="help_stretch_model">Alargar región</string -->
-    <!-- UNUSED string name="help_extrude_model">Extruir región</string -->
-    <!-- UNUSED string name="help_refine_center">Refinar superficie en centros triangulares</string -->
-    <!-- UNUSED string name="help_refine_sides">Refinar la superficie en los lados del triángulo</string -->
-    <!-- UNUSED string name="help_refine_point">Refinar la superficie en el punto</string -->
-    <!-- UNUSED string name="help_refine_triangle">Refinar la superficie de todos los lados largos</string -->
 
 
     <string name="title_azimut">Referencia declinación Magnética</string>
@@ -1295,21 +1234,6 @@
   <string name="pref_area_border_summary">Visibilidad predeterminada en el borde de área</string>
   <string name="pref_auto_section_pt_title">Punto de sección</string>
   <string name="pref_auto_section_pt_summary">Añadir punto de la sección a las líneas de sección</string>
-
-<!-- FIXME_SKETCH_3D
-  <string name="pref_sketchLineStep_title">Paso de la línea</string>
-  <string name="pref_sketchLineStep_summary">Distancia entre puntos de la línea</string>
-  <string name="pref_sketchDeltaExtrude_title">Extrusión delta</string>
-  <string name="pref_sketchDeltaExtrude_summary">Extrusión delta</string>
--->
-  <!-- UNUSED string name="pref_sketchUsesSplays_title">Tomas radiales en el dibujo</string -->
-  <!-- UNUSED string name="pref_sketchUsesSplays_summary">Utilizar tomas radiales en el dibujo</string -->
-  <!-- UNUSED string name="pref_sketchBorderStep_title">Paso borde</string -->
-  <!-- UNUSED string name="pref_sketchBorderStep_summary">Distancia entre puntos de edición de la línea</string -->
-  <!-- UNUSED string name="pref_sketchSectionStep_title">Sección paso</string -->
-  <!-- UNUSED string name="pref_sketchSectionStep_summary">Distancia entre las secciones</string -->
-  <!-- UNUSED string name="pref_sketchCompassReadings_title">Lecturas de la brújula</string -->
-  <!-- UNUSED string name="pref_sketchCompassReadings_summary">Promedio de lecturas</string -->
 
   <string name="pref_unit_length_title">Unidades de longitud</string>
   <string name="pref_unit_length_summary">Visualizar unidades de longitud</string>

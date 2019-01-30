@@ -457,18 +457,6 @@
     <string name="shot_reverse">развернуть</string>
     <string name="shot_to">№ НА</string>
 
-    <!-- UNUSED FIXME_SKETCH_3D
-    <string name="make_surface">Поверхность существует. Заменить?</string>
-    <string name="sketch3d_name">Название</string>
-    <string name="sketch3d_new">Новая 3D модель</string>
-    <string name="sketch3d_next">следующий пикет</string>
-    <string name="sketch3d_loading">загрузка модели &#8230;</string>
-    -->
-    <!-- UNUSED string name="sketch3d_null_name">Отсутствует название 3D абриса</string -->
-    <!-- UNUSED string name="sketch3d_null_next">Отсутствует следующий пикет 3D абриса</string -->
-    <!-- UNUSED string name="sketch3d_null_start">Отсутствует начальный пикет 3D абриса</string -->
-    <!-- UNUSED string name="sketch3d_start">начальный пикет</string -->
-
     <string name="station">пикет</string>
     <string name="station_ask">Добавить пикет в абрис?</string>
     <string name="station_del">Удалить пикет с абриса?</string>
@@ -669,26 +657,6 @@
 
     <string name="symbol_reload">Инструменты Рисования</string>
 
-<!-- FIXME_SKETCH_3D
-    <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
-    <string name="title_sketch_new">Новая 3D модель</string>
-    <string name="title_sketch_shot">Новый пикет</string>
-    <string name="title_sketch_refs">Режим показа</string>
--->    
-    <!-- UNUSED string name="title_sketch_edit">Изменить 3D поверхность</string -->
-    <!-- UNUSED string name="title_sketch_section_type">Типы разрезов</string -->
-    <!-- UNUSED string name="title_sketch_select">Выбрать</string -->
-
-<!-- FIXME_SKETCH_3D
-    <string name="sketch_mode_single">Отдельный пикет</string>
-    <string name="sketch_mode_ngbh">Соседние пикеты</string>
-    <string name="sketch_mode_all">Все пикеты</string>
-    <string name="sketch_mode_none">Нет поверхности</string>
-    <string name="sketch_delete">Удалить 3D модель ?</string>
-    <string name="sketch_clear">Очистить 3D модель ?</string>
--->    
-    <!-- UNUSED string name="sketch_no_split">Не точно. Уменьшите боковую макс. длинну чтобы уточнить.</string -->
-
     <string name="length">Длина [м]</string>
     <string name="azimuth">Азимут [грд]</string>
     <string name="clino">Угол [грд]</string>
@@ -698,33 +666,8 @@
     <string name="error_distribution">распределение ошибки</string>
     <string name="angle_distribution">угловое распределение</string>
 
-    <!-- UNUSED string name="btn_head">head</string -->
-    <!-- UNUSED string name="btn_stretch">Растянуть</string -->
-    <!-- UNUSED string name="btn_extrude">Вырезать</string -->
-    <!-- UNUSED string name="btn_erase">Стереть</string -->
-    <!-- UNUSED string name="btn_cut">Вырезать</string -->
-    <!-- UNUSED string name="btn_vertical">Вертикальный</string -->
     <string name="btn_horizontal">Горизонтальный</string>
 
-    <!-- select button labels -->
-    <!-- UNUSED string name="btn_section">Сечение</string -->
-    <!-- UNUSED string name="btn_step">Шаг</string -->
-    <!-- UNUSED string name="btn_shot">Пикет</string -->
-    <!-- UNUSED string name="btn_join">Сцепить</string -->
-
-    <!-- UNUSED string name="button_redraw">Перерисовать</string -->
-    <!-- UNUSED string name="button_erase">Стереть</string -->
-    <!-- UNUSED string name="btn_surface">Поверхность</string -->
-
-    <!-- UNUSED string name="station_next">СЛЕД.</string -->
-    <!-- UNUSED string name="few_line_points">Слишком мало точек в линии</string -->
-<!-- FIXME_SKETCH_3D
-    <string name="no_shot_between_stations">нет замера между пикетами</string>
-    <string name="line_delete">удалить_линию</string>
-    <string name="menu_head">Начало</string>
--->
-    <!-- UNUSED string name="menu_save_th2">сохр th2</string -->
-<!-- END_SKETCH_3D -->    
     <string name="split_nothing">Нечего разделять</string>
     <string name="flip_shots">Развернуть пикеты</string>
     <string name="copy_items">Копировать объекты</string>
@@ -847,23 +790,6 @@
     <string name="help_cover">Показать угловое распределение данных калибровки</string>
     <string name="help_compute">Рассчитать калибровку</string>
     <string name="help_write">Записать коэффициенты калибровки в DistoX</string>
-<!-- FIXME_SKETCH_3D
-    <string name="help_one_model">Вместить 3d модель в экран</string>
-    <string name="help_surface">Создать поверхность</string>
-    <string name="help_save_model">Экспорт 3D модели</string>
-    <string name="help_trash_model">Удалить 3D модель</string>
-    <string name="help_clear_model">Очистить 3D модель</string>
-    <string name="help_head_model">Ориентировать 3D модель</string>
--->
-    <!-- UNUSED string name="help_refs_model">Режим отображения</string -->
-    <!-- UNUSED string name="help_erase_model">Удалить область</string -->
-    <!-- UNUSED string name="help_cut_model">Обрезать область</string -->
-    <!-- UNUSED string name="help_stretch_model">Растянуть область</string -->
-    <!-- UNUSED string name="help_extrude_model">Вырезать область</string -->
-    <!-- UNUSED string name="help_refine_center">Уточнить поверхность в центре треугольников</string -->
-    <!-- UNUSED string name="help_refine_sides">Уточнить поверхность в сторонах треугольников</string -->
-    <!-- UNUSED string name="help_refine_point">Уточнить поверхность в точке</string -->
-    <!-- UNUSED string name="help_refine_triangle">Уточнить поверхность вдоль длинной стороны</string -->
   
     <string name="audio_paused">Пауза</string>
     <string name="audio_playing">Воспроизведение</string>
@@ -1308,23 +1234,6 @@
   <string name="pref_area_border_summary">Рисовать границы областей прозрачными</string>
   <string name="pref_auto_section_pt_title">Точки сечений</string>
   <string name="pref_auto_section_pt_summary">Добавить точки к линиям поперечных сечений</string>
-
-<!-- FIXME_SKETCH_3D
-  <string name="pref_sketchLineStep_title">Макс размер стороны</string>
-  <string name="pref_sketchLineStep_summary">Макс размер стороны треугольников</string>
-  <string name="pref_sketchDeltaExtrude_title">Масштаб вырезки</string>
-  <string name="pref_sketchDeltaExtrude_summary">Масштаб вырезок</string>
-  <string name="pref_sketchModelType_title">Тип модели стен</string>
-  <string name="pref_sketchModelType_summary">Модель для построения стен</string>
--->
-  <!-- UNUSED string name="pref_sketchUsesSplays_title">Абрис боковых замеров</string -->
-  <!-- UNUSED string name="pref_sketchUsesSplays_summary">Поверхность абриса использует боковые замеры</string -->
-  <!-- UNUSED string name="pref_sketchBorderStep_title">Шаг границы</string -->
-  <!-- UNUSED string name="pref_sketchBorderStep_summary">Расстоние между точками редактирования линии</string -->
-  <!-- UNUSED string name="pref_sketchSectionStep_title">Шаг сечений</string -->
-  <!-- UNUSED string name="pref_sketchSectionStep_summary">Расстоние между сечениями</string -->
-  <!-- UNUSED string name="pref_sketchCompassReadings_title">Значения азимута</string -->
-  <!-- UNUSED string name="pref_sketchCompassReadings_summary">Кол-во осредняемых значений азимутов</string -->
 
   <string name="pref_unit_length_title">Единицы измерения длины</string>
   <string name="pref_unit_length_summary">Отображаемые единицы изиерения длины</string>

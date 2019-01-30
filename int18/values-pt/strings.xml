@@ -452,17 +452,6 @@
     <string name="shot_reverse">inverter</string>
     <string name="shot_to">para</string>
 
-    <!-- UNUSED FIXME_SKETCH_3D
-    <string name="make_surface">A superfície existe. Subtituí-la?</string>
-    <string name="sketch3d_name">Nome</string>
-    <string name="sketch3d_new">Novo modelo 3D</string>
-    <string name="sketch3d_next">próxima base</string>
-    -->
-    <!-- UNUSED string name="sketch3d_null_name">Croqui 3D sem nome</string -->
-    <!-- UNUSED string name="sketch3d_null_next">Croqui 3D sem base seguinte</string -->
-    <!-- UNUSED string name="sketch3d_null_start">Croqui 3D sem base inicial</string -->
-    <!-- UNUSED string name="sketch3d_start">base inicial</string -->
-
     <string name="station">Base de referência</string>
     <string name="station_ask">Inserir a base no croqui?</string>
     <string name="station_del">Remover a base do croqui?</string>
@@ -663,24 +652,6 @@
 
     <string name="symbol_reload">Símbolos</string>
 
-<!-- FIXME_SKETCH_3D
-    <string name="title_sketch_new">Novo croqui 3D</string>
-    <string name="title_sketch_shot">Nova visada</string>
-    <string name="title_sketch_refs">Tipos de medidas apresentadas</string>
--->    
-    <!-- OK string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
-    <!-- UNUSED string name="title_sketch_edit">Editar superfície 3D</string -->
-    <!-- UNUSED string name="title_sketch_section_type">Tipo de cortes</string -->
-    <!-- UNUSED string name="title_sketch_select">Selecionar objeto</string -->
-
-<!-- FIXME_SKETCH_3D
-    <string name="sketch_mode_single">Visada única</string>
-    <string name="sketch_mode_ngbh">Visadas vizinhas</string>
-    <string name="sketch_mode_all">Todas as visadas</string>
-    <string name="sketch_delete">Apagar modelo 3D?</string>
--->    
-    <!-- UNUSED string name="sketch_no_split">Nenhum refinamento. Diminuir lado maior para refinar mais.</string -->
-
     <string name="length">Comprimento [m]</string>
     <string name="azimuth">Azimute [deg]</string>
     <string name="clino">Inclinação [deg]</string>
@@ -690,33 +661,8 @@
     <string name="error_distribution">distribuição do erro</string>
     <string name="angle_distribution">distribuição angular</string>
 
-    <!-- UNUSED string name="btn_head">Cabeça</string -->
-    <!-- UNUSED string name="btn_stretch">Esticar</string -->
-    <!-- UNUSED string name="btn_extrude">Extruir</string -->
-    <!-- UNUSED string name="btn_erase">Apagar</string -->
-    <!-- UNUSED string name="btn_cut">Cortar</string -->
-    <!-- UNUSED string name="btn_vertical">Vertical</string -->
     <string name="btn_horizontal">Horizontal</string>
 
-    <!-- select buttin labels -->
-    <!-- UNUSED string name="btn_section">Corte</string -->
-    <!-- UNUSED string name="btn_step">Passo</string -->
-    <!-- UNUSED string name="btn_shot">Visada</string -->
-    <!-- UNUSED string name="btn_join">Juntar</string -->
-
-    <!-- UNUSED string name="button_redraw">Redesenhar</string -->
-    <!-- UNUSED string name="button_erase">Apagar</string -->
-    <!-- UNUSED string name="btn_surface">Superfície</string -->
-
-    <!-- UNUSED string name="station_next">PRÓXIMO</string -->
-    <!-- UNUSED string name="few_line_points">A linha possui quantidade insuficiente de pontos</string -->
-<!-- FIXME_SKETCH_3D
-    <string name="no_shot_between_stations">nenhuma_visada_entre_as_bases</string>
-    <string name="line_delete">apagar_linha</string>
-    <string name="menu_head">CABEÇALHO</string>
--->
-    <!-- UNUSED string name="menu_save_th2">SALVAR TH2</string -->
-<!-- END_SKETCH_3D -->    
     <string name="split_nothing">Nada a ser dividido</string>
     <string name="flip_shots">Virar visadas</string>
     <string name="copy_items">Copiar itens</string>
@@ -839,23 +785,6 @@
     <string name="help_cover">Visualizar a distribuição angular dos dados de calibração</string>
     <string name="help_compute">Calcular calibração</string>
     <string name="help_write">Gravar coeficientes de calibração na DistoX</string>
-<!-- FIXME_SKETCH_3D
-    <string name="help_one_model">Encaixar o modelo 3D na visualização</string>
-    <string name="help_surface">Criar superfície</string>
-    <string name="help_save_model">Exportar modelo 3D</string>
-    <string name="help_trash_model">Apagar modelo 3D</string>
-    <string name="help_head_model">Orientar modelo 3D</string>
--->
-    <!-- UNUSED string name="help_refs_model">Modo de visualização</string -->
-    <!-- UNUSED string name="help_erase_model">Apagar região</string -->
-    <!-- UNUSED string name="help_cut_model">Cortar região</string -->
-    <!-- UNUSED string name="help_stretch_model">Esticar região</string -->
-    <!-- UNUSED string name="help_extrude_model">Extrudar região</string -->
-    <!-- UNUSED string name="help_refine_center">Melhorar superfície nos centros dos triângulos</string -->
-    <!-- UNUSED string name="help_refine_sides">Melhorar superfície nos lados dos triângulon</string -->
-    <!-- UNUSED string name="help_refine_point">Melhorar superfície no ponto</string -->
-    <!-- UNUSED string name="help_refine_triangle">Melhorar superfície nos lados longos</string -->
-  
 
     <string name="title_azimut">Referência para retificar perfil</string>
     <string name="title_audio">Áudio comentário</string>
@@ -1288,21 +1217,6 @@
   <string name="pref_area_border_summary">Visibilidade padrão das bordas da área</string>
   <string name="pref_auto_section_pt_title">Pontos corte</string>
   <string name="pref_auto_section_pt_summary">Adicionar ponto de corte às linhas de corte</string>
-
-<!-- FIXME_SKETCH_3D
-  <string name="pref_sketchLineStep_title">Lado máximo</string>
-  <string name="pref_sketchLineStep_summary">Tamanho máximo do lado do triângulo</string>
-  <string name="pref_sketchDeltaExtrude_title">Escala extrusão</string>
-  <string name="pref_sketchDeltaExtrude_summary">Fator escala de extrusão</string>
--->
-  <!-- UNUSED string name="pref_sketchUsesSplays_title">Medidas auxiliares croqui</string -->
-  <!-- UNUSED string name="pref_sketchUsesSplays_summary">Superfícies no croqui usas medidas auxiliares</string -->
-  <!-- UNUSED string name="pref_sketchBorderStep_title">Intervalo bordas</string -->
-  <!-- UNUSED string name="pref_sketchBorderStep_summary">Distância entre pontos da linha editada</string -->
-  <!-- UNUSED string name="pref_sketchSectionStep_title">Intervalo cortes</string -->
-  <!-- UNUSED string name="pref_sketchSectionStep_summary">Distância entre cortes</string -->
-  <!-- UNUSED string name="pref_sketchCompassReadings_title">Leituras bússola</string -->
-  <!-- UNUSED string name="pref_sketchCompassReadings_summary">Número de leituras para fazer a média</string -->
 
   <string name="pref_unit_length_title">Unidade distâncias</string>
   <string name="pref_unit_length_summary">Unidade para visualização de distâncias</string>

@@ -61,7 +61,7 @@ import android.bluetooth.BluetoothDevice;
 public class DeviceActivity extends Activity
                             implements View.OnClickListener
                             , OnItemClickListener
-                            , IEnableButtons
+                            , ICoeffDisplayer
                             , OnItemLongClickListener
                             // , RadioGroup.OnCheckedChangeListener
 {
@@ -394,7 +394,17 @@ public class DeviceActivity extends Activity
   }
 
 
-  @Override
+  // interface ICoeffDisplayer
+  // @Implements
+  public boolean isActivityFinishing() { return this.isFinishing(); }
+
+  // @Implements
+  public void displayCoeff( Vector bg, Matrix ag, Vector bm, Matrix am, Vector nL )
+  {
+    (new CalibCoeffDialog( this, mApp, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
+  }
+
+  // @Implements
   public void enableButtons( boolean enable ) 
   {
     mButton1[1].setEnabled( enable );
@@ -419,6 +429,7 @@ public class DeviceActivity extends Activity
       }
     }
   }
+
 
   @Override
   public void onClick(View v) 
@@ -489,7 +500,7 @@ public class DeviceActivity extends Activity
         TDToast.make( R.string.no_device_address );
       } else {
         enableButtons( false );
-        new CalibReadTask( this, this, mApp, CalibReadTask.PARENT_DEVICE ).execute();
+        new CalibReadTask( this, mApp, CalibReadTask.PARENT_DEVICE ).execute();
       }
 
     } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // DISTOX MEMORY TDLevel.overAdvanced

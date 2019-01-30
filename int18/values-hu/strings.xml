@@ -454,17 +454,6 @@
     <string name="shot_reverse">visszamérés</string>
     <string name="shot_to">hová</string>
 
-    <!-- UNUSED FIXME_SKETCH_3D
-    <string name="make_surface">Felszín létezik. Kicseréli?</string>
-    <string name="sketch3d_name">név</string>
-    <string name="sketch3d_new">Új 3D model</string>
-    <string name="sketch3d_next">következő mérési pont</string>
-    -->
-    <!-- UNUSED string name="sketch3d_null_name">Missing 3D sketch name</string -->
-    <!-- UNUSED string name="sketch3d_null_next">Missing 3D sketch next station</string -->
-    <!-- UNUSED string name="sketch3d_null_start">Missing 3D sketch base station</string -->
-    <!-- UNUSED string name="sketch3d_start">base station</string -->
-
     <string name="station">mérési pont</string>
     <string name="station_ask">Beilleszt mérési pontot a vázlatba?</string>
     <string name="station_del">Eltávolítja a mérési pontot a vázlatból?</string>
@@ -665,24 +654,6 @@
 
     <string name="symbol_reload">Rajz eszközök</string>
 
-<!-- FIXME_SKETCH_3D
-    <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
-    <string name="title_sketch_new">Új 3D vázlat</string>
-    <string name="title_sketch_shot">Új mérés</string>
-    <string name="title_sketch_refs">Nézet mód</string>
--->    
-    <!-- UNUSED string name="title_sketch_edit">Edit 3D surface</string -->
-    <!-- UNUSED string name="title_sketch_section_type">Sections type</string -->
-    <!-- UNUSED string name="title_sketch_select">Select item</string -->
-
-<!-- FIXME_SKETCH_3D
-    <string name="sketch_mode_single">Szimpla mérés</string>
-    <string name="sketch_mode_ngbh">Közeli mérések</string>
-    <string name="sketch_mode_all">Minden mérés</string>
-    <string name="sketch_delete">Törli a 3D modellt?</string>
--->    
-    <!-- UNUSED string name="sketch_no_split">Nem lehet finomítani. Csökkentsd az oldal max. hosszát a további pontosításhoz</string -->
-
     <string name="length">Hossz [m]</string>
     <string name="azimuth">Irányszög [fok]</string>
     <string name="clino">Lejtszög [fok]</string>
@@ -692,33 +663,8 @@
     <string name="error_distribution">hiba eloszlás</string>
     <string name="angle_distribution">szögeloszlás</string>
 
-    <!-- UNUSED string name="btn_head">head</string -->
-    <!-- UNUSED string name="btn_stretch">Stretch</string -->
-    <!-- UNUSED string name="btn_extrude">Extrude</string -->
-    <!-- UNUSED string name="btn_erase">erase</string -->
-    <!-- UNUSED string name="btn_cut">cut</string -->
-    <!-- UNUSED string name="btn_vertical">Vertical</string -->
     <!-- TODO string name="btn_horizontal">Horizontal</string -->
 
-    <!-- select buttin labels -->
-    <!-- UNUSED string name="btn_section">Section</string -->
-    <!-- UNUSED string name="btn_step">Step</string -->
-    <!-- UNUSED string name="btn_shot">Shot</string -->
-    <!-- UNUSED string name="btn_join">Join</string -->
-
-    <!-- UNUSED string name="button_redraw">Redraw</string -->
-    <!-- UNUSED string name="button_erase">Erase</string -->
-    <!-- UNUSED string name="btn_surface">surface</string -->
-
-    <!-- UNUSED string name="station_next">NEXT</string -->
-    <!-- UNUSED string name="few_line_points">A vonalnak túl kevés pontja van</string -->
-<!-- FIXME_SKETCH_3D
-    <string name="no_shot_between_stations">nincs_mérés_a_pontok_között</string>
-    <string name="line_delete">vonal_törlése</string>
-    <string name="menu_head">FEJLÉC</string>
--->
-    <!-- UNUSED string name="menu_save_th2">SAVE TH2</string -->
-<!-- END_SKETCH_3D -->    
     <string name="split_nothing">Nem megosztható</string>
     <string name="flip_shots">Mérések_megfordítása </string>
     <string name="copy_items">Tételek másolása</string>
@@ -839,23 +785,6 @@
     <string name="help_cover">A kalibrációs adatok szögeloszlásának bemutatása</string>
     <string name="help_compute">Kalibráció számítása</string>
     <string name="help_write">Kalibrációs együttható feltöltése a DistoX-be</string>
-<!-- FIXME_SKETCH_3D 
-    <string name="help_one_model">3D modell igazítása a nézethez</string>
-    <string name="help_surface">Felszín létrehozása</string>
-    <string name="help_save_model">3D modell exportálása</string>
-    <string name="help_trash_model">3D modell törlése</string>
-    <string name="help_head_model">3D modell tájolása</string>
--->
-    <!-- UNUSED string name="help_refs_model">View mode</string -->
-    <!-- UNUSED string name="help_erase_model">Erase region</string -->
-    <!-- UNUSED string name="help_cut_model">Terület kivágása</string -->
-    <!-- UNUSED string name="help_stretch_model">Terület kiterjesztése</string -->
-    <!-- UNUSED string name="help_extrude_model">Extrude region</string -->
-    <!-- UNUSED string name="help_refine_center">Felület finomítása a háromszögek középpontjában</string -->
-    <!-- UNUSED string name="help_refine_sides">Felület finomítása a háromszögek oldalai mentén</string -->
-    <!-- UNUSED string name="help_refine_point">Felület finomítása adott pontban</string -->
-    <!-- UNUSED string name="help_refine_triangle">Felület finomítása a hosszú oldalak mentén</string -->
-  
 
     <string name="title_azimut">Vonatkozási rendszer</string>
     <string name="title_audio">Hangjegyzet</string>
@@ -1287,21 +1216,6 @@
   <string name="pref_area_border_summary">Területhatár alapértelmezett láthatósága</string>
   <string name="pref_auto_section_pt_title">Szelvény pontok</string>
   <string name="pref_auto_section_pt_summary">Szelvénypontok hozzáadása a szelvényvonalhoz</string>
-
-<!-- FIXME_SKETCH_3D
-  <string name="pref_sketchLineStep_title">Max. oldalhossz</string>
-  <string name="pref_sketchLineStep_summary">Háromszög oldalainak maximális hossza </string>
-  <string name="pref_sketchDeltaExtrude_title">Kihúzás mértéke</string>
-  <string name="pref_sketchDeltaExtrude_summary">Kihúzási tényező</string>
--->
-  <!-- UNUSED string name="pref_sketchUsesSplays_title">Segédmérések a vázlaton</string -->
-  <!-- UNUSED string name="pref_sketchUsesSplays_summary">A vázlaton megjelennek a segédmérések</string -->
-  <!-- UNUSED string name="pref_sketchBorderStep_title">Határvonal osztásköze</string -->
-  <!-- UNUSED string name="pref_sketchBorderStep_summary">Távolság a szerkesztővonal pontjai között</string -->
-  <!-- UNUSED string name="pref_sketchSectionStep_title">Szelvény köz</string -->
-  <!-- UNUSED string name="pref_sketchSectionStep_summary">Szelvények távolsága</string -->
-  <!-- UNUSED string name="pref_sketchCompassReadings_title">Tájoló leolvasások</string -->
-  <!-- UNUSED string name="pref_sketchCompassReadings_summary">Leolvasások száma az átlagoláshoz</string -->
 
   <string name="pref_unit_length_title">Hossz mértékegysége</string>
   <string name="pref_unit_length_summary">Hosszak megjelenítési egysége</string>

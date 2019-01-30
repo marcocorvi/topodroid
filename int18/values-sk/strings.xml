@@ -464,18 +464,6 @@
     <string name="shot_reverse">Vymeniť body</string>
     <string name="shot_to">Na</string>
 
-    <!-- UNUSED FIXME_SKETCH_3D
-    <string name="make_surface">Povrch existuje. Nahradiť ho?</string>
-    <string name="sketch3d_name">Meno modelu</string>
-    <string name="sketch3d_new">Nový model</string>
-    <string name="sketch3d_next">Nasledujúce staničenie</string>
-    <string name="sketch3d_loading">Model sa nahráva &#8230;</string>
-    -->
-    <!-- NO string name="sketch3d_null_name">Missing 3D sketch name</string -->
-    <!-- NO string name="sketch3d_null_next">Missing 3D sketch next station</string -->
-    <!-- NO string name="sketch3d_null_start">Missing 3D sketch base station</string -->
-    <!-- NO string name="sketch3d_start">base station</string -->
-
     <string name="station">Merací bod</string>
     <string name="station_ask">Vložiť meracie body do nákresu?</string>
     <string name="station_del">Odstrániť meracie body z nákresu?</string>
@@ -681,26 +669,6 @@
 
     <string name="symbol_reload">Symboly na kreslenie</string>
 
-<!-- FIXME_SKETCH_3D
-    <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
-    <string name="title_sketch_new">Nový 3D nákres</string>
-    <string name="title_sketch_shot">Nová zámera</string>
-    <string name="title_sketch_refs">Výber možností zobrazenia</string>
--->    
-    <!-- UNUSED string name="title_sketch_edit">Edit 3D surface</string -->
-    <!-- UNUSED string name="title_sketch_section_type">Tipo di sezioni</string -->
-    <!-- UNUSED string name="title_sketch_select">Seleziona un oggetto</string -->
-
-<!-- FIXME_SKETCH_3D
-    <string name="sketch_mode_single">Jedna zámera</string>
-    <string name="sketch_mode_ngbh">Blízke zámery</string>
-    <string name="sketch_mode_all">Všetky zámery</string>
-    <string name="sketch_mode_none">Bez povrchu</string>
-    <string name="sketch_delete">Zmazať 3D model?</string>
-    <string name="sketch_clear">Vyčistiť 3D model ?</string>
--->    
-    <!-- UNUSED string name="sketch_no_split">Nessun raffinamento. Diminuire lato max. Lunghezza da raffinare ulteriormente.</string -->
-   
     <string name="length">Dĺžka [m]</string>
     <string name="azimuth">Azimut [deg]</string>
     <string name="clino">Sklon [deg]</string>
@@ -710,33 +678,8 @@
     <string name="error_distribution">Chyba distribúcie</string>
     <string name="angle_distribution">Uhlová distribúcia</string>
 
-    <!-- UNUSED string name="btn_head">head</string -->
-    <!-- UNUSED string name="btn_stretch">Stretch</string -->
-    <!-- UNUSED string name="btn_extrude">Extrude</string -->
-    <!-- UNUSED string name="btn_erase">erase</string -->
-    <!-- UNUSED string name="btn_cut">cut</string -->
-    <!-- UNUSED string name="btn_vertical">Vertical</string -->
     <string name="btn_horizontal">Horizontálny</string>
 
-    
-    <!-- UNUSED string name="btn_section">Section</string -->
-    <!-- UNUSED string name="btn_step">Step</string -->
-    <!-- UNUSED string name="btn_shot">Shot</string -->
-    <!-- UNUSED string name="btn_join">Join</string -->
-
-    <!-- UNUSED string name="button_redraw">Redraw</string -->
-    <!-- UNUSED string name="button_erase">Erase</string -->
-    <!-- UNUSED string name="btn_surface">surface</string -->
-
-    <!-- UNUSED string name="station_next">NEXT</string -->
-    <!-- UNUSED string name="few_line_points">Čiara má príliš málo bodov</string -->
-<!-- FIXME_SKETCH_3D
-    <string name="no_shot_between_stations">Žiadna zámera medzi bodmi</string>
-    <string name="line_delete">Odstrániť čiaru</string>
-    <string name="menu_head">Hlavné menu</string>
--->
-    <!-- UNUSED string name="menu_save_th2">SAVE TH2</string -->
-<!-- END_SKETCH_3D -->    
     <string name="split_nothing">Nič na rozdelenie</string>
     <string name="flip_shots">Obrátiť aj zámery (nezaškrtnuté otočí len krezbu)</string>
     <string name="copy_items">Kopírovanie položiek</string>
@@ -860,23 +803,6 @@
     <string name="help_cover">Distribúcia kalibračných dát v 3D sfére - azimut a sklon</string>
     <string name="help_compute">Vypočítať kalibráciu</string>
     <string name="help_write">Zapísať kalibráčné koeficienty do DistaX</string>
-<!-- FIXME_SKETCH_3D
-    <string name="help_one_model">prispôsobiť 3D model na zobrazenie</string>
-    <string name="help_surface">Vytvoriť povrch</string>
-    <string name="help_save_model">Exportovať 3D model</string>
-    <string name="help_trash_model">Odstrániť 3D model</string>
-    <string name="help_clear_model">Vyčistiť 3D model</string>
-    <string name="help_head_model">Orientovať 3D model</string>
--->
-    <!-- UNUSED string name="help_refs_model">View mode</string -->
-    <!-- UNUSED string name="help_erase_model">Erase region</string -->
-    <!-- UNUSED string name="help_cut_model">Cut region</string -->
-    <!-- UNUSED string name="help_stretch_model">Stretch region</string -->
-    <!-- UNUSED string name="help_extrude_model">Extrude region</string -->
-    <!-- UNUSED string name="help_refine_center">Refine surface at triangle centers</string -->
-    <!-- UNUSED string name="help_refine_sides">Refine surface at triangle sides</string -->
-    <!-- UNUSED string name="help_refine_point">Refine surface at point</string -->
-    <!-- UNUSED string name="help_refine_triangle">Refine surface al the long sides</string -->
     
     <string name="audio_paused">Pauza</string>
     <string name="audio_playing">Prehrávanie</string>
@@ -1320,23 +1246,6 @@
   <string name="pref_area_border_summary">Predvolená viditeľnosť hraníc Oblastí (pre export do Therionu)</string>
   <string name="pref_auto_section_pt_title">Body pri priečnom reze</string>
   <string name="pref_auto_section_pt_summary">Pridanie štvorca do nákresu, ktorý indikuje vytvorený priečny rez</string>
-
-<!-- FIXME_SKETCH_3D
-  <string name="pref_sketchLineStep_title">Maxinálna strana</string>
-  <string name="pref_sketchLineStep_summary">Maximálna veľkosť strany trojuholníka</string>
-  <string name="pref_sketchDeltaExtrude_title">Extrude mierka</string>
-  <string name="pref_sketchDeltaExtrude_summary">Extrude mierka</string>
-  <string name="pref_sketchModelType_title">Typ modelu</string>
-  <string name="pref_sketchModelType_summary">Model rekonštrukcie steny</string>	
--->
-  <!-- UNUSED string name="pref_sketchUsesSplays_title">Pomocné merania nákresu</string -->
-  <!-- UNUSED string name="pref_sketchUsesSplays_summary">Nákresový povrch používa pomocné meranie</string -->
-  <!-- UNUSED string name="pref_sketchBorderStep_title">Hraničný krok</string -->
-  <!-- UNUSED string name="pref_sketchBorderStep_summary">Vzdialenosť medzi bodmi editovacieho riadku</string -->
-  <!-- UNUSED string name="pref_sketchSectionStep_title">Krok sekcie</string -->
-  <!-- UNUSED string name="pref_sketchSectionStep_summary">Vzdialenosť medzi sekciami</string -->
-  <!-- UNUSED string name="pref_sketchCompassReadings_title">Čítania kompasu</string -->
-  <!-- UNUSED string name="pref_sketchCompassReadings_summary">Počet čítaní na výpočet priemeru</string -->
 
   <string name="pref_unit_length_title">Jednotky dĺžky</string>
   <string name="pref_unit_length_summary">Výber Jednotiek dĺžky</string>

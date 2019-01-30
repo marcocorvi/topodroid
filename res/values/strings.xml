@@ -464,18 +464,6 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="shot_reverse">reverse</string>
     <string name="shot_to">to</string>
 
-    <!-- UNUSED FIXME_SKETCH_3D
-    <string name="make_surface">Surface exists. Replace it?</string>
-    <string name="sketch3d_name">name</string>
-    <string name="sketch3d_new">New model</string>
-    <string name="sketch3d_next">next station</string>
-    <string name="sketch3d_loading">loading model &#8230;</string>
-    -->
-    <!-- UNUSED string name="sketch3d_null_name">Missing 3D sketch name</string -->
-    <!-- UNUSED string name="sketch3d_null_next">Missing 3D sketch next station</string -->
-    <!-- UNUSED string name="sketch3d_null_start">Missing 3D sketch base station</string -->
-    <!-- UNUSED string name="sketch3d_start">base station</string -->
-
     <string name="station">station</string>
     <string name="station_ask">Insert station in sketch?</string>
     <string name="station_del">Remove station from sketch?</string>
@@ -681,26 +669,6 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
     <string name="symbol_reload">Drawing Tools</string>
 
-<!-- FIXME_SKETCH_3D
-    <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
-    <string name="title_sketch_new">New 3D sketch</string>
-    <string name="title_sketch_shot">New shot</string>
-    <string name="title_sketch_refs">View mode</string>
--->    
-    <!-- UNUSED string name="title_sketch_edit">Edit 3D surface</string -->
-    <!-- UNUSED string name="title_sketch_section_type">Sections type</string -->
-    <!-- UNUSED string name="title_sketch_select">Select item</string -->
-
-<!-- FIXME_SKETCH_3D
-    <string name="sketch_mode_single">Single shot</string>
-    <string name="sketch_mode_ngbh">Nearby shots</string>
-    <string name="sketch_mode_all">All shots</string>
-    <string name="sketch_mode_none">No surface</string>
-    <string name="sketch_delete">Delete 3D model ?</string>
-    <string name="sketch_clear">Clear 3D model ?</string>
--->    
-    <!-- UNUSED string name="sketch_no_split">No refinement. Decrease side max. length to refine further.</string -->
-
     <string name="length">Length [m]</string>
     <string name="azimuth">Azimuth [deg]</string>
     <string name="clino">Clino [deg]</string>
@@ -710,33 +678,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="error_distribution">error distribution</string>
     <string name="angle_distribution">angular distribution</string>
 
-    <!-- UNUSED string name="btn_head">head</string -->
-    <!-- UNUSED string name="btn_stretch">Stretch</string -->
-    <!-- UNUSED string name="btn_extrude">Extrude</string -->
-    <!-- UNUSED string name="btn_erase">erase</string -->
-    <!-- UNUSED string name="btn_cut">cut</string -->
-    <!-- UNUSED string name="btn_vertical">Vert.</string -->
     <string name="btn_horizontal">Horiz.</string>
 
-    <!-- select buttin labels -->
-    <!-- UNUSED string name="btn_section">Section</string -->
-    <!-- UNUSED string name="btn_step">Step</string -->
-    <!-- UNUSED string name="btn_shot">Shot</string -->
-    <!-- UNUSED string name="btn_join">Join</string -->
-
-    <!-- UNUSED string name="button_redraw">Redraw</string -->
-    <!-- UNUSED string name="button_erase">Erase</string -->
-    <!-- UNUSED string name="btn_surface">surface</string -->
-
-    <!-- UNUSED string name="station_next">NEXT</string -->
-    <!-- UNUSED string name="few_line_points">Line has too few points</string -->
-<!-- FIXME_SKETCH_3D
-    <string name="no_shot_between_stations">no_shot_between_stations</string>
-    <string name="line_delete">line_delete</string>
-    <string name="menu_head">HEAD</string>
--->
-    <!-- UNUSED string name="menu_save_th2">SAVE TH2</string -->
-<!-- END_SKETCH_3D -->    
     <string name="split_nothing">Nothing to split</string>
     <string name="flip_shots">Flip shots</string>
     <string name="copy_items">Copy items</string>
@@ -860,23 +803,6 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_cover">Angle distribution of calibration data</string>
     <string name="help_compute">Compute calibration</string>
     <string name="help_write">Write calibration coefficients to the DistoX</string>
-<!-- FIXME_SKETCH_3D 
-    <string name="help_one_model">Fit 3d model to view</string>
-    <string name="help_surface">Make surface</string>
-    <string name="help_save_model">Export 3D model</string>
-    <string name="help_trash_model">Delete 3D model</string>
-    <string name="help_clear_model">Clear 3D model</string>
-    <string name="help_head_model">Orient 3D model</string>
--->
-    <!-- UNUSED string name="help_refs_model">View mode</string -->
-    <!-- UNUSED string name="help_erase_model">Erase region</string -->
-    <!-- UNUSED string name="help_cut_model">Cut region</string -->
-    <!-- UNUSED string name="help_stretch_model">Stretch region</string -->
-    <!-- UNUSED string name="help_extrude_model">Extrude region</string -->
-    <!-- UNUSED string name="help_refine_center">Refine surface at triangle centers</string -->
-    <!-- UNUSED string name="help_refine_sides">Refine surface at triangle sides</string -->
-    <!-- UNUSED string name="help_refine_point">Refine surface at point</string -->
-    <!-- UNUSED string name="help_refine_triangle">Refine surface al the long sides</string -->
   
     <string name="audio_paused">Paused</string>
     <string name="audio_playing">Playing</string>
@@ -991,7 +917,6 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
   <string name="pref_cat_device">DEVICES</string>
   <string name="pref_cat_geek">GEEK FLAGS</string>
-  <string name="pref_cat_sketch">3D MODELS</string>
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
 
   <string name="pref_locale_title">Language</string>
@@ -1320,23 +1245,6 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_area_border_summary">Area border default visibility</string>
   <string name="pref_auto_section_pt_title">Section points</string>
   <string name="pref_auto_section_pt_summary">Add section point to section lines</string>
-
-<!-- FIXME_SKETCH_3D
-  <string name="pref_sketchLineStep_title">Max side</string>
-  <string name="pref_sketchLineStep_summary">Maximum size of a triangle side</string>
-  <string name="pref_sketchDeltaExtrude_title">Extrude scale</string>
-  <string name="pref_sketchDeltaExtrude_summary">Extrude scale factor</string>
-  <string name="pref_sketchModelType_title">Model type</string>
-  <string name="pref_sketchModelType_summary">Model wall reconstruction</string>
--->
-  <!-- UNUSED string name="pref_sketchUsesSplays_title">Sketch splays</string -->
-  <!-- UNUSED string name="pref_sketchUsesSplays_summary">Sketch surface uses splays</string -->
-  <!-- UNUSED string name="pref_sketchBorderStep_title">Border step</string -->
-  <!-- UNUSED string name="pref_sketchBorderStep_summary">Distance between edit-line points</string -->
-  <!-- UNUSED string name="pref_sketchSectionStep_title">Section step</string -->
-  <!-- UNUSED string name="pref_sketchSectionStep_summary">Distance between sections</string -->
-  <!-- UNUSED string name="pref_sketchCompassReadings_title">Compass readings</string -->
-  <!-- UNUSED string name="pref_sketchCompassReadings_summary">Number of readings to average</string -->
 
   <string name="pref_unit_length_title">Length units</string>
   <string name="pref_unit_length_summary">Display units for lengths</string>

@@ -58,7 +58,7 @@ import android.graphics.drawable.BitmapDrawable;
 public class GMActivity extends Activity
                         implements OnItemClickListener
                         , ILister
-                        , IEnableButtons
+                        , ICoeffDisplayer
                         , OnClickListener
                         , OnLongClickListener
 {
@@ -772,7 +772,17 @@ public class GMActivity extends Activity
     }
   }
 
-  @Override
+  // interface ICoeffDisplayer
+  // @Implements
+  public boolean isActivityFinishing() { return this.isFinishing(); }
+
+  // @Implements
+  public void displayCoeff( Vector bg, Matrix ag, Vector bm, Matrix am, Vector nL )
+  {
+    (new CalibCoeffDialog( this, mApp, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
+  }
+
+  // @Implements
   public void enableButtons( boolean enable )
   {
     boolean enable2 = enable && mEnableWrite;
@@ -919,7 +929,7 @@ public class GMActivity extends Activity
 
     } else if ( TDLevel.overNormal && b == mButton1[BTN_READ] ) { // READ
       enableButtons( false );
-      new CalibReadTask( this, this, mApp, CalibReadTask.PARENT_GM ).execute(); // 
+      new CalibReadTask( this, mApp, CalibReadTask.PARENT_GM ).execute(); // 
 
     } else if (TDLevel.overNormal &&  b == mButton1[BTN_WRITE] ) { // WRITE
       // if ( mEnableWrite ) {

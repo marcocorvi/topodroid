@@ -22,12 +22,12 @@ import android.os.AsyncTask;
 class CalibToggleTask extends AsyncTask<Void, Integer, Boolean>
 {
   private WeakReference<TopoDroidApp> mApp; // FIXME LEAK
-  private final IEnableButtons mEnableButtons;
+  private WeakReference<ICoeffDisplayer> mParent;
 
-  CalibToggleTask( IEnableButtons eb, TopoDroidApp app )
+  CalibToggleTask( ICoeffDisplayer parent, TopoDroidApp app )
   {
     mApp = new WeakReference<TopoDroidApp>( app );
-    mEnableButtons = eb;
+    mParent = new WeakReference<ICoeffDisplayer>( parent );
   }
 
   @Override
@@ -49,6 +49,8 @@ class CalibToggleTask extends AsyncTask<Void, Integer, Boolean>
     } else {
       TDToast.make( R.string.toggle_failed );
     }
-    mEnableButtons.enableButtons( true );
+    if ( mParent.get() != null && !mParent.get().isActivityFinishing() ) {
+      mParent.get().enableButtons( true );
+    }
   }
 }

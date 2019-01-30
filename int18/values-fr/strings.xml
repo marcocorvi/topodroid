@@ -454,17 +454,6 @@
     <string name="shot_reverse">Inverse</string>
     <string name="shot_to">À ou VERS</string>
 
-    <!-- UNUSED FIXME_SKETCH_3D
-    <string name="make_surface">Cette surface existe. La remplacer ?</string>
-    <string name="sketch3d_name">Nom</string>
-    <string name="sketch3d_new">Nouveau modèle 3D</string>
-    <string name="sketch3d_next">Station suivante</string>
-    -->
-    <!-- UNUSED string name="sketch3d_null_name">Missing 3D sketch name</string -->
-    <!-- UNUSED string name="sketch3d_null_next">Missing 3D sketch next station</string -->
-    <!-- UNUSED string name="sketch3d_null_start">Missing 3D sketch base station</string -->
-    <!-- UNUSED string name="sketch3d_start">station de base</string -->
-
     <string name="station">Station</string>
     <string name="station_ask">Insérer station ?</string>
     <string name="station_del">Supprimer la station du croquis ?</string>
@@ -666,24 +655,6 @@
     <string name="symbol_reload">Outils de dessin</string>
 
 
-<!-- FIXME_SKETCH_3D
-    <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
-    <string name="title_sketch_new">Nouveau croquis 3D</string>
-    <string name="title_sketch_shot">Nouveau Tir</string>
-    <string name="title_sketch_refs">Mode Vue</string>
--->
-    <!-- UNUSED string name="title_sketch_edit">Edit 3D surface</string -->
-    <!-- UNUSED string name="title_sketch_section_type">Sections type</string -->
-    <!-- UNUSED string name="title_sketch_select">Select item</string -->
-
-<!-- FIXME_SKETCH_3D
-    <string name="sketch_mode_single">Simple point</string>
-    <string name="sketch_mode_ngbh">Points autour</string>
-    <string name="sketch_mode_all">Tous les points</string>
-    <string name="sketch_delete">Suprimer le modèle 3D ?</string>
--->
-    <!-- UNUSED string name="sketch_no_split">Aucun épuration. Réduire le côté à la taille maximum pour une épuration ultérieure.</string -->
-
     <string name="length">Longueur [m]</string>
     <string name="azimuth">Azimut [deg]</string>
     <!-- OK string name="clino">Clino [deg]</string -->
@@ -693,33 +664,8 @@
     <string name="error_distribution">Répartition d\'erreur</string>
     <string name="angle_distribution">Répartition angulaire</string>
 
-    <!-- string name="btn_head">head</string -->
-    <!-- string name="btn_stretch">Stretch</string -->
-    <!-- string name="btn_extrude">Extrude</string -->
-    <!-- string name="btn_erase">erase</string -->
-    <!-- string name="btn_cut">cut</string -->
-    <!-- string name="btn_vertical">Vertical</string -->
     <string name="btn_horizontal">Horizontal</string>
 
-    <!-- select button labels -->
-    <!-- UNUSED string name="btn_section">Section</string -->
-    <!-- UNUSED string name="btn_step">Pas</string -->
-    <!-- UNUSED string name="btn_shot">Point</string -->
-    <!-- UNUSED string name="btn_join">Joindre</string -->
-
-    <!-- UNUSED string name="button_redraw">Redraw</string -->
-    <!-- UNUSED string name="button_erase">Effacer</string -->
-    <!-- UNUSED string name="btn_surface">surface</string -->
-
-    <!-- UNUSED string name="station_next">SUIVANT</string -->
-    <!-- UNUSED string name="few_line_points">La ligne contient trop peu de points</string -->
-<!-- FIXME_SKETCH_3D
-    <string name="no_shot_between_stations">Pas de point entre les stations</string>
-    <string name="line_delete">Supprimer la ligne</string>
--->
-    <!-- OK SKETCH3D non utilisé string name="menu_head">HEAD</string -->
-    <!-- string name="menu_save_th2">SAVE TH2</string -->
-<!-- END_SKETCH_3D -->
     <string name="split_nothing">Rien à diviser</string>
     <string name="flip_shots">Inverser les points</string>
     <string name="copy_items">Copie des données</string>
@@ -840,23 +786,6 @@
     <string name="help_cover">Affiche la distribution des données d\'étalonnage</string>
     <string name="help_compute">Calcule l\'étalonnage</string>
     <string name="help_write">Écrit les coefficients d\'étalonnage sur le DistoX</string>
-<!-- FIXME_SKETCH_3D
-    <string name="help_one_model">Ajuster le modèle 3D à la vue</string>
--->
-    <!-- string name="help_surface">Make surface</string -->
-    <!-- string name="help_save_model">Export 3D model</string -->
-    <!-- string name="help_trash_model">Delete 3D model</string -->
-    <!-- string name="help_head_model">Orient 3D model</string -->
-    <!-- string name="help_erase_model">Erase region</string -->
-    <!-- UNUSED string name="help_refs_model">Mode vueView mode</string -->
-    <!-- UNUSED string name="help_cut_model">Cut region</string -->
-    <!-- UNUSED string name="help_stretch_model">Stretch region</string -->
-    <!-- UNUSED string name="help_extrude_model">Extrude region</string -->
-    <!-- UNUSED string name="help_refine_center">Refine surface at triangle centers</string -->
-    <!-- UNUSED string name="help_refine_sides">Refine surface at triangle sides</string -->
-    <!-- UNUSED string name="help_refine_point">Refine surface at point</string -->
-    <!-- UNUSED string name="help_refine_triangle">Refine surface al the long sides</string -->
-
 
     <string name="title_azimut">Référence extension</string>
     <string name="title_audio">Commentaire Audio</string>
@@ -1290,21 +1219,6 @@
   <string name="pref_area_border_summary">Visibilité de la bordure</string>
   <string name="pref_auto_section_pt_title">Points de section</string>
   <string name="pref_auto_section_pt_summary">Ajouter point de section aux lignes de section</string>
-
-<!-- FIXME_SKETCH_3D
-  <string name="pref_sketchLineStep_title">Paramètres de ligne</string>
-  <string name="pref_sketchLineStep_summary">Distance entre les points d\'une ligne</string>
-  <string name="pref_sketchDeltaExtrude_title">Extrude delta</string>
-  <string name="pref_sketchDeltaExtrude_summary">Extrude delta</string>
--->
-  <!-- UNUSED string name="pref_sketchUsesSplays_title">Dessiner les visées latérales</string -->
-  <!-- UNUSED string name="pref_sketchUsesSplays_summary">Dessiner les surfaces en utilisant les visées latérales</string -->
-  <!-- UNUSED string name="pref_sketchBorderStep_title">Paramètre de bordure</string -->
-  <!-- UNUSED string name="pref_sketchBorderStep_summary">Distance entre les points d\'édition de ligne</string -->
-  <!-- UNUSED string name="pref_sketchSectionStep_title">Paramètres de section</string -->
-  <!-- UNUSED string name="pref_sketchSectionStep_summary">Distance entre sections</string -->
-  <!-- UNUSED string name="pref_sketchCompassReadings_title">Lectures compas</string -->
-  <!-- UNUSED string name="pref_sketchCompassReadings_summary">Nombre de lectures (pour moyenne)</string -->
 
   <string name="pref_unit_length_title">Unité de distance</string>
   <string name="pref_unit_length_summary">Afficher les unités de longueurs</string>

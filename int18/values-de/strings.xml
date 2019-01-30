@@ -464,17 +464,6 @@
     <string name="shot_reverse">Richtung umkehren</string>
     <string name="shot_to">bis</string>
 
-    <!-- UNUSED FIXME_SKETCH_3D
-    <string name="make_surface">Oberfläche existiert. Ersetzen?</string>
-     -->
-    <!-- NO string name="sketch3d_name">Name</string -->
-    <!-- NO string name="sketch3d_new">Neue 3D Skizze</string -->
-    <!-- NO string name="sketch3d_next">nächster Messpunkt</string -->
-    <!-- NO string name="sketch3d_null_name">Name der 3D-Skizze fehlt</string -->
-    <!-- NO string name="sketch3d_null_next">Name des nächsten 3D-Messpunktes fehlt</string -->
-    <!-- NO string name="sketch3d_null_start">Name des 3D-Skizzen Startmesspunktes fehlt</string -->
-    <!-- NO string name="sketch3d_start">Startmesspunkt</string -->
-
     <string name="station">Messpunkt</string>
     <string name="station_ask">Messpunkt in Skizze anlegen?</string>
     <string name="station_del">Messpunkt aus Skizze entfernen?</string>
@@ -681,21 +670,6 @@
     <string name="symbol_reload">Zeichenwerkzeuge</string>
 
 
-<!-- FIXME_SKETCH_3D -->
-    <!-- NO string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
-    <!-- NO string name="title_sketch_new">New 3D sketch</string -->
-    <!-- NO string name="title_sketch_edit">Edit 3D surface</string -->
-    <!-- NO string name="title_sketch_shot">New shot</string -->
-    <!-- NO string name="title_sketch_refs">View mode</string -->
-    <!-- NO string name="title_sketch_section_type">Sections type</string -->
-    <!-- NO string name="title_sketch_select">Select item</string -->
-
-    <!-- NO string name="sketch_mode_single">Single shot</string -->
-    <!-- NO string name="sketch_mode_ngbh">Nearby shots</string -->
-    <!-- NO string name="sketch_mode_all">All shots</string -->
-    <!-- NO string name="sketch_delete">Delete 3D model ?</string -->
-    <!-- UNUSED string name="sketch_no_split">No refinement. Decrease side max. length to refine further.</string -->
-
     <!-- TODO string name="length">Length [m]</string -->
     <!-- TODO string name="azimuth">Azimuth [deg]</string -->
     <!-- TODO string name="clino">Clino [deg]</string -->
@@ -705,33 +679,8 @@
     <!-- TODO string name="error_distribution">error distribution</string -->
     <!-- TODO string name="angle_distribution">angular distribution</string -->
 
-    <!-- UNUSED string name="btn_head">head</string -->
-    <!-- UNUSED string name="btn_stretch">Stretch</string -->
-    <!-- UNUSED string name="btn_extrude">Extrude</string -->
-    <!-- UNUSED string name="btn_erase">erase</string -->
-    <!-- UNUSED string name="btn_cut">cut</string -->
-    <!-- UNUSED string name="btn_vertical">Vertical</string -->
     <string name="btn_horizontal">Horizontal</string>
 
-    <!-- select button labels -->
-    <!-- UNUSED string name="btn_section">Section</string -->
-    <!-- UNUSED string name="btn_step">Step</string -->
-    <!-- UNUSED string name="btn_shot">Shot</string -->
-    <!-- UNUSED string name="btn_join">Join</string -->
-
-    <!-- UNUSED string name="button_redraw">Redraw</string -->
-    <!-- UNUSED string name="button_erase">Erase</string -->
-    <!-- UNUSED string name="btn_surface">surface</string -->
-
-    <!-- UNUSED string name="station_next">NEXT</string -->
-    <!-- UNUSED string name="few_line_points">Line has too few points</string -->
-<!-- FIXME_SKETCH_3D
-    <string name="no_shot_between_stations">no_shot_between_stations</string>
-    <string name="line_delete">line_delete</string>
-    <string name="menu_head">HEAD</string>
--->
-    <!-- UNUSED string name="menu_save_th2">SAVE TH2</string -->
-<!-- END_SKETCH_3D -->
     <string name="split_nothing">Nichts aufzuteilen</string>
     <string name="flip_shots">Flip shots</string>
     <string name="copy_items">Kopieren</string>
@@ -856,22 +805,6 @@
     <string name="help_compute">Kalibrierungs-Koeffizienten berechnen</string>
     <string name="help_write">Kalibrierungs-Koeffizienten auf den DistoX speichern</string>
 
-<!-- FIXME_SKETCH_3D
-    <string name="help_one_model">3D-Modell einpassen</string>
-    <string name="help_surface">Oberfläche erzeugen</string>
-    <string name="help_save_model">3D-Modell exportieren</string>
-    <string name="help_trash_model">3D-Modell löschen</string>
-    <string name="help_head_model">3D-Modell drehen</string>
--->
-    <!-- UNUSED string name="help_refs_model">View mode</string -->
-    <!-- UNUSED string name="help_erase_model">Erase region</string -->
-    <!-- UNUSED string name="help_cut_model">Region ausschneiden</string -->
-    <!-- UNUSED string name="help_stretch_model">Region zeichnen</string -->
-    <!-- UNUSED string name="help_extrude_model">Extrude region</string -->
-    <!-- UNUSED string name="help_refine_center">Oberfläche verfeinern im Dreieckszentrum</string -->
-    <!-- UNUSED string name="help_refine_sides">Oberfläche verfeinern an den Rändern</string -->
-    <!-- UNUSED string name="help_refine_point">Oberfläche verfeinern an Punkt</string -->
-    <!-- UNUSED string name="help_refine_triangle">Oberfläche verfeinern an den langen Seiten</string -->
 
 <!-- TITLES -->
     <string name="title_azimut">Seitenriss-Azimut</string>
@@ -953,13 +886,6 @@
     <string name="title_shot_delete">Messung löschen ?</string>
     <string name="title_sensor_edit">Sensordaten</string>
     <string name="title_split">Skizze aufteilen</string>
-
-<!-- SKETCH_3D titles -->
-    <!-- NO string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
-    <!-- NO string name="title_sketch_edit">Edit 3D surface</string -->
-    <!-- NO string name="title_sketch_shot">New shot</string -->
-    <!-- NO string name="title_sketch_section_type">Sections type</string -->
-    <!-- NO string name="title_sketch_select">Select item</string -->
 
     <string name="title_stats">Statistik</string>
     <!-- UNUSED string name="title_step">Schritt</string -->
