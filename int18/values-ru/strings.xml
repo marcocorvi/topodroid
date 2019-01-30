@@ -937,10 +937,10 @@
   <string name="pref_size_buttons_title">Размер кнопок</string>
   <string name="pref_size_buttons_summary">Размер кнопок на панели инструментов</string>
   <!-- UNUSED string name="pref_size_buttons_message">Введите размер кнопок панели инструментов [pixels]</string -->
-  <!-- TODO string name="pref_with_sensors_title">Sensors</string -->
-  <!-- TODO string name="pref_with_sensors_summary">Enable "sensors" data</string -->
-  <!-- TODO string name="pref_palettes_title">Palettes</string -->
-  <!-- TODO string name="pref_palettes_summary">Enable additional palettes</string -->
+  <string name="pref_with_sensors_title">Датчики</string>
+  <string name="pref_with_sensors_summary">Включить данные "датчиков"</string>
+  <string name="pref_palettes_title">Доп. Знаки</string>
+  <string name="pref_palettes_summary">Включить дополнительные наборы условных знаков</string>
 
   <string name="pref_bezier_step_title">Макс. расстояние между точками</string>
   <string name="pref_bezier_step_summary">Маскисмальное расстояние между точками при апроксимации кривых полилиниями [м]</string>
@@ -1213,8 +1213,8 @@
   <string name="pref_splay_color_summary">Включить цвета сплеев</string>
   <string name="pref_plot_shift_title">Сдвиг и скалирование абриса</string>
   <string name="pref_plot_shift_summary">Включить режим смещения и масштабирования абриса относительно нитки</string>
-  <!-- TODO string name="pref_splay_alpha_title">Splay transparency</string -->
-  <!-- TODO string name="pref_splay_alpha_summary">Splay transparency [0: transparent, 100: opaque]</string -->
+  <string name="pref_splay_alpha_title">Прозрачность сплеев</string>
+  <string name="pref_splay_alpha_summary">Прозрачность сплеев [0: прозрачные, 100: видимые]</string>
 
   <string name="pref_picker_type_title">Вид меню инструментов рисования</string>
   <string name="pref_picker_type_summary">Тип меню инструментов рисования</string>
