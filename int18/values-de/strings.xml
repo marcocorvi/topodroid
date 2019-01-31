@@ -258,8 +258,6 @@
     <!-- UNUSED string name="splays_toggle">Hilfszüge ein/ausblenden</string -->
     <string name="splays_on_off">Hilfszüge</string>
     <string name="splays">Hilfszüge</string>
-    <string name="splays_show">Hilfszüge anzeigen</string>
-    <string name="foresurface_show">Vorderfläche zeigen</string>
     <!-- UNUSED string name="fmt_listen">WARTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Länge %1$s</string>
@@ -298,10 +296,8 @@
     <string name="no_profile_overview">Kein Überblick für projizierte Profile</string>
     <string name="no_proj4">Proj4 nicht installiert</string>
     <string name="no_sensors">Vermessung hat keine Sensormessungen</string>
-    <string name="no_sketch">Keine 3D Skizze</string>
     <!-- UNUSED string name="no_shots">Vermessung hat keine Messungen</string -->
     <string name="no_survey">Keine Vermessung ausgewählt</string>
-    <string name="no_to_station">Keine Zielstation.</string>
     <string name="no_thmanager">Keine ThManager App</string>
     <!-- UNUSED string name="no_db_viewer">Keine DB_viewer App</string -->
     <string name="no_undelete">Nichts wiederherzustellen</string>
@@ -324,7 +320,7 @@
     <!-- TODO string name="menu_backups">CLEAR BACKUPS</string -->
     <string name="menu_calib_check">KALIB. TEST</string>
     <string name="menu_close">SCHLIEßEN</string>
-    <string name="menu_clear">SKIZZE LÖSCHEN</string>
+    <!-- UNUSED string name="menu_clear">SKIZZE LÖSCHEN</string -->
     <string name="menu_color">FARBE ENTF</string>
     <string name="menu_delete">LÖSCHEN</string>
     <string name="menu_detach">TRENNEN</string>
@@ -460,7 +456,7 @@
     <string name="shot_info">Manuelle Messung erfassen</string>
     <!-- UNUSED string name="shot_length">Länge</string -->
     <string name="shot_note">Notizen</string>
-    <string name="shot_not_found">nicht gefunden</string>
+    <!-- UNUSED string name="shot_not_found">nicht gefunden</string -->
     <string name="shot_reverse">Richtung umkehren</string>
     <string name="shot_to">bis</string>
 
@@ -670,9 +666,9 @@
     <string name="symbol_reload">Zeichenwerkzeuge</string>
 
 
-    <!-- TODO string name="length">Length [m]</string -->
-    <!-- TODO string name="azimuth">Azimuth [deg]</string -->
-    <!-- TODO string name="clino">Clino [deg]</string -->
+    <!-- UNUSED string name="length">Length [m]</string -->
+    <!-- UNUSED string name="azimuth">Azimuth [deg]</string -->
+    <!-- UNUSED string name="clino">Clino [deg]</string -->
 
     <!-- TODO string name="orientation">orientation</string -->
     <!-- TODO string name="contents">contents</string -->
@@ -822,7 +818,7 @@
     <string name="title_device">DistoX Geräte</string>
     <string name="title_device_select">DistoX Gerät auswählen</string>
     <string name="title_discover">DistoX Geräte suchen&#8230;</string>
-    <string name="title_draw">Zeichnen</string>
+    <!-- UNUSED string name="title_draw">Zeichnen</string -->
     <string name="title_draw_area">FLÄCHE %1$s</string>
     <string name="title_draw_line">LINIE %1$s</string>
     <string name="title_draw_line_no_stations">LINIE %1$s: kein Messpunkt</string>
@@ -850,7 +846,7 @@
     <string name="title_refs">Elemente Anzeigen</string>
     <string name="title_scraps">Skizzen</string>
     <string name="title_scraps_outline">Skizzenumriss</string>
-    <string name="title_select">Auswählen</string>
+    <!-- UNUSED string name="title_select">Auswählen</string -->
 
     <string name="title_settings_main">TopoDroid Einstellungen</string>
     <string name="title_settings_export">Import/Export Einstellungen</string>
@@ -912,7 +908,7 @@
   <string name="pref_cat_calib">Kalibrierung</string>
   <string name="pref_cat_device">Verbindung</string>
   <!-- TODO string name="pref_cat_geek">GEEK FLAGS</string -->
-  <string name="pref_cat_sketch">3D-Modell</string>
+  <!-- UNUSED string name="pref_cat_sketch">3D-Modell</string -->
   <!-- UNUSED string name="pref_cat_log">Log Optionen</string -->
 
   <string name="pref_locale_title">Sprache</string>

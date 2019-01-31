@@ -253,8 +253,6 @@
     <!-- UNUSED string name="splays_toggle">Alternar exibição das medidas auxiliares</string -->
     <string name="splays_on_off">Medidas auxiliares</string>
     <string name="splays">medidas auxiliares</string>
-    <string name="splays_show">Mostrar medidas auxiliares</string>
-    <string name="foresurface_show">Mostrar toda a superfície</string>
     <!-- UNUSED string name="fmt_listen">OUVIR | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Latitude %1$s</string>
@@ -293,10 +291,8 @@
     <string name="no_profile_overview">Nenhuma panorâmica para as projeções</string>
     <string name="no_proj4">Proj4 não instalado</string>
     <string name="no_sensors">Topo sem informações de sensores externos</string>
-    <string name="no_sketch">Nenhum croqui 3D</string>
     <!-- UNUSED string name="no_shots">Nenhuma medida registrada na topo.\nUsar o botão Download para baixar algumas</string -->
     <string name="no_survey">Nenhuma topo selecionada</string>
-    <string name="no_to_station">Sem base PARA.</string>
     <string name="no_thmanager">O aplicativo ThManager não está instalado</string>
     <!-- UNUSED string name="no_db_viewer">DB_viewer não encontrado</string -->
     <string name="no_undelete">Nenhum item a ser restaurado</string>
@@ -313,7 +309,7 @@
     <!-- TODO string name="menu_backups">CLEAR BACKUPS</string -->
     <string name="menu_calib_check">VERIF. CALIB.</string>
     <string name="menu_close">FECHAR</string>
-    <string name="menu_clear">LIMPAR</string>
+    <!-- UNUSED string name="menu_clear">LIMPAR</string -->
     <string name="menu_color">VOLTAR PARA COR PADRÃO</string>
     <string name="menu_delete">APAGAR</string>
     <string name="menu_detach">DESCONECTAR</string>
@@ -448,7 +444,7 @@
     <string name="shot_info">Inserir medida manualmente</string>
     <!-- UNUSED string name="shot_length">comprimento</string -->
     <string name="shot_note">comentário</string>
-    <string name="shot_not_found">Nenhuma visada encontrada</string>
+    <!-- UNUSED string name="shot_not_found">Nenhuma visada encontrada</string -->
     <string name="shot_reverse">inverter</string>
     <string name="shot_to">para</string>
 
@@ -652,9 +648,9 @@
 
     <string name="symbol_reload">Símbolos</string>
 
-    <string name="length">Comprimento [m]</string>
-    <string name="azimuth">Azimute [deg]</string>
-    <string name="clino">Inclinação [deg]</string>
+    <!-- UNUSED string name="length">Comprimento [m]</string -->
+    <!-- UNUSED string name="azimuth">Azimute [deg]</string -->
+    <!-- UNUSED string name="clino">Inclinação [deg]</string -->
 
     <string name="orientation">orientação</string>
     <string name="contents">conteúdos</string>
@@ -801,7 +797,7 @@
     <string name="title_device">Dispositivos DistoX</string>
     <string name="title_device_select">Selecionar o dispositivo DistoX</string>
     <string name="title_discover">Procurando dispositivos DistoX &#8230; Aguardar</string>
-    <string name="title_draw">Desenhar</string>
+    <!-- UNUSED string name="title_draw">Desenhar</string -->
     <string name="title_draw_area">ÁREA %1$s</string>
     <string name="title_draw_line">LINHA %1$s</string>
     <!-- TODO string name="title_draw_line_no_stations">LINE %1$s: no stations</string -->
@@ -829,7 +825,7 @@
     <string name="title_refs">Mostrar</string>
     <string name="title_scraps">Croquis da topo</string>
     <string name="title_scraps_outline">Contorno do croqui</string>
-    <string name="title_select">Selecionar</string>
+    <!-- UNUSED string name="title_select">Selecionar</string -->
 
     <!-- TODO string name="title_settings_main">TopoDroid main settings</string -->
     <!-- TODO string name="title_settings_export">TopoDroid import/export settings</string -->
@@ -891,7 +887,7 @@
   <string name="pref_cat_calib">CALIBRAÇÕES</string>
   <string name="pref_cat_device">DISPOSITIVOS</string>
   <!-- TODO string name="pref_cat_geek">GEEK FLAGS</string -->
-  <string name="pref_cat_sketch">MODELOS 3D</string>
+  <!-- UNUSED string name="pref_cat_sketch">MODELOS 3D</string -->
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
 
   <string name="pref_locale_title">Língua</string>

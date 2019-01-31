@@ -254,8 +254,6 @@
     <!-- UNUSED string name="splays_toggle">Mutassa a fix pontokat </string -->
     <!-- TODO string name="splays_on_off">Splays</string -->
     <string name="splays">segédpontok</string>
-    <!-- TODO string name="splays_show">Show splays</string -->
-    <!-- TODO string name="foresurface_show">Show fore surface</string -->
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <!-- TODO string name="fmt_id">ID %1$s</string -->
     <!-- TODO string name="fmt_latitude">Latitude %1$s</string -->
@@ -294,10 +292,8 @@
     <string name="no_profile_overview">Nincs áttekintő a vetített szelvényekhez</string>
     <string name="no_proj4">Proj4 nincs telepítve</string>
     <string name="no_sensors">A felmérésben nincsennek mérések</string>
-    <string name="no_sketch">Nincs 3D vázlat</string>
     <!-- UNUSED string name="no_shots">Survey has no shots.\nUse Download button to get some</string -->
     <string name="no_survey">Nincs kiválasztva felmérés</string>
-    <!-- TODO string name="no_to_station">No TO station.</string -->
     <string name="no_thmanager">A Thmanager alkalmazás nincs telepítve</string>
     <!-- UNUSED string name="no_db_viewer">A DB_viewer alkalmazás nem található</string -->
     <string name="no_undelete">Nincs helyreállítható részlet</string>
@@ -314,7 +310,7 @@
     <!-- TODO string name="menu_backups">CLEAR BACKUPS</string -->
     <string name="menu_calib_check">KALIBR. ELLENŐRZÉS</string>
     <string name="menu_close">BEZÁR</string>
-    <!-- TODO string name="menu_clear">CLEAR</string -->
+    <!-- UNUSED string name="menu_clear">CLEAR</string -->
     <!-- TODO string name="menu_color">CLEAR COLOR</string -->
     <string name="menu_delete">TÖRÖL</string>
     <string name="menu_detach">SZÉTKAPCSOL</string>
@@ -450,7 +446,7 @@
     <string name="shot_info">Írd be a mérés adatait</string>
     <!-- UNUSED string name="shot_length">length</string -->
     <string name="shot_note">megjegyzés</string>
-    <string name="shot_not_found">Nem található mérés</string>
+    <!-- UNUSED string name="shot_not_found">Nem található mérés</string -->
     <string name="shot_reverse">visszamérés</string>
     <string name="shot_to">hová</string>
 
@@ -654,9 +650,9 @@
 
     <string name="symbol_reload">Rajz eszközök</string>
 
-    <string name="length">Hossz [m]</string>
-    <string name="azimuth">Irányszög [fok]</string>
-    <string name="clino">Lejtszög [fok]</string>
+    <!-- UNUSED string name="length">Hossz [m]</string -->
+    <!-- UNUSED string name="azimuth">Irányszög [fok]</string -->
+    <!-- UNUSED string name="clino">Lejtszög [fok]</string -->
 
     <string name="orientation">irány</string>
     <string name="contents">tartalom</string>
@@ -801,7 +797,7 @@
     <string name="title_device">DistoX-ek</string>
     <string name="title_device_select">Válaszd ki a DistoX-et</string>
     <string name="title_discover">DistoX eszközök keresése &#8230; várj!</string>
-    <string name="title_draw">Rajzolás</string>
+    <!-- UNUSED string name="title_draw">Rajzolás</string -->
     <string name="title_draw_area">TERÜLET %1$s</string>
     <string name="title_draw_line">VONAL %1$s</string>
     <!-- TODO string name="title_draw_line_no_stations">LINE %1$s: no stations</string -->
@@ -829,7 +825,7 @@
     <string name="title_refs">Vázlat hivatkozásai</string>
     <string name="title_scraps">Felmérés vázlatok</string>
     <string name="title_scraps_outline">Körvonal felvázolása</string>
-    <string name="title_select">Kiválaszt</string>
+    <!-- UNUSED string name="title_select">Kiválaszt</string -->
 
     <!-- TODO string name="title_settings_main">TopoDroid main settings</string -->
     <!-- TODO string name="title_settings_export">TopoDroid import/export settings</string -->
@@ -891,7 +887,7 @@
   <string name="pref_cat_calib">KALIBRÁCIÓK</string>
   <string name="pref_cat_device">ESZKÖZÖK</string>
   <!-- TODO string name="pref_cat_geek">GEEK FLAGS</string -->
-  <string name="pref_cat_sketch">3D MODELLEK</string>
+  <!-- UNUSED string name="pref_cat_sketch">3D MODELLEK</string -->
   <!-- UNUSED string name="pref_cat_log">NAPLÓZÁSOK</string -->
 
   <string name="pref_locale_title">Nyelv</string>

@@ -254,8 +254,6 @@
     <!-- UNUSED string name="splays_toggle">Показване/скриване на странични изм.</string -->
     <string name="splays_on_off">Странични изм.</string>
     <string name="splays">Странични изм.</string>
-    <string name="splays_show">Показване на странични изм.</string>
-    <!-- TODO string name="foresurface_show">Show fore surface</string -->
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <!-- TODO string name="fmt_id">ID %1$s</string -->
     <string name="fmt_latitude">Геогр. шир. %1$s</string>
@@ -294,10 +292,8 @@
     <string name="no_profile_overview">Няма общ преглед за проектиран разрези</string>
     <string name="no_proj4">Proj4 не е инсталирана</string>
     <string name="no_sensors">Картировката не съдържа сензорни измервания</string>
-    <string name="no_sketch">Няма 3D скица</string>
     <!-- UNUSED string name="no_shots">Картировката не съдържа отсечки.\nИзползвайте бутона за изтегляне на данни</string -->
     <string name="no_survey">Не е избрана картировка</string>
-    <string name="no_to_station">Няма репер ДО</string>
     <string name="no_thmanager">ThManager не е инсталирана</string>
     <!-- UNUSED string name="no_db_viewer">Програмата SQliteViewer не е инсталирана</string -->
     <string name="no_undelete">Няма елементи за възстановяване</string>
@@ -314,7 +310,7 @@
     <!-- TODO string name="menu_backups">CLEAR BACKUPS</string -->
     <string name="menu_calib_check">Проверка калибрация</string>
     <string name="menu_close">Затваряне</string>
-    <string name="menu_clear">Изчистване</string>
+    <!-- UNUSED string name="menu_clear">Изчистване</string -->
     <string name="menu_color">Изчистване цвят</string>
     <string name="menu_delete">Изтриване</string>
     <string name="menu_detach">Прек. на връзката</string>
@@ -450,7 +446,7 @@
     <string name="shot_info">Въведете данни за отсечката</string>
     <!-- string name="shot_length">length</string -->
     <string name="shot_note">бележка</string>
-    <string name="shot_not_found">Не е намерена отсечка</string>
+    <!-- UNUSED string name="shot_not_found">Не е намерена отсечка</string -->
     <string name="shot_reverse">обръщане</string>
     <string name="shot_to">до</string>
 
@@ -654,9 +650,9 @@
 
     <string name="symbol_reload">Символи за рисуване</string>
 
-    <string name="length">Дължина [метри]</string>
-    <string name="azimuth">Азимут [градуси]</string>
-    <string name="clino">Наклон [градуси]</string>
+    <!-- UNUSED string name="length">Дължина [метри]</string -->
+    <!-- UNUSED string name="azimuth">Азимут [градуси]</string -->
+    <!-- UNUSED string name="clino">Наклон [градуси]</string -->
 
     <string name="orientation">Ориентация</string>
     <string name="contents">Съдържание</string>
@@ -803,7 +799,7 @@
     <string name="title_device">DistoX устройства</string>
     <string name="title_device_select">Изберете DistoX</string>
     <string name="title_discover">Сканиране за DistoX устройства…</string>
-    <string name="title_draw">Рисуване</string>
+    <!-- UNUSED string name="title_draw">Рисуване</string -->
     <string name="title_draw_area">Площ %1$s</string>
     <string name="title_draw_line">Линия %1$s</string>
     <string name="title_draw_line_no_stations">Линия %1$s: няма репери</string>
@@ -831,7 +827,7 @@
     <string name="title_refs">Показване в скицата на:</string>
     <string name="title_scraps">Скици в картировката</string>
     <string name="title_scraps_outline">Очертание на скица</string>
-    <string name="title_select">Избор</string>
+    <!-- UNUSED string name="title_select">Избор</string -->
 
     <!-- TODO string name="title_settings_main">TopoDroid main settings</string -->
     <!-- TODO string name="title_settings_export">TopoDroid import/export settings</string -->
@@ -893,7 +889,7 @@
   <string name="pref_cat_calib">Настройки Калибрация</string>
   <string name="pref_cat_device">Настройки DistoX</string>
   <!-- TODO string name="pref_cat_geek">GEEK FLAGS</string -->
-  <string name="pref_cat_sketch">Настройки 3D модел</string>
+  <!-- UNUSED string name="pref_cat_sketch">Настройки 3D модел</string -->
   <!-- UNUSED string name="pref_cat_log">Настройки Лог файл</string -->
 
   <string name="pref_locale_title">Език</string>

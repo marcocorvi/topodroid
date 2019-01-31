@@ -253,8 +253,6 @@
     <!-- UNUSED string name="splays_toggle">Cambiar a tomas laterales</string -->
     <!-- TODO string name="splays_on_off">Splays</string -->
     <string name="splays">Tomas laterales</string>
-    <!-- TODO string name="splays_show">Show splays</string -->
-    <!-- TODO string name="foresurface_show">Show fore surface</string -->
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <!-- TODO string name="fmt_id">ID %1$s</string -->
     <!-- TODO string name="fmt_latitude">Latitude %1$s</string -->
@@ -293,10 +291,8 @@
     <string name="no_profile_overview">Hay descripción para perfiles de proyectos</string>
     <string name="no_proj4">Proj4 no instalado</string>
     <string name="no_sensors">Topografía sin mediciones</string>
-    <string name="no_sketch">Sin dibujo 3D</string>
     <!-- UNUSED string name="no_shots">Topografía sin mediciones.\nPulse el botón para descargar mediciones</string -->
     <string name="no_survey">Topografía no seleccionada</string>
-    <!-- TODO string name="no_to_station">No TO station.</string -->
     <string name="no_thmanager">ThManager no instalado</string>
     <!-- UNUSED string name="no_db_viewer">app DB_viewer no instalada</string -->
     <string name="no_undelete">No hay medida para recuperar</string>
@@ -313,7 +309,7 @@
     <!-- TODO string name="menu_backups">CLEAR BACKUPS</string -->
     <string name="menu_calib_check">Verificar calibración</string>
     <string name="menu_close">Cerrar</string>
-    <!-- TODO string name="menu_clear">CLEAR</string -->
+    <!-- UNUSED string name="menu_clear">CLEAR</string -->
     <!-- TODO string name="menu_color">CLEAR COLOR</string -->
     <string name="menu_delete">Eliminar</string>
     <string name="menu_detach">Desconectar</string>
@@ -448,7 +444,7 @@
     <string name="shot_info">Introducir datos Toma</string>
     <!-- UNUSED string name="shot_length">Longitud de la toma</string -->
     <string name="shot_note">Nota de toma</string>
-    <string name="shot_not_found">No se encontraron tomas</string>
+    <!-- UNUSED string name="shot_not_found">No se encontraron tomas</string -->
     <string name="shot_reverse">Toma Inversa</string>
     <string name="shot_to">Toma hasta</string>
 <!-- NOT USED -->
@@ -660,9 +656,9 @@
 
     <string name="symbol_reload">Herramientas dibujo</string>
 
-    <string name="length">Longitud [m]</string>
-    <string name="azimuth">Rumbo [deg]</string>
-    <string name="clino">Clino [deg]</string>
+    <!-- UNUSED string name="length">Longitud [m]</string -->
+    <!-- UNUSED string name="azimuth">Rumbo [deg]</string -->
+    <!-- UNUSED string name="clino">Clino [deg]</string -->
 
     <string name="orientation">Orientación</string>
     <string name="contents">Contenido</string>
@@ -811,7 +807,7 @@
     <string name="title_device">Dispositivo DistoX</string>
     <string name="title_device_select">Select DistoX device</string>
     <string name="title_discover">Buscar dispositivos DistoX &#8230; espere</string>
-    <string name="title_draw">Dibujo</string>
+    <!-- UNUSED string name="title_draw">Dibujo</string -->
     <string name="title_draw_area">Área %1$s</string>
     <string name="title_draw_line">Línea %1$s</string>
     <!-- TODO string name="title_draw_line_no_stations">LINE %1$s: no stations</string -->
@@ -839,7 +835,7 @@
     <string name="title_refs">Referencias de dibujo</string>
     <string name="title_scraps">Dibujo</string>
     <string name="title_scraps_outline">Esquema del dibujo</string>
-    <string name="title_select">Seleccionar</string>
+    <!-- UNUSED string name="title_select">Seleccionar</string -->
 
     <!-- TODO string name="title_settings_main">TopoDroid main settings</string -->
     <!-- TODO string name="title_settings_export">TopoDroid import/export settings</string -->

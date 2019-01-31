@@ -254,8 +254,6 @@
     <!-- UNUSED string name="splays_toggle">Mostra o Nascondi gli splay</string -->
     <string name="splays_on_off">Splays</string>
     <string name="splays">splay</string>
-    <string name="splays_show">Mostra splays</string>
-    <string name="foresurface_show">Mostra superficie</string>
     <!-- UNUSED string name="fmt_listen">ASCOLTA | %1$s</string -->
     <!-- FT_NO_TR string name="fmt_id">ID %1$s</string -->
     <string name="fmt_latitude">Latitudine %1$s</string>
@@ -294,10 +292,8 @@
     <string name="no_profile_overview">Nessuna panoramica per i profili proiettati</string>
     <string name="no_proj4">Proj4 non installato</string>
     <string name="no_sensors">Rilievo senza misurazioni</string>
-    <string name="no_sketch">No disegno 3D</string>
     <!-- UNUSED string name="no_shots">Rilievo senza dati</string -->
     <string name="no_survey">Rilievo non selezionato</string>
-    <string name="no_to_station">No caposaldo A.</string>
     <string name="no_thmanager">ThManager non installato</string>
     <!-- UNUSED string name="no_db_viewer">DB_viewer non installato</string -->
     <string name="no_undelete">Nessun oggetto da riprendere</string>
@@ -314,7 +310,7 @@
     <!-- TODO string name="menu_backups">CLEAR BACKUPS</string -->
     <string name="menu_calib_check">VERIFICA CALIBR.</string>
     <string name="menu_close">CHIUDI</string>
-    <string name="menu_clear">PULISCI</string>
+    <!-- UNUSED string name="menu_clear">PULISCI</string -->
     <string name="menu_color">PULISCI COLORE</string>
     <string name="menu_delete">ELIMINA</string>
     <string name="menu_detach">SCONNETTI</string>
@@ -450,7 +446,7 @@
     <string name="shot_info">Scrivi i dati</string>
     <!-- UNUSED string name="shot_length">lunghezza</string -->
     <string name="shot_note">nota</string>
-    <string name="shot_not_found">Nessuna misura trovata</string>
+    <!-- UNUSED string name="shot_not_found">Nessuna misura trovata</string -->
     <string name="shot_reverse">inverso</string>
     <string name="shot_to">a</string>
 
@@ -654,9 +650,9 @@
 
     <string name="symbol_reload">Strumenti Disegno</string>
 
-    <string name="length">Lunghezza [m]</string>
-    <string name="azimuth">Azimut [deg]</string>
-    <string name="clino">Inclinazione [deg]</string>
+    <!-- UNUSED string name="length">Lunghezza [m]</string -->
+    <!-- UNUSED string name="azimuth">Azimut [deg]</string -->
+    <!-- UNUSED string name="clino">Inclinazione [deg]</string -->
 
     <string name="orientation">orientamento</string>
     <string name="contents">contenuti</string>
@@ -803,7 +799,7 @@
     <string name="title_device">Dispositivi DistoX</string>
     <string name="title_device_select">Seleziona DistoX</string>
     <string name="title_discover">Ricerca DistoX &#8230; attendi</string>
-    <string name="title_draw">Disegno</string>
+    <!-- UNUSED string name="title_draw">Disegno</string -->
     <string name="title_draw_area">AREA %1$s</string>
     <string name="title_draw_line">LINEA %1$s</string>
     <string name="title_draw_line_no_stations">LINEA %1$s: no capisaldi</string>
@@ -831,7 +827,7 @@
     <string name="title_refs">Riferimenti grafici</string>
     <string name="title_scraps">Disegni</string>
     <string name="title_scraps_outline">Contorno disegno</string>
-    <string name="title_select">Seleziona</string>
+    <!-- UNUSED string name="title_select">Seleziona</string -->
 
     <string name="title_settings_main">TopoDroid: Impostazioni principali</string>
     <string name="title_settings_export">Impostazione import/export</string>

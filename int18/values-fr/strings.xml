@@ -254,8 +254,6 @@
 <!-- UNUSED string name="splays_toggle">Basculer les visées d\'habillage - Splays</string -->
     <string name="splays_on_off">Visées d\'habillage ON OFF</string>
 <string name="splays">Visées d\'habillage</string>
-    <string name="splays_show">Afficher les visées d\'habillage</string>
-    <string name="foresurface_show">Afficher les surfaces avant</string>
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Latitude %1$s</string>
@@ -294,10 +292,8 @@
 <string name="no_profile_overview">Pas d\'apercu pour les coupes projetées</string>
 <string name="no_proj4">*Proj$* non installé</string>
 <string name="no_sensors">Le relevé n\'a aucune mesure</string>
-<string name="no_sketch">Pas de croquis 3D</string>
 <!-- UNUSED string name="no_shots">Le relevé ne contient aucune visées.\n Utilisez le menu Télécharger pour en obtenir.</string -->
 <string name="no_survey">Aucun relevé sélectionné.</string>
-<string name="no_to_station">Pas de station VERS (TO)</string>
 <string name="no_thmanager">ThManager non installé</string>
 <!-- UNUSED string name="no_db_viewer">DB_viewer app pas trouvée</string -->
 <string name="no_undelete">Aucun élément à récupérer</string>
@@ -314,7 +310,7 @@
     <string name="menu_backups">EFFACER SAUVEGARDES</string>
     <string name="menu_calib_check">VERIF ÉTALON.</string>
     <string name="menu_close">FERMER</string>
-    <string name="menu_clear">EFFACER</string>
+    <!-- UNUSED string name="menu_clear">EFFACER</string -->
     <string name="menu_color">EFFACER COULEUR</string>
     <string name="menu_delete">SUPPRIMER</string>
     <string name="menu_detach">DÉCONNECTER</string>
@@ -450,7 +446,7 @@
     <string name="shot_info">Saisir les infos de visée</string>
     <!-- UNUSED string name="shot_length">longueur</string -->
     <string name="shot_note">Note</string>
-    <string name="shot_not_found">Aucune visée trouvée</string>
+    <!-- UNUSED string name="shot_not_found">Aucune visée trouvée</string -->
     <string name="shot_reverse">Inverse</string>
     <string name="shot_to">À ou VERS</string>
 
@@ -655,8 +651,8 @@
     <string name="symbol_reload">Outils de dessin</string>
 
 
-    <string name="length">Longueur [m]</string>
-    <string name="azimuth">Azimut [deg]</string>
+    <!-- UNUSED string name="length">Longueur [m]</string -->
+    <!-- UNUSED string name="azimuth">Azimut [deg]</string -->
     <!-- OK string name="clino">Clino [deg]</string -->
 
     <!-- OK string name="orientation">orientation</string -->
@@ -802,7 +798,7 @@
     <string name="title_device">Périphériques DistoX</string>
     <string name="title_device_select">Sélectionner le DistoX</string>
     <string name="title_discover">Recherche de nouveaux DistoX… Patientez</string>
-    <string name="title_draw">Dessin</string>
+    <!-- UNUSED string name="title_draw">Dessin</string -->
     <string name="title_draw_area">ZONE %1$s</string>
     <string name="title_draw_line">LIGNE %1$s</string>
     <string name="title_draw_line_no_stations">LIGNE %1$s: pas de station</string>
@@ -830,7 +826,7 @@
     <string name="title_refs">Références du dessin</string>
     <string name="title_scraps">Croquis du relevé</string>
     <string name="title_scraps_outline">Contours Esquisse</string>
-    <string name="title_select">Sélectionner</string>
+    <!-- UNUSED string name="title_select">Sélectionner</string -->
 
     <string name="title_settings_main">Paramètres principaux de TopoDroid</string>
     <string name="title_settings_export">Paramètres d\'importation / exportation de TopoDroid</string>

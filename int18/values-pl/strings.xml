@@ -259,8 +259,6 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="splays_toggle">Toggle splays display</string -->
     <string name="splays_on_off">Domiary</string>
     <string name="splays">domiary</string>
-    <string name="splays_show">Pokaż domiary</string>
-    <string name="foresurface_show">Pokaż poprzednią powierzchnię</string>
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Szer. geogr. %1$s</string>
@@ -300,10 +298,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="no_profile_overview">Brak podglądu profili</string>
     <string name="no_proj4">Proj4 nie jest zainstalowany</string>
     <string name="no_sensors">Pomiar nie ma danych</string>
-    <string name="no_sketch">Brak szkicu 3D</string>
     <!-- UNUSED string name="no_shots">Survey has no shots.\nUse Download button to get some</string -->
     <string name="no_survey">Brak wybranego pomiaru</string>
-    <string name="no_to_station">Brak stacji docelowej.</string>
     <string name="no_thmanager">ThManager nie jest zainstalowany</string>
     <!-- UNUSED string name="no_db_viewer">DB_viewer app not found</string -->
     <string name="no_undelete">Brak elementu od odzyskania</string>
@@ -320,7 +316,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- TODO string name="menu_backups">CLEAR BACKUPS</string -->
     <string name="menu_calib_check">Test kalibracji</string>
     <string name="menu_close">ZAMKNIJ</string>
-    <string name="menu_clear">WYCZYŚĆ</string>
+    <!-- UNUSED string name="menu_clear">WYCZYŚĆ</string -->
     <string name="menu_color">WYCZYSĆ KOLOR</string>
     <string name="menu_delete">USUŃ</string>
     <string name="menu_detach">ROZŁĄCZ</string>
@@ -458,7 +454,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="shot_info">Wprowadz dane pomiaru</string>
     <!-- UNUSED string name="shot_length">length</string -->
     <string name="shot_note">uwaga</string>
-    <string name="shot_not_found">Nie znaleziono pomiaru</string>
+    <!-- UNUSED string name="shot_not_found">Nie znaleziono pomiaru</string -->
     <string name="shot_reverse">wsteczny</string>
     <string name="shot_to">do</string>
 
@@ -666,9 +662,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
     <string name="symbol_reload">Narzędzia rysowania</string>
 
-    <string name="length">Długość [m]</string>
-    <string name="azimuth">Azymut [deg]</string>
-    <string name="clino">Upad [deg]</string>
+    <!-- UNUSED string name="length">Długość [m]</string -->
+    <!-- UNUSED string name="azimuth">Azymut [deg]</string -->
+    <!-- UNUSED string name="clino">Upad [deg]</string -->
 
     <string name="orientation">orientacja</string>
     <string name="contents">zawartość</string>
@@ -822,7 +818,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_device">Urządzenia DistoX</string>
     <string name="title_device_select">Wybierz DistoX</string>
     <string name="title_discover">Skanowanie urządzeń DistoX &#8230; czekaj</string>
-    <string name="title_draw">Rysowanie</string>
+    <!-- UNUSED string name="title_draw">Rysowanie</string -->
     <string name="title_draw_area">POWIERZCHNIA %1$s</string>
     <string name="title_draw_line">LINIA %1$s</string>
     <string name="title_draw_line_no_stations">LINIA %1$s: brak stacji</string>
@@ -850,7 +846,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_refs">Odniesienie szkicu</string>
     <string name="title_scraps">Szkice ciągu pomiarowego</string>
     <string name="title_scraps_outline">Szkic konturów</string>
-    <string name="title_select">Wybierz</string>
+    <!-- UNUSED string name="title_select">Wybierz</string -->
 
     <string name="title_settings_main">Ustawienia główne TopoDroid</string>
     <string name="title_settings_export">Ustawienia importu/eksportu TopoDroid</string>
@@ -916,7 +912,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
   <string name="pref_cat_device">URZĄDZENIA</string>
   <!-- TODO string name="pref_cat_geek">GEEK FLAGS</string -->
-  <string name="pref_cat_sketch">MODELE 3D</string>
+  <!-- UNUSED string name="pref_cat_sketch">MODELE 3D</string -->
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
 
   <string name="pref_locale_title">Język</string>

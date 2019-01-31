@@ -257,8 +257,6 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="splays_toggle">Toggle splays display</string -->
     <string name="splays_on_off">Splays</string>
     <string name="splays">splays</string>
-    <string name="splays_show">Show splays</string>
-    <string name="foresurface_show">Show fore surface</string>
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Latitude %1$s</string>
@@ -298,10 +296,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="no_profile_overview">No overview for projected profiles</string>
     <string name="no_proj4">Proj4 not installed</string>
     <string name="no_sensors">Survey has no measurement</string>
-    <string name="no_sketch">No 3D sketch</string>
     <!-- UNUSED string name="no_shots">Survey has no shots.\nUse Download button to get some</string -->
     <string name="no_survey">No survey selected.</string>
-    <string name="no_to_station">No TO station.</string>
     <string name="no_thmanager">ThManager app not installed</string>
     <!-- UNUSED string name="no_db_viewer">DB_viewer app not found</string -->
     <string name="no_undelete">No item to recover</string>
@@ -318,7 +314,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="menu_backups">CLEAR BACKUPS</string>
     <string name="menu_calib_check">CALIB. CHECK</string>
     <string name="menu_close">CLOSE</string>
-    <string name="menu_clear">CLEAR</string>
+    <!-- UNUSED string name="menu_clear">CLEAR</string -->
     <string name="menu_color">CLEAR COLOR</string>
     <string name="menu_delete">DELETE</string>
     <string name="menu_detach">DISCONNECT</string>
@@ -460,7 +456,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="shot_info">Enter shot data</string>
     <!-- UNUSED string name="shot_length">length</string -->
     <string name="shot_note">note</string>
-    <string name="shot_not_found">Found no shot</string>
+    <!-- UNUSED string name="shot_not_found">Found no shot</string -->
     <string name="shot_reverse">reverse</string>
     <string name="shot_to">to</string>
 
@@ -669,9 +665,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
     <string name="symbol_reload">Drawing Tools</string>
 
-    <string name="length">Length [m]</string>
-    <string name="azimuth">Azimuth [deg]</string>
-    <string name="clino">Clino [deg]</string>
+    <!-- UNUSED string name="length">Length [m]</string -->
+    <!-- UNUSED string name="azimuth">Azimuth [deg]</string -->
+    <!-- UNUSED string name="clino">Clino [deg]</string -->
 
     <string name="orientation">orientation</string>
     <string name="contents">contents</string>
@@ -825,7 +821,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_device">DistoX devices</string>
     <string name="title_device_select">Select DistoX device</string>
     <string name="title_discover">Scanning for DistoX devices &#8230; wait</string>
-    <string name="title_draw">Draw</string>
+    <!-- UNUSED string name="title_draw">Draw</string -->
     <string name="title_draw_area">AREA %1$s</string>
     <string name="title_draw_line">LINE %1$s</string>
     <string name="title_draw_line_no_stations">LINE %1$s: no stations</string>
@@ -853,7 +849,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_refs">Sketch References</string>
     <string name="title_scraps">Survey sketches</string>
     <string name="title_scraps_outline">Sketch outlines</string>
-    <string name="title_select">Select</string>
+    <!-- UNUSED string name="title_select">Select</string -->
 
     <string name="title_settings_main">TopoDroid main settings</string>
     <string name="title_settings_export">TopoDroid import/export settings</string>

@@ -8,7 +8,7 @@
   <dimen name="activity_vertical_margin">20dp</dimen>
   <dimen name="nav_drawer_width">320dp</dimen>
 -->
-  <dimen name="size">16sp</dimen>
+  <!-- UNUSED dimen name="size">16sp</dimen -->
   <dimen name="sizeplus">18sp</dimen>
 
   <dimen name="textsize">16sp</dimen>
@@ -32,7 +32,7 @@
   <dimen name="marginhuge">60dp</dimen>
 
   <dimen name="dividersmall">3dp</dimen>
-  <dimen name="divider">8dp</dimen>
+  <!-- UNUSED dimen name="divider">8dp</dimen -->
   <dimen name="dividerbig">15dp</dimen>
 
   <string name="dimxp">2.4f</string>

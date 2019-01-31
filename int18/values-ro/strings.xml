@@ -255,8 +255,6 @@
     <!-- UNUSED string name="splays_toggle">Comută afișarea radierilor</string -->
     <string name="splays_on_off">Radieri</string>
     <string name="splays">radieri</string>
-    <string name="splays_show">Arată radierile</string>
-    <string name="foresurface_show">Arată suprafața din față (3D)</string>
     <!-- UNUSED string name="fmt_listen">ASCULTĂ | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Latitudine %1$s</string>
@@ -296,10 +294,8 @@
     <string name="no_profile_overview">Nici un ~overview pentru profilele proiectate</string>
     <string name="no_proj4">Proj4 neinstalat</string>
     <string name="no_sensors">Cartarea nu are măsurători</string>
-    <string name="no_sketch">Nici o schiță 3D</string>
     <!-- UNUSED string name="no_shots">Calibrarea nu are nici o măsuratoare.\nFolosește butonul Descarcă pentru a le adăuga</string -->
     <string name="no_survey">Nici o cartare nu a fost selectată.</string>
-    <string name="no_to_station">Nici o stație destinație(viză).</string>
     <string name="no_thmanager">Aplicația ThManager nu este instalată</string>
     <!-- UNUSED string name="no_db_viewer">Aplicația DB_viewer nu a fost gasită</string -->
     <string name="no_undelete">Nici un element de recuperat</string>
@@ -316,7 +312,7 @@
     <!-- TODO string name="menu_backups">CLEAR BACKUPS</string -->
     <string name="menu_calib_check">VERIFICARE CALIBRARE</string>
     <string name="menu_close">ÎNCHIDE</string>
-    <string name="menu_clear">CURĂȚĂ</string>
+    <!-- UNUSED string name="menu_clear">CURĂȚĂ</string -->
     <string name="menu_color">ȘTERGE CULOARE</string>
     <string name="menu_delete">ȘTERGE</string>
     <string name="menu_detach">DECONECTEAZĂ</string>
@@ -452,7 +448,7 @@
     <string name="shot_info">Introdu valorile măsurătorii</string>
     <!-- UNUSED string name="shot_length">lungime</string -->
     <string name="shot_note">notă</string>
-    <string name="shot_not_found">Nu a fost găsită nici o măsuratoare</string>
+    <!-- UNUSED string name="shot_not_found">Nu a fost găsită nici o măsuratoare</string -->
     <string name="shot_reverse">inversează</string>
     <string name="shot_to">la</string>
 
@@ -655,9 +651,9 @@
 
     <string name="symbol_reload">Unelte desen</string>
 
-    <string name="length">Lungime [m]</string>
-    <string name="azimuth">Azimut [deg]</string>
-    <string name="clino">Clino [deg]</string>
+    <!-- UNUSED string name="length">Lungime [m]</string -->
+    <!-- UNUSED string name="azimuth">Azimut [deg]</string -->
+    <!-- UNUSED string name="clino">Clino [deg]</string -->
 
     <string name="orientation">orientare</string>
     <string name="contents">conținut</string>
@@ -810,7 +806,7 @@
     <string name="title_device">Dispozitive DistoX</string>
     <string name="title_device_select">Selectează dispozitivul DistoX</string>
     <string name="title_discover">Se scanează după dispozitive DistoX &#8230; așteaptă</string>
-    <string name="title_draw">Desen</string>
+    <!-- UNUSED string name="title_draw">Desen</string -->
     <string name="title_draw_area">SUPRAFAȚA %1$s</string>
     <string name="title_draw_line">LINIE %1$s</string>
     <string name="title_draw_line_no_stations">LINIE %1$s: nici o stație</string>
@@ -838,7 +834,7 @@
     <string name="title_refs">Referințe schiță</string>
     <string name="title_scraps">Schițele cartării</string>
     <string name="title_scraps_outline">Contururi schiță</string>
-    <string name="title_select">Selectează</string>
+    <!-- UNUSED string name="title_select">Selectează</string -->
 
     <!-- TODO string name="title_settings_main">TopoDroid main settings</string -->
     <!-- TODO string name="title_settings_export">TopoDroid import/export settings</string -->
@@ -901,7 +897,7 @@
   <!-- UNUSED string name="pref_cat_min_algo">ALGO MIN</string -->
   <string name="pref_cat_device">Dispozitive</string>
   <!-- TODO string name="pref_cat_geek">GEEK FLAGS</string -->
-  <string name="pref_cat_sketch">MODELE 3D</string>
+  <!-- UNUSED string name="pref_cat_sketch">MODELE 3D</string -->
   <!-- UNUSED string name="pref_cat_log">JURNALE</string -->
 
   <string name="pref_locale_title">Limbă</string>

@@ -256,8 +256,6 @@
     <!-- UNUSED string name="splays_toggle">Показать/скрыть сплеи</string -->
     <string name="splays_on_off">Вкл/Выкл бок. замер</string>
     <string name="splays">бок. замеры</string>
-    <string name="splays_show">Показать бок. замеры</string>
-    <string name="foresurface_show">Показать переднюю поверхность</string>
     <!-- UNUSED string name="fmt_listen">СЛУШАТЬ | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Широта %1$s</string>
@@ -296,10 +294,8 @@
     <string name="no_profile_overview">Нет обзора для спроецированного профиля</string>
     <string name="no_proj4">Proj4 не установлен</string>
     <string name="no_sensors">В съёмке отсутствуют измерения</string>
-    <string name="no_sketch">Отсутствует 3D абрис</string>
     <!-- UNUSED string name="no_shots">В съёмке отсутствуют пикеты.\nИспользуйте кнопку Скачать для их создания</string -->
     <string name="no_survey">Съёмка не выбрана.</string>
-    <string name="no_to_station">Отсутсвует пикет ДО.</string>
     <string name="no_thmanager">ThManager не установлен</string>
     <!-- UNUSED string name="no_db_viewer">Приложение просмотра баз данных не найдено</string -->
     <string name="no_undelete">Нечего восстанавливать</string>
@@ -316,7 +312,7 @@
     <string name="menu_backups">ОЧИСТИТЬ БЭКАП</string>
     <string name="menu_calib_check">КОНТРОЛЬ КАЛИБ.</string>
     <string name="menu_close">ЗАКРЫТЬ</string>
-    <!-- DUP string name="menu_clear">ОЧИСТИТЬ</string -->
+    <!-- UNUSED string name="menu_clear">ОЧИСТИТЬ</string -->
     <string name="menu_color">ОЧИСТИТЬ ЦВЕТ</string>
     <string name="menu_clear">ОЧИСТИТЬ</string>
     <string name="menu_delete">Удалить</string>
@@ -453,7 +449,7 @@
     <string name="shot_info">Введите данные измерений</string>
     <!-- UNUSED string name="shot_length">длина</string -->
     <string name="shot_note">заметки</string>
-    <string name="shot_not_found">Сегмент не найден</string>
+    <!-- UNUSED string name="shot_not_found">Сегмент не найден</string -->
     <string name="shot_reverse">развернуть</string>
     <string name="shot_to">№ НА</string>
 
@@ -657,9 +653,9 @@
 
     <string name="symbol_reload">Инструменты Рисования</string>
 
-    <string name="length">Длина [м]</string>
-    <string name="azimuth">Азимут [грд]</string>
-    <string name="clino">Угол [грд]</string>
+    <!-- UNUSED string name="length">Длина [м]</string -->
+    <!-- UNUSED string name="azimuth">Азимут [грд]</string -->
+    <!-- UNUSED string name="clino">Угол [грд]</string -->
 
     <string name="orientation">ориентация</string>
     <string name="contents">содержимое</string>
@@ -812,7 +808,7 @@
     <string name="title_device">Устройства DistoX</string>
     <string name="title_device_select">Выберите прибор DistoX</string>
     <string name="title_discover">Поиск устройств DistoX &#8230; подождите</string>
-    <string name="title_draw">Рисовать</string>
+    <!-- UNUSED string name="title_draw">Рисовать</string -->
     <string name="title_draw_area">ОБЛАСТЬ %1$s</string>
     <string name="title_draw_line">ЛИНИЯ %1$s</string>
     <string name="title_draw_line_no_stations">ЛИНИЯ %1$s: нет пикетов</string>
@@ -840,7 +836,7 @@
     <string name="title_refs">Вид</string>
     <string name="title_scraps">Абрисы в съёмке</string>
     <string name="title_scraps_outline">Контуры абриса</string>
-    <string name="title_select">Выбрать</string>
+    <!-- UNUSED string name="title_select">Выбрать</string -->
 
     <string name="title_settings_main">TopoDroid Основные настройки</string>
     <string name="title_settings_export">TopoDroid настройки импорта/экспорта</string>
@@ -903,7 +899,7 @@
   <!-- UNUSED string name="pref_cat_min_algo">АЛГОРИТМ МИНИМИЗАЦИИ</string -->
   <string name="pref_cat_device">НАСТРОЙКИ УСТРОЙСТВ DistoX</string>
   <string name="pref_cat_geek">СПЕЦ НАСТРОЙКИ</string>
-  <string name="pref_cat_sketch">НАСТРОЙКИ АБРИСА</string>
+  <!-- UNUSED string name="pref_cat_sketch">НАСТРОЙКИ АБРИСА</string -->
   <!-- UNUSED string name="pref_cat_log">НАСТРОЙКИ ЖУРНАЛА</string -->
   <!-- OK string name="pref_hide_help_title">Скрыть помощь</string -->
   <!-- OK string name="pref_hide_help_summary">Скрыть кнопку помощи</string -->

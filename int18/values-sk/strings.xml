@@ -257,8 +257,6 @@
     <!-- UNUSED string name="splays_toggle">Prepnúť zobrazenie/skrytie pomocných zámer</string -->
     <string name="splays_on_off">Pomocné zámery</string>
     <string name="splays">pomocné zámery</string>
-    <string name="splays_show">Zobraziť pomocné zámery</string>
-    <string name="foresurface_show">Zobraz povrch</string>
     <!-- UNUSED string name="fmt_listen">POČÚVAJ | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Zemepisná šírka %1$s</string>
@@ -298,10 +296,8 @@
     <string name="no_profile_overview">Celkový pohľad pre Priemet je nepodporovaný</string>
     <string name="no_proj4">Proj4 nie je nainštalovaný</string>
     <string name="no_sensors">Mapovanie nemá žiadne meranie</string>
-    <string name="no_sketch">Žiadny 3D nákres</string>
     <!-- UNUSED string name="no_shots">Rilievo senza dati</string -->
     <string name="no_survey">Nie je zvolené mapovanie</string>
-    <string name="no_to_station">Chýba staničenie nasledujúceho bodu</string>
     <string name="no_thmanager">ThManager app nie je nainštalovaná</string>
     <!-- UNUSED string name="no_db_viewer">DB_viewer app sa nenašla</string -->
     <string name="no_undelete">Žiadna položka na Obnovenie </string>
@@ -318,7 +314,7 @@
     <!-- TODO string name="menu_backups">CLEAR BACKUPS</string -->
     <string name="menu_calib_check">KALIB. KONTROLA</string>
     <string name="menu_close">ZATVORIŤ</string>
-    <string name="menu_clear">VYČISTIŤ</string>
+    <!-- UNUSED string name="menu_clear">VYČISTIŤ</string -->
     <string name="menu_color">VYČISTIŤ FARBU</string>
     <string name="menu_delete">VYMAZAŤ</string>
     <string name="menu_detach">ODPOJIŤ</string>
@@ -460,7 +456,7 @@
     <string name="shot_info">Vložte údaje o zámere</string>
     <!-- UNUSED string name="shot_length">longueur</string -->
     <string name="shot_note">Poznámka</string>
-    <string name="shot_not_found">Meranie sa nenašlo</string>
+    <!-- UNUSED string name="shot_not_found">Meranie sa nenašlo</string -->
     <string name="shot_reverse">Vymeniť body</string>
     <string name="shot_to">Na</string>
 
@@ -669,9 +665,9 @@
 
     <string name="symbol_reload">Symboly na kreslenie</string>
 
-    <string name="length">Dĺžka [m]</string>
-    <string name="azimuth">Azimut [deg]</string>
-    <string name="clino">Sklon [deg]</string>
+    <!-- UNUSED string name="length">Dĺžka [m]</string -->
+    <!-- UNUSED string name="azimuth">Azimut [deg]</string -->
+    <!-- UNUSED string name="clino">Sklon [deg]</string -->
 
     <string name="orientation">Orientácia</string>
     <string name="contents">Obsah</string>
@@ -825,7 +821,7 @@
     <string name="title_device">DistoX</string>
     <string name="title_device_select">Zvoľte DistoX</string>
     <string name="title_discover">Vyhladávanie DistaX &#8230; prosím čakajte</string>
-    <string name="title_draw">Kreslenie</string>
+    <!-- UNUSED string name="title_draw">Kreslenie</string -->
     <string name="title_draw_area">OBLASŤ %1$s</string>
     <string name="title_draw_line">ČIARA %1$s</string>
     <string name="title_draw_line_no_stations">ČIARA %1$s: bez staničení</string>
@@ -853,7 +849,7 @@
     <string name="title_refs">Výber možností zobrazenia</string>
     <string name="title_scraps">Nákresy</string>
     <string name="title_scraps_outline">Nákres obrysu</string>
-    <string name="title_select">Vybrať</string>
+    <!-- UNUSED string name="title_select">Vybrať</string -->
 
     <string name="title_settings_main">TopoDroid Hlavné nastavenia</string>
     <string name="title_settings_export">TopoDroid Import/Export nastavenia</string>
@@ -917,7 +913,7 @@
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->  
   <string name="pref_cat_device">NASTAVENIE DISTOX</string>
   <string name="pref_cat_geek">ŠPECIÁLNE NASTAVENIA</string>
-  <string name="pref_cat_sketch">3D MODELY</string>
+  <!-- UNUSED string name="pref_cat_sketch">3D MODELY</string -->
   <!-- UNUSED string name="pref_cat_log">NASTAVENIE ZÁZNAMU</string -->
 
   <string name="pref_locale_title">Jazyk</string>

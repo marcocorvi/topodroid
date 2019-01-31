@@ -6,7 +6,7 @@
   <string name="north" translatable="false">N</string>
   <string name="empty" translatable="false"> </string>
   <string name="zero" translatable="false"> 0 </string>
-  <string name="one" translatable="false"> 1 </string>
+  <!-- UNUSED string name="one" translatable="false"> 1 </string -->
   <string name="four_zero" translatable="false">0000</string>
   <string name="a3_max" translatable="false">4096</string>
   <string name="x310_max" translatable="false">1040</string>
