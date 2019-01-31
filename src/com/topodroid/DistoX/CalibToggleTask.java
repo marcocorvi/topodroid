@@ -26,8 +26,8 @@ class CalibToggleTask extends AsyncTask<Void, Integer, Boolean>
 
   CalibToggleTask( ICoeffDisplayer parent, TopoDroidApp app )
   {
-    mApp = new WeakReference<TopoDroidApp>( app );
     mParent = new WeakReference<ICoeffDisplayer>( parent );
+    mApp    = new WeakReference<TopoDroidApp>( app );
   }
 
   @Override

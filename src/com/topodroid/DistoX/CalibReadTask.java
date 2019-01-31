@@ -40,7 +40,8 @@ class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
   CalibReadTask( ICoeffDisplayer parent, TopoDroidApp app, int parent_type )
   {
     // mContext = new WeakReference<Context>( context );
-    mApp     = new WeakReference<TopoDroidApp>( app );
+    mParent = new WeakReference<ICoeffDisplayer>( parent );
+    mApp    = new WeakReference<TopoDroidApp>( app );
     coeff = new byte[52]; // always read 52 bytes
     mParentType = parent_type;
     // comp_name = "ComponentInfo{com.topodroid.DistoX/com.topodroid.DistoX." + act_name + "}";
