@@ -71,6 +71,7 @@ class DBlock
   boolean mWithPhoto;
   boolean mMultiBad; // whether it disagree with siblings
   private float mStretch;
+  private String mAddress; // DistoX address - used only in exports
   // boolean mWasRecent = false; // REVISE_RECENT
 
   static final private int BLOCK_BLANK      = 0;
@@ -196,6 +197,10 @@ class DBlock
      }
   }
 
+  void setAddress( String address ) { mAddress = address; } // used by DataHelper
+  String getAddress() { return mAddress; } // used by the data exported
+
+
   // static int getExtend( int ext ) { return ( ext < EXTEND_UNSET )? ext : ext - EXTEND_FVERT; }
   static int getExtend( int ext ) { return ext; }
   static float getReducedExtend( int ext, float stretch ) 
@@ -212,6 +217,7 @@ class DBlock
   int getFullExtend() { return mExtend; }
   void setExtend( int ext, float stretch ) { mExtend = ext; mStretch = stretch; }
   boolean hasStretch( float stretch ) { return Math.abs( mStretch - stretch ) < 0.01f; }
+  // void setStretch( float stretch ) { mStretch = stretch; } // ununsed
   float getStretch() { return mStretch; }
   float getStretchedExtend() { return mExtend + mStretch; }
 
@@ -293,6 +299,7 @@ class DBlock
     mWithPhoto = false;
     mMultiBad = false;
     mStretch  = 0.0f;
+    mAddress  = null;
   }
 
   DBlock()
@@ -324,6 +331,7 @@ class DBlock
     mWithPhoto = false;
     mMultiBad = false;
     mStretch  = 0.0f;
+    mAddress  = null;
   }
 
   boolean makeClino( float tdepth )

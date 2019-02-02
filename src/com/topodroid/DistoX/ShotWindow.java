@@ -757,6 +757,8 @@ public class ShotWindow extends Activity
     (new ShotNewDialog( this, mApp, this, blk, mShotId )).show();
   }
 
+  // insert a manual intermediate leg
+  // called by the photo-sensor dialog
   // return id of inserted leg
   long insertDuplicateLeg( String from, String to, float distance, float bearing, float clino, int extend )
   {

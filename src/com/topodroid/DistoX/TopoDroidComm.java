@@ -110,7 +110,7 @@ class TopoDroidComm
           TDLog.Log( TDLog.LOG_COMM, "Comm D PACKET " + d + " " + b + " " + c );
           // NOTE type=0 shot is DistoX-type
           long status = ( d > TDSetting.mMaxShotLength )? TDStatus.OVERSHOOT : TDStatus.NORMAL;
-          mLastShotId = TopoDroidApp.mData.insertDistoXShot( TDInstance.sid, -1L, d, b, c, r, DBlock.EXTEND_IGNORE, status, true );
+          mLastShotId = TopoDroidApp.mData.insertDistoXShot( TDInstance.sid, -1L, d, b, c, r, DBlock.EXTEND_IGNORE, status, TDInstance.distoAddress(), true );
           if ( mLister != null ) { // FIXME_LISTER sendMessage with mLastShotId only
             Message msg = mLister.obtainMessage( Lister.LIST_UPDATE );
             Bundle bundle = new Bundle();

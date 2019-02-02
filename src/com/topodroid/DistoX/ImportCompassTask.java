@@ -44,12 +44,12 @@ class ImportCompassTask extends ImportTask
       long id = 1; // start id = 1
       ArrayList< ParserShot > shots  = parser.getShots();
       if ( mDatamode == SurveyInfo.DATAMODE_NORMAL ) {
-        id = app_data.insertShots( sid, id, shots );
+        id = app_data.insertImportShots( sid, id, shots );
       } else { // SurveyInfo.DATAMODE_DIVING
-        id = app_data.insertShotsDiving( sid, id, shots );
+        id = app_data.insertImportShotsDiving( sid, id, shots );
       }
       ArrayList< ParserShot > splays = parser.getSplays();
-      app_data.insertShots( sid, id, splays );
+      app_data.insertImportShots( sid, id, splays );
     } catch ( ParserException e ) {
       // TDToast.make(mActivity, R.string.file_parse_fail );
     }

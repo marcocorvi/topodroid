@@ -314,7 +314,6 @@
     <string name="menu_close">ЗАКРЫТЬ</string>
     <!-- UNUSED string name="menu_clear">ОЧИСТИТЬ</string -->
     <string name="menu_color">ОЧИСТИТЬ ЦВЕТ</string>
-    <string name="menu_clear">ОЧИСТИТЬ</string>
     <string name="menu_delete">Удалить</string>
     <string name="menu_detach">Отсоединить</string>
     <!-- UNUSED string name="menu_display">Показать</string -->

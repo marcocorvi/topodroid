@@ -42,10 +42,10 @@ class ImportVisualTopoTask extends ImportTask
       app_data.updateSurveyInitStation( sid, parser.initStation(), false );
 
       ArrayList< ParserShot > shots  = parser.getShots();
-      long id = app_data.insertShots( sid, 1, shots ); // start id = 1
+      long id = app_data.insertImportShots( sid, 1, shots ); // start id = 1
 
       ArrayList< ParserShot > splays = parser.getSplays();
-      app_data.insertShots( sid, id, splays );
+      app_data.insertImportShots( sid, id, splays );
     } catch ( ParserException e ) {
       // TDToast.make(mActivity, R.string.file_parse_fail );
     }

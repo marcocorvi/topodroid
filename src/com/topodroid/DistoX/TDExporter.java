@@ -213,9 +213,9 @@ class TDExporter
     //   }
     // }
 
-    List<DBlock> list  = data.selectAllShots( sid, TDStatus.NORMAL );
-    List<DBlock> clist = data.selectAllShots( sid, TDStatus.CHECK );
-    checkShotsClino( list );
+    List<DBlock> dlist = data.selectAllExportShots( sid, TDStatus.NORMAL );
+    List<DBlock> clist = data.selectAllExportShots( sid, TDStatus.CHECK );
+    checkShotsClino( dlist );
 
     List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
     // List< PlotInfo > plots  = data.selectAllPlots( sid, TDStatus.NORMAL );
@@ -223,7 +223,7 @@ class TDExporter
     // List< CurrentStation > stations = data.getStations( sid );
 
     if ( origin == null ) { // use first non-null "from"
-      for ( DBlock item : list ) {
+      for ( DBlock item : dlist ) {
         String from = item.mFrom;
         if ( from != null && from.length() > 0 ) {
           origin = from;
@@ -309,6 +309,7 @@ class TDExporter
         if ( blk.mComment != null && blk.mComment.length() > 0 ) {
           pw.format(" note=\"%s\"", blk.mComment.replaceAll("\"", "") );
         }
+	pw.format(" distox=\"%s\"", blk.getAddress() ); // MAC-address
         pw.format(" >\n");
         // writeCsxShotAttachments( pw, data, survey, sid, blk ); // calib-check shots have no attachment
         pw.format("    </segment>\n");
@@ -328,7 +329,7 @@ class TDExporter
       // int n = 0;
       AverageLeg leg = new AverageLeg(0);
 
-      for ( DBlock item : list ) {
+      for ( DBlock item : dlist ) {
         String from = item.mFrom;
         String to   = item.mTo;
         if ( from == null || from.length() == 0 ) {
@@ -356,6 +357,7 @@ class TDExporter
                 pw.format(" note=\"%s\"", com.replaceAll("\"", "") );
                 com = null;
               }
+	      pw.format(" distox=\"%s\"", ref_item.getAddress() ); // MAC-address
               pw.format(" >\n");
               writeCsxShotAttachments( pw, data, survey, sid, ref_item );
               pw.format("    </segment>\n");
@@ -376,6 +378,7 @@ class TDExporter
             if ( item.mComment != null && item.mComment.length() > 0 ) {
               pw.format(" note=\"%s\"", item.mComment.replaceAll("\"", "") );
             }
+	    pw.format(" distox=\"%s\"", item.getAddress() ); // MAC-address
             pw.format(" >\n");
             writeCsxShotAttachments( pw, data, survey, sid, item );
             pw.format("    </segment>\n");
@@ -399,6 +402,7 @@ class TDExporter
                 pw.format(" note=\"%s\"", com.replaceAll("\"", "") );
                 com = null;
               }
+	      pw.format(" distox=\"%s\"", ref_item.getAddress() ); // MAC-address
               pw.format(" >\n");
               writeCsxShotAttachments( pw, data, survey, sid, ref_item );
               pw.format("    </segment>\n");
@@ -419,6 +423,7 @@ class TDExporter
             if ( item.mComment != null && item.mComment.length() > 0 ) {
               pw.format(" note=\"%s\"", item.mComment.replaceAll("\"", "") );
             }
+	    pw.format(" distox=\"%s\"", item.getAddress() ); // MAC-address
             pw.format(" >\n");
             writeCsxShotAttachments( pw, data, survey, sid, item );
             pw.format("    </segment>\n");
@@ -439,6 +444,7 @@ class TDExporter
                 pw.format(" note=\"%s\"", com.replaceAll("\"", "") );
                 com = null;
               }
+	      pw.format(" distox=\"%s\"", ref_item.getAddress() ); // MAC-address
               pw.format(" >\n");
               writeCsxShotAttachments( pw, data, survey, sid, ref_item );
               pw.format("    </segment>\n");
@@ -477,6 +483,7 @@ class TDExporter
           pw.format(" note=\"%s\"", com.replaceAll("\"", "") );
           // com = null;
         }
+	pw.format(" distox=\"%s\"", ref_item.getAddress() ); // MAC-address
         pw.format(" >\n");
         writeCsxShotAttachments( pw, data, survey, sid, ref_item );
         pw.format("    </segment>\n");
@@ -532,7 +539,7 @@ class TDExporter
     if ( fixeds.size() == 0 ) return null;
 
     List<DistoXNum> nums = new ArrayList<DistoXNum>();
-    List<DBlock> shots_data = data.selectAllShots( sid, 0 );
+    List<DBlock> shots_data = data.selectAllExportShots( sid, 0 );
     FixedInfo origin = null;
     for ( FixedInfo fixed : fixeds ) {
       DistoXNum num = new DistoXNum( shots_data, fixed.name, null, null, decl, null ); // null formatClosure
@@ -997,7 +1004,7 @@ class TDExporter
       TDLog.Error( "exportSurveyAsTop date parse error " + info.date );
     }
 
-    List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+    List<DBlock> list = data.selectAllExportShots( sid, TDStatus.NORMAL );
     checkShotsClino( list );
     long extend = 0;  // current extend
     DBlock ref_item = null;
@@ -1099,8 +1106,8 @@ class TDExporter
     // String uls = TDSetting.mUnitLengthStr;
     // String uas = TDSetting.mUnitAngleStr;
 
-    List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
-    List<DBlock> clist = data.selectAllShots( sid, TDStatus.CHECK );
+    List<DBlock> list = data.selectAllExportShots( sid, TDStatus.NORMAL );
+    List<DBlock> clist = data.selectAllExportShots( sid, TDStatus.CHECK );
     checkShotsClino( list );
 
     List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
@@ -1438,7 +1445,7 @@ class TDExporter
     String uls = ( ul < 1.01f )? "meters"  : "feet"; // FIXME
     String uas = ( ua < 1.01f )? "degrees" : "grads";
 
-    List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+    List<DBlock> list = data.selectAllExportShots( sid, TDStatus.NORMAL );
     checkShotsClino( list );
     List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
     List<DBlock> st_blk = new ArrayList<>(); // blocks with from station (for LRUD)
@@ -1754,7 +1761,7 @@ class TDExporter
   static String exportSurveyAsCsv( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     // Log.v("DistoX", "export as CSV: " + filename );
-    List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+    List<DBlock> list = data.selectAllExportShots( sid, TDStatus.NORMAL );
     checkShotsClino( list );
     // List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
     float ul = TDSetting.mUnitLength;
@@ -1882,7 +1889,7 @@ class TDExporter
   //     dir.mkdirs();
   //   }
   //   String filename = TopoDroidApp.APP_TLX_PATH + info.name + ".tlx";
-  //   List<DBlock> list = mData.selectAllShots( sid, TDStatus.NORMAL );
+  //   List<DBlock> list = mData.selectAllExportShots( sid, TDStatus.NORMAL );
   //   checkShotsClino( list );
   //   try {
   //     TDPath.checkPath( filename );
@@ -2188,7 +2195,7 @@ class TDExporter
   static String exportSurveyAsDat( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     // Log.v("DistoX", "export as compass: " + filename + " swap LR " + TDSetting.mSwapLR );
-    List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+    List<DBlock> list = data.selectAllExportShots( sid, TDStatus.NORMAL );
     checkShotsClino( list );
     try {
       // TDLog.Log( TDLog.LOG_IO, "export Compass " + filename );
@@ -2351,7 +2358,7 @@ class TDExporter
   {
     int trip = 1;
     int code = 1;
-    List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+    List<DBlock> list = data.selectAllExportShots( sid, TDStatus.NORMAL );
     checkShotsClino( list );
     // Log.v("DistoX", "export as TopoRobot: " + filename + " data " + list.size() );
     char[] line = new char[ TRB_LINE_LENGTH ];
@@ -2592,7 +2599,7 @@ class TDExporter
   static String exportSurveyAsSur( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     // Log.v("DistoX", "export as winkarst: " + filename + " swap LR " + TDSetting.mSwapLR );
-    List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+    List<DBlock> list = data.selectAllExportShots( sid, TDStatus.NORMAL );
     checkShotsClino( list );
     try {
       // TDLog.Log( TDLog.LOG_IO, "export WinKarst " + filename );
@@ -2733,7 +2740,7 @@ class TDExporter
                 TopoDroidUtil.getDateString("yyyy/MM/dd"), TopoDroidApp.VERSION );
       pw.format("  </General>\n");
 
-      List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+      List<DBlock> list = data.selectAllExportShots( sid, TDStatus.NORMAL );
       checkShotsClino( list );
       TRobot trobot = new TRobot( list );
       // trobot.dump(); // DEBUG
@@ -2905,7 +2912,7 @@ class TDExporter
 
       List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
       boolean first = true; // first station
-      List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+      List<DBlock> list = data.selectAllExportShots( sid, TDStatus.NORMAL );
       checkShotsClino( list );
       // int extend = 1;
       AverageLeg leg = new AverageLeg(0);
@@ -3062,7 +3069,7 @@ class TDExporter
 
       pw.format("#Units %s A=%s\n", uls, uas );
 
-      List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+      List<DBlock> list = data.selectAllExportShots( sid, TDStatus.NORMAL );
       checkShotsClino( list );
       // int extend = 1;
       AverageLeg leg = new AverageLeg(0);
@@ -3298,7 +3305,7 @@ class TDExporter
       pw.format("#from_to%s", eol);
       pw.format("#R0%s", eol);
 
-      List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+      List<DBlock> list = data.selectAllExportShots( sid, TDStatus.NORMAL );
       checkShotsClino( list );
       AverageLeg leg = new AverageLeg(0);
       DBlock ref_item = null;
@@ -3450,7 +3457,7 @@ class TDExporter
       pw.format("Survey data\n");
       pw.format("From\tTo\tLength\tAzimuth\tVertical\tLabel\tLeft\tRight\tUp\tDown\tNote\n");
 
-      List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+      List<DBlock> list = data.selectAllExportShots( sid, TDStatus.NORMAL );
       checkShotsClino( list );
 
       AverageLeg leg = new AverageLeg(0);
@@ -3753,7 +3760,7 @@ class TDExporter
   static String exportSurveyAsTro( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     // Log.v("DistoX", "export as visualtopo: " + filename );
-    List<DBlock> list = data.selectAllShots( sid, TDStatus.NORMAL );
+    List<DBlock> list = data.selectAllExportShots( sid, TDStatus.NORMAL );
     checkShotsClino( list );
     List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
     try {

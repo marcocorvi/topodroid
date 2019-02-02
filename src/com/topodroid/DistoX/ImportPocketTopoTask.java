@@ -41,7 +41,7 @@ class ImportPocketTopoTask extends ImportTask
       app_data.updateSurveyInitStation( sid, parser.initStation(), false );
 
       ArrayList< ParserShot > shots  = parser.getShots();
-      long id = app_data.insertShots( sid, 1, shots ); // start id = 1
+      long id = app_data.insertImportShots( sid, 1, shots ); // start id = 1
       TDLog.Log( TDLog.LOG_PTOPO, "SID " + sid + " inserted shots. return " + id );
 
       if ( parser.mStartFrom != null ) {
