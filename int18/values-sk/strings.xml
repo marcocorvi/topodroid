@@ -945,10 +945,10 @@
   <string name="pref_extra_buttons_summary">Výber Úrovne príkazov</string>
   <string name="pref_size_buttons_title">Veľkosť tlačidiel</string>
   <string name="pref_size_buttons_summary">Veľkosť ikon tlačidiel</string>
-  <!-- TODO string name="pref_with_sensors_title">Sensors</string -->
-  <!-- TODO string name="pref_with_sensors_summary">Enable "sensors" data</string -->
-  <!-- TODO string name="pref_palettes_title">Palettes</string -->
-  <!-- TODO string name="pref_palettes_summary">Enable additional palettes</string -->
+   <string name="pref_with_sensors_title">Sensory</string>
+  <string name="pref_with_sensors_summary">Povolí dáta zo "sensorov"</string>
+  <string name="pref_palettes_title">Palety</string>
+  <string name="pref_palettes_summary">Povolí doplnkové palety</string>
 
   <string name="pref_bezier_step_title">Vzdialenosť bodov Therion</string>
   <string name="pref_bezier_step_summary">Vzdialenosť medzi bodmi Čiary pri exporte do Therionu [m]</string>
@@ -956,8 +956,8 @@
   <string name="pref_leg_shots_summary">Minimálny počet jednotlivých zámer hlavnej zámery, ktoré program vyhodnotí ako hlavnú zámeru</string>
   <string name="pref_recent_timeout_title">Posledne stiahnuté dáta - čas</string>
   <string name="pref_recent_timeout_summary">Čas po ktorom uplynutí dáta už nie sú označené ako "Posledne stiahnuté"</string>
-  <!-- TODO string name="pref_triple_shot_title">Leg-shot bell</string -->
-  <!-- TODO string name="pref_triple_shot_summary">Sound feedback on leg-shot recognition</string -->
+  <string name="pref_triple_shot_title">Zvkuk pri hlavnej zámere</string>
+  <string name="pref_triple_shot_summary">Zvuková spätná vázba pri rozoznaní hlavnej zámery</string>
   <string name="pref_station_prefix_title">Predčíslie bodu</string>
   <string name="pref_station_prefix_summary">Export predčíslia bodov Compass</string>
   <string name="pref_compass_splays_title">Pomocné zámery</string>
