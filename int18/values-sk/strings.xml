@@ -311,7 +311,7 @@
     <!-- UNUSED string name="menu_attach">PRIPOJIŤ</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
-    <!-- TODO string name="menu_backups">CLEAR BACKUPS</string -->
+    <string name="menu_backups">VYČISTIŤ ZÁLOHY</string>
     <string name="menu_calib_check">KALIB. KONTROLA</string>
     <string name="menu_close">ZATVORIŤ</string>
     <!-- UNUSED string name="menu_clear">VYČISTIŤ</string -->
@@ -561,7 +561,7 @@
     <!-- UNUSED string name="ask_reset">Resetovať pamäť DistoX?</string -->
     <!-- UNUSED string name="ask_close_survey">Chiudere rilievo?</string -->
     <string name="ask_gps_service">Nastaviť službu GPS?</string>
-    <!-- TODO string name="ask_backups_clear">Delete sketch backups?</string -->
+    <string name="ask_backups_clear">Vymazať zálohy Nákresov?</string>
 
     <!-- UNUSED string name="button_add"       >Pridať </string -->
     <string name="button_back"      >Späť </string>
@@ -704,7 +704,7 @@
     <string name="help_measure_type">Metódy merania: jednotlivo / viacnásobne</string>
     <string name="help_measure_undo">Späť</string>
     
-    <!-- TODO string name="help_backups">Delete sketch backups</string -->
+    <string name="help_backups">Vymazať zálohy Nákresov</string>
     <string name="help_calib_check">Kalibrácia - Kontrolné merania</string>
     <string name="help_close">Zavrieť okno</string>
     <string name="help_coeff">Ukázať Kalibračné koeficienty vybranej kalibrácie</string>
