@@ -1214,7 +1214,7 @@
   <string name="pref_LRExtend_summary">Odhadnúť Smerovú orientáciu vľavo/vpravo (len pre import Compass VisualTopo)</string>
   <string name="pref_diving_mode_title">Potápačský mód</string>
   <string name="pref_diving_mode_summary">Povolí potápačský mód</string>
-  <string name="pref_splay_classes_title">Tiedy pomocných zámer</string>
+  <string name="pref_splay_classes_title">Triedy pomocných zámer</string>
   <string name="pref_splay_classes_summary">Povolí zaradenie pomocných zámer do tried</string>
   <string name="pref_splay_color_title">Farebné označovanie pomocných zámer</string>
   <string name="pref_splay_color_summary">Povolí výber ľubovoľných farieb pre pomocné zámery</string>
