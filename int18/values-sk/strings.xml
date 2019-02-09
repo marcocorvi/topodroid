@@ -311,7 +311,7 @@
     <!-- UNUSED string name="menu_attach">PRIPOJIŤ</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
-    <!-- TODO string name="menu_backups">CLEAR BACKUPS</string -->
+    <string name="menu_backups">VYČISTIŤ ZÁLOHY</string>
     <string name="menu_calib_check">KALIB. KONTROLA</string>
     <string name="menu_close">ZATVORIŤ</string>
     <!-- UNUSED string name="menu_clear">VYČISTIŤ</string -->
@@ -561,7 +561,7 @@
     <!-- UNUSED string name="ask_reset">Resetovať pamäť DistoX?</string -->
     <!-- UNUSED string name="ask_close_survey">Chiudere rilievo?</string -->
     <string name="ask_gps_service">Nastaviť službu GPS?</string>
-    <!-- TODO string name="ask_backups_clear">Delete sketch backups?</string -->
+    <string name="ask_backups_clear">Vymazať zálohy Nákresov?</string>
 
     <!-- UNUSED string name="button_add"       >Pridať </string -->
     <string name="button_back"      >Späť </string>
@@ -704,7 +704,7 @@
     <string name="help_measure_type">Metódy merania: jednotlivo / viacnásobne</string>
     <string name="help_measure_undo">Späť</string>
     
-    <!-- TODO string name="help_backups">Delete sketch backups</string -->
+    <string name="help_backups">Vymazať zálohy Nákresov</string>
     <string name="help_calib_check">Kalibrácia - Kontrolné merania</string>
     <string name="help_close">Zavrieť okno</string>
     <string name="help_coeff">Ukázať Kalibračné koeficienty vybranej kalibrácie</string>
@@ -913,9 +913,8 @@
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->  
   <string name="pref_cat_device">NASTAVENIE DISTOX</string>
   <string name="pref_cat_geek">ŠPECIÁLNE NASTAVENIA</string>
-  <!-- UNUSED string name="pref_cat_sketch">3D MODELY</string -->
-  <!-- UNUSED string name="pref_cat_log">NASTAVENIE ZÁZNAMU</string -->
-
+  <!-- UNUSED string name="pref_cat_log">LOGS</string -->
+  
   <string name="pref_locale_title">Jazyk</string>
   <string name="pref_locale_summary">Výber Jazyka aplikácie</string>
 
@@ -945,10 +944,10 @@
   <string name="pref_extra_buttons_summary">Výber Úrovne príkazov</string>
   <string name="pref_size_buttons_title">Veľkosť tlačidiel</string>
   <string name="pref_size_buttons_summary">Veľkosť ikon tlačidiel</string>
-  <!-- TODO string name="pref_with_sensors_title">Sensors</string -->
-  <!-- TODO string name="pref_with_sensors_summary">Enable "sensors" data</string -->
-  <!-- TODO string name="pref_palettes_title">Palettes</string -->
-  <!-- TODO string name="pref_palettes_summary">Enable additional palettes</string -->
+   <string name="pref_with_sensors_title">Sensory</string>
+  <string name="pref_with_sensors_summary">Povolí dáta zo "sensorov"</string>
+  <string name="pref_palettes_title">Palety</string>
+  <string name="pref_palettes_summary">Povolí doplnkové palety</string>
 
   <string name="pref_bezier_step_title">Vzdialenosť bodov Therion</string>
   <string name="pref_bezier_step_summary">Vzdialenosť medzi bodmi Čiary pri exporte do Therionu [m]</string>
@@ -956,8 +955,8 @@
   <string name="pref_leg_shots_summary">Minimálny počet jednotlivých zámer hlavnej zámery, ktoré program vyhodnotí ako hlavnú zámeru</string>
   <string name="pref_recent_timeout_title">Posledne stiahnuté dáta - čas</string>
   <string name="pref_recent_timeout_summary">Čas po ktorom uplynutí dáta už nie sú označené ako "Posledne stiahnuté"</string>
-  <!-- TODO string name="pref_triple_shot_title">Leg-shot bell</string -->
-  <!-- TODO string name="pref_triple_shot_summary">Sound feedback on leg-shot recognition</string -->
+  <string name="pref_triple_shot_title">Zvkuk pri hlavnej zámere</string>
+  <string name="pref_triple_shot_summary">Zvuková spätná vázba pri rozoznaní hlavnej zámery</string>
   <string name="pref_station_prefix_title">Predčíslie bodu</string>
   <string name="pref_station_prefix_summary">Export predčíslia bodov Compass</string>
   <string name="pref_compass_splays_title">Pomocné zámery</string>
@@ -1178,7 +1177,7 @@
   <string name="pref_path_multiselect_title">Viacnásobný výber</string>
   <string name="pref_path_multiselect_summary">Povolí viacnásobný výber</string>
   <string name="pref_plane_interpolation_title">Interpolácia pôdorysu</string>
-  <string name="pref_plane_interpolation_summary">Povolí interpoláciu pôdorysu</string>
+  <string name="pref_plane_interpolation_summary">Povolí interpoláciu spätných zámer v pôdoryse</string>
   <string name="pref_plot_split_title">Spojiť/Rozdeliť Nákres</string>
   <string name="pref_plot_split_summary">Povolí spojenie alebo rozdelenie nákresu</string>
   <string name="pref_fixed_thickness_title">Šírka meračskej zámery</string>
@@ -1195,14 +1194,14 @@
   <string name="pref_backup_number_summary">Výber počtu záloh dát programu</string>
   <string name="pref_backup_interval_title">Čas intervalu zálohovania dát</string>
   <string name="pref_backup_interval_summary">Minimálny interval medzi 2 zálohami [s]</string>
-  <!-- TODO string name="pref_backups_clear_title">Backups clear</string -->
-  <!-- TODO string name="pref_backups_clear_summary">Enable sketch backups clear menu</string -->
-  <!-- UNUSED string name="pref_xtherion_areas_title">Aree xtherion</string -->
-  <!-- UNUSED string name="pref_xtherion_areas_summary">Salva le aree in modo xtherion</string -->
+  <string name="pref_backups_clear_title">Vyčistanie záloh</string>
+  <string name="pref_backups_clear_summary">Povolí pridanie menu Vyčistenia Záloh v Nákrese</string>
+  <!-- UNUSED string name="pref_xtherion_areas_title">xtherion areas</string -->
+  <!-- UNUSED string name="pref_xtherion_areas_summary">Save areas a la xtherion</string -->
   <string name="pref_therion_splays_title">Therion pomocné zámery</string>
   <string name="pref_therion_splays_summary">Pridanie u:pomocných zámer do súborov th2</string>
-  <!-- TODO string name="pref_th2_scale_title">Therion scale</string -->
-  <!-- TODO string name="pref_th2_scale_summary">Scale of th2/xvi export</string -->
+  <string name="pref_th2_scale_title"> Mierka Therionu</string>
+  <string name="pref_th2_scale_summary">Mierka th2/xvi exportu<
   <string name="pref_autoStations_title">Staničenie Therionu</string>
   <string name="pref_autoStations_summary">Automatické pridanie staničení do Therionu</string>
   <string name="pref_loopClosure_title">Vyrovnanie polygoného ťahu</string>
@@ -1215,14 +1214,14 @@
   <string name="pref_LRExtend_summary">Odhadnúť Smerovú orientáciu vľavo/vpravo (len pre import Compass VisualTopo)</string>
   <string name="pref_diving_mode_title">Potápačský mód</string>
   <string name="pref_diving_mode_summary">Povolí potápačský mód</string>
-  <string name="pref_splay_classes_title">Tiedy pomocných zámer</string>
+  <string name="pref_splay_classes_title">Triedy pomocných zámer</string>
   <string name="pref_splay_classes_summary">Povolí zaradenie pomocných zámer do tried</string>
   <string name="pref_splay_color_title">Farebné označovanie pomocných zámer</string>
   <string name="pref_splay_color_summary">Povolí výber ľubovoľných farieb pre pomocné zámery</string>
   <string name="pref_plot_shift_title">Nákres posun/zmena mierky</string>
   <string name="pref_plot_shift_summary">Povolí posun a zmenu mierky krezby v nákrese po povolení Bočného Posuvu vo Výbere možností zobrazenia</string>
-  <!-- TODO string name="pref_splay_alpha_title">Splay transparency</string -->
-  <!-- TODO string name="pref_splay_alpha_summary">Splay transparency [0: transparent, 100: opaque]</string -->
+  <string name="pref_splay_alpha_title">Priehľadnosť pomocných zámer</string>
+  <string name="pref_splay_alpha_summary">Priehľadnosť pomocných zámer [0: priehľadné, 100: nepriehľadné]</string>
 
   <string name="pref_picker_type_title">Paleta v režime kreslenia</string>
   <string name="pref_picker_type_summary">Spôsob zobrazenia výberu z Palety v režime kreslenia</string>
