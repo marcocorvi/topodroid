@@ -1201,7 +1201,7 @@
   <string name="pref_therion_splays_title">Therion pomocné zámery</string>
   <string name="pref_therion_splays_summary">Pridanie u:pomocných zámer do súborov th2</string>
   <string name="pref_th2_scale_title"> Mierka Therionu</string>
-  <string name="pref_th2_scale_summary">Mierka th2/xvi exportu<
+  <string name="pref_th2_scale_summary">Mierka th2/xvi exportu</string>
   <string name="pref_autoStations_title">Staničenie Therionu</string>
   <string name="pref_autoStations_summary">Automatické pridanie staničení do Therionu</string>
   <string name="pref_loopClosure_title">Vyrovnanie polygoného ťahu</string>
