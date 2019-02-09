@@ -2321,7 +2321,7 @@ class DataHelper extends DataSetObservable
      if (cursor.moveToFirst()) {
        do {
          // int type = cursor.getInt(2);     
-         // if ( type == PlotInfo.PLOT_PLAN ) { // FIXME || type == PlotInfo.PLOT_EXTENDED || type == PlotInfo.PLOT_PROFILE
+         // if ( type == PlotInfo.PLOT_PLAN ) { // FIXME || type == PlotInfo.PLOT_EXTENDED || type == PlotInfo.PLOT_PROJECTED
            int r = 0;
            byte[] name = cursor.getString(1).getBytes();
            for ( int k=0; k<name.length; ++k ) {

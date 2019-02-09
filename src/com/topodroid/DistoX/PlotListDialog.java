@@ -230,7 +230,7 @@ class PlotListDialog extends MyDialog
       } else if ( res.getString( R.string.extended ).equals( type ) ) {
         plot_type = PlotInfo.PLOT_EXTENDED;
       } else if ( res.getString( R.string.profile ).equals( type ) ) {
-        plot_type = PlotInfo.PLOT_PROFILE;
+        plot_type = PlotInfo.PLOT_PROJECTED;
       }
 
       // long plot_type = (( position % 2 ) == 0 )? PlotInfo.PLOT_PLAN : PlotInfo.PLOT_EXTENDED;

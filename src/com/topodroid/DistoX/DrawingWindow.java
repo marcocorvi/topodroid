@@ -1019,7 +1019,7 @@ public class DrawingWindow extends ItemDrawer
         saveReference( mPlot2, mPid2 );
         // resetReference( mPlot2 );
         // return;
-      } else { // if ( type == PlotInfo.PLOT_PROFILE ) 
+      } else { // if ( type == PlotInfo.PLOT_PROJECTED ) 
         float cosp = TDMath.cosd( mPlot2.azimuth );
         float sinp = TDMath.sind( mPlot2.azimuth );
         mZoom     = mPlot2.zoom;
@@ -1062,7 +1062,7 @@ public class DrawingWindow extends ItemDrawer
         DrawingUtil.addGrid( -50, 50, -50 , 50, mDrawingSurface );
       }
       mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_PROFILE, type );
-      if ( type == PlotInfo.PLOT_PROFILE ) {
+      if ( type == PlotInfo.PLOT_PROJECTED ) {
         cosp = TDMath.cosd( mPlot2.azimuth );
         sinp = TDMath.sind( mPlot2.azimuth );
       }
@@ -1136,7 +1136,7 @@ public class DrawingWindow extends ItemDrawer
                   DrawingUtil.toSceneX(st.h, st.v), DrawingUtil.toSceneY(st.h, st.v), true, xhsections );
         }
       }
-    } else { // if ( type == PlotInfo.PLOT_PROFILE ) 
+    } else { // if ( type == PlotInfo.PLOT_PROJECTED ) 
       float h1, h2;
       for ( NumShot sh : shots ) {
         // Log.v("DistoX", "shot " + sh.from.name + "-" + sh.to.name + " from " + sh.from.show() + " to " + sh.to.show() );
@@ -2447,7 +2447,7 @@ public class DrawingWindow extends ItemDrawer
       recomputeProfileReference();
     }
 
-    // only PLOT_EXTENDED ( not PLOT_PROFILE )
+    // only PLOT_EXTENDED ( not PLOT_PROJECTED )
     // used only when a shot extend is changed
     private void recomputeProfileReference()
     {
@@ -5362,7 +5362,7 @@ public class DrawingWindow extends ItemDrawer
 	} else {
           if ( mNum != null ) {
             float azimuth = -1;
-            if ( mPlot2 !=  null && PlotInfo.PLOT_PROFILE == mPlot2.type ) {
+            if ( mPlot2 !=  null && PlotInfo.PLOT_PROJECTED == mPlot2.type ) {
               azimuth = mPlot2.azimuth;
             }
             new DistoXStatDialog( mActivity, mNum, mPlot1.start, azimuth, mApp_mData.getSurveyStat( TDInstance.sid ) ).show();
@@ -5393,7 +5393,7 @@ public class DrawingWindow extends ItemDrawer
         (new SymbolEnableDialog( mActivity )).show();
 
       } else if ( TDLevel.overBasic && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // OVERVIEW
-        if ( mType == PlotInfo.PLOT_PROFILE ) {
+        if ( mType == PlotInfo.PLOT_PROJECTED ) {
           TDToast.make( R.string.no_profile_overview );
         } else {
           updateReference();
@@ -5667,7 +5667,7 @@ public class DrawingWindow extends ItemDrawer
           }
         } 
       }
-    } else { // PLOT_EXTENDED || PLOT_PROFILE
+    } else { // PLOT_EXTENDED || PLOT_PROJECTED
       for ( NumSplay sp : splays ) {
         NumStation st = sp.from;
         if ( st == st1 || st == st2 ) {

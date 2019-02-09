@@ -597,7 +597,7 @@ class DrawingIO
           flag |= 0x02;
           String name = dis.readUTF();
           type = dis.readInt();
-          if ( type == PlotInfo.PLOT_PROFILE ) dir = dis.readInt();
+          if ( type == PlotInfo.PLOT_PROJECTED ) dir = dis.readInt();
           String lib = dis.readUTF();
           lib = dis.readUTF();
           lib = dis.readUTF();
@@ -633,7 +633,7 @@ class DrawingIO
 				   String plotName )
   {
     // Log.v("DistoXX", "load data stream file " + filename );
-    // if ( plotName != null ) Log.v("DistoXX", "load data stream " + plotName );
+    // if ( plotName != null ) Log.v("DistoXX", "load data stream plot-name " + plotName );
 
     int version = 0;
     boolean in_scrap = false;
@@ -713,7 +713,7 @@ class DrawingIO
               {
                 String name = dis.readUTF();
                 int type = dis.readInt();
-                if ( type == PlotInfo.PLOT_PROFILE ) project_dir = dis.readInt();
+                if ( type == PlotInfo.PLOT_PROJECTED ) project_dir = dis.readInt();
                 // read palettes
                 String points = dis.readUTF();
                 String[] vals = points.split(",");
@@ -846,7 +846,7 @@ class DrawingIO
               {
                 dis.readUTF();
                 int type = dis.readInt();
-                if ( type == PlotInfo.PLOT_PROFILE ) dis.readInt();
+                if ( type == PlotInfo.PLOT_PROJECTED ) dis.readInt();
                 // read palettes
                 dis.readUTF();
                 dis.readUTF();
@@ -914,7 +914,7 @@ class DrawingIO
       dos.write( 'S' );
       dos.writeUTF( scrap_name );
       dos.writeInt( type );
-      if ( type == PlotInfo.PLOT_PROFILE ) dos.writeInt( proj_dir );
+      if ( type == PlotInfo.PLOT_PROJECTED ) dos.writeInt( proj_dir );
       BrushManager.mPointLib.toDataStream( dos );
       BrushManager.mLineLib.toDataStream( dos );
       BrushManager.mAreaLib.toDataStream( dos );
@@ -974,7 +974,7 @@ class DrawingIO
       dos.write( 'S' );
       dos.writeUTF( scrap_name );
       dos.writeInt( type );
-      if ( type == PlotInfo.PLOT_PROFILE ) dos.writeInt( proj_dir );
+      if ( type == PlotInfo.PLOT_PROJECTED ) dos.writeInt( proj_dir );
       BrushManager.mPointLib.toDataStream( dos );
       BrushManager.mLineLib.toDataStream( dos );
       BrushManager.mAreaLib.toDataStream( dos );
@@ -1086,7 +1086,7 @@ class DrawingIO
       } else {
         pw.format("scrap %s -projection %s -scale [0 0 %.0f 0 0 0 1 0 m]", scrap_name, proj_name, oneMeter );
       }
-    } else if ( type == PlotInfo.PLOT_PROFILE ) {
+    } else if ( type == PlotInfo.PLOT_PROJECTED ) {
       pw.format("scrap %s -projection [%s %d] -scale [0 0 %.0f 0 0 0 1 0 m]", scrap_name, proj_name, project_dir, oneMeter );
     } else {
       pw.format("scrap %s -projection %s -scale [0 0 %.0f 0 0 0 1 0 m]", scrap_name, proj_name, oneMeter );
@@ -1261,7 +1261,7 @@ class DrawingIO
         final List<DrawingStationName> stations,
         final List<DrawingPath> splays )
   {
-
+    // Log.v("DistoXX", "export multiscrap type " + type + " proj " + proj_name );
     class XSectionScrap
     {
       public String name; // scrap name
@@ -1284,7 +1284,6 @@ class DrawingIO
 
     float xmin=1000000f, xmax=-1000000f, 
           ymin=1000000f, ymax=-1000000f;
-    // Log.v("DistoXX", "export multiscrap type " + type + " proj " + proj_name );
     synchronized( cstack ) {
       for ( ICanvasCommand cmd : cstack ) {
         if ( cmd.commandType() != 0 ) continue;
@@ -1296,6 +1295,7 @@ class DrawingIO
         if ( p.bottom > ymax ) ymax = p.bottom;
 
 	if ( p.mPlotName != null ) {
+	  // Log.v("DistoXX", "path with plot-name " + p.mPlotName + " type " + p.mType );
 	  int k=0;
 	  for ( ; k<nplots; ++k ) if ( plots[k].equals( p.mPlotName ) ) break;
 	  if ( k == nplots ) {
@@ -1305,12 +1305,15 @@ class DrawingIO
 	      for ( int j=0; j<nplots; ++j ) tmp[j] = plots[j];
 	    }
 	    plots[k] = p.mPlotName;
+	    nplots ++;
 	  }
+	} else {
+	  TDLog.Error("DistoXX", "path with no plot-name, type " + p.mType );
 	}
       }
       RectF bbox = new RectF( xmin, ymin, xmax, ymax ); // left top right bottom
 
-      // Log.v("DistoXX", "export th2 multiscrap nr. " + plots.size() + " cstack " + cstack.size() );
+      // Log.v("DistoXX", "export th2 multiscrap nr. " + nplots + "/" + plots.length + " cstack " + cstack.size() );
       // Log.v("DistoXX", "export th2 multiscrap bbox X " + xmin + " " + xmax  + " Y " + ymin + " " + ymax );
 
       try { 
@@ -1338,6 +1341,7 @@ class DrawingIO
                 }
 		if ( BrushManager.isPointSection( pp.mPointType ) ) {
                   String name = pp.getOption("-scrap");  // xsection name
+		  // Log.v("DistoXX", "multiscrap add x-section " + name );
 		  if ( name != null && name.length() > 0 ) xsections.add( new XSectionScrap( name, pp.cx, pp.cy ) );
 		}
               } else if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) { // should never happen
@@ -1424,6 +1428,7 @@ class DrawingIO
       }
     }
 
+    // Log.v("DistoXX", "multiscrap sections " + xsections.size() );
     for ( XSectionScrap xsection : xsections ) { // write xsection scraps
       File file = new File( TDPath.getTdrFileWithExt( xsection.name ) );
       dataStream2Therion( file, out, null, false, true, xsection.x, xsection.y );
@@ -1501,7 +1506,7 @@ class DrawingIO
               {
                 name = dis.readUTF();
                 type = dis.readInt();
-                if ( type == PlotInfo.PLOT_PROFILE ) project_dir = dis.readInt();
+                if ( type == PlotInfo.PLOT_PROJECTED ) project_dir = dis.readInt();
                 // read palettes
                 points = dis.readUTF();
                 lines = dis.readUTF();
@@ -1509,23 +1514,23 @@ class DrawingIO
               }
               break;
             case 'P':
-              th_str = DrawingPointPath.loadDataStream( version, dis, 0, 0, null ).toTherion();
+              th_str = DrawingPointPath.loadDataStream( version, dis, xoff, yoff, null ).toTherion();
 	      if ( th_str != null ) out.write( th_str );
               break;
             case 'T':
-              th_str = DrawingLabelPath.loadDataStream( version, dis, 0, 0 ).toTherion();
+              th_str = DrawingLabelPath.loadDataStream( version, dis, xoff, yoff ).toTherion();
 	      if ( th_str != null ) out.write( th_str );
               break;
             case 'L':
-              th_str = DrawingLinePath.loadDataStream( version, dis, 0, 0, null ).toTherion();
+              th_str = DrawingLinePath.loadDataStream( version, dis, xoff, yoff, null ).toTherion();
 	      if ( th_str != null ) out.write( th_str );
               break;
             case 'A':
-              th_str = DrawingAreaPath.loadDataStream( version, dis, 0, 0, null ).toTherion();
+              th_str = DrawingAreaPath.loadDataStream( version, dis, xoff, yoff, null ).toTherion();
 	      if ( th_str != null ) out.write( th_str );
               break;
             case 'J':
-              th_str = DrawingSpecialPath.loadDataStream( version, dis, 0, 0 ).toTherion(); // empty string anyways
+              th_str = DrawingSpecialPath.loadDataStream( version, dis, xoff, yoff ).toTherion(); // empty string anyways
 	      if ( th_str != null ) out.write( th_str );
               break;
             case 'U':

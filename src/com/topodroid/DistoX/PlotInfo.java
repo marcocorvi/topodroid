@@ -28,7 +28,7 @@ class PlotInfo
   static final long PLOT_SECTION    = 5; // section-line cross-section
   static final long PLOT_SKETCH_3D  = 6;
   static final long PLOT_XH_SECTION = 7; // X-H_sectiuon at a station (defined in EXT plot)
-  static final long PLOT_PROFILE    = 8; // projected profile
+  static final long PLOT_PROJECTED    = 8; // projected profile
 
   final static int ORIENTATION_PORTRAIT  = 0;
   final static int ORIENTATION_LANDSCAPE = 1;
@@ -53,7 +53,7 @@ class PlotInfo
   boolean isLandscape() { return orientation == ORIENTATION_LANDSCAPE; }
 
   static boolean isVertical( long type ) 
-  { return ( type == PLOT_EXTENDED || type == PLOT_PROFILE || type == PLOT_SECTION || type == PLOT_X_SECTION ); }
+  { return ( type == PLOT_EXTENDED || type == PLOT_PROJECTED || type == PLOT_SECTION || type == PLOT_X_SECTION ); }
 
   static boolean isSection( long t )  { return t == PLOT_SECTION   || t == PLOT_H_SECTION; }
   static boolean isXSection( long t ) { return t == PLOT_X_SECTION || t == PLOT_XH_SECTION; }
@@ -63,10 +63,10 @@ class PlotInfo
   static boolean isAnySectionOrPhoto( long t )
   { return t == PLOT_SECTION || t == PLOT_H_SECTION || t == PLOT_X_SECTION || t == PLOT_XH_SECTION || t == PLOT_PHOTO; }
 
-  static boolean isSketch2D( long t ) { return t == PLOT_PLAN || t == PLOT_EXTENDED || t == PLOT_PROFILE; }
-  static boolean isProfile(  long t ) { return t == PLOT_EXTENDED || t == PLOT_PROFILE; }
+  static boolean isSketch2D( long t ) { return t == PLOT_PLAN || t == PLOT_EXTENDED || t == PLOT_PROJECTED; }
+  static boolean isProfile(  long t ) { return t == PLOT_EXTENDED || t == PLOT_PROJECTED; }
   static boolean isExtended( long t ) { return t == PLOT_EXTENDED; }
-  static boolean isProjeted( long t ) { return t == PLOT_PROFILE; }
+  static boolean isProjeted( long t ) { return t == PLOT_PROJECTED; }
   static boolean isPlan(     long t ) { return t == PLOT_PLAN; }
 
   static boolean isSketch3D( long t ) { return t == PLOT_SKETCH_3D; }
@@ -160,7 +160,7 @@ class PlotInfo
   //    if ( type.equals("SECTION") )    return (int)PLOT_SECTION;
   //    if ( type.equals("SKETCH-3D") )  return (int)PLOT_SKETCH_3D;
   //    if ( type.equals("XH-SECTION") ) return (int)PLOT_XH_SECTION;
-  //    if ( type.equals("PROFILE") )    return (int)PLOT_PROFILE;
+  //    if ( type.equals("PROFILE") )    return (int)PLOT_PROJECTED;
   //    return (int)PLOT_PLAN;
   // }
 

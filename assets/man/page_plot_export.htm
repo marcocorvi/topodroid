@@ -24,6 +24,11 @@ The resolution of <b>PNG</b> images is an adjustable setting. However a larger a
 
 Sketches can be exported as 2D <b>DXF</b> files. The AutoCAD version of the exported DXF files is R12. The DXF export has been tested with VariCAD 2016-1-07 and BricsCAD 3.1.17. It is not guaranteed that can be opened by AutoCAD.<br><p>
 
+The <b>shapefile</b> export includes stations, shots, and drawing. All the drawing objects are converted to linestring.
+The attribute tables contain the object data (eg, point type, orientationn, etc.). 
+The files comprising a shapefile export are compressed in a zip archive.
+<br><p>
+
 <b>Overview export</b><br>
 Sketches can be exported also from the "Overview Window" in the following formats
 <ul>
@@ -34,7 +39,8 @@ Sketches can be exported also from the "Overview Window" in the following format
 </ul>
 <br><p>
 
-The export of the overview window includes all the sketches of the current view (either plan or profile).
+The export of the overview window includes all the sketches of the current view (either plan or profile).<br>
+If there are "section" points, the x-sections are also included.
 <br><p>
 
 
