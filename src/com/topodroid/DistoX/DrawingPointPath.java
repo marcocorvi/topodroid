@@ -107,7 +107,7 @@ class DrawingPointPath extends DrawingPath
     // TDLog.Log( TDLog.LOG_PATH, "Point " + type + " X " + x + " Y " + y );
     mPointType = type;
     setCenter( x, y );
-    mScale   = SCALE_NONE;
+    // mScale   = SCALE_NONE;
     mOrientation = 0.0;
     mOptions = options;
     mPointText = text; // getTextFromOptions( options ); // this can also reset mOptions

@@ -788,12 +788,12 @@ class TDPrefKey
   };
 
   // ==============================================================================
-  static String[] DATA = { // [14]
+  static String[] DATA = { // [13]
     "DISTOX_CLOSE_DISTANCE",  // 0 // tolerance among leg shots [%]
     "DISTOX_MAX_SHOT_LENGTH",      // maximum length of a shot data
     "DISTOX_MIN_LEG_LENGTH",       // minimum length of a shot data
     "DISTOX_LEG_SHOTS",       // 3 // nr. of shots to make a leg [2, 3, 4]
-    "DISTOX_RECENT_TIMEOUT",       // recent block timeout
+    // "DISTOX_RECENT_TIMEOUT",       // recent block timeout
     "DISTOX_BACKSHOT",             // using DistoX in backshot mode
     "DISTOX_EXTEND_THR2",     // 6 // half angle around 90 where splays have "vert" extend
     "DISTOX_VTHRESHOLD",           // if shot clino is above, LRUD are horizontal
@@ -814,7 +814,7 @@ class TDPrefKey
     R.string.pref_max_shot_title,
     R.string.pref_min_leg_title,
     R.string.pref_leg_shots_title,
-    R.string.pref_recent_timeout_title,
+    // R.string.pref_recent_timeout_title,
     R.string.pref_backshot_title,
     R.string.pref_ethr_title,
     R.string.pref_vthr_title,
@@ -835,7 +835,7 @@ class TDPrefKey
     R.string.pref_max_shot_summary,
     R.string.pref_min_leg_summary,
     R.string.pref_leg_shots_summary,
-    R.string.pref_recent_timeout_summary,
+    // R.string.pref_recent_timeout_summary,
     R.string.pref_backshot_summary,
     R.string.pref_ethr_summary,
     R.string.pref_vthr_summary,
@@ -856,7 +856,7 @@ class TDPrefKey
     TDString.FIFTY,
     TDString.ZERO,
     TDString.THREE,
-    "30",
+    // "30",
     FALSE,
     TDString.TEN,
     "80",
@@ -1337,6 +1337,7 @@ class TDPrefKey
   static String[] GEEKSHOT = {
     "DISTOX_DIVING_MODE",     // enable diving mode
     "DISTOX_RECENT_SHOT",     // highlight recent shots
+    "DISTOX_RECENT_TIMEOUT",       // recent block timeout
     "DISTOX_SPLAY_CLASSES",   // splay classes
     "DISTOX_SPLAY_COLOR",     // splay color
     "DISTOX_EXTEND_FRAC",     // fractional extend
@@ -1349,6 +1350,7 @@ class TDPrefKey
   static int[] GEEKSHOTtitle = {
     R.string.pref_diving_mode_title,
     R.string.pref_recent_shot_title,
+    R.string.pref_recent_timeout_title,
     R.string.pref_splay_classes_title,
     R.string.pref_splay_color_title,
     R.string.pref_extend_frac_title,
@@ -1361,6 +1363,7 @@ class TDPrefKey
   static int[] GEEKSHOTdesc = {
     R.string.pref_diving_mode_summary,
     R.string.pref_recent_shot_summary,
+    R.string.pref_recent_timeout_summary,
     R.string.pref_splay_classes_summary,
     R.string.pref_splay_color_summary,
     R.string.pref_extend_frac_summary,
@@ -1373,6 +1376,7 @@ class TDPrefKey
   static String[] GEEKSHOTdef = {
     FALSE,
     FALSE,
+    "30",
     FALSE,
     FALSE,
     FALSE,

@@ -33,7 +33,7 @@ import android.graphics.Matrix;
 
 class SymbolPoint extends Symbol
 {
-  static final private float dxfScale = 0.05f;
+  static final private float dxfScale = 0.05f; // 1 / 20 TopoDroid has 20 units = 1 m
   static final private float csxScale = 5.00f;
   static final private float csxdxfScale = csxScale * dxfScale;
   Paint  mPaint;

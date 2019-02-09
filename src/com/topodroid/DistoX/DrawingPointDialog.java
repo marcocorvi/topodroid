@@ -36,6 +36,7 @@ class DrawingPointDialog extends MyDialog
   private final DrawingPointPath mPoint;
   private final DrawingWindow  mParent;
   private final boolean mOrientable;
+  private int mPointType;
 
   // private TextView mTVtype;
   private EditText mEToptions;
@@ -49,6 +50,7 @@ class DrawingPointDialog extends MyDialog
   private CheckBox mCBxsection; // to display xsection outline
   private Button   mBTdraw;
   private boolean  mHasXSectionOutline;
+  private boolean  mDoOptions;
 
   private OrientationWidget mOrientationWidget;
  
@@ -62,9 +64,11 @@ class DrawingPointDialog extends MyDialog
     super( context, R.string.DrawingPointDialog );
     mParent = parent;
     mPoint  = point;
-    mOrientable = BrushManager.mPointLib.isSymbolOrientable( mPoint.mPointType );
+    mPointType = mPoint.mPointType;
+    mOrientable = BrushManager.mPointLib.isSymbolOrientable( mPointType );
     mXSectionName = null;
     mHasXSectionOutline = false;
+    mDoOptions = BrushManager.pointHasText( mPointType ) || TDLevel.overAdvanced;
   }
 
 // -------------------------------------------------------------------
@@ -78,6 +82,11 @@ class DrawingPointDialog extends MyDialog
 
     // mTVtype = (TextView) findViewById( R.id.point_type );
     mEToptions = (EditText) findViewById( R.id.point_options );
+    if ( mDoOptions ) {
+      if ( mPoint.mOptions != null ) mEToptions.setText( mPoint.mOptions );
+    } else {
+      mEToptions.setVisibility( View.GONE );
+    }
     mETtext    = (EditText) findViewById( R.id.point_text );
 
     mCBxsection = (CheckBox) findViewById( R.id.point_xsection );
@@ -92,9 +101,6 @@ class DrawingPointDialog extends MyDialog
 
     mOrientationWidget = new OrientationWidget( this, mOrientable, mPoint.mOrientation );
 
-    if ( mPoint.mOptions != null ) {
-      mEToptions.setText( mPoint.mOptions );
-    }
 
     if ( mPoint.mPointType == BrushManager.mPointLib.mPointSectionIndex ) {
       // FIXME SECTION_RENAME
@@ -152,7 +158,7 @@ class DrawingPointDialog extends MyDialog
     // TDLog.Log( TDLog.LOG_INPUT, "DrawingPointDialog onClick() " + b.getText().toString() );
 
     if ( b == mBtnOk ) {
-      if ( mEToptions.getText() != null ) {
+      if ( mDoOptions && mEToptions.getText() != null ) {
         mPoint.mOptions = mEToptions.getText().toString().trim();
       }
       if ( mBtnScaleXS.isChecked() )      mPoint.setScale( DrawingPointPath.SCALE_XS );

@@ -56,6 +56,8 @@ class DrawingLineDialog extends MyDialog
   private MyCheckBox mBtnRock = null;
   private MyCheckBox mBtnClose;
 
+  private boolean mDoOptions;
+
   DrawingLineDialog( Context context, DrawingWindow parent, DrawingLinePath line, LinePoint lp )
   {
     super( context, R.string.DrawingLineDialog );
@@ -64,6 +66,7 @@ class DrawingLineDialog extends MyDialog
     mPoint = lp;
     mType  = mLine.mLineType;
     mTypeSection = BrushManager.mLineLib.mLineSectionIndex;
+    mDoOptions = TDLevel.overAdvanced;
   }
 
 // -------------------------------------------------------------------
@@ -92,7 +95,12 @@ class DrawingLineDialog extends MyDialog
     }
 
     mEToptions = (EditText) findViewById( R.id.line_options );
-    mEToptions.setText( mLine.getOptionString() );
+    if ( mDoOptions ) {
+      String options = mLine.getOptionString();
+      if ( options != null ) mEToptions.setText( options );
+    } else {
+      mEToptions.setVisibility( View.GONE );
+    }
 
     mBtnOutlineOut  = (CheckBox) findViewById( R.id.line_outline_out );
     mBtnOutlineIn   = (CheckBox) findViewById( R.id.line_outline_in );
@@ -192,7 +200,7 @@ class DrawingLineDialog extends MyDialog
     } else if ( b == mBtnOk ) {
       if ( mType != mLine.mLineType && mType != mTypeSection ) mLine.setLineType( mType );
 
-      if ( mEToptions.getText() != null ) {
+      if ( mDoOptions && mEToptions.getText() != null ) {
         String options = mEToptions.getText().toString().trim();
         if ( options.length() > 0 ) mLine.setOptions( options );
       }

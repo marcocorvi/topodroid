@@ -176,7 +176,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
             break;
         }
       } else if ( mSuffix == PlotSave.OVERVIEW ) {
-	Log.v("DistoXX", "save plot file OVERVIEW");
+	// Log.v("DistoXX", "save plot file OVERVIEW");
         File file = new File( TDPath.getTh2FileWithExt( mFullName ) );
         DrawingIO.exportTherion( mManager, mType, file, mFullName, PlotInfo.projName[ mType ], mProjDir, true ); // multi-scrap
 	return true;

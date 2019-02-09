@@ -147,14 +147,18 @@ class SymbolPointLibrary extends SymbolLibrary
           String thname = symbol.mThName;
           String name = "p_" + thname;
           boolean enable = false;
-          if ( ! TopoDroidApp.mData.hasSymbolName( name ) ) {
-            for ( int k=0; k<DefaultPoints.length; ++k ) { 
-              if ( DefaultPoints[k].equals( thname ) ) { enable = true; break; }
+          if ( symbol.mThName.equals("section") ) { // FIXME_SECTION_POINT always enabled
+            enable = true;
+	  } else {
+            if ( ! TopoDroidApp.mData.hasSymbolName( name ) ) {
+              for ( int k=0; k<DefaultPoints.length; ++k ) { 
+                if ( DefaultPoints[k].equals( thname ) ) { enable = true; break; }
+              }
+              TopoDroidApp.mData.setSymbolEnabled( name, enable );
+            } else {
+              enable = TopoDroidApp.mData.getSymbolEnabled( name );
             }
-            TopoDroidApp.mData.setSymbolEnabled( name, enable );
-          } else {
-            enable = TopoDroidApp.mData.getSymbolEnabled( name );
-          }
+	  }
           symbol.setEnabled( enable );
         }
       }

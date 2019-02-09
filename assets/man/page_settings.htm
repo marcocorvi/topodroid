@@ -1,7 +1,7 @@
 <html><body>
 <h4>TopoDroid settings</h4>
 
-<b>GENERAL SETTINGS</b><br>
+<b>GENERALSETTINGS</b><br>
 <ul>
 <li><a href="page_cwd.htm">Work directory.</a> Default "unset" (ie "TopoDroid")</li>
 <li>Text size: size of the text in lists. &gt;= 1. Default 14</li>
@@ -11,44 +11,88 @@
 <li>Custom keyboard cursor</li>
 <!-- li>Cosurveying service. Default OFF</li -->
 <li>Translated manual</li>
-<li><a href="page_language.htm">Language</a> {default,en,fr,es,it,ru,de,pg,slo,bg,cn,ukr,hu}. Default "default" (i.e. locale)</li>
+<li><a href="page_language.htm">Language</a> {default,en,fr,es,it,ru,de,pl,pg,sl,bg,ukr,hu}. Default "default" (i.e. locale)</li>
+<li>Geek:<br>
+  <ul>
+  <li>Additional palettes</li>
+  </ul>
+</li>
 </ul><br><p>
 
-<b>IMPORT/EXPORT SETTINGS</b><br>
+<b>IMPORT/EXPORT</b><br>
 <ul>
-<li><a href="page_pt_cmap.htm">PocketTopo color map</a> Map PocketTopo colours to TopoDroid objecs</li>
-<li>Estimate LR extend on import of Compass and Visual Topo files, Default YES</li>
-<li>Default data export type {th,svx,dat,srv,top,tro,dxf,svg,csv} default th</li>
-<li>Default sketch export type {none,th,csx,dxf,svg,png} default th</li>
-<li>Therion maps first: export therion maps before survey data. default OFF</li>
-<li>Therion stations: Add station points to Therion scraps. Default YES</li>
-<li>Therion splays: Add splay lines to Therion scraps. Default YES</li>
-<li>Compass station prefix. Default NO</li>
-<li>Compass splays: add splays to Compass files</li>
-<li>Compass LRUD splay angle. LRUD minimum splay-leg angle.</li>
-<li>Up/Down minimum splay clino. Default 0</li>
-<li>Left/Right maximum splay clino. Default 90</li>
-<li>Compass swap LR. Swap L and R on Compass export.</li>
-<li>Survex/Topo line termination {Linux,Windows}. Default Linux</li>
-<li>Survex splays TO station. Default NO</li>
-<li>Survex/Therion LRUD. Add LRUD to Survex/Therion export. Default NO</li>
-<li>Point spacing: distance between line points</li>
-<li>SVG grid. Add grid to SVG export. Default OFF</li>
-<li>SVG line orientation. Default NO</li>
-<li>SVG point stroke. Default 0.1</li>
-<li>SVG label stroke. Default 0.3</li>
-<li>SVG line stroke. Default 0.5</li>
-<li>SVG grid stroke. Default 0.5</li>
-<li>SVG shot stroke. Default 0.5</li>
-<li>SVG orientation stroke. Default 2.0</li>
-<!-- li>SVG in HTML. Export SVG as HTML page. Default OFF</li -->
-<li>KML/GeoJSON stations. Add stations to KML/GeoJSON export Default ON</li>
-<!-- li>KML splays. Add splays to KML export Default OFF</li -->
-<li>PNG resolution [0.5, 100]. Default 1.5 [x200 px]</li>
-<li>PNG background color (RGB in 0-100). Default "0 0 0" [black]</li>
-<!-- li>DXF sketch scale. Default 1</li -->
-<li>DXF splay endpoints. Default ON</li>
-<li>AutoCAD version {6,12}. Default 6</li>
+<li>General:<br>
+  <ul>
+  <li>Default data export type {th,svx,dat,srv,top,tro,dxf,svg,csv} default th</li>
+  <li>Default sketch export type {none,th,csx,dxf,svg,png} default th</li>
+  <li>Compass LRUD splay angle. LRUD minimum splay-leg angle.</li>
+  <li>Up/Down minimum splay clino. Default 0</li>
+  <li>Left/Right maximum splay clino. Default 90</li>
+  <li>Point spacing: distance between line points</li>
+  </ul>
+</li>
+<li>Import:<br>
+  <ul>
+  <li><a href="page_pt_cmap.htm">PocketTopo color map</a> Map PocketTopo colours to TopoDroid objecs</li>
+  <li>Estimate LR extend on import of Compass and Visual Topo files, Default YES</li>
+  <li>Import datamode: normal or diving. Diving applies only to compass. Default normal</li>
+  </ul>
+</li>
+<li>Survex:<br>
+  <ul>
+  <li>Survex/Topo line termination {Linux,Windows}. Default Linux</li>
+  <li>Splays TO station. Default NO</li>
+  <li>LRUD. Add LRUD to Survex/Therion export. Default NO</li>
+  </ul>
+</li>
+<li>Therion:<br>
+  <ul>
+  <li>Maps first: export therion maps before survey data. default OFF</li>
+  <li>Stations: Add station points to Therion scraps. Default YES</li>
+  <li>Splays: Add splay lines to Therion scraps. Default YES</li>
+  <li>LRUD. Add LRUD to Survex/Therion export. Default NO</li>
+  <li>Grid. Add grid to xvi export. Default NO</li>
+  <li>Scale. Export scale. Default 1:100</li>
+  </ul>
+</li>
+<li>Compass:<br>
+  <ul>
+  <li>Compass station prefix. Default NO</li>
+  <li>Compass splays: add splays to Compass files</li>
+  <li>Compass swap LR. Swap L and R on Compass export.</li>
+  </ul>
+</li>
+<li>SVG:<br>
+  <ul>
+  <li>Grid. Add grid to SVG export. Default OFF</li>
+  <li>Line orientation. Default NO</li>
+  <li>Splays. Include splays. Default NO</li>
+  <li>Point stroke. Default 0.1</li>
+  <li>Label stroke. Default 0.3</li>
+  <li>Line stroke. Default 0.5</li>
+  <li>Grid stroke. Default 0.5</li>
+  <li>Shot stroke. Default 0.5</li>
+  <li>Orientation stroke. Default 2.0</li>
+  </ul>
+</li>
+<li>DXF:<br>
+  <ul>
+  <li>DXF splay endpoints. Default ON</li>
+  <li>AutoCAD version {6,12}. Default 6</li>
+  </ul>
+</li>
+<li>PNG:<br>
+  <ul>
+  <li>Image resolution [0.5, 100]. Default 1.5 [x200 px]</li>
+  <li>Background color (RGB in 0-100). Default "0 0 0" [black]</li>
+  </ul>
+</li>
+<li>KML/GeoJSON:<br>
+  <ul>
+  <li>Stations. Add stations to KML/GeoJSON export Default ON</li>
+  <li>Splays. Add splays to KML/GeoJSON export Default OFF</li>
+  </ul>
+</li>
 </ul><br><p>
 
 <b>SURVEY DATA</b><br>
@@ -60,6 +104,9 @@
 <li>Station names {alphanumeric,numeric}. Default alphanumeric</li>
 <li>Initial station name. Default "unset"</li>
 <li>Photo thumbnails size [80,400]. Default 200 pxl</li>
+<li>Data auto-export</li>
+<li>Sketch origin</li>
+<li>Shared x-sections</li>
 </ul>
 UNITS
 <ul>
@@ -70,15 +117,31 @@ UNITS
 SHOT DATA
 <ul>
 <li>Leg tolerance. Tolerance among the shots of same leg &gt; 0 [percent]. Default 0.05 (5%)</li>
-<li>Minimum Leg shots. Minimum number of shots per leg &gt;=2. Default 2</li>
+<li>Maximum shot length</li>
+<li>Minimum shot length</li>
+<li>Minimum leg-shot number. Minimum number of shots per leg &gt;=2. Default 2</li>
+<li>Backshot DistoX</li>
 <li>Splay vertical threshold. Limit for splay extend "vertical" [0,90]. Default 10 deg</li>
-<li>Leg vertical threshold. Leg V threshold [0,90]. Default 80 deg</li>
-<li>Settable "extend" reference. Settable or fixed extend L/R reference. Default NO</li>
+<li>Leg WENS threshold. Leg V threshold [0,90]. Default 80 deg</li>
+<li>"extend" reference. Settable or fixed extend L/R reference. Default NO</li>
 <li>Loop closure. Default "none"</li>
 <li>Prev/Next buttons. Default ON</li>
 <li>Backsight in user entered shot dialog. Default OFF</li>
 <li>Shot direction delay (timer). Default 10 s</li>
 <li>Shot direction timer beep volume [10,100]. Default 50 percent</li>
+<li>Geek:<br>
+  <ul>
+  <li>Diving mode</li>
+  <li>Recent shots</li>
+  <li>Recent data timeout</li>
+  <li>Splay classes</li>
+  <li>Splay coloring</li>
+  <li>Fractional "extend"</li>
+  <li>Plane interpolation</li>
+  <li>Leg-shot bell</li>
+  <li>Sensors</li>
+  </ul>
+</li>
 </ul>
 LOCATION
 <ul>
@@ -99,10 +162,24 @@ ACCURACY
 <li>Recent tool number {3, 4, 5, 6}. Default 4</li>
 <li>Side drag. Enable side dreg in sketch window. Default OFF</li>
 <li>Zoom controls {off,temporary,permanent}. Default permanent</li>
+<li>x-section horizontal threshold</li>
 <li>Midline check. Check if stations are attached to midline. Default ON</li>
-<li>Backup number. Default 5</li>
-<li>Backup interval. Default 60</li>
-<!--li>Save areas in xtherion-"style". Default NO</li-->
+<li>Leg "extend" check</li>
+<li>Geek:<br>
+  <ul>
+  <li>Sketch shift/scale</li>
+  <li>Sketch split/merge</li>
+  <li>Leg WENS threshold</li>
+  <li>Dash coherence</li>
+  <li>Splay dash clino threshold</li>
+  <li>Splay dash azimuth threshold</li>
+  <li>Splay dash angle threshold</li>
+  <li>Backup number. Default 5</li>
+  <li>Backup interval. Default 60</li>
+  <li>Backup clear menu</li>
+  <li>Auto-walls: type, and others</li>
+  </ul>
+</li>
 </ul>
 POINT TOOLS
 <ul>
@@ -114,11 +191,22 @@ LINE TOOLS
 <ul>
 <li>Lines width (N.B. wall line are twice this). Default 1 px</li>
 <li>Line style {Bezier,fine,normal,coarse}. Default normal</li>
-<li>Line default join {none, start, end, both, continue}. Default none</li>
 <li>Line-point spacing. Minimum distance between line points. Default 10 px</li>
 <li>Section lines "direction tick" size [1,20]. Default 8 [x unit]</li>
 <li>Section points. Add Therion section point to section line. Default ON</li>
+<li>Line default join {none, start, end, both, continue}. Default none</li>
 <li>Area border default visibility. Default ON</li>
+<li>Geek:<br>
+  <ul>
+  <li>Straightening angle</li>
+  <li>Interpolation accuracy (Bezier)</li>
+  <li>Cornet threshold (Bezier)</li>
+  <li>Line/area snap</li>
+  <li>Smooth/straighten segments</li>
+  <li>Streighten lines</li>
+  <li>Path multiselection</li>
+  </ul>
+</li>
 </ul>
 SKETCH ITEMS
 <ul>
@@ -129,11 +217,11 @@ SKETCH ITEMS
 <li>Eraser size. Default 36</li>
 <li>Shift sensitivity. Default 60</li>
 <li>Pointing radius. Default 16</li>
-<li>X-section H threshold [0,90]. Default 70 deg</li>
+<li>Splay transparency</li>
 </ul>
 <br><p>
 
-<b>DEVICES</b><br>
+<b>DEVICE</b><br>
 <ul>
 <li>Bluetooth. Check if BT is enabled on start. Default YES</li>
 <li>Connection data mode {on-demand,continuous}. Default on-demand</li>
@@ -141,9 +229,18 @@ SKETCH ITEMS
 <li>BT socket type {normal,insecure}. Default normal</li>
 <li>Z6 workaround. Default YES</li>
 <li>Autopairing. Default YES</li>
+<li>Geek:<br>
+  <ul>
+  <li>Connection delay</li>
+  <li>Data pause</li>
+  <li>Data ready wait delay</li>
+  <li>Laser pause</li>
+  <li>Shot pause</li>
+  </ul>
+</li>
 </ul><br><p>
 
-<b>CALIBRATION SETTINGS</b><br>
+<b>CALIBRATION</b><br>
 <ul>
 <li>Group policy {4x4+M,Nx4,distance). Default Nx4
 <li>Group tolerance. Default 40 [deg]</li>

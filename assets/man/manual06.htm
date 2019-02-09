@@ -100,8 +100,8 @@ If the 3D modelling is enabled there is also a button to create a new 3D model, 
   <li><i>Start station</i>: the default first station name for new surveys. Can be overridden in the <i>New survey</i> dialog. [default unset]</li>
   <li><i>Thumbnail size</i>: size of the photo thumbnails [default 200, min 80, max 400]</li>
   <li><i>Data auto-export</i>: whether to export the survey data whenever the data window is closed [default no]</li>
+  <li><i>Sketch origin</i>: whether to suggest always the same origin or not [default no]</li>
   <li><i>Shared x-sections</i>: whether at-station x-section should be shared by default [default no]</li>
-  <li><i>Fixed sketch origin</i>: whether to suggest always the same origin or not [default no]</li>
   <li><i>DATA UNITS</i>
     <ul style="margin-top:0; margin-bottom:0">
     <li><i>Length units</i>: either meters or feet [default meters]</li>
@@ -111,12 +111,13 @@ If the 3D modelling is enabled there is also a button to create a new 3D model, 
   </li>
   <li><i>SHOT DATA</i>
     <ul style="margin-top:0; margin-bottom:0">
+    <li><i>Leg tolerance</i>: the angular tolerance (percent) between consecutive shots of a leg [default 0.05, min 0]</li>
     <li><i>Max shot length</i>: longer shots are "overshoots" [default 50 m, min 20 m]</li>
     <li><i>Min leg length</i>: shorter legs are highlighted with an orange background [default 0.5 m]</li>
-    <li><i>Leg tolerance</i>: the angular tolerance (percent) between consecutive shots of a leg [default 0.05, min 0]</li>
     <li><i>Min leg shots</i>: minimum number of close consecutive shots for a leg.[default 2, min 2, max 4]</li>
+    <li><i>Backshot DistoX</i>: DistoX in "backshot" mode [default no]</li>
     <li><i>Splay vertical threshold</i> defines how the <a href="page_azimuth.htm">splay "extend"</a> is set [default 10, min 0, max 90]</li>
-    <li><i>Leg vertical threshold</i> (Therion "vthreshold"): the LRUD for manually entered shots are considered West-East-North-South when the shot inclination exceeds the vertical threshold [default 80, min 0, max 90]</li>
+    <li><i>Leg WENS threshold</i> (Therion "vthreshold"): the LRUD for manually entered shots are considered West-East-North-South when the shot inclination exceeds the vertical threshold [default 80, min 0, max 90]</li>
     <li><i>Shot extend</i>: either fixed or relative to the <a href="page_azimuth.htm">extend reference</a> azimuth [default relative]</li>
     <li><i>Loop closure</i> error compensation. It is advisable not to do the compensation, as this allows to see graphically the misclosures, and spot possible survey errors [default "none"]. The special loop compensation based on "triangles" is for <a href="page_trilateration.htm">trilateration</a> [E].</li>
     <li>whether to show <i>prev/next</i> buttons in the shot edit dialog [default yes]</li>
@@ -129,7 +130,7 @@ If the 3D modelling is enabled there is also a button to create a new 3D model, 
   <li><i>ACCURACY <a href="page_accuracy.htm">settings</a></i></li>
 </ul><br><p>
 
-<a href="page_geek.htm">Geek settings</a>: <i>Fractional extend</i>, <i>Latest shots</i>.<br><p>
+<a href="page_geek.htm">Geek settings</a>: <i>Latest shots and their timeout</i>, <i>Fractional extend</i>, <i>Splay classes and coloring</i>, <i>Diving mode</i>, <i>Sensors</i>.<br><p>
 
 To exit the survey data window double tap on the <u>BACK</u> button of your device.<br>
 If the automatic backup is enabled and the default data file format is set, the data are exported whenever the data window is closed.<br><p>

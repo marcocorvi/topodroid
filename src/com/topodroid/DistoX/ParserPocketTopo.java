@@ -17,13 +17,21 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-// import java.util.ArrayList;
+// import java.io.PrintWriter; // FIXME_TH2
+
+import java.io.FileOutputStream;
+import java.io.BufferedOutputStream;
+import java.io.DataOutputStream;
+import java.util.List;
+import java.util.ArrayList;
+
 // import java.util.Stack;
 // import java.util.regex.Pattern;
 import java.util.Locale;
 
-// import android.util.Log;
+import android.graphics.RectF;
+
+import android.util.Log;
 
 class ParserPocketTopo extends ImportParser
 {
@@ -93,7 +101,7 @@ class ParserPocketTopo extends ImportParser
       String from = shot.from().toString();
       String to   = shot.to().toString();
       float da = shot.distance();
-      float ba = shot.azimuth();
+      float ba = TDMath.in360( shot.azimuth() );
       float ca = shot.inclination();
       float ra = shot.roll();
       // Log.v("PTDistoX", "shot <" + from + ">-<" + to + ">: " + da + " " + ba + " " + ca );
@@ -149,13 +157,19 @@ class ParserPocketTopo extends ImportParser
       // NumStation st = num.getStation( mStartFrom );
       // Log.v("PTDistoX", " start " + st.e + " " + st.s );
 
+      int over_scale = ptfile.getOverview().scale();
+
       PTDrawing outline = ptfile.getOutline();
-      String filename1 = TDPath.getTh2File( mName + "-1p.th2" );
-      writeDrawing( filename1, outline, PlotInfo.PLOT_PLAN, 5*DrawingUtil.CENTER_X, 5*DrawingUtil.CENTER_Y );
+      String scrap_name1 = mName + "-1p";
+      // String filename1 = TDPath.getTh2File( mName + "-1p.th2" );
+      String filename1 = TDPath.getTdrFileWithExt( scrap_name1 );
+      writeDrawing( filename1, scrap_name1, outline, PlotInfo.PLOT_PLAN, over_scale );
 
       PTDrawing sideview = ptfile.getSideview();
-      String filename2 = TDPath.getTh2File( mName + "-1s.th2" );
-      writeDrawing( filename2, sideview, PlotInfo.PLOT_EXTENDED, 5*DrawingUtil.CENTER_X, 5*DrawingUtil.CENTER_Y );
+      String scrap_name2 = mName + "-1s";
+      // String filename2 = TDPath.getTh2File( mName + "-1s.th2" );
+      String filename2 = TDPath.getTdrFileWithExt( scrap_name2 );
+      writeDrawing( filename2, scrap_name2, sideview, PlotInfo.PLOT_EXTENDED, over_scale );
       // Log.v("DistoX", "display " + TopoDroidApp.mDisplayWidth + " " + TopoDroidApp.mDisplayHeight ); 
     } else {
       TDLog.Error( "PT null StartFrom");
@@ -163,12 +177,14 @@ class ParserPocketTopo extends ImportParser
     
   }
 
-  static final private float FCT = 0.0f;
   /** return true if successful
    */
-  private boolean writeDrawing( String filename, PTDrawing drawing, long type, float xoff, float yoff )
+  private boolean writeDrawing( String filename, String scrap_name, PTDrawing drawing, long type, int over_scale )
   {
     if ( drawing == null ) return false;
+    float xoff = DrawingUtil.CENTER_X; // * 5;
+    float yoff = DrawingUtil.CENTER_Y; // * 5;
+
     int elem_count = drawing.elementNumber();
     // Log.v( "PTDistoX", "off " + xoff + " " + yoff );
     // TDLog.Log( TDLog.LOG_IO, "PocketTopo to Therion: file " + filename + " elems " + elem_count );
@@ -177,25 +193,30 @@ class ParserPocketTopo extends ImportParser
     File file = new File( filename );
     boolean ret = false;
     // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
+    List<DrawingPath> paths = new ArrayList<DrawingPath>();
+
     {
       try {
-        FileWriter fw = new FileWriter( file );
-        PrintWriter pw = new PrintWriter( fw );
+        // FileWriter fw = new FileWriter( file ); // FIXME_TH2
+        // PrintWriter pw = new PrintWriter( fw );
+        // if ( type == PlotInfo.PLOT_PLAN ) {
+        //   pw.format("scrap 1p -proj plan "); // scrap_name
+        // } else {
+        //   pw.format("scrap 1s -proj extended ");
+        // }
+        // pw.format("[0 0 1 0 0.0 0.0 1.0 0.0 m]\n");
 
-        if ( type == PlotInfo.PLOT_PLAN ) {
-          pw.format("scrap 1p -proj plan ");
-        } else {
-          pw.format("scrap 1s -proj extended ");
-        }
-        pw.format("[0 0 1 0 0.0 0.0 1.0 0.0 m]\n");
+        float map_scale = drawing.mapping().scale();
+        float scale = 0.02f;
+        // float scale = 2.0f / map_scale;
+	// Log.v("PTDistoXX", "map scale " + scale + " outline_scale " + map_scale );
 
-        PTMapping mapping = drawing.mapping();
-        int scale = mapping.scale();
-        int x0 = (mapping.origin().x());
-        int y0 = (mapping.origin().y());
+        float x0 = 0; // (mapping.origin().x());
+        float y0 = 0; // (mapping.origin().y());
         // Log.v("PTDistoX", "map origin " + x0 + " " + y0 + " elements " + elem_count );
-        x0 *= FCT;
-        y0 *= FCT;
+
+        float xmin=1000000f, xmax=-1000000f, 
+              ymin=1000000f, ymax=-1000000f;
 
         if ( elem_count > 0 ) {
           for (int h=0; h<elem_count; ++h ) {
@@ -204,46 +225,76 @@ class ParserPocketTopo extends ImportParser
               int point_count = elem.pointCount();
               int col = elem.getColor();
               if ( point_count > 1 ) {
-                PTPoint point = elem.point(0);
+		String th_name = PtCmapActivity.getLineThName( col );
                 // add a line to the plotCanvas
-                pw.format("line %s\n", PtCmapActivity.getLineThName(col) );
+		int line_type = BrushManager.mLineLib.getSymbolIndexByThName( th_name );
+		if ( line_type < 0 ) line_type = 0;
+		DrawingLinePath line = new DrawingLinePath( line_type );
+
+                PTPoint point = elem.point(0);
+                // pw.format("line %s\n", th_name );
                 int k=0;
-                int x1 =   (int)( xoff + PT_SCALE*(point.x() - x0));
-                int y1 = - (int)( yoff + PT_SCALE*(point.y() - y0));
+                int x1 = (int)( xoff + scale*(point.x() - x0));
+                int y1 = (int)( yoff + scale*(point.y() - y0));
+		// update bbox
+		if ( x1 < xmin ) { xmin = x1; } if ( x1 > xmax ) { xmax = x1; }
+		if ( y1 < ymin ) { ymin = y1; } if ( y1 > ymax ) { ymax = y1; }
                 // FIXME drawer->insertLinePoint( x1, y1, type, canvas );
-                pw.format("  %d %d \n", x1, y1 );
+                // pw.format("  %d %d \n", x1, -y1 ); FIXME_TH2
+		line.addStartPoint( x1, y1 );
                 // Log.v("PTDistoX", "elem " + h + ":0 " + x1 + " " + y1 + " point " + point.x() + " " + point.y() );
 
                 for (++k; k<point_count; ++k ) {
                   point = elem.point(k);
-                  int x =   (int)( xoff + PT_SCALE*(point.x() - x0) );
-                  int y = - (int)( yoff + PT_SCALE*(point.y() - y0) );
-                  if ( Math.abs(x - x1) >= 4 || Math.abs(y - y1) >= 4 ) {
-                    x1 = x;
-                    y1 = y;
-                    // FIXME drawer->insertLinePoint( x, y, type, canvas );
-                    pw.format("  %d %d \n", x1, y1 );
-                    // Log.v("PTDistoX", "elem " + h + ":" + k + " " + x1 + " " + y1 + " point " + point.x() + " " + point.y() );
-                  }
+                  int x = (int)( xoff + scale*(point.x() - x0) );
+                  int y = (int)( yoff + scale*(point.y() - y0) );
+		  if ( x < xmin ) { xmin = x; } else if ( x > xmax ) { xmax = x; }
+		  if ( y < ymin ) { ymin = y; } else if ( y > ymax ) { ymax = y; }
+                  // if ( Math.abs(x - x1) >= 4 || Math.abs(y - y1) >= 4 ) { // FIXME_TH2
+                  //   x1 = x;
+                  //   y1 = y;
+                  //   // FIXME drawer->insertLinePoint( x, y, type, canvas );
+                  //   pw.format("  %d %d \n", x1, -y1 );
+                  //   // Log.v("PTDistoX", "elem " + h + ":" + k + " " + x1 + " " + y1 + " point " + point.x() + " " + point.y() );
+                  // } 
+		  line.addPoint( x, y );
                 }
                 // FIXME drawer->insertLinePoint( x1, y1, type, canvas ); // close the line
                 // FIXME pw.format("  %d %d \n", x1, y1 );
-                pw.format("endline\n");
+                // pw.format("endline\n"); // FIXME_TH2
+		paths.add( line );
               } else if ( point_count == 1 ) {
+		String th_name = PtCmapActivity.getPointThName(col);
+		int point_type = BrushManager.mPointLib.getSymbolIndexByThName( th_name );
+		if ( point_type < 0 ) point_type = 0;
+
                 PTPoint point = elem.point(0);
-                int x =   (int)( xoff + PT_SCALE*(point.x() - x0) );
-                int y = - (int)( yoff + PT_SCALE*(point.y() - y0) );
+                int x = (int)( xoff + scale*(point.x() - x0) );
+                int y = (int)( yoff + scale*(point.y() - y0) );
+		if ( x < xmin ) { xmin = x; } if ( x > xmax ) { xmax = x; }
+		if ( y < ymin ) { ymin = y; } if ( y > ymax ) { ymax = y; }
                 // FIXME drawer->insertPoint(x, y, type, canvas );
-                pw.format("point %d %d %s \n", x, y, PtCmapActivity.getPointThName(col) );
+                // pw.format("point %d %d %s \n", x, -y, th_name ); // FIXME_TH2
                 // Log.v("PTDistoX", "elem " + h + " single " + x + " " + y );
+		paths.add( new DrawingPointPath( point_type, x, y, DrawingPointPath.SCALE_M, "", "" ) ); // no text, no options
               }
             } catch( ClassCastException e ) {
             }
           }
         }
-        pw.format("endscrap\n");
-        fw.flush();
-        fw.close();
+        // pw.format("endscrap\n"); // FIXME_TH2
+        // fw.flush();
+        // fw.close();
+
+	RectF bbox = new RectF( xmin, ymin, xmax, ymax );
+
+        FileOutputStream fos = new FileOutputStream( file );
+        BufferedOutputStream bfos = new BufferedOutputStream( fos );
+        DataOutputStream dos = new DataOutputStream( bfos );
+	DrawingIO.exportDataStream( (int)type, dos, scrap_name, 0, bbox, paths ); // proj_dir not used
+        dos.close();
+        fos.close();
+
         ret = true;
       } catch ( IOException e ) {
         TDLog.Error( mName + " scraps IO error " + e );

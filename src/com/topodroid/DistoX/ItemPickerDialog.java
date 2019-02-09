@@ -359,7 +359,7 @@ class ItemPickerDialog extends MyDialog
       int np = mPointLib.mSymbolNr;
       for ( int i=0; i<np; ++i ) {
         SymbolPoint p = (SymbolPoint)mPointLib.getSymbolByIndex( i );
-        if ( p.isEnabled() ) {
+        if ( p.isEnabled() && ( TDLevel.overAdvanced || ! p.mThName.equals("section") ) ) { // FIXME_SECTION_POINT 
           mPointAdapter.add( new ItemSymbol( mContext, this, Symbol.POINT, i, p, use_text ) );
         }
       }

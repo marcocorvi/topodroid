@@ -36,10 +36,11 @@ class DrawingAreaDialog extends MyDialog
   private final DrawingAreaPath mArea;
   private final DrawingWindow mParent;
   private final boolean mOrientable;
+  // private boolean mDoOptions; // areas do not have options
 
   private CheckBox mCBvisible;
   // private Spinner mETtype;
-  private int mType;
+  private int mAreaType;
 
   private OrientationWidget mOrientationWidget; 
 
@@ -53,8 +54,9 @@ class DrawingAreaDialog extends MyDialog
     super( context, R.string.DrawingAreaDialog );
     mParent = parent;
     mArea = line;
-    mType  = mArea.mAreaType;
-    mOrientable = BrushManager.mAreaLib.isSymbolOrientable( mType );
+    mAreaType  = mArea.mAreaType;
+    mOrientable = BrushManager.mAreaLib.isSymbolOrientable( mAreaType );
+    // mDoOptions = TDLevel.overAdvanced;
   }
 
 // -------------------------------------------------------------------
@@ -71,7 +73,7 @@ class DrawingAreaDialog extends MyDialog
     Spinner eTtype = (Spinner) findViewById( R.id.area_type );
     ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, BrushManager.mAreaLib.getSymbolNames() );
     eTtype.setAdapter( adapter );
-    eTtype.setSelection( mType );
+    eTtype.setSelection( mAreaType );
     eTtype.setOnItemSelectedListener( this );
 
     mCBvisible = (CheckBox) findViewById( R.id.area_visible );
@@ -96,10 +98,10 @@ class DrawingAreaDialog extends MyDialog
   }
 
   @Override
-  public void onItemSelected( AdapterView av, View v, int pos, long id ) { mType = pos; }
+  public void onItemSelected( AdapterView av, View v, int pos, long id ) { mAreaType = pos; }
 
   @Override
-  public void onNothingSelected( AdapterView av ) { mType = mArea.mAreaType; }
+  public void onNothingSelected( AdapterView av ) { mAreaType = mArea.mAreaType; }
 
 
   public void onClick(View v) 
@@ -108,7 +110,7 @@ class DrawingAreaDialog extends MyDialog
     // TDLog.Log( TDLog.LOG_INPUT, "DrawingAreaDialog onClick() " + b.getText().toString() );
 
     if ( b == mBtnOk ) {
-      if ( mType != mArea.mAreaType ) mArea.setAreaType( mType );
+      if ( mAreaType != mArea.mAreaType ) mArea.setAreaType( mAreaType );
 
       int reduce = mBtnReduce.getState();
       if ( reduce > 0 ) mParent.reduceArea( mArea, reduce );

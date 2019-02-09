@@ -904,7 +904,8 @@ class DrawingIO
     }
   }
 
-  static private void exportDataStream( int type, DataOutputStream dos, String scrap_name, int proj_dir,
+  // used by ParserPocketTopo
+  static void exportDataStream( int type, DataOutputStream dos, String scrap_name, int proj_dir,
                                         RectF bbox, List<DrawingPath> paths )
   {
     try { 
@@ -1260,10 +1261,26 @@ class DrawingIO
         final List<DrawingStationName> stations,
         final List<DrawingPath> splays )
   {
+
+    class XSectionScrap
+    {
+      public String name; // scrap name
+      public float x, y;  // offset
+  
+      public XSectionScrap( String nn, float xx, float yy ) 
+      {
+        name = nn;
+        x = xx;
+        y = yy;
+      }
+    }
+
     // ArraySet<String> plots = new ArraySet<String>(); // need API-23
     int NPLOTS = 8;
     int nplots = 0;
     String[] plots = new String[NPLOTS];
+
+    ArrayList< XSectionScrap> xsections = new ArrayList<XSectionScrap>();
 
     float xmin=1000000f, xmax=-1000000f, 
           ymin=1000000f, ymax=-1000000f;
@@ -1319,6 +1336,10 @@ class DrawingIO
                   out.write( pp_str );
                   out.newLine();
                 }
+		if ( BrushManager.isPointSection( pp.mPointType ) ) {
+                  String name = pp.getOption("-scrap");  // xsection name
+		  if ( name != null && name.length() > 0 ) xsections.add( new XSectionScrap( name, pp.cx, pp.cy ) );
+		}
               } else if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) { // should never happen
                 // if ( ! TDSetting.mAutoStations ) {
                 //   DrawingStationPath st = (DrawingStationPath)p;
@@ -1402,15 +1423,28 @@ class DrawingIO
         e.printStackTrace();
       }
     }
+
+    for ( XSectionScrap xsection : xsections ) { // write xsection scraps
+      File file = new File( TDPath.getTdrFileWithExt( xsection.name ) );
+      dataStream2Therion( file, out, null, false, true, xsection.x, xsection.y );
+    }
   }
 
   static public void dataStream2Therion( File file, BufferedWriter out, RectF bbox, boolean endscrap )
+  {
+    dataStream2Therion( file, out, bbox, true, endscrap, 0, 0 ); // true = beginheader
+  }
+
+  // bbox != null  <==>  begeinheader true
+  static private void dataStream2Therion( File file, BufferedWriter out, RectF bbox,
+                                          boolean beginheader, boolean endscrap,
+                                          float xoff, float yoff )
   {
     int version = 0;
     boolean in_scrap = false;
 
     boolean do_north = false;
-    float north_x1=0, north_y1=0, north_x2=0, north_y2=0;
+    float north_x1=xoff, north_y1=yoff, north_x2=xoff, north_y2=yoff;
 
     String name = "";
     int type = 0;
@@ -1436,25 +1470,30 @@ class DrawingIO
               break;
             case 'I': // plot info: bounding box
               {
-                bbox.left   = dis.readFloat();
-                bbox.top    = dis.readFloat();
-                bbox.right  = dis.readFloat();
-                bbox.bottom = dis.readFloat();
+	        if ( bbox != null ) {
+                  bbox.left   = dis.readFloat();
+                  bbox.top    = dis.readFloat();
+                  bbox.right  = dis.readFloat();
+                  bbox.bottom = dis.readFloat();
+		} else {
+                  for ( int k=0; k<4; ++k)  dis.readFloat();
+		}
                 if ( dis.readInt() == 1 ) {
                   do_north = true;
-                  north_x1 = dis.readFloat();
-                  north_y1 = dis.readFloat();
-                  north_x2 = dis.readFloat();
-                  north_y2 = dis.readFloat();
+                  north_x1 = xoff + dis.readFloat();
+                  north_y1 = yoff + dis.readFloat();
+                  north_x2 = xoff + dis.readFloat();
+                  north_y2 = yoff + dis.readFloat();
                 }
-                exportTherionHeader1( out, type, bbox );
+                if ( bbox != null ) exportTherionHeader1( out, type, bbox );
                 // exportTherionHeader2( out, points, lines, areas );
                 String proj = PlotInfo.projName[ type ];
-                if ( do_north ) { 
-                  exportTherionHeader3( out, type, name, proj, 0, true, north_x1, north_y1, north_x2, north_y2 );
-                } else {
-                  exportTherionHeader3( out, type, name, proj, project_dir, false, 0, 0, 0, 0 );
-                }
+                exportTherionHeader3( out, type, name, proj, project_dir, do_north, north_x1, north_y1, north_x2, north_y2 );
+                // if ( do_north ) { 
+                //   exportTherionHeader3( out, type, name, proj, 0, true, north_x1, north_y1, north_x2, north_y2 );
+                // } else {
+                //   exportTherionHeader3( out, type, name, proj, project_dir, false, 0, 0, 0, 0 );
+                // }
                 in_scrap = true;
               }
               break;
