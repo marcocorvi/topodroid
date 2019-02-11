@@ -136,7 +136,6 @@ class Archiver
         addEntry( zos, new File( TDPath.getSurveyPlotTdrFile( survey, plt.name ) ) );
         addEntry( zos, new File( TDPath.getSurveyPlotDxfFile( survey, plt.name ) ) );
         addEntry( zos, new File( TDPath.getSurveyPlotSvgFile( survey, plt.name ) ) );
-        // addEntry( zos, new File( TDPath.getSurveyPlotHtmFile( survey, plt.name ) ) ); // SVG in HTML
         addEntry( zos, new File( TDPath.getSurveyPlotXviFile( survey, plt.name ) ) );
         addEntry( zos, new File( TDPath.getSurveyPlotPngFile( survey, plt.name ) ) );
         if ( plt.type == PlotInfo.PLOT_PLAN ) {
@@ -198,7 +197,6 @@ class Archiver
       addEntry( zos, new File( TDPath.getSurveyTroFile( survey ) ) );
       addEntry( zos, new File( TDPath.getSurveyTrbFile( survey ) ) );
       addEntry( zos, new File( TDPath.getSurveyTopFile( survey ) ) );
-      addDirectory( zos, new File( TDPath.getShpPath( survey ) ) );
 
       addEntry( zos, new File( TDPath.getSurveyNoteFile( survey ) ) );
  
@@ -300,7 +298,7 @@ class Archiver
             pathname = TDPath.getSurFile( ze.getName() );
           } else if ( ze.getName().endsWith( TDPath.SVX ) ) {
             pathname = TDPath.getSvxFile( ze.getName() );
-          } else if ( ze.getName().endsWith( TDPath.SHPZIP ) ) {
+          } else if ( ze.getName().endsWith( TDPath.SHZ ) ) {
             pathname = TDPath.getShzFile( ze.getName() );
 
           } else if ( ze.getName().endsWith( TDPath.TH ) ) {

@@ -493,9 +493,10 @@ class DrawingIO
   // which calls the full method exportTherion with the list of sketch items
   //
   // FIXME DataHelper and SID are necessary to export splays by the station
+  // @param fullname  full scrap name ( filename without extension )
   static void exportTherion( DrawingCommandManager manager, int type, File file, String fullname, String projname, int proj_dir, boolean multiscrap )
   {
-    TDLog.Log( TDLog.LOG_IO, "export Therion file " + file.getPath() );
+    TDLog.Log( TDLog.LOG_IO, "export Therion " + fullname + " file " + file.getPath() );
     try {
       FileWriter fw = new FileWriter( file );
       BufferedWriter bw = new BufferedWriter( fw );
@@ -1026,49 +1027,54 @@ class DrawingIO
     }
   }
 
-  static private void exportTherionHeader1( BufferedWriter out, int type, RectF bbox ) throws IOException
+  // @param name filename without extension .th2
+  static private void exportTherionHeader1( BufferedWriter out, int type, RectF bbox, String name ) throws IOException
   {
     out.write("encoding utf-8");
     out.newLine();
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
-    pw.format("##XTHERION## xth_me_area_adjust %.1f %.1f %.1f %.1f\n", 
-       bbox.left*6, 400-bbox.bottom*6, bbox.right*6, 400-bbox.top*6 );
-    pw.format("##XTHERION## xth_me_area_zoom_to 25\n\n");
+    pw.format("##XTHERION## xth_me_area_adjust %.1f %.1f %.1f %.1f\n", bbox.left*6, 400-bbox.bottom*6, bbox.right*6, 400-bbox.top*6 );
+    pw.format("##XTHERION## xth_me_area_zoom_to 25\n");
+    if ( TDSetting.mTherionXvi ) {
+      // xx vsb gamma - yy XVIroot
+      pw.format("##XTHERION## xth_me_image_insert {%.2f 1 1.0} {%.2f 0} %s.xvi 0 {}\n", 0, 0, name );
+    }
+    pw.format("\n");
     pw.format("# %s created by TopoDroid v. %s\n\n", TopoDroidUtil.currentDate(), TopoDroidApp.VERSION );
     out.write( sw.getBuffer().toString() );
   }
 
-  static private void exportTherionHeader2( BufferedWriter out ) throws IOException
-  {
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter(sw);
-    pw.format("#P ");
-    BrushManager.mPointLib.writePalette( pw );
-    pw.format("\n#L ");
-    BrushManager.mLineLib.writePalette( pw );
-    pw.format("\n#A ");
-    BrushManager.mAreaLib.writePalette( pw );
-    pw.format("\n");
-    out.write( sw.getBuffer().toString() );
-  }
+  // static private void exportTherionHeader2( BufferedWriter out ) throws IOException
+  // {
+  //   StringWriter sw = new StringWriter();
+  //   PrintWriter pw  = new PrintWriter(sw);
+  //   pw.format("#P ");
+  //   BrushManager.mPointLib.writePalette( pw );
+  //   pw.format("\n#L ");
+  //   BrushManager.mLineLib.writePalette( pw );
+  //   pw.format("\n#A ");
+  //   BrushManager.mAreaLib.writePalette( pw );
+  //   pw.format("\n");
+  //   out.write( sw.getBuffer().toString() );
+  // }
 
-  static private void exportTherionHeader2( BufferedWriter out, String points, String lines, String areas ) throws IOException
-  {
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter(sw);
-    pw.format("#P");
-    String[] vals = points.split(",");
-    for ( String v : vals ) if ( v.length() > 0 ) pw.format(" %s", v );
-    pw.format("\n#L");
-    vals = lines.split(",");
-    for ( String v : vals ) if ( v.length() > 0 ) pw.format(" %s", v );
-    pw.format("\n#A");
-    vals = lines.split(",");
-    for ( String v : vals ) if ( v.length() > 0 ) pw.format(" %s", v );
-    pw.format("\n");
-    out.write( sw.getBuffer().toString() );
-  }
+  // static private void exportTherionHeader2( BufferedWriter out, String points, String lines, String areas ) throws IOException
+  // {
+  //   StringWriter sw = new StringWriter();
+  //   PrintWriter pw  = new PrintWriter(sw);
+  //   pw.format("#P");
+  //   String[] vals = points.split(",");
+  //   for ( String v : vals ) if ( v.length() > 0 ) pw.format(" %s", v );
+  //   pw.format("\n#L");
+  //   vals = lines.split(",");
+  //   for ( String v : vals ) if ( v.length() > 0 ) pw.format(" %s", v );
+  //   pw.format("\n#A");
+  //   vals = lines.split(",");
+  //   for ( String v : vals ) if ( v.length() > 0 ) pw.format(" %s", v );
+  //   pw.format("\n");
+  //   out.write( sw.getBuffer().toString() );
+  // }
   
   static private void exportTherionHeader3( BufferedWriter out,
          int type, String scrap_name, String proj_name, int project_dir,
@@ -1105,7 +1111,11 @@ class DrawingIO
   }
 
   // FIXME DataHelper and SID are necessary to export splays by the station
-  static void exportTherion( int type, BufferedWriter out, String scrap_name, String proj_name, int project_dir,
+  //
+  // @param full_name   name of the scrap (= file_name without extension)
+  // @param proj_name   name of the projection
+  //
+  static void exportTherion( int type, BufferedWriter out, String full_name, String proj_name, int project_dir,
         RectF bbox,
         DrawingPath north,
         final List<ICanvasCommand> cstack,
@@ -1114,12 +1124,12 @@ class DrawingIO
         final List<DrawingPath> splays )
   {
     try { 
-      exportTherionHeader1( out, type, bbox );
+      exportTherionHeader1( out, type, bbox, full_name );
       // exportTherionHeader2( out );
       if ( north != null ) { 
-        exportTherionHeader3( out, type, scrap_name, proj_name, 0, true, north.x1, north.y1, north.x2, north.y2 );
+        exportTherionHeader3( out, type, full_name, proj_name, 0, true, north.x1, north.y1, north.x2, north.y2 );
       } else {
-        exportTherionHeader3( out, type, scrap_name, proj_name, project_dir, false, 0, 0, 0, 0 );
+        exportTherionHeader3( out, type, full_name, proj_name, project_dir, false, 0, 0, 0, 0 );
       }
         
       synchronized( cstack ) {
@@ -1253,7 +1263,8 @@ class DrawingIO
   }
 
   // FIXME DataHelper and SID are necessary to export splays by the station
-  static void exportTherionMultiScrap( int type, BufferedWriter out, String proj_name, int project_dir,
+  // @param full_name    filename without extension
+  static void exportTherionMultiScrap( int type, BufferedWriter out, String full_name, String proj_name, int project_dir,
         // RectF bbox,
         // DrawingPath north, // no x-section
         final List<ICanvasCommand> cstack,
@@ -1308,7 +1319,7 @@ class DrawingIO
 	    nplots ++;
 	  }
 	} else {
-	  TDLog.Error("DistoXX", "path with no plot-name, type " + p.mType );
+	  TDLog.Error("path with no plot-name, type " + p.mType );
 	}
       }
       RectF bbox = new RectF( xmin, ymin, xmax, ymax ); // left top right bottom
@@ -1317,12 +1328,12 @@ class DrawingIO
       // Log.v("DistoXX", "export th2 multiscrap bbox X " + xmin + " " + xmax  + " Y " + ymin + " " + ymax );
 
       try { 
-        exportTherionHeader1( out, type, bbox );
+        exportTherionHeader1( out, type, bbox, full_name );
         // exportTherionHeader2( out );
         for ( int k=0; k<nplots; ++k ) {
           String plot = plots[k]; 
           // if ( north != null ) { 
-          //   exportTherionHeader3( out, type, scrap_name, proj_name, 0, true, north.x1, north.y1, north.x2, north.y2 );
+          //   exportTherionHeader3( out, type, full_name, proj_name, 0, true, north.x1, north.y1, north.x2, north.y2 );
           // } else {
             exportTherionHeader3( out, type, plot, proj_name, project_dir, false, 0, 0, 0, 0 );
           // }
@@ -1431,17 +1442,19 @@ class DrawingIO
     // Log.v("DistoXX", "multiscrap sections " + xsections.size() );
     for ( XSectionScrap xsection : xsections ) { // write xsection scraps
       File file = new File( TDPath.getTdrFileWithExt( xsection.name ) );
-      dataStream2Therion( file, out, null, false, true, xsection.x, xsection.y );
+      dataStreamToTherion( file, out, null, null, false, true, xsection.x, xsection.y );
     }
   }
 
-  static public void dataStream2Therion( File file, BufferedWriter out, RectF bbox, boolean endscrap )
-  {
-    dataStream2Therion( file, out, bbox, true, endscrap, 0, 0 ); // true = beginheader
-  }
+  // @param fullname  file name without extension (= scrap name)
+  // static public void dataStreamToTherion( File file, BufferedWriter out, String fullname, RectF bbox, boolean endscrap )
+  // {
+  //   dataStreamToTherion( file, out, fullname, bbox, true, endscrap, 0, 0 ); // true = beginheader
+  // }
 
   // bbox != null  <==>  begeinheader true
-  static private void dataStream2Therion( File file, BufferedWriter out, RectF bbox,
+  // @param file_name  filename without extension
+  static private void dataStreamToTherion( File file, BufferedWriter out, String file_name, RectF bbox, 
                                           boolean beginheader, boolean endscrap,
                                           float xoff, float yoff )
   {
@@ -1490,7 +1503,7 @@ class DrawingIO
                   north_x2 = xoff + dis.readFloat();
                   north_y2 = yoff + dis.readFloat();
                 }
-                if ( bbox != null ) exportTherionHeader1( out, type, bbox );
+                if ( bbox != null ) exportTherionHeader1( out, type, bbox, file_name );
                 // exportTherionHeader2( out, points, lines, areas );
                 String proj = PlotInfo.projName[ type ];
                 exportTherionHeader3( out, type, name, proj, project_dir, do_north, north_x1, north_y1, north_x2, north_y2 );

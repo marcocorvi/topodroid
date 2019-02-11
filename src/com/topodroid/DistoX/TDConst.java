@@ -113,13 +113,15 @@ class TDConst
       "Therion",
       "DXF",
       "SVG",
-      "SHP"
+      "SHP",
+      "XVI"
   };
   static final private int[] mOverviewExportIndex = {
     DISTOX_EXPORT_TH2,
     DISTOX_EXPORT_DXF,
     DISTOX_EXPORT_SVG,
-    DISTOX_EXPORT_SHP
+    DISTOX_EXPORT_SHP,
+    DISTOX_EXPORT_XVI
   };
 
   static final String[] mCalibExportTypes = { "CSV" };

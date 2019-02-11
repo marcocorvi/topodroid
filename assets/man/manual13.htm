@@ -1,7 +1,27 @@
 <html><body>
 <h3>[13] IMPORT EXPORT </h3>
-When you are done, export the survey in your favourite format and make a zip archive. The zip archive is the a complete backup of your survey, and its exports. You can use it to transfer the survey to another android.<br><p>
+When you are done, export the survey in your favourite format and make a zip archive.<br>
+After you have downloaded the zip to your PC and unzipped it, you can complete the cave map with whatever program you are used to.<br><p>
 
+The zip archive contains the command to restore the survey data and other informations in the database.
+The zip archive is the a complete backup of your survey, and its exports. You can use it to transfer the survey to another android.<br><p>
+
+Survey data, and zip archive, are exported from the "Survey Window".<br>
+Survey sketches are exported from the "Drawing Window" (single sketch) and from the "Overview Window" (all sketches in one file).<br>
+File for survey import are searched in the <i>import</i> folder.<br>
+Zip archives for import are searched in the <i>zip</i> folder.<br><p>
+
+<b>Default export formats</b><br>
+TopoDroid has two settings to select a default export format for the survey data and one for the sketches.
+By default these are both set to "none", ie, no export.
+<br><p>
+
+When the default survey data export format is set, TopoDroid exports the survey data in that format before creating a zip archive, so that the export is included in the archive.<br><p>
+
+When the default sketch export format is set, the sketches are exported in this format whenever they are closed from the "Drawing Window".<br>
+For cSurvey x-sections are saved as PNG images.<br><p>
+
+<h4>SURVEY IMPORT</h4>
 TopoDroid imports survey data from the following formats:
 <ul>
 <li>Compass</li>
@@ -11,25 +31,10 @@ TopoDroid imports survey data from the following formats:
 <li>CaveSniper</li>
 <li>PocketTopo, including sketches</li>
 </ul>
-On import from file formats that have LRUD values, these are converted to x-splays (shown in green).
-TopoDroid looks for the files to import in the folder "import", and for zip archives in the folder "zip".<br><p>
 
-<b>Warning</b><br>
-The zip archive contains the command to restore the survey data and other informations in the database.
-A survey zip is a full backup of the survey and can be used to copy the survey to another Android.
-Zip import fails if the zip has a database version that is too old or is newer than the one in TopoDroid.<br><p>
-
-After you have downloaded the zip to your PC and unzipped it, you can complete the cave map with whatever program you are used to. The support of other cave survey file format in import may not be complete.<br><p>
-
-<h4>Default export formats</h4>
-TopoDroid has two settings to select a default export format for the survey data and one for the sketches.
-By default these are both set to "none", ie, no export.
-<br><p>
-
-When the default survey data export format is set, TopoDroid exports the survey data in that format before creating a zip archive, so that the export is included in the archive.<br><p>
-
-When the default sketch export format is set, the sketches are exported in this format whenever they are closed (besides being saved in TopoDroid binary format).<br>
-For cSurvey x-sections are saved as PNG images.<br><p>
+A file import fails if a survey with the same name is already in TopoDroid.<br>
+Zip import fails if the zip has a database version that is too old or is newer than the one in TopoDroid.<br>
+On import from file formats that have LRUD values, these are converted to x-splays (shown in green).<br><p>
 
 
 <h4>SURVEY DATA EXPORT</h4>
@@ -106,6 +111,7 @@ leg.<br><p>
 <b>Survex</b> (.svx)<br>
 Survey data can be exported as <i>Survex</i> files.<br>
 Data units are according to the user options.<br><p>
+Import Survex files must have extension ".svx".<br>
 
 Settings:<ul style="margin-top=0">
 <li><u>line termination</u> can be either Unix or Windows</li>
@@ -171,10 +177,11 @@ Settings:
 <b>Shapefile</b> (.shp .shx .dbf)<br>
 Survey data can be exported as shapefile if you have georeferenced at least a station.
 There is a shapefile for the stations and one for the shots (both legs and splays).
-The shapefiles are saved in the folder "shp".
-Each shapefile consists of three files: the data file (shp), the index file (shx), and the attributes file (dbf).
 If the survey contains disjoint pieces, a shapefile is exported for each pieces with a georeferenced station.
-Data are corrected with magnetic declination.<br><p>
+Data are corrected with magnetic declination.
+Each shapefile consists of three files: the data file (shp), the index file (shx), and the attributes file (dbf).
+The files are zip-compressed and the zip is saved in the folder "shp" with extension ".shz".
+<br><p>
 
 The "stations" DBF contains only the field "name".<br><p>
 
@@ -216,7 +223,12 @@ Data are corrected with magnetic declination.<br><p>
 <h4>SKETCH EXPORT</h4>
 
 <b>Therion</b> (.th2)<br>
-<i>Therion</i> is the cave map drafting program of choice for TopoDroid.<br><p>
+<i>Therion</i> is the cave map drafting program of choice for TopoDroid.<br>
+Sketches are exported in Therion format as one sketch per file (when exported from the "Drawing Window")
+or as a file containing all the sketches with the same view, plan or extended, (when exported
+from the "Overview Window"). In the latter there is a scrap for each sketch, and x-section scraps
+are included if the automatic "section" points are enabled.
+<br><p>
 
 
 Settings:<ul style="margin-top=0">
@@ -226,9 +238,12 @@ Settings:<ul style="margin-top=0">
 <li>export <u>scale</u>. Default 1:100</li>
 </ul><p>
 
+<!--
 <u>Note</u>. With version 3.1 TopoDroid saves sketches "natively" in its binary format.<br>
 Previous versions used Therion format.
-The conversion from Therion to binary is "automatic" when you open a sketch: if TopoDroid does not find the binary file, it looks for the Therion file.<br><p>
+The conversion from Therion to binary is "automatic" when you open a sketch: if TopoDroid does not find the binary file, it looks for the Therion file.<br>
+From v. 4.1.2 TopoDroid does not load any more sketches in Therion format.<br>
+-->
 
 <b>cSurvey</b> (.csx)<br>
 These exports contain both the plan and profile sketches, as well as the survey data.
@@ -262,7 +277,8 @@ the drawing of the section is inserted in the export, at the "section" point</li
 <b>SVG</b> (.svg)<br>
 Sketches can be exported as SVG files.<br><p>
 
-SVG settings:<ul style="margin-top=0">
+SVG settings:
+<ul style="margin-top=0">
 <li>Drawing <u>section-point</u>: if section points are automatically added to section lines,
 the section drawing is inserted in the export, at the "section" point</li>
 <li>automatic <u>station-points</u>: if enabled all stations are included in the export,
@@ -276,18 +292,23 @@ otherwise only the user-chosen stations are included</li>
 <b>Shapefile</b> (.shp)<br>
 Sketches can be exported as shapefile, with stations, shots, and lines.
 Each item has three files: the shape data file, the shape index file, and the database file.
-A folder is created containing all the files.
-<p>
+The files comprising the shapefile export are zip-compressed and the zip file is saved in the
+folder "shp" with extension ".shz".<br><p>
 
 <b>Xtherion</b> (.xvi)<br>
 The "xvi" export can be inserted as background image in xtherion.<br>
 Lines of type "wall" are red, "slope" orange, "section" gray, all others are brown.
 Area borders are black.
-Points are exported as blue crosses.<br>
+Point icons are rendered in a simplified way.
+Label rendering supports only latin characters and digits and a few characters ('+', '-', '/', '_', '&gt;', '&lt;', '?').
+Other characters are replaced by a "diamond".<br>
 The grid cell are 1 m.
 <br><p>
 
-XVI settings are among Therion settings:<ul style="margin-top=0">
+XVI settings are among Therion settings:
+<ul style="margin-top=0">
+<li>Drawing <u>section-point</u>: if section points are automatically added to section lines,
+the section drawing is inserted in the xvi file, at the "section" point</li>
 <li><u>grid</u> lines added to the export (cell size in the current grid units). Default no</li>
 <li>export <u>scale</u>. Default 1:100</li>
 </ul><p>

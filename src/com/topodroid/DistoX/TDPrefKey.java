@@ -372,50 +372,12 @@ class TDPrefKey
 
   // ==============================================================================
   static String[] EXPORT = { // [16] [32]
-    // "DISTOX_PT_CMAP",         // 0
-    // "DISTOX_SPLAY_EXTEND",         // whether to set L/R extend to LRUD splay shots (Compass, VTopo import)
-    // "DISTOX_IMPORT_DATAMODE",
     "DISTOX_EXPORT_SHOTS",    // 0 // default data export
     "DISTOX_EXPORT_PLOT",          // default plot export
-
-    // "DISTOX_THERION_MAPS",         // whether to put map commands before centerline in therion
-    // "DISTOX_AUTO_STATIONS",   // 6 // whether to add stations to thetion th2 exports
-    // // "DISTOX_XTHERION_AREAS",    // save areas a-la xtherion
-    // "DISTOX_THERION_SPLAYS",  // 7 // whether to add u:splay lines to Therion th2 export
-
-    // "DISTOX_STATION_PREFIX",       // whether to add cave-name prefix to stations (cSurvey/Compass export)
-    // "DISTOX_COMPASS_SPLAYS",       // whether to add splays to Compass dat export
-    // "DISTOX_SWAP_LR",               // whether to swap Left-Right in Compass export
-
     "DISTOX_ORTHO_LRUD",      // 2 // orthogonal LRUD ( >=1 disable, min 0 )
     "DISTOX_LRUD_VERTICAL", 
     "DISTOX_LRUD_HORIZONTAL", // 4 
-    // "DISTOX_SURVEX_EOL",            // survex end of line [either Linux or Windows]
-    // "DISTOX_SURVEX_SPLAY",    // 6  // whether to name endpoint of splays in Survex export
-    // "DISTOX_SURVEX_LRUD",           // whether to add LRUD to Survex export
     "DISTOX_BEZIER_STEP",           // max step between interpolating points for bezier in export (cSurvey)
-
-    // "DISTOX_SVG_GRID",        // 18 // whether to export grid in SVG 
-    // "DISTOX_SVG_LINE_DIR",          // whether to add line orientation ticks in SVG export
-    // "DISTOX_SVG_SPLAYS",
-    // // "DISTOX_SVG_IN_HTML",        // whether to export SVG embedded in HTML
-    // "DISTOX_SVG_POINT_STROKE", // 20 
-    // "DISTOX_SVG_LABEL_STROKE", 
-    // "DISTOX_SVG_LINE_STROKE", 
-    // "DISTOX_SVG_GRID_STROKE",  // 23 
-    // "DISTOX_SVG_SHOT_STROKE", 
-    // "DISTOX_SVG_LINEDIR_STROKE", 
-
-    // "DISTOX_KML_STATIONS",     // 18 26 // whether to add station points to KML export
-    // "DISTOX_KML_SPLAYS",             // whether to add splay lines to KML export
-
-    // "DISTOX_BITMAP_SCALE",           // default bitmap scale PNG
-    // "DISTOX_BITMAP_BGCOLOR",   // 21 29 // bitmap background color [RGB]
-
-    // "DISTOX_DXF_SCALE",           // default DXF scale (export)
-    // "DISTOX_DXF_BLOCKS",             // whether to export point items as Blocks in DXF export
-    // "DISTOX_ACAD_VERSION",     // 23 31 
-
     "DISTOX_EXPORT_IMPORT_PREF", // 9
     "DISTOX_EXPORT_SVX_PREF",
     "DISTOX_EXPORT_TH_PREF",
@@ -428,48 +390,12 @@ class TDPrefKey
   };
 
   static int[] EXPORTtitle = {
-    // R.string.pref_pt_color_map_title,
-    // R.string.pref_LRExtend_title,
-    // R.string.pref_import_datamode_title,
     R.string.pref_export_shots_title,
     R.string.pref_export_plot_title,
-
-    // R.string.pref_therion_maps_title, //5
-    // R.string.pref_autoStations_title,
-    // // R.string.pref_xtherion_areas_title,
-    // R.string.pref_therion_splays_title,
-
-    // R.string.pref_station_prefix_title, // 8
-    // R.string.pref_compass_splays_title,
-    // R.string.pref_swapLR_title,
-
     R.string.pref_ortho_lrud_title,
     R.string.pref_lrud_vertical_title,
     R.string.pref_lrud_horizontal_title,
-    // R.string.pref_survex_eol_title,
-    // R.string.pref_survex_splay_title,
-    // R.string.pref_survex_lrud_title,
     R.string.pref_bezier_step_title,
-    // R.string.pref_svg_grid_title,
-    // R.string.pref_svg_line_dir_title,
-    // // R.string.pref_svg_in_html_title,
-    // R.string.pref_svg_pointstroke_title,
-    // R.string.pref_svg_labelstroke_title,
-    // R.string.pref_svg_linestroke_title,
-    // R.string.pref_svg_gridstroke_title,
-    // R.string.pref_svg_shotstroke_title,
-    // R.string.pref_svg_linedirstroke_title,
-
-    // R.string.pref_kml_stations_title,
-    // R.string.pref_kml_splays_title,
-
-    // R.string.pref_bitmap_scale_title,
-    // R.string.pref_bitmap_bgcolor_title,
-
-    // R.string.pref_dxf_scale_title,
-    // R.string.pref_dxf_blocks_title,
-    // R.string.pref_acad_version_title,
-
     R.string.pref_cat_exportimport,
     R.string.pref_cat_exportsvx,
     R.string.pref_cat_exportth,
@@ -481,92 +407,36 @@ class TDPrefKey
   };
 
   static int[] EXPORTdesc = {
-    // R.string.pref_pt_color_map_summary,
-    // R.string.pref_LRExtend_summary,
-    // R.string.pref_import_datamode_summary,
     R.string.pref_export_shots_summary,
     R.string.pref_export_plot_summary,
-
-    // R.string.pref_therion_maps_summary,
-    // R.string.pref_autoStations_summary,
-    // // R.string.pref_xtherion_areas_summary,
-    // R.string.pref_therion_splays_summary,
-
-    // R.string.pref_station_prefix_summary,
-    // R.string.pref_compass_splays_summary,
-    // R.string.pref_swapLR_summary,
-
     R.string.pref_ortho_lrud_summary,
     R.string.pref_lrud_vertical_summary,
     R.string.pref_lrud_horizontal_summary,
-    // R.string.pref_survex_eol_summary,
-    // R.string.pref_survex_splay_summary,
-    // R.string.pref_survex_lrud_summary,
     R.string.pref_bezier_step_summary,
-    // R.string.pref_svg_grid_summary,
-    // R.string.pref_svg_line_dir_summary,
-    // // R.string.pref_svg_in_html_summary,
-    // R.string.pref_svg_pointstroke_summary,
-    // R.string.pref_svg_labelstroke_summary,
-    // R.string.pref_svg_linestroke_summary,
-    // R.string.pref_svg_gridstroke_summary,
-    // R.string.pref_svg_shotstroke_summary,
-    // R.string.pref_svg_linedirstroke_summary,
-
-    // R.string.pref_kml_stations_summary,
-    // R.string.pref_kml_splays_summary,
-
-    // R.string.pref_bitmap_scale_summary,
-    // R.string.pref_bitmap_bgcolor_summary,
-
-    // // R.string.pref_dxf_scale_summary,
-    // R.string.pref_dxf_blocks_summary,
-    // R.string.pref_acad_version_summary,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
     -1,
   };
 
   static String[] EXPORTdef = {
-    // "",
-    // TRUE,
-    // TDString.ZERO, // SurveyInfo.DATAMODE_NORMAL
     "-1",
     "-1",
-
-    // FALSE,   // THERION
-    // TRUE,
-    // // FALSE,
-    // FALSE,
-
-    // FALSE,   // 8 COMPASS
-    // TRUE,
-    // FALSE,
-
     TDString.ZERO,
     TDString.ZERO,
     TDString.NINETY,
-    // "lf",
-    // FALSE,
-    // FALSE,
     "0.2",
-    // FALSE,    // SVG
-    // FALSE,
-    // // FALSE,
-    // "0.1",
-    // "0.3",
-    // "0.5", 
-    // "0.5",
-    // "0.5",
-    // "2.0",
-
-    // TRUE,     // KML-JSON
-    // FALSE,
-
-    // "1.5",    // PNG
-    // "0 0 0",
-
-    // // "1.0", // DXF
-    // TRUE,
-    // "9",
+    TDString.EMPTY,
+    TDString.EMPTY,
+    TDString.EMPTY,
+    TDString.EMPTY,
+    TDString.EMPTY,
+    TDString.EMPTY,
+    TDString.EMPTY,
     TDString.EMPTY
   };
 
@@ -622,7 +492,8 @@ class TDPrefKey
     "DISTOX_THERION_SPLAYS",   // whether to add u:splay lines to Therion th2 export
     "DISTOX_SURVEX_LRUD",      // whether to add LRUD to Survex export
     "DISTOX_SVG_GRID",         // whether to export grid in SVG/DXF/XVI
-    "DISTOX_TH2_SCALE"         // th2/xvi scale
+    "DISTOX_TH2_SCALE",        // th2/xvi scale
+    "DISTOX_TH2_XVI"           // th2 with xvi image comment
   };
   static int[] EXPORT_THtitle = {
     R.string.pref_therion_maps_title,
@@ -632,6 +503,7 @@ class TDPrefKey
     R.string.pref_survex_lrud_title,
     R.string.pref_svg_grid_title,
     R.string.pref_th2_scale_title,
+    R.string.pref_th2_xvi_title,
     -1
   };
   static int[] EXPORT_THdesc = {
@@ -642,6 +514,7 @@ class TDPrefKey
     R.string.pref_survex_lrud_summary,
     R.string.pref_svg_grid_summary,
     R.string.pref_th2_scale_summary,
+    R.string.pref_th2_xvi_summary,
     -1
   };
   static String[] EXPORT_THdef = {
@@ -651,7 +524,8 @@ class TDPrefKey
     FALSE,
     FALSE,
     TRUE,
-    "100"
+    "100",
+    FALSE
   };
 
   // ------------------------------------------------------------------------------

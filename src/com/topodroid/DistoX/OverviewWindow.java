@@ -656,16 +656,16 @@ public class OverviewWindow extends ItemDrawer
    private void saveWithExt( final String ext )
    {
      DistoXNum num = mNum;
-     final String filename = TDInstance.survey + ( (mType == PlotInfo.PLOT_PLAN )? "-p" : "-s" );
+     final String fullname = TDInstance.survey + ( (mType == PlotInfo.PLOT_PLAN )? "-p" : "-s" );
      // TDLog.Log( TDLog.LOG_IO, "export plot type " + mType + " with extension " + ext );
-     // Log.v( "DistoXX", "export th2 file " + filename );
+     // Log.v( "DistoXX", "export th2 file " + fullname );
      DrawingCommandManager manager = mOverviewSurface.getManager( DrawingSurface.DRAWING_OVERVIEW );
 
      if ( ext.equals("th2") ) {
        Handler th2Handler = new Handler() {
           @Override public void handleMessage(Message msg) {
             if (msg.what == 661 ) {
-              TDToast.make( String.format( getString(R.string.saved_file_1), (filename + "." + ext) ) );
+              TDToast.make( String.format( getString(R.string.saved_file_1), (fullname + "." + ext) ) );
             } else {
               TDToast.make( R.string.saving_file_failed );
             }
@@ -674,9 +674,9 @@ public class OverviewWindow extends ItemDrawer
        // parent can be null because this is user-requested EXPORT
        // azimuth = 0
        // rotate  = 0
-       (new SavePlotFileTask( this, null, th2Handler, mNum, manager, filename, mType, 0, PlotSave.OVERVIEW, 0 )).execute();
+       (new SavePlotFileTask( this, null, th2Handler, mNum, manager, fullname, mType, 0, PlotSave.OVERVIEW, 0 )).execute();
      } else {
-       (new ExportPlotToFile( this, mNum, manager, mType, filename, ext, true )).execute();
+       (new ExportPlotToFile( this, mNum, manager, mType, fullname, ext, true )).execute();
      }
    }
 
@@ -689,6 +689,7 @@ public class OverviewWindow extends ItemDrawer
       case TDConst.DISTOX_EXPORT_DXF: saveWithExt( "dxf" ); break; 
       case TDConst.DISTOX_EXPORT_SVG: saveWithExt( "svg" ); break;
       case TDConst.DISTOX_EXPORT_SHP: saveWithExt( "shp" ); break;
+      case TDConst.DISTOX_EXPORT_XVI: saveWithExt( "xvi" ); break;
     }
   }
 

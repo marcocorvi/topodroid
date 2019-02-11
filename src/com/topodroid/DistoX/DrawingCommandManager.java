@@ -2850,15 +2850,18 @@ class DrawingCommandManager
   }
 
   // FIXME DataHelper and SID are necessary to export splays by the station
-  void exportTherion( int type, BufferedWriter out, String scrap_name, String proj_name, int proj_dir, boolean multiscrap )
+  // @param full_name   file name without extension, which is also scrap_name for single scrap 
+  void exportTherion( int type, BufferedWriter out, String full_name, String proj_name, int proj_dir, boolean multiscrap )
   {
     if ( multiscrap ) {
       // Log.v("DistoXX", "multi scrap export stack size " + mCurrentStack.size() );
       // BBox computed by export multiscrap
-      DrawingIO.exportTherionMultiScrap( type, out, proj_name, proj_dir, /* bbox, mNorthLine, */ mCurrentStack, mUserStations, mStations, mSplaysStack );
+      DrawingIO.exportTherionMultiScrap( type, out, full_name, proj_name, proj_dir,
+		      /* bbox, mNorthLine, */ mCurrentStack, mUserStations, mStations, mSplaysStack );
     } else {
       RectF bbox = computeBBox();
-      DrawingIO.exportTherion( type, out, scrap_name, proj_name, proj_dir, bbox, mNorthLine, mCurrentStack, mUserStations, mStations, mSplaysStack );
+      DrawingIO.exportTherion( type, out, full_name, proj_name, proj_dir,
+		      bbox, mNorthLine, mCurrentStack, mUserStations, mStations, mSplaysStack );
     }
   }
    

@@ -1202,6 +1202,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_therion_splays_summary">Add u:splay lines to th2 files</string>
   <string name="pref_th2_scale_title">Therion scale</string>
   <string name="pref_th2_scale_summary">Scale of th2/xvi export</string>
+  <string name="pref_th2_xvi_title">xvi image</string>
+  <string name="pref_th2_xvi_summary">Insert xvi image in th2</string>
   <string name="pref_autoStations_title">Therion stations</string>
   <string name="pref_autoStations_summary">Add stations automatically to Therion files</string>
   <string name="pref_loopClosure_title">Loop closure</string>

@@ -31,7 +31,7 @@ import java.io.IOException;
 
 import android.graphics.RectF;
 
-// import android.util.Log;
+import android.util.Log;
 
 class DrawingXvi
 {
@@ -42,10 +42,14 @@ class DrawingXvi
   static final private float CELL  = 20; // 1 meter
   static final private float POINT = 20;
 
-  static final private int[] CHAR_any = { 0,0,2,0 };
+  static final private int[] CHAR_any = { 2,2,1,4, 1,4,0,2, 0,2,1,0, 1,0,2,2 };
+  static final private int[] CHAR_underscore = { 0,0,2,0 };
   static final private int[] CHAR_plus = { 1,1,1,3, 0,2,2,2 };
   static final private int[] CHAR_minus = { 0,2,2,2 };
   static final private int[] CHAR_question = { 1,0,1,2, 0,3,0,4, 0,4,2,4, 1,2,2,3, 2,3,2,4 };
+  static final private int[] CHAR_slash = { 0,0,2,4 };
+  static final private int[] CHAR_less = { 0,2,2,3, 0,2,2,1 };
+  static final private int[] CHAR_more = { 0,3,2,2, 0,1,2,2 };
 
   static final private int[][] GLYPH_AZ = {
     { 0,0,0,4, 0,4,2,4, 2,4,2,0, 0,2,2,2 }, // A
@@ -101,7 +105,7 @@ class DrawingXvi
       out.write( sw.getBuffer().toString() );
       out.flush();
     } catch ( IOException e ) {
-      TDLog.Error( "SVG grid io-exception " + e.getMessage() );
+      TDLog.Error( "XVI grid io-exception " + e.getMessage() );
     }
   }
 
@@ -222,7 +226,8 @@ class DrawingXvi
           DrawingPointPath point = (DrawingPointPath)path;
           if ( point.mPointType == BrushManager.mPointLib.mPointSectionIndex ) {
             float xx = xoff+point.cx;
-            float yy = yoff-point.cy;
+            float yy = yoff+point.cy;
+	    // Log.v("DistoXX", " yoff " + yoff + " cy " + point.cy + " yy " + yy );
             // pw5.format(Locale.US, "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"%d\" ", xx, yy, RADIUS );
             // pw5.format(" style=\"fill:grey;stroke:black;stroke-width:%.2f\" />\n", TDSetting.mSvgLabelStroke );
 
@@ -232,8 +237,8 @@ class DrawingXvi
               String scrapfile = scrapname + ".tdr";
               // String scrapfile = point.mOptions.substring( 7 ) + ".tdr";
 
-              // open file survey-xx#.tdr and convert it to svg
-              tdrToXvi( pw5, scrapfile, xx, yy, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
+              // open file survey-xx#.tdr and convert it to xvi
+              tdrToXvi( pw5, scrapfile, xx, yy, -DrawingUtil.CENTER_X,  DrawingUtil.CENTER_Y );
             }
             // pw5.format("</g>\n");
           } else {
@@ -334,6 +339,14 @@ class DrawingXvi
 	  glyph = CHAR_plus;
 	} else if ( ch == '?' ) {
 	  glyph = CHAR_question;
+	} else if ( ch == '_' ) {
+	  glyph = CHAR_underscore;
+	} else if ( ch == '/' ) {
+	  glyph = CHAR_slash;
+	} else if ( ch == '>' ) {
+	  glyph = CHAR_more;
+	} else if ( ch == '<' ) {
+	  glyph = CHAR_less;
 	}
 	int j = 0;
 	while ( j < glyph.length ) {
@@ -429,13 +442,14 @@ class DrawingXvi
 
   static private void tdrToXvi( PrintWriter pw, String scrapfile, float dx, float dy, float xoff, float yoff )
   {
+    // TDLog.Log( TDLog.LOG_IO, "trd to xvi. scrap file " + scrapfile );
+    // Log.v( "DistoXX", "trd to xvi. scrap file " + scrapfile + " shift " + dx + " " + dy + " offset " + xoff + " " + yoff );
     try {
-      // TDLog.Log( TDLog.LOG_IO, "trd to svg. scrap file " + scrapfile );
       FileInputStream fis = new FileInputStream( TDPath.getTdrFile( scrapfile ) );
       BufferedInputStream bfis = new BufferedInputStream( fis );
       DataInputStream dis = new DataInputStream( bfis );
       int version = DrawingIO.skipTdrHeader( dis );
-      // Log.v("DistoX", "tdr to svg delta " + dx + " " + dy + " Offset " + xoff + " " + yoff );
+      // Log.v("DistoX", "tdr to xvi delta " + dx + " " + dy + " Offset " + xoff + " " + yoff );
 
       DrawingPath path = null;
       boolean done = false;
