@@ -82,7 +82,7 @@ import android.graphics.RectF;
 import android.net.Uri;
 
 // import android.util.SparseArray;
-// import android.util.Log;
+import android.util.Log;
 
 /**
  */
@@ -5052,6 +5052,7 @@ public class DrawingWindow extends ItemDrawer
       };
     }
     try { 
+      // Log.v("DistoXX", "save th2 origin " + mPlot1.xoffset + " " + mPlot1.yoffset + " toTherion " + TDSetting.mToTherion );
       (new SavePlotFileTask( mActivity, this, th2Handler, /* mApp, */ mNum, /* mDrawingUtil, */ manager, name, type, azimuth, suffix, 0 )).execute();
     } catch ( RejectedExecutionException e ) { }
   }

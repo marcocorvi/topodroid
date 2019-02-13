@@ -80,8 +80,10 @@ class ParserCaveSniper extends ImportParser
               mClino   = Float.parseFloat(vals[k]); ++k;
               mComment = TopoDroidUtil.concat( vals, k );
               // k = vals.length;
-	          if ( mTo.startsWith( mFrom + ":" ) ) { // splay are added to the shots array to keep the list order
-                shots.add( new ParserShot( mFrom, TDString.EMPTY, mLength, mBearing, mClino, 0.0f, 0, 0, false, false, false, mComment ) );
+	      if ( mTo.startsWith( mFrom + ":" ) ) { // splay are added to the shots array to keep the list order
+		// splays have "extend" = DBlock.EXTEND_UNSET
+                shots.add( new ParserShot( mFrom, TDString.EMPTY, mLength, mBearing, mClino, 0.0f, 
+					DBlock.EXTEND_UNSET, 0, false, false, false, mComment ) );
               } else {
                 int extend = ( mBearing < 90 || mBearing > 270 )? 1 : -1;
                 shots.add( new ParserShot( mFrom, mTo, mLength, mBearing, mClino, 0.0f, extend, 0, false, false, false, mComment ) );

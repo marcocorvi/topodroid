@@ -1038,7 +1038,9 @@ class DrawingIO
     pw.format("##XTHERION## xth_me_area_zoom_to 25\n");
     if ( TDSetting.mTherionXvi ) {
       // xx vsb gamma - yy XVIroot
-      pw.format("##XTHERION## xth_me_image_insert {%.2f 1 1.0} {%.2f 0} %s.xvi 0 {}\n", 0, 0, name );
+      pw.format("##XTHERION## xth_me_image_insert {%.2f 1 1.0} {%.2f 0} %s.xvi 0 {}\n",
+		      TDSetting.mToTherion*DrawingUtil.CENTER_X, -TDSetting.mToTherion*DrawingUtil.CENTER_Y, name );
+      // Log.v("DistoXX", "bbox " + bbox.left + " " + bbox.top + " - " + bbox.right + " " + bbox.bottom );
     }
     pw.format("\n");
     pw.format("# %s created by TopoDroid v. %s\n\n", TopoDroidUtil.currentDate(), TopoDroidApp.VERSION );

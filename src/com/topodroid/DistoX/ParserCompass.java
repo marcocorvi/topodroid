@@ -132,28 +132,21 @@ class ParserCompass extends ImportParser
                 if ( mLeft > 0 ) {
                   float ber = mBearing + 270;
                   if ( ber > 360 ) ber -= 360;
-                  if ( TDSetting.mLRExtend ) {
-                    extend = (int)TDAzimuth.computeSplayExtend( ber );
-                  }
+                  extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : DBlock.EXTEND_UNSET;
                   // FIXME splays in the shots array to keep them interleaved with legs, but have leg flag 2
                   shots.add( new ParserShot( mFrom, TDString.EMPTY, mLeft, ber, 0.0f, 0.0f, extend, 2, false, false, false, "" ) );
                 }
                 if ( mRight > 0 ) {
                   float ber = mBearing + 90;
                   if ( ber > 360 ) ber -= 360;
-                  if ( TDSetting.mLRExtend ) {
-                    extend = (int)TDAzimuth.computeSplayExtend( ber );
-                  }
-                  // FIXME splays
+                  extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : DBlock.EXTEND_UNSET;
                   shots.add( new ParserShot( mFrom, TDString.EMPTY, mRight, ber, 0.0f, 0.0f, extend, 2, false, false, false, "" ) );
                 }
                 if ( mUp > 0 ) {
-                  // FIXME splays
-                  shots.add( new ParserShot( mFrom, TDString.EMPTY, mUp, 0.0f, 90.0f, 0.0f, 0, 2, false, false, false, "" ) );
+                  shots.add( new ParserShot( mFrom, TDString.EMPTY, mUp, 0.0f, 90.0f, 0.0f, DBlock.EXTEND_VERT, 2, false, false, false, "" ) );
                 }
                 if ( mDown > 0 ) {
-                  // FIXME splays
-                  shots.add( new ParserShot( mFrom, TDString.EMPTY, mDown, 0.0f, -90.0f, 0.0f, 0, 2, false, false, false, "" ) );
+                  shots.add( new ParserShot( mFrom, TDString.EMPTY, mDown, 0.0f, -90.0f, 0.0f, DBlock.EXTEND_VERT, 2, false, false, false, "" ) );
                 }
                 extend = ( mBearing < 90 || mBearing > 270 )? 1 : -1;
                 shots.add( new ParserShot( mFrom, mTo, mLength, mBearing, mClino, 0.0f,
@@ -203,24 +196,24 @@ class ParserCompass extends ImportParser
     return 1.0f;
   }
 
-  int parseExtend( String extend, int old_extend )
-  {
-    // skip: hide, start
-    if ( extend.equals("hide") || extend.equals("start") ) {
-      return old_extend;
-    }
-    if ( extend.equals("left") || extend.equals("reverse") ) {
-      return DBlock.EXTEND_LEFT;
-    } 
-    if ( extend.startsWith("vert") ) {
-      return DBlock.EXTEND_VERT;
-    }
-    if ( extend.startsWith("ignore") ) {
-      return DBlock.EXTEND_IGNORE;
-    }
-    // if ( extend.equals("right") || extend.equals("normal") ) {
-    //   return DBlock.EXTEND_RIGHT;
-    // } 
-    return DBlock.EXTEND_RIGHT;
-  }
+  // int parseExtend( String extend, int old_extend )
+  // {
+  //   // skip: hide, start
+  //   if ( extend.equals("hide") || extend.equals("start") ) {
+  //     return old_extend;
+  //   }
+  //   if ( extend.equals("left") || extend.equals("reverse") ) {
+  //     return DBlock.EXTEND_LEFT;
+  //   } 
+  //   if ( extend.startsWith("vert") ) {
+  //     return DBlock.EXTEND_VERT;
+  //   }
+  //   if ( extend.startsWith("ignore") ) {
+  //     return DBlock.EXTEND_IGNORE;
+  //   }
+  //   // if ( extend.equals("right") || extend.equals("normal") ) {
+  //   //   return DBlock.EXTEND_RIGHT;
+  //   // } 
+  //   return DBlock.EXTEND_RIGHT;
+  // }
 }

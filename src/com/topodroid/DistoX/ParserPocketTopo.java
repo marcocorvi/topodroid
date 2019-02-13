@@ -86,7 +86,7 @@ class ParserPocketTopo extends ImportParser
     int shot_count = ptfile.shotCount();
     TDLog.Log( TDLog.LOG_PTOPO, "PT shots count " + shot_count );
     int extend = DBlock.EXTEND_NONE;
-    // int ext_flag = extend;
+    int ext_flag = extend;
     // DBlock b     = null;  // temporary block pointer
     // DBlock start = null;  // first block inserted
     // DBlock last  = null;  // last block on the list
@@ -132,7 +132,9 @@ class ParserPocketTopo extends ImportParser
         }
       }
       // store both legs and splays in the shots array
-      shots.add( new ParserShot( from, to,  da, ba, ca, ra, extend, 0, false, false, false,
+      // splays "extend" is not set
+      ext_flag = ( to.length() == 0 )? DBlock.EXTEND_UNSET : extend;
+      shots.add( new ParserShot( from, to,  da, ba, ca, ra, ext_flag, 0, false, false, false,
                                  shot.hasComment()? shot.comment() : "" ) );
       if ( mStartFrom == null && from.length() > 0 && to.length() > 0 ) {
         mStartFrom = from;

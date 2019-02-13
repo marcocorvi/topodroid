@@ -79,8 +79,8 @@ class ParserVisualTopo extends ImportParser
 
     boolean splayAtFrom = true;
     String comment = "";
-    int extend = 1;
-    int shot_extend = 1;
+    int extend = DBlock.EXTEND_RIGHT;
+    int shot_extend = DBlock.EXTEND_RIGHT;
     boolean duplicate = false;
     boolean surface   = false;
     boolean backshot  = false;
@@ -191,9 +191,9 @@ class ParserVisualTopo extends ImportParser
 		if ( k < vals.length ) {
                   mDown  = vals[k].equals("*")? -1 : Float.parseFloat(vals[k]) * ul; ++k; // 8
                 }
-                shot_extend = 1;
+                shot_extend = DBlock.EXTEND_RIGHT;
                 if ( k < vals.length ) {
-                  shot_extend = vals[k].equals("N")? 1 : -1; ++k; // 'N' or 'I'
+                  shot_extend = vals[k].equals("N")? DBlock.EXTEND_RIGHT : DBlock.EXTEND_LEFT; ++k; // 'N' or 'I'
                 } 
                 duplicate = false;
                 if ( k < vals.length ) {
@@ -201,31 +201,24 @@ class ParserVisualTopo extends ImportParser
                 }
 
                 String station = ( splayAtFrom ? mFrom : mTo );
-                extend = 0;
                 if ( mLeft > 0 ) {
-	            float ber = mBearing + 180 + 90 * dirw;
-                    if ( TDSetting.mLRExtend ) {
-                      extend = (int)TDAzimuth.computeSplayExtend( ber );
-                    }
-                    // FIXME splays
-                    shots.add( new ParserShot( station, TDString.EMPTY, mLeft, ber, 0.0f, 0.0f, extend, 2, false, false, false, "" ) );
+	          float ber = mBearing + 180 + 90 * dirw;
+                  extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : DBlock.EXTEND_UNSET;
+                  shots.add( new ParserShot( station, TDString.EMPTY, mLeft, ber, 0.0f, 0.0f, extend, 2, false, false, false, "" ) );
                 }
                 if ( mRight > 0 ) {
-                    float ber = mBearing + 180 - 90 * dirw;
-                    if ( ber > 360 ) ber -= 360;
-                    if ( TDSetting.mLRExtend ) {
-                      extend = (int)TDAzimuth.computeSplayExtend( ber );
-                    }
-                    // FIXME splays
-                    shots.add( new ParserShot( station, TDString.EMPTY, mRight, ber, 0.0f, 0.0f, -extend, 2, false, false, false, "" ) );
+                  float ber = mBearing + 180 - 90 * dirw;
+                  if ( ber > 360 ) ber -= 360;
+                  extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : DBlock.EXTEND_UNSET;
+                  shots.add( new ParserShot( station, TDString.EMPTY, mRight, ber, 0.0f, 0.0f, -extend, 2, false, false, false, "" ) );
                 } 
                 if ( mUp > 0 ) {
-                    // FIXME splays
-                    shots.add( new ParserShot( station, TDString.EMPTY, mUp, 0.0f, 90.0f, 0.0f, 0, 2, false, false, false, "" ) );
+                  // FIXME splays
+                  shots.add( new ParserShot( station, TDString.EMPTY, mUp, 0.0f, 90.0f, 0.0f, DBlock.EXTEND_VERT, 2, false, false, false, "" ) );
                 }
                 if ( mDown > 0 ) {
-                    // FIXME splays
-                    shots.add( new ParserShot( station, TDString.EMPTY, mDown, 0.0f, -90.0f, 0.0f, 0, 2, false, false, false, "" ) );
+                  // FIXME splays
+                  shots.add( new ParserShot( station, TDString.EMPTY, mDown, 0.0f, -90.0f, 0.0f, DBlock.EXTEND_VERT, 2, false, false, false, "" ) );
                 }
                 
                 extend = ( mBearing < 90 || mBearing > 270 )? 1 : -1;
