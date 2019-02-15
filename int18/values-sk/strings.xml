@@ -1218,8 +1218,8 @@
   <string name="pref_diving_mode_summary">Povolí potápačský mód</string>
   <string name="pref_splay_classes_title">Triedy pomocných zámer</string>
   <string name="pref_splay_classes_summary">Povolí zaradenie pomocných zámer do tried</string>
-  <string name="pref_splay_color_title">Farebné označovanie pomocných zámer</string>
-  <string name="pref_splay_color_summary">Povolí výber ľubovoľných farieb pre pomocné zámery</string>
+  <string name="pref_splay_color_title">Označovanie pomocných zámer</string>
+  <string name="pref_splay_color_summary">Povolí ľubovoľné farebné zobrazenie pomocných zámer</string>
   <string name="pref_plot_shift_title">Nákres posun/zmena mierky</string>
   <string name="pref_plot_shift_summary">Povolí posun a zmenu mierky krezby v nákrese po povolení Bočného Posuvu vo Výbere možností zobrazenia</string>
   <string name="pref_splay_alpha_title">Priehľadnosť pomocných zámer</string>
