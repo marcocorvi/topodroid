@@ -945,7 +945,7 @@
   <string name="pref_size_buttons_title">Veľkosť tlačidiel</string>
   <string name="pref_size_buttons_summary">Veľkosť ikon tlačidiel</string>
    <string name="pref_with_sensors_title">Sensory</string>
-  <string name="pref_with_sensors_summary">Povolí dáta zo "sensorov"</string>
+  <string name="pref_with_sensors_summary">Povolí zaznamenávanie dát zo sensorov smartphonu</string>
   <string name="pref_palettes_title">Palety</string>
   <string name="pref_palettes_summary">Povolí doplnkové palety</string>
 
