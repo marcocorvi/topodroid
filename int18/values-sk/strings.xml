@@ -927,7 +927,7 @@
   <string name="pref_mkeyboard_title">Užívateľská Klávesnica</string>
   <string name="pref_mkeyboard_summary">Zaškrtnuté - povolí užívateľskú klávesnicu v niektorých situáciách</string>
   <string name="pref_no_cursor_title">Kurzory na klávesnici</string>
-  <string name="pref_no_cursor_summary">Zaškrtnuté zobrazí kurzor pri písaní pri používaní základnej klávesnice</string>
+  <string name="pref_no_cursor_summary">Zaškrtnuté skryje kurzor pri písaní pri používaní základnej klávesnice</string>
   <string name="pref_local_help_title">Prekladateľská príručka</string>
   <string name="pref_local_help_summary">Výber jazyka prekladateľskej príručky</string>
   <!-- UNUSED string name="pref_cosurvey_title">Spoločný priekum</string -->
