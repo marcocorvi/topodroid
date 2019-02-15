@@ -1177,7 +1177,7 @@
   <string name="pref_path_multiselect_title">Viacnásobný výber</string>
   <string name="pref_path_multiselect_summary">Povolí viacnásobný výber</string>
   <string name="pref_plane_interpolation_title">Interpolácia pôdorysu</string>
-  <string name="pref_plane_interpolation_summary">Povolí interpoláciu spätných zámer v pôdoryse</string>
+  <string name="pref_plane_interpolation_summary">Povolí interpoláciu pomocných zámer v pôdoryse</string>
   <string name="pref_plot_split_title">Spojiť/Rozdeliť Nákres</string>
   <string name="pref_plot_split_summary">Povolí spojenie alebo rozdelenie nákresu</string>
   <string name="pref_fixed_thickness_title">Šírka meračskej zámery</string>
