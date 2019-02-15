@@ -916,7 +916,7 @@
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
   
   <string name="pref_locale_title">Jazyk</string>
-  <string name="pref_locale_summary">Výber Jazyka aplikácie</string>
+  <string name="pref_locale_summary">Výber jazyka aplikácie</string>
 
   <string name="pref_raw_data_title">Surové dáta</string>
   <string name="pref_raw_data_summary">Výber typu zobrazenia surových (nespracovaných) dát</string>
