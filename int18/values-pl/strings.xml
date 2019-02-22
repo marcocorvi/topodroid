@@ -1150,6 +1150,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_lineacc_summary">Dokładność interpolacji sześciennej Beziera</string>
   <string name="pref_linecorner_title">Początek naroża Beziera</string>
   <string name="pref_linecorner_summary">Początek wykrywania narożnika Beziera</string>
+  <!-- TODO string name="pref_weeddistance_title">Point weeding segment buffer</string -->
+  <!-- TODO string name="pref_weeddistance_summary">Max distance from segment to weed points</string -->
+  <!-- TODO string name="pref_weedlength_title">Point weeding segment length</string -->
+  <!-- TODO string name="pref_weedlength_summary">Max length of a line segment</string -->
   <string name="pref_calib_algo_title">Algorytm</string>
   <string name="pref_calib_algo_summary">Algorytm kalibracji</string>
   <string name="pref_group_by_title">Zasady grupowania</string>

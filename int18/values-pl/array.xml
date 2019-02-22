@@ -226,6 +226,7 @@
      <item name="two">Normalna</item>
      <item name="three">Zgrubna</item>
      <item name="bezier">Beziera</item>
+     <item name="simplified">Simplified</item> <!-- TODO -->
   </string-array>
 
   <string-array name="groupBy">

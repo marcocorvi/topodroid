@@ -187,6 +187,7 @@
      <item name="two">Normal</item>
      <item name="three">Grosseiro</item>
      <item name="bezier">Bezier (curva paramétrica)</item>
+     <item name="simplified">Simplified</item> <!-- TODO -->
   </string-array>
 
   <string-array name="groupBy">

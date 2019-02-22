@@ -33,7 +33,7 @@ class Selection
     mBuckets = new ArrayList<>();
   }
 
-  void shiftSelectionBy( float x, float y )
+  void shiftSelectionBy( float x, float y )  // synchronized by CommandManager
   {
     for ( SelectionPoint sp : mPoints ) {
       int t = sp.type();
@@ -54,7 +54,7 @@ class Selection
     }
   }
 
-  void scaleSelectionBy( float z, Matrix m )
+  void scaleSelectionBy( float z, Matrix m ) // synchronized by CommandManager
   {
     for ( SelectionPoint sp : mPoints ) {
       int t = sp.type();
@@ -75,14 +75,13 @@ class Selection
     }
   }
 
-  void clearSelectionPoints()
+  void clearSelectionPoints() // synchronized by CommandManager
   {
-    // Log.v("DistoX", "Selection clear" );
     mPoints.clear();
     mBuckets.clear();
   }
 
-  synchronized void clearReferencePoints()
+  void clearReferencePoints() // synchronized by CommandManager
   {
     Iterator< SelectionPoint > it = mPoints.iterator();
     while( it.hasNext() ) {
@@ -94,17 +93,19 @@ class Selection
     }
   }
 
-  synchronized void clearDrawingPoints()
-  {
-    Iterator< SelectionPoint > it = mPoints.iterator();
-    while( it.hasNext() ) {
-      SelectionPoint sp1 = (SelectionPoint)it.next();
-      if ( sp1.isDrawingType() ) {
-        sp1.setBucket( null );
-        it.remove( );
-      }
-    }
-  }
+  // void clearDrawingPoints()
+  // {
+  //   synchronized ( TDPath.mSelectionLock ) {
+  //     Iterator< SelectionPoint > it = mPoints.iterator();
+  //     while( it.hasNext() ) {
+  //       SelectionPoint sp1 = (SelectionPoint)it.next();
+  //       if ( sp1.isDrawingType() ) {
+  //         sp1.setBucket( null );
+  //         it.remove( );
+  //       }
+  //     }
+  //   }
+  // }
 
   void insertStationName( DrawingStationName st )
   {
@@ -116,7 +117,7 @@ class Selection
    * @param pt       new point on the point-line
    * @return newly cretaed selection point
    */
-  SelectionPoint insertPathPoint( DrawingPointLinePath path, LinePoint pt )
+  SelectionPoint insertPathPoint( DrawingPointLinePath path, LinePoint pt ) // synchrinized by CommandManager
   {
     SelectionPoint sp = new SelectionPoint( path, pt, null );
     mPoints.add( sp );
@@ -127,14 +128,14 @@ class Selection
     return sp;
   }
   
-  void insertLinePath( DrawingLinePath path )
+  void insertLinePath( DrawingLinePath path ) // synchronized by CommandManager
   {
     for ( LinePoint p2 = path.mFirst; p2 != null; p2 = p2.mNext ) {
       insertItem( path, p2 );
     }
   }
 
-  void insertPath( DrawingPath path )
+  void insertPath( DrawingPath path ) // synchronized by CommandManager
   {
     // Log.v("DistoX", "Selection insert path" );
     // LinePoint p1;
@@ -177,7 +178,7 @@ class Selection
     }
   }
 
-  void rebucket( SelectionPoint sp )
+  void rebucket( SelectionPoint sp ) // synchronized by CommandManager
   {
     sp.setBucket( getBucket( sp.X(), sp.Y() ) );
   }
@@ -290,13 +291,13 @@ class Selection
     return spmin;
   }
 
-  void removePoint( SelectionPoint sp )
+  void removePoint( SelectionPoint sp ) // synchronized by CommandManager
   {
     sp.setBucket( null );
     mPoints.remove( sp ); 
   }
 
-  void removePath( DrawingPath path )
+  void removePath( DrawingPath path ) // synchronized by CommandManager
   {
     if ( path.mType == DrawingPath.DRAWING_PATH_LINE || path.mType == DrawingPath.DRAWING_PATH_AREA ) {
       DrawingPointLinePath line = (DrawingPointLinePath)path;
@@ -318,7 +319,7 @@ class Selection
     }
   }
 
-  void removeLinePoint( DrawingPointLinePath path, LinePoint lp )
+  void removeLinePoint( DrawingPointLinePath path, LinePoint lp ) // snchronized by CommandManager
   {
     if ( path.mType != DrawingPath.DRAWING_PATH_LINE && path.mType != DrawingPath.DRAWING_PATH_AREA ) return;
     for ( SelectionPoint sp : mPoints ) {
@@ -451,7 +452,7 @@ class Selection
     } 
   }
   
-  SelectionPoint  selectOnItemAt( DrawingPath item, float x, float y, float radius )
+  SelectionPoint selectOnItemAt( DrawingPath item, float x, float y, float radius ) // synchronized by CommandManager
   {
     return bucketSelectOnItemAt( item, x, y, radius );
   }

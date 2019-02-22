@@ -1128,6 +1128,10 @@
   <string name="pref_lineacc_summary">Accuratezza di interpolazione per le curve Bezier</string>
   <string name="pref_linecorner_title">Angolatura Bezier</string>
   <string name="pref_linecorner_summary">Soglia angolatura curve Bezier</string>
+  <!-- TODO string name="pref_weeddistance_title">Point weeding segment buffer</string -->
+  <!-- TODO string name="pref_weeddistance_summary">Max distance from segment to weed points</string -->
+  <!-- TODO string name="pref_weedlength_title">Point weeding segment length</string -->
+  <!-- TODO string name="pref_weedlength_summary">Max length of a line segment</string -->
   <string name="pref_calib_algo_title">Algoritmo</string>
   <string name="pref_calib_algo_summary">Algortimo di calibrazione</string>
   <string name="pref_group_by_title">Politica gruppi</string>

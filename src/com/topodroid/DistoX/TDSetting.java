@@ -268,6 +268,7 @@ class TDSetting
 
   static int mThumbSize = 200;               // thumbnail size
   static boolean mWithSensors = false;       // whether sensors are enabled
+  // static boolean mWithRename  = false;       // whether survey rename is enabled
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // SKETCH DRAWING
@@ -304,6 +305,7 @@ class TDSetting
   static final private int LINE_STYLE_ONE    = 1;
   static final private int LINE_STYLE_TWO    = 2;
   static final private int LINE_STYLE_THREE  = 3;
+  static final private int LINE_STYLE_SIMPLIFIED = 4;
   static final private String LINE_STYLE     = TDString.TWO;     // LINE_STYLE_TWO NORMAL
   static int   mLineStyle = LINE_STYLE_BEZIER;    
   static int   mLineType;        // line type:  1       1     2    3
@@ -312,6 +314,9 @@ class TDSetting
   static float mLineAccuracy  = 1f;
   static float mLineCorner    = 20;    // corner threshold
   static int   mContinueLine  = DrawingWindow.CONT_NONE; // 0
+
+  static float mWeedDistance  = 0.5f;  // max weeding distance
+  static float mWeedLength    = 2.0f;  // max weeding length
 
   static float mStationSize    = 20;   // size of station names [pt]
   static float mLabelSize      = 24;   // size of labels [pt]
@@ -835,6 +840,8 @@ class TDSetting
     mBedding       = prefs.getBoolean( keyGShot[ 6], bool(defGShot[ 6]) ); // DISTOX_BEDDING
     mTripleShot    = prefs.getBoolean( keyGShot[ 7], bool(defGShot[ 7]) ); // DISTOX_TRIPLE_SHOT
     mWithSensors   = prefs.getBoolean( keyGShot[ 8], bool(defGShot[ 8]) ); // DISTOX_WITH_SENSORS
+    // mWithRename    = prefs.getBoolean( keyGShot[ 9], bool(defGShot[ 9]) ); // DISTOX_WITH_RENAME
+
 
     String[] keyGPlot = TDPrefKey.GEEKPLOT;
     String[] defGPlot = TDPrefKey.GEEKPLOTdef;
@@ -855,10 +862,12 @@ class TDSetting
     setReduceAngle( tryFloat(  prefs,  keyGLine[ 0],      defGLine[ 0] ) ); // DISTOX_REDUCE_ANGLE
     mLineAccuracy  = tryFloat( prefs,  keyGLine[ 1],      defGLine[ 1] );   // DISTOX_LINE_ACCURACY
     mLineCorner    = tryFloat( prefs,  keyGLine[ 2],      defGLine[ 2] );   // DISTOX_LINE_CORNER
-    mLineSnap      = prefs.getBoolean( keyGLine[ 3], bool(defGLine[ 3]) );  // DISTOX_LINE_SNAP
-    mLineCurve     = prefs.getBoolean( keyGLine[ 4], bool(defGLine[ 4]) );  // DISTOX_LINE_CURVE
-    mLineStraight  = prefs.getBoolean( keyGLine[ 5], bool(defGLine[ 5]) );  // DISTOX_LINE_STRAIGHT
-    mPathMultiselect = prefs.getBoolean( keyGLine[ 6], bool(defGLine[ 6]) );  // DISTOX_PATH_MULTISELECT
+    mWeedDistance  = tryFloat( prefs,  keyGLine[ 3],      defGLine[ 3] );   // DISTOX_WEED_DISTANCE
+    mWeedLength    = tryFloat( prefs,  keyGLine[ 4],      defGLine[ 4] );   // DISTOX_WEED_LENGTH
+    mLineSnap      = prefs.getBoolean( keyGLine[ 5], bool(defGLine[ 5]) );  // DISTOX_LINE_SNAP
+    mLineCurve     = prefs.getBoolean( keyGLine[ 6], bool(defGLine[ 6]) );  // DISTOX_LINE_CURVE
+    mLineStraight  = prefs.getBoolean( keyGLine[ 7], bool(defGLine[ 7]) );  // DISTOX_LINE_STRAIGHT
+    mPathMultiselect = prefs.getBoolean( keyGLine[ 8], bool(defGLine[ 8]) );  // DISTOX_PATH_MULTISELECT
 
     String[] keyUnits = TDPrefKey.UNITS;
     String[] defUnits = TDPrefKey.UNITSdef;
@@ -1244,6 +1253,8 @@ class TDSetting
       mTripleShot   = tryBooleanValue( hlp, k, v, bool(def[ 7]) );
     } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_WITH_SENSORS
       mWithSensors  = tryBooleanValue( hlp, k, v, bool(def[ 8]) );
+    // } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_WITH_RENAME
+    //   mWithRename   = tryBooleanValue( hlp, k, v, bool(def[ 9]) );
     } else {
       TDLog.Error("missing GEEK_SHOT key: " + k );
     }
@@ -1340,14 +1351,18 @@ class TDSetting
       ret = setLineAccuracy( tryFloatValue( hlp, k, v, def[1] ) );
     } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_LINE_CORNER
       ret = setLineCorner( tryFloatValue(   hlp, k, v, def[2] ) );
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_LINE_SNAP (bool)
-      mLineSnap = tryBooleanValue(          hlp, k, v, bool(def[3]) );
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_LINE_CURVE (bool)
-      mLineCurve = tryBooleanValue(         hlp, k, v, bool(def[4]) );
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_LINE_STRAIGHT
-      mLineStraight = tryBooleanValue(         hlp, k, v, bool(def[5]) );
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_PATH_MULTISELECT (bool)
-      mPathMultiselect = tryBooleanValue(         hlp, k, v, bool(def[6]) );
+    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_WEED_DISTANCE
+      ret = setWeedDistance( tryFloatValue(   hlp, k, v, def[3] ) );
+    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_WEED_LENGTH
+      ret = setWeedLength( tryFloatValue(   hlp, k, v, def[4] ) );
+    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_LINE_SNAP (bool)
+      mLineSnap = tryBooleanValue(          hlp, k, v, bool(def[5]) );
+    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_LINE_CURVE (bool)
+      mLineCurve = tryBooleanValue(         hlp, k, v, bool(def[6]) );
+    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_LINE_STRAIGHT
+      mLineStraight = tryBooleanValue(         hlp, k, v, bool(def[7]) );
+    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_PATH_MULTISELECT (bool)
+      mPathMultiselect = tryBooleanValue(         hlp, k, v, bool(def[8]) );
 
     } else {
       TDLog.Error("missing DEVICE key: " + k );
@@ -1928,10 +1943,6 @@ class TDSetting
       mAreaBorder = tryBooleanValue( hlp, k, v, bool(def[9]) );
     // } else if ( k.equals( key[ 10 ] ) ) { // DISTOX_REDUCE_ANGLE
     //   ret = setReduceAngle( tryFloatValue( hlp, k, v, def[10] ) );
-    // } else if ( k.equals( key[ 11 ] ) ) { // DISTOX_LINE_ACCURACY
-    //   ret = setLineAccuracy( tryFloatValue( hlp, k, v, def[11] ) );
-    // } else if ( k.equals( key[ 12 ] ) ) { // DISTOX_LINE_CORNER
-    //   ret = setLineCorner( tryFloatValue( hlp, k, v, def[12] ) );
     } else {
       TDLog.Error("missing DRAW key: " + k );
     }
@@ -2045,8 +2056,17 @@ class TDSetting
     } else if ( style.equals( TDString.THREE ) ) {
       mLineStyle = LINE_STYLE_THREE;
       mLineType  = 3;
+    } else if ( style.equals( TDString.FOUR ) ) {
+      mLineStyle = LINE_STYLE_SIMPLIFIED;
+      // mLineType  = 1;
     }
   }
+
+  static boolean isLineStyleComplex() 
+  { return mLineStyle == LINE_STYLE_BEZIER || mLineStyle == LINE_STYLE_SIMPLIFIED; }
+
+  static boolean isLineStyleBezier() { return mLineStyle == LINE_STYLE_BEZIER; }
+  static boolean isLineStyleSimplified() { return mLineStyle == LINE_STYLE_SIMPLIFIED; }
 
   private static String setLineThickness( String str )
   {
@@ -2095,6 +2115,22 @@ class TDSetting
     String ret = null;
     if ( a < 0.1f )  { a = 0.1f; ret = "0.1"; }    
     mLineCorner = a;
+    return ret;
+  }
+
+  private static String setWeedDistance( float a )
+  {
+    String ret = null;
+    if ( a < 0.1f )  { a = 0.1f; ret = "0.1"; } 
+    mWeedDistance = a;
+    return ret;
+  }
+
+  private static String setWeedLength( float a )
+  {
+    String ret = null;
+    if ( a < 0.1f )  { a = 0.1f; ret = "0.1"; }    
+    mWeedLength = a;
     return ret;
   }
 

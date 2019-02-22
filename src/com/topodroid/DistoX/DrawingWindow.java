@@ -2881,67 +2881,112 @@ public class DrawingWindow extends ItemDrawer
           
           if ( mPointCnt > mLinePointStep || mLinePointStep == POINT_MAX ) {
             if ( ! ( mSymbol == Symbol.LINE && mCurrentLine == BrushManager.mLineLib.mLineSectionIndex ) 
-                 && TDSetting.mLineStyle == TDSetting.LINE_STYLE_BEZIER
+                 && TDSetting.isLineStyleComplex()
                  && ( mSymbol == Symbol.AREA || ! BrushManager.mLineLib.isStyleStraight( mCurrentLine ) )
                ) {
               int nPts = (mSymbol == Symbol.LINE )? mCurrentLinePath.size() 
                                                   : mCurrentAreaPath.size() ;
               if ( nPts > 1 ) {
-                ArrayList< Point2D > pts = new ArrayList<>(); // [ nPts ];
-                // ArrayList< LinePoint > lp = 
-                //   (mSymbol == Symbol.LINE )? mCurrentLinePath.mPoints : mCurrentAreaPath.mPoints ;
-                // for (int k=0; k<nPts; ++k ) {
-                //   pts.add( new Point2D( lp.get(k).x, lp.get(k).y ) );
-                // }
-                LinePoint lp = (mSymbol == Symbol.LINE )? mCurrentLinePath.mFirst 
-                                                        : mCurrentAreaPath.mFirst;
-                for ( ; lp != null; lp = lp.mNext ) {
-                  pts.add( new Point2D( lp.x, lp.y ) );
-                }
+		if ( TDSetting.isLineStyleBezier() ) {
+                  ArrayList< Point2D > pts = new ArrayList<>(); // [ nPts ];
+                  LinePoint lp = (mSymbol == Symbol.LINE )? mCurrentLinePath.mFirst : mCurrentAreaPath.mFirst;
+                  for ( ; lp != null; lp = lp.mNext ) {
+                    pts.add( new Point2D( lp.x, lp.y ) );
+                  }
 
-                mBezierInterpolator.fitCurve( pts, nPts, TDSetting.mLineAccuracy, TDSetting.mLineCorner );
-                ArrayList< BezierCurve > curves = mBezierInterpolator.getCurves();
-                int k0 = curves.size();
-                // TDLog.Log( TDLog.LOG_PLOT, " Bezier size " + k0 );
-                if ( k0 > 0 ) {
-                  BezierCurve c = curves.get(0);
-                  Point2D p0 = c.getPoint(0);
-                  if ( mSymbol == Symbol.LINE ) {
-                    DrawingLinePath lp1 = new DrawingLinePath( mCurrentLine );
-                    lp1.addStartPoint( p0.x, p0.y );
-                    for (int k=0; k<k0; ++k) {
-                      c = curves.get(k);
-                      Point2D p1 = c.getPoint(1);
-                      Point2D p2 = c.getPoint(2);
-                      Point2D p3 = c.getPoint(3);
-                      lp1.addPoint3(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y );
-                    }
-                    boolean addline = true;
-                    if ( mContinueLine > CONT_NONE && mCurrentLine != BrushManager.mLineLib.mLineSectionIndex ) {
-                      addline = tryToJoin( lp1, mCurrentLinePath );
-                    }
-                    if ( addline ) {
-                      lp1.computeUnitNormal();
-                      if ( mSymbol == Symbol.LINE && BrushManager.mLineLib.isClosed( mCurrentLine ) ) {
-                        // mCurrentLine == lp1.mLineType 
-                        lp1.setClosed( true );
-                        lp1.closePath();
+                  mBezierInterpolator.fitCurve( pts, nPts, TDSetting.mLineAccuracy, TDSetting.mLineCorner );
+                  ArrayList< BezierCurve > curves = mBezierInterpolator.getCurves();
+                  int k0 = curves.size();
+                  // TDLog.Log( TDLog.LOG_PLOT, " Bezier size " + k0 );
+                  if ( k0 > 0 ) {
+                    BezierCurve c = curves.get(0);
+                    Point2D p0 = c.getPoint(0);
+                    if ( mSymbol == Symbol.LINE ) {
+                      DrawingLinePath lp1 = new DrawingLinePath( mCurrentLine );
+                      lp1.addStartPoint( p0.x, p0.y );
+                      for (int k=0; k<k0; ++k) {
+                        c = curves.get(k);
+                        Point2D p1 = c.getPoint(1);
+                        Point2D p2 = c.getPoint(2);
+                        Point2D p3 = c.getPoint(3);
+                        lp1.addPoint3(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y );
                       }
-                      mDrawingSurface.addDrawingPath( lp1 );
+                      boolean addline = true;
+                      if ( mContinueLine > CONT_NONE && mCurrentLine != BrushManager.mLineLib.mLineSectionIndex ) {
+                        addline = tryToJoin( lp1, mCurrentLinePath );
+                      }
+                      if ( addline ) {
+                        lp1.computeUnitNormal();
+                        if ( mSymbol == Symbol.LINE && BrushManager.mLineLib.isClosed( mCurrentLine ) ) {
+                          // mCurrentLine == lp1.mLineType 
+                          lp1.setClosed( true );
+                          lp1.closePath();
+                        }
+                        mDrawingSurface.addDrawingPath( lp1 );
+                      }
+                    } else { //  mSymbol == Symbol.AREA
+                      DrawingAreaPath ap = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(), mName+"-a", TDSetting.mAreaBorder ); 
+                      ap.addStartPoint( p0.x, p0.y );
+                      for (int k=0; k<k0; ++k) {
+                        c = curves.get(k);
+                        Point2D p1 = c.getPoint(1);
+                        Point2D p2 = c.getPoint(2);
+                        Point2D p3 = c.getPoint(3);
+                        ap.addPoint3(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y );
+                      }
+                      ap.closePath();
+                      ap.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
+                      mDrawingSurface.addDrawingPath( ap );
                     }
-                  } else { //  mSymbol == Symbol.AREA
-                    DrawingAreaPath ap = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(), mName+"-a", TDSetting.mAreaBorder ); 
-                    ap.addStartPoint( p0.x, p0.y );
-                    for (int k=0; k<k0; ++k) {
-                      c = curves.get(k);
-                      Point2D p1 = c.getPoint(1);
-                      Point2D p2 = c.getPoint(2);
-                      Point2D p3 = c.getPoint(3);
-                      ap.addPoint3(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y );
+                  }
+                } else { // if ( TDSetting.isLineStyleSimplified() ) 
+		  Weeder weeder = new Weeder();
+                  LinePoint lp = (mSymbol == Symbol.LINE )? mCurrentLinePath.mFirst : mCurrentAreaPath.mFirst;
+                  for ( ; lp != null; lp = lp.mNext ) {
+                    weeder.addPoint( lp.x, lp.y );
+                  }
+		  // get pixels from meters
+		  float dist = mZoom*DrawingUtil.SCALE_FIX*TDSetting.mWeedDistance;
+		  float len  = mZoom*DrawingUtil.SCALE_FIX*TDSetting.mWeedLength;
+		  // Log.v("DistoXX", "Weed dist " + dist + " len " + len );
+
+                  ArrayList< Point2D > points = weeder.simplify( dist, len );
+
+                  int k0 = points.size();
+                  // TDLog.Log( TDLog.LOG_PLOT, " Bezier size " + k0 );
+                  if ( k0 > 1 ) {
+                    Point2D p0 = points.get(0);
+                    if ( mSymbol == Symbol.LINE ) {
+                      DrawingLinePath lp1 = new DrawingLinePath( mCurrentLine );
+                      lp1.addStartPoint( p0.x, p0.y );
+                      for (int k=1; k<k0; ++k) {
+                        p0 = points.get(k);
+                        lp1.addPoint(p0.x, p0.y );
+                      }
+                      boolean addline = true;
+                      if ( mContinueLine > CONT_NONE && mCurrentLine != BrushManager.mLineLib.mLineSectionIndex ) {
+                        addline = tryToJoin( lp1, mCurrentLinePath );
+                      }
+                      if ( addline ) {
+                        lp1.computeUnitNormal();
+                        if ( mSymbol == Symbol.LINE && BrushManager.mLineLib.isClosed( mCurrentLine ) ) {
+                          // mCurrentLine == lp1.mLineType 
+                          lp1.setClosed( true );
+                          lp1.closePath();
+                        }
+                        mDrawingSurface.addDrawingPath( lp1 );
+                      }
+                    } else { //  mSymbol == Symbol.AREA
+                      DrawingAreaPath ap = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(), mName+"-a", TDSetting.mAreaBorder ); 
+                      ap.addStartPoint( p0.x, p0.y );
+                      for (int k=1; k<k0; ++k) {
+                        p0 = points.get(k);
+                        ap.addPoint(p0.x, p0.y );
+                      }
+                      ap.closePath();
+                      ap.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
+                      mDrawingSurface.addDrawingPath( ap );
                     }
-                    ap.closePath();
-                    ap.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
-                    mDrawingSurface.addDrawingPath( ap );
                   }
                 }
               }

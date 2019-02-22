@@ -470,12 +470,14 @@
      <item name="two">Normal</item>
      <item name="three">Coarse</item>
      <item name="bezier">Bezier</item>
+     <item name="simplified">Simplified</item>
   </string-array>
   <string-array name="lineStyleValue" translatable="false">
      <item name="none">1</item>
      <item name="two">2</item>
      <item name="three">3</item>
      <item name="bezier">0</item>
+     <item name="simplified">4</item>
   </string-array>
 
   <string-array name="groupBy">

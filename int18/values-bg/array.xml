@@ -197,6 +197,7 @@
      <item name="two">Нормални</item>
      <item name="two">Груби</item>
      <item name="bezier">"Безие" криви</item>
+     <item name="simplified">Simplified</item> <!-- TODO -->
   </string-array>
 
   <string-array name="groupBy">

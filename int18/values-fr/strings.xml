@@ -1124,6 +1124,10 @@
   <string name="pref_lineacc_summary">Précision de l\'interpolation cubique Bézier</string>
   <string name="pref_linecorner_title">Angle Bézier</string>
   <string name="pref_linecorner_summary">Seuil de détection angle Bézier</string>
+  <!-- TODO string name="pref_weeddistance_title">Point weeding segment buffer</string -->
+  <!-- TODO string name="pref_weeddistance_summary">Max distance from segment to weed points</string -->
+  <!-- TODO string name="pref_weedlength_title">Point weeding segment length</string -->
+  <!-- TODO string name="pref_weedlength_summary">Max length of a line segment</string -->
   <string name="pref_calib_algo_title">Algorithme</string>
   <string name="pref_calib_algo_summary">Algorithme d\'étalonnage</string>
   <string name="pref_group_by_title">Politique de groupage</string>

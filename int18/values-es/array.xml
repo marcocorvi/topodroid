@@ -194,6 +194,7 @@
      <item name="two">Normal</item>
      <item name="two">Pocos</item>
      <item name="bezier">Bezier</item>
+     <item name="simplified">Simplified</item> <!-- TODO -->
   </string-array>
 
   <string-array name="groupBy">

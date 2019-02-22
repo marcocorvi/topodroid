@@ -214,7 +214,7 @@ class DrawingSurface extends SurfaceView
     commandManager.setDisplayPoints( display );
     if ( display ) {
     } else {
-      commandManager.clearSelected();
+      commandManager.syncClearSelected();
     }
   }
 
@@ -588,7 +588,7 @@ class DrawingSurface extends SurfaceView
 
   SelectionPoint prevHotItem() { return commandManager.prevHotItem(); }
 
-  void clearSelected() { commandManager.clearSelected(); }
+  void clearSelected() { commandManager.syncClearSelected(); }
 
   void shiftDrawing( float x, float y ) { commandManager.shiftDrawing( x, y ); }
 

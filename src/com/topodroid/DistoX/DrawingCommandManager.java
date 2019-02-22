@@ -370,7 +370,9 @@ class DrawingCommandManager
               DrawingLinePath line = (DrawingLinePath)path;
               line.flipReversed();
             }
-            selection.insertPath( path );
+	    synchronized ( TDPath.mSelectionLock ) {
+              selection.insertPath( path );
+	    }
           }
         }
       }
@@ -495,16 +497,18 @@ class DrawingCommandManager
   //                                   + mCurrentStack.toArray().length );
   // }
 
-  void clearSelected()
+  void syncClearSelected()
   { 
-    // Log.v("DistoX", "clear selected");
-    synchronized( TDPath.mSelectionLock ) {
-      mSelected.clear();
-      // PATH_MULTISELECT
-      mMultiselected.clear();
-      mMultiselectionType  = -1;
-      isMultiselection = false;
-    }
+    synchronized( TDPath.mSelectionLock ) { clearSelected(); }
+  }
+
+  private void clearSelected()
+  {
+    mSelected.clear();
+    // PATH_MULTISELECT
+    mMultiselected.clear();
+    mMultiselectionType  = -1;
+    isMultiselection = false;
   }
 
   void clearReferences()
@@ -525,8 +529,8 @@ class DrawingCommandManager
     synchronized( mScrap       ) { mScrap.clear(); }
     synchronized( TDPath.mXSectionsLock   ) { mXSectionOutlines.clear(); }
     synchronized( mStations )    { mStations.clear(); }
-    clearSelected();
     synchronized( TDPath.mSelectionLock ) {
+      clearSelected();
       mSelection.clearReferencePoints();
     }
   }
@@ -538,7 +542,7 @@ class DrawingCommandManager
     synchronized( mCurrentStack ) { mCurrentStack.clear(); }
     synchronized( mUserStations ) { mUserStations.clear(); }
     mRedoStack.clear();
-    clearSelected();
+    syncClearSelected();
     mDisplayPoints = false;
   }
 
@@ -752,7 +756,9 @@ class DrawingCommandManager
   {
     SelectionSet sel = new SelectionSet();
     float erase_radius = TDSetting.mCloseCutoff + erase_size / zoom;
-    mSelection.selectAt( sel, x, y, erase_radius, Drawing.FILTER_ALL, false, false, false, null );
+    synchronized ( TDPath.mSelectionLock ) {
+      mSelection.selectAt( sel, x, y, erase_radius, Drawing.FILTER_ALL, false, false, false, null );
+    }
     // int ret = 0;
     if ( sel.size() > 0 ) {
       synchronized( mCurrentStack ) {
@@ -910,7 +916,7 @@ class DrawingCommandManager
     if ( lp == line.mFirst || lp == line.mLast ) return; // cannot split at first and last point
     int size = line.size();
     if ( size == 2 ) return;
-    clearSelected();
+    syncClearSelected();
 
     DrawingLinePath line1 = new DrawingLinePath( line.mLineType );
     DrawingLinePath line2 = new DrawingLinePath( line.mLineType );
@@ -946,7 +952,7 @@ class DrawingCommandManager
     if ( point == null ) return false;
     int size = line.size();
     if ( size <= 2 ) return false;
-    synchronized( TDPath.mSelectionLock ) { clearSelected(); }
+    syncClearSelected();
     for ( LinePoint lp = line.mFirst; lp != null; lp = lp.mNext ) 
     {
       if ( lp == point ) {
@@ -1011,7 +1017,9 @@ class DrawingCommandManager
       if ( remove ) {
         for ( DrawingPath pp : paths ) {
           mCurrentStack.remove( pp );
-          mSelection.removePath( pp );
+	  synchronized ( TDPath.mSelectionLock ) { 
+            mSelection.removePath( pp );
+	  }
         }
       }
     }
@@ -1108,8 +1116,10 @@ class DrawingCommandManager
     synchronized( mCurrentStack ) {
       SelectionPoint sp = mSelection.getSelectionPoint( line.mLast );
       line.makeClose( );
-      // rebucket last line point
-      mSelection.rebucket( sp );
+      // re-bucket last line point
+      synchronized ( TDPath.mSelectionLock ) {
+        mSelection.rebucket( sp );
+      }
     }
   }
 
@@ -1169,9 +1179,9 @@ class DrawingCommandManager
       mLegsStack.add( path );
       if ( selectable ) {
         synchronized( TDPath.mSelectionLock ) {
-          if ( path.mBlock != null ) {
-            // Log.v( "DistoX", "selection add fixed path " + path.mBlock.mFrom + " " + path.mBlock.mTo );
-          }
+          // if ( path.mBlock != null ) {
+          //   // Log.v( "DistoX", "selection add fixed path " + path.mBlock.mFrom + " " + path.mBlock.mTo );
+          // }
           mSelection.insertPath( path );
         }
       }
@@ -1185,9 +1195,9 @@ class DrawingCommandManager
       mSplaysStack.add( path );
       if ( selectable ) {
         synchronized( TDPath.mSelectionLock ) {
-          if ( path.mBlock != null ) {
-            // Log.v( "DistoX", "selection add fixed path " + path.mBlock.mFrom + " " + path.mBlock.mTo );
-          }
+          // if ( path.mBlock != null ) {
+          //   // Log.v( "DistoX", "selection add fixed path " + path.mBlock.mFrom + " " + path.mBlock.mTo );
+          // }
           mSelection.insertPath( path );
         }
       }
@@ -2766,7 +2776,7 @@ class DrawingCommandManager
           mSelection.insertPath( area );
         }
       }
-      clearSelected();
+      syncClearSelected();
     }
     // checkLines();
     return ret;

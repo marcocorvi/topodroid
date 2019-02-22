@@ -660,7 +660,7 @@ public class ShotWindow extends Activity
       // updateDisplay( );
     } else if ( TDLevel.overNormal && p++ == pos ) { // PHOTO
       mActivity.startActivity( new Intent( mActivity, PhotoActivity.class ) );
-    } else if ( TDLevel.overNormal && p++ == pos ) { // SENSORS
+    } else if ( TDSetting.mWithSensors && TDLevel.overNormal && p++ == pos ) { // SENSORS
       mActivity.startActivity( new Intent( mActivity, SensorListActivity.class ) );
     } else if ( TDLevel.overBasic && p++ == pos ) { // 3D
       if ( TopoDroidApp.exportSurveyAsThSync( ) ) { // make sure to have survey exported as therion
@@ -2008,7 +2008,7 @@ public class ShotWindow extends Activity
     mMenuAdapter.add( res.getString( menus[k++] ) );                                      // menu_close
     if ( TDLevel.overBasic  ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_recover
     if ( TDLevel.overNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_photo  
-    if ( TDLevel.overNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_sensor
+    if ( TDSetting.mWithSensors && TDLevel.overNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_sensor
     if ( TDLevel.overBasic  ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_3d
     if ( TDLevel.overNormal && ! diving ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_distox
     mMenuAdapter.add( res.getString( menus[k++] ) );  // menu_options

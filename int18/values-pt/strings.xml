@@ -1122,6 +1122,10 @@
   <string name="pref_lineacc_summary">Exatidão da interpolação cúbica das curvas Bézier</string>
   <string name="pref_linecorner_title">Limite quinas Bézier</string>
   <string name="pref_linecorner_summary">Limite para detecção de quinas nas curvas Bézier</string>
+  <!-- TODO string name="pref_weeddistance_title">Point weeding segment buffer</string -->
+  <!-- TODO string name="pref_weeddistance_summary">Max distance from segment to weed points</string -->
+  <!-- TODO string name="pref_weedlength_title">Point weeding segment length</string -->
+  <!-- TODO string name="pref_weedlength_summary">Max length of a line segment</string -->
   <string name="pref_calib_algo_title">Algoritmo</string>
   <string name="pref_calib_algo_summary">Algoritmo de calibração</string>
   <string name="pref_group_by_title">Regra agrupamento</string>

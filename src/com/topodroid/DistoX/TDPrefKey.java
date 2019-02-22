@@ -917,10 +917,6 @@ class TDPrefKey
     "DISTOX_LINE_CONTINUE",   // 6 // default line continuation set
     "DISTOX_AREA_BORDER",          // area border visibility
     // "DISTOX_REDUCE_ANGLE",         // "rock" reducing lines: maximal angle
-    // "DISTOX_LINE_ACCURACY",        // Bezier interpolator param:
-    // "DISTOX_LINE_CORNER",     // 9 // Bezier interpolator param:
-    // "DISTOX_LINE_SNAP",       // whether to show line-snap action
-    // "DISTOX_LINE_CURVE",      // whether to show line- smooth/straighten action
     null
   };
 
@@ -933,10 +929,6 @@ class TDPrefKey
     R.string.pref_linecontinue_title,
     R.string.pref_area_border_title,
     // R.string.pref_reduce_angle_title, 
-    // R.string.pref_lineacc_title, 
-    // R.string.pref_linecorner_title,
-    // R.string.pref_linesnap_title,
-    // R.string.pref_linecurve_title,
     -1
   };
 
@@ -949,10 +941,6 @@ class TDPrefKey
     R.string.pref_linecontinue_summary,
     R.string.pref_area_border_summary,
     // R.string.pref_reduce_angle_summary,
-    // R.string.pref_lineacc_summary,
-    // R.string.pref_linecorner_summary,
-    // R.string.pref_linesnap_summary,
-    // R.string.pref_linecurve_summary,
     -1
   };
 
@@ -965,10 +953,6 @@ class TDPrefKey
     TDString.ZERO,
     TRUE,
     // "45",
-    // "1.0",
-    // "20.0",
-    // FALSE,
-    // FALSE
     null
   };
 
@@ -1050,8 +1034,6 @@ class TDPrefKey
     "DISTOX_LINE_CONTINUE",         // default line continuation set
     "DISTOX_AREA_BORDER",           // area border visibility
     // "DISTOX_REDUCE_ANGLE",    // 10 // "rock" reducing lines: maximal angle
-    // "DISTOX_LINE_ACCURACY",   // 11 // Bezier interpolator param:
-    // "DISTOX_LINE_CORNER",     // 12 // Bezier interpolator param:
     null
   };
 
@@ -1168,6 +1150,8 @@ class TDPrefKey
     "DISTOX_REDUCE_ANGLE",    // "rock" reducing lines: maximal angle
     "DISTOX_LINE_ACCURACY",   // Bezier interpolator param:
     "DISTOX_LINE_CORNER",     // Bezier interpolator param:
+    "DISTOX_WEED_DISTANCE",
+    "DISTOX_WEED_LENGTH",
     "DISTOX_LINE_SNAP",       // whether to show line-snap action
     "DISTOX_LINE_CURVE",      // whether to show line- smooth/straighten action
     "DISTOX_LINE_STRAIGHT",   // whetter to show lines straighten button
@@ -1179,6 +1163,8 @@ class TDPrefKey
     R.string.pref_reduce_angle_title,
     R.string.pref_lineacc_title,  
     R.string.pref_linecorner_title,
+    R.string.pref_weeddistance_title,
+    R.string.pref_weedlength_title,
     R.string.pref_linesnap_title,
     R.string.pref_linecurve_title,
     R.string.pref_linestraight_title,
@@ -1190,6 +1176,8 @@ class TDPrefKey
     R.string.pref_reduce_angle_summary,
     R.string.pref_lineacc_summary,  
     R.string.pref_linecorner_summary,
+    R.string.pref_weeddistance_summary,
+    R.string.pref_weedlength_summary,
     R.string.pref_linesnap_summary,
     R.string.pref_linecurve_summary,
     R.string.pref_linestraight_summary,
@@ -1201,6 +1189,8 @@ class TDPrefKey
     "45",
     "1.0",
     "20.0",
+    "0.5",
+    "2.0",
     FALSE,
     FALSE,
     FALSE,
@@ -1218,6 +1208,7 @@ class TDPrefKey
     "DISTOX_BEDDING",         // splays bed plane interpolation
     "DISTOX_TRIPLE_SHOT",     // triple shot bell
     "DISTOX_WITH_SENSORS",    // using sensors
+    // "DISTOX_WITH_RENAME",     // with survey "rename" menu
     null
   };
 
@@ -1231,6 +1222,7 @@ class TDPrefKey
     R.string.pref_plane_interpolation_title,
     R.string.pref_triple_shot_title,
     R.string.pref_with_sensors_title,
+    // R.string.pref_with_rename_title,
     -1
   };
 
@@ -1244,6 +1236,7 @@ class TDPrefKey
     R.string.pref_plane_interpolation_summary,
     R.string.pref_triple_shot_summary,
     R.string.pref_with_sensors_summary,
+    // R.string.pref_with_rename_summary,
     -1
   };
 
@@ -1257,6 +1250,7 @@ class TDPrefKey
     FALSE,
     FALSE,
     FALSE,
+    // FALSE,
     null
   };
 

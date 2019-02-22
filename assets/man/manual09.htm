@@ -179,6 +179,7 @@ A long tap on the delete button removes the selected line/area point [N].<br>
 <a href="page_geek.htm">Geek settings</a>:
 <i>Leg vertical threshold</i>,
 <i>Bezier interpolation accuracy, and corner threshold</i>,
+<i>Line simplification distance and length</i>,
 <i>Pointwise actions flags (Line/Area snap, Smooth/Straighten segment, multiselection)</i>,
 <i>Splay dashing (coherence, plan minimum clino, profile and x-section minimum angles)</i>,
 <i>Backup number and interval</i>, <i>Auto-walls settings</i>.<br><p>
@@ -195,7 +196,8 @@ To do some editing you must select a point: either a point item, a line/area poi
 To this aim you tap near the point you want. However if there are several points close where you tap, they are all selected, but only one of them is actively being edited. You change the "active" point among the selected set with the <u>Previous</u> and <u>Next</u> buttons.<br><p>
 
 <h4>Line style</h4>
-TopoDroid has four line styles. With the normal style [default] the lines are drawn as polylines. With the fine style the polyline segments are shorter, while with the coarse style they are longer. In the fourth style lines are interpolated replacing the segments with cubic Bezier curves (splines). These segments pass through the two endpoints and have two control points used define the curvature.
+TopoDroid has five line styles. With the normal style [default] the lines are drawn as polylines. With the fine style the polyline segments are shorter, while with the coarse style they are longer. In the fourth style lines are interpolated replacing the segments with cubic Bezier curves (splines). These segments pass through the two endpoints and have two control points used define the curvature.
+With the fifth line style the traced lines are simplified using a point-weeding algorithm.
 If you export the drawing in DXF with AutoCAD version 6 do not use splines because they get exported as polylines.<br><p>
 
 <h4>Line join</h4>
