@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="401074"
-      android:versionName="4.1.2m"
+      android:versionCode="401075"
+      android:versionName="4.1.2n"
     >
     <!-- android:debuggable="true" -->
     <!-- Android SDK dependencies:
