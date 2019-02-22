@@ -15,7 +15,7 @@
     <string name="setup_buttonsize_title">Configura TopoDroid. Dimensione pulsanti</string>
     <string name="setup_drawingunit_title">Configura TopoDroid. Dimensione Icone</string>
     <string name="setup_done_title">Configura TopoDroid. Fatto</string>
-    <!-- TODO string name="setup_buttonsample">Button size</string -->
+    <string name="setup_buttonsample">Dimensione pulsanti</string>
 
     <string name="setup_textsize">Imposta la dimensione testo.\nPuoi sempre cambiarla in seguito dalla finestra di configurazione.</string>
     <string name="setup_buttonsize">Imposta la dimensione pulsanti.\nPuoi sempre cambiarla in seguito dalla finestra di configurazione..</string>
@@ -34,10 +34,9 @@
     <string name="STATION">CAPOSALDO </string>
     <string name="UP">IN SU</string>
     <string name="DOWN">IN GIU\'</string>
-
-    <!-- TODO string name="xsplay">X</string -->
-    <!-- TODO string name="hsplay">H</string -->
-    <!-- TODO string name="vsplay">V</string -->
+    <string name="xsplay">Xsplay</string>
+    <string name="hsplay">Ysplay</string>
+    <string name="vsplay">Zsplay</string>
 
     <string name="cut">TAGLIA</string>
     <string name="copy">COPIA</string>
@@ -70,7 +69,7 @@
     <string name="failed_snap_to_line">Nessuna linea su cui deformare il bordo area</string>
     <string name="failed_snap_to_point">Nessun punto vicino su cui muovere il punto</string>
     <string name="failed_snap_to_splays">Nessun splay vicino su cui agganciare il bordo</string>
-    <!-- TODO string name="failed_append_to_line">Failed to append to another line</string -->
+    <string name="failed_append_to_line">Errore: collegamento linee</string>
 
     <string name="calibration_title">Strumenti di calibrazione</string>
     <string name="calibration_length">Fettuccia</string>
@@ -307,7 +306,7 @@
     <!-- UNUSED string name="menu_attach">CONNETTI</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
-    <!-- TODO string name="menu_backups">CLEAR BACKUPS</string -->
+    <string name="menu_backups">CANCELLA BACKUP</string>
     <string name="menu_calib_check">VERIFICA CALIBR.</string>
     <string name="menu_close">CHIUDI</string>
     <!-- UNUSED string name="menu_clear">PULISCI</string -->
@@ -315,8 +314,8 @@
     <string name="menu_delete">ELIMINA</string>
     <string name="menu_detach">SCONNETTI</string>
     <!-- UNUSED string name="menu_display">DISPLAY</string -->
-    <!-- TODO string name="menu_show_deleted">SHOW DELETED</string -->
-    <!-- TODO string name="menu_hide_deleted">HIDE DELETED</string -->
+    <string name="menu_show_deleted">MOSTRA CANCELLATI</string>
+    <string name="menu_hide_deleted">NASCONDI CANCELLATI</string>
     <!-- OK string name="menu_distox">DISTOX</string -->
     <string name="menu_export">ESPORTA</string>
     <!-- OK string name="menu_firmware">FIRMWARE</string -->
@@ -352,7 +351,7 @@
     <string name="popup_sharp_pt">Rendi diritto</string>
     <string name="popup_curve_pt">Rendi curvo</string>
     <string name="popup_remove_pt">Elimina punto</string>
-    <!-- TODO string name="popup_append_line">Append to line</string -->
+    <string name="popup_append_line">Collega alla linea</string>
 
     <string name="popup_erase_all">Cancella tutto</string>
     <string name="popup_erase_point">Cancella punti</string>
@@ -396,7 +395,7 @@
     <string name="item_delete">Cancellare elemento %1$s ?</string>
     <string name="splay_delete">Cancello splay %1$s ?</string>
     <string name="plot_duplicate_name">Nome disegno già presente</string>
-    <!-- TODO string name="plot_dangling">Dangling sketch</string -->
+    <string name="plot_dangling">Disegno dondolante</string>
     <!-- UNUSED string name="plot_name">Nome del disegno</string -->
     <string name="plot_new">Nuovo disegno</string>
     <string name="plot_not_found">Disegno non trovato</string>
@@ -547,7 +546,7 @@
     <!-- UNUSED string name="ask_reset">Resettare memoria DistoX?</string -->
     <!-- UNUSED string name="ask_close_survey">Chiudere rilievo?</string -->
     <string name="ask_gps_service">Impostare il servizio GPS?</string>
-    <!-- TODO string name="ask_backups_clear">Delete sketch backups?</string -->
+    <string name="ask_backups_clear">Cancellare backup disegni?</string>
 
     <!-- UNUSED string name="button_add"       >Inserisci </string -->
     <string name="button_back"      >Indietro  </string>
@@ -600,7 +599,7 @@
     <string name="button_split"     >Dividi    </string>
     <string name="button_station"   >Centra</string>
     <string name="button_store"     >Scrivi    </string>
-    <!-- TODO string name="button_swap"      >Swap      </string -->
+    <string name="button_swap"      >Scambia   </string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
     <!-- OK string name="button_upload"    >Upload   </string -->
@@ -608,7 +607,7 @@
     <!-- UNUSED string name="button_zoomfit"   >Adatta zoom</string -->
     <!-- UNUSED string name="button_landscape" >Panorama  </string -->
     <!-- UNUSED string name="button_portrait"  >Ritratto  </string -->
-    <!-- TODO string name="button_splays">Splays</string -->
+    <string name="button_splays">Splay</string>
 
 
     <string name="button_write"     >Installa</string>
@@ -689,7 +688,7 @@
     <string name="help_measure_type">Metodo misura: punti fissi o polilinea</string>
     <string name="help_measure_undo">Cancella l\'ultimo punto della polilinea</string>
     
-    <!-- TODO string name="help_backups">Delete sketch backups</string -->
+    <string name="help_backups">Cancella backup disegni</string>
     <string name="help_calib_check">Tiri di controllo calib.</string>
     <string name="help_close">Chiusura finestra</string>
     <string name="help_coeff">Coefficienti della calibrazione</string>
@@ -698,7 +697,7 @@
     <!-- NO string name="help_contour">Contour editing</string -->
     <string name="help_current_station">Capisaldi salvati</string>
     <string name="help_azimuth">Riferimento per "extend"</string>
-    <!-- TODO string name="help_refresh">Refresh display</string -->
+    <string name="help_refresh">Aggiorna schermata</string>
     <string name="help_device">Finestra DistoX</string>
     <string name="help_add_topodroid">Nuovo rilievo/calibr.</string>
     <string name="help_import">Importa zip o file dati rilievo</string>
@@ -832,7 +831,7 @@
     <string name="title_settings_main">TopoDroid: Impostazioni principali</string>
     <string name="title_settings_export">Impostazione import/export</string>
     <string name="title_settings_import">Impostazione import</string>
-    <!-- TODO string name="title_settings_svx">Survex export settings</string -->
+    <string name="title_settings_svx">Impostazioni export Survex</string>
     <string name="title_settings_th">Therion: Imposta export</string>
     <string name="title_settings_dat">Compass: Imposta export</string>
     <string name="title_settings_svg">SVG: Imposta export</string>
@@ -856,7 +855,7 @@
     <string name="title_settings_edit">Impostazione editing</string>
     <string name="title_settings_device">Impostazione device</string>
     <string name="title_settings_calib">Impostazione calibrazione</string>
-    <!-- TODO string name="title_settings_geek">TopoDroid geek flags settings</string -->
+    <string name="title_settings_geek">Flag impostazioni principianti</string>
     <string name="title_settings_log">Impostazione log</string>
 
     <string name="title_shift">Sposta</string>
@@ -893,7 +892,7 @@
 
   <string name="pref_cat_calib">OPZIONI CALIBRAZIONE</string>
   <string name="pref_cat_device">OPZIONI DISTOX</string>
-  <!-- TODO string name="pref_cat_geek">GEEK FLAGS</string -->
+  <string name="pref_cat_geek">FLAG PRINCIPIANTI</string>
   <!-- UNUSED string name="pref_cat_log">Opzioni log</string -->
 
   <string name="pref_locale_title">Lingua</string>
@@ -923,10 +922,10 @@
   <string name="pref_extra_buttons_summary">Seleziona il livello di comandi</string>
   <string name="pref_size_buttons_title">Dimensione bottoni</string>
   <string name="pref_size_buttons_summary">Dimensione bottoni barra superiore [pixels]</string>
-  <!-- TODO string name="pref_with_sensors_title">Sensors</string -->
-  <!-- TODO string name="pref_with_sensors_summary">Enable "sensors" data</string -->
-  <!-- TODO string name="pref_palettes_title">Palettes</string -->
-  <!-- TODO string name="pref_palettes_summary">Enable additional palettes</string -->
+  <string name="pref_with_sensors_title">Sensori</string>
+  <string name="pref_with_sensors_summary">Abilita dati "sensori"</string>
+  <string name="pref_palettes_title">Tavolozze</string>
+  <string name="pref_palettes_summary">Abilita tavolozze addizionali</string>
 
   <string name="pref_bezier_step_title">Spaziatura punti</string>
   <string name="pref_bezier_step_summary">Distanza tra punti in una linea di export [m]</string>
@@ -934,8 +933,8 @@
   <string name="pref_leg_shots_summary">Minimo numero di misure per tiro di poligonale</string>
   <string name="pref_recent_timeout_title">Dati Timeout recenti</string>
   <string name="pref_recent_timeout_summary">Timeout dopo i quali un dato non e\' piu\' recente</string>
-  <!-- TODO string name="pref_triple_shot_title">Leg-shot bell</string -->
-  <!-- TODO string name="pref_triple_shot_summary">Sound feedback on leg-shot recognition</string -->
+  <string name="pref_triple_shot_title">Suono Misura-Tiro</string>
+  <string name="pref_triple_shot_summary">Feedback sonoro al riconoscimento di Misura-Tiro</string>
   <string name="pref_station_prefix_title">Esporta il prefisso dei caposaldi</string>
   <string name="pref_station_prefix_summary">Esporta in cSurvey il prefisso dei caposaldi</string>
   <string name="pref_compass_splays_title">Splay Compass</string>
@@ -956,8 +955,8 @@
   <string name="pref_survex_lrud_summary">Survex - Aggiungi LRUD alla export</string>
   <string name="pref_svg_grid_title">Griglia SVG</string>
   <string name="pref_svg_grid_summary">Aggiungi griglia alla export SVG</string>
-  <!-- TODO string name="pref_svg_splays_title">SVG splays</string -->
-  <!-- TODO string name="pref_svg_splays_summary">Include splays into SVG export</string -->
+  <string name="pref_svg_splays_title">Splay SVG</string>
+  <string name="pref_svg_splays_summary">Include splay in export SVG</string>
   <!-- UNUSED string name="pref_svg_in_html_title">SVG nell\'HTML</string -->
   <!-- UNUSED string name="pref_svg_in_html_summary">Inserire SVG export in HTML</string -->
   <string name="pref_svg_pointstroke_title">SVG, tratto del punto</string>
@@ -1041,8 +1040,8 @@
   <string name="pref_section_splay_message">Nella sezione, oltre questo angolo, gli splay sono tratteggiati</string>
   <string name="pref_data_backup_title">Auto-esporta dati</string>
   <string name="pref_data_backup_summary">Esportazione automatica dei dati (necessita formato di default)</string>
-  <!-- TODO string name="pref_fixed_origin_title">Sketch origin</string -->
-  <!-- TODO string name="pref_fixed_origin_summary">Fixed sketch origin</string -->
+  <string name="pref_fixed_origin_title">Origine disegno</string>
+  <string name="pref_fixed_origin_summary">Origine disegno fissa</string>
   <string name="pref_shared_xsections_title">X-section condivise</string>
   <string name="pref_shared_xsections_summary">X-section al caposaldo condivisa tra i disegni</string>
   <string name="xsections_shared">X-section condivise</string>
@@ -1110,10 +1109,10 @@
   <string name="pref_shot_timer_summary">Secondi di attesa prima della misura</string>
   <string name="pref_beep_volume_title">Volume timer</string>
   <string name="pref_beep_volume_summary">Percent timer-beep volume</string>
-  <!-- TODO string name="pref_extend_frac_title">Fractional extend</string -->
-  <!-- TODO string name="pref_extend_frac_summary">Whether "extend" can have a decimal part</string -->
-  <!-- TODO string name="pref_recent_shot_title">Recent shots</string -->
-  <!-- TODO string name="pref_recent_shot_summary">Whether to highlight recent shots</string -->
+  <string name="pref_extend_frac_title">Extend frazionario</string>
+  <string name="pref_extend_frac_summary">Se gli "extend" possono avere decimali</string>
+  <string name="pref_recent_shot_title">Tiri recenti</string>
+  <string name="pref_recent_shot_summary">Se evidenziare i tiri recenti</string>
   <string name="pref_drawing_unit_title">Scala simboli grafici</string>
   <string name="pref_drawing_unit_summary">Scala simboli grafici</string>
   <string name="pref_unscaled_points_title">Punti icona senza zoom</string>
@@ -1150,18 +1149,18 @@
   <string name="pref_dot_radius_message">Raggio dei punti di selezione</string>
   <string name="pref_line_thickness_title">Spessore linee</string>
   <string name="pref_line_thickness_summary">Spessore linee disegno</string>
-  <!-- TODO string name="pref_linesnap_title">Line/Area snap</string -->
-  <!-- TODO string name="pref_linesnap_summary">Enable line/area snap action</string -->
-  <!-- TODO string name="pref_linecurve_title">Smooth/Straigten segment</string -->
-  <!-- TODO string name="pref_linecurve_summary">Smooth/Straighten line segment action</string -->
-  <!-- TODO string name="pref_linestraight_title">Straigten lines</string -->
-  <!-- TODO string name="pref_linestraight_summary">Straighten whole line action</string -->
-  <!-- TODO string name="pref_path_multiselect_title">Path multiselection</string -->
-  <!-- TODO string name="pref_path_multiselect_summary">Path multiselection action</string -->
-  <!-- TODO string name="pref_plane_interpolation_title">Plane interpolation</string -->
-  <!-- TODO string name="pref_plane_interpolation_summary">Plane interpolation action</string -->
-  <!-- TODO string name="pref_plot_split_title">Sketch split/merge</string -->
-  <!-- TODO string name="pref_plot_split_summary">Sketch split and merge actions</string -->
+  <string name="pref_linesnap_title">Snap di Linea/Area</string>
+  <string name="pref_linesnap_summary">Abilita lo snap(copia) su linee/aree</string>
+  <string name="pref_linecurve_title">Aggiusta segmento</string>
+  <string name="pref_linecurve_summary">Azioni per aggiustare segmenti</string>
+  <string name="pref_linestraight_title">Raddrizza linee</string>
+  <string name="pref_linestraight_summary">Azione per raddrizzare una intera linea</string>
+  <string name="pref_path_multiselect_title">Multiselezione</string>
+  <string name="pref_path_multiselect_summary">Azione di selezione multipla</string>
+  <string name="pref_plane_interpolation_title">Interpolazione piana</string>
+  <string name="pref_plane_interpolation_summary">Azione di interpolazione piana</string>
+  <string name="pref_plot_split_title">Divisione/Unione disegno</string>
+  <string name="pref_plot_split_summary">Azione per dividere o unire disegni</string>
   <string name="pref_fixed_thickness_title">Spessore poligonale</string>
   <string name="pref_fixed_thickness_summary">Spessore linee di poligonale</string>
   <!-- UNUSED string name="pref_device_title">Dispositivo</string -->
@@ -1176,17 +1175,17 @@
   <string name="pref_backup_number_summary">Numero di backup di sketch file</string>
   <string name="pref_backup_interval_title">Intervallo di backup</string>
   <string name="pref_backup_interval_summary">Intervallo minimo tra 2 backup [s]</string>
-  <!-- TODO string name="pref_backups_clear_title">Backups clear</string -->
-  <!-- TODO string name="pref_backups_clear_summary">Enable sketch backups clear menu</string -->
+  <string name="pref_backups_clear_title">Cancella backup</string>
+  <string name="pref_backups_clear_summary">Abilita menu per cancellazione backup disegni</string>
   <!-- UNUSED string name="pref_xtherion_areas_title">Aree xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Salva le aree in modo xtherion</string -->
   <string name="pref_therion_splays_title">Splay Therion</string>
   <string name="pref_therion_splays_summary">Aggiungere linee u:splay ai file th2</string>
-  <!-- TODO string name="pref_th2_scale_title">Therion scale</string -->
-  <!-- TODO string name="pref_th2_scale_summary">Scale of th2/xvi export</string -->
-  <!-- TODO string name="pref_th2_xvi_title">xvi image</string -->
-  <!-- TODO string name="pref_th2_xvi_summary">Insert xvi image in th2</string -->
-  <string name="pref_autoStations_title">Punti th2 station</string>
+  <string name="pref_th2_scale_title">Scala Therion</string>
+  <string name="pref_th2_scale_summary">Scala della export th2/xvi</string>
+  <string name="pref_th2_xvi_title">Immagine xvi</string>
+  <string name="pref_th2_xvi_summary">Inserire immagine xvi in th2</string>
+  <string name="pref_autoStations_title">Punti capisaldi th2</string>
   <string name="pref_autoStations_summary">Aggiungi capisaldi automaticamente</string>
   <string name="pref_loopClosure_title">Chiusura anelli</string>
   <string name="pref_loopClosure_summary">Compensazione errore nella chiusura anelli</string>
@@ -1196,16 +1195,16 @@
   <string name="pref_swapLR_summary">Scambia LR nella export Compass</string>
   <string name="pref_LRExtend_title">Stima extend Sx/Dx</string>
   <string name="pref_LRExtend_summary">Stima extend Sx/Dx (Bussola/import VisualTopo)</string>
-  <!-- TODO string name="pref_diving_mode_title">Diving mode</string -->
-  <!-- TODO string name="pref_diving_mode_summary">Enable diving mode</string -->
-  <!-- TODO string name="pref_splay_classes_title">Splay classes</string -->
-  <!-- TODO string name="pref_splay_classes_summary">Enable splay classes and coloring</string -->
-  <!-- TODO string name="pref_splay_color_title">Splay coloring</string -->
-  <!-- TODO string name="pref_splay_color_summary">Enable splay coloring</string -->
-  <!-- TODO string name="pref_plot_shift_title">Sketch shift/scale</string -->
-  <!-- TODO string name="pref_plot_shift_summary">Enable sketch shift and scale</string -->
-  <!-- TODO string name="pref_splay_alpha_title">Splay transparency</string -->
-  <!-- TODO string name="pref_splay_alpha_summary">Splay transparency [0: transparent, 100: opaque]</string -->
+  <string name="pref_diving_mode_title">Modo Immersione</string>
+  <string name="pref_diving_mode_summary">Abilita modo immersione</string>
+  <string name="pref_splay_classes_title">Classi di splay</string>
+  <string name="pref_splay_classes_summary">Abilita classi e colorazione spla</string>
+  <string name="pref_splay_color_title">Colorazione splay</string>
+  <string name="pref_splay_color_summary">Abilita colorazione splay</string>
+  <string name="pref_plot_shift_title">Scala/Sposta disegno</string>
+  <string name="pref_plot_shift_summary">Abilita spostamento/ridimensione disegno</string>
+  <string name="pref_splay_alpha_title">Trasparenza splay</string>
+  <string name="pref_splay_alpha_summary">Trasparenza splay [0: transparente, 100: opaco]</string>
 
   <string name="pref_picker_type_title">Dialogo scelta prototipo</string>
   <string name="pref_picker_type_summary">Tipo dialogo scelta prototipo grafico</string>
