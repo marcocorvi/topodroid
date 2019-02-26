@@ -2946,7 +2946,8 @@ public class DrawingWindow extends ItemDrawer
                     weeder.addPoint( lp.x, lp.y );
                   }
 		  // get pixels from meters
-		  float dist = mZoom*DrawingUtil.SCALE_FIX*TDSetting.mWeedDistance;
+		  // float dist = mZoom*DrawingUtil.SCALE_FIX*TDSetting.mWeedDistance;
+		  float dist = DrawingUtil.SCALE_FIX*TDSetting.mWeedDistance; // N.B. no zoom
 		  float len  = mZoom*DrawingUtil.SCALE_FIX*TDSetting.mWeedLength;
 		  // Log.v("DistoXX", "Weed dist " + dist + " len " + len );
 

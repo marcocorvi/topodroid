@@ -929,10 +929,11 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2], FLOAT,   ctx, hlp ), //        CORNER
       makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], T, def[ 3], FLOAT,   ctx, hlp ), // WEED DISTANCE
       makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], T, def[ 4], FLOAT,   ctx, hlp ), //      LENGTH
-      makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5],          ctx, hlp ), // SNAP
-      makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], T, def[ 6],          ctx, hlp ), // CURVE
-      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], T, def[ 7],          ctx, hlp ), // STRAIGHT
-      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], T, def[ 8],          ctx, hlp )  // PATH MULTISELECT
+      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5], FLOAT,   ctx, hlp ), //      BUFFER
+      makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], T, def[ 6],          ctx, hlp ), // SNAP
+      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], T, def[ 7],          ctx, hlp ), // CURVE
+      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], T, def[ 8],          ctx, hlp ), // STRAIGHT
+      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9],          ctx, hlp )  // PATH MULTISELECT
     };
   }
 

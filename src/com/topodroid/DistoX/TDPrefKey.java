@@ -1152,6 +1152,7 @@ class TDPrefKey
     "DISTOX_LINE_CORNER",     // Bezier interpolator param:
     "DISTOX_WEED_DISTANCE",
     "DISTOX_WEED_LENGTH",
+    "DISTOX_WEED_BUFFER",
     "DISTOX_LINE_SNAP",       // whether to show line-snap action
     "DISTOX_LINE_CURVE",      // whether to show line- smooth/straighten action
     "DISTOX_LINE_STRAIGHT",   // whetter to show lines straighten button
@@ -1165,6 +1166,7 @@ class TDPrefKey
     R.string.pref_linecorner_title,
     R.string.pref_weeddistance_title,
     R.string.pref_weedlength_title,
+    R.string.pref_weedbuffer_title,
     R.string.pref_linesnap_title,
     R.string.pref_linecurve_title,
     R.string.pref_linestraight_title,
@@ -1178,6 +1180,7 @@ class TDPrefKey
     R.string.pref_linecorner_summary,
     R.string.pref_weeddistance_summary,
     R.string.pref_weedlength_summary,
+    R.string.pref_weedbuffer_summary,
     R.string.pref_linesnap_summary,
     R.string.pref_linecurve_summary,
     R.string.pref_linestraight_summary,
@@ -1191,6 +1194,7 @@ class TDPrefKey
     "20.0",
     "0.5",
     "2.0",
+    "10",
     FALSE,
     FALSE,
     FALSE,

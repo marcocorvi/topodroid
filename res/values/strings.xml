@@ -1156,6 +1156,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_weeddistance_summary">Max distance from segment to weed points [m]</string>
   <string name="pref_weedlength_title">Point weeding segment length</string>
   <string name="pref_weedlength_summary">Max length of a line segment [m]</string>
+  <string name="pref_weedbuffer_title">Weeding segment buffer</string>
+  <string name="pref_weedbuffer_summary">Buffer around a line segment [pxl]</string>
   <string name="pref_calib_algo_title">Algorithm</string>
   <string name="pref_calib_algo_summary">Calibration algorithm</string>
   <string name="pref_group_by_title">Group policy</string>

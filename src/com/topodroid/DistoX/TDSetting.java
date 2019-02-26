@@ -317,6 +317,7 @@ class TDSetting
 
   static float mWeedDistance  = 0.5f;  // max weeding distance
   static float mWeedLength    = 2.0f;  // max weeding length
+  static float mWeedBuffer    = 10;    // weed segment buffer
 
   static float mStationSize    = 20;   // size of station names [pt]
   static float mLabelSize      = 24;   // size of labels [pt]
@@ -864,10 +865,11 @@ class TDSetting
     mLineCorner    = tryFloat( prefs,  keyGLine[ 2],      defGLine[ 2] );   // DISTOX_LINE_CORNER
     mWeedDistance  = tryFloat( prefs,  keyGLine[ 3],      defGLine[ 3] );   // DISTOX_WEED_DISTANCE
     mWeedLength    = tryFloat( prefs,  keyGLine[ 4],      defGLine[ 4] );   // DISTOX_WEED_LENGTH
-    mLineSnap      = prefs.getBoolean( keyGLine[ 5], bool(defGLine[ 5]) );  // DISTOX_LINE_SNAP
-    mLineCurve     = prefs.getBoolean( keyGLine[ 6], bool(defGLine[ 6]) );  // DISTOX_LINE_CURVE
-    mLineStraight  = prefs.getBoolean( keyGLine[ 7], bool(defGLine[ 7]) );  // DISTOX_LINE_STRAIGHT
-    mPathMultiselect = prefs.getBoolean( keyGLine[ 8], bool(defGLine[ 8]) );  // DISTOX_PATH_MULTISELECT
+    mWeedBuffer    = tryFloat( prefs,  keyGLine[ 5],      defGLine[ 5] );   // DISTOX_WEED_BUFFER
+    mLineSnap      = prefs.getBoolean( keyGLine[ 6], bool(defGLine[ 6]) );  // DISTOX_LINE_SNAP
+    mLineCurve     = prefs.getBoolean( keyGLine[ 7], bool(defGLine[ 7]) );  // DISTOX_LINE_CURVE
+    mLineStraight  = prefs.getBoolean( keyGLine[ 8], bool(defGLine[ 8]) );  // DISTOX_LINE_STRAIGHT
+    mPathMultiselect = prefs.getBoolean( keyGLine[ 9], bool(defGLine[ 9]) );  // DISTOX_PATH_MULTISELECT
 
     String[] keyUnits = TDPrefKey.UNITS;
     String[] defUnits = TDPrefKey.UNITSdef;
@@ -1355,14 +1357,16 @@ class TDSetting
       ret = setWeedDistance( tryFloatValue(   hlp, k, v, def[3] ) );
     } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_WEED_LENGTH
       ret = setWeedLength( tryFloatValue(   hlp, k, v, def[4] ) );
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_LINE_SNAP (bool)
-      mLineSnap = tryBooleanValue(          hlp, k, v, bool(def[5]) );
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_LINE_CURVE (bool)
-      mLineCurve = tryBooleanValue(         hlp, k, v, bool(def[6]) );
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_LINE_STRAIGHT
-      mLineStraight = tryBooleanValue(         hlp, k, v, bool(def[7]) );
-    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_PATH_MULTISELECT (bool)
-      mPathMultiselect = tryBooleanValue(         hlp, k, v, bool(def[8]) );
+    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_WEED_BUFFER
+      ret = setWeedBuffer( tryFloatValue(   hlp, k, v, def[5] ) );
+    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_LINE_SNAP (bool)
+      mLineSnap = tryBooleanValue(          hlp, k, v, bool(def[6]) );
+    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_LINE_CURVE (bool)
+      mLineCurve = tryBooleanValue(         hlp, k, v, bool(def[7]) );
+    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_LINE_STRAIGHT
+      mLineStraight = tryBooleanValue(         hlp, k, v, bool(def[8]) );
+    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_PATH_MULTISELECT (bool)
+      mPathMultiselect = tryBooleanValue(         hlp, k, v, bool(def[9]) );
 
     } else {
       TDLog.Error("missing DEVICE key: " + k );
@@ -2131,6 +2135,14 @@ class TDSetting
     String ret = null;
     if ( a < 0.1f )  { a = 0.1f; ret = "0.1"; }    
     mWeedLength = a;
+    return ret;
+  }
+
+  private static String setWeedBuffer( float a )
+  {
+    String ret = null;
+    if ( a < 0 )  { a = 0; ret = "0"; }    
+    mWeedBuffer = a;
     return ret;
   }
 

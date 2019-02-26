@@ -27,8 +27,11 @@ class Weeder
     WeedPoint( float xx, float yy ) { super(xx,yy); }
   }
   
-  // check whether two segments crosses
-  static boolean cross( WeedPoint p1, WeedPoint p2, WeedPoint q1, WeedPoint q2 )
+  // check whether two segments crosses - allow a buffer to both
+  // buffer are in units of segments lengths
+  //
+  // p1 + s * (p2 - p1) = q1 + t * (q2 - q1)
+  static boolean cross( WeedPoint p1, WeedPoint p2, WeedPoint q1, WeedPoint q2, float bp, float bq )
   {
     float px = p2.x - p1.x;
     float py = p2.y - p1.y;
@@ -38,9 +41,9 @@ class Weeder
     float den = qx*py - qy*px;
     if ( den == 0 ) return false;
     float t = ((p1.x-q1.x)*py - (p1.y-q1.y)*px)/den;
-    if ( t < 0 || t > 1 ) return false;
+    if ( t < -bq || t > 1+bq ) return false;
     float s = ((p1.x-q1.x)*qy - (p1.y-q1.y)*qx)/den;
-    if ( s < 0 || s > 1) return false;
+    if ( s < -bp || s > 1+bp ) return false;
     return true;
   }
   
@@ -179,12 +182,12 @@ class Weeder
     WeedIndex idx0 = idx1;
   
     // intersections
-    WeedPoint p1 = pts.get(k1);
+    WeedPoint p1 = pts.get(k1); // first point of the segment
     // WeedPoint p2 = pts[k2];
-    float len = 0;
-    WeedPoint q0 = p1;
+    float len = 0.001f;
+    WeedPoint q0 = p1; // prev point - used for the length of the curve portion
     for ( int k=1; k < k2; ++ k ) {
-      WeedPoint pp = pts.get(k);
+      WeedPoint pp = pts.get(k); // running point to find the second point of the segment
       len += pp.s - q0.s;
       if ( len > max_len ) {
         WeedIndex idx = new WeedIndex( pp, k, idx1, idx2 );
@@ -198,7 +201,8 @@ class Weeder
         boolean crosses = false;
         for ( int kk = k+2; kk<k2; ++kk ) {
           WeedPoint q2 = pts.get(kk);
-          if ( cross( p1, pp, q1, q2 ) ) { crosses = true; break; }
+          if ( cross( p1, pp, q1, q2, TDSetting.mWeedBuffer/len, TDSetting.mWeedBuffer/(0.001f + q2.s-q1.s)  ) ) { crosses = true; break; }
+	  q1 = q2;
         }
         if ( crosses ) {
           WeedIndex idx = new WeedIndex( pp, k, idx1, idx2 );
