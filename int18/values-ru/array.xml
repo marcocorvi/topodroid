@@ -188,7 +188,7 @@
      <item name="two">Нормальный</item>
      <item name="two">Грубый</item>
      <item name="bezier">Кр. Безье</item>
-     <item name="simplified">Simplified</item> <!-- TODO -->
+     <item name="simplified">Упрощенная</item>
   </string-array>
 
   <string-array name="groupBy">
