@@ -198,7 +198,7 @@
      <item name="two">Normálna</item>
      <item name="two">Hrubá</item>
      <item name="bezier">Bezierová krivka</item>
-     <item name="simplified">Simplified</item> <!-- TODO -->
+     <item name="simplified">Jednoduchá</item>
   </string-array>
 
   <string-array name="groupBy">
