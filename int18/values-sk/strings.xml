@@ -944,8 +944,10 @@
   <string name="pref_extra_buttons_summary">Výber Úrovne príkazov</string>
   <string name="pref_size_buttons_title">Veľkosť tlačidiel</string>
   <string name="pref_size_buttons_summary">Veľkosť ikon tlačidiel</string>
-   <string name="pref_with_sensors_title">Sensory</string>
+  <string name="pref_with_sensors_title">Sensory</string>
   <string name="pref_with_sensors_summary">Povolí zaznamenávanie dát zo sensorov smartphonu</string>
+  <!-- UNUSED string name="pref_with_rename_title">Survey renaming</string -->
+  <!-- UNUSED string name="pref_with_rename_summary">Enable "survey renaming" menu</string -->	
   <string name="pref_palettes_title">Palety</string>
   <string name="pref_palettes_summary">Povolí doplnkové palety</string>
 
