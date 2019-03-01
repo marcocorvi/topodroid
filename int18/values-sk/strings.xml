@@ -897,9 +897,9 @@
     <string name="title_calib_export">Exportovať kalibráciu</string>
     <!-- OK ENGLISH string name="title_zoom">Zoom</string -->
 
-  <string name="pref_cat_survey">NASTAVENIE MAPOVANIA</string>
-  <string name="pref_cat_drawing">NASTAVENIE KRESLENIA</string>
-  <string name="pref_cat_import_export">NASTAVENIE IMPORT/EXPORT</string>
+  <string name="pref_cat_survey">NASTAVENIA MAPOVANIA</string>
+  <string name="pref_cat_drawing">NASTAVENIA KRESLENIA</string>
+  <string name="pref_cat_import_export">NASTAVENIA IMPORT/EXPORT</string>
   <string name="pref_cat_exportimport">IMPORT</string>
   <!-- UNUSED string name="pref_cat_exportsvx" translatable="false">Survex</string -->
   <!-- UNUSED string name="pref_cat_exportth"  translatable="false">Therion</string -->
@@ -909,9 +909,9 @@
   <!-- UNUSED string name="pref_cat_exportpng" translatable="false">PNG</string -->
   <!-- UNUSED string name="pref_cat_exportkml" translatable="false">KML/GeoJSON</string -->
  
-  <string name="pref_cat_calib">NASTAVENIE KALIBRÁCIE</string>
+  <string name="pref_cat_calib">NASTAVENIA KALIBRÁCIE</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->  
-  <string name="pref_cat_device">NASTAVENIE DISTOX</string>
+  <string name="pref_cat_device">NASTAVENIA DISTOX</string>
   <string name="pref_cat_geek">ŠPECIÁLNE NASTAVENIA</string>
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
   
@@ -1034,13 +1034,13 @@
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Se usare GPSAveraging</string -->
     
-  <string name="pref_plot_screen_title">NASTAVENIE KRESLENIA</string>
-  <string name="pref_tool_line_title">NASTAVENIE ČIAR</string>
-  <string name="pref_tool_point_title">NASTAVENIE BODOV</string>
-  <string name="pref_location_title">NASTAVENIE POLOHY</string>
-  <string name="pref_accuracy_title">NASTAVENIE PRESNOSTI</string>
+  <string name="pref_plot_screen_title">NASTAVENIA KRESLENIA</string>
+  <string name="pref_tool_line_title">NASTAVENIA ČIAR</string>
+  <string name="pref_tool_point_title">NASTAVENIA BODOV</string>
+  <string name="pref_location_title">NASTAVENIA POLOHY</string>
+  <string name="pref_accuracy_title">NASTAVENIA PRESNOSTI</string>
   <string name="pref_shot_data_title">NASTAVENIA ZÁMERY</string>
-  <string name="pref_shot_units_title">NASTAVENIE JEDNOTIEK</string>
+  <string name="pref_shot_units_title">NASTAVENIA JEDNOTIEK</string>
   <string name="pref_cwd_title">Pracovný adresár</string>
   <!-- UNUSED string name="pref_cwd_summary">Directory di lavoro di TopoDroid</string -->
   <string name="pref_pt_color_map_title">Farebná mapa PocketTopo</string>
