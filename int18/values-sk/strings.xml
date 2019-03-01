@@ -1152,10 +1152,12 @@
   <string name="pref_lineacc_summary">Presnosť interpolácie pre Bezierove krivky (čím menšie číslo tým viac bodov)</string>
   <string name="pref_linecorner_title">Ostrosť Bezierového uhla</string>
   <string name="pref_linecorner_summary">Menšie číslo (0,2 robí rohy ostrejšie; väčšie číslo (20) ich viac vyhladzuje</string>
-  <!-- TODO string name="pref_weeddistance_title">Point weeding segment buffer</string -->
-  <!-- TODO string name="pref_weeddistance_summary">Max distance from segment to weed points</string -->
-  <!-- TODO string name="pref_weedlength_title">Point weeding segment length</string -->
-  <!-- TODO string name="pref_weedlength_summary">Max length of a line segment</string -->
+  <string name="pref_weeddistance_title">Redukcia bodov - nárazník segmentu</string>
+  <string name="pref_weeddistance_summary">Maximálna vzdialenosť od segmentu, pri ktorej dôjde k redukcii bodov pri Jednoduchej Čiare</string>
+  <string name="pref_weedlength_title">Redukcia bodov - dĺžka segmentu</string>
+  <string name="pref_weedlength_summary">Maximálna dĺžka segmentu čiary pri Jednoduchej Čiare</string>
+  <string name="pref_weedbuffer_title">Redukcia - nárazník segmentu</string>	
+  <string name="pref_weedbuffer_summary">Veľkosť Nárazníka okolo segmentu čiary pri Jednoduchej Čiare [pxl]</string>	
   <string name="pref_calib_algo_title">Algoritmus</string>
   <string name="pref_calib_algo_summary">Výber kalibračného algoritmu</string>
   <string name="pref_group_by_title">Zoskupovanie údajov</string>
