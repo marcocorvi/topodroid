@@ -156,7 +156,7 @@ class SymbolLine extends Symbol
   private void readFile( String filename, String locale, String iso )
   {
     // Log.v(  TopoDroidApp.TAG, "load line file " + filename );
-    float unit = TDSetting.mUnitIcons * TDSetting.mLineThickness;
+    float unit = TDSetting.mUnitLines * TDSetting.mLineThickness;
     String name    = null;
     String th_name = null;
     String group   = null;

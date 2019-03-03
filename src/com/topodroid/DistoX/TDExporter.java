@@ -1387,6 +1387,22 @@ class TDExporter
   // static String   survex_flags_surface       = "   *flags surface";
   // static String   survex_flags_not_surface   = "   *flags not surface";
 
+  static String splayChar = "a";
+  static void resetSplayChar() { splayChar = "a"; }
+  static void incSplayChar()
+  {
+    char[] ch = splayChar.toCharArray();
+    int k = splayChar.length() - 1;
+    while ( k >= 0 ) {
+      if ( ch[k] == 'z' ) { ch[k] = 'a'; --k; } else { ++ch[k]; break; }
+    }
+    if ( k > 0 ) {
+      splayChar = new String( ch );
+    } else {
+      splayChar = new String( ch ) + "a";
+    }
+  }
+
   static private void writeSurvexLine( PrintWriter pw, String str )
   {
     pw.format("%s%s", str, TDSetting.mSurvexEol );
@@ -1438,7 +1454,6 @@ class TDExporter
   static String exportSurveyAsSvx( long sid, DataHelper data, SurveyInfo info, Device device, String filename )
   {
     // Log.v("DistoX", "export as survex: " + filename );
-    char splayChar = 'a';
 
     float ul = TDSetting.mUnitLength;
     float ua = TDSetting.mUnitAngle;
@@ -1512,6 +1527,7 @@ class TDExporter
         DBlock ref_item = null;
         boolean duplicate = false;
         boolean splays = false;
+	resetSplayChar();
         for ( DBlock item : list ) {
           String from = item.mFrom;
           String to   = item.mTo;
@@ -1530,10 +1546,9 @@ class TDExporter
 
               if ( ! splays ) {
                 if ( TDSetting.mSurvexSplay ) writeSurvexLine(pw, "  *flags splay" );
-                splayChar = 'a';
                 splays = true;
               } else {
-                splayChar ++;
+                incSplayChar();
               }
               // if ( ! first  ) 
               {
@@ -1555,9 +1570,8 @@ class TDExporter
               if ( ! splays ) {
                 if ( TDSetting.mSurvexSplay ) writeSurvexLine(pw, "  *flags splay" );
                 splays = true;
-                splayChar = 'a';
               } else {
-                splayChar ++;
+                incSplayChar();
               }
               // if ( ! first  )
               {
@@ -1576,6 +1590,7 @@ class TDExporter
               if ( splays ) {
                 if ( TDSetting.mSurvexSplay ) writeSurvexLine(pw, "  *flags not splay");
                 splays = false;
+                resetSplayChar();
               }
               ref_item = item;
               if ( item.isDuplicate() ) {

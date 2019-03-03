@@ -919,7 +919,8 @@ public class DrawingWindow extends ItemDrawer
   }
 
   // called by doSaveTdr and doSaveTh2
-  // @param suffix
+  // @param type      plot type (-1 to save both plan and profile)
+  // @param suffix    plot save mode (see PlotSave) - called only with TOGGLE, SAVE, MODIFIED
   // @param maxTasks
   // @param rotate    backup_rotate
   private void startSaveTdrTask( final long type, int suffix, int maxTasks, int rotate )
@@ -1099,11 +1100,13 @@ public class DrawingWindow extends ItemDrawer
       // N.B. this is where TDInstance.xsections is necessary: to decide which xsections to check for stations
       //      could use PlotInfo.isXSectionPrivate and PlotInfo.getXSectionParent
       List< PlotInfo > xsections = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotInfo.PLOT_X_SECTION, parent );
+      List< CurrentStation > saved = null;
+      if ( TDSetting.mSavedStations ) saved = mApp_mData.getStations( TDInstance.sid );
       for ( NumStation st : stations ) {
         if ( st.show() ) {
           DrawingStationName dst;
           dst = mDrawingSurface.addDrawingStationName( name, st,
-                  DrawingUtil.toSceneX(st.e, st.s), DrawingUtil.toSceneY(st.e, st.s), true, xsections );
+                  DrawingUtil.toSceneX(st.e, st.s), DrawingUtil.toSceneY(st.e, st.s), true, xsections, saved );
         }
       }
     } else if ( type == PlotInfo.PLOT_EXTENDED ) {
@@ -1129,11 +1132,13 @@ public class DrawingWindow extends ItemDrawer
         }
       }
       List< PlotInfo > xhsections = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotInfo.PLOT_XH_SECTION, parent );
+      List< CurrentStation > saved = null;
+      if ( TDSetting.mSavedStations ) saved = mApp_mData.getStations( TDInstance.sid );
       for ( NumStation st : stations ) {
         if ( st.mHasCoords && st.show() ) {
           DrawingStationName dst;
           dst = mDrawingSurface.addDrawingStationName( name, st,
-                  DrawingUtil.toSceneX(st.h, st.v), DrawingUtil.toSceneY(st.h, st.v), true, xhsections );
+                  DrawingUtil.toSceneX(st.h, st.v), DrawingUtil.toSceneY(st.h, st.v), true, xhsections, saved );
         }
       }
     } else { // if ( type == PlotInfo.PLOT_PROJECTED ) 
@@ -1162,12 +1167,14 @@ public class DrawingWindow extends ItemDrawer
         }
       }
       List< PlotInfo > xhsections = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotInfo.PLOT_XH_SECTION, parent );
+      List< CurrentStation > saved = null;
+      if ( TDSetting.mSavedStations ) saved = mApp_mData.getStations( TDInstance.sid );
       for ( NumStation st : stations ) {
         if ( st.show() ) {
           DrawingStationName dst;
           h1 = st.e * cosp + st.s * sinp;
           dst = mDrawingSurface.addDrawingStationName( name, st,
-                  DrawingUtil.toSceneX(h1, st.v), DrawingUtil.toSceneY(h1, st.v), true, xhsections );
+                  DrawingUtil.toSceneX(h1, st.v), DrawingUtil.toSceneY(h1, st.v), true, xhsections, saved );
         // } else {
         //   Log.v("DistoX", "station not showing " + st.name );
         }
@@ -1930,7 +1937,12 @@ public class DrawingWindow extends ItemDrawer
         TDLog.Error("cannot save plot state: " + e.getMessage() );
       }
     }
-    mApp_mData.setValue( "DISTOX_PLOT_MODE", DisplayMode.toString( DrawingCommandManager.getDisplayMode() ) );
+    // TODO exec this line in a Thread
+    (new Thread() {
+       public void run() {
+         mApp_mData.setValue( "DISTOX_PLOT_MODE", DisplayMode.toString( DrawingCommandManager.getDisplayMode() ) );
+       }
+    } ).start();
     doSaveTdr( ); // do not alert-dialog on mAllSymbols
   }
 
@@ -3032,33 +3044,50 @@ public class DrawingWindow extends ItemDrawer
         }
         else
         { // Symbol.POINT
-          if ( ( ! pointerDown ) && Math.abs( x_shift ) < TDSetting.mPointingRadius 
-                                 && Math.abs( y_shift ) < TDSetting.mPointingRadius ) {
-            // Log.v("DistoX", "insert point type " + mCurrentPoint );
-            if ( BrushManager.isPointLabel( mCurrentPoint ) ) {
-              new DrawingLabelDialog( mActivity, this, xs, ys ).show();
-            } else if ( BrushManager.isPointPhoto( mCurrentPoint ) ) {
-              new DrawingPhotoDialog( mActivity, this, xs, ys ).show();
-            } else if ( BrushManager.isPointAudio( mCurrentPoint ) ) {
-	      if ( audioCheck ) {
-                addAudioPoint( xs, ys );
-	      } else {
-                TDToast.make( R.string.no_feature_audio );
-              }
-            } else {
-    	      if ( mLandscape ) {
-                DrawingPointPath point = new DrawingPointPath( mCurrentPoint, -ys, xs, mPointScale, null, null );
-    	        if ( BrushManager.isPointOrientable( mCurrentPoint ) && ! BrushManager.isPointLabel( mCurrentPoint ) ) {
-    	          point.rotateBy( 90 );
+          if ( ! pointerDown ) {
+	    float radius = TDSetting.mPointingRadius;
+    	    if ( BrushManager.isPointOrientable( mCurrentPoint ) ) radius *= 4;
+	    float shift = Math.abs( x_shift ) + Math.abs( y_shift );
+	    if ( shift < radius ) {
+              // Log.v("DistoXO", "insert point type " + mCurrentPoint + " x " + x_shift + " y " + y_shift + " R " + radius );
+              if ( BrushManager.isPointLabel( mCurrentPoint ) ) {
+                new DrawingLabelDialog( mActivity, this, xs, ys ).show();
+              } else if ( BrushManager.isPointPhoto( mCurrentPoint ) ) {
+                new DrawingPhotoDialog( mActivity, this, xs, ys ).show();
+              } else if ( BrushManager.isPointAudio( mCurrentPoint ) ) {
+	        if ( audioCheck ) {
+                  addAudioPoint( xs, ys );
+	        } else {
+                  TDToast.make( R.string.no_feature_audio );
+                }
+              } else {
+    	        if ( mLandscape ) {
+                  DrawingPointPath point = new DrawingPointPath( mCurrentPoint, -ys, xs, mPointScale, null, null );
+    	          if ( BrushManager.isPointOrientable( mCurrentPoint ) ) {
+		    if ( shift > TDSetting.mPointingRadius ) {
+		      float angle = TDMath.atan2d( x_shift, -y_shift );
+                      point.setOrientation( angle );
+		      // Log.v("DistoXO", "L orientation " + angle + " shift " + shift + " radius " + radius );
+		    }
+                    if ( ! BrushManager.isPointLabel( mCurrentPoint ) ) point.rotateBy( 90 );
+    	          }
+                  mDrawingSurface.addDrawingPath( point );
+    	        } else {
+                  DrawingPointPath point = new DrawingPointPath( mCurrentPoint, xs, ys, mPointScale, null, null ); // no text, no options
+    	          if ( BrushManager.isPointOrientable( mCurrentPoint ) ) {
+		    if ( shift > TDSetting.mPointingRadius ) {
+		      float angle = TDMath.atan2d( x_shift, -y_shift );
+                      point.setOrientation( angle );
+		      // Log.v("DistoXO", "P orientation " + angle + " shift " + shift + " radius " + radius );
+		    }
+                  }
+                  mDrawingSurface.addDrawingPath( point );
     	        }
-                mDrawingSurface.addDrawingPath( point );
-    	      } else {
-                mDrawingSurface.addDrawingPath( new DrawingPointPath( mCurrentPoint, xs, ys, mPointScale, null, null ) ); // no text, no options
-    	      }
-              // undoBtn.setEnabled(true);
-              // redoBtn.setEnabled(false);
-              // canRedo = false;
-            }
+                // undoBtn.setEnabled(true);
+                // redoBtn.setEnabled(false);
+                // canRedo = false;
+              }
+	    }
           }
         }
         pointerDown = false;
@@ -3294,6 +3323,7 @@ public class DrawingWindow extends ItemDrawer
           // if ( ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2 ) {
           //   pointerDown = 0;
           // }
+	  save = false;
         }
       } else if (  mMode == MODE_MOVE 
                || (mMode == MODE_EDIT && mEditMove ) 

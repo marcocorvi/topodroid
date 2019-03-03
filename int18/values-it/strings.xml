@@ -1149,6 +1149,8 @@
   <string name="pref_dot_radius_message">Raggio dei punti di selezione</string>
   <string name="pref_line_thickness_title">Spessore linee</string>
   <string name="pref_line_thickness_summary">Spessore linee disegno</string>
+  <!-- TODO string name="pref_line_units_title">Line units</string -->
+  <!-- TODO string name="pref_line_units_summary">Drawing line units</string -->
   <string name="pref_linesnap_title">Snap di Linea/Area</string>
   <string name="pref_linesnap_summary">Abilita lo snap(copia) su linee/aree</string>
   <string name="pref_linecurve_title">Aggiusta segmento</string>
@@ -1187,6 +1189,8 @@
   <string name="pref_th2_xvi_summary">Inserire immagine xvi in th2</string>
   <string name="pref_autoStations_title">Punti capisaldi th2</string>
   <string name="pref_autoStations_summary">Aggiungi capisaldi automaticamente</string>
+  <!-- TODO string name="pref_auto_xsections_title">Auto X-sections</string -->
+  <!-- TODO string name="pref_auto_xsections_summary">Add x-sections automatically to save/export [csx/svg/dxf/xvi]</string -->
   <string name="pref_loopClosure_title">Chiusura anelli</string>
   <string name="pref_loopClosure_summary">Compensazione errore nella chiusura anelli</string>
   <!-- UNUSED string name="pref_splayExtend_title">Stima extend per splay</string -->

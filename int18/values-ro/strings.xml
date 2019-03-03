@@ -1154,6 +1154,8 @@
   <string name="pref_dot_radius_message">Mărimea punctelor verzi</string>
   <string name="pref_line_thickness_title">Lățimea liniei</string>
   <string name="pref_line_thickness_summary">Lățimea liniei de desen</string>
+  <!-- TODO string name="pref_line_units_title">Line units</string -->
+  <!-- TODO string name="pref_line_units_summary">Drawing line units</string -->
   <!-- TODO string name="pref_linesnap_title">Line/Area snap</string -->
   <!-- TODO string name="pref_linesnap_summary">Enable line/area snap action</string -->
   <!-- TODO string name="pref_linecurve_title">Smooth/Straigten segment</string -->
@@ -1192,6 +1194,8 @@
   <!-- TODO string name="pref_th2_xvi_summary">Insert xvi image in th2</string -->
   <string name="pref_autoStations_title">Stații Therion</string>
   <string name="pref_autoStations_summary">Adaugă stații automat la fițierele Therion</string>
+  <!-- TODO string name="pref_auto_xsections_title">Auto X-sections</string -->
+  <!-- TODO string name="pref_auto_xsections_summary">Add x-sections automatically to save/export [csx/svg/dxf/xvi]</string -->
   <string name="pref_loopClosure_title">Închidere bucle drumuire</string>
   <string name="pref_loopClosure_summary">Compensare eroare la închiderea buclelor de drumuire</string>
   <!-- UNUSED string name="pref_splayExtend_title">Estimare extensie radiere</string -->

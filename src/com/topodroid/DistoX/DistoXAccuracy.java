@@ -62,7 +62,7 @@ class DistoXAccuracy
   } 
 
   // add a block to the existing means
-  void addBlock( DBlock blk ) 
+  void addBlockAMD( DBlock blk ) 
   {
     if ( blk == null || blk.mAcceleration < 10.0 ) return;
     mAccelerationMean = mAccelerationMean * mCount + blk.mAcceleration;
@@ -74,7 +74,22 @@ class DistoXAccuracy
       mMagneticMean     /= mCount;
       mDipMean          /= mCount;
     }
-  } 
+  }
+
+  // remove a block to the existing means (not used)
+  // void removeBlockAMD( DBlock blk ) 
+  // {
+  //   if ( blk == null || blk.mAcceleration < 10.0 ) return;
+  //   mAccelerationMean = mAccelerationMean * mCount - blk.mAcceleration;
+  //   mMagneticMean     = mMagneticMean * mCount     - blk.mMagnetic;
+  //   mDipMean          = mDipMean * mCount          - blk.mDip;
+  //   -- mCount;
+  //   if ( mCount > 1 ) {
+  //     mAccelerationMean /= mCount;
+  //     mMagneticMean     /= mCount;
+  //     mDipMean          /= mCount;
+  //   }
+  // }
 
   private float deltaAcc( float acc )
   {
@@ -90,7 +105,7 @@ class DistoXAccuracy
 
   private float deltaDip( float dip ) { return TDMath.abs( dip - mDipMean ); }
 
-  boolean isBlockMagneticBad( DBlock blk )
+  boolean isBlockAMDBad( DBlock blk )
   {
     if ( blk == null || blk.mAcceleration < 10.0f || blk.mMagnetic < 10.0f ) return false;
     return deltaMag( blk.mMagnetic ) > TDSetting.mMagneticThr

@@ -236,7 +236,7 @@ public class ShotWindow extends Activity
 
   private StationSearch mSearch;
 
-  boolean isBlockMagneticBad( DBlock blk ) { return mDistoXAccuracy.isBlockMagneticBad( blk ); }
+  boolean isBlockMagneticBad( DBlock blk ) { return mDistoXAccuracy.isBlockAMDBad( blk ); }
 
   String getBlockExtraString( DBlock blk ) { return mDistoXAccuracy.getBlockExtraString( blk ); }
 
@@ -374,7 +374,7 @@ public class ShotWindow extends Activity
     if ( mDataAdapter != null ) {
       // FIXME 3.3.0
       if ( mDataAdapter.addDataBlock( blk ) ) {
-        mDistoXAccuracy.addBlock( blk );
+        mDistoXAccuracy.addBlockAMD( blk );
         if ( StationPolicy.doBacksight() || StationPolicy.doTripod() ) {
           mApp.assignStationsAll( mDataAdapter.mItems );
         } else {
@@ -1178,8 +1178,13 @@ public class ShotWindow extends Activity
     
   private void saveInstanceToData()
   {
-    mApp_mData.setValue( "DISTOX_SHOTS",
-      String.format(Locale.US, "%d %d %d %d %d", mFlagSplay?1:0, mFlagLeg?1:0, mFlagBlank?1:0, getShowIds()?1:0, mFlagLatest?1:0 ) );
+    // TODO run in a Thread
+    (new Thread() {
+      public void run() {
+        mApp_mData.setValue( "DISTOX_SHOTS",
+          String.format(Locale.US, "%d %d %d %d %d", mFlagSplay?1:0, mFlagLeg?1:0, mFlagBlank?1:0, getShowIds()?1:0, mFlagLatest?1:0 ) );
+      }
+    } ).start();
     // Log.v("DistoX", "save to data mFlagSplay " + mFlagSplay );
   }
 
@@ -1403,6 +1408,7 @@ public class ShotWindow extends Activity
     for ( DBlock blk : mDataAdapter.mSelect ) {
       long id = blk.mId;
       mApp_mData.deleteShot( id, TDInstance.sid, TDStatus.DELETED, true ); // forward = true
+      // mDistoXAccuracy.removeBlockAMD( blk ); // not necessary: done by updateDisplay
       if ( /* blk != null && */ blk.isMainLeg() ) { // == DBlock.BLOCK_MAIN_LEG 
         if ( mFlagLeg ) {
           for ( ++id; ; ++id ) {
@@ -1411,6 +1417,7 @@ public class ShotWindow extends Activity
               break;
 	    }
             mApp_mData.deleteShot( id, TDInstance.sid, TDStatus.DELETED, true ); // forward = true
+            // mDistoXAccuracy.removeBlockAMD( b );
           }
         } else { // set station to next leg shot
           ++id;

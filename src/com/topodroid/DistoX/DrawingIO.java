@@ -594,6 +594,7 @@ class DrawingIO
         if ( what == 'V' ) {
           flag |= 0x01;
           version = dis.readInt();
+	  // Log.v("DistoXs", "TDR header version: " + version );
         } else if ( what == 'S' ) {
           flag |= 0x02;
           String name = dis.readUTF();
@@ -602,12 +603,15 @@ class DrawingIO
           String lib = dis.readUTF();
           lib = dis.readUTF();
           lib = dis.readUTF();
+	  // Log.v("DistoXs", "TDR header scrap: " + name + " type " + type );
         } else if ( what == 'I' ) {
           flag |= 0x04;
           x = dis.readFloat();
           y = dis.readFloat();
+	  // Log.v("DistoXs", "TDR header bbox from: " + x + " " + y );
           x = dis.readFloat();
           y = dis.readFloat();
+	  // Log.v("DistoXs", "TDR header bbox to:   " + x + " " + y );
           if ( dis.readInt() == 1 ) {
             x = dis.readFloat();
             y = dis.readFloat();
@@ -1353,9 +1357,11 @@ class DrawingIO
                   out.newLine();
                 }
 		if ( BrushManager.isPointSection( pp.mPointType ) ) {
-                  String name = pp.getOption("-scrap");  // xsection name
-		  // Log.v("DistoXX", "multiscrap add x-section " + name );
-		  if ( name != null && name.length() > 0 ) xsections.add( new XSectionScrap( name, pp.cx, pp.cy ) );
+		  if ( TDSetting.mAutoXSections ) {
+                    String name = pp.getOption("-scrap");  // xsection name
+		    // Log.v("DistoXX", "multiscrap add x-section " + name );
+		    if ( name != null && name.length() > 0 ) xsections.add( new XSectionScrap( name, pp.cx, pp.cy ) );
+		  }
 		}
               } else if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) { // should never happen
                 // if ( ! TDSetting.mAutoStations ) {
@@ -1792,67 +1798,68 @@ class DrawingIO
 
       // section points are special
       if ( all_sections != null && pp.mPointType == BrushManager.mPointLib.mPointSectionIndex ) {
-        // Log.v("DistoX", "Section point <" + pp.mOptions + ">");
-        // option: -scrap survey-xx#
-        PlotInfo section = null;
-
-        // FIXME GET_OPTION
-        String scrap_name = pp.getOption( "-scrap" );
-        if ( scrap_name != null ) {
-          for ( PlotInfo s : all_sections ) {
-            if ( scrap_name.endsWith( s.name ) ) {
-              // String name = survey + "-" + s.name; // scrap filename
-              section = s;
-              section.csxIndex = csxIndex;
-              if ( sections != null ) sections.add( section );
-              break;
+	if ( TDSetting.mAutoXSections ) {
+          // Log.v("DistoX", "Section point <" + pp.mOptions + ">");
+          // option: -scrap survey-xx#
+          // FIXME GET_OPTION
+          PlotInfo section = null;
+          String scrap_name = pp.getOption( "-scrap" );
+          if ( scrap_name != null ) {
+            for ( PlotInfo s : all_sections ) {
+              if ( scrap_name.endsWith( s.name ) ) {
+                // String name = survey + "-" + s.name; // scrap filename
+                section = s;
+                section.csxIndex = csxIndex;
+                if ( sections != null ) sections.add( section );
+                break;
+              }
             }
           }
-        }
-        // String[] vals = pp.mOptions.split(" ");
-        // int k0 = vals.length;
-        // for ( int k = 0; k < k0; ++k ) {
-        //   if ( vals[k].equals("-scrap") ) {
-        //     for ( ++k; k < k0; ++k ) {
-        //       if ( vals[k].length() > 0 ) break;
-        //     }
-        //     if ( k < k0 ) {
-        //       for ( PlotInfo s : all_sections ) {
-        //         if ( vals[k].endsWith( s.name ) ) {
-        //           // String name = survey + "-" + s.name; // scrap filename
-        //           section = s;
-        //           section.csxIndex = csxIndex;
-        //           if ( sections != null ) sections.add( section );
-        //           break;
-        //         }
-        //       }
-        //     }
-        //   }
-        // }
+          // String[] vals = pp.mOptions.split(" ");
+          // int k0 = vals.length;
+          // for ( int k = 0; k < k0; ++k ) {
+          //   if ( vals[k].equals("-scrap") ) {
+          //     for ( ++k; k < k0; ++k ) {
+          //       if ( vals[k].length() > 0 ) break;
+          //     }
+          //     if ( k < k0 ) {
+          //       for ( PlotInfo s : all_sections ) {
+          //         if ( vals[k].endsWith( s.name ) ) {
+          //           // String name = survey + "-" + s.name; // scrap filename
+          //           section = s;
+          //           section.csxIndex = csxIndex;
+          //           if ( sections != null ) sections.add( section );
+          //           break;
+          //         }
+          //       }
+          //     }
+          //   }
+          // }
 
-        if ( section != null ) {
-          // Log.v("DistoX", "section " + section.name + " " + section.nick );
-          // special toCsurvey for cross-section points
-          float x = DrawingUtil.sceneToWorldX( pp.cx, pp.cy ); // convert to world coords.
-          float y = DrawingUtil.sceneToWorldY( pp.cx, pp.cy );
-          String text = ( section.nick == null || section.nick.length() == 0 )? section.name : section.nick;
-          pw.format("  <item layer=\"6\" cave=\"%s\" branch=\"%s\" type=\"9\" category=\"96\" direction=\"0\" ", cave, branch );
-          pw.format("text=\"%s\" textdistance=\"2\" crosswidth=\"4\" crossheight=\"4\" name=\"%s\" ", text, section.name );
-          // pw.format("crosssection=\"%d\" ", section.csxIndex );
-          if ( section.name.startsWith("xs-") || section.name.startsWith("xh-") ) {
-            pw.format("station=\"%s\" ", section.name.substring(3) ); // == section.start
+          if ( section != null ) {
+            // Log.v("DistoX", "section " + section.name + " " + section.nick );
+            // special toCsurvey for cross-section points
+            float x = DrawingUtil.sceneToWorldX( pp.cx, pp.cy ); // convert to world coords.
+            float y = DrawingUtil.sceneToWorldY( pp.cx, pp.cy );
+            String text = ( section.nick == null || section.nick.length() == 0 )? section.name : section.nick;
+            pw.format("  <item layer=\"6\" cave=\"%s\" branch=\"%s\" type=\"9\" category=\"96\" direction=\"0\" ", cave, branch );
+            pw.format("text=\"%s\" textdistance=\"2\" crosswidth=\"4\" crossheight=\"4\" name=\"%s\" ", text, section.name );
+            // pw.format("crosssection=\"%d\" ", section.csxIndex );
+            if ( section.name.startsWith("xs-") || section.name.startsWith("xh-") ) {
+              pw.format("station=\"%s\" ", section.name.substring(3) ); // == section.start
+            } else {
+              pw.format("stationfrom=\"%s\" stationto=\"%s\" ", section.start, section.view );
+            }
+            // pw.format(" segment=\"%s\"", "undefined" );
+            pw.format(Locale.US, "splayborderprojectionangle=\"%.2f\" splayborderprojectionvangle=\"%.2f\" id=\"%d\">\n",
+              section.azimuth, section.clino, section.csxIndex );
+            pw.format(Locale.US, "<points data=\"%.2f %.2f \" />\n", x, y );
+            pw.format("    <font type=\"4\" />\n");
+            pw.format("  </item>\n");
           } else {
-            pw.format("stationfrom=\"%s\" stationto=\"%s\" ", section.start, section.view );
+            TDLog.Error("xsection not found. Name: " + ((scrap_name == null)? "null" : scrap_name) );
           }
-          // pw.format(" segment=\"%s\"", "undefined" );
-          pw.format(Locale.US, "splayborderprojectionangle=\"%.2f\" splayborderprojectionvangle=\"%.2f\" id=\"%d\">\n",
-            section.azimuth, section.clino, section.csxIndex );
-          pw.format(Locale.US, "<points data=\"%.2f %.2f \" />\n", x, y );
-          pw.format("    <font type=\"4\" />\n");
-          pw.format("  </item>\n");
-        } else {
-          // Log.v("DistoX", "section not found");
-        }
+	}
       } else {
         pp.toCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ );
       }

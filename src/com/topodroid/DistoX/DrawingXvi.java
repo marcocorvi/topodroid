@@ -231,16 +231,18 @@ class DrawingXvi
             // pw5.format(Locale.US, "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"%d\" ", xx, yy, RADIUS );
             // pw5.format(" style=\"fill:grey;stroke:black;stroke-width:%.2f\" />\n", TDSetting.mSvgLabelStroke );
 
-            // GET_OPTION option: -scrap survey-xx#
-            String scrapname = point.getOption("-scrap");
-            if ( scrapname != null ) {
-              String scrapfile = scrapname + ".tdr";
-              // String scrapfile = point.mOptions.substring( 7 ) + ".tdr";
+	    if ( TDSetting.mAutoXSections ) {
+              // GET_OPTION option: -scrap survey-xx#
+              String scrapname = point.getOption("-scrap");
+              if ( scrapname != null ) {
+                String scrapfile = scrapname + ".tdr";
+                // String scrapfile = point.mOptions.substring( 7 ) + ".tdr";
 
-              // open file survey-xx#.tdr and convert it to xvi
-              tdrToXvi( pw5, scrapfile, xx, yy, -DrawingUtil.CENTER_X,  DrawingUtil.CENTER_Y );
-            }
-            // pw5.format("</g>\n");
+                // open file survey-xx#.tdr and convert it to xvi
+                tdrToXvi( pw5, scrapfile, xx, yy, -DrawingUtil.CENTER_X,  DrawingUtil.CENTER_Y );
+              }
+              // pw5.format("</g>\n");
+	    }
           } else {
             toXvi( pw5, point, xoff, yoff );
           }
@@ -478,9 +480,21 @@ class DrawingXvi
           case 'X':
             path = DrawingStationName.loadDataStream( version, dis ); // consume DrawingStationName data
             break;
+          case 'Y':
+            path = DrawingPhotoPath.loadDataStream( version, dis, dx, dy );
+            break;
+          case 'Z':
+            path = DrawingAudioPath.loadDataStream( version, dis, dx, dy );
+            break;
+          case 'J':
+            path = DrawingSpecialPath.loadDataStream( version, dis, dx, dy );
+            break;
           case 'F':
             done = true;
             break;
+	  default:
+	    TDLog.Error("TDR2XVI Error. unexpected code=" + what );
+	    return;
         }
       }
     } catch ( FileNotFoundException e ) { // this is OK

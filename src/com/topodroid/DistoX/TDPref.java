@@ -783,12 +783,6 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], E, def[ 5], INTEGER, ctx, hlp ),
       makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], E, def[ 6], INTEGER, ctx, hlp ),
       makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], T, def[ 7], INTEGER, ctx, hlp )  // SPLAY ALPHA
-      // makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7], INTEGER, ctx, hlp ),
-      // makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], T, def[ 8],          ctx, hlp ),
-      // makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9], FLOAT,   ctx, hlp ),
-      // makeEdt( cat, key[10], tit[10], dsc[10], T, def[10], FLOAT,   ctx, hlp ),
-      // makeEdt( cat, key[11], tit[11], dsc[11], T, def[11], FLOAT,   ctx, hlp ),
-      // makeEdt( cat, key[12], tit[12], dsc[12], T, def[12], FLOAT,   ctx, hlp )
     };
   }
 
@@ -801,17 +795,13 @@ class TDPref implements AdapterView.OnItemSelectedListener
     String[] def = TDPrefKey.LINEdef;
     return new TDPref[ ] {
       makeEdt( cat, key[ 0], tit[ 0], dsc[ 0], N, def[ 0], FLOAT,   ctx, hlp ),
-      makeLst( cat, key[ 1], tit[ 1], dsc[ 1], N, def[ 1], R.array.lineStyle, R.array.lineStyleValue, ctx, hlp ),
-      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], N, def[ 2], INTEGER, ctx, hlp ),
-      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], A, def[ 3], FLOAT,   ctx, hlp ),
-      makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], A, def[ 4],          ctx, hlp ),
-      makeLst( cat, key[ 5], tit[ 5], dsc[ 5], E, def[ 5], R.array.lineContinue, R.array.lineContinueValue, ctx, hlp ),
-      makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], N, def[ 6],          ctx, hlp ),
-      // makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], T, def[ 7], FLOAT,   ctx, hlp ),
-      // makeEdt( cat, key[ 8], tit[ 8], dsc[ 8], T, def[ 8], FLOAT,   ctx, hlp ),
-      // makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9], FLOAT,   ctx, hlp ),
-      // makeCbx( cat, key[10], tit[10], dsc[10], T, def[10],          ctx, hlp ),
-      // makeCbx( cat, key[11], tit[11], dsc[11], T, def[11],          ctx, hlp )
+      makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], N, def[ 1], FLOAT,   ctx, hlp ),
+      makeLst( cat, key[ 2], tit[ 2], dsc[ 2], N, def[ 2], R.array.lineStyle, R.array.lineStyleValue, ctx, hlp ),
+      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], N, def[ 3], INTEGER, ctx, hlp ),
+      makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], A, def[ 4], FLOAT,   ctx, hlp ),
+      makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], A, def[ 5],          ctx, hlp ),
+      makeLst( cat, key[ 6], tit[ 6], dsc[ 6], E, def[ 6], R.array.lineContinue, R.array.lineContinueValue, ctx, hlp ),
+      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], N, def[ 7],          ctx, hlp ),
     };
   }
 
@@ -955,6 +945,8 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], T, def[ 6],          ctx, hlp ), // BEDDING PLANE
       makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7],          ctx, hlp ), // TRIPLE SHOT BELL
       makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8],          ctx, hlp )  // WITH SENSORS
+      // makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9], FLOAT,   ctx, hlp ), // DIST/ANGLE TOLERANCE
+      // makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9],          ctx, hlp )  // SPLAYS AT ACTIVE STATION
       // makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9],          ctx, hlp )  // WITH RENAME
     };
   }
@@ -976,7 +968,9 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], T, def[ 6], FLOAT,   ctx, hlp ), // DASH X-SCETION
       makeLst( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7], R.array.backupNumber, R.array.backupNumberValue, ctx, hlp ),
       makeEdt( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8], INTEGER, ctx, hlp ), // BACKUP INTERVAL
-      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9],          ctx, hlp )  // BACKUPS CLEAR
+      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9],          ctx, hlp ), // BACKUPS CLEAR
+      makeCbx( cat, key[10], tit[10], dsc[10], T, def[10],          ctx, hlp ), // AUTO XSECTIONS on export/save
+      makeCbx( cat, key[11], tit[11], dsc[11], T, def[11],          ctx, hlp )  // SAVED STATIONS
     };
   }
   static TDPref[] makeGeekPrefs( Context ctx, TDPrefHelper hlp )

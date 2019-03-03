@@ -79,7 +79,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
             if ( mExt.equals("dxf") ) {
               DrawingDxf.write( bw, mNum, /* mUtil, */ mCommand, mType );
             } else if ( mExt.equals("svg") ) {
-              DrawingSvg.write( bw, mNum, /* mUtil, */ mCommand, mType );
+              (new DrawingSvg()).write( bw, mNum, /* mUtil, */ mCommand, mType );
             } else if ( mExt.equals("xvi") ) {
               DrawingXvi.write( bw, mNum, /* mUtil, */ mCommand, mType );
             }

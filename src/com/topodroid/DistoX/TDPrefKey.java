@@ -910,6 +910,7 @@ class TDPrefKey
   // ------------------------------------------------------------------------------
   static String[] LINE = { // [11]
     "DISTOX_LINE_THICKNESS",  // 0 // thickness of normal lines (walls are twice)
+    "DISTOX_LINE_UNITS",           // line units
     "DISTOX_LINE_STYLE",           // line style: 0 bezier, 1 fine, 2 normal, 3 coarse
     "DISTOX_LINE_SEGMENT",         // minimum distance between consecutive points on a line
     "DISTOX_ARROW_LENGTH",    // 3 // length of the tick at the first line-point (when applicable)
@@ -922,6 +923,7 @@ class TDPrefKey
 
   static int[] LINEtitle = {
     R.string.pref_line_thickness_title,
+    R.string.pref_line_units_title,
     R.string.pref_linestyle_title,
     R.string.pref_segment_title,
     R.string.pref_arrow_length_title,
@@ -934,6 +936,7 @@ class TDPrefKey
 
   static int[] LINEdesc = {
     R.string.pref_line_thickness_summary,
+    R.string.pref_line_units_summary,
     R.string.pref_linestyle_summary,
     R.string.pref_segment_message,
     R.string.pref_arrow_length_message,
@@ -946,6 +949,7 @@ class TDPrefKey
 
   static String[] LINEdef = {
     TDString.ONE,
+    "1.4",
     TDString.TWO,
     TDString.TEN,
     "8",
@@ -1212,6 +1216,8 @@ class TDPrefKey
     "DISTOX_BEDDING",         // splays bed plane interpolation
     "DISTOX_TRIPLE_SHOT",     // triple shot bell
     "DISTOX_WITH_SENSORS",    // using sensors
+    // "DISTOX_DIST_TOLERANCE",  // ratio of distance tolerance to angle tolerance
+    // "DISTOX_SPLAY_ACTIVE",    // attach splays to active station, if defined
     // "DISTOX_WITH_RENAME",     // with survey "rename" menu
     null
   };
@@ -1226,6 +1232,8 @@ class TDPrefKey
     R.string.pref_plane_interpolation_title,
     R.string.pref_triple_shot_title,
     R.string.pref_with_sensors_title,
+    // R.string.pref_dist_tolerance_title,
+    // R.string.pref_splay_active_title,
     // R.string.pref_with_rename_title,
     -1
   };
@@ -1240,6 +1248,8 @@ class TDPrefKey
     R.string.pref_plane_interpolation_summary,
     R.string.pref_triple_shot_summary,
     R.string.pref_with_sensors_summary,
+    // R.string.pref_dist_tolerance_summary,
+    // R.string.pref_splay_active_summary,
     // R.string.pref_with_rename_summary,
     -1
   };
@@ -1254,6 +1264,8 @@ class TDPrefKey
     FALSE,
     FALSE,
     FALSE,
+    // "1",
+    // FALSE,
     // FALSE,
     null
   };
@@ -1270,6 +1282,8 @@ class TDPrefKey
     "DISTOX_BACKUP_NUMBER",   // number of plot backups
     "DISTOX_BACKUP_INTERVAL", // minimum interval between plot backups [60 s]
     "DISTOX_BACKUPS_CLEAR",
+    "DISTOX_AUTO_XSECTIONS",  // automatically add xsections on export/save
+    "DISTOX_SAVED_STATIONS",  // whether to color saved stations
     null
   };
 
@@ -1285,6 +1299,8 @@ class TDPrefKey
     R.string.pref_backup_number_title,
     R.string.pref_backup_interval_title,
     R.string.pref_backups_clear_title,
+    R.string.pref_auto_xsections_title,
+    R.string.pref_saved_stations_title,
     -1
   };
 
@@ -1300,6 +1316,8 @@ class TDPrefKey
     R.string.pref_backup_number_summary,
     R.string.pref_backup_interval_summary,
     R.string.pref_backups_clear_summary,
+    R.string.pref_auto_xsections_summary,
+    R.string.pref_saved_stations_summary,
     -1
   };
 
@@ -1314,6 +1332,8 @@ class TDPrefKey
     // "70",
     TDString.FIVE,
     TDString.SIXTY,
+    FALSE,
+    TRUE,
     FALSE,
     null
   };

@@ -419,43 +419,44 @@ class DBlock
     return (v1.minus(v2)).Length(); // approximation: 2 * asin( dv/2 );
   }
 
-  private float relativeDistance( DBlock b )
+  private boolean checkRelativeDistance( DBlock b )
   {
-    float cc, sc, cb, sb, len;
-    len = mLength;
+    float cc, sc, cb, sb;
+    float alen = mLength;
     cc = TDMath.cosd( mClino );
     sc = TDMath.sind( mClino );
     cb = TDMath.cosd( mBearing ); 
     sb = TDMath.sind( mBearing ); 
-    Vector v1 = new Vector( len * cc * sb, len * cc * cb, len * sc );
-    len = b.mLength;
+    Vector v1 = new Vector( alen * cc * sb, alen * cc * cb, alen * sc );
+    float blen = b.mLength;
     cc = TDMath.cosd( b.mClino );
     sc = TDMath.sind( b.mClino );
     cb = TDMath.cosd( b.mBearing ); 
     sb = TDMath.sind( b.mBearing ); 
-    Vector v2 = new Vector( len * cc * sb, len * cc * cb, len * sc );
-    return (v1.minus(v2)).Length();
+    Vector v2 = new Vector( blen * cc * sb, blen * cc * cb, blen * sc );
+    float d = (v1.minus(v2)).Length();
+    return ( d/alen + d/blen < TDSetting.mCloseDistance );
   }
 
-  private float relativeDistanceDiving( DBlock b )
+  private boolean checkRelativeDistanceDiving( DBlock b )
   {
-    float cb, sb, len;
-    len = mLength;
+    float cb, sb;
+    float alen = mLength;
     cb = TDMath.cosd( mBearing ); 
     sb = TDMath.sind( mBearing ); 
-    Vector v1 = new Vector( len * sb, len * cb, mDepth );
-    len = b.mLength;
+    Vector v1 = new Vector( alen * sb, alen * cb, mDepth );
+    float blen = b.mLength;
     cb = TDMath.cosd( b.mBearing ); 
     sb = TDMath.sind( b.mBearing ); 
-    Vector v2 = new Vector( len * sb, len * cb, b.mDepth );
-    return (v1.minus(v2)).Length();
+    Vector v2 = new Vector( blen * sb, blen * cb, b.mDepth );
+    float d = (v1.minus(v2)).Length();
+    return ( d/alen + d/blen < TDSetting.mCloseDistance );
   }
 
   boolean isRelativeDistance( DBlock b )
   {
     if ( b == null ) return false;
-    float dist = ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING )? relativeDistanceDiving( b ) : relativeDistance( b );
-    return ( dist/mLength + dist/b.mLength ) < TDSetting.mCloseDistance;
+    return ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING )? checkRelativeDistanceDiving( b ) : checkRelativeDistance( b );
   }
   
   private void formatFlagPhoto( PrintWriter pw )

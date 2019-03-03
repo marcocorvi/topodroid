@@ -14,12 +14,12 @@ package com.topodroid.DistoX;
 class PlotSave
 {
   final static int NONE     = 0;
-  final static int SAVE     = 1; // save as therion/binary (onPause and onBackPressed)
-  final static int EXPORT   = 3; // save as therion
+  final static int SAVE     = 1; // save binary (onPause and onBackPressed)
+  final static int EXPORT   = 3; // save as therion, svg, ect.
   final static int HANDLER  = 2;
   final static int TOGGLE   = 4; 
   final static int MODIFIED = 5; 
-  final static int OVERVIEW = 6; // used by OverviewWindow to save whole th2
+  final static int OVERVIEW = 6; // used by OverviewWindow to save whole therion, svg, etc.
   final static int CREATE   = 7; 
 
 }

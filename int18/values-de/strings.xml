@@ -1165,6 +1165,8 @@
   <string name="pref_dot_radius_message">Größe der Punkte während dem bearbeiten einer Linie</string>
   <string name="pref_line_thickness_title">Liniendicke</string>
   <string name="pref_line_thickness_summary">Dicke der gezeichneten Linien</string>
+  <!-- TODO string name="pref_line_units_title">Line units</string -->
+  <!-- TODO string name="pref_line_units_summary">Drawing line units</string -->
   <!-- TODO string name="pref_linesnap_title">Line/Area snap</string -->
   <!-- TODO string name="pref_linesnap_summary">Enable line/area snap action</string -->
   <!-- TODO string name="pref_linecurve_title">Smooth/Straigten segment</string -->
@@ -1203,6 +1205,8 @@
   <!-- TODO string name="pref_th2_xvi_summary">Insert xvi image in th2</string -->
   <string name="pref_autoStations_title">Therion Stationen</string>
   <string name="pref_autoStations_summary">Therion-Stationen automatisch einfügen</string>
+  <!-- TODO string name="pref_auto_xsections_title">Auto X-sections</string -->
+  <!-- TODO string name="pref_auto_xsections_summary">Add x-sections automatically to save/export [csx/svg/dxf/xvi]</string -->
   <string name="pref_loopClosure_title">Kreisschluss</string>
   <string name="pref_loopClosure_summary">Kreisschlussfehler Kompensation</string>
   <!-- UNUSED string name="pref_splayExtend_title">Splay extend</string -->

@@ -758,36 +758,35 @@ class DistoXComm extends TopoDroidComm
             while ( mRfcommThread != null ) {
               TopoDroidUtil.slowDown( 100 );
             }
-            ret = (nReadPackets == null)? 0 : nReadPackets.get();
+            ret = getNrReadPackets();
 	  }
         } else {
           // FIXME asyncTask ?
-          // nReadPackets.get() = 0; // done in RfcommThread cstr
-	  int packets = (nReadPackets == null) ? 0 : nReadPackets.get();
+          // resetNtReadPackets(); // done in RfcommThread cstr 
+	  int packets = getNrReadPackets();
           startRfcommThread( to_read, lister );
           while ( mRfcommThread != null ) {
-	    packets = (nReadPackets == null)? 0 : nReadPackets.get();
+	    packets = getNrReadPackets();
 	    if ( packets >= to_read ) break;
-            if ( packets != prev_read ) {
-              // TDLog.Log( TDLog.LOG_COMM, "download data: read " + packets + " / " + to_read );
-              prev_read = packets;
-            }
+            // if ( packets != prev_read ) {
+            //   TDLog.Log( TDLog.LOG_COMM, "download data: read " + packets + " / " + to_read );
+            // }
+            prev_read = packets;
             TopoDroidUtil.slowDown( 100 );
           }
-	  packets = (nReadPackets == null)? 0 : nReadPackets.get();
-	  if ( packets > to_read ) {
-            TDLog.Log( TDLog.LOG_COMM, "download done: read " + packets + " expected " + to_read );
-	  }
-          ret = packets;
+	  ret = getNrReadPackets();
+	  // if ( ret > to_read ) {
+          //   TDLog.Log( TDLog.LOG_COMM, "download done: read " + ret + " expected " + to_read );
+	  // }
         }
       } else {
         startRfcommThread( -1, lister );
         while ( mRfcommThread != null ) {
           TopoDroidUtil.slowDown( 100 );
         }
-        // TDLog.Log( TDLog.LOG_COMM, "download done: read " + nReadPackets.get() );
+        // TDLog.Log( TDLog.LOG_COMM, "download done: read " + getNrReadPacket() );
         // cancelRfcommThread(); // called by closeSocket() which is called by destroySocket()
-        ret = (nReadPackets == null)? 0 : nReadPackets.get();
+        ret = getNrReadPackets();
       }
     } else {
       TDLog.Error( "download data: fail to connect socket");

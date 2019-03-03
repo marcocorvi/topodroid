@@ -65,11 +65,19 @@ class TDSetting
     return false;
   }
 
-  static void setDrawingUnits( float f )
+  static void setDrawingUnitIcons( float f )
   {
     if ( f > 0.1f && f != mUnitIcons ) {
       mUnitIcons = f;
       BrushManager.reloadPointLibrary( TDInstance.context, TDInstance.context.getResources() );
+    }
+  }
+
+  static void setDrawingUnitLines( float f )
+  {
+    if ( f > 0.1f && f != mUnitLines ) {
+      mUnitLines = f;
+      BrushManager.reloadLineLibrary( TDInstance.context.getResources() );
     }
   }
 
@@ -234,7 +242,10 @@ class TDSetting
   // static int mCompassReadings  = 4;     // number of compass readings to average
 
   // static final String CLOSE_DISTANCE = "0.05"; // 50 cm / 1000 cm
+  // static float   mCloseAngle    = 0.05f; 
   static float   mCloseDistance = 0.05f; 
+  // static float   mDistTolerance = 1.0f;   // ratio of distance-tolerance to angle-tolerance
+
   static int     mMinNrLegShots = 3;
   static String  mInitStation   = TDString.ZERO; // guaranteed non-null non-empty
   static boolean mBacksightInput = false;   // whether to add backsight fields in shot anual-input dialog
@@ -268,6 +279,7 @@ class TDSetting
 
   static int mThumbSize = 200;               // thumbnail size
   static boolean mWithSensors = false;       // whether sensors are enabled
+  // static boolean mSplayActive = false;       // whether splays are attached to active station (if defined)
   // static boolean mWithRename  = false;       // whether survey rename is enabled
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -280,7 +292,8 @@ class TDSetting
   static int mZoomCtrl = 1;
   static boolean mSideDrag = false;
 
-  static float mUnitIcons = 1.4f; // drawing unit
+  static float mUnitIcons = 1.4f; // drawing unit icons
+  static float mUnitLines = 1.4f; // drawing unit lines
 
   // selection_radius = cutoff + closeness / zoom
   static final float mCloseCutoff = 0.01f; // minimum selection radius
@@ -329,6 +342,8 @@ class TDSetting
   static boolean mBackupsClear = false;
   static boolean mFixedOrigin     = false; 
   static boolean mSharedXSections = false; // default value
+  static boolean mAutoXSections   = true;  // auto save/export xsections with section points
+  static boolean mSavedStations   = false;
   // static boolean mPlotCache       = true;  // default value
   static float mDotRadius      = 5;
   static float mArrowLength    = 8;
@@ -841,6 +856,8 @@ class TDSetting
     mBedding       = prefs.getBoolean( keyGShot[ 6], bool(defGShot[ 6]) ); // DISTOX_BEDDING
     mTripleShot    = prefs.getBoolean( keyGShot[ 7], bool(defGShot[ 7]) ); // DISTOX_TRIPLE_SHOT
     mWithSensors   = prefs.getBoolean( keyGShot[ 8], bool(defGShot[ 8]) ); // DISTOX_WITH_SENSORS
+    // mDistTolerance = tryFloat( prefs,  keyGShot[ 9],      defGShot[ 9]  ); // DISTOX_DIST_TOLERANCE
+    // mSplayActive   = prefs.getBoolean( keyGShot[ 8], bool(defGShot[ 8]) ); // DISTOX_WITH_SENSORS
     // mWithRename    = prefs.getBoolean( keyGShot[ 9], bool(defGShot[ 9]) ); // DISTOX_WITH_RENAME
 
 
@@ -857,6 +874,8 @@ class TDSetting
     mBackupNumber   = tryInt( prefs,   keyGPlot[ 7],      defGPlot[ 7] );  // DISTOX_BACKUP_NUMBER
     mBackupInterval = tryInt( prefs,   keyGPlot[ 8],      defGPlot[ 8] );  // DISTOX_BACKUP_INTERVAL
     // setBackupsClear( prefs.getBoolean( keyGPlot[ 9], bool(defGPlot[ 9]) ) ); // DISTOX_BACKUPS_CLEAR primary
+    mAutoXSections  = prefs.getBoolean( keyGPlot[10], bool(defGPlot[10]) ); // DISTOX_AUTO_XSECTIONS
+    mSavedStations  = prefs.getBoolean( keyGPlot[11], bool(defGPlot[11]) ); // DISTOX_SAVED_STATIONS
 
     String[] keyGLine = TDPrefKey.GEEKLINE;
     String[] defGLine = TDPrefKey.GEEKLINEdef;
@@ -924,12 +943,13 @@ class TDSetting
     String[] keyLine = TDPrefKey.LINE;
     String[] defLine = TDPrefKey.LINEdef;
     mLineThickness = tryFloat( prefs,  keyLine[0],      defLine[0] );   // DISTOX_LINE_THICKNESS
-    setLineStyleAndType( prefs.getString( keyLine[1],   defLine[1] ) ); // DISTOX_LINE_STYLE
-    setLineSegment( tryInt(    prefs,  keyLine[2],      defLine[2] ) ); // DISTOX_LINE_SEGMENT
-    mArrowLength   = tryFloat( prefs,  keyLine[3],      defLine[3] );   // DISTOX_ARROW_LENGTH
-    mAutoSectionPt = prefs.getBoolean( keyLine[4], bool(defLine[4]) );  // DISTOX_AUTO_SECTION_PT
-    mContinueLine  = tryInt(   prefs,  keyLine[5],      defLine[5] );   // DISTOX_LINE_CONTINUE
-    mAreaBorder    = prefs.getBoolean( keyLine[6], bool(defLine[6]) );  // DISTOX_AREA_BORDER
+    mUnitLines     = tryFloat( prefs,  keyLine[1],      defLine[1] );   // DISTOX_LINE_UNITS
+    setLineStyleAndType( prefs.getString( keyLine[2],   defLine[2] ) ); // DISTOX_LINE_STYLE
+    setLineSegment( tryInt(    prefs,  keyLine[3],      defLine[3] ) ); // DISTOX_LINE_SEGMENT
+    mArrowLength   = tryFloat( prefs,  keyLine[4],      defLine[4] );   // DISTOX_ARROW_LENGTH
+    mAutoSectionPt = prefs.getBoolean( keyLine[5], bool(defLine[5]) );  // DISTOX_AUTO_SECTION_PT
+    mContinueLine  = tryInt(   prefs,  keyLine[6],      defLine[6] );   // DISTOX_LINE_CONTINUE
+    mAreaBorder    = prefs.getBoolean( keyLine[7], bool(defLine[7]) );  // DISTOX_AREA_BORDER
 
     String[] keyPoint = TDPrefKey.POINT;
     String[] defPoint = TDPrefKey.POINTdef;
@@ -1255,6 +1275,10 @@ class TDSetting
       mTripleShot   = tryBooleanValue( hlp, k, v, bool(def[ 7]) );
     } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_WITH_SENSORS
       mWithSensors  = tryBooleanValue( hlp, k, v, bool(def[ 8]) );
+    // } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_DIST_TOLERANCE
+    //   mDistTolerance = tryFloatValue( hlp, k, v, def[ 9]  );
+    // } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_SPLAY_ACTIVE
+    //   mSplayActive  = prefs.getBoolean( key[ 9],  bool(def[ 9]) );
     // } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_WITH_RENAME
     //   mWithRename   = tryBooleanValue( hlp, k, v, bool(def[ 9]) );
     } else {
@@ -1303,6 +1327,10 @@ class TDSetting
       if ( mBackupInterval > 600 ) { mBackupInterval = 600; ret = Integer.toString( mBackupInterval ); }
     } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_BACKUPS_CLEAR
       setBackupsClear( tryBooleanValue( hlp, k, v, bool(def[ 9]) ) );
+    } else if ( k.equals( key[10 ] ) ) { // DISTOX_AUTO_XSECTIONS
+      mAutoXSections  = tryBooleanValue( hlp, k, v, bool(def[10]) );
+    } else if ( k.equals( key[11 ] ) ) { // DISTOX_SAVED_STATIONS
+      mSavedStations  = tryBooleanValue( hlp, k, v, bool(def[11]) );
     } else {
       TDLog.Error("missing GEEK_PLOT key: " + k );
     }
@@ -1840,19 +1868,20 @@ class TDSetting
     String[] def = TDPrefKey.LINEdef;
     if ( k.equals( key[ 0 ] ) ) { // DISTOX_LINE_THICKNESS
       ret = setLineThickness( tryStringValue( hlp, k, v, def[0] ) );
-
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_LINE_STYLE (choice)
-      setLineStyleAndType( tryStringValue( hlp, k, v, def[1] ) );
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_LINE_SEGMENT
-      ret = setLineSegment( tryIntValue(   hlp, k, v, def[2] ) );
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_ARROW_LENGTH
-      ret = setArrowLength( tryFloatValue( hlp, k, v, def[3] ) );
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_AUTO_SECTION_PT (bool)
-      mAutoSectionPt = tryBooleanValue( hlp, k, v, bool(def[4]) );
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_LINE_CONTINUE (choice)
-      mContinueLine  = tryIntValue( hlp, k, v, def[5] );
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_AREA_BORDER (bool)
-      mAreaBorder = tryBooleanValue( hlp, k, v, bool(def[6]) );
+    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_LINE_UNITS
+      try { setDrawingUnitLines( tryFloatValue( hlp, k, v, def[1] ) ); } catch ( NumberFormatException e ) { }
+    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_LINE_STYLE (choice)
+      setLineStyleAndType( tryStringValue( hlp, k, v, def[2] ) );
+    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_LINE_SEGMENT
+      ret = setLineSegment( tryIntValue(   hlp, k, v, def[3] ) );
+    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_ARROW_LENGTH
+      ret = setArrowLength( tryFloatValue( hlp, k, v, def[4] ) );
+    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_AUTO_SECTION_PT (bool)
+      mAutoSectionPt = tryBooleanValue( hlp, k, v, bool(def[5]) );
+    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_LINE_CONTINUE (choice)
+      mContinueLine  = tryIntValue( hlp, k, v, def[6] );
+    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_AREA_BORDER (bool)
+      mAreaBorder = tryBooleanValue( hlp, k, v, bool(def[7]) );
     } else {
       TDLog.Error("missing LINE key: " + k );
     }
@@ -1868,8 +1897,8 @@ class TDSetting
     String[] def = TDPrefKey.POINTdef;
     if ( k.equals( key[ 0 ] ) ) { // DISTOX_UNSCALED_POINTS (bool)
       mUnscaledPoints = tryBooleanValue( hlp, k, v, bool(def[0]) );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_DRAWING_UNIT (choice)
-      try { setDrawingUnits( tryFloatValue( hlp, k, v, def[1] ) ); } catch ( NumberFormatException e ) { }
+    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_DRAWING_UNIT 
+      try { setDrawingUnitIcons( tryFloatValue( hlp, k, v, def[1] ) ); } catch ( NumberFormatException e ) { }
     } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_LABEL_SIZE
       try {
         setLabelSize( Float.parseFloat( tryStringValue( hlp, k, v, def[2] ) ), true );
@@ -1924,7 +1953,7 @@ class TDSetting
     if ( k.equals( key[ 0 ] ) ) { // DISTOX_UNSCALED_POINTS (bool)
       mUnscaledPoints = tryBooleanValue( hlp, k, v, bool(def[0]) );
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_DRAWING_UNIT (choice)
-      try { setDrawingUnits( tryFloatValue( hlp, k, v, def[1] ) ); } catch ( NumberFormatException e ) { }
+      try { setDrawingUnitIcons( tryFloatValue( hlp, k, v, def[1] ) ); } catch ( NumberFormatException e ) { }
     } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_LABEL_SIZE
       try {
         setLabelSize( Float.parseFloat( tryStringValue( hlp, k, v, def[2] ) ), true );

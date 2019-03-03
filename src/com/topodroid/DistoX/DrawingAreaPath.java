@@ -243,7 +243,7 @@ class DrawingAreaPath extends DrawingPointLinePath
       canvas.save();
       canvas.clipPath( path );
       canvas.drawPaint( mPaint );
-      if ( isVisible() ) canvas.drawPath( path, BrushManager.borderPaint );
+      if ( isVisible() ) canvas.drawPath( path, BrushManager.borderPaint ); // ??? NullPointerException reported here`
       canvas.restore();
     }
   }

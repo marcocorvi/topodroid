@@ -15,7 +15,7 @@ package com.topodroid.DistoX;
 import java.util.Locale;
 
 import java.util.List;
-// import java.util.ArrayList;
+import java.util.ArrayList;
 // import java.util.HashMap;
 // import java.util.Locale;
 
@@ -31,7 +31,7 @@ import java.io.IOException;
 
 import android.graphics.RectF;
 
-// import android.util.Log;
+import android.util.Log;
 
 class DrawingSvg
 {
@@ -40,6 +40,19 @@ class DrawingSvg
   static final private int POINT_RADIUS = 10;
   static final private int RADIUS = 3;
   // float SCALE_FIX = util.SCALE_FIX; // 20.0f
+  
+  private class XSection
+  {
+    String mFilename;
+    float  mX, mY;
+
+    XSection( String filename, float x, float y ) 
+    {
+      mFilename = filename;
+      mX = x; 
+      mY = y;
+    }
+  }
 
   private static void printSvgGrid( BufferedWriter out, List<DrawingPath> grid, String color, float opacity, float xoff, float yoff )
   {
@@ -73,7 +86,7 @@ class DrawingSvg
     return String.format( "#%02x%02x%02x", red, grn, blu );
   }
 
-  static void write( BufferedWriter out, DistoXNum num, /* DrawingUtil util, */ DrawingCommandManager plot, long type )
+  void write( BufferedWriter out, DistoXNum num, /* DrawingUtil util, */ DrawingCommandManager plot, long type )
   {
     String wall_group = BrushManager.getLineGroup( BrushManager.mLineLib.mLineWallIndex );
 
@@ -137,11 +150,14 @@ class DrawingSvg
         // centerline data
         if ( PlotInfo.isSketch2D( type ) ) { 
           if ( TDSetting.mSvgGrid ) {
+            // Log.v("DistoXsvg", "SVG grid");
             printSvgGrid( out, plot.getGrid1(),   "999999", 0.4f, xoff, yoff );
             printSvgGrid( out, plot.getGrid10(),  "666666", 0.6f, xoff, yoff );
             printSvgGrid( out, plot.getGrid100(), "333333", 0.8f, xoff, yoff );
           }
           // FIXME OK PROFILE
+
+          // Log.v("DistoXsvg", "SVG legs");
           out.write("<g style=\"fill:none;stroke-opacity:0.6;stroke:red\" >\n");
           for ( DrawingPath sh : plot.getLegs() ) {
             DBlock blk = sh.mBlock;
@@ -173,6 +189,8 @@ class DrawingSvg
             out.flush();
           }
           out.write("</g>\n");
+
+          // Log.v("DistoXsvg", "SVG splays " + plot.getSplays().size() );
           if ( TDSetting.mSvgSplays ) {
             out.write("<g style=\"fill:none;stroke-opacity:0.4;stroke:orange\" >\n");
             for ( DrawingPath sh : plot.getSplays() ) {
@@ -210,6 +228,7 @@ class DrawingSvg
         }
 
         if ( TDSetting.mSvgLineDirection ) {
+          // Log.v("DistoXsvg", "SVG line direction");
           StringWriter swD = new StringWriter();
           PrintWriter pwD  = new PrintWriter(swD);
           pwD.format("<marker id=\"dir\" viewBox=\"0 0 10 30\"  orient=\"auto\"");
@@ -226,6 +245,9 @@ class DrawingSvg
           out.flush();
         }
 
+	ArrayList< XSection > xsections = new ArrayList< XSection >();
+
+        // Log.v("DistoXsvg", "SVG commands " + plot.getCommands().size() );
         for ( ICanvasCommand cmd : plot.getCommands() ) {
           if ( cmd.commandType() != 0 ) continue;
           DrawingPath path = (DrawingPath)cmd;
@@ -243,23 +265,26 @@ class DrawingSvg
             if ( point.mPointType == BrushManager.mPointLib.mPointSectionIndex ) {
               float xx = xoff+point.cx;
               float yy = yoff+point.cy;
-              pw5.format(Locale.US, "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"%d\" ", xx, yy, RADIUS );
-              pw5.format(" style=\"fill:grey;stroke:black;stroke-width:%.2f\" />\n", TDSetting.mSvgLabelStroke );
+	      if ( TDSetting.mAutoXSections ) {
+                // pw5.format(Locale.US, "<g transform=\"translate(%.2f,%.2f)\" >\n", xx, yy );
+                // pw5.format(" style=\"fill:none;stroke:%s;stroke-width:0.1\" >\n", color_str );
+                // Log.v("DistoX", "Section point <" + point.mOptions + "> " + point.cx + " " + point.cy );
+                // option: -scrap survey-xx#
+                // FIXME GET_OPTION
+                String scrapname = point.getOption("-scrap");
+                if ( scrapname != null ) {
+                  String scrapfile = scrapname + ".tdr";
+                  // String scrapfile = point.mOptions.substring( 7 ) + ".tdr";
 
-              // pw5.format(Locale.US, "<g transform=\"translate(%.2f,%.2f)\" >\n", xx, yy );
-              // pw5.format(" style=\"fill:none;stroke:%s;stroke-width:0.1\" >\n", color_str );
-              // Log.v("DistoX", "Section point <" + point.mOptions + "> " + point.cx + " " + point.cy );
-              // option: -scrap survey-xx#
-              // FIXME GET_OPTION
-              String scrapname = point.getOption("-scrap");
-              if ( scrapname != null ) {
-                String scrapfile = scrapname + ".tdr";
-                // String scrapfile = point.mOptions.substring( 7 ) + ".tdr";
-
-                // TODO open file survey-xx#.tdr and convert it to svg
-                tdrToSvg( pw5, scrapfile, xx, yy, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
-              }
-              // pw5.format("</g>\n");
+                  // TODO open file survey-xx#.tdr and convert it to svg
+                  // tdrToSvg( pw5, scrapfile, xx, yy, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
+	          xsections.add( new XSection( scrapfile, xx, yy ) );
+                }
+                // pw5.format("</g>\n");
+	      } else {
+                pw5.format(Locale.US, "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"%d\" ", xx, yy, RADIUS );
+                pw5.format(" style=\"fill:grey;stroke:black;stroke-width:%.2f\" />\n", TDSetting.mSvgLabelStroke );
+	      }
             } else {
               toSvg( pw5, point, color_str, xoff, yoff );
             }
@@ -267,7 +292,24 @@ class DrawingSvg
           out.write( sw5.getBuffer().toString() );
           out.flush();
         }
+
+        // xsections
+        // Log.v("DistoXsvg", "SVG xsections " + xsections.size() );
+        out.write("<g>\n");
+	for ( XSection xsection : xsections ) {
+          // Log.v("DistoXsvg", "SVG xsection " + xsection.mFilename );
+          StringWriter sw7 = new StringWriter();
+          PrintWriter pw7  = new PrintWriter(sw7);
+          pw7.format("<g>\n");
+          tdrToSvg( pw7, xsection.mFilename, xsection.mX, xsection.mY, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
+          pw7.format("</g>\n");
+          out.write( sw7.getBuffer().toString() );
+          out.flush();
+	}
+        out.write("</g>\n");
+
         // stations
+        // Log.v("DistoXsvg", "SVG statioons " + plot.getStations().size() );
         StringWriter sw6 = new StringWriter();
         PrintWriter pw6  = new PrintWriter(sw6);
         if ( TDSetting.mAutoStations ) {
@@ -421,7 +463,7 @@ class DrawingSvg
       BufferedInputStream bfis = new BufferedInputStream( fis );
       DataInputStream dis = new DataInputStream( bfis );
       int version = DrawingIO.skipTdrHeader( dis );
-      // Log.v("DistoX", "tdr to svg delta " + dx + " " + dy + " Offset " + xoff + " " + yoff );
+      // Log.v("DistoXsvg", "tdr to svg " + scrapfile + " delta " + dx + " " + dy + " Offset " + xoff + " " + yoff );
 
       DrawingPath path = null;
       boolean done = false;
@@ -450,9 +492,21 @@ class DrawingSvg
           case 'X':
             path = DrawingStationName.loadDataStream( version, dis ); // consume DrawingStationName data
             break;
+          case 'Y':
+            path = DrawingPhotoPath.loadDataStream( version, dis, dx, dy );
+            break;
+          case 'Z':
+            path = DrawingAudioPath.loadDataStream( version, dis, dx, dy );
+            break;
+          case 'J':
+            path = DrawingSpecialPath.loadDataStream( version, dis, dx, dy );
+            break;
           case 'F':
             done = true;
             break;
+	  default:
+	    TDLog.Error("TDR2SVG Error. unexpected code=" + what );
+	    return;
         }
       }
     } catch ( FileNotFoundException e ) { // this is OK

@@ -324,7 +324,7 @@ public class OverviewWindow extends ItemDrawer
         DrawingStationName dst;
         // dst = mOverviewSurface.addDrawingStationName( null, st, DrawingUtil.toSceneX(st.e,st.s) - xoff,
         //                                                   DrawingUtil.toSceneY(st.e,st.s) - yoff, true, null );
-        dst = mOverviewSurface.addDrawingStationName( null, st, DrawingUtil.toSceneX(st.e,st.s), DrawingUtil.toSceneY(st.e,st.s), true, null );
+        dst = mOverviewSurface.addDrawingStationName( null, st, DrawingUtil.toSceneX(st.e,st.s), DrawingUtil.toSceneY(st.e,st.s), true, null, null );
       }
     } else { // if ( PlotInfo.isProfile( type ) // FIXME OK PROFILE
       for ( NumShot sh : shots ) {
@@ -344,7 +344,7 @@ public class OverviewWindow extends ItemDrawer
         DrawingStationName dst;
         // dst = mOverviewSurface.addDrawingStationName( null, st, DrawingUtil.toSceneX(st.h,st.v) - xoff,
         //                                                   DrawingUtil.toSceneY(st.h,st.v) - yoff, true, null );
-        dst = mOverviewSurface.addDrawingStationName( null, st, DrawingUtil.toSceneX(st.h,st.v), DrawingUtil.toSceneY(st.h,st.v), true, null );
+        dst = mOverviewSurface.addDrawingStationName( null, st, DrawingUtil.toSceneX(st.h,st.v), DrawingUtil.toSceneY(st.h,st.v), true, null, null );
       }
     }
 

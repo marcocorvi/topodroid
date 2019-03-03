@@ -731,6 +731,7 @@ public class TopoDroidApp extends Application
   // called by GMActivity and by CalibCoeffDialog 
   void uploadCalibCoeff( Context context, byte[] coeff, boolean check, Button b )
   {
+    // TODO this writeCoeff shoudl be run in an AsyncTask
     if ( b != null ) b.setEnabled( false );
     if ( mComm == null || TDInstance.device == null ) {
       TDToast.make( R.string.no_device_address );
@@ -1063,10 +1064,16 @@ public class TopoDroidApp extends Application
     mPrefHlp.update( "DISTOX_SIZE_BUTTONS", Integer.toString(bs) );
   }
 
-  void setDrawingUnit( float u )
+  void setDrawingUnitIcons( float u )
   {
-    TDSetting.setDrawingUnits( u );
+    TDSetting.setDrawingUnitIcons( u );
     mPrefHlp.update( "DISTOX_DRAWING_UNIT", Float.toString(u) );
+  }
+
+  void setDrawingUnitLines( float u )
+  {
+    TDSetting.setDrawingUnitLines( u );
+    mPrefHlp.update( "DISTOX_LINE_UNITS", Float.toString(u) );
   }
 
   // used for "DISTOX_WELCOME_SCREEN" and "DISTOX_TD_SYMBOL"

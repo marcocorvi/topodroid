@@ -1176,6 +1176,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_dot_radius_message">Size of the green dots</string>
   <string name="pref_line_thickness_title">Line width</string>
   <string name="pref_line_thickness_summary">Drawing line width</string>
+  <string name="pref_line_units_title">Line units</string>
+  <string name="pref_line_units_summary">Drawing line units</string>
   <string name="pref_linesnap_title">Line/Area snap</string>
   <string name="pref_linesnap_summary">Enable line/area snap action</string>
   <string name="pref_linecurve_title">Smooth/Straigten segment</string>
@@ -1214,6 +1216,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_th2_xvi_summary">Insert xvi image in th2</string>
   <string name="pref_autoStations_title">Therion stations</string>
   <string name="pref_autoStations_summary">Add stations automatically to Therion files</string>
+  <string name="pref_auto_xsections_title">Auto X-sections</string>
+  <string name="pref_auto_xsections_summary">Add x-sections automatically to save/export [csx/svg/dxf/xvi]</string>
+  <string name="pref_saved_stations_title">Saved stations</string>
+  <string name="pref_saved_stations_summary">Color saved stations orange</string>
   <string name="pref_loopClosure_title">Loop closure</string>
   <string name="pref_loopClosure_summary">Loop closure-error compensation</string>
   <!-- UNUSED string name="pref_splayExtend_title">Estimate splay extend</string -->
@@ -1228,6 +1234,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_splay_classes_summary">Enable splay classes</string>
   <string name="pref_splay_color_title">Splay coloring</string>
   <string name="pref_splay_color_summary">Enable splay coloring</string>
+  <!-- UNUSED string name="pref_splay_active_title">Splay at active station</string -->
+  <!-- UNUSED string name="pref_splay_active_summary">Enable splay at the active station</string -->
   <string name="pref_plot_shift_title">Sketch shift/scale</string>
   <string name="pref_plot_shift_summary">Enable sketch shift and scale</string>
   <string name="pref_splay_alpha_title">Splay transparency</string>

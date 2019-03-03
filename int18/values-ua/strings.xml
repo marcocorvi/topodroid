@@ -1150,6 +1150,8 @@
   <string name="pref_dot_radius_message">Розмір зелених точок</string>
   <string name="pref_line_thickness_title">Товщина ліній</string>
   <string name="pref_line_thickness_summary">Товщина ліній</string>
+  <!-- TODO string name="pref_line_units_title">Line units</string -->
+  <!-- TODO string name="pref_line_units_summary">Drawing line units</string -->
   <!-- TODO string name="pref_linesnap_title">Line/Area snap</string -->
   <!-- TODO string name="pref_linesnap_summary">Enable line/area snap action</string -->
   <!-- TODO string name="pref_linecurve_title">Smooth/Straigten segment</string -->
@@ -1188,6 +1190,8 @@
   <!-- TODO string name="pref_th2_xvi_summary">Insert xvi image in th2</string -->
   <string name="pref_autoStations_title">Точки пікетів Therion</string>
   <string name="pref_autoStations_summary">Додавати точки пікетів в експорт абрису</string>
+  <!-- TODO string name="pref_auto_xsections_title">Auto X-sections</string -->
+  <!-- TODO string name="pref_auto_xsections_summary">Add x-sections automatically to save/export [csx/svg/dxf/xvi]</string -->
   <string name="pref_loopClosure_title">Закривати петлі автоматично</string>
   <string name="pref_loopClosure_summary">Розкидання невязок в петлі</string>
   <!-- UNUSED string name="pref_splayExtend_title">Розгортка бокового заміру</string -->

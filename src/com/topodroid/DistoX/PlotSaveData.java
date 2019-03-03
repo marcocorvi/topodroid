@@ -17,14 +17,14 @@ package com.topodroid.DistoX;
 class PlotSaveData
 {
   final PlotInfo plot;
-  final long type;
+  final long type;     // plot type
   final DistoXNum num;
   // final DrawingUtil util;
   final DrawingCommandManager cm;
-  final String name;
-  final String fname;
+  final String name;   
+  final String fname;  // filename
   final int azimuth;
-  final int suffix;
+  final int suffix;    // plot save mode
   final int rotate;
 
   PlotSaveData( DistoXNum n, /* DrawingUtil u, */ PlotInfo p, DrawingCommandManager manager, String nam, String fnam, int a, int s, int r )

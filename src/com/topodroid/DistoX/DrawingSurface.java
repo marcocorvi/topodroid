@@ -395,7 +395,9 @@ class DrawingSurface extends SurfaceView
   // @param num_st     station
   // @param selectable whether the station is selectable
   // @param xsections  list of survey xsections
-  DrawingStationName addDrawingStationName ( String parent, NumStation num_st, float x, float y, boolean selectable, List<PlotInfo> xsections )
+  // @param saved      list of saved stations
+  DrawingStationName addDrawingStationName ( String parent, NumStation num_st, float x, float y, boolean selectable, 
+		                             List<PlotInfo> xsections, List<CurrentStation> saved )
   {
     // TDLog.Log( TDLog.LOG_PLOT, "add Drawing Station Name " + num_st.name + " " + x + " " + y );
     // FIXME STATION_XSECTION
@@ -408,6 +410,14 @@ class DrawingSurface extends SurfaceView
       st.setPathPaint( BrushManager.fixedStationBarrierPaint );
     } else {
       st.setPathPaint( BrushManager.fixedStationPaint );
+      if ( TDSetting.mSavedStations && saved != null ) {
+	for ( CurrentStation sst : saved ) {
+	  if ( sst.mName.equals( num_st.name ) ) {
+            st.setPathPaint( BrushManager.fixedStationSavedPaint );
+	    break;
+	  }
+	}
+      }
     }
     if ( xsections != null && parent != null ) {
       for ( PlotInfo plot : xsections ) {

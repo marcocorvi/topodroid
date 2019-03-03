@@ -138,6 +138,9 @@ public class MainWindow extends Activity
   private boolean say_not_enabled = true; // whether to say that BT is not enabled
   private boolean do_check_bt = true;             // one-time bluetooth check sentinel
 
+  boolean mPaletteButtonEnabled = false;
+  void enablePaletteButton() { mPaletteButtonEnabled = true; }
+
   // -------------------------------------------------------------------
 
   TopoDroidApp getApp() { return mApp; }
@@ -212,11 +215,14 @@ public class MainWindow extends Activity
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // IMPORT
         (new ImportDialog( mActivity, this /*, mApp */ )).show();
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // PALETTE
-        BrushManager.makePaths( mApp, getResources() );
-        SymbolEnableDialog dlg = new SymbolEnableDialog( mActivity );
-	dlg.anchorTop();
-	dlg.show();
-
+	if ( mPaletteButtonEnabled ) {
+          BrushManager.makePaths( mApp, getResources() );
+          SymbolEnableDialog dlg = new SymbolEnableDialog( mActivity );
+	  dlg.anchorTop();
+	  dlg.show();
+        } else {
+	  TDToast.make( "palette not yet loaded" );
+	}
       // FIXME THMANAGER
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // THERION MANAGER ThManager
         try {
@@ -533,6 +539,7 @@ public class MainWindow extends Activity
           BrushManager.reloadAreaLibrary( res );
           BrushManager.doMakePaths( );
           WorldMagneticModel.loadEGM9615( mApp );
+	  enablePaletteButton();
         }
       };
       loader.setPriority( Thread.MIN_PRIORITY );

@@ -346,7 +346,7 @@ class DrawingDxf
   static private int printSpline( PrintWriter pw, DrawingPointLinePath line, float scale, int handle, String layer, boolean closed,
                           float xoff, float yoff )
   {
-    Log.v("DistoX", "print spline");
+    // Log.v("DistoXdxf", "print spline");
     printString( pw, 0, "SPLINE" );
     handle = inc(handle); printAcDb( pw, handle, AcDbEntity, "AcDbSpline" );
     printString( pw, 8, layer );
@@ -1086,13 +1086,15 @@ class DrawingDxf
             int idx = 1 + point.mPointType;
             if ( mVersion13 ) {
               if ( point.mPointType == BrushManager.mPointLib.mPointSectionIndex ) {
-                // FIXME GET_OPTION
-                // String scrapfile = point.mOptions.substring( 7 ) + ".tdr";
-                String scrapname = point.getOption( "-scrap" );
-                if ( scrapname != null ) {
-                  String scrapfile = scrapname + ".tdr";
-                  handle = tdrToDxf( pw5, handle, scrapfile, 
-                         scale, point.cx, point.cy, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
+		if ( TDSetting.mAutoXSections ) {
+                  // FIXME GET_OPTION
+                  // String scrapfile = point.mOptions.substring( 7 ) + ".tdr";
+                  String scrapname = point.getOption( "-scrap" );
+                  if ( scrapname != null ) {
+                    String scrapfile = scrapname + ".tdr";
+                    handle = tdrToDxf( pw5, handle, scrapfile, 
+                           scale, point.cx, point.cy, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
+                  }
                 }
               } else {
                 handle = toDxf( pw5, handle, point, scale, xoff, yoff );
@@ -1295,9 +1297,21 @@ class DrawingDxf
           case 'X':
             path = DrawingStationName.loadDataStream( version, dis ); // consume DrawingStationName data
             break;
+          case 'Y':
+            path = DrawingPhotoPath.loadDataStream( version, dis, dx, dy );
+            break;
+          case 'Z':
+            path = DrawingAudioPath.loadDataStream( version, dis, dx, dy );
+            break;
+          case 'J':
+            path = DrawingSpecialPath.loadDataStream( version, dis, dx, dy );
+            break;
           case 'F':
             done = true;
             break;
+	  default:
+	    TDLog.Error("TDR2DXF Error. unexpected code=" + what );
+	    return handle;
         }
       }
     } catch ( FileNotFoundException e ) { // this is OK
