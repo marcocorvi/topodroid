@@ -897,9 +897,9 @@
     <string name="title_calib_export">Exportovať kalibráciu</string>
     <!-- OK ENGLISH string name="title_zoom">Zoom</string -->
 
-  <string name="pref_cat_survey">NASTAVENIE MAPOVANIA</string>
-  <string name="pref_cat_drawing">NASTAVENIE KRESLENIA</string>
-  <string name="pref_cat_import_export">NASTAVENIE IMPORT/EXPORT</string>
+  <string name="pref_cat_survey">NASTAVENIA MAPOVANIA</string>
+  <string name="pref_cat_drawing">NASTAVENIA KRESLENIA</string>
+  <string name="pref_cat_import_export">NASTAVENIA IMPORT/EXPORT</string>
   <string name="pref_cat_exportimport">IMPORT</string>
   <!-- UNUSED string name="pref_cat_exportsvx" translatable="false">Survex</string -->
   <!-- UNUSED string name="pref_cat_exportth"  translatable="false">Therion</string -->
@@ -909,9 +909,9 @@
   <!-- UNUSED string name="pref_cat_exportpng" translatable="false">PNG</string -->
   <!-- UNUSED string name="pref_cat_exportkml" translatable="false">KML/GeoJSON</string -->
  
-  <string name="pref_cat_calib">NASTAVENIE KALIBRÁCIE</string>
+  <string name="pref_cat_calib">NASTAVENIA KALIBRÁCIE</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->  
-  <string name="pref_cat_device">NASTAVENIE DISTOX</string>
+  <string name="pref_cat_device">NASTAVENIA DISTOX</string>
   <string name="pref_cat_geek">ŠPECIÁLNE NASTAVENIA</string>
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
   
@@ -944,8 +944,10 @@
   <string name="pref_extra_buttons_summary">Výber Úrovne príkazov</string>
   <string name="pref_size_buttons_title">Veľkosť tlačidiel</string>
   <string name="pref_size_buttons_summary">Veľkosť ikon tlačidiel</string>
-   <string name="pref_with_sensors_title">Sensory</string>
+  <string name="pref_with_sensors_title">Sensory</string>
   <string name="pref_with_sensors_summary">Povolí zaznamenávanie dát zo sensorov smartphonu</string>
+  <!-- UNUSED string name="pref_with_rename_title">Survey renaming</string -->
+  <!-- UNUSED string name="pref_with_rename_summary">Enable "survey renaming" menu</string -->	
   <string name="pref_palettes_title">Palety</string>
   <string name="pref_palettes_summary">Povolí doplnkové palety</string>
 
@@ -1032,13 +1034,13 @@
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Se usare GPSAveraging</string -->
     
-  <string name="pref_plot_screen_title">NASTAVENIE KRESLENIA</string>
-  <string name="pref_tool_line_title">NASTAVENIE ČIAR</string>
-  <string name="pref_tool_point_title">NASTAVENIE BODOV</string>
-  <string name="pref_location_title">NASTAVENIE POLOHY</string>
-  <string name="pref_accuracy_title">NASTAVENIE PRESNOSTI</string>
+  <string name="pref_plot_screen_title">NASTAVENIA KRESLENIA</string>
+  <string name="pref_tool_line_title">NASTAVENIA ČIAR</string>
+  <string name="pref_tool_point_title">NASTAVENIA BODOV</string>
+  <string name="pref_location_title">NASTAVENIA POLOHY</string>
+  <string name="pref_accuracy_title">NASTAVENIA PRESNOSTI</string>
   <string name="pref_shot_data_title">NASTAVENIA ZÁMERY</string>
-  <string name="pref_shot_units_title">NASTAVENIE JEDNOTIEK</string>
+  <string name="pref_shot_units_title">NASTAVENIA JEDNOTIEK</string>
   <string name="pref_cwd_title">Pracovný adresár</string>
   <!-- UNUSED string name="pref_cwd_summary">Directory di lavoro di TopoDroid</string -->
   <string name="pref_pt_color_map_title">Farebná mapa PocketTopo</string>
@@ -1150,10 +1152,12 @@
   <string name="pref_lineacc_summary">Presnosť interpolácie pre Bezierove krivky (čím menšie číslo tým viac bodov)</string>
   <string name="pref_linecorner_title">Ostrosť Bezierového uhla</string>
   <string name="pref_linecorner_summary">Menšie číslo (0,2 robí rohy ostrejšie; väčšie číslo (20) ich viac vyhladzuje</string>
-  <!-- TODO string name="pref_weeddistance_title">Point weeding segment buffer</string -->
-  <!-- TODO string name="pref_weeddistance_summary">Max distance from segment to weed points</string -->
-  <!-- TODO string name="pref_weedlength_title">Point weeding segment length</string -->
-  <!-- TODO string name="pref_weedlength_summary">Max length of a line segment</string -->
+  <string name="pref_weeddistance_title">Redukcia bodov - nárazník segmentu</string>
+  <string name="pref_weeddistance_summary">Maximálna vzdialenosť od segmentu, pri ktorej dôjde k redukcii bodov pri Jednoduchej Čiare</string>
+  <string name="pref_weedlength_title">Redukcia bodov - dĺžka segmentu</string>
+  <string name="pref_weedlength_summary">Maximálna dĺžka segmentu čiary pri Jednoduchej Čiare</string>
+  <string name="pref_weedbuffer_title">Redukcia - nárazník segmentu</string>	
+  <string name="pref_weedbuffer_summary">Veľkosť Nárazníka okolo segmentu čiary pri Jednoduchej Čiare [pxl]</string>	
   <string name="pref_calib_algo_title">Algoritmus</string>
   <string name="pref_calib_algo_summary">Výber kalibračného algoritmu</string>
   <string name="pref_group_by_title">Zoskupovanie údajov</string>
