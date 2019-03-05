@@ -1160,8 +1160,8 @@
   <string name="pref_dot_radius_message">Размер зеленых точек подсветки при поточечном редактировании</string>
   <string name="pref_line_thickness_title">Толщина линий</string>
   <string name="pref_line_thickness_summary">Толщина линий</string>
-  <!-- TODO string name="pref_line_units_title">Line units</string -->
-  <!-- TODO string name="pref_line_units_summary">Drawing line units</string -->
+  <string name="pref_line_units_title">Размер линий</string>
+  <string name="pref_line_units_summary">Размер орнамета линий</string>
   <string name="pref_linesnap_title">Привязать линию/область</string>
   <string name="pref_linesnap_summary">Включить привязку линий/областей</string>
   <string name="pref_linecurve_title">Сгладить/Спрямить сегмент</string>
