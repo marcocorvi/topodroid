@@ -618,8 +618,19 @@ public class GMActivity extends Activity
       TDToast.make( R.string.no_gms );
       return;
     }
+    float thr = TDMath.cosd( TDSetting.mGroupDistance );
+    long group = 0;
+    CalibCBlock ref = null;
     for ( CalibCBlock item : list ) {
       if ( item.isSaturated() ) ++ n_saturated;
+
+      item.computeBearingAndClino();
+      if ( item.mGroup > 0 && item.mGroup != group ) {
+        group = item.mGroup;
+	ref   = item;
+      } else if ( ref != null ) {
+        item.computeFarness( ref, thr );
+      }	
       mDataAdapter.add( item );
     }
     // mList.setAdapter( mDataAdapter );

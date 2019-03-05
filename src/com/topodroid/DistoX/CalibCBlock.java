@@ -37,6 +37,7 @@ class CalibCBlock
   float mRoll;     // computed roll
   float mError;    // error in the calibration algo associated to this data
   long mStatus;
+  boolean mFarness; // farness from reference item (previous item of a group)
 
   boolean isSaturated()
   { 
@@ -46,6 +47,13 @@ class CalibCBlock
   boolean isGZero()
   {
     return ( gx == 0 && gy == 0 && gz == 0 );
+  }
+
+  boolean isFar() { return mFarness; }
+
+  void computeFarness( CalibCBlock ref, float thr )
+  {
+    mFarness = isFarFrom( ref.mBearing, ref.mClino, thr );
   }
 
   CalibCBlock()
@@ -60,6 +68,7 @@ class CalibCBlock
     mz = 0;
     mGroup = 0;
     mError = 0.0f;
+    mFarness = false;
   }
 
   boolean isFarFrom( float b0, float c0, float thr )
