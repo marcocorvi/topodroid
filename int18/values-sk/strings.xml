@@ -1218,6 +1218,8 @@
   <string name="pref_autoStations_summary">Automatické pridanie staničení do Therionu</string>
   <string name="pref_auto_xsections_title">Automatické  priečne rezy</string>
   <string name="pref_auto_xsections_summary">Pridá automaticky priečne rezy do uloženia/exportu [csx/svg/dxf/xvi]</string>
+  <string name="pref_saved_stations_title">Uložené meračské body</string>
+  <string name="pref_saved_stations_summary">Zafarbí číslo uložených meračských bodov na žlto (oranžovo)</string>	
   <string name="pref_loopClosure_title">Vyrovnanie polygoného ťahu</string>
   <string name="pref_loopClosure_summary">Výber možností Vyrovnania polygoného ťahu</string>
   <!-- UNUSED string name="pref_splayExtend_title">Stima extend per splay</string -->
