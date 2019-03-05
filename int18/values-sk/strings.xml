@@ -8,7 +8,7 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Pre návrat Opätovne stlačte tlačidlo SPÄŤ</string>
 
-    <!-- UNUSED string name="version_ask">Updatovať na novú verziu Topodroid.\nChcete reinštalovať kresliace symboly?</string -->
+    <!-- UNUSED string name="version_ask">Updating to a new version of TopoDroid.\nDo you want to reinstall drawing tools?</string -->
     <string name="symbols_ask">Inštalovať kresliace symboly v.%1$s?\n(Aktuálne v.%2$s)</string>
 
     <string name="setup_textsize_title">TopoDroid nastavenie. Veľkosť textu</string>
@@ -45,11 +45,11 @@
 
     <string name="memoryA3">DistoX A3 pamäť</string>
     <string name="memoryX310">DistoX X310 pamäť</string>
-    <!-- UNUSED string name="memory_data">DistoX dáta</string -->
+    <!-- UNUSED string name="memory_data">DistoX data</string -->
 
     <string name="thp_user">Univerzálny bod</string>
     <string name="thp_label">Poznámka</string>
-    <!-- UNUSED string name="thp_danger">pericolo</string -->
+    <!-- UNUSED string name="thp_danger">danger</string -->
     <string name="thl_user">Univerzálna čiara</string>
     <string name="thl_wall">Stena</string>
     <string name="tha_user">Univerzálna oblasť</string>
@@ -59,13 +59,13 @@
     <string name="missing_station">Chýba merací bod</string>
     <string name="station_not_found">Merací bod nenájdený</string>
     <!-- UNUSED string name="missing_area">AREA</string -->
-    <!-- UNUSED string name="missing_hint">Inštalovať a prototypovať grafiku s TdSymbol</string -->
-    <!-- UNUSED string name="missing_line">LINEA</string -->
-    <!-- UNUSED string name="missing_point">PUNTO</string -->
-    <!-- UNUSED string name="missing_save">Disegno non salvato causa prototipi mancanti</string -->
-    <!-- UNUSED string name="missing_symbols">Mancano alcuni prototipi grafici.\nSalvare ugualmente?</string -->
-    <!-- UNUSED string name="missing_title">PROTOTIPI MANCANTI</string -->
-    <!-- UNUSED string name="missing_warning">Mancano i seguenti prototipi grafici.\n</string -->
+    <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->
+    <!-- UNUSED string name="missing_line">LINE</string -->
+    <!-- UNUSED string name="missing_point">POINT</string -->
+    <!-- UNUSED string name="missing_save">Sketch has missing drawing tools.\nNot saving it.</string -->
+    <!-- UNUSED string name="missing_symbols">There are missing drawing tools.\nSave anyway ?</string -->
+    <!-- UNUSED string name="missing_title">MISSING SYMBOLS</string -->
+    <!-- UNUSED string name="missing_warning">The following drawing tools are missing.\n</string -->
     <string name="failed_snap_to_line">V blízkosti nie je žiadny bod z čiary "na prichytenie" ku Hranici Oblasti</string>
     <string name="failed_snap_to_point">V blízkosti nie je žiadny bod "na prichytenie" k Bodu</string>
     <string name="failed_snap_to_splays">V blízkosti nie je pomocná zámera na "prichytenie" ku Čiare</string>
@@ -87,11 +87,11 @@
     <string name="calib_updated">Aktualizovaná kalibrácia</string>
     <string name="calib_compute_groups">Zoradí kalibračné údaje do skupín &#8230;</string>
     <string name="calib_compute_coeffs">Vypočíta kalibračné koeficienty &#8230;</string>
-    <!-- UNUSED string name="calib_read_coeffs">Lettura coefficienti in corso</string -->
+    <!-- UNUSED string name="calib_read_coeffs">Reading calibration coefficients &#8230;</string -->
     <string name="calib_write_coeffs">Zapíše kalibračné koeficienty &#8230;</string>
     <string name="calib_validation">Porovnanie %1$s vs %2$s</string>
-    <!-- UNUSED string name="connect_failed">Comunicazione DistoX fallita</string -->
-    <!-- UNUSED string name="data"> dati</string -->
+    <!-- UNUSED string name="connect_failed">Failed connect</string -->
+    <!-- UNUSED string name="data"> data</string -->
     <string name="using">Pripojené zariadenie %1$s</string>
     <string name="calib_error">Priemerná chyba" %1$f stupňov</string>
     <string name="calib_stddev">Chyba stddev: %1$.4f stupňov</string>
@@ -107,9 +107,9 @@
     <string name="non_linear">Nelineárny</string>
     <string name="algo_minimum">Minimum</string>
    
-    <!-- UNUSED string name="device_algo_failed">Zlyhala automatická detekcia algoritmu\nPoužitý lineárny algoritmus</string -->
+    <!-- UNUSED string name="device_algo_failed">Algorithm auto-determination failed\nUsing linear algorithm</string -->
     <string name="device_address">Adresa %1$s</string>
-    <!-- UNUSED string name="device_busy">Zariadenie je zaneprázdnené</string -->
+    <!-- UNUSED string name="device_busy">Device busy</string -->
     <string name="device_illegal_addr">Neplatná adresa pamäte</string>
     <string name="device_info">Informácie o zariadení</string>
     <string name="device_model_set">Chcete naozaj zmeniť model zariadenia?</string>
@@ -119,7 +119,7 @@
     <string name="device_code">DistoX kód %1$4d</string>
     <string name="device_firmware">Firmware %1$d.%2$d</string>
     <string name="device_hardware">Hardware %1$d.%2$d</string>
-    <!-- UNUSED string name="device_memory">Pamäť  %1$02x.%2$02x</string -->
+    <!-- UNUSED string name="device_memory">Memory  %1$02x.%2$02x</string -->
     <string name="device_status_angle_grad">Jednotky uhlov: gradiány</string>
     <string name="device_status_angle_degree">Jednotky uhlov: stupne</string>
     <string name="device_status_compass_on">Compass/clino: zapnutý</string>
@@ -135,15 +135,15 @@
     <string name="comment">Komentár</string>
     <!-- UNUSED string name="flag">Flag</string -->
     <!-- UNUSED string name="backshot">backshot</string -->
-    <!-- UNUSED string name="duplicate">duplicato</string -->
-    <!-- UNUSED string name="regular">regolare</string -->
-    <!-- UNUSED string name="surface">superficie</string -->
+    <!-- UNUSED string name="duplicate">duplicate</string -->
+    <!-- UNUSED string name="regular">regular</string -->
+    <!-- UNUSED string name="surface">surface</string -->
     <!-- UNUSED string name="extend">Extend</string -->
-    <!-- UNUSED string name="extend_ignore">Niente</string -->
+    <!-- UNUSED string name="extend_ignore">None</string -->
     <string name="extend_left">Doľava</string>
     <string name="extend_right">Doprava</string>
     <string name="extend_vert">Vertikálne</string>
-    <!-- UNUSED string name="external_prompt">Scrivi i dati</string -->
+    <!-- UNUSED string name="external_prompt">Enter measurement</string -->
     <string name="splay_at_to">LRUD na druhom meračskom bode</string>
     <string name="lrud">LRUD</string>
     <string name="strike_dip">Strike %1$.0f Dip %2$.0f</string>
@@ -152,13 +152,13 @@
     <string name="few_iter">Zlyhanie: príliš veľa opakovaní</string>
     <string name="few_groups">Nedostatok dát na zoradenie do skupín</string>
     <string name="found_groups">Nájdených %1$d skupín</string>
-    <!-- UNUSED string name="few_plots">Troppo pochi disegni</string -->
+    <!-- UNUSED string name="few_plots">Not enough sketches</string -->
     <string name="few_calibs">Nedostatočné množstvo kalibrácií</string>
     <string name="getting_info">DistoX informácie &#8230;</string>
 
     <string name="calib_import_title">Import kalibrácie</string>
     <string name="import_title">Import mapovania</string>
-    <!-- UNUSED string name="import_wait">Importazione file&#8230; attendi&#8230;</string -->
+     <!-- UNUSED string name="import_wait">Importing file &#8230; please wait &#8230;</string -->
     <string name="import_already">Mapovanie bolo už importované</string>
     <string name="import_none">Žiadny súbor na import</string>
     <string name="import_failed">Nepodarilo sa importovať súbor</string>
@@ -170,14 +170,14 @@
     <string name="import_calib_no_data">Calib. súbor: Žiadne dáta</string>
     <string name="import_calib_io_error">Calib. súbor: Chyba čítania</string>
     <string name="import_zip_ok">Import zip súboru úspešný</string>
-    <!-- UNUSED string name="import_zip_wait">Importovanie zip súboru vyžaduje čas. Prosím, čakajte &#8230;</string -->
-    <!-- UNUSED string name="sketch_saving">Salvataggio disegno &#8230; attendi &#8230;</string -->
+    <!-- UNUSED string name="import_zip_wait">Imported zip file may take long. Please wait &#8230;</string -->
+    <!-- UNUSED string name="sketch_saving">Saving sketch &#8230; please wait &#8230;</string -->
     <string name="MT_points_none">Chýbajúci bod MobileTopographer</string>
 
     <string name="pleasewait">Prosím čakajte</string>
     <string name="processing">Prebieha proces</string>
 
-    <!-- UNUSED string name="head_tail">Memoria: </string -->
+    <!-- UNUSED string name="head_tail">Memory: </string -->
     <string name="head_tail_failed">Neúspešné čitanie pamäte DistoX</string>
     <string name="head_tail_store_failed">Neúspešné uloženie pamäte DistoX</string>
     <!-- UNUSED string name="pairing_failed">Pairing failed</string -->
@@ -201,19 +201,19 @@
     <string name="longitude_hint">Zemepisná Dĺžka st:mi:se.sss</string>
     <string name="loop_closure_errors">Chyby v uzavretí polygónového ťahu</string>
     <string name="loop_none">Žiadne uzavretie polygónu</string>
-    <!-- UNUSED string name="long_lat">Dol-Širina</string -->
+    <!-- UNUSED string name="long_lat">Long-Lat</string -->
 
     <string name="error_m">Chyba [m]</string>
     <string name="fmt_error_m">Chyba %1$.1f m</string>
     <string name="fmt_h_geoid">Geoid výška %1$.0f m</string>
     <string name="fmt_h_ellipsoid">Ellipsoid výška %1$.0f m</string>
-    <!-- UNUSED string name="depth_error">Varov. Chyba hĺbky</string -->
+    <!-- UNUSED string name="depth_error">Waring. Data depth error</string -->
 
     <string name="error_azimuth_required">Vyžaduje sa azimut</string>
     <string name="error_length_required">Vyžaduje sa dĺžka</string>
     <string name="error_depth_required">Vyžaduje sa hĺbka</string>
     <string name="error_clino_required">Vyžaduje sa sklon</string>
-    <!-- UNUSED string name="error_comment_required">Vyžaduje sa komentár</string -->
+    <!-- UNUSED string name="error_comment_required">Comment required</string -->
     <string name="error_begin_required">Vyžaduje sa počiatočná adresa</string>
     <string name="error_declination_number">Deklinácia musí byť číslo</string>
     <string name="error_end_required">Vyžaduje sa koncová adresa</string>
@@ -226,10 +226,10 @@
     <string name="error_lat_required">Vyžaduje sa zem.šírka</string>
     <string name="error_long_required">Vyžaduje sa zem.dĺžka</string>
     <string name="error_name_required">Vyžaduje sa meno</string>
-     <string name="error_dir_exists">Adresár už existuje</string>
+    <string name="error_dir_exists">Adresár už existuje</string>
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Vyžaduje sa referenčný bod</string>
-    <!-- UNUSED string name="error_station_already_fixed">Caposaldo già con coordinate</string -->
+    <!-- UNUSED string name="error_station_already_fixed">Station already with coordinates</string -->
     <string name="error_station_required">Vyžaduje sa meračský bod</string>
     <string name="error_station_non_existing">Neexistujúci meračský bod</string>
     <string name="error_sensor_required">Vyžaduje sa senzor</string>
@@ -241,23 +241,23 @@
     <string name="group_policy_distance">Metóda: Skupiny podľa vzdialenosti (uhlovej)</string>
     <string name="group_reset">Reset skupín</string>
 
-    <!-- UNUSED string name="scale">scala</string -->
-    <!-- UNUSED string name="reversed">Otočené</string -->
+    <!-- UNUSED string name="scale">scale</string -->
+    <!-- UNUSED string name="reversed">reversed</string -->
     <string name="options">Možnosti</string>
     <string name="outline">Obrys</string>
     <string name="out">Out (Therion)</string>
     <string name="in">In (Therion)</string>
     <!-- UNUSED string name="none">none</string -->
-    <!-- UNUSED string name="barrier_add">Ovira</string -->
+    <!-- UNUSED string name="barrier_add">Hide following shots</string -->
     <string name="hide_from">Skryť Do / Od</string>
-    <!-- UNUSED string name="barrier_del">Vymažte prekážku</string -->
-    <!-- UNUSED string name="hidden_add">Skryje mediálnu čiaru</string -->
-    <!-- UNUSED string name="hidden_del">Zobraziť stredovú čiaru</string -->
+    <!-- UNUSED string name="barrier_del">Show following shots</string -->
+    <!-- UNUSED string name="hidden_add">Hide previous shots</string -->
+    <!-- UNUSED string name="hidden_del">Show previous shots</string -->
      <string name="hidden_show">Zobraziť zámery Pred / Za bodom</string>
-    <!-- UNUSED string name="splays_toggle">Prepnúť zobrazenie/skrytie pomocných zámer</string -->
+    <!-- UNUSED string name="splays_toggle">Toggle splays display</string -->
     <string name="splays_on_off">Pomocné zámery</string>
     <string name="splays">pomocné zámery</string>
-    <!-- UNUSED string name="fmt_listen">POČÚVAJ | %1$s</string -->
+    <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Zemepisná šírka %1$s</string>
     <string name="fmt_longitude">Zemepisná dĺžka %1$s</string>
@@ -296,10 +296,10 @@
     <string name="no_profile_overview">Celkový pohľad pre Priemet je nepodporovaný</string>
     <string name="no_proj4">Proj4 nie je nainštalovaný</string>
     <string name="no_sensors">Mapovanie nemá žiadne meranie</string>
-    <!-- UNUSED string name="no_shots">Rilievo senza dati</string -->
+    <!-- UNUSED string name="no_shots">Survey has no shots.\nUse Download button to get some</string -->
     <string name="no_survey">Nie je zvolené mapovanie</string>
     <string name="no_thmanager">ThManager app nie je nainštalovaná</string>
-    <!-- UNUSED string name="no_db_viewer">DB_viewer app sa nenašla</string -->
+    <!-- UNUSED string name="no_db_viewer">DB_viewer app not found</string -->
     <string name="no_undelete">Žiadna položka na Obnovenie </string>
     <string name="format_measure_plan">D %1$.2f %2$.2f X %3$.2f Y %4$.2f A. %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f X %3$.2f Y %4$.2f C. %5$.1f"</string>
@@ -307,18 +307,18 @@
 
     <string name="menu_3d">3D</string>
     <string name="menu_about">O PROGRAME</string>
-   <string name="menu_area">OBLASŤ</string>
-    <!-- UNUSED string name="menu_attach">PRIPOJIŤ</string -->
+    <string name="menu_area">OBLASŤ</string>
+    <!-- UNUSED string name="menu_attach">CONNECT</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
     <string name="menu_backups">VYČISTIŤ ZÁLOHY</string>
     <string name="menu_calib_check">KALIB. KONTROLA</string>
     <string name="menu_close">ZATVORIŤ</string>
-    <!-- UNUSED string name="menu_clear">VYČISTIŤ</string -->
+    <!-- UNUSED string name="menu_clear">CLEAR</string -->
     <string name="menu_color">VYČISTIŤ FARBU</string>
     <string name="menu_delete">VYMAZAŤ</string>
     <string name="menu_detach">ODPOJIŤ</string>
-    <!-- UNUSED string name="menu_display">ZOBRAZIŤ</string -->
+    <!-- UNUSED string name="menu_display">DISPLAY</string -->
     <string name="menu_show_deleted">ZOBRAZIŤ VYMAZANÉ</string>
     <string name="menu_hide_deleted">SKRYŤ VYMAZANÉ</string>
     <string name="menu_distox">DISTOX</string>
@@ -330,7 +330,7 @@
     <string name="menu_rename">PREMENOVAŤ</string>
     <string name="menu_switch">PREPNÚŤ/ZATVORIŤ</string>
     <string name="menu_help">POMOC</string>
-    <!-- UNUSED string name="menu_join_survey">SPOLOČNÝ PRIESKUM</string --> <!-- rilievo cooperativo -->
+    <!-- UNUSED string name="menu_join_survey">CO-SURVEY</string -->
     <string name="menu_logs">ZÁZNAM PROGRAMU</string>
     <string name="menu_manual_calibration">KALIBRÁCIA</string>
     <string name="menu_options">NASTAVENIA</string>
@@ -340,11 +340,11 @@
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SENZOR</string>
     <string name="menu_scan">SKENOVAŤ</string>
-    <!-- UNUSED string name="menu_station">CAPISALDI</string -->
+    <!-- UNUSED string name="menu_station">STATIONS</string -->
     <string name="menu_stats">ŠTATISTIKA</string>
     <string name="menu_survey">JASKYŇA</string>
-    <!-- UNUSED string name="menu_sync">SYNCHONIZOVAŤ</string -->
-    <!-- UNUSED string name="menu_tdr2th2">RISEB TH2</string -->
+    <!-- UNUSED string name="menu_sync">SYNC</string -->
+    <!-- UNUSED string name="menu_tdr2th2">TH2 SKETCHES</string -->
     <!-- UPDATES string name="menu_updates">CHECK UPDATES</string -->	
     <string name="menu_validate">POROVNAŤ</string>
     <string name="menu_zoom_fit">ORIENTÁCIA</string>
@@ -381,26 +381,26 @@
     <string name="popup_cont_both">Obidva body</string>
     <string name="popup_cont_continue">Pokračovanie</string>
     
-    <!-- UNUSED string name="connected_none">Nepripojené</string -->
-    <!-- UNUSED string name="connected_already">Už pripojené</string -->
+    <!-- UNUSED string name="connected_none">Not connected</string -->
+    <!-- UNUSED string name="connected_already">Already connected</string -->
 
     <string name="not_available">Bluetooth nie je k dispozícii</string>
     <string name="not_enabled">Bluetooth nie je povolený</string>
 
-    <!-- UNUSED string name="not_implemented">Non implementato</string -->
+    <!-- UNUSED string name="not_implemented">Not implemented yet</string -->
     <string name="null_bitmap">Nie je možné vytvoriť obraz[OOM error]</string>
     <string name="photo">foto</string>
     <string name="photo_camera">Kamera App</string>
     <string name="photo_comment_prompt">Napíšte komentár</string>
     <string name="photo_azimuth_clino">Azimuth: %1$.1f Uhol %2$.1f</string>
-    <!-- UNUSED string name="photo_name">caposaldo/nome</string -->
-    <!-- UNUSED string name="photo_photo">foto</string -->
-    <!-- UNUSED string name="photo_sensor">sensore</string -->
-    <!-- UNUSED string name="photo_external">misurazione</string -->
-    <!-- UNUSED string name="photo_sensor_prompt">Seleziona foto o sensore</string -->
-    <!-- UNUSED string name="photo_shot">aggiungi battuta</string -->
-    <!-- UNUSED string name="photo_survey">dividi rilievo</string -->
-    <!-- UNUSED string name="picture_no_station">Caposaldo o nome mancante</string -->
+    <!-- UNUSED string name="photo_name">station/name</string -->
+    <!-- UNUSED string name="photo_photo">photo</string -->
+    <!-- UNUSED string name="photo_sensor">sensor</string -->
+    <!-- UNUSED string name="photo_external">measurement</string -->
+    <!-- UNUSED string name="photo_sensor_prompt">Select photo or sensor</string -->
+    <!-- UNUSED string name="photo_shot">add shot</string -->
+    <!-- UNUSED string name="photo_survey">split survey</string -->
+    <!-- UNUSED string name="picture_no_station">Station name required</string -->
     <string name="plot_delete">Vymazať nákres?</string>
     <string name="item_delete">Odstrániť položku %1$s ?</string>
     <string name="splay_delete">Odstrániť pomocnú zámeru %1$s ?</string>
@@ -409,11 +409,11 @@
     <!-- UNUSED string name="plot_name">Sketch name</string -->
     <string name="plot_new">Nový nákres</string>
     <string name="plot_not_found">Nákres sa nenašiel</string>
-    <!-- UNUSED string name="plot_null_name">Nome del disegno mancante</string -->
-    <!-- UNUSED string name="plot_null_start">Caposaldo di riferimento mancante</string -->
-    <!-- UNUSED string name="plot_recover">Ricaricare il disegno dal backup?</string -->
+    <!-- UNUSED string name="plot_null_name">Missing sketch name</string -->
+    <!-- UNUSED string name="plot_null_start">Missing base station</string -->
+    <!-- UNUSED string name="plot_recover">Reload sketch from backup?</string -->
     <string name="plot_start">Počiatočný bod merania</string>
-    <!-- UNUSED string name="plot_view">Caposaldo puntato</string -->
+    <!-- UNUSED string name="plot_view">Viewed station</string -->
     <string name="read_fail_with_code">Načítanie zlyhalo: chybový kód </string>
     <string name="read_failed">Neúspešné načítanie údajov DistoX</string>
     <string name="swap_hotbit_ok">Prehodené dáta hot bit</string>
@@ -423,40 +423,40 @@
     <string name="saved_file_2">Súbor uložený %1$s Mierka %2$.2f</string>
     <string name="saving_">Ukladanie </string>
     <string name="saving_file_failed">Neúspešné uloženie súboru</string>
-    <!-- UNUSED string name="scrap_name">nome del disegno</string -->
+    <!-- UNUSED string name="scrap_name">sketch name</string -->
     <string name="splay">Pomocné zámery</string>
     <string name="too_many_leg_intersection">Čiara priečneho rezu pretína veľa hlavných zámer</string>
-    <!-- UNUSED string name="too_many_legs_xsection">Príliš veľa hlavných zámer pre priečny rez</string -->
-    <!-- UNUSED string name="converted_tdr2th2">Pretvorjena skice iz binarnega formata v th2</string -->
-    <!-- UNUSED string name="convert_tdr2th2">Pretvori  skico iz binarnega formata v th2</string -->
+    <!-- UNUSED string name="too_many_legs_xsection">Too many legs for X-section</string -->
+    <!-- UNUSED string name="converted_tdr2th2">Converted sketches binary files to th2</string -->
+    <!-- UNUSED string name="convert_tdr2th2">Overwrite th2 sketch files ?</string -->
     <string name="section_area">Sekcia oblasti: %1$.1f</string>
     <string name="section_name">Komentár k Priečnemu rezu</string>
     <string name="scrap_outline">Obrysy</string>
 
-    <!-- UNUSED string name="sensor">sensore</string -->
+    <!-- UNUSED string name="sensor">sensor</string -->
     <string name="sensor_gravity">Gravitácia</string>
-    <!-- UNUSED string name="sensor_humidity">umidità</string -->
+    <!-- UNUSED string name="sensor_humidity">humidity</string -->
     <string name="sensor_light">Jas</string>
     <string name="sensor_magnetic_field">Magnetické pole</string>
-    <!-- UNUSED string name="sensor_orientation">orientazione</string -->
+    <!-- UNUSED string name="sensor_orientation">orientation</string -->
     <string name="sensor_pressure">Tlak</string>
     <string name="sensor_temperature">Teplota</string>
     <string name="sensor_extern">Externý</string>
     <string name="sensor_type">typ</string>
     <string name="sensor_value">Hodnota</string>
     <string name="sensor_comment">Komentár</string>
-    <!-- UNUSED string name="insufficient_data">Nedostatok dát zo senzorov</string -->
+    <!-- UNUSED string name="insufficient_data">insufficient sensor data</string -->
 
-    <!-- UNUSED string name="shot_clino">zamerať sklon</string -->
-    <!-- UNUSED string name="shot_compass">zamerať kompasom</string -->
+    <!-- UNUSED string name="shot_clino">clino</string -->
+    <!-- UNUSED string name="shot_compass">compass</string -->
     <string name="shot_delete">Odstrániť meranie ?</string>
     <string name="shots_delete">Odstrániť merania ?</string>
     <string name="shot_check">Označiť meranie, ako kontrolné meranie ?</string>
     <string name="shot_from">Z</string>
     <string name="shot_info">Vložte údaje o zámere</string>
-    <!-- UNUSED string name="shot_length">longueur</string -->
+    <!-- UNUSED string name="shot_length">length</string -->
     <string name="shot_note">Poznámka</string>
-    <!-- UNUSED string name="shot_not_found">Meranie sa nenašlo</string -->
+    <!-- UNUSED string name="shot_not_found">Found no shot</string -->
     <string name="shot_reverse">Vymeniť body</string>
     <string name="shot_to">Na</string>
 
@@ -464,11 +464,11 @@
     <string name="station_ask">Vložiť meracie body do nákresu?</string>
     <string name="station_del">Odstrániť meracie body z nákresu?</string>
     <string name="station_set">Pokračovať v meraní z tohto bodu?</string>
-    <!-- UNUSED string name="station_base">caposaldo di riferimento</string -->
-    <!-- UNUSED string name="station_next">prossimo caposaldo</string -->
-    <!-- UNUSED string name="station_viewed">caposaldo puntato</string -->
+    <!-- UNUSED string name="station_base">reference station</string -->
+    <!-- UNUSED string name="station_next">next station</string -->
+    <!-- UNUSED string name="station_viewed">viewed station</string -->
     <string name="survey_exists">Mapovanie už existuje</string>
-    <!-- UNUSED string name="survey_date">aaaa.mm.gg</string -->
+    <!-- UNUSED string name="survey_date">yyyy.mm.dd</string -->
     <string name="survey_delete">Vymazať mapovanie ?</string>
     <string name="survey_split">Rozdeliť mapovanie ?</string>
     <string name="survey_not_attached">VAROVANIE: Nepripojené merania</string>
@@ -489,7 +489,7 @@
     <string name="description">Popis</string>
     <string name="name">Názov</string>
     <string name="team">Merací tím</string>
-    <!-- UNUSED string name="toggle_device">Attiva modo calibrazione</string -->
+    <!-- UNUSED string name="toggle_device">Toggle device calibration mode</string -->
     <string name="toggle_failed">Zlyhalo prepnutie režimu DistaX kalibrácia/meranie</string>
     <string name="toggle_ok">DistoX prepnuté do režimu kalibrácie alebo merania</string>
     <string name="undelete_text">Vyberte položku, ktorá sa má obnoviť</string>
@@ -499,7 +499,7 @@
     <string name="undelete_plot">Nákresy</string>
     <string name="delete_whole_leg">Odstráňte celú hlavnú zámeru</string>
     <string name="visible_border">Viditeľná hranica Oblasti (Therion)</string>
-    <!-- UNUSED string name="vthreshold">soglia vert.</string -->
+    <!-- UNUSED string name="vthreshold">vert. threshold</string -->
     <string name="wait_scan">Skenovanie: čakajte &#8230;</string>
     <string name="write_failed">Zapísanie do DistaX bolo neuspešné</string>
     <string name="write_ok">Kalibrácia zapísaná do DistaX</string>
@@ -547,9 +547,9 @@
     <string name="extended">Rozvinutý rez</string>
     <string name="profile">Priemet</string>
     <string name="extended_profile">Zaškrtnuté=Rozvinutý rez Nezaškrtnuté=Priemet</string>
-    <!-- UNUSED string name="v_section">SEZIONE VERT.</string -->
+    <!-- UNUSED string name="v_section">V-SECTION</string -->
     <string name="h_section">HORIZONTÁLNY</string>
-    <!-- UNUSED string name="landscape">Viditeľná hranica</string -->
+    <!-- UNUSED string name="landscape">landscape</string -->
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Čítanie pamäte DistoX zlyhalo</string>
@@ -557,13 +557,13 @@
     <string name="distox_err_headtail_eof">Chyba EOF pamäte DistoX</string>
     <string name="distox_err_connected">DistoX je už pripojené</string>
 
-    <!-- UNUSED string name="ask_close">Uscire da TopoDroid?</string -->
-    <!-- UNUSED string name="ask_reset">Resetovať pamäť DistoX?</string -->
-    <!-- UNUSED string name="ask_close_survey">Chiudere rilievo?</string -->
+    <!-- UNUSED string name="ask_close">Close TopoDroid?</string -->
+    <!-- UNUSED string name="ask_reset">Reset DistoX memory?</string -->
+    <!-- UNUSED string name="ask_close_survey">Close survey?</string -->
     <string name="ask_gps_service">Nastaviť službu GPS?</string>
     <string name="ask_backups_clear">Vymazať zálohy Nákresov?</string>
 
-    <!-- UNUSED string name="button_add"       >Pridať </string -->
+    <!-- UNUSED string name="button_add"       >Add       </string -->
     <string name="button_back"      >Späť </string>
     <string name="button_cancel"    >Zrušiť   </string>
     <string name="button_change"    >Zmena   </string>
@@ -580,10 +580,10 @@
     <string name="button_eval_cal"  >Vyhodnotiť kalibr.</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
-    <!-- UNUSED string name="button_manual"    >Manuale   </string -->
-    <!-- UNUSED string name="button_measure"   >Misura    </string -->
-    <!-- UNUSED string name="button_photo"   >Fotografia</string -->
-    <!-- UNUSED string name="button_sensor"  >Misure</string -->
+    <!-- UNUSED string name="button_manual"    >Manual    </string -->
+    <!-- UNUSED string name="button_measure"   >Measure   </string -->
+    <!-- UNUSED string name="button_photo"   >Photo</string -->
+    <!-- UNUSED string name="button_sensor"  >Sensors</string -->
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Nákres</string>
@@ -597,8 +597,8 @@
     <string name="button_on"        >Zapnúť</string>
     <string name="button_open"      >Uložiť a Otvoriť     </string>
     <string name="button_read"      >Čítať    </string>
-    <!-- UNUSED string name="button_redo"      >Ripeti azione</string -->
-    <!-- UNUSED string name="button_regroup"   >Raggruppare   </string -->
+    <!-- UNUSED string name="button_redo"      >Redo      </string -->
+    <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Kopírovať z DistaX   </string>
     <string name="button_rename"    >Premenovať    </string>
     <string name="button_renumber"  >Prečíslovať</string>
@@ -609,7 +609,7 @@
     <string name="button_right"     >Vpravo</string>
     <string name="button_clear"     >Vyčistiť  </string>
     <string name="button_save"      >Uložiť     </string>
-    <!-- UNUSED string name="button_select"    >Seleziona </string -->
+    <!-- UNUSED string name="button_select"    >Select    </string -->
     <string name="button_search"    >Vyhľadať     </string>
     <string name="button_merge"     >Zlúčiť    </string>
     <string name="button_split"     >Rozdeliť   </string>
@@ -620,9 +620,9 @@
     <!-- UNUSED string name="button_stop"      >Stop</string -->
     <string name="button_upload"    >Nahrať    </string>
     <string name="button_view"      >Náhľad v mape     </string>
-    <!-- UNUSED string name="button_zoomfit"   >Adatta zoom</string -->
-    <!-- UNUSED string name="button_landscape" >Panorama  </string -->
-    <!-- UNUSED string name="button_portrait"  >Ritratto  </string -->
+    <!-- UNUSED string name="button_zoomfit"   >Zoom fit  </string -->
+    <!-- UNUSED string name="button_landscape" >Landscape </string --> 
+    <!-- UNUSED string name="button_portrait"  >Portrait  </string -->
     <string name="button_splays">Pomocné zámery</string>
     
     
@@ -639,12 +639,12 @@
     <string name="mode_outline">Obrys</string>
     <string name="mode_scale_ref">Grafická mierka</string>
 
-    <!-- UNUSED string name="remote_title">DistoX Remote Control</string -->
+    <!-- UNUSED string name="remote_title">Device Remote Control</string -->
     <string name="remote_on">Laser zapnutý</string>
     <string name="remote_off">Laser vypnutý</string>
-    <!-- UNUSED string name="remote_measure">Misura</string -->
+    <!-- UNUSED string name="remote_measure">Measure</string -->
     <string name="remote_reset">Reset BT</string>
-    <!-- UNUSED string name="download">Scarica dati</string -->
+    <!-- UNUSED string name="download">Download</string -->
     
     <string name="popup_do_splay">Pomocná zámera</string>
     <string name="popup_do_leg">Hlavné zámery</string>
@@ -665,9 +665,9 @@
 
     <string name="symbol_reload">Symboly na kreslenie</string>
 
-    <!-- UNUSED string name="length">Dĺžka [m]</string -->
-    <!-- UNUSED string name="azimuth">Azimut [deg]</string -->
-    <!-- UNUSED string name="clino">Sklon [deg]</string -->
+    <!-- UNUSED string name="length">Length [m]</string -->
+    <!-- UNUSED string name="azimuth">Azimuth [deg]</string -->
+    <!-- UNUSED string name="clino">Clino [deg]</string -->
 
     <string name="orientation">Orientácia</string>
     <string name="contents">Obsah</string>
@@ -699,7 +699,7 @@
     <string name="man_website">* Website</string>
 
     <string name="help_help">Táto pomoc</string>
-    <!-- UNUSED string name="help_manual">Manuale online</string -->
+    <!-- UNUSED string name="help_manual">User manual</string -->
     <string name="help_measure">Merať vzdialenosti</string>
     <string name="help_measure_type">Metódy merania: jednotlivo / viacnásobne</string>
     <string name="help_measure_undo">Späť</string>
@@ -710,7 +710,7 @@
     <string name="help_coeff">Ukázať Kalibračné koeficienty vybranej kalibrácie</string>
     <string name="help_color">Vymazať užívateľsky definované farby pomocných zámer</string>
     <string name="help_continue">Vybrať možnosti nadpájania Čiar</string>
-    <!-- UNUSED string name="help_contour">Editovať obrysy</string -->
+    <!-- UNUSED string name="help_contour">Contour editing</string -->
     <string name="help_current_station">Uložené meračské body</string>
     <string name="help_azimuth">Smerová orientácia</string>
     <string name="help_refresh">Obnoviť zobrazenie</string>
@@ -719,13 +719,13 @@
     <string name="help_import">Importovať zip súbor alebo meračský súbor</string>
     <string name="help_symbol">Pridať Symboly do Palety</string>
     <string name="help_therion">App Therion manažér</string>
-    <!-- UNUSED string name="help_database">App database (SQliteViewer)</string -->
+    <!-- UNUSED string name="help_database">Database viewer app (SQliteViewer)</string -->
     <string name="help_prefs">Nastavenia</string>
     <string name="help_log">Nastaviť možnosti záznamu log-u</string>
-    <!-- UNUSED string name="help_join_survey">Spoločné mapovanie viacerými DistoX</string -->
+    <!-- UNUSED string name="help_join_survey">Joint surveying</string -->
     <string name="help_info_topodroid">Informácie o TopoDroide</string>
     <string name="help_download">Stiahnuť kalibračné dáta z DistaX</string>
-    <!-- UNUSED string name="help_splay">Assegna capisaldi agli splay automaticamente</string -->
+    <!-- UNUSED string name="help_splay">Assign stations to splays automatically</string -->
     <string name="help_display">Výber možností zobrazenia</string>
     <string name="help_display_calib">Zobraziť / skryť vymazané zámery</string>
     <string name="help_validate">Porovnať viaceré kalibrácie</string>
@@ -742,7 +742,7 @@
     <string name="help_photo">Zobraziť nasnímané fotografie</string>
     <string name="help_sensor">Zobraziť merania z interných senzorov</string>
     <string name="help_3d">3D zobrazenie (Cave3D)</string>
-    <!-- UNUSED string name="help_move">Režim presunu/zoom</string -->
+    <!-- UNUSED string name="help_move">Move/zoom mode</string -->
     <string name="help_draw">Režim kreslenia</string>
     <string name="help_edit">Režim úprav</string>
     <string name="help_refs">Vybrať možnosti zobrazenia</string>
@@ -752,15 +752,15 @@
     <string name="help_search">Vyhľadať body</string>
     <string name="help_stats">Štatistika mapovania</string>
     <string name="help_save_plot">Export nákresu</string>
-    <!-- UNUSED string name="help_tdr2th2">Conversione formato disegno da binario a th2</string -->
+    <!-- UNUSED string name="help_tdr2th2">Convert sketch binary files to th2</string -->
     <string name="help_toggle_plot">Prepínať medzi Pôdorysom a Rozvinutým rezom/Priemetom</string>
-    <!-- UNUSED string name="help_trash">ELimina disegno</string -->
+    <!-- UNUSED string name="help_trash">Delete sketch</string -->
     <string name="help_undo">Odstrániť poslednú akciu</string>
     <string name="help_redo">Zopakovať poslednú akciu</string>
     <string name="help_symbol_plot">Vybrať Symboly na kreslenie</string>
     <string name="help_delete_item">Odstrániť prvok nákresu</string>
     <string name="help_range">Presunúť časť Čiary</string>
-    <!-- UNUSED string name="help_clear">Pulisci selezione</string -->
+     <!-- UNUSED string name="help_clear">Clear selection</string -->
     <string name="help_eraser">Režim mazania</string>
     <string name="help_select_mode">Položky na výber - indikácia</string>
     <string name="help_erase_mode">Položky na výber - mazanie</string>
@@ -779,7 +779,7 @@
 -->
     <string name="help_manual_calibration">Manuálna kalibrácia nástrojov</string>
     <string name="help_note_plot">Menu podrobných možností</string>
-    <!-- UNUSED string name="help_save">Zmeniť modifikáciu / kalibráciu</string -->
+    <!-- UNUSED string name="help_save">Save changes to survey info</string -->
     <string name="help_save_calib">Uložiť  zmeny do kalibrácie v Topodroide</string>
     <string name="help_export_survey">Export mapovania</string>
     <string name="help_loc">Lokalizácia GPS</string>
@@ -814,14 +814,14 @@
     <string name="title_coverage">Distribúcia kalibračných údajov</string>
     <string name="title_coeff">Kalibračné koeficienty</string>
     <string name="title_color_picker">Vyber farbu</string>
-    <!-- UNUSED string name="title_contour">Obrysy</string -->
-    <!-- UNUSED string name="title_coord">Inserisci le coordinate del punto:</string -->
+    <!-- UNUSED string name="title_contour">Contour</string -->
+    <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Uložené meračské body</string>
     <string name="title_station_search">Vlož meračský bod</string>
     <string name="title_device">DistoX</string>
     <string name="title_device_select">Zvoľte DistoX</string>
     <string name="title_discover">Vyhladávanie DistaX &#8230; prosím čakajte</string>
-    <!-- UNUSED string name="title_draw">Kreslenie</string -->
+    <!-- UNUSED string name="title_draw">Draw</string -->
     <string name="title_draw_area">OBLASŤ %1$s</string>
     <string name="title_draw_line">ČIARA %1$s</string>
     <string name="title_draw_line_no_stations">ČIARA %1$s: bez staničení</string>
@@ -842,14 +842,14 @@
     <string name="title_photo">Rozšírené možnosti</string>
     <string name="title_photo_comment">Fotografia</string>
     <string name="title_plot_save">Exportovať nákres </string>
-    <!-- UNUSED string name="title_plot_merge">Zlúčiť nákresy</string -->
+    <!-- UNUSED string name="title_plot_merge">Merge sketch in</string -->
     <string name="title_plot_reload">Znovu načítať nákres</string>
     <string name="title_profile_flip">Otočiť zrkadlovo nákres profilu?</string>
     <string name="title_projection">Azimut Priemetu %1$d</string>
     <string name="title_refs">Výber možností zobrazenia</string>
     <string name="title_scraps">Nákresy</string>
     <string name="title_scraps_outline">Nákres obrysu</string>
-    <!-- UNUSED string name="title_select">Vybrať</string -->
+    <!-- UNUSED string name="title_select">Select</string -->
 
     <string name="title_settings_main">TopoDroid Hlavné nastavenia</string>
     <string name="title_settings_export">TopoDroid Import/Export nastavenia</string>
@@ -887,7 +887,7 @@
     <string name="title_split">Rozdelenie nákresov</string>
 
     <string name="title_stats">Štatistika</string>
-    <!-- UNUSED string name="title_step">Krok</string -->
+    <!-- UNUSED string name="title_step">Step</string -->
     <string name="title_survey">Jaskyňa</string>
     <string name="title_survey_new">Nové mapovanie</string>
     <string name="title_survey_export">Export mapovania</string>
@@ -895,7 +895,7 @@
     <string name="title_plot_rename">Premenovať nákres</string>
     <string name="title_plot_zoomfit">Orientácia</string>
     <string name="title_calib_export">Exportovať kalibráciu</string>
-    <!-- OK ENGLISH string name="title_zoom">Zoom</string -->
+    <!-- UNUSED string name="title_zoom">Zoom</string -->
 
   <string name="pref_cat_survey">NASTAVENIA MAPOVANIA</string>
   <string name="pref_cat_drawing">NASTAVENIA KRESLENIA</string>
@@ -923,15 +923,15 @@
   <string name="pref_calib_shot_download_title">Stiahnutie dát</string>
   <string name="pref_calib_shot_download_summary">Pri zaškrtnutí sťahuje kalibračné dáta pri kalibrácii DistoX priebežne</string>
   <!-- UNUSED string name="pref_bootloader_title">Bootloader</string -->
-  <!-- UNUSED string name="pref_bootloader_summary">Bootloader abilitiato</string -->
+  <!-- UNUSED string name="pref_bootloader_summary">Enable bootloader</string -->
   <string name="pref_mkeyboard_title">Užívateľská Klávesnica</string>
   <string name="pref_mkeyboard_summary">Zaškrtnuté - povolí užívateľskú klávesnicu v niektorých situáciách</string>
   <string name="pref_no_cursor_title">Kurzory na klávesnici</string>
   <string name="pref_no_cursor_summary">Zaškrtnuté skryje kurzor pri písaní pri používaní základnej klávesnice</string>
   <string name="pref_local_help_title">Prekladateľská príručka</string>
   <string name="pref_local_help_summary">Výber jazyka prekladateľskej príručky</string>
-  <!-- UNUSED string name="pref_cosurvey_title">Spoločný priekum</string -->
-  <!-- UNUSED string name="pref_cosurvey_summary">Aktivovať / deaktivovať funkciu Spoločného prieskumu</string -->
+  <!-- UNUSED string name="pref_cosurvey_title">Co-surveying service</string -->
+  <!-- UNUSED string name="pref_cosurvey_summary">Enable co-surveying service</string -->
   <string name="pref_import_datamode_title">Datamód Importu</string>
   <string name="pref_import_datamode_summary">Výber Datamódu pre import meraní</string>	
   <string name="pref_export_shots_title">Formát exportu - dát</string>
@@ -963,8 +963,8 @@
   <string name="pref_station_prefix_summary">Export predčíslia bodov Compass</string>
   <string name="pref_compass_splays_title">Pomocné zámery</string>
   <string name="pref_compass_splays_summary">Export pomocných zámer do programu Compass</string>
-  <!-- UNUSED string name="pref_trobot_names_title">Názvy staníc TopoRobot</string -->
-  <!-- UNUSED string name="pref_trobot_names_summary">Názvy staníc sú v štýle TopoRobot</string -->
+  <!-- UNUSED string name="pref_trobot_names_title">TopoRobot station names</string -->
+  <!-- UNUSED string name="pref_trobot_names_summary">Station names are in TopoRobot style</string -->
   <string name="pref_ortho_lrud_title">LRUD uhol pomocnej zámery</string>
   <string name="pref_ortho_lrud_summary">Minimálny uhol medzi pomocnou/hlavnou zámerou na export LRUD merania</string>
   <string name="pref_lrud_vertical_title">UD uhol pomocnej zámery</string> 
@@ -981,8 +981,8 @@
   <string name="pref_svg_grid_summary">Pridanie mriežky do exportu SVG</string>
   <string name="pref_svg_splays_title">SVG pomocné zámery</string>
   <string name="pref_svg_splays_summary">Zahrnutie pomocných zámer do exportu SVG</string>	
-  <!-- UNUSED string name="pref_svg_in_html_title">SVG v \'HTML</string -->
-  <!-- UNUSED string name="pref_svg_in_html_summary">Zadajte export SVG v HTML</string -->
+  <!-- UNUSED string name="pref_svg_in_html_title">SVG in HTML</string -->
+  <!-- UNUSED string name="pref_svg_in_html_summary">Embed SVG export in HTML</string -->
   <string name="pref_svg_pointstroke_title">SVG, šírka bodov</string>
   <string name="pref_svg_pointstroke_summary">SVG: šírka bodov</string>
   <string name="pref_svg_labelstroke_title">SVG, šírka textu</string>
@@ -1004,11 +1004,11 @@
 
   <string name="pref_sock_type_title">Zabezpečenie</string>
   <string name="pref_sock_type_summary">Výber typu zabezpečenia pripojenia DistoX</string>
-  <!-- UNUSED string name="pref_device_type_title">Tipo DistoX</string -->
-  <!-- UNUSED string name="pref_device_type_summary">Modello DistoX</string -->
-  <!-- UNUSED string name="pref_comm_retry_title">Tentativi connesione</string -->
-  <!-- UNUSED string name="pref_comm_retry_summary">Numero tentativi di connessione</string -->
-  <!-- UNUSED string name="pref_comm_retry_dialogtitle">Connection retries number</string -->	
+  <!-- UNUSED string name="pref_device_type_title">Disto type</string -->
+  <!-- UNUSED string name="pref_device_type_summary">Model of the DistoX</string -->
+  <!-- UNUSED string name="pref_comm_retry_title">Connection retry</string -->
+  <!-- UNUSED string name="pref_comm_retry_summary">Connection retries number</string -->
+  <!-- UNUSED string name="pref_comm_retry_dialogtitle">Connection retries number</string -->
   <string name="pref_wait_laser_title">Pauza lasera [ms]</string>
   <string name="pref_wait_laser_summary">Doba za ktorú zasvieti laser pri ovládaní cez Bluetooth [ms]</string>
   <string name="pref_wait_shot_title">Pauza zámery [ms]</string>
@@ -1032,7 +1032,7 @@
   <string name="pref_crs_title">C R S </string>
   <string name="pref_crs_summary">Názov CRS ako v Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
-  <!-- UNUSED string name="pref_gps_averaging_summary">Se usare GPSAveraging</string -->
+  <!-- UNUSED string name="pref_gps_averaging_summary">Use GPSAveraging</string -->
     
   <string name="pref_plot_screen_title">NASTAVENIA KRESLENIA</string>
   <string name="pref_tool_line_title">NASTAVENIA ČIAR</string>
@@ -1042,7 +1042,7 @@
   <string name="pref_shot_data_title">NASTAVENIA ZÁMERY</string>
   <string name="pref_shot_units_title">NASTAVENIA JEDNOTIEK</string>
   <string name="pref_cwd_title">Pracovný adresár</string>
-  <!-- UNUSED string name="pref_cwd_summary">Directory di lavoro di TopoDroid</string -->
+  <!-- UNUSED string name="pref_cwd_summary">TopoDroid work directory</string -->
   <string name="pref_pt_color_map_title">Farebná mapa PocketTopo</string>
   <string name="pref_pt_color_map_summary">Import podľa farieb z PocketTopo</string>
   <string name="pref_text_size_title">Veľkosť textu</string>
@@ -1096,8 +1096,8 @@
   <string name="pref_backshot_summary">DistoX v režime spätného merania - merajú sa VŽDY VŠETKY zámery z koncového bodu na počiatočný! Číslovanie bodov je NAOPAK!</string>
   <string name="pref_prev_next_title">Predchádzajúci/Nasledujúci</string>
   <string name="pref_prev_next_summary">Zobrazenie tlačítka predchádzajúci/nasledujúci v MENU bodu merania</string>
-  <!-- UNUSED string name="pref_mag_anomaly_title">Lokálna kompenzácia magnetickej anomálie</string -->
-  <!-- UNUSED string name="pref_mag_anomaly_summary">Kompenzácia lokálnej magnetickej anomálie - vyžaduje vykonávať merania zo spätnými zámerami - nie Režim spätného merania DistoX</string -->
+  <!-- UNUSED string name="pref_mag_anomaly_title">Magnetic Anomaly</string -->
+  <!-- UNUSED string name="pref_mag_anomaly_summary">Compensate Local Magnetic Anomaly</string -->
   <string name="pref_azimuth_manual_title">"Fixná Smerová orientácia</string>
   <string name="pref_azimuth_manual_summary">Zaškrtnuté = Fixná / Nezašktnuté = Nastavitelná Smerová orientácia</string>
 
@@ -1109,8 +1109,8 @@
   <string name="pref_vthr_title">Hodnota hlavnej zámery</string>
   <string name="pref_vthr_summary">Prah sklonu hlavnej zámery medzi LRUD / WENS - Therion "vthreshold"</string>
 
-  <!-- UNUSED string name="pref_plan_vthr_title">Skrytie pomoc.zámery-pôdorys</string -->
-  <!-- UNUSED string name="pref_plan_vthr_message">Skryje pomocné zámery s vyšším sklonom ako daná hodnota v pôdoryse</string -->
+  <!-- UNUSED string name="pref_plan_vthr_title">Splay plan-view threshold</string -->
+  <!-- UNUSED string name="pref_plan_vthr_message">Hide splays with high inclination in the plan-view</string -->
   <string name="pref_init_station_title">Počiatočný meračský bod</string>
   <string name="pref_init_station_summary">Predvolené číslo počiatočného meračského bodu</string>
   <string name="pref_station_names_title">Názvy meračských bodov</string>
@@ -1124,8 +1124,8 @@
   <string name="pref_bitmap_bgcolor_summary">Nastavenie farby pozadia pre export nákresov vo formáte PNG</string>
   <string name="pref_acad_version_title"> Verzia AutoCADu</string>
   <string name="pref_acad_version_summary">Vybratie verzie AutoCADu</string>
-  <!-- UNUSED string name="pref_dxf_scale_title">Fakror mierky nákresu DXF</string -->
-  <!-- UNUSED string name="pref_dxf_scale_summary">Faktor mierky DXF</string -->
+  <!-- UNUSED string name="pref_dxf_scale_title">DXF sketch scale</string -->
+  <!-- UNUSED string name="pref_dxf_scale_summary">DXF sketch scale factor</string -->
   <string name="pref_dxf_blocks_title">Koncové body pomocných zámer</string>
   <string name="pref_dxf_blocks_summary">Zahrnie Koncové body pomocných zámer pre export DXF</string>
   <string name="pref_thumbnail_title">Veľkosť Náhľadov</string>
@@ -1192,8 +1192,8 @@
   <string name="pref_plot_split_summary">Povolí spojenie alebo rozdelenie nákresu</string>
   <string name="pref_fixed_thickness_title">Šírka meračskej zámery</string>
   <string name="pref_fixed_thickness_summary">Hrúbka meračskej zámery v nákrese</string>
-  <!-- UNUSED string name="pref_device_title">Zariadenie</string -->
-  <!-- UNUSED string name="pref_device_summary">Adresa BT DistoX</string -->
+  <!-- UNUSED string name="pref_device_title">Device</string -->
+  <!-- UNUSED string name="pref_device_summary">DistoX address name</string -->
   <string name="pref_checkBT_title">Bluetooth</string>
   <string name="pref_checkBT_summary">Výber režimu Bluetooth</string>
   <string name="pref_checkAttached_title">Kontrola meračských bodov</string>
@@ -1222,8 +1222,8 @@
   <string name="pref_saved_stations_summary">Zafarbí číslo uložených meračských bodov na žlto (oranžovo)</string>	
   <string name="pref_loopClosure_title">Vyrovnanie polygoného ťahu</string>
   <string name="pref_loopClosure_summary">Výber možností Vyrovnania polygoného ťahu</string>
-  <!-- UNUSED string name="pref_splayExtend_title">Stima extend per splay</string -->
-  <!-- UNUSED string name="pref_splayExtend_summary">Stima del extend degli splay</string -->
+  <!-- UNUSED string name="pref_splayExtend_title">Estimate splay extend</string -->
+  <!-- UNUSED string name="pref_splayExtend_summary">Estimate splay extend</string -->
   <string name="pref_swapLR_title">Prepnutie na LR</string>
   <string name="pref_swapLR_summary">V programe Compass</string>
   <string name="pref_LRExtend_title">Odhadnúť Smerovú orientáciu</string>
@@ -1234,6 +1234,8 @@
   <string name="pref_splay_classes_summary">Povolí zaradenie pomocných zámer do tried</string>
   <string name="pref_splay_color_title">Označovanie pomocných zámer</string>
   <string name="pref_splay_color_summary">Povolí ľubovoľné farebné zobrazenie pomocných zámer</string>
+  <!-- UNUSED string name="pref_splay_active_title">Splay at active station</string -->
+  <!-- UNUSED string name="pref_splay_active_summary">Enable splay at the active station</string -->
   <string name="pref_plot_shift_title">Nákres posun/zmena mierky</string>
   <string name="pref_plot_shift_summary">Povolí posun a zmenu mierky krezby v nákrese po povolení Bočného Posuvu vo Výbere možností zobrazenia</string>
   <string name="pref_splay_alpha_title">Priehľadnosť pomocných zámer</string>
@@ -1241,8 +1243,8 @@
 
   <string name="pref_picker_type_title">Paleta v režime kreslenia</string>
   <string name="pref_picker_type_summary">Spôsob zobrazenia výberu z Palety v režime kreslenia</string>
-  <!-- UNUSED string name="pref_section_stations_title">Meracie body X-sekcie</string -->
-  <!-- UNUSED string name="pref_section_stations_summary">Referenčné základy pre X-sekciu</string -->
+  <!-- UNUSED string name="pref_section_stations_title">X-Section stations</string -->
+  <!-- UNUSED string name="pref_section_stations_summary">X-Section reference stations</string -->
   <string name="pref_station_size_title">Veľkosť názvu meračského bodu</string>
   <string name="pref_station_size_summary">Veľkosť názvu meračského bodu</string>
   <string name="pref_zoom_controls_title">Nastavenie tlačidla Zoom-u</string>
@@ -1315,17 +1317,16 @@
   <string name="pref_log_ptopo" translatable="false">PocketTopo</string>
   <string name="pref_log_sensor" translatable="false">Sensors</string>
   <string name="pref_log_shot" translatable="false">Shots</string>
-  <string name="pref_log_sync" translatable="false">Cosurveying</string>
+  <!-- UNUSED string name="pref_log_sync" translatable="false">Cosurveying</string -->
   <string name="pref_log_survey" translatable="false">Surveys</string>
   <string name="pref_log_therion" translatable="false">Therion</string>
   <string name="pref_log_units" translatable="false">Units</string>
   <string name="pref_log_zip" translatable="false">ZIP</string>
--->
 
   <!-- UNUSED string name="line_bezier">Bezier</string -->
   <!-- UNUSED string name="line_fine">fine</string -->
-  <!-- UNUSED string name="line_normal">normale</string -->
-  <!-- UNUSED string name="line_coarse">grossolana</string -->
+  <!-- UNUSED string name="line_normal">normal</string -->
+  <!-- UNUSED string name="line_coarse">coarse</string -->
   <!-- UNUSED string name="units_ddmmss">ddmmss</string -->
   <!-- UNUSED string name="units_dd">degrees</string -->
   <!-- UNUSED string name="units_grads">grads</string -->
