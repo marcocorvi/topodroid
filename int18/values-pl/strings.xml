@@ -517,7 +517,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="stat_stddev_dip">Dip stddev %1$.1f deg. (average %2$.1f deg.)</string>
     <string name="stat_component">Elementy %1$d</string>
     <string name="stat_depth">Głębkość %1$.1f %2$s %3$.1f %4$s"</string>
-    <string name="stat_duplicate">Zduplikowane pomiary %1$d %2$.1f %3$s</string>
+    <string name="stat_duplicate">Zduplikowane pomiary %1$d # %2$d %3$.1f %4$s</string>
     <string name="stat_leg">Strzały %1$d %2$.1f %3$.1f %4$.1f %5$s</string>
     <string name="stat_length">Długość %1$.1f %2$s</string>
     <string name="stat_extlen">Długość 3D %1$.1f %2$s</string>
@@ -526,10 +526,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="stat_loop">Pętle %1$d</string>
     <string name="stat_origin">Punkt startowy: %1$s</string>
     <string name="stat_azimuth">Azymut odwzorowania profilu: %1$.1f</string>
-    <string name="stat_shot">Strzały  %1$d,   Duplicate %2$d,   Surface %3$d</string>
-    <string name="stat_splay">Domiary %1$d</string>
-    <string name="stat_station">Stacje %1$d</string>
-    <string name="stat_surface">STrzały powierzchniowe %1$d %2$.1f %3$s</string>
+    <!-- UNUSED string name="stat_shot">Strzały  %1$d,   Duplicate %2$d,   Surface %3$d</string -->
+    <string name="stat_splay">Domiary %1$d # %2$d</string>
+    <string name="stat_station">Stacje %1$d # %2$d</string>
+    <string name="stat_surface">STrzały powierzchniowe %1$d # %2$d %3$.1f %4$s</string>
     <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]</string>
     <string name="stat_angle_error">Błąd kąta %1$.2f ± %2$.2f</string>
     <string name="shot_title">Strzał %1$s - %2$s</string>
@@ -999,6 +999,12 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_kml_stations_summary">Dodaj stacje do eksportu KML/GeoJSON</string>
   <string name="pref_kml_splays_title">domiary KML/JSON</string>
   <string name="pref_kml_splays_summary">dodaj domiary do eksportu KML/GeoJSON</string>
+  <!-- TODO string name="pref_csv_raw_title">Raw CSV</string -->
+  <!-- TODO string name="pref_csv_raw_summary">Export raw data to CSV</string -->
+  <!-- TODO string name="pref_csv_sep_title">CSV separator</string -->
+  <!-- TODO string name="pref_csv_sep_summary">CSV fields separator</string -->
+  <!-- TODO string name="pref_csv_eol_title">CSV eol</string -->
+  <!-- TODO string name="pref_csv_eol_summary">CSV records separator</string -->
 
   <string name="pref_sock_type_title">Gniazdo</string>
   <string name="pref_sock_type_summary">typ gniazda Bluetooth</string>

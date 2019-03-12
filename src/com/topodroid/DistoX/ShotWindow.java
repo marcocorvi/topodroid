@@ -1711,7 +1711,7 @@ public class ShotWindow extends Activity
   void updateShot( String from, String to, int extend, float stretch, long flag, long leg, String comment, DBlock blk )
   {
     // TDLog.Log( TDLog.LOG_SHOT, "update Shot From >" + from + "< To >" + to + "< comment " + comment );
-    // Log.v("DistoX", "update shot " + from + "-" + to + " leg " + leg + "/" + blk.getLegType() + " blk type " + blk.getBlockType() );
+    // Log.v("DistoXShot", "update shot " + from + "-" + to + " leg " + leg + "/" + blk.getLegType() + " blk type " + blk.getBlockType() );
     blk.setBlockName( from, to, (leg == LegType.BACK) );
 
     int ret = mApp_mData.updateShot( blk.mId, TDInstance.sid, from, to, extend, flag, leg, comment, true );

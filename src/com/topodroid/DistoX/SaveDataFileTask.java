@@ -75,7 +75,11 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
           filename = TDExporter.exportSurveyAsCsx( mSid, mData, mInfo, null, null, null, TDPath.getSurveyCsxFile( mSurvey ));
           break;
         case TDConst.DISTOX_EXPORT_CSV:
-          filename = TDExporter.exportSurveyAsCsv( mSid, mData, mInfo, TDPath.getSurveyCsvFile( mSurvey ) );
+	  if ( TDSetting.mCsvRaw ) {
+            filename = TDExporter.exportSurveyAsRawCsv( mSid, mData, mInfo, TDPath.getSurveyCsvFile( mSurvey ) );
+          } else {
+            filename = TDExporter.exportSurveyAsCsv( mSid, mData, mInfo, TDPath.getSurveyCsvFile( mSurvey ) );
+	  }
           break;
         case TDConst.DISTOX_EXPORT_CAV: // Topo
           filename = TDExporter.exportSurveyAsCav( mSid, mData, mInfo, TDPath.getSurveyCavFile( mSurvey ) );

@@ -386,6 +386,7 @@ class TDPrefKey
     "DISTOX_EXPORT_DXF_PREF",
     "DISTOX_EXPORT_PNG_PREF",
     "DISTOX_EXPORT_KML_PREF",    // 15
+    "DISTOX_EXPORT_CSV_PREF",    // 16
     null
   };
 
@@ -404,6 +405,7 @@ class TDPrefKey
     R.string.pref_cat_exportdxf,
     R.string.pref_cat_exportpng,
     R.string.pref_cat_exportkml,
+    R.string.pref_cat_exportcsv,
   };
 
   static int[] EXPORTdesc = {
@@ -413,6 +415,7 @@ class TDPrefKey
     R.string.pref_lrud_vertical_summary,
     R.string.pref_lrud_horizontal_summary,
     R.string.pref_bezier_step_summary,
+    -1,
     -1,
     -1,
     -1,
@@ -437,7 +440,9 @@ class TDPrefKey
     TDString.EMPTY,
     TDString.EMPTY,
     TDString.EMPTY,
-    TDString.EMPTY
+    TDString.EMPTY,
+    TDString.EMPTY,
+    null
   };
 
   // ------------------------------------------------------------------------------
@@ -462,6 +467,31 @@ class TDPrefKey
     TDString.ZERO  // SurveyInfo.DATAMODE_NORMAL
   };
   // ------------------------------------------------------------------------------
+  static String[] EXPORT_CSV = { // [1]
+    "DISTOX_CSV_RAW",
+    "DISTOX_CSV_SEP",
+    "DISTOX_SURVEX_EOL"
+  };
+  static int[] EXPORT_CSVtitle = { // [1]
+    R.string.pref_csv_raw_title,
+    R.string.pref_csv_sep_title,
+    R.string.pref_csv_eol_title,
+    -1
+  };
+  static int[] EXPORT_CSVdesc = { // [1]
+    R.string.pref_csv_raw_summary,
+    R.string.pref_csv_sep_summary,
+    R.string.pref_csv_eol_summary,
+    -1
+  };
+  static String[] EXPORT_CSVdef = { // [1]
+    FALSE,
+    TDString.ZERO,
+    "lf",
+    null
+  };
+
+
   static String[] EXPORT_SVX = { // [8]
     "DISTOX_SURVEX_EOL",            // survex end of line [either Linux or Windows]
     "DISTOX_SURVEX_SPLAY",    // 6  // whether to name endpoint of splays in Survex export
@@ -482,7 +512,8 @@ class TDPrefKey
   static String[] EXPORT_SVXdef = {
     "lf",
     FALSE,
-    FALSE
+    FALSE,
+    null
   };
 
   static String[] EXPORT_TH = { // [8]
@@ -669,19 +700,20 @@ class TDPrefKey
     "DISTOX_LEG_SHOTS",       // 3 // nr. of shots to make a leg [2, 3, 4]
     // "DISTOX_RECENT_TIMEOUT",       // recent block timeout
     "DISTOX_BACKSHOT",             // using DistoX in backshot mode
-    "DISTOX_EXTEND_THR2",     // 6 // half angle around 90 where splays have "vert" extend
+    "DISTOX_EXTEND_THR2",     // 5 // half angle around 90 where splays have "vert" extend
     "DISTOX_VTHRESHOLD",           // if shot clino is above, LRUD are horizontal
-    "DISTOX_AZIMUTH_MANUAL",  // 8 * // whether the "extend" is fixed L or R, selected by hand 
-    "DISTOX_LOOP_CLOSURE_VALUE",     // whether to close loop
-    "DISTOX_PREV_NEXT",       // 10  // whether to put "prev-next" arrows in shot edit dialog
+    "DISTOX_AZIMUTH_MANUAL",  // 7 * // whether the "extend" is fixed L or R, selected by hand 
+    // "DISTOX_LOOP_CLOSURE_VALUE",     // whether to close loop
+    "DISTOX_PREV_NEXT",       // 9  // whether to put "prev-next" arrows in shot edit dialog
     "DISTOX_BACKSIGHT", // whether to add backsight fields in manual shot input dialog
     // "DISTOX_MAG_ANOMALY",        // whether to compensate magnetic anomaly
-    "DISTOX_SHOT_TIMER",      // 12 // bearing-clino timer [1/10 s]
-    "DISTOX_BEEP_VOLUME",     // 13 // bearing-clino beep volume [%]
-    // "DISTOX_EXTEND_FRAC",     // 14 // fractional extend
-    // "DISTOX_RECENT_SHOT",     // 15 // highlight recent shots
+    "DISTOX_SHOT_TIMER",      // 11 // bearing-clino timer [1/10 s]
+    "DISTOX_BEEP_VOLUME",     // 12 // bearing-clino beep volume [%]
+    // "DISTOX_EXTEND_FRAC",     // fractional extend
+    // "DISTOX_RECENT_SHOT",     // highlight recent shots
     null
   };
+
 
   static int[] DATAtitle = {
     R.string.pref_leg_title,
@@ -693,7 +725,7 @@ class TDPrefKey
     R.string.pref_ethr_title,
     R.string.pref_vthr_title,
     R.string.pref_azimuth_manual_title,
-    R.string.pref_loopClosure_title,
+    // R.string.pref_loopClosure_title,
     R.string.pref_prev_next_title,
     R.string.pref_backsight_title,
     // R.string.pref_mag_anomaly_title,
@@ -714,7 +746,7 @@ class TDPrefKey
     R.string.pref_ethr_summary,
     R.string.pref_vthr_summary,
     R.string.pref_azimuth_manual_summary,
-    R.string.pref_loopClosure_summary,
+    // R.string.pref_loopClosure_summary,
     R.string.pref_prev_next_summary,
     R.string.pref_backsight_summary,
     // R.string.pref_mag_anomaly_summary,
@@ -735,7 +767,7 @@ class TDPrefKey
     TDString.TEN,
     "80",
     FALSE, 
-    TDString.ZERO,
+    // TDString.ZERO,
     TRUE,
     FALSE,
     // FALSE,
@@ -1216,6 +1248,7 @@ class TDPrefKey
     "DISTOX_BEDDING",         // splays bed plane interpolation
     "DISTOX_TRIPLE_SHOT",     // triple shot bell
     "DISTOX_WITH_SENSORS",    // using sensors
+    "DISTOX_LOOP_CLOSURE_VALUE",     // whether to close loop
     // "DISTOX_DIST_TOLERANCE",  // ratio of distance tolerance to angle tolerance
     // "DISTOX_SPLAY_ACTIVE",    // attach splays to active station, if defined
     // "DISTOX_WITH_RENAME",     // with survey "rename" menu
@@ -1232,6 +1265,7 @@ class TDPrefKey
     R.string.pref_plane_interpolation_title,
     R.string.pref_triple_shot_title,
     R.string.pref_with_sensors_title,
+    R.string.pref_loopClosure_title,
     // R.string.pref_dist_tolerance_title,
     // R.string.pref_splay_active_title,
     // R.string.pref_with_rename_title,
@@ -1248,6 +1282,7 @@ class TDPrefKey
     R.string.pref_plane_interpolation_summary,
     R.string.pref_triple_shot_summary,
     R.string.pref_with_sensors_summary,
+    R.string.pref_loopClosure_summary,
     // R.string.pref_dist_tolerance_summary,
     // R.string.pref_splay_active_summary,
     // R.string.pref_with_rename_summary,
@@ -1264,6 +1299,7 @@ class TDPrefKey
     FALSE,
     FALSE,
     FALSE,
+    TDString.ZERO,
     // "1",
     // FALSE,
     // FALSE,

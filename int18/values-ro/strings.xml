@@ -509,7 +509,7 @@
     <string name="stat_stddev_dip">Dip stddev %1$.1f deg. (average %2$.1f deg.)</string>
     <string name="stat_component">Componentele %1$d</string>
     <string name="stat_depth">Adâncime %1$.1f %2$s %3$.1f %4$s"</string>
-    <string name="stat_duplicate">Măsurători duplicate %1$d %2$.1f %3$s</string>
+    <string name="stat_duplicate">Măsurători duplicate %1$d # %2$d %3$.1f %4$s</string>
     <string name="stat_leg">Vize(seg. drum.) %1$d %2$.1f %3$.1f %4$.1f %5$s</string>
     <string name="stat_length">Lungime %1$.1f %2$s</string>
     <string name="stat_extlen">Lungime 3D %1$.1f %2$s</string>
@@ -517,10 +517,10 @@
     <string name="stat_loop">Bucle %1$d</string>
     <string name="stat_origin">Stație zero: %1$s</string>
     <string name="stat_azimuth">Azimutul proiecției profilului: %1$.1f</string>
-    <string name="stat_shot">Măsurători  %1$d,   Duplicate %2$d,   Surface %3$d</string>
-    <string name="stat_splay">Radieri %1$d</string>
-    <string name="stat_station">Stații %1$d</string>
-    <string name="stat_surface">Măsurători suprafață %1$d %2$.1f %3$s</string>
+    <!-- UNUSED string name="stat_shot">Măsurători  %1$d,   Duplicate %2$d,   Surface %3$d</string -->
+    <string name="stat_splay">Radieri %1$d # %2$d</string>
+    <string name="stat_station">Stații %1$d # %2$d</string>
+    <string name="stat_surface">Măsurători suprafață %1$d # %2$d %3$.1f %4$s</string>
     <string name="stat_wens">V %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]</string>
     <string name="stat_angle_error">Erori unghi %1$.2f ± %2$.2f</string>
     <string name="shot_title">MĂSURĂTOARE %1$s - %2$s</string>
@@ -982,6 +982,12 @@
   <string name="pref_kml_stations_summary">Adaugă stații la exportul KML</string>
   <string name="pref_kml_splays_title">Radieri KML</string>
   <string name="pref_kml_splays_summary">Adaugă radiero la exportul KML</string>
+  <!-- TODO string name="pref_csv_raw_title">Raw CSV</string -->
+  <!-- TODO string name="pref_csv_raw_summary">Export raw data to CSV</string -->
+  <!-- TODO string name="pref_csv_sep_title">CSV separator</string -->
+  <!-- TODO string name="pref_csv_sep_summary">CSV fields separator</string -->
+  <!-- TODO string name="pref_csv_eol_title">CSV eol</string -->
+  <!-- TODO string name="pref_csv_eol_summary">CSV records separator</string -->
 
   <string name="pref_sock_type_title">Socket</string>
   <string name="pref_sock_type_summary">Creeare socket</string>

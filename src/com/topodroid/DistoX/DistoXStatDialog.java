@@ -28,6 +28,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.LinearLayout;
 
 import android.widget.ArrayAdapter;
 
@@ -38,28 +39,6 @@ class DistoXStatDialog extends MyDialog
     private String mOrigin;
     private float mAzimuth;
     private SurveyStat mStat;
-
-    // private TextView mTextOrigin;
-    // private TextView mTextAzimuth;
-    // private TextView mTextLength;
-    // private TextView mTextExtLen;
-    // private TextView mTextProjLen;
-    // private TextView mTextWENS;
-    // private TextView mTextZminmax;
-    // private TextView mTextStations;
-    // private TextView mTextShots;
-    // private TextView mTextSplays;
-    private ListView mList;
-    
-    // private TextView mTextLeg;
-    // private TextView mTextDuplicate;
-    // private TextView mTextSurface;
-    // private TextView mTextSplay;
-    // private TextView mTextStation;
-    // private TextView mTextLoop;
-    // private TextView mTextComponent;
-    // private TextView mTextAngleErr;
-
 
     // private Button mBtnBack;
 
@@ -90,9 +69,9 @@ class DistoXStatDialog extends MyDialog
         TextView mTextProjLen  = (TextView) findViewById(R.id.text_stat_projlen);
         TextView mTextWENS     = (TextView) findViewById(R.id.text_stat_wens);
         TextView mTextZminmax  = (TextView) findViewById(R.id.text_stat_zminmax);
-        TextView mTextStations = (TextView) findViewById(R.id.text_stat_stations);
-        TextView mTextShots    = (TextView) findViewById(R.id.text_stat_shots);
-        TextView mTextSplays   = (TextView) findViewById(R.id.text_stat_splays);
+        // TextView mTextStations = (TextView) findViewById(R.id.text_stat_stations);
+        // TextView mTextShots    = (TextView) findViewById(R.id.text_stat_shots);
+        // TextView mTextSplays   = (TextView) findViewById(R.id.text_stat_splays);
 
         TextView mTextLeg       = (TextView) findViewById(R.id.stat_leg);
         TextView mTextDuplicate = (TextView) findViewById(R.id.stat_duplicate);
@@ -105,13 +84,16 @@ class DistoXStatDialog extends MyDialog
         TextView mTextAngleErr  = (TextView) findViewById(R.id.text_stat_angle_error);
 
         mTextLeg.setText( String.format( res.getString(R.string.stat_leg),
-                          mStat.countLeg, mStat.lengthLeg * unit, mStat.extLength * unit, mStat.planLength * unit, unit_str ) );
+          mStat.countLeg, mStat.lengthLeg * unit, mStat.extLength * unit, mStat.planLength * unit, unit_str ) );
         mTextDuplicate.setText( String.format( res.getString(R.string.stat_duplicate),
-                          mStat.countDuplicate, mStat.lengthDuplicate * unit, unit_str ) );
+          mStat.countDuplicate, mNum.duplicateNr(), mStat.lengthDuplicate * unit, unit_str ) );
         mTextSurface.setText( String.format( res.getString(R.string.stat_surface),
-                          mStat.countSurface, mStat.lengthSurface * unit, unit_str ) );
-        mTextSplay.setText( String.format( res.getString(R.string.stat_splay), mStat.countSplay ) );
-        mTextStation.setText( String.format( res.getString(R.string.stat_station), mStat.countStation ) );
+          mStat.countSurface, mNum.surfaceNr(), mStat.lengthSurface * unit, unit_str ) );
+        mTextSplay.setText( String.format( res.getString(R.string.stat_splay),
+          mStat.countSplay, mNum.splaysNr() ) );
+        mTextStation.setText( String.format( res.getString(R.string.stat_station),
+          mStat.countStation, mNum.stationsNr() ) );
+
         mTextLoop.setText( String.format( res.getString(R.string.stat_cycle), mStat.countLoop ) );
         mTextComponent.setText( String.format( res.getString(R.string.stat_component), mStat.countComponent ) );
 
@@ -119,15 +101,19 @@ class DistoXStatDialog extends MyDialog
             mNum.angleErrorMean() * TDMath.RAD2DEG, mNum.angleErrorStddev() * TDMath.RAD2DEG ) );
 
    
-        // mList.setOnItemClickListener( this );
         List< String > cls = mNum.getClosures();
 	int nr_loop = cls.size();
         if ( nr_loop == 0 ) {
           ((TextView)findViewById( R.id.text_stat_loops )).setText( R.string.loop_none );
         } else {
           ((TextView)findViewById( R.id.text_stat_loops )).setText( String.format( res.getString(R.string.stat_loop), nr_loop ) );
-          mList = (ListView) findViewById(R.id.list);
-          mList.setAdapter( new ArrayAdapter<>( mContext, R.layout.row, cls ) );
+	  LinearLayout list = (LinearLayout) findViewById( R.id.list );
+          LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 10, 10, 20, 20 );
+	  for ( String cl : cls ) {
+            TextView tv = new TextView( mContext );
+	    tv.setText( cl );
+	    list.addView( tv, lp );
+	  }
         }
 
         // mBtnBack = (Button) findViewById(R.id.btn_back);
@@ -155,16 +141,12 @@ class DistoXStatDialog extends MyDialog
         mTextZminmax.setText( String.format( res.getString(R.string.stat_depth),
                                              mNum.surveyTop()    * unit, unit_str,
                                              mNum.surveyBottom() * unit, unit_str ) );
-        mTextStations.setText(String.format( res.getString(R.string.stat_station),
-                                             mNum.stationsNr() ) );
+        // mTextStations.setText(String.format( res.getString(R.string.stat_station), mNum.stationsNr() ) );
 
-        mTextShots.setText( String.format( res.getString(R.string.stat_shot),
-                                           mNum.shotsNr(),
-                                           mNum.duplicateNr(),
-                                           mNum.surfaceNr() ) );
+        // mTextShots.setText( String.format( res.getString(R.string.stat_shot),
+	//   mNum.shotsNr(), mNum.duplicateNr(), mNum.surfaceNr() ) );
           
-        mTextSplays.setText( String.format( res.getString(R.string.stat_splay),
-                                            mNum.splaysNr() ) );
+        // mTextSplays.setText( String.format( res.getString(R.string.stat_splay), mNum.splaysNr() ) );
 
     }
 

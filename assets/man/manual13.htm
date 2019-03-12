@@ -197,19 +197,33 @@ The "shots" DBF contains the fields
 Settings:
 <ul style="margin-top=0">
 <li><u>stations</u>: whether to export the stations file</li>
-<li><u>splays</u>: wheter to include the splays</li>
-</ul>
-<br><p>
+<li><u>splays</u>: whether to include the splays</li>
+</ul><br><p>
 
 <b>CSV</b> (.csv)<br>
 Survey data can be exported as a list of records with comma-separated fields:
 <ul style="margin-top=0">
-<li>"from" station</li>
-<li>"to" station</li>
+<li>"from" and "to" stations</li>
 <li>distance, azimuth, clino</li>
 <li>if present the flag</li>
 </ul><br>
-Shot comments are not exported. A brief header is prepended to the data list.<br><p>
+Shot comments are not exported. A brief header is prepended to the data list.<br>
+
+The survey raw data can be exported in CSV format. In this case each record (line) has
+<ul style="margin-top=0">
+<li>shot id</li>
+<li>"from" and "to" stations</li>
+<li>distance, azimuth, clino, roll</li>
+<li>acceleration, magnetic field, dip</li>
+</ul><br>
+
+Settings:
+<ul style="margin-top=0">
+<li><u>raw data</u>: whether to export the raw data</li>
+<li><u>separator</u>: fields separator (comma, pipe or tab)</li>
+<li><u>EOL</u>: record separator (lf or cr+lf)</li>
+</ul><br><p>
+
 
 <b>DXF</b> (.dxf)<br>
 Survey data are exported as 3D DXF with layers

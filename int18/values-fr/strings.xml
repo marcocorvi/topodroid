@@ -506,7 +506,7 @@
     <string name="stat_stddev_dip">Ecart type Dipôle %1$.1f deg. (moyenne %2$.1f deg.)</string>
     <string name="stat_component">Composants %1$d</string>
     <string name="stat_depth">Profondeur %1$.1f %2$s %3$.1f %4$s"</string>
-    <string name="stat_duplicate">Visées dupliquées %1$d %2$.1f %3$s</string>
+    <string name="stat_duplicate">Visées dupliquées %1$d # %2$d %3$.1f %4$s</string>
     <string name="stat_leg">Cheminements %1$d %2$.1f %3$.1f %4$.1f %5$s</string>
     <string name="stat_length">Longueur %1$.1f %2$s</string>
     <string name="stat_extlen">3D length %1$.1f %2$s</string>
@@ -514,10 +514,10 @@
     <string name="stat_loop">Boucle %1$d</string>
     <string name="stat_origin">0 - Station Origine: %1$s</string>
     <string name="stat_azimuth">Azimut du profil projeté : %1$.1f</string>
-    <string name="stat_shot">Visées  %1$d,   Dupliquées %2$d,   Surface %3$d</string>
-    <string name="stat_splay">Visées latérales d\'habillage %1$d</string>
-    <string name="stat_station">Stations %1$d</string>
-    <string name="stat_surface">Surface des visées %1$d %2$.1f %3$s</string>
+    <!-- UNUSED string name="stat_shot">Visées  %1$d,   Dupliquées %2$d,   Surface %3$d</string -->
+    <string name="stat_splay">Visées latérales d\'habillage %1$d # %2$d</string>
+    <string name="stat_station">Stations %1$d # %2$d</string>
+    <string name="stat_surface">Surface des visées %1$d # %2$d %3$.1f %4$s</string>
     <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]"</string>
     <string name="stat_angle_error">Erreurs d\'angle %1$.2f ± %2$.2f</string>
     <string name="shot_title">VISÉE %1$s - %2$s"</string>
@@ -971,6 +971,12 @@
   <string name="pref_kml_stations_summary">Ajouter les stations à l\'export KML</string>
   <string name="pref_kml_splays_title">Visée latérales KML</string>
   <string name="pref_kml_splays_summary">Ajouter les visées latérales d\'habillage à l\'export KML</string>
+  <!-- TODO string name="pref_csv_raw_title">Raw CSV</string -->
+  <!-- TODO string name="pref_csv_raw_summary">Export raw data to CSV</string -->
+  <!-- TODO string name="pref_csv_sep_title">CSV separator</string -->
+  <!-- TODO string name="pref_csv_sep_summary">CSV fields separator</string -->
+  <!-- TODO string name="pref_csv_eol_title">CSV eol</string -->
+  <!-- TODO string name="pref_csv_eol_summary">CSV records separator</string -->
 
   <!-- UNUSED string name="pref_csv_length_title">Unité de long. CSV</string -->
   <!-- UNUSED string name="pref_csv_length_summary">Unité de long. export CSV</string -->

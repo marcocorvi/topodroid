@@ -1749,32 +1749,60 @@ class TDExporter
    *  NOTE declination exported in comment only in CSV
    *
    */
-  static private void writeCsvLeg( PrintWriter pw, AverageLeg leg, float ul, float ua )
+  static private void writeCsvLeg( PrintWriter pw, AverageLeg leg, float ul, float ua, char sep )
   {
-    pw.format(Locale.US, ",%.2f,%.1f,%.1f", 
-      leg.length() * ul, leg.bearing() * ua, leg.clino() * ua );
+    pw.format(Locale.US, "%c%.2f%c%.1f%c%.1f", sep, leg.length() * ul, sep, leg.bearing() * ua, sep, leg.clino() * ua );
     leg.reset();
   }
 
-  static private void writeCsvFlag( PrintWriter pw, boolean dup, boolean cmtd )
+  static private void writeCsvFlag( PrintWriter pw, boolean dup, boolean cmtd, char sep, String newline )
   {
     if ( dup ) {
       if ( cmtd ) {
-        pw.format(",LC\n");
+        pw.format("%cLC%s", sep, newline );
       } else {
-        pw.format(",L\n");
+        pw.format("%cL%s", sep, newline );
       }
     } else {
       if ( cmtd ) {
-        pw.format(",C\n");
+        pw.format("%cC%s", sep, newline );
       } else {
-        pw.format("\n");
+        pw.format("%c%s", sep, newline );
       }
+    }
+  }
+
+  static String exportSurveyAsRawCsv( long sid, DataHelper data, SurveyInfo info, String filename )
+  {
+    List<DBlock> list = data.selectAllShotsRawData( sid );
+    char sep = TDSetting.mCsvSeparator;
+    String newline = TDSetting.mSurvexEol;
+    try {
+      TDPath.checkPath( filename );
+      FileWriter fw = new FileWriter( filename );
+      PrintWriter pw = new PrintWriter( fw );
+      pw.format("# %s [*] created by TopoDroid v %s%s", TopoDroidUtil.getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION, newline );
+      pw.format("# %s%s", info.name, newline );
+      for ( DBlock b : list ) {
+	// String f = ( b.mFrom == null )? "" : b.mFrom;
+	// String t = ( b.mTo   == null )? "" : b.mTo;
+        pw.format(Locale.US, "%d%c%s%c%s%c", b.mId, sep, b.mFrom, sep, b.mTo, sep );
+        pw.format(Locale.US, "%.3f%c%.2f%c%.2f%c%.2f%c%.2f%c%.2f%c%.2f%s",
+	  b.mLength, sep, b.mBearing, sep, b.mClino, sep, b.mRoll, sep, b.mAcceleration, sep, b.mMagnetic, sep, b.mDip, newline );
+      }
+      fw.flush();
+      fw.close();
+      return filename;
+    } catch ( IOException e ) {
+      TDLog.Error( "Failed CSV export: " + e.getMessage() );
+      return null;
     }
   }
 
   static String exportSurveyAsCsv( long sid, DataHelper data, SurveyInfo info, String filename )
   {
+    char sep = TDSetting.mCsvSeparator;
+    String newline = TDSetting.mSurvexEol;
     // Log.v("DistoX", "export as CSV: " + filename );
     List<DBlock> list = data.selectAllExportShots( sid, TDStatus.NORMAL );
     checkShotsClino( list );
@@ -1789,8 +1817,8 @@ class TDExporter
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
 
-      pw.format("# %s created by TopoDroid v %s\n\n", TopoDroidUtil.getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
-      pw.format("# %s\n", info.name );
+      pw.format("# %s created by TopoDroid v %s%s", TopoDroidUtil.getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION, newline );
+      pw.format("# %s%s", info.name, newline );
       // if ( fixed.size() > 0 ) {
       //   pw.format("  ; fix stations as long-lat alt\n");
       //   for ( FixedInfo fix : fixed ) {
@@ -1798,11 +1826,11 @@ class TDExporter
       //   }
       // }
       if ( info.hasDeclination() ) { // DECLINATION in CSV
-        pw.format(Locale.US, "# from to tape compass clino (declination %.4f)\n", info.declination ); 
+        pw.format(Locale.US, "# from to tape compass clino (declination %.4f)%s", info.declination, newline ); 
       } else {
-        pw.format(Locale.US, "# from to tape compass clino (declination undefined)\n" );
+        pw.format(Locale.US, "# from to tape compass clino (declination undefined)%s", newline );
       }
-      pw.format(Locale.US, "# units tape %s compass clino %s\n", uls, uas );
+      pw.format(Locale.US, "# units tape %s compass clino %s%s", uls, uas, newline );
       
       AverageLeg leg = new AverageLeg(0);
       DBlock ref_item = null;
@@ -1819,8 +1847,8 @@ class TDExporter
             }
           } else { // only TO station
             if ( leg.mCnt > 0 && ref_item != null ) {
-              writeCsvLeg( pw, leg, ul, ua );
-              writeCsvFlag( pw, duplicate, ref_item.isCommented() );
+              writeCsvLeg( pw, leg, ul, ua, sep );
+              writeCsvFlag( pw, duplicate, ref_item.isCommented(), sep, newline );
               duplicate = false;
               ref_item = null; 
             }
@@ -1831,9 +1859,9 @@ class TDExporter
             if ( ! splays ) {
               splays = true;
             }
-            pw.format(Locale.US, "-,%s@%s,%.2f,%.1f,%.1f",
-                      to, info.name, item.mLength * ul, item.mBearing * ua, item.mClino * ua );
-            writeCsvFlag( pw, false, item.isCommented() );
+            pw.format(Locale.US, "-%c%s@%s%c%.2f%c%.1f%c%.1f",
+                      sep, to, info.name, sep, item.mLength * ul, sep, item.mBearing * ua, sep, item.mClino * ua );
+            writeCsvFlag( pw, false, item.isCommented(), sep, newline );
 
             // if ( item.mComment != null && item.mComment.length() > 0 ) {
             //   pw.format(",\"%s\"\n", item.mComment );
@@ -1842,8 +1870,8 @@ class TDExporter
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
-              writeCsvLeg( pw, leg, ul, ua );
-              writeCsvFlag( pw, duplicate, ref_item.isCommented() );
+              writeCsvLeg( pw, leg, ul, ua, sep );
+              writeCsvFlag( pw, duplicate, ref_item.isCommented(), sep, newline );
               duplicate = false;
               ref_item = null; 
             }
@@ -1854,16 +1882,16 @@ class TDExporter
             if ( ! splays ) {
               splays = true;
             }
-            pw.format(Locale.US, "%s@%s,-,%.2f,%.1f,%.1f",
-                      from, info.name, item.mLength * ul, item.mBearing * ua, item.mClino * ua );
-            writeCsvFlag( pw, false, item.isCommented() );
+            pw.format(Locale.US, "%s@%s%c-%c%.2f%c%.1f%c%.1f",
+                      from, info.name, sep, sep, item.mLength * ul, sep, item.mBearing * ua, sep, item.mClino * ua );
+            writeCsvFlag( pw, false, item.isCommented(), sep, newline );
             // if ( item.mComment != null && item.mComment.length() > 0 ) {
             //   pw.format(",\"%s\"\n", item.mComment );
             // }
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {
-              writeCsvLeg( pw, leg, ul, ua );
-              writeCsvFlag( pw, duplicate, ref_item.isCommented() );
+              writeCsvLeg( pw, leg, ul, ua, sep );
+              writeCsvFlag( pw, duplicate, ref_item.isCommented(), sep, newline );
               duplicate = false;
               // n = 0;
             }
@@ -1874,14 +1902,14 @@ class TDExporter
             if ( item.isDuplicate() ) {
               duplicate = true;
             }
-            pw.format("%s@%s,%s@%s", from, info.name, to, info.name );
+            pw.format("%s@%s%c%s@%s", from, info.name, sep, to, info.name );
             leg.set( item.mLength, item.mBearing, item.mClino );
           }
         }
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
-        writeCsvLeg( pw, leg, ul, ua );
-        writeCsvFlag( pw, duplicate, ref_item.isCommented() );
+        writeCsvLeg( pw, leg, ul, ua, sep );
+        writeCsvFlag( pw, duplicate, ref_item.isCommented(), sep, newline );
         // duplicate = false;
       }
       fw.flush();

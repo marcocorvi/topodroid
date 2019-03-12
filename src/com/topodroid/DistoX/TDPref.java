@@ -573,7 +573,8 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeFwd( cat, key[10], tit[10],          N,                   ctx, hlp ),
       makeFwd( cat, key[11], tit[11],          N,                   ctx, hlp ),
       makeFwd( cat, key[12], tit[12],          N,                   ctx, hlp ),
-      makeFwd( cat, key[13], tit[13],          N,                   ctx, hlp )
+      makeFwd( cat, key[13], tit[13],          N,                   ctx, hlp ),
+      makeFwd( cat, key[14], tit[14],          T,                   ctx, hlp )
     };
   }
 
@@ -699,6 +700,20 @@ class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  static TDPref[] makeCsvPrefs( Context ctx, TDPrefHelper hlp )
+  {
+    int cat = TDPrefActivity.PREF_CATEGORY_CSV;
+    String[] key = TDPrefKey.EXPORT_CSV;
+    int[] tit = TDPrefKey.EXPORT_CSVtitle;
+    int[] dsc = TDPrefKey.EXPORT_CSVdesc;
+    String[] def = TDPrefKey.EXPORT_CSVdef;
+    return new TDPref[ ] {
+      makeCbx( cat, key[0], tit[0], dsc[0], N, def[0],         ctx, hlp ), // DISTOX_CSV_RAW
+      makeLst( cat, key[1], tit[1], dsc[1], A, def[1], R.array.csvSeparator, R.array.csvSeparatorValue, ctx, hlp ), // DISTOX_CSV_SEP
+      makeLst( cat, key[2], tit[2], dsc[2], N, def[2], R.array.survexEol, R.array.survexEolValue, ctx, hlp ) // DISTOC_SURVEX_EOL
+    };
+  }
+
 
   static TDPref[] makeShotPrefs( Context ctx, TDPrefHelper hlp )
   {
@@ -716,11 +731,10 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], N, def[ 5], FLOAT,   ctx, hlp ), // EXTEND_THRS
       makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], N, def[ 6], FLOAT,   ctx, hlp ),
       makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], N, def[ 7],          ctx, hlp ), // AZIMUTH_MANUAL
-      makeLst( cat, key[ 8], tit[ 8], dsc[ 8], E, def[ 8], R.array.loopClosure, R.array.loopClosureValue, ctx, hlp ),
-      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9],          ctx, hlp ), // PREV_NEXT
-      makeCbx( cat, key[10], tit[10], dsc[10], A, def[10],          ctx, hlp ), // BACKSIGHT
-      makeEdt( cat, key[11], tit[11], dsc[11], T, def[11], INTEGER, ctx, hlp ), // TIMER
-      makeEdt( cat, key[12], tit[12], dsc[12], T, def[12], INTEGER, ctx, hlp ), // VOLUME
+      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8],          ctx, hlp ), // PREV_NEXT
+      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9],          ctx, hlp ), // BACKSIGHT
+      makeEdt( cat, key[10], tit[10], dsc[10], T, def[10], INTEGER, ctx, hlp ), // TIMER
+      makeEdt( cat, key[11], tit[11], dsc[11], T, def[11], INTEGER, ctx, hlp ), // VOLUME
     };
   }
 
@@ -944,7 +958,8 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5],          ctx, hlp ), // EXTEND FRAC
       makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], T, def[ 6],          ctx, hlp ), // BEDDING PLANE
       makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7],          ctx, hlp ), // TRIPLE SHOT BELL
-      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8],          ctx, hlp )  // WITH SENSORS
+      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8],          ctx, hlp ), // WITH SENSORS
+      makeLst( cat, key[ 9], tit[ 9], dsc[ 9], E, def[ 9], R.array.loopClosure, R.array.loopClosureValue, ctx, hlp )
       // makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9], FLOAT,   ctx, hlp ), // DIST/ANGLE TOLERANCE
       // makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9],          ctx, hlp )  // SPLAYS AT ACTIVE STATION
       // makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9],          ctx, hlp )  // WITH RENAME

@@ -3049,6 +3049,8 @@ public class DrawingWindow extends ItemDrawer
     	    if ( BrushManager.isPointOrientable( mCurrentPoint ) ) radius *= 4;
 	    float shift = Math.abs( x_shift ) + Math.abs( y_shift );
 	    if ( shift < radius ) {
+              xs = mSaveX/mZoom - mOffset.x;
+              ys = mSaveY/mZoom - mOffset.y;
               // Log.v("DistoXO", "insert point type " + mCurrentPoint + " x " + x_shift + " y " + y_shift + " R " + radius );
               if ( BrushManager.isPointLabel( mCurrentPoint ) ) {
                 new DrawingLabelDialog( mActivity, this, xs, ys ).show();

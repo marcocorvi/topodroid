@@ -32,17 +32,6 @@ import android.widget.ImageView;
 class SurveyStatDialog extends MyDialog
                               implements View.OnClickListener
 {
-  // private TextView mTextLeg;
-  // private TextView mTextDuplicate;
-  // private TextView mTextSurface;
-  // private TextView mTextSplay;
-  // private TextView mTextStation;
-  // private TextView mTextLoop;
-  // private TextView mTextComponent;
-  // private TextView mTextStddevM;
-  // private TextView mTextStddevG;
-  // private TextView mTextStddevD;
-
   private ImageView histG;
   private ImageView histM;
   private ImageView histD;

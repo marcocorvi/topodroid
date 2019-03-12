@@ -505,7 +505,7 @@
     <string name="stat_stddev_dip">Dip stddev %1$.1f gradi (media %2$.1f gradi)</string>
     <string name="stat_component">Componenti %1$d</string>
     <string name="stat_depth">Profondità %1$.1f %2$s %3$.1f %4$s"</string>
-    <string name="stat_duplicate">Battute doppie %1$d %2$.1f %3$s</string>
+    <string name="stat_duplicate">Battute doppie %1$d # %2$d %3$.1f %4$s</string>
     <string name="stat_leg">Battute %1$d %2$.1f %3$.1f %4$.1f %5$s</string>
     <string name="stat_length">Sviluppo %1$.1f %2$s</string>
     <string name="stat_extlen">Lunghezza 3D %1$.1f %2$s</string>
@@ -513,10 +513,10 @@
     <string name="stat_loop">Anelli %1$d</string>
     <string name="stat_origin">Caposaldo zero: %1$s</string>
     <string name="stat_azimuth">Profilo proiezione azimut: %1$.1f</string>
-    <string name="stat_shot">Tiri  %1$d,   Doppi %2$d,   Superficie %3$d</string>
-    <string name="stat_splay">Splay %1$d</string>
-    <string name="stat_station">Capisaldi %1$d</string>
-    <string name="stat_surface">Tiri di superficie %1$d %2$.1f %3$s</string>
+    <!-- UNUSED string name="stat_shot">Tiri  %1$d,   Doppi %2$d,   Superficie %3$d</string -->
+    <string name="stat_splay">Splay %1$d # %2$d</string>
+    <string name="stat_station">Capisaldi %1$d # %2$d</string>
+    <string name="stat_surface">Tiri di superficie %1$d # %2$d %3$.1f %4$s</string>
     <!-- OK string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]</string -->
     <string name="stat_angle_error">Errori angolari %1$.2f ± %2$.2f"</string>
     <string name="shot_title">BATTUTA %1$s - %2$s"</string>
@@ -977,6 +977,12 @@
   <string name="pref_kml_stations_summary">Capisaldi nell\'export KML</string>
   <string name="pref_kml_splays_title">Splays KML</string>
   <string name="pref_kml_splays_summary">Splays nell\'export KML</string>
+  <!-- TODO string name="pref_csv_raw_title">Raw CSV</string -->
+  <!-- TODO string name="pref_csv_raw_summary">Export raw data to CSV</string -->
+  <!-- TODO string name="pref_csv_sep_title">CSV separator</string -->
+  <!-- TODO string name="pref_csv_sep_summary">CSV fields separator</string -->
+  <!-- TODO string name="pref_csv_eol_title">CSV eol</string -->
+  <!-- TODO string name="pref_csv_eol_summary">CSV records separator</string -->
 
   <string name="pref_sock_type_title">Socket</string>
   <string name="pref_sock_type_summary">Crea socket</string>

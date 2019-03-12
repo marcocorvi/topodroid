@@ -266,9 +266,11 @@ class DistoXProtocol
         mRoll = r * 180.0 / 128.0;
 
         if ( TDLog.LOG_PROTO ) {
-          TDLog.DoLog( "Proto packet data " +
-            String.format(Locale.US, " %7.2f %6.1f %6.1f", mDistance, mBearing, mClino ) );
+          TDLog.DoLog( "Proto packet D " +
+            String.format(Locale.US, " %7.2f %6.1f %6.1f (%6.1f)", mDistance, mBearing, mClino, mRoll ) );
         }
+        // Log.v( "DistoXProto packet D ",
+        //     String.format(Locale.US, " %7.2f %6.1f %6.1f (%6.1f)", mDistance, mBearing, mClino, mRoll ) );
 
         return DISTOX_PACKET_DATA;
       case 0x02: // g
@@ -279,7 +281,7 @@ class DistoXProtocol
         if ( mGX > TopoDroidUtil.ZERO ) mGX = mGX - TopoDroidUtil.NEG;
         if ( mGY > TopoDroidUtil.ZERO ) mGY = mGY - TopoDroidUtil.NEG;
         if ( mGZ > TopoDroidUtil.ZERO ) mGZ = mGZ - TopoDroidUtil.NEG;
-        TDLog.Log( TDLog.LOG_PROTO, "handle Packet G " + String.format(" %x %x %x", mGX, mGY, mGZ ) );
+        TDLog.Log( TDLog.LOG_PROTO, "Proto packet G " + String.format(" %x %x %x", mGX, mGY, mGZ ) );
         return DISTOX_PACKET_G;
       case 0x03: // m
         mMX = MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
@@ -289,7 +291,7 @@ class DistoXProtocol
         if ( mMX > TopoDroidUtil.ZERO ) mMX = mMX - TopoDroidUtil.NEG;
         if ( mMY > TopoDroidUtil.ZERO ) mMY = mMY - TopoDroidUtil.NEG;
         if ( mMZ > TopoDroidUtil.ZERO ) mMZ = mMZ - TopoDroidUtil.NEG;
-        TDLog.Log( TDLog.LOG_PROTO, "handle Packet M " + String.format(" %x %x %x", mMX, mMY, mMZ ) );
+        TDLog.Log( TDLog.LOG_PROTO, "Proto packet M " + String.format(" %x %x %x", mMX, mMY, mMZ ) );
         return DISTOX_PACKET_M;
       case 0x04: // vector data packet
         if ( mDeviceType == Device.DISTO_X310 ) {
@@ -302,7 +304,12 @@ class DistoXProtocol
           mDip = dip * 90.0  / 16384.0; // 90/0x4000;
           if ( dip >= 32768 ) { mDip = (65536 - dip) * (-90.0) / 16384.0; }
           mRoll  = rh * 180.0 / 32768.0; // 180/0x8000;
-          TDLog.Log( TDLog.LOG_PROTO, "handle Packet V " + String.format(Locale.US, " %.2f %.2f %.2f roll %.1f", mAcceleration, mMagnetic, mDip, mRoll ) );
+          if ( TDLog.LOG_PROTO ) {
+            TDLog.DoLog( "Proto packet V " +
+              String.format(Locale.US, " %.2f %.2f %.2f roll %.1f", mAcceleration, mMagnetic, mDip, mRoll ) );
+	  }
+          // Log.v( "DistoXProto packet V ",
+          //     String.format(Locale.US, " %.2f %.2f %.2f roll %.1f", mAcceleration, mMagnetic, mDip, mRoll ) );
         }
         return DISTOX_PACKET_VECTOR;
       case 0x38: 

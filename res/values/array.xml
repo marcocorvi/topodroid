@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+  <string-array name="csvSeparator">
+     <item name="comma">comma</item>
+     <item name="pipe">pipe</item>
+     <item name="tab">tab</item>
+  </string-array>
+  <string-array name="csvSeparatorValue">
+     <item name="comma">0</item>
+     <item name="pipe">1</item>
+     <item name="tab">2</item>
+  </string-array>
 
   <string-array name="lineContinue">
      <item name="none">none</item>

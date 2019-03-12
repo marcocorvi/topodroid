@@ -10,7 +10,7 @@
     android:layout_height="0dp"
     android:layout_weight="1"
     >
-    <LinearLayout
+    <LinearLayout android:id="@+id/list"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:orientation="vertical"
@@ -87,21 +87,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
       />
-      <TextView android:id="@+id/text_stat_stations"
+      <!-- TextView android:id="@+id/text_stat_stations"
         android:layout_marginTop="@dimen/marginsmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
-      />
-      <TextView android:id="@+id/text_stat_shots"
+      / -->
+      <!-- TextView android:id="@+id/text_stat_shots"
         android:layout_marginTop="@dimen/marginsmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
-      />
-      <TextView android:id="@+id/text_stat_splays"
+      / -->
+      <!-- TextView android:id="@+id/text_stat_splays"
         android:layout_marginTop="@dimen/marginsmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
-      />
+      / -->
       <TextView android:id="@+id/text_stat_angle_error"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
@@ -113,13 +113,6 @@
         android:text="@string/loop_closure_errors"
         android:layout_marginTop="@dimen/marginsmall"
       />
-      <ListView android:id="@+id/list"
-        style="@style/list_top"
-        android:layout_marginTop="@dimen/marginv"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-      />  
     </LinearLayout> 
   </ScrollView>
 

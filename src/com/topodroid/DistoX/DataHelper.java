@@ -147,6 +147,9 @@ class DataHelper extends DataSetObservable
     { "id", "fStation", "tStation", "distance", "bearing", "clino", "acceleration", "magnetic", "dip",  // 0 .. 8
       "extend", "flag", "leg", "comment", "type", "millis", "color", "stretch" // 9 .. 16
     };
+  static private String[] mShotRawDataFields =
+    { "id", "fStation", "tStation", "distance", "bearing", "clino", "roll", "acceleration", "magnetic", "dip"
+    };
 
   static final private String[] mPlotFieldsFull =
     { "id", "name", "type", "status", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide", "nick" };
@@ -214,6 +217,20 @@ class DataHelper extends DataSetObservable
        myDB = null;
        logError( "DataHelper cstr failed to get DB", e );
      }
+   }
+
+   private void fillBlockRawData( long sid, DBlock blk, Cursor cursor )
+   {
+     blk.setId( cursor.getLong(0), sid );
+     blk.mFrom = cursor.getString(1);
+     blk.mTo   = cursor.getString(2);
+     blk.mLength       = (float)( cursor.getDouble(3) );  // length [meters]
+     blk.mBearing      = (float)( cursor.getDouble(4) );  // bearing [degrees]
+     blk.mClino        = (float)( cursor.getDouble(5) );  // clino [degrees], or depth [meters]
+     blk.mRoll         = (float)( cursor.getDouble(6) );  // clino [degrees], or depth [meters]
+     blk.mAcceleration = (float)( cursor.getDouble(7) );
+     blk.mMagnetic     = (float)( cursor.getDouble(8) );
+     blk.mDip          = (float)( cursor.getDouble(9) );
    }
 
    private void fillBlock( long sid, DBlock blk, Cursor cursor )
@@ -1073,7 +1090,7 @@ class DataHelper extends DataSetObservable
       myDB.endTransaction();
     }
 
-    // Log.v("DistoX", "update shot " + fStation + " " + tStation + " success " + success );
+    // Log.v("DistoXS", "update shot " + fStation + " " + tStation + " success " + success );
     // if ( success && forward && mListeners != null ) { // synchronized( mListeners )
     //   mListeners.onUpdateShot( id, sid, fStation, tStation, extend, flag, leg, comment );
     // }
@@ -2996,6 +3013,27 @@ class DataHelper extends DataSetObservable
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return set;
+  }
+
+  /** select all shots, used by CSV raw export
+   * @param sid surveyId
+   */
+  List<DBlock> selectAllShotsRawData( long sid )
+  {
+    // Log.v("DistoXX", "B3 select shots all");
+    List< DBlock > list = new ArrayList<>();
+    if ( myDB == null ) return list;
+    Cursor cursor = myDB.query(SHOT_TABLE, mShotRawDataFields, WHERE_SID, new String[]{ Long.toString(sid) }, null, null, "id" );
+    if (cursor.moveToFirst()) {
+      do {
+        DBlock block = new DBlock();
+        fillBlockRawData( sid, block, cursor );
+        list.add( block );
+      } while (cursor.moveToNext());
+    }
+    // TDLog.Log( TDLog.LOG_DB, "select All Shots list size " + list.size() );
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return list;
   }
 
   List<DBlock> selectAllShots( long sid, long status )

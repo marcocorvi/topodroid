@@ -221,6 +221,11 @@ class TDSetting
   static boolean mDataBackup = false; // whether to export data when shotwindow is closed
   static boolean mDistoXBackshot = false;
   // static int mTitleColor = TDColor.TITLE_NORMAL;
+  
+  static final char CSV_COMMA = ',';
+  static final char CSV_PIPE  = '|';
+  static final char CSV_TAB   = '\t';
+  static final char[] CSV_SEPARATOR = { CSV_COMMA, CSV_PIPE, CSV_TAB };
 
   static int mImportDatamode    = 0;  // SurveyInfo.DATAMODE_NORMAL
   static int mExportShotsFormat = -1; // DISTOX_EXPORT_NONE
@@ -232,6 +237,8 @@ class TDSetting
   static boolean mSvgSplays        = true;
   static boolean mKmlStations   = true;
   static boolean mKmlSplays     = false;
+  static boolean mCsvRaw        = false;
+  static char mCsvSeparator     = CSV_COMMA;
   static int mRecentTimeout     = 30; // 30 seconds
 
   // static int mScreenTimeout = 60000; // 60 secs
@@ -754,27 +761,7 @@ class TDSetting
     mOrthogonalLRUD       = ( mOrthogonalLRUDAngle > 0.000001f ); 
     mLRUDvertical      = tryFloat( prefs,      keyExport[ 3],      defExport[ 3] );  // DISTOX_LRUD_VERTICAL
     mLRUDhorizontal    = tryFloat( prefs,      keyExport[ 4],      defExport[ 4] );  // DISTOX_LRUD_HORIZONTAL
-    // mSurvexEol         = ( prefs.getString(    keyExport[ 5],      defExport[ 5] ).equals("LF") )? "\n" : "\r\n";  // DISTOX_SURVEX_EOL
-    // mSurvexSplay       =   prefs.getBoolean(   keyExport[ 6], bool(defExport[ 6]) ); // DISTOX_SURVEX_SPLAY
-    // mSurvexLRUD        =   prefs.getBoolean(   keyExport[ 7], bool(defExport[ 7]) ); // DISTOX_SURVEX_LRUD
     mBezierStep        = tryFloat( prefs,      keyExport[ 5],      defExport[ 5] );  // DISTOX_BEZIER_STEP
-    // mSvgGrid           = prefs.getBoolean(     keyExport[18], bool(defExport[18]) ); // DISTOX_SVG_GRID
-    // mSvgLineDirection  = prefs.getBoolean(     keyExport[19], bool(defExport[19]) ); // DISTOX_SVG_LINE_DIR
-    // mSvgSplays         = prefs.getBoolean(     keyExport[??], bool(defExport[??]) ); // DISTOX_SVG_SPLAYS
-    // // mSvgInHtml      = prefs.getBoolean(     keyExport[  ], bool(defExport[  ]) ); // DISTOX_SVG_IN_HTML
-    // mSvgPointStroke    = tryFloat( prefs,      keyExport[20],      defExport[20] );  // DISTOX_SVG_POINT_STROKE
-    // mSvgLabelStroke    = tryFloat( prefs,      keyExport[21],      defExport[21] );  // DISTOX_SVG_LABEL_STROKE
-    // mSvgLineStroke     = tryFloat( prefs,      keyExport[22],      defExport[22] );  // DISTOX_SVG_LINE_STROKE
-    // mSvgGridStroke     = tryFloat( prefs,      keyExport[23],      defExport[23] );  // DISTOX_SVG_GRID_STROKE
-    // mSvgShotStroke     = tryFloat( prefs,      keyExport[24],      defExport[24] );  // DISTOX_SVG_SHOT_STROKE
-    // mSvgLineDirStroke  = tryFloat( prefs,      keyExport[25],      defExport[25] );  // DISTOX_SVG_LINEDIR_STROKE
-    // mKmlStations       = prefs.getBoolean(     keyExport[18], bool(defExport[18]) ); // DISTOX_KML_STATIONS
-    // mKmlSplays         = prefs.getBoolean(     keyExport[19], bool(defExport[19]) ); // DISTOX_KML_SPLAYS
-    // mBitmapScale       = tryFloat( prefs,      keyExport[20],      defExport[20] );  // DISTOX_BITMAP_SCALE 
-    // setBitmapBgcolor( prefs, keyExport[21], prefs.getString(keyExport[21], defExport[21]), defExport[21] );// DISTOX_BITMAP_BGCOLOR
-    // // mDxfScale    = tryFloat( prefs,         keyExport[  ],      defExport[  ] );  // DISTOX_DXF_SCALE
-    // mDxfBlocks        =  prefs.getBoolean(     keyExport[22], bool(defExport[22]) ); // DISTOX_DXF_BLOCKS
-    // mAcadVersion = tryInt(   prefs,            keyExport[23],      defExport[23] );  // DISTOX_ACAD_VERSION choice: 9, 13
 
     String[] keyExpSvx = TDPrefKey.EXPORT_SVX;
     String[] defExpSvx = TDPrefKey.EXPORT_SVXdef;
@@ -818,6 +805,11 @@ class TDSetting
     mKmlStations       = prefs.getBoolean(     keyExpKml[0], bool(defExpKml[0]) ); // DISTOX_KML_STATIONS
     mKmlSplays         = prefs.getBoolean(     keyExpKml[1], bool(defExpKml[1]) ); // DISTOX_KML_SPLAYS
 
+    String[] keyExpCsv = TDPrefKey.EXPORT_CSV;
+    String[] defExpCsv = TDPrefKey.EXPORT_CSVdef;
+    mCsvRaw            = prefs.getBoolean(     keyExpCsv[0], bool(defExpCsv[0]) ); // DISTOX_CSV_RAW
+    mCsvSeparator      = CSV_SEPARATOR[ tryInt( prefs, keyExpCsv[1], defExpCsv[1] ) ]; // DISTOX_CSV_SEP
+
     String[] keyExpPng = TDPrefKey.EXPORT_PNG;
     String[] defExpPng = TDPrefKey.EXPORT_PNGdef;
     mBitmapScale       = tryFloat( prefs,      keyExpPng[0], defExpPng[0] );  // DISTOX_BITMAP_SCALE 
@@ -839,11 +831,10 @@ class TDSetting
     mExtendThr     = tryFloat( prefs,          keyData[ 5],      defData[ 5]  ); // DISTOX_EXTEND_THR2
     mVThreshold    = tryFloat( prefs,          keyData[ 6],      defData[ 6]  ); // DISTOX_VTHRESHOLD
     // DISTOX_AZIMUTH_MANUAL [7] handled in the first pass
-    setLoopClosure( tryInt(   prefs,           keyData[ 8],      defData[ 8] ) );// DISTOX_LOOP_CLOSURE_VALUE
-    mPrevNext      = prefs.getBoolean(         keyData[ 9], bool(defData[ 9]) ); // DISTOX_PREV_NEXT
-    mBacksightInput = prefs.getBoolean(        keyData[10], bool(defData[10]) ); // DISTOX_BACKSIGHT
-    mTimerWait     = tryInt(   prefs,          keyData[11],      defData[11] );  // DISTOX_SHOT_TIMER
-    mBeepVolume    = tryInt(   prefs,          keyData[12],      defData[12] );  // DISTOX_BEEP_VOLUME
+    mPrevNext      = prefs.getBoolean(         keyData[ 8], bool(defData[ 8]) ); // DISTOX_PREV_NEXT
+    mBacksightInput = prefs.getBoolean(        keyData[ 9], bool(defData[ 9]) ); // DISTOX_BACKSIGHT
+    mTimerWait     = tryInt(   prefs,          keyData[10],      defData[10] );  // DISTOX_SHOT_TIMER
+    mBeepVolume    = tryInt(   prefs,          keyData[11],      defData[11] );  // DISTOX_BEEP_VOLUME
 
     String[] keyGShot = TDPrefKey.GEEKSHOT;
     String[] defGShot = TDPrefKey.GEEKSHOTdef;
@@ -856,6 +847,7 @@ class TDSetting
     mBedding       = prefs.getBoolean( keyGShot[ 6], bool(defGShot[ 6]) ); // DISTOX_BEDDING
     mTripleShot    = prefs.getBoolean( keyGShot[ 7], bool(defGShot[ 7]) ); // DISTOX_TRIPLE_SHOT
     mWithSensors   = prefs.getBoolean( keyGShot[ 8], bool(defGShot[ 8]) ); // DISTOX_WITH_SENSORS
+    setLoopClosure( tryInt(   prefs,   keyGShot[ 9],      defGShot[ 9] ) );// DISTOX_LOOP_CLOSURE_VALUE
     // mDistTolerance = tryFloat( prefs,  keyGShot[ 9],      defGShot[ 9]  ); // DISTOX_DIST_TOLERANCE
     // mSplayActive   = prefs.getBoolean( keyGShot[ 8], bool(defGShot[ 8]) ); // DISTOX_WITH_SENSORS
     // mWithRename    = prefs.getBoolean( keyGShot[ 9], bool(defGShot[ 9]) ); // DISTOX_WITH_RENAME
@@ -1003,6 +995,7 @@ class TDSetting
       case TDPrefActivity.PREF_CATEGORY_DXF:    return updatePrefDxf( hlp, k, v );
       case TDPrefActivity.PREF_CATEGORY_PNG:    return updatePrefPng( hlp, k, v );
       case TDPrefActivity.PREF_CATEGORY_KML:    return updatePrefKml( hlp, k, v );
+      case TDPrefActivity.PREF_CATEGORY_CSV:    return updatePrefCsv( hlp, k, v );
       case TDPrefActivity.PREF_SHOT_DATA:       return updatePrefData( hlp, k, v );
       case TDPrefActivity.PREF_SHOT_UNITS:      return updatePrefUnits( hlp, k, v );
       case TDPrefActivity.PREF_ACCURACY:        return updatePrefAccuracy( hlp, k, v );
@@ -1275,6 +1268,9 @@ class TDSetting
       mTripleShot   = tryBooleanValue( hlp, k, v, bool(def[ 7]) );
     } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_WITH_SENSORS
       mWithSensors  = tryBooleanValue( hlp, k, v, bool(def[ 8]) );
+    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_LOOP_CLOSURE_VALUE
+      setLoopClosure( tryIntValue( hlp, k, v, def[ 9] ) );
+
     // } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_DIST_TOLERANCE
     //   mDistTolerance = tryFloatValue( hlp, k, v, def[ 9]  );
     // } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_SPLAY_ACTIVE
@@ -1469,40 +1465,6 @@ class TDSetting
       mBezierStep  = tryFloatValue( hlp, k, v, def[ 5] );
       if ( mBezierStep < 0 ) { mBezierStep = 0; ret = TDString.ZERO; }
       if ( mBezierStep > 3 ) { mBezierStep = 3; ret = TDString.THREE; } // was 2
-    // } else if ( k.equals( key[ 18 ] ) ) { // DISTOX_SVG_GRID
-    //   mSvgGrid = tryBooleanValue( hlp, k, v, bool(def[18]) );
-    // } else if ( k.equals( key[ 19 ] ) ) { // DISTOX_SVG_LINE_DIR
-    //   mSvgLineDirection = tryBooleanValue( hlp, k, v, bool(def[19]) );
-    // } else if ( k.equals( key[ ?? ] ) ) { // DISTOX_SVG_SPLAYS
-    //   mSvgSplays = tryBooleanValue( hlp, k, v, bool(def[??]) );
-    // // } else if ( k.equals( key[ ? ] ) ) { // DISTOX_SVG_IN_HTML
-    // //   mSvgInHtml = tryBooleanValue( hlp, k, bool(def[ ]) );
-    // } else if ( k.equals( key[ 20 ] ) ) { // DISTOX_SVG_POINT_STROKE
-    //   mSvgPointStroke    = tryFloatValue( hlp, k, v, def[20] );
-    // } else if ( k.equals( key[ 21 ] ) ) { // DISTOX_SVG_LABEL_STROKE
-    //   mSvgLabelStroke    = tryFloatValue( hlp, k, v, def[21] );
-    // } else if ( k.equals( key[ 22 ] ) ) { // DISTOX_SVG_LINE_STROKE
-    //   mSvgLineStroke     = tryFloatValue( hlp, k, v, def[22] );
-    // } else if ( k.equals( key[ 23 ] ) ) { // DISTOX_SVG_GRID_STROKE
-    //   mSvgGridStroke     = tryFloatValue( hlp, k, v, def[23] );
-    // } else if ( k.equals( key[ 24 ] ) ) { // DISTOX_SVG_SHOT_STROKE
-    //   mSvgShotStroke     = tryFloatValue( hlp, k, v, def[24] );
-    // } else if ( k.equals( key[ 25 ] ) ) { // DISTOX_SVG_LINEDIR_STROKE
-    //   mSvgLineDirStroke  = tryFloatValue( hlp, k, v, def[25] );
-    // } else if ( k.equals( key[ 18 ] ) ) { // DISTOX_KML_STATIONS
-    //   mKmlStations = tryBooleanValue( hlp, k, v, bool(def[18]) );
-    // } else if ( k.equals( key[ 19 ] ) ) { // DISTOX_KML_SPLAYS
-    //   mKmlSplays = tryBooleanValue( hlp, k, v, bool(def[19]) );
-    // } else if ( k.equals( key[ 20 ] ) ) { // DISTOX_BITMAP_SCALE
-    //   mBitmapScale = tryFloatValue( hlp, k, v, def[20] );
-    // } else if ( k.equals( key[ 21 ] ) ) { // DISTOX_BITMAP_BGCOLOR
-    //   setBitmapBgcolor( hlp.getSharedPrefs(), k, tryStringValue( hlp, k, v, def[21] ), def[21] );
-    // } else if ( k.equals( key[ ? ] ) ) { // DISTOX_DXF_SCALE
-    //   mDxfScale = tryFloatValue( hlp, k, v, def[ ] );
-    // } else if ( k.equals( key[ 22 ] ) ) { // DISTOX_DXF_BLOCKS
-    //   mDxfBlocks = tryBooleanValue( hlp, k, v, bool(def[22]) );
-    // } else if ( k.equals( key[ 23 ] ) ) { // DISTOX_ACAD_VERSION
-    //   try { mAcadVersion = tryIntValue( hlp, k, v, def[23] ); } catch ( NumberFormatException e) { }
     } else {
       TDLog.Error("missing EXPORT key: " + k );
     }
@@ -1587,6 +1549,23 @@ class TDSetting
       mKmlSplays   = tryBooleanValue( hlp, k, v, bool(def[ 1 ]) );
     } else {
       TDLog.Error("missing EXPORT KML key: " + k );
+    }
+    return null;
+  }
+
+  private static String updatePrefCsv( TDPrefHelper hlp, String k, String v )
+  {
+    // Log.v("DistoX", "update pref CSV: " + k );
+    String[] key = TDPrefKey.EXPORT_CSV;
+    String[] def = TDPrefKey.EXPORT_CSVdef;
+    if ( k.equals( key[ 0 ] ) ) { // DISTOX_CSV_RAW (bool)
+      mCsvRaw      = tryBooleanValue( hlp, k, v, bool(def[ 0 ]) );
+    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_CSV_SEP (choice)
+      mCsvSeparator = CSV_SEPARATOR[ tryIntValue( hlp, k, v, def[1] ) ]; 
+    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_SURVEX_EOL
+      mSurvexEol = ( tryStringValue( hlp, k, v, def[2] ).equals(def[0]) )? "\n" : "\r\n";
+    } else {
+      TDLog.Error("missing EXPORT CSV key: " + k );
     }
     return null;
   }
@@ -1700,17 +1679,15 @@ class TDSetting
     } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_AZIMUTH_MANUAL (bool)
       mAzimuthManual  = tryBooleanValue( hlp, k, v, bool(def[7]) ); 
       TDAzimuth.resetRefAzimuth( TopoDroidApp.mShotWindow, TDAzimuth.mRefAzimuth );
-    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_LOOP_CLOSURE_VALUE (choice)
-      setLoopClosure( tryIntValue( hlp, k, v, def[8] ) );
-    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_PREV_NEXT (bool)
-      mPrevNext = tryBooleanValue( hlp, k, v, bool(def[ 9]) );
-    } else if ( k.equals( key[ 10 ] ) ) { // DISTOX_BACKSIGHT (bool)
-      mBacksightInput = tryBooleanValue( hlp, k, v, bool(def[10]) );
-    } else if ( k.equals( key[ 11 ] ) ) { // DISTOX_SHOT_TIMER [3 ..)
-      mTimerWait        = tryIntValue( hlp, k, v, def[11] );
+    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_PREV_NEXT (bool)
+      mPrevNext = tryBooleanValue( hlp, k, v, bool(def[ 8]) );
+    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_BACKSIGHT (bool)
+      mBacksightInput = tryBooleanValue( hlp, k, v, bool(def[ 9]) );
+    } else if ( k.equals( key[ 10 ] ) ) { // DISTOX_SHOT_TIMER [3 ..)
+      mTimerWait        = tryIntValue( hlp, k, v, def[10] );
       if ( mTimerWait < 0 ) { mTimerWait = 0; ret = TDString.ZERO; }
-    } else if ( k.equals( key[ 12 ] ) ) { // DISTOX_BEEP_VOLUME [0 .. 100]
-      mBeepVolume       = tryIntValue( hlp, k, v, def[12] );
+    } else if ( k.equals( key[ 11 ] ) ) { // DISTOX_BEEP_VOLUME [0 .. 100]
+      mBeepVolume       = tryIntValue( hlp, k, v, def[11] );
       if ( mBeepVolume <   0 ) { mBeepVolume =   0; ret =   TDString.ZERO; }
       if ( mBeepVolume > 100 ) { mBeepVolume = 100; ret = "100"; }
     } else {
