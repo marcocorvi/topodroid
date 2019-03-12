@@ -987,12 +987,12 @@
   <string name="pref_kml_stations_summary">Добавить пикеты в экспорт KML</string>
   <string name="pref_kml_splays_title">Экспорт сплеев в KML</string>
   <string name="pref_kml_splays_summary">Добавить боковые замеры в экспорт KML</string>
-  <!-- TODO string name="pref_csv_raw_title">Raw CSV</string -->
-  <!-- TODO string name="pref_csv_raw_summary">Export raw data to CSV</string -->
-  <!-- TODO string name="pref_csv_sep_title">CSV separator</string -->
-  <!-- TODO string name="pref_csv_sep_summary">CSV fields separator</string -->
-  <!-- TODO string name="pref_csv_eol_title">CSV eol</string -->
-  <!-- TODO string name="pref_csv_eol_summary">CSV records separator</string -->
+  <string name="pref_csv_raw_title">Сырые данные в CSV</string>
+  <string name="pref_csv_raw_summary">Экспорт сырых данных замеров в CSV</string>
+  <string name="pref_csv_sep_title">CSV разделитель</string>
+  <string name="pref_csv_sep_summary">Разделитель данных в CSV</string>
+  <string name="pref_csv_eol_title">CSV eol</string>
+  <string name="pref_csv_eol_summary">CSV окончание строки</string>
 
   <string name="pref_sock_type_title">Тип соединения</string>
   <string name="pref_sock_type_summary">Тип соединения Bluetooth</string>
