@@ -1166,8 +1166,8 @@
   <string name="pref_dot_radius_message">Размер зеленых точек подсветки при поточечном редактировании</string>
   <string name="pref_line_thickness_title">Толщина линий</string>
   <string name="pref_line_thickness_summary">Толщина линий</string>
-  <!-- TODO string name="pref_line_units_title">Line units</string -->
-  <!-- TODO string name="pref_line_units_summary">Drawing line units</string -->
+  <string name="pref_line_units_title">Размер линий</string>
+  <string name="pref_line_units_summary">Размер орнамета линий</string>
   <string name="pref_linesnap_title">Привязать линию/область</string>
   <string name="pref_linesnap_summary">Включить привязку линий/областей</string>
   <string name="pref_linecurve_title">Сгладить/Спрямить сегмент</string>
@@ -1206,8 +1206,8 @@
   <string name="pref_th2_xvi_summary">Включить изображение xvi в th2 файл</string>
   <string name="pref_autoStations_title">Точки пикетов в абрисе Therion</string>
   <string name="pref_autoStations_summary">Добавлять точки пикетов в экспортированный абрис .th2</string>
-  <!-- TODO string name="pref_auto_xsections_title">Auto X-sections</string -->
-  <!-- TODO string name="pref_auto_xsections_summary">Add x-sections automatically to save/export [csx/svg/dxf/xvi]</string -->
+  <string name="pref_auto_xsections_title">Авто сечения</string>
+  <string name="pref_auto_xsections_summary">Автоматически добавлять поперечные сечения при экспорте [csx/svg/dxf/xvi]</string>
   <string name="pref_loopClosure_title">Закрывать петли</string>
   <string name="pref_loopClosure_summary">Автоматически компенсировать невязки при закрытии петли</string>
   <!-- UNUSED string name="pref_splayExtend_title">Развертка бокового замера</string -->
