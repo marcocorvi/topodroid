@@ -1001,12 +1001,12 @@
   <string name="pref_kml_stations_summary">Pridanie staničení do exportu KML</string>
   <string name="pref_kml_splays_title">KML pomocné zámery</string>
   <string name="pref_kml_splays_summary">Pridanie pomocných zámer do KML exportu</string>
-  <!-- TODO string name="pref_csv_raw_title">Raw CSV</string -->
-  <!-- TODO string name="pref_csv_raw_summary">Export raw data to CSV</string -->
-  <!-- TODO string name="pref_csv_sep_title">CSV separator</string -->
-  <!-- TODO string name="pref_csv_sep_summary">CSV fields separator</string -->
-  <!-- TODO string name="pref_csv_eol_title">CSV eol</string -->
-  <!-- TODO string name="pref_csv_eol_summary">CSV records separator</string -->
+  <string name="pref_csv_raw_title">Surové dáta CSV</string>
+  <string name="pref_csv_raw_summary">Exportuje surové dáta do CSV</string>
+  <string name="pref_csv_sep_title">CSV separátor</string>
+  <string name="pref_csv_sep_summary">CSV oddeľovač polí</string>
+  <string name="pref_csv_eol_title">CSV eol</string>
+  <string name="pref_csv_eol_summary">CSV nahraje oddeľovač</string>
 
   <string name="pref_sock_type_title">Zabezpečenie</string>
   <string name="pref_sock_type_summary">Výber typu zabezpečenia pripojenia DistoX</string>
