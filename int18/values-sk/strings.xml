@@ -901,13 +901,14 @@
   <string name="pref_cat_drawing">NASTAVENIA KRESLENIA</string>
   <string name="pref_cat_import_export">NASTAVENIA IMPORT/EXPORT</string>
   <string name="pref_cat_exportimport">IMPORT</string>
-  <!-- UNUSED string name="pref_cat_exportsvx" translatable="false">Survex</string -->
-  <!-- UNUSED string name="pref_cat_exportth"  translatable="false">Therion</string -->
-  <!-- UNUSED string name="pref_cat_exportdat" translatable="false">Compass</string -->
-  <!-- UNUSED string name="pref_cat_exportsvg" translatable="false">SVG</string -->
-  <!-- UNUSED string name="pref_cat_exportdxf" translatable="false">DXF</string -->
-  <!-- UNUSED string name="pref_cat_exportpng" translatable="false">PNG</string -->
-  <!-- UNUSED string name="pref_cat_exportkml" translatable="false">KML/GeoJSON</string -->
+  <string name="pref_cat_exportsvx" translatable="false">Survex</string>
+  <string name="pref_cat_exportth"  translatable="false">Therion</string>
+  <string name="pref_cat_exportdat" translatable="false">Compass</string>
+  <string name="pref_cat_exportsvg" translatable="false">SVG</string>
+  <string name="pref_cat_exportdxf" translatable="false">DXF</string>
+  <string name="pref_cat_exportpng" translatable="false">PNG</string>
+  <string name="pref_cat_exportkml" translatable="false">KML/GeoJSON</string>
+  <string name="pref_cat_exportcsv" translatable="false">CSV</string>
  
   <string name="pref_cat_calib">NASTAVENIA KALIBRÁCIE</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->  
