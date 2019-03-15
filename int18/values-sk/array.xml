@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <!-- TODO string-array name="csvSeparator">
-     <item name="comma">comma</item>
-     <item name="pipe">pipe</item>
-     <item name="tab">tab</item>
+  <string-array name="csv Oddeľovač">
+     <item name="comma">Čiarka</item>
+     <item name="pipe">Fajka</item>
+     <item name="tab">Tabulátor</item>
   </string-array -->
 
   <string-array name="lineContinue">
