@@ -1329,6 +1329,7 @@
   <string name="pref_log_therion" translatable="false">Therion</string>
   <string name="pref_log_units" translatable="false">Units</string>
   <string name="pref_log_zip" translatable="false">ZIP</string>
+DO NOT REMOVE THIS LINE -->
 
   <!-- UNUSED string name="line_bezier">Bezier</string -->
   <!-- UNUSED string name="line_fine">fine</string -->
