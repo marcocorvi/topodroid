@@ -977,13 +977,12 @@
   <string name="pref_kml_stations_summary">Capisaldi nell\'export KML</string>
   <string name="pref_kml_splays_title">Splays KML</string>
   <string name="pref_kml_splays_summary">Splays nell\'export KML</string>
-  <!-- TODO string name="pref_csv_raw_title">Raw CSV</string -->
-  <!-- TODO string name="pref_csv_raw_summary">Export raw data to CSV</string -->
-  <!-- TODO string name="pref_csv_sep_title">CSV separator</string -->
-  <!-- TODO string name="pref_csv_sep_summary">CSV fields separator</string -->
-  <!-- TODO string name="pref_csv_eol_title">CSV eol</string -->
-  <!-- TODO string name="pref_csv_eol_summary">CSV records separator</string -->
-
+  <string name="pref_csv_raw_title">CSV grezzo</string>
+  <string name="pref_csv_raw_summary">Esporta dati grezzi in CSV</string>
+  <string name="pref_csv_sep_title">Separatore CSV</string>
+  <string name="pref_csv_sep_summary">Separatore campi CSV</string>
+  <string name="pref_csv_eol_title">Fine linea CSV</string>
+  <string name="pref_csv_eol_summary">Separatore riga CSV</string>
   <string name="pref_sock_type_title">Socket</string>
   <string name="pref_sock_type_summary">Crea socket</string>
   <!-- UNUSED string name="pref_device_type_title">Tipo DistoX</string -->
@@ -1133,10 +1132,10 @@
   <string name="pref_lineacc_summary">Accuratezza di interpolazione per le curve Bezier</string>
   <string name="pref_linecorner_title">Angolatura Bezier</string>
   <string name="pref_linecorner_summary">Soglia angolatura curve Bezier</string>
-  <!-- TODO string name="pref_weeddistance_title">Point weeding segment buffer</string -->
-  <!-- TODO string name="pref_weeddistance_summary">Max distance from segment to weed points</string -->
-  <!-- TODO string name="pref_weedlength_title">Point weeding segment length</string -->
-  <!-- TODO string name="pref_weedlength_summary">Max length of a line segment</string -->
+  <string name="pref_weeddistance_title">Buffer segmento di pulizia punti</string>
+  <string name="pref_weeddistance_summary">Distanza massima da un segmento ai punti superflui</string>
+  <string name="pref_weedlength_title">Lunghezza massima segmento di pulizia punti</string>
+  <string name="pref_weedlength_summary">Lunghezza massima di un segmento di linea</string>
   <string name="pref_calib_algo_title">Algoritmo</string>
   <string name="pref_calib_algo_summary">Algortimo di calibrazione</string>
   <string name="pref_group_by_title">Politica gruppi</string>
@@ -1155,8 +1154,8 @@
   <string name="pref_dot_radius_message">Raggio dei punti di selezione</string>
   <string name="pref_line_thickness_title">Spessore linee</string>
   <string name="pref_line_thickness_summary">Spessore linee disegno</string>
-  <!-- TODO string name="pref_line_units_title">Line units</string -->
-  <!-- TODO string name="pref_line_units_summary">Drawing line units</string -->
+  <string name="pref_line_units_title">Unita\' linea</string>
+  <string name="pref_line_units_summary">Unita\' disegno linea</string>
   <string name="pref_linesnap_title">Snap di Linea/Area</string>
   <string name="pref_linesnap_summary">Abilita lo snap(copia) su linee/aree</string>
   <string name="pref_linecurve_title">Aggiusta segmento</string>
@@ -1195,8 +1194,8 @@
   <string name="pref_th2_xvi_summary">Inserire immagine xvi in th2</string>
   <string name="pref_autoStations_title">Punti capisaldi th2</string>
   <string name="pref_autoStations_summary">Aggiungi capisaldi automaticamente</string>
-  <!-- TODO string name="pref_auto_xsections_title">Auto X-sections</string -->
-  <!-- TODO string name="pref_auto_xsections_summary">Add x-sections automatically to save/export [csx/svg/dxf/xvi]</string -->
+  <string name="pref_auto_xsections_title">X-section automatiche</string>
+  <string name="pref_auto_xsections_summary">Aggiunge automaticamente le X-section alla save/export [csx/svg/dxf/xvi]</string>
   <string name="pref_loopClosure_title">Chiusura anelli</string>
   <string name="pref_loopClosure_summary">Compensazione errore nella chiusura anelli</string>
   <!-- UNUSED string name="pref_splayExtend_title">Stima extend per splay</string -->
