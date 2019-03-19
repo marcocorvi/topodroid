@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:id="@+id/layout0"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/paddingv"
+    >
+
+  <ListView android:id="@+id/packet_list"
+    style="@style/list_top"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    />  
+
+  <LinearLayout 
+    android:orientation="horizontal"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/marginvbig"
+    android:layout_gravity="left"
+    android:paddingBottom="@dimen/paddingv"
+    >  
+    <Button android:id="@+id/clear_day"
+      style="@style/button_default"
+      android:layout_marginRight="@dimen/marginh"
+      android:text="@string/button_clear_day"
+      />
+    <Button android:id="@+id/clear_week"
+      style="@style/button_default"
+      android:layout_marginRight="@dimen/marginh"
+      android:text="@string/button_clear_week"
+      />
+    <Button android:id="@+id/cancel"
+      style="@style/button_default"
+      android:layout_marginRight="@dimen/marginh"
+      android:text="@string/button_back"
+      />
+  </LinearLayout>
+   					  
+</LinearLayout>

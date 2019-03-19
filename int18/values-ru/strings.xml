@@ -333,6 +333,7 @@
     <string name="menu_manual_calibration">ПОПРАВКИ</string>
     <string name="menu_options">НАСТРОЙКИ</string>
     <string name="menu_overview">ОБЗОР</string>
+    <!-- TODO string name="menu_packets">PACKETS</string -->
     <string name="menu_pair">СОПРЯЖЕНИЕ</string>
     <string name="menu_palette">ПАЛИТРА</string>
     <string name="menu_photo">ФОТО</string>
@@ -595,6 +596,8 @@
     <string name="button_left"      >ЛЕВО</string>
     <string name="button_right"     >ПРАВО</string>
     <string name="button_clear"     >Очистить  </string>
+    <!-- TODO string name="button_clear_day" >Clear 1d  </string -->
+    <!-- TODO string name="button_clear_week">Clear 7d  </string -->
     <string name="button_save"      >Сохр.     </string>
     <!-- UNUSED string name="button_select"    >Выбрать   </string -->
     <string name="button_search"    >Поиск    </string>
@@ -717,6 +720,7 @@
     <string name="help_display_calib">Показать удаленные измерения</string>
     <string name="help_validate">Проверить калибровку</string>
     <string name="help_overview">Обзор карты</string>
+    <!-- TODO string name="help_packets">DistoX packets dialog</string -->
     <string name="help_plot">Окно абрисов</string>
     <string name="help_note">Редактировать заметки съёмки</string>
     <string name="help_bluetooth">Сброс соединения Bluetooth</string>
@@ -825,6 +829,7 @@
     <string name="title_mode">Режим отображения</string>
     <string name="title_move">Перемещение</string>
     <string name="title_note">Заметки</string>
+    <!-- TODO string name="title_packet_dialog">Packets</string -->
     <string name="title_photo">Фото/Измерения</string>
     <string name="title_photo_comment">Описание Фото</string>
     <string name="title_plot_save">Сохранить абрис как</string>
@@ -936,6 +941,8 @@
   <string name="pref_with_sensors_summary">Включить данные "датчиков"</string>
   <string name="pref_palettes_title">Доп. Знаки</string>
   <string name="pref_palettes_summary">Включить дополнительные наборы условных знаков</string>
+  <!-- TODO string name="pref_packet_logger_title">Packets log</string -->
+  <!-- TODO string name="pref_packet_logger_summary">Enable packets logging</string -->
 
   <string name="pref_bezier_step_title">Макс. расстояние между точками</string>
   <string name="pref_bezier_step_summary">Маскисмальное расстояние между точками при апроксимации кривых полилиниями [м]</string>

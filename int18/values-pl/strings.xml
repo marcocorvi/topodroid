@@ -337,6 +337,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="menu_manual_calibration">KALIBRACJA</string>
     <string name="menu_options">USTAWIENIA</string>
     <string name="menu_overview">PRZEGLĄD</string>
+    <!-- TODO string name="menu_packets">PACKETS</string -->
     <string name="menu_pair">PARUJ</string>
     <string name="menu_palette">PALETA</string>
     <string name="menu_photo">ZDJĘCIE</string>
@@ -605,6 +606,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="button_left"      >LEWY</string>
     <string name="button_right"     >PRAWY</string>
     <string name="button_clear"     >Wyczyść     </string>
+    <!-- TODO string name="button_clear_day" >Clear 1d  </string -->
+    <!-- TODO string name="button_clear_week">Clear 7d  </string -->
     <string name="button_save"      >Zapisz      </string>
     <!-- UNUSED string name="button_select"    >Select    </string -->
     <string name="button_search"    >Szukaj    </string>
@@ -727,6 +730,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_display_calib">Przełącz wyświetlanie usuniętych strzałów</string>
     <string name="help_validate">Sprawdzanie kalibracji</string>
     <string name="help_overview">Przegląd aktywności</string>
+    <!-- TODO string name="help_packets">DistoX packets dialog</string -->
     <string name="help_plot">Aktywność szkicu</string>
     <string name="help_note">Uwagi do ciągu pomiarowego</string>
     <string name="help_bluetooth">Resetuj połączenie BT</string>
@@ -836,6 +840,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_mode">Tryb wyświetlania</string>
     <string name="title_move">Ruchomy</string>
     <string name="title_note">Notatki ciągu pomiarowego</string>
+    <!-- TODO string name="title_packet_dialog">Packets</string -->
     <string name="title_photo">Więcej edycji strzałów</string>
     <string name="title_photo_comment">Komentarz zdjęcia</string>
     <string name="title_plot_save">Eksport szkicu</string>
@@ -948,6 +953,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <!-- TODO string name="pref_with_sensors_summary">Enable "sensors" data</string -->
   <!-- TODO string name="pref_palettes_title">Palettes</string -->
   <!-- TODO string name="pref_palettes_summary">Enable additional palettes</string -->
+  <!-- TODO string name="pref_packet_logger_title">Packets log</string -->
+  <!-- TODO string name="pref_packet_logger_summary">Enable packets logging</string -->
 
   <string name="pref_bezier_step_title">Odstępy między punktami</string>
   <string name="pref_bezier_step_summary">Max. odstęp między punktami (przybliżenie krzywych) [m]</string>

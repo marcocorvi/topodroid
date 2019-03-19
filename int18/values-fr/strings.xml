@@ -331,6 +331,7 @@
     <string name="menu_manual_calibration">ÉTALONNAGE</string>
     <string name="menu_options">OPTIONS</string>
     <string name="menu_overview">APERÇU</string>
+    <!-- TODO string name="menu_packets">PACKETS</string -->
     <string name="menu_pair">APPAIRER</string>
     <string name="menu_palette">PALETTE</string>
     <string name="menu_photo">PHOTO</string>
@@ -593,6 +594,8 @@
     <string name="button_left"      >GAUCHE</string>
     <string name="button_right"     >DROITE</string>
     <string name="button_clear"     >EFFACER     </string>
+    <!-- TODO string name="button_clear_day" >Clear 1d  </string -->
+    <!-- TODO string name="button_clear_week">Clear 7d  </string -->
     <string name="button_save"      >ENREGISTRER      </string>
     <!-- UNUSED string name="button_select"    >Sélectionner    </string -->
     <string name="button_search"    >Chercher    </string>
@@ -715,6 +718,7 @@
     <string name="help_display_calib">Basculer affichage des visées supprimées</string>
     <string name="help_validate">Valider l\'étalonnage</string>
     <string name="help_overview">Résumé d\'activité</string>
+    <!-- TODO string name="help_packets">DistoX packets dialog</string -->
     <string name="help_plot">Passe en mode croquis</string>
     <string name="help_note">Modifie les notes du relevé</string>
     <string name="help_bluetooth">Réinitialise la connexion Bluetooth</string>
@@ -816,6 +820,7 @@
     <string name="title_mode">Mode d\'affichage</string>
     <string name="title_move">Déplacement</string>
     <string name="title_note">Notes du relevé</string>
+    <!-- TODO string name="title_packet_dialog">Packets</string -->
     <string name="title_photo">Photo/Mesures</string>
     <string name="title_photo_comment">Commentaire photo</string>
     <string name="title_plot_save">Enregistrer le croquis sous</string>
@@ -920,6 +925,8 @@
   <!-- TODO string name="pref_with_sensors_summary">Enable "sensors" data</string -->
   <!-- TODO string name="pref_palettes_title">Palettes</string -->
   <!-- TODO string name="pref_palettes_summary">Enable additional palettes</string -->
+  <!-- TODO string name="pref_packet_logger_title">Packets log</string -->
+  <!-- TODO string name="pref_packet_logger_summary">Enable packets logging</string -->
 
   <string name="pref_bezier_step_title">Espacement des points</string>
   <string name="pref_bezier_step_summary">Distance entre les points lors de l\'export ligne [m]</string>

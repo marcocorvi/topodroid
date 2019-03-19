@@ -331,6 +331,7 @@
     <string name="menu_manual_calibration">KALIBRÁCIÓ</string>
     <string name="menu_options">BEÁLLÍTÁSOK</string>
     <string name="menu_overview">ÁTTEKINTÉS</string>
+    <!-- TODO string name="menu_packets">PACKETS</string -->
     <string name="menu_pair">PÁROSÍTÁS</string>
     <string name="menu_palette">PALETTA</string>
     <string name="menu_photo">FOTÓ</string>
@@ -593,6 +594,8 @@
     <string name="button_left"      >BAL</string>
     <string name="button_right"     >JOBB</string>
     <string name="button_clear"     >Töröl</string>
+    <!-- TODO string name="button_clear_day" >Clear 1d  </string -->
+    <!-- TODO string name="button_clear_week">Clear 7d  </string -->
     <string name="button_save"      >Ment</string>
     <!-- UNUSED string name="button_select"    >Select    </string -->
     <string name="button_search"    >Keres    </string>
@@ -715,6 +718,7 @@
     <string name="help_display_calib">Törölt mérések láthatóak/nem </string>
     <string name="help_validate">Kalibráció érvényesítése</string>
     <string name="help_overview">Aktivitás áttekintése</string>
+    <!-- TODO string name="help_packets">DistoX packets dialog</string -->
     <string name="help_plot">Vázlat aktivitás megtekintése</string>
     <string name="help_note">Felmérési jegyzetek szerkesztése</string>
     <string name="help_bluetooth">Bluetooth kapcsolat újraindítása</string>
@@ -815,6 +819,7 @@
     <string name="title_mode">Megjelenítési mód</string>
     <string name="title_move">Mozgatás</string>
     <string name="title_note">Felmérési jegyzetek</string>
+    <!-- TODO string name="title_packet_dialog">Packets</string -->
     <string name="title_photo">Fénykép/Méretek</string>
     <string name="title_photo_comment">Fénykép magyarázat</string>
     <string name="title_plot_save">Vázlat exportálása</string>
@@ -921,6 +926,8 @@
   <!-- TODO string name="pref_with_sensors_summary">Enable "sensors" data</string -->
   <!-- TODO string name="pref_palettes_title">Palettes</string -->
   <!-- TODO string name="pref_palettes_summary">Enable additional palettes</string -->
+  <!-- TODO string name="pref_packet_logger_title">Packets log</string -->
+  <!-- TODO string name="pref_packet_logger_summary">Enable packets logging</string -->
 
   <!-- TODO string name="pref_bezier_step_title">Point spacing</string -->
   <!-- TODO string name="pref_bezier_step_summary">Distance between points on an export line [m]</string -->

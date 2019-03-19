@@ -107,6 +107,7 @@ public class MainWindow extends Activity
 			  R.string.menu_backups,
                           // R.string.menu_join_survey,
 			  // R.string.menu_updates, // UPDATES
+                          R.string.menu_packets,
                           R.string.menu_about,
                           R.string.menu_options,
                           R.string.menu_help
@@ -126,6 +127,7 @@ public class MainWindow extends Activity
 			  R.string.help_backups,
                           // R.string.help_join_survey,
                           // R.string.help_updates, // UPDATES
+                          R.string.help_packets,
                           R.string.help_info_topodroid,
                           R.string.help_prefs,
                           R.string.help_help
@@ -377,9 +379,10 @@ public class MainWindow extends Activity
     if ( TDLevel.overExpert && TDSetting.mBackupsClear ) mMenuAdapter.add( res.getString( menus[2] ) ); // CLEAR_BACKUPS
     // if ( TDLevel.overExpert && mApp_mCosurvey ) mMenuAdapter.add( res.getString( menus[2] ) ); // IF_COSURVEY
     // if ( TDLevel.overExpert )   mMenuAdapter.add( res.getString( menus[3] ) ); // UPDATES
-    mMenuAdapter.add( res.getString( menus[3] ) ); // ABOUT
-    mMenuAdapter.add( res.getString( menus[4] ) ); // SETTINGS
-    mMenuAdapter.add( res.getString( menus[5] ) ); // HELP
+    if ( TDLevel.overExpert && TDSetting.mPacketLog ) mMenuAdapter.add( res.getString( menus[3] ) ); // PACKET_LOG
+    mMenuAdapter.add( res.getString( menus[4] ) ); // ABOUT
+    mMenuAdapter.add( res.getString( menus[5] ) ); // SETTINGS
+    mMenuAdapter.add( res.getString( menus[6] ) ); // HELP
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
   }
@@ -416,6 +419,8 @@ public class MainWindow extends Activity
       //   (new ConnectDialog( mActivity, mApp )).show();
       // } else if ( TDLevel.overExpert && p++ == pos ) {  // UPDATES
       //   // (new TDUpdatesDialog( mActivity, mApp )).show();
+      } else if ( TDLevel.overExpert && TDSetting.mPacketLog && p++ == pos ) {  // PACKET_LOG
+        (new PacketDialog( mActivity )).show();
       } else if ( p++ == pos ) { // ABOUT
         (new TopoDroidAbout( mActivity, this, -2 )).show();
       } else if ( p++ == pos ) { // SETTINGS

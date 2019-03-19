@@ -16,9 +16,7 @@ package com.topodroid.DistoX;
 import java.io.IOException;
 import java.io.EOFException;
 import java.io.FileNotFoundException;
-// import java.io.FilterInputStream;
 import java.io.File;
-// import java.io.InputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.DataInputStream;
@@ -30,6 +28,8 @@ import java.util.Locale;
 import java.net.Socket;
 
 // import android.os.CountDownTimer;
+
+import android.content.Context;
 
 import java.nio.channels.ClosedByInterruptException;
 // import java.nio.ByteBuffer;
@@ -45,9 +45,12 @@ import android.util.Log;
 class DistoXProtocol
 {
   private int  mDeviceType;
+  private String  mDeviceAddress;
+  private PacketLogger mPacketLogger;
   // private DistoX mDistoX;
   // private BluetoothDevice  mBTDevice;
   // private BluetoothSocket  mSocket = null;
+
   private Socket  mSocket = null;
   private DataInputStream  mIn;
   private DataOutputStream mOut;
@@ -121,6 +124,8 @@ class DistoXProtocol
           // synchronized( dataRead ) 
           {
             count[0] = mIn.read( mBuffer, dataRead[0], toRead[0] );
+            // if ( TDSetting.mPacketLog ) LogPacket( 0L );
+
             toRead[0]   -= count[0];
             dataRead[0] += count[0];
           }
@@ -173,9 +178,12 @@ class DistoXProtocol
 
 //-----------------------------------------------------
 
-  DistoXProtocol( DataInputStream in, DataOutputStream out, Device device )
+  DistoXProtocol( DataInputStream in, DataOutputStream out, Device device, Context context )
   {
     mDeviceType = device.mType;
+    mDeviceAddress = device.mAddress;
+    mPacketLogger  = new PacketLogger( context );
+
     // mSocket = socket;
     // mDistoX = distox;
     mSeqBit = (byte)0xff;
@@ -225,6 +233,57 @@ class DistoXProtocol
     }
   }
 
+  private void logPacket( long dir )
+  {
+    mPacketLogger.insertPacket(
+        System.currentTimeMillis(),
+        dir,
+        mDeviceAddress,
+        (int)(mBuffer[0] & 0x3f),
+        String.format("%02x %02x %02x %02x %02x %02x %02x %02x",
+          mBuffer[0], mBuffer[1], mBuffer[2], mBuffer[3], mBuffer[4], mBuffer[5], mBuffer[6], mBuffer[7] ) );
+  }
+
+  private void logPacket1( long dir, byte[] buf )
+  {
+    mPacketLogger.insertPacket(
+        System.currentTimeMillis(),
+        dir,
+        mDeviceAddress,
+        (int)(buf[0] & 0x3f),
+        String.format("%02x", buf[0] ) );
+  }
+
+  private void logPacket3( long dir, byte[] buf )
+  {
+    mPacketLogger.insertPacket(
+        System.currentTimeMillis(),
+        dir,
+        mDeviceAddress,
+        (int)(buf[0] & 0x3f),
+        String.format("%02x %02x %02x", buf[0], buf[1], buf[2], mBuffer[3], mBuffer[4], mBuffer[5], mBuffer[6], mBuffer[7] ) );
+  }
+
+  private void logPacket7( long dir, byte[] buf )
+  {
+    mPacketLogger.insertPacket(
+        System.currentTimeMillis(),
+        dir,
+        mDeviceAddress,
+        (int)(buf[0] & 0x3f),
+        String.format("%02x %02x %02x %02x %02x %02x %02x", buf[0], buf[1], buf[2], buf[3], buf[4], buf[5], buf[6] ) );
+  }
+
+  private void logPacket8( long dir, byte[] buf )
+  {
+    mPacketLogger.insertPacket(
+        System.currentTimeMillis(),
+        dir,
+        mDeviceAddress,
+        (int)(buf[0] & 0x3f),
+        String.format("%02x %02x %02x %02x %02x %02x %02x %02x", buf[0], buf[1], buf[2], buf[3], buf[4], buf[5], buf[6], buf[7] ) );
+  }
+
   private int handlePacket( ) 
   {
     byte type = (byte)(mBuffer[0] & 0x3f);
@@ -234,6 +293,7 @@ class DistoXProtocol
         String.format("%02x %02x %02x %02x %02x %02x %02x %02x", mBuffer[0], mBuffer[1], mBuffer[2],
         mBuffer[3], mBuffer[4], mBuffer[5], mBuffer[6], mBuffer[7] ) );
     }
+    if ( TDSetting.mPacketLog ) logPacket( 0L );
 
     // int high, low;
     switch ( type ) {
@@ -363,6 +423,7 @@ class DistoXProtocol
       if ( available >= min_available ) {
         if ( no_timeout || ! TDSetting.mZ6Workaround ) {
           mIn.readFully( mBuffer, 0, 8 );
+          if ( TDSetting.mPacketLog ) logPacket( 0L );
         }
         byte seq  = (byte)(mBuffer[0] & 0x80); // sequence bit
         // Log.v( "DistoX", "VD read packet seq bit " + String.format("%02x %02x %02x", mBuffer[0], seq, mSeqBit ) );
@@ -376,6 +437,7 @@ class DistoXProtocol
               "read packet byte " + String.format(" %02x", mBuffer[0] ) + " ... writing ack" );
           }
           mOut.write( mAcknowledge, 0, 1 );
+          if ( TDSetting.mPacketLog ) logPacket1( 1L, mAcknowledge );
         }
         if ( ok ) return handlePacket();
       } // else timedout with no packet
@@ -401,6 +463,7 @@ class DistoXProtocol
       mRequestBuffer[0] = (byte)(cmd);
       mOut.write( mRequestBuffer, 0, 1 );
       mOut.flush();
+      // if ( TDSetting.mPacketLog ) logPacket1( 1L, mRequestBuffer );
     } catch (IOException e ) {
       TDLog.Error( "sendCommand failed" );
       return false;
@@ -414,7 +477,11 @@ class DistoXProtocol
     mError = DISTOX_ERR_OK;
     try {
       mOut.write( command, 0, 3 );
+      // if ( TDSetting.mPacketLog ) logPacket3( 1L, command );
+
       mIn.readFully( mBuffer, 0, 8 );
+      if ( TDSetting.mPacketLog ) logPacket( 0L );
+
       if ( ( mBuffer[0] != (byte)( 0x38 ) ) || ( mBuffer[1] != command[1] ) || ( mBuffer[2] != command[2] ) ) {
 	mError = DISTOX_ERR_HEADTAIL;
 	return DISTOX_ERR_HEADTAIL;
@@ -458,7 +525,11 @@ class DistoXProtocol
       mBuffer[1] = (byte)( addr & 0xff );
       mBuffer[2] = (byte)( (addr>>8) & 0xff );
       mOut.write( mBuffer, 0, 3 );
+      // if ( TDSetting.mPacketLog ) logPacket3( 1L, mBuffer );
+
       mIn.readFully( mBuffer, 0, 8 );
+      // if ( TDSetting.mPacketLog ) logPacket( 0L );
+
       if ( mBuffer[0] != (byte)0x38 ) { 
         TDLog.Error( "HotBit-38 wrong reply packet addr " + addr );
         return false;
@@ -480,7 +551,11 @@ class DistoXProtocol
 
       mBuffer[3] |= (byte)0x80; // RESET HOT BIT
       mOut.write( mBuffer, 0, 7 );
+      // if ( TDSetting.mPacketLog ) logPacket7( 1L, mBuffer );
+
       mIn.readFully( mBuffer, 0, 8 );
+      // if ( TDSetting.mPacketLog ) logPacket( 0L );
+
       if ( mBuffer[0] != (byte)0x38 ) {
         TDLog.Error( "HotBit-39 wrong reply packet addr " + addr );
         return false;
@@ -506,7 +581,11 @@ class DistoXProtocol
   {
     try {
       mOut.write( command, 0, 3 );
+      // if ( TDSetting.mPacketLog ) logPacket3( 1L, command );
+
       mIn.readFully( mBuffer, 0, 8 );
+      // if ( TDSetting.mPacketLog ) logPacket( 0L );
+
       if ( mBuffer[0] != (byte)( 0x38 ) ) { return null; }
       if ( mBuffer[1] != command[1] ) { return null; }
       if ( mBuffer[2] != command[2] ) { return null; }
@@ -601,7 +680,11 @@ class DistoXProtocol
         // TODO write and read
         try {
           mOut.write( mBuffer, 0, 3 );
+          // if ( TDSetting.mPacketLog ) logPacket3( 1L, mBuffer );
+
           mIn.readFully( mBuffer, 0, 8 );
+          // if ( TDSetting.mPacketLog ) logPacket( 0L );
+
         } catch ( IOException e ) {
           TDLog.Error( "readMemory() IO failed" );
           break;
@@ -622,7 +705,11 @@ class DistoXProtocol
         mBuffer[2] = (byte)( (addr>>8) & 0xff );
         try {
           mOut.write( mBuffer, 0, 3 );
+          // if ( TDSetting.mPacketLog ) logPacket3( 1L, mBuffer );
+
           mIn.readFully( mBuffer, 0, 8 );
+          // if ( TDSetting.mPacketLog ) logPacket( 0L );
+
         } catch ( IOException e ) {
           TDLog.Error( "readMemory() IO failed" );
           break;
@@ -655,7 +742,11 @@ class DistoXProtocol
   //     // TODO write and read
   //     try {
   //       mOut.write( mBuffer, 0, 3 );
+  //       // if ( TDSetting.mPacketLog ) logPacket3( 1L, mBuffer );
+  //
   //       mIn.readFully( mBuffer, 0, 8 );
+  //       // if ( TDSetting.mPacketLog ) logPacket( 0L );
+  //
   //     } catch ( IOException e ) {
   //       TDLog.Error( "resetMemory() IO nr. 1 failed" );
   //       break;
@@ -675,7 +766,11 @@ class DistoXProtocol
   //     mBuffer[4] = (byte)( 0xff );
   //     try {
   //       mOut.write( mBuffer, 0, 7 );
+  //       // if ( TDSetting.mPacketLog ) logPacket7( 1L, mBuffer );
+  //
   //       mIn.readFully( mBuffer, 0, 8 );
+  //       // if ( TDSetting.mPacketLog ) logPacket( 0L );
+  //
   //     } catch ( IOException e ) {
   //       TDLog.Error( "resetMemory() IO nr. 2 failed" );
   //       break;
@@ -699,7 +794,11 @@ class DistoXProtocol
     mBuffer[2] = (byte)( (addr>>8) & 0xff );
     try {
       mOut.write( mBuffer, 0, 3 );
+      // if ( TDSetting.mPacketLog ) logPacket3( 1L, mBuffer );
+
       mIn.readFully( mBuffer, 0, 8 );
+      // if ( TDSetting.mPacketLog ) logPacket( 0L );
+
     } catch ( IOException e ) {
       TDLog.Error( "readMemory() IO failed" );
       return null;
@@ -735,7 +834,11 @@ class DistoXProtocol
         // TODO write and read
         try {
           mOut.write( mBuffer, 0, 3 );
+          // if ( TDSetting.mPacketLog ) logPacket3( 1L, mBuffer );
+
           mIn.readFully( mBuffer, 0, 8 );
+          // if ( TDSetting.mPacketLog ) logPacket( 0L );
+
         } catch ( IOException e ) {
           TDLog.Error( "readMemory() IO failed" );
           break;
@@ -764,7 +867,11 @@ class DistoXProtocol
   {
     try {
       mOut.write( mAddr8000, 0, 3 );
+      // if ( TDSetting.mPacketLog ) logPacket3( 1L, mAddr8000 );
+
       mIn.readFully( mBuffer, 0, 8 );
+      // if ( TDSetting.mPacketLog ) logPacket( 0L );
+
       if ( mBuffer[0] != (byte)( 0x38 ) ) { return false; }
       if ( mBuffer[1] != mAddr8000[1] ) { return false; }
       if ( mBuffer[2] != mAddr8000[2] ) { return false; }
@@ -800,7 +907,11 @@ class DistoXProtocol
         mBuffer[5] = calib[k]; ++k;
         mBuffer[6] = calib[k]; ++k;
         mOut.write( mBuffer, 0, 7 );
+        if ( TDSetting.mPacketLog ) logPacket7( 1L, mBuffer );
+
         mIn.readFully( mBuffer, 0, 8 );
+        if ( TDSetting.mPacketLog ) logPacket( 0L );
+
         // TDLog.Log( TDLog.LOG_PROTO, "writeCalibration " + 
         //   String.format("%02x %02x %02x %02x %02x %02x %02x %02x", mBuffer[0], mBuffer[1], mBuffer[2],
         //   mBuffer[3], mBuffer[4], mBuffer[5], mBuffer[6], mBuffer[7] ) );
@@ -834,7 +945,11 @@ class DistoXProtocol
         mBuffer[1] = (byte)( addr & 0xff );
         mBuffer[2] = (byte)( (addr>>8) & 0xff );
         mOut.write( mBuffer, 0, 3 );
+        // if ( TDSetting.mPacketLog ) logPacket3( 1L, mBuffer );
+
         mIn.readFully( mBuffer, 0, 8 );
+        // if ( TDSetting.mPacketLog ) logPacket( 0L );
+
         if ( mBuffer[0] != 0x38 ) { return false; }
         if ( mBuffer[1] != (byte)( addr & 0xff ) ) { return false; }
         if ( mBuffer[2] != (byte)( (addr>>8) & 0xff ) ) { return false; }
@@ -886,7 +1001,11 @@ class DistoXProtocol
             buf[1] = (byte)( addr & 0xff );
             buf[2] = 0; // not necessary
             mOut.write( buf, 0, 259 );
+            // if ( TDSetting.mPacketLog ) logPacket8( 1L, buf );
+
             mIn.readFully( mBuffer, 0, 8 );
+            // if ( TDSetting.mPacketLog ) logPacket( 0L );
+
             int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
             if ( mBuffer[0] != (byte)0x3b || addr != reply_addr ) {
               TDLog.LogFile( "Firmware upload: fail at " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr );
@@ -934,8 +1053,11 @@ class DistoXProtocol
           buf[1] = (byte)( addr & 0xff );
           buf[2] = 0; // not necessary
           mOut.write( buf, 0, 3 );
+          // if ( TDSetting.mPacketLog ) logPacket3( 1L, buf );
 
           mIn.readFully( mBuffer, 0, 8 );
+          // if ( TDSetting.mPacketLog ) logPacket( 0L );
+
           int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
           if ( mBuffer[0] != (byte)0x3a || addr != reply_addr ) {
             TDLog.LogFile( "Firmware dump: fail at " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr );
@@ -946,6 +1068,8 @@ class DistoXProtocol
           }
 
           mIn.readFully( buf, 0, 256 );
+          // if ( TDSetting.mPacketLog ) logPacket8( 0L, buf );
+
           boolean last = true;
           for ( int k=0; last && k<256; ++k ) {
             if ( buf[k] != (byte)0xff ) last = false;

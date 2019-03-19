@@ -330,6 +330,7 @@
     <string name="menu_manual_calibration">Calibrazione</string>
     <string name="menu_options">OPZIONI</string>
     <string name="menu_overview">PANORAMICA</string>
+    <!-- TODO string name="menu_packets">PACKETS</string -->
     <string name="menu_pair">ASSOCIA</string>
     <!-- OK string name="menu_palette">PALETTE</string -->
     <string name="menu_photo">FOTO</string>
@@ -592,6 +593,8 @@
     <string name="button_left"      >SINISTRA</string>
     <string name="button_right"     >DESTRA</string>
     <string name="button_clear"     >Cancella  </string>
+    <!-- TODO string name="button_clear_day" >Clear 1d  </string -->
+    <!-- TODO string name="button_clear_week">Clear 7d  </string -->
     <string name="button_save"      >Salva     </string>
     <!-- UNUSED string name="button_select"    >Seleziona </string -->
     <string name="button_search"    >Cerca     </string>
@@ -714,6 +717,7 @@
     <string name="help_display_calib">Mostra/Nascondi i tiri cancellati</string>
     <string name="help_validate">Convalida calibrazione</string>
     <string name="help_overview">Vista globale</string>
+    <!-- TODO string name="help_packets">DistoX packets dialog</string -->
     <string name="help_plot">Finestra disegno</string>
     <string name="help_note">Annotazioni rilievo</string>
     <string name="help_bluetooth">Resetta connessione bluetooth</string>
@@ -816,6 +820,7 @@
     <string name="title_mode">Modalità display</string>
     <string name="title_move">Sposta</string>
     <string name="title_note">Annotazioni</string>
+    <!-- TODO string name="title_packet_dialog">Packets</string -->
     <string name="title_photo">Foto/Misurazione</string>
     <string name="title_photo_comment">Commento foto</string>
     <string name="title_plot_save">Salva disegno come </string>
@@ -926,6 +931,8 @@
   <string name="pref_with_sensors_summary">Abilita dati "sensori"</string>
   <string name="pref_palettes_title">Tavolozze</string>
   <string name="pref_palettes_summary">Abilita tavolozze addizionali</string>
+  <!-- TODO string name="pref_packet_logger_title">Packets log</string -->
+  <!-- TODO string name="pref_packet_logger_summary">Enable packets logging</string -->
 
   <string name="pref_bezier_step_title">Spaziatura punti</string>
   <string name="pref_bezier_step_summary">Distanza tra punti in una linea di export [m]</string>

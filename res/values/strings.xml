@@ -335,6 +335,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="menu_manual_calibration">CALIBRATION</string>
     <string name="menu_options">SETTINGS</string>
     <string name="menu_overview">OVERVIEW</string>
+    <string name="menu_packets">PACKETS</string>
     <string name="menu_pair">PAIR</string>
     <string name="menu_palette">PALETTE</string>
     <string name="menu_photo">PHOTO</string>
@@ -608,6 +609,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="button_left"      >LEFT</string>
     <string name="button_right"     >RIGHT</string>
     <string name="button_clear"     >Clear     </string>
+    <string name="button_clear_day" >Clear 1d  </string>
+    <string name="button_clear_week">Clear 7d  </string>
     <string name="button_save"      >Save      </string>
     <!-- UNUSED string name="button_select"    >Select    </string -->
     <string name="button_search"    >Search    </string>
@@ -730,6 +733,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_display_calib">Toggle display of deleted shots</string>
     <string name="help_validate">Calibration validation</string>
     <string name="help_overview">Overview activity</string>
+    <string name="help_packets">DistoX packets dialog</string>
     <string name="help_plot">Sketch activity</string>
     <string name="help_note">Survey notes</string>
     <string name="help_bluetooth">Reset bluetooth connection</string>
@@ -839,6 +843,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_mode">Display Mode</string>
     <string name="title_move">Moving</string>
     <string name="title_note">Survey notes</string>
+    <string name="title_packet_dialog">Packets</string>
     <string name="title_photo">More shot edit</string>
     <string name="title_photo_comment">Photo comment</string>
     <string name="title_plot_save">Export sketch</string>
@@ -951,6 +956,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <!-- UNUSED string name="pref_with_rename_summary">Enable "survey renaming" menu</string -->
   <string name="pref_palettes_title">Palettes</string>
   <string name="pref_palettes_summary">Enable additional palettes</string>
+  <string name="pref_packet_logger_title">Packets log</string>
+  <string name="pref_packet_logger_summary">Enable packets logging</string>
 
   <string name="pref_bezier_step_title">Point spacing</string>
   <string name="pref_bezier_step_summary">Max. point spacing (polyline approx. of curves) [m]</string>

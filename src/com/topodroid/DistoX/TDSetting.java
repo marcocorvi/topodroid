@@ -108,6 +108,7 @@ class TDSetting
   static boolean mKeyboard = true;
   static boolean mNoCursor = false;
   static boolean mLocalManPages = true;
+  static boolean mPacketLog     = false;
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   // IMPORT EXPORT
@@ -642,7 +643,8 @@ class TDSetting
 
     String[] keyGeek = TDPrefKey.GEEK;
     String[] defGeek = TDPrefKey.GEEKdef;
-    setPalettes( prefs.getBoolean( keyGeek[0], bool(defGeek[0]) ) ); // DISTOX_PALETTES
+    setPalettes(  prefs.getBoolean( keyGeek[0], bool(defGeek[0]) ) ); // DISTOX_PALETTES
+    setPacketLog( prefs.getBoolean( keyGeek[1], bool(defGeek[1]) ) ); // DISTOX_PACKET_LOGGER
 
     String[] keyGPlot = TDPrefKey.GEEKPLOT;
     String[] defGPlot = TDPrefKey.GEEKPLOTdef;
@@ -1237,6 +1239,8 @@ class TDSetting
     String[] def = TDPrefKey.GEEKdef;
     if ( k.equals( key[ 0 ] ) ) { // DISTOX_PALETTES
       setPalettes( tryBooleanValue( hlp, k, v, bool(def[0]) ) );
+    } else if ( k.equals( key[1] ) ) {
+      setPacketLog( tryBooleanValue( hlp, k, v, bool(def[1]) ) ); // DISTOX_PACKET_LOGGER
     } else {
       TDLog.Error("missing GEEK key: " + k );
     }
@@ -2177,6 +2181,18 @@ class TDSetting
   {
     if ( mPalettes != b ) {
       mPalettes = b;
+      if ( TopoDroidApp.mActivity != null ) {
+        // TopoDroidApp.mActivity.resetButtonBar();
+        // FIXME TOOLBAR TopoDroidApp.mActivity.resetToolbar();
+        TopoDroidApp.mActivity.setMenuAdapter( TDInstance.context.getResources() );
+      }
+    }
+  }
+
+  private static void setPacketLog( boolean b )
+  {
+    if ( mPacketLog != b ) {
+      mPacketLog = b;
       if ( TopoDroidApp.mActivity != null ) {
         // TopoDroidApp.mActivity.resetButtonBar();
         // FIXME TOOLBAR TopoDroidApp.mActivity.resetToolbar();

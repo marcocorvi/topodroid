@@ -331,13 +331,8 @@ class DistoXComm extends TopoDroidComm
       if ( mBTSocket != null ) {
         // TDLog.Log( TDLog.LOG_COMM, "[6a] create Socket OK: create I/O streams");
         // mBTSocket.setSoTimeout( 200 ); // BlueToothSocket does not have timeout 
-        try {
-          DataInputStream in   = new DataInputStream( mBTSocket.getInputStream() );
-          DataOutputStream out = new DataOutputStream( mBTSocket.getOutputStream() );
-          mProtocol = new DistoXProtocol( in, out, TDInstance.device );
-          mAddress = address;
-        } catch ( IOException e ) {
-          TDLog.Error( "[6b] create Socket stream error " + e.getMessage() );
+        if ( TDInstance.device == null ) {
+          TDLog.Error( "[6b] create Socket on null device ");
           mAddress = null;
           try {
             mBTSocket.close();
@@ -345,6 +340,22 @@ class DistoXComm extends TopoDroidComm
             TDLog.Error( "[6c] close Socket IO " + ee.getMessage() );
           }
           mBTSocket = null;
+        } else {
+          try {
+            DataInputStream in   = new DataInputStream( mBTSocket.getInputStream() );
+            DataOutputStream out = new DataOutputStream( mBTSocket.getOutputStream() );
+            mProtocol = new DistoXProtocol( in, out, TDInstance.device, mApp );
+            mAddress = address;
+          } catch ( IOException e ) {
+            TDLog.Error( "[6d] create Socket stream error " + e.getMessage() );
+            mAddress = null;
+            try {
+              mBTSocket.close();
+            } catch ( IOException ee ) { 
+              TDLog.Error( "[6e] close Socket IO " + ee.getMessage() );
+            }
+            mBTSocket = null;
+          }
         }
       }
       if ( mBTSocket == null ) {

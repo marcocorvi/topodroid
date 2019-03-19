@@ -333,6 +333,7 @@
     <string name="menu_manual_calibration">CALIBRARE</string>
     <string name="menu_options">SETĂRI</string>
     <string name="menu_overview">~MĂSOARĂ</string>
+    <!-- TODO string name="menu_packets">PACKETS</string -->
     <string name="menu_pair">ÎMPERECHEAZĂ</string>
     <string name="menu_palette">PALETĂ</string>
     <string name="menu_photo">FOTO</string>
@@ -594,6 +595,8 @@
     <string name="button_left"      >STÂNGA</string>
     <string name="button_right"     >DREAPTA</string>
     <string name="button_clear"     >Curăță     </string>
+    <!-- TODO string name="button_clear_day" >Clear 1d  </string -->
+    <!-- TODO string name="button_clear_week">Clear 7d  </string -->
     <string name="button_save"      >Salvează   </string>
     <!-- UNUSED string name="button_select"    >Selectează</string -->
     <string name="button_search"    >Caută      </string>
@@ -716,6 +719,7 @@
     <string name="help_display_calib">Schimbă afișarea măsurătorilor șterse</string>
     <string name="help_validate">Validarea calibrării</string>
     <string name="help_overview">Viz. de ansamblu~</string>
+    <!-- TODO string name="help_packets">DistoX packets dialog</string -->
     <string name="help_plot">Schițare(crochiu)</string>
     <string name="help_note">Note cartare</string>
     <string name="help_bluetooth">Resetează conexiunea bluetooth</string>
@@ -824,6 +828,7 @@
     <string name="title_mode">Mod afișare</string>
     <string name="title_move">Mișcare</string>
     <string name="title_note">Note cartare</string>
+    <!-- TODO string name="title_packet_dialog">Packets</string -->
     <string name="title_photo">Foto/Măsurători</string>
     <string name="title_photo_comment">Comentariu fotografie</string>
     <string name="title_plot_save">Exportă schița</string>
@@ -931,6 +936,8 @@
   <!-- TODO string name="pref_with_sensors_summary">Enable "sensors" data</string -->
   <!-- TODO string name="pref_palettes_title">Palettes</string -->
   <!-- TODO string name="pref_palettes_summary">Enable additional palettes</string -->
+  <!-- TODO string name="pref_packet_logger_title">Packets log</string -->
+  <!-- TODO string name="pref_packet_logger_summary">Enable packets logging</string -->
 
   <string name="pref_bezier_step_title">Spațierea punctelor</string>
   <string name="pref_bezier_step_summary">Distanța între puncte pe o linie export [m]</string>

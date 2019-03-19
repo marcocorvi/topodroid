@@ -330,6 +330,7 @@
     <string name="menu_manual_calibration">Calibración</string>
     <string name="menu_options">Ajustes</string>
     <string name="menu_overview">Medir distancia</string>
+    <!-- TODO string name="menu_packets">PACKETS</string -->
     <string name="menu_pair">Emparejar</string>
     <string name="menu_palette">Simbología</string>
     <string name="menu_photo">Tomas con foto</string>
@@ -599,6 +600,8 @@
     <string name="button_left"      >Izquierdo</string>
     <string name="button_right"     >Derecho</string>
     <string name="button_clear"     >Borrar    </string>
+    <!-- TODO string name="button_clear_day" >Clear 1d  </string -->
+    <!-- TODO string name="button_clear_week">Clear 7d  </string -->
     <string name="button_save"      >Guardar   </string>
     <!-- UNUSED string name="button_select"    >Seleccionar </string -->
     <string name="button_search"    >Buscar    </string>
@@ -722,6 +725,7 @@
     <string name="help_display_calib">Cambiar a pantalla de tomas eliminadas</string>
     <string name="help_validate">Validar la calibración</string>
     <string name="help_overview">Editar medición</string>
+    <!-- TODO string name="help_packets">DistoX packets dialog</string -->
     <string name="help_plot">Introducir datos en dibujo</string>
     <string name="help_note">Editar notas Topografía</string>
     <string name="help_bluetooth">Reinicio conexión bluetooth</string>
@@ -825,6 +829,7 @@
     <string name="title_mode">Modo de visualización</string>
     <string name="title_move">Mover</string>
     <string name="title_note">Notas</string>
+    <!-- TODO string name="title_packet_dialog">Packets</string -->
     <string name="title_photo">Foto/Medidas</string>
     <string name="title_photo_comment">Comentario Foto</string>
     <string name="title_plot_save">Guardar dibujo como</string>
@@ -938,6 +943,8 @@
   <!-- TODO string name="pref_with_sensors_summary">Enable "sensors" data</string -->
   <!-- TODO string name="pref_palettes_title">Palettes</string -->
   <!-- TODO string name="pref_palettes_summary">Enable additional palettes</string -->
+  <!-- TODO string name="pref_packet_logger_title">Packets log</string -->
+  <!-- TODO string name="pref_packet_logger_summary">Enable packets logging</string -->
 
   <!-- TODO string name="pref_bezier_step_title">Point spacing</string -->
   <!-- TODO string name="pref_bezier_step_summary">Distance between points on an export line [m]</string -->

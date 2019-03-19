@@ -341,6 +341,7 @@
     <string name="menu_manual_calibration">KALIBRIERUNG</string>
     <string name="menu_options">EINSTELLUNGEN</string>
     <string name="menu_overview">ÜBERBLICK</string>
+    <!-- TODO string name="menu_packets">PACKETS</string -->
     <string name="menu_pair">VERBINDEN</string>
     <string name="menu_palette">PALETTE</string>
     <string name="menu_photo">FOTO</string>
@@ -609,6 +610,8 @@
     <string name="button_left"      >LINKS</string>
     <string name="button_right"     >RECHTS</string>
     <string name="button_clear"     >Entfernen</string>
+    <!-- TODO string name="button_clear_day" >Clear 1d  </string -->
+    <!-- TODO string name="button_clear_week">Clear 7d  </string -->
     <string name="button_save"      >Speichern</string>
     <!-- UNUSED string name="button_select"    >Wählen     </string -->
     <string name="button_search"    >Suche    </string>
@@ -731,6 +734,7 @@
     <string name="help_display_calib">Anzeige der gelöschten Vermessungen</string>
     <string name="help_validate">Kalibrierung validieren</string>
     <string name="help_overview">Überblicksansicht</string>
+    <!-- TODO string name="help_packets">DistoX packets dialog</string -->
     <string name="help_plot">Skizzen</string>
     <string name="help_note">Notizen</string>
     <string name="help_bluetooth">Bluetooth-Verbindung zurücksetzen</string>
@@ -836,6 +840,7 @@
     <string name="title_mode">Anzeigemodus</string>
     <string name="title_move">Verschieben</string>
     <string name="title_note">Notizen</string>
+    <!-- TODO string name="title_packet_dialog">Packets</string -->
     <string name="title_photo">Foto/Messungen</string>
     <string name="title_photo_comment">Foto Kommentar</string>
     <string name="title_plot_save">Skizze speichern als</string>
@@ -942,6 +947,8 @@
   <!-- TODO string name="pref_with_sensors_summary">Enable "sensors" data</string -->
   <!-- TODO string name="pref_palettes_title">Palettes</string -->
   <!-- TODO string name="pref_palettes_summary">Enable additional palettes</string -->
+  <!-- TODO string name="pref_packet_logger_title">Packets log</string -->
+  <!-- TODO string name="pref_packet_logger_summary">Enable packets logging</string -->
 
   <string name="pref_bezier_step_title">Punkteabstand</string>
   <string name="pref_bezier_step_summary">Max. Punkteabstand auf exportierter Linie [m]</string>

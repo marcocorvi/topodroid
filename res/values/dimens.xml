@@ -13,6 +13,7 @@
 
   <dimen name="titlesize">18sp</dimen>
 
+  <dimen name="textsizesmall">12sp</dimen>
   <dimen name="textsize">14sp</dimen>
   <dimen name="textsizehead">16sp</dimen>
   <dimen name="textsizebig">18sp</dimen>

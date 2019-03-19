@@ -1377,6 +1377,7 @@ class TDPrefKey
 
   static String[] GEEK = {
     "DISTOX_PALETTES",
+    "DISTOX_PACKET_LOGGER",
     "DISTOX_GEEK_SHOT",       // FORWARD
     "DISTOX_GEEK_PLOT",       // FORWARD
     "DISTOX_GEEK_LINE",       // FORWARD
@@ -1388,6 +1389,7 @@ class TDPrefKey
 
   static int[] GEEKtitle = {
     R.string.pref_palettes_title,
+    R.string.pref_packet_logger_title,
     R.string.pref_cat_survey,
     R.string.pref_cat_drawing,
     R.string.pref_tool_line_title,
@@ -1399,6 +1401,7 @@ class TDPrefKey
 
   static int[] GEEKdesc = {
     R.string.pref_palettes_summary,
+    R.string.pref_packet_logger_summary,
     -1,
     -1,
     -1,
@@ -1409,6 +1412,7 @@ class TDPrefKey
   };
 
   static String[] GEEKdef = {
+    FALSE,
     FALSE,
     TDString.EMPTY,
     TDString.EMPTY,

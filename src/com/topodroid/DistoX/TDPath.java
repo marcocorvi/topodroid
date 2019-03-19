@@ -131,6 +131,7 @@ class TDPath
 
   static String getDatabase() { return getDirFile( "distox14.sqlite" ); }
   static String getDeviceDatabase() { return PATH_DEFAULT + "device10.sqlite"; }
+  static String getPacketDatabase() { return PATH_DEFAULT + "packet10.sqlite"; }
   
   // when this is called basedir exists and is writable
   static boolean checkBasePath( String path, String basedir )

@@ -997,11 +997,12 @@ class TDPref implements AdapterView.OnItemSelectedListener
     String[] def = TDPrefKey.GEEKdef;
     return new TDPref[ ] {
       makeCbx( cat, key[0], tit[0], dsc[0],  T, def[0],  ctx, hlp ), // PALETTES
-      makeFwd( cat, key[1], tit[1],          T,          ctx, hlp ), // GEEK_SHOT
-      makeFwd( cat, key[2], tit[2],          T,          ctx, hlp ), // GEEK_PLOT
-      makeFwd( cat, key[3], tit[3],          T,          ctx, hlp ), // GEEK_LINE
-      makeFwd( cat, key[4], tit[4],          T,          ctx, hlp ), // PLOT_WALLS
-      makeFwd( cat, key[5], tit[5],          T,          ctx, hlp )  // GEEK_DEVICE
+      makeCbx( cat, key[1], tit[1], dsc[1],  T, def[1],  ctx, hlp ), // PACKET LOGGER
+      makeFwd( cat, key[2], tit[2],          T,          ctx, hlp ), // GEEK_SHOT
+      makeFwd( cat, key[3], tit[3],          T,          ctx, hlp ), // GEEK_PLOT
+      makeFwd( cat, key[4], tit[4],          T,          ctx, hlp ), // GEEK_LINE
+      makeFwd( cat, key[5], tit[5],          T,          ctx, hlp ), // PLOT_WALLS
+      makeFwd( cat, key[6], tit[6],          T,          ctx, hlp )  // GEEK_DEVICE
       // makeFwd( cat, key[6], tit[6],          D,          ctx, hlp )  // SKETCH // FIXME_SKETCH_3D
     };
   }
