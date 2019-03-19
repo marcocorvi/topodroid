@@ -906,13 +906,14 @@
   <string name="pref_cat_drawing">NASTAVENIA KRESLENIA</string>
   <string name="pref_cat_import_export">NASTAVENIA IMPORT/EXPORT</string>
   <string name="pref_cat_exportimport">IMPORT</string>
-  <!-- UNUSED string name="pref_cat_exportsvx" translatable="false">Survex</string -->
-  <!-- UNUSED string name="pref_cat_exportth"  translatable="false">Therion</string -->
-  <!-- UNUSED string name="pref_cat_exportdat" translatable="false">Compass</string -->
-  <!-- UNUSED string name="pref_cat_exportsvg" translatable="false">SVG</string -->
-  <!-- UNUSED string name="pref_cat_exportdxf" translatable="false">DXF</string -->
-  <!-- UNUSED string name="pref_cat_exportpng" translatable="false">PNG</string -->
-  <!-- UNUSED string name="pref_cat_exportkml" translatable="false">KML/GeoJSON</string -->
+  <string name="pref_cat_exportsvx" translatable="false">Survex</string>
+  <string name="pref_cat_exportth"  translatable="false">Therion</string>
+  <string name="pref_cat_exportdat" translatable="false">Compass</string>
+  <string name="pref_cat_exportsvg" translatable="false">SVG</string>
+  <string name="pref_cat_exportdxf" translatable="false">DXF</string>
+  <string name="pref_cat_exportpng" translatable="false">PNG</string>
+  <string name="pref_cat_exportkml" translatable="false">KML/GeoJSON</string>
+  <string name="pref_cat_exportcsv" translatable="false">CSV</string>
  
   <string name="pref_cat_calib">NASTAVENIA KALIBRÁCIE</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->  
@@ -964,7 +965,7 @@
   <string name="pref_leg_shots_summary">Minimálny počet jednotlivých zámer hlavnej zámery, ktoré program vyhodnotí ako hlavnú zámeru</string>
   <string name="pref_recent_timeout_title">Posledne stiahnuté dáta - čas</string>
   <string name="pref_recent_timeout_summary">Čas po ktorom uplynutí dáta už nie sú označené ako "Posledne stiahnuté"</string>
-  <string name="pref_triple_shot_title">Zvkuk pri hlavnej zámere</string>
+  <string name="pref_triple_shot_title">Zvuk pri hlavnej zámere</string>
   <string name="pref_triple_shot_summary">Zvuková spätná vázba pri rozoznaní hlavnej zámery</string>
   <string name="pref_station_prefix_title">Predčíslie bodu</string>
   <string name="pref_station_prefix_summary">Export predčíslia bodov Compass</string>
@@ -1008,12 +1009,12 @@
   <string name="pref_kml_stations_summary">Pridanie staničení do exportu KML</string>
   <string name="pref_kml_splays_title">KML pomocné zámery</string>
   <string name="pref_kml_splays_summary">Pridanie pomocných zámer do KML exportu</string>
-  <!-- TODO string name="pref_csv_raw_title">Raw CSV</string -->
-  <!-- TODO string name="pref_csv_raw_summary">Export raw data to CSV</string -->
-  <!-- TODO string name="pref_csv_sep_title">CSV separator</string -->
-  <!-- TODO string name="pref_csv_sep_summary">CSV fields separator</string -->
-  <!-- TODO string name="pref_csv_eol_title">CSV eol</string -->
-  <!-- TODO string name="pref_csv_eol_summary">CSV records separator</string -->
+  <string name="pref_csv_raw_title">Surové dáta CSV</string>
+  <string name="pref_csv_raw_summary">Exportuje surové dáta do CSV</string>
+  <string name="pref_csv_sep_title">CSV separátor</string>
+  <string name="pref_csv_sep_summary">CSV oddeľovač polí</string>
+  <string name="pref_csv_eol_title">CSV eol</string>
+  <string name="pref_csv_eol_summary">CSV nahraje oddeľovač</string>
 
   <string name="pref_sock_type_title">Zabezpečenie</string>
   <string name="pref_sock_type_summary">Výber typu zabezpečenia pripojenia DistoX</string>
@@ -1217,7 +1218,7 @@
   <string name="pref_backup_number_summary">Výber počtu záloh dát programu</string>
   <string name="pref_backup_interval_title">Čas intervalu zálohovania dát</string>
   <string name="pref_backup_interval_summary">Minimálny interval medzi 2 zálohami [s]</string>
-  <string name="pref_backups_clear_title">Vyčistanie záloh</string>
+  <string name="pref_backups_clear_title">Vyčistenie záloh</string>
   <string name="pref_backups_clear_summary">Povolí pridanie menu Vyčistenia Záloh v Nákrese</string>
   <!-- UNUSED string name="pref_xtherion_areas_title">xtherion areas</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Save areas a la xtherion</string -->
@@ -1335,7 +1336,7 @@
   <string name="pref_log_therion" translatable="false">Therion</string>
   <string name="pref_log_units" translatable="false">Units</string>
   <string name="pref_log_zip" translatable="false">ZIP</string>
--->
+DO NOT REMOVE THIS LINE -->
 
   <!-- UNUSED string name="line_bezier">Bezier</string -->
   <!-- UNUSED string name="line_fine">fine</string -->
