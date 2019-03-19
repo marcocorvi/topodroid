@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string-array name="csv Oddeľovač">
+  <string-array name="csvSeparator">
      <item name="comma">Čiarka</item>
      <item name="pipe">Fajka</item>
      <item name="tab">Tabulátor</item>
