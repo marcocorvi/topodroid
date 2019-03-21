@@ -212,6 +212,34 @@ class PacketLogger extends DataSetObservable
   }
 
   // @param secs    max packet age
+  // @param filter  1 zero type
+  //                2 D
+  //                4 G
+  //                8 M
+  //               16 V
+  //               32 C
+  //               64 X
+  List< PacketData > selectPackets( long secs, int filter )
+  {
+    ArrayList< PacketData > ret = new ArrayList< PacketData >();
+    long time = System.currentTimeMillis() - (1000 * secs);
+    Cursor cursor = myDB.query( PACKET_TABLE,
+       		         new String[] { "millis", "dir", "address", "type", "data" }, // columns
+                                "millis > ?",
+                                new String[] { Long.toString(time) },
+                                null, null, "millis DESC" );
+    if ( cursor.moveToFirst() ) {
+      do { 
+        if ( PacketData.checkType( (int)(cursor.getLong(3)), filter ) ) {
+          ret.add( fillPacketData( cursor ) ); 
+        }
+      } while ( cursor.moveToNext() );
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return ret;
+  }
+
+  // @param secs    max packet age
   // @param addr    packet address
   List< PacketData > selectPackets( long secs, String addr )
   {

@@ -19,22 +19,31 @@ import java.util.Locale;
 class PacketData
 {
   Long millis;
-  Long dir;
+  int  dir;
   String address;
   String data;
   int    type;
   private byte mRollHigh = 0;
 
-  static final char[] mTypes = { '_', 'D', 'G', 'M', 'V', 'X' };
+  static final char[] mTypes = { '_', 'D', 'G', 'M', 'V', 'C', 'X' };
+  static final int[] mColors = { TDColor.PINK,  TDColor.WHITE, TDColor.BROWN, TDColor.ORANGE, TDColor.LIGHT_GRAY, 
+                                 TDColor.GREEN, TDColor.YELLOW };
+  static final int[] mBackground = { TDColor.BLACK, TDColor.VERYDARK_GRAY };
 
   PacketData( long m, long d, String addr, int t, String dat )
   {
     millis = m;
-    dir    = d;
+    dir    = (int)d;
     address = addr;
     type    = t;    // byte[0]
-    if ( type < 0 || type > 5 ) type = 5; 
+    if ( type < 0 ) { type = 0; } else if ( type > 6 ) { type = 6; }
     data    = dat;
+  }
+
+  static boolean checkType( int type, int filter )
+  { 
+    if ( type < 0 ) { type = 0; } else if ( type > 6 ) { type = 6; }
+    return ( filter & ( 1 << type ) ) != 0;
   }
 
   static private byte toByte( String s )
@@ -118,11 +127,17 @@ class PacketData
 
   public String toString()
   {
-    SimpleDateFormat df = new SimpleDateFormat("yyyy.mm.dd hh:mm:ss");
-    String date = df.format( millis );
-    Log.v("DistoXP", date + " type " + type );
-    // return String.format("%s: %s (%d %c) %s", address, date, dir, mTypes[type], dataToString() );
-    return String.format("(%c) %s", mTypes[type], dataToString() );
+    // SimpleDateFormat df = new SimpleDateFormat("yyyy.mm.dd hh:mm:ss");
+    // String date = df.format( millis );
+    // // Log.v("DistoXP", date + " type " + type );
+    // // return String.format("%s: %s (%d %c) %s", address, date, dir, mTypes[type], dataToString() );
+    // return String.format("%s", dataToString() );
+    return dataToString();
   }
+
+  // foreground color
+  public int color() { return mColors[ type ]; }
+
+  public int background() { return mBackground[ dir ]; }
     
 }

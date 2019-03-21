@@ -110,6 +110,7 @@ public class DeviceActivity extends Activity
                         R.string.menu_pair,
                         R.string.menu_detach,
                         R.string.menu_firmware,
+                        R.string.menu_packets,
                         R.string.menu_options,
                         R.string.menu_help
                         // CALIB_RESET , R.string.menu_calib_reset
@@ -129,6 +130,7 @@ public class DeviceActivity extends Activity
                         R.string.help_pair,
                         R.string.help_detach,
                         R.string.help_firmware,
+                        R.string.help_packets,
                         R.string.help_prefs,
                         R.string.help_help
                       };
@@ -739,11 +741,10 @@ public class DeviceActivity extends Activity
     if ( TDLevel.overBasic    ) mMenuAdapter.add( res.getString( menus[1] ) );
     if ( TDLevel.overNormal   ) mMenuAdapter.add( res.getString( menus[2] ) );
     if ( TDLevel.overAdvanced ) mMenuAdapter.add( res.getString( menus[3] ) );
-    mMenuAdapter.add( res.getString( menus[4] ) );
+    if ( TDLevel.overExpert && TDSetting.mPacketLog ) mMenuAdapter.add( res.getString( menus[4] ) ); // PACKET_LOG
     mMenuAdapter.add( res.getString( menus[5] ) );
-    // mMenuAdapter.add( res.getString( menus[6] ) ); // SERVER
-    // CALIB_RESET
-    // if ( TDLevel.overTester ) mMenuAdapter.add( res.getString( menus[6] ) );
+    mMenuAdapter.add( res.getString( menus[6] ) );
+    // if ( TDLevel.overTester ) mMenuAdapter.add( res.getString( menus[7] ) ); // CALIB_RESET
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
   }
@@ -779,6 +780,8 @@ public class DeviceActivity extends Activity
         mApp.resetComm();
         (new FirmwareDialog( this, this, mApp )).show();
       }
+    } else if ( TDLevel.overExpert && TDSetting.mPacketLog && p++ == pos ) { // PACKET_LOG
+      (new PacketDialog( this )).show();
 
     } else if ( p++ == pos ) { // OPTIONS
       Intent intent = new Intent( this, TDPrefActivity.class );

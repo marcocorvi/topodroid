@@ -6,6 +6,52 @@
     android:orientation="vertical"
     android:paddingBottom="@dimen/paddingv"
     >
+  <LinearLayout 
+    android:orientation="horizontal"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:layout_gravity="left"
+    android:paddingBottom="@dimen/paddingv"
+    >  
+    <CheckBox android:id="@+id/type_zero"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="-"
+    />
+    <CheckBox android:id="@+id/type_d"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="D"
+      android:checked="true"
+    />
+    <CheckBox android:id="@+id/type_v"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="V"
+    />
+    <CheckBox android:id="@+id/type_g"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="G"
+      android:checked="true"
+    />
+    <CheckBox android:id="@+id/type_m"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="M"
+      android:checked="true"
+    />
+    <CheckBox android:id="@+id/type_c"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="C"
+    />
+    <CheckBox android:id="@+id/type_x"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="X"
+    />
+  </LinearLayout>
 
   <ListView android:id="@+id/packet_list"
     style="@style/list_top"
@@ -22,6 +68,11 @@
     android:layout_gravity="left"
     android:paddingBottom="@dimen/paddingv"
     >  
+    <!-- Button android:id="@+id/clear"
+      style="@style/button_default"
+      android:layout_marginRight="@dimen/marginh"
+      android:text="@string/button_clar"
+      / -->
     <Button android:id="@+id/clear_day"
       style="@style/button_default"
       android:layout_marginRight="@dimen/marginh"
