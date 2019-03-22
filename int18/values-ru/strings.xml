@@ -943,7 +943,7 @@
   <string name="pref_palettes_title">Доп. Знаки</string>
   <string name="pref_palettes_summary">Включить дополнительные наборы условных знаков</string>
   <string name="pref_packet_logger_title">Журнал пакетов</string>
-  <string name="pref_packet_logger_summary">Включить журнал пакетов</string>
+  <string name="pref_packet_logger_summary">Включить запись журнала пакетов DistoX</string>
 
   <string name="pref_bezier_step_title">Макс. расстояние между точками</string>
   <string name="pref_bezier_step_summary">Маскисмальное расстояние между точками при апроксимации кривых полилиниями [м]</string>
