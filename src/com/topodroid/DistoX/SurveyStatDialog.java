@@ -90,7 +90,7 @@ class SurveyStatDialog extends MyDialog
 
       mTextLeg.setText( String.format( res.getString(R.string.stat_leg),
                         mStat.countLeg, mStat.lengthLeg * unit, mStat.extLength * unit, mStat.planLength * unit, unit_str ) );
-      mTextDuplicate.setText( String.format( res.getString(R.string.stat_duplicate),
+      mTextDuplicate.setText( String.format( res.getString(R.string.survey_stat_duplicate),
                         mStat.countDuplicate, mStat.lengthDuplicate * unit, unit_str ) );
       mTextSurface.setText( String.format( res.getString(R.string.stat_surface),
                         mStat.countSurface, mStat.lengthSurface * unit, unit_str ) );

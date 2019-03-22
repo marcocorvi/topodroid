@@ -52,28 +52,32 @@ class DeviceHelper extends DataSetObservable
   private static final String GM_TABLE     = "gms";
   private static final String DEVICE_TABLE = "devices";
 
+  private static final String WHERE_CID_ID = "calibId=? AND id=?";
+  private static final String WHERE_CID_IDMORE = "calibId=? AND id>? AND status=0";
+  private static final String WHERE_ID = "id=?";
+  private static final String WHERE_ADDRESS = "address=?";
+
   private SQLiteDatabase myDB = null;
   private long           myNextId;   // id of next shot
   private long           myNextCId;  // id of next calib-data
 
   private SQLiteStatement updateConfig;
-  private SQLiteStatement updateGMGroupStmt = null;
-  private SQLiteStatement updateGMErrorStmt = null;
-  private SQLiteStatement deleteGMStmt = null;
-
-  private SQLiteStatement updateCalibStmt = null;
-  private SQLiteStatement updateCalibAlgoStmt = null;
-  private SQLiteStatement updateCalibCoeffStmt = null;
-  private SQLiteStatement updateCalibErrorStmt = null;
-  private SQLiteStatement resetAllGMStmt = null;
+  // private SQLiteStatement updateGMGroupStmt = null;
+  // private SQLiteStatement updateGMErrorStmt = null;
+  // private SQLiteStatement updateCalibStmt = null;
+  // private SQLiteStatement updateCalibAlgoStmt = null;
+  // private SQLiteStatement updateCalibCoeffStmt = null;
+  // private SQLiteStatement updateCalibErrorStmt = null;
+  // private SQLiteStatement resetAllGMStmt = null;
 
 //these are real database "delete"
+  private SQLiteStatement deleteGMStmt = null;
   private SQLiteStatement doDeleteGMStmt = null;
   private SQLiteStatement doDeleteCalibStmt = null;
 
-  private SQLiteStatement updateDeviceHeadTailStmt = null;
-  private SQLiteStatement updateDeviceModelStmt = null;
-  private SQLiteStatement updateDeviceNicknameStmt = null;
+  // private SQLiteStatement updateDeviceHeadTailStmt = null;
+  // private SQLiteStatement updateDeviceModelStmt = null;
+  // private SQLiteStatement updateDeviceNicknameStmt = null;
 
   // private ArrayList<DataListener> mListeners; // IF_COSURVEY
   // ----------------------------------------------------------------------
@@ -142,6 +146,21 @@ class DeviceHelper extends DataSetObservable
     } );
   }
 
+  private boolean doUpdate( String table, ContentValues cv, String where, String[] args, String msg )
+  {
+    boolean ret = false;
+    try {
+      myDB.beginTransaction();
+      myDB.update( table, cv, where, args );
+      myDB.setTransactionSuccessful();
+      ret = true;
+    } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
+    } catch ( SQLiteException e1 )       { logError(msg, e1 );
+    // } catch ( IllegalStateException e2 ) { logError(msg, e2 );
+    } finally { myDB.endTransaction(); }
+    return ret;
+  }
+
   // ----------------------------------------------------------------------
   // CALIBRATION DATA
 
@@ -178,31 +197,39 @@ class DeviceHelper extends DataSetObservable
   void updateGMName( long gid, long cid, String grp )
   {
     // if ( myDB == null ) return -1;
-    if ( updateGMGroupStmt == null )
-        updateGMGroupStmt  = myDB.compileStatement( "UPDATE gms SET grp=? WHERE calibId=? AND id=?" );
-    updateGMGroupStmt.bindString( 1, grp );
-    updateGMGroupStmt.bindLong( 2, cid );
-    updateGMGroupStmt.bindLong( 3, gid );
-    try {
-      updateGMGroupStmt.execute();
-    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } catch (SQLiteException e ) { logError( "update GM " + cid + "/" + gid + " group " + grp, e ); }
-    // return 0;
+    ContentValues cv = new ContentValues();
+    cv.put( "grp", grp );
+    doUpdate( "gms", cv, WHERE_CID_ID, new String[] { Long.toString(cid), Long.toString(gid) }, "GM name" );
+
+    // if ( updateGMGroupStmt == null )
+    //     updateGMGroupStmt  = myDB.compileStatement( "UPDATE gms SET grp=? WHERE calibId=? AND id=?" );
+    // updateGMGroupStmt.bindString( 1, grp );
+    // updateGMGroupStmt.bindLong( 2, cid );
+    // updateGMGroupStmt.bindLong( 3, gid );
+    // try {
+    //   updateGMGroupStmt.execute();
+    // } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    // } catch (SQLiteException e ) { logError( "update GM " + cid + "/" + gid + " group " + grp, e ); }
+    // // return 0;
   }
 
-  void updateGMError( long id, long cid, double error )
+  void updateGMError( long gid, long cid, double error )
   {
     // if ( myDB == null ) return -1;
-    if ( updateGMErrorStmt == null ) 
-        updateGMErrorStmt  = myDB.compileStatement( "UPDATE gms SET error=? WHERE calibId=? AND id=?" );
-    updateGMErrorStmt.bindDouble( 1, error );
-    updateGMErrorStmt.bindLong( 2, cid );
-    updateGMErrorStmt.bindLong( 3, id );
-    try { 
-      updateGMErrorStmt.execute();
-    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } catch (SQLiteException e ) { logError( "update GM error", e ); }
-    // return 0;
+    ContentValues cv = new ContentValues();
+    cv.put( "error", error );
+    doUpdate( "gms", cv, WHERE_CID_ID, new String[] { Long.toString(cid), Long.toString(gid) }, "GM error" );
+
+    // if ( updateGMErrorStmt == null ) 
+    //     updateGMErrorStmt  = myDB.compileStatement( "UPDATE gms SET error=? WHERE calibId=? AND id=?" );
+    // updateGMErrorStmt.bindDouble( 1, error );
+    // updateGMErrorStmt.bindLong( 2, cid );
+    // updateGMErrorStmt.bindLong( 3, gid );
+    // try { 
+    //   updateGMErrorStmt.execute();
+    // } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    // } catch (SQLiteException e ) { logError( "update GM error", e ); }
+    // // return 0;
   }
 
   long insertGM( long cid, long gx, long gy, long gz, long mx, long my, long mz )
@@ -236,15 +263,20 @@ class DeviceHelper extends DataSetObservable
 
   void resetAllGMs( long cid, long start_id )
   {
-    if ( resetAllGMStmt == null )
-       resetAllGMStmt = myDB.compileStatement( "UPDATE gms SET grp=0, error=0 WHERE calibId=? AND id>? AND status=0" );
-       // resetAllGMStmt = myDB.compileStatement( "UPDATE gms SET grp=0, error=0 WHERE calibId=? AND id>?" );
-    resetAllGMStmt.bindLong( 1, cid );
-    resetAllGMStmt.bindLong( 2, start_id );
-    try {
-      resetAllGMStmt.execute();
-    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } catch (SQLiteException e ) { logError( "reset GM " + cid + "/" + start_id, e ); }
+    ContentValues cv = new ContentValues();
+    cv.put( "grp", 0 );
+    cv.put( "error", 0 );
+    doUpdate( "gms", cv, WHERE_CID_IDMORE, new String[] { Long.toString(cid), Long.toString(start_id) }, "GM reset" );    
+
+    // if ( resetAllGMStmt == null )
+    //    resetAllGMStmt = myDB.compileStatement( "UPDATE gms SET grp=0, error=0 WHERE calibId=? AND id>? AND status=0" );
+    //    // resetAllGMStmt = myDB.compileStatement( "UPDATE gms SET grp=0, error=0 WHERE calibId=? AND id>?" );
+    // resetAllGMStmt.bindLong( 1, cid );
+    // resetAllGMStmt.bindLong( 2, start_id );
+    // try {
+    //   resetAllGMStmt.execute();
+    // } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    // } catch (SQLiteException e ) { logError( "reset GM " + cid + "/" + start_id, e ); }
   }
 
   List<CalibCBlock> selectAllGMs( long cid, int status )
@@ -881,32 +913,40 @@ class DeviceHelper extends DataSetObservable
 
   void updateDeviceModel( String address, String model )
   {
-    if ( updateDeviceModelStmt == null )
-      updateDeviceModelStmt = myDB.compileStatement( "UPDATE devices set model=? WHERE address=?" );
-    updateDeviceModelStmt.bindString( 1, model );
-    updateDeviceModelStmt.bindString( 2, address );
-    try { updateDeviceModelStmt.execute(); 
-    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } catch (SQLiteException e ) { logError( "update device", e ); }
+    ContentValues cv = new ContentValues();
+    cv.put( "model", model );
+    doUpdate( "devices", cv, WHERE_ADDRESS, new String[] { address }, "model" );
+
+    // if ( updateDeviceModelStmt == null )
+    //   updateDeviceModelStmt = myDB.compileStatement( "UPDATE devices set model=? WHERE address=?" );
+    // updateDeviceModelStmt.bindString( 1, model );
+    // updateDeviceModelStmt.bindString( 2, address );
+    // try { updateDeviceModelStmt.execute(); 
+    // } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    // } catch (SQLiteException e ) { logError( "update device", e ); }
   }
 
   void updateDeviceNickname( String address, String nickname )
   {
-    if ( updateDeviceNicknameStmt == null )
-        updateDeviceNicknameStmt = myDB.compileStatement( "UPDATE devices set nickname=? WHERE address=?" );
-    updateDeviceNicknameStmt.bindString( 1, nickname );
-    updateDeviceNicknameStmt.bindString( 2, address );
-    try { updateDeviceNicknameStmt.execute(); 
-    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } catch (SQLiteException e ) { logError( "update device nickname", e ); }
+    ContentValues cv = new ContentValues();
+    cv.put( "nickname", nickname );
+    doUpdate( "devices", cv, WHERE_ADDRESS, new String[] { address }, "nick" );
+
+    // if ( updateDeviceNicknameStmt == null )
+    //     updateDeviceNicknameStmt = myDB.compileStatement( "UPDATE devices set nickname=? WHERE address=?" );
+    // updateDeviceNicknameStmt.bindString( 1, nickname );
+    // updateDeviceNicknameStmt.bindString( 2, address );
+    // try { updateDeviceNicknameStmt.execute(); 
+    // } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    // } catch (SQLiteException e ) { logError( "update device nickname", e ); }
   }
 
   boolean updateDeviceHeadTail( String address, int[] head_tail )
   {
     // if ( myDB == null ) return false;
     boolean ret = false;
-    if ( updateDeviceHeadTailStmt == null )
-        updateDeviceHeadTailStmt = myDB.compileStatement( "UPDATE devices set head=?, tail=? WHERE address=?" );
+    // if ( updateDeviceHeadTailStmt == null )
+    //     updateDeviceHeadTailStmt = myDB.compileStatement( "UPDATE devices set head=?, tail=? WHERE address=?" );
     Cursor cursor = null;
     try {
       cursor = myDB.query( DEVICE_TABLE, new String[] { "head" },
@@ -916,15 +956,20 @@ class DeviceHelper extends DataSetObservable
       if (cursor != null ) {
         if (cursor.moveToFirst() ) {
           // Log.v(TopoDroidApp.TAG, "update Head Tail " + address + " " + head_tail[0] + " " + head_tail[1] );
-          long head = head_tail[0];
-          long tail = head_tail[1];
-          updateDeviceHeadTailStmt.bindLong( 1, head );
-          updateDeviceHeadTailStmt.bindLong( 2, tail );
-          updateDeviceHeadTailStmt.bindString( 3, address );
-          try { updateDeviceHeadTailStmt.execute();
-          } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-          } catch (SQLiteException e ) { logError( "update device H-T", e ); }
-          ret = true;
+          ContentValues cv = new ContentValues();
+          cv.put( "head", head_tail[0] );
+          cv.put( "tail", head_tail[1] );
+          ret = doUpdate( "devices", cv, WHERE_ADDRESS, new String[] { address }, "HT" );
+
+          // long head = head_tail[0];
+          // long tail = head_tail[1];
+          // updateDeviceHeadTailStmt.bindLong( 1, head );
+          // updateDeviceHeadTailStmt.bindLong( 2, tail );
+          // updateDeviceHeadTailStmt.bindString( 3, address );
+          // try { updateDeviceHeadTailStmt.execute();
+          // } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+          // } catch (SQLiteException e ) { logError( "update device H-T", e ); }
+          // ret = true;
         // } else {
         //   insertDeviceHeadTail( address, "DistoX", head_tail, name ); // FIXME name ?
         }
@@ -959,65 +1004,86 @@ class DeviceHelper extends DataSetObservable
    {
      // TDLog.Log( TDLog.LOG_DB, "updateCalibInfo id " + id + " day " + date + " comm. " + comment );
      if ( date == null ) return; // false;
-     if ( updateCalibStmt == null )
-        updateCalibStmt = myDB.compileStatement( "UPDATE calibs SET day=?, device=?, comment=? WHERE id=?" );
-     String dev = (device != null)? device : TDString.EMPTY;
-     String cmt = (comment != null)? comment : TDString.EMPTY;
-     updateCalibStmt.bindString( 1, date );
-     updateCalibStmt.bindString( 2, dev );
-     updateCalibStmt.bindString( 3, cmt );
-     updateCalibStmt.bindLong( 4, id );
-     try {
-       updateCalibStmt.execute(); 
-     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-     } catch (SQLiteException e ) { logError( "update calib", e ); }
-     // return true;
+     ContentValues cv = new ContentValues();
+     cv.put( "day", date );
+     cv.put( "device", device );
+     cv.put( "comment", comment );
+     doUpdate( "calibs", cv, WHERE_ID, new String[] { Long.toString(id) }, "info" );
+
+     // if ( updateCalibStmt == null )
+     //    updateCalibStmt = myDB.compileStatement( "UPDATE calibs SET day=?, device=?, comment=? WHERE id=?" );
+     // String dev = (device != null)? device : TDString.EMPTY;
+     // String cmt = (comment != null)? comment : TDString.EMPTY;
+     // updateCalibStmt.bindString( 1, date );
+     // updateCalibStmt.bindString( 2, dev );
+     // updateCalibStmt.bindString( 3, cmt );
+     // updateCalibStmt.bindLong( 4, id );
+     // try {
+     //   updateCalibStmt.execute(); 
+     // } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+     // } catch (SQLiteException e ) { logError( "update calib", e ); }
+     // // return true;
    }
 
    void updateCalibAlgo( long id, long algo )
    {
-     // TDLog.Log( TDLog.LOG_DB, "updateCalibAlgo id " + id + " algo " + algo );
-     if ( updateCalibAlgoStmt == null )
-        updateCalibAlgoStmt = myDB.compileStatement( "UPDATE calibs SET algo=? WHERE id=?" );
-     updateCalibAlgoStmt.bindLong( 1, algo );
-     updateCalibAlgoStmt.bindLong( 2, id );
-     try {
-       updateCalibAlgoStmt.execute();
-     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-     } catch (SQLiteException e ) { logError( "update calib algo", e ); }
-     // return true;
+     ContentValues cv = new ContentValues();
+     cv.put( "algo", algo );
+     doUpdate( "calibs", cv, WHERE_ID, new String[] { Long.toString(id) }, "algo" );
+
+     // // TDLog.Log( TDLog.LOG_DB, "updateCalibAlgo id " + id + " algo " + algo );
+     // if ( updateCalibAlgoStmt == null )
+     //    updateCalibAlgoStmt = myDB.compileStatement( "UPDATE calibs SET algo=? WHERE id=?" );
+     // updateCalibAlgoStmt.bindLong( 1, algo );
+     // updateCalibAlgoStmt.bindLong( 2, id );
+     // try {
+     //   updateCalibAlgoStmt.execute();
+     // } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+     // } catch (SQLiteException e ) { logError( "update calib algo", e ); }
+     // // return true;
    }
 
    void updateCalibCoeff( long id, String coeff )
    {
-     // TDLog.Log( TDLog.LOG_DB, "updateCalibCoeff id " + id + " coeff. " + coeff );
-     if ( coeff == null ) return; // false;
-     if ( updateCalibCoeffStmt == null )
-        updateCalibCoeffStmt = myDB.compileStatement( "UPDATE calibs SET coeff=? WHERE id=?" );
-     updateCalibCoeffStmt.bindString( 1, coeff );
-     updateCalibCoeffStmt.bindLong( 2, id );
-     try {
-       updateCalibCoeffStmt.execute();
-     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-     } catch (SQLiteException e ) { logError( "update calib coeff", e ); }
-     // return true;
+     ContentValues cv = new ContentValues();
+     cv.put( "coeff", coeff );
+     doUpdate( "calibs", cv, WHERE_ID, new String[] { Long.toString(id) }, "coeff" );
+
+     // // TDLog.Log( TDLog.LOG_DB, "updateCalibCoeff id " + id + " coeff. " + coeff );
+     // if ( coeff == null ) return; // false;
+     // if ( updateCalibCoeffStmt == null )
+     //    updateCalibCoeffStmt = myDB.compileStatement( "UPDATE calibs SET coeff=? WHERE id=?" );
+     // updateCalibCoeffStmt.bindString( 1, coeff );
+     // updateCalibCoeffStmt.bindLong( 2, id );
+     // try {
+     //   updateCalibCoeffStmt.execute();
+     // } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+     // } catch (SQLiteException e ) { logError( "update calib coeff", e ); }
+     // // return true;
    }
 
    void updateCalibError( long id, double error, double stddev, double max_error, int iterations )
    {
-     // TDLog.Log( TDLog.LOG_DB, "updateCalibCoeff id " + id + " coeff. " + coeff );
-     if ( updateCalibErrorStmt == null )
-        updateCalibErrorStmt = myDB.compileStatement( "UPDATE calibs SET error=?, stddev=?, max_error=?, iterations=? WHERE id=?" );
-     updateCalibErrorStmt.bindDouble( 1, error );
-     updateCalibErrorStmt.bindDouble( 2, stddev );
-     updateCalibErrorStmt.bindDouble( 3, max_error );
-     updateCalibErrorStmt.bindLong( 4, iterations );
-     updateCalibErrorStmt.bindLong( 5, id );
-     try {
-       updateCalibErrorStmt.execute(); 
-     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-     } catch (SQLiteException e ) { logError( "update calib error", e ); }
-     // return true;
+     ContentValues cv = new ContentValues();
+     cv.put( "error", error );
+     cv.put( "stddev", stddev );
+     cv.put( "max_error", max_error );
+     cv.put( "iterations", iterations );
+     doUpdate( "calibs", cv, WHERE_ID, new String[] { Long.toString(id) }, "error" );
+
+     // // TDLog.Log( TDLog.LOG_DB, "updateCalibCoeff id " + id + " coeff. " + coeff );
+     // if ( updateCalibErrorStmt == null )
+     //    updateCalibErrorStmt = myDB.compileStatement( "UPDATE calibs SET error=?, stddev=?, max_error=?, iterations=? WHERE id=?" );
+     // updateCalibErrorStmt.bindDouble( 1, error );
+     // updateCalibErrorStmt.bindDouble( 2, stddev );
+     // updateCalibErrorStmt.bindDouble( 3, max_error );
+     // updateCalibErrorStmt.bindLong( 4, iterations );
+     // updateCalibErrorStmt.bindLong( 5, id );
+     // try {
+     //   updateCalibErrorStmt.execute(); 
+     // } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+     // } catch (SQLiteException e ) { logError( "update calib error", e ); }
+     // // return true;
    }
 
    long setCalib( String calib )

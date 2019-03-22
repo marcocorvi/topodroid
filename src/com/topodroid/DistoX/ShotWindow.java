@@ -1711,7 +1711,9 @@ public class ShotWindow extends Activity
   void updateShot( String from, String to, int extend, float stretch, long flag, long leg, String comment, DBlock blk )
   {
     // TDLog.Log( TDLog.LOG_SHOT, "update Shot From >" + from + "< To >" + to + "< comment " + comment );
-    // Log.v("DistoXShot", "update shot " + from + "-" + to + " leg " + leg + "/" + blk.getLegType() + " blk type " + blk.getBlockType() );
+    // Log.v("DistoXShot", "update shot " + from + "-" + to + " leg " + leg + "/" + blk.getLegType()
+    //       + " blk type " + blk.getBlockType() + " comment " + comment );
+
     blk.setBlockName( from, to, (leg == LegType.BACK) );
 
     int ret = mApp_mData.updateShot( blk.mId, TDInstance.sid, from, to, extend, flag, leg, comment, true );
@@ -1808,11 +1810,11 @@ public class ShotWindow extends Activity
 
   void swapBlocksName( List<DBlock> blks )  // SWAP SELECTED BLOCKS STATIONS
   {
-    Log.v("DistoX", "swap list size " + blks.size() );
+    // Log.v("DistoX", "swap list size " + blks.size() );
     for ( DBlock blk : blks ) {
       String from = blk.mTo;
       String to   = blk.mFrom;
-      Log.v("DistoX", "swap block to <" + from + "-" + to + ">" );
+      // Log.v("DistoX", "swap block to <" + from + "-" + to + ">" );
       blk.setBlockName( from, to );
       // mApp_mData.updateShotName( blk.mId, TDInstance.sid, from, to, true );
     }

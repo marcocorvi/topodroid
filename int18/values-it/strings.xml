@@ -507,6 +507,7 @@
     <string name="stat_component">Componenti %1$d</string>
     <string name="stat_depth">Profondità %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Battute doppie %1$d # %2$d %3$.1f %4$s</string>
+    <string name="survey_stat_duplicate">Battute doppie %1$d %2$.1f %3$s</string>
     <string name="stat_leg">Battute %1$d %2$.1f %3$.1f %4$.1f %5$s</string>
     <string name="stat_length">Sviluppo %1$.1f %2$s</string>
     <string name="stat_extlen">Lunghezza 3D %1$.1f %2$s</string>

@@ -515,6 +515,7 @@
     <string name="stat_component">Componentes %1$d</string>
     <string name="stat_depth">Profundidad %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Mediciones duplicadas %1$d # %2$d %3$.1f %4$s</string>
+    <string name="survey_stat_duplicate">Mediciones duplicadas %1$d %2$.1f %3$s</string>
     <string name="stat_leg">Visual %1$d %2$.1f %3$.1f %4$.1f %5$s</string>
     <string name="stat_length">Desarrollo %1$.1f %2$s</string>
     <!-- TODO string name="stat_extlen">3D length %1$.1f %2$s</string -->

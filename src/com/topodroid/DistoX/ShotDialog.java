@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import java.util.regex.Pattern;
 
 // import android.app.Dialog;
@@ -36,17 +38,9 @@ import android.widget.EditText;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
-// import android.widget.PopupWindow;
-// import android.widget.Toast;
 
 import android.view.View;
-// import android.view.ViewGroup.LayoutParams;
-// import android.view.Window;
-// import android.view.WindowManager;
-// import android.view.View.OnKeyListener;
-// import android.view.KeyEvent;
 
-// import android.util.Log;
 
 class ShotDialog extends MyDialog
                  implements View.OnClickListener
@@ -104,9 +98,9 @@ class ShotDialog extends MyDialog
 
   private String shot_from;
   private String shot_to;
-  private String shot_distance;
-  private String shot_bearing;
-  private String shot_clino;
+  private String shot_distance;  // distance - depth
+  private String shot_bearing;   // bearing
+  private String shot_clino;     // clino    - distance
   private boolean shot_manual;
   private float shot_stretch; // FIXME_STRETCH
 
@@ -181,13 +175,12 @@ class ShotDialog extends MyDialog
       shot_distance = blk.depthString();
       shot_bearing  = blk.bearingString();
       shot_clino    = blk.distanceString();
-      shot_manual   = (blk.mShotType > 0);
     } else { // SurveyInfo.DATAMODE_NORMAL
       shot_distance = blk.distanceString();
       shot_bearing  = blk.bearingString();
       shot_clino    = blk.clinoString();
-      shot_manual   = (blk.mShotType > 0);
     }
+    shot_manual   = (blk.mShotType > 0);
 
     // Log.v("DistoX", "shot is manual " + shot_manual + " length " + shot_distance );
 
@@ -196,12 +189,13 @@ class ShotDialog extends MyDialog
     shot_extend  = blk.getExtend();
     shot_stretch = blk.getStretch(); // FIXME_STRETCH
     shot_flag    = blk.getFlag();
+    shot_comment = blk.mComment;
+
     // shot_secleg  = blk.isSecLeg(); // DBlock.BLOCK_SEC_LEG;
     // shot_backleg = blk.isBackLeg();
     // shot_xsplay  = blk.isOtherSplay(); // DBlock.BLOCK_X_SPLAY | H_SPLAY | V_SPLAY
-    shot_comment = blk.mComment;
-
     // if ( blk.type() != DBlock.BLOCK_MAIN_LEG ) mCBdeleteLeg.setVisibility( View.GONE );
+
     updateView();
   }
 
@@ -213,23 +207,21 @@ class ShotDialog extends MyDialog
     mETclino.setText( shot_clino );
 
     mTVextra.setText( shot_extra );
-    if ( shot_from.length() > 0 ) {
+    if ( shot_from.length() > 0 || shot_to.length() > 0 ) {
       mETfrom.setText( shot_from );
-      // mRBfrom.setText( shot_from );
-    // } else {
-    //   mRBfrom.setVisibility( View.GONE );
-    }
-    if ( shot_to.length() > 0 ) {
       mETto.setText( shot_to );
-      // mRBto.setText( shot_to );
-    // } else {
-    //   mRBto.setVisibility( View.GONE );
+      // if ( shot_from.length() > 0 ) {
+      //   mRBfrom.setText( shot_from );
+      // } else {
+      //   mRBfrom.setVisibility( View.GONE );
+      // }
+      // if ( shot_to.length() > 0 ) {
+      //   mRBto.setText( shot_to );
+      // } else {
+      //   mRBto.setVisibility( View.GONE );
+      // }
     }
-    if ( shot_comment != null ) {
-      mETcomment.setText( shot_comment );
-    } else {
-      mETcomment.setText( "" );
-    }
+    mETcomment.setText( ((shot_comment != null)? shot_comment : "") );
    
     // if ( DBlock.isSurvey(shot_flag) ) { mRBreg.setChecked( true ); }
     if ( TDLevel.overNormal ) {
@@ -513,7 +505,6 @@ class ShotDialog extends MyDialog
     boolean all_splay = mCBallSplay.isChecked();
     // FIXME_X2_SPLAY boolean x_splay = (mCBxSplay != null) && mCBxSplay.isChecked();
     boolean clear_xsplay = ( mCBxSplay != null ) && mCBxSplay.isChecked(); // FIXME_X3_SPLAY whether to clear other-splay value
-    // Log.v("DistoX", "clear xsplay = " + clear_xsplay );
     boolean leg_next = false;
     boolean shot_secleg = false;
     if ( mCBlegPrev.isChecked() ) {
@@ -558,6 +549,17 @@ class ShotDialog extends MyDialog
     else if ( mRBright.isChecked() ) { shot_extend = DBlock.EXTEND_RIGHT; }
     else                             { shot_extend = DBlock.EXTEND_IGNORE; }
 
+    // Log.v("DistoXShot", "clr xsplay " + clear_xsplay
+    //                     + " all splay " + all_splay 
+    //                     + " do_backleg " + do_backleg
+    //                     + " backleg val " + backleg_val 
+    //                     + " leg_next " + leg_next
+    //                     + " secleg " + shot_secleg
+    //                     + " F " + shot_from
+    //                     + " T " + shot_to
+    //                     + " flag " + shot_flag
+    //                     + " extend " + shot_extend );
+
     mBlk.resetFlag( shot_flag );
 
     if ( shot_secleg ) {
@@ -588,7 +590,7 @@ class ShotDialog extends MyDialog
     if ( comment != null ) mBlk.mComment = comment.trim();
 
     boolean renumber  = false;
-    boolean highlight = false;
+    // boolean highlight = false;
     if ( shot_from.length() > 0 ) {
       if ( shot_to.length() > 0 ) {
         renumber = mCBrenumber.isChecked();
@@ -602,6 +604,8 @@ class ShotDialog extends MyDialog
 
       }
     }
+
+    // Log.v("DostoXShot", "renumber " + renumber + " comment " + comment );
 
     if ( all_splay ) {
       long leg1 = clear_xsplay ? LegType.NORMAL : mBlk.getLegType();

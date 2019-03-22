@@ -85,31 +85,31 @@ class DataHelper extends DataSetObservable
 
   // private SQLiteStatement updateConfig = null;
 
-  private SQLiteStatement updateAudioStmt = null;
-  private SQLiteStatement updateShotStmt = null;
-  private SQLiteStatement updateShotStmtFull = null;
+  // private SQLiteStatement updateAudioStmt = null;
+  // private SQLiteStatement updateShotStmt = null;
+  // private SQLiteStatement updateShotStmtFull = null;
   // private SQLiteStatement updateShotDBCStmt = null;
   // private SQLiteStatement clearStationsStmt = null;
   // private SQLiteStatement updateShotLegStmt = null;
-  private SQLiteStatement updateStationCommentStmt = null;
+  // private SQLiteStatement updateStationCommentStmt = null;
   // private SQLiteStatement deleteStationStmt = null;
   // private SQLiteStatement updateShotNameStmt = null;
   // private SQLiteStatement updateShotExtendStmt = null;
   // private SQLiteStatement updateShotFlagStmt = null;
   // private SQLiteStatement updateShotLegFlagStmt = null;
   // private SQLiteStatement updateShotCommentStmt = null;
-  private SQLiteStatement resetShotColorStmt = null;
-  private SQLiteStatement updateShotColorStmt = null;
-  private SQLiteStatement updateShotAMDRStmt = null;
+  // private SQLiteStatement resetShotColorStmt = null;
+  // private SQLiteStatement updateShotColorStmt = null;
+  // private SQLiteStatement updateShotAMDRStmt = null;
   // private SQLiteStatement shiftShotsIdStmt = null;
 
   // private SQLiteStatement updatePlotStmt     = null;
-  private SQLiteStatement updatePlotViewStmt = null;
-  private SQLiteStatement updatePlotHideStmt = null;
-  private SQLiteStatement updatePlotNameStmt = null;
-  private SQLiteStatement updatePlotOrientationStmt = null;
-  private SQLiteStatement updatePlotAzimuthClinoStmt = null;
-  private SQLiteStatement updatePlotNickStmt = null;
+  // private SQLiteStatement updatePlotViewStmt = null;
+  // private SQLiteStatement updatePlotHideStmt = null;
+  // private SQLiteStatement updatePlotNameStmt = null;
+  // private SQLiteStatement updatePlotOrientationStmt = null;
+  // private SQLiteStatement updatePlotAzimuthClinoStmt = null;
+  // private SQLiteStatement updatePlotNickStmt = null;
 
 /* FIXME_SKETCH_3D *
   private SQLiteStatement updateSketchStmt = null;
@@ -663,9 +663,9 @@ class DataHelper extends DataSetObservable
     if ( myDB != null ) {
       // clearStationsStmt = myDB.compileStatement( "UPDATE shots SET fStation=\"\", tStation=\"\" where id>? and surveyId=?" );
       // updateShotDBCStmt = myDB.compileStatement( "UPDATE shots SET distance=?, bearing=?, clino=? WHERE surveyId=? AND id=?" );
-      updateShotStmtFull   = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, flag=?, leg=?, comment=? WHERE surveyId=? AND id=?" );
-      updateShotStmt       = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, flag=?, leg=? WHERE surveyId=? AND id=?" );
-      updateAudioStmt      = myDB.compileStatement( "UPDATE audios SET date=? WHERE surveyId=? AND shotId=?" );
+      // updateShotStmtFull   = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, flag=?, leg=?, comment=? WHERE surveyId=? AND id=?" );
+      // updateShotStmt       = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, flag=?, leg=? WHERE surveyId=? AND id=?" );
+      // updateAudioStmt      = myDB.compileStatement( "UPDATE audios SET date=? WHERE surveyId=? AND shotId=?" );
 
       // updateShotNameStmt    = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=? WHERE surveyId=? AND id=?" );
       // updateShotExtendStmt  = myDB.compileStatement( "UPDATE shots SET extend=?, stretch=? WHERE surveyId=? AND id=?" );
@@ -675,18 +675,18 @@ class DataHelper extends DataSetObservable
       // updateShotFlagStmt = myDB.compileStatement( "UPDATE shots SET flag=? WHERE surveyId=? AND id=?" );
       // updateShotLegFlagStmt = myDB.compileStatement( "UPDATE shots SET leg=?, flag=? WHERE surveyId=? AND id=?" );
 
-      resetShotColorStmt   = myDB.compileStatement( "UPDATE shots SET color=0 WHERE surveyId=?" );
-      updateShotColorStmt  = myDB.compileStatement( "UPDATE shots SET color=? WHERE surveyId=? AND id=?" );
-      updateShotAMDRStmt   =
-        myDB.compileStatement( "UPDATE shots SET acceleration=?, magnetic=?, dip=?, roll=? WHERE surveyId=? AND id=?" );
+      // resetShotColorStmt   = myDB.compileStatement( "UPDATE shots SET color=0 WHERE surveyId=?" );
+      // updateShotColorStmt  = myDB.compileStatement( "UPDATE shots SET color=? WHERE surveyId=? AND id=?" );
+      // updateShotAMDRStmt   =
+      //   myDB.compileStatement( "UPDATE shots SET acceleration=?, magnetic=?, dip=?, roll=? WHERE surveyId=? AND id=?" );
 
       // updatePlotStmt     = myDB.compileStatement( "UPDATE plots set xoffset=?, yoffset=?, zoom=? WHERE surveyId=? AND id=?" );
-      updatePlotViewStmt = myDB.compileStatement( "UPDATE plots set view=? WHERE surveyId=? AND id=?" );
-      updatePlotHideStmt = myDB.compileStatement( "UPDATE plots set hide=? WHERE surveyId=? AND id=?" );
-      updatePlotNameStmt = myDB.compileStatement( "UPDATE plots set name=? WHERE surveyId=? AND id=?" );
-      updatePlotOrientationStmt = myDB.compileStatement( "UPDATE plots set orientation=? WHERE surveyId=? AND id=?" );
-      updatePlotAzimuthClinoStmt = myDB.compileStatement( "UPDATE plots set azimuth=?, clino=? WHERE surveyId=? AND id=?" );
-      updatePlotNickStmt = myDB.compileStatement( "UPDATE plots set nick=? WHERE surveyId=? AND id=?" );
+      // updatePlotViewStmt = myDB.compileStatement( "UPDATE plots set view=? WHERE surveyId=? AND id=?" );
+      // updatePlotHideStmt = myDB.compileStatement( "UPDATE plots set hide=? WHERE surveyId=? AND id=?" );
+      // updatePlotNameStmt = myDB.compileStatement( "UPDATE plots set name=? WHERE surveyId=? AND id=?" );
+      // updatePlotOrientationStmt = myDB.compileStatement( "UPDATE plots set orientation=? WHERE surveyId=? AND id=?" );
+      // updatePlotAzimuthClinoStmt = myDB.compileStatement( "UPDATE plots set azimuth=?, clino=? WHERE surveyId=? AND id=?" );
+      // updatePlotNickStmt = myDB.compileStatement( "UPDATE plots set nick=? WHERE surveyId=? AND id=?" );
       // dropPlotStmt    = myDB.compileStatement( "DELETE FROM plots WHERE surveyId=? AND id=?" );
 
       /* FIXME_SKETCH_3D
@@ -714,7 +714,7 @@ class DataHelper extends DataSetObservable
       // updateFixedAltStmt     = myDB.compileStatement( "UPDATE fixeds set altitude=?, altimetric=? WHERE surveyId=? AND id=?" );
       // updateFixedDataStmt    = myDB.compileStatement( "UPDATE fixeds set longitude=?, latitude=?, altitude=? WHERE surveyId=? AND id=?" );
 
-      updateStationCommentStmt = myDB.compileStatement( "UPDATE stations SET comment=?, flag=? WHERE surveyId=? AND name=?" );
+      // updateStationCommentStmt = myDB.compileStatement( "UPDATE stations SET comment=?, flag=? WHERE surveyId=? AND name=?" );
       // deleteStationStmt        = myDB.compileStatement( "DELETE FROM stations WHERE surveyId=? AND name=?" );
     }
     // Log.v("DistoX", "compile statements done");
@@ -832,6 +832,21 @@ class DataHelper extends DataSetObservable
     return ret;
   }
 
+  private boolean doUpdate( String table, ContentValues cv, String where, String[] args, String msg )
+  {
+    boolean ret = false;
+    try {
+      myDB.beginTransaction();
+      myDB.update( table, cv, where, args );
+      myDB.setTransactionSuccessful();
+      ret = true;
+    } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
+    } catch ( SQLiteException e1 )       { logError(msg, e1 );
+    } catch ( IllegalStateException e2 ) { logError(msg, e2 );
+    } finally { myDB.endTransaction(); }
+    return ret;
+  }
+
   private boolean doInsert( String table, ContentValues cv, String msg )
   {
     boolean ret = false;
@@ -862,7 +877,7 @@ class DataHelper extends DataSetObservable
     return ret;
   }
 
-  private boolean doExecShotSQL( long id, StringWriter sw ) { return doExecSQL( sw, "shot " + id ); }
+  private boolean doExecShotSQL( long id, StringWriter sw ) { return doExecSQL( sw, "sht " + id ); }
 
   private boolean updateStatus( String table, long id, long sid, long status )
   {
@@ -1034,61 +1049,20 @@ class DataHelper extends DataSetObservable
     // if ( makesCycle( id, sid, fStation, tStation ) ) return -2;
 
     // Log.v("DistoXX", "A8 update shot. id " + id + " leg " + leg );
-    if ( updateShotStmtFull == null ) {
-      updateShotStmtFull = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, flag=?, leg=?, comment=? WHERE surveyId=? AND id=?" );
-    }
-    if ( updateShotStmt == null ) {
-      updateShotStmt = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, flag=?, leg=? WHERE surveyId=? AND id=?" );
-    }
-
-    // StringWriter sw = new StringWriter();
-    // PrintWriter pw = new PrintWriter( sw );
-    // if ( comment != null ) {
-    //   pw.format( Locale.US,
-// "UPDATE shots SET fStation=\"%s\", tStation=\"%s\", extend=%d, flag=%d, leg=%d, comment=\"%s\" WHERE surveyId=%d AND id=%d",
-    //      fStation, tStation, extend, flag, leg, comment, sid, id );
-    // } else {
-    //   pw.format( Locale.US,
-    //   "UPDATE shots SET fStation=\"%s\", tStation=\"%s\", extend=%d, flag=%d, leg=%d WHERE surveyId=%d AND id=%d",
-    //      fStation, tStation, extend, flag, leg, sid, id );
-    // }
-    // try {
-    //   myDB.execSQL( sw.toString() );
-    // } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e ); }
-
     if ( tStation == null ) tStation = TDString.EMPTY;
-    try {
-      myDB.beginTransaction();
-      if ( comment != null ) {
-        updateShotStmtFull.bindString( 1, fStation );
-        updateShotStmtFull.bindString( 2, tStation );
-        updateShotStmtFull.bindLong(   3, extend );
-        updateShotStmtFull.bindLong(   4, flag );
-        updateShotStmtFull.bindLong(   5, leg );
-        updateShotStmtFull.bindString( 6, comment );
-        updateShotStmtFull.bindLong(   7, sid );     // WHERE
-        updateShotStmtFull.bindLong(   8, id );
-        updateShotStmtFull.execute();
-        success = true;
-      } else {
-        updateShotStmt.bindString( 1, fStation );
-        updateShotStmt.bindString( 2, tStation );
-        updateShotStmt.bindLong(   3, extend );
-        updateShotStmt.bindLong(   4, flag );
-        updateShotStmt.bindLong(   5, leg );
-        updateShotStmt.bindLong(   6, sid );
-        updateShotStmt.bindLong(   7, id );
-        updateShotStmt.execute();
-        success = true;
-      }
-      myDB.setTransactionSuccessful();
-    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } catch ( SQLiteException e ) { logError("Shot update sqlite error " + fStation + " " + tStation, e );
-      // TopoDroidUtil.slowDown( 50 );
-    } catch ( IllegalStateException e2 ) { logError("Shot update sqlite error " + fStation + " " + tStation, e2 );
-    } finally {
-      myDB.endTransaction();
+
+    StringWriter sw = new StringWriter();
+    PrintWriter pw = new PrintWriter( sw );
+    if ( comment != null ) {
+      pw.format( Locale.US,
+        "UPDATE shots SET fStation=\"%s\", tStation=\"%s\", extend=%d, flag=%d, leg=%d, comment=\"%s\" WHERE surveyId=%d AND id=%d",
+        fStation, tStation, extend, flag, leg, comment, sid, id );
+    } else {
+      pw.format( Locale.US,
+        "UPDATE shots SET fStation=\"%s\", tStation=\"%s\", extend=%d, flag=%d, leg=%d WHERE surveyId=%d AND id=%d",
+        fStation, tStation, extend, flag, leg, sid, id );
     }
+    success = doExecShotSQL( id, sw );
 
     // Log.v("DistoXS", "update shot " + fStation + " " + tStation + " success " + success );
     // if ( success && forward && mListeners != null ) { // synchronized( mListeners )
@@ -1103,10 +1077,6 @@ class DataHelper extends DataSetObservable
     PrintWriter pw = new PrintWriter( sw );
     pw.format( Locale.US, "UPDATE shots SET id=id+1 where surveyId=%d and id>=%d", sid, id );
     doExecShotSQL( id, sw );
-
-    // shiftShotsIdStmt.bindLong(1, sid);
-    // shiftShotsIdStmt.bindLong(2, id);
-    // try { shiftShotsIdStmt.execute(); } catch (SQLiteException e ) { }
   }
 
   // public boolean makesCycle( long id, long sid, String f, String t )
@@ -1130,23 +1100,14 @@ class DataHelper extends DataSetObservable
     PrintWriter pw = new PrintWriter( sw );
     pw.format( Locale.US, "UPDATE shots SET fStation=\"%s\", tStation=\"%s\" WHERE surveyId=%d AND id=%d",
                fStation, tStation, sid, id );
-    myDB.beginTransaction();
-    try {
-      myDB.execSQL( sw.toString() );
-      // if ( forward && mListeners != null ) { // synchronized( mListeners )
-      //   mListeners.onUpdateShotName( id, sid, fStation, tStation );
-      // }
-      myDB.setTransactionSuccessful();
-    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } catch ( SQLiteException e ) { logError("shot " + id + " name " + fStation + " " + tStation, e );
-    } finally { myDB.endTransaction(); }
+    doExecShotSQL( id, sw );
   }
 
   void updateShotsName( List<DBlock> blks, long sid, boolean forward )
   {
     if ( myDB == null ) return;
-    myDB.beginTransaction();
     try {
+      myDB.beginTransaction();
       for ( DBlock blk : blks ) {
         String from = blk.mFrom;
         String to   = blk.mTo;
@@ -1174,16 +1135,7 @@ class DataHelper extends DataSetObservable
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
     pw.format( Locale.US, "UPDATE shots SET leg=%d WHERE surveyId=%d AND id=%d", leg, sid, id );
-    myDB.beginTransaction();
-    try {
-      myDB.execSQL( sw.toString() );
-      myDB.setTransactionSuccessful();
-      // if ( forward && mListeners != null ) { // synchronized( mListeners )
-      //   mListeners.onUpdateShotLeg( id, sid, leg );
-      // }
-    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } catch ( SQLiteException e ) { logError("shot " + id + " leg", e );
-    } finally { myDB.endTransaction(); }
+    doExecSQL( sw, "sht leg" );
   }
 
   // void updateShotLeg( long id, long sid, long leg, boolean forward )
@@ -1464,12 +1416,15 @@ class DataHelper extends DataSetObservable
 
   void resetShotColor( long sid )
   {
-    if ( resetShotColorStmt == null ) {
-      resetShotColorStmt   =
-        myDB.compileStatement( "UPDATE shots SET color=0 WHERE surveyId=?" );
-    }
-    resetShotColorStmt.bindLong( 1, sid );
-    doStatement( resetShotColorStmt, "Color" );
+    // if ( resetShotColorStmt == null ) {
+    //   resetShotColorStmt = myDB.compileStatement( "UPDATE shots SET color=0 WHERE surveyId=?" );
+    // }
+    // resetShotColorStmt.bindLong( 1, sid );
+    // doStatement( resetShotColorStmt, "Color" );
+
+    ContentValues cv = new ContentValues();
+    cv.put("color", 0 );
+    doUpdate( SHOT_TABLE, cv, "surveyId=?", new String[] { Long.toString(sid) }, "sht color reset" );
   }
 
   void updateShotColor( long id, long sid, int color, boolean forward )
@@ -1482,15 +1437,19 @@ class DataHelper extends DataSetObservable
     //            "UPDATE shots SET color=%d WHERE surveyId=%d AND id=%d",
     //            color, sid, id );
     // myDB.execSQL( sw.toString() );
-    if ( updateShotColorStmt == null ) {
-      updateShotColorStmt   =
-        myDB.compileStatement( "UPDATE shots SET color=? WHERE surveyId=? AND id=?" );
-    }
 
-    updateShotColorStmt.bindLong( 1, color );
-    updateShotColorStmt.bindLong( 2, sid );
-    updateShotColorStmt.bindLong( 3, id );
-    doStatement( updateShotColorStmt, "Color" );
+    ContentValues cv = new ContentValues();
+    cv.put("color", color );
+    doUpdate( SHOT_TABLE, cv, sid, id, "sht color" );
+
+    // if ( updateShotColorStmt == null ) {
+    //   updateShotColorStmt   =
+    //     myDB.compileStatement( "UPDATE shots SET color=? WHERE surveyId=? AND id=?" );
+    // }
+    // updateShotColorStmt.bindLong( 1, color );
+    // updateShotColorStmt.bindLong( 2, sid );
+    // updateShotColorStmt.bindLong( 3, id );
+    // doStatement( updateShotColorStmt, "Color" );
     // if ( doStatement( updateShotColorStmt, "Color" ) ) {
     //   // if ( forward && mListeners != null ) { // synchronized( mListeners )
     //   //   mListeners.onUpdateShotColor( sid, id, color );
@@ -1522,12 +1481,13 @@ class DataHelper extends DataSetObservable
   {
     // if ( myDB == null ) return;
 
-    // StringWriter sw = new StringWriter();
-    // PrintWriter pw  = new PrintWriter( sw );
-    // pw.format( Locale.US,
-    //            "UPDATE shots SET acceleration=%.6f, magnetic=%.6f, dip=%.4f, roll=%.6f WHERE surveyId=%d AND id=%d",
-    //            acc, mag, dip, r, sid, id );
-    // myDB.execSQL( sw.toString() );
+    StringWriter sw = new StringWriter();
+    PrintWriter pw  = new PrintWriter( sw );
+    pw.format( Locale.US,
+               "UPDATE shots SET acceleration=%.6f, magnetic=%.6f, dip=%.4f, roll=%.6f WHERE surveyId=%d AND id=%d",
+               acc, mag, dip, r, sid, id );
+    doExecSQL( sw, "sht AMDR" );
+/*
     if ( updateShotAMDRStmt == null ) {
       updateShotAMDRStmt   =
         myDB.compileStatement( "UPDATE shots SET acceleration=?, magnetic=?, dip=?, roll=? WHERE surveyId=? AND id=?" );
@@ -1547,6 +1507,7 @@ class DataHelper extends DataSetObservable
     //   return true;
     // }
     // return false;
+*/
   }
 
   private void renamePlotFile( String oldname, String newname )
@@ -1697,7 +1658,7 @@ class DataHelper extends DataSetObservable
 		     long extend, double stretch, long leg, long type, boolean forward )
   {
     if ( myDB == null ) return -1L;
-    // Log.v("DistoXX", "A4 insert shot at " + at + " leg " + leg );
+    // Log.v("DistoXX", "A4 insert sht at " + at + " leg " + leg );
     shiftShotsId( sid, at );
     ++ myNextId;
     ContentValues cv = new ContentValues();
@@ -1800,7 +1761,7 @@ class DataHelper extends DataSetObservable
     pw.format( Locale.US,
                "UPDATE plots set xoffset=%.2f, yoffset=%.2f, zoom=%.2f WHERE surveyId=%d AND id=%d", 
                xoffset, yoffset, zoom, sid, pid );
-    doExecSQL( sw, "update plot" );
+    doExecSQL( sw, "plt updt" );
 
     // FIXME with the update statement I get a crash on immediate switching Plan/Profile on load
     // updatePlotStmt.bindDouble( 1, xoffset );
@@ -1808,26 +1769,26 @@ class DataHelper extends DataSetObservable
     // updatePlotStmt.bindDouble( 3, zoom );
     // updatePlotStmt.bindLong( 4, sid );
     // updatePlotStmt.bindLong( 5, pid );
-    // try { updatePlotStmt.execute(); } catch (SQLiteException e) { logError("plot update", e); }
+    // try { updatePlotStmt.execute(); } catch (SQLiteException e) { logError("plt updt", e); }
   }
  
   void updatePlotNick( long pid, long sid, String nick )
   {
     if ( myDB == null ) return; // false;
-    // TDLog.Log( TDLog.LOG_DB, "update PlotView: " + pid + "/" + sid + " view " + view );
+    // TDLog.Log( TDLog.LOG_DB, "update PlotNick: " + pid + "/" + sid + " nick " + nick );
     if ( nick == null ) nick = TDString.EMPTY;
-    // StringWriter sw = new StringWriter();
-    // PrintWriter  pw = new PrintWriter( sw );
-    // pw.format( Locale.US, "UPDATE plots set view=\"%s\" WHERE surveyId=%d AND id=%d", view, sid, pid );
-    // myDB.execSQL( sw.toString() );
+    StringWriter sw = new StringWriter();
+    PrintWriter  pw = new PrintWriter( sw );
+    pw.format( Locale.US, "UPDATE plots set nick=\"%s\" WHERE surveyId=%d AND id=%d", nick, sid, pid );
+    doExecSQL( sw, "plt nick" );
 
-    if ( updatePlotNickStmt == null ) {
-      updatePlotNickStmt = myDB.compileStatement( "UPDATE plots set nick=? WHERE surveyId=? AND id=?" );
-    }
-    updatePlotNickStmt.bindString( 1, nick );
-    updatePlotNickStmt.bindLong( 2, sid );
-    updatePlotNickStmt.bindLong( 3, pid );
-    doStatement( updatePlotNickStmt, "plot nick" );
+    // if ( updatePlotNickStmt == null ) {
+    //   updatePlotNickStmt = myDB.compileStatement( "UPDATE plots set nick=? WHERE surveyId=? AND id=?" );
+    // }
+    // updatePlotNickStmt.bindString( 1, nick );
+    // updatePlotNickStmt.bindLong( 2, sid );
+    // updatePlotNickStmt.bindLong( 3, pid );
+    // doStatement( updatePlotNickStmt, "plt nick" );
   }
  
   void updatePlotView( long pid, long sid, String view )
@@ -1835,18 +1796,18 @@ class DataHelper extends DataSetObservable
     if ( myDB == null ) return; // false;
     // TDLog.Log( TDLog.LOG_DB, "update PlotView: " + pid + "/" + sid + " view " + view );
     if ( view == null ) view = TDString.EMPTY;
-    // StringWriter sw = new StringWriter();
-    // PrintWriter  pw = new PrintWriter( sw );
-    // pw.format( Locale.US, "UPDATE plots set view=\"%s\" WHERE surveyId=%d AND id=%d", view, sid, pid );
-    // myDB.execSQL( sw.toString() );
+    StringWriter sw = new StringWriter();
+    PrintWriter  pw = new PrintWriter( sw );
+    pw.format( Locale.US, "UPDATE plots set view=\"%s\" WHERE surveyId=%d AND id=%d", view, sid, pid );
+    doExecSQL( sw, "plt view" );
 
-    if ( updatePlotViewStmt == null ) {
-      updatePlotViewStmt = myDB.compileStatement( "UPDATE plots set view=? WHERE surveyId=? AND id=?" );
-    }
-    updatePlotViewStmt.bindString( 1, view );
-    updatePlotViewStmt.bindLong( 2, sid );
-    updatePlotViewStmt.bindLong( 3, pid );
-    doStatement( updatePlotViewStmt, "plot view" );
+    // if ( updatePlotViewStmt == null ) {
+    //   updatePlotViewStmt = myDB.compileStatement( "UPDATE plots set view=? WHERE surveyId=? AND id=?" );
+    // }
+    // updatePlotViewStmt.bindString( 1, view );
+    // updatePlotViewStmt.bindLong( 2, sid );
+    // updatePlotViewStmt.bindLong( 3, pid );
+    // doStatement( updatePlotViewStmt, "plt view" );
   }
 
   void updatePlotHide( long pid, long sid, String hide )
@@ -1854,18 +1815,18 @@ class DataHelper extends DataSetObservable
     if ( myDB == null ) return; // false;
     // TDLog.Log( TDLog.LOG_DB, "update PlotHide: " + pid + "/" + sid + " hide " + hide );
     if ( hide == null ) hide = TDString.EMPTY;
-    // StringWriter sw = new StringWriter();
-    // PrintWriter  pw = new PrintWriter( sw );
-    // pw.format( Locale.US, "UPDATE plots set hide=\"%s\" WHERE surveyId=%d AND id=%d", hide, sid, pid );
-    // myDB.execSQL( sw.toString() );
+    StringWriter sw = new StringWriter();
+    PrintWriter  pw = new PrintWriter( sw );
+    pw.format( Locale.US, "UPDATE plots set hide=\"%s\" WHERE surveyId=%d AND id=%d", hide, sid, pid );
+    doExecSQL( sw, "plt hide" );
 
-    if ( updatePlotHideStmt == null ) {
-      updatePlotHideStmt = myDB.compileStatement( "UPDATE plots set hide=? WHERE surveyId=? AND id=?" );
-    }
-    updatePlotHideStmt.bindString( 1, hide );
-    updatePlotHideStmt.bindLong( 2, sid );
-    updatePlotHideStmt.bindLong( 3, pid );
-    doStatement( updatePlotHideStmt, "plot hide" );
+    // if ( updatePlotHideStmt == null ) {
+    //   updatePlotHideStmt = myDB.compileStatement( "UPDATE plots set hide=? WHERE surveyId=? AND id=?" );
+    // }
+    // updatePlotHideStmt.bindString( 1, hide );
+    // updatePlotHideStmt.bindLong( 2, sid );
+    // updatePlotHideStmt.bindLong( 3, pid );
+    // doStatement( updatePlotHideStmt, "plt hide" );
   }
    
   /** DROP is a real record delete from the database table
@@ -1878,7 +1839,7 @@ class DataHelper extends DataSetObservable
       myDB.delete( PLOT_TABLE, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(pid) } );
       myDB.setTransactionSuccessful();
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } catch (SQLiteException e) { logError("plot drop", e);
+    } catch (SQLiteException e) { logError("plt drop", e);
     } finally { myDB.endTransaction(); }
   }
 
@@ -1898,7 +1859,7 @@ class DataHelper extends DataSetObservable
       myDB.delete( PLOT_TABLE, WHERE_SID_NAME, new String[]{ Long.toString(sid), name } );
       myDB.setTransactionSuccessful();
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } catch (SQLiteException e) { logError("plot dropN", e);
+    } catch (SQLiteException e) { logError("plt dropN", e);
     } finally { myDB.endTransaction(); }
   }
   
@@ -3383,36 +3344,50 @@ class DataHelper extends DataSetObservable
 
   void updatePlotName( long sid, long pid, String name )
   {
-    if ( updatePlotNameStmt == null ) {
-      updatePlotNameStmt = myDB.compileStatement( "UPDATE plots set name=? WHERE surveyId=? AND id=?" );
-    }
-    updatePlotNameStmt.bindString( 1, name );
-    updatePlotNameStmt.bindLong( 2, sid );
-    updatePlotNameStmt.bindLong( 3, pid );
-    doStatement( updatePlotNameStmt, "plot name" );
+    // if ( updatePlotNameStmt == null ) {
+    //   updatePlotNameStmt = myDB.compileStatement( "UPDATE plots set name=? WHERE surveyId=? AND id=?" );
+    // }
+    // updatePlotNameStmt.bindString( 1, name );
+    // updatePlotNameStmt.bindLong( 2, sid );
+    // updatePlotNameStmt.bindLong( 3, pid );
+    // doStatement( updatePlotNameStmt, "plot name" );
+
+    ContentValues cv = new ContentValues();
+    cv.put( "name", name );
+    doUpdate( PLOT_TABLE, cv, "surveyId=? AND id=?", new String[] { Long.toString(sid), Long.toString(pid) }, "plot name" );
   }
 
   void updatePlotOrientation( long sid, long pid, int orient )
   {
-    if ( updatePlotOrientationStmt == null ) {
-      updatePlotOrientationStmt = myDB.compileStatement( "UPDATE plots set orientation=? WHERE surveyId=? AND id=?" );
-    }
-    updatePlotOrientationStmt.bindLong( 1, orient );
-    updatePlotOrientationStmt.bindLong( 2, sid );
-    updatePlotOrientationStmt.bindLong( 3, pid );
-    doStatement( updatePlotOrientationStmt, "plot orientation" );
+    // if ( updatePlotOrientationStmt == null ) {
+    //   updatePlotOrientationStmt = myDB.compileStatement( "UPDATE plots set orientation=? WHERE surveyId=? AND id=?" );
+    // }
+    // updatePlotOrientationStmt.bindLong( 1, orient );
+    // updatePlotOrientationStmt.bindLong( 2, sid );
+    // updatePlotOrientationStmt.bindLong( 3, pid );
+    // doStatement( updatePlotOrientationStmt, "plot orientation" );
+
+    ContentValues cv = new ContentValues();
+    cv.put( "orientation", orient );
+    doUpdate( PLOT_TABLE, cv, "surveyId=? AND id=?", new String[] { Long.toString(sid), Long.toString(pid) }, "plot orient" );
   }
 
   boolean updatePlotAzimuthClino( long sid, long pid, float b, float c )
   {
-    if ( updatePlotAzimuthClinoStmt == null ) {
-      updatePlotAzimuthClinoStmt = myDB.compileStatement( "UPDATE plots set azimuth=?, clino=? WHERE surveyId=? AND id=?" );
-    }
-    updatePlotAzimuthClinoStmt.bindDouble( 1, b );
-    updatePlotAzimuthClinoStmt.bindDouble( 2, c );
-    updatePlotAzimuthClinoStmt.bindLong( 3, sid );
-    updatePlotAzimuthClinoStmt.bindLong( 4, pid );
-    return doStatement( updatePlotAzimuthClinoStmt, "plot azi+clino" );
+    // if ( updatePlotAzimuthClinoStmt == null ) {
+    //   updatePlotAzimuthClinoStmt = myDB.compileStatement( "UPDATE plots set azimuth=?, clino=? WHERE surveyId=? AND id=?" );
+    // }
+    // updatePlotAzimuthClinoStmt.bindDouble( 1, b );
+    // updatePlotAzimuthClinoStmt.bindDouble( 2, c );
+    // updatePlotAzimuthClinoStmt.bindLong( 3, sid );
+    // updatePlotAzimuthClinoStmt.bindLong( 4, pid );
+    // return doStatement( updatePlotAzimuthClinoStmt, "plot azi+clino" );
+
+    ContentValues cv = new ContentValues();
+    cv.put( "azimuth", b );
+    cv.put( "clino", c );
+    doUpdate( PLOT_TABLE, cv, "surveyId=? AND id=?", new String[] { Long.toString(sid), Long.toString(pid) }, "plot dir" );
+    return true; // FIXME
   }
  
   PlotInfo getPlotInfo( long sid, String name )
@@ -3904,7 +3879,7 @@ class DataHelper extends DataSetObservable
 
       ContentValues cv = new ContentValues();
       cv.put( "station", station );
-      ret = doUpdate( FIXED_TABLE, cv, sid, id, "fixed update" );
+      ret = doUpdate( FIXED_TABLE, cv, sid, id, "fix updt" );
     }
     return ret;
   }
@@ -3919,7 +3894,7 @@ class DataHelper extends DataSetObservable
     ContentValues cv = new ContentValues();
     cv.put( "station", station );
     cv.put( "comment", comment );
-    doUpdate( FIXED_TABLE, cv, sid, id, "fixed cmt" );
+    doUpdate( FIXED_TABLE, cv, sid, id, "fix cmt" );
   }
 
   void updateFixedAltitude( long id, long sid, double alt, double asl )
@@ -3928,7 +3903,7 @@ class DataHelper extends DataSetObservable
     ContentValues cv = new ContentValues();
     cv.put( "altitude",   alt );
     cv.put( "altimetric", asl );
-    doUpdate( FIXED_TABLE, cv, sid, id, "fixed alt" );
+    doUpdate( FIXED_TABLE, cv, sid, id, "fix alt" );
   }
 
   void updateFixedData( long id, long sid, double lng, double lat, double alt )
@@ -3938,7 +3913,7 @@ class DataHelper extends DataSetObservable
     cv.put( "longitude", lng );
     cv.put( "latitude",  lat );
     cv.put( "altitude",  alt );
-    doUpdate( FIXED_TABLE, cv, sid, id, "fixed data" );
+    doUpdate( FIXED_TABLE, cv, sid, id, "fix dat1" );
   }
 
   void updateFixedData( long id, long sid, double lng, double lat, double alt, double asl )
@@ -3949,7 +3924,7 @@ class DataHelper extends DataSetObservable
     cv.put( "latitude",  lat );
     cv.put( "altitude",  alt );
     cv.put( "altimetric", asl );
-    doUpdate( FIXED_TABLE, cv, sid, id, "fixed data" );
+    doUpdate( FIXED_TABLE, cv, sid, id, "fix dat2" );
   }
 
   void updateFixedCS( long id, long sid, String cs, double lng, double lat, double alt, long n_dec )
@@ -3969,7 +3944,7 @@ class DataHelper extends DataSetObservable
       cv.put( "cs_altitude",  0 );
       cv.put( "cs_decimals",  2 );
     }
-    doUpdate( FIXED_TABLE, cv, sid, id, "fixed cs" );
+    doUpdate( FIXED_TABLE, cv, sid, id, "fix cs" );
   }
 
   boolean hasSurveyName( String name )  { return hasName( name, SURVEY_TABLE ); }
@@ -4806,16 +4781,28 @@ class DataHelper extends DataSetObservable
        // pw.format( Locale.US, "UPDATE stations SET comment=\"%s\", flag=%d WHERE surveyId=%d AND name=\"%s\"",
        //            comment, flag, sid, name );
        // myDB.execSQL( sw.toString() );
+       ContentValues cv = new ContentValues();
+       cv.put("comment", comment );
+       cv.put("flag", flag );
+       doUpdate( STATION_TABLE, cv, "surveyId=? AND name=?", new String[]{ Long.toString(sid), name }, "station" );
+       // try {
+       //   myDB.beginTransaction();
+       //   myDB.update( STATION_TABLE, cv, "surveyId=? AND name=?", new String[]{ Long.toString(sid), name } );
+       //   myDB.setTransactionSuccessful();
+       // } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e ); ret = false;
+       // } catch ( SQLiteException e1 )       { logError("survey rename " + name, e1 ); ret =false;
+       // } catch ( IllegalStateException e2 ) { logError("survey rename", e2 ); ret = false;
+       // } finally { myDB.endTransaction(); }
 
-       if ( updateStationCommentStmt == null ) {
-          updateStationCommentStmt = myDB.compileStatement( "UPDATE stations SET comment=?, flag=? WHERE surveyId=? AND name=?" );
-       }
-       updateStationCommentStmt.bindString( 1, comment );
-       updateStationCommentStmt.bindLong(   2, flag );
-       updateStationCommentStmt.bindLong(   3, sid );
-       updateStationCommentStmt.bindString( 4, name );
-       // ret =
-       doStatement( updateStationCommentStmt, "station update" );
+       // if ( updateStationCommentStmt == null ) {
+       //    updateStationCommentStmt = myDB.compileStatement( "UPDATE stations SET comment=?, flag=? WHERE surveyId=? AND name=?" );
+       // }
+       // updateStationCommentStmt.bindString( 1, comment );
+       // updateStationCommentStmt.bindLong(   2, flag );
+       // updateStationCommentStmt.bindLong(   3, sid );
+       // updateStationCommentStmt.bindString( 4, name );
+       // // ret =
+       // doStatement( updateStationCommentStmt, "station update" );
      } else {
        ContentValues cv = makeStationContentValues( sid, name, comment, flag );
        // ret =
