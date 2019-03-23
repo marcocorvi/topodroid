@@ -477,7 +477,7 @@ class CalibAlgo
     // m[idx] = new Vector( mx/TopoDroidUtil.FV, my/TopoDroidUtil.FV, mz/TopoDroidUtil.FV );
     g[idx] = scaledVector( gx, gy, gz );
     m[idx] = scaledVector( mx, my, mz );
-    group[idx] = group0;
+    group[idx] = (group0 < 0)? 0 : group0;
 
     if ( TDLog.LOG_CALIB ) {
       TDLog.DoLog(

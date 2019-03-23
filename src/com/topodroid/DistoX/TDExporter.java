@@ -3938,7 +3938,7 @@ class TDExporter
       pw.format("# %s\n", ci.comment );
       pw.format("# %d\n", ci.algo );
 
-      List<CalibCBlock> list = data.selectAllGMs( cid, 1 ); // status 1 --> all shots
+      List<CalibCBlock> list = data.selectAllGMs( cid, 1, true ); // status 1: all shots, true: negative_grp too
       for ( CalibCBlock b : list ) {
         b.computeBearingAndClino();
         pw.format(Locale.US, "%d, %d, %d, %d, %d, %d, %d, %d, %.2f, %.2f, %.2f, %.4f, %d\n",

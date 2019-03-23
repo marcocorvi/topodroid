@@ -728,7 +728,7 @@ class ShotDialog extends MyDialog
       if ( mRBcmtd.toggleState() ) {
         mRBdup.setState( false );
         mRBsurf.setState( false );
-        if ( TDLevel.overExpert ) mRBsplay.setState( 0 );
+        if ( mRBsplay != null ) mRBsplay.setState( 0 );
       }
     } else if ( mRBsplay != null && b == mRBsplay ) {
       mRBsplay.setState( ( mRBsplay.getState() + 1 ) % 3 );

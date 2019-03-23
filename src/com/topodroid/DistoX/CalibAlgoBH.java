@@ -211,15 +211,15 @@ class CalibAlgoBH extends CalibAlgo
       ca = 0.0f;
       long group0 = -1;
       for ( int i=0; i<nn; ) {
-        if ( group[i] <= 0 ) {
+        if ( group[i] <= 0 ) { // N.B. group[] is >= 0 by CalibAlgo class
           ++i;
         } else if ( group[i] != group0 ) {
           group0 = group[i];
           Vector grp = new Vector();
           Vector mrp = new Vector();
           int first = i;
-          while ( i < nn && (group[i] == 0 || group[i] == group0) ) {
-            // group must be positive integer: group == 0 means to skip
+          while ( i < nn && (group[i] <= 0 || group[i] == group0) ) {
+            // group must be positive integer: group <= 0 means to skip
             if ( group[i] > 0 ) {
               TurnVectors( gr[i], mr[i], gr[first], mr[first] ); // output ==> gxt, mxt
               grp.plusEqual( gxt );
@@ -232,7 +232,7 @@ class CalibAlgoBH extends CalibAlgo
           sa += (mrp.cross(gxp)).Length();
           ca += mrp.dot(gxp);
           for (int j = first; j < i; ++j ) {
-            if ( group[j] != 0 ) {
+            if ( group[j] > 0 ) {
               TurnVectors( gxp, mxp, gr[j], mr[j] ); // output ==> gxt, mxt
               gx[j] = new Vector( gxt );
               mx[j] = new Vector( mxt );
@@ -341,8 +341,8 @@ class CalibAlgoBH extends CalibAlgo
         Vector grp = new Vector();
         Vector mrp = new Vector();
         int first = i;
-        while ( i < nn && (group[i] == 0 || group[i] == group0) ) {
-          if ( group[i] != 0 ) {
+        while ( i < nn && (group[i] <= 0 || group[i] == group0) ) {
+          if ( group[i] > 0 ) {
             TurnVectors( gr[i], mr[i], gr[first], mr[first] );
             grp.plusEqual( gxt );
             mrp.plusEqual( mxt );
@@ -354,7 +354,7 @@ class CalibAlgoBH extends CalibAlgo
         Vector v0 = new Vector( b0, c0 );
         // Log.v("DistoX", "group V " + v0.x + " " + v0.y + " " + v0.z );
         for (int j=first; j<i; ++j ) {
-          if ( group[j] == 0 ) {
+          if ( group[j] <= 0 ) {
             err[j] = 0.0f;
           } else {
             computeBearingAndClinoRad( gr[j], mr[j] );

@@ -169,8 +169,8 @@ class CalibAlgoMin extends CalibAlgo
         float xx = 0;
         float yy = 0;
         float zz = 0;
-        while ( i < idx && (group[i] == 0 || group[i] == group0) ) {
-          if ( group[i] != 0 ) {
+        while ( i < idx && (group[i] <= 0 || group[i] == group0) ) {
+          if ( group[i] > 0 ) {
             Vector v = g[i];
             xx += v.x;
             yy += v.y;
@@ -218,8 +218,8 @@ class CalibAlgoMin extends CalibAlgo
         float xx = 0;
         float yy = 0;
         float zz = 0;
-        while ( i < idx && (group[i] == 0 || group[i] == group0) ) {
-          if ( group[i] != 0 ) {
+        while ( i < idx && (group[i] <= 0 || group[i] == group0) ) {
+          if ( group[i] > 0 ) {
             Vector v = m[i];
             xx += v.x;
             yy += v.y;
@@ -266,8 +266,8 @@ class CalibAlgoMin extends CalibAlgo
         int c = 0;
         Vector xx = new Vector();
         float gmx = 0;
-        while ( i < idx && (group[i] == 0 || group[i] == group0) ) {
-          if ( group[i] != 0 ) {
+        while ( i < idx && (group[i] <= 0 || group[i] == group0) ) {
+          if ( group[i] > 0 ) {
             Vector gg = G(i);
             Vector mm = M(i);
             gmx += gg.cross( mm ).x;
@@ -306,8 +306,8 @@ class CalibAlgoMin extends CalibAlgo
         int c = 0;
         Matrix xx = new Matrix();
         float gmx = 0;
-        while ( i < idx && (group[i] == 0 || group[i] == group0) ) {
-          if ( group[i] != 0 ) {
+        while ( i < idx && (group[i] <= 0 || group[i] == group0) ) {
+          if ( group[i] > 0 ) {
             Vector gg = G(i);
             Vector mm = M(i);
             gmx += gg.cross( mm ).x;
@@ -348,8 +348,8 @@ class CalibAlgoMin extends CalibAlgo
         int c = 0;
         Vector xx = new Vector();
         float gmx = 0;
-        while ( i < idx && (group[i] == 0 || group[i] == group0) ) {
-          if ( group[i] != 0 ) {
+        while ( i < idx && (group[i] <= 0 || group[i] == group0) ) {
+          if ( group[i] > 0 ) {
             Vector gg = G(i);
             Vector mm = M(i);
             gmx += mm.cross( gg ).x;
@@ -388,8 +388,8 @@ class CalibAlgoMin extends CalibAlgo
         int c = 0;
         Matrix xx = new Matrix();
         float gmx = 0;
-        while ( i < idx && (group[i] == 0 || group[i] == group0) ) {
-          if ( group[i] != 0 ) {
+        while ( i < idx && (group[i] <= 0 || group[i] == group0) ) {
+          if ( group[i] > 0 ) {
             Vector gg = G(i);
             Vector mm = M(i);
             gmx += mm.cross( gg ).x;
@@ -709,8 +709,8 @@ class CalibAlgoMin extends CalibAlgo
         int first = i;
         vx = new Vector();
         int cx = 0;
-        while ( i < nn && (group[i] == 0 || group[i] == group0) ) {
-          if ( group[i] != 0 ) {
+        while ( i < nn && (group[i] <= 0 || group[i] == group0) ) {
+          if ( group[i] > 0 ) {
             computeBearingAndClinoRad( gr[i], mr[i] );
             vx.plusEqual( new Vector( b0, c0 ) ); 
             ++cx;
@@ -720,7 +720,7 @@ class CalibAlgoMin extends CalibAlgo
         if ( cx > 0 ) vx.timesEqual( 1.0f/cx );
         // Log.v("DistoX", "group V " + vx.x + " " + vx.y + " " + vx.z );
         for (int j=first; j<i; ++j ) {
-          if ( group[j] == 0 ) {
+          if ( group[j] <= 0 ) {
             err[j] = 0.0f;
           } else {
             computeBearingAndClinoRad( gr[j], mr[j] );

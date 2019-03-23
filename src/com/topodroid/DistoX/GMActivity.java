@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 // import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
@@ -52,8 +54,6 @@ import android.widget.AdapterView.OnItemClickListener;
 // import android.graphics.Bitmap;
 // import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-
-// import android.util.Log;
 
 public class GMActivity extends Activity
                         implements OnItemClickListener
@@ -184,7 +184,7 @@ public class GMActivity extends Activity
   {
     long cid = TDInstance.cid;
     if ( cid < 0 ) return -2;
-    List<CalibCBlock> list = mApp_mDData.selectAllGMs( cid, 0 ); 
+    List<CalibCBlock> list = mApp_mDData.selectAllGMs( cid, 0, false ); // false: skip negative-grp
     if ( list.size() < 16 ) {
       return -1;
     }
@@ -212,8 +212,11 @@ public class GMActivity extends Activity
 
     mCalibration.Reset( list.size() );
     for ( CalibCBlock item : list ) mCalibration.AddValues( item );
+    // Log.v("DistoXCalib", "Data " + list.size() + " ok " + ng );
     
     int iter = mCalibration.Calibrate();
+    // Log.v("DistoXCalib", "Iter " + iter );
+
     if ( iter > 0 && iter < TDSetting.mCalibMaxIt ) {
       float[] errors = mCalibration.Errors();
       for ( int k = 0; k < list.size(); ++k ) {
@@ -249,8 +252,8 @@ public class GMActivity extends Activity
     if ( cid < 0 ) {
       return;
     }
-    List<CalibCBlock> list  = mApp_mDData.selectAllGMs( TDInstance.cid, 0 );
-    List<CalibCBlock> list1 = mApp_mDData.selectAllGMs( cid, 0 );
+    List<CalibCBlock> list  = mApp_mDData.selectAllGMs( TDInstance.cid, 0, false ); // false: skip negative-grp
+    List<CalibCBlock> list1 = mApp_mDData.selectAllGMs( cid, 0, false );
     // list.addAll( list1 );
     int size  = list.size();
     int size1 = list1.size();
@@ -484,7 +487,7 @@ public class GMActivity extends Activity
     // Log.v("DistoX", "Compute CID " + cid + " from gid " + start_id );
     if ( cid < 0 ) return -2;
     float thr = TDMath.cosd( TDSetting.mGroupDistance );
-    List<CalibCBlock> list = mApp_mDData.selectAllGMs( cid, 0 );
+    List<CalibCBlock> list = mApp_mDData.selectAllGMs( cid, 0, true ); // true: negative-grp too
     if ( list.size() < 4 ) {
       return -1;
     }
@@ -604,7 +607,7 @@ public class GMActivity extends Activity
     resetTitle( );
     mDataAdapter.clear();
     if ( mApp_mDData != null && TDInstance.cid >= 0 ) {
-      List<CalibCBlock> list = mApp_mDData.selectAllGMs( TDInstance.cid, mBlkStatus );
+      List<CalibCBlock> list = mApp_mDData.selectAllGMs( TDInstance.cid, mBlkStatus, true ); // true: include negative-grp
       // Log.v( TopoDroidApp.TAG, "update Display GMs " + list.size() );
       updateGMList( list );
       setTitle( mCalibName );
@@ -893,7 +896,7 @@ public class GMActivity extends Activity
 
     } else if ( b == mButton1[BTN_GROUP] ) { // GROUP
       if ( TDInstance.cid >= 0 ) {
-        List< CalibCBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, 0 );
+        List< CalibCBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, 0, true ); // true: includde negative-grp
         if ( list.size() >= 16 ) {
           (new GMGroupsDialog( this, this, 
             ( TDSetting.mGroupBy == TDSetting.GROUP_BY_DISTANCE )?
@@ -930,7 +933,7 @@ public class GMActivity extends Activity
       // if ( mCalibration == null ) {
       //   TDToast.make( R.string.no_calibration );
       // } else {
-        List< CalibCBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, 0 );
+        List< CalibCBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, 0, false ); // false: skip negative-grp
         if ( list.size() >= 16 ) {
           ( new CalibCoverageDialog( this, list, mCalibration ) ).show();
         } else {

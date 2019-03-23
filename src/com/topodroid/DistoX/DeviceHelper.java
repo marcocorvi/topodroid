@@ -279,7 +279,7 @@ class DeviceHelper extends DataSetObservable
     // } catch (SQLiteException e ) { logError( "reset GM " + cid + "/" + start_id, e ); }
   }
 
-  List<CalibCBlock> selectAllGMs( long cid, int status )
+  List<CalibCBlock> selectAllGMs( long cid, int status, boolean negative_too )
   {
     List< CalibCBlock > list = new ArrayList<>();
     // if ( myDB == null ) return list;
@@ -292,21 +292,25 @@ class DeviceHelper extends DataSetObservable
                           null, null, "id" );
       if ( cursor != null && cursor.moveToFirst()) {
         do {
-          if ( status >= (int)cursor.getLong(9) ) { // status == 0 --> only good shots
-                                                    // status == 1 --> all shots
-            CalibCBlock block = new CalibCBlock();
-            block.setId( cursor.getLong(0), cid );
-            block.setData( 
-              cursor.getLong(1),
-              cursor.getLong(2),
-              cursor.getLong(3),
-              cursor.getLong(4),
-              cursor.getLong(5),
-              cursor.getLong(6) );
-            block.setGroup( cursor.getLong(7) );
-            block.setError( (float)( cursor.getDouble(8) ) );
-            block.setStatus( cursor.getLong(9) );
-            list.add( block );
+          long grp = cursor.getLong(7);
+          long sts = cursor.getLong(9);
+          if ( status >= (int)sts ) { // status == 0 --> only good shots
+                                      // status == 1 --> all shots
+            if ( negative_too || grp >= 0 ) {
+              CalibCBlock block = new CalibCBlock();
+              block.setId( cursor.getLong(0), cid );
+              block.setData( 
+                cursor.getLong(1),
+                cursor.getLong(2),
+                cursor.getLong(3),
+                cursor.getLong(4),
+                cursor.getLong(5),
+                cursor.getLong(6) );
+              block.setGroup( cursor.getLong(7) );
+              block.setError( (float)( cursor.getDouble(8) ) );
+              block.setStatus( cursor.getLong(9) );
+              list.add( block );
+            }
           }
         } while (cursor.moveToNext());
       }
