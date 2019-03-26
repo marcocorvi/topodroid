@@ -335,7 +335,7 @@
     <string name="menu_manual_calibration">KALIBRÁCIA</string>
     <string name="menu_options">NASTAVENIA</string>
     <string name="menu_overview">CELKOVÝ POHĽAD</string>
-    <!-- TODO string name="menu_packets">PACKETS</string -->
+    <string name="menu_packets">PAKETY</string -->
     <string name="menu_pair">SPÁROVAŤ</string>
     <string name="menu_palette">PALETA</string> 
     <string name="menu_photo">FOTO</string>
@@ -613,8 +613,8 @@
     <string name="button_left"      >Vľavo</string>
     <string name="button_right"     >Vpravo</string>
     <string name="button_clear"     >Vyčistiť  </string>
-    <!-- TODO string name="button_clear_day" >Clear 1d  </string -->
-    <!-- TODO string name="button_clear_week">Clear 7d  </string -->
+    <string name="button_clear_day" >Vyčistiť 1d  </string -->
+    <string name="button_clear_week">Vyčistiť 7d  </string -->
     <string name="button_save"      >Uložiť     </string>
     <!-- UNUSED string name="button_select"    >Select    </string -->
     <string name="button_search"    >Vyhľadať     </string>
@@ -737,7 +737,7 @@
     <string name="help_display_calib">Zobraziť / skryť vymazané zámery</string>
     <string name="help_validate">Porovnať viaceré kalibrácie</string>
     <string name="help_overview">Celkový pohľad</string>
-    <!-- TODO string name="help_packets">DistoX packets dialog</string -->
+    <string name="help_packets">DistoX Paket dialóg</string -->
     <string name="help_plot">Pridať nákres</string>
     <string name="help_note">Poznámky</string>
     <string name="help_bluetooth">Resetovať BT pripojenie</string>
@@ -847,7 +847,7 @@
     <string name="title_mode">Výber možností zobrazenia</string>
     <string name="title_move">Režim Posunu</string>
     <string name="title_note">Poznámky</string>
-    <!-- TODO string name="title_packet_dialog">Packets</string -->
+    <string name="title_packet_dialog">Pakety</string -->
     <string name="title_photo">Rozšírené možnosti</string>
     <string name="title_photo_comment">Fotografia</string>
     <string name="title_plot_save">Exportovať nákres </string>
@@ -960,8 +960,8 @@
   <!-- UNUSED string name="pref_with_rename_summary">Enable "survey renaming" menu</string -->	
   <string name="pref_palettes_title">Palety</string>
   <string name="pref_palettes_summary">Povolí doplnkové palety</string>
-  <!-- TODO string name="pref_packet_logger_title">Packets log</string -->
-  <!-- TODO string name="pref_packet_logger_summary">Enable packets logging</string -->
+  <string name="pref_packet_logger_title">Paket log</string -->
+  <string name="pref_packet_logger_summary">Povolí logging Paketov</string -->
 
   <string name="pref_bezier_step_title">Vzdialenosť bodov Therion</string>
   <string name="pref_bezier_step_summary">Vzdialenosť medzi bodmi Čiary pri exporte do Therionu [m]</string>
