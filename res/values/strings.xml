@@ -521,7 +521,6 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="stat_component">Components %1$d</string>
     <string name="stat_depth">Depth %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Duplicate shots %1$d # %2$d %3$.1f %4$s</string>
-    <string name="survey_stat_duplicate">Duplicate shots %1$d %2$.1f %3$s</string>
     <string name="stat_leg">Legs %1$d %2$.1f %3$.1f %4$.1f %5$s</string>
     <string name="stat_length">Length %1$.1f %2$s</string>
     <string name="stat_extlen">3D length %1$.1f %2$s</string>
@@ -539,6 +538,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="shot_title">SHOT %1$s - %2$s</string>
     <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f</string>
 
+    <string name="survey_stat_duplicate">Duplicate shots %1$d %2$.1f %3$s</string>
+    <string name="survey_stat_splay">Splays %1$d</string>
+    <string name="survey_stat_station">Stations %1$d</string>
+    <string name="survey_stat_surface">Surface shots %1$d %2$.1f %3$s</string>
 
     <string name="hide_blank">Blank shots</string>
     <string name="hide_leg">Repeated leg shots</string>

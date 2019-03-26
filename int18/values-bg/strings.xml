@@ -508,7 +508,6 @@
     <string name="stat_component">Компоненти %1$d</string>
     <string name="stat_depth">Дълбочина %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Дублирани отсечки %1$d # %2$d %3$.1f %4$s</string>
-    <string name="survey_stat_duplicate">Дублирани отсечки %1$d %2$.1f %3$s</string>
     <string name="stat_leg">Отсечки %1$d %2$.1f %3$.1f %4$.1f %5$s</string>
     <string name="stat_length">Дължина %1$.1f %2$s</string>
     <string name="stat_extlen">3D дължина %1$.1f %2$s</string>
@@ -525,6 +524,10 @@
     <string name="shot_title">Отсечка %1$s - %2$s"</string>
     <string name="shot_data">Дълж. %1$.2f  Азимут %2$.1f  Наклон %3$.1f"</string>
 
+    <string name="survey_stat_duplicate">Дублирани отсечки %1$d %2$.1f %3$s</string>
+    <string name="survey_stat_splay">Странични %1$d</string>
+    <string name="survey_stat_station">Репери %1$d</string>
+    <string name="survey_stat_surface">Повърхн. отсечки %1$d %2$.1f %3$s</string>
 
     <string name="hide_blank">Празни отсечки</string>
     <string name="hide_leg">Повтарящи се отсечки</string>

@@ -510,7 +510,6 @@
     <string name="stat_component">Компоненти %1$d</string>
     <string name="stat_depth">Глибина %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Дубльовані пікети %1$d # %2$d довжина: %3$.1f %4$s</string>
-    <string name="survey_stat_duplicate">Дубльовані пікети %1$d довжина: %2$.1f %3$s</string>
     <string name="stat_leg">Відрізки %1$d загальна довжина: %2$.1f %3$.1f %4$.1f %5$s</string>
     <string name="stat_length">Довжина %1$.1f %2$s</string>
     <!-- TODO string name="stat_extlen">3D length %1$.1f %2$s</string -->
@@ -527,6 +526,10 @@
     <string name="shot_title">ПІКЕТИ %1$s - %2$s"</string>
     <string name="shot_data">Довжина %1$.2f  Азимут %2$.1f  Угол %3$.1f"</string>
 
+    <string name="survey_stat_duplicate">Дубльовані пікети %1$d довжина: %2$.1f %3$s</string>
+    <string name="survey_stat_splay">Бокові заміри %1$d</string>
+    <string name="survey_stat_station">Пікети %1$d</string>
+    <string name="survey_stat_surface">Поверхн. пікети %1$d довжина: %2$.1f %3$s</string>
 
     <string name="hide_blank">Пусті пікети</string>
     <string name="hide_leg">Повторні виміри</string>

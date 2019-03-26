@@ -508,7 +508,6 @@
     <string name="stat_component">Statistikai komponensek %1$d</string>
     <string name="stat_depth">Mélység %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Kettőzött mérés %1$d # %2$d %3$.1f %4$s</string>
-    <string name="survey_stat_duplicate">Kettőzött mérés %1$d %2$.1f %3$s</string>
     <string name="stat_leg">Poligonmérések %1$d %2$.1f %3$.1f %4$.1f %5$s</string>
     <string name="stat_length">Hossz  %1$.1f %2$s</string>
     <!-- TODO string name="stat_extlen">3D length %1$.1f %2$s</string -->
@@ -524,6 +523,11 @@
     <string name="stat_angle_error">Szöghibák %1$.2f ± %2$.2f</string>
     <string name="shot_title">MÉRÉS %1$s - %2$s</string>
     <string name="shot_data">H %1$.2f  I %2$.1f  L %3$.1f</string>
+
+    <string name="survey_stat_duplicate">Kettőzött mérés %1$d %2$.1f %3$s</string>
+    <string name="survey_stat_splay">Segédpontok %1$d</string>
+    <string name="survey_stat_station">Mérési pontok %1$d</string>
+    <string name="survey_stat_surface">Felszíni mérések %1$d %2$.1f %3$s</string>
 
     <string name="hide_blank">Nem kapcsolt mérések</string>
     <string name="hide_leg">Ismételt poligonmérések</string>

@@ -515,7 +515,6 @@
     <string name="stat_component">Componentes %1$d</string>
     <string name="stat_depth">Profundidad %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Mediciones duplicadas %1$d # %2$d %3$.1f %4$s</string>
-    <string name="survey_stat_duplicate">Mediciones duplicadas %1$d %2$.1f %3$s</string>
     <string name="stat_leg">Visual %1$d %2$.1f %3$.1f %4$.1f %5$s</string>
     <string name="stat_length">Desarrollo %1$.1f %2$s</string>
     <!-- TODO string name="stat_extlen">3D length %1$.1f %2$s</string -->
@@ -531,6 +530,11 @@
     <string name="stat_angle_error">Error de ángulo %1$.2f ± %2$.2f"</string>
     <string name="shot_title">Toma %1$s - %2$s"</string>
     <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f"</string>
+
+    <string name="survey_stat_duplicate">Mediciones duplicadas %1$d %2$.1f %3$s</string>
+    <string name="survey_stat_splay">Tomas laterales %1$d</string>
+    <string name="survey_stat_station">Estaciones %1$d</string>
+    <string name="survey_stat_surface">mediciones Superficie %1$d %2$.1f %3$s</string>
 
     <string name="hide_blank">Visualizar tomas en blanco</string>
     <string name="hide_leg">Visualizar tomas repetidas</string>
