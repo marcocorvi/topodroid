@@ -137,6 +137,8 @@ class DrawingStationPath extends DrawingPath
       dos.writeFloat( cx );
       dos.writeFloat( cy );
       dos.writeInt( mScale );
+      // if ( version > 401090 ) 
+        dos.writeInt( mLevel );
       dos.writeUTF( mName );
     } catch ( IOException e ) {
       TDLog.Error( "ERROR-dos station " + mName );

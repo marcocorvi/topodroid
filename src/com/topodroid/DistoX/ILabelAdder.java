@@ -13,7 +13,7 @@ package com.topodroid.DistoX;
 
 interface ILabelAdder
 {
-  void addLabel( String text, float x, float y );
+  void addLabel( String text, float x, float y, int level );
 
   void addPhotoPoint( String text, float x, float y );
 }

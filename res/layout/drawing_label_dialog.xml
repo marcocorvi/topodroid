@@ -21,6 +21,54 @@
     android:singleLine="true"
     android:inputType="text"
     />
+
+  <LinearLayout android:id="@+id/layer_layout"
+    style="@style/base_padding"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+    <CheckBox android:id="@+id/cb_layer_base"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:text="B"
+    />
+    <CheckBox android:id="@+id/cb_layer_floor"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:text="F"
+    />
+    <CheckBox android:id="@+id/cb_layer_fill"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:text="D"
+    />
+    <CheckBox android:id="@+id/cb_layer_ceil"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:text="C"
+    />
+    <CheckBox android:id="@+id/cb_layer_arti"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:text="A"
+    />
+    <!-- CheckBox android:id="@+id/cb_layer_form"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:text="S"
+    />
+    <CheckBox android:id="@+id/cb_layer_water"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:text="W"
+    />
+    <CheckBox android:id="@+id/cb_layer_text"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:text="T"
+    / -->
+  </LinearLayout>
       	
   <LinearLayout 
     android:layout_width="match_parent" 

@@ -71,6 +71,7 @@ class DrawingLinePath extends DrawingPointLinePath
     mReversed = false;
     mOutline  = ( mLineType == BrushManager.mLineLib.mLineWallIndex )? OUTLINE_OUT : OUTLINE_NONE;
     setPathPaint( BrushManager.mLineLib.getLinePaint( mLineType, mReversed ) );
+    mLevel     = BrushManager.mLineLib.getSymbolLevel( mLineType );
   }
 
   static DrawingLinePath loadDataStream( int version, DataInputStream dis, float x, float y, SymbolsPalette missingSymbols )
@@ -78,6 +79,7 @@ class DrawingLinePath extends DrawingPointLinePath
     int type;
     boolean closed, reversed;
     int outline;
+    int level = DrawingLevel.LEVEL_ANY;
     String fname, options;
     try {
       fname = dis.readUTF();
@@ -85,6 +87,7 @@ class DrawingLinePath extends DrawingPointLinePath
       // visible= (dis.read() == 1);
       reversed = (dis.read() == 1);
       outline = dis.readInt();
+      if ( version >= 401090 ) level = dis.readInt();
       options = dis.readUTF();
 
       // BrushManager.mLineLib.tryLoadMissingArea( fname );
@@ -96,6 +99,7 @@ class DrawingLinePath extends DrawingPointLinePath
 
       DrawingLinePath ret = new DrawingLinePath( type );
       ret.mOutline  = outline;
+      ret.mLevel    = level;
       ret.mOptions  = options;
       ret.setReversed( reversed );
 
@@ -415,6 +419,8 @@ class DrawingLinePath extends DrawingPointLinePath
       // dos.write( isVisible()? 1 : 0 );
       dos.write( mReversed? 1 : 0 );
       dos.writeInt( mOutline );
+      // if ( version >= 401090 )
+        dos.writeInt( mLevel );
       dos.writeUTF( ( mOptions != null )? mOptions : "" );
       
       int npt = size(); // number of line points

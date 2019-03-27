@@ -634,6 +634,15 @@
     <string name="mode_outline">Только контур</string>
     <string name="mode_scale_ref">Шкала масштаба</string>
 
+    <!-- TODO string name="layer_floor">Floor</string -->
+    <!-- TODO string name="layer_fill">Fills</string -->
+    <!-- TODO string name="layer_ceil">Ceiling</string -->
+    <!-- TODO string name="layer_arti">Artifacts</string -->
+    <!-- UNUSED string name="layer_form">Forms</string -->
+    <!-- UNUSED string name="layer_water">Water</string -->
+    <!-- UNUSED string name="layer_text">Text</string -->
+
+
     <!-- UNUSED string name="remote_title">Пульт дистанционного управления</string -->
     <string name="remote_on">Лазер ВКЛ</string>
     <string name="remote_off">Лазер ВЫКЛ</string>
@@ -944,6 +953,8 @@
   <!-- UNUSED string name="pref_size_buttons_message">Введите размер кнопок панели инструментов [pixels]</string -->
   <string name="pref_with_sensors_title">Датчики</string>
   <string name="pref_with_sensors_summary">Включить данные "датчиков"</string>
+  <!-- TODO string name="pref_with_layers_title">Layers</string -->
+  <!-- TODO string name="pref_with_layers_summary">Use canvas layers</string -->
   <string name="pref_palettes_title">Доп. Знаки</string>
   <string name="pref_palettes_summary">Включить дополнительные наборы условных знаков</string>
   <string name="pref_packet_logger_title">Журнал пакетов</string>

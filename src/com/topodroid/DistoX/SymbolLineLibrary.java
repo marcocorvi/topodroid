@@ -78,14 +78,14 @@ class SymbolLineLibrary extends SymbolLibrary
   private void loadSystemLines( Resources res )
   {
     if ( mSymbols.size() > 0 ) return;
-    SymbolLine symbol = new SymbolLine( res.getString( R.string.thl_user ), "u:user", "user", "user", 0xffffffff, 1 );
+    SymbolLine symbol = new SymbolLine( res.getString( R.string.thl_user ), "u:user", "user", "user", 0xffffffff, 1, DrawingLevel.LEVEL_USER );
     symbol.mCsxLayer    = 0; // base
     symbol.mCsxType     = 1; // free-hand
     symbol.mCsxCategory = 0; // cSurvey line cat: NONE
     symbol.mCsxPen      = 2; // generic border
     addSymbol( symbol );
 
-    symbol = new SymbolLine( res.getString( R.string.thl_wall ),  "wall", "wall", "wall", 0xffff0000, 2 );
+    symbol = new SymbolLine( res.getString( R.string.thl_wall ),  "wall", "wall", "wall", 0xffff0000, 2, DrawingLevel.LEVEL_WALL );
     symbol.mCsxLayer    = 5; //
     symbol.mCsxType     = 4; // inverted free-hand
     symbol.mCsxCategory = 1; // cSurvey line cat: CAVE_BORDER

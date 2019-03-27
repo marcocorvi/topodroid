@@ -630,6 +630,15 @@
     <string name="mode_outline">Solo contorno</string>
     <string name="mode_scale_ref">Scala barra di riferimento</string>
 
+    <!-- TODO string name="layer_floor">Floor</string -->
+    <!-- TODO string name="layer_fill">Fills</string -->
+    <!-- TODO string name="layer_ceil">Ceiling</string -->
+    <!-- TODO string name="layer_arti">Artifacts</string -->
+    <!-- UNUSED string name="layer_form">Forms</string -->
+    <!-- UNUSED string name="layer_water">Water</string -->
+    <!-- UNUSED string name="layer_text">Text</string -->
+
+
     <!-- UNUSED string name="remote_title">DistoX Remote Control</string -->
     <string name="remote_on">Laser ON</string>
     <string name="remote_off">Laser OFF</string>
@@ -933,6 +942,8 @@
   <string name="pref_size_buttons_summary">Dimensione bottoni barra superiore [pixels]</string>
   <string name="pref_with_sensors_title">Sensori</string>
   <string name="pref_with_sensors_summary">Abilita dati "sensori"</string>
+  <!-- TODO string name="pref_with_layers_title">Layers</string -->
+  <!-- TODO string name="pref_with_layers_summary">Use canvas layers</string -->
   <string name="pref_palettes_title">Tavolozze</string>
   <string name="pref_palettes_summary">Abilita tavolozze addizionali</string>
   <!-- TODO string name="pref_packet_logger_title">Packets log</string -->

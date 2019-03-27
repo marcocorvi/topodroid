@@ -38,6 +38,15 @@ class DrawingAreaDialog extends MyDialog
   private final boolean mOrientable;
   // private boolean mDoOptions; // areas do not have options
 
+  private CheckBox mCBbase  = null;
+  private CheckBox mCBfloor = null;
+  private CheckBox mCBfill  = null;
+  private CheckBox mCBceil  = null;
+  private CheckBox mCBarti  = null;
+  // private CheckBox mCBform  = null;
+  // private CheckBox mCBwater = null;
+  // private CheckBox mCBtext  = null;
+
   private CheckBox mCBvisible;
   // private Spinner mETtype;
   private int mAreaType;
@@ -90,11 +99,53 @@ class DrawingAreaDialog extends MyDialog
     LinearLayout layout3 = (LinearLayout)findViewById( R.id.layout3 );
     layout3.addView( mBtnReduce, lp );
 
+    if ( TDSetting.mWithLayers ) {
+      setCBlayers();
+    } else {
+      LinearLayout ll = (LinearLayout) findViewById( R.id.layer_layout );
+      ll.setVisibility( View.GONE );
+    }
+
     mBtnOk = (Button) findViewById( R.id.button_ok );
     mBtnOk.setOnClickListener( this );
     // mBtnCancel = (Button) findViewById( R.id.button_cancel );
     // mBtnCancel.setOnClickListener( this );
     ( (Button) findViewById( R.id.button_cancel ) ).setOnClickListener( this );
+  }
+
+  private void setCBlayers()
+  {
+    mCBbase  = (CheckBox) findViewById( R.id.cb_layer_base  );
+    mCBfloor = (CheckBox) findViewById( R.id.cb_layer_floor );
+    mCBfill  = (CheckBox) findViewById( R.id.cb_layer_fill  );
+    mCBceil  = (CheckBox) findViewById( R.id.cb_layer_ceil  );
+    mCBarti  = (CheckBox) findViewById( R.id.cb_layer_arti  );
+    // mCBform  = (CheckBox) findViewById( R.id.cb_layer_form  );
+    // mCBwater = (CheckBox) findViewById( R.id.cb_layer_water );
+    // mCBtext  = (CheckBox) findViewById( R.id.cb_layer_text  );
+    int level = mArea.mLevel;
+    mCBbase .setChecked( ( level & DrawingLevel.LEVEL_BASE  ) == DrawingLevel.LEVEL_BASE  );
+    mCBfloor.setChecked( ( level & DrawingLevel.LEVEL_FLOOR ) == DrawingLevel.LEVEL_FLOOR );
+    mCBfill .setChecked( ( level & DrawingLevel.LEVEL_FILL  ) == DrawingLevel.LEVEL_FILL  );
+    mCBceil .setChecked( ( level & DrawingLevel.LEVEL_CEIL  ) == DrawingLevel.LEVEL_CEIL  );
+    mCBarti .setChecked( ( level & DrawingLevel.LEVEL_ARTI  ) == DrawingLevel.LEVEL_ARTI  );
+    // mCBform .setChecked( ( level & DrawingLevel.LEVEL_FORM  ) == DrawingLevel.LEVEL_FORM  );
+    // mCBwater.setChecked( ( level & DrawingLevel.LEVEL_WATER ) == DrawingLevel.LEVEL_WATER );
+    // mCBtext .setChecked( ( level & DrawingLevel.LEVEL_TEXT  ) == DrawingLevel.LEVEL_TEXT  );
+  }
+
+  private void setLevel()
+  {
+    int level = 0;
+    if ( mCBbase .isChecked() ) level |= DrawingLevel.LEVEL_BASE;
+    if ( mCBfloor.isChecked() ) level |= DrawingLevel.LEVEL_FLOOR;
+    if ( mCBfill .isChecked() ) level |= DrawingLevel.LEVEL_FILL;
+    if ( mCBceil .isChecked() ) level |= DrawingLevel.LEVEL_CEIL;
+    if ( mCBarti .isChecked() ) level |= DrawingLevel.LEVEL_ARTI;
+    // if ( mCBform .isChecked() ) level |= DrawingLevel.LEVEL_FORM;
+    // if ( mCBwater.isChecked() ) level |= DrawingLevel.LEVEL_WATER;
+    // if ( mCBtext .isChecked() ) level |= DrawingLevel.LEVEL_TEXT;
+    mArea.mLevel = level;
   }
 
   @Override
@@ -119,6 +170,9 @@ class DrawingAreaDialog extends MyDialog
       if ( mOrientable ) {
         mArea.setOrientation( mOrientationWidget.mOrient );
       }
+
+      if ( TDSetting.mWithLayers ) setLevel();
+     
     } else if ( b == mBtnReduce ) {
       int reduce = ( mBtnReduce.getState() + 1 ) % 3;
       mBtnReduce.setState( reduce );

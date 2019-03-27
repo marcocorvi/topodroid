@@ -52,7 +52,7 @@ class DrawingPath extends RectF
   Path mPath;
   Path mTransformedPath;
   Paint mPaint;          // drawing path paint
-  int mType;
+  int mType;             // path type
   String mOptions;
   float x1, y1, x2, y2; // endpoint scene coords  (not private just to write the scrap scale using mNorthLine )
   // private int dir; // 0 x1 < x2, 1 y1 < y2, 2 x2 < x1, 3 y2 < y1
@@ -61,6 +61,7 @@ class DrawingPath extends RectF
   float mExtend;  // extend value for splays (= cos of angle between splay and leg)
                   // x-sections: angle between splay and plane-normal
   String mPlotName; // path full plotname, ie,survey-plot (only for Overview window)
+  int mLevel;       // canvas levels flag
 
   protected float cx, cy; // midpoint scene coords
   // RectF mBBox;   // path boundig box (scene coords)
@@ -86,6 +87,7 @@ class DrawingPath extends RectF
   //   ret.mLandscape = mLandscape;
   //   ret.mExtend    = mExtend;
   //   ret.mPlotName  = mPlotName;
+  //   ret.mLevel     = mLevel;
   //   ret.x1 = x1;
   //   ret.y1 = y1;
   //   ret.x2 = x2;
@@ -110,6 +112,7 @@ class DrawingPath extends RectF
     mLandscape = false;
     mExtend = 1;
     mPlotName = null;
+    mLevel = DrawingLevel.LEVEL_ANY;
   }
 
   // boolean isDeletable( ) 

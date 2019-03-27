@@ -32,7 +32,8 @@ class Symbol implements SymbolInterface
   int     mCsxCategory;
   int     mCsxPen;      // pen (for lines)
   int     mCsxBrush;    // brush type (for areas)
-  String  mCsx; // clipart path 
+  String  mCsx;         // clipart path 
+  int     mLevel;       // canvas levels [flag]
 
   /** default cstr
    */
@@ -47,6 +48,7 @@ class Symbol implements SymbolInterface
     mCsxPen   = 1;     // default pen is "1"
     mCsxBrush = 1;     // default brush is "1"
     mCsx = null;
+    mLevel = DrawingLevel.LEVEL_ANY;
   }
 
   // filename not used
@@ -61,6 +63,7 @@ class Symbol implements SymbolInterface
     mCsxPen   = 1;
     mCsxBrush = 1; 
     mCsx = null;
+    mLevel = DrawingLevel.LEVEL_ANY;
   }
 
   /** cstr 
@@ -77,8 +80,8 @@ class Symbol implements SymbolInterface
     mCsxPen   = 1;
     mCsxBrush = 1; 
     mCsx = null;
+    mLevel = DrawingLevel.LEVEL_ANY;
   }
-
 
   // SymbolInterface methods
   public String getThName()     { return mThName; }

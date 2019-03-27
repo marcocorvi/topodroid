@@ -56,6 +56,15 @@ class DrawingLineDialog extends MyDialog
   private MyCheckBox mBtnRock = null;
   private MyCheckBox mBtnClose;
 
+  private CheckBox mCBbase  = null;
+  private CheckBox mCBfloor = null;
+  private CheckBox mCBfill  = null;
+  private CheckBox mCBceil  = null;
+  private CheckBox mCBarti  = null;
+  // private CheckBox mCBform  = null;
+  // private CheckBox mCBwater = null;
+  // private CheckBox mCBtext  = null;
+
   private boolean mDoOptions;
 
   DrawingLineDialog( Context context, DrawingWindow parent, DrawingLinePath line, LinePoint lp )
@@ -151,6 +160,48 @@ class DrawingLineDialog extends MyDialog
     mBtnReduce.setOnClickListener( this );
 
     // TODO sharp reduce rock must be exclusive
+
+    if ( TDSetting.mWithLayers ) {
+      setCBlayers();
+    } else {
+      LinearLayout ll = (LinearLayout) findViewById( R.id.layer_layout );
+      ll.setVisibility( View.GONE );
+    }
+  }
+
+  private void setCBlayers()
+  {
+    mCBbase  = (CheckBox) findViewById( R.id.cb_layer_base  );
+    mCBfloor = (CheckBox) findViewById( R.id.cb_layer_floor );
+    mCBfill  = (CheckBox) findViewById( R.id.cb_layer_fill  );
+    mCBceil  = (CheckBox) findViewById( R.id.cb_layer_ceil  );
+    mCBarti  = (CheckBox) findViewById( R.id.cb_layer_arti  );
+    // mCBform  = (CheckBox) findViewById( R.id.cb_layer_form  );
+    // mCBwater = (CheckBox) findViewById( R.id.cb_layer_water );
+    // mCBtext  = (CheckBox) findViewById( R.id.cb_layer_text  );
+    int level = mLine.mLevel;
+    mCBbase .setChecked( ( level & DrawingLevel.LEVEL_BASE  ) == DrawingLevel.LEVEL_BASE  );
+    mCBfloor.setChecked( ( level & DrawingLevel.LEVEL_FLOOR ) == DrawingLevel.LEVEL_FLOOR );
+    mCBfill .setChecked( ( level & DrawingLevel.LEVEL_FILL  ) == DrawingLevel.LEVEL_FILL  );
+    mCBceil .setChecked( ( level & DrawingLevel.LEVEL_CEIL  ) == DrawingLevel.LEVEL_CEIL  );
+    mCBarti .setChecked( ( level & DrawingLevel.LEVEL_ARTI  ) == DrawingLevel.LEVEL_ARTI  );
+    // mCBform .setChecked( ( level & DrawingLevel.LEVEL_FORM  ) == DrawingLevel.LEVEL_FORM  );
+    // mCBwater.setChecked( ( level & DrawingLevel.LEVEL_WATER ) == DrawingLevel.LEVEL_WATER );
+    // mCBtext .setChecked( ( level & DrawingLevel.LEVEL_TEXT  ) == DrawingLevel.LEVEL_TEXT  );
+  }
+
+  private void setLevel()
+  {
+    int level = 0;
+    if ( mCBbase .isChecked() ) level |= DrawingLevel.LEVEL_BASE;
+    if ( mCBfloor.isChecked() ) level |= DrawingLevel.LEVEL_FLOOR;
+    if ( mCBfill .isChecked() ) level |= DrawingLevel.LEVEL_FILL;
+    if ( mCBceil .isChecked() ) level |= DrawingLevel.LEVEL_CEIL;
+    if ( mCBarti .isChecked() ) level |= DrawingLevel.LEVEL_ARTI;
+    // if ( mCBform .isChecked() ) level |= DrawingLevel.LEVEL_FORM;
+    // if ( mCBwater.isChecked() ) level |= DrawingLevel.LEVEL_WATER;
+    // if ( mCBtext .isChecked() ) level |= DrawingLevel.LEVEL_TEXT;
+    mLine.mLevel = level;
   }
 
   @Override
@@ -225,6 +276,9 @@ class DrawingLineDialog extends MyDialog
       } else {
         mLine.setClosed( false );
       }
+
+      if ( TDSetting.mWithLayers ) setLevel();
+ 
     // } else if ( b == mBtnCancel ) {
     //   /* nothing */
     }

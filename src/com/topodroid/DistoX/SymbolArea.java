@@ -71,13 +71,16 @@ class SymbolArea extends Symbol
 
   /** 
    * color 0xaarrggbb
+   * level canvas level
    */
   SymbolArea( String name, String th_name, String fname, int color, Bitmap bitmap, TileMode xmode, TileMode ymode,
-              boolean close_horizontal )
+              boolean close_horizontal, int level )
   {
     super( th_name, fname );
-    mName = name;
-    mColor = color;
+    mName   = name;
+    mColor  = color;
+    mLevel  = level;
+
     mBitmap = bitmap;
     mXMode  = xmode;
     mYMode  = ymode;
@@ -247,6 +250,13 @@ class SymbolArea extends Symbol
               }
             } catch ( NumberFormatException e ) {
               TDLog.Error( filename + " parse error: " + line );
+            }
+          } else if ( vals[k].equals("level") ) {
+            ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+            if ( k < s ) {
+              try {
+                mLevel = ( Integer.parseInt( vals[k] ) );
+              } catch( NumberFormatException e ) { }
             }
   	  } else if ( vals[k].equals("color") ) {
   	    ++k; while ( k < s && vals[k].length() == 0 ) ++k;

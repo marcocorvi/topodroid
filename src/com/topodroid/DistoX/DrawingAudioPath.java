@@ -64,6 +64,7 @@ class DrawingAudioPath extends DrawingPointPath
   static DrawingAudioPath loadDataStream( int version, DataInputStream dis, float x, float y )
   {
     // int type;
+    int lvl = DrawingLevel.LEVEL_ANY;
     try {
       float orientation = 0;
       float ccx = x + dis.readFloat( );
@@ -72,12 +73,14 @@ class DrawingAudioPath extends DrawingPointPath
       // type = BrushManager.getPointLabelIndex();
       if ( version > 207043 ) orientation = dis.readFloat( ); // audio-point have no orientation
       int scale = dis.readInt( );
+      if ( version >= 401090 ) lvl = dis.readInt();
       String text = dis.readUTF(); // audio-point does not have text (not used)
       String options = dis.readUTF();
       int id = dis.readInt();
 
       // TDLog.Log( TDLog.LOG_PLOT, "Label <" + text + " " + ccx + " " + ccy + " scale " + scale + " (" + options + ")" );
       DrawingAudioPath ret = new DrawingAudioPath( ccx, ccy, scale, options, id );
+      ret.mLevel = lvl;
       ret.setOrientation( orientation );
       return ret;
     } catch ( IOException e ) {
@@ -137,6 +140,8 @@ class DrawingAudioPath extends DrawingPointPath
       // dos.writeUTF( BrushManager.mPointLib.getSymbolThName(mPointType) );
       dos.writeFloat( (float)mOrientation ); // from version 2.7.4e
       dos.writeInt( mScale );
+      // if ( version >= 401090 )
+        dos.writeInt( mLevel );
       dos.writeUTF( ( mPointText != null )? mPointText : "" ); // audio-point does not have text
       dos.writeUTF( ( mOptions != null )? mOptions : "" );
       dos.writeInt( ((int)mId) );

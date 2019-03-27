@@ -646,6 +646,14 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="mode_outline">Outline only</string>
     <string name="mode_scale_ref">Scale reference bar</string>
 
+    <string name="layer_floor">Floor</string>
+    <string name="layer_fill">Fills</string>
+    <string name="layer_ceil">Ceiling</string>
+    <string name="layer_arti">Artifacts</string>
+    <!-- UNUSED string name="layer_form">Forms</string -->
+    <!-- UNUSED string name="layer_water">Water</string -->
+    <!-- UNUSED string name="layer_text">Text</string -->
+
     <!-- UNUSED string name="remote_title">Device Remote Control</string -->
     <string name="remote_on">Laser ON</string>
     <string name="remote_off">Laser OFF</string>
@@ -956,6 +964,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_size_buttons_summary">Size of action-bar buttons</string>
   <string name="pref_with_sensors_title">Sensors</string>
   <string name="pref_with_sensors_summary">Enable "sensors" data</string>
+  <string name="pref_with_layers_title">Layers</string>
+  <string name="pref_with_layers_summary">Use canvas layers</string>
   <!-- UNUSED string name="pref_with_rename_title">Survey renaming</string -->
   <!-- UNUSED string name="pref_with_rename_summary">Enable "survey renaming" menu</string -->
   <string name="pref_palettes_title">Palettes</string>

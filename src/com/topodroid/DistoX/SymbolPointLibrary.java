@@ -100,14 +100,14 @@ class SymbolPointLibrary extends SymbolLibrary
     // Log.v(  TopoDroidApp.TAG, "SymbolPointLibrary::loadSystemPoints()" );
 
     mPointUserIndex = mSymbols.size(); // 0 = no-text, no-value
-    symbol = new SymbolPoint( res.getString(R.string.thp_user), "u:user", "user", 0xffffffff, p_user, false, 0 );
+    symbol = new SymbolPoint( res.getString(R.string.thp_user), "u:user", "user", 0xffffffff, p_user, false, 0, DrawingLevel.LEVEL_USER );
     symbol.mCsxLayer = 6;
     symbol.mCsxType  = 8;
     symbol.mCsxCategory = 81;
     addSymbol( symbol );
 
     mPointLabelIndex = mSymbols.size(); // 1 = text
-    symbol = new SymbolPoint( res.getString(R.string.thp_label), "label", "label", 0xffffffff, p_label, true, 1 );
+    symbol = new SymbolPoint( res.getString(R.string.thp_label), "label", "label", 0xffffffff, p_label, true, 1, DrawingLevel.LEVEL_ANY );
     symbol.mCsxLayer = 6;
     symbol.mCsxType  = 8;
     symbol.mCsxCategory = 81;

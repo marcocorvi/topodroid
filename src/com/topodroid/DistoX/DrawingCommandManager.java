@@ -54,6 +54,7 @@ class DrawingCommandManager
   private static final int BORDER = 20;
 
   static private int mDisplayMode = DisplayMode.DISPLAY_PLOT; // this display mode is shared among command managers
+  static private int mDisplayLevel = DrawingLevel.LEVEL_ANY;
   private RectF mBBox;
   boolean mIsExtended = false;
 
@@ -248,6 +249,8 @@ class DrawingCommandManager
 
   static void setDisplayMode( int mode ) { mDisplayMode = mode; }
   static int getDisplayMode( ) { return mDisplayMode; }
+  static void setDisplayLevel( int level ) { mDisplayLevel = level; }
+  static int getDisplayLevel( ) { return mDisplayLevel; }
 
   /* FIXME_HIGHLIGHT
   void highlights( TopoDroidApp app ) 
@@ -1723,17 +1726,19 @@ class DrawingCommandManager
         } else {
           for ( ICanvasCommand cmd : mCurrentStack  ) {
             if ( cmd.commandType() == 0 ) {
-              cmd.draw( canvas, mMatrix, mScale, mBBox );
               DrawingPath path = (DrawingPath)cmd;
-              if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
-                DrawingLinePath line = (DrawingLinePath)path;
-                if ( line.mLineType == BrushManager.mLineLib.mLineSectionIndex ) { // add direction-tick to section-lines
-                  LinePoint lp = line.mFirst;
-                  Path path1 = new Path();
-                  path1.moveTo( lp.x, lp.y );
-                  path1.lineTo( lp.x+line.mDx*TDSetting.mArrowLength, lp.y+line.mDy*TDSetting.mArrowLength );
-                  path1.transform( mMatrix );
-                  canvas.drawPath( path1, BrushManager.mSectionPaint );
+              if ( (path.mLevel & mDisplayLevel) != 0 ) {
+                cmd.draw( canvas, mMatrix, mScale, mBBox );
+                if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
+                  DrawingLinePath line = (DrawingLinePath)path;
+                  if ( line.mLineType == BrushManager.mLineLib.mLineSectionIndex ) { // add direction-tick to section-lines
+                    LinePoint lp = line.mFirst;
+                    Path path1 = new Path();
+                    path1.moveTo( lp.x, lp.y );
+                    path1.lineTo( lp.x+line.mDx*TDSetting.mArrowLength, lp.y+line.mDy*TDSetting.mArrowLength );
+                    path1.transform( mMatrix );
+                    canvas.drawPath( path1, BrushManager.mSectionPaint );
+                  }
                 }
               }
             }

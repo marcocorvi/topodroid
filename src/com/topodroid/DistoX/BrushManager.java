@@ -148,7 +148,7 @@ class BrushManager
   {
     if ( mStationSymbol == null ) {
       mStationSymbol = new SymbolPoint( "station", "station", "station", 0xffff6633, 
-        "addCircle 0 0 0.4 moveTo -3.0 1.73 lineTo 3.0 1.73 lineTo 0.0 -3.46 lineTo -3.0 1.73", false );
+        "addCircle 0 0 0.4 moveTo -3.0 1.73 lineTo 3.0 1.73 lineTo 0.0 -3.46 lineTo -3.0 1.73", false, DrawingLevel.LEVEL_WALL );
     }
     // if ( mSymbolHighlight == null ) {
     //   mSymbolHighlight = MyButton.getButtonBackground( mApp, res, R.drawable.symbol_highlight );

@@ -41,27 +41,30 @@ class DrawingSpecialPath extends DrawingPath
   // @Override
   // DrawingPath copyPath()
   // {
-  //   DrawingSpecialPath ret = new DrawingSpecialPath( mType, cx, cy );
+  //   DrawingSpecialPath ret = new DrawingSpecialPath( mType, cx, cy, mLevel );
   //   copyTo( ret );
   //   return ret;
   // }
 
-  DrawingSpecialPath( int t, float x, float y )
+  DrawingSpecialPath( int t, float x, float y, int level )
   {
     super( DrawingPath.DRAWING_PATH_NORTH, null );
     // TDLog.Log( TDLog.LOG_PATH, "Point " + type + " X " + x + " Y " + y );
     mType = t;
     setCenter( x, y );
+    mLevel = level;
     resetPath();
   }
 
   static DrawingSpecialPath loadDataStream( int version, DataInputStream dis, float x, float y )
   {
     try {
+      int lvl = DrawingLevel.LEVEL_ANY;
       int t = dis.readInt();
       float ccx = x + dis.readFloat();
       float ccy = y + dis.readFloat();
-      return new DrawingSpecialPath( t, ccx, ccy );
+      if ( version >= 401090 ) lvl = dis.readInt();
+      return new DrawingSpecialPath( t, ccx, ccy, lvl );
     } catch ( IOException e ) {
       TDLog.Error( "SPECIAL in error " + e.getMessage() );
     }
@@ -156,6 +159,8 @@ class DrawingSpecialPath extends DrawingPath
       dos.writeInt( mType );
       dos.writeFloat( cx );
       dos.writeFloat( cy );
+      // if ( version > 401090 ) 
+        dos.writeInt( mLevel );
       // TDLog.Log( TDLog.LOG_PLOT, "P " + name + " " + cx + " " + cy );
     } catch ( IOException e ) {
       TDLog.Error( "POINT out error " + e.toString() );

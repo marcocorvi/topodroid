@@ -137,6 +137,7 @@ class SymbolLibrary
   Path  getSymbolPath( int k )    { return ( k < 0 || k >= mSymbolNr )? null : mSymbols.get(k).getPath(); }
   boolean isSymbolOrientable( int k )   { return k >= 0 && k < mSymbolNr && mSymbols.get( k ).isOrientable(); }
   boolean isSymbolEnabled( int k )      { return k >= 0 && k < mSymbolNr && mSymbols.get( k ).isEnabled(); }
+  int getSymbolLevel( int k ) { return ( ( k<0 || k>=mSymbolNr )? 0xff : mSymbols.get( k ).mLevel ); }
 
   ArrayList<String> getSymbolNames()
   {

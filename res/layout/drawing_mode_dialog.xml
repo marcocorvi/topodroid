@@ -5,63 +5,136 @@
   android:layout_height="wrap_content"
   android:orientation="vertical"
   >
-   					  
-
-  <CheckBox android:id="@+id/cb_mode_leg"
-      android:layout_marginTop="@dimen/margintiny"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content" 
-      android:text="@string/mode_leg"
-      />
-      				  
-  <CheckBox android:id="@+id/cb_mode_splay"
-      android:layout_marginTop="@dimen/margintiny"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content" 
-      android:text="@string/mode_splay"
-      />
-      				  
-  <CheckBox android:id="@+id/cb_mode_latest"
-      android:layout_marginTop="@dimen/margintiny"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content" 
-      android:text="@string/mode_latest"
-      />
-      				  
-  <CheckBox android:id="@+id/cb_mode_station"
-      android:layout_marginTop="@dimen/margintiny"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content" 
-      android:text="@string/mode_station"
-      />
-      				  
-  <CheckBox android:id="@+id/cb_mode_grid"
-      android:layout_marginTop="@dimen/margintiny"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content" 
-      android:text="@string/mode_grid"
-      android:checked="false" />
-
-  <CheckBox android:id="@+id/cb_mode_scale_ref"
-      android:layout_marginTop="@dimen/margintiny"
-      android:layout_width="wrap_content"
+  <LinearLayout 
+    style="@style/base_padding"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+    <LinearLayout 
+      style="@style/base_padding"
+      android:layout_width="0dp"
+      android:layout_weight="50"
       android:layout_height="wrap_content"
-      android:text="@string/mode_scale_ref"
-      android:checked="false" />
+      android:orientation="vertical"
+      >
+      <CheckBox android:id="@+id/cb_mode_leg"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/mode_leg"
+        />
+        				  
+      <CheckBox android:id="@+id/cb_mode_splay"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/mode_splay"
+        />
+        				  
+      <CheckBox android:id="@+id/cb_mode_latest"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/mode_latest"
+        />
+        				  
+      <CheckBox android:id="@+id/cb_mode_station"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/mode_station"
+        />
+        				  
+      <CheckBox android:id="@+id/cb_mode_grid"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/mode_grid"
+        android:checked="false" />
 
-  <CheckBox android:id="@+id/cb_scrap"
-      android:layout_marginTop="@dimen/margintiny"
-      android:layout_width="wrap_content"
+      <CheckBox android:id="@+id/cb_mode_scale_ref"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mode_scale_ref"
+        android:checked="false" />
+
+      <CheckBox android:id="@+id/cb_scrap"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/scrap_outline"
+        android:checked="false" />
+
+      <CheckBox android:id="@+id/cb_mode_fixed"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/mode_fixed"
+        />
+
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/layer_layout"
+      style="@style/base_padding"
+      android:layout_width="0dp"
+      android:layout_weight="50"
       android:layout_height="wrap_content"
-      android:text="@string/scrap_outline"
-      android:checked="false" />
+      android:orientation="vertical"
+      >
 
-  <CheckBox android:id="@+id/cb_mode_fixed"
-      android:layout_marginTop="@dimen/margintiny"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content" 
-      android:text="@string/mode_fixed"
-      />
+      <CheckBox android:id="@+id/cb_layer_floor"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/layer_floor"
+        />
+        				  
+      <CheckBox android:id="@+id/cb_layer_fill"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/layer_fill"
+        />
+        				  
+      <CheckBox android:id="@+id/cb_layer_ceil"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/layer_ceil"
+        />
+        				  
+      <CheckBox android:id="@+id/cb_layer_arti"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/layer_arti"
+        />
+        				  
+      <!-- CheckBox android:id="@+id/cb_layer_form"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/layer_form"
+        />
+
+      <CheckBox android:id="@+id/cb_layer_water"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/layer_water"
+        />
+
+      <CheckBox android:id="@+id/cb_layer_text"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/layer_text"
+        / -->
+
+    </LinearLayout>
+  </LinearLayout>
       				  
   <LinearLayout 
     android:layout_width="match_parent" 

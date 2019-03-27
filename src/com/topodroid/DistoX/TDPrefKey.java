@@ -1320,6 +1320,7 @@ class TDPrefKey
     "DISTOX_BACKUPS_CLEAR",
     "DISTOX_AUTO_XSECTIONS",  // automatically add xsections on export/save
     "DISTOX_SAVED_STATIONS",  // whether to color saved stations
+    "DISTOX_WITH_LAYERS",    
     null
   };
 
@@ -1337,6 +1338,7 @@ class TDPrefKey
     R.string.pref_backups_clear_title,
     R.string.pref_auto_xsections_title,
     R.string.pref_saved_stations_title,
+    R.string.pref_with_layers_title,
     -1
   };
 
@@ -1354,6 +1356,7 @@ class TDPrefKey
     R.string.pref_backups_clear_summary,
     R.string.pref_auto_xsections_summary,
     R.string.pref_saved_stations_summary,
+    R.string.pref_with_layers_summary,
     -1
   };
 
@@ -1370,6 +1373,7 @@ class TDPrefKey
     TDString.SIXTY,
     FALSE,
     TRUE,
+    FALSE,
     FALSE,
     null
   };

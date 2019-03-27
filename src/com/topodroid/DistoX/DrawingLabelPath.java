@@ -53,6 +53,7 @@ class DrawingLabelPath extends DrawingPointPath
   {
     float ccx, ccy;
     int scale;
+    int level = DrawingLevel.LEVEL_ANY;
     float orientation = 0;
     // int type;
     String text, options;
@@ -63,11 +64,13 @@ class DrawingLabelPath extends DrawingPointPath
       // type = BrushManager.getPointLabelIndex();
       if ( version > 207043 ) orientation = dis.readFloat( );
       scale = dis.readInt( );
+      if ( version > 401090 ) level = dis.readInt();
       text = dis.readUTF();
       options = dis.readUTF();
 
       // TDLog.Log( TDLog.LOG_PLOT, "Label <" + text + " " + ccx + " " + ccy + " scale " + scale + " (" + options + ")" );
       DrawingLabelPath ret = new DrawingLabelPath( text, ccx, ccy, scale, options );
+      ret.mLevel = level;
       ret.setOrientation( orientation );
       return ret;
     } catch ( IOException e ) {
@@ -207,6 +210,8 @@ class DrawingLabelPath extends DrawingPointPath
       // dos.writeUTF( BrushManager.mPointLib.getSymbolThName(mPointType) );
       dos.writeFloat( (float)mOrientation ); // from version 2.7.4e
       dos.writeInt( mScale );
+      // if ( version >= 401090 ) 
+        dos.writeInt( mLevel );
       dos.writeUTF( ( mPointText != null )? mPointText : "" );
       dos.writeUTF( ( mOptions != null )? mOptions : "" );
       // TDLog.Log( TDLog.LOG_PLOT, "T " + " " + cx + " " + cy );

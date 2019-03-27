@@ -340,6 +340,8 @@ class TDSetting
   static float mWeedLength    = 2.0f;  // max weeding length
   static float mWeedBuffer    = 10;    // weed segment buffer
 
+  static boolean mWithLayers  = true; // false;
+
   static float mStationSize    = 20;   // size of station names [pt]
   static float mLabelSize      = 24;   // size of labels [pt]
   static float mFixedThickness = 1;    // width of fixed lines
@@ -870,6 +872,7 @@ class TDSetting
     // setBackupsClear( prefs.getBoolean( keyGPlot[ 9], bool(defGPlot[ 9]) ) ); // DISTOX_BACKUPS_CLEAR primary
     mAutoXSections  = prefs.getBoolean( keyGPlot[10], bool(defGPlot[10]) ); // DISTOX_AUTO_XSECTIONS
     mSavedStations  = prefs.getBoolean( keyGPlot[11], bool(defGPlot[11]) ); // DISTOX_SAVED_STATIONS
+    mWithLayers     = prefs.getBoolean( keyGPlot[12], bool(defGPlot[12]) ); // DISTOX_WITH_LAYERS
 
     String[] keyGLine = TDPrefKey.GEEKLINE;
     String[] defGLine = TDPrefKey.GEEKLINEdef;
@@ -1328,9 +1331,11 @@ class TDSetting
     } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_BACKUPS_CLEAR
       setBackupsClear( tryBooleanValue( hlp, k, v, bool(def[ 9]) ) );
     } else if ( k.equals( key[10 ] ) ) { // DISTOX_AUTO_XSECTIONS
-      mAutoXSections  = tryBooleanValue( hlp, k, v, bool(def[10]) );
+      mAutoXSections = tryBooleanValue( hlp, k, v, bool(def[10]) );
     } else if ( k.equals( key[11 ] ) ) { // DISTOX_SAVED_STATIONS
-      mSavedStations  = tryBooleanValue( hlp, k, v, bool(def[11]) );
+      mSavedStations = tryBooleanValue( hlp, k, v, bool(def[11]) );
+    } else if ( k.equals( key[12 ] ) ) { // DISTOX_WITH_LAYERS
+      mWithLayers    = tryBooleanValue( hlp, k, v, bool(def[12]) );
     } else {
       TDLog.Error("missing GEEK_PLOT key: " + k );
     }

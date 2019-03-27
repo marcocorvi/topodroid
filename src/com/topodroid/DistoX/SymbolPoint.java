@@ -93,7 +93,7 @@ class SymbolPoint extends Symbol
     readFile( pathname, locale, iso );
   }
 
-  SymbolPoint( String n1, String tn1, String fname, int c1, String path, boolean orientable )
+  SymbolPoint( String n1, String tn1, String fname, int c1, String path, boolean orientable, int level )
   {
     super( tn1, fname );
     mName  = n1;
@@ -109,9 +109,10 @@ class SymbolPoint extends Symbol
     mOrientable = orientable;
     mHasText = 0;
     mOrientation = 0.0;
+    mLevel = level;
   }
 
-  SymbolPoint( String n1, String tn1, String fname, int c1, String path, boolean orientable, int has_text )
+  SymbolPoint( String n1, String tn1, String fname, int c1, String path, boolean orientable, int has_text, int level )
   {
     super( tn1, fname ); // FIXME fname
     mName  = n1;
@@ -127,6 +128,7 @@ class SymbolPoint extends Symbol
     mOrientable = orientable;
     mHasText = has_text;
     mOrientation = 0.0;
+    mLevel = level;
   }
 
   void rotateGradP( double a )
@@ -168,14 +170,14 @@ class SymbolPoint extends Symbol
    */
   private void readFile( String pathname, String locale, String iso )
   {
-    // Log.v(  TopoDroidApp.TAG, "SymbolPoint::readFile " + pathname + " locale " + locale );
+    // Log.v(  TopoDroidApp.TAG, "Symbol Point read File " + pathname + " locale " + locale );
  
     String name    = null;
     String th_name = null;
     int color      = 0;
     Paint.Style style = Paint.Style.STROKE;
     String path    = null;
-    int cnt = 0;
+    int cnt   = 0;
 
     try {
       // FileReader fr = new FileReader( pathname );
@@ -206,6 +208,13 @@ class SymbolPoint extends Symbol
             ++k; while ( k < s && vals[k].length() == 0 ) ++k;
             if ( k < s ) {
               th_name = vals[k];
+            }
+          } else if ( vals[k].equals("level") ) {
+            ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+            if ( k < s ) {
+              try {
+                mLevel = ( Integer.parseInt( vals[k] ) );
+              } catch( NumberFormatException e ) { }
             }
           } else if ( vals[k].equals("orientation") ) {
             if ( cnt == 0 ) {
@@ -309,7 +318,7 @@ class SymbolPoint extends Symbol
       // FIXME
     }
     mOrientation = 0.0;
-    // Log.v(  TopoDroidApp.TAG, "SymbolPoint::readFile " + pathname + " csurvey " + mCsxLayer );
+    // Log.v(  TopoDroidApp.TAG, "Symbol Point read File " + pathname + " csurvey " + mCsxLayer );
   }
 
   private void makePath()

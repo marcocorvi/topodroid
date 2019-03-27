@@ -985,7 +985,8 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeEdt( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8], INTEGER, ctx, hlp ), // BACKUP INTERVAL
       makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9],          ctx, hlp ), // BACKUPS CLEAR
       makeCbx( cat, key[10], tit[10], dsc[10], T, def[10],          ctx, hlp ), // AUTO XSECTIONS on export/save
-      makeCbx( cat, key[11], tit[11], dsc[11], T, def[11],          ctx, hlp )  // SAVED STATIONS
+      makeCbx( cat, key[11], tit[11], dsc[11], T, def[11],          ctx, hlp ), // SAVED STATIONS
+      makeCbx( cat, key[12], tit[12], dsc[12], T, def[12],          ctx, hlp )  // WITH LAYERS
     };
   }
   static TDPref[] makeGeekPrefs( Context ctx, TDPrefHelper hlp )

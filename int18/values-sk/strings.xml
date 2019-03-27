@@ -646,6 +646,15 @@
     <string name="mode_outline">Obrys</string>
     <string name="mode_scale_ref">Grafická mierka</string>
 
+    <!-- TODO string name="layer_floor">Floor</string -->
+    <!-- TODO string name="layer_fill">Fills</string -->
+    <!-- TODO string name="layer_ceil">Ceiling</string -->
+    <!-- TODO string name="layer_arti">Artifacts</string -->
+    <!-- UNUSED string name="layer_form">Forms</string -->
+    <!-- UNUSED string name="layer_water">Water</string -->
+    <!-- UNUSED string name="layer_text">Text</string -->
+
+
     <!-- UNUSED string name="remote_title">Device Remote Control</string -->
     <string name="remote_on">Laser zapnutý</string>
     <string name="remote_off">Laser vypnutý</string>
@@ -956,6 +965,8 @@
   <string name="pref_size_buttons_summary">Veľkosť ikon tlačidiel</string>
   <string name="pref_with_sensors_title">Sensory</string>
   <string name="pref_with_sensors_summary">Povolí zaznamenávanie dát zo sensorov smartphonu</string>
+  <!-- TODO string name="pref_with_layers_title">Layers</string -->
+  <!-- TODO string name="pref_with_layers_summary">Use canvas layers</string -->
   <!-- UNUSED string name="pref_with_rename_title">Survey renaming</string -->
   <!-- UNUSED string name="pref_with_rename_summary">Enable "survey renaming" menu</string -->	
   <string name="pref_palettes_title">Palety</string>

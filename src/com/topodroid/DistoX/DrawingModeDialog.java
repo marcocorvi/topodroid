@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import android.os.Bundle;
 // import android.app.Dialog;
 // import android.app.Activity;
@@ -21,7 +23,7 @@ import android.content.Context;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-
+import android.widget.LinearLayout;
 
 class DrawingModeDialog extends MyDialog
                                implements View.OnClickListener
@@ -33,6 +35,14 @@ class DrawingModeDialog extends MyDialog
     private CheckBox mCBgrid;     // whether to show the grid
     private CheckBox mCBfixed;    // whether to show the grid
     private CheckBox mCBscrap;
+
+    private CheckBox mCBfloor = null;
+    private CheckBox mCBfill  = null;
+    private CheckBox mCBceil  = null;
+    private CheckBox mCBarti  = null;
+    // private CheckBox mCBform  = null;
+    // private CheckBox mCBwater = null;
+    // private CheckBox mCBtext  = null;
 
     private CheckBox mCBscaleRef; // whether to show the scale reference bar
 
@@ -62,6 +72,29 @@ class DrawingModeDialog extends MyDialog
       mCBstation = (CheckBox) findViewById(R.id.cb_mode_station);
       mCBgrid    = (CheckBox) findViewById(R.id.cb_mode_grid);
       mCBfixed   = (CheckBox) findViewById(R.id.cb_mode_fixed);
+
+      if ( TDSetting.mWithLayers ) {
+        mCBfloor = (CheckBox) findViewById(R.id.cb_layer_floor);
+        mCBfill  = (CheckBox) findViewById(R.id.cb_layer_fill);
+        mCBceil  = (CheckBox) findViewById(R.id.cb_layer_ceil);
+        mCBarti  = (CheckBox) findViewById(R.id.cb_layer_arti);
+        // mCBform  = (CheckBox) findViewById(R.id.cb_layer_form);
+        // mCBwater = (CheckBox) findViewById(R.id.cb_layer_water);
+        // mCBtext  = (CheckBox) findViewById(R.id.cb_layer_text);
+ 
+        int layers = DrawingCommandManager.getDisplayLevel();
+        mCBfloor.setChecked( ( layers & DrawingLevel.LEVEL_FLOOR ) == DrawingLevel.LEVEL_FLOOR );
+        mCBfill .setChecked( ( layers & DrawingLevel.LEVEL_FILL  ) == DrawingLevel.LEVEL_FILL  );
+        mCBceil .setChecked( ( layers & DrawingLevel.LEVEL_CEIL  ) == DrawingLevel.LEVEL_CEIL  );
+        mCBarti .setChecked( ( layers & DrawingLevel.LEVEL_ARTI  ) == DrawingLevel.LEVEL_ARTI  );
+        // mCBform .setChecked( ( layers & DrawingLevel.LEVEL_FORM  ) == DrawingLevel.LEVEL_FORM  );
+        // mCBwater.setChecked( ( layers & DrawingLevel.LEVEL_WATER ) == DrawingLevel.LEVEL_WATER );
+        // mCBtext .setChecked( ( layers & DrawingLevel.LEVEL_TEXT  ) == DrawingLevel.LEVEL_TEXT  );
+
+      } else {
+        LinearLayout ll = (LinearLayout) findViewById( R.id.layer_layout );
+        ll.setVisibility( View.GONE );
+      }
 
       mCBscaleRef = (CheckBox) findViewById(R.id.cb_mode_scale_ref);
       mCBscrap = (CheckBox) findViewById(R.id.cb_scrap);
@@ -95,6 +128,21 @@ class DrawingModeDialog extends MyDialog
       mCBscaleRef.setChecked((mode & DisplayMode.DISPLAY_SCALEBAR) != 0);
     }
 
+    // called only if mWithLayers
+    private void setLevels()
+    {
+      int layers = DrawingLevel.LEVEL_BASE;
+      if (  mCBfloor.isChecked( ) ) layers |= DrawingLevel.LEVEL_FLOOR;
+      if (  mCBfill .isChecked( ) ) layers |= DrawingLevel.LEVEL_FILL;
+      if (  mCBceil .isChecked( ) ) layers |= DrawingLevel.LEVEL_CEIL;
+      if (  mCBarti .isChecked( ) ) layers |= DrawingLevel.LEVEL_ARTI;
+      // if (  mCBform .isChecked( ) ) layers |= DrawingLevel.LEVEL_FORM;
+      // if (  mCBwater.isChecked( ) ) layers |= DrawingLevel.LEVEL_WATER;
+      // if (  mCBtext .isChecked( ) ) layers |= DrawingLevel.LEVEL_TEXT;
+      // Log.v("DistoXL", "set levels " + layers );
+      DrawingCommandManager.setDisplayLevel( layers );
+    }
+
     @Override
     public void onClick(View view)
     {
@@ -119,6 +167,8 @@ class DrawingModeDialog extends MyDialog
           if ( TDLevel.overNormal && mCBscrap.isChecked() && mParent != null ) {
             mParent.scrapOutlineDialog();
           }
+
+          if ( TDSetting.mWithLayers ) setLevels();
 
           break;
         case R.id.button_back:

@@ -180,6 +180,8 @@ class DrawingStationName extends DrawingPointPath
       dos.writeFloat( cx );
       dos.writeFloat( cy );
       dos.writeUTF( mName );
+      // if ( version >= 401090 )
+        dos.writeInt( mLevel );
       dos.writeInt( (int)mXSectionType );
       if ( mXSectionType != PlotInfo.PLOT_NULL ) {
         dos.writeFloat( mAzimuth );
@@ -195,12 +197,15 @@ class DrawingStationName extends DrawingPointPath
     float ccx, ccy;
     String name;
     int type;
+    int lvl = DrawingLevel.LEVEL_ANY;
     try {
       ccx = dis.readFloat();
       ccy = dis.readFloat();
       name = dis.readUTF();
+      if ( version >= 401090 ) lvl = dis.readInt();
       // TDLog.Log( TDLog.LOG_PATH, "SN " + ccx + " " + ccy + " " + name );
       DrawingStationName ret = new DrawingStationName( name, ccx, ccy );
+      ret.mLevel = lvl;
       if ( version >= 207038 ) {
         type = dis.readInt();
         if ( type != (int)PlotInfo.PLOT_NULL ) {

@@ -21,6 +21,8 @@ import android.content.Context;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 
 
 class DrawingLabelDialog extends MyDialog
@@ -31,6 +33,15 @@ class DrawingLabelDialog extends MyDialog
   private final ILabelAdder mActivity;
   private final float mX;
   private final float mY;
+
+  private CheckBox mCBbase  = null;
+  private CheckBox mCBfloor = null;
+  private CheckBox mCBfill  = null;
+  private CheckBox mCBceil  = null;
+  private CheckBox mCBarti  = null;
+  // private CheckBox mCBform  = null;
+  // private CheckBox mCBwater = null;
+  // private CheckBox mCBtext  = null;
 
   DrawingLabelDialog( Context context, ILabelAdder activity, float x, float y )
   {
@@ -53,6 +64,47 @@ class DrawingLabelDialog extends MyDialog
 
     mLabel.setTextSize( TDSetting.mTextSize );
 
+    if ( TDSetting.mWithLayers ) {
+      setCBlayers();
+    } else {
+      LinearLayout ll = (LinearLayout) findViewById( R.id.layer_layout );
+      ll.setVisibility( View.GONE );
+    }
+  }
+
+  private void setCBlayers()
+  {
+    mCBbase  = (CheckBox) findViewById( R.id.cb_layer_base  );
+    mCBfloor = (CheckBox) findViewById( R.id.cb_layer_floor );
+    mCBfill  = (CheckBox) findViewById( R.id.cb_layer_fill  );
+    mCBceil  = (CheckBox) findViewById( R.id.cb_layer_ceil  );
+    mCBarti  = (CheckBox) findViewById( R.id.cb_layer_arti  );
+    // mCBform  = (CheckBox) findViewById( R.id.cb_layer_form  );
+    // mCBwater = (CheckBox) findViewById( R.id.cb_layer_water );
+    // mCBtext  = (CheckBox) findViewById( R.id.cb_layer_text  );
+    mCBbase .setChecked( true );
+    mCBfloor.setChecked( true );
+    mCBfill .setChecked( true );
+    mCBceil .setChecked( true );
+    mCBarti .setChecked( true );
+    // mCBform .setChecked( true );
+    // mCBwater.setChecked( true );
+    // mCBtext .setChecked( true );
+  }
+
+  private int getLevel()
+  {
+    if ( ! TDSetting.mWithLayers ) return DrawingLevel.LEVEL_ANY;
+    int level = 0;
+    if ( mCBbase .isChecked() ) level |= DrawingLevel.LEVEL_BASE;
+    if ( mCBfloor.isChecked() ) level |= DrawingLevel.LEVEL_FLOOR;
+    if ( mCBfill .isChecked() ) level |= DrawingLevel.LEVEL_FILL;
+    if ( mCBceil .isChecked() ) level |= DrawingLevel.LEVEL_CEIL;
+    if ( mCBarti .isChecked() ) level |= DrawingLevel.LEVEL_ARTI;
+    // if ( mCBform .isChecked() ) level |= DrawingLevel.LEVEL_FORM;
+    // if ( mCBwater.isChecked() ) level |= DrawingLevel.LEVEL_WATER;
+    // if ( mCBtext .isChecked() ) level |= DrawingLevel.LEVEL_TEXT;
+    return level;
   }
 
   @Override
@@ -60,7 +112,7 @@ class DrawingLabelDialog extends MyDialog
   {
     // TDLog.Log( TDLog.LOG_INPUT, "DrawingLabelDialog onClick() " + view.toString() );
     if (view.getId() == R.id.label_ok ) {
-      mActivity.addLabel( mLabel.getText().toString(), mX, mY );
+      mActivity.addLabel( mLabel.getText().toString(), mX, mY, getLevel() );
     // } else if ( view.getId() == R.id.label_cancel ) {
     //   /* nothing */
     }

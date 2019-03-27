@@ -58,22 +58,24 @@ class SymbolLine extends Symbol
 
   // width = 1;
   // no effect
-  SymbolLine( String name, String th_name, String fname, String group, int color )
+  SymbolLine( String name, String th_name, String fname, String group, int color, int level )
   {
     super( th_name, fname );
     init( name, group, color, 1 );
     makePath();
+    mLevel = level;
   }
 
   // no effect
-  SymbolLine( String name, String th_name, String fname, String group, int color, float width )
+  SymbolLine( String name, String th_name, String fname, String group, int color, float width, int level )
   {
     super( th_name, fname );
     init( name, group, color, width );
     makePath();
+    mLevel = level;
   }
 
-  SymbolLine( String name, String th_name, String fname, String group, int color, float width, PathEffect effect_dir, PathEffect effect_rev )
+  SymbolLine( String name, String th_name, String fname, String group, int color, float width, PathEffect effect_dir, PathEffect effect_rev, int level )
   {
     super( th_name, fname );
     init( name, group, color, width );
@@ -81,6 +83,7 @@ class SymbolLine extends Symbol
     mRevPaint.setPathEffect( effect_rev );
     mHasEffect = true;
     makePath();
+    mLevel = level;
   }
 
   private void init( String name, String group, int color, float width )
@@ -205,6 +208,13 @@ class SymbolLine extends Symbol
   	    if ( k < s ) {
   	      group = vals[k];
   	    }
+          } else if ( vals[k].equals("level") ) {
+            ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+            if ( k < s ) {
+              try {
+                mLevel = ( Integer.parseInt( vals[k] ) );
+              } catch( NumberFormatException e ) { }
+            }
   	  } else if ( vals[k].equals("closed") ) {
   	    ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	    if ( k < s && vals[k].equals("yes") ) {

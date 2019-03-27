@@ -67,6 +67,7 @@ class DrawingPhotoPath extends DrawingPointPath
     int scale;
     float orientation = 0;
     // int type;
+    int lvl = DrawingLevel.LEVEL_ANY;
     String text, options;
     int id;
     try {
@@ -76,6 +77,7 @@ class DrawingPhotoPath extends DrawingPointPath
       // type = BrushManager.getPointLabelIndex();
       if ( version > 207043 ) orientation = dis.readFloat( );
       scale = dis.readInt( );
+      if ( version >= 401090 ) lvl = dis.readInt();
       text = dis.readUTF();
       options = dis.readUTF();
       id = dis.readInt();
@@ -83,6 +85,7 @@ class DrawingPhotoPath extends DrawingPointPath
       // TDLog.Log( TDLog.LOG_PLOT, "Label <" + text + " " + ccx + " " + ccy + " scale " + scale + " (" + options + ")" );
       DrawingPhotoPath ret = new DrawingPhotoPath( text, ccx, ccy, scale, options, id );
       ret.setOrientation( orientation );
+      ret.mLevel = lvl;
       return ret;
     } catch ( IOException e ) {
       TDLog.Error( "LABEL in error " + e.getMessage() );
@@ -141,6 +144,8 @@ class DrawingPhotoPath extends DrawingPointPath
       // dos.writeUTF( BrushManager.mPointLib.getSymbolThName(mPointType) );
       dos.writeFloat( (float)mOrientation ); // from version 2.7.4e
       dos.writeInt( mScale );
+      // if ( version >= 401090 ) 
+        dos.writeInt( mLevel );
       dos.writeUTF( ( mPointText != null )? mPointText : "" );
       dos.writeUTF( ( mOptions != null )? mOptions : "" );
       dos.writeInt( ((int)mId) );

@@ -2019,7 +2019,7 @@ public class DrawingWindow extends ItemDrawer
 
   // private void makeXSectionLegPoint( float x, float y )
   // {
-  //   DrawingSpecialPath path = new DrawingSpecialPath( DrawingSpecialPath.SPECIAL_DOT, DrawingUtil.toSceneX(x,y), DrawingUtil.toSceneY(x,y) );
+  //   DrawingSpecialPath path = new DrawingSpecialPath( DrawingSpecialPath.SPECIAL_DOT, DrawingUtil.toSceneX(x,y), DrawingUtil.toSceneY(x,y), DrawingLevel.LEVEL_ANY );
   //   mDrawingSurface.addDrawingPath( path );
   // }
   
@@ -2123,7 +2123,7 @@ public class DrawingWindow extends ItemDrawer
             if ( mLandscape ) { float t=xtt; xtt=-ytt; ytt=t; }
             // Log.v("DistoX", "TT " + tt + " " + xtt + " " + xfrom + " " + xto );
             // makeXSectionLegPoint( xtt, ytt );
-            DrawingSpecialPath path = new DrawingSpecialPath( DrawingSpecialPath.SPECIAL_DOT, DrawingUtil.toSceneX(xtt,ytt), DrawingUtil.toSceneY(xtt,ytt) );
+            DrawingSpecialPath path = new DrawingSpecialPath( DrawingSpecialPath.SPECIAL_DOT, DrawingUtil.toSceneX(xtt,ytt), DrawingUtil.toSceneY(xtt,ytt), DrawingLevel.LEVEL_ANY );
             mDrawingSurface.addDrawingPath( path );
           }
         }
@@ -3527,13 +3527,14 @@ public class DrawingWindow extends ItemDrawer
   // -------------------------------------------------------------
 
     // add a therion label point (ILabelAdder)
-    public void addLabel( String label, float x, float y )
+    public void addLabel( String label, float x, float y, int level )
     {
       if ( label != null && label.length() > 0 ) {
 	if ( mLandscape ) { float t=x; x=-y; y=t; }
         DrawingLabelPath label_path = new DrawingLabelPath( label, x, y, mPointScale, null );
 	label_path.setOrientation( BrushManager.mPointLib.getPointOrientation( mCurrentPoint ) ); // FIX Asenov
 	label_path.mLandscape = mLandscape;
+        label_path.mLevel = level;
         mDrawingSurface.addDrawingPath( label_path );
         modified();
       } 

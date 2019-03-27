@@ -111,6 +111,7 @@ class DrawingPointPath extends DrawingPath
     mOrientation = 0.0;
     mOptions = options;
     mPointText = text; // getTextFromOptions( options ); // this can also reset mOptions
+    mLevel     = BrushManager.mPointLib.getSymbolLevel( type );
 
     if ( BrushManager.mPointLib.isSymbolOrientable( type ) ) {
       mOrientation = BrushManager.getPointOrientation(type);
@@ -127,6 +128,7 @@ class DrawingPointPath extends DrawingPath
     float ccx, ccy, orientation;
     int   type;
     int   scale;
+    int   level = DrawingLevel.LEVEL_ANY;
     String fname;
     String options = null;
     String text = null;
@@ -136,6 +138,7 @@ class DrawingPointPath extends DrawingPath
       fname = dis.readUTF( );
       orientation = dis.readFloat();
       scale   = dis.readInt();
+      if ( version >= 401090 ) level = dis.readInt();
       if ( version >= 303066 ) text = dis.readUTF();
       options = dis.readUTF();
 
@@ -153,6 +156,7 @@ class DrawingPointPath extends DrawingPath
       //   option = "-scrap " + scrap;
       // }
       DrawingPointPath ret = new DrawingPointPath( type, ccx, ccy, scale, text, options );
+      ret.mLevel = level;
       ret.setOrientation( orientation );
       return ret;
 
@@ -455,6 +459,8 @@ class DrawingPointPath extends DrawingPath
       dos.writeUTF( name );
       dos.writeFloat( (float)mOrientation );
       dos.writeInt( mScale );
+      // if ( version >= 401090 )
+        dos.writeInt( mLevel );
       // if ( version >= 303066 ) 
         dos.writeUTF( (mPointText != null)? mPointText : "" );
       dos.writeUTF( (mOptions != null)? mOptions : "" );

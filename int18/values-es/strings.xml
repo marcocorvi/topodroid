@@ -638,6 +638,15 @@
     <string name="mode_outline">Solo poligonal</string>
     <string name="mode_scale_ref">Barra de referencia de escala</string>
 
+    <!-- TODO string name="layer_floor">Floor</string -->
+    <!-- TODO string name="layer_fill">Fills</string -->
+    <!-- TODO string name="layer_ceil">Ceiling</string -->
+    <!-- TODO string name="layer_arti">Artifacts</string -->
+    <!-- UNUSED string name="layer_form">Forms</string -->
+    <!-- UNUSED string name="layer_water">Water</string -->
+    <!-- UNUSED string name="layer_text">Text</string -->
+
+
     <!-- UNUSED string name="remote_title">Control remoto del dispositivo</string -->
     <string name="remote_on">Láser ON</string>
     <string name="remote_off">Láser OFF</string>
@@ -946,6 +955,8 @@
   <string name="pref_size_buttons_summary">Introduzca el tamaño de los botones de la barra [pixels]</string>
   <!-- TODO string name="pref_with_sensors_title">Sensors</string -->
   <!-- TODO string name="pref_with_sensors_summary">Enable "sensors" data</string -->
+  <!-- TODO string name="pref_with_layers_title">Layers</string -->
+  <!-- TODO string name="pref_with_layers_summary">Use canvas layers</string -->
   <!-- TODO string name="pref_palettes_title">Palettes</string -->
   <!-- TODO string name="pref_palettes_summary">Enable additional palettes</string -->
   <!-- TODO string name="pref_packet_logger_title">Packets log</string -->
