@@ -330,7 +330,7 @@
     <string name="menu_manual_calibration">Calibrazione</string>
     <string name="menu_options">OPZIONI</string>
     <string name="menu_overview">PANORAMICA</string>
-    <!-- TODO string name="menu_packets">PACKETS</string -->
+    <string name="menu_packets">PACCHETTI</string>
     <string name="menu_pair">ASSOCIA</string>
     <!-- OK string name="menu_palette">PALETTE</string -->
     <string name="menu_photo">FOTO</string>
@@ -597,8 +597,8 @@
     <string name="button_left"      >SINISTRA</string>
     <string name="button_right"     >DESTRA</string>
     <string name="button_clear"     >Cancella  </string>
-    <!-- TODO string name="button_clear_day" >Clear 1d  </string -->
-    <!-- TODO string name="button_clear_week">Clear 7d  </string -->
+    <string name="button_clear_day" >Pulisci 1g  </string>
+    <string name="button_clear_week">Pulisci 7gg  </string>
     <string name="button_save"      >Salva     </string>
     <!-- UNUSED string name="button_select"    >Seleziona </string -->
     <string name="button_search"    >Cerca     </string>
@@ -630,13 +630,13 @@
     <string name="mode_outline">Solo contorno</string>
     <string name="mode_scale_ref">Scala barra di riferimento</string>
 
-    <!-- TODO string name="layer_floor">Floor</string -->
-    <!-- TODO string name="layer_fill">Fills</string -->
-    <!-- TODO string name="layer_ceil">Ceiling</string -->
-    <!-- TODO string name="layer_arti">Artifacts</string -->
-    <!-- UNUSED string name="layer_form">Forms</string -->
-    <!-- UNUSED string name="layer_water">Water</string -->
-    <!-- UNUSED string name="layer_text">Text</string -->
+    <string name="layer_floor">Pavimento</string>
+    <string name="layer_fill">Riempimenti</string>
+    <string name="layer_ceil">Soffitto</string>
+    <string name="layer_arti">Artefatti</string>
+    <!-- UNUSED string name="layer_form">Forme</string -->
+    <!-- UNUSED string name="layer_water">Acqua</string -->
+    <!-- UNUSED string name="layer_text">Testo</string -->
 
 
     <!-- UNUSED string name="remote_title">DistoX Remote Control</string -->
@@ -730,7 +730,7 @@
     <string name="help_display_calib">Mostra/Nascondi i tiri cancellati</string>
     <string name="help_validate">Convalida calibrazione</string>
     <string name="help_overview">Vista globale</string>
-    <!-- TODO string name="help_packets">DistoX packets dialog</string -->
+    <string name="help_packets">Pacchetti DistoX</string>
     <string name="help_plot">Finestra disegno</string>
     <string name="help_note">Annotazioni rilievo</string>
     <string name="help_bluetooth">Resetta connessione bluetooth</string>
@@ -833,7 +833,7 @@
     <string name="title_mode">Modalità display</string>
     <string name="title_move">Sposta</string>
     <string name="title_note">Annotazioni</string>
-    <!-- TODO string name="title_packet_dialog">Packets</string -->
+    <string name="title_packet_dialog">Pacchetti</string>
     <string name="title_photo">Foto/Misurazione</string>
     <string name="title_photo_comment">Commento foto</string>
     <string name="title_plot_save">Salva disegno come </string>
@@ -943,12 +943,12 @@
   <string name="pref_size_buttons_summary">Dimensione bottoni barra superiore [pixels]</string>
   <string name="pref_with_sensors_title">Sensori</string>
   <string name="pref_with_sensors_summary">Abilita dati "sensori"</string>
-  <!-- TODO string name="pref_with_layers_title">Layers</string -->
-  <!-- TODO string name="pref_with_layers_summary">Use canvas layers</string -->
+  <string name="pref_with_layers_title">Strati</string>
+  <string name="pref_with_layers_summary">Usa strati di tele</string>
   <string name="pref_palettes_title">Tavolozze</string>
   <string name="pref_palettes_summary">Abilita tavolozze addizionali</string>
-  <!-- TODO string name="pref_packet_logger_title">Packets log</string -->
-  <!-- TODO string name="pref_packet_logger_summary">Enable packets logging</string -->
+  <string name="pref_packet_logger_title">Log Pacchetti</string>
+  <string name="pref_packet_logger_summary">Abilita log pacchetti</string>
 
   <string name="pref_bezier_step_title">Spaziatura punti</string>
   <string name="pref_bezier_step_summary">Distanza tra punti in una linea di export [m]</string>
@@ -959,7 +959,7 @@
   <string name="pref_triple_shot_title">Suono Misura-Tiro</string>
   <string name="pref_triple_shot_summary">Feedback sonoro al riconoscimento di Misura-Tiro</string>
   <string name="pref_station_prefix_title">Esporta il prefisso dei caposaldi</string>
-  <string name="pref_station_prefix_summary">Esporta in cSurvey il prefisso dei caposaldi</string>
+  <string name="pref_station_prefix_summary">Esporta caposaldi con prefisso [Compass]</string>
   <string name="pref_compass_splays_title">Splay Compass</string>
   <string name="pref_compass_splays_summary">Esporta splay in file Compass</string>
   <!-- UNUSED string name="pref_trobot_names_title">Nomi capisaldi TopoRobot</string -->
