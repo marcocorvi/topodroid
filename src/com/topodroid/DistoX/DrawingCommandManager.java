@@ -1431,27 +1431,33 @@ class DrawingCommandManager
     float sca = 1 / mBitmapScale;
     mat.postTranslate( BORDER - bounds.left, BORDER - bounds.top );
     mat.postScale( mBitmapScale, mBitmapScale );
-    if ( mGridStack1 != null ) {
-      synchronized( mGridStack1 ) {
-        for ( DrawingPath p1 : mGridStack1 ) {
-          p1.draw( c, mat, sca, null );
-        }
-        for ( DrawingPath p10 : mGridStack10 ) {
-          p10.draw( c, mat, sca, null );
-        }
-        for ( DrawingPath p100 : mGridStack100 ) {
-          p100.draw( c, mat, sca, null );
-        }
-        if ( mNorthLine != null ) mNorthLine.draw( c, mat, sca, null );
-      }
-    }
-    if ( mSplaysStack != null ) {
-      synchronized( mSplaysStack ) {
-        for ( DrawingPath path : mSplaysStack ) {
-          path.draw( c, mat, sca, null );
+    if ( TDSetting.mSvgGrid ) {
+      if ( mGridStack1 != null ) {
+        synchronized( mGridStack1 ) {
+          for ( DrawingPath p1 : mGridStack1 ) {
+            p1.draw( c, mat, sca, null );
+          }
+          for ( DrawingPath p10 : mGridStack10 ) {
+            p10.draw( c, mat, sca, null );
+          }
+          for ( DrawingPath p100 : mGridStack100 ) {
+            p100.draw( c, mat, sca, null );
+          }
+          if ( mNorthLine != null ) mNorthLine.draw( c, mat, sca, null );
         }
       }
     }
+
+    if ( TDSetting.mTherionSplays ) {
+      if ( mSplaysStack != null ) {
+        synchronized( mSplaysStack ) {
+          for ( DrawingPath path : mSplaysStack ) {
+            path.draw( c, mat, sca, null );
+          }
+        }
+      }
+    }
+
     if ( mLegsStack != null ) {
       synchronized( mLegsStack ) {
         for ( DrawingPath path : mLegsStack ) {
@@ -1460,10 +1466,12 @@ class DrawingCommandManager
       }
     }
  
-    if ( mStations != null ) {  
-      synchronized( mStations ) {
-        for ( DrawingStationName st : mStations ) {
-          st.draw( c, mat, sca, null );
+    if ( TDSetting.mAutoStations ) {
+      if ( mStations != null ) {  
+        synchronized( mStations ) {
+          for ( DrawingStationName st : mStations ) {
+            st.draw( c, mat, sca, null );
+          }
         }
       }
     }
@@ -1471,7 +1479,16 @@ class DrawingCommandManager
     if( mCurrentStack != null ){
       synchronized( mCurrentStack ) {
         for ( ICanvasCommand cmd : mCurrentStack ) {
-          cmd.draw( c, mat, sca, null );
+          if ( cmd.commandType() == 0 ) {
+            if ( TDSetting.mWithLayers ) {
+              DrawingPath path = (DrawingPath)cmd;
+              if ( (path.mLevel & mDisplayLevel) != 0 ) { // filter display levels
+                cmd.draw( c, mat, sca, null );
+              }
+            } else {
+              cmd.draw( c, mat, sca, null );
+            }
+          }
         }
       }
     }
@@ -2978,39 +2995,41 @@ class DrawingCommandManager
         if ( pt.mPointType != BrushManager.mPointLib.mPointSectionIndex ) continue;
 	// get the line/station
 	String scrap = p.getOption("-scrap");
-	// Log.v("DistoXX", "section point scrap " + scrap );
-	int pos = scrap.lastIndexOf( "-xx" );
-	if ( pos > 0 ) {
-          String id = scrap.substring(pos+1); // line id
-	  if ( id != null && id.length() > 0 ) {
-            for ( ICanvasCommand cmd2 : mCurrentStack ) {
-              if ( cmd2.commandType() != 0 ) continue; 
-              DrawingPath p2 = (DrawingPath)cmd2;
-              if ( p2.mType != DrawingPath.DRAWING_PATH_LINE ) continue;
-              DrawingLinePath ln = (DrawingLinePath)p2;
-              if ( ln.mLineType != BrushManager.mLineLib.mLineSectionIndex ) continue;
-	      if ( id.equals( ln.getOption("-id") ) ) {
-                pt.setLink( ln );
-	        break;
-	      }
-	    }
-	  }
-	} else {
-          pos = scrap.lastIndexOf( "-xs-" );
-	  if ( pos < 0 ) pos = scrap.lastIndexOf( "-xh-" );
+        if ( scrap != null ) {
+	  // Log.v("DistoXX", "section point scrap " + scrap );
+	  int pos = scrap.lastIndexOf( "-xx" );
 	  if ( pos > 0 ) {
-            String name = scrap.substring(pos+4);
-	    if ( name != null && name.length() > 0 ) {
-	      // Log.v("DistoXX", "section station " + name );
-	      for ( DrawingStationName st : mStations ) {
-                if ( name.equals( st.name() ) ) {
-                  pt.setLink( st );
+            String id = scrap.substring(pos+1); // line id
+	    if ( id != null && id.length() > 0 ) {
+              for ( ICanvasCommand cmd2 : mCurrentStack ) {
+                if ( cmd2.commandType() != 0 ) continue; 
+                DrawingPath p2 = (DrawingPath)cmd2;
+                if ( p2.mType != DrawingPath.DRAWING_PATH_LINE ) continue;
+                DrawingLinePath ln = (DrawingLinePath)p2;
+                if ( ln.mLineType != BrushManager.mLineLib.mLineSectionIndex ) continue;
+	        if ( id.equals( ln.getOption("-id") ) ) {
+                  pt.setLink( ln );
 	          break;
-		}
+	        }
+	      }
+	    }
+	  } else {
+            pos = scrap.lastIndexOf( "-xs-" );
+	    if ( pos < 0 ) pos = scrap.lastIndexOf( "-xh-" );
+	    if ( pos > 0 ) {
+              String name = scrap.substring(pos+4);
+	      if ( name != null && name.length() > 0 ) {
+	        // Log.v("DistoXX", "section station " + name );
+	        for ( DrawingStationName st : mStations ) {
+                  if ( name.equals( st.name() ) ) {
+                    pt.setLink( st );
+	            break;
+                  }
+	        }
 	      }
 	    }
 	  }
-	}
+        }
       }
     }
   }

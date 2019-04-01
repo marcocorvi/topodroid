@@ -59,7 +59,7 @@ class DrawingSpecialPath extends DrawingPath
   static DrawingSpecialPath loadDataStream( int version, DataInputStream dis, float x, float y )
   {
     try {
-      int lvl = DrawingLevel.LEVEL_ANY;
+      int lvl = DrawingLevel.LEVEL_DEFAULT;
       int t = dis.readInt();
       float ccx = x + dis.readFloat();
       float ccy = y + dis.readFloat();

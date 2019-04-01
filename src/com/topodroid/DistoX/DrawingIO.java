@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileReader;
@@ -38,8 +40,6 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import android.graphics.RectF;
-
-import android.util.Log;
 
 class DrawingIO
 {
@@ -1312,7 +1312,7 @@ class DrawingIO
         if ( p.bottom > ymax ) ymax = p.bottom;
 
 	if ( p.mPlotName != null ) {
-	  // Log.v("DistoXX", "path with plot-name " + p.mPlotName + " type " + p.mType );
+	  // Log.v("DistoXX", "path with plot-name " + p.mPlotName + " type " + p.mType + " nr plots " + nplots );
 	  int k=0;
 	  for ( ; k<nplots; ++k ) if ( plots[k].equals( p.mPlotName ) ) break;
 	  if ( k == nplots ) {
@@ -1320,6 +1320,7 @@ class DrawingIO
               NPLOTS += 8;
               String[] tmp = new String[NPLOTS];
 	      for ( int j=0; j<nplots; ++j ) tmp[j] = plots[j];
+              plots = tmp;
 	    }
 	    plots[k] = p.mPlotName;
 	    nplots ++;

@@ -67,7 +67,7 @@ class DrawingPhotoPath extends DrawingPointPath
     int scale;
     float orientation = 0;
     // int type;
-    int lvl = DrawingLevel.LEVEL_ANY;
+    int lvl = DrawingLevel.LEVEL_DEFAULT;
     String text, options;
     int id;
     try {

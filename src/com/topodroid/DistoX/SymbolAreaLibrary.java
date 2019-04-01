@@ -126,7 +126,7 @@ class SymbolAreaLibrary extends SymbolLibrary
     symbol.mCsxBrush = 2;
     addSymbol( symbol );
 
-    symbol = new SymbolArea( res.getString( R.string.tha_water ),  "water", "water", 0x663366ff, null, TileMode.REPEAT, TileMode.REPEAT, true, DrawingLevel.LEVEL_ANY );
+    symbol = new SymbolArea( res.getString( R.string.tha_water ),  "water", "water", 0x663366ff, null, TileMode.REPEAT, TileMode.REPEAT, true, DrawingLevel.LEVEL_WATER );
     symbol.mCsxLayer = 2;
     symbol.mCsxType  = 3;   
     symbol.mCsxCategory = 46;

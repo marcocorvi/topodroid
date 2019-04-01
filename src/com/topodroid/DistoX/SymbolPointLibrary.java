@@ -107,7 +107,7 @@ class SymbolPointLibrary extends SymbolLibrary
     addSymbol( symbol );
 
     mPointLabelIndex = mSymbols.size(); // 1 = text
-    symbol = new SymbolPoint( res.getString(R.string.thp_label), "label", "label", 0xffffffff, p_label, true, 1, DrawingLevel.LEVEL_ANY );
+    symbol = new SymbolPoint( res.getString(R.string.thp_label), "label", "label", 0xffffffff, p_label, true, 1, DrawingLevel.LEVEL_LABEL );
     symbol.mCsxLayer = 6;
     symbol.mCsxType  = 8;
     symbol.mCsxCategory = 81;

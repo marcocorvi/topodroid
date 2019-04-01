@@ -79,7 +79,7 @@ class DrawingLinePath extends DrawingPointLinePath
     int type;
     boolean closed, reversed;
     int outline;
-    int level = DrawingLevel.LEVEL_ANY;
+    int level = DrawingLevel.LEVEL_DEFAULT;
     String fname, options;
     try {
       fname = dis.readUTF();

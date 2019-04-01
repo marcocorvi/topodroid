@@ -197,7 +197,7 @@ class DrawingStationName extends DrawingPointPath
     float ccx, ccy;
     String name;
     int type;
-    int lvl = DrawingLevel.LEVEL_ANY;
+    int lvl = DrawingLevel.LEVEL_DEFAULT;
     try {
       ccx = dis.readFloat();
       ccy = dis.readFloat();

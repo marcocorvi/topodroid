@@ -1608,6 +1608,13 @@ class TDSetting
       if ( mBitmapScale >  10f ) { mBitmapScale =  10f; ret = TDString.TEN; }
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_BITMAP_BGCOLOR
       return setBitmapBgcolor( hlp.getSharedPrefs(), k, tryStringValue( hlp, k, v, def[1] ), def[1] );
+    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_SVG_GRID
+      mSvgGrid = tryBooleanValue( hlp, k, v, bool(def[2]) );
+    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_THERION_SPLAYS
+      mTherionSplays = tryBooleanValue( hlp, k, v, bool(def[ 3]) );   
+    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_AUTO_STATIONS
+      mAutoStations  = tryBooleanValue( hlp, k, v, bool(def[ 4]) );
+
     } else {
       TDLog.Error("missing EXPORT PNG key: " + k );
     }

@@ -48,7 +48,7 @@ class Symbol implements SymbolInterface
     mCsxPen   = 1;     // default pen is "1"
     mCsxBrush = 1;     // default brush is "1"
     mCsx = null;
-    mLevel = DrawingLevel.LEVEL_ANY;
+    mLevel = DrawingLevel.LEVEL_DEFAULT;
   }
 
   // filename not used
@@ -63,7 +63,7 @@ class Symbol implements SymbolInterface
     mCsxPen   = 1;
     mCsxBrush = 1; 
     mCsx = null;
-    mLevel = DrawingLevel.LEVEL_ANY;
+    mLevel = DrawingLevel.LEVEL_DEFAULT;
   }
 
   /** cstr 
@@ -80,7 +80,7 @@ class Symbol implements SymbolInterface
     mCsxPen   = 1;
     mCsxBrush = 1; 
     mCsx = null;
-    mLevel = DrawingLevel.LEVEL_ANY;
+    mLevel = DrawingLevel.LEVEL_DEFAULT;
   }
 
   // SymbolInterface methods

@@ -112,7 +112,7 @@ class DrawingAreaPath extends DrawingPointLinePath
     int type, cnt;
     boolean visible;
     float orientation;
-    int level = DrawingLevel.LEVEL_ANY;
+    int level = DrawingLevel.LEVEL_DEFAULT;
     String fname, prefix;
     try {
       fname = dis.readUTF();

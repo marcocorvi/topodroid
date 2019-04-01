@@ -25,8 +25,11 @@ class DrawingLevel
   // static final int LEVEL_TEXT   = 128;  // text
 
   static final int LEVEL_USER   =  1;
-  static final int LEVEL_WALL   = 15;
+  static final int LEVEL_LABEL  = 17;
+  static final int LEVEL_WALL   = 31;
+  static final int LEVEL_WATER  =  7;
 
   static final int LEVEL_ANY    = 31;
+  static final int LEVEL_DEFAULT  = 1;
 }
 

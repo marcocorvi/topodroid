@@ -91,13 +91,14 @@ public class TDPrefActivity extends Activity
     R.string.title_settings_dxf,
     R.string.title_settings_png,
     R.string.title_settings_kml,
+    R.string.title_settings_csv,
     R.string.title_settings_shot,     
-    R.string.title_settings_units,    // 16
+    R.string.title_settings_units,    // 17
     R.string.title_settings_accuracy,
     R.string.title_settings_location,
     R.string.title_settings_screen,
     R.string.title_settings_line,
-    R.string.title_settings_point,    // 21
+    R.string.title_settings_point,    // 22
     R.string.title_settings_walls,
     R.string.title_settings_draw,
     R.string.title_settings_erase,
@@ -105,8 +106,8 @@ public class TDPrefActivity extends Activity
     R.string.title_settings_geek,
     R.string.title_settings_survey,
     R.string.title_settings_plot,
-    R.string.title_settings_line,     // 29
-    R.string.title_settings_device,   // 30
+    R.string.title_settings_line,     // 30
+    R.string.title_settings_device,   // 31
     R.string.title_settings_log 
   };
 

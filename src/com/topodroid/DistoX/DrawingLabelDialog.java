@@ -83,9 +83,9 @@ class DrawingLabelDialog extends MyDialog
     // mCBwater = (CheckBox) findViewById( R.id.cb_layer_water );
     // mCBtext  = (CheckBox) findViewById( R.id.cb_layer_text  );
     mCBbase .setChecked( true );
-    mCBfloor.setChecked( true );
-    mCBfill .setChecked( true );
-    mCBceil .setChecked( true );
+    mCBfloor.setChecked( false);
+    mCBfill .setChecked( false);
+    mCBceil .setChecked( false);
     mCBarti .setChecked( true );
     // mCBform .setChecked( true );
     // mCBwater.setChecked( true );
@@ -94,7 +94,7 @@ class DrawingLabelDialog extends MyDialog
 
   private int getLevel()
   {
-    if ( ! TDSetting.mWithLayers ) return DrawingLevel.LEVEL_ANY;
+    if ( ! TDSetting.mWithLayers ) return DrawingLevel.LEVEL_DEFAULT;
     int level = 0;
     if ( mCBbase .isChecked() ) level |= DrawingLevel.LEVEL_BASE;
     if ( mCBfloor.isChecked() ) level |= DrawingLevel.LEVEL_FLOOR;

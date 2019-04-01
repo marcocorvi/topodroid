@@ -691,8 +691,9 @@ class ShpPoint extends ShpObject
     String[] fields = new String[ n_fld ];
     fields[0] = "name";
     fields[1] = "orient";
-    byte[]   ftypes = { BYTEC, BYTEC };
-    int[]    flens  = { 16, 6 };
+    fields[2] = "levels";
+    byte[]   ftypes = { BYTEC, BYTEC, BYTEC };
+    int[]    flens  = { 16, 6, 6 };
 
     int shpRecLen = getShpRecordLength( );
     int shxRecLen = getShxRecordLength( );
@@ -728,6 +729,7 @@ class ShpPoint extends ShpObject
       writeShxRecord( offset, shpRecLen );
       fields[0] = BrushManager.mPointLib.getSymbolThName( pt.mPointType );
       fields[1] = Integer.toString( (int)pt.mOrientation ); 
+      fields[2] = Integer.toString( (int)pt.mLevel ); 
       writeDBaseRecord( n_fld, fields, flens );
       ++cnt;
     }
@@ -865,8 +867,9 @@ class ShpPolyline extends ShpObject
     String[] fields = new String[ n_fld ];
     fields[0] = "type";
     fields[1] = "name";
-    byte[]   ftypes = { BYTEC, BYTEC }; // use only strings
-    int[]    flens  = { 8, 16 };
+    fields[2] = "levels";
+    byte[]   ftypes = { BYTEC, BYTEC, BYTEC }; // use only strings
+    int[]    flens  = { 8, 16, 6 };
 
     int shpLength = 50;
     for ( DrawingPointLinePath ln : lns ) {
@@ -898,14 +901,19 @@ class ShpPolyline extends ShpObject
     if ( lns != null && nrs > 0 ) {
       for ( DrawingPointLinePath ln : lns ) {
 	if ( ln.mType == DrawingPath.DRAWING_PATH_LINE ) {
+          DrawingLinePath line = (DrawingLinePath)ln;
           fields[0] = "line";
-	  fields[1] = BrushManager.mLineLib.getSymbolThName( ((DrawingLinePath)ln).mLineType );
+	  fields[1] = BrushManager.mLineLib.getSymbolThName( line.mLineType );
+          fields[2] = Integer.toString( line.mLevel );
 	} else if ( ln.mType == DrawingPath.DRAWING_PATH_AREA ) {
+          DrawingAreaPath area = (DrawingAreaPath)ln;
           fields[0] = "area";
-	  fields[1] = BrushManager.mAreaLib.getSymbolThName( ((DrawingAreaPath)ln).mAreaType );
+	  fields[1] = BrushManager.mAreaLib.getSymbolThName( area.mAreaType );
+          fields[2] = Integer.toString( area.mLevel );
 	} else {
 	  fields[0] = "undef";
           fields[1] = "undef";
+          fields[2] = "0";
 	}
         int close = ( ln.mType == DrawingPath.DRAWING_PATH_AREA || ln.isClosed() )? 1 : 0;
 	int shp_len = getShpRecordLength( ln.size() + close );

@@ -871,6 +871,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_settings_main">TopoDroid main settings</string>
     <string name="title_settings_export">TopoDroid import/export settings</string>
     <string name="title_settings_import">TopoDroid import settings</string>
+    <string name="title_settings_csv">CSV export settings</string>
     <string name="title_settings_svx">Survex export settings</string>
     <string name="title_settings_th">Therion export settings</string>
     <string name="title_settings_dat">Compass export settings</string>
@@ -1000,7 +1001,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_survex_lrud_title">Survex/Therion LRUD</string>
   <string name="pref_survex_lrud_summary">Add LRUD to Survex/Therion export</string>
   <string name="pref_svg_grid_title">Grid</string>
-  <string name="pref_svg_grid_summary">Add grid to SVG/XVI export</string>
+  <string name="pref_svg_grid_summary">Add grid to SVG/XVI/PNG export</string>
   <string name="pref_svg_splays_title">SVG splays</string>
   <string name="pref_svg_splays_summary">Include splays into SVG export</string>
   <!-- UNUSED string name="pref_svg_in_html_title">SVG in HTML</string -->
@@ -1146,9 +1147,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
   <string name="pref_hthr_title">Cross-section h-threshold</string>
   <string name="pref_hthr_summary">Threshold for horizontal cross-sections</string>
-  <string name="pref_bitmap_scale_title">PNG resolution</string>
+  <string name="pref_bitmap_scale_title">Resolution</string>
   <string name="pref_bitmap_scale_summary">Resolution of PNG image of sketches</string>
-  <string name="pref_bitmap_bgcolor_title">PNG background color</string>
+  <string name="pref_bitmap_bgcolor_title">Background color</string>
   <string name="pref_bitmap_bgcolor_summary">Background color of PNG image of sketches</string>
   <string name="pref_acad_version_title">AutoCAD version</string>
   <string name="pref_acad_version_summary">AutoCAD version</string>
@@ -1236,14 +1237,14 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_backups_clear_summary">Enable sketch backups clear menu</string>
   <!-- UNUSED string name="pref_xtherion_areas_title">xtherion areas</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Save areas a la xtherion</string -->
-  <string name="pref_therion_splays_title">Therion splays</string>
-  <string name="pref_therion_splays_summary">Add u:splay lines to th2 files</string>
+  <string name="pref_therion_splays_title">Splays</string>
+  <string name="pref_therion_splays_summary">Add splay lines to th2/PNG files</string>
   <string name="pref_th2_scale_title">Therion scale</string>
   <string name="pref_th2_scale_summary">Scale of th2/xvi export</string>
   <string name="pref_th2_xvi_title">xvi image</string>
   <string name="pref_th2_xvi_summary">Insert xvi image in th2</string>
-  <string name="pref_autoStations_title">Therion stations</string>
-  <string name="pref_autoStations_summary">Add stations automatically to Therion files</string>
+  <string name="pref_autoStations_title">Stations</string>
+  <string name="pref_autoStations_summary">Add stations automatically to th2/PNG files</string>
   <string name="pref_auto_xsections_title">Auto X-sections</string>
   <string name="pref_auto_xsections_summary">Add x-sections automatically to save/export [csx/svg/dxf/xvi]</string>
   <string name="pref_saved_stations_title">Saved stations</string>

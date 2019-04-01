@@ -128,7 +128,7 @@ class DrawingPointPath extends DrawingPath
     float ccx, ccy, orientation;
     int   type;
     int   scale;
-    int   level = DrawingLevel.LEVEL_ANY;
+    int   level = DrawingLevel.LEVEL_DEFAULT;
     String fname;
     String options = null;
     String text = null;

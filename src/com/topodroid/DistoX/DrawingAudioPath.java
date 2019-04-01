@@ -64,7 +64,7 @@ class DrawingAudioPath extends DrawingPointPath
   static DrawingAudioPath loadDataStream( int version, DataInputStream dis, float x, float y )
   {
     // int type;
-    int lvl = DrawingLevel.LEVEL_ANY;
+    int lvl = DrawingLevel.LEVEL_DEFAULT;
     try {
       float orientation = 0;
       float ccx = x + dis.readFloat( );

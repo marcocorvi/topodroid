@@ -870,6 +870,7 @@
     <string name="title_settings_main">TopoDroid Einstellungen</string>
     <string name="title_settings_export">Import/Export Einstellungen</string>
     <string name="title_settings_import">Import Einstellungen</string>
+    <!-- TODO string name="title_settings_csv">CSV export settings</string -->
     <string name="title_settings_svx">Survex-Export Einstellungen</string>
     <string name="title_settings_th">Therion-Export Einstellungen</string>
     <string name="title_settings_dat">Compass-Export Einstellungen</string>

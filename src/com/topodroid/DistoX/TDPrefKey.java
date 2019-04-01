@@ -518,7 +518,7 @@ class TDPrefKey
 
   static String[] EXPORT_TH = { // [8]
     "DISTOX_THERION_MAPS",     // whether to put map commands before centerline in therion
-    "DISTOX_AUTO_STATIONS",    // whether to add stations to thetion th2 exports
+    "DISTOX_AUTO_STATIONS",    // whether to add stations to therion th2 exports
     // "DISTOX_XTHERION_AREAS",    // save areas a-la xtherion
     "DISTOX_THERION_SPLAYS",   // whether to add u:splay lines to Therion th2 export
     "DISTOX_SURVEX_LRUD",      // whether to add LRUD to Survex export
@@ -656,18 +656,33 @@ class TDPrefKey
   static String[] EXPORT_PNG = {
     "DISTOX_BITMAP_SCALE",           // default bitmap scale PNG
     "DISTOX_BITMAP_BGCOLOR",   // 21 29 // bitmap background color [RGB]
+    "DISTOX_SVG_GRID",
+    "DISTOX_THERION_SPLAYS",
+    "DISTOX_AUTO_STATIONS",
   };
   static int[] EXPORT_PNGtitle = {
     R.string.pref_bitmap_scale_title,
     R.string.pref_bitmap_bgcolor_title,
+    R.string.pref_svg_grid_title,
+    R.string.pref_therion_splays_title,
+    R.string.pref_autoStations_title,
+    -1
   };
   static int[] EXPORT_PNGdesc = {
     R.string.pref_bitmap_scale_summary,
     R.string.pref_bitmap_bgcolor_summary,
+    R.string.pref_svg_grid_summary,
+    R.string.pref_therion_splays_summary,
+    R.string.pref_autoStations_summary,
+    -1
   };
   static String[] EXPORT_PNGdef = {
     "1.5",
     "0 0 0",
+    FALSE,
+    FALSE,
+    TRUE,
+    null
   };
 
   // ------------------------------------------------------------------------------

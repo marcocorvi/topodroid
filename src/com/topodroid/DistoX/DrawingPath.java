@@ -112,7 +112,7 @@ class DrawingPath extends RectF
     mLandscape = false;
     mExtend = 1;
     mPlotName = null;
-    mLevel = DrawingLevel.LEVEL_ANY;
+    mLevel = DrawingLevel.LEVEL_DEFAULT;
   }
 
   // boolean isDeletable( ) 

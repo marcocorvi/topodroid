@@ -53,7 +53,7 @@ class DrawingLabelPath extends DrawingPointPath
   {
     float ccx, ccy;
     int scale;
-    int level = DrawingLevel.LEVEL_ANY;
+    int level = DrawingLevel.LEVEL_DEFAULT;
     float orientation = 0;
     // int type;
     String text, options;

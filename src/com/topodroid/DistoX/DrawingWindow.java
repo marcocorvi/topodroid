@@ -2019,7 +2019,7 @@ public class DrawingWindow extends ItemDrawer
 
   // private void makeXSectionLegPoint( float x, float y )
   // {
-  //   DrawingSpecialPath path = new DrawingSpecialPath( DrawingSpecialPath.SPECIAL_DOT, DrawingUtil.toSceneX(x,y), DrawingUtil.toSceneY(x,y), DrawingLevel.LEVEL_ANY );
+  //   DrawingSpecialPath path = new DrawingSpecialPath( DrawingSpecialPath.SPECIAL_DOT, DrawingUtil.toSceneX(x,y), DrawingUtil.toSceneY(x,y), DrawingLevel.LEVEL_DEFAULT );
   //   mDrawingSurface.addDrawingPath( path );
   // }
   
@@ -2123,7 +2123,7 @@ public class DrawingWindow extends ItemDrawer
             if ( mLandscape ) { float t=xtt; xtt=-ytt; ytt=t; }
             // Log.v("DistoX", "TT " + tt + " " + xtt + " " + xfrom + " " + xto );
             // makeXSectionLegPoint( xtt, ytt );
-            DrawingSpecialPath path = new DrawingSpecialPath( DrawingSpecialPath.SPECIAL_DOT, DrawingUtil.toSceneX(xtt,ytt), DrawingUtil.toSceneY(xtt,ytt), DrawingLevel.LEVEL_ANY );
+            DrawingSpecialPath path = new DrawingSpecialPath( DrawingSpecialPath.SPECIAL_DOT, DrawingUtil.toSceneX(xtt,ytt), DrawingUtil.toSceneY(xtt,ytt), DrawingLevel.LEVEL_DEFAULT );
             mDrawingSurface.addDrawingPath( path );
           }
         }
