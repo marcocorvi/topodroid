@@ -3,11 +3,11 @@
 <resources>
 
   <!-- TODO string-array name="lineContinue">
-     <item name="none">none</item>
-     <item name="start">join with start point</item>
-     <item name="end">join with end point</item>
-     <item name="both">join with both ends</item>
-     <item name="continue">continue</item>
+     <item name="none">无</item>
+     <item name="start">以起始点联接</item>
+     <item name="end">以结束点联接t</item>
+     <item name="both">以两头连接</item>
+     <item name="continue">继续</item>
   </string-array -->
   <!-- FIXME string-array name="unitGrid">
      <item name="meter">米</item>
@@ -129,26 +129,26 @@
 
 <!--
   <string-array name="surveyStationsB">
-     <item name="no">No</item>
+     <item name="no">无</item>
      <item name="for">射线, 前测主线</item>
      <item name="back">射线, 后测主线</item>
      <item name="backsight">后测</item>
   </string-array>
   <string-array name="surveyStationsN">
-     <item name="no">No</item>
+     <item name="no">无</item>
      <item name="for">射线, 前测主线</item>
      <item name="back">射线, 后测主线</item>
      <item name="backsight">后测</item>
   </string-array>
   <string-array name="surveyStationsA">
-     <item name="no">No</item>
+     <item name="no">无</item>
      <item name="for">射线, 前测主线</item>
      <item name="back">射线, 后测主线</item>
      <item name="backsight">后测</item>
      <item name="tripod">脚架测量</item>
   </string-array>
   <string-array name="surveyStationsE">
-     <item name="no">No</item>
+     <item name="no">无</item>
      <item name="for">射线, 前测主线</item>
      <item name="back">射线, 后测主线</item>
      <item name="backsight">后测</item>
@@ -227,8 +227,8 @@
 
 
   <!-- TODO string-array name="rawCData">
-     <item name="none">None</item>
-     <item name="dec">Decimal</item>
-     <item name="hex">Hex</item>
+     <item name="none">无</item>
+     <item name="dec">十进制</item>
+     <item name="hex">十六进制</item>
   </string-array -->
 </resources>
