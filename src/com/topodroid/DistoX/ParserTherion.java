@@ -353,14 +353,14 @@ class ParserTherion
                 float scale = 1.0f;
 		int kk = 1;
                 while ( kk<vals_len-1 ) {
-		  try { // try to read the "scale" float (next val)
+		  try { // try to read the "zero" float (next val)
 		    ++kk;
                     zero = Float.parseFloat( vals[kk] );
 		    break;
                   } catch ( NumberFormatException e ) { }
 		}
                 while ( kk<vals_len-1 ) {
-		  try { // try to read the "zero" float (next val)
+		  try { // try to read the "scale" float (next val)
 		    ++kk;
                     scale  = Float.parseFloat( vals[kk] );
 		    break;
