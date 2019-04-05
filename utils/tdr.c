@@ -1,3 +1,7 @@
+/** this code is provided under GNU GPL v.3.0
+ */
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <arpa/inet.h>
