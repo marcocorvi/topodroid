@@ -3,6 +3,11 @@
 # check comments in string files and complete them if unclosed
 # output on stdout
 #
+# --------------------------------------------------------
+#  Copyright This software is distributed under GPL-3.0 or later
+#  See the file COPYING.
+# --------------------------------------------------------
+#
 open( DAT, "$ARGV[0]" ) || die "Cannot open input file\n";
 
 while ( $line = <DAT> ) {

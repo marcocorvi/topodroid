@@ -3,6 +3,11 @@
 # symbols
 # main script for symbols translations
 #
+# --------------------------------------------------------
+#  Copyright This software is distributed under GPL-3.0 or later
+#  See the file COPYING.
+# --------------------------------------------------------
+#
 lang="bg cn de fr es hu it pt ru sk sl ua";
 
 ./symbols_lang.sh en > "../res/values/symbols.xml" ;

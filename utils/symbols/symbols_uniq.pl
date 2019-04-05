@@ -2,6 +2,11 @@
 #
 # remove duplicate keys
 #
+# --------------------------------------------------------
+#  Copyright This software is distributed under GPL-3.0 or later
+#  See the file COPYING.
+# --------------------------------------------------------
+#
 open( DAT, $ARGV[0] ) or die "No input file $ARV[0]\n";
 
 while ( $line = <DAT> ) {

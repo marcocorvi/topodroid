@@ -1,3 +1,10 @@
+/**
+* --------------------------------------------------------
+*  Copyright This software is distributed under GPL-3.0 or later
+*  See the file COPYING.
+* --------------------------------------------------------
+*
+*/
 #include <stdio.h>
 #include <stdlib.h>
 

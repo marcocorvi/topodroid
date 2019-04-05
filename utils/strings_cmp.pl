@@ -9,6 +9,11 @@
 #    strings that appear in xx-strings but are missing in en-strings
 #    strings that appear enabled in xx-strings but are commented in en-strings
 #
+# --------------------------------------------------------
+#  Copyright This software is distributed under GPL-3.0 or later
+#  See the file COPYING.
+# --------------------------------------------------------
+#
 open( EN, "$ARGV[0]" ) or die "Cannot open english strings file \"$ARGV[0]\"\n";
 open( XX, "$ARGV[1]" ) or die "Cannot open strings file \"$ARGV[1]\"\n";
 

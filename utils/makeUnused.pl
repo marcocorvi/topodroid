@@ -2,6 +2,11 @@
 #
 # add/set comment UNUSED for the given key
 #
+# --------------------------------------------------------
+#  Copyright This software is distributed under GPL-3.0 or later
+#  See the file COPYING.
+# --------------------------------------------------------
+#
 open( DAT, "$ARGV[0]" ) || die "Cannot open string file $ARGV[0]\n";
 $key = "\"$ARGV[1]\"";
 

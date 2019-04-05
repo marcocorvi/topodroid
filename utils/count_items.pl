@@ -3,6 +3,11 @@
 # count number of items in a string-array
 # usage: count_items.pl string_array-name string_array-file
 #
+# --------------------------------------------------------
+#  Copyright This software is distributed under GPL-3.0 or later
+#  See the file COPYING.
+# --------------------------------------------------------
+#
 $name = $ARGV[0];
 $file = $ARGV[1];
 

@@ -1730,7 +1730,7 @@ class DataHelper extends DataSetObservable
                           String comment, String addr, boolean forward )
   {
     // TDLog.Log( TDLog.LOG_DB, "insert shot <" + id + "> " + from + "-" + to + " extend " + extend );
-    // Log.v("DistoXX", "A5 do insert shot id " + id + " leg " + leg + " flag " + flag );
+    Log.v("DistoXX", "do insert shot id " + id + " d " + d + " b " + b + " c " + c );
     if ( myDB == null ) return -1L;
     if ( id == -1L ) {
       ++ myNextId;

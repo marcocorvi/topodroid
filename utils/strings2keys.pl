@@ -3,6 +3,11 @@
 # extract keys from strings file
 # usage: strings.pl <en-strings_file>
 #
+# --------------------------------------------------------
+#  Copyright This software is distributed under GPL-3.0 or later
+#  See the file COPYING.
+# --------------------------------------------------------
+#
 #
 open( EN, "$ARGV[0]" ) or die "Cannot open english strings file \"$ARGV[0]\"\n";
 

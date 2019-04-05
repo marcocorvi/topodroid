@@ -1,6 +1,12 @@
 #!/usr/bin/perl
 #
 # extract symbols translations from a symbol file
+#
+# --------------------------------------------------------
+#  Copyright This software is distributed under GPL-3.0 or later
+#  See the file COPYING.
+# --------------------------------------------------------
+#
 $lang = "name-$ARGV[0]";
 $file = $ARGV[1];
 

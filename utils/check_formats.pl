@@ -4,6 +4,11 @@
 # [1] load formats from res/value/strings.xml and count number of args in the formats
 # [2] open translation file and compare formats
 #
+# --------------------------------------------------------
+#  Copyright This software is distributed under GPL-3.0 or later
+#  See the file COPYING.
+# --------------------------------------------------------
+#
 open( DAT, "res/values/strings.xml" ) or die "Cannot open reference strings file\n";
 while ( $line = <DAT> ) {
   next if ( $line =~ /TODO/ );

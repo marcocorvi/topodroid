@@ -10,6 +10,11 @@
 # english string file is ../res/values/strings.xml
 # other languages strings files in ../int18/values-XX/strings.xml
 #
+# --------------------------------------------------------
+#  Copyright This software is distributed under GPL-3.0 or later
+#  See the file COPYING.
+# --------------------------------------------------------
+#
 #
 use Encode qw(decode encode);
 $warn    = 0;

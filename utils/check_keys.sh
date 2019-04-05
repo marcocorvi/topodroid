@@ -2,6 +2,11 @@
 #
 # for each key in "keys" check if it is used in the code
 #
+# --------------------------------------------------------
+#  Copyright This software is distributed under GPL-3.0 or later
+#  See the file COPYING.
+# --------------------------------------------------------
+#
 echo "For each key in 'keys' check if it is used in the code"
 
 cd utils

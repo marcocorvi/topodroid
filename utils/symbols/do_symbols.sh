@@ -1,5 +1,10 @@
 #!/bin/sh
 #
+# --------------------------------------------------------
+#  Copyright This software is distributed under GPL-3.0 or later
+#  See the file COPYING.
+# --------------------------------------------------------
+#
 lang=$1
 dirs='symbols_archeo symbols_bio symbols_extra symbols_geo symbols_karst symbols_mine symbols_paleo symbols_speleo';
 

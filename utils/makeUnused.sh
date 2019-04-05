@@ -3,6 +3,11 @@
 # Usage:
 #    makeUnused.sh <key>
 #
+# --------------------------------------------------------
+#  Copyright This software is distributed under GPL-3.0 or later
+#  See the file COPYING.
+# --------------------------------------------------------
+#
 # echo $1
 tar -czf backup-$1.tgz res/values/strings.xml \
   int18/values-bg/strings.xml \
