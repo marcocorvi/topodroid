@@ -4,12 +4,10 @@
     <item quantity="one">警告： 一个饱和数据</item>
     <item quantity="other">警告. %1$d 饱和数据</item>
   </plurals>
-
   <plurals name="read_data">
     <item quantity="zero">无数据读取</item>
-    <item quantity="other">读取 %1$d data</item>
+    <item quantity="other">读取 %1$d 数据</item>
   </plurals>
-
   <plurals name="read_calib_data">
     <item quantity="zero">无校准数据读取</item>
     <item quantity="other">读取 %1$d 数据 (%2$d packets)</item>

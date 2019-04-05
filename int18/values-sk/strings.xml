@@ -646,10 +646,10 @@
     <string name="mode_outline">Obrys</string>
     <string name="mode_scale_ref">Grafická mierka</string>
 
-    <!-- TODO string name="layer_floor">Floor</string -->
-    <!-- TODO string name="layer_fill">Fills</string -->
-    <!-- TODO string name="layer_ceil">Ceiling</string -->
-    <!-- TODO string name="layer_arti">Artifacts</string -->
+    <string name="layer_floor">Podlaha</string -->
+    <string name="layer_fill">Výplne</string -->
+    <string name="layer_ceil">Strop</string -->
+    <string name="layer_arti">Artefakty</string -->
     <!-- UNUSED string name="layer_form">Forms</string -->
     <!-- UNUSED string name="layer_water">Water</string -->
     <!-- UNUSED string name="layer_text">Text</string -->
@@ -872,7 +872,7 @@
     <string name="title_settings_main">TopoDroid Hlavné nastavenia</string>
     <string name="title_settings_export">TopoDroid Import/Export nastavenia</string>
     <string name="title_settings_import">TopoDroid nastavenia Importu</string>
-    <!-- TODO string name="title_settings_csv">CSV export settings</string -->
+    <string name="title_settings_csv">CSV nastavenia Exportu</string -->
     <string name="title_settings_svx">Survex nastavenia Exportu</string>
     <string name="title_settings_th">Therion nastavenia Exportu</string>
     <string name="title_settings_dat">Compass nastavenia Exportu</string>
@@ -966,8 +966,8 @@
   <string name="pref_size_buttons_summary">Veľkosť ikon tlačidiel</string>
   <string name="pref_with_sensors_title">Sensory</string>
   <string name="pref_with_sensors_summary">Povolí zaznamenávanie dát zo sensorov smartphonu</string>
-  <!-- TODO string name="pref_with_layers_title">Layers</string -->
-  <!-- TODO string name="pref_with_layers_summary">Use canvas layers</string -->
+  <string name="pref_with_layers_title">Vrstvy</string -->
+  <string name="pref_with_layers_summary">Umožní používanie vrstiev pri kreslení</string -->
   <!-- UNUSED string name="pref_with_rename_title">Survey renaming</string -->
   <!-- UNUSED string name="pref_with_rename_summary">Enable "survey renaming" menu</string -->	
   <string name="pref_palettes_title">Palety</string>
