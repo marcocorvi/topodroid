@@ -773,152 +773,152 @@
     <!-- UNUSED string name="help_trash">Delete sketch</string -->
     <string name="help_undo">取消上一步绘图操作</string>
     <string name="help_redo">重做上一步绘图操作</string>
-    <string name="help_symbol_plot">Select the active drawing tool</string>
-    <string name="help_delete_item">Delete sketch item</string>
-    <string name="help_range">Moving a portion of line</string>
+    <string name="help_symbol_plot">选择最近使用的绘图工具</string>
+    <string name="help_delete_item">删除草图项</string>
+    <string name="help_range">移动线的某部分</string>
     <!-- UNUSED string name="help_clear">Clear selection</string -->
-    <string name="help_eraser">Erase mode</string>
-    <string name="help_select_mode">Selection tool</string>
-    <string name="help_erase_mode">Eraser tool</string>
-    <string name="help_erase_size">Select/Erase size [S/M/L]</string>
-    <string name="help_previous">Previous item in the selection</string>
-    <string name="help_next">Next item in the selection</string>
-    <string name="help_recover">Reload sketch from backup</string>
-    <string name="help_zoom_fit">Fit sketch to screen</string>
+    <string name="help_eraser">擦除模式</string>
+    <string name="help_select_mode">选择工具</string>
+    <string name="help_erase_mode">擦除工具</string>
+    <string name="help_erase_size">选择/橡皮擦尺寸 [S/M/L]</string>
+    <string name="help_previous">已选项目</string>
+    <string name="help_next">选项中的下一项目</string>
+    <string name="help_recover">从备份中重新载入草图</string>
+    <string name="help_zoom_fit">草图适应屏幕</string>
    
-    <string name="help_line_point">Line point actions: join, split, cut, remove</string>
+    <string name="help_line_point">线点功能: 衔接,分割, 剪切, 删除</string>
 <!--
     <string name="help_to_point">Move selected point to join with the nearest point</string>
     <string name="help_split_point">Split the point into two [line/area]</string>
     <string name="help_split_line">Split the line into two at the point</string>
     <string name="help_kink">Use a straight line at the point [line/area]</string>
 -->
-    <string name="help_manual_calibration">Manual instruments calibration</string>
-    <string name="help_note_plot">Sketch item properties</string>
+    <string name="help_manual_calibration">手动校准仪器</string>
+    <string name="help_note_plot">编辑选定的草图项目属性</string>
     <!-- UNUSED string name="help_save">Save changes to survey info</string -->
-    <string name="help_save_calib">Save changes to calibration info</string>
-    <string name="help_export_survey">Export survey</string>
-    <string name="help_loc">GPS location</string>
-    <string name="help_delete_survey">Delete survey</string>
-    <string name="help_delete_calib">Delete calibration</string>
-    <string name="help_detach">Clear active DistoX choice</string>
-    <string name="help_firmware">DistoX2 firmware updater</string>
-    <string name="help_toggle">Toggle DistoX calibration/normal mode</string>
-    <string name="help_sdcard">DistoX memory functions</string>
-    <string name="help_read">Read and display DistoX calibration coefficients</string>
-    <string name="help_info_device">Device info</string>
-    <string name="help_scan">Scan for new DistoX devices</string>
-    <string name="help_pair">Pair the active DistoX device</string>
-    <string name="help_open_calib">Open calibration</string>
-    <string name="help_export_calib">Export calibration</string>
-    <string name="help_group">Assign group numbers automatically</string>
-    <string name="help_cover">Angle distribution of calibration data</string>
-    <string name="help_compute">Compute calibration</string>
-    <string name="help_write">Write calibration coefficients to the DistoX</string>
+    <string name="help_save_calib">保存修改的校准信息</string>
+    <string name="help_export_survey">测量输出</string>
+    <string name="help_loc">GPS 位置</string>
+    <string name="help_delete_survey">删除测量</string>
+    <string name="help_delete_calib">删除校准</string>
+    <string name="help_detach">清除最近的DistoX选择</string>
+    <string name="help_firmware">DistoX2 固件升级</string>
+    <string name="help_toggle">切换 DistoX 校准/正常 模式</string>
+    <string name="help_sdcard">DistoX 记忆功能</string>
+    <string name="help_read">读取和显示DistoX 的校准系数</string>
+    <string name="help_info_device">设备信息</string>
+    <string name="help_scan">扫描新的DistoX设备</string>
+    <string name="help_pair">配对最近的DistoX设备</string>
+    <string name="help_open_calib">打开校准</string>
+    <string name="help_export_calib">输出校准</string>
+    <string name="help_group">自动分配组数</string>
+    <string name="help_cover">显示校准数据的角度分部</string>
+    <string name="help_compute">计算校准</string>
+    <string name="help_write">将校准系数写入DistoX</string>
   
-    <string name="audio_paused">Paused</string>
-    <string name="audio_playing">Playing</string>
-    <string name="audio_recording">Recording</string>
-    <string name="audio_delete">Delete ?</string>
-    <string name="audio_overwrite">Overwrite ?</string>
+    <string name="audio_paused">暂停</string>
+    <string name="audio_playing">播放中</string>
+    <string name="audio_recording">记录中</string>
+    <string name="audio_delete">删除 ?</string>
+    <string name="audio_overwrite">覆盖 ?</string>
 
-    <string name="title_azimut">Extend reference</string>
-    <string name="title_audio">Audio comment</string>
-    <string name="title_calib">Calibrations</string>
-    <string name="title_calib_check">Calibration-check shots</string>
+    <string name="title_azimut">扩展参考</string>
+    <string name="title_audio">音频备注</string>
+    <string name="title_calib">校准</string>
+    <string name="title_calib_check">校准检测测射</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->
-    <string name="title_coverage">Calibration data distribution</string>
-    <string name="title_coeff">Calibration coefficients</string>
-    <string name="title_color_picker">Pick a color</string>
+    <string name="title_coverage">校准数据分布</string>
+    <string name="title_coeff">校准系数</string>
+    <string name="title_color_picker">选择一个颜色</string>
     <!-- UNUSED string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
-    <string name="title_current_station">Saved stations</string>
-    <string name="title_station_search">Enter station</string>
-    <string name="title_device">DistoX devices</string>
-    <string name="title_device_select">Select DistoX device</string>
-    <string name="title_discover">Scanning for DistoX devices &#8230; wait</string>
+    <string name="title_current_station">保存测量点</string>
+    <string name="title_station_search">输入测量点</string>
+    <string name="title_device">DistoX设备</string>
+    <string name="title_device_select">选择DistoX设备</string>
+    <string name="title_discover">扫描DistoX设备 &#8230; wait</string>
     <!-- UNUSED string name="title_draw">Draw</string -->
-    <string name="title_draw_area">AREA %1$s</string>
-    <string name="title_draw_line">LINE %1$s</string>
-    <string name="title_draw_line_no_stations">LINE %1$s: no stations</string>
-    <string name="title_draw_point">POINT %1$s</string>
-    <string name="title_edit">Edit</string>
-    <string name="title_edit_user_station">Edit user station </string>
-    <string name="title_edit_station">Edit station </string>
-    <string name="title_erase">Erase</string>
-    <string name="title_fixed">Locations</string>
-    <string name="title_fixed_edit">Location edit</string>
-    <string name="title_fixed_import">Location import</string>
-    <string name="title_fixed_gps">Location GPS</string>
-    <string name="title_fixed_add">Location insert</string>
-    <string name="title_manual">TopoDroid User Manual</string>
-    <string name="title_mode">Display Mode</string>
-    <string name="title_move">Moving</string>
-    <string name="title_note">Survey notes</string>
-    <string name="title_packet_dialog">Packets</string>
-    <string name="title_photo">More shot edit</string>
-    <string name="title_photo_comment">Photo comment</string>
-    <string name="title_plot_save">Export sketch</string>
+    <string name="title_draw_area">区域 %1$s</string>
+    <string name="title_draw_line">线 %1$s</string>
+    <string name="title_draw_line_no_stations">线 %1$s: no stations</string>
+    <string name="title_draw_point">点 %1$s</string>
+    <string name="title_edit">编辑</string>
+    <string name="title_edit_user_station">编辑用户定义测量点 </string>
+    <string name="title_edit_station">编辑测量点 </string>
+    <string name="title_erase">擦除</string>
+    <string name="title_fixed">位置</string>
+    <string name="title_fixed_edit">位置编辑</string>
+    <string name="title_fixed_import">位置导入</string>
+    <string name="title_fixed_gps">位置GPS数据</string>
+    <string name="title_fixed_add">位置插入</string>
+    <string name="title_manual">TopoDroid用户手册</string>
+    <string name="title_mode">显示模式</string>
+    <string name="title_move">移动</string>
+    <string name="title_note">测量备注</string>
+    <string name="title_packet_dialog">数据包</string>
+    <string name="title_photo">更多测射编辑</string>
+    <string name="title_photo_comment">照片备注</string>
+    <string name="title_plot_save">输出草图</string>
     <!-- UNUSED string name="title_plot_merge">Merge sketch in</string -->
-    <string name="title_plot_reload">Reload sketch</string>
-    <string name="title_profile_flip">Flip profile sketch ?</string>
-    <string name="title_projection">Projected profile azimuth %1$d</string>
-    <string name="title_refs">Sketch References</string>
-    <string name="title_scraps">Survey sketches</string>
-    <string name="title_scraps_outline">Sketch outlines</string>
+    <string name="title_plot_reload">重新导入草图</string>
+    <string name="title_profile_flip">翻转剖面草图 ?</string>
+    <string name="title_projection">预计剖面方位 %1$d</string>
+    <string name="title_refs">草图参考</string>
+    <string name="title_scraps">测量草图</string>
+    <string name="title_scraps_outline">草图轮廓</string>
     <!-- UNUSED string name="title_select">Select</string -->
 
-    <string name="title_settings_main">TopoDroid main settings</string>
-    <string name="title_settings_export">TopoDroid import/export settings</string>
-    <string name="title_settings_import">TopoDroid import settings</string>
-    <string name="title_settings_csv">CSV export settings</string>
-    <string name="title_settings_svx">Survex export settings</string>
-    <string name="title_settings_th">Therion export settings</string>
-    <string name="title_settings_dat">Compass export settings</string>
-    <string name="title_settings_svg">SVG export settings</string>
-    <string name="title_settings_dxf">DXF export settings</string>
-    <string name="title_settings_png">PNG export settings</string>
-    <string name="title_settings_kml">KML export settings</string>
+    <string name="title_settings_main">TopoDroid主设置</string>
+    <string name="title_settings_export">TopoDroid输入/输出</string>
+    <string name="title_settings_import">TopoDroid输入设置</string>
+    <string name="title_settings_csv">CSV输出设置</string>
+    <string name="title_settings_svx">Survex输出设置</string>
+    <string name="title_settings_th">Therion输出设置</string>
+    <string name="title_settings_dat">Compass输出设置</string>
+    <string name="title_settings_svg">SVG输出设置</string>
+    <string name="title_settings_dxf">DXF输出设置</string>
+    <string name="title_settings_png">PNG输出设置</string>
+    <string name="title_settings_kml">KML输出设置</string>
 
-    <string name="title_settings_sketch">TopoDroid 3d sketch settings</string>
-    <string name="title_settings_survey">TopoDroid survey settings</string>
-    <string name="title_settings_shot">TopoDroid shot data settings</string>
-    <string name="title_settings_units">TopoDroid units settings</string>
-    <string name="title_settings_location">TopoDroid location settings</string>
-    <string name="title_settings_accuracy">TopoDroid accuracy settings</string>
-    <string name="title_settings_plot">TopoDroid sketch settings</string>
-    <string name="title_settings_screen">TopoDroid canvas settings</string>
-    <string name="title_settings_point">TopoDroid point settings</string>
-    <string name="title_settings_line">TopoDroid line settings</string>
-    <string name="title_settings_walls">TopoDroid autowalls settings</string>
-    <string name="title_settings_draw">TopoDroid drawing settings</string>
-    <string name="title_settings_erase">TopoDroid erasing settings</string>
-    <string name="title_settings_edit">TopoDroid editing settings</string>
-    <string name="title_settings_device">TopoDroid device settings</string>
-    <string name="title_settings_calib">TopoDroid calibration settings</string>
-    <string name="title_settings_geek">TopoDroid geek flags settings</string>
-    <string name="title_settings_log">TopoDroid log settings</string>
+    <string name="title_settings_sketch">TopoDroid 3d草图设置</string>
+    <string name="title_settings_survey">TopoDroid测量设置</string>
+    <string name="title_settings_shot">TopoDroid测射数据设置</string>
+    <string name="title_settings_units">TopoDroid单位设置</string>
+    <string name="title_settings_location">TopoDroid位置设置</string>
+    <string name="title_settings_accuracy">TopoDroid精度设置</string>
+    <string name="title_settings_plot">TopoDroid草图设置</string>
+    <string name="title_settings_screen">TopoDroid画布设置</string>
+    <string name="title_settings_point">TopoDroid点设置</string>
+    <string name="title_settings_line">TopoDroid线设置</string>
+    <string name="title_settings_walls">TopoDroid自动洞壁设置</string>
+    <string name="title_settings_draw">TopoDroid绘画设置</string>
+    <string name="title_settings_erase">TopoDroid擦除设置</string>
+    <string name="title_settings_edit">TopoDroid编辑设置</string>
+    <string name="title_settings_device">TopoDroid设备设置</string>
+    <string name="title_settings_calib">TopoDroid校准设置</string>
+    <string name="title_settings_geek">TopoDroid高级设置</string>
+    <string name="title_settings_log">TopoDroid日志设置</string>
 
-    <string name="title_shift">Shift</string>
-    <string name="title_shot_delete">Delete shot ?</string>
-    <string name="title_sensor_edit">Sensor</string>
-    <string name="title_split">Sketch split</string>
+    <string name="title_shift">转换</string>
+    <string name="title_shot_delete">删除测射 ?</string>
+    <string name="title_sensor_edit">传感器</string>
+    <string name="title_split">草图分割</string>
 
-    <string name="title_stats">Statistics</string>
+    <string name="title_stats">统计</string>
     <!-- UNUSED string name="title_step">Step</string -->
-    <string name="title_survey">Survey Info</string>
-    <string name="title_survey_new">New survey</string>
-    <string name="title_survey_export">Export survey</string>
-    <string name="title_survey_rename">Rename survey</string>
-    <string name="title_plot_rename">Rename sketch</string>
-    <string name="title_plot_zoomfit">Zoom fit / Orientation</string>
-    <string name="title_calib_export">Export calibration</string>
+    <string name="title_survey">测量项目信息</string>
+    <string name="title_survey_new">新建测量</string>
+    <string name="title_survey_export">输出测量</string>
+    <string name="title_survey_rename">测量重命名</string>
+    <string name="title_plot_rename">草图重命名</string>
+    <string name="title_plot_zoomfit">缩放适应 / 定向缩放</string>
+    <string name="title_calib_export">输出校准</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-  <string name="pref_cat_survey">SURVEY DATA</string>
-  <string name="pref_cat_drawing">SKETCHING</string>
-  <string name="pref_cat_import_export">IMPORT_EXPORT</string>
-  <string name="pref_cat_exportimport">IMPORT</string>
+  <string name="pref_cat_survey">测量信息</string>
+  <string name="pref_cat_drawing">草图</string>
+  <string name="pref_cat_import_export">输入输出</string>
+  <string name="pref_cat_exportimport">输入</string>
   <string name="pref_cat_exportsvx" translatable="false">Survex</string>
   <string name="pref_cat_exportth"  translatable="false">Therion</string>
   <string name="pref_cat_exportdat" translatable="false">Compass</string>
@@ -928,180 +928,180 @@
   <string name="pref_cat_exportkml" translatable="false">KML/GeoJSON</string>
   <string name="pref_cat_exportcsv" translatable="false">CSV</string>
 
-  <string name="pref_cat_calib">CALIBRATIONS</string>
+  <string name="pref_cat_calib">校准</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
-  <string name="pref_cat_device">DEVICES</string>
-  <string name="pref_cat_geek">GEEK FLAGS</string>
+  <string name="pref_cat_device">sheb</string>
+  <string name="pref_cat_geek">高级设置</string>
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
 
-  <string name="pref_locale_title">Language</string>
-  <string name="pref_locale_summary">App language</string>
+  <string name="pref_locale_title">语言</string>
+  <string name="pref_locale_summary">软件语言</string>
 
-  <string name="pref_raw_data_title">Raw data</string>
-  <string name="pref_raw_data_summary">Show raw calibration data</string>
-  <string name="pref_calib_shot_download_title">Download remote data</string>
-  <string name="pref_calib_shot_download_summary">Download remote calib data immediately</string>
+  <string name="pref_raw_data_title">原始数据</string>
+  <string name="pref_raw_data_summary">显示原始测量数据</string>
+  <string name="pref_calib_shot_download_title">下载远程数据</string>
+  <string name="pref_calib_shot_download_summary">立即下载远程校准数据</string>
   <!-- UNUSED string name="pref_bootloader_title">Bootloader</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Enable bootloader</string -->
-  <string name="pref_mkeyboard_title">Keyboard</string>
-  <string name="pref_mkeyboard_summary">Enable custom keyboards</string>
-  <string name="pref_no_cursor_title">No keyboard cursor</string>
-  <string name="pref_no_cursor_summary">Disable custom-keyboard cursor</string>
-  <string name="pref_local_help_title">User manual</string>
-  <string name="pref_local_help_summary">Optional translated manual [internet required]</string>
+  <string name="pref_mkeyboard_title">键盘</string>
+  <string name="pref_mkeyboard_summary">启用用户键盘</string>
+  <string name="pref_no_cursor_title">无键盘鼠标</string>
+  <string name="pref_no_cursor_summary">禁用用户键盘鼠标</string>
+  <string name="pref_local_help_title">用户手册</string>
+  <string name="pref_local_help_summary">可选翻译手册[需要互联网]</string>
   <!-- UNUSED string name="pref_cosurvey_title">Co-surveying service</string -->
   <!-- UNUSED string name="pref_cosurvey_summary">Enable co-surveying service</string -->
-  <string name="pref_import_datamode_title">Import datamode</string>
-  <string name="pref_import_datamode_summary">Datamode for importing surveys</string>
-  <string name="pref_export_shots_title">Default data export</string>
-  <string name="pref_export_shots_summary">Default data export format</string>
-  <string name="pref_export_plot_title">Default sketch export</string>
-  <string name="pref_export_plot_summary">Default sketch export format</string>
-  <string name="pref_therion_maps_title">Therion maps first</string>
-  <string name="pref_therion_maps_summary">Put Therion maps before survey data</string>
-  <string name="pref_extra_buttons_title">Activity level</string>
-  <string name="pref_extra_buttons_summary">Level of enabled features</string>
-  <string name="pref_size_buttons_title">Buttons size</string>
-  <string name="pref_size_buttons_summary">Size of action-bar buttons</string>
-  <string name="pref_with_sensors_title">Sensors</string>
-  <string name="pref_with_sensors_summary">Enable "sensors" data</string>
-  <string name="pref_with_layers_title">Layers</string>
-  <string name="pref_with_layers_summary">Use canvas layers</string>
+  <string name="pref_import_datamode_title">输入数据传输方式</string>
+  <string name="pref_import_datamode_summary">导入测量的数据传输方式</string>
+  <string name="pref_export_shots_title">默认数据输出</string>
+  <string name="pref_export_shots_summary">默认数据输出格式</string>
+  <string name="pref_export_plot_title">默认草图输出</string>
+  <string name="pref_export_plot_summary">默认草图输出格式</string>
+  <string name="pref_therion_maps_title">Therion地图优先</string>
+  <string name="pref_therion_maps_summary">把Therion地图放在数据之前</string>
+  <string name="pref_extra_buttons_title">激活等级</string>
+  <string name="pref_extra_buttons_summary">启用功能级别</string>
+  <string name="pref_size_buttons_title">按键大小</string>
+  <string name="pref_size_buttons_summary">操作栏按钮的大小</string>
+  <string name="pref_with_sensors_title">传感器</string>
+  <string name="pref_with_sensors_summary">启用 "传感器" 数据</string>
+  <string name="pref_with_layers_title">图层</string>
+  <string name="pref_with_layers_summary">使用画布图层</string>
   <!-- UNUSED string name="pref_with_rename_title">Survey renaming</string -->
   <!-- UNUSED string name="pref_with_rename_summary">Enable "survey renaming" menu</string -->
-  <string name="pref_palettes_title">Palettes</string>
-  <string name="pref_palettes_summary">Enable additional palettes</string>
-  <string name="pref_packet_logger_title">Packets log</string>
-  <string name="pref_packet_logger_summary">Enable packets logging</string>
+  <string name="pref_palettes_title">调色板</string>
+  <string name="pref_palettes_summary">启用附加调色板</string>
+  <string name="pref_packet_logger_title">日志包</string>
+  <string name="pref_packet_logger_summary">启用日志包</string>
 
-  <string name="pref_bezier_step_title">Point spacing</string>
-  <string name="pref_bezier_step_summary">Max. point spacing (polyline approx. of curves) [m]</string>
-  <string name="pref_leg_shots_title">Minimum leg shots</string>
-  <string name="pref_leg_shots_summary">Minimum number of shots for a leg</string>
-  <string name="pref_recent_timeout_title">Recent data timeout</string>
-  <string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent [s]</string>
-  <string name="pref_triple_shot_title">Leg-shot bell</string>
-  <string name="pref_triple_shot_summary">Sound feedback on leg-shot recognition</string>
-  <string name="pref_station_prefix_title">Compass station prefix</string>
-  <string name="pref_station_prefix_summary">Export station prefix [Compass]</string>
-  <string name="pref_compass_splays_title">Compass splays</string>
-  <string name="pref_compass_splays_summary">Export splays in Compass files</string>
+  <string name="pref_bezier_step_title">点间距</string>
+  <string name="pref_bezier_step_summary">最大点间距(多条曲线) [m]</string>
+  <string name="pref_leg_shots_title">最少主线测射</string>
+  <string name="pref_leg_shots_summary">最少主线测射次数</string>
+  <string name="pref_recent_timeout_title">最近的数据超时</string>
+  <string name="pref_recent_timeout_summary">超时之后，数据不再是最近的 [s]</string>
+  <string name="pref_triple_shot_title">主线测量提示声</string>
+  <string name="pref_triple_shot_summary">主线测量识别声反馈</string>
+  <string name="pref_station_prefix_title">Compass测量点前缀</string>
+  <string name="pref_station_prefix_summary">输出测量点前缀[Compass]</string>
+  <string name="pref_compass_splays_title">Compass辐测</string>
+  <string name="pref_compass_splays_summary">输出辐测到Compass文件</string>
   <!-- UNUSED string name="pref_trobot_names_title">TopoRobot station names</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Station names are in TopoRobot style</string -->
-  <string name="pref_ortho_lrud_title">LRUD splay angle</string>
-  <string name="pref_ortho_lrud_summary">Minimum splay-leg angle for LRUD splays</string>
-  <string name="pref_lrud_vertical_title">UD splay clino</string>
-  <string name="pref_lrud_vertical_summary">LRUD minimum clino for up/down splays</string>
-  <string name="pref_lrud_horizontal_title">LR splay clino</string>
-  <string name="pref_lrud_horizontal_summary">LRUD maximum clino for left/right splays</string>
-  <string name="pref_survex_eol_title">Survex/Topo line termination</string>
-  <string name="pref_survex_eol_summary">Survex/Topo line termination</string>
-  <string name="pref_survex_splay_title">Survex splays station</string>
-  <string name="pref_survex_splay_summary">Add TO station to splays in Survex</string>
-  <string name="pref_survex_lrud_title">Survex/Therion LRUD</string>
-  <string name="pref_survex_lrud_summary">Add LRUD to Survex/Therion export</string>
-  <string name="pref_svg_grid_title">Grid</string>
-  <string name="pref_svg_grid_summary">Add grid to SVG/XVI/PNG export</string>
-  <string name="pref_svg_splays_title">SVG splays</string>
-  <string name="pref_svg_splays_summary">Include splays into SVG export</string>
+  <string name="pref_ortho_lrud_title">左右上下辐测角度</string>
+  <string name="pref_ortho_lrud_summary">左右上下中的最小辐测和主线的夹角</string>
+  <string name="pref_lrud_vertical_title">上下辐测角度</string>
+  <string name="pref_lrud_vertical_summary">左右上下中的上/下最小辐测角度</string>
+  <string name="pref_lrud_horizontal_title">左右辐测角度</string>
+  <string name="pref_lrud_horizontal_summary">左右上下中的左/右最小辐测角度</string>
+  <string name="pref_survex_eol_title">Survex/Topo线终止</string>
+  <string name="pref_survex_eol_summary">Survex/Topo线终止</string>
+  <string name="pref_survex_splay_title">Survex辐测测量点</string>
+  <string name="pref_survex_splay_summary">在Survex中添加测量点到辐测中</string>
+  <string name="pref_survex_lrud_title">Survex/Therion的左右上下</string>
+  <string name="pref_survex_lrud_summary">添加左右上下到Survex/Therion输出</string>
+  <string name="pref_svg_grid_title">参考线</string>
+  <string name="pref_svg_grid_summary">添加参考线到SVG/XVI/PNG输出</string>
+  <string name="pref_svg_splays_title">SVG 侧线</string>
+  <string name="pref_svg_splays_summary">将辐测线添加到SVG输出</string>
   <!-- UNUSED string name="pref_svg_in_html_title">SVG in HTML</string -->
   <!-- UNUSED string name="pref_svg_in_html_summary">Embed SVG export in HTML</string -->
-  <string name="pref_svg_pointstroke_title">Point stroke</string>
-  <string name="pref_svg_pointstroke_summary">Pen width of point symbols</string>
-  <string name="pref_svg_labelstroke_title">Label stroke</string>
-  <string name="pref_svg_labelstroke_summary">Pen width of labels</string>
-  <string name="pref_svg_linestroke_title">Line stroke</string>
-  <string name="pref_svg_linestroke_summary">Width of lines</string>
-  <string name="pref_svg_gridstroke_title">Grid stroke</string>
-  <string name="pref_svg_gridstroke_summary">Width of grid lines</string>
-  <string name="pref_svg_shotstroke_title">Shot stroke</string>
-  <string name="pref_svg_shotstroke_summary">Width of shot segments</string>
-  <string name="pref_svg_linedirstroke_title">Orientation tick</string>
-  <string name="pref_svg_linedirstroke_summary">Length of orientation ticks</string>
-  <string name="pref_svg_line_dir_title">Line orientation</string>
-  <string name="pref_svg_line_dir_summary">Add orientation-tick to orientable lines</string>
-  <string name="pref_kml_stations_title">KML/JSON stations</string>
-  <string name="pref_kml_stations_summary">Add stations to KML/GeoJSON export</string>
-  <string name="pref_kml_splays_title">KML/JSON splays</string>
-  <string name="pref_kml_splays_summary">Add splays to KML/GeoJSON export</string>
-  <string name="pref_csv_raw_title">Raw CSV</string>
-  <string name="pref_csv_raw_summary">Export raw data to CSV</string>
-  <string name="pref_csv_sep_title">CSV separator</string>
-  <string name="pref_csv_sep_summary">CSV fields separator</string>
-  <string name="pref_csv_eol_title">CSV eol</string>
-  <string name="pref_csv_eol_summary">CSV records separator</string>
+  <string name="pref_svg_pointstroke_title">点选择</string>
+  <string name="pref_svg_pointstroke_summary">点符号的笔画宽度</string>
+  <string name="pref_svg_labelstroke_title">标签选择</string>
+  <string name="pref_svg_labelstroke_summary">标签的笔画宽度</string>
+  <string name="pref_svg_linestroke_title">线选择</string>
+  <string name="pref_svg_linestroke_summary">线宽度</string>
+  <string name="pref_svg_gridstroke_title">网格选择</string>
+  <string name="pref_svg_gridstroke_summary">网格线宽度</string>
+  <string name="pref_svg_shotstroke_title">测射线选择</string>
+  <string name="pref_svg_shotstroke_summary">测射线段宽度</string>
+  <string name="pref_svg_linedirstroke_title">标记方向</string>
+  <string name="pref_svg_linedirstroke_summary">标记方向的长度</string>
+  <string name="pref_svg_line_dir_title">线方向</string>
+  <string name="pref_svg_line_dir_summary">添加方向标记到线方向</string>
+  <string name="pref_kml_stations_title">KML/JSON 测量点</string>
+  <string name="pref_kml_stations_summary">添加测量点到KML/GeoJSON输出</string>
+  <string name="pref_kml_splays_title">KML/JSON 辐测</string>
+  <string name="pref_kml_splays_summary">添加辐测线到KML/GeoJSON输出</string>
+  <string name="pref_csv_raw_title">原 CSV</string>
+  <string name="pref_csv_raw_summary">输出原始数据到CSV</string>
+  <string name="pref_csv_sep_title">CSV分隔符</string>
+  <string name="pref_csv_sep_summary">CSV 分隔符字段</string>
+  <string name="pref_csv_eol_title">CSV 表达语言</string>
+  <string name="pref_csv_eol_summary">CSV 记录分隔符</string>
 
-  <string name="pref_sock_type_title">Socket</string>
-  <string name="pref_sock_type_summary">Bluetoot socket type</string>
+  <string name="pref_sock_type_title">信道</string>
+  <string name="pref_sock_type_summary">蓝牙信道类型</string>
   <!-- UNUSED string name="pref_device_type_title">Disto type</string -->
   <!-- UNUSED string name="pref_device_type_summary">Model of the DistoX</string -->
   <!-- UNUSED string name="pref_comm_retry_title">Connection retry</string -->
   <!-- UNUSED string name="pref_comm_retry_summary">Connection retries number</string -->
   <!-- UNUSED string name="pref_comm_retry_dialogtitle">Connection retries number</string -->
-  <string name="pref_wait_laser_title">Laser pause</string>
-  <string name="pref_wait_laser_summary">Pause after turning the laser on [ms]</string>
-  <string name="pref_wait_shot_title">Shot pause</string>
-  <string name="pref_wait_shot_summary">Pause after measuring a shot [ms]</string>
-  <string name="pref_wait_data_title">Data pause</string>
-  <string name="pref_wait_data_summary">Pause after a data download [ms]</string>
-  <string name="pref_wait_conn_title">Data ready wait delay</string>
-  <string name="pref_wait_conn_summary">Delay waiting for data to be ready [ms]</string>
-  <string name="pref_conn_mode_title">Data connection mode</string>
-  <string name="pref_conn_mode_summary">Mode of DistoX-connection for data download</string>
-  <string name="pref_auto_reconnect_title">Auto reconnect</string>
-  <string name="pref_auto_reconnect_summary">Reconnect when connection is lost</string>
-  <string name="pref_auto_pair_title">Auto pairing</string>
-  <string name="pref_auto_pair_summary">Pair with device after scan</string>
-  <string name="pref_head_tail_title">Number of new data</string>
-  <string name="pref_head_tail_summary">Get the number of new data before downloading them</string>
-  <string name="pref_socket_delay_title">Connection delay</string>
-  <string name="pref_socket_delay_summary">Connection delay to allow pairing [0.1 sec]</string>
-  <string name="pref_z6_workaround_title">Z6 workaround</string>
-  <string name="pref_z6_workaround_summary">Z6 workaround data-download</string>
+  <string name="pref_wait_laser_title">激光暂停</string>
+  <string name="pref_wait_laser_summary">打开激光后暂停 [ms]</string>
+  <string name="pref_wait_shot_title">测量暂停</string>
+  <string name="pref_wait_shot_summary">测量完一个测射后暂停 [ms]</string>
+  <string name="pref_wait_data_title">数据暂停</string>
+  <string name="pref_wait_data_summary">下载每一个数据后暂停 [ms]</string>
+  <string name="pref_wait_conn_title">数据就绪等待延迟</string>
+  <string name="pref_wait_conn_summary">延迟等待数据准备好 [ms]</string>
+  <string name="pref_conn_mode_title">数据连接方式</string>
+  <string name="pref_conn_mode_summary">数据下载的远程连接模式</string>
+  <string name="pref_auto_reconnect_title">自动连线</string>
+  <string name="pref_auto_reconnect_summary">当连接丢失时重新连接</string>
+  <string name="pref_auto_pair_title">自动配对</string>
+  <string name="pref_auto_pair_summary">扫描后与设备配对</string>
+  <string name="pref_head_tail_title">新数据数量</string>
+  <string name="pref_head_tail_summary">在下载新数据之前获取它们的数量</string>
+  <string name="pref_socket_delay_title">连接延时</string>
+  <string name="pref_socket_delay_summary">允许配对的连接延迟 [0.1 秒]</string>
+  <string name="pref_z6_workaround_title">Z6 工作区</string>
+  <string name="pref_z6_workaround_summary">Z6 工作区数据下载</string>
   <string name="pref_crs_title">C R S </string>
-  <string name="pref_crs_summary">CRS name, as in Proj4</string>
+  <string name="pref_crs_summary">CRS 名称,类属于Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Use GPSAveraging</string -->
 
-  <string name="pref_plot_screen_title">SKETCH</string>
-  <string name="pref_tool_line_title">LINES</string>
-  <string name="pref_tool_point_title">POINTS</string>
-  <string name="pref_location_title">LOCATION</string>
-  <string name="pref_accuracy_title">ACCURACY</string>
-  <string name="pref_shot_data_title">SHOT DATA</string>
-  <string name="pref_shot_units_title">UNITS</string>
-  <string name="pref_cwd_title">Work Directory</string>
+  <string name="pref_plot_screen_title">草图</string>
+  <string name="pref_tool_line_title">线</string>
+  <string name="pref_tool_point_title">点</string>
+  <string name="pref_location_title">位置</string>
+  <string name="pref_accuracy_title">精度</string>
+  <string name="pref_shot_data_title">测射数据</string>
+  <string name="pref_shot_units_title">单位</string>
+  <string name="pref_cwd_title">工作目录</string>
   <!-- UNUSED string name="pref_cwd_summary">TopoDroid work directory</string -->
-  <string name="pref_pt_color_map_title">PocketTopo color map</string>
-  <string name="pref_pt_color_map_summary">PocketTopo color map (PocketTopo import)</string>
-  <string name="pref_text_size_title">Text size</string>
-  <string name="pref_text_size_summary">Size of text in lists</string>
-  <string name="pref_closeness_title">Selection radius</string>
-  <string name="pref_closeness_message">Sketch item selection radius</string>
-  <string name="pref_eraseness_title">Eraser size</string>
-  <string name="pref_eraseness_message">Sketch item erasing radius</string>
-  <string name="pref_min_shift_title">Shift sensitivity</string>
-  <string name="pref_min_shift_message">Maximum shift speed [pxl/step]</string>
-  <string name="pref_pointing_title">Pointing tolerance</string>
-  <string name="pref_pointing_message">Touch-down/lift-up tolerance for point selection</string>
-  <string name="pref_dash_splay_title">Dash coherence</string>
-  <string name="pref_dash_splay_message">Splays dashed coherently in plan and profile</string>
-  <string name="pref_vert_splay_title">Splay dash clino-threshold</string>
-  <string name="pref_vert_splay_message">Minimum clinof for dashed splays</string>
-  <string name="pref_horiz_splay_title">Splay dash azimuth-threshold</string>
-  <string name="pref_horiz_splay_message">Minimum off azimuth for dashed splays</string>
-  <string name="pref_section_splay_title">Splay dash angle-threshold</string>
-  <string name="pref_section_splay_message">Minimum angle with the section plane for dashed splays</string>
-  <string name="pref_data_backup_title">Data auto-export</string>
-  <string name="pref_data_backup_summary">Automatic data export (need default format)</string>
-  <string name="pref_fixed_origin_title">Sketch origin</string>
-  <string name="pref_fixed_origin_summary">Fixed sketch origin</string>
-  <string name="pref_shared_xsections_title">Shared x-sections</string>
-  <string name="pref_shared_xsections_summary">At-station x-sections shared among sketches</string>
-  <string name="xsections_shared">Shared X-sections</string>
-  <string name="xsections_private">Private X-sections</string>
-  <string name="pref_reduce_angle_title">Straightening angle</string>
-  <string name="pref_reduce_angle_summary">Minimal corner-angle for straightened lines</string>
+  <string name="pref_pt_color_map_title">PocketTopo地图颜色</string>
+  <string name="pref_pt_color_map_summary">PocketTopo地图颜色(PocketTopo输入)</string>
+  <string name="pref_text_size_title">字体大小</string>
+  <string name="pref_text_size_summary">列表中字体大小</string>
+  <string name="pref_closeness_title">选择边界范围</string>
+  <string name="pref_closeness_message">草图项目选择半径</string>
+  <string name="pref_eraseness_title">橡皮擦尺寸</string>
+  <string name="pref_eraseness_message">素描项目擦除半径</string>
+  <string name="pref_min_shift_title">灵敏度变化</string>
+  <string name="pref_min_shift_message">最大的转变速度 [pxl/step]</string>
+  <string name="pref_pointing_title">点公差</string>
+  <string name="pref_pointing_message">点选择的触控/升降公差</string>
+  <string name="pref_dash_splay_title">虚线一致性</string>
+  <string name="pref_dash_splay_message">辐测的虚线连续的分布在平面和侧面</string>
+  <string name="pref_vert_splay_title">辐测虚线角度临界值</string>
+  <string name="pref_vert_splay_message">最小辐测虚线角度</string>
+  <string name="pref_horiz_splay_title">辐测虚线方位角临界值</string>
+  <string name="pref_horiz_splay_message">最小辐测虚线方位角度</string>
+  <string name="pref_section_splay_title">辐测虚线仰角临界值</string>
+  <string name="pref_section_splay_message">f辐测虚线剖面最小角度</string>
+  <string name="pref_data_backup_title">数据自动输出</string>
+  <string name="pref_data_backup_summary">自动输出数据 (需要设置默认格式)</string>
+  <string name="pref_fixed_origin_title">草图原点</string>
+  <string name="pref_fixed_origin_summary">修复草图原点</string>
+  <string name="pref_shared_xsections_title">共享横截面</string>
+  <string name="pref_shared_xsections_summary">在不同草图上共享同测量点的横截面</string>
+  <string name="xsections_shared">共享横截面</string>
+  <string name="xsections_private">私有横截面</string>
+  <string name="pref_reduce_angle_title">j矫正角度</string>
+  <string name="pref_reduce_angle_summary">直线的最小转角</string>
 
 
   <string name="pref_survey_stations_title">Stations policy</string>
@@ -1140,10 +1140,10 @@
 
   <!-- UNUSED string name="pref_plan_vthr_title">Splay plan-view threshold</string -->
   <!-- UNUSED string name="pref_plan_vthr_message">Hide splays with high inclination in the plan-view</string -->
-  <string name="pref_init_station_title">Initial station name</string>
-  <string name="pref_init_station_summary">Default initial station name</string>
-  <string name="pref_station_names_title">Station names</string>
-  <string name="pref_station_names_summary">Type of station names</string>
+  <string name="pref_init_station_title">最初的测量点名字</string>
+  <string name="pref_init_station_summary">默认初始测量点名</string>
+  <string name="pref_station_names_title">测量点名称</string>
+  <string name="pref_station_names_summary">测量点名称类型</string>
 
   <string name="pref_hthr_title">Cross-section h-threshold</string>
   <string name="pref_hthr_summary">Threshold for horizontal cross-sections</string>
@@ -1319,33 +1319,33 @@
   <string name="pref_algo_min_delta_title">Min-algo delta</string>
   <string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string>
 
-  <string name="pref_log_stream_summary" translatable="false">Log output stream</string>
-  <string name="pref_log_stream_title" translatable="false">Log stream</string>
-  <string name="pref_log_append" translatable="false">append logs</string>
-  <string name="pref_log_bt" translatable="false">Bluetooth</string>
-  <string name="pref_log_bezier" translatable="false">Bezier curves</string>
-  <string name="pref_log_calib" translatable="false">Calibration</string>
-  <string name="pref_log_comm" translatable="false">BT communication</string>
+  <string name="pref_log_stream_summary" translatable="false">日志输出流</string>
+  <string name="pref_log_stream_title" translatable="false">日志流</string>
+  <string name="pref_log_append" translatable="false">添加日志</string>
+  <string name="pref_log_bt" translatable="false">蓝牙</string>
+  <string name="pref_log_bezier" translatable="false">贝塞尔曲线</string>
+  <string name="pref_log_calib" translatable="false">校准</string>
+  <string name="pref_log_comm" translatable="false">蓝牙通信</string>
   <string name="pref_log_csurvey" translatable="false">cSurvey</string>
-  <string name="pref_log_data" translatable="false">Survey data</string>
-  <string name="pref_log_db" translatable="false">Database</string>
-  <string name="pref_log_debug" translatable="false">Debug</string>
-  <string name="pref_log_device" translatable="false">Device window</string>
+  <string name="pref_log_data" translatable="false">测量数据</string>
+  <string name="pref_log_db" translatable="false">数据库</string>
+  <string name="pref_log_debug" translatable="false">调试</string>
+  <string name="pref_log_device" translatable="false">设备窗口</string>
   <string name="pref_log_distox" translatable="false">DistoX</string>
-  <string name="pref_log_err" translatable="false">Error</string>
-  <string name="pref_log_fixed" translatable="false">GPS points</string>
-  <string name="pref_log_input" translatable="false">User input</string>
-  <string name="pref_log_io" translatable="false">Sketch i/o</string>
-  <string name="pref_log_loc" translatable="false">Location</string>
-  <string name="pref_log_num" translatable="false">Data reduction</string>
-  <string name="pref_log_path" translatable="false">File paths</string>
-  <string name="pref_log_perm" translatable="false">Permissions</string>
-  <string name="pref_log_photo" translatable="false">Photo</string>
-  <string name="pref_log_plot" translatable="false">Sketches</string>
-  <string name="pref_log_proto" translatable="false">DistoX protocol</string>
+  <string name="pref_log_err" translatable="false">错误</string>
+  <string name="pref_log_fixed" translatable="false">GPS 点</string>
+  <string name="pref_log_input" translatable="false">用户导入</string>
+  <string name="pref_log_io" translatable="false">草图 输入/输出</string>
+  <string name="pref_log_loc" translatable="false">位置</string>
+  <string name="pref_log_num" translatable="false">数据简化</string>
+  <string name="pref_log_path" translatable="false">文件路径</string>
+  <string name="pref_log_perm" translatable="false">许可权限</string>
+  <string name="pref_log_photo" translatable="false">照片</string>
+  <string name="pref_log_plot" translatable="false">草图</string>
+  <string name="pref_log_proto" translatable="false">DistoX 协议</string>
   <string name="pref_log_ptopo" translatable="false">PocketTopo</string>
-  <string name="pref_log_sensor" translatable="false">Sensors</string>
-  <string name="pref_log_shot" translatable="false">Shots</string>
+  <string name="pref_log_sensor" translatable="false">传感器</string>
+  <string name="pref_log_shot" translatable="false">测射</string>
   <!-- UNUSED string name="pref_log_sync" translatable="false">Cosurveying</string -->
   <string name="pref_log_survey" translatable="false">Surveys</string>
   <string name="pref_log_therion" translatable="false">Therion</string>
@@ -1365,41 +1365,41 @@
   <!-- UNUSED string name="alt_ortho">orthometric</string -->
   <!-- UNUSED string name="splay_extend">estimate splay extend</string -->
 
-    <string name="perms_mandatory">TopoDroid cannot run without these permissions:</string>
-    <string name="perms_optional">TopoDroid may fail without these permissions:</string>
+    <string name="perms_mandatory">TopoDroid没有这些权限无法运行:</string>
+    <string name="perms_optional">TopoDroid没有这些权限可能会失败:</string>
     <!-- UNUSED string name="perm_required">Required permissions are now granted. Restart TopoDroid</string -->
     <!-- UNUSED string name="perm_consider">Consider granting permission: </string -->
     <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">
-\nTopoDroid is an Open Source Android app for surveying caves with the DistoX.
-\n\nNo warranty: by using it you agree that the author is not responsible for any loss of data you might incur or damage whatsoever.
-\n\nHelp: menu "help"
-\nMan pages: MENU key
-\nDocs: http://sites.google.com/site/speleoapps
-\nComments, bug reports, feature requests: marco.corvi@gmail.com
+\nTopoDroid是一个专门配合DistoX使用的开源的免费的洞穴测量软件.
+\n\n免责声明: 要使用这个软件您必须同意作者将不对可能引起的的数据丢失或者损坏负责.
+\n\n帮助: 请选择菜单的"帮助"
+\n说明页: 菜单键
+\n说明文件: http://sites.google.com/site/speleoapps
+\n注解, 错误报告, 特殊功能请联系: luohongjie2012@gmail.com \n中文版编辑张远海、罗宏杰。
 \n
     </string>
 
-  <string name="firmware_title">Firmware Updater</string>
-  <string name="firmware_file_title">Firmware Files</string>
+  <string name="firmware_title">固件升级</string>
+  <string name="firmware_file_title">固件文件</string>
   <string name="firmware_text">
-\n[1] Select either to upload a firmware or to dump the firmware to a file.
-\n[2] Choose the file to upload or save. Firmware files are in the bin directory.
-\n[3] Make sure the upload firmware version is compatible with the DistoX hardware version.
-\n[4] Put the DistoX2 in bootloader mode: press PLUS and MINUS while switching on with DIST key.
-\n[5] Tap the OK button.
-\n[6] Confirm to continue and wait till the process is done.
-\n[7] Turn off the DistoX2 with the CLR key.
+\n[1] 选择其他来升级固件或者导出固件成为文件.
+\n[2] 选择要升级或者保存的文件. 固件文件已经在bin文件夹.
+\n[3] 确认固件版本与DistoX硬件版本相匹配.
+\n[4] 将DistoX2置于引导加载程序模式:使用DIST键打开时按加号和减号。
+\n[5] 点击OK按钮.
+\n[6] 确认继续并等待流程完成。
+\n[7] 按住CLR键关闭DistoX2。
 \n
    </string>
-   <string name="firmware_none">no firmware file</string>
-   <string name="firmware_file">firmware file</string>
-   <string name="firmware_file_exists">Existing firmware file</string>
-   <string name="firmware_file_missing">Missing firmware file</string>
-   <string name="ask_dump">Dump firmware?</string>
-   <string name="ask_upload">Upload firmware?</string>
-   <string name="ask_upload_not_compatible">Firmware file does not look correct.\nUpload anyways?</string>
-   <string name="firmware_file_dumped">Saved firmware file %1$s size %2$d</string>
-   <string name="firmware_file_uploaded">Uploaded firmware file %1$s written %2$d / %3$d</string>
+   <string name="firmware_none">无固件文件</string>
+   <string name="firmware_file">固件文件</string>
+   <string name="firmware_file_exists">现有固件文件</string>
+   <string name="firmware_file_missing">固件文件缺失</string>
+   <string name="ask_dump">删除固件?</string>
+   <string name="ask_upload">升级固件?</string>
+   <string name="ask_upload_not_compatible">固件文件不正确.\n强行升级??</string>
+   <string name="firmware_file_dumped">保存固件文件 %1$s size %2$d</string>
+   <string name="firmware_file_uploaded">升级固件文件 %1$s written %2$d / %3$d</string>
    
 </resources>
