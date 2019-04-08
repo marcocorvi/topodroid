@@ -517,6 +517,7 @@
     <!-- UNUSED string name="stat_shot">Tiri  %1$d,   Doppi %2$d,   Superficie %3$d</string -->
     <string name="stat_splay">Splay %1$d # %2$d</string>
     <string name="stat_station">Capisaldi %1$d # %2$d</string>
+    <!-- TODO string name="stat_dangling">Dangling shots %1$d %2$.1f %3$s</string -->
     <string name="stat_surface">Tiri di superficie %1$d # %2$d %3$.1f %4$s</string>
     <!-- OK string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]</string -->
     <string name="stat_angle_error">Errori angolari %1$.2f ± %2$.2f"</string>

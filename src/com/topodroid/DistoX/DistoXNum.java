@@ -40,18 +40,22 @@ class DistoXNum
   private float mLength;  // survey length 
   private float mExtLen;  // survey "extended" length (on extended profile)
   private float mProjLen; // survey projected length (on horiz plane)
+  private float mUnattachedLength;
   private int mDupNr;  // number of duplicate shots
   private int mSurfNr; // number of surface shots
 
   private float mErr0; // angular error distribution
   private float mErr1;
   private float mErr2;
+  private int mLenCnt;
 
   private void resetStats()
   {
+    mLenCnt = 0;
     mLength  = 0.0f;
     mExtLen  = 0.0f;
     mProjLen = 0.0f;
+    mUnattachedLength = 0.0f;
     mDupNr   = 0;
     mSurfNr  = 0;
     mErr0 = mErr1 = mErr2 = 0;
@@ -80,6 +84,7 @@ class DistoXNum
       mLength  += l;
       mExtLen  += e;
       mProjLen += h;
+      mLenCnt ++;
     }
   }
 
@@ -93,6 +98,7 @@ class DistoXNum
       mProjLen += h;
       if ( v < mZmin ) { mZmin = v; }
       if ( v > mZmax ) { mZmax = v; }
+      mLenCnt ++;
     }
   }
 
@@ -106,7 +112,7 @@ class DistoXNum
   private ArrayList<NumSplay>   mSplays;
   private ArrayList<String>     mClosures;
   private ArrayList<NumNode>    mNodes;
-
+  private ArrayList<DBlock>     mUnattachedShots;
 
   int stationsNr()  { return mStations.size(); }
   int shotsNr()     { return mShots.size(); }
@@ -114,12 +120,14 @@ class DistoXNum
   int surfaceNr()   { return mSurfNr; }
   int splaysNr()    { return mSplays.size(); }
   int loopNr()      { return mClosures.size(); }
+  int unattachedShotsNr() { return mUnattachedShots.size(); }
 
   float surveyLength()  { return mLength; }
   float surveyExtLen()  { return mExtLen; }
   float surveyProjLen() { return mProjLen; }
   float surveyTop()     { return -mZmin; } // top must be positive
   float surveyBottom()  { return -mZmax; } // bottom must be negative
+  float unattachedLength() { return mUnattachedLength; }
 
   float angleErrorMean()   { return mErr1; } // radians
   float angleErrorStddev() { return mErr2; } // radians
@@ -732,7 +740,7 @@ class DistoXNum
       HashMap< String, Float > depths = new HashMap< String, Float >();
       for ( DBlock blk : data ) { // prepare stations depths
 	if ( blk.mFrom != null && blk.mFrom.length() > 0 && blk.mTo != null && blk.mTo.length() > 0 ) {
-          Log.v("DistoX", blk.mFrom + " depth " + blk.mDepth );
+          // Log.v("DistoX", blk.mFrom + " depth " + blk.mDepth );
           // depths.putIfAbsent( blk.mFrom, new Float( blk.mDepth ) );
           if ( ! depths.containsKey(blk.mFrom) ) depths.put( blk.mFrom, new Float( blk.mDepth ) );
         }
@@ -748,9 +756,9 @@ class DistoXNum
 	  }
         }
       }
-      if ( depth_error ) {
-        // TDToast.make( R.string.depth_error );
-      }
+      // if ( depth_error ) {
+      //   TDToast.make( R.string.depth_error );
+      // }
     }
 
     resetBBox();
@@ -767,6 +775,7 @@ class DistoXNum
     mSplays   = new ArrayList<>();
     mClosures = new ArrayList<>();
     mNodes    = new ArrayList<>();
+    mUnattachedShots = new ArrayList<>();
 
     TriShot lastLeg = null;
     List<TriShot> tmpshots   = new ArrayList<>();
@@ -1036,7 +1045,6 @@ class DistoXNum
               // float length = ts.d();
 	      // if ( iext == 0 ) length = TDMath.sqrt( length*length - ts.h()*ts.h() );
               addToStats( ts.duplicate, ts.surface, ts.d(), ((iext == 0)? Math.abs(ts.v()) : ts.d()), ts.h() );
-
               ts.used = true;
               repeat = true;
             }
@@ -1081,7 +1089,7 @@ class DistoXNum
             // }
 
             updateBBox( sf );
-            addToStats( ts.duplicate, ts.surface, Math.abs(ts.d() ), ts.h(), sf.v );
+            addToStats( ts.duplicate, ts.surface, Math.abs(ts.d() ), Math.abs( (iext == 0)? ts.v() : ts.d() ), Math.abs(ts.h()), sf.v );
 
             // FIXME is st.mAnomaly OK ?
             // N.B. was new NumShot(st, sf, ts.block, -1, mDecl); // FIXME check -anomaly
@@ -1170,7 +1178,16 @@ class DistoXNum
 
     // long millis_end = System.currentTimeMillis() - millis_start;
     // Log.v("DistoX", "Data reduction " + millis_end + " msec" );
-
+    mUnattachedLength = 0;
+    for ( TriShot ts : tmpshots ) {
+      if ( ! ts.used ) {
+        // Log.v("DistoXN", "unattached shot " + ts.from + " " + ts.to + " id " + ts.blocks.get(0).mId );
+        mUnattachedShots.add( ts.blocks.get(0) );
+        mUnattachedLength += ts.blocks.get(0).mLength;
+      }
+    }
+    // Log.v("DistoXN", "unattached shot length " + mUnattachedLength );
+    
     return (mShots.size() + nrSiblings == tmpshots.size() );
   }
 

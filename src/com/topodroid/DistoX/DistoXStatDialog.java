@@ -78,10 +78,13 @@ class DistoXStatDialog extends MyDialog
         TextView mTextSurface   = (TextView) findViewById(R.id.stat_surface);
         TextView mTextSplay     = (TextView) findViewById(R.id.stat_splay);
         TextView mTextStation   = (TextView) findViewById(R.id.stat_station);
+        TextView mTextDangling  = (TextView) findViewById(R.id.stat_dangling);
         TextView mTextLoop      = (TextView) findViewById(R.id.stat_loop);
         TextView mTextComponent = (TextView) findViewById(R.id.stat_component);
 
         TextView mTextAngleErr  = (TextView) findViewById(R.id.text_stat_angle_error);
+
+        // mNum.shotsNr() = mNum.stationsNr() - mNum.loopsNr()
 
         mTextLeg.setText( String.format( res.getString(R.string.stat_leg),
           mStat.countLeg, mStat.lengthLeg * unit, mStat.extLength * unit, mStat.planLength * unit, unit_str ) );
@@ -93,6 +96,8 @@ class DistoXStatDialog extends MyDialog
           mStat.countSplay, mNum.splaysNr() ) );
         mTextStation.setText( String.format( res.getString(R.string.stat_station),
           mStat.countStation, mNum.stationsNr() ) );
+        mTextDangling.setText( String.format( res.getString(R.string.stat_dangling),
+          mNum.unattachedShotsNr(), mNum.unattachedLength() * unit, unit_str ) );
 
         mTextLoop.setText( String.format( res.getString(R.string.stat_cycle), mStat.countLoop ) );
         mTextComponent.setText( String.format( res.getString(R.string.stat_component), mStat.countComponent ) );

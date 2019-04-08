@@ -521,6 +521,7 @@
     <!-- UNUSED string name="stat_shot">Замеров:  %1$d,   Дублированные %2$d,   Поверхность %3$d</string -->
     <string name="stat_splay">Сплеев: %1$d # %2$d</string>
     <string name="stat_station">Пикетов: %1$d # %2$d</string>
+    <!-- TODO string name="stat_dangling">Dangling shots %1$d %2$.1f %3$s</string -->
     <string name="stat_surface">Поверхн. пикеты %1$d # %2$d длина: %3$.1f %4$s</string>
     <string name="stat_wens">З %1$.0f  В %2$.0f  С %3$.0f  Ю %4$.0f [%5$s]"</string>
     <string name="stat_angle_error">Угловые ошибки %1$.2f ± %2$.2f"</string>

@@ -518,6 +518,7 @@
     <!-- UNUSED string name="stat_shot">Отсечки  %1$d,   Дублирани %2$d,   Повърхностни %3$d</string -->
     <string name="stat_splay">Странични %1$d # %2$d</string>
     <string name="stat_station">Репери %1$d # %2$d</string>
+    <!-- TODO string name="stat_dangling">Dangling shots %1$d %2$.1f %3$s</string -->
     <string name="stat_surface">Повърхн. отсечки %1$d # %2$d %3$.1f %4$s</string>
     <string name="stat_wens">З %1$.0f,  И %2$.0f,  С %3$.0f,  Ю %4$.0f [%5$s]"</string>
     <string name="stat_angle_error">Ъглова грешка %1$.2f ± %2$.2f"</string>

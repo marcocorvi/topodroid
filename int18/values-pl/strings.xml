@@ -530,6 +530,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="stat_shot">Strzały  %1$d,   Duplicate %2$d,   Surface %3$d</string -->
     <string name="stat_splay">Domiary %1$d # %2$d</string>
     <string name="stat_station">Stacje %1$d # %2$d</string>
+    <!-- TODO string name="stat_dangling">Dangling shots %1$d %2$.1f %3$s</string -->
     <string name="stat_surface">STrzały powierzchniowe %1$d # %2$d %3$.1f %4$s</string>
     <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]</string>
     <string name="stat_angle_error">Błąd kąta %1$.2f ± %2$.2f</string>

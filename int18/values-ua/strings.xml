@@ -520,6 +520,7 @@
     <!-- UNUSED string name="stat_shot">Пікети  %1$d,   Дубльовані %2$d,   Поверхня %3$d</string -->
     <string name="stat_splay">Бокові заміри %1$d # %2$d</string>
     <string name="stat_station">Пікети %1$d # %2$d</string>
+    <!-- TODO string name="stat_dangling">Dangling shots %1$d %2$.1f %3$s</string -->
     <string name="stat_surface">Поверхн. пікети %1$d # %2$d довжина: %3$.1f %4$s</string>
     <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]"</string>
     <string name="stat_angle_error">Кутові помилки %1$.2f ± %2$.2f"</string>

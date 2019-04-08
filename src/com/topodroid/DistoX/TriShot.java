@@ -11,10 +11,11 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 // import java.util.List;
 
-// import android.util.Log;
 
 class TriShot
 {
@@ -92,7 +93,12 @@ class TriShot
   // horizontal length (good only for DATAMODE_NORMAL)
   float h()
   {
-    return mAvgLeg.length() * TDMath.cosd( mAvgLeg.clino() );
+    float hh = mAvgLeg.length() * TDMath.cosd( mAvgLeg.clino() );
+    if ( hh < 0 ) {
+      Log.v("DIistoXN", "block " + blocks.get(0).mId + " neg H " + hh );
+    }
+    return hh;
+    // return mAvgLeg.length() * TDMath.cosd( mAvgLeg.clino() );
   }
 
   // vertical length - with sign (only for DATAMODE_NORMAL)

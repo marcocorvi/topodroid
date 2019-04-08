@@ -521,6 +521,7 @@
     <!-- UNUSED string name="stat_shot">Măsurători  %1$d,   Duplicate %2$d,   Surface %3$d</string -->
     <string name="stat_splay">Radieri %1$d # %2$d</string>
     <string name="stat_station">Stații %1$d # %2$d</string>
+    <!-- TODO string name="stat_dangling">Dangling shots %1$d %2$.1f %3$s</string -->
     <string name="stat_surface">Măsurători suprafață %1$d # %2$d %3$.1f %4$s</string>
     <string name="stat_wens">V %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]</string>
     <string name="stat_angle_error">Erori unghi %1$.2f ± %2$.2f</string>

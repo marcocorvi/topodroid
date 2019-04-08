@@ -2056,7 +2056,7 @@ class TDExporter
   // }
 
   // -----------------------------------------------------------------------
-  // COMPASS EXPORT 
+  // COMPASS EXPORT DAT
   // commented flag not supported
 
   static private LRUDprofile computeLRUDprofile( DBlock b, List<DBlock> list, boolean at_from )

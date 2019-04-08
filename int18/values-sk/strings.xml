@@ -532,6 +532,7 @@
     <!-- UNUSED string name="stat_shot">Merania %1$d,   Opakované %2$d,   Povrchové %3$d</string -->
     <string name="stat_splay">Pomocné zámery %1$d # %2$d</string>
     <string name="stat_station">Staničenia %1$d # %2$d</string>
+    <!-- TODO string name="stat_dangling">Dangling shots %1$d %2$.1f %3$s</string -->
     <string name="stat_surface">Povrchové zámery (počet-dĺžka) %1$d # %2$d %3$.1f %4$s</string>
     <string name="stat_wens">Z - %1$.0f  V - %2$.0f  S - %3$.0f  J - %4$.0f [%5$s]</string>
     <string name="stat_angle_error">Uhlové chyby %1$.2f ± %2$.2f"</string>

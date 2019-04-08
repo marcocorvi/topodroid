@@ -518,6 +518,7 @@
     <!-- UNUSED string name="stat_shot">Mérések  %1$d,   Megkettőzött %2$d,   Felszín %3$d</string -->
     <string name="stat_splay">Segédpontok %1$d # %2$d</string>
     <string name="stat_station">Mérési pontok %1$d # %2$d</string>
+    <!-- TODO string name="stat_dangling">Dangling shots %1$d %2$.1f %3$s</string -->
     <string name="stat_surface">Felszíni mérések %1$d # %2$d %3$.1f %4$s</string>
     <string name="stat_wens">Ny %1$.0f  K %2$.0f  É %3$.0f  D %4$.0f [%5$s]</string>
     <string name="stat_angle_error">Szöghibák %1$.2f ± %2$.2f</string>
