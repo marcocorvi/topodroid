@@ -1104,37 +1104,37 @@
   <string name="pref_reduce_angle_summary">直线的最小转角</string>
 
 
-  <string name="pref_survey_stations_title">Stations policy</string>
-  <string name="pref_survey_stations_summary">Stations automatic naming policy</string>
-  <string name="pref_accel_thr_title">Acceleration tolerance</string>
-  <string name="pref_accel_thr_summary">Percent tolerance for the shots acceleration</string>
-  <string name="pref_mag_thr_title">Magnetic field tolerance</string>
-  <string name="pref_mag_thr_summary">Percent tolerance for the shots magnetic field</string>
-  <string name="pref_dip_thr_title">Magnetic dip tolerance</string>
-  <string name="pref_dip_thr_summary">Tolerance over the shots magnetic dip</string>
+  <string name="pref_survey_stations_title">测量点命名策略</string>
+  <string name="pref_survey_stations_summary">测量点自动命名策略</string>
+  <string name="pref_accel_thr_title">加速度容限</string>
+  <string name="pref_accel_thr_summary">测射加速度的容差百分比</string>
+  <string name="pref_mag_thr_title">磁场容差</string>
+  <string name="pref_mag_thr_summary">测射磁场的容差百分比</string>
+  <string name="pref_dip_thr_title">磁偏角容差</string>
+  <string name="pref_dip_thr_summary">公差超过测射磁偏角</string>
 
-  <string name="pref_leg_title">Leg tolerance</string>
-  <string name="pref_leg_summary">Tolerance among the shots of a leg</string>
-  <string name="pref_max_shot_title">Maximum shot length</string>
-  <string name="pref_max_shot_summary">Maximum length of shooting [m]</string>
-  <string name="pref_min_leg_title">Minimum leg length</string>
-  <string name="pref_min_leg_summary">Minimum length of legs [m]</string>
-  <string name="pref_backsight_title">Backsight</string>
-  <string name="pref_backsight_summary">Backsight fields in the new-shot dialog</string>
-  <string name="pref_backshot_title">Backshot DistoX</string>
-  <string name="pref_backshot_summary">DistoX in backshot mode</string>
-  <string name="pref_prev_next_title">Prev/Next buttons</string>
-  <string name="pref_prev_next_summary">Prev/Next buttons in the shot dialog</string>
+  <string name="pref_leg_title">主线容差</string>
+  <string name="pref_leg_summary">容差在主线测射之间</string>
+  <string name="pref_max_shot_title">最大测射距离</string>
+  <string name="pref_max_shot_summary">最大测量的距离 [m]</string>
+  <string name="pref_min_leg_title">最小主线距离</string>
+  <string name="pref_min_leg_summary">最小主线测量距离 [m]</string>
+  <string name="pref_backsight_title">后测</string>
+  <string name="pref_backsight_summary">新建测射对话中的后测字符</string>
+  <string name="pref_backshot_title">DistoX回测</string>
+  <string name="pref_backshot_summary">DistoX在回测模式</string>
+  <string name="pref_prev_next_title">上一步/下一步 按钮</string>
+  <string name="pref_prev_next_summary">测线对话中的上一步/下一步 按钮</string>
   <!-- UNUSED string name="pref_mag_anomaly_title">Magnetic Anomaly</string -->
   <!-- UNUSED string name="pref_mag_anomaly_summary">Compensate Local Magnetic Anomaly</string -->
-  <string name="pref_azimuth_manual_title">Fixed extend reference</string>
-  <string name="pref_azimuth_manual_summary">Fixed R/L or settable extend reference</string>
+  <string name="pref_azimuth_manual_title">固定延展参考</string>
+  <string name="pref_azimuth_manual_summary">固定 右/左 或者可变延展参考</string>
 
-  <string name="pref_team_title">Team</string>
-  <string name="pref_team_summary">Default surveying team</string>
+  <string name="pref_team_title">团队</string>
+  <string name="pref_team_summary">默认测量团队</string>
 
-  <string name="pref_ethr_title">Splay vertical threshold</string>
-  <string name="pref_ethr_summary">Region of vert. extend (splays)</string>
+  <string name="pref_ethr_title">测线垂直临界值</string>
+  <string name="pref_ethr_summary">垂直延展(测线)的范围</string>
   <string name="pref_vthr_title">Leg WENS threshold</string>
   <string name="pref_vthr_summary">Leg LRUD/WENS clino threshold</string>
 
