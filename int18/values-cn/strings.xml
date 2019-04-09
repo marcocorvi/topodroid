@@ -24,7 +24,7 @@
 如果您在DistoX连接上遇到问题，请尝试设置不安全的套接字.\n\n
 其他设置与素描窗口中的显示有关(图标大小、标签大小、线宽等); 你可以根据自己的需要设置.\n
     </string>
-    <string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet</string>
+    <!-- DO NOT TRANSLATE string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet</string -->
 
     <string name="POINT">点</string>
     <string name="LINE">线</string>
@@ -921,6 +921,7 @@
   <string name="pref_cat_drawing">草图</string>
   <string name="pref_cat_import_export">输入输出</string>
   <string name="pref_cat_exportimport">输入</string>
+<!-- DO NOT TRANSLATE THESE
   <string name="pref_cat_exportsvx" translatable="false">Survex</string>
   <string name="pref_cat_exportth"  translatable="false">Therion</string>
   <string name="pref_cat_exportdat" translatable="false">Compass</string>
@@ -929,6 +930,7 @@
   <string name="pref_cat_exportpng" translatable="false">PNG</string>
   <string name="pref_cat_exportkml" translatable="false">KML/GeoJSON</string>
   <string name="pref_cat_exportcsv" translatable="false">CSV</string>
+-->
 
   <string name="pref_cat_calib">校准</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
@@ -1321,6 +1323,7 @@
   <string name="pref_algo_min_delta_title">Min-algo delta</string>
   <string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string>
 
+<!-- DO NOT TRANSLATE THESE
   <string name="pref_log_stream_summary" translatable="false">日志输出流</string>
   <string name="pref_log_stream_title" translatable="false">日志流</string>
   <string name="pref_log_append" translatable="false">添加日志</string>
@@ -1348,11 +1351,12 @@
   <string name="pref_log_ptopo" translatable="false">PocketTopo</string>
   <string name="pref_log_sensor" translatable="false">传感器</string>
   <string name="pref_log_shot" translatable="false">测射</string>
-  <!-- UNUSED string name="pref_log_sync" translatable="false">Cosurveying</string -->
+  <string name="pref_log_sync" translatable="false">Cosurveying</string>
   <string name="pref_log_survey" translatable="false">Surveys</string>
   <string name="pref_log_therion" translatable="false">Therion</string>
   <string name="pref_log_units" translatable="false">Units</string>
   <string name="pref_log_zip" translatable="false">ZIP</string>
+-->
 
   <!-- UNUSED string name="line_bezier">Bezier</string -->
   <!-- UNUSED string name="line_fine">fine</string -->
