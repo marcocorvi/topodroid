@@ -55,11 +55,13 @@ class DrawingStationDialog extends MyDialog
     private Button mBtnInverse;
     private CheckBox mCBhorizontal;
 
+    private Button mBtnStation; // saved station dialog
     private Button mBtnCancel;
 
     private final DrawingWindow mParent;
     private final DrawingStationName mStation; // num station point
     private final DrawingStationPath mPath;
+    private final TopoDroidApp mApp;
 
     private String mStationName;
     private boolean mIsBarrier;
@@ -70,13 +72,14 @@ class DrawingStationDialog extends MyDialog
     private float mClino;
     private List<DBlock> mBlk;
 
-    DrawingStationDialog( Context context, DrawingWindow parent, DrawingStationName station,
-                                 DrawingStationPath path,
-                                 boolean is_barrier, boolean is_hidden, // boolean global_xsections,
-				 List<DBlock> blk )
+    DrawingStationDialog( Context context, DrawingWindow parent, TopoDroidApp app,
+                          DrawingStationName station, DrawingStationPath path,
+                          boolean is_barrier, boolean is_hidden, // boolean global_xsections,
+                          List<DBlock> blk )
     {
       super( context, R.string.DrawingStationDialog );
       mParent   = parent;
+      mApp      = app;
       mStation  = station;
       mPath     = path;
       mStationName = mStation.name();
@@ -106,6 +109,7 @@ class DrawingStationDialog extends MyDialog
       mCbSplaysOff = (CheckBox) findViewById(R.id.btn_splays_off );
       mBtnOK     = (Button) findViewById(R.id.btn_ok);
       mBtnSet    = (Button) findViewById(R.id.btn_set);
+      mBtnStation = (Button) findViewById(R.id.btn_station);
       mBtnCancel = (Button) findViewById(R.id.btn_cancel);
 
       mBtnXSection  = (Button) findViewById(R.id.btn_xsection );
@@ -250,6 +254,7 @@ class DrawingStationDialog extends MyDialog
           mBtnInverse.setVisibility( View.GONE );
         }
 
+        mBtnStation.setOnClickListener( this );
         mBtnCancel.setOnClickListener( this );
         if ( mIsBarrier ) {
           mBtnBarrier.setOnClickListener( this );
@@ -279,6 +284,10 @@ class DrawingStationDialog extends MyDialog
         } else {
           mParent.removeStationPoint( mStation, mPath );
         }
+      } else if ( b == mBtnStation ) {
+        dismiss();
+        (new CurrentStationDialog( mContext, null, mApp, mStationName )).show();
+        return;
       } else if ( b == mBtnCancel ) {
         /* nothing */
       } else if ( b == mBtnSet ) {

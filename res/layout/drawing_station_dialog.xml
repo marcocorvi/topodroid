@@ -172,6 +172,11 @@
       android:orientation="horizontal" 
       android:layout_marginTop="@dimen/marginv"
       >
+      <Button android:id="@+id/btn_station"
+        style="@style/button_default"
+        android:text="@string/button_saved"
+        android:layout_gravity="left"
+        />
       <Button android:id="@+id/btn_cancel"
         style="@style/button_default"
         android:text="@string/button_cancel"

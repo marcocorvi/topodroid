@@ -645,7 +645,7 @@ public class ShotWindow extends Activity
       intent.putExtra( TDTag.TOPODROID_OLDID,  -1 ); // old_id 
       startActivityForResult( intent, TDRequest.INFO_ACTIVITY_SHOTWINDOW );
     // } else if ( TDLevel.overBasic && p++ == pos ) { // CURRENT STATION
-    //   (new CurrentStationDialog( this, this, mApp )).show();
+    //   (new CurrentStationDialog( this, this, mApp, mApp.getCurrentOrLastStation() )).show();
 
     } else if ( TDLevel.overBasic && p++ == pos ) { // RECOVER
       List< DBlock > shots1 = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.DELETED );
@@ -1318,7 +1318,7 @@ public class ShotWindow extends Activity
         }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // STATIONS
         if ( TDLevel.overNormal ) {
-          (new CurrentStationDialog( mActivity, this, mApp )).show();
+          (new CurrentStationDialog( mActivity, this, mApp, mApp.getCurrentOrLastStation() )).show();
           // ArrayList<DBlock> list = numberSplays(); // SPLAYS splays numbering no longer active
           // if ( list != null && list.size() > 0 ) {
           //   updateDisplay( );

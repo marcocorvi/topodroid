@@ -3164,7 +3164,7 @@ public class DrawingWindow extends ItemDrawer
               boolean barrier = mNum.isBarrier( sn.mName );
               boolean hidden  = mNum.isHidden( sn.mName );
               List< DBlock > legs = mApp_mData.selectShotsAt( TDInstance.sid, sn.name(), true ); // select "independent" legs
-              // new DrawingStationDialog( mActivity, this, sn, barrier, hidden, // TDInstance.xsections, // legs ).show();
+              // new DrawingStationDialog( mActivity, this, mApp, sn, barrier, hidden, // TDInstance.xsections, // legs ).show();
               openXSection( sn, sn.mName, mType );
             }
           }
@@ -4790,7 +4790,7 @@ public class DrawingWindow extends ItemDrawer
               boolean barrier = mNum.isBarrier( sn.name() );
               boolean hidden  = mNum.isHidden( sn.name() );
               List< DBlock > legs = mApp_mData.selectShotsAt( TDInstance.sid, sn.name(), true ); // select "independent" legs
-              new DrawingStationDialog( mActivity, this, sn, path, barrier, hidden, /* TDInstance.xsections, */ legs ).show();
+              new DrawingStationDialog( mActivity, this, mApp, sn, path, barrier, hidden, /* TDInstance.xsections, */ legs ).show();
               break;
             case DrawingPath.DRAWING_PATH_POINT:
               DrawingPointPath point = (DrawingPointPath)(sp.mItem);

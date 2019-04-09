@@ -620,6 +620,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="button_select"    >Select    </string -->
     <string name="button_search"    >Search    </string>
     <string name="button_merge"     >Merge     </string>
+    <string name="button_saved"     >Saved station</string>
     <string name="button_split"     >Split     </string>
     <string name="button_station"   >Center at</string>
     <string name="button_store"     >Store     </string>

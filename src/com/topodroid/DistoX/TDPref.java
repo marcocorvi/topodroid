@@ -130,6 +130,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
             break;
 	  // case STRING:
 	  default:
+	    mEdittext.setInputType( TDConst.TEXT );
             break;
         }
         mEdittext.addTextChangedListener( this );

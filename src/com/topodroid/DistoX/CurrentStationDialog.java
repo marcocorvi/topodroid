@@ -49,6 +49,7 @@ class CurrentStationDialog extends MyDialog
 {
   private final TopoDroidApp mApp;
   private final ShotWindow mParent;
+  private final String mStation;    // station name
   private EditText mName;
   private EditText mComment;
 
@@ -65,11 +66,12 @@ class CurrentStationDialog extends MyDialog
 
   private MyKeyboard mKeyboard = null;
 
-  CurrentStationDialog( Context context, ShotWindow parent, TopoDroidApp app )
+  CurrentStationDialog( Context context, ShotWindow parent, TopoDroidApp app, String station )
   {
     super( context, R.string.CurrentStationDialog );
     mParent  = parent;
     mApp = app;
+    mStation = ( station == null )? mApp.getCurrentOrLastStation() : station ;
   }
 
   @Override
@@ -85,7 +87,7 @@ class CurrentStationDialog extends MyDialog
 
     mName = (EditText) findViewById( R.id.name );
     mComment = (EditText) findViewById( R.id.comment );
-    mName.setText( mApp.getCurrentOrLastStation() );
+    mName.setText( mStation );
     mName.setOnLongClickListener( this );
 
     mBtnFixed   = (CheckBox) findViewById(R.id.button_fixed);
@@ -250,7 +252,7 @@ class CurrentStationDialog extends MyDialog
       } else {
         mApp.setCurrentStationName( null );
       }
-      mParent.updateDisplay();
+      if ( mParent != null ) mParent.updateDisplay();
 
     // } else if ( b == mBtnCancel ) {
     //   /* nothing : dismiss */

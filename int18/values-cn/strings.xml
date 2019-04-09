@@ -532,6 +532,7 @@
     <!-- UNUSED string name="stat_shot">Shots %1$d, Duplicate %2$d, Surface %3$d</string -->
     <string name="stat_splay">辐测 %1$d # %2$d</string>
     <string name="stat_station">测量点 %1$d # %2$d</string>
+    <!-- TODO string name="stat_dangling">Dangling shots %1$d %2$.1f %3$s</string -->
     <string name="stat_surface">表面测射 %1$d # %2$d %3$.1f %4$s</string>
     <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]</string>
     <string name="stat_angle_error">角度错误 %1$.2f ± %2$.2f</string>
@@ -619,6 +620,7 @@
     <!-- UNUSED string name="button_select"    >Select    </string -->
     <string name="button_search"    >搜索    </string>
     <string name="button_merge"     >合并     </string>
+    <!-- TODO string name="button_saved"     >Saved station</string -->
     <string name="button_split"     >分割     </string>
     <string name="button_station"   >以 为中心</string>
     <string name="button_store"     >存储库     </string>
