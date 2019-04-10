@@ -17,9 +17,9 @@
     <string name="setup_done_title">Настройка TopoDroid. Готово</string>
     <string name="setup_buttonsample">Размер кнопок</string>
 
-    <string name="setup_textsize">Set the text size.\nВы всегда можете изменить это позже через главное меню настроек.</string>
-    <string name="setup_buttonsize">Set the button size.\nВы всегда можете изменить это позже через главное меню настроек.</string>
-    <string name="setup_drawingunit">Set the sketch icon size.\nВы всегда можете изменить это позже через меню настроек рисования.</string>
+    <string name="setup_textsize">Выберите размер текста.\nВы всегда можете изменить это позже через главное меню настроек.</string>
+    <string name="setup_buttonsize">Выберите размер кнопок.\nВы всегда можете изменить это позже через главное меню настроек.</string>
+    <string name="setup_drawingunit">Выберите размер условных обозначений.\nВы всегда можете изменить это позже через меню настроек рисования.</string>
     <string name="setup_done">Базовая настройка завершена.\n\n
 	    Если у вас возникли проблемы с подключением DistoX, попробуйте переключится на небезопасный протокол подключения BT.\n\n
 	    Другие настройки связанные с отображением в окне абрисов (размер значков, размер подписей, толщина линий и Т.Д.)
