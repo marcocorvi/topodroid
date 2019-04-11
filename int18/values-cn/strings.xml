@@ -1139,8 +1139,8 @@
 
   <string name="pref_ethr_title">测线垂直临界值</string>
   <string name="pref_ethr_summary">垂直延展(测线)的范围</string>
-  <string name="pref_vthr_title">Leg WENS threshold</string>
-  <string name="pref_vthr_summary">Leg LRUD/WENS clino threshold</string>
+  <string name="pref_vthr_title">主线东西南北临界值</string>
+  <string name="pref_vthr_summary">主线 左右上下/东西南北 角度临界值</string>
 
   <!-- UNUSED string name="pref_plan_vthr_title">Splay plan-view threshold</string -->
   <!-- UNUSED string name="pref_plan_vthr_message">Hide splays with high inclination in the plan-view</string -->
