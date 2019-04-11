@@ -893,7 +893,7 @@
     <string name="title_sensor_edit">Сенсор</string>
     <string name="title_split">Разделить абрис</string>
 
-    <string name="title_stats">Статистика</string>
+    <string name="title_stats">Статистика абриса</string>
     <!-- UNUSED string name="title_step">Шаг</string -->
     <string name="title_survey">Свойства съёмки</string>
     <string name="title_survey_new">Новая съёмка</string>
