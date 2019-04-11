@@ -934,7 +934,7 @@
 
   <string name="pref_cat_calib">校准</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
-  <string name="pref_cat_device">sheb</string>
+  <string name="pref_cat_device">设备</string>
   <string name="pref_cat_geek">高级设置</string>
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
 
