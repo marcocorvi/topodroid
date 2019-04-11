@@ -40,6 +40,16 @@
       <Button android:id="@+id/btn_search"
         style="@style/button_default"
         android:text="@string/button_search"
+        android:layout_marginRight="@dimen/marginh"
+      />
+      <Button android:id="@+id/btn_duplicate"
+        style="@style/button_default"
+        android:text="@string/button_duplicate"
+        android:layout_marginRight="@dimen/marginh"
+      />
+      <Button android:id="@+id/btn_surface"
+        style="@style/button_default"
+        android:text="@string/button_surface"
       />
     </LinearLayout>
   </LinearLayout>

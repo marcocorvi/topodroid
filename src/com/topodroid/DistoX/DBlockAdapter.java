@@ -72,6 +72,21 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     for ( int k=0; k<res.size(); ++k ) ret[k] = res.get(k).intValue();
     return ret;
   }
+
+  int[] searchShot( long flag )
+  {
+    ArrayList<Integer> res = new ArrayList<>();
+    for ( int pos=0; pos < mItems.size(); ++pos ) {
+      DBlock blk = mItems.get( pos );
+      if ( blk.hasFlag( flag ) ) {
+        res.add( new Integer(pos) );
+      }
+    }
+    if ( res.size() == 0 ) return null;
+    int[] ret = new int[ res.size() ];
+    for ( int k=0; k<res.size(); ++k ) ret[k] = res.get(k).intValue();
+    return ret;
+  }
     
   boolean isMultiSelect() { return ( mSelect.size() > 0 ); }
 

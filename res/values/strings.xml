@@ -58,6 +58,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="make_walls">Walls</string>
     <string name="missing_station">Missing station</string>
     <string name="station_not_found">Station not found</string>
+    <string name="shot_not_found">No shot found</string>
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->
     <!-- UNUSED string name="missing_line">LINE</string -->
@@ -580,6 +581,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="button_convert"   >Convert   </string>
     <string name="button_current"   >Active    </string>
     <string name="button_delete"    >Delete    </string>
+    <string name="button_duplicate" >Duplicate </string>
+    <string name="button_surface"   >Surface   </string>
     <string name="button_eval"      >Eval      </string>
     <string name="button_evalg"     >G      </string>
     <string name="button_evalm"     >M      </string>

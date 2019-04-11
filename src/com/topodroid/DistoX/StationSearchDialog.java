@@ -41,6 +41,8 @@ class StationSearchDialog extends MyDialog
   private EditText mName;
   private String mStation;
 
+  private Button mBtnDuplicate;
+  private Button mBtnSurface;
   private Button mBtnSearch;
   // private Button mBtnCancel;
 
@@ -52,7 +54,7 @@ class StationSearchDialog extends MyDialog
   {
     super( context, R.string.StationSearchDialog );
     mParent  = parent;
-    mStation = station;
+    mStation = station; // station name if result of a station search
   }
 
   @Override
@@ -69,8 +71,18 @@ class StationSearchDialog extends MyDialog
     mBtnSplays = (CheckBox) findViewById(R.id.splays);
     // mBtnSplays.setVisibility( View.GONE ); 
 
+    mBtnDuplicate = (Button) findViewById(R.id.btn_duplicate );
+    mBtnSurface   = (Button) findViewById(R.id.btn_surface );
+
     mBtnSearch = (Button) findViewById(R.id.btn_search);
-    mBtnSearch.setOnClickListener( this ); // SEARCH
+    mBtnSearch.setOnClickListener( this );    // SEARCH
+    if ( TDLevel.overExpert ) {
+      mBtnDuplicate.setOnClickListener( this ); // SEARCH duplicate legs
+      mBtnSurface.setOnClickListener( this );   // SEARCH surface legs
+    } else {
+      mBtnDuplicate.setVisibility( View.GONE );
+      mBtnSurface.setVisibility( View.GONE );
+    }
     // mBtnCancel = (Button) findViewById(R.id.btn_cancel);
     // mBtnCancel.setOnClickListener( this ); // CANCEL
     ( (Button) findViewById(R.id.btn_cancel) ).setOnClickListener( this ); // CANCEL
@@ -107,13 +119,18 @@ class StationSearchDialog extends MyDialog
 
     // TDLog.Log(  TDLog.LOG_INPUT, "StationSearchDialog onClick() " );
     Button b = (Button) v;
-    if ( b == mBtnSearch ) { // SEARCH
+    if ( b == mBtnSearch ) { // SEARCH station
       String name = mName.getText().toString().trim();
       if ( name.length() == 0 ) {
         mName.setError( mContext.getResources().getString( R.string.error_name_required ) );
         return;
       }
       mParent.searchStation( name, mBtnSplays.isChecked() );
+    } else if ( b == mBtnDuplicate ) { // SEARCH duplicate
+      mParent.searchShot( DBlock.FLAG_DUPLICATE );
+    } else if ( b == mBtnSurface ) { // SEARCH surface
+      mParent.searchShot( DBlock.FLAG_SURFACE );
+
     // } else if ( b == mBtnCancel ) {
     //   /* nothing : dismiss */
     }

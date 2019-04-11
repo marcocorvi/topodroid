@@ -59,6 +59,7 @@
     <string name="make_walls">Pereți</string>
     <string name="missing_station">Stație lipsă</string>
     <string name="station_not_found">Stație negasită</string>
+    <!-- TODO string name="shot_not_found">No shot found</string -->
     <!-- UNUSED string name="missing_area">ZONĂ</string -->
     <!-- UNUSED string name="missing_hint">Activează uneltele lipsă sau reinstalează-le</string -->
     <!-- UNUSED string name="missing_line">LINIE</string -->
@@ -568,6 +569,8 @@
     <string name="button_convert"   >Conversie </string>
     <string name="button_current"   >Activ     </string>
     <string name="button_delete"    >Șterge    </string>
+    <!-- TODO string name="button_duplicate" >Duplicate </string -->
+    <!-- TODO string name="button_surface"   >Surface   </string -->
     <string name="button_eval"      >Evaluează </string>
     <!-- TODO string name="button_evalg"     >G      </string -->
     <!-- TODO string name="button_evalm"     >M      </string -->

@@ -58,6 +58,7 @@
     <string name="make_walls">洞壁</string>
     <string name="missing_station">测量点丢失</string>
     <string name="station_not_found">未发现测量点</string>
+    <!-- TODO string name="shot_not_found">No shot found</string -->
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->
     <!-- UNUSED string name="missing_line">LINE</string -->
@@ -580,6 +581,8 @@
     <string name="button_convert"   >转换   </string>
     <string name="button_current"   >激活    </string>
     <string name="button_delete"    >删除    </string>
+    <!-- TODO string name="button_duplicate" >Duplicate </string -->
+    <!-- TODO string name="button_surface"   >Surface   </string -->
     <string name="button_eval"      >复运算      </string>
     <string name="button_evalg"     >G      </string>
     <string name="button_evalm"     >M      </string>

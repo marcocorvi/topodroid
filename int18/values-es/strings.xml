@@ -59,6 +59,7 @@
     <string name="make_walls">Paredes</string>
     <string name="missing_station">Falta Estación</string>
     <string name="station_not_found">Estación no encontrada</string>
+    <!-- TODO string name="shot_not_found">No shot found</string -->
     <!-- UNUSED string name="missing_area">Área</string -->
     <!-- UNUSED string name="missing_hint">Por favor, instale los símbolos con TdSymbol</string -->
     <!-- UNUSED string name="missing_line">Línea</string -->
@@ -572,6 +573,8 @@
     <string name="button_convert"   >Convertir </string>
     <string name="button_current"   >Corriente   </string>
     <string name="button_delete"    >Eliminar  </string>
+    <!-- TODO string name="button_duplicate" >Duplicate </string -->
+    <!-- TODO string name="button_surface"   >Surface   </string -->
     <string name="button_eval"      >Eval      </string>
     <!-- TODO string name="button_evalg"     >G      </string -->
     <!-- TODO string name="button_evalm"     >M      </string -->

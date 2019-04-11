@@ -59,6 +59,7 @@
     <string name="make_walls">Стіни</string>
     <string name="missing_station">Відсутній пікет</string>
     <!-- TODO string name="station_not_found">Station not found</string -->
+    <!-- TODO string name="shot_not_found">No shot found</string -->
     <!-- UNUSED string name="missing_area">ОБЛАСТЬ</string -->
     <!-- UNUSED string name="missing_hint">Будь ласка, підключіть відсутні інструменти, або встановіть їх.</string -->
     <!-- UNUSED string name="missing_line">ЛІНІЯ</string -->
@@ -567,6 +568,8 @@
     <string name="button_convert"   >Конвертув.</string>
     <string name="button_current"   >Поточний   </string>
     <string name="button_delete"    >Видалити   </string>
+    <!-- TODO string name="button_duplicate" >Duplicate </string -->
+    <!-- TODO string name="button_surface"   >Surface   </string -->
     <string name="button_eval"      >Обчислити    </string>
     <!-- TODO string name="button_evalg"     >G      </string -->
     <!-- TODO string name="button_evalm"     >M      </string -->

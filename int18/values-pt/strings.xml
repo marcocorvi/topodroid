@@ -58,6 +58,7 @@
     <string name="make_walls">Paredes</string>
     <string name="missing_station">Base inexistente</string>
     <string name="station_not_found">Base não encontrada</string>
+    <!-- TODO string name="shot_not_found">No shot found</string -->
     <!-- UNUSED string name="missing_area">ÁREA</string -->
     <!-- UNUSED string name="missing_hint">Habilite ou instale os símbolos que estão faltando</string -->
     <!-- UNUSED string name="missing_line">LINHA</string -->
@@ -563,6 +564,8 @@
     <string name="button_convert"   >Converter  </string>
     <string name="button_current"   >Atual      </string>
     <string name="button_delete"    >Apagar     </string>
+    <!-- TODO string name="button_duplicate" >Duplicate </string -->
+    <!-- TODO string name="button_surface"   >Surface   </string -->
     <string name="button_eval"      >Calcular   </string>
     <!-- TODO string name="button_evalg"     >G      </string -->
     <!-- TODO string name="button_evalm"     >M      </string -->
