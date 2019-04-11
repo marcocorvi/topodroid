@@ -197,8 +197,8 @@
     <string name="h_geoid_hint">H геоид [метры]</string>
     <string name="latitude_hint">Lat. dd:mm:ss.sss</string>
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
-    <string name="loop_closure_errors">Ошибки закрытия петли</string>
-    <string name="loop_none">нет петли</string>
+    <string name="loop_closure_errors">Ошибки закрытия колец</string>
+    <string name="loop_none">нет колец</string>
     <!-- UNUSED string name="long_lat">Широта-Долгота</string -->
 
     <!-- OK string name="line_delete">Удалить линию</string -->
@@ -515,7 +515,7 @@
     <string name="stat_extlen">Длина в 3D %1$.1f %2$s</string>
     <string name="stat_projlen">Длина в плане %1$.1f %2$s</string>
     <string name="stat_cycle">Циклов %1$d</string>
-    <string name="stat_loop">Петли %1$d</string>
+    <string name="stat_loop">Кольца %1$d</string>
     <string name="stat_origin">Нулевой пикет: %1$s</string>
     <string name="stat_azimuth">Азимут проекции разреза-развёртки: %1$.1f</string>
     <!-- UNUSED string name="stat_shot">Замеров:  %1$d,   Дублированные %2$d,   Поверхность %3$d</string -->
@@ -1233,8 +1233,8 @@
   <string name="pref_autoStations_summary">Добавлять точки пикетов в экспортированный абрис .th2</string>
   <string name="pref_auto_xsections_title">Авто сечения</string>
   <string name="pref_auto_xsections_summary">Автоматически добавлять поперечные сечения при экспорте [csx/svg/dxf/xvi]</string>
-  <string name="pref_loopClosure_title">Закрывать петли</string>
-  <string name="pref_loopClosure_summary">Автоматически компенсировать невязки при закрытии петли</string>
+  <string name="pref_loopClosure_title">Закрывать кольца</string>
+  <string name="pref_loopClosure_summary">Автоматически компенсировать невязки при закрытии колец</string>
   <!-- UNUSED string name="pref_splayExtend_title">Развертка бокового замера</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Расчитывать развертку бокового замера</string -->
   <string name="pref_swapLR_title">Развернуть ЛП в Compass</string>
