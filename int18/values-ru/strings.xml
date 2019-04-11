@@ -17,9 +17,9 @@
     <string name="setup_done_title">Настройка TopoDroid. Готово</string>
     <string name="setup_buttonsample">Размер кнопок</string>
 
-    <string name="setup_textsize">Set the text size.\nВы всегда можете изменить это позже через главное меню настроек.</string>
-    <string name="setup_buttonsize">Set the button size.\nВы всегда можете изменить это позже через главное меню настроек.</string>
-    <string name="setup_drawingunit">Set the sketch icon size.\nВы всегда можете изменить это позже через меню настроек рисования.</string>
+    <string name="setup_textsize">Выберите размер текста.\nВы всегда можете изменить это позже через главное меню настроек.</string>
+    <string name="setup_buttonsize">Выберите размер кнопок.\nВы всегда можете изменить это позже через главное меню настроек.</string>
+    <string name="setup_drawingunit">Выберите размер условных обозначений.\nВы всегда можете изменить это позже через меню настроек рисования.</string>
     <string name="setup_done">Базовая настройка завершена.\n\n
 	    Если у вас возникли проблемы с подключением DistoX, попробуйте переключится на небезопасный протокол подключения BT.\n\n
 	    Другие настройки связанные с отображением в окне абрисов (размер значков, размер подписей, толщина линий и Т.Д.)
@@ -197,8 +197,8 @@
     <string name="h_geoid_hint">H геоид [метры]</string>
     <string name="latitude_hint">Lat. dd:mm:ss.sss</string>
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
-    <string name="loop_closure_errors">Ошибки закрытия петли</string>
-    <string name="loop_none">нет петли</string>
+    <string name="loop_closure_errors">Ошибки закрытия колец</string>
+    <string name="loop_none">нет колец</string>
     <!-- UNUSED string name="long_lat">Широта-Долгота</string -->
 
     <!-- OK string name="line_delete">Удалить линию</string -->
@@ -510,18 +510,18 @@
     <string name="stat_component">Компоненты %1$d</string>
     <string name="stat_depth">Глубина %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Дублированные пикеты %1$d # %2$d длина: %3$.1f %4$s</string>
-    <string name="stat_leg">Отрезки %1$d общая длина: %2$.1f %3$.1f %4$.1f %5$s</string>
+    <string name="stat_leg">Отрезки %1$d общая длина: %2$.1f %3$.1f длина в плане %4$.1f %5$s</string>
     <string name="stat_length">Длина %1$.1f %2$s</string>
     <string name="stat_extlen">Длина в 3D %1$.1f %2$s</string>
     <string name="stat_projlen">Длина в плане %1$.1f %2$s</string>
     <string name="stat_cycle">Циклов %1$d</string>
-    <string name="stat_loop">Петли %1$d</string>
+    <string name="stat_loop">Кольца %1$d</string>
     <string name="stat_origin">Нулевой пикет: %1$s</string>
     <string name="stat_azimuth">Азимут проекции разреза-развёртки: %1$.1f</string>
     <!-- UNUSED string name="stat_shot">Замеров:  %1$d,   Дублированные %2$d,   Поверхность %3$d</string -->
     <string name="stat_splay">Сплеев: %1$d # %2$d</string>
     <string name="stat_station">Пикетов: %1$d # %2$d</string>
-    <!-- TODO string name="stat_dangling">Dangling shots %1$d %2$.1f %3$s</string -->
+    <string name="stat_dangling">Несоединенные замеры %1$d %2$.1f %3$s</string>
     <string name="stat_surface">Поверхн. пикеты %1$d # %2$d длина: %3$.1f %4$s</string>
     <string name="stat_wens">З %1$.0f  В %2$.0f  С %3$.0f  Ю %4$.0f [%5$s]"</string>
     <string name="stat_angle_error">Угловые ошибки %1$.2f ± %2$.2f"</string>
@@ -894,7 +894,7 @@
     <string name="title_sensor_edit">Сенсор</string>
     <string name="title_split">Разделить абрис</string>
 
-    <string name="title_stats">Статистика</string>
+    <string name="title_stats">Статистика абриса</string>
     <!-- UNUSED string name="title_step">Шаг</string -->
     <string name="title_survey">Свойства съёмки</string>
     <string name="title_survey_new">Новая съёмка</string>
@@ -1234,8 +1234,8 @@
   <string name="pref_autoStations_summary">Добавлять точки пикетов в экспортированный абрис .th2</string>
   <string name="pref_auto_xsections_title">Авто сечения</string>
   <string name="pref_auto_xsections_summary">Автоматически добавлять поперечные сечения при экспорте [csx/svg/dxf/xvi]</string>
-  <string name="pref_loopClosure_title">Закрывать петли</string>
-  <string name="pref_loopClosure_summary">Автоматически компенсировать невязки при закрытии петли</string>
+  <string name="pref_loopClosure_title">Закрывать кольца</string>
+  <string name="pref_loopClosure_summary">Автоматически компенсировать невязки при закрытии колец</string>
   <!-- UNUSED string name="pref_splayExtend_title">Развертка бокового замера</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Расчитывать развертку бокового замера</string -->
   <string name="pref_swapLR_title">Развернуть ЛП в Compass</string>
