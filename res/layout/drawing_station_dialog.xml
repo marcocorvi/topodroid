@@ -9,27 +9,43 @@
   <TextView android:id="@+id/coords"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" 
+    android:layout_marginBottom="@dimen/margintiny"
   />
 
   <LinearLayout 
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/marginv"
+    android:layout_marginBottom="@dimen/marginsmall"
     android:orientation="horizontal" 
     >
+    <Button android:id="@+id/btn_ok_comment"
+      style="@style/button_default"
+      android:layout_marginRight="@dimen/marginh"
+      android:text="@string/button_save"
+    />
+    <EditText android:id="@+id/comment"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" 
+      android:hint="@string/comment"
+    />
+  </LinearLayout>
 
+  <LinearLayout 
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/marginsmall"
+    android:orientation="horizontal" 
+    >
     <Button android:id="@+id/btn_ok"
       style="@style/button_default"
       android:layout_marginRight="@dimen/marginh"
       android:text="@string/button_ok"
     />
-
     <TextView android:id="@+id/station_text"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content" 
       android:text="@string/station_ask"
     />
-   					  
   </LinearLayout>
 
   <LinearLayout 
@@ -172,7 +188,7 @@
       android:orientation="horizontal" 
       android:layout_marginTop="@dimen/marginv"
       >
-      <Button android:id="@+id/btn_station"
+      <Button android:id="@+id/btn_saved"
         style="@style/button_default"
         android:text="@string/button_saved"
         android:layout_gravity="left"

@@ -1316,7 +1316,7 @@ public class ShotWindow extends Activity
           // Log.v( "DistoX", "last blk: " + last_blk.toString() );
           (new ShotNewDialog( mActivity, mApp, this, last_blk, -1L )).show();
         }
-      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // STATIONS
+      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // SAVED STATIONS
         if ( TDLevel.overNormal ) {
           (new CurrentStationDialog( mActivity, this, mApp, mApp.getCurrentOrLastStation() )).show();
           // ArrayList<DBlock> list = numberSplays(); // SPLAYS splays numbering no longer active

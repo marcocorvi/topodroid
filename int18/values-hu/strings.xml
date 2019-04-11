@@ -210,7 +210,7 @@
     <string name="error_azimuth_required">Azimut szükséges</string>
     <string name="error_length_required">Hossz szükséges</string>
     <string name="error_clino_required">Lejtszög szükséges</string>
-    <!-- UNUSED string name="error_comment_required">Megjegyzés szükséges</string -->
+    <string name="error_comment_required">Megjegyzés szükséges</string>
     <string name="error_begin_required">Kezdő hivatkozás szükséges</string>
     <string name="error_declination_number">A deklinációt számként kell megadni</string>
     <string name="error_end_required">Vépont szükséges</string>
@@ -813,6 +813,7 @@
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Elmentett mérési pontok</string>
     <string name="title_station_search">Mérési pont beírása</string>
+    <!-- TODO string name="title_dangling">Unattached shots</string -->
     <string name="title_device">DistoX-ek</string>
     <string name="title_device_select">Válaszd ki a DistoX-et</string>
     <string name="title_discover">DistoX eszközök keresése &#8230; várj!</string>

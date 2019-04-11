@@ -212,7 +212,7 @@
     <string name="error_azimuth_required">Вимагається азимут</string>
     <string name="error_length_required">Вимагається довжина</string>
     <string name="error_clino_required">Вимагається кут</string>
-    <!-- UNUSED string name="error_comment_required">Вимагається коментар</string -->
+    <string name="error_comment_required">Вимагається коментар</string>
     <string name="error_begin_required">Вимагається початкова адреса</string>
     <string name="error_declination_number">Нахил повинен бути задани числом</string>
     <string name="error_end_required">Вимагається кінцева адреса</string>
@@ -817,6 +817,7 @@
     <!-- UNUSED string name="title_coord">Введіть координати точки:</string -->
     <string name="title_current_station">Збережені пікети</string>
     <!-- TODO string name="title_station_search">Enter station</string -->
+    <!-- TODO string name="title_dangling">Unattached shots</string -->
     <string name="title_device">Прилади DistoX</string>
     <string name="title_device_select">Виберіть прилад DistoX</string>
     <string name="title_discover">Пошук приладів DistoX &#8230; почекайте</string>

@@ -214,7 +214,7 @@
     <string name="error_azimuth_required">Azimut erforderlich</string>
     <string name="error_length_required">Länge erforderlich</string>
     <string name="error_clino_required">Neigung erforderlich</string>
-    <!-- UNUSED string name="error_comment_required">Kommentar erforderlich</string -->
+    <string name="error_comment_required">Kommentar erforderlich</string>
     <string name="error_begin_required">Startaddresse erforderlich</string>
     <string name="error_declination_number">Deklination muss eine Zahl sein</string>
     <string name="error_end_required">Letzte Adresse erforderlich</string>
@@ -834,6 +834,7 @@
     <!-- UNUSED string name="title_coord">Gib die Punkt-Koordinaten ein:</string -->
     <string name="title_current_station">Gespeicherte Messpunkte</string>
     <string name="title_station_search">Messpunkt eingeben</string>
+    <!-- TODO string name="title_dangling">Unattached shots</string -->
     <string name="title_device">DistoX Geräte</string>
     <string name="title_device_select">DistoX Gerät auswählen</string>
     <string name="title_discover">DistoX Geräte suchen&#8230;</string>

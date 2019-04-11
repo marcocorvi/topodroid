@@ -140,6 +140,7 @@ class DistoXNum
   List<NumShot>    getShots()    { return mShots; }
   List<NumSplay>   getSplays()   { return mSplays; }
   List<String>     getClosures() { return mClosures; }
+  List<DBlock>     getUnattached() { return mUnattachedShots; }
 
   List<NumSplay>   getSplaysAt( NumStation st )
   {

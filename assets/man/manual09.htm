@@ -83,7 +83,7 @@ The <b>draw</b> mode has four buttons besides the green ones:
 <li><img src="btn_undo.png"> removes the last items you have drawn, one at a time.</li>
 <li><img src="btn_redo.png"> puts the removed item back in the sketch, one at a time. The list of removed items is emptied when you draw something new. Pointwise editing actions may also affect the list of redo.</li>
 <li><img src="btn_tools.png"> <a href="page_tools_recent.htm">Drawing tool</a> picker</li>
-<li><img src="btn_cont.png"> Line <u>continuation</u></li>
+<li><img src="btn_cont.png"> Line <u>joining</u></li>
 </ul><br><p>
 
 The <b>erase</b> mode has three buttons besides the green ones:
@@ -206,7 +206,7 @@ TopoDroid has five line styles. With the normal style [default] the lines are dr
 With the fifth line style the traced lines are simplified using a point-weeding algorithm.
 If you export the drawing in DXF with AutoCAD version 6 do not use splines because they get exported as polylines.<br><p>
 
-<h4>Line join</h4>
+<h4>Line joining</h4>
 The <u>join</u> button is a multi-state button.
 <ul>
 <li><i>off</i>: the lines of the current type cannot be joined</li>
@@ -216,6 +216,10 @@ The <u>join</u> button is a multi-state button.
 <li><i>both</i>: the current type line will be joined to a line of the same group by both its start and its end-point</li>
 <li><i>continue</i>: the current type line will continue a line of the same group if its start-point is close enough to an endpoint of that line</li>
 </ul>
+<br>
+
+When the joining is set to "continue" the last line that has been drawn can be modified as in Adobe Illustrator, ie, redrawing a piece of the line.
+<br><p> 
 
 <h4>Portrait/Landscape presentation</h4>
 In portrait presentation the North and the Vertical are upward in plan and profile view, respectively.

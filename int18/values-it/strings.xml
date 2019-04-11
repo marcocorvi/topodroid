@@ -209,7 +209,7 @@
     <string name="error_azimuth_required">Azimuth mancante</string>
     <string name="error_length_required">Lunghezza mancante</string>
     <string name="error_clino_required">Inclinazione mancante</string>
-    <!-- UNUSED string name="error_comment_required">Commento mancante</string -->
+    <string name="error_comment_required">Commento mancante</string>
     <string name="error_begin_required">Indirizzo iniziale mancante</string>
     <string name="error_declination_number">La declinazione deve esser un numero</string>
     <string name="error_end_required">Indirizzo finale mancante</string>
@@ -813,6 +813,7 @@
     <!-- UNUSED string name="title_coord">Inserisci le coordinate del punto:</string -->
     <string name="title_current_station">Capisaldi salvati</string>
     <string name="title_station_search">Caposaldo:</string>
+    <!-- TODO string name="title_dangling">Unattached shots</string -->
     <string name="title_device">Dispositivi DistoX</string>
     <string name="title_device_select">Seleziona DistoX</string>
     <string name="title_discover">Ricerca DistoX &#8230; attendi</string>

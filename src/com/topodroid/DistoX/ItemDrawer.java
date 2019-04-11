@@ -27,7 +27,7 @@ public class ItemDrawer extends Activity
   protected int mPointScale;
   protected int mLinePointStep = 1;
 
-  int mSymbol = Symbol.LINE; // kind of symbol being drawn
+  protected int mSymbol = Symbol.LINE; // kind of symbol being drawn
 
   // -----------------------------------------------------------
   static Symbol[] mRecentPoint = { null, null, null, null, null, null };

@@ -49,7 +49,7 @@ class CurrentStationDialog extends MyDialog
 {
   private final TopoDroidApp mApp;
   private final ShotWindow mParent;
-  private final String mStation;    // station name
+  private String mStation;    // station name
   private EditText mName;
   private EditText mComment;
 
@@ -87,7 +87,6 @@ class CurrentStationDialog extends MyDialog
 
     mName = (EditText) findViewById( R.id.name );
     mComment = (EditText) findViewById( R.id.comment );
-    mName.setText( mStation );
     mName.setOnLongClickListener( this );
 
     mBtnFixed   = (CheckBox) findViewById(R.id.button_fixed);
@@ -122,6 +121,9 @@ class CurrentStationDialog extends MyDialog
       }
     }
 
+    mName.setText( mStation );
+    setComment( );
+
     updateList();
   }
 
@@ -149,9 +151,17 @@ class CurrentStationDialog extends MyDialog
       name = token[0];
     }
     // Log.v("DistoX", "get station <" + name + ">" );
-    CurrentStation cs = TopoDroidApp.mData.getStation( TDInstance.sid, name );
+    setNameAndComment( name );
+  }
+
+  
+  // @param name    saved-station name
+  private void setNameAndComment( String name )
+  {
+    mStation = name;
     mBtnFixed.setChecked( false );
     mBtnPainted.setChecked( false );
+    CurrentStation cs = TopoDroidApp.mData.getStation( TDInstance.sid, mStation );
     if ( cs == null ) {
       mName.setText( TDString.EMPTY );
       mComment.setText( null );
@@ -165,7 +175,33 @@ class CurrentStationDialog extends MyDialog
       }
     }
   }
- 
+  
+  private void setComment( )
+  {
+    mBtnFixed.setChecked( false );
+    mBtnPainted.setChecked( false );
+    CurrentStation cs = TopoDroidApp.mData.getStation( TDInstance.sid, mStation );
+    if ( cs == null ) {
+      mComment.setText( null );
+    } else {
+      mComment.setText( cs.mComment );
+      if ( cs.mFlag == CurrentStation.STATION_FIXED ) {
+        mBtnFixed.setChecked( true );
+      } else if ( cs.mFlag == CurrentStation.STATION_PAINTED ) {
+        mBtnPainted.setChecked( true );
+      }
+    }
+  }
+
+  private void clear()
+  {
+    mStation = TDString.EMPTY;
+    mName.setText(TDString.EMPTY);
+    mComment.setText(TDString.EMPTY);
+    mBtnFixed.setChecked( false );
+    mBtnPainted.setChecked( false );
+  }
+
   @Override
   public boolean onLongClick(View v) 
   {
@@ -202,21 +238,12 @@ class CurrentStationDialog extends MyDialog
         flag = CurrentStation.STATION_PAINTED;
       }
 
-      String comment;
-      // String error = mContext.getResources().getString( R.string.error_comment_required );
-      if ( mComment.getText() == null ) {
-        // mComment.setError( error );
-        // return;
-	comment = TDString.EMPTY;
-      } else {
+      String comment = TDString.EMPTY;
+      if ( mComment.getText() != null ) {
         comment = mComment.getText().toString().trim();
-        // if ( comment.length() == 0 && flag == CurrentStation.STATION_NONE ) {
-        //   mComment.setError( error );
-        //   return;
-        // }
       }
 
-      // mApp.pushCurrentStation( name, comment );
+      mStation = name;
       TopoDroidApp.mData.insertStation( TDInstance.sid, name, comment, flag );
       updateList();
       return;
@@ -227,24 +254,11 @@ class CurrentStationDialog extends MyDialog
         return;
       }
       TopoDroidApp.mData.deleteStation( TDInstance.sid, name );
+      clear();
       updateList();
-      mName.setText(TDString.EMPTY);
-      mComment.setText(TDString.EMPTY);
-
-      // CurrentStation cs = mApp.popCurrentStation();
-      // if ( cs == null ) {
-      //   mName.setText("-");
-      //   mComment.setText( TDString.EMPTY );
-      // } else {
-      //   mName.setText( cs.mName );
-      //   mComment.setText( cs.mComment );
-      // }
       return;
     } else if ( b == mBtnClear ) {
-      mName.setText(TDString.EMPTY);
-      mComment.setText(TDString.EMPTY);
-      mBtnFixed.setChecked( false );
-      mBtnPainted.setChecked( false );
+      clear();
       return;
     } else if ( b == mBtnOK ) {
       if ( name.length() > 0 ) {

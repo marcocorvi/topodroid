@@ -1593,6 +1593,56 @@ class DrawingCommandManager
     return ret;
   }
         
+  // @return true if the line has been modified
+  // @param line  line to modify
+  // @param line2 modification
+  // @param zoom  current zoom
+  // @param size  selection size
+  boolean modifyLine( DrawingLinePath line, DrawingLinePath line2, float zoom, float size )
+  {
+    if ( line2.size() < 3 ) return false;
+    float delta = size / zoom;
+    LinePoint first = line2.mFirst;
+    LinePoint last  = line2.mLast;
+    LinePoint lp1 = line.mFirst; 
+    for ( ; lp1 != null; lp1 = lp1.mNext ) {
+      if ( lp1.distance( first ) < delta ) {
+        LinePoint lp2 = null;
+        LinePoint lp1n = lp1.mNext;
+        if ( lp1n != null ) {
+          lp2 = line.mLast;
+          // int toDrop = 0; // number of points to drop
+          for ( ; lp2 != lp1; lp2 = lp2.mPrev ) {
+            if ( lp2.distance( last ) < delta ) break;
+            // ++ toDrop;
+          }
+          if ( lp2 != lp1 ) { lp2 = lp2.mNext; }
+          else { lp2 = null; }
+        } 
+        // int old_size = line.size();
+        // line.mSize += line2.mSize - toDrop; // better recount points
+        synchronized( TDPath.mSelectionLock ) {
+          mSelection.removePath( line );
+        }
+        synchronized( mCurrentStack ) {
+          // line.replacePortion( lp1, lp2, line2 );
+          lp1.mNext = first.mNext;
+          first.mPrev = lp1;
+          last.mNext = lp2;
+          if ( lp2 != null ) lp2.mPrev = last;
+          line.recomputeSize();
+          line.retracePath();
+          // Log.v("DistoXC", "size old " + old_size + " drop " + toDrop + " line2 " + line2.size() + " new " + line.size() );
+        }
+        synchronized( TDPath.mSelectionLock ) {
+          mSelection.insertPath( line );
+        }
+        return true;
+      }
+    }
+    return false;
+  }
+
   /** add the points of the first line to the second line
    */
   void addLineToLine( DrawingLinePath line, DrawingLinePath line0 )

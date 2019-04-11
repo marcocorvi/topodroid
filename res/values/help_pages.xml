@@ -39,6 +39,7 @@
   <string name="DeviceSelectDialog" translatable="false">page_device_select.htm</string>
   <string name="DeviceX310InfoDialog" translatable="false">page_x310_info.htm</string>
   <string name="DeviceX310MemoryDialog" translatable="false">page_memory.htm</string>
+  <string name="DanglingShotsDialog" translatable="false">page_dangling.htm</string>
   <string name="DistoXStatDialog" translatable="false">page_stat2.htm</string>
   <string name="DistoXAnnotations" translatable="false">page_survey_notes.htm</string>
   <string name="DrawingAreaDialog" translatable="false">page_area_dialog.htm</string>

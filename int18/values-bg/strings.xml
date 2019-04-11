@@ -210,7 +210,7 @@
     <string name="error_azimuth_required">Необходим азимут</string>
     <string name="error_length_required">Необходима дължина</string>
     <string name="error_clino_required">Необходим наклон</string>
-    <!-- UNUSED string name="error_comment_required">Необходим коментар</string -->
+    <string name="error_comment_required">Необходим коментар</string>
     <string name="error_begin_required">Необходим начален адрес</string>
     <string name="error_declination_number">Деклинацията трябва да е число</string>
     <string name="error_end_required">Необходим краен адрес</string>
@@ -813,6 +813,7 @@
     <!-- UNUSED string name="title_coord">Въведете координати на точката:</string -->
     <string name="title_current_station">Записани репери</string>
     <string name="title_station_search">Въведете репер</string>
+    <!-- TODO string name="title_dangling">Unattached shots</string -->
     <string name="title_device">DistoX устройства</string>
     <string name="title_device_select">Изберете DistoX</string>
     <string name="title_discover">Сканиране за DistoX устройства…</string>

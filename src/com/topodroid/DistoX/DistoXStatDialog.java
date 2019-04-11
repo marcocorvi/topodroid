@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date nov 2011
  *
- * @brief TopoDroid stats display dialog
+ * @brief TopoDroid plot stats display dialog
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -11,14 +11,13 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 import java.util.List;
 // import java.util.ArrayList;
 
 import android.os.Bundle;
-// import android.app.Dialog;
-// import android.app.Activity;
 import android.content.Context;
-// import android.content.Intent;
 import android.content.res.Resources;
 
 // import android.graphics.*;
@@ -33,7 +32,7 @@ import android.widget.LinearLayout;
 import android.widget.ArrayAdapter;
 
 class DistoXStatDialog extends MyDialog
-                              implements View.OnClickListener
+                               implements View.OnClickListener
 {
     private DistoXNum mNum;
     private String mOrigin;
@@ -96,11 +95,26 @@ class DistoXStatDialog extends MyDialog
           mStat.countSplay, mNum.splaysNr() ) );
         mTextStation.setText( String.format( res.getString(R.string.stat_station),
           mStat.countStation, mNum.stationsNr() ) );
-        mTextDangling.setText( String.format( res.getString(R.string.stat_dangling),
-          mNum.unattachedShotsNr(), mNum.unattachedLength() * unit, unit_str ) );
 
-        mTextLoop.setText( String.format( res.getString(R.string.stat_cycle), mStat.countLoop ) );
-        mTextComponent.setText( String.format( res.getString(R.string.stat_component), mStat.countComponent ) );
+        if ( mNum.unattachedShotsNr() > 0 ) {
+          mTextDangling.setText( String.format( res.getString(R.string.stat_dangling),
+            mNum.unattachedShotsNr(), mNum.unattachedLength() * unit, unit_str ) );
+          mTextDangling.setOnClickListener( this );
+        } else {
+          mTextDangling.setVisibility( View.GONE );
+        }
+
+        if ( mStat.countLoop > 0 ) {
+          mTextLoop.setText( String.format( res.getString(R.string.stat_cycle), mStat.countLoop ) );
+        } else {
+          mTextLoop.setVisibility( View.GONE );
+        }
+
+        if ( mStat.countComponent > 1 ) {
+          mTextComponent.setText( String.format( res.getString(R.string.stat_component), mStat.countComponent ) );
+        } else {
+          mTextComponent.setVisibility( View.GONE );
+        }
 
         mTextAngleErr.setText( String.format( res.getString(R.string.stat_angle_error), 
             mNum.angleErrorMean() * TDMath.RAD2DEG, mNum.angleErrorStddev() * TDMath.RAD2DEG ) );
@@ -162,6 +176,14 @@ class DistoXStatDialog extends MyDialog
       // if ( b == mBtnBack ) {
       //   /* nothing */
       // }
+      if ( view.getId() == R.id.stat_dangling ) {
+        dismiss();
+        if ( mNum.unattachedShotsNr() > 0 ) {
+          // Log.v("DistoXD", "dangling list");
+          (new DanglingShotsDialog( mContext, mNum )).show();
+        }
+        return;
+      }
       dismiss();
     }
 }

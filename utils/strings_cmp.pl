@@ -42,8 +42,12 @@ while ( $line = <EN> ) {
   $name = $line;
   $name =~ s/^.*name="//;
   $name =~ s/".*$//;
+  $value = $line;
+  $value =~ s/^.*\"\>//;
+  $value =~ s/\<\/string.*$//;
 
   $en_type{ $name } = "NORMAL";
+  $en_value{ $name } = $value;
 
   if ( $in_comment == 3 ) {
     $en_strings{ $name } = 1;
@@ -54,9 +58,11 @@ while ( $line = <EN> ) {
     $TOTAL ++;
   }
 
-
   if ( $line =~ "UNUSED" )   { $en_type{ $name } = "UNUSED"; }
-  elsif ( $line =~ "translatable=\"false" ) { $en_type{ $name } = "UNTRANS"; }
+  elsif ( $line =~ "translatable=\"false" ) {
+    $en_type{ $name } = "UNTRANS";
+    $en_value{$name}="untranslatable";
+  }
 }
 close EN;
 
@@ -67,6 +73,7 @@ $OK     = 0;
 $NO     = 0;
 $FIXME  = 0;
 $UNTRANS = 0; # untranslatable translated
+$SAME    = 0; # strings equal to the english
 
 # -------------------------------------------------------
 # values of xx_type
@@ -92,14 +99,6 @@ while ( $line = <XX> ) {
   }
   next if not $line =~ /name="/;
 
-  if ( $line =~ "UNUSED" )   { ++ $UNUSED; }
-  elsif ( $line =~ "TODO" )  { ++ $TODO;   }
-  elsif ( $line =~ "OK" )    { ++ $OK;     }
-  elsif ( $line =~ "NO" )    { ++ $NO;     }
-  elsif ( $line =~ "FIXME" ) { ++ $FIXME;  }
-  elsif ( $line =~ "translatable=\"false" ) { ++$UNTRANS; $type="UNTRANS"; }
-  else { ++ $NORMAL; }
-
   chop $line;
   # print "LINE $line";
   $name = $line;
@@ -111,6 +110,23 @@ while ( $line = <XX> ) {
   } else {
     $xx_strings{ $name } = $in_comment;
   }
+
+  if ( $line =~ "UNUSED" )   { ++ $UNUSED; }
+  elsif ( $line =~ "TODO" )  { ++ $TODO;   }
+  elsif ( $line =~ "OK" )    { ++ $OK;     }
+  elsif ( $line =~ "NO" )    { ++ $NO;     }
+  elsif ( $line =~ "FIXME" ) { ++ $FIXME;  }
+  elsif ( $line =~ "translatable=\"false" ) { ++$UNTRANS; $type="UNTRANS"; }
+  else { ++ $NORMAL;
+    $value = $line;
+    $value =~ s/^.*\"\>//;
+    $value =~ s/\<\/string.*$//;
+    if ( $value eq $en_value{$name} ) { 
+      print "SAME $name: <$value> <$en_value{$name}>\n";
+      ++$SAME;
+    }
+  }
+
   $xx_type{ $name } = $type;
 }
 close XX;
@@ -166,19 +182,19 @@ foreach $k (keys(%en_strings)) {
 
 print "\nxx COMMENT - en MISSING\n";
 foreach $k (keys(%comment_missing)) {
-  print "$k\n";
+  print "COMMENTED KEY (MISSING) $k\n";
 }
 print "\nxx ENABLED - en MISSING\n";
 foreach $k (keys(%active_missing)) {
-  print "$k\n";
+  print "EXTRA KEY (MISSING) $k\n";
 }
 print "\nxx COMMENT - en ENABLED\n";
 foreach $k (keys(%comment_active)) {
-  print "$k\n";
+  print "COMMENTED KEY $k\n";
 }
 print "\nxx ENABLED - en COMMENT\n";
 foreach $k (keys(%active_comment)) {
-  print "$k\n";
+  print "EXTRA KEY (COMMENT) $k\n";
 }
 print "\nxx MISSING - en ENABLED\n";
 foreach $k (keys(%missing_active)) {
@@ -188,6 +204,7 @@ print "\nxx MISSING - en COMMENT\n";
 foreach $k (keys(%missing_comment)) {
   print "$k\n";
 }
+print "\nSAME STRINGS $SAME\n";
 
 $missing = ( $TODO + $FIXME ) / $TOTAL;
 

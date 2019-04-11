@@ -211,7 +211,7 @@
     <string name="error_azimuth_required">Azimutul este obligatoriu</string>
     <string name="error_length_required">Lungimea este obligatorie</string>
     <string name="error_clino_required">Unghiul vertical este obligatoriu</string>
-    <!-- UNUSED string name="error_comment_required">Comentariul este obligatoriu</string -->
+    <string name="error_comment_required">Comentariul este obligatoriu</string>
     <string name="error_begin_required">Adresa de start este obligatorie</string>
     <string name="error_declination_number">Declinația trebuie sa fie un număr</string>
     <string name="error_end_required">Adresa finală este obligatorie</string>
@@ -821,6 +821,7 @@
     <!-- UNUSED string name="title_coord">Introdu coordonatele punctului:</string -->
     <string name="title_current_station">Stații salvate</string>
     <string name="title_station_search">Introdu stația</string>
+    <!-- TODO string name="title_dangling">Unattached shots</string -->
     <string name="title_device">Dispozitive DistoX</string>
     <string name="title_device_select">Selectează dispozitivul DistoX</string>
     <string name="title_discover">Se scanează după dispozitive DistoX &#8230; așteaptă</string>

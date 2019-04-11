@@ -210,7 +210,7 @@
 <string name="error_azimuth_required">Azimut nécessaire</string>
 <string name="error_length_required">Longueur nécessaire</string>
 <string name="error_clino_required">Pente nécessaire</string>
-<!-- UNUSED string name="error_comment_required">Commentaire nécessaire</string -->
+<string name="error_comment_required">Commentaire nécessaire</string>
 <string name="error_begin_required">Adresse de début nécessaire</string>
 <string name="error_declination_number">Déclinaison doit être un nombre</string>
 <string name="error_end_required">Adresse de fin nécessaire</string>
@@ -814,6 +814,7 @@
     <!-- UNUSED string name="title_coord">Entrer les Coordonnées du point</string -->
     <string name="title_current_station">Stations sauvegardées</string>
     <string name="title_station_search">Entrer une station</string>
+    <!-- TODO string name="title_dangling">Unattached shots</string -->
     <string name="title_device">Périphériques DistoX</string>
     <string name="title_device_select">Sélectionner le DistoX</string>
     <string name="title_discover">Recherche de nouveaux DistoX… Patientez</string>

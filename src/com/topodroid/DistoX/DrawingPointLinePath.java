@@ -472,6 +472,12 @@ class DrawingPointLinePath extends DrawingPath
     return pp;
   }
 
+  void recomputeSize()
+  {
+    mSize = 0;
+    for ( LinePoint lp = mFirst; lp != null; lp = lp.mNext ) ++ mSize;
+  }
+
   void retracePath()
   {
     // int size = mPoints.size();

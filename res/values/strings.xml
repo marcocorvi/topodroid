@@ -213,7 +213,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="error_length_required">Length required</string>
     <string name="error_depth_required">Depth required</string>
     <string name="error_clino_required">Clino required</string>
-    <!-- UNUSED string name="error_comment_required">Comment required</string -->
+    <string name="error_comment_required">Comment required</string>
     <string name="error_begin_required">Start address required</string>
     <string name="error_declination_number">Declination must be a number</string>
     <string name="error_end_required">Final address required</string>
@@ -521,13 +521,13 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="stat_component">Components %1$d</string>
     <string name="stat_depth">Depth %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Duplicate shots %1$d # %2$d %3$.1f %4$s</string>
-    <string name="stat_leg">Legs %1$d length %2$.1f %3$.1f plan-length %4$.1f %5$s</string>
-    <string name="stat_length">Length %1$.1f %2$s</string>
+    <string name="stat_leg">Legs %1$d length %2$.1f %3$.1f H-length %4$.1f %5$s</string>
+    <string name="stat_length">Sketch length %1$.1f %2$s</string>
     <string name="stat_extlen">3D length %1$.1f %2$s</string>
-    <string name="stat_projlen">Plan length %1$.1f %2$s</string>
+    <string name="stat_projlen">plan length %1$.1f %2$s</string>
     <string name="stat_cycle">Cycles %1$d</string>
     <string name="stat_loop">Loops %1$d</string>
-    <string name="stat_origin">Origin station: %1$s</string>
+    <string name="stat_origin">Sketch origin station: %1$s</string>
     <string name="stat_azimuth">Profile projection azimuth: %1$.1f</string>
     <!-- UNUSED string name="stat_shot">Shots %1$d, Duplicate %2$d, Surface %3$d</string -->
     <string name="stat_splay">Splays %1$d # %2$d</string>
@@ -836,6 +836,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Saved stations</string>
     <string name="title_station_search">Enter station</string>
+    <string name="title_dangling">Unattached shots</string>
     <string name="title_device">DistoX devices</string>
     <string name="title_device_select">Select DistoX device</string>
     <string name="title_discover">Scanning for DistoX devices &#8230; wait</string>

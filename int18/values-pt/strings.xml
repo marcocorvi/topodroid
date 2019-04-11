@@ -209,7 +209,7 @@
     <string name="error_azimuth_required">Azimute exigido</string>
     <string name="error_length_required">Comprimento exigido</string>
     <string name="error_clino_required">Inclinação exigida</string>
-    <!-- UNUSED string name="error_comment_required">Comentário exigido</string -->
+    <string name="error_comment_required">Comentário exigido</string>
     <string name="error_begin_required">Endereço inicial exigido</string>
     <string name="error_declination_number">A declinação deve ser um número</string>
     <string name="error_end_required">Endereço final exigido</string>
@@ -813,6 +813,7 @@
     <!-- UNUSED string name="title_coord">Inserir as coordenadas do ponto:</string -->
     <string name="title_current_station">Base gravadas</string>
     <string name="title_station_search">Entre base</string>
+    <!-- TODO string name="title_dangling">Unattached shots</string -->
     <string name="title_device">Dispositivos DistoX</string>
     <string name="title_device_select">Selecionar o dispositivo DistoX</string>
     <string name="title_discover">Procurando dispositivos DistoX &#8230; Aguardar</string>

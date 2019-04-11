@@ -539,6 +539,11 @@ class DrawingSurface extends SurfaceView
   {
     return commandManager.getLineToContinue( lp, type, zoom, size );
   }
+
+  boolean modifyLine( DrawingLinePath line, DrawingLinePath lp2, float zoom, float size )
+  {
+    return commandManager.modifyLine( line, lp2, zoom, size );
+  }
  
   /** add the points of the first line to the second line
    */

@@ -215,7 +215,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="error_length_required">Wymagana długość</string>
     <string name="error_depth_required">Wymagana głębokość</string>
     <string name="error_clino_required">Wymagany upad</string>
-    <!-- UNUSED string name="error_comment_required">Comment required</string -->
+    <!-- TODO string name="error_comment_required">Comment required</string -->
     <string name="error_begin_required">Wymagany początek</string>
     <string name="error_declination_number">Deklinacja musi być liczbą</string>
     <string name="error_end_required">Wymagany koniec</string>
@@ -833,6 +833,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Zapisz stacje</string>
     <string name="title_station_search">Wprowadz stacje</string>
+    <!-- TODO string name="title_dangling">Unattached shots</string -->
     <string name="title_device">Urządzenia DistoX</string>
     <string name="title_device_select">Wybierz DistoX</string>
     <string name="title_discover">Skanowanie urządzeń DistoX &#8230; czekaj</string>

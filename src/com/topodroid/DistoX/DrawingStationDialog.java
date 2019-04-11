@@ -49,13 +49,15 @@ class DrawingStationDialog extends MyDialog
     private CheckBox mCbSplaysOff;
 
     private EditText mETnick;
+    private EditText mComment;
     private Button mBtnXSection;
     private Button mBtnXDelete;
     private Button mBtnDirect;
     private Button mBtnInverse;
     private CheckBox mCBhorizontal;
 
-    private Button mBtnStation; // saved station dialog
+    private Button mBtnOkComment; // saved station dialog
+    private Button mBtnSaved; // saved station dialog
     private Button mBtnCancel;
 
     private final DrawingWindow mParent;
@@ -64,6 +66,7 @@ class DrawingStationDialog extends MyDialog
     private final TopoDroidApp mApp;
 
     private String mStationName;
+    private int mFlag; // saved-station flag (if any)
     private boolean mIsBarrier;
     private boolean mIsHidden;
     private boolean mSensors;
@@ -109,7 +112,7 @@ class DrawingStationDialog extends MyDialog
       mCbSplaysOff = (CheckBox) findViewById(R.id.btn_splays_off );
       mBtnOK     = (Button) findViewById(R.id.btn_ok);
       mBtnSet    = (Button) findViewById(R.id.btn_set);
-      mBtnStation = (Button) findViewById(R.id.btn_station);
+      mBtnSaved = (Button) findViewById(R.id.btn_saved);
       mBtnCancel = (Button) findViewById(R.id.btn_cancel);
 
       mBtnXSection  = (Button) findViewById(R.id.btn_xsection );
@@ -118,6 +121,23 @@ class DrawingStationDialog extends MyDialog
       mBtnDirect  = (Button) findViewById( R.id.btn_direct );
       mBtnInverse = (Button) findViewById( R.id.btn_inverse );
       mETnick = (EditText) findViewById( R.id.nick );
+
+      mBtnOkComment = (Button) findViewById( R.id.btn_ok_comment );
+      mComment = (EditText) findViewById( R.id.comment );
+      mFlag    = 0;
+      if ( TDLevel.overExpert ) {
+        CurrentStation cs = mApp.mData.getStation( TDInstance.sid, mStationName );
+        mBtnOkComment.setOnClickListener( this );
+        if ( cs != null ) {
+          mComment.setText( cs.mComment );
+          mFlag = cs.mFlag;
+        // } else {
+        //   mComment.setVisibility( View.GONE );
+        }
+      } else {
+        mBtnOkComment.setVisibility( View.GONE );
+        mComment.setVisibility( View.GONE );
+      }
 
       mSensors = false;
       mBearing = 0;
@@ -254,7 +274,11 @@ class DrawingStationDialog extends MyDialog
           mBtnInverse.setVisibility( View.GONE );
         }
 
-        mBtnStation.setOnClickListener( this );
+        if ( TDLevel.overNormal ) {
+          mBtnSaved.setOnClickListener( this );
+        } else {
+          mBtnSaved.setVisibility( View.GONE );
+        }
         mBtnCancel.setOnClickListener( this );
         if ( mIsBarrier ) {
           mBtnBarrier.setOnClickListener( this );
@@ -284,7 +308,21 @@ class DrawingStationDialog extends MyDialog
         } else {
           mParent.removeStationPoint( mStation, mPath );
         }
-      } else if ( b == mBtnStation ) {
+      } else if ( /* TDLevel.overExpert && */ b == mBtnOkComment ) {
+        boolean fail = true;
+        if ( mComment.getText() != null ) {
+          String comment = mComment.getText().toString().trim();
+          if ( comment.length() > 0 ) {
+            // set/change saved-station comment - leave flags unchanged
+            TopoDroidApp.mData.insertStation( TDInstance.sid, mStationName, comment, mFlag );
+            fail = false;
+          } 
+        } 
+        if ( fail ) {
+          mComment.setError( mContext.getResources().getString( R.string.error_comment_required ) );
+          return;
+        }
+      } else if ( /* TDLevel.overNormal && */ b == mBtnSaved ) {
         dismiss();
         (new CurrentStationDialog( mContext, null, mApp, mStationName )).show();
         return;

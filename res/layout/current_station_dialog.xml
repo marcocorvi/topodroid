@@ -91,7 +91,7 @@
     >
     <Button android:id="@+id/button_cancel"
       style="@style/button_default"
-      android:text="@string/button_cancel"
+      android:text="@string/button_close"
       android:layout_marginRight="@dimen/marginh"
     />
     <Button android:id="@+id/button_current"

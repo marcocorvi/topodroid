@@ -299,6 +299,7 @@ public class DrawingWindow extends ItemDrawer
   private static BezierInterpolator mBezierInterpolator = new BezierInterpolator();
   private DrawingSurface  mDrawingSurface;
   private DrawingLinePath mCurrentLinePath;
+  private DrawingLinePath mLastLinePath = null;
   private DrawingAreaPath mCurrentAreaPath;
   // private DrawingPath mFixedDrawingPath;
   // private Paint mCurrentPaint;
@@ -689,6 +690,7 @@ public class DrawingWindow extends ItemDrawer
     // DrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
     DrawingUtil.makePath( dpath, x1, y1, x2, y2 );
     mDrawingSurface.setNorthPath( dpath );
+    // mLastLinePath = null;
   }
 
   // used to add legs and splays
@@ -881,6 +883,8 @@ public class DrawingWindow extends ItemDrawer
 
   void switchExistingPlot( String plot_name, long plot_type ) // context of current SID
   {
+    Log.v("DistoXC", "switchExistingPlot " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    mLastLinePath = null;
     doSaveTdr( );
   }
 
@@ -1041,6 +1045,8 @@ public class DrawingWindow extends ItemDrawer
     // Log.v("DistoX", "compute references() zoom " + zoom + " landscape " + mLandscape );
     if ( ! PlotInfo.isSketch2D( type ) ) return false;
     mDrawingSurface.clearReferences( type );
+    Log.v("DistoXC", "computeReference " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    mLastLinePath = null;
 
     // float xoff = 0; float yoff = 0;
 
@@ -1445,6 +1451,7 @@ public class DrawingWindow extends ItemDrawer
   private void resetStatus()
   {
     mSectionName  = null; 
+    mLastLinePath = null;
     mShiftDrawing = false;
     // mContinueLine = TDSetting.mContinueLine; // do not reset cont-mode
     resetModified();
@@ -1765,6 +1772,7 @@ public class DrawingWindow extends ItemDrawer
 
     if ( mMoveTo != null && mMoveTo.length() == 0 ) mMoveTo = null; // test for Xiaomi readmi note
     mSectionName  = null; // resetStatus
+    mLastLinePath = null;
     mShiftDrawing = false;
     mContinueLine = TDSetting.mContinueLine;
     resetModified();
@@ -1842,6 +1850,7 @@ public class DrawingWindow extends ItemDrawer
       mClino   = 0;
       mMoveTo  = null;
       mSectionName  = null; // resetStatus
+      mLastLinePath = null;
       mShiftDrawing = false;
       // mContinueLine = TDSetting.mContinueLine; 
       resetModified();
@@ -1921,6 +1930,8 @@ public class DrawingWindow extends ItemDrawer
     mOffset.y = info.yoffset;
     mZoom     = info.zoom;
     mDrawingSurface.isDrawing = true;
+    // Log.v("DistoXC", "doResume " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    mLastLinePath = null; // necessary ???
     switchZoomCtrl( TDSetting.mZoomCtrl );
     // Log.v("DistoX", "do Resume. offset " + mOffset.x + " " + mOffset.y + " zoom " + mZoom );
     setPlotType( mType );
@@ -1953,8 +1964,11 @@ public class DrawingWindow extends ItemDrawer
 
 // ----------------------------------------------------------------------------
 
+  // called by updateDisplay if the type is not plan/profile
   private void doRestart( )
   {
+    Log.v("DistoXC", "doRestart " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    mLastLinePath = null;
     List<DBlock> list = null;
     if ( PlotInfo.isSection( mType ) ) {
       list = mApp_mData.selectAllShotsAtStations( mSid, mFrom, mTo );
@@ -1967,9 +1981,12 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  // tt used only by leg x-sections when created to insert leg intersection point
+  // @param tt   used only by leg x-sections when created to insert leg intersection point
+  // called by onCreate, switchPlotType, onBackPressed and pushInfo
   private void doStart( boolean do_load, float tt )
   {
+    // Log.v("DistoXC", "doStart " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    assert( mLastLinePath == null); // not needed - guaranteed by callers
     mIntersectionT = tt;
     // Log.v("DistoX", "do start() tt " + tt );
     // TDLog.Log( TDLog.LOG_PLOT, "do Start() " + mName1 + " " + mName2 );
@@ -2023,8 +2040,11 @@ public class DrawingWindow extends ItemDrawer
   //   mDrawingSurface.addDrawingPath( path );
   // }
   
+  // called by doRestart, doStart, doRecover
   private void makeSectionReferences( List<DBlock> list, float tt, int skip )
   {
+    // Log.v("DistoXC", "makeSectionReferences " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    assert( mLastLinePath == null); // not needed - guaranteed by callers
     // Log.v("DistoX", "Section " + mClino + " " + mAzimuth );
     // DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface ); // FIXME_SK moved out
     float xfrom=0;
@@ -2182,162 +2202,175 @@ public class DrawingWindow extends ItemDrawer
     // mDrawingSurface.setScaleBar( mCenter.x, mCenter.y ); // (90,160) center of the drawing
   }
 
-    private boolean loadFiles( long type, List<DBlock> list )
-    {
-      // Log.v("DistoX", "load files()" );
-      
-      // String filename1  = null;
-      String filename1b = null;
-      // String filename2  = null;
-      String filename2b = null;
-      // String filename3  = null;
-      String filename3b = null;
+  private boolean loadFiles( long type, List<DBlock> list )
+  {
+    // Log.v("DistoXC", "loadFiles " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    assert( mLastLinePath == null ); // guaranteed when called
+    // Log.v("DistoX", "load files()" );
+    
+    // String filename1  = null;
+    String filename1b = null;
+    // String filename2  = null;
+    String filename2b = null;
+    // String filename3  = null;
+    String filename3b = null;
 
-      if ( PlotInfo.isSketch2D( type ) ) {
-        // Log.v( "DistoX", "load files type " + type + " " + mName1 + " " + mName2 );
-        mPlot1 = mApp_mData.getPlotInfo( mSid, mName1 );
-        mPlot2 = mApp_mData.getPlotInfo( mSid, mName2 );
-	if ( mPlot1 == null ) return false;
-	if ( mPlot2 == null ) return false;
-        mPid1  = mPlot1.id;
-        mPid2  = mPlot2.id;
-        // Log.v("DistoX", "Plot2 type " + mPlot2.type + " azimuth " + mPlot2.azimuth );
-        mPid = mPid1;
-        // filename1  = TDPath.getTh2FileWithExt( mFullName1 );
-        filename1b = TDPath.getTdrFileWithExt( mFullName1 );
-        // filename2  = TDPath.getTh2FileWithExt( mFullName2 );
-        filename2b = TDPath.getTdrFileWithExt( mFullName2 );
+    if ( PlotInfo.isSketch2D( type ) ) {
+      // Log.v( "DistoX", "load files type " + type + " " + mName1 + " " + mName2 );
+      mPlot1 = mApp_mData.getPlotInfo( mSid, mName1 );
+      mPlot2 = mApp_mData.getPlotInfo( mSid, mName2 );
+      if ( mPlot1 == null ) return false;
+      if ( mPlot2 == null ) return false;
+      mPid1  = mPlot1.id;
+      mPid2  = mPlot2.id;
+      // Log.v("DistoX", "Plot2 type " + mPlot2.type + " azimuth " + mPlot2.azimuth );
+      mPid = mPid1;
+      // filename1  = TDPath.getTh2FileWithExt( mFullName1 );
+      filename1b = TDPath.getTdrFileWithExt( mFullName1 );
+      // filename2  = TDPath.getTh2FileWithExt( mFullName2 );
+      filename2b = TDPath.getTdrFileWithExt( mFullName2 );
+    } else {
+      // Log.v( "DistoX", "load files type " + type + " " + mName3 );
+      mPlot3 = mApp_mData.getPlotInfo( mSid, mName3 );
+      if ( mPlot3 == null ) return false;
+      mPid3  = mPlot3.id;
+      // filename3  = TDPath.getTh2FileWithExt( mFullName3 );
+      filename3b = TDPath.getTdrFileWithExt( mFullName3 );
+    }
+
+    // mAllSymbols  = true; // by default there are all the symbols
+    SymbolsPalette missingSymbols = null; // new SymbolsPalette(); 
+    // missingSymbols = palette of missing symbols
+    // if there are missing symbols mAllSymbols is false and the MissingDialog is shown
+    //    (the dialog just warns the user about missing symbols, maybe a Toast would be enough)
+    // when the sketch is saved, mAllSymbols is checked ( see doSaveTdr )
+    // if there are not all symbols the user is asked if he/she wants to save anyways
+
+    if ( PlotInfo.isSketch2D( type ) ) {
+      if ( list.size() > 0 ) {
+        mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
       } else {
-        // Log.v( "DistoX", "load files type " + type + " " + mName3 );
-        mPlot3 = mApp_mData.getPlotInfo( mSid, mName3 );
-	if ( mPlot3 == null ) return false;
-        mPid3  = mPlot3.id;
-        // filename3  = TDPath.getTh2FileWithExt( mFullName3 );
-        filename3b = TDPath.getTdrFileWithExt( mFullName3 );
+        mNum = null;
+        // TDToast.make( R.string.few_data );
+        // if ( mPid1 >= 0 ) mApp_mData.dropPlot( mPid1, mSid );
+        // if ( mPid2 >= 0 ) mApp_mData.dropPlot( mPid2, mSid );
+        // finish();
       }
 
-      // mAllSymbols  = true; // by default there are all the symbols
-      SymbolsPalette missingSymbols = null; // new SymbolsPalette(); 
-      // missingSymbols = palette of missing symbols
-      // if there are missing symbols mAllSymbols is false and the MissingDialog is shown
-      //    (the dialog just warns the user about missing symbols, maybe a Toast would be enough)
-      // when the sketch is saved, mAllSymbols is checked ( see doSaveTdr )
-      // if there are not all symbols the user is asked if he/she wants to save anyways
-
-      if ( PlotInfo.isSketch2D( type ) ) {
-        if ( list.size() > 0 ) {
-          mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
-        } else {
-	  mNum = null;
-          // TDToast.make( R.string.few_data );
-          // if ( mPid1 >= 0 ) mApp_mData.dropPlot( mPid1, mSid );
-          // if ( mPid2 >= 0 ) mApp_mData.dropPlot( mPid2, mSid );
-          // finish();
-        }
-
-        if ( ! mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, mFullName1, false ) ) {
-          // mAllSymbols =
-          mDrawingSurface.modeloadDataStream( filename1b, /* filename1, */ missingSymbols );
-          DrawingSurface.addManagerToCache( mFullName1 );
-        }
-        if ( ! mDrawingSurface.resetManager( DrawingSurface.DRAWING_PROFILE, mFullName2, PlotInfo.isExtended(mPlot2.type) ) ) {
-          // mAllSymbols = mAllSymbols &&
-          mDrawingSurface.modeloadDataStream( filename2b, /* filename2, */ missingSymbols );
-          DrawingSurface.addManagerToCache( mFullName2 );
-        }
-        
-        String parent = ( TDInstance.xsections? null : mName);
-        List<PlotInfo> xsection_plan = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotInfo.PLOT_X_SECTION,  parent );
-        List<PlotInfo> xsection_ext  = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotInfo.PLOT_XH_SECTION, parent );
-
-	computeReferences( mPlot2.type, mPlot2.name, mZoom, true );
-	computeReferences( mPlot1.type, mPlot1.name, mZoom, false );
-	if ( mNum == null ) {
-          TDToast.make( R.string.survey_no_data_reduction );
-	}
-
-        doMoveTo();
-
-        mDrawingSurface.setStationXSections( xsection_plan, xsection_ext, mPlot2.type );
-	mDrawingSurface.linkAllSections();
-      } else {
-        mTo = ( PlotInfo.isSection( type ) )? mPlot3.view : "";
-        mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null, false );
+      if ( ! mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, mFullName1, false ) ) {
         // mAllSymbols =
-        mDrawingSurface.modeloadDataStream( filename3b, /* filename3, */ missingSymbols );
-        mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)type );
+        mDrawingSurface.modeloadDataStream( filename1b, /* filename1, */ missingSymbols );
+        DrawingSurface.addManagerToCache( mFullName1 );
+      }
+      if ( ! mDrawingSurface.resetManager( DrawingSurface.DRAWING_PROFILE, mFullName2, PlotInfo.isExtended(mPlot2.type) ) ) {
+        // mAllSymbols = mAllSymbols &&
+        mDrawingSurface.modeloadDataStream( filename2b, /* filename2, */ missingSymbols );
+        DrawingSurface.addManagerToCache( mFullName2 );
+      }
+      
+      String parent = ( TDInstance.xsections? null : mName);
+      List<PlotInfo> xsection_plan = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotInfo.PLOT_X_SECTION,  parent );
+      List<PlotInfo> xsection_ext  = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotInfo.PLOT_XH_SECTION, parent );
+
+      computeReferences( mPlot2.type, mPlot2.name, mZoom, true );
+      computeReferences( mPlot1.type, mPlot1.name, mZoom, false );
+      if ( mNum == null ) {
+        TDToast.make( R.string.survey_no_data_reduction );
       }
 
-      // if ( ! mAllSymbols ) {
-      //   String msg = missingSymbols.getMessage( getResources() );
-      //   // TDLog.Log( TDLog.LOG_PLOT, "Missing " + msg );
-      //   TDToast.makeLong( "Missing symbols \n" + msg );
-      //   // (new MissingDialog( mActivity, this, msg )).show();
-      //   // finish();
-      // }
-      return true;
-   }
+      doMoveTo();
 
-   private void setPlotType( long type )
-   {
-     if ( PlotInfo.isProfile( type ) ) {
-       setPlotType2( false );
-     } else if ( type == PlotInfo.PLOT_PLAN ) { 
-       setPlotType1( false );
-     } else {
-       setPlotType3();
-     }
-   }
+      mDrawingSurface.setStationXSections( xsection_plan, xsection_ext, mPlot2.type );
+      mDrawingSurface.linkAllSections();
+    } else {
+      mTo = ( PlotInfo.isSection( type ) )? mPlot3.view : "";
+      mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null, false );
+      // mAllSymbols =
+      mDrawingSurface.modeloadDataStream( filename3b, /* filename3, */ missingSymbols );
+      mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)type );
+    }
 
-   private void updateReference()
-   {
-     // Log.v("DistoX", "updateReference()" );
-     if ( mType == PlotInfo.PLOT_PLAN ) {
-       saveReference( mPlot1, mPid1 );
-     } else if ( PlotInfo.isProfile( mType ) ) {
-       saveReference( mPlot2, mPid2 );
-     }
-   }
+    // if ( ! mAllSymbols ) {
+    //   String msg = missingSymbols.getMessage( getResources() );
+    //   // TDLog.Log( TDLog.LOG_PLOT, "Missing " + msg );
+    //   TDToast.makeLong( "Missing symbols \n" + msg );
+    //   // (new MissingDialog( mActivity, this, msg )).show();
+    //   // finish();
+    // }
+    return true;
+  }
 
-   private void saveReference( PlotInfo plot, long pid )
-   {
-     // Log.v("DistoX", "saveReference()" );
-     // Log.v("DistoX", "save pid " + pid + " ref " + mOffset.x + " " + mOffset.y + " " + mZoom );
-     plot.xoffset = mOffset.x;
-     plot.yoffset = mOffset.y;
-     plot.zoom    = mZoom;
-     mApp_mData.updatePlot( pid, mSid, mOffset.x, mOffset.y, mZoom );
-   }
+  // called by doResume and doStart
+  private void setPlotType( long type )
+  {
+    // Log.v("DistoXC", "setPlotType " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    assert( mLastLinePath == null );
+    if ( PlotInfo.isProfile( type ) ) {
+      setPlotType2( false );
+    } else if ( type == PlotInfo.PLOT_PLAN ) { 
+      setPlotType1( false );
+    } else {
+      setPlotType3();
+    }
+  }
 
-   private void resetReference( PlotInfo plot )
-   {
-     mOffset.x = plot.xoffset; 
-     mOffset.y = plot.yoffset; 
-     mZoom     = plot.zoom;    
-     // Log.v("DistoX", "reset ref " + mOffset.x + " " + mOffset.y + " " + mZoom ); // DATA_DOWNLOAD
-     mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
-   }
+  private void updateReference()
+  {
+    Log.v("DistoXC", "updateReference " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    // mLastLinePath = null; // should not be necessary
+    // Log.v("DistoX", "update Reference()" );
+    if ( mType == PlotInfo.PLOT_PLAN ) {
+      saveReference( mPlot1, mPid1 );
+    } else if ( PlotInfo.isProfile( mType ) ) {
+      saveReference( mPlot2, mPid2 );
+    }
+  }
 
-   // ----------------------------------------------------
-   // previewPaint is not thread safe, but it is ok if two threads make two preview paints
-   // eventually only one remains
-   static private Paint previewPaint = null;
-   static public  Paint getPreviewPaint()
-   {
-     if ( previewPaint != null ) return previewPaint;
-     Paint paint = new Paint();
-     paint.setColor(0xFFC1C1C1);
-     paint.setStyle(Paint.Style.STROKE);
-     paint.setStrokeJoin(Paint.Join.ROUND);
-     paint.setStrokeCap(Paint.Cap.ROUND);
-     paint.setStrokeWidth( BrushManager.WIDTH_PREVIEW );
-     previewPaint = paint;
-     return paint;
-   }
+  // called by updateReefernce and moveTo
+  private void saveReference( PlotInfo plot, long pid )
+  {
+    // Log.v("DistoX", "save Reference()" );
+    // Log.v("DistoX", "save pid " + pid + " ref " + mOffset.x + " " + mOffset.y + " " + mZoom );
+    plot.xoffset = mOffset.x;
+    plot.yoffset = mOffset.y;
+    plot.zoom    = mZoom;
+    mApp_mData.updatePlot( pid, mSid, mOffset.x, mOffset.y, mZoom );
+  }
 
-    // x,y scene points
-    private void doSelectAt( float x, float y, float size )
-    {
+  private void resetReference( PlotInfo plot )
+  {
+    Log.v("DistoXC", "resetReference " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    mLastLinePath = null;
+    mOffset.x = plot.xoffset; 
+    mOffset.y = plot.yoffset; 
+    mZoom     = plot.zoom;    
+    // Log.v("DistoX", "reset ref " + mOffset.x + " " + mOffset.y + " " + mZoom ); // DATA_DOWNLOAD
+    mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
+  }
+
+  // ----------------------------------------------------
+  // previewPaint is not thread safe, but it is ok if two threads make two preview paints
+  // eventually only one remains
+  static private Paint previewPaint = null;
+  static public  Paint getPreviewPaint()
+  {
+    if ( previewPaint != null ) return previewPaint;
+    Paint paint = new Paint();
+    paint.setColor(0xFFC1C1C1);
+    paint.setStyle(Paint.Style.STROKE);
+    paint.setStrokeJoin(Paint.Join.ROUND);
+    paint.setStrokeCap(Paint.Cap.ROUND);
+    paint.setStrokeWidth( BrushManager.WIDTH_PREVIEW );
+    previewPaint = paint;
+    return paint;
+  }
+
+  // called only onTouchUp
+  // x,y scene points
+  private void doSelectAt( float x, float y, float size )
+  {
+      // Log.v("DistoXC", "doSelectAt " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      assert( mLastLinePath == null );
       if ( mLandscape ) { float t=x; x=-y; y=t; }
       // Log.v("DistoX", "select at: edit-range " + mDoEditRange + " mode " + mMode + " At " + x + " " + y );
       if ( mMode == MODE_EDIT ) {
@@ -2449,7 +2482,7 @@ public class DrawingWindow extends ItemDrawer
       }
     }
 
-    // called only be DrawingShotDialog
+    // called be DrawingShotDialog and onTouch
     void updateBlockExtend( DBlock block, int extend, float stretch )
     {
       // if ( ! block.isSplay() ) extend -= DBlock.EXTEND_FVERT;
@@ -2463,6 +2496,8 @@ public class DrawingWindow extends ItemDrawer
     // used only when a shot extend is changed
     private void recomputeProfileReference()
     {
+      // Log.v("DistoXC", "recomputeProfileReference " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      assert( mLastLinePath == null );
       if ( mType == PlotInfo.PLOT_EXTENDED ) { 
         List<DBlock> list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
         mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
@@ -2484,6 +2519,8 @@ public class DrawingWindow extends ItemDrawer
     void deletePoint( DrawingPointPath point )
     {
       if ( point == null ) return;
+      // Log.v("DistoXC", "deletePoint " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      assert( mLastLinePath == null );
       mDrawingSurface.deletePath( point ); 
       // Log.v("DistoX", "delete point type " + point.mPointType );
       if ( BrushManager.isPointPhoto( point.mPointType ) ) {
@@ -2504,6 +2541,8 @@ public class DrawingWindow extends ItemDrawer
     void splitLine( DrawingLinePath line, LinePoint point )
     {
       mDrawingSurface.splitLine( line, point );
+      // Log.v("DistoXC", "splitLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      assert( mLastLinePath == null );
       modified();
     }
 
@@ -2526,6 +2565,8 @@ public class DrawingWindow extends ItemDrawer
       } else {
         mDrawingSurface.deletePath( line );
       }
+      // Log.v("DistoXC", "deleteLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      assert( mLastLinePath == null );
       modified();
     }
 
@@ -2552,30 +2593,40 @@ public class DrawingWindow extends ItemDrawer
 
     void sharpenLine( DrawingLinePath line )
     {
+      // Log.v("DistoXC", "sharpenLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      assert( mLastLinePath == null );
       mDrawingSurface.sharpenPointLine( line );
       modified();
     }
 
     void reduceLine( DrawingLinePath line, int decimation )
     {
+      // Log.v("DistoXC", "reduceLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      assert( mLastLinePath == null );
       mDrawingSurface.reducePointLine( line, decimation );
       modified();
     }
 
     void rockLine( DrawingLinePath line )
     {
+      // Log.v("DistoXC", "rockLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      assert( mLastLinePath == null );
       mDrawingSurface.rockPointLine( line );
       modified();
     }
 
     void closeLine( DrawingLinePath line )
     {
+      // Log.v("DistoXC", "closeLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      assert( mLastLinePath == null );
       mDrawingSurface.closePointLine( line );
       modified();
     }
 
     void reduceArea( DrawingAreaPath area, int decimation )
     {
+      // Log.v("DistoXC", "reduceArea " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      assert( mLastLinePath == null );
       mDrawingSurface.reducePointLine( area, decimation );
       modified();
     }
@@ -2583,6 +2634,8 @@ public class DrawingWindow extends ItemDrawer
 
     void deleteArea( DrawingAreaPath area )
     {
+      // Log.v("DistoXC", "deleteArea " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      assert( mLastLinePath == null );
       mDrawingSurface.deletePath( area );
       modified();
     }
@@ -2693,6 +2746,11 @@ public class DrawingWindow extends ItemDrawer
     if ( lp2 == null ) return true;
 
     if ( mContinueLine == CONT_CONTINUE ) {
+      if ( mLastLinePath != null
+           && mCurrentLine == mLastLinePath.mLineType 
+           && mDrawingSurface.modifyLine( mLastLinePath, lp2, mZoom, mSelectSize ) ) {
+        return false;
+      }
       DrawingLinePath line = null;
       line = mDrawingSurface.getLineToContinue( lp2.mFirst, mCurrentLine, mZoom, mSelectSize );
       if ( line != null && mCurrentLine == line.mLineType ) { // continue line with the current line
@@ -2743,6 +2801,8 @@ public class DrawingWindow extends ItemDrawer
   // -------------------------------------------------------------------------
   private void startErasing( float xs, float ys, float xc, float yc )
   {
+    // Log.v("DistoXC", "startErasing " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    assert( mLastLinePath == null );
     // Log.v("DistoX", "Erase at " + xs + " " + ys );
     if ( mTouchMode == MODE_MOVE ) {
       mEraseCommand =  new EraseCommand();
@@ -2935,6 +2995,9 @@ public class DrawingWindow extends ItemDrawer
                           lp1.closePath();
                         }
                         mDrawingSurface.addDrawingPath( lp1 );
+                        mLastLinePath = lp1;
+                      // } else {
+                      //   mLastLinePath = ???
                       }
                     } else { //  mSymbol == Symbol.AREA
                       DrawingAreaPath ap = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(), mName+"-a", TDSetting.mAreaBorder ); 
@@ -2949,6 +3012,7 @@ public class DrawingWindow extends ItemDrawer
                       ap.closePath();
                       ap.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
                       mDrawingSurface.addDrawingPath( ap );
+                      mLastLinePath = null;
                     }
                   }
                 } else { // if ( TDSetting.isLineStyleSimplified() ) 
@@ -2988,6 +3052,9 @@ public class DrawingWindow extends ItemDrawer
                           lp1.closePath();
                         }
                         mDrawingSurface.addDrawingPath( lp1 );
+                        mLastLinePath = lp1;
+                      // } else {
+                      //   mLastLinePath = ???
                       }
                     } else { //  mSymbol == Symbol.AREA
                       DrawingAreaPath ap = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(), mName+"-a", TDSetting.mAreaBorder ); 
@@ -2999,6 +3066,7 @@ public class DrawingWindow extends ItemDrawer
                       ap.closePath();
                       ap.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
                       mDrawingSurface.addDrawingPath( ap );
+                      mLastLinePath = null;
                     }
                   }
                 }
@@ -3013,6 +3081,7 @@ public class DrawingWindow extends ItemDrawer
                 // section line points: right-end -- left-end -- tick-end
                 //
                 if ( mCurrentLinePath.mLineType == BrushManager.mLineLib.mLineSectionIndex ) {
+                  mLastLinePath = null;
                   doSectionLine( mCurrentLinePath );
                 } else { // not section line
                   boolean addline= true;
@@ -3027,6 +3096,9 @@ public class DrawingWindow extends ItemDrawer
                       mCurrentLinePath.closePath();
                     }
                     mDrawingSurface.addDrawingPath( mCurrentLinePath );
+                    mLastLinePath = mCurrentLinePath;
+                  // } else {
+                  //   mLastLinePath = ???
                   }
                 }
                 mCurrentLinePath = null;
@@ -3035,6 +3107,7 @@ public class DrawingWindow extends ItemDrawer
                 mCurrentAreaPath.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
                 mDrawingSurface.addDrawingPath( mCurrentAreaPath );
                 mCurrentAreaPath = null;
+                mLastLinePath = null;
               }
             }
             // undoBtn.setEnabled(true);
@@ -3044,6 +3117,7 @@ public class DrawingWindow extends ItemDrawer
         }
         else
         { // Symbol.POINT
+          mLastLinePath = null;
           if ( ! pointerDown ) {
 	    float radius = TDSetting.mPointingRadius;
     	    if ( BrushManager.isPointOrientable( mCurrentPoint ) ) radius *= 4;
@@ -3410,6 +3484,8 @@ public class DrawingWindow extends ItemDrawer
 
   private void doSectionLine( DrawingLinePath currentLine )
   {
+    // Log.v("DistoXC", "doSectionLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    // assert( mLastLinePath == null ); // obvious
     currentLine.addOption("-direction both");
     currentLine.makeStraight( );
     boolean h_section = PlotInfo.isProfile( mType );
@@ -3529,6 +3605,8 @@ public class DrawingWindow extends ItemDrawer
     // add a therion label point (ILabelAdder)
     public void addLabel( String label, float x, float y, int level )
     {
+      // Log.v("DistoXC", "addLabel " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      assert( mLastLinePath == null );
       if ( label != null && label.length() > 0 ) {
 	if ( mLandscape ) { float t=x; x=-y; y=t; }
         DrawingLabelPath label_path = new DrawingLabelPath( label, x, y, mPointScale, null );
@@ -3544,83 +3622,89 @@ public class DrawingWindow extends ItemDrawer
   private long  mMediaId = -1L;
   private float mMediaX, mMediaY;
 
-    public void insertPhoto( )
-    {
-      mApp_mData.insertPhoto( TDInstance.sid, mMediaId, -1, "", TopoDroidUtil.currentDate(), mMediaComment ); // FIXME TITLE has to go
-      // FIXME NOTIFY ? no
-      // photo file is "survey/id.jpg"
-      // String filename = TDInstance.survey + "/" + Long.toString( mMediaId ) + ".jpg";
-      DrawingPhotoPath photo = new DrawingPhotoPath( mMediaComment, mMediaX, mMediaY, mPointScale, null, mMediaId );
-      photo.mLandscape = mLandscape;
-      mDrawingSurface.addDrawingPath( photo );
-      modified();
-    }
+  public void insertPhoto( )
+  {
+    // Log.v("DistoXC", "insertPhoto " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    assert( mLastLinePath == null );
+    mApp_mData.insertPhoto( TDInstance.sid, mMediaId, -1, "", TopoDroidUtil.currentDate(), mMediaComment ); // FIXME TITLE has to go
+    // FIXME NOTIFY ? no
+    // photo file is "survey/id.jpg"
+    // String filename = TDInstance.survey + "/" + Long.toString( mMediaId ) + ".jpg";
+    DrawingPhotoPath photo = new DrawingPhotoPath( mMediaComment, mMediaX, mMediaY, mPointScale, null, mMediaId );
+    photo.mLandscape = mLandscape;
+    mDrawingSurface.addDrawingPath( photo );
+    modified();
+  }
 
-    // NOTE this was used to let QCamCompass tell the DrawingWindow the photo azimuth/clino
-    //      but it messes up the azimuth/clino set by the section line
-    //      DO NOT USE IT
-    // public void notifyAzimuthClino( long pid, float azimuth, float clino )
-    // {
-    //   mApp_mData.updatePlotAzimuthClino( TDInstance.sid, pid, azimuth, clino );
-    // }
+  // NOTE this was used to let QCamCompass tell the DrawingWindow the photo azimuth/clino
+  //      but it messes up the azimuth/clino set by the section line
+  //      DO NOT USE IT
+  // public void notifyAzimuthClino( long pid, float azimuth, float clino )
+  // {
+  //   mApp_mData.updatePlotAzimuthClino( TDInstance.sid, pid, azimuth, clino );
+  // }
 
-    private void doTakePhoto( File imagefile, boolean insert, long pid )
-    {
-      if ( TDandroid.checkCamera( mApp ) ) { // hasPhoto
-        new QCamCompass( this,
-              	         (new MyBearingAndClino( mApp, imagefile )),
-                         // this, pid, // pid non-negative if notify azimuth/clino // DO NOT USE THIS
-          	         ( insert ? this : null), // ImageInserter
-          	         true, false).show();  // true = with_box, false=with_delay
-      } else {
-	boolean ok = TDandroid.checkStrictMode();
-	// boolean ok = true;
-	// /* fixme-23 */
-        // if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ) { // build version 24
-        //   try {
-        //     Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposed");
-	//     m.invoke( null );
-	//   } catch ( Exception e ) { ok = false; }
-	// }
-	// /* */
-	if ( ok ) {
-          try {
-            Uri outfileuri = Uri.fromFile( imagefile );
-            Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
-            intent.putExtra( MediaStore.EXTRA_OUTPUT, outfileuri );
-            intent.putExtra( "outputFormat", Bitmap.CompressFormat.JPEG.toString() );
-            if ( insert ) {
-              mActivity.startActivityForResult( intent, TDRequest.CAPTURE_IMAGE_DRAWWINDOW );
-            } else {
-              mActivity.startActivity( intent );
-            }
-          } catch ( ActivityNotFoundException e ) {
-            TDToast.make( R.string.no_capture_app );
+  private void doTakePhoto( File imagefile, boolean insert, long pid )
+  {
+    if ( TDandroid.checkCamera( mApp ) ) { // hasPhoto
+      new QCamCompass( this,
+            	         (new MyBearingAndClino( mApp, imagefile )),
+                       // this, pid, // pid non-negative if notify azimuth/clino // DO NOT USE THIS
+        	         ( insert ? this : null), // ImageInserter
+        	         true, false).show();  // true = with_box, false=with_delay
+    } else {
+      boolean ok = TDandroid.checkStrictMode();
+      // boolean ok = true;
+      // /* fixme-23 */
+      // if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ) { // build version 24
+      //   try {
+      //     Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposed");
+      //     m.invoke( null );
+      //   } catch ( Exception e ) { ok = false; }
+      // }
+      // /* */
+      if ( ok ) {
+        try {
+          Uri outfileuri = Uri.fromFile( imagefile );
+          Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
+          intent.putExtra( MediaStore.EXTRA_OUTPUT, outfileuri );
+          intent.putExtra( "outputFormat", Bitmap.CompressFormat.JPEG.toString() );
+          if ( insert ) {
+            mActivity.startActivityForResult( intent, TDRequest.CAPTURE_IMAGE_DRAWWINDOW );
+          } else {
+            mActivity.startActivity( intent );
           }
-        } else {
-          TDToast.make( "NOT IMPLEMENTED YET" );
+        } catch ( ActivityNotFoundException e ) {
+          TDToast.make( R.string.no_capture_app );
         }
-      }
-    }
-
-    public void addPhotoPoint( String comment, float x, float y )
-    {
-      mMediaComment = (comment == null)? "" : comment;
-      mMediaId = mApp_mData.nextPhotoId( TDInstance.sid );
-      if ( mLandscape ) {
-        mMediaX = -y;
-        mMediaY = x;
       } else {
-        mMediaX = x;
-        mMediaY = y;
+        TDToast.make( "NOT IMPLEMENTED YET" );
       }
-      File imagefile = new File( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mMediaId) ) );
-      // TODO TD_XSECTION_PHOTO
-      doTakePhoto( imagefile, true, -1L ); // with inserter, no pid
     }
+  }
+
+  public void addPhotoPoint( String comment, float x, float y )
+  {
+    // Log.v("DistoXC", "addPhoto " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    assert( mLastLinePath == null );
+    mMediaComment = (comment == null)? "" : comment;
+    mMediaId = mApp_mData.nextPhotoId( TDInstance.sid );
+    if ( mLandscape ) {
+      mMediaX = -y;
+      mMediaY = x;
+    } else {
+      mMediaX = x;
+      mMediaY = y;
+    }
+    File imagefile = new File( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mMediaId) ) );
+    // TODO TD_XSECTION_PHOTO
+    doTakePhoto( imagefile, true, -1L ); // with inserter, no pid
+  }
 
     private void addAudioPoint( float x, float y )
     {
+      // Log.v("DistoXC", "addAudio " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      assert( mLastLinePath == null );
       mMediaComment = "";
       if ( ! audioCheck ) {
 	// TODO TDToast.make( R.string.no_feature_audio );
@@ -3641,6 +3725,8 @@ public class DrawingWindow extends ItemDrawer
 
     public void deletedAudio( long bid )
     {
+      // Log.v("DistoXC", "deleteAudio " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      assert( mLastLinePath == null );
       DrawingAudioPath audio = mDrawingSurface.getAudioPoint( bid );
       deletePoint( audio ); // if audio == null doesn't do anything
     }
@@ -3667,6 +3753,8 @@ public class DrawingWindow extends ItemDrawer
     // delete at-station xsection
     void deleteXSection( DrawingStationName st, String name, long type ) 
     {
+      // Log.v("DistoXC", "deleteXSection " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      assert( mLastLinePath == null );
       long xtype = -1;
       String xs_id = null; // xsection_id eg, xs-2 (xsection at station 2)
       if ( type == PlotInfo.PLOT_PLAN ) {
@@ -3693,6 +3781,8 @@ public class DrawingWindow extends ItemDrawer
     // delete section point and possibly the xsection outline
     private void deleteSectionPoint( String xs_id )
     {
+      // Log.v("DistoXC", "deleteSectionPoint " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      assert( mLastLinePath == null );
       if ( xs_id == null ) return;
       String scrap_name = TDInstance.survey + "-" + xs_id;
       mDrawingSurface.deleteSectionPoint( scrap_name );   // this section-point delete cannot be undone
@@ -3746,6 +3836,8 @@ public class DrawingWindow extends ItemDrawer
     void openXSection( DrawingStationName st, String st_name, long type,
                        float azimuth, float clino, boolean horiz, String nick )
     {
+      // Log.v("DistoXC", "openXSection " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      assert( mLastLinePath == null );
       // Log.v("DistoXX", "XSection nick <" + nick + "> st_name <" + st_name + "> plot " + mName );
       // parent plot name = mName
       String xs_id = getXSectionName( st_name, type );
@@ -3935,6 +4027,8 @@ public class DrawingWindow extends ItemDrawer
      */
     public void addStationPoint( DrawingStationName st )
     {
+      // Log.v("DistoXC", "addStationPoint " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      assert( mLastLinePath == null );
       DrawingStationPath path = new DrawingStationPath( st, DrawingPointPath.SCALE_M );
       mDrawingSurface.addDrawingStationPath( path );
       modified();
@@ -3946,6 +4040,8 @@ public class DrawingWindow extends ItemDrawer
      */
     public void removeStationPoint( DrawingStationName st, DrawingStationPath path )
     {
+      // Log.v("DistoXC", "reoveStationPoint " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      assert( mLastLinePath == null);
       mDrawingSurface.removeDrawingStationPath( path );
       modified();
     }
@@ -3979,7 +4075,10 @@ public class DrawingWindow extends ItemDrawer
      */
     private void setMode( int mode )
     {
+      // if ( mMode == mode ) return;
       mMode = mode;
+      Log.v("DistoXC", "setMode " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      mLastLinePath = null;
       switch ( mMode ) {
         case MODE_MOVE:
           setTheTitle();
@@ -4455,6 +4554,8 @@ public class DrawingWindow extends ItemDrawer
 
     private void switchPlotType()
     {
+      Log.v("DistoXC", "switchPlotType " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      mLastLinePath = null; // necessary
       doSaveTdr( ); // this sets mModified = false after spawning the saving task
       updateReference();
       if ( mType == PlotInfo.PLOT_PLAN ) {
@@ -4464,8 +4565,10 @@ public class DrawingWindow extends ItemDrawer
       }
     }
 
+    // called by doRecover and setPlotType
     private void setPlotType3( )
     {
+      assert( mLastLinePath == null);
       // Log.v("DistoX", "set plot type 2 mType " + mType );
       mPid  = mPid3;
       mName = mName3;
@@ -4477,6 +4580,7 @@ public class DrawingWindow extends ItemDrawer
 
     private void setPlotType2( boolean compute )
     {
+      assert( mLastLinePath == null);
       // Log.v("DistoX", "set plot type 2 mType " + mType );
       mPid  = mPid2;
       mName = mName2;
@@ -4495,8 +4599,10 @@ public class DrawingWindow extends ItemDrawer
       }
     } 
 
+    // called by setPlotType, switchPlotType and doRecover
     private void setPlotType1( boolean compute )
     {
+      assert( mLastLinePath == null);
       // Log.v("DistoX", "set plot type 1 mType " + mType );
       mPid  = mPid1;
       mName = mName1;
@@ -4527,6 +4633,8 @@ public class DrawingWindow extends ItemDrawer
     // @note barrier and hiding shots are not flipped
     public void flipProfile( boolean flip_shots )
     {
+      // Log.v("DistoXC", "flipProfile " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      assert( mLastLinePath == null );
       mDrawingSurface.flipProfile( mZoom );
       if ( flip_shots ) {
         DBlock blk;
@@ -4638,6 +4746,8 @@ public class DrawingWindow extends ItemDrawer
 
     private void clearSelected()
     {
+      // Log.v("DistoXC", "clearSelected " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      // assert( mLastLinePath == null ); // not needed
       mHasSelected = false;
       mDrawingSurface.clearSelected();
       mMode = MODE_EDIT;
@@ -4938,6 +5048,8 @@ public class DrawingWindow extends ItemDrawer
     {
       mCurrentLine = BrushManager.mLineLib.mLineWallIndex;
       if ( ! BrushManager.mLineLib.isSymbolEnabled( "wall" ) ) mCurrentLine = 0;
+      // Log.v("DistoXC", "prepareXSection " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      assert( mLastLinePath == null );
       setTheTitle();
 
       if ( id == null || id.length() == 0 ) return -1;
@@ -5168,9 +5280,12 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  // called by updateBlockName and refreshDisplay
   private void doComputeReferences( boolean reset )
   {
-    // Log.v("DistoX", "doComputeReferences() type " + mType );
+    Log.v("DistoXC", "doComputeRefenrences " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    // mLastLinePath = null; // not needed
+    // Log.v("DistoX", "do Compute References() type " + mType );
     List<DBlock> list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
     mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
     // doMoveTo();
@@ -5189,7 +5304,7 @@ public class DrawingWindow extends ItemDrawer
 
   public void refreshDisplay( int nr, boolean toast )
   {
-    // Log.v("DistoX", "refreshDisplay() type " + mType + " nr " + nr ); // DATA_DOWNLOAD
+    // Log.v("DistoX", "refresh Display() type " + mType + " nr " + nr ); // DATA_DOWNLOAD
     mActivity.setTitleColor( TDColor.TITLE_NORMAL );
     if ( nr >= 0 ) {
       if ( nr > 0 ) {
@@ -5272,9 +5387,13 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
   }
 
+  // called when the data reduction changes (hidden/barrier)
   private void recomputeReferences( float zoom )
   {
     if ( mNum == null ) return;
+    Log.v("DistoXC", "recomputeRefenrences " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    // mLastLinePath = null; // not needed
+
     if ( mType == (int)PlotInfo.PLOT_PLAN ) {
       if ( mPlot2 != null ) computeReferences( mPlot2.type, mPlot2.name, zoom, false );
     } else if ( PlotInfo.isProfile( mType ) ) {
@@ -5535,6 +5654,8 @@ public class DrawingWindow extends ItemDrawer
 
   void doRecover( String filename, long type )
   {
+    // Log.v("DistoXC", "doRecover " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    mLastLinePath = null; // absolutely necessary
     float x = mOffset.x;
     float y = mOffset.y;
     float z = mZoom;
@@ -6041,6 +6162,9 @@ public class DrawingWindow extends ItemDrawer
 
   void addScrap( PlotInfo plot )
   {
+    // Log.v("DistoXC", "addScrap " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    assert( mLastLinePath == null );
+
     mDrawingSurface.clearScrapOutline();
     if ( mNum == null || plot == null ) {
       // Log.v("DistoX0", "null num or plot");
@@ -6082,6 +6206,9 @@ public class DrawingWindow extends ItemDrawer
   // and the survey has station "station"
   void splitPlot( String name, String station, boolean remove ) 
   {
+    // Log.v("DistoXC", "splitPlot " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    mLastLinePath = null; // absolutely necessary
+
     // Log.v("DistoX-S", "split plot " + name + " station " + station );
     // get the DrawingStation of station
     mSplitName = name;
@@ -6105,6 +6232,10 @@ public class DrawingWindow extends ItemDrawer
 
   void mergeOutlineScrap()
   {
+    // merge is aclled in MOVE mode
+    // Log.v("DistoXC", "mergeOutlineScrap " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    assert( mLastLinePath == null );
+
     if ( mType == PlotInfo.PLOT_PLAN ) {
       if ( mOutlinePlot1 == null ) return;
       mDrawingSurface.clearScrapOutline();
@@ -6133,10 +6264,12 @@ public class DrawingWindow extends ItemDrawer
   //   new PlotMergeDialog( mActivity, this, plots ).show();
   // }
 
-  // called by PlotMergeDialog or privately
+  // called by mergeOutlineScrap
   // called only with mType PLOT_PLAN or PLOT_EXTENDED
   private void doMergePlot( PlotInfo plt )
   {
+    // assert( mLastLinePath == null); // obvious
+
     if ( plt.type != mType ) return;
     NumStation st1 = mNum.getStation( plt.start );
     NumStation st0 = mNum.mStartStation; // start-station has always coords (0,0)
@@ -6172,6 +6305,9 @@ public class DrawingWindow extends ItemDrawer
       TDToast.make( R.string.split_nothing );
       return;
     }
+    Log.v("DistoXC", "doSplitPlot " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    mLastLinePath = null;
+
     boolean extended = (mPlot2.type == PlotInfo.PLOT_EXTENDED);
     int azimuth = (int)mPlot2.azimuth; 
     long pid = mApp.insert2dPlot( TDInstance.sid, mSplitName, mSplitStationName, extended, azimuth );
@@ -6191,6 +6327,9 @@ public class DrawingWindow extends ItemDrawer
 
   void setXSectionOutline( String name, boolean on_off, float x, float y )
   { 
+    // Log.v("DistoXC", "setXSectionOutline " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    assert( mLastLinePath == null );
+
     mDrawingSurface.clearXSectionOutline( name );
     // Log.v("DistoXX", "XSECTION set " + name + " on/off " + on_off + " " + x + " " + y );
     if ( on_off ) {
