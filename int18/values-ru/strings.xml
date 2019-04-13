@@ -59,7 +59,7 @@
     <string name="make_walls">Стены</string>
     <string name="missing_station">Отсутствует пикет</string>
     <string name="station_not_found">Пикет не обнаружен</string>
-    <!-- TODO string name="shot_not_found">No shot found</string -->
+    <string name="shot_not_found">Замеры не найдены</string>
     <!-- UNUSED string name="missing_area">ОБЛАСТЬ</string -->
     <!-- UNUSED string name="missing_hint">Пожалуйста, подключите недостающие инструменты, либо установите их.</string -->
     <!-- UNUSED string name="missing_line">ЛИНИЯ</string -->
@@ -569,8 +569,8 @@
     <string name="button_convert"   >Конвертир.</string>
     <string name="button_current"   >Текущий   </string>
     <string name="button_delete"    >Удалить   </string>
-    <!-- TODO string name="button_duplicate" >Duplicate </string -->
-    <!-- TODO string name="button_surface"   >Surface   </string -->
+    <string name="button_duplicate" >Дубликаты </string>
+    <string name="button_surface"   >Поверхностные   </string>
     <string name="button_eval"      >Вычислить    </string>
     <string name="button_evalg"     >G      </string>
     <string name="button_evalm"     >M      </string>
@@ -864,7 +864,7 @@
     <string name="title_settings_main">TopoDroid Основные настройки</string>
     <string name="title_settings_export">TopoDroid настройки импорта/экспорта</string>
     <string name="title_settings_import">TopoDroid настройки импорта</string>
-    <!-- TODO string name="title_settings_csv">CSV export settings</string -->
+    <string name="title_settings_csv">Настройки экспорта в CSV</string>
     <string name="title_settings_svx">Survex настройки экспорта</string>
     <string name="title_settings_th">Therion настройки экспорта</string>
     <string name="title_settings_dat">Compass настройки экспорта</string>
