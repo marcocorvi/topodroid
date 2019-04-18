@@ -89,7 +89,7 @@ class FirmwareFileDialog extends MyDialog
       }
       mList.setAdapter( mArrayAdapter );
     } else {
-      TDToast.make( R.string.firmware_none );
+      TDToast.makeBad( R.string.firmware_none );
       dismiss();
     }
 

@@ -575,7 +575,7 @@ public class TopoDroidApp extends Application
       // TDLog.Profile("TDApp BT");
       mBTAdapter = BluetoothAdapter.getDefaultAdapter();
       // if ( mBTAdapter == null ) {
-      //   // TDToast.make( R.string.not_available );
+      //   // TDToast.makeBad( R.string.not_available );
       //   // finish(); // FIXME
       //   // return;
       // }
@@ -734,11 +734,11 @@ public class TopoDroidApp extends Application
     // TODO this writeCoeff shoudl be run in an AsyncTask
     if ( b != null ) b.setEnabled( false );
     if ( mComm == null || TDInstance.device == null ) {
-      TDToast.make( R.string.no_device_address );
+      TDToast.makeBad( R.string.no_device_address );
     } else if ( check && ! checkCalibrationDeviceMatch() ) {
-      TDToast.make( R.string.calib_device_mismatch );
+      TDToast.makeBad( R.string.calib_device_mismatch );
     } else if ( ! mComm.writeCoeff( TDInstance.distoAddress(), coeff ) ) {
-      TDToast.make( R.string.write_failed );
+      TDToast.makeBad( R.string.write_failed );
     } else {
       TDToast.make( R.string.write_ok );
     }
@@ -1625,7 +1625,7 @@ public class TopoDroidApp extends Application
     if ( ( distance < 0.0f ) ||
          ( clino < -90.0f || clino > 90.0f ) ||
          ( b < 0.0f || b >= 360.0f ) ) {
-      TDToast.make( R.string.illegal_data_value );
+      TDToast.makeBad( R.string.illegal_data_value );
       return null;
     }
     bearing = (bearing  - ManualCalibration.mAzimuth) / TDSetting.mUnitAngle;
@@ -1671,7 +1671,7 @@ public class TopoDroidApp extends Application
         ret = mData.selectShot( id, TDInstance.sid );
       }
     } else {
-      TDToast.make( R.string.missing_station );
+      TDToast.makeBad( R.string.missing_station );
     }
     return ret;
   }
@@ -1787,10 +1787,10 @@ public class TopoDroidApp extends Application
   //         // gracefully fail without saying anything
   //       }
   //     } else {
-  //       TDToast.make( "Photo display not yet implemented" );
+  //       TDToast.makeBad( "Photo display not yet implemented" );
   //     }
   //   } else {
-  //     TDToast.make( "ERROR file not found: " + filename );
+  //     TDToast.makeBad( "ERROR file not found: " + filename );
   //   }
   // }
 
@@ -1897,7 +1897,7 @@ public class TopoDroidApp extends Application
 
   static void syncConnectionFailed()
   {
-    TDToast.make( "Sync connection failed" );
+    TDToast.makeBad( "Sync connection failed" );
   }
 
   void syncConnectedDevice( String name )
@@ -1967,7 +1967,7 @@ public class TopoDroidApp extends Application
   {
     if ( exportType < 0 ) return;
     if ( TDInstance.sid < 0 ) {
-      if ( warn ) TDToast.make( R.string.no_survey );
+      if ( warn ) TDToast.makeBad( R.string.no_survey );
     } else {
       SurveyInfo info = getSurveyInfo( );
       if ( info == null ) return;

@@ -51,7 +51,7 @@ class ImportCompassTask extends ImportTask
       ArrayList< ParserShot > splays = parser.getSplays();
       app_data.insertImportShots( sid, id, splays );
     } catch ( ParserException e ) {
-      // TDToast.make(mActivity, R.string.file_parse_fail );
+      // TDToast.makeBad( R.string.file_parse_fail );
     }
     return sid;
   }

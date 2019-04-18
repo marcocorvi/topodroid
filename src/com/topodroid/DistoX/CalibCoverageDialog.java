@@ -151,7 +151,7 @@ class CalibCoverageDialog extends MyDialog
         fillImage();
         reset();
       } else {
-        TDToast.make( R.string.no_calib );
+        TDToast.makeBad( R.string.no_calib );
       }
     } else {
       dismiss();

@@ -229,7 +229,7 @@ public class FixedActivity extends Activity
       if ( dialog.getNrPoints() > 0 ) {
 	dialog.show();
       } else {
-        TDToast.make( R.string.MT_points_none );
+        TDToast.makeBad( R.string.MT_points_none );
       }
     }
     // refreshList();
@@ -292,7 +292,7 @@ public class FixedActivity extends Activity
       startActivityForResult( intent, CRS_CONVERSION_REQUEST );
     } catch ( ActivityNotFoundException e ) {
       mFixedDialog = null;
-      TDToast.make( R.string.no_proj4 );
+      TDToast.makeBad( R.string.no_proj4 );
     }
   }
 
@@ -308,7 +308,7 @@ public class FixedActivity extends Activity
       startActivityForResult( intent, CRS_INPUT_REQUEST );
     } catch ( ActivityNotFoundException e ) {
       mFixedAddDialog = null;
-      TDToast.make( R.string.no_proj4 );
+      TDToast.makeBad( R.string.no_proj4 );
     }
   }
 

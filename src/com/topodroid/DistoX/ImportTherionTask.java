@@ -58,7 +58,7 @@ class ImportTherionTask extends ImportTask
         app_data.insertStation( sid, st.name, st.comment, st.flag );
       }
     } catch ( ParserException e ) {
-      // TDToast.make(mActivity, R.string.file_parse_fail );
+      // TDToast.makeBad( R.string.file_parse_fail );
     }
     return sid;
   }

@@ -350,7 +350,7 @@ public class OverviewWindow extends ItemDrawer
 
     // FIXME mCheckExtend
     // if ( (! mNum.surveyAttached) && TDSetting.mCheckAttached ) {
-    //   TDToast.make( R.string.survey_not_attached );
+    //   TDToast.makeBad( R.string.survey_not_attached );
     // }
   }
     
@@ -565,7 +565,7 @@ public class OverviewWindow extends ItemDrawer
       // mBlockList = mData.selectAllLegShots( mSid, TDStatus.NORMAL );
       mBlockList = mData.selectAllShots( mSid, TDStatus.NORMAL );
       if ( mBlockList.size() == 0 ) {
-        TDToast.make( R.string.few_data );
+        TDToast.makeBad( R.string.few_data );
         finish();
       } else {
         loadFiles( mType ); 
@@ -582,7 +582,7 @@ public class OverviewWindow extends ItemDrawer
       // Log.v( "DistoX", "Overview plots " + plots.size() );
 
       // if ( plots.size() < 1 ) { // N.B. this should never happpen
-      //   TDToast.make( R.string.few_plots );
+      //   TDToast.makeBad( R.string.few_plots );
       //   finish();
       //   return;
       // }
@@ -643,7 +643,7 @@ public class OverviewWindow extends ItemDrawer
       // if ( ! mAllSymbols ) {
       //   String msg = missingSymbols.getMessage( getResources() );
       //   TDLog.Log( TDLog.LOG_PLOT, "Missing " + msg );
-      //   TDToast.make( "Missing symbols \n" + msg );
+      //   TDToast.makeBad( "Missing symbols \n" + msg );
       //   // (new MissingDialog( this, this, msg )).show();
       //   // finish();
       // }
@@ -667,7 +667,7 @@ public class OverviewWindow extends ItemDrawer
             if (msg.what == 661 ) {
               TDToast.make( String.format( getString(R.string.saved_file_1), (fullname + "." + ext) ) );
             } else {
-              TDToast.make( R.string.saving_file_failed );
+              TDToast.makeBad( R.string.saving_file_failed );
             }
           }
        };

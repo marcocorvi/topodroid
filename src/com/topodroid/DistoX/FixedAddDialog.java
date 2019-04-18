@@ -208,7 +208,7 @@ class FixedAddDialog extends MyDialog
         }
       }
       if ( toast ) {
-        TDToast.make( R.string.empty_clipboard );
+        TDToast.makeBad( R.string.empty_clipboard );
       }
       return;
     } else if ( b == mBtnProj4 ) {

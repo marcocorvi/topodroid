@@ -43,17 +43,17 @@ class ImportZipTask extends ImportTask
     if ( mMain.get() != null && ! mMain.get().isFinishing() ) {
       mMain.get().setTheTitle( );
       if ( result < -5 ) {
-        TDToast.make( R.string.unzip_fail );
+        TDToast.makeBad( R.string.unzip_fail );
       } else if ( result == -5 ) {
-        TDToast.make( R.string.unzip_fail_sqlite );
+        TDToast.makeBad( R.string.unzip_fail_sqlite );
       } else if ( result == -4 ) {
-        TDToast.make( R.string.unzip_fail_survey );
+        TDToast.makeBad( R.string.unzip_fail_survey );
       } else if ( result == -3 ) {
-        TDToast.make( R.string.unzip_fail_db );
+        TDToast.makeBad( R.string.unzip_fail_db );
       } else if ( result == -2 ) {
-        TDToast.make( R.string.unzip_fail_td );
+        TDToast.makeBad( R.string.unzip_fail_td );
       } else if ( result == -1 ) {
-        TDToast.make( R.string.import_already );
+        TDToast.makeBad( R.string.import_already );
       } else {
         mMain.get().updateDisplay( );
         TDToast.make( R.string.import_zip_ok );

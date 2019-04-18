@@ -580,7 +580,7 @@ public class DrawingWindow extends ItemDrawer
         // mApp.mShotWindow.setRecentPlot( name, mType );
         TDInstance.setRecentPlot( name, mType );
       } else {
-        TDToast.make( R.string.plot_duplicate_name );
+        TDToast.makeBad( R.string.plot_duplicate_name );
         // Log.v("DistoX", "plot name already exists");
       }
     }
@@ -1190,12 +1190,12 @@ public class DrawingWindow extends ItemDrawer
     if ( can_toast ) {
       if ( (! mNum.surveyAttached) && TDSetting.mCheckAttached ) {
         if ( (! mNum.surveyExtend) && TDSetting.mCheckExtend && type == PlotInfo.PLOT_EXTENDED ) {
-          TDToast.make( R.string.survey_not_attached_extend );
+          TDToast.makeBad( R.string.survey_not_attached_extend );
         } else {
-          TDToast.make( R.string.survey_not_attached );
+          TDToast.makeBad( R.string.survey_not_attached );
         }
       } else if ( (! mNum.surveyExtend) && TDSetting.mCheckExtend && type == PlotInfo.PLOT_EXTENDED ) {
-        TDToast.make( R.string.survey_not_extend );
+        TDToast.makeBad( R.string.survey_not_extend );
       }
     }
     return true;
@@ -2010,7 +2010,7 @@ public class DrawingWindow extends ItemDrawer
 
     if ( do_load ) {
       if ( ! loadFiles( mType, list ) ) {
-        TDToast.make( R.string.plot_not_found );
+        TDToast.makeBad( R.string.plot_not_found );
 	finish();
       }
     }
@@ -2251,7 +2251,7 @@ public class DrawingWindow extends ItemDrawer
         mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
       } else {
         mNum = null;
-        // TDToast.make( R.string.few_data );
+        // TDToast.makeBad( R.string.few_data );
         // if ( mPid1 >= 0 ) mApp_mData.dropPlot( mPid1, mSid );
         // if ( mPid2 >= 0 ) mApp_mData.dropPlot( mPid2, mSid );
         // finish();
@@ -2275,7 +2275,7 @@ public class DrawingWindow extends ItemDrawer
       computeReferences( mPlot2.type, mPlot2.name, mZoom, true );
       computeReferences( mPlot1.type, mPlot1.name, mZoom, false );
       if ( mNum == null ) {
-        TDToast.make( R.string.survey_no_data_reduction );
+        TDToast.makeBad( R.string.survey_no_data_reduction );
       }
 
       doMoveTo();
@@ -3134,7 +3134,7 @@ public class DrawingWindow extends ItemDrawer
 	        if ( audioCheck ) {
                   addAudioPoint( xs, ys );
 	        } else {
-                  TDToast.make( R.string.no_feature_audio );
+                  TDToast.makeBad( R.string.no_feature_audio );
                 }
               } else {
     	        if ( mLandscape ) {
@@ -3559,7 +3559,7 @@ public class DrawingWindow extends ItemDrawer
           }
         }
       } else if ( nr_legs > 1 ) { // many legs
-        // TDToast.make( R.string.too_many_leg_intersection );
+        // TDToast.makeBad( R.string.too_many_leg_intersection );
         if ( h_section ) { // xsection in profile view
           // nothing 
         } else {
@@ -3572,7 +3572,7 @@ public class DrawingWindow extends ItemDrawer
     // Log.v("DistoX", "new section " + from + " - " + to );
     // cross-section does not exists yet
     if ( nr_legs == 0 ) {
-      TDToast.make( R.string.no_leg_intersection );
+      TDToast.makeBad( R.string.no_leg_intersection );
     } else if ( nr_legs == 1 ) {
       String section_id = mApp_mData.getNextSectionId( TDInstance.sid );
       currentLine.addOption( "-id " + section_id );
@@ -3596,7 +3596,7 @@ public class DrawingWindow extends ItemDrawer
       new DrawingLineSectionDialog( mActivity, this, /* mApp, */ h_section, false, section_id, currentLine, from, to, azimuth, clino, tt ).show();
 
     } else { // many legs in profile view
-      TDToast.make( R.string.too_many_leg_intersection );
+      TDToast.makeBad( R.string.too_many_leg_intersection );
     }
   }
 
@@ -3675,10 +3675,10 @@ public class DrawingWindow extends ItemDrawer
             mActivity.startActivity( intent );
           }
         } catch ( ActivityNotFoundException e ) {
-          TDToast.make( R.string.no_capture_app );
+          TDToast.makeBad( R.string.no_capture_app );
         }
       } else {
-        TDToast.make( "NOT IMPLEMENTED YET" );
+        TDToast.makeBad( "NOT IMPLEMENTED YET" );
       }
     }
   }
@@ -3707,7 +3707,7 @@ public class DrawingWindow extends ItemDrawer
       assert( mLastLinePath == null );
       mMediaComment = "";
       if ( ! audioCheck ) {
-	// TODO TDToast.make( R.string.no_feature_audio );
+	// TODO TDToast.makeBad( R.string.no_feature_audio );
 	return;
       }
       mMediaId = mApp_mData.nextAudioNegId( TDInstance.sid );
@@ -3850,7 +3850,7 @@ public class DrawingWindow extends ItemDrawer
       PlotInfo plot = mApp_mData.getPlotInfo( TDInstance.sid, xs_id );
 
       if ( plot == null  ) { // if there does not exist xsection xs-name create it
-        // TDToast.make( R.string.too_many_legs_xsection );
+        // TDToast.makeBad( R.string.too_many_legs_xsection );
         if ( azimuth >= 360 ) azimuth -= 360;
 
         if ( PlotInfo.isProfile( type ) ) {
@@ -4279,7 +4279,7 @@ public class DrawingWindow extends ItemDrawer
                 if ( mDrawingSurface.moveHotItemToNearestPoint( TDSetting.mSelectness/2 ) ) {
                   modified();
                 } else {
-                  TDToast.make( R.string.failed_snap_to_point );
+                  TDToast.makeBad( R.string.failed_snap_to_point );
                 }
               }
               dismissPopupEdit();
@@ -4303,7 +4303,7 @@ public class DrawingWindow extends ItemDrawer
                       case -1:
                       case -2:
                       case -3: // no splay close enough
-                        TDToast.make( R.string.failed_snap_to_splays );
+                        TDToast.makeBad( R.string.failed_snap_to_splays );
                         break;
                       default:
                         break;
@@ -4327,7 +4327,7 @@ public class DrawingWindow extends ItemDrawer
                         modified();
                         break;
                       case -3: // no line close enough
-                        TDToast.make( R.string.failed_snap_to_line );
+                        TDToast.makeBad( R.string.failed_snap_to_line );
                         break;
                       default:
                         break;
@@ -4462,7 +4462,7 @@ public class DrawingWindow extends ItemDrawer
                     if ( mDrawingSurface.appendHotItemToNearestLine() ) {
                       modified();
                     } else {
-                      TDToast.make( R.string.failed_append_to_line );
+                      TDToast.makeBad( R.string.failed_append_to_line );
                     }
                   }
                   dismissPopupEdit();
@@ -4912,7 +4912,7 @@ public class DrawingWindow extends ItemDrawer
                   DrawingAudioPath audio = (DrawingAudioPath)point;
                   new AudioDialog( mActivity, this, audio.mId ).show();
                 } else {
-	          // TODO TDToast.make( R.string.no_feature_audio );
+	          // TODO TDToast.makeBad( R.string.no_feature_audio );
 		}
               } else {
                 new DrawingPointDialog( mActivity, this, point ).show();
@@ -5134,13 +5134,13 @@ public class DrawingWindow extends ItemDrawer
     {
       if ( manager == null ) {
 	// if ( toast ) 
-	  TDToast.make( R.string.null_bitmap );
+	  TDToast.makeBad( R.string.null_bitmap );
 	return;
       }
       Bitmap bitmap = manager.getBitmap( );
       if ( bitmap == null ) {
         // if ( toast )
-	  TDToast.make( R.string.null_bitmap );
+	  TDToast.makeBad( R.string.null_bitmap );
 	return;
       }
       float scale = manager.getBitmapScale();
@@ -5233,7 +5233,7 @@ public class DrawingWindow extends ItemDrawer
           if (msg.what == 661 ) {
             TDToast.make( String.format( getString(R.string.saved_file_1), (filename + ".th2") ) );
           } else {
-            TDToast.make( R.string.saving_file_failed );
+            TDToast.makeBad( R.string.saving_file_failed );
           }
         }
       };
@@ -5316,8 +5316,8 @@ public class DrawingWindow extends ItemDrawer
       }
     } else { // ( nr < 0 )
       if ( toast ) {
-        // TDToast.make( getString(R.string.read_fail_with_code) + nr );
-        TDToast.make( mApp.DistoXConnectionError[ -nr ] );
+        // TDToast.makeBad( getString(R.string.read_fail_with_code) + nr );
+        TDToast.makeBad( mApp.DistoXConnectionError[ -nr ] );
       }
     }
   }
@@ -5509,7 +5509,7 @@ public class DrawingWindow extends ItemDrawer
   {
     NumStation st = mNum.getStation( station );
     if ( st == null ) {
-      TDToast.make( R.string.missing_station );
+      TDToast.makeBad( R.string.missing_station );
     } else {
       moveTo( mPlot1.type, station );
       moveTo( mPlot2.type, station );
@@ -5566,7 +5566,7 @@ public class DrawingWindow extends ItemDrawer
             }
             new DistoXStatDialog( mActivity, mNum, mPlot1.start, azimuth, mApp_mData.getSurveyStat( TDInstance.sid ) ).show();
           } else {
-            TDToast.make( R.string.no_data_reduction );
+            TDToast.makeBad( R.string.no_data_reduction );
 	  }
 	}
       } else if ( TDLevel.overNormal && p++ == pos ) { // RECOVER RELOAD
@@ -5593,7 +5593,7 @@ public class DrawingWindow extends ItemDrawer
 
       } else if ( TDLevel.overBasic && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // OVERVIEW
         if ( mType == PlotInfo.PLOT_PROJECTED ) {
-          TDToast.make( R.string.no_profile_overview );
+          TDToast.makeBad( R.string.no_profile_overview );
         } else {
           updateReference();
           Intent intent = new Intent( this, OverviewWindow.class );
@@ -6225,7 +6225,7 @@ public class DrawingWindow extends ItemDrawer
       mTouchMode = MODE_MOVE;
       // Log.v("DistoX-S", "*** split mode");
     // } else {
-    //   TDToast.make("Missing station " + station );
+    //   TDToast.makeBad("Missing station " + station );
     // }
     // Log.v("DistoX-S", "mode " + mMode + " touch-mode " + mTouchMode );
   }
@@ -6297,12 +6297,12 @@ public class DrawingWindow extends ItemDrawer
   private void doSplitPlot( )
   {
     if ( mSplitBorder.size() <= 3 ) { // too few points: nothing to split
-      TDToast.make( R.string.split_nothing );
+      TDToast.makeBad( R.string.split_nothing );
       return;
     }
     List<DrawingPath> paths = mDrawingSurface.splitPlot( mSplitBorder, mSplitRemove );
     if ( paths.size() == 0 ) { // nothing to split
-      TDToast.make( R.string.split_nothing );
+      TDToast.makeBad( R.string.split_nothing );
       return;
     }
     Log.v("DistoXC", "doSplitPlot " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );

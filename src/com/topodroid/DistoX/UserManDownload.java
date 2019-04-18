@@ -105,7 +105,7 @@ class UserManDownload extends AsyncTask< String, Integer, Integer >
       if ( r == 1 ) { // success
 	TDToast.make( R.string.user_man_ok );
       } else { // failed
-	TDToast.make( R.string.user_man_fail );
+	TDToast.makeBad( R.string.user_man_fail );
       }
     }
     unlock();

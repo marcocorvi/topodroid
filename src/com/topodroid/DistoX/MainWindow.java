@@ -153,7 +153,7 @@ public class MainWindow extends Activity
       updateList( list );
       if ( say_no_survey && list.size() == 0 ) {
         say_no_survey = false;
-        TDToast.make( R.string.no_survey );
+        TDToast.makeBad( R.string.no_survey );
       } 
     }
   }
@@ -200,13 +200,13 @@ public class MainWindow extends Activity
     {
       if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) { // mBtnDevice
         if ( mApp.mBTAdapter == null ) {
-          TDToast.make( R.string.no_bt );
+          TDToast.makeBad( R.string.no_bt );
         } else {
           if ( mApp.mBTAdapter.isEnabled() ) {
             // TDLog.Debug( "start device window");
             startActivity( new Intent( Intent.ACTION_VIEW ).setClass( mActivity, DeviceActivity.class ) );
           } else {
-            TDToast.make( R.string.not_enabled );
+            TDToast.makeBad( R.string.not_enabled );
           }
         }
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // NEW SURVEY
@@ -221,7 +221,7 @@ public class MainWindow extends Activity
 	  dlg.anchorTop();
 	  dlg.show();
         } else {
-	  TDToast.make( "palette not yet loaded" );
+	  TDToast.makeBad( "palette not yet loaded" );
 	}
       // FIXME THMANAGER
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // THERION MANAGER ThManager
@@ -230,7 +230,7 @@ public class MainWindow extends Activity
           // intent.putExtra( "survey", mApp.getSurveyThFile() );
           startActivity( intent );
         } catch ( ActivityNotFoundException e ) {
-          TDToast.make( R.string.no_thmanager );
+          TDToast.makeBad( R.string.no_thmanager );
         }
       }
     }
@@ -315,11 +315,11 @@ public class MainWindow extends Activity
       String filepath = TDPath.getImportFile( filename );
       String name = filename.replace(".th", "" ).replace(".TH", "");
       if ( mApp_mData.hasSurveyName( name ) ) {
-        TDToast.make(R.string.import_already );
+        TDToast.makeBad(R.string.import_already );
         setTheTitle();
         return;
       }
-      // TDToast.make(mActivity, R.string.import_wait );
+      // TDToast.make( R.string.import_wait );
       new ImportTherionTask( this ).execute( filepath, name );
     } else if ( filename.endsWith(".dat") || filename.endsWith(".DAT") ) {
       String filepath = TDPath.getImportFile( filename );
@@ -672,7 +672,7 @@ public class MainWindow extends Activity
     if ( do_check_bt ) {
       do_check_bt = false;
       if ( mApp.mBTAdapter == null ) {
-        TDToast.make( R.string.no_bt );
+        TDToast.makeBad( R.string.no_bt );
       } else {
         if ( TDSetting.mCheckBT == 1 && ! mApp.mBTAdapter.isEnabled() ) {    
           Intent enableIntent = new Intent( BluetoothAdapter.ACTION_REQUEST_ENABLE );
@@ -794,7 +794,7 @@ public class MainWindow extends Activity
           // nothing to do: scanBTDEvices() is called by menu CONNECT
         } else if ( say_not_enabled ) {
           say_not_enabled = false;
-          TDToast.make(R.string.not_enabled );
+          TDToast.makeBad(R.string.not_enabled );
           // finish();
         }
         // FIXME_BT

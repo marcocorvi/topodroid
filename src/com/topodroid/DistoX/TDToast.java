@@ -34,7 +34,13 @@ class TDToast
   static void make( int r ) { show( Toast.makeText( TDInstance.context, r, SHORT ) ); }
 
   @SuppressLint("ShowToast")
+  static void makeBad( int r ) { makeBG( r, TDColor.VIOLET ); }
+
+  @SuppressLint("ShowToast")
   static void make( String text ) { show( Toast.makeText( TDInstance.context, text, SHORT ) ); }
+  
+  @SuppressLint("ShowToast")
+  static void makeBad( String text ) { makeBG( text, TDColor.VIOLET ); }
   
   static Toast makeToast( int r )
   {

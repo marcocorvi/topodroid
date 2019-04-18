@@ -95,7 +95,7 @@ public class PhotoActivity extends Activity
       updatePhotoList( list );
       setTitle( TDInstance.survey );
     // } else {
-    //   TDToast.make( R.string.no_survey );
+    //   TDToast.makeBad( R.string.no_survey );
     }
   }
 
@@ -107,7 +107,7 @@ public class PhotoActivity extends Activity
     // Log.v("DistoX", "photo activity, update photo list " );
     // Log.v("DistoX", "photo activity, update photo list. size " + list.size() );
     if ( list.size() == 0 ) {
-      TDToast.make( R.string.no_photos );
+      TDToast.makeBad( R.string.no_photos );
       finish();
     }
     mDataAdapter.clear();
@@ -199,7 +199,7 @@ public class PhotoActivity extends Activity
       // }
       updateDisplay( ); // FIXME
     } else {
-      TDToast.make( R.string.no_db );
+      TDToast.makeBad( R.string.no_db );
     }
   }
 

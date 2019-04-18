@@ -72,7 +72,7 @@ public class UserManualActivity extends Activity
       try {
         startActivity( new Intent( Intent.ACTION_VIEW, Uri.parse( manual )));
       } catch ( ActivityNotFoundException e ) {
-        TDToast.make( R.string.no_manual );
+        TDToast.makeBad( R.string.no_manual );
       }
     }
   }

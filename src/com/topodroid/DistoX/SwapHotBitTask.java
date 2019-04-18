@@ -70,7 +70,7 @@ class SwapHotBitTask extends AsyncTask<Void, Integer, Integer>
     if ( result >= 0 ) {
       TDToast.make( R.string.swap_hotbit_ok );
     } else {
-      TDToast.make( R.string.read_failed );
+      TDToast.makeBad( R.string.read_failed );
     }
   }
 

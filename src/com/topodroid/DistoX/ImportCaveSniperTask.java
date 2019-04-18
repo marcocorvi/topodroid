@@ -43,7 +43,7 @@ class ImportCaveSniperTask extends ImportTask
       long id = app_data.insertImportShots( sid, 1, shots ); // start id = 1
       // app_data.insertImportShots( sid, id, splays );
     } catch ( ParserException e ) {
-      // TDToast.make(mActivity, R.string.file_parse_fail );
+      // TDToast.makeBad( R.string.file_parse_fail );
     }
     return sid;
   }

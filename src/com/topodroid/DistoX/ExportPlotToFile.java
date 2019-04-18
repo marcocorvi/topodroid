@@ -104,7 +104,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
         if ( bool ) {
           TDToast.make( String.format( mFormat, filename ) );
         } else {
-          TDToast.make( R.string.saving_file_failed );
+          TDToast.makeBad( R.string.saving_file_failed );
         }
       }
     }

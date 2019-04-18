@@ -296,9 +296,9 @@ public class ShotWindow extends Activity
     } else { // ( nr < 0 )
       if ( toast ) {
         if ( nr <= -5 ) {
-          TDToast.make( getString(R.string.read_fail_with_code) + nr );
+          TDToast.makeBad( getString(R.string.read_fail_with_code) + nr );
 	       } else {
-          TDToast.make( mApp.DistoXConnectionError[ -nr ] );
+          TDToast.makeBad( mApp.DistoXConnectionError[ -nr ] );
         }
       }
     }
@@ -323,7 +323,7 @@ public class ShotWindow extends Activity
     } else {
       mApp.clearSurveyReferences();
       finish();
-      // TDToast.make( R.string.no_survey );
+      // TDToast.makeBad( R.string.no_survey );
     }
   }
 
@@ -406,7 +406,7 @@ public class ShotWindow extends Activity
     mDataAdapter.clear();
     // mList.setAdapter( mDataAdapter );
     if ( list.size() == 0 ) {
-      // TDToast.make( R.string.no_shots );
+      // TDToast.makeBad( R.string.no_shots );
       return;
     }
     processShotList( list );
@@ -653,7 +653,7 @@ public class ShotWindow extends Activity
       List< DBlock > shots3 = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.CHECK );
       List< PlotInfo > plots     = mApp_mData.selectAllPlots( TDInstance.sid, TDStatus.DELETED );
       if ( shots1.size() == 0 && shots2.size() == 0 && shots3.size() == 0 && plots.size() == 0 ) {
-        TDToast.make( R.string.no_undelete );
+        TDToast.makeBad( R.string.no_undelete );
       } else {
         (new UndeleteDialog(mActivity, this, mApp_mData, TDInstance.sid, shots1, shots2, shots3, plots ) ).show();
       }
@@ -669,7 +669,7 @@ public class ShotWindow extends Activity
           intent.putExtra( "survey", TDPath.getSurveyThFile( TDInstance.survey ) );
           mActivity.startActivity( intent );
         } catch ( ActivityNotFoundException e ) {
-          TDToast.make( R.string.no_cave3d );
+          TDToast.makeBad( R.string.no_cave3d );
         }
       }
     } else if ( TDLevel.overNormal && (! diving) && p++ == pos ) { // DEVICE
@@ -727,10 +727,10 @@ public class ShotWindow extends Activity
           intent.putExtra( "outputFormat", Bitmap.CompressFormat.JPEG.toString() );
           startActivityForResult( intent, TDRequest.CAPTURE_IMAGE_SHOTWINDOW );
         } catch ( ActivityNotFoundException e ) {
-          TDToast.make( R.string.no_capture_app );
+          TDToast.makeBad( R.string.no_capture_app );
         }
       } else {
-        TDToast.make( "NOT IMPLEMENTED YET" );
+        TDToast.makeBad( "NOT IMPLEMENTED YET" );
       }
     }
   }
@@ -1469,7 +1469,7 @@ public class ShotWindow extends Activity
       long mPIDs = mPIDp + 1L; // FIXME !!! this is true but not guaranteed
       startDrawingWindow( start, name+"p", mPIDp, name+"s", mPIDs, PlotInfo.PLOT_PLAN, start, false ); // default no-landscape
     // } else {
-    //   TDToast.make( R.string.plot_duplicate_name );
+    //   TDToast.makeBad( R.string.plot_duplicate_name );
     }
     // updateDisplay( );
   }
@@ -1480,7 +1480,7 @@ public class ShotWindow extends Activity
     // FIXME xoffset yoffset, east south and vert (downwards)
     if ( st2 != null ) {
       if ( ! mApp_mData.hasShot( TDInstance.sid, st1, st2 ) ) {
-        TDToast.make( R.string.no_shot_between_stations );
+        TDToast.makeBad( R.string.no_shot_between_stations );
         return;
       }
     } else {
@@ -1501,19 +1501,19 @@ public class ShotWindow extends Activity
         startSketchWindow( name );
       }
     } else {
-      TDToast.make( R.string.no_to_station );
+      TDToast.makeBad( R.string.no_to_station );
     }
   }
  
   void startSketchWindow( String name )
   {
     if ( TDInstance.sid < 0 ) {
-      TDToast.make( R.string.no_survey );
+      TDToast.makeBad( R.string.no_survey );
       return;
     }
 
     if ( ! mApp_mData.hasSketch3d( TDInstance.sid, name ) ) {
-      TDToast.make( R.string.no_sketch );
+      TDToast.makeBad( R.string.no_sketch );
       return;
     }
 
@@ -1552,14 +1552,14 @@ public class ShotWindow extends Activity
       }
  * END_SKETCH_3D */
     }
-    TDToast.make( R.string.plot_not_found );
+    TDToast.makeBad( R.string.plot_not_found );
   }
 
   private void startDrawingWindow( String start, String plot1_name, long plot1_id,
                                    String plot2_name, long plot2_id, long type, String station, boolean landscape )
   {
     if ( TDInstance.sid < 0 || plot1_id < 0 || plot2_id < 0 ) {
-      TDToast.make( R.string.no_survey );
+      TDToast.makeBad( R.string.no_survey );
       return;
     }
     
@@ -1735,7 +1735,7 @@ public class ShotWindow extends Activity
     int ret = mApp_mData.updateShot( blk.mId, TDInstance.sid, from, to, extend, flag, leg, comment, true );
 
     if ( ret == -1 ) {
-      TDToast.make( R.string.no_db );
+      TDToast.makeBad( R.string.no_db );
     // } else if ( ret == -2 ) {
     //   TDToast.make( R.string.makes_cycle );
     } else {
@@ -1819,7 +1819,7 @@ public class ShotWindow extends Activity
       }
       updateDisplay();
     } else {
-      TDToast.make( R.string.no_leg_first );
+      TDToast.makeBad( R.string.no_leg_first );
     }
     clearMultiSelect( );
   }
@@ -1968,7 +1968,7 @@ public class ShotWindow extends Activity
         int ret = mApp_mData.updateShot( blk.mId, TDInstance.sid, from, to, extend, flag, leg, comment, true );
 
         if ( ret == -1 ) {
-          TDToast.make( R.string.no_db );
+          TDToast.makeBad( R.string.no_db );
         // } else if ( ret == -2 ) {
         //   TDToast.make( R.string.makes_cycle );
         // } else {

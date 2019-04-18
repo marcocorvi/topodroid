@@ -122,14 +122,14 @@ class FirmwareDialog extends MyDialog
           if ( filename.length() == 0 ) filename = null;
         }
         if ( filename == null ) {
-          TDToast.make( R.string.firmware_file_missing );
+          TDToast.makeBad( R.string.firmware_file_missing );
           return;
         }
         if ( mBtnDump.isChecked() ) {
           TDLog.LogFile( "Firmware dump to " + filename );
           File fp = new File( TDPath.getBinFile( filename ) );
           if ( fp.exists() ) {
-            TDToast.make( R.string.firmware_file_exists );
+            TDToast.makeBad( R.string.firmware_file_exists );
             return;    
           }
           askDump( filename );

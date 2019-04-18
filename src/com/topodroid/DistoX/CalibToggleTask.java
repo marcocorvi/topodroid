@@ -47,7 +47,7 @@ class CalibToggleTask extends AsyncTask<Void, Integer, Boolean>
     if ( result ) {
       TDToast.make( R.string.toggle_ok );
     } else {
-      TDToast.make( R.string.toggle_failed );
+      TDToast.makeBad( R.string.toggle_failed );
     }
     if ( mParent.get() != null && !mParent.get().isActivityFinishing() ) {
       mParent.get().enableButtons( true );

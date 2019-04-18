@@ -155,7 +155,7 @@ public class SurveyWindow extends Activity
       mTextName.setText( name );
       mTextName.setTextColor( mNameColor );
     } else {
-      TDToast.make( R.string.cannot_rename );
+      TDToast.makeBad( R.string.cannot_rename );
     }
   } 
     
@@ -370,7 +370,7 @@ public class SurveyWindow extends Activity
     //   String msg = getResources().getString( R.string.zip_saved ) + " " + archiver.zipname;
     //   TDToast.make( msg );
     // } else {
-    //   TDToast.make( R.string.zip_failed );
+    //   TDToast.makeBad( R.string.zip_failed );
     // }
   }
 
@@ -395,7 +395,7 @@ public class SurveyWindow extends Activity
         intent.putExtra( "survey", TDPath.getSurveyThFile( TDInstance.survey ) );
         mActivity.startActivity( intent );
       } catch ( ActivityNotFoundException e ) {
-        TDToast.make( R.string.no_cave3d );
+        TDToast.makeBad( R.string.no_cave3d );
       }
     }
   }
@@ -414,7 +414,7 @@ public class SurveyWindow extends Activity
     if ( TDInstance.survey != null ) {
       (new DistoXAnnotations( mActivity, TDInstance.survey )).show();
     } else { // SHOULD NEVER HAPPEN
-      TDToast.make( R.string.no_survey );
+      TDToast.makeBad( R.string.no_survey );
     }
   }
 
@@ -605,7 +605,7 @@ public class SurveyWindow extends Activity
     } else if ( TDLevel.overAdvanced && p++ == pos ) { // CALIBRATION CHECK SHOTS
       List< DBlock > shots = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.CHECK );
       if ( shots.size() == 0 ) {
-        TDToast.make( R.string.no_calib_check );
+        TDToast.makeBad( R.string.no_calib_check );
       } else {
         new CalibCheckDialog( mActivity, this, shots ).show();
       }

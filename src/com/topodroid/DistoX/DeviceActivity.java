@@ -385,7 +385,7 @@ public class DeviceActivity extends Activity
     BluetoothDevice device = mApp.mBTAdapter.getRemoteDevice( mCurrDevice.mAddress );
     switch ( DeviceUtil.pairDevice( device ) ) {
       case -1: // failure
-        // TDToast.make( R.string.pairing_failed ); // TODO
+        // TDToast.makeBad( R.string.pairing_failed ); // TODO
         break;
       case 2: // already paired
         // TDToast.make( R.string.device_paired ); 
@@ -459,7 +459,7 @@ public class DeviceActivity extends Activity
     // FIXME COMMENTED
     // TopoDroidComm comm = mApp.mComm;
     // if ( comm == null ) {
-    //   TDToast.make( R.string.connect_failed );
+    //   TDToast.makeBad( R.string.connect_failed );
     //   return;
     // }
 
@@ -470,21 +470,21 @@ public class DeviceActivity extends Activity
       TDToast.make( R.string.bt_reset );
     } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // CALIBRATION MODE TOGGLE
       if ( mCurrDevice == null ) { // mAddress.length() < 1 ) {
-        TDToast.make( R.string.no_device_address );
+        TDToast.makeBad( R.string.no_device_address );
       } else {
         enableButtons( false );
         new CalibToggleTask( this, mApp ).execute();
       }
     } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // CALIBRATIONS
       if ( TDInstance.device == null ) {
-        TDToast.make( R.string.no_device_address );
+        TDToast.makeBad( R.string.no_device_address );
       } else {
         (new CalibListDialog( this, this /*, mApp */ )).show();
       }
 
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {    // INFO TDLevel.overNormal
       if ( mCurrDevice == null ) {
-        TDToast.make( R.string.no_device_address );
+        TDToast.makeBad( R.string.no_device_address );
       } else {
         // setTitleColor( TDColor.CONNECTED ); // USELESS
         if ( mCurrDevice.mType == Device.DISTO_A3 ) {
@@ -499,7 +499,7 @@ public class DeviceActivity extends Activity
 
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {   // CALIB_READ TDLevel.overNormal
       if ( mCurrDevice == null ) { // mAddress.length() < 1 ) {
-        TDToast.make( R.string.no_device_address );
+        TDToast.makeBad( R.string.no_device_address );
       } else {
         enableButtons( false );
         new CalibReadTask( this, mApp, CalibReadTask.PARENT_DEVICE ).execute();
@@ -507,14 +507,14 @@ public class DeviceActivity extends Activity
 
     } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // DISTOX MEMORY TDLevel.overAdvanced
       if ( mCurrDevice == null ) { // mAddress.length() < 1 ) {
-        TDToast.make( R.string.no_device_address );
+        TDToast.makeBad( R.string.no_device_address );
       } else {
         if ( mCurrDevice.mType == Device.DISTO_A3 ) {
           new DeviceA3MemoryDialog( this, this ).show();
         } else if ( mCurrDevice.mType == Device.DISTO_X310 ) {
           new DeviceX310MemoryDialog( this, this ).show();
         } else {
-          TDToast.make( "Unknown DistoX type " + mCurrDevice.mType );
+          TDToast.makeBad( "Unknown DistoX type " + mCurrDevice.mType );
         }
       }
 
@@ -554,7 +554,7 @@ public class DeviceActivity extends Activity
     // TDLog.Log( TDLog.LOG_DEVICE, "onClick mBtnHeadTail. Is connected " + mApp.isConnected() );
     String ht = mApp.readHeadTail( mCurrDevice.mAddress, command, head_tail );
     if ( ht == null ) {
-      TDToast.make( R.string.head_tail_failed );
+      TDToast.makeBad( R.string.head_tail_failed );
       // return false;
     }
     // Log.v( TopoDroidApp.TAG, "Head " + head_tail[0] + " tail " + head_tail[1] );
@@ -565,7 +565,7 @@ public class DeviceActivity extends Activity
   private boolean checkA3headtail( int[] ht )
   {
     if ( ht[0] < 0 || ht[0] >= DeviceA3Details.MAX_ADDRESS_A3 || ht[1] < 0 || ht[1] >= DeviceA3Details.MAX_ADDRESS_A3 ) {
-      TDToast.make(R.string.device_illegal_addr );
+      TDToast.makeBad(R.string.device_illegal_addr );
       return false;
     }
     return true;
@@ -587,7 +587,7 @@ public class DeviceActivity extends Activity
   {
     // Log.v(TopoDroidApp.TAG, "store HeadTail " + mCurrDevice.mAddress + " : " + head_tail[0] + " " + head_tail[1] );
     if ( ! mApp_mDData.updateDeviceHeadTail( mCurrDevice.mAddress, head_tail ) ) {
-      TDToast.make( R.string.head_tail_store_failed );
+      TDToast.makeBad( R.string.head_tail_store_failed );
     }
   }
 
@@ -692,7 +692,7 @@ public class DeviceActivity extends Activity
       //   if ( result == Activity.RESULT_OK ) {
       //     // nothing to do: scanBTDevices(); is called by menu CONNECT
       //   } else {
-      //     TDToast.make(R.string.not_enabled );
+      //     TDToast.makeBad(R.string.not_enabled );
       //     finish();
       //   }
       //   break;
@@ -872,7 +872,7 @@ public class DeviceActivity extends Activity
     String filename = TDPath.getCCsvFile( name );
     File file = new File( filename );
     if ( ! file.exists() ) {
-      TDToast.make(R.string.file_not_found );
+      TDToast.makeBad(R.string.file_not_found );
     } else {
       // FIXME_SYNC this is sync ... ok because calib file is small
       switch ( TDExporter.importCalibFromCsv( mApp_mDData, filename, mCurrDevice.mAddress ) ) {
@@ -880,22 +880,22 @@ public class DeviceActivity extends Activity
           TDToast.make(R.string.import_calib_ok );
           break;
         case -1:
-          TDToast.make(R.string.import_calib_no_header );
+          TDToast.makeBad(R.string.import_calib_no_header );
           break;
         case -2:
-          TDToast.make(R.string.import_calib_already );
+          TDToast.makeBad(R.string.import_calib_already );
           break;
         case -3:
-          TDToast.make(R.string.import_calib_mismatch );
+          TDToast.makeBad(R.string.import_calib_mismatch );
           break;
         case -4:
-          TDToast.make(R.string.import_calib_no_data );
+          TDToast.makeBad(R.string.import_calib_no_data );
           break;
         case -5:
-          TDToast.make(R.string.import_calib_io_error );
+          TDToast.makeBad(R.string.import_calib_io_error );
           break;
         default:
-          TDToast.make(R.string.import_failed );
+          TDToast.makeBad(R.string.import_failed );
       }
     }
   }

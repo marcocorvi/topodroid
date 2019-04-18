@@ -87,7 +87,7 @@ public class SensorListActivity extends Activity
       updateSensorList( list );
       setTitle( TDInstance.survey );
     // } else {
-    //   TDToast.make( R.string.no_survey );
+    //   TDToast.makeBad( R.string.no_survey );
     }
   }
 
@@ -97,7 +97,7 @@ public class SensorListActivity extends Activity
     mDataAdapter.clear();
     mList.setAdapter( mDataAdapter );
     if ( list.size() == 0 ) {
-      TDToast.make( R.string.no_sensors );
+      TDToast.makeBad( R.string.no_sensors );
       finish();
     }
     for ( SensorInfo item : list ) {
@@ -160,7 +160,7 @@ public class SensorListActivity extends Activity
       // }
       updateDisplay(); // FIXME
     } else {
-      TDToast.make( R.string.no_db );
+      TDToast.makeBad( R.string.no_db );
     }
   }
 

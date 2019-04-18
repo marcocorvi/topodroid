@@ -5,20 +5,18 @@ The Sketch button of the "Shot data" window opens the dialog with the list of sk
 
 Each sketch is made of two sketch files: one for the plan view, the other for the profile view (either extended or projected). X-sections have only one file. A new sketch is opened in the plan view. Afterwards the sketch dialog shows two columns, one for the plan, the other for the profile view, and you can choose which one to open from.<br><p>
 
-The extended profile view displays the midline with the shots drawn left or right, or vertical, according to their "extend". Splays are projected on the vertical plane of the shot that is closest in azimuth, unless the user has set a given "extend" through the shot edit dialog.
+The <u>extended</u> profile view displays the midline with the shots drawn left or right, or vertical, according to their "extend". If a leg has the "extend" not set, the midline is not displayed from that leg on.
+Splays are projected on the vertical plane of the shot that is closest in azimuth, unless the user has set a given "extend" through the shot edit dialog.
 For example, for the plan view in figure, the splays in the light region are projected on the vertical plane of shot 1-2, those in the dark region on the vertical plane of 0-1.<br><p>  
 
-The projected profile view displays the midline and the splays projected in the vertical plane perpendicular to the projection azimuth.<br><p>
+The <u>projected</u> profile view displays the midline and the splays projected in the vertical plane perpendicular to the projection azimuth.<br><p>
 
 
 <img src="splay_extend.png"><br><p>
 
 <b>Splays</b><br>
-Splays are displayed with continuous or dashed/dotted line and with different colors.<br>
-The splay display is turned off if the shot is marked for no-display in plan or profile view.<br>
-A "commented" splay is dark gray. 
-X-splays are green. H/V-splays are dark blue and are very transparent (small alpha) in profile/plan views, respectively.
-Otherwise the splay is gray.<br><p>
+Splays are displayed with continuous or dashed/dotted line and can have different colors.<br>
+A splay is not shown if the shot is marked for no-display in plan or profile view.<br><p>
 
 In <u>plan</u> view if the inclination of the splay is over the plan-view threshold, the splay is not drawn.
 If the splay clino is above the dash clino-threshold, it is dotted (positive clino) or dashed (negative clino).<br><p>
@@ -30,7 +28,7 @@ For <u>x-sections</u> the X-splays are green, the others are blue (TO station) o
 if the angle between the splay and the normal to the section plane is below the dash angle-threshold [default 60 deg.] (dotted if in the 
 direction of the normal, dashed if opposite).<br><p>
 
-The splay colors are [E]
+The splay colors are [E/G]
 <ul>
 <li>commented: dark green</li>
 <li>x-splay (LRUD): green</li>
@@ -40,7 +38,7 @@ The splay colors are [E]
 </ul><br><p>
 
 <b>Stations</b><br>
-The color of the stations is
+The station colors are
 <ul>
 <li>violet: default</li>
 <li>red/blue: stations beyond which the midline is hidden</li>
@@ -73,7 +71,7 @@ The remaining buttons differ by the mode. In the <b>move</b> mode they are
 	<li><img src="btn_download.png"> data <u>Download</u>. The last download shots are bluish to help distinguish them from the others. If no DistoX is selected, this button is hidden.</li>
 	<li><img src="btn_bluetooth.png"> <a href="page_bluetooth.htm">Bluetooth</a> reset/controls</li>
 	<li><img src="btn_note.png"> survey <a href="page_survey_notes.htm">notes</a></li>
-	<li><img src="btn_mode.png"> drawing <a href="page_drawing_refs.htm">references</a>: legs, splays, stations, metric grid, and scalebar.</li>
+	<li><img src="btn_mode.png"> drawing <a href="page_drawing_refs.htm">references</a>: legs, splays, stations, metric grid, scalebar, and sketch outline.</li>
 	<li><img src="btn_plan.png"> <u>Plan/Profile</u> switch. (<u>splay-display mode</u>, for x-sections)</li>
 	<li><img src="btn_azimuth.png"> <a href="page_azimuth.htm">"extend" reference</a></li>
 </ul><br><p>
@@ -83,7 +81,7 @@ The <b>draw</b> mode has four buttons besides the green ones:
 <li><img src="btn_undo.png"> removes the last items you have drawn, one at a time.</li>
 <li><img src="btn_redo.png"> puts the removed item back in the sketch, one at a time. The list of removed items is emptied when you draw something new. Pointwise editing actions may also affect the list of redo.</li>
 <li><img src="btn_tools.png"> <a href="page_tools_recent.htm">Drawing tool</a> picker</li>
-<li><img src="btn_cont.png"> Line <u>joining</u></li>
+<li><img src="btn_cont.png"> Line <u>joining</u> or continuing</li>
 </ul><br><p>
 
 The <b>erase</b> mode has three buttons besides the green ones:
@@ -98,7 +96,7 @@ The <b>edit</b> [A] mode has, besides the green buttons:
 <ul style="margin-top=0">
 <li><img src="btn_edit.png"> limits the selectable items [all, points, lines, areas, shots, stations]</li>
 <li><img src="btn_size.png"> size of the selection tool [S, M, L]</li>
-<li><img src="btn_point.png"> point-wise actions</li>
+<li><img src="btn_point.png"> point-wise and special actions</li>
 <li><img src="btn_item.png"> item properties edit</li>
 <li><img src="btn_delete.png"> delete the item from the sketch (it asks for confirmation, and can be "undone").</li>
 <li><img src="btn_range.png"> range selection: either pointwise or local (only for lines and areas).</li>
@@ -124,7 +122,7 @@ A long tap on the delete button removes the selected line/area point [N].<br>
 <h4>MENUS</h4>
 <ul style="margin-top=0">
 <li><u>Switch</u> to another sketch or <u>close</u>.</li>
-<li><u>Export</u>: the sketch can be <a href="page_plot_export.htm">exported</a> as <i>Therion</i> 2D file(s), <i>cSurvey</i> (a single file), PNG (two files), DXF (two files), and SVG (two files).</li>
+<li><u>Export</u>: the sketch can be <a href="page_plot_export.htm">exported</a> as <i>Therion</i> th2, <i>cSurvey</i>, PNG, DXF, SVG, and xvi. All exports generate two files, one for plan the other for profile, except cSurvey, which has both in one file.</li>
 <li><a href="page_stat2.htm">Statistics</a>. For x-sections this is just the section area.</li>
 <li><u>Reload</u> the sketch from a <a href="page_backup.htm">backup copy</a>.</li>
 <li><u>Zoom-fit</u>: dialog to fit the sketch into the screen, and to select the portrait or landscape orientation</li>
@@ -155,13 +153,13 @@ A long tap on the delete button removes the selected line/area point [N].<br>
   <li><i>LINE TOOLS</i>
     <ul style="margin-top:0; margin-bottom:0">
     <li>Line <i>pen width</i> (NB wall-lines are twice as wide) [1 px]</li>
-    <li>Line <i>style</i>: fine, normal, coarse, or "splines" (interpolated-curve)</li>
+    <li><i>Drawing units</i> for lines with "path effect"</li>
+    <li>Line <i>style</i>: fine, normal, coarse, "splines" (interpolated-curve), simplified</li>
     <li>Line <i>point spacing</i>: distance between line points in normal style [5 px] </li>
     <li><i>Direction tick length</i> for x-section lines [5 px]</li>
     <li><i>Section points</i>: whether to add a "section" point automatically for "section" lines [default yes]</li>
     <li>Line <i>default join mode</i>: none, start, end, both, "continue"</li>
     <li>Area <i>border</i> default visibility</li>
-    <li><i>Drawing units</i> for lines with "path effect"</li>
     </ul>
   </li>
   <li><i>SKETCH ITEMS</i>
@@ -183,12 +181,20 @@ A long tap on the delete button removes the selected line/area point [N].<br>
 </ul><br><p>
 
 <a href="page_geek.htm">Geek settings</a>:
-<i>Leg vertical threshold</i>,
+<i>sketch shift/scale</i>, 
+<i>sketch split/merge</i>,
+<i>Leg verticality threshold (over threshold LRUD become WENS)</i>,
+<i>splay dashing coherently</i>,
+<i>saved stations coloring</i>,
+<i>minimum angle of corners when a line is streightened</i>
 <i>Bezier interpolation accuracy, and corner threshold</i>,
-<i>Line simplification distance and length</i>,
+<i>Line simplification distance, length, and buffer zone</i>,
 <i>Pointwise actions flags (Line/Area snap, Smooth/Straighten segment, multiselection)</i>,
 <i>Splay dashing (coherence, plan minimum clino, profile and x-section minimum angles)</i>,
-<i>Backup number and interval</i>, <i>Auto-walls settings</i>.<br><p>
+<i>Backup number and interval</i>,
+<i>Backup clearing menu</i>,
+<i>auto x-section in exports (csx, svg, dxf, xvi)</i>
+<i>Auto-walls settings</i>.<br><p>
 
 <h4>Sketch cache</h4>
 Once opened the sketches are kept in memory, in a cache. This speeds up switching between the shot-list window and the sketch window, as the sketch do not need to be read from file. The sketch cache is cleared when the survey is closed.<br><p>

@@ -269,7 +269,7 @@ public class CalibActivity extends Activity
     } else if ( k < mNrButton1 && b == mButton1[k++] ) { // OPEN GM
       if ( ! mApp.checkCalibrationDeviceMatch() ) {
         // FIXME use alert dialog
-        TDToast.make( R.string.calib_device_mismatch );
+        TDToast.makeBad( R.string.calib_device_mismatch );
       }
       doOpen();
     // } else if ( k < mNrButton1 && b == mButton1[k++] ) { // EXPORT
@@ -348,7 +348,7 @@ public class CalibActivity extends Activity
       name = TopoDroidUtil.noSpaces( name );
       if ( /* name != null && */ name.length() > 0 ) { // name != null always true
         if ( mApp.hasCalibName( name ) ) { // name already exists
-          // TDToast.make( R.string.calib_exists );
+          // TDToast.makeBad( R.string.calib_exists );
           String error = getResources().getString( R.string.calib_exists );
           mEditName.setError( error );
         } else {
@@ -358,7 +358,7 @@ public class CalibActivity extends Activity
           TDToast.make( R.string.calib_saved );
         }
       } else {
-        TDToast.make( R.string.calib_no_name );
+        TDToast.makeBad( R.string.calib_no_name );
       }
     }
     int algo = 0;
@@ -489,7 +489,7 @@ public class CalibActivity extends Activity
   private void doExport( int exportType, boolean warn )
   {
     if ( TDInstance.cid < 0 ) {
-      if ( warn ) TDToast.make( R.string.no_calibration );
+      if ( warn ) TDToast.makeBad( R.string.no_calibration );
     } else {
       String filename = null;
       switch ( exportType ) {
@@ -500,7 +500,7 @@ public class CalibActivity extends Activity
         if ( filename != null ) {
           TDToast.make( getString(R.string.saving_) + filename );
         } else {
-          TDToast.make( R.string.saving_file_failed );
+          TDToast.makeBad( R.string.saving_file_failed );
         }
       }
     }

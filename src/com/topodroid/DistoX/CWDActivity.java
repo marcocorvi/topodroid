@@ -79,26 +79,26 @@ public class CWDActivity extends Activity
     File base_dir = new File( base_name );
     try {
       if ( ! ( base_dir.exists() && base_dir.canWrite() ) ) {
-        TDToast.make( R.string.bad_cbd );
+        TDToast.makeBad( R.string.bad_cbd );
         return false;
       }
     } catch ( SecurityException e ) { 
-      TDToast.make( R.string.bad_cbd );
+      TDToast.makeBad( R.string.bad_cbd );
       return false;
     }
 
     // if ( dir_name == null ) { // always false
-    //   TDToast.make( R.string.empty_cwd );
+    //   TDToast.makeBad( R.string.empty_cwd );
     //   return false;
     // } else {
       dir_name = dir_name.trim();
       if ( dir_name.length() == 0 ) {
-        TDToast.make( R.string.empty_cwd );
+        TDToast.makeBad( R.string.empty_cwd );
 	    return false;
       }
     // }
     if ( dir_name.contains("/") ) {
-      TDToast.make( R.string.bad_cwd );
+      TDToast.makeBad( R.string.bad_cwd );
       return false;
     }
     if ( ! dir_name.toUpperCase(Locale.US).startsWith( "TOPODROID" ) ) {

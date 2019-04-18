@@ -155,9 +155,9 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
   {
     if ( mToast ) { 
       if ( filename == null ) {
-        TDToast.make( R.string.saving_file_failed );
+        TDToast.makeBad( R.string.saving_file_failed );
       } else if ( filename.length() == 0 ) {
-        TDToast.make( R.string.no_geo_station );
+        TDToast.makeBad( R.string.no_geo_station );
       } else {
         TDToast.make( mSaving + filename ); // FIXME_FORMAT
       }

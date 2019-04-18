@@ -96,7 +96,7 @@ class ImportDialog extends MyDialog
       }
       mList.setAdapter( mArrayAdapter );
     } else {
-      TDToast.make( R.string.import_none );
+      TDToast.makeBad( R.string.import_none );
       dismiss();
     }
   }
