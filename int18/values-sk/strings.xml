@@ -58,7 +58,7 @@
     <string name="make_walls">Steny</string>
     <string name="missing_station">Chýba merací bod</string>
     <string name="station_not_found">Merací bod nenájdený</string>
-    <!-- TODO string name="shot_not_found">No shot found</string -->
+    <string name="shot_not_found">Zámera nenájdená</string -->
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->
     <!-- UNUSED string name="missing_line">LINE</string -->
@@ -214,7 +214,7 @@
     <string name="error_length_required">Vyžaduje sa dĺžka</string>
     <string name="error_depth_required">Vyžaduje sa hĺbka</string>
     <string name="error_clino_required">Vyžaduje sa sklon</string>
-    <!-- TODO string name="error_comment_required">Comment required</string -->
+    <string name="error_comment_required">Vyžaduje sa komentár</string -->
     <string name="error_begin_required">Vyžaduje sa počiatočná adresa</string>
     <string name="error_declination_number">Deklinácia musí byť číslo</string>
     <string name="error_end_required">Vyžaduje sa koncová adresa</string>
@@ -533,7 +533,7 @@
     <!-- UNUSED string name="stat_shot">Merania %1$d,   Opakované %2$d,   Povrchové %3$d</string -->
     <string name="stat_splay">Pomocné zámery %1$d # %2$d</string>
     <string name="stat_station">Staničenia %1$d # %2$d</string>
-    <!-- TODO string name="stat_dangling">Dangling shots %1$d %2$.1f %3$s</string -->
+    <string name="stat_dangling">Voľné zámery %1$d %2$.1f %3$s</string -->
     <string name="stat_surface">Povrchové zámery (počet-dĺžka) %1$d # %2$d %3$.1f %4$s</string>
     <string name="stat_wens">Z - %1$.0f  V - %2$.0f  S - %3$.0f  J - %4$.0f [%5$s]</string>
     <string name="stat_angle_error">Uhlové chyby %1$.2f ± %2$.2f"</string>
@@ -581,8 +581,8 @@
     <string name="button_convert"   >Konvertovať  </string>
     <string name="button_current"   >Aktivovať  </string>
     <string name="button_delete"    >Vymazať  </string>
-    <!-- TODO string name="button_duplicate" >Duplicate </string -->
-    <!-- TODO string name="button_surface"   >Surface   </string -->
+    <string name="button_duplicate" >Duplikovať </string -->
+    <string name="button_surface"   >Povrch   </string -->
     <string name="button_eval"      >Vyhodnotiť   </string>
     <string name="button_evalg"     >G      </string>
     <string name="button_evalm"     >M      </string>
@@ -839,7 +839,7 @@
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Uložené meračské body</string>
     <string name="title_station_search">Vlož meračský bod</string>
-    <!-- TODO string name="title_dangling">Unattached shots</string -->
+    <string name="title_dangling">Nepripojené zámery</string -->
     <string name="title_device">DistoX</string>
     <string name="title_device_select">Zvoľte DistoX</string>
     <string name="title_discover">Vyhladávanie DistaX &#8230; prosím čakajte</string>
