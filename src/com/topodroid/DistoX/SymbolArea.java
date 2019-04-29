@@ -204,6 +204,7 @@ class SymbolArea extends Symbol
       // TDLog.Log( TDLog.LOG_IO, "read symbol area file <" + filename + ">" );
       FileInputStream fr = new FileInputStream( filename );
       BufferedReader br = new BufferedReader( new InputStreamReader( fr, iso ) );
+      boolean insymbol = false;
       String line;
       line = br.readLine();
       while ( line != null ) {
@@ -213,127 +214,133 @@ class SymbolArea extends Symbol
         for (int k=0; k<s; ++k ) {
   	  if ( vals[k].startsWith( "#" ) ) break;
           if ( vals[k].length() == 0 ) continue;
-  	  if ( vals[k].equals("symbol") ) {
-  	    name    = null;
-  	    th_name = null;
-  	    mColor  = TDColor.TRANSPARENT;
-  	  } else if ( vals[k].equals("name") || vals[k].equals(locale) ) {
-  	    ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-  	    if ( k < s ) {
-              // Log.v(  TopoDroidApp.TAG, "found name " + vals[k] );
-              name = (new String( vals[k].getBytes(iso) )).replace("_", " ");
-  	    }
-	    // Log.v("DistoX", "area name <" + name + "> locale " + locale );
-  	  } else if ( vals[k].equals("th_name") ) {
-  	    ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-  	    if ( k < s ) {
-  	      th_name = vals[k];
-  	    }
-          } else if ( vals[k].equals("csurvey") ) {
-            // csurvey <layer> <category> <pen_type> <brush_type>
-            try {
-              ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-              if ( k < s ) {
-                mCsxLayer = Integer.parseInt( vals[k] );
-              }
-              ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-              if ( k < s ) {
-                mCsxCategory = Integer.parseInt( vals[k] );
-              }
-              ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-              if ( k < s ) {
-                mCsxPen = Integer.parseInt( vals[k] );
-              }
-              ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-              if ( k < s ) {
-                mCsxBrush = Integer.parseInt( vals[k] );
-              }
-            } catch ( NumberFormatException e ) {
-              TDLog.Error( filename + " parse error: " + line );
+          if ( ! insymbol ) {
+  	    if ( vals[k].equals("symbol") ) {
+  	      name    = null;
+  	      th_name = null;
+  	      mColor  = TDColor.TRANSPARENT;
+              insymbol = true;
             }
-          } else if ( vals[k].equals("level") ) {
-            ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-            if ( k < s ) {
+  	  } else {
+            if ( vals[k].equals("name") || vals[k].equals(locale) ) {
+  	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	      if ( k < s ) {
+                // Log.v(  TopoDroidApp.TAG, "found name " + vals[k] );
+                name = (new String( vals[k].getBytes(iso) )).replace("_", " ");
+  	      }
+	      // Log.v("DistoX", "area name <" + name + "> locale " + locale );
+  	    } else if ( vals[k].equals("th_name") ) {
+  	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	      if ( k < s ) {
+  	        th_name = vals[k];
+  	      }
+            } else if ( vals[k].equals("csurvey") ) {
+              // csurvey <layer> <category> <pen_type> <brush_type>
               try {
-                mLevel = ( Integer.parseInt( vals[k] ) );
-              } catch( NumberFormatException e ) { }
-            }
-  	  } else if ( vals[k].equals("color") ) {
-  	    ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-  	    if ( k < s ) {
-  	      color = Integer.decode( vals[k] );
-            }
-  	    ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-  	    if ( k < s ) {
-  	      alpha = Integer.decode( vals[k] );
-  	    }
-  	  } else if ( vals[k].equals("bitmap") ) {
-  	    ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-            if ( k < s ) {
-              try {
-                width = Integer.parseInt( vals[k] );
-  	        ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+                ++k; while ( k < s && vals[k].length() == 0 ) ++k;
                 if ( k < s ) {
-                  height = Integer.parseInt( vals[k] );
-                  mXMode = TileMode.REPEAT;
-                  mYMode = TileMode.REPEAT;
+                  mCsxLayer = Integer.parseInt( vals[k] );
+                }
+                ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+                if ( k < s ) {
+                  mCsxCategory = Integer.parseInt( vals[k] );
+                }
+                ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+                if ( k < s ) {
+                  mCsxPen = Integer.parseInt( vals[k] );
+                }
+                ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+                if ( k < s ) {
+                  mCsxBrush = Integer.parseInt( vals[k] );
+                }
+              } catch ( NumberFormatException e ) {
+                TDLog.Error( filename + " parse error: " + line );
+              }
+            } else if ( vals[k].equals("level") ) {
+              ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+              if ( k < s ) {
+                try {
+                  mLevel = ( Integer.parseInt( vals[k] ) );
+                } catch( NumberFormatException e ) { }
+              }
+  	    } else if ( vals[k].equals("color") ) {
+  	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	      if ( k < s ) {
+  	        color = Integer.decode( vals[k] );
+              }
+  	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	      if ( k < s ) {
+  	        alpha = Integer.decode( vals[k] );
+  	      }
+  	    } else if ( vals[k].equals("bitmap") ) {
+  	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+              if ( k < s ) {
+                try {
+                  width = Integer.parseInt( vals[k] );
   	          ++k; while ( k < s && vals[k].length() == 0 ) ++k;
                   if ( k < s ) {
-                    if ( vals[k].equals("M") ) { mXMode = TileMode.MIRROR; }
+                    height = Integer.parseInt( vals[k] );
+                    mXMode = TileMode.REPEAT;
+                    mYMode = TileMode.REPEAT;
   	            ++k; while ( k < s && vals[k].length() == 0 ) ++k;
                     if ( k < s ) {
-                      if ( vals[k].equals("M") ) { mYMode = TileMode.MIRROR; }
-                    }
-                  }
-                  if ( width > 0 && height > 0 ) {
-                    pxl = new int[ width * height];
-                    int col = (color & 0x00ffffff) | 0x33000000;
-                    for ( int j=0; j<height; ++j ) {
-                      for ( int i=0; i<width; ++i ) pxl[j*width+i] = col;
-                    }
-                    col = (color & 0x00ffffff) | ( alpha << 24 );
-                    // Log.v("DistoX", "bitmap " + width + " " + height );
-                    for ( int j=0; j<height; ++j ) {
-                      line = br.readLine().trim();
-                      // Log.v("DistoX", "bitmap line <" + line + ">" );
-                      if ( line.startsWith("endbitmap") ) {
-                        mBitmap = makeBitmap( pxl, width, height );
-                        pxl = null;
-                        break;
+                      if ( vals[k].equals("M") ) { mXMode = TileMode.MIRROR; }
+  	              ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+                      if ( k < s ) {
+                        if ( vals[k].equals("M") ) { mYMode = TileMode.MIRROR; }
                       }
-                      for ( int i=0; i<width && i <line.length(); ++i ) if ( line.charAt(i) == '1' ) pxl[j*width+i] = col;
                     }
-                  }
-                }   
-              } catch ( NumberFormatException e ) {
-                TDLog.Error( filename + " parse bitmap error: " + line );
+                    if ( width > 0 && height > 0 ) {
+                      pxl = new int[ width * height];
+                      int col = (color & 0x00ffffff) | 0x33000000;
+                      for ( int j=0; j<height; ++j ) {
+                        for ( int i=0; i<width; ++i ) pxl[j*width+i] = col;
+                      }
+                      col = (color & 0x00ffffff) | ( alpha << 24 );
+                      // Log.v("DistoX", "bitmap " + width + " " + height );
+                      for ( int j=0; j<height; ++j ) {
+                        line = br.readLine().trim();
+                        // Log.v("DistoX", "bitmap line <" + line + ">" );
+                        if ( line.startsWith("endbitmap") ) {
+                          mBitmap = makeBitmap( pxl, width, height );
+                          pxl = null;
+                          break;
+                        }
+                        for ( int i=0; i<width && i <line.length(); ++i ) if ( line.charAt(i) == '1' ) pxl[j*width+i] = col;
+                      }
+                    }
+                  }   
+                } catch ( NumberFormatException e ) {
+                  TDLog.Error( filename + " parse bitmap error: " + line );
+                }
               }
-            }
-  	  } else if ( vals[k].equals("endbitmap") ) {
-            mBitmap = makeBitmap( pxl, width, height );
-            pxl = null;
-  	  } else if ( vals[k].equals("orientable") ) {
-            mOrientable = true;
-  	  } else if ( vals[k].equals("close-horizontal") ) {
-            mCloseHorizontal = true;
+  	    } else if ( vals[k].equals("endbitmap") ) {
+              mBitmap = makeBitmap( pxl, width, height );
+              pxl = null;
+  	    } else if ( vals[k].equals("orientable") ) {
+              mOrientable = true;
+  	    } else if ( vals[k].equals("close-horizontal") ) {
+              mCloseHorizontal = true;
 
-  	  } else if ( vals[k].equals("endsymbol") ) {
-  	    if ( name == null ) {
-  	    } else if ( th_name == null ) {
-  	    } else {
-              mName   = name;
-              mThName = th_name;
-              mPaint  = new Paint();
-              mPaint.setDither(true);
-              mColor = (alpha << 24) | color;
-              mPaint.setColor( color );
-              mPaint.setAlpha( alpha );
-              // mPaint.setStyle(Paint.Style.STROKE);
-              mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-              mPaint.setStrokeJoin(Paint.Join.ROUND);
-              mPaint.setStrokeCap(Paint.Cap.ROUND);
-              mPaint.setStrokeWidth( TDSetting.mLineThickness );
-  	    }
+  	    } else if ( vals[k].equals("endsymbol") ) {
+  	      if ( name == null ) {
+  	      } else if ( th_name == null ) {
+  	      } else {
+                mName   = name;
+                mThName = th_name;
+                mPaint  = new Paint();
+                mPaint.setDither(true);
+                mColor = (alpha << 24) | color;
+                mPaint.setColor( color );
+                mPaint.setAlpha( alpha );
+                // mPaint.setStyle(Paint.Style.STROKE);
+                mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+                mPaint.setStrokeJoin(Paint.Join.ROUND);
+                mPaint.setStrokeCap(Paint.Cap.ROUND);
+                mPaint.setStrokeWidth( TDSetting.mLineThickness );
+  	      }
+              insymbol = false;
+            }
           }
         }
         line = br.readLine();

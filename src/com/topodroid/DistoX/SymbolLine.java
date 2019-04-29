@@ -181,6 +181,7 @@ class SymbolLine extends Symbol
       FileInputStream fr = new FileInputStream( filename );
       BufferedReader br = new BufferedReader( new InputStreamReader( fr, iso ) );
       String line;
+      boolean insymbol = false;
       while ( (line = br.readLine()) != null ) {
         line = line.trim();
         String[] vals = line.split(" ");
@@ -188,301 +189,307 @@ class SymbolLine extends Symbol
         for (int k=0; k<s; ++k ) {
   	  if ( vals[k].startsWith( "#" ) ) break;
           if ( vals[k].length() == 0 ) continue;
-  	  if ( vals[k].equals("symbol") ) {
-  	    name    = null;
-  	    th_name = null;
-            group   = null;
-  	    color   = TDColor.TRANSPARENT;
-  	  } else if ( vals[k].equals("name") || vals[k].equals(locale) ) {
-  	    ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-  	    if ( k < s ) {
-              name = (new String( vals[k].getBytes(iso) )).replace("_", " ");
-  	    }
-  	  } else if ( vals[k].equals("th_name") ) {
-  	    ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-  	    if ( k < s ) {
-  	      th_name = vals[k];
-  	    }
-  	  } else if ( vals[k].equals("group") ) {
-  	    ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-  	    if ( k < s ) {
-  	      group = vals[k];
-  	    }
-          } else if ( vals[k].equals("level") ) {
-            ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-            if ( k < s ) {
-              try {
-                mLevel = ( Integer.parseInt( vals[k] ) );
-              } catch( NumberFormatException e ) { }
+          if ( ! insymbol ) {
+  	    if ( vals[k].equals("symbol" ) ) {
+  	      name    = null;
+  	      th_name = null;
+              group   = null;
+  	      color   = TDColor.TRANSPARENT;
+              insymbol = true;
             }
-  	  } else if ( vals[k].equals("closed") ) {
-  	    ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-  	    if ( k < s && vals[k].equals("yes") ) {
-              mClosed = true;
-            }
-          } else if ( vals[k].equals("csurvey") ) {
-            // syntax: 
-            //    csurvey <layer> <type> <category> <pen>
-            try {
-              kval = k;
-              mCsxLayer    = nextInt( vals, s );
-              mCsxType     = nextInt( vals, s );
-              mCsxCategory = nextInt( vals, s );
-              mCsxPen      = nextInt( vals, s );
-              // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-              // if ( k < s ) {
-              //   mCsxLayer = Integer.parseInt( vals[k] );
-              // }
-              // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-              // if ( k < s ) {
-              //   mCsxType = Integer.parseInt( vals[k] );
-              // }
-              // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-              // if ( k < s ) {
-              //   mCsxCategory = Integer.parseInt( vals[k] );
-              // }
-              // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-              // if ( k < s ) {
-              //   mCsxPen = Integer.parseInt( vals[k] );
-              // }
-            } catch ( NumberFormatException e ) {
-              TDLog.Error( filename + " parse csurvey error: " + line );
-            }
-  	  } else if ( vals[k].equals("color") ) {
-  	    ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-  	    if ( k < s ) {
-  	      color = Integer.decode( vals[k] );
-            }
-  	    ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-  	    if ( k < s ) {
-  	      alpha = Integer.decode( vals[k] );
-  	    }
-  	  } else if ( vals[k].equals("width") ) {
-            try {
-              kval = k;
-              width = nextInt( vals, s ) * TDSetting.mLineThickness;
-  	      // ++k; while ( k < s && vals[k].length() == 0 ) ++k;    
-  	      // if ( k < s ) {
-  	      //   width = Integer.parseInt( vals[k] ) * TDSetting.mLineThickness;
-              // }
-            } catch ( NumberFormatException e ) {
-              TDLog.Error( filename + " parse width error: " + line );
-            }
-  	  } else if ( vals[k].equals("dash") ) {
-  	    ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-  	    if ( k < s ) {
-              int k1 = k;
-              int ndash = 0;
-              while ( k1 < s ) {
-                while ( k1 < s && vals[k1].length() == 0 ) ++k1;
-                ++ ndash;
-                ++k1;
-              }
-              ndash = ndash - (ndash % 2);
-              if ( ndash > 0 ) {
+          } else {
+  	    if ( vals[k].equals("name") || vals[k].equals(locale) ) {
+  	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	      if ( k < s ) {
+                name = (new String( vals[k].getBytes(iso) )).replace("_", " ");
+  	      }
+  	    } else if ( vals[k].equals("th_name") ) {
+  	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	      if ( k < s ) {
+  	        th_name = vals[k];
+  	      }
+  	    } else if ( vals[k].equals("group") ) {
+  	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	      if ( k < s ) {
+  	        group = vals[k];
+  	      }
+            } else if ( vals[k].equals("level") ) {
+              ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+              if ( k < s ) {
                 try {
-                  float[] x = new float[ndash];
-  	          x[0] = Float.parseFloat( vals[k] ) * unit;
-                  kval = k;
-                  for (int n=1; n<ndash; ++n ) {
-  	            x[n] = nextFloat( vals, s, unit );
-                    // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-  	            // x[n] = Float.parseFloat( vals[k] ) * unit;
-                  }  
-                  dash = new DashPathEffect( x, 0 );
-                } catch ( NumberFormatException e ) {
-                 TDLog.Error( filename + " parse dash error: " + line );
+                  mLevel = ( Integer.parseInt( vals[k] ) );
+                } catch( NumberFormatException e ) { }
+              }
+  	    } else if ( vals[k].equals("closed") ) {
+  	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	      if ( k < s && vals[k].equals("yes") ) {
+                mClosed = true;
+              }
+            } else if ( vals[k].equals("csurvey") ) {
+              // syntax: 
+              //    csurvey <layer> <type> <category> <pen>
+              try {
+                kval = k;
+                mCsxLayer    = nextInt( vals, s );
+                mCsxType     = nextInt( vals, s );
+                mCsxCategory = nextInt( vals, s );
+                mCsxPen      = nextInt( vals, s );
+                // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+                // if ( k < s ) {
+                //   mCsxLayer = Integer.parseInt( vals[k] );
+                // }
+                // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+                // if ( k < s ) {
+                //   mCsxType = Integer.parseInt( vals[k] );
+                // }
+                // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+                // if ( k < s ) {
+                //   mCsxCategory = Integer.parseInt( vals[k] );
+                // }
+                // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+                // if ( k < s ) {
+                //   mCsxPen = Integer.parseInt( vals[k] );
+                // }
+              } catch ( NumberFormatException e ) {
+                TDLog.Error( filename + " parse csurvey error: " + line );
+              }
+  	    } else if ( vals[k].equals("color") ) {
+  	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	      if ( k < s ) {
+  	        color = Integer.decode( vals[k] );
+              }
+  	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	      if ( k < s ) {
+  	        alpha = Integer.decode( vals[k] );
+  	      }
+  	    } else if ( vals[k].equals("width") ) {
+              try {
+                kval = k;
+                width = nextInt( vals, s ) * TDSetting.mLineThickness;
+  	        // ++k; while ( k < s && vals[k].length() == 0 ) ++k;    
+  	        // if ( k < s ) {
+  	        //   width = Integer.parseInt( vals[k] ) * TDSetting.mLineThickness;
+                // }
+              } catch ( NumberFormatException e ) {
+                TDLog.Error( filename + " parse width error: " + line );
+              }
+  	    } else if ( vals[k].equals("dash") ) {
+  	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	      if ( k < s ) {
+                int k1 = k;
+                int ndash = 0;
+                while ( k1 < s ) {
+                  while ( k1 < s && vals[k1].length() == 0 ) ++k1;
+                  ++ ndash;
+                  ++k1;
+                }
+                ndash = ndash - (ndash % 2);
+                if ( ndash > 0 ) {
+                  try {
+                    float[] x = new float[ndash];
+  	            x[0] = Float.parseFloat( vals[k] ) * unit;
+                    kval = k;
+                    for (int n=1; n<ndash; ++n ) {
+  	              x[n] = nextFloat( vals, s, unit );
+                      // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	              // x[n] = Float.parseFloat( vals[k] ) * unit;
+                    }  
+                    dash = new DashPathEffect( x, 0 );
+                  } catch ( NumberFormatException e ) {
+                   TDLog.Error( filename + " parse dash error: " + line );
+                  }
                 }
               }
-            }
-  	  } else if ( vals[k].equals("style") ) { // STYLE
-            for ( ++ k; k < s; ++k ) {
-  	      if ( vals[k].length() == 0 ) continue;
-              if ( vals[k].equals("straight") ) {
-                mStyleStraight = true;
-              } else if ( vals[k].startsWith("x") ) {
-                try {
-                  mStyleX = Integer.parseInt( vals[k].substring(1) );
-                  if ( mStyleX <= 0 ) mStyleX = ItemDrawer.POINT_MAX; // FIXME INT_MAX
-                } catch ( NumberFormatException e ) { }
-              }
-            }
-  	  } else if ( vals[k].equals("effect") ) {
-            path_dir = new Path();
-            path_rev = new Path();
-            // path_dir.moveTo(0,0);
-            // path_rev.moveTo(0,0);
-            boolean moved_to = false;
-            while ( (line = br.readLine() ) != null ) {
-              line = line.trim();
-              vals = line.split(" ");
-              s = vals.length;
-              k = 0;
-  	      while ( k < s && vals[k].length() == 0 ) ++k;
-              if ( k < s ) {
-                if ( vals[k].equals("moveTo") ) {
+  	    } else if ( vals[k].equals("style") ) { // STYLE
+              for ( ++ k; k < s; ++k ) {
+  	        if ( vals[k].length() == 0 ) continue;
+                if ( vals[k].equals("straight") ) {
+                  mStyleStraight = true;
+                } else if ( vals[k].startsWith("x") ) {
                   try {
-                    // if ( ! moved_to ) {
+                    mStyleX = Integer.parseInt( vals[k].substring(1) );
+                    if ( mStyleX <= 0 ) mStyleX = ItemDrawer.POINT_MAX; // FIXME INT_MAX
+                  } catch ( NumberFormatException e ) { }
+                }
+              }
+  	    } else if ( vals[k].equals("effect") ) {
+              path_dir = new Path();
+              path_rev = new Path();
+              // path_dir.moveTo(0,0);
+              // path_rev.moveTo(0,0);
+              boolean moved_to = false;
+              while ( (line = br.readLine() ) != null ) {
+                line = line.trim();
+                vals = line.split(" ");
+                s = vals.length;
+                k = 0;
+  	        while ( k < s && vals[k].length() == 0 ) ++k;
+                if ( k < s ) {
+                  if ( vals[k].equals("moveTo") ) {
+                    try {
+                      // if ( ! moved_to ) {
+                        kval = k;
+                        float x = nextFloat( vals, s, unit );
+                        float y = nextFloat( vals, s, unit );
+                        path_dir.moveTo( x, y );
+                        path_rev.moveTo( x, -y );
+                        if ( ! moved_to ) {
+                          xmin = xmax = x;
+                          moved_to = true;
+                        }
+	                if ( y > ymax ) { ymax = y; } else if ( y < ymin ) { ymin = y; }
+  	                // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	                // if ( k < s ) {
+  	                //   float x = Float.parseFloat( vals[k] ) * unit;
+  	                //   ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	                //   if ( k < s ) {
+  	                //      float y = Float.parseFloat( vals[k] ) * unit;
+                        //      path_dir.moveTo( x, y );
+                        //      path_rev.moveTo( x, -y );
+                        //      xmin = xmax = x;
+                        //      moved_to = true;
+                        //   }
+                        // }
+                      // }
+                    } catch ( NumberFormatException e ) {
+                      TDLog.Error( filename + " parse moveTo point error: " + line );
+                    }
+                  } else if ( vals[k].equals("lineTo") ) { 
+                    try {
                       kval = k;
                       float x = nextFloat( vals, s, unit );
                       float y = nextFloat( vals, s, unit );
-                      path_dir.moveTo( x, y );
-                      path_rev.moveTo( x, -y );
-                      if ( ! moved_to ) {
-                        xmin = xmax = x;
-                        moved_to = true;
-                      }
-		      if ( y > ymax ) { ymax = y; } else if ( y < ymin ) { ymin = y; }
+                      path_dir.lineTo( x, y );
+                      path_rev.lineTo( x, -y );
+                      if ( x < xmin ) xmin = x; else if ( x > xmax ) xmax = x;
+	              if ( y > ymax ) { ymax = y; } else if ( y < ymin ) { ymin = y; }
+
   	              // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	              // if ( k < s ) {
   	              //   float x = Float.parseFloat( vals[k] ) * unit;
   	              //   ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	              //   if ( k < s ) {
-  	              //      float y = Float.parseFloat( vals[k] ) * unit;
-                      //      path_dir.moveTo( x, y );
-                      //      path_rev.moveTo( x, -y );
-                      //      xmin = xmax = x;
-                      //      moved_to = true;
+  	              //     float y = Float.parseFloat( vals[k] ) * unit;
+                      //     path_dir.lineTo( x, y );
+                      //     path_rev.lineTo( x, -y );
+                      //     if ( x < xmin ) xmin = x; else if ( x > xmax ) xmax = x;
                       //   }
                       // }
-                    // }
-                  } catch ( NumberFormatException e ) {
-                    TDLog.Error( filename + " parse moveTo point error: " + line );
-                  }
-                } else if ( vals[k].equals("lineTo") ) { 
-                  try {
-                    kval = k;
-                    float x = nextFloat( vals, s, unit );
-                    float y = nextFloat( vals, s, unit );
-                    path_dir.lineTo( x, y );
-                    path_rev.lineTo( x, -y );
-                    if ( x < xmin ) xmin = x; else if ( x > xmax ) xmax = x;
-		    if ( y > ymax ) { ymax = y; } else if ( y < ymin ) { ymin = y; }
+                    } catch ( NumberFormatException e ) {
+                      TDLog.Error( filename + " parse lineTo point error: " + line );
+                    }
+                  } else if ( vals[k].equals("cubicTo") ) { 
+                    try {
+                      kval = k;
+                      float x1 = nextFloat( vals, s, unit );
+                      float y1 = nextFloat( vals, s, unit );
+                      float x2 = nextFloat( vals, s, unit );
+                      float y2 = nextFloat( vals, s, unit );
+                      float x3 = nextFloat( vals, s, unit );
+                      float y3 = nextFloat( vals, s, unit );
+                      path_dir.cubicTo( x1,  y1, x2,  y2, x3,  y3 );
+                      path_rev.cubicTo( x1, -y1, x2, -y2, x3, -y3 );
+                      if ( x1 < xmin ) xmin = x1; else if ( x1 > xmax ) xmax = x1;
+                      if ( x2 < xmin ) xmin = x2; else if ( x2 > xmax ) xmax = x2;
+                      if ( x3 < xmin ) xmin = x3; else if ( x3 > xmax ) xmax = x3;
+	              if ( y1 > ymax ) { ymax = y1; } else if ( y1 < ymin ) { ymin = y1; }
+	              if ( y2 > ymax ) { ymax = y2; } else if ( y2 < ymin ) { ymin = y2; }
+	              if ( y3 > ymax ) { ymax = y3; } else if ( y3 < ymin ) { ymin = y3; }
 
-  	            // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-  	            // if ( k < s ) {
-  	            //   float x = Float.parseFloat( vals[k] ) * unit;
-  	            //   ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-  	            //   if ( k < s ) {
-  	            //     float y = Float.parseFloat( vals[k] ) * unit;
-                    //     path_dir.lineTo( x, y );
-                    //     path_rev.lineTo( x, -y );
-                    //     if ( x < xmin ) xmin = x; else if ( x > xmax ) xmax = x;
-                    //   }
-                    // }
-                  } catch ( NumberFormatException e ) {
-                    TDLog.Error( filename + " parse lineTo point error: " + line );
+  	              // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	              // if ( k < s ) {
+  	              //   float x1 = Float.parseFloat( vals[k] ) * unit;
+  	              //   ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	              //   if ( k < s ) {
+  	              //     float y1 = Float.parseFloat( vals[k] ) * unit;
+  	              //     ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	              //     if ( k < s ) {
+  	              //       float x2 = Float.parseFloat( vals[k] ) * unit;
+  	              //       ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	              //       if ( k < s ) {
+  	              //         float y2 = Float.parseFloat( vals[k] ) * unit;
+  	              //         ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	              //         if ( k < s ) {
+  	              //           float x3 = Float.parseFloat( vals[k] ) * unit;
+  	              //           ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	              //           if ( k < s ) {
+  	              //             float y3 = Float.parseFloat( vals[k] ) * unit;
+                      //             path_dir.cubicTo( x1, y1, x2, y2, x3, y3 );
+                      //             path_rev.cubicTo( x1, -y1, x2, -y2, x3, -y3 );
+                      //             if ( x1 < xmin ) xmin = x1; else if ( x1 > xmax ) xmax = x1;
+                      //             if ( x2 < xmin ) xmin = x2; else if ( x2 > xmax ) xmax = x2;
+                      //             if ( x3 < xmin ) xmin = x3; else if ( x3 > xmax ) xmax = x3;
+                      //           }
+                      //         }
+                      //       }
+                      //     }
+                      //   }
+                      // }
+                    } catch ( NumberFormatException e ) {
+                      TDLog.Error( filename + " parse lineTo point error: " + line );
+                    }
+                  } else if ( vals[k].equals("addCircle") ) { 
+                    try {
+                      kval = k;
+                      float x = nextFloat( vals, s, unit );
+                      float y = nextFloat( vals, s, unit );
+                      float r = nextFloat( vals, s, unit );
+                      path_dir.addCircle( x,  y, r, Path.Direction.CCW );
+                      path_rev.addCircle( x, -y, r, Path.Direction.CCW );
+                      if ( x-r < xmin ) xmin = x-r;
+                      if ( x+r > xmax ) xmax = x+r;
+	              if ( y+r > ymax ) { ymax = y+r; } else if ( y-r < ymin ) { ymin = y-r; }
+                    } catch ( NumberFormatException e ) {
+                      TDLog.Error( filename + " parse lineTo point error: " + line );
+                    }
+                  } else if ( vals[k].equals("endeffect") ) {
+                    // path_dir.close();
+                    // path_rev.close();
+                    effect     = new PathDashPathEffect( path_dir, (xmax-xmin), 0, PathDashPathEffect.Style.MORPH );
+                    rev_effect = new PathDashPathEffect( path_rev, (xmax-xmin), 0, PathDashPathEffect.Style.MORPH );
+                    break;
                   }
-                } else if ( vals[k].equals("cubicTo") ) { 
-                  try {
-                    kval = k;
-                    float x1 = nextFloat( vals, s, unit );
-                    float y1 = nextFloat( vals, s, unit );
-                    float x2 = nextFloat( vals, s, unit );
-                    float y2 = nextFloat( vals, s, unit );
-                    float x3 = nextFloat( vals, s, unit );
-                    float y3 = nextFloat( vals, s, unit );
-                    path_dir.cubicTo( x1,  y1, x2,  y2, x3,  y3 );
-                    path_rev.cubicTo( x1, -y1, x2, -y2, x3, -y3 );
-                    if ( x1 < xmin ) xmin = x1; else if ( x1 > xmax ) xmax = x1;
-                    if ( x2 < xmin ) xmin = x2; else if ( x2 > xmax ) xmax = x2;
-                    if ( x3 < xmin ) xmin = x3; else if ( x3 > xmax ) xmax = x3;
-		    if ( y1 > ymax ) { ymax = y1; } else if ( y1 < ymin ) { ymin = y1; }
-		    if ( y2 > ymax ) { ymax = y2; } else if ( y2 < ymin ) { ymin = y2; }
-		    if ( y3 > ymax ) { ymax = y3; } else if ( y3 < ymin ) { ymin = y3; }
-
-  	            // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-  	            // if ( k < s ) {
-  	            //   float x1 = Float.parseFloat( vals[k] ) * unit;
-  	            //   ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-  	            //   if ( k < s ) {
-  	            //     float y1 = Float.parseFloat( vals[k] ) * unit;
-  	            //     ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-  	            //     if ( k < s ) {
-  	            //       float x2 = Float.parseFloat( vals[k] ) * unit;
-  	            //       ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-  	            //       if ( k < s ) {
-  	            //         float y2 = Float.parseFloat( vals[k] ) * unit;
-  	            //         ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-  	            //         if ( k < s ) {
-  	            //           float x3 = Float.parseFloat( vals[k] ) * unit;
-  	            //           ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-  	            //           if ( k < s ) {
-  	            //             float y3 = Float.parseFloat( vals[k] ) * unit;
-                    //             path_dir.cubicTo( x1, y1, x2, y2, x3, y3 );
-                    //             path_rev.cubicTo( x1, -y1, x2, -y2, x3, -y3 );
-                    //             if ( x1 < xmin ) xmin = x1; else if ( x1 > xmax ) xmax = x1;
-                    //             if ( x2 < xmin ) xmin = x2; else if ( x2 > xmax ) xmax = x2;
-                    //             if ( x3 < xmin ) xmin = x3; else if ( x3 > xmax ) xmax = x3;
-                    //           }
-                    //         }
-                    //       }
-                    //     }
-                    //   }
-                    // }
-                  } catch ( NumberFormatException e ) {
-                    TDLog.Error( filename + " parse lineTo point error: " + line );
-                  }
-                } else if ( vals[k].equals("addCircle") ) { 
-                  try {
-                    kval = k;
-                    float x = nextFloat( vals, s, unit );
-                    float y = nextFloat( vals, s, unit );
-                    float r = nextFloat( vals, s, unit );
-                    path_dir.addCircle( x,  y, r, Path.Direction.CCW );
-                    path_rev.addCircle( x, -y, r, Path.Direction.CCW );
-                    if ( x-r < xmin ) xmin = x-r;
-                    if ( x+r > xmax ) xmax = x+r;
-		    if ( y+r > ymax ) { ymax = y+r; } else if ( y-r < ymin ) { ymin = y-r; }
-                  } catch ( NumberFormatException e ) {
-                    TDLog.Error( filename + " parse lineTo point error: " + line );
-                  }
-                } else if ( vals[k].equals("endeffect") ) {
-                  // path_dir.close();
-                  // path_rev.close();
-                  effect     = new PathDashPathEffect( path_dir, (xmax-xmin), 0, PathDashPathEffect.Style.MORPH );
-                  rev_effect = new PathDashPathEffect( path_rev, (xmax-xmin), 0, PathDashPathEffect.Style.MORPH );
-                  break;
                 }
               }
+  	    } else if ( vals[k].equals("endsymbol") ) {
+  	      if ( name == null ) {
+  	      } else if ( th_name == null ) {
+  	      } else {
+                mName   = name;
+                mThName = th_name;
+                mGroup  = group;
+                mPaint  = new Paint();
+                mPaint.setDither(true);
+                mPaint.setColor( color );
+                mPaint.setAlpha( alpha );
+                mPaint.setStyle(Paint.Style.STROKE);
+                mPaint.setStrokeJoin(Paint.Join.ROUND);
+                mPaint.setStrokeCap(Paint.Cap.ROUND);
+                mRevPaint = new Paint( mPaint );
+                if ( effect != null ) {
+                  mHasEffect = true;
+                  // mPaint.setStrokeWidth( 4 );
+                  // mRevPaint.setStrokeWidth( 4 );
+                  if ( dash != null ) {
+                    mPaint.setPathEffect( new ComposePathEffect( effect, dash ) );
+                    mRevPaint.setPathEffect( new ComposePathEffect( rev_effect, dash ) );
+                  } else {
+                    mPaint.setPathEffect( effect );
+                    mRevPaint.setPathEffect( rev_effect );
+                  }
+                } else if ( dash != null ) {
+                  mPaint.setPathEffect( dash );
+                  mRevPaint.setPathEffect( dash );
+                // } else {
+                //   mPaint.setStrokeWidth( width * TDSetting.mLineThickness );
+                //   mRevPaint.setStrokeWidth( width * TDSetting.mLineThickness );
+                }
+	        float dy = ymax - ymin + 1;
+                mPaint.setStrokeWidth( dy * width * TDSetting.mLineThickness );
+                mRevPaint.setStrokeWidth( dy * width * TDSetting.mLineThickness );
+  	      }
+              insymbol = false;
             }
-  	  } else if ( vals[k].equals("endsymbol") ) {
-  	    if ( name == null ) {
-  	    } else if ( th_name == null ) {
-  	    } else {
-              mName   = name;
-              mThName = th_name;
-              mGroup  = group;
-              mPaint  = new Paint();
-              mPaint.setDither(true);
-              mPaint.setColor( color );
-              mPaint.setAlpha( alpha );
-              mPaint.setStyle(Paint.Style.STROKE);
-              mPaint.setStrokeJoin(Paint.Join.ROUND);
-              mPaint.setStrokeCap(Paint.Cap.ROUND);
-              mRevPaint = new Paint( mPaint );
-              if ( effect != null ) {
-                mHasEffect = true;
-                // mPaint.setStrokeWidth( 4 );
-                // mRevPaint.setStrokeWidth( 4 );
-                if ( dash != null ) {
-                  mPaint.setPathEffect( new ComposePathEffect( effect, dash ) );
-                  mRevPaint.setPathEffect( new ComposePathEffect( rev_effect, dash ) );
-                } else {
-                  mPaint.setPathEffect( effect );
-                  mRevPaint.setPathEffect( rev_effect );
-                }
-              } else if ( dash != null ) {
-                mPaint.setPathEffect( dash );
-                mRevPaint.setPathEffect( dash );
-              // } else {
-              //   mPaint.setStrokeWidth( width * TDSetting.mLineThickness );
-              //   mRevPaint.setStrokeWidth( width * TDSetting.mLineThickness );
-              }
-	      float dy = ymax - ymin + 1;
-              mPaint.setStrokeWidth( dy * width * TDSetting.mLineThickness );
-              mRevPaint.setStrokeWidth( dy * width * TDSetting.mLineThickness );
-  	    }
           }
         }
       }

@@ -186,127 +186,135 @@ class SymbolPoint extends Symbol
       BufferedReader br = new BufferedReader( new InputStreamReader( fr, iso ) );
       String line;
       line = br.readLine();
+      boolean insymbol = false;
       while ( line != null ) {
         line = line.trim();
         String[] vals = line.split(" ");
         int s = vals.length;
         for (int k=0; k<s; ++k ) {
           if ( vals[k].startsWith( "#" ) ) break;
-          if ( vals[k].equals("symbol") ) {
-            name = null;
-            th_name = null;
-            color = TDColor.TRANSPARENT;
-            path = null;
-          } else if ( vals[k].equals("name") || vals[k].equals(locale) ) {
-            ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-            if ( k < s ) {
-              // name = (new String( vals[k].getBytes(iso) )).replace("_", " ");
-              name = vals[k].replace("_", " ");
-              // Log.v(  TopoDroidApp.TAG, "set name " + name );
+          if ( vals[k].length() == 0 ) continue;
+          if ( ! insymbol ) {
+            if ( vals[k].equals("symbol" ) ) {
+              name = null;
+              th_name = null;
+              color = TDColor.TRANSPARENT;
+              path = null;
+              insymbol = true;
             }
-          } else if ( vals[k].equals("th_name") ) {
-            ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-            if ( k < s ) {
-              th_name = vals[k];
-            }
-          } else if ( vals[k].equals("level") ) {
-            ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-            if ( k < s ) {
-              try {
-                mLevel = ( Integer.parseInt( vals[k] ) );
-              } catch( NumberFormatException e ) { }
-            }
-          } else if ( vals[k].equals("orientation") ) {
-            if ( cnt == 0 ) {
+          } else {
+            if ( vals[k].equals("name") || vals[k].equals(locale) ) {
               ++k; while ( k < s && vals[k].length() == 0 ) ++k;
               if ( k < s ) {
-                mOrientable = ( vals[k].equals("yes") || vals[k].equals( TDString.ONE ) );
+                // name = (new String( vals[k].getBytes(iso) )).replace("_", " ");
+                name = vals[k].replace("_", " ");
+                // Log.v(  TopoDroidApp.TAG, "set name " + name );
               }
-            }
-          } else if ( vals[k].equals("has_text") ) {
-            if ( cnt == 0 ) {
+            } else if ( vals[k].equals("th_name") ) {
               ++k; while ( k < s && vals[k].length() == 0 ) ++k;
               if ( k < s ) {
-                mHasText = ( vals[k].equals("yes") || vals[k].equals( TDString.ONE ) )? 1 : 0;
-                if ( vals[k].equals( TDString.TWO ) ) mHasText = 2;
+                th_name = vals[k];
               }
-            }
-          } else if ( vals[k].equals("has_value") ) {
-            if ( cnt == 0 ) {
+            } else if ( vals[k].equals("level") ) {
               ++k; while ( k < s && vals[k].length() == 0 ) ++k;
               if ( k < s ) {
-                mHasText = ( vals[k].equals("yes") || vals[k].equals( TDString.ONE ) )? 2 : 0;
-                if ( vals[k].equals( TDString.ONE ) ) mHasText = 1;
+                try {
+                  mLevel = ( Integer.parseInt( vals[k] ) );
+                } catch( NumberFormatException e ) { }
               }
-            }
-          } else if ( vals[k].equals("style") ) {
-            if ( cnt == 0 ) {
-              ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-              if ( k < s ) {
-                if ( vals[k].equals("fill") ) {
-                //  style = Paint.Style.FILL;
-                // } else if ( vals[k].equals("fill-stroke") ) {
-                  style = Paint.Style.FILL_AND_STROKE;
+            } else if ( vals[k].equals("orientation") ) {
+              if ( cnt == 0 ) {
+                ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+                if ( k < s ) {
+                  mOrientable = ( vals[k].equals("yes") || vals[k].equals( TDString.ONE ) );
                 }
               }
-            }
-          } else if ( vals[k].equals("color") ) {
-            ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-            if ( k < s ) {
-              color = Integer.decode( vals[k] );
-              color |= 0xff000000;
-            }
-          } else if ( vals[k].equals("csurvey") ) {
-            try {
-              ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-              if ( k < s ) {
-                mCsxLayer = Integer.parseInt( vals[k] );
-              }
-              ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-              if ( k < s ) {
-                mCsxType = Integer.parseInt( vals[k] );
-              }
-              ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-              if ( k < s ) {
-                mCsxCategory = Integer.parseInt( vals[k] );
-              }
-            } catch ( NumberFormatException e ) {
-              TDLog.Error( pathname + " parse csurvey error: " + line );
-            }
-          } else if ( vals[k].equals("path") ) {
-            path = br.readLine();
-            if ( path != null ) {
-              while ( ( line = br.readLine() ) != null ) {
-                if ( line.startsWith( "endpath" ) ) break;
-                path = path + " " + line;
-              }
-            }
-          } else if ( vals[k].equals("endsymbol") ) {
-            if ( name == null ) {
-              TDLog.Error("NULL name " + pathname );
-            } else if ( th_name == null ) {
-              TDLog.Error("NULL th_name " + pathname );
-            } else if ( path == null ) {
-              TDLog.Error("NULL path " + pathname);
-            } else {
+            } else if ( vals[k].equals("has_text") ) {
               if ( cnt == 0 ) {
-                mName   = name;
-                mThName = th_name;
-                mPaint  = makePaint( color, style );
-                makePath( path );
-                mOrigPath = new Path( mPath );
-                // mPoint1 = new SymbolPointBasic( name, th_name, fname, color, path );
-              // } else if ( cnt == 1 ) {
-              //   if ( mOrientable == true ) {
-              //     // ERROR point1 is orientable
-              //   } else {
-              //     mPoint2 = new SymbolPointBasic( name, th_name, fname, color, path );
-              //     mOrientable = true;
-              //   }
-              // } else {
-              //   // ERROR only two points max
+                ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+                if ( k < s ) {
+                  mHasText = ( vals[k].equals("yes") || vals[k].equals( TDString.ONE ) )? 1 : 0;
+                  if ( vals[k].equals( TDString.TWO ) ) mHasText = 2;
+                }
               }
-              ++ cnt;
+            } else if ( vals[k].equals("has_value") ) {
+              if ( cnt == 0 ) {
+                ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+                if ( k < s ) {
+                  mHasText = ( vals[k].equals("yes") || vals[k].equals( TDString.ONE ) )? 2 : 0;
+                  if ( vals[k].equals( TDString.ONE ) ) mHasText = 1;
+                }
+              }
+            } else if ( vals[k].equals("style") ) {
+              if ( cnt == 0 ) {
+                ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+                if ( k < s ) {
+                  if ( vals[k].equals("fill") ) {
+                  //  style = Paint.Style.FILL;
+                  // } else if ( vals[k].equals("fill-stroke") ) {
+                    style = Paint.Style.FILL_AND_STROKE;
+                  }
+                }
+              }
+            } else if ( vals[k].equals("color") ) {
+              ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+              if ( k < s ) {
+                color = Integer.decode( vals[k] );
+                color |= 0xff000000;
+              }
+            } else if ( vals[k].equals("csurvey") ) {
+              try {
+                ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+                if ( k < s ) {
+                  mCsxLayer = Integer.parseInt( vals[k] );
+                }
+                ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+                if ( k < s ) {
+                  mCsxType = Integer.parseInt( vals[k] );
+                }
+                ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+                if ( k < s ) {
+                  mCsxCategory = Integer.parseInt( vals[k] );
+                }
+              } catch ( NumberFormatException e ) {
+                TDLog.Error( pathname + " parse csurvey error: " + line );
+              }
+            } else if ( vals[k].equals("path") ) {
+              path = br.readLine();
+              if ( path != null ) {
+                while ( ( line = br.readLine() ) != null ) {
+                  if ( line.startsWith( "endpath" ) ) break;
+                  path = path + " " + line;
+                }
+              }
+            } else if ( vals[k].equals("endsymbol") ) {
+              if ( name == null ) {
+                TDLog.Error("NULL name " + pathname );
+              } else if ( th_name == null ) {
+                TDLog.Error("NULL th_name " + pathname );
+              } else if ( path == null ) {
+                TDLog.Error("NULL path " + pathname);
+              } else {
+                if ( cnt == 0 ) {
+                  mName   = name;
+                  mThName = th_name;
+                  mPaint  = makePaint( color, style );
+                  makePath( path );
+                  mOrigPath = new Path( mPath );
+                  // mPoint1 = new SymbolPointBasic( name, th_name, fname, color, path );
+                // } else if ( cnt == 1 ) {
+                //   if ( mOrientable == true ) {
+                //     // ERROR point1 is orientable
+                //   } else {
+                //     mPoint2 = new SymbolPointBasic( name, th_name, fname, color, path );
+                //     mOrientable = true;
+                //   }
+                // } else {
+                //   // ERROR only two points max
+                }
+                ++ cnt;
+              }
+              insymbol = false;
             }
           }
         }

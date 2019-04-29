@@ -94,6 +94,7 @@ class TDExporter
 
   // =======================================================================
   // CSURVEY EXPORT cSurvey
+  //   handles flags: duplicate surface commented
 
   static private void exportEmptyCsxSketch( PrintWriter pw )
   {
@@ -527,7 +528,7 @@ class TDExporter
 
   // =======================================================================
   // KML export Keyhole Markup Language
-  // shot flags are ignored
+  //   NOTE shot flags are ignored
 
   static private final float EARTH_RADIUS1 = (float)(6378137 * Math.PI / 180.0f); // semimajor axis [m]
   static private final float EARTH_RADIUS2 = (float)(6356752 * Math.PI / 180.0f);
@@ -817,7 +818,7 @@ class TDExporter
 
   // =======================================================================
   // GEO JASON GeoJSON export
-  // shot flags are ignored
+  //   NOTE shot flags are ignored
 
   static String exportSurveyAsJson( long sid, DataHelper data, SurveyInfo info, String filename )
   {
@@ -906,7 +907,7 @@ class TDExporter
 
   // -------------------------------------------------------------------
   // TRACK FILE OZIEXPLORER
-  // shot flags are ignored
+  //   NOTE shot flags are ignored
 
   static String exportSurveyAsPlt( long sid, DataHelper data, SurveyInfo info, String filename )
   {
@@ -980,7 +981,7 @@ class TDExporter
 
   // =======================================================================
   // POCKETTOPO EXPORT PocketTopo
-  // shot flags are ignored
+  //   NOTE shot flags are ignored
 
   static String exportSurveyAsTop( long sid, DataHelper data, SurveyInfo info, DrawingWindow sketch, String origin, String filename )
   {
@@ -1056,7 +1057,7 @@ class TDExporter
   }
   // =======================================================================
   // THERION EXPORT Therion
-  // shot flags are used
+  //   NOTE handled flags: duplicate surface
 
   static private void writeThLeg( PrintWriter pw, AverageLeg leg, float ul, float ua )
   {
@@ -1210,7 +1211,7 @@ class TDExporter
 
       DBlock ref_item = null;
       boolean duplicate = false;
-      boolean surface   = false; // TODO
+      boolean surface   = false; // TODO for Therion
       for ( DBlock item : list ) {
         String from = item.mFrom;
         String to   = item.mTo;
@@ -1360,7 +1361,8 @@ class TDExporter
 
   // -----------------------------------------------------------------------
   /** SURVEX EXPORT 
-   * shot flags are used
+   *    NOTE handled flags: duplicate
+   *    N.B. surface treated as duplicate
    *
    * The following format is used to export the centerline data in survex
    *
@@ -1381,6 +1383,7 @@ class TDExporter
    *      ...
    *      (optional survey commands)
    *    *end survey_name
+   *
    */
   static private final String survex_flags_duplicate     = "   *flags duplicate";
   static private final String survex_flags_not_duplicate = "   *flags not duplicate";
@@ -1593,7 +1596,7 @@ class TDExporter
                 resetSplayChar();
               }
               ref_item = item;
-              if ( item.isDuplicate() ) {
+              if ( item.isDuplicate() || item.isSurface() ) { // FIXME SURFACE
                 if ( first ) writeSurvexLine(pw, survex_flags_duplicate);
                 duplicate = true;
               }
@@ -1747,7 +1750,7 @@ class TDExporter
   /** CSV COMMA-SEPARATED VALUES EXPORT 
    *  shot flags are used
    *  NOTE declination exported in comment only in CSV
-   *
+   *       handled flags: duplicate surface commented 
    */
   static private void writeCsvLeg( PrintWriter pw, AverageLeg leg, float ul, float ua, char sep )
   {
@@ -1755,19 +1758,35 @@ class TDExporter
     leg.reset();
   }
 
-  static private void writeCsvFlag( PrintWriter pw, boolean dup, boolean cmtd, char sep, String newline )
+  static private void writeCsvFlag( PrintWriter pw, boolean dup, boolean sur, boolean cmtd, char sep, String newline )
   {
     if ( dup ) {
-      if ( cmtd ) {
-        pw.format("%cLC%s", sep, newline );
+      if ( sur ) {
+        if ( cmtd ) {
+          pw.format("%cLSC%s", sep, newline );
+        } else {
+          pw.format("%cLS%s", sep, newline );
+        }
       } else {
-        pw.format("%cL%s", sep, newline );
+        if ( cmtd ) {
+          pw.format("%cLC%s", sep, newline );
+        } else {
+          pw.format("%cL%s", sep, newline );
+        }
       }
     } else {
-      if ( cmtd ) {
-        pw.format("%cC%s", sep, newline );
+      if ( sur ) {
+        if ( cmtd ) {
+          pw.format("%cSC%s", sep, newline );
+        } else {
+          pw.format("%cS%s", sep, newline );
+        }
       } else {
-        pw.format("%c%s", sep, newline );
+        if ( cmtd ) {
+          pw.format("%cC%s", sep, newline );
+        } else {
+          pw.format("%c%s", sep, newline );
+        }
       }
     }
   }
@@ -1835,6 +1854,7 @@ class TDExporter
       AverageLeg leg = new AverageLeg(0);
       DBlock ref_item = null;
       boolean duplicate = false;
+      boolean surface   = false;
       boolean splays = false;
       for ( DBlock item : list ) {
         String from = item.mFrom;
@@ -1848,8 +1868,9 @@ class TDExporter
           } else { // only TO station
             if ( leg.mCnt > 0 && ref_item != null ) {
               writeCsvLeg( pw, leg, ul, ua, sep );
-              writeCsvFlag( pw, duplicate, ref_item.isCommented(), sep, newline );
+              writeCsvFlag( pw, duplicate, surface, ref_item.isCommented(), sep, newline );
               duplicate = false;
+              surface   = false;
               ref_item = null; 
             }
             // if ( ref_item != null && ref_item.mComment != null && ref_item.mComment.length() > 0 ) {
@@ -1861,7 +1882,7 @@ class TDExporter
             }
             pw.format(Locale.US, "-%c%s@%s%c%.2f%c%.1f%c%.1f",
                       sep, to, info.name, sep, item.mLength * ul, sep, item.mBearing * ua, sep, item.mClino * ua );
-            writeCsvFlag( pw, false, item.isCommented(), sep, newline );
+            writeCsvFlag( pw, false, false, item.isCommented(), sep, newline );
 
             // if ( item.mComment != null && item.mComment.length() > 0 ) {
             //   pw.format(",\"%s\"\n", item.mComment );
@@ -1871,8 +1892,9 @@ class TDExporter
           if ( to == null || to.length() == 0 ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
               writeCsvLeg( pw, leg, ul, ua, sep );
-              writeCsvFlag( pw, duplicate, ref_item.isCommented(), sep, newline );
+              writeCsvFlag( pw, duplicate, surface, ref_item.isCommented(), sep, newline );
               duplicate = false;
+              surface   = false;
               ref_item = null; 
             }
             // if ( ref_item != null && ref_item.mComment != null && ref_item.mComment.length() > 0 ) {
@@ -1884,24 +1906,24 @@ class TDExporter
             }
             pw.format(Locale.US, "%s@%s%c-%c%.2f%c%.1f%c%.1f",
                       from, info.name, sep, sep, item.mLength * ul, sep, item.mBearing * ua, sep, item.mClino * ua );
-            writeCsvFlag( pw, false, item.isCommented(), sep, newline );
+            writeCsvFlag( pw, false, false, item.isCommented(), sep, newline );
             // if ( item.mComment != null && item.mComment.length() > 0 ) {
             //   pw.format(",\"%s\"\n", item.mComment );
             // }
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {
               writeCsvLeg( pw, leg, ul, ua, sep );
-              writeCsvFlag( pw, duplicate, ref_item.isCommented(), sep, newline );
+              writeCsvFlag( pw, duplicate, surface, ref_item.isCommented(), sep, newline );
               duplicate = false;
+              surface   = false;
               // n = 0;
             }
             if ( splays ) {
               splays = false;
             }
             ref_item = item;
-            if ( item.isDuplicate() ) {
-              duplicate = true;
-            }
+            if ( item.isDuplicate() ) duplicate = true;
+            if ( item.isSurface() ) surface = true;
             pw.format("%s@%s%c%s@%s", from, info.name, sep, to, info.name );
             leg.set( item.mLength, item.mBearing, item.mClino );
           }
@@ -1909,8 +1931,9 @@ class TDExporter
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
         writeCsvLeg( pw, leg, ul, ua, sep );
-        writeCsvFlag( pw, duplicate, ref_item.isCommented(), sep, newline );
+        writeCsvFlag( pw, duplicate, surface, ref_item.isCommented(), sep, newline );
         // duplicate = false;
+        // surface   = false;
       }
       fw.flush();
       fw.close();
@@ -2057,7 +2080,8 @@ class TDExporter
 
   // -----------------------------------------------------------------------
   // COMPASS EXPORT DAT
-  // commented flag not supported
+  //   commented flag not supported
+  //   surface flag handled as duplicate
 
   static private LRUDprofile computeLRUDprofile( DBlock b, List<DBlock> list, boolean at_from )
   {
@@ -2347,7 +2371,7 @@ class TDExporter
               printShotToDat( pw, leg, lrud, duplicate, ref_item.mComment );
             }
             ref_item = item;
-            duplicate = item.isDuplicate();
+            duplicate = item.isDuplicate() || item.isSurface();
             leg.set( item.mLength, item.mBearing, item.mClino );
           }
         }
@@ -2371,6 +2395,7 @@ class TDExporter
   // ----------------------------------------------------------------------------------------
   // TOPOROBOT
   // commented flag not supported
+  // duplicate and surface flags not handled
 
   private static final int TRB_LINE_LENGTH = 82; 
 
@@ -2578,7 +2603,7 @@ class TDExporter
               // }
             }
             ref_item = item;
-            // duplicate = item.isDuplicate();
+            // duplicate = item.isDuplicate() || item.isSurface();
             leg.set( item.mLength, item.mBearing, item.mClino );
           }
         }
@@ -2608,6 +2633,7 @@ class TDExporter
   // ----------------------------------------------------------------------------------------
   // WINKARST
   // commented flag not supported
+  //   surface flag treated as duplicate
 
   private static void printShotToSur( PrintWriter pw, AverageLeg leg, LRUD lrud, String comment )
   {
@@ -2737,7 +2763,7 @@ class TDExporter
               printShotToSur( pw, leg, lrud, ref_item.mComment );
             }
             ref_item = item;
-            duplicate = item.isDuplicate();
+            duplicate = item.isDuplicate() || item.isSurface();
             leg.set( item.mLength, item.mBearing, item.mClino );
           }
         }
@@ -2761,6 +2787,8 @@ class TDExporter
   // =======================================================================
   // GHTOPO EXPORT
   // commented flag supported for splays
+  //   surface flag handled
+  //   duplicate flag not handled
 
   // one of 6 14 31 83 115 164 211
   static private int randomColor()
@@ -3020,6 +3048,7 @@ class TDExporter
 
   // =======================================================================
   // WALLS EXPORT 
+  //   duplicate and surface flags are TODO
 
   static private void writeSrvLeg( PrintWriter pw, AverageLeg leg, float ul, float ua )
   {
@@ -3213,6 +3242,9 @@ class TDExporter
         if ( duplicate ) {
           // pw.format(therion_flags_not_duplicate);
           // duplicate = false;
+        } else if ( surface ) {
+          // pw.format(therion_flags_not_surface);
+          // surface = false;
         }
       }
 
@@ -3227,6 +3259,7 @@ class TDExporter
 
   // =======================================================================
   // TOPO EXPORT ( CAV )
+  //  handled flags: duplicate surface
 
   private static long printFlagToCav( PrintWriter pw, long old_flag, long new_flag, String eol )
   {
@@ -3418,12 +3451,13 @@ class TDExporter
   // POLYGON EXPORT 
   // shot flags are not supported
 
-  private static void printShotToPlg( PrintWriter pw, AverageLeg leg, LRUD lrud, boolean duplicate, String comment )
+  private static void printShotToPlg( PrintWriter pw, AverageLeg leg, LRUD lrud, String comment )
   {
     pw.format(Locale.US, "%.2f\t%.1f\t%.1f\t\t%.2f\t%.2f\t%.2f\t%.2f\t", 
       leg.length(), leg.bearing(), leg.clino(), lrud.l, lrud.r, lrud.u, lrud.d );
     leg.reset();
     // if ( duplicate ) { pw.format(" #|L#"); }
+    // if ( surface   ) { pw.format(" #|S#"); }
     if ( comment != null && comment.length() > 0 ) {
       pw.format("%s", comment );
     }
@@ -3508,7 +3542,8 @@ class TDExporter
 
       int extra_cnt = 0;
       boolean in_splay = false;
-      boolean duplicate = false;
+      // boolean duplicate = false;
+      // boolean surface   = false;
       LRUD lrud;
 
       for ( DBlock item : list ) {
@@ -3524,8 +3559,9 @@ class TDExporter
             if ( leg.mCnt > 0 && ref_item != null ) {
               lrud = computeLRUD( ref_item, list, true );
               pw.format("%s\t%s\t", ref_item.mFrom, ref_item.mTo );
-              printShotToPlg( pw, leg, lrud, duplicate, ref_item.mComment );
-              duplicate = false;
+              printShotToPlg( pw, leg, lrud, ref_item.mComment );
+              // duplicate = false;
+              // surface = false;
               ref_item = null; 
             }
           }
@@ -3534,18 +3570,20 @@ class TDExporter
             if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
               lrud = computeLRUD( ref_item, list, true );
               pw.format("%s\t%s\t", ref_item.mFrom, ref_item.mTo );
-              printShotToPlg( pw, leg, lrud, duplicate, ref_item.mComment );
-              duplicate = false;
+              printShotToPlg( pw, leg, lrud, ref_item.mComment );
+              // duplicate = false;
+              // surface = false;
               ref_item = null; 
             }
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {
               lrud = computeLRUD( ref_item, list, true );
               pw.format("%s\t%s\t", ref_item.mFrom, ref_item.mTo );
-              printShotToPlg( pw, leg, lrud, duplicate, ref_item.mComment );
+              printShotToPlg( pw, leg, lrud, ref_item.mComment );
             }
             ref_item = item;
-            duplicate = item.isDuplicate();
+            // duplicate = item.isDuplicate();
+            // surface = item.isSurface();
             leg.set( item.mLength, item.mBearing, item.mClino );
           }
         }
@@ -3553,7 +3591,7 @@ class TDExporter
       if ( leg.mCnt > 0 && ref_item != null ) {
         lrud = computeLRUD( ref_item, list, true );
         pw.format("%s\t%s\t", ref_item.mFrom, ref_item.mTo );
-        printShotToPlg( pw, leg, lrud, duplicate, ref_item.mComment );
+        printShotToPlg( pw, leg, lrud, ref_item.mComment );
       }
       pw.format( "\n" );
       pw.format("End of survey data.\n\n");
@@ -3766,9 +3804,8 @@ class TDExporter
     pw.format(Locale.US, "%.2f %.1f %.1f ", leg.length(), leg.bearing(), leg.clino() );
     leg.reset();
     pw.format(Locale.US, "%.2f %.2f %.2f %.2f N I *", lrud.l, lrud.r, lrud.u, lrud.d );
-    // if ( duplicate ) {
-    //   // pw.format(" #|L#");
-    // }
+    // if ( duplicate ) pw.format(" #|L#");
+    // if ( surface ) pw.forma(" #|S#");
     if ( item.mComment != null && item.mComment.length() > 0 ) {
       pw.format(" ;%s", item.mComment );
     }
@@ -3790,9 +3827,8 @@ class TDExporter
       pw.format(Locale.US, "%.2f %.1f %.1f * * * * N E", item.mLength, b, - item.mClino );
     }
     pw.format( (item.isCommented() ? " D" : " M" ) );
-    // if ( duplicate ) {
-    //   // pw.format(" #|L#");
-    // }
+    // if ( duplicate ) pw.format(" #|L#");
+    // if ( surface ) pw.format(" #|S#");
     if ( item.mComment != null && item.mComment.length() > 0 ) {
       pw.format(" ;%s", item.mComment );
     }
@@ -3837,7 +3873,8 @@ class TDExporter
 
       int extra_cnt = 0;
       boolean in_splay  = false;
-      boolean duplicate = false;
+      // boolean duplicate = false;
+      // boolean surface   = false;
       boolean started   = false;
       LRUD lrud;
 
@@ -3861,7 +3898,8 @@ class TDExporter
               psw = new PrintWriter( sw );
               lrud = computeLRUD( ref_item, list, false );
               printShotToTro( pw, ref_item, leg, lrud );
-              duplicate = false;
+              // duplicate = false;
+              // surface = false;
               ref_item = null; 
             }
 	    printSplayToTro( psw, item, false );
@@ -3877,7 +3915,8 @@ class TDExporter
               psw = new PrintWriter( sw );
               lrud = computeLRUD( ref_item, list, false );
               printShotToTro( pw, ref_item, leg, lrud );
-              duplicate = false;
+              // duplicate = false;
+              // surface = false;
               ref_item = null; 
             }
 	    printSplayToTro( psw, item, true );
@@ -3893,7 +3932,8 @@ class TDExporter
               printShotToTro( pw, ref_item, leg, lrud );
             }
             ref_item = item;
-            duplicate = item.isDuplicate();
+            // duplicate = item.isDuplicate();
+            // surface = item.isSurface();
             // Log.v( TAG, "first data " + item.mLength + " " + item.mBearing + " " + item.mClino );
             leg.set( item.mLength, item.mBearing, item.mClino );
           }
