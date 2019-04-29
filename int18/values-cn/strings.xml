@@ -58,7 +58,7 @@
     <string name="make_walls">洞壁</string>
     <string name="missing_station">测点丢失</string>
     <string name="station_not_found">未发现测点</string>
-    <string name="shot_not_found">未发现测线数据</string >
+    <string name="shot_not_found">未发现测线数据</string>
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->
     <!-- UNUSED string name="missing_line">LINE</string -->
@@ -1355,7 +1355,7 @@
   <string name="pref_log_ptopo" translatable="false">PocketTopo</string>
   <string name="pref_log_sensor" translatable="false">Sensors</string>
   <string name="pref_log_shot" translatable="false">Shots</string>
-  <!-- UNUSED string name="pref_log_sync" translatable="false">Cosurveying</string -->
+  <- UNUSED string name="pref_log_sync" translatable="false">Cosurveying</string ->
   <string name="pref_log_survey" translatable="false">Surveys</string>
   <string name="pref_log_therion" translatable="false">Therion</string>
   <string name="pref_log_units" translatable="false">Units</string>
