@@ -1212,7 +1212,7 @@ public class DrawingWindow extends ItemDrawer
   {
     TDAzimuth.mFixedExtend = fixed_extend;
     TDAzimuth.mRefAzimuth = azimuth;
-    if ( ! TDLevel.overNormal ) return;
+    if ( ! TDLevel.overAdvanced ) return;
     if ( BTN_DIAL >= mButton1.length ) return;
 
     if ( TDAzimuth.mFixedExtend == 0 ) {
@@ -1541,7 +1541,7 @@ public class DrawingWindow extends ItemDrawer
   private void makeButtons( )
   {
     Resources res = getResources();
-    if ( ! TDLevel.overNormal ) -- mNrButton1;
+    if ( ! TDLevel.overAdvanced ) -- mNrButton1; // AZIMUTH requires expert level
     mButton1 = new Button[ mNrButton1 + 1 ]; // MOVE
     int off = 0;
     int ic = 0;
@@ -4829,7 +4829,7 @@ public class DrawingWindow extends ItemDrawer
         } else if ( PlotInfo.isXSection( mType ) ) {
           updateSplays( (mApp.mSplayMode + 2)%4 );
         }
-      } else if ( TDLevel.overNormal && b == mButton1[k1++] ) { //  AZIMUTH
+      } else if ( TDLevel.overAdvanced && b == mButton1[k1++] ) { //  AZIMUTH
         if ( PlotInfo.isSketch2D( mType ) ) { 
           if ( TDSetting.mAzimuthManual ) {
             setRefAzimuth( 0, - TDAzimuth.mFixedExtend );

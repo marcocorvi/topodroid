@@ -1131,8 +1131,8 @@
   <string name="pref_vthr_title">Precisión toma vertical</string>
   <string name="pref_vthr_summary">Cáculo del límite de la toma vertical</string>
 
-  <!-- UNUSED string name="pref_plan_vthr_title">Límite visual vertical</string -->
-  <!-- UNUSED string name="pref_plan_vthr_message">límite vertical de la visual en planta</string -->
+  <string name="pref_plan_vthr_title">Límite visual vertical</string>
+  <string name="pref_plan_vthr_message">límite vertical de la visual en planta</string>
   <string name="pref_init_station_title">Estación de inicio</string>
   <string name="pref_init_station_summary">Estación inicio por defecto</string>
   <string name="pref_station_names_title">Nombre de estación</string>

@@ -1342,7 +1342,7 @@ class TDPrefKey
   static int[] GEEKPLOTtitle = {
     R.string.pref_plot_shift_title,
     R.string.pref_plot_split_title,
-    R.string.pref_vthr_title,
+    R.string.pref_plan_vthr_title,
     R.string.pref_dash_splay_title,
     R.string.pref_vert_splay_title,
     R.string.pref_horiz_splay_title,
@@ -1360,7 +1360,7 @@ class TDPrefKey
   static int[] GEEKPLOTdesc = {
     R.string.pref_plot_shift_summary,
     R.string.pref_plot_split_summary,
-    R.string.pref_vthr_summary,      
+    R.string.pref_plan_vthr_summary,      
     R.string.pref_dash_splay_message, 
     R.string.pref_vert_splay_message,  
     R.string.pref_horiz_splay_message,  

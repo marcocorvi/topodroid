@@ -673,7 +673,7 @@ class TDSetting
     String[] defData = TDPrefKey.DATAdef;
     mAzimuthManual = prefs.getBoolean( keyData[7], bool(defData[7]) );   // DISTOX_AZIMUTH_MANUAL 
     TDAzimuth.mFixedExtend = ( TDSetting.mAzimuthManual )? 1L : 0L;
-    // TDAzimuth.resetRefAzimuth( TDAzimuth.mRefAzimuth ); // BUG may call setRefAzimuthButton on non-UI thread
+    TDAzimuth.resetRefAzimuth( null, SurveyInfo.EXTEND_NORMAL ); // BUG ?? may call setRefAzimuthButton on non-UI thread
     
     // ------------------- DEVICE PREFERENCES -def--fallback--min-max
     String[] keyDevice = TDPrefKey.DEVICE;

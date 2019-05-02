@@ -1114,8 +1114,8 @@
   <string name="pref_vthr_title">Вертикална граница на отсечка</string>
   <string name="pref_vthr_summary">Граница за считане на мерки за Ляво/Дясно/Горе/Долу или Зап/Изт/Сев/Юг</string>
 
-  <!-- UNUSED string name="pref_plan_vthr_title">Скриване на наклонени измервания</string -->
-  <!-- UNUSED string name="pref_plan_vthr_message">Странични измервания с по-голям наклон не се показват в скицата на плана</string -->
+  <string name="pref_plan_vthr_title">Скриване на наклонени измервания</string>
+  <string name="pref_plan_vthr_message">Странични измервания с по-голям наклон не се показват в скицата на плана</string>
   <string name="pref_init_station_title">Начален репер</string>
   <string name="pref_init_station_summary">Име на първия репер в картировката</string>
   <string name="pref_station_names_title">Именоване на реперите</string>

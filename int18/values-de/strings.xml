@@ -1135,8 +1135,8 @@
   <string name="pref_vthr_title">Vertikale Messlinien</string>
   <string name="pref_vthr_summary">Winkelgrenzwert für vertikale Darstellung von Messlinien</string>
 
-  <!-- UNUSED string name="pref_plan_vthr_title">Hilfslinien vertikaler Grenzwert</string -->
-  <!-- UNUSED string name="pref_plan_vthr_message">Winkelgrenzwert für Anzeige der Hilfslinien auf Plan</string -->
+  <string name="pref_plan_vthr_title">Hilfslinien vertikaler Grenzwert</string>
+  <string name="pref_plan_vthr_message">Winkelgrenzwert für Anzeige der Hilfslinien auf Plan</string>
   <string name="pref_init_station_title">Name Startmesspunkt</string>
   <string name="pref_init_station_summary">Standard Startmesspunkt</string>
   <string name="pref_station_names_title">Messpunktnamen</string>

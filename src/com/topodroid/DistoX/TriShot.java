@@ -107,7 +107,7 @@ class TriShot
   {
     if ( TDInstance.datamode == SurveyInfo.DATAMODE_NORMAL ) {
       return mAvgLeg.length() * TDMath.sind( mAvgLeg.clino() );
-    } else { // SUrveyInfo.DATAMODE_DIVING
+    } else { // SurveyInfo.DATAMODE_DIVING
       return mAvgLeg.clino();
     }
   }

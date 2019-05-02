@@ -1113,8 +1113,8 @@
   <string name="pref_vthr_title">Poligon függőleges küszöbértéke </string>
   <string name="pref_vthr_summary">Poligon lejtszögének küszöbértéke BJFL és NyKÉD között</string>
 
-  <!-- UNUSED string name="pref_plan_vthr_title">Segédmérések alaprajzi vetületének küszöbértéke</string -->
-  <!-- UNUSED string name="pref_plan_vthr_message">Magas lejtszögértékű segédmérések elrejtése az alaprajzi vetületen</string -->
+  <string name="pref_plan_vthr_title">Segédmérések alaprajzi vetületének küszöbértéke</string>
+  <string name="pref_plan_vthr_message">Magas lejtszögértékű segédmérések elrejtése az alaprajzi vetületen</string>
   <string name="pref_init_station_title">Kezdőpont neve</string>
   <string name="pref_init_station_summary">Alapértelmezett Kezdőpont név</string>
   <string name="pref_station_names_title">Mérési pontok nevei</string>

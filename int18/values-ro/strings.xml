@@ -1123,8 +1123,8 @@
   <string name="pref_vthr_title">Limită viză verticală</string>
   <string name="pref_vthr_summary">Limită înclinare viză între LRUD/WENS~</string>
 
-  <!-- UNUSED string name="pref_plan_vthr_title">Limită radiere în vizualizare plan</string -->
-  <!-- UNUSED string name="pref_plan_vthr_message">Ascunde radierile cu înclinație mare în vizualizarea în plan orizontal</string -->
+  <string name="pref_plan_vthr_title">Limită radiere în vizualizare plan</string>
+  <string name="pref_plan_vthr_message">Ascunde radierile cu înclinație mare în vizualizarea în plan orizontal</string>
   <string name="pref_init_station_title">Numele inițial al stației</string>
   <string name="pref_init_station_summary">Numele inițial implicit al stației</string>
   <string name="pref_station_names_title">Numele stațiilor</string>

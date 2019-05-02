@@ -176,6 +176,7 @@ public class SurveyWindow extends Activity
     mInitStation = info.initStation;
     mXSections   = info.xsections;
     mDatamode    = info.datamode;
+    // mExtend      = info.getExtend(); // info.mExtend; // FIXME NOT USED
 
     mEditDate.setText( info.date );
     if ( info.comment != null && info.comment.length() > 0 ) {

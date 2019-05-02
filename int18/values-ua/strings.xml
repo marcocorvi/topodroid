@@ -1119,8 +1119,8 @@
   <string name="pref_vthr_title">Поріг вертикальності для відрізків</string>
   <string name="pref_vthr_summary">Допустимий кут відрізка між ЛПВН/ЗВСЮ</string>
 
-  <!-- UNUSED string name="pref_plan_vthr_title">Поріг кута бок. замірів в плані</string -->
-  <!-- UNUSED string name="pref_plan_vthr_message">Поріг кута  бок. замірів які відображаються в плані</string -->
+  <string name="pref_plan_vthr_title">Поріг кута бок. замірів в плані</string>
+  <string name="pref_plan_vthr_message">Поріг кута  бок. замірів які відображаються в плані</string>
   <string name="pref_init_station_title">Початковий пікет</string>
   <string name="pref_init_station_summary">Початковий пікет за замовчанням</string>
   <string name="pref_station_names_title">Номери пікетов</string>

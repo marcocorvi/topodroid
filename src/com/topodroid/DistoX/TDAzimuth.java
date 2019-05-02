@@ -11,15 +11,17 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
 
 class TDAzimuth
 {
   // ----------------------------------------------------------------
-  static float mRefAzimuth = 90; // west to east
+  static float mRefAzimuth  = SurveyInfo.EXTEND_NORMAL; // west to east
   static long  mFixedExtend = 0;
 
   static void resetRefAzimuth( final ShotWindow window, float azimuth )
   {
+    // Log.v("DistoXE", "reset Ref Azimuth " + azimuth );
     mRefAzimuth  = azimuth;
     mFixedExtend = ( TDSetting.mAzimuthManual )? 1L : 0L;
     if ( window != null ) {

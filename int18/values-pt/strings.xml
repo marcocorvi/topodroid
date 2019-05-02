@@ -1114,8 +1114,8 @@
   <string name="pref_ethr_summary">Ângulo máximo a partir dos 90° para considerar como vertical uma medida auxiliar [deg]</string>
   <string name="pref_vthr_title">Limite vertical medidas</string>
   <string name="pref_vthr_summary">Limite inclinação vertical de medidas para definição EDTC/NSLO</string>
-  <!-- UNUSED string name="pref_plan_vthr_title">Limite medida planta baixa</string -->
-  <!-- UNUSED string name="pref_plan_vthr_message">Esconder medidas auxiliares com grande inclinação na visualização da planta baixa</string -->
+  <string name="pref_plan_vthr_title">Limite medida planta baixa</string>
+  <string name="pref_plan_vthr_message">Esconder medidas auxiliares com grande inclinação na visualização da planta baixa</string>
   <string name="pref_init_station_title">Nome base inicial</string>
   <string name="pref_init_station_summary">Nome padrão da base inicial</string>
   <string name="pref_station_names_title">Nomes bases</string>

@@ -1130,8 +1130,8 @@
   <string name="pref_vthr_title">Порог вертикальности отрезков</string>
   <string name="pref_vthr_summary">Максимальный угол отрезка относительно горизонта для перехода от ЛПВН к ЗВСЮ</string>
 
-  <!-- UNUSED string name="pref_plan_vthr_title">Порог угла сплеев в плане</string -->
-  <!-- UNUSED string name="pref_plan_vthr_message">Максимальный угол от горизонта для отображения сплеев в плане</string -->
+  <string name="pref_plan_vthr_title">Порог угла сплеев в плане</string>
+  <string name="pref_plan_vthr_message">Максимальный угол от горизонта для отображения сплеев в плане</string>
   <string name="pref_init_station_title">Начальный пикет</string>
   <string name="pref_init_station_summary">Начальный пикет по умолчаниию</string>
   <string name="pref_station_names_title">Номера пикетов</string>

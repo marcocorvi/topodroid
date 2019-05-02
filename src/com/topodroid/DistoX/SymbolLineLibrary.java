@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import java.util.Locale;
 // import java.util.ArrayList;
 // import java.util.TreeSet;
@@ -21,8 +23,6 @@ import java.io.File;
 
 import android.graphics.Paint;
 import android.content.res.Resources;
-
-// import android.util.Log;
 
 class SymbolLineLibrary extends SymbolLibrary
 {
@@ -111,6 +111,7 @@ class SymbolLineLibrary extends SymbolLibrary
         SymbolLine symbol = new SymbolLine( file.getPath(), file.getName(), locale, iso );
         if ( symbol.mThName == null ) {
           TDLog.Error( "line with null ThName " + file.getName() );
+          // Log.v( "DistoX-SL", "line with null ThName " + file.getName() );
           continue;
         }
         if ( ! hasSymbolByFilename( symbol.mThName ) ) {
@@ -127,6 +128,9 @@ class SymbolLineLibrary extends SymbolLibrary
             enable = TopoDroidApp.mData.getSymbolEnabled( name );
           }
           symbol.setEnabled( enable );
+        } else {
+          TDLog.Error( "line " + symbol.mThName + " already in library" );
+          // Log.v( "DistoX-SL", "line " + symbol.mThName + " already in library" );
         }
       }
       // mSymbolNr = mSymbols.size();

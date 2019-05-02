@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 // import java.io.File;
 // import java.io.FileReader;
 import java.io.FileInputStream;
@@ -27,9 +29,6 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.Matrix;
-
-// to log error
-// import android.util.Log;
 
 class SymbolPoint extends Symbol
 {
@@ -170,7 +169,7 @@ class SymbolPoint extends Symbol
    */
   private void readFile( String pathname, String locale, String iso )
   {
-    // Log.v(  TopoDroidApp.TAG, "Symbol Point read File " + pathname + " locale " + locale );
+    // Log.v( "DistoX-SP", "Symbol Point read File " + pathname + " locale " + locale );
  
     String name    = null;
     String th_name = null;
@@ -212,6 +211,7 @@ class SymbolPoint extends Symbol
               }
             } else if ( vals[k].equals("th_name") ) {
               ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+              // Log.v("DistoX-SP", "th name " + k + " / " + s );
               if ( k < s ) {
                 th_name = vals[k];
               }

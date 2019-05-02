@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import java.io.File;
 // import java.io.FileFilter;
 import java.io.IOException;
@@ -80,13 +82,10 @@ import android.graphics.BitmapFactory;
 
 // import android.net.Uri;
 
-// import android.util.Log;
 import android.util.DisplayMetrics;
 
 import android.bluetooth.BluetoothAdapter;
 // import android.bluetooth.BluetoothDevice;
-
-// import android.widget.Toast;
 
 public class TopoDroidApp extends Application
 {
@@ -313,6 +312,21 @@ public class TopoDroidApp extends Application
     if ( mData == null ) return null;
     return mData.selectSurveyInfo( TDInstance.sid );
     // if ( info == null ) TDLog.Error("null survey info. sid " + TDInstance.sid );
+  }
+
+  private static int getSurveyExtend()
+  {
+    if ( TDInstance.sid <= 0 ) return SurveyInfo.EXTEND_NORMAL;
+    if ( mData == null ) return SurveyInfo.EXTEND_NORMAL;
+    return mData.getSurveyExtend( TDInstance.sid );
+  }
+
+  public static void setSurveyExtend( int extend )
+  {
+    // Log.v( "DistoXE", "set SurveyExtend: " + extend );
+    if ( TDInstance.sid <= 0 ) return;
+    if ( mData == null ) return;
+    mData.updateSurveyExtend( TDInstance.sid, extend );
   }
 
   public CalibInfo getCalibInfo()
@@ -969,6 +983,7 @@ public class TopoDroidApp extends Application
     TDInstance.sid      = -1;       // no survey by default
     TDInstance.survey   = null;
     TDInstance.datamode = 0;
+    // TDINstance.extend   = SurveyInfo.EXTEND_NORMAL;
     StationName.clearCurrentStation();
     // resetManualCalibrations();
     ManualCalibration.reset();
@@ -988,6 +1003,18 @@ public class TopoDroidApp extends Application
         // restoreFixed();
 	if ( update ) updateWindows();
         TDInstance.xsections = ( SurveyInfo.XSECTION_SHARED == mData.getSurveyXSections( TDInstance.sid ) );
+
+        // TDInstance.extend = 
+        int extend = mData.getSurveyExtend( TDInstance.sid );
+        // Log.v( "DistoXE", "set SurveyFromName extend: " + extend );
+        if ( SurveyInfo.isExtendLeft( extend ) ) { 
+          TDAzimuth.mFixedExtend = -1L;
+        } else if ( SurveyInfo.isExtendRight( extend ) ) { 
+          TDAzimuth.mFixedExtend = 1L;
+        } else {
+          TDAzimuth.mFixedExtend = 0;
+          TDAzimuth.mRefAzimuth  = extend;
+        }
       }
       return TDInstance.sid;
     }

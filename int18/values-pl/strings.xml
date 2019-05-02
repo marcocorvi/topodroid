@@ -1141,8 +1141,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_vthr_title">pomiar pionowy progu</string>
   <string name="pref_vthr_summary">Pionowe LRUD/WENS progu</string>
 
-  <!-- UNUSED string name="pref_plan_vthr_title">Splay plan-view threshold</string -->
-  <!-- UNUSED string name="pref_plan_vthr_message">Hide splays with high inclination in the plan-view</string -->
+  <!-- TODO string name="pref_plan_vthr_title">Splay plan-view threshold</string -->
+  <!-- TODO string name="pref_plan_vthr_message">Hide splays with high inclination in the plan-view</string -->
   <string name="pref_init_station_title">Początkowa nazwa stacji</string>
   <string name="pref_init_station_summary">Domyślna nazwa stacji</string>
   <string name="pref_station_names_title">Nazwy stacji</string>

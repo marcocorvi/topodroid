@@ -50,8 +50,8 @@ import java.util.HashMap;
 @SuppressWarnings("SyntaxError")
 class DataHelper extends DataSetObservable
 {
-  static final String DB_VERSION = "38";
-  static final int DATABASE_VERSION = 38;
+  static final String DB_VERSION = "39";
+  static final int DATABASE_VERSION = 39;
   static final int DATABASE_VERSION_MIN = 21; // was 14
 
   private static final String CONFIG_TABLE = "configs";
@@ -281,6 +281,7 @@ class DataHelper extends DataSetObservable
   private static String qXSections    = "select xsections from surveys where id=?";
   private static String qDatamode     = "select datamode from surveys where id=?";
   private static String qDeclination  = "select declination from surveys where id=?";
+  private static String qExtend       = "select extend from surveys where id=?";
   private static String qSurveysStat1 = "select flag, acceleration, magnetic, dip from shots where surveyId=? AND status=0 AND acceleration > 1 ";
   private static String qSurveysStat2 =
     "select flag, distance, fStation, tStation, clino, extend from shots where surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ";
@@ -378,6 +379,34 @@ class DataHelper extends DataSetObservable
     return ret;
   }
 
+  int getSurveyExtend( long sid )
+  {
+    int ret = SurveyInfo.EXTEND_NORMAL;
+    if ( myDB == null ) return SurveyInfo.EXTEND_NORMAL;
+    Cursor cursor = myDB.rawQuery( qExtend, new String[] { Long.toString(sid) } );
+    if (cursor.moveToFirst()) {
+      ret = (int)(cursor.getLong( 0 ));
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return ret;
+  }
+
+  void updateSurveyExtend( long sid, int extend )
+  {
+    if ( myDB == null ) return;
+    ContentValues cv = makeSurveyExtend( extend );
+    try {
+      myDB.beginTransaction();
+      myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(sid) } );
+      myDB.setTransactionSuccessful();
+      // if ( forward && mListeners != null ) { // synchronized( mListeners )
+      //   mListeners.onUpdateSurveyName( id, name );
+      // }
+    } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
+    } catch ( SQLiteException e1 )       { logError("survey set extend ", e1 ); 
+    } catch ( IllegalStateException e2 ) { logError("survey set extend ", e2 );
+    } finally { myDB.endTransaction(); }
+  }
 
   SurveyStat getSurveyStat( long sid )
   {
@@ -758,6 +787,13 @@ class DataHelper extends DataSetObservable
     return ret;
   }
 
+  private ContentValues makeSurveyExtend( int extend )
+  {
+    ContentValues cv = new ContentValues();
+    cv.put( "extend", extend );
+    return cv;
+  }
+
   private ContentValues makeSurveyInfoCcontentValues( String date, String team, double decl, String comment,
                                 String init_station, int xsections ) // datamode cannot be updated
   {
@@ -772,7 +808,8 @@ class DataHelper extends DataSetObservable
   }
 
   void updateSurveyInfo( long sid, String date, String team, double decl, String comment,
-                            String init_station, int xsections, boolean forward )
+                         String init_station, int xsections, boolean forward )
+                         // FIXME int extend
   {
     // boolean ret = false;
     // Log.v("DistoX_DB", "update survey, init station <" + init_station + ">" );
@@ -3089,7 +3126,7 @@ class DataHelper extends DataSetObservable
     SurveyInfo info = null;
     if ( myDB == null ) return null;
     Cursor cursor = myDB.query( SURVEY_TABLE,
-                               new String[] { "name", "day", "team", "declination", "comment", "init_station", "xsections", "datamode" }, // columns
+                               new String[] { "name", "day", "team", "declination", "comment", "init_station", "xsections", "datamode", "extend" }, // columns
                                WHERE_ID, new String[] { Long.toString(sid) },
                                null, null, "name" );
     if (cursor.moveToFirst()) {
@@ -3103,6 +3140,7 @@ class DataHelper extends DataSetObservable
       info.initStation = cursor.getString( 5 );
       info.xsections = (int)cursor.getLong( 6 );
       info.datamode  = (int)cursor.getLong( 7 );
+      info.mExtend   = (int)cursor.getLong( 8 );
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return info;
@@ -4263,13 +4301,13 @@ class DataHelper extends DataSetObservable
        FileWriter fw = new FileWriter( filename );
        PrintWriter pw = new PrintWriter( fw );
        Cursor cursor = myDB.query( SURVEY_TABLE, 
-                            new String[] { "name", "day", "team", "declination", "comment", "init_station", "xsections", "datamode" },
+                            new String[] { "name", "day", "team", "declination", "comment", "init_station", "xsections", "datamode", "extend" },
                             "id=?", new String[] { Long.toString( sid ) },
                             null, null, null );
        if (cursor.moveToFirst()) {
          do {
            pw.format(Locale.US,
-                     "INSERT into %s values( %d, \"%s\", \"%s\", \"%s\", %.4f, \"%s\", \"%s\", %d, %d );\n",
+                     "INSERT into %s values( %d, \"%s\", \"%s\", \"%s\", %.4f, \"%s\", \"%s\", %d, %d, %d );\n",
                      SURVEY_TABLE,
                      sid,
                      cursor.getString(0),
@@ -4279,7 +4317,8 @@ class DataHelper extends DataSetObservable
                      cursor.getString(4),     // comment
                      cursor.getString(5),     // init_station
                      (int)cursor.getLong(6),  // xstation
-                     (int)cursor.getLong(7)   // datamode
+                     (int)cursor.getLong(7),  // datamode
+                     (int)cursor.getLong(8)   // extend
            );
          } while (cursor.moveToNext());
        }
@@ -4543,6 +4582,8 @@ class DataHelper extends DataSetObservable
          if ( db_version > 29) xsections = (int)( scanline0.longValue( ) );
 	 int datamode  = SurveyInfo.DATAMODE_NORMAL;
          if ( db_version > 36) datamode = (int)( scanline0.longValue( ) );
+	 int extend_ref = SurveyInfo.EXTEND_NORMAL;
+         if ( db_version > 38) extend_ref = (int)( scanline0.longValue( ) );
 
          sid = setSurvey( name, datamode, false );
 
@@ -4552,6 +4593,9 @@ class DataHelper extends DataSetObservable
            ContentValues cv = makeSurveyInfoCcontentValues( date, team, decl, comment, init_station, xsections );
            myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(sid) } );
            // Log.v( "DistoX_DB", "updateSurveyInfo: " + success );
+
+           cv = makeSurveyExtend( extend_ref );
+           myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(sid) } );
 
            while ( (line = br.readLine()) != null ) {
              TDLog.Log( TDLog.LOG_DB, "loadFromFile: " + line );
@@ -4908,7 +4952,8 @@ class DataHelper extends DataSetObservable
              +   " declination REAL, "
              +   " init_station TEXT, "
              +   " xsections INTEGER, "
-	     +   " datamode INTEGER "
+	     +   " datamode INTEGER, "
+             +   " extend INTEGER "
              +   ")"
            );
 
@@ -5159,6 +5204,8 @@ class DataHelper extends DataSetObservable
 	   case 37:
              db.execSQL( "ALTER TABLE shots ADD COLUMN address TEXT default \"\"" );
 	   case 38:
+             db.execSQL( "ALTER TABLE surveys ADD COLUMN extend INTEGER default 90" );
+	   case 39:
              /* current version */
            default:
              break;

@@ -21,6 +21,10 @@ class SurveyInfo
   final static int DATAMODE_NORMAL  = 0;
   final static int DATAMODE_DIVING  = 1;
 
+  final static int EXTEND_NORMAL  = 90;
+  final static int EXTEND_LEFT    = -1000;
+  final static int EXTEND_RIGHT   =  1000;
+
   final static float DECLINATION_MAX = 999;
   final static float DECLINATION_UNSET = 1000;
 
@@ -33,6 +37,7 @@ class SurveyInfo
   String initStation;
   int xsections; // 0: shared, 1: private
   int datamode;
+  int mExtend;
 
   SurveyInfo copy() 
   {
@@ -46,8 +51,23 @@ class SurveyInfo
     ret.initStation = initStation;
     ret.xsections   = xsections;
     ret.datamode    = datamode;
+    ret.mExtend     = mExtend;
     return ret;
   }
+
+  static boolean isExtendLeft( int extend ) { return extend < -999; }
+  static boolean isExtendRight( int extend ) { return extend  > 999; }
+
+  boolean isExtendLeft( )  { return mExtend < -999; }
+  boolean isExtendRight( ) { return mExtend  > 999; }
+  int getExtend() { return mExtend; }
+  void setExtend( int extend )
+  { 
+    while ( extend < 0 ) extend += 360;
+    while ( extend >= 360 ) extend -= 360;
+    mExtend = extend;
+  }
+
 
   boolean hasDeclination() { return declination < DECLINATION_MAX; }
 

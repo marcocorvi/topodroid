@@ -1144,8 +1144,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_vthr_title">Leg WENS threshold</string>
   <string name="pref_vthr_summary">Leg LRUD/WENS clino threshold</string>
 
-  <!-- UNUSED string name="pref_plan_vthr_title">Splay plan-view threshold</string -->
-  <!-- UNUSED string name="pref_plan_vthr_message">Hide splays with high inclination in the plan-view</string -->
+  <string name="pref_plan_vthr_title">Splay plan-view threshold</string>
+  <string name="pref_plan_vthr_message">Hide splays with high inclination in the plan-view</string>
   <string name="pref_init_station_title">Initial station name</string>
   <string name="pref_init_station_summary">Default initial station name</string>
   <string name="pref_station_names_title">Station names</string>

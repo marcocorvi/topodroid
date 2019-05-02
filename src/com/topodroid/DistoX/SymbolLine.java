@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 // import java.io.File;
 // import java.io.FileReader;
 import java.io.FileInputStream;
@@ -28,8 +30,6 @@ import android.graphics.DashPathEffect;
 import android.graphics.PathDashPathEffect;
 // import android.graphics.PathDashPathEffect.Style;
 // import android.graphics.Matrix;
-
-// import android.util.Log;
 
 class SymbolLine extends Symbol
 {
@@ -158,7 +158,7 @@ class SymbolLine extends Symbol
    */
   private void readFile( String filename, String locale, String iso )
   {
-    // Log.v(  TopoDroidApp.TAG, "load line file " + filename );
+    // Log.v(  "DistoX-SL", "load line file " + filename );
     float unit = TDSetting.mUnitLines * TDSetting.mLineThickness;
     String name    = null;
     String th_name = null;
@@ -182,6 +182,7 @@ class SymbolLine extends Symbol
       BufferedReader br = new BufferedReader( new InputStreamReader( fr, iso ) );
       String line;
       boolean insymbol = false;
+      // Log.v( "DistoX-SL", "read symbol line file <" + filename + "> in_symbol " + insymbol );
       while ( (line = br.readLine()) != null ) {
         line = line.trim();
         String[] vals = line.split(" ");
@@ -190,12 +191,15 @@ class SymbolLine extends Symbol
   	  if ( vals[k].startsWith( "#" ) ) break;
           if ( vals[k].length() == 0 ) continue;
           if ( ! insymbol ) {
+            // Log.v("DistoX-SL", " not in symbol " + line );
   	    if ( vals[k].equals("symbol" ) ) {
   	      name    = null;
   	      th_name = null;
               group   = null;
   	      color   = TDColor.TRANSPARENT;
               insymbol = true;
+              // Log.v("DistoX-SL", filename + " in symbol" );
+              break;
             }
           } else {
   	    if ( vals[k].equals("name") || vals[k].equals(locale) ) {
@@ -203,10 +207,14 @@ class SymbolLine extends Symbol
   	      if ( k < s ) {
                 name = (new String( vals[k].getBytes(iso) )).replace("_", " ");
   	      }
+              // Log.v("DistoX-SL", filename + " name " + name );
   	    } else if ( vals[k].equals("th_name") ) {
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	      if ( k < s ) {
   	        th_name = vals[k];
+                // Log.v("DistoX-SL", filename + " th_name " + th_name );
+              } else {
+                // Log.v("DistoX-SL", filename + " th_name " + k + " / " + s + " " + line );
   	      }
   	    } else if ( vals[k].equals("group") ) {
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
@@ -313,6 +321,7 @@ class SymbolLine extends Symbol
                 }
               }
   	    } else if ( vals[k].equals("effect") ) {
+              // Log.v("DistoX-SL", "effect begins");
               path_dir = new Path();
               path_rev = new Path();
               // path_dir.moveTo(0,0);
@@ -443,6 +452,7 @@ class SymbolLine extends Symbol
                       TDLog.Error( filename + " parse lineTo point error: " + line );
                     }
                   } else if ( vals[k].equals("endeffect") ) {
+                    // Log.v("DistoX-SL", "effect ends");
                     // path_dir.close();
                     // path_rev.close();
                     effect     = new PathDashPathEffect( path_dir, (xmax-xmin), 0, PathDashPathEffect.Style.MORPH );
@@ -453,8 +463,11 @@ class SymbolLine extends Symbol
               }
   	    } else if ( vals[k].equals("endsymbol") ) {
   	      if ( name == null ) {
+                // Log.v("DistoX-SL", filename + " end-symbol name is null");
   	      } else if ( th_name == null ) {
+                // Log.v("DistoX-SL", filename + " end-symbol th_name is null");
   	      } else {
+                // Log.v("DistoX-SL", filename + " end-symbol is ok");
                 mName   = name;
                 mThName = th_name;
                 mGroup  = group;

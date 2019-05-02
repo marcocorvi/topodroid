@@ -30,6 +30,7 @@ class TDInstance
 
   static boolean xsections = false; // current value of mSharedSections
   static int     datamode = 0;      // current value of survey datamode
+  // FIXME static int    extend = 90;  // current value of survey extend
   static Device  device = null;
 
   static int distoType() { return (device == null)? 0 : device.mType; }

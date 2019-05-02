@@ -11,6 +11,7 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
 
 import java.io.File;
 // import java.io.IOException;
@@ -81,8 +82,6 @@ import android.graphics.drawable.BitmapDrawable;
 // import android.graphics.Rect;
 
 import android.net.Uri;
-
-import android.util.Log;
 
 // FIXME-28
 // import androidx.recyclerview.widget.RecyclerView;
@@ -242,6 +241,7 @@ public class ShotWindow extends Activity
 
   public void setRefAzimuth( float azimuth, long fixed_extend )
   {
+    // Log.v("DistoXE", "set Ref Azimuth " + fixed_extend + " " + azimuth );
     TDAzimuth.mFixedExtend = fixed_extend;
     TDAzimuth.mRefAzimuth  = azimuth;
     setRefAzimuthButton();
@@ -251,20 +251,26 @@ public class ShotWindow extends Activity
   {
     if ( ! TDLevel.overNormal ) return;
     if ( BTN_AZIMUTH - boff >= mNrButton1 ) return;
+
+    // Log.v("DistoXE", "set RefAzimuthButton extend " + TDAzimuth.mFixedExtend + " " + TDAzimuth.mRefAzimuth );
     if ( TDAzimuth.mFixedExtend == 0 ) {
       // android.graphics.Matrix m = new android.graphics.Matrix();
       // m.postRotate( TDAzimuth.mRefAzimuth - 90 );
       // if ( mBMdial != null ) // extra care !!!
       {
+        int extend = (int)(TDAzimuth.mRefAzimuth);
         // Bitmap bm1 = Bitmap.createScaledBitmap( mBMdial, mButtonSize, mButtonSize, true );
         // Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, mButtonSize, mButtonSize, m, true);
-	Bitmap bm2 = mDialBitmap.getBitmap( TDAzimuth.mRefAzimuth, mButtonSize );
+	Bitmap bm2 = mDialBitmap.getBitmap( extend, mButtonSize );
         TDandroid.setButtonBackground( mButton1[ BTN_AZIMUTH - boff ], new BitmapDrawable( getResources(), bm2 ) );
+        mApp.setSurveyExtend( extend );
       }
     } else if ( TDAzimuth.mFixedExtend == -1L ) {
       TDandroid.setButtonBackground( mButton1[ BTN_AZIMUTH - boff ], mBMleft );
+      mApp.setSurveyExtend( SurveyInfo.EXTEND_LEFT );
     } else {
       TDandroid.setButtonBackground( mButton1[ BTN_AZIMUTH - boff ], mBMright );
+      mApp.setSurveyExtend( SurveyInfo.EXTEND_RIGHT );
     } 
   }
 
@@ -951,6 +957,7 @@ public class ShotWindow extends Activity
 
     Resources res = getResources();
     mNrButton1 = TDLevel.overExpert ? 10
+               : TDLevel.overAdvanced ? 9
                : TDLevel.overNormal ? 8
                : TDLevel.overBasic ?  6 : 5;
     diving = ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING );
@@ -1003,8 +1010,8 @@ public class ShotWindow extends Activity
     }
     mButtonF[mNrButtonF] = MyButton.getButton( this, this, R.drawable.iz_empty );
 
-    TDAzimuth.resetRefAzimuth( this, 90 );
-    // setRefAzimuthButton( ); // called by mApp.resetRefAzimuth
+    // TDAzimuth.resetRefAzimuth( this, 90 );
+    setRefAzimuthButton( ); 
 
     mButtonView1 = new HorizontalButtonView( mButton1 );
     mButtonViewF = new HorizontalButtonView( mButtonF );
@@ -1343,7 +1350,7 @@ public class ShotWindow extends Activity
         String station = ( mSearch != null )? mSearch.getName() : null;
         new StationSearchDialog( mActivity, this, station ).show();
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // AZIMUTH
-        if ( TDLevel.overNormal ) {
+        if ( TDLevel.overAdvanced ) {
           if ( TDSetting.mAzimuthManual ) {
             setRefAzimuth( 0, - TDAzimuth.mFixedExtend );
           } else {
