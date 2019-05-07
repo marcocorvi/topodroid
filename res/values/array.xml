@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+  <string-array name="canvasLevels">
+     <item name="none">none</item>
+     <item name="class">by symbol</item>
+     <item name="instance">by item</item>
+  </string-array>
+  <string-array name="canvasLevelsValue">
+     <item name="none">0</item>
+     <item name="class">1</item>
+     <item name="instance">2</item>
+  </string-array>
+
   <string-array name="csvSeparator">
      <item name="comma">comma</item>
      <item name="pipe">pipe</item>

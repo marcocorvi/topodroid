@@ -415,7 +415,7 @@ public class SurveyWindow extends Activity
     if ( TDInstance.survey != null ) {
       (new DistoXAnnotations( mActivity, TDInstance.survey )).show();
     } else { // SHOULD NEVER HAPPEN
-      TDToast.makeBad( R.string.no_survey );
+      TDToast.makeWarn( R.string.no_survey );
     }
   }
 
@@ -606,7 +606,7 @@ public class SurveyWindow extends Activity
     } else if ( TDLevel.overAdvanced && p++ == pos ) { // CALIBRATION CHECK SHOTS
       List< DBlock > shots = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.CHECK );
       if ( shots.size() == 0 ) {
-        TDToast.makeBad( R.string.no_calib_check );
+        TDToast.makeWarn( R.string.no_calib_check );
       } else {
         new CalibCheckDialog( mActivity, this, shots ).show();
       }

@@ -23,6 +23,7 @@ The line tool file contains lines specifying the property of the drawing tool.
 <li>"effect" begins the line path-effect and is followed by path commands, and closed by</li>
 <li>"endeffect"</li>
 <li>"csurvey LAYER TYPE CATEGORY PEN"</li>
+<li>"level" view_flag [optional, 1 if missing]</li>
 <li>"endsymbol"</li>
 </ul>
 
@@ -33,5 +34,10 @@ This is used to specify that the various "wall" line types can be joined togethe
 
 <b>Effect path</b><br>
 This option is used to define lines with complex style.<br><p>
+
+<b>Level</b><br>
+The "level" attribute takes value the flag for the views enabled on this line items.<br>
+The flag is a number sum of 1 (base), 2 (floor), 4 (fills), 8 (ceiling), and 16 (artifacts).
+<br><p>
 
 </body></html>

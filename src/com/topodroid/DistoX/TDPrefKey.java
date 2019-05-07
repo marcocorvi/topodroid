@@ -708,7 +708,7 @@ class TDPrefKey
   };
 
   // ==============================================================================
-  static String[] DATA = { // [13]
+  static String[] DATA = { // [9]
     "DISTOX_CLOSE_DISTANCE",  // 0 // tolerance among leg shots [%]
     "DISTOX_MAX_SHOT_LENGTH",      // maximum length of a shot data
     "DISTOX_MIN_LEG_LENGTH",       // minimum length of a shot data
@@ -722,8 +722,8 @@ class TDPrefKey
     "DISTOX_PREV_NEXT",       // 9  // whether to put "prev-next" arrows in shot edit dialog
     "DISTOX_BACKSIGHT", // whether to add backsight fields in manual shot input dialog
     // "DISTOX_MAG_ANOMALY",        // whether to compensate magnetic anomaly
-    "DISTOX_SHOT_TIMER",      // 11 // bearing-clino timer [1/10 s]
-    "DISTOX_BEEP_VOLUME",     // 12 // bearing-clino beep volume [%]
+    // "DISTOX_SHOT_TIMER",      // 11 // bearing-clino timer [1/10 s]
+    // "DISTOX_BEEP_VOLUME",     // 12 // bearing-clino beep volume [%]
     // "DISTOX_EXTEND_FRAC",     // fractional extend
     // "DISTOX_RECENT_SHOT",     // highlight recent shots
     null
@@ -744,8 +744,8 @@ class TDPrefKey
     R.string.pref_prev_next_title,
     R.string.pref_backsight_title,
     // R.string.pref_mag_anomaly_title,
-    R.string.pref_shot_timer_title,
-    R.string.pref_beep_volume_title,
+    // R.string.pref_shot_timer_title,
+    // R.string.pref_beep_volume_title,
     // R.string.pref_extend_frac_title,
     // R.string.pref_recent_shot_title,
     -1
@@ -765,8 +765,8 @@ class TDPrefKey
     R.string.pref_prev_next_summary,
     R.string.pref_backsight_summary,
     // R.string.pref_mag_anomaly_summary,
-    R.string.pref_shot_timer_summary,
-    R.string.pref_beep_volume_summary,
+    // R.string.pref_shot_timer_summary,
+    // R.string.pref_beep_volume_summary,
     // R.string.pref_extend_frac_summary,
     // R.string.pref_recent_shot_summary,
     -1
@@ -786,8 +786,8 @@ class TDPrefKey
     TRUE,
     FALSE,
     // FALSE,
-    TDString.TEN,
-    TDString.FIFTY,
+    // TDString.TEN,
+    // TDString.FIFTY,
     // FALSE,
     // FALSE,
     null
@@ -1267,6 +1267,9 @@ class TDPrefKey
     // "DISTOX_DIST_TOLERANCE",  // ratio of distance tolerance to angle tolerance
     // "DISTOX_SPLAY_ACTIVE",    // attach splays to active station, if defined
     // "DISTOX_WITH_RENAME",     // with survey "rename" menu
+    "DISTOX_ANDROID_AZIMUTH",    // android azimuth+clino
+    "DISTOX_SHOT_TIMER",      // 11 // bearing-clino timer [1/10 s]
+    "DISTOX_BEEP_VOLUME",     // 12 // bearing-clino beep volume [%]
     null
   };
 
@@ -1284,6 +1287,9 @@ class TDPrefKey
     // R.string.pref_dist_tolerance_title,
     // R.string.pref_splay_active_title,
     // R.string.pref_with_rename_title,
+    R.string.pref_with_android_azimuth_title,
+    R.string.pref_shot_timer_title,
+    R.string.pref_beep_volume_title,
     -1
   };
 
@@ -1301,6 +1307,9 @@ class TDPrefKey
     // R.string.pref_dist_tolerance_summary,
     // R.string.pref_splay_active_summary,
     // R.string.pref_with_rename_summary,
+    R.string.pref_with_android_azimuth_summary,
+    R.string.pref_shot_timer_summary,
+    R.string.pref_beep_volume_summary,
     -1
   };
 
@@ -1318,6 +1327,9 @@ class TDPrefKey
     // "1",
     // FALSE,
     // FALSE,
+    FALSE,
+    TDString.TEN,
+    TDString.FIFTY,
     null
   };
 
@@ -1332,10 +1344,10 @@ class TDPrefKey
     // "DISTOX_HTHRESHOLD",      // if clino is over thr, H_SECTION is horizontal (has north arrow)
     "DISTOX_BACKUP_NUMBER",   // number of plot backups
     "DISTOX_BACKUP_INTERVAL", // minimum interval between plot backups [60 s]
-    "DISTOX_BACKUPS_CLEAR",
+    // "DISTOX_BACKUPS_CLEAR",
     "DISTOX_AUTO_XSECTIONS",  // automatically add xsections on export/save
     "DISTOX_SAVED_STATIONS",  // whether to color saved stations
-    "DISTOX_WITH_LAYERS",    
+    "DISTOX_WITH_LEVELS",    
     null
   };
 
@@ -1350,10 +1362,10 @@ class TDPrefKey
     // R.string.pref_hthr_title,
     R.string.pref_backup_number_title,
     R.string.pref_backup_interval_title,
-    R.string.pref_backups_clear_title,
+    // R.string.pref_backups_clear_title,
     R.string.pref_auto_xsections_title,
     R.string.pref_saved_stations_title,
-    R.string.pref_with_layers_title,
+    R.string.pref_with_levels_title,
     -1
   };
 
@@ -1368,10 +1380,10 @@ class TDPrefKey
     // R.string.pref_hthr_summary,
     R.string.pref_backup_number_summary,
     R.string.pref_backup_interval_summary,
-    R.string.pref_backups_clear_summary,
+    // R.string.pref_backups_clear_summary,
     R.string.pref_auto_xsections_summary,
     R.string.pref_saved_stations_summary,
-    R.string.pref_with_layers_summary,
+    R.string.pref_with_levels_summary,
     -1
   };
 
@@ -1386,16 +1398,17 @@ class TDPrefKey
     // "70",
     TDString.FIVE,
     TDString.SIXTY,
-    FALSE,
+    // FALSE,
     TRUE,
     FALSE,
-    FALSE,
+    TDString.ZERO,
     null
   };
 
 
   static String[] GEEK = {
     "DISTOX_PALETTES",
+    "DISTOX_BACKUPS_CLEAR",
     "DISTOX_PACKET_LOGGER",
     "DISTOX_GEEK_SHOT",       // FORWARD
     "DISTOX_GEEK_PLOT",       // FORWARD
@@ -1408,6 +1421,7 @@ class TDPrefKey
 
   static int[] GEEKtitle = {
     R.string.pref_palettes_title,
+    R.string.pref_backups_clear_title,
     R.string.pref_packet_logger_title,
     R.string.pref_cat_survey,
     R.string.pref_cat_drawing,
@@ -1420,6 +1434,7 @@ class TDPrefKey
 
   static int[] GEEKdesc = {
     R.string.pref_palettes_summary,
+    R.string.pref_backups_clear_summary,
     R.string.pref_packet_logger_summary,
     -1,
     -1,
@@ -1431,6 +1446,7 @@ class TDPrefKey
   };
 
   static String[] GEEKdef = {
+    FALSE,
     FALSE,
     FALSE,
     TDString.EMPTY,

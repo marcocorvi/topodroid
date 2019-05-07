@@ -73,7 +73,7 @@ class DrawingModeDialog extends MyDialog
       mCBgrid    = (CheckBox) findViewById(R.id.cb_mode_grid);
       mCBfixed   = (CheckBox) findViewById(R.id.cb_mode_fixed);
 
-      if ( TDSetting.mWithLayers ) {
+      if ( TDSetting.mWithLevels > 0 ) {
         mCBfloor = (CheckBox) findViewById(R.id.cb_layer_floor);
         mCBfill  = (CheckBox) findViewById(R.id.cb_layer_fill);
         mCBceil  = (CheckBox) findViewById(R.id.cb_layer_ceil);
@@ -82,7 +82,7 @@ class DrawingModeDialog extends MyDialog
         // mCBwater = (CheckBox) findViewById(R.id.cb_layer_water);
         // mCBtext  = (CheckBox) findViewById(R.id.cb_layer_text);
  
-        int layers = DrawingCommandManager.getDisplayLevel();
+        int layers = DrawingLevel.getDisplayLevel();
         mCBfloor.setChecked( ( layers & DrawingLevel.LEVEL_FLOOR ) == DrawingLevel.LEVEL_FLOOR );
         mCBfill .setChecked( ( layers & DrawingLevel.LEVEL_FILL  ) == DrawingLevel.LEVEL_FILL  );
         mCBceil .setChecked( ( layers & DrawingLevel.LEVEL_CEIL  ) == DrawingLevel.LEVEL_CEIL  );
@@ -128,7 +128,7 @@ class DrawingModeDialog extends MyDialog
       mCBscaleRef.setChecked((mode & DisplayMode.DISPLAY_SCALEBAR) != 0);
     }
 
-    // called only if mWithLayers
+    // called only if mWithLevels > 0
     private void setLevels()
     {
       int layers = DrawingLevel.LEVEL_BASE;
@@ -140,7 +140,7 @@ class DrawingModeDialog extends MyDialog
       // if (  mCBwater.isChecked( ) ) layers |= DrawingLevel.LEVEL_WATER;
       // if (  mCBtext .isChecked( ) ) layers |= DrawingLevel.LEVEL_TEXT;
       // Log.v("DistoXL", "set levels " + layers );
-      DrawingCommandManager.setDisplayLevel( layers );
+      DrawingLevel.setDisplayLevel( layers );
     }
 
     @Override
@@ -168,7 +168,7 @@ class DrawingModeDialog extends MyDialog
             mParent.scrapOutlineDialog();
           }
 
-          if ( TDSetting.mWithLayers ) setLevels();
+          if ( TDSetting.mWithLevels > 0 ) setLevels();
 
           break;
         case R.id.button_back:

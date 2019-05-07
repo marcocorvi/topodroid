@@ -161,7 +161,7 @@ class DrawingLineDialog extends MyDialog
 
     // TODO sharp reduce rock must be exclusive
 
-    if ( TDSetting.mWithLayers ) {
+    if ( TDSetting.mWithLevels > 0 ) {
       setCBlayers();
     } else {
       LinearLayout ll = (LinearLayout) findViewById( R.id.layer_layout );
@@ -277,7 +277,7 @@ class DrawingLineDialog extends MyDialog
         mLine.setClosed( false );
       }
 
-      if ( TDSetting.mWithLayers ) setLevel();
+      if ( TDSetting.mWithLevels  > 0 ) setLevel();
  
     // } else if ( b == mBtnCancel ) {
     //   /* nothing */

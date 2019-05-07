@@ -18,6 +18,7 @@ The area tool file contains lines specifying the property of the drawing tool.
 <li>"color rgb alpha" (rgb and alpha in hex format) [mandatory]</li>
 <li>"close-horizontal" [optional, false if missing]</li>
 <li>"orientable" [optional, false if missing]</li>
+<li>"level" view_flag [optional, 1 if missing]</li>
 <li>"bitmap WIDTH HEIGHT X_TILE Y_TILE" starts of the bitmap pattern. The tile modes can be M (mirror) or R (repeat). This line must be followed by HEIGHT lines of length WIDTH with the bitmap pixels (1: foreground, 0: background).</li>
 <li>"endbitmap" marks the end of a bitmap</li>
 <li>"csurvey LAYER CATEGORY PEN BRUSH"</li>
@@ -44,7 +45,11 @@ This attribute is not used in any tool packaged in the apk.<br><p>
 
 <b>Orientation</b><br>
 If the attribute "orientable" is set, the area pattern can be rotated through the area edit dialog.<br>
-Area patterns are not used in the default symbol set. Shading is preferred for performance.<p>
+Area patterns are not used in the default symbol set. Shading is preferred for performance.<br><p>
 
+<b>Level</b><br>
+The "level" attribute takes value the flag for the views enabled on this area items.<br>
+The flag is a number sum of 1 (base), 2 (floor), 4 (fills), 8 (ceiling), and 16 (artifacts).
+<br><p>
 
 </body></html>

@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+  <!-- TODO string-array name="canvasLevels">
+     <item name="none">none</item>
+     <item name="class">by symbol</item>
+     <item name="instance">by item</item>
+  </string-array -->
+
   <!-- TODO string-array name="csvSeparator">
      <item name="comma">comma</item>
      <item name="pipe">pipe</item>

@@ -243,6 +243,7 @@ class TDSetting
   static int mRecentTimeout     = 30; // 30 seconds
 
   // static int mScreenTimeout = 60000; // 60 secs
+  static boolean mWithAzimuth  = false;
   static int mTimerWait        = 10;    // Acc/Mag timer countdown (secs)
   static int mBeepVolume       = 50;    // beep volume
   static boolean mExtendFrac   = false;    // whether to use fractional extends
@@ -340,7 +341,8 @@ class TDSetting
   static float mWeedLength    = 2.0f;  // max weeding length
   static float mWeedBuffer    = 10;    // weed segment buffer
 
-  static boolean mWithLayers  = true; // false;
+  // static boolean mWithLayers  = true; // false;
+  static int mWithLevels = 0;  // 0: no, 1: by class, 2: by item
 
   static float mStationSize    = 20;   // size of station names [pt]
   static float mLabelSize      = 24;   // size of labels [pt]
@@ -646,11 +648,12 @@ class TDSetting
     String[] keyGeek = TDPrefKey.GEEK;
     String[] defGeek = TDPrefKey.GEEKdef;
     setPalettes(  prefs.getBoolean( keyGeek[0], bool(defGeek[0]) ) ); // DISTOX_PALETTES
-    mPacketLog = prefs.getBoolean( keyGeek[1], bool(defGeek[1]) ); // DISTOX_PACKET_LOGGER
+    setBackupsClear( prefs.getBoolean( keyGeek[1], bool(defGeek[1]) ) ); // DISTOX_BACKUPS_CLEAR
+    mPacketLog = prefs.getBoolean( keyGeek[2], bool(defGeek[2]) ); // DISTOX_PACKET_LOGGER
 
-    String[] keyGPlot = TDPrefKey.GEEKPLOT;
-    String[] defGPlot = TDPrefKey.GEEKPLOTdef;
-    setBackupsClear( prefs.getBoolean( keyGPlot[ 9], bool(defGPlot[ 9]) ) ); // DISTOX_BACKUPS_CLEAR
+    // String[] keyGPlot = TDPrefKey.GEEKPLOT;
+    // String[] defGPlot = TDPrefKey.GEEKPLOTdef;
+    // setBackupsClear( prefs.getBoolean( keyGPlot[ 9], bool(defGPlot[ 9]) ) ); // DISTOX_BACKUPS_CLEAR
 
     setTextSize( tryInt(    prefs,     keyMain[1], defMain[1] ) );      // DISTOX_TEXT_SIZE
     setSizeButtons( tryInt( prefs,     keyMain[2], defMain[2] ) );      // DISTOX_SIZE_BUTTONS
@@ -837,8 +840,8 @@ class TDSetting
     // DISTOX_AZIMUTH_MANUAL [7] handled in the first pass
     mPrevNext      = prefs.getBoolean(         keyData[ 8], bool(defData[ 8]) ); // DISTOX_PREV_NEXT
     mBacksightInput = prefs.getBoolean(        keyData[ 9], bool(defData[ 9]) ); // DISTOX_BACKSIGHT
-    mTimerWait     = tryInt(   prefs,          keyData[10],      defData[10] );  // DISTOX_SHOT_TIMER
-    mBeepVolume    = tryInt(   prefs,          keyData[11],      defData[11] );  // DISTOX_BEEP_VOLUME
+    // mTimerWait     = tryInt(   prefs,          keyData[10],      defData[10] );  // DISTOX_SHOT_TIMER
+    // mBeepVolume    = tryInt(   prefs,          keyData[11],      defData[11] );  // DISTOX_BEEP_VOLUME
 
     String[] keyGShot = TDPrefKey.GEEKSHOT;
     String[] defGShot = TDPrefKey.GEEKSHOTdef;
@@ -855,6 +858,9 @@ class TDSetting
     // mDistTolerance = tryFloat( prefs,  keyGShot[ 9],      defGShot[ 9]  ); // DISTOX_DIST_TOLERANCE
     // mSplayActive   = prefs.getBoolean( keyGShot[ 8], bool(defGShot[ 8]) ); // DISTOX_WITH_SENSORS
     // mWithRename    = prefs.getBoolean( keyGShot[ 9], bool(defGShot[ 9]) ); // DISTOX_WITH_RENAME
+    mWithAzimuth   = prefs.getBoolean( keyGShot[10], bool(defGShot[10]) ); // DISTOX_ANDROID_AZIMUTH
+    mTimerWait     = tryInt(   prefs,  keyGShot[11],      defGShot[11] );  // DISTOX_SHOT_TIMER
+    mBeepVolume    = tryInt(   prefs,  keyGShot[12],      defGShot[12] );  // DISTOX_BEEP_VOLUME
 
 
     String[] keyGPlot = TDPrefKey.GEEKPLOT;
@@ -869,10 +875,10 @@ class TDSetting
     mSectionSplay   = tryFloat( prefs, keyGPlot[ 6],      defGPlot[ 6] );  // DISTOX_SECTION_SPLAY
     mBackupNumber   = tryInt( prefs,   keyGPlot[ 7],      defGPlot[ 7] );  // DISTOX_BACKUP_NUMBER
     mBackupInterval = tryInt( prefs,   keyGPlot[ 8],      defGPlot[ 8] );  // DISTOX_BACKUP_INTERVAL
-    // setBackupsClear( prefs.getBoolean( keyGPlot[ 9], bool(defGPlot[ 9]) ) ); // DISTOX_BACKUPS_CLEAR primary
-    mAutoXSections  = prefs.getBoolean( keyGPlot[10], bool(defGPlot[10]) ); // DISTOX_AUTO_XSECTIONS
-    mSavedStations  = prefs.getBoolean( keyGPlot[11], bool(defGPlot[11]) ); // DISTOX_SAVED_STATIONS
-    mWithLayers     = prefs.getBoolean( keyGPlot[12], bool(defGPlot[12]) ); // DISTOX_WITH_LAYERS
+    // setBackupsClear( prefs.getBoolean( keyGPlot[ 9], bool(defGPlot[ 9]) ) ); // DISTOX_BACKUPS_CLEAR moved to GEEK
+    mAutoXSections  = prefs.getBoolean( keyGPlot[ 9], bool(defGPlot[ 9]) ); // DISTOX_AUTO_XSECTIONS
+    mSavedStations  = prefs.getBoolean( keyGPlot[10], bool(defGPlot[10]) ); // DISTOX_SAVED_STATIONS
+    mWithLevels     = tryInt( prefs,   keyGPlot[11],      defGPlot[11] );  // DISTOX_WITH_LEVELS
 
     String[] keyGLine = TDPrefKey.GEEKLINE;
     String[] defGLine = TDPrefKey.GEEKLINEdef;
@@ -1243,7 +1249,9 @@ class TDSetting
     if ( k.equals( key[ 0 ] ) ) { // DISTOX_PALETTES
       setPalettes( tryBooleanValue( hlp, k, v, bool(def[0]) ) );
     } else if ( k.equals( key[1] ) ) {
-      mPacketLog = tryBooleanValue( hlp, k, v, bool(def[1]) ); // DISTOX_PACKET_LOGGER
+      setBackupsClear( tryBooleanValue( hlp, k, v, bool(def[1]) ) ); // DISTOX_BACKUPS_CLEAR
+    } else if ( k.equals( key[2] ) ) {
+      mPacketLog = tryBooleanValue( hlp, k, v, bool(def[2]) ); // DISTOX_PACKET_LOGGER
     } else {
       TDLog.Error("missing GEEK key: " + k );
     }
@@ -1277,6 +1285,15 @@ class TDSetting
       mWithSensors  = tryBooleanValue( hlp, k, v, bool(def[ 8]) );
     } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_LOOP_CLOSURE_VALUE
       setLoopClosure( tryIntValue( hlp, k, v, def[ 9] ) );
+    } else if ( k.equals( key[10 ] ) ) { // DISTOX_ANDROID_AZIMUTH
+      mWithAzimuth  = tryBooleanValue( hlp, k, v, bool(def[10]) );
+    } else if ( k.equals( key[ 11 ] ) ) { // DISTOX_SHOT_TIMER [3 ..)
+      mTimerWait        = tryIntValue( hlp, k, v, def[11] );
+      if ( mTimerWait < 0 ) { mTimerWait = 0; ret = TDString.ZERO; }
+    } else if ( k.equals( key[ 12 ] ) ) { // DISTOX_BEEP_VOLUME [0 .. 100]
+      mBeepVolume       = tryIntValue( hlp, k, v, def[12] );
+      if ( mBeepVolume <   0 ) { mBeepVolume =   0; ret =   TDString.ZERO; }
+      if ( mBeepVolume > 100 ) { mBeepVolume = 100; ret = "100"; }
 
     // } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_DIST_TOLERANCE
     //   mDistTolerance = tryFloatValue( hlp, k, v, def[ 9]  );
@@ -1328,14 +1345,14 @@ class TDSetting
       mBackupInterval = tryIntValue( hlp, k, v, def[ 8] );  
       if ( mBackupInterval <  10 ) { mBackupInterval =  10; ret = Integer.toString( mBackupInterval ); }
       if ( mBackupInterval > 600 ) { mBackupInterval = 600; ret = Integer.toString( mBackupInterval ); }
-    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_BACKUPS_CLEAR
-      setBackupsClear( tryBooleanValue( hlp, k, v, bool(def[ 9]) ) );
-    } else if ( k.equals( key[10 ] ) ) { // DISTOX_AUTO_XSECTIONS
-      mAutoXSections = tryBooleanValue( hlp, k, v, bool(def[10]) );
-    } else if ( k.equals( key[11 ] ) ) { // DISTOX_SAVED_STATIONS
-      mSavedStations = tryBooleanValue( hlp, k, v, bool(def[11]) );
-    } else if ( k.equals( key[12 ] ) ) { // DISTOX_WITH_LAYERS
-      mWithLayers    = tryBooleanValue( hlp, k, v, bool(def[12]) );
+    // } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_BACKUPS_CLEAR moved to GEEK
+    //   setBackupsClear( tryBooleanValue( hlp, k, v, bool(def[ 9]) ) );
+    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_AUTO_XSECTIONS
+      mAutoXSections = tryBooleanValue( hlp, k, v, bool(def[ 9]) );
+    } else if ( k.equals( key[10 ] ) ) { // DISTOX_SAVED_STATIONS
+      mSavedStations = tryBooleanValue( hlp, k, v, bool(def[10]) );
+    } else if ( k.equals( key[11 ] ) ) { // DISTOX_WITH_LEVELS
+      mWithLevels    = tryIntValue( hlp, k, v, def[11] );
     } else {
       TDLog.Error("missing GEEK_PLOT key: " + k );
     }
@@ -1699,13 +1716,13 @@ class TDSetting
       mPrevNext = tryBooleanValue( hlp, k, v, bool(def[ 8]) );
     } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_BACKSIGHT (bool)
       mBacksightInput = tryBooleanValue( hlp, k, v, bool(def[ 9]) );
-    } else if ( k.equals( key[ 10 ] ) ) { // DISTOX_SHOT_TIMER [3 ..)
-      mTimerWait        = tryIntValue( hlp, k, v, def[10] );
-      if ( mTimerWait < 0 ) { mTimerWait = 0; ret = TDString.ZERO; }
-    } else if ( k.equals( key[ 11 ] ) ) { // DISTOX_BEEP_VOLUME [0 .. 100]
-      mBeepVolume       = tryIntValue( hlp, k, v, def[11] );
-      if ( mBeepVolume <   0 ) { mBeepVolume =   0; ret =   TDString.ZERO; }
-      if ( mBeepVolume > 100 ) { mBeepVolume = 100; ret = "100"; }
+    // } else if ( k.equals( key[ 10 ] ) ) { // DISTOX_SHOT_TIMER [3 ..)
+    //   mTimerWait        = tryIntValue( hlp, k, v, def[10] );
+    //   if ( mTimerWait < 0 ) { mTimerWait = 0; ret = TDString.ZERO; }
+    // } else if ( k.equals( key[ 11 ] ) ) { // DISTOX_BEEP_VOLUME [0 .. 100]
+    //   mBeepVolume       = tryIntValue( hlp, k, v, def[11] );
+    //   if ( mBeepVolume <   0 ) { mBeepVolume =   0; ret =   TDString.ZERO; }
+    //   if ( mBeepVolume > 100 ) { mBeepVolume = 100; ret = "100"; }
     } else {
       TDLog.Error("missing DATA key: " + k );
     }

@@ -970,8 +970,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_size_buttons_summary">Rozmiar przycisków paska akcji</string>
   <!-- TODO string name="pref_with_sensors_title">Sensors</string -->
   <!-- TODO string name="pref_with_sensors_summary">Enable "sensors" data</string -->
-  <!-- TODO string name="pref_with_layers_title">Layers</string -->
-  <!-- TODO string name="pref_with_layers_summary">Use canvas layers</string -->
+  <!-- TODO string name="pref_with_levels_title">Layers</string -->
+  <!-- TODO string name="pref_with_levels_summary">Use canvas layers</string -->
   <!-- TODO string name="pref_palettes_title">Palettes</string -->
   <!-- TODO string name="pref_palettes_summary">Enable additional palettes</string -->
   <!-- TODO string name="pref_packet_logger_title">Packets log</string -->
@@ -1142,7 +1142,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_vthr_summary">Pionowe LRUD/WENS progu</string>
 
   <!-- TODO string name="pref_plan_vthr_title">Splay plan-view threshold</string -->
-  <!-- TODO string name="pref_plan_vthr_message">Hide splays with high inclination in the plan-view</string -->
+  <!-- TODO string name="pref_plan_vthr_summary">Hide splays with high inclination in the plan-view</string -->
   <string name="pref_init_station_title">Początkowa nazwa stacji</string>
   <string name="pref_init_station_summary">Domyślna nazwa stacji</string>
   <string name="pref_station_names_title">Nazwy stacji</string>

@@ -64,7 +64,7 @@ class DrawingLabelDialog extends MyDialog
 
     mLabel.setTextSize( TDSetting.mTextSize );
 
-    if ( TDSetting.mWithLayers ) {
+    if ( TDSetting.mWithLevels > 1 ) {
       setCBlayers();
     } else {
       LinearLayout ll = (LinearLayout) findViewById( R.id.layer_layout );
@@ -94,7 +94,7 @@ class DrawingLabelDialog extends MyDialog
 
   private int getLevel()
   {
-    if ( ! TDSetting.mWithLayers ) return DrawingLevel.LEVEL_DEFAULT;
+    if ( TDSetting.mWithLevels < 2 ) return DrawingLevel.LEVEL_DEFAULT;
     int level = 0;
     if ( mCBbase .isChecked() ) level |= DrawingLevel.LEVEL_BASE;
     if ( mCBfloor.isChecked() ) level |= DrawingLevel.LEVEL_FLOOR;

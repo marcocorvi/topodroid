@@ -948,8 +948,8 @@
   <string name="pref_size_buttons_summary">Розмір кнопок панелі інструментів</string>
   <!-- TODO string name="pref_with_sensors_title">Sensors</string -->
   <!-- TODO string name="pref_with_sensors_summary">Enable "sensors" data</string -->
-  <!-- TODO string name="pref_with_layers_title">Layers</string -->
-  <!-- TODO string name="pref_with_layers_summary">Use canvas layers</string -->
+  <!-- TODO string name="pref_with_levels_title">Layers</string -->
+  <!-- TODO string name="pref_with_levels_summary">Use canvas layers</string -->
   <!-- TODO string name="pref_palettes_title">Palettes</string -->
   <!-- TODO string name="pref_palettes_summary">Enable additional palettes</string -->
   <!-- TODO string name="pref_packet_logger_title">Packets log</string -->
@@ -1120,7 +1120,7 @@
   <string name="pref_vthr_summary">Допустимий кут відрізка між ЛПВН/ЗВСЮ</string>
 
   <string name="pref_plan_vthr_title">Поріг кута бок. замірів в плані</string>
-  <string name="pref_plan_vthr_message">Поріг кута  бок. замірів які відображаються в плані</string>
+  <string name="pref_plan_vthr_summary">Поріг кута  бок. замірів які відображаються в плані</string>
   <string name="pref_init_station_title">Початковий пікет</string>
   <string name="pref_init_station_summary">Початковий пікет за замовчанням</string>
   <string name="pref_station_names_title">Номери пікетов</string>

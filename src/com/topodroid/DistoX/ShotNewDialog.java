@@ -83,6 +83,7 @@ class ShotNewDialog extends MyDialog
   private byte[] mJpegData; // camera jpeg data
 
   private static boolean mLRUDatTo = false;
+  private boolean sensorCheck = false;
   private boolean cameraCheck = false;
   private float mBearing;
   private float mClino;
@@ -102,7 +103,8 @@ class ShotNewDialog extends MyDialog
     mAt      = at;
     mTimer   = null;
     mJpegData = null;
-    cameraCheck = TDandroid.checkCamera( mApp );
+    sensorCheck = TDSetting.mWithAzimuth && TDLevel.overAdvanced;
+    cameraCheck = TDSetting.mWithAzimuth && TDLevel.overAdvanced && TDandroid.checkCamera( mApp );
     diving = (TDInstance.datamode == SurveyInfo.DATAMODE_DIVING);
   }
 
@@ -243,12 +245,13 @@ class ShotNewDialog extends MyDialog
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
     layout4.setMinimumHeight( size + 10 );
 
-    mBtnSensor = new MyCheckBox( mContext, size, R.drawable.iz_compass_transp, R.drawable.iz_compass_transp ); 
-    layout4.addView( mBtnSensor );
-    TDLayout.setMargins( mBtnSensor, 0, -10, 40, 10 );
-    mBtnSensor.setOnClickListener( this );
-
-    if ( cameraCheck && TDLevel.overAdvanced && ! diving ) {
+    if ( sensorCheck ) {
+      mBtnSensor = new MyCheckBox( mContext, size, R.drawable.iz_compass_transp, R.drawable.iz_compass_transp ); 
+      layout4.addView( mBtnSensor );
+      TDLayout.setMargins( mBtnSensor, 0, -10, 40, 10 );
+      mBtnSensor.setOnClickListener( this );
+    }
+    if ( cameraCheck && ! diving ) {
       mBtnCamera = new MyCheckBox( mContext, size, R.drawable.iz_camera_transp, R.drawable.iz_camera_transp ); 
       layout4.addView( mBtnCamera );
       TDLayout.setMargins( mBtnCamera, 0, -10, 40, 10 );
@@ -523,10 +526,10 @@ class ShotNewDialog extends MyDialog
       if ( b == mBtnOk ) {
         dismiss();
       }
-    } else if ( b == mBtnSensor ) {
+    } else if ( sensorCheck && b == mBtnSensor ) {
       mTimer = new TimerTask( this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
       mTimer.execute();
-    } else if ( b == mBtnCamera && cameraCheck && TDLevel.overAdvanced ) {
+    } else if ( cameraCheck && b == mBtnCamera ) {
       new QCamCompass( mContext, this, /* null, -1L, */ null, true, true).show();
                        // null drawer, -1 pid // DO NOT USE THIS
                        // null inserter, with_box, with_delay

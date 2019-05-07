@@ -1190,12 +1190,12 @@ public class DrawingWindow extends ItemDrawer
     if ( can_toast ) {
       if ( (! mNum.surveyAttached) && TDSetting.mCheckAttached ) {
         if ( (! mNum.surveyExtend) && TDSetting.mCheckExtend && type == PlotInfo.PLOT_EXTENDED ) {
-          TDToast.makeBad( R.string.survey_not_attached_extend );
+          TDToast.makeWarn( R.string.survey_not_attached_extend );
         } else {
-          TDToast.makeBad( R.string.survey_not_attached );
+          TDToast.makeWarn( R.string.survey_not_attached );
         }
       } else if ( (! mNum.surveyExtend) && TDSetting.mCheckExtend && type == PlotInfo.PLOT_EXTENDED ) {
-        TDToast.makeBad( R.string.survey_not_extend );
+        TDToast.makeWarn( R.string.survey_not_extend );
       }
     }
     return true;
@@ -3134,7 +3134,7 @@ public class DrawingWindow extends ItemDrawer
 	        if ( audioCheck ) {
                   addAudioPoint( xs, ys );
 	        } else {
-                  TDToast.makeBad( R.string.no_feature_audio );
+                  TDToast.makeWarn( R.string.no_feature_audio );
                 }
               } else {
     	        if ( mLandscape ) {
@@ -3559,7 +3559,7 @@ public class DrawingWindow extends ItemDrawer
           }
         }
       } else if ( nr_legs > 1 ) { // many legs
-        // TDToast.makeBad( R.string.too_many_leg_intersection );
+        // TDToast.makeWarn( R.string.too_many_leg_intersection );
         if ( h_section ) { // xsection in profile view
           // nothing 
         } else {
@@ -3572,7 +3572,7 @@ public class DrawingWindow extends ItemDrawer
     // Log.v("DistoX", "new section " + from + " - " + to );
     // cross-section does not exists yet
     if ( nr_legs == 0 ) {
-      TDToast.makeBad( R.string.no_leg_intersection );
+      TDToast.makeWarn( R.string.no_leg_intersection );
     } else if ( nr_legs == 1 ) {
       String section_id = mApp_mData.getNextSectionId( TDInstance.sid );
       currentLine.addOption( "-id " + section_id );
@@ -3596,7 +3596,7 @@ public class DrawingWindow extends ItemDrawer
       new DrawingLineSectionDialog( mActivity, this, /* mApp, */ h_section, false, section_id, currentLine, from, to, azimuth, clino, tt ).show();
 
     } else { // many legs in profile view
-      TDToast.makeBad( R.string.too_many_leg_intersection );
+      TDToast.makeWarn( R.string.too_many_leg_intersection );
     }
   }
 
@@ -3707,7 +3707,7 @@ public class DrawingWindow extends ItemDrawer
       assert( mLastLinePath == null );
       mMediaComment = "";
       if ( ! audioCheck ) {
-	// TODO TDToast.makeBad( R.string.no_feature_audio );
+	// TODO TDToast.makeWarn( R.string.no_feature_audio );
 	return;
       }
       mMediaId = mApp_mData.nextAudioNegId( TDInstance.sid );
@@ -3850,7 +3850,7 @@ public class DrawingWindow extends ItemDrawer
       PlotInfo plot = mApp_mData.getPlotInfo( TDInstance.sid, xs_id );
 
       if ( plot == null  ) { // if there does not exist xsection xs-name create it
-        // TDToast.makeBad( R.string.too_many_legs_xsection );
+        // TDToast.makeWarn( R.string.too_many_legs_xsection );
         if ( azimuth >= 360 ) azimuth -= 360;
 
         if ( PlotInfo.isProfile( type ) ) {
@@ -4912,7 +4912,7 @@ public class DrawingWindow extends ItemDrawer
                   DrawingAudioPath audio = (DrawingAudioPath)point;
                   new AudioDialog( mActivity, this, audio.mId ).show();
                 } else {
-	          // TODO TDToast.makeBad( R.string.no_feature_audio );
+	          // TODO TDToast.makeWarn( R.string.no_feature_audio );
 		}
               } else {
                 new DrawingPointDialog( mActivity, this, point ).show();
@@ -6297,12 +6297,12 @@ public class DrawingWindow extends ItemDrawer
   private void doSplitPlot( )
   {
     if ( mSplitBorder.size() <= 3 ) { // too few points: nothing to split
-      TDToast.makeBad( R.string.split_nothing );
+      TDToast.makeWarn( R.string.split_nothing );
       return;
     }
     List<DrawingPath> paths = mDrawingSurface.splitPlot( mSplitBorder, mSplitRemove );
     if ( paths.size() == 0 ) { // nothing to split
-      TDToast.makeBad( R.string.split_nothing );
+      TDToast.makeWarn( R.string.split_nothing );
       return;
     }
     Log.v("DistoXC", "doSplitPlot " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );

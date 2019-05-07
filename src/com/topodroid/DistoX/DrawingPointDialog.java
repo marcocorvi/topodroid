@@ -156,7 +156,7 @@ class DrawingPointDialog extends MyDialog
       case DrawingPointPath.SCALE_XL: mBtnScaleXL.setChecked( true ); break;
     }
 
-    if ( TDSetting.mWithLayers ) {
+    if ( TDSetting.mWithLevels > 1 ) {
       setCBlayers();
     } else {
       LinearLayout ll = (LinearLayout) findViewById( R.id.layer_layout );
@@ -233,7 +233,7 @@ class DrawingPointDialog extends MyDialog
         mPoint.setPointText( mETtext.getText().toString().trim() );
       }
 
-      if ( TDSetting.mWithLayers ) setLevel();
+      if ( TDSetting.mWithLevels > 1 ) setLevel();
 
     } else if ( b == mBTdraw ) {
       mParent.openSectionDraw( mXSectionName );

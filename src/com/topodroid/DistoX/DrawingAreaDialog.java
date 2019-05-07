@@ -99,7 +99,7 @@ class DrawingAreaDialog extends MyDialog
     LinearLayout layout3 = (LinearLayout)findViewById( R.id.layout3 );
     layout3.addView( mBtnReduce, lp );
 
-    if ( TDSetting.mWithLayers ) {
+    if ( TDSetting.mWithLevels > 1 ) {
       setCBlayers();
     } else {
       LinearLayout ll = (LinearLayout) findViewById( R.id.layer_layout );
@@ -171,7 +171,7 @@ class DrawingAreaDialog extends MyDialog
         mArea.setOrientation( mOrientationWidget.mOrient );
       }
 
-      if ( TDSetting.mWithLayers ) setLevel();
+      if ( TDSetting.mWithLevels > 1 ) setLevel();
      
     } else if ( b == mBtnReduce ) {
       int reduce = ( mBtnReduce.getState() + 1 ) % 3;

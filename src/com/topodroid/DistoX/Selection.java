@@ -350,6 +350,11 @@ class Selection
   }
 
 
+  SelectionPoint selectOnItemAt( DrawingPath item, float x, float y, float radius ) // synchronized by CommandManager
+  {
+    return bucketSelectOnItemAt( item, x, y, radius );
+  }
+
   private SelectionPoint bucketSelectOnItemAt(DrawingPath item,float x,float y,float radius)
   {  
     float min_distance = radius;
@@ -377,17 +382,23 @@ class Selection
       for ( SelectionBucket bucket : mBuckets ) {
         if ( bucket.contains( x, y, radius, radius ) ) {
           for ( SelectionPoint sp : bucket.mPoints ) {
-            if ( !legs && sp.type() == DrawingPath.DRAWING_PATH_FIXED ) continue;
-            // if ( !splays && sp.type() == DrawingPath.DRAWING_PATH_SPLAY ) continue;
-            if ( !stations && (    sp.type() == DrawingPath.DRAWING_PATH_STATION 
-                                || sp.type() == DrawingPath.DRAWING_PATH_NAME ) ) continue;
-            if ( sp.type() == DrawingPath.DRAWING_PATH_SPLAY && station_splay != null ) {
+            int type = sp.type();
+            if ( !legs && type == DrawingPath.DRAWING_PATH_FIXED ) continue;
+            // if ( !splays && type == DrawingPath.DRAWING_PATH_SPLAY ) continue;
+            if ( !stations && (    type == DrawingPath.DRAWING_PATH_STATION 
+                                || type == DrawingPath.DRAWING_PATH_NAME ) ) continue;
+            if ( type == DrawingPath.DRAWING_PATH_SPLAY && station_splay != null ) {
               if ( splays ) {
                 if ( station_splay.isStationOFF( sp.mItem ) ) continue;
 	      } else {
                 if ( ! station_splay.isStationON( sp.mItem ) ) continue;
 	      }
-	    }
+	    } else if ( type == DrawingPath.DRAWING_PATH_POINT
+	             || type == DrawingPath.DRAWING_PATH_LINE 
+	             || type == DrawingPath.DRAWING_PATH_AREA ) {
+              if ( ! DrawingLevel.isLevelVisible( sp.mItem ) ) continue;
+            }
+              
             if ( sp.distance( x, y ) < radius ) {
               // Log.v("DistoX", "pt " + sp.mPoint.x + " " + sp.mPoint.y + " dist " + sp.getDistance() );
               sel.addPoint( sp );
@@ -427,7 +438,7 @@ class Selection
       for ( SelectionBucket bucket : mBuckets ) {
         if ( bucket.contains( x, y, radius, radius ) ) {
           for ( SelectionPoint sp : bucket.mPoints ) {
-            if ( sp.type() == type ) {
+            if ( sp.type() == type && ! DrawingLevel.isLevelVisible( sp.mItem ) ) {
               if ( sp.distance( x, y ) < radius ) sel.addPoint( sp );
             }
           }
@@ -437,13 +448,18 @@ class Selection
   }
  
   // select by type
+  void selectAt( SelectionSet sel, float x, float y, float radius, int type )
+  {
+    bucketSelectAt( x, y, radius, type, sel );
+  }
+
   private void bucketSelectAt(float x,float y,float radius,int type, SelectionSet sel )
   {
     // Log.v("DistoX", "bucket select at " + x + " " + y + " R " + radius + " buckets " + mBuckets.size() );
     for ( SelectionBucket bucket : mBuckets ) {
       if ( bucket.contains( x, y, radius, radius ) ) {
         for ( SelectionPoint sp : bucket.mPoints ) {
-          if ( sp.type() == type && sp.distance( x, y ) < radius ) {
+          if ( sp.type() == type && DrawingLevel.isLevelVisible( sp.mItem ) && sp.distance( x, y ) < radius ) {
             // Log.v("DistoX", "pt " + sp.mPoint.x + " " + sp.mPoint.y + " dist " + sp.getDistance() );
             sel.addPoint( sp );
           }
@@ -452,19 +468,9 @@ class Selection
     } 
   }
   
-  SelectionPoint selectOnItemAt( DrawingPath item, float x, float y, float radius ) // synchronized by CommandManager
-  {
-    return bucketSelectOnItemAt( item, x, y, radius );
-  }
-
   void selectAt( SelectionSet sel, float x, float y, float radius, int mode, boolean legs, boolean splays, boolean stations, DrawingStationSplay station_splay )
   {
     bucketSelectAt( x, y, radius, mode, sel, legs, splays, stations, station_splay );
-  }
-
-  void selectAt( SelectionSet sel, float x, float y, float radius, int type )
-  {
-    bucketSelectAt( x, y, radius, type, sel );
   }
 
 

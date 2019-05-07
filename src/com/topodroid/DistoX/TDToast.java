@@ -35,12 +35,14 @@ class TDToast
 
   @SuppressLint("ShowToast")
   static void makeBad( int r ) { makeBG( r, TDColor.VIOLET ); }
+  static void makeWarn( int r ) { makeBG( r, TDColor.ORANGE ); }
 
   @SuppressLint("ShowToast")
   static void make( String text ) { show( Toast.makeText( TDInstance.context, text, SHORT ) ); }
   
   @SuppressLint("ShowToast")
   static void makeBad( String text ) { makeBG( text, TDColor.VIOLET ); }
+  static void makeWarn( String text ) { makeBG( text, TDColor.ORANGE ); }
   
   static Toast makeToast( int r )
   {
@@ -105,7 +107,9 @@ class TDToast
   {
     View view = toast.getView();
     view.setOnClickListener( new OnClickListener() { public void onClick( View v ) { v.setVisibility( View.GONE ); } } );
-    view.setBackgroundColor( mBgColor );
+    // view.setBackgroundColor( mBgColor );
+    TextView tv = (TextView)view.findViewById( android.R.id.message );
+    tv.setTextColor( mBgColor );
     return view;
   }
 
@@ -113,7 +117,9 @@ class TDToast
   {
     View view = toast.getView();
     view.setOnClickListener( new OnClickListener() { public void onClick( View v ) { v.setVisibility( View.GONE ); } } );
-    view.setBackgroundColor( color );
+    // view.setBackgroundColor( color );
+    TextView tv = (TextView)view.findViewById( android.R.id.message );
+    tv.setTextColor( color );
     return view;
   }
 

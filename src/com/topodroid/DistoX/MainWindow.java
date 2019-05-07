@@ -153,7 +153,7 @@ public class MainWindow extends Activity
       updateList( list );
       if ( say_no_survey && list.size() == 0 ) {
         say_no_survey = false;
-        TDToast.makeBad( R.string.no_survey );
+        TDToast.make( R.string.no_survey );
       } 
     }
   }

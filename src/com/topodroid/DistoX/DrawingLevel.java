@@ -31,5 +31,32 @@ class DrawingLevel
 
   static final int LEVEL_ANY    = 31;
   static final int LEVEL_DEFAULT  = 1;
+
+  static private int mDisplayLevel = DrawingLevel.LEVEL_ANY;
+
+  static void setDisplayLevel( int level ) { mDisplayLevel = level; }
+  static int getDisplayLevel( ) { return mDisplayLevel; }
+
+  static boolean isVisible( int level ) { return (level & mDisplayLevel ) != 0; }
+
+  static  boolean isLevelVisible( DrawingPath path )
+  {
+    if ( path == null ) return true; // visibility is filtered only if path is non-null
+    switch (TDSetting.mWithLevels) {
+      case 2: 
+        return isVisible( path.mLevel ); 
+      case 1:
+        int level = 0xff;
+        if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
+          level = BrushManager.getPointLevel( ((DrawingPointPath)path).mPointType );
+        } else if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
+          level = BrushManager.getLineLevel( ((DrawingLinePath)path).mLineType );
+        } else if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
+          level = BrushManager.getAreaLevel( ((DrawingAreaPath)path).mAreaType );
+        }
+        return isVisible( level ); 
+    }
+    return true;
+  }
 }
 

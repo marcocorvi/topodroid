@@ -902,7 +902,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_settings_edit">TopoDroid editing settings</string>
     <string name="title_settings_device">TopoDroid device settings</string>
     <string name="title_settings_calib">TopoDroid calibration settings</string>
-    <string name="title_settings_geek">TopoDroid geek flags settings</string>
+    <string name="title_settings_geek">TopoDroid geek settings</string>
     <string name="title_settings_log">TopoDroid log settings</string>
 
     <string name="title_shift">Shift</string>
@@ -937,7 +937,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_cat_calib">CALIBRATIONS</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
   <string name="pref_cat_device">DEVICES</string>
-  <string name="pref_cat_geek">GEEK FLAGS</string>
+  <string name="pref_cat_geek">GEEK SETTINGS</string>
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
 
   <string name="pref_locale_title">Language</string>
@@ -971,8 +971,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_size_buttons_summary">Size of action-bar buttons</string>
   <string name="pref_with_sensors_title">Sensors</string>
   <string name="pref_with_sensors_summary">Enable "sensors" data</string>
-  <string name="pref_with_layers_title">Layers</string>
-  <string name="pref_with_layers_summary">Use canvas layers</string>
+  <string name="pref_with_android_azimuth_title">Android compass</string>
+  <string name="pref_with_android_azimuth_summary">Enable Android compass/clino</string>
+  <string name="pref_with_levels_title">Layers</string>
+  <string name="pref_with_levels_summary">Canvas layers</string>
   <!-- UNUSED string name="pref_with_rename_title">Survey renaming</string -->
   <!-- UNUSED string name="pref_with_rename_summary">Enable "survey renaming" menu</string -->
   <string name="pref_palettes_title">Palettes</string>
@@ -1145,7 +1147,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_vthr_summary">Leg LRUD/WENS clino threshold</string>
 
   <string name="pref_plan_vthr_title">Splay plan-view threshold</string>
-  <string name="pref_plan_vthr_message">Hide splays with high inclination in the plan-view</string>
+  <string name="pref_plan_vthr_summary">Hide splays with high inclination in the plan-view</string>
   <string name="pref_init_station_title">Initial station name</string>
   <string name="pref_init_station_summary">Default initial station name</string>
   <string name="pref_station_names_title">Station names</string>

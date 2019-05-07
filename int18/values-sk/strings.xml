@@ -972,8 +972,8 @@
   <string name="pref_size_buttons_summary">Veľkosť ikon tlačidiel</string>
   <string name="pref_with_sensors_title">Sensory</string>
   <string name="pref_with_sensors_summary">Povolí zaznamenávanie dát zo sensorov smartphonu</string>
-  <string name="pref_with_layers_title">Vrstvy</string>
-  <string name="pref_with_layers_summary">Umožní používanie vrstiev pri kreslení</string>
+  <string name="pref_with_levels_title">Vrstvy</string>
+  <string name="pref_with_levels_summary">Umožní používanie vrstiev pri kreslení</string>
   <!-- UNUSED string name="pref_with_rename_title">Survey renaming</string -->
   <!-- UNUSED string name="pref_with_rename_summary">Enable "survey renaming" menu</string -->	
   <string name="pref_palettes_title">Palety</string>
@@ -1146,7 +1146,7 @@
   <string name="pref_vthr_summary">Prah sklonu hlavnej zámery medzi LRUD / WENS - Therion "vthreshold"</string>
 
   <!-- TODO string name="pref_plan_vthr_title">Splay plan-view threshold</string -->
-  <!-- TODO string name="pref_plan_vthr_message">Hide splays with high inclination in the plan-view</string -->
+  <!-- TODO string name="pref_plan_vthr_summary">Hide splays with high inclination in the plan-view</string -->
   <string name="pref_init_station_title">Počiatočný meračský bod</string>
   <string name="pref_init_station_summary">Predvolené číslo počiatočného meračského bodu</string>
   <string name="pref_station_names_title">Názvy meračských bodov</string>

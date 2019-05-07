@@ -54,7 +54,6 @@ class DrawingCommandManager
   private static final int BORDER = 20;
 
   static private int mDisplayMode = DisplayMode.DISPLAY_PLOT; // this display mode is shared among command managers
-  static private int mDisplayLevel = DrawingLevel.LEVEL_ANY;
   private RectF mBBox;
   boolean mIsExtended = false;
 
@@ -249,8 +248,6 @@ class DrawingCommandManager
 
   static void setDisplayMode( int mode ) { mDisplayMode = mode; }
   static int getDisplayMode( ) { return mDisplayMode; }
-  static void setDisplayLevel( int level ) { mDisplayLevel = level; }
-  static int getDisplayLevel( ) { return mDisplayLevel; }
 
   /* FIXME_HIGHLIGHT
   void highlights( TopoDroidApp app ) 
@@ -1012,7 +1009,7 @@ class DrawingCommandManager
       for ( ICanvasCommand c : mCurrentStack ) {
         if ( c.commandType() == 0 ) {
           DrawingPath p = (DrawingPath)c;
-          if ( isInside( p.getX(), p.getY(), border ) ) {
+          if ( DrawingLevel.isLevelVisible( p ) && isInside( p.getX(), p.getY(), border ) ) {
             paths.add(p);
           }
         }
@@ -1480,12 +1477,7 @@ class DrawingCommandManager
       synchronized( mCurrentStack ) {
         for ( ICanvasCommand cmd : mCurrentStack ) {
           if ( cmd.commandType() == 0 ) {
-            if ( TDSetting.mWithLayers ) {
-              DrawingPath path = (DrawingPath)cmd;
-              if ( (path.mLevel & mDisplayLevel) != 0 ) { // filter display levels
-                cmd.draw( c, mat, sca, null );
-              }
-            } else {
+            if ( DrawingLevel.isLevelVisible( (DrawingPath)cmd ) ) {
               cmd.draw( c, mat, sca, null );
             }
           }
@@ -1669,7 +1661,7 @@ class DrawingCommandManager
   void executeAll( Canvas canvas, float zoom, DrawingStationSplay station_splay )
   {
     if ( canvas == null ) {
-      TDLog.Error( "drawing executeAll: null canvas");
+      TDLog.Error( "drawing execute all: null canvas");
       return;
     }
 
@@ -1794,7 +1786,7 @@ class DrawingCommandManager
           for ( ICanvasCommand cmd : mCurrentStack  ) {
             if ( cmd.commandType() == 0 ) {
               DrawingPath path = (DrawingPath)cmd;
-              if ( (path.mLevel & mDisplayLevel) != 0 ) {
+              if ( DrawingLevel.isLevelVisible( (DrawingPath)cmd ) ) {
                 cmd.draw( canvas, mMatrix, mScale, mBBox );
                 if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
                   DrawingLinePath line = (DrawingLinePath)path;
@@ -1828,12 +1820,17 @@ class DrawingCommandManager
           if ( bucket.intersects( mBBox ) ) {
             for ( SelectionPoint pt : bucket.mPoints ) { 
               int type = pt.type();
-              if ( ( type == DrawingPath.DRAWING_PATH_POINT && ! spoints ) 
-                || ( type == DrawingPath.DRAWING_PATH_LINE && ! slines ) 
-                || ( type == DrawingPath.DRAWING_PATH_AREA && ! sareas ) 
-                || ( type == DrawingPath.DRAWING_PATH_FIXED && ! (legs && sshots) )
-                // || ( type == DrawingPath.DRAWING_PATH_SPLAY && ! (splays && sshots) )
-                || ( type == DrawingPath.DRAWING_PATH_NAME  && ! (sstations) ) ) continue;
+              if ( type == DrawingPath.DRAWING_PATH_POINT ) {
+                if ( ! spoints || ! DrawingLevel.isLevelVisible( pt.mItem ) ) continue;
+              } else if ( type == DrawingPath.DRAWING_PATH_LINE ) {
+                if ( ! slines || ! DrawingLevel.isLevelVisible( pt.mItem ) ) continue;
+              } else if ( type == DrawingPath.DRAWING_PATH_AREA ) {
+                if ( ! sareas || ! DrawingLevel.isLevelVisible( pt.mItem ) ) continue;
+              } else if ( ( type == DrawingPath.DRAWING_PATH_FIXED && ! (legs && sshots) )
+                          // || ( type == DrawingPath.DRAWING_PATH_SPLAY && ! (splays && sshots) )
+                          || ( type == DrawingPath.DRAWING_PATH_NAME  && ! (sstations) ) ) {
+                continue;
+              }
 	      if ( type == DrawingPath.DRAWING_PATH_SPLAY ) {
 		// FIXME_LATEST latest splays
                 if ( splays ) {
@@ -1841,7 +1838,8 @@ class DrawingCommandManager
 		} else {
                   if ( ! station_splay.isStationON( pt.mItem ) ) continue;
 		}
-	      }
+	      } 
+              
               Path path = new Path();
               if ( pt.mPoint != null ) { // line-point
                 path.addCircle( pt.mPoint.x, pt.mPoint.y, dot_radius, Path.Direction.CCW );

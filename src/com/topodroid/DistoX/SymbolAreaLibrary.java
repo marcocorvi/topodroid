@@ -33,7 +33,7 @@ class SymbolAreaLibrary extends SymbolLibrary
   static final private String[] DefaultAreas = {
     "blocks", "clay", "debris", "sand"
   };
-  private int mAreaUserIndex;
+  /* private */ int mAreaUserIndex;
 
   SymbolAreaLibrary( Resources res )
   {

@@ -965,8 +965,8 @@
   <string name="pref_size_buttons_summary">Eingabe der Größe der Action-bar Buttons [px]</string>
   <!-- TODO string name="pref_with_sensors_title">Sensors</string -->
   <!-- TODO string name="pref_with_sensors_summary">Enable "sensors" data</string -->
-  <!-- TODO string name="pref_with_layers_title">Layers</string -->
-  <!-- TODO string name="pref_with_layers_summary">Use canvas layers</string -->
+  <!-- TODO string name="pref_with_levels_title">Layers</string -->
+  <!-- TODO string name="pref_with_levels_summary">Use canvas layers</string -->
   <!-- TODO string name="pref_palettes_title">Palettes</string -->
   <!-- TODO string name="pref_palettes_summary">Enable additional palettes</string -->
   <!-- TODO string name="pref_packet_logger_title">Packets log</string -->
@@ -1136,7 +1136,7 @@
   <string name="pref_vthr_summary">Winkelgrenzwert für vertikale Darstellung von Messlinien</string>
 
   <string name="pref_plan_vthr_title">Hilfslinien vertikaler Grenzwert</string>
-  <string name="pref_plan_vthr_message">Winkelgrenzwert für Anzeige der Hilfslinien auf Plan</string>
+  <string name="pref_plan_vthr_summary">Winkelgrenzwert für Anzeige der Hilfslinien auf Plan</string>
   <string name="pref_init_station_title">Name Startmesspunkt</string>
   <string name="pref_init_station_summary">Standard Startmesspunkt</string>
   <string name="pref_station_names_title">Messpunktnamen</string>

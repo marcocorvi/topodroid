@@ -736,9 +736,9 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], N, def[ 6], FLOAT,   ctx, hlp ),
       makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], N, def[ 7],          ctx, hlp ), // AZIMUTH_MANUAL
       makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8],          ctx, hlp ), // PREV_NEXT
-      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9],          ctx, hlp ), // BACKSIGHT
-      makeEdt( cat, key[10], tit[10], dsc[10], T, def[10], INTEGER, ctx, hlp ), // TIMER
-      makeEdt( cat, key[11], tit[11], dsc[11], T, def[11], INTEGER, ctx, hlp ), // VOLUME
+      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9],          ctx, hlp )  // BACKSIGHT
+      // makeEdt( cat, key[10], tit[10], dsc[10], T, def[10], INTEGER, ctx, hlp ), // TIMER
+      // makeEdt( cat, key[11], tit[11], dsc[11], T, def[11], INTEGER, ctx, hlp ), // VOLUME
     };
   }
 
@@ -963,10 +963,13 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], T, def[ 6],          ctx, hlp ), // BEDDING PLANE
       makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7],          ctx, hlp ), // TRIPLE SHOT BELL
       makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8],          ctx, hlp ), // WITH SENSORS
-      makeLst( cat, key[ 9], tit[ 9], dsc[ 9], E, def[ 9], R.array.loopClosure, R.array.loopClosureValue, ctx, hlp )
+      makeLst( cat, key[ 9], tit[ 9], dsc[ 9], E, def[ 9], R.array.loopClosure, R.array.loopClosureValue, ctx, hlp ),
       // makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9], FLOAT,   ctx, hlp ), // DIST/ANGLE TOLERANCE
       // makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9],          ctx, hlp )  // SPLAYS AT ACTIVE STATION
       // makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9],          ctx, hlp )  // WITH RENAME
+      makeCbx( cat, key[10], tit[10], dsc[10], E, def[10],          ctx, hlp ),// WITH ANDROID AZIMUTH
+      makeEdt( cat, key[11], tit[11], dsc[11], T, def[11], INTEGER, ctx, hlp ), // TIMER
+      makeEdt( cat, key[12], tit[12], dsc[12], T, def[12], INTEGER, ctx, hlp )  // VOLUME
     };
   }
 
@@ -987,10 +990,10 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], T, def[ 6], FLOAT,   ctx, hlp ), // DASH X-SCETION
       makeLst( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7], R.array.backupNumber, R.array.backupNumberValue, ctx, hlp ),
       makeEdt( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8], INTEGER, ctx, hlp ), // BACKUP INTERVAL
-      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9],          ctx, hlp ), // BACKUPS CLEAR
-      makeCbx( cat, key[10], tit[10], dsc[10], T, def[10],          ctx, hlp ), // AUTO XSECTIONS on export/save
-      makeCbx( cat, key[11], tit[11], dsc[11], T, def[11],          ctx, hlp ), // SAVED STATIONS
-      makeCbx( cat, key[12], tit[12], dsc[12], T, def[12],          ctx, hlp )  // WITH LAYERS
+      // makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9],          ctx, hlp ), // BACKUPS CLEAR
+      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9],          ctx, hlp ), // AUTO XSECTIONS on export/save
+      makeCbx( cat, key[10], tit[10], dsc[10], T, def[10],          ctx, hlp ), // SAVED STATIONS
+      makeLst( cat, key[11], tit[11], dsc[11], T, def[11], R.array.canvasLevels, R.array.canvasLevelsValue, ctx, hlp )  // WITH LEVELS
     };
   }
   static TDPref[] makeGeekPrefs( Context ctx, TDPrefHelper hlp )
@@ -1002,13 +1005,14 @@ class TDPref implements AdapterView.OnItemSelectedListener
     String[] def = TDPrefKey.GEEKdef;
     return new TDPref[ ] {
       makeCbx( cat, key[0], tit[0], dsc[0],  T, def[0],  ctx, hlp ), // PALETTES
-      makeCbx( cat, key[1], tit[1], dsc[1],  T, def[1],  ctx, hlp ), // PACKET LOGGER
-      makeFwd( cat, key[2], tit[2],          T,          ctx, hlp ), // GEEK_SHOT
-      makeFwd( cat, key[3], tit[3],          T,          ctx, hlp ), // GEEK_PLOT
-      makeFwd( cat, key[4], tit[4],          T,          ctx, hlp ), // GEEK_LINE
-      makeFwd( cat, key[5], tit[5],          T,          ctx, hlp ), // PLOT_WALLS
-      makeFwd( cat, key[6], tit[6],          T,          ctx, hlp )  // GEEK_DEVICE
-      // makeFwd( cat, key[6], tit[6],          D,          ctx, hlp )  // SKETCH // FIXME_SKETCH_3D
+      makeCbx( cat, key[1], tit[1], dsc[1],  T, def[1],  ctx, hlp ), // BACKUP CLEAR
+      makeCbx( cat, key[2], tit[2], dsc[2],  T, def[2],  ctx, hlp ), // PACKET LOGGER
+      makeFwd( cat, key[3], tit[3],          T,          ctx, hlp ), // GEEK_SHOT
+      makeFwd( cat, key[4], tit[4],          T,          ctx, hlp ), // GEEK_PLOT
+      makeFwd( cat, key[5], tit[5],          T,          ctx, hlp ), // GEEK_LINE
+      makeFwd( cat, key[6], tit[6],          T,          ctx, hlp ), // PLOT_WALLS
+      makeFwd( cat, key[7], tit[7],          T,          ctx, hlp )  // GEEK_DEVICE
+      // makeFwd( cat, key[8], tit[8],          D,          ctx, hlp )  // SKETCH // FIXME_SKETCH_3D
     };
   }
 

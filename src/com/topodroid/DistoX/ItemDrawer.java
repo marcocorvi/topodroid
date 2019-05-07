@@ -106,45 +106,60 @@ public class ItemDrawer extends Activity
   // ----------------------------------------------------------------------
   // SELECTION
 
-    public void areaSelected( int k, boolean update_recent ) 
-    {
-      mSymbol = Symbol.AREA;
-      if ( k >= 0 && k < BrushManager.mAreaLib.mSymbolNr ) {
-        mCurrentArea = k;
-      }
-      setTheTitle();
-      if ( update_recent ) {
-        updateRecentArea( mCurrentArea );
-      }
-      mLinePointStep = TDSetting.mLineType;
-    }
-
-    public void lineSelected( int k, boolean update_recent ) 
-    {
-      mSymbol = Symbol.LINE;
-      if ( k >= 0 && k < BrushManager.mLineLib.mSymbolNr ) {
-        mCurrentLine = k;
-      }
-      setTheTitle();
-      if ( update_recent ) {
-        updateRecentLine( mCurrentLine );
-      }
-      mLinePointStep = BrushManager.mLineLib.getStyleX( mCurrentLine );
-      if ( mLinePointStep != POINT_MAX ) mLinePointStep *= TDSetting.mLineType;
-    }
-
-    public void pointSelected( int p, boolean update_recent )
-    {
-      mSymbol = Symbol.POINT;
-      if ( p >= 0 && p < BrushManager.mPointLib.mSymbolNr ) {
-        mCurrentPoint = p;
-      }
-      setTheTitle();
-      if ( update_recent ) {
-        updateRecentPoint( mCurrentPoint );
+  public void areaSelected( int k, boolean update_recent ) 
+  {
+    mSymbol = Symbol.AREA;
+    if ( k >= 0 && k < BrushManager.mAreaLib.mSymbolNr ) {
+      mCurrentArea = k;
+      if ( TDSetting.mWithLevels > 0 ) {
+        if ( DrawingLevel.isVisible( BrushManager.getAreaLevel( k ) ) ) {
+          mCurrentArea = BrushManager.mAreaLib.mAreaUserIndex;
+        }
       }
     }
+    setTheTitle();
+    if ( update_recent ) {
+      updateRecentArea( mCurrentArea );
+    }
+    mLinePointStep = TDSetting.mLineType;
+  }
 
-    public void setTheTitle() { }
+  public void lineSelected( int k, boolean update_recent ) 
+  {
+    mSymbol = Symbol.LINE;
+    if ( k >= 0 && k < BrushManager.mLineLib.mSymbolNr ) {
+      mCurrentLine = k;
+      if ( TDSetting.mWithLevels > 0 ) {
+        if ( DrawingLevel.isVisible( BrushManager.getLineLevel( k ) ) ) {
+          mCurrentLine = BrushManager.mLineLib.mLineUserIndex;
+        }
+      }
+    }
+    setTheTitle();
+    if ( update_recent ) {
+      updateRecentLine( mCurrentLine );
+    }
+    mLinePointStep = BrushManager.mLineLib.getStyleX( mCurrentLine );
+    if ( mLinePointStep != POINT_MAX ) mLinePointStep *= TDSetting.mLineType;
+  }
+
+  public void pointSelected( int p, boolean update_recent )
+  {
+    mSymbol = Symbol.POINT;
+    if ( p >= 0 && p < BrushManager.mPointLib.mSymbolNr ) {
+      mCurrentPoint = p;
+      if ( TDSetting.mWithLevels > 0 ) {
+        if ( DrawingLevel.isVisible( BrushManager.getPointLevel( p ) ) ) {
+          mCurrentPoint = BrushManager.mPointLib.mPointUserIndex;
+        }
+      }
+    }
+    setTheTitle();
+    if ( update_recent ) {
+      updateRecentPoint( mCurrentPoint );
+    }
+  }
+
+  public void setTheTitle() { }
 
 }

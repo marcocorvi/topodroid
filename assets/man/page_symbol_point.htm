@@ -20,6 +20,7 @@ The point tool file contains lines specifying the property of the drawing tool.
 <li>"orientation FLAG" [optional, false if missing, true if FLAG is '1' or 'yes']</li>
 <li>"has_text FLAG" [optional, false if missing, true if FLAG is '1' or 'yes']</li>
 <li>"csurvey LAYER TYPE CATEGORY"</li>
+<li>"level" view_flag [optional, 1 if missing]</li>
 <li>"path" begins the point symbol path. This is specified with the following commands
 <ul>
 <li>"moveTo X Y"</li>
@@ -34,5 +35,10 @@ The point tool file contains lines specifying the property of the drawing tool.
 
 <b>Orientation</b><br>
 If the attribute "orientation" is set, the point symbol can be rotated.<br><p>
+
+<b>Level</b><br>
+The "level" attribute takes value the flag for the views enabled on this point items.<br>
+The flag is a number sum of 1 (base), 2 (floor), 4 (fills), 8 (ceiling), and 16 (artifacts).
+<br><p>
 
 </body></html>

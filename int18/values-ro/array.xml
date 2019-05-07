@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+  <!-- TODO string-array name="canvasLevels">
+     <item name="none">none</item>
+     <item name="class">by symbol</item>
+     <item name="instance">by item</item>
+  </string-array -->
+
   <string-array name="csvSeparator">
      <item name="comma">virgulă</item>
      <item name="pipe">|</item>
@@ -39,10 +45,10 @@
      <item name="delaunay">Delaunay</item>
   </string-array>
 
-  <string-array name="acadVersion">
+  <!-- DO NOT TRANSLATE string-array name="acadVersion">
      <item name="9">AutoCAD 6</item>
      <item name="13">AutoCAD 12</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="zoomCtrl">
      <item name="0">Inactiv</item>

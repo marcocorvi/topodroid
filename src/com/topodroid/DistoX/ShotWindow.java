@@ -329,7 +329,7 @@ public class ShotWindow extends Activity
     } else {
       mApp.clearSurveyReferences();
       finish();
-      // TDToast.makeBad( R.string.no_survey );
+      // TDToast.makeWarn( R.string.no_survey );
     }
   }
 
@@ -412,7 +412,7 @@ public class ShotWindow extends Activity
     mDataAdapter.clear();
     // mList.setAdapter( mDataAdapter );
     if ( list.size() == 0 ) {
-      // TDToast.makeBad( R.string.no_shots );
+      // TDToast.makeWarn( R.string.no_shots );
       return;
     }
     processShotList( list );
@@ -659,7 +659,7 @@ public class ShotWindow extends Activity
       List< DBlock > shots3 = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.CHECK );
       List< PlotInfo > plots     = mApp_mData.selectAllPlots( TDInstance.sid, TDStatus.DELETED );
       if ( shots1.size() == 0 && shots2.size() == 0 && shots3.size() == 0 && plots.size() == 0 ) {
-        TDToast.makeBad( R.string.no_undelete );
+        TDToast.makeWarn( R.string.no_undelete );
       } else {
         (new UndeleteDialog(mActivity, this, mApp_mData, TDInstance.sid, shots1, shots2, shots3, plots ) ).show();
       }
@@ -1515,7 +1515,7 @@ public class ShotWindow extends Activity
   void startSketchWindow( String name )
   {
     if ( TDInstance.sid < 0 ) {
-      TDToast.makeBad( R.string.no_survey );
+      TDToast.make( R.string.no_survey );
       return;
     }
 
@@ -1566,7 +1566,7 @@ public class ShotWindow extends Activity
                                    String plot2_name, long plot2_id, long type, String station, boolean landscape )
   {
     if ( TDInstance.sid < 0 || plot1_id < 0 || plot2_id < 0 ) {
-      TDToast.makeBad( R.string.no_survey );
+      TDToast.makeWarn( R.string.no_survey );
       return;
     }
     

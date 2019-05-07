@@ -44,6 +44,7 @@ class BrushManager
 
   // -----------------------------------------------------------
   static String getPointName( int idx ) { return mPointLib.getSymbolName( idx ); }
+  static int getPointLevel( int idx ) { return mPointLib.getSymbolLevel( idx ); }
 
   static boolean pointHasText( int index ) { return mPointLib.pointHasText( index ); }
   static boolean pointHasValue( int index ) { return mPointLib.pointHasValue( index ); }
@@ -59,12 +60,14 @@ class BrushManager
   static int getLineCsxCategory( int index ) { return mLineLib.lineCsxCategory( index ); }
   static int getLineCsxPen( int index ) { return mLineLib.lineCsxPen( index ); }
   static String getLineGroup( int index ) { return mLineLib.getLineGroup( index ); }
+  static int getLineLevel( int idx ) { return mLineLib.getSymbolLevel( idx ); }
 
   static int getAreaCsxLayer( int index ) { return mAreaLib.areaCsxLayer( index ); }
   static int getAreaCsxType( int index ) { return mAreaLib.areaCsxType( index ); }
   static int getAreaCsxCategory( int index ) { return mAreaLib.areaCsxCategory( index ); }
   static int getAreaCsxPen( int index ) { return mAreaLib.areaCsxPen( index ); }
   static int getAreaCsxBrush( int index ) { return mAreaLib.areaCsxBrush( index ); }
+  static int getAreaLevel( int idx ) { return mAreaLib.getSymbolLevel( idx ); }
 
   static boolean isPointOrientable( int index ) { return mPointLib.isSymbolOrientable( index ); }
   static double getPointOrientation( int index ) { return mPointLib.getPointOrientation( index ); }
