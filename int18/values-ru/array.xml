@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-  <!-- TODO string-array name="canvasLevels">
-     <item name="none">none</item>
-     <item name="class">by symbol</item>
-     <item name="instance">by item</item>
-  </string-array -->
+  <string-array name="canvasLevels">
+     <item name="none">никак</item>
+     <item name="class">по типу символов</item>
+     <item name="instance">индивидуально</item>
+  </string-array>
 
   <string-array name="csvSeparator">
      <item name="comma">запятая</item>
