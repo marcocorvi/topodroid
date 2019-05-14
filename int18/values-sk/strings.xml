@@ -5,7 +5,6 @@
     <string name="no_manual">Nie je možné získať používateľský manuál</string>
     <string name="user_man_ok">Preklad používateľského manuálu bol nainštalovaný</string>
     <string name="user_man_fail">Inštalácia prekladu používateľského manuálu zlyhala</string>
-
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Pre návrat Opätovne stlačte tlačidlo SPÄŤ</string>
 
