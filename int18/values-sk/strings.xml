@@ -1145,8 +1145,8 @@
   <string name="pref_vthr_title">Hodnota hlavnej zámery</string>
   <string name="pref_vthr_summary">Prah sklonu hlavnej zámery medzi LRUD / WENS - Therion "vthreshold"</string>
 
-  <!-- TODO string name="pref_plan_vthr_title">Splay plan-view threshold</string -->
-  <!-- TODO string name="pref_plan_vthr_summary">Hide splays with high inclination in the plan-view</string -->
+  <string name="pref_plan_vthr_title">Prah pomocnej zámery v pôdoryse</string>
+  <string name="pref_plan_vthr_summary">Skryje pomocné zámery v pôdoryse, ktoré majú sklon väčší ako zadaná hodnota</string>
   <string name="pref_init_station_title">Počiatočný meračský bod</string>
   <string name="pref_init_station_summary">Predvolené číslo počiatočného meračského bodu</string>
   <string name="pref_station_names_title">Názvy meračských bodov</string>
