@@ -971,6 +971,8 @@
   <string name="pref_size_buttons_summary">Veľkosť ikon tlačidiel</string>
   <string name="pref_with_sensors_title">Sensory</string>
   <string name="pref_with_sensors_summary">Povolí zaznamenávanie dát zo sensorov smartphonu</string>
+  <string name="pref_with_android_azimuth_title">Android Kompas</string>
+  <string name="pref_with_android_azimuth_summary">Povolí používanie interného kompasu Android zariadenia</string>	
   <string name="pref_with_levels_title">Vrstvy</string>
   <string name="pref_with_levels_summary">Umožní používanie vrstiev pri kreslení</string>
   <!-- UNUSED string name="pref_with_rename_title">Survey renaming</string -->
