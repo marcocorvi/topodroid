@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <!-- TODO string-array name="canvasLevels">
-     <item name="none">none</item>
-     <item name="class">by symbol</item>
-     <item name="instance">by item</item>
+  <string-array name="canvasLevels">
+     <item name="none">Žiadne</item>
+     <item name="class">Podľa Symbolu</item>
+     <item name="instance">Podľa Položky</item>
   </string-array -->
 
   <string-array name="csvSeparator">

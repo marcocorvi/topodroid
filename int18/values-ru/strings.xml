@@ -959,6 +959,8 @@
   <!-- UNUSED string name="pref_size_buttons_message">Введите размер кнопок панели инструментов [pixels]</string -->
   <string name="pref_with_sensors_title">Датчики</string>
   <string name="pref_with_sensors_summary">Включить данные "датчиков"</string>
+  <string name="pref_with_android_azimuth_title">Компас телефона</string>
+  <string name="pref_with_android_azimuth_summary">Использовать датчики телефона компас/клинометр</string>
   <string name="pref_with_levels_title">Слои</string>
   <string name="pref_with_levels_summary">Включть слои абриса</string>
   <string name="pref_palettes_title">Доп. Знаки</string>
