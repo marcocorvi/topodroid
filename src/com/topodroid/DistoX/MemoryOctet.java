@@ -104,9 +104,9 @@ class MemoryOctet
           // long X = toInt( data[2], data[1] );
           // long Y = toInt( data[4], data[3] );
           // long Z = toInt( data[6], data[5] );
-          // if ( X > TopoDroidUtil.ZERO ) X = X - TopoDroidUtil.NEG;
-          // if ( Y > TopoDroidUtil.ZERO ) Y = Y - TopoDroidUtil.NEG;
-          // if ( Z > TopoDroidUtil.ZERO ) Z = Z - TopoDroidUtil.NEG;
+          // if ( X > TDUtil.ZERO ) X = X - TDUtil.NEG;
+          // if ( Y > TDUtil.ZERO ) Y = Y - TDUtil.NEG;
+          // if ( Z > TDUtil.ZERO ) Z = Z - TDUtil.NEG;
           if ( type == 0x02 ) {
             pw.format("%4d %c %02x %02x %02x %02x %02x %02x", index, hot? 'G' : 'g',
                data[1], data[2], data[3], data[4], data[5], data[6] );

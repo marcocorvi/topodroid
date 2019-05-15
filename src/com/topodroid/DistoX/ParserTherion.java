@@ -335,7 +335,7 @@ class ParserTherion
                 //   // mTeam +=  " " + vals[j];
                 // }
                 // mTeam += sb.toString();
-                mTeam += TopoDroidUtil.concat( vals, 1 );
+                mTeam += TDUtil.concat( vals, 1 );
               // } else if ( cmd.equals("explo-date") ) {
               // } else if ( cmd.equals("explo-team") ) {
               // } else if ( cmd.equals("instrument") ) {
@@ -709,7 +709,7 @@ class ParserTherion
       throw new ParserException();
     }
     if ( mDate == null ) {
-      mDate = TopoDroidUtil.currentDate();
+      mDate = TDUtil.currentDate();
     }
     TDLog.Log( TDLog.LOG_THERION, "ParserTherion shots "+ shots.size() +" splays "+ splays.size() +" fixes "+  fixes.size() );
     // Log.v( TopoDroidApp.TAG, "ParserTherion shots "+ shots.size() + " splays "+ splays.size() +" fixes "+  fixes.size() );

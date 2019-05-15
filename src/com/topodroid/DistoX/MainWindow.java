@@ -213,7 +213,13 @@ public class MainWindow extends Activity
         mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true, true ); // new-survey dialog: tell app to clear survey name and id
         (new SurveyNewDialog( mActivity, this, -1, -1 )).show(); 
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // IMPORT
-        (new ImportDialog( mActivity, this /*, mApp */ )).show();
+        File[] files = TDPath.getImportFiles();
+        File[] zips = TDPath.getZipFiles();
+        if ( files.length + zips.length > 0 ) {
+          (new ImportDialog( mActivity, this, files, zips )).show();
+        } else {
+          TDToast.makeWarn( R.string.import_none );
+        }
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // PALETTE
 	if ( mPaletteButtonEnabled ) {
           BrushManager.makePaths( mApp, getResources() );

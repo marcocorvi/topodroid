@@ -39,7 +39,8 @@ class PhotoSensorsDialog extends MyDialog
   private final ShotWindow mParent;
   private final DBlock mBlk;
 
-  private boolean audioCheck = false;
+  // private boolean audioCheck = false;
+  // private boolean photoCheck = false; // not used: can take photo with "camera" app
 
   private TextView mTVstations;
   private TextView mTVdata;
@@ -93,7 +94,8 @@ class PhotoSensorsDialog extends MyDialog
 
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
 
-    audioCheck = TDandroid.checkMicrophone( mContext );
+    boolean audioCheck = TDandroid.checkMicrophone( mContext );
+    // boolean photoCheck = TDandroid.checkCamera( mContext );
 
     LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
     layout4.setMinimumHeight( size + 20 );
@@ -117,16 +119,19 @@ class PhotoSensorsDialog extends MyDialog
     // mButtonPlot   = new MyCheckBox( mContext, size, R.drawable.iz_plot, R.drawable.iz_plot ); 
     // mButtonPlot.setOnClickListener( this );
     
-    mButtonPhoto  = new MyCheckBox( mContext, size, R.drawable.iz_camera, R.drawable.iz_camera ); 
-    mButton[pos++] = mButtonPhoto;
-    mButtonPhoto.setOnClickListener( this );
+    // if ( photoCheck ) {
+      mButtonPhoto  = new MyCheckBox( mContext, size, R.drawable.iz_camera, R.drawable.iz_camera ); 
+      mButton[pos++] = mButtonPhoto;
+      mButtonPhoto.setOnClickListener( this );
+    // } else {
+    //   -- nr_buttons;
+    // }
 
     if ( audioCheck ) {
       mButtonAudio = new MyCheckBox( mContext, size, R.drawable.iz_audio, R.drawable.iz_audio ); 
       mButtonAudio.setOnClickListener( this );
       mButton[pos++] = mButtonAudio;
     } else {
-      // mButtonAudio = null;
       -- nr_buttons;
     }
 
@@ -262,7 +267,7 @@ class PhotoSensorsDialog extends MyDialog
     // } else if ( b == mButtonPlot ) {       // PHOTO
     //   mParent.highlightBlock( mBlk );
     //   dismiss();
-    } else if ( b == mButtonPhoto ) {       // PHOTO
+    } else if ( mButtonPhoto != null && b == mButtonPhoto ) {  // PHOTO
       mParent.askPhotoComment( );
       dismiss();
     } else if ( mButtonAudio != null && b == mButtonAudio ) {  // AUDIO

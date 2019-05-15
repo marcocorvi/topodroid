@@ -49,9 +49,9 @@ class DrawThread extends  Thread
       if ( mHolder != null && mParent.isDrawing() ) {
         mParent.refresh( mHolder );
         Thread.yield();
-        TopoDroidUtil.slowDown( 1 ); // NECESSARY
+        TDUtil.slowDown( 1 ); // NECESSARY
       } else {
-        TopoDroidUtil.slowDown( 100 );
+        TDUtil.slowDown( 100 );
       }
     }
     // TDLog.Log( TDLog.LOG_PLOT, "draw thread exit");

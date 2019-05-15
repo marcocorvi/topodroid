@@ -37,7 +37,7 @@ class ParserCaveSniper extends ImportParser
     } else {
       mName = filename.replace(".csn", "");
     }
-    mDate = TopoDroidUtil.currentDate();
+    mDate = TDUtil.currentDate();
     mTeam = "";
     mDeclination = 0;
   }
@@ -78,7 +78,7 @@ class ParserCaveSniper extends ImportParser
               mLength  = Float.parseFloat(vals[k]); ++k;
               mBearing = Float.parseFloat(vals[k]); ++k;
               mClino   = Float.parseFloat(vals[k]); ++k;
-              mComment = TopoDroidUtil.concat( vals, k );
+              mComment = TDUtil.concat( vals, k );
               // k = vals.length;
 	      if ( mTo.startsWith( mFrom + ":" ) ) { // splay are added to the shots array to keep the list order
 		// splays have "extend" = DBlock.EXTEND_UNSET

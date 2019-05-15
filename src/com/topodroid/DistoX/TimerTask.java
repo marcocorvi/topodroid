@@ -66,7 +66,7 @@ class TimerTask extends AsyncTask<String, Integer, Long >
     mCntMag = 0;
     for ( int i=0; i<mWait && mRun; ++i ) {
       toneG.startTone( ToneGenerator.TONE_PROP_BEEP, duration ); 
-      TopoDroidUtil.slowDown( 1000 - duration );
+      TDUtil.slowDown( 1000 - duration );
       if ( isCancelled() ) {
         mRun = false;
         break;
@@ -85,7 +85,7 @@ class TimerTask extends AsyncTask<String, Integer, Long >
           while ( cnt > 0 && ( mCntAcc < mCount || mCntMag < mCount ) ) {
             toneG.startTone( ToneGenerator.TONE_PROP_BEEP, duration ); 
             -- cnt;
-            TopoDroidUtil.slowDown( 100 );
+            TDUtil.slowDown( 100 );
           }    
           mSensorManager.unregisterListener( this );
         }

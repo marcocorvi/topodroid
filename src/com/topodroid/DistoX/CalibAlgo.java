@@ -51,7 +51,7 @@ class CalibAlgo
 
   static private Vector scaledVector( float x, float y, float z )
   {
-    return new Vector( x/TopoDroidUtil.FV, y/TopoDroidUtil.FV, z/TopoDroidUtil.FV );
+    return new Vector( x/TDUtil.FV, y/TDUtil.FV, z/TDUtil.FV );
   }
 
   static final private double MAX_M_VALUE = 1.99993896;
@@ -171,15 +171,15 @@ class CalibAlgo
 
   static private long roundV( float x )
   {
-    long v = (long)Math.round(x * TopoDroidUtil.FV);
-    if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    long v = (long)Math.round(x * TDUtil.FV);
+    if ( v > TDUtil.ZERO ) v = TDUtil.NEG - v;
     return v;
   }
 
   static private long roundM( float x )
   {
-    long v = (long)Math.round(x * TopoDroidUtil.FM);
-    if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    long v = (long)Math.round(x * TDUtil.FM);
+    if ( v > TDUtil.ZERO ) v = TDUtil.NEG - v;
     return v;
   }
 
@@ -325,76 +325,76 @@ class CalibAlgo
     long c0 = (int)(coeff[off/*+ 0*/]); if ( c0 < 0 ) c0 = 256+c0;
     long c1 = (int)(coeff[off+ 1]); if ( c1 < 0 ) c1 = 256+c1;
     v = c0 + (c1<<8 );
-    if ( v > TopoDroidUtil.ZERO ) v = v - TopoDroidUtil.NEG;
-    b.x = v / TopoDroidUtil.FV;
+    if ( v > TDUtil.ZERO ) v = v - TDUtil.NEG;
+    b.x = v / TDUtil.FV;
 
     c0 = (int)(coeff[off+ 2]); if ( c0 < 0 ) c0 = 256+c0;
     c1 = (int)(coeff[off+ 3]); if ( c1 < 0 ) c1 = 256+c1;
     v = c0 + (c1<<8 );
-    if ( v > TopoDroidUtil.ZERO ) v = v - TopoDroidUtil.NEG;
-    a.x.x = v / TopoDroidUtil.FM;
+    if ( v > TDUtil.ZERO ) v = v - TDUtil.NEG;
+    a.x.x = v / TDUtil.FM;
 
     c0 = (int)(coeff[off+ 4]); if ( c0 < 0 ) c0 = 256+c0;
     c1 = (int)(coeff[off+ 5]); if ( c1 < 0 ) c1 = 256+c1;
     v = c0 + (c1<<8 );
-    if ( v > TopoDroidUtil.ZERO ) v = v - TopoDroidUtil.NEG;
-    a.x.y = v / TopoDroidUtil.FM;
+    if ( v > TDUtil.ZERO ) v = v - TDUtil.NEG;
+    a.x.y = v / TDUtil.FM;
 
     c0 = (int)(coeff[off+ 6]); if ( c0 < 0 ) c0 = 256+c0;
     c1 = (int)(coeff[off+ 7]); if ( c1 < 0 ) c1 = 256+c1;
     v = c0 + (c1<<8 );
-    if ( v > TopoDroidUtil.ZERO ) v = v - TopoDroidUtil.NEG;
-    a.x.z = v / TopoDroidUtil.FM;
+    if ( v > TDUtil.ZERO ) v = v - TDUtil.NEG;
+    a.x.z = v / TDUtil.FM;
 
     // BY
     c0 = (int)(coeff[off+ 8]); if ( c0 < 0 ) c0 = 256+c0;
     c1 = (int)(coeff[off+ 9]); if ( c1 < 0 ) c1 = 256+c1;
     v = c0 + (c1<<8 );
-    if ( v > TopoDroidUtil.ZERO ) v = v - TopoDroidUtil.NEG;
-    b.y = v / TopoDroidUtil.FV;
+    if ( v > TDUtil.ZERO ) v = v - TDUtil.NEG;
+    b.y = v / TDUtil.FV;
 
     c0 = (int)(coeff[off+10]); if ( c0 < 0 ) c0 = 256+c0;
     c1 = (int)(coeff[off+11]); if ( c1 < 0 ) c1 = 256+c1;
     v = c0 + (c1<<8 );
-    if ( v > TopoDroidUtil.ZERO ) v = v - TopoDroidUtil.NEG;
-    a.y.x = v / TopoDroidUtil.FM;
+    if ( v > TDUtil.ZERO ) v = v - TDUtil.NEG;
+    a.y.x = v / TDUtil.FM;
 
     c0 = (int)(coeff[off+12]); if ( c0 < 0 ) c0 = 256+c0;
     c1 = (int)(coeff[off+13]); if ( c1 < 0 ) c1 = 256+c1;
     v = c0 + (c1<<8 );
-    if ( v > TopoDroidUtil.ZERO ) v = v - TopoDroidUtil.NEG;
-    a.y.y = v / TopoDroidUtil.FM;
+    if ( v > TDUtil.ZERO ) v = v - TDUtil.NEG;
+    a.y.y = v / TDUtil.FM;
 
     c0 = (int)(coeff[off+14]); if ( c0 < 0 ) c0 = 256+c0;
     c1 = (int)(coeff[off+15]); if ( c1 < 0 ) c1 = 256+c1;
     v = c0 + (c1<<8 );
-    if ( v > TopoDroidUtil.ZERO ) v = v - TopoDroidUtil.NEG;
-    a.y.z = v / TopoDroidUtil.FM;
+    if ( v > TDUtil.ZERO ) v = v - TDUtil.NEG;
+    a.y.z = v / TDUtil.FM;
 
     // BZ
     c0 = (int)(coeff[off+16]); if ( c0 < 0 ) c0 = 256+c0;
     c1 = (int)(coeff[off+17]); if ( c1 < 0 ) c1 = 256+c1;
     v = c0 + (c1<<8 );
-    if ( v > TopoDroidUtil.ZERO ) v = v - TopoDroidUtil.NEG;
-    b.z = v / TopoDroidUtil.FV;
+    if ( v > TDUtil.ZERO ) v = v - TDUtil.NEG;
+    b.z = v / TDUtil.FV;
 
     c0 = (int)(coeff[off+18]); if ( c0 < 0 ) c0 = 256+c0;
     c1 = (int)(coeff[off+19]); if ( c1 < 0 ) c1 = 256+c1;
     v = c0 + (c1<<8 );
-    if ( v > TopoDroidUtil.ZERO ) v = v - TopoDroidUtil.NEG;
-    a.z.x = v / TopoDroidUtil.FM;
+    if ( v > TDUtil.ZERO ) v = v - TDUtil.NEG;
+    a.z.x = v / TDUtil.FM;
 
     c0 = (int)(coeff[off+20]); if ( c0 < 0 ) c0 = 256+c0;
     c1 = (int)(coeff[off+21]); if ( c1 < 0 ) c1 = 256+c1;
     v = c0 + (c1<<8 );
-    if ( v > TopoDroidUtil.ZERO ) v = v - TopoDroidUtil.NEG;
-    a.z.y = v / TopoDroidUtil.FM;
+    if ( v > TDUtil.ZERO ) v = v - TDUtil.NEG;
+    a.z.y = v / TDUtil.FM;
 
     c0 = (int)(coeff[off+22]); if ( c0 < 0 ) c0 = 256+c0;
     c1 = (int)(coeff[off+23]); if ( c1 < 0 ) c1 = 256+c1;
     v = c0 + (c1<<8 );
-    if ( v > TopoDroidUtil.ZERO ) v = v - TopoDroidUtil.NEG;
-    a.z.z = v / TopoDroidUtil.FM;
+    if ( v > TDUtil.ZERO ) v = v - TDUtil.NEG;
+    a.z.z = v / TDUtil.FM;
   }
 
   static void coeffToG( byte[] coeff, Vector b, Matrix a )
@@ -424,12 +424,12 @@ class CalibAlgo
   {
     int c0 = 1 + (int)(b);
     if ( c0 >= 128 ) c0 = c0 - 256;
-    return c0 / TopoDroidUtil.FN;
+    return c0 / TDUtil.FN;
   }
 
   static byte floatToByteNL( float x )
   {
-    float xf = x * TopoDroidUtil.FN; 
+    float xf = x * TDUtil.FN; 
     int v = Math.round( xf ) - 1;
     if ( v <= 0 ) v = 0x100 + v;
     return (byte)( v & 0xff );
@@ -438,13 +438,13 @@ class CalibAlgo
   // FIXME
   // protected static byte floatToByteV( float x )
   // {
-  //   long v = (long)(x * TopoDroidUtil.FV); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+  //   long v = (long)(x * TDUtil.FV); if ( v > TDUtil.ZERO ) v = TDUtil.NEG - v;
   //   return (byte)(v & 0xff);
   // }
   // 
   // protected static byte floatToByteM( float x )
   // {
-  //   long v = (long)(x * TopoDroidUtil.FM); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+  //   long v = (long)(x * TDUtil.FM); if ( v > TDUtil.ZERO ) v = TDUtil.NEG - v;
   //   return (byte)(v & 0xff);
   // }
   
@@ -473,8 +473,8 @@ class CalibAlgo
     if ( idx >= num ) {
       return;
     }
-    // g[idx] = new Vector( gx/TopoDroidUtil.FV, gy/TopoDroidUtil.FV, gz/TopoDroidUtil.FV );
-    // m[idx] = new Vector( mx/TopoDroidUtil.FV, my/TopoDroidUtil.FV, mz/TopoDroidUtil.FV );
+    // g[idx] = new Vector( gx/TDUtil.FV, gy/TDUtil.FV, gz/TDUtil.FV );
+    // m[idx] = new Vector( mx/TDUtil.FV, my/TDUtil.FV, mz/TDUtil.FV );
     g[idx] = scaledVector( gx, gy, gz );
     m[idx] = scaledVector( mx, my, mz );
     group[idx] = (group0 < 0)? 0 : group0;
@@ -541,8 +541,8 @@ class CalibAlgo
 
   protected void checkOverflow( Vector v, Matrix m )
   {
-    float mv = v.maxAbsValue() * TopoDroidUtil.FV;
-    float mm = m.maxAbsValue() * TopoDroidUtil.FM;
+    float mv = v.maxAbsValue() * TDUtil.FV;
+    float mm = m.maxAbsValue() * TDUtil.FM;
     if ( mv > mm ) mm = mv;
     if ( mm > 32768 ) { // 32768 = 256*128 = 1<<15 = 0x010000
       mv = 32768 / mm;
@@ -553,9 +553,9 @@ class CalibAlgo
 
   private float saturate( float x )
   {
-    int ix = (int)(x * TopoDroidUtil.FN);
+    int ix = (int)(x * TDUtil.FN);
     if ( ix > 127 ) { ix = 127; } else if ( ix < -127 ) { ix = -127; }
-    return ix / TopoDroidUtil.FN;
+    return ix / TDUtil.FN;
   }
 
   void saturate( Vector nl )
@@ -567,8 +567,8 @@ class CalibAlgo
 
   void computeBearingAndClinoRad( Vector g0, Vector m0 )
   {
-    // Vector g = g0.mult( 1.0f / TopoDroidUtil.FV );
-    // Vector m = m0.mult( 1.0f / TopoDroidUtil.FV );
+    // Vector g = g0.mult( 1.0f / TDUtil.FV );
+    // Vector m = m0.mult( 1.0f / TDUtil.FV );
     Vector g = scaledVector( g0 );
     Vector m = scaledVector( m0 );
     g.normalize();

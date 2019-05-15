@@ -99,17 +99,17 @@ class ParserCompass extends ImportParser
             mFrom = vals[k]; ++k;
             mTo   = vals[k]; ++k;
             try {
-              mLength  = Float.parseFloat(vals[k]) * TopoDroidUtil.FT2M; ++k;
+              mLength  = Float.parseFloat(vals[k]) * TDUtil.FT2M; ++k;
               mBearing = Float.parseFloat(vals[k]); ++k;
               mClino   = Float.parseFloat(vals[k]); ++k;
               if ( k < kmax ) {
-                mLeft = Float.parseFloat(vals[k]) * TopoDroidUtil.FT2M; ++k;
+                mLeft = Float.parseFloat(vals[k]) * TDUtil.FT2M; ++k;
                 if ( k < kmax ) {
-                  mUp = Float.parseFloat(vals[k]) * TopoDroidUtil.FT2M; ++k;
+                  mUp = Float.parseFloat(vals[k]) * TDUtil.FT2M; ++k;
                   if ( k < kmax ) {
-                    mDown = Float.parseFloat(vals[k]) * TopoDroidUtil.FT2M; ++k;
+                    mDown = Float.parseFloat(vals[k]) * TDUtil.FT2M; ++k;
                     if ( k < kmax ) {
-                      mRight = Float.parseFloat(vals[k]) * TopoDroidUtil.FT2M; ++k;
+                      mRight = Float.parseFloat(vals[k]) * TDUtil.FT2M; ++k;
                       mFlag = null;
                       mComment = "";
                       if ( k < kmax ) {
@@ -120,7 +120,7 @@ class ParserCompass extends ImportParser
                         if ( k < kmax ) {
 						  // mComment = vals[k];
                           // while ( k < kmax ) { mComment = mComment + " " + vals[k]; ++k; }
-                          mComment = TopoDroidUtil.concat( vals, k );
+                          mComment = TDUtil.concat( vals, k );
                           // k = vals.length;
                         }
                       }
@@ -169,7 +169,7 @@ class ParserCompass extends ImportParser
       throw new ParserException();
     }
     if ( mDate == null ) {
-      mDate = TopoDroidUtil.currentDate();
+      mDate = TDUtil.currentDate();
     }
     TDLog.Log( TDLog.LOG_THERION, "ParserCompass shots "+ shots.size() +" splays "+ splays.size()  );
     // Log.v( TopoDroidApp.TAG, "ParserCompass shots "+ shots.size() + " splays "+ splays.size() );
@@ -179,8 +179,8 @@ class ParserCompass extends ImportParser
   {
     // not handled "percent"
     if ( unit.startsWith("min") ) return 1/60.0f;
-    if ( unit.startsWith("grad") ) return (float)TopoDroidUtil.GRAD2DEG;
-    if ( unit.startsWith("mil") ) return (float)TopoDroidUtil.GRAD2DEG;
+    if ( unit.startsWith("grad") ) return (float)TDUtil.GRAD2DEG;
+    if ( unit.startsWith("mil") ) return (float)TDUtil.GRAD2DEG;
     // if ( unit.startsWith("deg") ) return 1.0f;
     return 1.0f;
   }
@@ -188,10 +188,10 @@ class ParserCompass extends ImportParser
   float parseLengthUnit( String unit ) 
   {
     if ( unit.startsWith("c") ) return 0.01f; // cm centimeter
-    if ( unit.startsWith("f") ) return (float)TopoDroidUtil.FT2M; // ft feet
-    if ( unit.startsWith("i") ) return (float)TopoDroidUtil.IN2M; // in inch
+    if ( unit.startsWith("f") ) return (float)TDUtil.FT2M; // ft feet
+    if ( unit.startsWith("i") ) return (float)TDUtil.IN2M; // in inch
     if ( unit.startsWith("milli") || unit.equals("mm") ) return 0.001f; // mm millimeter
-    if ( unit.startsWith("y") ) return (float)TopoDroidUtil.YD2M; // yd yard
+    if ( unit.startsWith("y") ) return (float)TDUtil.YD2M; // yd yard
     // if ( unit.startsWith("m") ) return 1.0f;
     return 1.0f;
   }

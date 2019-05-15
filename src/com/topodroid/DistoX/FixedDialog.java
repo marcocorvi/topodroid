@@ -128,9 +128,9 @@ class FixedDialog extends MyDialog
 
     mTVdecl = (EditText) findViewById( R.id.fix_decl );
     {
-      int year = TopoDroidUtil.year();
-      int month = TopoDroidUtil.month();
-      int day = TopoDroidUtil.day();
+      int year = TDUtil.year();
+      int month = TDUtil.month();
+      int day = TDUtil.day();
       MagElement elem = mWMM.computeMagElement( mFxd.lat, mFxd.lng, mFxd.alt, year, month, day );
       mTVdecl.setText( String.format(Locale.US, "%.4f", elem.Decl ) );
     }

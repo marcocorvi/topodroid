@@ -102,9 +102,9 @@ class PacketData
         long x = MemoryOctet.toInt( buf[2], buf[1] );
         long y = MemoryOctet.toInt( buf[4], buf[3] );
         long z = MemoryOctet.toInt( buf[6], buf[5] );
-        if ( x > TopoDroidUtil.ZERO ) x = x - TopoDroidUtil.NEG;
-        if ( y > TopoDroidUtil.ZERO ) y = y - TopoDroidUtil.NEG;
-        if ( z > TopoDroidUtil.ZERO ) z = z - TopoDroidUtil.NEG;
+        if ( x > TDUtil.ZERO ) x = x - TDUtil.NEG;
+        if ( y > TDUtil.ZERO ) y = y - TDUtil.NEG;
+        if ( z > TDUtil.ZERO ) z = z - TDUtil.NEG;
         return String.format("X %x Y %x Z %x", x, y, z );
       case 4:
         vals = data.split(" ");

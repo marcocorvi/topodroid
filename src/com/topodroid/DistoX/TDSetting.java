@@ -899,14 +899,14 @@ class TDSetting
       mUnitLength = 1.0f;
       mUnitLengthStr = "m";
     } else {
-      mUnitLength = TopoDroidUtil.M2FT;
+      mUnitLength = TDUtil.M2FT;
       mUnitLengthStr = "ft";
     }
     if ( prefs.getString( keyUnits[1],  defUnits[1] ).equals( defUnits[1] ) ) {
       mUnitAngle = 1.0f;
       mUnitAngleStr = "deg";
     } else {
-      mUnitAngle = TopoDroidUtil.DEG2GRAD;
+      mUnitAngle = TDUtil.DEG2GRAD;
       mUnitAngleStr = "grad";
     }
     mUnitGrid       = tryFloat(  prefs, keyUnits[2], defUnits[2] );      // DISTOX_UNIT_GRID
@@ -1740,7 +1740,7 @@ class TDSetting
         mUnitLength = 1.0f;
         mUnitLengthStr = "m";
       } else {
-        mUnitLength = TopoDroidUtil.M2FT;
+        mUnitLength = TDUtil.M2FT;
         mUnitLengthStr = "ft";
       }
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_UNIT_ANGLE (choice)
@@ -1748,7 +1748,7 @@ class TDSetting
         mUnitAngle = 1.0f;
         mUnitAngleStr = "deg";
       } else {
-        mUnitAngle = TopoDroidUtil.DEG2GRAD;
+        mUnitAngle = TDUtil.DEG2GRAD;
         mUnitAngleStr = "grad";
       }
     } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_UNIT_GRID (choice)

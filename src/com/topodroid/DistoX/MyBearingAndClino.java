@@ -73,7 +73,7 @@ class MyBearingAndClino implements IBearingAndClino
     // // Log.v("DistoX", "save. orientation " + mOrientation );
     // int rot = getExifOrientation( mOrientation );
     // exif.setAttribute( ExifInterface.TAG_ORIENTATION, String.format(Locale.US, "%d", rot) );
-    // exif.setAttribute( ExifInterface.TAG_DATETIME, TopoDroidUtil.currentDateTime() );
+    // exif.setAttribute( ExifInterface.TAG_DATETIME, TDUtil.currentDateTime() );
     // exif.setAttribute( ExifInterface.TAG_GPS_LATITUDE, String.format(Locale.US, "%d/100", (int)(mClino*100) ) );
     // exif.setAttribute( ExifInterface.TAG_GPS_LATITUDE_REF, "N" );
     // exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE, String.format(Locale.US, "%d/100", (int)(mBearing*100) ) );
@@ -88,7 +88,7 @@ class MyBearingAndClino implements IBearingAndClino
       // String.format(Locale.US, "%.2f %.2f", b, c );
       int rot = getExifOrientation( o );
       exif.setAttribute( ExifInterface.TAG_ORIENTATION, String.format(Locale.US, "%d", rot) );
-      exif.setAttribute( ExifInterface.TAG_DATETIME, TopoDroidUtil.currentDateTime() );
+      exif.setAttribute( ExifInterface.TAG_DATETIME, TDUtil.currentDateTime() );
       exif.setAttribute( ExifInterface.TAG_GPS_LATITUDE, String.format(Locale.US, "%d/100", (int)(c*100) ) );
       exif.setAttribute( ExifInterface.TAG_GPS_LATITUDE_REF, "N" );
       exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE, String.format(Locale.US, "%d/100", (int)(b*100) ) );

@@ -43,16 +43,19 @@ class ImportDialog extends MyDialog
 { 
   // private final TopoDroidApp mApp;
   private final MainWindow mParent;
+  private File[] mFiles = null;
+  private File[] mZips = null;
 
   // private ArrayAdapter<String> mArrayAdapter;
   private ListView mList;
   // private Button mBtnCancel;
 
-  ImportDialog( Context context, MainWindow parent /* , TopoDroidApp app */ )
+  ImportDialog( Context context, MainWindow parent, File[] files, File[] zips )
   {
     super( context, R.string.ImportDialog );
     mParent  = parent;
-    // mApp = app;
+    mFiles = files;
+    mZips  = zips;
   }
 
   @Override
@@ -70,16 +73,14 @@ class ImportDialog extends MyDialog
     // mBtnCancel.setOnClickListener( this );
     ( (Button)findViewById( R.id.button_cancel ) ).setOnClickListener( this );
 
-    File[] files = TDPath.getImportFiles();
     ArrayList<String> names = new ArrayList<>();
-    if ( files != null ) {
-      for ( File f : files ) { 
+    if ( mFiles != null ) {
+      for ( File f : mFiles ) { 
         names.add( f.getName() );
       }
     }
-    File[] zips = TDPath.getZipFiles();
-    if ( zips != null ) {
-      for ( File f : zips ) {
+    if ( mZips != null ) {
+      for ( File f : mZips ) {
         names.add( f.getName() );
       }
     }
@@ -95,9 +96,6 @@ class ImportDialog extends MyDialog
         mArrayAdapter.add( names.get(k) );
       }
       mList.setAdapter( mArrayAdapter );
-    } else {
-      TDToast.makeBad( R.string.import_none );
-      dismiss();
     }
   }
 

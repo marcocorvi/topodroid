@@ -48,7 +48,7 @@ class StationName
     ToneGenerator toneG = new ToneGenerator( AudioManager.STREAM_ALARM, ToneGenerator.MAX_VOLUME ); // TDSetting.mBeepVolume );
     // for ( int i=0; i<2; ++i ) {
       toneG.startTone( ToneGenerator.TONE_PROP_PROMPT, duration ); 
-      // TopoDroidUtil.slowDown( duration );
+      // TDUtil.slowDown( duration );
     // }
   }
 

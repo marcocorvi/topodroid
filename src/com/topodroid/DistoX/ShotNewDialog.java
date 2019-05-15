@@ -349,10 +349,10 @@ class ShotNewDialog extends MyDialog
       String shot_to = "";
    
       if ( notDone && mETfrom.getText() != null ) {
-        shot_from = TopoDroidUtil.noSpaces( mETfrom.getText().toString() );
+        shot_from = TDUtil.noSpaces( mETfrom.getText().toString() );
       }
       if ( notDone && mETto.getText() != null ) {
-        shot_to = TopoDroidUtil.noSpaces( mETto.getText().toString() );
+        shot_to = TDUtil.noSpaces( mETto.getText().toString() );
         if ( shot_to.equals(".") || shot_to.equals("-") ) shot_to = "";
       }
 
@@ -510,7 +510,7 @@ class ShotNewDialog extends MyDialog
 	    MyBearingAndClino.setExifBearingAndClino( imagefile, mBearing, mClino, mOrientation );
             TopoDroidApp.mData.insertPhoto( TDInstance.sid, photo_id, blk.mId,
                                     "",
-                                    TopoDroidUtil.currentDate(),
+                                    TDUtil.currentDate(),
                                     "snap " + shot_from + " " + shot_to ); // FIXME TITLE has to go
           } catch ( IOException e ) {
             TDLog.Error( "IO exception " + e.getMessage() );

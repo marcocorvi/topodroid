@@ -188,7 +188,7 @@ class AudioDialog extends MyDialog
 
   private void deleteAudio()
   {
-    TopoDroidUtil.deleteFile( mFilepath );
+    TDUtil.deleteFile( mFilepath );
     TopoDroidApp.mData.deleteAudio( TDInstance.sid, mBid );
     if ( mParent != null ) mParent.deletedAudio( mBid );
   }
@@ -225,7 +225,7 @@ class AudioDialog extends MyDialog
       mBtnConfirm.setText( R.string.audio_paused );
       canPlay = true;
       hasFile = true;
-      TopoDroidApp.mData.setAudio( TDInstance.sid, mBid, TopoDroidUtil.currentDateTime() );
+      TopoDroidApp.mData.setAudio( TDInstance.sid, mBid, TDUtil.currentDateTime() );
       if ( mParent != null ) mParent.stopRecordAudio( mBid );
     } catch ( IllegalStateException e ) {
     } catch ( RuntimeException e ) {

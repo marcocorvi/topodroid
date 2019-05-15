@@ -112,8 +112,8 @@ public class ItemDrawer extends Activity
     if ( k >= 0 && k < BrushManager.mAreaLib.mSymbolNr ) {
       mCurrentArea = k;
       if ( TDSetting.mWithLevels > 0 ) {
-        if ( DrawingLevel.isVisible( BrushManager.getAreaLevel( k ) ) ) {
-          mCurrentArea = BrushManager.mAreaLib.mAreaUserIndex;
+        if ( ! DrawingLevel.isVisible( BrushManager.getAreaLevel( k ) ) ) {
+          mCurrentArea = 0; // BrushManager.mAreaLib.mAreaUserIndex;
         }
       }
     }
@@ -130,8 +130,8 @@ public class ItemDrawer extends Activity
     if ( k >= 0 && k < BrushManager.mLineLib.mSymbolNr ) {
       mCurrentLine = k;
       if ( TDSetting.mWithLevels > 0 ) {
-        if ( DrawingLevel.isVisible( BrushManager.getLineLevel( k ) ) ) {
-          mCurrentLine = BrushManager.mLineLib.mLineUserIndex;
+        if ( ! DrawingLevel.isVisible( BrushManager.getLineLevel( k ) ) ) {
+          mCurrentLine = 0; // BrushManager.mLineLib.mLineUserIndex;
         }
       }
     }
@@ -149,8 +149,8 @@ public class ItemDrawer extends Activity
     if ( p >= 0 && p < BrushManager.mPointLib.mSymbolNr ) {
       mCurrentPoint = p;
       if ( TDSetting.mWithLevels > 0 ) {
-        if ( DrawingLevel.isVisible( BrushManager.getPointLevel( p ) ) ) {
-          mCurrentPoint = BrushManager.mPointLib.mPointUserIndex;
+        if ( ! DrawingLevel.isVisible( BrushManager.getPointLevel( p ) ) ) {
+          mCurrentPoint = 0; // BrushManager.mPointLib.mPointUserIndex;
         }
       }
     }

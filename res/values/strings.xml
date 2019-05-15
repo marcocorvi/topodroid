@@ -827,7 +827,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="audio_delete">Delete ?</string>
     <string name="audio_overwrite">Overwrite ?</string>
 
-    <string name="title_azimut">Extend reference</string>
+    <string name="title_azimut">Reference extend-azimuth</string>
     <string name="title_audio">Audio comment</string>
     <string name="title_calib">Calibrations</string>
     <string name="title_calib_check">Calibration-check shots</string>

@@ -26,6 +26,6 @@ class MyDateSetListener implements OnDateSetListener
 
   @Override
   public void onDateSet( DatePicker view, int y, int m, int d ) {
-    mView.setText( TopoDroidUtil.composeDate( y, m, d ) );
+    mView.setText( TDUtil.composeDate( y, m, d ) );
   }
 }

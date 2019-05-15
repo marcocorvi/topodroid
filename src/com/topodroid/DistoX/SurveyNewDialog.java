@@ -117,7 +117,7 @@ class SurveyNewDialog extends MyDialog
       mEditTeam.setText( TDSetting.mDefaultTeam );
     }
 
-    mEditDate.setText( TopoDroidUtil.currentDate() );
+    mEditDate.setText( TDUtil.currentDate() );
 
     mBTsave = (Button) findViewById( R.id.surveySave );
     mBTopen = (Button) findViewById( R.id.surveyOpen );
@@ -146,9 +146,9 @@ class SurveyNewDialog extends MyDialog
     }
     if ( b == mEditDate ) {
       String date = mEditDate.getText().toString();
-      int y = TopoDroidUtil.dateParseYear( date );
-      int m = TopoDroidUtil.dateParseMonth( date );
-      int d = TopoDroidUtil.dateParseDay( date );
+      int y = TDUtil.dateParseYear( date );
+      int m = TDUtil.dateParseMonth( date );
+      int d = TDUtil.dateParseDay( date );
       new DatePickerDialog( mContext, mDateListener, y, m, d ).show();
       return;
     }
@@ -158,7 +158,7 @@ class SurveyNewDialog extends MyDialog
     if ( /* name == null || */ name.length() == 0 ) { // ALWAYS false
       return;
     }
-    name = TopoDroidUtil.noSpaces( name );
+    name = TDUtil.noSpaces( name );
     if ( ! saveSurvey( name ) ) {
       return;
     }
@@ -181,7 +181,7 @@ class SurveyNewDialog extends MyDialog
   private boolean saveSurvey( String name )
   {
     if ( name == null ) return false;
-    name = TopoDroidUtil.noSpaces( name ).trim(); // FIXME FORCE NAMES WITHOUT SPACES
+    name = TDUtil.noSpaces( name ).trim(); // FIXME FORCE NAMES WITHOUT SPACES
     if ( name.length() == 0 ) {
       mEditName.setError( mContext.getResources().getString( R.string.error_name_required ) );
       return false;

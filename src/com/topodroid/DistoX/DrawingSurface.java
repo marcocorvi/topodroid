@@ -377,7 +377,7 @@ class DrawingSurface extends SurfaceView
       }
     } finally {
       if ( canvas != null ) {
-        holder.unlockCanvasAndPost( canvas );
+        holder.unlockCanvasAndPost( canvas ); // FIXME IllegalArgumentException ???
       }
     }
   }

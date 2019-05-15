@@ -276,7 +276,7 @@ class DistoXComm extends TopoDroidComm
       if ( ! DeviceUtil.isPaired( mBTDevice ) ) {
         for ( int n=0; n < TDSetting.mConnectSocketDelay; ++n ) {
           // TDLog.Log( TDLog.LOG_BT, "[4] pairing device: trial " + n );
-	  TopoDroidUtil.yieldDown( 100 );
+	  TDUtil.yieldDown( 100 );
           if ( DeviceUtil.isPaired( mBTDevice ) ) {
             // TDLog.Log( TDLog.LOG_BT, "[4a] device paired at time " + n );
             break;
@@ -499,7 +499,7 @@ class DistoXComm extends TopoDroidComm
               // Log.v("DistoX", "RF comm thread start ... ");
               startRfcommThread( -1, lister );
               while ( mRfcommThread != null ) {
-                TopoDroidUtil.slowDown( 100 );
+                TDUtil.slowDown( 100 );
               }
             // } else {
             //   Log.v("DistoX", "RF comm thread not null ");
@@ -767,7 +767,7 @@ class DistoXComm extends TopoDroidComm
 	  } else { // read with timeout
             startRfcommThread( -1, lister );
             while ( mRfcommThread != null ) {
-              TopoDroidUtil.slowDown( 100 );
+              TDUtil.slowDown( 100 );
             }
             ret = getNrReadPackets();
 	  }
@@ -783,7 +783,7 @@ class DistoXComm extends TopoDroidComm
             //   TDLog.Log( TDLog.LOG_COMM, "download data: read " + packets + " / " + to_read );
             // }
             prev_read = packets;
-            TopoDroidUtil.slowDown( 100 );
+            TDUtil.slowDown( 100 );
           }
 	  ret = getNrReadPackets();
 	  // if ( ret > to_read ) {
@@ -793,7 +793,7 @@ class DistoXComm extends TopoDroidComm
       } else {
         startRfcommThread( -1, lister );
         while ( mRfcommThread != null ) {
-          TopoDroidUtil.slowDown( 100 );
+          TDUtil.slowDown( 100 );
         }
         // TDLog.Log( TDLog.LOG_COMM, "download done: read " + getNrReadPacket() );
         // cancelRfcommThread(); // called by closeSocket() which is called by destroySocket()

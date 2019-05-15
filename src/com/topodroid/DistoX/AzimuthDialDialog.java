@@ -37,7 +37,7 @@ import android.widget.SeekBar;
 // import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import android.graphics.Bitmap;
-// import android.graphics.Matrix;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 
 // import android.util.Log;
@@ -64,20 +64,33 @@ class AzimuthDialDialog extends MyDialog
   private Button mBtnCancel;
 
   private SeekBar mSeekBar;
-  private MyTurnBitmap mDialBitmap;
+  // private MyTurnBitmap mDialBitmap;
 
-  AzimuthDialDialog( Context context, ILister parent, float azimuth, MyTurnBitmap dial )
+  // AzimuthDialDialog( Context context, ILister parent, float azimuth, MyTurnBitmap dial )
+  AzimuthDialDialog( Context context, ILister parent, float azimuth, Bitmap dial )
   {
     super(context, R.string.AzimuthDialDialog );
     mParent  = parent;
     mAzimuth = azimuth;
-    mDialBitmap = dial;
+    // mDialBitmap = dial;
+    mBMdial = dial;
   }
 
   private void updateView()
   {
-    Bitmap bm2 = mDialBitmap.getBitmap( mAzimuth, 96 );
-    TDandroid.setButtonBackground( mBTazimuth, new BitmapDrawable( mContext.getResources(), bm2 ) );
+    Matrix m = new Matrix();
+    m.preRotate( mAzimuth - 90 );
+    // float s = TDMath.cosd( ((mAzimuth % 90) - 45) );
+    // m.preScale( s, s );
+    int w = 96; // mBMdial.getWidth();
+    Bitmap bm1 = Bitmap.createScaledBitmap( mBMdial, w, w, true );
+    Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, w, w, m, true);
+    // rotatedBitmap( mBMdial, mBMdial.getWidth(), mAzimuth, 96 );
+    // Bitmap bm2 = Bitmap.createBitmap( mPxl, 96, 96, Bitmap.Config.ALPHA_8 );
+    mBTazimuth.setBackgroundDrawable( new BitmapDrawable( mContext.getResources(), bm2 ) );
+
+    //+ Bitmap bm2 = mDialBitmap.getBitmap( mAzimuth, 96 );
+    //+ TDandroid.setButtonBackground( mBTazimuth, new BitmapDrawable( mContext.getResources(), bm2 ) );
   }
 
   private void updateEditText() { mETazimuth.setText( String.format(Locale.US, "%d", (int)mAzimuth ) ); }

@@ -42,18 +42,18 @@ class DeviceX310TakeShot extends AsyncTask<Integer, Integer, Integer >
     for ( ; i>1; --i ) {
       // Log.v("DistoX", "take shot " + i + " wait " + TDSetting.mWaitLaser + "/" + TDSetting.mWaitShot );
       mApp.setX310Laser( 1, null );
-      TopoDroidUtil.slowDown( TDSetting.mWaitLaser ); 
+      TDUtil.slowDown( TDSetting.mWaitLaser ); 
       mApp.setX310Laser( 2, null );   
-      TopoDroidUtil.slowDown( TDSetting.mWaitShot );
+      TDUtil.slowDown( TDSetting.mWaitShot );
     }
     mApp.setX310Laser( 1, null );
-    TopoDroidUtil.slowDown( TDSetting.mWaitLaser ); 
+    TDUtil.slowDown( TDSetting.mWaitLaser ); 
     if ( mLister != null ) {
       mApp.setX310Laser( 3, mLister ); // 3 = measure and download
-      // TopoDroidUtil.slowDown( TDSetting.mWaitShot ); 
+      // TDUtil.slowDown( TDSetting.mWaitShot ); 
     } else {
       mApp.setX310Laser( 2, null ); // 2 = measure
-      // TopoDroidUtil.slowDown( TDSetting.mWaitLaser ); 
+      // TDUtil.slowDown( TDSetting.mWaitLaser ); 
     }
     return 0;
   }
@@ -72,10 +72,10 @@ class DeviceX310TakeShot extends AsyncTask<Integer, Integer, Integer >
   {
     // if ( mLister != null ) {
     //   mApp.setX310Laser( 3, mLister ); // 3 = measure and download
-    //   // TopoDroidUtil.slowDown( TDSetting.mWaitShot ); 
+    //   // TDUtil.slowDown( TDSetting.mWaitShot ); 
     // } else {
     //   mApp.setX310Laser( 2, null ); // 2 = measure
-    //   // TopoDroidUtil.slowDown( TDSetting.mWaitLaser ); 
+    //   // TDUtil.slowDown( TDSetting.mWaitLaser ); 
     // }
     mILister.enableBluetoothButton(true);
   }

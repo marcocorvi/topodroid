@@ -673,7 +673,7 @@ public class DeviceActivity extends Activity
                 DeviceUtil.bindDevice( btDevice );
                 for (int c=0; c<TDSetting.mConnectSocketDelay; ++c ) {
                   if ( DeviceUtil.isPaired( btDevice ) ) break;
-                  TopoDroidUtil.slowDown( 100 ); // Thread.yield();
+                  TDUtil.slowDown( 100 ); // Thread.yield();
                 }
               }
             }
@@ -810,8 +810,8 @@ public class DeviceActivity extends Activity
   {
     // Log.v("DistoX", "CALIB RESET");
     if ( mCurrDevice != null ) {
-      long one = (long)Math.round( TopoDroidUtil.FM );
-      // if (one > TopoDroidUtil.ZERO ) one = TopoDroidUtil.NEG - one;
+      long one = (long)Math.round( TDUtil.FM );
+      // if (one > TDUtil.ZERO ) one = TDUtil.NEG - one;
       byte low  = (byte)( one & 0xff );
       byte high = (byte)((one >> 8) & 0xff );
       byte zeroNL = CalibAlgo.floatToByteNL( 0 );

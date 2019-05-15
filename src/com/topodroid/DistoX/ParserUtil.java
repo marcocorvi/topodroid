@@ -46,8 +46,8 @@ class ParserUtil
     String u = unit.toLowerCase();
     // not handled "percent"
     if ( u.startsWith("min") )  return 1/60.0f;
-    if ( u.startsWith("grad") ) return (float)TopoDroidUtil.GRAD2DEG;
-    if ( u.startsWith("mil") )  return (float)TopoDroidUtil.GRAD2DEG;
+    if ( u.startsWith("grad") ) return (float)TDUtil.GRAD2DEG;
+    if ( u.startsWith("mil") )  return (float)TDUtil.GRAD2DEG;
     // if ( unit.startsWith("deg") ) return 1.0f;
     return 1.0f;
   }
@@ -56,10 +56,10 @@ class ParserUtil
   {
     String u = unit.toLowerCase();
     if ( u.startsWith("c") ) return 0.01f; // cm centimeter
-    if ( u.startsWith("f") ) return (float)TopoDroidUtil.FT2M; // ft feet
-    if ( u.startsWith("i") ) return (float)TopoDroidUtil.IN2M; // in inch
+    if ( u.startsWith("f") ) return (float)TDUtil.FT2M; // ft feet
+    if ( u.startsWith("i") ) return (float)TDUtil.IN2M; // in inch
     if ( u.startsWith("milli") || u.equals("mm") ) return 0.001f; // mm millimeter
-    if ( u.startsWith("y") ) return (float)TopoDroidUtil.YD2M; // yd yard
+    if ( u.startsWith("y") ) return (float)TDUtil.YD2M; // yd yard
     // if ( unit.startsWith("m") ) return 1.0f;
     return 1.0f;
   }

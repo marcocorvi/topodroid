@@ -91,7 +91,7 @@ class Archiver
     try {
       zos = new ZipOutputStream( new BufferedOutputStream( new FileOutputStream( zipname ) ) );
       for ( File file : files ) addEntry( zos, file );
-      // for ( File file : files ) TopoDroidUtil.deleteFile( file );
+      // for ( File file : files ) TDUtil.deleteFile( file );
     } catch ( FileNotFoundException e ) {
     // } catch ( IOException e ) {
     //   // FIXME
@@ -215,7 +215,7 @@ class Archiver
     //   // FIXME
     } finally {
       if ( zos != null ) try { zos.close(); } catch ( IOException e ) { TDLog.Error("ZIP close error"); }
-      TopoDroidUtil.deleteFile( TDPath.getSqlFile() );
+      TDUtil.deleteFile( TDPath.getSqlFile() );
     }
     return ret;
   }
@@ -244,7 +244,7 @@ class Archiver
         }
         fout.close();
         ok_manifest = mApp.checkManifestFile( pathname, surveyname  );
-        TopoDroidUtil.deleteFile( pathname );
+        TDUtil.deleteFile( pathname );
       }
       zip.close();
       TDLog.Log( TDLog.LOG_ZIP, "un-archive manifest " + ok_manifest );
@@ -255,7 +255,7 @@ class Archiver
       ZipInputStream zin = new ZipInputStream( fis );
       while ( ( ze = zin.getNextEntry() ) != null ) {
         if ( ze.isDirectory() ) {
-          TopoDroidUtil.makeDir( TDPath.getDirFile( ze.getName() ) );
+          TDUtil.makeDir( TDPath.getDirFile( ze.getName() ) );
         } else {
           TDLog.Log( TDLog.LOG_ZIP, "Zip entry \"" + ze.getName() + "\"" );
 	  Log.v("DistoXX", "Zip entry " + ze.getName() );
@@ -328,12 +328,12 @@ class Archiver
 
           } else if ( ze.getName().endsWith( ".wav" ) ) { // AUDIOS
             pathname = TDPath.getAudioDir( surveyname );
-            TopoDroidUtil.makeDir( pathname );
+            TDUtil.makeDir( pathname );
             pathname = TDPath.getAudioFile( surveyname, ze.getName() );
           } else if ( ze.getName().endsWith( ".jpg" ) ) { // PHOTOS
             // FIXME need survey dir
             pathname = TDPath.getJpgDir( surveyname );
-            TopoDroidUtil.makeDir( pathname );
+            TDUtil.makeDir( pathname );
             pathname = TDPath.getJpgFile( surveyname, ze.getName() );
           // } else {
             // unexpected file type
@@ -351,7 +351,7 @@ class Archiver
             if ( sql ) {
               TDLog.Log( TDLog.LOG_ZIP, "Zip sqlfile \"" + pathname + "\" DB version " + mApp.mManifestDbVersion );
               sql_success = ( app_data.loadFromFile( pathname, mApp.mManifestDbVersion ) >= 0 );
-              TopoDroidUtil.deleteFile( pathname );
+              TDUtil.deleteFile( pathname );
             }
           }
           zin.closeEntry();

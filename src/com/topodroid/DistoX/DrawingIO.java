@@ -210,7 +210,7 @@ class DrawingIO
   //                   ++ k;
   //                 }
   //               } else {
-  //                 options = TopoDroidUtil.concat( vals, k );
+  //                 options = TDUtil.concat( vals, k );
   //                 k = vals.length;
   //               }
   //             }
@@ -1047,7 +1047,7 @@ class DrawingIO
       // Log.v("DistoXX", "bbox " + bbox.left + " " + bbox.top + " - " + bbox.right + " " + bbox.bottom );
     }
     pw.format("\n");
-    pw.format("# %s created by TopoDroid v. %s\n\n", TopoDroidUtil.currentDate(), TopoDroidApp.VERSION );
+    pw.format("# %s created by TopoDroid v. %s\n\n", TDUtil.currentDate(), TopoDroidApp.VERSION );
     out.write( sw.getBuffer().toString() );
   }
 

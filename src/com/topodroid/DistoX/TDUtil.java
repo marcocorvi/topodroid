@@ -1,4 +1,4 @@
-/* @file TopoDroidUtil.java
+/* @file TDUtil.java
  *
  * @author marco corvi
  * @date jan 2014
@@ -23,7 +23,7 @@ import java.io.File;
 
 // import android.util.Log;
 
-class TopoDroidUtil
+class TDUtil
 {
   // static final float M_PI  = 3.1415926536f; // Math.PI;
   // static final float M_2PI = 6.283185307f;  // 2*Math.PI;

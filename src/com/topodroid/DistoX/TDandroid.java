@@ -10,6 +10,8 @@
  * --------------------------------------------------------
  */
 package com.topodroid.DistoX;
+
+import android.util.Log;
  
 import android.content.SharedPreferences.Editor;
 
@@ -47,6 +49,16 @@ class TDandroid
       android.Manifest.permission.CAMERA,
       android.Manifest.permission.RECORD_AUDIO
   };
+  static final String[] permNames = {
+      "BLUETOOTH", 
+      "BLUETOOTH_ADMIN",
+      // "INTERNET",
+      "WRITE_EXTERNAL_STORAGE",
+      // "READ_EXTERNAL_STORAGE",
+      "ACCESS_FINE_LOCATION",
+      "CAMERA",
+      "RECORD_AUDIO"
+  };
 
   static final int NR_PERMS_D = 3;
   static final int NR_PERMS   = 6;
@@ -83,8 +95,9 @@ class TDandroid
     if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.M ) return;
 
     for ( int k=0; k<NR_PERMS; ++k ) { // check whether the app has the six permissions
+      // Log.v("DistoX-PERM", "Create permission " + permNames[k] );
       GrantedPermission[k] = ( context.checkSelfPermission( perms[k] ) == PackageManager.PERMISSION_GRANTED );
-      if ( ! GrantedPermission[k] ) MustRestart = true;
+      if ( ! GrantedPermission[k] && k < NR_PERMS_D ) MustRestart = true;
     }
     // Log.v("DistoXX", "FC must restart " + MustRestart );
     if ( MustRestart ) { // if a permission has not been granted request it
@@ -206,6 +219,7 @@ class TDandroid
     // TDLog.Log( LOG_PERM, "check permissions" );
     int k;
     for ( k=0; k<NR_PERMS_D; ++k ) {
+      // Log.v("DistoX-PERM", "Check permission " + permNames[k] );
       int res = context.checkCallingOrSelfPermission( perms[k] );
       if ( res != PackageManager.PERMISSION_GRANTED ) {
         // TDToast.make( mActivity, "TopoDroid must have " + perms[k] );
@@ -215,6 +229,7 @@ class TDandroid
     int ret = 0;
     int flag = 1;
     for ( ; k<NR_PERMS; ++k ) {
+      // Log.v("DistoX-PERM", "Check permission " + permNames[k] );
       int res = context.checkCallingOrSelfPermission( perms[k] );
       if ( res != PackageManager.PERMISSION_GRANTED ) {
         // TDToast.make( mActivity, "TopoDroid may need " + perms[k] );
@@ -222,12 +237,14 @@ class TDandroid
       }
       flag *= 2;
     }
+    // Log.v("DistoX-PERM", "Check permission returns " + ret );
     return ret;
   }
 
   static boolean checkLocation( Context context )
   {
     // TDLog.Log( LOG_PERM, "check location" );
+    // Log.v("DistoX-PERM", "Check location ");
     PackageManager pm = context.getPackageManager();
     return ( context.checkCallingOrSelfPermission( android.Manifest.permission.ACCESS_FINE_LOCATION ) == PackageManager.PERMISSION_GRANTED )
         && pm.hasSystemFeature(PackageManager.FEATURE_LOCATION)
@@ -237,6 +254,7 @@ class TDandroid
   static boolean checkCamera( Context context )
   {
     // TDLog.Log( LOG_PERM, "check camera" );
+    // Log.v("DistoX-PERM", "Check camera ");
     PackageManager pm = context.getPackageManager();
     return ( context.checkCallingOrSelfPermission( android.Manifest.permission.CAMERA ) == PackageManager.PERMISSION_GRANTED )
         && pm.hasSystemFeature(PackageManager.FEATURE_CAMERA)
@@ -246,12 +264,14 @@ class TDandroid
   static boolean checkMultitouch( Context context )
   {
     // TDLog.Log( LOG_PERM, "check multitouch" );
+    // Log.v("DistoX-PERM", "Check multitouch ");
     return context.getPackageManager().hasSystemFeature( PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH );
   }
 
   static boolean checkMicrophone( Context context )
   {
     // TDLog.Log( LOG_PERM, "check microphone" );
+    // Log.v("DistoX-PERM", "Check microphone ");
     return ( context.checkCallingOrSelfPermission( android.Manifest.permission.RECORD_AUDIO ) == PackageManager.PERMISSION_GRANTED )
         && context.getPackageManager().hasSystemFeature( PackageManager.FEATURE_MICROPHONE );
   }
@@ -259,6 +279,7 @@ class TDandroid
   static boolean checkBluetooth( Context context )
   {
     // TDLog.Log( LOG_PERM, "check bluetooth" );
+    // Log.v("DistoX-PERM", "Check bluetooth ");
     return ( context.checkCallingOrSelfPermission( android.Manifest.permission.BLUETOOTH ) == PackageManager.PERMISSION_GRANTED )
         && context.getPackageManager().hasSystemFeature( PackageManager.FEATURE_BLUETOOTH );
   }
@@ -266,6 +287,7 @@ class TDandroid
   static boolean checkInternet( Context context )
   {
     // TDLog.Log( LOG_PERM, "check internet" );
+    // Log.v("DistoX-PERM", "Check internet ");
     return ( context.checkCallingOrSelfPermission( android.Manifest.permission.INTERNET ) == PackageManager.PERMISSION_GRANTED );
   }
 

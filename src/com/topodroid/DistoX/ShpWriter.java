@@ -74,7 +74,7 @@ class ShpObject
     nr    = 0;
     path  = pth;
     mFiles = files;
-    setYYMMDD( TopoDroidUtil.currentDate() );
+    setYYMMDD( TDUtil.currentDate() );
   }
 
   protected void open( ) throws IOException
@@ -99,9 +99,9 @@ class ShpObject
 
   void setYYMMDD( String date )
   {
-    year  = TopoDroidUtil.dateParseYear( date );
-    month = TopoDroidUtil.dateParseMonth( date );
-    day   = TopoDroidUtil.dateParseDay( date );
+    year  = TDUtil.dateParseYear( date );
+    month = TDUtil.dateParseMonth( date );
+    day   = TDUtil.dateParseDay( date );
   }
 
   protected void resetChannels( int shplen, int shxlen, int dbflen ) throws IOException

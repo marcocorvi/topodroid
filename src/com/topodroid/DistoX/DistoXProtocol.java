@@ -338,9 +338,9 @@ class DistoXProtocol
         mGY = MemoryOctet.toInt( mBuffer[4], mBuffer[3] );
         mGZ = MemoryOctet.toInt( mBuffer[6], mBuffer[5] );
 
-        if ( mGX > TopoDroidUtil.ZERO ) mGX = mGX - TopoDroidUtil.NEG;
-        if ( mGY > TopoDroidUtil.ZERO ) mGY = mGY - TopoDroidUtil.NEG;
-        if ( mGZ > TopoDroidUtil.ZERO ) mGZ = mGZ - TopoDroidUtil.NEG;
+        if ( mGX > TDUtil.ZERO ) mGX = mGX - TDUtil.NEG;
+        if ( mGY > TDUtil.ZERO ) mGY = mGY - TDUtil.NEG;
+        if ( mGZ > TDUtil.ZERO ) mGZ = mGZ - TDUtil.NEG;
         TDLog.Log( TDLog.LOG_PROTO, "Proto packet G " + String.format(" %x %x %x", mGX, mGY, mGZ ) );
         return DISTOX_PACKET_G;
       case 0x03: // m
@@ -348,9 +348,9 @@ class DistoXProtocol
         mMY = MemoryOctet.toInt( mBuffer[4], mBuffer[3] );
         mMZ = MemoryOctet.toInt( mBuffer[6], mBuffer[5] );
 
-        if ( mMX > TopoDroidUtil.ZERO ) mMX = mMX - TopoDroidUtil.NEG;
-        if ( mMY > TopoDroidUtil.ZERO ) mMY = mMY - TopoDroidUtil.NEG;
-        if ( mMZ > TopoDroidUtil.ZERO ) mMZ = mMZ - TopoDroidUtil.NEG;
+        if ( mMX > TDUtil.ZERO ) mMX = mMX - TDUtil.NEG;
+        if ( mMY > TDUtil.ZERO ) mMY = mMY - TDUtil.NEG;
+        if ( mMZ > TDUtil.ZERO ) mMZ = mMZ - TDUtil.NEG;
         TDLog.Log( TDLog.LOG_PROTO, "Proto packet M " + String.format(" %x %x %x", mMX, mMY, mMZ ) );
         return DISTOX_PACKET_M;
       case 0x04: // vector data packet
@@ -413,7 +413,7 @@ class DistoXProtocol
           while ( ( available = mIn.available() ) < min_available && timeout < maxtimeout ) {
             ++ timeout;
             // TDLog.Log( TDLog.LOG_PROTO, "Proto read packet sleep " + timeout + "/" + maxtimeout );
-            TopoDroidUtil.slowDown( 100, "Proto read packet InterruptedException" );
+            TDUtil.slowDown( 100, "Proto read packet InterruptedException" );
           }
         }
       }

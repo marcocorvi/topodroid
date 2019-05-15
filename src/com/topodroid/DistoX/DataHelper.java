@@ -208,7 +208,7 @@ class DataHelper extends DataSetObservable
         }
 
         // while ( myDB.isDbLockedByOtherThreads() ) {
-        //   TopoDroidUtil.slowDown( 200 );
+        //   TDUtil.slowDown( 200 );
         // }
 
         // updateConfig = myDB.compileStatement( "UPDATE configs SET value=? WHERE key=?" );
@@ -4437,7 +4437,7 @@ class DataHelper extends DataSetObservable
        if (cursor.moveToFirst()) {
          do {
            pw.format(Locale.US,
-                     "INSERT into %s values( %d, %d, \"%s\", \"%s\", %.2f, %.2f, %.2f, %.2f, %.2f %.2f %.2f, %d, %d, %d, %d, \"%s\", %d, %d, %d, %.2f, \"%s\" );\n",
+                     "INSERT into %s values( %d, %d, \"%s\", \"%s\", %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %d, %d, %d, %d, \"%s\", %d, %d, %d, %.2f, \"%s\" );\n",
                      SHOT_TABLE,
                      sid,
                      cursor.getLong(0),

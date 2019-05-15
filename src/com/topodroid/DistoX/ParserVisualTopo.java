@@ -245,8 +245,8 @@ class ParserVisualTopo extends ImportParser
   // {
   //   // not handled "percent"
   //   if ( unit.startsWith("Min") ) return 1/60.0f;
-  //   if ( unit.startsWith("Grad") ) return (float)TopoDroidUtil.GRAD2DEG;
-  //   if ( unit.startsWith("Mil") ) return (float)TopoDroidUtil.GRAD2DEG;
+  //   if ( unit.startsWith("Grad") ) return (float)TDUtil.GRAD2DEG;
+  //   if ( unit.startsWith("Mil") ) return (float)TDUtil.GRAD2DEG;
   //   // if ( unit.startsWith("Deg") ) return 1.0f;
   //   return 1.0f;
   // }
@@ -254,10 +254,10 @@ class ParserVisualTopo extends ImportParser
   // float parseLengthUnit( String unit )
   // {
   //   if ( unit.startsWith("c") ) return 0.01f; // cm centimeter
-  //   if ( unit.startsWith("f") ) return (float)TopoDroidUtil.FT2M; // ft feet
-  //   if ( unit.startsWith("i") ) return (float)TopoDroidUtil.IN2M; // in inch
+  //   if ( unit.startsWith("f") ) return (float)TDUtil.FT2M; // ft feet
+  //   if ( unit.startsWith("i") ) return (float)TDUtil.IN2M; // in inch
   //   if ( unit.startsWith("milli") || unit.equals("mm") ) return 0.001f; // mm millimeter
-  //   if ( unit.startsWith("y") ) return (float)TopoDroidUtil.YD2M; // yd yard
+  //   if ( unit.startsWith("y") ) return (float)TDUtil.YD2M; // yd yard
   //   // if ( unit.startsWith("m") ) return 1.0f;
   //   return 1.0f;
   // }

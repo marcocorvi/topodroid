@@ -211,7 +211,7 @@ public class CalibActivity extends Activity
       }
     } else {
       mEditName.setHint( R.string.name );
-      mEditDate.setText( TopoDroidUtil.currentDate() );
+      mEditDate.setText( TDUtil.currentDate() );
       mDeviceAddress = TDInstance.distoAddress();
       // mEditDevice.setText( mDeviceAddress );
 
@@ -256,9 +256,9 @@ public class CalibActivity extends Activity
       return;
     } else if ( b == mEditDate ) {
       String date = mEditDate.getText().toString();
-      int y = TopoDroidUtil.dateParseYear( date );
-      int m = TopoDroidUtil.dateParseMonth( date );
-      int d = TopoDroidUtil.dateParseDay( date );
+      int y = TDUtil.dateParseYear( date );
+      int m = TDUtil.dateParseMonth( date );
+      int d = TDUtil.dateParseDay( date );
       new DatePickerDialog( this, mDateListener, y, m, d ).show();
       return;
     }
@@ -327,7 +327,7 @@ public class CalibActivity extends Activity
     //   mEditName.setError( error );
     //   return;
     // }
-    name = TopoDroidUtil.noSpaces( name );
+    name = TDUtil.noSpaces( name );
     if ( name.length() == 0 ) {
       String error = getResources().getString( R.string.error_name_required );
       mEditName.setError( error );
@@ -345,7 +345,7 @@ public class CalibActivity extends Activity
       TopoDroidApp.mDData.updateCalibInfo( TDInstance.cid, date, device, comment );
       TDToast.make( R.string.calib_updated );
     } else { // new calib
-      name = TopoDroidUtil.noSpaces( name );
+      name = TDUtil.noSpaces( name );
       if ( /* name != null && */ name.length() > 0 ) { // name != null always true
         if ( mApp.hasCalibName( name ) ) { // name already exists
           // TDToast.makeBad( R.string.calib_exists );

@@ -204,12 +204,12 @@ class MultishotDialog extends MyDialog
 
     Button b = (Button) v;
     if ( b == mButtonRenumber ) {
-      String from = TopoDroidUtil.noSpaces( mETfrom.getText().toString() );
+      String from = TDUtil.noSpaces( mETfrom.getText().toString() );
       // if ( /* from == null || */ from.length() == 0 ) {
       //   mETfrom.setError( mContext.getResources().getString( R.string.error_station_required ) );;
       //   return;
       // }
-      String to   = TopoDroidUtil.noSpaces( mETto.getText().toString() );
+      String to   = TDUtil.noSpaces( mETto.getText().toString() );
       // if ( /* to == null || */ to.length() == 0 ) {
       //   mETto.setError( mContext.getResources().getString( R.string.error_station_required ) );;
       //   return;

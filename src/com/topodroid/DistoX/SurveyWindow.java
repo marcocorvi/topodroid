@@ -150,7 +150,7 @@ public class SurveyWindow extends Activity
 
   void renameSurvey( String name ) 
   {
-    name = TopoDroidUtil.noSpaces( name );
+    name = TDUtil.noSpaces( name );
     if ( mApp.renameCurrentSurvey( TDInstance.sid, name, true ) ) {
       mTextName.setText( name );
       mTextName.setTextColor( mNameColor );
@@ -327,9 +327,9 @@ public class SurveyWindow extends Activity
       return;
     } else if ( b == mEditDate ) {
       String date = mEditDate.getText().toString();
-      int y = TopoDroidUtil.dateParseYear( date );
-      int m = TopoDroidUtil.dateParseMonth( date );
-      int d = TopoDroidUtil.dateParseDay( date );
+      int y = TDUtil.dateParseYear( date );
+      int m = TDUtil.dateParseMonth( date );
+      int d = TDUtil.dateParseDay( date );
       new DatePickerDialog( mActivity, mDateListener, y, m, d ).show();
       saveSurvey();
       return;
@@ -466,7 +466,7 @@ public class SurveyWindow extends Activity
     doSetDeclination( decl );
 
     // FORCE NAMES WITHOUT SPACES
-    // name = TopoDroidUtil.noSpaces( name );
+    // name = TDUtil.noSpaces( name );
     // date, team, comment always non-null
     /* if ( date != null ) */ { date = date.trim(); } // else { date = ""; }
     /* if ( team != null ) */ { team = team.trim(); } // else { team = ""; }

@@ -70,7 +70,7 @@ import android.provider.MediaStore;
 
 import android.graphics.Bitmap;
 // import android.graphics.Bitmap.CompressFormat;
-// import android.graphics.BitmapFactory;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.Paint;
 import android.graphics.Paint.FontMetrics;
@@ -505,7 +505,8 @@ public class DrawingWindow extends ItemDrawer
   private BitmapDrawable mBMselectArea;
   private BitmapDrawable mBMselectShot;
   private BitmapDrawable mBMselectStation;
-  // private Bitmap mBMdial;
+  // FIXME_AZIMUTH_DIAL 1,2
+  private Bitmap mBMdial;
   private MyTurnBitmap mDialBitmap; // use global MyDialBitmap
 
   private HorizontalListView mListView;
@@ -982,7 +983,7 @@ public class DrawingWindow extends ItemDrawer
         }
       };
     }
-    // TopoDroidUtil.slowDown( 10 );
+    // TDUtil.slowDown( 10 );
 
     if ( psd2 != null ) {
       TDLog.Log( TDLog.LOG_IO, "save plot [2] " + psd2.fname );
@@ -1216,11 +1217,13 @@ public class DrawingWindow extends ItemDrawer
     if ( BTN_DIAL >= mButton1.length ) return;
 
     if ( TDAzimuth.mFixedExtend == 0 ) {
+      // FIXME_AZIMUTH_DIAL 2
       // android.graphics.Matrix m = new android.graphics.Matrix();
       // m.postRotate( azimuth - 90 );
       // Bitmap bm1 = Bitmap.createScaledBitmap( mBMdial, mButtonSize, mButtonSize, true );
       // Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, mButtonSize, mButtonSize, m, true);
       Bitmap bm2 = mDialBitmap.getBitmap( TDAzimuth.mRefAzimuth, mButtonSize );
+
       TDandroid.setButtonBackground( mButton1[BTN_DIAL], new BitmapDrawable( getResources(), bm2 ) );
     } else if ( TDAzimuth.mFixedExtend == -1L ) {
       TDandroid.setButtonBackground( mButton1[BTN_DIAL], mBMleft );
@@ -1553,7 +1556,8 @@ public class DrawingWindow extends ItemDrawer
       else if ( ic == IC_PLAN ) { mBMplan     = MyButton.getButtonBackground( mApp, res, izons[ic] ); }
     }
     mButton1[ mNrButton1 ] = MyButton.getButton( mActivity,this, R.drawable.iz_empty );
-    // mBMdial          = BitmapFactory.decodeResource( res, R.drawable.iz_dial_transp ); // FIXME AZIMUTH_DIAL
+    // FIXME_AZIMUTH_DIAL 1,2
+    mBMdial          = BitmapFactory.decodeResource( res, R.drawable.iz_dial_transp ); 
     mDialBitmap      = TopoDroidApp.getDialBitmap( res );
 
     mBMextend        = MyButton.getButtonBackground( mApp, res, izons[IC_EXTEND] ); 
@@ -2526,12 +2530,12 @@ public class DrawingWindow extends ItemDrawer
       if ( BrushManager.isPointPhoto( point.mPointType ) ) {
         DrawingPhotoPath photo = (DrawingPhotoPath)point;
         mApp_mData.deletePhoto( TDInstance.sid, photo.mId );
-        TopoDroidUtil.deleteFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString( photo.mId ) ) );
+        TDUtil.deleteFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString( photo.mId ) ) );
       } else if ( BrushManager.isPointAudio( point.mPointType ) ) {
         DrawingAudioPath audio = (DrawingAudioPath)point;
         mApp_mData.deleteAudio( TDInstance.sid, audio.mId );
 
-        TopoDroidUtil.deleteFile( TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString( audio.mId ) ) );
+        TDUtil.deleteFile( TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString( audio.mId ) ) );
       } else if ( BrushManager.isPointSection( point.mPointType ) ) {
         mDrawingSurface.clearXSectionOutline( point.getOption( "-scrap" ) );
       }
@@ -3626,7 +3630,7 @@ public class DrawingWindow extends ItemDrawer
   {
     // Log.v("DistoXC", "insertPhoto " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     assert( mLastLinePath == null );
-    mApp_mData.insertPhoto( TDInstance.sid, mMediaId, -1, "", TopoDroidUtil.currentDate(), mMediaComment ); // FIXME TITLE has to go
+    mApp_mData.insertPhoto( TDInstance.sid, mMediaId, -1, "", TDUtil.currentDate(), mMediaComment ); // FIXME TITLE has to go
     // FIXME NOTIFY ? no
     // photo file is "survey/id.jpg"
     // String filename = TDInstance.survey + "/" + Long.toString( mMediaId ) + ".jpg";
@@ -3771,8 +3775,8 @@ public class DrawingWindow extends ItemDrawer
       st.resetXSection();
       mApp_mData.deletePlotByName( xs_id, TDInstance.sid );
       // drop the files
-      TopoDroidUtil.deleteFile( TDPath.getSurveyPlotTdrFile( TDInstance.survey, xs_id ) );
-      TopoDroidUtil.deleteFile( TDPath.getSurveyPlotTh2File( TDInstance.survey, xs_id ) );
+      TDUtil.deleteFile( TDPath.getSurveyPlotTdrFile( TDInstance.survey, xs_id ) );
+      TDUtil.deleteFile( TDPath.getSurveyPlotTh2File( TDInstance.survey, xs_id ) );
       // TODO delete backup files
 
       deleteSectionPoint( xs_id ); 
@@ -4834,7 +4838,9 @@ public class DrawingWindow extends ItemDrawer
           if ( TDSetting.mAzimuthManual ) {
             setRefAzimuth( 0, - TDAzimuth.mFixedExtend );
           } else {
-            (new AzimuthDialDialog( mActivity, this, TDAzimuth.mRefAzimuth, mDialBitmap )).show();
+            // FIXME_AZIMUTH_DIAL 1
+            (new AzimuthDialDialog( mActivity, this, TDAzimuth.mRefAzimuth, mBMdial )).show();
+            // (new AzimuthDialDialog( mActivity, this, TDAzimuth.mRefAzimuth, mDialBitmap )).show();
           }
         }
 

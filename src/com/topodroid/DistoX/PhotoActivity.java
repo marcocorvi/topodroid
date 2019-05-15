@@ -183,7 +183,7 @@ public class PhotoActivity extends Activity
   public void dropPhoto( PhotoInfo photo )
   {
     mApp_mData.deletePhoto( photo.sid, photo.id );
-    TopoDroidUtil.deleteFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(photo.id) ) );
+    TDUtil.deleteFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(photo.id) ) );
     updateDisplay( ); // FIXME
   }
 

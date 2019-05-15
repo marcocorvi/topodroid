@@ -1604,7 +1604,7 @@ class DrawingCommandManager
         if ( lp1n != null ) {
           lp2 = line.mLast;
           // int toDrop = 0; // number of points to drop
-          for ( ; lp2 != lp1; lp2 = lp2.mPrev ) {
+          for ( ; lp2 != lp1; lp2 = lp2.mPrev ) { // FIXME 20190512 check lp2 != null
             if ( lp2.distance( last ) < delta ) break;
             // ++ toDrop;
           }

@@ -81,7 +81,7 @@ class NumShot
     } else { // this is not exactly the average vector, but is close enough
       // mLength = (mLength * n + blk.mLength) / (n+1);
       // mClino  = (mClino * n + blk.mClino) / (n+1);
-      // float b = TopoDroidUtil.around( blk.mBearing, mBearing );
+      // float b = TDUtil.around( blk.mBearing, mBearing );
       // mBearing = (mBearing * n  + b ) / (n+1);
       mAvgLeg.add( blk );
     }

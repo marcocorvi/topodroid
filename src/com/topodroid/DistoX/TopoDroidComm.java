@@ -96,7 +96,7 @@ class TopoDroidComm
             doWork = false;
           } else {
             // TDLog.Log( TDLog.LOG_COMM, "RFcomm sleeping 1000 " );
-            TopoDroidUtil.slowDown( TDSetting.mWaitConn, "RFcomm thread sleep interrupt");
+            TDUtil.slowDown( TDSetting.mWaitConn, "RFcomm thread sleep interrupt");
           }
         } else if ( res == DistoXProtocol.DISTOX_ERR_OFF ) {
           // TDLog.Error( "RFcomm readPacket returns ERR_OFF " );
@@ -127,7 +127,7 @@ class TopoDroidComm
             msg.setData(bundle);
             mLister.sendMessage(msg);
             if ( TDInstance.distoType() == Device.DISTO_A3 && TDSetting.mWaitData > 10 ) {
-              TopoDroidUtil.slowDown( TDSetting.mWaitData );
+              TDUtil.slowDown( TDSetting.mWaitData );
             }
           }
           // if ( mLister != null ) {
@@ -203,7 +203,7 @@ class TopoDroidComm
           if ( TDInstance.distoType() == Device.DISTO_X310 ) {
             TopoDroidApp.mData.updateShotAMDR( mLastShotId, TDInstance.sid, acc, mag, dip, roll, true );
             if ( TDSetting.mWaitData > 10 ) {
-              TopoDroidUtil.slowDown( TDSetting.mWaitData );
+              TDUtil.slowDown( TDSetting.mWaitData );
             }
           }
         }
@@ -294,7 +294,7 @@ class TopoDroidComm
         ret = mProtocol.sendCommand( (byte)cmd ); // was ret |= ...
         // TDLog.Log( TDLog.LOG_COMM, "sendCommand " + cmd + " " + k + "-ret " + ret );
         // Log.v( "DistoX", "sendCommand " + cmd + " " + k + "-ret " + ret );
-        TopoDroidUtil.slowDown( TDSetting.mWaitCommand, "SendCommand sleep interrupted"); // it is ok to be interrupted
+        TDUtil.slowDown( TDSetting.mWaitCommand, "SendCommand sleep interrupted"); // it is ok to be interrupted
       }
     }
     return ret;

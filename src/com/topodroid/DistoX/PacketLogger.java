@@ -94,7 +94,7 @@ class PacketLogger extends DataSetObservable
         }
 
         // while ( myDB.isDbLockedByOtherThreads() ) {
-        //   TopoDroidUtil.slowDown( 200 );
+        //   TDUtil.slowDown( 200 );
         // }
 
      } catch ( SQLiteException e ) {

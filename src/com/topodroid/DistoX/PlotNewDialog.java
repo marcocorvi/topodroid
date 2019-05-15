@@ -169,7 +169,7 @@ class PlotNewDialog extends MyDialog
     //   mEditName.setError( mContext.getResources().getString( R.string.error_name_required ) );
     //   return false;
     // }
-    name = TopoDroidUtil.noSpaces( name );
+    name = TDUtil.noSpaces( name );
     if ( name.length() == 0 ) {
       mEditName.setError( mContext.getResources().getString( R.string.error_name_required ) );
       return false;
@@ -179,7 +179,7 @@ class PlotNewDialog extends MyDialog
     //   return false;
     // }
     
-    // start = TopoDroidUtil.noSpaces( start );
+    // start = TDUtil.noSpaces( start );
     start = start.trim();
     if ( start.length() == 0 ) {
       mEditStart.setError( mContext.getResources().getString( R.string.error_start_required ) );

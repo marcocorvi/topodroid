@@ -54,7 +54,7 @@ class ImportParser
 
   ImportParser( boolean apply_declination ) throws ParserException
   {
-    mDate = TopoDroidUtil.currentDate();
+    mDate = TDUtil.currentDate();
     shots  = new ArrayList<>();
     splays = new ArrayList<>();
     mApplyDeclination = apply_declination;

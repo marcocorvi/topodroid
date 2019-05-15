@@ -76,7 +76,7 @@ import android.provider.MediaStore;
 
 import android.graphics.Bitmap;
 // import android.graphics.Bitmap.CompressFormat;
-// import android.graphics.BitmapFactory;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 // import android.graphics.Paint.FontMetrics;
 // import android.graphics.Rect;
@@ -254,14 +254,18 @@ public class ShotWindow extends Activity
 
     // Log.v("DistoXE", "set RefAzimuthButton extend " + TDAzimuth.mFixedExtend + " " + TDAzimuth.mRefAzimuth );
     if ( TDAzimuth.mFixedExtend == 0 ) {
+      // FIXME_AZIMUTH_DIAL 2
       // android.graphics.Matrix m = new android.graphics.Matrix();
       // m.postRotate( TDAzimuth.mRefAzimuth - 90 );
+
       // if ( mBMdial != null ) // extra care !!!
       {
         int extend = (int)(TDAzimuth.mRefAzimuth);
+        // FIXME_AZIMUTH_DIAL 2
         // Bitmap bm1 = Bitmap.createScaledBitmap( mBMdial, mButtonSize, mButtonSize, true );
         // Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, mButtonSize, mButtonSize, m, true);
 	Bitmap bm2 = mDialBitmap.getBitmap( extend, mButtonSize );
+
         TDandroid.setButtonBackground( mButton1[ BTN_AZIMUTH - boff ], new BitmapDrawable( getResources(), bm2 ) );
         mApp.setSurveyExtend( extend );
       }
@@ -699,7 +703,10 @@ public class ShotWindow extends Activity
     (new PhotoCommentDialog(mActivity, this ) ).show();
   }
 
-
+  /**
+   * @param comment  photo comment
+   * @param camera   camera type: 0 use URL, 1 use TopoDroid
+   */
   void doTakePhoto( String comment, int camera )
   {
     mComment = comment;
@@ -708,7 +715,7 @@ public class ShotWindow extends Activity
     // imageFile := PHOTO_DIR / surveyId / photoId .jpg
     File imagefile = new File( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhotoId) ) );
     // TDLog.Log( TDLog.LOG_SHOT, "photo " + imagefile.toString() );
-    if ( camera == 1 ) { // TopoDroid camera
+    if ( camera == PhotoInfo.CAMERA_TOPODROID ) { // TopoDroid camera
       new QCamCompass( this,
                        (new MyBearingAndClino( mApp, imagefile)),
                        // null, -1L, // drawer, pid // DO NOT USE THIS
@@ -837,7 +844,7 @@ public class ShotWindow extends Activity
   public void insertPhoto( )
   {
     // long shotid = 0;
-    mApp_mData.insertPhoto( TDInstance.sid, mPhotoId, mShotId, "", TopoDroidUtil.currentDate(), mComment ); // FIXME TITLE has to go
+    mApp_mData.insertPhoto( TDInstance.sid, mPhotoId, mShotId, "", TDUtil.currentDate(), mComment ); // FIXME TITLE has to go
     // FIXME NOTIFY ? no
   }
 
@@ -875,7 +882,7 @@ public class ShotWindow extends Activity
             // TDLog.Log( TDLog.LOG_SENSOR, "insert sensor " + type + " " + value + " " + comment );
 
             mApp_mData.insertSensor( TDInstance.sid, mSensorId, mShotId, "",
-                                  TopoDroidUtil.currentDate(),
+                                  TDUtil.currentDate(),
                                   comment,
                                   type,
                                   value );
@@ -916,9 +923,10 @@ public class ShotWindow extends Activity
   private BitmapDrawable mBMdownload_no;
   // BitmapDrawable mBMadd;
   private BitmapDrawable mBMplot;
-  // Bitmap mBMdial;
+  Bitmap mBMdial; // FXIME_AZIMUTH_DIAL
   // Bitmap mBMdial_transp;
   private MyTurnBitmap mDialBitmap;
+
   private BitmapDrawable mBMplot_no;
   private BitmapDrawable mBMleft;
   private BitmapDrawable mBMright;
@@ -973,7 +981,8 @@ public class ShotWindow extends Activity
       mButton1[k] = MyButton.getButton( this, this, izons[kk] );
     }
     mButton1[mNrButton1] = MyButton.getButton( this, this, R.drawable.iz_empty );
-    // mBMdial          = BitmapFactory.decodeResource( res, R.drawable.iz_dial_transp ); // FIXME AZIMUTH_DIAL
+    // FIXME_AZIMUTH_DIAL 1,2
+    mBMdial          = BitmapFactory.decodeResource( res, R.drawable.iz_dial_transp );
     // mBMdial_transp   = BitmapFactory.decodeResource( res, R.drawable.iz_dial_transp );
     mDialBitmap      = TopoDroidApp.getDialBitmap( res );
 
@@ -1354,7 +1363,8 @@ public class ShotWindow extends Activity
           if ( TDSetting.mAzimuthManual ) {
             setRefAzimuth( 0, - TDAzimuth.mFixedExtend );
           } else {
-            (new AzimuthDialDialog( mActivity, this, TDAzimuth.mRefAzimuth, mDialBitmap )).show();
+            (new AzimuthDialDialog( mActivity, this, TDAzimuth.mRefAzimuth, mBMdial )).show();
+            // FIXME_AZIMUTH_DIAL (new AzimuthDialDialog( mActivity, this, TDAzimuth.mRefAzimuth, mDialBitmap )).show();
           }
         }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // REFRESH

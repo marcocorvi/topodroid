@@ -109,17 +109,17 @@ class CalibCBlock
 
   void setData( long gx0, long gy0, long gz0, long mx0, long my0, long mz0 )
   {
-    gx = ( gx0 > TopoDroidUtil.ZERO ) ? gx0 - TopoDroidUtil.NEG : gx0;
-    gy = ( gy0 > TopoDroidUtil.ZERO ) ? gy0 - TopoDroidUtil.NEG : gy0;
-    gz = ( gz0 > TopoDroidUtil.ZERO ) ? gz0 - TopoDroidUtil.NEG : gz0;
-    mx = ( mx0 > TopoDroidUtil.ZERO ) ? mx0 - TopoDroidUtil.NEG : mx0;
-    my = ( my0 > TopoDroidUtil.ZERO ) ? my0 - TopoDroidUtil.NEG : my0;
-    mz = ( mz0 > TopoDroidUtil.ZERO ) ? mz0 - TopoDroidUtil.NEG : mz0;
+    gx = ( gx0 > TDUtil.ZERO ) ? gx0 - TDUtil.NEG : gx0;
+    gy = ( gy0 > TDUtil.ZERO ) ? gy0 - TDUtil.NEG : gy0;
+    gz = ( gz0 > TDUtil.ZERO ) ? gz0 - TDUtil.NEG : gz0;
+    mx = ( mx0 > TDUtil.ZERO ) ? mx0 - TDUtil.NEG : mx0;
+    my = ( my0 > TDUtil.ZERO ) ? my0 - TDUtil.NEG : my0;
+    mz = ( mz0 > TDUtil.ZERO ) ? mz0 - TDUtil.NEG : mz0;
   } 
 
   void computeBearingAndClino()
   {
-    float f = TopoDroidUtil.FV;
+    float f = TDUtil.FV;
     // StringWriter sw = new StringWriter();
     // PrintWriter pw = new PrintWriter( sw );
     // pw.format("Locale.US, G %d %d %d M %d %d %d E %.2f", gx, gy, gz, mx, my, mz, mError );
@@ -131,7 +131,7 @@ class CalibCBlock
 
   void computeBearingAndClino( CalibAlgo calib )
   {
-    float f = TopoDroidUtil.FV;
+    float f = TDUtil.FV;
     Vector g = new Vector( gx/f, gy/f, gz/f );
     Vector m = new Vector( mx/f, my/f, mz/f );
     Vector g0 = calib.GetAG().timesV( g );

@@ -280,7 +280,7 @@ class CalibCoverageDialog extends MyDialog
     float clino_avg   = 0.0f;
     int cnt_avg = 0;
 
-    float f = TopoDroidUtil.FV;
+    float f = TDUtil.FV;
     for ( CalibCBlock b : clist ) {
       if ( b.mGroup <= 0 ) continue;
       Vector v = ( mode == 0 )? new Vector( b.gx/f, b.gy/f, b.gz/f ) : new Vector( b.mx/f, b.my/f, b.mz/f );

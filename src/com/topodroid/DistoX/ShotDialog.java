@@ -521,9 +521,9 @@ class ShotDialog extends MyDialog
       all_splay = false;
       clear_xsplay = false;
     } else {
-      shot_from = TopoDroidUtil.noSpaces( mETfrom.getText().toString() );
+      shot_from = TDUtil.noSpaces( mETfrom.getText().toString() );
       // if ( shot_from == null ) { shot_from = ""; }
-      shot_to = TopoDroidUtil.noSpaces( mETto.getText().toString() );
+      shot_to = TDUtil.noSpaces( mETto.getText().toString() );
       // shot_secleg = false;
       do_backleg = ( shot_from.length() > 0 ) && ( shot_to.length() > 0 );
     }
@@ -786,9 +786,9 @@ class ShotDialog extends MyDialog
 
     } else if ( b == mButtonReverse ) {
       shot_from = mETfrom.getText().toString();
-      shot_from = TopoDroidUtil.noSpaces( shot_from );
+      shot_from = TDUtil.noSpaces( shot_from );
       shot_to = mETto.getText().toString();
-      shot_to = TopoDroidUtil.noSpaces( shot_to );
+      shot_to = TDUtil.noSpaces( shot_to );
       if ( shot_to.length() > 0 && shot_from.length() > 0 ) {
         String temp = shot_from; // new String( shot_from );
         shot_from = shot_to;

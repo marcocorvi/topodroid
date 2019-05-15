@@ -260,6 +260,8 @@ class SymbolLibrary
 
   static private int compare( String s1, String s2 )
   { 
+    if ( s1 == null ) return ((s2 == null)? 0 : +1);
+    if ( s2 == null ) return -1;
     int l1 = s1.length();
     int l2 = s2.length();
     int kk = ( l1 < l2 )? l1 : l2;

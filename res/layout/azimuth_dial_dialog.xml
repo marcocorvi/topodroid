@@ -6,14 +6,47 @@
     android:orientation="vertical"
     >
 
-    <Button
-      android:id="@+id/btn_azimuth"
-      android:layout_width="96dp"
-      android:layout_height="96dp"
-      android:layout_gravity="center"
-      style="@style/button_default"
-      android:layout_marginTop="@dimen/marginv"
+  <TextView 
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center|bottom"
+    android:text="@string/north"
+    />
+  <LinearLayout
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"
+    android:layout_gravity="center|center_vertical"
+    >
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="96dp"
+        android:gravity="right|center_vertical"
+        android:text="@string/west"
       />
+      <Button
+        android:id="@+id/btn_azimuth"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_gravity="center"
+        style="@style/button_default"
+      />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="96dp"
+        android:gravity="left|center_vertical"
+        android:text="@string/east"
+      />
+  </LinearLayout>
+  <TextView 
+    android:layout_marginBottom="@dimen/marginv"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center|top"
+    android:text="@string/south"
+    />
 
     <SeekBar android:id="@+id/seekbar"
       android:layout_gravity="center"

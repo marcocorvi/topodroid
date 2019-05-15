@@ -80,7 +80,7 @@ class ParserPocketTopo extends ImportParser
       // trip.declination(); NOT USED
       // TODO create a survey
     } else {
-      mDate = TopoDroidUtil.currentDate();
+      mDate = TDUtil.currentDate();
     }
 
     int shot_count = ptfile.shotCount();

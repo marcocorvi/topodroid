@@ -13,6 +13,9 @@ package com.topodroid.DistoX;
 
 class PhotoInfo
 {
+  static final int CAMERA_URL = 0;       // camera type
+  static final int CAMERA_TOPODROID = 1;
+
   long sid;       // survey id
   long id;        // photo id
   long shotid;    // shot id

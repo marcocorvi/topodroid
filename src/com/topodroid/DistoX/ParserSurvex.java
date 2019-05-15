@@ -293,7 +293,7 @@ class ParserSurvex extends ImportParser
                 String date = vals[1];
                 if ( mDate == null ) mDate = date; // save date
               } else if ( cmd.equals("team") ) {
-                mTeam += TopoDroidUtil.concat( vals, 1 );
+                mTeam += TDUtil.concat( vals, 1 );
               } else if ( cmd.equals("calibrate") ) {
                 // calibrate <quantities> <zero_error> [<scale>]
                 // calibrate <quantities> <zero_error> <zero_units> [<scale>]
@@ -614,7 +614,7 @@ class ParserSurvex extends ImportParser
       throw new ParserException();
     }
 
-    if ( mDate == null ) mDate = TopoDroidUtil.currentDate();
+    if ( mDate == null ) mDate = TDUtil.currentDate();
     if ( mTitle == null ) mTitle = TDString.EMPTY;
     TDLog.Log( TDLog.LOG_THERION, "ParserSurvex shots "+ shots.size() +" splays "+ splays.size() +" fixes "+  fixes.size() );
     // Log.v( TopoDroidApp.TAG, "ParserSurvex shots "+ shots.size() + " splays "+ splays.size() +" fixes "+  fixes.size() );
