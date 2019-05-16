@@ -1146,8 +1146,8 @@
   <string name="pref_vthr_title">主线东西南北临界值</string>
   <string name="pref_vthr_summary">主线 左右上下/东西南北 角度临界值</string>
 
-  <!-- TODO string name="pref_plan_vthr_title">Splay plan-view threshold</string -->
-  <!-- TODO string name="pref_plan_vthr_summary">Hide splays with high inclination in the plan-view</string -->
+  <string name="pref_plan_vthr_title">侧线平面视图阀值</string>
+  <string name="pref_plan_vthr_summary">在平面视图中隐藏高度倾斜的侧线</string>
   <string name="pref_init_station_title">最初的测点名字</string>
   <string name="pref_init_station_summary">默认初始测点名</string>
   <string name="pref_station_names_title">测点名称</string>
