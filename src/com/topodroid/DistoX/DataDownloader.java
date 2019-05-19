@@ -12,21 +12,12 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 // import java.util.ArrayList;
 
 import android.content.Context;
-// import android.content.BroadcastReceiver;
-// import android.content.Intent;
-// import android.content.IntentFilter;
 
-// import android.bluetooth.BluetoothDevice;
-
-// import android.widget.Button;
-// import android.widget.Toast;
-
-// import android.os.Bundle;
-
-// import android.util.Log;
 
 class DataDownloader
 {
@@ -92,7 +83,7 @@ class DataDownloader
       } else {
         tryConnect();
       }
-      notifyConnectionStatus( mConnected );
+      notifyUiThreadConnectionStatus( mConnected );
     } else if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI ) {
       tryDownloadData( );
     }
@@ -104,7 +95,7 @@ class DataDownloader
     // if ( ! mConnected ) return;
     // if ( TDSetting.isConnectionModeBatch() ) {
       mApp.disconnectComm();
-      notifyConnectionStatus( false );
+      notifyUiThreadConnectionStatus( false );
     // }
   }
 
@@ -128,6 +119,17 @@ class DataDownloader
     }
   }
 
+  private void notifyUiThreadConnectionStatus( boolean connected )
+  {
+    mConnected = connected;
+    TopoDroidApp.mActivity.runOnUiThread( new Runnable() {
+      public void run() {
+        mApp.notifyStatus( );
+      }
+    } );
+  }
+
+  // this must be called on UI thread (onPostExecute)
   void notifyConnectionStatus( boolean connected )
   {
     mConnected = connected;
@@ -140,12 +142,12 @@ class DataDownloader
   {
     TDInstance.secondLastShotId = TopoDroidApp.lastShotId( ); // FIXME-LATEST
     if ( TDInstance.device != null && mApp.mBTAdapter.isEnabled() ) {
-      notifyConnectionStatus( true );
+      notifyUiThreadConnectionStatus( true );
       // TDLog.Log( TDLog.LOG_COMM, "shot menu DOWNLOAD" );
       new DataDownloadTask( mApp, mApp.mListerSet, null ).execute();
     } else {
       mDownload = false;
-      notifyConnectionStatus( false );
+      notifyUiThreadConnectionStatus( false );
       TDLog.Error( "download data: no device selected" );
       if ( TDInstance.sid < 0 ) {
         TDLog.Error( "download data: no survey selected" );
@@ -170,7 +172,7 @@ class DataDownloader
 
   void onResume()
   {
-    // Log.v("DistoX", "DataDownloader onResume()");
+    // Log.v("DistoX", "Data Downloader onResume()");
   }
 
 }

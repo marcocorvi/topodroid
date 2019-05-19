@@ -11,13 +11,13 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import android.preference.PreferenceManager;
 import android.content.SharedPreferences;
 // import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.SharedPreferences.Editor;
 import android.content.Context;
-
-// import android.util.Log;
 
 class TDPrefHelper
 {
@@ -98,11 +98,5 @@ class TDPrefHelper
 
   // =============================================================
 
-  // static void applyEditor( Editor editor )
-  // {
-  //   // fixme-23 
-  //   editor.apply(); 
-  //   // fixme-16 editor.commit();
-  // }
   
 }

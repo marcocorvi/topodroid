@@ -24,7 +24,7 @@
     >
     <Button android:id="@+id/btn_ok"
       style="@style/button_default"
-      android:text="@string/button_save"
+      android:text="@string/button_close"
       android:layout_marginRight="@dimen/marginh" 
     />
   </LinearLayout>

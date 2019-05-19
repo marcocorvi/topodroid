@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 // import java.io.IOException;
 
 // import android.app.Dialog;
@@ -26,11 +28,9 @@ import android.widget.ImageView;
 import android.widget.Button;
 // import android.widget.Toast;
 import android.view.View;
-// import android.view.ViewGroup.LayoutParams;
+import android.view.ViewGroup.LayoutParams;
 // import android.view.View.OnKeyListener;
 // import android.view.KeyEvent;
-
-// import android.util.Log;
 
 class PhotoEditDialog extends MyDialog
                       implements View.OnClickListener
@@ -39,16 +39,12 @@ class PhotoEditDialog extends MyDialog
   private PhotoInfo mPhoto;
   private String mFilename;
 
-  private View     mContentView;
-  private boolean  mOnView2;
-  private ImageView mView2;
-
   private EditText mETcomment;  // photo comment
   private ImageView mIVimage;   // photo image
   private Button   mButtonOK;
   private Button   mButtonDelete;
   // private Button   mButtonCancel;
-  private int mOrientation = 0;
+  // private int mOrientation = 0;
   private String mDate = "";
   private boolean mAtShot;
 
@@ -98,7 +94,7 @@ class PhotoEditDialog extends MyDialog
     if ( mPhoto.mComment != null ) {
       mETcomment.setText( mPhoto.mComment );
     }
-    if ( mTdImage.fillImageView( mIVimage, mTdImage.width()/8 ) ) {
+    if ( mTdImage.fillImageView( mIVimage, mTdImage.width()/8, mTdImage.height()/8, true ) ) {
       mIVimage.setOnClickListener( this );
     } else {
       mIVimage.setVisibility( View.GONE );
@@ -112,8 +108,6 @@ class PhotoEditDialog extends MyDialog
     }
     // mButtonCancel.setOnClickListener( this );
     
-    mContentView = findViewById( R.id.view_one );
-    mOnView2 = false;
     // Log.v("DistoX", "photo edit dialog on create done");
   }
 
@@ -134,15 +128,8 @@ class PhotoEditDialog extends MyDialog
         mParent.dropPhoto( mPhoto );
         break;
       case R.id.photo_image:
-        // TopoDroidApp.viewPhoto( mContext, mFilename );
-	if ( mView2 == null ) {
-          mView2 = new ImageView( mContext );
-	}
-	if ( mTdImage.fillImageView( mView2 ) ) {
-	  setContentView( mView2 );
-	  mOnView2 = true;
-          return;
-	}
+        (new PhotoDialog( mContext, mPhoto )).show();
+        return;
     }
     if ( mTdImage != null ) mTdImage.recycleImages();
     dismiss();
@@ -151,11 +138,6 @@ class PhotoEditDialog extends MyDialog
   @Override
   public void onBackPressed()
   {
-    if ( mOnView2 ) {
-      mOnView2 = false;
-      setContentView( mContentView );
-      return;
-    }
     if ( mTdImage != null ) mTdImage.recycleImages();
     dismiss();
   }

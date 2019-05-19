@@ -80,7 +80,7 @@ class ShotNewDialog extends MyDialog
   private Button   mBtnBack;
   private Button   mBtnSensor;
   private Button   mBtnCamera = null;
-  private byte[] mJpegData; // camera jpeg data
+  private byte[] mJpegData = null; // camera jpeg data
 
   private static boolean mLRUDatTo = false;
   private boolean sensorCheck = false;
@@ -102,7 +102,7 @@ class ShotNewDialog extends MyDialog
     notDone  = true;
     mAt      = at;
     mTimer   = null;
-    mJpegData = null;
+    // mJpegData = null;
     sensorCheck = TDSetting.mWithAzimuth && TDLevel.overAdvanced;
     cameraCheck = TDSetting.mWithAzimuth && TDLevel.overAdvanced && TDandroid.checkCamera( mApp );
     diving = (TDInstance.datamode == SurveyInfo.DATAMODE_DIVING);
@@ -511,7 +511,8 @@ class ShotNewDialog extends MyDialog
             TopoDroidApp.mData.insertPhoto( TDInstance.sid, photo_id, blk.mId,
                                     "",
                                     TDUtil.currentDate(),
-                                    "snap " + shot_from + " " + shot_to ); // FIXME TITLE has to go
+                                    "snap " + shot_from + " " + shot_to,
+                                    PhotoInfo.CAMERA_TOPODROID ); // FIXME TITLE has to go
           } catch ( IOException e ) {
             TDLog.Error( "IO exception " + e.getMessage() );
           }

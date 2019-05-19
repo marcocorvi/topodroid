@@ -1342,6 +1342,10 @@
 
     <string name="perms_mandatory">I seguenti permessi sono necessari:</string>
     <string name="perms_optional">Senza questi permessi alcune funzioni sono disattivate:</string>
+    <!-- TODO string name="perm_location">\nLocation</string -->
+    <!-- TODO string name="perm_camera">\nCamera</string -->
+    <!-- TODO string name="perm_microphone">\nMicrophone</string -->
+
     <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">
 \nTopoDroid è una app Android open-source per fare rilievi di grotta con il DistoX

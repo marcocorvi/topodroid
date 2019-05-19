@@ -3612,7 +3612,7 @@ class TDExporter
   // -----------------------------------------------------------------------
   // DXF EXPORT 
   // NOTE declination is taken into account in DXF export (used to compute num)
-  // shot flags are not supported
+  // NOTE shot flags are not supported
 
   static String exportSurveyAsDxf( long sid, DataHelper data, SurveyInfo info, DistoXNum num, String filename )
   {
@@ -3635,13 +3635,13 @@ class TDExporter
       out.printf("9\n$INSBASE\n");
       out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", 0.0, 0.0, 0.0 ); // FIXME (0,0,0)
       out.printf("9\n$EXTMIN\n");
-      float emin = num.surveyEmin() - 2.0f;
+      float emin =   num.surveyEmin() - 2.0f;
       float nmin = - num.surveySmax() - 2.0f;
       float zmin = - num.surveyVmax() - 2.0f;
       out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", emin, nmin, zmin );
         // num.surveyEmin(), -num.surveySmax(), -num.surveyVmax() );
       out.printf("9\n$EXTMAX\n");
-      float emax = num.surveyEmax();
+      float emax =   num.surveyEmax();
       float nmax = - num.surveySmin();
       float zmax = - num.surveyVmin();
       

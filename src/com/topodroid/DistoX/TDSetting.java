@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import java.util.Locale;
 
 // import android.os.Build;
@@ -19,8 +21,6 @@ import android.content.res.Resources;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-
-// import android.util.Log;
 
 class TDSetting
 {

@@ -98,14 +98,14 @@ class MyBearingAndClino implements IBearingAndClino
       TDLog.Error( "IO exception " + e.getMessage() );
     }
   }
-
-  // 1: no rotation
-  // 6: rotate right
-  // 3: rotate 180
-  // 8: rotate left
+  
+  //                           up
+  // 1: no rotation            6
+  // 6: rotate right    left 1-+-3 right
+  // 3: rotate 180             8
+  // 8: rotate left            down
   static void applyOrientation( ImageView image, Bitmap bitmap, int orientation )
   {
-    Bitmap bm = null ;
     Matrix m = new Matrix();
     int w = bitmap.getWidth();
     int h = bitmap.getHeight();
@@ -122,8 +122,7 @@ class MyBearingAndClino implements IBearingAndClino
       image.setImageBitmap( bitmap );
       return;
     }
-    bm = Bitmap.createBitmap( bitmap, 0, 0, w, h, m, true );
-    image.setImageBitmap( bm );
+    image.setImageBitmap( Bitmap.createBitmap( bitmap, 0, 0, w, h, m, true ) );
   }
 
   // jpegexiforient man page has

@@ -224,7 +224,8 @@ public class ShotWindow extends Activity
 
   private static long    mSensorId;
   private static long    mPhotoId;
-  private static String  mComment;
+  private static String  mPhotoComment;
+  private static int     mPhotoCamera = PhotoInfo.CAMERA_UNDEFINED;
   private static long    mShotId;   // photo/sensor shot id
   boolean mOnOpenDialog = false;
 
@@ -709,13 +710,14 @@ public class ShotWindow extends Activity
    */
   void doTakePhoto( String comment, int camera )
   {
-    mComment = comment;
+    mPhotoComment = comment;
+    mPhotoCamera  = camera;
     mPhotoId = mApp_mData.nextPhotoId( TDInstance.sid );
 
     // imageFile := PHOTO_DIR / surveyId / photoId .jpg
     File imagefile = new File( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhotoId) ) );
     // TDLog.Log( TDLog.LOG_SHOT, "photo " + imagefile.toString() );
-    if ( camera == PhotoInfo.CAMERA_TOPODROID ) { // TopoDroid camera
+    if ( mPhotoCamera == PhotoInfo.CAMERA_TOPODROID ) { // TopoDroid camera
       new QCamCompass( this,
                        (new MyBearingAndClino( mApp, imagefile)),
                        // null, -1L, // drawer, pid // DO NOT USE THIS
@@ -844,7 +846,8 @@ public class ShotWindow extends Activity
   public void insertPhoto( )
   {
     // long shotid = 0;
-    mApp_mData.insertPhoto( TDInstance.sid, mPhotoId, mShotId, "", TDUtil.currentDate(), mComment ); // FIXME TITLE has to go
+    // FIXME TITLE has to go
+    mApp_mData.insertPhoto( TDInstance.sid, mPhotoId, mShotId, "", TDUtil.currentDate(), mPhotoComment, mPhotoCamera );
     // FIXME NOTIFY ? no
   }
 

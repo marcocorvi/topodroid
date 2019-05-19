@@ -43,7 +43,7 @@ class DrawingPhotoEditDialog extends MyDialog
   // private final TopoDroidApp  mApp;
   // private final DrawingWindow mParent;
   private DrawingPhotoPath mPhoto;
-  // private String mFilename;
+  private String mFilename = null;
 
   private EditText mETcomment;  // photo comment
   // private ImageView mIVimage;   // photo image
@@ -57,12 +57,6 @@ class DrawingPhotoEditDialog extends MyDialog
   private int mOrientation = 0;
   private String mDate = "";
 
-  private int mImageWidth;
-  private int mImageHeight;
-  private View     mContentView;
-  private boolean  mOnView2;
-  private ImageView mView2;
-
   /**
    * @param context   context
    */
@@ -72,7 +66,7 @@ class DrawingPhotoEditDialog extends MyDialog
     // mParent = parent;
     // mApp    = app;
     mPhoto  = photo;
-    String mFilename = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhoto.mId) );
+    mFilename = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhoto.mId) );
     // TDLog.Log(TDLog.LOG_PHOTO, "DrawingPhotoEditDialog " + mFilename);
     
     mTdImage = new TDImage( mFilename );
@@ -99,7 +93,7 @@ class DrawingPhotoEditDialog extends MyDialog
     if ( mPhoto.mPointText != null ) {
       mETcomment.setText( mPhoto.mPointText );
     }
-    if ( mTdImage.fillImageView( iVimage, mTdImage.width()/8 ) ) {
+    if ( mTdImage.fillImageView( iVimage, mTdImage.width()/8, mTdImage.height()/8, true ) ) {
       iVimage.setOnClickListener( this );
     } else {
       iVimage.setVisibility( View.GONE );
@@ -109,7 +103,6 @@ class DrawingPhotoEditDialog extends MyDialog
     // mButtonDelete.setOnClickListener( this );
     // mButtonCancel.setOnClickListener( this );
 
-    mContentView = (View) findViewById( R.id.content_view );
   }
 
   @Override
@@ -130,14 +123,8 @@ class DrawingPhotoEditDialog extends MyDialog
       case R.id.photo_image:
         // TopoDroidApp.viewPhoto( mContext, mFilename );
 	if ( mTdImage != null ) {
-	  if ( mView2 == null ) {
-            mView2 = new ImageView( mContext );
-  	  }
-	  if ( mTdImage.fillImageView( mView2 ) ) {
-	    setContentView( mView2 );
-	    mOnView2 = true;
-	  }
-	}
+          (new PhotoDialog( mContext, mFilename )).show();
+        }
         return;
     }
     if ( mTdImage != null ) mTdImage.recycleImages();
@@ -147,11 +134,6 @@ class DrawingPhotoEditDialog extends MyDialog
   @Override
   public void onBackPressed()
   {
-    if ( mOnView2 ) {
-      mOnView2 = false;
-      setContentView( mContentView );
-      return;
-    }
     if ( mTdImage != null ) mTdImage.recycleImages();
     dismiss();
   }

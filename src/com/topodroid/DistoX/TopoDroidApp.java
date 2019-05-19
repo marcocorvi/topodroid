@@ -58,11 +58,14 @@ import android.app.Application;
 // import android.app.Activity;
 
 import android.content.Context;
-// import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.content.res.Configuration;
+
+// import android.content.Intent;
 // import android.content.ActivityNotFoundException;
+// import android.net.Uri;
+
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 // import android.content.FileProvider;
@@ -80,7 +83,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 // import android.graphics.drawable.BitmapDrawable;
 
-// import android.net.Uri;
 
 import android.util.DisplayMetrics;
 
@@ -1800,6 +1802,7 @@ public class TopoDroidApp extends Application
   //     // FIXME create a dialog like QCam that displays the JPEG file
   //     //
   //     // Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("file://" + filename ) );
+  //     
   //     if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.N ) {
   //       Intent intent = new Intent(Intent.ACTION_VIEW );
   //       intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );

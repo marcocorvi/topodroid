@@ -1373,6 +1373,10 @@
 <!-- WELCOME MESSAGE: IT WOULD BE NICE TO HAVE THIS TRANSLATED -->
     <string name="perms_mandatory">TopoDroid benötigt folgende Berechtigungen:</string>
     <string name="perms_optional">TopoDroid sollte folgende Berechtigungen erhalten:</string>
+    <!-- TODO string name="perm_location">\nLocation</string -->
+    <!-- TODO string name="perm_camera">\nCamera</string -->
+    <!-- TODO string name="perm_microphone">\nMicrophone</string -->
+
     <string name="welcome_title">Willkommen in TopoDroid %1$s</string>
     <string name="welcome_text">
 \nTopoDroid is eine Open-Source Android Applikation zur Vermessung von Höhlen m mit dem DistoX.

@@ -1338,6 +1338,10 @@
 
     <string name="perms_mandatory">TopoDroid не може да стартира без тези права:</string>
     <string name="perms_optional">TopoDroid може да не работи правилно без тези права:</string>
+    <!-- TODO string name="perm_location">\nLocation</string -->
+    <!-- TODO string name="perm_camera">\nCamera</string -->
+    <!-- TODO string name="perm_microphone">\nMicrophone</string -->
+
     <string name="welcome_title">Добре дошли в TopoDroid %1$s</string>
 
     <string name="welcome_text">

@@ -13,8 +13,9 @@ package com.topodroid.DistoX;
 
 class PhotoInfo
 {
-  static final int CAMERA_URL = 0;       // camera type
+  static final int CAMERA_UNDEFINED = 0;
   static final int CAMERA_TOPODROID = 1;
+  static final int CAMERA_INTENT    = 2;       // camera type
 
   long sid;       // survey id
   long id;        // photo id
@@ -24,8 +25,9 @@ class PhotoInfo
   // public String mName; // photo filename without extension ".jpg" and survey prefix dir = photo id
   String mDate;
   String mComment;
+  int mCamera;
 
-  PhotoInfo( long _sid, long _id, long _shotid, String t, String sn, String dt, String cmt )
+  PhotoInfo( long _sid, long _id, long _shotid, String t, String sn, String dt, String cmt, int camera )
   {
     sid    = _sid;
     id     = _id;
@@ -34,6 +36,7 @@ class PhotoInfo
     mShotName = sn;
     mDate = dt;
     mComment = cmt;
+    mCamera  = camera;
   }
 
   // String getPhotoName() 

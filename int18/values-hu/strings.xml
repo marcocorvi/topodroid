@@ -1337,6 +1337,10 @@
 
     <!-- TODO string name="perms_mandatory">TopoDroid cannot run without these permissions:</string -->
     <!-- TODO string name="perms_optional">TopoDroid may fail without these permissions:</string -->
+    <!-- TODO string name="perm_location">\nLocation</string -->
+    <!-- TODO string name="perm_camera">\nCamera</string -->
+    <!-- TODO string name="perm_microphone">\nMicrophone</string -->
+
     <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">
 \nTopoDroid egy Nyílt forráskódú Android alkalmazás DistoX-el történő barlangfelmérésre.

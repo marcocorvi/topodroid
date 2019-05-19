@@ -28,15 +28,15 @@ class DistoXNum
   private float mSmax;
   private float mEmin; // east
   private float mEmax;
-  private float mVmin; // vertical - including duplicate shots
-  private float mVmax;
   private float mHmin; // horizontal
   private float mHmax;
   private float mDecl;
 
   /* statistics - not including survey shots */
-  private float mZmin; // Z depth 
-  private float mZmax;
+  private float mVmin;    // Z vertical (downwards)
+  private float mVmax;
+  private float mTup;     // Z station depth (pos. upwards)
+  private float mTdown;   //                 (neg. downwards)
   private float mLength;  // survey length 
   private float mExtLen;  // survey "extended" length (on extended profile)
   private float mProjLen; // survey projected length (on horiz plane)
@@ -96,8 +96,8 @@ class DistoXNum
       mLength  += l;
       mExtLen  += e;
       mProjLen += h;
-      if ( v < mZmin ) { mZmin = v; }
-      if ( v > mZmax ) { mZmax = v; }
+      if ( v < mVmin ) { mVmin = v; }
+      if ( v > mVmax ) { mVmax = v; }
       mLenCnt ++;
     }
   }
@@ -125,8 +125,8 @@ class DistoXNum
   float surveyLength()  { return mLength; }
   float surveyExtLen()  { return mExtLen; }
   float surveyProjLen() { return mProjLen; }
-  float surveyTop()     { return -mZmin; } // top must be positive
-  float surveyBottom()  { return -mZmax; } // bottom must be negative
+  float surveyTop()     { return mTup; }   // top must be positive
+  float surveyBottom()  { return mTdown; } // bottom must be negative
   float unattachedLength() { return mUnattachedLength; }
 
   float angleErrorMean()   { return mErr1; } // radians
@@ -397,22 +397,19 @@ class DistoXNum
     mEmax = 0.0f;
     mHmin = 0.0f;
     mHmax = 0.0f;
+    mTup   = 0.0f;
+    mTdown = 0.0f;
     mVmin = 0.0f;
     mVmax = 0.0f;
-    mZmin = 0.0f;
-    mZmax = 0.0f;
   }
 
   private void updateBBox( NumSurveyPoint s )
   {
-    if ( s.s < mSmin ) mSmin = s.s;
-    if ( s.s > mSmax ) mSmax = s.s;
-    if ( s.e < mEmin ) mEmin = s.e;
-    if ( s.e > mEmax ) mEmax = s.e;
-    if ( s.h < mHmin ) mHmin = s.h;
-    if ( s.h > mHmax ) mHmax = s.h;
-    if ( s.v < mVmin ) mVmin = s.v;
-    if ( s.v > mVmax ) mVmax = s.v;
+    if ( s.s < mSmin ) mSmin = s.s; else if ( s.s > mSmax ) mSmax = s.s;
+    if ( s.e < mEmin ) mEmin = s.e; else if ( s.e > mEmax ) mEmax = s.e;
+    if ( s.h < mHmin ) mHmin = s.h; else if ( s.h > mHmax ) mHmax = s.h;
+    float t = - s.v;
+    if ( t < mTdown ) mTdown = t; else if ( t > mTup ) mTup = t;
   }
 
   float surveyNorth() { return (mSmin < 0)? -mSmin : 0; }
@@ -527,8 +524,8 @@ class DistoXNum
   //             //   ++mSurfNr;
   //             // } 
   //             mLength += block.mLength;
-  //             if ( st.v < mZmin ) { mZmin = st.v; }
-  //             if ( st.v > mZmax ) { mZmax = st.v; }
+  //             if ( st.v < mVmin ) { mVmin = st.v; }
+  //             if ( st.v > mVmax ) { mVmax = st.v; }
   //             lastLeg = new NumShot( sf, st, block, 1, mDecl );
   //             addShotToStations( lastLeg, st, sf );
   //           }
@@ -545,8 +542,8 @@ class DistoXNum
   //           //   ++mSurfNr;
   //           // } 
   //           mLength += block.mLength;
-  //           if ( sf.v < mZmin ) { mZmin = sf.v; }
-  //           if ( sf.v > mZmax ) { mZmax = sf.v; }
+  //           if ( sf.v < mVmin ) { mVmin = sf.v; }
+  //           if ( sf.v > mVmax ) { mVmax = sf.v; }
   //           addShotToStations( new NumShot( st, sf, block, -1), sf, st, mDecl );
   //         }
   //         else 

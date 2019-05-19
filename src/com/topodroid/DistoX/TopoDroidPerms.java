@@ -46,9 +46,9 @@ class TopoDroidPerms extends MyDialog
       sb.append( "\nBLUETOOTH_ADMIN" );
     } else if ( check_perms > 0 ) {
       sb.append( context.getResources().getString( R.string.perms_optional ) );
-      if ( ( check_perms & 1 ) == 1 ) sb.append( "\nACCESS_FINE_LOCATION" );
-      if ( ( check_perms & 2 ) == 2 ) sb.append( "\nCAMERA" );
-      if ( ( check_perms & 4 ) == 4 ) sb.append( "\nRECORD_AUDIO" );
+      if ( ( check_perms & 1 ) == 1 ) sb.append( context.getResources().getString( R.string.perm_location ) );
+      if ( ( check_perms & 2 ) == 2 ) sb.append( context.getResources().getString( R.string.perm_camera ) );
+      if ( ( check_perms & 4 ) == 4 ) sb.append( context.getResources().getString( R.string.perm_microphone ) );
     }
     TextView tv = (TextView)findViewById( R.id.text_perms );
     tv.setText( sb.toString() );

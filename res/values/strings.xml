@@ -864,6 +864,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_packet_dialog">Packets</string>
     <string name="title_photo">More shot edit</string>
     <string name="title_photo_comment">Photo comment</string>
+    <string name="title_photo_view">Photo</string>
     <string name="title_plot_save">Export sketch</string>
     <!-- UNUSED string name="title_plot_merge">Merge sketch in</string -->
     <string name="title_plot_reload">Reload sketch</string>
@@ -1374,9 +1375,11 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <!-- UNUSED string name="splay_extend">estimate splay extend</string -->
 
     <string name="perms_mandatory">TopoDroid cannot run without these permissions:</string>
-    <string name="perms_optional">TopoDroid may fail without these permissions:</string>
-    <!-- UNUSED string name="perm_required">Required permissions are now granted. Restart TopoDroid</string -->
-    <!-- UNUSED string name="perm_consider">Consider granting permission: </string -->
+    <string name="perms_optional">Some functions are disabled without these permissions:</string>
+    <string name="perm_location">\nLocation</string>
+    <string name="perm_camera">\nCamera</string>
+    <string name="perm_microphone">\nMicrophone</string>
+
     <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">
 \nTopoDroid is an Open Source Android app for surveying caves with the DistoX.

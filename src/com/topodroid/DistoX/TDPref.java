@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import android.content.Context;
 // import android.content.res.Resources;
 
@@ -34,8 +36,6 @@ import android.view.KeyEvent;
 import android.text.TextWatcher;
 import android.text.Editable;
 // import android.text.method.KeyListener;
-
-import android.util.Log;
 
 class TDPref implements AdapterView.OnItemSelectedListener
                       , View.OnClickListener
@@ -178,8 +178,9 @@ class TDPref implements AdapterView.OnItemSelectedListener
       if ( ! value.equals( val ) ) {
         setValue( val );
         String text = TDSetting.updatePreference( helper, category, name, value );
+        // Log.v( "DistoXPref", "[commitValueStrring] " + name + " value " + val + " text " + text );
 	if ( text != null ) {
-	  Log.v("DistoX", "commit value <" + text + ">" );
+	  // Log.v("DistoX", "commit value <" + text + ">" );
 	  mEdittext.setText( text );
 	}
       }
@@ -201,7 +202,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
       case R.id.checkbox: // click always switches the checkbox
 	bvalue = ((CheckBox)v).isChecked();
 	value  = ( bvalue? "true" : "false" );
-        // Log.v("DistoXPref", "TODO checkbox click: " + name + " val " + value );
+        // Log.v("DistoXPref", "[onClick] checkbox: " + name + " val " + value );
 	TDSetting.updatePreference( helper, category, name, value );
         break;
       case R.id.title:
@@ -214,8 +215,8 @@ class TDPref implements AdapterView.OnItemSelectedListener
   public void onItemSelected( AdapterView av, View v, int pos, long id )
   {
     value  = options[pos];
-    // Log.v("DistoXPref", "TODO item Selected: " + name + " index " + ivalue + " -> " + pos + " val " + value );
     if ( ivalue != pos ) {
+      // Log.v("DistoXPref", "[onItemSelected]: " + name + " index " + ivalue + "->" + pos + " val " + values[pos] );
       ivalue = pos;
       TDSetting.updatePreference( helper, category, name, values[ ivalue ] ); // options store the selected value
     }

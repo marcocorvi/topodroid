@@ -37,6 +37,7 @@ class DrawingLineSectionDialog extends MyDialog
   private DrawingLinePath mLine;
   private DrawingWindow mParent;
   // private TopoDroidApp    mApp; // unused
+  private String mFilename = null;
 
   // private TextView mTVtype;
   private TextView mTVoptions;
@@ -49,14 +50,6 @@ class DrawingLineSectionDialog extends MyDialog
   private float   mAzimuth;
   private float   mClino;
 
-  private View     mContentView;
-  private boolean  mOnView2;
-  private ImageView mView2;
-
-  // private Button   mBtnFoto;
-  // private Button   mBtnDraw;
-  // private Button   mBtnErase;
-  // private Button   mBtnSave;
   private MyCheckBox mBtnFoto  = null;
   private MyCheckBox mBtnDraw  = null;
   private MyCheckBox mBtnErase = null;
@@ -166,15 +159,15 @@ class DrawingLineSectionDialog extends MyDialog
     mBtnDraw.setOnClickListener( this );
 
     if ( mPlotInfo != null ) { // check the photo
-      String filename = TDPath.getSurveyJpgFile( TDInstance.survey, mPlotInfo.name );
-      File imagefile = new File( filename );
+      mFilename = TDPath.getSurveyJpgFile( TDInstance.survey, mPlotInfo.name );
+      File imagefile = new File( mFilename );
       if ( imagefile.exists() ) {
-	mTdImage = new TDImage( filename );
+	mTdImage = new TDImage( mFilename );
         tv_azimuth.setText( String.format( mContext.getResources().getString( R.string.photo_azimuth_clino ), mTdImage.azimuth(), mTdImage.clino() ) );
         String date = mTdImage.date();
         tv_date.setText( (date != null)? date : "" );
 
-	if ( mTdImage.fillImageView( mIVimage, mTdImage.width()/8 ) ) {
+	if ( mTdImage.fillImageView( mIVimage, mTdImage.width()/8, mTdImage.height()/8, true ) ) {
           mIVimage.setOnClickListener( this );
         } else {
           mIVimage.setVisibility( View.GONE );
@@ -203,7 +196,6 @@ class DrawingLineSectionDialog extends MyDialog
     // mBtnCancel = (Button) findViewById( R.id.button_cancel );
     // mBtnCancel.setOnClickListener( this );
 
-    mContentView = (View) findViewById( R.id.content_view );
   }
 
   public void onClick(View v) 
@@ -211,14 +203,8 @@ class DrawingLineSectionDialog extends MyDialog
     // TDLog.Log( TDLog.LOG_INPUT, "Drawing Line Section Dialog onClick() " + b.getText().toString() );
 
     if ( v.getId() == R.id.line_image ) {
-      // TopoDroidApp.viewPhoto( mContext, mTdImage.filname() );
       if ( mTdImage != null ) {
-        if ( mView2 == null ) {
-          mView2 = new ImageView( mContext );
-        }
-        mTdImage.fillImageView( mView2 );
-        setContentView( mView2 );
-	mOnView2 = true;
+        (new PhotoDialog( mContext, mFilename )).show();
       }
       return;
     } else {
@@ -263,11 +249,6 @@ class DrawingLineSectionDialog extends MyDialog
   @Override
   public void onBackPressed()
   {    
-    if ( mOnView2 ) {
-      mOnView2 = false;
-      setContentView( mContentView );
-      return;
-    }
     if ( ! mExists ) {
       // if pressed BACK and the section did not exist, tell the parent to delete the "section" line
       mParent.deleteLine( mLine );

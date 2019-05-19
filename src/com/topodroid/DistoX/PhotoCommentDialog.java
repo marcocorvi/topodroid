@@ -84,7 +84,7 @@ class PhotoCommentDialog extends MyDialog
     if ( b == mButtonOK && mETcomment.getText() != null ) {
       // TDLog.Log( TDLog.LOG_PHOTO, "set photo comment " + mETcomment.getText().toString() );
       // mParent.insertPhoto( mETcomment.getText().toString() );
-      int camera = ( cameraCheck && ! mCamera.isChecked() )? PhotoInfo.CAMERA_TOPODROID : PhotoInfo.CAMERA_URL;
+      int camera = ( cameraCheck && ! mCamera.isChecked() )? PhotoInfo.CAMERA_TOPODROID : PhotoInfo.CAMERA_INTENT;
       mParent.doTakePhoto( mETcomment.getText().toString(), camera );
     // } else if ( b == mButtonCancel ) {
       /* nothing */

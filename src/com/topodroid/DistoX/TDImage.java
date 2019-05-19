@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import java.io.IOException;
 
 import android.widget.ImageView;
@@ -19,8 +21,6 @@ import android.widget.ImageView;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.ExifInterface;
-
-// import android.util.Log;
 
 class TDImage
 {
@@ -97,22 +97,44 @@ class TDImage
     }
   }
 
+  // 6 = upward
+  // 8 = downward
+  // 1 = leftward
+  // 3 = rightward
+  boolean isPortrait() { return mOrientation == 6 || mOrientation == 8; }
+
   // @param view
-  // @param ww    width
-  boolean fillImageView( ImageView view, int ww )
+  // @param ww     width
+  // @param hh     height
+  // @param orient whether to apply image orientation
+  boolean fillImageView( ImageView view, int ww, int hh, boolean orient )
   {
     if ( mImage == null ) return false;
-    int hh = (int)( mImageHeight * ww / mImageWidth );
-    // Log.v("DistoX", "fill image view w " + ww + " h " + hh );
+
+    hh = (int)( mImageHeight * ww / mImageWidth );
+
+    // if ( isPortrait() ) {
+    //   hh = (int)( mImageHeight * ww / mImageWidth );
+    // } else {
+    //   ww = (int)( mImageWidth * hh / mImageHeight );
+    // }
+      
+    // Log.v("DistoX", "fill image view w " + ww + " h " + hh + " orientation " + mOrientation );
     if ( ww <= 0 || hh <= 0 ) return false;
     if ( mImage2 != null ) mImage2.recycle();
     mImage2 = Bitmap.createScaledBitmap( mImage, ww, hh, true );
     if ( mImage2 == null ) return false;
+
+    // MyBearingAndClino.applyOrientation( view, mImage2, (orient? mOrientation : 6) );
     MyBearingAndClino.applyOrientation( view, mImage2, mOrientation );
     return true;
   }
 
-  boolean fillImageView( ImageView view ) { return fillImageView( view, (int)(TopoDroidApp.mDisplayWidth) ); }
+  // full image view: fixed orientation
+  // boolean fillImageView( ImageView view ) 
+  // { 
+  //   return fillImageView( view, (int)(TopoDroidApp.mDisplayWidth), (int)(TopoDroidApp.mDisplayHeight), false );
+  // }
 
   void recycleImages()
   {

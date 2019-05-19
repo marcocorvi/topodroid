@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="401104"
-      android:versionName="4.1.3o"
+      android:versionCode="401107"
+      android:versionName="4.1.3r"
     >
     <!-- android:debuggable="true" -->
     <!-- Android SDK dependencies:
@@ -163,6 +163,7 @@
 	<activity android:name=".TDPrefActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:windowSoftInputMode="stateHidden"
+	  android:screenOrientation="portrait"
           >
         </activity>
 

@@ -50,8 +50,8 @@ import java.util.HashMap;
 @SuppressWarnings("SyntaxError")
 class DataHelper extends DataSetObservable
 {
-  static final String DB_VERSION = "39";
-  static final int DATABASE_VERSION = 39;
+  static final String DB_VERSION = "41";
+  static final int DATABASE_VERSION = 41;
   static final int DATABASE_VERSION_MIN = 21; // was 14
 
   private static final String CONFIG_TABLE = "configs";
@@ -1926,12 +1926,12 @@ class DataHelper extends DataSetObservable
   private static String qSensors2     = "select id, shotId, title, date, comment, type, value from sensors where surveyId=? AND shotId=? ";
   private static String qShotAudio    = "select id, date from audios where surveyId=? AND shotId=? ";
   private static String qAudiosAll    = "select id, shotId, date from audios where surveyId=? ";
-  private static String qPhotosAll    = "select id, shotId, status, title, date, comment from photos where surveyId=? ";
+  private static String qPhotosAll    = "select id, shotId, status, title, date, comment, camera from photos where surveyId=? ";
   private static String qjPhotos      =
-    "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment from photos as p join shots as s on p.shotId=s.id where p.surveyId=? and s.surveyId=? and p.status=? ";
+    "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment, p.camera from photos as p join shots as s on p.shotId=s.id where p.surveyId=? and s.surveyId=? and p.status=? ";
   // private static String qShotPhoto    = "select id, shotId, title, date, comment from photos where surveyId=? AND shotId=? ";
   private static String qjShotPhoto   =
-    "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment from photos as p join shots as s on p.shotId=s.id where p.surveyId=? AND s.surveyId=? AND p.shotId=? ";
+    "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment, p.camera from photos as p join shots as s on p.shotId=s.id where p.surveyId=? AND s.surveyId=? AND p.shotId=? ";
 
   private static String qFirstStation = "select fStation from shots where surveyId=? AND fStation!=\"\" AND tStation!=\"\" limit 1 ";
   private static String qHasStation   = "select id, fStation, tStation from shots where surveyId=? and ( fStation=? or tStation=? ) order by id ";
@@ -2138,7 +2138,7 @@ class DataHelper extends DataSetObservable
     List< PhotoInfo > list = new ArrayList<>();
     if ( myDB == null ) return list;
     // Cursor cursor = myDB.query( PHOTO_TABLE,
-    //                             new String[] { "id", "shotId", "title", "date", "comment" }, // columns
+    //                             new String[] { "id", "shotId", "title", "date", "comment", "camera" }, // columns
     //                             WHERE_SID_STATUS, new String[] { Long.toString(sid), Long.toString(status) },
     //                             null, null,  null ); 
     Cursor cursor = myDB.rawQuery( qjPhotos, new String[] { Long.toString(sid), Long.toString(sid), Long.toString(status) } );
@@ -2151,7 +2151,9 @@ class DataHelper extends DataSetObservable
                                  cursor.getString(2),
                                  name,              // shot name
                                  cursor.getString(5),
-                                 cursor.getString(6) ) );
+                                 cursor.getString(6),
+                                 (int)(cursor.getLong(7))
+                 ) );
       } while (cursor.moveToNext());
     }
     // TDLog.Log( TDLog.LOG_DB, "select All Photos list size " + list.size() );
@@ -2177,7 +2179,7 @@ class DataHelper extends DataSetObservable
     List< PhotoInfo > list = new ArrayList<>();
     if ( myDB == null ) return list;
     // Cursor cursor = myDB.query( PHOTO_TABLE,
-    //                             new String[] { "id", "shotId", "title", "date", "comment" }, // columns
+    //                             new String[] { "id", "shotId", "title", "date", "comment", "camera" }, // columns
     //                             WHERE_SID_SHOTID, new String[] { Long.toString(sid), Long.toString(shotid) },
     //                             null, null, null ); 
     Cursor cursor = myDB.rawQuery( qjShotPhoto, new String[] { Long.toString(sid), Long.toString(sid), Long.toString(shotid) } );
@@ -2190,7 +2192,9 @@ class DataHelper extends DataSetObservable
                                  cursor.getString(2),
                                  name,              // shot name
                                  cursor.getString(5),
-                                 cursor.getString(6) ) );
+                                 cursor.getString(6),
+                                 (int)(cursor.getLong(7))
+                 ) );
       } while (cursor.moveToNext());
     }
     // TDLog.Log( TDLog.LOG_DB, "select All Photos list size " + list.size() );
@@ -3508,7 +3512,7 @@ class DataHelper extends DataSetObservable
    * @param title     photo title
    * @param comment   comment
    */
-  private ContentValues makePhotoContentValues( long sid, long id, long shotid, long status, String title, String date, String comment )
+  private ContentValues makePhotoContentValues( long sid, long id, long shotid, long status, String title, String date, String comment, long camera )
   {
     ContentValues cv = new ContentValues();
     cv.put( "surveyId",  sid );
@@ -3518,14 +3522,15 @@ class DataHelper extends DataSetObservable
     cv.put( "title",     title );
     cv.put( "date",      date );
     cv.put( "comment",   (comment == null)? TDString.EMPTY : comment );
+    cv.put( "camera",    camera );
     return cv;
   }
 
-  void insertPhoto( long sid, long id, long shotid, String title, String date, String comment )
+  void insertPhoto( long sid, long id, long shotid, String title, String date, String comment, int camera )
   {
     if ( myDB == null ) return; // -1L;
     if ( id == -1L ) id = maxId( PHOTO_TABLE, sid );
-    ContentValues cv = makePhotoContentValues( sid, id, shotid, TDStatus.NORMAL, title, date, comment );
+    ContentValues cv = makePhotoContentValues( sid, id, shotid, TDStatus.NORMAL, title, date, comment, camera );
     doInsert( PHOTO_TABLE, cv, "photo insert" );
     // if ( ! doInsert( PHOTO_TABLE, cv, "photo insert" ) ) return -1L;
     // return id;
@@ -4343,14 +4348,14 @@ class DataHelper extends DataSetObservable
        if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
        // cursor = myDB.query( PHOTO_TABLE, // SELECT ALL PHOTO RECORD
-       //  		    new String[] { "id", "shotId", "status", "title", "date", "comment" },
+       //  		    new String[] { "id", "shotId", "status", "title", "date", "comment", "camera" },
        //                      "surveyId=?", new String[] { Long.toString(sid) },
        //                      null, null, null );
        cursor = myDB.rawQuery( qPhotosAll, new String[] { Long.toString(sid) } );
        if (cursor.moveToFirst()) {
          do {
            pw.format(Locale.US,
-                     "INSERT into %s values( %d, %d, %d, %d, \"%s\", \"%s\", \"%s\" );\n",
+                     "INSERT into %s values( %d, %d, %d, %d, \"%s\", \"%s\", \"%s\", %d );\n",
                      PHOTO_TABLE,
                      sid,
                      cursor.getLong(0),   // id
@@ -4358,7 +4363,9 @@ class DataHelper extends DataSetObservable
                      cursor.getLong(2),   // status
                      cursor.getString(3), // title
                      cursor.getString(4), // date
-                     cursor.getString(5) );
+                     cursor.getString(5), // comment
+                     cursor.getLong(6)
+           );
          } while (cursor.moveToNext());
        }
        if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
@@ -4647,9 +4654,10 @@ class DataHelper extends DataSetObservable
                title   = scanline1.stringValue( );
                date    = scanline1.stringValue( );
                comment = scanline1.stringValue( );
+               long camera = (db_version > 39)? scanline1.longValue( ) : 0 ;
                if ( shotid >= 0 ) {
-                 // if ( insertPhoto( sid, id, shotid, title, date, comment ) < 0 ) { success = false; }
-                 cv = makePhotoContentValues( sid, id, shotid, TDStatus.NORMAL, title, date, comment );
+                 // if ( insertPhoto( sid, id, shotid, title, date, comment, camera ) < 0 ) { success = false; }
+                 cv = makePhotoContentValues( sid, id, shotid, TDStatus.NORMAL, title, date, comment, camera );
                  myDB.insert( PHOTO_TABLE, null, cv ); 
                  // TDLog.Log( TDLog.LOG_DB, "loadFromFile photo " + sid + " " + id + " " + title + " " + name );
                }
@@ -5075,7 +5083,8 @@ class DataHelper extends DataSetObservable
              +   " status INTEGER default 0, "
              +   " title TEXT, "
              +   " date TEXT, "
-             +   " comment TEXT "
+             +   " comment TEXT, "
+             +   " camera INTEGER "
              // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
              // +   " ON DELETE CASCADE "
              +   ")"
@@ -5206,6 +5215,10 @@ class DataHelper extends DataSetObservable
 	   case 38:
              db.execSQL( "ALTER TABLE surveys ADD COLUMN extend INTEGER default 90" );
 	   case 39:
+             db.execSQL( "ALTER TABLE photos ADD COLUMN camera INTEGER default 0" );
+	   case 40:
+             db.execSQL( "update surveys set declination=1080 where declination>720" );
+	   case 41:
              /* current version */
            default:
              break;

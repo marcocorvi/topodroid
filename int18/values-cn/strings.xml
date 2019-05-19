@@ -1377,8 +1377,11 @@
 
     <string name="perms_mandatory">没有这些权限TopoDroid无法运行:</string>
     <string name="perms_optional">没有这些权限TopoDroid可能会失败:</string>
-    <!-- UNUSED string name="perm_required">Required permissions are now granted. Restart TopoDroid</string -->
-    <!-- UNUSED string name="perm_consider">Consider granting permission: </string -->
+    <!-- TODO string name="perm_location">\nLocation</string -->
+    <!-- TODO string name="perm_camera">\nCamera</string -->
+    <!-- TODO string name="perm_microphone">\nMicrophone</string -->
+
+
     <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">
 \nTopoDroid是一个专门配合DistoX使用的开源的免费的洞穴测量软件.

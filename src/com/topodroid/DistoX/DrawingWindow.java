@@ -3625,12 +3625,14 @@ public class DrawingWindow extends ItemDrawer
   private String mMediaComment = null;
   private long  mMediaId = -1L;
   private float mMediaX, mMediaY;
+  private int   mMediaCamera = PhotoInfo.CAMERA_UNDEFINED;
 
   public void insertPhoto( )
   {
-    // Log.v("DistoXC", "insertPhoto " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    // Log.v("DistoXC", "insert photo " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     assert( mLastLinePath == null );
-    mApp_mData.insertPhoto( TDInstance.sid, mMediaId, -1, "", TDUtil.currentDate(), mMediaComment ); // FIXME TITLE has to go
+    // FIXME TITLE has to go
+    mApp_mData.insertPhoto( TDInstance.sid, mMediaId, -1, "", TDUtil.currentDate(), mMediaComment, mMediaCamera );
     // FIXME NOTIFY ? no
     // photo file is "survey/id.jpg"
     // String filename = TDInstance.survey + "/" + Long.toString( mMediaId ) + ".jpg";
@@ -3648,9 +3650,10 @@ public class DrawingWindow extends ItemDrawer
   //   mApp_mData.updatePlotAzimuthClino( TDInstance.sid, pid, azimuth, clino );
   // }
 
-  private void doTakePhoto( File imagefile, boolean insert, long pid )
+  private void doTakePointPhoto( File imagefile, boolean insert, long pid )
   {
     if ( TDandroid.checkCamera( mApp ) ) { // hasPhoto
+      mMediaCamera = PhotoInfo.CAMERA_TOPODROID;
       new QCamCompass( this,
             	         (new MyBearingAndClino( mApp, imagefile )),
                        // this, pid, // pid non-negative if notify azimuth/clino // DO NOT USE THIS
@@ -3674,6 +3677,7 @@ public class DrawingWindow extends ItemDrawer
           intent.putExtra( MediaStore.EXTRA_OUTPUT, outfileuri );
           intent.putExtra( "outputFormat", Bitmap.CompressFormat.JPEG.toString() );
           if ( insert ) {
+            mMediaCamera = PhotoInfo.CAMERA_INTENT;
             mActivity.startActivityForResult( intent, TDRequest.CAPTURE_IMAGE_DRAWWINDOW );
           } else {
             mActivity.startActivity( intent );
@@ -3702,7 +3706,7 @@ public class DrawingWindow extends ItemDrawer
     }
     File imagefile = new File( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mMediaId) ) );
     // TODO TD_XSECTION_PHOTO
-    doTakePhoto( imagefile, true, -1L ); // with inserter, no pid
+    doTakePointPhoto( imagefile, true, -1L ); // with inserter, no pid
   }
 
     private void addAudioPoint( float x, float y )
@@ -5076,7 +5080,7 @@ public class DrawingWindow extends ItemDrawer
         // imageFile := PHOTO_DIR / surveyId / photoId .jpg
         File imagefile = new File( TDPath.getSurveyJpgFile( TDInstance.survey, id ) );
         // TODO TD_XSECTION_PHOTO
-        doTakePhoto( imagefile, false, pid ); // without inserter
+        doTakePointPhoto( imagefile, false, pid ); // without inserter
       }
     }
 

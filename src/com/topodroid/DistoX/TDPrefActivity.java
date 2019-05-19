@@ -193,7 +193,7 @@ public class TDPrefActivity extends Activity
     // Resources res = getResources();
     TDPrefHelper hlp = TopoDroidApp.mPrefHlp;
 
-    Log.v("DistoX", "***** Pref create. category " + mPrefCategory );
+    // Log.v("DistoX", "***** Pref create. category " + mPrefCategory );
     switch ( mPrefCategory ) {
       case PREF_CATEGORY_ALL:       mPrefs = TDPref.makeMainPrefs(     this, hlp ); break;
       case PREF_CATEGORY_SURVEY:    mPrefs = TDPref.makeSurveyPrefs(   this, hlp ); break;
