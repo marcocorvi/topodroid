@@ -814,7 +814,7 @@
     <string name="audio_delete">Удалить ?</string>
     <string name="audio_overwrite">Перезаписать ?</string>
 
-    <string name="title_azimut">Направление развёртки</string>
+    <string name="title_azimut">Референс азимут развёртки</string>
     <string name="title_audio">Аудио заметка</string>
     <string name="title_calib">Калибровки</string>
     <string name="title_calib_check">Замеры контроля калибровки</string>
