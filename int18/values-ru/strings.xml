@@ -1356,9 +1356,9 @@
 
     <string name="perms_mandatory">TopoDroid не может работать без следующих разрешений:</string>
     <string name="perms_optional">TopoDroid может работать нестабильно без следующих разрешений:</string>
-    <!-- TODO string name="perm_location">\nLocation</string -->
-    <!-- TODO string name="perm_camera">\nCamera</string -->
-    <!-- TODO string name="perm_microphone">\nMicrophone</string -->
+    <string name="perm_location">\nМесоположение</string>
+    <string name="perm_camera">\nКамера</string>
+    <string name="perm_microphone">\nМикрофон</string>
 
 
     <string name="welcome_title">TopoDroid %1$s</string>
