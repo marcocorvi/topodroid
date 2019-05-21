@@ -69,7 +69,7 @@ class DrawingAreaPath extends DrawingPointLinePath
     mAreaType = type;
     mAreaCnt  = cnt;
     mPrefix   = (prefix != null && prefix.length() > 0)? prefix : "a";
-    if ( mAreaType < BrushManager.mAreaLib.mSymbolNr ) {
+    if ( mAreaType < BrushManager.mAreaLib.size() ) {
       setPathPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
     }
     mOrientation = 0.0;
@@ -100,7 +100,7 @@ class DrawingAreaPath extends DrawingPointLinePath
     } catch ( NumberFormatException e ) {
       TDLog.Error( "Drawing Area Path AreaCnt parse Int error: " + id.substring(1) );
     }
-    if ( mAreaType < BrushManager.mAreaLib.mSymbolNr ) {
+    if ( mAreaType < BrushManager.mAreaLib.size() ) {
       setPathPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
     }
     mLevel = BrushManager.mAreaLib.getSymbolLevel( type );
@@ -176,7 +176,7 @@ class DrawingAreaPath extends DrawingPointLinePath
   void setAreaType( int t )
   {
     mAreaType = t;
-    if ( mAreaType < BrushManager.mAreaLib.mSymbolNr ) {
+    if ( mAreaType < BrushManager.mAreaLib.size() ) {
       setPathPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
       // FIXME shader ?
     }

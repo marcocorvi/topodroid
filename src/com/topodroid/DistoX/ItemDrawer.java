@@ -109,7 +109,7 @@ public class ItemDrawer extends Activity
   public void areaSelected( int k, boolean update_recent ) 
   {
     mSymbol = Symbol.AREA;
-    if ( k >= 0 && k < BrushManager.mAreaLib.mSymbolNr ) {
+    if ( k >= 0 && k < BrushManager.mAreaLib.size() ) {
       mCurrentArea = k;
       if ( TDSetting.mWithLevels > 0 ) {
         if ( ! DrawingLevel.isVisible( BrushManager.getAreaLevel( k ) ) ) {
@@ -127,7 +127,7 @@ public class ItemDrawer extends Activity
   public void lineSelected( int k, boolean update_recent ) 
   {
     mSymbol = Symbol.LINE;
-    if ( k >= 0 && k < BrushManager.mLineLib.mSymbolNr ) {
+    if ( k >= 0 && k < BrushManager.mLineLib.size() ) {
       mCurrentLine = k;
       if ( TDSetting.mWithLevels > 0 ) {
         if ( ! DrawingLevel.isVisible( BrushManager.getLineLevel( k ) ) ) {
@@ -146,7 +146,7 @@ public class ItemDrawer extends Activity
   public void pointSelected( int p, boolean update_recent )
   {
     mSymbol = Symbol.POINT;
-    if ( p >= 0 && p < BrushManager.mPointLib.mSymbolNr ) {
+    if ( p >= 0 && p < BrushManager.mPointLib.size() ) {
       mCurrentPoint = p;
       if ( TDSetting.mWithLevels > 0 ) {
         if ( ! DrawingLevel.isVisible( BrushManager.getPointLevel( p ) ) ) {

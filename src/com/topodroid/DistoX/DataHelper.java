@@ -52,6 +52,7 @@ class DataHelper extends DataSetObservable
 {
   static final String DB_VERSION = "41";
   static final int DATABASE_VERSION = 41;
+
   static final int DATABASE_VERSION_MIN = 21; // was 14
 
   private static final String CONFIG_TABLE = "configs";

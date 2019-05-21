@@ -146,7 +146,7 @@ class DrawingIO
   //           if ( vals.length < 4 ) {
   //             TDLog.Error( "bad point cmd: " + line );
   //           } else {
-  //             int ptType = BrushManager.mPointLib.mSymbolNr;
+  //             int ptType = BrushManager.mPointLib.size();
   //             boolean has_orientation = false;
   //             float orientation = 0.0f;
   //             int scale = DrawingPointPath.SCALE_M;
@@ -265,7 +265,7 @@ class DrawingIO
   //               if ( vals.length >= 8 && vals[6].equals("-visibility") && vals[7].equals("off") ) {
   //                 visible = false;
   //               }
-  //               int arType = BrushManager.mAreaLib.mSymbolNr;
+  //               int arType = BrushManager.mAreaLib.size();
   //               DrawingAreaPath path = new DrawingAreaPath( arType, vals[3], visible );
 
   //               // TODO insert new area-path
@@ -386,7 +386,7 @@ class DrawingIO
   //                 } 
   //               }
   //               
-  //               int lnType = BrushManager.mLineLib.mSymbolNr;
+  //               int lnType = BrushManager.mLineLib.size();
   //               DrawingLinePath path = null;
   //               BrushManager.mLineLib.tryLoadMissingLine( type );
   //               String thname = type;

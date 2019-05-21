@@ -25,6 +25,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import java.io.File;
 import java.io.StringWriter;
 import java.io.FileWriter;
@@ -44,7 +46,6 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.HashMap;
 
-// import android.util.Log;
 import android.util.Base64;
 
 class TDExporter
@@ -3961,6 +3962,7 @@ class TDExporter
 
   // --------------------------------------------------------------------
   // CALIBRATION import/export
+  // CCSV
 
   static String exportCalibAsCsv( long cid, DeviceHelper data, CalibInfo ci, String filename )
   {
@@ -3993,7 +3995,26 @@ class TDExporter
     }
   }
 
+  static private String nextLineAtPos( BufferedReader br, int pos ) throws IOException
+  {
+    String line = br.readLine();
+    if ( line == null ) return "";
+    if ( line.length() <= pos ) return "";
+    return line.substring( pos );
+  }
 
+  // calib file
+  // line-1 must contain string "TopoDroid"
+  // line-2 skipped
+  // line-3 contains name at pos 2: must not match any calib name already in the db
+  // line-4 contains date at pos 2 format yyyy.mm.dd
+  // line-5 containd device MAC at pos 2: must match current device
+  // line-6 contains comment starting at pos 2
+  // line-7 contains algo at pos 2: 0 unset, 1 linear, 2 non-linear
+  // next data lines follow, each with at least 8 entries:
+  //   id, gx, gy, gz, mx, my, mz, group
+  // data reading ends at end-of-file or at a line with fewer entries
+  //
   static int importCalibFromCsv( DeviceHelper data, String filename, String device_name )
   {
     int ret = 0;
@@ -4008,16 +4029,16 @@ class TDExporter
         ret = -1; // NOT TOPODROID CSV
       } else {
         br.readLine(); // skip empty line
-        String name = br.readLine().substring(2);
+        String name = nextLineAtPos( br, 2 );
         if ( data.hasCalibName( name ) ) {
           ret = -2; // CALIB NAME ALREADY EXISTS
         } else {
-          String date   = br.readLine().substring(2);
-          String device = br.readLine().substring(2);
+          String date   = nextLineAtPos( br, 2 );
+          String device = nextLineAtPos( br, 2 );
           if ( ! device.equals( device_name ) ) {
             ret = -3; // DEVICE MISMATCH
           } else {
-            String comment = br.readLine().substring(2);
+            String comment = nextLineAtPos( br, 2 );
             long algo = 0L;
             line = br.readLine();
             if ( line != null && line.charAt(0) == '#' ) {
@@ -4031,8 +4052,13 @@ class TDExporter
             } else {
               long cid = data.insertCalibInfo( name, date, device, comment, algo );
               while ( line != null ) {
-                String[] vals = line.split(", ");
+                // FIXME
+                //   (1) replace ' '* with nothing
+                //   (2) split on ','
+                line = line.replaceAll( " ", "" );
+                String[] vals = line.split(",");
                 if ( vals.length > 7 ) {
+                  // Log.v("DistoX-Calib", vals.length + " <" + vals[1] + "><" + vals[2] + "><" + vals[3] + ">" );
                   try {
                     long gx = Long.parseLong( vals[1] );
                     long gy = Long.parseLong( vals[2] );
@@ -4043,7 +4069,9 @@ class TDExporter
                     long gid = data.insertGM( cid, gx, gy, gz, mx, my, mz );
                     String grp = vals[7].trim();
                     data.updateGMName( gid, cid, grp );
-                  } catch ( NumberFormatException e ) { }
+                  } catch ( NumberFormatException e ) { 
+                    TDLog.Error( e.getMessage() );
+                  }
                 }
                 line = br.readLine();
               }

@@ -107,11 +107,11 @@ class NumStation extends NumSurveyPoint
     if ( azimuth > 360 ) { // make sure to start with a negative azimuth
       temp.add( new NumAzimuth( a3.mAzimuth-360, a3.mExtend ) );
     }
-    temp.add( new NumAzimuth( azimuth-360, 0 ) ); // bisecant
+    temp.add( new NumAzimuth( azimuth-360, Float.NaN ) ); // bisecant
     temp.add( a1 );
     for (int k=1; k<sz; ++k ) {
       NumAzimuth a2 = mLegs.get( k );
-      temp.add( new NumAzimuth( (a1.mAzimuth + a2.mAzimuth)/2, 0 ) ); // bisecant
+      temp.add( new NumAzimuth( (a1.mAzimuth + a2.mAzimuth)/2, Float.NaN ) ); // bisecant
       temp.add( a2 );
       a1 = a2;
     }
@@ -148,10 +148,12 @@ class NumStation extends NumSurveyPoint
     for (int k=1; k<mLegs.size(); k++ ) {
       NumAzimuth a2 = mLegs.get(k);
       if ( b >= a1.mAzimuth && b < a2.mAzimuth ) {
-        if ( a1.mExtend == 0 ) {
+        if ( ! Float.isNaN( a2.mExtend ) ) {
           return TDMath.cosd( a2.mAzimuth - b ) * a2.mExtend;
-        } else {
+        } else if ( ! Float.isNaN( a1.mExtend ) ) {
           return TDMath.cosd( b - a1.mAzimuth ) * a1.mExtend;
+        } else {
+          break;
         }
       }
       a1 = a2;

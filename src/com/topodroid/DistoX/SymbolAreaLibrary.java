@@ -42,7 +42,7 @@ class SymbolAreaLibrary extends SymbolLibrary
     loadSystemAreas( res );
     loadUserAreas();
     makeEnabledList();
-    // Log.v("DistoX", "Areas " + mSymbolNr );
+    // Log.v("DistoX", "Areas " + size() );
     // for ( Symbol s : mSymbols ) Log.v("DistoX", "area " + s.getName() + " " + s.getThName() );
   }
 

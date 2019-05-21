@@ -33,7 +33,7 @@ class SymbolLibrary
 
   ArrayList< Symbol > mSymbols;
   private SymbolNode mRoot;
-  int mSymbolNr;
+  // int mSymbolNr;
 
   SymbolLibrary( String prefix )
   { 
@@ -42,7 +42,7 @@ class SymbolLibrary
     mSymbols = new ArrayList<>();
   }
 
-  int size() { return mSymbolNr; }
+  int size() { return mSymbols.size(); }
 
   // ----------------------------------------------------
 
@@ -51,6 +51,7 @@ class SymbolLibrary
 
   boolean addSymbol( Symbol v )
   {
+    if ( v == null ) return false; // prereq.
     boolean ret = true;
     SymbolNode n = new SymbolNode( v );
     if ( mRoot == null ) {
@@ -86,7 +87,7 @@ class SymbolLibrary
     }
     if ( ret ) {
       mSymbols.add( v );
-      mSymbolNr = mSymbols.size();
+      // mSymbolNr = mSymbols.size();
     }
     return ret;
   }
@@ -98,9 +99,10 @@ class SymbolLibrary
 
   // ============================================================
 
-  int getSymbolIndex( Symbol symbol ) 
+  int getSymbolIndex( Symbol symbol )
   {
-    for ( int k=0; k<mSymbolNr; ++k ) {
+    int nr = mSymbols.size();
+    for ( int k=0; k<nr; ++k ) {
       if ( symbol == mSymbols.get(k) ) return k;
     }
     return -1;
@@ -108,13 +110,15 @@ class SymbolLibrary
 
   int getSymbolIndexByThName( String th_name )
   {
-    for ( int k=0; k<mSymbolNr; ++k ) if ( mSymbols.get(k).mThName.equals( th_name) ) return k;
+    int nr = mSymbols.size();
+    for ( int k=0; k<nr; ++k ) if ( mSymbols.get(k).mThName.equals( th_name) ) return k;
     return -1;
   }
 
   int getSymbolIndexByFilename( String fname )
   {
-    for ( int k=0; k<mSymbolNr; ++k ) if ( mSymbols.get(k).mThName.equals( fname) ) return k;
+    int nr = mSymbols.size();
+    for ( int k=0; k<nr; ++k ) if ( mSymbols.get(k).mThName.equals( fname) ) return k;
     return -1;
   }
 
@@ -129,15 +133,15 @@ class SymbolLibrary
 
   Symbol getSymbolByFilename( String fname ) { return get( fname ); }
   // Symbol getSymbolByThName( String th_name ) { return get( th_name ); }
-  Symbol getSymbolByIndex( int k )       { return ( k < 0 || k >= mSymbolNr )? null : mSymbols.get( k ); }
+  Symbol getSymbolByIndex( int k ) { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get( k ); }
 
-  String getSymbolName( int k )   { return ( k < 0 || k >= mSymbolNr )? null : mSymbols.get(k).getName(); }
-  String getSymbolThName( int k ) { return ( k < 0 || k >= mSymbolNr )? null : mSymbols.get(k).getThName(); }
-  Paint getSymbolPaint( int k )   { return ( k < 0 || k >= mSymbolNr )? null : mSymbols.get(k).getPaint(); }
-  Path  getSymbolPath( int k )    { return ( k < 0 || k >= mSymbolNr )? null : mSymbols.get(k).getPath(); }
-  boolean isSymbolOrientable( int k )   { return k >= 0 && k < mSymbolNr && mSymbols.get( k ).isOrientable(); }
-  boolean isSymbolEnabled( int k )      { return k >= 0 && k < mSymbolNr && mSymbols.get( k ).isEnabled(); }
-  int getSymbolLevel( int k ) { return ( ( k<0 || k>=mSymbolNr )? 0xff : mSymbols.get( k ).mLevel ); }
+  String getSymbolName( int k )   { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getName(); }
+  String getSymbolThName( int k ) { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getThName(); }
+  Paint getSymbolPaint( int k )   { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getPaint(); }
+  Path  getSymbolPath( int k )    { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getPath(); }
+  boolean isSymbolOrientable( int k )   { return k >= 0 && k < mSymbols.size() && mSymbols.get( k ).isOrientable(); }
+  boolean isSymbolEnabled( int k )      { return k >= 0 && k < mSymbols.size() && mSymbols.get( k ).isEnabled(); }
+  int getSymbolLevel( int k ) { return ( ( k<0 || k>=mSymbols.size() )? 0xff : mSymbols.get( k ).mLevel ); }
 
   ArrayList<String> getSymbolNames()
   {
@@ -157,17 +161,18 @@ class SymbolLibrary
   // ========================================================================
   // CSURVEY attributes
 
-  int getSymbolCsxLayer( int k )    { return ( k < 0 || k >= mSymbolNr )? -1 : mSymbols.get(k).mCsxLayer; }
-  int getSymbolCsxType( int k )     { return ( k < 0 || k >= mSymbolNr )? -1 : mSymbols.get(k).mCsxType; }
-  int getSymbolCsxCategory( int k ) { return ( k < 0 || k >= mSymbolNr )? -1 : mSymbols.get(k).mCsxCategory; }
-  int getSymbolCsxPen( int k )      { return ( k < 0 || k >= mSymbolNr )? -1 : mSymbols.get(k).mCsxPen; }
-  int getSymbolCsxBrush( int k )    { return ( k < 0 || k >= mSymbolNr )? -1 : mSymbols.get(k).mCsxBrush; }
+  int getSymbolCsxLayer( int k )    { return ( k < 0 || k >= mSymbols.size() )? -1 : mSymbols.get(k).mCsxLayer; }
+  int getSymbolCsxType( int k )     { return ( k < 0 || k >= mSymbols.size() )? -1 : mSymbols.get(k).mCsxType; }
+  int getSymbolCsxCategory( int k ) { return ( k < 0 || k >= mSymbols.size() )? -1 : mSymbols.get(k).mCsxCategory; }
+  int getSymbolCsxPen( int k )      { return ( k < 0 || k >= mSymbols.size() )? -1 : mSymbols.get(k).mCsxPen; }
+  int getSymbolCsxBrush( int k )    { return ( k < 0 || k >= mSymbols.size() )? -1 : mSymbols.get(k).mCsxBrush; }
 
   // ========================================================================
 
   void sortSymbolByName( int start )
   {
-    for ( int k=start+1; k<mSymbolNr; ) {
+    int nr = mSymbols.size();
+    for ( int k=start+1; k<nr; ) {
       Symbol prev = mSymbols.get(k-1);
       Symbol curr = mSymbols.get(k);
       if ( prev.getName().compareTo(curr.getName()) > 0  ) { // swap

@@ -129,7 +129,7 @@ class DrawingSvg
       // ***** FIXME TODO POINT SYMBOLS
       // {
       //   // // 8 layer (0), 2 block name,
-      //   for ( int n = 0; n < BrushManager.mPointLib.mSymbolNr; ++ n ) {
+      //   for ( int n = 0; n < BrushManager.mPointLib.size(); ++ n ) {
       //     SymbolPoint pt = (SymbolPoint)BrushManager.mPointLib.getSymbolByIndex(n);
 
       //     int block = 1+n; // block_name = 1 + therion_code

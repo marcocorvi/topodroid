@@ -745,7 +745,7 @@ class DrawingDxf
         SymbolPointLibrary pointlib = BrushManager.mPointLib;
         SymbolLineLibrary linelib = BrushManager.mLineLib;
         SymbolAreaLibrary arealib = BrushManager.mAreaLib;
-        nr_layers += 1 + linelib.mSymbolNr + arealib.mSymbolNr;
+        nr_layers += 1 + linelib.size() + arealib.size();
         if ( mVersion13 ) { handle = inc(handle); } else { handle = 2; }
         writeBeginTable( out, "LAYER", handle, nr_layers );
         {
@@ -878,9 +878,9 @@ class DrawingDxf
           writeEndTable( out );
 
           handle = inc(handle);
-          writeBeginTable( out, "BLOCK_RECORD", handle, BrushManager.mPointLib.mSymbolNr );
+          writeBeginTable( out, "BLOCK_RECORD", handle, BrushManager.mPointLib.size() );
           {
-            for ( int n = 0; n < BrushManager.mPointLib.mSymbolNr; ++ n ) {
+            for ( int n = 0; n < BrushManager.mPointLib.size(); ++ n ) {
               String th_name = BrushManager.mPointLib.getSymbolThName(n).replace(':','-');
               writeString( out, 0, "BLOCK_RECORD" );
               handle = inc(handle);
@@ -899,7 +899,7 @@ class DrawingDxf
       writeSection( out, "BLOCKS" );
       {
         // // 8 layer (0), 2 block name,
-        for ( int n = 0; n < BrushManager.mPointLib.mSymbolNr; ++ n ) {
+        for ( int n = 0; n < BrushManager.mPointLib.size(); ++ n ) {
           SymbolPoint pt = (SymbolPoint)BrushManager.mPointLib.getSymbolByIndex(n);
 	  String th_name = pt.getThName().replace(':','-');
           writeString( out, 0, "BLOCK" );

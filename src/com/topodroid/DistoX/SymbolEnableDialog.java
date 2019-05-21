@@ -114,7 +114,7 @@ class SymbolEnableDialog extends MyDialog
     if ( TDLevel.overBasic ) {
       SymbolPointLibrary point_lib = BrushManager.mPointLib;
       if ( point_lib == null ) return false;
-      int np = point_lib.mSymbolNr;
+      int np = point_lib.size();
       for ( int i=0; i<np; ++i ) {
 	Symbol point = point_lib.getSymbolByIndex( i );
 	if ( ! point.mThName.equals("section") ) { // FIXME_SECTION_POINT always enabled
@@ -125,7 +125,7 @@ class SymbolEnableDialog extends MyDialog
 
     SymbolLineLibrary line_lib   = BrushManager.mLineLib;
     if ( line_lib == null ) return false;
-    int nl = line_lib.mSymbolNr;
+    int nl = line_lib.size();
     for ( int j=0; j<nl; ++j ) {
       mLineAdapter.add( new EnableSymbol( mContext, Symbol.LINE, j, line_lib.getSymbolByIndex( j ) ) );
     }
@@ -133,7 +133,7 @@ class SymbolEnableDialog extends MyDialog
     if ( TDLevel.overBasic ) {
       SymbolAreaLibrary area_lib   = BrushManager.mAreaLib;
       if ( area_lib == null ) return false;
-      int na = area_lib.mSymbolNr;
+      int na = area_lib.size();
       for ( int k=0; k<na; ++k ) {
         mAreaAdapter.add( new EnableSymbol( mContext, Symbol.AREA, k, area_lib.getSymbolByIndex( k ) ) );
       }

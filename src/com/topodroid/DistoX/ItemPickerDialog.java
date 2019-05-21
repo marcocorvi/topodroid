@@ -356,7 +356,7 @@ class ItemPickerDialog extends MyDialog
     {
       mPointAdapter = new ItemAdapter( mContext, this, Symbol.POINT, 
                                        R.layout.item, new ArrayList<ItemSymbol>() );
-      int np = mPointLib.mSymbolNr;
+      int np = mPointLib.size();
       for ( int i=0; i<np; ++i ) {
         SymbolPoint p = (SymbolPoint)mPointLib.getSymbolByIndex( i );
         if ( p.isEnabled() && ( TDLevel.overAdvanced || ! p.mThName.equals("section") ) ) { // FIXME_SECTION_POINT 
@@ -367,7 +367,7 @@ class ItemPickerDialog extends MyDialog
 
     mLineAdapter  = new ItemAdapter( mContext, this, Symbol.LINE,
                                      R.layout.item, new ArrayList<ItemSymbol>() );
-    int nl = mLineLib.mSymbolNr;
+    int nl = mLineLib.size();
     for ( int j=0; j<nl; ++j ) {
       SymbolLine l = (SymbolLine)mLineLib.getSymbolByIndex( j );
       if ( l.isEnabled() ) {
@@ -379,7 +379,7 @@ class ItemPickerDialog extends MyDialog
     {
       mAreaAdapter  = new ItemAdapter( mContext, this, Symbol.AREA,
                                        R.layout.item, new ArrayList<ItemSymbol>() );
-      int na = mAreaLib.mSymbolNr;
+      int na = mAreaLib.size();
       for ( int k=0; k<na; ++k ) {
         SymbolArea a = (SymbolArea)mAreaLib.getSymbolByIndex( k );
         if ( a.isEnabled() ) {

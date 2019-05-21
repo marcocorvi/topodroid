@@ -49,21 +49,21 @@ class SymbolLineLibrary extends SymbolLibrary
 
   // int size() { return mLine.size(); }
 
-  boolean isStyleStraight( int k ) { return ( k < 0 || k >= mSymbolNr ) || ((SymbolLine)mSymbols.get(k)).mStyleStraight; }
+  boolean isStyleStraight( int k ) { return ( k < 0 || k >= size() ) || ((SymbolLine)mSymbols.get(k)).mStyleStraight; }
 
-  boolean isClosed( int k ) { return k >= 0 && k < mSymbolNr && ((SymbolLine)mSymbols.get(k)).mClosed; }
+  boolean isClosed( int k ) { return k >= 0 && k < size() && ((SymbolLine)mSymbols.get(k)).mClosed; }
 
-  int getStyleX( int k ) { return ( k < 0 || k >= mSymbolNr )? 1 : ((SymbolLine)mSymbols.get(k)).mStyleX; }
+  int getStyleX( int k ) { return ( k < 0 || k >= size() )? 1 : ((SymbolLine)mSymbols.get(k)).mStyleX; }
 
-  String getLineGroup( int k ) { return ( k < 0 || k >= mSymbolNr )? null : ((SymbolLine)mSymbols.get(k)).mGroup; }
+  String getLineGroup( int k ) { return ( k < 0 || k >= size() )? null : ((SymbolLine)mSymbols.get(k)).mGroup; }
 
-  boolean isWall( int k ) { return k >= 0 && k < mSymbolNr && "wall".equals(((SymbolLine)mSymbols.get(k)).mGroup); }
+  boolean isWall( int k ) { return k >= 0 && k < size() && "wall".equals(((SymbolLine)mSymbols.get(k)).mGroup); }
 
-  boolean hasEffect( int k ) { return k >= 0  && k < mSymbolNr && ((SymbolLine)mSymbols.get(k)).mHasEffect; }
+  boolean hasEffect( int k ) { return k >= 0  && k < size() && ((SymbolLine)mSymbols.get(k)).mHasEffect; }
 
   Paint getLinePaint( int k, boolean reversed )
   {
-    if ( k < 0 || k >= mSymbolNr ) return null;
+    if ( k < 0 || k >= size() ) return null;
     SymbolLine s = (SymbolLine)mSymbols.get(k);
     return reversed ? s.mRevPaint : s.mPaint;
   }
@@ -92,7 +92,7 @@ class SymbolLineLibrary extends SymbolLibrary
     symbol.mCsxPen      = 1; // cave border
     addSymbol( symbol );
 
-    mSymbolNr = mSymbols.size();
+    // mSymbolNr = mSymbols.size();
   }
 
   void loadUserLines()

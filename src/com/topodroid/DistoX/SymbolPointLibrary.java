@@ -52,12 +52,12 @@ class SymbolPointLibrary extends SymbolLibrary
     makeEnabledList();
   }
 
-  boolean pointHasText( int k )        { return k >= 0 && k < mSymbolNr && ((SymbolPoint)mSymbols.get(k)).mHasText == 1; }
-  boolean pointHasValue( int k )       { return k >= 0 && k < mSymbolNr && ((SymbolPoint)mSymbols.get(k)).mHasText == 2; }
-  boolean pointHasTextOrValue( int k ) { return k >= 0 && k < mSymbolNr && ((SymbolPoint)mSymbols.get(k)).mHasText > 0; }
+  boolean pointHasText( int k )        { return k >= 0 && k < size() && ((SymbolPoint)mSymbols.get(k)).mHasText == 1; }
+  boolean pointHasValue( int k )       { return k >= 0 && k < size() && ((SymbolPoint)mSymbols.get(k)).mHasText == 2; }
+  boolean pointHasTextOrValue( int k ) { return k >= 0 && k < size() && ((SymbolPoint)mSymbols.get(k)).mHasText > 0; }
 
   double getPointOrientation( int k )
-  { return ( k < 0 || k >= mSymbolNr )? 0.0 : ((SymbolPoint)mSymbols.get(k)).mOrientation; }
+  { return ( k < 0 || k >= size() )? 0.0 : ((SymbolPoint)mSymbols.get(k)).mOrientation; }
 
   @Override
   void resetOrientations()
@@ -67,17 +67,17 @@ class SymbolPointLibrary extends SymbolLibrary
 
   void rotateGrad( int k, double a )
   {
-    if ( k >= 0 && k < mSymbolNr ) ((SymbolPoint)mSymbols.get(k)).rotateGradP( a );
+    if ( k >= 0 && k < size() ) ((SymbolPoint)mSymbols.get(k)).rotateGradP( a );
   }
 
   Path getPointPath( int k ) { 
   {
-    return ( k < 0 || k >= mSymbolNr )? null : ((SymbolPoint)mSymbols.get(k)).getPath( ); }
+    return ( k < 0 || k >= size() )? null : ((SymbolPoint)mSymbols.get(k)).getPath( ); }
   }
 
   Path getPointOrigPath( int k )
   {
-    return ( k < 0 || k >= mSymbolNr )? null : ((SymbolPoint)mSymbols.get(k)).getOrigPath( );
+    return ( k < 0 || k >= size() )? null : ((SymbolPoint)mSymbols.get(k)).getOrigPath( );
   }
 
   int pointCsxLayer( int k ) { return getSymbolCsxLayer( k ); }
@@ -86,7 +86,7 @@ class SymbolPointLibrary extends SymbolLibrary
 
   String pointCsx( int k )
   {
-    return ( k < 0 || k >= mSymbolNr )? "" : ((SymbolPoint)mSymbols.get(k)).mCsx;
+    return ( k < 0 || k >= size() )? "" : ((SymbolPoint)mSymbols.get(k)).mCsx;
   }
 
   // ========================================================================
@@ -184,6 +184,7 @@ class SymbolPointLibrary extends SymbolLibrary
       File file = new File( TDPath.APP_SAVE_POINT_PATH + fname );
       if ( ! file.exists() ) return false;
       symbol = new SymbolPoint( file.getPath(), file.getName(), locale, iso );
+      if ( symbol.mThName == null || symbol.mThName.length() == 0 ) return false;
       addSymbol( symbol );
     // } else {
     //   // Log.v( TopoDroidApp.TAG, "enabling missing point " + fname );

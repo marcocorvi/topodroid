@@ -2517,7 +2517,9 @@ public class DrawingWindow extends ItemDrawer
     {
       mDrawingSurface.deleteSplay( p, sp ); 
       mApp_mData.deleteShot( blk.mId, TDInstance.sid, TDStatus.DELETED, true );
-      TopoDroidApp.mShotWindow.updateDisplay(); // FIXME ???
+      if ( TopoDroidApp.mShotWindow != null ) {
+        TopoDroidApp.mShotWindow.updateDisplay(); // FIXME ???
+      }
     }
 
     void deletePoint( DrawingPointPath point )
@@ -5332,6 +5334,7 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  // called only by updateBlockList()
   private void updateDisplay( /* boolean compute, boolean reference */ ) // always called with true, false
   {
     // Log.v("DistoX", "updateDisplay() type " + mType + " reference " + reference );
@@ -5420,7 +5423,9 @@ public class DrawingWindow extends ItemDrawer
   public void updateBlockList( DBlock blk ) 
   {
     // Log.v("DistoX", "Drawing window: update Block List block id " + blk.mId + ": " + blk.mFrom + " - " + blk.mTo ); // DATA_DOWNLOAD
-    TopoDroidApp.mShotWindow.updateBlockList( blk ); // FIXME_EXTEND this is needed to update sketch splays immediately on download
+    if ( TopoDroidApp.mShotWindow != null ) {
+      TopoDroidApp.mShotWindow.updateBlockList( blk ); // FIXME_EXTEND needed to update sketch splays immediately on download
+    }
     updateDisplay( /* true, true */ );
   }
 
@@ -5428,7 +5433,9 @@ public class DrawingWindow extends ItemDrawer
   public void updateBlockList( long blk_id )
   {
     // Log.v("DistoX", "Drawing window: update Block List block id " + blk_id ); // DATA_DOWNLOAD
-    TopoDroidApp.mShotWindow.updateBlockList( blk_id ); // FIXME_EXTEND this is needed to update sketch splays immediately on download
+    if ( TopoDroidApp.mShotWindow != null ) {
+      TopoDroidApp.mShotWindow.updateBlockList( blk_id ); // FIXME_EXTEND needed to update sketch splays immediately on download
+    }
     updateDisplay( /* true, true */ );
   }
 
