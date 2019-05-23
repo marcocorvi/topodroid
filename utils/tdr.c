@@ -35,7 +35,7 @@ void readString( FILE * fp )
   printf("%ld= [length %d] \n", pos, len);
   for ( j=0; j<len; ++j ) {
     fread( &ch, sc, 1, fp );
-    printf("%c %02X ", ch, ch );
+    printf("%c", ch, ch );
   }
   printf("\n");
 }
@@ -154,8 +154,8 @@ void readLinePoint( FILE * fp )
   float x = readFloat( fp );
   float y = readFloat( fp );
   fread( &ch, sc, 1, fp );
-  lvl = (VERSION >= 401090 )? readInt( fp ) : 0xff;
-  printf("%ld= %.2f %.2f %d %02x", pos, x, y, ch, lvl );
+  // lvl = (VERSION >= 401090 )? readInt( fp ) : 0xff; N.B. Line Points do not have level
+  printf("%ld= %.2f %.2f %d ", pos, x, y, ch );
   if ( ch == 1 ) {
     x = readFloat( fp );
     y = readFloat( fp );
@@ -205,7 +205,7 @@ void readArea( FILE * fp )
   for ( int k=0; k<np; ++k ) readLinePoint( fp );
 }
 
-void readStation( FILE * fp )
+void readAutoStation( FILE * fp )
 {
   int lvl, section;
   long pos = ftell( fp );
@@ -214,9 +214,9 @@ void readStation( FILE * fp )
   printf("%ld= St: ", pos);
   readString( fp );          // name
   lvl = (VERSION >= 401090 )? readInt( fp ) : 0xff;
-  printf(" %.2f %.2f lvl %02x\n", x, y, lvl );
-  section = readInt();
-  if ( section != 0 ) {
+  section = readInt( fp );
+  printf(" %.2f %.2f lvl %02x x-section %d\n", x, y, lvl, section );
+  if ( section >= 0 ) { // PLOT_NULL == -1
     float a = readFloat( fp ); // azimuth
     float c = readFloat( fp ); // clino
   }
@@ -283,6 +283,8 @@ int main( int argc, char ** argv )
   }
 
   while ( done == 0 && fread( &ch, sc, 1, fp ) != 0 ) {
+    // printf("Section <%c>\n", ch);
+    // { char cc; scanf("%c\n", &cc); }
     switch ( ch ) {
       case 'V':
         readVersion( fp );
@@ -309,7 +311,7 @@ int main( int argc, char ** argv )
         readUserStation( fp );
         break;
       case 'X': // station name
-        readStation( fp );
+        readAutoStation( fp );
         break;
       case 'J': // special
 	readSpecial( fp );

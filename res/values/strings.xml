@@ -583,6 +583,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="button_delete"    >Delete    </string>
     <string name="button_duplicate" >Duplicate </string>
     <string name="button_surface"   >Surface   </string>
+    <string name="button_no_extend" >No extend </string>
     <string name="button_eval"      >Eval      </string>
     <string name="button_evalg"     >G      </string>
     <string name="button_evalm"     >M      </string>

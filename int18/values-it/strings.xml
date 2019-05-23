@@ -567,6 +567,7 @@
     <string name="button_delete"    >Elimina   </string>
     <!-- TODO string name="button_duplicate" >Duplicate </string -->
     <!-- TODO string name="button_surface"   >Surface   </string -->
+    <!-- TODO string name="button_no_extend" >No extend </string -->
     <string name="button_eval"      >Calcola   </string>
     <!-- FT_NO_TR string name="button_evalg"     >G      </string -->
     <!-- FT_NO_TR string name="button_evalm"     >M      </string -->

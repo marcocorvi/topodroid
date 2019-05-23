@@ -127,6 +127,9 @@ class DBlock
   static final long FLAG_NO_PROFILE = 16;
   // static final long FLAG_BACKSHOT   = 32;
 
+  static final long FLAG_NO_EXTEND  = 256; // used only in search dialog
+
+
   boolean hasFlag( long flag )    { return (mFlag & flag) == flag; }
   boolean isSurvey()    { return mFlag == FLAG_SURVEY; }
   boolean isSurface()   { return (mFlag & FLAG_SURFACE)    == FLAG_SURFACE; }

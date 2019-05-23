@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+  android:id="@+id/view_one"
+  style="@style/base_padding"
+  android:layout_width="fill_parent" 
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  >
+      				  
+  <ImageView android:id="@+id/photo_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scaleType="fitCenter"
+  />
+      				  
+  <LinearLayout 
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="@dimen/marginvbig"
+    android:layout_gravity="right"
+    android:gravity="right"
+    >
+    <Button android:id="@+id/photo_back"
+      style="@style/button_default"
+      android:text="@string/button_back"
+    />
+  </LinearLayout>
+
+</LinearLayout>

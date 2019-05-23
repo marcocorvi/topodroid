@@ -757,7 +757,7 @@ class DrawingIO
               path = DrawingSpecialPath.loadDataStream( version, dis, dx, dy );
               break;
             case 'U':
-              path = DrawingStationPath.loadDataStream( version, dis ); // consume DrawingStationName data
+              path = DrawingStationPath.loadDataStream( version, dis ); // consume DrawingStationPath data
               break;
             case 'X':
               path = DrawingStationName.loadDataStream( version, dis ); // consume DrawingStationName data

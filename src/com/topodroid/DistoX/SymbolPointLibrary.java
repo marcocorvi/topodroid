@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import java.util.Locale;
 // import java.util.ArrayList;
 // import java.util.TreeSet;
@@ -21,8 +23,6 @@ import android.graphics.Path;
 
 import android.content.Context;
 import android.content.res.Resources;
-
-// import android.util.Log;
 
 class SymbolPointLibrary extends SymbolLibrary
 {
@@ -142,6 +142,7 @@ class SymbolPointLibrary extends SymbolLibrary
           TDLog.Error( "point with null ThName " + fname );
           continue;
         }
+        // Log.v("DistoX-Pt", "Symbol point <" + fname + "> th_name <" + symbol.mThName + ">" );
         if ( ! hasSymbolByFilename( symbol.mThName ) ) {
           addSymbol( symbol );
           String thname = symbol.mThName;

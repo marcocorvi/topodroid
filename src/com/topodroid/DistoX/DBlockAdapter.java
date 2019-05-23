@@ -76,10 +76,19 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   int[] searchShot( long flag )
   {
     ArrayList<Integer> res = new ArrayList<>();
-    for ( int pos=0; pos < mItems.size(); ++pos ) {
-      DBlock blk = mItems.get( pos );
-      if ( blk.hasFlag( flag ) ) {
-        res.add( new Integer(pos) );
+    if ( flag == DBlock.FLAG_NO_EXTEND ) {
+      for ( int pos=0; pos < mItems.size(); ++pos ) {
+        DBlock blk = mItems.get( pos );
+        if ( blk.getExtend( ) > 1 ) {
+          res.add( new Integer(pos) );
+        }
+      }
+    } else { // real flag
+      for ( int pos=0; pos < mItems.size(); ++pos ) {
+        DBlock blk = mItems.get( pos );
+        if ( blk.hasFlag( flag ) ) {
+          res.add( new Integer(pos) );
+        }
       }
     }
     if ( res.size() == 0 ) return null;

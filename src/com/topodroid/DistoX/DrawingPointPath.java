@@ -13,6 +13,8 @@
 
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import android.graphics.Canvas;
 // import android.graphics.Paint;
 import android.graphics.Path;
@@ -25,8 +27,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Locale;
-
-// import android.util.Log;
 
 /**
  */
@@ -145,6 +145,7 @@ class DrawingPointPath extends DrawingPath
       BrushManager.mPointLib.tryLoadMissingPoint( fname );
       type = BrushManager.mPointLib.getSymbolIndexByFilename( fname );
       // TDLog.Log( TDLog.LOG_PLOT, "P " + fname + " " + type + " " + ccx + " " + ccy + " " + orientation + " " + scale + " options (" + options + ")" );
+      // Log.v( "DistoX-Pt", fname + " " + type + " " + ccx + " " + ccy + " " + orientation + " " + scale + " options (" + options + ")" );
       if ( type < 0 ) {
         if ( missingSymbols != null ) missingSymbols.addPointFilename( fname ); 
         type = 0;

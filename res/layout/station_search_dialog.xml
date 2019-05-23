@@ -42,6 +42,15 @@
         android:text="@string/button_search"
         android:layout_marginRight="@dimen/marginh"
       />
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/layout3"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+	android:layout_marginTop="@dimen/marginv"
+	android:layout_marginBottom="@dimen/marginv"
+      >
       <Button android:id="@+id/btn_duplicate"
         style="@style/button_default"
         android:text="@string/button_duplicate"
@@ -50,6 +59,10 @@
       <Button android:id="@+id/btn_surface"
         style="@style/button_default"
         android:text="@string/button_surface"
+      />
+      <Button android:id="@+id/btn_extend"
+        style="@style/button_default"
+        android:text="@string/button_no_extend"
       />
     </LinearLayout>
   </LinearLayout>

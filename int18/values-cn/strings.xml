@@ -583,6 +583,7 @@
     <string name="button_delete"    >删除    </string>
     <string name="button_duplicate" >副本 </string>
     <string name="button_surface"   >表面   </string>
+    <!-- TODO string name="button_no_extend" >No extend </string -->
     <string name="button_eval"      >复运算      </string>
     <string name="button_evalg"     >G      </string>
     <string name="button_evalm"     >M      </string>

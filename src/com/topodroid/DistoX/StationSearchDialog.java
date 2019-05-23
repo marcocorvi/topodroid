@@ -28,6 +28,7 @@ import android.inputmethodservice.KeyboardView;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 
 // import android.widget.Toast;
 
@@ -44,6 +45,7 @@ class StationSearchDialog extends MyDialog
   private Button mBtnDuplicate;
   private Button mBtnSurface;
   private Button mBtnSearch;
+  private Button mBtnExtend;
   // private Button mBtnCancel;
 
   private CheckBox mBtnSplays;
@@ -71,17 +73,22 @@ class StationSearchDialog extends MyDialog
     mBtnSplays = (CheckBox) findViewById(R.id.splays);
     // mBtnSplays.setVisibility( View.GONE ); 
 
+    LinearLayout ll3 = (LinearLayout) findViewById( R.id.layout3 );
     mBtnDuplicate = (Button) findViewById(R.id.btn_duplicate );
     mBtnSurface   = (Button) findViewById(R.id.btn_surface );
+    mBtnExtend    = (Button) findViewById(R.id.btn_extend );
 
     mBtnSearch = (Button) findViewById(R.id.btn_search);
     mBtnSearch.setOnClickListener( this );    // SEARCH
     if ( TDLevel.overExpert ) {
       mBtnDuplicate.setOnClickListener( this ); // SEARCH duplicate legs
       mBtnSurface.setOnClickListener( this );   // SEARCH surface legs
+      mBtnExtend.setOnClickListener( this );   // SEARCH legs without extend
     } else {
-      mBtnDuplicate.setVisibility( View.GONE );
-      mBtnSurface.setVisibility( View.GONE );
+      ll3.setVisibility( View.GONE );
+      // mBtnDuplicate.setVisibility( View.GONE );
+      // mBtnSurface.setVisibility( View.GONE );
+      // mBtnExtend.setVisibility( View.GONE );
     }
     // mBtnCancel = (Button) findViewById(R.id.btn_cancel);
     // mBtnCancel.setOnClickListener( this ); // CANCEL
@@ -130,6 +137,8 @@ class StationSearchDialog extends MyDialog
       mParent.searchShot( DBlock.FLAG_DUPLICATE );
     } else if ( b == mBtnSurface ) { // SEARCH surface
       mParent.searchShot( DBlock.FLAG_SURFACE );
+    } else if ( b == mBtnExtend ) { // SEARCH unset extend
+      mParent.searchShot( DBlock.FLAG_NO_EXTEND );
 
     // } else if ( b == mBtnCancel ) {
     //   /* nothing : dismiss */

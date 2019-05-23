@@ -571,6 +571,7 @@
     <string name="button_delete"    >Șterge    </string>
     <string name="button_duplicate" >Duplică   </string>
     <string name="button_surface"   >Suprafață </string>
+    <!-- TODO string name="button_no_extend" >No extend </string -->
     <string name="button_eval"      >Evaluează </string>
     <string name="button_evalg"     >G         </string>
     <string name="button_evalm"     >M         </string>

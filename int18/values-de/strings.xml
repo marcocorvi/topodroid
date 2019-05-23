@@ -585,6 +585,7 @@
     <string name="button_delete"    >Löschen    </string>
     <!-- TODO string name="button_duplicate" >Duplicate </string -->
     <!-- TODO string name="button_surface"   >Surface   </string -->
+    <!-- TODO string name="button_no_extend" >No extend </string -->
     <string name="button_eval"      >Auswerten </string>
     <string name="button_evalg"     >Beschleunigung      </string>
     <string name="button_evalm"     >Magnetisches Feld      </string>
