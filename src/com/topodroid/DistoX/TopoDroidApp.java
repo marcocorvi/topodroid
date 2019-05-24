@@ -745,7 +745,8 @@ public class TopoDroidApp extends Application
 // -----------------------------------------------------------------
 
   // called by GMActivity and by CalibCoeffDialog 
-  void uploadCalibCoeff( Context context, byte[] coeff, boolean check, Button b )
+  // and DeviceActivity (to reset coeffs)
+  void uploadCalibCoeff( byte[] coeff, boolean check, Button b )
   {
     // TODO this writeCoeff shoudl be run in an AsyncTask
     if ( b != null ) b.setEnabled( false );

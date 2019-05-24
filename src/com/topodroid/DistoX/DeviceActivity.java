@@ -403,7 +403,7 @@ public class DeviceActivity extends Activity
   // @Implements
   public void displayCoeff( Vector bg, Matrix ag, Vector bm, Matrix am, Vector nL )
   {
-    (new CalibCoeffDialog( this, mApp, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
+    (new CalibCoeffDialog( this, null, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
   }
 
   // @Implements
@@ -833,7 +833,7 @@ public class DeviceActivity extends Activity
       coeff[49] = zeroNL;
       coeff[50] = zeroNL;
       coeff[51] = zeroNL;
-      mApp.uploadCalibCoeff( this, coeff, false, b );
+      mApp.uploadCalibCoeff( coeff, false, b );
     }
   }
 

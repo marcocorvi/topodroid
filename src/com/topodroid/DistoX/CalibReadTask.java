@@ -78,13 +78,13 @@ class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
         case PARENT_DEVICE:
           if ( DeviceActivity.mDeviceActivityVisible && mParent.get() != null && !mParent.get().isActivityFinishing() ) {
             mParent.get().displayCoeff( bg, ag, bm, am, nL );
-            // (new CalibCoeffDialog( mContext.get(), mApp.get(), bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
+            // (new CalibCoeffDialog( mContext.get(), null, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
           }
           break;
         case PARENT_GM:
           if ( TopoDroidApp.mGMActivityVisible && mParent.get() != null && !mParent.get().isActivityFinishing() ) {
             mParent.get().displayCoeff( bg, ag, bm, am, nL );
-            // (new CalibCoeffDialog( mContext.get(), mApp.get(), bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
+            // (new CalibCoeffDialog( mContext.get(), null, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
           }
           break;
       }

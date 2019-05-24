@@ -485,6 +485,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="toporobot_warning">TopoRobot policy is exterimental !</string>
     <string name="anomaly_warning">Magnatic anomaly compensation is expert !</string>
     <string name="tripod_warning">Tripod policy is advanced !</string>
+    <string name="coverage_warning">Angle coverage below 95% - Write coefficients?</string>
 
     <string name="empty_clipboard">Empty clipboard</string>
     <string name="cannot_rename">Cannot rename survey</string>

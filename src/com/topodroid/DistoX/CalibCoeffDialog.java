@@ -32,7 +32,7 @@ import android.graphics.Bitmap;
 class CalibCoeffDialog extends MyDialog
                        implements View.OnClickListener
 {
-  private final TopoDroidApp mApp;
+  private GMActivity mParent;
 
   private static final int WIDTH  = 200;
   private static final int HEIGHT = 100;
@@ -72,12 +72,12 @@ class CalibCoeffDialog extends MyDialog
   private byte[] mCoeff;
   // private boolean mSaturated;
 
-  CalibCoeffDialog( Context context, TopoDroidApp app,
+  CalibCoeffDialog( Context context, GMActivity parent,
                     Vector bg, Matrix ag, Vector bm, Matrix am, Vector nl, float[] errors,
                     float delta, float delta2, float error, long iter, byte[] coeff /*, boolean saturated */ )
   {
     super( context, R.string.CalibCoeffDialog );
-    mApp   = app;
+    mParent = parent;
     mCoeff = coeff;
 
     bg0 = String.format(Locale.US, "bG   %8.4f %8.4f %8.4f", bg.x, bg.y, bg.z );
@@ -240,7 +240,7 @@ class CalibCoeffDialog extends MyDialog
   {
     Button b = (Button)v;
     if ( b == mButtonWrite ) {
-      mApp.uploadCalibCoeff( mContext, mCoeff, true, b );
+      if ( mParent != null ) mParent.uploadCoefficients( mCoeff, true, b );
     } else {
       dismiss();
     }

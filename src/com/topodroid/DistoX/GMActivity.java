@@ -432,7 +432,7 @@ public class GMActivity extends Activity
           byte[] coeff = mCalibration.GetCoeff();
           float[] errors = mCalibration.Errors();
 
-          (new CalibCoeffDialog( this, mApp, bg, ag, bm, am, nL, errors,
+          (new CalibCoeffDialog( this, this, bg, ag, bm, am, nL, errors,
                                  mCalibration.Delta(), mCalibration.Delta2(), mCalibration.MaxError(), 
                                  result, coeff /* , saturated */ ) ).show();
         } else if ( result == 0 ) {
@@ -679,8 +679,7 @@ public class GMActivity extends Activity
       } else { // FIXME TODO ask whether to undelete
         TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.calib_gm_undelete,
           new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick( DialogInterface dialog, int btn ) {
+            @Override public void onClick( DialogInterface dialog, int btn ) {
               // TDLog.Log( TDLog.LOG_INPUT, "calib delite" );
               deleteGM( false );
             }
@@ -793,7 +792,7 @@ public class GMActivity extends Activity
   // @Implements
   public void displayCoeff( Vector bg, Matrix ag, Vector bm, Matrix am, Vector nL )
   {
-    (new CalibCoeffDialog( this, mApp, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
+    (new CalibCoeffDialog( this, null, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
   }
 
   // @Implements
@@ -950,21 +949,38 @@ public class GMActivity extends Activity
         if ( mCalibration == null ) {
           TDToast.makeBad( R.string.no_calibration );
         } else {
-          setTitle( R.string.calib_write_coeffs );
-          setTitleColor( TDColor.CONNECTED );
-
           byte[] coeff = mCalibration.GetCoeff();
           if ( coeff == null ) {
             TDToast.makeBad( R.string.no_calibration );
           } else {
-            mApp.uploadCalibCoeff( this, coeff, true, b );
+            setTitle( R.string.calib_write_coeffs );
+            setTitleColor( TDColor.CONNECTED );
+            uploadCoefficients( coeff, true, b );
+            resetTitle( );
           }
-          resetTitle( );
         }
       // }
     // } else if ( b == mButton1[BTN_DISTO] ) { // disto
     //   Intent deviceIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DeviceActivity.class );
     //   startActivity( deviceIntent );
+    }
+  }
+
+  void uploadCoefficients( final byte[] coeff, final boolean mode, final Button b )
+  {
+    // check coverage
+    List< CalibCBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, 0, false ); // false: skip negative-grp
+    CalibCoverage coverage = new CalibCoverage( list );
+    float cover_value = coverage.getCoverage();
+    if ( cover_value < 95 ) {
+      TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.coverage_warning,
+        new DialogInterface.OnClickListener() {
+          @Override public void onClick( DialogInterface d, int btn ) {
+            mApp.uploadCalibCoeff( coeff, mode, b );
+          }
+        } );
+    } else {      
+      mApp.uploadCalibCoeff( coeff, mode, b );
     }
   }
 
