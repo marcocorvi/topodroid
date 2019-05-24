@@ -39,6 +39,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   boolean show_ids;  //!< whether to show data ids
   private LayoutInflater mLayoutInflater;
   private boolean diving;
+  private SearchResult mSearch;
 
   // private ArrayList< View > mViews;
 
@@ -53,48 +54,47 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     // mViews = new ArrayList<>();
     diving = (TDInstance.datamode == SurveyInfo.DATAMODE_DIVING);
     // Log.v("DistoX", "DBlock Adapter, diving " + diving );
+    mSearch = new SearchResult();
   }
 
-  int[] searchStation( String name, boolean splays )
+  void searchStation( String name, boolean splays )
   {
-    if ( name == null || name.length() == 0 ) return null;
-    ArrayList<Integer> res = new ArrayList<>();
+    mSearch.reset( name );
+    if ( name == null || name.length() == 0 ) return; // null;
     for ( int pos=0; pos < mItems.size(); ++pos ) {
       DBlock blk = mItems.get( pos );
       if ( blk.isSplay() && splays && name.equals( blk.mFrom ) ) {
-        res.add( new Integer(pos) );
+        mSearch.add( pos );
+        if ( blk.mView != null ) blk.mView.setBackgroundColor( TDColor.SEARCH );
       } else if ( blk.isLeg() && ( name.equals( blk.mFrom ) || name.equals( blk.mTo ) ) ) {
-        res.add( new Integer(pos) );
+        mSearch.add( pos );
+        if ( blk.mView != null ) blk.mView.setBackgroundColor( TDColor.SEARCH );
       }
     }
-    if ( res.size() == 0 ) return null;
-    int[] ret = new int[ res.size() ];
-    for ( int k=0; k<res.size(); ++k ) ret[k] = res.get(k).intValue();
-    return ret;
+    // return (mSearch.size() > 0);
   }
 
-  int[] searchShot( long flag )
+  void searchShot( long flag )
   {
-    ArrayList<Integer> res = new ArrayList<>();
+    mSearch.reset( null );
     if ( flag == DBlock.FLAG_NO_EXTEND ) {
       for ( int pos=0; pos < mItems.size(); ++pos ) {
         DBlock blk = mItems.get( pos );
         if ( blk.getExtend( ) > 1 ) {
-          res.add( new Integer(pos) );
+          mSearch.add( pos );
+          if ( blk.mView != null ) blk.mView.setBackgroundColor( TDColor.SEARCH );
         }
       }
     } else { // real flag
       for ( int pos=0; pos < mItems.size(); ++pos ) {
         DBlock blk = mItems.get( pos );
         if ( blk.hasFlag( flag ) ) {
-          res.add( new Integer(pos) );
+          mSearch.add( pos );
+          if ( blk.mView != null ) blk.mView.setBackgroundColor( TDColor.SEARCH );
         }
       }
     }
-    if ( res.size() == 0 ) return null;
-    int[] ret = new int[ res.size() ];
-    for ( int k=0; k<res.size(); ++k ) ret[k] = res.get(k).intValue();
-    return ret;
+    // return (mSearch.size() > 0);
   }
     
   boolean isMultiSelect() { return ( mSelect.size() > 0 ); }
@@ -131,7 +131,17 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     }
     mSelect.clear();
   }
-   
+
+  void clearSearch()
+  { 
+    for ( Integer pos : mSearch.getPositions() ) {
+      DBlock b = mItems.get( pos.intValue()  );
+      if ( b.mView != null ) b.mView.setBackgroundColor( TDColor.TRANSPARENT );
+    }
+    mSearch.clear(); 
+  }
+  int  nextSearchPosition() { return mSearch.nextPos(); }
+  String getSearchName()    { return mSearch.getName(); }
 
   /** this is not efficient because it scans the list of shots
    *  skips oven non-mail_leg, still it would be better to keep a tree of 
@@ -370,7 +380,11 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     b.mView = convertView;
 
     holder.setViewText( b, this );
-    b.mView.setBackgroundColor( b.mMultiSelected ? TDColor.GRID : TDColor.TRANSPARENT );
+    if ( mSearch.contains( pos ) ) {
+      b.mView.setBackgroundColor( TDColor.SEARCH );
+    } else {
+      b.mView.setBackgroundColor( b.mMultiSelected ? TDColor.GRID : TDColor.TRANSPARENT );
+    }
     convertView.setVisibility( b.mVisible );
     return convertView;
   }

@@ -256,7 +256,8 @@
     <!-- TODO string name="hidden_show">Show shots beyond station</string -->
     <!-- UNUSED string name="splays_toggle">Показати/приховати бок. заміри</string -->
     <!-- TODO string name="splays_on_off">Splays</string -->
-    <!-- TODO string name="splays">splays</string -->
+    <!-- TODO string name="splays">including splays</string -->
+    <!-- TODO string name="legs">Legs</string -->
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <!-- TODO string name="fmt_id">ID %1$s</string -->
     <!-- TODO string name="fmt_latitude">Latitude %1$s</string -->
@@ -820,7 +821,7 @@
     <!-- UNUSED string name="title_contour">Контур</string -->
     <!-- UNUSED string name="title_coord">Введіть координати точки:</string -->
     <string name="title_current_station">Збережені пікети</string>
-    <!-- TODO string name="title_station_search">Enter station</string -->
+    <!-- TODO string name="title_search">Station/Leg search</string -->
     <!-- TODO string name="title_dangling">Unattached shots</string -->
     <string name="title_device">Прилади DistoX</string>
     <string name="title_device_select">Виберіть прилад DistoX</string>

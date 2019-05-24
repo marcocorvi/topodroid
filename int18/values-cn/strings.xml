@@ -258,6 +258,7 @@
     <!-- UNUSED string name="splays_toggle">Toggle splays display</string -->
     <string name="splays_on_off">副线开关</string>
     <string name="splays">副线</string>
+    <!-- TODO string name="legs">Legs</string -->
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">纬度 %1$s</string>
@@ -839,7 +840,7 @@
     <!-- UNUSED string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">保存测点</string>
-    <string name="title_station_search">输入测点</string>
+    <!-- TODO string name="title_search">Station/Leg search</string -->
     <string name="title_dangling">独立测线</string>
     <string name="title_device">DistoX设备</string>
     <string name="title_device_select">选择DistoX设备</string>

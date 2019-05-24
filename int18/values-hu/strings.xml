@@ -255,6 +255,7 @@
     <!-- UNUSED string name="splays_toggle">Mutassa a fix pontokat </string -->
     <!-- TODO string name="splays_on_off">Splays</string -->
     <string name="splays">segédpontok</string>
+    <!-- TODO string name="legs">Legs</string -->
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <!-- TODO string name="fmt_id">ID %1$s</string -->
     <!-- TODO string name="fmt_latitude">Latitude %1$s</string -->
@@ -816,7 +817,7 @@
     <!-- UNUSED string name="title_contour">Körvonal</string -->
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Elmentett mérési pontok</string>
-    <string name="title_station_search">Mérési pont beírása</string>
+    <!-- TODO string name="title_search">Station/Leg search</string -->
     <!-- TODO string name="title_dangling">Unattached shots</string -->
     <string name="title_device">DistoX-ek</string>
     <string name="title_device_select">Válaszd ki a DistoX-et</string>

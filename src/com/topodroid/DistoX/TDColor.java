@@ -82,5 +82,7 @@ class TDColor
   static final int SPLAY_NORMAL  = MID_BLUE;
   static final int SPLAY_LRUD    = GREEN;
   static final int SPLAY_COMMENT = VERYDARK_GRAY;
+
+  static final int SEARCH        = 0xff996600; // search result highlight color
 }
   

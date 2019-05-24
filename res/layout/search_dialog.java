@@ -16,13 +16,7 @@
         android:singleLine="true"
         android:inputType="text"
         android:layout_marginTop="@dimen/marginv"
-    />
-    <CheckBox android:id="@+id/splays"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:text="@string/splays"
-        android:layout_marginTop="@dimen/marginv"
+        android:hint="@string/station"
     />
 
     <LinearLayout android:id="@+id/layout2"
@@ -32,9 +26,11 @@
 	android:layout_marginTop="@dimen/marginv"
 	android:layout_marginBottom="@dimen/marginv"
       >
-      <Button android:id="@+id/btn_cancel"
-        style="@style/button_default"
-        android:text="@string/button_cancel"
+      <CheckBox android:id="@+id/splays"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="@string/splays"
         android:layout_marginRight="@dimen/marginh"
       />
       <Button android:id="@+id/btn_search"
@@ -51,6 +47,13 @@
 	android:layout_marginTop="@dimen/marginv"
 	android:layout_marginBottom="@dimen/marginv"
       >
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="@string/legs"
+        android:layout_marginRight="@dimen/marginh"
+      />
       <Button android:id="@+id/btn_duplicate"
         style="@style/button_default"
         android:text="@string/button_duplicate"
@@ -59,10 +62,25 @@
       <Button android:id="@+id/btn_surface"
         style="@style/button_default"
         android:text="@string/button_surface"
+        android:layout_marginRight="@dimen/marginh"
       />
       <Button android:id="@+id/btn_extend"
         style="@style/button_default"
         android:text="@string/button_no_extend"
+      />
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/layout4"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+	android:layout_marginTop="@dimen/marginv"
+	android:layout_marginBottom="@dimen/marginv"
+      >
+      <Button android:id="@+id/btn_cancel"
+        style="@style/button_default"
+        android:text="@string/button_cancel"
+        android:layout_marginRight="@dimen/marginh"
       />
     </LinearLayout>
   </LinearLayout>

@@ -234,7 +234,7 @@ public class ShotWindow extends Activity
   private Button[] mButtonF;
   private int mNrButtonF = 6; // 8;
 
-  private StationSearch mSearch = null;
+  // private SearchResult mSearch = null;
 
   boolean isBlockMagneticBad( DBlock blk ) { return mDistoXAccuracy.isBlockAMDBad( blk ); }
 
@@ -1061,7 +1061,7 @@ public class ShotWindow extends Activity
       mApp.registerLister( this );
     }
 
-    mSearch = new StationSearch();
+    // mSearch = new SearchResult();
   }
 
   // void enableSketchButton( boolean enabled )
@@ -1232,6 +1232,8 @@ public class ShotWindow extends Activity
     if ( closeMenu() ) return true;
     if ( CutNPaste.dismissPopupBT() ) return true;
 
+    mDataAdapter.clearSearch();
+
     Button b = (Button)view;
     if ( ! diving && b == mButton1[ BTN_DOWNLOAD ] ) { // MULTI-DISTOX
       if (   TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI
@@ -1253,29 +1255,34 @@ public class ShotWindow extends Activity
     } else if ( b == mButton1[ BTN_MANUAL - boff ] ) {
       new SurveyCalibrationDialog( mActivity /*, mApp */ ).show();
     } else if ( b == mButton1[ BTN_SEARCH - boff ] ) { // next search pos
-      if ( mSearch != null ) jumpToPos( mSearch.nextPos() );
+      // if ( mSearch != null ) jumpToPos( mSearch.nextPos() );
+      jumpToPos( mDataAdapter.nextSearchPosition() );
     }
     return true;
   } 
 
   void searchStation( String name, boolean splays )
   {
-    if ( mSearch != null ) {
-      mSearch.set( name, mDataAdapter.searchStation( name, splays ) );
-      if ( ! jumpToPos( mSearch.nextPos() ) ) {
+    // if ( mSearch != null ) {
+      // mSearch.set( name, mDataAdapter.searchStation( name, splays ) );
+      mDataAdapter.searchStation( name, splays );
+      // if ( ! jumpToPos( mSearch.nextPos() ) ) 
+      if ( ! jumpToPos( mDataAdapter.nextSearchPosition() ) ) {
         TDToast.make( R.string.station_not_found );
       }
-    }
+    // }
   }
 
   void searchShot( long flag ) 
   {
-    if ( mSearch != null ) {
-      mSearch.set( null, mDataAdapter.searchShot( flag ) );
-      if ( ! jumpToPos( mSearch.nextPos() ) ) {
+    // if ( mSearch != null ) {
+      // mSearch.set( null, mDataAdapter.searchShot( flag ) );
+      mDataAdapter.searchShot( flag );
+      // if ( ! jumpToPos( mSearch.nextPos() ) ) 
+      if ( ! jumpToPos( mDataAdapter.nextSearchPosition() ) ) {
         TDToast.make( R.string.shot_not_found );
       }
-    }
+    // }
   }
 
   boolean jumpToPos( final int pos ) 
@@ -1299,6 +1306,8 @@ public class ShotWindow extends Activity
     if ( closeMenu() ) return;
     if ( CutNPaste.dismissPopupBT() ) return;
 
+    mDataAdapter.clearSearch();
+
     Button b = (Button)view;
     if ( b == mImage ) {
       if ( mMenu.getVisibility() == View.VISIBLE ) {
@@ -1320,7 +1329,7 @@ public class ShotWindow extends Activity
       if ( ! diving ) {
         if ( k1 < mNrButton1 && b == mButton1[k1++] ) {        // DOWNLOAD
           if ( TDInstance.device != null ) {
-            mSearch = null; // invalidate search
+            // mSearch = null; // invalidate search
             setConnectionStatus( 2 ); // turn arrow orange
             // TDLog.Log( TDLog.LOG_INPUT, "Download button, mode " + TDSetting.mConnectionMode );
             mDataDownloader.toggleDownload();
@@ -1334,7 +1343,7 @@ public class ShotWindow extends Activity
         }
       }
       if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // DISPLAY 
-        mSearch = null; // invalidate search
+        // mSearch = null; // invalidate search
         new ShotDisplayDialog( mActivity, this ).show();
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // PLOT LIST
         new PlotListDialog( mActivity, this, mApp, null ).show();
@@ -1345,7 +1354,7 @@ public class ShotWindow extends Activity
 
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // ADD MANUAL SHOT
         if ( TDLevel.overBasic ) {
-          mSearch = null; // invalidate search
+          // mSearch = null; // invalidate search
           DBlock last_blk = mApp_mData.selectLastLegShot( TDInstance.sid );
           // Log.v( "DistoX", "last blk: " + last_blk.toString() );
           (new ShotNewDialog( mActivity, mApp, this, last_blk, -1L )).show();
@@ -1359,8 +1368,9 @@ public class ShotWindow extends Activity
           // }
         }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // SEARCH
-        String station = ( mSearch != null )? mSearch.getName() : null;
-        new StationSearchDialog( mActivity, this, station ).show();
+        // String station = ( mSearch != null )? mSearch.getName() : null;
+        // new SearchDialog( mActivity, this, station ).show();
+        new SearchDialog( mActivity, this, mDataAdapter.getSearchName() ).show();
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // AZIMUTH
         if ( TDLevel.overAdvanced ) {
           if ( TDSetting.mAzimuthManual ) {

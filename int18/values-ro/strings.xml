@@ -256,6 +256,7 @@
     <!-- UNUSED string name="splays_toggle">Comută afișarea radierilor</string -->
     <string name="splays_on_off">Radieri</string>
     <string name="splays">radieri</string>
+    <!-- TODO string name="legs">Legs</string -->
     <!-- UNUSED string name="fmt_listen">ASCULTĂ | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Latitudine %1$s</string>
@@ -824,7 +825,7 @@
     <!-- UNUSED string name="title_contour">Contur</string -->
     <!-- UNUSED string name="title_coord">Introdu coordonatele punctului:</string -->
     <string name="title_current_station">Stații salvate</string>
-    <string name="title_station_search">Introdu stația</string>
+    <!-- TODO string name="title_search">Station/Leg search</string -->
     <string name="title_dangling">Măsurători neatașate</string>
     <string name="title_device">Dispozitive DistoX</string>
     <string name="title_device_select">Selectează dispozitivul DistoX</string>

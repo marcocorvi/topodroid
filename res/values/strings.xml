@@ -257,7 +257,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="hidden_show">Show shots beyond station</string>
     <!-- UNUSED string name="splays_toggle">Toggle splays display</string -->
     <string name="splays_on_off">Splays</string>
-    <string name="splays">splays</string>
+    <string name="splays">including splays</string>
+    <string name="legs">Legs</string>
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Latitude %1$s</string>
@@ -839,7 +840,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Saved stations</string>
-    <string name="title_station_search">Enter station</string>
+    <string name="title_search">Station/Leg search</string>
     <string name="title_dangling">Unattached shots</string>
     <string name="title_device">DistoX devices</string>
     <string name="title_device_select">Select DistoX device</string>

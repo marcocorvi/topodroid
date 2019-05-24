@@ -259,6 +259,7 @@
     <!-- UNUSED string name="splays_toggle">Hilfszüge ein/ausblenden</string -->
     <string name="splays_on_off">Hilfszüge</string>
     <string name="splays">Hilfszüge</string>
+    <!-- TODO string name="legs">Legs</string -->
     <!-- UNUSED string name="fmt_listen">WARTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Länge %1$s</string>
@@ -837,7 +838,7 @@
     <!-- UNUSED string name="title_contour">Konturen</string -->
     <!-- UNUSED string name="title_coord">Gib die Punkt-Koordinaten ein:</string -->
     <string name="title_current_station">Gespeicherte Messpunkte</string>
-    <string name="title_station_search">Messpunkt eingeben</string>
+    <!-- TODO string name="title_search">Station/Leg search</string -->
     <!-- TODO string name="title_dangling">Unattached shots</string -->
     <string name="title_device">DistoX Geräte</string>
     <string name="title_device_select">DistoX Gerät auswählen</string>

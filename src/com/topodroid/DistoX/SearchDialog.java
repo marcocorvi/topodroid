@@ -1,9 +1,9 @@
-/* @file StationSearchDialog.java
+/* @file SearchDialog.java
  *
  * @author marco corvi
  * @date jul 2017
  *
- * @brief TopoDroid station search dialog
+ * @brief TopoDroid search dialog for station-search or leg-flag search
  *
  * displays the stack of saved stations and allows to push 
  * a station on it or pop one from it
@@ -34,7 +34,7 @@ import android.widget.LinearLayout;
 
 // import android.util.Log;
 
-class StationSearchDialog extends MyDialog
+class SearchDialog extends MyDialog
                         implements View.OnClickListener
                         , View.OnLongClickListener
 {
@@ -52,9 +52,9 @@ class StationSearchDialog extends MyDialog
 
   private MyKeyboard mKeyboard = null;
 
-  StationSearchDialog( Context context, ShotWindow parent, String station )
+  SearchDialog( Context context, ShotWindow parent, String station )
   {
-    super( context, R.string.StationSearchDialog );
+    super( context, R.string.SearchDialog );
     mParent  = parent;
     mStation = station; // station name if result of a station search
   }
@@ -64,7 +64,7 @@ class StationSearchDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
 
-    initLayout( R.layout.station_search_dialog, R.string.title_station_search );
+    initLayout( R.layout.search_dialog, R.string.title_search );
 
     mName = (EditText) findViewById( R.id.name );
     mName.setOnLongClickListener( this );
@@ -124,7 +124,7 @@ class StationSearchDialog extends MyDialog
     if ( CutNPaste.dismissPopup() ) return;
     MyKeyboard.close( mKeyboard );
 
-    // TDLog.Log(  TDLog.LOG_INPUT, "StationSearchDialog onClick() " );
+    // TDLog.Log(  TDLog.LOG_INPUT, "Search Dialog onClick() " );
     Button b = (Button) v;
     if ( b == mBtnSearch ) { // SEARCH station
       String name = mName.getText().toString().trim();

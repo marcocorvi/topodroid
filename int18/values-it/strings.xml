@@ -253,7 +253,8 @@
     <string name="hidden_show">Mostra battute oltre il caposaldo</string>
     <!-- UNUSED string name="splays_toggle">Mostra o Nascondi gli splay</string -->
     <string name="splays_on_off">Splays</string>
-    <string name="splays">splay</string>
+    <string name="splays">inclusi splay</string>
+    <!-- TODO string name="legs">Legs</string -->
     <!-- UNUSED string name="fmt_listen">ASCOLTA | %1$s</string -->
     <!-- FT_NO_TR string name="fmt_id">ID %1$s</string -->
     <string name="fmt_latitude">Latitudine %1$s</string>
@@ -816,7 +817,7 @@
     <!-- NO string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Inserisci le coordinate del punto:</string -->
     <string name="title_current_station">Capisaldi salvati</string>
-    <string name="title_station_search">Caposaldo:</string>
+    <!-- TODO string name="title_search">Station/Leg search</string -->
     <!-- TODO string name="title_dangling">Unattached shots</string -->
     <string name="title_device">Dispositivi DistoX</string>
     <string name="title_device_select">Seleziona DistoX</string>
