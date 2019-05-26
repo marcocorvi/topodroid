@@ -1094,8 +1094,8 @@ class TDSetting
       if ( ! mInitStation.equals( v ) ) { ret = mInitStation; }
     } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_THUMBNAIL
       mThumbSize = tryIntValue( hlp, k, v, def[4] ); 
-      if ( mThumbSize < 80 )  { mThumbSize = 80;  ret = Integer.toString(mThumbSize); }
-      if ( mThumbSize > 400 ) { mThumbSize = 400; ret = Integer.toString(mThumbSize); }
+      if ( mThumbSize < 80 )       { mThumbSize = 80;  ret = Integer.toString( mThumbSize ); }
+      else if ( mThumbSize > 400 ) { mThumbSize = 400; ret = Integer.toString( mThumbSize ); }
     } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_DATA_BACKUP (bool)
       mDataBackup = tryBooleanValue( hlp, k, v, bool(def[5]) );
     } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_FIXED_ORIGIN (bool)
