@@ -21,18 +21,18 @@ import android.content.res.Resources;
 
 class TopoDroidAlertDialog 
 {
-  static void makeAlert( Context context, Resources res, int title, DialogInterface.OnClickListener pos )
+  static void makeAlert( Context context, Resources res, int message, DialogInterface.OnClickListener pos )
   {
-    makeAlert( context, res, res.getString(title), R.string.button_cancel, R.string.button_ok, null, pos );
+    makeAlert( context, res, res.getString(message), R.string.button_cancel, R.string.button_ok, null, pos );
   }
 
-  static void makeAlert( Context context, Resources res, String title, DialogInterface.OnClickListener pos )
+  static void makeAlert( Context context, Resources res, String message, DialogInterface.OnClickListener pos )
   {
-    makeAlert( context, res, title, R.string.button_cancel, R.string.button_ok, null, pos );
+    makeAlert( context, res, message, R.string.button_cancel, R.string.button_ok, null, pos );
   }
 
     // AlertDialog.Builder alert_builder = new AlertDialog.Builder( context );
-    // alert_builder.setMessage( title );
+    // alert_builder.setMessage( message );
     // alert_builder.setPositiveButton( res.getString( R.string.button_cancel ), 
     //     new DialogInterface.OnClickListener() {
     //       @Override
@@ -44,7 +44,7 @@ class TopoDroidAlertDialog
     // // alert.getWindow().setBackgroundDrawableResource( R.color.background );
     // alert.show();
 
-  static void makeAlert( Context context, Resources res, String title, 
+  static void makeAlert( Context context, Resources res, String message, 
              String ok, 
              String no,
              DialogInterface.OnClickListener ok_handler,
@@ -53,7 +53,7 @@ class TopoDroidAlertDialog
       // NEED API LEVEL 11 for custom background color
 
       AlertDialog.Builder alert_builder = new AlertDialog.Builder( context );
-      alert_builder.setMessage( title );
+      alert_builder.setMessage( message );
       if ( ok != null ) {
         if ( ok_handler == null ) {
           ok_handler = new DialogInterface.OnClickListener() {
@@ -77,7 +77,7 @@ class TopoDroidAlertDialog
       alert.show();
   }
 
-  static void makeAlert( Context context, Resources res, String title, 
+  static void makeAlert( Context context, Resources res, String message, 
              int ok, 
              int no,
              DialogInterface.OnClickListener ok_handler,
@@ -86,7 +86,7 @@ class TopoDroidAlertDialog
       // NEED API LEVEL 11 for custom background color
 
       AlertDialog.Builder alert_builder = new AlertDialog.Builder( context );
-      alert_builder.setMessage( title );
+      alert_builder.setMessage( message );
       if ( ok >= 0 ) {
         if ( ok_handler == null ) {
           ok_handler = new DialogInterface.OnClickListener() {

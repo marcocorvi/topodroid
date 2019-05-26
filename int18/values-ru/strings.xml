@@ -476,6 +476,8 @@
     <string name="toporobot_warning">ВНИМАНИЕ: нумерация пикетов TopoRobot экспериментальняа функция!</string>
     <string name="anomaly_warning">Компенсация магнитной аномалии доступна в экспертном уровне!</string>
     <string name="tripod_warning">Политика Штатив доступна в продвинутом уровне функций!</string>
+    <!-- TODO string name="coverage_warning">Angle coverage below %1$d %%\nWrite coefficients?</string -->
+    <!-- TODO string name="delta_warning">Average error above %1$.1f\nWrite coefficients?</string -->
 
     <string name="cannot_rename">Не могу перименовать съёмку</string>
     <string name="declination">Магн. скл.</string>

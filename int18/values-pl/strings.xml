@@ -483,6 +483,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="toporobot_warning">zasady TopoRobot są eksperymentalne !</string>
     <string name="anomaly_warning">Kompensacja magnetyczna jest eksperymentalna !</string>
     <string name="tripod_warning">Zasady Tripod są zaawansowane !</string>
+    <!-- TODO string name="coverage_warning">Angle coverage below %1$d %%\nWrite coefficients?</string -->
+    <!-- TODO string name="delta_warning">Average error above %1$.1f\nWrite coefficients?</string -->
 
 
     <string name="cannot_rename">Nie można zmienić nazwy ciągu</string>

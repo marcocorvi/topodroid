@@ -70,6 +70,7 @@ class CalibCoeffDialog extends MyDialog
   private String error0;
   private String iter0;
   private byte[] mCoeff;
+  private float mDelta;
   // private boolean mSaturated;
 
   CalibCoeffDialog( Context context, GMActivity parent,
@@ -96,6 +97,7 @@ class CalibCoeffDialog extends MyDialog
       nlx = TDString.EMPTY; // new String(TDString.EMPTY);
     }
 
+    mDelta = delta;
     delta0  = String.format( mContext.getResources().getString( R.string.calib_error ), delta );
     delta02 = String.format( mContext.getResources().getString( R.string.calib_stddev ), delta2 );
     error0  = String.format( mContext.getResources().getString( R.string.calib_max_error ), error );
@@ -240,7 +242,7 @@ class CalibCoeffDialog extends MyDialog
   {
     Button b = (Button)v;
     if ( b == mButtonWrite ) {
-      if ( mParent != null ) mParent.uploadCoefficients( mCoeff, true, b );
+      if ( mParent != null ) mParent.uploadCoefficients( mDelta, mCoeff, true, b );
     } else {
       dismiss();
     }

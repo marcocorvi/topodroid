@@ -485,6 +485,8 @@
     <string name="toporobot_warning">TopoRobot原则是实验性的!</string>
     <string name="anomaly_warning">磁力异常补偿需专业操作 !</string>
     <string name="tripod_warning">三脚架方案很高级!</string>
+    <!-- TODO string name="coverage_warning">Angle coverage below %1$d %%\nWrite coefficients?</string -->
+    <!-- TODO string name="delta_warning">Average error above %1$.1f\nWrite coefficients?</string -->
 
     <string name="empty_clipboard">清空剪贴板</string>
     <string name="cannot_rename">不能重命名测量</string>

@@ -484,6 +484,8 @@
     <string name="toporobot_warning">WARNUNG: TopoRobot ist experimentell !</string>
     <string name="anomaly_warning">Magnetische Anomalie-Kompensation ist Expertenlevel!</string>
     <string name="tripod_warning">Stativmessungen sind Fortgeschrittenenlevel!</string>
+    <!-- TODO string name="coverage_warning">Angle coverage below %1$d %%\nWrite coefficients?</string -->
+    <!-- TODO string name="delta_warning">Average error above %1$.1f\nWrite coefficients?</string -->
 
     <string name="cannot_rename">Kann Vermessung nicht umbenennen</string>
     <string name="declination">Magnetische Deklination</string>

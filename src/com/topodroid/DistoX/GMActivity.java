@@ -955,7 +955,7 @@ public class GMActivity extends Activity
           } else {
             setTitle( R.string.calib_write_coeffs );
             setTitleColor( TDColor.CONNECTED );
-            uploadCoefficients( coeff, true, b );
+            uploadCoefficients( mCalibration.Delta(), coeff, true, b );
             resetTitle( );
           }
         }
@@ -966,20 +966,27 @@ public class GMActivity extends Activity
     }
   }
 
-  void uploadCoefficients( final byte[] coeff, final boolean mode, final Button b )
+  void uploadCoefficients( float delta, final byte[] coeff, final boolean mode, final Button b )
   {
-    // check coverage
-    List< CalibCBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, 0, false ); // false: skip negative-grp
-    CalibCoverage coverage = new CalibCoverage( list );
-    float cover_value = coverage.getCoverage();
-    if ( cover_value < 95 ) {
-      TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.coverage_warning,
+    String warning = null;
+    if ( warning == null ) {
+      // check coverage
+      List< CalibCBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, 0, false ); // false: skip negative-grp
+      CalibCoverage coverage = new CalibCoverage( list );
+      float cover_value = coverage.getCoverage();
+      if ( cover_value < 95 ) warning = String.format( getResources().getString( R.string.coverage_warning ), 95 );
+    }
+    if ( warning == null ) {
+      if ( delta > 0.5f ) warning = String.format( getResources().getString(R.string.delta_warning), 0.5 ); 
+    }
+    if ( warning != null ) {
+      TopoDroidAlertDialog.makeAlert( this, getResources(), warning,
         new DialogInterface.OnClickListener() {
           @Override public void onClick( DialogInterface d, int btn ) {
             mApp.uploadCalibCoeff( coeff, mode, b );
           }
         } );
-    } else {      
+    } else {
       mApp.uploadCalibCoeff( coeff, mode, b );
     }
   }

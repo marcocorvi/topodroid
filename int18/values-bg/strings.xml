@@ -474,6 +474,8 @@
     <string name="toporobot_warning">Настройка TopoRobot е експериментална!</string>
     <string name="anomaly_warning">Компенсиране на магн. аномалия е експертна настройка!</string>
     <string name="tripod_warning">Настройка Статив е разширена!</string>
+    <!-- TODO string name="coverage_warning">Angle coverage below %1$d %%\nWrite coefficients?</string -->
+    <!-- TODO string name="delta_warning">Average error above %1$.1f\nWrite coefficients?</string -->
 
     <string name="cannot_rename">Не може да се преименува картировката</string>
     <string name="declination">Магн. деклинация</string>

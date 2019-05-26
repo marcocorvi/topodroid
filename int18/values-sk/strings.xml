@@ -485,6 +485,8 @@
     <string name="toporobot_warning">VAROVANIE: TopoRobot politika číslovania je experimentálna!</string>
     <string name="anomaly_warning">Kompenzácia magnetickej anomálie je pre expertov!</string>
     <string name="tripod_warning">Politika STATÍV-STENA je pre pokročilých !</string>
+    <!-- TODO string name="coverage_warning">Angle coverage below %1$d %%\nWrite coefficients?</string -->
+    <!-- TODO string name="delta_warning">Average error above %1$.1f\nWrite coefficients?</string -->
 	
     <string name="empty_clipboard">Prázdna schránka</string>
     <string name="cannot_rename">Nedá sa premenovať názov mapovania</string>

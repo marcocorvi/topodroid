@@ -476,6 +476,8 @@
     <!-- TODO string name="toporobot_warning">TopoRobot policy is exterimental !</string -->
     <!-- TODO string name="anomaly_warning">Magnatic anomaly compensation is expert !</string -->
     <!-- TODO string name="tripod_warning">Tripod policy is advanced !</string -->
+    <!-- TODO string name="coverage_warning">Angle coverage below %1$d %%\nWrite coefficients?</string -->
+    <!-- TODO string name="delta_warning">Average error above %1$.1f\nWrite coefficients?</string -->
 
     <string name="cannot_rename">Не можу перйменувати зйомку</string>
     <string name="declination">Магн. схилення.</string>

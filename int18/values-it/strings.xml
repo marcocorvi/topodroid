@@ -473,6 +473,8 @@
     <string name="toporobot_warning">TopoRobot e\' sperimentale !</string>
     <string name="anomaly_warning">La compensazione di anomalia magnetica e\' liv. esperto !</string>
     <string name="tripod_warning">Tripod e\' liv. avanzato !</string>
+    <!-- TODO string name="coverage_warning">Angle coverage below %1$d %%\nWrite coefficients?</string -->
+    <!-- TODO string name="delta_warning">Average error above %1$.1f\nWrite coefficients?</string -->
 
     <string name="cannot_rename">Rinomina rilievo non riuscita</string>
     <string name="declination">decl. magn.</string>

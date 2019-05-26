@@ -476,6 +476,8 @@
     <string name="toporobot_warning">AVERTISMENT: metoda TopoRobot este experimentală !</string>
     <string name="anomaly_warning">Compensarea anomaliilor magnetice este pentru utilizatori experți !</string>
     <string name="tripod_warning">Metoda tripod este pentru utilizatori avansați !</string>
+    <!-- TODO string name="coverage_warning">Angle coverage below %1$d %%\nWrite coefficients?</string -->
+    <!-- TODO string name="delta_warning">Average error above %1$.1f\nWrite coefficients?</string -->
 
     <string name="cannot_rename">Cartarea nu paote fi redenumită</string>
     <string name="declination">Magn. decl.</string>

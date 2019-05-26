@@ -474,6 +474,8 @@
     <string name="toporobot_warning">La stratégie TopoRobot est dispo. en mode expérimental !</string>
     <string name="anomaly_warning">La compensation des anomalies magnétiques est dispo. en mode expert !</string>
     <string name="tripod_warning">La stratégie Tripod est dispo. en mode avancé !</string>
+    <!-- TODO string name="coverage_warning">Angle coverage below %1$d %%\nWrite coefficients?</string -->
+    <!-- TODO string name="delta_warning">Average error above %1$.1f\nWrite coefficients?</string -->
 
     <string name="cannot_rename">Impossible de renommer le relevé</string>
     <string name="declination">Déclinaison magnétique</string>
