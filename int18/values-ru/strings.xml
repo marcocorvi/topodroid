@@ -257,7 +257,7 @@
     <!-- UNUSED string name="splays_toggle">Показать/скрыть сплеи</string -->
     <string name="splays_on_off">Вкл/Выкл бок. замер</string>
     <string name="splays">бок. замеры</string>
-    <!-- TODO string name="legs">Legs</string -->
+    <string name="legs">Замеры м-у пикетами</string>
     <!-- UNUSED string name="fmt_listen">СЛУШАТЬ | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Широта %1$s</string>
@@ -476,8 +476,8 @@
     <string name="toporobot_warning">ВНИМАНИЕ: нумерация пикетов TopoRobot экспериментальняа функция!</string>
     <string name="anomaly_warning">Компенсация магнитной аномалии доступна в экспертном уровне!</string>
     <string name="tripod_warning">Политика Штатив доступна в продвинутом уровне функций!</string>
-    <!-- TODO string name="coverage_warning">Angle coverage below %1$d %%\nWrite coefficients?</string -->
-    <!-- TODO string name="delta_warning">Average error above %1$.1f\nWrite coefficients?</string -->
+    <string name="coverage_warning">Angle coverage below %1$d %%\nЗаписать коэффициенты?</string>
+    <string name="delta_warning">Average error above %1$.1f\nЗаписать коэффициенты?</string>
 
     <string name="cannot_rename">Не могу перименовать съёмку</string>
     <string name="declination">Магн. скл.</string>
@@ -574,7 +574,7 @@
     <string name="button_delete"    >Удалить   </string>
     <string name="button_duplicate" >Дубликаты </string>
     <string name="button_surface"   >Поверхностные   </string>
-    <!-- TODO string name="button_no_extend" >No extend </string -->
+    <string name="button_no_extend" >Нет напр. развертки </string>
     <string name="button_eval"      >Вычислить    </string>
     <string name="button_evalg"     >G      </string>
     <string name="button_evalm"     >M      </string>
@@ -829,7 +829,7 @@
     <!-- UNUSED string name="title_contour">Контур</string -->
     <!-- UNUSED string name="title_coord">Введите координаты точки:</string -->
     <string name="title_current_station">Сохраненные пикеты</string>
-    <!-- TODO string name="title_search">Station/Leg search</string -->
+    <string name="title_search">Поиск пикетов/замеров</string>
     <string name="title_dangling">Неприсоединенные замеры</string>
     <string name="title_device">Устройства DistoX</string>
     <string name="title_device_select">Выберите прибор DistoX</string>
