@@ -104,7 +104,7 @@ public class ItemDrawer extends Activity
   }
 
   // ----------------------------------------------------------------------
-  // SELECTION
+  // TOOL SELECTION
 
   public void areaSelected( int k, boolean update_recent ) 
   {

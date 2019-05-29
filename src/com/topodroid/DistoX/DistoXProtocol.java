@@ -54,7 +54,7 @@ class DistoXProtocol extends TopoDroidProtocol
   // private static final UUID MY_UUID = UUID.fromString( "00001101-0000-1000-8000-00805F9B34FB" );
 
   // final private byte[] mBuffer = new byte[8]; // packet buffer
-  int mMaxTimeout = 8;
+  // int mMaxTimeout = 8;
   
   //-----------------------------------------------------
 

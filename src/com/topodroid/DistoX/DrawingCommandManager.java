@@ -1475,10 +1475,18 @@ class DrawingCommandManager
 
     if( mCurrentStack != null ){
       synchronized( mCurrentStack ) {
-        for ( ICanvasCommand cmd : mCurrentStack ) {
-          if ( cmd.commandType() == 0 ) {
-            if ( DrawingLevel.isLevelVisible( (DrawingPath)cmd ) ) {
+        if ( TDSetting.mWithLevels == 0 ) { // treat no-levels case by itself
+          for ( ICanvasCommand cmd : mCurrentStack ) {
+            if ( cmd.commandType() == 0 ) {
               cmd.draw( c, mat, sca, null );
+            }
+          }
+        } else {
+          for ( ICanvasCommand cmd : mCurrentStack ) {
+            if ( cmd.commandType() == 0 ) {
+              if ( DrawingLevel.isLevelVisible( (DrawingPath)cmd ) ) {
+                cmd.draw( c, mat, sca, null );
+              }
             }
           }
         }
@@ -1657,6 +1665,19 @@ class DrawingCommandManager
     // checkLines();
   }
 
+
+  private void drawGreenDot( Canvas canvas, SelectionPoint pt, float dot_radius )
+  {
+    Path path = new Path();
+    if ( pt.mPoint != null ) { // line-point
+      path.addCircle( pt.mPoint.x, pt.mPoint.y, dot_radius, Path.Direction.CCW );
+    } else {  
+      path.addCircle( pt.mItem.cx, pt.mItem.cy, dot_radius, Path.Direction.CCW );
+    }
+    path.transform( mMatrix );
+    canvas.drawPath( path, BrushManager.highlightPaint2 );
+  }
+
   // N.B. doneHandler is not used
   void executeAll( Canvas canvas, float zoom, DrawingStationSplay station_splay )
   {
@@ -1783,10 +1804,10 @@ class DrawingCommandManager
             }
           }
         } else {
-          for ( ICanvasCommand cmd : mCurrentStack  ) {
-            if ( cmd.commandType() == 0 ) {
-              DrawingPath path = (DrawingPath)cmd;
-              if ( DrawingLevel.isLevelVisible( (DrawingPath)cmd ) ) {
+          if ( TDSetting.mWithLevels == 0 ) { // treat no-levels case by itself
+            for ( ICanvasCommand cmd : mCurrentStack  ) {
+              if ( cmd.commandType() == 0 ) {
+                DrawingPath path = (DrawingPath)cmd;
                 cmd.draw( canvas, mMatrix, mScale, mBBox );
                 if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
                   DrawingLinePath line = (DrawingLinePath)path;
@@ -1797,6 +1818,26 @@ class DrawingCommandManager
                     path1.lineTo( lp.x+line.mDx*TDSetting.mArrowLength, lp.y+line.mDy*TDSetting.mArrowLength );
                     path1.transform( mMatrix );
                     canvas.drawPath( path1, BrushManager.mSectionPaint );
+                  }
+                }
+              }
+            }
+          } else {
+            for ( ICanvasCommand cmd : mCurrentStack  ) {
+              if ( cmd.commandType() == 0 ) {
+                DrawingPath path = (DrawingPath)cmd;
+                if ( DrawingLevel.isLevelVisible( (DrawingPath)cmd ) ) {
+                  cmd.draw( canvas, mMatrix, mScale, mBBox );
+                  if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
+                    DrawingLinePath line = (DrawingLinePath)path;
+                    if ( line.mLineType == BrushManager.mLineLib.mLineSectionIndex ) { // add direction-tick to section-lines
+                      LinePoint lp = line.mFirst;
+                      Path path1 = new Path();
+                      path1.moveTo( lp.x, lp.y );
+                      path1.lineTo( lp.x+line.mDx*TDSetting.mArrowLength, lp.y+line.mDy*TDSetting.mArrowLength );
+                      path1.transform( mMatrix );
+                      canvas.drawPath( path1, BrushManager.mSectionPaint );
+                    }
                   }
                 }
               }
@@ -1816,38 +1857,60 @@ class DrawingCommandManager
     if ( mDisplayPoints ) {
       float dot_radius = TDSetting.mDotRadius/zoom;
       synchronized( TDPath.mSelectionLock ) {
-        for ( SelectionBucket bucket: mSelection.mBuckets ) {
-          if ( bucket.intersects( mBBox ) ) {
-            for ( SelectionPoint pt : bucket.mPoints ) { 
-              int type = pt.type();
-              if ( type == DrawingPath.DRAWING_PATH_POINT ) {
-                if ( ! spoints || ! DrawingLevel.isLevelVisible( pt.mItem ) ) continue;
-              } else if ( type == DrawingPath.DRAWING_PATH_LINE ) {
-                if ( ! slines || ! DrawingLevel.isLevelVisible( pt.mItem ) ) continue;
-              } else if ( type == DrawingPath.DRAWING_PATH_AREA ) {
-                if ( ! sareas || ! DrawingLevel.isLevelVisible( pt.mItem ) ) continue;
-              } else if ( ( type == DrawingPath.DRAWING_PATH_FIXED && ! (legs && sshots) )
-                          // || ( type == DrawingPath.DRAWING_PATH_SPLAY && ! (splays && sshots) )
-                          || ( type == DrawingPath.DRAWING_PATH_NAME  && ! (sstations) ) ) {
-                continue;
+        if ( TDSetting.mWithLevels == 0 ) { // treat no-levels case by itself
+          for ( SelectionBucket bucket: mSelection.mBuckets ) {
+            if ( bucket.intersects( mBBox ) ) {
+              for ( SelectionPoint pt : bucket.mPoints ) { 
+                int type = pt.type();
+                if ( type == DrawingPath.DRAWING_PATH_POINT ) {
+                  if ( ! spoints ) continue;
+                } else if ( type == DrawingPath.DRAWING_PATH_LINE ) {
+                  if ( ! slines ) continue;
+                } else if ( type == DrawingPath.DRAWING_PATH_AREA ) {
+                  if ( ! sareas ) continue;
+                } else if ( ( type == DrawingPath.DRAWING_PATH_FIXED && ! (legs && sshots) )
+                            // || ( type == DrawingPath.DRAWING_PATH_SPLAY && ! (splays && sshots) )
+                            || ( type == DrawingPath.DRAWING_PATH_NAME  && ! (sstations) ) ) {
+                  continue;
+                }
+	        if ( type == DrawingPath.DRAWING_PATH_SPLAY ) {
+                  // FIXME_LATEST latest splays
+                  if ( splays ) {
+                    if ( station_splay.isStationOFF( pt.mItem ) ) continue;
+                  } else {
+                    if ( ! station_splay.isStationON( pt.mItem ) ) continue;
+                  }
+	        } 
+                drawGreenDot( canvas, pt, dot_radius );
               }
-	      if ( type == DrawingPath.DRAWING_PATH_SPLAY ) {
-		// FIXME_LATEST latest splays
-                if ( splays ) {
-                  if ( station_splay.isStationOFF( pt.mItem ) ) continue;
-		} else {
-                  if ( ! station_splay.isStationON( pt.mItem ) ) continue;
-		}
-	      } 
-              
-              Path path = new Path();
-              if ( pt.mPoint != null ) { // line-point
-                path.addCircle( pt.mPoint.x, pt.mPoint.y, dot_radius, Path.Direction.CCW );
-              } else {  
-                path.addCircle( pt.mItem.cx, pt.mItem.cy, dot_radius, Path.Direction.CCW );
+            }
+          }
+        } else {
+          for ( SelectionBucket bucket: mSelection.mBuckets ) {
+            if ( bucket.intersects( mBBox ) ) {
+              for ( SelectionPoint pt : bucket.mPoints ) { 
+                int type = pt.type();
+                if ( type == DrawingPath.DRAWING_PATH_POINT ) {
+                  if ( ! spoints || ! DrawingLevel.isLevelVisible( pt.mItem ) ) continue;
+                } else if ( type == DrawingPath.DRAWING_PATH_LINE ) {
+                  if ( ! slines || ! DrawingLevel.isLevelVisible( pt.mItem ) ) continue;
+                } else if ( type == DrawingPath.DRAWING_PATH_AREA ) {
+                  if ( ! sareas || ! DrawingLevel.isLevelVisible( pt.mItem ) ) continue;
+                } else if ( ( type == DrawingPath.DRAWING_PATH_FIXED && ! (legs && sshots) )
+                            // || ( type == DrawingPath.DRAWING_PATH_SPLAY && ! (splays && sshots) )
+                            || ( type == DrawingPath.DRAWING_PATH_NAME  && ! (sstations) ) ) {
+                  continue;
+                }
+	        if ( type == DrawingPath.DRAWING_PATH_SPLAY ) {
+                  // FIXME_LATEST latest splays
+                  if ( splays ) {
+                    if ( station_splay.isStationOFF( pt.mItem ) ) continue;
+                  } else {
+                    if ( ! station_splay.isStationON( pt.mItem ) ) continue;
+                  }
+	        } 
+                drawGreenDot( canvas, pt, dot_radius );
               }
-              path.transform( mMatrix );
-              canvas.drawPath( path, BrushManager.highlightPaint2 );
             }
           }
         }

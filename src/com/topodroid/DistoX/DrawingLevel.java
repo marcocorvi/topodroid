@@ -41,22 +41,20 @@ class DrawingLevel
 
   static  boolean isLevelVisible( DrawingPath path )
   {
-    if ( path == null ) return true; // visibility is filtered only if path is non-null
-    switch (TDSetting.mWithLevels) {
-      case 2: 
-        return isVisible( path.mLevel ); 
-      case 1:
-        int level = 0xff;
-        if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
-          level = BrushManager.getPointLevel( ((DrawingPointPath)path).mPointType );
-        } else if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
-          level = BrushManager.getLineLevel( ((DrawingLinePath)path).mLineType );
-        } else if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
-          level = BrushManager.getAreaLevel( ((DrawingAreaPath)path).mAreaType );
-        }
-        return isVisible( level ); 
+    if ( TDSetting.mWithLevels == 0 || path == null ) return true; // visibility is filtered only if path is non-null
+    if ( TDSetting.mWithLevels == 1 ) {
+      int level = 0xff;
+      if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
+        level = BrushManager.getPointLevel( ((DrawingPointPath)path).mPointType );
+      } else if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
+        level = BrushManager.getLineLevel( ((DrawingLinePath)path).mLineType );
+      } else if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
+        level = BrushManager.getAreaLevel( ((DrawingAreaPath)path).mAreaType );
+      }
+      return isVisible( level ); 
     }
-    return true;
+    // TDSetting.mWithLevels == 2
+    return isVisible( path.mLevel ); 
   }
 }
 

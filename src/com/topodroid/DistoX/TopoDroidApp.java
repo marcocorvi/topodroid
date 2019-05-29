@@ -397,14 +397,15 @@ public class TopoDroidApp extends Application
   public boolean isCommConnected()
   {
     // return mComm != null && mComm.mBTConnected;
-    return mComm != null && mComm.mBTConnected && mComm.mRfcommThread != null;
+    // return mComm != null && mComm.mBTConnected && mComm.mCommThread != null;
+    return mComm != null && mComm.isConnected() && ! mComm.checkCommThreadNull();
   }
 
   void disconnectRemoteDevice( boolean force )
   {
     // TDLog.Log( TDLog.LOG_COMM, "App disconnect RemoteDevice listers " + mListerSet.size() + " force " + force );
     if ( force || mListerSet.size() == 0 ) {
-      if ( mComm != null && mComm.mBTConnected ) mComm.disconnectRemoteDevice( );
+      if ( mComm != null && mComm.isConnected() ) mComm.disconnectRemoteDevice( );
     }
   }
 

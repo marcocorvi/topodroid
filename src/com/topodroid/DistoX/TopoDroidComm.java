@@ -29,7 +29,8 @@ class TopoDroidComm
 {
   protected TopoDroidApp mApp;
   protected String mAddress;
-  protected DistoXProtocol mProtocol;
+  protected TopoDroidProtocol mProtocol;
+
   protected boolean mCalibMode;   //!< whether the device is in calib-mode
 
   protected boolean mBTConnected;
@@ -48,9 +49,9 @@ class TopoDroidComm
 
   public boolean isConnected() { return mBTConnected; }
 
-  protected class RfcommThread extends Thread
+  protected class CommThread extends Thread
   {
-    private DistoXProtocol mProto;
+    private TopoDroidProtocol mProto;
     private int toRead; // number of packet to read
     // private ILister mLister;
     private Handler mLister; // FIXME_LISTER
@@ -68,7 +69,7 @@ class TopoDroidComm
      * @param protocol    communication protocol
      * @param to_read     number of data to read (use -1 to read forever until timeout or an exception)
      */
-    RfcommThread( DistoXProtocol protocol, int to_read, Handler /* ILister */ lister ) // FIXME_LISTER
+    CommThread( TopoDroidProtocol protocol, int to_read, Handler /* ILister */ lister ) // FIXME_LISTER
     {
       toRead = to_read;
       mProto = protocol;
@@ -77,7 +78,7 @@ class TopoDroidComm
       // nReadPackets = new AtomicInteger( 0 ); // FIXME_ATOMIC_INT
       nReadPackets = 0;
       // mLastShotId = 0;
-      // TDLog.Log( TDLog.LOG_COMM, "RFcomm thread cstr ToRead " + toRead );
+      // TDLog.Log( TDLog.LOG_COMM, "RF comm thread cstr ToRead " + toRead );
     }
 
     public void run()
@@ -85,21 +86,21 @@ class TopoDroidComm
       boolean hasG = false;
       doWork = true;
 
-      // TDLog.Log( TDLog.LOG_COMM, "RFcomm thread running ... to_read " + toRead );
+      // TDLog.Log( TDLog.LOG_COMM, "RF comm thread running ... to_read " + toRead );
       while ( doWork && nReadPackets /* .get() */ != toRead ) {
-        // TDLog.Log( TDLog.LOG_COMM, "RFcomm loop: read " + getNrReadPackets() + " to-read " + toRead );
+        // TDLog.Log( TDLog.LOG_COMM, "RF comm loop: read " + getNrReadPackets() + " to-read " + toRead );
         
         int res = mProto.readPacket( toRead >= 0 );
-        // TDLog.Log( TDLog.LOG_COMM, "RFcomm readPacket returns " + res );
-        if ( res == DistoXProtocol.DISTOX_PACKET_NONE ) {
+        // TDLog.Log( TDLog.LOG_COMM, "RF comm readPacket returns " + res );
+        if ( res == TopoDroidProtocol.DISTOX_PACKET_NONE ) {
           if ( toRead == -1 ) {
             doWork = false;
           } else {
-            // TDLog.Log( TDLog.LOG_COMM, "RFcomm sleeping 1000 " );
-            TDUtil.slowDown( TDSetting.mWaitConn, "RFcomm thread sleep interrupt");
+            // TDLog.Log( TDLog.LOG_COMM, "RF comm sleeping 1000 " );
+            TDUtil.slowDown( TDSetting.mWaitConn, "RF comm thread sleep interrupt");
           }
-        } else if ( res == DistoXProtocol.DISTOX_ERR_OFF ) {
-          // TDLog.Error( "RFcomm readPacket returns ERR_OFF " );
+        } else if ( res == TopoDroidProtocol.DISTOX_ERR_OFF ) {
+          // TDLog.Error( "RF comm readPacket returns ERR_OFF " );
           // if ( TDSetting.mCommType == 1 && TDSetting.mAutoReconnect ) { // FIXME ACL_DISCONNECT
           //   mApp.mDataDownloader.setConnected( false );
           //   mApp.notifyStatus();
@@ -107,7 +108,7 @@ class TopoDroidComm
           //   mApp.notifyDisconnected();
           // }
           doWork = false;
-        } else if ( res == DistoXProtocol.DISTOX_PACKET_DATA ) {
+        } else if ( res == TopoDroidProtocol.DISTOX_PACKET_DATA ) {
           // nReadPackets.incrementAndGet(); // FIXME_ATOMIC_INT
           ++nReadPackets;
           double d = mProto.mDistance;
@@ -139,12 +140,12 @@ class TopoDroidComm
           //   blk.mRoll    = (float)r;
           //   mLister.updateBlockList( blk );
           // }
-        } else if ( res == DistoXProtocol.DISTOX_PACKET_G ) {
+        } else if ( res == TopoDroidProtocol.DISTOX_PACKET_G ) {
           TDLog.Log( TDLog.LOG_COMM, "Comm G PACKET" );
           // nReadPackets.incrementAndGet(); // FIXME_ATOMIC_INT
 	  ++nReadPackets;
           hasG = true;
-        } else if ( res == DistoXProtocol.DISTOX_PACKET_M ) {
+        } else if ( res == TopoDroidProtocol.DISTOX_PACKET_M ) {
           TDLog.Log( TDLog.LOG_COMM, "Comm M PACKET" );
           // nReadPackets.incrementAndGet(); // FIXME_ATOMIC_INT
 	  ++nReadPackets;
@@ -167,7 +168,7 @@ class TopoDroidComm
             } );
           }
           hasG = false;
-        } else if ( res == DistoXProtocol.DISTOX_PACKET_REPLY ) {
+        } else if ( res == TopoDroidProtocol.DISTOX_PACKET_REPLY ) {
           // TODO jandle packet reply
 	  //
           // byte[] addr = mProto.getAddress();
@@ -191,7 +192,7 @@ class TopoDroidComm
           //   // mHead = (int)( reply[0] | ( (int)(reply[1]) << 8 ) );
           //   // mTail = (int)( reply[2] | ( (int)(reply[3]) << 8 ) );
           // }
-        } else if ( res == DistoXProtocol.DISTOX_PACKET_VECTOR ) {
+        } else if ( res == TopoDroidProtocol.DISTOX_PACKET_VECTOR ) {
           // vector packet do count
           // nReadPackets.incrementAndGet(); // FIXME_ATOMIC_INT
 	  ++nReadPackets;
@@ -208,8 +209,8 @@ class TopoDroidComm
           }
         }
       }
-      // TDLog.Log( TDLog.LOG_COMM, "RFcomm thread run() exiting");
-      mRfcommThread = null;
+      // TDLog.Log( TDLog.LOG_COMM, "RF comm thread run() exiting");
+      mCommThread = null;
 
       // FIXME_COMM
       // mApp.notifyConnState( );
@@ -217,7 +218,7 @@ class TopoDroidComm
     }
   }
 
-  protected RfcommThread mRfcommThread;
+  protected CommThread mCommThread;
 
 
   TopoDroidComm( TopoDroidApp app )
@@ -225,7 +226,7 @@ class TopoDroidComm
     mApp          = app;
     mProtocol     = null;
     mAddress      = null;
-    mRfcommThread = null;
+    mCommThread = null;
     mCalibMode    = false;
     mBTConnected  = false;
     // TDLog.Log( TDLog.LOG_COMM, "TopoDroid Comm cstr");
@@ -233,31 +234,31 @@ class TopoDroidComm
 
   void resume()
   {
-    // if ( mRfcommThread != null ) { mRfcommThread.resume(); }
+    // if ( mCommThread != null ) { mCommThread.resume(); }
   }
 
   void suspend()
   {
-    // if ( mRfcommThread != null ) { mRfcommThread.suspend(); }
+    // if ( mCommThread != null ) { mCommThread.suspend(); }
   }
 
 
-  protected void cancelRfcommThread()
+  protected void cancelCommThread()
   {
-    // TDLog.Log( TDLog.LOG_COMM, "VD comm cancel Rfcomm thread");
-    if ( mRfcommThread != null ) {
-      // TDLog.Log( TDLog.LOG_COMM, "cancel Rfcomm thread: thread is active");
-      mRfcommThread.cancelWork();
+    // TDLog.Log( TDLog.LOG_COMM, "VD comm cancel Comm thread");
+    if ( mCommThread != null ) {
+      // TDLog.Log( TDLog.LOG_COMM, "cancel Comm thread: thread is active");
+      mCommThread.cancelWork();
       try {
-        mRfcommThread.join();
+        mCommThread.join();
       } catch ( InterruptedException e ) {
         // TDLog.Error( "cancel thread interrupt " + e.getMessage() );
       } finally {
-        // TDLog.Log( TDLog.LOG_COMM, "cancel Rfcomm thread: nulling thread");
-        mRfcommThread = null;
+        // TDLog.Log( TDLog.LOG_COMM, "cancel Comm thread: nulling thread");
+        mCommThread = null;
       }
     } else {
-      // TDLog.Log( TDLog.LOG_COMM, "cancel Rfcomm thread: no thread");
+      // TDLog.Log( TDLog.LOG_COMM, "cancel Comm thread: no thread");
     }
   }
 
@@ -271,7 +272,7 @@ class TopoDroidComm
     mProtocol = null;
   }
 
-  protected boolean startRfcommThread( int to_read, Handler /* ILister */ lister ) 
+  protected boolean startCommThread( int to_read, Handler /* ILister */ lister ) 
   {
     return false;
   }
@@ -279,11 +280,11 @@ class TopoDroidComm
   void disconnectRemoteDevice( )
   {
     // TDLog.Log( TDLog.LOG_COMM, "disconnect remote device ");
-    cancelRfcommThread();
+    cancelCommThread();
     closeProtocol();
   }
 
-  protected boolean checkRfcommThreadNull( String msg ) { return ( mRfcommThread == null ); }
+  protected boolean checkCommThreadNull( ) { return ( mCommThread == null ); }
 
   protected boolean sendCommand( int cmd )
   {

@@ -72,6 +72,8 @@ class TopoDroidProtocol
   protected byte[] mRequestBuffer;  // request buffer
   protected byte[] mReplyBuffer;    // reply data
   
+  int mMaxTimeout = 8;
+
   // int    getType() { return mDeviceType; }
   // byte[] getAddress() { return mDeviceAddress; }
 
@@ -193,7 +195,7 @@ class TopoDroidProtocol
           TDLog.DoLog( "Proto packet D " +
             String.format(Locale.US, " %7.2f %6.1f %6.1f (%6.1f)", mDistance, mBearing, mClino, mRoll ) );
         }
-        // Log.v( "DistoXProto packet D ",
+        // Log.v( "Proto packet D ",
         //     String.format(Locale.US, " %7.2f %6.1f %6.1f (%6.1f)", mDistance, mBearing, mClino, mRoll ) );
 
         return DISTOX_PACKET_DATA;
@@ -232,7 +234,7 @@ class TopoDroidProtocol
             TDLog.DoLog( "Proto packet V " +
               String.format(Locale.US, " %.2f %.2f %.2f roll %.1f", mAcceleration, mMagnetic, mDip, mRoll ) );
 	  }
-          // Log.v( "DistoXProto packet V ",
+          // Log.v( "Proto packet V ",
           //     String.format(Locale.US, " %.2f %.2f %.2f roll %.1f", mAcceleration, mMagnetic, mDip, mRoll ) );
         }
         return DISTOX_PACKET_VECTOR;
