@@ -2869,7 +2869,8 @@ class TDExporter
             float az   = blk.mBearing;
             float incl = blk.mClino;
             if ( ! pt.mForward ) {
-              az = ( az + 180 ); if ( az >= 360 ) az -= 360;
+              // az = ( az + 180 ); if ( az >= 360 ) az -= 360;
+              az = TDMath.add180( az );
               incl = - incl;
             }
             float len = blk.mLength;
@@ -3822,8 +3823,8 @@ class TDExporter
       pw.format("%s * ", item.mFrom );
       pw.format(Locale.US, "%.2f %.1f %.1f * * * * N E", item.mLength, item.mBearing, item.mClino );
     } else {
-      float b = item.mBearing + 180;
-      if ( b >= 360 ) b -= 360;
+      // float b = item.mBearing + 180; if ( b >= 360 ) b -= 360;
+      float b = TDMath.add180( item.mBearing );
       pw.format("%s * ", item.mTo );
       pw.format(Locale.US, "%.2f %.1f %.1f * * * * N E", item.mLength, b, - item.mClino );
     }

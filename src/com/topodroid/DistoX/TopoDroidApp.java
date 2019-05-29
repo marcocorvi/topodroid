@@ -1580,8 +1580,8 @@ public class TopoDroidApp extends Application
           id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, r, 90.0f, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1, true );
         }
       } else {
-        float b = bearing + 90.0f;
-        if ( b >= 360.0f ) b -= 360.0f;
+        // float b = bearing + 90.0f; if ( b >= 360.0f ) b -= 360.0f;
+        float b = TDMath.add90( bearing );
         extend = TDAzimuth.computeSplayExtend( b );
         if ( at >= 0L ) {
           id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, r, b, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1, true );
@@ -1658,9 +1658,9 @@ public class TopoDroidApp extends Application
       TDToast.makeBad( R.string.illegal_data_value );
       return null;
     }
-    bearing = (bearing  - ManualCalibration.mAzimuth) / TDSetting.mUnitAngle;
-    while ( bearing >= 360 ) bearing -= 360;
-    while ( bearing <    0 ) bearing += 360;
+    bearing = TDMath.in360( (bearing  - ManualCalibration.mAzimuth) / TDSetting.mUnitAngle );
+    // while ( bearing >= 360 ) bearing -= 360;
+    // while ( bearing <    0 ) bearing += 360;
 
     if ( from != null && to != null && from.length() > 0 ) {
       // if ( mData.makesCycle( -1L, TDInstance.sid, from, to ) ) {

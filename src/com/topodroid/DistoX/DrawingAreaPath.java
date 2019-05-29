@@ -203,9 +203,7 @@ class DrawingAreaPath extends DrawingPointLinePath
   { 
     // Log.v( "DistoX", "Area path set orientation " + angle );
     if ( ! BrushManager.mAreaLib.isSymbolOrientable( mAreaType ) ) return;
-    mOrientation = angle; 
-    while ( mOrientation >= 360.0 ) mOrientation -= 360.0;
-    while ( mOrientation < 0.0 ) mOrientation += 360.0;
+    mOrientation = TDMath.in360( angle );
     resetPathPaint();
   }
 

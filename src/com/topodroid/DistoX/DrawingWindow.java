@@ -3546,7 +3546,7 @@ public class DrawingWindow extends ItemDrawer
     
           float dc = TDMath.in360( (extend == blk.getExtend())? clino - blk.mClino : 180 - clino - blk.mClino );
           if ( dc > 90 && dc <= 270 ) { // exchange FROM-TO 
-            azimuth = blk.mBearing + 180; if ( azimuth >= 360 ) azimuth -= 360;
+            azimuth = TDMath.add180( blk.mBearing );
             from = blk.mTo;
             to   = blk.mFrom;
             tt   = 1 - tt;
@@ -3554,7 +3554,7 @@ public class DrawingWindow extends ItemDrawer
             azimuth = blk.mBearing;
           }
           // if ( extend != blk.getExtend() ) {
-          //   azimuth = blk.mBearing + 180; if ( azimuth >= 360 ) azimuth -= 360;
+          //   azimuth = TDMath.add180( blk.mBearing );
           // }
         } else { // xsection in plan view ( clino = 0 )
           float da = TDMath.in360( azimuth - blk.mBearing );

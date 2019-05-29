@@ -345,9 +345,7 @@ class DrawingPointPath extends DrawingPath
   { 
     // TDLog.Log( TDLog.LOG_PATH, "Point " + mPointType + " set Orientation " + angle );
     // Log.v( "DistoX", "Point::set Orientation " + angle );
-    mOrientation = angle; 
-    while ( mOrientation >= 360.0 ) mOrientation -= 360.0;
-    while ( mOrientation < 0.0 ) mOrientation += 360.0;
+    mOrientation = TDMath.in360( angle ); 
     resetPath( 1.0f );
   }
 

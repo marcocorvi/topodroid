@@ -104,9 +104,10 @@ class SymbolArea extends Symbol
   {
     if ( mOrientable ) {
       // TDLog.Error( "ERROR area symbol rotate by " + a + " not implementd" );
-      mOrientation += a;
-      while ( mOrientation >= 360 ) mOrientation -= 360;
-      while ( mOrientation < 0 ) mOrientation += 360;
+      // mOrientation += a;
+      // while ( mOrientation >= 360 ) mOrientation -= 360;
+      // while ( mOrientation < 0 ) mOrientation += 360;
+      mOrientation = TDMath.in360( mOrientation + a );
       if ( mShader != null ) {
         android.graphics.Matrix m = new android.graphics.Matrix();
         m.preRotate( (float)mOrientation );

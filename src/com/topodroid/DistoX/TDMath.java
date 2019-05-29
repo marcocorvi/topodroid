@@ -37,12 +37,62 @@ class TDMath
   static float asind( float x )  { return (float)( RAD2DEG * Math.asin( x ) ); }
   static float sqrt( float x )   { return (float)Math.sqrt( x ); }
 
+  static int in360( int f )
+  {
+    while ( f >= 360 ) f -= 360;
+    while ( f < 0 )    f += 360;
+    return f;
+  }
+
   static float in360( float f )
   {
     while ( f >= 360 ) f -= 360;
     while ( f < 0 )    f += 360;
     return f;
   }
+
+  static double in360( double f )
+  {
+    while ( f >= 360 ) f -= 360;
+    while ( f < 0 )    f += 360;
+    return f;
+  }
+
+  static float add90( float a )
+  {
+    a += 90;
+    if ( a >= 360 ) a -= 360;
+    return a;
+  }
+
+  static int add180( int a )
+  {
+    a += 180;
+    if ( a >= 360 ) a -= 360;
+    return a;
+  }
+
+  static float add180( float a )
+  {
+    a += 180;
+    if ( a >= 360 ) a -= 360;
+    return a;
+  }
+
+  static double add180( double a )
+  {
+    a += 180;
+    if ( a >= 360 ) a -= 360;
+    return a;
+  }
+
+  static float sub90( float a )
+  {
+    a -= 90;
+    if ( a < 0 ) a += 360;
+    return a;
+  }
+
 
   static float around( float f, float f0 ) 
   {

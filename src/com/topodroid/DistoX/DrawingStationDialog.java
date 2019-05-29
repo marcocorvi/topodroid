@@ -206,20 +206,23 @@ class DrawingStationDialog extends MyDialog
               String from = leg0.mFrom;
               if ( from.equals( mStationName ) ) {
                 from = leg0.mTo;
-                b0 += 180; if ( b0 >= 360 ) b0 -= 360;
+                // b0 += 180; if ( b0 >= 360 ) b0 -= 360;
+                b0 = TDMath.add180( b0 );
                 c0 = -c0;
               }
               String to = leg1.mTo;
               if ( to.equals( mStationName ) ) {
                 to = leg0.mFrom;
-                b1 += 180; if ( b1 >= 360 ) b1 -= 360;
+                // b1 += 180; if ( b1 >= 360 ) b1 -= 360;
+                b1 = TDMath.add180( b1 );
                 c1 = -c1;
               }
 
               mBearing = (b1 + b0)/2;
               if ( Math.abs( b1 - b0 ) > 180 ) {
-                mBearing += 180; // like adding 360 to b1
-                if ( mBearing >= 360 ) mBearing -= 360;
+                // like adding 360 to b1
+                // mBearing += 180; if ( mBearing >= 360 ) mBearing -= 360;
+                mBearing = TDMath.add180( mBearing );
               }
               mClino = ( c0 + c1 ) / 2; // later reset to 0 if PLAN
 
@@ -369,8 +372,8 @@ class DrawingStationDialog extends MyDialog
         //   mETnick.setError( mContext.getResources().getString( R.string.error_nick_required ) );
         //   return;
         // }
-        mBearing += 180;
-        if ( mBearing >= 360 ) mBearing -= 360;
+        // mBearing += 180; if ( mBearing >= 360 ) mBearing -= 360;
+        mBearing = TDMath.add180( mBearing );
         mClino = -mClino;
         mParent.openXSection( mStation, mStationName, mParent.getPlotType(), mBearing, mClino, mCBhorizontal.isChecked(), nick);
       }

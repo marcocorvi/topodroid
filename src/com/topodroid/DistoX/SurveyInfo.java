@@ -61,12 +61,7 @@ class SurveyInfo
   boolean isExtendLeft( )  { return mExtend < -999; }
   boolean isExtendRight( ) { return mExtend  > 999; }
   int getExtend() { return mExtend; }
-  void setExtend( int extend )
-  { 
-    while ( extend < 0 ) extend += 360;
-    while ( extend >= 360 ) extend -= 360;
-    mExtend = extend;
-  }
+  void setExtend( int extend ) { mExtend = TDMath.in360( extend ); }
 
 
   boolean hasDeclination() { return declination < DECLINATION_MAX; }

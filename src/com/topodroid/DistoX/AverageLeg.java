@@ -57,12 +57,7 @@ class AverageLeg
 
   float length() { return mAverage.Length() / mCnt; }
 
-  float bearing() 
-  {
-    float a = TDMath.atan2d( mAverage.x, mAverage.y ) + mDecl;
-    if ( a < 0 ) a += 360;
-    return a;
-  }
+  float bearing() { return TDMath.in360( TDMath.atan2d( mAverage.x, mAverage.y ) + mDecl ); }
 
   float clino() 
   {

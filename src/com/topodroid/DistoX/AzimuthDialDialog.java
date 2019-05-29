@@ -195,14 +195,12 @@ class AzimuthDialDialog extends MyDialog
     // TDLog.Log( TDLog.LOG_INPUT, "AzimuthDialDialog onClick button " + b.getText().toString() );
 
     // if ( b == mBTback ) {
-    //   mAzimuth -= 5;
-    //   if ( mAzimuth < 0 ) mAzimuth += 360;
+    //   mAzimuth = TDMath.in360( mAzimuth-5 );
     //   updateSeekBar();
     //   updateView();
     //   updateEditText();
     // } else if ( b == mBTfore ) {
-    //   mAzimuth += 5;
-    //   if ( mAzimuth >= 360 ) mAzimuth -= 360;
+    //   mAzimuth = TDMath.in360( mAzimuth+5 );
     //   updateSeekBar();
     //   updateView();
     //   updateEditText();
@@ -210,8 +208,8 @@ class AzimuthDialDialog extends MyDialog
     if ( b == mBtnCancel ) {
       dismiss();
     } else if ( b == mBTazimuth ) {
-      mAzimuth += 90;
-      if ( mAzimuth >= 360 ) mAzimuth -= 360;
+      // mAzimuth += 90; if ( mAzimuth >= 360 ) mAzimuth -= 360;
+      mAzimuth = TDMath.add90( mAzimuth );
       updateSeekBar();
       updateView();
       updateEditText();

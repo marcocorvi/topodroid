@@ -49,8 +49,8 @@ class OrientationWidget
       seekBar.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener() {
         public void onProgressChanged( SeekBar seekbar, int progress, boolean fromUser) {
           if ( fromUser ) {
-            mOrient = 180 + progress;
-            if ( mOrient >= 360 ) mOrient -= 360;
+            // mOrient = 180 + progress; if ( mOrient >= 360 ) mOrient -= 360;
+            mOrient = TDMath.add180( progress );
             drawOrientation();
           }
         }

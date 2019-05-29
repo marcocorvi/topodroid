@@ -129,7 +129,10 @@ class TriShot
     // return TDMath.in360( ret/size );
 
     float ret = mAvgLeg.bearing();
-    if ( reversed == -1 ) { ret += 180; if (ret >= 360) ret -= 360; }
+    if ( reversed == -1 ) { 
+      // ret += 180; if (ret >= 360) ret -= 360;
+      ret = TDMath.add180( ret );
+    }
     return ret;
   }
 

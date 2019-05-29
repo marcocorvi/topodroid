@@ -636,19 +636,22 @@ class ParserTherion
                     len = (len - zLen) * sLen;
                     ber = (ber - state.mZeroBer) * state.mScaleBer * state.mUnitBer;
                     if ( mApplyDeclination ) ber += state.mDeclination;
-		    if ( ber < 0 ) { ber += 360; } else if ( ber >= 360 ) { ber -= 360; }
+		    // if ( ber < 0 ) { ber += 360; } else if ( ber >= 360 ) { ber -= 360; }
+                    ber = TDMath.in360( ber );
                     cln = (cln - state.mZeroCln) * state.mScaleCln * state.mUnitCln;
 
                     float dist, b;
                     if ( jLeft >= 0 && jLeft < sz ) {
                       dist = (Float.parseFloat( vals[jLeft] ) - zLen) * sLen;
-                      b = ber - 90; if ( b < 0 ) b += 360;
+                      // b = ber - 90; if ( b < 0 ) b += 360;
+                      b = TDMath.sub90( ber );
                       shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, TDString.EMPTY,
                                  dist, b, 0, 0.0f, state.mExtend, 2, state.mDuplicate, state.mSurface, false, "" ) );
                     }
                     if ( jRight >= 0 && jRight < sz ) {
                       dist = (Float.parseFloat( vals[jRight] ) - zLen) * sLen;
-                      b = ber + 90; if ( b >= 360 ) b -= 360;
+                      // b = ber + 90; if ( b >= 360 ) b -= 360;
+                      b = TDMath.add90( ber );
                       shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, TDString.EMPTY,
                                  dist, b, 0, 0.0f, state.mExtend, 2, state.mDuplicate, state.mSurface, false, "" ) );
                     }

@@ -43,8 +43,8 @@ class TDAzimuth
       bearing -= ref;
       return ( bearing > 90 && bearing < 270 )? -1L : 1L;
     } else if ( mFixedExtend == -1L ) {
-      bearing += 180; 
-      if ( bearing >= 360 ) bearing -= 360;
+      // bearing += 180; if ( bearing >= 360 ) bearing -= 360;
+      bearing = TDMath.add180( bearing );
     }
     mRefAzimuth = (float)bearing;
     return mFixedExtend;

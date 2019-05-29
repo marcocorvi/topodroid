@@ -148,9 +148,7 @@ class DrawingLabelPath extends DrawingPointPath
   @Override
   void setOrientation( double angle ) 
   { 
-    mOrientation = angle; 
-    while ( mOrientation >= 360.0 ) mOrientation -= 360.0;
-    while ( mOrientation < 0.0 ) mOrientation += 360.0;
+    mOrientation = TDMath.in360( angle );
     float f = fontSize();
     makeLabelPath( f );
   }

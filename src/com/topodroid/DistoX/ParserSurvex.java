@@ -532,7 +532,8 @@ class ParserSurvex extends ImportParser
                     len = len * sLen - zLen;
                     ber = ber * state.mScaleBer * state.mUnitBer - state.mZeroBer;
                     if ( mApplyDeclination ) ber += state.mDeclination;
-	            if ( ber < 0 ) { ber += 360; } else if ( ber >= 360 ) { ber -= 360; }
+	            // if ( ber < 0 ) { ber += 360; } else if ( ber >= 360 ) { ber -= 360; }
+                    ber = TDMath.in360( ber );
                     cln = cln * state.mScaleCln * state.mUnitCln - state.mZeroCln;
 
                   } catch ( NumberFormatException e ) {
@@ -559,19 +560,22 @@ class ParserSurvex extends ImportParser
                     len = len * sLen - zLen;
                     ber = ber * state.mScaleBer * state.mUnitBer - state.mZeroBer;
                     if ( mApplyDeclination ) ber += state.mDeclination;
-	            if ( ber < 0 ) { ber += 360; } else if ( ber >= 360 ) { ber -= 360; }
+	            // if ( ber < 0 ) { ber += 360; } else if ( ber >= 360 ) { ber -= 360; }
+                    ber = TDMath.in360( ber );
                     cln = cln * state.mScaleCln * state.mUnitCln - state.mZeroCln;
 
                     float dist, b;
                     if ( jLeft >= 0 && jLeft < sz ) {
                       dist = Float.parseFloat( vals[jLeft] ) * sLen - zLen;
-                      b = ber - 90; if ( b < 0 ) b += 360;
+                      // b = ber - 90; if ( b < 0 ) b += 360;
+                      b = TDMath.in360( ber - 90 );
                       shots.add( new ParserShot( from, TDString.EMPTY,
                                  dist, b, 0, 0.0f, DBlock.EXTEND_UNSET, 2, state.mDuplicate, state.mSurface, false, "" ) );
                     }
                     if ( jRight >= 0 && jRight < sz ) {
                       dist = Float.parseFloat( vals[jRight] ) * sLen - zLen;
-                      b = ber + 90; if ( b >= 360 ) b -= 360;
+                      // b = ber + 90; if ( b >= 360 ) b -= 360;
+                      b = TDMath.add90( ber );
                       shots.add( new ParserShot( from, TDString.EMPTY,
                                  dist, b, 0, 0.0f, DBlock.EXTEND_UNSET, 2, state.mDuplicate, state.mSurface, false, "" ) );
                     }
