@@ -1395,6 +1395,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
 \n
     </string>
 
+<!-- FIRMWARE DIALOG STRINGS CAN BE LEFT UNTRANSLATED -->
   <string name="firmware_title">Firmware Updater</string>
   <string name="firmware_file_title">Firmware Files</string>
   <string name="firmware_text">
@@ -1416,5 +1417,6 @@ There are other settings for the presentation of the sketchs (icon size, label s
    <string name="ask_upload_not_compatible">Firmware file does not look correct.\nUpload anyways?</string>
    <string name="firmware_file_dumped">Saved firmware file %1$s size %2$d</string>
    <string name="firmware_file_uploaded">Uploaded firmware file %1$s written %2$d / %3$d</string>
+   <string name="firmware_not_supported">Device does not support firmware functions</string>
    
 </resources>

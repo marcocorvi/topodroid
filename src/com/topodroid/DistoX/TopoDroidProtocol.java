@@ -52,6 +52,7 @@ class TopoDroidProtocol
   static final int DISTOX_ERR_HEADTAIL_EOF = -3;
   static final int DISTOX_ERR_CONNECTED    = -4;
   static final int DISTOX_ERR_OFF          = -5; // distox has turned off
+  static final int DISTOX_ERR_PROTOCOL     = -6; // protocol is null
 
   protected int  mError; // readToRead error code
   int getErrorCode() { return mError; }
@@ -182,8 +183,8 @@ class TopoDroidProtocol
           } else {
             mDistance = 100 + (d-100000) / 100.0;
           }
-        } else if ( mDeviceType == Device.DISTO_SAP ) {
-          // FIXME_SAP
+        } else if ( mDeviceType == Device.DISTO_SAP5 ) {
+          // FIXME_SAP5
         }
 
         mBearing  = b * 180.0 / 32768.0; // 180/0x8000;

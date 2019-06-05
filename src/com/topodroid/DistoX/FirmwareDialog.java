@@ -8,8 +8,12 @@
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
+ *
+ * this class is intsantiated only by DeviceActivity
  */
 package com.topodroid.DistoX;
+
+// import android.util.Log;
 
 import java.io.File;
 // import java.io.FileInputStream;
@@ -17,10 +21,9 @@ import java.io.File;
 // import java.io.IOException;
 
 import android.os.Bundle;
-// import android.app.Dialog;
 
-// import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 // import android.content.Intent;
 import android.content.DialogInterface;
 // import android.content.DialogInterface.OnCancelListener;
@@ -35,10 +38,8 @@ import android.widget.EditText;
 
 import android.text.method.KeyListener;
 
-// import android.util.Log;
-
 class FirmwareDialog extends MyDialog
-                             implements View.OnClickListener
+                     implements View.OnClickListener
 {
   private RadioButton mBtnDump;
   private RadioButton mBtnUpload;
@@ -47,14 +48,14 @@ class FirmwareDialog extends MyDialog
 
   private EditText mETfile;
 
-  private final DeviceActivity mParent;
   private final TopoDroidApp   mApp;
+  private Resources mRes;
   private KeyListener    mETkeyListener;
 
-  FirmwareDialog( Context context, DeviceActivity parent, TopoDroidApp app )
+  FirmwareDialog( Context context, Resources res, TopoDroidApp app )
   {
     super( context, R.string.FirmwareDialog );
-    mParent  = parent;
+    mRes     = res;
     mApp     = app;
   }
 
@@ -98,7 +99,7 @@ class FirmwareDialog extends MyDialog
     switch ( view.getId() ) {
       case R.id.firmware_file:
         if ( mBtnUpload.isChecked() ) {
-          (new FirmwareFileDialog( mContext, this, mApp)).show(); // select file from bin directory
+          (new FirmwareFileDialog( mContext, this )).show(); // select file from bin directory
         }
         break;
       case R.id.firmware_upload:
@@ -151,14 +152,14 @@ class FirmwareDialog extends MyDialog
 
   private void askDump( final String filename )
   {
-    TopoDroidAlertDialog.makeAlert( mContext, mParent.getResources(), R.string.ask_dump,
+    TopoDroidAlertDialog.makeAlert( mContext, mRes, R.string.ask_dump,
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {
           TDLog.LogFile( "Firmware dumping to file " + filename );
           int ret = mApp.dumpFirmware( filename );
           TDLog.LogFile( "Firmware dump to " + filename + " result: " + ret );
-          TDToast.makeLong( String.format( mParent.getResources().getString(R.string.firmware_file_dumped), filename, ret ) );
+          TDToast.makeLong( String.format( mRes.getString(R.string.firmware_file_dumped), filename, ret ) );
           // finish(); 
         }
       }
@@ -170,8 +171,8 @@ class FirmwareDialog extends MyDialog
   {
     boolean compatible = (fw == 21 || fw == 22 || fw == 23 || fw == 24 || fw == 25 || fw == 240 || fw == 250 );
     TDLog.LogFile( "FW/HW compatible " + compatible + " FW check " + check );
-    String title = mParent.getResources().getString( (compatible && check)? R.string.ask_upload : R.string.ask_upload_not_compatible );
-    TopoDroidAlertDialog.makeAlert( mContext, mParent.getResources(), title,
+    String title = mRes.getString( (compatible && check)? R.string.ask_upload : R.string.ask_upload_not_compatible );
+    TopoDroidAlertDialog.makeAlert( mContext, mRes, title,
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {
@@ -181,7 +182,7 @@ class FirmwareDialog extends MyDialog
           long len = file.length();
           int ret  = mApp.uploadFirmware( filename );
           TDLog.LogFile( "Firmware upload result: written " + ret + " bytes of " + len );
-          TDToast.makeLong( String.format( mParent.getResources().getString(R.string.firmware_file_uploaded), filename, ret, len ) );
+          TDToast.makeLong( String.format( mRes.getString(R.string.firmware_file_uploaded), filename, ret, len ) );
           // finish(); 
         }
       }

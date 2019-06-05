@@ -34,8 +34,6 @@ import android.view.View.OnClickListener;
 
 // import android.util.Log;
 
-// import android.bluetooth.BluetoothDevice;
-
 class DeviceSelectDialog extends MyDialog
                                 implements OnItemClickListener
                                 , OnClickListener

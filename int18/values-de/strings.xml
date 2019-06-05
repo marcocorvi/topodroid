@@ -1393,7 +1393,7 @@
 \n
     </string>
 
-<!-- FIRMWARE DIALOG STRINGS CAN BE LEFT UNTRANSLATED -->
+<!-- FIRMWARE DIALOG STRINGS CAN BE LEFT UNTRANSLATED : mark OK untranslated strings -->
   <string name="firmware_title">Firmware Updater</string>
   <string name="firmware_file_title">Firmware-Datei</string>
   <string name="firmware_text">
@@ -1414,5 +1414,6 @@
    <string name="ask_upload_not_compatible">Kompatibilität konnte nicht sichergestellt werden.\nFirmware trotzdem updaten?</string>
    <string name="firmware_file_dumped">Firmware gespeichert als %1$s (Größe %2$d)</string>
    <string name="firmware_file_uploaded">Firmware %1$s aktualisiert (%2$d / %3$d geschrieben)</string>
+   <!-- TODO string name="firmware_not_supported">Device does not support firmware functions</string -->
 
 </resources>

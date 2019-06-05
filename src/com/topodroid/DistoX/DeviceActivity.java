@@ -148,10 +148,10 @@ public class DeviceActivity extends Activity
   {
     public void onReceive( Context ctx, Intent intent )
     {
-      if ( BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals( intent.getAction() ) ) {
-        final int state = intent.getIntExtra( BluetoothDevice.EXTRA_BOND_STATE, BluetoothDevice.ERROR );
-        final int prev  = intent.getIntExtra( BluetoothDevice.EXTRA_PREVIOUS_BOND_STATE, BluetoothDevice.ERROR );
-        if ( state == BluetoothDevice.BOND_BONDED && prev == BluetoothDevice.BOND_BONDING ) {
+      if ( DeviceUtil.ACTION_BOND_STATE_CHANGED.equals( intent.getAction() ) ) {
+        final int state = intent.getIntExtra( DeviceUtil.EXTRA_BOND_STATE, DeviceUtil.ERROR );
+        final int prev  = intent.getIntExtra( DeviceUtil.EXTRA_PREVIOUS_BOND_STATE, DeviceUtil.ERROR );
+        if ( state == DeviceUtil.BOND_BONDED && prev == DeviceUtil.BOND_BONDING ) {
           // FIXME TDToast.make( R.string.device_paired );
           updateList();
         }
@@ -294,39 +294,38 @@ public class DeviceActivity extends Activity
     // if ( TDLevel.overTester ) { // FIXME VirtualDistoX
     //   mArrayAdapter.add( "X000" );
     // }
-    if ( mApp.mBTAdapter != null ) {
-      Set<BluetoothDevice> device_set = mApp.mBTAdapter.getBondedDevices(); // get paired devices
-      if ( device_set.isEmpty() ) {
-        // TDToast.make(R.string.no_paired_device );
-      } else {
-        setTitle( R.string.title_device );
-        for ( BluetoothDevice device : device_set ) {
-          String addr  = device.getAddress();
-          Device dev = mApp_mDData.getDevice( addr );
-          if ( dev == null ) {
-            String model = device.getName();
-            if ( model == null ) {
-              TDLog.Error( "WARNING. Null name for device " + addr );
-            } else if ( model.startsWith( "DistoX", 0 ) ) {
-              String name  = Device.modelToName( model );
-              mApp_mDData.insertDevice( addr, model, name );
-              dev = mApp_mDData.getDevice( addr );
-            }
+    Set<BluetoothDevice> device_set = DeviceUtil.getBondedDevices(); // get paired devices
+    if ( device_set == null || device_set.isEmpty() ) {
+      // TDToast.make(R.string.no_paired_device );
+    } else {
+      setTitle( R.string.title_device );
+      for ( BluetoothDevice device : device_set ) {
+        String addr  = device.getAddress();
+        Device dev = mApp_mDData.getDevice( addr );
+        if ( dev == null ) {
+          String model = device.getName();
+          if ( model == null ) {
+            TDLog.Error( "WARNING. Null name for device " + addr );
+          } else if ( model.startsWith( "DistoX", 0 ) ) {
+            String name  = Device.modelToName( model );
+            mApp_mDData.insertDevice( addr, model, name );
+            dev = mApp_mDData.getDevice( addr );
           }
-          if ( dev != null ) {
-            // // TDLog.Error( "device " + name );
-            // if ( dev.mModel.startsWith("DistoX-") ) {      // DistoX2 X310
-            //   mArrayAdapter.add( " X310 " + dev.mName + " " + addr );
-            // } else if ( dev.mModel.equals("DistoX") ) {    // DistoX A3
-            //   mArrayAdapter.add( " A3 " + dev.mName + " " + addr );
-            // } else {
-            //   // do not add
-            // }
-            mArrayAdapter.add( dev.toString() );
-          }
+        }
+        if ( dev != null ) {
+          // // TDLog.Error( "device " + name );
+          // if ( dev.mModel.startsWith("DistoX-") ) {      // DistoX2 X310
+          //   mArrayAdapter.add( " X310 " + dev.mName + " " + addr );
+          // } else if ( dev.mModel.equals("DistoX") ) {    // DistoX A3
+          //   mArrayAdapter.add( " A3 " + dev.mName + " " + addr );
+          // } else {
+          //   // do not add
+          // }
+          mArrayAdapter.add( dev.toString() );
         }
       }
     }
+    
   }
 
   @Override 
@@ -377,12 +376,11 @@ public class DeviceActivity extends Activity
     setState();
   }
 
-
-
   private void pairDevice()
   {
     if ( mCurrDevice == null ) return;
-    BluetoothDevice device = mApp.mBTAdapter.getRemoteDevice( mCurrDevice.mAddress );
+    BluetoothDevice device = DeviceUtil.getRemoteDevice( mCurrDevice.mAddress );
+    if ( device == null ) return;
     switch ( DeviceUtil.pairDevice( device ) ) {
       case -1: // failure
         // TDToast.makeBad( R.string.pairing_failed ); // TODO
@@ -533,7 +531,7 @@ public class DeviceActivity extends Activity
   {
     super.onResume();
     // TDLog.Debug("device activity on resume" );
-    registerReceiver( mPairReceiver, new IntentFilter( BluetoothDevice.ACTION_BOND_STATE_CHANGED ) );
+    registerReceiver( mPairReceiver, new IntentFilter( DeviceUtil.ACTION_BOND_STATE_CHANGED ) );
     mApp.resumeComm();
     mDeviceActivityVisible = true;
     // TDLog.Debug("device activity on resume done" );
@@ -665,7 +663,7 @@ public class DeviceActivity extends Activity
             mApp.setDevice( address );
 
             if ( TDSetting.mAutoPair ) { // try to get the system ask for the PIN
-              BluetoothDevice btDevice = mApp.mBTAdapter.getRemoteDevice( address );
+              BluetoothDevice btDevice = DeviceUtil.getRemoteDevice( address );
               // TDLog.Log( TDLog.LOG_BT, "auto-pairing remote device " + btDevice.getAddress()
               //   + " status " + btDevice.getBondState() );
               if ( ! DeviceUtil.isPaired( btDevice ) ) {
@@ -774,11 +772,15 @@ public class DeviceActivity extends Activity
       detachDevice();
 
     } else if ( TDLevel.overAdvanced && p++ == pos ) { // FIRMWARE
-      if ( TDSetting.mCommType != 0 ) {
-        TDToast.makeLong( "Connection mode must be \"on-demand\"" );
+      if ( TDInstance.distoType() == Device.DISTO_X310 ) {
+        // if ( TDSetting.mCommType != 0 ) {
+        //   TDToast.makeLong( "Connection mode must be \"on-demand\"" );
+        // } else {
+          mApp.resetComm();
+          (new FirmwareDialog( this, getResources(), mApp )).show();
+        // }
       } else {
-        mApp.resetComm();
-        (new FirmwareDialog( this, this, mApp )).show();
+        TDToast.makeLong( R.string.firmware_not_supported );
       }
     } else if ( TDLevel.overExpert && TDSetting.mPacketLog && p++ == pos ) { // PACKET_LOG
       (new PacketDialog( this )).show();

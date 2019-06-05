@@ -1024,7 +1024,7 @@ public class GMActivity extends Activity
   public void onStart()
   {
     super.onStart();
-    // setBTMenus( mApp.mBTAdapter.isEnabled() );
+    // setBTMenus( DeviceUtil.isAdapterEnabled() );
   }
 
   @Override

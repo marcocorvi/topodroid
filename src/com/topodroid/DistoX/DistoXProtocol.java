@@ -4,6 +4,8 @@
  * @date nov 2011
  *
  * @brief TopoDroid TopoDroid-DistoX communication protocol
+ *
+ * a DistoXProtocol is created by the DistoXComm to handle data
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -36,13 +38,9 @@ import android.content.Context;
 import java.nio.channels.ClosedByInterruptException;
 // import java.nio.ByteBuffer;
 
-// import android.bluetooth.BluetoothDevice;
-// import android.bluetooth.BluetoothServerSocket;
-// import android.bluetooth.BluetoothSocket;
-
 class DistoXProtocol extends TopoDroidProtocol
 {
-  private Socket  mSocket = null;
+  // private Socket  mSocket = null;
   private DataInputStream  mIn;
   private DataOutputStream mOut;
 

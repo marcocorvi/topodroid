@@ -1397,6 +1397,7 @@
 \n
     </string>
 
+<!-- FIRMWARE DIALOG STRINGS CAN BE LEFT UNTRANSLATED : mark OK untranslated strings -->
   <string name="firmware_title">固件升级</string>
   <string name="firmware_file_title">固件文件</string>
   <string name="firmware_text">
@@ -1418,5 +1419,6 @@
    <string name="ask_upload_not_compatible">固件文件不正确.\n强行上载??</string>
    <string name="firmware_file_dumped">保存固件文件 %1$s size %2$d</string>
    <string name="firmware_file_uploaded">升级固件文件 %1$s written %2$d / %3$d</string>
+   <!-- TODO string name="firmware_not_supported">Device does not support firmware functions</string -->
    
 </resources>

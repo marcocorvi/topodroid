@@ -684,7 +684,7 @@ public class ShotWindow extends Activity
         }
       }
     } else if ( TDLevel.overNormal && (! diving) && p++ == pos ) { // DEVICE
-      if ( mApp.mBTAdapter.isEnabled() ) {
+      if ( DeviceUtil.isAdapterEnabled() ) {
         mActivity.startActivity( new Intent( Intent.ACTION_VIEW ).setClass( mActivity, DeviceActivity.class ) );
       }
     } else  if ( p++ == pos ) { // OPTIONS

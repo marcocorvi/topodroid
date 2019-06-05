@@ -36,9 +36,7 @@ import android.os.Handler;
 import android.os.ParcelUuid;
 // import android.os.AsyncTask;
 
-// import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-// import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 
 import android.content.Context;
@@ -85,20 +83,20 @@ class DistoXComm extends TopoDroidComm
       public void onReceive( Context ctx, Intent data )
       {
         String action = data.getAction();
-        BluetoothDevice bt_device = data.getParcelableExtra( BluetoothDevice.EXTRA_DEVICE );
+        BluetoothDevice bt_device = data.getParcelableExtra( DeviceUtil.EXTRA_DEVICE );
         String device = ( bt_device != null )? bt_device.getAddress() : "undefined";
 
-        // if ( BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals( action ) ) {
-        // } else if ( BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals( action ) ) {
-        // } else if ( BluetoothDevice.ACTION_FOUND.equals( action ) ) {
-        if ( BluetoothDevice.ACTION_ACL_CONNECTED.equals( action ) ) {
+        // if ( DeviceUtil.ACTION_DISCOVERY_STARTED.equals( action ) ) {
+        // } else if ( DeviceUtil.ACTION_DISCOVERY_FINISHED.equals( action ) ) {
+        // } else if ( DeviceUtil.ACTION_FOUND.equals( action ) ) {
+        if ( DeviceUtil.ACTION_ACL_CONNECTED.equals( action ) ) {
           // TDLog.Log( TDLog.LOG_BT, "[C] ACL_CONNECTED " + device + " addr " + mAddress );
           if ( device.equals(mAddress) ) // FIXME ACL_DISCONNECT
           {
             mApp.mDataDownloader.setConnected( true );
             mApp.notifyStatus();
           }
-        } else if ( BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED.equals( action ) ) {
+        } else if ( DeviceUtil.ACTION_ACL_DISCONNECT_REQUESTED.equals( action ) ) {
           // TDLog.Log( TDLog.LOG_BT, "[C] ACL_DISCONNECT_REQUESTED " + device + " addr " + mAddress );
           if ( device.equals(mAddress) ) // FIXME ACL_DISCONNECT
           {
@@ -106,7 +104,7 @@ class DistoXComm extends TopoDroidComm
             mApp.notifyStatus();
             closeSocket( );
           }
-        } else if ( BluetoothDevice.ACTION_ACL_DISCONNECTED.equals( action ) ) {
+        } else if ( DeviceUtil.ACTION_ACL_DISCONNECTED.equals( action ) ) {
           // TDLog.Log( TDLog.LOG_BT, "[C] ACL_DISCONNECTED " + device + " addr " + mAddress );
           if ( device.equals(mAddress) ) // FIXME ACL_DISCONNECT
           {
@@ -115,14 +113,14 @@ class DistoXComm extends TopoDroidComm
             closeSocket( );
             mApp.notifyDisconnected();
           }
-        } else if ( BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals( action ) ) { // NOT USED
-          final int state     = data.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, BluetoothDevice.ERROR);
-          final int prevState = data.getIntExtra(BluetoothDevice.EXTRA_PREVIOUS_BOND_STATE, BluetoothDevice.ERROR);
-          if (state == BluetoothDevice.BOND_BONDED && prevState == BluetoothDevice.BOND_BONDING) {
+        } else if ( DeviceUtil.ACTION_BOND_STATE_CHANGED.equals( action ) ) { // NOT USED
+          final int state     = data.getIntExtra(DeviceUtil.EXTRA_BOND_STATE, DeviceUtil.ERROR);
+          final int prevState = data.getIntExtra(DeviceUtil.EXTRA_PREVIOUS_BOND_STATE, DeviceUtil.ERROR);
+          if (state == DeviceUtil.BOND_BONDED && prevState == DeviceUtil.BOND_BONDING) {
             TDLog.Log( TDLog.LOG_BT, "BOND STATE CHANGED paired (BONDING --> BONDED) " + device );
-          } else if (state == BluetoothDevice.BOND_NONE && prevState == BluetoothDevice.BOND_BONDED){
+          } else if (state == DeviceUtil.BOND_NONE && prevState == DeviceUtil.BOND_BONDED){
             TDLog.Log( TDLog.LOG_BT, "BOND STATE CHANGED unpaired (BONDED --> NONE) " + device );
-          } else if (state == BluetoothDevice.BOND_BONDING && prevState == BluetoothDevice.BOND_BONDED) {
+          } else if (state == DeviceUtil.BOND_BONDING && prevState == DeviceUtil.BOND_BONDED) {
             TDLog.Log( TDLog.LOG_BT, "BOND STATE CHANGED unpaired (BONDED --> BONDING) " + device );
             if ( mBTSocket != null ) {
               // TDLog.Error( "[*] socket is not null: close and retry connect ");
@@ -137,7 +135,7 @@ class DistoXComm extends TopoDroidComm
           }
 
           // DeviceUtil.bind2Device( data );
-        // } else if ( BluetoothDevice.ACTION_PAIRING_REQUEST.equals(action) ) {
+        // } else if ( DeviceUtil.ACTION_PAIRING_REQUEST.equals(action) ) {
         //   Log.v("DistoX", "PAIRING REQUEST");
         //   // BluetoothDevice device = getDevice();
         //   // //To avoid the popup notification:
@@ -157,15 +155,15 @@ class DistoXComm extends TopoDroidComm
     };
 
 
-    // mApp.registerReceiver( mBTReceiver, new IntentFilter( BluetoothDevice.ACTION_FOUND ) );
-    // mApp.registerReceiver( mBTReceiver, new IntentFilter( BluetoothAdapter.ACTION_DISCOVERY_STARTED ) );
-    // mApp.registerReceiver( mBTReceiver, new IntentFilter( BluetoothAdapter.ACTION_DISCOVERY_FINISHED ) );
-    mApp.registerReceiver( mBTReceiver, new IntentFilter( BluetoothDevice.ACTION_ACL_CONNECTED ) );
-    mApp.registerReceiver( mBTReceiver, new IntentFilter( BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED ) );
-    mApp.registerReceiver( mBTReceiver, new IntentFilter( BluetoothDevice.ACTION_ACL_DISCONNECTED ) );
+    // mApp.registerReceiver( mBTReceiver, new IntentFilter( DeviceUtil.ACTION_FOUND ) );
+    // mApp.registerReceiver( mBTReceiver, new IntentFilter( DeviceUtil.ACTION_DISCOVERY_STARTED ) );
+    // mApp.registerReceiver( mBTReceiver, new IntentFilter( DeviceUtil.ACTION_DISCOVERY_FINISHED ) );
+    mApp.registerReceiver( mBTReceiver, new IntentFilter( DeviceUtil.ACTION_ACL_CONNECTED ) );
+    mApp.registerReceiver( mBTReceiver, new IntentFilter( DeviceUtil.ACTION_ACL_DISCONNECT_REQUESTED ) );
+    mApp.registerReceiver( mBTReceiver, new IntentFilter( DeviceUtil.ACTION_ACL_DISCONNECTED ) );
     // mApp.registerReceiver( mBTReceiver, uuidFilter  = new IntentFilter( myUUIDaction ) );
-    mApp.registerReceiver( mBTReceiver, new IntentFilter( BluetoothDevice.ACTION_BOND_STATE_CHANGED ) );
-    // mApp.registerReceiver( mBTReceiver, new IntentFilter( BluetoothDevice.ACTION_PAIRING_REQUEST ) );
+    mApp.registerReceiver( mBTReceiver, new IntentFilter( DeviceUtil.ACTION_BOND_STATE_CHANGED ) );
+    // mApp.registerReceiver( mBTReceiver, new IntentFilter( DeviceUtil.ACTION_PAIRING_REQUEST ) );
   }
 
 // --------------------------------------------------
@@ -257,7 +255,7 @@ class DistoXComm extends TopoDroidComm
         mBTSocket = null;
       }
 
-      mBTDevice = mApp.mBTAdapter.getRemoteDevice( address );
+      mBTDevice = DeviceUtil.getRemoteDevice( address );
       // FIXME PAIRING
       // TDLog.Log( TDLog.LOG_BT, "[1] device state " + mBTDevice.getBondState() );
       if ( ! DeviceUtil.isPaired( mBTDevice ) ) {
@@ -266,7 +264,7 @@ class DistoXComm extends TopoDroidComm
       // }
 
         // TDLog.Log( TDLog.LOG_BT, "[2] device state " + mBTDevice.getBondState() );
-      // // if ( mBTDevice.getBondState() == BluetoothDevice.BOND_NONE ) 
+      // // if ( mBTDevice.getBondState() == DeviceUtil.BOND_NONE ) 
       // if ( ! DeviceUtil.isPaired( mBTDevice ) ) 
       // {
       //   TDLog.Log( TDLog.LOG_BT, "bind device " );
@@ -345,7 +343,7 @@ class DistoXComm extends TopoDroidComm
           try {
             DataInputStream in   = new DataInputStream( mBTSocket.getInputStream() );
             DataOutputStream out = new DataOutputStream( mBTSocket.getOutputStream() );
-            mProtocol = new DistoXProtocol( in, out, TDInstance.device, mApp );
+            mProtocol = new DistoXProtocol( in, out, TDInstance.device, mApp ); // mApp = context
             mAddress = address;
           } catch ( IOException e ) {
             TDLog.Error( "[6d] create Socket stream error " + e.getMessage() );
@@ -391,6 +389,7 @@ class DistoXComm extends TopoDroidComm
   }
 
   /** connect the socket to the device
+   * @param address   remote devioce address
    */
   private boolean connectSocket( String address )
   {
@@ -402,7 +401,7 @@ class DistoXComm extends TopoDroidComm
     getUuids();
 
     if ( mBTSocket != null ) {
-      mApp.mBTAdapter.cancelDiscovery();
+      DeviceUtil.cancelDiscovery();
       setupBTReceiver();
 
       int port = 0;
@@ -433,6 +432,11 @@ class DistoXComm extends TopoDroidComm
     return mBTConnected;
   }
 
+  /** start the communication thread
+   * @param to_read   number of packets to read
+   * @param lister    packet calback handler
+   * @return true on success
+   */
   protected boolean startCommThread( int to_read, Handler /* ILister */ lister ) // FIXME_LISTER
   {
     // TDLog.Log( TDLog.LOG_COMM, "start RFcomm thread: to_read " + to_read );
@@ -481,6 +485,9 @@ class DistoXComm extends TopoDroidComm
 
   /**
    * nothing to read (only write) --> no AsyncTask
+   * @param address   remote device address
+   * @param what      command to send to the remote device
+   * @param lister    callback handler
    */
   void setX310Laser( String address, int what, Handler /* ILister */ lister ) // FIXME_LISTER
   {
@@ -515,6 +522,9 @@ class DistoXComm extends TopoDroidComm
   /** send the set/unset calib-mode command
    * note called within connectSocket()
    * nothing to read (only write) --> no AsyncTask
+   *
+   * @param turn_on   whether to turn on or off the DistoX calibration mode
+   * @return true if success
    */
   private boolean setCalibMode( boolean turn_on )
   {
@@ -577,6 +587,11 @@ class DistoXComm extends TopoDroidComm
     return ret;
   }
 
+  /** write the calibration coeff to the remote DistoX device
+   * @param address   remote device address
+   * @param coeff     coeffs byte array 
+   * @return true on success
+   */
   boolean writeCoeff( String address, byte[] coeff )
   {
     if ( ! checkCommThreadNull() ) return false;
@@ -592,7 +607,13 @@ class DistoXComm extends TopoDroidComm
     return ret;
   }
 
-  // called only by CalibReadTask
+  /** read the calibration coeff from the remote DistoX device
+   * @param address   remote device address
+   * @param coeff     coeffs byte array for the result
+   * @return true on success
+   * 
+   * called only by CalibReadTask
+   */
   boolean readCoeff( String address, byte[] coeff )
   {
     if ( ! checkCommThreadNull() ) return false;
@@ -762,7 +783,8 @@ class DistoXComm extends TopoDroidComm
         if ( to_read == 0 ) {
           ret = to_read;
 	} else if ( to_read < 0 ) {
-	  int error_code = mProtocol.getErrorCode();
+	  int error_code = (mProtocol == null)? TopoDroidProtocol.DISTOX_ERR_PROTOCOL
+                         : mProtocol.getErrorCode();
 	  if ( error_code < 0 ) {
             ret = error_code;
 	  } else { // read with timeout

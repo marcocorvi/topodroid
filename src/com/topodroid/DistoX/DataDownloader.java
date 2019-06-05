@@ -103,7 +103,7 @@ class DataDownloader
   void tryConnect()
   {
     // Log.v("DistoX", "try Connect() download " + mDownload + " connected " + mConnected );
-    if ( TDInstance.device != null && mApp.mBTAdapter.isEnabled() ) {
+    if ( TDInstance.device != null && DeviceUtil.isAdapterEnabled() ) {
       mApp.disconnectComm();
       if ( ! mDownload ) {
         mConnected = false;
@@ -141,7 +141,7 @@ class DataDownloader
   private void tryDownloadData( )
   {
     TDInstance.secondLastShotId = TopoDroidApp.lastShotId( ); // FIXME-LATEST
-    if ( TDInstance.device != null && mApp.mBTAdapter.isEnabled() ) {
+    if ( TDInstance.device != null && DeviceUtil.isAdapterEnabled() ) {
       notifyUiThreadConnectionStatus( true );
       // TDLog.Log( TDLog.LOG_COMM, "shot menu DOWNLOAD" );
       new DataDownloadTask( mApp, mApp.mListerSet, null ).execute();

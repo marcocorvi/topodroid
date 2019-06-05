@@ -203,7 +203,7 @@ class TDSetting
   static int mSockType = TD_SOCK_DEFAULT;
 
   static int mCommRetry = 1; 
-  static int mCommType  = 0; // 0: on-demand, 1: continuous
+  static int mCommType  = 0; // 0: on-demand, 1: continuous, 2: multi
 
   static int mWaitLaser = 1000;
   static int mWaitShot  = 4000;

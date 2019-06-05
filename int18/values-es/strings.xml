@@ -1367,5 +1367,28 @@
 \n
     </string>
 
+<!-- FIRMWARE DIALOG STRINGS CAN BE LEFT UNTRANSLATED : mark OK untranslated strings -->
+  <!-- TODO string name="firmware_title">Firmware Updater</string -->
+  <!-- TODO string name="firmware_file_title">Firmware Files</string -->
+  <!-- TODO string name="firmware_text">
+\n[1] Select either to upload a firmware or to dump the firmware to a file.
+\n[2] Choose the file to upload or save. Firmware files are in the bin directory.
+\n[3] Make sure the upload firmware version is compatible with the DistoX hardware version.
+\n[4] Put the DistoX2 in bootloader mode: press PLUS and MINUS while switching on with DIST key.
+\n[5] Tap the OK button.
+\n[6] Confirm to continue and wait till the process is done.
+\n[7] Turn off the DistoX2 with the CLR key.
+\n
+   </string -->
+   <!-- TODO string name="firmware_none">no firmware file</string -->
+   <!-- TODO string name="firmware_file">firmware file</string -->
+   <!-- TODO string name="firmware_file_exists">Existing firmware file</string -->
+   <!-- TODO string name="firmware_file_missing">Missing firmware file</string -->
+   <!-- TODO string name="ask_dump">Dump firmware?</string -->
+   <!-- TODO string name="ask_upload">Upload firmware?</string -->
+   <!-- TODO string name="ask_upload_not_compatible">Firmware file does not look correct.\nUpload anyways?</string -->
+   <!-- TODO string name="firmware_file_dumped">Saved firmware file %1$s size %2$d</string -->
+   <!-- TODO string name="firmware_file_uploaded">Uploaded firmware file %1$s written %2$d / %3$d</string -->
+   <!-- TODO string name="firmware_not_supported">Device does not support firmware functions</string -->
 
 </resources>

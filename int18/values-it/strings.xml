@@ -1361,27 +1361,29 @@
 \nTraduzione italiana: fabrizio.toso@fastwebnet.it
     </string>
 
-  <!-- OK string name="firmware_title">Firmware Updater</string -->
-  <!-- OK string name="firmware_file_title">Firmware Files</string -->
-  <!-- OK string name="firmware_text">
-\n[1] Select either to upload a firmware or to dump the firmware to a file.
-\n[2] Choose the file to upload or save. Firmware files are in the bin directory.
-\n[3] Make sure the upload firmware version is compatible with the DistoX hardware version.
-\n[4] Put the DistoX2 in bootloader mode: press PLUS and MINUS while switching on with DIST key.
-\n[5] Tap the OK button.
-\n[6] Confirm to continue and wait till the process is done.
-\n[7] Turn off the DistoX2 with the CLR key.
+<!-- FIRMWARE DIALOG STRINGS CAN BE LEFT UNTRANSLATED : mark OK untranslated strings -->
+  <string name="firmware_title">Gestione firmware</string>
+  <string name="firmware_file_title">File firmware</string>
+  <string name="firmware_text">
+\n[1] Scegli se caricare un firmware o salvare il firmware su un file.
+\n[2] Seleziona il file da caricare o da salvare. I file sono nel folder bin.
+\n[3] Assicurati che la versione del firmware sia compatibile con la versione hardware del DistoX2.
+\n[4] Accendi il DistoX2 in modalità bootloader: premi i tasti PLUS e MINUS assieme a DIST.
+\n[5] Premi il bottone OK su TopoDroid.
+\n[6] Conferma e attendi che abbia finito.
+\n[7] Spegni il DistoX2 col tasto CLR.
 \n
-   </string -->
+   </string>
 
-   <!-- OK string name="firmware_none">no firmware file</string -->
-   <!-- OK string name="firmware_file">firmware file</string -->
-   <!-- OK string name="firmware_file_exists">Existing firmware file</string -->
-   <!-- OK string name="firmware_file_missing">Missing firmware file</string -->
-   <!-- OK string name="ask_dump">Dump firmware?</string -->
-   <!-- OK string name="ask_upload">Upload firmware?</string -->
-   <!-- OK string name="ask_upload_not_compatible">Firmware file does not look correct.\nUpload anyways?</string -->
-   <!-- OK string name="firmware_file_dumped">Saved firmware file %1$s size %2$d</string -->
-   <!-- OK string name="firmware_file_uploaded">Uploaded firmware file %1$s written %2$d / %3$d</string -->
+   <string name="firmware_none">Nessun file firmware</string>
+   <string name="firmware_file">File firmware</string>
+   <string name="firmware_file_exists">File firmware esistente</string>
+   <string name="firmware_file_missing">File firmware mancante</string>
+   <string name="ask_dump">Salva firmware?</string>
+   <string name="ask_upload">Carica firmware?</string>
+   <string name="ask_upload_not_compatible">Il file non sembra corretto.\nCaricare ugualmente?</string>
+   <string name="firmware_file_dumped">iSalvato file %1$s - %2$d B</string>
+   <string name="firmware_file_uploaded">Caricato firmware %1$s scritti %2$d / %3$d B</string>
+   <string name="firmware_not_supported">Dispositivo senza funzioni firmware</string>
 
 </resources>

@@ -1600,11 +1600,12 @@ class DrawingCommandManager
   // @param size  selection size
   boolean modifyLine( DrawingLinePath line, DrawingLinePath line2, float zoom, float size )
   {
+    LinePoint lp1 = line.mFirst; 
+    if ( lp1 == null ) return false; // sanity check
     if ( line2.size() < 3 ) return false;
     float delta = size / zoom;
     LinePoint first = line2.mFirst;
     LinePoint last  = line2.mLast;
-    LinePoint lp1 = line.mFirst; 
     for ( ; lp1 != null; lp1 = lp1.mNext ) {
       if ( lp1.distance( first ) < delta ) {
         LinePoint lp2 = null;

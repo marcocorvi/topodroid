@@ -8,8 +8,26 @@ Before uploading a new firmware TopoDroid checks that it is compatible with the 
 Unfortunately there is no sure way to read the firmware version from the file content;
 TopoDroid relies on the signature in the file after the bootloader blocks.<br><p>
 
-To prevent uploading a bad file, TopoDroid compares the checksum of the firmware file with the values of the known
-firmwares.<br><p>
+To prevent uploading a bad file, TopoDroid compares the checksum of the firmware file
+with the values of the known firmwares.<br>
+Check result codes (negative for failure):
+<ul>
+<li>2100: firmware 2.1</li>
+<li>2200: firmware 2.2</li>
+<li>2300: firmware 2.3</li>
+<li>2400: firmware 2.4</li>
+<li>2512: firmware 2.4c</li>
+<li>2500: firmware 2.5</li>
+<li>2501: firmware 2.5c</li>
+<li>2512: firmware 2.51</li>
+<li>-200: failed either 2.1 or 2.2</li>
+<li>-230, -2300: failed 2.3</li>
+<li>-240, -2400: failed 2.4</li>
+<li>-250: failed either 2.5 or 2.51</li>
+<li>-246, -2412: failed 2.4c</li>
+<li>-256, -2512: failed 2.5c</li>
+<li>-27: generic failure</li>
+</ul>
 
 The DistoX2 must be booted in "bootloader mode". Refer to the DistoX2 documentation for details.<br>
 <b>WARNING. UPLOADING AN INCOMPATIBLE FIRMWARE MAKES YOUR DistoX UNUSABLE.</b><br><p>

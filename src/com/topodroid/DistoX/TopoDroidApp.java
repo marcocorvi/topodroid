@@ -87,7 +87,7 @@ import android.graphics.BitmapFactory;
 import android.util.DisplayMetrics;
 
 import android.bluetooth.BluetoothAdapter;
-// import android.bluetooth.BluetoothDevice;
+// import android.bluetooth.BluetoothDevice; // COSURVEY
 
 public class TopoDroidApp extends Application
 {
@@ -191,7 +191,7 @@ public class TopoDroidApp extends Application
   // FIXME INSTALL_SYMBOL boolean askSymbolUpdate = false; // by default do not ask
 
   String[] DistoXConnectionError;
-  BluetoothAdapter mBTAdapter = null;     // BT connection
+  // BluetoothAdapter mBTAdapter = null;     // BT connection
   private TopoDroidComm mComm = null;     // BT communication
   DataDownloader mDataDownloader = null;  // data downloader
   static DataHelper mData = null;         // database 
@@ -590,7 +590,7 @@ public class TopoDroidApp extends Application
       TDSetting.loadPrimaryPreferences( /* this, */ getResources(),  mPrefHlp );
 
       // TDLog.Profile("TDApp BT");
-      mBTAdapter = BluetoothAdapter.getDefaultAdapter();
+      // mBTAdapter = BluetoothAdapter.getDefaultAdapter();
       // if ( mBTAdapter == null ) {
       //   // TDToast.makeBad( R.string.not_available );
       //   // finish(); // FIXME
@@ -1984,7 +1984,7 @@ public class TopoDroidApp extends Application
   {
     if ( mPairingRequest == null ) {
       // Log.v("DistoX", "start pairing" );
-      // IntentFilter filter = new IntentFilter( BluetoothDevice.ACTION_PAIRING_REQUEST );
+      // IntentFilter filter = new IntentFilter( DeviceUtil.ACTION_PAIRING_REQUEST );
       IntentFilter filter = new IntentFilter( "android.bluetooth.device.action.PAIRING_REQUEST" );
       // filter.addCategory( Intent.CATEGORY_ALTERNATIVE );
       mPairingRequest = new PairingRequest();

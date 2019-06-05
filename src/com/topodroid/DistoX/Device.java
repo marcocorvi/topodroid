@@ -26,13 +26,14 @@ class Device
   private int mHead;
   private int mTail;
 
-  final static int DISTO_NONE = 0;
+  final static int DISTO_NONE = 0; // device types - used as index in the arrays below
   final static int DISTO_A3   = 1;
   final static int DISTO_X310 = 2;
   // final static int DISTO_X000 = 3; // FIXME VirtualDistoX
-  final static int DISTO_SAP  = 4;
-  final static String[] typeString = { "Unknown", "A3", "X310", "X000", "SAP" };
-  final static private String[] typeSimpleString = { "Unknown", "DistoX", "DistoX2", "DistoX0", "SAP" };
+  final static int DISTO_SAP5 = 4;
+
+  final static String[] typeString = { "Unknown", "A3", "X310", "X000", "SAP5" };
+  final static private String[] typeSimpleString = { "Unknown", "DistoX", "DistoX2", "DistoX0", "SAP5" };
   
   static String typeToString( int type ) { return typeString[ type ]; }
 
@@ -40,7 +41,7 @@ class Device
   {
     if ( model.startsWith("DistoX-") ) {
       return model.replace("DistoX-", "" );
-    // } else if ( model.startsWith("SAP" ) ) { // FIXME_SAP
+    // } else if ( model.startsWith("SAP5" ) ) { // FIXME_SAP5
     //   return "???";
     }
     return "-";
@@ -49,14 +50,16 @@ class Device
   static int  stringToType( String model ) 
   {
     if ( model != null ) {
-      TDLog.Log( TDLog.LOG_DEBUG, "stringToType " + model );
+      // TDLog.Log( TDLog.LOG_DEBUG, "stringToType " + model );
       if ( model.equals( "X310" ) || model.startsWith( "DistoX-" ) ) return DISTO_X310;
       if ( model.equals( "A3" ) || model.equals( "DistoX" ) ) return DISTO_A3;
       // if ( model.equals( "X000" ) || model.equals( "DistoX0" ) ) return DISTO_X000; // FIXME VirtualDistoX
-      // FIXME_SAP
+      // FIXME_SAP5
     }
     return DISTO_NONE;
   }
+
+  // -------------------------------------------------------------------------------
 
   // nickname can be null
   Device( String addr, String model, int h, int t, String name, String nickname )
@@ -89,6 +92,10 @@ class Device
     if ( mNickname != null && mNickname.length() > 0 ) return mNickname;
     return mName;
   }
+
+  // X310 is the only device that has firmware support 
+  public boolean hasFirmwareSupport() { return mType == DISTO_X310; }
+
 
   public String toString() 
   { 

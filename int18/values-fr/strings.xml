@@ -1100,7 +1100,7 @@
     <string name="pref_max_shot_title">Longueur max cheminement</string>
     <string name="pref_max_shot_summary">Longueur maximum d\'une visée [m]</string>
     <string name="pref_min_leg_title">Longueur min cheminement</string>
-    <string name="pref_min_leg_summary">Longueur maximum d\'un cheminement [m]</string>
+    <string name="pref_min_leg_summary">Longueur minimum d\'un cheminement [m]</string>
   <string name="pref_backsight_title">Visée inverse</string>
   <string name="pref_backsight_summary">Afficher les champs de saisie inverse dans la boîte de dialogue de nouvelle visée</string>
   <string name="pref_backshot_title">DistoX Visée inverse</string>
@@ -1363,6 +1363,7 @@
 \nMise à jour le 25-04-2018 par D. Ros : souterweb@free.fr  
     </string>
 
+<!-- FIRMWARE DIALOG STRINGS CAN BE LEFT UNTRANSLATED : mark OK untranslated strings -->
   <string name="firmware_title">Firmware Updater</string>
   <string name="firmware_file_title">Firmware Files</string>
   <string name="firmware_text">
@@ -1384,5 +1385,6 @@
    <string name="ask_upload_not_compatible">Le firmware semble incorrect.\nEnvoyer quand même ?</string>
    <string name="firmware_file_dumped">Firmware sauvegardé dans : %1$s taille %2$d</string>
    <string name="firmware_file_uploaded">Firmware %1$s envoyé  %2$d / %3$d écrits</string>  
+   <!-- TODO string name="firmware_not_supported">Device does not support firmware functions</string -->
 
 </resources>

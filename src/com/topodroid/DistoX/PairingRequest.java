@@ -29,13 +29,13 @@ class PairingRequest extends BroadcastReceiver
   @Override
   public void onReceive(Context context, Intent intent){
     if (intent.getAction().equals("ACTION_PAIRING_REQUEST")) {
-      BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+      BluetoothDevice device = intent.getParcelableExtra(DeviceUtil.EXTRA_DEVICE);
       // Log.v("DistoX", "PAIRING REQUEST: " + device.getName() + " " + device.getAddress() );
       try { 
         device.getClass().getMethod("setPairingConfirmation", boolean.class).invoke(device, true);
         device.getClass().getMethod("cancelPairingUserInput", boolean.class).invoke(device, true);
         byte[] pin = ByteBuffer.allocate(4).putInt(0000).array();
-        // byte[] pinBytes = BluetoothDevice.convertPinToBytes("0000");
+        // byte[] pinBytes = DeviceUtil.convertPinToBytes("0000");
         //Entering pin programmatically:  
         Method ms = device.getClass().getMethod("setPin", byte[].class);
         // Method ms = device.getClass().getMethod("setPasskey", int.class);

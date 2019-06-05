@@ -4,6 +4,8 @@
  * @date nov 2011
  *
  * @brief TopoDroid firmware file list dialog
+ *        
+ * used by the FirmwareDialog to get a firmware filename
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -36,20 +38,18 @@ import android.content.Context;
 
 
 class FirmwareFileDialog extends MyDialog
-                          implements OnItemClickListener
+                         implements OnItemClickListener
 { 
-  // private TopoDroidApp mApp; // UNUSED
   private final FirmwareDialog mParent;
 
   // private ArrayAdapter<String> mArrayAdapter;
   private ListView mList;
   // private TextView mTVfile;
 
-  FirmwareFileDialog( Context context, FirmwareDialog parent, TopoDroidApp app )
+  FirmwareFileDialog( Context context, FirmwareDialog parent )
   {
     super( context, R.string.FirmwareFileDialog );
-    mParent  = parent;
-    // mApp = app;
+    mParent = parent;
   }
 
   @Override
@@ -59,13 +59,11 @@ class FirmwareFileDialog extends MyDialog
 
     initLayout( R.layout.firmware_file_dialog, R.string.firmware_file_title );
 
-
     mList = (ListView) findViewById( R.id.list );
     mList.setOnItemClickListener( this );
     mList.setDividerHeight( 2 );
 
     // mTVfile = (TextView) findViewById( R.id.file );
-
     // setTitleColor( TDColor.TITLE_NORMAL );
 
     File[] files = TDPath.getBinFiles();

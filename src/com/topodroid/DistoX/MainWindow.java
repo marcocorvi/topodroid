@@ -27,8 +27,6 @@ import android.os.Handler;
 // import android.os.Message;
 // import android.os.Parcelable;
 
-import android.bluetooth.BluetoothAdapter;
-
 import android.content.Context;
 import android.content.Intent;
 // import android.content.IntentFilter;
@@ -38,8 +36,6 @@ import android.content.DialogInterface.OnDismissListener;
 import android.content.res.Resources;
 import android.content.pm.PackageManager;
 // import android.net.Uri;
-
-// import android.bluetooth.BluetoothDevice;
 
 import android.widget.TextView;
 import android.widget.ArrayAdapter;
@@ -199,15 +195,15 @@ public class MainWindow extends Activity
     int k2 = 0;
     {
       if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) { // mBtnDevice
-        if ( mApp.mBTAdapter == null ) {
-          TDToast.makeBad( R.string.no_bt );
-        } else {
-          if ( mApp.mBTAdapter.isEnabled() ) {
+        if ( DeviceUtil.hasAdapter() ) {
+          if ( DeviceUtil.isAdapterEnabled() ) {
             // TDLog.Debug( "start device window");
             startActivity( new Intent( Intent.ACTION_VIEW ).setClass( mActivity, DeviceActivity.class ) );
           } else {
             TDToast.makeBad( R.string.not_enabled );
           }
+        } else {
+          TDToast.makeBad( R.string.no_bt );
         }
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // NEW SURVEY
         mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true, true ); // new-survey dialog: tell app to clear survey name and id
@@ -672,22 +668,22 @@ public class MainWindow extends Activity
   {
     super.onStart();
     // restoreInstanceFromFile();
-    // TDLog.Log( TDLog.LOG_MAIN, "onStart check BT " + mApp.mCheckBT + " enabled " + mApp.mBTAdapter.isEnabled() );
+    // TDLog.Log( TDLog.LOG_MAIN, "onStart check BT " + mApp.mCheckBT + " enabled " + DeviceUtil.isAdapterEnabled() );
 
     // TDLog.Profile("TDActivity onStart");
     if ( do_check_bt ) {
       do_check_bt = false;
-      if ( mApp.mBTAdapter == null ) {
-        TDToast.makeBad( R.string.no_bt );
-      } else {
-        if ( TDSetting.mCheckBT == 1 && ! mApp.mBTAdapter.isEnabled() ) {    
-          Intent enableIntent = new Intent( BluetoothAdapter.ACTION_REQUEST_ENABLE );
+      if ( DeviceUtil.hasAdapter() ) {
+        if ( TDSetting.mCheckBT == 1 && ! DeviceUtil.isAdapterEnabled() ) {    
+          Intent enableIntent = new Intent( DeviceUtil.ACTION_REQUEST_ENABLE );
           startActivityForResult( enableIntent, TDRequest.REQUEST_ENABLE_BT );
         } else {
           // nothing to do: scanBTDEvices(); is called by menu CONNECT
         }
         // FIXME_BT
-        // setBTMenus( mApp.mBTAdapter.isEnabled() );
+        // setBTMenus( DeviceUtil.isAdapterEnabled() );
+      } else {
+        TDToast.makeBad( R.string.no_bt );
       }
     }
     // mApp.checkAutoPairing(); // already done when prefs are loaded
@@ -805,7 +801,7 @@ public class MainWindow extends Activity
         }
         // FIXME_BT
         // FIXME mApp.mBluetooth = ( result == Activity.RESULT_OK );
-        // setBTMenus( mApp.mBTAdapter.isEnabled() );
+        // setBTMenus( DeviceUtil.isAdapterEnabled() );
         updateDisplay( );
         break;
 

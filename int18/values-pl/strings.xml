@@ -1386,6 +1386,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
 \n
     </string>
 
+<!-- FIRMWARE DIALOG STRINGS CAN BE LEFT UNTRANSLATED : mark OK untranslated strings -->
   <string name="firmware_title">Aktualizacja oprogramowania układowego</string>
   <string name="firmware_file_title">Pliki oprogramowania sprzętowego</string>
   <string name="firmware_text">
@@ -1407,5 +1408,6 @@ There are other settings for the presentation of the sketchs (icon size, label s
    <string name="ask_upload_not_compatible">Plik oprogramowania układowego nie wygląda poprawnie.\nZaładować mino to?</string>
    <string name="firmware_file_dumped">Zapisany plik oprogramowania układowego %1$s rozmiar %2$d</string>
    <string name="firmware_file_uploaded">Przesłany plik oprogramowania układowego %1$s zapisany %2$d / %3$d</string>
+   <!-- TODO string name="firmware_not_supported">Device does not support firmware functions</string -->
    
 </resources>

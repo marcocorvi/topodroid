@@ -23,6 +23,7 @@ import java.io.IOException;
 
 class FirmwareUtils 
 {
+  // sigmature is 64 bytes after the first 2048
   static final private byte[] signature = {
     (byte)0x03, (byte)0x48, (byte)0x85, (byte)0x46, (byte)0x03, (byte)0xf0, (byte)0x34, (byte)0xf8,
     (byte)0x00, (byte)0x48, (byte)0x00, (byte)0x47, (byte)0xf5, (byte)0x08, (byte)0x00, (byte)0x08,
@@ -34,10 +35,10 @@ class FirmwareUtils
     (byte)0x00, (byte)0xf0, (byte)0x30, (byte)0xf8, (byte)0x00, (byte)0x1b, (byte)0x49, (byte)0x1b
   };
 
-  //                                   2.1   2.2   2.3   2.4   2.5  2.5c  2.4c
-  // signatures differ in bytes 7- 6  f834  f83a  f990  fa0a  fb7e  fc10  fe94
-  //                             -12  08d5  08d5  08d5  08d5  08f5  08d5  08f5
-  //                           17-16  0c40  0c40  0c50  0c30  0c40  0c48  0c38
+  //                                   2.1   2.2   2.3   2.4  2.4c   2.5  2.5c  2.51
+  // signatures differ in bytes 7- 6  f834  f83a  f990  fa0a  fe94  fb7e  fc10  f894
+  //                             -12  08d5  08d5  08d5  08f5  08f5  08d5  08d5  08d5
+  //                           17-16  0c40  0c40  0c50  0c30  0c38  0c40  0c48  0c40
 
   // static boolean areCompatible( int hw, int fw )
   // {
@@ -73,30 +74,47 @@ class FirmwareUtils
         if ( k==6 || k==7 || k==12 || k==16 || k==17 ) continue;
         if ( buf[k] != signature[k] ) return -k;
       }
-      if ( buf[7] == (byte)0xf8 ) {
-        if ( buf[6] == (byte)0x34 && buf[16] == (byte)0x40 && buf[12] == (byte)0xf5 ) {
-          return 21;
-        } 
-        if ( buf[6] == (byte)0x3a && buf[16] == (byte)0x40 && buf[12] == (byte)0xf5 ) {
-          return 22;
+      //                                   2.1   2.2   2.3   2.4  2.4c   2.5  2.5c  2.51
+      // signatures differ in bytes 7- 6  f834  f83a  f990  fa0a  fe94  fb7e  fc10  fb94
+      //                             -12  08d5  08d5  08d5  08f5  08f5  08d5  08d5  08d5
+      //                           17-16  0c40  0c40  0c50  0c30  0c38  0c40  0c48  0c40
+
+      if ( buf[7] == (byte)0xf8 ) {       // 2.1 2.2
+        if ( buf[6] == (byte)0x34 ) {     // 2.1
+          return ( buf[16] == (byte)0x40 && buf[12] == (byte)0xf5 )? 2100 : -2100;
+        } else if ( buf[6] == (byte)0x3a ) { // 2.2
+          return ( buf[16] == (byte)0x40 && buf[12] == (byte)0xf5 )? 2200 : -2200;
         }
         return -200;
-        //                                   2.1   2.2   2.3   2.4   2.5  2.5c  2.4c
-        // signatures differ in bytes 7- 6  f834  f83a  f990  fa0a  fb7e  fc10  fe94
-        //                             -12  08d5  08d5  08d5  08d5  08f5  08d5  08f5
-        //                           17-16  0c40  0c40  0c50  0c30  0c40  0c48  0c38
-      } else if ( buf[7] == (byte)0xf9 ) {
-        return ( buf[6] == (byte)0x90 && buf[16] == (byte)0x50 && buf[12] == (byte)0xf5 )? 23 : -230;
-      } else if ( buf[7] == (byte)0xfa ) {
-        return ( buf[6] == (byte)0x0a && buf[16] == (byte)0x30 && buf[12] == (byte)0xf5 )? 24 : -240;
-      } else if ( buf[7] == (byte)0xfb ) {
-        return ( buf[6] == (byte)0x7e && buf[16] == (byte)0x40 && buf[12] == (byte)0xd5 )? 25 : -250;
-      } else if ( buf[7] == (byte)0xfc ) {     
-        return ( buf[6] == (byte)0x10 && buf[16] == (byte)0x48 && buf[12] == (byte)0xd5 )? 250 : -2500;
-      } else if ( buf[7] == (byte)0xfe ) {     
-        return ( buf[6] == (byte)0x94 && buf[16] == (byte)0x38 && buf[12] == (byte)0xf5 )? 240 : -2400;
+      } else if ( buf[7] == (byte)0xf9 ) { // 2.3
+        if ( buf[6] == (byte)0x90 ) {
+          return (buf[16] == (byte)0x50 && buf[12] == (byte)0xf5 )? 2300 : -2300;
+        }
+        return -230;
+      } else if ( buf[7] == (byte)0xfa ) { // 2.4
+        if ( buf[6] == (byte)0x0a ) {
+          return ( buf[16] == (byte)0x30 && buf[12] == (byte)0xf5 )? 2400 : -2400;
+        }
+        return -240;
+      } else if ( buf[7] == (byte)0xfb ) { // 2.5  2.51
+        if ( buf[6] == (byte)0x7e ) {      // 2.5
+          return ( buf[16] == (byte)0x40 && buf[12] == (byte)0xd5 )? 2500 : -2500;
+        } else if ( buf[6] == (byte)0x94 ) { // 2.51
+          return ( buf[16] == (byte)0x40 && buf[12] == (byte)0xd5 )? 2501 : -2501;
+        }
+        return -250;
+      } else if ( buf[7] == (byte)0xfc ) { // 2.5c
+        if ( buf[6] == (byte)0x10 ) {
+          return ( buf[16] == (byte)0x48 && buf[12] == (byte)0xd5 )? 2512 : -2512;
+        }
+        return -256;
+      } else if ( buf[7] == (byte)0xfe ) { // 2.4c
+        if ( buf[6] == (byte)0x94 ) {
+          return ( buf[16] == (byte)0x38 && buf[12] == (byte)0xf5 )? 2412 : -2412;
+        }
+        return -246;
       } else {
-        return -7;
+        return -27; // failed on byte[7]
       }
     } catch ( IOException e ) {
     } finally {

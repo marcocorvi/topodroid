@@ -1360,6 +1360,7 @@
 \n
     </string>
 
+<!-- FIRMWARE DIALOG STRINGS CAN BE LEFT UNTRANSLATED : mark OK untranslated strings -->
   <string name="firmware_title">Atualizador Firmware</string>
   <string name="firmware_file_title">Arquivos Firmware</string>
   <string name="firmware_text">
@@ -1381,5 +1382,6 @@
    <string name="ask_upload_not_compatible">Arquivo firmware não parece estar correto.\Ainda assim enviar?</string>
    <string name="firmware_file_dumped">Arquivo firmware salvo %1$s tamanho %2$d</string>
    <string name="firmware_file_uploaded">Arquivo firmware enviado %1$s escrito %2$d / %3$d</string>
+   <!-- TODO string name="firmware_not_supported">Device does not support firmware functions</string -->
    
 </resources>
