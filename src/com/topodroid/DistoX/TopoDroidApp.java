@@ -111,17 +111,6 @@ public class TopoDroidApp extends Application
   static String mLocaleStr;
   static int mCheckPerms;
 
-  static private MyTurnBitmap mDialBitmap = null;
-
-  static MyTurnBitmap getDialBitmap( Resources res )
-  {
-    if ( mDialBitmap == null ) {
-      Bitmap dial = BitmapFactory.decodeResource( res, R.drawable.iz_dial_transp ); // FIXME AZIMUTH_DIAL
-      mDialBitmap = new MyTurnBitmap( dial, TDColor.TRANSPARENT );
-    }
-    return mDialBitmap;
-  }
-
   static String mClipboardText = null; // text clipboard
 
   public static float mScaleFactor   = 1.0f;

@@ -76,17 +76,22 @@ class AzimuthDialDialog extends MyDialog
     mBMdial = dial;
   }
 
-  private void updateView()
+  static Bitmap getRotatedBitmap( float azimuth, Bitmap source )
   {
     Matrix m = new Matrix();
-    m.preRotate( mAzimuth - 90 );
-    // float s = TDMath.cosd( ((mAzimuth % 90) - 45) );
+    m.preRotate( azimuth - 90 );
+    // float s = TDMath.cosd( ((azimuth % 90) - 45) );
     // m.preScale( s, s );
-    int w = 96; // mBMdial.getWidth();
-    Bitmap bm1 = Bitmap.createScaledBitmap( mBMdial, w, w, true );
-    Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, w, w, m, true);
-    // rotatedBitmap( mBMdial, mBMdial.getWidth(), mAzimuth, 96 );
+    int w = 96; // source.getWidth();
+    Bitmap bm1 = Bitmap.createScaledBitmap( source, w, w, true );
+    return Bitmap.createBitmap( bm1, 0, 0, w, w, m, true);
+    // rotatedBitmap( source, source.getWidth(), mAzimuth, 96 );
     // Bitmap bm2 = Bitmap.createBitmap( mPxl, 96, 96, Bitmap.Config.ALPHA_8 );
+  }
+
+  private void updateView()
+  {
+    Bitmap bm2 = getRotatedBitmap( mAzimuth, mBMdial );
     mBTazimuth.setBackgroundDrawable( new BitmapDrawable( mContext.getResources(), bm2 ) );
 
     //+ Bitmap bm2 = mDialBitmap.getBitmap( mAzimuth, 96 );

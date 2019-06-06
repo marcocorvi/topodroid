@@ -307,17 +307,21 @@ class DrawingSurface extends SurfaceView
     commandManager.addEraseCommand( cmd );
   }
 
+  /**
+   * @param mode   drawing mode 
+   * @param type   plot type ( unused )
+   */
   void addScaleRef( int mode, int type )
   {
     switch ( mode ) {
       case DRAWING_PLAN: 
-        mCommandManager1.addScaleRef();
+        mCommandManager1.addScaleRef( ); // true ); // true = with extendAzimuth
         break;
       case DRAWING_PROFILE:
-        mCommandManager2.addScaleRef();
+        mCommandManager2.addScaleRef( );
         break;
       default:
-        mCommandManager3.addScaleRef();
+        mCommandManager3.addScaleRef( );
     }
   }
 
@@ -462,7 +466,8 @@ class DrawingSurface extends SurfaceView
     // commandManager.addFixedPath( path, selectable );
   }
 
-  public void setNorthPath( DrawingPath path ) { commandManager.setNorth( path ); }
+  // used only by H-Sections
+  public void setNorthPath( DrawingPath path ) { commandManager.setNorthLine( path ); }
 
   public void setFirstReference( DrawingPath path ) { commandManager.setFirstReference( path ); }
 

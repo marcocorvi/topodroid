@@ -987,7 +987,7 @@ public class ShotWindow extends Activity
     // FIXME_AZIMUTH_DIAL 1,2
     mBMdial          = BitmapFactory.decodeResource( res, R.drawable.iz_dial_transp );
     // mBMdial_transp   = BitmapFactory.decodeResource( res, R.drawable.iz_dial_transp );
-    mDialBitmap      = TopoDroidApp.getDialBitmap( res );
+    mDialBitmap      = MyTurnBitmap.getTurnBitmap( res );
 
     mBMplot     = MyButton.getButtonBackground( mApp, res, izons[BTN_PLOT] );
     mBMplot_no  = MyButton.getButtonBackground( mApp, res, R.drawable.iz_plot_no );

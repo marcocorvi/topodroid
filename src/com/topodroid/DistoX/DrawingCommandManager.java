@@ -482,9 +482,13 @@ class DrawingCommandManager
     mMaxAreaIndex = 0;
   }
 
-  void addScaleRef() 
+  /** 
+   * @parm azimuth   extend ref. azimuth (negative = no use)
+   * this is the only place DrawuingScaleReference is instantiated
+   */
+  void addScaleRef( ) // boolean with_azimuth
   {
-    mScaleRef = new DrawingScaleReference( BrushManager.referencePaint, new Point(20,-20), 0.33f);
+    mScaleRef = new DrawingScaleReference( BrushManager.referencePaint, new Point(20,-20), 0.33f ); // with_azimuth
   }
 
   // void debug()
@@ -1204,11 +1208,9 @@ class DrawingCommandManager
     }
   }  
   
-  void setNorth( DrawingPath path )
-  {
-    mNorthLine = path;
-  }
-  
+  // used by H-Sections
+  void setNorthLine( DrawingPath path ) { mNorthLine = path; }
+
   void addGrid( DrawingPath path, int k )
   { 
     if ( mGridStack1 == null ) return;
@@ -1441,6 +1443,7 @@ class DrawingCommandManager
             p100.draw( c, mat, sca, null );
           }
           if ( mNorthLine != null ) mNorthLine.draw( c, mat, sca, null );
+          // no extend line for bitmap
         }
       }
     }
@@ -1739,7 +1742,9 @@ class DrawingCommandManager
         for ( DrawingPath p100 : mGridStack100 ) {
           p100.draw( canvas, mMatrix, mScale, mBBox );
         }
-        if ( mNorthLine != null ) mNorthLine.draw( canvas, mMatrix, mScale, mBBox );
+        if ( mNorthLine != null ) {
+          mNorthLine.draw( canvas, mMatrix, mScale, mBBox );
+        }
         if(scaleRef && (mScaleRef != null)) {
           mScaleRef.draw(canvas, zoom, mLandscape);
         }

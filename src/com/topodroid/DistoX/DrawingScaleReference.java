@@ -35,6 +35,7 @@ class DrawingScaleReference
   private float mMaxWidthPercent;
   private Paint mPaint;
   private String mUnits;
+  // private boolean mExtendAzimuth = false;
 
   private final static float[] mValues = { 0, 0.01f, 0.05f, 0.1f, 0.5f, 1, 2, 5, 10, 20, 50, 100, 200, 500 };
 
@@ -46,9 +47,9 @@ class DrawingScaleReference
    * @param widthPercent maximum width of scale reference in percentage of screen width
    *                     (valid value are in range [0.2, 1.0]
    */
-  DrawingScaleReference( Point loc, float widthPercent )
+  DrawingScaleReference( Point loc, float widthPercent ) // boolean with_azimuth 
   {
-    this( null, loc, widthPercent );
+    this( null, loc, widthPercent ); //  with_azimuth 
   }
 
   /**
@@ -59,8 +60,8 @@ class DrawingScaleReference
    * @param widthPercent maximum width of scale reference in percentage of screen width
    *                     (valid value are in range [0.2, 1.0]
    */
-  DrawingScaleReference( Paint p, Point loc, float widthPercent) {
-
+  DrawingScaleReference( Paint p, Point loc, float widthPercent ) // boolean with_azimuth 
+  {
     if (p == null)
     {
       mPaint = new Paint();
@@ -81,8 +82,8 @@ class DrawingScaleReference
     mUnits = ( TDSetting.mUnitGrid > 0.99f)? " m" 
            : ( TDSetting.mUnitGrid > 0.8f)? " yd"
            : ( TDSetting.mUnitGrid > 0.2f)? " ft" : " dm";
+    // mExtendAzimuth = with_azimuth;
   }
-
 
   /**
    * Get the current color (or white)
@@ -158,12 +159,18 @@ class DrawingScaleReference
           canvas.drawLine( x, y, x - arrowlen, y, mPaint);
           canvas.drawLine( x-arrowlen+arrowtip, y-arrowtip, x - arrowlen, y, mPaint);
           canvas.drawLine( x-arrowlen+arrowtip, y+arrowtip, x - arrowlen, y, mPaint);
-	  } else {
+          // if ( mExtendAzimuth && TDAzimuth.mFixedExtend == 0 ) {
+          //   canvas.drawLine( x, y, x - TDMath.cosd( TDAzimuth.mRefAzimuth ), y - TDMath.sind( TDAzimuth.mRefAzimuth ), mPaint );
+          // }
+        } else {
           float x = locX;
           float y = locY - 4 * HEIGHT_BARS;
           canvas.drawLine( x, y, x, y - arrowlen, mPaint);
           canvas.drawLine( x-arrowtip, y-arrowlen+arrowtip, x, y - arrowlen, mPaint);
           canvas.drawLine( x+arrowtip, y-arrowlen+arrowtip, x, y - arrowlen, mPaint);
+          // if ( mExtendAzimuth && TDAzimuth.mFixedExtend == 0 ) {
+          //   canvas.drawLine( x, y, x + TDMath.sind( TDAzimuth.mRefAzimuth ), y - TDMath.cosd( TDAzimuth.mRefAzimuth ), mPaint );
+          // }
         }
       }
     }
