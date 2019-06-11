@@ -183,8 +183,8 @@ class TopoDroidProtocol
           } else {
             mDistance = 100 + (d-100000) / 100.0;
           }
-        } else if ( mDeviceType == Device.DISTO_SAP5 ) {
-          // FIXME_SAP5
+        } else if ( mDeviceType == Device.DISTO_BLE5 ) {
+          // FIXME_BLE5
         }
 
         mBearing  = b * 180.0 / 32768.0; // 180/0x8000;

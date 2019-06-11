@@ -16,6 +16,10 @@ package com.topodroid.DistoX;
 import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Set;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
 
 // import android.app.Activity;
 // import android.os.Bundle;
@@ -55,6 +59,8 @@ class DeviceUtil
   static final String EXTRA_DEVICE              = BluetoothDevice.EXTRA_DEVICE;
   static final String EXTRA_BOND_STATE          = BluetoothDevice.EXTRA_BOND_STATE;
   static final String EXTRA_PREVIOUS_BOND_STATE = BluetoothDevice.EXTRA_PREVIOUS_BOND_STATE;
+
+  // ---------------------------------------------------------------------------------
 
   // static byte[] convertPinToBytes( String pin ) { return BluetoothDevice.convertPinToBytes(pin); }
 

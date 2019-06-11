@@ -411,7 +411,7 @@ public class TopoDroidApp extends Application
 
   public void disconnectComm()
   {
-    if ( mComm != null ) mComm.disconnect();
+    if ( mComm != null ) mComm.disconnectDevice();
   }
   // end FIXME_COMM
 

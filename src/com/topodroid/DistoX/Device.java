@@ -30,10 +30,10 @@ class Device
   final static int DISTO_A3   = 1;
   final static int DISTO_X310 = 2;
   // final static int DISTO_X000 = 3; // FIXME VirtualDistoX
-  final static int DISTO_SAP5 = 4;
+  final static int DISTO_BLE5 = 4;
 
-  final static String[] typeString = { "Unknown", "A3", "X310", "X000", "SAP5" };
-  final static private String[] typeSimpleString = { "Unknown", "DistoX", "DistoX2", "DistoX0", "SAP5" };
+  final static String[] typeString = { "Unknown", "A3", "X310", "X000", "BLE5" };
+  final static private String[] typeSimpleString = { "Unknown", "DistoX", "DistoX2", "DistoX0", "Ble5" };
   
   static String typeToString( int type ) { return typeString[ type ]; }
 
@@ -41,7 +41,7 @@ class Device
   {
     if ( model.startsWith("DistoX-") ) {
       return model.replace("DistoX-", "" );
-    // } else if ( model.startsWith("SAP5" ) ) { // FIXME_SAP5
+    // } else if ( model.startsWith("BLE5" ) ) { // FIXME_BLE5
     //   return "???";
     }
     return "-";
@@ -54,7 +54,7 @@ class Device
       if ( model.equals( "X310" ) || model.startsWith( "DistoX-" ) ) return DISTO_X310;
       if ( model.equals( "A3" ) || model.equals( "DistoX" ) ) return DISTO_A3;
       // if ( model.equals( "X000" ) || model.equals( "DistoX0" ) ) return DISTO_X000; // FIXME VirtualDistoX
-      // FIXME_SAP5
+      // FIXME_BLE5
     }
     return DISTO_NONE;
   }

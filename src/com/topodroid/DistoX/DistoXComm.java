@@ -289,11 +289,11 @@ class DistoXComm extends TopoDroidComm
           Class[] classes2 = new Class[]{ UUID.class };
           if ( TDSetting.mSockType == TDSetting.TD_SOCK_DEFAULT ) {
             // TDLog.Log( TDLog.LOG_COMM, "[5a] createRfcommSocketToServiceRecord " );
-            mBTSocket = mBTDevice.createRfcommSocketToServiceRecord( UUID.fromString("00001101-0000-1000-8000-00805F9B34FB") );
+            mBTSocket = mBTDevice.createRfcommSocketToServiceRecord( SERVICE_UUID );
           } else if ( TDSetting.mSockType == TDSetting.TD_SOCK_INSEC ) {
             // TDLog.Log( TDLog.LOG_COMM, "[5b] createInsecureRfcommSocketToServiceRecord " );
             Method m3 = mBTDevice.getClass().getMethod( "createInsecureRfcommSocketToServiceRecord", classes2 );
-            mBTSocket = (BluetoothSocket) m3.invoke( mBTDevice, UUID.fromString("00001101-0000-1000-8000-00805F9B34FB") );
+            mBTSocket = (BluetoothSocket) m3.invoke( mBTDevice, SERVICE_UUID );
           } else if ( TDSetting.mSockType == TDSetting.TD_SOCK_INSEC_PORT ) {
             // TDLog.Log( TDLog.LOG_COMM, "[5c] invoke createInsecureRfcommSocket " );
             Method m1 = mBTDevice.getClass().getMethod( "createInsecureRfcommSocket", classes1 );
@@ -755,9 +755,9 @@ class DistoXComm extends TopoDroidComm
     return true;
   }
 
-  void disconnect()
+  void disconnectDevice()
   {
-    // TDLog.Log( TDLog.LOG_COMM, "disconnect");
+    // TDLog.Log( TDLog.LOG_COMM, "disconnect device");
     cancelCommThread();
     destroySocket( );
   }

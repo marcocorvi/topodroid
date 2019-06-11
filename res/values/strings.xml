@@ -343,6 +343,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="menu_photo">PHOTO</string>
     <string name="menu_sensor">SENSOR</string>
     <string name="menu_scan">SCAN</string>
+    <string name="menu_scan_ble">SCAN BTLE</string>
     <!-- UNUSED string name="menu_station">STATIONS</string -->
     <string name="menu_stats">STATS</string>
     <string name="menu_survey">SURVEY INFO</string>
@@ -351,6 +352,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UPDATES string name="menu_updates">CHECK UPDATES</string -->
     <string name="menu_validate">VALIDATE</string>
     <string name="menu_zoom_fit">ZOOM FIT</string>
+
+    <string name="ble_scan_failed">BLE scan failed</string>
+    <string name="ble_gatt_failure">BLE failure</string>
+    <string name="ble_no_remote">No remote device</string>
 
     <string name="popup_join_pt">Snap to nearby point</string>
     <string name="popup_snap_ln">Snap to nearby line</string>
@@ -817,6 +822,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_read">Read and display DistoX calibration coefficients</string>
     <string name="help_info_device">Device info</string>
     <string name="help_scan">Scan for new DistoX devices</string>
+    <string name="help_scan_ble">Scan for BTLE devices</string>
     <string name="help_pair">Pair the active DistoX device</string>
     <string name="help_open_calib">Open calibration</string>
     <string name="help_export_calib">Export calibration</string>

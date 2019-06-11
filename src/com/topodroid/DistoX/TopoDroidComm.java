@@ -11,6 +11,9 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
+import java.util.UUID;
 import java.util.List;
 // import java.util.concurrent.atomic.AtomicInteger; // FIXME_ATOMIC_INT
 
@@ -23,10 +26,11 @@ import android.os.Message;
 // import android.content.IntentFilter;
 // import android.content.BroadcastReceiver;
 
-// import android.util.Log;
-
 class TopoDroidComm
 {
+  protected static final String SERVICE_STRING = "00001101-0000-1000-8000-00805F9B34FB";
+  protected static final UUID   SERVICE_UUID = UUID.fromString( SERVICE_STRING );
+
   protected TopoDroidApp mApp;
   protected String mAddress;
   protected TopoDroidProtocol mProtocol;
@@ -327,7 +331,7 @@ class TopoDroidComm
     return false;
    }
 
-  void disconnect() { }
+  void disconnectDevice() { }
 
   // -------------------------------------------------------------------------------------
   // ON-DEMAND DATA DOWNLOAD

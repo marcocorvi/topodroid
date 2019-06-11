@@ -107,6 +107,7 @@ public class DeviceActivity extends Activity
 
   private static final int[] menus = {
                         R.string.menu_scan,
+                        R.string.menu_scan_ble,
                         R.string.menu_pair,
                         R.string.menu_detach,
                         R.string.menu_firmware,
@@ -127,6 +128,7 @@ public class DeviceActivity extends Activity
                      };
   private static final int[] help_menus = {
                         R.string.help_scan,
+                        R.string.help_scan_ble,
                         R.string.help_pair,
                         R.string.help_detach,
                         R.string.help_firmware,
@@ -143,6 +145,7 @@ public class DeviceActivity extends Activity
 
   // private String mAddress;
   private Device mCurrDevice;
+  private boolean mHasBLE;
 
   private final BroadcastReceiver mPairReceiver = new BroadcastReceiver()
   {
@@ -222,7 +225,9 @@ public class DeviceActivity extends Activity
     // TDLog.Debug("device activity on create");
     mApp = (TopoDroidApp) getApplication();
     mApp_mDData = TopoDroidApp.mDData;
-    mCurrDevice  = TDInstance.device;
+    mCurrDevice = TDInstance.device;
+    mHasBLE     = TDandroid.checkBluetoothLE( this );
+
     // mAddress = mCurrDevice.mAddress;
     // mAddress = getIntent().getExtras().getString(   TDTag.TOPODROID_DEVICE_ADDR );
 
@@ -735,14 +740,15 @@ public class DeviceActivity extends Activity
     // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
     mMenuAdapter = new ArrayAdapter<>(this, R.layout.menu );
 
-    if ( TDLevel.overBasic    ) mMenuAdapter.add( res.getString( menus[0] ) );
-    if ( TDLevel.overBasic    ) mMenuAdapter.add( res.getString( menus[1] ) );
-    if ( TDLevel.overNormal   ) mMenuAdapter.add( res.getString( menus[2] ) );
-    if ( TDLevel.overAdvanced ) mMenuAdapter.add( res.getString( menus[3] ) );
-    if ( TDLevel.overExpert && TDSetting.mPacketLog ) mMenuAdapter.add( res.getString( menus[4] ) ); // PACKET_LOG
-    mMenuAdapter.add( res.getString( menus[5] ) );
+    if ( TDLevel.overBasic    ) mMenuAdapter.add( res.getString( menus[0] ) );         // SCAN
+    if ( TDLevel.overBasic && mHasBLE ) mMenuAdapter.add( res.getString( menus[1] ) ); // SCAN_BLE
+    if ( TDLevel.overBasic    ) mMenuAdapter.add( res.getString( menus[2] ) );
+    if ( TDLevel.overNormal   ) mMenuAdapter.add( res.getString( menus[3] ) );
+    if ( TDLevel.overAdvanced ) mMenuAdapter.add( res.getString( menus[4] ) );
+    if ( TDLevel.overExpert && TDSetting.mPacketLog ) mMenuAdapter.add( res.getString( menus[5] ) ); // PACKET_LOG
     mMenuAdapter.add( res.getString( menus[6] ) );
-    // if ( TDLevel.overTester ) mMenuAdapter.add( res.getString( menus[7] ) ); // CALIB_RESET
+    mMenuAdapter.add( res.getString( menus[7] ) );
+    // if ( TDLevel.overTester ) mMenuAdapter.add( res.getString( menus[8] ) ); // CALIB_RESET
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
   }
@@ -764,6 +770,10 @@ public class DeviceActivity extends Activity
       scanIntent.putExtra( TDTag.TOPODROID_DEVICE_ACTION, DeviceList.DEVICE_SCAN );
       startActivityForResult( scanIntent, TDRequest.REQUEST_DEVICE );
       TDToast.makeLong(R.string.wait_scan );
+
+    } else if ( TDLevel.overBasic && mHasBLE && p++ == pos ) { // SCAN_BLE
+      // mBLEutil = scanBleService();
+      // DeviceUtil.scanBleDevices(); // TODO BLE
 
     } else if ( TDLevel.overBasic && p++ == pos ) { // PAIR
       pairDevice();
