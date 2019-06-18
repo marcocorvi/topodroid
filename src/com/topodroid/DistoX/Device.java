@@ -41,9 +41,10 @@ class Device
   {
     if ( model.startsWith("DistoX-") ) {
       return model.replace("DistoX-", "" );
-    // } else if ( model.startsWith("BLE5" ) ) { // FIXME_BLE5
-    //   return "???";
-    }
+    } 
+    // if ( model.startsWith("Ble-") ) { // FIXME BLE
+    //   return model.replace("Ble-", "" );
+    // }
     return "-";
   }
 
@@ -51,10 +52,10 @@ class Device
   {
     if ( model != null ) {
       // TDLog.Log( TDLog.LOG_DEBUG, "stringToType " + model );
+      if ( model.equals( "BLE5" ) || model.startsWith( "DistoX-BLE" ) ) return DISTO_BLE5; // FIXME BLE
       if ( model.equals( "X310" ) || model.startsWith( "DistoX-" ) ) return DISTO_X310;
       if ( model.equals( "A3" ) || model.equals( "DistoX" ) ) return DISTO_A3;
       // if ( model.equals( "X000" ) || model.equals( "DistoX0" ) ) return DISTO_X000; // FIXME VirtualDistoX
-      // FIXME_BLE5
     }
     return DISTO_NONE;
   }

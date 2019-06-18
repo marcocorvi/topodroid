@@ -13,7 +13,7 @@
  */
 package com.topodroid.DistoX;
 
-// import android.util.Log;
+import android.util.Log;
 
 import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
@@ -25,6 +25,7 @@ import android.bluetooth.BluetoothAdapter;
 
 import android.os.Build;
 import android.os.Handler;
+import android.os.ParcelUuid;
 
 import java.lang.Runnable;
 
@@ -34,15 +35,11 @@ import java.util.ArrayList;
 // -----------------------------------------------------------------------------
 class BleScanner
 {
-  // static final String BLE_SERVICE_STRING    = "..."; // TODO
-
-  // static UUID BLE_SERVICE_UUID    = UUID.fromString( BLE_SERVICE_STRING );
-  
   static final long BLE_SCAN_PERIOD = 10000; // 10 secs
 
   static boolean mScanning = false;
 
-  BleComm mParent;
+  DeviceActivity mParent;
 
   private ScanCallback mScanCallback;
   private BluetoothAdapter.LeScanCallback mLeScanCallback;
@@ -52,18 +49,20 @@ class BleScanner
 
   // -----------------------------------------------
 
-  BleScanner( BleComm parent )
+  BleScanner( DeviceActivity parent )
   {
     mParent = parent;
   }
 
-  void startScan( String address )
+  boolean startScan( /* String address */ )
   {
-    if ( mScanning ) return; // already scanning
-    mScanning = true;
-
     BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-    if ( adapter == null ) return;
+    if ( adapter == null ) return false;
+
+    if ( mScanning ) return true; // already scanning
+    mScanning = true;
+    // Log.v("DistoXBLE", "start scan");
+
     // FIXME mParent.disconnectGatt();
     if ( Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT ) {
       BluetoothLeScanner scanner = adapter.getBluetoothLeScanner();
@@ -71,14 +70,14 @@ class BleScanner
       mScanCallback = new ScanCallback() {
         @Override public void onScanResult( int type, ScanResult result ) 
         {
-          mParent.setRemoteDevice( result.getDevice() );
+          setRemoteDevice( result.getDevice() );
           stopScan();
         }
 
         @Override public void onBatchScanResults( List<ScanResult> results )
         {
           for ( ScanResult result : results ) {
-            mParent.setRemoteDevice( result.getDevice() );
+            setRemoteDevice( result.getDevice() );
             break;
           }
           stopScan();
@@ -91,8 +90,8 @@ class BleScanner
       };
 
       ScanFilter filter = new ScanFilter.Builder()
-        // .setServiceUuid( new ParcelUuid( BLE_SERVICE_UUID ) )
-        .setDeviceAddress( address )
+        .setServiceUuid( new ParcelUuid( BleConst.BLE_SERVICE_UUID ) )
+        // .setDeviceAddress( address )
         .build();
       List<ScanFilter> filters = new ArrayList<ScanFilter>();
       filters.add( filter );
@@ -110,15 +109,17 @@ class BleScanner
         @Override
         public void onLeScan( BluetoothDevice device, int rssi, byte[] scanRecord ) 
         {  
-          mParent.setRemoteDevice( device );
+          setRemoteDevice( device );
         }
       };
       adapter.startLeScan( mLeScanCallback ); 
     }
+    return true;
   }
 
   void stopScan() 
   {
+    // Log.v("DistoXBLE", "stop scan");
     if ( mScanHandler != null && mScanHandlerRunnable != null ) {
       mScanHandler.removeCallbacks( mScanHandlerRunnable );
     }
@@ -137,5 +138,13 @@ class BleScanner
     mScanHandlerRunnable = null;
     mScanHandler = null;
   }  
+
+  public void setRemoteDevice( final BluetoothDevice device ) 
+  {
+    // Log.v("DistoXBLE", "remote device " + device.getName() );
+    mParent.runOnUiThread( new Runnable() {
+      public void run() { mParent.addBleDevice( device ); }
+    } );
+  }
 
 }

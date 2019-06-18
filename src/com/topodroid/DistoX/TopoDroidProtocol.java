@@ -175,16 +175,21 @@ class TopoDroidProtocol
         double r = r7;
 
         // if ( mDeviceType == Device.DISTO_A3 || mDeviceType == Device.DISTO_X000) // FIXME VirtualDistoX
-        if ( mDeviceType == Device.DISTO_A3 ) {
-          mDistance = d / 1000.0;
-        } else if ( mDeviceType == Device.DISTO_X310 ) {
-          if ( d < 99999 ) {
+        switch ( mDeviceType ) {
+          case Device.DISTO_A3:
             mDistance = d / 1000.0;
-          } else {
-            mDistance = 100 + (d-100000) / 100.0;
-          }
-        } else if ( mDeviceType == Device.DISTO_BLE5 ) {
-          // FIXME_BLE5
+            break;
+          case Device.DISTO_X310:
+            if ( d < 99999 ) {
+              mDistance = d / 1000.0;
+            } else {
+              mDistance = 100 + (d-100000) / 100.0;
+            }
+            break;
+          // case Device.DISTO_BLE5: // FIXME BLE
+          default:
+            mDistance = d / 1000.0;
+            break;
         }
 
         mBearing  = b * 180.0 / 32768.0; // 180/0x8000;

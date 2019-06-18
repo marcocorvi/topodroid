@@ -13,8 +13,9 @@
  */
 package com.topodroid.DistoX;
 
-// import android.util.Log;
+import android.util.Log;
 
+// import android.os.Handler;
 import android.content.Context;
 
 // import android.bluetooth.BluetoothDevice;
@@ -27,22 +28,32 @@ import android.bluetooth.BluetoothGattCharacteristic;
 // -----------------------------------------------------------------------------
 class BleProtocol extends TopoDroidProtocol
 {
+  BleComm mComm;
   
-  BleProtocol( Device device, Context context )
+  BleProtocol( BleComm comm, Device device, Context context )
   {
     super( device, context );
+    mComm = comm;
+    // Log.v("DistoXBLE", "new proto");
   }
 
-  public void handleWrite( BluetoothGattCharacteristic chrt )
+  public int handleWrite( BluetoothGattCharacteristic chrt )
   {
+    Log.v("DistoXBLE", "proto write");
+    return 0;
   }
 
-  public void handleRead( BluetoothGattCharacteristic chrt )
+  public int handleRead( BluetoothGattCharacteristic chrt )
   {
+    byte[] bytes = chrt.getValue();
+    for ( int k=0; k<8; ++k ) mBuffer[k] = bytes[k];
+    return handlePacket();
+    // Log.v("DistoXBLE", "proto read. ret " + ret );
   }
 
   public void handleNotify( BluetoothGattCharacteristic chrt )
   {
+    Log.v("DistoXBLE", "proto notify");
   }
 
 }

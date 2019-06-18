@@ -192,8 +192,8 @@ public class CalibActivity extends Activity
       mEditDate.setText( info.date );
       if ( info.device != null && info.device.length() > 0 ) {
         mDeviceAddress = info.device;
-      } else if ( TDInstance.distoAddress() != null ) {
-        mDeviceAddress = TDInstance.distoAddress();
+      } else if ( TDInstance.deviceAddress() != null ) {
+        mDeviceAddress = TDInstance.deviceAddress();
       }
       // mEditDevice.setText( mDeviceAddress );
 
@@ -212,7 +212,7 @@ public class CalibActivity extends Activity
     } else {
       mEditName.setHint( R.string.name );
       mEditDate.setText( TDUtil.currentDate() );
-      mDeviceAddress = TDInstance.distoAddress();
+      mDeviceAddress = TDInstance.deviceAddress();
       // mEditDevice.setText( mDeviceAddress );
 
       mEditComment.setHint( R.string.description );

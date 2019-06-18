@@ -13,10 +13,10 @@
  */
 package com.topodroid.DistoX;
 
-// import android.util.Log;
+import android.util.Log;
 
-import java.util.UUID;
-
+import android.os.Handler;
+import android.os.Looper;
 import android.content.Context;
 
 import android.bluetooth.BluetoothDevice;
@@ -31,16 +31,6 @@ import android.bluetooth.BluetoothGattCharacteristic;
 // -----------------------------------------------------------------------------
 class BleComm extends TopoDroidComm
 {
-  static final String BLE_CHAR_WRITE_STRING = "...";
-  static final String BLE_DESC_WRITE_STRING = "...";
-  static final String BLE_CHAR_READ_STRING  = "...";
-  static final String BLE_DESC_READ_STRING  = "...";
-
-  static UUID BLE_CHAR_WRITE_UUID = UUID.fromString( BLE_CHAR_WRITE_STRING );
-  static UUID BLE_DESC_WRITE_UUID = UUID.fromString( BLE_DESC_WRITE_STRING );
-  static UUID BLE_CHAR_READ_UUID  = UUID.fromString( BLE_CHAR_READ_STRING );
-  static UUID BLE_DESC_READ_UUID  = UUID.fromString( BLE_DESC_READ_STRING );
-  
   // -----------------------------------------------
   private boolean mWriteInitialized = false;
   private boolean mReadInitialized = false;
@@ -52,29 +42,21 @@ class BleComm extends TopoDroidComm
 
   private String          mRemoteAddress;
   private BluetoothDevice mRemoteDevice;
-  private DeviceActivity  mParent;
-  private BleProtocol     mBleProtocol;
 
 
-  BleComm( TopoDroidApp app, DeviceActivity parent, String address ) 
+  BleComm( TopoDroidApp app, String address, BluetoothDevice bt_device ) 
   {
     super( app );
-    mParent = parent;
     mRemoteAddress = address;
-    mRemoteDevice  = null;
-    mBleProtocol   = null;
+    mRemoteDevice  = bt_device;
+    // Log.v("DistoXBLE", "new BLE comm " + address );
   }
 
-  void setRemoteDevice( BluetoothDevice device ) { mRemoteDevice = device; }
-
-  /**
-   * scan should not run on UI thread ?
-   */
-  void scanBleDevices( )
-  {
-    BleScanner scanner = new BleScanner( this );
-    scanner.startScan( mRemoteAddress );
-  }
+  // void setRemoteDevice( BluetoothDevice device ) 
+  // { 
+  //   Log.v("DistoXBLE", "BLE comm set remote " + device.getAddress() );
+  //   mRemoteDevice = device;
+  // }
 
   // -------------------------------------------------------------
   /** 
@@ -87,14 +69,17 @@ class BleComm extends TopoDroidComm
     if ( mRemoteDevice == null ) {
       TDToast.makeBad( R.string.ble_no_remote );
     } else {
-      mBleProtocol  = new BleProtocol( device, context );
-      BleGattCallback callback = new BleGattCallback( mBleProtocol );
-      mGatt = mRemoteDevice.connectGatt( context, true, callback ); // true: autoconnect as soon as the device becomes available
+      // Log.v("DistoXBLE", "BLE comm connect remote " + mRemoteDevice.getAddress() );
+      BleProtocol protocol  = new BleProtocol( this, device, context );
+      BleGattCallback callback = new BleGattCallback( protocol );
+      mProtocol = protocol;
+      mGatt = mRemoteDevice.connectGatt( context, false, callback ); // true: autoconnect as soon as the device becomes available
     }
   }
 
   void disconnectBleGatt()
   {
+    mConnectionMode = -1;
     setConnected( false );
     mWriteInitialized = false; 
     mReadInitialized  = false; 
@@ -123,9 +108,11 @@ class BleComm extends TopoDroidComm
         disconnectBleGatt();
       } else {
         if ( state == BluetoothProfile.STATE_CONNECTED ) {
+          // Log.v("DistoXBLE", "connected GATT");
           gatt.discoverServices();
           setConnected( true );
         } else if ( state == BluetoothProfile.STATE_DISCONNECTED ) {
+          // Log.v("DistoXBLE", "disconnected GATT");
           disconnectBleGatt();
         }
       }
@@ -138,31 +125,52 @@ class BleComm extends TopoDroidComm
       if ( status != BluetoothGatt.GATT_SUCCESS ) {
         // return;
       } else {
-        BluetoothGattService srv = gatt.getService( SERVICE_UUID );
-        mWriteChrt = srv.getCharacteristic( BLE_CHAR_WRITE_UUID );
-        mWriteChrt.setWriteType( BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT );
-        mWriteInitialized = gatt.setCharacteristicNotification( mWriteChrt, true );
+        // Log.v("DistoXBLE", "comm service discovered ok");
+        BluetoothGattService srv = gatt.getService( BleConst.BLE_SERVICE_UUID );
 
-        mReadChrt = srv.getCharacteristic( BLE_CHAR_READ_UUID );
+        // mWriteChrt = srv.getCharacteristic( BleConst.BLE_CHAR_WRITE_UUID );
+        // mWriteChrt.setWriteType( BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT );
+        // mWriteInitialized = gatt.setCharacteristicNotification( mWriteChrt, true );
+
+        mReadChrt = srv.getCharacteristic( BleConst.BLE_CHAR_READ_UUID );
         mReadInitialized = gatt.setCharacteristicNotification( mReadChrt, true );
+
+        readPacket();
       }
     }
 
-    @Override
-    public void onCharacteristicWrite( BluetoothGatt gatt, BluetoothGattCharacteristic chrt, int status )
-    {
-      super.onCharacteristicWrite( gatt, chrt, status );
-      if ( mWriteInitialized ) {
-        mProto.handleWrite( chrt );
-      }
-    }
+    // @Override
+    // public void onCharacteristicWrite( BluetoothGatt gatt, BluetoothGattCharacteristic chrt, int status )
+    // {
+    //   super.onCharacteristicWrite( gatt, chrt, status );
+    //   if ( mWriteInitialized ) {
+    //     int res = mProto.handleWrite( chrt );
+    //   }
+    // }
 
     @Override
     public void onCharacteristicRead( BluetoothGatt gatt, BluetoothGattCharacteristic chrt, int status )
     {
       super.onCharacteristicRead( gatt, chrt, status );
+      long wait = 0x40; // msec
+      // Log.v("DistoXBLE", "comm chrt read. init " + mReadInitialized + " status " + status );
       if ( mReadInitialized ) {
-        mProto.handleRead( chrt );
+        if (status == BluetoothGatt.GATT_SUCCESS) {
+          int res = mProto.handleRead( chrt );
+          if ( res == 1 ) {
+            ++ nReadPackets;
+            handleRegularPacket( res, mLister );
+          }
+          readPacket();
+        } else { 
+          if ( mConnectionMode != 1 ) {
+            disconnectBleGatt();
+          } else if ( isConnected()  ) {
+            if ( wait < 0x0400 ) wait <<= 1; // max 1 sec
+            Handler handler = new Handler( Looper.getMainLooper() );
+            handler.postDelayed( new Runnable() { public void run() { readPacket(); } }, wait );
+          }
+        }
       }
     }
 
@@ -174,5 +182,62 @@ class BleComm extends TopoDroidComm
     }
 
   }
+
+  boolean readPacket()
+  { 
+    // Log.v("DistoXBLE", "comm read packet");
+    if ( ! mBTConnected || ! mReadInitialized ) return false;
+    // BluetoothGattService srv = mGatt.getService( BleConst.BLE_SERVICE_UUID );
+    // BluetoothGattCharacteristic chrt = srv.getCharacteristic( BleConst.BLE_CHAR_READ_UUID );
+    // return mGatt.readCharacteristic( chrt );
+    return mGatt.readCharacteristic( mReadChrt );
+  }
+    
+  // ------------------------------------------------------------------------------------
+  // CONTINUOUS DATA DOWNLOAD
+  int mConnectionMode = -1;
+
+  boolean connectDevice( String address, Handler /* ILister */ lister )
+  {
+    // Log.v("DistoXBLE", "comm connect device");
+    mLister = lister;
+    mConnectionMode = 1;
+    nReadPackets = 0;
+    connectBleDevice( TDInstance.device, mApp );
+    return true;
+  }
+
+  void disconnectDevice() 
+  {
+    disconnectBleGatt();
+  }
+
+  // -------------------------------------------------------------------------------------
+  // ON-DEMAND DATA DOWNLOAD
+  Handler mLister;
+
+  int downloadData( String address, Handler /* ILister */ lister )
+  {
+    // Log.v("DistoXBLE", "comm data downlaod");
+    mConnectionMode = 0;
+    mLister = lister;
+    nReadPackets = 0;
+    connectBleDevice( TDInstance.device, mApp );
+    // nReadPackets = 0;
+    // start a thread that keeps track of read packets
+    // when read done stop it and return
+    return 0;
+  }
+
+  // protected boolean startCommThread( int to_read, Handler /* ILister */ lister ) 
+  // {
+  //   if ( mCommThread != null ) {
+  //     TDLog.Error( "start Comm Thread already running");
+  //   }
+  //   // Log.v("DistoXBLE", "comm start comm thread");
+  //   mCommThread = new CommThread( TopoDroidComm.COMM_GATT, mProtocol, to_read, lister );
+  //   mCommThread.start();
+  //   return true;
+  // }
 
 }

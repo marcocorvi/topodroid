@@ -2230,7 +2230,7 @@ class TDExporter
     pw.format( "\r\n" );
   }
 
-  private static void printSplayToDat( PrintWriter pw, String from, String to, DBlock blk, boolean reverse )
+  private static void printSplayToDat( PrintWriter pw, String prefix, String from, String to, DBlock blk, boolean reverse )
   {
     if ( ! TDSetting.mCompassSplays ) return;
     float b = blk.mBearing;
@@ -2240,7 +2240,8 @@ class TDExporter
       if ( b >=360 ) b -= 360;
       c = -c;
     }
-    pw.format(Locale.US, "%s %s %.2f %.1f %.1f -9.90 -9.90 -9.90 -9.90 #|L#", from, to, blk.mLength*TDUtil.M2FT, b, c );
+    writeDatFromTo( pw, prefix, from, to );
+    pw.format(Locale.US, "%.2f %.1f %.1f -9.90 -9.90 -9.90 -9.90 #|L#", blk.mLength*TDUtil.M2FT, b, c );
 
     // if ( duplicate ) {
     //   pw.format(" #|L#");
@@ -2344,7 +2345,7 @@ class TDExporter
                 ii = splay_station.get( to ).intValue();
               }
 	      splay_station.put( to, new Integer(ii+1) );
-	      printSplayToDat( pw, to, to + "ss" + ii, item, true ); // reverse
+	      printSplayToDat( pw, info.name, to, to + "ss" + ii, item, true ); // reverse
 	    }
           }
         } else { // with FROM station
@@ -2363,7 +2364,7 @@ class TDExporter
                 ii = splay_station.get( from ).intValue();
               }
 	      splay_station.put( from, new Integer(ii+1) );
-	      printSplayToDat( pw, from, from + "ss" + ii, item, false ); // not reverse
+	      printSplayToDat( pw, info.name, from, from + "ss" + ii, item, false ); // not reverse
 	    }
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {

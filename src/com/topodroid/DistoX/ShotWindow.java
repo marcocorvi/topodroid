@@ -969,7 +969,7 @@ public class ShotWindow extends Activity
     Resources res = getResources();
     mNrButton1 = TDLevel.overExpert ? 10
                : TDLevel.overAdvanced ? 9
-               : TDLevel.overNormal ? 8
+               : TDLevel.overNormal ? 9
                : TDLevel.overBasic ?  6 : 5;
     diving = ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING );
     if ( diving ) {
@@ -1211,7 +1211,7 @@ public class ShotWindow extends Activity
   {
     if ( ! mDataDownloader.isDownloading() ) {
       if ( TDLevel.overAdvanced
-             && TDInstance.distoType() == Device.DISTO_X310 
+             && TDInstance.deviceType() == Device.DISTO_X310 
 	     && TDSetting.mConnectionMode != TDSetting.CONN_MODE_MULTI
 	  ) {
         CutNPaste.showPopupBT( mActivity, this, mApp, b, false );
@@ -1372,9 +1372,9 @@ public class ShotWindow extends Activity
         // new SearchDialog( mActivity, this, station ).show();
         new SearchDialog( mActivity, this, mDataAdapter.getSearchName() ).show();
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // AZIMUTH
-        if ( TDLevel.overAdvanced ) {
+        if ( TDLevel.overNormal ) {
           if ( TDSetting.mAzimuthManual ) {
-            setRefAzimuth( 0, - TDAzimuth.mFixedExtend );
+            setRefAzimuth( TDAzimuth.mRefAzimuth, - TDAzimuth.mFixedExtend );
           } else {
             (new AzimuthDialDialog( mActivity, this, TDAzimuth.mRefAzimuth, mBMdial )).show();
             // FIXME_AZIMUTH_DIAL (new AzimuthDialDialog( mActivity, this, TDAzimuth.mRefAzimuth, mDialBitmap )).show();

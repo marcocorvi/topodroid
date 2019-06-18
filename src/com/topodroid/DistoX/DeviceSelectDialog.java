@@ -108,7 +108,7 @@ class DeviceSelectDialog extends MyDialog
     // String address = ( vals[0].equals("X000") )? Device.ZERO_ADDRESS : vals[2];
     String address = vals[2];
 
-    mApp.setDevice( address );
+    mApp.setDevice( address, null ); // FIXME BLE only BT devices
     mLister.setTheTitle();
     mDownloader.toggleDownload();
     mLister.setConnectionStatus( mDownloader.getStatus() );

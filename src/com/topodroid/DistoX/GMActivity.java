@@ -246,7 +246,7 @@ public class GMActivity extends Activity
    */
   void validateCalibration( String name )
   {
-    String address = TDInstance.distoAddress();
+    String address = TDInstance.deviceAddress();
     if ( address == null ) return;
     long cid = mApp_mDData.getCalibCID( name, address );
     if ( cid < 0 ) {
@@ -721,7 +721,7 @@ public class GMActivity extends Activity
       mButton1[k] = MyButton.getButton( this, this, izons[k] );
     }
     mButton1[mNrButton1] = MyButton.getButton( this, this, R.drawable.iz_empty );
-    if ( TDLevel.overAdvanced && TDInstance.distoType() == Device.DISTO_X310 ) {
+    if ( TDLevel.overAdvanced && TDInstance.deviceType() == Device.DISTO_X310 ) {
       mButton1[ BTN_BT ].setOnLongClickListener( this );
     }
 
@@ -825,7 +825,7 @@ public class GMActivity extends Activity
 
   private void doBluetooth( Button b )
   {
-    if ( TDLevel.overAdvanced && TDInstance.distoType() == Device.DISTO_X310 ) {
+    if ( TDLevel.overAdvanced && TDInstance.deviceType() == Device.DISTO_X310 ) {
       CutNPaste.showPopupBT( this, this, mApp, b, true );
     } else {
       mApp.resetComm();

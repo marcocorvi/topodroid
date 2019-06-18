@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import java.util.Set;
 // import java.util.List;
 // import java.util.ArrayList;
@@ -53,8 +55,6 @@ import android.widget.AdapterView.OnItemLongClickListener;
 // import android.graphics.Bitmap;
 // import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-
-// import android.util.Log;
 
 import android.bluetooth.BluetoothDevice;
 
@@ -315,6 +315,10 @@ public class DeviceActivity extends Activity
             String name  = Device.modelToName( model );
             mApp_mDData.insertDevice( addr, model, name );
             dev = mApp_mDData.getDevice( addr );
+          // } else if ( model.startsWith( "Ble", 0 ) ) { // FIXME BLE
+          //   String name  = Device.modelToName( model );
+          //   mApp_mDData.insertDevice( addr, model, name );
+          //   dev = mApp_mDData.getDevice( addr );
           }
         }
         if ( dev != null ) {
@@ -362,7 +366,7 @@ public class DeviceActivity extends Activity
       // if ( vals.length != 3 ) { TODO } // FIXME
       // Log.v("DistoX", "Addr/Name <" + vals[2] + ">");
       if ( mCurrDevice == null || ! ( address.equals( mCurrDevice.mAddress ) || address.equals( mCurrDevice.mNickname ) ) ) {
-        mApp.setDevice( address );
+        mApp.setDevice( address, null );
         mCurrDevice = TDInstance.device;
         // mAddress = address;
         mApp.disconnectRemoteDevice( true );
@@ -374,7 +378,7 @@ public class DeviceActivity extends Activity
   private void detachDevice()
   {
     if ( mCurrDevice == null ) return;
-    mApp.setDevice( null );
+    mApp.setDevice( null, null );
     mCurrDevice = TDInstance.device;
     // mAddress = address;
     mApp.disconnectRemoteDevice( true );
@@ -397,7 +401,6 @@ public class DeviceActivity extends Activity
                // 1: paired ok
     }
   }
-
 
   // interface ICoeffDisplayer
   // @Implements
@@ -651,6 +654,21 @@ public class DeviceActivity extends Activity
 
   // -----------------------------------------------------------------------------
 
+  public void addBleDevice( BluetoothDevice device ) // TODO BLE
+  {
+    if ( device == null ) return;
+    String address = device.getAddress();
+    // if ( mCurrDevice == null || ! address.equals( mCurrDevice.mAddress ) ) { // N.B. address != null
+      mApp.disconnectRemoteDevice( true );
+      mApp.setDevice( address, device );
+      mCurrDevice = TDInstance.device;
+      // mAddress = address;
+      setState();
+    // }
+    updateList();
+    Log.v("DistoXBLE", "add BLE device " + mCurrDevice.mName + "/" + mCurrDevice.mAddress + "/" + mCurrDevice.mModel );
+  }
+
   public void onActivityResult( int request, int result, Intent intent ) 
   {
     // Log.v("DistoX", "on Activity Result: req. " + request + " res. " + result );
@@ -665,22 +683,8 @@ public class DeviceActivity extends Activity
             TDLog.Error( "onActivityResult REQUEST DEVICE: null address");
           } else if ( mCurrDevice == null || ! address.equals( mCurrDevice.mAddress ) ) { // N.B. address != null
             mApp.disconnectRemoteDevice( true );
-            mApp.setDevice( address );
-
-            if ( TDSetting.mAutoPair ) { // try to get the system ask for the PIN
-              BluetoothDevice btDevice = DeviceUtil.getRemoteDevice( address );
-              // TDLog.Log( TDLog.LOG_BT, "auto-pairing remote device " + btDevice.getAddress()
-              //   + " status " + btDevice.getBondState() );
-              if ( ! DeviceUtil.isPaired( btDevice ) ) {
-                DeviceUtil.pairDevice( btDevice );
-                DeviceUtil.bindDevice( btDevice );
-                for (int c=0; c<TDSetting.mConnectSocketDelay; ++c ) {
-                  if ( DeviceUtil.isPaired( btDevice ) ) break;
-                  TDUtil.slowDown( 100 ); // Thread.yield();
-                }
-              }
-            }
-
+            mApp.setDevice( address, null );
+            DeviceUtil.checkPairing( address );
             mCurrDevice = TDInstance.device;
             // mAddress = address;
             setState();
@@ -771,10 +775,11 @@ public class DeviceActivity extends Activity
       startActivityForResult( scanIntent, TDRequest.REQUEST_DEVICE );
       TDToast.makeLong(R.string.wait_scan );
 
-    } else if ( TDLevel.overBasic && mHasBLE && p++ == pos ) { // SCAN_BLE
-      // mBLEutil = scanBleService();
-      // DeviceUtil.scanBleDevices(); // TODO BLE
-
+    } else if ( TDLevel.overBasic && mHasBLE && p++ == pos ) { // FIXME BLE SCAN_BLE
+      BleScanner scanner = new BleScanner( this );
+      if ( scanner.startScan() ) {
+        // TODO anything ?
+      }
     } else if ( TDLevel.overBasic && p++ == pos ) { // PAIR
       pairDevice();
 
@@ -782,7 +787,7 @@ public class DeviceActivity extends Activity
       detachDevice();
 
     } else if ( TDLevel.overAdvanced && p++ == pos ) { // FIRMWARE
-      if ( TDInstance.distoType() == Device.DISTO_X310 ) {
+      if ( TDInstance.deviceType() == Device.DISTO_X310 ) {
         // if ( TDSetting.mCommType != 0 ) {
         //   TDToast.makeLong( "Connection mode must be \"on-demand\"" );
         // } else {

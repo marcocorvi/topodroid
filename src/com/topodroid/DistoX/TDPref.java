@@ -735,7 +735,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], T, def[ 4],          ctx, hlp ), // BACKSHOT DistoX
       makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], N, def[ 5], FLOAT,   ctx, hlp ), // EXTEND_THRS
       makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], N, def[ 6], FLOAT,   ctx, hlp ),
-      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], N, def[ 7],          ctx, hlp ), // AZIMUTH_MANUAL
+      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7],          ctx, hlp ), // AZIMUTH_MANUAL
       makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8],          ctx, hlp ), // PREV_NEXT
       makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9],          ctx, hlp )  // BACKSIGHT
       // makeEdt( cat, key[10], tit[10], dsc[10], T, def[10], INTEGER, ctx, hlp ), // TIMER

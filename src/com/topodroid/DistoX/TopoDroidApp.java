@@ -86,6 +86,7 @@ import android.graphics.BitmapFactory;
 
 import android.util.DisplayMetrics;
 
+import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothAdapter;
 // import android.bluetooth.BluetoothDevice; // COSURVEY
 
@@ -197,7 +198,7 @@ public class TopoDroidApp extends Application
   static long lastShotId( ) { return mData.getLastShotId( TDInstance.sid ); }
 
   // static Device mDevice = null;
-  // static int distoType() { return (mDevice == null)? 0 : mDevice.mType; }
+  // static int deviceType() { return (mDevice == null)? 0 : mDevice.mType; }
   // static String distoAddress() { return (mDevice == null)? null : mDevice.mAddress; }
 
   // FIXME VirtualDistoX
@@ -387,14 +388,27 @@ public class TopoDroidApp extends Application
   {
     // return mComm != null && mComm.mBTConnected;
     // return mComm != null && mComm.mBTConnected && mComm.mCommThread != null;
-    return mComm != null && mComm.isConnected() && ! mComm.checkCommThreadNull();
+    return mComm != null && mComm.isConnected() && ! mComm.checkCommThreadNull(); // FIXME BLE to check
   }
 
   void disconnectRemoteDevice( boolean force )
   {
+    Log.v( "DistoXBLE", "App disconnect remote device. force " + force );
     // TDLog.Log( TDLog.LOG_COMM, "App disconnect RemoteDevice listers " + mListerSet.size() + " force " + force );
     if ( force || mListerSet.size() == 0 ) {
-      if ( mComm != null && mComm.isConnected() ) mComm.disconnectRemoteDevice( );
+      if ( mComm != null && mComm.isConnected() ) {
+        mComm.disconnectRemoteDevice( ); // FIXME BLE to check
+      }
+    }
+  }
+
+  private void deleteComm() // FIXME BLE
+  {
+    if ( mComm != null ) {
+      if ( mComm.isConnected() ) {
+        mComm.disconnectRemoteDevice(); 
+      }
+      mComm = null;
     }
   }
 
@@ -406,11 +420,13 @@ public class TopoDroidApp extends Application
   // FIXME_COMM
   public boolean connectDevice( String address ) 
   {
+    Log.v( "DistoXBLE", "App connect address " + address + " comm is " + ((mComm==null)? "null" : "non-null") );
     return mComm != null && mComm.connectDevice( address, mListerSet ); // FIXME_LISTER
   }
 
   public void disconnectComm()
   {
+    Log.v( "DistoXBLE", "App disconnect. comm is " + ((mComm==null)? "null" : "non-null") );
     if ( mComm != null ) mComm.disconnectDevice();
   }
   // end FIXME_COMM
@@ -508,10 +524,22 @@ public class TopoDroidApp extends Application
       mComm.disconnectRemoteDevice( );
       mComm = null;
     }
+    Log.v("DistoXBLE", "create comm. type " + TDInstance.deviceType() );
     // if ( TDInstance.isDeviceAddress( Device.ZERO_ADDRESS ) ) { // FIXME VirtualDistoX
     //   mComm = new VirtualDistoXComm( this, mVirtualDistoX );
-    // } else { 
-      mComm = new DistoXComm( this );
+    // } else {
+      switch ( TDInstance.deviceType() ) {
+        case Device.DISTO_X310:
+        case Device.DISTO_A3:
+          mComm = new DistoXComm( this );
+          break;
+        case Device.DISTO_BLE5: // FIXME BLE
+          String address = TDInstance.deviceAddress();
+          BluetoothDevice bt_device = TDInstance.bleDevice;
+          Log.v("DistoXBLE", "create BLE comm. address " + address + " BT " + ((bt_device==null)? "null" : bt_device.getAddress() ) );
+          mComm = new BleComm( this, address, bt_device );
+          break;
+      }
     // }
   }
 
@@ -744,7 +772,7 @@ public class TopoDroidApp extends Application
       TDToast.makeBad( R.string.no_device_address );
     } else if ( check && ! checkCalibrationDeviceMatch() ) {
       TDToast.makeBad( R.string.calib_device_mismatch );
-    } else if ( ! mComm.writeCoeff( TDInstance.distoAddress(), coeff ) ) {
+    } else if ( ! mComm.writeCoeff( TDInstance.deviceAddress(), coeff ) ) {
       TDToast.makeBad( R.string.write_failed );
     } else {
       TDToast.make( R.string.write_ok );
@@ -1100,9 +1128,9 @@ public class TopoDroidApp extends Application
   void setBooleanPreference( String preference, boolean val ) { mPrefHlp.update( preference, val ); }
 
   // FIXME_DEVICE_STATIC
-  void setDevice( String address ) 
+  void setDevice( String address, BluetoothDevice bt_device )
   { 
-    // Log.v("DistoX", "VD TDapp set device address " + address );
+    Log.v("DistoXBLE", "set device address " + address + " BLE " + ((bt_device!=null)? "yes" : "no") );
     if ( address == null ) {
       // if ( mVirtualDistoX != null ) mVirtualDistoX.stopServer( this ); // FIXME VirtualDistoX
       TDInstance.device = null;
@@ -1116,9 +1144,25 @@ public class TopoDroidApp extends Application
     } else {
       // if ( mVirtualDistoX != null ) mVirtualDistoX.stopServer( this ); // FIXME VirtualDistoX
       // boolean create = ( TDInstance.device == null || TDInstance.device.mAddress.equals( Device.ZERO_ADDRESS ) );
-      boolean create = TDInstance.isDeviceZeroAddress();
-      TDInstance.device = mDData.getDevice( address );
-      if ( create ) createComm();
+      if ( bt_device != null ) { // BLE device is temporary
+        deleteComm();
+        // if ( TDInstance.deviceType() == Device.DISTO_BLE5 ) {
+        //   Log.v("DistoXBLE", "update address " + address );
+        //   TDInstance.device.mAddress = address;
+        // } else {
+          // address, model, head, tail, name, nickname
+          // model could be "BLE5" or start with DistoX-BLE
+          TDInstance.device = new Device( address, "DistoX-BLE", 0, 0, null, null );
+          TDInstance.bleDevice = bt_device;
+        // }
+        Log.v("DistoXBLE", "create BLE address " + address );
+        mComm = new BleComm( this, address, bt_device ); // FIXME BLE
+      } else {
+        boolean create = TDInstance.isDeviceZeroAddress() || (TDInstance.deviceType() == Device.DISTO_BLE5);
+        TDInstance.device = mDData.getDevice( address );
+        TDInstance.bleDevice = null;
+        if ( create ) createComm();
+      }
     }
     if ( mPrefHlp != null ) {
       mPrefHlp.update( TDSetting.keyDeviceName(), address ); 
@@ -1539,7 +1583,9 @@ public class TopoDroidApp extends Application
 
     if ( l >= 0.0f ) { // FIXME_X_SPLAY
       if ( horizontal ) { // WENS
-        extend = TDAzimuth.computeSplayExtend( 270 );
+        // extend = TDAzimuth.computeSplayExtend( 270 );
+        // extend = ( TDSetting.mLRExtend )? TDAzimuth.computeSplayExtend( 270 ) : DBlock.EXTEND_UNSET;
+        extend = DBlock.EXTEND_UNSET;
         if ( at >= 0L ) {
           id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, l, 270.0f, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1, true );
           ++at;
@@ -1549,7 +1595,9 @@ public class TopoDroidApp extends Application
       } else {
         float b = bearing - 90.0f;
         if ( b < 0.0f ) b += 360.0f;
-        extend = TDAzimuth.computeSplayExtend( b );
+        // extend = TDAzimuth.computeSplayExtend( b );
+        // extend = ( TDSetting.mLRExtend )? TDAzimuth.computeSplayExtend( b ) : DBlock.EXTEND_UNSET;
+        extend = DBlock.EXTEND_UNSET;
         // b = in360( b );
         if ( at >= 0L ) {
           id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, l, b, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1, true );
@@ -1562,7 +1610,9 @@ public class TopoDroidApp extends Application
     }
     if ( r >= 0.0f ) {
       if ( horizontal ) { // WENS
-        extend = TDAzimuth.computeSplayExtend( 90 );
+        // extend = TDAzimuth.computeSplayExtend( 90 );
+        // extend = ( TDSetting.mLRExtend )? TDAzimuth.computeSplayExtend( 90 ) : DBlock.EXTEND_UNSET;
+        extend = DBlock.EXTEND_UNSET;
         if ( at >= 0L ) {
           id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, r, 90.0f, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1, true );
           ++at;
@@ -1572,7 +1622,9 @@ public class TopoDroidApp extends Application
       } else {
         // float b = bearing + 90.0f; if ( b >= 360.0f ) b -= 360.0f;
         float b = TDMath.add90( bearing );
-        extend = TDAzimuth.computeSplayExtend( b );
+        // extend = TDAzimuth.computeSplayExtend( b );
+        // extend = ( TDSetting.mLRExtend )? TDAzimuth.computeSplayExtend( b ) : DBlock.EXTEND_UNSET;
+        extend = DBlock.EXTEND_UNSET;
         if ( at >= 0L ) {
           id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, r, b, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1, true );
           ++at;

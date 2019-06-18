@@ -14,6 +14,8 @@ package com.topodroid.DistoX;
 import android.os.Bundle;
 import android.content.Context;
 
+import android.bluetooth.BluetoothDevice;
+
 // static class (singleton) with instance data
 class TDInstance
 {
@@ -31,10 +33,12 @@ class TDInstance
   static boolean xsections = false; // current value of mSharedSections
   static int     datamode = 0;      // current value of survey datamode
   // FIXME static int    extend = 90;  // current value of survey extend
-  static Device  device = null;
 
-  static int distoType() { return (device == null)? 0 : device.mType; }
-  static String distoAddress() { return (device == null)? null : device.mAddress; }
+  static Device  device = null;
+  static BluetoothDevice bleDevice = null; // FIXME BLE
+
+  static int deviceType() { return (device == null)? 0 : device.mType; }
+  static String deviceAddress() { return (device == null)? null : device.mAddress; }
   static boolean isDeviceAddress( String addr ) { return device != null && device.mAddress.equals( addr ); }
   // FIXME VitualDistoX
   // static boolean isDeviceZeroAddress( ) { return ( device == null || device.mAddress.equals( Device.ZERO_ADDRESS ) ); }
@@ -46,15 +50,15 @@ class TDInstance
   static Bundle toBundle()
   {
     Bundle b = new Bundle();
-    b.putString( "TOPODROID_CWD", cwd );
-    b.putString( "TOPODROID_CBD", cbd );
-    b.putLong( "TOPODROID_SID", sid );
-    b.putLong( "TOPODROID_CID", cid );
-    b.putString( "TOPODROID_SURVEY", survey );
-    b.putString( "TOPODROID_CALIB",  calib  );
-    b.putLong( "TOPODROID_SECOND_LAST_SHOT_ID", secondLastShotId );
+    b.putString(  "TOPODROID_CWD", cwd );
+    b.putString(  "TOPODROID_CBD", cbd );
+    b.putLong(    "TOPODROID_SID", sid );
+    b.putLong(    "TOPODROID_CID", cid );
+    b.putString(  "TOPODROID_SURVEY", survey );
+    b.putString(  "TOPODROID_CALIB",  calib  );
+    b.putLong(    "TOPODROID_SECOND_LAST_SHOT_ID", secondLastShotId );
     b.putBoolean( "TOPODROID_XSECTIONS", xsections );
-    b.putString( "TOPODROID_DEVICE", ( (device == null)? "" : device.mAddress)  );
+    b.putString(  "TOPODROID_DEVICE", ( (device == null)? "" : device.mAddress)  );
     return b;
   }
 

@@ -41,7 +41,11 @@ class TDAzimuth
       double ref = mRefAzimuth;
       while ( bearing < ref ) bearing += 360;
       bearing -= ref;
-      return ( bearing > 90 && bearing < 270 )? -1L : 1L;
+      if ( bearing <  90 - TDSetting.mExtendThr ) return +1L;
+      if ( bearing > 270 + TDSetting.mExtendThr ) return +1L;
+      if ( bearing >  90 + TDSetting.mExtendThr && bearing < 270 - TDSetting.mExtendThr ) return -1L;
+      return 0L;
+      // return ( bearing > 90 && bearing < 270 )? -1L : 1L; 
     } else if ( mFixedExtend == -1L ) {
       // bearing += 180; if ( bearing >= 360 ) bearing -= 360;
       bearing = TDMath.add180( bearing );
@@ -53,7 +57,8 @@ class TDAzimuth
   static long getFixedExtend() { return mFixedExtend; }
   static boolean isFixedExtend() { return mFixedExtend != 0; }
 
-  // used for manually entered shots, and by Compass/VisualTopo parser
+  // commented use for manually entered shots, 
+  // commenetd used by by Compass/VisualTopo parser
   static long computeSplayExtend( double bearing )
   {
     while ( bearing < mRefAzimuth ) bearing += 360;
