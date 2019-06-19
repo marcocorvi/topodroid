@@ -1,10 +1,11 @@
 symbol point
 name rock-moutonnee
 name-pt rocha_moutonnée
-name-es roca moutonnee
+name-es roca_moutonnee
 name-ru бараний_лоб
-th_name u:rock_moutonnee
 name-fr roche_moutonnée
+name-de Rundhöcker
+th_name u:rock_moutonnee
 color 0xcccc99
 csurvey 0 0 0
 path

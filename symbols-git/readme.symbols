@@ -5,7 +5,7 @@ There are three libraries, one for points, one for lines and one for areas.
 Symbol files must follow a strict syntax, which is detailed in the documentation of the 
 website.
 
-In particular symbol files contains informations used in the Therion and cSurvey exports.
+In particular symbol files contains information used in the Therion and cSurvey exports.
 
 Therion:
 therion name

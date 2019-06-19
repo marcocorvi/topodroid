@@ -3,8 +3,9 @@ name nivokarstic_niche
 name-pt nicho_glaciocárstico
 name-es nicho_glaciocárstico
 name-ru корозионно_нивальная_ниша
-name-fr niche nivo-karstique
+name-fr niche_nivo-karstique
 name-ro nișă_nivocarstică
+name-de Nivokarst
 th_name u:nivokarstic_niche
 group nivokarstic_niche
 color 0xcccccc 0xff

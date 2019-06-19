@@ -4,6 +4,7 @@ name-es pendiente_inclinada
 name-pt rampa_inclinada
 name-ru склон_крутой
 name-ro pantă_abruptă
+name-de Steile_Steigung
 th_name slope:steep
 group slope
 color 0xff9933 0xff

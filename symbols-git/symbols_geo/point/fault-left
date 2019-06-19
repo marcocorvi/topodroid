@@ -6,6 +6,7 @@ name-pt falha_esquerda
 name-ru нарушение_левостороннее
 name-fr faille_senestre
 name-ro falie-stânga
+name-de Linksverwerfung
 th_name u:fault-left
 color 0xff6666
 csurvey 0 0 0

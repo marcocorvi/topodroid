@@ -5,6 +5,7 @@ name-pt rampa_quase_vertical
 name-ru склон_отвесный
 name-fr pente_abrupte
 name-ro pantă_medie
+name-de Mittlere_Steigung
 th_name slope:sheer
 group slope
 color 0xff0000 0xff

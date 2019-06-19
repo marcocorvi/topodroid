@@ -4,6 +4,7 @@ name-pt fratura
 name-ru сочленение
 name-fr joint-de-strate
 name-ro conexiune?
+name-de Verbindung
 th_name u:joint
 group joint
 color 0xffffff 0x99
