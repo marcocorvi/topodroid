@@ -818,7 +818,7 @@
     <string name="audio_delete">Удалить ?</string>
     <string name="audio_overwrite">Перезаписать ?</string>
 
-    <string name="title_azimut">Референс азимут развёртки</string>
+    <string name="title_azimut">Опорный азимут развёртки</string>
     <string name="title_audio">Аудио заметка</string>
     <string name="title_calib">Калибровки</string>
     <string name="title_calib_check">Замеры контроля калибровки</string>
@@ -1131,8 +1131,8 @@
   <string name="pref_team_title">Группа топосъёмки</string>
   <string name="pref_team_summary">Имена членов группы топосъёмки, которые будут автоматически испрользованы при создании новой съёмки.</string>
 
-  <string name="pref_ethr_title">Порог угла вертикальности сплеев</string>
-  <string name="pref_ethr_summary">Максимальный угол от вертикали для вертикальной развертки сплея на разрезе [град]</string>
+  <string name="pref_ethr_title">Порог угла вертикальности замеров</string>
+  <string name="pref_ethr_summary">Максимальный угол от вертикали для вертикальной развертки замера на разрезе [град]</string>
   <string name="pref_vthr_title">Порог вертикальности отрезков</string>
   <string name="pref_vthr_summary">Максимальный угол отрезка относительно горизонта для перехода от ЛПВН к ЗВСЮ</string>
 
