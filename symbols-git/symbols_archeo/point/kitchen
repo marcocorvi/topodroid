@@ -6,8 +6,9 @@ name-pt cozinha
 name-ru кухня
 name-sk kuchyňa
 name-ro bucătărie
-th_name u:kitchen
 name-fr cuisine
+name-de Küche
+th_name u:kitchen
 color 0xff9966
 csurvey 0 0 0
 path

@@ -4,8 +4,9 @@ name-pt plano_sinforme
 name-es plano_sinforme
 name-ru плоско_конформное
 name-ro plan-sinform
-th_name u:plane_synform
 name-fr plan_synforme
+name-de Synforme_Fläche
+th_name u:plane_synform
 color 0xcccccc
 csurvey 0 0 0
 path

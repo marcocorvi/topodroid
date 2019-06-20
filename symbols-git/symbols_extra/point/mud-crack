@@ -1,6 +1,7 @@
 encoding  utf-8
 symbol point
 name mud-crack
+name-de Lehmriss
 th_name u:mud-crack
 orientation no
 color 0xff9933

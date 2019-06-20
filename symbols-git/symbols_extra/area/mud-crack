@@ -1,6 +1,7 @@
 encoding  utf-8
 symbol area
 name mud-crack
+name-de Getrockneter_Lehm
 th_name u:mud-crack
 color 0xcc9933 0xcc
 csurvey 1 48 0 3

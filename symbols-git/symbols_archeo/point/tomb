@@ -6,8 +6,9 @@ name-pt tumba
 name-ru погребение
 name-sk hrob
 name-ro mormânt
-th_name u:tomb
 name-fr tombe
+name-de Grab
+th_name u:tomb
 color 0xffff33
 csurvey 0 0 0
 path

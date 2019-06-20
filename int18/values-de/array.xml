@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-  <!-- TODO string-array name="canvasLevels">
-     <item name="none">none</item>
-     <item name="class">by symbol</item>
-     <item name="instance">by item</item>
-  </string-array -->
+   <string-array name="canvasLevels">
+     <item name="none">keine</item>
+     <item name="class">nach Symbolen</item>
+     <item name="instance">nach Elementen</item>
+  </string-array>
 
-  <!-- TODO string-array name="csvSeparator">
-     <item name="comma">comma</item>
-     <item name="pipe">pipe</item>
-     <item name="tab">tab</item>
-  </string-array -->
+  <string-array name="csvSeparator">
+     <item name="comma">Komma</item>
+     <item name="pipe">Pipe</item>
+     <item name="tab">Tabulator</item>
+  </string-array>
 
   <string-array name="lineContinue">
      <item name="none">nie</item>
@@ -206,7 +206,7 @@
      <item name="two">Normal</item>
      <item name="two">Grob</item>
      <item name="bezier">Bezier</item>
-     <item name="simplified">Simplified</item> <!-- TODO -->
+     <item name="simplified">Vereinfacht</item>
   </string-array>
 
   <string-array name="groupBy">

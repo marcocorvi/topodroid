@@ -1,12 +1,13 @@
 symbol point
 name pit
 name-it pozzo
-name- pozo
+name-es pozo
 name-pt poço
 name-ru яма
 name-fr puits
 name-sk jama
 name-ro puț
+name-de Loch
 th_name u:pit
 color 0xff6699
 csurvey 0 0 0

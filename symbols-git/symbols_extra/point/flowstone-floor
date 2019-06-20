@@ -2,6 +2,7 @@ symbol point
 name flowstone-floor
 name-ru натечный_пол
 name-ro cruste-podea
+name-de Sinterboden
 th_name flowstone:floor
 orientation no
 color 0xffcc66
