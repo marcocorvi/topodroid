@@ -555,10 +555,11 @@ public class DeviceActivity extends Activity
 
   // -----------------------------------------------------------------------------
 
+  // called only by DeviceA3MemoryDialog
   void /*boolean*/ readDeviceHeadTail( byte[] command, int[] head_tail )
   {
     // TDLog.Log( TDLog.LOG_DEVICE, "onClick mBtnHeadTail. Is connected " + mApp.isConnected() );
-    String ht = mApp.readHeadTail( mCurrDevice.mAddress, command, head_tail );
+    String ht = mApp.readA3HeadTail( mCurrDevice.mAddress, command, head_tail );
     if ( ht == null ) {
       TDToast.makeBad( R.string.head_tail_failed );
       // return false;
@@ -583,7 +584,7 @@ public class DeviceActivity extends Activity
     // int from = head_tail[0];
     // int to   = head_tail[1];
     // // Log.v(TopoDroidApp.TAG, "do reset from " + from + " to " + to );
-    // int n = mApp.swapHotBit( mCurrDevice.mAddress, from, to );
+    // int n = mApp.swapA3HotBit( mCurrDevice.mAddress, from, to );
     if ( checkA3headtail( head_tail ) ) {
       ( new SwapHotBitTask( mApp, Device.DISTO_A3, mCurrDevice.mAddress, head_tail ) ).execute();
     }

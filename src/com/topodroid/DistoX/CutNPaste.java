@@ -187,7 +187,7 @@ class CutNPaste
       textview1 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
-            app.setX310Laser( 1, null );
+            app.setX310Laser( 1, 0, null );
             dismissPopupBT();
           }
         } );
@@ -199,7 +199,7 @@ class CutNPaste
       textview2 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
-            app.setX310Laser( 0, null );
+            app.setX310Laser( 0, 0, null );
             dismissPopupBT();
           }
         } );

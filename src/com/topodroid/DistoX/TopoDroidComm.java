@@ -101,6 +101,7 @@ class TopoDroidComm
       mHasG  = false;
 
       // TDLog.Log( TDLog.LOG_COMM, "RF comm thread running ... to_read " + toRead );
+      Log.v( "DistoXCOMM", "RF comm thread ... to_read " + toRead );
       if ( mType == COMM_RFCOMM ) {
         while ( doWork && nReadPackets /* .get() */ != toRead ) {
           // TDLog.Log( TDLog.LOG_COMM, "RF comm loop: read " + getNrReadPackets() + " to-read " + toRead );
@@ -247,7 +248,7 @@ class TopoDroidComm
   boolean mHasG = false;
   long mLastShotId;   // last shot id
 
-  TopoDroidComm( TopoDroidApp app )
+  protected TopoDroidComm( TopoDroidApp app )
   {
     mApp          = app;
     mProtocol     = null;
@@ -327,23 +328,13 @@ class TopoDroidComm
     return ret;
   }
 
-  void setX310Laser( String address, int what, Handler /* ILister */ lister ) { }
-
   boolean toggleCalibMode( String address, int type ) { return false; }
 
   boolean writeCoeff( String address, byte[] coeff ) { return false; }
 
   boolean readCoeff( String address, byte[] coeff ) { return false; }
 
-  String readHeadTail( String address, byte[] command, int[] head_tail ) { return null; }
-  
-  int readX310Memory( String address, int from, int to, List< MemoryOctet > memory ) { return -1; }
-
-  int readA3Memory( String address, int from, int to, List< MemoryOctet > memory ) { return -1; }
-
   byte[] readMemory( String address, int addr ) { return null; }
-
-  int swapHotBit( String address, int from, int to ) { return -1; }
 
   // ------------------------------------------------------------------------------------
   // CONTINUOUS DATA DOWNLOAD
@@ -362,12 +353,5 @@ class TopoDroidComm
   {
     return -1;
   }
-
-  // ====================================================================================
-  // FIRMWARE
-
-  int dumpFirmware( String address, String filepath ) { return 0; }
-
-  int uploadFirmware( String address, String filepath ) { return 0; }
 
 }

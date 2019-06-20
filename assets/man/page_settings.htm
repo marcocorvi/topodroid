@@ -6,15 +6,17 @@
 <li><a href="page_cwd.htm">Work directory.</a> Default "unset" (ie "TopoDroid")</li>
 <li>Text size: size of the text in lists. &gt;= 1. Default 14</li>
 <li>Buttons size {small, normal, medium, large, huge}. Default normal</li>
-<li>Level of features {basic, normal, advanced, expert}. Default normal</li>
+<li>Activity level {basic, normal, advanced, expert}. Default normal</li>
 <li>Keyboard. Enable <a href="page_keypad.htm">custom keyboards</a> instead of Andrid default keyboard.</li>
 <li>Custom keyboard cursor</li>
 <!-- li>Cosurveying service. Default OFF</li -->
-<li>Translated manual</li>
-<li><a href="page_language.htm">Language</a> {default,en,fr,es,it,ru,de,pl,pg,sl,bg,ukr,hu}. Default "default" (i.e. locale)</li>
+<li>User manual language</li>
+<li>App <a href="page_language.htm">language</a> {default,en,fr,es,it,ru,de,pl,pg,ro,sl,bg,cn,ukr,hu}. Default "default" (i.e. locale)</li>
 <li>Geek:<br>
   <ul>
-  <li>Additional palettes</li>
+  <li>Additional palettes menu</li>
+  <li>Backup clear menu</li>
+  <li>Packets logging</li>
   </ul>
 </li>
 </ul><br><p>
@@ -51,8 +53,8 @@
   <li>Stations: Add station points to Therion scraps. Default YES</li>
   <li>Splays: Add splay lines to Therion scraps. Default YES</li>
   <li>LRUD. Add LRUD to Survex/Therion export. Default NO</li>
-  <li>Grid. Add grid to xvi export. Default NO</li>
   <li>Scale. Export scale. Default 1:100</li>
+  <li>xvi reference: insert reference to xvi image in th2 files</li>
   </ul>
 </li>
 <li>Compass:<br>
@@ -72,7 +74,7 @@
   <li>Line stroke. Default 0.5</li>
   <li>Grid stroke. Default 0.5</li>
   <li>Shot stroke. Default 0.5</li>
-  <li>Orientation stroke. Default 2.0</li>
+  <li>Orientation tick. Default 2.0</li>
   </ul>
 </li>
 <li>DXF:<br>
@@ -85,6 +87,9 @@
   <ul>
   <li>Image resolution [0.5, 100]. Default 1.5 [x200 px]</li>
   <li>Background color (RGB in 0-100). Default "0 0 0" [black]</li>
+  <li>Grid: add metric grid</li>
+  <li>Splays: add splay lines</li>
+  <li>Stations: add stations</li>
   </ul>
 </li>
 <li>KML/GeoJSON:<br>
@@ -92,6 +97,12 @@
   <li>Stations. Add stations to KML/GeoJSON export Default ON</li>
   <li>Splays. Add splays to KML/GeoJSON export Default OFF</li>
   </ul>
+</li>
+<li>CSV:<br>
+  <ul>
+  <li>Raw data: export raw data to csv</li>
+  <li>field separator</li>
+  <li>line separator</li>
 </li>
 </ul><br><p>
 
@@ -121,18 +132,16 @@ SHOT DATA
 <li>Minimum shot length</li>
 <li>Minimum leg-shot number. Minimum number of shots per leg &gt;=2. Default 2</li>
 <li>Backshot DistoX</li>
-<li>Splay vertical threshold. Limit for splay extend "vertical" [0,90]. Default 10 deg</li>
+<li>Shot vertical threshold. Region around 90 degrees, where shots are extended "vertical" [0,90]. Default 10 deg</li>
 <li>Leg WENS threshold. Leg V threshold [0,90]. Default 80 deg</li>
 <li>"extend" reference. Settable or fixed extend L/R reference. Default NO</li>
-<li>Loop closure. Default "none"</li>
 <li>Prev/Next buttons. Default ON</li>
 <li>Backsight in user entered shot dialog. Default OFF</li>
 <li>Shot direction delay (timer). Default 10 s</li>
-<li>Shot direction timer beep volume [10,100]. Default 50 percent</li>
 <li>Geek:<br>
   <ul>
   <li>Diving mode</li>
-  <li>Recent shots</li>
+  <li>Recent data highlight</li>
   <li>Recent data timeout</li>
   <li>Splay classes</li>
   <li>Splay coloring</li>
@@ -140,6 +149,10 @@ SHOT DATA
   <li>Plane interpolation</li>
   <li>Leg-shot bell</li>
   <li>Sensors</li>
+  <li>Loop closure. Default "none"</li>
+  <li>Android compass/clino</li>
+  <li>Shot direction timer countdown. Default 10 sec.</li>
+  <li>Shot direction timer beep volume [10,100]. Default 50 percent</li>
   </ul>
 </li>
 </ul>
@@ -169,15 +182,26 @@ ACCURACY
   <ul>
   <li>Sketch shift/scale</li>
   <li>Sketch split/merge</li>
-  <li>Leg WENS threshold</li>
+  <li>Splay plan-view threashold [default 80]</li>
   <li>Dash coherence</li>
-  <li>Splay dash clino threshold</li>
-  <li>Splay dash azimuth threshold</li>
-  <li>Splay dash angle threshold</li>
+  <li>Splay dash clino threshold [50 deg.]</li>
+  <li>Splay dash azimuth threshold [60 deg.]</li>
+  <li>Splay dash angle threshold [60 deg.]</li>
   <li>Backup number. Default 5</li>
-  <li>Backup interval. Default 60</li>
-  <li>Backup clear menu</li>
-  <li>Auto-walls: type, and others</li>
+  <li>Backup interval. Default 60 sec.</li>
+  <li>Auto x-sections in exports</li>
+  <li>Saved station coloring</li>
+  <li>Layers</li>
+  <li>Auto-walls:<br>
+    <ul>
+    <li>Wall type</li>
+    <li>Plan splay clino</li>
+    <li>Profile splay clino</li>
+    <li>Minimum separation along the shot</li>
+    <li>Concavity</li>
+    <li>Point separation on the wall</li>
+    </ul>
+  </li>
   </ul>
 </li>
 </ul>
@@ -190,6 +214,7 @@ POINT TOOLS
 LINE TOOLS
 <ul>
 <li>Lines width (N.B. wall line are twice this). Default 1 px</li>
+<li>Line style scale factor</li>
 <li>Line style {Bezier,fine,normal,coarse, simplified}. Default normal</li>
 <li>Line-point spacing. Minimum distance between line points. Default 10 px</li>
 <li>Section lines "direction tick" size [1,20]. Default 8 [x unit]</li>
@@ -203,6 +228,7 @@ LINE TOOLS
   <li>Cornet threshold (Bezier)</li>
   <li>Max point/segment distance for simplification [m]. Default 0.5</li>
   <li>Max segment length for simplification [m]. Default 2.0</li>
+  <li>Point weeding segment buffer</li>
   <li>Line/area snap</li>
   <li>Smooth/straighten segments</li>
   <li>Streighten lines</li>
@@ -215,7 +241,7 @@ SKETCH ITEMS
 <li>Survey line width [0.5,10]. Default 1 px</li>
 <li>Station name size. Default 24 px</li>
 <li>Green dots radius [0.5,100]. Default 5 px</li>
-<li>Selection radius &gt;= 0. Default 24</li>
+<li>Selection radius. Default 24</li>
 <li>Eraser size. Default 36</li>
 <li>Shift sensitivity. Default 60</li>
 <li>Pointing radius. Default 16</li>
@@ -228,6 +254,7 @@ SKETCH ITEMS
 <li>Bluetooth. Check if BT is enabled on start. Default YES</li>
 <li>Connection data mode {on-demand,continuous}. Default on-demand</li>
 <li>Auto reconnect (in continuous mode). Default FALSE</li>
+<li>New data number: get the number of new data before batc download</li>
 <li>BT socket type {normal,insecure}. Default normal</li>
 <li>Z6 workaround. Default YES</li>
 <li>Autopairing. Default YES</li>
@@ -246,8 +273,9 @@ SKETCH ITEMS
 <ul>
 <li>Group policy {4x4+M,Nx4,distance). Default Nx4
 <li>Group tolerance. Default 40 [deg]</li>
-<li>Calibration epsilon. Algorithm error. Default 0.000001</li>
+<li>Calibration algorithm error. Default 0.000001</li>
 <li>Calibration maximum iterations. Default 200</li>
+<li>Download remote calibration data immediately</li>
 <li>Show calibration raw data. Default NO</li>
 <li>Calibration algorithm {auto,linear,non-linear}. Default auto</li>
 </ul>

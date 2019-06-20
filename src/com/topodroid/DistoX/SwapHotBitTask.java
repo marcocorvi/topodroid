@@ -54,7 +54,7 @@ class SwapHotBitTask extends AsyncTask<Void, Integer, Integer>
     if ( mType == Device.DISTO_X310 ) {
       res = -1;
     } else if ( mType == Device.DISTO_A3 && mApp.get() != null ) {
-      res = mApp.get().swapHotBit( mAddress, mFrom, mTo );
+      res = mApp.get().swapA3HotBit( mAddress, mFrom, mTo );
     }
     return res;
   }

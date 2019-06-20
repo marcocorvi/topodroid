@@ -522,7 +522,7 @@ class TDPrefKey
     // "DISTOX_XTHERION_AREAS",    // save areas a-la xtherion
     "DISTOX_THERION_SPLAYS",   // whether to add u:splay lines to Therion th2 export
     "DISTOX_SURVEX_LRUD",      // whether to add LRUD to Survex export
-    "DISTOX_SVG_GRID",         // whether to export grid in SVG/DXF/XVI
+    // "DISTOX_SVG_GRID",         // whether to export grid in SVG/DXF/XVI
     "DISTOX_TH2_SCALE",        // th2/xvi scale
     "DISTOX_TH2_XVI"           // th2 with xvi image comment
   };
@@ -532,7 +532,7 @@ class TDPrefKey
     // R.string.pref_xtherion_areas_title,
     R.string.pref_therion_splays_title,
     R.string.pref_survex_lrud_title,
-    R.string.pref_svg_grid_title,
+    // R.string.pref_svg_grid_title, // NOT GOOD
     R.string.pref_th2_scale_title,
     R.string.pref_th2_xvi_title,
     -1
@@ -543,7 +543,7 @@ class TDPrefKey
     // R.string.pref_xtherion_areas_summary,
     R.string.pref_therion_splays_summary,
     R.string.pref_survex_lrud_summary,
-    R.string.pref_svg_grid_summary,
+    // R.string.pref_svg_grid_summary,
     R.string.pref_th2_scale_summary,
     R.string.pref_th2_xvi_summary,
     -1
@@ -554,7 +554,7 @@ class TDPrefKey
     // FALSE,
     FALSE,
     FALSE,
-    TRUE,
+    // TRUE,
     "100",
     FALSE
   };

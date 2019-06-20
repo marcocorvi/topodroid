@@ -479,16 +479,18 @@ public class TopoDroidApp extends Application
     return info;
   }
 
-  String readHeadTail( String address, byte[] command, int[] head_tail )
+  String readA3HeadTail( String address, byte[] command, int[] head_tail )
   {
-    String ret = mComm.readHeadTail( address, command, head_tail );
+    DistoXA3Comm comm = (DistoXA3Comm)mComm;
+    String ret = comm.readA3HeadTail( address, command, head_tail );
     resetComm();
     return ret;
   }
 
-  int swapHotBit( String address, int from, int to ) 
+  int swapA3HotBit( String address, int from, int to ) 
   {
-    int ret = mComm.swapHotBit( address, from, to );
+    DistoXA3Comm comm = (DistoXA3Comm)mComm;
+    int ret = comm.swapA3HotBit( address, from, to ); // FIXME_A3
     resetComm();
     return ret;
   }
@@ -530,8 +532,10 @@ public class TopoDroidApp extends Application
     // } else {
       switch ( TDInstance.deviceType() ) {
         case Device.DISTO_X310:
+          mComm = new DistoX310Comm( this );
+          break;
         case Device.DISTO_A3:
-          mComm = new DistoXComm( this );
+          mComm = new DistoXA3Comm( this );
           break;
         case Device.DISTO_BLE5: // FIXME BLE
           String address = TDInstance.deviceAddress();
@@ -810,7 +814,8 @@ public class TopoDroidApp extends Application
   int readX310Memory( String address, int h0, int h1, ArrayList< MemoryOctet > memory )
   {
     if ( mComm == null || isCommConnected() ) return -1;
-    int ret = mComm.readX310Memory( address, h0, h1, memory );
+    DistoX310Comm comm = (DistoX310Comm)mComm;
+    int ret = comm.readX310Memory( address, h0, h1, memory );
     resetComm();
     return ret;
   }
@@ -818,7 +823,8 @@ public class TopoDroidApp extends Application
   int readA3Memory( String address, int h0, int h1, ArrayList< MemoryOctet > memory )
   {
     if ( mComm == null || isCommConnected() ) return -1;
-    int ret = mComm.readA3Memory( address, h0, h1, memory );
+    DistoXA3Comm comm = (DistoXA3Comm)mComm;
+    int ret = comm.readA3Memory( address, h0, h1, memory );
     resetComm();
     return ret;
   }
@@ -1772,10 +1778,16 @@ public class TopoDroidApp extends Application
 
   // --------------------------------------------------------
 
-  void setX310Laser( int what, Handler /* ILister */ lister ) // 0: off, 1: on, 2: measure // FIXME_LISTER
+  /** 
+   * @param what      what to do
+   * @param nr        number od data to download
+   # @param lister    optional lister
+   */
+  void setX310Laser( int what, int nr, Handler /* ILister */ lister ) // 0: off, 1: on, 2: measure // FIXME_LISTER
   {
     if ( mComm == null || TDInstance.device == null ) return;
-    mComm.setX310Laser( TDInstance.device.mAddress, what, lister );
+    DistoX310Comm comm = (DistoX310Comm)mComm;
+    if ( comm != null ) comm.setX310Laser( TDInstance.device.mAddress, what, nr, lister );
   }
 
   // int readFirmwareHardware()
@@ -1786,7 +1798,8 @@ public class TopoDroidApp extends Application
   int dumpFirmware( String filename )
   {
     if ( mComm == null || TDInstance.device == null ) return -1;
-    return mComm.dumpFirmware( TDInstance.device.mAddress, TDPath.getBinFile(filename) );
+    DistoX310Comm comm = (DistoX310Comm)mComm;
+    return comm.dumpFirmware( TDInstance.device.mAddress, TDPath.getBinFile(filename) );
   }
 
   int uploadFirmware( String filename )
@@ -1802,7 +1815,8 @@ public class TopoDroidApp extends Application
       TDLog.LogFile( "Firmware upload file does not end with \"bin\"");
       return 0;
     }
-    return mComm.uploadFirmware( TDInstance.device.mAddress, pathname );
+    DistoX310Comm comm = (DistoX310Comm)mComm;
+    return comm.uploadFirmware( TDInstance.device.mAddress, pathname );
   }
 
   // ----------------------------------------------------------------------

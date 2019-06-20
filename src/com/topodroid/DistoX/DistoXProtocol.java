@@ -40,23 +40,23 @@ import java.nio.channels.ClosedByInterruptException;
 
 class DistoXProtocol extends TopoDroidProtocol
 {
-  // private Socket  mSocket = null;
-  private DataInputStream  mIn;
-  private DataOutputStream mOut;
+  // protected Socket  mSocket = null;
+  protected DataInputStream  mIn;
+  protected DataOutputStream mOut;
 
-  // private byte[] mHeadTailA3;  // head/tail for Protocol A3
-  private byte[] mAddr8000;
-  private byte[] mAcknowledge;
-  private byte   mSeqBit;         // sequence bit: 0x00 or 0x80
+  // protected byte[] mHeadTailA3;  // head/tail for Protocol A3
+  protected byte[] mAddr8000;
+  protected byte[] mAcknowledge;
+  protected byte   mSeqBit;         // sequence bit: 0x00 or 0x80
 
-  // private static final UUID MY_UUID = UUID.fromString( "00001101-0000-1000-8000-00805F9B34FB" );
+  // protected static final UUID MY_UUID = UUID.fromString( "00001101-0000-1000-8000-00805F9B34FB" );
 
-  // final private byte[] mBuffer = new byte[8]; // packet buffer
+  // final protected byte[] mBuffer = new byte[8]; // packet buffer
   // int mMaxTimeout = 8;
   
   //-----------------------------------------------------
 
-  DistoXProtocol( DataInputStream in, DataOutputStream out, Device device, Context context )
+  protected DistoXProtocol( DataInputStream in, DataOutputStream out, Device device, Context context )
   {
     super( device, context );
 
@@ -103,70 +103,69 @@ class DistoXProtocol extends TopoDroidProtocol
     }
   }
 
-
   // ACTIONS -----------------------------------------------------------
 
   /** swap hot bit in a data in DistoX A3 memory
    * @param addr  memory address
    */
-  @Override
-  boolean swapHotBit( int addr ) // only A3
-  {
-    try {
-      mBuffer[0] = (byte) 0x38;
-      mBuffer[1] = (byte)( addr & 0xff );
-      mBuffer[2] = (byte)( (addr>>8) & 0xff );
-      mOut.write( mBuffer, 0, 3 );
-      // if ( TDSetting.mPacketLog ) logPacket3( 1L, mBuffer );
+  // @Override
+  // boolean swapA3HotBit( int addr ) // only A3
+  // {
+  //   try {
+  //     mBuffer[0] = (byte) 0x38;
+  //     mBuffer[1] = (byte)( addr & 0xff );
+  //     mBuffer[2] = (byte)( (addr>>8) & 0xff );
+  //     mOut.write( mBuffer, 0, 3 );
+  //     // if ( TDSetting.mPacketLog ) logPacket3( 1L, mBuffer );
 
-      mIn.readFully( mBuffer, 0, 8 );
-      // if ( TDSetting.mPacketLog ) logPacket( 0L );
+  //     mIn.readFully( mBuffer, 0, 8 );
+  //     // if ( TDSetting.mPacketLog ) logPacket( 0L );
 
-      if ( mBuffer[0] != (byte)0x38 ) { 
-        TDLog.Error( "HotBit-38 wrong reply packet addr " + addr );
-        return false;
-      }
+  //     if ( mBuffer[0] != (byte)0x38 ) { 
+  //       TDLog.Error( "HotBit-38 wrong reply packet addr " + addr );
+  //       return false;
+  //     }
 
-      int reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
-      // Log.v( TopoDroidApp.TAG, "proto read ... addr " + addr + " reply addr " + reply_addr );
-      if ( reply_addr != addr ) {
-        TDLog.Error( "HotBit-38 wrong reply addr " + reply_addr + " addr " + addr );
-        return false;
-      }
-      mBuffer[0] = (byte)0x39;
-      // mBuffer[1] = (byte)( addr & 0xff );
-      // mBuffer[2] = (byte)( (addr>>8) & 0xff );
-      if ( mBuffer[3] == 0x00 ) {
-        TDLog.Error( "HotBit refusing to swap addr " + addr );
-        return false;
-      }  
+  //     int reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
+  //     // Log.v( TopoDroidApp.TAG, "proto read ... addr " + addr + " reply addr " + reply_addr );
+  //     if ( reply_addr != addr ) {
+  //       TDLog.Error( "HotBit-38 wrong reply addr " + reply_addr + " addr " + addr );
+  //       return false;
+  //     }
+  //     mBuffer[0] = (byte)0x39;
+  //     // mBuffer[1] = (byte)( addr & 0xff );
+  //     // mBuffer[2] = (byte)( (addr>>8) & 0xff );
+  //     if ( mBuffer[3] == 0x00 ) {
+  //       TDLog.Error( "HotBit refusing to swap addr " + addr );
+  //       return false;
+  //     }  
 
-      mBuffer[3] |= (byte)0x80; // RESET HOT BIT
-      mOut.write( mBuffer, 0, 7 );
-      // if ( TDSetting.mPacketLog ) logPacket7( 1L, mBuffer );
+  //     mBuffer[3] |= (byte)0x80; // RESET HOT BIT
+  //     mOut.write( mBuffer, 0, 7 );
+  //     // if ( TDSetting.mPacketLog ) logPacket7( 1L, mBuffer );
 
-      mIn.readFully( mBuffer, 0, 8 );
-      // if ( TDSetting.mPacketLog ) logPacket( 0L );
+  //     mIn.readFully( mBuffer, 0, 8 );
+  //     // if ( TDSetting.mPacketLog ) logPacket( 0L );
 
-      if ( mBuffer[0] != (byte)0x38 ) {
-        TDLog.Error( "HotBit-39 wrong reply packet addr " + addr );
-        return false;
-      }
-      reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
-      // Log.v( TopoDroidApp.TAG, "proto reset ... addr " + addr + " reply addr " + reply_addr );
-      if ( reply_addr != addr ) {
-        TDLog.Error( "HotBit-39 wrong reply addr " + reply_addr + " addr " + addr );
-        return false;
-      }
-    } catch ( EOFException e ) {
-      TDLog.Error( "HotBit EOF failed addr " + addr );
-      return false;
-    } catch (IOException e ) {
-      TDLog.Error( "HotBit IO failed addr " + addr );
-      return false;
-    }
-    return true;
-  }
+  //     if ( mBuffer[0] != (byte)0x38 ) {
+  //       TDLog.Error( "HotBit-39 wrong reply packet addr " + addr );
+  //       return false;
+  //     }
+  //     reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
+  //     // Log.v( TopoDroidApp.TAG, "proto reset ... addr " + addr + " reply addr " + reply_addr );
+  //     if ( reply_addr != addr ) {
+  //       TDLog.Error( "HotBit-39 wrong reply addr " + reply_addr + " addr " + addr );
+  //       return false;
+  //     }
+  //   } catch ( EOFException e ) {
+  //     TDLog.Error( "HotBit EOF failed addr " + addr );
+  //     return false;
+  //   } catch (IOException e ) {
+  //     TDLog.Error( "HotBit IO failed addr " + addr );
+  //     return false;
+  //   }
+  //   return true;
+  // }
 
   // PACKETS I/O ------------------------------------------------------------------------
 
@@ -175,8 +174,7 @@ class DistoXProtocol extends TopoDroidProtocol
    * @param maxtimeout max number of join attempts
    * @return number of data to read
    */
-  @Override
-  protected int getAvailable( long timeout, int maxtimeout ) throws IOException
+  private int getAvailable( long timeout, int maxtimeout ) throws IOException
   {
     mMaxTimeout = maxtimeout;
     final int[] dataRead = { 0 };
@@ -242,7 +240,9 @@ class DistoXProtocol extends TopoDroidProtocol
     return dataRead[0];
   }
 
-
+  /**
+   * @return packet type (if successful)
+   */
   @Override
   int readPacket( boolean no_timeout )
   {
@@ -330,13 +330,16 @@ class DistoXProtocol extends TopoDroidProtocol
     return true;
   }
 
+  // must be overridden
+  int getHeadMinusTail( int head, int tail ) { return 0; }
+
   /** read the number of data to download
    * @param command command to send to the DistoX
    * @param a3      whether DistoX A3
    * @return number of data to download
    */
   @Override
-  int readToRead( byte[] command, boolean a3 )
+  int readToRead( byte[] command )
   {
     int ret = 0;
     mError = DISTOX_ERR_OK;
@@ -353,31 +356,23 @@ class DistoXProtocol extends TopoDroidProtocol
       }
       int head = MemoryOctet.toInt( mBuffer[4], mBuffer[3] );
       int tail = MemoryOctet.toInt( mBuffer[6], mBuffer[5] );
-      if ( a3 ) {
-        ret = ( head >= tail )? (head-tail)/8 : ((DeviceA3Details.MAX_ADDRESS_A3 - tail) + head)/8; 
-      } else {
-        // head = head segment index
-        // tail = tail packet index
-        int hp = 2 * head; // head packet index
-        ret = ( hp >= tail )? (hp - tail) : (hp + (DeviceX310Details.MAX_INDEX_X310 - tail) );
-        // ret can be odd
-	Log.v("DistoX-PROTO", "read to-read: H " + head + " T " + tail + " ret " + ret );
-      }
+      ret = getHeadMinusTail( head, tail );
+      // Log.v("DistoX-PROTO", "read to-read: H " + head + " T " + tail + " ret " + ret );
 
       // DEBUG
       if ( TDLog.LOG_PROTO ) {
         TDLog.DoLog(
-          "Proto readToRead Head-Tail " + 
+          "Proto read-to-read Head-Tail " + 
           String.format("%02x%02x-%02x%02x", mBuffer[4], mBuffer[3], mBuffer[6], mBuffer[5] )
           + " " + head + " - " + tail + " = " + ret );
       }
       return ret;
     } catch ( EOFException e ) {
-      TDLog.Error( "Proto readToRead Head-Tail read() failed" );
+      TDLog.Error( "Proto read-to-read Head-Tail read() failed" );
       mError = DISTOX_ERR_HEADTAIL_EOF;
       return DISTOX_ERR_HEADTAIL_EOF;
     } catch (IOException e ) {
-      TDLog.Error( "Proto readToRead Head-Tail read() failed" );
+      TDLog.Error( "Proto read-to-read Head-Tail read() failed" );
       mError = DISTOX_ERR_HEADTAIL_IO;
       return DISTOX_ERR_HEADTAIL_IO;
     }
@@ -388,32 +383,32 @@ class DistoXProtocol extends TopoDroidProtocol
    * @param head_tail  array to store head and tail values
    * @return null on failure, string presentation on success
    */
-  @Override
-  String readHeadTail( byte[] command, int[] head_tail )
-  {
-    try {
-      mOut.write( command, 0, 3 );
-      // if ( TDSetting.mPacketLog ) logPacket3( 1L, command );
+  // @Override
+  // String readA3HeadTail( byte[] command, int[] head_tail )
+  // {
+  //   try {
+  //     mOut.write( command, 0, 3 );
+  //     // if ( TDSetting.mPacketLog ) logPacket3( 1L, command );
 
-      mIn.readFully( mBuffer, 0, 8 );
-      // if ( TDSetting.mPacketLog ) logPacket( 0L );
+  //     mIn.readFully( mBuffer, 0, 8 );
+  //     // if ( TDSetting.mPacketLog ) logPacket( 0L );
 
-      if ( mBuffer[0] != (byte)( 0x38 ) ) { return null; }
-      if ( mBuffer[1] != command[1] ) { return null; }
-      if ( mBuffer[2] != command[2] ) { return null; }
-      // TODO value of Head-Tail in byte[3-7]
-      head_tail[0] = MemoryOctet.toInt( mBuffer[4], mBuffer[3] );
-      head_tail[1] = MemoryOctet.toInt( mBuffer[6], mBuffer[5] );
-      return String.format("%02x%02x-%02x%02x", mBuffer[4], mBuffer[3], mBuffer[6], mBuffer[5] );
-      // TDLog.Log( TDLog.LOG_PROTO, "read Head Tail " + res );
-    } catch ( EOFException e ) {
-      TDLog.Error( "read Head Tail read() EOF failed" );
-      return null;
-    } catch (IOException e ) {
-      TDLog.Error( "read Head Tail read() IO failed" );
-      return null;
-    }
-  }
+  //     if ( mBuffer[0] != (byte)( 0x38 ) ) { return null; }
+  //     if ( mBuffer[1] != command[1] ) { return null; }
+  //     if ( mBuffer[2] != command[2] ) { return null; }
+  //     // TODO value of Head-Tail in byte[3-7]
+  //     head_tail[0] = MemoryOctet.toInt( mBuffer[4], mBuffer[3] );
+  //     head_tail[1] = MemoryOctet.toInt( mBuffer[6], mBuffer[5] );
+  //     return String.format("%02x%02x-%02x%02x", mBuffer[4], mBuffer[3], mBuffer[6], mBuffer[5] );
+  //     // TDLog.Log( TDLog.LOG_PROTO, "read Head Tail " + res );
+  //   } catch ( EOFException e ) {
+  //     TDLog.Error( "read Head Tail read() EOF failed" );
+  //     return null;
+  //   } catch (IOException e ) {
+  //     TDLog.Error( "read Head Tail read() IO failed" );
+  //     return null;
+  //   }
+  // }
 
   /** read 4 bytes at a memory location
    * @param addr    memory address to read
@@ -501,37 +496,6 @@ class DistoXProtocol extends TopoDroidProtocol
       }
     }
     return cnt;
-  }
-
-  /** read memory at address 8000
-   * @param result 4-byte array to write the read values
-   * @return true if successful
-   */
-  @Override
-  boolean read8000( byte[] result )
-  {
-    try {
-      mOut.write( mAddr8000, 0, 3 );
-      // if ( TDSetting.mPacketLog ) logPacket3( 1L, mAddr8000 );
-
-      mIn.readFully( mBuffer, 0, 8 );
-      // if ( TDSetting.mPacketLog ) logPacket( 0L );
-
-      if ( mBuffer[0] != (byte)( 0x38 ) ) { return false; }
-      if ( mBuffer[1] != mAddr8000[1] ) { return false; }
-      if ( mBuffer[2] != mAddr8000[2] ) { return false; }
-      result[0] = mBuffer[3];
-      result[1] = mBuffer[4];
-      result[2] = mBuffer[5];
-      result[3] = mBuffer[6];
-    } catch ( EOFException e ) {
-      TDLog.Error( "read8000 read() EOF failed" );
-      return false;
-    } catch (IOException e ) {
-      TDLog.Error( "read8000 read() IO failed" );
-      return false;
-    }
-    return true;
   }
 
   /** write calibration coeffs to the DistoX
@@ -626,8 +590,8 @@ class DistoXProtocol extends TopoDroidProtocol
   }
 
   // X310 ====================================================================   
-  private static final int DATA_PER_BLOCK = 56;
-  private static final int BYTE_PER_DATA  = 18;
+  // private static final int DATA_PER_BLOCK = 56;
+  // private static final int BYTE_PER_DATA  = 18;
   // note 56*18 = 1008
   // next there are 16 byte padding for each 1024-byte block (0x400 byte block)
   //
@@ -649,30 +613,30 @@ class DistoXProtocol extends TopoDroidProtocol
   //         7c00 - 7fff = 1736 - 1791
   // 
 
-  private static int index2addrX310( int index )
-  {
-    if ( index < 0 ) index = 0;
-    if ( index > 1792 ) index = 1792;
-    int addr = 0;
-    while ( index >= DATA_PER_BLOCK ) {
-      index -= DATA_PER_BLOCK;
-      addr += 0x400;
-    }
-    addr += BYTE_PER_DATA * index;
-    return addr;
-  }
+  // private static int index2addrX310( int index )
+  // {
+  //   if ( index < 0 ) index = 0;
+  //   if ( index > 1792 ) index = 1792;
+  //   int addr = 0;
+  //   while ( index >= DATA_PER_BLOCK ) {
+  //     index -= DATA_PER_BLOCK;
+  //     addr += 0x400;
+  //   }
+  //   addr += BYTE_PER_DATA * index;
+  //   return addr;
+  // }
 
-  private static int addr2indexX310( int addr )
-  {
-    int index = 0;
-    addr = addr - ( addr % 8 );
-    while ( addr >= 0x400 ) {
-      addr -= 0x400;
-      index += DATA_PER_BLOCK;
-    }
-    index += (int)(addr/BYTE_PER_DATA);
-    return index;
-  }
+  // private static int addr2indexX310( int addr )
+  // {
+  //   int index = 0;
+  //   addr = addr - ( addr % 8 );
+  //   while ( addr >= 0x400 ) {
+  //     addr -= 0x400;
+  //     index += DATA_PER_BLOCK;
+  //   }
+  //   index += (int)(addr/BYTE_PER_DATA);
+  //   return index;
+  // }
 
   // memory layout
   // byte 0-7  first packet
@@ -683,71 +647,71 @@ class DistoXProtocol extends TopoDroidProtocol
   // X310 data address space: 0x0000 - 0x7fff
   // each data takes 18 bytes
 
-  @Override
-  int readX310Memory( int start, int end, List< MemoryOctet > data )
-  {
-    // Log.v( "DistoX", "start " + start + " end " + end );
-    int cnt = 0;
-    while ( start < end ) {
-      int addr = index2addrX310( start );
-      // Log.v( "DistoX", start + " addr " + addr );
-      int endaddr = addr + BYTE_PER_DATA;
-      MemoryOctet result = new MemoryOctet( start );
-      // read only bytes 0-7 and 16-17
-      int k = 0;
-      for ( ; addr < endaddr && k < 8; addr += 4, k+=4 ) {
-        mBuffer[0] = (byte)( 0x38 );
-        mBuffer[1] = (byte)( addr & 0xff );
-        mBuffer[2] = (byte)( (addr>>8) & 0xff );
-        // TODO write and read
-        try {
-          mOut.write( mBuffer, 0, 3 );
-          // if ( TDSetting.mPacketLog ) logPacket3( 1L, mBuffer );
+  // @Override
+  // int readX310Memory( int start, int end, List< MemoryOctet > data )
+  // {
+  //   // Log.v( "DistoX", "start " + start + " end " + end );
+  //   int cnt = 0;
+  //   while ( start < end ) {
+  //     int addr = index2addrX310( start );
+  //     // Log.v( "DistoX", start + " addr " + addr );
+  //     int endaddr = addr + BYTE_PER_DATA;
+  //     MemoryOctet result = new MemoryOctet( start );
+  //     // read only bytes 0-7 and 16-17
+  //     int k = 0;
+  //     for ( ; addr < endaddr && k < 8; addr += 4, k+=4 ) {
+  //       mBuffer[0] = (byte)( 0x38 );
+  //       mBuffer[1] = (byte)( addr & 0xff );
+  //       mBuffer[2] = (byte)( (addr>>8) & 0xff );
+  //       // TODO write and read
+  //       try {
+  //         mOut.write( mBuffer, 0, 3 );
+  //         // if ( TDSetting.mPacketLog ) logPacket3( 1L, mBuffer );
 
-          mIn.readFully( mBuffer, 0, 8 );
-          // if ( TDSetting.mPacketLog ) logPacket( 0L );
+  //         mIn.readFully( mBuffer, 0, 8 );
+  //         // if ( TDSetting.mPacketLog ) logPacket( 0L );
 
-        } catch ( IOException e ) {
-          TDLog.Error( "readmemory() IO failed" );
-          break;
-        }
-        if ( mBuffer[0] != (byte)( 0x38 ) ) break;
-        int reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1]);
-        if ( reply_addr != addr ) break;
-        // for (int i=3; i<7; ++i) result.data[k+i-3] = mBuffer[i];
-        result.data[k  ] = mBuffer[3];
-        result.data[k+1] = mBuffer[4];
-        result.data[k+2] = mBuffer[5];
-        result.data[k+3] = mBuffer[6];
-      }
-      if ( k == 8 ) {
-        addr = index2addrX310( start ) + 16;
-        mBuffer[0] = (byte)( 0x38 );
-        mBuffer[1] = (byte)( addr & 0xff );
-        mBuffer[2] = (byte)( (addr>>8) & 0xff );
-        try {
-          mOut.write( mBuffer, 0, 3 );
-          // if ( TDSetting.mPacketLog ) logPacket3( 1L, mBuffer );
+  //       } catch ( IOException e ) {
+  //         TDLog.Error( "readmemory() IO failed" );
+  //         break;
+  //       }
+  //       if ( mBuffer[0] != (byte)( 0x38 ) ) break;
+  //       int reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1]);
+  //       if ( reply_addr != addr ) break;
+  //       // for (int i=3; i<7; ++i) result.data[k+i-3] = mBuffer[i];
+  //       result.data[k  ] = mBuffer[3];
+  //       result.data[k+1] = mBuffer[4];
+  //       result.data[k+2] = mBuffer[5];
+  //       result.data[k+3] = mBuffer[6];
+  //     }
+  //     if ( k == 8 ) {
+  //       addr = index2addrX310( start ) + 16;
+  //       mBuffer[0] = (byte)( 0x38 );
+  //       mBuffer[1] = (byte)( addr & 0xff );
+  //       mBuffer[2] = (byte)( (addr>>8) & 0xff );
+  //       try {
+  //         mOut.write( mBuffer, 0, 3 );
+  //         // if ( TDSetting.mPacketLog ) logPacket3( 1L, mBuffer );
 
-          mIn.readFully( mBuffer, 0, 8 );
-          // if ( TDSetting.mPacketLog ) logPacket( 0L );
+  //         mIn.readFully( mBuffer, 0, 8 );
+  //         // if ( TDSetting.mPacketLog ) logPacket( 0L );
 
-        } catch ( IOException e ) {
-          TDLog.Error( "readmemory() IO failed" );
-          break;
-        }
-        if ( mBuffer[0] != (byte)( 0x38 ) ) break;
-        if ( mBuffer[3] == (byte)( 0xff ) ) result.data[0] |= (byte)( 0x80 ); 
-        data.add( result );
-        // Log.v( TopoDroidApp.TAG, "memory " + result.toString() + " " + mBuffer[3] );
-        ++ cnt;
-      } else {
-        break;
-      }
-      ++start;
-    }
-    return cnt;
-  }
+  //       } catch ( IOException e ) {
+  //         TDLog.Error( "readmemory() IO failed" );
+  //         break;
+  //       }
+  //       if ( mBuffer[0] != (byte)( 0x38 ) ) break;
+  //       if ( mBuffer[3] == (byte)( 0xff ) ) result.data[0] |= (byte)( 0x80 ); 
+  //       data.add( result );
+  //       // Log.v( TopoDroidApp.TAG, "memory " + result.toString() + " " + mBuffer[3] );
+  //       ++ cnt;
+  //     } else {
+  //       break;
+  //     }
+  //     ++start;
+  //   }
+  //   return cnt;
+  // }
 
   // X310 data memory is read-only
   // // return number of memory slots that have been reset
@@ -809,128 +773,128 @@ class DistoXProtocol extends TopoDroidProtocol
   //   return start - cnt;
   // }
 
-  @Override
-  int uploadFirmware( String filepath )
-  {
-    TDLog.LogFile( "Firmware upload: protocol starts. file " + filepath );
-    byte[] buf = new byte[259];
-    buf[0] = (byte)0x3b;
-    buf[1] = (byte)0;
-    buf[2] = (byte)0;
+  // @Override
+  // int uploadFirmware( String filepath )
+  // {
+  //   TDLog.LogFile( "Firmware upload: protocol starts. file " + filepath );
+  //   byte[] buf = new byte[259];
+  //   buf[0] = (byte)0x3b;
+  //   buf[1] = (byte)0;
+  //   buf[2] = (byte)0;
 
-    boolean ok = true;
-    int cnt = 0;
-    try {
-      File fp = new File( filepath );
-      FileInputStream fis = new FileInputStream( fp );
-      DataInputStream dis = new DataInputStream( fis );
-      // int end_addr = (fp.size() + 255)/256;
+  //   boolean ok = true;
+  //   int cnt = 0;
+  //   try {
+  //     File fp = new File( filepath );
+  //     FileInputStream fis = new FileInputStream( fp );
+  //     DataInputStream dis = new DataInputStream( fis );
+  //     // int end_addr = (fp.size() + 255)/256;
 
-      for ( int addr = 0; /* addr < end_addr */; ++ addr ) {
-        TDLog.LogFile( "Firmware upload: addr " + addr + " count " + cnt );
-        // memset(buf+3, 0, 256)
-        for (int k=0; k<256; ++k) buf[3+k] = (byte)0xff;
-        try {
-          int nr = dis.read( buf, 3, 256 );
-          if ( nr <= 0 ) {
-            TDLog.LogFile( "Firmware upload: file read failure. Result " + nr );
-            break;
-          }
-          cnt += nr;
-          if ( addr >= 0x08 ) {
-            buf[0] = (byte)0x3b;
-            buf[1] = (byte)( addr & 0xff );
-            buf[2] = 0; // not necessary
-            mOut.write( buf, 0, 259 );
-            // if ( TDSetting.mPacketLog ) logPacket8( 1L, buf );
+  //     for ( int addr = 0; /* addr < end_addr */; ++ addr ) {
+  //       TDLog.LogFile( "Firmware upload: addr " + addr + " count " + cnt );
+  //       // memset(buf+3, 0, 256)
+  //       for (int k=0; k<256; ++k) buf[3+k] = (byte)0xff;
+  //       try {
+  //         int nr = dis.read( buf, 3, 256 );
+  //         if ( nr <= 0 ) {
+  //           TDLog.LogFile( "Firmware upload: file read failure. Result " + nr );
+  //           break;
+  //         }
+  //         cnt += nr;
+  //         if ( addr >= 0x08 ) {
+  //           buf[0] = (byte)0x3b;
+  //           buf[1] = (byte)( addr & 0xff );
+  //           buf[2] = 0; // not necessary
+  //           mOut.write( buf, 0, 259 );
+  //           // if ( TDSetting.mPacketLog ) logPacket8( 1L, buf );
 
-            mIn.readFully( mBuffer, 0, 8 );
-            // if ( TDSetting.mPacketLog ) logPacket( 0L );
+  //           mIn.readFully( mBuffer, 0, 8 );
+  //           // if ( TDSetting.mPacketLog ) logPacket( 0L );
 
-            int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
-            if ( mBuffer[0] != (byte)0x3b || addr != reply_addr ) {
-              TDLog.LogFile( "Firmware upload: fail at " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr );
-              ok = false;
-              break;
-            } else {
-              TDLog.LogFile( "Firmware upload: reply address ok");
-            }
-          } else {
-            TDLog.LogFile( "Firmware upload: skip address " + addr );
-          }
-        } catch ( EOFException e ) { // OK
-          TDLog.LogFile( "Firmware update: EOF " + e.getMessage() );
-          break;
-        } catch ( IOException e ) { 
-          TDLog.LogFile( "Firmware update: IO error " + e.getMessage() );
-          ok = false;
-          break;
-        }
-      }
-    } catch ( FileNotFoundException e ) {
-      TDLog.LogFile( "Firmware update: Not Found error " + e.getMessage() );
-      return 0;
-    }
-    TDLog.LogFile( "Firmware update: result is " + (ok? "OK" : "FAIL") + " count " + cnt );
-    return ( ok ? cnt : -cnt );
-  }
+  //           int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
+  //           if ( mBuffer[0] != (byte)0x3b || addr != reply_addr ) {
+  //             TDLog.LogFile( "Firmware upload: fail at " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr );
+  //             ok = false;
+  //             break;
+  //           } else {
+  //             TDLog.LogFile( "Firmware upload: reply address ok");
+  //           }
+  //         } else {
+  //           TDLog.LogFile( "Firmware upload: skip address " + addr );
+  //         }
+  //       } catch ( EOFException e ) { // OK
+  //         TDLog.LogFile( "Firmware update: EOF " + e.getMessage() );
+  //         break;
+  //       } catch ( IOException e ) { 
+  //         TDLog.LogFile( "Firmware update: IO error " + e.getMessage() );
+  //         ok = false;
+  //         break;
+  //       }
+  //     }
+  //   } catch ( FileNotFoundException e ) {
+  //     TDLog.LogFile( "Firmware update: Not Found error " + e.getMessage() );
+  //     return 0;
+  //   }
+  //   TDLog.LogFile( "Firmware update: result is " + (ok? "OK" : "FAIL") + " count " + cnt );
+  //   return ( ok ? cnt : -cnt );
+  // }
 
-  @Override
-  int dumpFirmware( String filepath )
-  {
-    TDLog.LogFile( "Firmware dump: output filepath " + filepath );
-    byte[] buf = new byte[256];
+  // @Override
+  // int dumpFirmware( String filepath )
+  // {
+  //   TDLog.LogFile( "Firmware dump: output filepath " + filepath );
+  //   byte[] buf = new byte[256];
 
-    boolean ok = true;
-    int cnt = 0;
-    try {
-      TDPath.checkPath( filepath );
-      File fp = new File( filepath );
-      FileOutputStream fos = new FileOutputStream( fp );
-      DataOutputStream dos = new DataOutputStream( fos );
-      for ( int addr = 0; ; ++ addr ) {
-        TDLog.LogFile( "Firmware dump: addr " + addr + " count " + cnt );
-        try {
-          buf[0] = (byte)0x3a;
-          buf[1] = (byte)( addr & 0xff );
-          buf[2] = 0; // not necessary
-          mOut.write( buf, 0, 3 );
-          // if ( TDSetting.mPacketLog ) logPacket3( 1L, buf );
+  //   boolean ok = true;
+  //   int cnt = 0;
+  //   try {
+  //     TDPath.checkPath( filepath );
+  //     File fp = new File( filepath );
+  //     FileOutputStream fos = new FileOutputStream( fp );
+  //     DataOutputStream dos = new DataOutputStream( fos );
+  //     for ( int addr = 0; ; ++ addr ) {
+  //       TDLog.LogFile( "Firmware dump: addr " + addr + " count " + cnt );
+  //       try {
+  //         buf[0] = (byte)0x3a;
+  //         buf[1] = (byte)( addr & 0xff );
+  //         buf[2] = 0; // not necessary
+  //         mOut.write( buf, 0, 3 );
+  //         // if ( TDSetting.mPacketLog ) logPacket3( 1L, buf );
 
-          mIn.readFully( mBuffer, 0, 8 );
-          // if ( TDSetting.mPacketLog ) logPacket( 0L );
+  //         mIn.readFully( mBuffer, 0, 8 );
+  //         // if ( TDSetting.mPacketLog ) logPacket( 0L );
 
-          int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
-          if ( mBuffer[0] != (byte)0x3a || addr != reply_addr ) {
-            TDLog.LogFile( "Firmware dump: fail at " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr );
-            ok = false;
-            break;
-          } else {
-            TDLog.LogFile( "Firmware dump: reply addr ok");
-          }
+  //         int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
+  //         if ( mBuffer[0] != (byte)0x3a || addr != reply_addr ) {
+  //           TDLog.LogFile( "Firmware dump: fail at " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr );
+  //           ok = false;
+  //           break;
+  //         } else {
+  //           TDLog.LogFile( "Firmware dump: reply addr ok");
+  //         }
 
-          mIn.readFully( buf, 0, 256 );
-          // if ( TDSetting.mPacketLog ) logPacket8( 0L, buf );
+  //         mIn.readFully( buf, 0, 256 );
+  //         // if ( TDSetting.mPacketLog ) logPacket8( 0L, buf );
 
-          boolean last = true;
-          for ( int k=0; last && k<256; ++k ) {
-            if ( buf[k] != (byte)0xff ) last = false;
-          }
-          if ( last ) break;
-          dos.write( buf, 0, 256 );
-          cnt += 256;
-        } catch ( EOFException e ) { // OK
-          break;
-        } catch ( IOException e ) { 
-          ok = false;
-          break;
-        }
-      }
-    } catch ( FileNotFoundException e ) {
-      return 0;
-    }
-    TDLog.LogFile( "Firmware dump: result is " + (ok? "OK" : "FAIL") + " count " + cnt );
-    return ( ok ? cnt : -cnt );
-  }
+  //         boolean last = true;
+  //         for ( int k=0; last && k<256; ++k ) {
+  //           if ( buf[k] != (byte)0xff ) last = false;
+  //         }
+  //         if ( last ) break;
+  //         dos.write( buf, 0, 256 );
+  //         cnt += 256;
+  //       } catch ( EOFException e ) { // OK
+  //         break;
+  //       } catch ( IOException e ) { 
+  //         ok = false;
+  //         break;
+  //       }
+  //     }
+  //   } catch ( FileNotFoundException e ) {
+  //     return 0;
+  //   }
+  //   TDLog.LogFile( "Firmware dump: result is " + (ok? "OK" : "FAIL") + " count " + cnt );
+  //   return ( ok ? cnt : -cnt );
+  // }
 
 }

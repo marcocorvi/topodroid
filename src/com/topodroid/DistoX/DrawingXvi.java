@@ -177,10 +177,10 @@ class DrawingXvi
         }
         out.write("}\n\n");
 
-	// GRID
-        if ( TDSetting.mSvgGrid ) {
+	// GRID always necessary
+        // if ( TDSetting.mSvgGrid ) {
           printXviGrid( out, xmin, ymin, xmax, ymax, xoff, yoff );
-        }
+        // }
 
 	// SHOTS
         out.write("set XVIshots {\n");

@@ -41,20 +41,14 @@ class DeviceX310TakeShot extends AsyncTask<Integer, Integer, Integer >
     int i = mNr;
     for ( ; i>1; --i ) {
       // Log.v("DistoX", "take shot " + i + " wait " + TDSetting.mWaitLaser + "/" + TDSetting.mWaitShot );
-      mApp.setX310Laser( 1, null );
+      mApp.setX310Laser( 1, 0, null );
       TDUtil.slowDown( TDSetting.mWaitLaser ); 
-      mApp.setX310Laser( 2, null );   
+      mApp.setX310Laser( 2, 0, null );   
       TDUtil.slowDown( TDSetting.mWaitShot );
     }
-    mApp.setX310Laser( 1, null );
+    mApp.setX310Laser( 1, 0, null );
     TDUtil.slowDown( TDSetting.mWaitLaser ); 
-    if ( mLister != null ) {
-      mApp.setX310Laser( 3, mLister ); // 3 = measure and download
-      // TDUtil.slowDown( TDSetting.mWaitShot ); 
-    } else {
-      mApp.setX310Laser( 2, null ); // 2 = measure
-      // TDUtil.slowDown( TDSetting.mWaitLaser ); 
-    }
+    // TDUtil.slowDown( TDSetting.mWaitLaser ); 
     return 0;
   }
 
@@ -70,13 +64,8 @@ class DeviceX310TakeShot extends AsyncTask<Integer, Integer, Integer >
   @Override
   protected void onPostExecute( Integer result ) 
   {
-    // if ( mLister != null ) {
-    //   mApp.setX310Laser( 3, mLister ); // 3 = measure and download
-    //   // TDUtil.slowDown( TDSetting.mWaitShot ); 
-    // } else {
-    //   mApp.setX310Laser( 2, null ); // 2 = measure
-    //   // TDUtil.slowDown( TDSetting.mWaitLaser ); 
-    // }
+    int nr = ( mLister == null )? 0 : mNr; // number of shots to download
+    mApp.setX310Laser( 2, nr, mLister ); // measure and download if nr > 0
     mILister.enableBluetoothButton(true);
   }
 }

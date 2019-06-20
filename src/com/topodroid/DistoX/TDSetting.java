@@ -186,7 +186,7 @@ class TDSetting
   static boolean mZ6Workaround  = true;
 
   static boolean mAutoReconnect = false;
-  static boolean mHeadTail      = false; // whether to use readHeadTail to download the data
+  static boolean mHeadTail      = false; // whether to use readA3HeadTail to download the data (A3 only)
   static boolean mAutoPair      = true;
   static int mConnectSocketDelay = 0; // wait time if not paired [0.1 sec]
 
@@ -781,9 +781,10 @@ class TDSetting
     mAutoStations      = prefs.getBoolean( keyExpTh[1], bool(defExpTh[1]) ); // DISTOX_AUTO_STATIONS 
     // mXTherionAreas  = prefs.getBoolean( keyExpTh[ ], bool(defExpTh[ ]) ); // DISTOX_XTHERION_AREAS
     mTherionSplays     = prefs.getBoolean( keyExpTh[2], bool(defExpTh[2]) ); // DISTOX_THERION_SPLAYS
-    int scale = tryInt( prefs, keyExpTh[5], defExpTh[5] );  // DISTOX_TH2_SCALE
+    // SVG_GRID not good
+    int scale = tryInt( prefs, keyExpTh[4], defExpTh[4] );  // DISTOX_TH2_SCALE
     mToTherion = THERION_SCALE / scale;
-    mTherionXvi        = prefs.getBoolean( keyExpTh[6], bool(defExpTh[6]) ); // DISTOX_TH2_XVI
+    mTherionXvi        = prefs.getBoolean( keyExpTh[5], bool(defExpTh[5]) ); // DISTOX_TH2_XVI
     // mSurvexLRUD        =   prefs.getBoolean(   keyExpTh[3], bool(defExpTh[3]) ); // DISTOX_SURVEX_LRUD
 
     String[] keyExpDat = TDPrefKey.EXPORT_DAT;
@@ -1530,15 +1531,15 @@ class TDSetting
       mTherionSplays    = tryBooleanValue( hlp, k, v, bool(def[ 2]) );   
     } else if ( k.equals( key[3] ) ) { // DISTOX_SURVEX_LRUD (bool)
       mSurvexLRUD       = tryBooleanValue( hlp, k, v, bool(def[3]) );
-    } else if ( k.equals( key[4] ) ) { // DISTOX_SVG_GRID (bool)
-      mSvgGrid = tryBooleanValue( hlp, k, v, bool(def[4]) );
-    } else if ( k.equals( key[5] ) ) { // DISTOX_TH2_SCALE
-      int scale = tryIntValue( hlp, k, v, def[5] );
+    // } else if ( k.equals( key[4] ) ) { // DISTOX_SVG_GRID (bool) // not good
+    //   mSvgGrid = tryBooleanValue( hlp, k, v, bool(def[4]) );
+    } else if ( k.equals( key[4] ) ) { // DISTOX_TH2_SCALE
+      int scale = tryIntValue( hlp, k, v, def[4] );
       if ( scale < 40 ) { scale = 40; ret = "40"; }
       if ( scale > 2000 ) { scale = 2000; ret = "2000"; }
       mToTherion = THERION_SCALE / scale;
-    } else if ( k.equals( key[6] ) ) { // DISTOX_TH2_XVI (bool)
-      mTherionXvi = tryBooleanValue( hlp, k, v, bool(def[6]) );
+    } else if ( k.equals( key[5] ) ) { // DISTOX_TH2_XVI (bool)
+      mTherionXvi = tryBooleanValue( hlp, k, v, bool(def[5]) );
     } else {
       TDLog.Error("missing EXPORT TH key: " + k );
     }

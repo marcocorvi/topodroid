@@ -80,7 +80,7 @@ class TopoDroidProtocol
 
   //-----------------------------------------------------
 
-  TopoDroidProtocol( Device device, Context context )
+  protected TopoDroidProtocol( Device device, Context context )
   {
     mDeviceType = device.mType;
     mDeviceAddress = device.mAddress;
@@ -263,24 +263,8 @@ class TopoDroidProtocol
     return DISTOX_PACKET_NONE;
   } 
 
-  /** swap hot bit in a data in DistoX A3 memory
-   * @param addr  memory address
-   */
-  boolean swapHotBit( int addr ) { return false; } // only A3 - by default does not do anything
 
   // PACKETS I/O ------------------------------------------------------------------------
-
-  /** try to read 8 bytes - return the number of read bytes
-   * @param timeout    joining timeout
-   * @param maxtimeout max number of join attempts
-   * @return number of data that have been read
-   * 
-   * must be overridden - by default returns 0
-   */
-  protected int getAvailable( long timeout, int maxtimeout ) throws IOException
-  {
-    return 0;
-  }
 
   // must be overridden
   int readPacket( boolean no_timeout )
@@ -303,14 +287,7 @@ class TopoDroidProtocol
    *
    * must be overridden - default returns 0
    */
-  int readToRead( byte[] command, boolean a3 ) { return 0; }
-
-  /** read the memory buffer head and tail
-   * @param command    head-tail command with the memory address of head-tail words
-   * @param head_tail  array to store head and tail values
-   * @return null on failure, string presentation on success
-   */
-  String readHeadTail( byte[] command, int[] head_tail ) { return null; }
+  int readToRead( byte[] command ) { return 0; }
 
   /** read 4 bytes at a memory location
    * @param addr    memory address to read
@@ -326,12 +303,6 @@ class TopoDroidProtocol
    */
   int readMemory( int start, int end, List< MemoryOctet > data ) { return 0; }
 
-  /** read memory at address 8000
-   * @param result 4-byte array to write the read values
-   * @return true if successful
-   */
-  boolean read8000( byte[] result ) { return false; }
-
   /** write calibration coeffs to the DistoX
    * @param calib    array of 48 (52) bytes with the coefficients
    * @return true if successful
@@ -345,11 +316,5 @@ class TopoDroidProtocol
    * called only by DistoXComm.readCoeff (TopoDroidComm.readCoeff)
    */
   boolean readCalibration( byte[] calib ) { return false; }
-
-  int readX310Memory( int start, int end, List< MemoryOctet > data ) { return 0; }
-
-  int uploadFirmware( String filepath ) { return 0; }
-
-  int dumpFirmware( String filepath ) { return 0; }
 
 }
