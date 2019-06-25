@@ -353,6 +353,10 @@
     <string name="menu_validate">POROVNAŤ</string>
     <string name="menu_zoom_fit">ORIENTÁCIA</string>
 
+    <string name="ble_scan_failed">BLE sken neúspešný</string>
+    <string name="ble_gatt_failure">BLE failzlyhanieure</string>
+    <string name="ble_no_remote">Bez diaľkového ovládania</string>
+
     <string name="popup_join_pt">Prichytiť na blízky bod</string>
     <string name="popup_snap_ln">Prichytiť na blízku čiaru</string>
     <string name="popup_snap_to_splays">Prichytiť na blízku pomocnú zámeru</string>
