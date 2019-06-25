@@ -822,6 +822,7 @@
     <string name="help_read">Načítať a Zobraziť kalibračné koeficienty z DistaX</string>
     <string name="help_info_device">Informácie o DistoX</string>
     <string name="help_scan">Vyhľadať zariadenia DistoX</string>
+    <string name="help_scan_ble">Vyhľadá zariadenia BTLE</string>
     <string name="help_pair">Vytvoriť spojenie s DistoX</string>
     <string name="help_open_calib">Otvoriť kalibračné okno</string>
     <string name="help_export_calib">Exportovať kalibráciu</string>
