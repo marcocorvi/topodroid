@@ -873,7 +873,8 @@
     <string name="title_note">Poznámky</string>
     <string name="title_packet_dialog">Pakety</string>
     <string name="title_photo">Rozšírené možnosti</string>
-    <string name="title_photo_comment">Fotografia</string>
+    <string name="title_photo_comment">Foto poznámka</string>
+    <string name="title_photo_view">Fotografia</string>
     <string name="title_plot_save">Exportovať nákres </string>
     <!-- UNUSED string name="title_plot_merge">Merge sketch in</string -->
     <string name="title_plot_reload">Znovu načítať nákres</string>
