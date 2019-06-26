@@ -104,6 +104,7 @@ public class ShotWindow extends Activity
   final static private int BTN_AZIMUTH   = 8;
   private int boff = 0;
   private boolean diving = false;
+  private int mBTstatus; // status of bluetooth buttons (download and reset)
 
   private DataHelper mApp_mData;
 
@@ -333,7 +334,7 @@ public class ShotWindow extends Activity
       setTheTitle( );
     } else {
       mApp.clearSurveyReferences();
-      finish();
+      doFinish();
       // TDToast.makeWarn( R.string.no_survey );
     }
   }
@@ -809,8 +810,8 @@ public class ShotWindow extends Activity
       if ( TDSetting.mDataBackup ) {
         TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false ); // try_save
       }
-      TopoDroidApp.mShotWindow.finish();
-      TopoDroidApp.mShotWindow = null;
+      TopoDroidApp.mShotWindow.doFinish();
+      // TopoDroidApp.mShotWindow = null; // done in doFinish
     }
     if ( TopoDroidApp.mSurveyWindow != null ) {
       TopoDroidApp.mSurveyWindow.finish();
@@ -898,7 +899,7 @@ public class ShotWindow extends Activity
           if ( TDSetting.mDataBackup ) {
             TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false ); // try_save
 	  }
-          finish();
+          doFinish();
         }
         break;
     }
@@ -1001,7 +1002,7 @@ public class ShotWindow extends Activity
       mBMdownload_no   = MyButton.getButtonBackground( mApp, res, R.drawable.iz_download_no );
       mBMbluetooth_no  = MyButton.getButtonBackground( mApp, res, R.drawable.iz_bt_no );
     }
-
+    mBTstatus = DataDownloader.STATUS_OFF;
 
     if ( TDLevel.overBasic ) {
       if ( ! diving ) mButton1[ BTN_DOWNLOAD ].setOnLongClickListener( this );
@@ -1071,43 +1072,43 @@ public class ShotWindow extends Activity
   //   TDandroid.setButtonBackground( mButton1[ BTN_PLOT - boff ], (enabled ? mBMplot : mBMplot_no) );
   // }
 
-  // @Override
-  // public void onStart() 
-  // {
-  //   super.onStart();
-  //   // Debug.startMethodTracing( "distox" );
-  //   // Log.v( "DistoX", "Shot Activity onStart() " );
-  // }
+  @Override
+  public void onStart() 
+  {
+    super.onStart();
+    // Debug.startMethodTracing( "distox" );
+    // Log.v( "DistoXLIFE", "Shot Activity onStart() " );
+  }
 
   @Override
   public synchronized void onDestroy() 
   {
     super.onDestroy();
-    // Log.v("DistoX", "ShotWindow onDestroy()" );
-    if ( mDataDownloader != null ) {
-      mApp.unregisterLister( this );
-      mDataDownloader.onStop();
-    }
-    mApp.disconnectRemoteDevice( false );
+    // Log.v("DistoXLIFE", "ShotWindow onDestroy()" );
+    // if ( mDataDownloader != null ) {
+    //   mApp.unregisterLister( this );
+    //   mDataDownloader.onStop();
+    // }
+    // mApp.disconnectRemoteDevice( false );
 
     if ( doubleBackHandler != null ) {
       doubleBackHandler.removeCallbacks( doubleBackRunnable );
     }
   }
 
-  // @Override
-  // public synchronized void onStop() 
-  // {
-  //   // Debug.stopMethodTracing( );
-  //   super.onStop();
-  //   // Log.v("DistoX", "ShotWindow onStop()" );
-  // }
+  @Override
+  public synchronized void onStop() 
+  {
+    // Debug.stopMethodTracing( );
+    super.onStop();
+    // Log.v("DistoXLIFE", "ShotWindow onStop()" );
+  }
 
   @Override
   public synchronized void onPause() 
   {
     super.onPause();
-    // Log.v("DistoX", "ShotWindow onPause()" );
+    // Log.v("DistoXLIFE", "ShotWindow onPause()" );
     saveInstanceToData();
 
     // mApp.unregisterConnListener( mHandler );
@@ -1119,6 +1120,7 @@ public class ShotWindow extends Activity
   public synchronized void onResume() 
   {
     super.onResume();
+    // Log.v("DistoXLIFE", "ShotWindow onResume()" );
     // mApp.resetLocale(); // FIXME-LOCALE
 
     // FIXME NOTIFY register ILister
@@ -1151,6 +1153,17 @@ public class ShotWindow extends Activity
     }
   };
 
+  void doFinish()
+  {
+    if ( mDataDownloader != null ) {
+      mApp.unregisterLister( this );
+      mDataDownloader.onStop();
+    }
+    mApp.disconnectRemoteDevice( false );
+    mApp.mShotWindow = null;
+    finish();
+  }
+
   @Override
   public void onBackPressed () // askClose
   {
@@ -1165,6 +1178,12 @@ public class ShotWindow extends Activity
       if ( doubleBackToast != null ) doubleBackToast.cancel();
       doubleBackToast = null;
       DrawingSurface.clearCache();
+      if ( mDataDownloader != null ) {
+        mApp.unregisterLister( this );
+        mDataDownloader.onStop();
+      }
+      mApp.disconnectRemoteDevice( false );
+
       if ( TDSetting.mDataBackup ) {
         TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false ); // try_save
       }
@@ -1241,8 +1260,10 @@ public class ShotWindow extends Activity
           && TopoDroidApp.mDData.getDevices().size() > 1 ) {
         (new DeviceSelectDialog( this, mApp, mDataDownloader, this )).show();
       } else {
+        // setConnectionStatus( DataDownloader.STATUS_WAIT ); // turn arrow orange
+        
         mDataDownloader.toggleDownload();
-        setConnectionStatus( mDataDownloader.getStatus() );
+        // setConnectionStatus( mDataDownloader.getStatus() );
         mDataDownloader.doDataDownload( );
       }
     } else if ( b == mButton1[ BTN_PLOT - boff ] ) {
@@ -1330,10 +1351,15 @@ public class ShotWindow extends Activity
         if ( k1 < mNrButton1 && b == mButton1[k1++] ) {        // DOWNLOAD
           if ( TDInstance.device != null ) {
             // mSearch = null; // invalidate search
-            setConnectionStatus( 2 ); // turn arrow orange
+            // if ( mBTstatus == DataDownloader.STATUS_OFF ) {
+            //   TDToast.make( R.string.connecting );
+            // }
             // TDLog.Log( TDLog.LOG_INPUT, "Download button, mode " + TDSetting.mConnectionMode );
-            mDataDownloader.toggleDownload();
-            setConnectionStatus( mDataDownloader.getStatus() );
+            
+            // toggle must come first in the test
+            mApp.notifyLed( mDataDownloader.toggleDownload() && mBTstatus == DataDownloader.STATUS_OFF );
+            // Log.v( "DistoXDOWN", "Download, conn mode " + TDSetting.mConnectionMode + " download status " + mDataDownloader.getStatus() );
+            // setConnectionStatus( mDataDownloader.getStatus() );
             mDataDownloader.doDataDownload( );
           }
 	  return;
@@ -2116,23 +2142,30 @@ public class ShotWindow extends Activity
   { 
     if ( diving ) return;
     if ( TDInstance.device == null ) {
+      mBTstatus = DataDownloader.STATUS_OFF;
       // mButton1[ BTN_DOWNLOAD ].setVisibility( View.GONE );
       TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload_no );
       TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], mBMbluetooth_no );
     } else {
-      // mButton1[ BTN_DOWNLOAD ].setVisibility( View.VISIBLE );
-      switch ( status ) {
-        case 1:
-          TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload_on );
-          TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], mBMbluetooth_no );
-          break;
-        case 2:
-          TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload_wait );
-          TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], mBMbluetooth_no );
-          break;
-        default:
-          TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload );
-          TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], mBMbluetooth );
+      if ( status != mBTstatus ) {
+        mBTstatus = status;
+        // Log.v( "DistoXDOWN", "set button, status " + status );
+        // mButton1[ BTN_DOWNLOAD ].setVisibility( View.VISIBLE );
+        switch ( status ) {
+          case DataDownloader.STATUS_ON:
+            mApp.notifyLed( true );
+            TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload_on );
+            TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], mBMbluetooth_no );
+            break;
+          case DataDownloader.STATUS_WAIT:
+            TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload_wait );
+            TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], mBMbluetooth_no );
+            break;
+          default:
+            mApp.notifyLed( false );
+            TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload );
+            TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], mBMbluetooth );
+        }
       }
     }
   }

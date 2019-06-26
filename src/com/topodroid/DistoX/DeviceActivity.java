@@ -667,7 +667,7 @@ public class DeviceActivity extends Activity
       setState();
     // }
     updateList();
-    Log.v("DistoXBLE", "add BLE device " + mCurrDevice.mName + "/" + mCurrDevice.mAddress + "/" + mCurrDevice.mModel );
+    // Log.v("DistoXBLE", "add BLE device " + mCurrDevice.mName + "/" + mCurrDevice.mAddress + "/" + mCurrDevice.mModel );
   }
 
   public void onActivityResult( int request, int result, Intent intent ) 

@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+  <string-array name="feedbackMode">
+     <item name="none">none</item>
+     <item name="sound">sound</item>
+     <item name="heptic">heptic</item>
+  </string-array>
+  <string-array name="feedbackModeValue">
+     <item name="none">0</item>
+     <item name="sound">1</item>
+     <item name="heptic">2</item>
+  </string-array>
+  
   <string-array name="canvasLevels">
      <item name="none">none</item>
      <item name="class">by symbol</item>

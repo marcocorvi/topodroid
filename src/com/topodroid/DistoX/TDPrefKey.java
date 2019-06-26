@@ -302,6 +302,7 @@ class TDPrefKey
     // "DISTOX_COMM_RETRY",        // number of socket connection attempts
     "DISTOX_Z6_WORKAROUND",   // 5 // whether to enable Z6 workaround
     "DISTOX_AUTO_PAIR",       // 6 // whether to auto-pair the discovered DistoX
+    "DISTOX_CONNECT_FEEDBACK",   
     // "DISTOX_SOCKET_DELAY",         // delay before a socket-connection attempt
     // "DISTOX_WAIT_DATA",       // 8 // msec wait after a data/vector packet
     // "DISTOX_WAIT_CONN",            // msec wait after getting "NO PACKET"
@@ -322,6 +323,7 @@ class TDPrefKey
     // R.string.pref_comm_retry_title,
     R.string.pref_z6_workaround_title,
     R.string.pref_auto_pair_title,
+    R.string.pref_connect_feedback_title,
     // R.string.pref_socket_delay_title,
     // R.string.pref_wait_data_title,
     // R.string.pref_wait_conn_title,
@@ -342,6 +344,7 @@ class TDPrefKey
     // R.string.pref_comm_retry_summary,
     R.string.pref_z6_workaround_summary,
     R.string.pref_auto_pair_summary,
+    R.string.pref_connect_feedback_summary,
     // R.string.pref_socket_delay_summary,
     // R.string.pref_wait_data_summary,
     // R.string.pref_wait_conn_summary,
@@ -362,6 +365,7 @@ class TDPrefKey
     // TDString.ONE,
     TRUE,
     TRUE,
+    TDString.ZERO,
     // TDString.ZERO,
     // "250",
     // "500",
@@ -721,6 +725,7 @@ class TDPrefKey
     // "DISTOX_LOOP_CLOSURE_VALUE",     // whether to close loop
     "DISTOX_PREV_NEXT",       // 9  // whether to put "prev-next" arrows in shot edit dialog
     "DISTOX_BACKSIGHT", // whether to add backsight fields in manual shot input dialog
+    "DISTOX_LEG_FEEDBACK",
     // "DISTOX_MAG_ANOMALY",        // whether to compensate magnetic anomaly
     // "DISTOX_SHOT_TIMER",      // 11 // bearing-clino timer [1/10 s]
     // "DISTOX_BEEP_VOLUME",     // 12 // bearing-clino beep volume [%]
@@ -743,6 +748,7 @@ class TDPrefKey
     // R.string.pref_loopClosure_title,
     R.string.pref_prev_next_title,
     R.string.pref_backsight_title,
+    R.string.pref_triple_shot_title,
     // R.string.pref_mag_anomaly_title,
     // R.string.pref_shot_timer_title,
     // R.string.pref_beep_volume_title,
@@ -764,6 +770,7 @@ class TDPrefKey
     // R.string.pref_loopClosure_summary,
     R.string.pref_prev_next_summary,
     R.string.pref_backsight_summary,
+    R.string.pref_triple_shot_summary,
     // R.string.pref_mag_anomaly_summary,
     // R.string.pref_shot_timer_summary,
     // R.string.pref_beep_volume_summary,
@@ -785,6 +792,7 @@ class TDPrefKey
     // TDString.ZERO,
     TRUE,
     FALSE,
+    TDString.ZERO,
     // FALSE,
     // TDString.TEN,
     // TDString.FIFTY,
@@ -1261,7 +1269,6 @@ class TDPrefKey
     "DISTOX_SPLAY_COLOR",     // splay color
     "DISTOX_EXTEND_FRAC",     // fractional extend
     "DISTOX_BEDDING",         // splays bed plane interpolation
-    "DISTOX_TRIPLE_SHOT",     // triple shot bell
     "DISTOX_WITH_SENSORS",    // using sensors
     "DISTOX_LOOP_CLOSURE_VALUE",     // whether to close loop
     // "DISTOX_DIST_TOLERANCE",  // ratio of distance tolerance to angle tolerance
@@ -1281,7 +1288,6 @@ class TDPrefKey
     R.string.pref_splay_color_title,
     R.string.pref_extend_frac_title,
     R.string.pref_plane_interpolation_title,
-    R.string.pref_triple_shot_title,
     R.string.pref_with_sensors_title,
     R.string.pref_loopClosure_title,
     // R.string.pref_dist_tolerance_title,
@@ -1301,7 +1307,6 @@ class TDPrefKey
     R.string.pref_splay_color_summary,
     R.string.pref_extend_frac_summary,
     R.string.pref_plane_interpolation_summary,
-    R.string.pref_triple_shot_summary,
     R.string.pref_with_sensors_summary,
     R.string.pref_loopClosure_summary,
     // R.string.pref_dist_tolerance_summary,
@@ -1317,7 +1322,6 @@ class TDPrefKey
     FALSE,
     FALSE,
     "30",
-    FALSE,
     FALSE,
     FALSE,
     FALSE,
@@ -1541,32 +1545,32 @@ class TDPrefKey
 
   // ------------------------------------------------------------------------------
   static String[] LOG = {
-    "DISTOX_LOG_STREAM",
+    "DISTOX_LOG_STREAM", // 0
     "DISTOX_LOG_APPEND",
     "DISTOX_LOG_DEBUG",
     "DISTOX_LOG_ERR", 
-    "DISTOX_LOG_PERM",
-    "DISTOX_LOG_INPUT",
+    "DISTOX_LOG_PERM",  
+    "DISTOX_LOG_INPUT",  // 5
     "DISTOX_LOG_PATH",
     "DISTOX_LOG_IO", 
     "DISTOX_LOG_BT",
     "DISTOX_LOG_COMM",
-    "DISTOX_LOG_DISTOX",
+    "DISTOX_LOG_DISTOX",  // 10
     "DISTOX_LOG_PROTO",
     "DISTOX_LOG_DEVICE",
     "DISTOX_LOG_CALIB",
     "DISTOX_LOG_DB",  
-    "DISTOX_LOG_UNITS",
+    "DISTOX_LOG_UNITS",   // 15
     "DISTOX_LOG_DATA",
     "DISTOX_LOG_SHOT",
     "DISTOX_LOG_SURVEY",
     "DISTOX_LOG_NUM",  
-    "DISTOX_LOG_FIXED",
+    "DISTOX_LOG_FIXED",   // 20
     "DISTOX_LOG_LOC", 
     "DISTOX_LOG_PHOTO",
     "DISTOX_LOG_SENSOR",
     "DISTOX_LOG_PLOT", 
-    "DISTOX_LOG_BEZIER",
+    "DISTOX_LOG_BEZIER",  // 25
     "DISTOX_LOG_THERION",
     "DISTOX_LOG_CSURVEY",
     "DISTOX_LOG_PTOPO",

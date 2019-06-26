@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 // import java.nio.ByteBuffer;
 
 import java.io.DataInputStream;
@@ -45,9 +47,6 @@ import android.content.IntentFilter;
 import android.content.BroadcastReceiver;
 
 // import android.database.DataSetObserver;
-
-// import android.widget.Toast;
-// import android.util.Log;
 
 class DistoXComm extends TopoDroidComm
 {
@@ -85,30 +84,26 @@ class DistoXComm extends TopoDroidComm
         String action = data.getAction();
         BluetoothDevice bt_device = data.getParcelableExtra( DeviceUtil.EXTRA_DEVICE );
         String device = ( bt_device != null )? bt_device.getAddress() : "undefined";
-
+ 
         // if ( DeviceUtil.ACTION_DISCOVERY_STARTED.equals( action ) ) {
         // } else if ( DeviceUtil.ACTION_DISCOVERY_FINISHED.equals( action ) ) {
         // } else if ( DeviceUtil.ACTION_FOUND.equals( action ) ) {
-        if ( DeviceUtil.ACTION_ACL_CONNECTED.equals( action ) ) {
-          // TDLog.Log( TDLog.LOG_BT, "[C] ACL_CONNECTED " + device + " addr " + mAddress );
-          if ( device.equals(mAddress) ) // FIXME ACL_DISCONNECT
-          {
-            mApp.mDataDownloader.setConnected( true );
+
+       
+        if ( device.equals(mAddress) ) {
+          // Log.v("DistoXDOWN", "on receive");
+          if ( DeviceUtil.ACTION_ACL_CONNECTED.equals( action ) ) {
+            // TDLog.Log( TDLog.LOG_BT, "[C] ACL_CONNECTED " + device + " addr " + mAddress );
+            mApp.mDataDownloader.updateConnected( true );
             mApp.notifyStatus();
-          }
-        } else if ( DeviceUtil.ACTION_ACL_DISCONNECT_REQUESTED.equals( action ) ) {
-          // TDLog.Log( TDLog.LOG_BT, "[C] ACL_DISCONNECT_REQUESTED " + device + " addr " + mAddress );
-          if ( device.equals(mAddress) ) // FIXME ACL_DISCONNECT
-          {
-            mApp.mDataDownloader.setConnected( false );
+          } else if ( DeviceUtil.ACTION_ACL_DISCONNECT_REQUESTED.equals( action ) ) {
+            // TDLog.Log( TDLog.LOG_BT, "[C] ACL_DISCONNECT_REQUESTED " + device + " addr " + mAddress );
+            mApp.mDataDownloader.updateConnected( false );
             mApp.notifyStatus();
             closeSocket( );
-          }
-        } else if ( DeviceUtil.ACTION_ACL_DISCONNECTED.equals( action ) ) {
-          // TDLog.Log( TDLog.LOG_BT, "[C] ACL_DISCONNECTED " + device + " addr " + mAddress );
-          if ( device.equals(mAddress) ) // FIXME ACL_DISCONNECT
-          {
-            mApp.mDataDownloader.setConnected( false );
+          } else if ( DeviceUtil.ACTION_ACL_DISCONNECTED.equals( action ) ) {
+            // TDLog.Log( TDLog.LOG_BT, "[C] ACL_DISCONNECTED " + device + " addr " + mAddress );
+            mApp.mDataDownloader.updateConnected( false );
             mApp.notifyStatus();
             closeSocket( );
             mApp.notifyDisconnected();
@@ -124,7 +119,7 @@ class DistoXComm extends TopoDroidComm
             TDLog.Log( TDLog.LOG_BT, "BOND STATE CHANGED unpaired (BONDED --> BONDING) " + device );
             if ( mBTSocket != null ) {
               // TDLog.Error( "[*] socket is not null: close and retry connect ");
-              mApp.mDataDownloader.setConnected( false );
+              mApp.mDataDownloader.setConnected( DataDownloader.STATUS_OFF );
               mApp.notifyStatus();
               closeSocket( );
               mApp.notifyDisconnected();
@@ -290,6 +285,7 @@ class DistoXComm extends TopoDroidComm
 
       if ( DeviceUtil.isPaired( mBTDevice ) ) {
         try {
+          Log.v("DistoXSOCKET", "create socket");
           Class[] classes1 = new Class[]{ int.class };
           Class[] classes2 = new Class[]{ UUID.class };
           if ( TDSetting.mSockType == TDSetting.TD_SOCK_DEFAULT ) {
@@ -419,6 +415,13 @@ class DistoXComm extends TopoDroidComm
             mBTSocket.connect();
             mBTConnected = true;
           } catch ( IOException e ) {
+            // Toast must run on UI Thread
+            // not sure this is good because it shows also when reconnection is interrupted
+            // TopoDroidApp.mActivity.runOnUiThread( new Runnable() {
+            //   public void run() {
+            //     TDToast.makeBad( R.string.connection_error  );
+            //   }
+            // } );
             TDLog.Error( "connect socket() (port " + port + ") IO error " + e.getMessage() );
             // TDLog.LogStackTrace( e );
             closeSocket();

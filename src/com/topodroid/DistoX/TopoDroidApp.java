@@ -53,6 +53,8 @@ import android.os.RemoteException;
 // import android.os.SystemClock; // FIXME TROBOT
 
 import android.app.Application;
+import android.app.Notification;
+import android.app.NotificationManager;
 // import android.app.KeyguardManager;
 // import android.app.KeyguardManager.KeyguardLock;
 // import android.app.Activity;
@@ -160,6 +162,7 @@ public class TopoDroidApp extends Application
 
   void notifyStatus( )
   { 
+    // Log.v("DistoXDOWN", "app notify status");
     mListerSet.setConnectionStatus( mDataDownloader.getStatus() );
   }
 
@@ -196,6 +199,7 @@ public class TopoDroidApp extends Application
   static boolean mGMActivityVisible = false;
 
   static long lastShotId( ) { return mData.getLastShotId( TDInstance.sid ); }
+  static StationName mStationName = null;
 
   // static Device mDevice = null;
   // static int deviceType() { return (mDevice == null)? 0 : mDevice.mType; }
@@ -393,7 +397,7 @@ public class TopoDroidApp extends Application
 
   void disconnectRemoteDevice( boolean force )
   {
-    Log.v( "DistoXBLE", "App disconnect remote device. force " + force );
+    // Log.v( "DistoXBLE", "App disconnect remote device. force " + force );
     // TDLog.Log( TDLog.LOG_COMM, "App disconnect RemoteDevice listers " + mListerSet.size() + " force " + force );
     if ( force || mListerSet.size() == 0 ) {
       if ( mComm != null && mComm.isConnected() ) {
@@ -420,13 +424,13 @@ public class TopoDroidApp extends Application
   // FIXME_COMM
   public boolean connectDevice( String address ) 
   {
-    Log.v( "DistoXBLE", "App connect address " + address + " comm is " + ((mComm==null)? "null" : "non-null") );
+    // Log.v( "DistoXBLE", "App connect address " + address + " comm is " + ((mComm==null)? "null" : "non-null") );
     return mComm != null && mComm.connectDevice( address, mListerSet ); // FIXME_LISTER
   }
 
   public void disconnectComm()
   {
-    Log.v( "DistoXBLE", "App disconnect. comm is " + ((mComm==null)? "null" : "non-null") );
+    // Log.v( "DistoXBLE", "App disconnect. comm is " + ((mComm==null)? "null" : "non-null") );
     if ( mComm != null ) mComm.disconnectDevice();
   }
   // end FIXME_COMM
@@ -526,7 +530,7 @@ public class TopoDroidApp extends Application
       mComm.disconnectRemoteDevice( );
       mComm = null;
     }
-    Log.v("DistoXBLE", "create comm. type " + TDInstance.deviceType() );
+    // Log.v("DistoXBLE", "create comm. type " + TDInstance.deviceType() );
     // if ( TDInstance.isDeviceAddress( Device.ZERO_ADDRESS ) ) { // FIXME VirtualDistoX
     //   mComm = new VirtualDistoXComm( this, mVirtualDistoX );
     // } else {
@@ -540,7 +544,7 @@ public class TopoDroidApp extends Application
         case Device.DISTO_BLE5: // FIXME BLE
           String address = TDInstance.deviceAddress();
           BluetoothDevice bt_device = TDInstance.bleDevice;
-          Log.v("DistoXBLE", "create BLE comm. address " + address + " BT " + ((bt_device==null)? "null" : bt_device.getAddress() ) );
+          // Log.v("DistoXBLE", "create BLE comm. address " + address + " BT " + ((bt_device==null)? "null" : bt_device.getAddress() ) );
           mComm = new BleComm( this, address, bt_device );
           break;
       }
@@ -688,8 +692,49 @@ public class TopoDroidApp extends Application
     // DrawingUtil.CENTER_X = mDisplayWidth  / 2;
     // DrawingUtil.CENTER_Y = mDisplayHeight / 2;
 
-
     // mManual = getResources().getString( R.string.topodroid_man );
+  }
+
+  // Led notifcation are shown only while the display is off
+  // static final int NOTIFY_LED_ID = 10101;
+  //   NotificationManager manager =
+  //     (NotificationManager)getSystemService( Context.NOTIFICATION_SERVICE );
+  //   Notification notify_led = new Notification( ); // crash
+  //   notify_led.ledARGB = Color
+  //   notify_led.ledOffMS = 800;
+  //   notify_led.ledOnMS  = 200;
+  //   notify_led.flags = notify_led.flags | Notification.FLAG_SHOW_LIGHTS | Notification.FLAG_ONGOING_EVENT;
+  //   manager.notify( NOTIFY_LED_ID, notify_led );
+  //   manager.cancel( NOTIFY_LED_ID );
+  //
+  // an alternative is a vibration (but too frequent vibrations are
+  // considered a bad idea)
+  // manifest must have
+  //   <uses-permission android:name="android.permission.VIBRATE" />
+  // next
+  //   Vibrator vibrator = (Vibrator)getSystemService( Context.VIBRATOR_SERVICE );
+  //   vibrator.vibrate( 500 );
+  // or
+  //   long[] pattern = {400, 200};
+  //   vibrator.vibrate( pattern, 0 ); // 0: repeat fom index 0, use -1 not to repeat
+  //   vibrator.cancel();
+  static boolean mLedOn = false;
+  void notifyLed( boolean on_off ) 
+  {
+    if ( mLedOn ) {
+      if ( ! on_off ) { // turn off led
+        mLedOn = false;
+      }
+    } else {
+      if ( on_off ) { // turn on led
+        mLedOn = true;
+        if ( TDSetting.mConnectFeedback == TDSetting.FEEDBACK_BELL ) {
+          TDUtil.ringTheBell( 200 );
+        } else if ( TDSetting.mConnectFeedback == TDSetting.FEEDBACK_VIBRATE ) {
+          TDUtil.vibrate( this, 200 );
+        }
+      }
+    }
   }
 
   @Override
@@ -1136,7 +1181,7 @@ public class TopoDroidApp extends Application
   // FIXME_DEVICE_STATIC
   void setDevice( String address, BluetoothDevice bt_device )
   { 
-    Log.v("DistoXBLE", "set device address " + address + " BLE " + ((bt_device!=null)? "yes" : "no") );
+    // Log.v("DistoXBLE", "set device address " + address + " BLE " + ((bt_device!=null)? "yes" : "no") );
     if ( address == null ) {
       // if ( mVirtualDistoX != null ) mVirtualDistoX.stopServer( this ); // FIXME VirtualDistoX
       TDInstance.device = null;
@@ -1161,7 +1206,7 @@ public class TopoDroidApp extends Application
           TDInstance.device = new Device( address, "DistoX-BLE", 0, 0, null, null );
           TDInstance.bleDevice = bt_device;
         // }
-        Log.v("DistoXBLE", "create BLE address " + address );
+        // Log.v("DistoXBLE", "create BLE address " + address );
         mComm = new BleComm( this, address, bt_device ); // FIXME BLE
       } else {
         boolean create = TDInstance.isDeviceZeroAddress() || (TDInstance.deviceType() == Device.DISTO_BLE5);
@@ -1208,6 +1253,7 @@ public class TopoDroidApp extends Application
   String getCurrentOrLastStation( ) { return StationName.getCurrentOrLastStation( mData, TDInstance.sid); }
   String getFirstStation( ) { return StationName.getFirstStation( mData, TDInstance.sid); }
   private void resetCurrentOrLastStation( ) { StationName.resetCurrentOrLastStation( mData, TDInstance.sid); }
+
   String getFirstPlotOrigin() { return ( TDInstance.sid < 0 )? null : mData.getFirstPlotOrigin( TDInstance.sid ); }
 
 
@@ -1230,13 +1276,13 @@ public class TopoDroidApp extends Application
       //   TDToast.make( R.string.toporobot_warning );
       //   trobotmillis = millis;
       // }
-      StationName.assignStationsAfter_TRobot( mData, TDInstance.sid, blk0, list, sts );
+      new StationNameTRobot(this, mData, TDInstance.sid ).assignStationsAfter( blk0, list, sts );
     } else  if ( StationPolicy.doBacksight() ) {
-      StationName.assignStationsAfter_Backsight( mData, TDInstance.sid, blk0, list, sts );
+      new StationNameBacksight(this, mData, TDInstance.sid ).assignStationsAfter( blk0, list, sts );
     } else if ( StationPolicy.doTripod() ) {
-      StationName.assignStationsAfter_Tripod( mData, TDInstance.sid, blk0, list, sts );
+      new StationNameTripod( this, mData, TDInstance.sid ).assignStationsAfter( blk0, list, sts );
     } else {
-      StationName.assignStationsAfter_Default( mData, TDInstance.sid, blk0, list, sts );
+      new StationNameDefault( this, mData, TDInstance.sid ).assignStationsAfter( blk0, list, sts );
     }
   }
 
@@ -1254,18 +1300,14 @@ public class TopoDroidApp extends Application
       //   TDToast.make( R.string.toporobot_warning );
       //   trobotmillis = millis;
       // }
-      StationName.assignStations_TRobot( mData, TDInstance.sid, list, sts );
-      return;
+      new StationNameTRobot(this, mData, TDInstance.sid ).assignStations( list, sts );
+    } else  if ( StationPolicy.doBacksight() ) {
+      new StationNameBacksight(this, mData, TDInstance.sid ).assignStations( list, sts );
+    } else if ( StationPolicy.doTripod() ) {
+      new StationNameTripod( this, mData, TDInstance.sid ).assignStations( list, sts );
+    } else {
+      new StationNameDefault( this, mData, TDInstance.sid ).assignStations( list, sts );
     } 
-    if ( StationPolicy.doBacksight() ) {
-      StationName.assignStations_Backsight( mData, TDInstance.sid, list, sts );
-      return;
-    } 
-    if ( StationPolicy.doTripod() ) {
-      StationName.assignStations_Tripod( mData, TDInstance.sid, list, sts );
-      return;
-    }
-    StationName.assignStations_Default( mData, TDInstance.sid, list, sts );
   }
 
   // ================================================================

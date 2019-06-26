@@ -24,6 +24,10 @@ import android.content.SharedPreferences.Editor;
 
 class TDSetting
 {
+  static final int FEEDBACK_NONE = 0;
+  static final int FEEDBACK_BELL = 1;
+  static final int FEEDBACK_VIBRATE = 2;
+ 
   static private String defaultTextSize   = "16";
   static private String defaultButtonSize = TDString.ONE;
 
@@ -210,6 +214,7 @@ class TDSetting
   static int mWaitData  =  100;  // delay between data
   static int mWaitConn  =  500;  // delay waiting a connection
   static int mWaitCommand = 100;
+  static int mConnectFeedback  = FEEDBACK_NONE;
 
   static boolean mCheckAttached = false;    // whether to check is there are shots non-attached
   static boolean mCheckExtend   = true;
@@ -371,7 +376,7 @@ class TDSetting
   static boolean mPathMultiselect = false;
 
   static boolean mBedding        = false;
-  static boolean mTripleShot     = false;
+  static int     mTripleShot     = FEEDBACK_NONE;  // leg feedback
   static boolean mSplayClasses   = false;
   static boolean mSplayColor     = false;
   static boolean mDivingMode     = false;
@@ -733,6 +738,7 @@ class TDSetting
     // mCommRetry      = tryInt( prefs, keyDevice[  ], bool(defDevice[  ]) );  // DISTOX_COMM_RETRY
     mZ6Workaround   = prefs.getBoolean( keyDevice[ 5], bool(defDevice[ 5])  ); // DISTOX_Z6_WORKAROUND
     mAutoPair       = prefs.getBoolean( keyDevice[ 6], bool(defDevice[ 6]) );  // DISTOX_AUTO_PAIR
+    mConnectFeedback = tryInt( prefs,    keyDevice[ 7],      defDevice[ 7] );   // DISTOX_CONNECT_FEEDBACK
 
     String[] keyGDev = TDPrefKey.GEEKDEVICE;
     String[] defGDev = TDPrefKey.GEEKDEVICEdef;
@@ -840,6 +846,7 @@ class TDSetting
     // DISTOX_AZIMUTH_MANUAL [7] handled in the first pass
     mPrevNext      = prefs.getBoolean(         keyData[ 8], bool(defData[ 8]) ); // DISTOX_PREV_NEXT
     mBacksightInput = prefs.getBoolean(        keyData[ 9], bool(defData[ 9]) ); // DISTOX_BACKSIGHT
+    mTripleShot     = tryInt(  prefs,          keyData[10],      defData[10]  ); // DISTOX_LEG_FEEDBACK
     // mTimerWait     = tryInt(   prefs,          keyData[10],      defData[10] );  // DISTOX_SHOT_TIMER
     // mBeepVolume    = tryInt(   prefs,          keyData[11],      defData[11] );  // DISTOX_BEEP_VOLUME
 
@@ -852,15 +859,14 @@ class TDSetting
     mSplayColor    = prefs.getBoolean( keyGShot[ 4], bool(defGShot[ 4]) ); // DISTOX_SPLAY_COLOR
     mExtendFrac    = prefs.getBoolean( keyGShot[ 5], bool(defGShot[ 5]) ); // DISTOX_EXTEND_FRAC
     mBedding       = prefs.getBoolean( keyGShot[ 6], bool(defGShot[ 6]) ); // DISTOX_BEDDING
-    mTripleShot    = prefs.getBoolean( keyGShot[ 7], bool(defGShot[ 7]) ); // DISTOX_TRIPLE_SHOT
-    mWithSensors   = prefs.getBoolean( keyGShot[ 8], bool(defGShot[ 8]) ); // DISTOX_WITH_SENSORS
-    setLoopClosure( tryInt(   prefs,   keyGShot[ 9],      defGShot[ 9] ) );// DISTOX_LOOP_CLOSURE_VALUE
+    mWithSensors   = prefs.getBoolean( keyGShot[ 7], bool(defGShot[ 7]) ); // DISTOX_WITH_SENSORS
+    setLoopClosure( tryInt(   prefs,   keyGShot[ 8],      defGShot[ 8] ) );// DISTOX_LOOP_CLOSURE_VALUE
     // mDistTolerance = tryFloat( prefs,  keyGShot[ 9],      defGShot[ 9]  ); // DISTOX_DIST_TOLERANCE
     // mSplayActive   = prefs.getBoolean( keyGShot[ 8], bool(defGShot[ 8]) ); // DISTOX_WITH_SENSORS
     // mWithRename    = prefs.getBoolean( keyGShot[ 9], bool(defGShot[ 9]) ); // DISTOX_WITH_RENAME
-    mWithAzimuth   = prefs.getBoolean( keyGShot[10], bool(defGShot[10]) ); // DISTOX_ANDROID_AZIMUTH
-    mTimerWait     = tryInt(   prefs,  keyGShot[11],      defGShot[11] );  // DISTOX_SHOT_TIMER
-    mBeepVolume    = tryInt(   prefs,  keyGShot[12],      defGShot[12] );  // DISTOX_BEEP_VOLUME
+    mWithAzimuth   = prefs.getBoolean( keyGShot[ 9], bool(defGShot[ 9]) ); // DISTOX_ANDROID_AZIMUTH
+    mTimerWait     = tryInt(   prefs,  keyGShot[10],      defGShot[10] );  // DISTOX_SHOT_TIMER
+    mBeepVolume    = tryInt(   prefs,  keyGShot[11],      defGShot[11] );  // DISTOX_BEEP_VOLUME
 
 
     String[] keyGPlot = TDPrefKey.GEEKPLOT;
@@ -1212,6 +1218,8 @@ class TDSetting
       mAutoPair = tryBooleanValue( hlp, k, v, bool(def[6]) );
       // hlp.getApp().checkAutoPairing();
       TopoDroidApp.checkAutoPairing();
+    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_CONNECT_FEEDBACK
+      mConnectFeedback = tryIntValue( hlp, k, v, def[7] );
     // } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_SOCKET_DELAY
     //   mConnectSocketDelay = tryIntValue( hlp, k, v, def[7] );  
     //   if ( mConnectSocketDelay < 0  ) { mConnectSocketDelay =  0; ret = TDString.ZERO; }
@@ -1279,19 +1287,17 @@ class TDSetting
       mExtendFrac   = tryBooleanValue( hlp, k, v, bool(def[ 5]) );
     } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_BEDDING
       mBedding      = tryBooleanValue( hlp, k, v, bool(def[ 6]) );
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_TRIPLE_SHOT
-      mTripleShot   = tryBooleanValue( hlp, k, v, bool(def[ 7]) );
-    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_WITH_SENSORS
-      mWithSensors  = tryBooleanValue( hlp, k, v, bool(def[ 8]) );
-    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_LOOP_CLOSURE_VALUE
-      setLoopClosure( tryIntValue( hlp, k, v, def[ 9] ) );
-    } else if ( k.equals( key[10 ] ) ) { // DISTOX_ANDROID_AZIMUTH
-      mWithAzimuth  = tryBooleanValue( hlp, k, v, bool(def[10]) );
-    } else if ( k.equals( key[ 11 ] ) ) { // DISTOX_SHOT_TIMER [3 ..)
-      mTimerWait        = tryIntValue( hlp, k, v, def[11] );
+    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_WITH_SENSORS
+      mWithSensors  = tryBooleanValue( hlp, k, v, bool(def[ 7]) );
+    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_LOOP_CLOSURE_VALUE
+      setLoopClosure( tryIntValue( hlp, k, v, def[ 8] ) );
+    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_ANDROID_AZIMUTH
+      mWithAzimuth  = tryBooleanValue( hlp, k, v, bool(def[ 9]) );
+    } else if ( k.equals( key[ 10 ] ) ) { // DISTOX_SHOT_TIMER [3 ..)
+      mTimerWait        = tryIntValue( hlp, k, v, def[10] );
       if ( mTimerWait < 0 ) { mTimerWait = 0; ret = TDString.ZERO; }
-    } else if ( k.equals( key[ 12 ] ) ) { // DISTOX_BEEP_VOLUME [0 .. 100]
-      mBeepVolume       = tryIntValue( hlp, k, v, def[12] );
+    } else if ( k.equals( key[ 11 ] ) ) { // DISTOX_BEEP_VOLUME [0 .. 100]
+      mBeepVolume       = tryIntValue( hlp, k, v, def[11] );
       if ( mBeepVolume <   0 ) { mBeepVolume =   0; ret =   TDString.ZERO; }
       if ( mBeepVolume > 100 ) { mBeepVolume = 100; ret = "100"; }
 
@@ -1716,6 +1722,8 @@ class TDSetting
       mPrevNext = tryBooleanValue( hlp, k, v, bool(def[ 8]) );
     } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_BACKSIGHT (bool)
       mBacksightInput = tryBooleanValue( hlp, k, v, bool(def[ 9]) );
+    } else if ( k.equals( key[10 ] ) ) { // DISTOX_LEG_FEEDBACK
+      mTripleShot   = tryIntValue( hlp, k, v, def[10] );
     // } else if ( k.equals( key[ 10 ] ) ) { // DISTOX_SHOT_TIMER [3 ..)
     //   mTimerWait        = tryIntValue( hlp, k, v, def[10] );
     //   if ( mTimerWait < 0 ) { mTimerWait = 0; ret = TDString.ZERO; }

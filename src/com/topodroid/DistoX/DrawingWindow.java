@@ -285,6 +285,7 @@ public class DrawingWindow extends ItemDrawer
   private boolean audioCheck;
   // private DataHelper mData;
   private Activity mActivity = null;
+  private int mBTstatus; // status of bluetooth buttons (download and reset)
 
   // long getSID() { return TDInstance.sid; }
   // String getSurvey() { return TDInstance.survey; }
@@ -1805,6 +1806,8 @@ public class DrawingWindow extends ItemDrawer
     if ( mDataDownloader != null ) {
       mApp.registerLister( this );
     } 
+
+    mBTstatus = DataDownloader.STATUS_OFF;
 
     // if ( mApp.hasHighlighted() ) {
     //   // Log.v("DistoX", "drawing window [2] highlighted " + mApp.getHighlightedSize() );
@@ -4839,7 +4842,7 @@ public class DrawingWindow extends ItemDrawer
       //   makeModePopup( b );
 
       } else if ( b == mButton1[k1++] ) { // DOWNLOAD
-        setConnectionStatus( 2 );
+        // setConnectionStatus( DataDownloader.STATUS_WAIT ); // FIXME DistoXDOWN was not commented
         resetFixedPaint();
         updateReference();
         if ( TDInstance.device == null ) {
@@ -4847,7 +4850,7 @@ public class DrawingWindow extends ItemDrawer
           (new ShotNewDialog( mActivity, mApp, this, null, -1L )).show();
         } else {
           mDataDownloader.toggleDownload();
-          setConnectionStatus( mDataDownloader.getStatus() );
+          // setConnectionStatus( mDataDownloader.getStatus() ); // FIXME DistoXDOWN was not commenetd
           mDataDownloader.doDataDownload( );
         }
       } else if ( b == mButton1[k1++] ) { // BLUETOOTH
@@ -5789,21 +5792,25 @@ public class DrawingWindow extends ItemDrawer
   public void setConnectionStatus( int status )
   { 
     if ( TDInstance.device == null ) {
+      mBTstatus = DataDownloader.STATUS_OFF;
       TDandroid.setButtonBackground( mButton1[ BTN_DOWNLOAD ], mBMadd );
       TDandroid.setButtonBackground( mButton1[ BTN_BLUETOOTH ], mBMbluetooth_no );
     } else {
-      switch ( status ) {
-        case 1:
-          TDandroid.setButtonBackground( mButton1[ BTN_DOWNLOAD ], mBMdownload_on );
-          TDandroid.setButtonBackground( mButton1[ BTN_BLUETOOTH ], mBMbluetooth_no );
-          break;
-        case 2:
-          TDandroid.setButtonBackground( mButton1[ BTN_DOWNLOAD ], mBMdownload_wait );
-          TDandroid.setButtonBackground( mButton1[ BTN_BLUETOOTH ], mBMbluetooth_no );
-          break;
-        default:
-          TDandroid.setButtonBackground( mButton1[ BTN_DOWNLOAD ], mBMdownload );
-          TDandroid.setButtonBackground( mButton1[ BTN_BLUETOOTH ], mBMbluetooth );
+      if ( status != mBTstatus ) {
+        mBTstatus = status;
+        switch ( status ) {
+          case DataDownloader.STATUS_ON:
+            TDandroid.setButtonBackground( mButton1[ BTN_DOWNLOAD ], mBMdownload_on );
+            TDandroid.setButtonBackground( mButton1[ BTN_BLUETOOTH ], mBMbluetooth_no );
+            break;
+          case DataDownloader.STATUS_WAIT:
+            TDandroid.setButtonBackground( mButton1[ BTN_DOWNLOAD ], mBMdownload_wait );
+            TDandroid.setButtonBackground( mButton1[ BTN_BLUETOOTH ], mBMbluetooth_no );
+            break;
+          default:
+            TDandroid.setButtonBackground( mButton1[ BTN_DOWNLOAD ], mBMdownload );
+            TDandroid.setButtonBackground( mButton1[ BTN_BLUETOOTH ], mBMbluetooth );
+        }
       }
     }
   }

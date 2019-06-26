@@ -12,7 +12,7 @@
  */
 package com.topodroid.DistoX;
 
-// import android.util.Log;
+import android.util.Log;
 
 // import java.util.ArrayList;
 
@@ -21,25 +21,43 @@ import android.content.Context;
 
 class DataDownloader
 {
-  private boolean mConnected = false;  // whetehr it is "connected"
+  // int mStatus = 0; // 0 disconnected, 1 connected, 2 connecting
+  final static int STATUS_OFF  = 0;
+  final static int STATUS_ON   = 1;
+  final static int STATUS_WAIT = 2;
+
+  private int mConnected = STATUS_OFF;  // whetehr it is "connected": 0 unconnected, 1 connecting, 2 connected
   private boolean mDownload  = false;  // whether it is "downloading"
 
-  boolean isConnected() { return mConnected; }
+  boolean isConnected() { return mConnected == STATUS_ON; }
   boolean isDownloading() { return mDownload; }
-  boolean needReconnect() { return mDownload && ! mConnected; }
-  void setConnected( boolean connected ) { mConnected = connected; }
+  boolean needReconnect() { return mDownload && mConnected != STATUS_ON; }
+  void setConnected( int connected ) { mConnected = connected; }
   void setDownload( boolean download ) { mDownload = download; }
+  void updateConnected( boolean on_off )
+  {
+    if ( on_off ) {
+      mConnected = STATUS_ON;
+    } else {
+      if ( mDownload ) {
+        mConnected = ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_CONTINUOUS && TDSetting.mAutoReconnect )? STATUS_WAIT : STATUS_OFF;
+      } else {
+        mConnected = STATUS_OFF;
+      }
+    }
+  }
 
-  // int mStatus = 0; // 0 disconnected, 1 connected, 2 connecting
   int getStatus()
   {
-    if ( ! mDownload ) return 0;
-    if ( ! mConnected ) {
-      if ( TDSetting.mAutoReconnect ) return 2;
-      return 0;
-    }
-    // setDownload( false );
-    return 1;
+    if ( ! mDownload ) return STATUS_OFF;
+    return mConnected;
+    // if ( mConnected == 0 ) {
+    //   if ( TDSetting.mAutoReconnect ) return STATUS_WAIT;
+    //   return STATUS_OFF;
+    // } else if ( mConnected == 1 ) {
+    //   return STATUS_WAIT;
+    // } // else mConnected == 2
+    // return STATUS_ON;
   }
 
   // private Context mContext; // UNUSED
@@ -53,15 +71,16 @@ class DataDownloader
     // mBTReceiver = null;
   }
 
-  void toggleDownload()
+  boolean toggleDownload()
   {
     mDownload = ! mDownload;
+    return mDownload;
     // Log.v("DistoX", "toggle download to " + mDownload );
   }
 
   void doDataDownload()
   {
-    // Log.v("DistoX", "do data download " + mDownload + " connected " + mConnected );
+    // Log.v("DistoXDOWN", "do data download " + mDownload + " connected " + mConnected );
     if ( mDownload ) {
       startDownloadData();
     } else {
@@ -77,13 +96,16 @@ class DataDownloader
     if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_BATCH ) {
       tryDownloadData( );
     } else if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_CONTINUOUS ) {
+      // Log.v("DistoXDOWN", "start download continuous" );
       if ( TDSetting.mAutoReconnect ) {
         TDInstance.secondLastShotId = TopoDroidApp.lastShotId( ); // FIXME-LATEST
         new ReconnectTask( this ).execute();
       } else {
-        tryConnect();
+        notifyConnectionStatus( STATUS_WAIT );
+        // notifyUiThreadConnectionStatus( STATUS_WAIT );
+        tryConnect( );
+        // notifyUiThreadConnectionStatus( mConnected );
       }
-      notifyUiThreadConnectionStatus( mConnected );
     } else if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI ) {
       tryDownloadData( );
     }
@@ -95,33 +117,40 @@ class DataDownloader
     // if ( ! mConnected ) return;
     // if ( TDSetting.isConnectionModeBatch() ) {
       mApp.disconnectComm();
-      notifyUiThreadConnectionStatus( false );
+      notifyConnectionStatus( STATUS_OFF );
+      // notifyUiThreadConnectionStatus( STATUS_OFF );
     // }
   }
 
   // called also by ReconnectTask
-  void tryConnect()
+  void tryConnect( )
   {
-    // Log.v("DistoX", "try Connect() download " + mDownload + " connected " + mConnected );
+    // Log.v("DistoXDOWN", "try Connect() download " + mDownload + " connected " + mConnected );
     if ( TDInstance.device != null && DeviceUtil.isAdapterEnabled() ) {
       mApp.disconnectComm();
       if ( ! mDownload ) {
-        mConnected = false;
+        mConnected = STATUS_OFF;
         return;
       }
-      if ( ! mConnected ) {
-        mConnected = mApp.connectDevice( TDInstance.device.mAddress );
-        // Log.v( "DistoX", "**** try Connect " + mConnected );
+      if ( mConnected == STATUS_ON ) {
+        mConnected = STATUS_OFF;
+        // Log.v( "DistoXDOWN", "**** toggle: connected " + mConnected );
       } else {
-        mConnected = false;
-        // Log.v( "DistoX", "**** try Connect false ");
+        // if this runs the RFcomm thread, it returns true
+        int connected = STATUS_ON;
+        if ( ! mApp.connectDevice( TDInstance.device.mAddress ) ) {
+           connected = TDSetting.mAutoReconnect ? STATUS_WAIT : STATUS_OFF;
+        }
+        // Log.v( "DistoXDOWN", "**** connect device returns " + connected );
+        notifyUiThreadConnectionStatus( connected );
       }
     }
   }
 
-  private void notifyUiThreadConnectionStatus( boolean connected )
+  private void notifyUiThreadConnectionStatus( int connected )
   {
     mConnected = connected;
+    // Log.v("DistoXDOWN", "notify UI thread " + connected );
     TopoDroidApp.mActivity.runOnUiThread( new Runnable() {
       public void run() {
         mApp.notifyStatus( );
@@ -130,9 +159,10 @@ class DataDownloader
   }
 
   // this must be called on UI thread (onPostExecute)
-  void notifyConnectionStatus( boolean connected )
+  void notifyConnectionStatus( int connected )
   {
     mConnected = connected;
+    // Log.v("DistoXDOWN", "notify thread " + connected );
     mApp.notifyStatus( );
   }
 
@@ -142,12 +172,14 @@ class DataDownloader
   {
     TDInstance.secondLastShotId = TopoDroidApp.lastShotId( ); // FIXME-LATEST
     if ( TDInstance.device != null && DeviceUtil.isAdapterEnabled() ) {
-      notifyUiThreadConnectionStatus( true );
+      notifyConnectionStatus( STATUS_WAIT );
+      // notifyUiThreadConnectionStatus( STATUS_WAIT );
       // TDLog.Log( TDLog.LOG_COMM, "shot menu DOWNLOAD" );
       new DataDownloadTask( mApp, mApp.mListerSet, null ).execute();
     } else {
       mDownload = false;
-      notifyUiThreadConnectionStatus( false );
+      notifyConnectionStatus( STATUS_OFF );
+      // notifyUiThreadConnectionStatus( STATUS_OFF );
       TDLog.Error( "download data: no device selected" );
       if ( TDInstance.sid < 0 ) {
         TDLog.Error( "download data: no survey selected" );
@@ -164,9 +196,9 @@ class DataDownloader
   {
     // Log.v("DistoX", "DataDownloader onStop()");
     mDownload = false;
-    if ( mConnected ) {
+    if ( mConnected  > STATUS_OFF ) { // mConnected == STATUS_ON || mConnected == STATUS_WAIT
       stopDownloadData();
-      mConnected = false;
+      mConnected = STATUS_OFF;
     }
   }
 

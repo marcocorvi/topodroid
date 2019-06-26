@@ -84,7 +84,7 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
     }
     if ( mApp.get() != null ) {
       mApp.get().mDataDownloader.setDownload( false );
-      mApp.get().mDataDownloader.notifyConnectionStatus( false );
+      mApp.get().mDataDownloader.notifyConnectionStatus( DataDownloader.STATUS_OFF );
     }
     unlock();
     // Log.v("DistoX", "data download task post exec");

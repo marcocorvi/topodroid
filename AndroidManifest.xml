@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="401112"
-      android:versionName="4.1.3w"
+      android:versionCode="401113"
+      android:versionName="4.1.3x"
     >
     <!-- android:debuggable="true" -->
     <!-- Android SDK dependencies:
@@ -38,6 +38,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <!-- uses-permission android:name="android.permission.DEVICE_POWER"/ -->
     <!-- uses-permission android:name="android.permission.WAKE_LOCK"/ -->
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <uses-feature android:name="android.hardware.screen.portrait"      android:required="true" />
     <uses-feature android:name="android.hardware.bluetooth"            android:required="true" />

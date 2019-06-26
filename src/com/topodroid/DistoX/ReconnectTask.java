@@ -61,7 +61,8 @@ class ReconnectTask extends AsyncTask< String, Integer, Integer >
     // if ( res != null ) {
     //   int r = res.intValue();
     // }
-    mDownloader.notifyConnectionStatus( mDownloader.isConnected() );
+
+    // mDownloader.notifyConnectionStatus( mDownloader.isConnected()? DataDownloader.STATUS_ON : DataDownloader.STATUS_WAIT );
     unlock();
   }
 

@@ -389,6 +389,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="popup_cont_both">Both points</string>
     <string name="popup_cont_continue">Continue</string>
 
+    <string name="connection_error">Connection error</string>
+    <string name="connecting">Connecting &#8230;</string>
     <!-- UNUSED string name="connected_none">Not connected</string -->
     <!-- UNUSED string name="connected_already">Already connected</string -->
 
@@ -999,8 +1001,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_leg_shots_summary">Minimum number of shots for a leg</string>
   <string name="pref_recent_timeout_title">Recent data timeout</string>
   <string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent [s]</string>
-  <string name="pref_triple_shot_title">Leg-shot bell</string>
-  <string name="pref_triple_shot_summary">Sound feedback on leg-shot recognition</string>
+  <string name="pref_triple_shot_title">Leg-shot feedback</string>
+  <string name="pref_triple_shot_summary">Feedback on leg-shot recognition</string>
+  <string name="pref_connect_feedback_title">Connect feedback</string>
+  <string name="pref_connect_feedback_summary">Feedback on device connect</string>
   <string name="pref_station_prefix_title">Compass station prefix</string>
   <string name="pref_station_prefix_summary">Export station prefix [Compass]</string>
   <string name="pref_compass_splays_title">Compass splays</string>

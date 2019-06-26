@@ -545,12 +545,13 @@ class TDPref implements AdapterView.OnItemSelectedListener
       // makeEdt( cat, key[  ], tit[  ], dsc[  ], X, def[  ], INTEGER, ctx, hlp ),
       makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], N, def[ 5],          ctx, hlp ),
       makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], A, def[ 6],          ctx, hlp ),
+      makeLst( cat, key[ 7], tit[ 7], dsc[ 7], E, def[ 7], R.array.feedbackMode, R.array.feedbackModeValue, ctx, hlp ),
       // makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], E, def[ 7], INTEGER, ctx, hlp ),
       // makeEdt( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8], INTEGER, ctx, hlp ),
       // makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9], INTEGER, ctx, hlp ),
       // makeEdt( cat, key[10], tit[10], dsc[10], A, def[10], INTEGER, ctx, hlp ),
       // makeEdt( cat, key[11], tit[11], dsc[11], A, def[11], INTEGER, ctx, hlp ),
-      makeFwd( cat, key[ 7], tit[ 7],          B,                   ctx, hlp )
+      makeFwd( cat, key[ 8], tit[ 8],          B,                   ctx, hlp )
     };
   }
 
@@ -737,7 +738,8 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], N, def[ 6], FLOAT,   ctx, hlp ),
       makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7],          ctx, hlp ), // AZIMUTH_MANUAL
       makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8],          ctx, hlp ), // PREV_NEXT
-      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9],          ctx, hlp )  // BACKSIGHT
+      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9],          ctx, hlp ), // BACKSIGHT
+      makeLst( cat, key[10], tit[10], dsc[10], N, def[10], R.array.feedbackMode, R.array.feedbackModeValue, ctx, hlp ) // DISTOX_LEG_FEEDBACK
       // makeEdt( cat, key[10], tit[10], dsc[10], T, def[10], INTEGER, ctx, hlp ), // TIMER
       // makeEdt( cat, key[11], tit[11], dsc[11], T, def[11], INTEGER, ctx, hlp ), // VOLUME
     };
@@ -962,15 +964,14 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], T, def[ 4],          ctx, hlp ), // SPLAY COLOR
       makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5],          ctx, hlp ), // EXTEND FRAC
       makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], T, def[ 6],          ctx, hlp ), // BEDDING PLANE
-      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7],          ctx, hlp ), // TRIPLE SHOT BELL
-      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8],          ctx, hlp ), // WITH SENSORS
-      makeLst( cat, key[ 9], tit[ 9], dsc[ 9], E, def[ 9], R.array.loopClosure, R.array.loopClosureValue, ctx, hlp ),
+      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7],          ctx, hlp ), // WITH SENSORS
+      makeLst( cat, key[ 8], tit[ 8], dsc[ 8], E, def[ 8], R.array.loopClosure, R.array.loopClosureValue, ctx, hlp ),
       // makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9], FLOAT,   ctx, hlp ), // DIST/ANGLE TOLERANCE
       // makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9],          ctx, hlp )  // SPLAYS AT ACTIVE STATION
       // makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9],          ctx, hlp )  // WITH RENAME
-      makeCbx( cat, key[10], tit[10], dsc[10], E, def[10],          ctx, hlp ),// WITH ANDROID AZIMUTH
-      makeEdt( cat, key[11], tit[11], dsc[11], T, def[11], INTEGER, ctx, hlp ), // TIMER
-      makeEdt( cat, key[12], tit[12], dsc[12], T, def[12], INTEGER, ctx, hlp )  // VOLUME
+      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], E, def[ 9],          ctx, hlp ),// WITH ANDROID AZIMUTH
+      makeEdt( cat, key[10], tit[10], dsc[10], T, def[10], INTEGER, ctx, hlp ), // TIMER
+      makeEdt( cat, key[11], tit[11], dsc[11], T, def[11], INTEGER, ctx, hlp )  // VOLUME
     };
   }
 
@@ -1044,36 +1045,36 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] tit    = TDPrefKey.LOGtitle;
     return new TDPref[ ] {
       makeLst( cat, key[0], R.string.pref_log_stream_title, R.string.pref_log_stream_summary, T, "0", R.array.logStream, R.array.logStreamValue, ctx, hlp ),
-      makeCbx( cat, key[ 1], tit[ 0], -1, T, false, ctx, hlp ),
-      makeCbx( cat, key[ 2], tit[ 1], -1, T, false, ctx, hlp ),
-      makeCbx( cat, key[ 3], tit[ 2], -1, T, true,  ctx, hlp ),
-      makeCbx( cat, key[ 4], tit[ 3], -1, T, false, ctx, hlp ),
-      makeCbx( cat, key[ 5], tit[ 4], -1, T, false, ctx, hlp ),
-      makeCbx( cat, key[ 6], tit[ 5], -1, T, false, ctx, hlp ),
-      makeCbx( cat, key[ 7], tit[ 6], -1, T, false, ctx, hlp ),
-      makeCbx( cat, key[ 8], tit[ 7], -1, T, false, ctx, hlp ),
-      makeCbx( cat, key[ 9], tit[ 8], -1, T, false, ctx, hlp ),
-      makeCbx( cat, key[10], tit[ 9], -1, T, false, ctx, hlp ),
-      makeCbx( cat, key[11], tit[10], -1, T, false, ctx, hlp ),
-      makeCbx( cat, key[12], tit[11], -1, T, false, ctx, hlp ),
-      makeCbx( cat, key[13], tit[12], -1, T, false, ctx, hlp ),
-      makeCbx( cat, key[14], tit[13], -1, T, false, ctx, hlp ),
-      makeCbx( cat, key[15], tit[14], -1, T, false, ctx, hlp ),
-      makeCbx( cat, key[16], tit[15], -1, T, false, ctx, hlp ),
-      makeCbx( cat, key[17], tit[16], -1, T, false, ctx, hlp ),
-      makeCbx( cat, key[18], tit[17], -1, T, false, ctx, hlp ),
-      makeCbx( cat, key[19], tit[18], -1, T, false, ctx, hlp ),
-      makeCbx( cat, key[20], tit[19], -1, T, false, ctx, hlp ),
-      makeCbx( cat, key[21], tit[20], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[ 1], tit[ 0], -1, E, false, ctx, hlp ),
+      makeCbx( cat, key[ 2], tit[ 1], -1, E, false, ctx, hlp ),
+      makeCbx( cat, key[ 3], tit[ 2], -1, E, true,  ctx, hlp ),
+      makeCbx( cat, key[ 4], tit[ 3], -1, E, false, ctx, hlp ),
+      makeCbx( cat, key[ 5], tit[ 4], -1, E, false, ctx, hlp ),
+      makeCbx( cat, key[ 6], tit[ 5], -1, E, false, ctx, hlp ),
+      makeCbx( cat, key[ 7], tit[ 6], -1, E, false, ctx, hlp ),
+      makeCbx( cat, key[ 8], tit[ 7], -1, E, false, ctx, hlp ),
+      makeCbx( cat, key[ 9], tit[ 8], -1, E, false, ctx, hlp ),
+      makeCbx( cat, key[10], tit[ 9], -1, E, false, ctx, hlp ),
+      makeCbx( cat, key[11], tit[10], -1, E, false, ctx, hlp ),
+      makeCbx( cat, key[12], tit[11], -1, E, false, ctx, hlp ),
+      makeCbx( cat, key[13], tit[12], -1, E, false, ctx, hlp ),
+      makeCbx( cat, key[14], tit[13], -1, E, false, ctx, hlp ),
+      makeCbx( cat, key[15], tit[14], -1, E, false, ctx, hlp ),
+      makeCbx( cat, key[16], tit[15], -1, E, false, ctx, hlp ),
+      makeCbx( cat, key[17], tit[16], -1, E, false, ctx, hlp ),
+      makeCbx( cat, key[18], tit[17], -1, E, false, ctx, hlp ),
+      makeCbx( cat, key[19], tit[18], -1, E, false, ctx, hlp ),
+      makeCbx( cat, key[20], tit[19], -1, E, false, ctx, hlp ),
+      makeCbx( cat, key[21], tit[20], -1, E, false, ctx, hlp ),
       makeCbx( cat, key[22], tit[21], -1, T, false, ctx, hlp ),
       makeCbx( cat, key[23], tit[22], -1, T, false, ctx, hlp ),
-      makeCbx( cat, key[24], tit[23], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[24], tit[23], -1, E, false, ctx, hlp ),
       makeCbx( cat, key[25], tit[24], -1, T, false, ctx, hlp ),
-      makeCbx( cat, key[26], tit[25], -1, T, false, ctx, hlp ),
+      makeCbx( cat, key[26], tit[25], -1, E, false, ctx, hlp ),
       makeCbx( cat, key[27], tit[26], -1, T, false, ctx, hlp ),
       makeCbx( cat, key[28], tit[27], -1, T, false, ctx, hlp ),
-      makeCbx( cat, key[29], tit[28], -1, T, false, ctx, hlp ) 
-      // makeCbx( cat, key[30], tit[29], -1, T, false, ctx, hlp )  // DISTOX_LOG_SYNC
+      makeCbx( cat, key[29], tit[28], -1, E, false, ctx, hlp ) 
+      // makeCbx( cat, key[30], tit[29], -1, E, false, ctx, hlp )  // DISTOX_LOG_SYNC
     };
   }
 

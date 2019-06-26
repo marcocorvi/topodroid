@@ -375,8 +375,8 @@ public class MainWindow extends Activity
     mWithBackupsClear = TDLevel.overExpert && TDSetting.mBackupsClear;
 
     if ( mWithPalettes ) mMenuAdapter.add( res.getString( menus[0] ) ); // PALETTE
-    if ( TDLevel.overAdvanced ) mMenuAdapter.add( res.getString( menus[1] ) ); // LOGS
-    if ( TDLevel.overExpert && TDSetting.mBackupsClear ) mMenuAdapter.add( res.getString( menus[2] ) ); // CLEAR_BACKUPS
+    if ( mWithLogs )     mMenuAdapter.add( res.getString( menus[1] ) ); // LOGS
+    if ( mWithBackupsClear ) mMenuAdapter.add( res.getString( menus[2] ) ); // CLEAR_BACKUPS
     // if ( TDLevel.overExpert && mApp_mCosurvey ) mMenuAdapter.add( res.getString( menus[2] ) ); // IF_COSURVEY
     // if ( TDLevel.overExpert )   mMenuAdapter.add( res.getString( menus[3] ) ); // UPDATES
     mMenuAdapter.add( res.getString( menus[3] ) ); // ABOUT

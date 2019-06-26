@@ -1,0 +1,351 @@
+/* @file StationNameDefault.java
+ *
+ * @author marco corvi
+ * @date nov 2011
+ *
+ * @brief TopoDroid station naming
+ * --------------------------------------------------------
+ *  Copyright This software is distributed under GPL-3.0 or later
+ *  See the file COPYING.
+ * --------------------------------------------------------
+ * N.B. backsight and tripod need the whole list to decide how to assign names
+ */
+package com.topodroid.DistoX;
+
+
+// import android.util.Log;
+
+import java.util.List;
+import java.util.Set;
+import java.util.ArrayList;
+
+import android.content.Context;
+import android.util.Log;
+
+class StationNameDefault extends StationName
+{
+  StationNameDefault( Context ctx, DataHelper data, long sid ) 
+  {
+    super( ctx, data, sid );
+  }
+
+  // ------------------------------------------------------------------------------------------------
+
+  // @param blk0         reference dblock
+  // @param list         list of dblock to assign
+  // @param sts          station names already in use
+  @Override
+  void assignStationsAfter( DBlock blk0, List<DBlock> list, Set<String> sts )
+  {
+    ArrayList<DBlock> unassigned = new ArrayList<DBlock>();
+    // boolean started = false;
+
+    boolean bs = TDSetting.mDistoXBackshot;
+
+    // Log.v("DistoX", "assign stations after.  size " + list.size() );
+    int survey_stations = StationPolicy.mSurveyStations;
+    if ( survey_stations <= 0 ) return;
+    boolean forward_shots = ( survey_stations == 1 );
+    boolean shot_after_splays = StationPolicy.mShotAfterSplays;
+    // Log.v("DistoX-SN", "default assign stations after. blk0 " + blk0.mId + " bs " + bs + " survey_stations " + survey_stations + " shot_after_splay " + shot_after_splays );
+
+    String main_from = null;
+    String main_to   = null;
+
+    // boolean increment = true;
+    // boolean flip = false; // whether to swap leg-stations (backsight backward shot)
+    // TDLog.Log( TDLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
+
+    DBlock prev = blk0;
+    String from = bs ? blk0.mTo   : blk0.mFrom;
+    String to   = bs ? blk0.mFrom : blk0.mTo;
+    String next;
+    String station;
+    if ( forward_shots ) {
+      next = DistoXStationName.incrementName( to, sts );
+      station = shot_after_splays ? to : from;
+    } else {
+      next = DistoXStationName.incrementName( from, sts );
+      station = shot_after_splays ? next : from;
+    }
+    // Log.v("DistoX-SN", "F " + from + " T " + to + " N " + next + " S " + station );
+
+    // int nrLegShots = 0;
+    for ( DBlock blk : list ) {
+      if ( blk.mId == blk0.mId ) continue;
+      if ( blk.isSplay() ) {
+	if ( bs ) { // blk.mTo = station;
+          setBlockName( blk, "", station );
+	} else { // blk.mFrom = station;
+          setBlockName( blk, station, "" );
+	}
+	sts.add( station );
+      } else if ( blk.isMainLeg() ) {
+	prev = blk;
+        if ( forward_shots ) {
+          from = to;
+          to   = next;
+          next = DistoXStationName.incrementName( to, sts );
+          station = shot_after_splays ? to : from;
+        } else {
+          to   = from;
+          from = next;
+          next = DistoXStationName.incrementName( from, sts );
+          station = shot_after_splays ? next : from;
+        }
+	main_from = from;
+	main_to   = to;
+	if ( bs ) {
+          // blk.mTo   = from;
+          // blk.mFrom = to;
+          setBlockName( blk, to, from );
+	} else {
+          // blk.mFrom = from;
+          // blk.mTo   = to;
+          setBlockName( blk, from, to );
+	}
+	sts.add( from );
+	sts.add( to );
+      } else if ( blk.isBackLeg() ) {
+	if ( main_from != null /* && main_to != null */ ) {
+	  prev = blk;
+	  if ( bs ) {
+            setBlockName( blk, main_from, main_to );
+	  } else {
+            setBlockName( blk, main_to, main_from );
+	  }
+	}
+	main_from = main_to = null;
+      } else {
+        // Log.v("DistoX-SN", "blk is skipped" + blk.mId );
+	if ( /* started || */ ! blk.isRelativeDistance( prev ) ) {
+	  unassigned.add( blk );
+	  // started = true;
+	}
+      }
+    }
+   
+    if ( unassigned.size() > 0 ) assignStations( unassigned, sts );
+  }
+
+  // DistoX backshot-mode is handled separatedly
+  // @param list         list of dblock to assign
+  // @param sts          station names already in use
+  @Override
+  void assignStations( List<DBlock> list, Set<String> sts )
+  { 
+    if ( TDSetting.mDistoXBackshot ) {
+      assignStationsBackshot( list, sts );
+      return;
+    }
+    int survey_stations = StationPolicy.mSurveyStations;
+    if ( survey_stations <= 0 ) return;
+    boolean forward_shots = ( survey_stations == 1 );
+    boolean shot_after_splay = StationPolicy.mShotAfterSplays;
+
+    // TDLog.Log( TDLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
+
+    DBlock prev = null;
+    String from = ( forward_shots )? DistoXStationName.mInitialStation  // next FROM station
+                                   : DistoXStationName.mSecondStation;
+    String to   = ( forward_shots )? DistoXStationName.mSecondStation   // nect TO station
+                                   : DistoXStationName.mInitialStation;
+    String station = ( mCurrentStationName != null )? mCurrentStationName
+                   : (shot_after_splay ? from : "");  // splays station
+    // Log.v("DistoX", "assign stations: F <" + from + "> T <" + to + "> st. <" + station + "> Blk size " + list.size() );
+    // Log.v("DistoX", "Current St. " + ( (mCurrentStationName==null)? "null" : mCurrentStationName ) );
+    // Log.v("DistoXX", "assign stations default. size " + list.size() + " fwd " + forward_shots + " shot after splays " + shot_after_splay + " station " + station );
+
+    int nrLegShots = 0;
+
+    for ( DBlock blk : list ) {
+      if ( blk.mFrom.length() == 0 ) // this implies blk.mTo.length() == 0
+      {
+        // Log.v( "DistoX", blk.mId + " EMPTY FROM. prev " + ( (prev==null)? "null" : prev.mId ) );
+
+        if ( prev == null ) {
+          prev = blk;
+          // blk.mFrom = station;
+          setBlockName( blk, station, "" );
+        } else {
+          if ( prev.isRelativeDistance( blk ) ) {
+            if ( nrLegShots == 0 ) {
+              // checkCurrentStationName
+              if ( mCurrentStationName != null ) {
+                if ( forward_shots ) { 
+                  from = mCurrentStationName;
+                } else if ( survey_stations == 2 ) {
+                  to = mCurrentStationName;
+                }
+              }
+              nrLegShots = 2; // prev and this shot
+            } else {
+              nrLegShots ++;  // one more centerline shot
+            }
+            if ( nrLegShots == TDSetting.mMinNrLegShots ) {
+              legFeedback( );
+              mCurrentStationName = null;
+              // Log.v( "DistoX", "PREV " + prev.mId + " nrLegShots " + nrLegShots + " set PREV " + from + "-" + to );
+              setBlockName( prev, from, to );
+              setLegExtend( prev );
+              if ( forward_shots ) {
+                station = shot_after_splay  ? to : from;     // splay-station = this-shot-to if splays before shot
+                                                             //                 this-shot-from if splays after shot
+                from = to;                                   // next-shot-from = this-shot-to
+                to   = DistoXStationName.incrementName( to, sts );  // next-shot-to   = increment next-shot-from
+                // Log.v("DistoX", "station [1] " + station + " FROM " + from + " TO " + to );
+              } else { // backward_shots
+                to   = from;                                     // next-shot-to   = this-shot-from
+                from = DistoXStationName.incrementName( from, sts ); // next-shot-from = increment this-shot-from
+                station = shot_after_splay ? from : to;          // splay-station  = next-shot-from if splay before shot
+                                                                 //                = this-shot-from if splay after shot
+                // Log.v("DistoX", "station [2] " + station + " FROM " + from + " TO " + to );
+              }
+            }
+          } else { // distance from prev > "closeness" setting
+            nrLegShots = 0;
+            setBlockName( blk, station, "" );
+            prev = blk;
+          }
+        }
+      }
+      else // blk.mFrom.length > 0
+      {
+        if ( blk.mTo.length() > 0 ) // FROM non-empty, TO non-empty --> LEG
+        {
+          if ( forward_shots ) {  // : ..., 0-1, 1-2 ==> from=(2) to=Next(2)=3 ie 2-3
+            from = blk.mTo;
+            to   = DistoXStationName.incrementName( from, sts );
+            if ( mCurrentStationName == null ) {
+              station = shot_after_splay ? blk.mTo    // 1,   1, 1-2, [ 2, 2, ..., 2-3 ] ...
+                                         : blk.mFrom; // 1-2, 1, 1,   [ 2-3, 2, 2, ... ] ...
+            } // otherwise station = mCurrentStationName
+          } else { // backward shots: ..., 1-0, 2-1 ==> from=Next(2)=3 to=2 ie 3-2
+            to      = blk.mFrom;
+            from    = DistoXStationName.incrementName( to, sts ); // FIXME it was from
+	    // station must be set even there is a "currentStation"
+            station = shot_after_splay ? from       // 2,   2, 2, 2-1, [ 3, 3, ..., 3-2 ]  ...
+                                       : blk.mFrom; // 2-1, 2, 2, 2,   [ 3-2, 3, 3, ... 3 ] ...
+          }
+          // Log.v("DistoXX", "IDX " + blk.mId + ": " + blk.mFrom + " - " + blk.mTo + " Next " + from + " - " + to + " station " + station );
+          nrLegShots = TDSetting.mMinNrLegShots;
+        } 
+        else // FROM non-empty, TO empty --> SPLAY
+        {
+          nrLegShots = 0;
+        }
+        prev = blk;
+      }
+    }
+  }
+
+  // ---------------------------------- backshot -----------------------------------
+  
+  // DistoX backshot-mode default station assignment(s)
+  @Override
+  protected void assignStationsBackshot( List<DBlock> list, Set<String> sts )
+  { 
+    // Log.v("DistoX", "assign stations default. size " + list.size() );
+    int survey_stations = StationPolicy.mSurveyStations;
+    if ( survey_stations <= 0 ) return;
+    boolean forward_shots = ( survey_stations == 1 );
+    boolean shot_after_splay = StationPolicy.mShotAfterSplays;
+
+    // TDLog.Log( TDLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
+
+    DBlock prev = null;
+    String from = ( forward_shots )? DistoXStationName.mInitialStation  // next FROM station
+                                   : DistoXStationName.mSecondStation;
+    String to   = ( forward_shots )? DistoXStationName.mSecondStation   // nect TO station
+                                   : DistoXStationName.mInitialStation;
+    String station = ( mCurrentStationName != null )? mCurrentStationName
+                   : (shot_after_splay ? from : "");  // splays station
+    // Log.v("DistoX", "assign stations: F <" + from + "> T <" + to + "> st. <" + station + "> Blk size " + list.size() );
+    // Log.v("DistoX", "Current St. " + ( (mCurrentStationName==null)? "null" : mCurrentStationName ) );
+
+    int nrLegShots = 0;
+
+    for ( DBlock blk : list ) {
+      if ( blk.mTo.length() == 0 ) // this implies blk.mFrom.length() == 0
+      {
+        // Log.v( "DistoX", blk.mId + " EMPTY FROM. prev " + ( (prev==null)? "null" : prev.mId ) );
+
+        if ( prev == null ) {
+          prev = blk;
+          // blk.mTo = station;
+          setBlockName( blk, "", station );
+          // Log.v( "DistoX", blk.mId + " FROM " + blk.mTo + " PREV null" );
+        } else {
+          if ( prev.isRelativeDistance( blk ) ) {
+            if ( nrLegShots == 0 ) {
+              // checkCurrentStationName
+              if ( mCurrentStationName != null ) {
+                if ( forward_shots ) { 
+                  from = mCurrentStationName;
+                } else if ( survey_stations == 2 ) {
+                  to = mCurrentStationName;
+                }
+              }
+              nrLegShots = 2; // prev and this shot
+            } else {
+              nrLegShots ++;  // one more centerline shot
+            }
+            if ( nrLegShots == TDSetting.mMinNrLegShots ) {
+              legFeedback( );
+              mCurrentStationName = null;
+              // Log.v( "DistoX", "PREV " + prev.mId + " nrLegShots " + nrLegShots + " set PREV " + from + "-" + to );
+              setBlockName( prev, to, from );
+              setLegExtend( prev );
+              if ( forward_shots ) {
+                station = shot_after_splay  ? to : from;     // splay-station = this-shot-to if splays before shot
+                                                             //                 this-shot-from if splays after shot
+                from = to;                                   // next-shot-from = this-shot-to
+                to   = DistoXStationName.incrementName( to, sts );  // next-shot-to   = increment next-shot-from
+                // Log.v("DistoX", "station [1] " + station + " FROM " + from + " TO " + to );
+              } else { // backward_shots
+                to   = from;                                     // next-shot-to   = this-shot-from
+                from = DistoXStationName.incrementName( from, sts ); // next-shot-from = increment this-shot-from
+                station = shot_after_splay ? from : to;          // splay-station  = next-shot-from if splay before shot
+                                                                 //                = this-shot-from if splay after shot
+                // Log.v("DistoX", "station [2] " + station + " FROM " + from + " TO " + to );
+              }
+            }
+          } else { // distance from prev > "closeness" setting
+            nrLegShots = 0;
+            setBlockName( blk, "", station );
+            prev = blk;
+          }
+        }
+      }
+      else // blk.mTo.length > 0
+      {
+        if ( blk.mFrom.length() > 0 ) // FROM non-empty, TO non-empty --> LEG
+        {
+          if ( forward_shots ) {  // : ..., 0-1, 1-2 ==> from=(2) to=Next(2)=3 ie 2-3
+            from = blk.mFrom;
+            to   = DistoXStationName.incrementName( from, sts );
+            if ( mCurrentStationName == null ) {
+              station = shot_after_splay ? blk.mFrom  // 1,   1, 1-2, [ 2, 2, ..., 2-3 ] ...
+                                         : blk.mTo;   // 1-2, 1, 1,   [ 2-3, 2, 2, ... ] ...
+            } // otherwise station = mCurrentStationName
+          } else { // backward shots: ..., 1-0, 2-1 ==> from=Next(2)=3 to=2 ie 3-2
+            to      = blk.mTo;
+            from    = DistoXStationName.incrementName( to, sts ); // FIXME it was from
+            if ( mCurrentStationName == null ) {
+              station = shot_after_splay ? from       // 2,   2, 2, 2-1, [ 3, 3, ..., 3-2 ]  ...
+                                         : blk.mTo;   // 2-1, 2, 2, 2,   [ 3-2, 3, 3, ... 3 ] ...
+            } // otherwise station = mCurrentStationName
+          }
+          nrLegShots = TDSetting.mMinNrLegShots;
+        } 
+        else // FROM non-empty, TO empty --> SPLAY
+        {
+          nrLegShots = 0;
+        }
+        prev = blk;
+      }
+    }
+  }
+
+
+}

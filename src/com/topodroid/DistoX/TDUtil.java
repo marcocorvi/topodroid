@@ -21,6 +21,12 @@ import java.util.GregorianCalendar;
 
 import java.io.File;
 
+import android.media.AudioManager;
+import android.media.ToneGenerator;
+
+import android.content.Context;
+import android.os.Vibrator;
+
 // import android.util.Log;
 
 class TDUtil
@@ -234,6 +240,23 @@ class TDUtil
       Thread.sleep( msec );
     } catch ( InterruptedException e ) { return false; }
     return true;
+  }
+
+  static void ringTheBell( int duration )
+  {
+    // Log.v("DistoXX", "bell ...");
+    // ToneGenerator toneG = new ToneGenerator( AudioManager.STREAM_ALARM, ToneGenerator.MAX_VOLUME );
+    ToneGenerator toneG = new ToneGenerator( AudioManager.STREAM_ALARM, TDSetting.mBeepVolume );
+    // for ( int i=0; i<2; ++i ) {
+      toneG.startTone( ToneGenerator.TONE_PROP_PROMPT, duration ); 
+      // TDUtil.slowDown( duration );
+    // }
+  }
+
+  static void vibrate( Context ctx, int duration )
+  {
+    Vibrator vibrator = (Vibrator)ctx.getSystemService( Context.VIBRATOR_SERVICE );
+    vibrator.vibrate( duration );
   }
 
 }
