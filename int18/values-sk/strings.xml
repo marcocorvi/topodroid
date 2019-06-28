@@ -257,8 +257,8 @@
      <string name="hidden_show">Zobraziť zámery Pred / Za bodom</string>
     <!-- UNUSED string name="splays_toggle">Toggle splays display</string -->
     <string name="splays_on_off">Pomocné zámery</string>
-    <string name="splays">pomocné zámery</string>
-    <!-- TODO string name="legs">Legs</string -->
+    <string name="splays">Pomocné zámery</string>
+    <string name="legs">Hlavné zámery</string>
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Zemepisná šírka %1$s</string>
@@ -343,6 +343,7 @@
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SENZOR</string>
     <string name="menu_scan">SKENOVAŤ</string>
+    <string name="menu_scan_ble">SKEN BTLE</string>
     <!-- UNUSED string name="menu_station">STATIONS</string -->
     <string name="menu_stats">ŠTATISTIKA</string>
     <string name="menu_survey">JASKYŇA</string>
@@ -351,6 +352,10 @@
     <!-- UPDATES string name="menu_updates">CHECK UPDATES</string -->	
     <string name="menu_validate">POROVNAŤ</string>
     <string name="menu_zoom_fit">ORIENTÁCIA</string>
+
+    <string name="ble_scan_failed">BLE sken neúspešný</string>
+    <string name="ble_gatt_failure">BLE failzlyhanieure</string>
+    <string name="ble_no_remote">Bez diaľkového ovládania</string>
 
     <string name="popup_join_pt">Prichytiť na blízky bod</string>
     <string name="popup_snap_ln">Prichytiť na blízku čiaru</string>
@@ -485,8 +490,8 @@
     <string name="toporobot_warning">VAROVANIE: TopoRobot politika číslovania je experimentálna!</string>
     <string name="anomaly_warning">Kompenzácia magnetickej anomálie je pre expertov!</string>
     <string name="tripod_warning">Politika STATÍV-STENA je pre pokročilých !</string>
-    <!-- TODO string name="coverage_warning">Angle coverage below %1$d %%\nWrite coefficients?</string -->
-    <!-- TODO string name="delta_warning">Average error above %1$.1f\nWrite coefficients?</string -->
+    <string name="coverage_warning">Distribúcia údajov z uhlov je pod %1$d %%\nZapísať koeficienty?</string>
+    <string name="delta_warning">Priemerná chyba nad %1$.1f\nZapísať koeficienty?</string>
 	
     <string name="empty_clipboard">Prázdna schránka</string>
     <string name="cannot_rename">Nedá sa premenovať názov mapovania</string>
@@ -586,7 +591,7 @@
     <string name="button_delete"    >Vymazať  </string>
     <string name="button_duplicate" >Duplikovať </string>
     <string name="button_surface"   >Povrch   </string>
-    <!-- TODO string name="button_no_extend" >No extend </string -->
+    <string name="button_no_extend" >Bez Orientácie</string>
     <string name="button_eval"      >Vyhodnotiť   </string>
     <string name="button_evalg"     >G      </string>
     <string name="button_evalm"     >M      </string>
@@ -817,6 +822,7 @@
     <string name="help_read">Načítať a Zobraziť kalibračné koeficienty z DistaX</string>
     <string name="help_info_device">Informácie o DistoX</string>
     <string name="help_scan">Vyhľadať zariadenia DistoX</string>
+    <string name="help_scan_ble">Vyhľadá zariadenia BTLE</string>
     <string name="help_pair">Vytvoriť spojenie s DistoX</string>
     <string name="help_open_calib">Otvoriť kalibračné okno</string>
     <string name="help_export_calib">Exportovať kalibráciu</string>
@@ -842,7 +848,7 @@
     <!-- UNUSED string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Uložené meračské body</string>
-    <!-- TODO string name="title_search">Station/Leg search</string -->
+    <string name="title_search">Staničenia/Hľadanie zámer</string>
     <string name="title_dangling">Nepripojené zámery</string>
     <string name="title_device">DistoX</string>
     <string name="title_device_select">Zvoľte DistoX</string>
@@ -867,7 +873,8 @@
     <string name="title_note">Poznámky</string>
     <string name="title_packet_dialog">Pakety</string>
     <string name="title_photo">Rozšírené možnosti</string>
-    <string name="title_photo_comment">Fotografia</string>
+    <string name="title_photo_comment">Foto poznámka</string>
+    <string name="title_photo_view">Fotografia</string>
     <string name="title_plot_save">Exportovať nákres </string>
     <!-- UNUSED string name="title_plot_merge">Merge sketch in</string -->
     <string name="title_plot_reload">Znovu načítať nákres</string>
@@ -1380,9 +1387,9 @@ DO NOT REMOVE THIS LINE -->
 
     <string name="perms_mandatory">Topodroid nemôže fungovať bez týchto povolení:</string>
     <string name="perms_optional">Topodroid môže zlyhať bez týchto povolení:</string>
-    <!-- TODO string name="perm_location">\nLocation</string -->
-    <!-- TODO string name="perm_camera">\nCamera</string -->
-    <!-- TODO string name="perm_microphone">\nMicrophone</string -->
+    <string name="perm_location">\nPoloha</string>
+    <string name="perm_camera">\nKamera</string>
+    <string name="perm_microphone">\nMikrofón</string>
 
 
     <string name="welcome_title">TopoDroid %1$s</string>
@@ -1392,7 +1399,7 @@ DO NOT REMOVE THIS LINE -->
 \nDokumentácia: http://sites.google.com/site/speleoapps
 \nKomentáre, hlásenia chýb, požiadavky: marco.corvi@gmail.com
 \nOriginálny preklad: v0.1-0.6 - 5-6/2018 M.Jurečka, M.Chlebovec - OS Ružomberok - https://www.speleork.sk - mail: jurecka@gmail.com	    
-\nAktualizované dňa: revizia v1.0 - 11-20.6.2018 Jozef Hetesi - mail: jozefhetesi@gmail.com
+\nAktualizované dňa: revizia v1.0 - 11-20.6.2018 - priebežne 2019 - Jozef Hetesi - mail: jozefhetesi@gmail.com
     </string>
 
 <!-- FIRMWARE DIALOG STRINGS CAN BE LEFT UNTRANSLATED : mark OK untranslated strings -->
@@ -1418,6 +1425,6 @@ DO NOT REMOVE THIS LINE -->
    <string name="ask_upload_not_compatible">Firmware nevyzerá korektne.\n Napriek tomu nahrať?</string>
    <string name="firmware_file_dumped">Firmware uložený %1$s veľkosť %2$d</string>
    <string name="firmware_file_uploaded">Firmware  %1$s úspešne nahraný %2$d / %3$d</string>
-   <!-- TODO string name="firmware_not_supported">Device does not support firmware functions</string -->
+   <string name="firmware_not_supported">Zariadenie nepodporuje funkcie firmwéru</string>
 
 </resources>
