@@ -345,6 +345,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="menu_photo">ZDJĘCIE</string>
     <string name="menu_sensor">SENSOR</string>
     <string name="menu_scan">SKAN</string>
+    <!-- TODO string name="menu_scan_ble">SCAN BTLE</string -->
     <!-- UNUSED string name="menu_station">STATIONS</string -->
     <string name="menu_stats">STATYSTYKI</string>
     <string name="menu_survey">INFORMACJE O POMIARZE</string>
@@ -353,6 +354,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UPDATES string name="menu_updates">CHECK UPDATES</string -->
     <string name="menu_validate">SPRAWDŹ</string>
     <string name="menu_zoom_fit">DOPASUJ POWIĘKSZENIE</string>
+
+    <!-- TODO string name="ble_scan_failed">BLE scan failed</string -->
+    <!-- TODO string name="ble_gatt_failure">BLE failure</string -->
+    <!-- TODO string name="ble_no_remote">No remote device</string -->
 
     <string name="popup_join_pt">Przyciąg do najbliższego punktu</string>
     <string name="popup_snap_ln">Przyciągnij do najbliższej linii</string>
@@ -382,6 +387,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="popup_cont_both">Oba punkty</string>
     <string name="popup_cont_continue">Kontynuuj</string>
 
+    <!-- TODO string name="connection_error">Connection error</string -->
+    <!-- TODO string name="connecting">Connecting &#8230;</string -->
     <!-- UNUSED string name="connected_none">Not connected</string -->
     <!-- UNUSED string name="connected_already">Already connected</string -->
 
@@ -814,6 +821,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_read">Odczytaj i wyświetl współczynniki kalibracji DistoX</string>
     <string name="help_info_device">Informacje o urządzeniu</string>
     <string name="help_scan">Skanuj w poszukiwaniu DistoX</string>
+    <!-- TODO string name="help_scan_ble">Scan for BTLE devices</string -->
     <string name="help_pair">Paruj aktywny DistoX</string>
     <string name="help_open_calib">Otwórz kalibrację</string>
     <string name="help_export_calib">Eksportuj kalibrację</string>
@@ -989,6 +997,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_recent_timeout_summary">Limit czasu, po którym dane nie są już aktualne</string>
   <!-- TODO string name="pref_triple_shot_title">Leg-shot bell</string -->
   <!-- TODO string name="pref_triple_shot_summary">Sound feedback on leg-shot recognition</string -->
+  <!-- TODO string name="pref_connect_feedback_title">Connect feedback</string -->
+  <!-- TODO string name="pref_connect_feedback_summary">Feedback on device connect</string -->
   <string name="pref_station_prefix_title">Prefix dla stacji Compass</string>
   <string name="pref_station_prefix_summary">Eksportuj prefix stacji [Compass]</string>
   <string name="pref_compass_splays_title">Domiary Compass</string>
@@ -1007,8 +1017,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_survex_splay_summary">dodaj stację docelową do domiarów w Survex</string>
   <string name="pref_survex_lrud_title">Survex/Therion LRUD</string>
   <string name="pref_survex_lrud_summary">dodaj LRUD do eksportu Survex/Therion</string>
-  <string name="pref_svg_grid_title">siatka SVG</string>
-  <string name="pref_svg_grid_summary">dodaj siatkę do eksportu SVG</string>
+  <string name="pref_svg_grid_title">siatka</string>
+  <string name="pref_svg_grid_summary">dodaj siatkę do eksportu SVG/PNG</string>
   <string name="pref_svg_splays_title">domiary SVG</string>
   <string name="pref_svg_splays_summary">Umieśc domiary w eksporcie SVG</string>
   <!-- UNUSED string name="pref_svg_in_html_title">SVG in HTML</string -->
@@ -1188,8 +1198,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_lineacc_summary">Dokładność interpolacji sześciennej Beziera</string>
   <string name="pref_linecorner_title">Początek naroża Beziera</string>
   <string name="pref_linecorner_summary">Początek wykrywania narożnika Beziera</string>
-  <!-- TODO string name="pref_weeddistance_title">Point weeding segment buffer</string -->
-  <!-- TODO string name="pref_weeddistance_summary">Max distance from segment to weed points</string -->
+  <!-- TODO string name="pref_weeddistance_title">Weeding point distance</string -->
+  <!-- TODO string name="pref_weeddistance_summary">Max distance from segment to weed points [m]</string -->
   <!-- TODO string name="pref_weedlength_title">Point weeding segment length</string -->
   <!-- TODO string name="pref_weedlength_summary">Max length of a line segment</string -->
   <string name="pref_calib_algo_title">Algorytm</string>

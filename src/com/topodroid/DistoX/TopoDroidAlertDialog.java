@@ -41,7 +41,8 @@ class TopoDroidAlertDialog
     // );
     // alert_builder.setNegativeButton( res.getString( R.string.button_ok ), pos );
     // AlertDialog alert = alert_builder.create();
-    // // alert.getWindow().setBackgroundDrawableResource( R.color.background );
+    // // alert.getWindow().setBackgroundDrawableResource( R.color.alert_background );
+    // alert.getWindow().setBackgroundDrawableResource( R.drawable.alert_bg );
     // alert.show();
 
   static void makeAlert( Context context, Resources res, String message, 
@@ -50,8 +51,6 @@ class TopoDroidAlertDialog
              DialogInterface.OnClickListener ok_handler,
              DialogInterface.OnClickListener no_handler )
   {
-      // NEED API LEVEL 11 for custom background color
-
       AlertDialog.Builder alert_builder = new AlertDialog.Builder( context );
       alert_builder.setMessage( message );
       if ( ok != null ) {
@@ -73,7 +72,11 @@ class TopoDroidAlertDialog
       }
 
       AlertDialog alert = alert_builder.create();
-      // alert.getWindow().setBackgroundDrawableResource( R.color.background );
+      
+      // NEED API LEVEL 11 for custom background color
+      // alert.getWindow().setBackgroundDrawableResource( R.color.alert_background );
+      alert.getWindow().setBackgroundDrawableResource( R.drawable.alert_bg );
+
       alert.show();
   }
 
@@ -83,8 +86,6 @@ class TopoDroidAlertDialog
              DialogInterface.OnClickListener ok_handler,
              DialogInterface.OnClickListener no_handler )
   {
-      // NEED API LEVEL 11 for custom background color
-
       AlertDialog.Builder alert_builder = new AlertDialog.Builder( context );
       alert_builder.setMessage( message );
       if ( ok >= 0 ) {
@@ -106,7 +107,9 @@ class TopoDroidAlertDialog
       }
 
       AlertDialog alert = alert_builder.create();
-      // alert.getWindow().setBackgroundDrawableResource( R.color.background );
+      // NEED API LEVEL 11 for custom background color
+      // alert.getWindow().setBackgroundDrawableResource( R.color.alert_background );
+      alert.getWindow().setBackgroundDrawableResource( R.drawable.alert_bg );
       alert.show();
   }
 

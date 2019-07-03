@@ -339,6 +339,7 @@
     <string name="menu_photo">Снимки</string>
     <string name="menu_sensor">Сензори</string>
     <string name="menu_scan">Сканиране</string>
+    <!-- TODO string name="menu_scan_ble">SCAN BTLE</string -->
     <!-- UNUSED string name="menu_station">Репери</string -->
     <string name="menu_stats">Статистика</string>
     <string name="menu_survey">Инфо за картировката</string>
@@ -346,6 +347,10 @@
     <!-- UNUSED string name="menu_tdr2th2">TH2 скици</string -->
     <string name="menu_validate">Проверка</string>
     <string name="menu_zoom_fit">Оптимално прибл.</string>
+
+    <!-- TODO string name="ble_scan_failed">BLE scan failed</string -->
+    <!-- TODO string name="ble_gatt_failure">BLE failure</string -->
+    <!-- TODO string name="ble_no_remote">No remote device</string -->
 
     <string name="popup_join_pt">Прикачване към близка точка</string>
     <string name="popup_snap_ln">Прикачване към близка линия</string>
@@ -375,6 +380,8 @@
     <string name="popup_cont_both">Двете точки</string>
     <string name="popup_cont_continue">Продължаване</string>
 
+    <!-- TODO string name="connection_error">Connection error</string -->
+    <!-- TODO string name="connecting">Connecting &#8230;</string -->
     <!-- UNUSED string name="connected_none">Няма връзка</string -->
     <!-- UNUSED string name="connected_already">Вече има връзка</string -->
 
@@ -800,6 +807,7 @@
     <string name="help_read">Прочитане и показване на калибр. коефициенти от DistoX</string>
     <string name="help_info_device">Информация за устройството</string>
     <string name="help_scan">Сканиране за DistoX устройства</string>
+    <!-- TODO string name="help_scan_ble">Scan for BTLE devices</string -->
     <string name="help_pair">Сдвояване на текущото DistoX устройство</string>
     <string name="help_open_calib">Отваряне на калибрация</string>
     <string name="help_export_calib">Експорт на калибрация</string>
@@ -963,6 +971,8 @@
   <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent</string -->
   <!-- TODO string name="pref_triple_shot_title">Leg-shot bell</string -->
   <!-- TODO string name="pref_triple_shot_summary">Sound feedback on leg-shot recognition</string -->
+  <!-- TODO string name="pref_connect_feedback_title">Connect feedback</string -->
+  <!-- TODO string name="pref_connect_feedback_summary">Feedback on device connect</string -->
   <string name="pref_station_prefix_title">Експортиране на префикс в името на реперите</string>
   <string name="pref_station_prefix_summary">Експортиране в cSurvey на префикс в името на реперите</string>
   <string name="pref_compass_splays_title">Странични изм. в Compass</string>
@@ -1161,8 +1171,8 @@
   <string name="pref_lineacc_summary">Точност на кубична интерполация на криви "Безие"</string>
   <string name="pref_linecorner_title">Граница на ъгъл "Безие"</string>
   <string name="pref_linecorner_summary">Граница на отчитане на ъгъл при криви "Безие"</string>
-  <!-- TODO string name="pref_weeddistance_title">Point weeding segment buffer</string -->
-  <!-- TODO string name="pref_weeddistance_summary">Max distance from segment to weed points</string -->
+  <!-- TODO string name="pref_weeddistance_title">Weeding point distance</string -->
+  <!-- TODO string name="pref_weeddistance_summary">Max distance from segment to weed points [m]</string -->
   <!-- TODO string name="pref_weedlength_title">Point weeding segment length</string -->
   <!-- TODO string name="pref_weedlength_summary">Max length of a line segment</string -->
   <string name="pref_calib_algo_title">Алгоритъм</string>

@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import java.io.File;
 import java.io.FileFilter;
 
@@ -55,8 +57,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 // import android.preference.PreferenceManager;
-
-import android.util.Log;
 
 /*
   Method m = device.getClass().getMethod( "createRfcommSocket", new Class[] (int.class) );
@@ -771,7 +771,6 @@ public class MainWindow extends Activity
     }
     doubleBack = true;
     doubleBackToast = TDToast.makeToast( R.string.double_back );
-    doubleBackToast.show();
     doubleBackHandler.postDelayed( doubleBackRunnable, 1000 );
   }
 

@@ -341,6 +341,7 @@
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SENZOR</string>
     <string name="menu_scan">SCANEAZĂ</string>
+    <!-- TODO string name="menu_scan_ble">SCAN BTLE</string -->
     <!-- UNUSED string name="menu_station">STAȚII</string -->
     <string name="menu_stats">STATISTICI</string>
     <string name="menu_survey">INFO CARTARE</string>
@@ -348,6 +349,10 @@
     <!-- UNUSED string name="menu_tdr2th2">SCHIȚE TH2</string -->
     <string name="menu_validate">VALIDEAZĂ</string>
     <string name="menu_zoom_fit">ÎNCADREAZĂ</string>
+
+    <!-- TODO string name="ble_scan_failed">BLE scan failed</string -->
+    <!-- TODO string name="ble_gatt_failure">BLE failure</string -->
+    <!-- TODO string name="ble_no_remote">No remote device</string -->
 
     <string name="popup_join_pt">Conectează la punctul apropiat</string>
     <string name="popup_snap_ln">Conectează la linia apropiată</string>
@@ -377,6 +382,8 @@
     <string name="popup_cont_both">Ambele puncte</string>
     <string name="popup_cont_continue">Continuă</string>
 
+    <!-- TODO string name="connection_error">Connection error</string -->
+    <!-- TODO string name="connecting">Connecting &#8230;</string -->
     <!-- UNUSED string name="connected_none">Neconectat</string -->
     <!-- UNUSED string name="connected_already">Deja conectat</string -->
 
@@ -802,6 +809,7 @@
     <string name="help_read">Citirea și afișarea coeficienții de calibrare DistoX</string>
     <string name="help_info_device">Informațiile dispozitivului</string>
     <string name="help_scan">Scanarea pentru găsirea dispozitivelor DistoX noi</string>
+    <!-- TODO string name="help_scan_ble">Scan for BTLE devices</string -->
     <string name="help_pair">Împerecherea cu dispozitivul DistoX activ</string>
     <string name="help_open_calib">Deschiderea calibrării</string>
     <string name="help_export_calib">Exportul calibrării</string>
@@ -972,6 +980,8 @@
   <string name="pref_recent_timeout_summary">Timeout după care datele nu mai sunt recente</string>
   <string name="pref_triple_shot_title">Sunet avertizare viză</string>
   <string name="pref_triple_shot_summary">Sunet avertizare la recunoașterea unei vize noi(segment de drumuire)</string>
+  <!-- TODO string name="pref_connect_feedback_title">Connect feedback</string -->
+  <!-- TODO string name="pref_connect_feedback_summary">Feedback on device connect</string -->
   <string name="pref_station_prefix_title">Prefix stație Compass</string>
   <string name="pref_station_prefix_summary">Exportă prefix stație (Compass)~</string>
   <string name="pref_compass_splays_title">Radieri Compass</string>
@@ -990,8 +1000,8 @@
   <string name="pref_survex_splay_summary">Adaugă stație TO (punct viză) la radieri în Survex</string>
   <string name="pref_survex_lrud_title">LRUD Survex/Therion</string>
   <string name="pref_survex_lrud_summary">Adaugă LRUD la exportul Survex/Therion</string>
-  <string name="pref_svg_grid_title">Caroiaj SVG</string>
-  <string name="pref_svg_grid_summary">Adaugă caroiaj la exportul SVG</string>
+  <string name="pref_svg_grid_title">Caroiaj</string>
+  <string name="pref_svg_grid_summary">Adaugă caroiaj la exportul SVG/PNG</string>
   <string name="pref_svg_splays_title">Radieri SVG</string>
   <string name="pref_svg_splays_summary">Include radierile în exportul SVG</string>
   <!-- UNUSED string name="pref_svg_in_html_title">SVG în HTML</string -->
@@ -1170,8 +1180,8 @@
   <string name="pref_lineacc_summary">Acuratețe interpolare cubică Bezier</string>
   <string name="pref_linecorner_title">Limită colțuri Bezier~</string>
   <string name="pref_linecorner_summary">Limită detecție colțuri Bezier~</string>
-  <!-- TODO string name="pref_weeddistance_title">Point weeding segment buffer</string -->
-  <!-- TODO string name="pref_weeddistance_summary">Max distance from segment to weed points</string -->
+  <!-- TODO string name="pref_weeddistance_title">Weeding point distance</string -->
+  <!-- TODO string name="pref_weeddistance_summary">Max distance from segment to weed points [m]</string -->
   <!-- TODO string name="pref_weedlength_title">Point weeding segment length</string -->
   <!-- TODO string name="pref_weedlength_summary">Max length of a line segment</string -->
   <string name="pref_calib_algo_title">Algoritm</string>

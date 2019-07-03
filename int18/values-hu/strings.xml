@@ -339,6 +339,7 @@
     <string name="menu_photo">FOTÓ</string>
     <string name="menu_sensor">SZENZOR</string>
     <string name="menu_scan">KERESÉS</string>
+    <!-- TODO string name="menu_scan_ble">SCAN BTLE</string -->
     <!-- UNUSED string name="menu_station">STATIONS</string -->
     <string name="menu_stats">STATISZTIKA</string>
     <string name="menu_survey">FELMÉRÉSI INFORMÁCIÓK</string>
@@ -346,6 +347,10 @@
     <!-- UNUSED string name="menu_tdr2th2">TH2 SKETCHES</string -->
     <string name="menu_validate">ELLENŐRZÉS</string>
     <string name="menu_zoom_fit">ABLAK KITÖLTÉSE</string>
+
+    <!-- TODO string name="ble_scan_failed">BLE scan failed</string -->
+    <!-- TODO string name="ble_gatt_failure">BLE failure</string -->
+    <!-- TODO string name="ble_no_remote">No remote device</string -->
 
     <string name="popup_join_pt">Ugrás a legközelebbi pontra</string>
     <string name="popup_snap_ln">Ugrás a legközelebbi vonalra</string>
@@ -375,6 +380,8 @@
     <string name="popup_cont_both">Mindkét pont</string>
     <string name="popup_cont_continue">Folytat</string>
 
+    <!-- TODO string name="connection_error">Connection error</string -->
+    <!-- TODO string name="connecting">Connecting &#8230;</string -->
     <!-- UNUSED string name="connected_none">Nincs kapcsolat</string -->
     <!-- UNUSED string name="connected_already">Már összekapcsolt</string -->
 
@@ -800,6 +807,7 @@
     <string name="help_read">DistoX kalibrációs együtthatójának kiolvasása és megjelenítése</string>
     <string name="help_info_device">Eszköz információ</string>
     <string name="help_scan">Újabb DistoX-ek keresése</string>
+    <!-- TODO string name="help_scan_ble">Scan for BTLE devices</string -->
     <string name="help_pair">Párosítás a kiválasztott DistoX-el</string>
     <string name="help_open_calib">Kalibráció megnyitása</string>
     <string name="help_export_calib">Kalibráció exportálása</string>
@@ -963,6 +971,8 @@
   <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent</string -->
   <!-- TODO string name="pref_triple_shot_title">Leg-shot bell</string -->
   <!-- TODO string name="pref_triple_shot_summary">Sound feedback on leg-shot recognition</string -->
+  <!-- TODO string name="pref_connect_feedback_title">Connect feedback</string -->
+  <!-- TODO string name="pref_connect_feedback_summary">Feedback on device connect</string -->
   <string name="pref_station_prefix_title">Pontnév előtag cSurvey programhoz</string>
   <string name="pref_station_prefix_summary">cSurvey pontnév előtagok exportálása</string>
   <!-- TODO string name="pref_compass_splays_title">Compass splays</string -->
@@ -1160,8 +1170,8 @@
   <string name="pref_lineacc_summary">Négyzetes Bezier interpoláció pontossága</string>
   <string name="pref_linecorner_title">Bezier szöglet küszöbérték</string>
   <string name="pref_linecorner_summary">Küszöbérték szöglet detektáláshoz Bezier interpolációnál</string>
-  <!-- TODO string name="pref_weeddistance_title">Point weeding segment buffer</string -->
-  <!-- TODO string name="pref_weeddistance_summary">Max distance from segment to weed points</string -->
+  <!-- TODO string name="pref_weeddistance_title">Weeding point distance</string -->
+  <!-- TODO string name="pref_weeddistance_summary">Max distance from segment to weed points [m]</string -->
   <!-- TODO string name="pref_weedlength_title">Point weeding segment length</string -->
   <!-- TODO string name="pref_weedlength_summary">Max length of a line segment</string -->
   <string name="pref_calib_algo_title">Algoritmus</string>

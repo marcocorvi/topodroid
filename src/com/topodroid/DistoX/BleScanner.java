@@ -92,6 +92,7 @@ class BleScanner
       ScanFilter filter = new ScanFilter.Builder()
         .setServiceUuid( new ParcelUuid( BleConst.BLE_SERVICE_UUID ) )
         // .setDeviceAddress( address )
+        // .setDeviceName( name )
         .build();
       List<ScanFilter> filters = new ArrayList<ScanFilter>();
       filters.add( filter );

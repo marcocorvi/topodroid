@@ -25,7 +25,10 @@ import android.view.View.OnClickListener;
 
 class TDToast
 {
-  static final private int mBgColor = 0xff6699ff;
+  static final private int mFgColor = 0xff6699ff;
+  static final private int mBgDrawable = R.drawable.toast_bg; // 0xff333333;
+  static final private int mBgColor = 0xff333333;
+
   static final private int mGravity = Gravity.BOTTOM | Gravity.CENTER | Gravity.FILL_HORIZONTAL;
   static final private int SHORT    = Toast.LENGTH_SHORT;
   static final private int LONG     = Toast.LENGTH_LONG;
@@ -107,9 +110,11 @@ class TDToast
   {
     View view = toast.getView();
     view.setOnClickListener( new OnClickListener() { public void onClick( View v ) { v.setVisibility( View.GONE ); } } );
+    view.setBackgroundResource( mBgDrawable );
     // view.setBackgroundColor( mBgColor );
+    // view.setClipToOutline( true );
     TextView tv = (TextView)view.findViewById( android.R.id.message );
-    tv.setTextColor( mBgColor );
+    tv.setTextColor( mFgColor );
     return view;
   }
 
@@ -117,7 +122,9 @@ class TDToast
   {
     View view = toast.getView();
     view.setOnClickListener( new OnClickListener() { public void onClick( View v ) { v.setVisibility( View.GONE ); } } );
-    // view.setBackgroundColor( color );
+    view.setBackgroundResource( mBgDrawable );
+    // view.setBackgroundColor( mBgColor );
+    // view.setClipToOutline( true );
     TextView tv = (TextView)view.findViewById( android.R.id.message );
     tv.setTextColor( color );
     return view;

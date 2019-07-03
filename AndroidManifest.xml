@@ -23,7 +23,7 @@
     -->
     <uses-sdk
        android:minSdkVersion="16"
-       android:targetSdkVersion="26"
+       android:targetSdkVersion="28"
     />
 
     <uses-permission android:name="android.permission.CAMERA" />
@@ -58,11 +58,13 @@
           android:name=".TopoDroidApp"
           android:label="@string/app_name"
           android:allowBackup="false"
-	  android:icon="@drawable/icon4"
+	  android:icon="@mipmap/ic_launcher"
 	  android:largeHeap="true"
 	  ><!-- FIXME-23 android:largeHeap="true"
                 FIXME-16 android:largeHeap="true"
                 FIXME-8 nothing
+	  android:icon="@drawable/icon4"
+	  android:roundIcon="@drawable/icon4"
 	  -->
 	  <!-- android:screenOrientation="portrait" -->
       

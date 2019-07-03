@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 // import android.app.Dialog;
 import android.os.Bundle;
 
@@ -23,8 +25,6 @@ import android.widget.Button;
 
 import android.view.View;
 // import android.view.ViewGroup.LayoutParams;
-
-// import android.util.Log;
 
 class PhotoDialog extends MyDialog
                   implements View.OnClickListener
@@ -42,6 +42,7 @@ class PhotoDialog extends MyDialog
   {
     super( context, R.string.PhotoDialog );
     // TDLog.Log( TDLog.LOG_PHOTO, "Photo Dialog");
+    // Log.v("DistoXPHOTO", "photo dialog id " + photo.id );
     String filename = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(photo.id) );
     mTdImage = new TDImage( filename );
   }
@@ -49,6 +50,7 @@ class PhotoDialog extends MyDialog
   PhotoDialog( Context context, String filename )
   {
     super( context, R.string.PhotoDialog );
+    // Log.v("DistoXPHOTO", "photo dialog file " + filename );
     // TDLog.Log( TDLog.LOG_PHOTO, "Photo Dialog");
     mTdImage = new TDImage( filename );
   }

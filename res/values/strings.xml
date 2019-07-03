@@ -1396,7 +1396,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
     <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">
-\nTopoDroid is an Open Source Android app for surveying caves with the DistoX.
+\nThankyou for choosing TopoDroid.
+\n\nTopoDroid is an Open Source Android app for surveying caves with the DistoX.
 \n\nNo warranty: by using it you agree that the author is not responsible for any loss of data you might incur or damage whatsoever.
 \n\nHelp: menu "help"
 \nMan pages: MENU key

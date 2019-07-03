@@ -3672,10 +3672,10 @@ public class DrawingWindow extends ItemDrawer
     if ( TDandroid.checkCamera( mApp ) ) { // hasPhoto
       mMediaCamera = PhotoInfo.CAMERA_TOPODROID;
       new QCamCompass( this,
-            	         (new MyBearingAndClino( mApp, imagefile )),
+            	       (new MyBearingAndClino( mApp, imagefile )),
                        // this, pid, // pid non-negative if notify azimuth/clino // DO NOT USE THIS
-        	         ( insert ? this : null), // ImageInserter
-        	         true, false).show();  // true = with_box, false=with_delay
+        	       ( insert ? this : null), // ImageInserter
+        	       true, false).show();  // true = with_box, false=with_delay
     } else {
       boolean ok = TDandroid.checkStrictMode();
       // boolean ok = true;

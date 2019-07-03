@@ -56,6 +56,7 @@ class PhotoEditDialog extends MyDialog
   PhotoEditDialog( Context context, PhotoActivity parent, PhotoInfo photo )
   {
     super( context, R.string.PhotoEditDialog );
+    // Log.v("DistoXPHOTO", "photo edit dialog id " + photo.id );
     mParent = parent;
     mPhoto  = photo;
     // mFilename = filename;
@@ -84,8 +85,7 @@ class PhotoEditDialog extends MyDialog
     float a = mTdImage.azimuth();
     float c = mTdImage.clino();
 
-    // Log.v("DistoX", "photo edit dialog on create. Azimuth " + a + " Clino " + c );
-
+    // Log.v("DistoXPHOTO", "photo edit dialog on create. Azimuth " + a + " Clino " + c );
 
     ((TextView) findViewById( R.id.photo_azimuth )).setText(
        String.format( mContext.getResources().getString( R.string.photo_azimuth_clino ), a, c ) );

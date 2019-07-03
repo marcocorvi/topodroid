@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -23,8 +25,6 @@ import android.graphics.Matrix;
 import android.graphics.Bitmap;
 
 import android.media.ExifInterface;
-
-// import android.util.Log;
 
 class MyBearingAndClino implements IBearingAndClino
 {
@@ -83,6 +83,7 @@ class MyBearingAndClino implements IBearingAndClino
 
   static void setExifBearingAndClino( File file, float b, float c, int o )
   {
+    // Log.v("DistoXPHOTO", "set exif " + b + " " + c + " file " + file.getPath() );
     try {
       ExifInterface exif = new ExifInterface( file.getPath() );
       // String.format(Locale.US, "%.2f %.2f", b, c );
@@ -93,9 +94,12 @@ class MyBearingAndClino implements IBearingAndClino
       exif.setAttribute( ExifInterface.TAG_GPS_LATITUDE_REF, "N" );
       exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE, String.format(Locale.US, "%d/100", (int)(b*100) ) );
       exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE_REF, "E" );
+      // FIXME-GPS_LATITUDE work-around for tag GPS Latitude not supported correctly
+      exif.setAttribute( "UserComment", String.format(Locale.US, "%d %d", (int)(b*100), (int)(c*100) ) );
       exif.saveAttributes();
     } catch ( IOException e ) {
       TDLog.Error( "IO exception " + e.getMessage() );
+      // Log.v( "DistoXPHOTO", "IO exception " + e.getMessage() );
     }
   }
   
