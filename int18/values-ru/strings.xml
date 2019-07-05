@@ -341,7 +341,7 @@
     <string name="menu_photo">ФОТО</string>
     <string name="menu_sensor">ДАТЧИКИ</string>
     <string name="menu_scan">Сканировать</string>
-    <!-- TODO string name="menu_scan_ble">SCAN BTLE</string -->
+    <string name="menu_scan_ble">СКАН BT окружение</string>
     <!-- UNUSED string name="menu_station">ПИКЕТЫ</string -->
     <string name="menu_stats">СТАТИСТИКА</string>
     <string name="menu_survey">Свойства съёмки</string>
@@ -350,9 +350,9 @@
     <string name="menu_validate">ВАЛИДАЦИЯ</string>
     <string name="menu_zoom_fit">ВМЕСТИТЬ</string>
 
-    <!-- TODO string name="ble_scan_failed">BLE scan failed</string -->
-    <!-- TODO string name="ble_gatt_failure">BLE failure</string -->
-    <!-- TODO string name="ble_no_remote">No remote device</string -->
+    <string name="ble_scan_failed">Сбой сканирования BLE</string>
+    <string name="ble_gatt_failure">Сбой BLE</string>
+    <string name="ble_no_remote">Нет беспроводного устройства</string>
 
     <string name="popup_join_pt">Привязать к ближайшей точке</string>
     <string name="popup_snap_ln">Привязать к ближайшей линии</string>
@@ -382,8 +382,8 @@
     <string name="popup_cont_both">Обе точки</string>
     <string name="popup_cont_continue">Продолжить</string>
 
-    <!-- TODO string name="connection_error">Connection error</string -->
-    <!-- TODO string name="connecting">Connecting &#8230;</string -->
+    <string name="connection_error">Ошибка соединения</string>
+    <string name="connecting">Подключение к &#8230;</string>
     <!-- UNUSED string name="connected_none">Не соединено</string -->
     <!-- UNUSED string name="connected_already">Уже соединено</string -->
 
@@ -811,7 +811,7 @@
     <string name="help_read">Загрузить и показать текущие коэффициенты калибровки DistoX</string>
     <string name="help_info_device">Информация об устройстве</string>
     <string name="help_scan">Найти новые устройства DistoX</string>
-    <!-- TODO string name="help_scan_ble">Scan for BTLE devices</string -->
+    <string name="help_scan_ble">Сканирование BT окружения </string>
     <string name="help_pair">Сопряжение текущего устройства DistoX</string>
     <string name="help_open_calib">Открыть окно данных калибровки</string>
     <string name="help_export_calib">Экспорт калибровки</string>
@@ -988,8 +988,8 @@
   <string name="pref_recent_timeout_summary">Отрезок времени после скачивания в течении которого данные выделены на абрисе как новые. [с]</string>
   <string name="pref_triple_shot_title">Сигнал одинаковых измерений</string>
   <string name="pref_triple_shot_summary">Звуковой сингал при получении нескольких одинаковых замеров между пикетами.</string>
-  <!-- TODO string name="pref_connect_feedback_title">Connect feedback</string -->
-  <!-- TODO string name="pref_connect_feedback_summary">Feedback on device connect</string -->
+  <string name="pref_connect_feedback_title">Сигнал подключения</string>
+  <string name="pref_connect_feedback_summary">Сигнал при подключении устройства</string>
   <string name="pref_station_prefix_title">Экспортировать пикеты с префиксом </string>
   <string name="pref_station_prefix_summary">Добавлять префикс к номерам пикетов при экспорте в формат [Compass]</string>
   <string name="pref_compass_splays_title">Боковые замеры в Compass</string>
