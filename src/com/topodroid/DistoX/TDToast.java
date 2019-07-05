@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.os.Build;
+
 import android.annotation.SuppressLint;
 import android.widget.Toast;
 import android.widget.TextView;
@@ -110,8 +112,11 @@ class TDToast
   {
     View view = toast.getView();
     view.setOnClickListener( new OnClickListener() { public void onClick( View v ) { v.setVisibility( View.GONE ); } } );
-    view.setBackgroundResource( mBgDrawable );
-    // view.setBackgroundColor( mBgColor );
+    if ( Build.VERSION.SDK_INT > Build.VERSION_CODES.O ) {
+      view.setBackgroundResource( mBgDrawable );
+    } else {
+      // view.setBackgroundColor( mBgColor );
+    }
     // view.setClipToOutline( true );
     TextView tv = (TextView)view.findViewById( android.R.id.message );
     tv.setTextColor( mFgColor );
@@ -122,8 +127,11 @@ class TDToast
   {
     View view = toast.getView();
     view.setOnClickListener( new OnClickListener() { public void onClick( View v ) { v.setVisibility( View.GONE ); } } );
-    view.setBackgroundResource( mBgDrawable );
-    // view.setBackgroundColor( mBgColor );
+    if ( Build.VERSION.SDK_INT > Build.VERSION_CODES.O ) {
+      view.setBackgroundResource( mBgDrawable );
+    } else {
+      // view.setBackgroundColor( mBgColor );
+    }
     // view.setClipToOutline( true );
     TextView tv = (TextView)view.findViewById( android.R.id.message );
     tv.setTextColor( color );

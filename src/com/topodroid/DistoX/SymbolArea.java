@@ -267,11 +267,15 @@ class SymbolArea extends Symbol
   	    } else if ( vals[k].equals("color") ) {
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	      if ( k < s ) {
-  	        color = Integer.decode( vals[k] );
+                try {
+  	          color = Integer.decode( vals[k] );
+                } catch( NumberFormatException e ) { }
               }
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	      if ( k < s ) {
-  	        alpha = Integer.decode( vals[k] );
+                try {
+  	          alpha = Integer.decode( vals[k] );
+                } catch( NumberFormatException e ) { }
   	      }
   	    } else if ( vals[k].equals("bitmap") ) {
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;

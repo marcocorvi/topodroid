@@ -1605,7 +1605,7 @@ class DrawingCommandManager
   {
     LinePoint lp1 = line.mFirst; 
     if ( lp1 == null ) return false; // sanity check
-    if ( line2.size() < 3 ) return false;
+    if ( line2 == null || line2.size() < 3 ) return false;
     float delta = size / zoom;
     LinePoint first = line2.mFirst;
     LinePoint last  = line2.mLast;

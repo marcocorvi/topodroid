@@ -259,8 +259,9 @@ class SymbolPoint extends Symbol
             } else if ( vals[k].equals("color") ) {
               ++k; while ( k < s && vals[k].length() == 0 ) ++k;
               if ( k < s ) {
-                color = Integer.decode( vals[k] );
-                color |= 0xff000000;
+                try {
+                  color = Integer.decode( vals[k] ) | 0xff000000;
+                } catch ( NumberFormatException e ) { }
               }
             } else if ( vals[k].equals("csurvey") ) {
               try {

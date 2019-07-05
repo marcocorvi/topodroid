@@ -136,7 +136,9 @@ class SymbolLine extends Symbol
   {
     ++kval; while ( kval < s && vals[kval].length() == 0 ) ++kval;
     if ( kval < s ) {
-      return Integer.parseInt( vals[kval] );
+      try {
+        return Integer.parseInt( vals[kval] );
+      } catch( NumberFormatException e ) { }
     }
     throw new NumberFormatException();
   }
@@ -264,11 +266,15 @@ class SymbolLine extends Symbol
   	    } else if ( vals[k].equals("color") ) {
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	      if ( k < s ) {
-  	        color = Integer.decode( vals[k] );
+                try {
+  	          color = Integer.decode( vals[k] );
+                } catch ( NumberFormatException e ) { }
               }
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	      if ( k < s ) {
-  	        alpha = Integer.decode( vals[k] );
+                try {
+  	          alpha = Integer.decode( vals[k] );
+                } catch ( NumberFormatException e ) { }
   	      }
   	    } else if ( vals[k].equals("width") ) {
               try {
