@@ -103,7 +103,7 @@ class ShotNewDialog extends MyDialog
     mAt      = at;
     mTimer   = null;
     // mJpegData = null;
-    sensorCheck = TDSetting.mWithAzimuth && TDLevel.overAdvanced;
+    sensorCheck = TDSetting.mWithAzimuth && TDLevel.overNormal;
     cameraCheck = TDSetting.mWithAzimuth && TDLevel.overAdvanced && TDandroid.checkCamera( mApp );
     diving = (TDInstance.datamode == SurveyInfo.DATAMODE_DIVING);
   }
