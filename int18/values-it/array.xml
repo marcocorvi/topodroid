@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-  <!-- TODO string-array name="canvasLevels">
-     <item name="none">none</item>
-     <item name="class">by symbol</item>
-     <item name="instance">by item</item>
-  </string-array -->
+  <string-array name="canvasLevels">
+     <item name="none">nessuno</item>
+     <item name="class">per simbolo</item>
+     <item name="instance">per oggetto</item>
+  </string-array>
 
-  <!-- TODO string-array name="csvSeparator">
-     <item name="comma">comma</item>
-     <item name="pipe">pipe</item>
+  <string-array name="csvSeparator">
+     <item name="comma">virgola</item>
+     <item name="pipe">barra</item>
      <item name="tab">tab</item>
-  </string-array -->
+  </string-array>
 
-  <!-- TODO string-array name="lineContinue">
-     <item name="none">none</item>
-     <item name="start">join with start point</item>
-     <item name="end">join with end point</item>
-     <item name="both">join with both ends</item>
-     <item name="continue">continue</item>
-  </string-array -->
+  <string-array name="lineContinue">
+     <item name="none">nessuno</item>
+     <item name="start">collega al punto iniziale</item>
+     <item name="end">collega al punto finale</item>
+     <item name="both">collega agli estremi</item>
+     <item name="continue">continuazione</item>
+  </string-array>
   <string-array name="unitGrid">
      <item name="meter">metri</item>
      <item name="yard">iarde</item>
@@ -36,7 +36,7 @@
   <string-array name="wallsType">
      <item name="none">Nessuno</item>
      <item name="convex">Convesso</item>
-     <item name="delaunay">TODO</item>
+     <item name="delaunay">Delaunay</item>
   </string-array>
 
   <string-array name="zoomCtrl">
