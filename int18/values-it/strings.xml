@@ -58,7 +58,7 @@
     <string name="make_walls">Pareti</string>
     <string name="missing_station">Caposaldo assente</string>
     <string name="station_not_found">Caposaldo non trovato</string>
-    <!-- TODO string name="shot_not_found">No shot found</string -->
+    <!-- TODO string name="shot_not_found">Trovato nessun tiro</string -->
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Installa i prototipi grafici con TdSymbol</string -->
     <!-- UNUSED string name="missing_line">LINEA</string -->
@@ -254,7 +254,7 @@
     <!-- UNUSED string name="splays_toggle">Mostra o Nascondi gli splay</string -->
     <string name="splays_on_off">Splays</string>
     <string name="splays">inclusi splay</string>
-    <!-- TODO string name="legs">Legs</string -->
+    <!-- TODO string name="legs">Battute</string -->
     <!-- UNUSED string name="fmt_listen">ASCOLTA | %1$s</string -->
     <!-- FT_NO_TR string name="fmt_id">ID %1$s</string -->
     <string name="fmt_latitude">Latitudine %1$s</string>
@@ -347,9 +347,9 @@
     <string name="menu_validate">CONVALIDA</string>
     <string name="menu_zoom_fit">ADATTA ZOOM</string>
 
-    <!-- TODO string name="ble_scan_failed">BLE scan failed</string -->
-    <!-- TODO string name="ble_gatt_failure">BLE failure</string -->
-    <!-- TODO string name="ble_no_remote">No remote device</string -->
+    <!-- TODO string name="ble_scan_failed">Scan BLE fallita</string -->
+    <!-- TODO string name="ble_gatt_failure">Guasto BLE</string -->
+    <!-- TODO string name="ble_no_remote">No dispositivo remoto</string -->
 
     <string name="popup_join_pt">Sposta al punto vicino</string>
     <string name="popup_snap_ln">Segui la linea vicina</string>
@@ -379,8 +379,8 @@
     <string name="popup_cont_both">Entrambi i punti</string>
     <string name="popup_cont_continue">Continua</string>
 
-    <!-- TODO string name="connection_error">Connection error</string -->
-    <!-- TODO string name="connecting">Connecting &#8230;</string -->
+    <!-- TODO string name="connection_error">Errore di connessione</string -->
+    <!-- TODO string name="connecting">Connessione a &#8230;</string -->
     <!-- UNUSED string name="connected_none">Non connesso</string -->
     <!-- UNUSED string name="connected_already">Gia\' connesso</string -->
 
@@ -480,8 +480,8 @@
     <string name="toporobot_warning">TopoRobot e\' sperimentale !</string>
     <string name="anomaly_warning">La compensazione di anomalia magnetica e\' liv. esperto !</string>
     <string name="tripod_warning">Tripod e\' liv. avanzato !</string>
-    <!-- TODO string name="coverage_warning">Angle coverage below %1$d %%\nWrite coefficients?</string -->
-    <!-- TODO string name="delta_warning">Average error above %1$.1f\nWrite coefficients?</string -->
+    <!-- TODO string name="coverage_warning">Copertura angolo sotto %1$d %%\nScrivo coefficenti?</string -->
+    <!-- TODO string name="delta_warning">Errore medio oltre %1$.1f\nScrivo coefficenti?</string -->
 
     <string name="cannot_rename">Rinomina rilievo non riuscita</string>
     <string name="declination">decl. magn.</string>
@@ -528,7 +528,7 @@
     <!-- UNUSED string name="stat_shot">Tiri  %1$d,   Doppi %2$d,   Superficie %3$d</string -->
     <string name="stat_splay">Splay %1$d # %2$d</string>
     <string name="stat_station">Capisaldi %1$d # %2$d</string>
-    <!-- TODO string name="stat_dangling">Dangling shots %1$d %2$.1f %3$s</string -->
+    <!-- TODO string name="stat_dangling">Tiri scollegati %1$d %2$.1f %3$s</string -->
     <string name="stat_surface">Tiri di superficie %1$d # %2$d %3$.1f %4$s</string>
     <!-- OK string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]</string -->
     <string name="stat_angle_error">Errori angolari %1$.2f ± %2$.2f"</string>
@@ -575,9 +575,9 @@
     <string name="button_convert"   >Converti  </string>
     <string name="button_current"   >Corrente   </string>
     <string name="button_delete"    >Elimina   </string>
-    <!-- TODO string name="button_duplicate" >Duplicate </string -->
-    <!-- TODO string name="button_surface"   >Surface   </string -->
-    <!-- TODO string name="button_no_extend" >No extend </string -->
+    <!-- TODO string name="button_duplicate" >Duplicato   </string -->
+    <!-- TODO string name="button_surface"   >Superfice   </string -->
+    <!-- TODO string name="button_no_extend" >Manca Extend</string -->
     <string name="button_eval"      >Calcola   </string>
     <!-- FT_NO_TR string name="button_evalg"     >G      </string -->
     <!-- FT_NO_TR string name="button_evalm"     >M      </string -->
@@ -807,7 +807,7 @@
     <string name="help_read">Leggi la calibrazione dal DistoX</string>
     <string name="help_info_device">Dati dispositivo DistoX</string>
     <string name="help_scan">Cerca dispositivi DistoX</string>
-    <!-- TODO string name="help_scan_ble">Scan for BTLE devices</string -->
+    <!-- TODO string name="help_scan_ble">Ricerca dispositivi BTLE</string -->
     <string name="help_pair">Associa il DistoX</string>
     <string name="help_open_calib">Apri calibrazione</string>
     <string name="help_export_calib">Esporta calibrazione</string>
@@ -827,8 +827,8 @@
     <!-- NO string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Inserisci le coordinate del punto:</string -->
     <string name="title_current_station">Capisaldi salvati</string>
-    <!-- TODO string name="title_search">Station/Leg search</string -->
-    <!-- TODO string name="title_dangling">Unattached shots</string -->
+    <!-- TODO string name="title_search">Cerca Caposaldo/Battuta</string -->
+    <!-- TODO string name="title_dangling">Tiri non collegati</string -->
     <string name="title_device">Dispositivi DistoX</string>
     <string name="title_device_select">Seleziona DistoX</string>
     <string name="title_discover">Ricerca DistoX &#8230; attendi</string>
@@ -866,7 +866,7 @@
     <string name="title_settings_main">TopoDroid: Impostazioni principali</string>
     <string name="title_settings_export">Impostazione import/export</string>
     <string name="title_settings_import">Impostazione import</string>
-    <!-- TODO string name="title_settings_csv">CSV export settings</string -->
+    <!-- TODO string name="title_settings_csv">Impostazioni export CSV</string -->
     <string name="title_settings_svx">Impostazioni export Survex</string>
     <string name="title_settings_th">Therion: Imposta export</string>
     <string name="title_settings_dat">Compass: Imposta export</string>
@@ -975,8 +975,8 @@
   <string name="pref_recent_timeout_summary">Timeout dopo i quali un dato non e\' piu\' recente</string>
   <string name="pref_triple_shot_title">Suono Misura-Tiro</string>
   <string name="pref_triple_shot_summary">Feedback sonoro al riconoscimento di Misura-Tiro</string>
-  <!-- TODO string name="pref_connect_feedback_title">Connect feedback</string -->
-  <!-- TODO string name="pref_connect_feedback_summary">Feedback on device connect</string -->
+  <!-- TODO string name="pref_connect_feedback_title">Feedback connessione</string -->
+  <!-- TODO string name="pref_connect_feedback_summary">Feedback alla connessione</string -->
   <string name="pref_station_prefix_title">Esporta il prefisso dei caposaldi</string>
   <string name="pref_station_prefix_summary">Esporta caposaldi con prefisso [Compass]</string>
   <string name="pref_compass_splays_title">Splay Compass</string>
@@ -1356,9 +1356,9 @@
 
     <string name="perms_mandatory">I seguenti permessi sono necessari:</string>
     <string name="perms_optional">Senza questi permessi alcune funzioni sono disattivate:</string>
-    <!-- TODO string name="perm_location">\nLocation</string -->
-    <!-- TODO string name="perm_camera">\nCamera</string -->
-    <!-- TODO string name="perm_microphone">\nMicrophone</string -->
+    <!-- TODO string name="perm_location">\nLocalizzazione</string -->
+    <!-- TODO string name="perm_camera">\nFotocamera</string -->
+    <!-- TODO string name="perm_microphone">\nMicrofono</string -->
 
     <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">
