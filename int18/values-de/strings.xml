@@ -350,7 +350,7 @@
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SENSORWERTE</string>
     <string name="menu_scan">SCAN</string>
-    <!-- TODO string name="menu_scan_ble">SCAN BTLE</string -->
+    <string name="menu_scan_ble">SCAN BLE</string>
     <!-- UNUSED string name="menu_station">MESSPUNKTE</string -->
     <string name="menu_stats">STATISTIK</string>
     <string name="menu_survey">INFO</string>
@@ -358,10 +358,10 @@
     <!-- UNUSED string name="menu_tdr2th2">TH2 SKIZZEN</string -->
     <string name="menu_validate">VALIDIEREN</string>
     <string name="menu_zoom_fit">AUF SKIZZE ZOOMEN</string>
-
-    <!-- TODO string name="ble_scan_failed">BLE scan failed</string -->
-    <!-- TODO string name="ble_gatt_failure">BLE failure</string -->
-    <!-- TODO string name="ble_no_remote">No remote device</string -->
+    
+    <string name="ble_scan_failed">BLE scan fehlgeschlagen</string>
+    <string name="ble_gatt_failure">BLE Fehler</string>
+    <string name="ble_no_remote">Kein BLE-Gerät gefunden</string>
 <!-- LINE POINT EDITING ACTIONS -->
     <string name="popup_join_pt">Mit nähestem Punkt vereinigen</string>
     <string name="popup_snap_ln">Auf nächste Linie verschieben</string>
@@ -391,8 +391,8 @@
     <string name="popup_cont_both">Start- und Endpunkt</string>
     <string name="popup_cont_continue">Fortsetzen</string>
 
-    <!-- TODO string name="connection_error">Connection error</string -->
-    <!-- TODO string name="connecting">Connecting &#8230;</string -->
+    <string name="connection_error">Verbindungsfehler</string>
+    <string name="connecting">Verbinde &#8230;</string>
     <!-- UNUSED string name="connected_none">Nicht verbunden</string -->
     <!-- UNUSED string name="connected_already">Bereits verbunden</string -->
     <string name="not_available">Bluetooth nicht verfügbar</string>
@@ -827,7 +827,7 @@
     <string name="help_read">Kalibrierungs-Koeffizienten vom DistoX anzeigen</string>
     <string name="help_info_device">Geräte-Infos</string>
     <string name="help_scan">DistoX suchen</string>
-    <!-- TODO string name="help_scan_ble">Scan for BTLE devices</string -->
+    <string name="help_scan_ble">Nach BLE (Bluetooth Low Energy) Geräten suchen</string>
     <string name="help_pair">Mit DistoX verbinden</string>
     <string name="help_open_calib">Kalibrierung öffnen</string>
     <string name="help_export_calib">Kalibrierung speichern</string>
@@ -996,8 +996,8 @@
   <string name="pref_recent_timeout_summary">Zeit nach welcher Daten nicht mehr als \'neu\' markiert werden</string>
   <string name="pref_triple_shot_title">Messlinienton</string>
   <string name="pref_triple_shot_summary">Ton abspielen wenn Messlinie erkannt</string>
-  <!-- TODO string name="pref_connect_feedback_title">Connect feedback</string -->
-  <!-- TODO string name="pref_connect_feedback_summary">Feedback on device connect</string -->
+  <string name="pref_connect_feedback_title">Aktion bei Verbindung</string>
+  <string name="pref_connect_feedback_summary">Aktion wenn ein Gerät verbunden wird</string>
   <string name="pref_station_prefix_title">Compass: Prefix</string>
   <string name="pref_station_prefix_summary">Exportiere Messpunkt Prefix (compass)</string>
   <string name="pref_compass_splays_title">Compass: Hilfszüge</string>
@@ -1102,11 +1102,11 @@
   <string name="pref_dash_splay_title">Hilfslinien Kohärenz</string>
   <string name="pref_dash_splay_message">Hilfslinien kohärent gestrichelt zwischen Skizzen</string>
   <string name="pref_vert_splay_title">Vert. Neigung Hilfslinien</string>
-  <string name="pref_vert_splay_message">Vertikaler Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string>
+  <string name="pref_vert_splay_message">Vertikaler Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden; Standardwert: 50</string>
   <string name="pref_horiz_splay_title">Horiz. Neigung Hilflinien</string>
-  <string name="pref_horiz_splay_message">Horizontaler Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string>
+  <string name="pref_horiz_splay_message">Horizontaler Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden; Standardwert: 60</string>
   <string name="pref_section_splay_title">Grenzwert Querschnitt</string>
-  <string name="pref_section_splay_message">Grenzwert in Querschnitten ab welchem Hilfslinien gestrichelt dargestellt werden</string>
+  <string name="pref_section_splay_message">Grenzwert in Querschnitten ab welchem Hilfslinien gestrichelt dargestellt werden; Standardwert: 60</string>
   <string name="pref_data_backup_title">Auto-Datenexport</string>
   <string name="pref_data_backup_summary">Automatischer Datenexport beim Verlassen (benötigt ein Standard Exportformat)</string>
   <string name="pref_fixed_origin_title">Skizzen fixieren</string>
@@ -1122,11 +1122,11 @@
   <string name="pref_survey_stations_title">Vermessungs-Strategie</string>
   <string name="pref_survey_stations_summary">Art der Vermessung und Zuweisung der Messpunkte</string>
   <string name="pref_accel_thr_title">Beschleunigungstoleranz</string>
-  <string name="pref_accel_thr_summary">Toleranz gegenüber Durchschnittswert der Beschleunigung um Messung als anomal zu markieren (%%)</string>
+  <string name="pref_accel_thr_summary">Toleranz gegenüber Durchschnittswert der Beschleunigung um Messung als anomal zu markieren (%)</string>
   <string name="pref_mag_thr_title">Magnetfeldtoleranz</string>
-  <string name="pref_mag_thr_summary">Toleranz gegenüber Durchschnittswert des Magnetfeldes um Messung als anomal zu markieren (%%)</string>
+  <string name="pref_mag_thr_summary">Toleranz gegenüber Durchschnittswert des Magnetfeldes um Messung als anomal zu markieren (%)</string>
   <string name="pref_dip_thr_title">Inklinationstoleranz</string>
-  <string name="pref_dip_thr_summary">Toleranz gegenüber Durchschnittswert der magnetischen Inklination um Messung als anomal zu markieren (%%)</string>
+  <string name="pref_dip_thr_summary">Toleranz gegenüber Durchschnittswert der magnetischen Inklination um Messung als anomal zu markieren (%)</string>
 
   <string name="pref_leg_title">Messzug Toleranz</string>
   <string name="pref_leg_summary">Toleranz zwischen Messungen eines Messzugs</string>
@@ -1149,12 +1149,12 @@
   <string name="pref_team_summary">Standard-Messteam</string>
 
   <string name="pref_ethr_title">Vertikale Hilfszüge</string>
-  <string name="pref_ethr_summary">Winkelgrenzwert für vertikale Darstellung von Hilfszügen</string>
+  <string name="pref_ethr_summary">Toleranz um 90° wo Hilfszüge als vertikal angesehen werden; Standardwert: 10</string>
   <string name="pref_vthr_title">Vertikale Messlinien</string>
-  <string name="pref_vthr_summary">Winkelgrenzwert für vertikale Darstellung von Messlinien</string>
+  <string name="pref_vthr_summary">Winkelgrenzwert für vertikale Darstellung von Messlinien; Standardwert: 80</string>
 
   <string name="pref_plan_vthr_title">Hilfslinien vertikaler Grenzwert</string>
-  <string name="pref_plan_vthr_summary">Winkelgrenzwert für Anzeige der Hilfslinien auf Plan</string>
+  <string name="pref_plan_vthr_summary">Nur Hilfslinien unter diesem Winkelgrenzwert werden auf dem Plan angezeigt. Standardwert: 80</string>
   <string name="pref_init_station_title">Name Startmesspunkt</string>
   <string name="pref_init_station_summary">Standard Startmesspunkt</string>
   <string name="pref_station_names_title">Messpunktnamen</string>
@@ -1328,7 +1328,7 @@
   <string name="pref_walls_xclose_title">Min. Punkteabstand</string>
   <string name="pref_walls_xclose_summary">Minimaler Punktabstand der Wände [m]</string>
   <string name="pref_walls_concave_title">Konkavität</string>
-  <string name="pref_walls_concave_summary">Maximale Konkavität [%%]</string>
+  <string name="pref_walls_concave_summary">Maximale Konkavität [%]</string>
   <string name="pref_walls_xstep_title">Abstand Zwischenpunkte</string>
   <string name="pref_walls_xstep_summary">Abstand der automatischen Zwischenpunkte [m]</string>
 

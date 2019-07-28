@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+    <string-array name="feedbackMode">
+        <item name="none">keine</item>
+        <item name="sound">Ton</item>
+        <item name="heptic">Vibration</item>
+    </string-array>
+
    <string-array name="canvasLevels">
      <item name="none">keine</item>
      <item name="class">nach Symbolen</item>

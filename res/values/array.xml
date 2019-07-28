@@ -4,7 +4,7 @@
   <string-array name="feedbackMode">
      <item name="none">none</item>
      <item name="sound">sound</item>
-     <item name="heptic">heptic</item>
+     <item name="heptic">haptic</item>
   </string-array>
   <string-array name="feedbackModeValue">
      <item name="none">0</item>
