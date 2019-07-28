@@ -5151,9 +5151,9 @@ class DataHelper extends DataSetObservable
          switch ( oldVersion ) {
            case 14: 
              db.execSQL( "ALTER TABLE surveys ADD COLUMN declination REAL default 0" );
-             db.execSQL( "ALTER TABLE gms ADD COLUMN status INTEGER default 0" );
+             // db.execSQL( "ALTER TABLE gms ADD COLUMN status INTEGER default 0" );
            case 15:
-             db.execSQL( "ALTER TABLE devices ADD COLUMN name TEXT" );
+             // db.execSQL( "ALTER TABLE devices ADD COLUMN name TEXT" );
             case 16:
 // FIXME DEVICE_DB
 //              db.execSQL( "ALTER TABLE calibs ADD COLUMN coeff BLOB" );

@@ -640,7 +640,8 @@ class DrawingDxf
 	int ltypeowner = handle;
 	int ltypenr    = mVersion13 ? 5 : 1; // linetype number
         writeBeginTable( out, "LTYPE", handle, ltypenr ); 
-	writeInt( out, 330, 0 ); // table has no owner
+        // FIXME this line might be a problem with AutoCAD
+	// writeInt( out, 330, 0 ); // table has no owner
         {
           // int flag = 64;
           if ( mVersion13 ) {

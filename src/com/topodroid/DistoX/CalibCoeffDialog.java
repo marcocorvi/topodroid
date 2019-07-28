@@ -75,7 +75,7 @@ class CalibCoeffDialog extends MyDialog
 
   CalibCoeffDialog( Context context, GMActivity parent,
                     Vector bg, Matrix ag, Vector bm, Matrix am, Vector nl, float[] errors,
-                    float delta, float delta2, float error, long iter, byte[] coeff /*, boolean saturated */ )
+                    float delta_bh, float delta, float delta2, float error, long iter, byte[] coeff /*, boolean saturated */ )
   {
     super( context, R.string.CalibCoeffDialog );
     mParent = parent;
@@ -98,7 +98,7 @@ class CalibCoeffDialog extends MyDialog
     }
 
     mDelta = delta;
-    delta0  = String.format( mContext.getResources().getString( R.string.calib_error ), delta );
+    delta0  = String.format( mContext.getResources().getString( R.string.calib_error ), delta, delta_bh );
     delta02 = String.format( mContext.getResources().getString( R.string.calib_stddev ), delta2 );
     error0  = String.format( mContext.getResources().getString( R.string.calib_max_error ), error );
     iter0   = String.format( mContext.getResources().getString( R.string.calib_iter ), iter );

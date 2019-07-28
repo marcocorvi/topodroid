@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 class CalibResult
 {
+  float delta_bh; // BH algo original delta
   float error;  // average error [deg]
   float stddev; // error stddev [deg]
   float max_error;      // [deg]
@@ -20,9 +21,10 @@ class CalibResult
 
   CalibResult()
   {
-    error = 0.0f;
-    stddev = 0.0f;
-    max_error = 0.0f;
+    delta_bh   = 0.0f;
+    error      = 0.0f;
+    stddev     = 0.0f;
+    max_error  = 0.0f;
     iterations = 0;
   }
 }

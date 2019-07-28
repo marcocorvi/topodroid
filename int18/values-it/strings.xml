@@ -94,7 +94,7 @@
     <!-- UNUSED string name="connect_failed">Comunicazione DistoX fallita</string -->
     <!-- UNUSED string name="data"> dati</string -->
     <string name="using">Usando %1$s</string>
-    <string name="calib_error">Errore %1$f gradi</string>
+    <string name="calib_error">Errore %1$.2f gradi (BH delta %2$.2f)</string>
     <string name="calib_stddev">Errore stddev: %1$.4f gradi</string>
     <string name="calib_max_error">Errore massimo %1$.4f gradi</string>
     <string name="calib_ave_std">Accuratezza: %1$.4f %2$.4f gradi</string>
@@ -914,6 +914,8 @@
     <string name="title_plot_zoomfit">Adatta Zoom / Orientamento</string>
     <string name="title_calib_export">Esporta calibrazione come </string>
     <!-- OK ENGLISH string name="title_zoom">Zoom</string -->
+
+  <!-- TODO string name="pref_export_settings">Export settings</string -->
 
   <string name="pref_cat_survey">OPZIONI RILIEVO</string>
   <string name="pref_cat_drawing">OPZIONI DISEGNO</string>

@@ -360,6 +360,7 @@ public class MainWindow extends Activity
   
   // FIXME TOOLBAR Toolbar mToolbar;
   
+  private boolean mWithPalette  = false;
   private boolean mWithPalettes = false;
   private boolean mWithLogs     = false;
   private boolean mWithBackupsClear = false;
@@ -370,12 +371,13 @@ public class MainWindow extends Activity
     // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
     mMenuAdapter = new ArrayAdapter<>(mActivity, R.layout.menu );
 
-    mWithPalettes = TDLevel.overNormal && TDSetting.mPalettes;
+    mWithPalette  = TDLevel.overNormal;
+    mWithPalettes = TDLevel.overExpert && TDSetting.mPalettes; // mWithPalettes ==> mWithPalette
     mWithLogs     = TDLevel.overAdvanced;
     mWithBackupsClear = TDLevel.overExpert && TDSetting.mBackupsClear;
 
-    if ( mWithPalettes ) mMenuAdapter.add( res.getString( menus[0] ) ); // PALETTE
-    if ( mWithLogs )     mMenuAdapter.add( res.getString( menus[1] ) ); // LOGS
+    if ( mWithPalette ) mMenuAdapter.add( res.getString( menus[0] ) ); // PALETTE
+    if ( mWithLogs )    mMenuAdapter.add( res.getString( menus[1] ) ); // LOGS
     if ( mWithBackupsClear ) mMenuAdapter.add( res.getString( menus[2] ) ); // CLEAR_BACKUPS
     // if ( TDLevel.overExpert && mApp_mCosurvey ) mMenuAdapter.add( res.getString( menus[2] ) ); // IF_COSURVEY
     // if ( TDLevel.overExpert )   mMenuAdapter.add( res.getString( menus[3] ) ); // UPDATES
@@ -400,10 +402,10 @@ public class MainWindow extends Activity
     // TDToast.make(item.toString() );
     int p = 0;
       Intent intent;
-      if ( mWithPalettes && p++ == pos ) { // PALETTE EXTRA SYMBOLS
+      if ( mWithPalette && p++ == pos ) { // PALETTE EXTRA SYMBOLS
         // BrushManager.makePaths( getResources() );
         // (new SymbolEnableDialog( mActivity )).show();
-        (new SymbolReload( mActivity, mApp, TDLevel.overExpert )).show();
+        (new SymbolReload( mActivity, mApp, mWithPalettes )).show();
       } else if ( mWithLogs && p++ == pos ) { // LOGS
         intent = new Intent( mActivity, TDPrefActivity.class );
         intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_LOG );

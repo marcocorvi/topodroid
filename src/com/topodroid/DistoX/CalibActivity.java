@@ -296,7 +296,7 @@ public class CalibActivity extends Activity
     CalibResult res = new CalibResult();
     TopoDroidApp.mDData.selectCalibError( TDInstance.cid, res );
     (new CalibCoeffDialog( this, null, vG, mG, vM, mM, nL, null,
-                           res.error, res.stddev, res.max_error, res.iterations, coeff /*, false */ )).show();
+                           res.delta_bh, res.error, res.stddev, res.max_error, res.iterations, coeff /*, false */ )).show();
   }
 
   private void askDelete()

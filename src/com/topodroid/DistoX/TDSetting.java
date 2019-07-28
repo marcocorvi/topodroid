@@ -15,6 +15,11 @@ import android.util.Log;
 
 import java.util.Locale;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.IOException;
+
 // import android.os.Build;
 // import android.content.Context;
 import android.content.res.Resources;
@@ -2347,5 +2352,101 @@ class TDSetting
       return true;
     }
     return false;
+  }
+
+  // ============================================================================
+  // export current settings
+  static private char tf( boolean b ) { return b? 'T' : 'F'; }
+
+  static void exportSettings( )
+  {
+    // Log.v("DistoX", "TDSetting exports settings");
+    File file = TDPath.getSettingsFile();
+    try {
+      FileWriter fw = new FileWriter( file, false ); // true = append
+      PrintWriter pw = new PrintWriter( fw, true ); // true = autoflush
+      pw.printf(Locale.US, "Buttons Size %2d %3d\n", mSizeBtns, mSizeButtons);
+      pw.printf(Locale.US, "Text Size %3d\n", mTextSize);
+      pw.printf(Locale.US, "Keyboard %c, no-cursor %c\n", tf(mKeyboard), tf(mNoCursor) );
+      pw.printf(Locale.US, "Local man %c\n", tf(mLocalManPages) );
+      pw.printf(Locale.US, "Palettes %c\n", tf(mPalettes) );
+
+      pw.printf(Locale.US, "Auto-export: data %c / %d, plot %d \n", tf(mDataBackup), mExportShotsFormat, mExportPlotFormat );
+      String eol = "\\n"; if ( mSurvexEol.equals("\r\n") ) eol = "\\r\\n";
+      pw.printf(Locale.US, "Survex: eol \"%s\", splay %c LRUD %c \n", eol, tf(mSurvexSplay), tf(mSurvexLRUD) );
+      pw.printf(Locale.US, "Compass: swap LR %c, station prefix %c, splays %c\n", tf(mSwapLR), tf(mExportStationsPrefix), tf(mCompassSplays) );
+      pw.printf(Locale.US, "Ortho LRUD %c, angle %.2f cos %.2f \n", tf(mOrthogonalLRUD), mOrthogonalLRUDAngle, mOrthogonalLRUDCosine );
+      pw.printf(Locale.US, "Therion: maps %c, stations %c, splays %c, xvi %c, scale %.2f\n",
+        tf(mTherionMaps), tf(mAutoStations), tf(mTherionSplays), tf(mTherionXvi), mToTherion );
+      pw.printf(Locale.US, "PNG scale %.2f, bg color %d\n", mBitmapScale, mBitmapBgcolor );
+      pw.printf(Locale.US, "DXF: acad version %d, blocks %c \n", mAcadVersion, tf(mDxfBlocks) );
+      pw.printf(Locale.US, "SVG: shot %.1f, label %.1f, point %.1f, grid %c %.1f, line %.1f, dir %c %.1f, splays %c\n",
+        mSvgShotStroke, mSvgLabelStroke, mSvgPointStroke,
+        tf(mSvgGrid), mSvgGridStroke, mSvgLineStroke, tf(mSvgLineDirection), mSvgLineDirStroke, tf(mSvgSplays) );
+      pw.printf(Locale.US, "KML: stations %c, splays %c\n", tf(mKmlStations), tf(mKmlSplays) );
+      pw.printf(Locale.US, "CSV: raw %c, separator \'%c\'\n", tf(mCsvRaw), mCsvSeparator );
+
+      pw.printf(Locale.US, "BT: check %d, autopair %c \n", mCheckBT, tf(mAutoPair) );
+      pw.printf(Locale.US, "Socket: type \"%s\" / %d, delay %d\n", mDefaultSockStrType, mSockType, mConnectSocketDelay );
+      pw.printf(Locale.US, "Connection mode %d, Z6 %c, feedback %d\n", mConnectionMode, tf(mZ6Workaround), mConnectFeedback );
+      pw.printf(Locale.US, "Communication type %d, autoreconnect %c, retry %d, head/tail %c\n", mCommType, tf(mAutoReconnect), mCommRetry, tf(mHeadTail) );
+      pw.printf(Locale.US, "Packet log %c\n", tf(mPacketLog) );
+      pw.printf(Locale.US, "Wait: laser %d, shot %d, data %d, conn %d, command %d\n", mWaitLaser, mWaitShot, mWaitData, mWaitConn, mWaitCommand );
+
+      pw.printf(Locale.US, "Calib grous %d, distance %.2f\n", mGroupBy, mGroupDistance);
+      pw.printf(Locale.US, "Calib algo %d, eps %f, iter %d\n", mCalibAlgo, mCalibEps, mCalibMaxIt );
+      pw.printf(Locale.US, "Calib shot download %c, raw data %d \n", tf(mCalibShotDownload), mRawCData );
+      pw.printf(Locale.US, "Min_Algo alpha %.1f, beta %.1f, gamma %.1f, delta %.1f \n", mAlgoMinAlpha, mAlgoMinBeta, mAlgoMinGamma, mAlgoMinDelta );
+
+      pw.printf(Locale.US, "Default Team \"%s\"\n", mDefaultTeam);
+      pw.printf(Locale.US, "Midline check: attached %c, extend %c\n", tf(mCheckAttached), tf(mCheckExtend) );
+      pw.printf(Locale.US, "Location: units %d, CRS \"%s\"\n", mUnitLocation, mCRS );
+      pw.printf(Locale.US, "Shots: vthr %.1f, hthr %.1f \n", mVThreshold, mHThreshold );
+      pw.printf(Locale.US, "Data: backshot %c, diving-mode %c \n", tf(mDistoXBackshot), tf(mDivingMode) );
+      pw.printf(Locale.US, "Data input: backsight %c, prev/next %c\n", tf(mBacksightInput), tf(mPrevNext) );
+      pw.printf(Locale.US, "L/R extend %c\n", tf(mLRExtend) );
+      pw.printf(Locale.US, "U/D vertical %.1f, L/R horicontal %.1f\n", mLRUDvertical, mLRUDhorizontal );
+
+      pw.printf(Locale.US, "Import data mode %d\n", mImportDatamode );
+      pw.printf(Locale.US, "Timer: wait %d, volume %d\n", mTimerWait, mBeepVolume );
+      pw.printf(Locale.US, "Recent data %c, timeout %d\n", tf(mShotRecent), mRecentTimeout );
+      pw.printf(Locale.US, "Leg: closeness %.2f, nr %d, triple-shot %d, max %.2f, min %.2f\n",
+        mCloseDistance, mMinNrLegShots, mTripleShot, mMaxShotLength, mMinLegLength );
+      pw.printf(Locale.US, "Splay: vthr %.1f, classes %c\n", mSplayVertThrs, tf(mSplayClasses) );
+      pw.printf(Locale.US, "Stations: names %d, init \"%s\"\n", mStationNames, mInitStation );
+      pw.printf(Locale.US, "Extend: thr %.1f, manual %c, frac %c\n", mExtendThr, tf(mAzimuthManual), tf(mExtendFrac) );
+      pw.printf(Locale.US, "Loop: %d \n", mLoopClosure );
+      pw.printf(Locale.US, "Units: length %.2f [%s], angle %.2f [%s]\n", mUnitLength, mUnitLengthStr, mUnitAngle, mUnitAngleStr );
+      pw.printf(Locale.US, "ThumbSize %d, SavedStations %c, WithAzimuth %c, WithSensors %c, Bedding %c\n",
+        mThumbSize, tf(mSavedStations), tf(mWithAzimuth), tf(mWithSensors), tf(mBedding) );
+
+      pw.printf(Locale.US, "Plot: zoom %d, drag %c, fix-origin %c, split %c, shift %c, levels %d\n",
+        mZoomCtrl, tf(mSideDrag), tf(mFixedOrigin), tf(mPlotSplit), tf(mPlotShift), mWithLevels );
+      pw.printf(Locale.US, "Units: icon %.2f, line %.2f, grid %.2f\n", mUnitIcons, mUnitLines, mUnitGrid );
+      pw.printf(Locale.US, "Size: station %.1f, label %.1f, fixed %.1f line %.1f\n", mStationSize, mLabelSize, mFixedThickness, mLineThickness );
+      pw.printf(Locale.US, "Select: radius %.2f [min %.2f], pointing %d, shift %d, dot %.1f, multiple %c \n",
+        mSelectness, mCloseCutoff, mPointingRadius, mMinShift, mDotRadius, tf(mPathMultiselect) );
+      pw.printf(Locale.US, "Erase: radius %.2f\n", mEraseness );
+      pw.printf(Locale.US, "Picker: type %d, recent %d\n", mPickerType, mRecentNr );
+      pw.printf(Locale.US, "Point: unscaled %c\n", tf(mUnscaledPoints) );
+      pw.printf(Locale.US, "Line: style %d, type %d, segment %d, continue %d, arrow %.1f\n",
+        mLineStyle, mLineType, mLineSegment, mContinueLine, mArrowLength );
+      pw.printf(Locale.US, "Bezier: step %.2f, accuracy %.2f, corner %.2f\n", mBezierStep, mLineAccuracy, mLineCorner );
+      pw.printf(Locale.US, "Weed: distance %.2f, length %.2f, buffer %.2f\n", mWeedDistance, mWeedLength, mWeedBuffer );
+      pw.printf(Locale.US, "Area: border %c\n", tf(mAreaBorder) );
+      pw.printf(Locale.US, "Backup: nr %d, interval %d, clear %c\n", mBackupNumber, mBackupInterval, tf(mBackupsClear) );
+      pw.printf(Locale.US, "XSections: shared %c, auto-export %c, point %c\n", tf(mSharedXSections), tf(mAutoXSections), tf(mAutoSectionPt) );
+      pw.printf(Locale.US, "Actions: snap %c, curve %c, straight %c %.1f\n", tf(mLineSnap), tf(mLineCurve), tf(mLineStraight), mReduceAngle );
+      pw.printf(Locale.US, "Splay: alpha %d, color %c, coherence %c, vert %.1f, horiz %.1f, section %.1f\n",
+        mSplayAlpha, tf(mSplayColor), tf(mDashSplay), mVertSplay, mHorizSplay, mSectionSplay );
+      pw.printf(Locale.US, "Accuracy: G %.2f, M %.2f, dip %.2f\n", mAccelerationThr, mMagneticThr, mDipThr );
+      // pw.printf(Locale.US, "Sketch: type %d, size %.2f, extrude %.2f\n", mSketchModelType, mSketchSideSize, mDeltaExtrude );
+      pw.printf(Locale.US, "Walls: type %d, thr P %.2f E %.2f, close %.2f, step %.2f, concave %.2f\n",
+        mWallsType, mWallsPlanThr, mWallsExtendedThr, mWallsXClose, mWallsXStep, mWallsConcave );
+
+      TDLog.exportLogSettings( pw );
+
+      fw.close();
+    } catch ( IOException e ) { TDLog.Error("failed to export settings"); }
   }
 }

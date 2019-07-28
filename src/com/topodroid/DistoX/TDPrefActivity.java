@@ -11,10 +11,13 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import android.content.Intent;
 import android.content.Context;
 // import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.AsyncTask;
 import android.app.Activity;
 
 import android.widget.LinearLayout;
@@ -22,8 +25,6 @@ import android.widget.LinearLayout;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.LayoutInflater;
-
-import android.util.Log;
 
 /**
  */
@@ -253,6 +254,26 @@ public class TDPrefActivity extends Activity
             @Override
             public void onClick( View v ) { startActivityForResult( cwd_intent, REQUEST_CWD ); }
           } );
+        }
+      }
+      if ( TDLevel.overAdvanced ) {
+        TDPref export_settings = findPreference( "DISTOX_EXPORT_SETTINGS" );
+        View v = export_settings.getView();
+        if ( v != null ) {
+          v.setOnClickListener( new OnClickListener() {
+            @Override
+            public void onClick( View v ) {
+              ( new AsyncTask< Void, Void, Void >() {
+                @Override
+                protected Void doInBackground(Void... v)
+                {
+                  // Log.v("DistoX", "export settings");
+                  TDSetting.exportSettings();
+                  return null;
+                }
+              }).execute();
+              finish();
+          } } );
         }
       }
       

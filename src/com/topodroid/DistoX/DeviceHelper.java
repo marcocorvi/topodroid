@@ -43,8 +43,8 @@ import java.util.List;
 class DeviceHelper extends DataSetObservable
 {
 
-  // static final private String DB_VERSION = "26";
-  static final private int DATABASE_VERSION = 26;
+  // static final private String DB_VERSION = "27";
+  static final private int DATABASE_VERSION = 27;
   // static final private int DATABASE_VERSION_MIN = 21;
 
   private static final String CONFIG_TABLE = "configs";
@@ -355,7 +355,7 @@ class DeviceHelper extends DataSetObservable
   int selectCalibAlgo( long cid )
   {
     int algo = CalibInfo.ALGO_AUTO; // default 
-    // if ( myDB == null ) return 0;
+    // if ( myDB == null ) return algo;
     Cursor cursor = null;
     try {
       cursor = myDB.query( CALIB_TABLE,
@@ -420,7 +420,7 @@ class DeviceHelper extends DataSetObservable
     Cursor cursor = null;
     try {
       cursor = myDB.query( CALIB_TABLE,
-                           new String[] { "error", "max_error", "iterations", "stddev" }, // columns
+                           new String[] { "error", "max_error", "iterations", "stddev", "delta_bh" }, // columns
                            "id=?",
                            new String[] { Long.toString(cid) },
                            null, null, null );
@@ -435,6 +435,8 @@ class DeviceHelper extends DataSetObservable
           if ( str != null ) res.iterations = Integer.parseInt( str );
           str = cursor.getString(3);
           if ( str != null ) res.stddev = Float.parseFloat( str );
+          str = cursor.getString(4);
+          if ( str != null ) res.delta_bh = Float.parseFloat( str );
         } catch ( NumberFormatException e ) {
           TDLog.Error( "selectCalibError parse Float error: calib ID " + cid );
         }
@@ -1066,9 +1068,10 @@ class DeviceHelper extends DataSetObservable
      // // return true;
    }
 
-   void updateCalibError( long id, double error, double stddev, double max_error, int iterations )
+   void updateCalibError( long id, double delta_bh, double error, double stddev, double max_error, int iterations )
    {
      ContentValues cv = new ContentValues();
+     cv.put( "delta_bh", delta_bh );
      cv.put( "error", error );
      cv.put( "stddev", stddev );
      cv.put( "max_error", max_error );
@@ -1157,7 +1160,8 @@ class DeviceHelper extends DataSetObservable
              +   " iterations INTEGER default 0, "
              +   " coeff BLOB, "
              +   " algo INTEGER default 0, "
-             +   " stddev REAL default 0 "
+             +   " stddev REAL default 0, "
+             +   " delta_bh REAL default 0 "
              +   ")"
            );
 
@@ -1205,6 +1209,10 @@ class DeviceHelper extends DataSetObservable
          // FIXME this is called at each start when the database file exists
          TDLog.Log( TDLog.LOG_DB, "onUpgrade old " + oldVersion + " new " + newVersion );
          switch ( oldVersion ) {
+           case 14: 
+             db.execSQL( "ALTER TABLE gms ADD COLUMN status INTEGER default 0" );
+           case 15:
+             db.execSQL( "ALTER TABLE devices ADD COLUMN name TEXT" );
            case 16:
              db.execSQL( "ALTER TABLE calibs ADD COLUMN coeff BLOB" );
            case 17:
@@ -1219,6 +1227,8 @@ class DeviceHelper extends DataSetObservable
              db.execSQL( "ALTER TABLE calibs ADD COLUMN stddev REAL default 0" );
            case 25:
            case 26:
+             db.execSQL( "ALTER TABLE calibs ADD COLUMN delta_bh REAL default 0" );
+           case 27:
              /* current version */
            default:
              break;

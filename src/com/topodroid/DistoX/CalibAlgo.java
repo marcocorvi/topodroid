@@ -41,9 +41,10 @@ class CalibAlgo
 
   protected float b0=0.0f, c0=0.0f; // bearing and clino
 
-  protected float mDelta;   // average data error [degrees]
-  protected float mDelta2;  // std-dev data error [degrees]
+  protected float mDelta    = 0.0f; // average data error [degrees]
+  protected float mDelta2   = 0.0f; // std-dev data error [degrees]
   protected float mMaxError = 0.0f; // max error [degrees]
+  protected float mDeltaBH  = 0.0f; // original delta BH algo
 
   // ==============================================================
 
@@ -155,6 +156,7 @@ class CalibAlgo
 
   // void setAlgorith( boolean nonLinear ) { mNonLinear = nonLinear; }
 
+  float DeltaBH()      { return mDeltaBH; }
   float Delta()        { return mDelta; }
   float Delta2()       { return mDelta2; }
   public float Error( int k ) { return err[k]; }

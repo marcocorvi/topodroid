@@ -278,6 +278,15 @@ class TDPath
     return logfile;
   }
 
+  static File getSettingsFile()
+  {
+    File file = new File( PATH_DEFAULT + "settings.txt" );
+    checkPath( file );
+    return file;
+  }
+
+  // ------------------------------------------------------------------
+
   // ------------------------------------------------------------------
   // FILE NAMES
 

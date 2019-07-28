@@ -32,6 +32,7 @@ class TDPrefKey
     "DISTOX_DEVICE_PREF",   // 13 FORWARD
     "DISTOX_GEEK_PREF",     // 13 FORWARD
     // "DISTOX_SKETCH_PREF",   //    FORWARD
+    "DISTOX_EXPORT_SETTINGS",
     null
   };
 
@@ -51,6 +52,7 @@ class TDPrefKey
     R.string.pref_cat_device,
     R.string.pref_cat_geek,
     // R.string.pref_cat_sketch,
+    R.string.pref_export_settings,
     -1
   };
 
@@ -70,6 +72,7 @@ class TDPrefKey
     -1,
     -1,
     // -1,
+    -1,
     -1
   };
 
@@ -89,6 +92,7 @@ class TDPrefKey
      "",
      "",
      // "",
+     "",
      null
   };
 

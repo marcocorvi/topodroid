@@ -70,6 +70,27 @@ class TDLog
   static boolean LOG_PERM   = false;
   static boolean LOG_IO     = false;
 
+  static private char tf( boolean b ) { return b? 'T' : 'F'; }
+
+  static void exportLogSettings( PrintWriter pw )
+  {
+    // Log.v("DistoX", "TDLog exports settings");
+    pw.printf("Log stream %d\n", mLogStream );
+    pw.printf("ERROR %c, DEBUG %c, MAIN %c, PREFS %c, PERM %c, DB %c \n",
+      tf(LOG_ERR), tf(LOG_DEBUG), tf(LOG_MAIN), tf(LOG_PREFS), tf(LOG_PERM), tf(LOG_DB) );
+    pw.printf("BT %c, COMM %c, DISTOX %c, DEVICE %c, PROTO %c, SYNC %c \n",
+      tf(LOG_BT), tf(LOG_COMM), tf(LOG_DISTOX), tf(LOG_DEVICE), tf(LOG_PROTO), tf(LOG_SYNC) );
+    pw.printf("CALIB %c \n",
+      tf(LOG_CALIB) );
+    pw.printf("DATA %c, FIXED %c, INPUT %c, LOC %c, NOTE %c, NAME %c, SHOT %c, STATS %c, SURVEY %c, UNITS %c \n",
+      tf(LOG_DATA), tf(LOG_FIXED), tf(LOG_INPUT), tf(LOG_LOC), tf(LOG_NOTE), tf(LOG_NAME), tf(LOG_SHOT), tf(LOG_STATS), tf(LOG_SURVEY), tf(LOG_UNITS) );
+    pw.printf("NUM %c, PATH %c, PLOT %c, BEZIER %c \n",
+      tf(LOG_NUM), tf(LOG_PATH), tf(LOG_PLOT), tf(LOG_BEZIER) );
+    pw.printf("PHOTO %c, SENSOR %c \n",
+      tf(LOG_PHOTO), tf(LOG_SENSOR) );
+    pw.printf("CSURVEY %c, PTOPO %c, THERION %c, ZIP %c \n",
+      tf(LOG_CSURVEY), tf(LOG_PTOPO), tf(LOG_THERION), tf(LOG_ZIP) );
+  }
 
   // --------------- LOG PREFERENCES ----------------------
 /*

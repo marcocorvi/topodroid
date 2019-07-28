@@ -455,6 +455,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeFwd( cat, key[10], tit[10],          B,          ctx, hlp ),
       makeFwd( cat, key[11], tit[11],          B,          ctx, hlp ),
       makeFwd( cat, key[12], tit[12],          T,          ctx, hlp ),    // GEEK
+      makeFwd( cat, key[13], tit[13],          E,          ctx, hlp ),    // EXPORT SETTINGS
     };
   }
 

@@ -1,0 +1,189 @@
+TopoDroid databases
+TopoDroid v. 4.1.4a
+
+TopoDroid uses two SQLite databases, one for the cave surveys, and one
+for the devices (and the configuration).
+
+The date format is yyyy.MM.dd
+The time format is yyyy.MM.dd-hh:mm
+This is not really the ISO format, unfortunately.
+
+The numbers refer to the database version in which the column has been added.
+
+--------------------------------------------------------
+Device Database - Version 26
+
+The device database is named device10.sqlite.
+The class that manages access to this database is DeviceHelper.
+
+The tables are
+  - configs
+  - calibs
+  - gms
+  - devices
+
+Their schema are
+  - configs
+       key TEXT NOT NULL
+       value TEXT
+
+  - calibs
+       id INTEGER (PRIMARY KEY)
+       name TEXT          : name of the calibration
+       day TEXT           : data of the calibration
+       device TEXT        : MAC address of the device
+       comment TEXT
+    16 coeff BLOB         : calibration coefficients
+    17 error REAL         : calibration data average error [deg]
+    17 max_error REAL     : calibration data max error [deg]
+    17 iterations INTEGER : calibration algo iterations
+    18 algo INTEGER       : calibration algorithm - 0: auto, 1: linear, 2: non-linear, 3: minimum
+    24 stddev REAL        : stddev of calibration data error [deg]
+
+  - gms
+       id INTEGER
+       gx INTEGER     : Gx [DistoX units]
+       gy
+       gz
+       mx INTEGER     : Mx [DistoX units]
+       my 
+       mz
+       grp INTEGER    : data group (positive, 0: non-assigned, neg.: deleted)
+       error REAL     : data error in the calibration [deg.]
+    14 status INTEGER : 0: normal
+
+  - device
+       address TEXT     : MAC address
+       model TEXT       : device model
+       head INTEGER     : head position in the device memory buffer
+       tail INTEGER     : tail position
+    15 name TEXT        : device name
+    23 nickname TEXT    : user-assigned nickname
+
+
+-------------------------------------------------------------------------------------
+Survey Database - Version 41
+
+The survey database is name distox14.sqlite, is managed by the class DataHelper, 
+and contains the following tables:
+  - configs
+  - surveys
+  - shots
+  - fixeds
+  - stations
+  - plots (2D sketches)
+  - sketches (3D sketches)
+  - photos
+  - sensosrs
+  - audios
+
+The table schemas are
+  - configs
+       key TEXT
+       value TEXT
+
+  - surveys
+       id INTEGER
+       name TEXT           : user-assigned
+       day TEXT            : date
+       team TEXT
+       comment TEXT
+    14 declination REAL    : 1080 unset
+    22 init_station TEXT   : initial-station (internal use)
+    29 xsections INTEGER   : 0 shared, 1 private
+    36 datamode INTEGER    : 0 normal, 1 diving
+    38 extend INTEGER      : extend reference azimuth [deg]: 90 default, -1000 left, 1000 right
+
+  - shots
+       surveyId INTEGER
+       id INTEGER
+       fStation TEXT
+       tStation TEXT
+       distance REAL       : [m]
+       bearing REAL        : [deg]
+       clino REAL          : [deg]
+       roll REAL           : [deg]
+       acceleration REAL   : [distox units]
+       magnetic REAL
+       dip REAL            : [deg]
+       extend INTEGER      : -1 left, 0 vert, 1 right, 2 ignore, (3 hide, 4 start)
+       flag INTEGER        : 0 none, 1 surface, 2 duplicated, 3 commented, ...
+       leg INTEGER         : -1 invalid, 0 normal, 1 extra, 2 xsplay, 3 back, 4 hsplay, 5 vsplay
+       status INTEGER      : 0 normal, 1 deleted, 2 check, 3 backshot
+       comment TEXT
+    21 type INTEGER        : 0 distox, 1 manual
+    31 millis INTEGER      : timestamp
+    33 color INTEGER       : aarrggbb
+    35 stretch REAL        : extend stretch, ie, fractional extend (default 0)
+    37 address TEXT        : DistoX MAC address
+
+  - fixeds
+       surveyId INTEGER
+       id INTEGER
+       station TEXT
+       longitude REAL      : WGS84 [deg]
+       latitude REAL       :       [deg]
+       altitude REAL       : above WGS84 ellipsoid [m]
+       altimetric REAL     : above M.S.L. [m]
+       comment TEXT
+    26 cs_name TEXT        : CRS name
+    26 cs_longitude REAL   : CRS [deg]
+    26 cs_latitude REAL    :     [deg]
+    26 cs_altitude REAL    : above CRS ellipsoid [m]
+    27 source INTEGER      : 0 unknown, 1 topodroid, 2 manual, 3 mobile-topographer
+    34 cs_decimals INTEGER : nr of decimals in presentation
+
+   - 19 stations
+       surveyId INTEGER
+       name TEXT           : user-assigned
+       comment TEXT
+    25 flag INTEGER        : 0 none, 1 fixed, 2 painted
+
+   - plots
+       surveyId INTEGER
+       id INTEGER
+       name TEXT           : user-assigned
+       type INTEGER        : -1 null, 0 xsection, 1 plan, 2 extended, 3 hsection, 4 photo, 5 section, 6 sketch, 
+                             7 xhsection, 8 projected
+       status INTEGER      : 0 normal, 1 deleted
+       start TEXT          : origin station
+       view TEXT           : viewed station (X-sections), midline barrier (plot/profile)
+       xoffset REAL        : canvas X-offset [pxl]
+       yoffset REAL
+       zoom REAL           : canvas zoom
+       azimuth REAL        : for X-sections and projected profile
+    20 clino REAL
+    24 hide TEXT           : midline hiding stations
+    30 nick TEXT           : X-section "nick" (used internally)
+    32 orientation INTEGER : presentation orientation: 0 portrait, 1 landscape
+ 
+   - sketches
+       ... not used 
+
+   - photos
+       surveyId INTEGER
+       id INTEGER
+       shotId INTEGER      : reference shot
+       status INTEGER      : 0 normal
+       title TEXT          : (unused)
+       date TEXT           : date
+       comment TEXT
+    39 camera INTEGER      : 0 undefined, 1 topodroid, 2 camera app
+
+   - sensors
+       surveyId INTEGER
+       id INTEGER
+       shotId INTEGER      : reference shot
+       status INTEGER      : 0 normal
+       title TEXT
+       date TEXT           : date
+       comment TEXT
+       type TEXT           : sensor type (name)
+       value TEXT          : sensor value (as string)
+
+   - audios
+    28 surveyId INTEGER
+    28 id INTEGER
+    28 shotId INTEGER      : reference shot
+    28 date TEXT           : date
+

@@ -114,8 +114,8 @@ class TDToast
     view.setOnClickListener( new OnClickListener() { public void onClick( View v ) { v.setVisibility( View.GONE ); } } );
     if ( Build.VERSION.SDK_INT > Build.VERSION_CODES.O ) {
       view.setBackgroundResource( mBgDrawable );
-    } else {
-      // view.setBackgroundColor( mBgColor );
+    } else if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.M ) {
+      view.setBackgroundColor( mBgColor );
     }
     // view.setClipToOutline( true );
     TextView tv = (TextView)view.findViewById( android.R.id.message );
@@ -129,8 +129,8 @@ class TDToast
     view.setOnClickListener( new OnClickListener() { public void onClick( View v ) { v.setVisibility( View.GONE ); } } );
     if ( Build.VERSION.SDK_INT > Build.VERSION_CODES.O ) {
       view.setBackgroundResource( mBgDrawable );
-    } else {
-      // view.setBackgroundColor( mBgColor );
+    } else if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.M ) {
+      view.setBackgroundColor( mBgColor );
     }
     // view.setClipToOutline( true );
     TextView tv = (TextView)view.findViewById( android.R.id.message );

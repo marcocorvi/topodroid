@@ -228,6 +228,7 @@ public class GMActivity extends Activity
       byte[] coeff = mCalibration.GetCoeff();
       mApp_mDData.updateCalibCoeff( cid, CalibAlgo.coeffToString( coeff ) );
       mApp_mDData.updateCalibError( cid, 
+             mCalibration.DeltaBH(),
              mCalibration.Delta(),
              mCalibration.Delta2(),
              mCalibration.MaxError(),
@@ -433,7 +434,7 @@ public class GMActivity extends Activity
           float[] errors = mCalibration.Errors();
 
           (new CalibCoeffDialog( this, this, bg, ag, bm, am, nL, errors,
-                                 mCalibration.Delta(), mCalibration.Delta2(), mCalibration.MaxError(), 
+                                 mCalibration.DeltaBH(), mCalibration.Delta(), mCalibration.Delta2(), mCalibration.MaxError(), 
                                  result, coeff /* , saturated */ ) ).show();
         } else if ( result == 0 ) {
           TDToast.makeBad( R.string.few_iter );
@@ -792,7 +793,7 @@ public class GMActivity extends Activity
   // @Implements
   public void displayCoeff( Vector bg, Matrix ag, Vector bm, Matrix am, Vector nL )
   {
-    (new CalibCoeffDialog( this, null, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
+    (new CalibCoeffDialog( this, null, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
   }
 
   // @Implements

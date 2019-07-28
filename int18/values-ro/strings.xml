@@ -95,7 +95,7 @@
     <!-- UNUSED string name="connect_failed">Conexiune eșuată</string -->
     <!-- UNUSED string name="data"> date</string -->
     <string name="using">Se folosește %1$s</string>
-    <string name="calib_error">Eroarea medie: %1$.4f degrees</string>
+    <string name="calib_error">Eroarea medie: %1$.2f degrees (BH delta %2$.2f)</string>
     <string name="calib_stddev">Abaterea standard: %1$.4f degrees (dev. medie pătratică - stddev)</string>
     <string name="calib_max_error">Eroarea maximă: %1$.4f degrees</string>
     <string name="calib_ave_std">Acuratețe: %1$.4f ± %2$.4f degrees</string>
@@ -917,6 +917,8 @@
     <string name="title_plot_zoomfit">Încadrare / Orientare</string>
     <string name="title_calib_export">Exportă calibrare</string>
     <!-- UNUSED string name="title_zoom">Redimensionează</string -->
+
+  <!-- TODO string name="pref_export_settings">Export settings</string -->
 
   <string name="pref_cat_survey">DATE CARTARE</string>
   <string name="pref_cat_drawing">SCHIȚARE</string>

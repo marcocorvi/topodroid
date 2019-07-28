@@ -97,19 +97,26 @@ public class TopoDroidApp extends Application
   // static final String EMPTY = "";
   static private TopoDroidApp thisApp = null;
 
+  // symbol version of installed symbols is stored in the database
+  // symbol version of the current  symbols is in the app
   static final String SYMBOL_VERSION = "35";
+
+  // TopoDroid version: this is loaded from the Manifest
   static String VERSION = "0.0.0"; 
   static int VERSION_CODE = 0;
   static int MAJOR = 0;
   static int MINOR = 0;
   static int SUB   = 0;
-  static final int MAJOR_MIN = 2; // minimum compatible version
+
+  // minimum compatible TopoDroid version
+  static final int MAJOR_MIN = 2; 
   static final int MINOR_MIN = 1;
   static final int SUB_MIN   = 1;
   
-  boolean mWelcomeScreen;  // whether to show the welcome screen
-  boolean mSetupScreen;    // whether to show the welcome screen
+  boolean mWelcomeScreen;  // whether to show the welcome screen (used by MainWindow)
+  boolean mSetupScreen;    // whether to show the welcome screen (used by MainWindow)
   // static String mManual;  // manual url
+
   static Locale mLocale;
   static String mLocaleStr;
   static int mCheckPerms;
@@ -121,19 +128,6 @@ public class TopoDroidApp extends Application
   public static float mDisplayHeight = 320f;
 
   // static boolean isTracing = false;
-
-  // static float mManualCalibrationLength  = 0; // calibration of manually inputed data: length
-  // static float mManualCalibrationAzimuth = 0;
-  // static float mManualCalibrationClino   = 0;
-  // static boolean mManualCalibrationLRUD  = false;
-
-  // static private void resetManualCalibrations() 
-  // {
-  //   mManualCalibrationLength  = 0; 
-  //   mManualCalibrationAzimuth = 0;
-  //   mManualCalibrationClino   = 0;
-  //   mManualCalibrationLRUD    = false;
-  // }
 
   /* FIXME_HIGHLIGHT
   private List<DBlock> mHighlighted = null;
@@ -176,8 +170,6 @@ public class TopoDroidApp extends Application
       }
     }
   }
-
-
 
   // -----------------------------------------------------
 
@@ -638,7 +630,6 @@ public class TopoDroidApp extends Application
       String version = mDData.getValue( "version" );
       if ( version == null || ( ! version.equals(VERSION) ) ) {
         mDData.setValue( "version", VERSION );
-        // FIXME MANUAL installManual( );  // must come before installSymbols
         // FIXME INSTALL_SYMBOL installSymbols( false ); // this updates symbol_version in the database
         if ( mDData.getValue( "symbol_version" ) == null ) installSymbols( true );
         installFirmware( false );
@@ -1352,7 +1343,7 @@ public class TopoDroidApp extends Application
   }
 
   // ----------------------------------------------
-  // FIRMWARE and USER MANUAL
+  // FIRMWARE 
 
   private void installFirmware( boolean overwrite )
   {
@@ -1361,39 +1352,8 @@ public class TopoDroidApp extends Application
     try { is.close(); } catch ( IOException e ) { }
   }
  
-  // static private void installUserManual()
-  // {
-  //   InputStream is = getResources().openRawResource( R.raw.manual ); // res/raw/manual.zip
-  //   userManualUncompress( is );
-  //   try { is.close(); } catch ( IOException e ) { }
-  // }
- 
   // -------------------------------------------------------------
   // SYMBOLS
-
-  // FIXME INSTALL_SYMBOL
-  // void installSymbols( boolean overwrite )
-  // {
-  //   boolean install = overwrite;
-  //   askSymbolUpdate = false;
-  //   if ( ! overwrite ) { // check whether to install
-  //     String version = mDData.getValue( "symbol_version" );
-  //     // Log.v("DistoX", "symbol version <" + version + "> SYMBOL_VERSION <" + SYMBOL_VERSION + ">" );
-  //     if ( version == null ) {
-  //       install = true;
-  //     } else if ( ! version.equals(SYMBOL_VERSION) ) {
-  //       askSymbolUpdate = true;
-  //     } else { // version .equals SYMBOL_VERSION
-  //       return;
-  //     }
-  //   }
-  //   if ( install ) {
-  //     deleteObsoleteSymbols();
-  //     InputStream is = getResources().openRawResource( R.raw.symbols_speleo );
-  //     symbolsUncompress( is, overwrite );
-  //   }
-  //   mDData.setValue( "symbol_version", SYMBOL_VERSION );
-  // }
 
   void installSymbols( boolean overwrite )
   {

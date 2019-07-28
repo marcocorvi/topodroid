@@ -12,12 +12,16 @@ It is used in three different situations:
 </ul>
 
 In the last case the dialog displays also an histogram of the residual errors of the calibration data,
-the average error, the std deviation, the maximum error, and the number of iterations taken by the calibration computation.<br><p>
+the average error (and the "delta" of the original algorithm), the std deviation, the maximum error, and the number of iterations taken by the calibration computation.<br><p>
 
-The error of a calibration data is the angle between the data and the average vector of the group the data belongs to, after having taken the calibration correction into account. The errors are reported in degrees.<br><p>
+The error of a calibration data is the angle between the data direction and the average direction of the group the data belongs to, after having taken the calibration correction into account. The errors are reported in degrees.<br><p>
 
 The histogram has ticks on the horizontal axis at 0.5 (yellow line), 1.0 (red line), and 1.5 degrees.<br>
 On the vertical axis the tick marks are 10 and 20.<br><p>
+
+The "delta" of the original algorithm is the square-root average of the residual differences between calibrated G-M vectors and the vectors that satisfy the minimization condition.
+It gives an estimate of the calibration accuracy (precision of the instrument):
+"delta" is roughly 5/4 of the accuracy in degrees.<br><p>
 
 This dialog has a button to <b>write</b> the coefficients to the DistoX.<br>
 A warning is given if the data direction distribution is below 95%, or the calibration average error is above 0.5 degrees.

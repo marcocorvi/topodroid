@@ -69,11 +69,14 @@ class DrawingStationDialog extends MyDialog
     private int mFlag; // saved-station flag (if any)
     private boolean mIsBarrier;
     private boolean mIsHidden;
-    private boolean mSensors;
     // private boolean mGlobalXSections; // unused
     private float mBearing;
     private float mClino;
     private List<DBlock> mBlk;
+
+    // cannot use disabled compass, otherwise there is no way to choose x-section at junction station
+    // private boolean sensorCheck; // whether android sensor is enabled
+    private boolean mSensors;    // whether use comapss or delete x-section
 
     DrawingStationDialog( Context context, DrawingWindow parent, TopoDroidApp app,
                           DrawingStationName station, DrawingStationPath path,
@@ -90,6 +93,7 @@ class DrawingStationDialog extends MyDialog
       mIsHidden  = is_hidden; 
       // mGlobalXSections = global_xsections;
       mBlk       = blk;
+      // sensorCheck = TDSetting.mWithAzimuth && TDLevel.overNormal;
     }
 
     @Override
@@ -180,7 +184,7 @@ class DrawingStationDialog extends MyDialog
 	mCbSplaysOn.setChecked( mParent.isStationSplaysOn( mStationName ) );
 	mCbSplaysOff.setChecked( mParent.isStationSplaysOff( mStationName ) );
     
-        if ( TDLevel.overAdvanced ) {
+        if ( TDLevel.overNormal ) {
           mBtnXDelete.setOnClickListener( this );
 
           if ( mStation.mXSectionType == PlotInfo.PLOT_NULL ) {
@@ -246,9 +250,16 @@ class DrawingStationDialog extends MyDialog
               mBtnDirect.setVisibility( View.GONE );
               mBtnInverse.setVisibility( View.GONE );
             }
-            mBtnXDelete.setText( "" );
-            TDandroid.setButtonBackground( mBtnXDelete, MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_compass ) );
-            mSensors = true;
+
+            // if ( sensorCheck ) {
+              mBtnXDelete.setText( "" );
+              TDandroid.setButtonBackground( mBtnXDelete, MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_compass ) );
+              mSensors = true;
+              mBtnXDelete.setOnClickListener( this );
+            // } else {
+            //   mBtnXDelete.setVisibility( View.GONE );
+            // }
+
             mBtnXSection.setBackgroundColor( TDColor.MID_GRAY );
             // if ( mGlobalXSections ) {
             //   mETnick.setVisibility( View.GONE );
@@ -265,10 +276,11 @@ class DrawingStationDialog extends MyDialog
             }
             mBtnXSection.setOnClickListener( this );
             mCBhorizontal.setVisibility( View.GONE );
+            mBtnXDelete.setOnClickListener( this );
             mBtnDirect.setVisibility( View.GONE );
             mBtnInverse.setVisibility( View.GONE );
           } 
-        } else { // level <= advanced
+        } else { // level <= normal
           mETnick.setVisibility( View.GONE );
           mBtnXSection.setVisibility( View.GONE );
           mCBhorizontal.setVisibility( View.GONE );

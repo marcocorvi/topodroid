@@ -117,7 +117,7 @@ class DrawingLabelPath extends DrawingPointPath
     return 1;
   }
 
-  private void makeLabelPath( float f )
+  private void makeLabelPath( /* float f */ )
   {
     Rect r = new Rect();
     mPaint.getTextBounds( mPointText, 0, mPointText.length(), r );
@@ -142,15 +142,14 @@ class DrawingLabelPath extends DrawingPointPath
     float f = fontSize();
     mPaint = new Paint( BrushManager.labelPaint );
     mPaint.setTextSize( TDSetting.mLabelSize * f );
-    makeLabelPath( f );
+    makeLabelPath( /* f */ );
   }
 
   @Override
   void setOrientation( double angle ) 
   { 
     mOrientation = TDMath.in360( angle );
-    float f = fontSize();
-    makeLabelPath( f );
+    makeLabelPath( /* fontSize() */ );
   }
 
 

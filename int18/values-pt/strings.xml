@@ -94,7 +94,7 @@
     <!-- UNUSED string name="connect_failed">Falha de conexão</string -->
     <!-- UNUSED string name="data">Dados</string -->
     <string name="using">Usando %1$s</string>
-    <string name="calib_error">Erro médio: %1$.4f graus</string>
+    <string name="calib_error">Erro médio: %1$.2f graus (BH delta %2$.2f)</string>
     <string name="calib_stddev">Erro desvio padrão: %1$.4f graus</string>
     <string name="calib_max_error">Erro máximo: %1$.4f graus</string>
     <string name="calib_ave_std">Exatidão: %1$.4f ± %2$.4f graus</string>
@@ -909,6 +909,8 @@
     <string name="title_plot_zoomfit">Encaixar zoom / Orientação</string>
     <string name="title_calib_export">Exportar calibração</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
+
+  <!-- TODO string name="pref_export_settings">Export settings</string -->
 
   <string name="pref_cat_survey">DADOS DA TOPO</string>
   <string name="pref_cat_drawing">DESENHANDO CROQUI</string>

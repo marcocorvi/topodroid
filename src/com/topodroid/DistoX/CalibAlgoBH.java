@@ -22,12 +22,13 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import java.lang.Math;
 
 // import java.util.Locale;
 
 // used by logCoeff
-// import android.util.Log;
 
 class CalibAlgoBH extends CalibAlgo
 {
@@ -317,6 +318,22 @@ class CalibAlgoBH extends CalibAlgo
     checkOverflow( bG, aG );
     checkOverflow( bM, aM );
 
+    // this is beat's delta
+    int cnt_bh = 0;
+    mDeltaBH = 0.0f;
+    for ( int i=0; i<nn; ++i ) {
+      if ( group[i] > 0 ) {
+        Vector dg = gx[i].minus( gr[i] );
+        Vector dm = mx[i].minus( mr[i] );
+        mDeltaBH += dg.LengthSquared() + dm.LengthSquared();
+        ++ cnt_bh;
+      }
+    }
+    if ( cnt_bh > 0 ) {
+      mDeltaBH = TDMath.sqrt( mDeltaBH / cnt_bh ) * 100;
+      // Log.v("DistoXAlgoBH", "delta BH " + mDeltaBH + " cnt " + cnt_bh );
+    }
+
     for ( int i=0; i<nn; ++i ) {
       if ( group[i] > 0 ) {
         if ( mNonLinear ) { 
@@ -353,6 +370,9 @@ class CalibAlgoBH extends CalibAlgo
         computeBearingAndClinoRad( gxp, mxp );
         Vector v0 = new Vector( b0, c0 );
         // Log.v("DistoX", "group V " + v0.x + " " + v0.y + " " + v0.z );
+        int cnt_gr = 0;
+        float delta_gr = 0.0f;
+        float delta2_gr = 0.0f;
         for (int j=first; j<i; ++j ) {
           if ( group[j] <= 0 ) {
             err[j] = 0.0f;
@@ -361,11 +381,16 @@ class CalibAlgoBH extends CalibAlgo
             Vector v = new Vector( b0, c0 );
             err[j] = v0.minus(v).Length(); // approx angle with 2*tan(alpha/2)
             // Log.v("DistoX", "Err" + err[j] + " V " + v.x + " " + v.y + " " + v.z );
-            mDelta  += err[j];
-            mDelta2 += err[j] * err[j];
             if ( err[j] > mMaxError ) mMaxError = err[j];
-            ++ cnt;
+            delta_gr  += err[j];
+            delta2_gr += err[j] * err[j];
+            ++ cnt_gr;
           }
+        }
+        if ( cnt_gr > 1 ) {
+          mDelta  += delta_gr;
+          mDelta2 += delta2_gr;
+          cnt += cnt_gr;
         }
       }
     }
@@ -374,7 +399,7 @@ class CalibAlgoBH extends CalibAlgo
     mDelta    *= TDMath.RAD2DEG; // convert avg and std0-dev from radians to degrees
     mDelta2   *= TDMath.RAD2DEG;
     mMaxError *= TDMath.RAD2DEG;
-    // Log.v("DistoX", "Delta " + mDelta + " " + mDelta2 + " cnt " + cnt + " max " + mMaxError );
+    // Log.v("DistoXAlgoBH", "nn " + nn + " Delta " + mDelta + " " + mDelta2 + " cnt " + cnt + " max " + mMaxError );
 
     EnforceMax2( bG, aG );
     EnforceMax2( bM, aM );
