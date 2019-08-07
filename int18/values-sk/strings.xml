@@ -344,7 +344,6 @@
     <string name="menu_sensor">SENZOR</string>
     <string name="menu_scan">SKENOVAŤ</string>
     <string name="menu_scan_ble">SKEN BTLE</string>
-    <string name="menu_scan_ble">SKEN BTLE</string>
     <!-- UNUSED string name="menu_station">STATIONS</string -->
     <string name="menu_stats">ŠTATISTIKA</string>
     <string name="menu_survey">JASKYŇA</string>
