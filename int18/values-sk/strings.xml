@@ -94,7 +94,6 @@
     <!-- UNUSED string name="connect_failed">Failed connect</string -->
     <!-- UNUSED string name="data"> data</string -->
     <string name="using">Pripojené zariadenie %1$s</string>
-    <!-- OLD string name="calib_error">Priemerná chyba" %1$f stupňov</string -->
     <string name="calib_error">Priemerná chyba: %1$.2f stupňov (BH delta %2$.3f)</string>
     <string name="calib_stddev">Chyba stddev: %1$.4f stupňov</string>
     <string name="calib_max_error">Maximálna chyba: %1$.4f stupňov</string>
