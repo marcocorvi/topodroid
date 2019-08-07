@@ -95,7 +95,7 @@
     <!-- UNUSED string name="data"> data</string -->
     <string name="using">Pripojené zariadenie %1$s</string>
     <!-- OLD string name="calib_error">Priemerná chyba" %1$f stupňov</string -->
-    <!-- TODO string name="calib_error">Average error: %1$.2f degrees (BH delta %2$.3f)</string -->
+    <string name="calib_error">Priemerná chyba: %1$.2f stupňov (BH delta %2$.3f)</string>
     <string name="calib_stddev">Chyba stddev: %1$.4f stupňov</string>
     <string name="calib_max_error">Maximálna chyba: %1$.4f stupňov</string>
     <string name="calib_ave_std">Priemerná presnosť: %1$.4f %2$.4f stupňov</string>
@@ -344,7 +344,7 @@
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SENZOR</string>
     <string name="menu_scan">SKENOVAŤ</string>
-    <!-- TODO string name="menu_scan_ble">SCAN BTLE</string -->
+    <string name="menu_scan_ble">SKEN BTLE</string>
     <string name="menu_scan_ble">SKEN BTLE</string>
     <!-- UNUSED string name="menu_station">STATIONS</string -->
     <string name="menu_stats">ŠTATISTIKA</string>
@@ -391,8 +391,8 @@
     <string name="popup_cont_both">Obidva body</string>
     <string name="popup_cont_continue">Pokračovanie</string>
     
-    <!-- TODO string name="connection_error">Connection error</string -->
-    <!-- TODO string name="connecting">Connecting &#8230;</string -->
+    <string name="connection_error">Chyba spojenia</string>
+    <string name="connecting">Spojenie &#8230;</string>
     <!-- UNUSED string name="connected_none">Not connected</string -->
     <!-- UNUSED string name="connected_already">Already connected</string -->
 
@@ -936,7 +936,7 @@
     <string name="title_calib_export">Exportovať kalibráciu</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-  <!-- TODO string name="pref_export_settings">Export settings</string -->
+  <string name="pref_export_settings">Nastavenia Exportu</string>
 
   <string name="pref_cat_survey">NASTAVENIA MAPOVANIA</string>
   <string name="pref_cat_drawing">NASTAVENIA KRESLENIA</string>
@@ -1007,8 +1007,8 @@
   <string name="pref_recent_timeout_summary">Čas po ktorom uplynutí dáta už nie sú označené ako "Posledne stiahnuté"</string>
   <string name="pref_triple_shot_title">Zvuk pri hlavnej zámere</string>
   <string name="pref_triple_shot_summary">Zvuková spätná vázba pri rozoznaní hlavnej zámery</string>
-  <!-- TODO string name="pref_connect_feedback_title">Connect feedback</string -->
-  <!-- TODO string name="pref_connect_feedback_summary">Feedback on device connect</string -->
+  <string name="pref_connect_feedback_title">Pripojenie - Spätná väzba</string>
+  <string name="pref_connect_feedback_summary">Spätná väzba pri pripojení zariadenia</string>
   <string name="pref_station_prefix_title">Predčíslie bodu</string>
   <string name="pref_station_prefix_summary">Export predčíslia bodov Compass</string>
   <string name="pref_compass_splays_title">Pomocné zámery</string>
