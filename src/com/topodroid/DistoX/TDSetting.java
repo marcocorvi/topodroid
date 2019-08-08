@@ -150,7 +150,7 @@ class TDSetting
   // static float mDxfScale    = 1.0f;
   static int mBitmapBgcolor = 0x000000;
 
-  static int mAcadVersion = 9;      // AutoCAD version 9, or 13
+  static int mAcadVersion = 9;      // AutoCAD version 9, or 13, or 16
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // LOCATION
@@ -837,7 +837,7 @@ class TDSetting
     String[] defExpDxf = TDPrefKey.EXPORT_DXFdef;
     // mDxfScale    = tryFloat( prefs,    keyExpDxf[ ],      defExpDxf[ ] );  // DISTOX_DXF_SCALE
     mDxfBlocks   =  prefs.getBoolean(     keyExpDxf[0], bool(defExpDxf[0]) ); // DISTOX_DXF_BLOCKS
-    mAcadVersion = tryInt(   prefs,       keyExpDxf[1],      defExpDxf[1] );  // DISTOX_ACAD_VERSION choice: 9, 13
+    mAcadVersion = tryInt(   prefs,       keyExpDxf[1],      defExpDxf[1] );  // DISTOX_ACAD_VERSION choice: 9, 13, 16
   
     String[] keyData = TDPrefKey.DATA;
     String[] defData = TDPrefKey.DATAdef;

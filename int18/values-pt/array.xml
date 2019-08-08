@@ -41,10 +41,7 @@
      <item name="convex">Convexo</item>
      <item name="delaunay">TODO</item>
   </string-array>
-  <!-- string-array name="acadVersion">
-     <item name="9">AutoCAD 6</item>
-     <item name="13">AutoCAD 12</item>
-  </string-array -->
+  
   <string-array name="zoomCtrl">
      <item name="0">Off</item>
      <item name="1">Temporário</item>

@@ -96,10 +96,12 @@
   <string-array name="acadVersion" translatable="false">
      <item name="9">AutoCAD 6</item>
      <item name="13">AutoCAD 12</item>
+     <item name="16">AutoCAD 16</item>
   </string-array>
   <string-array name="acadVersionValue" translatable="false">
      <item name="9">9</item>
      <item name="13">13</item>
+     <item name="16">16</item>
   </string-array>
 
   <string-array name="zoomCtrl">

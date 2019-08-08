@@ -48,11 +48,6 @@
      <item name="delaunay">狄洛尼型</item>
   </string-array>
 
-  <!-- DO NOT TRANSLATE string-array name="acadVersion" translatable="false">
-     <item name="9">AutoCAD 6</item>
-     <item name="13">AutoCAD 12</item>
-  </string-array -->
-
   <string-array name="zoomCtrl">
      <item name="0">关闭</item>
      <item name="1">临时</item>

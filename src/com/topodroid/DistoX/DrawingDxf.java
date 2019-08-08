@@ -34,6 +34,7 @@ import android.util.Log;
 class DrawingDxf
 {
   private static boolean mVersion13 = false;
+  private static boolean mVersion16 = false;
   private static boolean doHandle   = true;
 
   static private int inc( int h ) { ++h; if ( h == 0x0105 ) ++h; return h; }
@@ -467,6 +468,7 @@ class DrawingDxf
   static void write( BufferedWriter out, DistoXNum num, /* DrawingUtil util, */ DrawingCommandManager plot, long type )
   {
     mVersion13 = (TDSetting.mAcadVersion >= 13);
+    mVersion16 = (TDSetting.mAcadVersion >= 16);
     
     float scale = 1.0f/DrawingUtil.SCALE_FIX; // TDSetting.mDxfScale; 
     float xoff = 0;
@@ -675,39 +677,41 @@ class DrawingDxf
             writeInt( out, 73, 0 );
             writeString( out, 40, zero );
 
-	    writeString( out, 0, "LTYPE" );
-            handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
-            writeString( out, 2, lt_center );
-	    writeInt( out, 330, ltypeowner );
-            writeInt( out, 70, 0 );
-            writeString( out, 3, "Center ____ _ ____ _ ____ _ ____" ); // description
-            writeInt( out, 72, 65 );
-            writeInt( out, 73, 4 );         // number of elements
-            writeString( out, 40, two );  // pattern length
-            writeString( out, 49, "1.25" );  writeInt( out, 74, 0 ); // segment
-            writeString( out, 49, "-0.25" ); writeInt( out, 74, 0 ); // gap
-            writeString( out, 49, "0.25" );  writeInt( out, 74, 0 );
-            writeString( out, 49, "-0.25" ); writeInt( out, 74, 0 );
+            if ( ! mVersion16 ) {
+	      writeString( out, 0, "LTYPE" );
+              handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
+              writeString( out, 2, lt_center );
+	      writeInt( out, 330, ltypeowner );
+              writeInt( out, 70, 0 );
+              writeString( out, 3, "Center ____ _ ____ _ ____ _ ____" ); // description
+              writeInt( out, 72, 65 );
+              writeInt( out, 73, 4 );         // number of elements
+              writeString( out, 40, two );  // pattern length
+              writeString( out, 49, "1.25" );  writeInt( out, 74, 0 ); // segment
+              writeString( out, 49, "-0.25" ); writeInt( out, 74, 0 ); // gap
+              writeString( out, 49, "0.25" );  writeInt( out, 74, 0 );
+              writeString( out, 49, "-0.25" ); writeInt( out, 74, 0 );
 
-	    writeString( out, 0, "LTYPE" );
-            handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
-            writeString( out, 2, lt_ticks );
-	    writeInt( out, 330, ltypeowner );
-            writeInt( out, 70, 0 );
-            writeString( out, 3, "Ticks ____|____|____|____" ); // description
-            writeInt( out, 72, 65 );
-            writeInt( out, 73, 3 );        // number of elements
-            writeString( out, 40, one ); // pattern length
-            writeString( out, 49, half );  writeInt( out, 74, 0 ); // segment
-            writeString( out, 49, "-0.2" ); writeInt( out, 74, 2 ); // embedded text
-	      writeInt( out, 75, 0 );   // SHAPE number must be 0
-	      writeInt( out, 340, p_style );  // STYLE pointer FIXME
-	      writeString( out, 46, "0.1" );  // scale
-	      writeString( out, 50, zero );   // rotation
-	      writeString( out, 44, "-0.1" ); // X offset
-	      writeString( out, 45, "-0.1" ); // Y offset
-	      writeString( out, 9, "|" ); // text
-            writeString( out, 49, "-0.25" ); writeInt( out, 74, 0 ); // gap
+	      writeString( out, 0, "LTYPE" );
+              handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
+              writeString( out, 2, lt_ticks );
+	      writeInt( out, 330, ltypeowner );
+              writeInt( out, 70, 0 );
+              writeString( out, 3, "Ticks ____|____|____|____" ); // description
+              writeInt( out, 72, 65 );
+              writeInt( out, 73, 3 );        // number of elements
+              writeString( out, 40, one ); // pattern length
+              writeString( out, 49, half );  writeInt( out, 74, 0 ); // segment
+              writeString( out, 49, "-0.2" ); writeInt( out, 74, 2 ); // embedded text
+	        writeInt( out, 75, 0 );   // SHAPE number must be 0
+	        writeInt( out, 340, p_style );  // STYLE pointer FIXME
+	        writeString( out, 46, "0.1" );  // scale
+	        writeString( out, 50, zero );   // rotation
+	        writeString( out, 44, "-0.1" ); // X offset
+	        writeString( out, 45, "-0.1" ); // Y offset
+	        writeString( out, 9, "|" ); // text
+              writeString( out, 49, "-0.25" ); writeInt( out, 74, 0 ); // gap
+            }
 
 	    // writeString( out, 0, "LTYPE" );
             // handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
@@ -770,9 +774,12 @@ class DrawingDxf
           // if ( linelib != null ) { // always true
             for ( Symbol line : linelib.getSymbols() ) {
               String lname = "L_" + line.getThName().replace(':','-');
-	      String ltype = lname.equals("L_pit") ? lt_ticks 
-			   : lname.equals("L_border" ) ? lt_center
-		           : lt_continuous;
+	      String ltype = lt_continuous;
+              if ( ! mVersion16 ) {
+	        ltype = lname.equals("L_pit") ? lt_ticks 
+                      : lname.equals("L_border" ) ? lt_center
+                      : lt_continuous;
+              }
               handle = inc(handle); printLayer( pw2, handle, lname, flag, color, ltype ); 
 	      if ( ++color >= 256 ) color = 1;
             }

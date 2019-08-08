@@ -45,11 +45,6 @@
      <item name="delaunay">Delaunay</item>
   </string-array>
 
-  <!-- DO NOT TRANSLATE string-array name="acadVersion">
-     <item name="9">AutoCAD 6</item>
-     <item name="13">AutoCAD 12</item>
-  </string-array -->
-
   <string-array name="zoomCtrl">
      <item name="0">Inactiv</item>
      <item name="1">Temporar</item>
