@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string-array name="feedbackMode">
+     <item name="none">Žiadna</item>
+     <item name="sound">Zvuková</item>
+     <item name="heptic">Haptická</item>
+  </string-array>
+  
   <string-array name="canvasLevels">
      <item name="none">Žiadne</item>
      <item name="class">Podľa Symbolu</item>
