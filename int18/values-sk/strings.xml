@@ -934,7 +934,7 @@
     <string name="title_calib_export">Exportovať kalibráciu</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-  <string name="pref_export_settings">Nastavenia Exportu</string>
+  <string name="pref_export_settings">EXPORT NASTAVENÍ do súboru</string>
 
   <string name="pref_cat_survey">NASTAVENIA MAPOVANIA</string>
   <string name="pref_cat_drawing">NASTAVENIA KRESLENIA</string>
