@@ -18,15 +18,28 @@ The <u>projected</u> profile view displays the midline and the splays projected 
 Splays are displayed with continuous or dashed/dotted line and can have different colors.<br>
 A splay is not shown if the shot is marked for no-display in plan or profile view.<br><p>
 
-In <u>plan</u> view if the inclination of the splay is over the plan-view threshold, the splay is not drawn.
-If the splay clino is above the dash clino-threshold, it is dotted (positive clino) or dashed (negative clino).<br><p>
+In <u>plan</u> view:<br>
+<ul>
+<li>if the inclination of the splay is over the plan-view threshold, the splay is not drawn [default 80&deg;]</li>
+<li>if the splay clino is above the dash clino-threshold, it is dotted (positive clino)
+or dashed (negative clino) [default 50&deg;]</li>
+</ul><br>
 
-In <u>profile</u> view the splay is dashed/dotted if the angle with the "closest" leg in azimuth is above the dash azimuth-threshold.
-However is the splay dash-coherence is checked the splays are dash/dotted as in plan view.<br><p>
+In <u>profile</u> view:
+<ul>
+<li>if the splay dash-coherence is checked [default yes], the splay is dash/dotted as in plan view.</li>
+<li>if the angle with the "closest" leg in azimuth is above the dash azimuth-threshold,
+the splay is dotted/dashed [default 60&deg;]</li>
+</ul><br>
 
-For <u>x-sections</u> the X-splays are green, the others are blue (TO station) or light blue (FROM station), and dotted or dashed
-if the angle between the splay and the normal to the section plane is below the dash angle-threshold [default 60 deg.] (dotted if in the 
-direction of the normal, dashed if opposite).<br><p>
+For <u>x-sections</u>:
+<ul>
+<li>x-splays (LRUD) are green</li>
+<li>other splays are blue: dark at TO station, light at FROM station</li>
+<li>furthermore they dotted or dashed
+if the angle between the splay and the normal to the x-section plane is below the dash angle-threshold
+[default 60&deg;] (dotted if in the direction of the normal, dashed if opposite).</li>
+</ul><br>
 
 The splay colors are [E/G]
 <ul>
@@ -41,11 +54,13 @@ The splay colors are [E/G]
 The station colors are
 <ul>
 <li>violet: default</li>
-<li>red/blue: stations beyond which the midline is hidden</li>
+<li>red: stations beyond which the midline is hidden</li>
+<li>blue: stations before which the midline is hidden</li>
 <li>yellow: saved stations [T/G]</li>
-</ul><br>
+</ul><br><p>
 
-The sketch window has four modes:
+<b>Interaction modes</b><br>
+The sketch window has four interaction modes:
 <ul style="margin-top=0">
 <li><b>move</b>, the default: you can shift the canvas, and zoom in/out. If the "fixed references" box in the references dialog is set, shifts affect only the drawings [level experimental]</li>
 <li><b>draw</b>: in this mode you add iconic symbols (points, including labels), and trace lines and areas (closed regions filled with a color).</li>
@@ -177,7 +192,7 @@ A long tap on the <i>delete</i> button removes the selected line/area point [N].
     <li>Radius of <i>pointing</i>: to select you must not move the finger more than this [A]</li>
     <li><i>Splay transparency</i> (alpha) [0-100, default 80]</li>
     <!--
-    <li><i>Splay plan-view threshold</i>: splay shots with inclination above this threshold are hidden in the plan-view [80 deg.]</li>
+    <li><i>Splay plan-view threshold</i>: splay shots with inclination above this threshold are hidden in the plan-view [80&deg;]</li>
     <li><i>X-section H-threshold</i>: the inclination angle above which a x-section is horizontal. (Below it x-section are vertical).</li>
     -->
     </ul>
