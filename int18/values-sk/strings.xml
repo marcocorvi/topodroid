@@ -934,7 +934,7 @@
     <string name="title_calib_export">Exportovať kalibráciu</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-  <string name="pref_export_settings">Nastavenia Exportu</string>
+  <string name="pref_export_settings">EXPORT NASTAVENÍ do súboru</string>
 
   <string name="pref_cat_survey">NASTAVENIA MAPOVANIA</string>
   <string name="pref_cat_drawing">NASTAVENIA KRESLENIA</string>
@@ -1159,7 +1159,7 @@
   <string name="pref_team_summary">Predvolená meračská skupina</string>
 
   <string name="pref_ethr_title">Uhol pomocnej zámery</string>
-  <string name="pref_ethr_summary">Uhol +- od 90 stupnov pre ktorý má pomocná zámera vertikálnu Smerovú orientáciu [stupne]</string>
+  <string name="pref_ethr_summary">Uhol +- 90 stupnov od hlavnej zámery, ktorý definuje šírku rozpätia, kedy má pomocná zámera vertikálnu Smerovú orientáciu [stupne]</string>
   <string name="pref_vthr_title">Hodnota hlavnej zámery</string>
   <string name="pref_vthr_summary">Prah sklonu hlavnej zámery medzi LRUD / WENS - Therion "vthreshold"</string>
 
