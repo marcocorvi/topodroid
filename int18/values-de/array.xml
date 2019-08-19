@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+  <!-- TODO string-array name="splayDash">
+     <item name="none">none</item>
+     <item name="plan">clino</item>
+     <item name="profile">azimuth</item>
+     <item name="view">view</item>
+  </string-array -->
+
     <string-array name="feedbackMode">
         <item name="none">keine</item>
         <item name="sound">Ton</item>

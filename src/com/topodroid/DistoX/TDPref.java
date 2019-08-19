@@ -987,7 +987,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], T, def[ 0],          ctx, hlp ), // PLOT SHIFT
       makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], T, def[ 1],          ctx, hlp ), // PLOT SPLIT MERGE
       makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], A, def[ 2], INTEGER, ctx, hlp ), // MAX CLINO SPLAY-PLAN
-      makeCbx( cat, key[ 3], tit[ 3], dsc[ 3], T, def[ 3],          ctx, hlp ), // DASH COHERENCE
+      makeLst( cat, key[ 3], tit[ 3], dsc[ 3], T, def[ 3], R.array.splayDash, R.array.splayDashValue,       ctx, hlp ), // DASH COHERENCE
       makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], T, def[ 4], FLOAT,   ctx, hlp ), // DASH PLAN
       makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5], FLOAT,   ctx, hlp ), // DASH PROFILE
       makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], T, def[ 6], FLOAT,   ctx, hlp ), // DASH X-SCETION

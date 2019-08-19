@@ -154,7 +154,8 @@ class DrawingCommandManager
       synchronized( mCurrentStack ) {
         for ( DrawingPath path : mMultiselected ) {
           DrawingPointLinePath line = (DrawingPointLinePath)path;
-          line.makeReduce( 1 );
+          int min_size = (path.mType == DrawingPath.DRAWING_PATH_AREA)? 3 : 2;
+          line.makeReduce( 1, min_size );
         }
       }
       for ( DrawingPath path : mMultiselected ) {
@@ -278,7 +279,7 @@ class DrawingCommandManager
   void setSplayAlpha( boolean on ) 
   {
     for ( DrawingPath p : mSplaysStack ) {
-      if ( p.mExtend > TDSetting.mSectionSplay || p.mExtend < -TDSetting.mSectionSplay ) p.setPaintAlpha( on );
+      if ( p.getCosine() > TDSetting.mSectionSplay || p.getCosine() < -TDSetting.mSectionSplay ) p.setPaintAlpha( on );
     }
   }
 
@@ -1091,7 +1092,8 @@ class DrawingCommandManager
       clearSelected();
     }
     synchronized( mCurrentStack ) {
-      line.makeReduce( decimation );
+      int min_size = (line.mType == DrawingPath.DRAWING_PATH_AREA)? 3 : 2;
+      line.makeReduce( decimation, min_size );
     }
     synchronized( TDPath.mSelectionLock ) {
       mSelection.insertPath( line );
@@ -1160,15 +1162,19 @@ class DrawingCommandManager
         for ( DrawingPath path : mSplaysStack ) {
           if ( path.mBlock == null || ( ! path.mBlock.mMultiBad ) ) {
             // path.setPathPaint( paint );
-	        if ( profile ) {
-	          if ( TDSetting.mDashSplay ) {
-                path.setSplayPaintPlan( path.mBlock, path.mExtend, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-	          } else {
+            if ( profile ) {
+              if ( TDSetting.mDashSplay == 1 ) {
+                path.setSplayPaintPlan( path.mBlock, path.getCosine(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+              } else {
                 path.setSplayPaintProfile( path.mBlock, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-	          }
-	        } else {
-              path.setSplayPaintPlan( path.mBlock, path.mExtend, BrushManager.deepBluePaint, BrushManager.darkBluePaint );
-	        }
+              }
+            } else {
+              if ( TDSetting.mDashSplay == 2 ) {
+                path.setSplayPaintProfile( path.mBlock, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+              } else {
+                path.setSplayPaintPlan( path.mBlock, path.getCosine(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
+              }
+            }
           }
         }
 	// highlightsSplays( app ); // FIXME_HIGHLIGHT

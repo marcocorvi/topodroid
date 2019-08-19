@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+  <string-array name="splayDash">
+     <item name="none">none</item>
+     <item name="plan">clino</item>
+     <item name="profile">azimuth</item>
+     <item name="view">view</item>
+  </string-array>
+  <string-array name="splayDashValue">
+     <item name="none">0</item>
+     <item name="plan">1</item>
+     <item name="profile">2</item>
+     <item name="view">3</item>
+  </string-array>
+  
   <string-array name="feedbackMode">
      <item name="none">none</item>
      <item name="sound">sound</item>

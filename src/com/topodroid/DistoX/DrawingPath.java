@@ -16,6 +16,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 import java.io.PrintWriter;
 import java.io.DataOutputStream;
 
@@ -24,8 +26,6 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Matrix;
 import android.graphics.RectF;
-
-// import android.util.Log;
 
 /**
  * direct/indirect subclasses:
@@ -58,13 +58,16 @@ class DrawingPath extends RectF
   // private int dir; // 0 x1 < x2, 1 y1 < y2, 2 x2 < x1, 3 y2 < y1
   DBlock mBlock;
   boolean mLandscape; // whether the canvas is in landscape presentation mode or not
-  float mExtend;  // extend value for splays (= cos of angle between splay and leg)
+  private float mCosine;      // cosine value for splays (= cos of angle between splay and leg)
                   // x-sections: angle between splay and plane-normal
   String mPlotName; // path full plotname, ie,survey-plot (only for Overview window)
   int mLevel;       // canvas levels flag
 
   protected float cx, cy; // midpoint scene coords
   // RectF mBBox;   // path boundig box (scene coords)
+
+  void setCosine( float cosine ) { mCosine = cosine; }
+  float getCosine() { return mCosine; }
   
   // FIXME-COPYPATH
   // // overridable
@@ -85,7 +88,7 @@ class DrawingPath extends RectF
   //   ret.mOptions   = mOptions;
   //   ret.mPaint     = mPaint;
   //   ret.mLandscape = mLandscape;
-  //   ret.mExtend    = mExtend;
+  //   ret.mCosine    = mCosine;
   //   ret.mPlotName  = mPlotName;
   //   ret.mLevel     = mLevel;
   //   ret.x1 = x1;
@@ -110,7 +113,7 @@ class DrawingPath extends RectF
     // x2 = y2 = 1.0f;
     // dx = dy = 1.0f;
     mLandscape = false;
-    mExtend = 1;
+    mCosine = 1;
     mPlotName = null;
     mLevel = DrawingLevel.LEVEL_DEFAULT;
   }
@@ -392,9 +395,9 @@ class DrawingPath extends RectF
   }
  
   // setSplayExtend is used for the plan view
-  // extend = cos(angle_splay-leg)
+  // cosine = cos(angle_splay-leg)
   // called by DrawingCommandManager
-  void setSplayPaintPlan( DBlock blk, float extend, Paint h_paint, Paint v_paint )
+  void setSplayPaintPlan( DBlock blk, float cosine, Paint h_paint, Paint v_paint )
   {
     if ( blk == null ) {
       mPaint = BrushManager.paintSplayXB;
@@ -422,12 +425,16 @@ class DrawingPath extends RectF
         return;
       } 
     }
-    if (extend >= 0 && extend < TDSetting.mCosHorizSplay) {
-      mPaint = BrushManager.paintSplayXBdot;
-    } else if (extend < 0 && extend > -TDSetting.mCosHorizSplay) {
-      mPaint = BrushManager.paintSplayXBdash;
-    } else {
+    if ( TDSetting.mDashSplay == 0 ) {
       mPaint = BrushManager.paintSplayXB;
+    } else {
+      if (cosine >= 0 && cosine < TDSetting.mCosHorizSplay) {
+        mPaint = BrushManager.paintSplayXBdot;
+      } else if (cosine < 0 && cosine > -TDSetting.mCosHorizSplay) {
+        mPaint = BrushManager.paintSplayXBdash;
+      } else {
+        mPaint = BrushManager.paintSplayXB;
+      }
     }
   }
   
@@ -460,12 +467,16 @@ class DrawingPath extends RectF
 	return;
       } 
     }
-    if (blk.mClino > TDSetting.mVertSplay) {
-      mPaint= BrushManager.paintSplayXBdot;
-    } else if (blk.mClino < -TDSetting.mVertSplay) {
-      mPaint= BrushManager.paintSplayXBdash;
+    if ( TDSetting.mDashSplay == 0 ) {
+      mPaint = BrushManager.paintSplayXB;
     } else {
-      mPaint= BrushManager.paintSplayXB;
+      if (blk.mClino > TDSetting.mVertSplay) {
+        mPaint= BrushManager.paintSplayXBdot;
+      } else if (blk.mClino < -TDSetting.mVertSplay) {
+        mPaint= BrushManager.paintSplayXBdash;
+      } else {
+        mPaint= BrushManager.paintSplayXB;
+      }
     }
   }
 

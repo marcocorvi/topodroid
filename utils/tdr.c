@@ -22,9 +22,9 @@ int toLE( int * pi )
   return (int)( ( ((int)ch[0])<<24 ) | ( ((int)ch[1]) << 16 ) | ( ((int)ch[2]) << 8 ) | ( ((int)ch[3]) ) );
 }
 
-void readString( FILE * fp )
+void readString( char * hdr, FILE * fp )
 {
-  long pos = ftell( fp );
+  // long pos = ftell( fp );
   char ch2[2];
   int j, len, c0, c1;
   char ch;
@@ -32,22 +32,25 @@ void readString( FILE * fp )
   c0 = ch2[0]; if ( c0 < 0 ) c0 += 256;
   c1 = ch2[1]; if ( c1 < 0 ) c1 += 256;
   len = ( c0 << 8 ) | c1;
-  printf("%ld= [length %d] \n", pos, len);
+  printf("%s [length %d] <", hdr, len);
   for ( j=0; j<len; ++j ) {
     fread( &ch, sc, 1, fp );
     printf("%c", ch, ch );
   }
-  printf("\n");
+  printf(">\n");
 }
 
 void read4ch( FILE * fp, int skip )
 {
   char ch;
   int j;
+  long pos = ftell( fp );
+  printf("%ld= [skip %d]", pos, skip);
   for ( j=0; j<skip; ++j ) {
     fread( &ch, sc, 1, fp );
     printf(" %02x ", ch );
   }
+  printf("\n");
 }
 
 int readInt( FILE * fp )
@@ -73,22 +76,22 @@ void readVersion( FILE * fp )
   long pos = ftell( fp );
   int v = readInt( fp );
   VERSION = v;
-  printf("%ld= V: %d\n", pos, v );
+  printf("%ld= VERSION: %d\n", pos, v );
 }
 
 void readScrap( FILE * fp )
 {
   long pos = ftell( fp );
   int type, j, k;
-  printf("%ld= S <", pos);
-  readString( fp );
+  printf("%ld= SCRAP\n", pos);
+  readString( "  Name ", fp );
   type = readInt( fp );
-  printf("> TYPE %d \n", type );
+  printf("  Type %d \n", type );
   for ( int k=0; k<3; ++k ) {
     // j = readInt( fp );
     // printf("%d ", j );
-    readString( fp );
-    printf("\n");
+    readString( "", fp );
+    // printf("\n");
     // read4ch( fp, 2 ); printf("\n");
   }
 }
@@ -101,13 +104,13 @@ void readBBox( FILE * fp )
   float x2 = readFloat( fp );
   float y2 = readFloat( fp );
   int north = readInt( fp );
-  printf("%ld= bbox %.2f %.2f %.2f %.2f (north %d)\n", pos, x1, y1, x2, y2, north );
+  printf("%ld= BBOX %.2f %.2f - %.2f %.2f (north %d)\n", pos, x1, y1, x2, y2, north );
   if ( north == 1 ) {
     x1 = readFloat( fp );
     y1 = readFloat( fp );
     x2 = readFloat( fp );
     y2 = readFloat( fp );
-    printf("     %.2f %.2f %.2f %.2f\n", x1, y1, x2, y2 );
+    printf("  North %.2f %.2f - %.2f %.2f\n", x1, y1, x2, y2 );
   }
 }
 
@@ -118,15 +121,14 @@ void readPoint( FILE * fp )
   float orient;
   float cx = readFloat( fp );
   float cy = readFloat( fp ); 
-  printf("%ld= P: %.3f %.3f ", pos, cx, cy );
-  readString( fp );
+  printf("%ld= POINT: X %.3f Y %.3f\n", pos, cx, cy );
+  readString( "  Type ", fp );
   orient = readFloat( fp );
   scale  = readInt( fp );
   lvl = (VERSION >= 401090 )? readInt( fp ) : 0xff;
-  printf(" az. %.2f lvl %02x scale %d options <", orient, lvl, scale );
-  readString( fp );  // text
-  readString( fp );  // options
-  printf(">\n");
+  printf("  Orientation %.2f Level %02x Scale %d\n", orient, lvl, scale );
+  readString( "  Text ", fp );  // text
+  readString( "  Options ", fp );  // options
 }
   
 void readLabel( FILE * fp )
@@ -139,11 +141,9 @@ void readLabel( FILE * fp )
   azi   = readFloat( fp ); // orientation
   scale = readInt( fp );   
   lvl = (VERSION >= 401090 )? readInt( fp ) : 0xff;
-  printf("%ld= T: %.3f %.3f az. %.1f scale %d lvl %02x Text: ", pos, cx, cy, azi, scale, lvl );
-  readString( fp );      // text
-  printf(" options <");
-  readString( fp );      // options
-  printf(">\n");
+  printf("%ld= LABEL: X %.3f Y %.3f Orientattion %.1f Scale %d Level %02x\n", pos, cx, cy, azi, scale, lvl );
+  readString( "  Text ", fp );      // text
+  readString( "  Options ", fp );      // options
 }
 
 void readLinePoint( FILE * fp )
@@ -155,7 +155,7 @@ void readLinePoint( FILE * fp )
   float y = readFloat( fp );
   fread( &ch, sc, 1, fp );
   // lvl = (VERSION >= 401090 )? readInt( fp ) : 0xff; N.B. Line Points do not have level
-  printf("%ld= %.2f %.2f %d ", pos, x, y, ch );
+  printf("  %ld= %.2f %.2f %d ", pos, x, y, ch );
   if ( ch == 1 ) {
     x = readFloat( fp );
     y = readFloat( fp );
@@ -173,16 +173,16 @@ void readLine( FILE * fp )
   int k , np;
   char closed, reversed;
   int outline, lvl;
-  printf("%ld= L: ", pos);
-  readString( fp );                // name
+  printf("%ld= LINE:\n", pos);
+  readString( "  Type ", fp );                // name
   fread( &closed, sc, 1, fp );
   fread( &reversed, sc, 1, fp );
   outline = readInt( fp );
   lvl = (VERSION >= 401090 )? readInt( fp ) : 0xff;
-  printf(" Closed %d Rev. %d Outline %d Lvl %02x: <", closed, reversed, outline, lvl );
-  readString( fp );     // options
+  printf("  Closed %d Rev. %d Outline %d Level %02x\n", closed, reversed, outline, lvl );
+  readString( "  Options ", fp );     // options
   np = readInt( fp );   // nr. points
-  printf("> NP %d \n", np );
+  printf("  Nr. Points %d\n", np );
   for ( int k=0; k<np; ++k ) readLinePoint( fp );
 }
 
@@ -192,16 +192,15 @@ void readArea( FILE * fp )
   char ch;
   int cnt, np, lvl;
   float orient;
-  printf("%ld= A: ", pos);
-  readString( fp );         // name
-  printf(" - ");
-  readString( fp );         // prefix
+  printf("%ld= AREA: ", pos);
+  readString( "  Type ", fp );         // name
+  readString( "  Prefix ", fp );         // prefix
   cnt = readInt( fp );      // counter
   fread( &ch, sc, 1, fp );  // visibility
   orient = readFloat( fp );
   lvl = (VERSION >= 401090 )? readInt( fp ) : 0xff;
   np = readInt( fp );       // nr points
-  printf(" # %d ch %d az. %.2f lvl %02x NP %d\n", cnt, ch, orient, lvl, np );
+  printf("  Counter %d Visibility %d Orientation %.2f Level %02x Nr.Points %d\n", cnt, ch, orient, lvl, np );
   for ( int k=0; k<np; ++k ) readLinePoint( fp );
 }
 
@@ -211,15 +210,17 @@ void readAutoStation( FILE * fp )
   long pos = ftell( fp );
   float x = readFloat( fp ); // position
   float y = readFloat( fp );
-  printf("%ld= St: ", pos);
-  readString( fp );          // name
+  printf("%ld= STATION:\n", pos);
+  readString( "  Name ", fp );          // name
   lvl = (VERSION >= 401090 )? readInt( fp ) : 0xff;
   section = readInt( fp );
-  printf(" %.2f %.2f lvl %02x x-section %d\n", x, y, lvl, section );
+  printf("  X %.2f Y %.2f Level %02x X-section %d", x, y, lvl, section );
   if ( section >= 0 ) { // PLOT_NULL == -1
     float a = readFloat( fp ); // azimuth
     float c = readFloat( fp ); // clino
+    printf(" (azimuth %.1f clino %.1f)", a, c );
   }
+  printf("\n");
 }
 
 void readUserStation( FILE * fp )
@@ -229,9 +230,9 @@ void readUserStation( FILE * fp )
   float y = readFloat( fp );
   int s = readInt( fp );       // scale
   int lvl = (VERSION >= 401090 )? readInt( fp ) : 0xff;
-  printf("%ld= USt: ", pos);
-  readString( fp );            // name
-  printf(" (scale %d) %.2f %.2f lvl %02x\n", s, x, y, lvl );
+  printf("%ld= USER-STTAION:\n", pos);
+  readString( "  Name ", fp );            // name
+  printf("  Scale %d X %.2f Y %.2f Level %02x\n", s, x, y, lvl );
 }
 
 void readSpecial( FILE * fp )
@@ -241,7 +242,7 @@ void readSpecial( FILE * fp )
   float x = readFloat( fp ); // center X
   float y = readFloat( fp ); // center Y
   int lvl = (VERSION >= 401090 )? readInt( fp ) : 0xff;
-  printf("%ld= Special (type %d) at %.2f %.2f lvl %02x\n", pos, s, x, y, lvl );
+  printf("%ld= SPECIAL: Type %d X %.2f Y %.2f Level %02x\n", pos, s, x, y, lvl );
 }
 
 void readSpecialPoint( FILE * fp, const char * type ) 
@@ -253,11 +254,11 @@ void readSpecialPoint( FILE * fp, const char * type )
   if ( VERSION > 207043 ) o = readFloat( fp ); // orientation 
   int s = readInt( fp ); // scale
   int lvl = (VERSION >= 401090 )? readInt( fp ) : 0xff;
-  printf("%ld= Special point %s lvl %02x: ", pos, type, lvl );
-  readString( fp ); // point text
-  readString( fp ); // options
+  printf("%ld= SPECIAL POINT: Type %s Level %02x: ", pos, type, lvl );
+  readString( "  Text ", fp ); // point text
+  readString( "  Options ", fp ); // options
   int id = readInt( fp );
-  printf(" (orient. %.2f scale %d) at %.2f %.2f id %d\n", o, s, x, y, id );
+  printf("  Orientation %.2f Scale %d X %.2f Y %.2f ID %d\n", o, s, x, y, id );
 }
 
 

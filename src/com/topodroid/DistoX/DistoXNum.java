@@ -1169,8 +1169,8 @@ class DistoXNum
     for ( TriSplay ts : tmpsplays ) {
       NumStation st = getStation( ts.from );
       if ( st != null ) {
-        float extend = st.computeExtend( ts.b( mDecl ), ts.extend ); // FIXME_EXTEND
-        mSplays.add( new NumSplay( st, ts.d(), ts.b( mDecl ), ts.c(), extend, ts.block, mDecl ) );
+        float cosine = st.computeExtend( ts.b( mDecl ), ts.extend ); // FIXME_EXTEND
+        mSplays.add( new NumSplay( st, ts.d(), ts.b( mDecl ), ts.c(), cosine, ts.block, mDecl ) );
       }
     }
 

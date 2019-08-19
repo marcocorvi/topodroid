@@ -245,10 +245,11 @@ class DrawingPointLinePath extends DrawingPath
   // @param decimation   log-decimation (must be >= 1)
   //                     1: keep one point every 2
   //                     2: keep one point every 4
-  void makeReduce( int decimation )
+  // @param min_size     2: line, 3: area
+  void makeReduce( int decimation, int min_size )
   {
     while ( decimation > 0 ) {
-      if ( mSize > 2 ) {
+      if ( mSize > min_size ) {
         int size = 1;  // keep first point 
         LinePoint prev = mFirst;
         LinePoint pt = prev.mNext;

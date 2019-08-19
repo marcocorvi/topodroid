@@ -698,23 +698,26 @@ public class DrawingWindow extends ItemDrawer
   }
 
   // used to add legs and splays
-  // @param extend  used only for splays
+  // @param cosine  used only for splays
   private void addFixedLine( long type, DBlock blk, float x1, float y1, float x2, float y2,
-                             // float xoff, float yoff, 
-                             float extend, boolean splay, boolean selectable )
+                             float cosine, boolean splay, boolean selectable )
   {
     DrawingPath dpath = null;
     if ( splay ) {
       dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
-      dpath.mExtend = extend; // save extend into path
+      dpath.setCosine( cosine ); // save cosine into path
       if ( PlotInfo.isProfile( type ) ) {
-        if ( TDSetting.mDashSplay ) {
-          dpath.setSplayPaintPlan( blk, extend, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+        if ( TDSetting.mDashSplay == 1 ) {
+          dpath.setSplayPaintPlan( blk, dpath.getCosine(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
         } else {
           dpath.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
         }
       } else {
-        dpath.setSplayPaintPlan( blk, extend, BrushManager.deepBluePaint, BrushManager.darkBluePaint );
+        if ( TDSetting.mDashSplay == 2) {
+          dpath.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+        } else {
+          dpath.setSplayPaintPlan( blk, dpath.getCosine(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
+        }
       }
     } else {
       dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );
@@ -739,38 +742,38 @@ public class DrawingWindow extends ItemDrawer
   // the DBlock comes from a query in the DB and it is not the DBlock in the plan/profile
   //     therefore coloring the splays of those blocks does not affect the X-Section splay coloring
   //
-  // @param a    angle between splay and normal to the plane
-  // @param blue true for splays at TO station
+  // @param angle  angle between splay and normal to the plane
+  // @param blue   true for splays at TO station
   //
-  private void addFixedSectionSplay( DBlock blk, float x1, float y1, float x2, float y2, float a,
+  private void addFixedSectionSplay( DBlock blk, float x1, float y1, float x2, float y2, float angle,
                                      // float xoff, float yoff, 
                                      boolean blue )
   {
     // Log.v("DistoX", "Section splay angle " + a + " " + TDSetting.mVertSplay );
     DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
-    dpath.mExtend = a; 
+    dpath.setCosine( angle ); 
     Paint paint = blk.getPaint();
     if ( paint != null ) {
       dpath.setPathPaint( paint );
     } else if ( blue ) {
       if ( blk.isXSplay() ) {
         dpath.setPathPaint( BrushManager.paintSplayLRUD );    // GREEN
-      } else if ( a > TDSetting.mSectionSplay ) {
-        dpath.setPathPaint( BrushManager.paintSplayXVdot );  // BLUE dashed-4  -- -- -- --
-      } else if ( a < -TDSetting.mSectionSplay ) {
+      } else if ( angle > TDSetting.mSectionSplay ) {
+        dpath.setPathPaint( BrushManager.paintSplayXVdot );   // BLUE dashed-4  -- -- -- --
+      } else if ( angle < -TDSetting.mSectionSplay ) {
         dpath.setPathPaint( BrushManager.paintSplayXVdash );  // BLUE dashed-3  --- --- ---
       } else {
-        dpath.setPathPaint( BrushManager.paintSplayXViewed );   // BLUE
+        dpath.setPathPaint( BrushManager.paintSplayXViewed ); // BLUE
       }
     } else {
       if ( blk.isXSplay() ) {
         dpath.setPathPaint( BrushManager.paintSplayLRUD );    // GREEN
-      } else if ( a > TDSetting.mSectionSplay ) {
+      } else if ( angle > TDSetting.mSectionSplay ) {
         dpath.setPathPaint( BrushManager.paintSplayXBdot );   // LIGHT_BLUE dashed-4
-      } else if ( a < -TDSetting.mSectionSplay ) {
-        dpath.setPathPaint( BrushManager.paintSplayXBdash );   // LIGHT_BLUE dashed-3
+      } else if ( angle < -TDSetting.mSectionSplay ) {
+        dpath.setPathPaint( BrushManager.paintSplayXBdash );  // LIGHT_BLUE dashed-3
       } else {
-        dpath.setPathPaint( BrushManager.paintSplayXB );    // LIGHT_BLUE
+        dpath.setPathPaint( BrushManager.paintSplayXB );      // LIGHT_BLUE
       }
     }
     // dpath.setPathPaint( blue? BrushManager.paintSplayXViewed : BrushManager.paintSplayXB );
@@ -1092,7 +1095,6 @@ public class DrawingWindow extends ItemDrawer
         NumStation st2 = sh.to;
         if ( st1.show() && st2.show() ) {
           addFixedLine( type, sh.getFirstBlock(), st1.e, st1.s, st2.e, st2.s, sh.getReducedExtend(), false, true );
-                        // xoff, yoff, false, true );
         }
       }
       for ( NumSplay sp : splays ) {
@@ -1101,8 +1103,8 @@ public class DrawingWindow extends ItemDrawer
           if ( st.show() ) {
             DBlock blk = sp.getBlock();
             if ( ! blk.isNoPlan() ) {
-              addFixedLine( type, blk, st.e, st.s, sp.e, sp.s, sp.getReducedExtend(), true, true );
-                          // xoff, yoff, true, true );
+              // Log.v("DistoX-SPLAY", "cosine " + sp.getCosine() );
+              addFixedLine( type, blk, st.e, st.s, sp.e, sp.s, sp.getCosine(), true, true );
             }
           }
         }
@@ -1127,7 +1129,6 @@ public class DrawingWindow extends ItemDrawer
 	  DBlock blk = sh.getFirstBlock();
           if ( blk != null && st1.mHasCoords && st2.mHasCoords && st1.show() && st2.show() ) {
             addFixedLine( type, blk, st1.h, st1.v, st2.h, st2.v, sh.getReducedExtend(), false, true );
-                          // xoff, yoff, false, true );
           }
         }
       } 
@@ -1136,8 +1137,7 @@ public class DrawingWindow extends ItemDrawer
         if ( st.mHasCoords && st.show() ) {
           DBlock blk = sp.getBlock();
           if ( ! blk.isNoProfile() ) {
-            addFixedLine( type, blk, st.h, st.v, sp.h, sp.v, sp.getReducedExtend(), true, true );
-                        // xoff, yoff, true, true );
+            addFixedLine( type, blk, st.h, st.v, sp.h, sp.v, sp.getCosine(), true, true );
           }
         }
       }
@@ -1160,7 +1160,6 @@ public class DrawingWindow extends ItemDrawer
         if ( st1.show() && st2.show() ) {
           h1 = st1.e * cosp + st1.s * sinp;
           h2 = st2.e * cosp + st2.s * sinp;
-          // addFixedLine( type, sh.getFirstBlock(), h1, (float)(st1.v), h2, (float)(st2.v), xoff, yoff, sh.getReducedExtend(), false, true );
           addFixedLine( type, sh.getFirstBlock(), h1, st1.v, h2, st2.v, sh.getReducedExtend(), false, true );
         }
       } 
@@ -1171,8 +1170,7 @@ public class DrawingWindow extends ItemDrawer
           if ( ! blk.isNoProfile() ) {
             h1 = st.e * cosp + st.s * sinp;
             h2 = sp.e * cosp + sp.s * sinp;
-            // addFixedLine( type, sp.getBlock(), h1, (float)(st.v), h2, (float)(sp.v), xoff, yoff, sp.getReducedExtend(), true, true );
-            addFixedLine( type, blk, h1, st.v, h2, sp.v, sp.getReducedExtend(), true, true );
+            addFixedLine( type, blk, h1, st.v, h2, sp.v, sp.getCosine(), true, true );
           }
         }
       }
@@ -2143,7 +2141,6 @@ public class DrawingWindow extends ItemDrawer
             yfrom = -xn * xfrom - yn * yfrom;
             xfrom = xx;
           }
-          // addFixedLine( mType, blk, xfrom, yfrom, xto, yto, 0, 0, false, false ); // not-splay, not-selecteable
           addFixedLine( mType, blk, xfrom, yfrom, xto, yto, blk.getReducedExtend(), false, false ); // not-splay, not-selecteable
           mDrawingSurface.addDrawingStationName( mFrom, DrawingUtil.toSceneX(xfrom, yfrom), DrawingUtil.toSceneY(xfrom, yfrom) );
           mDrawingSurface.addDrawingStationName( mTo, DrawingUtil.toSceneX(xto, yto), DrawingUtil.toSceneY(xto, yto) );
@@ -2463,13 +2460,19 @@ public class DrawingWindow extends ItemDrawer
       blk.resetFlag( flag );
       // the next is really necessary only if flag || mFlag is FLAG_COMMENTED:
       if ( PlotInfo.isProfile( mType ) ) {
-        if ( TDSetting.mDashSplay ) {
-          shot.setSplayPaintPlan( blk, blk.getReducedIntExtend(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+        if ( TDSetting.mDashSplay == 1 ) {
+          // shot.setSplayPaintPlan( blk, blk.getReducedIntExtend(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+          shot.setSplayPaintPlan( blk, shot.getCosine(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
         } else {
           shot.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
         }
       } else {
-        shot.setSplayPaintPlan( blk, blk.getReducedIntExtend(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
+        if ( TDSetting.mDashSplay == 2 ) {
+          shot.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+        } else {
+          // shot.setSplayPaintPlan( blk, blk.getReducedIntExtend(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
+          shot.setSplayPaintPlan( blk, shot.getCosine(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
+        }
       }
       mApp_mData.updateShotFlag( blk.mId, mSid, flag, true );
     }
@@ -2482,13 +2485,19 @@ public class DrawingWindow extends ItemDrawer
       mApp_mData.updateShotLeg( blk.mId, mSid, LegType.NORMAL, false );
       // the next is really necessary only if flag || mFlag is FLAG_COMMENTED:
       if ( PlotInfo.isProfile( mType ) ) {
-        if ( TDSetting.mDashSplay ) {
-          shot.setSplayPaintPlan( blk, blk.getReducedIntExtend(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+        if ( TDSetting.mDashSplay == 1 ) {
+          // shot.setSplayPaintPlan( blk, blk.getReducedIntExtend(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+          shot.setSplayPaintPlan( blk, shot.getCosine(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
         } else {
           shot.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
         }
       } else {
-        shot.setSplayPaintPlan( blk, blk.getReducedIntExtend(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
+        if ( TDSetting.mDashSplay == 2 ) {
+          shot.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+        } else {
+          // shot.setSplayPaintPlan( blk, blk.getReducedIntExtend(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
+          shot.setSplayPaintPlan( blk, shot.getCosine(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
+        }
       }
     }
 
@@ -4389,13 +4398,27 @@ public class DrawingWindow extends ItemDrawer
               public void onClick(View v) {
                 if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // remove pt
                   SelectionPoint sp = mDrawingSurface.hotItem();
-                  if ( sp != null && ( sp.type() == DrawingPath.DRAWING_PATH_LINE || sp.type() == DrawingPath.DRAWING_PATH_AREA ) ) {
-                    DrawingPointLinePath line = (DrawingPointLinePath)sp.mItem;
-                    if ( line.size() > 2 ) {
-                      removeLinePoint( line, sp.mPoint, sp );
-                      line.retracePath();
-                      modified();
+                  if ( sp != null ) {
+                    int t = sp.type();
+                    DrawingPointLinePath linepath = (DrawingPointLinePath)sp.mItem;
+                    if ( t == DrawingPath.DRAWING_PATH_LINE ) {
+                      if ( linepath.size() > 2 ) {
+                        removeLinePoint( linepath, sp.mPoint, sp );
+                        linepath.retracePath();
+                      } else { 
+                        DrawingLinePath lp = (DrawingLinePath)linepath;
+                        askDeleteItem( lp, t, BrushManager.mLineLib.getSymbolName( lp.mLineType ) );
+                      }
+                    } else if ( t == DrawingPath.DRAWING_PATH_AREA ) {
+                      if ( linepath.size() > 3 ) {
+                        removeLinePoint( linepath, sp.mPoint, sp );
+                        linepath.retracePath();
+                      } else {
+                        DrawingAreaPath ap = (DrawingAreaPath)linepath;
+                        askDeleteItem( ap, t, BrushManager.mAreaLib.getSymbolName( ap.mAreaType ) );
+                      }
                     }
+                    modified();
                   }
                 }
                 dismissPopupEdit();

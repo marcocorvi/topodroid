@@ -920,12 +920,6 @@ class TDPrefKey
     R.string.pref_min_shift_title,
     R.string.pref_pointing_title,
     R.string.pref_splay_alpha_title,
-    // R.string.pref_vthr_title,
-    // R.string.pref_dash_splay_title,
-    // R.string.pref_vert_splay_title,
-    // R.string.pref_horiz_splay_title,
-    // R.string.pref_section_splay_title,
-    // R.string.pref_hthr_title,
     -1
   };
 
@@ -1345,7 +1339,7 @@ class TDPrefKey
     "DISTOX_PLOT_SHIFT",      // plot shift and scale
     "DISTOX_PLOT_SPLIT",      // plot split and merge
     "DISTOX_SPLAY_VERT_THRS", // splays with clino over mSplayVertThrs are not displayed in plan view
-    "DISTOX_DASH_SPLAY",      // whether dash-splay are coherent between plan and profile
+    "DISTOX_SPLAY_DASH",      // whether dash-splay are coherent from plan (1), profile (2), or independent (0)
     "DISTOX_VERT_SPLAY",      // splays with clino over this are shown with dashed/dotted line
     "DISTOX_HORIZ_SPLAY",     // splays off-azimuth over this are shown with dashed/dotted line
     "DISTOX_SECTION_SPLAY",   // splays with angle over this are shown with dashed/dotted line
@@ -1399,7 +1393,7 @@ class TDPrefKey
     FALSE,
     FALSE,
     "80",
-    TRUE,
+    TDString.ZERO,
     TDString.FIFTY,
     TDString.SIXTY,
     TDString.SIXTY,

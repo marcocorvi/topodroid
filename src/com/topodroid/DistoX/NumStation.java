@@ -11,9 +11,9 @@
  */
 package com.topodroid.DistoX;
 
-import java.util.ArrayList;
+import android.util.Log;
 
-// import android.util.Log;
+import java.util.ArrayList;
 
 class NumStation extends NumSurveyPoint
 {
@@ -83,7 +83,7 @@ class NumStation extends NumSurveyPoint
   // extend  [-1,0,+1]
   void addAzimuth( float azimuth, float extend ) 
   {
-    // Log.v("DistoX", "Station " + name + " add azimuth " + azimuth + " extend " + extend );
+    // Log.v("DistoX-SPLAY", "Station " + name + " add azimuth " + azimuth + " extend " + extend );
     NumAzimuth leg = new NumAzimuth( azimuth, extend );
     for ( int k=0; k<mLegs.size(); ++k ) {
       if ( azimuth < mLegs.get(k).mAzimuth ) {
@@ -96,31 +96,62 @@ class NumStation extends NumSurveyPoint
 
   void setAzimuths()
   {
-    int sz= mLegs.size();
+    int sz = mLegs.size();
     if ( sz == 0 ) return;
 
     ArrayList< NumAzimuth > temp = new ArrayList<>();
     NumAzimuth a1 = mLegs.get( 0 );
-    NumAzimuth a3 = mLegs.get( sz-1 );
-    float azimuth = (a1.mAzimuth + a3.mAzimuth + 360)/2; 
+    if ( sz == 1 ) {
+      if ( a1.mAzimuth > 270 ) {
+        temp.add( new NumAzimuth( a1.mAzimuth-360,   a1.mExtend ) );
+        temp.add( new NumAzimuth( a1.mAzimuth-270,   Float.NaN ) );
+        temp.add( new NumAzimuth( a1.mAzimuth-180, - a1.mExtend ) );
+        temp.add( new NumAzimuth( a1.mAzimuth- 90,   Float.NaN ) );
+        temp.add( new NumAzimuth( a1.mAzimuth,       a1.mExtend ) );
+        temp.add( new NumAzimuth( a1.mAzimuth+ 90,   Float.NaN ) );
+      } else if ( a1.mAzimuth > 180 ) {
+        temp.add( new NumAzimuth( a1.mAzimuth-270,   Float.NaN ) );
+        temp.add( new NumAzimuth( a1.mAzimuth-180, - a1.mExtend ) );
+        temp.add( new NumAzimuth( a1.mAzimuth- 90,   Float.NaN ) );
+        temp.add( new NumAzimuth( a1.mAzimuth,       a1.mExtend ) );
+        temp.add( new NumAzimuth( a1.mAzimuth+ 90,   Float.NaN ) );
+        temp.add( new NumAzimuth( a1.mAzimuth+180, - a1.mExtend ) );
+      } else if ( a1.mAzimuth >  90 ) {
+        temp.add( new NumAzimuth( a1.mAzimuth-180, - a1.mExtend ) );
+        temp.add( new NumAzimuth( a1.mAzimuth- 90,   Float.NaN ) );
+        temp.add( new NumAzimuth( a1.mAzimuth,       a1.mExtend ) );
+        temp.add( new NumAzimuth( a1.mAzimuth+ 90,   Float.NaN ) );
+        temp.add( new NumAzimuth( a1.mAzimuth+180, - a1.mExtend ) );
+        temp.add( new NumAzimuth( a1.mAzimuth+270,   Float.NaN ) );
+      } else {
+        temp.add( new NumAzimuth( a1.mAzimuth- 90,   Float.NaN ) );
+        temp.add( new NumAzimuth( a1.mAzimuth,       a1.mExtend ) );
+        temp.add( new NumAzimuth( a1.mAzimuth+ 90,   Float.NaN ) );
+        temp.add( new NumAzimuth( a1.mAzimuth+180, - a1.mExtend ) );
+        temp.add( new NumAzimuth( a1.mAzimuth+270,   Float.NaN ) );
+        temp.add( new NumAzimuth( a1.mAzimuth+360,   a1.mExtend ) );
+      }
+    } else {
+      NumAzimuth a3 = mLegs.get( sz-1 );
+      float azimuth = (a1.mAzimuth + a3.mAzimuth + 360)/2; 
 
-    if ( azimuth > 360 ) { // make sure to start with a negative azimuth
-      temp.add( new NumAzimuth( a3.mAzimuth-360, a3.mExtend ) );
+      if ( azimuth > 360 ) { // make sure to start with a negative azimuth
+        temp.add( new NumAzimuth( a3.mAzimuth-360, a3.mExtend ) );
+      }
+      temp.add( new NumAzimuth( azimuth-360, Float.NaN ) ); // bisecant
+      temp.add( a1 );
+      for (int k=1; k<sz; ++k ) {
+        NumAzimuth a2 = mLegs.get( k );
+        temp.add( new NumAzimuth( (a1.mAzimuth + a2.mAzimuth)/2, Float.NaN ) ); // bisecant
+        temp.add( a2 );
+        a1 = a2;
+      }
+      temp.add( new NumAzimuth( azimuth, 0 ) ); // bisecant (sz-1)..0
+      if ( azimuth < 360 ) {
+        a1 = mLegs.get( 0 );
+        temp.add( new NumAzimuth( a1.mAzimuth+360, a1.mExtend ) );
+      }
     }
-    temp.add( new NumAzimuth( azimuth-360, Float.NaN ) ); // bisecant
-    temp.add( a1 );
-    for (int k=1; k<sz; ++k ) {
-      NumAzimuth a2 = mLegs.get( k );
-      temp.add( new NumAzimuth( (a1.mAzimuth + a2.mAzimuth)/2, Float.NaN ) ); // bisecant
-      temp.add( a2 );
-      a1 = a2;
-    }
-    temp.add( new NumAzimuth( azimuth, 0 ) ); // bisecant (sz-1)..0
-    if ( azimuth < 360 ) {
-      a1 = mLegs.get( 0 );
-      temp.add( new NumAzimuth( a1.mAzimuth+360, a1.mExtend ) );
-    }
-
     mLegs = temp;
     // for ( NumAzimuth a : mLegs ) {
     //   Log.v("DistoX", "Station " + name + " Azimuth " + a.mAzimuth + " extend " + a.mExtend );
@@ -145,19 +176,39 @@ class NumStation extends NumSurveyPoint
 
     if ( mLegs.size() == 0 ) return e;
     NumAzimuth a1 = mLegs.get(0);
+    // if ( mLegs.size() == 1 ) {
+    //   if ( ! Float.isNaN( a1.mExtend ) ) {
+    //     float ret = TDMath.cosd( b - a1.mAzimuth ) * a1.mExtend;
+    //     Log.v("DistoX-SPLAY", name + " compute cosine: legs " + mLegs.size() + " " + b + " " + a1.mAzimuth + " ext " + a1.mExtend + " = " + ret );
+    //     return ret;
+    //   } 
+    //   return e;
+    // }
     for (int k=1; k<mLegs.size(); k++ ) {
       NumAzimuth a2 = mLegs.get(k);
       if ( b >= a1.mAzimuth && b < a2.mAzimuth ) {
         if ( ! Float.isNaN( a2.mExtend ) ) {
           return TDMath.cosd( a2.mAzimuth - b ) * a2.mExtend;
+          // Log.v("DistoX-SPLAY", name + " compute cosine: legs " + mLegs.size() + " " + b + " " + a2.mAzimuth + " ext " + a2.mExtend + " = " + ret );
+          // return ret;
         } else if ( ! Float.isNaN( a1.mExtend ) ) {
           return TDMath.cosd( b - a1.mAzimuth ) * a1.mExtend;
+          // Log.v("DistoX-SPLAY", name + " compute cosine: legs " + mLegs.size() + " " + b + " " + a1.mAzimuth + " ext " + a1.mExtend + " = " + ret );
+          // return ret;
         } else {
           break;
         }
       }
       a1 = a2;
     }
+    // NumAzimuth a2 = mLegs.get(0);;
+    // if ( b >= a1.mAzimuth && b < a2.mAzimuth+360 ) {
+    //   if ( ! Float.isNaN( a2.mExtend ) ) {
+    //     return TDMath.cosd( a2.mAzimuth - b ) * a2.mExtend;
+    //   } else if ( ! Float.isNaN( a1.mExtend ) ) {
+    //     return TDMath.cosd( b - a1.mAzimuth ) * a1.mExtend;
+    //   }
+    // }
     return e;
   }
     

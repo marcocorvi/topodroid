@@ -1109,8 +1109,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_min_shift_message">Maximum shift speed [pxl/step]</string>
   <string name="pref_pointing_title">Pointing tolerance</string>
   <string name="pref_pointing_message">Touch-down/lift-up tolerance for point selection</string>
-  <string name="pref_dash_splay_title">Dash coherence</string>
-  <string name="pref_dash_splay_message">Splays dashed coherently in plan and profile</string>
+  <string name="pref_dash_splay_title">Splay dashing</string>
+  <string name="pref_dash_splay_message">Splay-dash by plan, by profile, or independently</string>
   <string name="pref_vert_splay_title">Splay dash clino-threshold</string>
   <string name="pref_vert_splay_message">Minimum clinof for dashed splays</string>
   <string name="pref_horiz_splay_title">Splay dash azimuth-threshold</string>

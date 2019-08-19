@@ -270,7 +270,7 @@ class TDSetting
   static boolean mBacksightInput = false;   // whether to add backsight fields in shot anual-input dialog
   static float   mSplayVertThrs = 80;
   static boolean mAzimuthManual = false;    // whether to manually set extend / or use reference azimuth
-  static boolean mDashSplay     = true;     // whether dash-splay are coherent between plan and profile
+  static int     mDashSplay     = 0;        // whether dash-splay are plan-type (1), profile-type (2), or independent (0)
   static float   mVertSplay     = 50;
   static float   mHorizSplay    = 60;
   static float   mCosHorizSplay = TDMath.cosd( mHorizSplay );
@@ -879,7 +879,7 @@ class TDSetting
     mPlotShift     = prefs.getBoolean( keyGPlot[ 0], bool(defGPlot[ 0]) ); // DISTOX_PLOT_SHIFT
     mPlotSplit     = prefs.getBoolean( keyGPlot[ 1], bool(defGPlot[ 1]) ); // DISTOX_PLOT_SPLIT
     mSplayVertThrs  = tryFloat( prefs, keyGPlot[ 2],      defGPlot[ 2]  ); // DISTOX_SPLAY_VERT_THRS
-    mDashSplay     = prefs.getBoolean( keyGPlot[ 3], bool(defGPlot[ 3]) ); // DISTOX_DASH_SPLAY
+    mDashSplay      = tryInt( prefs,   keyGPlot[ 3],      defGPlot[ 3] );  // DISTOX_SPLAY_DASH
     mVertSplay      = tryFloat( prefs, keyGPlot[ 4],      defGPlot[ 4] );  // DISTOX_VERT_SPLAY
     mHorizSplay     = tryFloat( prefs, keyGPlot[ 5],      defGPlot[ 5] );  // DISTOX_HORIZ_SPLAY
     mCosHorizSplay = TDMath.cosd( mHorizSplay );  
@@ -946,13 +946,6 @@ class TDSetting
     mPointingRadius = tryInt(   prefs, keyScreen[ 6],      defScreen[ 6] );  // DISTOX_POINTING
     mSplayAlpha     = tryInt(   prefs, keyScreen[ 7],      defScreen[ 7] );  // DISTOX_SPLAY_ALPHA
     BrushManager.setSplayAlpha( mSplayAlpha );
-    // mSplayVertThrs  = tryFloat( prefs, keyScreen[ 7],      defScreen[ 7]  ); // DISTOX_SPLAY_VERT_THRS
-    // mDashSplay     = prefs.getBoolean( keyScreen[ 8], bool(defScreen[ 8]) ); // DISTOX_DASH_SPLAY
-    // mVertSplay      = tryFloat( prefs, keyScreen[ 9],      defScreen[ 9] );  // DISTOX_VERT_SPLAY
-    // mHorizSplay     = tryFloat( prefs, keyScreen[10],      defScreen[10] );  // DISTOX_HORIZ_SPLAY
-    // mCosHorizSplay = TDMath.cosd( mHorizSplay );
-    // mSectionSplay   = tryFloat( prefs, keyScreen[11],      defScreen[11] );  // DISTOX_SECTION_SPLAY
-    // mHThreshold     = tryFloat( prefs, keyScreen[12],      defScreen[12] );  // DISTOX_HTHRESHOLD
 
     String[] keyLine = TDPrefKey.LINE;
     String[] defLine = TDPrefKey.LINEdef;
@@ -1333,8 +1326,8 @@ class TDSetting
       mSplayVertThrs = tryFloatValue( hlp, k, v, def[ 2] );
       if ( mSplayVertThrs <  0 ) { mSplayVertThrs =  0; ret = TDString.ZERO; }
       if ( mSplayVertThrs > 91 ) { mSplayVertThrs = 91; ret = TDString.NINETYONE; }
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_DASH_SPLAY (bool)
-      mDashSplay = tryBooleanValue( hlp, k, v, bool(def[ 3]) );      
+    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_SPLAY_DASH (0,1,2)
+      mDashSplay = tryIntValue( hlp, k, v, def[ 3] );      
     } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_VERT_SPLAY
       mVertSplay   = tryFloatValue( hlp, k, v, def[ 4] );
       if ( mVertSplay <  0 ) { mVertSplay =  0; ret = TDString.ZERO; }
@@ -1853,29 +1846,6 @@ class TDSetting
       if ( mSplayAlpha < 0 ) { mSplayAlpha = 0; ret = Float.toString(mSplayAlpha); }
       if ( mSplayAlpha > 100 ) { mSplayAlpha = 100; ret = Float.toString(mSplayAlpha); }
       BrushManager.setSplayAlpha( mSplayAlpha );
-    // } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_SPLAY_VERT_THRS
-    //   mSplayVertThrs = tryFloatValue( hlp, k, v, def[7] );
-    //   if ( mSplayVertThrs <  0 ) { mSplayVertThrs =  0; ret = TDString.ZERO; }
-    //   if ( mSplayVertThrs > 91 ) { mSplayVertThrs = 91; ret = TDString.NINETYONE; }
-    // } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_DASH_SPLAY (bool)
-    //   mDashSplay = tryBooleanValue( hlp, k, v, bool(def[8]) );      
-    // } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_VERT_SPLAY
-    //   mVertSplay   = tryFloatValue( hlp, k, v, def[9] );
-    //   if ( mVertSplay <  0 ) { mVertSplay =  0; ret = TDString.ZERO; }
-    //   if ( mVertSplay > 91 ) { mVertSplay = 91; ret = TDString.NINETYONE; }
-    // } else if ( k.equals( key[ 10 ] ) ) { // DISTOX_HORIZ_SPLAY
-    //   mHorizSplay  = tryFloatValue( hlp, k, v, def[10] );
-    //   if ( mHorizSplay <  0 ) { mHorizSplay =  0; ret = TDString.ZERO; }
-    //   if ( mHorizSplay > 91 ) { mHorizSplay = 91; ret = TDString.NINETYONE; }
-    //   mCosHorizSplay = TDMath.cosd( mHorizSplay );
-    // } else if ( k.equals( key[ 11 ] ) ) { // DISTOX_SECTION_SPLAY
-    //   mSectionSplay = tryFloatValue( hlp, k, v, def[11] );
-    //   if ( mSectionSplay <  0 ) { mSectionSplay =  0; ret = TDString.ZERO; }
-    //   if ( mSectionSplay > 91 ) { mSectionSplay = 91; ret = TDString.NINETYONE; }
-    // } else if ( k.equals( key[ 12 ] ) ) { // DISTOX_HTHRESHOLD
-    //   mHThreshold = tryFloatValue( hlp, k, v, def[12] );
-    //   if ( mHThreshold <  0 ) { mHThreshold =  0; ret = TDString.ZERO; }
-    //   if ( mHThreshold > 90 ) { mHThreshold = 90; ret = TDString.NINETY; }
     } else {
       TDLog.Error("missing SCREEN key: " + k );
     }
@@ -2437,8 +2407,8 @@ class TDSetting
       pw.printf(Locale.US, "Backup: nr %d, interval %d, clear %c\n", mBackupNumber, mBackupInterval, tf(mBackupsClear) );
       pw.printf(Locale.US, "XSections: shared %c, auto-export %c, point %c\n", tf(mSharedXSections), tf(mAutoXSections), tf(mAutoSectionPt) );
       pw.printf(Locale.US, "Actions: snap %c, curve %c, straight %c %.1f\n", tf(mLineSnap), tf(mLineCurve), tf(mLineStraight), mReduceAngle );
-      pw.printf(Locale.US, "Splay: alpha %d, color %c, coherence %c, vert %.1f, horiz %.1f, section %.1f\n",
-        mSplayAlpha, tf(mSplayColor), tf(mDashSplay), mVertSplay, mHorizSplay, mSectionSplay );
+      pw.printf(Locale.US, "Splay: alpha %d, color %c, splay-dash %d, vert %.1f, horiz %.1f, section %.1f\n",
+        mSplayAlpha, tf(mSplayColor), mDashSplay, mVertSplay, mHorizSplay, mSectionSplay );
       pw.printf(Locale.US, "Accuracy: G %.2f, M %.2f, dip %.2f\n", mAccelerationThr, mMagneticThr, mDipThr );
       // pw.printf(Locale.US, "Sketch: type %d, size %.2f, extrude %.2f\n", mSketchModelType, mSketchSideSize, mDeltaExtrude );
       pw.printf(Locale.US, "Walls: type %d, thr P %.2f E %.2f, close %.2f, step %.2f, concave %.2f\n",

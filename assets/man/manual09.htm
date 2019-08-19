@@ -15,31 +15,6 @@ The <u>projected</u> profile view displays the midline and the splays projected 
 <img src="splay_extend.png"><br><p>
 
 <b>Splays</b><br>
-Splays are displayed with continuous or dashed/dotted line and can have different colors.<br>
-A splay is not shown if the shot is marked for no-display in plan or profile view.<br><p>
-
-In <u>plan</u> view:<br>
-<ul>
-<li>if the inclination of the splay is over the plan-view threshold, the splay is not drawn [default 80&deg;]</li>
-<li>if the splay clino is above the dash clino-threshold, it is dotted (positive clino)
-or dashed (negative clino) [default 50&deg;]</li>
-</ul><br>
-
-In <u>profile</u> view:
-<ul>
-<li>if the splay dash-coherence is checked [default yes], the splay is dash/dotted as in plan view.</li>
-<li>if the angle with the "closest" leg in azimuth is above the dash azimuth-threshold,
-the splay is dotted/dashed [default 60&deg;]</li>
-</ul><br>
-
-For <u>x-sections</u>:
-<ul>
-<li>x-splays (LRUD) are green</li>
-<li>other splays are blue: dark at TO station, light at FROM station</li>
-<li>furthermore they dotted or dashed
-if the angle between the splay and the normal to the x-section plane is below the dash angle-threshold
-[default 60&deg;] (dotted if in the direction of the normal, dashed if opposite).</li>
-</ul><br>
 
 The splay colors are [E/G]
 <ul>
@@ -49,6 +24,30 @@ The splay colors are [E/G]
 <li>v-splay: dark blue (plan), deep blue (profile)</li>
 <li>others: light grey</li>
 </ul><br><p>
+
+It is possible to set a transparency level for splays.<br>
+Splays can be assigned different colors, individually.<br>
+A splay is not shown if the shot is marked for no-display in plan or profile view.<br><p>
+
+If splay dashing [G] is not disabled, they can be displayed with a dashed line.<br>
+If the splay-dashing is set to <i>azimuth</i> the splay is dashed if the 
+angle with the "closest" leg in azimuth is above the dash azimuth-threshold, [default 60&deg;]<br>
+If the splay-dashing is set to <i>clino</i> the splay is dashed if the 
+splay clino is above the dash clino-threshold: dotted (positive clino) and dashed (negative clino).<br>
+If the splay-dashing is set <i>by the view</i> the splayis dashed by the clino in the plan view and 
+by the azimuth in the profile view.<br><p>
+
+Furthermore, in the <u>plan</u> view the splay is not displayed 
+if the inclination of the splay is over the plan-view threshold [default 80&deg;]<br>
+
+For <u>x-sections</u>:
+<ul>
+<li>x-splays (LRUD) are green</li>
+<li>other splays are blue: dark at TO station, light at FROM station</li>
+<li>finally, if the splay-dashint is enabled, they are dotted or dashed
+if the angle between the splay and the normal to the x-section plane is below the dash angle-threshold
+[default 60&deg;] (dotted if in the direction of the normal, dashed if opposite).</li>
+</ul><br>
 
 <b>Stations</b><br>
 The station colors are
