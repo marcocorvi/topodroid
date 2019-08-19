@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-  <!-- TODO string-array name="splayDash">
-     <item name="none">none</item>
-     <item name="plan">clino</item>
-     <item name="profile">azimuth</item>
-     <item name="view">view</item>
-  </string-array -->
+  <string-array name="splayDash">
+     <item name="none">нет</item>
+     <item name="plan">наклон</item>
+     <item name="profile">азимут</item>
+     <item name="view">показать</item>
+  </string-array>
 
-  <!-- TODO string-array name="feedbackMode">
-     <item name="none">none</item>
-     <item name="sound">sound</item>
-     <item name="heptic">haptic</item>
-  </string-array -->
+  <string-array name="feedbackMode">
+     <item name="none">нет</item>
+     <item name="sound">звук</item>
+     <item name="heptic">вибрация</item>
+  </string-array>
 
   <string-array name="canvasLevels">
      <item name="none">никак</item>
