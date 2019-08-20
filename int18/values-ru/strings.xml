@@ -1096,9 +1096,9 @@
   <string name="pref_pointing_message">Допуск касания/подъема для выбора точки</string>
   <string name="pref_dash_splay_title">Сплеи пунктиром</string>
   <string name="pref_dash_splay_message">Отображать сплеи пунктиром на плане и разрезе по одним критериям, или независимо</string>
-  <string name="pref_vert_splay_title">Порог угла сплеев пунктиром на плане</string>
+  <string name="pref_vert_splay_title">Порог наклона сплеев пунктиром на плане</string>
   <string name="pref_vert_splay_message">Сплеи с наклоном больше порогового показаны на плане пунктиром</string>
-  <string name="pref_horiz_splay_title">Порог азимута сплеев пунктиром на разрезе</string>
+  <string name="pref_horiz_splay_title">Порог разницы азимута сплеев пунктиром на разрезе</string>
   <string name="pref_horiz_splay_message">Боковые замеры с разницей азимута к нитке хода больше заданого значения показаны пунктиром</string>
   <string name="pref_section_splay_title">Порог угла сплеев пунктиром на сечении</string>
   <string name="pref_section_splay_message">Боковые замеры с углом к плоскости сечения больше заданого значения показаны пунктиром</string>
