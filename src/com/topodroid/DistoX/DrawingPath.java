@@ -425,7 +425,7 @@ class DrawingPath extends RectF
         return;
       } 
     }
-    if ( TDSetting.mDashSplay == 0 ) {
+    if ( TDSetting.mDashSplay == TDSetting.DASHING_NONE ) {
       mPaint = BrushManager.paintSplayXB;
     } else {
       if (cosine >= 0 && cosine < TDSetting.mCosHorizSplay) {
@@ -467,7 +467,7 @@ class DrawingPath extends RectF
 	return;
       } 
     }
-    if ( TDSetting.mDashSplay == 0 ) {
+    if ( TDSetting.mDashSplay == TDSetting.DASHING_NONE ) {
       mPaint = BrushManager.paintSplayXB;
     } else {
       if (blk.mClino > TDSetting.mVertSplay) {

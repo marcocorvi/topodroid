@@ -1163,13 +1163,13 @@ class DrawingCommandManager
           if ( path.mBlock == null || ( ! path.mBlock.mMultiBad ) ) {
             // path.setPathPaint( paint );
             if ( profile ) {
-              if ( TDSetting.mDashSplay == 1 ) {
+              if ( TDSetting.mDashSplay == TDSetting.DASHING_AZIMUTH ) {
                 path.setSplayPaintPlan( path.mBlock, path.getCosine(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
               } else {
                 path.setSplayPaintProfile( path.mBlock, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
               }
             } else {
-              if ( TDSetting.mDashSplay == 2 ) {
+              if ( TDSetting.mDashSplay == TDSetting.DASHING_CLINO ) {
                 path.setSplayPaintProfile( path.mBlock, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
               } else {
                 path.setSplayPaintPlan( path.mBlock, path.getCosine(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );

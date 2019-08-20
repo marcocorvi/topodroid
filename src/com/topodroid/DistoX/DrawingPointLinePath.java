@@ -151,19 +151,19 @@ class DrawingPointLinePath extends DrawingPath
     for ( LinePoint p = mFirst.mNext; p != null; p = p.mNext ) {
       if ( p == mFirst ) break;
       // Log.v( "DistoX", "[>] " + p.x + " " + p.y );
-      // if ( ++ mSize > 100 ) break;
+      ++ mSize;
     }
     // CHECK;
-    int size = 1;
-    for ( LinePoint p = mLast.mPrev; p != null; p = p.mPrev ) {
-      if ( p == mLast ) break;
-      // Log.v( "DistoX", "[<] " + p.x + " " + p.y );
-      // if ( ++ size > 100 ) break;
-    }
-    if ( size != mSize ) {
-      TDLog.Error( "recount size mismatch " + mSize + " " + size );
-      // throw new Exception("size mismatch");
-    }
+    // int size = 1;
+    // for ( LinePoint p = mLast.mPrev; p != null; p = p.mPrev ) {
+    //   if ( p == mLast ) break;
+    //   // Log.v( "DistoX", "[<] " + p.x + " " + p.y );
+    //   ++ size;
+    // }
+    // if ( size != mSize ) {
+    //   TDLog.Error( "recount size mismatch " + mSize + " " + size );
+    //   // throw new Exception("size mismatch");
+    // }
   }
 
   void landscapeToPortrait()

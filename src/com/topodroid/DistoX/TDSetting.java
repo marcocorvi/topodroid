@@ -33,6 +33,11 @@ class TDSetting
   static final int FEEDBACK_BELL = 1;
   static final int FEEDBACK_VIBRATE = 2;
  
+  static final int DASHING_NONE    = 0;
+  static final int DASHING_CLINO   = 1;
+  static final int DASHING_AZIMUTH = 2;
+  static final int DASHING_VIEW    = 3;
+
   static private String defaultTextSize   = "16";
   static private String defaultButtonSize = TDString.ONE;
 
@@ -270,7 +275,7 @@ class TDSetting
   static boolean mBacksightInput = false;   // whether to add backsight fields in shot anual-input dialog
   static float   mSplayVertThrs = 80;
   static boolean mAzimuthManual = false;    // whether to manually set extend / or use reference azimuth
-  static int     mDashSplay     = 0;        // whether dash-splay are plan-type (1), profile-type (2), or independent (0)
+  static int     mDashSplay     = DASHING_NONE; // whether dash-splay are plan-type (1), profile-type (2), or independent (0)
   static float   mVertSplay     = 50;
   static float   mHorizSplay    = 60;
   static float   mCosHorizSplay = TDMath.cosd( mHorizSplay );

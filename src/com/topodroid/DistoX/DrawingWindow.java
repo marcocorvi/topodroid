@@ -151,12 +151,12 @@ public class DrawingWindow extends ItemDrawer
   private static final int BTN_CONT = 6;      // index of mButton2 continue button (level > normal)
   private static final int BTN_JOIN = 5;      // index of mButton3 join button
   private static final int BTN_REMOVE = 7;    // index of mButton3 remove
-  private static final int BTN_BORDER = 8;    // line border-editing (leve > advanced)
+  private static final int BTN_BORDER = 8;    // line border-editing (level > advanced)
 
   private static final int BTN_SELECT_MODE = 3; // select-mode button
   private static final int BTN_SELECT_PREV = 3; // select-mode button
   private static final int BTN_SELECT_NEXT = 4; // select-mode button
-  private static final int BTN_DELETE      = 7; // select-mode button
+  // private static final int BTN_DELETE      = 7; // select-mode button
 
   private static final int BTN_ERASE_MODE = 5; // erase-mode button
   private static final int BTN_ERASE_SIZE = 6; // erase-size button
@@ -707,13 +707,13 @@ public class DrawingWindow extends ItemDrawer
       dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
       dpath.setCosine( cosine ); // save cosine into path
       if ( PlotInfo.isProfile( type ) ) {
-        if ( TDSetting.mDashSplay == 1 ) {
+        if ( TDSetting.mDashSplay == TDSetting.DASHING_AZIMUTH ) {
           dpath.setSplayPaintPlan( blk, dpath.getCosine(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
         } else {
           dpath.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
         }
       } else {
-        if ( TDSetting.mDashSplay == 2) {
+        if ( TDSetting.mDashSplay == TDSetting.DASHING_CLINO ) {
           dpath.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
         } else {
           dpath.setSplayPaintPlan( blk, dpath.getCosine(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
@@ -1282,7 +1282,7 @@ public class DrawingWindow extends ItemDrawer
       mActivity.setTitle( title );
     }
     TDandroid.setButtonBackground( mButton3[ BTN_JOIN ], bm );
-    TDandroid.setButtonBackground( mButton3[ BTN_DELETE ], (deletable ? mBMdelete_on : mBMdelete_off) );
+    TDandroid.setButtonBackground( mButton3[ BTN_REMOVE ], (deletable ? mBMdelete_on : mBMdelete_off) );
   }
 
   private void setButton3PrevNext( )
@@ -1396,7 +1396,7 @@ public class DrawingWindow extends ItemDrawer
 
   private void setButtonDelete( boolean on ) 
   {
-    TDandroid.setButtonBackground( mButton3[ BTN_DELETE ], (on ? mBMdelete_on : mBMdelete_off) );
+    TDandroid.setButtonBackground( mButton3[ BTN_REMOVE ], (on ? mBMdelete_on : mBMdelete_off) );
   }
 
   private void setButtonSelectSize( int scale )
@@ -1737,6 +1737,7 @@ public class DrawingWindow extends ItemDrawer
     }
     if ( TDLevel.overBasic ) {
       if ( BTN_PLOT   < mButton1.length ) mButton1[BTN_PLOT].setOnLongClickListener( this );
+      // Log.v("DistoX-LongClick", "Remove " + BTN_REMOVE + " " + mButton3.length );
       if ( BTN_REMOVE < mButton3.length ) mButton3[BTN_REMOVE].setOnLongClickListener( this );
     }
  
@@ -2460,14 +2461,14 @@ public class DrawingWindow extends ItemDrawer
       blk.resetFlag( flag );
       // the next is really necessary only if flag || mFlag is FLAG_COMMENTED:
       if ( PlotInfo.isProfile( mType ) ) {
-        if ( TDSetting.mDashSplay == 1 ) {
+        if ( TDSetting.mDashSplay == TDSetting.DASHING_AZIMUTH ) {
           // shot.setSplayPaintPlan( blk, blk.getReducedIntExtend(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
           shot.setSplayPaintPlan( blk, shot.getCosine(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
         } else {
           shot.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
         }
       } else {
-        if ( TDSetting.mDashSplay == 2 ) {
+        if ( TDSetting.mDashSplay == TDSetting.DASHING_CLINO ) {
           shot.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
         } else {
           // shot.setSplayPaintPlan( blk, blk.getReducedIntExtend(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
@@ -2485,14 +2486,14 @@ public class DrawingWindow extends ItemDrawer
       mApp_mData.updateShotLeg( blk.mId, mSid, LegType.NORMAL, false );
       // the next is really necessary only if flag || mFlag is FLAG_COMMENTED:
       if ( PlotInfo.isProfile( mType ) ) {
-        if ( TDSetting.mDashSplay == 1 ) {
+        if ( TDSetting.mDashSplay == TDSetting.DASHING_AZIMUTH ) {
           // shot.setSplayPaintPlan( blk, blk.getReducedIntExtend(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
           shot.setSplayPaintPlan( blk, shot.getCosine(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
         } else {
           shot.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
         }
       } else {
-        if ( TDSetting.mDashSplay == 2 ) {
+        if ( TDSetting.mDashSplay == TDSetting.DASHING_CLINO ) {
           shot.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
         } else {
           // shot.setSplayPaintPlan( blk, blk.getReducedIntExtend(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
@@ -4733,28 +4734,26 @@ public class DrawingWindow extends ItemDrawer
     public boolean onLongClick( View view ) 
     {
       Button b = (Button)view;
-      if ( TDLevel.overAdvanced ) {
-        if ( b == mButton1[ BTN_DOWNLOAD ] ) {
-          if (   TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI
-              && ! mDataDownloader.isDownloading() 
-              && TopoDroidApp.mDData.getDevices().size() > 1 ) {
-            (new DeviceSelectDialog( this, mApp, mDataDownloader, this )).show();
-          } else {
-            mDataDownloader.toggleDownload();
-            setConnectionStatus( mDataDownloader.getStatus() );
-            mDataDownloader.doDataDownload( );
-          }
-        } else if ( b == mButton1[ BTN_DIAL ] ) {
-          if ( TDLevel.overAdvanced && mType == PlotInfo.PLOT_PLAN && TDAzimuth.mFixedExtend == 0 ) {
-            mRotateAzimuth = true;
-            setAzimuthButton();
-          } else {
-            onClick( view );
-          }
+      if ( TDLevel.overAdvanced && b == mButton1[ BTN_DOWNLOAD ] ) {
+        if (   TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI
+            && ! mDataDownloader.isDownloading() 
+            && TopoDroidApp.mDData.getDevices().size() > 1 ) {
+          (new DeviceSelectDialog( this, mApp, mDataDownloader, this )).show();
+        } else {
+          mDataDownloader.toggleDownload();
+          setConnectionStatus( mDataDownloader.getStatus() );
+          mDataDownloader.doDataDownload( );
+        }
+      } else if ( TDLevel.overAdvanced && b == mButton1[ BTN_DIAL ] ) {
+        if ( TDLevel.overAdvanced && mType == PlotInfo.PLOT_PLAN && TDAzimuth.mFixedExtend == 0 ) {
+          mRotateAzimuth = true;
+          setAzimuthButton();
+        } else {
+          onClick( view );
         }
       } else if ( b == mButton1[ BTN_PLOT ] ) {
 	if ( PlotInfo.isSketch2D( mType ) ) {
-          if ( TDLevel.overBasic && mType == PlotInfo.PLOT_EXTENDED ) {
+          if ( /* TDLevel.overBasic && */ mType == PlotInfo.PLOT_EXTENDED ) {
             new DrawingProfileFlipDialog( mActivity, this ).show();
           } else {
             return false; // not consumed
