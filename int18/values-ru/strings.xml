@@ -1094,8 +1094,8 @@
   <string name="pref_min_shift_message">Максимальная скорость сдвига абриса [пикс/шаг]</string>
   <string name="pref_pointing_title">Допуск указания</string>
   <string name="pref_pointing_message">Допуск касания/подъема для выбора точки</string>
-  <string name="pref_dash_splay_title">Боковые замеры пунктиром на плане как на разрезе</string>
-  <string name="pref_dash_splay_message">Боковые замеры показаны пунктиром на плане и разрезе по одинаковым критериям</string>
+  <string name="pref_dash_splay_title">Сплеи пунктиром</string>
+  <string name="pref_dash_splay_message">Отображать сплеи пунктиром на плане и разрезе по одним критериям, или независимо</string>
   <string name="pref_vert_splay_title">Порог угла сплеев пунктиром на плане</string>
   <string name="pref_vert_splay_message">Сплеи с наклоном больше порогового показаны на плане пунктиром</string>
   <string name="pref_horiz_splay_title">Порог азимута сплеев пунктиром на разрезе</string>
