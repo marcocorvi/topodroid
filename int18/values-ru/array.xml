@@ -3,9 +3,9 @@
 <resources>
   <string-array name="splayDash">
      <item name="none">нет</item>
-     <item name="plan">наклон</item>
-     <item name="profile">азимут</item>
-     <item name="view">показать</item>
+     <item name="plan">по наклону</item>
+     <item name="profile">по азимуту</item>
+     <item name="view">по проекции</item>
   </string-array>
 
   <string-array name="feedbackMode">
