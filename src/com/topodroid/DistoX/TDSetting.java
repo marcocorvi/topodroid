@@ -2340,6 +2340,7 @@ class TDSetting
     try {
       FileWriter fw = new FileWriter( file, false ); // true = append
       PrintWriter pw = new PrintWriter( fw, true ); // true = autoflush
+      pw.printf(Locale.US, "TopoDroid v. %s\n", TopoDroidApp.VERSION );
       pw.printf(Locale.US, "Buttons Size %2d %3d\n", mSizeBtns, mSizeButtons);
       pw.printf(Locale.US, "Text Size %3d\n", mTextSize);
       pw.printf(Locale.US, "Keyboard %c, no-cursor %c\n", tf(mKeyboard), tf(mNoCursor) );

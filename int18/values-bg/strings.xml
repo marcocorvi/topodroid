@@ -162,6 +162,7 @@
     <string name="import_title">Импортиране на файл</string>
     <!-- UNUSED string name="import_wait">Импортиране… Моля изчакайте…</string -->
     <string name="import_already">Картировката е вече импортирана</string>
+    <!-- TODO string name="import_bad">Invalid import file</string -->
     <string name="import_none">Няма файлове за импортиране</string>
     <string name="import_failed">Файлът не е импортиран</string>
     <string name="file_not_found">Файлът не е намерен</string>

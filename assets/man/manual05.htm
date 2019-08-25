@@ -1,7 +1,7 @@
 <html><body>
 <h3>[5] CALIBRATION DATA</h3>
 
-The calibration data window displays the list of calibration data. If the calibration has no data, the window is empty but for the top buttons. Each calibration data line contains the following data informations:
+The <u>calibration-data window</u> displays the list of calibration data. If the calibration has no data, the window is empty but for the top buttons. Each calibration data line contains the following data informations:
 <ul style="margin-top=0">
 <li>index: incremental index that identifies the data</li>
 <li>group: number of the group the data belongs to</li>
@@ -21,7 +21,7 @@ The background color:
 <li>brown: saturated data</li>
 <li>gray: deleted data</li>
 <li>red: data with error larger than 1&deg;</li>
-<li>green: data that, row, differ from the first data of the group by more than the "group distance"</li>
+<li>green: data differing from the first group-data by more than the <i>group distance</i></li>
 </ul><br><p>
 
 <h4>ACTIONS</h4>
@@ -34,16 +34,16 @@ The background color:
 <li><img src="btn_toggle.png"> toggle the DistoX calibration mode on and off</li>
 <li><img src="btn_bluetooth.png"> reset BT, or control DistoX remotely</li>
 <li><img src="btn_download.png"> download calibration data from the DistoX</li>
-<li><img src="btn_numbers.png"> divide the calibration data into <a href="page_groups.htm">groups</a> automatically</li>
-<li><img src="btn_compute.png"> <a href="page_calib_coeffs.htm">calibration coefficients</a> computation</li>
+<li><img src="btn_numbers.png"> assign <a href="page_groups.htm">group</a> numbers to the data, or reset the group numbers</li>
+<li><img src="btn_compute.png"> compute the <a href="page_calib_coeffs.htm">calibration coefficients</a></li>
 <li><img src="btn_cover.png"> <a href="page_calib_distrib.htm">direction distribution</a> of the calibration data</li>
 <li><img src="btn_read.png"> read and display the coefficients stored in the DistoX</li>
-<li><img src="btn_write.png"> write the calibration coefficients to the DistoX. Enabled only after the calibration coefficients have been computed. The coefficients can also be written directly from the dialog showing the outcome of the computation. A warning is issued in the data direction coverage is below 95% or the average error is above 0.5&deg;</li>
+<li><img src="btn_write.png"> write the calibration coefficients to the DistoX. Enabled only after the calibration coefficients have been computed. The coefficients can also be written directly from the dialog showing the result of the computation. A warning is issued in the data direction coverage is below 95% or the average error is above 0.5&deg;</li>
 </ul><br><p>
 
 At the moment only on-demand data download is active for the calibration data. The downloaded data are added to the current calibration. Therefore you can take some calibration measurements, download the data, check if you are satisfied with them, if not take further data and download them, and so on until you are happy with your calibration data. Downloaded data can be "disabled" (by setting the group number to "0" (zero); 
 disabled data are not used in the computation of calibration coefficients), or deleted (usually not shown in the list of data).
-Deleted data are not taken into account in the group assignment policy and in the computation of the calibration.<br><p>
+Deleted data are not taken into account in the group-number assignment and in the computation of the calibration.<br><p>
 
 <h4>Bluetooth</h4>
 This button resets the TopoDroid bluetooth connection.<br>
@@ -62,14 +62,14 @@ displayed.<br><p>
 <h4>Warnings</h4>
 <ul style=margin-top=0">
 <li><b>saturated data</b>: data with abnormal magnetic field value. A possible cause of this is the presence of spurious magnetic fields. Saturated data have a red background<li>
-<li><b>zero data</b>: incorrectly received calibration data. The data has zero values, and by default it is not assigned a number, although it is used in computing the groups. Zero data have a pink background</li>
+<li><b>zero data</b>: incorrectly received calibration data. The data has zero values, and by default it is not assigned a number, although it is used in computing the groups. Zero data have a violet background</li>
 </ul><br><p>
 
 <h4>MENUS</h4>
 <ul style="margin-top=0">
 <li><u>Display</u>: whether to display all data including the deleted data</li>
 <li><u>Validate</u>: <a href="page_validation.htm">validation</a> of this calibration with another one</li>
-<li><u>Settings</u>: same as for the calibration window</li>
+<li><u>Settings</u>: same as for the <u>calibration window</u></li>
 <li><u>Help</u></li>
 </ul><br><p>
 

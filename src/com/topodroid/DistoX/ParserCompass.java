@@ -35,6 +35,7 @@ class ParserCompass extends ImportParser
     // Log.v("DistoX", "Parser Compass <" + filename + ">" );
     // mName = survey name is read from the file
     readFile( filename );
+    checkValid();
   }
 
   private boolean isDuplicate( String flag ) { return  ( flag != null && flag.indexOf('L') >= 0 ); }
@@ -171,8 +172,8 @@ class ParserCompass extends ImportParser
     if ( mDate == null ) {
       mDate = TDUtil.currentDate();
     }
-    TDLog.Log( TDLog.LOG_THERION, "ParserCompass shots "+ shots.size() +" splays "+ splays.size()  );
-    // Log.v( TopoDroidApp.TAG, "ParserCompass shots "+ shots.size() + " splays "+ splays.size() );
+    TDLog.Log( TDLog.LOG_THERION, "Parser Compass shots "+ shots.size() +" splays "+ splays.size()  );
+    // Log.v( TopoDroidApp.TAG, "Parser Compass shots "+ shots.size() + " splays "+ splays.size() );
   }
 
   float parseAngleUnit( String unit ) 

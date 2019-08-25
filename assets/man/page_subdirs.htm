@@ -2,7 +2,7 @@
 
 <h4>TopoDroid SUBDIRECTORIES</h4>
 
-Here is some background about how the survey data, the calibration data, and the sketches are stored. You can safely skip the following and the next two sections, and come back to them later if needed.<br><p>
+Here is some background about how the survey data, the calibration data, and the sketches are stored.<br><p>
 
 The app creates its default base directory, named "TopoDroid", in the primary external memory (usually /sdcard). This directory is not removed when you uninstall the app. In this directory the app creates two SQLite databases. The first is "device10.sqlite", where the calibration data, the DistoX informations, and other data are stored. The second is "distox14.sqlite" and stores the surveys data. The app also creates subdirectories for the different types of files. These subdirectories are created only in the "TopoDroid" base directory:
 <ul style="margin-top: 0">
@@ -12,7 +12,6 @@ The app creates its default base directory, named "TopoDroid", in the primary ex
 <li><b>symbol</b>: drawing tools files (points, lines, areas)</li>
 <li>man: user manual translation</li>
 </ul>
-The subdirectory "symbol" contains the drawing tool files.
 "bin" is used to store firmware files, both the factory files included in TopoDroid and the firmware dumps read from a DistoX.<br><p>
 
 The following subdirectories can be created in each working directory (in bold those that are always created):
@@ -40,13 +39,13 @@ The following subdirectories can be created in each working directory (in bold t
 <li><b>tdr</b>: binary sketch files</li>
 <li>th: <i>Therion</i> files (exported surveys)</li>
 <li>th2 for <i>Therion</i> scrap files (saved sketches)</li>
-<li>th3 for 3D model files</li>
+<!-- li>th3 for 3D model files</li -->
 <li>tmp: for temporary files. Any file leftover in this directory can be safely deleted.</li>
 <li>top: <i>PocketTopo</i> files (exported surveys)</li>
 <li>tro: <i>VisualTopo</i> files (exported surveys)</li>
 <li><b>zip</b>: survey ZIP archives (exported and importable)</li>
 </ul>
 Some of these subdirectories are used only to store exported files (cav, cave, csx, dat, dxf, png, svx, th, th2, top, tro). Others are used to store data (tdr, th3, note, photo). 
-The subdirectory "zip" is used to store zipped archives as well to read them and uncompress in TopoDroid. When you want to import a survey made with another program (<i>Therion</i>, <i>Compass</i>, <i>VisualTopo</i>, or <i>PocketTopo</i>) you must place it in the subdirectory "import".<br><p>
+The subdirectory "zip" is used to store zipped archives as well to read them and uncompress in TopoDroid. When you want to import a survey made with another program (<i>Therion</i>, <i>Compass</i>, <i>VisualTopo</i>, <i>Survex</i>, <i>PocketTopo</i>, <i>CaveSniper</i>) you must place it in the subdirectory "import".<br><p>
 
 </body></html>

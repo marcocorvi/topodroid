@@ -162,6 +162,7 @@
 <string name="import_title">Import fichier</string>
 <!-- UNUSED string name="import_wait">Importation de fichier&#8230; Patientez&#8230;</string -->
 <string name="import_already">Relevé déjà importé</string>
+    <!-- TODO string name="import_bad">Invalid import file</string -->
 <string name="import_none">Aucun fichier à importer</string>
 <string name="import_failed">L\'import du fichier a échoué</string>
 <string name="file_not_found">Fichier inexistant</string>

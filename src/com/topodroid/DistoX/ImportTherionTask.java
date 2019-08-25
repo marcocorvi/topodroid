@@ -31,6 +31,7 @@ class ImportTherionTask extends ImportTask
     try {
       DataHelper app_data = TopoDroidApp.mData;
       ParserTherion parser = new ParserTherion( str[0], true ); // apply_declination = true
+      if ( ! parser.isValid() ) return -2L;
       if ( mApp.get() == null ) return -1L;
 
       sid = mApp.get().setSurveyFromName( str[1], SurveyInfo.DATAMODE_NORMAL, false, false ); // IMPORT TH no update, no forward

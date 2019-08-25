@@ -33,6 +33,7 @@ class ParserVisualTopo extends ImportParser
     super( apply_declination );
     mName = extractName( filename );
     readFile( filename );
+    checkValid();
   }
 
   private boolean isDuplicate( String flag )
@@ -237,8 +238,8 @@ class ParserVisualTopo extends ImportParser
       TDLog.Error( "ERROR " + mLineCnt + ": " + line );
       throw new ParserException();
     }
-    TDLog.Log( TDLog.LOG_THERION, "ParserVisualTopo shots "+ shots.size() +" splays "+ splays.size()  );
-    // Log.v( "DistoX", "ParserVisualTopo shots "+ shots.size() + " splays "+ splays.size() );
+    TDLog.Log( TDLog.LOG_THERION, "Parser VisualTopo shots "+ shots.size() +" splays "+ splays.size()  );
+    // Log.v( "DistoX", "Parser VisualTopo shots "+ shots.size() + " splays "+ splays.size() );
   }
 
   // float parseAngleUnit( String unit )

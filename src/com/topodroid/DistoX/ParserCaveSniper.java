@@ -40,6 +40,7 @@ class ParserCaveSniper extends ImportParser
     mDate = TDUtil.currentDate();
     mTeam = "";
     mDeclination = 0;
+    checkValid();
   }
 
   /** read input file
@@ -100,8 +101,8 @@ class ParserCaveSniper extends ImportParser
       TDLog.Error( "ERROR " + mLineCnt + ": " + line );
       throw new ParserException();
     }
-    TDLog.Log( TDLog.LOG_THERION, "ParserCaveSniper shots "+ shots.size() +" splays "+ splays.size()  );
-    // Log.v( TopoDroidApp.TAG, "ParserCaveSniper shots "+ shots.size() + " splays "+ splays.size() );
+    TDLog.Log( TDLog.LOG_THERION, "Parser CaveSniper shots "+ shots.size() +" splays "+ splays.size()  );
+    // Log.v( TopoDroidApp.TAG, "Parser CaveSniper shots "+ shots.size() + " splays "+ splays.size() );
   }
 
 }

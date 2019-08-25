@@ -10,20 +10,25 @@ The dialog shows
 <li>longitude, latitude and geoid altitude. WGS84 ellipsoid altitude in square brackets</li>
 <li>point <b>name</b> and <b>comment</b></li>
 <li>magnetic <b>declination</b> at the point (at the current date)</li>
+</ul><br><p>
+
+Buttons
+<ul>
 <li><b>View</b> the point in a Location app (provided you have one installed)</li>
 <li><b>Convert</b> the position to another reference system (using the app Proj4)</li>
 <li><b>Delete</b> the location record</li>
 </ul>
 
 If the coordinates of the fixed point have been entered manually, they can be edited.
-Coordinates taken with GPS or imported from Mobile Topographer cannot be changed.<br><p>
+Coordinates taken with GPS or imported from <i>MobileTopographer</i> cannot be changed.<br><p>
 
 The orthometric altitude is computed from the ellipsoidic altitude using the geoid model EGM2008.<br><p>
 
 The <b>Convert</b> button computes the point coordinates in another Coordinate Reference System,
-using the app Proj4. The converted coordinates are displayed and stored with the fixed point.<br><p>
+using the app Proj4. The converted coordinates are displayed and stored in the database with the fixed point.<br><p>
 
-The magnetic declination is computed using the World Magnetic Model for 2015-2020.
+The magnetic declination is computed using the World Magnetic Model for 2015-2020 (this will be replaced 
+with WMM 2020-2025 in Jan. 2020).<br>
 Check the <b>save</b> box to set it to the survey.<br><p>
 
 The <b>Save</b> button commits the changes to the database.<br><p>

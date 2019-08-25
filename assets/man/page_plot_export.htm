@@ -5,24 +5,25 @@
 
 Sketches are stored in TopoDroid binary format, and can be exported as
 <ul>
-<li>Therion th2 file</li>
-<li>cSurvey file</li>
+<li>Therion ".th2" file</li>
+<li>cSurvey ".csx" file</li>
 <li>2D DXF</li>
 <li>SVG</li>
 <li>Shapefile</li>
-<li>xtherion image</li>
+<li>xtherion image ".xvi"</li>
 <li>PNG image file</li>
 </ul><br><p>
 
 
-In addition to the <b>Therion</b> export, there
-is an option to automatically save a sketch in Therion format whenever it is closed.<br><p>
+In addition to the export, there
+is an option to automatically save a sketch in one of the supported export formats whenever it is closed.<br><p>
 
-The <b>cSurvey</b> export file contains both the plan and the profile sketches. However it does not has the x-sections. X-sections cannot be exported as cSurvey files, and you need to export as images if you want to use them for postprocessing with cSurvey.<br><p>
+The <b>cSurvey</b> export file contains both the plan and the profile sketches. If the "section" points are defined, it has also the x-sections.
+X-sections are not exported as cSurvey files.<br><p>
 
 The resolution of <b>PNG</b> images is an adjustable setting. However a larger and more detailed image requires more CPU time and may fail due to memory limits. If it fails TopoDroid tries reducing the resolution until it succeeds exporting the sketch as PNG image file.<br><p>
 
-Sketches can be exported as 2D <b>DXF</b> files. The AutoCAD version of the exported DXF files is R12. The DXF export has been tested with VariCAD 2016-1-07 and BricsCAD 3.1.17. It is not guaranteed that can be opened by AutoCAD.<br><p>
+Sketches can be exported as 2D <b>DXF</b> files. The AutoCAD version of the exported DXF files is R12. The DXF export has been tested with LibreCAD. It is not guaranteed that can be opened by AutoCAD.<br><p>
 
 The <b>shapefile</b> export includes stations, shots, and drawing. All the drawing objects are converted to linestring.
 The attribute tables contain the object data (eg, point type, orientationn, etc.). 
@@ -32,14 +33,15 @@ The files comprising a shapefile export are compressed in a zip archive.
 <b>Overview export</b><br>
 Sketches can be exported also from the "Overview Window" in the following formats
 <ul>
-<li>Therion th2 file</li>
+<li>Therion ".th2" file</li>
 <li>2D DXF</li>
 <li>SVG</li>
 <li>Shapefile</li>
+<li>".xvi" file</li>
 </ul>
 <br><p>
 
-The export of the overview window includes all the sketches of the current view (either plan or profile).<br>
+The export of the <u>overview window</u> includes all the sketches of the current view (either plan or profile).<br>
 If there are "section" points, the x-sections are also included.
 <br><p>
 

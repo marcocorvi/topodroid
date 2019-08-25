@@ -3,11 +3,11 @@
 
 <h4>SHOT EDIT</h4>
 
-This dialog is opened by tapping on the shot data in the <i>Shot list</i> window.<br><p>
+This dialog is opened by tapping on a shot data entry in the survey <u>data window</u>.<br><p>
 
 It displays
 <ul>
-<li><b>length, azimuth, inclination</b>. Editable for manually entered shots; not 
+<li><b>length, azimuth, inclination</b>. Editable for manually entered shots; not editable
  for downloaded shots</li>
 <li>differences of acceleration, magnetic field, and magnetic dip from the respective average values. Only for DistoX2 shots</li>
 <li><b>stations</b></li>
@@ -15,7 +15,11 @@ It displays
 <li><b>reverse</b>: swap stations</li>
 <li><b>right arrow</b>: load next leg</li>
 <li>shot <b>comment</b></li>
-<li>profile "extend" choice: "left", "vertical", "right"</li>
+<li>profile "extend" choice: "left", "vertical", "right". "Unset" if none is checked</li>
+</ul><br><p>
+
+Buttons:
+<ul>
 <li><img src="btn_duplicate.png" > "duplicate" flag</li>
 <li><img src="btn_surface.png" > "surface" flag</li>
 <li><img src="btn_comment.png" > "commented" flag</li>
@@ -23,7 +27,8 @@ It displays
 <li><img src="btn_leg_before.png" > the shot belongs to the immediately following leg.</li>
 <li><img src="btn_backleg.png" > the shot is a backsight leg.</li>
 <li><img src="btn_renumber.png" > renumber shots from this leg onward following the current station naming policy. Both stations must have been specified</li>
-<li><img src="btn_splay_group.png" > apply the station change to all splays in the group of the splay shot. It applies only to the splays with same station as the edit shot. Only FROM station must have been specified</li>
+<li><img src="btn_splay_group.png" > apply the station change to all splays in the group of the splay shot. It applies only to the splays with same station as the edit shot.
+Only FROM station must have been specified. (A group of splays is the set of splays between two legs)</li>
 <li>the next button restricts the display of splays to plan only or to profile only</li>
 <li><img src="btn_xsplay.png" > clear X-splay or H/V-splay marks for this shot. X-splays are supported by cSurvey.</li>
 <li><b>OK</b>: save the changes and close the dialog</li>

@@ -12,6 +12,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 // import java.io.File;
 import java.io.IOException;
 import java.io.FileReader;
@@ -20,8 +22,6 @@ import java.util.ArrayList;
 // import java.util.Stack;
 import java.util.HashMap;
 import java.util.regex.Pattern;
-
-// import android.util.Log;
 
 // TODO this class can be made extend ImportParser
 //
@@ -105,6 +105,7 @@ class ParserSurvex extends ImportParser
     // mStates  = new Stack< ParserSurvexState >();
     ParserSurvexState state = new ParserSurvexState("."); // root of the linked list of states
     readFile( filename, state );
+    checkValid();
   }
 
   // private String nextLine( BufferedReader br ) throws IOException // from ImportParser
@@ -506,7 +507,7 @@ class ParserSurvex extends ImportParser
 	        if ( ks > 0 ) {
                   --ks;
                 } else {
-                  TDLog.Error("ParserSurvex: endsurvey out of survey");
+                  TDLog.Error("Parser Survex: endsurvey out of survey");
 	        }
                 // path = path.substring(survey_pos[ks]); // return to previous survey_pos in path
 	      }
@@ -620,8 +621,8 @@ class ParserSurvex extends ImportParser
 
     if ( mDate == null ) mDate = TDUtil.currentDate();
     if ( mTitle == null ) mTitle = TDString.EMPTY;
-    TDLog.Log( TDLog.LOG_THERION, "ParserSurvex shots "+ shots.size() +" splays "+ splays.size() +" fixes "+  fixes.size() );
-    // Log.v( TopoDroidApp.TAG, "ParserSurvex shots "+ shots.size() + " splays "+ splays.size() +" fixes "+  fixes.size() );
+    TDLog.Log( TDLog.LOG_THERION, "Parser Survex shots "+ shots.size() +" splays "+ splays.size() +" fixes "+  fixes.size() );
+    // Log.v( TopoDroidApp.TAG, "Parser Survex shots "+ shots.size() + " splays "+ splays.size() +" fixes "+  fixes.size() );
   }
 
   boolean setJIndices( String[] vals, int vals_len )

@@ -1,10 +1,10 @@
 <html><body>
 <h3>[8] SURVEY INFO WINDOW</h3>
 
-The "survey" menu of the shot window opens the "Survey Info" window. Alternatively you can open it with a
-long tap on the survey entry in the main window.<br><p>
+The <i>survey</i> menu of the <u>data window</u> opens the survey <u>info window</u>. Alternatively you can open it with a
+long tap on the survey entry in the <u>main window</u>.<br><p>
 
-The window displays the survey info:
+The displayed survey info are:
 <ul>
 <li>name (not editable)</li>
 <li>date</li>
@@ -12,7 +12,7 @@ The window displays the survey info:
 <li>magnetic declination (if set)</li>
 <li>survey description</li>
 <li>whether the x-sections are <i>shared</i> among sketches or not</li>
-<li>whether the data-mode is <i>normal</i> or <i>diving</i></li>
+<li>whether the data-mode is <i>normal</i> or <i>diving</i> [T]</li>
 </ul>
 <br>
 
@@ -21,29 +21,30 @@ The allowed values for the magnetic declination is [-360, 360]. Values outside t
 
 <h4>BUTTONS</h4>
 <ul style="margin-top=0">
-<li><img src="btn_note.png">: survey annotations dialog</li>
-<li><img src="btn_info.png"> <a href="page_stat1.htm">survey statistics</a> dialog</li>
+<li><img src="btn_note.png"> survey annotations</li>
+<li><img src="btn_info.png"> survey <a href="page_stat1.htm">statistics</a></li>
 <li><img src="btn_3d.png"> 3D display (need Cave3D app)</li>
-<li><img src="btn_gps.png"> <a href="page_fixed_list.htm">location</a> dialogi [A]</li>
-<li><img src="btn_photo.png"> photos. Tapping one of them you get a dialog to edit the description or delete the photo [A]</li>
-<li><img src="btn_sensor.png"> sensor measurements. Tapping on an entry you get a dialog to edit the comment or delete the measurement [A]</li>
+<li><img src="btn_gps.png"> <a href="page_fixed_list.htm">location</a> [A]</li>
+<li><img src="btn_photo.png"> photo list. Tap on an entry to edit the description or delete the photo [A]</li>
+<li><img src="btn_sensor.png"> sensor measurements. Tap on an entry to edit the comment or delete the measurement [A]</li>
 </ul><br><p>
 
 <h4>MENUS</h4>
 <ul style="margin-top=0">
 <li><u>Close</u> </li>
-<li><u>Export</u> dialog</li>
-<li><u>Rename</u> dialog</li>
-<li><u>Delete</u> dialog</li>
+<li><u>Export</u></li>
+<li><u>Rename</u></li>
+<li><u>Delete</u></li>
 <li><u>Clear color</u>: clear the custom splay colors</li>
-<li><u>Calibration</u>: <a href="page_survey_calib.htm">instruments calibration</a> dialog</li>
-<li><u>Calibr. Check</u>: <a href="page_calib_check.htm">calibration-check</a> shots</li>
-<li><u>Settings</u> (same as the shot window settings)</li>
+<li>Instruments <a href="page_survey_calib.htm">calibration</a></li>
+<li><a href="page_calib_check.htm">Calibration-check</a> shots</li>
+<li><u>Settings</u> (same as the <u>data window</u> settings)</li>
 <li><u>Help</u></li>
 </ul><br><p>
 
 <h4>Export dialog</h4>
-The export dialog has a selection-list of export-formats: <i>Compass</i>, <i>cSurvey</i>, <i>Survex</i>, <i>PocketTopo</i>, <i>Polygon</i>, <i>GHTopo</i>, <i>Grottolf</i>, <i>Therion</i>, <i>Topo</i>, <i>VisualTopo</i>, <i>Walls</i>, and <i>WinKarst</i>. Furthermore the data can be exported as DXF, and CSV text file. If the survey has a fixed station it can be exported as KML, and track file (PLT). This export fails if no the survey station is fixed. Finally you can export a ZIP archive which includes all the data of the survey.<br><p>
+The export dialog has a selection-list of export-formats: <i>Compass</i>, <i>cSurvey</i>, <i>Survex</i>, <i>PocketTopo</i>, <i>Polygon</i>, <i>GHTopo</i>, <i>Grottolf</i>, <i>Therion</i>, <i>Topo</i>, <i>VisualTopo</i>, <i>Walls</i>, and <i>WinKarst</i>. Furthermore the data can be exported as <i>DXF</i>, <i>CSV</i> text file, and <i>shapefile</i>.
+If the survey has a fixed station it can be exported as <i>KML</i>, <i>GeoJSON</i>, and <i>track</i> file (PLT). This export fails if no the survey station is fixed. Finally you can export a <i>ZIP</i> archive which includes all the data of the survey.<br><p>
 
 There are a number of export settings, that control the way TopoDroid writes the survey data in the various export formats.<br><p>
 
@@ -54,7 +55,7 @@ However reference to section "scrap" in the sketch files are not updated until t
 Therefore it is advisable to go over and "open and close" all the sketches.<br><p>
 
 <h4>Delete dialog</h4>
-The delete dialog ask for confirmation to delete the survey. Deleting the survey is unrecoverable: the survey and all associated data (photos, notes, sketch files, etc. ) except the zip archive. Make sure to export a backup ZIP archive before you delete the survey.<br><p>
+The delete dialog ask for confirmation to delete the survey. Deleting the survey is unrecoverable: the survey and all associated data (photos, notes, sketch files, etc. ), except the zip archive, are deleted. Make sure to export a backup <i>ZIP</i> archive before you delete the survey.<br><p>
 
 <a href="manual07.htm">&lt; Shot list</a> |
 <a href="manual09.htm">Sketch window &gt;</a>

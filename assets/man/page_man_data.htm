@@ -3,9 +3,9 @@
 <h4>MANUAL DATA INPUT</h4>
 
 If you do not have a DistoX you can still enter the shot data manually. 
-Tapping the <u>Add</u> button opens the dialog for the shot data input. 
+The <i>Add</i> button opens the dialog for the shot data input. 
 You must enter the station names and the shot data (length, azimuth, and clino).
-The "reverse" button allow to swap the stations, ie, reverse the shot.<br><p>
+The <i>reverse</i> button swaps the stations, ie, reverse the shot.<br><p>
 
 If only the backward fields are filled in (the forward fields are left empty)
 the shot is entered with the backward data.<br><p>
@@ -14,14 +14,18 @@ To add a splay shot enter "." (period) or "-" (dash) in the TO station.
 LRUD can be added to a splay shot, thus providing additional splay shots.
 In this case the LRUD refer to the FROM station.<br><p>
 
-The <u>Save</u> button at the bottom inserts the shot into the survey, and updates the station names incrementing them so that the dialog is ready to input the next shot. The <u>OK</u> button inserts the shot in the survey, and closes
-the dialog.<br><p>
+Buttons:
+<ul>
+<li><b>Save</b> inserts the shot into the survey, and updates the station names incrementing them so that
+the dialog is ready to input the next shot</li>
+<li><b>OK</b> inserts the shot in the survey, and closes the dialog.</li>
+</ul><br><p>
 
 <b>Using Android for the direction</b><br>
-Azimuth and clino can be set using the Android sensors:<br>
-<img src="btn_compass.png" > by the direction of the long side of the device.
+Azimuth and clino can be set using the Android sensors [G]:<br>
+<img src="btn_compass.png" > the reference axis is the direction of the long side of the device.
 A timer (10 s by default) lets you point the device before measuring.<br>
-<img src="btn_photo.png" > by the normal to the display: 
+<img src="btn_photo.png" > the reference axis is the normal to the display: 
 look at the TO station on the screen and start the timer when the station is in the
 middle of the cross-hair.<br><p>
 
@@ -29,11 +33,11 @@ middle of the cross-hair.<br><p>
 If LRUD are specified the respective splay shots are also inserted.
 Additionally you can select whether these refer to the FROM station (default) or to the TO station.<br><p>
 
-If the shot clino is smaller than the v-threshold setting, the LRUD are in a vertical plane:
+If the shot clino is smaller than the <i>v-threshold</i> setting, the LRUD are in a vertical plane:
 U is upwards, D downwards, L horizontal to the left of the shot (i.e., with azimuth that of the shot minus 90&deg;),
 and R horizontal to the right of the shot.<br><p>
 
-If the shot clino is greater than the v-threshold setting, the LRUD are in a horizontal plane:
+If the shot clino is greater than the <i>v-threshold</i> setting, the LRUD are in a horizontal plane:
 L is west, R is east, U is north, and D is south.<br><p>
 
 <b>Units</b><br>

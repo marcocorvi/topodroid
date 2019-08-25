@@ -30,6 +30,7 @@ class ImportVisualTopoTask extends ImportTask
     long sid = 0;
     try {
       ParserVisualTopo parser = new ParserVisualTopo( str[0], true ); // apply_declination = true
+      if ( ! parser.isValid() ) return -2L;
       if ( mApp.get() == null ) return -1L;
       DataHelper app_data = TopoDroidApp.mData;
       if ( app_data.hasSurveyName( parser.mName ) ) {

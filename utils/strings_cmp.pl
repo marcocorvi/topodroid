@@ -208,5 +208,5 @@ print "\nSAME STRINGS $SAME\n";
 
 $missing = ( $TODO + $FIXME ) / $TOTAL;
 
-print "\nTotal $TOTAL UNUSED $UNUSED OK $OK NO $NO TODO $TODO FIXME $FIXME: $missing\n";
+printf "\nTotal %4d UNUSED %3d OK %3d NO %3d TODO %3d FIXME %3d: %.2f\n", $TOTAL, $UNUSED, $OK, $NO, $TODO, $FIXME, $missing;
 

@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import android.content.res.Configuration;
 import android.app.Activity;
 
@@ -44,8 +46,6 @@ import java.io.DataOutputStream;
 // import java.io.EOFException;
 
 // import java.util.Locale;
-
-import android.util.Log;
 
 /**
  */
@@ -2584,9 +2584,9 @@ class DrawingCommandManager
     DrawingPath item = sp.mItem;
     DrawingAreaPath area = (DrawingAreaPath)item;
     LinePoint q0 = sp.mPoint;
-    // // area border: ... --> q2 --> q0 --> q1 --> ...
     LinePoint q1 = area.next( q0 ); // next point on the area border
     LinePoint q2 = area.prev( q0 ); // previous point on the border
+    // area border: ... --> q2 --> q0 --> q1 --> ...
 
     float x = q0.x;
     float y = q0.y;
@@ -2636,6 +2636,13 @@ class DrawingCommandManager
 
     LinePoint pp1 = lmin.next( pp0 );
     LinePoint pp2 = lmin.prev( pp0 );
+    //
+    // lmin: ... ---> pp2 ---> pp0 ---> pp1 --->
+    // area: ...      q2 ----> q0 ----> q1 ...
+    //                qq2 ------------> qq1          FORWARD
+    //
+    // area: ...      q1 <---- q0 <---- q2 ...
+    //                qq2 ------------> qq1          REVERSE
 
     LinePoint pp10 = null; // current point forward
     LinePoint pp20 = null; // current point backward
@@ -2706,6 +2713,11 @@ class DrawingCommandManager
       // TDLog.Debug( "qq1 not null " + qq1.x + " " + qq1.y + " reverse " + reverse );
       // follow line pp10 --> pp1 --> ... using step 1
       // with border qq10 --> qq1 --> ... using step delta1
+      //
+      // lmin: ... ---> pp2 ---> pp0 ---> pp1 --->
+      //                         pp10 --> pp1 --->
+      // area: ...      q2 ----> q0 ----> q1 ...
+      //                qq2 ------------> qq1          FORWARD
 
       for (int c=0; c<cmax; ++c) { // try to move qq1 forward
         // TDLog.Debug( "snap at qq1 " + qq1.x + " " + qq1.y );
@@ -2814,8 +2826,8 @@ class DrawingCommandManager
           area.mFirst = q;
           if ( q.mPrev != null ) { // make sure first has no prev
             q.mPrev.mNext = null;
-            q.mPrev = null;
           }
+          q.mPrev = null;
           // TDLog.Debug( "snap setting area FIRST " + area.mFirst.x + " " + area.mFirst.y );
         }
 
@@ -2832,12 +2844,37 @@ class DrawingCommandManager
           area.mLast = q;
           if ( q.mNext != null ) {
             q.mNext.mPrev = null;
-            q.mNext = null;
           }
+          q.mNext = null;
           // TDLog.Debug( "snap setting area LAST " + area.mLast.x + " " + area.mLast.y );
         }
 
-        next = (reverse)? qq20 : qq10;
+        next = (reverse)? qq20 : qq10; // where to close the snapped portion
+        prev = (reverse)? qq10 : qq20; // where to start the snapped portion
+        // it can be qq10.next == qq20 (forward)
+        if ( next.mNext == prev ) {
+          for ( LinePoint qc = prev; qc != null && qc != next; ) {
+            LinePoint qn = qc.mNext;
+            if ( qn != null ) qn.mPrev = null;
+            qc.mNext = null;
+            qc = qn;
+          }
+          area.mFirst = next;
+          area.mLast  = prev;
+          if ( area.mFirst != null ) {
+            area.mFirst.mNext = area.mLast;
+            area.mFirst.mPrev = null;
+            if ( area.mLast != null ) { 
+              area.mLast.mPrev = area.mFirst;
+              area.mLast.mNext = null;
+            } else { 
+              area.mLast = area.mFirst;
+            }
+          } else { 
+            area.mFirst = area.mLast;
+            if ( area.mFirst != null ) area.mFirst.mNext = area.mFirst.mPrev = null;
+          }
+        }
 
         // insert points pp20 - ... - pp10 (included)
         if ( reverse ) {
@@ -2909,6 +2946,14 @@ class DrawingCommandManager
           }
           if ( area.mLast == null ) area.mLast = q;
         }
+
+
+        // if ( area.mLast == area.mFirst ) { // avoid circular closed border
+        //   area.mLast = area.mLast.mPrev;
+        //   area.mLast.mNext = null;
+        //   area.mFirst.mPrev = null;
+        // }
+
         area.recount(); 
         // TDLog.Debug( "snap new size " + area.size() );
       }

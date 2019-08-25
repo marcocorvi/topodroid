@@ -1799,7 +1799,7 @@ class TDExporter
     String newline = TDSetting.mSurvexEol;
     try {
       TDPath.checkPath( filename );
-      FileWriter fw = new FileWriter( filename );
+      FileWriter  fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
       pw.format("# %s [*] created by TopoDroid v %s%s", TDUtil.getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION, newline );
       pw.format("# %s%s", info.name, newline );
@@ -1807,8 +1807,12 @@ class TDExporter
 	// String f = ( b.mFrom == null )? "" : b.mFrom;
 	// String t = ( b.mTo   == null )? "" : b.mTo;
         pw.format(Locale.US, "%d%c%s%c%s%c", b.mId, sep, b.mFrom, sep, b.mTo, sep );
-        pw.format(Locale.US, "%.3f%c%.2f%c%.2f%c%.2f%c%.2f%c%.2f%c%.2f%s",
-	  b.mLength, sep, b.mBearing, sep, b.mClino, sep, b.mRoll, sep, b.mAcceleration, sep, b.mMagnetic, sep, b.mDip, newline );
+        pw.format(Locale.US, "%.3f%c%.2f%c%.2f%c%.2f%c%.2f%c%.2f%c%.2f%c",
+	  b.mLength, sep, b.mBearing, sep, b.mClino, sep, b.mRoll, sep, b.mAcceleration, sep, b.mMagnetic, sep, b.mDip, sep );
+        String address = b.getAddress();
+        if ( address == null || address.length() == 0 ) address = "-";
+        pw.format(Locale.US, "%d%c%d%c%s%s",
+          b.mTime, sep, b.mShotType, sep, address, newline );
       }
       fw.flush();
       fw.close();

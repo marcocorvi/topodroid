@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 // import java.lang.ref.WeakReference;
 
 import java.util.ArrayList;
@@ -31,6 +33,7 @@ class ImportCompassTask extends ImportTask
     long sid = 0;
     try {
       ParserCompass parser = new ParserCompass( str[0], true ); // apply_declination = true
+      if ( ! parser.isValid() ) return -2L;
       if ( mApp.get() == null ) return -1L;
       DataHelper app_data = TopoDroidApp.mData;
       if ( app_data.hasSurveyName( parser.mName ) ) {

@@ -1,37 +1,36 @@
 <html><body>
 <h3>[12] OVERVIEW WINDOW</h3>
 
-You get into the Overview window from the "OVERVIEW" menu of the Drawing window.
+You get into the <u>overview window</u> from the <i>overview</i> menu of the <u>sketch window</u>.
 <br><p>
 
-The Overview window displays all the sketches together, either in plan or in profile view depending on the view of the Drawing window.
-The overview window can be either in normal mode (canvas shift and zoom), or in measure-mode.<br><p>
+The <u>overview window</u> displays all the sketches together, either in plan or in extended profile view depending on the view of the
+<u>sketch window</u>.
+The <u>overview window</u> can be either in normal mode (canvas shift and zoom), or in measure-mode.<br><p>
 
 <b>BUTTONS</b><br>
 <ul style="margin-top=0">
 <li><img src="btn_measure.png"> toggles the window in "measure mode"</li>
-<li><img src="btn_mode.png"> references dialog, through which you can switch on/off the display of midline, splay shots, station names, metric grid, and scalebar.</li>
-<li><img src="btn_angle.png">  with "polyline" enabled, measure the total length of a polyline traced by tapping the positions of the nodes</li>
+<li><img src="btn_mode.png"> references dialog, through which you can switch on/off the display of midline, splay shots, station names, metric grid, and scalebar.  There is also a checkbox to hide the cave details and show the outline only.</li>
+<li><img src="btn_angle.png">If "angle", you measure the distance and angle between two points. If "polyline", you measure the total length of a polyline traced by tapping the positions of the nodes</li>
 <li><img src="btn_undo.png"> undo: remove the last point of the polyline</li>
 </ul>
 <br><p>
 
-The "display reference" dialog has also a checkbox to hide the cave details and show the outline only.<br><p>
-
 When the window is in <i>measure mode</i> the first button has a bright green color.
-In this mode the drawing can be translated with the side draw (if enabled) and zoomed with the zoom buttoms (if enabled).
+In this mode the drawing can be translated with the side-drag (if enabled) and zoomed with the zoom buttoms (if enabled).
 <br><p>
 
 <h4>Segment measure</h4>
-When the Overview window is in measure-mode you can measure the distance between two points on the canvas.
+When the <u>overview window</u> is in measure-mode you can measure the distance between two points on the canvas.
 To do this you tap first on the first point: this is displayed as a pink circled cross. Next you tap on the
-second point: this is shown with a blue cross and the 2D distance is shown in the title bar, together with the differences along the X and Y axes, and the bearing (plan) or inclination (profile).
+second point: this is shown with a blue cross and the 2D distance is shown in the title bar, together with the differences along the X and Y axes, and the bearing (plan) or inclination (extended profile).
 The distance units is the the sketch grid units (meter, yard, or 2-ft). The angle is in the current angle units (degrees or grad).<br>
-Any further tap changes the second point (and the measures).<br><p>
+Any further tap changes the second point (and the measure values).<br><p>
 
 To end the measure tap on the "measure-mode" button.<br><p>
 
-The distance is computed in the plane of the canvas. In plan view, this is the horizontal distance. In profile view the Y-axis difference is the difference in elevation.<br><p>
+The distance is computed in the plane of the canvas. In plan view, this is the horizontal distance. In extended profile view the Y-axis difference is the difference in elevation.<br><p>
 
 <h4>Polyline measure</h4>
 The "polyline" measure is useful to get an estimate of the "length" of the cave, more sensible than the length of the midline.
@@ -59,10 +58,11 @@ The overview can be exported in the following formats:
 <li>SVG</li>
 <li>DXF</li>
 <li>Shapefile</li>
+<li>xvi</li>
 </ul><br>
 The sketches are mapped to "scraps" in the Therion export.
 Station points are not included automatically in the therion export; only user defined station are added.<br>
-The stations are added automatically to SVG, DXF, and shapefile exports.<br>
+The stations are added automatically to SVG, DXF, shapefile, and xvi exports.<br>
 If there are "section" points, the x-sections are included.
 <br><p>
 

@@ -161,6 +161,7 @@
     <string name="import_title">Importar archivo</string>
     <!-- UNUSED string name="import_wait">Importando archivo, espere&#8230;</string -->
     <string name="import_already">Topografía importada con éxito</string>
+    <!-- TODO string name="import_bad">Invalid import file</string -->
     <string name="import_none">No hay archivo a importar</string>
     <string name="import_failed">Fallo al importar archivo</string>
     <string name="file_not_found">Archivo no encontrado</string>

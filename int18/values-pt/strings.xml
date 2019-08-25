@@ -160,6 +160,7 @@
     <string name="import_title">Importar topo</string>
     <!-- UNUSED string name="import_wait">Importando arquivo &#8230; Por favor aguarde &#8230;</string -->
     <string name="import_already">Topo já importada</string>
+    <!-- TODO string name="import_bad">Invalid import file</string -->
     <string name="import_none">Nenhum arquivo a ser importado</string>
     <string name="import_failed">Importação de arquivo falhou</string>
     <string name="file_not_found">Arquivo não encontrado</string>

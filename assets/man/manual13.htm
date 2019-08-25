@@ -4,21 +4,22 @@ When you are done, export the survey in your favourite format and make a zip arc
 After you have downloaded the zip to your PC and unzipped it, you can complete the cave map with whatever program you are used to.<br><p>
 
 The zip archive contains the command to restore the survey data and other information in the database.
-The zip archive is a complete backup of your survey and its exports. You can use it to transfer the survey to another android.<br><p>
+The zip archive is a complete backup of your survey and its exports. You can use it to transfer the survey to another Android.<br><p>
 
-Survey data, and zip archive, are exported from the "Survey Window".<br>
-Survey sketches are exported from the "Drawing Window" (single sketch) and from the "Overview Window" (all sketches in one file).<br>
+Survey data, and zip archive, are exported from the survey <u>info window</u>.<br>
+Survey sketches are exported from the </u>sketch window</u> (single sketch) and from the <u>overview window</u> (all sketches in one file).<br><p>
+
 File for survey import are searched in the <i>import</i> folder.<br>
 Zip archives for import are searched in the <i>zip</i> folder.<br><p>
 
 <b>Default export formats</b><br>
-TopoDroid has two settings to select a default export format for the survey data and one for the sketches.
+TopoDroid has two settings to set a default export format for the survey data and one for the sketches.
 By default these are both set to "none", ie, no export.
 <br><p>
 
 When the default survey data export format is set, TopoDroid exports the survey data in that format before creating a zip archive, so that the export is included in the archive.<br><p>
 
-When the default sketch export format is set, the sketches are exported in this format whenever they are closed from the "Drawing Window".<br>
+When the default sketch export format is set, the sketches are exported in this format whenever they are closed from the <u>sketch window</u>.<br>
 For cSurvey x-sections are saved as PNG images.<br><p>
 
 <h4>SURVEY IMPORT</h4>
@@ -45,21 +46,21 @@ H/V-splays are treated normally in the exports.<br><p>
 
 <b>Therion</b> (.th)<br>
 Survey data are exported in <i>Therion</i> format, using the data "normal" form.<br>
-Data units are according to the user options.<br>
+Data units follow the user options.<br>
 The team names are listed but the command is commented.<br>
 Station comments and marks (fixed, painted) precede the centerline data.<br>
 X-splays are exported with station "-" (dash), the others with station "." (dot).<br>
 Commented shots are exported under comment (#).<br><p>
 
 Fixed points coordinates (longitude latitude and altitude a.s.l.) are exported commented.
-If the point has custom CRS coordinates, these are exported as well, preceded by the CRS name.<br><p>
+If the point has custom CRS coordinates, these are included as well, preceded by the CRS name.<br><p>
 
-Furthermore "input" of the th2 files and definitions for a map for each scrap are added at the end, but are commented.<br><p>
+Furthermore "input" of the th2 files and definitions of maps for each scrap are added at the end, but are commented.<br><p>
 
 Settings
 <ul>
 <li><u>Therion maps</u>: if enabled the "map" commands are placed before the survey centerline.</li>
-<li><u>LRUD</u>: add LRUD to export</li>
+<li>add <u>LRUD</u> to export</li>
 </ul><p>
 
 Import Therion files must have extension ".th".<br>
@@ -91,9 +92,10 @@ Alphabetic characters are replaces each character with two digits. More precisel
 Import PocketTopo files must have extension either ".top" or ".TOP".<br>
 The "outline" and "profile" sketches are imported.
 <i>PocketTopo</i> uses only a few colors to differentiate line types.
-Therefore a <a href="page_pt_cmap.htm">map</a> from colors to therion_types is used. The line and point types can be through a setting.<br><p>
+Therefore a <a href="page_pt_cmap.htm">mapping</a> from colors to TopoDroid types is used. The mapping can be changed through a setting.<br><p>
 
-It may happen that the imported sketch is not aligned with the survey data. In this case you can shift the sketch in the <i>Sketch</i> window, to fit the centerline.<br><p>
+It may happen that the imported sketch is not aligned with the survey data. In this case you can shift the sketch in the
+<u>sketch window</u>, to fit the centerline.<br><p>
 
 <b>Polygon</b> (.cave)<br>
 TopoDroid can export survey data in <i>Polygon</i> format. 
@@ -110,12 +112,12 @@ leg.<br><p>
 
 <b>Survex</b> (.svx)<br>
 Survey data can be exported as <i>Survex</i> files.<br>
-Data units are according to the user options.<br><p>
+Data units follow the user options.<br><p>
 Import Survex files must have extension ".svx".<br>
 
 Settings:<ul style="margin-top=0">
 <li><u>line termination</u> can be either Unix or Windows</li>
-<li><u>named TO station</u> for splay shots (name = the FROM station with a letter appended)</li>
+<li><u>named TO station</u> for splay shots (the TO name is the FROM station with a letter appended)</li>
 <li>add <u>LRUD</u> to export</li>
 </ul><p>
 
@@ -138,7 +140,7 @@ Data units are 'meters' and 'degrees'.<br><p>
 
 <b>Walls</b> (.srv)<br>
 Survey data can be exported as <i>Walls</i> files (partially tested).<br>
-Data units are according to the user options.<br><p>
+Data units follow the user options.<br><p>
 
 <b>WinKarst</b> (.sur)<br>
 Survey data can be exported as <i>WinKarst</i> files (untested).<br><p>
@@ -146,12 +148,12 @@ Survey data can be exported as <i>WinKarst</i> files (untested).<br><p>
 <b>PLT</b> (.plt)<br>
 Survey data can be exported as track file (<i>OziExplorer</i>) if you have georeferenced a station.
 If the survey contains disjoint pieces, the track file includes all the pieces with a georeferenced station.
-Data are corrected with magnetic declination.<br><p>
+Data are corrected with the magnetic declination.<br><p>
 
 <b>KML</b> (.kml)<br>
 Survey data can be exported as KML file (<i>Keyhole Markup Language</i>) if you have georeferenced at least a station.
 If the survey contains disjoint pieces, the KML export includes all the pieces with a georeferenced station.
-Data are corrected with magnetic declination.<br><p>
+Data are corrected with the magnetic declination.<br><p>
 
 Settings:
 <ul style="margin-top=0">
@@ -164,7 +166,7 @@ Settings:
 Survey data can be exported as GeoJSON file (<i>RFC 7946</i>) if you have georeferenced at least a station.
 Shots are exported as <i>LineString</i>, stations as <i>Point</i>. 
 If the survey contains disjoint pieces, the GeoJSON export includes all the pieces with a georeferenced station.
-Data are corrected with magnetic declination.<br><p>
+Data are corrected with the magnetic declination.<br><p>
 
 Settings:
 <ul style="margin-top=0">
@@ -178,7 +180,7 @@ Settings:
 Survey data can be exported as shapefile if you have georeferenced at least a station.
 There is a shapefile for the stations and one for the shots (both legs and splays).
 If the survey contains disjoint pieces, a shapefile is exported for each pieces with a georeferenced station.
-Data are corrected with magnetic declination.
+Data are corrected with the magnetic declination.
 Each shapefile consists of three files: the data file (shp), the index file (shx), and the attributes file (dbf).
 The files are zip-compressed and the zip is saved in the folder "shp" with extension ".shz".
 <br><p>
@@ -215,6 +217,7 @@ The survey raw data can be exported in CSV format. In this case each record (lin
 <li>"from" and "to" stations</li>
 <li>distance, azimuth, clino, roll</li>
 <li>acceleration, magnetic field, dip</li>
+<li>timestamp, type (DistoX or manual), DistoX-address</li>
 </ul><br>
 
 Settings:
@@ -232,15 +235,14 @@ Survey data are exported as 3D DXF with layers
 <li>legs</li>
 <li>splays</li>
 </ul><br>
-Data are corrected with magnetic declination.<br><p>
+Data are corrected with the magnetic declination.<br><p>
 
 <h4>SKETCH EXPORT</h4>
 
 <b>Therion</b> (.th2)<br>
-<i>Therion</i> is the cave map drafting program of choice for TopoDroid.<br>
-Sketches are exported in Therion format as one sketch per file (when exported from the "Drawing Window")
-or as a file containing all the sketches with the same view, plan or extended, (when exported
-from the "Overview Window"). In the latter there is a scrap for each sketch, and x-section scraps
+Sketches are exported in Therion format as one sketch per file, if exported from the <u>sketch window</u>,
+or as a file containing all the sketches with the same view, plan or extended, if exported
+from the <u>overview window</u>. In the latter there is a scrap for each sketch, and x-section scraps
 are included if the automatic "section" points are enabled.
 <br><p>
 
@@ -285,7 +287,7 @@ Settings:<ul style="margin-top=0">
 the drawing of the section is inserted in the export, at the "section" point</li>
 <li><u>splay endpoints</u></li>
 <li><u>point spacing</u> maximum distance between interpolating points on smooth lines. Default 20 cm</li>
-<li>AutoCAD version: 6 (Acad-9) or 12 (Acad-13). Default "6"</li>
+<li>AutoCAD version: 6 (Acad-9), 12 (Acad-13), or 16 (Acad-16). Default "6"</li>
 </ul><p>
 
 <b>SVG</b> (.svg)<br>

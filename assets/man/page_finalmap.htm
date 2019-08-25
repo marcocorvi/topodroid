@@ -4,8 +4,7 @@
 
 This section describes the use of <i>Therion</i> or <i>cSurvey</i> to draft the final map.<br><p>
 
-You will find, among other things, the survey notes (a text file), the sketch files (Therion th2 files), and the survey Therion th file.  In this file the inclusion of the sketches is written but it is commented.  To get the drawing in the exported PDF files you must uncomment them.  It is a good idea to add a map for each sketch (scrap); actually two maps one for the plan the other for the profile.<br><p>
-
+<b>Therion</b><br>
 If you want to compile the <i>Therion</i> project you must supply a <i>thconfig</i> file which can be as simple as<br>
 <code>
    source my_survey.th
@@ -14,7 +13,15 @@ If you want to compile the <i>Therion</i> project you must supply a <i>thconfig<
 <br>
    export map -proj extended -o my_cave_s.pdf
 </code><br><p>
-  
-Alternatively you may work with <i>cSurvey</i>. Open the csx exported sketch file with <i>cSurvey</i>: you will have the data sheet filled with survey data and the sketches properly aligned in the drawing canvas of <i>cSurvey</i>.<br><p>
+
+You need to have exported the survey data as Therion ".th" file, and the survey sketches as Therion ".th2" files.<br>
+The data file contains commands to input sketch files. However they are commented and you need uncomment them.<br>
+The data file contains commands to define a map for each sketch (scrap). For simple surveys you can leave these commented.<br><p>
+
+Alternatively you can export the sketches as Therion ".xvi" files and retrace them using <i>xtherion</i>.<br><p>
+
+<b>cSurvey</b><br>
+Export the sketch as cSurvey ".csx" file.<br>
+Open the exported file with <i>cSurvey</i>: you will have the data sheet filled with survey data and the sketches properly aligned in the drawing canvas of <i>cSurvey</i>.<br><p>
 
 </body></html>

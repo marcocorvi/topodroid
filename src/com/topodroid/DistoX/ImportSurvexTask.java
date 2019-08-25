@@ -31,6 +31,7 @@ class ImportSurvexTask extends ImportTask
     try {
       DataHelper app_data = TopoDroidApp.mData;
       ParserSurvex parser = new ParserSurvex( str[0], true ); // apply_declination = true
+      if ( ! parser.isValid() ) return -2L;
       if ( mApp.get() == null ) return -1L;
 
       sid = mApp.get().setSurveyFromName( parser.mName, SurveyInfo.DATAMODE_NORMAL, false, false );

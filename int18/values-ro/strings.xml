@@ -162,6 +162,7 @@
     <string name="import_title">Importare cartare</string>
     <!-- UNUSED string name="import_wait">Se importează fișierul &#8230; te rog așteaptă &#8230;</string -->
     <string name="import_already">Cartarea este deja importată</string>
+    <!-- TODO string name="import_bad">Invalid import file</string -->
     <string name="import_none">Nici un fișier de importat</string>
     <string name="import_failed">Importarea fișierului a eșuat</string>
     <string name="file_not_found">Fișierul nu a fost găsit</string>

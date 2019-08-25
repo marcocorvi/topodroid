@@ -4,14 +4,14 @@
 
 When you download data TopoDroid can automatically assign them station names. A repeated measurement is considered a leg shot, the others are splay shots.  If you stick to a convention taking measurements TopoDroid automatic station naming can be very handy. TopoDroid supports a number of conventions to automatically assign stations to shots. You can select the one that fits your habits through the settings.
 <ol>
-<li><b>splays+foreshot</b>. At the "From" station: you take splays first and then forward leg shot(s). This is the default convention.</li>
-<li><b>splays+backshot</b>. At the "To" station: you take splays first and then backward leg shot(s)</li>
-<li><b>Backsight</b>.</li>
-<li><b>tripod</b></li>
-<li><b>magnetic anomaly</b> compensation</li>
-<li><b>foreshot+splays</b>. At the "From" station: you take the forward leg shot(s) first, and then the splays</li>
-<li><b>backshot+splays</b>. At the "To" station: you take backward leg shot(s) first and then splays</li>
-<li><b>TopoRobot</b></li>
+<li><b>splays+foreshot</b>. At the FROM station: you take splays first and then forward leg shots. This is the default convention.</li>
+<li><b>splays+backshot</b>. At the TO station: you take splays first and then backward leg shots</li>
+<li><b>backsight</b></li>
+<li><b>tripod</b> [A]</li>
+<li><b>magnetic anomaly</b> compensation [E]</li>
+<li><b>foreshot+splays</b>. At the FROM station: you take the forward leg shots first, and then the splays</li>
+<li><b>backshot+splays</b>. At the TO station: you take backward leg shots first and then splays</li>
+<li><b>TopoRobot</b> [T]</li>
 </ol><br><p>
 
 Examples of the conventions (shots takes at the same station are grouped in parenthesis):
@@ -37,7 +37,7 @@ The backsight shots are marked "duplicate".<br><p>
 
 <b>Tripod</b> policy<br>
 At station "1" you take splays and then shots to the station "2". Then you move into station "3", take shots to station "2", then splays, then shots
-to station "4". Move to station "5" and so on.<br>
+to station "4". Move to station "5" and so on.<br><p>
 
 <b>Magnetic anomaly compensation</b> [Tester level]<br>
 The magnetic anomaly compensation is done estimating at each station the

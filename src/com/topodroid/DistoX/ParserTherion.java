@@ -27,17 +27,21 @@ import java.util.regex.Pattern;
 // units, calibrate, sd supported quantities:
 //   length tape bearing compass gradient clino counter depth x y z position easting dx northing dy altitude dz
 
-class ParserTherion
+class ParserTherion extends ImportParser
 {
-  // final static private String EMPTY = "";
+  // String mName = null;  // survey name FROM ImportParser
+  // String mDate = null;  // survey date
+  // private String mTeam = TDString.EMPTY;
+  // String mTitle = TDString.EMPTY;
+  // private float   mDeclination = 0.0f; // one-survey declination
+  // private boolean mApplyDeclination = false;
+  // private boolean mValid = false;
+  // protected void checkValid() 
+  // {
+  //   mValid =  ( mName != null && mName.length() > 0 ) && ( mDate != null ) && ( shots.size() > 0 );
+  // }
+  // public boolean isValid() { return mValid; }
 
-  String mName = null;  // survey name
-  String mDate = null;  // survey date
-  private String mTeam = TDString.EMPTY;
-  String mTitle = TDString.EMPTY;
-  private float   mDeclination = 0.0f; // one-survey declination
-  private boolean mApplyDeclination = false;
- 
   // private Stack< ParserTherionState > mStates; // states stack (LIFO)
   // private void pushState( ParserTherionState state )
   // {
@@ -83,55 +87,55 @@ class ParserTherion
 
   private ArrayList< Fix > fixes;
   private ArrayList< Station > stations;
-  private ArrayList< ParserShot > shots;   // centerline shots
-  private ArrayList< ParserShot > splays;  // splay shots
-
-  // public int getShotNumber()    { return shots.size(); }
+  // private ArrayList< ParserShot > shots;   // centerline shots // FROM ImportParser
+  // private ArrayList< ParserShot > splays;  // splay shots
+  // public int getShotNumber()    { return shots.size(); } // FROM ImportParser
   // public int getSplayNumber()   { return splays.size(); }
-
-  ArrayList< ParserShot > getShots()    { return shots; }
-  ArrayList< ParserShot > getSplays()   { return splays; }
+  // ArrayList< ParserShot > getShots()    { return shots; }
+  // ArrayList< ParserShot > getSplays()   { return splays; }
   ArrayList< Station >    getStations() { return stations; }
   ArrayList< Fix >        getFixes()    { return fixes; }
 
   // same as in ImportParser.java
-  String initStation()
-  {
-    for ( ParserShot sh : shots ) {
-      if ( sh.from != null && sh.from.length() > 0 ) return sh.from;
-    }
-    return TDString.ZERO;
-  }
+  // String initStation() // FROM ImportParser
+  // {
+  //   for ( ParserShot sh : shots ) {
+  //     if ( sh.from != null && sh.from.length() > 0 ) return sh.from;
+  //   }
+  //   return TDString.ZERO;
+  // }
 
   float surveyDeclination( ) { return mDeclination; }
   // ---------------------------------------------------------
 
   ParserTherion( String filename, boolean apply_declination ) throws ParserException
   {
+    super( apply_declination );
     fixes    = new ArrayList<>();
     stations = new ArrayList<>();
-    shots    = new ArrayList<>();
-    splays   = new ArrayList<>();
-    // mStates  = new Stack< ParserTherionState >();
-    mApplyDeclination = apply_declination;
+    // shots    = new ArrayList<>(); // FROM ImportParser
+    // splays   = new ArrayList<>();
+    // // mStates  = new Stack< ParserTherionState >();
+    // mApplyDeclination = apply_declination;
     ParserTherionState state = new ParserTherionState(); // root of the linked list of states
     readFile( filename, "", state );
+    checkValid();
   }
 
-  private String nextLine( BufferedReader br ) throws IOException
-  {
-    StringBuilder ret = new StringBuilder();
-    {
-      String line = br.readLine();
-      if ( line == null ) return null; // EOF
-      while ( line != null && line.endsWith( "\\" ) ) {
-        ret.append( line.replace( '\\', ' ' ) ); // FIXME
-        line = br.readLine();
-      }
-      if ( line != null ) ret.append( line );
-    }
-    return ret.toString();
-  }
+  // private String nextLine( BufferedReader br ) throws IOException // FROM ImportParser
+  // {
+  //   StringBuilder ret = new StringBuilder();
+  //   {
+  //     String line = br.readLine();
+  //     if ( line == null ) return null; // EOF
+  //     while ( line != null && line.endsWith( "\\" ) ) {
+  //       ret.append( line.replace( '\\', ' ' ) ); // FIXME
+  //       line = br.readLine();
+  //     }
+  //     if ( line != null ) ret.append( line );
+  //   }
+  //   return ret.toString();
+  // }
 
   private String extractStationName( String fullname )
   {
@@ -147,8 +151,7 @@ class ParserTherion
    * @param basepath survey pathname base
    * @param state    state of the parser
    */
-  private void readFile( String filename, String basepath, ParserTherionState state )
-                       throws ParserException
+  private void readFile( String filename, String basepath, ParserTherionState state ) throws ParserException
   {
     String path = basepath;   // survey pathname(s)
     int ks = 0;               // survey index
@@ -698,7 +701,7 @@ class ParserTherion
 	      if ( ks > 0 ) {
                 --ks;
               } else {
-                TDLog.Error("ParserTherion: endsurvey out of survey");
+                TDLog.Error("Parser Therion: endsurvey out of survey");
 	      }
               path = path.substring(survey_pos[ks]); // return to previous survey_pos in path
               state.in_survey = ( ks > 0 );
@@ -714,8 +717,8 @@ class ParserTherion
     if ( mDate == null ) {
       mDate = TDUtil.currentDate();
     }
-    TDLog.Log( TDLog.LOG_THERION, "ParserTherion shots "+ shots.size() +" splays "+ splays.size() +" fixes "+  fixes.size() );
-    // Log.v( TopoDroidApp.TAG, "ParserTherion shots "+ shots.size() + " splays "+ splays.size() +" fixes "+  fixes.size() );
+    TDLog.Log( TDLog.LOG_THERION, "Parser Therion shots "+ shots.size() +" splays "+ splays.size() +" fixes "+  fixes.size() );
+    // Log.v( TopoDroidApp.TAG, "Parser Therion shots "+ shots.size() + " splays "+ splays.size() +" fixes "+  fixes.size() );
   }
 
 

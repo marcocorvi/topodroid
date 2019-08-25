@@ -164,6 +164,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="import_title">Import pomiaru</string>
     <!-- UNUSED string name="import_wait">Importing file &#8230; please wait &#8230;</string -->
     <string name="import_already">Pomiar już zaimportowany</string>
+    <!-- TODO string name="import_bad">Invalid import file</string -->
     <string name="import_none">Brak pliku do importu</string>
     <string name="import_failed">Błąd importu pliku</string>
     <string name="file_not_found">File not found</string>

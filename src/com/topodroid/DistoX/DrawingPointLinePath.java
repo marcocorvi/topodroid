@@ -14,6 +14,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 // import android.graphics.Canvas;
 // import android.graphics.Paint;
 import android.graphics.Path;
@@ -24,9 +26,6 @@ import android.graphics.Path;
 // import java.util.List;
 import java.util.ArrayList;
 import java.io.PrintWriter;
-
-// used by Log.e
-// import android.util.Log;
 
 /**
  */
@@ -148,15 +147,17 @@ class DrawingPointLinePath extends DrawingPath
       return;
     }
     mSize = 1;
+    if ( mFirst.mPrev != null ) { // make sure mFirst has no prev
+      mFirst.mPrev.mNext = null;
+      mFirst.mPrev = null;
+    }
     for ( LinePoint p = mFirst.mNext; p != null; p = p.mNext ) {
-      if ( p == mFirst ) break;
-      // Log.v( "DistoX", "[>] " + p.x + " " + p.y );
       ++ mSize;
+      if ( p.mNext == mFirst ) p.mNext = null; // make sure we don't come back to mFirst
     }
     // CHECK;
     // int size = 1;
-    // for ( LinePoint p = mLast.mPrev; p != null; p = p.mPrev ) {
-    //   if ( p == mLast ) break;
+    // for ( LinePoint p = mLast.mPrev; p != null && p != mLast; p = p.mPrev ) {
     //   // Log.v( "DistoX", "[<] " + p.x + " " + p.y );
     //   ++ size;
     // }
@@ -500,7 +501,7 @@ class DrawingPointLinePath extends DrawingPath
     left = right  = lp.x;
     top  = bottom = lp.y;
     mPath.moveTo( lp.x, lp.y );
-    for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
+    for ( lp = lp.mNext; lp != null && lp != mFirst; lp = lp.mNext ) {
       if ( lp.has_cp ) {
         mPath.cubicTo( lp.x1, lp.y1, lp.x2, lp.y2, lp.x, lp.y );
       } else {
@@ -508,6 +509,7 @@ class DrawingPointLinePath extends DrawingPath
       }
       if ( lp.x < left ) { left = lp.x; } else if ( lp.x > right  ) { right  = lp.x; }
       if ( lp.y < top  ) { top  = lp.y; } else if ( lp.y > bottom ) { bottom = lp.y; }
+      // if ( lp == mLast ) break; // FIXME-AREA-SNAP mLast should have mNext ====  null
     }
     if ( mClosed ) mPath.close();
     computeUnitNormal();

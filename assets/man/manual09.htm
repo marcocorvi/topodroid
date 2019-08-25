@@ -1,7 +1,7 @@
 <html><body>
 <h3>[9] SKETCH WINDOW</h3>
 
-The Sketch button of the "Shot data" window opens the dialog with the list of sketches, besides the "New Sketch" button. Tap on this button to create a new survey sketch.<br><p>
+The <i>sketch</i> button of the <u>data window</u> opens the dialog with the list of sketches, besides the <i>New Sketch</i> button. Tap on this button to create a new survey sketch.<br><p>
 
 Each sketch is made of two sketch files: one for the plan view, the other for the profile view (either extended or projected). X-sections have only one file. A new sketch is opened in the plan view. Afterwards the sketch dialog shows two columns, one for the plan, the other for the profile view, and you can choose which one to open from.<br><p>
 
@@ -25,7 +25,7 @@ The splay colors are [E/G]
 <li>others: light grey</li>
 </ul><br><p>
 
-It is possible to set a transparency level for splays.<br>
+It is possible to set a transparency level for splays [G].<br>
 Splays can be assigned different colors, individually.<br>
 A splay is not shown if the shot is marked for no-display in plan or profile view.<br><p>
 
@@ -44,7 +44,7 @@ For <u>x-sections</u>:
 <ul>
 <li>x-splays (LRUD) are green</li>
 <li>other splays are blue: dark at TO station, light at FROM station</li>
-<li>finally, if the splay-dashint is enabled, they are dotted or dashed
+<li>finally, if splay-dashing is enabled, they are dotted or dashed
 if the angle between the splay and the normal to the x-section plane is below the dash angle-threshold
 [default 60&deg;] (dotted if in the direction of the normal, dashed if opposite).</li>
 </ul><br>
@@ -59,21 +59,22 @@ The station colors are
 </ul><br><p>
 
 <b>Interaction modes</b><br>
-The sketch window has four interaction modes:
+The <u>sketch window</u> has four interaction modes:
 <ul style="margin-top=0">
-<li><b>move</b>, the default: you can shift the canvas, and zoom in/out. If the "fixed references" box in the references dialog is set, shifts affect only the drawings [level experimental]</li>
-<li><b>draw</b>: in this mode you add iconic symbols (points, including labels), and trace lines and areas (closed regions filled with a color).</li>
+<li><b>move</b>: you can shift the canvas, and zoom in/out. If the "fixed references" box in the references dialog is set, shifts affect only the drawings [T]</li>
+<li><b>draw</b>: in this mode you add iconic symbols (points, including labels), and trace lines and areas (closed regions filled with a color or a pattern).</li>
 <li><b>erase</b>: to erase items, and lines/areas, or portions of them, from the sketch.</li>
 <li><b>edit</b> [A]: for pointwise changes and item properties editing, including item deleting.</li>
 </ul><br><p>
 
 Shift and zoom are possible even in <b>draw</b> and in <b>erase</b> mode using two fingers.
-Zoom controls can be enabled (either temporarily or permanently). If temporary, they show up when you tap at the bottom of the canvas in the middle.
-If "side-drag" is enabled, the sketch can be shifted by "dragging" it from the left, right and bottom sides of the canvas.<br><p>
+If "side-drag" is enabled, the sketch can be shifted by "dragging" it from the left, right and bottom sides of the canvas.
+Zoom controls can be enabled (either temporarily or permanently). If temporary, they show up when you tap at the bottom
+of the canvas in the middle.<br><p>
 
 
 <h4>BUTTONS</h4>
-The modes are represented by the three green buttons on the left: <u>draw</u>, <u>erase</u>, and <u>edit</u>. When one of them is "on" the relative button has a bright green color. Otherwise the mode is "move".<br><p>
+The modes are represented by the three green buttons on the left: <i>draw</i>, <i>erase</i>, and <i>edit</i>. When one of them is "on" the relative button has a bright green color. If none is on the mode is <i>move</i>.<br><p>
 
 When a green button is "on", a long tap on it, opens the dialog to edit the settings relevant to the mode of the button.<br><p>
 
@@ -82,11 +83,13 @@ When a green button is "on", a long tap on it, opens the dialog to edit the sett
 
 The remaining buttons differ by the mode. In the <b>move</b> mode they are
 <ul style="margin-top=0">
-<li><img src="btn_download.png"> data <u>Download</u>. The last download shots are bluish to help distinguish them from the others. If no DistoX is selected, this button is hidden.</li>
+<li><img src="btn_download.png"> data <i>download</i>.  If no DistoX is selected, this button is hidden.
+The last download shots can be highlighted blue to help distinguish them from the others [G].
+</li>
 <li><img src="btn_bluetooth.png"> <a href="page_bluetooth.htm">Bluetooth</a> reset/controls</li>
 <li><img src="btn_note.png"> survey <a href="page_survey_notes.htm">notes</a></li>
 <li><img src="btn_mode.png"> drawing <a href="page_drawing_refs.htm">references</a>: legs, splays, stations, metric grid, scalebar, and sketch outline.</li>
-<li><img src="btn_plan.png"> <u>Plan/Profile</u> switch. (<u>splay-display mode</u>, for x-sections)</li>
+<li><img src="btn_plan.png"> <i>plan/profile</i> switch. <i>Splay-display mode</i>, for x-sections</li>
 <li><img src="btn_azimuth.png"> <a href="page_azimuth.htm">"extend" reference</a></li>
 </ul><br><p>
 
@@ -95,27 +98,27 @@ The <b>draw</b> mode has four buttons besides the green ones:
 <li><img src="btn_undo.png"> removes the last items you have drawn, one at a time.</li>
 <li><img src="btn_redo.png"> puts the removed item back in the sketch, one at a time. The list of removed items is emptied when you draw something new. Pointwise editing actions may also affect the list of redo.</li>
 <li><img src="btn_tools.png"> <a href="page_tools_recent.htm">Drawing tool</a> picker</li>
-<li><img src="btn_cont.png"> Line <u>joining</u> or continuing</li>
+<li><img src="btn_cont.png"> Line <i>joining</i> or continuing</li>
 </ul><br><p>
 
 The <b>erase</b> mode has three buttons besides the green ones:
 <ul style="margin-top=0">
-<li><img src="btn_undo.png"> <u>Undo</u></li>
-<li><img src="btn_redo.png"> <u>Redo</u></li>
-<li><img src="btn_erase.png"> limit the eraser to one class among points, lines or areas</li>
+<li><img src="btn_undo.png"> <i>undo</i></li>
+<li><img src="btn_redo.png"> <i>redo</i></li>
+<li><img src="btn_erase.png"> type of erasable items: all, points, lines, areas</li>
 <li><img src="btn_size.png"> eraser size [S, M, L]</li>
 </ul><br><p>
 
 The <b>edit</b> [A] mode has, besides the green buttons:
 <ul style="margin-top=0">
-<li><img src="btn_edit.png"> limits the selectable items [all, points, lines, areas, shots, stations]</li>
+<li><img src="btn_edit.png"> type of selectable items: all, points, lines, areas, shots, stations</li>
 <li><img src="btn_size.png"> size of the selection tool [S, M, L]</li>
 <li><img src="btn_point.png"> point-wise and special actions</li>
 <li><img src="btn_item.png"> item properties edit</li>
 <li><img src="btn_delete.png"> delete the item from the sketch (it asks for confirmation, and can be "undone").</li>
 <li><img src="btn_range.png"> range selection: either pointwise or local (only for lines and areas).</li>
 </ul><br><p>
-When there are selected items the first two buttons become <u>previous/next</u> navigation buttons in the set
+When there are selected items the first two buttons become <i>previous/next</i> navigation buttons in the set
 of the selected items.<br><p>
 
 The buttons are somewhat different for x-section sketches.
@@ -140,12 +143,12 @@ graphically editable by sliding the finger across the display.  The button turns
 <ul style="margin-top=0">
 <li><u>Switch</u> to another sketch or <u>close</u>.</li>
 <li><u>Export</u>: the sketch can be <a href="page_plot_export.htm">exported</a> as <i>Therion</i> th2, <i>cSurvey</i>, PNG, DXF, SVG, and xvi. All exports generate two files, one for plan the other for profile, except cSurvey, which has both in one file.</li>
-<li><a href="page_stat2.htm">Statistics</a>. For x-sections this is just the section area.</li>
+<li><a href="page_stat2.htm">Statistics</a>. For x-sections this computes the section area.</li>
 <li><u>Reload</u> the sketch from a <a href="page_backup.htm">backup copy</a>.</li>
 <li><u>Zoom-fit</u>: dialog to fit the sketch into the screen, and to select the portrait or landscape presentation</li>
-<li><u>Rename/Delete/Split</u> the sketch. Deleted sketches can be recovered ("recover" menu in shot window)</li>
+<li><u>Rename/Delete/Split</u> the sketch. Deleted sketches can be recovered (<i>recover</i> menu in <u>data window</u>)</li>
 <li><a href="page_tools.htm">drawing tools</a> palette</li>
-<li><u>Overview</u> window, showing all the survey sketches together. [Only for plan and extended profiles]</li>
+<li><u>Overview window</u>, showing all the survey sketches together. [Only for plan and extended profiles]</li>
 <li><u>Settings</u></li>
 <li><u>Help</u></li>
 </ul><br><p>
@@ -154,9 +157,9 @@ graphically editable by sliding the finger across the display.  The button turns
 <h4>SKETCH SETTINGS</h4>
 <ul style="margin-top=0">
   <li><i>Drawing tool picker</i>: most-recent [default], or list, or grid, or triple-grid view</li>
-  <li><i>Recent tools number</i> to display in the recent tool picker [3, <u>4</u>, 5, or 6]</li>
+  <li><i>Recent tools number</i> to display in the recent tool picker [3, 4, 5, or 6]</li>
   <li><i>Side drag</i>: enable panning by side-drag</li>
-  <li><i>Zoom controls</i>: specifies whether and how zoom controls are displayed on multitouch devices [B]. The zoom controls can be hidden, displayed only for a short interval when the user tap the lower part of the screen in the middle, or shown all the time</li>
+  <li><i>Zoom controls</i>: specifies how zoom controls are displayed on multitouch devices [B]. The zoom controls can be hidden, displayed only for a short interval when the user tap the lower part of the screen in the middle, or shown all the time</li>
   <li><i>Horizontal x-sections</i> leg-clino threshold for horizontal x-sections (profile view).</li>
   <li><i>Midline check</i>: check if all the legs are attached to the midline [disabled]</li>
   <li><i>Extend check</i>: check if all the legs have the "extend" defined [enabled]</li>
@@ -201,28 +204,29 @@ graphically editable by sliding the finger across the display.  The button turns
 <i>sketch shift/scale</i>, 
 <i>sketch split/merge</i>,
 <i>Leg verticality threshold (over threshold LRUD become WENS)</i>,
-<i>splay dashing coherently</i>,
 <i>saved stations coloring</i>,
 <i>minimum angle of corners when a line is streightened</i>
 <i>Bezier interpolation accuracy, and corner threshold</i>,
 <i>Line simplification distance, length, and buffer zone</i>,
 <i>Pointwise actions flags (Line/Area snap, Smooth/Straighten segment, multiselection)</i>,
-<i>Splay dashing (coherence, plan minimum clino, profile and x-section minimum angles)</i>,
+<i>Splay dashing (mode, clino threshold, azimuth thresholds)</i>,
 <i>Backup number and interval</i>,
 <i>Backup clearing menu</i>,
 <i>auto x-section in exports (csx, svg, dxf, xvi)</i>
 <i>Auto-walls settings</i>.<br><p>
 
 <h4>Sketch cache</h4>
-Once opened the sketches are kept in memory, in a cache. This speeds up switching between the shot-list window and the sketch window, as the sketch do not need to be read from file. The sketch cache is cleared when the survey is closed.<br><p>
+Once opened the sketches are kept in memory, in a cache. This speeds up switching between the <u>data window</u>
+and the <u>sketch window</u>, as the sketch do not need to be read from file.
+The sketch cache is cleared when the survey is closed.<br><p>
 
 <h4>Sketch file format</h4>
-Each sketch is saved to file whenever it is modified, or when the sketch window changes to a different view.
+Each sketch is saved to file whenever it is modified, or when the <u>sketch window</u> changes to a different view.
 For performance TopoDroid saves the sketches in a binary format.<br><p>
 
 <h4>Point selection [A]</h4>
 To do some editing you must select a point: either a point item, a line/area point, a station, or a shot midpoint.<br>
-To this aim you tap near the point you want. However if there are several points close where you tap, they are all selected, but only one of them is actively being edited. You change the "active" point among the selected set with the <u>Previous</u> and <u>Next</u> buttons.<br><p>
+To this aim you tap near the point you want. However if there are several points close where you tap, they are all selected, but only one of them is being edited. You change the "edit" point among the selected set with the <i>previous/next</i> buttons.<br><p>
 
 <h4>Line style</h4>
 TopoDroid has five line styles. With the normal style [default] the lines are drawn as polylines. With the fine style the polyline segments are shorter, while with the coarse style they are longer. In the fourth style lines are interpolated replacing the segments with cubic Bezier curves (splines). These segments pass through the two endpoints and have two control points used define the curvature.
@@ -230,7 +234,7 @@ With the fifth line style the traced lines are simplified using a point-weeding 
 If you export the drawing in DXF with AutoCAD version 6 do not use splines because they get exported as polylines.<br><p>
 
 <h4>Line joining</h4>
-The <u>join</u> button is a multi-state button.
+The <i>join</i> button is a multi-state button.
 <ul>
 <li><i>off</i>: the lines of the current type cannot be joined</li>
 <li><i>no</i>: the current type line will not be joined</li>

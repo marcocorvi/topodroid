@@ -160,6 +160,7 @@
     <string name="import_title">Importazione file</string>
     <!-- UNUSED string name="import_wait">Importazione file&#8230; attendi&#8230;</string -->
     <string name="import_already">Rilievo già presente</string>
+    <!-- TODO string name="import_bad">Invalid import file</string -->
     <string name="import_none">Nessun file da importare</string>
     <string name="import_failed">Importazione file fallita</string>
     <string name="file_not_found">File non trovato</string>

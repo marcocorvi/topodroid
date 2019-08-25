@@ -161,6 +161,7 @@
     <string name="import_title">Import mapovania</string>
      <!-- UNUSED string name="import_wait">Importing file &#8230; please wait &#8230;</string -->
     <string name="import_already">Mapovanie bolo už importované</string>
+    <!-- TODO string name="import_bad">Invalid import file</string -->
     <string name="import_none">Žiadny súbor na import</string>
     <string name="import_failed">Nepodarilo sa importovať súbor</string>
     <string name="file_not_found">Nenašiel sa žiadny súbor</string>

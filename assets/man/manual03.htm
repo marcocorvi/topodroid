@@ -1,9 +1,9 @@
 <html><body>
 <h3>[3] DEVICE WINDOW</h3>
 
-Before surveying you need to connect and pair the DistoX with the Android and calibrate it. Tap the <u>DistoX</u> button from the Main windows to open the Device window. The list of known DistoX devices is shown in the middle. TopoDroid works with one DistoX at a time. To select it tap on its entry in the list. The name of the selected DistoX is shown at the top, just below the buttons. If no DistoX is selected, there is a red message saying "Device not selected".<br><p>
+Before surveying you need to connect and pair the DistoX with the Android and calibrate it. Tap the <i>DistoX</i> button in the <u>main window</u> to open the Device window. The list of known DistoX devices is shown in the middle. TopoDroid works with one DistoX at a time. To select it tap on its entry in the list. The name of the selected DistoX is shown at the top, just below the buttons. If no DistoX is selected, there is a red message saying "Device not selected".<br><p>
 
-If the DistoX list is empty, your DistoX needs to be connected and paired with the Android. This can be done with TopoDroid (<u>Scan</u> and <u>Pair</u> menus) or with the <i>Settings</i> app.<br><p>
+If the DistoX list is empty, your DistoX needs to be connected and paired with the Android. This can be done with TopoDroid (<i>Scan</i> and <i>Pair</i> menus) or with the <i>Settings</i> app.<br><p>
 
 <b>DistoX nickname</b><br>
 By default TopoDroid uses the BT address as name for a DistoX. The DistoXes can be given nicknames to distinguish among several devices more easily.<br><p>
@@ -28,11 +28,11 @@ By default TopoDroid uses the BT address as name for a DistoX. The DistoXes can 
 
 <h4>MENUS</h4>
 <ul style="margin-top=0">
-<li><u>Scan</u> for new DistoX devices [*]. You might have to try two or three times before the DistoX is found.</li>
-<li><u>Pair</u> the active DistoX with the Android, if not already paired [*]</li>
-<li><u>Disconnect</u> clears the active device (the DistoX remains paired)</li>
-<li>Dump and upload <a href="page_firmware.htm">firmwares</a> to the DistoX2 [*]</li>
-<li>Display log of DistoX packets</li>
+<li><u>Scan</u> for new DistoX devices [N,*]. You might have to try two or three times before the DistoX is found</li>
+<li><u>Pair</u> the active DistoX with the Android, if not already paired [N,*]</li>
+<li><u>Disconnect</u> clears the active device (the DistoX remains paired) [A]</li>
+<li>Dump and upload <a href="page_firmware.htm">firmwares</a> to the DistoX2 [E,*]</li>
+<li>Display log of DistoX packets [T]</li>
 <li><u>Settings</u></li>
 <li><u>Help</u></li>
 </ul><br>
@@ -43,7 +43,7 @@ By default TopoDroid uses the BT address as name for a DistoX. The DistoXes can 
 <li><i>Connection mode</i>: either stay connected to the DistoX to <a href="page_download.htm">download shot data</a> as soon as they are taken, or download the shots in burst, "on-demand". The "multi" mode is like "on-demand" mode, but a long-tap of the button lets you switch DistoX. The connection mode applies only to data: other DistoX functions use a one-shot query mode [default "on-demand"]</li>
 <li><i>Auto reconnect</i>: automatically reconnect if the connection is lost in "continuous" data download-mode [default "no"]</li>
 <li><i>Number of new data</i>: get the number of new data before downloading them (on-demand mode) [default "no"]</li>
-<li><i>Socket</i> type: either normal or "insecure" [default "normal"]</li>
+<li><i>Socket</i> type: either normal or "insecure" [default is device-dependent]</li>
 <li><i>Z6-workaround</i> Fixes a download timeout error on a Z6 phone, and possibly other devices. It is safe to leave this enabled [default "on"]</li>
 <li><i>Auto pairing</i>: whether TopoDroid should try to pair with the DistoX selected from a scan [default "no"]</li>
 </ul><br><p>

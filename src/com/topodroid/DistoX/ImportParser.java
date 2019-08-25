@@ -30,6 +30,7 @@ class ImportParser
   String mTitle = TDString.EMPTY;
   float  mDeclination = 0.0f; // one-survey declination
   protected boolean mApplyDeclination = false;
+  protected boolean mValid = false;  // whether the parser is valid
 
   protected ArrayList< ParserShot > shots;   // centerline shots
   protected ArrayList< ParserShot > splays;  // splay shots
@@ -39,6 +40,13 @@ class ImportParser
 
   ArrayList< ParserShot > getShots() { return shots; }
   ArrayList< ParserShot > getSplays() { return splays; }
+
+  protected void checkValid() 
+  {
+    mValid =  ( mName != null && mName.length() > 0 ) && ( mDate != null ) && ( shots.size() > 0 );
+  }
+
+  public boolean isValid() { return mValid; }
 
   String initStation()
   {

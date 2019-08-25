@@ -165,6 +165,7 @@
     <string name="import_title">Daten Importieren</string>
     <!-- UNUSED string name="import_wait">Importieren&#8230; bitte warten&#8230;</string -->
     <string name="import_already">Vermessung bereits importiert</string>
+    <!-- TODO string name="import_bad">Invalid import file</string -->
     <string name="import_none">Keine Daten importiert</string>
     <string name="import_failed">Import fehlgeschlagen</string>
     <string name="file_not_found">Datei nicht gefunden</string>

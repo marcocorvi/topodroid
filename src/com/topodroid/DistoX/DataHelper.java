@@ -149,7 +149,8 @@ class DataHelper extends DataSetObservable
       "extend", "flag", "leg", "comment", "type", "millis", "color", "stretch" // 9 .. 16
     };
   static private String[] mShotRawDataFields =
-    { "id", "fStation", "tStation", "distance", "bearing", "clino", "roll", "acceleration", "magnetic", "dip"
+    { "id", "fStation", "tStation", "distance", "bearing", "clino", "roll", "acceleration", "magnetic", "dip",
+      "type", "millis", "address"
     };
 
   static final private String[] mPlotFieldsFull =
@@ -232,6 +233,9 @@ class DataHelper extends DataSetObservable
      blk.mAcceleration = (float)( cursor.getDouble(7) );
      blk.mMagnetic     = (float)( cursor.getDouble(8) );
      blk.mDip          = (float)( cursor.getDouble(9) );
+     blk.mShotType     = (int)(  cursor.getLong(10) );
+     blk.mTime         = (long)( cursor.getLong(11) );
+     blk.setAddress( cursor.getString(12) );
    }
 
    private void fillBlock( long sid, DBlock blk, Cursor cursor )

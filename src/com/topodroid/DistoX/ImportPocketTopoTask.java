@@ -29,6 +29,7 @@ class ImportPocketTopoTask extends ImportTask
     try {
       // import PocketTopo (only data for the first trip)
       ParserPocketTopo parser = new ParserPocketTopo( str[0], str[1], true ); // apply_declination = true
+      if ( ! parser.isValid() ) return -2L;
       if ( mApp.get() == null ) return -1L;
       DataHelper app_data = TopoDroidApp.mData;
       if ( app_data.hasSurveyName( parser.mName ) ) {

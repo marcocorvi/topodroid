@@ -162,6 +162,7 @@
     <string name="import_title">Felmérés importálása</string>
     <!-- UNUSED string name="import_wait">Importing file &#8230; please wait &#8230;</string -->
     <string name="import_already">A felmérés már importálva</string>
+    <!-- TODO string name="import_bad">Invalid import file</string -->
     <string name="import_none">Nincs importálható fájl</string>
     <string name="import_failed">Fájl importálása nem sikerült</string>
     <string name="file_not_found">Fájl nem található</string>

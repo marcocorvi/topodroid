@@ -2,37 +2,39 @@
 
 <h4>NEW SURVEY</h4>
 
-This dialog is opened tapping the <u>Add</u> button in the <i>Main</i> window.<br><p>
+This dialog is opened from the <i>Add</i> button in the <u>main window</u>.<br><p>
 
 Information for the new survey:
 <ul>
-<li><b>name</b></li>
-<li><b>date</b></li>
-<li><b>team</b></li>
-<li><b>initial station</b></li>
-<li>magnetic <b>declination</b></li>
-<li>survey <b>description</b></li>
-<li>at-station <b>x-sections</b></li>
-<li>diving <b>data-mode</b> [T]</li>
+<li><i>name</i></li>
+<li><i>date</i></li>
+<li><i>team</i></li>
+<li><i>initial station</i></li>
+<li>magnetic <i>declination</i></li>
+<li>survey <i>description</i></li>
+<li>at-station <i>x-sections</i>, shared or private</li>
+<li>diving <i>data-mode</i> [T]</li>
 </ul>
 <br><p>
 
-The <b>name</b> is mandatory. It must be unique in the database. The survey names are used to list surveys in the main window and TopoDroid distinguishes surveys by their name (although each survey has a unique numerical id in the database).<br>
+The <i>name</i> is mandatory. It must be unique in the database. The survey names are used to list surveys in the
+<u>main window</u> and TopoDroid distinguishes surveys by their name (although each survey has a unique numerical id in the database).<br>
 <b>The name of the survey cannot contain the character '/' (slash), which is the pathname separator.</b><br><p>
 
-The <b>date</b> is written with format "yyyy.mm.dd". For example January 6, 2015 is "2015.01.06". It is preset to the current date.<br><p>
+The <i>date</i> is written with format "yyyy.mm.dd". For example January 6, 2015 is "2015.01.06". It is preset to the current date.<br><p>
 
-<b>Team</b> and <b>description</b> are empty (unless you have set a default team in the app settings). They can safely be left so, although it is a good practice to take the time to fill them.<br><p>
+<i>Team</i> and <i>description</i> are empty (unless you have set a default team in the app settings). They can safely be left so, although it is a good practice to take the time to fill them.<br><p>
 
-The <b>magnetic declination</b> is unset by default. If you know it you can enter it here, otherwise you can look it up in the web after you have found the coordinates of a fixed point (say, the cave entrance) with the GPS [A].
+The <i>magnetic declination</i> is unset by default. If you know it you can enter it here, otherwise you can look it up in the web after you have found the coordinates of a fixed point (say, the cave entrance) with the GPS [A].
 The accepted range of values is [-360, 360]. Any value outside this interval is considered as "unset".<br><p>
 
-At-station <b>x-sections</b> can be either shared among the survey sketches, or private to each sketch.
+At-station <i>x-sections</i> can be either shared among the survey sketches, or private to each sketch.
 This choice must be made when the survey is created and cannot be modified later because
 it affects the existing sketches.<br><p>
 
-<b>Save</b>: the new survey name is added to the database.<br>
-<b>Open</b>: saves and starts the <i>Shot list</i> activity immediately.<br><p>
+<b>Buttons</b><br>
+<i>Save</i>: the new survey name is added to the database.<br>
+<i>Open</i>: saves and starts the <i>Shot list</i> activity immediately.<br><p>
 
 <b>Diving data-mode</b><br>
 The diving data-mode is an experimental feature.

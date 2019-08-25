@@ -49,6 +49,7 @@ class ParserPocketTopo extends ImportParser
     // TDLog.Log( TDLog.LOG_PTOPO, "PocketTopo parser " + surveyname );
     mName     = surveyname.replace(".top", "");
     readPocketTopoFile( filename );
+    checkValid();
   }
 
   private void readPocketTopoFile( String filename ) throws ParserException

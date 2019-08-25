@@ -162,6 +162,7 @@
     <string name="import_title">测量导入</string>
     <!-- UNUSED string name="import_wait">Importing file &#8230; please wait &#8230;</string -->
     <string name="import_already">测量已导入</string>
+    <!-- TODO string name="import_bad">Invalid import file</string -->
     <string name="import_none">无文件输入</string>
     <string name="import_failed">文件导入失败</string>
     <string name="file_not_found">未发现文件</string>
