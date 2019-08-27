@@ -42,7 +42,7 @@ class DrawingStationDialog extends MyDialog
     // private TextView mHiddenLabel;
     // private TextView mCoords;
     private Button mBtnOK;
-    private Button mBtnSet;
+    private Button mBtnCurrent;
     private Button mBtnBarrier;
     private Button mBtnHidden;
     private CheckBox mCbSplaysOn;
@@ -88,7 +88,7 @@ class DrawingStationDialog extends MyDialog
       mApp      = app;
       mStation  = station;
       mPath     = path;
-      mStationName = mStation.name();
+      mStationName = mStation.getName();
       mIsBarrier = is_barrier; 
       mIsHidden  = is_hidden; 
       // mGlobalXSections = global_xsections;
@@ -114,10 +114,10 @@ class DrawingStationDialog extends MyDialog
       mBtnHidden = (Button) findViewById(R.id.btn_hidden );
       mCbSplaysOn  = (CheckBox) findViewById(R.id.btn_splays_on );
       mCbSplaysOff = (CheckBox) findViewById(R.id.btn_splays_off );
-      mBtnOK     = (Button) findViewById(R.id.btn_ok);
-      mBtnSet    = (Button) findViewById(R.id.btn_set);
-      mBtnSaved = (Button) findViewById(R.id.btn_saved);
-      mBtnCancel = (Button) findViewById(R.id.btn_cancel);
+      mBtnOK       = (Button) findViewById(R.id.btn_ok);
+      mBtnCurrent  = (Button) findViewById(R.id.btn_set);
+      mBtnSaved    = (Button) findViewById(R.id.btn_saved);
+      mBtnCancel   = (Button) findViewById(R.id.btn_cancel);
 
       mBtnXSection  = (Button) findViewById(R.id.btn_xsection );
       mCBhorizontal  = (CheckBox) findViewById(R.id.cb_horizontal );
@@ -148,7 +148,7 @@ class DrawingStationDialog extends MyDialog
       mClino   = 0;
       if ( mParent.isAnySection() ) {
         mBtnOK.setVisibility( View.GONE );
-        mBtnSet.setVisibility( View.GONE );
+        mBtnCurrent.setVisibility( View.GONE );
         mBtnBarrier.setVisibility( View.GONE );
         mBtnHidden.setVisibility( View.GONE );
         mBarrierLabel.setVisibility( View.GONE );
@@ -178,7 +178,7 @@ class DrawingStationDialog extends MyDialog
           }
           mBtnOK.setOnClickListener( this );
         }
-        mBtnSet.setOnClickListener( this );
+        mBtnCurrent.setOnClickListener( this );
         mCbSplaysOn.setOnClickListener( this );
         mCbSplaysOff.setOnClickListener( this );
 	mCbSplaysOn.setChecked( mParent.isStationSplaysOn( mStationName ) );
@@ -343,8 +343,8 @@ class DrawingStationDialog extends MyDialog
         return;
       } else if ( b == mBtnCancel ) {
         /* nothing */
-      } else if ( b == mBtnSet ) {
-        mParent.setCurrentStationName( mStationName );
+      } else if ( b == mBtnCurrent ) {
+        mParent.setCurrentStationName( mStationName, mStation );
       } else if ( b == mBtnBarrier ) {
         mParent.toggleStationBarrier( mStationName, mIsBarrier );
       } else if ( b == mBtnHidden ) {

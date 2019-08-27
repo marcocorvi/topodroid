@@ -945,7 +945,7 @@ class DrawingIO
       // if ( TDSetting.mAutoStations ) {
       //   synchronized( stations ) {
       //     for ( DrawingStationName st : stations ) {
-      //       NumStation station = st.station();
+      //       NumStation station = st.getNumStation();
       //       if ( station != null && station.barriered() ) continue;
       //       if ( bbox.left > st.cx || bbox.right  < st.cx ) continue;
       //       if ( bbox.top  > st.cy || bbox.bottom < st.cy ) continue;
@@ -1017,7 +1017,7 @@ class DrawingIO
       if ( TDSetting.mAutoStations ) {
         synchronized( stations ) {
           for ( DrawingStationName st : stations ) {
-            NumStation station = st.station();
+            NumStation station = st.getNumStation();
             if ( station != null && station.barriered() ) continue;
             if ( bbox.left > st.cx || bbox.right  < st.cx ) continue;
             if ( bbox.top  > st.cy || bbox.bottom < st.cy ) continue;
@@ -1203,7 +1203,7 @@ class DrawingIO
       if ( TDSetting.mAutoStations ) {
         synchronized( stations ) {
           for ( DrawingStationName st : stations ) {
-            NumStation station = st.station();
+            NumStation station = st.getNumStation();
             if ( station != null && station.barriered() ) continue;
             // FIXME if station is in the convex hull (bbox) of the lines
             if ( bbox.left > st.cx || bbox.right  < st.cx ) continue;
@@ -1221,7 +1221,7 @@ class DrawingIO
               float x = st.cx * th;
               float y = - st.cy * th;
               th *= DrawingUtil.SCALE_FIX;
-              List< DBlock > blks = dh.selectSplaysAt( sid, st.name(), false );
+              List< DBlock > blks = dh.selectSplaysAt( sid, st.getName(), false );
               if ( type == PlotInfo.PLOT_PLAN ) {
                 for ( DBlock blk : blks ) {
                   float h = blk.mLength * TDMath.cosd( blk.mClino ) * th;
@@ -1418,7 +1418,7 @@ class DrawingIO
           // if ( TDSetting.mAutoStations ) {
           //   synchronized( stations ) {
           //     for ( DrawingStationName st : stations ) {
-          //       NumStation station = st.station();
+          //       NumStation station = st.getNumStation();
           //       if ( station != null && station.barriered() ) continue;
           //       // FIXME if station is in the convex hull (bbox) of the lines
           //       if ( bbox.left > st.cx || bbox.right  < st.cx ) continue;

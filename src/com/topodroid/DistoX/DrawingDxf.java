@@ -1076,8 +1076,8 @@ class DrawingDxf
 
           if ( path.mType == DrawingPath.DRAWING_PATH_STATION )
           {
-            DrawingStationPath st = (DrawingStationPath)path;
-            handle = printText( pw5, handle, st.name(), (st.cx+xoff) * scale, -(st.cy+yoff) * scale,
+            DrawingStationPath sp = (DrawingStationPath)path;
+            handle = printText( pw5, handle, sp.name(), (sp.cx+xoff) * scale, -(sp.cy+yoff) * scale,
                                 0, LABEL_SCALE, "STATION", style_dejavu, xoff, yoff );
           } 
           else if ( path.mType == DrawingPath.DRAWING_PATH_LINE )
@@ -1124,10 +1124,10 @@ class DrawingDxf
         StringWriter sw6 = new StringWriter();
         PrintWriter pw6  = new PrintWriter(sw6);
         if ( TDSetting.mAutoStations ) {
-          for ( DrawingStationName name : plot.getStations() ) { // auto-stations
-            handle = toDxf( pw6, handle, name, scale, xoff+1.0f, yoff-1.0f );
-	    float len = 2.0f + name.name().length() * 5.0f; // FIXME fonts ?
-            handle = printLine( pw6,scale,handle,"STATION",name.cx+xoff, -name.cy+yoff,name.cx+xoff+len, -name.cy+yoff );
+          for ( DrawingStationName st : plot.getStations() ) { // auto-stations
+            handle = toDxf( pw6, handle, st, scale, xoff+1.0f, yoff-1.0f );
+	    float len = 2.0f + st.getName().length() * 5.0f; // FIXME fonts ?
+            handle = printLine( pw6,scale,handle,"STATION", xoff+st.cx, yoff-st.cy, xoff+st.cx+len, yoff-st.cy );
           }
           out.write( sw6.getBuffer().toString() );
           out.flush();
@@ -1154,14 +1154,14 @@ class DrawingDxf
   static private int toDxf( PrintWriter pw, int handle, DrawingStationName sn, float scale, float xoff, float yoff )
   { // FIXME point scale factor is 0.3
     if ( sn == null ) return handle;
-    return printText( pw, handle, sn.name(),  (sn.cx+xoff)*scale, -(sn.cy+yoff)*scale, 0,
+    return printText( pw, handle, sn.getName(),  (sn.cx+xoff)*scale, -(sn.cy+yoff)*scale, 0,
                         STATION_SCALE, "STATION", style_dejavu, xoff, yoff );
   }
 
-  static private int toDxf( PrintWriter pw, int handle, DrawingStationPath st, float scale, float xoff, float yoff )
+  static private int toDxf( PrintWriter pw, int handle, DrawingStationPath sp, float scale, float xoff, float yoff )
   { // FIXME point scale factor is 0.3
-    if ( st == null ) return handle;
-    return printText( pw, handle, st.name(),  (st.cx+xoff)*scale, -(st.cy+yoff)*scale, 0,
+    if ( sp == null ) return handle;
+    return printText( pw, handle, sp.name(),  (sp.cx+xoff)*scale, -(sp.cy+yoff)*scale, 0,
                         STATION_SCALE, "STATION", style_dejavu, xoff, yoff );
   }
 

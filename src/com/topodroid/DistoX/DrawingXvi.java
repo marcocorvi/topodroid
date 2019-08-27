@@ -259,14 +259,14 @@ class DrawingXvi
     }
   }
 
-  static private void toXvi( PrintWriter pw, DrawingStationName name, float xoff, float yoff )
+  static private void toXvi( PrintWriter pw, DrawingStationName st, float xoff, float yoff )
   {
-    pw.format(Locale.US, "  { %.2f %.2f %s }\n", TDSetting.mToTherion*(xoff+name.cx), TDSetting.mToTherion*(yoff-name.cy), name.name() );
+    pw.format(Locale.US, "  { %.2f %.2f %s }\n", TDSetting.mToTherion*(xoff+st.cx), TDSetting.mToTherion*(yoff-st.cy), st.getName() );
   }
 
-  static private void toXvi( PrintWriter pw, DrawingStationPath st, float xoff, float yoff )
+  static private void toXvi( PrintWriter pw, DrawingStationPath sp, float xoff, float yoff )
   {
-    pw.format(Locale.US, "  { %.2f %.2f %s }\n", TDSetting.mToTherion*(xoff+st.cx), TDSetting.mToTherion*(yoff-st.cy), st.name() );
+    pw.format(Locale.US, "  { %.2f %.2f %s }\n", TDSetting.mToTherion*(xoff+sp.cx), TDSetting.mToTherion*(yoff-sp.cy), sp.name() );
   }
 
   static private void toXviPointLine( PrintWriter pw, DrawingPointLinePath lp, String color, float xoff, float yoff, boolean closed )

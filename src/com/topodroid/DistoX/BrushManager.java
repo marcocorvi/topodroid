@@ -133,6 +133,7 @@ class BrushManager
   static Paint fixedGrid100Paint  = null;
   static Paint fixedStationPaint  = null;
   static Paint fixedStationSavedPaint   = null;
+  static Paint fixedStationActivePaint  = null;
   static Paint fixedStationBarrierPaint = null;
   static Paint fixedStationHiddenPaint  = null;
   static Paint labelPaint  = null;
@@ -272,6 +273,7 @@ class BrushManager
       fixedGrid100Paint = makePaint( TDColor.LIGHT_GRID,  WIDTH_FIXED, Paint.Style.STROKE);
       fixedStationPaint = makePaint( TDColor.REDDISH,     WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
       fixedStationSavedPaint   = makePaint( TDColor.ORANGE, WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
+      fixedStationActivePaint  = makePaint( TDColor.LIGHT_GREEN, WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
       fixedStationBarrierPaint = makePaint( TDColor.FULL_RED, WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
       fixedStationHiddenPaint  = makePaint( 0xFF9966ff,  WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
       labelPaint = makePaint( TDColor.WHITE, WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
@@ -310,6 +312,7 @@ class BrushManager
     if ( labelPaint != null )               labelPaint.setTextSize( TDSetting.mLabelSize );
     if ( fixedStationPaint != null )        fixedStationPaint.setTextSize( TDSetting.mStationSize );
     if ( fixedStationSavedPaint != null )   fixedStationSavedPaint.setTextSize( TDSetting.mStationSize );
+    if ( fixedStationActivePaint != null )  fixedStationActivePaint.setTextSize( TDSetting.mStationSize );
     if ( fixedStationBarrierPaint != null ) fixedStationBarrierPaint.setTextSize( TDSetting.mStationSize );
     if ( fixedStationHiddenPaint != null )  fixedStationHiddenPaint.setTextSize( TDSetting.mStationSize );
     if ( duplicateStationPaint != null )    duplicateStationPaint.setTextSize( TDSetting.mStationSize );

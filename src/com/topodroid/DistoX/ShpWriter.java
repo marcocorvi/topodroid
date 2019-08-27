@@ -799,17 +799,17 @@ class ShpStation extends ShpObject
     // Log.v("DistoX", "POINTZ done headers");
 
     int cnt = 0;
-    for ( DrawingStationName pt : pts ) {
+    for ( DrawingStationName st : pts ) {
       int offset = 50 + cnt * shpRecLen; 
       writeShpRecordHeader( cnt, shpRecLen );
       shpBuffer.order(ByteOrder.LITTLE_ENDIAN);   
       shpBuffer.putInt( SHP_POINT );
-      // Log.v("DistoX", "POINT station " + cnt + ": " + pt.e + " " + pt.s + " " + pt.v + " offset " + offset );
-      shpBuffer.putDouble( x0+scale*pt.cx );
-      shpBuffer.putDouble( y0-scale*pt.cy );
+      // Log.v("DistoX", "POINT station " + cnt + ": " + st.e + " " + st.s + " " + st.v + " offset " + offset );
+      shpBuffer.putDouble( x0+scale*st.cx );
+      shpBuffer.putDouble( y0-scale*st.cy );
 
       writeShxRecord( offset, shpRecLen );
-      fields[0] = pt.name();
+      fields[0] = st.getName();
       writeDBaseRecord( n_fld, fields, flens );
       ++cnt;
     }
@@ -828,11 +828,11 @@ class ShpStation extends ShpObject
       xmin = xmax = ymin = ymax = zmin = zmax = 0.0;
       return;
     }
-    DrawingStationName pt = pts.get(0);
-    initBBox( x0+scale*pt.cx, y0-scale*pt.cy );
+    DrawingStationName st = pts.get(0);
+    initBBox( x0+scale*st.cx, y0-scale*st.cy );
     for ( int k=pts.size() - 1; k>0; --k ) {
-      pt = pts.get(k);
-      updateBBox( x0+scale*pt.cx, y0-scale*pt.cy );
+      st = pts.get(k);
+      updateBBox( x0+scale*st.cx, y0-scale*st.cy );
     }
   }
 }

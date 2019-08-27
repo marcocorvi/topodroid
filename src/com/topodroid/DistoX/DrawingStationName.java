@@ -83,8 +83,8 @@ class DrawingStationName extends DrawingPointPath
     makeStraightPath( 0, 0, 2*TDSetting.mStationSize*mName.length(), 0, cx, cy );
   }
 
-  String name() { return mName; }
-  NumStation station() { return mStation; }
+  String getName() { return mName; }
+  NumStation getNumStation() { return mStation; }
 
   // @implements IDrawingLink
   public float getLinkX() { return cx; }

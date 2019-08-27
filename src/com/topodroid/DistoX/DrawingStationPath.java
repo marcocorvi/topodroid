@@ -76,7 +76,7 @@ class DrawingStationPath extends DrawingPath
     // mYpos = st.cy;
     cx = st.cx;  // st.cx : scene coords
     cy = st.cy;
-    mName = st.name(); // N.B. st.name is not null
+    mName = st.getName(); // N.B. st.getName() is not null
 
     mScale = DrawingPointPath.SCALE_NONE; // scale
     // mPath = null;

@@ -1112,8 +1112,7 @@ public class DrawingWindow extends ItemDrawer
       // N.B. this is where TDInstance.xsections is necessary: to decide which xsections to check for stations
       //      could use PlotInfo.isXSectionPrivate and PlotInfo.getXSectionParent
       List< PlotInfo > xsections = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotInfo.PLOT_X_SECTION, parent );
-      List< CurrentStation > saved = null;
-      if ( TDSetting.mSavedStations ) saved = mApp_mData.getStations( TDInstance.sid );
+      List< CurrentStation > saved = TDSetting.mSavedStations ? mApp_mData.getStations( TDInstance.sid ) : null;
       for ( NumStation st : stations ) {
         if ( st.show() ) {
           DrawingStationName dst;
@@ -1142,8 +1141,7 @@ public class DrawingWindow extends ItemDrawer
         }
       }
       List< PlotInfo > xhsections = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotInfo.PLOT_XH_SECTION, parent );
-      List< CurrentStation > saved = null;
-      if ( TDSetting.mSavedStations ) saved = mApp_mData.getStations( TDInstance.sid );
+      List< CurrentStation > saved = TDSetting.mSavedStations ? mApp_mData.getStations( TDInstance.sid ) : null;
       for ( NumStation st : stations ) {
         if ( st.mHasCoords && st.show() ) {
           DrawingStationName dst;
@@ -1175,8 +1173,7 @@ public class DrawingWindow extends ItemDrawer
         }
       }
       List< PlotInfo > xhsections = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotInfo.PLOT_XH_SECTION, parent );
-      List< CurrentStation > saved = null;
-      if ( TDSetting.mSavedStations ) saved = mApp_mData.getStations( TDInstance.sid );
+      List< CurrentStation > saved = TDSetting.mSavedStations ? mApp_mData.getStations( TDInstance.sid ) : null;
       for ( NumStation st : stations ) {
         if ( st.show() ) {
           DrawingStationName dst;
@@ -1272,7 +1269,7 @@ public class DrawingWindow extends ItemDrawer
           break;
         case DrawingPath.DRAWING_PATH_NAME:
           title = getResources().getString( R.string.title_edit_station );
-          mActivity.setTitle( title + " " + ((DrawingStationName)item).name() );
+          mActivity.setTitle( title + " " + ((DrawingStationName)item).getName() );
           break;
         default:
           mActivity.setTitle( title );
@@ -3265,7 +3262,7 @@ public class DrawingWindow extends ItemDrawer
             if ( sn != null ) {
               boolean barrier = mNum.isBarrier( sn.mName );
               boolean hidden  = mNum.isHidden( sn.mName );
-              List< DBlock > legs = mApp_mData.selectShotsAt( TDInstance.sid, sn.name(), true ); // select "independent" legs
+              List< DBlock > legs = mApp_mData.selectShotsAt( TDInstance.sid, sn.getName(), true ); // select "independent" legs
               // new DrawingStationDialog( mActivity, this, mApp, sn, barrier, hidden, // TDInstance.xsections, // legs ).show();
               openXSection( sn, sn.mName, mType );
             }
@@ -3783,7 +3780,12 @@ public class DrawingWindow extends ItemDrawer
       }
     }
 
-    void setCurrentStationName( String name ) { mApp.setCurrentStationName( name ); }
+    void setCurrentStationName( String name, DrawingStationName st )
+    {
+      List< CurrentStation > saved = TDSetting.mSavedStations ? mApp_mData.getStations( TDInstance.sid ) : null;
+      mApp.setCurrentStationName( name );
+      mDrawingSurface.setCurrentStation( st, saved );
+    }
 
     // delete at-station xsection
     void deleteXSection( DrawingStationName st, String name, long type ) 
@@ -4952,7 +4954,7 @@ public class DrawingWindow extends ItemDrawer
           // SelectionPoint sp = mDrawingSurface.hotItem();
           // if ( sp != null && sp.mItem.mType == DrawingPath.DRAWING_PATH_NAME ) {
           //   DrawingStationName sn = (DrawingStationName)(sp.mItem);
-          //   new DrawingBarrierDialog( this, this, sn.name(), mNum.isBarrier( sn.name() ) ).show();
+          //   new DrawingBarrierDialog( this, this, sn.getName(), mNum.isBarrier( sn.getName() ) ).show();
           // }
         }
       } else if ( b == mButton3[k3++] ) { // EDIT ITEM PROPERTIES
@@ -4961,12 +4963,12 @@ public class DrawingWindow extends ItemDrawer
           int flag = 0;
           switch ( sp.type() ) {
             case DrawingPath.DRAWING_PATH_NAME:
-              DrawingStationName sn = (DrawingStationName)(sp.mItem);
-              DrawingStationPath path = mDrawingSurface.getStationPath( sn.name() );
-              boolean barrier = mNum.isBarrier( sn.name() );
-              boolean hidden  = mNum.isHidden( sn.name() );
-              List< DBlock > legs = mApp_mData.selectShotsAt( TDInstance.sid, sn.name(), true ); // select "independent" legs
-              new DrawingStationDialog( mActivity, this, mApp, sn, path, barrier, hidden, /* TDInstance.xsections, */ legs ).show();
+              DrawingStationName st = (DrawingStationName)(sp.mItem);
+              DrawingStationPath path = mDrawingSurface.getStationPath( st.getName() );
+              boolean barrier = mNum.isBarrier( st.getName() );
+              boolean hidden  = mNum.isHidden( st.getName() );
+              List< DBlock > legs = mApp_mData.selectShotsAt( TDInstance.sid, st.getName(), true ); // select "independent" legs
+              new DrawingStationDialog( mActivity, this, mApp, st, path, barrier, hidden, /* TDInstance.xsections, */ legs ).show();
               break;
             case DrawingPath.DRAWING_PATH_POINT:
               DrawingPointPath point = (DrawingPointPath)(sp.mItem);

@@ -394,6 +394,55 @@ class DrawingSurface extends SurfaceView
 
   // void clearDrawing() { commandManager.clearDrawing(); }
 
+  // return true if the station is the current active
+  private void setStationPaint( DrawingStationName st, List<CurrentStation> saved, DrawingCommandManager manager )
+  {
+    String name = st.getName();
+    NumStation num_st = st.getNumStation();
+
+    if ( StationName.isCurrentStationName( name ) ) {
+      st.setPathPaint( BrushManager.fixedStationActivePaint );
+      if ( manager != null ) {
+        // mCurrentStation = st;
+        manager.setCurrentStationName( st );
+      }
+    } else if ( num_st.mHidden == 1 ) {
+      st.setPathPaint( BrushManager.fixedStationHiddenPaint );
+    } else if ( num_st.mHidden == -1 || num_st.mBarrierAndHidden ) {
+      st.setPathPaint( BrushManager.fixedStationBarrierPaint );
+    } else {
+      st.setPathPaint( BrushManager.fixedStationPaint );
+      if ( TDSetting.mSavedStations && saved != null ) { // the test on mSavedStatios is extra care
+	for ( CurrentStation sst : saved ) {
+	  if ( sst.mName.equals( num_st.name ) ) {
+            st.setPathPaint( BrushManager.fixedStationSavedPaint );
+	    break;
+	  }
+	}
+      }
+    }
+  }
+
+  void setCurrentStation( DrawingStationName st, List<CurrentStation> saved )
+  {
+    DrawingStationName st0 = commandManager.getCurrentStationName();
+    if ( st0 != null && st0 != st ) {
+      st0 = mCommandManager1.getCurrentStationName();
+      setStationPaint( st0, saved, mCommandManager1 );
+      st0 = mCommandManager2.getCurrentStationName();
+      setStationPaint( st0, saved, mCommandManager2 );
+    }
+    if ( commandManager == mCommandManager1 ) {
+      setStationPaint( st, saved, commandManager );
+      st0 = mCommandManager2.getStation( st.getName() );
+      setStationPaint( st0, saved, mCommandManager2 );
+    } else {
+      setStationPaint( st, saved, commandManager );
+      st0 = mCommandManager1.getStation( st.getName() );
+      setStationPaint( st0, saved, mCommandManager1 );
+    }
+  }
+
   // called by DrawingWindow::computeReference
   // @param parent     name of the parent plot
   // @param num_st     station
@@ -408,24 +457,11 @@ class DrawingSurface extends SurfaceView
     // DO as when loaded
 
     DrawingStationName st = new DrawingStationName( num_st, x, y );
-    if ( num_st.mHidden == 1 ) {
-      st.setPathPaint( BrushManager.fixedStationHiddenPaint );
-    } else if ( num_st.mHidden == -1 || num_st.mBarrierAndHidden ) {
-      st.setPathPaint( BrushManager.fixedStationBarrierPaint );
-    } else {
-      st.setPathPaint( BrushManager.fixedStationPaint );
-      if ( TDSetting.mSavedStations && saved != null ) {
-	for ( CurrentStation sst : saved ) {
-	  if ( sst.mName.equals( num_st.name ) ) {
-            st.setPathPaint( BrushManager.fixedStationSavedPaint );
-	    break;
-	  }
-	}
-      }
-    }
+    setStationPaint( st, saved, commandManager );
+
     if ( xsections != null && parent != null ) {
       for ( PlotInfo plot : xsections ) {
-        if ( plot.start.equals( st.name() ) ) {
+        if ( plot.start.equals( st.getName() ) ) {
           // if ( plot.isXSectionShared() || parent.equals(plot.getXSectionParent()) ) { 
             st.setXSection( plot.azimuth, plot.clino, mType );
           // }

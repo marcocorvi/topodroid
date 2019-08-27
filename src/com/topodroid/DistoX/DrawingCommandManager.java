@@ -82,6 +82,9 @@ class DrawingCommandManager
   private SelectionSet mSelected;
   private boolean mDisplayPoints;
 
+  // the current station is displayed green
+  private DrawingStationName mCurrentStationName = null;
+
   private Matrix mMatrix;
   private float  mScale; // current zoom: value of 1 pl in scene space
   private boolean mLandscape = false;
@@ -210,6 +213,9 @@ class DrawingCommandManager
     }
   }
   // end PATH_MULTISELECT
+
+  void setCurrentStationName( DrawingStationName st ) { mCurrentStationName = st; }
+  DrawingStationName getCurrentStationName( ) { return mCurrentStationName; }
 
   // DrawingPath              getNorth()        { return mNorthLine;    }
 
@@ -611,7 +617,7 @@ class DrawingCommandManager
   DrawingStationName getStation( String name ) 
   {
     for ( DrawingStationName st : mStations ) {
-      if ( name.equals( st.name() ) ) return st;
+      if ( name.equals( st.getName() ) ) return st;
     }
     return null;
   }
@@ -1243,7 +1249,7 @@ class DrawingCommandManager
   DrawingStationPath getUserStation( String name )
   {
     if ( name != null ) {
-      for ( DrawingStationPath p : mUserStations ) if ( name.equals( p.name() ) ) return p;
+      for ( DrawingStationPath sp : mUserStations ) if ( name.equals( sp.name() ) ) return sp;
     }
     return null;
   }
@@ -3105,12 +3111,12 @@ class DrawingCommandManager
   // called by DrawingSurface.addDrawingStationName
   void addStation( DrawingStationName st, boolean selectable )
   {
-    // Log.v("DistoX", "add station " + st.name() + " scene " + st.cx + " " + st.cy + " XSection " + st.mXSectionType );
+    // Log.v("DistoX", "add station " + st.getName() + " scene " + st.cx + " " + st.cy + " XSection " + st.mXSectionType );
     synchronized( mStations ) {
       mStations.add( st );
       if ( selectable ) {
         synchronized( TDPath.mSelectionLock ) {
-          // Log.v( "DistoX", "selection add station " + st.name() );
+          // Log.v( "DistoX", "selection add station " + st.getName() );
           mSelection.insertStationName( st );
         }
       }
@@ -3122,7 +3128,7 @@ class DrawingCommandManager
   void setStationXSections( List<PlotInfo> xsections, long type )
   {
     for ( DrawingStationName st : mStations ) {
-      String name = st.name();
+      String name = st.getName();
       // Log.v( "DistoX", "Station <" + name + ">" );
       for ( PlotInfo plot : xsections ) {
         if ( name.equals( plot.start ) ) {
@@ -3189,7 +3195,7 @@ class DrawingCommandManager
 	      if ( name != null && name.length() > 0 ) {
 	        // Log.v("DistoXX", "section station " + name );
 	        for ( DrawingStationName st : mStations ) {
-                  if ( name.equals( st.name() ) ) {
+                  if ( name.equals( st.getName() ) ) {
                     pt.setLink( st );
 	            break;
                   }
