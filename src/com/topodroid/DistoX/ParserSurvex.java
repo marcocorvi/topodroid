@@ -135,7 +135,6 @@ class ParserSurvex extends ImportParser
 
   /** read input file
    * @param filename name of the file to parse
-   * @param basepath survey pathname base
    * @param state    state of the parser
    */
   private void readFile( String filename, ParserSurvexState state ) throws ParserException

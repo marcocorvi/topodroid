@@ -89,7 +89,7 @@ class PTFile
 
   // used also by PTString
   //  @param fs    input stream
-  //  @param b     byte array to store read bytes
+  //  @param b     byte array to store read bytes (size n+1)
   //  @param n     total number of bytes to read
   static void read( FileInputStream fs, byte[] b, int n )
   {
@@ -97,7 +97,7 @@ class PTFile
       int nread  = 0; // number of bytes that have been read
       int toread = n; // number of bytes still to read
       do {
-        int nn = fs.read( b, nread, toread );
+        int nn = fs.read( b, nread, toread ); // 401126 reports an ArrayOutOfBound here but it does not make sense
 	    nread  += nn;
 	    toread -= nn;
       } while ( nread < n );

@@ -70,7 +70,7 @@ class SearchDialog extends MyDialog
     mName.setOnLongClickListener( this );
     if ( mStation != null ) mName.setText( mStation );
 
-    mBtnSplays = (CheckBox) findViewById(R.id.splays);
+    mBtnSplays = (CheckBox) findViewById(R.id.search_splays);
     // mBtnSplays.setVisibility( View.GONE ); 
 
     LinearLayout ll3 = (LinearLayout) findViewById( R.id.layout3 );

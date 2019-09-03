@@ -784,7 +784,7 @@ class DrawingIO
           }
         }
         dis.close();
-        if ( fis != null ) fis.close();
+        /* if ( fis != null ) */ fis.close();
       } catch ( FileNotFoundException e ) {
         // this is OK
       } catch ( IOException e ) {
@@ -899,7 +899,7 @@ class DrawingIO
           }
         }
         dis.close();
-        if ( fis != null ) fis.close();
+        /* if ( fis != null ) */ fis.close();
       } catch ( FileNotFoundException e ) {
         // this is OK
       } catch ( IOException e ) {

@@ -77,6 +77,7 @@ class DataHelper extends DataSetObservable
   private final static String WHERE_SID_STATUS  = "surveyId=? AND status=?";
   private final static String WHERE_SID_STATUS_LEG  = "surveyId=? AND status=? AND fStation > \"\" AND tStation > \"\"";
   private final static String WHERE_SID_LEG     = "surveyId=? AND fStation > \"\" AND tStation > \"\"";
+  private final static String WHERE_ID_SID_LEG  = "id<=? AND surveyId=? AND fStation > \"\" AND tStation > \"\"";
   private final static String WHERE_SID_SHOTID  = "surveyId=? AND shotId=?";
   private final static String WHERE_SID_START   = "surveyId=? AND start=?";
 
@@ -2955,13 +2956,15 @@ class DataHelper extends DataSetObservable
   }
 
   // select all LEG stations before a shot
-  Set<String> selectAllStationsBefore( long id, long sid, long status )
+  // @param id     shot id
+  // @param sid    survey id
+  Set<String> selectAllStationsBefore( long id, long sid /*, long status */ )
   {
     Set< String > set = new TreeSet<String>();
     if ( myDB == null ) return set;
     Cursor cursor = myDB.query(SHOT_TABLE, new String[] { "fStation", "tStation" },
-                    "id<=? and surveyId=? and status=?",
-                    new String[] { Long.toString(id), Long.toString(sid), Long.toString(status) },
+                    WHERE_ID_SID_LEG, // "id<=? and surveyId=? and fStation ", // and status=?",
+                    new String[] { Long.toString(id), Long.toString(sid) /*, Long.toString(status) */ },
                     null, null, "id" );
     if (cursor.moveToFirst()) {
       do {
@@ -3085,12 +3088,14 @@ class DataHelper extends DataSetObservable
 
   // @param backshot  whether the DistoX is in backshot mode
   // @return the last block with either the from station (non-backshot) or the to station (backshot)
-  DBlock selectLastNonBlankShot( long sid, long status, boolean backshot )
+  // used only by StationName
+  DBlock selectLastNonBlankShot( long sid, /* long status, */ boolean backshot )
   {
     if ( myDB == null ) return null;
     DBlock ret = null;
     Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
-                    WHERE_SID_STATUS_LEG, new String[]{ Long.toString(sid), Long.toString(status) },
+                    // WHERE_SID_STATUS_LEG, new String[]{ Long.toString(sid), Long.toString(status) },
+                    WHERE_SID_LEG, new String[]{ Long.toString(sid) },
                     null, null, "id desc", TDString.ONE );
     if (cursor.moveToFirst()) {
       // Log.v("DistoX", "got the last leg " + cursor.getLong(0) + " " + cursor.getString(1) + " - " + cursor.getString(2) );

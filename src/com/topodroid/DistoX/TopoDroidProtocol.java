@@ -123,7 +123,7 @@ class TopoDroidProtocol
         dir,
         mDeviceAddress,
         (int)(buf[0] & 0x3f),
-        String.format("%02x %02x %02x", buf[0], buf[1], buf[2], mBuffer[3], mBuffer[4], mBuffer[5], mBuffer[6], mBuffer[7] ) );
+        String.format("%02x %02x %02x", buf[0], buf[1], buf[2] ) );
   }
 
   protected void logPacket7( long dir, byte[] buf )
@@ -282,7 +282,6 @@ class TopoDroidProtocol
 
   /** read the number of data to download
    * @param command command to send to the DistoX
-   * @param a3      whether DistoX A3
    * @return number of data to download
    *
    * must be overridden - default returns 0

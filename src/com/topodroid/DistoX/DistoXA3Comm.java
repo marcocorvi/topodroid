@@ -135,7 +135,7 @@ class DistoXA3Comm extends DistoXComm
   int readA3Memory( String address, int from, int to, List< MemoryOctet > memory )
   {
     if ( ! checkCommThreadNull() ) return -1;
-    from &= 0x7ff8;
+    from &= 0xfff8; // was 0x7ff8
     to   &= 0xfff8;
     if ( from >= 0x8000 ) from = 0;
     if ( to >= 0x8000 )   to   = 0x8000;
@@ -158,7 +158,7 @@ class DistoXA3Comm extends DistoXComm
     if ( ! checkCommThreadNull() ) return -1;
     if ( TDInstance.deviceType() != Device.DISTO_A3 ) return -2;
 
-    from &= 0x7ff8;
+    from &= 0xfff8; // was 0x7ff8
     to   &= 0xfff8;
     if ( from >= 0x8000 ) from = 0;
     if ( to >= 0x8000 )   to   = 0x8000;

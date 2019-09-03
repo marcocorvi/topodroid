@@ -26,7 +26,7 @@
 	android:layout_marginTop="@dimen/marginv"
 	android:layout_marginBottom="@dimen/marginv"
       >
-      <CheckBox android:id="@+id/splays"
+      <CheckBox android:id="@+id/search_splays"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:singleLine="true"

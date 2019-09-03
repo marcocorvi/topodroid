@@ -54,7 +54,7 @@ class CalibValidateResultDialog extends MyDialog
     errors2 = errs2;
     avestd0 = String.format( mContext.getResources().getString( R.string.calib_ave_std ), a0, s0 );
     avestd1 = String.format( mContext.getResources().getString( R.string.calib_ave_std ), a1, s1 );
-    err1  = String.format( mContext.getResources().getString( R.string.calib_error ), e1 );
+    err1  = String.format( mContext.getResources().getString( R.string.calib_validate_error ), e1 );
     err2 = String.format( mContext.getResources().getString( R.string.calib_stddev ), e2 );
     errmax = String.format( mContext.getResources().getString( R.string.calib_max_error ), em );
     title = String.format( mContext.getResources().getString( R.string.calib_validation ), n1, n2 );

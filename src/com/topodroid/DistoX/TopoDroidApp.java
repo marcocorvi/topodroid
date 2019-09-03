@@ -1257,7 +1257,7 @@ public class TopoDroidApp extends Application
   // @param list list of shot to assign
   void assignStationsAfter( DBlock blk0, List<DBlock> list )
   { 
-    Set<String> sts = mData.selectAllStationsBefore( blk0.mId, TDInstance.sid, TDStatus.NORMAL  );
+    Set<String> sts = mData.selectAllStationsBefore( blk0.mId, TDInstance.sid /*, TDStatus.NORMAL */ );
     // Log.v("DistoX", "assign stations after " + blk0.Name() + " size " + list.size() + " stations " + sts.size() );
     // if ( TDSetting.mSurveyStations < 0 ) return;
     StationName.clearCurrentStation();

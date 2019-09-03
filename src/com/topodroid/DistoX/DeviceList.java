@@ -67,6 +67,7 @@ public class DeviceList extends Activity
       command = getIntent().getExtras().getInt( TDTag.TOPODROID_DEVICE_ACTION );
     } catch ( NullPointerException e ) {
       TDLog.Error("Missing TOPODROID_DEVICE_ACTION");
+      return;
     }
 
     // TDLog.Log( TDLog.LOG_BT, "command " + command );

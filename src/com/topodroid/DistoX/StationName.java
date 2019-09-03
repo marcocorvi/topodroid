@@ -81,6 +81,7 @@ class StationName
 
   static boolean isCurrentStationName( String name ) { return name.equals(mCurrentStationName); }
 
+  // used only to reset/getCurrentOrLastStation name
   static private String getLastStationName( DataHelper data, long sid )
   {
     // FIXME not efficient: use a better select with reverse order and test on FROM
@@ -103,7 +104,7 @@ class StationName
     //   if ( StationPolicy.mSurveyStations == 1 ) return last.mTo;  // forward-shot
     //   return last.mFrom;
     // }
-    DBlock last = data.selectLastNonBlankShot( sid, TDStatus.NORMAL, TDSetting.mDistoXBackshot );
+    DBlock last = data.selectLastNonBlankShot( sid, /* TDStatus.NORMAL, */ TDSetting.mDistoXBackshot );
     if ( last == null ) return TDSetting.mInitStation;
     if ( TDSetting.mDistoXBackshot ) {
       if ( last.mFrom == null || last.mFrom.length() == 0 ) return last.mTo;

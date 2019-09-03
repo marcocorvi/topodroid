@@ -127,7 +127,7 @@ class ShpObject
   private ByteBuffer checkBuffer( ByteBuffer buffer, int size )
   {   
     if (buffer.capacity() < size) {   
-      if (buffer != null) buffer.clear();   
+      /* if (buffer != null) */ buffer.clear();
       buffer = ByteBuffer.allocateDirect(size);   
     }   
     return buffer;
@@ -687,7 +687,7 @@ class ShpPoint extends ShpObject
     // Log.v("DistoX", "SHP write points " + n_pts );
     if ( n_pts == 0 ) return false;
 
-    int n_fld = 2;
+    int n_fld = 3;
     String[] fields = new String[ n_fld ];
     fields[0] = "name";
     fields[1] = "orient";
@@ -863,7 +863,7 @@ class ShpPolyline extends ShpObject
     int nrs = ( lns != null )? lns.size() : 0;
     if ( nrs == 0 ) return false;
 
-    int n_fld = 2; // type from to flag comment
+    int n_fld = 3; // type from to flag comment
     String[] fields = new String[ n_fld ];
     fields[0] = "type";
     fields[1] = "name";

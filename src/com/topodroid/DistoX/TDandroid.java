@@ -291,6 +291,7 @@ class TDandroid
     return ( context.checkCallingOrSelfPermission( android.Manifest.permission.INTERNET ) == PackageManager.PERMISSION_GRANTED );
   }
 
+  // REQUIRES API-18
   static boolean checkBluetoothLE( Context context )
   {
     return context.getPackageManager().hasSystemFeature( PackageManager.FEATURE_BLUETOOTH_LE );

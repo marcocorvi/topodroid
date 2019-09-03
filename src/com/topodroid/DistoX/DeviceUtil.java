@@ -46,7 +46,7 @@ class DeviceUtil
   static final String ACTION_ACL_DISCONNECT_REQUESTED = BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED;
   static final String ACTION_FOUND              = BluetoothDevice.ACTION_FOUND;
   static final String ACTION_BOND_STATE_CHANGED = BluetoothDevice.ACTION_BOND_STATE_CHANGED;
-  static final String ACTION_PAIRING_REQUEST    = BluetoothDevice.ACTION_PAIRING_REQUEST;
+  static final String ACTION_PAIRING_REQUEST    = BluetoothDevice.ACTION_PAIRING_REQUEST;  // REQUIRES API-19
 
   static final int SCAN_MODE_CONNECTABLE_DISCOVERABLE = BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE;
 

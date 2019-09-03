@@ -280,7 +280,7 @@ class DrawingLinePath extends DrawingPointLinePath
     pw.format(" mergemode=\"0\">\n" );
     pw.format("            <pen type=\"%d\" />\n", pen);
     pw.format("            <points data=\"");
-    boolean b = true;
+    // boolean b = true;
     float x3, y3;
     float x0, y0, x1, y1, x2, y2;
     // for ( LinePoint pt : mPoints ) 
@@ -292,7 +292,10 @@ class DrawingLinePath extends DrawingPointLinePath
       y0 = DrawingUtil.sceneToWorldY( pt.x, pt.y );
       pw.format(Locale.US, "%.2f %.2f ", x0, y0 );
       // Log.v("DistoX", "X " + x0 + " Y " + y0 );
-      if ( b ) { pw.format("B "); b = false; }
+      // if ( b ) {
+        pw.format("B ");
+        //  b = false;
+      // }
       for ( pt = pt.mNext; pt != null; pt = pt.mNext ) 
       {
         x3 = DrawingUtil.sceneToWorldX( pt.x, pt.y );
@@ -326,7 +329,10 @@ class DrawingLinePath extends DrawingPointLinePath
       y0 = DrawingUtil.sceneToWorldY( pt.x, pt.y );
       pw.format(Locale.US, "%.2f %.2f ", x0, y0 );
       // Log.v("DistoX", "X " + x0 + " Y " + y0 );
-      if ( b ) { pw.format("B "); b = false; }
+      // if ( b ) {
+        pw.format("B ");
+        // b = false;
+      // }
       for ( pt = pt.mPrev; pt != null; pt = pt.mPrev ) 
       {
         x3 = DrawingUtil.sceneToWorldX( pt.x, pt.y );

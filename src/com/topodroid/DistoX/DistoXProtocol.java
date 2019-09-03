@@ -67,7 +67,7 @@ class DistoXProtocol extends TopoDroidProtocol
     // allocate device-specific buffers
     mAddr8000 = new byte[3];
     mAddr8000[0] = 0x38;
-    mAddr8000[1] = 0x00; // address 0x8000
+    mAddr8000[1] = 0x00; // address 0x8000 - already assigned but repeat for completeness
     mAddr8000[2] = (byte)0x80;
     mAcknowledge = new byte[1];
     // mAcknowledge[0] = ( b & 0x80 ) | 0x55;
@@ -335,7 +335,6 @@ class DistoXProtocol extends TopoDroidProtocol
 
   /** read the number of data to download
    * @param command command to send to the DistoX
-   * @param a3      whether DistoX A3
    * @return number of data to download
    */
   @Override

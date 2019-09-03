@@ -2189,7 +2189,6 @@ public class ShotWindow extends Activity
     // } else {
       shots = mApp_mData.selectAllShotsAfter( blk.mId, TDInstance.sid, TDStatus.NORMAL );
     // }
-    // Set<String> stations = mApp_mData.selectAllStationsBefore( blk.mId, TDInstance.sid, TDStatus.NORMAL );
     // Log.v("DistoX", "shots " + shots.size() );
     mApp.assignStationsAfter( blk, shots /*, stations */ );
 

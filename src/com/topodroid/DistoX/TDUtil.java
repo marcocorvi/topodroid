@@ -256,7 +256,11 @@ class TDUtil
   static void vibrate( Context ctx, int duration )
   {
     Vibrator vibrator = (Vibrator)ctx.getSystemService( Context.VIBRATOR_SERVICE );
-    vibrator.vibrate( duration );
+    try {
+      vibrator.vibrate(duration);
+    } catch ( NullPointerException e ) {
+      // TODO
+    }
   }
 
 }
