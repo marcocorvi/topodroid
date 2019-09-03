@@ -163,7 +163,7 @@
     <string name="import_title">Импорт файла</string>
     <!-- UNUSED string name="import_wait">Импорт файла&#8230; обождите&#8230;</string -->
     <string name="import_already">съёмка уже импортирована</string>
-    <!-- TODO string name="import_bad">Invalid import file</string -->
+    <string name="import_bad">Импортируемый файл поврежден</string>
     <string name="import_none">Отсутствует файл для импорта</string>
     <string name="import_failed">Не удалось импортировать файл</string>
     <string name="file_not_found">Файл не обнаружен</string>
