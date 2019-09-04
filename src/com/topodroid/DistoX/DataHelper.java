@@ -58,15 +58,12 @@ class DataHelper extends DataSetObservable
   private static final String CONFIG_TABLE = "configs";
   private static final String SURVEY_TABLE = "surveys";
   private static final String FIXED_TABLE  = "fixeds";
-  private static final String CALIB_TABLE  = "calibs";
   private static final String SHOT_TABLE   = "shots";
   private static final String STATION_TABLE = "stations";
-  private static final String GM_TABLE     = "gms";
   private static final String PLOT_TABLE   = "plots";
   private static final String SKETCH_TABLE = "sketches";
   private static final String PHOTO_TABLE  = "photos";
   private static final String SENSOR_TABLE = "sensors";
-  private static final String DEVICE_TABLE = "devices";
   private static final String AUDIO_TABLE  = "audios";
 
   private final static String WHERE_ID          = "id=?";
@@ -176,19 +173,18 @@ class DataHelper extends DataSetObservable
   // ----------------------------------------------------------------------
   // DATABASE
 
-  private final Context mContext;
   // private final TopoDroidApp mApp; // unused
 
-  public SQLiteDatabase getDb() { return myDB; }
+  // UNUSED
+  // public SQLiteDatabase getDb() { return myDB; }
 
 
   // public DataHelper( Context context, TopoDroidApp app, DataListenerSet listeners ) // IF_COSURVEY
   public DataHelper( Context context /* , TopoDroidApp app */ )
   {
-    mContext = context;
     // mApp     = app;
     // mListeners = listeners; // IF_COSURVEY
-    openDatabase();
+    openDatabase( context );
   }
 
   void closeDatabase()
@@ -198,10 +194,10 @@ class DataHelper extends DataSetObservable
     myDB = null;
   }
 
-  void openDatabase()
+  void openDatabase( Context context )
   {
     String database_name = TDPath.getDatabase();
-    DistoXOpenHelper openHelper = new DistoXOpenHelper( mContext, database_name );
+    DistoXOpenHelper openHelper = new DistoXOpenHelper( context, database_name );
 
     try {
         myDB = openHelper.getWritableDatabase();
@@ -467,7 +463,6 @@ class DataHelper extends DataSetObservable
         stat.M = new float[ nr ];
         stat.D = new float[ nr ];
         do {
-          int k = 0;
           float a = (float)( cursor.getDouble(1) );
           if ( a > 0.1f ) {
             float m = (float)( cursor.getDouble(2) );
@@ -939,20 +934,21 @@ class DataHelper extends DataSetObservable
     return ret;
   }
 
-  private boolean doStatement( SQLiteStatement stmt, String msg )
-  {
-    boolean ret = false;
-    try {
-      myDB.beginTransaction();
-      stmt.execute();
-      myDB.setTransactionSuccessful();
-      ret = true;
-    } catch ( SQLiteDiskIOException e0 ) { handleDiskIOError( e0 );
-    } catch ( SQLiteException e1 )       { logError(msg, e1 ); 
-    } catch ( IllegalStateException e2 ) { logError(msg, e2 );
-    } finally { myDB.endTransaction(); }
-    return ret;
-  }
+  // UNUSED
+  // private boolean doStatement( SQLiteStatement stmt, String msg )
+  // {
+  //   boolean ret = false;
+  //   try {
+  //     myDB.beginTransaction();
+  //     stmt.execute();
+  //     myDB.setTransactionSuccessful();
+  //     ret = true;
+  //   } catch ( SQLiteDiskIOException e0 ) { handleDiskIOError( e0 );
+  //   } catch ( SQLiteException e1 )       { logError(msg, e1 ); 
+  //   } catch ( IllegalStateException e2 ) { logError(msg, e2 );
+  //   } finally { myDB.endTransaction(); }
+  //   return ret;
+  // }
 
   // -----------------------------------------------------------------
 
@@ -1302,7 +1298,7 @@ class DataHelper extends DataSetObservable
     long millis = 0L;
     long color  = 0L;
 
-    InsertHelper ih = new InsertHelper( myDB, SHOT_TABLE );
+    InsertHelper ih = new InsertHelper( myDB, SHOT_TABLE ); // DEPRECATED API-17
     final int surveyIdCol = ih.getColumnIndex( "surveyId" );
     final int idCol       = ih.getColumnIndex( "id" );
     final int fStationCol = ih.getColumnIndex( "fStation" );
@@ -1395,7 +1391,7 @@ class DataHelper extends DataSetObservable
     ArrayList< ParserShot > stack   = new ArrayList< ParserShot >();
     HashMap< String, Float > depths = new HashMap< String, Float >();
     String start = shots.get(0).from; // FIXME
-    depths.put( start, new Float(0) );
+    depths.put( start, Float.valueOf(0) );
     for ( ParserShot sh : shots ) {
       String s1 = sh.from;
       String s2 = sh.to;
@@ -1413,7 +1409,7 @@ class DataHelper extends DataSetObservable
           if ( s1.length() > 0 && s2.length() > 0 && ( to.equals( s1 ) || to.equals( s2 ) ) ) stack.add( sh );
         }
         float depth = depths.get( from ).floatValue() - shot.len * TDMath.sind( shot.cln );
-        depths.put( to, new Float( depth ) );
+        depths.put( to, Float.valueOf( depth ) );
         // Log.v("DistoX", "processed shot <" + from + "-" + to + "> shots " + stack.size() + "add station <" + to + "> depth " + depth );
       }
       if ( to != null && to.length() > 0 && depths.containsKey( to ) && from != null && from.length() > 0 && ! depths.containsKey( from ) ) { // can add FROM station
@@ -1423,7 +1419,7 @@ class DataHelper extends DataSetObservable
           if ( s1.length() > 0 && s2.length() > 0 && ( from.equals( s1 ) || from.equals( s2 ) ) ) stack.add( sh );
         }
         float depth = depths.get( to ).floatValue() + shot.len * TDMath.sind( shot.cln );
-        depths.put( from, new Float( depth ) );
+        depths.put( from, Float.valueOf( depth ) );
         // Log.v("DistoX", "processed shot <" + from + "-" + to + "> shots " + stack.size() + "add station <" + from + "> depth " + depth );
       }
     }
@@ -3273,18 +3269,19 @@ class DataHelper extends DataSetObservable
     return false;
   }
 
-  void addSymbolEnabled( String name )
-  {
-    if ( myDB != null ) {
-      ContentValues cv = new ContentValues();
-      cv.put( "key",     name );
-      cv.put( "value",   TDString.ZERO );     // symbols are enabled by default
-      try {
-        myDB.insert( CONFIG_TABLE, null, cv );
-      } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-      } catch ( SQLiteException e ) { logError("config symbol " + name, e ); }
-    }
-  }
+  // UNUSED
+  // void addSymbolEnabled( String name )
+  // {
+  //   if ( myDB != null ) {
+  //     ContentValues cv = new ContentValues();
+  //     cv.put( "key",     name );
+  //     cv.put( "value",   TDString.ZERO );     // symbols are enabled by default
+  //     try {
+  //       myDB.insert( CONFIG_TABLE, null, cv );
+  //     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+  //     } catch ( SQLiteException e ) { logError("config symbol " + name, e ); }
+  //   }
+  // }
 
   boolean hasSymbolName( String name ) { return ( getValue( name ) != null ); }
 
@@ -3375,7 +3372,7 @@ class DataHelper extends DataSetObservable
     if (cursor != null ) {
       if (cursor.moveToFirst() ) {
         do {
-          int type   = cursor.getInt(1);
+          int type    = cursor.getInt(1);    // type is not used
           String name = cursor.getString(2);
           // Log.v( TopoDroidApp.TAG, "plot name " + name + " prefix " + prefix );
           if ( name.startsWith( prefix ) /* && ( type == PlotInfo.PLOT_PHOTO || type == PlotInfo.PLOT_SECTION ) */ ) {
@@ -4001,7 +3998,6 @@ class DataHelper extends DataSetObservable
   }
 
   boolean hasSurveyName( String name )  { return hasName( name, SURVEY_TABLE ); }
-  // boolean hasCalibName( String name )  { return hasName( name, CALIB_TABLE ); }
 
   private boolean hasName( String name, String table )
   {

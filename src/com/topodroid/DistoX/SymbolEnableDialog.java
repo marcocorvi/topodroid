@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 import java.util.ArrayList;
 
 import android.os.Bundle;
@@ -25,7 +27,6 @@ import android.content.Context;
 
 // import android.view.Window;
 
-// import android.graphics.*;
 import android.view.View;
 // import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
@@ -35,8 +36,6 @@ import android.widget.Button;
 
 // import android.widget.TextView;
 import android.widget.ListView;
-
-// import android.util.Log;
 
 class SymbolEnableDialog extends MyDialog
                          implements View.OnClickListener
@@ -235,29 +234,35 @@ class SymbolEnableDialog extends MyDialog
     // dismiss();
   }
 
-  // static SaveSymbols mSaveSymbols = new SaveSymbols();
+  // static SaveSymbols mSaveSymbols = null; // new SaveSymbols();
 
   public void onBackPressed()
   {
     SaveSymbols save = new SaveSymbols();
     save.setAdapters( mPointAdapter, mLineAdapter, mAreaAdapter );
     save.execute();
-    // mSaveSymbols.setAdapters( mPointAdapter, mLineAdapter, mAreaAdapter );
-    // mSaveSymbols.execute();
+    // if ( mSaveSymbols == null ) mSaveSymbols = new SaveSymbols();
+    // if ( mSaveSymbols.setAdapters( mPointAdapter, mLineAdapter, mAreaAdapter ) ) {
+    //   mSaveSymbols.execute();
+    // }
     dismiss();
   }
 
-  private class SaveSymbols extends AsyncTask< Void, Void, Void > // FIXME LEAK
+  private class SaveSymbols extends AsyncTask< Void, Void, Void > // FIXME static or LEAK
   {
+    boolean run = false;
     SymbolAdapter mPtAdapter = null;
     SymbolAdapter mLnAdapter = null;
     SymbolAdapter mArAdapter = null;
 
-    void setAdapters( SymbolAdapter pt_adapter, SymbolAdapter ln_adapter, SymbolAdapter ar_adapter )
+    boolean setAdapters( SymbolAdapter pt_adapter, SymbolAdapter ln_adapter, SymbolAdapter ar_adapter )
     {
+      if ( run ) return false;
+      run = true;
       mPtAdapter = pt_adapter;
       mLnAdapter = ln_adapter;
       mArAdapter = ar_adapter;
+      return true;
     }
 
     protected Void doInBackground( Void ... v )
@@ -277,6 +282,7 @@ class SymbolEnableDialog extends MyDialog
         SymbolAreaLibrary area_lib   = BrushManager.mAreaLib;
         if ( area_lib  != null ) area_lib.makeEnabledList();
       }
+      run = false;
       return null;
     }
 

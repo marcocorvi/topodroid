@@ -11,9 +11,9 @@
  */
 package com.topodroid.DistoX;
 
-import android.util.Log;
+// import android.util.Log;
 
-import java.text.SimpleDateFormat;
+// import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 class PacketData

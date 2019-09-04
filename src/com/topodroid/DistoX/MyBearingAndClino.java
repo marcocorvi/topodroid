@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-import android.util.Log;
+// import android.util.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,7 +24,7 @@ import android.widget.ImageView;
 import android.graphics.Matrix;
 import android.graphics.Bitmap;
 
-import android.media.ExifInterface;
+import android.media.ExifInterface; // REQUIRES android.support
 
 class MyBearingAndClino implements IBearingAndClino
 {

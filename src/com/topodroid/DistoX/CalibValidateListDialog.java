@@ -40,7 +40,7 @@ class CalibValidateListDialog extends MyDialog
   // private ArrayAdapter<String> mArrayAdapter;
 
   // private ListView mList;
-  private List<String> mCalibs;
+  private final List<String> mCalibs;
 
   CalibValidateListDialog( Context context, GMActivity parent, List<String> calibs )
   {

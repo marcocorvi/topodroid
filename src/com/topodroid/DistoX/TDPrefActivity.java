@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-import android.util.Log;
+// import android.util.Log;
 
 import android.content.Intent;
 import android.content.Context;
@@ -263,7 +263,7 @@ public class TDPrefActivity extends Activity
           v.setOnClickListener( new OnClickListener() {
             @Override
             public void onClick( View v ) {
-              ( new AsyncTask< Void, Void, Void >() {
+              ( new AsyncTask< Void, Void, Void >() { // FIXME static or LEAK
                 @Override
                 protected Void doInBackground(Void... v)
                 {

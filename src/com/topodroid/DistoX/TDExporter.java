@@ -25,7 +25,7 @@
  */
 package com.topodroid.DistoX;
 
-import android.util.Log;
+// import android.util.Log;
 
 import java.io.File;
 import java.io.StringWriter;
@@ -2348,7 +2348,7 @@ class TDExporter
 	      if ( splay_station.containsKey(to) ) {
                 ii = splay_station.get( to ).intValue();
               }
-	      splay_station.put( to, new Integer(ii+1) );
+	      splay_station.put( to, Integer.valueOf(ii+1) );
 	      printSplayToDat( pw, info.name, to, to + "ss" + ii, item, true ); // reverse
 	    }
           }
@@ -2367,7 +2367,7 @@ class TDExporter
 	      if ( splay_station.containsKey(from) ) {
                 ii = splay_station.get( from ).intValue();
               }
-	      splay_station.put( from, new Integer(ii+1) );
+	      splay_station.put( from, Integer.valueOf(ii+1) );
 	      printSplayToDat( pw, info.name, from, from + "ss" + ii, item, false ); // not reverse
 	    }
           } else {

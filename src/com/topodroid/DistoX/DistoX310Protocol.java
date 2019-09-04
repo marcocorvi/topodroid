@@ -13,7 +13,7 @@
  */
 package com.topodroid.DistoX;
 
-import android.util.Log;
+// import android.util.Log;
 
 // import java.lang.ref.WeakReference;
 
@@ -25,17 +25,17 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.util.UUID;
+// import java.util.UUID;
 import java.util.List;
-import java.util.Locale;
+// import java.util.Locale;
 // import java.lang.reflect.Field;
-import java.net.Socket;
+// import java.net.Socket;
 
 // import android.os.CountDownTimer;
 
 import android.content.Context;
 
-import java.nio.channels.ClosedByInterruptException;
+// import java.nio.channels.ClosedByInterruptException;
 // import java.nio.ByteBuffer;
 
 class DistoX310Protocol extends DistoXProtocol

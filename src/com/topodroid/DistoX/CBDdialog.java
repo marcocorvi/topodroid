@@ -41,8 +41,8 @@ import android.content.Context;
 
 
 class CBDdialog extends MyDialog
-                               implements OnItemClickListener
-                               , OnClickListener
+                implements OnItemClickListener
+                , OnClickListener
 { 
   private CWDActivity mParent;
 

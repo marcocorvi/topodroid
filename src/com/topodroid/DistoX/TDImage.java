@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-import android.util.Log;
+// import android.util.Log;
 
 import java.io.IOException;
 
@@ -20,7 +20,7 @@ import android.widget.ImageView;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.ExifInterface;
+import android.media.ExifInterface; // REQUIRES android.support
 
 class TDImage
 {
@@ -85,7 +85,7 @@ class TDImage
         String u = exif.getAttribute( "UserComment" );
         // Log.v("DistoXPHOTO", "u " + u );
         if ( u != null ) {
-          String vals[] = u.split(" ");
+          String[] vals = u.split(" ");
           if ( vals.length > 1 ) {
             if ( b == null ) b = vals[0] + "/100";
             if ( c == null ) c = vals[1] + "/100";

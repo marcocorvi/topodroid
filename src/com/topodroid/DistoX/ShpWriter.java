@@ -408,7 +408,7 @@ class ShpObject
 
 class ShpPointz extends ShpObject
 {
-  ShpPointz( String path, List<File> files ) throws IOException
+  ShpPointz( String path, List<File> files ) // throws IOException
   {
     super( SHP_POINTZ, path, files );
   }
@@ -489,7 +489,7 @@ class ShpPointz extends ShpObject
 
 class ShpPolylinez extends ShpObject
 {
-  ShpPolylinez( String path, List<File> files ) throws IOException
+  ShpPolylinez( String path, List<File> files ) // throws IOException
   {
     super( SHP_POLYLINEZ, path, files );
   }
@@ -675,7 +675,7 @@ class ShpPolylinez extends ShpObject
 
 class ShpPoint extends ShpObject
 {
-  ShpPoint( String path, List<File> files ) throws IOException
+  ShpPoint( String path, List<File> files ) // throws IOException
   {
     super( SHP_POINT, path, files );
   }
@@ -759,7 +759,7 @@ class ShpPoint extends ShpObject
 
 class ShpStation extends ShpObject
 {
-  ShpStation( String path, List<File> files ) throws IOException
+  ShpStation( String path, List<File> files ) // throws IOException
   {
     super( SHP_POINT, path, files );
   }
@@ -842,7 +842,7 @@ class ShpPolyline extends ShpObject
   // int mPathType; 
 
   // @param path_type   either DRAWING_PATH_LINE or DRAWING_PATH_AREA
-  ShpPolyline( String path, int path_type, List<File> files ) throws IOException
+  ShpPolyline( String path, int path_type, List<File> files ) // throws IOException
   {
     super( ( (path_type == DrawingPath.DRAWING_PATH_LINE)? SHP_POLYLINE : SHP_POLYGON ), path, files );
     // mPathType = path_type;
@@ -997,7 +997,7 @@ class ShpPolyline extends ShpObject
 // This class handles shots: les and splays
 class ShpSegment extends ShpObject
 {
-  ShpSegment( String path, List<File> files ) throws IOException
+  ShpSegment( String path, List<File> files ) // throws IOException
   {
     super( SHP_POLYLINE, path, files );
   }

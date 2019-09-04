@@ -168,6 +168,8 @@ class SymbolAreaLibrary extends SymbolLibrary
             enable = TopoDroidApp.mData.getSymbolEnabled( name );
           }
           symbol.setEnabled( enable );
+        } else {
+          TDLog.Error( "area " + symbol.mThName + " already in library" );
         }
       }
       sortSymbolByName( systemNr );

@@ -46,7 +46,7 @@ class PairingRequest extends BroadcastReceiver
         TDLog.Error( "Illegal access: " + e.getMessage() );
       } catch ( InvocationTargetException e ) {
         TDLog.Error( "Invocation target: " + e.getMessage() );
-      } finally {
+      // } finally {
 	// stopPairingRequest(); // NOTE leave pairing request on
       }
     }

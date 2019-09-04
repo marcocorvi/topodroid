@@ -18,7 +18,7 @@ import java.lang.ref.WeakReference;
 // import android.app.ActivityManager;
 // import android.app.ActivityManager.RunningTaskInfo;
 import android.os.AsyncTask;
-import android.content.Context;
+// import android.content.Context;
 
 // import android.widget.Button;
 // import android.widget.Toast;

@@ -14,7 +14,7 @@ package com.topodroid.DistoX;
 import android.util.Log;
 
 import java.util.UUID;
-import java.util.List;
+// import java.util.List;
 // import java.util.concurrent.atomic.AtomicInteger; // FIXME_ATOMIC_INT
 
 import android.os.Bundle;

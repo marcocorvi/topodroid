@@ -11,10 +11,10 @@
  */
 package com.topodroid.DistoX;
 
-import android.util.Log;
+// import android.util.Log;
 
 import android.content.res.Configuration;
-import android.app.Activity;
+// import android.app.Activity;
 
 import android.graphics.Canvas;
 import android.graphics.Matrix;
@@ -489,8 +489,7 @@ class DrawingCommandManager
     mMaxAreaIndex = 0;
   }
 
-  /** 
-   * @parm azimuth   extend ref. azimuth (negative = no use)
+  /**
    * this is the only place DrawuingScaleReference is instantiated
    */
   void addScaleRef( ) // boolean with_azimuth
@@ -1648,7 +1647,7 @@ class DrawingCommandManager
           if ( lp2 != null ) lp2.mPrev = last;
           line.recomputeSize();
           line.retracePath();
-          // Log.v("DistoXC", "size old " + old_size + " drop " + toDrop + " line2 " + line2.size() + " new " + line.size() );
+          // Log.v("DistoX-C", "size old " + old_size + " drop " + toDrop + " line2 " + line2.size() + " new " + line.size() );
         }
         synchronized( TDPath.mSelectionLock ) {
           mSelection.insertPath( line );

@@ -63,42 +63,42 @@
     <CheckBox android:id="@+id/cb_layer_base"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:text="B"
+      android:text="@string/level_b"
     />
     <CheckBox android:id="@+id/cb_layer_floor"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:text="F"
+      android:text="@string/level_f"
     />
     <CheckBox android:id="@+id/cb_layer_fill"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:text="D"
+      android:text="@string/level_d"
     />
     <CheckBox android:id="@+id/cb_layer_ceil"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:text="C"
+      android:text="@string/level_c"
     />
     <CheckBox android:id="@+id/cb_layer_arti"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:text="A"
+      android:text="@string/level_a"
     />
     <!-- CheckBox android:id="@+id/cb_layer_form"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:text="S"
+      android:text="@string/level_s"
     />
     <CheckBox android:id="@+id/cb_layer_water"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:text="W"
+      android:text="@string/level_w"
     />
     <CheckBox android:id="@+id/cb_layer_text"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:text="T"
+      android:text="@string/level_t"
     / -->
   </LinearLayout>
 

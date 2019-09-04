@@ -13,7 +13,7 @@
 
 package com.topodroid.DistoX;
 
-import android.util.Log;
+// import android.util.Log;
 
 import android.graphics.Canvas;
 // import android.graphics.Paint;

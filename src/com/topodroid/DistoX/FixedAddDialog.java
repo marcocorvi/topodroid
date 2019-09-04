@@ -192,7 +192,7 @@ class FixedAddDialog extends MyDialog
         mContext.startActivity( new Intent( Intent.ACTION_VIEW, uri ) );
       }
     } else if ( b == mBtnClipboard ) {
-      ClipboardManager cm = (ClipboardManager)mContext.getSystemService( Context.CLIPBOARD_SERVICE );
+      ClipboardManager cm = (ClipboardManager)mContext.getSystemService( Context.CLIPBOARD_SERVICE ); // DEPRECAED API-11
       boolean toast = true;
       if ( cm != null ) {
         CharSequence text = cm.getText();

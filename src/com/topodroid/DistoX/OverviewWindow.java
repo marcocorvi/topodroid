@@ -60,7 +60,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import java.util.List;
 import java.util.ArrayList;
 
-import android.util.Log;
+// import android.util.Log;
 
 /**
  */
@@ -470,7 +470,7 @@ public class OverviewWindow extends ItemDrawer
       mButtonView1 = new HorizontalButtonView( mButton1 );
       mListView.setAdapter( mButtonView1.mAdapter );
 
-      BrushManager.makePaths( mApp, res );
+      // BrushManager.makePaths( mApp, res ); FIXME-PATHS
       setTheTitle();
 
       mData         = TopoDroidApp.mData; // new DataHelper( this );

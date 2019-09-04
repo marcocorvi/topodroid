@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-import android.util.Log;
+// import android.util.Log;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -218,7 +218,7 @@ public class MainWindow extends Activity
         }
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // PALETTE
 	if ( mPaletteButtonEnabled ) {
-          BrushManager.makePaths( mApp, getResources() );
+          // BrushManager.makePaths( mApp, getResources() ); // FIXME-PATHS
           SymbolEnableDialog dlg = new SymbolEnableDialog( mActivity );
 	  dlg.anchorTop();
 	  dlg.show();

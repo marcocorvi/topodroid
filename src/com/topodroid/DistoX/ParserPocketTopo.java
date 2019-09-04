@@ -13,7 +13,7 @@
 package com.topodroid.DistoX;
 
 import java.io.File;
-import java.io.FileWriter;
+// import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -31,7 +31,7 @@ import java.util.Locale;
 
 import android.graphics.RectF;
 
-import android.util.Log;
+// import android.util.Log;
 
 class ParserPocketTopo extends ImportParser
 {

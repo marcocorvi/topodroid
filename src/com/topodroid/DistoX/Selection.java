@@ -130,7 +130,7 @@ class Selection
   
   void insertLinePath( DrawingLinePath path ) // synchronized by CommandManager
   {
-    for ( LinePoint p2 = path.mFirst; p2 != null; p2 = p2.mNext ) {
+    for ( LinePoint p2 = path.first(); p2 != null; p2 = p2.mNext ) {
       insertItem( path, p2 );
     }
   }
@@ -156,13 +156,13 @@ class Selection
         break;
       case DrawingPath.DRAWING_PATH_LINE:
         DrawingLinePath lp = (DrawingLinePath)path;
-        for ( p2 = lp.mFirst; p2 != null; p2 = p2.mNext ) {
+        for ( p2 = lp.first(); p2 != null; p2 = p2.mNext ) {
           insertItem( path, p2 );
         }
         break;
       case DrawingPath.DRAWING_PATH_AREA:
         DrawingAreaPath ap = (DrawingAreaPath)path;
-        for ( p2 = ap.mFirst; p2 != null; p2 = p2.mNext ) {
+        for ( p2 = ap.first(); p2 != null; p2 = p2.mNext ) {
           insertItem( path, p2 );
         }
         break;
@@ -241,7 +241,8 @@ class Selection
 	  if ( line2 == line1 ) continue;
 	  if ( line2.mLineType != linetype ) continue;
 	  LinePoint pt2 = sp2.mPoint;
-	  if ( pt2 != line2.mFirst && pt2 != line2.mLast ) continue;
+	  // if ( pt2 != line2.first() && pt2 != line2.last() ) continue;
+	  if ( line2.isNotEndpoint( pt2 ) ) continue;
 
           float d = sp2.distance( x, y );
           if ( d < dmin ) {
@@ -281,7 +282,9 @@ class Selection
       DrawingLinePath line1 = (DrawingLinePath)sp1.mItem;
       if ( line1.mLineType != linetype ) continue;
       LinePoint pt1 = sp1.mPoint;
-      if ( pt1 != line1.mFirst && pt1 != line1.mLast ) continue;
+      // if ( pt1 != line1.first() && pt1 != line1.last() ) continue;
+      if ( line1.isNotEndpoint( pt1 ) ) continue;
+
       float d = sp1.distance( x, y );
       if ( d < dmin ) {
         dmin = d;
@@ -301,7 +304,7 @@ class Selection
   {
     if ( path.mType == DrawingPath.DRAWING_PATH_LINE || path.mType == DrawingPath.DRAWING_PATH_AREA ) {
       DrawingPointLinePath line = (DrawingPointLinePath)path;
-      for ( LinePoint lp = line.mFirst; lp != null; lp = lp.mNext ) {
+      for ( LinePoint lp = line.first(); lp != null; lp = lp.mNext ) {
         for ( SelectionPoint sp : mPoints ) {
           if ( sp.mPoint == lp ) {
             removePoint( sp );
@@ -505,7 +508,7 @@ class Selection
 
   private void rebucketLinePath(DrawingPointLinePath line)
   {
-    for ( LinePoint lp = line.mFirst; lp != null; lp = lp.mNext ) {
+    for ( LinePoint lp = line.first(); lp != null; lp = lp.mNext ) {
       for ( SelectionPoint sp : mPoints ) {
         if ( sp.mPoint == lp ) {
           SelectionBucket sb = sp.mBucket;

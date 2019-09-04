@@ -18,7 +18,7 @@ import java.util.List;
 
 import android.os.Bundle;
 import android.content.Context;
-import android.content.res.Resources;
+// import android.content.res.Resources;
 
 // import android.graphics.*;
 import android.view.View;
@@ -26,10 +26,10 @@ import android.view.View;
 
 import android.widget.TextView;
 import android.widget.Button;
-import android.widget.ListView;
+// import android.widget.ListView;
 import android.widget.LinearLayout;
 
-import android.widget.ArrayAdapter;
+// import android.widget.ArrayAdapter;
 
 class DanglingShotsDialog extends MyDialog
                           implements View.OnClickListener

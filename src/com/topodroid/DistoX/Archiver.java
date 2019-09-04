@@ -67,9 +67,9 @@ class Archiver
       zos.closeEntry( );
       ret = true;
     } catch (FileNotFoundException e ) {
-      // FIXME
+      TDLog.Error( "File Not Found " + e.getMessage() );
     } catch ( IOException e ) {
-      // FIXME
+      TDLog.Error( "IO exception " + e.getMessage() );
     } finally {
       if ( bis != null ) try { bis.close(); } catch (IOException e ) { }
     }

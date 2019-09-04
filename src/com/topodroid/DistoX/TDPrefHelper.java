@@ -11,12 +11,12 @@
  */
 package com.topodroid.DistoX;
 
-import android.util.Log;
+// import android.util.Log;
 
 import android.preference.PreferenceManager;
 import android.content.SharedPreferences;
 // import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-import android.content.SharedPreferences.Editor;
+// import android.content.SharedPreferences.Editor;
 import android.content.Context;
 
 class TDPrefHelper

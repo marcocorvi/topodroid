@@ -92,7 +92,7 @@ class AzimuthDialDialog extends MyDialog
   private void updateView()
   {
     Bitmap bm2 = getRotatedBitmap( mAzimuth, mBMdial );
-    mBTazimuth.setBackgroundDrawable( new BitmapDrawable( mContext.getResources(), bm2 ) );
+    mBTazimuth.setBackgroundDrawable( new BitmapDrawable( mContext.getResources(), bm2 ) ); // DEPRECATED API-16
 
     //+ Bitmap bm2 = mDialBitmap.getBitmap( mAzimuth, 96 );
     //+ TDandroid.setButtonBackground( mBTazimuth, new BitmapDrawable( mContext.getResources(), bm2 ) );

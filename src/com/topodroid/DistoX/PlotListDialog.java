@@ -51,7 +51,7 @@ class PlotListDialog extends MyDialog
   private Button mBtnClose;
   private Button mBtnBack;
 
-  private boolean mDoNew;
+  private final boolean mDoNew;
 
   /* FIXME_SKETCH_3D *
   private Button mBtnSketch3dNew;

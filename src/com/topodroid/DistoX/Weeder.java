@@ -102,7 +102,7 @@ class Weeder
       if ( pp != null ) pp.next = this;
       // if ( nn != null ) nn.prev = this;
     }
-  };
+  }
   // ------------------------------------------------------------------
 
   ArrayList< WeedPoint > mPoints;

@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-import android.util.Log;
+// import android.util.Log;
  
 import android.content.SharedPreferences.Editor;
 
@@ -32,7 +32,7 @@ import android.os.StrictMode;
 import android.hardware.Sensor;
 import android.widget.Button;
 import android.widget.SeekBar;
-import android.graphics.Bitmap;
+// import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 
 class TDandroid

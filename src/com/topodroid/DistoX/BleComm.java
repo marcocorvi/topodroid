@@ -13,18 +13,18 @@
  */
 package com.topodroid.DistoX;
 
-import android.util.Log;
+// import android.util.Log;
 
 import android.os.Handler;
 import android.os.Looper;
 import android.content.Context;
 
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothAdapter;
+// import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothProfile;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattService;
-import android.bluetooth.BluetoothGattDescriptor;
+// import android.bluetooth.BluetoothGattDescriptor;
 import android.bluetooth.BluetoothGattCallback;
 import android.bluetooth.BluetoothGattCharacteristic;
 
@@ -166,7 +166,7 @@ class BleComm extends TopoDroidComm
           if ( mConnectionMode != 1 ) {
             disconnectBleGatt();
           } else if ( isConnected()  ) {
-            if ( wait < 0x0400 ) wait <<= 1; // max 1 sec
+            if ( wait < 0x0400 ) wait *= 2; // max 1 sec
             Handler handler = new Handler( Looper.getMainLooper() );
             handler.postDelayed( new Runnable() { public void run() { readPacket(); } }, wait );
           }

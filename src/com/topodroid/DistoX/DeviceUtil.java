@@ -16,10 +16,10 @@ package com.topodroid.DistoX;
 import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Set;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ArrayList;
+// import java.util.Map;
+// import java.util.HashMap;
+// import java.util.List;
+// import java.util.ArrayList;
 
 // import android.app.Activity;
 // import android.os.Bundle;

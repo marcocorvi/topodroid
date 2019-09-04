@@ -123,7 +123,7 @@ public class SensorActivity extends Activity
       mRBPressure.setEnabled( false );
     }
 
-    sl = mSensorManager.getSensorList( Sensor.TYPE_ORIENTATION );
+    sl = mSensorManager.getSensorList( Sensor.TYPE_ORIENTATION ); // DEPRECATED API-16
     if ( sl.size() > 0 ) {
       mRBGravity.setOnClickListener( this );
       mSensor.addAll( sl ); // for ( Sensor s : sl ) mSensor.add( s );
@@ -170,7 +170,7 @@ public class SensorActivity extends Activity
       mSensorType = Sensor.TYPE_PRESSURE;
       mETtype.setText( R.string.sensor_pressure );
     } else if ( mRBGravity != null && mRBGravity.isChecked() ) {
-      mSensorType = Sensor.TYPE_ORIENTATION; // Sensor.TYPE_GRAVITY;
+      mSensorType = Sensor.TYPE_ORIENTATION; // Sensor.TYPE_GRAVITY; DEPRECATED API-16
       mETtype.setText( R.string.sensor_gravity );
     // } else if ( mRBHumidity != null && mRBHumidity.isChecked() ) {
     //   mSensorType = Sensor.TYPE_RELATIVE_HUMIDITY;
@@ -226,7 +226,7 @@ public class SensorActivity extends Activity
             value = String.format(Locale.US, "%.2f", mValues[0] );
             break;
           case Sensor.TYPE_MAGNETIC_FIELD:
-          case Sensor.TYPE_ORIENTATION:
+          case Sensor.TYPE_ORIENTATION: // DEPRECAED API-16
           // case Sensor.TYPE_ACCELEROMETER:
           default:
             if ( mFirst ) {

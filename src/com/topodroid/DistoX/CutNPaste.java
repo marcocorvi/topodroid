@@ -143,7 +143,11 @@ class CutNPaste
     layout.addView( button, new LinearLayout.LayoutParams(h, w));
     button.setOnClickListener( listener );
     button.setOnTouchListener( new View.OnTouchListener( ) {
-      @Override public boolean onTouch( View v, MotionEvent ev ) { v.setBackgroundColor( TDColor.DARK_ORANGE ); return false; }
+      @Override public boolean onTouch( View v, MotionEvent ev ) {
+        v.setBackgroundColor( TDColor.DARK_ORANGE );
+        // button.performClick(); // don't do performClick right-away, give user a short feedback
+        return false;
+      }
     } );
     return button;
   }

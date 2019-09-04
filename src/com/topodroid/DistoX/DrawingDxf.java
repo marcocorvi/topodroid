@@ -29,7 +29,7 @@ import java.io.IOException;
 
 import android.graphics.RectF;
 
-import android.util.Log;
+// import android.util.Log;
 
 class DrawingDxf
 {

@@ -14,7 +14,7 @@
  */
 package com.topodroid.DistoX;
 
-import android.util.Log;
+// import android.util.Log;
 
 // import android.graphics.Canvas;
 // import android.graphics.Paint;
@@ -36,13 +36,18 @@ class DrawingPointLinePath extends DrawingPath
   private boolean mClosed;
   // ArrayList< LinePoint > mPoints;      // points (scene coordinates)
   private LinePoint mPrevPoint = null; // previous point while constructing the line
-  LinePoint mFirst;
-  LinePoint mLast;
+  protected LinePoint mFirst;
+  protected LinePoint mLast;
   private int mSize;  // number of points
 
   float mDx, mDy; // unit vector in the direction of this line
 
   int size() { return mSize; }
+
+  // access to mFirst mLast is used only by Selection
+  LinePoint first() { return mFirst; }
+  // LinePoint last()  { return mLast; }
+  boolean isNotEndpoint( LinePoint lp ) { return lp != mFirst && lp != mLast; }
 
   // FIXME-COPYPATH
   // @Override
@@ -151,10 +156,24 @@ class DrawingPointLinePath extends DrawingPath
       mFirst.mPrev.mNext = null;
       mFirst.mPrev = null;
     }
+    // THIS SHOULD NOT BE NECESSARY
+    if ( mLast != null && mLast.mNext != null ) { // make sure mLast has no next
+      if ( mLast.mNext.mPrev == mLast ) mLast.mNext.mPrev = null;
+      mLast.mNext = null;
+    }
+
+    // THIS SHOULD NOT BE NECESSARY
+    // LinePoint prev = mFirst;
     for ( LinePoint p = mFirst.mNext; p != null; p = p.mNext ) {
+      // THIS SHOULD NOT BE NECESSARY
+      // p.mPrev = prev;
+      // prev = p;
       ++ mSize;
       if ( p.mNext == mFirst ) p.mNext = null; // make sure we don't come back to mFirst
     }
+    // THIS SHOULD NOT BE NECESSARY
+    // mLast = prev;
+
     // CHECK;
     // int size = 1;
     // for ( LinePoint p = mLast.mPrev; p != null && p != mLast; p = p.mPrev ) {

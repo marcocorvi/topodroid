@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-import android.util.Log;
+// import android.util.Log;
 
 import java.util.Locale;
 // import java.util.ArrayList;
@@ -161,6 +161,8 @@ class SymbolPointLibrary extends SymbolLibrary
             }
 	  }
           symbol.setEnabled( enable );
+        } else {
+          TDLog.Error( "point " + symbol.mThName + " already in library" );
         }
       }
       sortSymbolByName( systemNr );

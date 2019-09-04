@@ -19,7 +19,7 @@ import android.bluetooth.BluetoothDevice;
 // static class (singleton) with instance data
 class TDInstance
 {
-  static Context context; // must be the application context FIXME LEAK
+  static Context context; // must be the application context FIXME LEAK AND BREAKS INSTANT RUN
 
   static String cwd;  // current work directory
   static String cbd;  // current base directory

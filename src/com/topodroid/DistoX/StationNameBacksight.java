@@ -20,7 +20,7 @@ import java.util.Set;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.util.Log;
+// import android.util.Log;
 
 class StationNameBacksight extends StationName
 {

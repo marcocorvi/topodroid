@@ -15,12 +15,10 @@
  */
 package com.topodroid.DistoX;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.FileWriter;
+// import java.io.File;
+// import java.io.FileNotFoundException;
+// import java.io.IOException;
+// import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
@@ -29,23 +27,23 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.DataSetObservable;
-import android.database.DatabaseUtils.InsertHelper;
+// import android.database.DatabaseUtils.InsertHelper;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteStatement;
+// import android.database.sqlite.SQLiteStatement;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteDiskIOException;
 
 // import android.widget.Toast;
 
-import android.util.Log;
+// import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.HashMap;
+// import java.util.HashMap;
 
-@SuppressWarnings("SyntaxError")
+
 class PacketLogger extends DataSetObservable
 {
   static final String DB_VERSION = "1";
@@ -261,7 +259,7 @@ class PacketLogger extends DataSetObservable
    // ----------------------------------------------------------------------
    // DATABASE TABLES
 
-   @SuppressWarnings("SyntaxError")
+
    private static class DistoXOpenHelper extends SQLiteOpenHelper
    {
       private static final String create_table = "CREATE TABLE IF NOT EXISTS ";

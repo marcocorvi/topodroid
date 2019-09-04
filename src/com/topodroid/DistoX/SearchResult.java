@@ -37,7 +37,7 @@ class SearchResult
 
   void clear() { mPos.clear(); mIdx = -1; }
 
-  void add( int pos ) { mPos.add( new Integer(pos) ); }
+  void add( int pos ) { mPos.add( Integer.valueOf(pos) ); }
 
   int nextPos( )
   {

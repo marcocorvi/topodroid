@@ -12,7 +12,7 @@
  */
 package com.topodroid.DistoX;
 
-import android.util.Log;
+// import android.util.Log;
 
 // import java.io.File;
 import java.io.IOException;

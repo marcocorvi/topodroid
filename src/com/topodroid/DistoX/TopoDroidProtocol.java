@@ -11,11 +11,11 @@
  */
 package com.topodroid.DistoX;
 
-import android.util.Log;
+// import android.util.Log;
 
 // import java.lang.ref.WeakReference;
 
-import java.io.IOException;
+// import java.io.IOException;
 
 import java.util.UUID;
 import java.util.List;

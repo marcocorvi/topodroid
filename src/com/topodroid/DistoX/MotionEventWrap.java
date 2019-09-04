@@ -28,7 +28,7 @@ class MotionEventWrap
       // FIXME NFE 
 
       // Use Build.VERSION.SDK_INT if you don't have to support Cupcake
-      if (Integer.parseInt(Build.VERSION.SDK) >= Build.VERSION_CODES.ECLAIR) {
+      if (Integer.parseInt(Build.VERSION.SDK) >= Build.VERSION_CODES.ECLAIR) { // DEPRECATED API-16
          // Log.d("MotionEventWrap", "Using Eclair version");
          return new MotionEventEclair(event);
       } else {

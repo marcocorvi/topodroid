@@ -60,7 +60,7 @@ class ImportParser
 
   Pattern pattern = Pattern.compile( "\\s+" );
 
-  ImportParser( boolean apply_declination ) throws ParserException
+  ImportParser( boolean apply_declination ) // throws ParserException
   {
     mDate = TDUtil.currentDate();
     shots  = new ArrayList<>();

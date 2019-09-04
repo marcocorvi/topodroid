@@ -32,4 +32,18 @@
   <string name="less_than" translatable="false">&lt;</string>
   <string name="greater_than" translatable="false">&gt;</string>
   <string name="proj4" translatable="false">Proj4</string>
+
+  <string name="level_b" translatable="false">B</string>
+  <string name="level_f" translatable="false">F</string>
+  <string name="level_d" translatable="false">D</string>
+  <string name="level_c" translatable="false">C</string>
+  <string name="level_a" translatable="false">A</string>
+
+  <string name="packet_none" translatable="false">-</string>
+  <string name="packet_d" translatable="false">D</string>
+  <string name="packet_v" translatable="false">V</string>
+  <string name="packet_g" translatable="false">G</string>
+  <string name="packet_m" translatable="false">M</string>
+  <string name="packet_c" translatable="false">C</string>
+  <string name="packet_x" translatable="false">X</string>
 </resources>

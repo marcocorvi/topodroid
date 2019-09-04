@@ -13,29 +13,29 @@
  */
 package com.topodroid.DistoX;
 
-import android.util.Log;
+// import android.util.Log;
 
 // import java.lang.ref.WeakReference;
 
 import java.io.IOException;
 import java.io.EOFException;
-import java.io.FileNotFoundException;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+// import java.io.FileNotFoundException;
+// import java.io.File;
+// import java.io.FileInputStream;
+// import java.io.FileOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.util.UUID;
-import java.util.List;
-import java.util.Locale;
+// import java.util.UUID;
+// import java.util.List;
+// import java.util.Locale;
 // import java.lang.reflect.Field;
-import java.net.Socket;
+// import java.net.Socket;
 
 // import android.os.CountDownTimer;
 
 import android.content.Context;
 
-import java.nio.channels.ClosedByInterruptException;
+// import java.nio.channels.ClosedByInterruptException;
 // import java.nio.ByteBuffer;
 
 class DistoXA3Protocol extends DistoXProtocol

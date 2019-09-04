@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-import android.util.Log;
+// import android.util.Log;
 
 import java.io.File;
 // import java.io.FileFilter;
@@ -53,8 +53,8 @@ import android.os.RemoteException;
 // import android.os.SystemClock; // FIXME TROBOT
 
 import android.app.Application;
-import android.app.Notification;
-import android.app.NotificationManager;
+// import android.app.Notification;
+// import android.app.NotificationManager;
 // import android.app.KeyguardManager;
 // import android.app.KeyguardManager.KeyguardLock;
 // import android.app.Activity;
@@ -81,15 +81,15 @@ import android.view.ViewGroup.LayoutParams;
 
 import android.widget.Button;
 // import android.graphics.Point;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+// import android.graphics.Bitmap;
+// import android.graphics.BitmapFactory;
 // import android.graphics.drawable.BitmapDrawable;
 
 
 import android.util.DisplayMetrics;
 
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothAdapter;
+// import android.bluetooth.BluetoothAdapter;
 // import android.bluetooth.BluetoothDevice; // COSURVEY
 
 public class TopoDroidApp extends Application
@@ -183,10 +183,10 @@ public class TopoDroidApp extends Application
   static DeviceHelper mDData = null;      // device/calib database
 
   static TDPrefHelper mPrefHlp      = null;
-  static SurveyWindow mSurveyWindow = null;
-  static ShotWindow   mShotWindow   = null;
+  static SurveyWindow mSurveyWindow = null; // FIXME ref mActivity
+  static ShotWindow   mShotWindow   = null; // FIXME ref mActivity
   // static DrawingWindow mDrawingWindow = null; // FIXME currently not used
-  static MainWindow mActivity = null; 
+  static MainWindow mActivity = null; // FIXME ref mActivity
 
   static boolean mGMActivityVisible = false;
 
@@ -796,7 +796,7 @@ public class TopoDroidApp extends Application
     TDInstance.cbd = cbd;
     TDInstance.cwd = cwd;
     TDPath.setPaths( TDInstance.cwd, TDInstance.cbd );
-    mData.openDatabase();
+    mData.openDatabase( TDInstance.context );
     if ( mActivity != null ) mActivity.setTheTitle( );
   }
 

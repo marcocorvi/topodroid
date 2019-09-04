@@ -26,10 +26,10 @@ import android.view.View;
 
 import android.widget.TextView;
 import android.widget.Button;
-import android.widget.ListView;
+// import android.widget.ListView;
 import android.widget.LinearLayout;
 
-import android.widget.ArrayAdapter;
+// import android.widget.ArrayAdapter;
 
 class DistoXStatDialog extends MyDialog
                                implements View.OnClickListener

@@ -16,40 +16,40 @@
     <CheckBox android:id="@+id/type_zero"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="-"
+      android:text="@string/packet_none"
     />
     <CheckBox android:id="@+id/type_d"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="D"
+      android:text="@string/packet_d"
       android:checked="true"
     />
     <CheckBox android:id="@+id/type_v"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="V"
+      android:text="@string/packet_v"
     />
     <CheckBox android:id="@+id/type_g"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="G"
+      android:text="@string/packet_g"
       android:checked="true"
     />
     <CheckBox android:id="@+id/type_m"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="M"
+      android:text="@string/packet_m"
       android:checked="true"
     />
     <CheckBox android:id="@+id/type_c"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="C"
+      android:text="@string/packet_c"
     />
     <CheckBox android:id="@+id/type_x"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="X"
+      android:text="@string/packet_x"
     />
   </LinearLayout>
 

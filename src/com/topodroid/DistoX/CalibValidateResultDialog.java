@@ -31,16 +31,16 @@ class CalibValidateResultDialog extends MyDialog
   // private ImageView hist0;
   // private ImageView hist1;
   // private ImageView hist2;
-  private String avestd0;
-  private String avestd1;
-  // private String std; // UNUSED
-  private String err1;
-  private String err2;
-  private String errmax;
-  private String title;
-  private float[] errors0;
-  private float[] errors1;
-  private float[] errors2;
+  private final String avestd0;
+  private final String avestd1;
+  // private final String std; // UNUSED
+  private final String err1;
+  private final String err2;
+  private final String errmax;
+  private final String title;
+  private final float[] errors0;
+  private final float[] errors1;
+  private final float[] errors2;
 
   CalibValidateResultDialog( Context context,
                                     float[] errs0, float[] errs1, float[] errs2,

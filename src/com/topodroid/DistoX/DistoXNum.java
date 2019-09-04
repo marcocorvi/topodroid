@@ -17,7 +17,7 @@ import java.util.Stack;
 import java.util.Locale;
 import java.util.HashMap;
 
-import android.util.Log;
+// import android.util.Log;
 
 class DistoXNum
 {
@@ -740,7 +740,7 @@ class DistoXNum
 	if ( blk.mFrom != null && blk.mFrom.length() > 0 && blk.mTo != null && blk.mTo.length() > 0 ) {
           // Log.v("DistoX", blk.mFrom + " depth " + blk.mDepth );
           // depths.putIfAbsent( blk.mFrom, new Float( blk.mDepth ) );
-          if ( ! depths.containsKey(blk.mFrom) ) depths.put( blk.mFrom, new Float( blk.mDepth ) );
+          if ( ! depths.containsKey(blk.mFrom) ) depths.put( blk.mFrom, Float.valueOf( blk.mDepth ) );
         }
       }
       boolean depth_error = false;

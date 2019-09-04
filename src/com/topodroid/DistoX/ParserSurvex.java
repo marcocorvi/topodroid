@@ -216,8 +216,6 @@ class ParserSurvex extends ImportParser
 		}
               } else if ( cmd.equals("include") ) {
                 // ignore
-              } else if ( cmd.equals("sd") ) {
-                // ignore
               } else if ( cmd.equals("copyright") ) {
                 // ignore
               } else if ( cmd.equals("entrance") ) {

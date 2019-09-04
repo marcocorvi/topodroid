@@ -41,7 +41,7 @@ class DistoXAnnotations extends MyDialog // Activity
   private Button   mButtonOK;
   // private Button   mButtonCancel;
   private String   mFilename;
-  private String   mTitle;
+  private final String   mTitle;
 
   DistoXAnnotations( Context context, String title )
   {
