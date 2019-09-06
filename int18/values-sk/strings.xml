@@ -95,6 +95,7 @@
     <!-- UNUSED string name="data"> data</string -->
     <string name="using">Pripojené zariadenie %1$s</string>
     <string name="calib_error">Priemerná chyba: %1$.2f stupňov (BH delta %2$.3f)</string>
+    <string name="calib_validate_error">Priemerná chyba: %1$.2f stupňov</string>
     <string name="calib_stddev">Chyba stddev: %1$.4f stupňov</string>
     <string name="calib_max_error">Maximálna chyba: %1$.4f stupňov</string>
     <string name="calib_ave_std">Priemerná presnosť: %1$.4f %2$.4f stupňov</string>
