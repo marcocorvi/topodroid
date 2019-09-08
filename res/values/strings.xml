@@ -491,8 +491,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="out_of_memory">WARNING: out of memory !</string>
     <string name="disk_io_error">CRITICAL: disk i/o error !</string>
 
-    <string name="toporobot_warning">TopoRobot policy is exterimental !</string>
-    <string name="anomaly_warning">Magnatic anomaly compensation is expert !</string>
+    <string name="toporobot_warning">TopoRobot policy is experimental !</string>
+    <string name="anomaly_warning">Magnetic anomaly compensation is expert !</string>
     <string name="tripod_warning">Tripod policy is advanced !</string>
     <string name="coverage_warning">Angle coverage below %1$d %%\nWrite coefficients?</string>
     <string name="delta_warning">Average error above %1$.1f\nWrite coefficients?</string>
