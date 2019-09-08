@@ -58,7 +58,7 @@
     <string name="make_walls">Paredes</string>
     <string name="missing_station">Base inexistente</string>
     <string name="station_not_found">Base não encontrada</string>
-    <string name="shot_not_found">Visada não encontrada</string>
+    <string name="shot_not_found">Medida não encontrada</string>
     <!-- UNUSED string name="missing_area">ÁREA</string -->
     <!-- UNUSED string name="missing_hint">Habilite ou instale os símbolos que estão faltando</string -->
     <!-- UNUSED string name="missing_line">LINHA</string -->
@@ -134,7 +134,7 @@
 
     <string name="comment">comentário</string>
     <!-- UNUSED string name="flag">Flag</string -->
-    <!-- UNUSED string name="backshot">Visada contrária</string -->
+    <!-- UNUSED string name="backshot">Contramedida</string -->
     <!-- UNUSED string name="duplicate">Duplicar</string -->
     <!-- UNUSED string name="regular">Regular</string -->
     <!-- UNUSED string name="surface">Superfície</string -->
@@ -286,7 +286,7 @@
     <string name="no_gms">Calibração sem dados.\nUse o botão de Download</string>
     <string name="no_geo_station">Falha: nenhuma base geolocalizada</string>
     <string name="no_leg_first">Seleção não começa com uma visada</string>
-    <string name="no_leg_intersection">Linha de corte não cruza nenhuma linha de visada</string>
+    <string name="no_leg_intersection">Linha de corte não cruza nenhuma visada</string>
     <string name="no_location_data">Nenhuma informação de posição</string>
     <string name="no_paired_device">Nenhum dispositivo associado.\nBusque e associe uma DistoX</string>
     <string name="no_photos">Topo sem foto</string>
@@ -424,7 +424,7 @@
     <string name="saving_file_failed">Falha ao salvar o arquivo</string>
     <!-- UNUSED string name="scrap_name">nome do croqui</string -->
     <string name="splay">visada auxiliar</string>
-    <string name="too_many_leg_intersection">A linha de corte cruza mais de uma linha de visada.</string>
+    <string name="too_many_leg_intersection">Linha de corte cruza mais de uma visada.</string>
     <!-- UNUSED string name="too_many_legs_xsection">Corte X em bases com visadas para mais de 2 outras bases não é suportado.</string -->
     <!-- UNUSED string name="converted_tdr2th2">Arquivos binários dos croquis convertidos para th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Sobrescrever arquivos de croqui th2?</string -->
@@ -448,8 +448,8 @@
 
     <!-- UNUSED string name="shot_clino">clinômetro</string -->
     <!-- UNUSED string name="shot_compass">bússola</string -->
-    <string name="shot_delete">Apagar visada?</string>
-    <string name="shots_delete">Apagar visadas?</string>
+    <string name="shot_delete">Apagar medida?</string>
+    <string name="shots_delete">Apagar medidas?</string>
     <string name="shot_check">Marcar medida como medida de calibração?</string>
     <string name="shot_from">de</string>
     <string name="shot_info">Inserir medida manualmente</string>
@@ -496,7 +496,7 @@
     <string name="undelete_overshoot">Medidas erradas</string>
     <string name="undelete_check">Verificações</string>
     <string name="undelete_plot">Croquis</string>
-    <string name="delete_whole_leg">Apague este braço inteiro</string>
+    <string name="delete_whole_leg">Apague esta visada inteira</string>
     <string name="visible_border">borda visível</string>
     <!-- UNUSED string name="vthreshold">limite vertical</string -->
     <string name="wait_scan">Procurando: espere &#8230;</string>
@@ -693,7 +693,7 @@
     <string name="btn_horizontal">Horizontal</string>
 
     <string name="split_nothing">Nada a ser dividido</string>
-    <string name="flip_shots">Virar visadas</string>
+    <string name="flip_shots">Virar medidas</string>
     <string name="copy_items">Copiar itens</string>
 
     <string name="man_preface">Prefácio</string>
@@ -703,7 +703,7 @@
     <string name="man_calib">4. Tela Calibração</string>
     <string name="man_gm">5. Informação de calibração</string>
     <string name="man_survey">6. Dados da topografia</string>
-    <string name="man_shot">7. Lista de visadas</string>
+    <string name="man_shot">7. Lista de medidas</string>
     <string name="man_info">8. Informaçãos sobre a topografia</string>
     <string name="man_sketch">9. Tela Croqui</string>
     <string name="man_draw">10. Desenhando croquis</string>
@@ -969,8 +969,8 @@
 
   <string name="pref_bezier_step_title">Espaçamento pontos</string>
   <string name="pref_bezier_step_summary">Distância entre pontos em uma linha exportada [m]</string>
-  <string name="pref_leg_shots_title">Mínimo medições por visada</string>
-  <string name="pref_leg_shots_summary">Quantidade mínimo de medições para uma visada</string>
+  <string name="pref_leg_shots_title">Mínimo medidas por visada</string>
+  <string name="pref_leg_shots_summary">Quantidade mínima de medidas para uma visada</string>
   <string name="pref_recent_timeout_title">Prazo "dados recentes"</string>
   <string name="pref_recent_timeout_summary">Limite de tempo para dados ser considerado recente</string>
   <string name="pref_triple_shot_title">Som visada</string>
@@ -1009,8 +1009,8 @@
   <string name="pref_svg_linestroke_summary">Espessura das linhas em SVG</string>
   <string name="pref_svg_gridstroke_title">Espessura grade SVG</string>
   <string name="pref_svg_gridstroke_summary">Espessura das lionhas da grade em SVG</string>
-  <string name="pref_svg_shotstroke_title">Espessura visada SVG</string>
-  <string name="pref_svg_shotstroke_summary">Espessura das linhas de visada em SVG</string>
+  <string name="pref_svg_shotstroke_title">Espessura medida SVG</string>
+  <string name="pref_svg_shotstroke_summary">Espessura das linhas de medidas em SVG</string>
   <string name="pref_svg_linedirstroke_title">Espessura orientação linha SVG</string>
   <string name="pref_svg_linedirstroke_summary">ESpessura das orientações de linha em SVG</string>
   <string name="pref_svg_line_dir_title">Orientação das linhas SVG</string>
@@ -1109,8 +1109,8 @@
 
   <string name="pref_leg_title">Tolerância visadas</string>
   <string name="pref_leg_summary">Tolerância entre as medições de uma visada</string>
-  <string name="pref_max_shot_title">Comprimento máximo visada</string>
-  <string name="pref_max_shot_summary">Comprimento máximo para visadas [m]</string>
+  <string name="pref_max_shot_title">Comprimento máximo medida</string>
+  <string name="pref_max_shot_summary">Comprimento máximo de medidas [m]</string>
   <string name="pref_min_leg_title">Comprimento mínimo visada</string>
   <string name="pref_min_leg_summary">Comprimeto mínimo de visadas [m]</string>
   <string name="pref_backsight_title">Medida contra</string>
@@ -1332,7 +1332,7 @@
   <string name="pref_log_proto">Protocolo DistoX</string>
   <string name="pref_log_ptopo">PocketTopo</string>
   <string name="pref_log_sensor">Sensores</string>
-  <string name="pref_log_shot">Visadas</string>
+  <string name="pref_log_shot">Medidas</string>
   <string name="pref_log_sync">Mapeamento compartilhado</string>
   <string name="pref_log_survey">Topografias</string>
   <string name="pref_log_therion">Therion</string>
