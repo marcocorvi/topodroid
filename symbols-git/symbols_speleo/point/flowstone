@@ -1,9 +1,9 @@
 symbol point
 name flowstone
+name-de Sinter
 name-pt escorrimento
 name-ro cruste-podea
 name-ru натёки
-name-de Sinter
 th_name flowstone
 orientation no
 color 0xffcc66
