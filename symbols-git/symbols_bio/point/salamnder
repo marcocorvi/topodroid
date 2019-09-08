@@ -1,6 +1,7 @@
 symbol point
 name salamander
 name-de Salamander
+name-pt salamandra
 th_name u:salamander
 color 0xcccc33
 csurvey 0 0 0
