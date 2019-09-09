@@ -15,7 +15,7 @@
     <string name="setup_buttonsize_title">Configuração TopoDroid. Tamanho dos botões</string>
     <string name="setup_drawingunit_title">Configuração TopoDroid. Tamanho dos ícones</string>
     <string name="setup_done_title">Configuração TopoDroid. Fim</string>
-    <!-- TODO string name="setup_buttonsample">Button size</string -->
+    <string name="setup_buttonsample">Tamanho do botão</string>
 
     <string name="setup_textsize">Defina o tamanho do texto.\nPode ser alterado depois na janela principal de configurações.</string>
     <string name="setup_buttonsize">Defina o tamanho dos botões.\nPode ser alterado depois na janela principal de configurações.</string>
@@ -34,9 +34,9 @@
     <string name="UP">PARA CIMA</string>
     <string name="DOWN">PARA BAIXO</string>
 
-    <!-- TODO string name="xsplay">X</string -->
-    <!-- TODO string name="hsplay">H</string -->
-    <!-- TODO string name="vsplay">V</string -->
+    <string name="xsplay">X</string>
+    <string name="hsplay">H</string>
+    <string name="vsplay">V</string>
 
     <string name="cut">CORTAR</string>
     <string name="copy">COPIAR</string>
@@ -58,7 +58,7 @@
     <string name="make_walls">Paredes</string>
     <string name="missing_station">Base inexistente</string>
     <string name="station_not_found">Base não encontrada</string>
-    <!-- TODO string name="shot_not_found">No shot found</string -->
+    <string name="shot_not_found">Medida não encontrada</string>
     <!-- UNUSED string name="missing_area">ÁREA</string -->
     <!-- UNUSED string name="missing_hint">Habilite ou instale os símbolos que estão faltando</string -->
     <!-- UNUSED string name="missing_line">LINHA</string -->
@@ -70,7 +70,7 @@
     <string name="failed_snap_to_line">Nenhum ponto de fechamento de linha para atrair a borda da área</string>
     <string name="failed_snap_to_point">Nenhum ponto de fechamento para atrair o ponto</string>
     <string name="failed_snap_to_splays">Nenhuma medida auxiliar próxima onde juntar linha</string>
-    <!-- TODO string name="failed_append_to_line">Failed to append to another line</string -->
+    <string name="failed_append_to_line">Falha ao conectar a outra linha</string>
 
     <string name="calibration_title">Calibração de instrumentos</string>
     <string name="calibration_length">Trena</string>
@@ -134,7 +134,7 @@
 
     <string name="comment">comentário</string>
     <!-- UNUSED string name="flag">Flag</string -->
-    <!-- UNUSED string name="backshot">Visada contrária</string -->
+    <!-- UNUSED string name="backshot">Contramedida</string -->
     <!-- UNUSED string name="duplicate">Duplicar</string -->
     <!-- UNUSED string name="regular">Regular</string -->
     <!-- UNUSED string name="surface">Superfície</string -->
@@ -160,7 +160,7 @@
     <string name="import_title">Importar topo</string>
     <!-- UNUSED string name="import_wait">Importando arquivo &#8230; Por favor aguarde &#8230;</string -->
     <string name="import_already">Topo já importada</string>
-    <!-- TODO string name="import_bad">Invalid import file</string -->
+    <string name="import_bad">Arquivo de importação inválido</string>
     <string name="import_none">Nenhum arquivo a ser importado</string>
     <string name="import_failed">Importação de arquivo falhou</string>
     <string name="file_not_found">Arquivo não encontrado</string>
@@ -255,7 +255,7 @@
     <!-- UNUSED string name="splays_toggle">Alternar exibição das medidas auxiliares</string -->
     <string name="splays_on_off">Medidas auxiliares</string>
     <string name="splays">medidas auxiliares</string>
-    <!-- TODO string name="legs">Legs</string -->
+    <string name="legs">Visadas</string>
     <!-- UNUSED string name="fmt_listen">OUVIR | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Latitude %1$s</string>
@@ -278,15 +278,15 @@
     <string name="no_calibration">Nenhuma calibração selecionada</string>
     <string name="no_capture_app">Nenhum aplicativo de captura de imagem</string>
     <string name="no_cave3d">Cave3D não instalado</string>
-    <!-- TODO string name="no_data_reduction">No data reduction</string -->
+    <string name="no_data_reduction">Nenhuma redução nos dados</string>
     <string name="no_db">Nenhum banco de dados</string>
     <string name="no_device_address">Dispositivo não selecionado</string>
     <string name="no_device_found">Nenhum dispositivo encontrado</string>
     <string name="no_feature_audio">Sem suporte para áudio</string>
     <string name="no_gms">Calibração sem dados.\nUse o botão de Download</string>
     <string name="no_geo_station">Falha: nenhuma base geolocalizada</string>
-    <!-- TODO string name="no_leg_first">Selection does not start with a leg</string -->
-    <string name="no_leg_intersection">Linha de corte não cruza nenhuma linha de visada</string>
+    <string name="no_leg_first">Seleção não começa com uma visada</string>
+    <string name="no_leg_intersection">Linha de corte não cruza nenhuma visada</string>
     <string name="no_location_data">Nenhuma informação de posição</string>
     <string name="no_paired_device">Nenhum dispositivo associado.\nBusque e associe uma DistoX</string>
     <string name="no_photos">Topo sem foto</string>
@@ -301,7 +301,7 @@
     <string name="no_undelete">Nenhum item a ser restaurado</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Azimute %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Inclinação %5$.1f"</string>
-    <!-- TODO string name="format_closure">%1$s-%2$s: %3$.1f / %4$.1f m [%5$.1f %6$.1f] %7$.1f (%8$.1f \u00b0)</string -->
+    <string name="format_closure">%1$s-%2$s: %3$.1f / %4$.1f m [%5$.1f %6$.1f] %7$.1f (%8$.1f \u00b0)</string>
 
     <string name="menu_3d">3D</string>
     <string name="menu_about">SOBRE</string>
@@ -309,7 +309,7 @@
     <!-- UNUSED string name="menu_attach">CONECTAR</string -->
     <!-- UNUSED string name="menu_attached">Conectado</string -->
     <!-- UNUSED string name="menu_ready">Pronto</string -->
-    <!-- TODO string name="menu_backups">CLEAR BACKUPS</string -->
+    <string name="menu_backups">APAGAR BACKUPS</string>
     <string name="menu_calib_check">VERIF. CALIB.</string>
     <string name="menu_close">FECHAR</string>
     <!-- UNUSED string name="menu_clear">LIMPAR</string -->
@@ -317,8 +317,8 @@
     <string name="menu_delete">APAGAR</string>
     <string name="menu_detach">DESCONECTAR</string>
     <!-- UNUSED string name="menu_display">DISPLAY</string -->
-    <!-- TODO string name="menu_show_deleted">SHOW DELETED</string -->
-    <!-- TODO string name="menu_hide_deleted">HIDE DELETED</string -->
+    <string name="menu_show_deleted">MOSTRAR APAGADOS</string>
+    <string name="menu_hide_deleted">ESCONDER APAGADOS</string>
     <string name="menu_distox">DISTOX</string>
     <string name="menu_export">EXPORTAR</string>
     <string name="menu_firmware">FIRMWARE</string>
@@ -333,13 +333,13 @@
     <string name="menu_manual_calibration">CALIBRAÇÃO</string>
     <string name="menu_options">CONFIGURAÇÕES</string>
     <string name="menu_overview">VISÃO GLOBAL</string>
-    <!-- TODO string name="menu_packets">PACKETS</string -->
+    <string name="menu_packets">PACOTES</string>
     <string name="menu_pair">PAREAR</string>
     <string name="menu_palette">PALETA</string>
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SENSOR</string>
     <string name="menu_scan">PROCURAR</string>
-    <!-- TODO string name="menu_scan_ble">SCAN BTLE</string -->
+    <string name="menu_scan_ble">PROCURAR DISPOSITIVOS BLE</string>
     <!-- UNUSED string name="menu_station">BASES</string -->
     <string name="menu_stats">ESTATÍSTICAS</string>
     <string name="menu_survey">INFO TOPO</string>
@@ -348,9 +348,9 @@
     <string name="menu_validate">VALIDAR</string>
     <string name="menu_zoom_fit">ZOOM GERAL</string>
 
-    <!-- TODO string name="ble_scan_failed">BLE scan failed</string -->
-    <!-- TODO string name="ble_gatt_failure">BLE failure</string -->
-    <!-- TODO string name="ble_no_remote">No remote device</string -->
+    <string name="ble_scan_failed">Busca por dispositivos BLE falhou</string>
+    <string name="ble_gatt_failure">Falha no dispositivo BLE</string>
+    <string name="ble_no_remote">Nenhum dispositivo remoto</string>
 
     <string name="popup_join_pt">Juntar ao ponto mais próximo</string>
     <string name="popup_snap_ln">Juntar à linha mais próxima</string>
@@ -360,7 +360,7 @@
     <string name="popup_sharp_pt">Deixar segmento reto</string>
     <string name="popup_curve_pt">Suavizar segmento</string>
     <string name="popup_remove_pt">Apagar ponto</string>
-    <!-- TODO string name="popup_append_line">Append to line</string -->
+    <string name="popup_append_line">Ligar à linha</string>
 
     <string name="popup_erase_all">Apagar tudo</string>
     <string name="popup_erase_point">Apagar pontos</string>
@@ -380,8 +380,8 @@
     <string name="popup_cont_both">Ambos pontos</string>
     <string name="popup_cont_continue">Continuar</string>
 
-    <!-- TODO string name="connection_error">Connection error</string -->
-    <!-- TODO string name="connecting">Connecting &#8230;</string -->
+    <string name="connection_error">Erro na conexão</string>
+    <string name="connecting">Conectando &#8230;</string>
     <!-- UNUSED string name="connected_none">Não conectado</string -->
     <!-- UNUSED string name="connected_already">Já conectado</string -->
 
@@ -406,7 +406,7 @@
     <string name="item_delete">Apagar item %1$s?</string>
     <string name="splay_delete">Apagar medida auxiliar %1$s ?</string>
     <string name="plot_duplicate_name">Nome de croqui repetido</string>
-    <!-- TODO string name="plot_dangling">Dangling sketch</string -->
+    <string name="plot_dangling">Croqui desconectado</string>
     <!-- UNUSED string name="plot_name">Nome do croqui</string -->
     <string name="plot_new">Novo croqui</string>
     <string name="plot_not_found">Croqui não encontrado</string>
@@ -424,7 +424,7 @@
     <string name="saving_file_failed">Falha ao salvar o arquivo</string>
     <!-- UNUSED string name="scrap_name">nome do croqui</string -->
     <string name="splay">visada auxiliar</string>
-    <string name="too_many_leg_intersection">A linha de corte cruza mais de uma linha de visada.</string>
+    <string name="too_many_leg_intersection">Linha de corte cruza mais de uma visada.</string>
     <!-- UNUSED string name="too_many_legs_xsection">Corte X em bases com visadas para mais de 2 outras bases não é suportado.</string -->
     <!-- UNUSED string name="converted_tdr2th2">Arquivos binários dos croquis convertidos para th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Sobrescrever arquivos de croqui th2?</string -->
@@ -448,8 +448,8 @@
 
     <!-- UNUSED string name="shot_clino">clinômetro</string -->
     <!-- UNUSED string name="shot_compass">bússola</string -->
-    <string name="shot_delete">Apagar visada?</string>
-    <string name="shots_delete">Apagar visadas?</string>
+    <string name="shot_delete">Apagar medida?</string>
+    <string name="shots_delete">Apagar medidas?</string>
     <string name="shot_check">Marcar medida como medida de calibração?</string>
     <string name="shot_from">de</string>
     <string name="shot_info">Inserir medida manualmente</string>
@@ -477,11 +477,11 @@
     <string name="out_of_memory">ALERTA: sem memória!</string>
     <string name="disk_io_error">CRÍTICO: erro de E/S no disco!</string>
     
-    <!-- TODO string name="toporobot_warning">TopoRobot policy is exterimental !</string -->
-    <!-- TODO string name="anomaly_warning">Magnatic anomaly compensation is expert !</string -->
-    <!-- TODO string name="tripod_warning">Tripod policy is advanced !</string -->
-    <!-- TODO string name="coverage_warning">Angle coverage below %1$d %%\nWrite coefficients?</string -->
-    <!-- TODO string name="delta_warning">Average error above %1$.1f\nWrite coefficients?</string -->
+    <string name="toporobot_warning">Política para o TopoRobot é 'Teste devel'!</string>
+    <string name="anomaly_warning">Compensação de anomalias magnéticas é 'Especialista'!</string>
+    <string name="tripod_warning">Política para tripés é "Avançado'!</string>
+    <string name="coverage_warning">Amplitude angular abaixo de %1$d %%\nGravar coeficientes?</string>
+    <string name="delta_warning">Erro mpédio acima de %1$.1f\nGravar coeficientes?</string>
 
     <string name="cannot_rename">Não é possível renomear a topo</string>
     <string name="declination">declinação magnética</string>
@@ -496,7 +496,7 @@
     <string name="undelete_overshoot">Medidas erradas</string>
     <string name="undelete_check">Verificações</string>
     <string name="undelete_plot">Croquis</string>
-    <string name="delete_whole_leg">Apague este braço inteiro</string>
+    <string name="delete_whole_leg">Apague esta visada inteira</string>
     <string name="visible_border">borda visível</string>
     <!-- UNUSED string name="vthreshold">limite vertical</string -->
     <string name="wait_scan">Procurando: espere &#8230;</string>
@@ -528,7 +528,7 @@
     <!-- UNUSED string name="stat_shot">Medidas: %1$d Duplicadas: %2$d Na superfície: %3$d</string -->
     <string name="stat_splay">Medidas auxiliares: %1$d # %2$d</string>
     <string name="stat_station">Bases: %1$d # %2$d</string>
-    <!-- TODO string name="stat_dangling">Dangling shots %1$d %2$.1f %3$s</string -->
+    <string name="stat_dangling">Medidas desconectadas %1$d %2$.1f %3$s</string>
     <string name="stat_surface">Medidas na superfície - Qt: %1$d # %2$d Ext: %3$.1f %4$s</string>
     <string name="stat_wens">Oeste: %1$.0f %5$s Leste: %2$.0f %5$s Norte: %3$.0f %5$s Sul: %4$.0f %5$s</string>
     <string name="stat_angle_error">Erros de ângulo: %1$.2f ± %2$.2f</string>
@@ -563,7 +563,7 @@
     <!-- UNUSED string name="ask_reset">Reiniciar memória da DistoX?</string -->
     <!-- UNUSED string name="ask_close_survey">Fechar mapa?</string -->
     <string name="ask_gps_service">Configurar o serviço GPS?</string>
-    <!-- TODO string name="ask_backups_clear">Delete sketch backups?</string -->
+    <string name="ask_backups_clear">Apagar backups dos croquis?</string>
 
     <!-- UNUSED string name="button_add"       >Novo       </string -->
     <string name="button_back"      >Voltar     </string>
@@ -575,12 +575,12 @@
     <string name="button_convert"   >Converter  </string>
     <string name="button_current"   >Atual      </string>
     <string name="button_delete"    >Apagar     </string>
-    <!-- TODO string name="button_duplicate" >Duplicate </string -->
-    <!-- TODO string name="button_surface"   >Surface   </string -->
-    <!-- TODO string name="button_no_extend" >No extend </string -->
+    <string name="button_duplicate" >Dupĺicar   </string>
+    <string name="button_surface"   >Superfície </string>
+    <string name="button_no_extend" >Excluídas perfil retificado</string>
     <string name="button_eval"      >Calcular   </string>
-    <!-- TODO string name="button_evalg"     >G      </string -->
-    <!-- TODO string name="button_evalm"     >M      </string -->
+    <string name="button_evalg"     >G      </string>
+    <string name="button_evalm"     >M      </string>
     <string name="button_eval_cal"  >Calcular c/ calib.</string>
     <!-- OK string name="button_gps_start" >GPS       </string -->
     <!-- UNUSED string name="button_gps_stop"  >Parar     </string -->
@@ -605,24 +605,24 @@
     <!-- UNUSED string name="button_regroup"   >Reagrupar   </string -->
     <string name="button_dump"      >Baixar    </string>
     <string name="button_rename"    >Renomear  </string>
-    <!-- TODO string name="button_renumber"  >Renumber</string -->
-    <!-- TODO string name="button_bedding"   >Bedding plane</string -->
+    <string name="button_renumber"  >Renumerar </string>
+    <string name="button_bedding"   >Plano de acamamento</string>
     <string name="button_replace"   >Substituir</string>
     <string name="button_reset"     >Reiniciar </string>
     <string name="button_left"      >ESQUERDA</string>
 
     <string name="button_right"     >DIREITA</string>
     <string name="button_clear"     >Limpar    </string>
-    <!-- TODO string name="button_clear_day" >Clear 1d  </string -->
-    <!-- TODO string name="button_clear_week">Clear 7d  </string -->
+    <string name="button_clear_day" >Limpar 1 dia</string>
+    <string name="button_clear_week">Limpar 7 dias</string>
     <string name="button_save"      >Salvar    </string>
     <!-- UNUSED string name="button_select"    >Selecionar    </string -->
     <string name="button_search"    >Pesquisar </string>
     <string name="button_merge"     >Mesclar   </string>
     <string name="button_split"     >Dividir   </string>
-    <!-- TODO string name="button_station"   >Center at</string -->
+    <string name="button_station"   >Centralizar em</string>
     <string name="button_store"     >Armazenar </string>
-    <!-- TODO string name="button_swap"      >Swap      </string -->
+    <string name="button_swap"      >Inverter      </string>
     <!-- UNUSED string name="button_start"     >Iniciar</string -->
     <!-- UNUSED string name="button_stop"      >Parar</string -->
     <string name="button_upload"    >Enviar     </string>
@@ -630,7 +630,7 @@
     <!-- UNUSED string name="button_zoomfit"   >Zoom fit  </string -->
     <!-- UNUSED string name="button_landscape" >Landscape </string -->
     <!-- UNUSED string name="button_portrait"  >Portrait  </string -->
-    <!-- TODO string name="button_splays">Splays</string -->
+    <string name="button_splays">Medidas auxiliares</string>
 
 
     <string name="button_write"     >Enviar</string>
@@ -639,17 +639,17 @@
 
     <string name="mode_leg">Visadas</string>
     <string name="mode_splay">Medidas auxiliares</string>
-    <!-- TODO string name="mode_latest">Latest splays</string -->
+    <string name="mode_latest">Últimas medidas auxiliares</string>
     <string name="mode_station">Bases</string>
     <string name="mode_grid">Grade</string>
     <string name="mode_fixed">Deslocar croqui X aranha (CUIDADO!)</string>
     <string name="mode_outline">Contorno</string>
     <string name="mode_scale_ref">Escala gráfica</string>
 
-    <!-- TODO string name="layer_floor">Floor</string -->
-    <!-- TODO string name="layer_fill">Fills</string -->
-    <!-- TODO string name="layer_ceil">Ceiling</string -->
-    <!-- TODO string name="layer_arti">Artifacts</string -->
+    <string name="layer_floor">Base</string>
+    <string name="layer_fill">Preenchimentos</string>
+    <string name="layer_ceil">Topo</string>
+    <string name="layer_arti">Artefatos</string>
     <!-- UNUSED string name="layer_form">Forms</string -->
     <!-- UNUSED string name="layer_water">Water</string -->
     <!-- UNUSED string name="layer_text">Text</string -->
@@ -693,7 +693,7 @@
     <string name="btn_horizontal">Horizontal</string>
 
     <string name="split_nothing">Nada a ser dividido</string>
-    <string name="flip_shots">Virar visadas</string>
+    <string name="flip_shots">Virar medidas</string>
     <string name="copy_items">Copiar itens</string>
 
     <string name="man_preface">Prefácio</string>
@@ -703,7 +703,7 @@
     <string name="man_calib">4. Tela Calibração</string>
     <string name="man_gm">5. Informação de calibração</string>
     <string name="man_survey">6. Dados da topografia</string>
-    <string name="man_shot">7. Lista de visadas</string>
+    <string name="man_shot">7. Lista de medidas</string>
     <string name="man_info">8. Informaçãos sobre a topografia</string>
     <string name="man_sketch">9. Tela Croqui</string>
     <string name="man_draw">10. Desenhando croquis</string>
@@ -720,7 +720,7 @@
     <string name="help_measure_type">Modo de medição: ponto fixo ou linha com diversos pontos</string>
     <string name="help_measure_undo">Descartar o último ponto da polilinha</string>
     
-    <!-- TODO string name="help_backups">Delete sketch backups</string -->
+    <string name="help_backups">Apagar backups dos croquis</string>
     <string name="help_calib_check">Medidas de verificação de calibração</string>
     <string name="help_close">Fechar janela</string>
     <string name="help_coeff">Mostrar coeficientes de calibração</string>
@@ -729,7 +729,7 @@
     <!-- UNUSED string name="help_contour">Editar perfil</string -->
     <string name="help_current_station">Bases salvas</string>
     <string name="help_azimuth">Referência para retificar perfil</string>
-    <!-- TODO string name="help_refresh">Refresh display</string -->
+    <string name="help_refresh">Redesenhar tela</string>
     <string name="help_device">Editar dispositivo em uso</string>
     <string name="help_add_topodroid">Criar nova topo/calibração</string>
     <string name="help_import">Importar arquivo zip ou arquivo de topo</string>
@@ -746,7 +746,7 @@
     <string name="help_display_calib">Mudar exibição de medidas apagadas</string>
     <string name="help_validate">Validar calibração</string>
     <string name="help_overview">Visualização geral do croqui</string>
-    <!-- TODO string name="help_packets">DistoX packets dialog</string -->
+    <string name="help_packets">Janela pacotes DistoX</string>
     <string name="help_plot">Editar croqui</string>
     <string name="help_note">Editar comentários da topo</string>
     <string name="help_bluetooth">Reiniciar conexão Bluetooth</string>
@@ -808,7 +808,7 @@
     <string name="help_read">Ler e mostrar os coeficientes de calibração da DistoX</string>
     <string name="help_info_device">Informações do dispositivo</string>
     <string name="help_scan">Procurar por novos dispositivos DistoX</string>
-    <!-- TODO string name="help_scan_ble">Scan for BTLE devices</string -->
+    <string name="help_scan_ble">Procurar por dispositivos BLE</string>
     <string name="help_pair">Parear o dispositivo DistoX selecionado</string>
     <string name="help_open_calib">Abrir calibração</string>
     <string name="help_export_calib">Exportar calibração</string>
@@ -828,15 +828,15 @@
     <!-- UNUSED string name="title_contour">Contorno</string -->
     <!-- UNUSED string name="title_coord">Inserir as coordenadas do ponto:</string -->
     <string name="title_current_station">Base gravadas</string>
-    <!-- TODO string name="title_search">Station/Leg search</string -->
-    <!-- TODO string name="title_dangling">Unattached shots</string -->
+    <string name="title_search">Pesquisa de estações e visadas</string>
+    <string name="title_dangling">Medidas desconectadas</string>
     <string name="title_device">Dispositivos DistoX</string>
     <string name="title_device_select">Selecionar o dispositivo DistoX</string>
     <string name="title_discover">Procurando dispositivos DistoX &#8230; Aguardar</string>
     <!-- UNUSED string name="title_draw">Desenhar</string -->
     <string name="title_draw_area">ÁREA %1$s</string>
     <string name="title_draw_line">LINHA %1$s</string>
-    <!-- TODO string name="title_draw_line_no_stations">LINE %1$s: no stations</string -->
+    <string name="title_draw_line_no_stations">LINHA %1$s: nenhuma estação</string>
     <string name="title_draw_point">PONTO %1$s</string>
     <string name="title_edit">Editar</string>
     <string name="title_edit_user_station">Alterar base do usuário </string>
@@ -851,7 +851,7 @@
     <string name="title_mode">Modo de visualização</string>
     <string name="title_move">Mover</string>
     <string name="title_note">Comentários da topo</string>
-    <!-- TODO string name="title_packet_dialog">Packets</string -->
+    <string name="title_packet_dialog">Pacotes</string>
     <string name="title_photo">Foto/Medições</string>
     <string name="title_photo_comment">Comentário da foto</string>
     <string name="title_plot_save">Exportar croqui</string>
@@ -864,36 +864,36 @@
     <string name="title_scraps_outline">Contorno do croqui</string>
     <!-- UNUSED string name="title_select">Selecionar</string -->
 
-    <!-- TODO string name="title_settings_main">TopoDroid main settings</string -->
-    <!-- TODO string name="title_settings_export">TopoDroid import/export settings</string -->
-    <!-- TODO string name="title_settings_import">TopoDroid import settings</string -->
-    <!-- TODO string name="title_settings_csv">CSV export settings</string -->
-    <!-- TODO string name="title_settings_svx">Survex export settings</string -->
-    <!-- TODO string name="title_settings_th">Therion export settings</string -->
-    <!-- TODO string name="title_settings_dat">Compass export settings</string -->
-    <!-- TODO string name="title_settings_svg">SVG export settings</string -->
-    <!-- TODO string name="title_settings_dxf">DXF export settings</string -->
-    <!-- TODO string name="title_settings_png">PNG export settings</string -->
-    <!-- TODO string name="title_settings_kml">KML export settings</string -->
+    <string name="title_settings_main">Configurações principais do TopoDroid</string>
+    <string name="title_settings_export">Configurações de importação/exportação do TopoDroid</string>
+    <string name="title_settings_import">Configurãções de importação do TopoDroid</string>
+    <string name="title_settings_csv">Configurações de exportação CSV</string>
+    <string name="title_settings_svx">Configurações de exportação Survex</string>
+    <string name="title_settings_th">Configurações de exportação Therion</string>
+    <string name="title_settings_dat">Configurações de exportação Compass</string>
+    <string name="title_settings_svg">Configurações de exportação SVG</string>
+    <string name="title_settings_dxf">Configurações de exportação DXF</string>
+    <string name="title_settings_png">Configurações de exportação PNG</string>
+    <string name="title_settings_kml">Configurações de exportação KML</string>
 
-    <!-- TODO string name="title_settings_sketch">TopoDroid 3d sketch settings</string -->
-    <!-- TODO string name="title_settings_survey">TopoDroid survey settings</string -->
-    <!-- TODO string name="title_settings_shot">TopoDroid shot data settings</string -->
-    <!-- TODO string name="title_settings_units">TopoDroid units settings</string -->
-    <!-- TODO string name="title_settings_location">TopoDroid location settings</string -->
-    <!-- TODO string name="title_settings_accuracy">TopoDroid accuracy settings</string -->
-    <!-- TODO string name="title_settings_plot">TopoDroid sketch settings</string -->
-    <!-- TODO string name="title_settings_screen">TopoDroid canvas settings</string -->
-    <!-- TODO string name="title_settings_point">TopoDroid point settings</string -->
-    <!-- TODO string name="title_settings_line">TopoDroid line settings</string -->
-    <!-- TODO string name="title_settings_walls">TopoDroid autowalls settings</string -->
-    <!-- TODO string name="title_settings_draw">TopoDroid drawing settings</string -->
-    <!-- TODO string name="title_settings_erase">TopoDroid erasing settings</string -->
-    <!-- TODO string name="title_settings_edit">TopoDroid editing settings</string -->
-    <!-- TODO string name="title_settings_device">TopoDroid device settings</string -->
-    <!-- TODO string name="title_settings_calib">TopoDroid calibration settings</string -->
-    <!-- TODO string name="title_settings_geek">TopoDroid geek flags settings</string -->
-    <!-- TODO string name="title_settings_log">TopoDroid log settings</string -->
+    <string name="title_settings_sketch">Configurações de croquis 3D do TopoDroid</string>
+    <string name="title_settings_survey">Configurações de topo do TopoDroid</string>
+    <string name="title_settings_shot">Configirações de dados de medidas do TopoDroid</string>
+    <string name="title_settings_units">Configurações de unidades do TopoDroid</string>
+    <string name="title_settings_location">Configurações de coordenadas do TopoDroid</string>
+    <string name="title_settings_accuracy">Configurações de precisão do TopoDroid</string>
+    <string name="title_settings_plot">Configurações de croquis do TopoDroid</string>
+    <string name="title_settings_screen">Configurações de tela de desenho do TopoDroid</string>
+    <string name="title_settings_point">Configurações de pontos do TopoDroid</string>
+    <string name="title_settings_line">Configurações de linhas do TopoDroid</string>
+    <string name="title_settings_walls">Configurações de paredes automáticas do TopoDroid</string>
+    <string name="title_settings_draw">Configurações de desenho do TopoDroid</string>
+    <string name="title_settings_erase">Configurações da borracha do TopoDroid</string>
+    <string name="title_settings_edit">Configurações de edição do TopoDroid</string>
+    <string name="title_settings_device">Configurações de dispositivo do TopoDroid</string>
+    <string name="title_settings_calib">Configurações de calibração do TopoDroid</string>
+    <string name="title_settings_geek">Configurações de marcas 'geek' do TopoDroid</string>
+    <string name="title_settings_log">Configurações de log do TopoDroid</string>
 
     <string name="title_shift">Deslocar</string>
     <string name="title_shot_delete">Apagar medida?</string>
@@ -911,12 +911,12 @@
     <string name="title_calib_export">Exportar calibração</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-  <!-- TODO string name="pref_export_settings">Export settings</string -->
+  <string name="pref_export_settings">Configurações de exportação</string>
 
   <string name="pref_cat_survey">DADOS DA TOPO</string>
   <string name="pref_cat_drawing">DESENHANDO CROQUI</string>
   <string name="pref_cat_import_export">IMPORTAR/EXPORTAR</string>
-  <!-- TODO string name="pref_cat_exportimport">IMPORT</string -->
+  <string name="pref_cat_exportimport">IMPORTAR</string>
   <!-- OK string name="pref_cat_exportth">Therion</string -->
   <!-- OK string name="pref_cat_exportdat">Compass</string -->
   <!-- OK string name="pref_cat_exportsvg">SVG</string -->
@@ -926,7 +926,7 @@
 
   <string name="pref_cat_calib">CALIBRAÇÕES</string>
   <string name="pref_cat_device">DISPOSITIVOS</string>
-  <!-- TODO string name="pref_cat_geek">GEEK FLAGS</string -->
+  <string name="pref_cat_geek">MARCAS 'GEEK'</string>
   <!-- UNUSED string name="pref_cat_sketch">MODELOS 3D</string -->
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
 
@@ -957,26 +957,26 @@
   <string name="pref_extra_buttons_summary">Nível de recursos habilitados</string>
   <string name="pref_size_buttons_title">Tamanho botões</string>
   <string name="pref_size_buttons_summary">Tamanho dos botões da barra de ações</string>
-  <!-- TODO string name="pref_with_sensors_title">Sensors</string -->
-  <!-- TODO string name="pref_with_sensors_summary">Enable "sensors" data</string -->
-  <!-- TODO string name="pref_with_levels_title">Layers</string -->
-  <!-- TODO string name="pref_with_levels_summary">Use canvas layers</string -->
-  <!-- TODO string name="pref_palettes_title">Palettes</string -->
-  <!-- TODO string name="pref_palettes_summary">Enable additional palettes</string -->
-  <!-- TODO string name="pref_packet_logger_title">Packets log</string -->
-  <!-- TODO string name="pref_packet_logger_summary">Enable packets logging</string -->
+  <string name="pref_with_sensors_title">Sensores</string>
+  <string name="pref_with_sensors_summary">Habilitar dados de sensores</string>
+  <string name="pref_with_levels_title">Camadas</string>
+  <string name="pref_with_levels_summary">Usar camadas na tela de desenho</string>
+  <string name="pref_palettes_title">Paletas</string>
+  <string name="pref_palettes_summary">Habilitar paletas adicionais</string>
+  <string name="pref_packet_logger_title">Log de pacotes</string>
+  <string name="pref_packet_logger_summary">Habilitar log de pacotes</string>
   <!-- UNUSED string name="pref_size_buttons_message">Defina o tamanho dos botões da barra de ações [pixels]</string -->
 
   <string name="pref_bezier_step_title">Espaçamento pontos</string>
   <string name="pref_bezier_step_summary">Distância entre pontos em uma linha exportada [m]</string>
-  <string name="pref_leg_shots_title">Mínimo medições por visada</string>
-  <string name="pref_leg_shots_summary">Quantidade mínimo de medições para uma visada</string>
-  <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
-  <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent</string -->
-  <!-- TODO string name="pref_triple_shot_title">Leg-shot bell</string -->
-  <!-- TODO string name="pref_triple_shot_summary">Sound feedback on leg-shot recognition</string -->
-  <!-- TODO string name="pref_connect_feedback_title">Connect feedback</string -->
-  <!-- TODO string name="pref_connect_feedback_summary">Feedback on device connect</string -->
+  <string name="pref_leg_shots_title">Mínimo medidas por visada</string>
+  <string name="pref_leg_shots_summary">Quantidade mínima de medidas para uma visada</string>
+  <string name="pref_recent_timeout_title">Prazo "dados recentes"</string>
+  <string name="pref_recent_timeout_summary">Limite de tempo para dados ser considerado recente</string>
+  <string name="pref_triple_shot_title">Som visada</string>
+  <string name="pref_triple_shot_summary">Aviso sonoro reconhecimento de visada</string>
+  <string name="pref_connect_feedback_title">Feedback conexão</string>
+  <string name="pref_connect_feedback_summary">Feedback ao estabelecer conexão com dispositivo</string>
   <string name="pref_station_prefix_title">Prefixos bases Compass</string>
   <string name="pref_station_prefix_summary">Exportar prefixo de bases (Compass)</string>
   <string name="pref_compass_splays_title">Medidas auxiliares Compass</string>
@@ -997,8 +997,8 @@
   <string name="pref_survex_lrud_summary">Incluir EDTC à exportação do Survex</string>
   <string name="pref_svg_grid_title">Grade</string>
   <string name="pref_svg_grid_summary">Incluir grade no arquivo SVG/PNG exportado</string>
-  <!-- TODO string name="pref_svg_splays_title">SVG splays</string -->
-  <!-- TODO string name="pref_svg_splays_summary">Include splays into SVG export</string -->
+  <string name="pref_svg_splays_title">Medidas auxiliares SVG</string>
+  <string name="pref_svg_splays_summary">Incluir medidas auxiliares nos arquivos SVG exportados</string
   <!-- UNUSED string name="pref_svg_in_html_title">SVG em HTML</string -->
   <!-- UNUSED string name="pref_svg_in_html_summary">Incorporar arquivo SVG exportado em HTML</string -->
   <string name="pref_svg_pointstroke_title">Espessura ponto SVG</string>
@@ -1009,8 +1009,8 @@
   <string name="pref_svg_linestroke_summary">Espessura das linhas em SVG</string>
   <string name="pref_svg_gridstroke_title">Espessura grade SVG</string>
   <string name="pref_svg_gridstroke_summary">Espessura das lionhas da grade em SVG</string>
-  <string name="pref_svg_shotstroke_title">Espessura visada SVG</string>
-  <string name="pref_svg_shotstroke_summary">Espessura das linhas de visada em SVG</string>
+  <string name="pref_svg_shotstroke_title">Espessura medida SVG</string>
+  <string name="pref_svg_shotstroke_summary">Espessura das linhas de medidas em SVG</string>
   <string name="pref_svg_linedirstroke_title">Espessura orientação linha SVG</string>
   <string name="pref_svg_linedirstroke_summary">ESpessura das orientações de linha em SVG</string>
   <string name="pref_svg_line_dir_title">Orientação das linhas SVG</string>
@@ -1019,12 +1019,12 @@
   <string name="pref_kml_stations_summary">Incluir bases ao arquivo de exportação KML</string>
   <string name="pref_kml_splays_title">Medidas auxiliares KML</string>
   <string name="pref_kml_splays_summary">Incluir medidas auxiliares ao arquivo de exportação KML</string>
-  <!-- TODO string name="pref_csv_raw_title">Raw CSV</string -->
-  <!-- TODO string name="pref_csv_raw_summary">Export raw data to CSV</string -->
-  <!-- TODO string name="pref_csv_sep_title">CSV separator</string -->
-  <!-- TODO string name="pref_csv_sep_summary">CSV fields separator</string -->
-  <!-- TODO string name="pref_csv_eol_title">CSV eol</string -->
-  <!-- TODO string name="pref_csv_eol_summary">CSV records separator</string -->
+  <string name="pref_csv_raw_title">CSV bruto</string>
+  <string name="pref_csv_raw_summary">Exportar dados brutos no CSV</string>
+  <string name="pref_csv_sep_title">Separador CSV</string>
+  <string name="pref_csv_sep_summary">Separador de campos CSV</string>
+  <string name="pref_csv_eol_title">Separador de linhas CSV</string>
+  <string name="pref_csv_eol_summary">Separador de linhas/registros CSV</string>
 
   <string name="pref_sock_type_title">Soquete</string>
   <string name="pref_sock_type_summary">Criar soquete</string>
@@ -1088,8 +1088,8 @@
   <string name="pref_section_splay_message">Acima deste ângulo com o plano do corte, a medida auxiliar será pontilhada</string>
   <string name="pref_data_backup_title">Exportação automática</string>
   <string name="pref_data_backup_summary">Exportação automática de dados (exige definição de formato padrão)</string>
-  <!-- TODO string name="pref_fixed_origin_title">Sketch origin</string -->
-  <!-- TODO string name="pref_fixed_origin_summary">Fixed sketch origin</string -->
+  <string name="pref_fixed_origin_title">Origem do croqui</string>
+  <string name="pref_fixed_origin_summary">Origem fixa para croqui</string>
   <string name="pref_shared_xsections_title">Cortes X compartilhados</string>
   <string name="pref_shared_xsections_summary">Cortes X em bases compartilhados entre croquis</string>
   <string name="xsections_shared">Cortes X compartilhados</string>
@@ -1109,8 +1109,8 @@
 
   <string name="pref_leg_title">Tolerância visadas</string>
   <string name="pref_leg_summary">Tolerância entre as medições de uma visada</string>
-  <string name="pref_max_shot_title">Comprimento máximo visada</string>
-  <string name="pref_max_shot_summary">Comprimento máximo para visadas [m]</string>
+  <string name="pref_max_shot_title">Comprimento máximo medida</string>
+  <string name="pref_max_shot_summary">Comprimento máximo de medidas [m]</string>
   <string name="pref_min_leg_title">Comprimento mínimo visada</string>
   <string name="pref_min_leg_summary">Comprimeto mínimo de visadas [m]</string>
   <string name="pref_backsight_title">Medida contra</string>
@@ -1156,10 +1156,10 @@
   <string name="pref_shot_timer_summary">Segundos de espera antes de capturar a direção da medida</string>
   <string name="pref_beep_volume_title">Volume bip temporizador</string>
   <string name="pref_beep_volume_summary">Percentual de volume do bip do temporizador</string>
-  <!-- TODO string name="pref_extend_frac_title">Fractional extend</string -->
-  <!-- TODO string name="pref_extend_frac_summary">Whether "extend" can have a decimal part</string -->
-  <!-- TODO string name="pref_recent_shot_title">Recent shots</string -->
-  <!-- TODO string name="pref_recent_shot_summary">Whether to highlight recent shots</string -->
+  <string name="pref_extend_frac_title">Extensão parcial no perfil retificado</string>
+  <string name="pref_extend_frac_summary">Define se as visadas podem ser incluídas com comprimentos parciais nos perfis retificados</string>
+  <string name="pref_recent_shot_title">Medidas recentes</string>
+  <string name="pref_recent_shot_summary">Medidas recentes devem ser destacadas?</string>
   <string name="pref_drawing_unit_title">Escala símbolos pontos</string>
   <string name="pref_drawing_unit_summary">Escala dos símbolos dos pontos</string>
   <string name="pref_unscaled_points_title">Ícones pontos sem zoom</string>
@@ -1168,16 +1168,16 @@
   <string name="pref_segment_message">Distância mínima entre pontos de linhas</string>
   <string name="pref_linestyle_title">Estilo linha</string>
   <string name="pref_linestyle_summary">Estilo de desenho da linha</string>
-  <!-- TODO string name="pref_linecontinue_title">Line continue</string -->
-  <!-- TODO string name="pref_linecontinue_summary">Line default continue-mode</string -->
+  <string name="pref_linecontinue_title">Continuação de linha</string>
+  <string name="pref_linecontinue_summary">Modo padrão de continuação de linhas</string>
   <string name="pref_lineacc_title">Precisão interpolação</string>
   <string name="pref_lineacc_summary">Exatidão da interpolação cúbica das curvas Bézier</string>
   <string name="pref_linecorner_title">Limite quinas Bézier</string>
   <string name="pref_linecorner_summary">Limite para detecção de quinas nas curvas Bézier</string>
-  <!-- TODO string name="pref_weeddistance_title">Weeding point distance</string -->
-  <!-- TODO string name="pref_weeddistance_summary">Max distance from segment to weed points [m]</string -->
-  <!-- TODO string name="pref_weedlength_title">Point weeding segment length</string -->
-  <!-- TODO string name="pref_weedlength_summary">Max length of a line segment</string -->
+  <string name="pref_weeddistance_title">Distância pontos \'weeding\'</string>
+  <string name="pref_weeddistance_summary">Distância máxima entre segmento e pontos 'weed' (para redução da quantidade pontos em uma linha) [m]</string>
+  <string name="pref_weedlength_title">Comprimento segmento \'weeding\'</string>
+  <string name="pref_weedlength_summary">Comprimento máximo de um segmento na redução da quantidade de pontos via \'weeding\'</string>
   <string name="pref_calib_algo_title">Algoritmo</string>
   <string name="pref_calib_algo_summary">Algoritmo de calibração</string>
   <string name="pref_group_by_title">Regra agrupamento</string>
@@ -1196,20 +1196,20 @@
   <string name="pref_dot_radius_message">Raio dos pontos verdes</string>
   <string name="pref_line_thickness_title">Espessura linha</string>
   <string name="pref_line_thickness_summary">Espessura das linhas do desenho</string>
-  <!-- TODO string name="pref_line_units_title">Line units</string -->
-  <!-- TODO string name="pref_line_units_summary">Drawing line units</string -->
-  <!-- TODO string name="pref_linesnap_title">Line/Area snap</string -->
-  <!-- TODO string name="pref_linesnap_summary">Enable line/area snap action</string -->
-  <!-- TODO string name="pref_linecurve_title">Smooth/Straigten segment</string -->
-  <!-- TODO string name="pref_linecurve_summary">Smooth/Straighten line segment action</string -->
-  <!-- TODO string name="pref_linestraight_title">Straigten lines</string -->
-  <!-- TODO string name="pref_linestraight_summary">Straighten whole line action</string -->
-  <!-- TODO string name="pref_path_multiselect_title">Path multiselection</string -->
-  <!-- TODO string name="pref_path_multiselect_summary">Path multiselection action</string -->
-  <!-- TODO string name="pref_plane_interpolation_title">Plane interpolation</string -->
-  <!-- TODO string name="pref_plane_interpolation_summary">Plane interpolation action</string -->
-  <!-- TODO string name="pref_plot_split_title">Sketch split/merge</string -->
-  <!-- TODO string name="pref_plot_split_summary">Sketch split and merge actions</string -->
+  <string name="pref_line_units_title">Unidade linhas</string>
+  <string name="pref_line_units_summary">Unidades desenho linhas</string>
+  <string name="pref_linesnap_title">Colar linha/área</string>
+  <string name="pref_linesnap_summary">Habilitar atração+união de linhas/áreas</string>
+  <string name="pref_linecurve_title">Suavizar/tormar retos segmentos</string>
+  <string name="pref_linecurve_summary">Habilitar ação de suavizar/tornar retos segmentos de linhas</string>
+  <string name="pref_linestraight_title">Tornar linhas retas</string>
+  <string name="pref_linestraight_summary">Habilitar ação de tornar linhas inteiras retas</string>
+  <string name="pref_path_multiselect_title">Multiseleção de caminhos</string>
+  <string name="pref_path_multiselect_summary">Habilitar ação de seleção de múltiplos caminhos/string>
+  <string name="pref_plane_interpolation_title">Interpolação de plano</string>
+  <string name="pref_plane_interpolation_summary">Habilitar ação de interpolação de plano</string>
+  <string name="pref_plot_split_title">Quebra/união de croquis</string>
+  <string name="pref_plot_split_summary">Habilitar ação de quebra/união de croquis</string>
   <string name="pref_fixed_thickness_title">Espessura linha trena</string>
   <string name="pref_fixed_thickness_summary">Espessura das linhas de trena</string>
   <!-- UNUSED string name="pref_device_title">Dispositivo</string -->
@@ -1224,20 +1224,20 @@
   <string name="pref_backup_number_summary">Quantidade de backups do croqui</string>
   <string name="pref_backup_interval_title">Intervalos backup</string>
   <string name="pref_backup_interval_summary">Intervalo mínimo entre dois backups [s]</string>
-  <!-- TODO string name="pref_backups_clear_title">Backups clear</string -->
-  <!-- TODO string name="pref_backups_clear_summary">Enable sketch backups clear menu</string -->
+  <string name="pref_backups_clear_title">Apagar backups</string>
+  <string name="pref_backups_clear_summary">Habilitar menu para apagar backups</string>
   <!-- UNUSED string name="pref_xtherion_areas_title">Áreas xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Salvar áreas como o xtherion</string -->
   <string name="pref_therion_splays_title">Medidas auxiliares Therion</string>
   <string name="pref_therion_splays_summary">Adicionar linhas u:splay aos arquivos th2</string>
-  <!-- TODO string name="pref_th2_scale_title">Therion scale</string -->
-  <!-- TODO string name="pref_th2_scale_summary">Scale of th2/xvi export</string -->
-  <!-- TODO string name="pref_th2_xvi_title">xvi image</string -->
-  <!-- TODO string name="pref_th2_xvi_summary">Insert xvi image in th2</string -->
+  <string name="pref_th2_scale_title">Escala Therion</string>
+  <string name="pref_th2_scale_summary">Escala da exportaçãode arquivos th2/xvi</string>
+  <string name="pref_th2_xvi_title">Imagem xvi</string>
+  <string name="pref_th2_xvi_summary">Insderir imagem xvi no arquivo th2</string>
   <string name="pref_autoStations_title">Bases Therion</string>
   <string name="pref_autoStations_summary">Incluir automaticamente bases aos arquivos para o Therion</string>
-  <!-- TODO string name="pref_auto_xsections_title">Auto X-sections</string -->
-  <!-- TODO string name="pref_auto_xsections_summary">Add x-sections automatically to save/export [csx/svg/dxf/xvi]</string -->
+  <string name="pref_auto_xsections_title">Cirtes X automáticos</string>
+  <string name="pref_auto_xsections_summary">Incluir automaticamente cortes X na exportação de arquivos csx/svg/dxf/xvi</string>
   <string name="pref_loopClosure_title">Fechamento anéis</string>
   <string name="pref_loopClosure_summary">Compensação de erro de fechamento do anel</string>
   <!-- UNUSED string name="pref_splayExtend_title">Estimar extensão medida auxiliar</string -->
@@ -1246,16 +1246,16 @@
   <string name="pref_swapLR_summary">Inverter Esquerda e Direita na exportação para o Compass</string>
   <string name="pref_LRExtend_title">Estimar ref. retif. perfil</string>
   <string name="pref_LRExtend_summary">Estimar referência para retificação do perfil (importação Compass/VisualTopo)</string>
-  <!-- TODO string name="pref_diving_mode_title">Diving mode</string -->
-  <!-- TODO string name="pref_diving_mode_summary">Enable diving mode</string -->
-  <!-- TODO string name="pref_splay_classes_title">Splay classes</string -->
-  <!-- TODO string name="pref_splay_classes_summary">Enable splay classes and coloring</string -->
-  <!-- TODO string name="pref_splay_color_title">Splay coloring</string -->
-  <!-- TODO string name="pref_splay_color_summary">Enable splay coloring</string -->
-  <!-- TODO string name="pref_plot_shift_title">Sketch shift/scale</string -->
-  <!-- TODO string name="pref_plot_shift_summary">Enable sketch shift and scale</string -->
-  <!-- TODO string name="pref_splay_alpha_title">Splay transparency</string -->
-  <!-- TODO string name="pref_splay_alpha_summary">Splay transparency [0: transparent, 100: opaque]</string -->
+  <string name="pref_diving_mode_title">Modo mergulho</string>
+  <string name="pref_diving_mode_summary">Habilitar modo mergulho</string>
+  <string name="pref_splay_classes_title">Classes medidas auxiliares</string>
+  <string name="pref_splay_classes_summary">Habilitar classes e coloração de medidas auxiliares</string>
+  <string name="pref_splay_color_title">Coloração medidas auxiliares</string>
+  <string name="pref_splay_color_summary">Habilitar coloração de medidas auxiliares</string>
+  <string name="pref_plot_shift_title">Escalar e deslocar croquis</string>
+  <string name="pref_plot_shift_summary">Habilitar escalonamento e deslocamento de croquis</string>
+  <string name="pref_splay_alpha_title">Transparência de medidas auxiliares</string>
+  <string name="pref_splay_alpha_summary">Transparência de medidas auxiliares [0: transparente, 100: opaca]</string>
 
   <string name="pref_picker_type_title">Janela símbolos</string>
   <string name="pref_picker_type_summary">Forma de apresentação da seleção de símbolos</string>
@@ -1332,7 +1332,7 @@
   <string name="pref_log_proto">Protocolo DistoX</string>
   <string name="pref_log_ptopo">PocketTopo</string>
   <string name="pref_log_sensor">Sensores</string>
-  <string name="pref_log_shot">Visadas</string>
+  <string name="pref_log_shot">Medidas</string>
   <string name="pref_log_sync">Mapeamento compartilhado</string>
   <string name="pref_log_survey">Topografias</string>
   <string name="pref_log_therion">Therion</string>
@@ -1355,9 +1355,9 @@
 
     <string name="perms_mandatory">TopoDroid não pode ser executado sem essas permissões:</string>
     <string name="perms_optional">TopoDroid pode apresentar erros sem essas permissões:</string>
-    <!-- TODO string name="perm_location">\nLocation</string -->
-    <!-- TODO string name="perm_camera">\nCamera</string -->
-    <!-- TODO string name="perm_microphone">\nMicrophone</string -->
+    <string name="perm_location">\nLocalização</string>
+    <string name="perm_camera">\nCâmera</string>
+    <string name="perm_microphone">\nMicrofone</string>
 
     <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">
@@ -1395,6 +1395,6 @@
    <string name="ask_upload_not_compatible">Arquivo firmware não parece estar correto.\Ainda assim enviar?</string>
    <string name="firmware_file_dumped">Arquivo firmware salvo %1$s tamanho %2$d</string>
    <string name="firmware_file_uploaded">Arquivo firmware enviado %1$s escrito %2$d / %3$d</string>
-   <!-- TODO string name="firmware_not_supported">Device does not support firmware functions</string -->
+   <string name="firmware_not_supported">Dispositivo não suporte funções relativas à firmware</string>
    
 </resources>

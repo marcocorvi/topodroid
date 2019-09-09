@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <!-- TODO string-array name="splayDash">
-     <item name="none">none</item>
-     <item name="plan">clino</item>
-     <item name="profile">azimuth</item>
-     <item name="view">view</item>
-  </string-array -->
+  <string-array name="splayDash">
+     <item name="none">Žiadny</item>
+     <item name="plan">Podľa Uhola</item>
+     <item name="profile">Podľa Azimutu</item>
+     <item name="view">Podľa Pohľadu</item>
+  </string-array>
 
   <string-array name="feedbackMode">
      <item name="none">Žiadna</item>

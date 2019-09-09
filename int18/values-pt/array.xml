@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-  <!-- TODO string-array name="splayDash">
-     <item name="none">none</item>
+  <string-array name="splayDash">
+     <item name="none">nenhum</item>
      <item name="plan">clino</item>
-     <item name="profile">azimuth</item>
-     <item name="view">view</item>
-  </string-array -->
+     <item name="profile">azimute</item>
+     <item name="view">visão</item>
+  </string-array>
 
-  <!-- TODO string-array name="feedbackMode">
-     <item name="none">none</item>
-     <item name="sound">sound</item>
-     <item name="heptic">haptic</item>
-  </string-array -->
+  <string-array name="feedbackMode">
+     <item name="none">nenhum</item>
+     <item name="sound">som</item>
+     <item name="heptic">tátil</item>
+  </string-array>
 
-  <!-- TODO string-array name="canvasLevels">
-     <item name="none">none</item>
-     <item name="class">by symbol</item>
-     <item name="instance">by item</item>
-  </string-array -->
+  <string-array name="canvasLevels">
+     <item name="none">nenhum</item>
+     <item name="class">por símbolo</item>
+     <item name="instance">por item</item>
+  </string-array>
 
-  <!-- TODO string-array name="csvSeparator">
-     <item name="comma">comma</item>
-     <item name="pipe">pipe</item>
+  <string-array name="csvSeparator">
+     <item name="comma">vírgula</item>
+     <item name="pipe">barra vertical</item>
      <item name="tab">tab</item>
-  </string-array -->
+  </string-array>
 
-  <!-- TODO string-array name="lineContinue">
-     <item name="none">none</item>
-     <item name="start">join with start point</item>
-     <item name="end">join with end point</item>
-     <item name="both">join with both ends</item>
-     <item name="continue">continue</item>
-  </string-array -->
+  <string-array name="lineContinue">
+     <item name="none">nenhuma</item>
+     <item name="start">ligar ao ponto inicial</item>
+     <item name="end">ligar ao ponto final</item>
+     <item name="both">ligar às 2 extremidades</item>
+     <item name="continue">continuar</item>
+  </string-array>
   <string-array name="unitGrid">
      <item name="meter">metros</item>
      <item name="yard">jardas</item>
@@ -52,7 +52,7 @@
   <string-array name="wallsType">
      <item name="none">Nenhum</item>
      <item name="convex">Convexo</item>
-     <item name="delaunay">TODO</item>
+     <item name="delaunay">Delaunay</item>
   </string-array>
   
   <string-array name="zoomCtrl">
@@ -109,7 +109,7 @@
      <item name="normal">Normal</item>
      <item name="advanced">Avançado</item>
      <item name="expert">Especialista</item>
-     <item name="tester">Tester</item>
+     <item name="tester">Teste devel</item>
      <!-- item name="complete">Completo</item -->
   </string-array>
   <string-array name="sizeButtons">
@@ -127,7 +127,7 @@
   <string-array name="connMode">
      <item name="batch">Por pedido</item>
      <item name="continuous">Contínua</item>
-     <item name="multi">Múlti</item>
+     <item name="multi">Multi</item>
   </string-array>
 
   <string-array name="sockType">
@@ -208,7 +208,7 @@
      <item name="two">Normal</item>
      <item name="three">Grosseiro</item>
      <item name="bezier">Bezier (curva paramétrica)</item>
-     <item name="simplified">Simplified</item> <!-- TODO -->
+     <item name="simplified">Simplificado</item>
   </string-array>
 
   <string-array name="groupBy">

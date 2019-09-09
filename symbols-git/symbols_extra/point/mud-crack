@@ -2,6 +2,7 @@ encoding  utf-8
 symbol point
 name mud-crack
 name-de Lehmriss
+name-pt lama_rachada
 th_name u:mud-crack
 orientation no
 color 0xff9933
@@ -26,4 +27,3 @@ path
   lineTo -1.75 1
 endpath
 endsymbol
-
