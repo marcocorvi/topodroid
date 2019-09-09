@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- TODO do not forget that apostrophe must be preceeded by backslash -->
+
     <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string>
     <string name="no_manual">Não é possível obter o manual do usuário da internet</string>
     <string name="user_man_ok">Manual traduzido instalado</string>
@@ -477,9 +479,9 @@
     <string name="out_of_memory">ALERTA: sem memória!</string>
     <string name="disk_io_error">CRÍTICO: erro de E/S no disco!</string>
     
-    <string name="toporobot_warning">Política para o TopoRobot é 'Teste devel'!</string>
-    <string name="anomaly_warning">Compensação de anomalias magnéticas é 'Especialista'!</string>
-    <string name="tripod_warning">Política para tripés é "Avançado'!</string>
+    <string name="toporobot_warning">Política para o TopoRobot é \'Teste devel\'!</string>
+    <string name="anomaly_warning">Compensação de anomalias magnéticas é \'Especialista\'!</string>
+    <string name="tripod_warning">Política para tripés é "Avançado"!</string>
     <string name="coverage_warning">Amplitude angular abaixo de %1$d %%\nGravar coeficientes?</string>
     <string name="delta_warning">Erro mpédio acima de %1$.1f\nGravar coeficientes?</string>
 
@@ -892,7 +894,7 @@
     <string name="title_settings_edit">Configurações de edição do TopoDroid</string>
     <string name="title_settings_device">Configurações de dispositivo do TopoDroid</string>
     <string name="title_settings_calib">Configurações de calibração do TopoDroid</string>
-    <string name="title_settings_geek">Configurações de marcas 'geek' do TopoDroid</string>
+    <string name="title_settings_geek">Configurações de marcas \'geek\' do TopoDroid</string>
     <string name="title_settings_log">Configurações de log do TopoDroid</string>
 
     <string name="title_shift">Deslocar</string>
@@ -926,7 +928,7 @@
 
   <string name="pref_cat_calib">CALIBRAÇÕES</string>
   <string name="pref_cat_device">DISPOSITIVOS</string>
-  <string name="pref_cat_geek">MARCAS 'GEEK'</string>
+  <string name="pref_cat_geek">MARCAS \'GEEK\'</string>
   <!-- UNUSED string name="pref_cat_sketch">MODELOS 3D</string -->
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
 
@@ -998,7 +1000,7 @@
   <string name="pref_svg_grid_title">Grade</string>
   <string name="pref_svg_grid_summary">Incluir grade no arquivo SVG/PNG exportado</string>
   <string name="pref_svg_splays_title">Medidas auxiliares SVG</string>
-  <string name="pref_svg_splays_summary">Incluir medidas auxiliares nos arquivos SVG exportados</string
+  <string name="pref_svg_splays_summary">Incluir medidas auxiliares nos arquivos SVG exportados</string>
   <!-- UNUSED string name="pref_svg_in_html_title">SVG em HTML</string -->
   <!-- UNUSED string name="pref_svg_in_html_summary">Incorporar arquivo SVG exportado em HTML</string -->
   <string name="pref_svg_pointstroke_title">Espessura ponto SVG</string>
@@ -1175,7 +1177,7 @@
   <string name="pref_linecorner_title">Limite quinas Bézier</string>
   <string name="pref_linecorner_summary">Limite para detecção de quinas nas curvas Bézier</string>
   <string name="pref_weeddistance_title">Distância pontos \'weeding\'</string>
-  <string name="pref_weeddistance_summary">Distância máxima entre segmento e pontos 'weed' (para redução da quantidade pontos em uma linha) [m]</string>
+  <string name="pref_weeddistance_summary">Distância máxima entre segmento e pontos \'weed\' (para redução da quantidade pontos em uma linha) [m]</string>
   <string name="pref_weedlength_title">Comprimento segmento \'weeding\'</string>
   <string name="pref_weedlength_summary">Comprimento máximo de um segmento na redução da quantidade de pontos via \'weeding\'</string>
   <string name="pref_calib_algo_title">Algoritmo</string>
@@ -1205,7 +1207,7 @@
   <string name="pref_linestraight_title">Tornar linhas retas</string>
   <string name="pref_linestraight_summary">Habilitar ação de tornar linhas inteiras retas</string>
   <string name="pref_path_multiselect_title">Multiseleção de caminhos</string>
-  <string name="pref_path_multiselect_summary">Habilitar ação de seleção de múltiplos caminhos/string>
+  <string name="pref_path_multiselect_summary">Habilitar ação de seleção de múltiplos caminhos</string>
   <string name="pref_plane_interpolation_title">Interpolação de plano</string>
   <string name="pref_plane_interpolation_summary">Habilitar ação de interpolação de plano</string>
   <string name="pref_plot_split_title">Quebra/união de croquis</string>
