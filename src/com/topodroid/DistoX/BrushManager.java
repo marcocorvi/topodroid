@@ -82,10 +82,18 @@ class BrushManager
   static boolean isPointSection( int index ) { return index == mPointLib.mPointSectionIndex; }
 
   static int getPointLabelIndex() { return mPointLib.mPointLabelIndex; }
+  static int getPointSectionIndex() { return mPointLib.mPointSectionIndex; }
+
+
+  static String getPointSymbolName( int idx ) { return mPointLib.getSymbolName( idx ); } 
+  static String getLineSymbolName( int idx )  { return mLineLib.getSymbolName( idx ); } 
+  static String getAreaSymbolName( int idx )  { return mAreaLib.getSymbolName( idx ); } 
 
   // LINE CLOSED
   static boolean isLineClosed( int index ) { return mLineLib.isClosed( index ); }
   static boolean isLineSection( int index ) { return index == mLineLib.mLineSectionIndex; }
+  // static int getLineSectionIndex() { return mLineLib.mLineSectionIndex; }
+  static int getLineWallIndex() { return mLineLib.mLineWallIndex; }
 
   // FIXME AREA_ORIENT
   static void resetAreaOrientations( ) { mAreaLib.resetOrientations(); }

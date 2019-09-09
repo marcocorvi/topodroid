@@ -69,7 +69,7 @@ class CalibComputer extends AsyncTask< String, Integer, Integer >
   {
     if ( res != null ) {
       int r = res.intValue();
-      if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
+      if ( mParent.get() != null && ! mParent.get().isFinishing() ) { // isFinishing MAY NullPointerException
         mParent.get().handleComputeCalibResult( mJob, r );
       }
     }

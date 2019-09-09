@@ -52,6 +52,8 @@ class CalibAlgoBH extends CalibAlgo
   }
 
 
+  // @param N         number of calib data
+  // @parm nonLinear  whether to use non-linear algo
   CalibAlgoBH( int N, boolean nonLinear )
   {
     super( N, nonLinear );

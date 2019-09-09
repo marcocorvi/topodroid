@@ -154,7 +154,7 @@ class TopoDroidComm
       // Log.v( "DistoXBLE", "Comm D PACKET " + d + " " + b + " " + c );
       // NOTE type=0 shot is DistoX-type
       long status = ( d > TDSetting.mMaxShotLength )? TDStatus.OVERSHOOT : TDStatus.NORMAL;
-      mLastShotId = TopoDroidApp.mData.insertDistoXShot( TDInstance.sid, -1L, d, b, c, r, DBlock.EXTEND_IGNORE, status, TDInstance.deviceAddress(), true );
+      mLastShotId = TopoDroidApp.mData.insertDistoXShot( TDInstance.sid, -1L, d, b, c, r, DBlock.EXTEND_IGNORE, status, TDInstance.deviceAddress() );
       if ( lister != null ) { // FIXME_LISTER sendMessage with mLastShotId only
         Message msg = lister.obtainMessage( Lister.LIST_UPDATE );
         Bundle bundle = new Bundle();
@@ -236,7 +236,7 @@ class TopoDroidComm
       double roll = mProtocol.mRoll;
       TDLog.Log( TDLog.LOG_COMM, "Comm V PACKET " + mLastShotId + " " + acc + " " + mag + " " + dip + " " + roll );
       if ( TDInstance.deviceType() == Device.DISTO_X310 ) {
-        TopoDroidApp.mData.updateShotAMDR( mLastShotId, TDInstance.sid, acc, mag, dip, roll, true );
+        TopoDroidApp.mData.updateShotAMDR( mLastShotId, TDInstance.sid, acc, mag, dip, roll );
         if ( TDSetting.mWaitData > 10 ) {
           TDUtil.slowDown( TDSetting.mWaitData );
         }

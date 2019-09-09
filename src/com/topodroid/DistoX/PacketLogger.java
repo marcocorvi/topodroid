@@ -148,7 +148,7 @@ class PacketLogger extends DataSetObservable
       ret = true;
     } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
     } catch ( SQLiteException e1 )       { logError("delete", e1 );
-    } catch ( IllegalStateException e2 ) { logError("delete", e2 );
+    // } catch ( IllegalStateException e2 ) { logError("delete", e2 );
     } finally { myDB.endTransaction(); }
     return ret;
   }

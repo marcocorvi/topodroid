@@ -264,7 +264,7 @@ public class FixedActivity extends Activity
   void setDeclination( float decl )
   {
     // Log.v( "DistoX", "set declination " + decl );
-    TopoDroidApp.mData.updateSurveyDeclination( TDInstance.sid, decl, true );
+    TopoDroidApp.mData.updateSurveyDeclination( TDInstance.sid, decl );
   }
 
   // private final static int LOCATION_REQUEST = 1;

@@ -401,9 +401,6 @@ class DataHelper extends DataSetObservable
       myDB.beginTransaction();
       myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(sid) } );
       myDB.setTransactionSuccessful();
-      // if ( forward && mListeners != null ) { // synchronized( mListeners )
-      //   mListeners.onUpdateSurveyName( id, name );
-      // }
     } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
     } catch ( SQLiteException e1 )       { logError("survey set extend ", e1 ); 
     } catch ( IllegalStateException e2 ) { logError("survey set extend ", e2 );
@@ -758,18 +755,14 @@ class DataHelper extends DataSetObservable
   private void handleDiskIOError( SQLiteDiskIOException e )
   {
     Log.e("DistoX", "DB disk error " + e.getMessage() );
-    TopoDroidApp.mActivity.runOnUiThread( new Runnable() {
-      public void run() {
-        TDToast.makeBad( R.string.disk_io_error );
-      }
-    } );
+    TopoDroidApp.mActivity.runOnUiThread( new Runnable() { public void run() { TDToast.makeBad( R.string.disk_io_error ); } } );
   }
 
   // --------------------------------------------------------------------
   // SURVEY
   // survey attributes renaming are "rare" actions
 
-  boolean renameSurvey( long id, String name, boolean forward )
+  boolean renameSurvey( long id, String name )
   {
     boolean ret = true;
     ContentValues cv = new ContentValues();
@@ -778,9 +771,6 @@ class DataHelper extends DataSetObservable
       myDB.beginTransaction();
       myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(id) } );
       myDB.setTransactionSuccessful();
-      // if ( forward && mListeners != null ) { // synchronized( mListeners )
-      //   mListeners.onUpdateSurveyName( id, name );
-      // }
     } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e ); ret = false;
     } catch ( SQLiteException e1 )       { logError("survey rename " + name, e1 ); ret =false;
     } catch ( IllegalStateException e2 ) { logError("survey rename", e2 ); ret = false;
@@ -809,50 +799,41 @@ class DataHelper extends DataSetObservable
   }
 
   void updateSurveyInfo( long sid, String date, String team, double decl, String comment,
-                         String init_station, int xsections, boolean forward )
+                         String init_station, int xsections )
                          // FIXME int extend
   {
-    // boolean ret = false;
     // Log.v("DistoX_DB", "update survey, init station <" + init_station + ">" );
     ContentValues cv = makeSurveyInfoCcontentValues( date, team, decl, comment, init_station, xsections );
     try {
       myDB.beginTransaction();
       myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(sid) } );
       myDB.setTransactionSuccessful();
-      // if ( forward && mListeners != null ) { // synchronized( mListeners )
-      //   mListeners.onUpdateSurveyInfo( sid, date, team, decl, comment, init_station, xsections );
-      // }
-      // ret = true;
     } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
     } catch ( SQLiteException e1 )       { logError("survey info", e1 ); 
     } catch ( IllegalStateException e2 ) { logError("survey info", e2 );
     } finally { myDB.endTransaction(); }
-    // return ret;
   }
 
-  boolean updateSurveyDayAndComment( String name, String date, String comment, boolean forward )
+  boolean updateSurveyDayAndComment( String name, String date, String comment )
   {
     boolean ret = false;
     long id = getIdFromName( SURVEY_TABLE, name );
     if ( id >= 0 ) { // survey name exists
-      ret = updateSurveyDayAndComment( id, date, comment, forward );
+      ret = updateSurveyDayAndComment( id, date, comment );
     }
     return ret;
   }
 
-  private boolean doUpdateSurvey( long id, ContentValues cv, String msg )
+  private void doUpdateSurvey( long id, ContentValues cv, String msg )
   {
-    boolean ret = false;
     try {
       myDB.beginTransaction();
       myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(id) } );
       myDB.setTransactionSuccessful();
-      ret = true;
     } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
     } catch ( SQLiteException e1 )       { logError(msg, e1 ); 
     } catch ( IllegalStateException e2 ) { logError(msg, e2 );
     } finally { myDB.endTransaction(); }
-    return ret;
   }
 
   private boolean doUpdate( String table, ContentValues cv, long sid, long id, String msg )
@@ -870,19 +851,16 @@ class DataHelper extends DataSetObservable
     return ret;
   }
 
-  private boolean doUpdate( String table, ContentValues cv, String where, String[] args, String msg )
+  private void doUpdate( String table, ContentValues cv, String where, String[] args, String msg )
   {
-    boolean ret = false;
     try {
       myDB.beginTransaction();
       myDB.update( table, cv, where, args );
       myDB.setTransactionSuccessful();
-      ret = true;
     } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
     } catch ( SQLiteException e1 )       { logError(msg, e1 );
     } catch ( IllegalStateException e2 ) { logError(msg, e2 );
     } finally { myDB.endTransaction(); }
-    return ret;
   }
 
   private boolean doInsert( String table, ContentValues cv, String msg )
@@ -917,21 +895,18 @@ class DataHelper extends DataSetObservable
 
   private boolean doExecShotSQL( long id, StringWriter sw ) { return doExecSQL( sw, "sht " + id ); }
 
-  private boolean updateStatus( String table, long id, long sid, long status )
+  private void updateStatus( String table, long id, long sid, long status )
   {
-    boolean ret = false;
     ContentValues cv = new ContentValues();
     cv.put( "status", status );
     try {
       myDB.beginTransaction();
       myDB.update( table, cv, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
       myDB.setTransactionSuccessful();
-      ret = true;
     } catch ( SQLiteDiskIOException e )  {  handleDiskIOError( e );
     } catch (SQLiteException e1 )        { logError(table + " update " + id, e1 ); 
     } catch ( IllegalStateException e2 ) { logError(table + " update " + id, e2 );
     } finally { myDB.endTransaction(); }
-    return ret;
   }
 
   // UNUSED
@@ -952,51 +927,35 @@ class DataHelper extends DataSetObservable
 
   // -----------------------------------------------------------------
 
-  boolean updateSurveyDayAndComment( long id, String date, String comment, boolean forward )
+  boolean updateSurveyDayAndComment( long id, String date, String comment )
   {
     if ( date == null ) return false;
     ContentValues cv = new ContentValues();
     cv.put( "day", date );
     cv.put( "comment", (comment != null)? comment : TDString.EMPTY );
-    if ( doUpdateSurvey( id, cv, "survey day+cmt" ) ) {
-      // if ( forward && mListeners != null ) { // synchronized( mListeners )
-      //   mListeners.onUpdateSurveyDayAndComment( id, date, comment );
-      // }
-    }
+    doUpdateSurvey( id, cv, "survey day+cmt" );
     return true;
   }
 
-  void updateSurveyTeam( long id, String team, boolean forward )
+  void updateSurveyTeam( long id, String team )
   {
     ContentValues cv = new ContentValues();
     cv.put( "team", team );
-    if ( doUpdateSurvey( id, cv, "survey team" ) ) {
-      // if ( forward && mListeners != null ) { // synchronized( mListeners )
-      //   mListeners.onUpdateSurveyTeam( id, team );
-      // }
-    }
+    doUpdateSurvey( id, cv, "survey team" );
   }
 
-  void updateSurveyInitStation( long id, String station, boolean forward )
+  void updateSurveyInitStation( long id, String station )
   {
     ContentValues cv = new ContentValues();
     // Log.v("DistoX_DB", "update survey init_station <" + station + ">" );
     cv.put( "init_station", station );
-    if ( doUpdateSurvey( id, cv, "survey init_station" ) ) {
-      // if ( forward && mListeners != null ) { // synchronized( mListeners )
-      //   mListeners.onUpdateSurveyInitStation( id, station );
-      // }
-    }
+    doUpdateSurvey( id, cv, "survey init_station" );
   }
-  void updateSurveyDeclination( long id, double decl, boolean forward )
+  void updateSurveyDeclination( long id, double decl )
   {
     ContentValues cv = new ContentValues();
     cv.put( "declination", decl );
-    if ( doUpdateSurvey( id, cv, "survey decl" ) ) {
-      // if ( forward && mListeners != null ) { // synchronized( mListeners )
-      //   mListeners.onUpdateSurveyDeclination( id, decl );
-      // }
-    } 
+    doUpdateSurvey( id, cv, "survey decl" );
   }
 
   // -----------------------------------------------------------------------
@@ -1029,7 +988,7 @@ class DataHelper extends DataSetObservable
   // --------------------------------------------------------------------
   // SHOTS
 
-  // void clearStationsAfter( long id, long sid, boolean forward ) 
+  // void clearStationsAfter( long id, long sid )
   // {
   //   // update shots set fStation="", tStation="" where id>id and surveyId=sid
   //   if ( clearStationsStmt == null )
@@ -1037,14 +996,11 @@ class DataHelper extends DataSetObservable
   //   clearStationsStmt.bindLong( 1, id );
   //   clearStationsStmt.bindLong( 2, sid );
   //   try { clearStationsStmt.execute(); } catch (SQLiteException e ) { logError("clear station after", e); }
-  //   // if ( forward ) {
-  //   //   // no need to forward ?
-  //   // }
   // }
 
 
   // this is an update of a manual-shot data
-  void updateShotDistanceBearingClino( long id, long sid, float d, float b, float c, boolean forward )
+  void updateShotDistanceBearingClino( long id, long sid, float d, float b, float c )
   {
     // updateShotDBCStmt.bindDouble(  1, d );
     // updateShotDBCStmt.bindDouble(  2, b );
@@ -1058,30 +1014,21 @@ class DataHelper extends DataSetObservable
     pw.format( Locale.US,
                "UPDATE shots SET distance=%.6f, bearing=%.4f, clino=%.4f WHERE surveyId=%d AND id=%d",
                d, b, c, sid, id );
-    if ( doExecShotSQL( id, sw ) ) {
-      // if ( forward && mListeners != null ) { // synchronized( mListeners )
-      //   mListeners.onUpdateShotDBC( id, sid, d, b, c );
-      // }
-    } 
+    doExecShotSQL( id, sw );
   }
 
-  void updateShotDepthBearingDistance( long id, long sid, float p, float b, float d, boolean forward )
+  void updateShotDepthBearingDistance( long id, long sid, float p, float b, float d )
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
     pw.format( Locale.US,
                "UPDATE shots SET distance=%.6f, bearing=%.4f, clino=%.4f WHERE surveyId=%d AND id=%d",
                d, b, p, sid, id );
-    if ( doExecShotSQL( id, sw ) ) {
-      // if ( forward && mListeners != null ) { // synchronized( mListeners )
-      //   mListeners.onUpdateShotPBD( id, sid, p, b, d );
-      // }
-    } 
+    doExecShotSQL( id, sw );
   }
 
   int updateShot( long id, long sid, String fStation, String tStation,
-                  long extend, long flag, long leg,
-		  String comment, boolean forward )
+                  long extend, long flag, long leg, String comment )
   {
     boolean success = false;
     if ( myDB == null ) return -1;
@@ -1104,9 +1051,6 @@ class DataHelper extends DataSetObservable
     success = doExecShotSQL( id, sw );
 
     // Log.v("DistoXS", "update shot " + fStation + " " + tStation + " success " + success );
-    // if ( success && forward && mListeners != null ) { // synchronized( mListeners )
-    //   mListeners.onUpdateShot( id, sid, fStation, tStation, extend, flag, leg, comment );
-    // }
     return 0;
   }
 
@@ -1130,7 +1074,7 @@ class DataHelper extends DataSetObservable
   // }
 
 
-  void updateShotName( long id, long sid, String fStation, String tStation, boolean forward )
+  void updateShotName( long id, long sid, String fStation, String tStation )
   {
     if ( myDB == null ) return;
     if ( fStation == null ) fStation = TDString.EMPTY;
@@ -1142,7 +1086,7 @@ class DataHelper extends DataSetObservable
     doExecShotSQL( id, sw );
   }
 
-  void updateShotsName( List<DBlock> blks, long sid, boolean forward )
+  void updateShotsName( List<DBlock> blks, long sid )
   {
     if ( myDB == null ) return;
     try {
@@ -1156,9 +1100,6 @@ class DataHelper extends DataSetObservable
         PrintWriter pw = new PrintWriter( sw );
         pw.format( Locale.US, "UPDATE shots SET fStation=\"%s\", tStation=\"%s\" WHERE surveyId=%d AND id=%d", from, to, sid, blk.mId );
         myDB.execSQL( sw.toString() );
-        // if ( forward && mListeners != null ) { // synchronized( mListeners )
-        //   mListeners.onUpdateShotName( blk.mId, sid, from, to );
-        // }
       }
       myDB.setTransactionSuccessful();
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -1167,7 +1108,7 @@ class DataHelper extends DataSetObservable
   }
 
   // "leg" flag: 0 splay, 1 leg, 2 x-splay
-  void updateShotLeg( long id, long sid, long leg, boolean forward )
+  void updateShotLeg( long id, long sid, long leg )
   {
     // Log.v("DistoXX", "A1 update shot leg. id " + id + " leg " + leg ); 
     // if ( myDB == null ) return;
@@ -1177,118 +1118,86 @@ class DataHelper extends DataSetObservable
     doExecSQL( sw, "sht leg" );
   }
 
-  // void updateShotLeg( long id, long sid, long leg, boolean forward )
+  // void updateShotLeg( long id, long sid, long leg )
   // {
   //   // Log.v("DistoXX", "A2 update shot leg. id " + id + " leg " + leg ); 
   //   StringWriter sw = new StringWriter();
   //   PrintWriter pw = new PrintWriter( sw );
   //   pw.format( Locale.US, "UPDATE shots SET leg=%d WHERE surveyId=%d AND id=%d", leg, sid, id );
-  //   if ( doExecShotSQL( id, sw ) ) {
-  //     // if ( forward && mListeners != null ) { // synchronized( mListeners )
-  //     //   mListeners.onUpdateShotLeg( id, sid, leg );
-  //     // }
-  //   } 
+  //   doExecShotSQL( id, sw );
   // }
 
   // FIXME_X2_SPLAY
-  // long updateSplayLeg( long id, long sid, boolean forward )
+  // long updateSplayLeg( long id, long sid )
   // {
   //   // if ( myDB == null ) return;
   //   // get the shot sid/id
   //   DBlock blk = selectShot( id, sid );
   //   if ( blk.isPlainSplay() ) {
-  //     updateShotLeg( id, sid, LegType.XSPLAY, forward );
+  //     updateShotLeg( id, sid, LegType.XSPLAY );
   //     return LegType.XSPLAY;
   //   } else if ( blk.isXSplay() ) {
-  //     updateShotLeg( id, sid, LegType.NORMAL, forward );
+  //     updateShotLeg( id, sid, LegType.NORMAL );
   //     return LegType.NORMAL;
   //   }
   //   return LegType.INVALID;
   // }
 
-  void updateShotExtend( long id, long sid, long extend, float stretch, boolean forward )
+  void updateShotExtend( long id, long sid, long extend, float stretch )
   {
     // if ( myDB == null ) return;
 
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
     pw.format( Locale.US, "UPDATE shots SET extend=%d, stretch=%.2f WHERE surveyId=%d AND id=%d", extend, stretch, sid, id );
-    if ( doExecShotSQL( id, sw ) ) {
-      // if ( forward && mListeners != null ) { // synchronized( mListeners )
-      //   mListeners.onUpdateShotExtend( id, sid, extend, stretch );
-      // }
-    } 
+    doExecShotSQL( id, sw );
   }
 
-  void updateShotFlag( long id, long sid, long flag, boolean forward )
+  void updateShotFlag( long id, long sid, long flag )
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
     pw.format( Locale.US, "UPDATE shots SET flag=%d WHERE surveyId=%d AND id=%d", flag, sid, id );
-    if ( doExecShotSQL( id, sw ) ) {
-      // if ( forward && mListeners != null ) { // synchronized( mListeners )
-      //   mListeners.onUpdateShotFlag( id, sid, flag );
-      // }
-    } 
+    doExecShotSQL( id, sw );
   }
 
-  void updateShotLegFlag( long id, long sid, long leg, long flag, boolean forward )
+  void updateShotLegFlag( long id, long sid, long leg, long flag )
   {
     // Log.v("DistoXX", "A2 update shot leg/flag. id " + id + " leg " + leg + " flag " + flag ); 
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
     pw.format( Locale.US, "UPDATE shots SET leg=%d, flag=%d WHERE surveyId=%d AND id=%d", leg, flag, sid, id );
-    if ( doExecShotSQL( id, sw ) ) {
-      // if ( forward && mListeners != null ) { // synchronized( mListeners )
-      //   mListeners.onUpdateShotLegFlag( id, sid, leg, flag );
-      // }
-    } 
+    doExecShotSQL( id, sw );
   }
 
-  void updateShotComment( long id, long sid, String comment, boolean forward )
+  void updateShotComment( long id, long sid, String comment )
   {
     // if ( myDB == null ) return;
     if ( comment == null ) comment = TDString.EMPTY;
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
     pw.format( Locale.US, "UPDATE shots SET comment=\"%s\" WHERE surveyId=%d AND id=%d", comment, sid, id );
-    if ( doExecShotSQL( id, sw ) ) {
-      // if ( forward && mListeners != null ) { // synchronized( mListeners )
-      //   mListeners.onUpdateShotComment( id, sid, comment );
-      // }
-    } 
+    doExecShotSQL( id, sw );
   }
 
-  void updateShotStatus( long id, long sid, long status, boolean forward )
+  void updateShotStatus( long id, long sid, long status )
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
     pw.format( Locale.US, "UPDATE shots SET status=%d WHERE surveyId=%d AND id=%d", status, sid, id );
-    if ( doExecShotSQL( id, sw ) ) {
-      // if ( forward && mListeners != null ) { // synchronized( mListeners )
-      //   mListeners.onUpdateShotStatus( id, sid, status );
-      // }
-    } 
+    doExecShotSQL( id, sw );
   }
 
-  void deleteShot( long id, long sid, int status, boolean forward )
+  void deleteShot( long id, long sid, int status )
   {
     // if ( myDB == null ) return;
-    if ( updateStatus( SHOT_TABLE, id, sid, status ) ) {
-      // if ( forward && mListeners != null ) { // synchronized( mListeners )
-      //   mListeners.onDeleteShot( id, sid, status );
-      // }
-    }
+    updateStatus( SHOT_TABLE, id, sid, status );
   }
 
-  void undeleteShot( long id, long sid, boolean forward )
+  void undeleteShot( long id, long sid )
   {
     // if ( myDB == null ) return;
-    if ( updateStatus( SHOT_TABLE, id, sid, TDStatus.NORMAL ) ) {
-      // if ( forward && mListeners != null ) { // synchronized( mListeners )
-      //   mListeners.onUndeleteShot( id, sid );
-      // }
-    }
+    updateStatus( SHOT_TABLE, id, sid, TDStatus.NORMAL );
   }
   
   // called by the importXXXTask's
@@ -1433,24 +1342,24 @@ class DataHelper extends DataSetObservable
     return insertImportShots( sid, id, shots );
   }
 
-  long insertDistoXShot( long sid, long id, double d, double b, double c, double r, long extend, long status, String addr, boolean forward )
+  long insertDistoXShot( long sid, long id, double d, double b, double c, double r, long extend, long status, String addr )
   { // 0L=leg, status, 0L=type DISTOX
     // stretch = 0.0;
-    return doInsertShot( sid, id, System.currentTimeMillis()/1000, 0L, "", "",  d, b, c, r, extend, 0.0, DBlock.FLAG_SURVEY, 0L, status, 0L, "", addr, forward );
+    return doInsertShot( sid, id, System.currentTimeMillis()/1000, 0L, "", "",  d, b, c, r, extend, 0.0, DBlock.FLAG_SURVEY, 0L, status, 0L, "", addr );
   }
 
   long insertShot( long sid, long id, long millis, long color, double d, double b, double c, double r,
 		   long extend, double stretch, long leg,
-                   long shot_type, String addr, boolean forward )
+                   long shot_type, String addr )
   { // leg, 0L=status, type 
-    return doInsertShot( sid, id, millis, color, "", "",  d, b, c, r, extend, stretch, DBlock.FLAG_SURVEY, leg, 0L, shot_type, "", addr, forward );
+    return doInsertShot( sid, id, millis, color, "", "",  d, b, c, r, extend, stretch, DBlock.FLAG_SURVEY, leg, 0L, shot_type, "", addr );
   }
 
   long insertManualShot( long sid, long id, long millis, long color, double d, double b, double c, double r,
 		   long extend, double stretch, long leg,
-                   long shot_type, boolean forward )
+                   long shot_type )
   { // leg, 0L=status, type 
-    return doInsertShot( sid, id, millis, color, "", "",  d, b, c, r, extend, stretch, DBlock.FLAG_SURVEY, leg, 0L, shot_type, "", "", forward );
+    return doInsertShot( sid, id, millis, color, "", "",  d, b, c, r, extend, stretch, DBlock.FLAG_SURVEY, leg, 0L, shot_type, "", "" );
   }
 
   void resetShotColor( long sid )
@@ -1466,7 +1375,7 @@ class DataHelper extends DataSetObservable
     doUpdate( SHOT_TABLE, cv, "surveyId=?", new String[] { Long.toString(sid) }, "sht color reset" );
   }
 
-  void updateShotColor( long id, long sid, int color, boolean forward )
+  void updateShotColor( long id, long sid, int color )
   {
     // if ( myDB == null ) return;
 
@@ -1489,16 +1398,10 @@ class DataHelper extends DataSetObservable
     // updateShotColorStmt.bindLong( 2, sid );
     // updateShotColorStmt.bindLong( 3, id );
     // doStatement( updateShotColorStmt, "Color" );
-    // if ( doStatement( updateShotColorStmt, "Color" ) ) {
-    //   // if ( forward && mListeners != null ) { // synchronized( mListeners )
-    //   //   mListeners.onUpdateShotColor( sid, id, color );
-    //   // }
-    //   return true;
-    // }
-    // return false;
+    // return doStatement( updateShotColorStmt, "Color" );
   }
 
-  void updateShotsColor( List<DBlock> blks, long sid, int color, boolean forward )
+  void updateShotsColor( List<DBlock> blks, long sid, int color )
   {
     if ( myDB == null ) return;
     myDB.beginTransaction();
@@ -1506,9 +1409,6 @@ class DataHelper extends DataSetObservable
       String stmt = "UPDATE shots SET color=" + color + " WHERE surveyId=" + sid + " AND id=";
       for ( DBlock blk : blks ) {
         myDB.execSQL( stmt + blk.mId );
-        // // if ( forward && mListeners != null ) { // synchronized( mListeners )
-        // //   mListeners.onUpdateShotColor( sid, id, color );
-        // // }
       }
       myDB.setTransactionSuccessful();
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -1516,7 +1416,7 @@ class DataHelper extends DataSetObservable
     } finally { myDB.endTransaction(); }
   }
 
-  void updateShotAMDR( long id, long sid, double acc, double mag, double dip, double r, boolean forward )
+  void updateShotAMDR( long id, long sid, double acc, double mag, double dip, double r )
   {
     // if ( myDB == null ) return;
 
@@ -1539,13 +1439,7 @@ class DataHelper extends DataSetObservable
     updateShotAMDRStmt.bindLong( 5, sid );
     updateShotAMDRStmt.bindLong( 6, id );
     doStatement( updateShotAMDRStmt, "AMDR" );
-    // if ( doStatement( updateShotAMDRStmt, "AMDR" ) ) {
-    //   // if ( forward && mListeners != null ) { // synchronized( mListeners )
-    //   //   mListeners.onUpdateShotAMDR( sid, id, acc, mag, dip, r );
-    //   // }
-    //   return true;
-    // }
-    // return false;
+    // return doStatement( updateShotAMDRStmt, "AMDR" );
 */
   }
 
@@ -1694,7 +1588,7 @@ class DataHelper extends DataSetObservable
   }
 
   long insertManualShotAt( long sid, long at, long millis, long color, double d, double b, double c, double r,
-		     long extend, double stretch, long leg, long type, boolean forward )
+		     long extend, double stretch, long leg, long type )
   {
     if ( myDB == null ) return -1L;
     // Log.v("DistoXX", "A4 insert sht at " + at + " leg " + leg );
@@ -1723,11 +1617,7 @@ class DataHelper extends DataSetObservable
     cv.put( "stretch",  stretch );
     cv.put( "address",  "" );
 
-    if ( doInsert( SHOT_TABLE, cv, "insert at" ) ) {
-      // if ( forward && mListeners != null ) { // synchronized( mListeners )
-      //   mListeners.onInsertShotAt( sid, at, millis, color, d, b, c, r, extend, stretch, leg, DBlock.FLAG_SURVEY );
-      // }
-    }
+    doInsert( SHOT_TABLE, cv, "insert at" );
     return at;
   }
 
@@ -1766,7 +1656,7 @@ class DataHelper extends DataSetObservable
   private long doInsertShot( long sid, long id, long millis, long color, String from, String to,
                           double d, double b, double c, double r, 
                           long extend, double stretch, long flag, long leg, long status, long shot_type,
-                          String comment, String addr, boolean forward )
+                          String comment, String addr )
   {
     // TDLog.Log( TDLog.LOG_DB, "insert shot <" + id + "> " + from + "-" + to + " extend " + extend );
     Log.v("DistoXX", "do insert shot id " + id + " d " + d + " b " + b + " c " + c );
@@ -1780,11 +1670,7 @@ class DataHelper extends DataSetObservable
     if (addr == null) addr = "";
     ContentValues cv = makeShotContentValues( sid, id, millis, color, from, to, d, b, c, r, 0.0, 0.0, 0.0,
 		    extend, stretch, flag, leg, status, shot_type, comment, addr );
-    if ( doInsert( SHOT_TABLE, cv, "insert" ) ) {
-      // if ( forward && mListeners != null ) { // synchronized( mListeners )
-      //   mListeners.onInsertShot( sid,  id, millis, color, from, to, d, b, c, r, extend, stretch, flag, leg, status, shot_type, comment );
-      // }
-    } 
+    doInsert( SHOT_TABLE, cv, "insert" );
     return id;
   }
 
@@ -2529,7 +2415,7 @@ class DataHelper extends DataSetObservable
   }
 
   // mergeToNextLeg does not change anything if blk has both FROM and TO stations
-  long mergeToNextLeg( DBlock blk, long sid, boolean forward )
+  long mergeToNextLeg( DBlock blk, long sid )
   {
     long ret = -1;
     if ( myDB == null ) return ret;
@@ -2545,15 +2431,15 @@ class DataHelper extends DataSetObservable
           // Log.v("DistoX", blk.mId + " < " + from + " - " + to + " > at k " + k );
           if ( k > 0 ) {
             // Log.v("DistoX", blk.mId + " clear shot name " + ret );
-            updateShotName( ret, sid, "", "", forward );
-            updateShotLeg( ret, sid, LegType.EXTRA, forward ); 
+            updateShotName( ret, sid, "", "" );
+            updateShotLeg( ret, sid, LegType.EXTRA ); 
             if ( k == 2 ) { // N.B. if k == 2 must set ShotLeg also to intermediate shot
               if ( cursor.moveToPrevious() ) { // overcautious
-                updateShotLeg( cursor.getLong(0), sid, LegType.EXTRA, forward ); 
+                updateShotLeg( cursor.getLong(0), sid, LegType.EXTRA ); 
               }
             }
           }
-          updateShotName( blk.mId, sid, from, to, forward );
+          updateShotName( blk.mId, sid, from, to );
           blk.mFrom = from;
           blk.mTo   = to;
           break;
@@ -3421,7 +3307,7 @@ class DataHelper extends DataSetObservable
     doUpdate( PLOT_TABLE, cv, "surveyId=? AND id=?", new String[] { Long.toString(sid), Long.toString(pid) }, "plot orient" );
   }
 
-  boolean updatePlotAzimuthClino( long sid, long pid, float b, float c )
+  void updatePlotAzimuthClino( long sid, long pid, float b, float c )
   {
     // if ( updatePlotAzimuthClinoStmt == null ) {
     //   updatePlotAzimuthClinoStmt = myDB.compileStatement( "UPDATE plots set azimuth=?, clino=? WHERE surveyId=? AND id=?" );
@@ -3436,7 +3322,7 @@ class DataHelper extends DataSetObservable
     cv.put( "azimuth", b );
     cv.put( "clino", c );
     doUpdate( PLOT_TABLE, cv, "surveyId=? AND id=?", new String[] { Long.toString(sid), Long.toString(pid) }, "plot dir" );
-    return true; // FIXME
+    // return true; // FIXME
   }
  
   PlotInfo getPlotInfo( long sid, String name )
@@ -3790,7 +3676,7 @@ class DataHelper extends DataSetObservable
 
   long insertPlot( long sid, long id, String name, long type, long status, String start, String view,
                           double xoffset, double yoffset, double zoom, double azimuth, double clino,
-                          String hide, String nick, int orientation, boolean forward )
+                          String hide, String nick, int orientation )
   {
     // Log.v( TopoDroidApp.TAG, "insert plot " + name + " start " + start + " azimuth " + azimuth );
     // Log.v("DistoXX", "insert plot <" + name + "> hide <" + hide + "> nick <" + nick + ">" );
@@ -3801,11 +3687,7 @@ class DataHelper extends DataSetObservable
     if ( id == -1L ) id = maxId( PLOT_TABLE, sid );
     ContentValues cv = makePlotContentValues( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, 
        	     azimuth, clino, hide, nick, orientation );
-    if ( doInsert( PLOT_TABLE, cv, "plot insert" ) ) {
-      // if ( forward && mListeners != null ) { // synchronized( mListeners )
-      //   mListeners.onInsertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation );
-      // }
-    } else { // failed
+    if ( ! doInsert( PLOT_TABLE, cv, "plot insert" ) ) { // failed
       id = -1L;
     }
     return id;
@@ -4017,7 +3899,7 @@ class DataHelper extends DataSetObservable
     return ret;
   }
 
-   long setSurvey( String name, int datamode, boolean forward )
+   long setSurvey( String name, int datamode )
    {
      myNextId = 0;
      if ( myDB == null ) return 0L;
@@ -4029,11 +3911,6 @@ class DataHelper extends DataSetObservable
        myNextId = cursor.getLong(0);
      }
      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-
-     // TDLog.Log( TDLog.LOG_DB, "setSurvey " + name + " forward " + forward + " listeners " + mListeners.size() );
-     // if ( forward && mListeners != null ) { // synchronized( mListeners )
-     //   mListeners.onSetSurvey( sid, name, datamode );
-     // }
      return sid;
    }
 
@@ -4550,10 +4427,8 @@ class DataHelper extends DataSetObservable
 
        fw.flush();
        fw.close();
-     } catch ( FileNotFoundException e ) {
-       // FIXME
-     } catch ( IOException e ) {
-       // FIXME
+     } catch ( FileNotFoundException e ) {// FIXME
+     } catch ( IOException e ) {// FIXME
      }
    }
 
@@ -4598,7 +4473,7 @@ class DataHelper extends DataSetObservable
 	 int extend_ref = SurveyInfo.EXTEND_NORMAL;
          if ( db_version > 38) extend_ref = (int)( scanline0.longValue( ) );
 
-         sid = setSurvey( name, datamode, false );
+         sid = setSurvey( name, datamode );
 
          try {
            myDB.beginTransaction();

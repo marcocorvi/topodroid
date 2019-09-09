@@ -91,7 +91,7 @@ class DrawingCommandManager
 
   // PATH_MULTISELECT
   private int mMultiselectionType = -1;  // current multiselection type (DRAWING_PATH_POINT / LINE / AREA
-  List< DrawingPath > mMultiselected;
+  private List< DrawingPath > mMultiselected;
   boolean isMultiselection = false; 
   int getMultiselectionType() { return mMultiselectionType; }
 
@@ -802,10 +802,10 @@ class DrawingCommandManager
                 // ret = 3;
                 eraseCmd.addAction( EraseAction.ERASE_MODIFY, path );
                 // LinePoint lp = points.get(0);
-                LinePoint lp = first;
+                // LinePoint lp = first;
                 doRemoveLinePoint( line, pt.mPoint, pt );
                 synchronized ( TDPath.mSelectionLock ) {
-                  mSelection.removeLinePoint( line, lp ); // index = 0
+                  mSelection.removeLinePoint( line, first ); // index = 0
                   // mSelection.mPoints.remove( pt );        // index = 1
                 }
                 line.retracePath();
@@ -816,11 +816,11 @@ class DrawingCommandManager
                 // ret = 3;
                 eraseCmd.addAction( EraseAction.ERASE_MODIFY, path );
                 // LinePoint lp = points.get(0);
-                LinePoint lp = first;
-                doRemoveLinePoint( line, lp, null );
+                // LinePoint lp = first;
+                doRemoveLinePoint( line, first, null );
                 doRemoveLinePoint( line, pt.mPoint, pt );
                 synchronized ( TDPath.mSelectionLock ) {
-                  mSelection.removeLinePoint( line, lp ); // index = 0
+                  mSelection.removeLinePoint( line, first ); // index = 0
                   mSelection.mPoints.remove( pt );        // index = 1
                 }
                 line.retracePath();
@@ -831,11 +831,11 @@ class DrawingCommandManager
                 // ret = 4;
                 eraseCmd.addAction( EraseAction.ERASE_MODIFY, path );
                 // LinePoint lp = points.get(size-1);
-                LinePoint lp = last;
-                doRemoveLinePoint( line, lp, null );
+                // LinePoint lp = last;
+                doRemoveLinePoint( line, first, null );
                 doRemoveLinePoint( line, pt.mPoint, pt );
                 synchronized ( TDPath.mSelectionLock ) {
-                  mSelection.removeLinePoint( line, lp ); // size -1
+                  mSelection.removeLinePoint( line, first ); // size -1
                   mSelection.mPoints.remove( pt );        // size -2
                 }
                 line.retracePath();
@@ -1627,12 +1627,16 @@ class DrawingCommandManager
         if ( lp1n != null ) {
           lp2 = line.mLast;
           // int toDrop = 0; // number of points to drop
-          for ( ; lp2 != lp1; lp2 = lp2.mPrev ) { // FIXME 20190512 check lp2 != null
-            if ( lp2.distance( last ) < delta ) break;
+          for ( ; lp2 != lp1 && lp2 != null; lp2 = lp2.mPrev ) { // FIXME 20190512 check lp2 != null
+            if ( lp2.distance( last ) < delta ) {
+              lp2 = lp2.mNext; // backup one point
+              break;
+            }
             // ++ toDrop;
           }
-          if ( lp2 != lp1 ) { lp2 = lp2.mNext; }
-          else { lp2 = null; }
+          if ( lp2 == lp1 ) { // if loop ended because arrived to the initial point lp1
+            lp2 = null;
+          }
         } 
         // int old_size = line.size();
         // line.mSize += line2.mSize - toDrop; // better recount points

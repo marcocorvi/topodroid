@@ -52,7 +52,7 @@ class ParserPocketTopo extends ImportParser
     checkValid();
   }
 
-  private void readPocketTopoFile( String filename ) throws ParserException
+  private void readPocketTopoFile( String filename ) // throws ParserException
   {
     PTFile ptfile = new PTFile();
     // TDLog.Log( TDLog.LOG_IO, "read PocketTopo file " + filename );

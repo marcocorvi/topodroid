@@ -220,13 +220,13 @@ class SurveyNewDialog extends MyDialog
     int datamode  = SurveyInfo.DATAMODE_NORMAL;
     if ( TDLevel.overExpert && TDSetting.mDivingMode && mCBdatamode.isChecked() ) datamode = SurveyInfo.DATAMODE_DIVING;
 
-    long sid = mApp.setSurveyFromName( name, datamode, true, true ); // save survey name: tell app to set it into the database
+    long sid = mApp.setSurveyFromName( name, datamode, true ); // save survey name: tell app to set it into the database
     if ( sid <= 0 ) {
       TDLog.Error( "Failed to set survey name in DB");
       return false;
     }
     // Note TDInstance.sid == sid
-    TopoDroidApp.mData.updateSurveyInfo( TDInstance.sid, date, team, decl, comment, init_station, xsections, true );
+    TopoDroidApp.mData.updateSurveyInfo( TDInstance.sid, date, team, decl, comment, init_station, xsections );
 
     if ( mOldSid >= 0L && mOldId >= 0L ) {  // SPLIT_SURVEY
       TopoDroidApp.mData.transferShots( TDInstance.sid, mOldSid, mOldId );

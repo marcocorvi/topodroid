@@ -321,10 +321,8 @@ class SymbolPoint extends Symbol
         }
         line = br.readLine();
       }
-    } catch ( FileNotFoundException e ) {
-      // FIXME
-    } catch( IOException e ) {
-      // FIXME
+    } catch ( FileNotFoundException e ) {// FIXME
+    } catch( IOException e ) {// FIXME
     }
     mOrientation = 0.0;
     // Log.v(  TopoDroidApp.TAG, "Symbol Point read File " + pathname + " csurvey " + mCsxLayer );

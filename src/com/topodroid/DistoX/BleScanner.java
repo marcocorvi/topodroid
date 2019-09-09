@@ -35,17 +35,17 @@ import java.util.ArrayList;
 // -----------------------------------------------------------------------------
 class BleScanner
 {
-  static final long BLE_SCAN_PERIOD = 10000; // 10 secs
+  private static final long BLE_SCAN_PERIOD = 10000; // 10 secs
 
-  static boolean mScanning = false;
+  private static boolean mScanning = false;
 
-  DeviceActivity mParent;
+  private DeviceActivity mParent;
 
   private ScanCallback mScanCallback;
   private BluetoothAdapter.LeScanCallback mLeScanCallback;
 
-  Handler mScanHandler = null;
-  Runnable mScanHandlerRunnable = null;
+  private Handler mScanHandler = null;
+  private Runnable mScanHandlerRunnable = null;
 
   // -----------------------------------------------
 
@@ -118,7 +118,7 @@ class BleScanner
     return true;
   }
 
-  void stopScan() 
+  private void stopScan()
   {
     // Log.v("DistoXBLE", "stop scan");
     if ( mScanHandler != null && mScanHandlerRunnable != null ) {
@@ -140,12 +140,10 @@ class BleScanner
     mScanHandler = null;
   }  
 
-  public void setRemoteDevice( final BluetoothDevice device ) 
+  private void setRemoteDevice( final BluetoothDevice device )
   {
     // Log.v("DistoXBLE", "remote device " + device.getName() );
-    mParent.runOnUiThread( new Runnable() {
-      public void run() { mParent.addBleDevice( device ); }
-    } );
+    mParent.runOnUiThread( new Runnable() { public void run() { mParent.addBleDevice( device ); } } );
   }
 
 }

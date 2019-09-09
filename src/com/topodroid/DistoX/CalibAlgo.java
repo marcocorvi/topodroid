@@ -147,6 +147,8 @@ class CalibAlgo
   //   // Log.v("DistoX", String.format("NL %8.4f %8.4f %8.4f", nL.x, nL.y, nL.z ) );
   // }
 
+  // @param N         number of data
+  // @param nonLinear whether to use non-linear algo
   CalibAlgo( int N, boolean nonLinear )
   {
     num = 0;

@@ -79,8 +79,8 @@ class Archiver
   private void addDirectory( ZipOutputStream zos, File dir )
   {
     if ( ! dir.exists() ) return;
-    Log.v( "DistoXX", "zip add dir " + dir.getPath() );
-    for ( File file : dir.listFiles() ) {
+    // Log.v( "DistoXX", "zip add dir " + dir.getPath() );
+    for ( File file : dir.listFiles() ) { // listFiles MAY NullPointerException
       if ( file.isFile() ) addEntry( zos, file );
     }
   }

@@ -130,7 +130,7 @@ class DrawingStationDialog extends MyDialog
       mComment = (EditText) findViewById( R.id.comment );
       mFlag    = 0;
       if ( TDLevel.overExpert ) {
-        CurrentStation cs = mApp.mData.getStation( TDInstance.sid, mStationName );
+        CurrentStation cs = TopoDroidApp.mData.getStation( TDInstance.sid, mStationName );
         mBtnOkComment.setOnClickListener( this );
         if ( cs != null ) {
           mComment.setText( cs.mComment );

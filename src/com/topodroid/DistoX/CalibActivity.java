@@ -474,7 +474,7 @@ public class CalibActivity extends Activity
   public void doExport( String type )
   {
     int index = TDConst.calibExportIndex( type );
-    if ( index >= 0 ) doExport( index, true );
+    if ( index >= 0 ) doExport( index );
   }
 
   @Override 
@@ -486,22 +486,20 @@ public class CalibActivity extends Activity
     }
   }
 
-  private void doExport( int exportType, boolean warn )
+  private void doExport( int exportType )
   {
     if ( TDInstance.cid < 0 ) {
-      if ( warn ) TDToast.makeBad( R.string.no_calibration );
+      TDToast.makeBad( R.string.no_calibration );
     } else {
       String filename = null;
       switch ( exportType ) {
         case TDConst.DISTOX_EXPORT_CSV:
           filename = mApp.exportCalibAsCsv();
       }
-      if ( warn ) { 
-        if ( filename != null ) {
-          TDToast.make( getString(R.string.saving_) + filename );
-        } else {
-          TDToast.makeBad( R.string.saving_file_failed );
-        }
+      if ( filename != null ) {
+        TDToast.make( getString(R.string.saving_) + filename );
+      } else {
+        TDToast.makeBad( R.string.saving_file_failed );
       }
     }
   }

@@ -128,7 +128,7 @@ class AudioDialog extends MyDialog
           // file.delete();
           // mApp.mData.dropAudio( TDInstance.sid, mBid );
         }
-	Log.v("DistoX", "audio delete has no file");
+	// Log.v("DistoX", "audio delete has no file");
       } else if ( b == mBtnPlay ) {
         mAction = ACTION_NONE;
         mBtnConfirm.setText( R.string.audio_paused );
@@ -166,7 +166,7 @@ class AudioDialog extends MyDialog
         }
         return;
       }
-    } catch ( ClassCastException e ) { }
+    } catch ( ClassCastException e ) { /* THIS IS OK */ }
     if ( mAction > ACTION_NONE ) {
       try {
         if ( (Button)v == mBtnConfirm ) {
@@ -181,7 +181,7 @@ class AudioDialog extends MyDialog
         // } else {
 	//   Log.v("DistoX", "audio confirm undefined");
 	}
-      } catch ( ClassCastException e ) { }
+      } catch ( ClassCastException e ) { /* THIS IS OK */ }
     }
     dismiss();
   }
@@ -209,7 +209,9 @@ class AudioDialog extends MyDialog
       mBtnConfirm.setText( R.string.audio_recording );
       mMR.start();
     } catch ( IllegalStateException e ) {
+      TDLog.Error("Illegal State " + e.getMessage() );
     } catch ( IOException e ) {
+      TDLog.Error("I/O error " + e.getMessage() );
     }
   }
 
@@ -228,7 +230,9 @@ class AudioDialog extends MyDialog
       TopoDroidApp.mData.setAudio( TDInstance.sid, mBid, TDUtil.currentDateTime() );
       if ( mParent != null ) mParent.stopRecordAudio( mBid );
     } catch ( IllegalStateException e ) {
+      TDLog.Error("Illegal state " + e.getMessage() );
     } catch ( RuntimeException e ) {
+      TDLog.Error("Runtime error " + e.getMessage() );
     }
   }
 
@@ -254,7 +258,9 @@ class AudioDialog extends MyDialog
       mBtnConfirm.setText(  R.string.audio_playing );
       mMP.start();
     } catch ( IllegalStateException e ) {
+      TDLog.Error("Illegal state " + e.getMessage() );
     } catch ( IOException e ) {
+      TDLog.Error("I/O error " + e.getMessage() );
     }
   }
 
@@ -271,7 +277,9 @@ class AudioDialog extends MyDialog
       mBtnConfirm.setText( R.string.audio_paused );
       mBtnPlay.setState( 1 );
     } catch ( IllegalStateException e ) {
-    } catch ( RuntimeException e ) {
+      TDLog.Error("Illegal state " + e.getMessage() );
+    // } catch ( RuntimeException e ) {
+    //   TDLog.Error("Runtime error " + e.getMessage() );
     }
   }
 

@@ -49,7 +49,7 @@ class CalibCBlockAdapter extends ArrayAdapter< CalibCBlock >
         v = li.inflate( R.layout.row, parent, false ); // FIXME inflate may produce NullPointerException
       } catch ( NullPointerException e ) {
         TDLog.Error("CBlock adapter inflate view: null pointer");
-        return convertView; // null;
+        return null;
       }
     }
 

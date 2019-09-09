@@ -27,7 +27,7 @@ class ConvexHull
   // private Vector mZ;
 
   private ArrayList< Vector > mPts; // other points
-  ArrayList< CHTriangle > mTri;
+  private ArrayList< CHTriangle > mTri;
 
   private class VectorPair
   {

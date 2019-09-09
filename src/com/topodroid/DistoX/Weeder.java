@@ -167,8 +167,7 @@ class Weeder
       if ( d > d0 ) { d0 = d; k0 = k; }
     }
     if ( d0 < thr ) return null;
-    WeedIndex ret = new WeedIndex( pts.get(k0), k0, i1, i2 );
-    return ret;
+    return new WeedIndex( pts.get(k0), k0, i1, i2 );
   }
   
   private WeedIndex initSections( List<WeedPoint> pts, float max_len )
@@ -190,8 +189,7 @@ class Weeder
       WeedPoint pp = pts.get(k); // running point to find the second point of the segment
       len += pp.s - q0.s;
       if ( len > max_len ) {
-        WeedIndex idx = new WeedIndex( pp, k, idx1, idx2 );
-        idx1 = idx;
+        idx1 = new WeedIndex( pp, k, idx1, idx2 );
         p1   = pp;
 	len = 0;
 	q0   = p1;
@@ -204,9 +202,8 @@ class Weeder
           if ( cross( p1, pp, q1, q2, TDSetting.mWeedBuffer/len, TDSetting.mWeedBuffer/(0.001f + q2.s-q1.s)  ) ) { crosses = true; break; }
 	  q1 = q2;
         }
-        if ( crosses ) {
-          WeedIndex idx = new WeedIndex( pp, k, idx1, idx2 );
-          idx1 = idx;
+        if  ( crosses ) {
+          idx1 = new WeedIndex( pp, k, idx1, idx2 );
           p1   = pp;
         }
       }

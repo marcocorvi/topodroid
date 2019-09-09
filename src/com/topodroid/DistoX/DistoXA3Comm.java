@@ -71,7 +71,7 @@ class DistoXA3Comm extends DistoXComm
   }
   // -------------------------------------------------------- 
 
-  /** send the set/unset calib-mode command
+  /* send the set/unset calib-mode command
    * note called within connectSocket()
    * nothing to read (only write) --> no AsyncTask
    *

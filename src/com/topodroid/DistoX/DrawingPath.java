@@ -151,11 +151,10 @@ class DrawingPath extends RectF
   { 
     // return true;
     if ( bbox == null ) return true;
-    if ( ( bbox.right  < left   ) 
-      || ( bbox.left   > right  ) 
-      || ( bbox.top    > bottom ) 
-      || ( bbox.bottom < top    ) ) return false;
-    return true;
+    return (bbox.right >= left)
+            && (bbox.left <= right)
+            && (bbox.top <= bottom)
+            && (bbox.bottom >= top);
   }
   
   // from ICanvasCommand

@@ -74,12 +74,7 @@ public class HorizontalListView extends AdapterView<ListAdapter>
     mMaxX = Integer.MAX_VALUE;
     mScroller = new Scroller(getContext());
     mGesture  = new GestureDetector(getContext(), mOnGesture);
-    mRunnable = new Runnable() {
-        @Override
-        public void run() {
-          requestLayout();
-        }
-    };
+    mRunnable = new Runnable() { public void run() { requestLayout(); } };
   }
   
   @Override

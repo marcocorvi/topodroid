@@ -91,7 +91,7 @@ class UndeleteDialog extends MyDialog
       long id = Long.parseLong( value[1] );
       try {
         if ( value[0].equals( "shot" ) ) {
-          mData.undeleteShot( id, mSid, true );
+          mData.undeleteShot( id, mSid );
           mParent.updateDisplay(); // this recomputes DistoX accuracy
         } else {
           mData.undeletePlot( id, mSid );

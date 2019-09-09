@@ -143,7 +143,7 @@ class StationName
     {
       long extend = TDAzimuth.computeLegExtend( blk.mBearing );
       blk.setExtend( (int)extend, DBlock.STRETCH_NONE ); 
-      mData.updateShotExtend( blk.mId, mSid, extend, DBlock.STRETCH_NONE, true );
+      mData.updateShotExtend( blk.mId, mSid, extend, DBlock.STRETCH_NONE );
     }
   }
 
@@ -152,7 +152,7 @@ class StationName
   protected void setLegFixedExtend( DBlock blk, long extend )
   {
     blk.setExtend( (int)extend, DBlock.STRETCH_NONE );
-    mData.updateShotExtend( blk.mId, mSid, extend, DBlock.STRETCH_NONE, true );
+    mData.updateShotExtend( blk.mId, mSid, extend, DBlock.STRETCH_NONE );
   }
 
   // ------------------------------------------------------------------------------------------------
@@ -161,13 +161,13 @@ class StationName
   protected void setBlockName( DBlock blk, String from, String to, boolean is_backleg ) 
   {
     blk.setBlockName( from, to, is_backleg );
-    mData.updateShotName( blk.mId, mSid, from, to, true );
+    mData.updateShotName( blk.mId, mSid, from, to );
   }
 
   protected void setBlockName( DBlock blk, String from, String to )
   {
     blk.setBlockName( from, to );
-    mData.updateShotName( blk.mId, mSid, from, to, true );
+    mData.updateShotName( blk.mId, mSid, from, to );
   }
 
   // ------------------------------------------------------------------------------------------------

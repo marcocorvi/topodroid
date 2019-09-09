@@ -111,7 +111,7 @@ class PacketDialog extends MyDialog
     if ( mCBV.isChecked() ) filter += 16;
     if ( mCBC.isChecked() ) filter += 32;
     if ( mCBX.isChecked() ) filter += 64;
-    Long age = 28L * 24L * 3600L;  // four weeks
+    long age = 28L * 24L * 3600L;  // four weeks
     List< PacketData > packets = mLogger.selectPackets( age, filter );
     PacketAdapter adapter = new PacketAdapter( mContext, R.layout.row, packets );
     // MyStringAdapter adapter = new MyStringAdapter( mContext, R.layout.message_small );

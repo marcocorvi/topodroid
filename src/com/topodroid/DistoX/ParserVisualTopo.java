@@ -24,11 +24,11 @@ import java.io.BufferedReader;
 
 class ParserVisualTopo extends ImportParser
 {
-  boolean dmb = false; // whether bearing is DD.MM
-  boolean dmc = false;
-  float ul = 1;  // units factor [m]
-  float ub = 1;  // dec.deg
-  float uc = 1;  // dec.deg
+  private boolean dmb = false; // whether bearing is DD.MM
+  private boolean dmc = false;
+  private float ul = 1;  // units factor [m]
+  private float ub = 1;  // dec.deg
+  private float uc = 1;  // dec.deg
 
   /** VisualTopo parser
    * @param filename name of the file to parse

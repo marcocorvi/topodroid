@@ -39,10 +39,10 @@ class ImportCompassTask extends ImportTask
       if ( app_data.hasSurveyName( parser.mName ) ) {
         return -1L;
       }
-      sid = mApp.get().setSurveyFromName( parser.mName, mDatamode, false, false ); // IMPORT DAT no update, no forward
-      app_data.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle, false );
-      app_data.updateSurveyDeclination( sid, parser.mDeclination, false );
-      app_data.updateSurveyInitStation( sid, parser.initStation(), false );
+      sid = mApp.get().setSurveyFromName( parser.mName, mDatamode, false ); // IMPORT DAT no update
+      app_data.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle );
+      app_data.updateSurveyDeclination( sid, parser.mDeclination );
+      app_data.updateSurveyInitStation( sid, parser.initStation() );
 
       long id = 1; // start id = 1
       ArrayList< ParserShot > shots  = parser.getShots();

@@ -57,7 +57,7 @@ class TDExporter
   private static final String   therion_flags_surface       = "   flags surface\n";
   private static final String   therion_flags_not_surface   = "   flags not surface\n";
 
-  static void checkShotsClino( List<DBlock> list )
+  private static void checkShotsClino( List<DBlock> list )
   {
     if ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING ) {
       for ( DBlock blk : list ) {
@@ -1391,9 +1391,9 @@ class TDExporter
   // static String   survex_flags_surface       = "   *flags surface";
   // static String   survex_flags_not_surface   = "   *flags not surface";
 
-  static String splayChar = "a";
-  static void resetSplayChar() { splayChar = "a"; }
-  static void incSplayChar()
+  private static String splayChar = "a";
+  private static void resetSplayChar() { splayChar = "a"; }
+  private static void incSplayChar()
   {
     char[] ch = splayChar.toCharArray();
     int k = splayChar.length() - 1;

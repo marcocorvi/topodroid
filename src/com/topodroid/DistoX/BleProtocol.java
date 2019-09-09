@@ -28,7 +28,7 @@ import android.bluetooth.BluetoothGattCharacteristic;
 // -----------------------------------------------------------------------------
 class BleProtocol extends TopoDroidProtocol
 {
-  BleComm mComm;
+  private BleComm mComm;
   
   BleProtocol( BleComm comm, Device device, Context context )
   {

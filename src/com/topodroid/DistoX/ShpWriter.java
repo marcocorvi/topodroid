@@ -848,14 +848,14 @@ class ShpPolyline extends ShpObject
     // mPathType = path_type;
   }
 
-  boolean writeLines( List<DrawingPointLinePath> lns, float x0, float y0, float scale ) throws IOException
+  void writeLines( List<DrawingPointLinePath> lns, float x0, float y0, float scale ) throws IOException
   {
-    return writwPointLines( lns, DrawingPath.DRAWING_PATH_LINE, x0, y0, scale );
+    writwPointLines( lns, DrawingPath.DRAWING_PATH_LINE, x0, y0, scale );
   }
 
-  boolean writeAreas( List<DrawingPointLinePath> lns, float x0, float y0, float scale ) throws IOException
+  void writeAreas( List<DrawingPointLinePath> lns, float x0, float y0, float scale ) throws IOException
   {
-    return writwPointLines( lns, DrawingPath.DRAWING_PATH_AREA, x0, y0, scale );
+    writwPointLines( lns, DrawingPath.DRAWING_PATH_AREA, x0, y0, scale );
   }
 
   private boolean writwPointLines( List<DrawingPointLinePath> lns, int path_type, float x0, float y0, float scale ) throws IOException

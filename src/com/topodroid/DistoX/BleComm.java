@@ -36,9 +36,9 @@ class BleComm extends TopoDroidComm
   private boolean mReadInitialized = false;
 
   // BluetoothAdapter   mAdapter;
-  BluetoothGatt mGatt = null;
+  private BluetoothGatt mGatt = null;
   BluetoothGattCharacteristic mWriteChrt;
-  BluetoothGattCharacteristic mReadChrt;
+  private BluetoothGattCharacteristic mReadChrt;
 
   private String          mRemoteAddress;
   private BluetoothDevice mRemoteDevice;
@@ -62,9 +62,9 @@ class BleComm extends TopoDroidComm
   /** 
    * connection and data handling must run on a separate thread
    */
-  void setConnected( boolean connected ) { mBTConnected = connected; }
+  private void setConnected(boolean connected) { mBTConnected = connected; }
 
-  void connectBleDevice( Device device, Context context )
+  private void connectBleDevice(Device device, Context context)
   {
     if ( mRemoteDevice == null ) {
       TDToast.makeBad( R.string.ble_no_remote );
@@ -77,7 +77,7 @@ class BleComm extends TopoDroidComm
     }
   }
 
-  void disconnectBleGatt()
+  private void disconnectBleGatt()
   {
     mConnectionMode = -1;
     setConnected( false );
@@ -183,7 +183,7 @@ class BleComm extends TopoDroidComm
 
   }
 
-  boolean readPacket()
+  private boolean readPacket()
   { 
     // Log.v("DistoXBLE", "comm read packet");
     if ( ! mBTConnected || ! mReadInitialized ) return false;
@@ -195,7 +195,7 @@ class BleComm extends TopoDroidComm
     
   // ------------------------------------------------------------------------------------
   // CONTINUOUS DATA DOWNLOAD
-  int mConnectionMode = -1;
+  private int mConnectionMode = -1;
 
   boolean connectDevice( String address, Handler /* ILister */ lister )
   {
@@ -214,7 +214,7 @@ class BleComm extends TopoDroidComm
 
   // -------------------------------------------------------------------------------------
   // ON-DEMAND DATA DOWNLOAD
-  Handler mLister;
+  private Handler mLister;
 
   int downloadData( String address, Handler /* ILister */ lister )
   {

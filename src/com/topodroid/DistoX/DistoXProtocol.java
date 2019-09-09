@@ -105,7 +105,7 @@ class DistoXProtocol extends TopoDroidProtocol
 
   // ACTIONS -----------------------------------------------------------
 
-  /** swap hot bit in a data in DistoX A3 memory
+  /* swap hot bit in a data in DistoX A3 memory
    * @param addr  memory address
    */
   // @Override

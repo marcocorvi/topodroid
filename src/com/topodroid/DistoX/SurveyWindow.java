@@ -151,7 +151,7 @@ public class SurveyWindow extends Activity
   void renameSurvey( String name ) 
   {
     name = TDUtil.noSpaces( name );
-    if ( mApp.renameCurrentSurvey( TDInstance.sid, name, true ) ) {
+    if ( mApp.renameCurrentSurvey( TDInstance.sid, name ) ) {
       mTextName.setText( name );
       mTextName.setTextColor( mNameColor );
     } else {
@@ -434,7 +434,7 @@ public class SurveyWindow extends Activity
   void setDeclination( float decl )
   {
     doSetDeclination( decl );
-    mApp_mData.updateSurveyDeclination( TDInstance.sid, decl, true );
+    mApp_mData.updateSurveyDeclination( TDInstance.sid, decl );
   }
 
   // float getDeclination()
@@ -473,7 +473,7 @@ public class SurveyWindow extends Activity
     /* if ( comment != null ) */ { comment = comment.trim(); } // else { comment = ""; }
 
     // TDLog.Log( TDLog.LOG_SURVEY, "INSERT survey id " + id + " date " + date + " name " + name + " comment " + comment );
-    mApp_mData.updateSurveyInfo( TDInstance.sid, date, team, decl, comment, mInitStation, mXSections, true );
+    mApp_mData.updateSurveyInfo( TDInstance.sid, date, team, decl, comment, mInitStation, mXSections );
   }
 
   // interface IExporter
@@ -515,7 +515,7 @@ public class SurveyWindow extends Activity
     TDPath.deleteSurveyOverviewFiles( survey );
 
     mApp_mData.doDeleteSurvey( TDInstance.sid );
-    mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, false, false ); // tell app to clear survey name and id
+    mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, false ); // tell app to clear survey name and id
     setResult( RESULT_OK, new Intent() );
     TopoDroidApp.mSurveyWindow = null;
     super.onBackPressed();

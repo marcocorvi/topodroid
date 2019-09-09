@@ -149,7 +149,7 @@ class DistoXA3Protocol extends DistoXProtocol
     }
   }
 
-  /** read memory at address 8000 DistoX A3 - this method is not used
+  /* read memory at address 8000 DistoX A3 - this method is not used
    * @param result 4-byte array to write the read values
    * @return true if successful
    */

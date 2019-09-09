@@ -36,8 +36,7 @@ class TriSplay
   {
     if ( reversed == 1 ) return block.mBearing + decl ;
     // float ret = block.mBearing + decl + 180; if ( ret >= 360 ) ret -= 360;
-    float ret = TDMath.add180( block.mBearing + decl );
-    return ret;
+    return TDMath.add180( block.mBearing + decl );
   }
 
   float c() { return reversed * block.mClino; }

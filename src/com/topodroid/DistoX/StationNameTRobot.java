@@ -161,7 +161,7 @@ class StationNameTRobot extends StationName
         if ( prev == null ) {
           prev = blk;
           blk.setBlockName( ((station!=null)? station : from), "" ); // ALWAYS true
-          mData.updateShotName( blk.mId, mSid, blk.mFrom, "", true );  // SPLAY
+          mData.updateShotName( blk.mId, mSid, blk.mFrom, "" );  // SPLAY
           // Log.v( "DistoX", blk.mId + " FROM " + blk.mFrom + " PREV null" );
         } else {
           if ( prev.isRelativeDistance( blk ) ) {
@@ -181,7 +181,7 @@ class StationNameTRobot extends StationName
               mCurrentStationName = null;
               // Log.v( "DistoX", "PREV " + prev.mId + " nrLegShots " + nrLegShots + " set PREV " + from + "-" + to );
               prev.setBlockName( from, to );
-              mData.updateShotName( prev.mId, mSid, from, to, true ); // LEG
+              mData.updateShotName( prev.mId, mSid, from, to ); // LEG
               setLegExtend( prev );
               station = to;
               from = to;                                   // next-shot-from = this-shot-to
@@ -191,7 +191,7 @@ class StationNameTRobot extends StationName
           } else { // distance from prev > "closeness" setting
             nrLegShots = 0;
             blk.setBlockName( ((station!=null)? station : from), "" );
-            mData.updateShotName( blk.mId, mSid, blk.mFrom, "", true ); // SPLAY
+            mData.updateShotName( blk.mId, mSid, blk.mFrom, "" ); // SPLAY
             prev = blk;
           }
         }

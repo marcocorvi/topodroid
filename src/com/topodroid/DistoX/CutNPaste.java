@@ -75,9 +75,10 @@ class CutNPaste
     Button btn_cut = makePopupButton( context, cut, layout, lWidth, lHeight,
       new View.OnClickListener( ) {
         public void onClick(View v) {
-          if ( mEditText.get() != null ) {
-            mClipboardText = mEditText.get().getText().toString();
-            mEditText.get().setText(TDString.EMPTY);
+          EditText etext = mEditText.get();
+          if ( etext != null ) {
+            mClipboardText = etext.getText().toString();
+            etext.setText(TDString.EMPTY);
             String str = String.format( context.getResources().getString( R.string.copied ), mClipboardText );
             TDToast.makeGravity( str, Gravity.LEFT | Gravity.TOP );
           }
@@ -87,8 +88,9 @@ class CutNPaste
     Button btn_copy = makePopupButton( context, copy, layout, lWidth, lHeight,
       new View.OnClickListener( ) {
         public void onClick(View v) {
-          if ( mEditText.get() != null ) {
-            mClipboardText = mEditText.get().getText().toString();
+          EditText etext = mEditText.get();
+          if ( etext != null ) {
+            mClipboardText = etext.getText().toString();
             String str = String.format( context.getResources().getString( R.string.copied ), mClipboardText );
             TDToast.makeGravity( str, Gravity.LEFT | Gravity.TOP );
           }
@@ -98,8 +100,11 @@ class CutNPaste
     Button btn_paste = makePopupButton( context, paste, layout, lWidth, lHeight,
       new View.OnClickListener( ) {
         public void onClick(View v) {
-          if ( mClipboardText != null && mEditText.get() != null ) {
-            mEditText.get().setText( mClipboardText );
+          if ( mClipboardText != null ) {
+            EditText etext = mEditText.get();
+            if ( etext != null ) {
+              etext.setText( mClipboardText );
+            }
           }
           dismissPopup();
         }

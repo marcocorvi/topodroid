@@ -132,7 +132,7 @@ class StationNameBacksight extends StationName
           p_to = oldFrom; 
           from = to;
           station = from;
-	  mData.updateShotLegFlag( blk.mId, mSid, LegType.BACK, DBlock.FLAG_DUPLICATE, true ); // true = forward
+	  mData.updateShotLegFlag( blk.mId, mSid, LegType.BACK, DBlock.FLAG_DUPLICATE );
         } else {  // forward
           // flip = true;
           if ( increment ) {
@@ -220,7 +220,7 @@ class StationNameBacksight extends StationName
                 station = from;
                 // flip = false;
 	        // Log.v("DistoXX", "set " + prev.mId + " back leg and dup ");
-	        mData.updateShotLegFlag( prev.mId, mSid, LegType.BACK, DBlock.FLAG_DUPLICATE, true ); // true = forward
+	        mData.updateShotLegFlag( prev.mId, mSid, LegType.BACK, DBlock.FLAG_DUPLICATE );
               } else {               // 2 backsight forward shot from--to
                 // prev_to = to;     // 3
                 oldFrom = from;      // 2
@@ -334,7 +334,7 @@ class StationNameBacksight extends StationName
                 station = from;
                 // flip = false;
 	        // Log.v("DistoXX", "set " + prev.mId + " back leg and dup ");
-	        mData.updateShotLegFlag( prev.mId, mSid, LegType.BACK, DBlock.FLAG_DUPLICATE, true ); // true = forward
+	        mData.updateShotLegFlag( prev.mId, mSid, LegType.BACK, DBlock.FLAG_DUPLICATE );
               } else {               // 2 backsight forward shot from--to
                 // prev_to = to;     // 3
                 oldFrom = from;      // 2

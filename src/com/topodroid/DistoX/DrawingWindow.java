@@ -672,7 +672,7 @@ public class DrawingWindow extends ItemDrawer
   {
     super.lineSelected( k, update_recent );
     if ( TDLevel.overNormal ) {
-      if ( BrushManager.mLineLib.getLineGroup( mCurrentLine ) == null ) {
+      if ( BrushManager.getLineGroup( mCurrentLine ) == null ) {
         setButtonContinue( CONT_OFF );
       } else {
         setButtonContinue( mContinueLine ); // was CONT_NONE
@@ -803,15 +803,15 @@ public class DrawingWindow extends ItemDrawer
     if ( mMode == MODE_DRAW ) { 
       if ( mSymbol == Symbol.POINT ) {
         sb.append( String.format( res.getString(R.string.title_draw_point), 
-                                 BrushManager.mPointLib.getSymbolName(mCurrentPoint) ) );
+                                 BrushManager.getPointSymbolName( mCurrentPoint ) ) );
       } else if ( mSymbol == Symbol.LINE ) {
         sb.append( String.format( res.getString(R.string.title_draw_line),
-                                 BrushManager.mLineLib.getSymbolName(mCurrentLine) ) );
+                                 BrushManager.getLineSymbolName( mCurrentLine ) ) );
       } else  {  // if ( mSymbol == Symbol.LINE ) 
         sb.append( String.format( res.getString(R.string.title_draw_area),
-                                 BrushManager.mAreaLib.getSymbolName(mCurrentArea) ) );
+                                 BrushManager.getAreaSymbolName( mCurrentArea ) ) );
       }
-      // boolean visible = ( mSymbol == Symbol.LINE && mCurrentLine == BrushManager.mLineLib.mLineWallIndex );
+      // boolean visible = ( mSymbol == Symbol.LINE && mCurrentLine == BrushManager.getLineWallIndex() );
       boolean visible = ( mSymbol == Symbol.LINE );
       if ( TDLevel.overNormal ) {
         mButton2[ BTN_CONT ].setVisibility( visible? View.VISIBLE : View.GONE );
@@ -1247,11 +1247,11 @@ public class DrawingWindow extends ItemDrawer
           mActivity.setTitle( title + " " + item.mBlock.mFrom + "-." );
           break;
         case DrawingPath.DRAWING_PATH_POINT:
-          mActivity.setTitle( title + " " + BrushManager.mPointLib.getSymbolName( ((DrawingPointPath)item).mPointType ) );
+          mActivity.setTitle( title + " " + BrushManager.getPointSymbolName( ((DrawingPointPath)item).mPointType ) );
 	  deletable = true;
           break;
         case DrawingPath.DRAWING_PATH_LINE:
-          mActivity.setTitle( title + " " + BrushManager.mLineLib.getSymbolName( ((DrawingLinePath)item).mLineType ) );
+          mActivity.setTitle( title + " " + BrushManager.getLineSymbolName( ((DrawingLinePath)item).mLineType ) );
           inLinePoint = true;
           bm = mBMjoin;
 	  deletable = true;
@@ -1297,7 +1297,7 @@ public class DrawingWindow extends ItemDrawer
   private void setButtonContinue( int continue_line )
   {
     mContinueLine = continue_line;
-    if ( mSymbol == Symbol.LINE /* && mCurrentLine == BrushManager.mLineLib.mLineWallIndex */ ) {
+    if ( mSymbol == Symbol.LINE /* && mCurrentLine == BrushManager.getLineWallIndex() */ ) {
       mButton2[ BTN_CONT ].setVisibility( View.VISIBLE );
       switch ( mContinueLine ) {
         case CONT_NONE:
@@ -1996,9 +1996,12 @@ public class DrawingWindow extends ItemDrawer
     mIntersectionT = tt;
     // Log.v("DistoX", "do start() tt " + tt );
     // TDLog.Log( TDLog.LOG_PLOT, "do Start() " + mName1 + " " + mName2 );
-    mCurrentPoint = ( BrushManager.mPointLib.isSymbolEnabled( "label" ) )? 1 : 0;
-    mCurrentLine  = ( BrushManager.mLineLib.isSymbolEnabled( "wall" ) )? 1 : 0;
-    mCurrentArea  = ( BrushManager.mAreaLib.isSymbolEnabled( "water" ) )? 1 : 0;
+    mCurrentPoint = ( BrushManager.mPointLib != null && BrushManager.mPointLib.isSymbolEnabled( "label" ) )?
+                    1 : 0;
+    mCurrentLine  = ( BrushManager.mLineLib != null && BrushManager.mLineLib.isSymbolEnabled( "wall" ) )?
+                    1 : 0;
+    mCurrentArea  = ( BrushManager.mAreaLib != null && BrushManager.mAreaLib.isSymbolEnabled( "water" ) )?
+                    1 : 0;
     // mContinueLine = TDSetting.mContinueLine; // do not reset
     if ( TDLevel.overNormal ) setButtonContinue( mContinueLine );
 
@@ -2438,7 +2441,7 @@ public class DrawingWindow extends ItemDrawer
 
       block.mFrom = from;
       block.mTo   = to;
-      mApp_mData.updateShotName( block.mId, mSid, from, to, true );
+      mApp_mData.updateShotName( block.mId, mSid, from, to );
       doComputeReferences( true );
       mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
 
@@ -2449,7 +2452,7 @@ public class DrawingWindow extends ItemDrawer
     {
       if ( comment.equals( block.mComment ) ) return;
       block.mComment = comment;
-      mApp_mData.updateShotComment( block.mId, mSid, comment, true ); // true = forward
+      mApp_mData.updateShotComment( block.mId, mSid, comment );
     }
     
     void updateBlockFlag( DBlock blk, long flag, DrawingPath shot )
@@ -2472,7 +2475,7 @@ public class DrawingWindow extends ItemDrawer
           shot.setSplayPaintPlan( blk, shot.getCosine(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
         }
       }
-      mApp_mData.updateShotFlag( blk.mId, mSid, flag, true );
+      mApp_mData.updateShotFlag( blk.mId, mSid, flag );
     }
     
     void clearBlockSplayLeg( DBlock blk, DrawingPath shot )
@@ -2480,7 +2483,7 @@ public class DrawingWindow extends ItemDrawer
       // Log.v("DistoX", "clear splay leg " + blk.mId + "/" + mSid + " reset shot paint ");
       blk.setTypeSplay();
       if ( shot.mBlock != null ) shot.mBlock.setTypeSplay();
-      mApp_mData.updateShotLeg( blk.mId, mSid, LegType.NORMAL, false );
+      mApp_mData.updateShotLeg( blk.mId, mSid, LegType.NORMAL );
       // the next is really necessary only if flag || mFlag is FLAG_COMMENTED:
       if ( PlotInfo.isProfile( mType ) ) {
         if ( TDSetting.mDashSplay == TDSetting.DASHING_AZIMUTH ) {
@@ -2505,7 +2508,7 @@ public class DrawingWindow extends ItemDrawer
       // if ( ! block.isSplay() ) extend -= DBlock.EXTEND_FVERT;
       if ( block.getExtend() == extend && block.hasStretch( stretch ) ) return;
       block.setExtend( extend, stretch );
-      mApp_mData.updateShotExtend( block.mId, mSid, extend, stretch, true );
+      mApp_mData.updateShotExtend( block.mId, mSid, extend, stretch );
       recomputeProfileReference();
     }
 
@@ -2529,7 +2532,7 @@ public class DrawingWindow extends ItemDrawer
     private void deleteSplay( DrawingPath p, SelectionPoint sp, DBlock blk )
     {
       mDrawingSurface.deleteSplay( p, sp ); 
-      mApp_mData.deleteShot( blk.mId, TDInstance.sid, TDStatus.DELETED, true );
+      mApp_mData.deleteShot( blk.mId, TDInstance.sid, TDStatus.DELETED );
       if ( TopoDroidApp.mShotWindow != null ) {
         TopoDroidApp.mShotWindow.updateDisplay(); // FIXME ???
       }
@@ -2579,7 +2582,7 @@ public class DrawingWindow extends ItemDrawer
     // @param scrap_name xsection scrap_name = survey_name + "-" + xsection_id
     void deleteLine( DrawingLinePath line ) 
     { 
-      if ( line.mLineType == BrushManager.mLineLib.mLineSectionIndex ) {
+      if ( BrushManager.isLineSection( line.mLineType ) ) {
         deleteSectionLine( line );
       } else {
         mDrawingSurface.deletePath( line );
@@ -2977,7 +2980,7 @@ public class DrawingWindow extends ItemDrawer
           }
           
           if ( mPointCnt > mLinePointStep || mLinePointStep == POINT_MAX ) {
-            if ( ! ( mSymbol == Symbol.LINE && mCurrentLine == BrushManager.mLineLib.mLineSectionIndex ) 
+            if ( ! ( mSymbol == Symbol.LINE && BrushManager.isLineSection( mCurrentLine ) ) 
                  && TDSetting.isLineStyleComplex()
                  && ( mSymbol == Symbol.AREA || ! BrushManager.mLineLib.isStyleStraight( mCurrentLine ) )
                ) {
@@ -3009,12 +3012,12 @@ public class DrawingWindow extends ItemDrawer
                         lp1.addPoint3(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y );
                       }
                       boolean addline = true;
-                      if ( mContinueLine > CONT_NONE && mCurrentLine != BrushManager.mLineLib.mLineSectionIndex ) {
+                      if ( mContinueLine > CONT_NONE && ! BrushManager.isLineSection( mCurrentLine ) ) {
                         addline = tryToJoin( lp1, mCurrentLinePath );
                       }
                       if ( addline ) {
                         lp1.computeUnitNormal();
-                        if ( mSymbol == Symbol.LINE && BrushManager.mLineLib.isClosed( mCurrentLine ) ) {
+                        if ( mSymbol == Symbol.LINE && BrushManager.isLineClosed( mCurrentLine ) ) {
                           // mCurrentLine == lp1.mLineType 
                           lp1.setClosed( true );
                           lp1.closePath();
@@ -3066,12 +3069,12 @@ public class DrawingWindow extends ItemDrawer
                         lp1.addPoint(p0.x, p0.y );
                       }
                       boolean addline = true;
-                      if ( mContinueLine > CONT_NONE && mCurrentLine != BrushManager.mLineLib.mLineSectionIndex ) {
+                      if ( mContinueLine > CONT_NONE && ! BrushManager.isLineSection( mCurrentLine ) ) {
                         addline = tryToJoin( lp1, mCurrentLinePath );
                       }
                       if ( addline ) {
                         lp1.computeUnitNormal();
-                        if ( mSymbol == Symbol.LINE && BrushManager.mLineLib.isClosed( mCurrentLine ) ) {
+                        if ( mSymbol == Symbol.LINE && BrushManager.isLineClosed( mCurrentLine ) ) {
                           // mCurrentLine == lp1.mLineType 
                           lp1.setClosed( true );
                           lp1.closePath();
@@ -3105,17 +3108,17 @@ public class DrawingWindow extends ItemDrawer
                 // and splay reference are taken from the station the section looks towards
                 // section line points: right-end -- left-end -- tick-end
                 //
-                if ( mCurrentLinePath.mLineType == BrushManager.mLineLib.mLineSectionIndex ) {
+                if ( BrushManager.isLineSection(  mCurrentLinePath.mLineType ) ) {
                   mLastLinePath = null;
                   doSectionLine( mCurrentLinePath );
                 } else { // not section line
                   boolean addline= true;
-                  if ( mContinueLine > CONT_NONE && mCurrentLine != BrushManager.mLineLib.mLineSectionIndex ) {
+                  if ( mContinueLine > CONT_NONE && ! BrushManager.isLineSection( mCurrentLine ) ) {
                     addline = tryToJoin( mCurrentLinePath, mCurrentLinePath );
                   }
                   if ( addline ) {
                     mCurrentLinePath.computeUnitNormal();
-                    if ( mSymbol == Symbol.LINE && BrushManager.mLineLib.isClosed( mCurrentLine ) ) {
+                    if ( mSymbol == Symbol.LINE && BrushManager.isLineClosed( mCurrentLine ) ) {
                       // mCurrentLine == mCurrentLinePath.mLineType
                       mCurrentLinePath.setClosed( true );
                       mCurrentLinePath.closePath();
@@ -3612,7 +3615,7 @@ public class DrawingWindow extends ItemDrawer
         // FIXME_LANDSCAPE if ( mLandscape ) { float t=x5; x5=-y5; y5=t; }
         // FIXME String scrap_option = "-scrap " /* + TDInstance.survey + "-" */ + section_id;
         String scrap_option = "-scrap " + TDInstance.survey + "-" + section_id;
-        DrawingPointPath section_pt = new DrawingPointPath( BrushManager.mPointLib.mPointSectionIndex,
+        DrawingPointPath section_pt = new DrawingPointPath( BrushManager.getPointSectionIndex(),
                                                         x5, y5, DrawingPointPath.SCALE_M, 
                                                         null, // no text 
                                                         scrap_option );
@@ -3638,7 +3641,7 @@ public class DrawingWindow extends ItemDrawer
       if ( label != null && label.length() > 0 ) {
 	if ( mLandscape ) { float t=x; x=-y; y=t; }
         DrawingLabelPath label_path = new DrawingLabelPath( label, x, y, mPointScale, null );
-	label_path.setOrientation( BrushManager.mPointLib.getPointOrientation( mCurrentPoint ) ); // FIX Asenov
+	label_path.setOrientation( BrushManager.getPointOrientation( mCurrentPoint ) ); // FIX Asenov
 	label_path.mLandscape = mLandscape;
         label_path.mLevel = level;
         mDrawingSurface.addDrawingPath( label_path );
@@ -3914,7 +3917,7 @@ public class DrawingWindow extends ItemDrawer
 	  if ( mLandscape ) { float t=x5; x5=-y5; y5=t; }
 	  // FIXME String scrap_option = "-scrap " /* + TDInstance.survey + "-" */ + xs_id;
 	  String scrap_option = "-scrap " + TDInstance.survey + "-" + xs_id;
-	  DrawingPointPath section_pt = new DrawingPointPath( BrushManager.mPointLib.mPointSectionIndex,
+	  DrawingPointPath section_pt = new DrawingPointPath( BrushManager.getPointSectionIndex(),
 							    x5, y5, DrawingPointPath.SCALE_M, 
 							    null, scrap_option ); // no text
 	  section_pt.setLink( st );
@@ -4410,7 +4413,7 @@ public class DrawingWindow extends ItemDrawer
                         linepath.retracePath();
                       } else { 
                         DrawingLinePath lp = (DrawingLinePath)linepath;
-                        askDeleteItem( lp, t, BrushManager.mLineLib.getSymbolName( lp.mLineType ) );
+                        askDeleteItem( lp, t, BrushManager.getLineSymbolName( lp.mLineType ) );
                       }
                     } else if ( t == DrawingPath.DRAWING_PATH_AREA ) {
                       if ( linepath.size() > 3 ) {
@@ -4418,7 +4421,7 @@ public class DrawingWindow extends ItemDrawer
                         linepath.retracePath();
                       } else {
                         DrawingAreaPath ap = (DrawingAreaPath)linepath;
-                        askDeleteItem( ap, t, BrushManager.mAreaLib.getSymbolName( ap.mAreaType ) );
+                        askDeleteItem( ap, t, BrushManager.getAreaSymbolName( ap.mAreaType ) );
                       }
                     }
                     modified();
@@ -4675,7 +4678,7 @@ public class DrawingWindow extends ItemDrawer
     private void flipBlock( DBlock blk )
     {
       if ( blk != null && blk.flipExtendAndStretch() ) {
-        mApp_mData.updateShotExtend( blk.mId, mSid, blk.getFullExtend(), blk.getStretch(), true );
+        mApp_mData.updateShotExtend( blk.mId, mSid, blk.getFullExtend(), blk.getStretch() );
       }
     }
 
@@ -4777,7 +4780,7 @@ public class DrawingWindow extends ItemDrawer
           } else if ( t == DrawingPath.DRAWING_PATH_LINE ) {
             DrawingLinePath lp = (DrawingLinePath)sp.mItem;
             if ( lp.size() <= 2 ) {
-              askDeleteItem( lp, t, BrushManager.mLineLib.getSymbolName( lp.mLineType ) );
+              askDeleteItem( lp, t, BrushManager.getLineSymbolName( lp.mLineType ) );
             } else {
               removeLinePoint( lp, sp.mPoint, sp );
               lp.retracePath();
@@ -4786,7 +4789,7 @@ public class DrawingWindow extends ItemDrawer
           } else if ( t == DrawingPath.DRAWING_PATH_AREA ) {
             DrawingAreaPath ap = (DrawingAreaPath)sp.mItem;
             if ( ap.size() <= 3 ) {
-              askDeleteItem( ap, t, BrushManager.mAreaLib.getSymbolName( ap.mAreaType ) );
+              askDeleteItem( ap, t, BrushManager.getAreaSymbolName( ap.mAreaType ) );
             } else {
               removeLinePoint( ap, sp.mPoint, sp );
               ap.retracePath();
@@ -4925,7 +4928,7 @@ public class DrawingWindow extends ItemDrawer
           new ItemPickerDialog(mActivity, this, mType, mSymbol ).show();
         }
       } else if ( TDLevel.overNormal && b == mButton2[k2++] ) { //  CONT continuation popup menu
-        if ( mSymbol == Symbol.LINE && BrushManager.mLineLib.getLineGroup( mCurrentLine ) != null ) {
+        if ( mSymbol == Symbol.LINE && BrushManager.getLineGroup( mCurrentLine ) != null ) {
           // setButtonContinue( (mContinueLine+1) % CONT_MAX );
           makePopupJoin( b, Drawing.mJoinModes, 5, 0, dismiss );
         }
@@ -4989,7 +4992,7 @@ public class DrawingWindow extends ItemDrawer
               break;
             case DrawingPath.DRAWING_PATH_LINE:
               DrawingLinePath line = (DrawingLinePath)(sp.mItem);
-              if ( line.mLineType == BrushManager.mLineLib.mLineSectionIndex ) {
+              if ( BrushManager.isLineSection( line.mLineType ) ) {
                 // Log.v("DistoX", "edit section line " ); // default azimuth = 0 clino = 0
                 // cross-section exists already
                 boolean h_section = PlotInfo.isProfile( mType ); // not really necessary
@@ -5033,10 +5036,10 @@ public class DrawingWindow extends ItemDrawer
                 name = BrushManager.getPointName( ((DrawingPointPath)p).mPointType );
                 break;
               case DrawingPath.DRAWING_PATH_LINE:
-                name = BrushManager.mLineLib.getSymbolName( ((DrawingLinePath)p).mLineType );
+                name = BrushManager.getLineSymbolName( ((DrawingLinePath)p).mLineType );
                 break;
               case DrawingPath.DRAWING_PATH_AREA:
-                name = BrushManager.mAreaLib.getSymbolName( ((DrawingAreaPath)p).mAreaType );
+                name = BrushManager.getAreaSymbolName( ((DrawingAreaPath)p).mAreaType );
                 break;
             }
             askDeleteItem( p, t, name );
@@ -5114,7 +5117,7 @@ public class DrawingWindow extends ItemDrawer
     private long prepareXSection( String id, long type,
                                  String from, String to, String nick, float azimuth, float clino )
     {
-      mCurrentLine = BrushManager.mLineLib.mLineWallIndex;
+      mCurrentLine = BrushManager.getLineWallIndex();
       if ( ! BrushManager.mLineLib.isSymbolEnabled( "wall" ) ) mCurrentLine = 0;
       // Log.v("DistoX-C", "prepareXSection " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
       assert( mLastLinePath == null );
@@ -6015,7 +6018,7 @@ public class DrawingWindow extends ItemDrawer
       DLNSide side = hpos.side;
       float xx = DrawingUtil.toSceneX( side.mP1.x, side.mP1.y );
       float yy = DrawingUtil.toSceneY( side.mP1.x, side.mP1.y );
-      DrawingLinePath path = new DrawingLinePath( BrushManager.mLineLib.mLineWallIndex );
+      DrawingLinePath path = new DrawingLinePath( BrushManager.getLineWallIndex() );
       path.addStartPoint( xx, yy );
       for ( DLNSideList hp : dln_wall.mPosHull ) {
         side = hp.side;
@@ -6034,7 +6037,7 @@ public class DrawingWindow extends ItemDrawer
       DLNSide side = hneg.side;
       float xx = DrawingUtil.toSceneX( side.mP1.x, side.mP1.y );
       float yy = DrawingUtil.toSceneY( side.mP1.x, side.mP1.y );
-      DrawingLinePath path = new DrawingLinePath( BrushManager.mLineLib.mLineWallIndex );
+      DrawingLinePath path = new DrawingLinePath( BrushManager.getLineWallIndex() );
       path.addStartPoint( xx, yy );
       for ( DLNSideList hn : dln_wall.mNegHull ) {
         side = hn.side;
@@ -6059,7 +6062,7 @@ public class DrawingWindow extends ItemDrawer
     DLNSide side = hull.side;
     float xx = DrawingUtil.toSceneX( side.mP1.x, side.mP1.y );
     float yy = DrawingUtil.toSceneY( side.mP1.x, side.mP1.y );
-    DrawingLinePath path = new DrawingLinePath( BrushManager.mLineLib.mLineWallIndex );
+    DrawingLinePath path = new DrawingLinePath( BrushManager.getLineWallIndex() );
     path.addStartPoint( xx, yy );
     int size = dln_wall.hullSize();
     for ( int k=0; k<size; ++k ) {
@@ -6094,7 +6097,7 @@ public class DrawingWindow extends ItemDrawer
         y0 = DrawingUtil.toSceneY( x0, y0 );
         x1 = DrawingUtil.toSceneX( x1, y1 );
         y1 = DrawingUtil.toSceneY( x1, y1 );
-        DrawingLinePath path = new DrawingLinePath( BrushManager.mLineLib.mLineWallIndex );
+        DrawingLinePath path = new DrawingLinePath( BrushManager.getLineWallIndex() );
         path.addStartPoint( x0, y0 );
         addPointsToLine( path, x0, y0, xx, yy );
         addPointsToLine( path, xx, yy, x1, y1 );
@@ -6109,7 +6112,7 @@ public class DrawingWindow extends ItemDrawer
       float y2 = y0 + uu.y * p1.x + vv.y * p1.y;
       xx = DrawingUtil.toSceneX( x2, y2 );
       yy = DrawingUtil.toSceneY( x2, y2 );
-      DrawingLinePath path = new DrawingLinePath( BrushManager.mLineLib.mLineWallIndex );
+      DrawingLinePath path = new DrawingLinePath( BrushManager.getLineWallIndex() );
       path.addStartPoint( xx, yy );
       for ( int k=1; k<pts.size(); ++k ) {
         p1 = pts.get(k);
@@ -6422,7 +6425,7 @@ public class DrawingWindow extends ItemDrawer
   void updateBlockColor( DBlock blk, int color )
   {
     blk.setPaintColor( color );
-    mApp_mData.updateShotColor( blk.mId, TDInstance.sid, color, false ); // do not forward color
+    mApp_mData.updateShotColor( blk.mId, TDInstance.sid, color );
   }
 
 

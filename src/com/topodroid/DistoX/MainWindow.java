@@ -134,7 +134,7 @@ public class MainWindow extends Activity
   private boolean say_not_enabled = true; // whether to say that BT is not enabled
   private boolean do_check_bt = true;             // one-time bluetooth check sentinel
 
-  boolean mPaletteButtonEnabled = false;
+  private boolean mPaletteButtonEnabled = false;
   void enablePaletteButton() { mPaletteButtonEnabled = true; }
 
   // -------------------------------------------------------------------
@@ -206,7 +206,7 @@ public class MainWindow extends Activity
           TDToast.makeBad( R.string.no_bt );
         }
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // NEW SURVEY
-        mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true, true ); // new-survey dialog: tell app to clear survey name and id
+        mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true ); // new-survey dialog: tell app to clear survey name and id
         (new SurveyNewDialog( mActivity, this, -1, -1 )).show(); 
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // IMPORT
         File[] files = TDPath.getImportFiles();
@@ -245,7 +245,7 @@ public class MainWindow extends Activity
   //
   private void startSurvey( String value, int mustOpen ) // , long old_sid, long old_id )
   {
-    mApp.setSurveyFromName( value, -1, true, false ); // open survey activity: tell app to update survey name+id, no forward
+    mApp.setSurveyFromName( value, -1, true ); // open survey activity: tell app to update survey name+id
     Intent surveyIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, SurveyWindow.class );
     surveyIntent.putExtra( TDTag.TOPODROID_SURVEY, mustOpen );
     // surveyIntent.putExtra( TDTag.TOPODROID_OLDSID, old_sid );
@@ -255,7 +255,7 @@ public class MainWindow extends Activity
 
   void startSplitSurvey( long old_sid, long old_id )
   {
-    mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true, false ); // FIXME JOIN-SURVEY
+    mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true ); // FIXME CO-SURVEY
     (new SurveyNewDialog( mActivity, this, old_sid, old_id )).show(); // WITH SPLIT
   }
 
@@ -273,7 +273,7 @@ public class MainWindow extends Activity
 
   void doOpenSurvey( String name )
   {
-    mApp.setSurveyFromName( name, -1, true, false ); // open survey: tell app to update survey name+id, no forward
+    mApp.setSurveyFromName( name, -1, true ); // open survey: tell app to update survey name+id
     Intent openIntent = new Intent( this, ShotWindow.class );
     startActivity( openIntent );
   }
@@ -291,7 +291,7 @@ public class MainWindow extends Activity
       return;
     }
 
-    mApp.setSurveyFromName( item.toString(), -1, true, true ); 
+    mApp.setSurveyFromName( item.toString(), -1, true ); 
     Intent openIntent = new Intent( this, ShotWindow.class );
     startActivity( openIntent );
   }
@@ -552,22 +552,22 @@ public class MainWindow extends Activity
     setTheTitle();
   }
 
-  void doBackupsClear()
+  private void doBackupsClear()
   {
     Thread cleaner = new Thread() {
       @Override
       public void run() { 
         File dir = TDPath.getTdrDir();
 	// Log.v("DistoXX", "clear tdr backups from " + dir.getPath() );
-	File[] files = dir.listFiles( new FileFilter() { 
-	  public boolean accept( File f ) { 
-            return f.getName().matches( ".*tdr.bck.?" );
-	  }
-	} );
-	for ( File f : files ) {
-	  // Log.v("DistoXX", "delete file " + f.getPath() );
+        File[] files = dir.listFiles( new FileFilter() { 
+          public boolean accept( File f ) { 
+              return f.getName().matches( ".*tdr.bck.?" );
+          }
+        } );
+        for ( File f : files ) {
+          // Log.v("DistoXX", "delete file " + f.getPath() );
           f.delete();
-	}
+        }
       }
     };
     // cleaner.setPriority( Thread.MIN_PRIORITY );

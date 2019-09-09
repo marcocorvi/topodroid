@@ -104,14 +104,14 @@ public class TopoDroidApp extends Application
   // TopoDroid version: this is loaded from the Manifest
   static String VERSION = "0.0.0"; 
   static int VERSION_CODE = 0;
-  static int MAJOR = 0;
-  static int MINOR = 0;
-  static int SUB   = 0;
+  private static int MAJOR = 0;
+  private static int MINOR = 0;
+  private static int SUB   = 0;
 
   // minimum compatible TopoDroid version
-  static final int MAJOR_MIN = 2; 
-  static final int MINOR_MIN = 1;
-  static final int SUB_MIN   = 1;
+  private static final int MAJOR_MIN = 2;
+  private static final int MINOR_MIN = 1;
+  private static final int SUB_MIN   = 1;
   
   boolean mWelcomeScreen;  // whether to show the welcome screen (used by MainWindow)
   boolean mSetupScreen;    // whether to show the welcome screen (used by MainWindow)
@@ -965,12 +965,12 @@ public class TopoDroidApp extends Application
   // ----------------------------------------------------------
   // SURVEY AND CALIBRATION
 
-  boolean renameCurrentSurvey( long sid, String name, boolean forward )
+  boolean renameCurrentSurvey( long sid, String name )
   {
     if ( name == null || name.length() == 0 ) return false;
     if ( name.equals( TDInstance.survey ) ) return true;
     if ( mData == null ) return false;
-    if ( mData.renameSurvey( sid, name, forward ) ) {  
+    if ( mData.renameSurvey( sid, name ) ) {  
       File old = null;
       File nev = null;
       { // rename plot/sketch files: th3
@@ -1041,7 +1041,7 @@ public class TopoDroidApp extends Application
    * @param name      survey name
    * @param datamode  survey datamode
    */
-  long setSurveyFromName( String name, int datamode, boolean update, boolean forward )
+  long setSurveyFromName( String name, int datamode, boolean update )
   { 
     TDInstance.sid      = -1;       // no survey by default
     TDInstance.survey   = null;
@@ -1052,9 +1052,9 @@ public class TopoDroidApp extends Application
     ManualCalibration.reset();
 
     if ( name != null && mData != null ) {
-      // Log.v( "DistoX", "set SurveyFromName <" + name + "> forward " + forward );
+      // Log.v( "DistoX", "set SurveyFromName <" + name + ">");
 
-      TDInstance.sid = mData.setSurvey( name, datamode, forward );
+      TDInstance.sid = mData.setSurvey( name, datamode );
       // mFixed.clear();
       TDInstance.survey = null;
       if ( TDInstance.sid > 0 ) {
@@ -1539,9 +1539,9 @@ public class TopoDroidApp extends Application
     resetCurrentOrLastStation( );
     long millis = java.lang.System.currentTimeMillis()/1000;
     distance = distance / TDSetting.mUnitLength;
-    long id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, distance, bearing, clino, 0.0f, extend, 0.0, LegType.NORMAL, 1, true );
-    mData.updateShotName( id, TDInstance.sid, from, to, true ); // forward = true
-    mData.updateShotFlag( id, TDInstance.sid, DBlock.FLAG_DUPLICATE, true ); // forward = true
+    long id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, distance, bearing, clino, 0.0f, extend, 0.0, LegType.NORMAL, 1 );
+    mData.updateShotName( id, TDInstance.sid, from, to );
+    mData.updateShotFlag( id, TDInstance.sid, DBlock.FLAG_DUPLICATE );
     return id;
   }
 
@@ -1595,10 +1595,10 @@ public class TopoDroidApp extends Application
         // extend = ( TDSetting.mLRExtend )? TDAzimuth.computeSplayExtend( 270 ) : DBlock.EXTEND_UNSET;
         extend = DBlock.EXTEND_UNSET;
         if ( at >= 0L ) {
-          id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, l, 270.0f, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1, true );
+          id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, l, 270.0f, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
           ++at;
         } else {
-          id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, l, 270.0f, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1, true );
+          id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, l, 270.0f, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
         }
       } else {
         float b = bearing - 90.0f;
@@ -1608,13 +1608,13 @@ public class TopoDroidApp extends Application
         extend = DBlock.EXTEND_UNSET;
         // b = in360( b );
         if ( at >= 0L ) {
-          id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, l, b, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1, true );
+          id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, l, b, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
           ++at;
         } else {
-          id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, l, b, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1, true );
+          id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, l, b, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
         }
       }
-      mData.updateShotName( id, TDInstance.sid, splay_station, TDString.EMPTY, true );
+      mData.updateShotName( id, TDInstance.sid, splay_station, TDString.EMPTY );
     }
     if ( r >= 0.0f ) {
       if ( horizontal ) { // WENS
@@ -1622,10 +1622,10 @@ public class TopoDroidApp extends Application
         // extend = ( TDSetting.mLRExtend )? TDAzimuth.computeSplayExtend( 90 ) : DBlock.EXTEND_UNSET;
         extend = DBlock.EXTEND_UNSET;
         if ( at >= 0L ) {
-          id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, r, 90.0f, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1, true );
+          id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, r, 90.0f, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
           ++at;
         } else {
-          id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, r, 90.0f, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1, true );
+          id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, r, 90.0f, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
         }
       } else {
         // float b = bearing + 90.0f; if ( b >= 360.0f ) b -= 360.0f;
@@ -1634,49 +1634,49 @@ public class TopoDroidApp extends Application
         // extend = ( TDSetting.mLRExtend )? TDAzimuth.computeSplayExtend( b ) : DBlock.EXTEND_UNSET;
         extend = DBlock.EXTEND_UNSET;
         if ( at >= 0L ) {
-          id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, r, b, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1, true );
+          id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, r, b, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
           ++at;
         } else {
-          id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, r, b, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1, true );
+          id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, r, b, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
         }
       }
-      mData.updateShotName( id, TDInstance.sid, splay_station, TDString.EMPTY, true );
+      mData.updateShotName( id, TDInstance.sid, splay_station, TDString.EMPTY );
     }
     if ( u >= 0.0f ) {  
       if ( horizontal ) {
         if ( at >= 0L ) {
-          id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, u, 0.0f, 0.0f, 0.0f, 0L, 0.0, LegType.XSPLAY, 1, true );
+          id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, u, 0.0f, 0.0f, 0.0f, 0L, 0.0, LegType.XSPLAY, 1 );
           ++at;
         } else {
-          id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, u, 0.0f, 0.0f, 0.0f, 0L, 0.0, LegType.XSPLAY, 1, true );
+          id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, u, 0.0f, 0.0f, 0.0f, 0L, 0.0, LegType.XSPLAY, 1 );
         }
       } else {
         if ( at >= 0L ) {
-          id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, u, 0.0f, 90.0f, 0.0f, 0L, 0.0, LegType.XSPLAY, 1, true );
+          id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, u, 0.0f, 90.0f, 0.0f, 0L, 0.0, LegType.XSPLAY, 1 );
           ++at;
         } else {
-          id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, u, 0.0f, 90.0f, 0.0f, 0L, 0.0, LegType.XSPLAY, 1, true );
+          id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, u, 0.0f, 90.0f, 0.0f, 0L, 0.0, LegType.XSPLAY, 1 );
         }
       }
-      mData.updateShotName( id, TDInstance.sid, splay_station, TDString.EMPTY, true );
+      mData.updateShotName( id, TDInstance.sid, splay_station, TDString.EMPTY );
     }
     if ( d >= 0.0f ) {
       if ( horizontal ) {
         if ( at >= 0L ) {
-          id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, d, 180.0f, 0.0f, 0.0f, 0L, 0.0, LegType.XSPLAY, 1, true );
+          id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, d, 180.0f, 0.0f, 0.0f, 0L, 0.0, LegType.XSPLAY, 1 );
           ++at;
         } else {
-          id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, d, 180.0f, 0.0f, 0.0f, 0L, 0.0, LegType.XSPLAY, 1, true );
+          id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, d, 180.0f, 0.0f, 0.0f, 0L, 0.0, LegType.XSPLAY, 1 );
         }
       } else {
         if ( at >= 0L ) {
-          id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, d, 0.0f, -90.0f, 0.0f, 0L, 0.0, LegType.XSPLAY, 1, true );
+          id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, d, 0.0f, -90.0f, 0.0f, 0L, 0.0, LegType.XSPLAY, 1 );
           ++at;
         } else {
-          id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, d, 0.0f, -90.0f, 0.0f, 0L, 0.0, LegType.XSPLAY, 1, true );
+          id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, d, 0.0f, -90.0f, 0.0f, 0L, 0.0, LegType.XSPLAY, 1 );
         }
       }
-      mData.updateShotName( id, TDInstance.sid, splay_station, TDString.EMPTY, true );
+      mData.updateShotName( id, TDInstance.sid, splay_station, TDString.EMPTY );
     }
     return at;
   }
@@ -1724,26 +1724,26 @@ public class TopoDroidApp extends Application
           at = addManualSplays( at, splay_station, left, right, up, down, bearing, horizontal );
 
           if ( at >= 0L ) {
-            id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, distance, bearing, clino, 0.0f, extend0, 0.0, LegType.NORMAL, 1, true );
+            id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, distance, bearing, clino, 0.0f, extend0, 0.0, LegType.NORMAL, 1 );
           } else {
-            id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, distance, bearing, clino, 0.0f, extend0, 0.0, LegType.NORMAL, 1, true );
+            id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, distance, bearing, clino, 0.0f, extend0, 0.0, LegType.NORMAL, 1 );
           }
           // String name = from + "-" + to;
-          mData.updateShotName( id, TDInstance.sid, from, to, true );
-          // mData.updateShotExtend( id, TDInstance.sid, extend0, stretch0, true );
-          // mData.updateShotExtend( id, TDInstance.sid, DBlock.EXTEND_IGNORE, 1, true ); // FIXME WHY ???
+          mData.updateShotName( id, TDInstance.sid, from, to );
+          // mData.updateShotExtend( id, TDInstance.sid, extend0, stretch0 );
+          // mData.updateShotExtend( id, TDInstance.sid, DBlock.EXTEND_IGNORE, 1 ); // FIXME WHY ???
           // FIXME updateDisplay( );
         } else {
           if ( at >= 0L ) {
-            id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, distance, bearing, clino, 0.0f, extend0, 0.0, LegType.NORMAL, 1, true );
+            id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, distance, bearing, clino, 0.0f, extend0, 0.0, LegType.NORMAL, 1 );
             ++ at;
           } else {
-            id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, distance, bearing, clino, 0.0f, extend0, 0.0, LegType.NORMAL, 1, true );
+            id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, distance, bearing, clino, 0.0f, extend0, 0.0, LegType.NORMAL, 1 );
           }
           // String name = from + "-" + to;
-          mData.updateShotName( id, TDInstance.sid, from, to, true );
-          // mData.updateShotExtend( id, TDInstance.sid, extend0, stretch0, true ); 
-          // mData.updateShotExtend( id, TDInstance.sid, DBlock.EXTEND_IGNORE, 1, true );  // FIXME WHY ???
+          mData.updateShotName( id, TDInstance.sid, from, to );
+          // mData.updateShotExtend( id, TDInstance.sid, extend0, stretch0 );
+          // mData.updateShotExtend( id, TDInstance.sid, DBlock.EXTEND_IGNORE, 1 );  // FIXME WHY ???
           // FIXME updateDisplay( );
 
           addManualSplays( at, splay_station, left, right, up, down, bearing, horizontal );
@@ -1828,13 +1828,13 @@ public class TopoDroidApp extends Application
     // PlotInfo.ORIENTATION_PORTRAIT = 0
     // TDLog.Log( TDLog.LOG_PLOT, "new plot " + name + " start " + start );
     long pid_p = mData.insertPlot( sid, -1L, name+"p",
-                 PlotInfo.PLOT_PLAN, 0L, start, TDString.EMPTY, 0, 0, mScaleFactor, 0, 0, TDString.EMPTY, TDString.EMPTY, 0, true );
+                 PlotInfo.PLOT_PLAN, 0L, start, TDString.EMPTY, 0, 0, mScaleFactor, 0, 0, TDString.EMPTY, TDString.EMPTY, 0 );
     if ( extended ) {
       long pid_s = mData.insertPlot( sid, -1L, name+"s",
-                   PlotInfo.PLOT_EXTENDED, 0L, start, TDString.EMPTY, 0, 0, mScaleFactor, 0, 0, TDString.EMPTY, TDString.EMPTY, 0, true );
+                   PlotInfo.PLOT_EXTENDED, 0L, start, TDString.EMPTY, 0, 0, mScaleFactor, 0, 0, TDString.EMPTY, TDString.EMPTY, 0 );
     } else {
       long pid_s = mData.insertPlot( sid, -1L, name+"s",
-                   PlotInfo.PLOT_PROJECTED, 0L, start, TDString.EMPTY, 0, 0, mScaleFactor, project, 0, TDString.EMPTY, TDString.EMPTY, 0, true );
+                   PlotInfo.PLOT_PROJECTED, 0L, start, TDString.EMPTY, 0, 0, mScaleFactor, project, 0, TDString.EMPTY, TDString.EMPTY, 0 );
     }
     return pid_p;
   }
@@ -1848,7 +1848,7 @@ public class TopoDroidApp extends Application
     // 0 0 mScaleFactor : offset and zoom
     String hide = ( parent == null )? TDString.EMPTY : parent;
     String nick = ( nickname == null )? TDString.EMPTY : nickname;
-    return mData.insertPlot( sid, -1L, name, type, 0L, from, to, 0, 0, mScaleFactor, azimuth, clino, hide, nick, 0, false );
+    return mData.insertPlot( sid, -1L, name, type, 0L, from, to, 0, 0, mScaleFactor, azimuth, clino, hide, nick, 0 );
   }
 
   // @param ctx       context

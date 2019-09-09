@@ -544,8 +544,7 @@ class ParserSurvex extends ImportParser
 	        if ( vals_len >= 5 ) {
                   // data line
                   try {
-                    int sz = vals_len;
-                    from = checkAlias( ParserUtil.applyCase( state.mCase, vals[jFrom] ) );
+                      from = checkAlias( ParserUtil.applyCase( state.mCase, vals[jFrom] ) );
                     to   = checkAlias( ParserUtil.applyCase( state.mCase, vals[jTo] ) );
                     len  = Float.parseFloat( vals[jLength] );
                     ber  = Float.parseFloat( vals[jCompass] );
@@ -563,26 +562,26 @@ class ParserSurvex extends ImportParser
                     cln = cln * state.mScaleCln * state.mUnitCln - state.mZeroCln;
 
                     float dist, b;
-                    if ( jLeft >= 0 && jLeft < sz ) {
+                    if ( jLeft >= 0 && jLeft < vals_len) {
                       dist = Float.parseFloat( vals[jLeft] ) * sLen - zLen;
                       // b = ber - 90; if ( b < 0 ) b += 360;
                       b = TDMath.in360( ber - 90 );
                       shots.add( new ParserShot( from, TDString.EMPTY,
                                  dist, b, 0, 0.0f, DBlock.EXTEND_UNSET, 2, state.mDuplicate, state.mSurface, false, "" ) );
                     }
-                    if ( jRight >= 0 && jRight < sz ) {
+                    if ( jRight >= 0 && jRight < vals_len) {
                       dist = Float.parseFloat( vals[jRight] ) * sLen - zLen;
                       // b = ber + 90; if ( b >= 360 ) b -= 360;
                       b = TDMath.add90( ber );
                       shots.add( new ParserShot( from, TDString.EMPTY,
                                  dist, b, 0, 0.0f, DBlock.EXTEND_UNSET, 2, state.mDuplicate, state.mSurface, false, "" ) );
                     }
-                    if ( jUp >= 0 && jUp < sz ) {
+                    if ( jUp >= 0 && jUp < vals_len) {
                       dist = Float.parseFloat( vals[jUp] ) * sLen - zLen;
                       shots.add( new ParserShot( from, TDString.EMPTY,
                                  dist, 0, 90, 0.0f, DBlock.EXTEND_UNSET, 2, state.mDuplicate, state.mSurface, false, "" ) );
                     }
-                    if ( jDown >= 0 && jDown < sz ) {
+                    if ( jDown >= 0 && jDown < vals_len) {
                       dist = Float.parseFloat( vals[jDown] ) * sLen - zLen;
                       shots.add( new ParserShot( from, TDString.EMPTY,
                                  dist, 0, -90, 0.0f, DBlock.EXTEND_UNSET, 2, state.mDuplicate, state.mSurface, false, "" ) );
@@ -622,7 +621,7 @@ class ParserSurvex extends ImportParser
     // Log.v( TopoDroidApp.TAG, "Parser Survex shots "+ shots.size() + " splays "+ splays.size() +" fixes "+  fixes.size() );
   }
 
-  boolean setJIndices( String[] vals, int vals_len )
+  private boolean setJIndices(String[] vals, int vals_len)
   {
     jFrom = jTo = jLength = jCompass = jClino = -1;
     jLeft = jUp = jRight  = jDown = -1;
@@ -671,7 +670,7 @@ class ParserSurvex extends ImportParser
     return false;
   }
 
-  void resetJIndices( )
+  private void resetJIndices()
   {
      jFrom    = 2;
      jTo      = 3;

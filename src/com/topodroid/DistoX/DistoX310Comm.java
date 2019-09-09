@@ -105,7 +105,7 @@ class DistoX310Comm extends DistoXComm
     destroySocket( );
   }
 
-  /** send the set/unset calib-mode command
+  /* send the set/unset calib-mode command
    * note called within connectSocket()
    * nothing to read (only write) --> no AsyncTask
    *

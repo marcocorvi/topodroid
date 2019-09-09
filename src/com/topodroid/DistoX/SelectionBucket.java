@@ -45,11 +45,10 @@ class SelectionBucket
   boolean intersects( RectF bbox )
   { 
     if ( bbox == null ) return true;
-    if ( ( bbox.right  < x0 ) 
-      || ( bbox.left   > x1 ) 
-      || ( bbox.top    > y1 ) 
-      || ( bbox.bottom < y0 ) ) return false;
-    return true;
+    return (!(bbox.right < x0))
+            && (!(bbox.left > x1))
+            && (!(bbox.top > y1))
+            && (!(bbox.bottom < y0));
   }
 
   void addPoint( SelectionPoint pt ) { mPoints.add( pt ); }

@@ -25,11 +25,7 @@ class TDAzimuth
     mRefAzimuth  = azimuth;
     mFixedExtend = ( TDSetting.mAzimuthManual )? 1L : 0L;
     if ( window != null ) {
-      window.runOnUiThread( new Runnable() {
-        public void run() {
-          window.setRefAzimuthButton();
-        }
-      } );
+      window.runOnUiThread( new Runnable() { public void run() { window.setRefAzimuthButton(); } } );
     }
     // DrawingWindow does not have the RefAzimuth setting
   }
