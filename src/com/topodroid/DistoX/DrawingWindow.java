@@ -2247,7 +2247,7 @@ public class DrawingWindow extends ItemDrawer
     }
 
     // mAllSymbols  = true; // by default there are all the symbols
-    SymbolsPalette missingSymbols = null; // new SymbolsPalette(); 
+    // FIXME_MISSING SymbolsPalette missingSymbols = null; // new SymbolsPalette(); 
     // missingSymbols = palette of missing symbols
     // if there are missing symbols mAllSymbols is false and the MissingDialog is shown
     //    (the dialog just warns the user about missing symbols, maybe a Toast would be enough)
@@ -2267,12 +2267,12 @@ public class DrawingWindow extends ItemDrawer
 
       if ( ! mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, mFullName1, false ) ) {
         // mAllSymbols =
-        mDrawingSurface.modeloadDataStream( filename1b, /* filename1, */ missingSymbols );
+        mDrawingSurface.modeloadDataStream( filename1b /*, filename1, FIXME-MISSING missingSymbols */ );
         DrawingSurface.addManagerToCache( mFullName1 );
       }
       if ( ! mDrawingSurface.resetManager( DrawingSurface.DRAWING_PROFILE, mFullName2, PlotInfo.isExtended(mPlot2.type) ) ) {
         // mAllSymbols = mAllSymbols &&
-        mDrawingSurface.modeloadDataStream( filename2b, /* filename2, */ missingSymbols );
+        mDrawingSurface.modeloadDataStream( filename2b /*, filename2, FIXME-MISSING missingSymbols */ );
         DrawingSurface.addManagerToCache( mFullName2 );
       }
       
@@ -2294,7 +2294,7 @@ public class DrawingWindow extends ItemDrawer
       mTo = ( PlotInfo.isSection( type ) )? mPlot3.view : "";
       mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null, false );
       // mAllSymbols =
-      mDrawingSurface.modeloadDataStream( filename3b, /* filename3, */ missingSymbols );
+      mDrawingSurface.modeloadDataStream( filename3b /*, filename3, FIXME-MISSING missingSymbols */ );
       mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)type );
     }
 
@@ -5741,20 +5741,20 @@ public class DrawingWindow extends ItemDrawer
     // Log.v("DistoX", "recover " + type + " <" + filename + "> TRD " + tdr + " TH2 " + th2 );
     if ( type == PlotInfo.PLOT_PLAN ) {
       mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, null, false );
-      mDrawingSurface.modeloadDataStream( tdr, /* th2, */ null ); // no missing symbols
+      mDrawingSurface.modeloadDataStream( tdr /*, th2, null */ ); // no missing symbols
       mDrawingSurface.linkSections();
       DrawingSurface.addManagerToCache( mFullName1 );
       setPlotType1( true );
     } else if ( PlotInfo.isProfile( type ) ) {
       mDrawingSurface.resetManager( DrawingSurface.DRAWING_PROFILE, null, PlotInfo.isExtended(type) );
-      mDrawingSurface.modeloadDataStream( tdr, /* th2, */ null );
+      mDrawingSurface.modeloadDataStream( tdr /*, th2,  null */ );
       mDrawingSurface.linkSections();
       DrawingSurface.addManagerToCache( mFullName2 );
       // now switch to extended view FIXME-VIEW
       setPlotType2( true );
     } else {
       mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null, false );
-      mDrawingSurface.modeloadDataStream( tdr, /* th2, */ null );
+      mDrawingSurface.modeloadDataStream( tdr /*, th2, null */ );
       // DrawingSurface.addManagerToCache( mFullName2 ); // sections are not cached
       setPlotType3( );
       DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
@@ -6370,7 +6370,7 @@ public class DrawingWindow extends ItemDrawer
     ydelta *= DrawingUtil.SCALE_FIX;
     String fullName = TDInstance.survey + "-" + plt.name;
     String tdr = TDPath.getTdrFileWithExt( fullName );
-    boolean ret = mDrawingSurface.addloadDataStream( tdr, /* null, */ xdelta, ydelta, null, null ); // do not save plot name in paths
+    boolean ret = mDrawingSurface.addLoadDataStream( tdr, /* null, */ xdelta, ydelta, /* null, */ null ); // do not save plot name in paths
   }
 
   // remove: whether to remove the paths from the current plot

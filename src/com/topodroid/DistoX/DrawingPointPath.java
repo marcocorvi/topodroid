@@ -123,7 +123,7 @@ class DrawingPointPath extends DrawingPath
     // Log.v( TopoDroidApp.TAG, "Point cstr " + type + " orientation " + mOrientation );
   }
 
-  static DrawingPointPath loadDataStream( int version, DataInputStream dis, float x, float y, SymbolsPalette missingSymbols ) 
+  static DrawingPointPath loadDataStream( int version, DataInputStream dis, float x, float y /* , SymbolsPalette missingSymbols */ ) 
   {
     float ccx, ccy, orientation;
     int   type;
@@ -147,7 +147,7 @@ class DrawingPointPath extends DrawingPath
       // TDLog.Log( TDLog.LOG_PLOT, "P " + fname + " " + type + " " + ccx + " " + ccy + " " + orientation + " " + scale + " options (" + options + ")" );
       // Log.v( "DistoX-Pt", fname + " " + type + " " + ccx + " " + ccy + " " + orientation + " " + scale + " options (" + options + ")" );
       if ( type < 0 ) {
-        if ( missingSymbols != null ) missingSymbols.addPointFilename( fname ); 
+        // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.addPointFilename( fname ); 
         type = 0;
       }
       // FIXME SECTION_RENAME

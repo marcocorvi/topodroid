@@ -544,7 +544,10 @@ class TDPath
   {
     File dir = new File( dirname );
     if ( dir.exists() ) {
-      for ( File file : dir.listFiles() ) if ( file.isFile() ) file.delete();
+      File[] files = dir.listFiles();
+      if ( files != null ) {
+        for (File file : files ) if (file.isFile()) file.delete();
+      }
       dir.delete();
     }
   }
@@ -558,8 +561,10 @@ class TDPath
   {
     File imagedir = new File( getSurveyPhotoDir( survey ) );
     if ( imagedir.exists() ) {
-      File[] fs = imagedir.listFiles();
-      for ( File f : fs ) if ( ! f.delete() ) TDLog.Error("File delete error");
+      File[] files = imagedir.listFiles();
+      if ( files != null ) {
+        for (File f : files) if (!f.delete()) TDLog.Error("File delete error");
+      }
       if ( ! imagedir.delete() ) TDLog.Error("Dir delete error");
     }
 

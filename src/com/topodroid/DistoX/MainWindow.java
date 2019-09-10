@@ -564,9 +564,11 @@ public class MainWindow extends Activity
               return f.getName().matches( ".*tdr.bck.?" );
           }
         } );
-        for ( File f : files ) {
-          // Log.v("DistoXX", "delete file " + f.getPath() );
-          f.delete();
+        if ( files != null ) {
+          for (File f : files) {
+            // Log.v("DistoXX", "delete file " + f.getPath() );
+            f.delete();
+          }
         }
       }
     };

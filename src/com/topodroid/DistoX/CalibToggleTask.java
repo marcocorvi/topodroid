@@ -33,7 +33,12 @@ class CalibToggleTask extends AsyncTask<Void, Integer, Boolean>
   @Override
   protected Boolean doInBackground(Void... v)
   {
-    return mApp.get() != null && mApp.get().toggleCalibMode( );
+    try {
+      if (mApp.get() != null) return mApp.get().toggleCalibMode();
+    } catch ( NullPointerException e ) {
+      TDLog.Error( e.getMessage() );
+    }
+    return false;
   }
 
   // @Override
@@ -49,8 +54,12 @@ class CalibToggleTask extends AsyncTask<Void, Integer, Boolean>
     } else {
       TDToast.makeBad( R.string.toggle_failed );
     }
-    if ( mParent.get() != null && !mParent.get().isActivityFinishing() ) {
-      mParent.get().enableButtons( true );
+    try {
+      if (mParent.get() != null && !mParent.get().isActivityFinishing()) {
+        mParent.get().enableButtons(true);
+      }
+    } catch ( NullPointerException e ) {
+      TDLog.Error( e.getMessage() );
     }
   }
 }

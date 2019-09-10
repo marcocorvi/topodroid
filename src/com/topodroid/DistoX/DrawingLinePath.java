@@ -74,7 +74,7 @@ class DrawingLinePath extends DrawingPointLinePath
     mLevel     = BrushManager.mLineLib.getSymbolLevel( mLineType );
   }
 
-  static DrawingLinePath loadDataStream( int version, DataInputStream dis, float x, float y, SymbolsPalette missingSymbols )
+  static DrawingLinePath loadDataStream( int version, DataInputStream dis, float x, float y /*, SymbolsPalette missingSymbols */ )
   {
     int type;
     boolean closed, reversed;
@@ -93,7 +93,7 @@ class DrawingLinePath extends DrawingPointLinePath
       // BrushManager.mLineLib.tryLoadMissingArea( fname );
       type = BrushManager.mLineLib.getSymbolIndexByFilename( fname ); 
       if ( type < 0 ) {
-        if ( missingSymbols != null ) missingSymbols.addLineFilename( fname );
+        // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.addLineFilename( fname );
         type = 0;
       }
 

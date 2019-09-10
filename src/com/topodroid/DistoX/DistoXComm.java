@@ -241,7 +241,7 @@ class DistoXComm extends TopoDroidComm
     if ( address == null ) return;
     // TDLog.Log( TDLog.LOG_COMM, "create Socket() addr " + address + " mAddress " + mAddress);
     if ( mProtocol == null || ! address.equals( mAddress ) ) {
-      if ( mProtocol != null && ! address.equals( mAddress ) ) {
+      if ( mProtocol != null /* && ! address.equals( mAddress ) */ ) {
         disconnectRemoteDevice();
       }
 

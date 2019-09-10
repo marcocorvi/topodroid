@@ -631,8 +631,8 @@ class DrawingIO
   static boolean doLoadDataStream( DrawingSurface surface,
                                    String filename,
                                    float dx, float dy,
-                                   SymbolsPalette missingSymbols,
-                                   SymbolsPalette localPalette,
+                                   // FIXME-MISISNG SymbolsPalette missingSymbols,
+                                   // SymbolsPalette localPalette,
                                    RectF bbox,
 				   boolean complete,
 				   String plotName )
@@ -722,20 +722,20 @@ class DrawingIO
                 // read palettes
                 String points = dis.readUTF();
                 String[] vals = points.split(",");
-                for ( String val : vals ) if ( val.length() > 0 ) localPalette.addPointFilename( val );
+                // for ( String val : vals ) if ( val.length() > 0 ) localPalette.addPointFilename( val );
                 String lines = dis.readUTF();
                 vals = lines.split(",");
-                for ( String val : vals ) if ( val.length() > 0 ) localPalette.addLineFilename( val );
+                // for ( String val : vals ) if ( val.length() > 0 ) localPalette.addLineFilename( val );
                 String areas = dis.readUTF();
                 vals = areas.split(",");
-                for ( String val : vals ) if ( val.length() > 0 ) localPalette.addAreaFilename( val );
+                // for ( String val : vals ) if ( val.length() > 0 ) localPalette.addAreaFilename( val );
                 in_scrap = true;
                 // Log.v("DistoX", "TDR type " + type );
               }
               break;
             case 'P':
 	      // FIXME SECTION_RENAME
-              path = DrawingPointPath.loadDataStream( version, dis, dx, dy, missingSymbols ).fixScrap( survey_name );
+              path = DrawingPointPath.loadDataStream( version, dis, dx, dy /*, missingSymbols */ ).fixScrap( survey_name );
               break;
             case 'T':
               path = DrawingLabelPath.loadDataStream( version, dis, dx, dy );
@@ -747,11 +747,11 @@ class DrawingIO
               path = DrawingAudioPath.loadDataStream( version, dis, dx, dy );
               break;
             case 'L':
-              path = DrawingLinePath.loadDataStream( version, dis, dx, dy, missingSymbols );
+              path = DrawingLinePath.loadDataStream( version, dis, dx, dy /*, missingSymbols */ );
               // Log.v("DistoX0", "add path ... " + ((DrawingLinePath)path).mFirst.mX + " " + ((DrawingLinePath)path).mFirst.mY );
               break;
             case 'A':
-              path = DrawingAreaPath.loadDataStream( version, dis, dx, dy, missingSymbols );
+              path = DrawingAreaPath.loadDataStream( version, dis, dx, dy /*, missingSymbols */ );
               break;
             case 'J':
               path = DrawingSpecialPath.loadDataStream( version, dis, dx, dy );
@@ -792,7 +792,8 @@ class DrawingIO
       }
       // Log.v("DistoX", "read: " + sb.toString() );
     }
-    return (missingSymbols == null ) || missingSymbols.isOK();
+    // FIXME-MISSING return (missingSymbols == null ) || missingSymbols.isOK();
+    return true;
   }
 
   static void doLoadOutlineDataStream( DrawingSurface surface,
@@ -860,16 +861,16 @@ class DrawingIO
               }
               break;
             case 'P':
-              DrawingPointPath.loadDataStream( version, dis, dx, dy, null );
+              DrawingPointPath.loadDataStream( version, dis, dx, dy /*, null */ );
               break;
             case 'T':
               DrawingLabelPath.loadDataStream( version, dis, dx, dy );
               break;
             case 'L':
-              path = DrawingLinePath.loadDataStream( version, dis, dx, dy, null );
+              path = DrawingLinePath.loadDataStream( version, dis, dx, dy /*, null */ );
               break;
             case 'A':
-              DrawingAreaPath.loadDataStream( version, dis, dx, dy, null );
+              DrawingAreaPath.loadDataStream( version, dis, dx, dy /*, null */ );
               break;
             case 'J':
               DrawingSpecialPath.loadDataStream( version, dis, dx, dy );
@@ -1536,7 +1537,7 @@ class DrawingIO
               }
               break;
             case 'P':
-              th_str = DrawingPointPath.loadDataStream( version, dis, xoff, yoff, null ).toTherion();
+              th_str = DrawingPointPath.loadDataStream( version, dis, xoff, yoff /*, null */ ).toTherion();
 	      if ( th_str != null ) out.write( th_str );
               break;
             case 'T':
@@ -1544,11 +1545,11 @@ class DrawingIO
 	      if ( th_str != null ) out.write( th_str );
               break;
             case 'L':
-              th_str = DrawingLinePath.loadDataStream( version, dis, xoff, yoff, null ).toTherion();
+              th_str = DrawingLinePath.loadDataStream( version, dis, xoff, yoff /*, null */ ).toTherion();
 	      if ( th_str != null ) out.write( th_str );
               break;
             case 'A':
-              th_str = DrawingAreaPath.loadDataStream( version, dis, xoff, yoff, null ).toTherion();
+              th_str = DrawingAreaPath.loadDataStream( version, dis, xoff, yoff /*, null */ ).toTherion();
 	      if ( th_str != null ) out.write( th_str );
               break;
             case 'J':
@@ -1649,16 +1650,16 @@ class DrawingIO
               }
               break;
             case 'P':
-              paths.add( DrawingPointPath.loadDataStream( version, dis, 0, 0, null ) );
+              paths.add( DrawingPointPath.loadDataStream( version, dis, 0, 0 /*, null */ ) );
               break;
             case 'T':
               paths.add( DrawingLabelPath.loadDataStream( version, dis, 0, 0 ) );
               break;
             case 'L':
-              paths.add( DrawingLinePath.loadDataStream( version, dis, 0, 0, null ) );
+              paths.add( DrawingLinePath.loadDataStream( version, dis, 0, 0 /*, null */ ) );
               break;
             case 'A':
-              paths.add( DrawingAreaPath.loadDataStream( version, dis, 0, 0, null ) );
+              paths.add( DrawingAreaPath.loadDataStream( version, dis, 0, 0 /*, null */ ) );
               break;
 	    case 'J':
               paths.add( DrawingSpecialPath.loadDataStream( version, dis, 0, 0 ) );

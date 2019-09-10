@@ -471,7 +471,7 @@ class DrawingSvg
         int what = dis.read();
         switch ( what ) {
           case 'P':
-            path = DrawingPointPath.loadDataStream( version, dis, dx, dy, null );
+            path = DrawingPointPath.loadDataStream( version, dis, dx, dy /*, null */ );
             if ( path != null) toSvg( pw, (DrawingPointPath)path, pathToColor(path), xoff, yoff );
             break;
           case 'T':
@@ -479,11 +479,11 @@ class DrawingSvg
             if ( path != null) toSvg( pw, (DrawingLabelPath)path, pathToColor(path), xoff, yoff );
             break;
           case 'L':
-            path = DrawingLinePath.loadDataStream( version, dis, dx, dy, null );
+            path = DrawingLinePath.loadDataStream( version, dis, dx, dy /*, null */ );
             if ( path != null) toSvg( pw, (DrawingLinePath)path, pathToColor(path), xoff, yoff );
             break;
           case 'A':
-            path = DrawingAreaPath.loadDataStream( version, dis, dx, dy, null );
+            path = DrawingAreaPath.loadDataStream( version, dis, dx, dy /*, null */ );
             if ( path != null) toSvg( pw, (DrawingAreaPath)path, pathToColor(path), xoff, yoff );
             break;
           case 'U':

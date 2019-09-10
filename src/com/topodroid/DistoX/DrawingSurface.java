@@ -735,20 +735,6 @@ class DrawingSurface extends SurfaceView
   //   return false;
   // }
 
-  // called by OverviewWindow
-  // @pre tdr != null
-  boolean addloadDataStream( String tdr, /* String th2, */ float xdelta, float ydelta, SymbolsPalette missingSymbols, String plotName )
-  {
-    boolean ret = false;
-    SymbolsPalette localPalette = preparePalette();
-    if ( (new File(tdr)).exists() ) {
-      ret = DrawingIO.doLoadDataStream( this, tdr, xdelta, ydelta, missingSymbols, localPalette, null, false, plotName );
-    // } else if ( th2 != null && (new File(th2)).exists() ) {
-    //   return DrawingIO.doLoadTherion( this, th2, xdelta, ydelta, missingSymbols, localPalette );
-    }
-    return ret;
-  }
-
   // @note th21 can be null
   // boolean modeloadTherion( String th21, SymbolsPalette missingSymbols )
   // {
@@ -757,21 +743,28 @@ class DrawingSurface extends SurfaceView
   //   return DrawingIO.doLoadTherion( this, th21, 0, 0, missingSymbols, localPalette );
   // }
 
-  // FIXME 
-  // WITH VERSION 3.0 support for TH2 fallback will be dropped
-  // @note tdr1 and tdr2 can be null
-  // @note th21 is not used if tdr1 == null
-  // called only by DrawingWindow
-  boolean modeloadDataStream( String tdr1, /* String th21, */ SymbolsPalette missingSymbols )
+  // called by OverviewWindow
+  // @pre tdr != null
+  boolean addLoadDataStream( String tdr, float xdelta, float ydelta,
+    /* SymbolsPalette missingSymbols, */ String plotName )
   {
     boolean ret = false;
-    SymbolsPalette localPalette = preparePalette();
-    if ( missingSymbols != null ) missingSymbols.resetSymbolLists();
+    // SymbolsPalette localPalette = preparePalette();
+    if ( (new File(tdr)).exists() ) {
+      ret = DrawingIO.doLoadDataStream( this, tdr, xdelta, ydelta, /* missingSymbols, localPalette, */ null, false, plotName );
+    }
+    return ret;
+  }
+
+  // called only by DrawingWindow
+  boolean modeloadDataStream( String tdr1 /*, SymbolsPalette missingSymbols */ )
+  {
+    boolean ret = false;
+    // SymbolsPalette localPalette = preparePalette();
+    // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.resetSymbolLists();
     if ( tdr1 != null ) {
       if ( (new File( tdr1 )).exists() ) {
-        ret = DrawingIO.doLoadDataStream( this, tdr1, 0, 0, missingSymbols, localPalette, null, false, null ); // no plot_name
-      // } else if ( th21 != null && (new File(th21)).exists() ) {
-      //   return DrawingIO.doLoadTherion( this, th21, 0, 0, missingSymbols, localPalette );
+        ret = DrawingIO.doLoadDataStream( this, tdr1, 0, 0, /* missingSymbols, localPalette, */ null, false, null ); // no plot_name
       }
     }
     return ret;

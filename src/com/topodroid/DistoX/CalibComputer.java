@@ -69,8 +69,12 @@ class CalibComputer extends AsyncTask< String, Integer, Integer >
   {
     if ( res != null ) {
       int r = res.intValue();
-      if ( mParent.get() != null && ! mParent.get().isFinishing() ) { // isFinishing MAY NullPointerException
-        mParent.get().handleComputeCalibResult( mJob, r );
+      try {
+        if (mParent.get() != null && !mParent.get().isFinishing()) { // isFinishing MAY NullPointerException
+          mParent.get().handleComputeCalibResult(mJob, r);  // MAY NullPointerException
+        }
+      } catch ( NullPointerException e ) {
+        TDLog.Error( e.getMessage() );
       }
     }
     unlock();

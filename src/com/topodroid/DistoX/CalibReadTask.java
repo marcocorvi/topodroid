@@ -61,7 +61,13 @@ class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
   @Override
   protected void onPostExecute( Boolean result )
   {
-    if ( mParent.get() != null && ! mParent.get().isActivityFinishing() ) mParent.get().enableButtons( true );
+    try {
+      if (mParent.get() != null && !mParent.get().isActivityFinishing()) {
+        mParent.get().enableButtons(true);
+      }
+    } catch ( NullPointerException e ) {
+      TDLog.Error( e.getMessage() );
+    }
 
     if ( result ) {
       String[] items = new String[8];

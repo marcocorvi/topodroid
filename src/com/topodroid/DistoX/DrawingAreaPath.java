@@ -107,7 +107,7 @@ class DrawingAreaPath extends DrawingPointLinePath
   }
 
 
-  static DrawingAreaPath loadDataStream( int version, DataInputStream dis, float x, float y, SymbolsPalette missingSymbols )
+  static DrawingAreaPath loadDataStream( int version, DataInputStream dis, float x, float y /*, SymbolsPalette missingSymbols */ )
   {
     int type, cnt;
     boolean visible;
@@ -127,7 +127,7 @@ class DrawingAreaPath extends DrawingPointLinePath
       type = BrushManager.mAreaLib.getSymbolIndexByFilename( fname );
       // TDLog.Log( TDLog.LOG_PLOT, "A: " + fname + " " + cnt + " " + visible + " " + orientation + " NP " + npt );
       if ( type < 0 ) {
-        if ( missingSymbols != null ) missingSymbols.addAreaFilename( fname );
+        // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.addAreaFilename( fname );
         type = 0;
       }
 

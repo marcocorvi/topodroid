@@ -1284,7 +1284,7 @@ class DrawingDxf
         int what = dis.read();
         switch ( what ) {
           case 'P':
-            path = DrawingPointPath.loadDataStream( version, dis, dx, dy, null );
+            path = DrawingPointPath.loadDataStream( version, dis, dx, dy /*, null */ );
             handle = toDxf( pw, handle, (DrawingPointPath)path, scale, xoff, yoff );
             break;
           case 'T':
@@ -1292,11 +1292,11 @@ class DrawingDxf
             handle = toDxf( pw, handle, (DrawingLabelPath)path, scale, xoff, yoff );
             break;
           case 'L':
-            path = DrawingLinePath.loadDataStream( version, dis, dx, dy, null );
+            path = DrawingLinePath.loadDataStream( version, dis, dx, dy /*, null */ );
             handle = toDxf( pw, handle, (DrawingLinePath)path, scale, xoff, yoff );
             break;
           case 'A':
-            path = DrawingAreaPath.loadDataStream( version, dis, dx, dy, null );
+            path = DrawingAreaPath.loadDataStream( version, dis, dx, dy /*, null */ );
             handle = toDxf( pw, handle, (DrawingAreaPath)path, scale, xoff, yoff );
             break;
           case 'U':

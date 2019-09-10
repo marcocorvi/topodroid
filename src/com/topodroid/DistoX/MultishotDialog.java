@@ -215,8 +215,10 @@ class MultishotDialog extends MyDialog
       //   return;
       // }
       //
-      // FROM and TO can be empty, but this means no renumbering is made (anly station assignment to first block)
-      mParent.renumberBlocks( mBlks, from, to );
+      if ( from != null ) {
+        // FROM and TO can be empty, but this means no renumbering is made (only station assignment to first block)
+        mParent.renumberBlocks(mBlks, from, to);
+      }
     // } else if ( b == mButtonHighlight ) { FIXME_HIGHLIGHT
     //   mParent.highlightBlocks( mBlks );
     } else if ( b == mButtonSwap ) {

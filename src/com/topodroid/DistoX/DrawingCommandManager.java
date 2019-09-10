@@ -2870,10 +2870,11 @@ class DrawingCommandManager
           }
           area.mFirst = next;
           area.mLast  = prev;
-          if ( area.mFirst != null ) { // always true [?]
+          if ( area.mFirst != null ) { // always true: area.mFirst == next != null
             area.mFirst.mNext = area.mLast;
             area.mFirst.mPrev = null;
-            if ( area.mLast != null ) { // always true [?]
+            if ( area.mLast != null ) // always true [?]
+            {
               area.mLast.mPrev = area.mFirst;
               area.mLast.mNext = null;
             } else { 
@@ -3177,7 +3178,7 @@ class DrawingCommandManager
 	  int pos = scrap.lastIndexOf( "-xx" );
 	  if ( pos > 0 ) {
             String id = scrap.substring(pos+1); // line id
-	    if ( id != null && id.length() > 0 ) { // id always not null [?]
+	    if ( /* id != null && */ id.length() > 0 ) { // id always not null [?]
               for ( ICanvasCommand cmd2 : mCurrentStack ) {
                 if ( cmd2.commandType() != 0 ) continue; 
                 DrawingPath p2 = (DrawingPath)cmd2;
@@ -3195,7 +3196,7 @@ class DrawingCommandManager
 	    if ( pos < 0 ) pos = scrap.lastIndexOf( "-xh-" );
 	    if ( pos > 0 ) {
               String name = scrap.substring(pos+4);
-	      if ( name != null && name.length() > 0 ) { // name always not null [?]
+	      if ( /* name != null && */ name.length() > 0 ) { // name always not null [?]
 	        // Log.v("DistoXX", "section station " + name );
 	        for ( DrawingStationName st : mStations ) {
                   if ( name.equals( st.getName() ) ) {

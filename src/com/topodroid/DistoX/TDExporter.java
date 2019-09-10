@@ -776,7 +776,7 @@ class TDExporter
           // Log.v("DistoX", "SHP export " + filepath + " stations " + stations.size() );
           ShpPointz shp = new ShpPointz( filepath, files );
           shp.setYYMMDD( info.date );
-          success |= shp.writeStations( stations ); 
+          success &= shp.writeStations( stations );
         }
       }
 
@@ -789,7 +789,7 @@ class TDExporter
         // Log.v("DistoX", "SHP export " + filepath + " shots " + shots.size() );
         ShpPolylinez shp = new ShpPolylinez( filepath, files );
         shp.setYYMMDD( info.date );
-        success |= shp.writeShots( shots, splays );
+        success &= shp.writeShots( shots, splays );
       }
 
       // if ( TDSetting.mKmlSplays ) {

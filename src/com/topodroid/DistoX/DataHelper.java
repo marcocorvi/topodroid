@@ -1030,7 +1030,6 @@ class DataHelper extends DataSetObservable
   int updateShot( long id, long sid, String fStation, String tStation,
                   long extend, long flag, long leg, String comment )
   {
-    boolean success = false;
     if ( myDB == null ) return -1;
     // if ( makesCycle( id, sid, fStation, tStation ) ) return -2;
 
@@ -1048,7 +1047,7 @@ class DataHelper extends DataSetObservable
         "UPDATE shots SET fStation=\"%s\", tStation=\"%s\", extend=%d, flag=%d, leg=%d WHERE surveyId=%d AND id=%d",
         fStation, tStation, extend, flag, leg, sid, id );
     }
-    success = doExecShotSQL( id, sw );
+    doExecShotSQL( id, sw );
 
     // Log.v("DistoXS", "update shot " + fStation + " " + tStation + " success " + success );
     return 0;

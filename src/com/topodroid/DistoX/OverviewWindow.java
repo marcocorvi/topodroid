@@ -633,7 +633,7 @@ public class OverviewWindow extends ItemDrawer
         // String th2 = TDPath.getTh2FileWithExt( fullName );
         // if ( TDSetting.mBinaryTh2 ) { // TDR BINARY
           String tdr = TDPath.getTdrFileWithExt( fullName );
-          mOverviewSurface.addloadDataStream( tdr, /* th2, */ xdelta, ydelta, null, fullName ); // save plot name in paths
+          mOverviewSurface.addLoadDataStream( tdr, /* th2, */ xdelta, ydelta, /* null, */ fullName ); // save plot name in paths
         // } else {
         //   // FIXME_OVER N.B. this loads the drawing on DrawingSurface.mCommandManager3
         //   mOverviewSurface.addloadTherion( th2, xdelta, ydelta, null ); // ignore missing symbols

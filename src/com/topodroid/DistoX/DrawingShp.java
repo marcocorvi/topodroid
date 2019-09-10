@@ -104,10 +104,13 @@ class DrawingShp
       return false;
     } finally {
       if ( dir != null && dir.exists() ) {
-        for ( File file : dir.listFiles() ) {
-          if ( file.isFile() ) file.delete();
+        File[] files = dir.listFiles();
+        if ( files != null ) {
+          for (File file : files) {
+            if (file.isFile()) file.delete();
+          }
         }
-	dir.delete();
+	    dir.delete();
       }
     }
     return true;

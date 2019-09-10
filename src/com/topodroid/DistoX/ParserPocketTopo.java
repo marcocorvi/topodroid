@@ -52,7 +52,7 @@ class ParserPocketTopo extends ImportParser
     checkValid();
   }
 
-  private void readPocketTopoFile( String filename ) // throws ParserException
+  private void readPocketTopoFile( String filename ) throws ParserException
   {
     PTFile ptfile = new PTFile();
     // TDLog.Log( TDLog.LOG_IO, "read PocketTopo file " + filename );
@@ -64,11 +64,10 @@ class ParserPocketTopo extends ImportParser
       fs.close();
     } catch ( FileNotFoundException e ) {
       TDLog.Error( "File not found: " + filename );
-      // FIXME
-      return;
+      throw new ParserException();
     } catch ( IOException e ) { // on close
       TDLog.Error( "IO exception: " + e );
-      return;
+      throw new ParserException();
     }
     int nr_trip = ptfile.tripCount();
     TDLog.Log( TDLog.LOG_PTOPO, "PT trip count " + nr_trip );
@@ -176,13 +175,14 @@ class ParserPocketTopo extends ImportParser
       // Log.v("DistoX", "display " + TopoDroidApp.mDisplayWidth + " " + TopoDroidApp.mDisplayHeight ); 
     } else {
       TDLog.Error( "PT null StartFrom");
+      // throw new ParserException();
     }
-    
   }
 
   /** return true if successful
    */
   private boolean writeDrawing( String filename, String scrap_name, PTDrawing drawing, long type, int over_scale )
+                  throws ParserException
   {
     if ( drawing == null ) return false;
     float xoff = DrawingUtil.CENTER_X; // * 5;
@@ -282,6 +282,7 @@ class ParserPocketTopo extends ImportParser
 		paths.add( new DrawingPointPath( point_type, x, y, DrawingPointPath.SCALE_M, "", "" ) ); // no text, no options
               }
             } catch( ClassCastException e ) {
+              throw new ParserException();
             }
           }
         }
@@ -302,6 +303,7 @@ class ParserPocketTopo extends ImportParser
       } catch ( IOException e ) {
         TDLog.Error( mName + " scraps IO error " + e );
         if ( ! file.delete() ) TDLog.Error("File delete error");
+        throw new ParserException();
       }
     }
     return ret;

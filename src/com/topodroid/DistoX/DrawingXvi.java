@@ -459,7 +459,7 @@ class DrawingXvi
         int what = dis.read();
         switch ( what ) {
           case 'P':
-            path = DrawingPointPath.loadDataStream( version, dis, dx, dy, null );
+            path = DrawingPointPath.loadDataStream( version, dis, dx, dy /*, null */ );
             if ( path != null) toXvi( pw, (DrawingPointPath)path, xoff, yoff );
             break;
           case 'T':
@@ -467,11 +467,11 @@ class DrawingXvi
             if ( path != null) toXvi( pw, (DrawingLabelPath)path, xoff, yoff );
             break;
           case 'L':
-            path = DrawingLinePath.loadDataStream( version, dis, dx, dy, null );
+            path = DrawingLinePath.loadDataStream( version, dis, dx, dy /*, null */ );
             if ( path != null) toXvi( pw, (DrawingLinePath)path, xoff, yoff );
             break;
           case 'A':
-            path = DrawingAreaPath.loadDataStream( version, dis, dx, dy, null );
+            path = DrawingAreaPath.loadDataStream( version, dis, dx, dy /*, null*/ );
             if ( path != null) toXvi( pw, (DrawingAreaPath)path, xoff, yoff );
             break;
           case 'U':

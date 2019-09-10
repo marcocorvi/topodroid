@@ -80,8 +80,11 @@ class Archiver
   {
     if ( ! dir.exists() ) return;
     // Log.v( "DistoXX", "zip add dir " + dir.getPath() );
-    for ( File file : dir.listFiles() ) { // listFiles MAY NullPointerException
-      if ( file.isFile() ) addEntry( zos, file );
+    File[] files = dir.listFiles();
+    if ( files != null ) {
+      for ( File file : files ) { // listFiles MAY NullPointerException
+        if (file.isFile()) addEntry(zos, file);
+      }
     }
   }
 
