@@ -23,7 +23,7 @@
     >
     <Button android:id="@+id/photo_back"
       style="@style/button_default"
-      android:text="@string/button_back"
+      android:text="@string/button_close"
     />
   </LinearLayout>
 

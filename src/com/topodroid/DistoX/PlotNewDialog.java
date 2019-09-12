@@ -90,11 +90,13 @@ class PlotNewDialog extends MyDialog
     if ( station != null ) mEditStart.setText( station );
     mEditStart.setOnLongClickListener( this );
 
-    mBtnOK = (Button) findViewById(R.id.button_ok );
-    mBtnBack = (Button) findViewById(R.id.button_back );
+    mBtnOK = (Button) findViewById(R.id.btn_ok );
+    mBtnBack = (Button) findViewById(R.id.btn_cancel );
     mBtnOK.setOnClickListener( this );
     mBtnOK.setOnLongClickListener( this );
+
     mBtnBack.setOnClickListener( this );
+
     mCBextended = (CheckBox)findViewById( R.id.button_extended );
     mCBextended.setChecked( true );
     mCBdangling = (CheckBox)findViewById( R.id.button_dangling );
@@ -149,11 +151,13 @@ class PlotNewDialog extends MyDialog
     Button b = (Button) v;
     // TDLog.Log( TDLog.LOG_INPUT, "PlotDialog onClick() button " + b.getText().toString() ); 
 
-    if ( /* notDone && */ b == mBtnOK ) {
-      // notDone = false;
-      if ( ! handleOK( ) ) return;
-    } else if ( b == mBtnBack ) {
-      /* nothing */
+    switch ( v.getId( ) ) {
+      case R.id.btn_ok:
+        if ( ! handleOK( ) ) return;
+        break;
+      case R.id.btn_cancel:
+        /* nothing */
+        break;
     }
     dismiss();
   }

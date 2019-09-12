@@ -60,8 +60,6 @@ public class SensorActivity extends Activity
   private EditText mETcomment;
 
   // private Button mBTtype;
-  private Button mBTok;
-  private Button mBTcancel;
 
   @Override
   public void onCreate(Bundle savedInstanceState)
@@ -139,11 +137,9 @@ public class SensorActivity extends Activity
     //   mRBHumidity.setEnabled( false );
     // }
 
-    mBTok     = ( Button ) findViewById( R.id.sensor_ok );
-    mBTcancel = ( Button ) findViewById( R.id.sensor_cancel );
+    ( ( Button ) findViewById( R.id.sensor_ok ) ).setOnClickListener( this );
+    ( ( Button ) findViewById( R.id.sensor_cancel ) ).setOnClickListener( this );
 
-    mBTok.setOnClickListener( this );
-    mBTcancel.setOnClickListener( this );
     // setTitleColor( TDColor.TITLE_NORMAL );
 
     // mETtype.setText( null );
@@ -260,38 +256,44 @@ public class SensorActivity extends Activity
   @Override
   public void onClick( View view )
   {
-    Button b = (Button) view;
-    // TDLog.Log(  TDLog.LOG_INPUT, "SensorActivity onClick() button " + b.getText().toString() );
     String error;
-    if ( b == mBTok ) {
-      String type = mETtype.getText().toString().trim();
-      String value = mETvalue.getText().toString().trim();
-      String comment = mETcomment.getText().toString().trim();
-      if ( type.length() == 0 ) {
-        error = getResources().getString( R.string.error_sensor_required );
-        mETtype.setError( error );
-        return;
+    switch (view.getId()) {
+      case R.id.sensor_ok:
+      {
+        String type = mETtype.getText().toString().trim();
+        String value = mETvalue.getText().toString().trim();
+        String comment = mETcomment.getText().toString().trim();
+        if ( type.length() == 0 ) {
+          error = getResources().getString( R.string.error_sensor_required );
+          mETtype.setError( error );
+          return;
+        }
+        if (  value.length() == 0 ) {
+          error = getResources().getString( R.string.error_value_required );
+          mETvalue.setError( error );
+          return;
+        }
+        // TDLog.Log( TDLog.LOG_SENSOR, "sensor " + type + " " + value );
+        Intent intent = new Intent();
+        intent.putExtra( TDTag.TOPODROID_SENSOR_TYPE, type );
+        intent.putExtra( TDTag.TOPODROID_SENSOR_VALUE, value );
+        intent.putExtra( TDTag.TOPODROID_SENSOR_COMMENT, comment );
+        setResult( RESULT_OK, intent );
+        finish();
+        break;
       }
-      if (  value.length() == 0 ) {
-        error = getResources().getString( R.string.error_value_required );
-        mETvalue.setError( error );
-        return;
+      case R.id.sensor_cancel:
+      {
+        setResult( RESULT_CANCELED );
+        if ( mSensorType != -1 ) {
+          mSensorManager.unregisterListener(mListener);
+        }
+        finish();
+        break;
       }
-      // TDLog.Log( TDLog.LOG_SENSOR, "sensor " + type + " " + value );
-      Intent intent = new Intent();
-      intent.putExtra( TDTag.TOPODROID_SENSOR_TYPE, type );
-      intent.putExtra( TDTag.TOPODROID_SENSOR_VALUE, value );
-      intent.putExtra( TDTag.TOPODROID_SENSOR_COMMENT, comment );
-      setResult( RESULT_OK, intent );
-      finish();
-    } else if ( b == mBTcancel ) {
-      setResult( RESULT_CANCELED );
-      if ( mSensorType != -1 ) {
-        mSensorManager.unregisterListener(mListener);
-      }
-      finish();
-    } else { 
-      setSensor();
+      default:
+        setSensor();
+        break;
     }
   }  
     

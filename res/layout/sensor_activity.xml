@@ -85,7 +85,7 @@
       <Button android:id="@+id/sensor_cancel"
         android:layout_marginRight="@dimen/marginh"
         style="@style/button_default"
-        android:text="@string/button_back"
+        android:text="@string/button_cancel"
         />
 
       <LinearLayout 

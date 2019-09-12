@@ -54,8 +54,8 @@ class ShotDisplayDialog extends MyDialog
         mCBblank  = (CheckBox) findViewById(R.id.cb_mode_blank);
         mCBleg    = (CheckBox) findViewById(R.id.cb_mode_leg);
 
-        ((Button) findViewById(R.id.button_ok)).setOnClickListener( this );
-        ((Button) findViewById(R.id.button_back)).setOnClickListener( this );
+        ((Button) findViewById(R.id.btn_ok)).setOnClickListener( this );
+        ((Button) findViewById(R.id.btn_cancel)).setOnClickListener( this );
         // mBtnRefresh = (Button) findViewById(R.id.button_mode_refresh);
         // mBtnRefresh.setOnClickListener( this );
 
@@ -77,10 +77,10 @@ class ShotDisplayDialog extends MyDialog
       // TDLog.Log( TDLog.LOG_INPUT, "ShotDisplayDialog onClick " + view.toString() );
       hide();
       switch (view.getId()) {
-        case R.id.button_ok:
+        case R.id.btn_ok:
           setParent();
           break;
-        case R.id.button_back:
+        case R.id.btn_cancel:
           /* nothing */
           break;
         // case R.id.button_mode_refresh:

@@ -754,8 +754,10 @@ class DataHelper extends DataSetObservable
 
   private void handleDiskIOError( SQLiteDiskIOException e )
   {
-    Log.e("DistoX", "DB disk error " + e.getMessage() );
-    TopoDroidApp.mActivity.runOnUiThread( new Runnable() { public void run() { TDToast.makeBad( R.string.disk_io_error ); } } );
+    Log.e( "DistoX", "DB disk error " + e.getMessage() );
+    if ( TopoDroidApp.mActivity != null ) {
+      TopoDroidApp.mActivity.runOnUiThread( new Runnable() { public void run() { TDToast.makeBad( R.string.disk_io_error ); } } );
+    }
   }
 
   // --------------------------------------------------------------------

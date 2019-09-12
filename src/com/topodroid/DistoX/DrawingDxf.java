@@ -1127,7 +1127,7 @@ class DrawingDxf
           for ( DrawingStationName st : plot.getStations() ) { // auto-stations
             handle = toDxf( pw6, handle, st, scale, xoff+1.0f, yoff-1.0f );
 	    float len = 2.0f + st.getName().length() * 5.0f; // FIXME fonts ?
-            handle = printLine( pw6,scale,handle,"STATION", xoff+st.cx, yoff-st.cy, xoff+st.cx+len, yoff-st.cy );
+            handle = printLine( pw6,scale,handle,"STATION", xoff+st.cx, -(yoff+st.cy), xoff+st.cx+len, -(yoff+st.cy) );
           }
           out.write( sw6.getBuffer().toString() );
           out.flush();

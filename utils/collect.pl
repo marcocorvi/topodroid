@@ -126,9 +126,17 @@ manual15
 # manual16,
 );
 
+@month = qw( Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec );
+($sec, $min, $hour, $mday, $mon, $year, $wday, $yday, $isdst ) = localtime();
+$year += 1900;
+
 foreach $i (@html) {
   open( DAT, "$i.htm" );
   while ( $line = <DAT> ) {
+    if ( $line =~ /<!-- NOW -->/ ) {
+      print OUT "$mday  $month[$mon], $year <br>";
+      next;
+    }
     if ( $line =~ /<html>/ ) {
       print OUT "<a name=\"$i\" />\n";
     } elsif ( $line =~ /<\/html>/ ) {

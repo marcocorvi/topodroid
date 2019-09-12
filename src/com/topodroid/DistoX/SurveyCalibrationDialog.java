@@ -35,8 +35,8 @@ class SurveyCalibrationDialog extends MyDialog
   private EditText mETlength;
   private EditText mETazimuth;
   private EditText mETclino;
-  private Button mBTok;
-  // private Button mBTback;
+  // private Button mBTsave;
+  // private Button mBTcancel;
   private CheckBox mCBlrud;
 
   // private final TopoDroidApp mApp;
@@ -65,37 +65,36 @@ class SurveyCalibrationDialog extends MyDialog
     mCBlrud   = (CheckBox) findViewById( R.id.cb_lrud );
     mCBlrud.setChecked( ManualCalibration.mLRUD );
 
-    mBTok = (Button) findViewById( R.id.button_ok );
-    mBTok.setOnClickListener( this );
-    // mBTback = (Button) findViewById( R.id.button_back );
-    // mBTback.setOnClickListener( this );
-    ( (Button) findViewById( R.id.button_back ) ).setOnClickListener( this );
+    ( (Button) findViewById( R.id.btn_save ) ).setOnClickListener( this );
+    ( (Button) findViewById( R.id.btn_cancel ) ).setOnClickListener( this );
   }
 
   @Override
   public void onClick(View view)
   {
-    Button b = (Button)view;
-    if ( b == mBTok ) {
-      if ( mETlength.getText() != null ) {
-        try {
-          ManualCalibration.mLength = Float.parseFloat( mETlength.getText().toString() );
-        } catch ( NumberFormatException e ) { }
-      }
-      if ( mETazimuth.getText() != null ) {
-        try {
-          ManualCalibration.mAzimuth = Float.parseFloat( mETazimuth.getText().toString() );
-        } catch ( NumberFormatException e ) { }
-      }
-      if ( mETclino.getText() != null ) {
-        try {
-          ManualCalibration.mClino = Float.parseFloat( mETclino.getText().toString() );
-        } catch ( NumberFormatException e ) { }
-      }
-      ManualCalibration.mLRUD = mCBlrud.isChecked();
-
-    // } else if ( b == mBTback ) {
-    //   /* nothing */
+    hide();
+    switch (view.getId()) {
+      case R.id.btn_save:
+        if ( mETlength.getText() != null ) {
+          try {
+            ManualCalibration.mLength = Float.parseFloat( mETlength.getText().toString() );
+          } catch ( NumberFormatException e ) { }
+        }
+        if ( mETazimuth.getText() != null ) {
+          try {
+            ManualCalibration.mAzimuth = Float.parseFloat( mETazimuth.getText().toString() );
+          } catch ( NumberFormatException e ) { }
+        }
+        if ( mETclino.getText() != null ) {
+          try {
+            ManualCalibration.mClino = Float.parseFloat( mETclino.getText().toString() );
+          } catch ( NumberFormatException e ) { }
+        }
+        ManualCalibration.mLRUD = mCBlrud.isChecked();
+        break;
+      // case R.id.btn_cancel:
+      //   /* nothing */
+      //   break;
     }
     dismiss();
   }
