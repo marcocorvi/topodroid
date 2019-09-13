@@ -6,6 +6,7 @@ cd tmp_pdf
 /usr/bin/perl ../utils/collect.pl
 # wkhtmltopdf ./tot.htm ../manual.pdf
 lowriter --headless --convert-to pdf tot.htm
-mv tot.pdf ../manual.pdf
+mv tot.pdf ../TDmanual.pdf
 cd -
 rm -rf tmp_pdf
+echo -n "\nCreated TDManual.pdf\nTo update git version rename it to manual.pdf\n"

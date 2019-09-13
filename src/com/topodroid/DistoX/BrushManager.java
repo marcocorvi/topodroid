@@ -327,4 +327,36 @@ class BrushManager
     if ( referencePaint != null )           referencePaint.setTextSize( TDSetting.mStationSize );
   }
 
+  // UNUSED
+  // static SymbolsPalette preparePalette()
+  // {
+  //   SymbolsPalette palette = new SymbolsPalette();
+  //   // populate local palette with default symbols
+  //   palette.addPointFilename("user"); // make sure local palette contains "user" symnbols
+  //   palette.addLineFilename("user");
+  //   palette.addAreaFilename("user");
+  //   SymbolPointLibrary points = mPointLib;
+  //   if ( points != null ) {
+  //     for ( Symbol p : points.getSymbols() ) if ( p.isEnabled() ) {
+  //       String fname = p.getFilename();
+  //       if ( ! fname.equals("user") ) palette.addPointFilename( fname );
+  //     }
+  //   }
+  //   SymbolLineLibrary lines = mLineLib;
+  //   if ( lines != null ) {
+  //     for ( Symbol p : lines.getSymbols() ) if ( p.isEnabled() ) {
+  //       String fname = p.getFilename();
+  //       if ( ! fname.equals("user") ) palette.addLineFilename( fname );
+  //     }
+  //   }
+  //   SymbolAreaLibrary areas = mAreaLib;
+  //   if ( areas != null ) {
+  //     for ( Symbol p : areas.getSymbols() ) if ( p.isEnabled() ) {
+  //       String fname = p.getFilename();
+  //       if ( ! fname.equals("user") ) palette.addAreaFilename( fname );
+  //     }
+  //   }
+  //   return palette;
+  // }
+
 }

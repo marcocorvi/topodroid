@@ -699,28 +699,6 @@ class DrawingSurface extends SurfaceView
     return mCommandManager3;
   }
 
-  private SymbolsPalette preparePalette()
-  {
-    SymbolsPalette palette = new SymbolsPalette();
-    // populate local palette with default symbols
-    palette.addPointFilename("user"); // make sure local palette contains "user" symnbols
-    palette.addLineFilename("user");
-    palette.addAreaFilename("user");
-    for ( Symbol p : BrushManager.mPointLib.getSymbols() ) if ( p.isEnabled() ) {
-      String fname = p.getFilename();
-      if ( ! fname.equals("user") ) palette.addPointFilename( fname );
-    }
-    for ( Symbol p : BrushManager.mLineLib.getSymbols() ) if ( p.isEnabled() ) {
-      String fname = p.getFilename();
-      if ( ! fname.equals("user") ) palette.addLineFilename( fname );
-    }
-    for ( Symbol p : BrushManager.mAreaLib.getSymbols() ) if ( p.isEnabled() ) {
-      String fname = p.getFilename();
-      if ( ! fname.equals("user") ) palette.addAreaFilename( fname );
-    }
-    return palette;
-  }
-
   // -------------------------------------------------------------------
   // LOAD
 
@@ -728,7 +706,7 @@ class DrawingSurface extends SurfaceView
   // @pre th2 != null
   // boolean addloadTherion( String th2, float xdelta, float ydelta, SymbolsPalette missingSymbols )
   // {
-  //   SymbolsPalette localPalette = preparePalette();
+  //   SymbolsPalette localPalette = BrushManager.preparePalette();
   //   if ( (new File(th2)).exists() ) {
   //     return DrawingIO.doLoadTherion( this, th2, xdelta, ydelta, missingSymbols, localPalette );
   //   }
@@ -738,7 +716,7 @@ class DrawingSurface extends SurfaceView
   // @note th21 can be null
   // boolean modeloadTherion( String th21, SymbolsPalette missingSymbols )
   // {
-  //   SymbolsPalette localPalette = preparePalette();
+  //   SymbolsPalette localPalette = BrushManager.preparePalette();
   //   if ( missingSymbols != null ) missingSymbols.resetSymbolLists();
   //   return DrawingIO.doLoadTherion( this, th21, 0, 0, missingSymbols, localPalette );
   // }
@@ -749,7 +727,7 @@ class DrawingSurface extends SurfaceView
     /* SymbolsPalette missingSymbols, */ String plotName )
   {
     boolean ret = false;
-    // SymbolsPalette localPalette = preparePalette();
+    // SymbolsPalette localPalette = BrushManager.preparePalette();
     if ( (new File(tdr)).exists() ) {
       ret = DrawingIO.doLoadDataStream( this, tdr, xdelta, ydelta, /* missingSymbols, localPalette, */ null, false, plotName );
     }
@@ -760,7 +738,7 @@ class DrawingSurface extends SurfaceView
   boolean modeloadDataStream( String tdr1 /*, SymbolsPalette missingSymbols */ )
   {
     boolean ret = false;
-    // SymbolsPalette localPalette = preparePalette();
+    // SymbolsPalette localPalette = BrushManager.preparePalette();
     // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.resetSymbolLists();
     if ( tdr1 != null ) {
       if ( (new File( tdr1 )).exists() ) {
