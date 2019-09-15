@@ -32,12 +32,14 @@ class CalibCBlock
   long my;
   long mz;
   long  mGroup;
-  float mBearing;  // computed compass
-  float mClino;    // computed clino
+  float mBearing;  // computed compass [degrees]
+  float mClino;    // computed clino [degrees]
   float mRoll;     // computed roll
   float mError;    // error in the calibration algo associated to this data
   long mStatus;
-  boolean mFarness; // farness from reference item (previous item of a group)
+  private boolean mFarness; // farness from reference item (previous item of a group)
+  // float   mFarCosine;  // cos(angle) of farness (default 0 is ok)
+  private boolean mOffGroup;
 
   boolean isSaturated()
   { 
@@ -49,12 +51,17 @@ class CalibCBlock
     return ( gx == 0 && gy == 0 && gz == 0 );
   }
 
-  boolean isFar() { return mFarness; }
+  void setOffGroup( boolean b ) { mOffGroup = b; }
+  boolean isOffGroup() { return mOffGroup; }
 
-  void computeFarness( CalibCBlock ref, float thr )
-  {
-    mFarness = isFarFrom( ref.mBearing, ref.mClino, thr );
-  }
+  void setFarness( boolean b ) { mFarness = b; }
+  boolean isFar() { return mFarness; }
+  // float   getFarCosine() { return mFarCosine; }
+
+  // void computeFarness( CalibCBlock ref, float thr )
+  // {
+  //   mFarness = isFarFrom( ref.mBearing, ref.mClino, thr );
+  // }
 
   CalibCBlock()
   {
@@ -84,8 +91,8 @@ class CalibCBlock
     Vector v2 = new Vector( (float)Math.cos(c) * (float)Math.cos(b), 
                             (float)Math.cos(c) * (float)Math.sin(b),
                             (float)Math.sin(c) );
-    float x = v1.dot(v2);
-    return x < thr; // 0.70: approx 45 degrees
+    float mFarCosine = v1.dot(v2);
+    return mFarCosine < thr; // 0.70: approx 45 degrees
   }
 
   void setId( long id, long cid )

@@ -84,6 +84,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="calib_no_name">The name is mandatory</string>
     <string name="calib_gm_policy">Policy</string>
     <string name="calib_gm_undelete">Undelete calibration data?</string>
+    <string name="calib_offgroup_data">Possibly %1$d off-group data</string>
     <string name="calib_saved">Saved calibration</string>
     <string name="calib_updated">Updated calibration</string>
     <string name="calib_compute_groups">Computing calibration data groups &#8230;</string>

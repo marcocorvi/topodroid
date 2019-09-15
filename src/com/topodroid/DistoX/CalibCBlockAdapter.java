@@ -67,7 +67,7 @@ class CalibCBlockAdapter extends ArrayAdapter< CalibCBlock >
         tw.setBackgroundColor( TDColor.DARK_GRAY );
       } else if ( b.mError > TDMath.DEG2RAD ) { // 1 degree
         tw.setBackgroundColor( TDColor.MID_RED );
-      } else if ( b.isFar() ) {
+      } else if ( b.isFar() || b.isOffGroup() ) {
         tw.setBackgroundColor( TDColor.DARK_GREEN );
       } else {
         tw.setBackgroundColor( TDColor.BLACK );

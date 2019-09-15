@@ -11,11 +11,11 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import java.util.List;
 import java.util.Set;
 import java.util.ArrayList;
-
-// import android.util.Log;
 
 class DistoXStationName
 {
@@ -79,33 +79,36 @@ class DistoXStationName
 
   static String incrementName( String name, Set<String> set )
   {
+    String n = name;
     do {
-      name = incrementName( name ); 
-    } while ( set.contains( name ) );
-    return name;
+      n = incrementName( n ); 
+    } while ( set.contains( n ) );
+    return n;
   }
 
   static String incrementName( String name, List<DBlock> list )
   {
+    String n = name;
     do {
-      name = incrementName( name ); 
-    } while ( listHasName( list, name ) );
-    return name;
+      n = incrementName( n ); 
+    } while ( listHasName( list, n ) );
+    return n;
   }
 
   static String incrementName( String name, ArrayList<String> sts )
   {
+    String n = name;
     do {
-      name = incrementName( name ); 
-    } while ( orderContains( sts, name ) );
-    return name;
+      n = incrementName( n ); 
+    } while ( orderContains( sts, n ) );
+    return n;
   }
 
 
   static String incrementName( String name )
   {
     // if name is numeric
-    // Log.v( TopoDroidApp.TAG, "incrementing " + name );
+    // Log.v( "DistoX-SN", "incrementing " + name );
 
     if ( name != null /* && name.length() > 0 */ ) {
       int len = name.length();
@@ -115,8 +118,7 @@ class DistoXStationName
         if ( k >= 10 && k < 35 ) {
           k -= 9; // - 10 + 1
           // TDLog.Log( TDLog.LOG_NAME, "not numeric " + k );
-          return name.substring( 0, len - 1 ) + 
-           ( Character.isLowerCase( ch )? lc[k] : uc[k] );
+          return name.substring( 0, len - 1 ) + ( Character.isLowerCase( ch )? lc[k] : uc[k] );
         } else if ( k >= 0 && k < 10 ) {
           int n = 0;
           int s = 1;
@@ -133,10 +135,12 @@ class DistoXStationName
             return name.substring( 0, len ) + Integer.toString( n+1 );
           } 
           return Integer.toString( n+1 );
+        } else {
+          return name + 1;
         }
       }
     }
-    return "";
+    return ""; // default is the empty string
   }
 
   // used by SketchNewShotDialog

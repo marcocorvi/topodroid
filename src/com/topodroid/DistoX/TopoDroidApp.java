@@ -905,9 +905,9 @@ public class TopoDroidApp extends Application
   {
     mManifestDbVersion = 0;
     String line;
-    if ( mData.hasSurveyName( surveyname ) ) {
-      return -1;
-    }
+    // if ( mData.hasSurveyName( surveyname ) ) {
+    //   return -1;
+    // }
     try {
       FileReader fr = new FileReader( filename );
       BufferedReader br = new BufferedReader( fr );
@@ -951,8 +951,11 @@ public class TopoDroidApp extends Application
                           + DataHelper.DATABASE_VERSION_MIN + "-" + DataHelper.DATABASE_VERSION );
         return -3;
       }
-      line = br.readLine().trim();
-      if ( ! line.equals( surveyname ) ) return -4;
+      surveyname = br.readLine().trim();
+      // if ( ! line.equals( surveyname ) ) return -4;
+      if ( mData.hasSurveyName( surveyname ) ) {
+        return -1;
+      }
       fr.close();
     } catch ( NumberFormatException e ) {
     } catch ( FileNotFoundException e ) {

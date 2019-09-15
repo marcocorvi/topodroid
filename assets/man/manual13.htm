@@ -27,14 +27,16 @@ TopoDroid imports survey data from the following formats:
 <ul>
 <li>Compass</li>
 <li>Survex</li>
-<li>Therion</li>
+<li>Therion. Only data</li>
 <li>VisualTopo</li>
 <li>CaveSniper</li>
 <li>PocketTopo, including sketches</li>
 </ul>
 
-A file import fails if a survey with the same name is already in TopoDroid.<br>
-Zip import fails if the zip has a database version that is too old or is newer than the one in TopoDroid.<br>
+A file import fails if a survey with the same name is already in TopoDroid.<br><p>
+
+Zip import fails if the zip has a database version that is too old or is newer than the one in TopoDroid.<br><p>
+
 On import from file formats that have LRUD values, these are converted to x-splays (shown in green).<br><p>
 
 
@@ -42,7 +44,7 @@ On import from file formats that have LRUD values, these are converted to x-spla
 
 Note. Fixed points are exported with coordinates latitude-longitude [decimal degrees] and altitude above
 mean sea level [m].<br>
-H/V-splays are treated normally in the exports.<br><p>
+H/V-splays are treated as normal splays in the exports.<br><p>
 
 <b>Therion</b> (.th)<br>
 Survey data are exported in <i>Therion</i> format, using the data "normal" form.<br>

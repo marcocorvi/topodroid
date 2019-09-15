@@ -11,9 +11,9 @@
  */
 package com.topodroid.DistoX;
 
-import java.util.List;
+import android.util.Log;
 
-// import android.util.Log;
+import java.util.List;
 
 class CalibCoverage
 {
@@ -44,13 +44,14 @@ class CalibCoverage
   private Direction[] angles;
   private float mCoverage;
 
-  CalibCoverage( List< CalibCBlock > list )
+  CalibCoverage( )
   {
     clino_angles = new int[ DIM_Y ];
     t_size       = new int[ DIM_Y ];
     t_offset     = new int[ DIM_Y ];
     setup();
-    mCoverage = evalCoverage( list,  null );
+    // mCoverage = evalCoverage( list,  null );
+    mCoverage = 0; // do not compute immediately
   }
 
   float getCoverage() { return mCoverage; }
@@ -116,8 +117,88 @@ class CalibCoverage
     }
   }
 
+  // @param clist    list of calib shots
+  // @pre shots bearing and clino must have been precomputed
+  // @return array distribution of between shots errors
+  // static float[] evalDeviations( List<CalibCBlock> clist )
+  // {
+  //   float[] error = new float[ 181 ]; // angle deviations among calib shots of a group
+  //   for ( int k = 0; k < 181; ++ k ) error[k] = 0;
+  //   int sz = clist.size();
+  //   int cnt = 0;
+  //   for ( int i1 = 0; i1 < sz; ++ i1 ) {
+  //     CalibCBlock b1 = clist.get( i1 );
+  //     if ( b1.mGroup == 0 ) continue;
+  //     float compass = b1.mBearing * TDMath.DEG2RAD;
+  //     float clino   = b1.mClino   * TDMath.DEG2RAD;
+  //     float h1 = TDMath.cos( clino );
+  //     float z1 = TDMath.sin( clino );
+  //     float n1 = h1 * TDMath.cos( compass );
+  //     float e1 = h1 * TDMath.sin( compass );
+  //     for ( int i2 = i1+1; i2 < sz; ++i2 ) {
+  //       CalibCBlock b2 = clist.get( i2 );
+  //       if ( b2.mGroup == 0 ) continue;
+  //       if ( b2.mGroup != b1.mGroup ) break;
+  //       // compute difference
+  //       compass = b2.mBearing * TDMath.DEG2RAD;
+  //       clino   = b2.mClino   * TDMath.DEG2RAD;
+  //       h1 = TDMath.cos( clino );
+  //       int a = (int)(TDMath.acosd( z1 * TDMath.sin( clino ) + n1 * h1 * TDMath.cos( compass ) + e1 * h1 * TDMath.sin( compass ) ) );
+  //       if ( a > 180 ) a = 180;
+  //       ++ error[a];
+  //       ++ cnt;
+  //     }
+  //   }
+  //   Log.v("DistoX-COVER", "size " + sz + " count " + cnt );
+  //   return error;
+  // }
+
+  // @param clist    list of calib shots
+  // @param thr      deviation threshold
+  // @return number of shots above threshold
+  // static int evalShotDeviations( List< CalibCBlock > clist, float thr )
+  // {
+  //   int sz = clist.size();
+  //   int ret = 0;
+  //   long old_grp = 0;
+  //   int i0 = 0;
+  //   for ( int i1 = 0; i1 < sz; ++ i1 ) {
+  //     CalibCBlock b1 = clist.get( i1 );
+  //     if ( b1.mGroup == 0 ) continue;
+  //     if ( old_grp != b1.mGroup ) {
+  //       i0 = i1;
+  //       old_grp = b1.mGroup;
+  //     }
+  //     float compass = b1.mBearing * TDMath.DEG2RAD;
+  //     float clino   = b1.mClino   * TDMath.DEG2RAD;
+  //     float h1 = TDMath.cos( clino );
+  //     float z1 = TDMath.sin( clino );
+  //     float n1 = h1 * TDMath.cos( compass );
+  //     float e1 = h1 * TDMath.sin( compass );
+  //     int cnt = 0;
+  //     float dev = 0;
+  //     for ( int i2 = i0; i2 < sz; ++i2 ) {
+  //       if ( i2 == i1 ) continue;
+  //       CalibCBlock b2 = clist.get( i2 );
+  //       if ( b2.mGroup == 0 ) continue;
+  //       if ( b2.mGroup != b1.mGroup ) break;
+  //       // compute difference
+  //       compass = b2.mBearing * TDMath.DEG2RAD;
+  //       clino   = b2.mClino   * TDMath.DEG2RAD;
+  //       h1 = TDMath.cos( clino );
+  //       dev += TDMath.acosd( z1 * TDMath.sin( clino ) + n1 * h1 * TDMath.cos( compass ) + e1 * h1 * TDMath.sin( compass ) );
+  //       ++ cnt;
+  //     }
+  //     b1.setOffGroup( ( cnt > 0 && dev/cnt > thr ) );
+  //     if ( b1.isOffGroup() ) ++ ret;
+  //   }
+  //   Log.v("DistoX-COVER", "off-group " + ret );
+  //   return ret;
+  // }
+
   float evalCoverage( List<CalibCBlock> clist, CalibAlgo transform )
   {
+
     for (int j=0; j<t_dim; ++j ) angles[j].mValue = 1.0f;
 
     long old_grp = 0;
@@ -133,7 +214,7 @@ class CalibCoverage
       }
       float compass = b.mBearing * TDMath.DEG2RAD;
       float clino   = b.mClino   * TDMath.DEG2RAD;
-      if ( b.mGroup == old_grp ) {
+      if ( b.mGroup == old_grp ) { // calib shot adds to the group
         if ( cnt_avg > 0 && Math.abs( compass - compass_avg / cnt_avg ) > 1.5f * TDMath.M_PI ) {
           if ( compass > TDMath.M_PI ) {
             compass -= TDMath.M_2PI; // average around 0
@@ -144,7 +225,7 @@ class CalibCoverage
         clino_avg   += clino;
         compass_avg += compass;
         cnt_avg     ++;
-      } else {
+      } else { // new group: update directions
         if ( cnt_avg > 0 ) {
           compass_avg /= cnt_avg;
           clino_avg   /= cnt_avg;

@@ -252,6 +252,7 @@ class Archiver
       zip.close();
       TDLog.Log( TDLog.LOG_ZIP, "un-archive manifest " + ok_manifest );
       if ( ok_manifest < 0 ) return ok_manifest;
+      TDLog.Log( TDLog.LOG_ZIP, "un-archive survey " + surveyname );
 
       // TDLog.Log( TDLog.LOG_IO, "unzip file " + filename );
       FileInputStream fis = new FileInputStream( filename );

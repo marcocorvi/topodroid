@@ -175,7 +175,6 @@ public class GMActivity extends Activity
 
   void setAlgo( int algo ) { mAlgo = algo; }
 
-
   /** called by CalibComputer Task
    * @return nr of iterations (neg. error)
    * note run on an AsyncTask
@@ -195,6 +194,18 @@ public class GMActivity extends Activity
     if ( ng < 16 ) {
       return -3;
     }
+    // int off_group = CalibCoverage.evalShotDeviations( list, TDSetting.mGroupDistance );
+    // if ( off_group > 0 ) {
+    //   updateGMList( list );
+    //   TDToast.makeBad( String.format( getResources().getString( R.string.calib_offgroup_data ), off_group ) );
+    // }
+    return doComputeCalib( list );
+  }
+
+
+  private int doComputeCalib( List<CalibCBlock> list )
+  {    
+    long cid = TDInstance.cid;
     switch ( mAlgo ) {
       case CalibInfo.ALGO_NON_LINEAR:
         mCalibration = new CalibAlgoBH( 0, true );
@@ -622,20 +633,58 @@ public class GMActivity extends Activity
       TDToast.makeBad( R.string.no_gms );
       return;
     }
-    float thr = TDMath.cosd( TDSetting.mGroupDistance );
+    // float thr = TDMath.cosd( TDSetting.mGroupDistance );
+    float thr = TDSetting.mGroupDistance;
     long group = 0;
+    int i0 = 0;
     CalibCBlock ref = null;
-    for ( CalibCBlock item : list ) {
-      if ( item.isSaturated() ) ++ n_saturated;
+    int sz = list.size();
+    for ( int i1 = 0; i1 < sz; ++i1 ) {
+      CalibCBlock b1 = list.get( i1 );
+      if ( b1.isSaturated() ) ++ n_saturated;
 
-      item.computeBearingAndClino();
-      if ( item.mGroup > 0 && item.mGroup != group ) {
-        group = item.mGroup;
-	ref   = item;
-      } else if ( ref != null ) {
-        item.computeFarness( ref, thr );
-      }	
-      mDataAdapter.add( item );
+      if ( b1.mGroup > 0 ) {
+        if ( b1.mGroup != group ) {
+          group = b1.mGroup;
+	  ref   = b1;
+          i0    = i1;
+          b1.computeBearingAndClino();
+          for (int i2 = i1+1; i2 < sz; ++i2 ) {
+            CalibCBlock b2 = list.get( i2 );
+            if ( b2.mGroup == 0 ) continue;
+            if ( b2.mGroup != group ) break;
+            b2.computeBearingAndClino();
+          }
+        }
+        float compass = b1.mBearing * TDMath.DEG2RAD;
+        float clino   = b1.mClino   * TDMath.DEG2RAD;
+        float h1 = TDMath.cos( clino );
+        float z1 = TDMath.sin( clino );
+        float n1 = h1 * TDMath.cos( compass );
+        float e1 = h1 * TDMath.sin( compass );
+        int cnt = 0;
+        float dev = 0;
+        for (int i2=i0; i2<sz; ++ i2 ) {
+          if ( i2 == i1 ) continue;
+          CalibCBlock b2 = list.get( i2 );
+          if ( b2.mGroup == 0 ) continue;
+          if ( b2.mGroup != group ) break;
+          compass = b2.mBearing * TDMath.DEG2RAD;
+          clino   = b2.mClino   * TDMath.DEG2RAD;
+          h1 = TDMath.cos( clino );
+          dev += TDMath.acosd( z1 * TDMath.sin( clino ) + n1 * h1 * TDMath.cos( compass ) + e1 * h1 * TDMath.sin( compass ) );
+          ++ cnt;
+        }
+        b1.setFarness( cnt > 0 && dev/cnt > thr );
+      } else {
+        b1.computeBearingAndClino();
+        b1.setFarness( false );
+      } 
+          
+      // } else if ( ref != null ) {
+      //   item.computeFarness( ref, thr );
+      // }	
+      mDataAdapter.add( b1 );
     }
     // mList.setAdapter( mDataAdapter );
     if ( n_saturated > 0 ) {
@@ -973,8 +1022,8 @@ public class GMActivity extends Activity
     if ( warning == null ) {
       // check coverage
       List< CalibCBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, 0, false ); // false: skip negative-grp
-      CalibCoverage coverage = new CalibCoverage( list );
-      float cover_value = coverage.getCoverage();
+      CalibCoverage coverage = new CalibCoverage( );
+      float cover_value = coverage.evalCoverage( list, null );
       if ( cover_value < 95 ) warning = String.format( getResources().getString( R.string.coverage_warning ), 95 );
     }
     if ( warning == null ) {

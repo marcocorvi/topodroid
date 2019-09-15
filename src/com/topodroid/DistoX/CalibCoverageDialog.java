@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import java.util.List;
 import java.util.Locale;
 
@@ -28,8 +30,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.View;
 
-// import android.util.Log;
-
 class CalibCoverageDialog extends MyDialog
                           implements View.OnClickListener
 {
@@ -40,11 +40,12 @@ class CalibCoverageDialog extends MyDialog
   private static final int DELTA_W     =  20;
 
   private float mCoverageValue;
+  private float[] mDeviations;
 
   private Bitmap mBitmapUp;
   private Bitmap mBitmapDown;
-  private List<CalibCBlock> mList;
-  private CalibAlgo mCalib; // calibration algorithm
+  private List<CalibCBlock> mList;  // list of calibration shots
+  private CalibAlgo mCalib;         // calibration algorithm
 
   private TextView mText;
   private ImageView mImageUp;
@@ -63,10 +64,16 @@ class CalibCoverageDialog extends MyDialog
     
     mCalib = cal;
     mList  = list;
-    mCoverage = new CalibCoverage( list );
+    mCoverage = new CalibCoverage( );
     mBitmapUp   = Bitmap.createBitmap( WIDTH+DELTA_W+1, HEIGHT+1, Bitmap.Config.ARGB_8888 );
     mBitmapDown = Bitmap.createBitmap( WIDTH+DELTA_W+1, HEIGHT+1, Bitmap.Config.ARGB_8888 );
     mCoverageValue = mCoverage.evalCoverage( list,  null );
+    // mDeviations = mCoverage.evalDeviations( list );
+    // for ( int k= 180; k>=0; --k ) {
+    //   if ( mDeviations[k] > 0 ) {
+    //     Log.v("DistoX-COVER", k + " " + mDeviations[k] );
+    //   }
+    // }
 
     fillImage();
   }

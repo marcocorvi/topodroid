@@ -12,8 +12,7 @@
  */
 package com.topodroid.DistoX;
 
-
-// import android.util.Log;
+import android.util.Log;
 
 import java.util.List;
 import java.util.Set;
@@ -42,7 +41,7 @@ class StationNameDefault extends StationName
 
     boolean bs = TDSetting.mDistoXBackshot;
 
-    // Log.v("DistoX", "assign stations after.  size " + list.size() );
+    // Log.v("DistoX-SN", "assign stations after " + list.size() + " " + (sts!=null? sts.size():0) );
     int survey_stations = StationPolicy.mSurveyStations;
     if ( survey_stations <= 0 ) return;
     boolean forward_shots = ( survey_stations == 1 );
@@ -144,6 +143,7 @@ class StationNameDefault extends StationName
   @Override
   void assignStations( List<DBlock> list, Set<String> sts )
   { 
+    // Log.v("DistoX-SN", "assign stations " + list.size() + " " + (sts!=null? sts.size():0) );
     if ( TDSetting.mDistoXBackshot ) {
       assignStationsBackshot( list, sts );
       return;
@@ -158,7 +158,7 @@ class StationNameDefault extends StationName
     DBlock prev = null;
     String from = ( forward_shots )? DistoXStationName.mInitialStation  // next FROM station
                                    : DistoXStationName.mSecondStation;
-    String to   = ( forward_shots )? DistoXStationName.mSecondStation   // nect TO station
+    String to   = ( forward_shots )? DistoXStationName.mSecondStation   // next TO station
                                    : DistoXStationName.mInitialStation;
     String station = ( mCurrentStationName != null )? mCurrentStationName
                    : (shot_after_splay ? from : "");  // splays station
@@ -207,12 +207,34 @@ class StationNameDefault extends StationName
                                                              //                 this-shot-from if splays after shot
                 from = to;                                   // next-shot-from = this-shot-to
                 to   = DistoXStationName.incrementName( to, sts );  // next-shot-to   = increment next-shot-from
+                // {
+                //   try {
+                //     int i1 = Integer.parseInt( from );
+                //     int i2 = Integer.parseInt( to );
+                //     if ( i2-i1 != 1 ) {
+                //       StringBuilder sb = new StringBuilder();
+                //       for ( String st : sts ) sb.append(st + " " );
+                //       TDLog.Error( from + "-" + to + " blk " + blk.mId + " set " + sb.toString() );
+                //     }
+                //   } catch ( NumberFormatException e ) { }
+                // }
                 // TDLog.Log( TDLog.LOG_DATA, "station [1] " + station + " FROM " + from + " TO " + to );
               } else { // backward_shots
                 to   = from;                                     // next-shot-to   = this-shot-from
                 from = DistoXStationName.incrementName( from, sts ); // next-shot-from = increment this-shot-from
                 station = shot_after_splay ? from : to;          // splay-station  = next-shot-from if splay before shot
                                                                  //                = this-shot-from if splay after shot
+                // {
+                //   try {
+                //     int i1 = Integer.parseInt( to );
+                //     int i2 = Integer.parseInt( from );
+                //     if ( i2-i1 != 1 ) {
+                //       StringBuilder sb = new StringBuilder();
+                //       for ( String st : sts ) sb.append(st + " " );
+                //       TDLog.Error( from + "-" + to + " blk " + blk.mId + " set " + sb.toString() );
+                //     }
+                //   } catch ( NumberFormatException e ) { }
+                // }
                 // TDLog.Log( TDLog.LOG_DATA, "station [2] " + station + " FROM " + from + " TO " + to );
               }
             }
@@ -231,6 +253,17 @@ class StationNameDefault extends StationName
           if ( forward_shots ) {  // : ..., 0-1, 1-2 ==> from=(2) to=Next(2)=3 ie 2-3
             from = blk.mTo;
             to   = DistoXStationName.incrementName( from, sts );
+            // {
+            //   try {
+            //     int i1 = Integer.parseInt( from );
+            //     int i2 = Integer.parseInt( to );
+            //     if ( i2-i1 != 1 ) {
+            //       StringBuilder sb = new StringBuilder();
+            //       for ( String st : sts ) sb.append(st + " " );
+            //       TDLog.Error( from + "-" + to + " blk " + blk.mId + " set " + sb.toString() );
+            //     }
+            //   } catch ( NumberFormatException e ) { }
+            // }
             if ( mCurrentStationName == null ) {
               station = shot_after_splay ? blk.mTo    // 1,   1, 1-2, [ 2, 2, ..., 2-3 ] ...
                                          : blk.mFrom; // 1-2, 1, 1,   [ 2-3, 2, 2, ... ] ...
@@ -238,6 +271,17 @@ class StationNameDefault extends StationName
           } else { // backward shots: ..., 1-0, 2-1 ==> from=Next(2)=3 to=2 ie 3-2
             to      = blk.mFrom;
             from    = DistoXStationName.incrementName( to, sts ); // FIXME it was from
+            // {
+            //   try {
+            //     int i1 = Integer.parseInt( to );
+            //     int i2 = Integer.parseInt( from );
+            //     if ( i2-i1 != 1 ) {
+            //       StringBuilder sb = new StringBuilder();
+            //       for ( String st : sts ) sb.append(st + " " );
+            //       TDLog.Error( from + "-" + to + " blk " + blk.mId + " set " + sb.toString() );
+            //     }
+            //   } catch ( NumberFormatException e ) { }
+            // }
 	    // station must be set even there is a "currentStation"
             station = shot_after_splay ? from       // 2,   2, 2, 2-1, [ 3, 3, ..., 3-2 ]  ...
                                        : blk.mFrom; // 2-1, 2, 2, 2,   [ 3-2, 3, 3, ... 3 ] ...
