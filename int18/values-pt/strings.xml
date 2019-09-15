@@ -504,7 +504,7 @@
     <string name="wait_scan">Procurando: espere &#8230;</string>
     <string name="write_failed">Falha ao gravar na DistoX</string>
     <string name="write_ok">Calibração gravada na DistoX</string>
-    <string name="zip_saved">Salvo </string>
+    <string name="zip_saved">Salvo</string>
     <string name="zip_failed">Falha na compressão da topo</string>
     <string name="unzip_fail">Falha na decompressão da topo</string>
     <string name="unzip_fail_sqlite">SQL falhou: apague a topo e tente novamente</string>
@@ -1238,8 +1238,10 @@
   <string name="pref_th2_xvi_summary">Insderir imagem xvi no arquivo th2</string>
   <string name="pref_autoStations_title">Bases Therion</string>
   <string name="pref_autoStations_summary">Incluir automaticamente bases aos arquivos para o Therion</string>
-  <string name="pref_auto_xsections_title">Cirtes X automáticos</string>
+  <string name="pref_auto_xsections_title">Cortes X automáticos</string>
   <string name="pref_auto_xsections_summary">Incluir automaticamente cortes X na exportação de arquivos csx/svg/dxf/xvi</string>
+  <string name="pref_saved_stations_title">Estações salvas</string>
+  <string name="pref_saved_stations_summary">Apresentar estações salvas em laranja</string>
   <string name="pref_loopClosure_title">Fechamento anéis</string>
   <string name="pref_loopClosure_summary">Compensação de erro de fechamento do anel</string>
   <!-- UNUSED string name="pref_splayExtend_title">Estimar extensão medida auxiliar</string -->
