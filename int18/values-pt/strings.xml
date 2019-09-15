@@ -894,7 +894,7 @@
     <string name="title_settings_edit">Configurações de edição do TopoDroid</string>
     <string name="title_settings_device">Configurações de dispositivo do TopoDroid</string>
     <string name="title_settings_calib">Configurações de calibração do TopoDroid</string>
-    <string name="title_settings_geek">Configurações \'geek\' do TopoDroid</string>
+    <string name="title_settings_geek">Configurações GEEK do TopoDroid</string>
     <string name="title_settings_log">Configurações de log do TopoDroid</string>
 
     <string name="title_shift">Deslocar</string>
@@ -928,7 +928,7 @@
 
   <string name="pref_cat_calib">CALIBRAÇÕES</string>
   <string name="pref_cat_device">DISPOSITIVOS</string>
-  <string name="pref_cat_geek">CONFIGURAÇÕES \'GEEK\'</string>
+  <string name="pref_cat_geek">CONFIGURAÇÕES GEEK</string>
   <!-- UNUSED string name="pref_cat_sketch">MODELOS 3D</string -->
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
 
