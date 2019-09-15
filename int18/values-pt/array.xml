@@ -109,7 +109,7 @@
      <item name="normal">Normal</item>
      <item name="advanced">Avançado</item>
      <item name="expert">Especialista</item>
-     <item name="tester">Teste devel</item>
+     <item name="tester">Testador</item>
      <!-- item name="complete">Completo</item -->
   </string-array>
   <string-array name="sizeButtons">
