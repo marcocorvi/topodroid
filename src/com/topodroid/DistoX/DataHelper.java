@@ -15,6 +15,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -35,10 +37,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteDiskIOException;
-
-// import android.widget.Toast;
-
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;

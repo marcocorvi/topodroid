@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -36,7 +38,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 // import android.widget.TextView;
 import android.widget.EditText;
-// import android.widget.Toast;
 
 import android.content.Context;
 import android.content.Intent;
@@ -45,12 +46,10 @@ import android.inputmethodservice.KeyboardView;
 
 import android.net.Uri;
 
-// import android.util.Log;
-
 class FixedImportDialog extends MyDialog
-                               implements OnItemClickListener
-                                        , OnClickListener
-                                        , OnLongClickListener
+                        implements OnItemClickListener
+                        , OnClickListener
+                        , OnLongClickListener
 { 
   static final private String POINTLISTS = Environment.getExternalStorageDirectory().getPath() + "/MobileTopographer/pointlists";
   static final private String POINTLISTS_PRO = Environment.getExternalStorageDirectory().getPath() + "/MobileTopographerPro/pointlists";

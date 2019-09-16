@@ -37,7 +37,7 @@ import android.view.View;
 // import android.view.WindowManager;
 
 class CalibGMDialog extends MyDialog
-                           implements View.OnClickListener
+                    implements View.OnClickListener
 {
   private final GMActivity  mParent;
   private CalibCBlock mBlk;

@@ -37,8 +37,8 @@ class BezierInterpolator
 
   /** computeLeftTangent, computeRightTangent, computeCenterTangent:
    * Approximate unit tangents at endpoints and "center" of digitized curve
-   * d   Digitized points
-   * end Index to "left" end of region 
+   * @param d   Digitized points
+   * @param end Index to "left" end of region 
    */
   private Point2D computeLeftTangent( ArrayList<Point2D> d, int end)
   {
@@ -47,7 +47,10 @@ class BezierInterpolator
     return tHat1;
   }
   
-  /** end  Index to "right" end of region */
+  /**
+   * @param d   Digitized points
+   * @param end Index to "right" end of region 
+   */
   private Point2D computeRightTangent( ArrayList<Point2D> d, int end)
   {
     Point2D tHat2 = d.get(end-1).sub( d.get(end) );
@@ -55,7 +58,10 @@ class BezierInterpolator
     return tHat2;
   }
   
-  /** center  Index to point inside region */
+  /**
+   * @param d       Digitized points
+   * @param center  Index to point inside region
+   */
   private Point2D computeCenterTangent( ArrayList<Point2D> d, int center)
   {
     Point2D V1 = d.get(center-1).sub( d.get(center) );
@@ -177,7 +183,7 @@ class BezierInterpolator
   }
 
   /**  chordLengthParameterize : Assign parameter values to digitized points 
-   *	using relative distances between points.
+   *   using relative distances between points.
    * @param d            Array of digitized points
    * @param first, last  Indices defining region
    */

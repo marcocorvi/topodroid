@@ -22,8 +22,6 @@ import android.app.Dialog;
 import android.view.ViewGroup.LayoutParams;
 // import android.net.Uri;
 
-// import android.widget.Toast;
-
 class TopoDroidAbout extends Dialog
                      // implements OnClickListener
 {

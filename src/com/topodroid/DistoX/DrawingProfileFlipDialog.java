@@ -30,12 +30,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 
-// import android.widget.Toast;
-
 // import android.util.Log;
 
 class DrawingProfileFlipDialog extends MyDialog
-                           implements View.OnClickListener
+                               implements View.OnClickListener
 {
   private final DrawingWindow mParent;
   private CheckBox mCBshots;

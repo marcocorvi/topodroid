@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 import java.util.Iterator;
 
 // import java.io.File;
@@ -38,7 +40,6 @@ import android.widget.Button;
 
 import android.view.View;
 // import android.widget.ListView;
-// import android.widget.Toast;
 import android.inputmethodservice.KeyboardView;
 
 import android.location.Location;
@@ -49,8 +50,6 @@ import android.location.GpsSatellite;
 // import android.location.GpsStatus.Listener;
 
 import android.net.Uri;
-
-// import android.util.Log;
 
 class FixedGpsDialog extends MyDialog
                             implements View.OnClickListener

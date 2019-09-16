@@ -44,8 +44,6 @@ import android.view.KeyEvent;
 // import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.ListView;
-// import android.widget.Toast;
-// import android.app.Dialog;
 // import android.widget.Button;
 import android.view.View;
 // import android.view.View.OnClickListener;

@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 import java.io.File;
 import java.util.Locale;
 // import java.util.List;
@@ -38,9 +40,6 @@ import android.view.KeyEvent;
 
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-// import android.widget.Toast;
-
-// import android.util.Log;
 
 public class CWDActivity extends Activity
                          implements OnItemClickListener

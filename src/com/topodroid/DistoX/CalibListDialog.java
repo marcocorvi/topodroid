@@ -30,9 +30,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
 class CalibListDialog extends MyDialog
-                             implements OnItemClickListener
-                             , View.OnClickListener
-                             // , OnItemLongClickListener
+                      implements OnItemClickListener
+                      , View.OnClickListener
+                      // , OnItemLongClickListener
 {
   private DeviceActivity mParent;
   // private TopoDroidApp mApp; // unused

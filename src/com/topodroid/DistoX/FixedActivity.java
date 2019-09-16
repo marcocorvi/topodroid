@@ -11,12 +11,13 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 // import java.util.regex.Pattern;
 // import java.util.Locale;
 
 // import android.widget.ArrayAdapter;
 
-// import android.app.Dialog;
 import android.os.Bundle;
 
 import android.content.Context;
@@ -35,12 +36,6 @@ import android.view.View;
 // import android.inputmethodservice.KeyboardView;
 
 // import android.net.Uri;
-
-// import android.widget.Toast;
-// import android.util.Log;
-
-// import java.util.Iterator;
-// import java.io.File;
 
 import java.util.List;
 
@@ -63,7 +58,6 @@ import android.widget.AdapterView.OnItemClickListener;
 
 // import android.view.View;
 import android.widget.ListView;
-// import android.widget.Toast;
 // import android.inputmethodservice.KeyboardView;
 
 // import android.location.Location;
@@ -73,11 +67,9 @@ import android.location.LocationManager;
 // import android.location.GpsSatellite;
 // import android.location.GpsStatus.Listener;
 
-// import android.util.Log;
-
 public class FixedActivity extends Activity
                            implements View.OnClickListener
-                                    , OnItemClickListener
+                           , OnItemClickListener
 {
   private Context mContext;
   // private TopoDroidApp mApp; // unused

@@ -20,8 +20,6 @@ import android.os.AsyncTask;
 import android.graphics.Bitmap;
 // import android.graphics.Bitmap.CompressFormat;
 
-// import android.widget.Toast;
-
 class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean> 
 {
     private Bitmap mBitmap;

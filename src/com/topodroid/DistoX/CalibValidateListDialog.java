@@ -31,10 +31,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 // import android.widget.AdapterView.OnItemLongClickListener;
 
-// import android.widget.Toast;
-
 class CalibValidateListDialog extends MyDialog
-                        implements OnItemClickListener
+                              implements OnItemClickListener
 {
   private final GMActivity mParent;
   // private ArrayAdapter<String> mArrayAdapter;

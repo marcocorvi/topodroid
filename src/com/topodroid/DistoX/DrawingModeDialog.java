@@ -26,7 +26,7 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
 class DrawingModeDialog extends MyDialog
-                               implements View.OnClickListener
+                        implements View.OnClickListener
 {
     private CheckBox mCBleg;      // whether to show legs
     private CheckBox mCBsplay;    // whether to show splays

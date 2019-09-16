@@ -26,7 +26,6 @@ import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-// import android.widget.Toast;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -35,7 +34,7 @@ import android.content.Context;
 
 
 public class DeviceList extends Activity
-                                implements OnItemClickListener
+                        implements OnItemClickListener
 { 
   private TopoDroidApp mApp;
 

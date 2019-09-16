@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 // import android.app.Dialog;
 import android.content.Context;
 // import android.content.res.Resources;
@@ -24,7 +26,6 @@ import android.widget.LinearLayout;
 import android.widget.Button;
 import android.widget.EditText;
 // import android.widget.ImageView;
-// import android.widget.Toast;
 
 import android.text.TextWatcher;
 import android.text.Editable;
@@ -34,10 +35,6 @@ import android.graphics.Paint;
 
 import java.util.Locale;
 
-// import android.util.Log;
-
-/**
- */
 class SetupDrawingUnitDialog extends MyDialog
                              implements View.OnClickListener
 {

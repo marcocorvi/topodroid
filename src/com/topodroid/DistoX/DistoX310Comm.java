@@ -25,20 +25,6 @@ import java.util.List;
 import android.os.Handler;
 // import android.os.Message;
 
-// import android.os.Parcelable;
-// import android.os.ParcelUuid;
-// import android.os.AsyncTask;
-
-// import android.bluetooth.BluetoothDevice;
-// import android.bluetooth.BluetoothSocket;
-
-// import android.content.Context;
-// import android.content.Intent;
-// import android.content.IntentFilter;
-// import android.content.BroadcastReceiver;
-
-// import android.database.DataSetObserver;
-
 class DistoX310Comm extends DistoXComm
 {
 

@@ -31,7 +31,8 @@ import android.widget.ArrayAdapter;
 import android.view.View;
 
 class DrawingAreaDialog extends MyDialog
-                               implements View.OnClickListener, AdapterView.OnItemSelectedListener
+                        implements View.OnClickListener
+                        , AdapterView.OnItemSelectedListener
 {
   private final DrawingAreaPath mArea;
   private final DrawingWindow mParent;

@@ -353,6 +353,10 @@ public class TopoDroidApp extends Application
     }
   }
 
+  /**
+   * @param device      device
+   * @param nickname    device nickmane
+   */
   static void setDeviceName( Device device, String nickname )
   {
     if ( device != null /* && device == TDInstance.device */ ) {
@@ -475,6 +479,9 @@ public class TopoDroidApp extends Application
     return info;
   }
 
+  // @param address    device address
+  // @param command
+  // @param head_tail  return array with positions of head and tail
   String readA3HeadTail( String address, byte[] command, int[] head_tail )
   {
     DistoXA3Comm comm = (DistoXA3Comm)mComm;
@@ -901,6 +908,8 @@ public class TopoDroidApp extends Application
   // -2 TopoDroid version mismatch
   // -3 database version mismatch
   // -4 survey name does not match filename
+  //
+  // @note surveyname is modified
   public int checkManifestFile( String filename, String surveyname )
   {
     mManifestDbVersion = 0;

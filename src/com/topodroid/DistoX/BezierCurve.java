@@ -131,8 +131,9 @@ class BezierCurve
   }
 
   /**  findRootNewtonRaphson: Use Newton-Raphson iteration to find better root.
-      P	Digitized point		
-      u	Parameter value for "P"	
+   * @param P	digitized point		
+   * @param u	parameter value for "P"	
+   * @return improved 'u'
    */
   private float findRootNewtonRaphson( Point2D P, float u)
   {

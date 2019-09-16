@@ -22,7 +22,6 @@ import android.graphics.Bitmap;
 // import android.app.Dialog;
 import android.os.Bundle;
 
-// import android.widget.Toast;
 import android.content.Context;
 
 import android.widget.Button;

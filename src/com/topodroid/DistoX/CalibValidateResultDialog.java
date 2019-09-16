@@ -43,9 +43,9 @@ class CalibValidateResultDialog extends MyDialog
   private final float[] errors2;
 
   CalibValidateResultDialog( Context context,
-                                    float[] errs0, float[] errs1, float[] errs2,
-                                    double a0, double s0, double a1, double s1,
-                                    double e1, double e2, double em, String n1, String n2 )
+                             float[] errs0, float[] errs1, float[] errs2,
+                             double a0, double s0, double a1, double s1,
+                             double e1, double e2, double em, String n1, String n2 )
   {
     super( context, R.string.CalibValidateResultDialog );
 

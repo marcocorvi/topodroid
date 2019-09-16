@@ -32,7 +32,7 @@ import android.widget.LinearLayout;
 // import android.widget.ArrayAdapter;
 
 class DistoXStatDialog extends MyDialog
-                               implements View.OnClickListener
+                       implements View.OnClickListener
 {
     private DistoXNum mNum;
     private String mOrigin;

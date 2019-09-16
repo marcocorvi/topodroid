@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 // import android.app.Dialog;
 import android.content.Context;
 // import android.content.res.Resources;
@@ -23,14 +25,8 @@ import android.view.View;
 // import android.util.DisplayMetrics;
 // import android.widget.TextView;
 import android.widget.Button;
-// import android.widget.Toast;
-
 // import java.util.Locale;
 
-// import android.util.Log;
-
-/**
- */
 class SetupDoneDialog extends MyDialog
                       implements View.OnClickListener
 {

@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 import java.util.List;
 import java.util.Locale;
 
@@ -25,12 +27,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-// import android.widget.Toast;
 
 import android.view.View;
 // import android.view.View.OnClickListener;
-
-// import android.util.Log;
 
 class UndeleteDialog extends MyDialog
                             implements OnItemClickListener

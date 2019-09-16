@@ -11,15 +11,14 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 import java.lang.ref.WeakReference;
 
 // import java.util.ArrayList;
 
-// import android.widget.Toast;
 import android.os.AsyncTask;
 // import android.os.Handler;
-
-// import android.util.Log;
 
 class DataDownloadTask extends AsyncTask< String, Integer, Integer >
 {

@@ -11,13 +11,12 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 // import java.lang.ref.WeakReference;
 
 import android.os.AsyncTask;
 import android.content.Context;
-
-// import android.widget.Toast;
-// import android.util.Log;
 
 class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
 {

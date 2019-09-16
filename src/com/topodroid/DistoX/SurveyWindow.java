@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 import java.util.Locale;
 import java.util.List;
 // import java.util.Calendar;
@@ -42,10 +44,6 @@ import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-
-// import android.widget.Toast;
-
-// import android.util.Log;
 
 import android.view.View;
 import android.view.View.OnFocusChangeListener;

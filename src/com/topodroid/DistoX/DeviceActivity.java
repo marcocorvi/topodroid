@@ -50,8 +50,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 
-// import android.widget.Toast;
-
 // import android.graphics.Bitmap;
 // import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -205,12 +203,20 @@ public class DeviceActivity extends Activity
   //   }
   // }
 
+  /**
+   * @param device    device
+   * @param model     device model
+   */
   void setDeviceModel( Device device, int model )
   {
     TopoDroidApp.setDeviceModel( device, model );
     updateList();
   }
 
+  /**
+   * @param device    device
+   * @param nickname  device nickname
+   */
   void setDeviceName( Device device, String nickname )
   {
     TopoDroidApp.setDeviceName( device, nickname );
@@ -375,6 +381,7 @@ public class DeviceActivity extends Activity
     }
   }
 
+  // clear the current device
   private void detachDevice()
   {
     if ( mCurrDevice == null ) return;
@@ -385,6 +392,7 @@ public class DeviceActivity extends Activity
     setState();
   }
 
+  // pair the android and the current device
   private void pairDevice()
   {
     if ( mCurrDevice == null ) return;
@@ -556,17 +564,15 @@ public class DeviceActivity extends Activity
   // -----------------------------------------------------------------------------
 
   // called only by DeviceA3MemoryDialog
-  void /*boolean*/ readDeviceHeadTail( byte[] command, int[] head_tail )
+  void readDeviceHeadTail( byte[] command, int[] head_tail )
   {
     // TDLog.Log( TDLog.LOG_DEVICE, "onClick mBtnHeadTail. Is connected " + mApp.isConnected() );
     String ht = mApp.readA3HeadTail( mCurrDevice.mAddress, command, head_tail );
     if ( ht == null ) {
       TDToast.makeBad( R.string.head_tail_failed );
-      // return false;
     }
     // Log.v( TopoDroidApp.TAG, "Head " + head_tail[0] + " tail " + head_tail[1] );
     // TDToast.make( getString(R.string.head_tail) + ht );
-    // return true;
   }
 
   private boolean checkA3headtail( int[] ht )

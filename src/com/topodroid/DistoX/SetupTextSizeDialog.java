@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 // import android.app.Dialog;
 import android.content.Context;
 // import android.content.res.Resources;
@@ -26,17 +28,11 @@ import android.widget.Button;
 import android.widget.EditText;
 // import android.widget.SeekBar;
 // import android.widget.SeekBar.OnSeekBarChangeListener;
-// import android.widget.Toast;
-
 import android.text.TextWatcher;
 import android.text.Editable;
 
 import java.util.Locale;
 
-// import android.util.Log;
-
-/**
- */
 class SetupTextSizeDialog extends MyDialog
                           implements View.OnClickListener
 {

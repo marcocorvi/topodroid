@@ -14,6 +14,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 import java.util.List;
 
 import android.os.Bundle;
@@ -30,12 +32,9 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.EditText;
 
-// import android.util.Log;
-
-
 class DrawingStationDialog extends MyDialog
-                                  implements View.OnClickListener
-                                  , IBearingAndClino
+                           implements View.OnClickListener
+                           , IBearingAndClino
 {
     // private TextView mLabel;
     // private TextView mBarrierLabel;

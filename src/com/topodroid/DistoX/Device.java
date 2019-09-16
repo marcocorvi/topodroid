@@ -68,8 +68,13 @@ class Device
     mAddress = addr;
     mModel = model;
     mType = stringToType( model );
-    mName = ( name == null )? "-" : name;
-    if ( mName.equals("null") ) mName = "-";
+
+    if ( name == null ) {
+      mName = "-";
+    } else { 
+      mName = name.trim();
+      if ( mName.length() == 0 || mName.equals("null") ) mName = "-";
+    }
     mNickname = nickname;
     mHead = h;
     mTail = t;
@@ -81,8 +86,14 @@ class Device
     mAddress = addr;
     mModel = model;
     mType = stringToType( model );
-    mName = ( name == null )? "-" : name;
-    if ( mName.equals("null") ) mName = "-";
+
+    if ( name == null ) {
+      mName = "-";
+    } else { 
+      mName = name.trim();
+      if ( mName.length() == 0 || mName.equals("null") ) mName = "-";
+    }
+
     mNickname = nickname;
     mHead = 0;
     mTail = 0;

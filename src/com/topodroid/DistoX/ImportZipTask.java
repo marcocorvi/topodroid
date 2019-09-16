@@ -15,8 +15,6 @@ package com.topodroid.DistoX;
 
 // import java.util.ArrayList;
 
-// import android.widget.Toast;
-   
 class ImportZipTask extends ImportTask
 {
 

@@ -47,7 +47,6 @@ import android.widget.Button;
 // import android.widget.ZoomButton;
 import android.widget.ZoomButtonsController;
 import android.widget.ZoomButtonsController.OnZoomListener;
-// import android.widget.Toast;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView;

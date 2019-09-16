@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 //import java.util.List;
 
 // import java.io.File;
@@ -28,9 +30,6 @@ import android.widget.EditText;
 // import android.widget.TextView;
 import android.widget.Button;
 import android.widget.CheckBox;
-// import android.widget.Toast;
-
-// import android.util.Log;
 
 import android.view.View;
 import android.view.View.OnFocusChangeListener;

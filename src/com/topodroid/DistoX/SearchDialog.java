@@ -15,6 +15,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 import android.os.Bundle;
 // import android.app.Dialog;
 
@@ -29,10 +31,6 @@ import android.widget.EditText;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
-
-// import android.widget.Toast;
-
-// import android.util.Log;
 
 class SearchDialog extends MyDialog
                         implements View.OnClickListener

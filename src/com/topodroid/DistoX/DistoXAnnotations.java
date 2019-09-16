@@ -34,7 +34,7 @@ import android.view.View;
 
 
 class DistoXAnnotations extends MyDialog // Activity
-                               implements View.OnClickListener
+                        implements View.OnClickListener
 {
   // private TextView mTVtitle;
   private EditText mETtext;

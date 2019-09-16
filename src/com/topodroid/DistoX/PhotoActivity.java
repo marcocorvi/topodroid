@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -32,16 +34,14 @@ import android.view.KeyEvent;
 // import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.ListView;
-// import android.widget.Toast;
 // import android.widget.Button;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 // import android.preference.PreferenceManager;
 
-// import android.util.Log;
-
 public class PhotoActivity extends Activity
-                           implements OnItemClickListener, ILister
+                           implements OnItemClickListener
+                           , ILister
 {
   // private TopoDroidApp mApp;
   private DataHelper mApp_mData;

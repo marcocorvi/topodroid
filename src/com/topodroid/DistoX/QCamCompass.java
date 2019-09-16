@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 // import android.app.Activity;
 import android.app.Dialog;
 // import android.content.Intent;
@@ -26,16 +28,14 @@ import android.widget.LinearLayout;
 import android.widget.Button;
 import android.widget.TextView;
 // import android.widget.FrameLayout;
-// import android.widget.Toast;
 
 import android.graphics.drawable.BitmapDrawable;
 
-// import android.util.Log;
 import java.util.Locale;
 
 class QCamCompass extends Dialog
-                         implements OnClickListener
-                                  , IBearingAndClino
+                  implements OnClickListener
+                  , IBearingAndClino
 {
   private final Context mContext;
   // DrawingWindow mDrawer;

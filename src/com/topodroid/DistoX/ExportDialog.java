@@ -32,7 +32,8 @@ import android.view.View;
 // import android.util.Log;
 
 class ExportDialog extends MyDialog
-                          implements AdapterView.OnItemSelectedListener, View.OnClickListener
+                   implements AdapterView.OnItemSelectedListener
+                   , View.OnClickListener
 {
   private Button   mBtnOk;
   // private Button   mBtnBack;

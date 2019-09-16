@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 // import java.util.ArrayList;
 
 import android.content.Context;
@@ -27,8 +29,6 @@ import android.view.View;
 // import android.view.View.OnTouchListener;
 // import android.text.Layout;
 // import android.widget.LinearLayout;
-
-// import android.util.Log;
 
 class EnableSymbol implements View.OnClickListener
 {

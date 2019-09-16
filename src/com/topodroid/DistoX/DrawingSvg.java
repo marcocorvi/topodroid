@@ -11,6 +11,7 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
 
 import java.util.Locale;
 
@@ -30,8 +31,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import android.graphics.RectF;
-
-// import android.util.Log;
 
 class DrawingSvg
 {

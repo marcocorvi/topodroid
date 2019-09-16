@@ -24,14 +24,7 @@ import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Button;
-// import android.widget.Toast;
 import android.view.View;
-// import android.view.ViewGroup.LayoutParams;
-// import android.view.View.OnKeyListener;
-// import android.view.KeyEvent;
-
-// import android.graphics.Bitmap;
-// import android.graphics.BitmapFactory;
 
 // import android.media.ExifInterface;
 

@@ -25,7 +25,7 @@ import android.widget.EditText;
 
 
 class DrawingPhotoDialog extends MyDialog
-                                implements View.OnClickListener
+                         implements View.OnClickListener
 {
   private EditText mComment;
 

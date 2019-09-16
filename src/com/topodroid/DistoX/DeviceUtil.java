@@ -29,8 +29,6 @@ import java.util.Set;
 // import android.content.IntentFilter;
 // import android.content.BroadcastReceiver;
 
-// import android.widget.Toast;
-
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 

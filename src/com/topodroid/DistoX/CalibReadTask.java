@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 import java.lang.ref.WeakReference;
 // import java.util.List;
 
@@ -21,9 +23,6 @@ import android.os.AsyncTask;
 // import android.content.Context;
 
 // import android.widget.Button;
-// import android.widget.Toast;
-
-// import android.util.Log;
 
 class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
 {

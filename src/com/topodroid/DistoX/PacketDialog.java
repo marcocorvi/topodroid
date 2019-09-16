@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 import java.util.List;
 
 // import android.app.Dialog;
@@ -27,10 +29,6 @@ import android.widget.CheckBox;
 
 import android.view.View;
 import android.view.View.OnClickListener;
-
-// import android.widget.Toast;
-
-// import android.util.Log;
 
 
 class PacketDialog extends MyDialog

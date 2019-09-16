@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 import java.lang.ref.WeakReference;
 
 // import java.io.FileWriter;
@@ -23,10 +25,6 @@ import java.lang.ref.WeakReference;
 // import android.app.Activity;
 import android.os.AsyncTask;
 // import android.content.Context;
-
-// import android.widget.Toast;
-
-// import android.util.Log;
 
 class SwapHotBitTask extends AsyncTask<Void, Integer, Integer>
 {

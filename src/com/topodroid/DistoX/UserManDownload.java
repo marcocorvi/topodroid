@@ -24,10 +24,8 @@ import java.net.URLConnection;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipEntry;
 
-// import android.widget.Toast;
 import android.os.AsyncTask;
 // import android.content.Context;
-
 
 class UserManDownload extends AsyncTask< String, Integer, Integer >
 {

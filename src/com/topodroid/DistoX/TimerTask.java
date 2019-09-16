@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 import java.lang.ref.WeakReference;
 
 import android.content.Context;
@@ -21,10 +23,6 @@ import android.hardware.SensorManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
-
-// import android.widget.Toast;
-
-// import android.util.Log;
 
 class TimerTask extends AsyncTask<String, Integer, Long >
                 implements SensorEventListener

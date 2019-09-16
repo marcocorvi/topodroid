@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 import java.io.File;
 // import java.io.FileReader;
 // import java.io.BufferedReader;
@@ -40,12 +42,9 @@ import android.view.View.OnClickListener;
 
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-// import android.widget.Toast;
 
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
-// import android.util.Log;
 
 public class UserManualActivity extends Activity
                                 implements OnItemClickListener, OnClickListener

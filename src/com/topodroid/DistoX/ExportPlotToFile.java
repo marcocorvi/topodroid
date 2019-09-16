@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 
@@ -18,10 +20,6 @@ import android.content.Context;
 
 import android.os.AsyncTask;
 // import android.os.Message;
-
-// import android.widget.Toast;
-
-// import android.util.Log;
 
 class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
 {

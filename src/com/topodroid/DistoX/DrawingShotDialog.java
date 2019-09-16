@@ -11,9 +11,9 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 import android.os.Bundle;
-// import android.app.Dialog;
-// import android.app.Activity;
 import android.content.Context;
 // import android.content.Intent;
 
@@ -35,12 +35,10 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 // import android.text.InputType;
 import android.inputmethodservice.KeyboardView;
 
-// import android.util.Log;
-
 class DrawingShotDialog extends MyDialog
-                               implements View.OnClickListener
-                               , View.OnLongClickListener
-			       , MyColorPicker.IColorChanged
+                        implements View.OnClickListener
+                        , View.OnLongClickListener
+                        , MyColorPicker.IColorChanged
 {
   // private TextView mLabel;
   private Button mBtnOK;

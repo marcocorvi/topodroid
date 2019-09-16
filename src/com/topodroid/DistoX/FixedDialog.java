@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 // import java.util.regex.Pattern;
 import java.util.Locale;
 
@@ -37,10 +39,6 @@ import android.inputmethodservice.KeyboardView;
 import android.text.method.KeyListener; 
 
 import android.net.Uri;
-
-// import android.widget.Toast;
-
-// import android.util.Log;
 
 
 class FixedDialog extends MyDialog

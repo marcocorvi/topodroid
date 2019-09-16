@@ -17,7 +17,6 @@ import java.lang.ref.WeakReference;
 import android.os.AsyncTask;
 
 // import android.widget.Button;
-// import android.widget.Toast;
 
 class CalibToggleTask extends AsyncTask<Void, Integer, Boolean>
 {

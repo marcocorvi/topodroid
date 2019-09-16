@@ -15,6 +15,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 // import java.util.List;
 import java.util.ArrayList;
 
@@ -38,14 +40,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 // import android.widget.AdapterView.OnItemLongClickListener;
 
-// import android.widget.Toast;
-
-// import android.util.Log;
-
 class CurrentStationDialog extends MyDialog
-                        implements View.OnClickListener
-                        , View.OnLongClickListener
-                        , OnItemClickListener
+                           implements View.OnClickListener
+                           , View.OnLongClickListener
+                           , OnItemClickListener
 {
   private final TopoDroidApp mApp;
   private final ShotWindow mParent;

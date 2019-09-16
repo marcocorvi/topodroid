@@ -46,9 +46,7 @@ class CalibCheckDialog extends MyDialog
   // private ArrayAdapter<String> mArrayAdapter;
   // private ListView mList;
 
-  CalibCheckDialog( Context context,
-                           SurveyWindow parent,
-                           List< DBlock > shots )
+  CalibCheckDialog( Context context, SurveyWindow parent, List< DBlock > shots )
   {
     super( context, R.string.CalibCheckDialog );
     // mParent = parent;
@@ -191,51 +189,51 @@ class CalibCheckDialog extends MyDialog
 	int sign3 = 0;
 	DBlock blk2 = null;
 	// boolean reversed = false; // triangle is 1-3-2
-    for ( DBlock b : mShots ) {
-	  if ( b == blk ) { ++k; continue; }
+        for ( DBlock b : mShots ) {
+          if ( b == blk ) { ++k; continue; }
           if ( ! in_leg ) {
             if ( b.isMainLeg() ) {
               // FIXME only the first triangle trial is considered
-	      if ( b.mFrom.equals( blk.mFrom ) && ! b.mTo.equals( blk.mTo ) ) {
+              if ( b.mFrom.equals( blk.mFrom ) && ! b.mTo.equals( blk.mTo ) ) {
                 k2 = k;
-	        n2 = 1;
-		sign2 = -1;
-		blk2 = b;
-	        station = b.mTo;
-		// reversed = true;
-		in_leg = true;
-	      } else if ( b.mFrom.equals( blk.mTo ) && ! b.mTo.equals( blk.mFrom ) ) {
+                n2 = 1;
+                sign2 = -1;
+                blk2 = b;
+                station = b.mTo;
+                // reversed = true;
+                in_leg = true;
+              } else if ( b.mFrom.equals( blk.mTo ) && ! b.mTo.equals( blk.mFrom ) ) {
                 k2 = k;
-	        n2 = 1;
-		sign2 = 1;
-		blk2 = b;
-	        station = b.mTo;
-		in_leg = true;
-	      } else if ( b.mTo.equals( blk.mFrom ) && ! b.mFrom.equals( blk.mTo ) ) {
+                n2 = 1;
+                sign2 = 1;
+                blk2 = b;
+                station = b.mTo;
+                in_leg = true;
+              } else if ( b.mTo.equals( blk.mFrom ) && ! b.mFrom.equals( blk.mTo ) ) {
                 k2 = k;
-	        n2 = 1;
-		sign2 = 1;
-		blk2 = b;
-	        station = b.mFrom;
-		// reversed = true;
-		in_leg = true;
-	      } else if ( b.mTo.equals( blk.mTo   ) && ! b.mFrom.equals( blk.mFrom ) ) {
+                n2 = 1;
+                sign2 = 1;
+                blk2 = b;
+                station = b.mFrom;
+                // reversed = true;
+                in_leg = true;
+              } else if ( b.mTo.equals( blk.mTo   ) && ! b.mFrom.equals( blk.mFrom ) ) {
                 k2 = k;
-	        n2 = 1;
-		sign2 = -1;
-		blk2 = b;
-	        station = b.mFrom;
-		in_leg = true;
-	      }
-	    }
-	  } else {
+                n2 = 1;
+                sign2 = -1;
+                blk2 = b;
+                station = b.mFrom;
+                in_leg = true;
+              }
+            }
+          } else {
             if ( b.isMainLeg() ) {
-	      break;
+              break;
             } else {
               ++n2;
             }
-	  }
-	  ++k;
+          }
+          ++k;
 	}
 	if ( station != null ) {
           // Log.v("DistoX", "found block2 " + blk2.mFrom + " " + blk2.mTo + " sign2 " + sign2 + " n2 " + n2 );
@@ -277,7 +275,7 @@ class CalibCheckDialog extends MyDialog
 	    ++k;
 	  }
 	}
-	if ( n2 > 0 && n3 > 0 ) {
+        if ( n2 > 0 && n3 > 0 ) {
           // Log.v("DistoX", "found block3 k1 " + k1 + " k2 " + k2 + " k3 " + k3 );
           float[] errors3 = new float[n3*n2*n1];
           for ( int h1 = 0; h1<n1; ++h1 ) {

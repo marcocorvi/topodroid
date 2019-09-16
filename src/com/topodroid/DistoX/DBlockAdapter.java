@@ -29,8 +29,8 @@ import java.util.Locale;
 // import android.util.Log;
 
 class DBlockAdapter extends ArrayAdapter< DBlock >
-                          implements OnLongClickListener
-                                   // , OnClickListener
+                    implements OnLongClickListener
+                    // , OnClickListener
 {
   // private Context mContext;
   private ShotWindow mParent;
@@ -231,27 +231,26 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     }
   }
 
+  // return the list of blocks to assign station names
   ArrayList< DBlock > getItemsForAssign()
   {
     ArrayList< DBlock > ret = new ArrayList<>();
     int size = mItems.size();
     int k = size-1;
-    for ( ; k > 0; --k ) {
+    for ( ; k > 0; --k ) { // scan from last backword until a leg is found
       DBlock blk = mItems.get(k);
       if ( blk.mFrom.length() > 0 && blk.mTo.length() > 0 ) break;
     }
-    for ( ; k < size; ++k ) {
+    for ( ; k < size; ++k ) { // insert into return from the leg onward
       ret.add( mItems.get(k) );
     }
     return ret;
   }
 
+  // return the block at the given position
   public DBlock get( int pos ) 
   { 
-    try {
-      return mItems.get(pos);
-    } catch ( IndexOutOfBoundsException e ) { }
-    return null;
+    return ( pos < 0 || pos >= mItems.size() )? null : mItems.get(pos);
   }
 
   // public DBlock getBlockById( long id ) 
@@ -416,6 +415,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     return null;
   }
 
+  // update block name text-color
+  // @param set   whether to set green or normal color
   private void updateBlocksName( boolean set )
   {
     if ( ! set ) {

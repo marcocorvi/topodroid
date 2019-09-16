@@ -1,4 +1,4 @@
-/* @file DeviceActivity.java
+/* @file DeviceSelectDialog.java
  *
  * @author marco corvi
  * @date nov 2016
@@ -10,6 +10,8 @@
  * --------------------------------------------------------
  */
 package com.topodroid.DistoX;
+
+// import android.util.Log;
 
 // import java.util.Set;
 // import java.util.List;
@@ -27,16 +29,13 @@ import android.widget.ListView;
 import android.widget.Button;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-// import android.widget.Toast;
 
 import android.view.View;
 import android.view.View.OnClickListener;
 
-// import android.util.Log;
-
 class DeviceSelectDialog extends MyDialog
-                                implements OnItemClickListener
-                                , OnClickListener
+                         implements OnItemClickListener
+                         , OnClickListener
 {
   private final Context mContext;
   private final TopoDroidApp mApp;

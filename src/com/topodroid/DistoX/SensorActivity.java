@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -24,7 +26,6 @@ import android.content.Context;
 import android.widget.RadioButton;
 import android.widget.Button;
 import android.widget.EditText;
-// import android.widget.Toast;
 import android.view.View;
 import android.view.KeyEvent;
 
@@ -32,8 +33,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorEvent;
 import android.hardware.SensorManager;
-
-// import android.util.Log;
 
 
 public class SensorActivity extends Activity

@@ -10,8 +10,9 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-
 package com.topodroid.DistoX;
+
+// import android.util.Log;
 
 import android.graphics.Canvas;
 // import android.graphics.Paint;
@@ -25,8 +26,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 // import java.util.Locale;
-
-// import android.util.Log;
 
 /**
  */

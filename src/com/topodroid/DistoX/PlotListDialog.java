@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 import java.util.List;
 // import java.util.ArrayList;
 
@@ -33,14 +35,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 // import android.widget.AdapterView.OnItemLongClickListener;
 
-// import android.widget.Toast;
-
-// import android.util.Log;
-
 class PlotListDialog extends MyDialog
                         implements OnItemClickListener
-                                // , OnItemLongClickListener
-                                , View.OnClickListener
+                        // , OnItemLongClickListener
+                        , View.OnClickListener
 {
   private final ShotWindow    mParent;
   private final DrawingWindow mParent2;

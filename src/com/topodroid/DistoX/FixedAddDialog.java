@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 import java.util.Locale;
 
 import android.net.Uri;
@@ -33,15 +35,12 @@ import android.text.ClipboardManager;
 // import android.content.ClipDescription;
 
 import android.inputmethodservice.KeyboardView;
-// import android.widget.Toast;
 // import android.widget.TextView;
 // import android.view.View.OnFocusChangeListener;
 
-// import android.util.Log;
-
 class FixedAddDialog extends MyDialog
                      implements View.OnClickListener
-                              , View.OnLongClickListener
+                     , View.OnLongClickListener
 {
   private final FixedActivity mParent;
 

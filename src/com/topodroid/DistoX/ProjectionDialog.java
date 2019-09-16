@@ -41,7 +41,6 @@ import android.widget.Button;
 // import android.widget.ZoomButton;
 import android.widget.ZoomButtonsController;
 import android.widget.ZoomButtonsController.OnZoomListener;
-// import android.widget.Toast;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;

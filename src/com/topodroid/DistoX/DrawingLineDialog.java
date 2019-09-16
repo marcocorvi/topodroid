@@ -32,7 +32,7 @@ import android.view.View;
 
 class DrawingLineDialog extends MyDialog
                         implements View.OnClickListener
-			         , AdapterView.OnItemSelectedListener
+                        , AdapterView.OnItemSelectedListener
 {
   private DrawingLinePath mLine;
   private DrawingWindow mParent;

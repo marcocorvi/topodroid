@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 // import java.io.File;
 // import java.util.List;
 // import java.util.ArrayList;
@@ -32,10 +34,6 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager;
 // import android.view.WindowManager.LayoutParams;
 import android.view.KeyEvent;
-
-// import android.widget.Toast;
-
-// import android.util.Log;
 
 public class PtCmapActivity extends Activity
                             implements OnClickListener

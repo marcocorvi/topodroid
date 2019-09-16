@@ -12,6 +12,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 // import java.io.PrintWriter;
 
 import android.graphics.Canvas;
@@ -21,10 +23,7 @@ import android.graphics.Matrix;
 import android.graphics.RectF;
 
 import java.util.ArrayList;
-// import android.util.Log;
 
-/**
- */
 class EraseCommand implements ICanvasCommand
 {
   ArrayList< EraseAction > mActions;

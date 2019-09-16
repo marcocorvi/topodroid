@@ -23,8 +23,6 @@ import android.view.View.OnClickListener;
 // import android.view.ViewGroup.LayoutParams;
 // import android.net.Uri;
 
-// import android.widget.Toast;
-
 class TopoDroidPerms extends MyDialog
                      implements OnClickListener
 {

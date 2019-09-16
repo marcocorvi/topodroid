@@ -562,14 +562,14 @@ class CalibAlgo
     return ix / TDUtil.FN;
   }
 
-  void saturate( Vector nl )
+  protected void saturate( Vector nl )
   {
     nl.x = saturate( nl.x );
     nl.y = saturate( nl.y );
     nl.z = saturate( nl.z );
   }
 
-  void computeBearingAndClinoRad( Vector g0, Vector m0 )
+  protected void computeBearingAndClinoRad( Vector g0, Vector m0 )
   {
     // Vector g = g0.mult( 1.0f / TDUtil.FV );
     // Vector m = m0.mult( 1.0f / TDUtil.FV );

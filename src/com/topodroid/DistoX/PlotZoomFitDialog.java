@@ -27,8 +27,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.EditText;
 
-// import android.widget.Toast;
-
 class PlotZoomFitDialog extends MyDialog
                                implements OnClickListener
 {

@@ -11,15 +11,13 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 import java.lang.ref.WeakReference;
 
 // import android.app.Activity;
 import android.os.AsyncTask;
 // import android.content.Context;
-
-// import android.widget.Toast;
-
-// import android.util.Log;
 
 class InfoReadX310Task extends AsyncTask<Void, Integer, Boolean>
 {

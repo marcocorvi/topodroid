@@ -11,13 +11,11 @@
  */
 package com.topodroid.DistoX;
 
-// import java.lang.ref.WeakReference;
-
-// import android.widget.Toast;
-import android.os.AsyncTask;
-
 // import android.util.Log;
 
+// import java.lang.ref.WeakReference;
+
+import android.os.AsyncTask;
 
 class ReconnectTask extends AsyncTask< String, Integer, Integer >
 {

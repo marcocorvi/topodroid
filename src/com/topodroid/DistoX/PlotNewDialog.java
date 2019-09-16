@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 import java.util.Locale;
 
 // import android.app.Dialog;
@@ -28,10 +30,6 @@ import android.widget.CheckBox;
 // import android.widget.LinearLayout;
 import android.view.View;
 // import android.view.ViewGroup.LayoutParams;
-
-// import android.widget.Toast;
-
-// import android.util.Log;
 
 class PlotNewDialog extends MyDialog
                            implements View.OnClickListener

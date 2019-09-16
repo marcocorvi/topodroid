@@ -26,7 +26,7 @@ import android.widget.LinearLayout;
 
 
 class DrawingLabelDialog extends MyDialog
-                                implements View.OnClickListener
+                         implements View.OnClickListener
 {
   private EditText mLabel;
 

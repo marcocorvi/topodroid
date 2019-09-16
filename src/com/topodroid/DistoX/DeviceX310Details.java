@@ -1,4 +1,3 @@
-
 /* @file DeviceX310Details.java
  *
  * @author marco corvi

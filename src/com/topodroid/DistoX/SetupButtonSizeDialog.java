@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 // import android.app.Dialog;
 import android.content.Context;
 // import android.content.res.Resources;
@@ -24,11 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
-// import android.widget.Toast;
-
 // import java.util.Locale;
-
-// import android.util.Log;
 
 /**
  */

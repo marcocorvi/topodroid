@@ -246,7 +246,7 @@ class Archiver
           fout.write(buffer, 0, c);
         }
         fout.close();
-        ok_manifest = mApp.checkManifestFile( pathname, surveyname  );
+        ok_manifest = mApp.checkManifestFile( pathname, surveyname  ); // this sets surveyname
         TDUtil.deleteFile( pathname );
       }
       zip.close();

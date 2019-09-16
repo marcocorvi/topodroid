@@ -62,9 +62,9 @@ class BleComm extends TopoDroidComm
   /** 
    * connection and data handling must run on a separate thread
    */
-  private void setConnected(boolean connected) { mBTConnected = connected; }
+  private void setConnected( boolean connected ) { mBTConnected = connected; }
 
-  private void connectBleDevice(Device device, Context context)
+  private void connectBleDevice( Device device, Context context )
   {
     if ( mRemoteDevice == null ) {
       TDToast.makeBad( R.string.ble_no_remote );
