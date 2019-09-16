@@ -85,6 +85,7 @@
     <string name="calib_no_name">Необходимо задать название</string>
     <string name="calib_gm_policy">Правила</string>
     <string name="calib_gm_undelete">Восстановить калибровчные данные?</string>
+    <string name="calib_offgroup_data">Возможно отклонение %1$d от данных в группе</string>
     <string name="calib_saved">Сохранить калибровку</string>
     <string name="calib_updated">Обновить калибровку</string>
     <string name="calib_compute_groups">Вычисление групп данных калибровки &#8230;</string>
