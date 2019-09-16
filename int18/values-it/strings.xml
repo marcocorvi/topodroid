@@ -963,6 +963,8 @@
   <string name="pref_size_buttons_summary">Dimensione bottoni barra superiore [pixels]</string>
   <string name="pref_with_sensors_title">Sensori</string>
   <string name="pref_with_sensors_summary">Abilita dati "sensori"</string>
+  <!-- TODO string name="pref_with_android_azimuth_title">Android compass</string -->
+  <!-- TODO string name="pref_with_android_azimuth_summary">Enable Android compass/clino</string -->
   <string name="pref_with_levels_title">Strati</string>
   <string name="pref_with_levels_summary">Usa strati di tele</string>
   <string name="pref_palettes_title">Tavolozze</string>

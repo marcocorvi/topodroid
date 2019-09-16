@@ -968,6 +968,8 @@
   <string name="pref_size_buttons_summary">Mărimea butoanelor de pe bara de acțiune</string>
   <string name="pref_with_sensors_title">Senzori</string>
   <string name="pref_with_sensors_summary">Activează date "senzori"</string>
+  <!-- TODO string name="pref_with_android_azimuth_title">Android compass</string -->
+  <!-- TODO string name="pref_with_android_azimuth_summary">Enable Android compass/clino</string -->
   <string name="pref_with_levels_title">Strate</string>
   <string name="pref_with_levels_summary">Folosește strate desen</string>
   <string name="pref_palettes_title">Palete</string>

@@ -989,6 +989,8 @@
   <string name="pref_size_buttons_summary">操作栏按钮的大小</string>
   <string name="pref_with_sensors_title">传感器</string>
   <string name="pref_with_sensors_summary">启用 "传感器" 数据</string>
+  <!-- TODO string name="pref_with_android_azimuth_title">Android compass</string -->
+  <!-- TODO string name="pref_with_android_azimuth_summary">Enable Android compass/clino</string -->
   <string name="pref_with_levels_title">图层</string>
   <string name="pref_with_levels_summary">使用画布图层</string>
   <!-- UNUSED string name="pref_with_rename_title">Survey renaming</string -->

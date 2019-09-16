@@ -986,6 +986,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_size_buttons_summary">Rozmiar przycisków paska akcji</string>
   <!-- TODO string name="pref_with_sensors_title">Sensors</string -->
   <!-- TODO string name="pref_with_sensors_summary">Enable "sensors" data</string -->
+  <!-- TODO string name="pref_with_android_azimuth_title">Android compass</string -->
+  <!-- TODO string name="pref_with_android_azimuth_summary">Enable Android compass/clino</string -->
   <!-- TODO string name="pref_with_levels_title">Layers</string -->
   <!-- TODO string name="pref_with_levels_summary">Use canvas layers</string -->
   <!-- TODO string name="pref_palettes_title">Palettes</string -->
