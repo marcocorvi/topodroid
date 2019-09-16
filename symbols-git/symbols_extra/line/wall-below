@@ -1,7 +1,7 @@
 symbol line
 name wall_below
 name-es pared_galeria_inferior
-name-pt parede_abaixo
+name-pt parede_galeria_inferior
 name-ru нижерасположенная_стена
 name-bg по-ниско_разположена_стена
 name-fr sol_ou_plancher
@@ -14,4 +14,3 @@ width 1
 csurvey 5 1 2 2
 dash 10 10
 endsymbol
-

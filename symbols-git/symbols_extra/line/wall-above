@@ -1,7 +1,7 @@
 symbol line
 name wall_above
 name-es pared_galeria_superior
-name-pt parede_acima
+name-pt parede_galeria_superior
 name-ru вышерасположенная_стена
 name-bg по-високо_разположена_стена
 name-fr voûte
@@ -14,4 +14,3 @@ width 1
 csurvey 5 1 2 2
 dash 5 10 
 endsymbol
-

@@ -479,7 +479,7 @@
     <string name="out_of_memory">ALERTA: sem memória!</string>
     <string name="disk_io_error">CRÍTICO: erro de E/S no disco!</string>
     
-    <string name="toporobot_warning">Política para o TopoRobot é \'Teste devel\'!</string>
+    <string name="toporobot_warning">Política para o TopoRobot é \'Testador\'!</string>
     <string name="anomaly_warning">Compensação de anomalias magnéticas é \'Especialista\'!</string>
     <string name="tripod_warning">Política para tripés é "Avançado"!</string>
     <string name="coverage_warning">Amplitude angular abaixo de %1$d %%\nGravar coeficientes?</string>
@@ -504,7 +504,7 @@
     <string name="wait_scan">Procurando: espere &#8230;</string>
     <string name="write_failed">Falha ao gravar na DistoX</string>
     <string name="write_ok">Calibração gravada na DistoX</string>
-    <string name="zip_saved">Salvo </string>
+    <string name="zip_saved">Salvo</string>
     <string name="zip_failed">Falha na compressão da topo</string>
     <string name="unzip_fail">Falha na decompressão da topo</string>
     <string name="unzip_fail_sqlite">SQL falhou: apague a topo e tente novamente</string>
@@ -894,7 +894,7 @@
     <string name="title_settings_edit">Configurações de edição do TopoDroid</string>
     <string name="title_settings_device">Configurações de dispositivo do TopoDroid</string>
     <string name="title_settings_calib">Configurações de calibração do TopoDroid</string>
-    <string name="title_settings_geek">Configurações de marcas \'geek\' do TopoDroid</string>
+    <string name="title_settings_geek">Configurações GEEK do TopoDroid</string>
     <string name="title_settings_log">Configurações de log do TopoDroid</string>
 
     <string name="title_shift">Deslocar</string>
@@ -913,7 +913,7 @@
     <string name="title_calib_export">Exportar calibração</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-  <string name="pref_export_settings">Configurações de exportação</string>
+  <string name="pref_export_settings">CONFIGURAÇÕES DE EXPORTAÇÃO</string>
 
   <string name="pref_cat_survey">DADOS DA TOPO</string>
   <string name="pref_cat_drawing">DESENHANDO CROQUI</string>
@@ -928,7 +928,7 @@
 
   <string name="pref_cat_calib">CALIBRAÇÕES</string>
   <string name="pref_cat_device">DISPOSITIVOS</string>
-  <string name="pref_cat_geek">MARCAS \'GEEK\'</string>
+  <string name="pref_cat_geek">CONFIGURAÇÕES GEEK</string>
   <!-- UNUSED string name="pref_cat_sketch">MODELOS 3D</string -->
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
 
@@ -950,9 +950,9 @@
   <!-- UNUSED string name="pref_cosurvey_title">Topo colaborativa</string -->
   <!-- UNUSED string name="pref_cosurvey_summary">Habilitar topo colaborativa</string -->
   <string name="pref_export_shots_title">Exportação padrão de dados</string>
-  <string name="pref_export_shots_summary">Formato padrão de dados para exportação</string>
+  <string name="pref_export_shots_summary">Formato padrão para exportação de dados</string>
   <string name="pref_export_plot_title">Exportação padrão de croqui</string>
-  <string name="pref_export_plot_summary">Formato padrão de exportação de croqui</string>
+  <string name="pref_export_plot_summary">Formato padrão para exportação de croqui</string>
   <string name="pref_therion_maps_title">Mapas Therion primeiro</string>
   <string name="pref_therion_maps_summary">Mapas de Therion antes dos dados da topo</string>
   <string name="pref_extra_buttons_title">Nível de recursos</string>
@@ -961,6 +961,8 @@
   <string name="pref_size_buttons_summary">Tamanho dos botões da barra de ações</string>
   <string name="pref_with_sensors_title">Sensores</string>
   <string name="pref_with_sensors_summary">Habilitar dados de sensores</string>
+  <string name="pref_with_android_azimuth_title">Bússola Android</string>
+  <string name="pref_with_android_azimuth_summary">Habilitar bússola/clino do Android</string>
   <string name="pref_with_levels_title">Camadas</string>
   <string name="pref_with_levels_summary">Usar camadas na tela de desenho</string>
   <string name="pref_palettes_title">Paletas</string>
@@ -994,9 +996,9 @@
   <string name="pref_survex_eol_title">Terminação linha Survex/Topo</string>
   <string name="pref_survex_eol_summary">Terminação de linha Survex/Topo</string>
   <string name="pref_survex_splay_title">Base med. aux. Survex</string>
-  <string name="pref_survex_splay_summary">Incluir a base PARA à medida auxiliar no Survex</string>
+  <string name="pref_survex_splay_summary">Incluir a base PARA à medida auxiliar nos arquivos Survex exportados</string>
   <string name="pref_survex_lrud_title">EDTC Survex</string>
-  <string name="pref_survex_lrud_summary">Incluir EDTC à exportação do Survex</string>
+  <string name="pref_survex_lrud_summary">Incluir EDTC nos arquivos Survex exportados</string>
   <string name="pref_svg_grid_title">Grade</string>
   <string name="pref_svg_grid_summary">Incluir grade no arquivo SVG/PNG exportado</string>
   <string name="pref_svg_splays_title">Medidas auxiliares SVG</string>
@@ -1004,29 +1006,29 @@
   <!-- UNUSED string name="pref_svg_in_html_title">SVG em HTML</string -->
   <!-- UNUSED string name="pref_svg_in_html_summary">Incorporar arquivo SVG exportado em HTML</string -->
   <string name="pref_svg_pointstroke_title">Espessura ponto SVG</string>
-  <string name="pref_svg_pointstroke_summary">Espessura símbolos pontos em SVG</string>
+  <string name="pref_svg_pointstroke_summary">Espessura símbolos pontos nos arquivos SVG exportados</string>
   <string name="pref_svg_labelstroke_title">Espessura rótulo SVG</string>
-  <string name="pref_svg_labelstroke_summary">Espessura do texto rótulo em SVG</string>
+  <string name="pref_svg_labelstroke_summary">Espessura do texto rótulo nos arquivos SVG exportados</string>
   <string name="pref_svg_linestroke_title">Espessura linha SVG</string>
-  <string name="pref_svg_linestroke_summary">Espessura das linhas em SVG</string>
+  <string name="pref_svg_linestroke_summary">Espessura das linhas nos arquivos SVG exportados</string>
   <string name="pref_svg_gridstroke_title">Espessura grade SVG</string>
-  <string name="pref_svg_gridstroke_summary">Espessura das lionhas da grade em SVG</string>
+  <string name="pref_svg_gridstroke_summary">Espessura das linhas da grade nos arquivos SVG exportados</string>
   <string name="pref_svg_shotstroke_title">Espessura medida SVG</string>
-  <string name="pref_svg_shotstroke_summary">Espessura das linhas de medidas em SVG</string>
+  <string name="pref_svg_shotstroke_summary">Espessura das linhas de medidas nos arquivos SVG exportados</string>
   <string name="pref_svg_linedirstroke_title">Espessura orientação linha SVG</string>
-  <string name="pref_svg_linedirstroke_summary">ESpessura das orientações de linha em SVG</string>
+  <string name="pref_svg_linedirstroke_summary">ESpessura das orientações de linha nos arquivos SVG exportados</string>
   <string name="pref_svg_line_dir_title">Orientação das linhas SVG</string>
-  <string name="pref_svg_line_dir_summary">Incluir indicadores de orientação de linha na exportação SVG</string>
+  <string name="pref_svg_line_dir_summary">Incluir indicadores de orientação de linha nos arquivos SVG exportados</string>
   <string name="pref_kml_stations_title">Bases KML</string>
-  <string name="pref_kml_stations_summary">Incluir bases ao arquivo de exportação KML</string>
+  <string name="pref_kml_stations_summary">Incluir bases nos arquivos KML exportados</string>
   <string name="pref_kml_splays_title">Medidas auxiliares KML</string>
-  <string name="pref_kml_splays_summary">Incluir medidas auxiliares ao arquivo de exportação KML</string>
+  <string name="pref_kml_splays_summary">Incluir medidas auxiliares nos arquivos KML exportados</string>
   <string name="pref_csv_raw_title">CSV bruto</string>
   <string name="pref_csv_raw_summary">Exportar dados brutos no CSV</string>
   <string name="pref_csv_sep_title">Separador CSV</string>
-  <string name="pref_csv_sep_summary">Separador de campos CSV</string>
+  <string name="pref_csv_sep_summary">Separador de campos nos arquivos CSV exportados</string>
   <string name="pref_csv_eol_title">Separador de linhas CSV</string>
-  <string name="pref_csv_eol_summary">Separador de linhas/registros CSV</string>
+  <string name="pref_csv_eol_summary">Separador de linhas/registros nos arquivos CSV exportados</string>
 
   <string name="pref_sock_type_title">Soquete</string>
   <string name="pref_sock_type_summary">Criar soquete</string>
@@ -1076,10 +1078,10 @@
   <string name="pref_closeness_message">Raio da ferramenta de seleção do croqui</string>
   <string name="pref_eraseness_title">Tamanho da borracha</string>
   <string name="pref_eraseness_message">Raio da borracha no desenho</string>
-  <string name="pref_min_shift_title">Mudar sensibilidade</string>
-  <string name="pref_min_shift_message">Mudar sensibilidade</string>
+  <string name="pref_min_shift_title">Sensibilidade deslocamento</string>
+  <string name="pref_min_shift_message">Sensibilidade do deslocamento [pxl/passo]</string>
   <string name="pref_pointing_title">Diâmetro tolerância cursor</string>
-  <string name="pref_pointing_message">Tolerância entre toque e destoque para seleção de ponto</string>
+  <string name="pref_pointing_message">Tolerância do deslocamento da posição do toque e da remoção do toque para seleção de ponto</string>
   <string name="pref_dash_splay_title">Coerência pont. med. aux.</string>
   <string name="pref_dash_splay_message">Pontilhamento coerente entre medidas auxiliares na planta baixa e nos perfis</string>
   <string name="pref_vert_splay_title">Limite med. aux. tracejadas</string>
@@ -1201,17 +1203,17 @@
   <string name="pref_line_units_title">Unidade linhas</string>
   <string name="pref_line_units_summary">Unidades desenho linhas</string>
   <string name="pref_linesnap_title">Colar linha/área</string>
-  <string name="pref_linesnap_summary">Habilitar atração+união de linhas/áreas</string>
-  <string name="pref_linecurve_title">Suavizar/tormar retos segmentos</string>
-  <string name="pref_linecurve_summary">Habilitar ação de suavizar/tornar retos segmentos de linhas</string>
+  <string name="pref_linesnap_summary">Habilitar atração + união de linhas/áreas</string>
+  <string name="pref_linecurve_title">Suavizar/tornar retos segmentos</string>
+  <string name="pref_linecurve_summary">Habilitar função de suavizar/tornar retos segmentos de linhas</string>
   <string name="pref_linestraight_title">Tornar linhas retas</string>
-  <string name="pref_linestraight_summary">Habilitar ação de tornar linhas inteiras retas</string>
+  <string name="pref_linestraight_summary">Habilitar função de transformar linhas inteiras em retas</string>
   <string name="pref_path_multiselect_title">Multiseleção de caminhos</string>
-  <string name="pref_path_multiselect_summary">Habilitar ação de seleção de múltiplos caminhos</string>
+  <string name="pref_path_multiselect_summary">Habilitar função de seleção de vários caminhos</string>
   <string name="pref_plane_interpolation_title">Interpolação de plano</string>
-  <string name="pref_plane_interpolation_summary">Habilitar ação de interpolação de plano</string>
+  <string name="pref_plane_interpolation_summary">Habilitar função de interpolação de plano</string>
   <string name="pref_plot_split_title">Quebra/união de croquis</string>
-  <string name="pref_plot_split_summary">Habilitar ação de quebra/união de croquis</string>
+  <string name="pref_plot_split_summary">Habilitar função de quebra/união de croquis</string>
   <string name="pref_fixed_thickness_title">Espessura linha trena</string>
   <string name="pref_fixed_thickness_summary">Espessura das linhas de trena</string>
   <!-- UNUSED string name="pref_device_title">Dispositivo</string -->
@@ -1233,13 +1235,15 @@
   <string name="pref_therion_splays_title">Medidas auxiliares Therion</string>
   <string name="pref_therion_splays_summary">Adicionar linhas u:splay aos arquivos th2</string>
   <string name="pref_th2_scale_title">Escala Therion</string>
-  <string name="pref_th2_scale_summary">Escala da exportaçãode arquivos th2/xvi</string>
+  <string name="pref_th2_scale_summary">Escala da exportação de arquivos th2/xvi</string>
   <string name="pref_th2_xvi_title">Imagem xvi</string>
-  <string name="pref_th2_xvi_summary">Insderir imagem xvi no arquivo th2</string>
+  <string name="pref_th2_xvi_summary">Inserir imagem xvi no arquivo th2</string>
   <string name="pref_autoStations_title">Bases Therion</string>
   <string name="pref_autoStations_summary">Incluir automaticamente bases aos arquivos para o Therion</string>
-  <string name="pref_auto_xsections_title">Cirtes X automáticos</string>
+  <string name="pref_auto_xsections_title">Cortes X automáticos</string>
   <string name="pref_auto_xsections_summary">Incluir automaticamente cortes X na exportação de arquivos csx/svg/dxf/xvi</string>
+  <string name="pref_saved_stations_title">Estações salvas</string>
+  <string name="pref_saved_stations_summary">Apresentar estações salvas em laranja</string>
   <string name="pref_loopClosure_title">Fechamento anéis</string>
   <string name="pref_loopClosure_summary">Compensação de erro de fechamento do anel</string>
   <!-- UNUSED string name="pref_splayExtend_title">Estimar extensão medida auxiliar</string -->
