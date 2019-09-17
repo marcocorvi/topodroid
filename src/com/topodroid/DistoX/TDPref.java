@@ -578,7 +578,8 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeFwd( cat, key[11], tit[11],          N,                   ctx, hlp ),
       makeFwd( cat, key[12], tit[12],          N,                   ctx, hlp ),
       makeFwd( cat, key[13], tit[13],          N,                   ctx, hlp ),
-      makeFwd( cat, key[14], tit[14],          T,                   ctx, hlp )
+      makeFwd( cat, key[14], tit[14],          T,                   ctx, hlp ),
+      makeFwd( cat, key[15], tit[15],          T,                   ctx, hlp )
     };
   }
 
@@ -640,6 +641,19 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeCbx( cat, key[0], tit[0], dsc[0], B, def[0], ctx, hlp ),
       makeCbx( cat, key[1], tit[1], dsc[1], A, def[1], ctx, hlp ),
       makeCbx( cat, key[2], tit[2], dsc[2], N, def[2], ctx, hlp )
+    };
+  }
+
+  static TDPref[] makeTroPrefs( Context ctx, TDPrefHelper hlp )
+  {
+    int cat = TDPrefActivity.PREF_CATEGORY_TRO;
+    String[] key = TDPrefKey.EXPORT_TRO;
+    int[] tit = TDPrefKey.EXPORT_TROtitle;
+    int[] dsc = TDPrefKey.EXPORT_TROdesc;
+    String[] def = TDPrefKey.EXPORT_TROdef;
+    return new TDPref[ ] {
+      makeCbx( cat, key[0], tit[0], dsc[0], A, def[0], ctx, hlp ),
+      makeCbx( cat, key[1], tit[1], dsc[1], N, def[1], ctx, hlp )
     };
   }
 

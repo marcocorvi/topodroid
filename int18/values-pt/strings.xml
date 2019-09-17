@@ -985,6 +985,10 @@
   <string name="pref_station_prefix_summary">Exportar prefixo de bases (Compass)</string>
   <string name="pref_compass_splays_title">Medidas auxiliares Compass</string>
   <string name="pref_compass_splays_summary">Exportar medidas auxiliares em arquivos Compass</string>
+  <!-- TODO string name="pref_vtopo_splays_title">VisualTopo splays</string -->
+  <!-- TODO string name="pref_vtopo_splays_summary">Export splays in VisualTopo files</string -->
+  <!-- TODO string name="pref_vtopo_lrud_title">LRUD at From</string -->
+  <!-- TODO string name="pref_vtopo_lrud_summary">VisualTopo LRUD at From station</string -->
   <!-- UNUSED string name="pref_trobot_names_title">Nomes bases TopoRobot</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Os nomes das bases usam o estilo do TopoRobot</string -->
   <string name="pref_ortho_lrud_title">Ângulo med. aux. EDTC Compass</string>

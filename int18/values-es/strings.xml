@@ -999,6 +999,10 @@
   <string name="pref_station_prefix_summary">Prefijo estación de exportación cSurvey</string>
   <!-- TODO string name="pref_compass_splays_title">Compass splays</string -->
   <!-- TODO string name="pref_compass_splays_summary">Export splays in Compass files</string -->
+  <!-- TODO string name="pref_vtopo_splays_title">VisualTopo splays</string -->
+  <!-- TODO string name="pref_vtopo_splays_summary">Export splays in VisualTopo files</string -->
+  <!-- TODO string name="pref_vtopo_lrud_title">LRUD at From</string -->
+  <!-- TODO string name="pref_vtopo_lrud_summary">VisualTopo LRUD at From station</string -->
   <!-- UNUSED string name="pref_trobot_names_title">TopoRobot Nombres de estaciones</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Los nombres de las estaciones están en el estilo TopoRobot</string -->
   <string name="pref_ortho_lrud_title">LRUD ángulo de apertura</string>

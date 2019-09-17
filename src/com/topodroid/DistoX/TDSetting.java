@@ -145,6 +145,8 @@ class TDSetting
   static boolean mTherionSplays = false; // whether to add splay segments to auto stations
   static boolean mTherionXvi    = false; // whether to add xvi image to th2
   static boolean mCompassSplays = true;  // whether to add splays to Compass export
+  static boolean mVTopoSplays = true;    // whether to add splays to VisualTopo export
+  static boolean mVTopoLrudAtFrom = false; 
   static final float THERION_SCALE = 196.8503937f; // 200 * 39.3700787402 / 40;
   static float   mToTherion = THERION_SCALE / 100;
 
@@ -808,6 +810,11 @@ class TDSetting
     mExportStationsPrefix =  prefs.getBoolean( keyExpDat[0], bool(defExpDat[0]) ); // DISTOX_STATION_PREFIX
     mCompassSplays     = prefs.getBoolean(     keyExpDat[1], bool(defExpDat[1]) ); // DISTOX_COMPASS_SPLAYS
     mSwapLR            = prefs.getBoolean(     keyExpDat[2], bool(defExpDat[2]) ); // DISTOX_SWAP_LR
+
+    String[] keyExpTro = TDPrefKey.EXPORT_TRO;
+    String[] defExpTro = TDPrefKey.EXPORT_TROdef;
+    mVTopoSplays       = prefs.getBoolean(     keyExpTro[0], bool(defExpTro[0]) ); // DISTOX_VTOPO_SPLAYS
+    mVTopoLrudAtFrom   = prefs.getBoolean(     keyExpTro[1], bool(defExpTro[1]) ); // DISTOX_VTOPO_LRUD
 
     String[] keyExpSvg = TDPrefKey.EXPORT_SVG;
     String[] defExpSvg = TDPrefKey.EXPORT_SVGdef;
@@ -1569,6 +1576,21 @@ class TDSetting
       mSwapLR               = tryBooleanValue( hlp, k, v, bool(def[ 2]) );
     } else {
       TDLog.Error("missing EXPORT DAT key: " + k );
+    }
+    return null;
+  }
+
+  private static String updatePrefTro( TDPrefHelper hlp, String k, String v )
+  {
+    // Log.v("DistoX", "update pref TRO: " + k );
+    String[] key = TDPrefKey.EXPORT_TRO;
+    String[] def = TDPrefKey.EXPORT_TROdef;
+    if ( k.equals( key[ 0 ] ) ) { // DISTOX_VTOPO_SPLAYS (bool)
+      mVTopoSplays        = tryBooleanValue( hlp, k, v, bool(def[ 0]) );   
+    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_VTOPO_LRUD (bool)
+      mVTopoLrudAtFrom    = tryBooleanValue( hlp, k, v, bool(def[ 1]) );   
+    } else {
+      TDLog.Error("missing EXPORT TRO key: " + k );
     }
     return null;
   }
@@ -2351,6 +2373,7 @@ class TDSetting
       String eol = "\\n"; if ( mSurvexEol.equals("\r\n") ) eol = "\\r\\n";
       pw.printf(Locale.US, "Survex: eol \"%s\", splay %c LRUD %c \n", eol, tf(mSurvexSplay), tf(mSurvexLRUD) );
       pw.printf(Locale.US, "Compass: swap LR %c, station prefix %c, splays %c\n", tf(mSwapLR), tf(mExportStationsPrefix), tf(mCompassSplays) );
+      pw.printf(Locale.US, "VisualTopo: splays %c\n", tf(mVTopoSplays) );
       pw.printf(Locale.US, "Ortho LRUD %c, angle %.2f cos %.2f \n", tf(mOrthogonalLRUD), mOrthogonalLRUDAngle, mOrthogonalLRUDCosine );
       pw.printf(Locale.US, "Therion: maps %c, stations %c, splays %c, xvi %c, scale %.2f\n",
         tf(mTherionMaps), tf(mAutoStations), tf(mTherionSplays), tf(mTherionXvi), mToTherion );

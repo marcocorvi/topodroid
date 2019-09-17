@@ -3793,8 +3793,9 @@ class TDExporter
   static private boolean printStartShotToTro( PrintWriter pw, DBlock item, List< DBlock > list )
   {
     if ( item == null ) return false;
-    LRUD lrud = computeLRUD( item, list, true );
-    pw.format(Locale.US, "%s %s 0.00 0.00 0.00 ", item.mFrom, item.mFrom );
+    LRUD lrud = computeLRUD( item, list, ! TDSetting.mVTopoLrudAtFrom ); // default: mVTopoLrudAtFrom = false
+    String station = TDSetting.mVTopoLrudAtFrom ? item.mTo : item.mFrom;
+    pw.format(Locale.US, "%s %s 0.00 0.00 0.00 ", station, station );
     pw.format(Locale.US, "%.2f %.2f %.2f %.2f N I *", lrud.l, lrud.r, lrud.u, lrud.d );
     if ( item.mComment != null && item.mComment.length() > 0 ) {
       pw.format(" ;%s", item.mComment );
@@ -3803,9 +3804,9 @@ class TDExporter
     return true;
   }
 
-  static private boolean printShotToTro( PrintWriter pw, DBlock item, AverageLeg leg, LRUD lrud )
+  static private void printShotToTro( PrintWriter pw, DBlock item, AverageLeg leg, LRUD lrud )
   {
-    if ( item == null ) return false;
+    if ( item == null ) return; // false;
     // Log.v( TAG, "shot " + item.mFrom + "-" + item.mTo + " " + l/n + " " + b + " " + c/n );
     pw.format("%s %s ", item.mFrom, item.mTo );
     pw.format(Locale.US, "%.2f %.1f %.1f ", leg.length(), leg.bearing(), leg.clino() );
@@ -3817,12 +3818,13 @@ class TDExporter
       pw.format(" ;%s", item.mComment );
     }
     pw.format("\r\n");
-    return true;
+    // return true;
   }
 
-  static private boolean printSplayToTro( PrintWriter pw, DBlock item, boolean direct )
+  static private void printSplayToTro( PrintWriter pw, DBlock item, boolean direct )
   {
-    if ( item == null ) return false;
+    if ( ! TDSetting.mVTopoSplays ) return; // false;
+    if ( item == null ) return; // false;
     // Log.v( TAG, "shot " + item.mFrom + "-" + item.mTo + " " + l/n + " " + b + " " + c/n );
     if ( direct ) {
       pw.format("%s * ", item.mFrom );
@@ -3840,7 +3842,7 @@ class TDExporter
       pw.format(" ;%s", item.mComment );
     }
     pw.format("\r\n");
-    return true;
+    // return true;
   }
 
   static String exportSurveyAsTro( long sid, DataHelper data, SurveyInfo info, String filename )
@@ -3873,7 +3875,8 @@ class TDExporter
       pw.format("Couleur 0,0,0\r\n\r\n");
       
       // VISUALTOPO: use 0 if declination is undefined
-      pw.format(Locale.US, "Param Deca Degd Clino Degd %.4f Dir,Dir,Dir Arr Inc 0,0,0\r\n\r\n", info.getDeclination() );
+      pw.format(Locale.US, "Param Deca Degd Clino Degd %.4f Dir,Dir,Dir %s Inc 0,0,0\r\n\r\n",
+        info.getDeclination(), ( TDSetting.mVTopoLrudAtFrom ? "Dep" : "Arr" ) );
 
       AverageLeg leg = new AverageLeg(0);
       DBlock ref_item = null;
@@ -3903,7 +3906,7 @@ class TDExporter
 	      pw.format( sw.toString() );
               sw = new StringWriter();
               psw = new PrintWriter( sw );
-              lrud = computeLRUD( ref_item, list, false );
+              lrud = computeLRUD( ref_item, list, TDSetting.mVTopoLrudAtFrom );
               printShotToTro( pw, ref_item, leg, lrud );
               // duplicate = false;
               // surface = false;
@@ -3920,7 +3923,7 @@ class TDExporter
 	      pw.format( sw.toString() );
               sw = new StringWriter();
               psw = new PrintWriter( sw );
-              lrud = computeLRUD( ref_item, list, false );
+              lrud = computeLRUD( ref_item, list, TDSetting.mVTopoLrudAtFrom );
               printShotToTro( pw, ref_item, leg, lrud );
               // duplicate = false;
               // surface = false;
@@ -3935,7 +3938,7 @@ class TDExporter
 	      pw.format( sw.toString() );
               sw = new StringWriter();
               psw = new PrintWriter( sw );
-              lrud = computeLRUD( ref_item, list, false );
+              lrud = computeLRUD( ref_item, list, TDSetting.mVTopoLrudAtFrom );
               printShotToTro( pw, ref_item, leg, lrud );
             }
             ref_item = item;
@@ -3951,7 +3954,7 @@ class TDExporter
           started = printStartShotToTro( pw, ref_item, list );
         }
 	pw.format( sw.toString() );
-        lrud = computeLRUD( ref_item, list, false );
+        lrud = computeLRUD( ref_item, list, TDSetting.mVTopoLrudAtFrom );
         printShotToTro( pw, ref_item, leg, lrud );
       } else {
 	pw.format( sw.toString() );

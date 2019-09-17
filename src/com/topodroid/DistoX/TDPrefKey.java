@@ -386,15 +386,16 @@ class TDPrefKey
     "DISTOX_LRUD_VERTICAL", 
     "DISTOX_LRUD_HORIZONTAL", // 4 
     "DISTOX_BEZIER_STEP",           // max step between interpolating points for bezier in export (cSurvey)
-    "DISTOX_EXPORT_IMPORT_PREF", // 9
+    "DISTOX_EXPORT_IMPORT_PREF", // 6
     "DISTOX_EXPORT_SVX_PREF",
     "DISTOX_EXPORT_TH_PREF",
     "DISTOX_EXPORT_DAT_PREF",
-    "DISTOX_EXPORT_SVG_PREF",    // 12
+    "DISTOX_EXPORT_TRO_PREF",
+    "DISTOX_EXPORT_SVG_PREF",    // 11
     "DISTOX_EXPORT_DXF_PREF",
     "DISTOX_EXPORT_PNG_PREF",
-    "DISTOX_EXPORT_KML_PREF",    // 15
-    "DISTOX_EXPORT_CSV_PREF",    // 16
+    "DISTOX_EXPORT_KML_PREF",    // 14
+    "DISTOX_EXPORT_CSV_PREF",    // 15
     null
   };
 
@@ -409,6 +410,7 @@ class TDPrefKey
     R.string.pref_cat_exportsvx,
     R.string.pref_cat_exportth,
     R.string.pref_cat_exportdat,
+    R.string.pref_cat_exporttro,
     R.string.pref_cat_exportsvg,
     R.string.pref_cat_exportdxf,
     R.string.pref_cat_exportpng,
@@ -432,6 +434,7 @@ class TDPrefKey
     -1,
     -1,
     -1,
+    -1,
   };
 
   static String[] EXPORTdef = {
@@ -441,6 +444,7 @@ class TDPrefKey
     TDString.ZERO,
     TDString.NINETY,
     "0.2",
+    TDString.EMPTY,
     TDString.EMPTY,
     TDString.EMPTY,
     TDString.EMPTY,
@@ -638,6 +642,24 @@ class TDPrefKey
   };
   static String[] EXPORT_DATdef = {
     FALSE,   // 8 COMPASS
+    TRUE,
+    FALSE,
+  };
+
+  // ------------------------------------------------------------------------------
+  static String[] EXPORT_TRO = {
+    "DISTOX_VTOPO_SPLAYS",       // whether to add splays to VisualTopo tro export
+    "DISTOX_VTOPO_LRUD",         // whether VisualTopo LRUD are at-from 
+  };
+  static int[] EXPORT_TROtitle = {
+    R.string.pref_vtopo_splays_title,
+    R.string.pref_vtopo_lrud_title,
+  };
+  static int[] EXPORT_TROdesc = {
+    R.string.pref_vtopo_splays_summary,
+    R.string.pref_vtopo_lrud_title,
+  };
+  static String[] EXPORT_TROdef = {
     TRUE,
     FALSE,
   };

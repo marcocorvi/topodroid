@@ -71,6 +71,7 @@ Import Therion files must have extension ".th".<br>
 TopoDroid parsing of <i>Therion</i> data syntax is very limited. Basically only data in "normal" form are understood. The Therion data commands "units", "flag", "extend", "mark" and "station" are supported.<br>
 Fixed points ("fix") are parsed but not taken into account as "cs" is not supported.<br><p>
 
+
 <b>Compass</b> (.dat)<br>
 <i>Compass</i> data file are supported both in import and in export.<br>
 Import compass files must have extension either ".dat" or ".DAT".<br>
@@ -85,6 +86,34 @@ Settings:
 </ul>
 <br><p>
 
+
+<b>VisualTopo</b> (.tro)<br>
+<i>VisualTopo</i> data file are supported both in import and in export.<br>
+Import VisualTopo files must have extension either ".tro" or ".TRO".<br>
+VisualTopo splays are included if enabled.<br>
+By default LRUD are at the TO station, but they can be set at the FROM station.<br> 
+Data units are 'meters' and 'degrees'.<br><p>
+
+Settings:
+<ul style="margin-top=0">
+<li><u>splays</u></li>
+<li><u>LRUD at From</u></li>
+</ul>
+<br><p>
+
+
+<b>Survex</b> (.svx)<br>
+Survey data can be exported as <i>Survex</i> files.<br>
+Data units follow the user options.<br><p>
+Import Survex files must have extension ".svx".<br>
+
+Settings:<ul style="margin-top=0">
+<li><u>line termination</u> can be either Unix or Windows</li>
+<li><u>named TO station</u> for splay shots (the TO name is the FROM station with a letter appended)</li>
+<li>add <u>LRUD</u> to export</li>
+</ul><p>
+
+
 <b>cSurvey</b> (.csx)<br>
 The <i>cSurvey</i> export from the survey <u>info window</u> includes only the 
 survey data, and does not have any sketch.<br>
@@ -94,6 +123,19 @@ you should export from the <u>drawing window</u>.
 
 The <i>cSurvey</i> export includes the calibration-check shots and media files
 (audio and photo).<br><p>
+
+
+<b>TopoRobot</b> (.trb)<br>
+Survey data can be exported as <i>TopoRobot</i> files. The <i>TopoRobot</i> station naming policy
+must have been selected. If the station names follow TopoRobot convention "series.number", they are used.<br><p>
+
+<b>Walls</b> (.srv)<br>
+Survey data can be exported as <i>Walls</i> files (partially tested).<br>
+Data units follow the user options.<br><p>
+
+<b>WinKarst</b> (.sur)<br>
+Survey data can be exported as <i>WinKarst</i> files (untested).<br><p>
+
 
 <b>PocketTopo</b> (.top)<br>
 TopoDroid supports <i>PocketTopo</i> both in import and in export.<br><p>
@@ -111,12 +153,15 @@ Therefore a <a href="page_pt_cmap.htm">mapping</a> from colors to TopoDroid type
 It may happen that the imported sketch is not aligned with the survey data. In this case you can shift the sketch in the
 <u>sketch window</u>, to fit the centerline.<br><p>
 
+
 <b>Polygon</b> (.cave)<br>
 TopoDroid can export survey data in <i>Polygon</i> format. 
 Fixed points are exported as lat-long.<br><p>
 
+
 <b>GHTopo</b> (.gtx)<br>
 TopoDroid can export survey data in <i>GHTopo</i> format (partially tested).<br><p>
+
 
 <b>Grottolf</b> (.grt)<br>
 TopoDroid can export survey data in <i>Grottolf</i> format (untested). 
@@ -124,16 +169,6 @@ If the first station has geographical coordinates these are exported, otherwise 
 The profile at the stations are computed by projecting the splay shots onto a vertical plane perpendicular to the
 leg.<br><p>
 
-<b>Survex</b> (.svx)<br>
-Survey data can be exported as <i>Survex</i> files.<br>
-Data units follow the user options.<br><p>
-Import Survex files must have extension ".svx".<br>
-
-Settings:<ul style="margin-top=0">
-<li><u>line termination</u> can be either Unix or Windows</li>
-<li><u>named TO station</u> for splay shots (the TO name is the FROM station with a letter appended)</li>
-<li>add <u>LRUD</u> to export</li>
-</ul><p>
 
 <b>Topo</b> (.cav)<br>
 Survey data can be exported as <i>Topo</i> files.<br><p>
@@ -142,23 +177,6 @@ Settings (under "Survex"settings):
 <ul style="margin-top=0">
 <li><u>line termination</u> can be either Unix or Windows</li>
 </ul><p>
-
-<b>TopoRobot</b> (.trb)<br>
-Survey data can be exported as <i>TopoRobot</i> files. The <i>TopoRobot</i> station naming policy
-must have been selected. If the station names follow TopoRobot convention "series.number", they are used.<br><p>
-
-<b>VisualTopo</b> (.tro)<br>
-<i>VisualTopo</i> data file are supported both in import and in export.<br>
-Import VisualTopo files must have extension either ".tro" or ".TRO".<br>
-VisualTopo splays are supported.<br>
-Data units are 'meters' and 'degrees'.<br><p>
-
-<b>Walls</b> (.srv)<br>
-Survey data can be exported as <i>Walls</i> files (partially tested).<br>
-Data units follow the user options.<br><p>
-
-<b>WinKarst</b> (.sur)<br>
-Survey data can be exported as <i>WinKarst</i> files (untested).<br><p>
 
 <b>PLT</b> (.plt)<br>
 Survey data can be exported as track file (<i>OziExplorer</i>) if you have georeferenced a station.
@@ -251,6 +269,7 @@ Survey data are exported as 3D DXF with layers
 <li>splays</li>
 </ul><br>
 Data are corrected with the magnetic declination.<br><p>
+
 
 <h4>SKETCH EXPORT</h4>
 

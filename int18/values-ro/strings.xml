@@ -991,6 +991,10 @@
   <string name="pref_station_prefix_summary">Exportă prefix stație (Compass)~</string>
   <string name="pref_compass_splays_title">Radieri Compass</string>
   <string name="pref_compass_splays_summary">Exportă radierile în fișiere Compass</string>
+  <!-- TODO string name="pref_vtopo_splays_title">VisualTopo splays</string -->
+  <!-- TODO string name="pref_vtopo_splays_summary">Export splays in VisualTopo files</string -->
+  <!-- TODO string name="pref_vtopo_lrud_title">LRUD at From</string -->
+  <!-- TODO string name="pref_vtopo_lrud_summary">VisualTopo LRUD at From station</string -->
   <!-- UNUSED string name="pref_trobot_names_title">TopoRobot nume stații</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Numele stațiilor sunt în stil TopoRobot</string -->
   <string name="pref_ortho_lrud_title">Unghi radieri LRUD</string>

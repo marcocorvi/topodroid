@@ -1013,6 +1013,10 @@
   <string name="pref_station_prefix_summary">Export predčíslia bodov Compass</string>
   <string name="pref_compass_splays_title">Pomocné zámery</string>
   <string name="pref_compass_splays_summary">Export pomocných zámer do programu Compass</string>
+  <!-- TODO string name="pref_vtopo_splays_title">VisualTopo splays</string -->
+  <!-- TODO string name="pref_vtopo_splays_summary">Export splays in VisualTopo files</string -->
+  <!-- TODO string name="pref_vtopo_lrud_title">LRUD at From</string -->
+  <!-- TODO string name="pref_vtopo_lrud_summary">VisualTopo LRUD at From station</string -->
   <!-- UNUSED string name="pref_trobot_names_title">TopoRobot station names</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Station names are in TopoRobot style</string -->
   <string name="pref_ortho_lrud_title">LRUD uhol pomocnej zámery</string>

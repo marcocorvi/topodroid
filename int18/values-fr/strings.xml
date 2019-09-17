@@ -981,6 +981,10 @@
   <string name="pref_station_prefix_summary">Export préfixe station cSurvey</string>
   <string name="pref_compass_splays_title">Visées latérales d\'habillage Compass</string>
   <string name="pref_compass_splays_summary">Exporter les visées latérales d\'habillage dans le fichier Compass</string>
+  <!-- TODO string name="pref_vtopo_splays_title">VisualTopo splays</string -->
+  <!-- TODO string name="pref_vtopo_splays_summary">Export splays in VisualTopo files</string -->
+  <!-- TODO string name="pref_vtopo_lrud_title">LRUD at From</string -->
+  <!-- TODO string name="pref_vtopo_lrud_summary">VisualTopo LRUD at From station</string -->
   <!-- UNUSED string name="pref_trobot_names_title">Noms stations TopoRobot</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Les noms de station sont de style TopoRobot</string -->
   <string name="pref_ortho_lrud_title">Angle visée chem. LRUD</string>

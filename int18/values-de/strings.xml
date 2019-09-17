@@ -1005,6 +1005,10 @@
   <string name="pref_station_prefix_summary">Exportiere Messpunkt Prefix (compass)</string>
   <string name="pref_compass_splays_title">Compass: Hilfszüge</string>
   <string name="pref_compass_splays_summary">Export Hilfszüge (compass)</string>
+  <!-- TODO string name="pref_vtopo_splays_title">VisualTopo splays</string -->
+  <!-- TODO string name="pref_vtopo_splays_summary">Export splays in VisualTopo files</string -->
+  <!-- TODO string name="pref_vtopo_lrud_title">LRUD at From</string -->
+  <!-- TODO string name="pref_vtopo_lrud_summary">VisualTopo LRUD at From station</string -->
   <!-- UNUSED string name="pref_trobot_names_title">TopoRobot Namen</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Stationen wie in TopoRobot benennen</string -->
   <string name="pref_ortho_lrud_title">Min. Winkel für LRUD</string>

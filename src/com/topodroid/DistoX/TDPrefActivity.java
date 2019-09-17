@@ -53,28 +53,29 @@ public class TDPrefActivity extends Activity
   static final int PREF_CATEGORY_SVX       =  8;
   static final int PREF_CATEGORY_TH        =  9;
   static final int PREF_CATEGORY_DAT       = 10;
-  static final int PREF_CATEGORY_SVG       = 11;
-  static final int PREF_CATEGORY_DXF       = 12;
-  static final int PREF_CATEGORY_PNG       = 13;
-  static final int PREF_CATEGORY_KML       = 14;
-  static final int PREF_CATEGORY_CSV       = 15;
-  static final int PREF_SHOT_DATA          = 16; 
-  static final int PREF_SHOT_UNITS         = 17; 
-  static final int PREF_ACCURACY           = 18; 
-  static final int PREF_LOCATION           = 19; 
-  static final int PREF_PLOT_SCREEN        = 20; 
-  static final int PREF_TOOL_LINE          = 21; 
-  static final int PREF_TOOL_POINT         = 22; 
-  static final int PREF_PLOT_WALLS         = 23; 
-  static final int PREF_PLOT_DRAW          = 24; 
-  static final int PREF_PLOT_ERASE         = 25; 
-  static final int PREF_PLOT_EDIT          = 26; 
-  static final int PREF_CATEGORY_GEEK      = 27; 
-  static final int PREF_GEEK_SHOT          = 28; 
-  static final int PREF_GEEK_PLOT          = 29; 
-  static final int PREF_GEEK_LINE          = 30; 
-  static final int PREF_GEEK_DEVICE        = 31; 
-  static final int PREF_CATEGORY_LOG       = 32; // this must be the last
+  static final int PREF_CATEGORY_TRO       = 11;
+  static final int PREF_CATEGORY_SVG       = 12;
+  static final int PREF_CATEGORY_DXF       = 13;
+  static final int PREF_CATEGORY_PNG       = 14;
+  static final int PREF_CATEGORY_KML       = 15;
+  static final int PREF_CATEGORY_CSV       = 16;
+  static final int PREF_SHOT_DATA          = 17; 
+  static final int PREF_SHOT_UNITS         = 18; 
+  static final int PREF_ACCURACY           = 19; 
+  static final int PREF_LOCATION           = 20; 
+  static final int PREF_PLOT_SCREEN        = 21; 
+  static final int PREF_TOOL_LINE          = 22; 
+  static final int PREF_TOOL_POINT         = 23; 
+  static final int PREF_PLOT_WALLS         = 24; 
+  static final int PREF_PLOT_DRAW          = 25; 
+  static final int PREF_PLOT_ERASE         = 26; 
+  static final int PREF_PLOT_EDIT          = 27; 
+  static final int PREF_CATEGORY_GEEK      = 28; 
+  static final int PREF_GEEK_SHOT          = 29; 
+  static final int PREF_GEEK_PLOT          = 30; 
+  static final int PREF_GEEK_LINE          = 31; 
+  static final int PREF_GEEK_DEVICE        = 32; 
+  static final int PREF_CATEGORY_LOG       = 33; // this must be the last
 
   static int[] mTitleRes = {
     R.string.title_settings_main,     // 0
@@ -206,6 +207,7 @@ public class TDPrefActivity extends Activity
       case PREF_CATEGORY_SVX:       mPrefs = TDPref.makeSvxPrefs(      this, hlp ); break;
       case PREF_CATEGORY_TH:        mPrefs = TDPref.makeThPrefs(       this, hlp ); break;
       case PREF_CATEGORY_DAT:       mPrefs = TDPref.makeDatPrefs(      this, hlp ); break;
+      case PREF_CATEGORY_TRO:       mPrefs = TDPref.makeTroPrefs(      this, hlp ); break;
       case PREF_CATEGORY_SVG:       mPrefs = TDPref.makeSvgPrefs(      this, hlp ); break;
       case PREF_CATEGORY_DXF:       mPrefs = TDPref.makeDxfPrefs(      this, hlp ); break;
       case PREF_CATEGORY_PNG:       mPrefs = TDPref.makePngPrefs(      this, hlp ); break;
@@ -300,6 +302,7 @@ public class TDPrefActivity extends Activity
       linkPreference( "DISTOX_EXPORT_SVX_PREF",     PREF_CATEGORY_SVX );
       linkPreference( "DISTOX_EXPORT_TH_PREF",      PREF_CATEGORY_TH );
       linkPreference( "DISTOX_EXPORT_DAT_PREF",     PREF_CATEGORY_DAT );
+      linkPreference( "DISTOX_EXPORT_TRO_PREF",     PREF_CATEGORY_TRO );
       linkPreference( "DISTOX_EXPORT_SVG_PREF",     PREF_CATEGORY_SVG );
       linkPreference( "DISTOX_EXPORT_DXF_PREF",     PREF_CATEGORY_DXF );
       linkPreference( "DISTOX_EXPORT_PNG_PREF",     PREF_CATEGORY_PNG );
