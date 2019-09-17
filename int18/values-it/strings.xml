@@ -160,7 +160,7 @@
     <string name="import_title">Importazione file</string>
     <!-- UNUSED string name="import_wait">Importazione file&#8230; attendi&#8230;</string -->
     <string name="import_already">Rilievo già presente</string>
-    <!-- TODO string name="import_bad">Invalid import file</string -->
+    <string name="import_bad">File di Import non valido</string>
     <string name="import_none">Nessun file da importare</string>
     <string name="import_failed">Importazione file fallita</string>
     <string name="file_not_found">File non trovato</string>
@@ -916,7 +916,7 @@
     <string name="title_calib_export">Esporta calibrazione come </string>
     <!-- OK ENGLISH string name="title_zoom">Zoom</string -->
 
-  <!-- TODO string name="pref_export_settings">Export settings</string -->
+  <string name="pref_export_settings">Impostazioni Export</string>
 
   <string name="pref_cat_survey">OPZIONI RILIEVO</string>
   <string name="pref_cat_drawing">OPZIONI DISEGNO</string>
@@ -963,8 +963,8 @@
   <string name="pref_size_buttons_summary">Dimensione bottoni barra superiore [pixels]</string>
   <string name="pref_with_sensors_title">Sensori</string>
   <string name="pref_with_sensors_summary">Abilita dati "sensori"</string>
-  <!-- TODO string name="pref_with_android_azimuth_title">Android compass</string -->
-  <!-- TODO string name="pref_with_android_azimuth_summary">Enable Android compass/clino</string -->
+  <string name="pref_with_android_azimuth_title">Bussola Android</string>
+  <string name="pref_with_android_azimuth_summary">Abilita bussola/clino Android</string>
   <string name="pref_with_levels_title">Strati</string>
   <string name="pref_with_levels_summary">Usa strati di tele</string>
   <string name="pref_palettes_title">Tavolozze</string>
@@ -986,10 +986,10 @@
   <string name="pref_station_prefix_summary">Esporta caposaldi con prefisso [Compass]</string>
   <string name="pref_compass_splays_title">Splay Compass</string>
   <string name="pref_compass_splays_summary">Esporta splay in file Compass</string>
-  <!-- TODO string name="pref_vtopo_splays_title">VisualTopo splays</string -->
-  <!-- TODO string name="pref_vtopo_splays_summary">Export splays in VisualTopo files</string -->
-  <!-- TODO string name="pref_vtopo_lrud_title">LRUD at From</string -->
-  <!-- TODO string name="pref_vtopo_lrud_summary">VisualTopo LRUD at From station</string -->
+  <string name="pref_vtopo_splays_title">Splay VisualTopo</string>
+  <string name="pref_vtopo_splays_summary">Esporta splay in VisualTopo</string>
+  <string name="pref_vtopo_lrud_title">LRUD al DA</string>
+  <string name="pref_vtopo_lrud_summary">LRUD VisualTopo al caposaldo DA</string>
   <!-- UNUSED string name="pref_trobot_names_title">Nomi capisaldi TopoRobot</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">I nomi capisaldi sono in stile TopoRobot</string -->
   <string name="pref_ortho_lrud_title">Angolo di splay di tipo LRUD</string>
