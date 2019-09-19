@@ -32,12 +32,12 @@
     <string name="AREA">Área</string>
     <string name="HELP">Ayuda</string>
     <string name="STATION">Estación</string>
-    <!-- TODO string name="UP">UPWARD</string -->
-    <!-- TODO string name="DOWN">DOWNWARD</string -->
+    <string name="UP">HACIA ARRIBA</string>
+    <string name="DOWN">HACIA ABAJO</string>
 
-    <!-- TODO string name="xsplay">X</string -->
-    <!-- TODO string name="hsplay">H</string -->
-    <!-- TODO string name="vsplay">V</string -->
+    <string name="xsplay">X</string>
+    <string name="hsplay">H</string>
+    <string name="vsplay">V</string>
 
     <string name="cut">Cortar</string>
     <string name="copy">Copiar</string>
@@ -59,7 +59,7 @@
     <string name="make_walls">Paredes</string>
     <string name="missing_station">Falta Estación</string>
     <string name="station_not_found">Estación no encontrada</string>
-    <!-- TODO string name="shot_not_found">No shot found</string -->
+    <string name="shot_not_found">No se encontró ninguna toma</string>
     <!-- UNUSED string name="missing_area">Área</string -->
     <!-- UNUSED string name="missing_hint">Por favor, instale los símbolos con TdSymbol</string -->
     <!-- UNUSED string name="missing_line">Línea</string -->
@@ -71,7 +71,7 @@
     <string name="failed_snap_to_line">No hay línea cercana al borde</string>
     <string name="failed_snap_to_point">No hay punto cercano al borde</string>
     <string name="failed_snap_to_splays">No se puede cerrar la línea</string>
-    <!-- TODO string name="failed_append_to_line">No se pudo agregar a otra línea</string -->
+    <string name="failed_append_to_line">No se puede agregar a otra línea</string>
 
     <string name="calibration_title">Calibración de instrumentos</string>
     <string name="calibration_length">Cinta</string>
@@ -152,7 +152,7 @@
     <string name="few_data">No hay suficientes datos</string>
     <string name="few_iter">Interacción fallida</string>
     <string name="few_groups">No hay suficientes datos del grupo</string>
-    <!-- TODO string name="found_groups">Found %1$d groups</string -->
+    <string name="found_groups">Se encontraron %1$d grupos</string>
     <!-- UNUSED string name="few_plots">No hay suficientes dibujos</string -->
     <string name="few_calibs">No hay suficientes calibraciones</string>
     <string name="getting_info">Obteniendo información DistoX &#8230;</string>
@@ -161,7 +161,7 @@
     <string name="import_title">Importar archivo</string>
     <!-- UNUSED string name="import_wait">Importando archivo, espere&#8230;</string -->
     <string name="import_already">Topografía importada con éxito</string>
-    <!-- TODO string name="import_bad">Invalid import file</string -->
+    <string name="import_bad">Archivo de importación no válido</string>
     <string name="import_none">No hay archivo a importar</string>
     <string name="import_failed">Fallo al importar archivo</string>
     <string name="file_not_found">Archivo no encontrado</string>
@@ -176,8 +176,8 @@
     <!-- UNUSED string name="sketch_saving">Exportando dibujo &#8230; espere &#8230;</string -->
     <string name="MT_points_none">No hay punto móvil Topográfico</string>
 
-    <!-- TODO string name="pleasewait">Please wait</string -->
-    <!-- TODO string name="processing">processing &#8230;</string -->
+    <string name="pleasewait">Por favor espere</string>
+    <string name="processing">procesando &#8230;</string>
 
     <!-- UNUSED string name="head_tail">Memoria: </string -->
     <string name="head_tail_failed">Error al leer la memoria DistoX</string>
@@ -202,10 +202,10 @@
     <string name="loop_none">No hay Bucle</string>
     <!-- UNUSED string name="long_lat">Longitud-Latitud</string -->
 
-    <!-- TODO string name="error_m">Error [m]</string -->
-    <!-- TODO string name="fmt_error_m">Error %1$.1f m</string -->
-    <!-- TODO string name="fmt_h_geoid">Error %1$.0f m</string -->
-    <!-- TODO string name="fmt_h_ellipsoid">Error %1$.0f m</string -->
+    <string name="error_m">Error [m]</string>
+    <string name="fmt_error_m">Error %1$.1f m</string>
+    <string name="fmt_h_geoid">Error %1$.0f m</string>
+    <string name="fmt_h_ellipsoid">Error %1$.0f m</string>
     <!-- UNUSED string name="depth_error">Waring. Data depth error</string -->
 
     <string name="error_azimuth_required">Introducir rumbo</string>
@@ -251,16 +251,16 @@
     <!-- UNUSED string name="barrier_del">¿Quiere unir el croquis de la poligonal principal?</string -->
     <!-- UNUSED string name="hidden_add">Oculta dibujo de la poligonal principal</string -->
     <!-- UNUSED string name="hidden_del">Mostrar el croquis de la poligonal principal</string -->
-    <!-- TODO string name="hidden_show">Show shots beyond station</string -->
+    <string name="hidden_show">Mostrar tomas más allá de la estación</string>
     <!-- UNUSED string name="splays_toggle">Cambiar a tomas laterales</string -->
     <!-- TODO string name="splays_on_off">Splays</string -->
     <string name="splays">Tomas laterales</string>
     <!-- TODO string name="legs">Legs</string -->
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <!-- TODO string name="fmt_id">ID %1$s</string -->
-    <!-- TODO string name="fmt_latitude">Latitude %1$s</string -->
-    <!-- TODO string name="fmt_longitude">Longitude %1$s</string -->
-    <!-- TODO string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string --> 
+    <string name="fmt_latitude">Latitud %1$s</string>
+    <string name="fmt_longitude">Longitud %1$s</string>
+    <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string> 
     <string name="fixed">Fijo</string>
     <string name="painted">Dibujado</string>
 
@@ -278,11 +278,11 @@
     <string name="no_calibration">Calibración no seleccionada</string>
     <string name="no_capture_app">No hay aplicación para capturar imagen</string>
     <string name="no_cave3d">Cave3D No instalado</string>
-    <!-- TODO string name="no_data_reduction">No data reduction</string -->
+    <string name="no_data_reduction">Sin reducción de datos</string>
     <string name="no_db">No hay base de datos</string>
     <string name="no_device_address">Dispositivo no seleccionado</string>
     <string name="no_device_found">No se encuentra dispositivos</string>
-    <!-- TODO string name="no_feature_audio">Audio not supported</string -->
+    <string name="no_feature_audio">Audio no compatible</string>
     <string name="no_gms">La calibración no tiene datos.\nPulse el botón Descargar</string>
     <string name="no_geo_station">Error: estación no geolocalizada</string>
     <!-- TODO string name="no_leg_first">Selection does not start with a leg</string -->
