@@ -886,24 +886,24 @@
     <string name="title_settings_png">Configuración de exportación PNG export</string>
     <string name="title_settings_kml">Configuración de exportación KML</string>
 
-    <!-- TODO string name="title_settings_sketch">TopoDroid 3d sketch settings</string -->
-    <!-- TODO string name="title_settings_survey">TopoDroid survey settings</string -->
-    <!-- TODO string name="title_settings_shot">TopoDroid shot data settings</string -->
-    <!-- TODO string name="title_settings_units">TopoDroid units settings</string -->
-    <!-- TODO string name="title_settings_location">TopoDroid location settings</string -->
-    <!-- TODO string name="title_settings_accuracy">TopoDroid accuracy settings</string -->
-    <!-- TODO string name="title_settings_plot">TopoDroid sketch settings</string -->
-    <!-- TODO string name="title_settings_screen">TopoDroid canvas settings</string -->
-    <!-- TODO string name="title_settings_point">TopoDroid point settings</string -->
-    <!-- TODO string name="title_settings_line">TopoDroid line settings</string -->
-    <!-- TODO string name="title_settings_walls">TopoDroid autowalls settings</string -->
-    <!-- TODO string name="title_settings_draw">TopoDroid drawing settings</string -->
-    <!-- TODO string name="title_settings_erase">TopoDroid erasing settings</string -->
-    <!-- TODO string name="title_settings_edit">TopoDroid editing settings</string -->
-    <!-- TODO string name="title_settings_device">TopoDroid device settings</string -->
-    <!-- TODO string name="title_settings_calib">TopoDroid calibration settings</string -->
-    <!-- TODO string name="title_settings_geek">TopoDroid geek flags settings</string -->
-    <!-- TODO string name="title_settings_log">TopoDroid log settings</string -->
+    <string name="title_settings_sketch">Ajuste de dibujo 3D en TopoDroid</string>
+    <string name="title_settings_survey">Ajustes de la topografía en TopoDroid</string>
+    <string name="title_settings_shot">Ajustes de datos de tomas en TopoDroid</string>
+    <string name="title_settings_units">Ajustes de las unidades en TopoDroid</string>
+    <string name="title_settings_location">Ajustes de ubicación en TopoDroid</string>
+    <string name="title_settings_accuracy">Ajustes de precisión en TopoDroid</string>
+    <string name="title_settings_plot">Ajustes de croquis en TopoDroid</string>
+    <string name="title_settings_screen">Ajustes del dibujo en TopoDroid</string>
+    <string name="title_settings_point">Ajustes de puntos en TopoDroid</string>
+    <string name="title_settings_line">Ajustes de línea en TopoDroid</string>
+    <string name="title_settings_walls">Ajustes de paredes automáticas en TopoDroid</string>
+    <string name="title_settings_draw">Ajustes de dibujo en TopoDroid</string>
+    <string name="title_settings_erase">Ajustes de borrado en TopoDroid</string>
+    <string name="title_settings_edit">Ajustes de edición en TopoDroid</string>
+    <string name="title_settings_device">Ajustes del dispositivo en TopoDroid</string>
+    <string name="title_settings_calib">Ajustes de calibración en TopoDroid</string>
+    <!-- TODO string name="title_settings_geek">TopoDroid geek flags settings</string-->
+    <string name="title_settings_log">Ajustes de registro en TopoDroid</string>
 
     <string name="title_shift">Cambio</string>
     <string name="title_shot_delete">¿Quiere eliminar la toma?</string>
@@ -927,12 +927,12 @@
     <string name="title_calib_export">Exportar topografía como&#8230;</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-  <!-- TODO string name="pref_export_settings">Export settings</string -->
+  <string name="pref_export_settings">Ajustes de exportación</string>
 
   <string name="pref_cat_survey">Ajustes de topografía</string>
   <string name="pref_cat_drawing">Ajustes de dibujo</string>
   <string name="pref_cat_import_export">Importar/Exportar</string>
-  <!-- TODO string name="pref_cat_exportimport">IMPORT</string -->
+  <string name="pref_cat_exportimport">IMPORTAR</string>
   <!-- OK string name="pref_cat_exportth">Therion</string -->
   <!-- OK string name="pref_cat_exportdat">Compass</string -->
   <!-- OK string name="pref_cat_exportsvg">SVG</string -->
