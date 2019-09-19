@@ -309,16 +309,16 @@
     <!-- UNUSED string name="menu_attach">Conectar</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
-    <!-- TODO string name="menu_backups">CLEAR BACKUPS</string -->
+    <string name="menu_backups">LIMPIAR COPIAS DE SEGURIDAD</string>
     <string name="menu_calib_check">Verificar calibración</string>
     <string name="menu_close">Cerrar</string>
     <!-- UNUSED string name="menu_clear">CLEAR</string -->
-    <!-- TODO string name="menu_color">CLEAR COLOR</string -->
+    <string name="menu_color">LIMPIAR COLOR</string>
     <string name="menu_delete">Eliminar</string>
     <string name="menu_detach">Desconectar</string>
     <!-- UNUSED string name="menu_display">Pantalla</string -->
-    <!-- TODO string name="menu_show_deleted">SHOW DELETED</string -->
-    <!-- TODO string name="menu_hide_deleted">HIDE DELETED</string -->
+    <string name="menu_show_deleted">MOSTRAR ELIMINADOS</string>
+    <string name="menu_hide_deleted">OCULTAR ELIMINADO</string>
     <string name="menu_distox">DistoX</string>
     <string name="menu_export">Exportar</string>
     <string name="menu_firmware">Firmware</string>
@@ -333,13 +333,13 @@
     <string name="menu_manual_calibration">Calibración</string>
     <string name="menu_options">Ajustes</string>
     <string name="menu_overview">Medir distancia</string>
-    <!-- TODO string name="menu_packets">PACKETS</string -->
+    <string name="menu_packets">PAQUETES</string>
     <string name="menu_pair">Emparejar</string>
     <string name="menu_palette">Simbología</string>
     <string name="menu_photo">Tomas con foto</string>
     <string name="menu_sensor">Tomas con sensor</string>
     <string name="menu_scan">Escanear</string>
-    <!-- TODO string name="menu_scan_ble">SCAN BTLE</string -->
+    <string name="menu_scan_ble">ESCANEAR BTLE</string>
     <!-- UNUSED string name="menu_station">Estación</string -->
     <string name="menu_stats">Estadísticas</string>
     <string name="menu_survey">Info. topografía</string>
@@ -348,9 +348,9 @@
     <string name="menu_validate">Validar</string>
     <string name="menu_zoom_fit">Ajustar a pantalla</string>
 
-    <!-- TODO string name="ble_scan_failed">BLE scan failed</string -->
-    <!-- TODO string name="ble_gatt_failure">BLE failure</string -->
-    <!-- TODO string name="ble_no_remote">No remote device</string -->
+    <string name="ble_scan_failed">Fallo escaneo BLE</string>
+    <string name="ble_gatt_failure">Fallo BLE</string>
+    <string name="ble_no_remote">Sin dispositivo remoto</string>
 
     <string name="popup_join_pt">Unir al punto más cercano</string>
     <string name="popup_snap_ln">Ajustar a la línea más cercana</string>
@@ -360,7 +360,7 @@
     <string name="popup_sharp_pt">Segmento recto</string>
     <string name="popup_curve_pt">Segmento curvo</string>
     <string name="popup_remove_pt">Eliminar punto</string>
-    <!-- TODO string name="popup_append_line">Append to line</string -->
+    <string name="popup_append_line">Agregar a la línea</string>
 
     <string name="popup_erase_all">Borrar Todo</string>
     <string name="popup_erase_point">Borrar puntos</string>
@@ -379,8 +379,8 @@
     <string name="popup_cont_both">Ambos puntos</string>
     <string name="popup_cont_continue">Continuar</string>
 
-    <!-- TODO string name="connection_error">Connection error</string -->
-    <!-- TODO string name="connecting">Connecting &#8230;</string -->
+    <string name="connection_error">Error conexión</string>
+    <string name="connecting">Conectando &#8230;</string>
     <!-- UNUSED string name="connected_none">No conctado</string -->
     <!-- UNUSED string name="connected_already">Ya esta conectado</string -->
 
@@ -405,7 +405,7 @@
     <string name="item_delete">¿Quiere eliminar elemento %1$s?</string>
     <string name="splay_delete">¿Quiere eliminar tomas radiales %1$s ?</string>
     <string name="plot_duplicate_name">Nombre de croquis duplicado</string>
-    <!-- TODO string name="plot_dangling">Dangling sketch</string -->
+    <string name="plot_dangling">Croquis colgado</string>
     <!-- UNUSED string name="plot_name">Nombre dibujo</string -->
     <string name="plot_new">Nuevo croquis</string>
     <string name="plot_not_found">No hay croquis</string>
@@ -482,15 +482,15 @@
     <string name="survey_not_attached">ADVERTENCIA: Medidas no insertadas</string>
     <string name="survey_not_extend">ADVERTENCIA: la toma desvinculada sin extensión</string>
     <string name="survey_not_attached_extend">ADVERTENCIA: Tomas no conectadas y desvinculadas</string>
-    <!-- TODO string name="saturated_coeffs">WARNING: saturated calibration coefficients</string -->
-    <!-- TODO string name="out_of_memory">WARNING: out of memory !</string -->
-    <!-- TODO string name="disk_io_error">CRITICAL: disk i/o error !</string -->
+    <string name="saturated_coeffs">ADVERTENCIA: coeficientes de calibración saturados</string>
+    <string name="out_of_memory">ADVERTENCIA: sin memoria!</string>
+    <string name="disk_io_error">ERROR CRÍTICO: error de E/S de disco!</string>
     
-    <!-- TODO string name="toporobot_warning">TopoRobot policy is exterimental !</string -->
-    <!-- TODO string name="anomaly_warning">Magnatic anomaly compensation is expert !</string -->
-    <!-- TODO string name="tripod_warning">Tripod policy is advanced !</string -->
-    <!-- TODO string name="coverage_warning">Angle coverage below %1$d %%\nWrite coefficients?</string -->
-    <!-- TODO string name="delta_warning">Average error above %1$.1f\nWrite coefficients?</string -->
+    <string name="toporobot_warning">¡La política de TopoRobot es experimental!</string>
+    <string name="anomaly_warning">¡La compensación de anomalías magnéticas es modo experto!</string>
+    <string name="tripod_warning">¡La política de trípode está en modo avanzado!</string>
+    <string name="coverage_warning">Ángulo de cobertura por debajo de %1$d %%\nEscribir coeficientes?</string>
+    <string name="delta_warning">Error promedio superior %1$.1f\nEscribir coeficientes?</string>
 
     <string name="cannot_rename">No se puede cambiar el nombre de la topografía</string>
     <string name="declination">Declinación magnética </string>
@@ -514,7 +514,7 @@
     <string name="zip_saved">Guardar</string>
     <string name="zip_failed">Error al archivar Topografía</string>
     <string name="unzip_fail">Error al importar archivo</string>
-    <!-- TODO string name="unzip_fail_sqlite">Failed SQL: delete survey and retry</string -->
+    <string name="unzip_fail_sqlite">Fallo SQL: elimine la topografía y vuelva a intentarlo</string>
     <string name="unzip_fail_survey">Error: El nombre de la topo no coincide</string>
     <string name="unzip_fail_db">Error: La versión de base de datos no coincide</string>
     <string name="unzip_fail_td">Error: Versión TopoDroid no coincide</string>
