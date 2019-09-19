@@ -874,17 +874,17 @@
     <string name="title_scraps_outline">Esquema del dibujo</string>
     <!-- UNUSED string name="title_select">Seleccionar</string -->
 
-    <!string name="title_settings_main">Configuración principal de TopoDroid</string>
-    <!string name="title_settings_export">Configuración de importación / exportación de TopoDroid</string>
-    <!string name="title_settings_import">Configuración de importación de TopoDroid</string>
-    <!string name="title_settings_csv">Configuración de exportación CSV</string>
-    <!string name="title_settings_svx">Configuración de exportación Survex</string>
-    <!string name="title_settings_th">Configuración de exportación Therion</string>
-    <!string name="title_settings_dat">Configuración de exportación Compass</string>
-    <!string name="title_settings_svg">Configuración de exportación SVG export</string>
-    <!string name="title_settings_dxf">Configuración de exportación DXF export</string>
-    <!string name="title_settings_png">Configuración de exportación PNG export</string>
-    <!string name="title_settings_kml">Configuración de exportación KML</string>
+    <string name="title_settings_main">Configuración principal de TopoDroid</string>
+    <string name="title_settings_export">Configuración de importación / exportación de TopoDroid</string>
+    <string name="title_settings_import">Configuración de importación de TopoDroid</string>
+    <string name="title_settings_csv">Configuración de exportación CSV</string>
+    <string name="title_settings_svx">Configuración de exportación Survex</string>
+    <string name="title_settings_th">Configuración de exportación Therion</string>
+    <string name="title_settings_dat">Configuración de exportación Compass</string>
+    <string name="title_settings_svg">Configuración de exportación SVG export</string>
+    <string name="title_settings_dxf">Configuración de exportación DXF export</string>
+    <string name="title_settings_png">Configuración de exportación PNG export</string>
+    <string name="title_settings_kml">Configuración de exportación KML</string>
 
     <!-- TODO string name="title_settings_sketch">TopoDroid 3d sketch settings</string -->
     <!-- TODO string name="title_settings_survey">TopoDroid survey settings</string -->
