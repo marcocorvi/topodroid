@@ -2,8 +2,8 @@
 <resources>
     <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs/2.7-es-UserManual.pdf</string>
     <string name="no_manual">No se puede recuperar el manual de usuario de la web</string>
-    <!-- TODO string name="user_man_ok">Installed user manual translation</string -->
-    <!-- TODO string name="user_man_fail">Failed to install user manual translation</string -->
+    <string name="user_man_ok">Instalado traducción manual de usuario</string>
+    <string name="user_man_fail">Error al instalar la traducción del manual del usuario</string>
 
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Haga doble click para salir</string>
@@ -11,9 +11,9 @@
     <!-- UNUSED string name="version_ask">Usted va a actualizar a una nueva versión de topodroid.\n¿Quiere volver a instalar los elementos de dibujo?</string -->
     <string name="symbols_ask">¿Quiere instalar simbologías para el croquis v.%1$s?\n(Actualiza v.%2$s)</string>
 
-    <!-- TODO string name="setup_textsize_title">TopoDroid setup. Text size</string -->
-    <!-- TODO string name="setup_buttonsize_title">TopoDroid setup. Button size</string -->
-    <!-- TODO string name="setup_drawingunit_title">TopoDroid setup. Icons size</string -->
+    <string name="setup_textsize_title">Configuración de TopoDroid. Tamano del texto</string>
+    <string name="setup_buttonsize_title">Configuración de TopoDroid. Tamaño del botón</string>
+    <string name="setup_drawingunit_title">Configuración de TopoDroid. Tamaño de los iconos</string>
     <!-- TODO string name="setup_done_title">TopoDroid setup. Done</string -->
     <!-- TODO string name="setup_buttonsample">Button size</string -->
 
