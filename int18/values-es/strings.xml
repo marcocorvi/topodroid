@@ -14,12 +14,12 @@
     <string name="setup_textsize_title">Configuración de TopoDroid. Tamano del texto</string>
     <string name="setup_buttonsize_title">Configuración de TopoDroid. Tamaño del botón</string>
     <string name="setup_drawingunit_title">Configuración de TopoDroid. Tamaño de los iconos</string>
-    <!-- TODO string name="setup_done_title">TopoDroid setup. Done</string -->
-    <!-- TODO string name="setup_buttonsample">Button size</string -->
+    <!-- TODO string name="setup_done_title">Configuración de TopoDroid. Hecho</string -->
+    <!-- TODO string name="setup_buttonsample">Tamaño del botón</string -->
 
-    <!-- TODO string name="setup_textsize">Set the text size.\nYou can always change this later thru the main window settings.</string -->
-    <!-- TODO string name="setup_buttonsize">Set the button size.\nYou can always change this later thru the main window settings.</string -->
-    <!-- TODO string name="setup_drawingunit">Set the sketch icon size.\nYou can always change this later thru the sketch window settings.</string -->
+    <!-- TODO string name="setup_textsize">Establezca el tamaño del texto. \ Puede cambiarlo más tarde a través de la configuración de la ventana principal.</string -->
+    <!-- TODO string name="setup_buttonsize">Establezca el tamaño del botón. \ Puede cambiarlo más tarde a través de la configuración de la ventana principal.</string -->
+    <!-- TODO string name="setup_drawingunit">Establezca el tamaño del icono de boceto. \ Puede cambiarlo más tarde a través de la configuración de la ventana de croquis.</string -->
     <!-- TODO string name="setup_done">The basic setup in done.\n\n
 	    If you experience problems with the DistoX connection, try and set the insecure socket.\n\n
 	    Other settings concern the presentation in the sketching window (icon size, label size, line width, etc.)
@@ -71,7 +71,7 @@
     <string name="failed_snap_to_line">No hay línea cercana al borde</string>
     <string name="failed_snap_to_point">No hay punto cercano al borde</string>
     <string name="failed_snap_to_splays">No se puede cerrar la línea</string>
-    <!-- TODO string name="failed_append_to_line">Failed to append to another line</string -->
+    <!-- TODO string name="failed_append_to_line">No se pudo agregar a otra línea</string -->
 
     <string name="calibration_title">Calibración de instrumentos</string>
     <string name="calibration_length">Cinta</string>
