@@ -1269,16 +1269,16 @@
   <string name="pref_swapLR_summary">Cambiar LR en Compass al exportar</string>
   <string name="pref_LRExtend_title">Ampliación izq./drch. estimada</string>
   <string name="pref_LRExtend_summary">Ampliación L/R estimada (Compass/VisualTopo import)</string>
-  <!-- TODO string name="pref_diving_mode_title">Diving mode</string -->
-  <!-- TODO string name="pref_diving_mode_summary">Enable diving mode</string -->
-  <!-- TODO string name="pref_splay_classes_title">Splay classes</string -->
-  <!-- TODO string name="pref_splay_classes_summary">Enable splay classes and coloring</string -->
-  <!-- TODO string name="pref_splay_color_title">Splay coloring</string -->
-  <!-- TODO string name="pref_splay_color_summary">Enable splay coloring</string -->
-  <!-- TODO string name="pref_plot_shift_title">Sketch shift/scale</string -->
-  <!-- TODO string name="pref_plot_shift_summary">Enable sketch shift and scale</string -->
-  <!-- TODO string name="pref_splay_alpha_title">Splay transparency</string -->
-  <!-- TODO string name="pref_splay_alpha_summary">Splay transparency [0: transparent, 100: opaque]</string -->
+  <string name="pref_diving_mode_title">Modo de buceo</string>
+  <string name="pref_diving_mode_summary">Habilitar el modo de buceo</string>
+  <string name="pref_splay_classes_title">clases de tomas secundarias</string>
+  <string name="pref_splay_classes_summary">Habilitar clases y colores de tomas secundarias</string>
+  <string name="pref_splay_color_title">Colores de tomas secundarias</string>
+  <string name="pref_splay_color_summary">Habilitar colores de tomas secundarias</string>
+  <string name="pref_plot_shift_title">Cambio de croquis / escala</string>
+  <string name="pref_plot_shift_summary">Habilitar cambio de croquis y escala</string>
+  <string name="pref_splay_alpha_title">Transparencia de tomas secundarias</string>
+  <string name="pref_splay_alpha_summary">Transparencia de tomas secundarias [0: transparencia, 100: opaco]</string>
 
   <string name="pref_picker_type_title">Selector de simbología</string>
   <string name="pref_picker_type_summary">Tipo de selector de simbología</string>
@@ -1368,11 +1368,11 @@
   <!-- UNUSED string name="line_normal">normal</string -->
   <!-- UNUSED string name="line_coarse">gruesa</string -->
 
-    <!-- TODO string name="perms_mandatory">TopoDroid cannot run without these permissions:</string -->
-    <!-- TODO string name="perms_optional">TopoDroid may fail without these permissions:</string -->
-    <!-- TODO string name="perm_location">\nLocation</string -->
-    <!-- TODO string name="perm_camera">\nCamera</string -->
-    <!-- TODO string name="perm_microphone">\nMicrophone</string -->
+    <string name="perms_mandatory">TopoDroid no puede ejecutarse sin estos permisos:</string>
+    <string name="perms_optional">TopoDroid puede fallar sin estos permisos:</string>
+    <string name="perm_location">\nUbicación</string>
+    <string name="perm_camera">\nCámara</string>
+    <string name="perm_microphone">\nMicrófono</string>
 
     <string name="welcome_title">Bienvenido a TopoDroid %1$s</string>
 
@@ -1387,27 +1387,27 @@
     </string>
 
 <!-- FIRMWARE DIALOG STRINGS CAN BE LEFT UNTRANSLATED : mark OK untranslated strings -->
-  <!-- TODO string name="firmware_title">Firmware Updater</string -->
-  <!-- TODO string name="firmware_file_title">Firmware Files</string -->
-  <!-- TODO string name="firmware_text">
-\n[1] Select either to upload a firmware or to dump the firmware to a file.
-\n[2] Choose the file to upload or save. Firmware files are in the bin directory.
-\n[3] Make sure the upload firmware version is compatible with the DistoX hardware version.
-\n[4] Put the DistoX2 in bootloader mode: press PLUS and MINUS while switching on with DIST key.
-\n[5] Tap the OK button.
-\n[6] Confirm to continue and wait till the process is done.
-\n[7] Turn off the DistoX2 with the CLR key.
+  <string name="firmware_title">Actualizar de firmware</string>
+  <string name="firmware_file_title">Archivos de firmware</string>
+  <string name="firmware_text">
+\n[1] Seleccione cargar un firmware o volcar el firmware en un archivo.
+\n[2] Elija el archivo para cargar o guardar. Los archivos de firmware están en el directorio bin.
+\n[3] Asegúrese de que la versión de carga del firmware sea compatible con la versión de hardware DistoX.
+\n[4] Ponga el DistoX2 en modo bootloader: presione MÁS y MENOS mientras enciende con la tecla DIST.
+\n[5] Toque el botón Aceptar.
+\n[6] Confirme para continuar y espere hasta que se complete el proceso.
+\n[7] Apague el DistoX2 con la tecla CLR.
 \n
-   </string -->
-   <!-- TODO string name="firmware_none">no firmware file</string -->
-   <!-- TODO string name="firmware_file">firmware file</string -->
-   <!-- TODO string name="firmware_file_exists">Existing firmware file</string -->
-   <!-- TODO string name="firmware_file_missing">Missing firmware file</string -->
-   <!-- TODO string name="ask_dump">Dump firmware?</string -->
-   <!-- TODO string name="ask_upload">Upload firmware?</string -->
-   <!-- TODO string name="ask_upload_not_compatible">Firmware file does not look correct.\nUpload anyways?</string -->
-   <!-- TODO string name="firmware_file_dumped">Saved firmware file %1$s size %2$d</string -->
-   <!-- TODO string name="firmware_file_uploaded">Uploaded firmware file %1$s written %2$d / %3$d</string -->
-   <!-- TODO string name="firmware_not_supported">Device does not support firmware functions</string -->
+   </string>
+   <string name="firmware_none">sin archivo de firmware</string>
+   <string name="firmware_file">Archivo firmware</string>
+   <string name="firmware_file_exists">Existe archivo firmware</string>
+   <string name="firmware_file_missing">No hay archivo firmware</string>
+   <string name="ask_dump">¿Quiere cargar el firmware?</string>
+   <string name="ask_upload">¿Quiere subir el firmware?</string>
+   <string name="ask_upload_not_compatible">Firmware el archivo no parece correcto. \n¿Quiere probar a cargarlo?</string>
+   <string name="firmware_file_dumped">Archivo de firmware guardado %1$s tamaño %2$d</string>
+   <string name="firmware_file_uploaded">Archivo de firmware cargado %1$s escribir %2$d / %3$d</string>
+   <string name="firmware_not_supported">El dispositivo no admite funciones de firmware</string>
 
 </resources>
