@@ -195,7 +195,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         // TDPath.checkPath( tempname1 );
         File tmpDir = TDPath.getTmpDir();
         File[] files = tmpDir.listFiles();
-        for ( File f : files ) {
+        if ( files != null ) for ( File f : files ) {
           if ( f.getName().endsWith("tmp") && f.lastModified() < time ) {
             // TDLog.Log( TDLog.LOG_PLOT, "delete temp file " + f.getAbsolutePath() );
             if ( ! f.delete() ) TDLog.Error("File delete error");

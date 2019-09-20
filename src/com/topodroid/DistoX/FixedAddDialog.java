@@ -103,8 +103,8 @@ class FixedAddDialog extends MyDialog
       MyKeyboard.registerEditText( mKeyboard, mEThgeo, MyKeyboard.FLAG_POINT_SIGN  );
     } else {
       mKeyboard.hide();
-      mETlng.setInputType(  TDConst.NUMBER_DECIMAL_SIGNED );
-      mETlat.setInputType(  TDConst.NUMBER_DECIMAL_SIGNED );
+      mETlng.setInputType(  TDConst.TEXT );
+      mETlat.setInputType(  TDConst.TEXT );
       mEThell.setInputType( TDConst.NUMBER_DECIMAL );
       mEThgeo.setInputType( TDConst.NUMBER_DECIMAL );
       if ( TDSetting.mStationNames == 1 ) {
