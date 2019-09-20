@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-  <!-- TODO string-array name="splayDash">
-     <item name="none">none</item>
+  <string-array name="splayDash">
+     <item name="none">nada</item>
      <item name="plan">clino</item>
-     <item name="profile">azimuth</item>
-     <item name="view">view</item>
+     <item name="profile">rumbo</item>
+     <item name="view">vista</item>
   </string-array -->
 
-  <!-- TODO string-array name="feedbackMode">
-     <item name="none">none</item>
-     <item name="sound">sound</item>
-     <item name="heptic">haptic</item>
+  <string-array name="feedbackMode">
+     <item name="none">nada</item>
+     <item name="sound">sonido</item>
+     <item name="heptic">háptico</item>
   </string-array -->
 
-  <!-- TODO string-array name="canvasLevels">
-     <item name="none">none</item>
-     <item name="class">by symbol</item>
-     <item name="instance">by item</item>
+  <string-array name="canvasLevels">
+     <item name="none">nada</item>
+     <item name="class">por simbolo</item>
+     <item name="instance">por artículo</item>
   </string-array -->
 
-  <!-- TODO string-array name="csvSeparator">
-     <item name="comma">comma</item>
-     <item name="pipe">pipe</item>
-     <item name="tab">tab</item>
+  <string-array name="csvSeparator">
+     <item name="comma">coma</item>
+     <item name="pipe">tubo</item>
+     <item name="tab">tabular</item>
   </string-array -->
 
-  <!-- TODO string-array name="lineContinue">
-     <item name="none">none</item>
-     <item name="start">join with start point</item>
-     <item name="end">join with end point</item>
-     <item name="both">join with both ends</item>
-     <item name="continue">continue</item>
+  <string-array name="lineContinue">
+     <item name="none">nada</item>
+     <item name="start">unir con punto de inicio</item>
+     <item name="end">unir con punto final</item>
+     <item name="both">unir con ambos extremos</item>
+     <item name="continue">continuar</item>
   </string-array -->
   <string-array name="unitGrid">
      <item name="meter">metros</item>
@@ -185,7 +185,7 @@
      <item name="recent">Más reciente</item>
      <item name="list">Lista</item>
      <item name="grid">Cuadrícula</item>
-     <item name="grid3">Triple cuadricula</item>
+     <item name="grid3">Triple cuadrícula</item>
   </string-array>
 
   <!-- UNUSED string-array name="sectionStations">
