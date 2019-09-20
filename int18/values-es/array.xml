@@ -6,25 +6,25 @@
      <item name="plan">clino</item>
      <item name="profile">rumbo</item>
      <item name="view">vista</item>
-  </string-array -->
+  </string-array>
 
   <string-array name="feedbackMode">
      <item name="none">nada</item>
      <item name="sound">sonido</item>
      <item name="heptic">háptico</item>
-  </string-array -->
+  </string-array>
 
   <string-array name="canvasLevels">
      <item name="none">nada</item>
      <item name="class">por simbolo</item>
      <item name="instance">por artículo</item>
-  </string-array -->
+  </string-array>
 
   <string-array name="csvSeparator">
      <item name="comma">coma</item>
      <item name="pipe">tubo</item>
      <item name="tab">tabular</item>
-  </string-array -->
+  </string-array>
 
   <string-array name="lineContinue">
      <item name="none">nada</item>
@@ -32,7 +32,7 @@
      <item name="end">unir con punto final</item>
      <item name="both">unir con ambos extremos</item>
      <item name="continue">continuar</item>
-  </string-array -->
+  </string-array>
   <string-array name="unitGrid">
      <item name="meter">metros</item>
      <item name="yard">yarda</item>
