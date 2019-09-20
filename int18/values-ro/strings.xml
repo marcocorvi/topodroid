@@ -1159,8 +1159,8 @@
   <string name="pref_bitmap_scale_summary">Rezoluție imaginilor schițelor în PNG</string>
   <string name="pref_bitmap_bgcolor_title">Culoare fundal PNG</string>
   <string name="pref_bitmap_bgcolor_summary">Culoarea fundal schițe PNG</string>
-  <string name="pref_acad_version_title">Versiune AutoCAD</string>
-  <string name="pref_acad_version_summary">Versiune AutoCAD</string>
+  <string name="pref_acad_version_title">Versiune DXF</string>
+  <string name="pref_acad_version_summary">Versiune DXF</string>
   <!-- UNUSED string name="pref_dxf_scale_title">Scară schiță DXF</string -->
   <!-- UNUSED string name="pref_dxf_scale_summary">Factor scară schiță DXF</string -->
   <string name="pref_dxf_blocks_title">Capete radieri DXF</string>

@@ -1182,8 +1182,8 @@
   <string name="pref_bitmap_scale_summary">Rozlíšenie pri exporte výkresov PNG</string>
   <string name="pref_bitmap_bgcolor_title">Farba pozadia pre PNG</string>
   <string name="pref_bitmap_bgcolor_summary">Nastavenie farby pozadia pre export nákresov vo formáte PNG</string>
-  <string name="pref_acad_version_title"> Verzia AutoCADu</string>
-  <string name="pref_acad_version_summary">Vybratie verzie AutoCADu</string>
+  <string name="pref_acad_version_title"> Verzia DXF</string>
+  <string name="pref_acad_version_summary">Vybratie verzie DXF</string>
   <!-- UNUSED string name="pref_dxf_scale_title">DXF sketch scale</string -->
   <!-- UNUSED string name="pref_dxf_scale_summary">DXF sketch scale factor</string -->
   <string name="pref_dxf_blocks_title">Koncové body pomocných zámer</string>

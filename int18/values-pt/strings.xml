@@ -1152,8 +1152,8 @@
   <string name="pref_bitmap_scale_summary">Resolução imagem PNG croquis</string>
   <string name="pref_bitmap_bgcolor_title">Cor fundo PNG</string>
   <string name="pref_bitmap_bgcolor_summary">Cor de fundo imagem PNG croquis</string>
-  <string name="pref_acad_version_title">Versão AutoCAD</string>
-  <string name="pref_acad_version_summary">Versão AutoCAD</string>
+  <string name="pref_acad_version_title">Versão DXF</string>
+  <string name="pref_acad_version_summary">Versão DXF</string>
   <!-- UNUSED string name="pref_dxf_scale_title">Escala croqui DXF</string -->
   <!-- UNUSED string name="pref_dxf_scale_summary">Fator de escala croqui DXF</string -->
   <string name="pref_dxf_blocks_title">Ponto final med. aux. DXF</string>

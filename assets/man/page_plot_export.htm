@@ -5,12 +5,12 @@
 
 Sketches are stored in TopoDroid binary format, and can be exported as
 <ul>
-<li>Therion ".th2" file</li>
-<li>cSurvey ".csx" file</li>
-<li>2D DXF</li>
+<li><i>Therion</i> ".th2" file</li>
+<li><i>cSurvey</i> ".csx" file</li>
+<li>2D DXF (<i>LibreCAD</i>)</li>
 <li>SVG</li>
-<li>Shapefile</li>
-<li>xtherion image ".xvi"</li>
+<li>shapefile (<i>QGIS</i>)</li>
+<li><i>xtherion</i> image ".xvi"</li>
 <li>PNG image file</li>
 </ul><br><p>
 
@@ -23,7 +23,8 @@ X-sections are not exported as cSurvey files.<br><p>
 
 The resolution of <b>PNG</b> images is an adjustable setting. However a larger and more detailed image requires more CPU time and may fail due to memory limits. If it fails TopoDroid tries reducing the resolution until it succeeds exporting the sketch as PNG image file.<br><p>
 
-Sketches can be exported as 2D <b>DXF</b> files. The AutoCAD version of the exported DXF files is R12. The DXF export has been tested with LibreCAD. It is not guaranteed that can be opened by AutoCAD.<br><p>
+Sketches can be exported as 2D <b>DXF</b> files. The DXF export is tested with <i>LibreCAD</i>.
+It is not guaranteed that can be opened by <i>AutoCAD</i> or other CAD programs.<br><p>
 
 The <b>shapefile</b> export includes stations, shots, and drawing. All the drawing objects are converted to linestring.
 The attribute tables contain the object data (eg, point type, orientationn, etc.). 
@@ -33,11 +34,11 @@ The files comprising a shapefile export are compressed in a zip archive.
 <b>Overview export</b><br>
 Sketches can be exported also from the "Overview Window" in the following formats
 <ul>
-<li>Therion ".th2" file</li>
-<li>2D DXF</li>
+<li><i>Therion</i> ".th2" file</li>
+<li>2D DXF (<i>LibreCAD</i>)</li>
 <li>SVG</li>
-<li>Shapefile</li>
-<li>".xvi" file</li>
+<li>shapefile (<i>QGIS</i>)</li>
+<li>".xvi" file (<i>xtherion</i>)</li>
 </ul>
 <br><p>
 

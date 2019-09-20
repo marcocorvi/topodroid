@@ -1183,8 +1183,8 @@
   <string name="pref_bitmap_scale_summary">草图PNG图像输出分辨率</string>
   <string name="pref_bitmap_bgcolor_title">背景颜色</string>
   <string name="pref_bitmap_bgcolor_summary">草图PNG图像输出背景颜色</string>
-  <string name="pref_acad_version_title">AutoCAD 版本</string>
-  <string name="pref_acad_version_summary">AutoCAD 版本</string>
+  <string name="pref_acad_version_title">DXF 版本</string>
+  <string name="pref_acad_version_summary">DXF 版本</string>
   <!-- UNUSED string name="pref_dxf_scale_title">DXF sketch scale</string -->
   <!-- UNUSED string name="pref_dxf_scale_summary">DXF sketch scale factor</string -->
   <string name="pref_dxf_blocks_title">DXF 副线端点</string>

@@ -107,9 +107,9 @@
   </string-array>
 
   <string-array name="acadVersion" translatable="false">
-     <item name="9">AutoCAD 6</item>
-     <item name="13">AutoCAD 12</item>
-     <item name="16">AutoCAD 16</item>
+     <item name="9">DXF 6</item>
+     <item name="13">DXF 12</item>
+     <item name="16">DXF 16</item>
   </string-array>
   <string-array name="acadVersionValue" translatable="false">
      <item name="9">9</item>

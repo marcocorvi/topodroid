@@ -1178,8 +1178,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_bitmap_scale_summary">rozdzielczość obrazu PNG szkicu</string>
   <string name="pref_bitmap_bgcolor_title">kolor tła PNG</string>
   <string name="pref_bitmap_bgcolor_summary">kolor tła obrazu PNG szkicu</string>
-  <string name="pref_acad_version_title">wersja AutoCAD</string>
-  <string name="pref_acad_version_summary">wersja AutoCAD</string>
+  <string name="pref_acad_version_title">wersja DXF</string>
+  <string name="pref_acad_version_summary">wersja DXF</string>
   <!-- UNUSED string name="pref_dxf_scale_title">DXF sketch scale</string -->
   <!-- UNUSED string name="pref_dxf_scale_summary">DXF sketch scale factor</string -->
   <string name="pref_dxf_blocks_title">DXF punkty końcowe domiarów</string>

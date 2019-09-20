@@ -1173,8 +1173,8 @@
   <string name="pref_bitmap_scale_summary">Skalierungsfaktor in PNG-Skizzen Export</string>
   <string name="pref_bitmap_bgcolor_title">PNG Hintergrundfarbe</string>
   <string name="pref_bitmap_bgcolor_summary">PNG Hintergrundfarbe Skizze</string>
-  <string name="pref_acad_version_title">AutoCAD-Version</string>
-  <string name="pref_acad_version_summary">AutoCAD-Version</string>
+  <string name="pref_acad_version_title">DXF-Version</string>
+  <string name="pref_acad_version_summary">DXF-Version</string>
   <!-- UNUSED string name="pref_dxf_scale_title">Massstab DXF-Skizze</string -->
   <!-- UNUSED string name="pref_dxf_scale_summary">Massstab-Faktor DXF-Skizze</string -->
   <string name="pref_dxf_blocks_title">DXF: Hilfszüge</string>

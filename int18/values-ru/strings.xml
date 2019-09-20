@@ -1168,8 +1168,8 @@
   <string name="pref_bitmap_scale_summary">Масштабный коэффициент абриса при экспорте в PNG</string>
   <string name="pref_bitmap_bgcolor_title">Цвет фона PNG</string>
   <string name="pref_bitmap_bgcolor_summary">Цвет фона PNG для абрисов в RGB</string>
-  <string name="pref_acad_version_title">Версия AutoCAD</string>
-  <string name="pref_acad_version_summary">Версия AutoCAD</string>
+  <string name="pref_acad_version_title">Версия DXF</string>
+  <string name="pref_acad_version_summary">Версия DXF</string>
   <!-- UNUSED string name="pref_dxf_scale_title">Масштаб абриса в DXF</string -->
   <!-- UNUSED string name="pref_dxf_scale_summary">Фактор масштаба абриса DXF</string -->
   <string name="pref_dxf_blocks_title">Точки сплеев в DXF</string>
