@@ -1231,8 +1231,8 @@
   <string name="pref_path_multiselect_summary">Acción de multiselección de ruta</string>
   <string name="pref_plane_interpolation_title">Interpolación plana</string>
   <string name="pref_plane_interpolation_summary">Acción de interpolación plana</string>
-  <!-- TODO string name="pref_plot_split_title">Sketch split/merge</string -->
-  <!-- TODO string name="pref_plot_split_summary">Sketch split and merge actions</string -->
+  <!-- TODO string name="pref_plot_split_title">Dibujar dividir/fusionar</string -->
+  <!-- TODO string name="pref_plot_split_summary">Dibujar acciones de división y fusión</string -->
   <string name="pref_fixed_thickness_title">Grosor de la línea topografía</string>
   <string name="pref_fixed_thickness_summary">Grosor de la línea topografía</string>
   <!-- UNUSED string name="pref_device_title">Dispositivo</string -->
@@ -1259,8 +1259,8 @@
   <string name="pref_th2_xvi_summary">Insertar imagen xvi en th2</string>
   <string name="pref_autoStations_title">Estaciones automáticas</string>
   <string name="pref_autoStations_summary">Añadir estación automáticamente</string>
-  <!-- TODO string name="pref_auto_xsections_title">Auto X-sections</string -->
-  <!-- TODO string name="pref_auto_xsections_summary">Add x-sections automatically to save/export [csx/svg/dxf/xvi]</string -->
+  <string name="pref_auto_xsections_title">Auto X-sección</string>
+  <string name="pref_auto_xsections_summary">Añadir x-sección automaticas para guardar/exportar [csx/svg/dxf/xvi]</string>
   <string name="pref_loopClosure_title">Cierre de bucle</string>
   <string name="pref_loopClosure_summary">Error en cierre de bucle</string>
   <!-- UNUSED string name="pref_splayExtend_title">Estimate splay extend</string -->
