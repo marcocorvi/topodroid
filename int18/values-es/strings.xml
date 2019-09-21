@@ -1329,7 +1329,7 @@
   <!-- NO string name="pref_algo_min_delta_title">Min-algo delta</string -->
   <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
 
-<!-- LEAVE LOG STUFF IN ENGLISH
+<!-- LEAVE LOG STUFF IN ENGLISH   ---------- WHY? Isn't the translation correct?
   <string name="pref_log_stream_summary">Salida secuencia de registros</string>
   <string name="pref_log_stream_title">Secuencia de registros</string>
   <string name="pref_log_bt">Bluetooth</string>
@@ -1386,7 +1386,7 @@
 \n
     </string>
 
-<!-- FIRMWARE DIALOG STRINGS CAN BE LEFT UNTRANSLATED : mark OK untranslated strings -->
+
   <string name="firmware_title">Actualizar de firmware</string>
   <string name="firmware_file_title">Archivos de firmware</string>
   <string name="firmware_text">
