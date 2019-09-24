@@ -1112,7 +1112,7 @@
   <string name="pref_horiz_splay_title">Separar instantaneamente el umbral del rumbo</string>
   <string name="pref_horiz_splay_message">Separe el rumbo más de lo que esta discontínuo</string>
   <string name="pref_section_splay_title">Umbral del ángulo del tablero de separación</string>
-  <string name="pref_section_splay_message">Sobre este ángulo con el plano de sección,los guiones se puntean</string -->
+  <string name="pref_section_splay_message">Sobre este ángulo con el plano de sección,los guiones se puntean</string>
   <string name="pref_data_backup_title">Autoexportación de datos</string>
   <string name="pref_data_backup_summary">Exportación automática de datos (necesita formato predeterminado)</string>
   <string name="pref_fixed_origin_title">Origen del dibujo</string>
@@ -1334,7 +1334,9 @@
   <!-- NO string name="pref_algo_min_delta_title">Min-algo delta</string -->
   <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
 
-<!-- LEAVE LOG STUFF IN ENGLISH   ---------- WHY? Isn't the translation correct?
+<!-- LEAVE LOG STUFF IN ENGLISH   =========- WHY? Isn't the translation correct?
+it is correct but i need to use english to tell a user which log to enable when there is a problem 
+
   <string name="pref_log_stream_summary">Salida secuencia de registros</string>
   <string name="pref_log_stream_title">Secuencia de registros</string>
   <string name="pref_log_bt">Bluetooth</string>
