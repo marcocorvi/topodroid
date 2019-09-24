@@ -763,57 +763,54 @@ class TDExporter
       // TDLog.Log( TDLog.LOG_IO, "export SHP " + filename );
       // TDPath.checkPath( filename );
       File dir = new File( filename );
-      if ( ! dir.exists() ) dir.mkdir();
-
-      ArrayList<File> files = new ArrayList<File>();
-      
-      int nr = 0;
-      if ( TDSetting.mKmlStations ) {
-        for ( DistoXNum num : nums ) {
-          String filepath = filename + "/stations-" + nr;
-          ++ nr;
-          List<NumStation> stations = num.getStations();
-          // Log.v("DistoX", "SHP export " + filepath + " stations " + stations.size() );
-          ShpPointz shp = new ShpPointz( filepath, files );
-          shp.setYYMMDD( info.date );
-          success &= shp.writeStations( stations );
+      if ( (dir != null) && ( dir.exists() || dir.mkdirs() ) ) {
+        ArrayList<File> files = new ArrayList<File>();
+        int nr = 0;
+        if ( TDSetting.mKmlStations ) {
+          for ( DistoXNum num : nums ) {
+            String filepath = filename + "/stations-" + nr;
+            ++ nr;
+            List<NumStation> stations = num.getStations();
+            // Log.v("DistoX", "SHP export " + filepath + " stations " + stations.size() );
+            ShpPointz shp = new ShpPointz( filepath, files );
+            shp.setYYMMDD( info.date );
+            success &= shp.writeStations( stations );
+          }
         }
+
+        nr = 0;
+        for ( DistoXNum num : nums ) {
+          String filepath = filename + "/shots-" + nr;
+          ++ nr;
+          List<NumShot> shots = num.getShots();
+          List<NumSplay> splays = ( TDSetting.mKmlSplays ? num.getSplays() : null );
+          // Log.v("DistoX", "SHP export " + filepath + " shots " + shots.size() );
+          ShpPolylinez shp = new ShpPolylinez( filepath, files );
+          shp.setYYMMDD( info.date );
+          success &= shp.writeShots( shots, splays );
+        }
+
+        // if ( TDSetting.mKmlSplays ) {
+        //   nr = 0;
+        //   for ( DistoXNum num : nums ) {
+        //     String filepath = filename + "-splays-" + nr;
+        //     ++ nr;
+        //     List<NumSplay> splays = num.getSplays();
+        //     // Log.v("DistoX", "SHP export " + filepath + " splays " + splays.size() );
+        //     ShpPolylinez shp = new ShpPolylinez( filepath, files );
+        //     shp.setYYMMDD( info.date );
+        //     shp.writeSplays( splays );
+        //   }
+        // }
+
+        Archiver zipper = new Archiver( );
+        zipper.compressFiles( filename + ".shz", files );
+        TDUtil.deleteDir( filename ); // delete temporary shapedir
       }
-
-      nr = 0;
-      for ( DistoXNum num : nums ) {
-        String filepath = filename + "/shots-" + nr;
-        ++ nr;
-        List<NumShot> shots = num.getShots();
-        List<NumSplay> splays = ( TDSetting.mKmlSplays ? num.getSplays() : null );
-        // Log.v("DistoX", "SHP export " + filepath + " shots " + shots.size() );
-        ShpPolylinez shp = new ShpPolylinez( filepath, files );
-        shp.setYYMMDD( info.date );
-        success &= shp.writeShots( shots, splays );
-      }
-
-      // if ( TDSetting.mKmlSplays ) {
-      //   nr = 0;
-      //   for ( DistoXNum num : nums ) {
-      //     String filepath = filename + "-splays-" + nr;
-      //     ++ nr;
-      //     List<NumSplay> splays = num.getSplays();
-      //     // Log.v("DistoX", "SHP export " + filepath + " splays " + splays.size() );
-      //     ShpPolylinez shp = new ShpPolylinez( filepath, files );
-      //     shp.setYYMMDD( info.date );
-      //     shp.writeSplays( splays );
-      //   }
-      // }
-
-      Archiver zipper = new Archiver( );
-      zipper.compressFiles( filename + ".shz", files );
-      TDPath.deleteDir( filename ); // delete temporary shapedir
-
     } catch ( IOException e ) {
       TDLog.Error( "Failed SHP export: " + e.getMessage() );
       return null;
     }
-
     return filename;
   }
 
@@ -949,7 +946,7 @@ class TDExporter
       // date should be "days_since_12/30/1899.time_of_the_day"
       // eg, 0=12/30/1899, 2=1/1/1900, 35065=1/1/1996, 36526=1/1/00, 39447=1/1/08, 40908=1/1/12, ...
       Calendar cal = Calendar.getInstance();
-      cal.set(1996,1,1);
+      cal.set(1996, Calendar.JANUARY, 1);
       long diff = System.currentTimeMillis() - cal.getTimeInMillis();
       long days = 35065 + diff / 86400000L; // 24*60*60*1000 // FIXME +33 ?
 
@@ -1042,9 +1039,9 @@ class TDExporter
       ptfile.addShot( (short)0, from, to, item.mLength, item.mBearing, item.mClino, item.mRoll, (int)extend, item.mComment );
     }
 
-    if ( sketch != null ) {
-      // TODO add sketch
-    }
+    // if ( sketch != null ) {
+    //   // TODO add sketch
+    // }
 
     try {
       TDPath.checkPath( filename );
@@ -3246,13 +3243,13 @@ class TDExporter
       if ( leg.mCnt > 0 && ref_item != null ) {
         writeSrvLeg( pw, leg, ul, ua );
         writeSrvComment( pw, ref_item.mComment );
-        if ( duplicate ) {
+        // if ( duplicate ) {
           // pw.format(therion_flags_not_duplicate);
           // duplicate = false;
-        } else if ( surface ) {
+        // } else if ( surface ) {
           // pw.format(therion_flags_not_surface);
           // surface = false;
-        }
+        // }
       }
 
       fw.flush();

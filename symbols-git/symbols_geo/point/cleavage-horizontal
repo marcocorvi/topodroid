@@ -6,7 +6,7 @@ name-ru горизонтальная_трещиноватость
 name-fr fissuration_horizontale
 name-ro clivaj-orizontal
 name-de Horizontale_Schieferung
-th_name u:cleavage_horizontal
+th_name u:cleavage-horizontal
 color 0xcccc99
 csurvey 0 0 0 
 path

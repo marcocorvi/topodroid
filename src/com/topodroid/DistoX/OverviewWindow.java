@@ -1000,7 +1000,7 @@ public class OverviewWindow extends ItemDrawer
 
       if ( mTouchMode == MODE_ZOOM ) {
         mTouchMode = MODE_MOVE;
-      } else {
+      // } else {
         // NOTHING
         // if ( mOnMeasure == MEASURE_OFF ) {
         //   // float x_shift = x_canvas - mSaveX; // compute shift

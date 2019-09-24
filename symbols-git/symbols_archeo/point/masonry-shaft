@@ -8,7 +8,7 @@ name-fr puits_maçonné
 name-sk murivo
 name-ro puț_zidit
 name-de Gemauerter_Schacht
-th_name u:masonry_shaft
+th_name u:masonry-shaft
 color 0xff6699
 csurvey 0 0 0
 path

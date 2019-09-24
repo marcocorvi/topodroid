@@ -7,7 +7,7 @@ name-fr anneau_de_suspension
 name-ru кольцо_на_потолке
 name-ro cupolă-suspendată
 name-de Deckenring
-th_name u:ceiling_ring
+th_name u:ceiling-ring
 color 0xcccccc
 csurvey 0 0 0
 path

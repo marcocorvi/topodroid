@@ -8,7 +8,7 @@ name-fr base_de_colonne
 name-sk základ_piliera
 name-ro bază_de_coloană
 name-de Säulenfuss
-th_name u:cut_pillar
+th_name u:cut-pillar
 color 0xcccccc
 csurvey 0 0 0
 path

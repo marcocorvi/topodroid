@@ -141,7 +141,7 @@ class DrawingScaleReference
         float canvasLen = canvasUnit * referenceLen;
         canvasLen *= TDSetting.mUnitGrid;
         if ( TDSetting.mUnitGrid < 0.2f ) { } // using m instead of dm
-	else if ( TDSetting.mUnitGrid < 0.8f ) canvasLen /= 2;
+	    else if ( TDSetting.mUnitGrid < 0.8f ) canvasLen /= 2;
 
         String refstr = (( referenceLen < 1 )?  Float.toString(referenceLen) : Integer.toString((int)referenceLen)) + mUnits;
         float locX = (mLocation.x > 0) ? mLocation.x : canvas.getWidth() + mLocation.x - referenceLen;

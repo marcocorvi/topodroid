@@ -8,7 +8,7 @@ name-fr fosse_commune
 name-sk hromadný_hrob
 name-ro mormânt_colectiv
 name-de Schlitzgrab
-th_name u:trench_tomb
+th_name u:trench-tomb
 color 0xffff33
 csurvey 0 0 0
 path

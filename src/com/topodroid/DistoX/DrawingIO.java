@@ -632,7 +632,7 @@ class DrawingIO
                                    String filename,
                                    float dx, float dy,
                                    // FIXME-MISISNG SymbolsPalette missingSymbols,
-                                   // SymbolsPalette localPalette,
+                                   SymbolsPalette localPalette,
                                    RectF bbox,
 				   boolean complete,
 				   String plotName )
@@ -722,13 +722,13 @@ class DrawingIO
                 // read palettes
                 String points = dis.readUTF();
                 String[] vals = points.split(",");
-                // for ( String val : vals ) if ( val.length() > 0 ) localPalette.addPointFilename( val );
+                for ( String val : vals ) if ( val.length() > 0 ) localPalette.addPointFilename( val );
                 String lines = dis.readUTF();
                 vals = lines.split(",");
-                // for ( String val : vals ) if ( val.length() > 0 ) localPalette.addLineFilename( val );
+                for ( String val : vals ) if ( val.length() > 0 ) localPalette.addLineFilename( val );
                 String areas = dis.readUTF();
                 vals = areas.split(",");
-                // for ( String val : vals ) if ( val.length() > 0 ) localPalette.addAreaFilename( val );
+                for ( String val : vals ) if ( val.length() > 0 ) localPalette.addAreaFilename( val );
                 in_scrap = true;
                 // Log.v("DistoX", "TDR type " + type );
               }
@@ -1282,10 +1282,10 @@ class DrawingIO
     // Log.v("DistoXX", "export multiscrap type " + type + " proj " + proj_name );
     class XSectionScrap
     {
-      public String name; // scrap name
-      public float x, y;  // offset
+      String name; // scrap name
+      float x, y;  // offset
   
-      public XSectionScrap( String nn, float xx, float yy ) 
+      XSectionScrap( String nn, float xx, float yy )
       {
         name = nn;
         x = xx;

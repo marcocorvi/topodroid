@@ -2538,7 +2538,7 @@ public class DrawingWindow extends ItemDrawer
       }
     }
 
-    void deletePoint( DrawingPointPath point )
+    private void deletePoint( DrawingPointPath point )
     {
       if ( point == null ) return;
       // Log.v("DistoX-C", "deletePoint " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
@@ -2560,7 +2560,7 @@ public class DrawingWindow extends ItemDrawer
       modified();
     }
 
-    void splitLine( DrawingLinePath line, LinePoint point )
+    private void splitLine( DrawingLinePath line, LinePoint point )
     {
       mDrawingSurface.splitLine( line, point );
       // Log.v("DistoX-C", "splitLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
@@ -2568,7 +2568,7 @@ public class DrawingWindow extends ItemDrawer
       modified();
     }
 
-    void /*boolean*/ removeLinePoint( DrawingPointLinePath line, LinePoint point, SelectionPoint sp ) 
+    private void /*boolean*/ removeLinePoint( DrawingPointLinePath line, LinePoint point, SelectionPoint sp ) 
     {
       boolean ret = mDrawingSurface.removeLinePoint(line, point, sp); 
       if ( ret ) {
@@ -2654,7 +2654,7 @@ public class DrawingWindow extends ItemDrawer
     }
 
 
-    void deleteArea( DrawingAreaPath area )
+    private void deleteArea( DrawingAreaPath area )
     {
       // Log.v("DistoX-C", "deleteArea " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
       assert( mLastLinePath == null );
@@ -3239,12 +3239,12 @@ public class DrawingWindow extends ItemDrawer
           if ( Math.abs(mStartX - xc) < TDSetting.mPointingRadius
             && Math.abs(mStartY - yc) < TDSetting.mPointingRadius ) {
             // mEditMove = false;
-	    // PATH_MULTISELECTION
-	    if ( mDrawingSurface.isMultiselection() ) {
-	      // TODO
-	    } else {
-              clearSelected();
-	    }
+	        // PATH_MULTISELECTION
+	        if ( mDrawingSurface.isMultiselection() ) {
+	          // TODO
+	        } else {
+	          clearSelected();
+	        }
           }
         }
         mShiftMove = false;
@@ -4087,7 +4087,7 @@ public class DrawingWindow extends ItemDrawer
     }
 
 
-    void doDelete()
+    private void doDelete()
     {
       mApp_mData.deletePlot( mPid1, mSid );
       if ( mPid2 >= 0 ) mApp_mData.deletePlot( mPid2, mSid );
@@ -4708,7 +4708,7 @@ public class DrawingWindow extends ItemDrawer
 
 
   // this is the same as in ShotWindow
-  void doBluetooth( Button b, int dismiss )
+  private void doBluetooth( Button b, int dismiss )
   {
     if ( dismiss == DISMISS_BT ) return;
     if ( ! mDataDownloader.isDownloading() ) {
@@ -4911,9 +4911,9 @@ public class DrawingWindow extends ItemDrawer
 
       } else if ( b == mButton2[k2++] || b == mButton5[k5++] ) { // UNDO
         mDrawingSurface.undo();
-        if ( ! mDrawingSurface.hasMoreUndo() ) {
-          // undoBtn.setEnabled( false );
-        }
+        // if ( ! mDrawingSurface.hasMoreUndo() ) {
+        //   // undoBtn.setEnabled( false );
+        // }
         // redoBtn.setEnabled( true );
         // canRedo = true;/
         modified();
@@ -4953,7 +4953,7 @@ public class DrawingWindow extends ItemDrawer
         // Log.v( TopoDroidApp.TAG, "Button3[5] inLinePoint " + inLinePoint );
         if ( inLinePoint ) {
           makePopupEdit( b, dismiss );
-        } else {
+        // } else {
           // SelectionPoint sp = mDrawingSurface.hotItem();
           // if ( sp != null && sp.mItem.mType == DrawingPath.DRAWING_PATH_NAME ) {
           //   DrawingStationName sn = (DrawingStationName)(sp.mItem);
@@ -4982,9 +4982,9 @@ public class DrawingWindow extends ItemDrawer
                 if ( audioCheck ) {
                   DrawingAudioPath audio = (DrawingAudioPath)point;
                   new AudioDialog( mActivity, this, audio.mId ).show();
-                } else {
-	          // TODO TDToast.makeWarn( R.string.no_feature_audio );
-		}
+                // } else {
+	               // TODO TDToast.makeWarn( R.string.no_feature_audio );
+		        }
               } else {
                 new DrawingPointDialog( mActivity, this, point ).show();
               }
@@ -5995,7 +5995,7 @@ public class DrawingWindow extends ItemDrawer
     modified();
   }
 
-  void addPointsToLine( DrawingLinePath line, float x0, float y0, float xx, float yy )
+  private void addPointsToLine( DrawingLinePath line, float x0, float y0, float xx, float yy )
   {
     float ll = (float)Math.sqrt( (xx-x0)*(xx-x0) + (yy-y0)*(yy-y0) ) / 20;
     if ( ll > TDSetting.mWallsXStep ) {
@@ -6009,7 +6009,7 @@ public class DrawingWindow extends ItemDrawer
     line.addPoint( xx, yy );
   }
 
-  void makeDlnWall( ArrayList<DLNSite> sites, float x0, float y0, float x1, float y1, float len, PointF uu, PointF vv )
+  private void makeDlnWall( ArrayList<DLNSite> sites, float x0, float y0, float x1, float y1, float len, PointF uu, PointF vv )
   {
     DLNWall dln_wall = new DLNWall( new Point2D(x0,y0), new Point2D(x1,y1) );
     dln_wall.compute( sites );
@@ -6080,7 +6080,7 @@ public class DrawingWindow extends ItemDrawer
   }
   */
 
-  void makeWall( ArrayList<PointF> pts, float x0, float y0, float x1, float y1, float len, PointF uu, PointF vv )
+  private void makeWall( ArrayList<PointF> pts, float x0, float y0, float x1, float y1, float len, PointF uu, PointF vv )
   {
     int size = pts.size();
     float xx, yy;

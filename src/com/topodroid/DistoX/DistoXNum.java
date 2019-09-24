@@ -1554,10 +1554,11 @@ class DistoXNum
       for (int x=0; x<bs; ++x ) {
         NumBranch bx = branches.get(x);
         alpha[ y*bs + x] = 0.0f;
-        int k = cy.branchIndex( bx );
-        if ( k < cy.mSize ) {
+        // int k = cy.getBranchIndex( bx );
+        int dir = cy.getBranchDir( bx );
+        if ( dir != 0 ) { // ( k >= 0 ) 
           // alpha[ y*bs + x] = ( bx.n2 == cy.getNode(k) )? 1.0f : -1.0f;
-          alpha[ y*bs + x] = cy.dirs[k];
+          alpha[ y*bs + x] = dir; // cy.dirs[k];
         }
       }
     }

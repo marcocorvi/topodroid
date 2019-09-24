@@ -176,8 +176,8 @@ class ParserSurvex extends ImportParser
           int vals_len = vals.length;
           if ( vals_len == 1 ) {
 	    if ( vals[0].startsWith("*") ) {
-              String cmd = vals[0].substring(1);
-              if ( cmd.equals("solve" ) ) { 
+	        String cmd = vals[0].substring(1);
+	        if ( cmd.equals("solve" ) ) {
                 // ignore
 	      } else if ( cmd.equals("data" ) ) { // data default
                 state.setDataDefault();

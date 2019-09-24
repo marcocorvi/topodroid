@@ -27,7 +27,7 @@ class ConvexHull
   // private Vector mZ;
 
   private ArrayList< Vector > mPts; // other points
-  private ArrayList< CHTriangle > mTri;
+  // private ArrayList< CHTriangle > mTri; // TODO STILL_TO_USE
 
   private class VectorPair
   {
@@ -109,10 +109,10 @@ class ConvexHull
         }
       }
     }
-    mTri = new ArrayList<>(); // definitive triangle array list
-    for ( CHTriangle t : tri ) {
-      if ( t.valid ) mTri.add( t ) ;
-    }
+    // mTri = new ArrayList<>(); // definitive triangle array list - TODO STILL_TO_USE
+    // for ( CHTriangle t : tri ) {
+    //   if ( t.valid ) mTri.add( t ) ;
+    // }
   }
 
 }

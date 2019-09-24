@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import java.util.Locale;
+import java.lang.ref.WeakReference;
 
 // import android.app.Dialog;
 import android.os.Bundle;
@@ -39,8 +40,10 @@ import android.view.View;
 class CalibGMDialog extends MyDialog
                     implements View.OnClickListener
 {
-  private final GMActivity  mParent;
-  private CalibCBlock mBlk;
+  private final WeakReference<GMActivity> mParent; 
+  private final CalibCBlock mBlk;
+  private final String mErrorGroupRequired;
+  private final String mErrorGroupNonInt;
 
   // private EditText mETbearing;
   // private EditText mETclino;
@@ -64,8 +67,10 @@ class CalibGMDialog extends MyDialog
   CalibGMDialog( Context context, GMActivity parent, CalibCBlock blk )
   {
     super( context, R.string.CalibGMDialog );
-    mParent  = parent;
-    mBlk     = blk;
+    mParent = new WeakReference<GMActivity>( parent );
+    mErrorGroupRequired = parent.getResources().getString( R.string.error_group_required );
+    mErrorGroupNonInt   = parent.getResources().getString( R.string.error_group_non_integer );
+    mBlk    = blk;
   }
 
 // -------------------------------------------------------------------
@@ -120,9 +125,9 @@ class CalibGMDialog extends MyDialog
     } else {
       mETname.setInputType( TDConst.NUMBER_SIGNED );
     }
-    setEditable( eTbearing, null, false, MyKeyboard.FLAG_POINT );
-    setEditable( eTclino,   null, false, MyKeyboard.FLAG_POINT );
-    setEditable( eTroll,    null, false, MyKeyboard.FLAG_POINT );
+    setEditable( eTbearing ); // , null, false, MyKeyboard.FLAG_POINT );
+    setEditable( eTclino ); // ,   null, false, MyKeyboard.FLAG_POINT );
+    setEditable( eTroll ); // ,    null, false, MyKeyboard.FLAG_POINT );
   }
 
   @Override
@@ -136,56 +141,66 @@ class CalibGMDialog extends MyDialog
       // if ( name == null || name.length() == 0 ) {
       //   name = mETname.getHint().toString();
       // }
-      if ( /* name == null || */ name.length() == 0 ) { // name == null always false
-        mETname.setError( mParent.getResources().getString( R.string.error_group_required ) );
-        return;
-      } else {
-        try {
-          long value = Long.parseLong( name );
-          mParent.updateGM( value, name );
-        } catch ( NumberFormatException e ) {
-          mETname.setError( mParent.getResources().getString( R.string.error_group_non_integer ) );
+      GMActivity parent = mParent.get();
+      if ( parent != null ) {
+        if ( /* name == null || */ name.length() == 0 ) { // name == null always false
+          mETname.setError( mErrorGroupRequired );
           return;
+        } else {
+          try {
+            long value = Long.parseLong( name );
+            parent.updateGM( value, name );
+          } catch ( NumberFormatException e ) {
+            mETname.setError( mErrorGroupNonInt );
+            return;
+          }
         }
-      }
-      if ( mCBregroup.isChecked() ) {
-        mParent.resetAndComputeGroups( mBlk.mId );
+        if ( mCBregroup.isChecked() ) {
+          parent.resetAndComputeGroups( mBlk.mId );
+        }
+      } else {
+        TDLog.Error("GM Dialog null parent [1]" );
       }
     } else if ( b == mButtonDelete ) {
-      mParent.deleteGM( true );
-    } else if ( b == mButtonCancel ) {
+      GMActivity parent = mParent.get();
+      if ( parent != null ) {
+        parent.deleteGM( true );
+      } else {
+        TDLog.Error("GM Dialog null parent [2]" );
+      }
+    // } else if ( b == mButtonCancel ) {
       /* nothing */
     }
     dismiss();
   }
 
 
-  private void setEditable( EditText et, KeyListener kl, boolean editable, int flag )
+  private void setEditable( EditText et ) // , KeyListener kl, boolean editable, int flag )
   {
     if ( TDSetting.mKeyboard ) {
       et.setKeyListener( null );
       et.setClickable( true );
-      et.setFocusable( editable );
-      if ( editable ) {
-        MyKeyboard.registerEditText( mKeyboard, et, flag );
-        // et.setKeyListener( mKeyboard );
-        et.setBackgroundResource( android.R.drawable.edit_text );
-      } else {
-        MyKeyboard.registerEditText( mKeyboard, et, flag | MyKeyboard.FLAG_NOEDIT );
+      et.setFocusable( false ); // editable = false
+      // if ( editable ) {
+      //   MyKeyboard.registerEditText( mKeyboard, et, MyKeyboard.FLAG_POINT ); // flag = MyKeyboard.FLAG_POINT
+      //   // et.setKeyListener( mKeyboard );
+      //   et.setBackgroundResource( android.R.drawable.edit_text );
+      // } else {
+        MyKeyboard.registerEditText( mKeyboard, et, MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_NOEDIT );
         et.setBackgroundColor( TDColor.MID_GRAY );
-      }
+      // }
     } else {
-      if ( editable ) {
-        et.setKeyListener( kl );
-        et.setBackgroundResource( android.R.drawable.edit_text );
-        et.setClickable( true );
-        et.setFocusable( true );
-      } else {
+      // if ( editable ) {
+      //   et.setKeyListener( kl );
+      //   et.setBackgroundResource( android.R.drawable.edit_text );
+      //   et.setClickable( true );
+      //   et.setFocusable( true );
+      // } else {
         // et.setFocusable( false );
         // et.setClickable( false );
         et.setKeyListener( null );
         et.setBackgroundColor( TDColor.MID_GRAY );
-      }
+      // }
     }
   }
 

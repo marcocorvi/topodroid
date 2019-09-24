@@ -5,7 +5,7 @@ name-es lineación_inclinada
 name-ru наклонно_линейно
 name-fr linéation_inclinée
 name-de Schräge_Bänderung
-th_name u:lineation_inclined
+th_name u:lineation-inclined
 color 0xffffff
 csurvey 0 0 0
 orientation yes

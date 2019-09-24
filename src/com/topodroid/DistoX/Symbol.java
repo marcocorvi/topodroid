@@ -85,7 +85,10 @@ class Symbol implements SymbolInterface
 
   // SymbolInterface methods
   public String getThName()     { return mThName; }
-  public String getFilename()   { return mThName; /* mFilename; */ }
+
+  // filename is not used - symbols are distinguished by their th_name
+  // public String getFilename()   { return mThName.startsWith("u") ? mThName.substring(2) : mThName; /* mFilename; */ }
+
   public String getName()       { return "undefined"; }
   public Paint  getPaint()      { return null; }
   public Path   getPath()       { return null; }

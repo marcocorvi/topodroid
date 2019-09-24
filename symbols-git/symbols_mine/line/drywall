@@ -8,7 +8,7 @@ name-fr paroi-sèche
 name-sk suchý_múrik
 name-ro perete_sec
 name-de Trockenmauer
-th_name drywall
+th_name u:drywall
 group wall
 color 0xff0000 0xff
 width 1

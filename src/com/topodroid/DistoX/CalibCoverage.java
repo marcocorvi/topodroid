@@ -19,8 +19,8 @@ class CalibCoverage
 {
   class Direction
   {
-    float mCompass;
-    float mClino;
+    final float mCompass;
+    final float mClino;
     float mValue;
 
     Direction( float cm, float cl, float v )
@@ -36,9 +36,9 @@ class CalibCoverage
   static final int DELTA_Y     =   5;
   static final int AZIMUTH_BIT =  32;
 
-  private int[] clino_angles;
-  private int[] t_size;
-  private int[] t_offset;
+  private final int[] clino_angles;
+  private final int[] t_size;
+  private final int[] t_offset;
   private int t_dim;
 
   private Direction[] angles;

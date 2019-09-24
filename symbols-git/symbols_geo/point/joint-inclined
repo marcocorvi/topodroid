@@ -6,7 +6,7 @@ name-pt diaclase_oblíqua
 name-ru наклонное_несогласие
 name-fr diaclase_inclinée
 name-de Schräge_Kluft
-th_name u:joint_inclined
+th_name u:joint-inclined
 color 0xcccc99
 csurvey 0 0 0
 orientation yes

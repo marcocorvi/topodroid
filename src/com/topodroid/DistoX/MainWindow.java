@@ -135,7 +135,7 @@ public class MainWindow extends Activity
   private boolean do_check_bt = true;             // one-time bluetooth check sentinel
 
   private boolean mPaletteButtonEnabled = false;
-  void enablePaletteButton() { mPaletteButtonEnabled = true; }
+  private void enablePaletteButton() { mPaletteButtonEnabled = true; }
 
   // -------------------------------------------------------------------
 
@@ -566,8 +566,7 @@ public class MainWindow extends Activity
         } );
         if ( files != null ) {
           for (File f : files) {
-            // Log.v("DistoXX", "delete file " + f.getPath() );
-            f.delete();
+            TDUtil.deleteFile( f );
           }
         }
       }
@@ -681,7 +680,7 @@ public class MainWindow extends Activity
         if ( TDSetting.mCheckBT == 1 && ! DeviceUtil.isAdapterEnabled() ) {    
           Intent enableIntent = new Intent( DeviceUtil.ACTION_REQUEST_ENABLE );
           startActivityForResult( enableIntent, TDRequest.REQUEST_ENABLE_BT );
-        } else {
+        // } else {
           // nothing to do: scanBTDEvices(); is called by menu CONNECT
         }
         // FIXME_BT

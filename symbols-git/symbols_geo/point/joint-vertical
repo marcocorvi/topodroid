@@ -6,7 +6,7 @@ name-pt diaclase_vertical
 name-ru вертикальное_сочленение
 name-fr diaclase_verticale
 name-de Vertikale_Kluft
-th_name u:joint_vertical
+th_name u:joint-vertical
 color 0xcccc99
 csurvey 0 0 0
 orientation yes

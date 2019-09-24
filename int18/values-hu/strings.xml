@@ -486,6 +486,11 @@
     <!-- TODO string name="coverage_warning">Angle coverage below %1$d %%\nWrite coefficients?</string -->
     <!-- TODO string name="delta_warning">Average error above %1$.1f\nWrite coefficients?</string -->
 
+    <!-- TODO string name="cover_data">Raw data distribution: %1$.2f %%</string -->
+    <!-- TODO string name="cover_calib">Calibrated data distribution: %1$.2f %%</string -->
+    <!-- TODO string name="cover_g">G distribution: %1$.2f %%</string -->
+    <!-- TODO string name="cover_m">M distribution: %1$.2f %%</string -->
+
     <string name="cannot_rename">A felmérés nem nevezhető át</string>
     <string name="declination">Mágn. dekl.</string>
     <string name="description">leírás</string>

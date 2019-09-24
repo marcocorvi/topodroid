@@ -16,6 +16,8 @@
     android:layout_width="wrap_content" 
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:rowCount="2"
+    android:columnCount="2"
     ><!-- FIXME-23 FIXME-16
     android:rowCount="2"
     android:columnCount="2"

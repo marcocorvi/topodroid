@@ -1,5 +1,5 @@
 symbol point
-name ponor_vertical
+name ponor-vertical
 name-pt ponor_vertical
 name-es ponor_vertical
 name-ru понор_вертикальный
@@ -7,7 +7,7 @@ name-fr ponor_vertical
 name-sk vertikálny_ponor
 name-ro ponor_vertical
 name-de Vertikaler_Ponor
-th_name u:ponor_vertical
+th_name u:ponor-vertical
 orientation no
 color 0x999999
 csurvey 6 6 80

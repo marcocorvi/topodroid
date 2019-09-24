@@ -18,7 +18,7 @@ class CalibInfo
   final static int ALGO_AUTO       = 0;
   final static int ALGO_LINEAR     = 1;
   final static int ALGO_NON_LINEAR = 2;
-  final static int ALGO_MINIMUM    = 3;
+  // final static int ALGO_MINIMUM    = 3;
 
   private long id;           //!< database ID
   public String name;       //!< name 

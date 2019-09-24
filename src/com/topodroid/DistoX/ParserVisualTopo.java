@@ -165,6 +165,7 @@ class ParserVisualTopo extends ImportParser
               }
             }
           } else if ( vals[0].equals("Entree") ) {
+            // ignore
           } else if ( vals[0].equals("Club") ) {
             mTeam = line.substring(5);
           } else if ( vals[0].equals("Couleur") ) {

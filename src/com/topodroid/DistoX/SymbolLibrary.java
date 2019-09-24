@@ -115,12 +115,12 @@ class SymbolLibrary
     return -1;
   }
 
-  int getSymbolIndexByFilename( String fname )
-  {
-    int nr = mSymbols.size();
-    for ( int k=0; k<nr; ++k ) if ( mSymbols.get(k).mThName.equals( fname) ) return k;
-    return -1;
-  }
+  // int getSymbolIndexByFilename( String fname )
+  // {
+  //   int nr = mSymbols.size();
+  //   for ( int k=0; k<nr; ++k ) if ( mSymbols.get(k).mThName.equals( fname) ) return k;
+  //   return -1;
+  // }
 
   // ===============================================
   // SymbolInterface
@@ -129,10 +129,11 @@ class SymbolLibrary
   boolean hasSymbolByThName( String th_name ) { return ( null != get( th_name ) ); }
 
   // this is used by loadUserXXX 
-  boolean hasSymbolByFilename( String fname ) { return ( null != get( fname ) ); }
+  // boolean hasSymbolByFilename( String fname ) { return ( null != get( fname ) ); }
 
-  Symbol getSymbolByFilename( String fname ) { return get( fname ); }
-  // Symbol getSymbolByThName( String th_name ) { return get( th_name ); }
+  // Symbol getSymbolByFilename( String fname ) { return get( fname ); }
+  Symbol getSymbolByThName( String th_name ) { return get( th_name ); }
+
   Symbol getSymbolByIndex( int k ) { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get( k ); }
 
   String getSymbolName( int k )   { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getName(); }
@@ -211,17 +212,21 @@ class SymbolLibrary
   {
     for ( Symbol symbol : mSymbols ) {
       TopoDroidApp.mData.setSymbolEnabled( mPrefix + symbol.mThName, symbol.mEnabled );
-      if ( symbol.mEnabled ) {
-      }
+      // if ( symbol.mEnabled ) {
+        // TODO what ?
+      // }
     }
   }
 
   // symbols = palette.mPaletteAreas etc. (filenames)
-  void makeEnabledListFromStrings( TreeSet<String> symbols )
+  // clear     if true disable all symbols before enabling the symbols in the palette
+  void makeEnabledListFromStrings( TreeSet<String> symbols, boolean clear )
   {
-    for ( Symbol symbol : mSymbols ) symbol.setEnabled( false );
-    for ( String fname : symbols ) {
-      Symbol symbol = getSymbolByFilename( fname );
+    if ( clear ) {
+      for ( Symbol symbol : mSymbols ) symbol.setEnabled( false );
+    }
+    for ( String thname : symbols ) {
+      Symbol symbol = getSymbolByThName( thname );
       if ( symbol != null ) symbol.setEnabled( true );
     }
     makeEnabledList( );
@@ -238,19 +243,19 @@ class SymbolLibrary
     }
   }
 
-  void writePalette( PrintWriter pw ) 
-  {
-    for ( Symbol symbol : mSymbols ) {
-      if ( symbol.isEnabled( ) ) pw.format( " %s", symbol.getFilename() );
-    }
-  }
-
+  // UNUSED
+  // void writePalette( PrintWriter pw ) 
+  // {
+  //   for ( Symbol symbol : mSymbols ) {
+  //     if ( symbol.isEnabled( ) ) pw.format( " %s", symbol.getFilename() );
+  //   }
+  // }
 
   void toDataStream( DataOutputStream dos ) 
   {
     StringBuilder sb = new StringBuilder();
     for ( Symbol symbol : mSymbols ) {
-      if ( symbol.isEnabled( ) ) { sb.append( symbol.getFilename() ).append(","); }
+      if ( symbol.isEnabled( ) ) { sb.append( symbol.getThName() ).append(","); }
     }
     try {
       // int str_len = sb.length();

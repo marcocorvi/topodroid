@@ -80,9 +80,9 @@ class DrawingLinePath extends DrawingPointLinePath
     boolean closed, reversed;
     int outline;
     int level = DrawingLevel.LEVEL_DEFAULT;
-    String fname, options;
+    String thname, options;
     try {
-      fname = dis.readUTF();
+      thname = dis.readUTF();
       closed = (dis.read() == 1);
       // visible= (dis.read() == 1);
       reversed = (dis.read() == 1);
@@ -90,10 +90,10 @@ class DrawingLinePath extends DrawingPointLinePath
       if ( version >= 401090 ) level = dis.readInt();
       options = dis.readUTF();
 
-      // BrushManager.mLineLib.tryLoadMissingArea( fname );
-      type = BrushManager.mLineLib.getSymbolIndexByFilename( fname ); 
+      BrushManager.mLineLib.tryLoadMissingLine( thname );
+      type = BrushManager.mLineLib.getSymbolIndexByThName( thname ); 
       if ( type < 0 ) {
-        // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.addLineFilename( fname );
+        // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.addLineFilename( thname );
         type = 0;
       }
 
@@ -104,7 +104,7 @@ class DrawingLinePath extends DrawingPointLinePath
       ret.setReversed( reversed );
 
       int npt = dis.readInt();
-      // TDLog.Log( TDLog.LOG_PLOT, "L: " + fname + " T " + type + " R" + reversed + " C" + closed + " NP " + npt );
+      // TDLog.Log( TDLog.LOG_PLOT, "L: " + thname + " T " + type + " R" + reversed + " C" + closed + " NP " + npt );
 
       int has_cp;
       float x1, y1, x2, y2, x0, y0;

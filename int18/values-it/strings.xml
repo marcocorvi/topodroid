@@ -484,6 +484,11 @@
     <string name="coverage_warning">Copertura angolo sotto %1$d %%\nScrivo coefficenti?</string>
     <string name="delta_warning">Errore medio oltre %1$.1f\nScrivo coefficenti?</string>
 
+    <!-- TODO string name="cover_data">Raw data distribution: %1$.2f %%</string -->
+    <!-- TODO string name="cover_calib">Calibrated data distribution: %1$.2f %%</string -->
+    <!-- TODO string name="cover_g">G distribution: %1$.2f %%</string -->
+    <!-- TODO string name="cover_m">M distribution: %1$.2f %%</string -->
+
     <string name="cannot_rename">Rinomina rilievo non riuscita</string>
     <string name="declination">decl. magn.</string>
     <string name="description">descrizione</string>

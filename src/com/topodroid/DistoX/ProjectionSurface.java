@@ -37,7 +37,7 @@ import android.view.SurfaceView;
  * note this class must be public
  */
 public class ProjectionSurface extends SurfaceView
-                            implements SurfaceHolder.Callback
+                               implements SurfaceHolder.Callback
 {
     private boolean mSurfaceCreated = false;
     private DrawThread mDrawThread;

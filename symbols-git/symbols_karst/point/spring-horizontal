@@ -1,5 +1,5 @@
 symbol point
-name spring_horizontal
+name spring-horizontal
 name-pt nascente_horizontal
 name-es manatial_horizontal
 name-ru источник_горизонтальный
@@ -7,7 +7,7 @@ name-fr arrivée_d'eau_horizontale_(source)
 name-sk horizontálny_prameň
 name-ro izvor_orizontal
 name-de Horizontale_Quelle
-th_name u:spring_horizontal
+th_name u:spring-horizontal
 orientation no
 color 0x3399ff
 csurvey 6 6 80

@@ -96,21 +96,13 @@ class DrawingShp
       
       Archiver zipper = new Archiver( );
       zipper.compressFiles( basepath + ".shz", files );
-      TDPath.deleteDir( basepath ); // delete temporary shapedir
+      TDUtil.deleteDir( basepath ); // delete temporary shapedir
 
     } catch ( IOException e ) {
       TDLog.Error( "SHP io-exception " + e.getMessage() );
       return false;
     } finally {
-      if ( dir != null && dir.exists() ) {
-        File[] files = dir.listFiles();
-        if ( files != null ) {
-          for (File file : files) {
-            if (file.isFile()) file.delete();
-          }
-        }
-	    dir.delete();
-      }
+      TDUtil.deleteDir( dir );
     }
     return true;
   }

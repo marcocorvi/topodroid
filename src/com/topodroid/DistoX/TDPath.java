@@ -540,22 +540,7 @@ class TDPath
     }
   }
 
-  static void deleteDir( String dirname )
-  {
-    File dir = new File( dirname );
-    if ( dir.exists() ) {
-      File[] files = dir.listFiles();
-      if ( files != null ) {
-        for (File file : files ) if (file.isFile()) file.delete();
-      }
-      dir.delete();
-    }
-  }
-
-  static void deleteFile( String filename )
-  {
-    TDUtil.deleteFile( filename );
-  }
+  static void deleteFile( String filename ) { TDUtil.deleteFile( filename ); }
 
   static void deleteSurveyFiles( String survey )
   {

@@ -492,6 +492,11 @@
     <string name="coverage_warning">Ángulo de cobertura por debajo de %1$d %%\nEscribir coeficientes?</string>
     <string name="delta_warning">Error promedio superior %1$.1f\nEscribir coeficientes?</string>
 
+    <!-- TODO string name="cover_data">Raw data distribution: %1$.2f %%</string -->
+    <!-- TODO string name="cover_calib">Calibrated data distribution: %1$.2f %%</string -->
+    <!-- TODO string name="cover_g">G distribution: %1$.2f %%</string -->
+    <!-- TODO string name="cover_m">M distribution: %1$.2f %%</string -->
+
     <string name="cannot_rename">No se puede cambiar el nombre de la topografía</string>
     <string name="declination">Declinación magnética </string>
     <string name="description">Descripción</string>

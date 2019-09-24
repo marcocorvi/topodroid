@@ -284,7 +284,7 @@ class TopoDroidComm
         // TDLog.Log( TDLog.LOG_COMM, "cancel Comm thread: nulling thread");
         mCommThread = null;
       }
-    } else {
+    // } else {
       // TDLog.Log( TDLog.LOG_COMM, "cancel Comm thread: no thread");
     }
   }

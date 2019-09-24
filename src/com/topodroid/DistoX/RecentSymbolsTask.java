@@ -118,21 +118,21 @@ class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
     if ( names != null ) {
       String[] points = names.split(" ");
       for ( String point : points ) {
-        ItemDrawer.updateRecent( BrushManager.mPointLib.getSymbolByFilename( point ), mRecentPoint );
+        ItemDrawer.updateRecent( BrushManager.mPointLib.getSymbolByThName( point ), mRecentPoint );
       }
     }
     names = mData.getValue( "recent_lines" );
     if ( names != null ) {
       String[] lines = names.split(" ");
       for ( String line : lines ) {
-        ItemDrawer.updateRecent( BrushManager.mLineLib.getSymbolByFilename( line ), mRecentLine );
+        ItemDrawer.updateRecent( BrushManager.mLineLib.getSymbolByThName( line ), mRecentLine );
       }
     }
     names = mData.getValue( "recent_areas" );
     if ( names != null ) {
       String[] areas = names.split(" ");
       for ( String area : areas ) {
-        ItemDrawer.updateRecent( BrushManager.mAreaLib.getSymbolByFilename( area ), mRecentArea );
+        ItemDrawer.updateRecent( BrushManager.mAreaLib.getSymbolByThName( area ), mRecentArea );
       }
     }
   }

@@ -28,7 +28,7 @@ import java.util.TreeSet;
  */
 class SymbolsPalette
 {
-  TreeSet< String > mPalettePoint;  // filenames == th_names
+  TreeSet< String > mPalettePoint;  // filenames == th_names without "u:" if the case
   TreeSet< String > mPaletteLine;
   TreeSet< String > mPaletteArea;
 

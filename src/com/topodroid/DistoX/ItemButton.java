@@ -28,7 +28,7 @@ import android.widget.Button;
  * note this class must be public
  */
 @SuppressLint("AppCompatCustomView")
-public class ItemButton extends Button
+class ItemButton extends Button
 {
   private Paint mPaint;
   private Path  mPath;

@@ -106,7 +106,7 @@ class ScrapOutlineDialog extends MyDialog
       mParent.addScrap( null );
     } else if ( TDSetting.mPlotSplit && b == mBtnMerge ) {
       mParent.mergeOutlineScrap( );
-    } else if ( b == mBtnBack ) {
+    // } else if ( b == mBtnBack ) {
       /* nothing */
     }
     dismiss();

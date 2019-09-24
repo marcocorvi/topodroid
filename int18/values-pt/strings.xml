@@ -485,6 +485,11 @@
     <string name="coverage_warning">Amplitude angular abaixo de %1$d %%\nGravar coeficientes?</string>
     <string name="delta_warning">Erro mpédio acima de %1$.1f\nGravar coeficientes?</string>
 
+    <!-- TODO string name="cover_data">Raw data distribution: %1$.2f %%</string -->
+    <!-- TODO string name="cover_calib">Calibrated data distribution: %1$.2f %%</string -->
+    <!-- TODO string name="cover_g">G distribution: %1$.2f %%</string -->
+    <!-- TODO string name="cover_m">M distribution: %1$.2f %%</string -->
+
     <string name="cannot_rename">Não é possível renomear a topo</string>
     <string name="declination">declinação magnética</string>
     <string name="description">descrição</string>

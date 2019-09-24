@@ -496,6 +496,11 @@
     <string name="coverage_warning">Winkelabdeckung unter %1$d %%\nKoeffizienten trotzdem schreiben?</string>
     <string name="delta_warning">Durchschnittlicher Fehler über %1$.1f\nKoeffizienten trotzdem schreiben?</string>
 
+    <!-- TODO string name="cover_data">Raw data distribution: %1$.2f %%</string -->
+    <!-- TODO string name="cover_calib">Calibrated data distribution: %1$.2f %%</string -->
+    <!-- TODO string name="cover_g">G distribution: %1$.2f %%</string -->
+    <!-- TODO string name="cover_m">M distribution: %1$.2f %%</string -->
+
     <string name="cannot_rename">Kann Vermessung nicht umbenennen</string>
     <string name="declination">Magnetische Deklination</string>
     <string name="description">Beschreibung</string>

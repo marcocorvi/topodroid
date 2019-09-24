@@ -41,10 +41,10 @@ class CalibCoverageDialog extends MyDialog
   private float mCoverageValue;
   private float[] mDeviations;
 
-  private Bitmap mBitmapUp;
-  private Bitmap mBitmapDown;
-  private List<CalibCBlock> mList;  // list of calibration shots
-  private CalibAlgo mCalib;         // calibration algorithm
+  private final Bitmap mBitmapUp;
+  private final Bitmap mBitmapDown;
+  private final List<CalibCBlock> mList;  // list of calibration shots
+  private final CalibAlgo mCalib;         // calibration algorithm
 
   private TextView mText;
   private ImageView mImageUp;
@@ -102,14 +102,17 @@ class CalibCoverageDialog extends MyDialog
       mBtnEvalCal.setVisibility( View.GONE );
     }
     // mBtnBack.setOnClickListener( this );
-    reset();
+    reset( R.string.cover_data );
   }
 
-  private void reset()
+  private void reset( int res )
   {
     mImageUp.setImageBitmap( mBitmapUp );
     mImageDown.setImageBitmap( mBitmapDown );
-    mText.setText( String.format(Locale.US, "%.2f", mCoverageValue ) );
+    String format = mContext.getResources().getString(res);
+    Log.v("DistoXX", "res " + res + " format " + format );
+
+    mText.setText( String.format(Locale.US, mContext.getResources().getString(res), mCoverageValue ) );
   }
 
   @Override
@@ -119,20 +122,20 @@ class CalibCoverageDialog extends MyDialog
     if ( btn == mBtnEval ) {
       mCoverageValue = mCoverage.evalCoverage( mList, null );
       fillImage();
-      reset();
+      reset( R.string.cover_data );
     } else if ( btn == mBtnEvalG ) {
       mCoverageValue = mCoverage.evalCoverageGM( mList, 0 );
       fillImage();
-      reset();
+      reset( R.string.cover_g );
     } else if ( btn == mBtnEvalM ) {
       mCoverageValue = mCoverage.evalCoverageGM( mList, 1 );
       fillImage();
-      reset();
+      reset( R.string.cover_m );
     } else if ( btn == mBtnEvalCal ) {
       if ( mCalib.GetAG() != null ) {
         mCoverageValue = mCoverage.evalCoverage( mList, mCalib );
         fillImage();
-        reset();
+        reset( R.string.cover_calib );
       } else {
         TDToast.makeBad( R.string.no_calib );
       }

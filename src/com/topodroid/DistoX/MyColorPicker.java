@@ -255,7 +255,8 @@ class MyColorPicker extends MyDialog
         mListener.colorChanged( mColorPicker.getColor() );
       } else if ( b == mBtnClear ) {
         mListener.colorChanged( 0 ); // clear color is 0
-      } else if ( b == mBtnClose ) {
+      // } else if ( b == mBtnClose ) {
+          /* nothing */
       }
       dismiss();
     }

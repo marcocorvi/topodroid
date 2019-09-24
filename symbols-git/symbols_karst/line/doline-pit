@@ -1,12 +1,12 @@
 symbol line
-name doline_pit
+name doline-pit
 name-pt poço_de_dolina
 name-es pozo_de_dolina
 name-ru какстовый_провал
 name-fr doline_d'effondrement
 name-ro puț_dolină
 name-de Dolinenschacht
-th_name u:doline_pit
+th_name u:doline-pit
 group doline
 color 0x66cc33 0xff
 width 8

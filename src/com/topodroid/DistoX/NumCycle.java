@@ -15,35 +15,54 @@ import java.util.ArrayList;
 
 // import android.util.Log;
 
+import java.util.ArrayList;
+
 class NumCycle
 {
-  private int mMax;
-  int mSize;
-  private NumBranch[] branches;
-  // NumNode[]   nodes;
-  int[]       dirs; // branch direction in the cycle
+  class NumCycleBranch
+  {
+    NumBranch mBranch;
+    // NumNode   mNode;
+    int       mDir;    // branch direction in the cycle
+
+    NumCycleBranch( NumBranch br, NumNode nd, int dir )
+    {
+      mBranch = br;
+      // mNode = nd;
+      mDir = dir;
+    }
+  };
+
+  // private int mMax;
+  // int mSize;
+  private ArrayList< NumCycleBranch > branches;
+  // private ArrayList< NumNode >   nodes;
+  // int[]       dirs; // branch direction in the cycle
   float e, s, v;    // displacement = closure error
   float ce, cs, cv; // corrections
 
+  int size() { return branches.size(); }
+
   NumCycle( int sz )
   {
-    mMax = sz;
-    mSize = 0;
-    branches = new NumBranch[mMax];
+    // mMax = sz;
+    // mSize = 0;
+    branches = new ArrayList< NumCycleBranch >();
     // nodes = new NumNode[mMax];
-    dirs  = new int[mMax];
+    // dirs  = new int[mMax];
   }
 
   void addBranch( NumBranch branch, NumNode node )
   {
-    if ( mSize < mMax ) {
-      branches[mSize] = branch;
-      // nodes[mSize] = node;
-      dirs[mSize] = ( node == branch.n2 )? 1 : -1;
-      // TDLog.Log( TDLog.LOG_NUM, "C add branch dir " + dirs[mSize] );
-      // branch.dump();
-      ++mSize;
-    }
+    branches.add( new NumCycleBranch( branch, node, ( (node == branch.n2)? 1 : -1 ) ) );
+    // if ( mSize < mMax ) {
+    //   branches[mSize] = branch;
+    //   // nodes[mSize] = node;
+    //   dirs[mSize] = ( node == branch.n2 )? 1 : -1;
+    //   // TDLog.Log( TDLog.LOG_NUM, "C add branch dir " + dirs[mSize] );
+    //   // branch.dump();
+    //   ++mSize;
+    // }
   }
 
   // NumNode getNode( int k ) 
@@ -58,9 +77,10 @@ class NumCycle
     e = 0.0f;
     s = 0.0f;
     v = 0.0f;
-    for ( int k=0; k<mSize; ++k ) {
-      NumBranch br = branches[k];
-      int dir = dirs[k];
+    // for ( int k=0; k<mSize; ++k ) {
+    for ( NumCycleBranch branch : branches ) {
+      NumBranch br = branch.mBranch;
+      int dir      = branch.mDir;
       e += br.e * dir;
       s += br.s * dir;
       v += br.v * dir;
@@ -81,29 +101,44 @@ class NumCycle
     // }
   }
 
-  int branchIndex( NumBranch br )
+  // @param br   num branch
+  // @return  the index of the branch or -1 if the branch is not in this cycle
+  // int getBranchIndex( NumBranch br )
+  // {
+  //   int sz = branches.size();
+  //   for (int k = 0; k<sz; ++k ) {
+  //     if ( br == branches.get(k).mBranch ) return k;
+  //   }
+  //   return -1;
+  // }
+
+  // @param br   num branch
+  // @return  the direction of the branch in this cycle or 0 if the branch is not in this cycle
+  int getBranchDir( NumBranch br )
   {
-    for (int k = 0; k<mSize; ++k ) {
-      if ( br == branches[k] ) return k;
+    for ( NumCycleBranch branch : branches ) {
+      if ( br == branch.mBranch ) return branch.mDir;
     }
-    return mSize;
+    return 0;
   }
 
+  // return true if every branch in this cycle is equal to a branch of one of the cycles
   boolean isBranchCovered( ArrayList<NumCycle> cycles )
   {
-    for (int k=0; k<mSize; ++k ) {
-      NumBranch br = branches[k];
+    for ( NumCycleBranch branch : branches ) {
+      NumBranch br = branch.mBranch;
       boolean found = false;
       for ( NumCycle cy : cycles ) {
-        for ( int k1 = 0; k1 < cy.mSize; ++k1 ) {
-          if ( br == cy.branches[k1] ) {
+        if ( cy == this ) continue;
+        for ( NumCycleBranch branch1 : cy.branches ) {
+          if ( br == branch1.mBranch ) {
             found = true;
             break;
           }
         }
         if ( found ) break;
       }
-      if ( ! found ) return false;
+      if ( ! found ) return false; // the branch has not been found among the cycles
     }
     return true;
   }

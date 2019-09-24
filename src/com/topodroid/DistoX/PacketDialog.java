@@ -132,7 +132,8 @@ class PacketDialog extends MyDialog
       mLogger.clearDayOlder();
     } else if ( id == R.id.clear_week ) {
       mLogger.clearWeekOlder();
-    } else { // every checkbox
+    // } else { // every checkbox
+      /* nothing */
     } 
     updateDisplay();
   }

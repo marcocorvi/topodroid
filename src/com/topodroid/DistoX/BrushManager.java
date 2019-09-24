@@ -203,6 +203,15 @@ class BrushManager
     // mAreaLib.loadUserAreas();
   }
 
+  // palette    set of symbols filenames
+  // clear      whether the disable all symbols first
+  static void makeEnabledListFromPalette( SymbolsPalette palette, boolean clear ) 
+  {
+    mPointLib.makeEnabledListFromPalette( palette, clear );
+    mLineLib.makeEnabledListFromPalette( palette, clear );
+    mAreaLib.makeEnabledListFromPalette( palette, clear );
+  }
+
   static private boolean doneMakePaths = false;
 
   // paint for fixed path
@@ -327,36 +336,35 @@ class BrushManager
     if ( referencePaint != null )           referencePaint.setTextSize( TDSetting.mStationSize );
   }
 
-  // UNUSED
-  // static SymbolsPalette preparePalette()
-  // {
-  //   SymbolsPalette palette = new SymbolsPalette();
-  //   // populate local palette with default symbols
-  //   palette.addPointFilename("user"); // make sure local palette contains "user" symnbols
-  //   palette.addLineFilename("user");
-  //   palette.addAreaFilename("user");
-  //   SymbolPointLibrary points = mPointLib;
-  //   if ( points != null ) {
-  //     for ( Symbol p : points.getSymbols() ) if ( p.isEnabled() ) {
-  //       String fname = p.getFilename();
-  //       if ( ! fname.equals("user") ) palette.addPointFilename( fname );
-  //     }
-  //   }
-  //   SymbolLineLibrary lines = mLineLib;
-  //   if ( lines != null ) {
-  //     for ( Symbol p : lines.getSymbols() ) if ( p.isEnabled() ) {
-  //       String fname = p.getFilename();
-  //       if ( ! fname.equals("user") ) palette.addLineFilename( fname );
-  //     }
-  //   }
-  //   SymbolAreaLibrary areas = mAreaLib;
-  //   if ( areas != null ) {
-  //     for ( Symbol p : areas.getSymbols() ) if ( p.isEnabled() ) {
-  //       String fname = p.getFilename();
-  //       if ( ! fname.equals("user") ) palette.addAreaFilename( fname );
-  //     }
-  //   }
-  //   return palette;
-  // }
+  static SymbolsPalette preparePalette()
+  {
+    SymbolsPalette palette = new SymbolsPalette();
+    // populate local palette with default symbols
+    palette.addPointFilename("user"); // make sure local palette contains "user" symnbols
+    palette.addLineFilename("user");
+    palette.addAreaFilename("user");
+    SymbolPointLibrary points = mPointLib;
+    if ( points != null ) {
+      for ( Symbol p : points.getSymbols() ) if ( p.isEnabled() ) {
+        String fname = p.getThName();
+        if ( ! fname.equals("user") ) palette.addPointFilename( fname );
+      }
+    }
+    SymbolLineLibrary lines = mLineLib;
+    if ( lines != null ) {
+      for ( Symbol p : lines.getSymbols() ) if ( p.isEnabled() ) {
+        String fname = p.getThName();
+        if ( ! fname.equals("user") ) palette.addLineFilename( fname );
+      }
+    }
+    SymbolAreaLibrary areas = mAreaLib;
+    if ( areas != null ) {
+      for ( Symbol p : areas.getSymbols() ) if ( p.isEnabled() ) {
+        String fname = p.getThName();
+        if ( ! fname.equals("user") ) palette.addAreaFilename( fname );
+      }
+    }
+    return palette;
+  }
 
 }

@@ -11,6 +11,9 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
+import java.lang.ref.WeakReference;
 import java.util.Locale;
 
 // import android.app.Dialog;
@@ -27,12 +30,10 @@ import android.view.View;
 import android.graphics.Bitmap;
 // import android.graphics.Bitmap.Config;
 
-// import android.util.Log;
-
 class CalibCoeffDialog extends MyDialog
                        implements View.OnClickListener
 {
-  private GMActivity mParent;
+  private final WeakReference<GMActivity> mParent; 
 
   private static final int WIDTH  = 200;
   private static final int HEIGHT = 100;
@@ -56,21 +57,21 @@ class CalibCoeffDialog extends MyDialog
   private Button mButtonWrite;
   // private Button   mButtonBack;
 
-  private String bg0;
-  private String agx;
-  private String agy;
-  private String agz;
-  private String bm0;
-  private String amx;
-  private String amy;
-  private String amz;
-  private String nlx;
-  private String delta0;
-  private String delta02;
-  private String error0;
-  private String iter0;
-  private byte[] mCoeff;
-  private float mDelta;
+  private final String bg0;
+  private final String agx;
+  private final String agy;
+  private final String agz;
+  private final String bm0;
+  private final String amx;
+  private final String amy;
+  private final String amz;
+  private final String nlx;
+  private final String delta0;
+  private final String delta02;
+  private final String error0;
+  private final String iter0;
+  private final byte[] mCoeff;
+  private final float mDelta;
   // private boolean mSaturated;
 
   CalibCoeffDialog( Context context, GMActivity parent,
@@ -78,7 +79,7 @@ class CalibCoeffDialog extends MyDialog
                     float delta_bh, float delta, float delta2, float error, long iter, byte[] coeff /*, boolean saturated */ )
   {
     super( context, R.string.CalibCoeffDialog );
-    mParent = parent;
+    mParent = new WeakReference<GMActivity>( parent );
     mCoeff = coeff;
 
     bg0 = String.format(Locale.US, "bG   %8.4f %8.4f %8.4f", bg.x, bg.y, bg.z );
@@ -242,7 +243,12 @@ class CalibCoeffDialog extends MyDialog
   {
     Button b = (Button)v;
     if ( b == mButtonWrite ) {
-      if ( mParent != null ) mParent.uploadCoefficients( mDelta, mCoeff, true, b );
+      GMActivity parent = mParent.get();
+      if ( parent != null ) {
+        parent.uploadCoefficients( mDelta, mCoeff, true, b );
+      } else {
+        TDLog.Error("Calib Coeff Dialog null parent");
+      }
     } else {
       dismiss();
     }

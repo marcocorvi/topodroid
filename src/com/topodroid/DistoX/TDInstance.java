@@ -77,7 +77,7 @@ class TDInstance
     String addr = b.getString( "TOPODROID_DEVICE" );
     if ( addr == null || addr.length() == 0 ) {
       device = null;
-    } else {
+    // } else {
       // device = TopoDroidApp.setDevice( addr ); // FIXME_DEVICE_STATIC
     }
     recentPlot = null;

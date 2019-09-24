@@ -8,7 +8,7 @@ name-fr trace_de_creusement
 name-sk stopy_kopania
 name-ro urme_de_excavare
 name-de Schnittspuren
-th_name u:cut_marks
+th_name u:cut-marks
 color 0xffffff
 csurvey 0 0 0
 orientation yes

@@ -113,9 +113,9 @@ class DrawingAreaPath extends DrawingPointLinePath
     boolean visible;
     float orientation;
     int level = DrawingLevel.LEVEL_DEFAULT;
-    String fname, prefix;
+    String thname, prefix;
     try {
-      fname = dis.readUTF();
+      thname = dis.readUTF();
       prefix = dis.readUTF();
       cnt = dis.readInt();
       visible = ( dis.read( ) == 1 );
@@ -123,11 +123,11 @@ class DrawingAreaPath extends DrawingPointLinePath
       if ( version >= 401090 ) level = dis.readInt();
       int npt = dis.readInt( );
 
-      // BrushManager.mAreaLib.tryLoadMissingArea( fname );
-      type = BrushManager.mAreaLib.getSymbolIndexByFilename( fname );
-      // TDLog.Log( TDLog.LOG_PLOT, "A: " + fname + " " + cnt + " " + visible + " " + orientation + " NP " + npt );
+      BrushManager.mAreaLib.tryLoadMissingArea( thname );
+      type = BrushManager.mAreaLib.getSymbolIndexByThName( thname );
+      // TDLog.Log( TDLog.LOG_PLOT, "A: " + thname + " " + cnt + " " + visible + " " + orientation + " NP " + npt );
       if ( type < 0 ) {
-        // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.addAreaFilename( fname );
+        // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.addAreaFilename( thname );
         type = 0;
       }
 

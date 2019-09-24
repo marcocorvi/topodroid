@@ -154,7 +154,7 @@ class SymbolAreaLibrary extends SymbolLibrary
           TDLog.Error( "area with null ThName " + file.getName() );
           continue;
         }
-        if ( ! hasSymbolByFilename( symbol.mThName ) ) {
+        if ( ! hasSymbolByThName( symbol.mThName ) ) {
           addSymbol( symbol );
           String thname = symbol.mThName;
           String name = mPrefix + thname;
@@ -178,18 +178,17 @@ class SymbolAreaLibrary extends SymbolLibrary
     }
   }
 
-  boolean tryLoadMissingArea( String fname )
+  boolean tryLoadMissingArea( String thname )
   {
     String locale = "name-" + Locale.getDefault().toString().substring(0,2);
     String iso = "ISO-8859-1";
     // String iso = "UTF-8";
     // if ( locale.equals( "name-es" ) ) iso = "ISO-8859-1";
-
-    Symbol symbol = getSymbolByFilename( fname );
+    Symbol symbol = getSymbolByThName( thname );
     // APP_SAVE SYMBOLS
     if ( symbol == null ) {
-      String filename = TDPath.APP_SAVE_AREA_PATH + fname;
-      File file = new File( filename );
+      String filename = thname.startsWith("u:")? thname.substring(2) : thname; 
+      File file = new File( TDPath.APP_SAVE_AREA_PATH + filename );
       if ( ! file.exists() ) return false;
       symbol = new SymbolArea( file.getPath(), file.getName(), locale, iso );
       addSymbol( symbol );
@@ -202,9 +201,9 @@ class SymbolAreaLibrary extends SymbolLibrary
     return true;
   }
 
-  void makeEnabledListFromPalette( SymbolsPalette palette )
+  void makeEnabledListFromPalette( SymbolsPalette palette, boolean clear )
   {
-    makeEnabledListFromStrings( palette.mPaletteArea );
+    makeEnabledListFromStrings( palette.mPaletteArea, clear );
   }
 
 }    

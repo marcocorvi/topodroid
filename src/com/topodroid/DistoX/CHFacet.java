@@ -4,6 +4,7 @@
  * @date may 2017
  *
  * @brief TopoDroid N vector facet
+ *        baswe class for triangles (N=3)
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -29,7 +30,7 @@ class CHFacet
   private boolean hasCenter;
   private boolean hasNormal;
 
-  CHFacet( int n )
+  CHFacet( int n ) 
   {
     valid = true;
     nr = n;

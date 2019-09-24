@@ -727,9 +727,9 @@ class DrawingSurface extends SurfaceView
     /* SymbolsPalette missingSymbols, */ String plotName )
   {
     boolean ret = false;
-    // SymbolsPalette localPalette = BrushManager.preparePalette();
+    SymbolsPalette localPalette = BrushManager.preparePalette();
     if ( (new File(tdr)).exists() ) {
-      ret = DrawingIO.doLoadDataStream( this, tdr, xdelta, ydelta, /* missingSymbols, localPalette, */ null, false, plotName );
+      ret = DrawingIO.doLoadDataStream( this, tdr, xdelta, ydelta, /* missingSymbols, */ localPalette, null, false, plotName );
     }
     return ret;
   }
@@ -738,11 +738,14 @@ class DrawingSurface extends SurfaceView
   boolean modeloadDataStream( String tdr1 /*, SymbolsPalette missingSymbols */ )
   {
     boolean ret = false;
-    // SymbolsPalette localPalette = BrushManager.preparePalette();
+    SymbolsPalette localPalette = BrushManager.preparePalette();
     // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.resetSymbolLists();
     if ( tdr1 != null ) {
       if ( (new File( tdr1 )).exists() ) {
-        ret = DrawingIO.doLoadDataStream( this, tdr1, 0, 0, /* missingSymbols, localPalette, */ null, false, null ); // no plot_name
+        ret = DrawingIO.doLoadDataStream( this, tdr1, 0, 0, /* missingSymbols, */ localPalette, null, false, null ); // no plot_name
+        if ( ret ) {
+          BrushManager.makeEnabledListFromPalette( localPalette, false );
+        }
       }
     }
     return ret;

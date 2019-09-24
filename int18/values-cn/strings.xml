@@ -497,6 +497,11 @@
     <!-- TODO string name="coverage_warning">Angle coverage below %1$d %%\nWrite coefficients?</string -->
     <!-- TODO string name="delta_warning">Average error above %1$.1f\nWrite coefficients?</string -->
 
+    <!-- TODO string name="cover_data">Raw data distribution: %1$.2f %%</string -->
+    <!-- TODO string name="cover_calib">Calibrated data distribution: %1$.2f %%</string -->
+    <!-- TODO string name="cover_g">G distribution: %1$.2f %%</string -->
+    <!-- TODO string name="cover_m">M distribution: %1$.2f %%</string -->
+
     <string name="empty_clipboard">清空剪贴板</string>
     <string name="cannot_rename">不能重命名测量</string>
     <string name="declination">磁偏角</string>

@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 import java.util.Map;
 import java.util.List;
 import java.util.HashMap;
@@ -36,15 +38,12 @@ import android.view.View.OnFocusChangeListener;
 // import android.view.WindowManager; 
 import android.view.inputmethod.InputMethodManager; 
 import android.view.KeyEvent;
-// import android.view.MotionEvent;
 // import android.view.ViewGroup;
 
 import android.text.InputType;
 import android.text.Editable;
 // import android.text.Layout;
 import android.text.method.KeyListener; 
-
-// import android.util.Log;
 
 /* you need to override EditText::onTouchListener()
  */
@@ -75,7 +74,7 @@ class MyKeyboard // FIXME DIALOG extends Dialog
 
   private Map< EditText, Integer > mFlags;
 
-  private final Context  mContext;
+  private Context  mContext;
   private EditText mEdit; 
   private KeyboardView mKeyboardView;
   private Keyboard mKeyboard;
@@ -83,7 +82,7 @@ class MyKeyboard // FIXME DIALOG extends Dialog
   private Keyboard mKeyboard2; // secondary kbd
 
   EditText getEditText() { return mEdit; }
-  Context  getContext() { return mContext; }
+  // Context  getContext() { return mContext; }
 
   // Keyboard.Key mKeySign;
   // Keyboard.Key mKeyDegree;
@@ -127,7 +126,7 @@ class MyKeyboard // FIXME DIALOG extends Dialog
           CutNPaste.dismissPopup();
           // Log.v(TAG, "onFocusChange() " + hasFocus + " " + e.getText().toString() );
           if ( hasFocus ) {
-            InputMethodManager imm = (InputMethodManager)kbd.getContext().getSystemService( Context.INPUT_METHOD_SERVICE );
+            InputMethodManager imm = (InputMethodManager)kbd.mContext.getSystemService( Context.INPUT_METHOD_SERVICE );
             imm.hideSoftInputFromWindow( e.getWindowToken(), 0 ); // NullPointerException
             if ( kbd.setEditText( e ) ) {
               // e.setBackgroundResource( R.drawable.textfield_selected );
@@ -225,7 +224,7 @@ class MyKeyboard // FIXME DIALOG extends Dialog
     if ( visible ) show( null );
   }
 
-  boolean isVisible()
+  private boolean isVisible()
   {
     return mKeyboardView.isShown();
   }
@@ -239,8 +238,8 @@ class MyKeyboard // FIXME DIALOG extends Dialog
 
     // Log.v("DistoX", "id1 " + kbdid1 + " " + kbdid2 );
     mKeyboardView = view;
-    mKeyboard1 = new Keyboard( mContext, kbdid1 );
-    mKeyboard2 = ( kbdid2 == -1 )? null : new Keyboard( mContext, kbdid2 );
+    mKeyboard1 = new Keyboard( context, kbdid1 );
+    mKeyboard2 = ( kbdid2 == -1 )? null : new Keyboard( context, kbdid2 );
     mKeyboard  = mKeyboard1;
     mKeyboardView.setKeyboard(mKeyboard);
     mKeyboardView.setEnabled(true);

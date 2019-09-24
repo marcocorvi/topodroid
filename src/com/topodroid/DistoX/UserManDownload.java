@@ -58,29 +58,31 @@ class UserManDownload extends AsyncTask< String, Integer, Integer >
         ZipInputStream zin = new ZipInputStream( in );
         ZipEntry ze = null;
        	File dir = new File( TDPath.getManPath() );
-       	if ( ! dir.exists() ) { dir.mkdirs(); }
-
-        while ( ( ze = zin.getNextEntry() ) != null ) {
-          String name = ze.getName();
-          if ( ze.isDirectory() ) { // not really an error: just neglect
-            // TDLog.Error( "Zip dir entry \"" + name + "\"" );
-          } else {
-            // TDLog.Error( "Zip entry \"" + name + "\"" );
-            int pos = name.lastIndexOf('/');
-	    if ( pos > 0 ) name = name.substring(pos+1);
-	    if ( ! name.startsWith("README") ) {
-	      FileOutputStream fos = new FileOutputStream( TDPath.getManFile( name ) );
-              int c;
-              while ( ( c = zin.read( buffer ) ) != -1 ) {
-                fos.write(buffer, 0, c);
-              }
-              fos.close();
+        if ( (dir != null) && ( dir.exists() || dir.mkdirs() ) ) {
+          while ( ( ze = zin.getNextEntry() ) != null ) {
+            String name = ze.getName();
+            if ( ze.isDirectory() ) { // not really an error: just neglect
+              // TDLog.Error( "Zip dir entry \"" + name + "\"" );
+            } else {
+              // TDLog.Error( "Zip entry \"" + name + "\"" );
+              int pos = name.lastIndexOf('/');
+	      if ( pos > 0 ) name = name.substring(pos+1);
+	      if ( ! name.startsWith("README") ) {
+	        FileOutputStream fos = new FileOutputStream( TDPath.getManFile( name ) );
+                int c;
+                while ( ( c = zin.read( buffer ) ) != -1 ) {
+                  fos.write(buffer, 0, c);
+                }
+                fos.close();
+	      }
 	    }
 	  }
-	}
+          ret = 1;
+        } else {
+          TDLog.Error("ERROR could not mkdirs" );
+        }
       }
       http.disconnect();
-      ret = 1;
     } catch ( MalformedURLException e1 ) {
       TDLog.Error( "ERROR bad URL: " + e1.toString() );
     } catch ( IOException e2 ) {

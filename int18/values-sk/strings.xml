@@ -496,6 +496,11 @@
     <string name="tripod_warning">Politika STATÍV-STENA je pre pokročilých !</string>
     <string name="coverage_warning">Distribúcia údajov z uhlov je pod %1$d %%\nZapísať koeficienty?</string>
     <string name="delta_warning">Priemerná chyba nad %1$.1f\nZapísať koeficienty?</string>
+
+    <!-- TODO string name="cover_data">Raw data distribution: %1$.2f %%</string -->
+    <!-- TODO string name="cover_calib">Calibrated data distribution: %1$.2f %%</string -->
+    <!-- TODO string name="cover_g">G distribution: %1$.2f %%</string -->
+    <!-- TODO string name="cover_m">M distribution: %1$.2f %%</string -->
 	
     <string name="empty_clipboard">Prázdna schránka</string>
     <string name="cannot_rename">Nedá sa premenovať názov mapovania</string>

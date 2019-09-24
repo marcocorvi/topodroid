@@ -211,11 +211,11 @@ public class GMActivity extends Activity
         // FIXME set the calibration algorithm (whether non-linear or linear)
         // mCalibration.setAlgorith( mAlgo == 2 ); // CALIB_AUTO_NON_LINEAR
         break;
-      case CalibInfo.ALGO_MINIMUM:
-        if ( TDLevel.overTester ) {
-          mCalibration = new CalibAlgoMin( 0, false );
-          break;
-        }
+      // case CalibInfo.ALGO_MINIMUM:
+      //   if ( TDLevel.overTester ) {
+      //     mCalibration = new CalibAlgoMin( 0, false );
+      //     break;
+      //   }
       default: // linear algo
         mCalibration = new CalibAlgoBH( 0, false );
     }
@@ -254,6 +254,8 @@ public class GMActivity extends Activity
   }
 
   /** validate this calibration against another calibration
+   * *-0 vars are computed on list0 using calib1, ie, the other calib on the data of this calib
+   * *-1 vars are computed on list1 using calib0, iw, this calib on the data of the other calib
    */
   void validateCalibration( String name )
   {
@@ -263,12 +265,11 @@ public class GMActivity extends Activity
     if ( cid < 0 ) {
       return;
     }
-    List<CalibCBlock> list  = mApp_mDData.selectAllGMs( TDInstance.cid, 0, false ); // false: skip negative-grp
+    List<CalibCBlock> list0 = mApp_mDData.selectAllGMs( TDInstance.cid, 0, false ); // false: skip negative-grp
     List<CalibCBlock> list1 = mApp_mDData.selectAllGMs( cid, 0, false );
-    // list.addAll( list1 );
-    int size  = list.size();
+    int size0 = list0.size();
     int size1 = list1.size();
-    if ( size < 16 || size1 < 16 ) {
+    if ( size0 < 16 || size1 < 16 ) {
       TDToast.makeBad( R.string.few_data );
       return;
     }
@@ -281,11 +282,11 @@ public class GMActivity extends Activity
       case CalibInfo.ALGO_NON_LINEAR:
         calib1 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr ), true );
         break;
-      case CalibInfo.ALGO_MINIMUM:
-        if ( TDLevel.overTester ) {
-          calib1 = new CalibAlgoMin( CalibAlgo.stringToCoeff( coeffStr ), false );
-          break;
-        }
+      // case CalibInfo.ALGO_MINIMUM:
+      //   if ( TDLevel.overTester ) {
+      //     calib1 = new CalibAlgoMin( CalibAlgo.stringToCoeff( coeffStr ), false );
+      //     break;
+      //   }
       default:
         calib1 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr ), false );
     }
@@ -300,39 +301,40 @@ public class GMActivity extends Activity
       case CalibInfo.ALGO_NON_LINEAR:
         calib0 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr ), true );
         break;
-      case CalibInfo.ALGO_MINIMUM:
-        if ( TDLevel.overTester ) {
-          calib0 = new CalibAlgoMin( CalibAlgo.stringToCoeff( coeffStr ), false );
-          break;
-        }
+      // case CalibInfo.ALGO_MINIMUM:
+      //   if ( TDLevel.overTester ) {
+      //     calib0 = new CalibAlgoMin( CalibAlgo.stringToCoeff( coeffStr ), false );
+      //     break;
+      //   }
       default:
         calib0 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr ), false );
     }
     // Log.v("DistoX", "Calib-0 algo " + algo );
     // calib0.dump();
 
-    float[] errors0 = new float[ list.size() ]; 
-    float[] errors1 = new float[ list1.size() ]; 
+    float[] errors1 = new float[ size1 ]; 
     int ke1 = computeErrorStats( calib0, list1, errors1 );
-    int ke0 = computeErrorStats( calib1, list,  errors0 );
-    double ave0 = calib0.getStatError() / calib0.getStatCount();
-    double std0 = Math.sqrt( calib0.getStatError2() / calib0.getStatCount() - ave0 * ave0 + 1e-8 );
-    double ave1 = calib1.getStatError() / calib1.getStatCount();
-    double std1 = Math.sqrt( calib1.getStatError2() / calib1.getStatCount() - ave1 * ave1 + 1e-8 );
-    ave0 *= TDMath.RAD2DEG;
-    std0 *= TDMath.RAD2DEG;
+    double ave1 = calib0.getStatError() / calib0.getStatCount();
+    double std1 = Math.sqrt( calib0.getStatError2() / calib0.getStatCount() - ave1 * ave1 + 1e-8 );
     ave1 *= TDMath.RAD2DEG;
     std1 *= TDMath.RAD2DEG;
 
-    list.addAll( list1 );
-    size = list.size();
+    float[] errors0 = new float[ size0 ]; 
+    int ke0 = computeErrorStats( calib1, list0, errors0 );
+    double ave0 = calib1.getStatError() / calib1.getStatCount();
+    double std0 = Math.sqrt( calib1.getStatError2() / calib1.getStatCount() - ave0 * ave0 + 1e-8 );
+    ave0 *= TDMath.RAD2DEG;
+    std0 *= TDMath.RAD2DEG;
 
-    float[] errors = new float[ size ];
+    list0.addAll( list1 );
+    size0 = list0.size(); // size0 += size1;
+
+    float[] errors = new float[ size0 ];
     double err1   = 0; // average error [radians]
     double err2   = 0;
     double errmax = 0;
     int ke = 0;
-    for ( CalibCBlock b : list ) {
+    for ( CalibCBlock b : list0 ) {
       Vector g = new Vector( b.gx, b.gy, b.gz );
       Vector m = new Vector( b.mx, b.my, b.mz );
       Vector v0 = calib0.computeDirection(g,m);
@@ -343,8 +345,8 @@ public class GMActivity extends Activity
       err2 += err * err;
       if ( err > errmax ) errmax = err;
     }
-    err1 /= size;
-    err2 = Math.sqrt( err2/size - err1 * err1 );
+    err1 /= size0;
+    err2 = Math.sqrt( err2/size0 - err1 * err1 );
     err1 *= TDMath.RAD2DEG;
     err2 *= TDMath.RAD2DEG;
     errmax *= TDMath.RAD2DEG;
@@ -373,7 +375,7 @@ public class GMActivity extends Activity
     for ( int j=k; j<list.size(); ++j ) {
       if ( list.get(j).mGroup > 0 ) {
         if ( list.get(j).mGroup != group ) {
-          if ( cnt > 0 ) {
+          if ( cnt > 1 ) { // 2019.09.23 at least two data in the group
             Vector[] g = new Vector[cnt];
             Vector[] m = new Vector[cnt];
             float[]  e = new float[cnt];
@@ -397,7 +399,7 @@ public class GMActivity extends Activity
         }
       }
     } 
-    if ( cnt > 0 ) {
+    if ( cnt > 1 ) { // 2019.09.23 at least two data in the group
       Vector[] g = new Vector[cnt];
       Vector[] m = new Vector[cnt];
       float[]  e = new float[cnt];
@@ -1018,16 +1020,16 @@ public class GMActivity extends Activity
   void uploadCoefficients( float delta, final byte[] coeff, final boolean mode, final Button b )
   {
     String warning = null;
-    if ( warning == null ) {
-      // check coverage
+    // if ( warning == null ) { // check coverage
       List< CalibCBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, 0, false ); // false: skip negative-grp
       CalibCoverage coverage = new CalibCoverage( );
       float cover_value = coverage.evalCoverage( list, null );
       if ( cover_value < 95 ) warning = String.format( getResources().getString( R.string.coverage_warning ), 95 );
-    }
+    // }
     if ( warning == null ) {
       if ( delta > 0.5f ) warning = String.format( getResources().getString(R.string.delta_warning), 0.5 ); 
     }
+
     if ( warning != null ) {
       TopoDroidAlertDialog.makeAlert( this, getResources(), warning,
         new DialogInterface.OnClickListener() {

@@ -13,9 +13,9 @@ package com.topodroid.DistoX;
 
 class CurrentStation
 {
-  public String mName;
-  public String mComment;
-  public int mFlag;
+  final String mName;
+  final String mComment;
+  final int mFlag;
 
   static final int STATION_NONE    = 0;
   static final int STATION_FIXED   = 1;

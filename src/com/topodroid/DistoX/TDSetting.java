@@ -2280,8 +2280,8 @@ class TDSetting
         // TDToast.make( R.string.backsight_warning );
       } else if ( policy == StationPolicy.SURVEY_STATION_ANOMALY ) {
         TDToast.make( R.string.anomaly_warning );
-      } else {
-        //
+      // } else {
+        // nothing
       }
       return false;
     }

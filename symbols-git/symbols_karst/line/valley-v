@@ -1,12 +1,12 @@
 symbol line
-name valley_v
+name valley-v
 name-pt vale_em_v
 name-es valle_en_V
 name-ru долина_V_образная
 name-fr vallée_en_V
 name-ro vale_în_v
 name-de V-Tal
-th_name u:valley_v
+th_name u:valley-v
 group valley
 color 0x999999 0xff
 width 8

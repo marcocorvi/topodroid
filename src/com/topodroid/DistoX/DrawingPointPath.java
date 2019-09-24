@@ -129,25 +129,25 @@ class DrawingPointPath extends DrawingPath
     int   type;
     int   scale;
     int   level = DrawingLevel.LEVEL_DEFAULT;
-    String fname;
+    String name;  // th-name
     String options = null;
     String text = null;
     try {
       ccx = x + dis.readFloat();
       ccy = y + dis.readFloat();
-      fname = dis.readUTF( );
+      name = dis.readUTF( );
       orientation = dis.readFloat();
       scale   = dis.readInt();
       if ( version >= 401090 ) level = dis.readInt();
       if ( version >= 303066 ) text = dis.readUTF();
       options = dis.readUTF();
 
-      BrushManager.mPointLib.tryLoadMissingPoint( fname );
-      type = BrushManager.mPointLib.getSymbolIndexByFilename( fname );
-      // TDLog.Log( TDLog.LOG_PLOT, "P " + fname + " " + type + " " + ccx + " " + ccy + " " + orientation + " " + scale + " options (" + options + ")" );
-      // Log.v( "DistoX-Pt", fname + " " + type + " " + ccx + " " + ccy + " " + orientation + " " + scale + " options (" + options + ")" );
+      BrushManager.mPointLib.tryLoadMissingPoint( name );
+      type = BrushManager.mPointLib.getSymbolIndexByThName( name );
+      // TDLog.Log( TDLog.LOG_PLOT, "P " + name + " " + type + " " + ccx + " " + ccy + " " + orientation + " " + scale + " options (" + options + ")" );
+      // Log.v( "DistoX-Pt", name + " " + type + " " + ccx + " " + ccy + " " + orientation + " " + scale + " options (" + options + ")" );
       if ( type < 0 ) {
-        // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.addPointFilename( fname ); 
+        // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.addPointFilename( name ); 
         type = 0;
       }
       // FIXME SECTION_RENAME

@@ -237,7 +237,7 @@ class DrawingPointDialog extends MyDialog
 
     } else if ( b == mBTdraw ) {
       mParent.openSectionDraw( mXSectionName );
-    } else if ( b == mBtnCancel ) {
+    // } else if ( b == mBtnCancel ) {
       // nothing
     }
     dismiss();

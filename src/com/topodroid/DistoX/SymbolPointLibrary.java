@@ -143,7 +143,7 @@ class SymbolPointLibrary extends SymbolLibrary
           continue;
         }
         // Log.v("DistoX-Pt", "Symbol point <" + fname + "> th_name <" + symbol.mThName + ">" );
-        if ( ! hasSymbolByFilename( symbol.mThName ) ) {
+        if ( ! hasSymbolByThName( symbol.mThName ) ) {
           addSymbol( symbol );
           String thname = symbol.mThName;
           String name = "p_" + thname;
@@ -172,25 +172,27 @@ class SymbolPointLibrary extends SymbolLibrary
     }
   }
 
-  boolean tryLoadMissingPoint( String fname )
+  // thname   symbol th-name
+  boolean tryLoadMissingPoint( String thname )
   {
     String locale = "name-" + Locale.getDefault().toString().substring(0,2);
     String iso = "ISO-8859-1";
     // String iso = "UTF-8";
     // if ( locale.equals( "name-es" ) ) iso = "ISO-8859-1";
 
-    if ( isSymbolEnabled( fname ) ) return true;
-    Symbol symbol = getSymbolByFilename( fname );
+    if ( isSymbolEnabled( thname ) ) return true;
+    Symbol symbol = getSymbolByThName( thname );
     // APP_SAVE SYMBOLS
     if ( symbol == null ) {
-      // Log.v( TopoDroidApp.TAG, "load missing point " + fname );
-      File file = new File( TDPath.APP_SAVE_POINT_PATH + fname );
+      String filename = thname.startsWith("u:")? thname.substring(2) : thname ;
+      // Log.v( "DistoX", "load missing point " + thname + " filename " + filename );
+      File file = new File( TDPath.APP_SAVE_POINT_PATH + filename );
       if ( ! file.exists() ) return false;
       symbol = new SymbolPoint( file.getPath(), file.getName(), locale, iso );
       if ( symbol.mThName == null || symbol.mThName.length() == 0 ) return false;
       addSymbol( symbol );
     // } else {
-    //   // Log.v( TopoDroidApp.TAG, "enabling missing point " + fname );
+    //   // Log.v( "DistoX", "enabling missing point " + thname );
     }
     // if ( symbol == null ) return false; // ALWAYS false
 
@@ -218,9 +220,9 @@ class SymbolPointLibrary extends SymbolLibrary
     //                 + " section " + mPointSectionIndex );
   }
 
-  void makeEnabledListFromPalette( SymbolsPalette palette )
+  void makeEnabledListFromPalette( SymbolsPalette palette, boolean clear )
   {
-    makeEnabledListFromStrings( palette.mPalettePoint );
+    makeEnabledListFromStrings( palette.mPalettePoint, clear );
   }
 
 }    

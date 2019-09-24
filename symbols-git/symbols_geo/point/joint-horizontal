@@ -6,7 +6,7 @@ name-pt diaclase_horizontal
 name-ru горизонтальное_несогласие
 name-fr diaclase_horizontale
 name-de Horizontale_Kluft
-th_name u:joint_horizontal
+th_name u:joint-horizontal
 color 0xcccc99
 csurvey 0 0 0
 path

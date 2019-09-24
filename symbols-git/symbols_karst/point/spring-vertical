@@ -1,5 +1,5 @@
 symbol point
-name spring_vertical
+name spring-vertical
 name-pt nascente_vertical
 name-es manatial_vertical
 name-ru источник_вертикальный
@@ -7,7 +7,7 @@ name-fr arrivée_d'eau_verticale_(chute)
 name-sk vertikálny_prameň
 name-ro izvor_vertical
 name-de Vertikale_Quelle
-th_name u:spring_vertical
+th_name u:spring-vertical
 orientation no
 color 0x3399ff
 csurvey 6 6 80

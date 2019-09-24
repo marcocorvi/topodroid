@@ -345,7 +345,7 @@ class ItemPickerDialog extends MyDialog
         mBTsize.setVisibility( View.GONE );
         setRecentButtons( ItemDrawer.mRecentArea, DIMXL, DIMYL );
       }
-    } else {
+    // } else {
       // nothing
     }
   }
@@ -521,7 +521,8 @@ class ItemPickerDialog extends MyDialog
           if ( mPlotType != PlotInfo.PLOT_SECTION || is.mIndex != BrushManager.mLineLib.mLineSectionIndex ) {
             mSelectedLine = is.mIndex;
             // mParent.get().lineSelected( is.mIndex, false ); // mLineAdapter.getSelectedItem() );
-          } else {
+          // } else {
+            /* nothing */
           }
           mSeekBar.setEnabled( false );
           // mBTpoint.setTextColor( TDColor.SYMBOL_TAB );

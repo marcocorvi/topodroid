@@ -6,7 +6,7 @@ name-ru плоско_конформное
 name-ro plan-sinform
 name-fr plan_synforme
 name-de Synforme_Fläche
-th_name u:plane_synform
+th_name u:plane-synform
 color 0xcccccc
 csurvey 0 0 0
 path

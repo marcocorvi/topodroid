@@ -5,7 +5,7 @@ name-es foliación_vertical
 name-ru сланцеватость_вертикальная
 name-fr schistosité_verticale
 name-de Vertikale_Blätterung
-th_name u:foliation_vertical
+th_name u:foliation-vertical
 color 0xcccc99
 csurvey 0 0 0 
 orientation yes

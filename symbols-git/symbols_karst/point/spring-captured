@@ -1,5 +1,5 @@
 symbol point
-name spring_captured
+name spring-captured
 name-pt nascente_confinada
 name-es manatial_confinado
 name-ru источник_водозабор
@@ -7,7 +7,7 @@ name-fr source_captée
 name-sk zachytený_prameň
 name-ro izvor_captat
 name-de Quellfassung
-th_name u:spring_captured
+th_name u:spring-captured
 orientation no
 color 0x3399ff
 csurvey 6 6 80

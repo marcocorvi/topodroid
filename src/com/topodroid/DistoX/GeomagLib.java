@@ -556,7 +556,7 @@ class GeomagLib
         grad.y = grad.y / (cos_phi * cos_phi);
         grad.x = grad.x / (cos_phi);
         grad.z = grad.z / (cos_phi);
-    } else {
+    // } else {
         // Special calculation for component - By - at Geographic poles.
         // If the user wants to avoid using this function,  please make sure that
         // the latitude is not exactly +/-90. An option is to make use the function

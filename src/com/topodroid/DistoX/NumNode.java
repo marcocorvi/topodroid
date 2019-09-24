@@ -22,7 +22,7 @@ class NumNode
   int use;  // tag for loop identification
   NumStation station; // station of this node
   ArrayList< NumShot > shots; // station shots
-  private ArrayList< NumBranch > branches;
+  // private ArrayList< NumBranch > branches; // TODO STILL_TO_USE
   float e, s, v; // east, south, vert 3D position
 
   NumNode( int t, NumStation st )
@@ -32,14 +32,14 @@ class NumNode
     shots    = new ArrayList<>();
     shots.add( st.s1 ); // and set first two shots
     shots.add( st.s2 );
-    branches = new ArrayList<>();
+    // branches = new ArrayList<>(); // TODO STILL_TO_USE
     use = 0;
     e = st.e;
     s = st.s;
     v = st.v;
   }
 
-  void addBranch( NumBranch branch ) { branches.add( branch ); }
+  // void addBranch( NumBranch branch ) { branches.add( branch ); } // TODO STILL_TO_USE
 
   void addShot( NumShot sh ) { shots.add( sh ); }
 

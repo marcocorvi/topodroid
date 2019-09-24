@@ -198,7 +198,8 @@ class QCamCompass extends Dialog
           mHasSaved = true;
         }
       }
-    } else if ( b == buttonCancel ) {
+    // } else if ( b == buttonCancel ) {
+      /* nothing */
     }
     mSurface.close();
     TDUtil.slowDown( 100 );

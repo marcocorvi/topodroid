@@ -489,6 +489,11 @@
     <string name="coverage_warning">Angle coverage below %1$d %%\nЗаписать коэффициенты?</string>
     <string name="delta_warning">Average error above %1$.1f\nЗаписать коэффициенты?</string>
 
+    <!-- TODO string name="cover_data">Raw data distribution: %1$.2f %%</string -->
+    <!-- TODO string name="cover_calib">Calibrated data distribution: %1$.2f %%</string -->
+    <!-- TODO string name="cover_g">G distribution: %1$.2f %%</string -->
+    <!-- TODO string name="cover_m">M distribution: %1$.2f %%</string -->
+
     <string name="cannot_rename">Не могу перименовать съёмку</string>
     <string name="declination">Магн. скл.</string>
     <string name="description">описание</string>

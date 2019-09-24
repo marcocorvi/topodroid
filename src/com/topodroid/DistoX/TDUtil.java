@@ -69,13 +69,31 @@ class TDUtil
 
   // static float slope2degree( float slp ) { return (float)( Math.atan( slp/100 ) * RAD2DEG ); }
 
-  static void deleteFile( String pathname )
+  static void deleteFile( File f )
   {
-    File f = new File( pathname );
-    if ( f.exists() ) {
-      if ( ! f.delete() ) TDLog.Error("File delete failed " + pathname );
+    if ( f != null && f.exists() ) {
+      if ( ! f.delete() ) TDLog.Error("File delete failed " + f.getName() );
     }
   }
+
+  static void deleteDir( File dir )
+  {
+    if ( dir != null && dir.exists() ) {
+      File[] files = dir.listFiles();
+      if ( files != null ) {
+        for (File file : files ) {
+          if (file.isFile()) {
+            if ( ! file.delete() ) TDLog.Error("File delete failed " + file.getName() ); 
+          }
+        }
+      }
+      if ( ! dir.delete() ) TDLog.Error("Dir delete failed " + dir.getName() );
+    }
+  }
+
+  static void deleteFile( String pathname ) { deleteFile( new File( pathname ) ); }
+
+  static void deleteDir( String dirname ) { deleteDir( new File( dirname ) ); }
 
   static void renameFile( String oldname, String newname )
   {

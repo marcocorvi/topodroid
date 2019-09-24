@@ -16,7 +16,7 @@ import android.graphics.Path;
 
 interface SymbolInterface
 {
-  String getFilename();
+  // String getFilename();
   String getName();
   String getThName();
   Paint  getPaint();

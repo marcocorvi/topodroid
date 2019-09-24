@@ -495,8 +495,13 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="toporobot_warning">TopoRobot policy is experimental !</string>
     <string name="anomaly_warning">Magnetic anomaly compensation is expert !</string>
     <string name="tripod_warning">Tripod policy is advanced !</string>
-    <string name="coverage_warning">Angle coverage below %1$d %%\nWrite coefficients?</string>
-    <string name="delta_warning">Average error above %1$.1f\nWrite coefficients?</string>
+    <string name="coverage_warning">Angle coverage below %1$d%%\nWrite coefficients?</string>
+    <string name="delta_warning">Average error above %1$.1f\u00b0\nWrite coefficients?</string>
+
+    <string name="cover_data">Raw data distribution: %1$.2f %%</string>
+    <string name="cover_calib">Calibrated data distribution: %1$.2f %%</string>
+    <string name="cover_g">G distribution: %1$.2f %%</string>
+    <string name="cover_m">M distribution: %1$.2f %%</string>
 
     <string name="empty_clipboard">Empty clipboard</string>
     <string name="cannot_rename">Cannot rename survey</string>

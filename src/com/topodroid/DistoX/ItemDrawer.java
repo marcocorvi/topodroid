@@ -15,7 +15,7 @@ import android.app.Activity;
 
 // import android.util.Log;
 
-public abstract class ItemDrawer extends Activity
+abstract class ItemDrawer extends Activity
 {
   static final int POINT_MAX = 32678;
 

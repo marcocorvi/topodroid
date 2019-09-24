@@ -45,9 +45,9 @@ class DistoXProtocol extends TopoDroidProtocol
   protected DataOutputStream mOut;
 
   // protected byte[] mHeadTailA3;  // head/tail for Protocol A3
-  protected byte[] mAddr8000;
-  protected byte[] mAcknowledge;
-  protected byte   mSeqBit;         // sequence bit: 0x00 or 0x80
+  protected byte[] mAddr8000;     // cpuld be used by DistoXA3Protocol.read8000 
+  private byte[] mAcknowledge;
+  private byte   mSeqBit;         // sequence bit: 0x00 or 0x80
 
   // protected static final UUID MY_UUID = UUID.fromString( "00001101-0000-1000-8000-00805F9B34FB" );
 
@@ -377,7 +377,7 @@ class DistoXProtocol extends TopoDroidProtocol
     }
   }
 
-  /** read the memory buffer head and tail
+  /* read the memory buffer head and tail
    * @param command    head-tail command with the memory address of head-tail words
    * @param head_tail  array to store head and tail values
    * @return null on failure, string presentation on success

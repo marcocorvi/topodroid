@@ -114,7 +114,7 @@ class SymbolLineLibrary extends SymbolLibrary
           // Log.v( "DistoX-SL", "line with null ThName " + file.getName() );
           continue;
         }
-        if ( ! hasSymbolByFilename( symbol.mThName ) ) {
+        if ( ! hasSymbolByThName( symbol.mThName ) ) {
           addSymbol( symbol );
           String thname = symbol.mThName;
           String name = mPrefix + thname;
@@ -140,24 +140,26 @@ class SymbolLineLibrary extends SymbolLibrary
     }
   }
 
-  boolean tryLoadMissingLine( String fname )
+  // thname  symbol th-name
+  boolean tryLoadMissingLine( String thname )
   {
     String locale = "name-" + Locale.getDefault().toString().substring(0,2);
     String iso = "ISO-8859-1";
     // String iso = "UTF-8";
     // if ( locale.equals( "name-es" ) ) iso = "ISO-8859-1";
 
-    if ( isSymbolEnabled( fname ) ) return true;
-    Symbol symbol = getSymbolByFilename( fname );
+    if ( isSymbolEnabled( thname ) ) return true;
+    Symbol symbol = getSymbolByThName( thname );
     // APP_SAVE SYMNBOLS
     if ( symbol == null ) {
-      // Log.v( TopoDroidApp.TAG, "load missing line " + fname );
-      File file = new File( TDPath.APP_SAVE_LINE_PATH + fname );
+      String filename = thname.startsWith("u:")? thname.substring(2) : thname; 
+      // Log.v( "DistoX", "load missing line " + thname + " filename " + filename );
+      File file = new File( TDPath.APP_SAVE_LINE_PATH + filename );
       if ( ! file.exists() ) return false;
       symbol = new SymbolLine( file.getPath(), file.getName(), locale, iso );
       addSymbol( symbol );
     // } else {
-    //   // Log.v( TopoDroidApp.TAG, "enabling missing line " + fname );
+    //   // Log.v( TopoDroidApp.TAG, "enabling missing line " + thname );
     }
     // if ( symbol == null ) return false; // ALWAYS false
 
@@ -178,9 +180,9 @@ class SymbolLineLibrary extends SymbolLibrary
     mLineSectionIndex = getSymbolIndexByThName( "section" );
   }
 
-  void makeEnabledListFromPalette( SymbolsPalette palette )
+  void makeEnabledListFromPalette( SymbolsPalette palette, boolean clear )
   {
-    makeEnabledListFromStrings( palette.mPaletteLine ); 
+    makeEnabledListFromStrings( palette.mPaletteLine, clear ); 
   }
 
   // ArrayList<String> getSymbolNamesNoSection()

@@ -4497,9 +4497,8 @@ class DataHelper extends DataSetObservable
              if ( table.equals(AUDIO_TABLE) ) // ---------------- FIXME_AUDIO
 	     {
                shotid = scanline1.longValue( );
-               date   = scanline1.stringValue( );
                if ( shotid >= 0 ) {
-                 // if ( insertAudio( sid, id, shotid, date ) < 0 ) { success = false; }
+                 date   = scanline1.stringValue( );
                  cv = makeAudioContentValues( sid, id, shotid, date );
                  myDB.insert( AUDIO_TABLE, null, cv ); 
                  // TDLog.Log( TDLog.LOG_DB, "loadFromFile photo " + sid + " " + id + " " + title + " " + name );
@@ -4517,11 +4516,6 @@ class DataHelper extends DataSetObservable
                String type  = scanline1.stringValue( );
                String value = scanline1.stringValue( );
                if ( shotid >= 0 ) {
-                 // if ( insertSensor( sid, id, shotid, title, date, comment, type, value ) >= 0 ) {
-                 //   success &= updateStatus( SENSOR_TABLE, id, sid, status );
-	         // } else {
-	         //   success = false;
-	         // }
                  cv = makeSensorContentValues( sid, id, shotid, status, title, date, comment, type, value );
                  myDB.insert( SENSOR_TABLE, null, cv ); 
                  // TDLog.Log( TDLog.LOG_DB, "loadFromFile photo " + sid + " " + id + " " + title + " " + name );
@@ -4531,12 +4525,11 @@ class DataHelper extends DataSetObservable
 	     else if ( table.equals(PHOTO_TABLE) ) // --------------- FIXME_PHOTO
              {
                shotid  = scanline1.longValue( );
-               title   = scanline1.stringValue( );
-               date    = scanline1.stringValue( );
-               comment = scanline1.stringValue( );
-               long camera = (db_version > 39)? scanline1.longValue( ) : 0 ;
                if ( shotid >= 0 ) {
-                 // if ( insertPhoto( sid, id, shotid, title, date, comment, camera ) < 0 ) { success = false; }
+                 title   = scanline1.stringValue( );
+                 date    = scanline1.stringValue( );
+                 comment = scanline1.stringValue( );
+                 long camera = (db_version > 39)? scanline1.longValue( ) : 0 ;
                  cv = makePhotoContentValues( sid, id, shotid, TDStatus.NORMAL, title, date, comment, camera );
                  myDB.insert( PHOTO_TABLE, null, cv ); 
                  // TDLog.Log( TDLog.LOG_DB, "loadFromFile photo " + sid + " " + id + " " + title + " " + name );
