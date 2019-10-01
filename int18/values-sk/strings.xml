@@ -497,10 +497,10 @@
     <string name="coverage_warning">Distribúcia údajov z uhlov je pod %1$d %%\nZapísať koeficienty?</string>
     <string name="delta_warning">Priemerná chyba nad %1$.1f\nZapísať koeficienty?</string>
 
-    <!-- TODO string name="cover_data">Raw data distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_calib">Calibrated data distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_g">G distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_m">M distribution: %1$.2f %%</string -->
+    <string name="cover_data">Distribúcia surových dát: %1$.2f %%</string>
+    <string name="cover_calib">Distribúcia kalibračných dát: %1$.2f %%</string>
+    <string name="cover_g">G Distribúcia: %1$.2f %%</string>
+    <string name="cover_m">M Distribúcia: %1$.2f %%</string>
 	
     <string name="empty_clipboard">Prázdna schránka</string>
     <string name="cannot_rename">Nedá sa premenovať názov mapovania</string>
@@ -1020,10 +1020,10 @@
   <string name="pref_station_prefix_summary">Export predčíslia bodov Compass</string>
   <string name="pref_compass_splays_title">Pomocné zámery</string>
   <string name="pref_compass_splays_summary">Export pomocných zámer do programu Compass</string>
-  <!-- TODO string name="pref_vtopo_splays_title">VisualTopo splays</string -->
-  <!-- TODO string name="pref_vtopo_splays_summary">Export splays in VisualTopo files</string -->
-  <!-- TODO string name="pref_vtopo_lrud_title">LRUD at From</string -->
-  <!-- TODO string name="pref_vtopo_lrud_summary">VisualTopo LRUD at From station</string -->
+  <string name="pref_vtopo_splays_title">VisualTopo pomocné zámery</string>
+  <string name="pref_vtopo_splays_summary">Exportuje pomocné zámery do programu VisualTopo</string>
+  <string name="pref_vtopo_lrud_title">LRUD na Počiatočnom Bode</string>
+  <string name="pref_vtopo_lrud_summary">VisualTopo LRUD na Počiatočnom Bode (staničení)</string>
   <!-- UNUSED string name="pref_trobot_names_title">TopoRobot station names</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Station names are in TopoRobot style</string -->
   <string name="pref_ortho_lrud_title">LRUD uhol pomocnej zámery</string>
