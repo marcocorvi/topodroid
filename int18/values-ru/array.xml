@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-  <!-- TODO string-array name="orientation">
-     <item name="unspecified">unspecified</item>
-     <item name="portrait">portrait</item>
-     <item name="landscape">landscape</item>
-  </string-array -->
+  <string-array name="orientation">
+     <item name="unspecified">автомтически</item>
+     <item name="portrait">портретная</item>
+     <item name="landscape">альбомная</item>
+  </string-array>
 
   <string-array name="splayDash">
      <item name="none">нет</item>
