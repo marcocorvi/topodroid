@@ -62,7 +62,7 @@ class DrawingPointDialog extends MyDialog
   // private CheckBox mCBwater = null;
   // private CheckBox mCBtext  = null;
 
-  private OrientationWidget mOrientationWidget;
+  private MyOrientationWidget mOrientationWidget;
  
   private Button   mBtnOk;
   private Button   mBtnCancel;
@@ -109,7 +109,7 @@ class DrawingPointDialog extends MyDialog
       mETtext.setEnabled( false );
     }
 
-    mOrientationWidget = new OrientationWidget( this, mOrientable, mPoint.mOrientation );
+    mOrientationWidget = new MyOrientationWidget( this, mOrientable, mPoint.mOrientation );
 
 
     if ( mPoint.mPointType == BrushManager.mPointLib.mPointSectionIndex ) {

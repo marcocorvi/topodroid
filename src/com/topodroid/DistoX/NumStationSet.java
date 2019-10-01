@@ -29,7 +29,7 @@ class NumStationSet
   { 
     int l1 = s1.length();
     int l2 = s2.length();
-    int kk = ( l1 < l2 )? l1 : l2;
+    int kk = Math.min(l1, l2);
     for ( int k=0; k < kk; ++k ) {
       if ( s1.charAt(k) < s2.charAt(k) ) return -1;
       if ( s1.charAt(k) > s2.charAt(k) ) return +1;
@@ -108,11 +108,12 @@ class NumStationSet
       return ( right == null )? null : right.get( name );
     }
 
-    void setShortPathDist( float p ) 
+    // initialize the subtree at this node with a distance value "p" (supposedly large)
+    void initShortPathDist( float p ) 
     { 
-      value.mShortpathDist = new NumShortpath( p, 0 );
-      if ( left  != null ) left.setShortPathDist( p );
-      if ( right != null ) right.setShortPathDist( p );
+      value.mShortpathDist = new NumShortpath( 0, p, 0 );
+      if ( left  != null ) left.initShortPathDist( p );
+      if ( right != null ) right.initShortPathDist( p );
     }
 
     void setCoords( boolean b )
@@ -150,7 +151,7 @@ class NumStationSet
   }
 
   private ArrayList< NumStation > mStations;
-  private NumStationNode mRoot;
+  private NumStationNode mRoot; // tree root
 
   NumStationSet() 
   { 
@@ -158,10 +159,11 @@ class NumStationSet
     mStations = new ArrayList<>();
   }
 
-  void setShortestPath( float p ) 
+  // initialize the tree with a distance value "p" (supposedly large)
+  void initShortestPath( float p ) 
   {
     if ( mRoot == null ) return;
-    mRoot.setShortPathDist( p );
+    mRoot.initShortPathDist( p );
   }
 
   void setCoords( boolean b ) 

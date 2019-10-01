@@ -31,7 +31,7 @@ class NumCycle
       // mNode = nd;
       mDir = dir;
     }
-  };
+  }
 
   // private int mMax;
   // int mSize;

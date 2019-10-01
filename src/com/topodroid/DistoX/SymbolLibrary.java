@@ -274,7 +274,7 @@ class SymbolLibrary
     if ( s2 == null ) return -1;
     int l1 = s1.length();
     int l2 = s2.length();
-    int kk = ( l1 < l2 )? l1 : l2;
+    int kk = Math.min(l1, l2);
     for ( int k=0; k < kk; ++k ) {
       if ( s1.charAt(k) < s2.charAt(k) ) return -1;
       if ( s1.charAt(k) > s2.charAt(k) ) return +1;

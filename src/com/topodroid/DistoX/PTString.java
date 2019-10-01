@@ -47,7 +47,7 @@ class PTString
       int b = 0;
       do {
         b = fs.read( );
-        len |= ( ((int)b) << shift );
+        len |= ( b << shift );
         shift += 7;
       } while ( (b & 0x80) != 0 );
     } catch ( IOException e ) {

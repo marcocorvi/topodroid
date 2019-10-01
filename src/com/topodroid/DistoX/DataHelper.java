@@ -201,7 +201,7 @@ class DataHelper extends DataSetObservable
         myDB = openHelper.getWritableDatabase();
         if ( myDB == null ) {
           TDLog.Error( "failed get writable database" );
-          return;
+          // return;
         }
 
         // while ( myDB.isDbLockedByOtherThreads() ) {
@@ -605,7 +605,7 @@ class DataHelper extends DataSetObservable
 	        // float dep = (float)( cursor.getDouble(4) ) - depths.get( t ).floatValue();
 	        float dep = (float)( cursor.getDouble(4) - cursor.getDouble(5) );
                 if ( cursor.getLong(6) == 0 ) {
-                  stat.extLength += (float)( Math.abs( dep ) );
+                  stat.extLength += Math.abs( dep );
                 } else {
                   stat.extLength += len;
                 }
@@ -3207,6 +3207,9 @@ class DataHelper extends DataSetObservable
     return id;
   }
 
+  // @return positive ID on success
+  //         0 if no database
+  //         -1 failure
   private long setName( String table, String name, int datamode )
   {
     long id = -1;
@@ -3898,6 +3901,8 @@ class DataHelper extends DataSetObservable
     return ret;
   }
 
+   // @return positive ID on success
+   //         0 or -1 failure
    long setSurvey( String name, int datamode )
    {
      myNextId = 0;

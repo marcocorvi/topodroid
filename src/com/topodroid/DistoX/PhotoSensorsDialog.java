@@ -66,8 +66,8 @@ class PhotoSensorsDialog extends MyDialog
   private MyCheckBox mButtonDelete = null;
   private MyCheckBox mButtonCheck  = null;
 
-  private HorizontalListView mListView;
-  private HorizontalButtonView mButtonView;
+  private MyHorizontalListView mListView;
+  private MyHorizontalButtonView mButtonView;
   private Button[] mButton;
 
   private Button mBtnCancel;
@@ -157,10 +157,10 @@ class PhotoSensorsDialog extends MyDialog
       -- nr_buttons;
     }
 
-    mListView = (HorizontalListView) findViewById(R.id.listview);
+    mListView = (MyHorizontalListView) findViewById(R.id.listview);
     // mListView.setEmptyPlacholder( true );
     /* size = */ TopoDroidApp.setListViewHeight( mContext, mListView );
-    mButtonView = new HorizontalButtonView( mButton );
+    mButtonView = new MyHorizontalButtonView( mButton );
     mListView.setAdapter( mButtonView.mAdapter );
     layout4.invalidate();
 

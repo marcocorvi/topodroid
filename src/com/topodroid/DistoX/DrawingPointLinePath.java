@@ -86,6 +86,7 @@ class DrawingPointLinePath extends DrawingPath
   // @implements IDrawingLink
   public float getLinkX( ) { return mLast.x; }
   public float getLinkY( ) { return mLast.y; }
+  // public Point2D getLink() { return mLast; }
 
   @Override
   float getX() { return (left+right)/2; }

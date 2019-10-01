@@ -58,12 +58,10 @@ class UserManDownload extends AsyncTask< String, Integer, Integer >
         ZipInputStream zin = new ZipInputStream( in );
         ZipEntry ze = null;
        	File dir = new File( TDPath.getManPath() );
-        if ( (dir != null) && ( dir.exists() || dir.mkdirs() ) ) {
+        if ( /* (dir != null) && */ ( dir.exists() || dir.mkdirs() ) ) {
           while ( ( ze = zin.getNextEntry() ) != null ) {
             String name = ze.getName();
-            if ( ze.isDirectory() ) { // not really an error: just neglect
-              // TDLog.Error( "Zip dir entry \"" + name + "\"" );
-            } else {
+            if ( ! ze.isDirectory() ) { // normal file
               // TDLog.Error( "Zip entry \"" + name + "\"" );
               int pos = name.lastIndexOf('/');
 	      if ( pos > 0 ) name = name.substring(pos+1);
@@ -75,6 +73,8 @@ class UserManDownload extends AsyncTask< String, Integer, Integer >
                 }
                 fos.close();
 	      }
+            // } else { // ze directory: not really an error
+            //   TDLog.Error( "Zip dir entry \"" + name + "\"" );
 	    }
 	  }
           ret = 1;

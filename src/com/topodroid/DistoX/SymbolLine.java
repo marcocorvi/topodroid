@@ -215,8 +215,8 @@ class SymbolLine extends Symbol
   	      if ( k < s ) {
   	        th_name = vals[k];
                 // Log.v("DistoX-SL", filename + " th_name " + th_name );
-              } else {
-                // Log.v("DistoX-SL", filename + " th_name " + k + " / " + s + " " + line );
+              // } else {
+              //   Log.v("DistoX-SL", filename + " th_name " + k + " / " + s + " " + line );
   	      }
   	    } else if ( vals[k].equals("group") ) {
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
@@ -468,11 +468,7 @@ class SymbolLine extends Symbol
                 }
               }
   	    } else if ( vals[k].equals("endsymbol") ) {
-  	      if ( name == null ) {
-                // Log.v("DistoX-SL", filename + " end-symbol name is null");
-  	      } else if ( th_name == null ) {
-                // Log.v("DistoX-SL", filename + " end-symbol th_name is null");
-  	      } else {
+  	      if ( name != null && th_name != null ) { 
                 // Log.v("DistoX-SL", filename + " end-symbol is ok");
                 mName   = name;
                 mThName = th_name;

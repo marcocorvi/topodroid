@@ -213,12 +213,12 @@ public class TopoDroidApp extends Application
     return Resources.getSystem().getDisplayMetrics().density;
   }
 
-  // int setListViewHeight( HorizontalListView listView )
+  // int setListViewHeight( MyHorizontalListView listView )
   // {
   //   return TopoDroidApp.setListViewHeight( this, listView );
   // }
 
-  static int setListViewHeight( Context context, HorizontalListView listView )
+  static int setListViewHeight( Context context, MyHorizontalListView listView )
   {
     // int size = getScaledSize( context );
     if ( listView != null ) {

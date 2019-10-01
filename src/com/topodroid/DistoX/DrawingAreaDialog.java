@@ -52,7 +52,7 @@ class DrawingAreaDialog extends MyDialog
   // private Spinner mETtype;
   private int mAreaType;
 
-  private OrientationWidget mOrientationWidget; 
+  private MyOrientationWidget mOrientationWidget; 
 
   private Button mBtnOk;
   // private Button mBtnCancel;
@@ -78,7 +78,7 @@ class DrawingAreaDialog extends MyDialog
                                   BrushManager.mAreaLib.getSymbolName( mArea.mAreaType ) );
     initLayout( R.layout.drawing_area_dialog, title );
 
-    mOrientationWidget = new OrientationWidget( this, mOrientable, mArea.mOrientation );
+    mOrientationWidget = new MyOrientationWidget( this, mOrientable, mArea.mOrientation );
 
     Spinner eTtype = (Spinner) findViewById( R.id.area_type );
     ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, BrushManager.mAreaLib.getSymbolNames() );

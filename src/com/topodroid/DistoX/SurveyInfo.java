@@ -91,18 +91,21 @@ class SurveyInfo
     return decl;
   }
 
+  // test returns false if declination is in range [-360,360] 
+  //                    or edit textfield is empty
   static boolean declinationOutOfRange( EditText et )
   {
-    if ( et == null && et.getText() == null ) return false;
-    String decl_str = et.getText().toString().trim();
-    if ( /* decl_str != null && */ decl_str.length() == 0 ) return true;
-    decl_str = decl_str.replace(',', '.');
-    try {
-      float decl = Float.parseFloat( decl_str );
-      if ( decl < -360 || decl > 360 ) return true;
-    } catch ( NumberFormatException e ) {
-      TDLog.Error( "parse Float error: declination " + decl_str );
-      return true;
+    if ( et != null && et.getText() != null ) {
+      String decl_str = et.getText().toString().trim();
+      if ( /* decl_str != null && */ decl_str.length() == 0 ) return true;
+      decl_str = decl_str.replace(',', '.');
+      try {
+        float decl = Float.parseFloat( decl_str );
+        if ( decl < -360 || decl > 360 ) return true;
+      } catch ( NumberFormatException e ) {
+        TDLog.Error( "parse Float error: declination " + decl_str );
+        return true;
+      }
     }
     return false;
   }

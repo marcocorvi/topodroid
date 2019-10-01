@@ -1,4 +1,4 @@
-/* @file HorizontalButtonView.java
+/* @file MyHorizontalButtonView.java
  *
  * @author marco corvi (adapted from 
  * http://sandyandroidtutorials.blogspot.it/2013/06/horizontal-listview-tutorial.html
@@ -20,11 +20,11 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 // import android.view.View.OnClickListener;
 
-class HorizontalButtonView
+class MyHorizontalButtonView
 {
   private Button[] mButtons;
 
-  HorizontalButtonView( Button[] buttons )
+  MyHorizontalButtonView( Button[] buttons )
   {
     mButtons  = buttons;
   }

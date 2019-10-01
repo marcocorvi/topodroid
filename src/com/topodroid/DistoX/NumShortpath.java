@@ -17,28 +17,39 @@ package com.topodroid.DistoX;
 
 class NumShortpath
 {
+  int     mNr;    // number of segments in this short path
   float   mDist;  // loop closure distance (shortest-path algo)
   float   mDist2; // loop closure squared distance (shortest-path algo)
 
   NumShortpath()
   {
+    mNr    = 0;
     mDist  = 0;
     mDist2 = 0;
   }
 
-  NumShortpath( float d, float d2 )
+  // start a short path 
+  NumShortpath( int n, float d, float d2 )
   {
+    mNr    = n;
     mDist  = d;
     mDist2 = d2;
   }
 
-  NumShortpath add( float len )
+  // create a new short path adding a segmentto this 
+  // @param length    segment length
+  NumShortpath addSegment( float len )
   {
-    return new NumShortpath( mDist+len, mDist2+len*len );
+    return new NumShortpath( mNr+1, mDist+len, mDist2+len*len );
   }
 
-  void reset( float d, float d2 )
+  // reset the values of this short-path
+  // @param n   number of segments
+  // @param d   length = sum of segment lengths
+  // @param d2  sum of segment square lengths
+  void resetShortpath( int n, float d, float d2 )
   {
+    mNr    = n;
     mDist  = d;
     mDist2 = d2;
   }

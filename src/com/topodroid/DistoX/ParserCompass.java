@@ -180,8 +180,8 @@ class ParserCompass extends ImportParser
   {
     // not handled "percent"
     if ( unit.startsWith("min") ) return 1/60.0f;
-    if ( unit.startsWith("grad") ) return (float)TDUtil.GRAD2DEG;
-    if ( unit.startsWith("mil") ) return (float)TDUtil.GRAD2DEG;
+    if ( unit.startsWith("grad") ) return TDUtil.GRAD2DEG;
+    if ( unit.startsWith("mil") ) return TDUtil.GRAD2DEG;
     // if ( unit.startsWith("deg") ) return 1.0f;
     return 1.0f;
   }
@@ -189,10 +189,10 @@ class ParserCompass extends ImportParser
   float parseLengthUnit( String unit ) 
   {
     if ( unit.startsWith("c") ) return 0.01f; // cm centimeter
-    if ( unit.startsWith("f") ) return (float)TDUtil.FT2M; // ft feet
-    if ( unit.startsWith("i") ) return (float)TDUtil.IN2M; // in inch
+    if ( unit.startsWith("f") ) return TDUtil.FT2M; // ft feet
+    if ( unit.startsWith("i") ) return TDUtil.IN2M; // in inch
     if ( unit.startsWith("milli") || unit.equals("mm") ) return 0.001f; // mm millimeter
-    if ( unit.startsWith("y") ) return (float)TDUtil.YD2M; // yd yard
+    if ( unit.startsWith("y") ) return TDUtil.YD2M; // yd yard
     // if ( unit.startsWith("m") ) return 1.0f;
     return 1.0f;
   }

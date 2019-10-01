@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -30,8 +32,6 @@ import android.view.View;
 // import android.view.WindowManager;
 
 import android.widget.Button;
-
-import android.util.Log;
 
 class AudioDialog extends MyDialog
                   implements View.OnClickListener

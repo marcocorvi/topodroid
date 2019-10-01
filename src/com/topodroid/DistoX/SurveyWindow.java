@@ -127,8 +127,8 @@ public class SurveyWindow extends Activity
 
   private Button[] mButton1;
   private int mNrButton1 = 0;
-  private HorizontalListView mListView;
-  private HorizontalButtonView mButtonView1;
+  private MyHorizontalListView mListView;
+  private MyHorizontalButtonView mButtonView1;
   private ListView   mMenu;
   private Button     mImage;
   // HOVER
@@ -205,6 +205,8 @@ public class SurveyWindow extends Activity
   {
     super.onCreate( savedInstanceState );
 
+    TDandroid.setOrientation( this );
+
     mApp = (TopoDroidApp)getApplication();
     mApp_mData = TopoDroidApp.mData;
     TopoDroidApp.mSurveyWindow = this;
@@ -261,7 +263,7 @@ public class SurveyWindow extends Activity
     // mFixed = new ArrayList<>();
     // mPhoto = new ArrayList<>();
 
-    mListView = (HorizontalListView) findViewById(R.id.listview);
+    mListView = (MyHorizontalListView) findViewById(R.id.listview);
     mListView.setEmptyPlacholder( true );
     /* int size = */ TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
@@ -276,7 +278,7 @@ public class SurveyWindow extends Activity
     }
     mButton1[mNrButton1] = MyButton.getButton( mActivity, this, R.drawable.iz_empty );
 
-    mButtonView1 = new HorizontalButtonView( mButton1 );
+    mButtonView1 = new MyHorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );
 
     mImage = (Button) findViewById( R.id.handle );

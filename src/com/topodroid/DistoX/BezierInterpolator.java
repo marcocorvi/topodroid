@@ -277,7 +277,7 @@ class BezierInterpolator
     float err1 = fitCubic( d, first, split, tHat1, tHatCenter, error );
     tHatCenter.negate();
     float err2 = fitCubic( d, split, last, tHatCenter, tHat2, error );
-    return (err1 < err2)? err2 : err1;
+    return Math.max(err1, err2);
   }
 
   private void insertBezierCurve( BezierCurve curve )

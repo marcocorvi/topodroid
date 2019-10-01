@@ -211,7 +211,8 @@ public class MainWindow extends Activity
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // IMPORT
         File[] files = TDPath.getImportFiles();
         File[] zips = TDPath.getZipFiles();
-        if ( files.length + zips.length > 0 ) {
+        int len = ( ( files != null )? files.length : 0 ) + ( ( zips != null )? zips.length : 0 );
+        if ( len > 0 ) {
           (new ImportDialog( mActivity, this, files, zips )).show();
         } else {
           TDToast.makeWarn( R.string.import_none );
@@ -350,8 +351,8 @@ public class MainWindow extends Activity
   // ---------------------------------------------------------------
 
 
-  private HorizontalListView mListView;
-  private HorizontalButtonView mButtonView1;
+  private MyHorizontalListView mListView;
+  private MyHorizontalButtonView mButtonView1;
   private Button     mImage;
   private ListView   mMenu;
   // HOVER
@@ -474,7 +475,7 @@ public class MainWindow extends Activity
     mMenu.setOnItemClickListener( this );
 
     // TDLog.Profile("TDActivity buttons");
-    mListView = (HorizontalListView) findViewById(R.id.listview);
+    mListView = (MyHorizontalListView) findViewById(R.id.listview);
     mListView.setEmptyPlacholder( true );
     resetButtonBar();
 
@@ -595,7 +596,7 @@ public class MainWindow extends Activity
     }
     mButton1[mNrButton1] = MyButton.getButton( mActivity, this, R.drawable.iz_empty );
 
-    mButtonView1 = new HorizontalButtonView( mButton1 );
+    mButtonView1 = new MyHorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );
 
     // mRelLayout.invalidate();

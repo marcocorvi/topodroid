@@ -227,13 +227,13 @@ class SymbolArea extends Symbol
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	      if ( k < s ) {
                 // Log.v(  TopoDroidApp.TAG, "found name " + vals[k] );
-                name = (new String( vals[k].getBytes(iso) )).replace("_", " ");
+                name = (new String( vals[k].getBytes(iso) )).replace("_", " "); // should .trim(); for tab etc.
   	      }
 	      // Log.v("DistoX", "area name <" + name + "> locale " + locale );
-  	    } else if ( vals[k].equals("th_name") ) {
+  	    } else if ( vals[k].equals("th_name") ) {  // therion name must not have spaces
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	      if ( k < s ) {
-  	        th_name = vals[k];
+  	        th_name = vals[k]; // should .trim(); for tab etc. ? no: require syntax without tabs etc.
   	      }
             } else if ( vals[k].equals("csurvey") ) {
               // csurvey <layer> <category> <pen_type> <brush_type>
@@ -328,9 +328,7 @@ class SymbolArea extends Symbol
               mCloseHorizontal = true;
 
   	    } else if ( vals[k].equals("endsymbol") ) {
-  	      if ( name == null ) {
-  	      } else if ( th_name == null ) {
-  	      } else {
+  	      if ( name != null && th_name != null ) { // at this point if both are not null, they have both positive length
                 mName   = name;
                 mThName = th_name;
                 mPaint  = new Paint();

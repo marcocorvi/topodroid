@@ -26,43 +26,63 @@ import android.graphics.BitmapFactory;
 
 class MyTurnBitmap 
 {
-  private int mBGcolor;
+  static private MyTurnBitmap mTurnBitmap = null;  // singleton
+  private int mBGcolor; // background color
+  private int[] mPxlSave = null;
+  private int   mPxlSize = 0;
+  private int[] mPxl;
 
+  // table of cosine and sine as signed char
   private static final int[] cos128 = {
  128, 127, 127, 127, 127, 127, 126, 126, 125, 124, 124, 123, 122, 121, 120, 119, 118, 117, 115, 114, 112, 111, 109, 108, 106, 104, 102, 100, 98, 96, 94, 92, 90, 88, 85, 83, 81, 78, 76, 73, 71, 68, 65, 63, 60, 57, 54, 51, 48, 46, 43, 40, 37, 34, 31, 28, 24, 21, 18, 15, 12, 9, 6, 3, 0, -3, -6, -9, -12, -15, -18, -21, -24, -28, -31, -34, -37, -40, -43, -46, -48, -51, -54, -57, -60, -63, -65, -68, -71, -73, -76, -78, -81, -83, -85, -88, -90, -92, -94, -96, -98, -100, -102, -104, -106, -108, -109, -111, -112, -114, -115, -117, -118, -119, -120, -121, -122, -123, -124, -124, -125, -126, -126, -127, -127, -127, -127, -127  };
   private static final int[] sin128 = {
  0, 3, 6, 9, 12, 15, 18, 21, 24, 28, 31, 34, 37, 40, 43, 46, 48, 51, 54, 57, 60, 63, 65, 68, 71, 73, 76, 78, 81, 83, 85, 88, 90, 92, 94, 96, 98, 100, 102, 104, 106, 108, 109, 111, 112, 114, 115, 117, 118, 119, 120, 121, 122, 123, 124, 124, 125, 126, 126, 127, 127, 127, 127, 127, 128, 127, 127, 127, 127, 127, 126, 126, 125, 124, 124, 123, 122, 121, 120, 119, 118, 117, 115, 114, 112, 111, 109, 108, 106, 104, 102, 100, 98, 96, 94, 92, 90, 88, 85, 83, 81, 78, 76, 73, 71, 68, 65, 63, 60, 57, 54, 51, 48, 46, 43, 40, 37, 34, 31, 28, 24, 21, 18, 15, 12, 9, 6, 3  };
 
-  static private MyTurnBitmap mTurnBitmap = null;
 
   static MyTurnBitmap getTurnBitmap( Resources res )
   {
     if ( mTurnBitmap == null ) {
-      Bitmap dial = BitmapFactory.decodeResource( res, R.drawable.iz_dial_transp ); // FIXME AZIMUTH_DIAL
+      Bitmap dial = BitmapFactory.decodeResource( res, R.drawable.iz_dial_transp ); // FIXME_AZIMUTH_DIAL
       mTurnBitmap = new MyTurnBitmap( dial, TDColor.TRANSPARENT );
     }
     return mTurnBitmap;
   }
 
-  private int[] mPxlSave = null;
-  private int   mPxlSize = 0;
-  private int[] mPxl;
+    // Bitmap bm1 = Bitmap.createBitmap( mPxl, mPxlSize, mPxlSize, Bitmap.Config.ALPHA_8 );
+    // Bitmap bm2 = Bitmap.createScaledBitmap( bm1, w, w, true );
+  // @param azimuth angle [deg]
+  // @param w       button size [pxl]
+  Bitmap getBitmap( float azimuth, int w )
+  {
+    // Log.v("DistoX", "get rotated bitmap Angle " + azimuth + " size " + w );
+    rotatedBitmap( azimuth );
+    Bitmap bm1 = Bitmap.createBitmap( mPxlSize, mPxlSize, Bitmap.Config.ARGB_8888 );
+    for (int j=0; j<mPxlSize; ++j ) for ( int i=0; i<mPxlSize; ++i ) {
+      bm1.setPixel( i, j, mPxl[j*mPxlSize+i] );
+    }
+    Bitmap bm2 = Bitmap.createScaledBitmap( bm1, w, w, true );
+    bm1.recycle();
+    return bm2;
+  }
 
-  MyTurnBitmap( Bitmap dial, int color )
+  // @param dial     reference bitmap - pixels are saved in mPxlSave
+  // @param color    background color
+  private MyTurnBitmap( Bitmap dial, int color )
   {
     mBGcolor = color;
-
-    if ( mPxlSave == null ) {
+    // if ( mPxlSave == null ) { // always true
       mPxlSize = dial.getWidth();
       mPxlSave = new int[mPxlSize * mPxlSize];
       for ( int j=0; j < mPxlSize; ++j ) for ( int i=0; i < mPxlSize; ++i ) {
         mPxlSave[j*mPxlSize+i] = dial.getPixel(i, j);
       }
       mPxl = new int[mPxlSize * mPxlSize];
-    }
+    // }
     // Log.v("DistoX", "Pxl Size " + mPxlSize + " " + dial.getHeight() );
   }
 
+  // rotate the pixmap to the given azimuth
+  // @param azimuth degrees
   private void rotatedBitmap( float azimuth )
   {
   /*
@@ -113,23 +133,6 @@ class MyTurnBitmap
         }
       }
     }
-  }
-
-    // Bitmap bm1 = Bitmap.createBitmap( mPxl, mPxlSize, mPxlSize, Bitmap.Config.ALPHA_8 );
-    // Bitmap bm2 = Bitmap.createScaledBitmap( bm1, w, w, true );
-  // @param azimuth angle [deg]
-  // @param w       button size [pxl]
-  Bitmap getBitmap( float azimuth, int w )
-  {
-    // Log.v("DistoX", "get rotated bitmap Angle " + azimuth + " size " + w );
-    rotatedBitmap( azimuth );
-    Bitmap bm1 = Bitmap.createBitmap( mPxlSize, mPxlSize, Bitmap.Config.ARGB_8888 );
-    for (int j=0; j<mPxlSize; ++j ) for ( int i=0; i<mPxlSize; ++i ) {
-      bm1.setPixel( i, j, mPxl[j*mPxlSize+i] );
-    }
-    Bitmap bm2 = Bitmap.createScaledBitmap( bm1, w, w, true );
-    bm1.recycle();
-    return bm2;
   }
 
 }

@@ -84,8 +84,8 @@ class ParserVisualTopo extends ImportParser
     int extend = DBlock.EXTEND_RIGHT;
     int shot_extend = DBlock.EXTEND_RIGHT;
     boolean duplicate = false;
-    boolean surface   = false;
-    boolean backshot  = false;
+    final boolean surface   = false; // TODO ...
+    final boolean backshot  = false;
 
     String line = null;
     try {

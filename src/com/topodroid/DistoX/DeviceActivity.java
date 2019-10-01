@@ -180,8 +180,8 @@ public class DeviceActivity extends Activity
   // private Button mButtonHelp;
   private Button[] mButton1;
   private int mNrButton1 = 6; // 7 if ButtonRemote
-  private HorizontalListView mListView;
-  private HorizontalButtonView mButtonView1;
+  private MyHorizontalListView mListView;
+  private MyHorizontalButtonView mButtonView1;
   private ListView   mMenu;
   private Button     mImage;
   // HOVER
@@ -228,6 +228,9 @@ public class DeviceActivity extends Activity
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
+
+    TDandroid.setOrientation( this );
+
     // TDLog.Debug("device activity on create");
     mApp = (TopoDroidApp) getApplication();
     mApp_mDData = TopoDroidApp.mDData;
@@ -240,7 +243,7 @@ public class DeviceActivity extends Activity
     setContentView(R.layout.device_activity);
     mTvAddress = (TextView) findViewById( R.id.device_address );
 
-    mListView = (HorizontalListView) findViewById(R.id.listview);
+    mListView = (MyHorizontalListView) findViewById(R.id.listview);
     mListView.setEmptyPlacholder(true);
     /* int size = */ TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
@@ -269,7 +272,7 @@ public class DeviceActivity extends Activity
     mBMread    = MyButton.getButtonBackground( mApp, res, izons[IDX_READ] );
     mBMread_no = MyButton.getButtonBackground( mApp, res, izonsno[IDX_READ] );
 
-    mButtonView1 = new HorizontalButtonView( mButton1 );
+    mButtonView1 = new MyHorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );
 
     // mArrayAdapter = new ArrayAdapter<>( this, R.layout.message );
@@ -835,7 +838,7 @@ public class DeviceActivity extends Activity
   {
     // Log.v("DistoX", "CALIB RESET");
     if ( mCurrDevice != null ) {
-      long one = (long)Math.round( TDUtil.FM );
+      long one = Math.round( TDUtil.FM );
       // if (one > TDUtil.ZERO ) one = TDUtil.NEG - one;
       byte low  = (byte)( one & 0xff );
       byte high = (byte)((one >> 8) & 0xff );

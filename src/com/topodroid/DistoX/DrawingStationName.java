@@ -89,6 +89,7 @@ class DrawingStationName extends DrawingPointPath
   // @implements IDrawingLink
   public float getLinkX() { return cx; }
   public float getLinkY() { return cy; }
+  // public Point2D getLink() { return new Point2D(cx,cy); }
 
   // FIXME OK PROFILE
   void setXSection( float azimuth, float clino, long type )

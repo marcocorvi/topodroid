@@ -86,7 +86,7 @@ class PacketLogger extends DataSetObservable
         myDB = openHelper.getWritableDatabase();
         if ( myDB == null ) {
           TDLog.Error( "failed get writable packet database" );
-          return;
+          // return;
         }
 
         // while ( myDB.isDbLockedByOtherThreads() ) {

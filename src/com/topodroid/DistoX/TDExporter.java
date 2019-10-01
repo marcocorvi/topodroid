@@ -2597,14 +2597,14 @@ class TDExporter
               ref_item = null; 
             }
           } else {
-            if ( leg.mCnt > 0 && ref_item != null ) {
-              // int srt = getTrbSeries( ref_item.mTo );
-              // if ( srt != series ) {
-              //   series = srt;
-              //   pw.format("%6d%6d%4d%4d%4d%8d%8d%8d%8d%8d%8d%8d\r\n",
-              //     srt, -1, 1, 1, 1, start_sr[srt], start_st[srt], srt, end_st[srt], nr_st[srt], 0, 0 );
-              // }
-            }
+            // if ( leg.mCnt > 0 && ref_item != null ) {
+            //   int srt = getTrbSeries( ref_item.mTo );
+            //   if ( srt != series ) {
+            //     series = srt;
+            //     pw.format("%6d%6d%4d%4d%4d%8d%8d%8d%8d%8d%8d%8d\r\n",
+            //       srt, -1, 1, 1, 1, start_sr[srt], start_st[srt], srt, end_st[srt], nr_st[srt], 0, 0 );
+            //   }
+            // }
             ref_item = item;
             // duplicate = item.isDuplicate() || item.isSurface();
             leg.set( item.mLength, item.mBearing, item.mClino );

@@ -111,7 +111,7 @@ class MyColorPicker extends MyDialog
           setMeasuredDimension(CENTER_X*2, CENTER_Y*2);
       }
       
-      private int floatToByte(float x) { return (int)( Math.round(x) ); }
+      private int floatToByte(float x) { return Math.round(x); }
       private int pinToByte(int n) { return ( n < 0 )? 0 : ( n > 255 ) ? 255 : n; }
       
       private int ave(int s, int d, float p) { return s + Math.round(p * (d - s)); }

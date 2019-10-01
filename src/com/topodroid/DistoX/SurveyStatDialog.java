@@ -140,12 +140,12 @@ class SurveyStatDialog extends MyDialog
     for ( int k=0; k<bbin; ++k ) if ( hist[k] > max ) max = hist[k];
 
     int joff = hh-10;
-    int dx   = (int)( ww / bbin ); 
+    int dx   = ww / bbin;
     if ( dx*20 >= ww ) dx --;
     int x, y;
     for ( int k=0; k<bbin; ++ k ) {
       int brd = ( k == bin )? TDColor.FIXED_RED : TDColor.WHITE;
-      int h = (int)((joff * hist[k]) / max);
+      int h = (joff * hist[k]) / max;
       x  = dx * k;
       for ( y=joff-h; y <= joff; ++y ) bitmap.setPixel( x, y, brd );
       int x2 = x  + dx-1;

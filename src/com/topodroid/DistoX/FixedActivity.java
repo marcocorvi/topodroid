@@ -81,8 +81,8 @@ public class FixedActivity extends Activity
 
   private Button[] mButton1;
   private int mNrButton1 = 0;
-  private HorizontalListView mListView;
-  private HorizontalButtonView mButtonView1;
+  private MyHorizontalListView mListView;
+  private MyHorizontalButtonView mButtonView1;
 
 
   private boolean hasGps = false;
@@ -107,11 +107,12 @@ public class FixedActivity extends Activity
   {
     super.onCreate(savedInstanceState);
 
+    TDandroid.setOrientation( this );
+
     // mApp = (TopoDroidApp)getApplication();
     mContext = this;
 
     hasGps = TDandroid.checkLocation( mContext );
-
     // Bundle extras = getIntent().getExtras();
     // if ( extras != null ) {
     // }
@@ -119,7 +120,7 @@ public class FixedActivity extends Activity
     setContentView(R.layout.fixed_activity);
     setTitle( R.string.title_fixed );
 
-    mListView = (HorizontalListView) findViewById(R.id.listview);
+    mListView = (MyHorizontalListView) findViewById(R.id.listview);
     // mListView.setEmptyPlacholder(true);
     /* int size = */ TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
     mNrButton1 = (hasGps)? 3 : 2;
@@ -128,7 +129,7 @@ public class FixedActivity extends Activity
     for ( int k=0; k<mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( this, this, izons[kz++] );
     }
-    mButtonView1 = new HorizontalButtonView( mButton1 );
+    mButtonView1 = new MyHorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );
 
     // NO MENU

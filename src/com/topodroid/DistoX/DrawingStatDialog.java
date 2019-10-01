@@ -1,4 +1,4 @@
-/* @file DistoXStatDialog.java
+/* @file DrawingStatDialog.java
  *
  * @author marco corvi
  * @date nov 2011
@@ -31,7 +31,7 @@ import android.widget.LinearLayout;
 
 // import android.widget.ArrayAdapter;
 
-class DistoXStatDialog extends MyDialog
+class DrawingStatDialog extends MyDialog
                        implements View.OnClickListener
 {
     private DistoXNum mNum;
@@ -41,9 +41,9 @@ class DistoXStatDialog extends MyDialog
 
     // private Button mBtnBack;
 
-    DistoXStatDialog( Context context, DistoXNum num, String origin, float azimuth, SurveyStat stat )
+    DrawingStatDialog( Context context, DistoXNum num, String origin, float azimuth, SurveyStat stat )
     {
-      super( context, R.string.DistoXStatDialog );
+      super( context, R.string.DrawingStatDialog );
       mNum    = num;
       mOrigin = origin;
       mAzimuth = azimuth;

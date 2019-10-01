@@ -359,8 +359,8 @@ public class OverviewWindow extends ItemDrawer
   
     private Button[] mButton1;  // primary
     private int mNrButton1 = 4; // main-primary
-    private HorizontalListView mListView;
-    private HorizontalButtonView mButtonView1;
+    private MyHorizontalListView mListView;
+    private MyHorizontalButtonView mButtonView1;
     private ListView   mMenu;
     private Button     mImage;
     // HOVER
@@ -409,6 +409,9 @@ public class OverviewWindow extends ItemDrawer
     {
       super.onCreate(savedInstanceState);
 
+      TDandroid.setOrientation( this );
+
+
       mCrossPath = new Path();
       mCrossPath.moveTo(10,10);
       mCrossPath.lineTo(-10,-10);
@@ -446,7 +449,7 @@ public class OverviewWindow extends ItemDrawer
 
       switchZoomCtrl( TDSetting.mZoomCtrl );
 
-      mListView = (HorizontalListView) findViewById(R.id.listview);
+      mListView = (MyHorizontalListView) findViewById(R.id.listview);
       mListView.setEmptyPlacholder( true );
       /* int size = */ TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
@@ -466,7 +469,7 @@ public class OverviewWindow extends ItemDrawer
       mBMcontinueOn = MyButton.getButtonBackground( mApp, res, R.drawable.iz_polyline );
       // FIXME_OVER mBMextend  = MyButton.getButtonBackground( mApp, res, izons[IC_EXTEND] ); 
 
-      mButtonView1 = new HorizontalButtonView( mButton1 );
+      mButtonView1 = new MyHorizontalButtonView( mButton1 );
       mListView.setAdapter( mButtonView1.mAdapter );
 
       // BrushManager.makePaths( mApp, res ); FIXME-PATHS

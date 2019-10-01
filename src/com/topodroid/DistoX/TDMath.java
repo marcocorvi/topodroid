@@ -25,7 +25,7 @@ class TDMath
   static final float RAD2DEG = (180.0f/M_PI);
   static final float DEG2RAD = (M_PI/180.0f);
 
-  static float abs( float x )   { return (float)( Math.abs(x) ); }
+  static float abs( float x )   { return Math.abs(x); }
   static float cos( float x )   { return (float)Math.cos( x ); }
   static float cosd( float xd ) { return (float)Math.cos( xd * DEG2RAD ); }
   static float sin( float x )   { return (float)Math.sin( x ); }

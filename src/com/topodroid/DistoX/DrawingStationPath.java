@@ -91,6 +91,7 @@ class DrawingStationPath extends DrawingPath
   // @implements IDrawingLink
   public float getLinkX() { return cx; }
   public float getLinkY() { return cy; }
+  // public Point2D getLink() { return new Point2D(cx,cy); }
 
   private void setScale( int scale )
   {

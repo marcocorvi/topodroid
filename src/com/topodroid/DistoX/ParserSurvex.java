@@ -211,8 +211,8 @@ class ParserSurvex extends ImportParser
 		  } else if ( vals_len == 3 ) {
 		    aliases.remove( vals[1] );
 		  }
-		} else {
-                  // TDLog.Log(  , "survex parser: unsupported alias " + vals[1] );
+		// } else {
+                //   TDLog.Log(  , "survex parser: unsupported alias " + vals[1] );
 		}
               } else if ( cmd.equals("include") ) {
                 // ignore
@@ -269,18 +269,22 @@ class ParserSurvex extends ImportParser
                   for ( int j = 1; j<vals_len; ++j ) {
                     if ( vals[j].length() == 0 ) continue;
                     if ( vals[j].startsWith("\"") ) {
-                      StringBuilder sb = new StringBuilder();
-                      sb.append( vals[j].substring(1) );
-                      for ( ++j; j<vals_len; ++j ) {
-                        if ( vals[j].length() == 0 ) continue;
-                        if ( vals[j].endsWith( "\"" ) ) {
-                          sb.append(" ").append(vals[j].substring(0, vals[j].length()-1));
-                          break;
-                        } else {
-                          sb.append(" ").append(vals[j] );
+                      if ( vals[j].endsWith( "\"" ) ) { 
+                        mTitle = vals[j].substring(1, vals[j].length()-1 );
+                      } else {
+                        StringBuilder sb = new StringBuilder();
+                        sb.append( vals[j].substring(1) );
+                        for ( ++j; j<vals_len; ++j ) {
+                          if ( vals[j].length() == 0 ) continue;
+                          if ( vals[j].endsWith( "\"" ) ) { // skip final " and end loop
+                            sb.append(" ").append(vals[j].substring(0, vals[j].length()-1));
+                            break;
+                          } else {
+                            sb.append(" ").append(vals[j] );
+                          }
                         }
+                        mTitle = sb.toString();
                       }
-                      mTitle = sb.toString();
                     } else {
                       mTitle = vals[j];
                     }
@@ -611,7 +615,6 @@ class ParserSurvex extends ImportParser
         line = nextLine( br );
       }
     } catch ( IOException e ) {
-      // TODO
       throw new ParserException();
     }
 

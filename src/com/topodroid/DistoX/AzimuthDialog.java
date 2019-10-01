@@ -1,4 +1,4 @@
-/* @file AzimuthDialDialog.java
+/* @file AzimuthDialog.java
  *
  * @author marco corvi
  * @date nov 2011
@@ -42,14 +42,18 @@ import android.graphics.drawable.BitmapDrawable;
 
 // import android.util.Log;
 
-class AzimuthDialDialog extends MyDialog
-                              implements View.OnClickListener
-                              , IBearingAndClino
+class AzimuthDialog extends MyDialog
+                    implements View.OnClickListener
+                    , IBearingAndClino
 {
+  // FIXME_AZIMUTH_DIAL
+  // there are two attempts to the azimuth dial 
+  // the first (1) uses a bitmap, the second (2) a turn-bitmap
 
   private final ILister mParent;
   private float mAzimuth;
   private Bitmap mBMdial;
+  // private MyTurnBitmap mDialBitmap;
 
   private EditText mETazimuth;
 
@@ -64,12 +68,11 @@ class AzimuthDialDialog extends MyDialog
   private Button mBtnCancel;
 
   private SeekBar mSeekBar;
-  // private MyTurnBitmap mDialBitmap;
 
-  // AzimuthDialDialog( Context context, ILister parent, float azimuth, MyTurnBitmap dial )
-  AzimuthDialDialog( Context context, ILister parent, float azimuth, Bitmap dial )
+  // AzimuthDialog( Context context, ILister parent, float azimuth, MyTurnBitmap dial ) // FIXME_AZIMUTH_DIAL 2
+  AzimuthDialog( Context context, ILister parent, float azimuth, Bitmap dial ) // FIXME_AZIMUTH_DIAL 1
   {
-    super(context, R.string.AzimuthDialDialog );
+    super(context, R.string.AzimuthDialog );
     mParent  = parent;
     mAzimuth = azimuth;
     // mDialBitmap = dial;
@@ -94,8 +97,8 @@ class AzimuthDialDialog extends MyDialog
     Bitmap bm2 = getRotatedBitmap( mAzimuth, mBMdial );
     mBTazimuth.setBackgroundDrawable( new BitmapDrawable( mContext.getResources(), bm2 ) ); // DEPRECATED API-16
 
-    //+ Bitmap bm2 = mDialBitmap.getBitmap( mAzimuth, 96 );
-    //+ TDandroid.setButtonBackground( mBTazimuth, new BitmapDrawable( mContext.getResources(), bm2 ) );
+    // Bitmap bm2 = mDialBitmap.getBitmap( mAzimuth, 96 );
+    // TDandroid.setButtonBackground( mBTazimuth, new BitmapDrawable( mContext.getResources(), bm2 ) );
   }
 
   private void updateEditText() { mETazimuth.setText( String.format(Locale.US, "%d", (int)mAzimuth ) ); }
@@ -109,7 +112,7 @@ class AzimuthDialDialog extends MyDialog
     super.onCreate(savedInstanceState);
 
     // TDLog.Log( TDLog.LOG_SHOT, "Shot Dialog::onCreate" );
-    initLayout( R.layout.azimuth_dial_dialog, R.string.title_azimut );
+    initLayout( R.layout.azimuth_dialog, R.string.title_azimut );
 
     // mBTback = (Button) findViewById(R.id.btn_back );
     // mBTfore = (Button) findViewById(R.id.btn_fore );
@@ -197,7 +200,7 @@ class AzimuthDialDialog extends MyDialog
     }
 
     Button b = (Button) v;
-    // TDLog.Log( TDLog.LOG_INPUT, "AzimuthDialDialog onClick button " + b.getText().toString() );
+    // TDLog.Log( TDLog.LOG_INPUT, "Azimuth Dialog onClick button " + b.getText().toString() );
 
     // if ( b == mBTback ) {
     //   mAzimuth = TDMath.in360( mAzimuth-5 );

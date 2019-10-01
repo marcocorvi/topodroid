@@ -175,14 +175,14 @@ class CalibAlgo
 
   static private long roundV( float x )
   {
-    long v = (long)Math.round(x * TDUtil.FV);
+    long v = Math.round(x * TDUtil.FV);
     if ( v > TDUtil.ZERO ) v = TDUtil.NEG - v;
     return v;
   }
 
   static private long roundM( float x )
   {
-    long v = (long)Math.round(x * TDUtil.FM);
+    long v = Math.round(x * TDUtil.FM);
     if ( v > TDUtil.ZERO ) v = TDUtil.NEG - v;
     return v;
   }

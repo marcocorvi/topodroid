@@ -131,7 +131,7 @@ class CalibCoeffDialog extends MyDialog
     int top = red;
     int joff = hh-10;
     int ioff = 10;
-    int dx   = (int)( ww / bin ); 
+    int dx   = ww / bin;
     if ( dx*20 >= ww ) dx --;
     int x, y;
     for ( int k=0; k<bin; ++ k ) {

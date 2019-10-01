@@ -140,8 +140,8 @@ public class GMActivity extends Activity
 
   static private int mNrButton1 = 0;
   private Button[]     mButton1;
-  private HorizontalListView   mListView;
-  private HorizontalButtonView mButtonView1;
+  private MyHorizontalListView   mListView;
+  private MyHorizontalButtonView mButtonView1;
   private boolean mEnableWrite;
   private ListView   mMenu;
   private Button     mImage;
@@ -747,6 +747,9 @@ public class GMActivity extends Activity
   public void onCreate(Bundle savedInstanceState)
   {
     super.onCreate( savedInstanceState );
+
+    TDandroid.setOrientation( this );
+
     setContentView(R.layout.gm_activity);
     mApp = (TopoDroidApp) getApplication();
     mApp_mDData = TopoDroidApp.mDData;
@@ -759,7 +762,7 @@ public class GMActivity extends Activity
     mList.setDividerHeight( 2 );
 
     // mHandler = new ConnHandler( mApp, this );
-    mListView = (HorizontalListView) findViewById(R.id.listview);
+    mListView = (MyHorizontalListView) findViewById(R.id.listview);
     mListView.setEmptyPlacholder(true);
     /* int size = */ TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
@@ -795,7 +798,7 @@ public class GMActivity extends Activity
 
     enableWrite( false );
 
-    mButtonView1 = new HorizontalButtonView( mButton1 );
+    mButtonView1 = new MyHorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );
 
     mCalibName = TDInstance.calib;

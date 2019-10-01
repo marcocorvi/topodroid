@@ -130,11 +130,20 @@ manual15
 ($sec, $min, $hour, $mday, $mon, $year, $wday, $yday, $isdst ) = localtime();
 $year += 1900;
 
+open( DAT, "../AndroidManifest.xml" );
+while ( $line = <DAT> ) {
+  last if ( $line =~ /android:versionName/ );
+}
+$line =~ s/^\s*android:versionName="//;
+$line =~ s/"\s*$//;
+$version = $line;
+close DAT;
+
 foreach $i (@html) {
   open( DAT, "$i.htm" );
   while ( $line = <DAT> ) {
     if ( $line =~ /<!-- NOW -->/ ) {
-      print OUT "$mday  $month[$mon], $year <br>";
+      print OUT "Version $version - $mday  $month[$mon], $year <br>";
       next;
     }
     if ( $line =~ /<html>/ ) {

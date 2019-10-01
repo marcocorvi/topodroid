@@ -456,10 +456,10 @@ public class DrawingWindow extends ItemDrawer
   private int mNrButton2 = NR_BUTTON2; // draw
   private int mNrButton3 = NR_BUTTON3; // edit [8 if level <= advanced]
   private int mNrButton5 = NR_BUTTON5; // erase
-  private HorizontalButtonView mButtonView1;
-  private HorizontalButtonView mButtonView2;
-  private HorizontalButtonView mButtonView3;
-  private HorizontalButtonView mButtonView5;
+  private MyHorizontalButtonView mButtonView1;
+  private MyHorizontalButtonView mButtonView2;
+  private MyHorizontalButtonView mButtonView3;
+  private MyHorizontalButtonView mButtonView5;
 
   private BitmapDrawable mBMbluetooth;
   private BitmapDrawable mBMbluetooth_no;
@@ -510,9 +510,9 @@ public class DrawingWindow extends ItemDrawer
   // FIXME_AZIMUTH_DIAL 1,2
   private Bitmap mBMdial;
   private Bitmap mDialOn;
-  private MyTurnBitmap mDialBitmap; // use global MyDialBitmap
+  private MyTurnBitmap mDialBitmap; // use global dial bitmap
 
-  private HorizontalListView mListView;
+  private MyHorizontalListView mListView;
   private ListView   mMenu;
   private Button     mImage;
   // HOVER
@@ -1220,7 +1220,9 @@ public class DrawingWindow extends ItemDrawer
       // m.postRotate( azimuth - 90 );
       // Bitmap bm1 = Bitmap.createScaledBitmap( mBMdial, mButtonSize, mButtonSize, true );
       // Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, mButtonSize, mButtonSize, m, true);
+      // FIXME_AZIMUTH_DIAL 1
       Bitmap bm2 = mDialBitmap.getBitmap( TDAzimuth.mRefAzimuth, mButtonSize );
+
       TDandroid.setButtonBackground( mButton1[BTN_DIAL], new BitmapDrawable( getResources(), bm2 ) );
     } else if ( TDAzimuth.mFixedExtend == -1L ) {
       TDandroid.setButtonBackground( mButton1[BTN_DIAL], mBMleft );
@@ -1643,16 +1645,19 @@ public class DrawingWindow extends ItemDrawer
     setButtonEraseSize( Drawing.SCALE_MEDIUM );
     setButtonSelectSize( Drawing.SCALE_MEDIUM );
 
-    mButtonView1 = new HorizontalButtonView( mButton1 );
-    mButtonView2 = new HorizontalButtonView( mButton2 );
-    mButtonView3 = new HorizontalButtonView( mButton3 );
-    mButtonView5 = new HorizontalButtonView( mButton5 );
+    mButtonView1 = new MyHorizontalButtonView( mButton1 );
+    mButtonView2 = new MyHorizontalButtonView( mButton2 );
+    mButtonView3 = new MyHorizontalButtonView( mButton3 );
+    mButtonView5 = new MyHorizontalButtonView( mButton5 );
   }
 
   @Override
   public void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
+
+    TDandroid.setOrientation( this );
+
     // TDLog.TimeStart();
     // Log.v("DistoX", "onCreate()" );
 
@@ -1671,7 +1676,8 @@ public class DrawingWindow extends ItemDrawer
     // DisplayMetrics dm = new DisplayMetrics();
     // display.getMetrics( dm );
     // int width = dm widthPixels;
-    int width = getResources().getDisplayMetrics().widthPixels;
+    // int width = getResources().getDisplayMetrics().widthPixels; // 20190930 unused
+    // Log.v( "DistoX", "width " + w );
 
     // mIsNotMultitouch = ! TDandroid.checkMultitouch( this );
 
@@ -1702,7 +1708,7 @@ public class DrawingWindow extends ItemDrawer
     // ViewGroup vg = mZoomBtnsCtrl.getContainer();
     // switchZoomCtrl( TDSetting.mZoomCtrl );
 
-    mListView = (HorizontalListView) findViewById(R.id.listview);
+    mListView = (MyHorizontalListView) findViewById(R.id.listview);
     mListView.setEmptyPlacholder(true);
     mButtonSize = TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
@@ -2521,11 +2527,11 @@ public class DrawingWindow extends ItemDrawer
       if ( mType == PlotInfo.PLOT_EXTENDED ) { 
         List<DBlock> list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
         mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
-	if ( mNum != null ) {
+	// if ( mNum != null ) { // always true
           computeReferences( (int)mType, mName, TopoDroidApp.mScaleFactor, false );
           mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
           modified();
-	}
+	// }
       } 
     }
 
@@ -2823,7 +2829,7 @@ public class DrawingWindow extends ItemDrawer
   // -------------------------------------------------------------------------
   private void startErasing( float xs, float ys, float xc, float yc )
   {
-    // Log.v("DistoX-C", "startErasing " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    // Log.v("DistoX-ERASE", "startErasing " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     assert( mLastLinePath == null );
     // Log.v("DistoX", "Erase at " + xs + " " + ys );
     if ( mTouchMode == MODE_MOVE ) {
@@ -2929,7 +2935,7 @@ public class DrawingWindow extends ItemDrawer
             if (    ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2 || ( mPointCnt % mLinePointStep ) > 0 ) {
               if ( mCurrentLinePath != null ) mCurrentLinePath.addPoint( xs, ys );
             }
-            if ( mLandscape ) mCurrentLinePath.landscapeToPortrait();
+            if ( mLandscape ) mCurrentLinePath.landscapeToPortrait(); // may produce null_pointer_exc.
           } else if ( mSymbol == Symbol.AREA ) {
             // Log.v("DistoX",
             //       "DX " + (xs - mCurrentAreaPath.mFirst.x) + " DY " + (ys - mCurrentAreaPath.mFirst.y ) );
@@ -3256,7 +3262,7 @@ public class DrawingWindow extends ItemDrawer
         // Log.v("DistoX-S", "*** split border size " + mSplitBorder.size() );
         doSplitPlot( );
         setMode( MODE_MOVE );
-      } else { // MODE_MOVE 
+      // } else { // MODE_MOVE
 /* F for the moment do not create X-Sections
         if ( Math.abs(xc - mDownX) < 10 && Math.abs(yc - mDownY) < 10 ) {
           // check if there is a station: only PLAN and EXTENDED or PROFILE
@@ -4731,7 +4737,7 @@ public class DrawingWindow extends ItemDrawer
   private void setAzimuthButton()
   {
     // if ( mRotateAzimuth ) {
-      Bitmap bm2 = AzimuthDialDialog.getRotatedBitmap( TDAzimuth.mRefAzimuth, mDialOn );
+      Bitmap bm2 = AzimuthDialog.getRotatedBitmap( TDAzimuth.mRefAzimuth, mDialOn );
       mButton1[ BTN_DIAL ].setBackgroundDrawable( new BitmapDrawable( getResources(), bm2 ) ); // DEPRECATED API-16
     // }
   }
@@ -4750,7 +4756,7 @@ public class DrawingWindow extends ItemDrawer
           mDataDownloader.doDataDownload( );
         }
       } else if ( TDLevel.overAdvanced && b == mButton1[ BTN_DIAL ] ) {
-        if ( TDLevel.overAdvanced && mType == PlotInfo.PLOT_PLAN && TDAzimuth.mFixedExtend == 0 ) {
+        if ( /* TDLevel.overAdvanced && */ mType == PlotInfo.PLOT_PLAN && TDAzimuth.mFixedExtend == 0 ) {
           mRotateAzimuth = true;
           setAzimuthButton();
         } else {
@@ -4903,9 +4909,8 @@ public class DrawingWindow extends ItemDrawer
           if ( TDSetting.mAzimuthManual ) {
             setRefAzimuth( 0, - TDAzimuth.mFixedExtend );
           } else {
-            // FIXME_AZIMUTH_DIAL 1
-            (new AzimuthDialDialog( mActivity, this, TDAzimuth.mRefAzimuth, mBMdial )).show();
-            // (new AzimuthDialDialog( mActivity, this, TDAzimuth.mRefAzimuth, mDialBitmap )).show();
+            (new AzimuthDialog( mActivity, this, TDAzimuth.mRefAzimuth, mBMdial )).show(); // FIXME_AZIMUTH_DIAL 1
+            // (new AzimuthDialog( mActivity, this, TDAzimuth.mRefAzimuth, mDialBitmap )).show(); // FIXME_AZIMUTH_DIAL 2
           }
         }
 
@@ -5360,7 +5365,7 @@ public class DrawingWindow extends ItemDrawer
     List<DBlock> list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
     mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
     // doMoveTo();
-    if ( mNum != null ) {
+    // if ( mNum != null ) { // alwayst true
       if ( mType == (int)PlotInfo.PLOT_PLAN ) {
         computeReferences( mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, true );
         computeReferences( mPlot1.type, mPlot1.name, TopoDroidApp.mScaleFactor, false );
@@ -5370,7 +5375,7 @@ public class DrawingWindow extends ItemDrawer
         computeReferences( mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, true );
         if ( reset ) resetReference( mPlot2 );
       }
-    }
+    // }
   }
 
   public void refreshDisplay( int nr, boolean toast )
@@ -5441,7 +5446,7 @@ public class DrawingWindow extends ItemDrawer
       float h = b.right - b.left;
       float wZoom = (float) ( mDrawingSurface.getMeasuredWidth() * 0.9 ) / ( 1 + w );
       float hZoom = (float) ( ( ( mDrawingSurface.getMeasuredHeight() - mListView.getHeight() ) * 0.9 ) / ( 1 + h ));
-      mZoom = ( hZoom < wZoom ) ? hZoom : wZoom;
+      mZoom = Math.min(hZoom, wZoom);
       if ( mZoom < 0.1f ) mZoom = 0.1f;
       mOffset.y = ( TopoDroidApp.mDisplayHeight + mListView.getHeight() - DrawingUtil.CENTER_Y )/(2*mZoom) + lr;
       mOffset.x = ( TopoDroidApp.mDisplayWidth - DrawingUtil.CENTER_X )/(2*mZoom) - tb;
@@ -5450,7 +5455,7 @@ public class DrawingWindow extends ItemDrawer
       float h = b.bottom - b.top;
       float wZoom = (float) ( mDrawingSurface.getMeasuredWidth() * 0.9 ) / ( 1 + w );
       float hZoom = (float) ( ( ( mDrawingSurface.getMeasuredHeight() - mListView.getHeight() ) * 0.9 ) / ( 1 + h ));
-      mZoom = ( hZoom < wZoom ) ? hZoom : wZoom;
+      mZoom = Math.min(hZoom, wZoom);
       if ( mZoom < 0.1f ) mZoom = 0.1f;
       mOffset.x = ( TopoDroidApp.mDisplayWidth - DrawingUtil.CENTER_X )/(2*mZoom) - lr;
       mOffset.y = ( TopoDroidApp.mDisplayHeight + mListView.getHeight() - DrawingUtil.CENTER_Y )/(2*mZoom) - tb;
@@ -5640,7 +5645,7 @@ public class DrawingWindow extends ItemDrawer
             if ( mPlot2 !=  null && PlotInfo.PLOT_PROJECTED == mPlot2.type ) {
               azimuth = mPlot2.azimuth;
             }
-            new DistoXStatDialog( mActivity, mNum, mPlot1.start, azimuth, mApp_mData.getSurveyStat( TDInstance.sid ) ).show();
+            new DrawingStatDialog( mActivity, mNum, mPlot1.start, azimuth, mApp_mData.getSurveyStat( TDInstance.sid ) ).show();
           } else {
             TDToast.makeBad( R.string.no_data_reduction );
 	  }
@@ -6082,6 +6087,7 @@ public class DrawingWindow extends ItemDrawer
 
   private void makeWall( ArrayList<PointF> pts, float x0, float y0, float x1, float y1, float len, PointF uu, PointF vv )
   {
+    if ( pts == null ) return; // safety check
     int size = pts.size();
     float xx, yy;
     if ( size == 0 ) { // no wall

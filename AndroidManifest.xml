@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="401138"
-      android:versionName="4.1.4r"
+      android:versionCode="401139"
+      android:versionName="4.1.4t"
     >
     <!-- android:debuggable="true" -->
     <!-- Android SDK dependencies:
@@ -172,11 +172,13 @@
 
         <activity android:name=".CWDActivity"
 	  android:theme="@style/Theme.FullScreen"
+	  android:screenOrientation="portrait"
           >
         </activity>
 
         <activity android:name=".PtCmapActivity"
 	  android:theme="@style/Theme.FullScreen"
+	  android:screenOrientation="portrait"
           >
         </activity>
 

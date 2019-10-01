@@ -129,8 +129,8 @@ public class CalibActivity extends Activity
   private Button[] mButton1;
   private int mNrButton1 = 0;
   // private Button[] mButton2;
-  private HorizontalListView mListView;
-  private HorizontalButtonView mButtonView1;
+  private MyHorizontalListView mListView;
+  private MyHorizontalButtonView mButtonView1;
   private ListView   mMenu;
   private Button     mImage;
   // HOVER
@@ -142,8 +142,10 @@ public class CalibActivity extends Activity
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    mApp     = (TopoDroidApp)getApplication();
 
+    TDandroid.setOrientation( this );
+
+    mApp     = (TopoDroidApp)getApplication();
     setContentView(R.layout.calib_activity);
     mEditName    = (EditText) findViewById(R.id.calib_name);
     mEditDate    = (Button) findViewById(R.id.calib_date);
@@ -162,7 +164,7 @@ public class CalibActivity extends Activity
       mCBAlgoMinimum.setVisibility( View.GONE );
     }
 
-    mListView = (HorizontalListView) findViewById(R.id.listview);
+    mListView = (MyHorizontalListView) findViewById(R.id.listview);
     mListView.setEmptyPlacholder(true);
     /* int size = */ TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
@@ -178,8 +180,8 @@ public class CalibActivity extends Activity
     mBMopen_no = MyButton.getButtonBackground( mApp, res, izonsno[1] );
     mBMread_no = MyButton.getButtonBackground( mApp, res, izonsno[2] );
 
-    mButtonView1 = new HorizontalButtonView( mButton1 );
-    // mButtonView2 = new HorizontalButtonView( mButton2 );
+    mButtonView1 = new MyHorizontalButtonView( mButton1 );
+    // mButtonView2 = new MyHorizontalButtonView( mButton2 );
     mListView.setAdapter( mButtonView1.mAdapter );
 
     // TDLog.Log( TDLog.LOG_CALIB, "app TDInstance.cid " + TDInstance.cid );

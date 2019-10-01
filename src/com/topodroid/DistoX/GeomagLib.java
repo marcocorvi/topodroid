@@ -476,10 +476,8 @@ class GeomagLib
    */
   void checkGeographicPole( MagGeodetic coord )
   {
-    coord.phi = coord.phi < (-90.0 + MagUtil.MAG_GEO_POLE_TOLERANCE) ? (-90.0 + MagUtil.MAG_GEO_POLE_TOLERANCE) 
-              : coord.phi;
-    coord.phi = coord.phi > (90.0 - MagUtil.MAG_GEO_POLE_TOLERANCE) ? (90.0 - MagUtil.MAG_GEO_POLE_TOLERANCE)
-              : coord.phi;
+    coord.phi = Math.max(coord.phi, (-90.0 + MagUtil.MAG_GEO_POLE_TOLERANCE));
+    coord.phi = Math.min(coord.phi, (90.0 - MagUtil.MAG_GEO_POLE_TOLERANCE));
   } 
 
   /** Computes Spherical variables

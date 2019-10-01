@@ -213,10 +213,10 @@ class ProjectionDialog extends MyDialog
       NumStation st1 = sh.from;
       NumStation st2 = sh.to;
       if ( st1.show() && st2.show() ) {
-	float x1 = (float)( st1.e * cosp + st1.s * sinp ); // - dx;
-	float x2 = (float)( st2.e * cosp + st2.s * sinp ); // - dx;
-	float y1 =(float)( st1.v ); // - dy;
-	float y2 = (float)( st2.v ); // - dy;
+	float x1 = st1.e * cosp + st1.s * sinp; // - dx;
+	float x2 = st2.e * cosp + st2.s * sinp; // - dx;
+	float y1 = st1.v; // - dy;
+	float y2 = st2.v; // - dy;
         h1 = DrawingUtil.toSceneX( x1, y1 );
         h2 = DrawingUtil.toSceneX( x2, y2 );
         v1 = DrawingUtil.toSceneY( x1, y1 );
@@ -227,10 +227,10 @@ class ProjectionDialog extends MyDialog
     for ( NumSplay sp : splays ) {
       NumStation st = sp.from;
       if ( st.show() ) {
-	float x1 = (float)( st.e * cosp + st.s * sinp ); // - dx;
-	float x2 = (float)( sp.e * cosp + sp.s * sinp ); // - dx;
-	float y1 = (float)( st.v ); // - dy;
-	float y2 = (float)( sp.v ); // - dy;
+	float x1 = st.e * cosp + st.s * sinp; // - dx;
+	float x2 = sp.e * cosp + sp.s * sinp; // - dx;
+	float y1 = st.v; // - dy;
+	float y2 = sp.v; // - dy;
         h1 = DrawingUtil.toSceneX( x1, y1 );
         h2 = DrawingUtil.toSceneX( x2, y2 );
         v1 = DrawingUtil.toSceneY( x1, y1 );
@@ -240,8 +240,8 @@ class ProjectionDialog extends MyDialog
     }
     for ( NumStation st : stations ) {
       if ( st.show() ) {
-	float x1 = (float)( st.e * cosp + st.s * sinp ); // - dx;
-	float y1 = (float)( st.v ); // - dy;
+	float x1 = st.e * cosp + st.s * sinp; // - dx;
+	float y1 = st.v; // - dy;
         h1 = DrawingUtil.toSceneX( x1, y1 );
         v1 = DrawingUtil.toSceneY( x1, y1 );
         mDrawingSurface.addDrawingStationName( st, h1, v1 );
@@ -338,7 +338,7 @@ class ProjectionDialog extends MyDialog
 
     mSeekBar.setOnSeekBarChangeListener( new OnSeekBarChangeListener() {
       public void onProgressChanged( SeekBar seekbar, int progress, boolean fromUser) {
-        mAzimuth = (int)( (160 + progress)%360 );
+        mAzimuth = (160 + progress)%360;
         if ( progress < 10 ) {
           seekbar.setProgress( progress + 360 );
         } else if ( progress > 390 ) {

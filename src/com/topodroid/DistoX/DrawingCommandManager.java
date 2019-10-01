@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-// import android.util.Log;
+import android.util.Log;
 
 import android.content.res.Configuration;
 // import android.app.Activity;
@@ -662,6 +662,7 @@ class DrawingCommandManager
       ww = TopoDroidApp.mDisplayHeight;
       hh = TopoDroidApp.mDisplayWidth;
     }
+    if ( ww < hh ) { ww = hh; } else { hh = ww; }
 
     mLandscape = landscape;
     mScale  = 1 / s;
@@ -720,6 +721,7 @@ class DrawingCommandManager
   // x, y canvas coords
   void setEraser( float x, float y, float r )
   {
+    // Log.v("DistoX-ERASE", "set eraser " + x + " " + y + " " + r );
     mEraserX = x;
     mEraserY = y;
     mEraserR = r;

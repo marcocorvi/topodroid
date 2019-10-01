@@ -25,6 +25,7 @@ class TDPrefKey
     "DISTOX_NO_CURSOR",     // 5 * // no cursor for custom keyboard
     "DISTOX_LOCAL_MAN",     // 6 * // enable local man pages
     "DISTOX_LOCALE",        // 7 * // language
+    "DISTOX_ORIENTATION",   
     // "DISTOX_COSURVEY",      // 8 * // whether to enable co-surveying // IF_COSURVEY
     "DISTOX_EXPORT_PREF",   // 9  FORWARD
     "DISTOX_SURVEY_PREF",   //    FORWARD
@@ -45,6 +46,7 @@ class TDPrefKey
     R.string.pref_no_cursor_title,
     R.string.pref_local_help_title,
     R.string.pref_locale_title,
+    R.string.pref_orientation_title,
     // R.string.pref_cosurvey_title, // IF_COSURVEY
     R.string.pref_cat_import_export,
     R.string.pref_cat_survey,
@@ -65,6 +67,7 @@ class TDPrefKey
     R.string.pref_no_cursor_summary,
     R.string.pref_local_help_summary,
     R.string.pref_locale_summary,
+    R.string.pref_orientation_summary,
     // R.string.pref_cosurvey_summary, // IF_COSURVEY
     -1,
     -1,
@@ -85,6 +88,7 @@ class TDPrefKey
      TRUE,            // NO CURSOR
      TDString.ZERO,   // USER MANUAL
      TDString.EMPTY,  // LOCALE
+     TDString.ZERO,   // SCREEEN ORIENTATION
      // FALSE, // IF_COSURVEY
      "",
      "",

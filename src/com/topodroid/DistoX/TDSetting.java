@@ -124,6 +124,8 @@ class TDSetting
   static boolean mLocalManPages = true;
   static boolean mPacketLog     = false;
 
+  static int mOrientation = 0; // 0 unspecified, 1 portrait, 2 landscape
+
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   // IMPORT EXPORT
   static boolean mLRExtend           = true;   // whether to extend LR or not (Compass/VisualTopo input)
@@ -678,6 +680,7 @@ class TDSetting
     mNoCursor      = prefs.getBoolean( keyMain[5], bool(defMain[5]) );  // DISTOX_NO_CURSOR
     mLocalManPages = handleLocalUserMan( /* my_app, */ prefs.getString( keyMain[6], defMain[6] ), false ); // DISTOX_LOCAL_MAN
     TopoDroidApp.setLocale( prefs.getString( keyMain[7], TDString.EMPTY ), false ); // DISTOX_LOCALE
+    mOrientation = Integer.parseInt( prefs.getString( keyMain[8], defMain[8] ) ); // DISTOX_ORIENTATION choice: 0, 1, 2
     // TopoDroidApp.setLocale( prefs.getString( keyMain[7], defMain[7] ), false ); // DISTOX_LOCALE
     // TDLog.Profile("locale");
     // boolean co_survey = prefs.getBoolean( keyMain[8], bool(defMain[8]) );        // DISTOX_COSURVEY 
@@ -1051,6 +1054,7 @@ class TDSetting
   {
     String ret = null;
     String[] key = TDPrefKey.MAIN;
+    String[] def = TDPrefKey.MAINdef;
     // Log.v("DistoX", "update pref main: " + k );
     if ( k.equals( key[0] ) ) {// DISTOX_CWD
       // handled independently
@@ -1065,16 +1069,19 @@ class TDSetting
 	}
       }
     } else if ( k.equals( key[ 3 ] ) ) {             // DISTOX_EXTRA_BUTTONS (choice)
-      int level = tryIntValue( hlp, k, v, TDString.ONE );
+      int level = tryIntValue( hlp, k, v, def[3] );
       setActivityBooleans( hlp.getSharedPrefs(), level );
     } else if ( k.equals( key[ 4 ] ) ) {           // DISTOX_MKEYBOARD (bool)
-      mKeyboard = tryBooleanValue( hlp, k, v, true );
+      mKeyboard = tryBooleanValue( hlp, k, v, bool(def[4]) );
     } else if ( k.equals( key[ 5 ] ) ) {           // DISTOX_NO_CURSOR(bool)
-      mNoCursor = tryBooleanValue( hlp, k, v, false );
+      mNoCursor = tryBooleanValue( hlp, k, v, bool(def[5]) );
     } else if ( k.equals( key[ 6 ] ) ) {           // DISTOX_LOCAL_MAN (choice)
-      mLocalManPages = handleLocalUserMan( /* hlp.getApp(), */ tryStringValue( hlp, k, v, TDString.ZERO ), true );
+      mLocalManPages = handleLocalUserMan( /* hlp.getApp(), */ tryStringValue( hlp, k, v, def[6] ), true );
     } else if ( k.equals( key[ 7 ] ) ) {           // DISTOX_LOCALE (choice)
-      TopoDroidApp.setLocale( tryStringValue( hlp, k, v, TDString.EMPTY ), true );
+      TopoDroidApp.setLocale( tryStringValue( hlp, k, v, def[7] ), true );
+    } else if ( k.equals( key[ 8 ] ) ) {           // DISTOX_ORIENTATION (choice)
+      mOrientation = tryIntValue( hlp, k, v, def[8] );
+      TDandroid.setOrientation( TopoDroidApp.mActivity );
     /* ---- IF_COSURVEY
     } else if ( k.equals( key[ 8 ] ) ) {           // DISTOX_COSURVEY (bool)
       boolean co_survey = tryBooleanValue( hlp, k, v, false );
@@ -2276,8 +2283,8 @@ class TDSetting
         TDToast.make( R.string.toporobot_warning );
       } else if ( policy == StationPolicy.SURVEY_STATION_TRIPOD ) {
         TDToast.make( R.string.tripod_warning );
-      } else if ( policy == StationPolicy.SURVEY_STATION_BACKSIGHT ) {
-        // TDToast.make( R.string.backsight_warning );
+      // } else if ( policy == StationPolicy.SURVEY_STATION_BACKSIGHT ) {
+      //   TDToast.make( R.string.backsight_warning );
       } else if ( policy == StationPolicy.SURVEY_STATION_ANOMALY ) {
         TDToast.make( R.string.anomaly_warning );
       // } else {
@@ -2368,12 +2375,13 @@ class TDSetting
       pw.printf(Locale.US, "Keyboard %c, no-cursor %c\n", tf(mKeyboard), tf(mNoCursor) );
       pw.printf(Locale.US, "Local man %c\n", tf(mLocalManPages) );
       pw.printf(Locale.US, "Palettes %c\n", tf(mPalettes) );
+      pw.printf(Locale.US, "Orientation %d\n", mOrientation );
 
       pw.printf(Locale.US, "Auto-export: data %c / %d, plot %d \n", tf(mDataBackup), mExportShotsFormat, mExportPlotFormat );
       String eol = "\\n"; if ( mSurvexEol.equals("\r\n") ) eol = "\\r\\n";
       pw.printf(Locale.US, "Survex: eol \"%s\", splay %c LRUD %c \n", eol, tf(mSurvexSplay), tf(mSurvexLRUD) );
       pw.printf(Locale.US, "Compass: swap LR %c, station prefix %c, splays %c\n", tf(mSwapLR), tf(mExportStationsPrefix), tf(mCompassSplays) );
-      pw.printf(Locale.US, "VisualTopo: splays %c\n", tf(mVTopoSplays) );
+      pw.printf(Locale.US, "VisualTopo: splays %c at-from %c\n", tf(mVTopoSplays), tf(mVTopoLrudAtFrom) ); 
       pw.printf(Locale.US, "Ortho LRUD %c, angle %.2f cos %.2f \n", tf(mOrthogonalLRUD), mOrthogonalLRUDAngle, mOrthogonalLRUDCosine );
       pw.printf(Locale.US, "Therion: maps %c, stations %c, splays %c, xvi %c, scale %.2f\n",
         tf(mTherionMaps), tf(mAutoStations), tf(mTherionSplays), tf(mTherionXvi), mToTherion );

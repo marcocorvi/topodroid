@@ -14,8 +14,8 @@ package com.topodroid.DistoX;
 class AudioInfo
 {
   private final long sid;       // survey id
-  public  final long id;        // audio id
-  public  final long shotid;    // shot id
+  final long id;        // audio id
+  final long shotid;    // shot id
   private final String mDate;
 
   AudioInfo( long _sid, long _id, long _shotid, String dt )

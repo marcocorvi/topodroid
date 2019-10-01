@@ -18,8 +18,8 @@ package com.topodroid.DistoX;
 class Point2D // extends PointF
 {
   // from PointF
-  public float x;  // X coord
-  public float y;  // Y coord
+  float x;  // X coord
+  float y;  // Y coord
 
   Point2D( )
   {

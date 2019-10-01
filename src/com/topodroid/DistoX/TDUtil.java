@@ -219,7 +219,7 @@ class TDUtil
     if ( ch >= '1' && ch <= '3' ) ret += 10*(ch - '0');
     ch = date.charAt(9);
     if ( ch >= '1' && ch <= '9' ) ret += (ch - '0');
-    return (ret > 0)? ret : 0;
+    return Math.max(ret, 0);
   }
 
   static String composeDate( int y, int m, int d )

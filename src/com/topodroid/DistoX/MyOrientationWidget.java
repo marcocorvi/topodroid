@@ -1,4 +1,4 @@
-/* @file OrientationWidget.java
+/* @file MyOrientationWidget.java
  *
  * @author marco corvi
  * @date june 2012
@@ -23,7 +23,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 
-class OrientationWidget
+class MyOrientationWidget
 {
   // private SeekBar  mSeekBar;
   private ImageView mIVorientation;
@@ -32,7 +32,7 @@ class OrientationWidget
 
   int mOrient;
 
-  OrientationWidget( Dialog parent, boolean orientable, double orient )
+  MyOrientationWidget( Dialog parent, boolean orientable, double orient )
   {
     mOrient = (int)orient;
 

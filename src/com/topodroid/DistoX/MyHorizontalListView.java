@@ -1,4 +1,4 @@
-/* @file HorizontalListView.java
+/* @file MyHorizontalListView.java
  *
  * @author marco corvi (adapted from 
  * http://sandyandroidtutorials.blogspot.it/2013/06/horizontal-listview-tutorial.html
@@ -30,7 +30,7 @@ import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.Scroller;
 
-class HorizontalListView extends AdapterView<ListAdapter> 
+class MyHorizontalListView extends AdapterView<ListAdapter> 
 {
   public boolean mAlwaysOverrideTouch = true;
   private ListAdapter mAdapter;              // data adapter
@@ -52,7 +52,7 @@ class HorizontalListView extends AdapterView<ListAdapter>
   private Runnable mRunnable = null;
   private boolean  mEmptyPlaceholder = false;
 
-  public HorizontalListView(Context context, AttributeSet attrs )
+  public MyHorizontalListView(Context context, AttributeSet attrs )
   {
     super(context, attrs);
     mEmptyPlaceholder = false;
@@ -100,7 +100,7 @@ class HorizontalListView extends AdapterView<ListAdapter>
     @Override
     public void onChanged() 
     {
-      synchronized ( HorizontalListView.this ) {
+      synchronized ( MyHorizontalListView.this ) {
         mDataChanged = true;
       }
       invalidate();
@@ -320,7 +320,7 @@ class HorizontalListView extends AdapterView<ListAdapter>
  
   private boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
   {
-    synchronized( HorizontalListView.this ) {
+    synchronized( MyHorizontalListView.this ) {
       mScroller.fling(mNextX, 0, (int)-velocityX, 0, 0, mMaxX, 0, 0);
     }
     requestLayout();
@@ -337,17 +337,17 @@ class HorizontalListView extends AdapterView<ListAdapter>
   {
     @Override
     public boolean onDown(MotionEvent e) {
-      return HorizontalListView.this.onDown(e);
+      return MyHorizontalListView.this.onDown(e);
     }
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-      return HorizontalListView.this.onFling(e1, e2, velocityX, velocityY);
+      return MyHorizontalListView.this.onFling(e1, e2, velocityX, velocityY);
     }
 
     @Override
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-      synchronized(HorizontalListView.this){
+      synchronized(MyHorizontalListView.this){
         mNextX += (int)distanceX;
       }
       requestLayout();
@@ -360,10 +360,10 @@ class HorizontalListView extends AdapterView<ListAdapter>
         View child = getChildAt(i);
         if (isEventWithinView(e, child)) {
           if(mOnItemClicked != null){
-            mOnItemClicked.onItemClick(HorizontalListView.this, child, mLeftViewIndex + 1 + i, mAdapter.getItemId( mLeftViewIndex + 1 + i ));
+            mOnItemClicked.onItemClick(MyHorizontalListView.this, child, mLeftViewIndex + 1 + i, mAdapter.getItemId( mLeftViewIndex + 1 + i ));
           }
           if(mOnItemSelected != null){
-            mOnItemSelected.onItemSelected(HorizontalListView.this, child, mLeftViewIndex + 1 + i, mAdapter.getItemId( mLeftViewIndex + 1 + i ));
+            mOnItemSelected.onItemSelected(MyHorizontalListView.this, child, mLeftViewIndex + 1 + i, mAdapter.getItemId( mLeftViewIndex + 1 + i ));
           }
           break;
         }
@@ -379,7 +379,7 @@ class HorizontalListView extends AdapterView<ListAdapter>
         View child = getChildAt(i);
         if (isEventWithinView(e, child)) {
           if (mOnItemLongClicked != null) {
-            mOnItemLongClicked.onItemLongClick(HorizontalListView.this, child, mLeftViewIndex + 1 + i, mAdapter.getItemId(mLeftViewIndex + 1 + i));
+            mOnItemLongClicked.onItemLongClick(MyHorizontalListView.this, child, mLeftViewIndex + 1 + i, mAdapter.getItemId(mLeftViewIndex + 1 + i));
           }
           break;
         }
@@ -401,7 +401,7 @@ class HorizontalListView extends AdapterView<ListAdapter>
 }
 
 /* sample
-HorizontalListViewDemo.java
+MyHorizontalListViewDemo.java
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -413,7 +413,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class HorizontalListViewDemo extends Activity
+public class MyHorizontalListViewDemo extends Activity
 {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -421,7 +421,7 @@ public class HorizontalListViewDemo extends Activity
     
       setContentView(R.layout.listviewdemo);
     
-      HorizontalListView listview = (HorizontalListView) findViewById(R.id.listview);
+      MyHorizontalListView listview = (MyHorizontalListView) findViewById(R.id.listview);
       listview.setAdapter(mAdapter);
     
   }
@@ -492,7 +492,7 @@ listviewdemo.xml
   android:layout_height="fill_parent"
   android:background="#fff"
   >
-  <com.sandy.demo.HorizontalListView
+  <com.sandy.demo.MyHorizontalListView
       android:id="@+id/listview"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"

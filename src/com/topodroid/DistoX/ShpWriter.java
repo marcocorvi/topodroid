@@ -729,7 +729,7 @@ class ShpPoint extends ShpObject
       writeShxRecord( offset, shpRecLen );
       fields[0] = BrushManager.mPointLib.getSymbolThName( pt.mPointType );
       fields[1] = Integer.toString( (int)pt.mOrientation ); 
-      fields[2] = Integer.toString( (int)pt.mLevel ); 
+      fields[2] = Integer.toString( pt.mLevel );
       writeDBaseRecord( n_fld, fields, flens );
       ++cnt;
     }

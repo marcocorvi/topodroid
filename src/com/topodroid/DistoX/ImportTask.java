@@ -29,8 +29,8 @@ abstract class ImportTask extends AsyncTask< String, Integer, Long >
     mMain = new WeakReference<MainWindow>( main );
     mApp  = new WeakReference<TopoDroidApp>( main.getApp() );
     mProgress = ProgressDialog.show( main,
-		    mApp.get().getResources().getString(R.string.pleasewait),
-		    mApp.get().getResources().getString(R.string.processing),
+		    main.getResources().getString(R.string.pleasewait),
+		    main.getResources().getString(R.string.processing),
 		    true );
   }
 

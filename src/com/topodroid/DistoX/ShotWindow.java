@@ -100,8 +100,8 @@ public class ShotWindow extends Activity
   final static private int BTN_BLUETOOTH = 1;
   final static private int BTN_PLOT      = 3;
   final static private int BTN_MANUAL    = 5;
-  final static private int BTN_SEARCH    = 7;
-  final static private int BTN_AZIMUTH   = 8;
+  final static private int BTN_AZIMUTH   = 6;
+  final static private int BTN_SEARCH    = 8;
   private int boff = 0;
   private boolean diving = false;
   private int mBTstatus; // status of bluetooth buttons (download and reset)
@@ -115,9 +115,9 @@ public class ShotWindow extends Activity
                         R.drawable.iz_plot,
                         R.drawable.iz_note,
                         R.drawable.iz_plus,
+                        R.drawable.iz_dial,
                         R.drawable.iz_station,
                         R.drawable.iz_search,
-                        R.drawable.iz_dial,
 			R.drawable.iz_refresh,
 			R.drawable.iz_empty
                       };
@@ -165,9 +165,9 @@ public class ShotWindow extends Activity
                           R.string.help_plot,
                           R.string.help_note,
                           R.string.help_add_shot,
+                          R.string.help_azimuth,
                           R.string.help_current_station,
                           R.string.help_search,
-                          R.string.help_azimuth,
 			  R.string.help_refresh,
                         };
    private static final int[] help_menus = {
@@ -187,7 +187,7 @@ public class ShotWindow extends Activity
   private TopoDroidApp   mApp;
   private Activity       mActivity;
   private DataDownloader mDataDownloader;
-  private DistoXAccuracy mDistoXAccuracy;
+  private SurveyAccuracy mSurveyAccuracy;
 
   // TODO replace flags with DisplayMode-flag 
   //      N.B. id is in the data adapter
@@ -235,12 +235,50 @@ public class ShotWindow extends Activity
   private Button[] mButtonF;
   private int mNrButtonF = 6; // 8;
 
+  // private Button mButtonHelp;
+  private MyHorizontalListView mListView;
+  private MyHorizontalButtonView mButtonView1;
+  private MyHorizontalButtonView mButtonViewF;
+  private ListView   mMenu = null;
+  private Button     mImage;
+  // HOVER
+  // MyMenuAdapter mMenuAdapter;
+  private ArrayAdapter< String > mMenuAdapter;
+  private boolean onMenu = false;
+  private boolean onMultiselect = false;
+
+  private BitmapDrawable mBMbluetooth;
+  private BitmapDrawable mBMbluetooth_no;
+  private BitmapDrawable mBMdownload;
+  private BitmapDrawable mBMdownload_on;
+  private BitmapDrawable mBMdownload_wait;
+  private BitmapDrawable mBMdownload_no;
+  // BitmapDrawable mBMadd;
+  private BitmapDrawable mBMplot;
+  Bitmap mBMdial; // FIXME_AZIMUTH_DIAL
+  // Bitmap mBMdial_transp;
+  private MyTurnBitmap mDialBitmap;
+
+  private BitmapDrawable mBMplot_no;
+  private BitmapDrawable mBMleft;
+  private BitmapDrawable mBMright;
   // private SearchResult mSearch = null;
 
-  boolean isBlockMagneticBad( DBlock blk ) { return mDistoXAccuracy.isBlockAMDBad( blk ); }
+  boolean isBlockMagneticBad( DBlock blk ) { return mSurveyAccuracy.isBlockAMDBad( blk ); }
 
-  String getBlockExtraString( DBlock blk ) { return mDistoXAccuracy.getBlockExtraString( blk ); }
+  String getBlockExtraString( DBlock blk ) { return mSurveyAccuracy.getBlockExtraString( blk ); }
 
+  // --------------------------------------------------------------------------------
+  // get a button-1
+  // @param idx    index of the button-1
+  private Button button1( int idx ) { return mButton1[ idx - boff ]; }
+
+  // check if a button is a given button-1
+  // @param b    button
+  // @param idx  index of button-1
+  private boolean isButton1( Button b, int idx ) { return idx - boff < mNrButton1 && b == button1( idx ); }
+
+  // --------------------------------------------------------------------------------
   public void setRefAzimuth( float azimuth, long fixed_extend )
   {
     // Log.v("DistoXE", "set Ref Azimuth " + fixed_extend + " " + azimuth );
@@ -268,7 +306,7 @@ public class ShotWindow extends Activity
         // Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, mButtonSize, mButtonSize, m, true);
 	Bitmap bm2 = mDialBitmap.getBitmap( extend, mButtonSize );
 
-        TDandroid.setButtonBackground( mButton1[ BTN_AZIMUTH - boff ], new BitmapDrawable( getResources(), bm2 ) );
+        TDandroid.setButtonBackground( button1( BTN_AZIMUTH ), new BitmapDrawable( getResources(), bm2 ) );
         TopoDroidApp.setSurveyExtend( extend );
       }
     } else if ( TDAzimuth.mFixedExtend == -1L ) {
@@ -318,17 +356,13 @@ public class ShotWindow extends Activity
     
   void updateDisplay( )
   {
-    // Log.v( "DistoX", "update Display() " );
     // highlightBlocks( null );
-    // DataHelper data = mApp_mData;
     if ( mApp_mData != null && TDInstance.sid >= 0 ) {
       List<DBlock> list = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.NORMAL );
-      mDistoXAccuracy = new DistoXAccuracy( list ); 
-      // if ( list.size() > 4 ) DistoXAccuracy.setBlocks( list );
+      mSurveyAccuracy = new SurveyAccuracy( list ); 
+      // if ( list.size() > 4 ) SurveyAccuracy.setBlocks( list );
 
       List< PhotoInfo > photos = mApp_mData.selectAllPhotos( TDInstance.sid, TDStatus.NORMAL );
-      // TDLog.Log( TDLog.LOG_SHOT, "update Display() shot list size " + list.size() );
-      // Log.v( TopoDroidApp.TAG, "update Display() shot list size " + list.size() );
       updateShotList( list, photos );
       
       setTheTitle( );
@@ -386,7 +420,7 @@ public class ShotWindow extends Activity
     if ( mDataAdapter != null ) {
       // FIXME 3.3.0
       if ( mDataAdapter.addDataBlock( blk ) ) {
-        mDistoXAccuracy.addBlockAMD( blk );
+        mSurveyAccuracy.addBlockAMD( blk );
         if ( StationPolicy.doBacksight() || StationPolicy.doTripod() ) {
           mApp.assignStationsAll( mDataAdapter.mItems );
         } else {
@@ -638,6 +672,8 @@ public class ShotWindow extends Activity
     }
   }
 
+  // ----------------------------------------------------------------------------
+  // MENU
 
   private void handleMenu( int pos )
   {
@@ -698,7 +734,7 @@ public class ShotWindow extends Activity
     }
   }
 
-// ---------------------------------------------------------------
+  // ---------------------------------------------------------------
 
   void askPhotoComment( )
   {
@@ -861,6 +897,14 @@ public class ShotWindow extends Activity
   //   } catch ( IOException e ) { }
   // }
 
+  // void refreshList()
+  // {
+  //   Log.v("DistoX", "refresh display" );
+  //   mDataAdapter.notifyDataSetChanged();
+  //   mList.invalidate();
+  // }
+
+  // ---------------------------------------------------------------
   @Override
   protected void onActivityResult( int reqCode, int resCode, Intent data )
   {
@@ -907,45 +951,14 @@ public class ShotWindow extends Activity
   }
 
   // ---------------------------------------------------------------
-  // private Button mButtonHelp;
-  private HorizontalListView mListView;
-  private HorizontalButtonView mButtonView1;
-  private HorizontalButtonView mButtonViewF;
-  private ListView   mMenu = null;
-  private Button     mImage;
-  // HOVER
-  // MyMenuAdapter mMenuAdapter;
-  private ArrayAdapter< String > mMenuAdapter;
-  private boolean onMenu = false;
-  private boolean onMultiselect = false;
-
-  private BitmapDrawable mBMbluetooth;
-  private BitmapDrawable mBMbluetooth_no;
-  private BitmapDrawable mBMdownload;
-  private BitmapDrawable mBMdownload_on;
-  private BitmapDrawable mBMdownload_wait;
-  private BitmapDrawable mBMdownload_no;
-  // BitmapDrawable mBMadd;
-  private BitmapDrawable mBMplot;
-  Bitmap mBMdial; // FXIME_AZIMUTH_DIAL
-  // Bitmap mBMdial_transp;
-  private MyTurnBitmap mDialBitmap;
-
-  private BitmapDrawable mBMplot_no;
-  private BitmapDrawable mBMleft;
-  private BitmapDrawable mBMright;
-
-  // void refreshList()
-  // {
-  //   Log.v("DistoX", "refresh display" );
-  //   mDataAdapter.notifyDataSetChanged();
-  //   mList.invalidate();
-  // }
   
   @Override
   public void onCreate(Bundle savedInstanceState)
   {
     super.onCreate( savedInstanceState );
+
+    TDandroid.setOrientation( this );
+
     setContentView( R.layout.shot_activity );
     mApp = (TopoDroidApp) getApplication();
     mApp_mData = TopoDroidApp.mData;
@@ -953,7 +966,7 @@ public class ShotWindow extends Activity
     mDataDownloader = mApp.mDataDownloader; // new DataDownloader( this, mApp );
     mActivity = this;
     mOnOpenDialog = false;
-    mDistoXAccuracy = new DistoXAccuracy( ); 
+    mSurveyAccuracy = new SurveyAccuracy( ); 
 
     // FIXME-28
     // RecyclerView rv = (RecyclerView) findViewById( R.id.recycler_view );
@@ -963,14 +976,14 @@ public class ShotWindow extends Activity
     mShowSplay   = new ArrayList<>();
     mDataAdapter = new DBlockAdapter( this, this, R.layout.dblock_row, new ArrayList<DBlock>() );
 
-    mListView = (HorizontalListView) findViewById(R.id.listview);
+    mListView = (MyHorizontalListView) findViewById(R.id.listview);
     mListView.setEmptyPlacholder( true );
     mButtonSize = TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
     Resources res = getResources();
     mNrButton1 = TDLevel.overExpert ? 10
                : TDLevel.overAdvanced ? 9
-               : TDLevel.overNormal ? 9
+               : TDLevel.overNormal ? 7
                : TDLevel.overBasic ?  6 : 5;
     diving = ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING );
     if ( diving ) {
@@ -1026,8 +1039,8 @@ public class ShotWindow extends Activity
     // TDAzimuth.resetRefAzimuth( this, 90 );
     setRefAzimuthButton( ); 
 
-    mButtonView1 = new HorizontalButtonView( mButton1 );
-    mButtonViewF = new HorizontalButtonView( mButtonF );
+    mButtonView1 = new MyHorizontalButtonView( mButton1 );
+    mButtonViewF = new MyHorizontalButtonView( mButtonF );
     mListView.setAdapter( mButtonView1.mAdapter );
     onMultiselect = false;
 
@@ -1064,13 +1077,6 @@ public class ShotWindow extends Activity
 
     // mSearch = new SearchResult();
   }
-
-  // void enableSketchButton( boolean enabled )
-  // {
-  //   mApp.mEnableZip = enabled;
-  //   mButton1[ BTN_PLOT - boff ].setEnabled( enabled ); // FIXME PLOT BUTTON 
-  //   TDandroid.setButtonBackground( mButton1[ BTN_PLOT - boff ], (enabled ? mBMplot : mBMplot_no) );
-  // }
 
   @Override
   public void onStart() 
@@ -1226,6 +1232,7 @@ public class ShotWindow extends Activity
     // Log.v("DistoX", "save to data mFlagSplay " + mFlagSplay );
   }
 
+  // --------------------------------------------------------------
   void doBluetooth( Button b ) // BLUETOOTH
   {
     if ( ! mDataDownloader.isDownloading() ) {
@@ -1266,60 +1273,21 @@ public class ShotWindow extends Activity
         // setConnectionStatus( mDataDownloader.getStatus() );
         mDataDownloader.doDataDownload( );
       }
-    } else if ( b == mButton1[ BTN_PLOT - boff ] ) {
+    } else if ( isButton1( b, BTN_PLOT ) ) {
       if ( TDInstance.recentPlot != null ) {
         startExistingPlot( TDInstance.recentPlot, TDInstance.recentPlotType, null );
       } else {
         // onClick( view ); // fall back to onClick
         new PlotListDialog( mActivity, this, mApp, null ).show();
       }
-    } else if ( b == mButton1[ BTN_MANUAL - boff ] ) {
+    } else if ( isButton1( b, BTN_MANUAL ) ) {
       new SurveyCalibrationDialog( mActivity /*, mApp */ ).show();
-    } else if ( b == mButton1[ BTN_SEARCH - boff ] ) { // next search pos
+    } else if ( isButton1( b, BTN_SEARCH ) ) { // next search pos
       // if ( mSearch != null ) jumpToPos( mSearch.nextPos() );
       jumpToPos( mDataAdapter.nextSearchPosition() );
     }
     return true;
   } 
-
-  void searchStation( String name, boolean splays )
-  {
-    // if ( mSearch != null ) {
-      // mSearch.set( name, mDataAdapter.searchStation( name, splays ) );
-      mDataAdapter.searchStation( name, splays );
-      // if ( ! jumpToPos( mSearch.nextPos() ) ) 
-      if ( ! jumpToPos( mDataAdapter.nextSearchPosition() ) ) {
-        TDToast.make( R.string.station_not_found );
-      }
-    // }
-  }
-
-  void searchShot( long flag ) 
-  {
-    // if ( mSearch != null ) {
-      // mSearch.set( null, mDataAdapter.searchShot( flag ) );
-      mDataAdapter.searchShot( flag );
-      // if ( ! jumpToPos( mSearch.nextPos() ) ) 
-      if ( ! jumpToPos( mDataAdapter.nextSearchPosition() ) ) {
-        TDToast.make( R.string.shot_not_found );
-      }
-    // }
-  }
-
-  boolean jumpToPos( final int pos ) 
-  {
-    if ( pos < 0 ) return false;
-    mList.post( new Runnable() {
-      @Override
-      public void run() {
-        mList.setSelection( pos );
-        View v = mList.getChildAt( pos );
-        if ( v != null ) v.requestFocus();
-      }
-    } );
-    return true;
-  }
-   
 
   @Override 
   public void onClick(View view)
@@ -1382,11 +1350,20 @@ public class ShotWindow extends Activity
         if ( TDLevel.overBasic ) {
           // mSearch = null; // invalidate search
           DBlock last_blk = mApp_mData.selectLastLegShot( TDInstance.sid );
-          // Log.v( "DistoX", "last blk: " + last_blk.toString() );
           (new ShotNewDialog( mActivity, mApp, this, last_blk, -1L )).show();
         }
-      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // SAVED STATIONS
+      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // AZIMUTH
         if ( TDLevel.overNormal ) {
+          if ( TDSetting.mAzimuthManual ) {
+            setRefAzimuth( TDAzimuth.mRefAzimuth, - TDAzimuth.mFixedExtend );
+          } else {
+            (new AzimuthDialog( mActivity, this, TDAzimuth.mRefAzimuth, mBMdial )).show();
+            // FIXME_AZIMUTH_DIAL (new AzimuthDialog( mActivity, this, TDAzimuth.mRefAzimuth, mDialBitmap )).show();
+          }
+        }
+
+      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // SAVED STATIONS
+        if ( TDLevel.overAdvanced ) {
           (new CurrentStationDialog( mActivity, this, mApp, mApp.getCurrentOrLastStation() )).show();
           // ArrayList<DBlock> list = numberSplays(); // SPLAYS splays numbering no longer active
           // if ( list != null && list.size() > 0 ) {
@@ -1394,17 +1371,8 @@ public class ShotWindow extends Activity
           // }
         }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // SEARCH
-        // String station = ( mSearch != null )? mSearch.getName() : null;
-        // new SearchDialog( mActivity, this, station ).show();
-        new SearchDialog( mActivity, this, mDataAdapter.getSearchName() ).show();
-      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // AZIMUTH
-        if ( TDLevel.overNormal ) {
-          if ( TDSetting.mAzimuthManual ) {
-            setRefAzimuth( TDAzimuth.mRefAzimuth, - TDAzimuth.mFixedExtend );
-          } else {
-            (new AzimuthDialDialog( mActivity, this, TDAzimuth.mRefAzimuth, mBMdial )).show();
-            // FIXME_AZIMUTH_DIAL (new AzimuthDialDialog( mActivity, this, TDAzimuth.mRefAzimuth, mDialBitmap )).show();
-          }
+        if ( TDLevel.overAdvanced ) {
+          new SearchDialog( mActivity, this, mDataAdapter.getSearchName() ).show();
         }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // REFRESH
         if ( TDLevel.overExpert ) {
@@ -1455,6 +1423,48 @@ public class ShotWindow extends Activity
     }
   }
 
+  // ----------------------------------------------------------------
+  // SEARCH
+
+  void searchStation( String name, boolean splays )
+  {
+    // if ( mSearch != null ) {
+      // mSearch.set( name, mDataAdapter.searchStation( name, splays ) );
+      mDataAdapter.searchStation( name, splays );
+      // if ( ! jumpToPos( mSearch.nextPos() ) ) 
+      if ( ! jumpToPos( mDataAdapter.nextSearchPosition() ) ) {
+        TDToast.make( R.string.station_not_found );
+      }
+    // }
+  }
+
+  void searchShot( long flag ) 
+  {
+    // if ( mSearch != null ) {
+      // mSearch.set( null, mDataAdapter.searchShot( flag ) );
+      mDataAdapter.searchShot( flag );
+      // if ( ! jumpToPos( mSearch.nextPos() ) ) 
+      if ( ! jumpToPos( mDataAdapter.nextSearchPosition() ) ) {
+        TDToast.make( R.string.shot_not_found );
+      }
+    // }
+  }
+
+  boolean jumpToPos( final int pos ) 
+  {
+    if ( pos < 0 ) return false;
+    mList.post( new Runnable() {
+      @Override
+      public void run() {
+        mList.setSelection( pos );
+        View v = mList.getChildAt( pos );
+        if ( v != null ) v.requestFocus();
+      }
+    } );
+    return true;
+  }
+   
+  // ----------------------------------------------------------------
   private void askMultiDelete()
   {
     Resources res = getResources();
@@ -1480,7 +1490,7 @@ public class ShotWindow extends Activity
     for ( DBlock blk : mDataAdapter.mSelect ) {
       long id = blk.mId;
       mApp_mData.deleteShot( id, TDInstance.sid, TDStatus.DELETED );
-      // mDistoXAccuracy.removeBlockAMD( blk ); // not necessary: done by updateDisplay
+      // mSurveyAccuracy.removeBlockAMD( blk ); // not necessary: done by updateDisplay
       if ( /* blk != null && */ blk.isMainLeg() ) { // == DBlock.BLOCK_MAIN_LEG 
         if ( mFlagLeg ) {
           for ( ++id; ; ++id ) {
@@ -1489,7 +1499,7 @@ public class ShotWindow extends Activity
               break;
 	    }
             mApp_mData.deleteShot( id, TDInstance.sid, TDStatus.DELETED );
-            // mDistoXAccuracy.removeBlockAMD( b );
+            // mSurveyAccuracy.removeBlockAMD( b );
           }
         } else { // set station to next leg shot
           ++id;
@@ -1507,136 +1517,9 @@ public class ShotWindow extends Activity
 
   // ------------------------------------------------------------------
 
-  public boolean hasSurveyPlot( String name )
-  {
-    return mApp_mData.hasSurveyPlot( TDInstance.sid, name+"p" );
-  }
- 
   public boolean hasSurveyStation( String start )
   {
     return mApp_mData.hasSurveyStation( TDInstance.sid, start );
-  }
-
-  public void makeNewPlot( String name, String start, boolean extended, int project )
-  {
-    long mPIDp = mApp.insert2dPlot( TDInstance.sid, name, start, extended, project );
-
-    if ( mPIDp >= 0 ) {
-      long mPIDs = mPIDp + 1L; // FIXME !!! this is true but not guaranteed
-      startDrawingWindow( start, name+"p", mPIDp, name+"s", mPIDs, PlotInfo.PLOT_PLAN, start, false ); // default no-landscape
-    // } else {
-    //   TDToast.makeBad( R.string.plot_duplicate_name );
-    }
-    // updateDisplay( );
-  }
-
-/* FIXME_SKETCH_3D 
-  public void makeNewSketch3d( String name, String st1, String st2 )
-  {
-    // FIXME xoffset yoffset, east south and vert (downwards)
-    if ( st2 != null ) {
-      if ( ! mApp_mData.hasShot( TDInstance.sid, st1, st2 ) ) {
-        TDToast.makeBad( R.string.no_shot_between_stations );
-        return;
-      }
-    } else {
-      st2 = mApp_mData.nextStation( TDInstance.sid, st1 );
-    }
-    if ( st2 != null ) {
-      float e = 0.0f; // NOTE (e,s,v) are the coord of station st1, and st1 is taken as the origin of the ref-frame
-      float s = 0.0f;
-      float v = 0.0f;
-      long mPID = mApp_mData.insertSketch3d( TDInstance.sid, -1L, name, 0L, st1, st1, st2,
-                                            0, // mApp.mDisplayWidth/(2*TopoDroidApp.mScaleFactor),
-                                            0, // mApp.mDisplayHeight/(2*TopoDroidApp.mScaleFactor),
-                                            10 * TopoDroidApp.mScaleFactor,
-                                            0, 0, 10 * TopoDroidApp.mScaleFactor,
-                                            0, 0, 10 * TopoDroidApp.mScaleFactor,
-                                            e, s, v, 180, 0 );
-      if ( mPID >= 0 ) {
-        startSketchWindow( name );
-      }
-    } else {
-      TDToast.makeBad( R.string.no_to_station );
-    }
-  }
- 
-  void startSketchWindow( String name )
-  {
-    if ( TDInstance.sid < 0 ) {
-      TDToast.make( R.string.no_survey );
-      return;
-    }
-
-    if ( ! mApp_mData.hasSketch3d( TDInstance.sid, name ) ) {
-      TDToast.makeBad( R.string.no_sketch );
-      return;
-    }
-
-    // notice when starting the SketchWindow the remote device is disconnected 
-    // FIXME mApp.disconnectRemoteDevice();
-
-    // TODO
-    Intent sketchIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, SketchWindow.class );
-    sketchIntent.putExtra( TDTag.TOPODROID_SURVEY_ID, TDInstance.sid );
-    sketchIntent.putExtra( TDTag.TOPODROID_SKETCH_NAME, name );
-    startActivity( sketchIntent );
-  }
- * END_SKETCH_3D */
-
-  // called either by a long-tap on plot button 
-  //        or a highlights
-  void startExistingPlot( String name, long type, String station ) // name = plot/sketch3d name
-  {
-    // TDLog.Log( TDLog.LOG_SHOT, "start Existing Plot \"" + name + "\" type " + type + " sid " + TDInstance.sid );
-    if ( type != PlotInfo.PLOT_SKETCH_3D ) {
-      PlotInfo plot1 =  mApp_mData.getPlotInfo( TDInstance.sid, name+"p" );
-      if ( plot1 != null ) {
-        TDInstance.setRecentPlot( name, type );
-        PlotInfo plot2 =  mApp_mData.getPlotInfo( TDInstance.sid, name+"s" );
-        startDrawingWindow( plot1.start, plot1.name, plot1.id, plot2.name, plot2.id, type, station, plot1.isLandscape() );
-        return;
-      } else {
-        TDInstance.setRecentPlot( null, 0L );
-      }
-/* FIXME_SKETCH_3D *
-    } else {
-      Sketch3dInfo sketch = mApp_mData.getSketch3dInfo( TDInstance.sid, name );
-      if ( sketch != null ) {
-        startSketchWindow( sketch.name );
-        return;
-      }
- * END_SKETCH_3D */
-    }
-    TDToast.makeBad( R.string.plot_not_found );
-  }
-
-  private void startDrawingWindow( String start, String plot1_name, long plot1_id,
-                                   String plot2_name, long plot2_id, long type, String station, boolean landscape )
-  {
-    if ( TDInstance.sid < 0 || plot1_id < 0 || plot2_id < 0 ) {
-      TDToast.makeWarn( R.string.no_survey );
-      return;
-    }
-    
-    // notice when starting the DrawingWindow the remote device is disconnected 
-    // FIXME mApp.disconnectRemoteDevice();
-    
-    Intent drawIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DrawingWindow.class );
-    drawIntent.putExtra( TDTag.TOPODROID_SURVEY_ID, TDInstance.sid );
-    drawIntent.putExtra( TDTag.TOPODROID_PLOT_NAME, plot1_name );
-    drawIntent.putExtra( TDTag.TOPODROID_PLOT_NAME2, plot2_name );
-    drawIntent.putExtra( TDTag.TOPODROID_PLOT_TYPE, type );
-    drawIntent.putExtra( TDTag.TOPODROID_PLOT_FROM, start );
-    drawIntent.putExtra( TDTag.TOPODROID_PLOT_TO, "" );
-    drawIntent.putExtra( TDTag.TOPODROID_PLOT_AZIMUTH, 0.0f );
-    drawIntent.putExtra( TDTag.TOPODROID_PLOT_CLINO, 0.0f );
-    drawIntent.putExtra( TDTag.TOPODROID_PLOT_MOVE_TO, ((station==null)? "" : station) );
-    drawIntent.putExtra( TDTag.TOPODROID_PLOT_LANDSCAPE, landscape );
-    // drawIntent.putExtra( TDTag.TOPODROID_PLOT_ID, plot1_id ); // not necessary
-    // drawIntent.putExtra( TDTag.TOPODROID_PLOT_ID2, plot2_id ); // not necessary
-
-    startActivity( drawIntent );
   }
 
   // ---------------------------------------------------------------------------------
@@ -2111,13 +1994,6 @@ public class ShotWindow extends Activity
   }
 
 
-  void deletePlot( long pid1, long pid2 )
-  {
-    mApp_mData.deletePlot( pid1, TDInstance.sid );
-    mApp_mData.deletePlot( pid2, TDInstance.sid );
-    // FIXME NOTIFY
-  }
-
   void recomputeItems( String st, int pos )
   {
     if ( mFlagSplay ) {
@@ -2177,6 +2053,15 @@ public class ShotWindow extends Activity
     mButton1[BTN_BLUETOOTH].setEnabled( enable );
   }
 
+  // void enableSketchButton( boolean enabled )
+  // {
+  //   mApp.mEnableZip = enabled;
+  //   mButton1[ BTN_PLOT - boff ].setEnabled( enabled ); // FIXME PLOT BUTTON 
+  //   TDandroid.setButtonBackground( mButton1[ BTN_PLOT - boff ], (enabled ? mBMplot : mBMplot_no) );
+  // }
+
+  // ------------------------------------------------------------------
+
   void renumberShotsAfter( DBlock blk )
   {
     // Log.v("DistoX", "renumber shots after " + blk.mLength + " " + blk.mBearing + " " + blk.mClino );
@@ -2224,6 +2109,141 @@ public class ShotWindow extends Activity
     makeNewPlot( name, start, false, azimuth );
   }
 
+  void deletePlot( long pid1, long pid2 )
+  {
+    mApp_mData.deletePlot( pid1, TDInstance.sid );
+    mApp_mData.deletePlot( pid2, TDInstance.sid );
+    // FIXME NOTIFY
+  }
+
+  public boolean hasSurveyPlot( String name )
+  {
+    return mApp_mData.hasSurveyPlot( TDInstance.sid, name+"p" );
+  }
+ 
+  public void makeNewPlot( String name, String start, boolean extended, int project )
+  {
+    long mPIDp = mApp.insert2dPlot( TDInstance.sid, name, start, extended, project );
+
+    if ( mPIDp >= 0 ) {
+      long mPIDs = mPIDp + 1L; // FIXME !!! this is true but not guaranteed
+      startDrawingWindow( start, name+"p", mPIDp, name+"s", mPIDs, PlotInfo.PLOT_PLAN, start, false ); // default no-landscape
+    // } else {
+    //   TDToast.makeBad( R.string.plot_duplicate_name );
+    }
+    // updateDisplay( );
+  }
+
+/* FIXME_SKETCH_3D 
+  public void makeNewSketch3d( String name, String st1, String st2 )
+  {
+    // FIXME xoffset yoffset, east south and vert (downwards)
+    if ( st2 != null ) {
+      if ( ! mApp_mData.hasShot( TDInstance.sid, st1, st2 ) ) {
+        TDToast.makeBad( R.string.no_shot_between_stations );
+        return;
+      }
+    } else {
+      st2 = mApp_mData.nextStation( TDInstance.sid, st1 );
+    }
+    if ( st2 != null ) {
+      float e = 0.0f; // NOTE (e,s,v) are the coord of station st1, and st1 is taken as the origin of the ref-frame
+      float s = 0.0f;
+      float v = 0.0f;
+      long mPID = mApp_mData.insertSketch3d( TDInstance.sid, -1L, name, 0L, st1, st1, st2,
+                                            0, // mApp.mDisplayWidth/(2*TopoDroidApp.mScaleFactor),
+                                            0, // mApp.mDisplayHeight/(2*TopoDroidApp.mScaleFactor),
+                                            10 * TopoDroidApp.mScaleFactor,
+                                            0, 0, 10 * TopoDroidApp.mScaleFactor,
+                                            0, 0, 10 * TopoDroidApp.mScaleFactor,
+                                            e, s, v, 180, 0 );
+      if ( mPID >= 0 ) {
+        startSketchWindow( name );
+      }
+    } else {
+      TDToast.makeBad( R.string.no_to_station );
+    }
+  }
+ 
+  void startSketchWindow( String name )
+  {
+    if ( TDInstance.sid < 0 ) {
+      TDToast.make( R.string.no_survey );
+      return;
+    }
+
+    if ( ! mApp_mData.hasSketch3d( TDInstance.sid, name ) ) {
+      TDToast.makeBad( R.string.no_sketch );
+      return;
+    }
+
+    // notice when starting the SketchWindow the remote device is disconnected 
+    // FIXME mApp.disconnectRemoteDevice();
+
+    // TODO
+    Intent sketchIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, SketchWindow.class );
+    sketchIntent.putExtra( TDTag.TOPODROID_SURVEY_ID, TDInstance.sid );
+    sketchIntent.putExtra( TDTag.TOPODROID_SKETCH_NAME, name );
+    startActivity( sketchIntent );
+  }
+ * END_SKETCH_3D */
+
+  // called either by a long-tap on plot button 
+  //        or a highlights
+  void startExistingPlot( String name, long type, String station ) // name = plot/sketch3d name
+  {
+    // TDLog.Log( TDLog.LOG_SHOT, "start Existing Plot \"" + name + "\" type " + type + " sid " + TDInstance.sid );
+    if ( type != PlotInfo.PLOT_SKETCH_3D ) {
+      PlotInfo plot1 =  mApp_mData.getPlotInfo( TDInstance.sid, name+"p" );
+      if ( plot1 != null ) {
+        TDInstance.setRecentPlot( name, type );
+        PlotInfo plot2 =  mApp_mData.getPlotInfo( TDInstance.sid, name+"s" );
+        startDrawingWindow( plot1.start, plot1.name, plot1.id, plot2.name, plot2.id, type, station, plot1.isLandscape() );
+        return;
+      } else {
+        TDInstance.setRecentPlot( null, 0L );
+      }
+/* FIXME_SKETCH_3D *
+    } else {
+      Sketch3dInfo sketch = mApp_mData.getSketch3dInfo( TDInstance.sid, name );
+      if ( sketch != null ) {
+        startSketchWindow( sketch.name );
+        return;
+      }
+ * END_SKETCH_3D */
+    }
+    TDToast.makeBad( R.string.plot_not_found );
+  }
+
+  private void startDrawingWindow( String start, String plot1_name, long plot1_id,
+                                   String plot2_name, long plot2_id, long type, String station, boolean landscape )
+  {
+    if ( TDInstance.sid < 0 || plot1_id < 0 || plot2_id < 0 ) {
+      TDToast.makeWarn( R.string.no_survey );
+      return;
+    }
+    
+    // notice when starting the DrawingWindow the remote device is disconnected 
+    // FIXME mApp.disconnectRemoteDevice();
+    
+    Intent drawIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DrawingWindow.class );
+    drawIntent.putExtra( TDTag.TOPODROID_SURVEY_ID, TDInstance.sid );
+    drawIntent.putExtra( TDTag.TOPODROID_PLOT_NAME, plot1_name );
+    drawIntent.putExtra( TDTag.TOPODROID_PLOT_NAME2, plot2_name );
+    drawIntent.putExtra( TDTag.TOPODROID_PLOT_TYPE, type );
+    drawIntent.putExtra( TDTag.TOPODROID_PLOT_FROM, start );
+    drawIntent.putExtra( TDTag.TOPODROID_PLOT_TO, "" );
+    drawIntent.putExtra( TDTag.TOPODROID_PLOT_AZIMUTH, 0.0f );
+    drawIntent.putExtra( TDTag.TOPODROID_PLOT_CLINO, 0.0f );
+    drawIntent.putExtra( TDTag.TOPODROID_PLOT_MOVE_TO, ((station==null)? "" : station) );
+    drawIntent.putExtra( TDTag.TOPODROID_PLOT_LANDSCAPE, landscape );
+    // drawIntent.putExtra( TDTag.TOPODROID_PLOT_ID, plot1_id ); // not necessary
+    // drawIntent.putExtra( TDTag.TOPODROID_PLOT_ID2, plot2_id ); // not necessary
+
+    startActivity( drawIntent );
+  }
+
+  // ------------------------------------------------------------------
   void startAudio( DBlock blk )
   {
     (new AudioDialog( mActivity, /* this */ null, blk.mId )).show();

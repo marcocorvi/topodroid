@@ -78,8 +78,8 @@ class ShotDialog extends MyDialog
   // private MyCheckBox mCBhighlight;
   private MyCheckBox mCBbackLeg = null;
 
-  private HorizontalListView mListView;
-  private HorizontalButtonView mButtonView;
+  private MyHorizontalListView mListView;
+  private MyHorizontalButtonView mButtonView;
   private Button[] mButton;
 
   private CheckBox mRBleft;
@@ -184,7 +184,7 @@ class ShotDialog extends MyDialog
 
     // Log.v("DistoX", "shot is manual " + shot_manual + " length " + shot_distance );
 
-    // shot_extra   = blk.extraString( mParent.mDistoXAccuracy );
+    // shot_extra   = blk.extraString( mParent.mSurveyAccuracy );
     shot_extra   = mParent.getBlockExtraString( blk );
     shot_extend  = blk.getExtend();
     shot_stretch = blk.getStretch(); // FIXME_STRETCH
@@ -419,10 +419,10 @@ class ShotDialog extends MyDialog
     if ( mRBsplay  != null ) mButton[k++] = mRBsplay;
     if ( mCBxSplay != null ) mButton[k++] = mCBxSplay;
 
-    mListView = (HorizontalListView) findViewById(R.id.listview);
+    mListView = (MyHorizontalListView) findViewById(R.id.listview);
     // mListView.setEmptyPlacholder( true );
     /* size = */ TopoDroidApp.setListViewHeight( mContext, mListView );
-    mButtonView = new HorizontalButtonView( mButton );
+    mButtonView = new MyHorizontalButtonView( mButton );
     mListView.setAdapter( mButtonView.mAdapter );
 
     layout4.invalidate();

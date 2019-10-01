@@ -83,7 +83,7 @@ class ImportDialog extends MyDialog
         names.add( f.getName() );
       }
     }
-    if ( names.size() > 0 ) {
+    if ( names.size() > 0 ) { // this is guaranteed
       // sort files by name (alphabetical order)
       Comparator<String> cmp = new Comparator<String>() 
       {

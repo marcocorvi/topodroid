@@ -20,7 +20,7 @@
   <string name="CWDActivity" translatable="false">page_cwd.htm</string>
   <string name="CBDdialog" translatable="false">page_cwd.htm</string>
 
-  <string name="AzimuthDialDialog" translatable="false">page_azimuth.htm</string>
+  <string name="AzimuthDialog" translatable="false">page_azimuth.htm</string>
   <string name="AudioDialog" translatable="false">page_audio.htm</string>
   <string name="CalibCheckDialog" translatable="false">page_calib_check.htm</string>
   <string name="CalibCoeffDialog" translatable="false">page_calib_coeffs.htm</string>
@@ -40,7 +40,7 @@
   <string name="DeviceX310InfoDialog" translatable="false">page_x310_info.htm</string>
   <string name="DeviceX310MemoryDialog" translatable="false">page_memory.htm</string>
   <string name="DanglingShotsDialog" translatable="false">page_dangling.htm</string>
-  <string name="DistoXStatDialog" translatable="false">page_stat2.htm</string>
+  <string name="DrawingStatDialog" translatable="false">page_stat2.htm</string>
   <string name="DistoXAnnotations" translatable="false">page_survey_notes.htm</string>
   <string name="DrawingAreaDialog" translatable="false">page_area_dialog.htm</string>
   <string name="DrawingLabelDialog" translatable="false">page_label_dialog.htm</string>

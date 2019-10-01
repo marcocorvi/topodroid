@@ -139,7 +139,7 @@ class DrawingShotDialog extends MyDialog
 	}
       } else if ( mParent.isExtendedProfile() && mBlock.isMainLeg() ) {
 	if ( mFracExtend ) {
-	  Bitmap bitmap =  MyButton.getLVRseekbarBackGround( mContext, (int)(TopoDroidApp.mDisplayWidth), (int)(20) );
+	  Bitmap bitmap =  MyButton.getLVRseekbarBackGround( mContext, (int)(TopoDroidApp.mDisplayWidth), 20 );
 	  if ( bitmap != null ) {
 	    BitmapDrawable background = new BitmapDrawable( mContext.getResources(), bitmap );
             TDandroid.setSeekBarBackground( mStretchBar, background ); 

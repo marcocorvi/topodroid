@@ -48,6 +48,9 @@ public class DeviceList extends Activity
   public void onCreate(Bundle savedInstanceState)
   {
     super.onCreate( savedInstanceState );
+
+    TDandroid.setOrientation( this );
+
     setContentView(R.layout.device_list);
     mApp = (TopoDroidApp) getApplication();
 

@@ -48,7 +48,7 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
      mData    = data;
      mSurvey  = survey;
      mDevice  = device;
-     mType    = (int)type;
+     mType    = type;
      mToast   = toast;
   }
 

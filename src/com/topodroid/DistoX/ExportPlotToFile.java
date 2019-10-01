@@ -65,7 +65,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
 	  return false;
         }
         // Log.v("DistoX", "Export to File: " + filename );
-        if ( filename != null ) {
+        // if ( filename != null ) { // always true
           // final FileOutputStream out = new FileOutputStream( filename );
           TDLog.Log( TDLog.LOG_IO, "export plot to file " + filename );
           if ( mExt.equals("shp") ) { 
@@ -85,7 +85,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
             fw.close();
 	  }
           return true;
-        }
+        // }
       } catch (Exception e) {
         e.printStackTrace();
       }

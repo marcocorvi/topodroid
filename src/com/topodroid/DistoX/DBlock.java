@@ -593,7 +593,7 @@ class DBlock
     return String.format(Locale.US, "%.1f", mDepth * TDSetting.mUnitLength );
   }
 
-  // public String extraString( DistoXAccuracy accu )
+  // public String extraString( SurveyAccuracy accu )
   // {
   //   return String.format(Locale.US, "A %.1f  M %.1f  D %.1f", 
   //     accu.deltaAcc( mAcceleration ), 

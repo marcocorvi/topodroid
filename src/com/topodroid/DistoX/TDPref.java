@@ -449,13 +449,14 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5], ctx, hlp ),
       makeLst( cat, key[ 6], tit[ 6], dsc[ 6], A, def[ 6], R.array.localUserMan, R.array.localUserManValue, ctx, hlp ),
       makeLst( cat, key[ 7], tit[ 7], dsc[ 7], N, def[ 7], R.array.locale, R.array.localeValue, ctx, hlp ),
+      makeLst( cat, key[ 8], tit[ 8], dsc[ 8], T, def[ 8], R.array.orientation, R.array.orientationValue, ctx, hlp ),
       // makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], D, def[ 8], ctx, hlp ), // IF_COSURVEY
-      makeFwd( cat, key[ 8], tit[ 8],          B,          ctx, hlp ),
       makeFwd( cat, key[ 9], tit[ 9],          B,          ctx, hlp ),
       makeFwd( cat, key[10], tit[10],          B,          ctx, hlp ),
       makeFwd( cat, key[11], tit[11],          B,          ctx, hlp ),
-      makeFwd( cat, key[12], tit[12],          T,          ctx, hlp ),    // GEEK
-      makeFwd( cat, key[13], tit[13],          E,          ctx, hlp ),    // EXPORT SETTINGS
+      makeFwd( cat, key[12], tit[12],          B,          ctx, hlp ),
+      makeFwd( cat, key[13], tit[13],          T,          ctx, hlp ),    // GEEK
+      makeFwd( cat, key[14], tit[14],          E,          ctx, hlp ),    // EXPORT SETTINGS
     };
   }
 

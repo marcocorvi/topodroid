@@ -298,21 +298,22 @@ class ParserTherion extends ImportParser
                   for ( ++j; j<vals_len; ++j ) {
                     if ( vals[j].length() == 0 ) continue;
                     if ( vals[j].startsWith("\"") ) {
-                      StringBuilder sb = new StringBuilder();
-                      sb.append( vals[j].substring(1) );
-                      // mTitle = vals[j].substring(1);
-                      for ( ++j; j<vals_len; ++j ) {
-                        if ( vals[j].length() == 0 ) continue;
-                        if ( vals[j].endsWith( "\"" ) ) {
-                          sb.append(" ").append(vals[j].substring(0, vals[j].length()-1));
-                          // mTitle += " " + vals[j].substring(0, vals[j].length()-1);
-                          break;
-                        } else {
-                          sb.append(" ").append(vals[j] );
-                          // mTitle += " " + vals[j];
+                      if ( vals[j].endsWith( "\"" ) ) {
+                        mTitle = vals[j].substring(1,vals[j].length()-1);
+                      } else {
+                        StringBuilder sb = new StringBuilder();
+                        sb.append( vals[j].substring(1) );
+                        for ( ++j; j<vals_len; ++j ) {
+                          if ( vals[j].length() == 0 ) continue;
+                          if ( vals[j].endsWith( "\"" ) ) {
+                            sb.append(" ").append(vals[j].substring(0, vals[j].length()-1));
+                            break;
+                          } else {
+                            sb.append(" ").append(vals[j] );
+                          }
                         }
+                        mTitle = sb.toString();
                       }
-                      mTitle = sb.toString();
                     } else {
                       mTitle = vals[j];
                     }
@@ -477,20 +478,23 @@ class ParserTherion extends ImportParser
                   String name = extractStationName( vals[1] );
                   String comment = vals[2];
                   if ( comment.startsWith( "\"" ) ) {
-                    int len = comment.length();
-                    StringBuilder sb = new StringBuilder();
-                    sb.append( comment.substring( 1 ) );
-                    for ( int kk=3; kk<vals_len; ++kk ) {
-                      if ( vals[kk].endsWith("\"") ) {
-                        sb.append(" ");
-                        sb.append( vals[kk].substring(0, vals[kk].length()-1) );
-                        break;
-                      } else {
-                        sb.append(" ");
-                        sb.append( vals[kk] );
+                    if ( comment.endsWith( "\"" ) ) {
+                      comment = comment.substring(1,comment.length()-1);
+                    } else {
+                      StringBuilder sb = new StringBuilder();
+                      sb.append( comment.substring( 1 ) );
+                      for ( int kk=3; kk<vals_len; ++kk ) {
+                        if ( vals[kk].endsWith("\"") ) {
+                          sb.append(" ");
+                          sb.append( vals[kk].substring(0, vals[kk].length()-1) );
+                          break;
+                        } else {
+                          sb.append(" ");
+                          sb.append( vals[kk] );
+                        }
                       }
+                      comment = sb.toString();
                     }
-                    comment = sb.toString();
                   }
                   // Log.v("DistoX", "Therion parser station " + name + " comment <" + comment + ">" );
                   if ( comment.length() > 0 ) {

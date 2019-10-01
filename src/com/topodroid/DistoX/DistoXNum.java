@@ -302,13 +302,13 @@ class DistoXNum
   {
     // Log.v("DistoX-LOOP", "shortest path " + s1.name + " " + s2.name );
     Stack<NumStation> stack = new Stack<NumStation>();
-    mStations.setShortestPath( 100000.0f );
+    mStations.initShortestPath( 100000.0f );
     // for ( NumStation s : mStations ) {
     //   s.mShortpathDist = new NumShortpath( 100000.0f, 0 );
     //   // s.path = null;
     // }
 
-    s1.mShortpathDist.reset( 0, 0 ); // clear 
+    s1.mShortpathDist.resetShortpath( 0, 0, 0 ); // clear 
     stack.push( s1 );
     while ( ! stack.empty() ) {
       NumStation s = stack.pop();
@@ -324,7 +324,7 @@ class DistoXNum
             float d = sp.mDist + len;
             if ( d < etp.mDist ) {
 	      // Log.v("DistoX-LOOP", "set short dist T " + e.to.name + " : " + d );
-              etp.reset( d, sp.mDist2 + len*len );
+              etp.resetShortpath( sp.mNr+1, d, sp.mDist2 + len*len );
               // e.to.path = from;
               stack.push( e.to );
             }
@@ -335,7 +335,7 @@ class DistoXNum
             float d = sp.mDist + len;
             if ( d < efp.mDist ) {
 	      // Log.v("DistoX-LOOP", "set short dist F " + e.from.name + " : " + d );
-              efp.reset( d, sp.mDist2 + len*len );
+              efp.resetShortpath( sp.mNr+1, d, sp.mDist2 + len*len );
               // e.from.path = from;
               stack.push( e.from );
             }
@@ -1621,6 +1621,13 @@ class DistoXNum
 
   /** get the string description of the loop closure error(s)
    * need the loop length to compute the percent error
+   *
+   * @param format    string format
+   * @param at        closed station (to)
+   * @param fr        closing station (from)
+   * @param d         closure distance
+   * @param b         closure azimuth
+   * @param c         closure clino
    */
   private String getClosureError( String format, NumStation at, NumStation fr, float d, float b, float c, NumShortpath short_path, float length )
   {
@@ -1633,20 +1640,24 @@ class DistoXNum
     // Log.v("DistoX-LOOP", "closure from " + fr.name + " " + fr.e + " " + fr.s + " " + fr.v );
     // Log.v("DistoX-LOOP", "closure diff " + (fr.e-at.e) + " " + (fr.s-at.s) + " " + (fr.v-at.v) );
     // Log.v("DistoX-LOOP", "closure " + te + " " + ts + " " + tv );
-    float dv = TDMath.abs( fr.v - d * TDMath.sind(c) - at.v );
+
+    float dv = TDMath.abs( fr.v - d * TDMath.sind(c) - at.v );  // closure vertical error
     float h0 = d * TDMath.abs( TDMath.cosd(c) );
-    float ds = TDMath.abs( fr.s - h0 * TDMath.cosd( b ) - at.s );
-    float de = TDMath.abs( fr.e + h0 * TDMath.sind( b ) - at.e );
+    float ds = TDMath.abs( fr.s - h0 * TDMath.cosd( b ) - at.s ); // closure south error
+    float de = TDMath.abs( fr.e + h0 * TDMath.sind( b ) - at.e ); // closure east error
     float dh = ds*ds + de*de;
     float dl = TDMath.sqrt( dh + dv*dv );
     dh = TDMath.sqrt( dh );
 
+    int nr     = 1 + short_path.mNr;
     float len  = length + short_path.mDist;
     float len2 = length*length + short_path.mDist2;
     float error = (dl*100) / len;
-    float angle = dl / TDMath.sqrt( len2 ) * TDMath.RAD2DEG;
+    // float angle = dl / TDMath.sqrt( len2 ) * TDMath.RAD2DEG;
+    float angle = TDMath.sqrt( nr ) * dl / len * TDMath.RAD2DEG;
+
     // return String.format(Locale.US, "%s-%s %.1f/%.1f m [%.1f %.1f] %.1f%% (%.2f &#00b0;)", fr.name, at.name,  dl, len, dh, dv, error, angle );
-    return String.format(Locale.US, format, fr.name, at.name,  dl, len, dh, dv, error, angle );
+    return String.format(Locale.US, format, fr.name, at.name, nr, dl, len, dh, dv, error, angle );
   }
 }
 

@@ -69,7 +69,7 @@ class DistoXStationName
     // n1 == n2 compare rest of the string (note k1 == k2)
     if ( k1 == l1 ) return true;  // nnn < nnn...
     if ( k2 == l2 ) return false; // nnn... > nnn
-    int len = ( l1 < l2 )? l1 : l2;
+    int len = Math.min(l1, l2);
     for ( int k = k1; k < len; ++k ) {
       if ( ch1[k] < ch2[k] ) return true;
       if ( ch1[k] > ch2[k] ) return false;
@@ -136,7 +136,7 @@ class DistoXStationName
           } 
           return Integer.toString( n+1 );
         } else {
-          return name + 1;
+          return name + "1";
         }
       }
     }
