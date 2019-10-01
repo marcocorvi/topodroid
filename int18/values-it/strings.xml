@@ -941,6 +941,8 @@
 
   <string name="pref_locale_title">Lingua</string>
   <string name="pref_locale_summary">Lingua</string>
+  <!-- TODO string name="pref_orientation_title">Screen orientation</string -->
+  <!-- TODO string name="pref_orientation_summary">App screen orientation</string -->
 
   <string name="pref_raw_data_title">Dati grezzi</string>
   <string name="pref_raw_data_summary">Mostra dati grezzi</string>

@@ -439,6 +439,8 @@ public class MainWindow extends Activity
   {
     super.onCreate( savedInstanceState );
     
+    TDandroid.setScreenOrientation( this );
+
     // TDLog.Profile("TDActivity onCreate");
     setContentView(R.layout.topodroid_activity);
     mApp = (TopoDroidApp) getApplication();

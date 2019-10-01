@@ -110,6 +110,9 @@ public class PtCmapActivity extends Activity
   public void onCreate( Bundle b )
   {
     super.onCreate( b );
+
+    TDandroid.setScreenOrientation( this );
+
     setContentView(R.layout.pt_cmap_activity);
     mApp = (TopoDroidApp) getApplication();
 

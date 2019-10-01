@@ -229,7 +229,7 @@ public class DeviceActivity extends Activity
   {
     super.onCreate(savedInstanceState);
 
-    TDandroid.setOrientation( this );
+    TDandroid.setScreenOrientation( this );
 
     // TDLog.Debug("device activity on create");
     mApp = (TopoDroidApp) getApplication();

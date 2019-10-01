@@ -152,7 +152,7 @@ public class PhotoActivity extends Activity
   {
     super.onCreate( savedInstanceState );
 
-    TDandroid.setOrientation( this );
+    TDandroid.setScreenOrientation( this );
 
     setContentView(R.layout.main_photo);
     // mApp = (TopoDroidApp) getApplication();

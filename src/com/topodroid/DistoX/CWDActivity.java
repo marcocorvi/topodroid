@@ -167,6 +167,9 @@ public class CWDActivity extends Activity
   public void onCreate( Bundle b )
   {
     super.onCreate( b );
+
+    TDandroid.setScreenOrientation( this );
+
     setContentView(R.layout.cwd_activity);
     mApp = (TopoDroidApp) getApplication();
     mBaseName = TDInstance.cbd;

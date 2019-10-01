@@ -205,7 +205,7 @@ public class SurveyWindow extends Activity
   {
     super.onCreate( savedInstanceState );
 
-    TDandroid.setOrientation( this );
+    TDandroid.setScreenOrientation( this );
 
     mApp = (TopoDroidApp)getApplication();
     mApp_mData = TopoDroidApp.mData;

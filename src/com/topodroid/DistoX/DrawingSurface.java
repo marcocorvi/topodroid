@@ -12,7 +12,8 @@
 package com.topodroid.DistoX;
 
 import android.content.Context;
-import android.graphics.*; // Bitmap
+
+import android.app.Activity;
 // import android.os.Handler;
 // import android.os.Message;
 import android.util.AttributeSet;
@@ -22,8 +23,13 @@ import android.view.SurfaceView;
 
 // import android.view.MotionEvent;
 
-// import android.graphics.Path;
-// import android.graphics.Paint;
+import android.graphics.Canvas;
+import android.graphics.Bitmap;
+import android.graphics.Path;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.PointF;
+import android.graphics.PorterDuff;
 
 import java.util.ArrayList;
 // import java.util.TreeSet;
@@ -250,10 +256,10 @@ class DrawingSurface extends SurfaceView
    *  X -> (x+dx)*s = x*s + dx*s
    *  Y -> (y+dy)*s = y*s + dy*s
    */
-  public void setTransform( float dx, float dy, float s, boolean landscape )
+  public void setTransform( Activity act, float dx, float dy, float s, boolean landscape )
   {
     if ( commandManager != null ) // test for Xiaomi readmi note
-      commandManager.setTransform( dx, dy, s, landscape );
+      commandManager.setTransform( act, dx, dy, s, landscape );
   }
 
   void splitLine( DrawingLinePath line, LinePoint lp ) { commandManager.splitLine( line, lp ); }

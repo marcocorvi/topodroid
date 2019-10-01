@@ -107,7 +107,7 @@ public class FixedActivity extends Activity
   {
     super.onCreate(savedInstanceState);
 
-    TDandroid.setOrientation( this );
+    TDandroid.setScreenOrientation( this );
 
     // mApp = (TopoDroidApp)getApplication();
     mContext = this;

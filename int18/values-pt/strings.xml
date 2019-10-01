@@ -939,6 +939,8 @@
 
   <string name="pref_locale_title">Língua</string>
   <string name="pref_locale_summary">Língua</string>
+  <!-- TODO string name="pref_orientation_title">Screen orientation</string -->
+  <!-- TODO string name="pref_orientation_summary">App screen orientation</string -->
 
   <string name="pref_raw_data_title">Dados brutos</string>
   <string name="pref_raw_data_summary">Exibir dados brutos</string>

@@ -946,6 +946,8 @@
 
   <string name="pref_locale_title">Limbă</string>
   <string name="pref_locale_summary">Limbă</string>
+  <!-- TODO string name="pref_orientation_title">Screen orientation</string -->
+  <!-- TODO string name="pref_orientation_summary">App screen orientation</string -->
 
   <string name="pref_raw_data_title">Date brute</string>
   <string name="pref_raw_data_summary">Arată date brute</string>

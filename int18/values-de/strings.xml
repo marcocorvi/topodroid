@@ -960,6 +960,8 @@
 
   <string name="pref_locale_title">Sprache</string>
   <string name="pref_locale_summary">Auswahl der Sprache</string>
+  <!-- TODO string name="pref_orientation_title">Screen orientation</string -->
+  <!-- TODO string name="pref_orientation_summary">App screen orientation</string -->
 
   <string name="pref_raw_data_title">Rohdaten anzeigen</string>
   <string name="pref_raw_data_summary">Rohdaten anzeigen</string>

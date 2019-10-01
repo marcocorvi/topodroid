@@ -49,7 +49,7 @@ public class DeviceList extends Activity
   {
     super.onCreate( savedInstanceState );
 
-    TDandroid.setOrientation( this );
+    TDandroid.setScreenOrientation( this );
 
     setContentView(R.layout.device_list);
     mApp = (TopoDroidApp) getApplication();

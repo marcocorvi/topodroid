@@ -16,6 +16,8 @@ package com.topodroid.DistoX;
 import android.content.Intent;
 import android.content.Context;
 // import android.content.res.Resources;
+import android.content.res.Configuration;
+
 import android.os.Bundle;
 import android.os.AsyncTask;
 import android.app.Activity;
@@ -144,6 +146,8 @@ public class TDPrefActivity extends Activity
   public void onCreate(Bundle savedInstanceState)
   {
     super.onCreate( savedInstanceState );
+
+    TDandroid.setScreenOrientation( this );
 
     // Log.v("DistoX", "TDPrefActivity::onCreate");
 
@@ -407,5 +411,18 @@ public class TDPrefActivity extends Activity
         break;
     }
   }
+
+  // @Override
+  // public void onConfigurationChanged( Configuration new_cfg )
+  // {
+  //   super.onConfigurationChanged( new_cfg );
+  //   if ( new_cfg.orientation == Configuration.ORIENTATION_LANDSCAPE ) {
+  //     TDLog.Error( "landscape" );
+  //   } else if ( new_cfg.orientation == Configuration.ORIENTATION_PORTRAIT ) {
+  //     TDLog.Error( "portrait" );
+  //   } else {
+  //     TDLog.Error( "unknown" );
+  //   }
+  // }
 
 }

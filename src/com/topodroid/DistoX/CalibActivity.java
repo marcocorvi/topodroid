@@ -143,7 +143,7 @@ public class CalibActivity extends Activity
   {
     super.onCreate(savedInstanceState);
 
-    TDandroid.setOrientation( this );
+    TDandroid.setScreenOrientation( this );
 
     mApp     = (TopoDroidApp)getApplication();
     setContentView(R.layout.calib_activity);

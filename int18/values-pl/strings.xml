@@ -962,6 +962,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
   <string name="pref_locale_title">Język</string>
   <string name="pref_locale_summary">Język aplikacji</string>
+  <!-- TODO string name="pref_orientation_title">Screen orientation</string -->
+  <!-- TODO string name="pref_orientation_summary">App screen orientation</string -->
 
   <string name="pref_raw_data_title">Dane nieprzetworzone</string>
   <string name="pref_raw_data_summary">Pokaż nieprzetworzone dane kalibracji</string>

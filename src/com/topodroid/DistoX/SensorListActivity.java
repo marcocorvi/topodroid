@@ -126,7 +126,7 @@ public class SensorListActivity extends Activity
   {
     super.onCreate( savedInstanceState );
 
-    TDandroid.setOrientation( this );
+    TDandroid.setScreenOrientation( this );
 
     setContentView(R.layout.sensor_list_activity);
     

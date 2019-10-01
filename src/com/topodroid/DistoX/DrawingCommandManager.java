@@ -14,7 +14,9 @@ package com.topodroid.DistoX;
 import android.util.Log;
 
 import android.content.res.Configuration;
-// import android.app.Activity;
+import android.app.Activity;
+import android.os.Build;
+// import android.os.Handler;
 
 import android.graphics.Canvas;
 import android.graphics.Matrix;
@@ -26,7 +28,8 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 // import android.graphics.Path.Direction;
-// import android.os.Handler;
+import android.view.Display;
+// import android.view.Surface;
 
 // import java.util.Iterator;
 import java.util.List;
@@ -653,16 +656,30 @@ class DrawingCommandManager
   /* Set the transform matrix for the canvas rendering of the drawing
    * The matrix is diag(s*dx, s*dy)
    */
-  void setTransform( float dx, float dy, float s, boolean landscape )
+  void setTransform( Activity act, float dx, float dy, float s, boolean landscape )
   {
-    int orientation = TDInstance.context.getResources().getConfiguration().orientation;
-    float hh = TopoDroidApp.mDisplayHeight;
-    float ww = TopoDroidApp.mDisplayWidth;
-    if ( orientation == Configuration.ORIENTATION_LANDSCAPE ) {
-      ww = TopoDroidApp.mDisplayHeight;
-      hh = TopoDroidApp.mDisplayWidth;
+    // int orientation = TDInstance.context.getResources().getConfiguration().orientation;
+    // float hh = TopoDroidApp.mDisplayHeight;
+    // float ww = TopoDroidApp.mDisplayWidth;
+    // if ( orientation == Configuration.ORIENTATION_LANDSCAPE ) {
+    //   ww = TopoDroidApp.mDisplayHeight;
+    //   hh = TopoDroidApp.mDisplayWidth;
+    // }
+    // if ( ww < hh ) { ww = hh; } else { hh = ww; }
+
+    Display d = act.getWindowManager().getDefaultDisplay();
+    int r = d.getRotation();
+    float ww, hh;
+    if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR2 ) {
+      hh = d.getHeight();
+      ww = d.getWidth();
+    } else {
+      Point pt = new Point();
+      d.getSize( pt );
+      hh = pt.y;
+      ww = pt.x;
     }
-    if ( ww < hh ) { ww = hh; } else { hh = ww; }
+    // Log.v( "DistoX-RR", "R " + r + " W " + ww + " H " + hh );
 
     mLandscape = landscape;
     mScale  = 1 / s;

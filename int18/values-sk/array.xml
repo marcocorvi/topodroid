@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <!-- TODO string-array name="orientation">
+     <item name="unspecified">unspecified</item>
+     <item name="portrait">portrait</item>
+     <item name="landscape">landscape</item>
+  </string-array -->
+
   <string-array name="splayDash">
      <item name="none">Žiadny</item>
      <item name="plan">Podľa Uhola</item>

@@ -71,7 +71,7 @@ class ProjectionDialog extends MyDialog
   private final ShotWindow mParent;
   // private final DrawingUtil mDrawingUtil;
 
-  private ProjectionSurface mDrawingSurface;
+  private ProjectionSurface mProjectionSurface;
   private SeekBar mSeekBar;
   private Button  mBtnOk;
   private Button  mBtnPlus;
@@ -156,8 +156,8 @@ class ProjectionDialog extends MyDialog
     mOffset.x -= mDisplayCenter.x*(1/zoom-1/mZoom);
     mOffset.y -= mDisplayCenter.y*(1/zoom-1/mZoom);
     // Log.v("DistoX", "change zoom " + mOffset.x + " " + mOffset.y + " " + mZoom );
-    mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
-    // mDrawingSurface.refresh();
+    mProjectionSurface.setTransform( mOffset.x, mOffset.y, mZoom );
+    // mProjectionSurface.refresh();
     // mZoomCtrl.hide();
     // if ( mZoomBtnsCtrlOn ) mZoomBtnsCtrl.setVisible( false );
   }
@@ -169,7 +169,7 @@ class ProjectionDialog extends MyDialog
   // public void zoomView( )
   // {
   //   // TDLog.Log( TDLog.LOG_PLOT, "zoomView ");
-  //   DrawingZoomDialog zoom = new DrawingZoomDialog( mDrawingSurface.getContext(), this );
+  //   DrawingZoomDialog zoom = new DrawingZoomDialog( mProjectionSurface.getContext(), this );
   //   zoom.show();
   // }
 
@@ -189,14 +189,14 @@ class ProjectionDialog extends MyDialog
     dpath.mPath = new Path();
     dpath.mPath.moveTo( x1, y1 );
     dpath.mPath.lineTo( x2, y2 );
-    mDrawingSurface.addFixedPath( dpath, splay );
+    mProjectionSurface.addFixedPath( dpath, splay );
   }
 
   // --------------------------------------------------------------------------------------
 
   private void computeReferences( )
   {
-    mDrawingSurface.clearReferences( );
+    mProjectionSurface.clearReferences( );
     // Log.v("DistoX", "refs " + mOffset.x + " " + mOffset.y + " " + mZoom + " " + mAzimuth );
 
     float cosp = TDMath.cosd( mAzimuth );
@@ -244,7 +244,7 @@ class ProjectionDialog extends MyDialog
 	float y1 = st.v; // - dy;
         h1 = DrawingUtil.toSceneX( x1, y1 );
         v1 = DrawingUtil.toSceneY( x1, y1 );
-        mDrawingSurface.addDrawingStationName( st, h1, v1 );
+        mProjectionSurface.addDrawingStationName( st, h1, v1 );
       }
     }
 
@@ -321,12 +321,12 @@ class ProjectionDialog extends MyDialog
     mDisplayCenter = new PointF( displayWidth / 2, displayHeight / 2);
     // Log.v("DistoX", "surface " + mOffset.x + " " + mOffset.y + " " + mZoom );
 
-    mDrawingSurface = (ProjectionSurface) findViewById(R.id.drawingSurface);
-    // mDrawingSurface.setZoomer( this );
-    mDrawingSurface.setProjectionDialog( this );
-    mDrawingSurface.setOnTouchListener(this);
-    // mDrawingSurface.setOnLongClickListener(this);
-    // mDrawingSurface.setBuiltInZoomControls(true);
+    mProjectionSurface = (ProjectionSurface) findViewById(R.id.drawingSurface);
+    // mProjectionSurface.setZoomer( this );
+    mProjectionSurface.setProjectionDialog( this );
+    mProjectionSurface.setOnTouchListener(this);
+    // mProjectionSurface.setOnLongClickListener(this);
+    // mProjectionSurface.setBuiltInZoomControls(true);
 
     mZoomView = (View) findViewById(R.id.zoomView );
     mZoomBtnsCtrl = new ZoomButtonsController( mZoomView );
@@ -416,7 +416,7 @@ class ProjectionDialog extends MyDialog
   {
     // mOffset.x = w/2;
     // mOffset.y = h/2;
-    // mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
+    // mProjectionSurface.setTransform( mOffset.x, mOffset.y, mZoom );
   }
 
 // ----------------------------------------------------------------------------
@@ -444,7 +444,7 @@ class ProjectionDialog extends MyDialog
         mOffset.x = ( mNum.surveyEmax() + mNum.surveyEmin() )/ 2;
         mOffset.y = ( mNum.surveySmax() + mNum.surveySmin() )/ 2;
 
-        mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
+        mProjectionSurface.setTransform( mOffset.x, mOffset.y, mZoom );
       }
    }
 
@@ -508,8 +508,8 @@ class ProjectionDialog extends MyDialog
         mOffset.x += x_shift / mZoom;                // add shift to offset
         mOffset.y += y_shift / mZoom; 
         // Log.v("DistoX", "move canvas " + mOffset.x + " " + mOffset.y + " " + mZoom );
-        mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
-        // mDrawingSurface.refresh();
+        mProjectionSurface.setTransform( mOffset.x, mOffset.y, mZoom );
+        // mProjectionSurface.refresh();
       }
    }
 
@@ -612,7 +612,7 @@ class ProjectionDialog extends MyDialog
    {
      Button b = (Button)view;
      if ( b == mBtnOk ) {
-       mDrawingSurface.stopDrawingThread();
+       mProjectionSurface.stopDrawingThread();
        mParent.doProjectedProfile( mName, mFrom, mAzimuth );
        dismiss();
      } else if ( b == mBtnPlus ) {
@@ -625,7 +625,7 @@ class ProjectionDialog extends MyDialog
    @Override
    public void onBackPressed()
    {
-     mDrawingSurface.stopDrawingThread();
+     mProjectionSurface.stopDrawingThread();
      dismiss();
    }
 

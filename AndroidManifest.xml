@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="401139"
-      android:versionName="4.1.4t"
+      android:versionCode="401140"
+      android:versionName="4.1.4u"
     >
     <!-- android:debuggable="true" -->
     <!-- Android SDK dependencies:
@@ -74,6 +74,7 @@
 
         <activity android:name=".MainWindow"
 	  android:theme="@style/Theme.FullScreen"
+          android:configChanges="orientation|screenSize"
           >
           <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -88,47 +89,56 @@
 
         <activity android:name=".FixedActivity"
 	  android:theme="@style/Theme.FullScreen"
+          android:configChanges="orientation|screenSize"
           >
         </activity>
 
         <activity android:name=".GMActivity"
 	  android:theme="@style/Theme.FullScreen"
+          android:configChanges="orientation|screenSize"
           >
         </activity>
 
         <activity android:name=".CalibActivity"
 	  android:theme="@style/Theme.FullScreen"
+          android:configChanges="orientation|screenSize"
           >
         </activity>
 
         <activity android:name=".SurveyWindow"
 	  android:theme="@style/Theme.FullScreen"
+          android:configChanges="orientation|screenSize"
           >
         </activity>
 
         <activity android:name=".ShotWindow"
 	  android:theme="@style/Theme.FullScreen"
+          android:configChanges="orientation|screenSize"
           >
         </activity>
 
         <activity android:name=".SensorActivity"
 	  android:theme="@style/Theme.FullScreen"
+          android:configChanges="orientation|screenSize"
           android:windowSoftInputMode="stateHidden|adjustResize"
           >
         </activity>
 
         <activity android:name=".DeviceActivity"
 	  android:theme="@style/Theme.FullScreen"
+          android:configChanges="orientation|screenSize"
           >
         </activity>
 
         <activity android:name=".DeviceList"
 	  android:theme="@style/Theme.FullScreen"
+          android:configChanges="orientation|screenSize"
           >
         </activity>
 
         <activity android:name=".DrawingWindow"
 	  android:theme="@style/Theme.FullScreen"
+          android:configChanges="orientation|screenSize"
           >
           <intent-filter>
             <action android:name="android.intent.action.VIEW" />
@@ -138,6 +148,7 @@
 
         <activity android:name=".OverviewWindow"
 	  android:theme="@style/Theme.FullScreen"
+          android:configChanges="orientation|screenSize"
           >
           <intent-filter>
             <action android:name="android.intent.action.VIEW" />
@@ -145,17 +156,19 @@
           </intent-filter>
         </activity>
 
-        <activity android:name=".SketchWindow"
+        <!-- activity android:name=".SketchWindow"
 	  android:theme="@style/Theme.FullScreen"
+          android:configChanges="orientation|screenSize"
           >
           <intent-filter>
             <action android:name="android.intent.action.VIEW" />
             <category android:name="android.intent.category.DEFAULT" />
           </intent-filter>
-        </activity>
+        </activity -->
 
         <activity android:name=".UserManualActivity"
 	  android:theme="@style/Theme.FullScreen"
+          android:configChanges="orientation|screenSize"
           >
           <intent-filter>
               <action android:name="android.intent.action.VIEW" />
@@ -166,29 +179,34 @@
 	<activity android:name=".TDPrefActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:windowSoftInputMode="stateHidden"
-	  android:screenOrientation="portrait"
+          android:configChanges="orientation|screenSize"
           >
+	  <!-- android:screenOrientation="portrait" -->
         </activity>
 
         <activity android:name=".CWDActivity"
 	  android:theme="@style/Theme.FullScreen"
-	  android:screenOrientation="portrait"
+          android:configChanges="orientation|screenSize"
           >
+	  <!-- android:screenOrientation="portrait" -->
         </activity>
 
         <activity android:name=".PtCmapActivity"
 	  android:theme="@style/Theme.FullScreen"
-	  android:screenOrientation="portrait"
+          android:configChanges="orientation|screenSize"
           >
+	  <!-- android:screenOrientation="portrait" -->
         </activity>
 
         <activity android:name=".PhotoActivity"
 	  android:theme="@style/Theme.FullScreen"
+          android:configChanges="orientation|screenSize"
           >
         </activity>
 
         <activity android:name=".SensorListActivity"
 	  android:theme="@style/Theme.FullScreen"
+          android:configChanges="orientation|screenSize"
           >
         </activity>
 

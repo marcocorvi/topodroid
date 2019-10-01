@@ -16,6 +16,7 @@ package com.topodroid.DistoX;
 // import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.content.res.Configuration;
 
 import android.util.TypedValue;
 
@@ -30,6 +31,7 @@ import android.graphics.Matrix;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+
 import android.view.MotionEvent;
 import android.view.View;
 // import android.widget.LinearLayout;
@@ -201,7 +203,7 @@ public class OverviewWindow extends ItemDrawer
       // Log.v( TopoDroidApp.TAG, "zoom " + mZoom );
       mOffset.x -= mDisplayCenter.x*(1/zoom-1/mZoom);
       mOffset.y -= mDisplayCenter.y*(1/zoom-1/mZoom);
-      mOverviewSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
+      mOverviewSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
       // mOverviewSurface.refresh();
       // mZoomCtrl.hide();
       // mZoomBtnsCtrl.setVisible( false );
@@ -231,7 +233,7 @@ public class OverviewWindow extends ItemDrawer
     //     
     //   // TDLog.Log(TDLog.LOG_PLOT, "zoom one to " + mZoom );
     //     
-    //   mOverviewSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
+    //   mOverviewSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
     //   // mOverviewSurface.refresh();
     // }
 
@@ -409,7 +411,7 @@ public class OverviewWindow extends ItemDrawer
     {
       super.onCreate(savedInstanceState);
 
-      TDandroid.setOrientation( this );
+      TDandroid.setScreenOrientation( this );
 
 
       mCrossPath = new Path();
@@ -511,7 +513,7 @@ public class OverviewWindow extends ItemDrawer
 
       mOffset.x   += extras.getFloat( TDTag.TOPODROID_PLOT_XOFF );
       mOffset.y   += extras.getFloat( TDTag.TOPODROID_PLOT_YOFF );
-      mOverviewSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
+      mOverviewSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
     }
 
     @Override
@@ -710,7 +712,7 @@ public class OverviewWindow extends ItemDrawer
    //   mOffset.y = plot.yoffset; 
    //   mZoom     = plot.zoom;    
    //   // Log.v("DistoX", "reset ref " + mOffset.x + " " + mOffset.y + " " + mZoom );
-   //   mOverviewSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
+   //   mOverviewSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
    //   // mOverviewSurface.refresh();
    // }
 
@@ -793,7 +795,7 @@ public class OverviewWindow extends ItemDrawer
     if ( Math.abs( x_shift ) < 60 && Math.abs( y_shift ) < 60 ) {
       mOffset.x += x_shift / mZoom;                // add shift to offset
       mOffset.y += y_shift / mZoom; 
-      mOverviewSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
+      mOverviewSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
     }
 
   }
@@ -803,7 +805,7 @@ public class OverviewWindow extends ItemDrawer
     if ( Math.abs( x_shift ) < 60 && Math.abs( y_shift ) < 60 ) {
       mOffset.x += x_shift / mZoom;                // add shift to offset
       mOffset.y += y_shift / mZoom; 
-      mOverviewSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
+      mOverviewSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
       // mOverviewSurface.refresh();
     }
   }
@@ -976,7 +978,7 @@ public class OverviewWindow extends ItemDrawer
           if ( Math.abs( x_shift ) < 60 && Math.abs( y_shift ) < 60 ) {
             mOffset.x += x_shift / mZoom;                // add shift to offset
             mOffset.y += y_shift / mZoom; 
-            mOverviewSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
+            mOverviewSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
           }
           mSaveX = x_canvas; 
           mSaveY = y_canvas;
@@ -1233,6 +1235,13 @@ public class OverviewWindow extends ItemDrawer
     if ( TDSetting.mZoomCtrl == 2 && ! mZoomBtnsCtrl.isVisible() ) {
       mZoomBtnsCtrl.setVisible( true );
     }
+  }
+
+  @Override
+  public void onConfigurationChanged( Configuration new_cfg )
+  {
+    super.onConfigurationChanged( new_cfg );
+    mOverviewSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
   }
 
 }

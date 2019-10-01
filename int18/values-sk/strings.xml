@@ -964,6 +964,8 @@
   
   <string name="pref_locale_title">Jazyk</string>
   <string name="pref_locale_summary">Výber jazyka aplikácie</string>
+  <!-- TODO string name="pref_orientation_title">Screen orientation</string -->
+  <!-- TODO string name="pref_orientation_summary">App screen orientation</string -->
 
   <string name="pref_raw_data_title">Surové dáta</string>
   <string name="pref_raw_data_summary">Výber typu zobrazenia surových (nespracovaných) dát</string>

@@ -1081,7 +1081,8 @@ class TDSetting
       TopoDroidApp.setLocale( tryStringValue( hlp, k, v, def[7] ), true );
     } else if ( k.equals( key[ 8 ] ) ) {           // DISTOX_ORIENTATION (choice)
       mOrientation = tryIntValue( hlp, k, v, def[8] );
-      TDandroid.setOrientation( TopoDroidApp.mActivity );
+      TDandroid.setScreenOrientation( TopoDroidApp.mActivity );
+      TDandroid.setScreenOrientation( TDPrefActivity.mPrefActivityAll );
     /* ---- IF_COSURVEY
     } else if ( k.equals( key[ 8 ] ) ) {           // DISTOX_COSURVEY (bool)
       boolean co_survey = tryBooleanValue( hlp, k, v, false );

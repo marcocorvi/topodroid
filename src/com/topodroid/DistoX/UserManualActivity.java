@@ -86,7 +86,7 @@ public class UserManualActivity extends Activity
   {
     super.onCreate(savedInstanceState);
 
-    TDandroid.setOrientation( this );
+    TDandroid.setScreenOrientation( this );
 
     mCloseOnBack = 0;
     // get intent extra

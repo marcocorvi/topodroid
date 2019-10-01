@@ -34,10 +34,10 @@ import android.hardware.Sensor;
 import android.widget.Button;
 import android.widget.SeekBar;
 // import android.graphics.Bitmap;
-import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
-import android.view.Display;
-import android.view.Surface;
+// import android.graphics.Point;
+// import android.view.Display;
+// import android.view.Surface;
 
 class TDandroid
 {
@@ -301,69 +301,62 @@ class TDandroid
     return context.getPackageManager().hasSystemFeature( PackageManager.FEATURE_BLUETOOTH_LE );
   }
 
-  static void lockOrientation( Activity act )
-  {
-    Display d = act.getWindowManager().getDefaultDisplay();
-    int r = d.getRotation();
-    int h, w;
-    if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR2 ) {
-      h = d.getHeight();
-      w = d.getWidth();
-    } else {
-      Point s = new Point();
-      d.getSize( s );
-      h = s.y;
-      w = s.x;
-    }
-    switch ( r ) {
-      case Surface.ROTATION_90:
-        if ( w > h ) {
-          act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE );
-        } else {
-          act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT );
-        }
-        break;
-      case Surface.ROTATION_180:
-        if ( h > w ) {
-          act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT );
-        } else {
-          act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE );
-        }
-        break;
-      case Surface.ROTATION_270:
-        if ( w > h ) {
-          act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE );
-        } else {
-          act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_PORTRAIT );
-        }
-        break;
-      default:
-        if ( h > w ) {
-          act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_PORTRAIT );
-        } else {
-          act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE );
-        }
-        break;
-    }
-  }
+  // static void lockOrientation( Activity act )
+  // {
+  //   Display d = act.getWindowManager().getDefaultDisplay();
+  //   int r = d.getRotation();
+  //   int h, w;
+  //   if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR2 ) {
+  //     h = d.getHeight();
+  //     w = d.getWidth();
+  //   } else {
+  //     Point s = new Point();
+  //     d.getSize( s );
+  //     h = s.y;
+  //     w = s.x;
+  //   }
+  //   switch ( r ) {
+  //     case Surface.ROTATION_90:
+  //       if ( w > h ) {
+  //         act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE );
+  //       } else {
+  //         act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT );
+  //       }
+  //       break;
+  //     case Surface.ROTATION_180:
+  //       if ( h > w ) {
+  //         act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT );
+  //       } else {
+  //         act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE );
+  //       }
+  //       break;
+  //     case Surface.ROTATION_270:
+  //       if ( w > h ) {
+  //         act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE );
+  //       } else {
+  //         act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_PORTRAIT );
+  //       }
+  //       break;
+  //     default:
+  //       if ( h > w ) {
+  //         act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_PORTRAIT );
+  //       } else {
+  //         act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE );
+  //       }
+  //       break;
+  //   }
+  // }
 
-  static void unlockOrientation( Activity act )
-  {
-    act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED );
-  }
+  // static void unlockOrientation( Activity act ) { act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED ); }
 
-  static void lockOrientationiPortrait( Activity act )
-  {
-    act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_PORTRAIT );
-  }
+  // static void lockOrientationiPortrait( Activity act ) { act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_PORTRAIT ); }
 
-  static void lockOrientationiLandscape( Activity act )
-  {
-    act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE );
-  }
+  // static void lockOrientationiLandscape( Activity act ) { act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE ); }
 
-  static void setOrientation( Activity act )
+
+  static void setScreenOrientation( Activity act )
   {
+    if ( act == null ) return;
     switch ( TDSetting.mOrientation ) {
       case 0:
         act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED );

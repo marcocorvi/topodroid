@@ -965,6 +965,8 @@
 
   <string name="pref_locale_title">语言</string>
   <string name="pref_locale_summary">软件语言</string>
+  <!-- TODO string name="pref_orientation_title">Screen orientation</string -->
+  <!-- TODO string name="pref_orientation_summary">App screen orientation</string -->
 
   <string name="pref_raw_data_title">原始数据</string>
   <string name="pref_raw_data_summary">显示原始测量数据</string>

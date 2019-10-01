@@ -748,7 +748,7 @@ public class GMActivity extends Activity
   {
     super.onCreate( savedInstanceState );
 
-    TDandroid.setOrientation( this );
+    TDandroid.setScreenOrientation( this );
 
     setContentView(R.layout.gm_activity);
     mApp = (TopoDroidApp) getApplication();

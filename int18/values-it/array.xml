@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+  <!-- TODO string-array name="orientation">
+     <item name="unspecified">unspecified</item>
+     <item name="portrait">portrait</item>
+     <item name="landscape">landscape</item>
+  </string-array -->
+
   <!-- TODO string-array name="splayDash">
      <item name="none">none</item>
      <item name="plan">clino</item>

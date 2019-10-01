@@ -957,7 +957,7 @@ public class ShotWindow extends Activity
   {
     super.onCreate( savedInstanceState );
 
-    TDandroid.setOrientation( this );
+    TDandroid.setScreenOrientation( this );
 
     setContentView( R.layout.shot_activity );
     mApp = (TopoDroidApp) getApplication();

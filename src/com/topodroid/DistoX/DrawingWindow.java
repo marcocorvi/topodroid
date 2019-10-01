@@ -32,6 +32,7 @@ import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.content.res.Configuration;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -650,7 +651,7 @@ public class DrawingWindow extends ItemDrawer
     // Log.v( TopoDroidApp.TAG, "zoom " + mZoom );
     mOffset.x -= mDisplayCenter.x*(1/zoom-1/mZoom);
     mOffset.y -= mDisplayCenter.y*(1/zoom-1/mZoom);
-    mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
+    mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
     // mZoomCtrl.hide();
     // if ( mZoomBtnsCtrlOn ) mZoomBtnsCtrl.setVisible( false );
   }
@@ -1022,7 +1023,7 @@ public class DrawingWindow extends ItemDrawer
         mOffset.y = TopoDroidApp.mDisplayHeight/(2 * mZoom) - DrawingUtil.toSceneY( st.e, st.s );
         saveReference( mPlot1, mPid1 );
         // resetReference( mPlot1 );
-        // mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
+        // mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
         // return;
       } else if ( type == PlotInfo.PLOT_EXTENDED ) {
         mZoom     = mPlot2.zoom;
@@ -1656,7 +1657,7 @@ public class DrawingWindow extends ItemDrawer
   {
     super.onCreate(savedInstanceState);
 
-    TDandroid.setOrientation( this );
+    TDandroid.setScreenOrientation( this );
 
     // TDLog.TimeStart();
     // Log.v("DistoX", "onCreate()" );
@@ -2359,7 +2360,7 @@ public class DrawingWindow extends ItemDrawer
     mOffset.y = plot.yoffset; 
     mZoom     = plot.zoom;    
     // Log.v("DistoX", "reset ref " + mOffset.x + " " + mOffset.y + " " + mZoom ); // DATA_DOWNLOAD
-    mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
+    mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
   }
 
   // ----------------------------------------------------
@@ -2449,7 +2450,7 @@ public class DrawingWindow extends ItemDrawer
       block.mTo   = to;
       mApp_mData.updateShotName( block.mId, mSid, from, to );
       doComputeReferences( true );
-      mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
+      mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
 
       modified();
     }
@@ -2529,7 +2530,7 @@ public class DrawingWindow extends ItemDrawer
         mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
 	// if ( mNum != null ) { // always true
           computeReferences( (int)mType, mName, TopoDroidApp.mScaleFactor, false );
-          mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
+          mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
           modified();
 	// }
       } 
@@ -2744,7 +2745,7 @@ public class DrawingWindow extends ItemDrawer
     if ( Math.abs( x_shift ) < TDSetting.mMinShift && Math.abs( y_shift ) < TDSetting.mMinShift ) {
       mOffset.x += x_shift / mZoom;                // add shift to offset
       mOffset.y += y_shift / mZoom; 
-      mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
+      mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
     }
   }
 
@@ -2753,7 +2754,7 @@ public class DrawingWindow extends ItemDrawer
     if ( Math.abs( x_shift ) < TDSetting.mMinShift && Math.abs( y_shift ) < TDSetting.mMinShift ) {
       mOffset.x += x_shift / mZoom;                // add shift to offset
       mOffset.y += y_shift / mZoom; 
-      mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
+      mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
     }
   }
 
@@ -5461,7 +5462,7 @@ public class DrawingWindow extends ItemDrawer
       mOffset.y = ( TopoDroidApp.mDisplayHeight + mListView.getHeight() - DrawingUtil.CENTER_Y )/(2*mZoom) - tb;
     }
     // Log.v("DistoX", "W " + w + " H " + h + " zoom " + mZoom + " X " + mOffset.x + " Y " + mOffset.y );
-    mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
+    mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
   }
 
   // called when the data reduction changes (hidden/barrier)
@@ -5594,7 +5595,7 @@ public class DrawingWindow extends ItemDrawer
     } else {
       moveTo( mPlot1.type, station );
       moveTo( mPlot2.type, station );
-      mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
+      mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
     }
   }
 
@@ -5609,7 +5610,7 @@ public class DrawingWindow extends ItemDrawer
       //         float t = mOffset.x; mOffset.x = -mOffset.y;  mOffset.y = t;
       // }
       mApp_mData.updatePlotOrientation( TDInstance.sid, mPid, mLandscape ? 1 : 0 );
-      mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
+      mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
       doZoomFit();
       setTheTitle();
     } else {
@@ -5768,7 +5769,7 @@ public class DrawingWindow extends ItemDrawer
     mOffset.x = x;
     mOffset.y = y;
     mZoom     = z;
-    mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom, mLandscape );
+    mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
   }
 
   static void exportAsCsx( long sid, PrintWriter pw, String survey, String cave, String branch, /* String session, */ PlotSaveData psd1, PlotSaveData psd2 )
@@ -6434,5 +6435,11 @@ public class DrawingWindow extends ItemDrawer
     mApp_mData.updateShotColor( blk.mId, TDInstance.sid, color );
   }
 
+  @Override
+  public void onConfigurationChanged( Configuration new_cfg )
+  {
+    super.onConfigurationChanged( new_cfg );
+    mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
+  }
 
 }
