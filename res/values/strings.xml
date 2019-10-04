@@ -509,6 +509,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="description">description</string>
     <string name="name">name</string>
     <string name="team">team</string>
+    <string name="init_station">start station</string>
+    <string name="start_station">start station [%1$s]</string>
     <!-- UNUSED string name="toggle_device">Toggle device calibration mode</string -->
     <string name="toggle_failed">Failed to toggle DistoX</string>
     <string name="toggle_ok">Toggled DistoX calibration mode</string>

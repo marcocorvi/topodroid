@@ -293,6 +293,7 @@ public class DrawingWindow extends ItemDrawer
 
   private DistoXNum mNum;
   private float mDecl;
+  private float mWidthScale = 0.6f;
   private String mFormatClosure;
 
   private String mSectionName;
@@ -1878,6 +1879,7 @@ public class DrawingWindow extends ItemDrawer
     super.onResume();
     // mApp.resetLocale(); FIXME-LOCALE
     // Log.v("DistoX", "Drawing Activity onResume " + ((mDataDownloader!=null)?"with DataDownloader":"") );
+    mWidthScale = TopoDroidApp.getWidthScale();
     doResume();
     if ( mDataDownloader != null ) {
       mDataDownloader.onResume();
@@ -4184,7 +4186,7 @@ public class DrawingWindow extends ItemDrawer
       }
       FontMetrics fm = tv[0].getPaint().getFontMetrics();
       // Log.v("DistoX", "metrics TOP " + fm.top + " ASC. " + fm.ascent + " BOT " + fm.bottom + " LEAD " + fm.leading ); 
-      int w = (int)( Math.abs( ( len ) * fm.ascent ) * 0.6);
+      int w = (int)( Math.abs( ( len + 1 ) * fm.ascent ) * mWidthScale );
       int h = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.70);
       for ( int k=0; k<nr; ++k ) {
         tv[k].setWidth( w );
@@ -4222,7 +4224,7 @@ public class DrawingWindow extends ItemDrawer
         if ( k == 0 ) {
           FontMetrics fm = tv[0].getPaint().getFontMetrics();
           // Log.v("DistoX", "metrics TOP " + fm.top + " ASC. " + fm.ascent + " BOT " + fm.bottom + " LEAD " + fm.leading ); 
-          w = (int)( Math.abs( ( len + 1 ) * fm.ascent ) * 0.6);
+          w = (int)( Math.abs( ( len + 1 ) * fm.ascent ) * mWidthScale );
           h = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.70);
         }
         tv[k].setWidth( w );
@@ -4554,7 +4556,7 @@ public class DrawingWindow extends ItemDrawer
 
       FontMetrics fm = myTextView0.getPaint().getFontMetrics();
       // Log.v("DistoX", "font metrics TOP " + fm.top + " ASC. " + fm.ascent + " BOT " + fm.bottom + " LEAD " + fm.leading ); 
-      int w = (int)( Math.abs( ( len + 1 ) * fm.ascent ) * 0.6);
+      int w = (int)( Math.abs( ( len + 1 ) * fm.ascent ) * mWidthScale );
       int h = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.70);
       // int h1 = (int)( myTextView0.getHeight() * 7 * 1.1 ); this is 0
       myTextView0.setWidth( w );

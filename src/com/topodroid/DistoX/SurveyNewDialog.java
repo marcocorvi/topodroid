@@ -109,7 +109,8 @@ class SurveyNewDialog extends MyDialog
     mDateListener = new MyDateSetListener( mEditDate );
     mEditDate.setOnClickListener( this );
 
-    mEditStation.setText( TDSetting.mInitStation );
+    // mEditStation.setText( TDSetting.mInitStation );
+    mEditStation.setHint( String.format( mContext.getResources().getString( R.string.start_station ), TDSetting.mInitStation ) );
     mEditStation.setOnLongClickListener( this );
 
     if ( TDSetting.mDefaultTeam.length() > 0 ) {
@@ -155,9 +156,10 @@ class SurveyNewDialog extends MyDialog
     // if ( mEditName.getText() == null ) return;
     String name = mEditName.getText().toString();
     if ( /* name == null || */ name.length() == 0 ) { // ALWAYS false
+      mEditName.setError( mContext.getResources().getString( R.string.error_name_required ) );
       return;
     }
-    name = TDUtil.noSpaces( name );
+    name = TDUtil.noSpaces( name ).trim(); // FIXME FORCE NAMES WITHOUT SPACES
     if ( ! saveSurvey( name ) ) {
       return;
     }
@@ -179,8 +181,8 @@ class SurveyNewDialog extends MyDialog
 
   private boolean saveSurvey( String name )
   {
-    if ( name == null ) return false;
-    name = TDUtil.noSpaces( name ).trim(); // FIXME FORCE NAMES WITHOUT SPACES
+    // if ( name == null ) return false; // guaranteed
+    // name = TDUtil.noSpaces( name ).trim(); // already checked
     if ( name.length() == 0 ) {
       mEditName.setError( mContext.getResources().getString( R.string.error_name_required ) );
       return false;
@@ -205,7 +207,7 @@ class SurveyNewDialog extends MyDialog
       if ( station.length() > 0 ) {
         init_station = station;
       }
-    }
+    } // if mEditStation text is empty use setting mInitStation
     if ( init_station == null || init_station.length() == 0 ) init_station = TDString.ZERO;
 
     // date, team, comment always non-null

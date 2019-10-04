@@ -776,6 +776,13 @@ public class TopoDroidApp extends Application
     return TDInstance.context;
   }
 
+  static float getWidthScale()
+  {
+    String lang = mLocale.getLanguage().substring(0, 2);
+    if ( lang.equals("de") ) return 1.0f;
+    return 0.6f;
+  }
+
   static void setLocale( String locale, boolean load_symbols )
   {
     mLocaleStr = locale;

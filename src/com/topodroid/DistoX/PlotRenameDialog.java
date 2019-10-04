@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.content.Context;
 
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.view.View;
@@ -32,7 +33,6 @@ class PlotRenameDialog extends MyDialog
                        , View.OnLongClickListener
 {
   private EditText mEtName;
-  private EditText mEtStation;
   private Button   mBtnRename;
   private Button   mBtnBack;
   private Button   mBtnDelete;
@@ -41,13 +41,13 @@ class PlotRenameDialog extends MyDialog
   private CheckBox mCBcopy;
 
   private final DrawingWindow mParent;
-  // private final TopoDroidApp mApp;
+  private String mStation;
 
   PlotRenameDialog( Context context, DrawingWindow parent /*, TopoDroidApp app */ )
   {
     super( context, R.string.PlotRenameDialog );
     mParent = parent;
-    // mApp    = app;
+    mStation = mParent.getPlotStation();
   }
 
 // -------------------------------------------------------------------
@@ -66,9 +66,9 @@ class PlotRenameDialog extends MyDialog
     mCBcopy    = (CheckBox) findViewById( R.id.cb_copy );
 
     mEtName = (EditText) findViewById( R.id.et_name );
-    mEtStation = (EditText) findViewById( R.id.et_station );
     mEtName.setText( mParent.getPlotName( ) );
-    mEtStation.setText( mParent.getPlotStation( ) );
+
+    ((TextView) findViewById( R.id.et_station )).setText( mStation );
 
     mBtnRename.setOnClickListener( this );
     mBtnBack.setOnClickListener( this );
@@ -77,12 +77,10 @@ class PlotRenameDialog extends MyDialog
       // mBtnMerge.setOnClickListener( this );
       mBtnSplit.setOnClickListener( this );
       mBtnSplit.setOnLongClickListener( this );
-      // mEtStation.setInputType( android.text.InputType.TYPE_NULL );
     } else {
       mCBcopy.setVisibility( View.GONE );
       mBtnSplit.setVisibility( View.GONE );
       // mBtnMerge.setVisibility( View.GONE );
-      // mEtStation.setInputType( android.text.InputType.TYPE_NULL );
     }
   }
 
@@ -128,12 +126,7 @@ class PlotRenameDialog extends MyDialog
       mEtName.setError( mContext.getResources().getString( R.string.plot_duplicate_name ) );
       return false;
     }
-    String station = mEtStation.getText().toString();
-    // if ( warning && ! maker.hasSurveyStation( station ) ) {
-    //   mEtStation.setError( mContext.getResources().getString( R.string.error_station_non_existing ) );
-    //   return false;
-    // }
-    mParent.splitPlot( name, station, ! mCBcopy.isChecked() ); // not mCBcopy == remove
+    mParent.splitPlot( name, mStation, ! mCBcopy.isChecked() ); // not mCBcopy == remove
     return true;
   }
 
