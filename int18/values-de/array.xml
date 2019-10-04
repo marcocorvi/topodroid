@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-  <!-- TODO string-array name="orientation">
-     <item name="unspecified">unspecified</item>
-     <item name="portrait">portrait</item>
-     <item name="landscape">landscape</item>
-  </string-array -->
+  <string-array name="orientation">
+     <item name="unspecified">System</item>
+     <item name="portrait">Hochformat</item>
+     <item name="landscape">Querformat</item>
+  </string-array>
 
-  <!-- TODO string-array name="splayDash">
-     <item name="none">none</item>
-     <item name="plan">clino</item>
-     <item name="profile">azimuth</item>
-     <item name="view">view</item>
-  </string-array -->
+  <string-array name="splayDash">
+     <item name="none">nie</item>
+     <item name="plan">nur Neigungsmesser</item>
+     <item name="profile">nur Kompasskurs</item>
+     <item name="view">je nach Ansicht</item>
+  </string-array>
 
     <string-array name="feedbackMode">
         <item name="none">keine</item>

@@ -93,8 +93,7 @@
     <!-- UNUSED string name="connect_failed">Verbindung fehlgeschlagen</string -->
     <!-- UNUSED string name="data"> Daten</string -->
     <string name="using">%1$s benutzen</string>
-    <!-- OLD string name="calib_error">Abweichung: %1$.4f Grad</string -->
-    <!-- TODO string name="calib_error">Average error: %1$.2f degrees (BH delta %2$.3f)</string -->
+    <string name="calib_error">Abweichung: %1$.2f Grad (BH delta %2$.3f)</string>
     <string name="calib_stddev">Standardabweichung: %1$.4f Grad</string>
     <string name="calib_max_error">Max. Abweichung: %1$.4f Grad</string>
     <string name="calib_ave_std">Genauigkeit: %1$.4f %2$.4f Grad</string>
@@ -165,7 +164,7 @@
     <string name="import_title">Daten Importieren</string>
     <!-- UNUSED string name="import_wait">Importieren&#8230; bitte warten&#8230;</string -->
     <string name="import_already">Vermessung bereits importiert</string>
-    <!-- TODO string name="import_bad">Invalid import file</string -->
+    <string name="import_bad">Ungültiges Importfile</string>
     <string name="import_none">Keine Daten importiert</string>
     <string name="import_failed">Import fehlgeschlagen</string>
     <string name="file_not_found">Datei nicht gefunden</string>
@@ -364,15 +363,15 @@
     <string name="ble_gatt_failure">BLE Fehler</string>
     <string name="ble_no_remote">Kein BLE-Gerät gefunden</string>
 <!-- LINE POINT EDITING ACTIONS -->
-    <string name="popup_join_pt">Mit nähestem Punkt vereinigen</string>
+    <string name="popup_join_pt">Vereinigen mit nähestem Punkt</string>
     <string name="popup_snap_ln">Auf nächste Linie verschieben</string>
-    <string name="popup_snap_to_splays">Auf nächste Messstrecke verschieben</string>
+    <string name="popup_snap_to_splays">Auf nächste Hilfsmessung verschieben</string>
     <string name="popup_split_pt">Punkt verdoppeln</string>
     <string name="popup_split_ln">Linie trennen</string>
     <string name="popup_sharp_pt">Linie begradigen</string>
     <string name="popup_curve_pt">Linie rund machen</string>
     <string name="popup_remove_pt">Punkt löschen</string>
-    <string name="popup_append_line">Linie fortsetzen</string>
+    <string name="popup_append_line">Verbinden mit nähestem Punkt</string>
 
     <string name="popup_erase_all">Alles löschen</string>
     <string name="popup_erase_point">Punkte löschen</string>
@@ -387,10 +386,10 @@
     <string name="popup_select_station">Messpunkte auswählen</string>
 
     <string name="popup_cont_none">Keine</string>
-    <string name="popup_cont_start">Startpunkt</string>
-    <string name="popup_cont_end">Endpunkt</string>
+    <string name="popup_cont_start">Nur am Startpunkt</string>
+    <string name="popup_cont_end">nur am Endpunkt</string>
     <string name="popup_cont_both">Start- und Endpunkt</string>
-    <string name="popup_cont_continue">Fortsetzen</string>
+    <string name="popup_cont_continue">Linie Fortsetzen</string>
 
     <string name="connection_error">Verbindungsfehler</string>
     <string name="connecting">Verbinde &#8230;</string>
@@ -484,8 +483,8 @@
     <string name="survey_delete">Vermessung löschen?</string>
     <string name="survey_split">Vermessung teilen?</string>
     <string name="survey_not_attached">WARNUNG: Unverbundene Messungen</string>
-    <string name="survey_not_extend">WARNUNG: Nicht definierte LRUD Werte</string>
-    <string name="survey_not_attached_extend">WARNUNG: Nicht verbundene Messungen</string>
+    <string name="survey_not_extend">WARNUNG: Nicht definierte Ausrichtung im Seitenriss</string>
+    <string name="survey_not_attached_extend">WARNUNG: Nicht verbundene Messungen mit undefinierter Ausrichtung</string>
     <string name="saturated_coeffs">WARNUNG: Kalibrierungs-Koeffizienten nicht berechenbar</string>
     <string name="out_of_memory">WARNUNG: Zuwenig Arbeitsspeicher!</string>
     <string name="disk_io_error">FEHLER: Lese-/Schreibfehler!</string>
@@ -496,10 +495,10 @@
     <string name="coverage_warning">Winkelabdeckung unter %1$d %%\nKoeffizienten trotzdem schreiben?</string>
     <string name="delta_warning">Durchschnittlicher Fehler über %1$.1f\nKoeffizienten trotzdem schreiben?</string>
 
-    <!-- TODO string name="cover_data">Raw data distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_calib">Calibrated data distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_g">G distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_m">M distribution: %1$.2f %%</string -->
+    <string name="cover_data">Rohdaten-Verteilung: %1$.2f %%</string>
+    <string name="cover_calib">Kalibrierte Daten Verteilung: %1$.2f %%</string>
+    <string name="cover_g">G Verteilung: %1$.2f %%</string>
+    <string name="cover_m">M Verteilung: %1$.2f %%</string>
 
     <string name="cannot_rename">Kann Vermessung nicht umbenennen</string>
     <string name="declination">Magnetische Deklination</string>
@@ -939,7 +938,7 @@
     <string name="title_calib_export">Kalibrierung speichern als</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-  <!-- TODO string name="pref_export_settings">Export settings</string -->
+  <string name="pref_export_settings">Export Einstellungen</string>
 
 <!-- PREFERENCES STRINGS CAN BE LEFT UNTRANSLATED FOR NOW -->
   <string name="pref_cat_survey">Vermessung</string>
@@ -961,8 +960,8 @@
 
   <string name="pref_locale_title">Sprache</string>
   <string name="pref_locale_summary">Auswahl der Sprache</string>
-  <!-- TODO string name="pref_orientation_title">Screen orientation</string -->
-  <!-- TODO string name="pref_orientation_summary">App screen orientation</string -->
+  <string name="pref_orientation_title">Bildschirmausrichtung</string>
+  <string name="pref_orientation_summary">Bildschirmausrichtung fixieren oder automatisch</string>
 
   <string name="pref_raw_data_title">Rohdaten anzeigen</string>
   <string name="pref_raw_data_summary">Rohdaten anzeigen</string>
@@ -990,8 +989,8 @@
   <string name="pref_size_buttons_summary">Eingabe der Größe der Action-bar Buttons [px]</string>
   <string name="pref_with_sensors_title">Sensoren</string>
   <string name="pref_with_sensors_summary">"Sensordaten" aktivieren</string>
-  <!-- TODO string name="pref_with_android_azimuth_title">Android compass</string -->
-  <!-- TODO string name="pref_with_android_azimuth_summary">Enable Android compass/clino</string -->
+  <string name="pref_with_android_azimuth_title">Android Kompass</string>
+  <string name="pref_with_android_azimuth_summary">Eingebauten Kompass dieses Geräts verwenden (ungenau)</string>
   <string name="pref_with_levels_title">Ebenen</string>
   <string name="pref_with_levels_summary">Aktiviere Symbolebenen in der Skizze</string>
   <string name="pref_palettes_title">Paletten</string>
@@ -1012,11 +1011,11 @@
   <string name="pref_station_prefix_title">Compass: Prefix</string>
   <string name="pref_station_prefix_summary">Exportiere Messpunkt Prefix (compass)</string>
   <string name="pref_compass_splays_title">Compass: Hilfszüge</string>
-  <string name="pref_compass_splays_summary">Export Hilfszüge (compass)</string>
-  <!-- TODO string name="pref_vtopo_splays_title">VisualTopo splays</string -->
-  <!-- TODO string name="pref_vtopo_splays_summary">Export splays in VisualTopo files</string -->
-  <!-- TODO string name="pref_vtopo_lrud_title">LRUD at From</string -->
-  <!-- TODO string name="pref_vtopo_lrud_summary">VisualTopo LRUD at From station</string -->
+  <string name="pref_compass_splays_summary">Hilfszüge exportieren (compass)</string>
+  <string name="pref_vtopo_splays_title">VisualTopo: Hilfszüge</string>
+  <string name="pref_vtopo_splays_summary">Hilfszüge exportieren (VisualTopo)</string>
+  <string name="pref_vtopo_lrud_title">VisualTopo: LRUD von Quellstation</string>
+  <string name="pref_vtopo_lrud_summary">LRUD exportieren (VisualTopo)</string>
   <!-- UNUSED string name="pref_trobot_names_title">TopoRobot Namen</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Stationen wie in TopoRobot benennen</string -->
   <string name="pref_ortho_lrud_title">Min. Winkel für LRUD</string>
@@ -1073,7 +1072,7 @@
   <string name="pref_wait_shot_title">Warten nach Messung</string>
   <string name="pref_wait_shot_summary">Wartezeit nach einer Messung [ms]</string>
   <string name="pref_wait_data_title">Warten nach Download</string>
-  <string name="pref_wait_data_summary">Wartezeit nach dem Download von Daten [ms]</string>
+  <string name="pref_wait_data_summary">Wartezeit nach dem Download von Daten [ms] (Standard: 250)</string>
   <string name="pref_wait_conn_title">Warten nach Fehler</string>
   <string name="pref_wait_conn_summary">Wartezeit nach Download-Fehler [ms] (Standard: 500)</string>
   <string name="pref_conn_mode_title">Verbindungsart</string>
@@ -1085,7 +1084,7 @@
   <string name="pref_head_tail_title">Anzahl Daten abfragen</string>
   <string name="pref_head_tail_summary">Anzahl Datensätze abfragen vor dem Download</string>
   <string name="pref_socket_delay_title">Verbindungsverzögerung</string>
-  <string name="pref_socket_delay_summary">Verzögerung vor dem verbinden [0.1 sek]</string>
+  <string name="pref_socket_delay_summary">Verzögerung vor dem verbinden [0.1 sek] (Standard: 0)</string>
   <string name="pref_z6_workaround_title">Z6 Workaround</string>
   <string name="pref_z6_workaround_summary">Bei Problemen mit einem Z6 aktivieren</string>
   <string name="pref_crs_title">Koordinatensystem</string>
@@ -1114,11 +1113,11 @@
   <string name="pref_min_shift_message">Ignoriert Verschiebungen größer als dieser Wert. Verhindert herumspringen bei Multitouch.</string>
   <string name="pref_pointing_title">Radius für Tippen</string>
   <string name="pref_pointing_message">Radius für Objekterkennung beim Antippen</string>
-  <string name="pref_dash_splay_title">Hilfslinien Kohärenz</string>
-  <string name="pref_dash_splay_message">Hilfslinien kohärent gestrichelt zwischen Skizzen</string>
+  <string name="pref_dash_splay_title">Hilfslinien Gestrichelt</string>
+  <string name="pref_dash_splay_message">Welche Hilfslinien sollen abhängig vom Grenzwert gestrichelt dargestellt werden</string>
   <string name="pref_vert_splay_title">Vert. Neigung Hilfslinien</string>
   <string name="pref_vert_splay_message">Vertikaler Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden; Standardwert: 50</string>
-  <string name="pref_horiz_splay_title">Horiz. Neigung Hilflinien</string>
+  <string name="pref_horiz_splay_title">Horiz. Neigung Hilfslinien</string>
   <string name="pref_horiz_splay_message">Horizontaler Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden; Standardwert: 60</string>
   <string name="pref_section_splay_title">Grenzwert Querschnitt</string>
   <string name="pref_section_splay_message">Grenzwert in Querschnitten ab welchem Hilfslinien gestrichelt dargestellt werden; Standardwert: 60</string>
@@ -1235,18 +1234,18 @@
   <string name="pref_line_thickness_summary">Dicke der gezeichneten Linien</string>
   <string name="pref_line_units_title">Lineneinheiten</string>
   <string name="pref_line_units_summary">Einheiten der gezeichneten Linien</string>
-  <string name="pref_linesnap_title">Line/Area snap</string>
-  <string name="pref_linesnap_summary">Enable line/area snap action</string>
-  <string name="pref_linecurve_title">Smooth/Straigten segment</string>
-  <string name="pref_linecurve_summary">Smooth/Straighten line segment action</string>
-  <string name="pref_linestraight_title">Straigten lines</string>
-  <string name="pref_linestraight_summary">Straighten whole line action</string>
-  <string name="pref_path_multiselect_title">Path multiselection</string>
-  <string name="pref_path_multiselect_summary">Path multiselection action</string>
+  <string name="pref_linesnap_title">Linien/Bereiche Verbinden</string>
+  <string name="pref_linesnap_summary">Punkteigenschaften: Verbinden mit nähester Hilfsmessung</string>
+  <string name="pref_linecurve_title">Linienpunkt rund/eckig</string>
+  <string name="pref_linecurve_summary">Punkteigenschaften: Zwischen rund/eckig ändern</string>
+  <string name="pref_linestraight_title">Linie begradigen</string>
+  <string name="pref_linestraight_summary">Punkteigenschaften: Ganze linie begradigen</string>
+  <string name="pref_path_multiselect_title">Pfad Mehrfachauswahl</string>
+  <string name="pref_path_multiselect_summary">Erlaube mehrere Pfade auszuwählen</string>
   <string name="pref_plane_interpolation_title">Plane interpolation</string>
   <string name="pref_plane_interpolation_summary">Plane interpolation action</string>
-  <string name="pref_plot_split_title">Sketch split/merge</string>
-  <string name="pref_plot_split_summary">Sketch split and merge actions</string>
+  <string name="pref_plot_split_title">Skizzen aufteilen</string>
+  <string name="pref_plot_split_summary">Erlaube Skizzen aufzuteilen</string>
   <string name="pref_fixed_thickness_title">Liniendicke Messstrecke</string>
   <string name="pref_fixed_thickness_summary">Liniendicke der Messstrecken</string>
   <!-- UNUSED string name="pref_device_title">Device</string -->
@@ -1255,8 +1254,8 @@
   <string name="pref_checkBT_summary">Bluetooth (de)aktivieren</string>
   <string name="pref_checkAttached_title">Messlinien-Check</string>
   <string name="pref_checkAttached_summary">Prüfe ob alle Messpunkte verbunden sind</string>
-  <string name="pref_checkExtend_title">Messlinien LRUD Check</string>
-  <string name="pref_checkExtend_summary">Prüfe ob alle Messlinien LRUD haben</string>
+  <string name="pref_checkExtend_title">Messlinien Seitenriss-Ausrichtung Check</string>
+  <string name="pref_checkExtend_summary">Prüfe ob alle Messlinien eine Ausrichtung im Seitenriss haben</string>
   <string name="pref_backup_number_title">Anzahl Backups</string>
   <string name="pref_backup_number_summary">Anzahl Skizzenbackups</string>
   <string name="pref_backup_interval_title">Backup Intervall</string>
