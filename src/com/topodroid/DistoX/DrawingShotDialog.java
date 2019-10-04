@@ -270,7 +270,7 @@ class DrawingShotDialog extends MyDialog
         mETcomment.setHint( R.string.comment );
       }
 
-      switch ( mBlock.getExtend() ) {
+      switch ( mBlock.getIntExtend() ) {
         case DBlock.EXTEND_LEFT:
           mRBleft.setChecked( true );
           break;
@@ -418,7 +418,7 @@ class DrawingShotDialog extends MyDialog
         }
       }
 
-      // int extend = mBlock.getExtend();
+      // int extend = mBlock.getIntExtend();
       int extend = DBlock.EXTEND_IGNORE;
       if ( mRBleft.isChecked() )       { extend = DBlock.EXTEND_LEFT; }
       else if ( mRBvert.isChecked() )  { extend = DBlock.EXTEND_VERT; }

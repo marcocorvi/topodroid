@@ -25,17 +25,6 @@ interface ILister
   void refreshDisplay( int nr, boolean toast );
 
   /** 
-   * @param blk data-block from which to update the list
-   *
-   * updateBlockList is called by
-   *   - DistoXComm.run()
-   *   + updateBlockList( long ) for each class that implements this method
-   */
-  void updateBlockList( DBlock blk );
-
-  void updateBlockList( CalibCBlock blk );
-
-  /** 
    * @param blk_id id (of the data-block) from which to update the list
    *
    *  updateBlockList is called by

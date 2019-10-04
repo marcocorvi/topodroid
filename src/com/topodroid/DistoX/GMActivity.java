@@ -588,19 +588,15 @@ public class GMActivity extends Activity
     enableButtons( true );
   }
     
-  @Override
-  public void updateBlockList( CalibCBlock blk ) 
+  private void updateCBlockList( CalibCBlock blk ) 
   { 
     if ( blk != null ) mDataAdapter.add( blk );
   }
   
   @Override
-  public void updateBlockList( DBlock blk ) { }
-
-  @Override
   public void updateBlockList( long blk_id ) 
   {
-    updateBlockList( mApp_mDData.selectGM( blk_id, TDInstance.cid ) );
+    updateCBlockList( mApp_mDData.selectGM( blk_id, TDInstance.cid ) );
   }
 
   @Override

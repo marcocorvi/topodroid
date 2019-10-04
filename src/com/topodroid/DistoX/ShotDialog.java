@@ -186,7 +186,7 @@ class ShotDialog extends MyDialog
 
     // shot_extra   = blk.extraString( mParent.mSurveyAccuracy );
     shot_extra   = mParent.getBlockExtraString( blk );
-    shot_extend  = blk.getExtend();
+    shot_extend  = blk.getIntExtend();
     shot_stretch = blk.getStretch(); // FIXME_STRETCH
     shot_flag    = blk.getFlag();
     shot_comment = blk.mComment;
@@ -543,7 +543,7 @@ class ShotDialog extends MyDialog
     // else                            { shot_flag = DBlock.FLAG_SURVEY; }
     // Log.v("DistoXA", "shot flag " + shot_flag );
 
-    shot_extend = mBlk.getExtend();
+    shot_extend = mBlk.getIntExtend();
     if ( mRBleft.isChecked() )       { shot_extend = DBlock.EXTEND_LEFT; }
     else if ( mRBvert.isChecked() )  { shot_extend = DBlock.EXTEND_VERT; }
     else if ( mRBright.isChecked() ) { shot_extend = DBlock.EXTEND_RIGHT; }
@@ -577,7 +577,7 @@ class ShotDialog extends MyDialog
     int extend = shot_extend;
     boolean sflen = shot_from.length() > 0;
     boolean stlen = shot_to.length() > 0;
-    if ( mBlk.getExtend() != shot_extend ) {
+    if ( mBlk.getIntExtend() != shot_extend ) {
       if ( leg_next || ( sflen && stlen ) ) { // leg
         mBlk.setExtend( extend, DBlock.STRETCH_NONE ); // FIXME_STRETCH
       } else if ( ( sflen && ! stlen ) || ( stlen && ! sflen ) ) { // splay

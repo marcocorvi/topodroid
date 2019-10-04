@@ -877,6 +877,7 @@
     <!-- TODO string name="title_settings_svx">Survex export settings</string -->
     <!-- TODO string name="title_settings_th">Therion export settings</string -->
     <!-- TODO string name="title_settings_dat">Compass export settings</string -->
+    <!-- TODO string name="title_settings_tro">VisualTopo export settings</string -->
     <!-- TODO string name="title_settings_svg">SVG export settings</string -->
     <!-- TODO string name="title_settings_dxf">DXF export settings</string -->
     <!-- TODO string name="title_settings_png">PNG export settings</string -->

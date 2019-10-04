@@ -16,8 +16,11 @@ package com.topodroid.DistoX;
 class TDAzimuth
 {
   // ----------------------------------------------------------------
+  static long  mFixedExtend = 0;  // -1 left, 0 unspecified, 1 right
+
+  // if mFixedExtend != 0 the mRefAzimuth is the last bearing times mFixedExtend
   static float mRefAzimuth  = SurveyInfo.EXTEND_NORMAL; // west to east
-  static long  mFixedExtend = 0;
+
 
   static void resetRefAzimuth( final ShotWindow window, float azimuth )
   {
@@ -30,7 +33,7 @@ class TDAzimuth
     // DrawingWindow does not have the RefAzimuth setting
   }
 
-  // called by DistoXComm, ShotNewDialog, and setLegExtend
+  // called by ShotNewDialog, and setLegExtend
   static long computeLegExtend( double bearing )
   {
     if ( mFixedExtend == 0 ) {

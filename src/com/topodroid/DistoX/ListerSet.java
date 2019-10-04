@@ -11,9 +11,9 @@
  */
 package com.topodroid.DistoX;
 
-import java.util.ArrayList;
+import android.util.Log;
 
-// import android.util.Log;
+import java.util.ArrayList;
 
 class ListerSet implements ILister
 {
@@ -30,7 +30,6 @@ class ListerSet implements ILister
 
   void registerLister( ILister lister )
   {
-    // Log.v("DistoX", "register lister " + lister.toString() + " size " + size() );
     for ( ILister l : mLister ) {
       if ( l == lister ) return; // already registered
     }
@@ -39,23 +38,12 @@ class ListerSet implements ILister
 
   void unregisterLister( ILister lister )
   {
-    // Log.v("DistoX", "unregister lister " + lister.toString() + " size " + size() );
     mLister.remove( lister );
   }
 
   public void updateBlockList( long blk_id ) 
   {
     for ( ILister lister : mLister ) lister.updateBlockList( blk_id );
-  }
-
-  public void updateBlockList( DBlock blk ) 
-  {
-    for ( ILister lister : mLister ) lister.updateBlockList( blk );
-  }
-
-  public void updateBlockList( CalibCBlock cblk ) 
-  {
-    for ( ILister lister : mLister ) lister.updateBlockList( cblk );
   }
 
   public void setConnectionStatus( int status )

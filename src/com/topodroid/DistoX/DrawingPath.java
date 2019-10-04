@@ -390,7 +390,7 @@ class DrawingPath extends RectF
   // used in executeAll to draw yellow extend control segnment
   int getBlockExtend( )
   {
-    return ( mBlock == null )? 0 : mBlock.getExtend();
+    return ( mBlock == null )? 0 : mBlock.getIntExtend();
   }
  
   // setSplayExtend is used for the plan view

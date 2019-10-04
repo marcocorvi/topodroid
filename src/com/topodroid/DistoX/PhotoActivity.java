@@ -68,12 +68,6 @@ public class PhotoActivity extends Activity
   }
 
   @Override
-  public void updateBlockList( CalibCBlock blk ) { }
-
-  @Override
-  public void updateBlockList( DBlock blk ) { }
-  
-  @Override
   public void updateBlockList( long blk_id ) { }
   
   @Override

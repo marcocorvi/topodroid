@@ -12,15 +12,13 @@
  */
 package com.topodroid.DistoX;
 
-
-// import android.util.Log;
+import android.util.Log;
 
 import java.util.List;
 import java.util.Set;
 // import java.util.ArrayList;
 
 import android.content.Context;
-// import android.util.Log;
 
 class StationName
 {
@@ -142,6 +140,7 @@ class StationName
     // if ( ! TDSetting.mSplayExtend ) 
     {
       long extend = TDAzimuth.computeLegExtend( blk.mBearing );
+      TDLog.Log( TDLog.LOG_SHOT, blk.mId + " set extend " + extend );
       blk.setExtend( (int)extend, DBlock.STRETCH_NONE ); 
       mData.updateShotExtend( blk.mId, mSid, extend, DBlock.STRETCH_NONE );
     }
@@ -151,6 +150,7 @@ class StationName
   // used to set block extend "fixed"
   protected void setLegFixedExtend( DBlock blk, long extend )
   {
+    TDLog.Log( TDLog.LOG_SHOT, blk.mId + " set fixed extend " + extend );
     blk.setExtend( (int)extend, DBlock.STRETCH_NONE );
     mData.updateShotExtend( blk.mId, mSid, extend, DBlock.STRETCH_NONE );
   }
@@ -160,12 +160,15 @@ class StationName
 
   protected void setBlockName( DBlock blk, String from, String to, boolean is_backleg ) 
   {
+    TDLog.Log( TDLog.LOG_SHOT, blk.mId + " set name " + from + "-" + to + " bckleg " + is_backleg );
     blk.setBlockName( from, to, is_backleg );
     mData.updateShotName( blk.mId, mSid, from, to );
   }
 
   protected void setBlockName( DBlock blk, String from, String to )
   {
+    // Log.v( "DistoX-BLOCK", "set block " + blk.mId + " name " + from + " " + to );
+    TDLog.Log( TDLog.LOG_SHOT, blk.mId + " set name " + from + "-" + to );
     blk.setBlockName( from, to );
     mData.updateShotName( blk.mId, mSid, from, to );
   }

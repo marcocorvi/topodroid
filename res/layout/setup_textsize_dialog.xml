@@ -53,6 +53,7 @@
       android:imeOptions="actionDone"
       android:text="@string/default_textsize"
       style="@style/edit_number"
+      android:inputType="none"
     />
     <Button android:id="@+id/btn_plus"
       android:layout_width="0dp"

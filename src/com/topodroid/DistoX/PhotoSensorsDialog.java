@@ -252,7 +252,7 @@ class PhotoSensorsDialog extends MyDialog
         // add a duplicate leg d, mBlk.mBearing, mBlk.mClino
 	String from = mBlk.mFrom;
 	station = from + "-" + dstr;
-	at = mParent.insertDuplicateLeg( from, station, d, mBlk.mBearing, mBlk.mClino, mBlk.getExtend() );
+	at = mParent.insertDuplicateLeg( from, station, d, mBlk.mBearing, mBlk.mClino, mBlk.getIntExtend() );
       }
       if ( station != null ) {
         // check the data

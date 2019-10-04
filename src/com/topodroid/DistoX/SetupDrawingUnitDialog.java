@@ -13,7 +13,6 @@ package com.topodroid.DistoX;
 
 // import android.util.Log;
 
-// import android.app.Dialog;
 import android.content.Context;
 // import android.content.res.Resources;
 
@@ -47,7 +46,7 @@ class SetupDrawingUnitDialog extends MyDialog
   private Button  mBtnPlus;
 
   private EditText mETsize;
-  private boolean mETsizeChanged = false;
+  private boolean mETskip = false;
 
   private float  mSize;
 
@@ -90,8 +89,12 @@ class SetupDrawingUnitDialog extends MyDialog
 
     mLayout = (LinearLayout) findViewById(R.id.layout2);
     mETsize = (EditText) findViewById( R.id.textsize );
-    mETsize.setText( String.format(Locale.US, "%.2f", mSize ) );
+    setETsize( mSize );
 
+    mETsize.setKeyListener( null );
+    // mETsize.setBackgroundColor( TDColor.MID_GRAY );
+
+    /*
     mETsize.addTextChangedListener( new TextWatcher() {
       @Override
       public void afterTextChanged( Editable e ) { }
@@ -102,12 +105,16 @@ class SetupDrawingUnitDialog extends MyDialog
       @Override
       public void onTextChanged( CharSequence cs, int start, int before, int cnt ) 
       {
+        if ( mETskip ) return;
         try {
           float size = Float.parseFloat( mETsize.getText().toString() );
           setSize( size, false );
-        } catch ( NumberFormatException e ) { }
+        } catch ( NumberFormatException e ) { 
+          setETsize( mSize );
+        }
       }
     } );
+    */
 
     mBtnNext   = (Button) findViewById( R.id.btn_next );
     mBtnSkip   = (Button) findViewById( R.id.btn_skip );
@@ -119,14 +126,27 @@ class SetupDrawingUnitDialog extends MyDialog
     mBtnMinus.setOnClickListener( this );
   }
 
+  /** update the EditText text - disable TextChange listening temporarely 
+   * @param sz         new size
+   */
+  private void setETsize( float sz )
+  {
+    mETskip = true;
+    mETsize.setText( String.format(Locale.US, "%.2f", sz ) );
+    mETskip = false;
+  }
+
+  /** set the size - do some bounds checks: size must be in [0.1, 14.0]
+   * @param sz         new size
+   * @param edit_text  whether to update EditText
+   */
   private void setSize( float sz, boolean edit_text )
   {
     mSize = sz;
     if ( mSize < 0.1f ) { mSize = 0.1f; edit_text = true; }
     else if ( mSize >= 14 ) { mSize = 14; edit_text = true; }
-    mETsizeChanged = ! edit_text;
-    if ( edit_text ) mETsize.setText( String.format(Locale.US, "%.2f", mSize ) );
-    mSample.resetPaintPath( mPaint, mPath, sz*1.4f, sz*1.4f );
+    if ( edit_text ) setETsize( mSize );
+    mSample.resetPaintPath( mPaint, mPath, mSize*1.4f, mSize*1.4f );
     mLayout.invalidate();
   }
 

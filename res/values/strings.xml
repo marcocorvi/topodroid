@@ -902,6 +902,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_settings_svx">Survex export settings</string>
     <string name="title_settings_th">Therion export settings</string>
     <string name="title_settings_dat">Compass export settings</string>
+    <string name="title_settings_tro">VisualTopo export settings</string>
     <string name="title_settings_svg">SVG export settings</string>
     <string name="title_settings_dxf">DXF export settings</string>
     <string name="title_settings_png">PNG export settings</string>

@@ -30,6 +30,7 @@ class StationNameDefault extends StationName
 
   // ------------------------------------------------------------------------------------------------
 
+  // this is called to renumber a list of blocks - therefore the extend need not be updated
   // @param blk0         reference dblock
   // @param list         list of dblock to assign
   // @param sts          station names already in use
@@ -41,7 +42,8 @@ class StationNameDefault extends StationName
 
     boolean bs = TDSetting.mDistoXBackshot;
 
-    TDLog.Log( TDLog.LOG_DATA, "assign stations after " + list.size() + " " + (sts!=null? sts.size():0) );
+    // TDLog.Log( TDLog.LOG_DATA, "assign stations after " + list.size() + " " + (sts!=null? sts.size():0) );
+
     int survey_stations = StationPolicy.mSurveyStations;
     if ( survey_stations <= 0 ) return;
     boolean forward_shots = ( survey_stations == 1 );
@@ -61,10 +63,12 @@ class StationNameDefault extends StationName
     String next;
     String station;
     if ( forward_shots ) {
-      next = DistoXStationName.incrementName( to, sts );
+      next = to;
+      next = DistoXStationName.incrementName( next, sts );
       station = shot_after_splays ? to : from;
     } else {
-      next = DistoXStationName.incrementName( from, sts );
+      next = from;
+      next = DistoXStationName.incrementName( next, sts );
       station = shot_after_splays ? next : from;
     }
     // Log.v("DistoX-SN", "F " + from + " T " + to + " N " + next + " S " + station );
@@ -92,12 +96,12 @@ class StationNameDefault extends StationName
         if ( forward_shots ) {
           from = to;
           to   = next;
-          next = DistoXStationName.incrementName( to, sts );
+          next = DistoXStationName.incrementName( next, sts ); // to, sts
           station = shot_after_splays ? to : from;
         } else {
           to   = from;
           from = next;
-          next = DistoXStationName.incrementName( from, sts );
+          next = DistoXStationName.incrementName( next, sts ); // from, sts
           station = shot_after_splays ? next : from;
         }
 	main_from = from;
@@ -137,13 +141,33 @@ class StationNameDefault extends StationName
     if ( unassigned.size() > 0 ) assignStations( unassigned, sts );
   }
 
-  // DistoX backshot-mode is handled separatedly
-  // @param list         list of dblock to assign
-  // @param sts          station names already in use
+  // debug log
+  private void logJump( DBlock blk, String from, String to, Set<String> sts )
+  {
+    if ( TDLog.LOG_SHOT ) {
+      try {
+        int i1 = Integer.parseInt( from );
+        int i2 = Integer.parseInt( to );
+        if ( Math.abs(i2-i1) != 1 ) {
+          StringBuilder sb = new StringBuilder();
+          for ( String st : sts ) sb.append(st + "," );
+          TDLog.Error( from + "-" + to + " blk " + blk.mId + " set " + sb.toString() );
+        }
+      } catch ( NumberFormatException e ) { }
+    }
+  }
+
+  /** assign station names to shots
+   * @param list         list of dblock, including those to assign
+   * @param sts          station names already in use
+   * DistoX backshot-mode is handled separatedly
+   */
   @Override
   void assignStations( List<DBlock> list, Set<String> sts )
   { 
-    TDLog.Log( TDLog.LOG_DATA, "assign stations: list " + list.size() + " sts " + (sts!=null? sts.size():0) );
+    // TDLog.Log( TDLog.LOG_DATA, "assign stations: list " + list.size() + " sts " + (sts!=null? sts.size():0) );
+    // Log.v( "DistoX-BLOCK", "assign stations: list " + list.size() + " sts " + (sts!=null? sts.size():0) );
+
     if ( TDSetting.mDistoXBackshot ) {
       assignStationsBackshot( list, sts );
       return;
@@ -163,7 +187,7 @@ class StationNameDefault extends StationName
     String station = ( mCurrentStationName != null )? mCurrentStationName
                    : (shot_after_splay ? from : "");  // splays station
 
-    TDLog.Log( TDLog.LOG_DATA, "F<" + from + "> T<" + to + "> S<" + station + "> CS " + ( (mCurrentStationName==null)? "null" : mCurrentStationName ) );
+    // TDLog.Log( TDLog.LOG_DATA, "F<" + from + "> T<" + to + "> S<" + station + "> CS " + ( (mCurrentStationName==null)? "null" : mCurrentStationName ) );
     // if ( TDLog.LOG_DATA ) {
     //   StringBuilder sb = new StringBuilder();
     //   for ( String st : sts ) sb.append(st + " " );
@@ -173,9 +197,10 @@ class StationNameDefault extends StationName
     int nrLegShots = 0;
 
     for ( DBlock blk : list ) {
+      TDLog.Log( TDLog.LOG_SHOT, blk.mId + " <" + blk.mFrom + "-" + blk.mTo + "> F " + from + " T " + to + " S " + station );
       if ( blk.mFrom.length() == 0 ) // this implies blk.mTo.length() == 0
       {
-        TDLog.Log( TDLog.LOG_DATA, blk.mId + " EMPTY FROM. prev " + ( (prev==null)? "null" : prev.mId ) );
+        // TDLog.Log( TDLog.LOG_DATA, blk.mId + " EMPTY FROM. prev " + ( (prev==null)? "null" : prev.mId ) );
 
         if ( prev == null ) {
           prev = blk;
@@ -194,14 +219,14 @@ class StationNameDefault extends StationName
                 }
               }
               nrLegShots = 2; // prev and this shot
-              TDLog.Log( TDLog.LOG_DATA, "leg-2 F " + from + " T " + to + " S " + station );
+              // TDLog.Log( TDLog.LOG_DATA, "leg-2 F " + from + " T " + to + " S " + station );
             } else {
               nrLegShots ++;  // one more centerline shot
             }
             if ( nrLegShots == TDSetting.mMinNrLegShots ) {
               legFeedback( );
               mCurrentStationName = null;
-              TDLog.Log( TDLog.LOG_DATA, "PREV " + prev.mId + " nrLegShots " + nrLegShots + " set PREV " + from + "-" + to );
+              // TDLog.Log( TDLog.LOG_DATA, "PREV " + prev.mId + " nrLegShots " + nrLegShots + " set PREV " + from + "-" + to );
 
               setBlockName( prev, from, to );
               setLegExtend( prev );
@@ -210,35 +235,15 @@ class StationNameDefault extends StationName
                                                              //                 this-shot-from if splays after shot
                 from = to;                                   // next-shot-from = this-shot-to
                 to   = DistoXStationName.incrementName( to, sts );  // next-shot-to   = increment next-shot-from
-                // {
-                //   try {
-                //     int i1 = Integer.parseInt( from );
-                //     int i2 = Integer.parseInt( to );
-                //     if ( i2-i1 != 1 ) {
-                //       StringBuilder sb = new StringBuilder();
-                //       for ( String st : sts ) sb.append(st + " " );
-                //       TDLog.Error( from + "-" + to + " blk " + blk.mId + " set " + sb.toString() );
-                //     }
-                //   } catch ( NumberFormatException e ) { }
-                // }
+                logJump( blk, from, to, sts );
               } else { // backward_shots
                 to   = from;                                     // next-shot-to   = this-shot-from
                 from = DistoXStationName.incrementName( from, sts ); // next-shot-from = increment this-shot-from
                 station = shot_after_splay ? from : to;          // splay-station  = next-shot-from if splay before shot
                                                                  //                = this-shot-from if splay after shot
-                // {
-                //   try {
-                //     int i1 = Integer.parseInt( to );
-                //     int i2 = Integer.parseInt( from );
-                //     if ( i2-i1 != 1 ) {
-                //       StringBuilder sb = new StringBuilder();
-                //       for ( String st : sts ) sb.append(st + " " );
-                //       TDLog.Error( from + "-" + to + " blk " + blk.mId + " set " + sb.toString() );
-                //     }
-                //   } catch ( NumberFormatException e ) { }
-                // }
+                // logJump( blk, to, from, sts );
               }
-              TDLog.Log( TDLog.LOG_DATA, "increment F " + from + " T " + to + " S " + station );
+              // TDLog.Log( TDLog.LOG_DATA, "increment F " + from + " T " + to + " S " + station );
             }
           } else { // distance from prev > "closeness" setting
             nrLegShots = 0;
@@ -254,41 +259,24 @@ class StationNameDefault extends StationName
         {
           if ( forward_shots ) {  // : ..., 0-1, 1-2 ==> from=(2) to=Next(2)=3 ie 2-3
             from = blk.mTo;
-            to   = DistoXStationName.incrementName( from, sts );
-            // {
-            //   try {
-            //     int i1 = Integer.parseInt( from );
-            //     int i2 = Integer.parseInt( to );
-            //     if ( i2-i1 != 1 ) {
-            //       StringBuilder sb = new StringBuilder();
-            //       for ( String st : sts ) sb.append(st + " " );
-            //       TDLog.Error( from + "-" + to + " blk " + blk.mId + " set " + sb.toString() );
-            //     }
-            //   } catch ( NumberFormatException e ) { }
-            // }
+            to   = from;
+            to   = DistoXStationName.incrementName( to, sts );
+            logJump( blk, from, to, sts );
             if ( mCurrentStationName == null ) {
               station = shot_after_splay ? blk.mTo    // 1,   1, 1-2, [ 2, 2, ..., 2-3 ] ...
                                          : blk.mFrom; // 1-2, 1, 1,   [ 2-3, 2, 2, ... ] ...
             } // otherwise station = mCurrentStationName
           } else { // backward shots: ..., 1-0, 2-1 ==> from=Next(2)=3 to=2 ie 3-2
-            to      = blk.mFrom;
-            from    = DistoXStationName.incrementName( to, sts ); // FIXME it was from
-            // {
-            //   try {
-            //     int i1 = Integer.parseInt( to );
-            //     int i2 = Integer.parseInt( from );
-            //     if ( i2-i1 != 1 ) {
-            //       StringBuilder sb = new StringBuilder();
-            //       for ( String st : sts ) sb.append(st + " " );
-            //       TDLog.Error( from + "-" + to + " blk " + blk.mId + " set " + sb.toString() );
-            //     }
-            //   } catch ( NumberFormatException e ) { }
-            // }
+            to   = blk.mFrom;
+            from = to;
+            from = DistoXStationName.incrementName( from, sts ); // FIXME it was old from
+            // logJump( blk, to, from, sts );
+
 	    // station must be set even if there is a "currentStation"
             station = shot_after_splay ? from       // 2,   2, 2, 2-1, [ 3, 3, ..., 3-2 ]  ...
                                        : blk.mFrom; // 2-1, 2, 2, 2,   [ 3-2, 3, 3, ... 3 ] ...
           }
-          TDLog.Log( TDLog.LOG_DATA, "ID " + blk.mId + ": " + blk.mFrom + " - " + blk.mTo + " F " + from + " T " + to + " S " + station );
+          // TDLog.Log( TDLog.LOG_DATA, "ID " + blk.mId + ": " + blk.mFrom + " - " + blk.mTo + " F " + from + " T " + to + " S " + station );
 
           nrLegShots = TDSetting.mMinNrLegShots;
         } 
@@ -386,14 +374,16 @@ class StationNameDefault extends StationName
         {
           if ( forward_shots ) {  // : ..., 0-1, 1-2 ==> from=(2) to=Next(2)=3 ie 2-3
             from = blk.mFrom;
-            to   = DistoXStationName.incrementName( from, sts );
+            to   = from;
+            to   = DistoXStationName.incrementName( to, sts );
             if ( mCurrentStationName == null ) {
               station = shot_after_splay ? blk.mFrom  // 1,   1, 1-2, [ 2, 2, ..., 2-3 ] ...
                                          : blk.mTo;   // 1-2, 1, 1,   [ 2-3, 2, 2, ... ] ...
             } // otherwise station = mCurrentStationName
           } else { // backward shots: ..., 1-0, 2-1 ==> from=Next(2)=3 to=2 ie 3-2
-            to      = blk.mTo;
-            from    = DistoXStationName.incrementName( to, sts ); // FIXME it was from
+            to   = blk.mTo;
+            from = to;
+            from = DistoXStationName.incrementName( from, sts ); // FIXME it was old from
             if ( mCurrentStationName == null ) {
               station = shot_after_splay ? from       // 2,   2, 2, 2-1, [ 3, 3, ..., 3-2 ]  ...
                                          : blk.mTo;   // 2-1, 2, 2, 2,   [ 3-2, 3, 3, ... 3 ] ...

@@ -52,7 +52,7 @@ class NumShot
     from = f;
     to   = t;
     // block = blk;
-    mIgnoreExtend = ( blk.getExtend() == DBlock.EXTEND_IGNORE);
+    mIgnoreExtend = ( blk.getIntExtend() == DBlock.EXTEND_IGNORE);
     mUsed = false;
     mDirection = dir;
     mBranchDir = 0;
@@ -65,7 +65,7 @@ class NumShot
     mAvgLeg  = new AverageLeg( decl );
     mAvgLeg.set( blk );
     mAnomaly = anomaly;
-    // mExtend  = blk.getExtend();
+    // mExtend  = blk.getIntExtend();
     firstBlock = blk;
   }
 

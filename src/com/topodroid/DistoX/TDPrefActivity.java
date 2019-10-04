@@ -91,6 +91,7 @@ public class TDPrefActivity extends Activity
     R.string.title_settings_svx,
     R.string.title_settings_th,
     R.string.title_settings_dat,
+    R.string.title_settings_tro,
     R.string.title_settings_svg,      // 11
     R.string.title_settings_dxf,
     R.string.title_settings_png,

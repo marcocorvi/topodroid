@@ -703,7 +703,7 @@ class DistoXNum
       TDLog.Error( "making shot from reversed temp " + sf.name + " " + st.name );
     }
     DBlock blk = ts.getFirstBlock();
-    // Log.v("DistoX", "make shot " + sf.name + "-" + st.name + " blocks " + ts.blocks.size() + " E " + blk.getExtend() + " S " + blk.getStretch() );
+    // Log.v("DistoX", "make shot " + sf.name + "-" + st.name + " blocks " + ts.blocks.size() + " E " + blk.getIntExtend() + " S " + blk.getStretch() );
     // NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), 1, anomaly, mDecl ); // FIXME DIRECTION
     NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), direction, anomaly, mDecl );
     ArrayList<DBlock> blks = ts.getBlocks();
@@ -719,7 +719,7 @@ class DistoXNum
       TDLog.Error( "making shot from reversed temp " + sf.name + " " + st.name );
     }
     DBlock blk = ts.getFirstBlock();
-    // Log.v("DistoX", "make shot " + sf.name + "-" + st.name + " blocks " + ts.blocks.size() + " E " + blk.getExtend() + " S " + blk.getStretch() );
+    // Log.v("DistoX", "make shot " + sf.name + "-" + st.name + " blocks " + ts.blocks.size() + " E " + blk.getIntExtend() + " S " + blk.getStretch() );
     // NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), 1, anomaly, mDecl ); // FIXME DIRECTION
     NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), direction, anomaly, mDecl );
     ArrayList<DBlock> blks = ts.getBlocks();
@@ -784,25 +784,25 @@ class DistoXNum
       if ( blk.isSplay() ) {
         lastLeg = null;  // clear last-leg
         if ( blk.mFrom != null && blk.mFrom.length() > 0 ) { // normal splay
-          tmpsplays.add( new TriSplay( blk, blk.mFrom, blk.getFullExtend(), +1 ) );
+          tmpsplays.add( new TriSplay( blk, blk.mFrom, blk.getIntExtend(), +1 ) );
         } else if ( blk.mTo != null && blk.mTo.length() > 0 ) { // reversed splay
-          tmpsplays.add( new TriSplay( blk, blk.mTo, blk.getFullExtend(), -1 ) );
+          tmpsplays.add( new TriSplay( blk, blk.mTo, blk.getIntExtend(), -1 ) );
         }
       } else if ( blk.isMainLeg() ) {
-        lastLeg = new TriShot( blk, blk.mFrom, blk.mTo, blk.getExtend(), blk.getStretch(), +1 );
+        lastLeg = new TriShot( blk, blk.mFrom, blk.mTo, blk.getIntExtend(), blk.getStretch(), +1 );
         lastLeg.duplicate = ( blk.isDuplicate() );
         lastLeg.surface   = ( blk.isSurface() );
         lastLeg.commented = ( blk.isCommented() ); // FIXME_COMMENTED
         // lastLeg.backshot  = 0;
-        if ( blk.getExtend() > 1 ) surveyExtend = false;
+        if ( blk.getIntExtend() > 1 ) surveyExtend = false;
         tmpshots.add( lastLeg );
       } else if ( blk.isBackLeg() ) {
-        lastLeg = new TriShot( blk, blk.mFrom, blk.mTo, blk.getExtend(), blk.getStretch(), +1 );
+        lastLeg = new TriShot( blk, blk.mFrom, blk.mTo, blk.getIntExtend(), blk.getStretch(), +1 );
         lastLeg.duplicate = true;
         lastLeg.surface   = ( blk.isSurface() );
         lastLeg.commented = false;
         // lastLeg.backshot  = 0;
-        if ( blk.getExtend() > 1 ) surveyExtend = false;
+        if ( blk.getIntExtend() > 1 ) surveyExtend = false;
         tmpshots.add( lastLeg );
       } else if ( blk.isSecLeg() ) {
         if (lastLeg != null) lastLeg.addBlock( blk );
@@ -935,7 +935,7 @@ class DistoXNum
         repeat = false;
         for ( TriShot ts : tmpshots ) {
           if ( ts.used || ts.backshot != 0 ) continue;                  // skip used and siblings
-          if ( pass == 0 && DBlock.getExtend(ts.extend) > 1 ) continue; // first pass skip non-extended
+          if ( pass == 0 && DBlock.getIntExtend(ts.extend) > 1 ) continue; // first pass skip non-extended
 
           float anomaly = 0;
           if ( StationPolicy.doMagAnomaly() ) {
@@ -1000,7 +1000,7 @@ class DistoXNum
           //     ( ( sf == null )? "null" : sf.name ) + " " + (( st == null )? "null" : st.name ) );
           // }
 
-          int  iext = DBlock.getExtend( ts.extend );
+          int  iext = DBlock.getIntExtend( ts.extend );
           boolean has_coords = (iext <= 1);
           float ext = DBlock.getReducedExtend( ts.extend, ts.stretch );
           if ( sf != null ) {

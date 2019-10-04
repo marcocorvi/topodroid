@@ -80,7 +80,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     if ( flag == DBlock.FLAG_NO_EXTEND ) {
       for ( int pos=0; pos < mItems.size(); ++pos ) {
         DBlock blk = mItems.get( pos );
-        if ( blk.getExtend( ) > 1 ) {
+        if ( blk.getIntExtend( ) > 1 ) {
           mSearch.add( pos );
           if ( blk.mView != null ) blk.mView.setBackgroundColor( TDColor.SEARCH );
         }
@@ -183,7 +183,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     return ret;
   }
 
-  // called only by ShotWindow updateBlockList( blk )
+  // called only by ShotWindow updateDBlockList( blk )
   // this method changes the ArrayList of DistoxDBlock's
   //
   boolean addDataBlock( DBlock blk ) 
@@ -232,19 +232,21 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   }
 
   // return the list of blocks to assign station names
-  ArrayList< DBlock > getItemsForAssign()
+  // called only by ShotWindow.updateDBlockList
+  List< DBlock > getItemsForAssign()
   {
-    ArrayList< DBlock > ret = new ArrayList<>();
     int size = mItems.size();
     int k = size-1;
     for ( ; k > 0; --k ) { // scan from last backword until a leg is found
       DBlock blk = mItems.get(k);
       if ( blk.mFrom.length() > 0 && blk.mTo.length() > 0 ) break;
     }
-    for ( ; k < size; ++k ) { // insert into return from the leg onward
-      ret.add( mItems.get(k) );
-    }
-    return ret;
+    // List< DBlock > ret = new ArrayList<>();
+    // for ( ; k < size; ++k ) { // insert into return from the leg onward
+    //   ret.add( mItems.get(k) );
+    // }
+    // return ret; // REPLACED 20191002
+    return mItems.subList( k, size );
   }
 
   // return the block at the given position

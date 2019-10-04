@@ -13,7 +13,6 @@ package com.topodroid.DistoX;
 
 // import android.util.Log;
 
-// import android.app.Dialog;
 import android.content.Context;
 // import android.content.res.Resources;
 
@@ -48,8 +47,7 @@ class SetupTextSizeDialog extends MyDialog
   private TextView mSample;
 
   private int  mSize;
-
-  private boolean mETsizeChanged = false;
+  private boolean mETskip = false;
 
   SetupTextSizeDialog( Context context, MainWindow parent, int setup, int size )
   {
@@ -57,11 +55,6 @@ class SetupTextSizeDialog extends MyDialog
     mParent = parent;
     mSetup  = setup;
     mSize   = size;
-  }
-
-  private void updateEditSize()
-  { 
-    mETsize.setText( String.format(Locale.US, "%d", mSize ) );
   }
 
   @Override
@@ -90,10 +83,8 @@ class SetupTextSizeDialog extends MyDialog
     mBtnPlus.setOnClickListener( this );
     mBtnMinus.setOnClickListener( this );
 
-    // float displayWidth = TopoDroidApp.mDisplayWidth;
-    // float displayHeight = TopoDroidApp.mDisplayHeight;
-    
-    updateEditSize();
+    mETsize.setKeyListener( null );
+    // mETsize.setBackgroundColor( TDColor.MID_GRAY );
 
     // mSeekBar.setOnSeekBarChangeListener( new OnSeekBarChangeListener() {
     //   public void onProgressChanged( SeekBar seekbar, int progress, boolean fromUser) {
@@ -101,16 +92,14 @@ class SetupTextSizeDialog extends MyDialog
     //     if ( s < TDSetting.MIN_SIZE_TEXT ) s = TDSetting.MIN_SIZE_TEXT;
     //     else if ( s > 128 ) s = 128;
     //     if ( s != mSize ) {
-    //       mSize = s;		
-    //       if ( ! mETsizeChanged ) updateEditSize();
-    //       mETsizeChanged = false;
-    //       mSample.setTextSize( TDSetting.getTextSize(mParent.getApp(), mSize) );
+    //       setSize( s );
     //     }
     //   }
     //   public void onStartTrackingTouch(SeekBar seekbar) { }
     //   public void onStopTrackingTouch(SeekBar seekbar) { }
     // } );
 
+    /*
     mETsize.addTextChangedListener( new TextWatcher() {
       @Override
       public void afterTextChanged( Editable e ) { }
@@ -121,26 +110,37 @@ class SetupTextSizeDialog extends MyDialog
       @Override
       public void onTextChanged( CharSequence cs, int start, int before, int cnt ) 
       {
+        if ( mETskip ) return;
         try {
           int size = Integer.parseInt( mETsize.getText().toString() );
           setSize( size, false );
-        } catch ( NumberFormatException e ) { }
+        } catch ( NumberFormatException e ) { 
+          setSize( mSize, false );
+        }
       }
     } );
+    */
 
     // mSeekBar.setProgress( mSize );
+    setEditSize();
     mSample.setTextSize( TDSetting.getTextSize( mSize ) );
   }
 
-  private void setSize( int a, boolean edit_text )
+  private void setSize( int sz, boolean edit_text )
   {
-    mSize = a;
+    mSize = sz;
     if ( mSize < 10 ) { mSize = 10; edit_text = true; }
     else if ( mSize > 128 ) { mSize = 128; edit_text = true; }
-    mETsizeChanged = ! edit_text;
     // mSeekBar.setProgress( mSize );
-    if ( edit_text ) updateEditSize();
+    if ( edit_text ) setEditSize();
     mSample.setTextSize( TDSetting.getTextSize( mSize ) );
+  }
+
+  private void setEditSize()
+  { 
+    mETskip = true;
+    mETsize.setText( String.format(Locale.US, "%d", mSize ) );
+    mETskip = false;
   }
 
 // ----------------------------------------------------------------------------

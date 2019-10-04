@@ -2513,7 +2513,7 @@ public class DrawingWindow extends ItemDrawer
     void updateBlockExtend( DBlock block, int extend, float stretch )
     {
       // if ( ! block.isSplay() ) extend -= DBlock.EXTEND_FVERT;
-      if ( block.getExtend() == extend && block.hasStretch( stretch ) ) return;
+      if ( block.getIntExtend() == extend && block.hasStretch( stretch ) ) return;
       block.setExtend( extend, stretch );
       mApp_mData.updateShotExtend( block.mId, mSid, extend, stretch );
       recomputeProfileReference();
@@ -3576,7 +3576,7 @@ public class DrawingWindow extends ItemDrawer
             extend = -1;
           }
     
-          float dc = TDMath.in360( (extend == blk.getExtend())? clino - blk.mClino : 180 - clino - blk.mClino );
+          float dc = TDMath.in360( (extend == blk.getIntExtend())? clino - blk.mClino : 180 - clino - blk.mClino );
           if ( dc > 90 && dc <= 270 ) { // exchange FROM-TO 
             azimuth = TDMath.add180( blk.mBearing );
             from = blk.mTo;
@@ -3585,7 +3585,7 @@ public class DrawingWindow extends ItemDrawer
           } else {
             azimuth = blk.mBearing;
           }
-          // if ( extend != blk.getExtend() ) {
+          // if ( extend != blk.getIntExtend() ) {
           //   azimuth = TDMath.add180( blk.mBearing );
           // }
         } else { // xsection in plan view ( clino = 0 )
@@ -4685,7 +4685,7 @@ public class DrawingWindow extends ItemDrawer
     private void flipBlock( DBlock blk )
     {
       if ( blk != null && blk.flipExtendAndStretch() ) {
-        mApp_mData.updateShotExtend( blk.mId, mSid, blk.getFullExtend(), blk.getStretch() );
+        mApp_mData.updateShotExtend( blk.mId, mSid, blk.getIntExtend(), blk.getStretch() );
       }
     }
 
@@ -5480,19 +5480,19 @@ public class DrawingWindow extends ItemDrawer
     computeReferences( (int)mType, mName, zoom, false );
   }
 
-  @Override
-  public void updateBlockList( CalibCBlock blk ) { }
+  // @Override
+  // public void updateBlockList( CalibCBlock blk ) { }
   
   // forward adding data to the ShotWindow
-  @Override
-  public void updateBlockList( DBlock blk ) 
-  {
-    // Log.v("DistoX", "Drawing window: update Block List block id " + blk.mId + ": " + blk.mFrom + " - " + blk.mTo ); // DATA_DOWNLOAD
-    if ( TopoDroidApp.mShotWindow != null ) {
-      TopoDroidApp.mShotWindow.updateBlockList( blk ); // FIXME_EXTEND needed to update sketch splays immediately on download
-    }
-    updateDisplay( /* true, true */ );
-  }
+  // @Override
+  // public void updateBlockList( DBlock blk ) 
+  // {
+  //   // Log.v("DistoX", "Drawing window: update Block List block id " + blk.mId + ": " + blk.mFrom + " - " + blk.mTo ); // DATA_DOWNLOAD
+  //   if ( TopoDroidApp.mShotWindow != null ) {
+  //     TopoDroidApp.mShotWindow.updateBlockList( blk ); // FIXME_EXTEND needed to update sketch splays immediately on download
+  //   }
+  //   updateDisplay( /* true, true */ );
+  // }
 
   @Override
   public void updateBlockList( long blk_id )

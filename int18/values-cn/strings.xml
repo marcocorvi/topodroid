@@ -900,6 +900,7 @@
     <string name="title_settings_svx">Survex输出设置</string>
     <string name="title_settings_th">Therion输出设置</string>
     <string name="title_settings_dat">Compass输出设置</string>
+    <!-- TODO string name="title_settings_tro">VisualTopo export settings</string -->
     <string name="title_settings_svg">SVG输出设置</string>
     <string name="title_settings_dxf">DXF输出设置</string>
     <string name="title_settings_png">PNG输出设置</string>

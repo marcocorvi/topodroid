@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-// import android.util.Log;
+import android.util.Log;
 
 import java.io.File;
 // import java.io.IOException;
@@ -400,24 +400,14 @@ public class ShotWindow extends Activity
 
   // add a block to the adapter (ILister interface)
   // called by the RFcommThread after receiving a data packet
+  // this is the only place where assignStationsAll is called: 
+  // synchronize it
   @Override
-  public void updateBlockList( long blk_id )
+  synchronized public void updateBlockList( long blk_id )
   {
-    // Log.v("DistoX", "Shot window update block list. Id: " + blk_id );
+    // Log.v("DistoX-BLOCK", "Shot window update block list. Id: " + blk_id );
     DBlock blk = mApp_mData.selectShot( blk_id, TDInstance.sid );
-    if ( blk != null ) {
-      updateBlockList( blk );
-    }
-  }
-
-  @Override
-  public void updateBlockList( CalibCBlock blk ) { }
- 
-  @Override
-  public void updateBlockList( DBlock blk )
-  {
-    // Log.v("DistoX", "Shot window update list. blk id: " + blk.mId + " " + blk.mLength + " " + blk.mBearing + " " + blk.mClino );
-    if ( mDataAdapter != null ) {
+    if ( blk != null && mDataAdapter != null ) {
       // FIXME 3.3.0
       if ( mDataAdapter.addDataBlock( blk ) ) {
         mSurveyAccuracy.addBlockAMD( blk );
@@ -437,6 +427,8 @@ public class ShotWindow extends Activity
         } );
 	// mList.invalidate();
 	// mDataAdapter.reviseLatest();
+      } else {
+        TDLog.Error( "block already-added " + blk.mId );
       }
     }
   }
@@ -872,7 +864,7 @@ public class ShotWindow extends Activity
         ++id;
         DBlock b = mApp_mData.selectShot( id, TDInstance.sid );
         if ( b != null && b.isSecLeg() ) { //  DBlock.BLOCK_SEC_LEG --> leg-flag = 0
-          mApp_mData.updateShot( id, TDInstance.sid, blk.mFrom, blk.mTo, blk.getFullExtend(), blk.getFlag(), 0, blk.mComment );
+          mApp_mData.updateShot( id, TDInstance.sid, blk.mFrom, blk.mTo, blk.getIntExtend(), blk.getFlag(), 0, blk.mComment );
           mApp_mData.updateShotStatus( id, TDInstance.sid, 0 ); // status normal
         }
       }
@@ -1389,7 +1381,7 @@ public class ShotWindow extends Activity
       } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // FLIP
         for ( DBlock blk : mDataAdapter.mSelect ) {
           if ( blk.flipExtendAndStretch() ) {
-            mApp_mData.updateShotExtend( blk.mId, TDInstance.sid, blk.getExtend(), blk.getStretch() );
+            mApp_mData.updateShotExtend( blk.mId, TDInstance.sid, blk.getIntExtend(), blk.getStretch() );
           }
         }
         clearMultiSelect( );
@@ -1505,7 +1497,7 @@ public class ShotWindow extends Activity
           ++id;
           DBlock b = mApp_mData.selectShot( id, TDInstance.sid );
           if ( b != null && b.isSecLeg() ) { // DBlock.BLOCK_SEC_LEG --> leg-flag 0
-            mApp_mData.updateShot( id, TDInstance.sid, blk.mFrom, blk.mTo, blk.getFullExtend(), blk.getFlag(), 0, blk.mComment );
+            mApp_mData.updateShot( id, TDInstance.sid, blk.mFrom, blk.mTo, blk.getIntExtend(), blk.getFlag(), 0, blk.mComment );
             mApp_mData.updateShotStatus( id, TDInstance.sid, 0 ); // status normal
           }
         }
@@ -1739,6 +1731,10 @@ public class ShotWindow extends Activity
   }
 
   // called by MultishotDialog
+  // @param blks    list of blocks to renumber
+  // @param from    FROM station to assign to first block
+  // @param to      TO station to assign to first block
+  // no need to synchronize
   void renumberBlocks( List<DBlock> blks, String from, String to )  // RENUMBER SELECTED BLOCKS
   {
     DBlock blk = blks.get(0); // blk is guaranteed to exists
@@ -2062,13 +2058,16 @@ public class ShotWindow extends Activity
 
   // ------------------------------------------------------------------
 
+  // called by ShotDialog
+  // @param blk   shot after which to renumber
+  // no need to synchronize
   void renumberShotsAfter( DBlock blk )
   {
     // Log.v("DistoX", "renumber shots after " + blk.mLength + " " + blk.mBearing + " " + blk.mClino );
     // NEED TO FORWARD to the APP to change the stations accordingly
  
     List< DBlock > shots;
-    // backsight and tripod seem o be OK
+    // backsight and tripod seem to be OK
     // if ( StationPolicy.doTripod() || StationPolicy.doBacksight() ) {
     //   shots = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.NORMAL );
     // } else {

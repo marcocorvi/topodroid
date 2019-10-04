@@ -876,6 +876,7 @@
     <string name="title_settings_svx">Impostazioni export Survex</string>
     <string name="title_settings_th">Therion: Imposta export</string>
     <string name="title_settings_dat">Compass: Imposta export</string>
+    <!-- TODO string name="title_settings_tro">VisualTopo export settings</string -->
     <string name="title_settings_svg">SVG: Imposta export</string>
     <string name="title_settings_dxf">DXF: Imposta export</string>
     <string name="title_settings_png">PNG: Imposta export</string>

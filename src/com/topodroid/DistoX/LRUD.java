@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date dec 2014
  *
- * @brief TopoDroid drawing: button for an area type
+ * @brief TopoDroid LRUD struct
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -17,9 +17,9 @@ class LRUD
 
   LRUD() 
   {
-    l = 0.0f;
-    r = 0.0f;
-    u = 0.0f;
-    d = 0.0f;
+    l = 0.0f; // left
+    r = 0.0f; // right
+    u = 0.0f; // up
+    d = 0.0f; // down
   }
 }

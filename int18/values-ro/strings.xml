@@ -884,6 +884,7 @@
     <string name="title_settings_svx">Parametri exportare Survex</string>
     <string name="title_settings_th">Parametri exportare Therion</string>
     <string name="title_settings_dat">Parametri exportare Compass</string>
+    <!-- TODO string name="title_settings_tro">VisualTopo export settings</string -->
     <string name="title_settings_svg">Parametri exportare SVG</string>
     <string name="title_settings_dxf">Parametri exportare DXF</string>
     <string name="title_settings_png">Parametri exportare PNG</string>

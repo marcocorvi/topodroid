@@ -366,7 +366,7 @@ class TDExporter
               ref_item = null; 
             }
 
-            extend = item.getExtend();
+            extend = item.getIntExtend();
             writeCsxTSplaySegment( pw, cave, branch, session, to, cntSplay, item.isXSplay() ); // branch prefix
             ++ cntSplay;
             pw.format(" splay=\"1\" exclude=\"1\"");
@@ -411,7 +411,7 @@ class TDExporter
               ref_item = null; 
             }
 
-            extend = item.getExtend();
+            extend = item.getIntExtend();
             writeCsxFSplaySegment( pw, cave, branch, session, from, cntSplay, item.isXSplay() ); // branch prefix
             ++cntSplay;
             pw.format(" splay=\"1\" exclude=\"1\"");
@@ -452,7 +452,7 @@ class TDExporter
               pw.format("    </segment>\n");
             }
             ref_item = item;
-            extend = item.getExtend();
+            extend = item.getIntExtend();
             if ( item.isDuplicate() ) {
               dup = true;
             } else if ( item.isSurface() ) {
@@ -1012,7 +1012,7 @@ class TDExporter
     for ( DBlock item : list ) {
       String from = item.mFrom;
       String to   = item.mTo;
-      extend = item.getExtend();
+      extend = item.getIntExtend();
       if ( from == null || from.length() == 0 ) {
         from = "";
         if ( to == null || to.length() == 0 ) {
@@ -1021,7 +1021,7 @@ class TDExporter
             && ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
             from = ref_item.mFrom;
             to   = ref_item.mTo;
-            extend = ref_item.getExtend();
+            extend = ref_item.getIntExtend();
           } else {
             ref_item = null;
           }
@@ -1235,13 +1235,13 @@ class TDExporter
             if ( item.mComment != null && item.mComment.length() > 0 ) {
               pw.format("  # %s\n", item.mComment );
             }
-            if ( item.getExtend() > 1 ) {
+            if ( item.getIntExtend() > 1 ) {
 	          if ( splay_extend ) {
                 pw.format( extend_auto );
 	            splay_extend = false;
 	          }
-	        } else if ( item.getExtend() != extend || ! splay_extend ) {
-              extend = item.getExtend();
+	        } else if ( item.getIntExtend() != extend || ! splay_extend ) {
+              extend = item.getIntExtend();
               pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
 	          splay_extend = true;
             }
@@ -1270,13 +1270,13 @@ class TDExporter
             if ( item.mComment != null && item.mComment.length() > 0 ) {
               pw.format("  # %s\n", item.mComment );
             }
-            if ( item.getExtend() > 1 ) {
+            if ( item.getIntExtend() > 1 ) {
 	          if ( splay_extend ) {
                 pw.format( extend_auto );
 	            splay_extend = false;
 	          }
-	        } else if ( item.getExtend() != extend || ! splay_extend ) {
-              extend = item.getExtend();
+	        } else if ( item.getIntExtend() != extend || ! splay_extend ) {
+              extend = item.getIntExtend();
               pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
 	          splay_extend = true;
             }
@@ -1295,8 +1295,8 @@ class TDExporter
               }
             }
             ref_item = item;
-            if ( item.getExtend() != extend || ! splay_extend ) {
-              extend = item.getExtend();
+            if ( item.getIntExtend() != extend || ! splay_extend ) {
+              extend = item.getIntExtend();
               pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
 	          splay_extend = true;
             }
@@ -1999,7 +1999,7 @@ class TDExporter
   //           l = item.mLength;
   //           b = item.mBearing;
   //           c = item.mClino;
-  //           extend = item.getExtend();
+  //           extend = item.getIntExtend();
   //           flag   = (int) item.getFlag();
   //           l0[0] = item.mLength;
   //           b0[0] = item.mBearing;
@@ -2021,7 +2021,7 @@ class TDExporter
   //           // item.Comment()
   //           pw.format("    \"%s\" \"\" ", from );
   //           pw.format(Locale.US, "%.2f %.1f %.1f %.1f %d %d 1\n",
-  //             item.mLength, item.mBearing, item.mClino, item.mRoll, item.getExtend(), item.getFlag() );
+  //             item.mLength, item.mBearing, item.mClino, item.mRoll, item.getIntExtend(), item.getFlag() );
   //         }
   //       } else { // from.isEmpty()
   //         if ( to != null && to.length() > 0 ) {
@@ -2040,7 +2040,7 @@ class TDExporter
   //           // item.Comment()
   //           pw.format("    \"\" \"%s\" ", to );
   //           pw.format(Locale.US, "%.2f %.1f %.1f %.1f %d %d 1\n",
-  //             item.mLength, item.mBearing, item.mClino, item.mRoll, item.getExtend(), item.getFlag() );
+  //             item.mLength, item.mBearing, item.mClino, item.mRoll, item.getIntExtend(), item.getFlag() );
   //         } else {
   //           // not exported
   //           if ( ref_item != null &&
@@ -2069,7 +2069,7 @@ class TDExporter
   //       // flag   = DBlock.FLAG_SURVEY;
   //     }
   //     // pw.format(Locale.US, "%.2f %.1f %.1f %.1f %d %d %d\n", 
-  //     //   item.mLength, item.mBearing, item.mClino, item.mRoll, item.getExtendi(), 0, 1 );
+  //     //   item.mLength, item.mBearing, item.mClino, item.mRoll, item.getIntExtend(), 0, 1 );
   //     // item.mComment
   //     fw.flush();
   //     fw.close();
@@ -3175,8 +3175,8 @@ class TDExporter
               }
               ref_item = null; 
             }
-            // if ( item.getExtend() != extend ) {
-            //   extend = item.getExtend();
+            // if ( item.getIntExtend() != extend ) {
+            //   extend = item.getIntExtend();
             //   //  FIXME pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
             // }
             writeSrvStations( pw, "-", to, item.isCommented() );
@@ -3198,8 +3198,8 @@ class TDExporter
               }
               ref_item = null; 
             }
-            // if ( item.getExtend() != extend ) {
-            //   extend = item.getExtend();
+            // if ( item.getIntExtend() != extend ) {
+            //   extend = item.getIntExtend();
             //   // FIXME pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
             // }
             writeSrvStations( pw, from, "-", item.isCommented() );
@@ -3219,8 +3219,8 @@ class TDExporter
               }
             }
             ref_item = item;
-            // if ( item.getExtend() != extend ) {
-            //   extend = item.getExtend();
+            // if ( item.getIntExtend() != extend ) {
+            //   extend = item.getIntExtend();
             //   // FIXME pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
             // }
             if ( item.isDuplicate() ) {
@@ -3410,7 +3410,7 @@ class TDExporter
               printShotToCav( pw, leg, ref_item, eol, ents );
               ref_item = null; 
             }
-            extend = printCavExtend( pw, extend, item.getExtend(), eol );
+            extend = printCavExtend( pw, extend, item.getIntExtend(), eol );
             // TODO export TO splay
           }
         } else { // with FROM station
@@ -3420,7 +3420,7 @@ class TDExporter
               printShotToCav( pw, leg, ref_item, eol, ents );
               ref_item = null; 
             }
-            extend = printCavExtend( pw, extend, item.getExtend(), eol );
+            extend = printCavExtend( pw, extend, item.getIntExtend(), eol );
             printSplayToCav( pw, item, eol );
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {
@@ -3428,7 +3428,7 @@ class TDExporter
               printShotToCav( pw, leg, ref_item, eol, ents );
             }
             ref_item = item;
-            extend = printCavExtend( pw, extend, item.getExtend(), eol );
+            extend = printCavExtend( pw, extend, item.getIntExtend(), eol );
             leg.set( item.mLength, item.mBearing, item.mClino );
           }
         }

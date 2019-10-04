@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-// import android.util.Log;
+import android.util.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -51,6 +51,7 @@ class Archiver
   private boolean addEntry( ZipOutputStream zos, File name )
   {
     if ( name == null || ! name.exists() ) return false;
+    Log.v( "DistoX-ZIP", "zip add file " + name.getPath() );
     boolean ret = false;
     BufferedInputStream bis = null;
     try { 
@@ -74,18 +75,39 @@ class Archiver
     return ret;
   }
 
-  private boolean addDirectory( ZipOutputStream zos, File dir )
+  private void addOptionalEntry( ZipOutputStream zos, File name )
   {
-    if ( ! dir.exists() ) return false;
-    boolean ret = true;
-    // Log.v( "DistoXX", "zip add dir " + dir.getPath() );
+    if ( name == null || ! name.exists() ) return;
+    BufferedInputStream bis = null;
+    try { 
+      // TDLog.Log( TDLog.LOG_IO, "zip add file " + name.getPath() );
+      bis = new BufferedInputStream( new FileInputStream( name ), BUF_SIZE );
+      ZipEntry entry = new ZipEntry( name.getName() );
+      int cnt;
+      zos.putNextEntry( entry );
+      while ( (cnt = bis.read( data, 0, BUF_SIZE )) != -1 ) {
+        zos.write( data, 0, cnt );
+      }
+      zos.closeEntry( );
+    } catch (FileNotFoundException e ) {
+      TDLog.Error( "File Not Found " + e.getMessage() );
+    } catch ( IOException e ) {
+      TDLog.Error( "IO exception " + e.getMessage() );
+    } finally {
+      if ( bis != null ) try { bis.close(); } catch (IOException e ) { }
+    }
+  }
+
+  private void addDirectory( ZipOutputStream zos, File dir )
+  {
+    if ( ! dir.exists() ) return;
+    // Log.v( "DistoX-ZIP", "zip add dir " + dir.getPath() );
     File[] files = dir.listFiles();
     if ( files != null ) {
       for ( File file : files ) { // listFiles MAY NullPointerException
-        if (file.isFile()) ret &= addEntry(zos, file);
+        if (file.isFile()) addOptionalEntry(zos, file); 
       }
     }
-    return ret;
   }
 
   boolean compressFiles( String zipname, List<File> files )
@@ -140,73 +162,61 @@ class Archiver
 
       List< PlotInfo > plots  = app_data.selectAllPlots( TDInstance.sid, TDStatus.NORMAL );
       for ( PlotInfo plt : plots ) {
-        ret &= addEntry( zos, new File( TDPath.getSurveyPlotTh2File( survey, plt.name ) ) );
         ret &= addEntry( zos, new File( TDPath.getSurveyPlotTdrFile( survey, plt.name ) ) );
-        ret &= addEntry( zos, new File( TDPath.getSurveyPlotDxfFile( survey, plt.name ) ) );
-        ret &= addEntry( zos, new File( TDPath.getSurveyPlotSvgFile( survey, plt.name ) ) );
-        ret &= addEntry( zos, new File( TDPath.getSurveyPlotXviFile( survey, plt.name ) ) );
-        ret &= addEntry( zos, new File( TDPath.getSurveyPlotPngFile( survey, plt.name ) ) );
+        addOptionalEntry( zos, new File( TDPath.getSurveyPlotTh2File( survey, plt.name ) ) );
+        addOptionalEntry( zos, new File( TDPath.getSurveyPlotDxfFile( survey, plt.name ) ) );
+        addOptionalEntry( zos, new File( TDPath.getSurveyPlotSvgFile( survey, plt.name ) ) );
+        addOptionalEntry( zos, new File( TDPath.getSurveyPlotXviFile( survey, plt.name ) ) );
+        addOptionalEntry( zos, new File( TDPath.getSurveyPlotPngFile( survey, plt.name ) ) );
         if ( plt.type == PlotInfo.PLOT_PLAN ) {
-          ret &= addEntry( zos, new File( TDPath.getSurveyCsxFile( survey, plt.name ) ) );
+          addOptionalEntry( zos, new File( TDPath.getSurveyCsxFile( survey, plt.name ) ) );
         }
-	ret &= addEntry( zos, new File( TDPath.getSurveyPlotShzFile( survey, plt.name ) ) );
+	addOptionalEntry( zos, new File( TDPath.getSurveyPlotShzFile( survey, plt.name ) ) );
       }
 
       // try overview exports
-      ret &= addEntry( zos, new File( TDPath.getSurveyPlotTh2File( survey, "p" ) ) );
-      ret &= addEntry( zos, new File( TDPath.getSurveyPlotDxfFile( survey, "p" ) ) );
-      ret &= addEntry( zos, new File( TDPath.getSurveyPlotSvgFile( survey, "p" ) ) );
-      ret &= addEntry( zos, new File( TDPath.getSurveyPlotXviFile( survey, "p" ) ) );
-      ret &= addEntry( zos, new File( TDPath.getSurveyPlotShzFile( survey, "p" ) ) ); // zipped shp
+      addOptionalEntry( zos, new File( TDPath.getSurveyPlotTh2File( survey, "p" ) ) );
+      addOptionalEntry( zos, new File( TDPath.getSurveyPlotDxfFile( survey, "p" ) ) );
+      addOptionalEntry( zos, new File( TDPath.getSurveyPlotSvgFile( survey, "p" ) ) );
+      addOptionalEntry( zos, new File( TDPath.getSurveyPlotXviFile( survey, "p" ) ) );
+      addOptionalEntry( zos, new File( TDPath.getSurveyPlotShzFile( survey, "p" ) ) ); // zipped shp
 
-      ret &= addEntry( zos, new File( TDPath.getSurveyPlotTh2File( survey, "s" ) ) );
-      ret &= addEntry( zos, new File( TDPath.getSurveyPlotDxfFile( survey, "s" ) ) );
-      ret &= addEntry( zos, new File( TDPath.getSurveyPlotSvgFile( survey, "s" ) ) );
-      ret &= addEntry( zos, new File( TDPath.getSurveyPlotXviFile( survey, "s" ) ) );
-      ret &= addEntry( zos, new File( TDPath.getSurveyPlotShzFile( survey, "s" ) ) ); // zipped shp
+      addOptionalEntry( zos, new File( TDPath.getSurveyPlotTh2File( survey, "s" ) ) );
+      addOptionalEntry( zos, new File( TDPath.getSurveyPlotDxfFile( survey, "s" ) ) );
+      addOptionalEntry( zos, new File( TDPath.getSurveyPlotSvgFile( survey, "s" ) ) );
+      addOptionalEntry( zos, new File( TDPath.getSurveyPlotXviFile( survey, "s" ) ) );
+      addOptionalEntry( zos, new File( TDPath.getSurveyPlotShzFile( survey, "s" ) ) ); // zipped shp
 
       plots  = app_data.selectAllPlots( TDInstance.sid, TDStatus.DELETED );
       for ( PlotInfo plt : plots ) {
         ret &= addEntry( zos, new File( TDPath.getSurveyPlotTdrFile( survey, plt.name ) ) );
       }
 
-      ret &= addDirectory( zos, new File( TDPath.getSurveyPhotoDir( survey ) ) );
-      // List< PhotoInfo > photos = app_data.selectAllPhotos( TDInstance.sid, TDStatus.NORMAL );
-      // for ( PhotoInfo pht : photos ) {
-      //   ret &= addEntry( zos, new File( TDPath.getSurveyJpgFile( survey, Long.toString(pht.id) ) ) );
-      // }
-      // photos = app_data.selectAllPhotos( TDInstance.sid, TDStatus.DELETED );
-      // for ( PhotoInfo pht : photos ) {
-      //   ret &= addEntry( zos, new File( TDPath.getSurveyJpgFile( survey, Long.toString(pht.id) ) ) );
-      // }
+      addDirectory( zos, new File( TDPath.getSurveyPhotoDir( survey ) ) );
 
-      ret &= addDirectory( zos, new File( TDPath.getSurveyAudioDir( survey ) ) );
-      // List< AudioInfo > audios = app_data.selectAllAudios( TDInstance.sid );
-      // for ( AudioInfo audio : audios ) {
-      //   ret &= addEntry( zos, new File( TDPath.getSurveyAudioFile( survey, Long.toString( audio.shotid ) ) ) );
-      // }
+      addDirectory( zos, new File( TDPath.getSurveyAudioDir( survey ) ) );
 
-      ret &= addEntry( zos, new File( TDPath.getSurveyThFile( survey ) ) );
-      ret &= addEntry( zos, new File( TDPath.getSurveyCsvFile( survey ) ) );
-      ret &= addEntry( zos, new File( TDPath.getSurveyCsxFile( survey ) ) );
-      ret &= addEntry( zos, new File( TDPath.getSurveyCaveFile( survey ) ) );
-      ret &= addEntry( zos, new File( TDPath.getSurveyCavFile( survey ) ) );
-      ret &= addEntry( zos, new File( TDPath.getSurveyDatFile( survey ) ) );
-      ret &= addEntry( zos, new File( TDPath.getSurveyDxfFile( survey ) ) );
-      ret &= addEntry( zos, new File( TDPath.getSurveyGrtFile( survey ) ) );
-      ret &= addEntry( zos, new File( TDPath.getSurveyGtxFile( survey ) ) );
-      ret &= addEntry( zos, new File( TDPath.getSurveyKmlFile( survey ) ) );
-      ret &= addEntry( zos, new File( TDPath.getSurveyJsonFile( survey ) ) );
-      ret &= addEntry( zos, new File( TDPath.getSurveyPltFile( survey ) ) );
-      ret &= addEntry( zos, new File( TDPath.getSurveyShzFile( survey ) ) );
-      ret &= addEntry( zos, new File( TDPath.getSurveySrvFile( survey ) ) );
-      ret &= addEntry( zos, new File( TDPath.getSurveySurFile( survey ) ) );
-      ret &= addEntry( zos, new File( TDPath.getSurveySvxFile( survey ) ) );
-      ret &= addEntry( zos, new File( TDPath.getSurveyTroFile( survey ) ) );
-      ret &= addEntry( zos, new File( TDPath.getSurveyTrbFile( survey ) ) );
-      ret &= addEntry( zos, new File( TDPath.getSurveyTopFile( survey ) ) );
+      addOptionalEntry( zos, new File( TDPath.getSurveyThFile( survey ) ) );
+      addOptionalEntry( zos, new File( TDPath.getSurveyCsvFile( survey ) ) );
+      addOptionalEntry( zos, new File( TDPath.getSurveyCsxFile( survey ) ) );
+      addOptionalEntry( zos, new File( TDPath.getSurveyCaveFile( survey ) ) );
+      addOptionalEntry( zos, new File( TDPath.getSurveyCavFile( survey ) ) );
+      addOptionalEntry( zos, new File( TDPath.getSurveyDatFile( survey ) ) );
+      addOptionalEntry( zos, new File( TDPath.getSurveyDxfFile( survey ) ) );
+      addOptionalEntry( zos, new File( TDPath.getSurveyGrtFile( survey ) ) );
+      addOptionalEntry( zos, new File( TDPath.getSurveyGtxFile( survey ) ) );
+      addOptionalEntry( zos, new File( TDPath.getSurveyKmlFile( survey ) ) );
+      addOptionalEntry( zos, new File( TDPath.getSurveyJsonFile( survey ) ) );
+      addOptionalEntry( zos, new File( TDPath.getSurveyPltFile( survey ) ) );
+      addOptionalEntry( zos, new File( TDPath.getSurveyShzFile( survey ) ) );
+      addOptionalEntry( zos, new File( TDPath.getSurveySrvFile( survey ) ) );
+      addOptionalEntry( zos, new File( TDPath.getSurveySurFile( survey ) ) );
+      addOptionalEntry( zos, new File( TDPath.getSurveySvxFile( survey ) ) );
+      addOptionalEntry( zos, new File( TDPath.getSurveyTroFile( survey ) ) );
+      addOptionalEntry( zos, new File( TDPath.getSurveyTrbFile( survey ) ) );
+      addOptionalEntry( zos, new File( TDPath.getSurveyTopFile( survey ) ) );
 
-      ret &= addEntry( zos, new File( TDPath.getSurveyNoteFile( survey ) ) );
+      addOptionalEntry( zos, new File( TDPath.getSurveyNoteFile( survey ) ) );
  
       pathname = TDPath.getSqlFile( );
       app_data.dumpToFile( pathname, TDInstance.sid );
@@ -218,6 +228,7 @@ class Archiver
 
       // ret = true;
     } catch ( FileNotFoundException e ) {
+      Log.v("DistoX-ZIP", e.getMessage() );
       ret = false;
     // } catch ( IOException e ) {
     //   // FIXME

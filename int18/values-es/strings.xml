@@ -886,6 +886,7 @@
     <string name="title_settings_svx">Configuración de exportación Survex</string>
     <string name="title_settings_th">Configuración de exportación Therion</string>
     <string name="title_settings_dat">Configuración de exportación Compass</string>
+    <string name="title_settings_tro">Configuración de exportación VisualTopo</string>
     <string name="title_settings_svg">Configuración de exportación SVG export</string>
     <string name="title_settings_dxf">Configuración de exportación DXF export</string>
     <string name="title_settings_png">Configuración de exportación PNG export</string>

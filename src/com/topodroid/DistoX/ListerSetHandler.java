@@ -11,13 +11,13 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 // import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
-
-// import android.util.Log;
 
 class ListerSetHandler extends ListerHandler
 {
@@ -32,7 +32,6 @@ class ListerSetHandler extends ListerHandler
 
   void registerLister( ILister lister )
   {
-    // Log.v("DistoX", "register lister " + lister.toString() + " size " + size() );
     for ( ILister l : mListers ) {
       if ( l == lister ) return; // already registered
     }
@@ -41,7 +40,6 @@ class ListerSetHandler extends ListerHandler
 
   void unregisterLister( ILister lister )
   {
-    // Log.v("DistoX", "unregister lister " + lister.toString() + " size " + size() );
     mListers.remove( lister );
   }
 
@@ -78,6 +76,8 @@ class ListerSetHandler extends ListerHandler
         break;
       case Lister.LIST_UPDATE:
         long blk_id = bundle.getLong( Lister.BLOCK_ID );
+        // Log.v("DistoX-BLOCK", "lister set msg blk id " + blk_id );
+        // TDUtil.slowDown( (int)(400 + Math.random() * 600) );
         for ( ILister lister : mListers ) lister.updateBlockList( blk_id );
         break;
       case Lister.LIST_REF_AZIMUTH:

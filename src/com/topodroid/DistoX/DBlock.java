@@ -205,20 +205,20 @@ class DBlock
   String getAddress() { return mAddress; } // used by the data exported
 
 
-  // static int getExtend( int ext ) { return ( ext < EXTEND_UNSET )? ext : ext - EXTEND_FVERT; }
-  static int getExtend( int ext ) { return ext; }
+  // static int getIntExtend( int ext ) { return ( ext < EXTEND_UNSET )? ext : ext - EXTEND_FVERT; }
+  static int getIntExtend( int ext ) { return ext; }
   static float getReducedExtend( int ext, float stretch ) 
   {
     // if ( ext >= EXTEND_UNSET ) { ext -= EXTEND_FVERT; }
     return ( ext < 2 )? ext + stretch : 0;
   }
 
-  // int getExtend() { return ( mExtend < EXTEND_UNSET )? mExtend : mExtend - EXTEND_FVERT; }
-  int getExtend() { return mExtend; }
+  // int getIntExtend() { return ( mExtend < EXTEND_UNSET )? mExtend : mExtend - EXTEND_FVERT; }
+  int getIntExtend() { return mExtend; }
   float getReducedExtend() { return ( mExtend < 2 )? mExtend + mStretch : 0.0f; }
   int   getReducedIntExtend() { return ( mExtend < 2 )? mExtend : 0; }
 
-  int getFullExtend() { return mExtend; }
+  // int getFullExtend() { return mExtend; } // 20191002 same as getIntExtend()
   void setExtend( int ext, float stretch ) { mExtend = ext; mStretch = stretch; }
   boolean hasStretch( float stretch ) { return Math.abs( mStretch - stretch ) < 0.01f; }
   // void setStretch( float stretch ) { mStretch = stretch; } // ununsed

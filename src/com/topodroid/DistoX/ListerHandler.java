@@ -11,11 +11,11 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
-
-// import android.util.Log;
 
 class ListerHandler extends Handler
 {
@@ -50,7 +50,7 @@ class ListerHandler extends Handler
         break;
       case Lister.LIST_UPDATE:
         long blk_id = bundle.getLong( Lister.BLOCK_ID );
-        // Log.v("DistoX", "lister handler message blk id " + blk_id );
+        // Log.v("DistoX-BLOCK", "lister " + this.toString() + " msg blk id " + blk_id );
         mLister.updateBlockList( blk_id );
         break;
       case Lister.LIST_REF_AZIMUTH:

@@ -44,6 +44,7 @@
       android:layout_marginRight="@dimen/marginh"
       style="@style/edit_decimal"
       android:imeOptions="actionDone"
+      android:inputType="none"
     />
     <Button android:id="@+id/btn_plus"
       android:layout_width="0dp"
