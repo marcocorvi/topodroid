@@ -3,7 +3,7 @@
       package="com.topodroid.DistoX"
       android:installLocation="auto"
       android:versionCode="401142"
-      android:versionName="4.1.4v"
+      android:versionName="4.1.4w"
     >
     <!-- android:debuggable="true" -->
     <!-- Android SDK dependencies:
