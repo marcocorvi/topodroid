@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-// import android.util.Log;
+import android.util.Log;
 
 import java.io.File;
 // import java.io.FileFilter;
@@ -691,6 +691,8 @@ public class TopoDroidApp extends Application
     // DrawingUtil.CENTER_Y = mDisplayHeight / 2;
 
     // mManual = getResources().getString( R.string.topodroid_man );
+
+    // Log.v("DistoX-MAIN", "W " + mDisplayWidth + " H " + mDisplayHeight + " D " + density );
   }
 
   // Led notifcation are shown only while the display is off
@@ -774,13 +776,6 @@ public class TopoDroidApp extends Application
       res.updateConfiguration( conf, dm );
     /* */
     return TDInstance.context;
-  }
-
-  static float getWidthScale()
-  {
-    String lang = mLocale.getLanguage().substring(0, 2);
-    if ( lang.equals("de") ) return 1.0f;
-    return 0.6f;
   }
 
   static void setLocale( String locale, boolean load_symbols )

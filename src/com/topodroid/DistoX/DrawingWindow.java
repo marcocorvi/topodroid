@@ -293,7 +293,6 @@ public class DrawingWindow extends ItemDrawer
 
   private DistoXNum mNum;
   private float mDecl;
-  private float mWidthScale = 0.6f;
   private String mFormatClosure;
 
   private String mSectionName;
@@ -1879,7 +1878,6 @@ public class DrawingWindow extends ItemDrawer
     super.onResume();
     // mApp.resetLocale(); FIXME-LOCALE
     // Log.v("DistoX", "Drawing Activity onResume " + ((mDataDownloader!=null)?"with DataDownloader":"") );
-    mWidthScale = TopoDroidApp.getWidthScale();
     doResume();
     if ( mDataDownloader != null ) {
       mDataDownloader.onResume();
@@ -4177,21 +4175,23 @@ public class DrawingWindow extends ItemDrawer
       int lWidth = LinearLayout.LayoutParams.WRAP_CONTENT;
 
       String text;
-      int len = 0;
+      int w = 0;
       Button[] tv = new Button[nr];
       for ( int k=0; k<nr; ++k ) {
         text = getString( modes[k] );
-        len = ( len < text.length() )? text.length() : len;
         tv[k] = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight, new JoinClickListener( this, k, code ) );
+        int ww = (int)( tv[k].getPaint().measureText( text ) );
+        if ( ww > w ) w = ww;
       }
-      FontMetrics fm = tv[0].getPaint().getFontMetrics();
-      // Log.v("DistoX", "metrics TOP " + fm.top + " ASC. " + fm.ascent + " BOT " + fm.bottom + " LEAD " + fm.leading ); 
-      int w = (int)( Math.abs( ( len + 1 ) * fm.ascent ) * mWidthScale );
-      int h = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.70);
+      w += 10;
+      // Log.v("DistoX-FONT", "W " + w + " " + TopoDroidApp.mDisplayWidth );
+      // if ( w > TopoDroidApp.mDisplayWidth / 2 ) w = (int)TopoDroidApp.mDisplayWidth / 2;
       for ( int k=0; k<nr; ++k ) {
         tv[k].setWidth( w );
       }
-      // Log.v( TopoDroidApp.TAG, "popup width " + w );
+      
+      FontMetrics fm = tv[0].getPaint().getFontMetrics();
+      int h = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.70);
       mPopupJoin = new PopupWindow( popup_layout, w, h ); 
       mPopupJoin.showAsDropDown(b); 
     }
@@ -4214,24 +4214,24 @@ public class DrawingWindow extends ItemDrawer
       int lWidth = LinearLayout.LayoutParams.WRAP_CONTENT;
 
       String text;
-      int len = 0;
-      int w = 0, h = 0;
+      int w = 0;
       Button[] tv = new Button[nr];
       for ( int k=0; k<nr; ++k ) {
         text = getString( modes[k] );
-        len = text.length();
         tv[k] = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight, new FilterClickListener( this, k, code ) );
-        if ( k == 0 ) {
-          FontMetrics fm = tv[0].getPaint().getFontMetrics();
-          // Log.v("DistoX", "metrics TOP " + fm.top + " ASC. " + fm.ascent + " BOT " + fm.bottom + " LEAD " + fm.leading ); 
-          w = (int)( Math.abs( ( len + 1 ) * fm.ascent ) * mWidthScale );
-          h = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.70);
-        }
+        int ww = (int)( tv[k].getPaint().measureText( text ) );
+        if ( ww > w ) w = ww;
+      }
+      w += 10;
+      // Log.v("DistoX-FONT", "W " + w + " " + TopoDroidApp.mDisplayWidth );
+      // if ( w > TopoDroidApp.mDisplayWidth / 2 ) w = (int)TopoDroidApp.mDisplayWidth / 2;
+      for ( int k=0; k<nr; ++k ) {
         tv[k].setWidth( w );
       }
-      // Log.v( TopoDroidApp.TAG, "popup width " + w );
+
+      FontMetrics fm = tv[0].getPaint().getFontMetrics();
+      int h = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.70);
       mPopupFilter = new PopupWindow( popup_layout, w, h ); 
-      // mPopupEdit = new PopupWindow( popup_layout, popup_layout.getHeight(), popup_layout.getWidth() );
       mPopupFilter.showAsDropDown(b); 
     }
 
@@ -4252,7 +4252,7 @@ public class DrawingWindow extends ItemDrawer
       // ----- MOVE POINT TO THE NEAREST CLOSE POINT
       //
       String text;
-      int len = 0; 
+      int w = 0, ww; 
       Button myTextView0 = null;
       Button myTextView1 = null;
       Button myTextView2 = null;
@@ -4267,7 +4267,6 @@ public class DrawingWindow extends ItemDrawer
         int type = mDrawingSurface.getMultiselectionType();
         // ----- REMOVE MULTISELECTION ITEMS
         text = getString(R.string.popup_delete);
-        if ( len < text.length() ) len = text.length();
         myTextView0 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
           new View.OnClickListener( ) {
             public void onClick(View v) {
@@ -4276,11 +4275,12 @@ public class DrawingWindow extends ItemDrawer
               dismissPopupEdit();
             }
           } );
+        ww = (int)myTextView0.getPaint().measureText( text );
+        if ( ww > w ) w = ww;
 
 	if ( type != DrawingPath.DRAWING_PATH_POINT ) { // DRAWING_PATH_LINE or DRAWING_PATH_AREA
           // DECIMATE
           text = getString(R.string.popup_decimate);
-          if ( len < text.length() ) len = text.length();
           myTextView1 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
             new View.OnClickListener( ) {
               public void onClick(View v) {
@@ -4289,12 +4289,13 @@ public class DrawingWindow extends ItemDrawer
                 dismissPopupEdit();
               }
             } );
+          ww = (int)myTextView1.getPaint().measureText( text );
+          if ( ww > w ) w = ww;
         }
 
 	if ( type == DrawingPath.DRAWING_PATH_LINE ) {
           // JOIN
           text = getString(R.string.popup_join);
-          if ( len < text.length() ) len = text.length();
           myTextView2 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
             new View.OnClickListener( ) {
               public void onClick(View v) {
@@ -4303,11 +4304,12 @@ public class DrawingWindow extends ItemDrawer
                 dismissPopupEdit();
               }
             } );
+          ww = (int)myTextView2.getPaint().measureText( text );
+          if ( ww > w ) w = ww;
         }
 
 	// CLEAR MULTISELECTION
         text = getString(R.string.popup_multiselect);
-        if ( len < text.length() ) len = text.length();
         myTextView8 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
           new View.OnClickListener( ) {
             public void onClick(View v) {
@@ -4315,10 +4317,11 @@ public class DrawingWindow extends ItemDrawer
               dismissPopupEdit();
 	    }
           } );
+        ww = (int)myTextView8.getPaint().measureText( text );
+        if ( ww > w ) w = ww;
 
       } else {
         text = getString(R.string.popup_join_pt);
-        if ( len < text.length() ) len = text.length();
         myTextView0 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
           new View.OnClickListener( ) {
             public void onClick(View v) {
@@ -4334,13 +4337,14 @@ public class DrawingWindow extends ItemDrawer
               dismissPopupEdit();
             }
           } );
+        ww = (int)myTextView0.getPaint().measureText( text );
+        if ( ww > w ) w = ww;
   
         // ----- SNAP LINE to splays AREA BORDER to close line
         //
         if ( TDLevel.overExpert && TDSetting.mLineSnap ) {
           if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE ) {
             text = getString( R.string.popup_snap_to_splays );
-            if ( len < text.length() ) len = text.length();
             myTextView1 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
               new View.OnClickListener( ) {
                 public void onClick(View v) {
@@ -4361,9 +4365,10 @@ public class DrawingWindow extends ItemDrawer
                   dismissPopupEdit();
                 }
               } );
+            ww = (int)myTextView1.getPaint().measureText( text );
+            if ( ww > w ) w = ww;
           } else if ( mHotItemType == DrawingPath.DRAWING_PATH_AREA ) {
             text = getString( R.string.popup_snap_ln );
-            if ( len < text.length() ) len = text.length();
             myTextView1 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
               new View.OnClickListener( ) {
                 public void onClick(View v) {
@@ -4385,6 +4390,8 @@ public class DrawingWindow extends ItemDrawer
                   dismissPopupEdit();
                 }
               } );
+            ww = (int)myTextView1.getPaint().measureText( text );
+            if ( ww > w ) w = ww;
           } 
         }
 
@@ -4392,7 +4399,6 @@ public class DrawingWindow extends ItemDrawer
           // ----- DUPLICATE LINE/AREA POINT
           //
           text = getString(R.string.popup_split_pt);
-          if ( len > text.length() ) len = text.length();
           myTextView2 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
             new View.OnClickListener( ) {
               public void onClick(View v) {
@@ -4403,11 +4409,12 @@ public class DrawingWindow extends ItemDrawer
                 dismissPopupEdit();
               }
             } );
+          ww = (int)myTextView2.getPaint().measureText( text );
+          if ( ww > w ) w = ww;
 
           // ----- REMOVE LINE/AREA POINT
           //
           text = getString(R.string.popup_remove_pt);
-          if ( len < text.length() ) len = text.length();
           myTextView6 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
             new View.OnClickListener( ) {
               public void onClick(View v) {
@@ -4439,11 +4446,12 @@ public class DrawingWindow extends ItemDrawer
                 dismissPopupEdit();
               }
             } );
+          ww = (int)myTextView6.getPaint().measureText( text );
+          if ( ww > w ) w = ww;
 
           if ( TDLevel.overExpert && TDSetting.mLineCurve ) {
             // ----- MAKE LINE/AREA SEGMENT STRAIGHT
             text = getString(R.string.popup_sharp_pt);
-            if ( len < text.length() ) len = text.length();
             myTextView4 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
               new View.OnClickListener( ) {
                 public void onClick(View v) {
@@ -4460,10 +4468,11 @@ public class DrawingWindow extends ItemDrawer
                   dismissPopupEdit();
                 }
               } );
+            ww = (int)myTextView4.getPaint().measureText( text );
+            if ( ww > w ) w = ww;
 
             // ----- MAKE LINE/AREA SEGMENT SMOOTH (CURVED, WITH CONTROL POINTS)
             text = getString(R.string.popup_curve_pt);
-            if ( len < text.length() ) len = text.length();
             myTextView5 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
               new View.OnClickListener( ) {
                 public void onClick(View v) {
@@ -4492,6 +4501,8 @@ public class DrawingWindow extends ItemDrawer
                   dismissPopupEdit();
                 }
               } );
+            ww = (int)myTextView5.getPaint().measureText( text );
+            if ( ww > w ) w = ww;
 
           }
         }
@@ -4499,7 +4510,6 @@ public class DrawingWindow extends ItemDrawer
         if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE ) {
           // ----- CUT LINE AT SELECTED POINT AND SPLIT IT IN TWO LINES
           text = getString(R.string.popup_split_ln);
-          if ( len < text.length() ) len = text.length();
           myTextView3 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
             new View.OnClickListener( ) {
               public void onClick(View v) {
@@ -4513,11 +4523,12 @@ public class DrawingWindow extends ItemDrawer
                 dismissPopupEdit();
               }
             } );
+          ww = (int)myTextView3.getPaint().measureText( text );
+          if ( ww > w ) w = ww;
 
           // ATTACH LINE TO LINE
           if ( TDLevel.overExpert ) {
             text = getString(R.string.popup_append_line);
-            if ( len < text.length() ) len = text.length();
             myTextView7 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
               new View.OnClickListener( ) {
                 public void onClick(View v) {
@@ -4531,6 +4542,8 @@ public class DrawingWindow extends ItemDrawer
                   dismissPopupEdit();
                 }
               } );
+            ww = (int)myTextView7.getPaint().measureText( text );
+            if ( ww > w ) w = ww;
           }
         }
 
@@ -4540,7 +4553,6 @@ public class DrawingWindow extends ItemDrawer
                || mHotItemType == DrawingPath.DRAWING_PATH_LINE 
                || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) {
             text = getString(R.string.popup_multiselect);
-            if ( len < text.length() ) len = text.length();
             myTextView8 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
             new View.OnClickListener( ) {
               public void onClick(View v) {
@@ -4549,16 +4561,16 @@ public class DrawingWindow extends ItemDrawer
                 dismissPopupEdit();
               }
             } );
+            ww = (int)myTextView8.getPaint().measureText( text );
+            if ( ww > w ) w = ww;
           }
         }
 
       }
+      w += 10;
+      // Log.v("DistoX-FONT", "W " + w + " " + TopoDroidApp.mDisplayWidth );
+      // if ( w > TopoDroidApp.mDisplayWidth / 2 ) w = (int)TopoDroidApp.mDisplayWidth / 2;
 
-      FontMetrics fm = myTextView0.getPaint().getFontMetrics();
-      // Log.v("DistoX", "font metrics TOP " + fm.top + " ASC. " + fm.ascent + " BOT " + fm.bottom + " LEAD " + fm.leading ); 
-      int w = (int)( Math.abs( ( len + 1 ) * fm.ascent ) * mWidthScale );
-      int h = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.70);
-      // int h1 = (int)( myTextView0.getHeight() * 7 * 1.1 ); this is 0
       myTextView0.setWidth( w );
       if ( myTextView1 != null ) myTextView1.setWidth( w );
       if ( myTextView2 != null ) myTextView2.setWidth( w );
@@ -4569,6 +4581,8 @@ public class DrawingWindow extends ItemDrawer
       if ( myTextView7 != null ) myTextView7.setWidth( w ); // APPEND LINE TO LINE
       if ( myTextView8 != null ) myTextView8.setWidth( w ); // PATH_MULTISELECTION
       
+      FontMetrics fm = myTextView0.getPaint().getFontMetrics();
+      int h = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.70);
       mPopupEdit = new PopupWindow( popup_layout, w, h ); 
       // mPopupEdit = new PopupWindow( popup_layout, popup_layout.getHeight(), popup_layout.getWidth() );
       mPopupEdit.showAsDropDown(b); 

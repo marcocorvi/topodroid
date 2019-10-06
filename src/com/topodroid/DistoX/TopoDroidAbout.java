@@ -16,17 +16,18 @@ import android.content.Context;
 // import android.content.Intent;
 
 import android.app.Dialog;
-// import android.widget.Button;
-// import android.view.View;
-// import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 // import android.net.Uri;
 
 class TopoDroidAbout extends Dialog
-                     // implements OnClickListener
+                     implements OnClickListener
 {
   // private Button mBTok;
-  // private Context mContext;
+  // private Button mBTman;
+  private Context mContext;
   // private MainWindow mParent;
   private int mSetup;
 
@@ -35,7 +36,7 @@ class TopoDroidAbout extends Dialog
   TopoDroidAbout( Context context, MainWindow parent, int setup )
   {
     super( context );
-    // mContext = context;
+    mContext = context;
     // mParent  = parent;
     mSetup   = setup;
     setContentView(R.layout.welcome);
@@ -43,9 +44,8 @@ class TopoDroidAbout extends Dialog
 
     setTitle( String.format( context.getResources().getString(R.string.welcome_title), TopoDroidApp.VERSION ) );
 
-    // mBTok     = (Button)findViewById(R.id.btn_ok);
-
-    // mBTok.setOnClickListener( this );
+    ((Button)findViewById(R.id.btn_ok)).setOnClickListener( this );
+    ((Button)findViewById(R.id.btn_manual)).setOnClickListener( this );
   }
 
   // @Override
@@ -54,5 +54,16 @@ class TopoDroidAbout extends Dialog
   //   if ( mSetup >= 0 ) mParent.doNextSetup( mSetup + 1 );
   // }
 
+  @Override
+  public void onClick( View v ) 
+  {
+    if ( v.getId() == R.id.btn_manual ) {
+      dismiss();
+      UserManualActivity.showHelpPage( mContext, null );
+      return;
+    // } else if ( v.getId() == R.id.btn_ok ) {
+    }
+    dismiss();
+  }
   
 }

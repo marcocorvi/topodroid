@@ -590,7 +590,7 @@
     <string name="button_eval_cal"  >Calcola con calibr.</string>
     <!-- OK string name="button_gps_start" >GPS       </string -->
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
-    <!-- UNUSED string name="button_manual"    >Manuale   </string -->
+    <string name="button_manual"    >Manuale utente</string>
     <!-- UNUSED string name="button_measure"   >Misura    </string -->
     <!-- UNUSED string name="button_photo"   >Foto</string -->
     <!-- UNUSED string name="button_sensor"  >Misure</string -->

@@ -594,7 +594,7 @@
     <string name="button_eval_cal"  >Evaluează calib. w.</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
-    <!-- UNUSED string name="button_manual"    >Manual    </string -->
+    <!-- TODO string name="button_manual"    >User Manual</string -->
     <!-- UNUSED string name="button_measure"   >Măsoară   </string -->
     <!-- UNUSED string name="button_photo"   >Foto</string -->
     <!-- UNUSED string name="button_sensor"  >Senzori</string -->

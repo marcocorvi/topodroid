@@ -610,7 +610,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="button_eval_cal"  >Eval w. calib.</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
-    <!-- UNUSED string name="button_manual"    >Manual    </string -->
+    <string name="button_manual"    >User manual</string>
     <!-- UNUSED string name="button_measure"   >Measure   </string -->
     <!-- UNUSED string name="button_photo"   >Photo</string -->
     <!-- UNUSED string name="button_sensor"  >Sensors</string -->

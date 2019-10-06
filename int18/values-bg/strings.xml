@@ -592,7 +592,7 @@
     <string name="button_eval_cal"  >Оц./кал.  </string>
     <string name="button_gps_start" >GPS       </string>
     <!-- string name="button_gps_stop"  >Stop      </string -->
-    <!-- string name="button_manual"    >Manual    </string -->
+    <!-- TODO string name="button_manual"    >User Manual</string -->
     <!-- string name="button_measure"   >Measure   </string -->
     <!-- UNUSED string name="button_photo"   >Снимка</string -->
     <!-- UNUSED string name="button_sensor"  >Сензори</string -->

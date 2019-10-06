@@ -11,12 +11,12 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 // import android.app.Dialog;
 import android.content.Context;
 // import android.content.res.Resources;
 
-// import android.graphics.Paint;
-// import android.graphics.Paint.FontMetrics;
 import android.graphics.PointF;
 import android.graphics.Path;
 
@@ -54,8 +54,6 @@ import java.util.Locale;
 
 // import java.util.concurrent.RejectedExecutionException;
 // import java.util.Deque; // only API-9
-
-// import android.util.Log;
 
 /**
  */

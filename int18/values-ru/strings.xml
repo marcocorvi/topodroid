@@ -596,7 +596,7 @@
     <string name="button_eval_cal"  >Вычислить с учетом калиб.</string>
     <!-- OK string name="button_gps_start" >GPS       </string -->
     <!-- UNUSED string name="button_gps_stop"  >Стоп      </string -->
-    <!-- UNUSED string name="button_manual"    >Вручную    </string -->
+    <string name="button_manual"    >Вручную</string>
     <!-- UNUSED string name="button_measure"   >Изменить   </string -->
     <!-- UNUSED string name="button_photo"   >Фото</string -->
     <!-- UNUSED string name="button_sensor"  >Датчики</string -->

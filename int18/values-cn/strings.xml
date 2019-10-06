@@ -607,7 +607,7 @@
     <string name="button_eval_cal"  >校准复运算</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
-    <!-- UNUSED string name="button_manual"    >Manual    </string -->
+    <!-- TODO string name="button_manual"    >User Manual</string -->
     <!-- UNUSED string name="button_measure"   >Measure   </string -->
     <!-- UNUSED string name="button_photo"   >Photo</string -->
     <!-- UNUSED string name="button_sensor"  >Sensors</string -->

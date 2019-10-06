@@ -31,8 +31,6 @@ import android.content.Context;
 // import android.content.DialogInterface;
 import android.inputmethodservice.KeyboardView;
 
-// import android.graphics.Paint.FontMetrics;
-
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
@@ -40,7 +38,6 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
 import android.view.View;
-
 
 class ShotDialog extends MyDialog
                  implements View.OnClickListener

@@ -592,7 +592,7 @@
     <string name="button_eval_cal"  >Évaluation avec étalonnage</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
-    <!-- UNUSED string name="button_manual"    >Manuel    </string -->
+    <string name="button_manual"    >Manuel</string>
     <!-- UNUSED string name="button_measure"   >Mesure   </string -->
     <!-- UNUSED string name="button_photo"   >Photos</string -->
     <!-- UNUSED string name="button_sensor"  >Capteurs</string -->

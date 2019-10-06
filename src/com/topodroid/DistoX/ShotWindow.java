@@ -78,7 +78,6 @@ import android.graphics.Bitmap;
 // import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-// import android.graphics.Paint.FontMetrics;
 // import android.graphics.Rect;
 
 import android.net.Uri;

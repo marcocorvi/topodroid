@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 import java.util.regex.Pattern;
 import java.util.List;
 
@@ -29,7 +31,6 @@ import android.content.Context;
 // import android.content.res.Resources;
 // import android.content.DialogInterface;
 import android.inputmethodservice.KeyboardView;
-// import android.graphics.Paint.FontMetrics;
 
 import android.widget.TextView;
 import android.widget.EditText;
@@ -40,8 +41,6 @@ import android.widget.RadioButton;
 import android.view.View;
 // import android.view.View.OnKeyListener;
 // import android.view.KeyEvent;
-
-// import android.util.Log;
 
 class MultishotDialog extends MyDialog
                       implements View.OnClickListener

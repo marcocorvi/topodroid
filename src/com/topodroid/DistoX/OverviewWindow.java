@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 // import android.app.Activity;
 // import android.content.Context;
 // import android.content.DialogInterface;
@@ -20,8 +22,6 @@ import android.content.res.Configuration;
 
 import android.util.TypedValue;
 
-// import android.graphics.Paint;
-// import android.graphics.Paint.FontMetrics;
 import android.graphics.PointF;
 import android.graphics.Path;
 // import android.graphics.Path.Direction;
@@ -60,8 +60,6 @@ import android.widget.AdapterView.OnItemClickListener;
 // import java.io.FileWriter;
 import java.util.List;
 import java.util.ArrayList;
-
-// import android.util.Log;
 
 /**
  */

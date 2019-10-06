@@ -598,7 +598,7 @@
     <string name="button_eval_cal"  >Eval w. calib.</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
-    <!-- UNUSED string name="button_manual"    >Manual    </string -->
+    <!-- TODO string name="button_manual"    >User Manual</string -->
     <!-- UNUSED string name="button_measure"   >Medida   </string -->
     <!-- UNUSED string name="button_photo"   >Fotos</string -->
     <!-- UNUSED string name="button_sensor"  >Sensores</string -->

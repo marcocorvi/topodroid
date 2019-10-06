@@ -14,5 +14,27 @@
         android:autoLink="all"
         android:padding="@dimen/paddingmedium"
   />
+  <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_marginBottom="@dimen/marginv"
+    >
+    <Button android:id="@+id/btn_manual"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginRight="@dimen/marginh"
+      style="@style/button_default"
+      android:text="@string/button_manual"
+    />
+    <Button android:id="@+id/btn_ok"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginRight="@dimen/marginh"
+      style="@style/button_default"
+      android:text="@string/button_close"
+    />
+  </LinearLayout>
 
 </LinearLayout>
