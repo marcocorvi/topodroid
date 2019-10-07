@@ -67,9 +67,6 @@ class CutNPaste
     String cut   = res.getString( R.string.cut );
     String copy  = res.getString( R.string.copy );
     String paste = res.getString( R.string.paste );
-    int len = cut.length();
-    if ( len < copy.length() ) len = copy.length();
-    if ( len < paste.length() ) len = paste.length();
 
     Button btn_cut = makePopupButton( context, cut, layout, lWidth, lHeight,
       new View.OnClickListener( ) {
@@ -84,6 +81,8 @@ class CutNPaste
           dismissPopup();
         }
       } );
+    float w = btn_cut.getPaint().measureText( cut );
+
     Button btn_copy = makePopupButton( context, copy, layout, lWidth, lHeight,
       new View.OnClickListener( ) {
         public void onClick(View v) {
@@ -96,6 +95,9 @@ class CutNPaste
           dismissPopup();
         }
       } );
+    float ww = btn_copy.getPaint().measureText( cut );
+    if ( ww > w ) w = ww;
+
     Button btn_paste = makePopupButton( context, paste, layout, lWidth, lHeight,
       new View.OnClickListener( ) {
         public void onClick(View v) {
@@ -108,16 +110,16 @@ class CutNPaste
           dismissPopup();
         }
       } );
+    ww = btn_paste.getPaint().measureText( cut );
+    if ( ww > w ) w = ww;
+    int iw = (int)(w + 10);
+    btn_cut.setWidth( iw );
+    btn_copy.setWidth( iw );
+    btn_paste.setWidth( iw );
 
     FontMetrics fm = btn_cut.getPaint().getFontMetrics();
-    int w = (int)( Math.abs( len * fm.ascent ) * 1.3); // 0.7
-    int h = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 2.7); // 1.7
-    // int h1 = (int)( textview0.getHeight() * 7 * 1.1 ); this is 0
-    btn_cut.setWidth( w );
-    btn_copy.setWidth( w );
-    btn_paste.setWidth( w );
-
-    mPopup = new PopupWindow( layout, w, h );
+    int ih = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 2.7); // 1.7
+    mPopup = new PopupWindow( layout, iw, ih );
     mPopup.showAsDropDown( et );
   }
 
@@ -173,7 +175,6 @@ class CutNPaste
     // ----- RESET BT
     //
     String text = res.getString(R.string.remote_reset);
-    int len = text.length();
     Button textview0 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
       new View.OnClickListener( ) {
         public void onClick(View v) {
@@ -182,6 +183,7 @@ class CutNPaste
           TDToast.make( R.string.bt_reset );
         }
       } );
+    float w = textview0.getPaint().measureText( text );
 
     Button textview1 = null;
     Button textview2 = null;
@@ -191,7 +193,6 @@ class CutNPaste
       // ----- TURN LASER ON
       //
       text = res.getString(R.string.remote_on);
-      if ( len < text.length() ) len = text.length();
       textview1 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
@@ -199,11 +200,12 @@ class CutNPaste
             dismissPopupBT();
           }
         } );
+      float ww = textview1.getPaint().measureText( text );
+      if ( ww > w ) w = ww;
 
       // ----- TURN LASER OFF
       //
       text = res.getString(R.string.remote_off);
-      if ( len < text.length() ) len = text.length();
       textview2 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
@@ -211,26 +213,28 @@ class CutNPaste
             dismissPopupBT();
           }
         } );
+      ww = textview2.getPaint().measureText( text );
+      if ( ww > w ) w = ww;
 
       if ( gm_data ) {
-      // ----- MEASURE ONE CALIB DATA AND DOWNLOAD IF MODE IS CONTINUOUS
-      //
-      text = res.getString( R.string.popup_do_gm_data );
-      if ( len < text.length() ) len = text.length();
-      textview3 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
-        new View.OnClickListener( ) {
-          public void onClick(View v) {
-            // ilister.enableBluetoothButton(false);
-            new DeviceX310TakeShot( ilister, (TDSetting.mCalibShotDownload ? lister : null), app, 1 ).execute();
-            dismissPopupBT();
-          }
-        } );
+        // ----- MEASURE ONE CALIB DATA AND DOWNLOAD IF MODE IS CONTINUOUS
+        //
+        text = res.getString( R.string.popup_do_gm_data );
+        textview3 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+          new View.OnClickListener( ) {
+            public void onClick(View v) {
+              // ilister.enableBluetoothButton(false);
+              new DeviceX310TakeShot( ilister, (TDSetting.mCalibShotDownload ? lister : null), app, 1 ).execute();
+              dismissPopupBT();
+            }
+          } );
+        ww = textview3.getPaint().measureText( text );
+        if ( ww > w ) w = ww;
 
       } else {
         // ----- MEASURE ONE SPLAY AND DOWNLOAD IT IF MODE IS CONTINUOUS
         //
         text = res.getString( R.string.popup_do_splay );
-        if ( len < text.length() ) len = text.length();
         textview3 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
           new View.OnClickListener( ) {
             public void onClick(View v) {
@@ -239,11 +243,12 @@ class CutNPaste
               dismissPopupBT();
             }
           } );
+        ww = textview3.getPaint().measureText( text );
+        if ( ww > w ) w = ww;
 
         // ----- MEASURE ONE LEG AND DOWNLOAD IT IF MODE IS CONTINUOUS
         //
         text = res.getString(R.string.popup_do_leg);
-        if ( len < text.length() ) len = text.length();
         textview4 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
           new View.OnClickListener( ) {
             public void onClick(View v) {
@@ -252,21 +257,22 @@ class CutNPaste
               dismissPopupBT();
             }
           } );
+        ww = textview4.getPaint().measureText( text );
+        if ( ww > w ) w = ww;
       }
+    }
+    int iw = (int)(w + 10);
+    textview0.setWidth( iw );
+    if ( TDInstance.deviceType() == Device.DISTO_X310 ) {
+      if ( textview1 != null) textview1.setWidth( iw );
+      if ( textview2 != null) textview2.setWidth( iw );
+      if ( textview3 != null) textview3.setWidth( iw );
+      if ( ! gm_data ) if ( textview4 != null ) textview4.setWidth( iw );
     }
 
     FontMetrics fm = textview0.getPaint().getFontMetrics();
-    int w = (int)( Math.abs( len * fm.ascent ) * 0.7);
-    int h = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.70);
-    // int h = (int)( BUTTON_HEIGHT * 7 * 1.1 ); 
-    textview0.setWidth( w );
-    if ( TDInstance.deviceType() == Device.DISTO_X310 ) {
-      if ( textview1 != null) textview1.setWidth( w );
-      if ( textview2 != null) textview2.setWidth( w );
-      if ( textview3 != null) textview3.setWidth( w );
-      if ( ! gm_data ) if ( textview4 != null ) textview4.setWidth( w );
-    }
-    mPopupBT = new PopupWindow( popup_layout, w, h ); 
+    int ih = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.70);
+    mPopupBT = new PopupWindow( popup_layout, iw, ih ); 
     mPopupBT.showAsDropDown(b); 
     return mPopupBT;
   }
