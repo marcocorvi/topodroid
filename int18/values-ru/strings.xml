@@ -888,7 +888,7 @@
     <string name="title_settings_svx">Survex настройки экспорта</string>
     <string name="title_settings_th">Therion настройки экспорта</string>
     <string name="title_settings_dat">Compass настройки экспорта</string>
-    <!-- TODO string name="title_settings_tro">VisualTopo export settings</string -->
+    <string name="title_settings_tro">VisualTopo настройки экспорта</string>
     <string name="title_settings_svg">SVG настройки экспорта</string>
     <string name="title_settings_dxf">DXF настройки экспорта</string>
     <string name="title_settings_png">PNG настройки экспорта</string>
