@@ -200,8 +200,8 @@
     <string name="h_geoid_hint">Geóide H [metros]</string>
     <string name="latitude_hint">Lat. dd:mm:ss.sss</string>
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
-    <string name="loop_closure_errors">Erros no fechamento do anel</string>
-    <string name="loop_none">nenhum anel</string>
+    <string name="loop_closure_errors">Erros no fechamento de poligonais</string>
+    <string name="loop_none">Nenhuma poligonal fechada</string>
     <!-- UNUSED string name="long_lat">Long-Lat</string -->
 
     <string name="error_m">Erro [m]</string>
