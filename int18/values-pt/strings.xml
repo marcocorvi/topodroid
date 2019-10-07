@@ -485,10 +485,10 @@
     <string name="coverage_warning">Amplitude angular abaixo de %1$d %%\nGravar coeficientes?</string>
     <string name="delta_warning">Erro mpédio acima de %1$.1f\nGravar coeficientes?</string>
 
-    <!-- TODO string name="cover_data">Raw data distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_calib">Calibrated data distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_g">G distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_m">M distribution: %1$.2f %%</string -->
+    <string name="cover_data">Distribuição dos dados brutos: %1$.2f %%</string>
+    <string name="cover_calib">Distribuição dos dados calibrados: %1$.2f %%</string>
+    <string name="cover_g">Distribuição G: %1$.2f %%</string>
+    <string name="cover_m">Distribuição M: %1$.2f %%</string>
 
     <string name="cannot_rename">Não é possível renomear a topo</string>
     <string name="declination">declinação magnética</string>
@@ -591,7 +591,7 @@
     <string name="button_eval_cal"  >Calcular c/ calib.</string>
     <!-- OK string name="button_gps_start" >GPS       </string -->
     <!-- UNUSED string name="button_gps_stop"  >Parar     </string -->
-    <!-- TODO string name="button_manual"    >User Manual</string -->
+    <string name="button_manual"    >Manual do Usuário</string>
     <!-- UNUSED string name="button_measure"   >Medir   </string -->
     <!-- UNUSED string name="button_photo"   >Foto</string -->
     <!-- UNUSED string name="button_sensor"  >Sensores</string -->
@@ -878,7 +878,7 @@
     <string name="title_settings_svx">Configurações de exportação Survex</string>
     <string name="title_settings_th">Configurações de exportação Therion</string>
     <string name="title_settings_dat">Configurações de exportação Compass</string>
-    <!-- TODO string name="title_settings_tro">VisualTopo export settings</string -->
+    <string name="title_settings_tro">Configurações de exportação VisualTopo</string>
     <string name="title_settings_svg">Configurações de exportação SVG</string>
     <string name="title_settings_dxf">Configurações de exportação DXF</string>
     <string name="title_settings_png">Configurações de exportação PNG</string>
@@ -940,8 +940,8 @@
 
   <string name="pref_locale_title">Língua</string>
   <string name="pref_locale_summary">Língua</string>
-  <!-- TODO string name="pref_orientation_title">Screen orientation</string -->
-  <!-- TODO string name="pref_orientation_summary">App screen orientation</string -->
+  <string name="pref_orientation_title">Orientação da tela</string>
+  <string name="pref_orientation_summary">Orientação da tela do aplicativo</string>
 
   <string name="pref_raw_data_title">Dados brutos</string>
   <string name="pref_raw_data_summary">Exibir dados brutos</string>
@@ -993,10 +993,10 @@
   <string name="pref_station_prefix_summary">Exportar prefixo de bases (Compass)</string>
   <string name="pref_compass_splays_title">Medidas auxiliares Compass</string>
   <string name="pref_compass_splays_summary">Exportar medidas auxiliares em arquivos Compass</string>
-  <!-- TODO string name="pref_vtopo_splays_title">VisualTopo splays</string -->
-  <!-- TODO string name="pref_vtopo_splays_summary">Export splays in VisualTopo files</string -->
-  <!-- TODO string name="pref_vtopo_lrud_title">LRUD at From</string -->
-  <!-- TODO string name="pref_vtopo_lrud_summary">VisualTopo LRUD at From station</string -->
+  <string name="pref_vtopo_splays_title">Medidas auxiliares VisualTopo</string>
+  <string name="pref_vtopo_splays_summary">Incluir medidas auxiliares em arquivos VisualTopo</string>
+  <string name="pref_vtopo_lrud_title">EDTB em De</string>
+  <string name="pref_vtopo_lrud_summary">EDTB na base De em arquivos VisualTopo</string>
   <!-- UNUSED string name="pref_trobot_names_title">Nomes bases TopoRobot</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Os nomes das bases usam o estilo do TopoRobot</string -->
   <string name="pref_ortho_lrud_title">Ângulo med. aux. EDTC Compass</string>
