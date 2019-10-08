@@ -1,6 +1,6 @@
 encoding  utf-8
 symbol point
-name water-flow
+name water-flow_intermittent
 name-cn 水流
 name-es curso_temporal
 name-pt fluxo_de_água
