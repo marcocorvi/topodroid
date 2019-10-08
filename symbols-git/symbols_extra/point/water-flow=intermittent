@@ -3,7 +3,7 @@ symbol point
 name water-flow_intermittent
 name-cn 水流
 name-es curso_temporal
-name-pt fluxo_de_água
+name-pt fluxo_de_água_intermitente
 name-it flusso_d'acqua
 name-fr circulation_d'eau_temporaire
 name-de Zeitweises_Gerinne
