@@ -2,7 +2,7 @@ encoding  utf-8
 symbol line
 name floor-step
 name-es resalte
-name-pt degrau_chão
+name-pt desnível_abrupto_chão
 name-ru уступ_пола
 name-fr ressaut
 name-sk schodisko
@@ -23,4 +23,3 @@ effect
   lineTo 0 0 
 endeffect
 endsymbol
-

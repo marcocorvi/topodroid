@@ -2,7 +2,7 @@ encoding  utf-8
 symbol line
 name ceiling-step
 name-es resalte_techo
-name-pt degrau_teto
+name-pt desnível_abrupto_teto
 name-ru уступ_потолка
 name-fr décrochement-de-plafond
 name-ro treaptă-tavan
@@ -23,4 +23,3 @@ effect
   lineTo 0 1 
 endeffect
 endsymbol
-
