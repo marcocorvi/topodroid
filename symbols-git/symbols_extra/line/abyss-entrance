@@ -1,7 +1,7 @@
 symbol line
-  name abyss_entrance
+  name abyss-entrance
   name-pt entrada_em_abismo
-  th_name u:abyss_entrance
+  th_name u:abyss-entrance
   group wall
   color 0x7f007f 0xff
   width 8
@@ -30,3 +30,4 @@ symbol line
     moveTo 0 0
   endeffect
 endsymbol
+
