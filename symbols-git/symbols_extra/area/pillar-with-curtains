@@ -1,0 +1,7 @@
+symbol area
+name pillar-with-curtains
+name-pt coluna_coberta_por_cortinas
+th_name u:pillar-with-curtains
+color 0xff1966 0x66
+csurvey 1 48 0 1
+endsymbol
