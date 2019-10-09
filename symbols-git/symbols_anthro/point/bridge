@@ -1,0 +1,19 @@
+symbol point
+name bridge
+name-pt ponte
+th_name u:bridge
+orientation no
+color 0xc46210
+csurvey 6 6 80
+path
+  moveTo -10 -6
+  lineTo -7 -2
+  lineTo 7 -2
+  lineTo 10 -6
+
+  moveTo -10 6
+  lineTo -7 2
+  lineTo 7 2
+  lineTo 10 6
+endpath
+endsymbol
