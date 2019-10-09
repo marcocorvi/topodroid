@@ -1,0 +1,17 @@
+symbol point
+name tree-trunk
+name-pt tronco_de_árvore
+th_name u:tree-trunk
+orientation no
+color 0xb33b00
+csurvey 6 6 80
+path
+  moveTo -7 0
+  cubicTo -10 0 -10 6 -7 6
+  cubicTo -4 6 -4 0 -7 0
+  moveTo -8 0
+  lineTo 7 -6
+  cubicTo 10 -6 10 -1 7 0
+  lineTo -6 6
+endpath
+endsymbol
