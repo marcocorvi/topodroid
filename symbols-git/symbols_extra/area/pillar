@@ -1,0 +1,7 @@
+symbol area
+name pillar
+name-pt coluna
+th_name u:pillar
+color 0x00ffdd 0x66
+csurvey 1 48 0 1
+endsymbol
