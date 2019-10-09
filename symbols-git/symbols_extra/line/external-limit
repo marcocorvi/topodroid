@@ -1,7 +1,7 @@
 symbol line
-  name external_limit
+  name external-limit
   name-pt contorno_externo
-  th_name u:external_limit
+  th_name u:external-limit
   group wall
   color 0xff0000 0xff
   width 1
@@ -28,3 +28,4 @@ symbol line
     moveTo 0 0
   endeffect
 endsymbol
+
