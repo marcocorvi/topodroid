@@ -1,0 +1,38 @@
+symbol point
+name eletric_light
+name-pt luz_elétrica
+th_name u:eletric_light
+orientation no
+color 0xffbf00
+csurvey 6 6 80
+path
+  moveTo -2 -8
+  lineTo -5 0
+  cubicTo -5 5 5 5 5 0
+  lineTo 2 -8
+
+  moveTo -3 -10
+  lineTo 3 -10
+
+  moveTo -3 -9
+  lineTo 3 -9
+
+  moveTo -3 -8
+  lineTo 3 -8
+
+  moveTo -6 -4
+  lineTo -10 -6
+
+  moveTo -6 4
+  lineTo -10 7
+
+  moveTo 0 6
+  lineTo 0 10
+
+  moveTo 6 4
+  lineTo 10 7
+
+  moveTo 6 -4
+  lineTo 10 -6
+endpath
+endsymbol
