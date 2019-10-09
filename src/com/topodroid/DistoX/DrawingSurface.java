@@ -635,7 +635,8 @@ class DrawingSurface extends SurfaceView
   int snapHotItemToNearestLine() { return commandManager.snapHotItemToNearestLine(); }
   int snapHotItemToNearestSplays( float dthr ) { return commandManager.snapHotItemToNearestSplays( dthr, mStationSplay /* mSplayStationsOn, mSplayStationsOff */ ); }
 
-  void splitHotItem() { commandManager.splitHotItem(); }
+  void splitPointHotItem() { commandManager.splitPointHotItem(); }
+  void insertPointsHotItem() { commandManager.insertPointsHotItem(); }
   
   SelectionPoint hotItem() { return commandManager.hotItem(); }
 

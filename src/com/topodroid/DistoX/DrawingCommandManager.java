@@ -2312,7 +2312,7 @@ class DrawingCommandManager
     }
   }
 
-  void splitHotItem()
+  void splitPointHotItem()
   { 
     SelectionPoint sp = mSelected.mHotItem;
     if ( sp == null ) return;
@@ -2333,6 +2333,28 @@ class DrawingCommandManager
         mSelected.mPoints.add( sp1 );
       }
     }
+  }
+
+  /** insert points in the range of the selected point
+   */
+  void insertPointsHotItem()
+  {
+    SelectionPoint sp = mSelected.mHotItem;
+    if ( sp == null ) return;
+    if ( sp.type() != DrawingPath.DRAWING_PATH_LINE && sp.type() != DrawingPath.DRAWING_PATH_AREA ) return;
+    LinePoint lp1 = sp.mLP1;
+    if ( lp1 == null ) return;
+    LinePoint lp2 = sp.mLP2;
+    DrawingPointLinePath line = (DrawingPointLinePath)sp.mItem;
+
+    for ( LinePoint lp0 = lp1.mNext; lp1 != lp2 && lp0 != null; lp0 = lp0.mNext ) {
+      float x = (lp1.x + lp0.x)/2;
+      float y = (lp1.y + lp0.y)/2;
+      LinePoint lp = line.insertPointAfter( x, y, lp1 ); 
+      SelectionPoint sp1 = mSelection.insertPathPoint( line, lp );
+      lp1 = lp0;
+    }
+    syncClearSelected();
   }
 
   // moved to methods of LinePoint

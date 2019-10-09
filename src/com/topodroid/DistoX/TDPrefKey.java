@@ -1240,6 +1240,7 @@ class TDPrefKey
     "DISTOX_LINE_CURVE",      // whether to show line- smooth/straighten action
     "DISTOX_LINE_STRAIGHT",   // whetter to show lines straighten button
     "DISTOX_PATH_MULTISELECT",// path multiselection
+    "DISTOX_COMPOSITE_ACTIONS",
     null
   };
 
@@ -1254,6 +1255,7 @@ class TDPrefKey
     R.string.pref_linecurve_title,
     R.string.pref_linestraight_title,
     R.string.pref_path_multiselect_title,
+    R.string.pref_composite_actions_title,
     -1
   };
 
@@ -1268,6 +1270,7 @@ class TDPrefKey
     R.string.pref_linecurve_summary,
     R.string.pref_linestraight_summary,
     R.string.pref_path_multiselect_summary,
+    R.string.pref_composite_actions_summary,
     -1
   };
 
@@ -1278,6 +1281,7 @@ class TDPrefKey
     "0.5",
     "2.0",
     "10",
+    FALSE,
     FALSE,
     FALSE,
     FALSE,

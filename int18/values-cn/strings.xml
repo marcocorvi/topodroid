@@ -1255,6 +1255,8 @@
   <string name="pref_linestraight_summary">启用伸直所有线操作</string>
   <string name="pref_path_multiselect_title">路径的多个选项</string>
   <string name="pref_path_multiselect_summary">启用路径的多个选项操作</string>
+  <!-- TODO string name="pref_composite_actions_title">Composite actions</string -->
+  <!-- TODO string name="pref_composite_actions_summary">Enable line/area long-tap actions</string -->
   <string name="pref_plane_interpolation_title">平面插值</string>
   <string name="pref_plane_interpolation_summary">启用平面插值操作</string>
   <string name="pref_plot_split_title">草图分割/合并</string>

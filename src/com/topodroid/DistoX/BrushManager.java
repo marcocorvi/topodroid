@@ -71,7 +71,8 @@ class BrushManager
 
   static boolean isPointOrientable( int index ) { return mPointLib.isSymbolOrientable( index ); }
   static double getPointOrientation( int index ) { return mPointLib.getPointOrientation( index ); }
-  static void resetPointOrientations( ) { mPointLib.resetOrientations(); }
+  // test should not be necessary but Xperia Z Ultra Android 5.1 crashed 2019-10-07
+  static void resetPointOrientations( ) { if ( mPointLib != null ) mPointLib.resetOrientations(); }
   static void rotateGradPoint( int index, double a ) { mPointLib.rotateGrad( index, a ); }
   static Path getPointPath( int i ) { return mPointLib.getPointPath( i ); }
   static Path getPointOrigPath( int i ) { return mPointLib.getPointOrigPath( i ); }

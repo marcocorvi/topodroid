@@ -4396,19 +4396,36 @@ public class DrawingWindow extends ItemDrawer
         }
 
         if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) {
-          // ----- DUPLICATE LINE/AREA POINT
+          // ----- DUPLICATE LINE/AREA POINT - INSERT LINE/AREA POINTS IN RANGE
           //
           text = getString(R.string.popup_split_pt);
           myTextView2 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
             new View.OnClickListener( ) {
               public void onClick(View v) {
-                if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // split point LINE/AREA
-                  mDrawingSurface.splitHotItem();
+                if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // LINE/AREA
+                  if ( mDoEditRange == 0 ) {
+                    mDrawingSurface.splitPointHotItem(); // split point 
+                  } else {
+                    mDrawingSurface.insertPointsHotItem(); // insert points
+                  }
                   modified();
                 }
                 dismissPopupEdit();
               }
             } );
+          if ( TDLevel.overExpert && TDSetting.mCompositeActions ) {
+            myTextView2.setOnLongClickListener( new View.OnLongClickListener() {
+              public boolean onLongClick( View v ) {
+                if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // LINE/AREA
+                  mDrawingSurface.moveHotItemToNearestPoint( TDSetting.mSelectness/2 );
+                  mDrawingSurface.splitPointHotItem();
+                  modified();
+                }
+                dismissPopupEdit();
+                return true;
+              }
+            } );
+          }
           ww = myTextView2.getPaint().measureText( text );
           if ( ww > w ) w = ww;
 

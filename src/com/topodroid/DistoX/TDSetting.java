@@ -355,6 +355,7 @@ class TDSetting
   static float mLineAccuracy  = 1f;
   static float mLineCorner    = 20;    // corner threshold
   static int   mContinueLine  = DrawingWindow.CONT_NONE; // 0
+  static boolean mCompositeActions = false;
 
   static float mWeedDistance  = 0.5f;  // max weeding distance
   static float mWeedLength    = 2.0f;  // max weeding length
@@ -918,6 +919,7 @@ class TDSetting
     mLineCurve     = prefs.getBoolean( keyGLine[ 7], bool(defGLine[ 7]) );  // DISTOX_LINE_CURVE
     mLineStraight  = prefs.getBoolean( keyGLine[ 8], bool(defGLine[ 8]) );  // DISTOX_LINE_STRAIGHT
     mPathMultiselect = prefs.getBoolean( keyGLine[ 9], bool(defGLine[ 9]) );  // DISTOX_PATH_MULTISELECT
+    mCompositeActions = prefs.getBoolean( keyGLine[10], bool(defGLine[10]) );  // DISTOX_COMPOSITE_ACTIONS
 
     String[] keyUnits = TDPrefKey.UNITS;
     String[] defUnits = TDPrefKey.UNITSdef;
@@ -1438,9 +1440,11 @@ class TDSetting
     } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_LINE_CURVE (bool)
       mLineCurve = tryBooleanValue(         hlp, k, v, bool(def[7]) );
     } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_LINE_STRAIGHT
-      mLineStraight = tryBooleanValue(         hlp, k, v, bool(def[8]) );
+      mLineStraight = tryBooleanValue(      hlp, k, v, bool(def[8]) );
     } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_PATH_MULTISELECT (bool)
-      mPathMultiselect = tryBooleanValue(         hlp, k, v, bool(def[9]) );
+      mPathMultiselect = tryBooleanValue(   hlp, k, v, bool(def[9]) );
+    } else if ( k.equals( key[10 ] ) ) { // DISTOX_COMPOSITE_ACTIONS (bool)
+      mCompositeActions = tryBooleanValue(  hlp, k, v, bool(def[10]) );
 
     } else {
       TDLog.Error("missing DEVICE key: " + k );

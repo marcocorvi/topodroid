@@ -67,7 +67,7 @@ or lines (except "section" lines) [L], or areas [A].
 <ul style="margin-top=0">
 <li><i>Snap to nearby point</i> [P,L,A]: move the point to coincide with the closest nearby point (no action if there is no nearby point)</li>
 <li><i>Snap to nearby splays/line</i> [L:T]. Lines are deformed to pass through the splay endpoints that are close enough. For areas the point is moved to coincide with the closest line point, and the pieces of the area border before and after it are replaced with pieces of border that follow the line path. It requires the proper setting enabled</li>
-<li><i>duplicate</i> the point [L:A]. The new point is inserted "after" the selected point. It is added to the selection set, and you can select it with the Prev-Next buttons</li>
+<li><i>Insert</i> point(s) [L:A]. When a single point is selected, the new point is inserted "after" the selected point, and it is added to the selection set, and you can select it with the Prev-Next buttons. When a range is selected, new points are inserted between every two points of the range. A <u>long-tap</u> moves the selected point to the nearest point and inserts another point, "after" the selected point [T/G]</li>
 <li><i>Cut</i> [L] the line at the point, thus making two lines</li>
 <li><i>Straighten</i> [L:T] the line segment removing the control points</li>
 <li><i>Smoothen</i> [L:T] the line segment inserting control points at 1/3 and 2/3 the segment length. Further editing can move them and give any wanted curvature to the segment</li>

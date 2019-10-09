@@ -38,6 +38,7 @@ class SelectionPoint
   private float mD1;      // range shift endpoint distances
   private float mD2;
   
+  // range is from lp1 to lp2 - see DrawingCommandManager.setRangeAt()
   void setRangeTypeAndPoints( int type, LinePoint lp1, LinePoint lp2, float d1, float d2 )
   {
     mRangeType = type;

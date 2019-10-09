@@ -193,6 +193,7 @@ class SymbolArea extends Symbol
     String th_name = null;
     int color      = 0;
     int alpha      = 0x66;
+    int alpha_bg   = 0x33;
     mBitmap    = null;
     int width  = 0;
     int height = 0;
@@ -277,6 +278,12 @@ class SymbolArea extends Symbol
   	          alpha = Integer.decode( vals[k] );
                 } catch( NumberFormatException e ) { }
   	      }
+  	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	      if ( k < s ) {
+                try {
+  	          alpha_bg = Integer.decode( vals[k] );
+                } catch( NumberFormatException e ) { }
+  	      }
   	    } else if ( vals[k].equals("bitmap") ) {
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
               if ( k < s ) {
@@ -297,7 +304,7 @@ class SymbolArea extends Symbol
                     }
                     if ( width > 0 && height > 0 ) {
                       pxl = new int[ width * height];
-                      int col = (color & 0x00ffffff) | 0x33000000;
+                      int col = (color & 0x00ffffff) | ( alpha_bg << 24 ) ;
                       for ( int j=0; j<height; ++j ) {
                         for ( int i=0; i<width; ++i ) pxl[j*width+i] = col;
                       }
