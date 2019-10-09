@@ -1,0 +1,7 @@
+symbol area
+name stalagmite
+name-pt estalagmite
+th_name u:stalagmite
+color 0xd0ff00 0x66
+csurvey 1 48 0 1
+endsymbol
