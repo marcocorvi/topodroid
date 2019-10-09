@@ -1,0 +1,36 @@
+symbol point
+name archeo-excavation
+name-pt escavação_arqueológica
+th_name u:archeo-excavation
+orientation no
+color 0xc39953
+csurvey 6 6 80
+path
+  moveTo -10 0
+  lineTo -7 0
+  lineTo -7 6
+  lineTo 7 6
+  lineTo 7 0
+  lineTo 10 0
+
+  moveTo 7 -7
+  lineTo 7 -5
+
+  moveTo 7 -6
+  lineTo 2 -1
+
+  moveTo 2 -3
+  lineTo 2 1
+
+  cubicTo -1 2 -2 0 2 -3
+
+  moveTo -3 -1
+  lineTo -6 -2
+
+  moveTo -2 -3
+  lineTo -4 -5
+
+  moveTo 0 -4
+  lineTo -1 -7
+endpath
+endsymbol
