@@ -494,8 +494,10 @@ class Selection
   void checkBucket( SelectionPoint sp ) 
   {
     if ( sp == null ) return;
-    if ( sp.mLP1 != null || sp.mLP2 != null ) {
-      rebucketLinePath( (DrawingPointLinePath)sp.mItem );
+    if ( sp.mRange != null ) {
+      // if ( sp.mRange.start() != null || sp.mRange.end() != null ) {
+        rebucketLinePath( (DrawingPointLinePath)sp.mItem );
+      // }
     } else {
       SelectionBucket sb = sp.mBucket;
       if ( sb != null && ! sb.contains( sp.X(), sp.Y() ) ) {

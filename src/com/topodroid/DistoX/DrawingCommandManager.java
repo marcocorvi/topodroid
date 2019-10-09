@@ -2007,8 +2007,8 @@ class DrawingCommandManager
             float x, y;
             LinePoint lp = sp.mPoint;
             DrawingPath item = sp.mItem;
-            LinePoint lp1 = sp.mLP1;
-            LinePoint lp2 = sp.mLP2;
+            LinePoint lp1 = (sp.mRange == null)? null : sp.mRange.start();
+            LinePoint lp2 = (sp.mRange == null)? null : sp.mRange.end();
 
             if ( lp != null ) { // line-point
               x = lp.x;
@@ -2052,7 +2052,7 @@ class DrawingCommandManager
               }
               path.transform( mMatrix );
               canvas.drawPath( path, paint );
-              if ( lp != lp2 ) {
+              if ( lp != null && lp != lp2 ) {
                 path = new Path();
                 path.moveTo( lp.x, lp.y );
                 for ( lp = lp.mNext; lp != lp2 && lp != null; lp = lp.mNext ) {
@@ -2342,9 +2342,10 @@ class DrawingCommandManager
     SelectionPoint sp = mSelected.mHotItem;
     if ( sp == null ) return;
     if ( sp.type() != DrawingPath.DRAWING_PATH_LINE && sp.type() != DrawingPath.DRAWING_PATH_AREA ) return;
-    LinePoint lp1 = sp.mLP1;
+    if ( sp.mRange == null ) return;
+    LinePoint lp1 = sp.mRange.start();
     if ( lp1 == null ) return;
-    LinePoint lp2 = sp.mLP2;
+    LinePoint lp2 = sp.mRange.end();
     DrawingPointLinePath line = (DrawingPointLinePath)sp.mItem;
 
     for ( LinePoint lp0 = lp1.mNext; lp1 != lp2 && lp0 != null; lp0 = lp0.mNext ) {

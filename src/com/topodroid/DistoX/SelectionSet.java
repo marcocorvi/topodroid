@@ -38,8 +38,9 @@ class SelectionSet
   private void clearHotItemRange()
   {
     if ( mHotItem != null ) {
-      mHotItem.mLP1 = null;
-      mHotItem.mLP2 = null;
+      mHotItem.mRange = null;
+      // mHotItem.mLP1 = null;
+      // mHotItem.mLP2 = null;
     }
   }
 

@@ -332,7 +332,7 @@ public class DrawingWindow extends ItemDrawer
   private float mSelectSize = 1.0f * TDSetting.mSelectness;
 
   // protected static int mEditRadius = 0; 
-  private int mDoEditRange = 0; // 0 no, 1 smooth, 2 boxed
+  private int mDoEditRange = SelectionRange.RANGE_POINT; // 0 no, 1 smooth, 2 boxed
 
   private boolean mRotateAzimuth;
   private boolean mEditMove;    // whether moving the selected point
@@ -2384,290 +2384,284 @@ public class DrawingWindow extends ItemDrawer
   // x,y scene points
   private void doSelectAt( float x, float y, float size )
   {
-      // Log.v("DistoX-C", "doSelectAt " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-      assert( mLastLinePath == null );
-      if ( mLandscape ) { float t=x; x=-y; y=t; }
-      // Log.v("DistoX", "select at: edit-range " + mDoEditRange + " mode " + mMode + " At " + x + " " + y );
-      if ( mMode == MODE_EDIT ) {
-        if ( TDLevel.overExpert ) {
-	  // PATH_MULTISELECTION
-          // if ( mDrawingSurface.isMultiselection() ) {
-          //   mDrawingSurface.addItemAt( x, y, mZoom, size );
-	  //   return;
-          // }
-          if ( mDoEditRange > 0 ) {
-            // mDoEditRange = false;
-            // TDandroid.setButtonBackground( mButton3[ BTN_BORDER ], mBMedit_no );
-            if ( mDrawingSurface.setRangeAt( x, y, mZoom, mDoEditRange, size ) ) {
-              mMode = MODE_SHIFT;
-              return;
-            }
-          }
-        } 
-        // float d0 = TopoDroidApp.mCloseCutoff + TopoDroidApp.mSelectness / mZoom;
-        SelectionSet selection = mDrawingSurface.getItemsAt( x, y, mZoom, mSelectMode, size );
-        // Log.v( TopoDroidApp.TAG, "selection at " + x + " " + y + " items " + selection.size() );
-        // Log.v( TopoDroidApp.TAG, " zoom " + mZoom + " radius " + d0 );
-        mHasSelected = mDrawingSurface.hasSelected();
-        setButton3PrevNext();
-        if ( mHasSelected ) {
-          if ( mDoEditRange == 0 ) {
+    // Log.v("DistoX-C", "doSelectAt " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    assert( mLastLinePath == null );
+    if ( mLandscape ) { float t=x; x=-y; y=t; }
+    // Log.v("DistoX", "select at: edit-range " + mDoEditRange + " mode " + mMode + " At " + x + " " + y );
+    if ( mMode == MODE_EDIT ) {
+      if ( TDLevel.overExpert ) {
+        // PATH_MULTISELECTION
+        // if ( mDrawingSurface.isMultiselection() ) {
+        //   mDrawingSurface.addItemAt( x, y, mZoom, size );
+        //   return;
+        // }
+        if ( ! SelectionRange.isPoint( mDoEditRange ) ) {
+          // TDandroid.setButtonBackground( mButton3[ BTN_BORDER ], mBMedit_no );
+          if ( mDrawingSurface.setRangeAt( x, y, mZoom, mDoEditRange, size ) ) {
             mMode = MODE_SHIFT;
+            return;
           }
-          setButton3Item( selection.mHotItem );
-        } else {
-          setButton3Item( null );
         }
       } 
-    }
-
-    // x,y scene points
-    private void doEraseAt( float x, float y )
-    {
-      if ( mLandscape ) { float t=x; x=-y; y=t; }
-      mDrawingSurface.eraseAt( x, y, mZoom, mEraseCommand, mEraseMode, mEraseSize );
-      modified();
-    }
-
-    void updateBlockName( DBlock block, String from, String to )
-    {
-      // if ( mFullName2 == null ) return; // nothing for PLOT_SECTION or PLOT_H_SECTION
-      if ( PlotInfo.isAnySection( mType ) )  return;
-      // FIXME if ( from == null || to == null ) return;
-
-      if ( block.mFrom == null ) {
-        if (from == null) return;
+      // float d0 = TopoDroidApp.mCloseCutoff + TopoDroidApp.mSelectness / mZoom;
+      SelectionSet selection = mDrawingSurface.getItemsAt( x, y, mZoom, mSelectMode, size );
+      // Log.v( TopoDroidApp.TAG, "selection at " + x + " " + y + " items " + selection.size() );
+      // Log.v( TopoDroidApp.TAG, " zoom " + mZoom + " radius " + d0 );
+      mHasSelected = mDrawingSurface.hasSelected();
+      setButton3PrevNext();
+      if ( mHasSelected ) {
+        if ( SelectionRange.isPoint( mDoEditRange ) ) {
+          mMode = MODE_SHIFT;
+        }
+        setButton3Item( selection.mHotItem );
       } else {
-        if ( block.mFrom.equals(from) ) return;
+        setButton3Item( null );
       }
-      if ( block.mTo == null ) {
-        if ( to == null ) return;
-      } else {
-        if ( block.mTo.equals( to )) return;
-      }
+    } 
+  }
 
-      block.mFrom = from;
-      block.mTo   = to;
-      mApp_mData.updateShotName( block.mId, mSid, from, to );
-      doComputeReferences( true );
-      mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
+  // x,y scene points
+  private void doEraseAt( float x, float y )
+  {
+    if ( mLandscape ) { float t=x; x=-y; y=t; }
+    mDrawingSurface.eraseAt( x, y, mZoom, mEraseCommand, mEraseMode, mEraseSize );
+    modified();
+  }
 
-      modified();
+  void updateBlockName( DBlock block, String from, String to )
+  {
+    // if ( mFullName2 == null ) return; // nothing for PLOT_SECTION or PLOT_H_SECTION
+    if ( PlotInfo.isAnySection( mType ) )  return;
+    // FIXME if ( from == null || to == null ) return;
+
+    if ( block.mFrom == null ) {
+      if (from == null) return;
+    } else {
+      if ( block.mFrom.equals(from) ) return;
     }
+    if ( block.mTo == null ) {
+      if ( to == null ) return;
+    } else {
+      if ( block.mTo.equals( to )) return;
+    }
+
+    block.mFrom = from;
+    block.mTo   = to;
+    mApp_mData.updateShotName( block.mId, mSid, from, to );
+    doComputeReferences( true );
+    mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
+
+    modified();
+  }
  
-    void updateBlockComment( DBlock block, String comment ) 
-    {
-      if ( comment.equals( block.mComment ) ) return;
-      block.mComment = comment;
-      mApp_mData.updateShotComment( block.mId, mSid, comment );
-    }
-    
-    void updateBlockFlag( DBlock blk, long flag, DrawingPath shot )
-    {
-      if ( blk.getFlag() == flag ) return;
-      blk.resetFlag( flag );
-      // the next is really necessary only if flag || mFlag is FLAG_COMMENTED:
-      if ( PlotInfo.isProfile( mType ) ) {
-        if ( TDSetting.mDashSplay == TDSetting.DASHING_AZIMUTH ) {
-          // shot.setSplayPaintPlan( blk, blk.getReducedIntExtend(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-          shot.setSplayPaintPlan( blk, shot.getCosine(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-        } else {
-          shot.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-        }
+  void updateBlockComment( DBlock block, String comment ) 
+  {
+    if ( comment.equals( block.mComment ) ) return;
+    block.mComment = comment;
+    mApp_mData.updateShotComment( block.mId, mSid, comment );
+  }
+  
+  void updateBlockFlag( DBlock blk, long flag, DrawingPath shot )
+  {
+    if ( blk.getFlag() == flag ) return;
+    blk.resetFlag( flag );
+    // the next is really necessary only if flag || mFlag is FLAG_COMMENTED:
+    if ( PlotInfo.isProfile( mType ) ) {
+      if ( TDSetting.mDashSplay == TDSetting.DASHING_AZIMUTH ) {
+        // shot.setSplayPaintPlan( blk, blk.getReducedIntExtend(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+        shot.setSplayPaintPlan( blk, shot.getCosine(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
       } else {
-        if ( TDSetting.mDashSplay == TDSetting.DASHING_CLINO ) {
-          shot.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-        } else {
-          // shot.setSplayPaintPlan( blk, blk.getReducedIntExtend(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
-          shot.setSplayPaintPlan( blk, shot.getCosine(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
-        }
+        shot.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
       }
-      mApp_mData.updateShotFlag( blk.mId, mSid, flag );
-    }
-    
-    void clearBlockSplayLeg( DBlock blk, DrawingPath shot )
-    {
-      // Log.v("DistoX", "clear splay leg " + blk.mId + "/" + mSid + " reset shot paint ");
-      blk.setTypeSplay();
-      if ( shot.mBlock != null ) shot.mBlock.setTypeSplay();
-      mApp_mData.updateShotLeg( blk.mId, mSid, LegType.NORMAL );
-      // the next is really necessary only if flag || mFlag is FLAG_COMMENTED:
-      if ( PlotInfo.isProfile( mType ) ) {
-        if ( TDSetting.mDashSplay == TDSetting.DASHING_AZIMUTH ) {
-          // shot.setSplayPaintPlan( blk, blk.getReducedIntExtend(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-          shot.setSplayPaintPlan( blk, shot.getCosine(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-        } else {
-          shot.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-        }
+    } else {
+      if ( TDSetting.mDashSplay == TDSetting.DASHING_CLINO ) {
+        shot.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
       } else {
-        if ( TDSetting.mDashSplay == TDSetting.DASHING_CLINO ) {
-          shot.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-        } else {
-          // shot.setSplayPaintPlan( blk, blk.getReducedIntExtend(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
-          shot.setSplayPaintPlan( blk, shot.getCosine(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
-        }
+        // shot.setSplayPaintPlan( blk, blk.getReducedIntExtend(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
+        shot.setSplayPaintPlan( blk, shot.getCosine(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
       }
     }
-
-    // called be DrawingShotDialog and onTouch
-    void updateBlockExtend( DBlock block, int extend, float stretch )
-    {
-      // if ( ! block.isSplay() ) extend -= DBlock.EXTEND_FVERT;
-      if ( block.getIntExtend() == extend && block.hasStretch( stretch ) ) return;
-      block.setExtend( extend, stretch );
-      mApp_mData.updateShotExtend( block.mId, mSid, extend, stretch );
-      recomputeProfileReference();
-    }
-
-    // only PLOT_EXTENDED ( not PLOT_PROJECTED )
-    // used only when a shot extend is changed
-    private void recomputeProfileReference()
-    {
-      // Log.v("DistoX-C", "recomputeProfileReference " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-      assert( mLastLinePath == null );
-      if ( mType == PlotInfo.PLOT_EXTENDED ) { 
-        List<DBlock> list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
-        mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
-	// if ( mNum != null ) { // always true
-          computeReferences( (int)mType, mName, TopoDroidApp.mScaleFactor, false );
-          mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
-          modified();
-	// }
-      } 
-    }
-
-    private void deleteSplay( DrawingPath p, SelectionPoint sp, DBlock blk )
-    {
-      mDrawingSurface.deleteSplay( p, sp ); 
-      mApp_mData.deleteShot( blk.mId, TDInstance.sid, TDStatus.DELETED );
-      if ( TopoDroidApp.mShotWindow != null ) {
-        TopoDroidApp.mShotWindow.updateDisplay(); // FIXME ???
+    mApp_mData.updateShotFlag( blk.mId, mSid, flag );
+  }
+  
+  void clearBlockSplayLeg( DBlock blk, DrawingPath shot )
+  {
+    // Log.v("DistoX", "clear splay leg " + blk.mId + "/" + mSid + " reset shot paint ");
+    blk.setTypeSplay();
+    if ( shot.mBlock != null ) shot.mBlock.setTypeSplay();
+    mApp_mData.updateShotLeg( blk.mId, mSid, LegType.NORMAL );
+    // the next is really necessary only if flag || mFlag is FLAG_COMMENTED:
+    if ( PlotInfo.isProfile( mType ) ) {
+      if ( TDSetting.mDashSplay == TDSetting.DASHING_AZIMUTH ) {
+        // shot.setSplayPaintPlan( blk, blk.getReducedIntExtend(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+        shot.setSplayPaintPlan( blk, shot.getCosine(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+      } else {
+        shot.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+      }
+    } else {
+      if ( TDSetting.mDashSplay == TDSetting.DASHING_CLINO ) {
+        shot.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+      } else {
+        // shot.setSplayPaintPlan( blk, blk.getReducedIntExtend(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
+        shot.setSplayPaintPlan( blk, shot.getCosine(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
       }
     }
+  }
 
-    private void deletePoint( DrawingPointPath point )
-    {
-      if ( point == null ) return;
-      // Log.v("DistoX-C", "deletePoint " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-      assert( mLastLinePath == null );
-      mDrawingSurface.deletePath( point ); 
-      // Log.v("DistoX", "delete point type " + point.mPointType );
-      if ( BrushManager.isPointPhoto( point.mPointType ) ) {
-        DrawingPhotoPath photo = (DrawingPhotoPath)point;
-        mApp_mData.deletePhoto( TDInstance.sid, photo.mId );
-        TDUtil.deleteFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString( photo.mId ) ) );
-      } else if ( BrushManager.isPointAudio( point.mPointType ) ) {
-        DrawingAudioPath audio = (DrawingAudioPath)point;
-        mApp_mData.deleteAudio( TDInstance.sid, audio.mId );
+  // called be DrawingShotDialog and onTouch
+  void updateBlockExtend( DBlock block, int extend, float stretch )
+  {
+    // if ( ! block.isSplay() ) extend -= DBlock.EXTEND_FVERT;
+    if ( block.getIntExtend() == extend && block.hasStretch( stretch ) ) return;
+    block.setExtend( extend, stretch );
+    mApp_mData.updateShotExtend( block.mId, mSid, extend, stretch );
+    recomputeProfileReference();
+  }
 
-        TDUtil.deleteFile( TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString( audio.mId ) ) );
-      } else if ( BrushManager.isPointSection( point.mPointType ) ) {
-        mDrawingSurface.clearXSectionOutline( point.getOption( "-scrap" ) );
-      }
-      modified();
-    }
-
-    private void splitLine( DrawingLinePath line, LinePoint point )
-    {
-      mDrawingSurface.splitLine( line, point );
-      // Log.v("DistoX-C", "splitLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-      assert( mLastLinePath == null );
-      modified();
-    }
-
-    private void /*boolean*/ removeLinePoint( DrawingPointLinePath line, LinePoint point, SelectionPoint sp ) 
-    {
-      boolean ret = mDrawingSurface.removeLinePoint(line, point, sp); 
-      if ( ret ) {
+  // only PLOT_EXTENDED ( not PLOT_PROJECTED )
+  // used only when a shot extend is changed
+  private void recomputeProfileReference()
+  {
+    // Log.v("DistoX-C", "recomputeProfileReference " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    assert( mLastLinePath == null );
+    if ( mType == PlotInfo.PLOT_EXTENDED ) { 
+      List<DBlock> list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
+      mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
+      // if ( mNum != null ) { // always true
+        computeReferences( (int)mType, mName, TopoDroidApp.mScaleFactor, false );
+        mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
         modified();
-      }
-      // return ret;
+      // }
+    } 
+  }
+
+  private void deleteSplay( DrawingPath p, SelectionPoint sp, DBlock blk )
+  {
+    mDrawingSurface.deleteSplay( p, sp ); 
+    mApp_mData.deleteShot( blk.mId, TDInstance.sid, TDStatus.DELETED );
+    if ( TopoDroidApp.mShotWindow != null ) {
+      TopoDroidApp.mShotWindow.updateDisplay(); // FIXME ???
     }
+  }
 
+  private void deletePoint( DrawingPointPath point )
+  {
+    if ( point == null ) return;
+    // Log.v("DistoX-C", "deletePoint " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    assert( mLastLinePath == null );
+    mDrawingSurface.deletePath( point ); 
+    // Log.v("DistoX", "delete point type " + point.mPointType );
+    if ( BrushManager.isPointPhoto( point.mPointType ) ) {
+      DrawingPhotoPath photo = (DrawingPhotoPath)point;
+      mApp_mData.deletePhoto( TDInstance.sid, photo.mId );
+      TDUtil.deleteFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString( photo.mId ) ) );
+    } else if ( BrushManager.isPointAudio( point.mPointType ) ) {
+      DrawingAudioPath audio = (DrawingAudioPath)point;
+      mApp_mData.deleteAudio( TDInstance.sid, audio.mId );
+      TDUtil.deleteFile( TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString( audio.mId ) ) );
+    } else if ( BrushManager.isPointSection( point.mPointType ) ) {
+      mDrawingSurface.clearXSectionOutline( point.getOption( "-scrap" ) );
+    }
+    modified();
+  }
 
-    // @param xs_id      section-line id 
-    // @param scrap_name xsection scrap_name = survey_name + "-" + xsection_id
-    void deleteLine( DrawingLinePath line ) 
-    { 
-      if ( BrushManager.isLineSection( line.mLineType ) ) {
-        deleteSectionLine( line );
-      } else {
-        mDrawingSurface.deletePath( line );
-      }
-      // Log.v("DistoX-C", "deleteLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-      assert( mLastLinePath == null );
+  private void splitLine( DrawingLinePath line, LinePoint point )
+  {
+    mDrawingSurface.splitLine( line, point );
+    // Log.v("DistoX-C", "splitLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    assert( mLastLinePath == null );
+    modified();
+  }
+
+  private void removeLinePoint( DrawingPointLinePath line, LinePoint point, SelectionPoint sp ) 
+  {
+    if (  mDrawingSurface.removeLinePoint(line, point, sp) ) {
       modified();
     }
+  }
 
-    private void deleteSectionLine( DrawingLinePath line )
-    {
-      String xs_id = line.getOption( "-id" );
-      String scrap_name = TDInstance.survey + "-" + xs_id;
-      mDrawingSurface.deleteSectionLine( line, scrap_name );
-      TDPath.deletePlotFileWithBackups( TDPath.getTh2File( scrap_name + ".th2" ) );
-      TDPath.deletePlotFileWithBackups( TDPath.getTdrFile( scrap_name + ".tdr" ) );
-      TDPath.deleteFile( TDPath.getJpgFile( TDInstance.survey, xs_id + ".jpg" ) );
 
-      // section point is deleted automatically
-      // deleteSectionPoint( xs_id ); // delete section point and possibly clear section outline
-      mDrawingSurface.clearXSectionOutline( scrap_name ); // clear outline if any
-     
-      PlotInfo plot = mApp_mData.getPlotInfo( TDInstance.sid, xs_id );
-      if ( plot != null ) {
-        mApp_mData.dropPlot( plot.id, TDInstance.sid );
-      } else {
-        TDLog.Error("Delete section line. No plot NAME " + xs_id + " SID " + TDInstance.sid );
-      }
+  // @param xs_id      section-line id 
+  // @param scrap_name xsection scrap_name = survey_name + "-" + xsection_id
+  void deleteLine( DrawingLinePath line ) 
+  { 
+    if ( BrushManager.isLineSection( line.mLineType ) ) {
+      deleteSectionLine( line );
+    } else {
+      mDrawingSurface.deletePath( line );
     }
+    // Log.v("DistoX-C", "deleteLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    assert( mLastLinePath == null );
+    modified();
+  }
 
-    void sharpenLine( DrawingLinePath line )
-    {
-      // Log.v("DistoX-C", "sharpenLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-      assert( mLastLinePath == null );
-      mDrawingSurface.sharpenPointLine( line );
-      modified();
+  private void deleteSectionLine( DrawingLinePath line )
+  {
+    String xs_id = line.getOption( "-id" );
+    String scrap_name = TDInstance.survey + "-" + xs_id;
+    mDrawingSurface.deleteSectionLine( line, scrap_name );
+    TDPath.deletePlotFileWithBackups( TDPath.getTh2File( scrap_name + ".th2" ) );
+    TDPath.deletePlotFileWithBackups( TDPath.getTdrFile( scrap_name + ".tdr" ) );
+    TDPath.deleteFile( TDPath.getJpgFile( TDInstance.survey, xs_id + ".jpg" ) );
+    // section point is deleted automatically
+    // deleteSectionPoint( xs_id ); // delete section point and possibly clear section outline
+    mDrawingSurface.clearXSectionOutline( scrap_name ); // clear outline if any
+    PlotInfo plot = mApp_mData.getPlotInfo( TDInstance.sid, xs_id );
+    if ( plot != null ) {
+      mApp_mData.dropPlot( plot.id, TDInstance.sid );
+    } else {
+      TDLog.Error("Delete section line. No plot NAME " + xs_id + " SID " + TDInstance.sid );
     }
+  }
 
-    void reduceLine( DrawingLinePath line, int decimation )
-    {
-      // Log.v("DistoX-C", "reduceLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-      assert( mLastLinePath == null );
-      mDrawingSurface.reducePointLine( line, decimation );
-      modified();
-    }
+  void sharpenLine( DrawingLinePath line )
+  {
+    // Log.v("DistoX-C", "sharpenLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    assert( mLastLinePath == null );
+    mDrawingSurface.sharpenPointLine( line );
+    modified();
+  }
 
-    void rockLine( DrawingLinePath line )
-    {
-      // Log.v("DistoX-C", "rockLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-      assert( mLastLinePath == null );
-      mDrawingSurface.rockPointLine( line );
-      modified();
-    }
+  void reduceLine( DrawingLinePath line, int decimation )
+  {
+    // Log.v("DistoX-C", "reduceLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    assert( mLastLinePath == null );
+    mDrawingSurface.reducePointLine( line, decimation );
+    modified();
+  }
 
-    void closeLine( DrawingLinePath line )
-    {
-      // Log.v("DistoX-C", "closeLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-      assert( mLastLinePath == null );
-      mDrawingSurface.closePointLine( line );
-      modified();
-    }
+  void rockLine( DrawingLinePath line )
+  {
+    // Log.v("DistoX-C", "rockLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    assert( mLastLinePath == null );
+    mDrawingSurface.rockPointLine( line );
+    modified();
+  }
 
-    void reduceArea( DrawingAreaPath area, int decimation )
-    {
-      // Log.v("DistoX-C", "reduceArea " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-      assert( mLastLinePath == null );
-      mDrawingSurface.reducePointLine( area, decimation );
-      modified();
-    }
+  void closeLine( DrawingLinePath line )
+  {
+    // Log.v("DistoX-C", "closeLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    assert( mLastLinePath == null );
+    mDrawingSurface.closePointLine( line );
+    modified();
+  }
+
+  void reduceArea( DrawingAreaPath area, int decimation )
+  {
+    // Log.v("DistoX-C", "reduceArea " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    assert( mLastLinePath == null );
+    mDrawingSurface.reducePointLine( area, decimation );
+    modified();
+  }
 
 
-    private void deleteArea( DrawingAreaPath area )
-    {
-      // Log.v("DistoX-C", "deleteArea " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-      assert( mLastLinePath == null );
-      mDrawingSurface.deletePath( area );
-      modified();
-    }
+  private void deleteArea( DrawingAreaPath area )
+  {
+    // Log.v("DistoX-C", "deleteArea " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    assert( mLastLinePath == null );
+    mDrawingSurface.deletePath( area );
+    modified();
+  }
 
   // ----------------------------------------------------------------
   /*
@@ -3438,7 +3432,7 @@ public class DrawingWindow extends ItemDrawer
         }
       } else if (  mMode == MODE_MOVE && mRotateAzimuth ) {
         TDAzimuth.mRefAzimuth = TDMath.in360( TDAzimuth.mRefAzimuth + x_shift/2 );
-        setAzimuthButton();
+        setButtonAzimuth();
       } else if (  mMode == MODE_MOVE 
                || (mMode == MODE_EDIT && mEditMove ) 
                || (mMode == MODE_SHIFT && mShiftMove) ) {
@@ -3598,12 +3592,12 @@ public class DrawingWindow extends ItemDrawer
         }
       } else if ( nr_legs > 1 ) { // many legs
         // TDToast.makeWarn( R.string.too_many_leg_intersection );
-        if ( h_section ) { // xsection in profile view
-          // nothing 
-        } else {
+        if ( ! h_section ) { // not xsection in profile view
           nr_legs = 1; // ok
           // these have already been computed before the if-test
           // azimuth = TDMath.in360( 90 + (float)(Math.atan2( l2.x-l1.x, -l2.y+l1.y ) * TDMath.RAD2DEG ) );
+        // } else {
+        //   // nothing 
         }
       }
     }
@@ -4403,7 +4397,7 @@ public class DrawingWindow extends ItemDrawer
             new View.OnClickListener( ) {
               public void onClick(View v) {
                 if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // LINE/AREA
-                  if ( mDoEditRange == 0 ) {
+                  if ( SelectionRange.isPoint( mDoEditRange ) ) {
                     mDrawingSurface.splitPointHotItem(); // split point 
                   } else {
                     mDrawingSurface.insertPointsHotItem(); // insert points
@@ -4768,12 +4762,29 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  private void setAzimuthButton()
+  private void setButtonAzimuth()
   {
     // if ( mRotateAzimuth ) {
       Bitmap bm2 = AzimuthDialog.getRotatedBitmap( TDAzimuth.mRefAzimuth, mDialOn );
       mButton1[ BTN_DIAL ].setBackgroundDrawable( new BitmapDrawable( getResources(), bm2 ) ); // DEPRECATED API-16
     // }
+  }
+
+  private void setButtonRange()
+  {
+    if ( BTN_BORDER < mButton3.length ) {
+      switch ( mDoEditRange ) {
+        case SelectionRange.RANGE_POINT:
+          TDandroid.setButtonBackground( mButton3[ BTN_BORDER ], mBMedit_no );
+          break;
+        case SelectionRange.RANGE_SOFT:
+          TDandroid.setButtonBackground( mButton3[ BTN_BORDER ], mBMedit_ok );
+          break;
+        case SelectionRange.RANGE_HARD:
+          TDandroid.setButtonBackground( mButton3[ BTN_BORDER ], mBMedit_box );
+          break;
+      }
+    }
   }
 
     public boolean onLongClick( View view ) 
@@ -4792,7 +4803,7 @@ public class DrawingWindow extends ItemDrawer
       } else if ( TDLevel.overAdvanced && b == mButton1[ BTN_DIAL ] ) {
         if ( /* TDLevel.overAdvanced && */ mType == PlotInfo.PLOT_PLAN && TDAzimuth.mFixedExtend == 0 ) {
           mRotateAzimuth = true;
-          setAzimuthButton();
+          setButtonAzimuth();
         } else {
           onClick( view );
         }
@@ -4975,7 +4986,7 @@ public class DrawingWindow extends ItemDrawer
       } else if ( b == mButton3[k3++] ) { // PREV
         if ( mHasSelected ) {
           SelectionPoint pt = mDrawingSurface.prevHotItem( );
-          if ( mDoEditRange == 0 ) mMode = MODE_SHIFT;
+          if ( SelectionRange.isPoint( mDoEditRange ) ) mMode = MODE_SHIFT;
           setButton3Item( pt );
         } else {
           makePopupFilter( b, Drawing.mSelectModes, 6, Drawing.CODE_SELECT, dismiss );
@@ -4983,7 +4994,7 @@ public class DrawingWindow extends ItemDrawer
       } else if ( b == mButton3[k3++] ) { // NEXT
         if ( mHasSelected ) {
           SelectionPoint pt = mDrawingSurface.nextHotItem( );
-          if ( mDoEditRange == 0 ) mMode = MODE_SHIFT;
+          if ( SelectionRange.isPoint( mDoEditRange ) ) mMode = MODE_SHIFT;
           setButton3Item( pt );
         } else {
           setButtonSelectSize( mSelectScale + 1 ); // toggle select size
@@ -5093,20 +5104,8 @@ public class DrawingWindow extends ItemDrawer
           }
         }
       } else if ( TDLevel.overExpert && b == mButton3[ k3++ ] ) { // RANGE EDIT
-        mDoEditRange = ( mDoEditRange + 1 ) % 3;
-        if ( BTN_BORDER < mButton3.length ) {
-          switch ( mDoEditRange ) {
-            case 0:
-              TDandroid.setButtonBackground( mButton3[ BTN_BORDER ], mBMedit_no );
-              break;
-            case 1:
-              TDandroid.setButtonBackground( mButton3[ BTN_BORDER ], mBMedit_ok );
-              break;
-            case 2:
-              TDandroid.setButtonBackground( mButton3[ BTN_BORDER ], mBMedit_box );
-              break;
-          }
-        }
+        mDoEditRange = SelectionRange.rotateType( mDoEditRange );
+        setButtonRange();
       } else if ( b == mButton5[k5++] ) { // ERASE MODE
         makePopupFilter( b, Drawing.mEraseModes, 4, Drawing.CODE_ERASE, dismiss ); // pulldown menu to select erase mode
       } else if ( b == mButton5[k5++] ) { // ERASE SIZE
