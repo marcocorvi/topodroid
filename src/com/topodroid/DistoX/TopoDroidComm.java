@@ -101,7 +101,7 @@ class TopoDroidComm
       mHasG  = false;
 
       // TDLog.Log( TDLog.LOG_COMM, "RF comm thread running ... to_read " + toRead );
-      Log.v( "DistoXCOMM", "RF comm thread ... to_read " + toRead );
+      // Log.v( "DistoX-COMM", "RF comm thread ... to_read " + toRead );
       if ( mType == COMM_RFCOMM ) {
         while ( doWork && nReadPackets /* .get() */ != toRead ) {
           // TDLog.Log( TDLog.LOG_COMM, "RF comm loop: read " + getNrReadPackets() + " to-read " + toRead );

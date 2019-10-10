@@ -75,7 +75,7 @@ class DrawingPointDialog extends MyDialog
     mParent = parent;
     mPoint  = point;
     mPointType = mPoint.mPointType;
-    mOrientable = BrushManager.mPointLib.isSymbolOrientable( mPointType );
+    mOrientable = BrushManager.isPointOrientable( mPointType );
     mXSectionName = null;
     mHasXSectionOutline = false;
     mDoOptions = BrushManager.pointHasText( mPointType ) || TDLevel.overAdvanced;

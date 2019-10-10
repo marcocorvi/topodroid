@@ -49,7 +49,7 @@ class StationPolicy
 
   // static void dump()
   // {
-  //   Log.v("DistoXP", "Policy " + mSavedPolicy + " " + mSurveyStations + "/" + (mShotAfterSplays?"a ":"b ")
+  //   Log.v("DistoX-POLICY", "Policy " + mSavedPolicy + " " + mSurveyStations + "/" + (mShotAfterSplays?"a ":"b ")
   //       	    + (mBacksightShot?"B":"-")
   //       	    + (mTripodShot?"T":"-")
   //       	    + (mMagAnomaly?"M":"-")

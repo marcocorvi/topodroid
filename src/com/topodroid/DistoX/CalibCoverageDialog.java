@@ -110,7 +110,7 @@ class CalibCoverageDialog extends MyDialog
     mImageUp.setImageBitmap( mBitmapUp );
     mImageDown.setImageBitmap( mBitmapDown );
     String format = mContext.getResources().getString(res);
-    Log.v("DistoXX", "res " + res + " format " + format );
+    // Log.v("DistoX-COVER", "res " + res + " format " + format );
 
     mText.setText( String.format(Locale.US, mContext.getResources().getString(res), mCoverageValue ) );
   }
@@ -177,10 +177,10 @@ class CalibCoverageDialog extends MyDialog
           int i22 = (i21 + 1) % t_size[j2];
           float d2 = c2 - i21;
 	  // if ( j1off+i11 >= t_dim || j1off+i12 >= t_dim ) {
-	  //         Log.v("DistoX", "OOB north " + i0 + " " + j0 + " J " + j1 + " " + j2 + " I11 " + i11 + " " + i21 );
+	  //         Log.v("DistoX-COVER", "OOB north " + i0 + " " + j0 + " J " + j1 + " " + j2 + " I11 " + i11 + " " + i21 );
 	  // }
 	  // if ( j2off+i21 >= t_dim || j2off+i22 >= t_dim ) {
-	  //         Log.v("DistoX", "OOB north " + i0 + " " + j0 + " J " + j1 + " " + j2 + " I11 " + i11 + " " + i21 );
+	  //         Log.v("DistoX-COVER", "OOB north " + i0 + " " + j0 + " J " + j1 + " " + j2 + " I11 " + i11 + " " + i21 );
 	  // }
           float v1 = angles[j1off+i11].mValue * (1-d1) + angles[j1off+i12].mValue * d1;
           float v2 = angles[j2off+i21].mValue * (1-d2) + angles[j2off+i22].mValue * d2;
@@ -204,10 +204,10 @@ class CalibCoverageDialog extends MyDialog
           i22 = (i21 + 1) % t_size[j2];
           d2 = c2 - i21;
 	  // if ( j1off+i11 >= t_dim || j1off+i12 >= t_dim ) {
-	  //         Log.v("DistoX", "OOB south " + i0 + " " + j0 + " J " + j1 + " " + j2 + " I11 " + i11 + " " + i21 );
+	  //         Log.v("DistoX-COVER", "OOB south " + i0 + " " + j0 + " J " + j1 + " " + j2 + " I11 " + i11 + " " + i21 );
 	  // }
 	  // if ( j2off+i21 >= t_dim || j2off+i22 >= t_dim ) {
-	  //         Log.v("DistoX", "OOB south " + i0 + " " + j0 + " J " + j1 + " " + j2 + " I11 " + i11 + " " + i21 );
+	  //         Log.v("DistoX-COVER", "OOB south " + i0 + " " + j0 + " J " + j1 + " " + j2 + " I11 " + i11 + " " + i21 );
 	  // }
           v1 = angles[j1off+i11].mValue * (1-d1) + angles[j1off+i12].mValue * d1;
           v2 = angles[j2off+i21].mValue * (1-d2) + angles[j2off+i22].mValue * d2;

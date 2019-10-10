@@ -89,7 +89,7 @@ public class QCamDrawingSurface extends SurfaceView
   //   //
   //   public void onOrientationChanged(int orientation)
   //   {
-  //     Log.v("DistoX", "on Orientation Change " + orientation );
+  //     Log.v("DistoX-QCAM", "on Orientation Change " + orientation );
   //     if (orientation == OrientationEventListener.ORIENTATION_UNKNOWN) return;
   //     CameraInfo info = new CameraInfo();
   //     Camera.getCameraInfo( 0, info );  // cameraId = 0

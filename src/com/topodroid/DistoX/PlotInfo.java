@@ -136,7 +136,7 @@ class PlotInfo
 
   // void dump()
   // {
-  //   Log.v( TopoDroidApp.TAG, surveyId + "-" + id + " " + name + " type " + type + " start " + start );
+  //   Log.v( "DistoX-PLOT", surveyId + "-" + id + " " + name + " type " + type + " start " + start );
   // }
 
   public void setId( long i, long sid )

@@ -98,7 +98,7 @@ public class ProjectionSurface extends SurfaceView
           canvas.drawColor(0, PorterDuff.Mode.CLEAR);
           mCommandManager.executeAll( canvas );
         // } else {
-        //   Log.v("DistoX", "holder has no canvas");
+        //   Log.v("DistoX-PROJ", "holder has no canvas");
         }
       } finally {
         if ( canvas != null ) { holder.unlockCanvasAndPost( canvas ); }

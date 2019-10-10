@@ -243,7 +243,7 @@ class DrawingIO
   //                   surface.addDrawingPath( path );
   //                 // }
   //               }
-  //             } else if ( has_orientation && BrushManager.mPointLib.isSymbolOrientable(ptType) ) {
+  //             } else if ( has_orientation && BrushManager.isPointOrientable(ptType) ) {
   //               // TDLog.Log( TDLog.LOG_PLOT, "[2] point " + ptType + " has orientation " + orientation );
   //               BrushManager.rotateGradPoint( ptType, orientation );
   //               DrawingPointPath path = new DrawingPointPath( ptType, x, y, scale, label_text, options );
@@ -679,7 +679,7 @@ class DrawingIO
           BufferedInputStream bfis = new BufferedInputStream( fis );
           dis = new DataInputStream( bfis );
         // } else {
-        //   Log.v("DistoX", "cache hit " + filename );
+        //   Log.v("DistoX-IO", "cache hit " + filename );
         //   ByteArrayInputStream bis = new ByteArrayInputStream( bos.toByteArray() );
         //   dis = new DataInputStream( bis );
         // }
@@ -819,7 +819,7 @@ class DrawingIO
           BufferedInputStream bfis = new BufferedInputStream( fis );
           dis = new DataInputStream( bfis );
         // } else {
-        //   Log.v("DistoX", "cache hit " + filename );
+        //   Log.v("DistoX-IO", "cache hit " + filename );
         //   ByteArrayInputStream bis = new ByteArrayInputStream( bos.toByteArray() );
         //   dis = new DataInputStream( bis );
         // }

@@ -200,7 +200,7 @@ class PTShot
     //   float roll = (((int)_roll) * 360.0f) / (1<<8);
 
     //   if ( inclination > 180.0f ) inclination -= 360.0f;
-    //   Log.v( TopoDroidApp.TAG, "shot: D " + _dist + " A " + azimuth + " I " + inclination + " R " + roll + " trip " + _trip_index + " flags " + _flags );
+    //   Log.v( "DistoX-PT", "shot: D " + _dist + " A " + azimuth + " I " + inclination + " R " + roll + " trip " + _trip_index + " flags " + _flags );
     //   _from.print();
     //   _to.print();
     //   if ( (_flags & (byte)0x02) != 0 ) _comment.print();

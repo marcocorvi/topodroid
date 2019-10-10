@@ -425,7 +425,6 @@ public class DrawingWindow extends ItemDrawer
   private float mZoom  = 1.0f;
 
   private boolean mModified; // whether the sketch has been modified 
-  private long mBackupTime;  // last time of backup
 
   private float mBorderRight      = 4096;
   private float mBorderLeft       = 0;
@@ -599,31 +598,32 @@ public class DrawingWindow extends ItemDrawer
 
   boolean isLandscape() { return mLandscape; }
 
-  // ----------------------------------------------------------------
-
   public float zoom() { return mZoom; }
+
+  // ----------------------------------------------------------------
+  private Handler saveHandler = new Handler();
+  private final Runnable saveRunnable = new Runnable() {
+    @Override 
+    public void run() {
+      startSaveTdrTask( mType, PlotSave.MODIFIED, TDSetting.mBackupNumber, 1 );
+      mModified = false;
+    }
+  };
 
   private void modified()
   {
-    long now = System.currentTimeMillis()/1000;
-    if ( now < mBackupTime ) {
-      // Log.v("DistoX", "time " + now + " < " + mBackupTime );
-      return;
+    if ( ! mModified ) {
+      mModified = true;
+      saveHandler.postDelayed( saveRunnable, TDSetting.mBackupInterval * 100 ); // FIXME 1000
     }
-    if ( mModified ) {
-      // Log.v("DistoX", "already modified true");
-      return;
-    }
-    mModified = true;
-    mBackupTime = System.currentTimeMillis()/1000 + TDSetting.mBackupInterval;
-    startSaveTdrTask( mType, PlotSave.MODIFIED, TDSetting.mBackupNumber, 1 );
   }
 
   private void resetModified()
   {
     mModified = false;
-    mBackupTime = System.currentTimeMillis()/1000 + TDSetting.mBackupInterval;
-    // Log.v("DistoX", "reset modified false, time " + mBackupTime );
+    if ( saveHandler != null && saveRunnable != null ) {
+      saveHandler.removeCallbacks( saveRunnable );
+    }
   }
 
   // -------------------------------------------------------------------
@@ -863,6 +863,7 @@ public class DrawingWindow extends ItemDrawer
 
   void doClose()
   {
+    // Log.v("DistoX-SAVE", "menu close ...");
     super.onBackPressed();
   }
 
@@ -872,7 +873,7 @@ public class DrawingWindow extends ItemDrawer
   {
     if ( dismissPopups() != DISMISS_NONE ) return;
     if ( PlotInfo.isAnySection( mType ) ) {
-      mModified = true; // force saving
+      // Modified = true; // force saving
       startSaveTdrTask( mType, PlotSave.SAVE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP );
       popInfo();
       doStart( false, -1 );
@@ -880,6 +881,7 @@ public class DrawingWindow extends ItemDrawer
       if ( doubleBack ) {
         if ( doubleBackToast != null ) doubleBackToast.cancel();
         doubleBackToast = null;
+        // Log.v("DistoX-SAVE", "double back pressed ...");
         super.onBackPressed();
       } else {
         doubleBack = true;
@@ -901,7 +903,7 @@ public class DrawingWindow extends ItemDrawer
   {
     if ( mDrawingSurface != null ) {
       // Log.v("DistoX", "do save type " + mType );
-      mModified = true; // force saving: mModified is checked before spawning the saving task
+      // Modified = true; // force saving: Modified is checked before spawning the saving task
       startSaveTdrTask( mType, PlotSave.SAVE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP );
 
       // if ( not_all_symbols ) AlertMissingSymbols();
@@ -919,6 +921,10 @@ public class DrawingWindow extends ItemDrawer
 
   String getOrigin() { return mPlot1.start; }
 
+  // called by SavePlotFileTask
+  // @param tt       plot type
+  // @param suffix   plot save mode
+  // @param rotate
   PlotSaveData makePlotSaveData( int tt, int suffix, int rotate )
   {
     if ( tt == 1 && mPlot1 != null )
@@ -931,6 +937,7 @@ public class DrawingWindow extends ItemDrawer
   }
 
   // called by doSaveTdr and doSaveTh2
+  //    prepare struct and forwards to doStartSaveTdrTask
   // @param type      plot type (-1 to save both plan and profile)
   // @param suffix    plot save mode (see PlotSave) - called only with TOGGLE, SAVE, MODIFIED
   // @param maxTasks
@@ -960,40 +967,55 @@ public class DrawingWindow extends ItemDrawer
 
     // Log.v("DistoX", "start save Th2 task. type " + type + " suffix " + suffix 
     //                 + " maxTasks " + maxTasks + " rotate " + rotate ); 
-    if ( suffix != PlotSave.EXPORT ) {
-      if ( ! mModified ) return;
-      if ( mNrSaveTh2Task > maxTasks ) return;
-      saveHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-          -- mNrSaveTh2Task;
-          if ( mModified ) {
-            doStartSaveTdrTask( psd1, psd2, PlotSave.HANDLER, TDSetting.mBackupNumber, 0 ); 
-          } else {
+    switch ( suffix ) {
+      case PlotSave.EXPORT:
+        // Log.v("DistoX-SAVE", "exporting plot ... " + maxTasks );
+        saveHandler = new Handler(){
+          @Override
+          public void handleMessage(Message msg) {
             // mApp.mShotWindow.enableSketchButton( true );
             TopoDroidApp.mEnableZip = true;
           }
-        }
-      };
-      ++ mNrSaveTh2Task;
+        };
+        break;
+      case PlotSave.SAVE:
+        // Log.v("DistoX-SAVE", "saving plot ... " + maxTasks );
+        saveHandler = new Handler(){
+          @Override
+          public void handleMessage(Message msg) {
+            // mApp.mShotWindow.enableSketchButton( true );
+            TopoDroidApp.mEnableZip = true;
+          }
+        };
+        break;
+      case PlotSave.TOGGLE:
+      case PlotSave.MODIFIED:
+        // Log.v("DistoX-SAVE", "backing up plot ... " + maxTasks + " nr tasks " + mNrSaveTh2Task + " modified " + mModified );
+        if ( ! mModified ) return;
+        if ( mNrSaveTh2Task > maxTasks ) return;
+        saveHandler = new Handler() {
+          @Override
+          public void handleMessage(Message msg) {
+            -- mNrSaveTh2Task;
+            if ( mModified ) {
+              doStartSaveTdrTask( psd1, psd2, PlotSave.HANDLER, TDSetting.mBackupNumber, 0 ); 
+            } else {
+              // mApp.mShotWindow.enableSketchButton( true );
+              TopoDroidApp.mEnableZip = true;
+            }
+          }
+        };
+        ++ mNrSaveTh2Task;
 
-      // mApp.mShotWindow.enableSketchButton( false );
-      TopoDroidApp.mEnableZip = false;
-      resetModified();
-    } else {
-      // Log.v("DISTOX", "exporting plot ...");
-      saveHandler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-          // mApp.mShotWindow.enableSketchButton( true );
-          TopoDroidApp.mEnableZip = true;
-        }
-      };
+        // mApp.mShotWindow.enableSketchButton( false );
+        TopoDroidApp.mEnableZip = false;
     }
+    resetModified();
     // TDUtil.slowDown( 10 );
 
+    // Log.v("DistoX-SAVE", "saving ... ");
     if ( psd2 != null ) {
-      TDLog.Log( TDLog.LOG_IO, "save plot [2] " + psd2.fname );
+      // TDLog.Log( TDLog.LOG_IO, "save plot [2] " + psd2.fname );
       try { 
         (new SavePlotFileTask( mActivity, this, null, psd2.num, /* psd2.util, */ psd2.cm, psd2.fname, psd2.type, psd2.azimuth, psd2.suffix, r )).execute();
       } catch ( RejectedExecutionException e ) { 
@@ -1001,7 +1023,7 @@ public class DrawingWindow extends ItemDrawer
       }
     }
     try { 
-      TDLog.Log( TDLog.LOG_IO, "save plot [1] " + psd1.fname );
+      // TDLog.Log( TDLog.LOG_IO, "save plot [1] " + psd1.fname );
       (new SavePlotFileTask( mActivity, this, saveHandler, psd1.num, /* psd1.util, */ psd1.cm, psd1.fname, psd1.type, psd1.azimuth, psd1.suffix, r )).execute();
     } catch ( RejectedExecutionException e ) { 
       TDLog.Error("rejected exec save plot " + psd1.fname );
@@ -1182,7 +1204,7 @@ public class DrawingWindow extends ItemDrawer
           dst = mDrawingSurface.addDrawingStationName( name, st,
                   DrawingUtil.toSceneX(h1, st.v), DrawingUtil.toSceneY(h1, st.v), true, xhsections, saved );
         // } else {
-        //   Log.v("DistoX", "station not showing " + st.name );
+        //   Log.v("DistoX-PLOT", "station not showing " + st.name );
         }
       }
     }
@@ -1972,7 +1994,7 @@ public class DrawingWindow extends ItemDrawer
 
   // private void doStop()
   // {
-  //   // TDLog.Log( TDLog.LOG_PLOT, "doStop type " + mType + " modified " + mModified );
+  //   // TDLog.Log( TDLog.LOG_PLOT, "doStop type " + mType + " modified " + Modified );
   // }
 
 // ----------------------------------------------------------------------------
@@ -2042,7 +2064,7 @@ public class DrawingWindow extends ItemDrawer
       DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
       makeSectionReferences( list, tt, 0 );
     // } else {
-    //   Log.v("DistoX", "try to highlight [1] ");
+    //   Log.v("DistoX-PLOT", "try to highlight [1] ");
     //   if ( mApp.hasHighlighted() ) mDrawingSurface.highlights( mApp ); 
     }
     // TDLog.TimeEnd("do start done");
@@ -4644,7 +4666,7 @@ public class DrawingWindow extends ItemDrawer
     {
       // Log.v("DistoX-C", "switchPlotType " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
       mLastLinePath = null; // necessary
-      doSaveTdr( ); // this sets mModified = false after spawning the saving task
+      doSaveTdr( ); // this sets Modified = false after spawning the saving task
       updateReference();
       if ( mType == PlotInfo.PLOT_PLAN ) {
         setPlotType2( false );
@@ -5038,7 +5060,7 @@ public class DrawingWindow extends ItemDrawer
               } else {
                 new DrawingPointDialog( mActivity, this, point ).show();
               }
-              // mModified = true;
+              // modified()
               break;
             case DrawingPath.DRAWING_PATH_LINE:
               DrawingLinePath line = (DrawingLinePath)(sp.mItem);
@@ -5055,11 +5077,11 @@ public class DrawingWindow extends ItemDrawer
               } else {
                 new DrawingLineDialog( mActivity, this, line, sp.mPoint ).show();
               }
-              // mModified = true;
+              // modified()
               break;
             case DrawingPath.DRAWING_PATH_AREA:
               new DrawingAreaDialog( mActivity, this, (DrawingAreaPath)(sp.mItem) ).show();
-              // mModified = true;
+              // modified()
               break;
             case DrawingPath.DRAWING_PATH_FIXED:
               DrawingPath p = sp.mItem;
@@ -5335,7 +5357,8 @@ public class DrawingWindow extends ItemDrawer
       name = mFullName3;
     }
     final String filename = name;
-    TDLog.Log( TDLog.LOG_IO, "save th2: " + filename );
+    // TDLog.Log( TDLog.LOG_IO, "save th2: " + filename );
+    // Log.v( "DistoX-SAVE", "save th2: " + filename );
     if ( toast ) {
       th2Handler = new Handler(){
         @Override public void handleMessage(Message msg) {
@@ -5364,7 +5387,7 @@ public class DrawingWindow extends ItemDrawer
   //   super.onCreateContextMenu( menu, v, info );
   //   getMenuInflater().inflate( R.menu.popup, menu );
   //   menu.setHeaderTitle( "Context Menu" );
-  //   Log.v( TopoDroidApp.TAG, "on Create Context Menu view " + v.toString()  );
+  //   Log.v( "DistoX-PLOT", "on Create Context Menu view " + v.toString()  );
   // }
 
   // @Override
@@ -5749,6 +5772,7 @@ public class DrawingWindow extends ItemDrawer
   public void doExport( String export_type )
   {
     int index = TDConst.plotExportIndex( export_type );
+    // Log.v( "DistoX-SAVE", "export request type " + index );
     switch ( index ) {
       case TDConst.DISTOX_EXPORT_TH2: doSaveTh2( mType, true ); break;
       case TDConst.DISTOX_EXPORT_CSX: 
@@ -6264,7 +6288,7 @@ public class DrawingWindow extends ItemDrawer
           if ( extras == null ) return;
           long type = extras.getLong( TDTag.TOPODROID_PLOT_TYPE );
           String filename = extras.getString( TDTag.TOPODROID_PLOT_FILENAME );
-          Log.v("DistoX-RELOAD", "result " + filename );
+          // Log.v("DistoX-RELOAD", "result " + filename );
           doRecover( filename, type );
         }
         break;

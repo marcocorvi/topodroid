@@ -752,7 +752,7 @@ class DataHelper extends DataSetObservable
 
   private void handleDiskIOError( SQLiteDiskIOException e )
   {
-    Log.e( "DistoX", "DB disk error " + e.getMessage() );
+    // Log.e( "DistoX-DB", "disk IO error " + e.getMessage() );
     if ( TopoDroidApp.mActivity != null ) {
       TopoDroidApp.mActivity.runOnUiThread( new Runnable() { public void run() { TDToast.makeBad( R.string.disk_io_error ); } } );
     }
@@ -1658,7 +1658,7 @@ class DataHelper extends DataSetObservable
                           String comment, String addr )
   {
     // TDLog.Log( TDLog.LOG_DB, "insert shot <" + id + "> " + from + "-" + to + " extend " + extend );
-    Log.v("DistoXX", "do insert shot id " + id + " d " + d + " b " + b + " c " + c );
+    // Log.v("DistoX-SHOT", "do insert shot id " + id + " d " + d + " b " + b + " c " + c );
     if ( myDB == null ) return -1L;
     if ( id == -1L ) {
       ++ myNextId;

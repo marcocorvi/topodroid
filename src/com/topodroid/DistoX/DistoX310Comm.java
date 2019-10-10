@@ -85,7 +85,7 @@ class DistoX310Comm extends DistoXComm
           TDUtil.slowDown( 100 );
         }
       // } else {
-      //   Log.v("DistoX", "RF comm thread not null ");
+      //   Log.v("DistoX-COMM", "RF comm thread not null ");
       }
     }
     destroySocket( );

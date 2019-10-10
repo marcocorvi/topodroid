@@ -38,7 +38,7 @@ class TriShot
 
   // void dump()
   // {
-  //   Log.v("DistoXL", from + "-" + to + " " + (used?"u":"-") + (duplicate?"d":"-") + (surface?"s":"-") + (commented?"c ":"- ") + backshot
+  //   Log.v("DistoX-TRI", from + "-" + to + " " + (used?"u":"-") + (duplicate?"d":"-") + (surface?"s":"-") + (commented?"c ":"- ") + backshot
   //       	    + " blks " + blocks.size() );
   // }
 
@@ -94,9 +94,9 @@ class TriShot
   float h()
   {
     float hh = mAvgLeg.length() * TDMath.cosd( mAvgLeg.clino() );
-    if ( hh < 0 ) {
-      Log.v("DIistoXN", "block " + blocks.get(0).mId + " neg H " + hh );
-    }
+    // if ( hh < 0 ) {
+    //   Log.v("DistoX-TRI", "block " + blocks.get(0).mId + " neg H " + hh );
+    // }
     return hh;
     // return mAvgLeg.length() * TDMath.cosd( mAvgLeg.clino() );
   }

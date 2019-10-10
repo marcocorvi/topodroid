@@ -345,19 +345,18 @@ class PTFile
 
     // void print()
     // { 
-    //   Log.v( TopoDroidApp.TAG, "FILE trips " + _trips.size() + " shots " + _shots.size() +
-    //                            " refs " + _references.size() );
-    //   Log.v( TopoDroidApp.TAG, "TRIPS");
+    //   Log.v( "DistoX-PT", "FILE trips " + _trips.size() + " shots " + _shots.size() + " refs " + _references.size() );
+    //   Log.v( "DistoX-PT", "TRIPS");
     //   for ( PTTrip t : _trips ) t.print();
-    //   Log.v( TopoDroidApp.TAG, "SHOTS");
+    //   Log.v( "DistoX-PT", "SHOTS");
     //   for ( PTShot s : _shots ) s.print();
-    //   Log.v( TopoDroidApp.TAG, "REFERENCES");
+    //   Log.v( "DistoX-PT", "REFERENCES");
     //   for ( PTReference r : _references ) r.print();
-    //   Log.v( TopoDroidApp.TAG, "OVERVIEW");
+    //   Log.v( "DistoX-PT", "OVERVIEW");
     //   _overview.print();
-    //   Log.v( TopoDroidApp.TAG, "OUTLINE");
+    //   Log.v( "DistoX-PT", "OUTLINE");
     //   _outline.print();
-    //   Log.v( TopoDroidApp.TAG, "SIDEVIEW");
+    //   Log.v( "DistoX-PT", "SIDEVIEW");
     //   _sideview.print();
     // }
 

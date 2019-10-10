@@ -202,7 +202,7 @@ class DrawingPath extends RectF
 
   // void log()
   // {
-  //   Log.v("DistoX", "Path " + x1 + " " + y1 + "   " + x2 + " " + y2 );
+  //   Log.v("DistoX-PATH", "Path " + x1 + " " + y1 + "   " + x2 + " " + y2 );
   // }
 
   /** make the path copying from another path

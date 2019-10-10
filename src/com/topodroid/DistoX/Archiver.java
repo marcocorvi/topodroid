@@ -51,7 +51,7 @@ class Archiver
   private boolean addEntry( ZipOutputStream zos, File name )
   {
     if ( name == null || ! name.exists() ) return false;
-    Log.v( "DistoX-ZIP", "zip add file " + name.getPath() );
+    // Log.v( "DistoX-ZIP", "zip add file " + name.getPath() );
     boolean ret = false;
     BufferedInputStream bis = null;
     try { 
@@ -228,7 +228,7 @@ class Archiver
 
       // ret = true;
     } catch ( FileNotFoundException e ) {
-      Log.v("DistoX-ZIP", e.getMessage() );
+      // Log.v("DistoX-ZIP", e.getMessage() );
       ret = false;
     // } catch ( IOException e ) {
     //   // FIXME

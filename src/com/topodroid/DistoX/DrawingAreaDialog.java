@@ -65,7 +65,7 @@ class DrawingAreaDialog extends MyDialog
     mParent = parent;
     mArea = line;
     mAreaType  = mArea.mAreaType;
-    mOrientable = BrushManager.mAreaLib.isSymbolOrientable( mAreaType );
+    mOrientable = BrushManager.isAreaOrientable( mAreaType );
     // mDoOptions = TDLevel.overAdvanced;
   }
 

@@ -99,7 +99,7 @@ class DrawingPointLinePath extends DrawingPath
   //   for (LinePoint l1 = mFirst; l1 != null; l1=l1.mNext ) {
   //     // if ( k < 2 || k > mSize-2 ) 
   //     {
-  //       Log.v("DistoX", k + ": " + l1.x + " " + l1.y );
+  //       Log.v("DistoX=PATH", k + ": " + l1.x + " " + l1.y );
   //     }
   //     ++k;
   //   }

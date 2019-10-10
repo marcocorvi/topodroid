@@ -113,7 +113,7 @@ class DrawingPointPath extends DrawingPath
     mPointText = text; // getTextFromOptions( options ); // this can also reset mOptions
     mLevel     = BrushManager.mPointLib.getSymbolLevel( type );
 
-    if ( BrushManager.mPointLib.isSymbolOrientable( type ) ) {
+    if ( BrushManager.isPointOrientable( type ) ) {
       mOrientation = BrushManager.getPointOrientation(type);
     }
     setPathPaint( BrushManager.mPointLib.getSymbolPaint( mPointType ) );
@@ -163,7 +163,7 @@ class DrawingPointPath extends DrawingPath
 
       // // TODO parse option for "-text"
       // setPathPaint( BrushManager.mPointLib.getSymbolPaint( mPointType ) );
-      // if ( BrushManager.mPointLib.isSymbolOrientable( mPointType ) ) {
+      // if ( BrushManager.isPointOrientable( mPointType ) ) {
       //   BrushManager.rotateGradPoint( mPointType, mOrientation );
       //   resetPath( 1.0f );
       //   BrushManager.rotateGradPoint( mPointType, -mOrientation );
@@ -312,8 +312,8 @@ class DrawingPointPath extends DrawingPath
   {
     // Log.v("DistoX", "Reset path " + mOrientation + " scale " + mScale );
     Matrix m = new Matrix();
-    if ( ! BrushManager.isPointLabel( mPoinType ) ) {
-      if ( BrushManager.mPointLib.isSymbolOrientable( mPointType ) ) {
+    if ( ! BrushManager.isPointLabel( mPointType ) ) {
+      if ( BrushManager.isPointOrientable( mPointType ) ) {
         m.postRotate( (float)mOrientation );
       }
       switch ( mScale ) {

@@ -131,7 +131,7 @@ class DistoXComm extends TopoDroidComm
 
           // DeviceUtil.bind2Device( data );
         // } else if ( DeviceUtil.ACTION_PAIRING_REQUEST.equals(action) ) {
-        //   Log.v("DistoX", "PAIRING REQUEST");
+        //   Log.v("DistoX-COMM", "PAIRING REQUEST");
         //   // BluetoothDevice device = getDevice();
         //   // //To avoid the popup notification:
         //   // device.getClass().getMethod("setPairingConfirmation", boolean.class).invoke(device, true);
@@ -285,7 +285,7 @@ class DistoXComm extends TopoDroidComm
 
       if ( DeviceUtil.isPaired( mBTDevice ) ) {
         try {
-          Log.v("DistoXSOCKET", "create socket");
+          // Log.v("DistoX-SOCKET", "create socket");
           Class[] classes1 = new Class[]{ int.class };
           Class[] classes2 = new Class[]{ UUID.class };
           if ( TDSetting.mSockType == TDSetting.TD_SOCK_DEFAULT ) {
@@ -548,7 +548,7 @@ class DistoXComm extends TopoDroidComm
 
         // int k;
         // for ( k=0; k<48; k+=8 ) {
-        //   Log.v( TopoDroidApp.TAG, 
+        //   Log.v( "DistoX-COMM"
         //   String.format( "%02x %02x %02x %02x %02x %02x %02x %02x",
         //     coeff[k+0], coeff[k+1], coeff[k+2], coeff[k+3], coeff[k+4], coeff[k+5], coeff[k+6], coeff[k+7] ) );
         // }

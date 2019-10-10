@@ -595,7 +595,7 @@ class ShotDialog extends MyDialog
         clear_xsplay = false;
       // } else { // this is useless: replaced by long-tap on shot list 
       //   if ( mCBhighlight.isChecked() ) {
-      //     Log.v("DistoX", "parent to highlight " + mBlk.mFrom + " " + mBlk.mTo );
+      //     Log.v("DistoX-SHOT", "parent to highlight " + mBlk.mFrom + " " + mBlk.mTo );
       //     mParent.highlightBlock( mBlk );
       //   }
 

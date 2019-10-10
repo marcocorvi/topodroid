@@ -125,11 +125,11 @@ class PTId
   // void print() 
   // { 
   //   if ( (int)_id == ID_UNDEFINED ) {
-  //     Log.v( TopoDroidApp.TAG, "ID undef" );
+  //     Log.v( "DistoX-PT", "ID undef" );
   //   } else if ( _id < 0 ) {
-  //     Log.v( TopoDroidApp.TAG, "ID number " + (_id + 0x80000001 ) );
+  //     Log.v( "DistoX-PT", "ID number " + (_id + 0x80000001 ) );
   //   } else {
-  //     Log.v( TopoDroidApp.TAG, "ID major " + (_id>>16) + " minor " + (_id & 0xffff) );
+  //     Log.v( "DistoX-PT", "ID major " + (_id>>16) + " minor " + (_id & 0xffff) );
   //   }
   // }
 

@@ -23,9 +23,9 @@ class PlotSaveData
   final DrawingCommandManager cm;
   final String name;   
   final String fname;  // filename
-  final int azimuth;
+  final int azimuth;   // projected profile azimuth (0 for plan and extended profile)
   final int suffix;    // plot save mode
-  final int rotate;
+  final int rotate;    // number of backups to rotate (??)
 
   PlotSaveData( DistoXNum n, /* DrawingUtil u, */ PlotInfo p, DrawingCommandManager manager, String nam, String fnam, int a, int s, int r )
   {

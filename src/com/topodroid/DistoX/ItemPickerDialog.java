@@ -763,7 +763,7 @@ class ItemPickerDialog extends MyDialog
   // @Override
   // public void onItemClick( AdapterView adapter, View view, int pos, long id )
   // {
-  //    Log.v( "DistoX", "ItemPicker onItemCLick()" );
+  //    Log.v( "DistoX-PICKER", "ItemPicker onItemCLick()" );
   //    if ( mAdapter != null ) mAdapter.doClick( view );
   // }
 

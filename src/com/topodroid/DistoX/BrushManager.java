@@ -98,6 +98,7 @@ class BrushManager
   static int getLineWallIndex() { return mLineLib.mLineWallIndex; }
 
   // FIXME AREA_ORIENT
+  static boolean isAreaOrientable( int index ) { return mAreaLib.isSymbolOrientable( index ); }
   static void resetAreaOrientations( ) { mAreaLib.resetOrientations(); }
   static double getAreaOrientation( int index ) { return mAreaLib.getAreaOrientation( index ); }
   static void rotateGradArea( int index, double a ) { mAreaLib.rotateGrad( index, a ); }

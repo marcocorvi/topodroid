@@ -73,7 +73,7 @@ class DrawingAreaPath extends DrawingPointLinePath
       setPathPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
     }
     mOrientation = 0.0;
-    if ( BrushManager.mAreaLib.isSymbolOrientable( mAreaType ) ) {
+    if ( BrushManager.isAreaOrientable( mAreaType ) ) {
       // FIXME AREA_ORIENT 
       mOrientation = BrushManager.getAreaOrientation( type );
 
@@ -202,7 +202,7 @@ class DrawingAreaPath extends DrawingPointLinePath
   void setOrientation( double angle ) 
   { 
     // Log.v( "DistoX", "Area path set orientation " + angle );
-    if ( ! BrushManager.mAreaLib.isSymbolOrientable( mAreaType ) ) return;
+    if ( ! BrushManager.isAreaOrientable( mAreaType ) ) return;
     mOrientation = TDMath.in360( angle );
     resetPathPaint();
   }
@@ -278,7 +278,7 @@ class DrawingAreaPath extends DrawingPointLinePath
 
     pw.format("endline\n");
     pw.format("area %s", BrushManager.mAreaLib.getSymbolThName( mAreaType ) );
-    if ( BrushManager.mAreaLib.isSymbolOrientable( mAreaType ) ) {
+    if ( BrushManager.isAreaOrientable( mAreaType ) ) {
       pw.format(Locale.US, " #orientation %.1f", mOrientation );
     }
     pw.format("\n");

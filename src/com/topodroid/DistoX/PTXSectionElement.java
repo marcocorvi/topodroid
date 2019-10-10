@@ -82,7 +82,7 @@ class PTXSectionElement extends PTElement
     // @Override
     // void print() 
     // {
-    //   Log.v( TopoDroidApp.TAG, "xsection: dir " + _direction );
+    //   Log.v( "DistoX-PT", "xsection: dir " + _direction );
     //   _pos.print();
     //   _station.print();
     // }

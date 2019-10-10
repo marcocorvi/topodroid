@@ -190,9 +190,9 @@ class Selection
     sp.setBucket( getBucket( sp.X(), sp.Y() ) );
 
     // if ( pt != null ) {
-    //   Log.v("DistoX", "insert item path type " + path.mType + " pt " + pt.x + " " + pt.y );
+    //   Log.v("DistoX-SELECT", "insert item path type " + path.mType + " pt " + pt.x + " " + pt.y );
     // } else {
-    //   Log.v("DistoX", "insert item path type " + path.mType + " null pt ");
+    //   Log.v("DistoX-SELECT", "insert item path type " + path.mType + " null pt ");
     // }
     // sp.mBucket.dump();
     // dumpBuckets();
@@ -558,7 +558,7 @@ class Selection
   //       default: noth ++;
   //     }
   //   }
-  //   Log.v("DistoX", "Selection points " + mPoints.size() + " " + nfxd + " " + nspl + " " + ngrd + " " + nsta 
+  //   Log.v("DistoX-SELECT", "Selection points " + mPoints.size() + " " + nfxd + " " + nspl + " " + ngrd + " " + nsta 
   //                   + " " + npnt + " " + nlin + " " + nare + " " + nnam + " " + nnrt + " " + noth  );
   // }
 }

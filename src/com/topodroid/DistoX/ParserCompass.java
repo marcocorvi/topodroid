@@ -118,13 +118,23 @@ class ParserCompass extends ImportParser
                           mFlag = vals[k]; ++k;
                           if ( k < kmax ) mComment = TDUtil.concat( vals, k );
                         } else if ( mBearing < -900 || mClino < -900 ) {
-                          float bearing = Float.parseFloat(vals[k]); ++k; 
+                          float bearing = TDMath.add180( Float.parseFloat(vals[k]) ); ++k; 
                           if ( mBearing < -900 ) {
-                            mBearing = bearing + 180;
-                            if ( mBearing >= 360 ) mBearing -= 360;
+                            mBearing = bearing;
+                          } else if ( bearing >= 0 && bearing <= 360 ) {
+                            if ( Math.abs( mBearing - bearing ) > 180 ) {
+                              mBearing = TDMath.in360( ( mBearing + bearing + 360 ) / 2 );
+                            } else {
+                              mBearing = ( mBearing + bearing ) / 2;
+                            }
                           }
                           if ( k < kmax ) {
-                            mClino = - Float.parseFloat(vals[k]); ++k;
+                            float clino = Float.parseFloat(vals[k]); ++k;
+                            if ( mClino < -900 ) {
+                              mClino = - clino;
+                            } else if ( clino >= -90 && clino <= 90 ) {
+                              mClino = ( mClino - clino ) / 2;
+                            }
                           }
                           if ( k < kmax ) {
                             if (vals[k].startsWith("#")) {

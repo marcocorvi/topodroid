@@ -472,7 +472,7 @@ public class TopoDroidApp extends Application
 
     // ret = readMemory( address, 0xc044 );
     // if ( ret != null ) {
-    //   Log.v("DistoX", "X310 info C044 " + String.format( getResources().getString( R.string.device_memory ), ret[0], ret[1] ) );
+    //   Log.v("DistoX-APP", "X310 info C044 " + String.format( getResources().getString( R.string.device_memory ), ret[0], ret[1] ) );
     // }
 
     resetComm();

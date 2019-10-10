@@ -502,7 +502,7 @@ class DrawingCommandManager
 
   // void debug()
   // {
-  //   Log.v("DistoX", "Manager grid " + mGridStack1.toArray().length + " " 
+  //   Log.v("DistoX-CMD", "Manager grid " + mGridStack1.toArray().length + " " 
   //                                   + mGridStack10.toArray().length + " " 
   //                                   + mGridStack100.toArray().length + " legs "
   //                                   + mLegsStack.toArray().length + " "
@@ -723,7 +723,7 @@ class DrawingCommandManager
     //     if ( bucket.intersects( mBBox ) ) { ++ cnt; pts += bucket.size(); }
     //   }
     //   pts /= cnt;
-    //   Log.v("DistoX", "visible buckets " + cnt + " avg pts/bucket " + pts );
+    //   Log.v("DistoX-CMD", "visible buckets " + cnt + " avg pts/bucket " + pts );
     // }
   }
 
@@ -1313,7 +1313,7 @@ class DrawingCommandManager
     // if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
     //   DrawingLinePath line = (DrawingLinePath)path;
     //   LinePoint lp = line.mFirst;
-    //   Log.v("PTDistoX", "add path. size " + line.size() + " start " + lp.x + " " + lp.y );
+    //   Log.v("DistoX-CMD", "add path. size " + line.size() + " start " + lp.x + " " + lp.y );
     // }
     
     synchronized( mCurrentStack ) {

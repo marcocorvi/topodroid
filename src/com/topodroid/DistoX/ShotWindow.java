@@ -890,7 +890,7 @@ public class ShotWindow extends Activity
 
   // void refreshList()
   // {
-  //   Log.v("DistoX", "refresh display" );
+  //   Log.v("DistoX-SHOT", "refresh display" );
   //   mDataAdapter.notifyDataSetChanged();
   //   mList.invalidate();
   // }

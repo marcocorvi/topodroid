@@ -569,7 +569,7 @@ class DistoXNum
   //   // dump debug
   //   // Log.v( TopoDroidApp.TAG, "shots " + mShots.size() );
   //   // for ( NumShot sh : mShots ) {
-  //   //   Log.v( TopoDroidApp.TAG, sh.from.name + "-" + sh.to.name + " [" + sh.blocks.size() + "] " + sh.mLength + " " + sh.mBearing + " " + sh.mClino );
+  //   //   Log.v( "DistoX-NUM", sh.from.name + "-" + sh.to.name + " [" + sh.blocks.size() + "] " + sh.mLength + " " + sh.mBearing + " " + sh.mClino );
   //   // }
 
   //   int rev = 0;
@@ -821,7 +821,7 @@ class DistoXNum
     }
 
     // if ( TDLog.LOG_DEBUG ) {
-    //   Log.v( TDLog.TAG, "DistoXNum::compute tmp-shots " + tmpshots.size() + " tmp-splays " + tmpsplays.size() );
+    //   Log.v( "DistoX-NUM", "DistoXNum::compute tmp-shots " + tmpshots.size() + " tmp-splays " + tmpsplays.size() );
     //   for ( TriShot ts : tmpshots ) ts.Dump();
     // }
     for ( TriShot tsh : tmpshots ) { // clear backshot, sibling, and multibad
@@ -911,7 +911,7 @@ class DistoXNum
     }
 
     // if ( TDLog.LOG_DEBUG ) {
-    //   Log.v( TDLog.TAG, "DistoXNum::compute tmp-shots " + tmpshots.size() + " tmp-splays " + tmpsplays.size() );
+    //   Log.v( "DistoX-NUM", "DistoXNum::compute tmp-shots " + tmpshots.size() + " tmp-splays " + tmpsplays.size() );
     //   for ( TriShot ts : tmpshots ) ts.Dump();
     // }
 
@@ -994,9 +994,9 @@ class DistoXNum
           NumStation sf = getStation( ts.from );
           NumStation st = getStation( ts.to );
           // if ( TDLog.LOG_DEBUG ) {
-          //   Log.v( TDLog.TAG, "using shot " + ts.from + " " + ts.to + " id " + ts.blocks.get(0).mId );
+          //   Log.v( "DistoX-NUM", "using shot " + ts.from + " " + ts.to + " id " + ts.blocks.get(0).mId );
           //   ts.Dump();
-          //   Log.v( TDLog.TAG, "shot " + ts.from + "-" + ts.to + " stations " +
+          //   Log.v( "DistoX-NUM", "shot " + ts.from + "-" + ts.to + " stations " +
           //     ( ( sf == null )? "null" : sf.name ) + " " + (( st == null )? "null" : st.name ) );
           // }
 
@@ -1059,8 +1059,8 @@ class DistoXNum
               addToStats( ts.duplicate, ts.surface, ts.d(), ((iext == 0)? Math.abs(ts.v()) : ts.d()), ts.h(), st.v );
 
               // if ( TDLog.LOG_DEBUG ) {
-              //   Log.v( TDLog.TAG, "new station F->T id= " + ts.to + " from= " + sf.name + " anomaly " + anomaly + " d " + ts.d() ); 
-              //   Log.v( TDLog.TAG, "  " + st.e + " " + st.s + " : " + st.h + " " + st.v );
+              //   Log.v( "DistoX-NUM", "new station F->T id= " + ts.to + " from= " + sf.name + " anomaly " + anomaly + " d " + ts.d() ); 
+              //   Log.v( "DistoX-NUM", "  " + st.e + " " + st.s + " : " + st.h + " " + st.v );
               // }
 
               sh = makeShotFromTmp( sf, st, ts, 1, sf.mAnomaly, mDecl );
@@ -1082,8 +1082,8 @@ class DistoXNum
             sf.mAnomaly = anomaly + st.mAnomaly; // FIXME
 	    // Log.v("DistoXX", "station " + sf.name + " anomaly " + sf.mAnomaly );
             // if ( TDLog.LOG_DEBUG ) {
-            //   Log.v( TDLog.TAG, "new station T->F id= " + ts.from + " from= " + st.name + " anomaly " + anomaly ); 
-            //   Log.v( TDLog.TAG, "  " + sf.e + " " + sf.s + " : " + sf.h + " " + sf.v );
+            //   Log.v( "DistoX-NUM", "new station T->F id= " + ts.from + " from= " + st.name + " anomaly " + anomaly ); 
+            //   Log.v( "DistoX-NUM", "  " + sf.e + " " + sf.s + " : " + sf.h + " " + sf.v );
             // }
 
             updateBBox( sf );
@@ -1140,7 +1140,7 @@ class DistoXNum
             s2.mHasCoords = true;
             sh2.mUsed = true;
             repeat = true;
-            // if ( TDLog.LOG_DEBUG )  Log.v( TDLog.TAG, "reset " + s1.name + "->" + s2.name + " " + e + " " + s + " " + v );
+            // if ( TDLog.LOG_DEBUG )  Log.v( "DistoX-NUM", "reset " + s1.name + "->" + s2.name + " " + e + " " + s + " " + v );
           } else if ( s2.mHasCoords && ! s1.mHasCoords ) {
             // reset s1 values from the shot
             // float d = - sh2.length() * sh2.mDirection; // FIXME DIRECTION
@@ -1155,7 +1155,7 @@ class DistoXNum
             s1.mHasCoords = true;
             sh2.mUsed = true;
             repeat = true;
-            // if ( TDLog.LOG_DEBUG )  Log.v( TDLog.TAG, "reset " + s1.name + "<-" + s2.name + " " + e + " " + s + " " + v );
+            // if ( TDLog.LOG_DEBUG )  Log.v( "DistoX-NUM", "reset " + s1.name + "<-" + s2.name + " " + e + " " + s + " " + v );
           }
           
         }
@@ -1389,7 +1389,7 @@ class DistoXNum
   private ArrayList<NumBranch> makeBranches( ArrayList<NumNode> nodes, boolean also_cross_end )
   {
     // for ( NumNode nd : nodes ) {
-    //   Log.v("DistoX", "node " + nd.station.name + " branches " + nd.branches.size() );
+    //   Log.v("DistoX-NUM", "node " + nd.station.name + " branches " + nd.branches.size() );
     // }
     ArrayList< NumBranch > branches = new ArrayList<>();
     if ( nodes.size() > 0 ) {

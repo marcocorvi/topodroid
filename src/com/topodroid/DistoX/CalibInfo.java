@@ -39,6 +39,6 @@ class CalibInfo
 
   // void debug()
   // {
-  //   Log.v("DistoX", "CALIB: " + id + " " + name + " " + date + " " + device ); // this is DEBUG
+  //   Log.v("DistoX-CALIB", id + " " + name + " " + date + " " + device ); // this is DEBUG
   // }
 }

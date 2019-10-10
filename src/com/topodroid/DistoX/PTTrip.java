@@ -158,7 +158,7 @@ class PTTrip
     // {
     //   float declination = ((float)_declination) * PTFile.INT16_2_DEG;
     //   if ( declination > 180.0f ) declination -= 360.0f;
-    //   Log.v( TopoDroidApp.TAG, "trip: date " + _year + "-" + _month + "-" + _day + " decl. " + declination );
+    //   Log.v( "DistoX-PT", "trip: date " + _year + "-" + _month + "-" + _day + " decl. " + declination );
     //   _comment.print();
     // }
 

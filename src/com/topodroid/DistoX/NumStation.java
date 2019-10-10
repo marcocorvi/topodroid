@@ -154,7 +154,7 @@ class NumStation extends NumSurveyPoint
     }
     mLegs = temp;
     // for ( NumAzimuth a : mLegs ) {
-    //   Log.v("DistoX", "Station " + name + " Azimuth " + a.mAzimuth + " extend " + a.mExtend );
+    //   Log.v("DistoX-NUM", "Station " + name + " Azimuth " + a.mAzimuth + " extend " + a.mExtend );
     // }
   }
 

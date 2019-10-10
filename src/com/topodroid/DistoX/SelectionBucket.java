@@ -76,6 +76,6 @@ class SelectionBucket
 
   // void dump()
   // {
-  //   Log.v("DistoX", "B " + size() + " " + x0 + ":" + x1 + " " + y0 + ":" + y1 );
+  //   Log.v("DistoX-SELECT", "B " + size() + " " + x0 + ":" + x1 + " " + y0 + ":" + y1 );
   // }
 }

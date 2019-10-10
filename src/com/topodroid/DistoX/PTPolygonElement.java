@@ -94,7 +94,7 @@ class PTPolygonElement extends PTElement
     // @Override
     // void print()
     // {
-    //   Log.v( TopoDroidApp.TAG, "polygon: count " + _points.size() + " color " + _color );
+    //   Log.v( "DistoX-PT", "polygon: count " + _points.size() + " color " + _color );
     //   for ( PTPoint p : _points ) p.print();
     // }
 

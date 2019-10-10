@@ -200,7 +200,7 @@ public class PlotReloadWindow extends ItemDrawer
       String age = TDUtil.getAge( millis - file.lastModified() );
       String name = age + " [" + Long.toString(file.length()) + "] ()";
       mBackups.add( new PlotBackup( tdr, name, filetdr ) );
-      Log.v("DistoX-RELOAD", "filename " + filetdr );
+      // Log.v("DistoX-RELOAD", "filename " + filetdr );
     }
     tdr = tdr + TDPath.BCK_SUFFIX;
     filetdr = filetdr + TDPath.BCK_SUFFIX;
@@ -209,7 +209,7 @@ public class PlotReloadWindow extends ItemDrawer
       String age = TDUtil.getAge( millis - file.lastModified() );
       String name = age + " [" + Long.toString(file.length()) + "] (" + TDPath.BCK_SUFFIX + ")";
       mBackups.add( new PlotBackup( tdr, name, filetdr ) );
-      Log.v("DistoX-RELOAD", "filename " + filetdr );
+      // Log.v("DistoX-RELOAD", "filename " + filetdr );
     }
     for ( int i=0; i< TDPath.NR_BACKUP; ++i ) {
       String tdr1 = tdr + Integer.toString(i);
@@ -219,7 +219,7 @@ public class PlotReloadWindow extends ItemDrawer
         String name = age + " [" + Long.toString(file.length()) + "] (" +  TDPath.BCK_SUFFIX + Integer.toString(i) + ")";
         String filetdr1 = filetdr + Integer.toString(i);
         mBackups.add( new PlotBackup( tdr1, name, filetdr1 ) );
-        Log.v("DistoX-RELOAD", "filename " + filetdr1 );
+        // Log.v("DistoX-RELOAD", "filename " + filetdr1 );
       }
     }
   }
@@ -346,7 +346,7 @@ public class PlotReloadWindow extends ItemDrawer
     closeMenu();
     mMenu.setOnItemClickListener( this );
     
-    Log.v("DistoX-RELOAD", "Reload " + filename + " offset " + mOffset.x + " " + mOffset.y );
+    // Log.v("DistoX-RELOAD", "Reload " + filename + " offset " + mOffset.x + " " + mOffset.y );
     doStart();
 
     mOffset.x   += extras.getFloat( TDTag.TOPODROID_PLOT_XOFF );
@@ -416,7 +416,7 @@ public class PlotReloadWindow extends ItemDrawer
     String tdr      = mBackups.get(mPos).tdr;
     String filename = mBackups.get(mPos).filename;
     setTitle( mBackups.get(mPos).desc );
-    Log.v("DistoX-RELOAD", "file pos " + mPos + " " + tdr );
+    // Log.v("DistoX-RELOAD", "file pos " + mPos + " " + tdr );
     mReloadSurface.addLoadDataStream( tdr, 0, 0, filename ); // save plot name in paths
   } 
 

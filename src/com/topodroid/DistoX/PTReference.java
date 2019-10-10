@@ -89,7 +89,7 @@ class PTReference
 
     // void print()
     // { 
-    //   Log.v( TopoDroidApp.TAG, "reference: east " + _east + " north " + _north + " alt " + _altitude );
+    //   Log.v( "DistoX-PT", "reference: east " + _east + " north " + _north + " alt " + _altitude );
     //   _station.print();
     //   _comment.print();
     // }
