@@ -1410,14 +1410,14 @@ public class TopoDroidApp extends Application
   }  
 
   void reloadSymbols( boolean clear, 
-                      boolean speleo, boolean extra, boolean mine, boolean geo, boolean archeo, boolean paleo,
+                      boolean speleo, boolean extra, boolean mine, boolean geo, boolean archeo, boolean anthro, boolean paleo,
                       boolean bio,    boolean karst )
   {
     // Log.v("DistoX", "Reload symbols " + speleo + " " + mine + " " + geo + " " + archeo + " " + paleo + " " + bio + " clear " + clear );
-    if ( extra ) speleo = true; // extra implies speleo
+    // if ( extra ) speleo = true; // extra implies speleo
 
     if ( clear ) {
-      if (speleo || mine || geo || archeo || paleo || bio ) { 
+      if (speleo || extra || mine || geo || archeo || anthro || paleo || bio || karst ) { 
         clearSymbols();
       }
     }
@@ -1426,6 +1426,7 @@ public class TopoDroidApp extends Application
     if ( mine   ) installSymbols( R.raw.symbols_mine,   true );
     if ( geo    ) installSymbols( R.raw.symbols_geo,    true );
     if ( archeo ) installSymbols( R.raw.symbols_archeo, true );
+    if ( anthro ) installSymbols( R.raw.symbols_anthro, true );
     if ( paleo  ) installSymbols( R.raw.symbols_paleo,  true );
     if ( bio    ) installSymbols( R.raw.symbols_bio,    true );
     if ( karst  ) installSymbols( R.raw.symbols_karst,  true );

@@ -68,6 +68,15 @@
         android:text="@string/symbol_archeo"
       />
               	
+      <CheckBox android:id="@+id/ckb_anthro"
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginLeft="@dimen/marginh"
+        android:layout_marginTop="@dimen/marginv"
+        android:text="@string/symbol_anthro"
+      />
+
       <CheckBox android:id="@+id/ckb_paleo"
         android:layout_width="match_parent" 
         android:layout_height="wrap_content" 

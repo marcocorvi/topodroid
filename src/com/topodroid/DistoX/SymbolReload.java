@@ -44,6 +44,7 @@ class SymbolReload extends MyDialog
   private CheckBox mCBmine;
   private CheckBox mCBgeo;
   private CheckBox mCBarcheo;
+  private CheckBox mCBanthro;
   private CheckBox mCBpaleo;
   private CheckBox mCBbio;
   private CheckBox mCBkarst;
@@ -76,6 +77,7 @@ class SymbolReload extends MyDialog
     mCBmine   = (CheckBox) findViewById( R.id.ckb_mine   );
     mCBgeo    = (CheckBox) findViewById( R.id.ckb_geo    );
     mCBarcheo = (CheckBox) findViewById( R.id.ckb_archeo );
+    mCBanthro = (CheckBox) findViewById( R.id.ckb_anthro );
     mCBpaleo  = (CheckBox) findViewById( R.id.ckb_paleo  );
     mCBbio    = (CheckBox) findViewById( R.id.ckb_bio    );
     mCBkarst  = (CheckBox) findViewById( R.id.ckb_karst  );
@@ -94,6 +96,7 @@ class SymbolReload extends MyDialog
       mCBmine.setVisibility( View.GONE );
       mCBgeo.setVisibility( View.GONE );
       mCBarcheo.setVisibility( View.GONE );
+      mCBanthro.setVisibility( View.GONE );
       mCBpaleo.setVisibility( View.GONE );
       mCBbio.setVisibility( View.GONE );
       mCBkarst.setVisibility( View.GONE );
@@ -117,6 +120,7 @@ class SymbolReload extends MyDialog
                           mCBmine.isChecked(),
                           mCBgeo.isChecked(),
                           mCBarcheo.isChecked(),
+                          mCBanthro.isChecked(),
                           mCBpaleo.isChecked(),
                           mCBbio.isChecked(),
                           mCBkarst.isChecked()
@@ -128,6 +132,7 @@ class SymbolReload extends MyDialog
                           mCBmine.isChecked(),
                           mCBgeo.isChecked(),
                           mCBarcheo.isChecked(),
+                          mCBanthro.isChecked(),
                           mCBpaleo.isChecked(),
                           mCBbio.isChecked(),
                           mCBkarst.isChecked()

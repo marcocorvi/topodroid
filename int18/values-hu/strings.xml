@@ -679,6 +679,7 @@
     <string name="btn_install">Telepítés</string>
 
     <string name="symbol_archeo">Régészet</string>
+    <!-- TODO string name="symbol_anthro">Anthro</string -->
     <string name="symbol_bio">Biológia</string>
     <string name="symbol_geo">Geológia</string>
     <!-- TODO string name="symbol_karst">Karst</string -->

@@ -684,6 +684,7 @@
     <string name="btn_install">Instalar</string>
 
     <string name="symbol_archeo">Arqueología</string>
+    <!-- TODO string name="symbol_anthro">Anthro</string -->
     <string name="symbol_bio">Biología</string>
     <string name="symbol_geo">Geología</string>
     <string name="symbol_karst">Karst</string>

@@ -696,6 +696,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="btn_install">Install</string>
 
     <string name="symbol_archeo">Archeo</string>
+    <string name="symbol_anthro">Anthro</string>
     <string name="symbol_bio">Biology</string>
     <string name="symbol_geo">Geology</string>
     <string name="symbol_karst">Karst</string>

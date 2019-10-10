@@ -20,6 +20,7 @@ cd $base
 
 makezip symbols_speleo symbols_speleo
 makezip symbols_archeo symbols_archeo
+makezip symbols_anthro symbols_anthro
 makezip symbols_bio symbols_bio
 makezip symbols_geo symbols_geo
 makezip symbols_paleo symbols_paleo

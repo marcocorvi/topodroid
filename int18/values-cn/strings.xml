@@ -693,6 +693,7 @@
     <string name="btn_install">安装</string>
 
     <string name="symbol_archeo">考古学</string>
+    <!-- TODO string name="symbol_anthro">Anthro</string -->
     <string name="symbol_bio">生物学</string>
     <string name="symbol_geo">地质学</string>
     <string name="symbol_karst">岩溶学</string>

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- TODO do not forget that apostrophe must be preceeded by backslash -->
+    <!-- TODO TODO TODO 
+         DO NOT FORGET THAT APOSTROPHE MUST BE PRECEEDED BY BACKSLASH
+     -->
 
     <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string>
     <string name="no_manual">Não é possível obter o manual do usuário da internet</string>
@@ -678,6 +680,7 @@
     <string name="btn_install">Instalar</string>
 
     <string name="symbol_archeo">Arqueologia</string>
+    <!-- TODO string name="symbol_anthro">Anthro</string -->
     <string name="symbol_bio">Biologia</string>
     <string name="symbol_geo">Geologia</string>
     <string name="symbol_karst">Carste</string>
@@ -1223,7 +1226,7 @@
   <string name="pref_path_multiselect_title">Multiseleção de caminhos</string>
   <string name="pref_path_multiselect_summary">Habilitar função de seleção de vários caminhos</string>
   <string name="pref_composite_actions_title">Ações compostas</string>
-  <string name="pref_composite_actions_summary">Habilitar ações de 'clique longo' para linhas e áreas</string>
+  <string name="pref_composite_actions_summary">Habilitar ações de \'clique longo\' para linhas e áreas</string>
   <string name="pref_plane_interpolation_title">Interpolação de plano</string>
   <string name="pref_plane_interpolation_summary">Habilitar função de interpolação de plano</string>
   <string name="pref_plot_split_title">Quebra/união de croquis</string>

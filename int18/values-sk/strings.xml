@@ -693,6 +693,7 @@
     <string name="btn_install">Inštalovať</string>
 
     <string name="symbol_archeo">Archeológia</string>
+    <!-- TODO string name="symbol_anthro">Anthro</string -->
     <string name="symbol_bio">Biológia</string>
     <string name="symbol_geo">Geológia</string>
     <string name="symbol_karst">Kras</string>
