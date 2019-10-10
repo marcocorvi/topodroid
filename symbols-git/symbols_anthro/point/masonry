@@ -1,0 +1,42 @@
+symbol point
+name masonry
+name-pt alvenaria
+th_name u:masonry
+orientation no
+color 0x993300
+csurvey 6 6 80
+path
+  moveTo -5 -6
+  lineTo 5 -6
+
+  moveTo -10 -2
+  lineTo 10 -2
+
+  moveTo -10 2
+  lineTo 10 2
+
+  moveTo -5 6
+  lineTo 5 6
+
+  moveTo -3 -6
+  lineTo -3 -2
+
+  moveTo 3 -6
+  lineTo 3 -2
+
+  moveTo -6 -2
+  lineTo -6 2
+
+  moveTo 0 -2
+  lineTo 0 2
+
+  moveTo 6 -2
+  lineTo 6 2
+
+  moveTo -3 6
+  lineTo -3 2
+
+  moveTo 3 6
+  lineTo 3 2
+endpath
+endsymbol

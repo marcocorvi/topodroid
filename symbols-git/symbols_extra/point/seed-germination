@@ -1,0 +1,17 @@
+symbol point
+name seed-germination
+name-pt germinação_de_sementes
+th_name u:seed-germination
+orientation no
+color 0xddffcc
+csurvey 6 6 80
+path
+  moveTo 0 0
+  cubicTo 0 -12 5 -12 5 -8
+
+  addCircle 5 -7 1
+
+  moveTo -2 0
+  lineTo 2 0
+endpath
+endsymbol

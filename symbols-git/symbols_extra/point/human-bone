@@ -1,0 +1,27 @@
+symbol point
+name human-bone
+name-pt osso_humano
+th_name u:human-bone
+orientation no
+color 0xc2c2c2
+csurvey 6 6 80
+path
+  moveTo 5 -1
+  cubicTo 5 2 4 8 0 8
+  cubicTo -4 8 -5 2 -5 -1
+  cubicTo -6 -4 -4 -7 0 -7
+  cubicTo 4 -7 6 -4 5 -1
+
+  moveTo -3 -2
+  lineTo -1 -2
+
+  moveTo 1 -2
+  lineTo 3 -2
+
+  moveTo -1 5
+  lineTo 1 5
+
+  moveTo 0 2
+  lineTo 0 0
+endpath
+endsymbol

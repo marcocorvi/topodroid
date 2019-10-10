@@ -1,0 +1,38 @@
+symbol point
+name walkway-metalic
+name-pt passarela_metálica
+th_name u:walkway-metalic
+orientation no
+color 0xcccccc
+csurvey 6 6 80
+path
+  moveTo -10 0
+  lineTo -4 0
+  lineTo 0 -2
+  lineTo 9 -2
+
+  moveTo -10 4
+  lineTo -4 4
+  lineTo 0 2
+  lineTo 9 2
+
+  moveTo -7 0
+  lineTo -7 4
+
+  moveTo -4 0
+  lineTo -4 4
+
+  moveTo -2 -1
+  lineTo -2 3
+
+  moveTo 0 -2
+  lineTo 0 2
+
+  moveTo 3 -2
+  lineTo 3 2
+
+  moveTo 6 -2
+  lineTo 6 2
+endpath
+endsymbol
+

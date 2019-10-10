@@ -1,0 +1,27 @@
+symbol line
+  name dripline
+  name-pt linha_de_gotejamento
+  th_name u:dripline
+  group wall
+  color 0xff0000 0xff
+  width 8
+  csurvey 2 1 3 4
+  dash 23 4
+  effect
+    moveTo 0 0
+    lineTo 12 0
+    lineTo 12 1
+    lineTo 0 1
+    moveTo 17 -4
+    lineTo 18 -4
+    lineTo 18 5
+    lineTo 17 5
+    lineTo 17 -4
+    moveTo 22 -4
+    lineTo 23 -4
+    lineTo 23 5
+    lineTo 22 5
+    lineTo 22 -4
+    moveTo 0 0
+  endeffect
+endsymbol

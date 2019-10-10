@@ -1,0 +1,17 @@
+symbol point
+name bone
+name-pt osso
+th_name u:bone
+orientation no
+color 0xc2c2c2
+csurvey 6 6 80
+path
+  moveTo -4 -2
+  lineTo 4 -2
+  cubicTo 5 -6 10 -2 6 0
+  cubicTo 10 2 5 6 4 2
+  lineTo -4 2
+  cubicTo -5 6 -10 2 -6 0
+  cubicTo -10 -2 -5 -6 -4 -2
+endpath
+endsymbol

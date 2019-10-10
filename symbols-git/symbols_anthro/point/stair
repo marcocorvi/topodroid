@@ -1,0 +1,18 @@
+symbol point
+name stair
+name-pt escada
+th_name u:stair
+orientation no
+color 0x993300
+csurvey 6 6 80
+path
+  moveTo -10 5
+  lineTo -5 5
+  lineTo -5 0
+  lineTo 0 0
+  lineTo 0 -5
+  lineTo 5 -5
+  lineTo 5 -10
+  lineTo 10 -10
+endpath
+endsymbol

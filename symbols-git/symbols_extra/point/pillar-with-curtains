@@ -1,0 +1,26 @@
+symbol point
+name pillar-with-curtains
+name-pt coluna_coberta_por_cortinas
+th_name u:pillar-with-curtains
+orientation no
+color 0xccff66
+csurvey 6 6 80
+path
+  moveTo -3 -7
+  lineTo 0 -4
+  lineTo 0 4
+  lineTo -3 7
+
+  moveTo 0 4
+  lineTo 3 7
+
+  moveTo 0 -4
+  lineTo 3 -7
+
+  moveTo 0 -2
+  cubicTo -2 -4 -1 0 -3 -2
+
+  moveTo 0 2
+  cubicTo 2 4 1 0 3 2
+endpath
+endsymbol

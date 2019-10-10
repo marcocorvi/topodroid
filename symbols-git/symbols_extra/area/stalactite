@@ -1,0 +1,7 @@
+symbol area
+name stalactite
+name-pt estalactite
+th_name u:stalactite
+color 0xfff100 0x66
+csurvey 1 48 0 1
+endsymbol

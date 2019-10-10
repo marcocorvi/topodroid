@@ -1,0 +1,20 @@
+symbol line
+  name walkway-metalic
+  name-pt passarela_metálica
+  th_name u:walkway-metalic
+  group walkway
+  color 0xcccccc 0x66
+  width 8
+  csurvey 2 1 3 4
+  effect
+    moveTo 0 0
+    lineTo 0 8
+    lineTo 2 10
+    lineTo 2 14
+    lineTo 8 14
+    lineTo 8 10
+    lineTo 6 8
+    lineTo 6 0
+    lineTo 0 0
+  endeffect
+endsymbol

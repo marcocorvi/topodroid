@@ -1,0 +1,34 @@
+symbol point
+name bat
+name-es murciélago
+name-pt morcego
+name-ru летучая_мышь
+name-fr chauve-souris
+name-ro liliac
+name-de Fledermaus
+th_name u:bat
+color 0xffcc33
+csurvey 0 0 0
+path
+  addCircle 0 -2 2
+  moveTo 0 0
+  cubicTo 2 0 2 6 0 6
+  cubicTo -2 6 -2 0 0 0
+  moveTo -2 -2 
+  lineTo -2 -4
+  lineTo -1 -2.7
+  moveTo 2 -2 
+  lineTo 2 -4
+  lineTo 1 -2.7
+  moveTo -1 0
+  lineTo -5 -2
+  lineTo -7 4
+  lineTo -7 5
+  cubicTo -6 4 -3 2 -2 3
+  moveTo 1 0
+  lineTo 5 -2
+  lineTo 7 4
+  lineTo 7 5
+  cubicTo 6 4 3 2 2 3
+endpath
+endsymbol  

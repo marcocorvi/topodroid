@@ -3,7 +3,11 @@ README symbols
 Symbol files are parsed by the program when if loads the symbol libraries.
 There are three libraries, one for points, one for lines and one for areas.
 Symbol files must follow a strict syntax, which is detailed in the documentation of the 
-website.
+website available at https://sites.google.com/site/speleoapps/home/topodroid/topodroid-video-course/tdsymbol
+
+To get a list of untranslated symbols in some language use (in Linux):
+
+# cd topodroid/symbols-git/; grep -Lr name-TWO-LETTER-LANGUAGE-CODE *
 
 In particular symbol files contains information used in the Therion and cSurvey exports.
 

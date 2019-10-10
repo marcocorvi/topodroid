@@ -1,0 +1,33 @@
+symbol line
+  name abyss-entrance
+  name-pt entrada_em_abismo
+  th_name u:abyss-entrance
+  group wall
+  color 0x7f007f 0xff
+  width 8
+  csurvey 2 1 3 4
+  dash 24 4
+  effect
+    moveTo 0 0
+    lineTo 13 0
+    lineTo 13 1
+    lineTo 7 1
+    lineTo 7 8
+    lineTo 6 8
+    lineTo 6 1
+    lineTo 0 1
+    lineTo 0 0
+    moveTo 18 -4
+    lineTo 19 -4
+    lineTo 19 5
+    lineTo 18 5
+    lineTo 18 -4
+    moveTo 23 -4
+    lineTo 24 -4
+    lineTo 24 5
+    lineTo 23 5
+    lineTo 23 -4
+    moveTo 0 0
+  endeffect
+endsymbol
+

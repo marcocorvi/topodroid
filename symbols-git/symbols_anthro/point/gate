@@ -1,0 +1,33 @@
+symbol point
+name gate
+name-pt portão
+th_name u:gate
+orientation no
+color 0xff0000
+csurvey 6 6 80
+path
+  moveTo -10 -10
+  lineTo 10 -10
+  lineTo 10 10
+  lineTo -10 10
+  lineTo -10 -10
+
+  moveTo -5 -10
+  lineTo -5 10
+
+  moveTo 0 -10
+  lineTo 0 10
+
+  moveTo 5 -10
+  lineTo 5 10
+
+  moveTo -10 -5
+  lineTo 10 -5
+
+  moveTo -10 0
+  lineTo 10 0
+
+  moveTo -10 5
+  lineTo 10 5
+endpath
+endsymbol

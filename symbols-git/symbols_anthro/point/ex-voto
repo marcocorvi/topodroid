@@ -1,0 +1,18 @@
+symbol point
+name ex-voto
+name-pt ex-voto
+th_name u:ex-voto
+orientation no
+color 0xffea80
+csurvey 6 6 80
+path
+  moveTo 0 10
+  lineTo 0 5
+  lineTo -3 -10
+  lineTo 3 -10
+  lineTo 0 5
+
+  moveTo -2 -5
+  lineTo 2 -5
+endpath
+endsymbol
