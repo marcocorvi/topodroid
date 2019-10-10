@@ -261,7 +261,7 @@ class DrawingSvg
             toSvg( pw5, (DrawingAreaPath) path, color_str, xoff, yoff );
           } else if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
             DrawingPointPath point = (DrawingPointPath)path;
-            if ( point.mPointType == BrushManager.mPointLib.mPointSectionIndex ) {
+            if ( BrushManager.isPointSection( point.mPointType ) ) {
               float xx = xoff+point.cx;
               float yy = yoff+point.cy;
 	      if ( TDSetting.mAutoXSections ) {
@@ -437,7 +437,7 @@ class DrawingSvg
     // } else if ( name.equals("danger") ) {
     //   pw.format(Locale.US, "<text x=\"%.2f\" y=\"%.2f\" ", xoff+point.cx, yoff+point.cy );
     //   pw.format(Locale.US, " style=\"fill:none;stroke:red;stroke-width:%.2f\">!</text>\n", TDSetting.mSvgLabelStroke );
-    } else if ( idx == BrushManager.mPointLib.mPointSectionIndex ) {
+    } else if ( BrushManager.isPointSection( idx ) ) {
       /* nothing */
     } else {
       SymbolPoint sp = (SymbolPoint)BrushManager.mPointLib.getSymbolByIndex( idx );

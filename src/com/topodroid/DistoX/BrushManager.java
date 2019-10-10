@@ -82,9 +82,10 @@ class BrushManager
   static boolean isPointAudio( int index ) { return index == mPointLib.mPointAudioIndex; }
   static boolean isPointSection( int index ) { return index == mPointLib.mPointSectionIndex; }
 
-  static int getPointLabelIndex() { return mPointLib.mPointLabelIndex; }
+  static int getPointLabelIndex() { return (mPointLib == null)? 1 : mPointLib.mPointLabelIndex; }
+  static int getPointPhotoIndex() { return (mPointLib == null)? 0 : mPointLib.mPointPhotoIndex; }
+  static int getPointAudioIndex() { return (mPointLib == null)? 0 : mPointLib.mPointAudioIndex; }
   static int getPointSectionIndex() { return mPointLib.mPointSectionIndex; }
-
 
   static String getPointSymbolName( int idx ) { return mPointLib.getSymbolName( idx ); } 
   static String getLineSymbolName( int idx )  { return mLineLib.getSymbolName( idx ); } 

@@ -19,6 +19,7 @@ class TDRequest
   // private static final int EXTERNAL_ACTIVITY = 4;
   static final int REQUEST_DEVICE    = 5; 
   // static final int QCAM_COMPASS_DRAWWINDOW  = 6;
+  static final int PLOT_RELOAD = 7;
   static final int CAPTURE_IMAGE_SHOTWINDOW = 100;
   static final int CAPTURE_IMAGE_DRAWWINDOW = 101;
 }

@@ -115,14 +115,23 @@ class ParserCompass extends ImportParser
                       mComment = "";
                       if ( k < kmax ) {
                         if (vals[k].startsWith("#")) {
-                          mFlag = vals[k];
-						  ++k;
-                        }
-                        if ( k < kmax ) {
-						  // mComment = vals[k];
-                          // while ( k < kmax ) { mComment = mComment + " " + vals[k]; ++k; }
-                          mComment = TDUtil.concat( vals, k );
-                          // k = vals.length;
+                          mFlag = vals[k]; ++k;
+                          if ( k < kmax ) mComment = TDUtil.concat( vals, k );
+                        } else if ( mBearing < -900 || mClino < -900 ) {
+                          float bearing = Float.parseFloat(vals[k]); ++k; 
+                          if ( mBearing < -900 ) {
+                            mBearing = bearing + 180;
+                            if ( mBearing >= 360 ) mBearing -= 360;
+                          }
+                          if ( k < kmax ) {
+                            mClino = - Float.parseFloat(vals[k]); ++k;
+                          }
+                          if ( k < kmax ) {
+                            if (vals[k].startsWith("#")) {
+                              mFlag = vals[k]; ++k;
+                            }
+                            if ( k < kmax ) mComment = TDUtil.concat( vals, k );
+                          }
                         }
                       }
                     }

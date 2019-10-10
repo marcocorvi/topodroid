@@ -65,7 +65,7 @@ class DrawingPointPath extends DrawingPath
   // FIXME SECTION_RENAME
   DrawingPointPath fixScrap( String survey_name )
   {
-    if ( survey_name != null && mPointType == BrushManager.mPointLib.mPointSectionIndex ) {
+    if ( survey_name != null && BrushManager.isPointSection( mPointType ) ) {
       String scrap = mOptions.replace("-scrap ", "");
       if ( ! scrap.startsWith(survey_name) ) {
         int pos = scrap.lastIndexOf('-');
@@ -151,7 +151,7 @@ class DrawingPointPath extends DrawingPath
         type = 0;
       }
       // FIXME SECTION_RENAME
-      // if ( type == BrushManager.mPointLib.mPointSectionIndex ) {
+      // if ( BrushManager.isPointSection( type ) ) {
       //   String scrap = options.replace("-scrap ", "");
       //   scrap = scrap.replace( mApp.mSurvey + "-", "" ); // remove survey name from options
       //   option = "-scrap " + scrap;
@@ -312,7 +312,7 @@ class DrawingPointPath extends DrawingPath
   {
     // Log.v("DistoX", "Reset path " + mOrientation + " scale " + mScale );
     Matrix m = new Matrix();
-    if ( mPointType != BrushManager.mPointLib.mPointLabelIndex ) {
+    if ( ! BrushManager.isPointLabel( mPoinType ) ) {
       if ( BrushManager.mPointLib.isSymbolOrientable( mPointType ) ) {
         m.postRotate( (float)mOrientation );
       }
@@ -399,7 +399,7 @@ class DrawingPointPath extends DrawingPath
     pw.format(Locale.US, "point %.2f %.2f %s", cx*TDSetting.mToTherion, -cy*TDSetting.mToTherion, th_name );
     toTherionOrientation( pw );
     // FIXME SECTION_RENAME
-    // if ( mPointType != BrushManager.mPointLib.mPointSectionIndex )
+    // if ( ! BrushManager.isPointSection( mPointType ) )
     toTherionTextOrValue( pw );
     toTherionOptions( pw );
     pw.format("\n");
@@ -437,7 +437,7 @@ class DrawingPointPath extends DrawingPath
       // }
     }
     // FIXME SECTION_RENAME
-    // if ( type == BrushManager.mPointLib.mPointSectionIndex ) {
+    // if ( BrushManager.isPointSection( type ) ) {
     //   String scrap = mOptions.replace("-scrap ", "" );
     //   pw.format(" -scrap %s-%s", mApp.mSurvey, scrap );
     // } else {

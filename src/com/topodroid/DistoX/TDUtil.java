@@ -231,6 +231,19 @@ class TDUtil
   static int month() { return (new GregorianCalendar()).get( Calendar.MONTH ); }
   static int day()   { return (new GregorianCalendar()).get( Calendar.DAY_OF_MONTH); }
 
+  static String getAge( long age )
+  {
+    age /= 60000;
+    if ( age < 120 ) return Long.toString(age) + "\'";
+    age /= 60;
+    if ( age < 24 ) return Long.toString(age) + "h";
+    age /= 24;
+    if ( age < 60 ) return Long.toString(age) + "d";
+    age /= 30;
+    if ( age < 24 ) return Long.toString(age) + "m";
+    age /= 12;
+    return Long.toString(age) + "y";
+  }
 
   static boolean slowDown( int msec ) 
   {

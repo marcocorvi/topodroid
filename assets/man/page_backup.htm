@@ -2,34 +2,42 @@
 
 <h4>SKETCH RELOAD</h4>
 
-This dialog is opened by the <u>Reload</u> menu of the <u>sketch window</u>.<br><p>
+This window is opened by the <u>Reload</u> menu of the <u>sketch window</u>.<br><p>
 
 TopoDroid maintains backup copies of sketch files, from which the sketch can be recovered.<br>
-TopoDroid keeps a set of four backup copies for each sketch file.
-These are named with suffixes "bck", "bck0", "bck1", and "bck2" and are stored in the 
+TopoDroid keeps a set of backup copies for each sketch file.
+These are named with suffixes "bck", "bck0", "bck1", and so on. They are stored in the 
 <i>tdr</i> subdirectory (binary sketch files). Whenever a sketch is saved the backup copies are rotated
 (eg, "bck1" is renamed "bck2", and so on; "bck" is renamed "bck0"),
 the old "tdr" file is renamed with suffix "bck", and the sketch is saved to a new "tdr" file.
 <br><p>
 
 TopoDroid saves a sketch whenever it is modified (eg, a new item is added, or part of the sketch is erased)
-while it is open. Only one backup is used in this case: the old saved copy being renamed with suffix "bck".
+while it is open, but no more frequently than a given setting. The deafault in no more tan once in a minute.
+ Only one backup is used in this case: the old saved copy being renamed with suffix "bck".
 <br><p>
 
 When you switch between plan and profile view, or to and from a cross-section,
 and when you close the sketch window, the open view is saved.
 <br><p>
 
-The dialog shows the list of the sketch backups with
+The window displays a preview of the sketch backups.
+One backup at a time is diaplayed. Some info about the backup are shown in the title: 
 <ul>
 <li>how long ago it was written, with suffixes for minutes (m), hours (h), days (d), months (M) and years (Y)</li>
 <li>size of the file, in square brackets, in bytes</li>
-<li>filename</li>
+<li>backup number</li>
 </ul>
 <br><p> 
 
-To recover a sketch you choose which copy to load, and tap the <u>OK</u> button to confirm.<br>
-The <u>Back</u> key closes the dialog without reloading the sketch.
+There are two buttons to move back and forth in the backup list.
 <br><p>
+
+The menus are
+<ul>
+<li><i>close</i> the window without reloading the sketch from a backup</li>
+<li><i>reload</i> the sketch from the displayed backup (and close the window)</li>
+<li><i>help</i></li>
+</ul><br><p>
 
 </body></html>

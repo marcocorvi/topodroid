@@ -403,6 +403,7 @@ class DrawingSurface extends SurfaceView
   // return true if the station is the current active
   private void setStationPaint( DrawingStationName st, List<CurrentStation> saved, DrawingCommandManager manager )
   {
+    if ( st == null ) return; // 20191010 should not be necessary: crash called from setCurrentStation
     String name = st.getName();
     NumStation num_st = st.getNumStation();
 

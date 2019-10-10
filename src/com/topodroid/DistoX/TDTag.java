@@ -29,6 +29,7 @@ class TDTag
   static final String TOPODROID_PLOT_YOFF    = "plot_yoff";
   static final String TOPODROID_PLOT_LANDSCAPE = "plot_landscape";
   static final String TOPODROID_HELP_PAGE    = "help_page";
+  static final String TOPODROID_PLOT_FILENAME = "plot_filename";
 
   /* FIXME_SKETCH_3D *
   static final String TOPODROID_SKETCH_ID   = "sketch_id";

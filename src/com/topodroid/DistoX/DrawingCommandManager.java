@@ -1079,7 +1079,7 @@ class DrawingCommandManager
   void deleteSectionLine( DrawingPath line, String scrap, EraseCommand cmd )
   {
     synchronized( mCurrentStack ) {
-      int index = BrushManager.mPointLib.mPointSectionIndex;
+      int index = BrushManager.getPointSectionIndex();
       if ( index >= 0 ) {
         ArrayList<DrawingPath> todo = new ArrayList<>();
         for ( ICanvasCommand c : mCurrentStack ) {
@@ -1330,7 +1330,7 @@ class DrawingCommandManager
 
   void deleteSectionPoint( String scrap_name, EraseCommand cmd )
   {
-    int index = BrushManager.mPointLib.mPointSectionIndex;
+    int index = BrushManager.getPointSectionIndex();
     synchronized( mCurrentStack ) {
       for ( ICanvasCommand icc : mCurrentStack ) { // FIXME reverse_iterator
         if ( icc.commandType() == 0 ) { // DrawingPath
@@ -3045,7 +3045,7 @@ class DrawingCommandManager
         DrawingPath path = sp.mItem;
         if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
           DrawingPointPath pt = (DrawingPointPath)path;
-          if ( pt.mPointType == BrushManager.mPointLib.mPointSectionIndex ) {
+          if ( BrushManager.isPointSection( pt.mPointType )  ) {
             String scrap_name = pt.getOption( "-scrap" );
             if ( scrap_name != null ) {
               shiftXSectionOutline( scrap_name, dx, dy );
@@ -3143,7 +3143,7 @@ class DrawingCommandManager
           DrawingPath path = (DrawingPath)cmd;
           if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
             DrawingPointPath pt = (DrawingPointPath)path;
-            if ( pt.mPointType == BrushManager.mPointLib.mPointAudioIndex ) {
+            if ( BrushManager.isPointAudio( pt.mPointType ) ) {
               DrawingAudioPath audio = (DrawingAudioPath)pt;
               if ( audio.mId == bid ) return audio;
             }
@@ -3212,7 +3212,7 @@ class DrawingCommandManager
         DrawingPath p = (DrawingPath)cmd;
         if ( p.mType != DrawingPath.DRAWING_PATH_POINT ) continue;
         DrawingPointPath pt = (DrawingPointPath)p;
-        if ( pt.mPointType != BrushManager.mPointLib.mPointSectionIndex ) continue;
+        if ( ! BrushManager.isPointSection( pt.mPointType ) ) continue;
 	// get the line/station
 	String scrap = p.getOption("-scrap");
         if ( scrap != null ) {

@@ -46,7 +46,7 @@ class DrawingAudioPath extends DrawingPointPath
 
   DrawingAudioPath( float off_x, float off_y, int scale, String options, long id )
   {
-    super( BrushManager.mPointLib.mPointAudioIndex, off_x, off_y, scale, null, options );
+    super( BrushManager.getPointAudioIndex(), off_x, off_y, scale, null, options );
     mId = id;
 
     // mPointText = text;

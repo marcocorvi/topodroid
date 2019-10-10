@@ -810,6 +810,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_previous">Previous item in the selection</string>
     <string name="help_next">Next item in the selection</string>
     <string name="help_recover">Reload sketch from backup</string>
+    <string name="help_reload_prev">Display newer backup</string>
+    <string name="help_reload_next">Display older backup</string>
+    <string name="help_reload_plot">Reload sketch backup</string>
     <string name="help_zoom_fit">Fit sketch to screen</string>
    
     <string name="help_line_point">Line point actions: join, split, cut, remove</string>

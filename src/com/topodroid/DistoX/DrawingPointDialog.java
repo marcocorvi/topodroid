@@ -112,7 +112,7 @@ class DrawingPointDialog extends MyDialog
     mOrientationWidget = new MyOrientationWidget( this, mOrientable, mPoint.mOrientation );
 
 
-    if ( mPoint.mPointType == BrushManager.mPointLib.mPointSectionIndex ) {
+    if ( BrushManager.isPointSection( mPoint.mPointType ) ) {
       // FIXME SECTION_RENAME
       // scrap option contains only section nickname (no survey prefix)
       mXSectionName = mPoint.getOption("-scrap"); 

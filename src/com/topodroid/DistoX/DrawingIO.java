@@ -1799,7 +1799,7 @@ class DrawingIO
       if ( BrushManager.getPointCsxLayer( pp.mPointType ) != 6 ) continue;
 
       // section points are special
-      if ( all_sections != null && pp.mPointType == BrushManager.mPointLib.mPointSectionIndex ) {
+      if ( all_sections != null && BrushManager.isPointSection( pp.mPointType ) ) {
 	if ( TDSetting.mAutoXSections ) {
           // Log.v("DistoX", "Section point <" + pp.mOptions + ">");
           // option: -scrap survey-xx#

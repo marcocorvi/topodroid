@@ -218,7 +218,7 @@ class DrawingXvi
           toXvi( pw5, (DrawingAreaPath) path, xoff, yoff );
         } else if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
           DrawingPointPath point = (DrawingPointPath)path;
-          if ( point.mPointType == BrushManager.mPointLib.mPointSectionIndex ) {
+          if ( BrushManager.isPointSection( point.mPointType ) ) {
             float xx = xoff+point.cx;
             float yy = yoff+point.cy;
 	    // Log.v("DistoXX", " yoff " + yoff + " cy " + point.cy + " yy " + yy );
@@ -317,8 +317,8 @@ class DrawingXvi
     float yof = yoff - point.cy;
     float x1, y1, x2, y2;
 
-    if ( idx == BrushManager.mPointLib.mPointSectionIndex ) return;
-    if ( idx == BrushManager.mPointLib.mPointLabelIndex ) {
+    if ( BrushManager.isPointSection( idx ) ) return;
+    if ( BrushManager.isPointLabel( idx ) ) {
       String label = point.getPointText().toUpperCase();
       int len = label.length();
       int pos = 0;

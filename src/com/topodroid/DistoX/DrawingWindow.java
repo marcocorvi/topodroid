@@ -5684,13 +5684,25 @@ public class DrawingWindow extends ItemDrawer
 	  }
 	}
       } else if ( TDLevel.overNormal && p++ == pos ) { // RECOVER RELOAD
+        Intent intent = new Intent( this, PlotReloadWindow.class );
+        intent.putExtra( TDTag.TOPODROID_SURVEY_ID, mSid );
+        intent.putExtra( TDTag.TOPODROID_PLOT_FROM, mFrom );
+        intent.putExtra( TDTag.TOPODROID_PLOT_ZOOM, mZoom );
+        intent.putExtra( TDTag.TOPODROID_PLOT_TYPE, mType );
+        intent.putExtra( TDTag.TOPODROID_PLOT_LANDSCAPE, mLandscape );
+        intent.putExtra( TDTag.TOPODROID_PLOT_XOFF, mOffset.x );
+        intent.putExtra( TDTag.TOPODROID_PLOT_YOFF, mOffset.y );
         if ( PlotInfo.isProfile( mType ) ) {
-          ( new PlotRecoverDialog( mActivity, this, mFullName2, mType ) ).show();
+          intent.putExtra( TDTag.TOPODROID_PLOT_FILENAME, mFullName2 );
+          // ( new PlotRecoverDialog( mActivity, this, mFullName2, mType ) ).show();
         } else if ( mType == PlotInfo.PLOT_PLAN ) {
-          ( new PlotRecoverDialog( mActivity, this, mFullName1, mType ) ).show();
+          intent.putExtra( TDTag.TOPODROID_PLOT_FILENAME, mFullName1 );
+          // ( new PlotRecoverDialog( mActivity, this, mFullName1, mType ) ).show();
         } else {
-          ( new PlotRecoverDialog( mActivity, this, mFullName3, mType ) ).show();
+          intent.putExtra( TDTag.TOPODROID_PLOT_FILENAME, mFullName3 );
+          // ( new PlotRecoverDialog( mActivity, this, mFullName3, mType ) ).show();
         }
+        startActivityForResult( intent, TDRequest.PLOT_RELOAD );
       } else if ( TDLevel.overNormal && p++ == pos ) { // ZOOM_FIT / ORIENTATION
 	if ( TDLevel.overExpert ) {
           ( new PlotZoomFitDialog( mActivity, this ) ).show();
@@ -5768,15 +5780,14 @@ public class DrawingWindow extends ItemDrawer
 
   void doRecover( String filename, long type )
   {
-    // Log.v("DistoX-C", "doRecover " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     mLastLinePath = null; // absolutely necessary
     float x = mOffset.x;
     float y = mOffset.y;
     float z = mZoom;
     String tdr  = TDPath.getTdrFile( filename );
     // String th2  = TDPath.getTh2File( filename );
-    TDLog.Log( TDLog.LOG_IO, "reload tdr " + filename + " file " + tdr );
-    // Log.v("DistoX", "recover " + type + " <" + filename + "> TRD " + tdr + " TH2 " + th2 );
+    TDLog.Log( TDLog.LOG_IO, "reload file " + filename + " path " + tdr );
+    // Log.v("DistoX-RELOAD", "recover " + type + " <" + filename + "> TRD " + tdr );
     if ( type == PlotInfo.PLOT_PLAN ) {
       mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, null, false );
       mDrawingSurface.modeloadDataStream( tdr /*, th2, null */ ); // no missing symbols
@@ -6228,13 +6239,13 @@ public class DrawingWindow extends ItemDrawer
   }
 
   @Override
-  protected void onActivityResult( int reqCode, int resCode, Intent data )
+  protected void onActivityResult( int reqCode, int resCode, Intent intent )
   {
     switch ( reqCode ) {
       // case TDRequest.QCAM_COMPASS_DRAWWINDOW: // not used
       //   if ( resCode == Activity.RESULT_OK ) {
       //     try {
-      //       Bundle extras = data.getExtras();
+      //       Bundle extras = intent.getExtras();
       //       float b = Float.parseFloat( extras.getString( TDTag.TOPODROID_BEARING ) );
       //       float c = Float.parseFloat( extras.getString( TDTag.TOPODROID_CLINO ) );
       //       mShotNewDialog.setBearingAndClino( b, c, 0 ); // orientation 0
@@ -6245,6 +6256,16 @@ public class DrawingWindow extends ItemDrawer
       case TDRequest.CAPTURE_IMAGE_DRAWWINDOW:
         if ( resCode == Activity.RESULT_OK ) {
           insertPhoto();
+        }
+        break;
+      case TDRequest.PLOT_RELOAD:
+        if ( resCode == Activity.RESULT_OK ) {
+          Bundle extras = (intent != null)? intent.getExtras() : null;
+          if ( extras == null ) return;
+          long type = extras.getLong( TDTag.TOPODROID_PLOT_TYPE );
+          String filename = extras.getString( TDTag.TOPODROID_PLOT_FILENAME );
+          Log.v("DistoX-RELOAD", "result " + filename );
+          doRecover( filename, type );
         }
         break;
     }

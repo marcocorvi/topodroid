@@ -17,6 +17,7 @@
   <string name="ShotWindow" translatable="false">manual06.htm</string>
   <string name="DrawingWindow" translatable="false">manual09.htm</string>
   <string name="OverviewWindow" translatable="false">manual12.htm</string>
+  <string name="PlotReloadWindow" translatable="false">page_backup.htm</string>
   <string name="CWDActivity" translatable="false">page_cwd.htm</string>
   <string name="CBDdialog" translatable="false">page_cwd.htm</string>
 
@@ -75,7 +76,7 @@
   <string name="PlotListDialog" translatable="false">page_plot_list.htm</string>
   <!-- string name="PlotMergeDialog" translatable="false">page_plot_merge.htm</string -->
   <string name="PlotNewDialog" translatable="false">page_new_plot.htm</string>
-  <string name="PlotRecoverDialog" translatable="false">page_backup.htm</string>
+  <!-- string name="PlotRecoverDialog" translatable="false">page_backup.htm</string -->
   <string name="PlotRenameDialog" translatable="false">page_plot_rename.htm</string>
   <string name="PlotZoomFitDialog" translatable="false">page_plot_zoomfit.htm</string>
   <string name="ProjectionDialog" translatable="false">page_projection.htm</string>

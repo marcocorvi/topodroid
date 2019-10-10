@@ -1093,7 +1093,7 @@ class DrawingDxf
             DrawingPointPath point = (DrawingPointPath) path;
             int idx = 1 + point.mPointType;
             if ( mVersion13 ) {
-              if ( point.mPointType == BrushManager.mPointLib.mPointSectionIndex ) {
+              if ( BrushManager.isPointSection( point.mPointType ) ) {
 		if ( TDSetting.mAutoXSections ) {
                   // FIXME GET_OPTION
                   // String scrapfile = point.mOptions.substring( 7 ) + ".tdr";

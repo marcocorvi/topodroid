@@ -46,7 +46,7 @@ class DrawingPhotoPath extends DrawingPointPath
 
   DrawingPhotoPath( String text, float off_x, float off_y, int scale, String options, long id )
   {
-    super( BrushManager.mPointLib.mPointPhotoIndex, off_x, off_y, scale, text, options );
+    super( BrushManager.getPointPhotoIndex(), off_x, off_y, scale, text, options );
     mId = id;
 
     // mPointText = text;

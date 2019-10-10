@@ -46,7 +46,7 @@ class DrawingStationName extends DrawingPointPath
 
   public DrawingStationName( String name, float x, float y )
   {
-    super( BrushManager.mPointLib.mPointLabelIndex,
+    super( BrushManager.getPointLabelIndex(),
            x, // scene coordinate
            y, 
            DrawingPointPath.SCALE_M, null, null ); // no text no options
@@ -65,7 +65,7 @@ class DrawingStationName extends DrawingPointPath
 
   public DrawingStationName( NumStation num_st, float x, float y )
   {
-    super( BrushManager.mPointLib.mPointLabelIndex,
+    super( BrushManager.getPointLabelIndex(),
            x, // scene coordinate
            y, 
            DrawingPointPath.SCALE_M, null, null );
