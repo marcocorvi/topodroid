@@ -614,7 +614,7 @@ public class DrawingWindow extends ItemDrawer
   {
     if ( ! mModified ) {
       mModified = true;
-      saveHandler.postDelayed( saveRunnable, TDSetting.mBackupInterval * 100 ); // FIXME 1000
+      saveHandler.postDelayed( saveRunnable, TDSetting.mBackupInterval * 1000 ); // Backup Interval is in seconds
     }
   }
 
