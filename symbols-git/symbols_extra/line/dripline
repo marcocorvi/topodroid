@@ -1,7 +1,7 @@
 symbol line
-  name dripping
-  name-pt gotejamento
-  th_name u:dripping
+  name dripline
+  name-pt linha_de_gotejamento
+  th_name u:dripline
   group wall
   color 0xff0000 0xff
   width 8
