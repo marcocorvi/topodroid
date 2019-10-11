@@ -356,6 +356,7 @@
     <string name="popup_snap_ln">Ajustar a la línea más cercana</string>
     <string name="popup_snap_to_splays">Ajustar a anchuras cercanas</string>
     <string name="popup_split_pt">Añadir punto</string>
+    <!-- TODO string name="popup_split_pts">Adds points</string -->
     <string name="popup_split_ln">Separar línea</string>
     <string name="popup_sharp_pt">Segmento recto</string>
     <string name="popup_curve_pt">Segmento curvo</string>

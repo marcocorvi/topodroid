@@ -364,6 +364,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="popup_snap_ln">Snap to line</string>
     <string name="popup_snap_to_splays">Snap to splays</string>
     <string name="popup_split_pt">Insert point</string>
+    <string name="popup_split_pts">Adds points</string>
     <string name="popup_split_ln">Split line</string>
     <string name="popup_sharp_pt">Straighten segment</string>
     <string name="popup_curve_pt">Smoothen segment</string>

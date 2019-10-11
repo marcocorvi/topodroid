@@ -18,6 +18,8 @@ class SelectionRange
   static final int RANGE_POINT = 0; // point - no range
   static final int RANGE_SOFT  = 1; // smooth ends
   static final int RANGE_HARD  = 2; // hard-cut ends
+  static final int RANGE_ITEM  = 3; // whole item
+  static final int RANGE_MAX   = 4; // MUST BE LAST
 
   private int mRangeType; // range type
   private LinePoint mLP1 = null;  // range endpoints
@@ -34,7 +36,7 @@ class SelectionRange
     mD2  = d2;
   }
 
-  static int rotateType( int type ) { return (type+1)%3; }
+  static int rotateType( int type ) { return (type+1)%RANGE_MAX; }
 
   LinePoint start() { return mLP1; }
   LinePoint end()   { return mLP2; }
@@ -44,9 +46,14 @@ class SelectionRange
   float startDistance() { return mD1; }
   float endDistance()   { return mD2; }
 
+  static boolean isRange(int type) { return type == RANGE_SOFT || type == RANGE_HARD; }
+  static boolean isPointOrItem(int type) { return type == RANGE_POINT || type == RANGE_ITEM; }
   static boolean isPoint(int type) { return type == RANGE_POINT; }
+  static boolean isItem( int type ) { return type == RANGE_ITEM; }
+
   boolean isPoint() { return mRangeType == RANGE_POINT; }
   boolean isSoft() { return mRangeType == RANGE_SOFT; }
   // boolean isHard() { return mRangeType == RANGE_HARD; }
+  boolean isItem() { return mRangeType == RANGE_ITEM; }
 
 }

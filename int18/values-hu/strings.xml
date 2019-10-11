@@ -358,6 +358,7 @@
     <string name="popup_snap_ln">Ugrás a legközelebbi vonalra</string>
     <string name="popup_snap_to_splays">Ugrás a legközelebbi segédpontra</string>
     <string name="popup_split_pt">Pont duplázása</string>
+    <!-- TODO string name="popup_split_pts">Adds points</string -->
     <string name="popup_split_ln">Vonal elmetszése pontnál</string>
     <string name="popup_sharp_pt">Szakasz kiegyenesítése</string>
     <string name="popup_curve_pt">Szakasz simítása</string>

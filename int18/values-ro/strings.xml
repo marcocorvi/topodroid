@@ -359,6 +359,7 @@
     <string name="popup_snap_ln">Conectează la linia apropiată</string>
     <string name="popup_snap_to_splays">Conectează la radierile apropiate</string>
     <string name="popup_split_pt">Duplică punctul</string>
+    <!-- TODO string name="popup_split_pts">Adds points</string -->
     <string name="popup_split_ln">Taie linia la punct</string>
     <string name="popup_sharp_pt">Îndreaptă segmentul</string>
     <string name="popup_curve_pt">Netezește segmentul</string>

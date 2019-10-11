@@ -360,6 +360,7 @@
     <string name="popup_snap_ln">Juntar à linha mais próxima</string>
     <string name="popup_snap_to_splays">Juntar à medida auxiliar próxima</string>
     <string name="popup_split_pt">Duplicar ponto</string>
+    <!-- TODO string name="popup_split_pts">Adds points</string -->
     <string name="popup_split_ln">Corta a linha no ponto</string>
     <string name="popup_sharp_pt">Deixar segmento reto</string>
     <string name="popup_curve_pt">Suavizar segmento</string>

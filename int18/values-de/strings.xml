@@ -367,6 +367,7 @@
     <string name="popup_snap_ln">Auf nächste Linie verschieben</string>
     <string name="popup_snap_to_splays">Auf nächste Hilfsmessung verschieben</string>
     <string name="popup_split_pt">Punkt verdoppeln</string>
+    <!-- TODO string name="popup_split_pts">Adds points</string -->
     <string name="popup_split_ln">Linie trennen</string>
     <string name="popup_sharp_pt">Linie begradigen</string>
     <string name="popup_curve_pt">Linie rund machen</string>

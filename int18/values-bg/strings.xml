@@ -358,6 +358,7 @@
     <string name="popup_snap_ln">Прикачване към близка линия</string>
     <string name="popup_snap_to_splays">Прикачване към близки стр. измервания</string>
     <string name="popup_split_pt">Дублиране на точката</string>
+    <!-- TODO string name="popup_split_pts">Adds points</string -->
     <string name="popup_split_ln">Разделяне на линията в точката</string>
     <string name="popup_sharp_pt">Изправяне (премахване Безие)</string>
     <string name="popup_curve_pt">Изглаждане (с Безие)</string>

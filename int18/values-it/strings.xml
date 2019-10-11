@@ -356,6 +356,7 @@
     <string name="popup_snap_ln">Segui la linea vicina</string>
     <string name="popup_snap_to_splays">Collega agli splay vicini</string>
     <string name="popup_split_pt">Sdoppia il punto</string>
+    <!-- TODO string name="popup_split_pts">Adds points</string -->
     <string name="popup_split_ln">Taglia la linea</string>
     <string name="popup_sharp_pt">Rendi diritto</string>
     <string name="popup_curve_pt">Rendi curvo</string>

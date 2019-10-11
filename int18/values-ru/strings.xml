@@ -361,6 +361,7 @@
     <string name="popup_snap_ln">Привязать к ближайшей линии</string>
     <string name="popup_snap_to_splays">Прилепить к ближайшим боковым замерам</string>
     <string name="popup_split_pt">Дублировать точку</string>
+    <!-- TODO string name="popup_split_pts">Adds points</string -->
     <string name="popup_split_ln">Разорвать линию на точке</string>
     <string name="popup_sharp_pt">Спрямить сегмент</string>
     <string name="popup_curve_pt">Сгладить сегмент</string>

@@ -357,6 +357,7 @@
     <string name="popup_snap_ln">Attacher à la ligne la plus proche</string>
     <string name="popup_snap_to_splays">Attacher aux cheminements proches</string>
     <string name="popup_split_pt">Dupliquer le point</string>
+    <!-- TODO string name="popup_split_pts">Adds points</string -->
     <string name="popup_split_ln">Couper la ligne</string>
     <string name="popup_sharp_pt">Redresser le segment</string>
     <string name="popup_curve_pt">Lisser le segment</string>

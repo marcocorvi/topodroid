@@ -158,48 +158,57 @@ class SelectionPoint
           //   }
           // }
           if ( mRange != null ) {
-            LinePoint lp2 = mRange.end();
-            if ( lp2 != null ) {
-              if ( mRange.isSoft() ) {
-                float d0 = 0;
-                LinePoint lp0 = mPoint;
-                float dd = 2.0f/( 0.1f + mRange.endDistance() );
-                for ( LinePoint lp = mPoint.mNext; lp != lp2 && lp != null; lp=lp.mNext ) {
-                  d0 += lp0.distance( lp );
-                  float d = dd * d0;
-                  d = d*d;
-                  d = 1/(1+d*d);
-                  lp.shiftBy( d*dx, d*dy );
-                  lp0 = lp;
-                }
-                mRange.setEndDistance( d0 );
-              } else { // if ( mRange.isHard() ) 
-                for ( LinePoint lp = mPoint.mNext; lp != lp2 && lp != null; lp=lp.mNext ) {
-                  lp.shiftBy( dx, dy );
-                }
-                lp2.shiftBy( dx, dy );
+            if ( mRange.isItem() ) { // FIXME item-shift could be a for on item points - but the point should not have been shifted already
+              for ( LinePoint lp = mPoint.mPrev; lp != null; lp=lp.mPrev ) {
+                lp.shiftBy( dx, dy );
               }
-            }
-            LinePoint lp1 = mRange.start();
-            if ( lp1 != null ) {
-              if ( mRange.isSoft() ) {
-                float d0 = 0;
-                float dd = 2.0f/( 0.1f + mRange.startDistance() );
-	        LinePoint lp0 = mPoint;
-                for ( LinePoint lp = mPoint.mPrev; lp != lp1 && lp != null; lp=lp.mPrev ) {
-                  d0 += lp0.distance( lp );
-                  float d = dd * d0;
-                  d = d*d;
-                  d = 1/(1+d*d); // 1/(1 + d^4)
-                  lp.shiftBy( d*dx, d*dy );
-                  lp0 = lp;
+              for ( LinePoint lp = mPoint.mNext; lp != null; lp=lp.mNext ) {
+                lp.shiftBy( dx, dy );
+              }
+            } else { // isSoft() || isHard()
+              LinePoint lp2 = mRange.end();
+              if ( lp2 != null ) {
+                if ( mRange.isSoft() ) {
+                  float d0 = 0;
+                  LinePoint lp0 = mPoint;
+                  float dd = 2.0f/( 0.1f + mRange.endDistance() );
+                  for ( LinePoint lp = mPoint.mNext; lp != lp2 && lp != null; lp=lp.mNext ) {
+                    d0 += lp0.distance( lp );
+                    float d = dd * d0;
+                    d = d*d;
+                    d = 1/(1+d*d);
+                    lp.shiftBy( d*dx, d*dy );
+                    lp0 = lp;
+                  }
+                  mRange.setEndDistance( d0 );
+                } else { // if ( mRange.isHard() || mRange.isItem() )
+                  for ( LinePoint lp = mPoint.mNext; lp != lp2 && lp != null; lp=lp.mNext ) {
+                    lp.shiftBy( dx, dy );
+                  }
+                  lp2.shiftBy( dx, dy );
                 }
-                mRange.setStartDistance( d0 );
-              } else { // if ( mRange.isHard() ) 
-                for ( LinePoint lp = mPoint.mPrev; lp != lp1 && lp != null; lp=lp.mPrev ) {
-                  lp.shiftBy( dx, dy );
+              }
+              LinePoint lp1 = mRange.start();
+              if ( lp1 != null ) {
+                if ( mRange.isSoft() ) {
+                  float d0 = 0;
+                  float dd = 2.0f/( 0.1f + mRange.startDistance() );
+	          LinePoint lp0 = mPoint;
+                  for ( LinePoint lp = mPoint.mPrev; lp != lp1 && lp != null; lp=lp.mPrev ) {
+                    d0 += lp0.distance( lp );
+                    float d = dd * d0;
+                    d = d*d;
+                    d = 1/(1+d*d); // 1/(1 + d^4)
+                    lp.shiftBy( d*dx, d*dy );
+                    lp0 = lp;
+                  }
+                  mRange.setStartDistance( d0 );
+                } else { // if ( mRange.isHard() || mRange.isItem() )
+                  for ( LinePoint lp = mPoint.mPrev; lp != lp1 && lp != null; lp=lp.mPrev ) {
+                    lp.shiftBy( dx, dy );
+                  }
+                  lp1.shiftBy( dx, dy );
                 }
-                lp1.shiftBy( dx, dy );
               }
             }
           }

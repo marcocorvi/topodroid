@@ -46,7 +46,7 @@ class DrawingPointLinePath extends DrawingPath
 
   // access to mFirst mLast is used only by Selection
   LinePoint first() { return mFirst; }
-  // LinePoint last()  { return mLast; }
+  LinePoint last()  { return mLast; }
   boolean isNotEndpoint( LinePoint lp ) { return lp != mFirst && lp != mLast; }
 
   // FIXME-COPYPATH

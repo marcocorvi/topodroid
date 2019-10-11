@@ -363,6 +363,7 @@
     <string name="popup_snap_ln">Prichytiť na blízku čiaru</string>
     <string name="popup_snap_to_splays">Prichytiť na blízku pomocnú zámeru</string>
     <string name="popup_split_pt">Duplikovať bod</string>
+    <!-- TODO string name="popup_split_pts">Adds points</string -->
     <string name="popup_split_ln">Rozdeliť čiaru v bode</string>
     <string name="popup_sharp_pt">Vyrovnať segment</string>
     <string name="popup_curve_pt">Vyhladiť segment</string>

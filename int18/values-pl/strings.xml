@@ -365,6 +365,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="popup_snap_ln">Przyciągnij do najbliższej linii</string>
     <string name="popup_snap_to_splays">Przyciągnij do najbliższego domiaru</string>
     <string name="popup_split_pt">Zduplikowany punkt</string>
+    <!-- TODO string name="popup_split_pts">Adds points</string -->
     <string name="popup_split_ln">Utnij linię w punkcie</string>
     <string name="popup_sharp_pt">Wyprostuj segment</string>
     <string name="popup_curve_pt">Wygładź segment</string>

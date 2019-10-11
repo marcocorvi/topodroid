@@ -363,6 +363,7 @@
     <string name="popup_snap_ln">接至附近线</string>
     <string name="popup_snap_to_splays">接至附近的副线</string>
     <string name="popup_split_pt">复制点</string>
+    <!-- TODO string name="popup_split_pts">Adds points</string -->
     <string name="popup_split_ln">在线上的点剪切</string>
     <string name="popup_sharp_pt">拉直分段</string>
     <string name="popup_curve_pt">平滑分段</string>

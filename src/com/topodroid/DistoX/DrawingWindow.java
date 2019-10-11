@@ -129,20 +129,21 @@ public class DrawingWindow extends ItemDrawer
   private static final int IC_ADD           = 21+8;
   private static final int IC_BORDER_OK     = 21+9;
   private static final int IC_BORDER_BOX    = 21+10;
-  private static final int IC_ERASE_POINT   = 21+11;
-  private static final int IC_ERASE_LINE    = 21+12;
-  private static final int IC_ERASE_AREA    = 21+13;
-  private static final int IC_SMALL         = 21+14;
-  private static final int IC_LARGE         = 21+15;
-  private static final int IC_SELECT_ALL    = 21+16;
-  private static final int IC_SELECT_POINT  = 21+17;
-  private static final int IC_SELECT_LINE   = 21+18;
-  private static final int IC_SELECT_AREA   = 21+19;
-  private static final int IC_SELECT_SHOT   = 21+20;
-  private static final int IC_SELECT_STATION= 21+21;
-  private static final int IC_CONT_OFF      = 21+22;
+  private static final int IC_BORDER_ITEM   = 21+11;
+  private static final int IC_ERASE_POINT   = 21+12;
+  private static final int IC_ERASE_LINE    = 21+13;
+  private static final int IC_ERASE_AREA    = 21+14;
+  private static final int IC_SMALL         = 21+15;
+  private static final int IC_LARGE         = 21+16;
+  private static final int IC_SELECT_ALL    = 21+17;
+  private static final int IC_SELECT_POINT  = 21+18;
+  private static final int IC_SELECT_LINE   = 21+19;
+  private static final int IC_SELECT_AREA   = 21+20;
+  private static final int IC_SELECT_SHOT   = 21+21;
+  private static final int IC_SELECT_STATION= 21+22;
+  private static final int IC_CONT_OFF      = 21+23;
   private static final int IC_DELETE_OFF    = 17;
-  private static final int IC_DELETE_ON     = 21+23;
+  private static final int IC_DELETE_ON     = 21+24;
 
   private static final int BTN_DOWNLOAD = 3;  // index of mButton1 download button
   private static final int BTN_BLUETOOTH = 4; // index of mButton1 bluetooth button
@@ -200,20 +201,21 @@ public class DrawingWindow extends ItemDrawer
                         R.drawable.iz_plus,           // 21+8
                         R.drawable.iz_range_ok,       // 21+9
                         R.drawable.iz_range_box,      // 21+10
-                        R.drawable.iz_erase_point,    // 21+11
-                        R.drawable.iz_erase_line,     // 21+12
-                        R.drawable.iz_erase_area,     // 21+13
-                        R.drawable.iz_small,          // 21+14
-                        R.drawable.iz_large,          // 21+15
-                        R.drawable.iz_select_all,     // 21+16 all
-                        R.drawable.iz_select_point,   // 21+17 point
-                        R.drawable.iz_select_line,    // 21+18 line
-                        R.drawable.iz_select_area,    // 21+19 area
-                        R.drawable.iz_select_shot,    // 21+20 shot
-                        R.drawable.iz_select_station, // 21+21 station
-                        R.drawable.iz_cont_off,       // 21+22 continuation off
-			R.drawable.iz_delete,         // 21+23 do delete
-                        R.drawable.iz_dial_on,        // 21+24 set dial
+                        R.drawable.iz_range_item,     // 21+11
+                        R.drawable.iz_erase_point,    // 21+12
+                        R.drawable.iz_erase_line,     // 21+13
+                        R.drawable.iz_erase_area,     // 21+14
+                        R.drawable.iz_small,          // 21+15
+                        R.drawable.iz_large,          // 21+16
+                        R.drawable.iz_select_all,     // 21+17 all
+                        R.drawable.iz_select_point,   // 21+18 point
+                        R.drawable.iz_select_line,    // 21+19 line
+                        R.drawable.iz_select_area,    // 21+20 area
+                        R.drawable.iz_select_shot,    // 21+21 shot
+                        R.drawable.iz_select_station, // 21+22 station
+                        R.drawable.iz_cont_off,       // 21+23 continuation off
+			R.drawable.iz_delete,         // 21+24 do delete
+                        R.drawable.iz_dial_on,        // 21+25 set dial
                       };
   private static final int[] menus = {
                         R.string.menu_switch,
@@ -468,9 +470,10 @@ public class DrawingWindow extends ItemDrawer
   private BitmapDrawable mBMdownload_wait;
   private BitmapDrawable mBMjoin;
   private BitmapDrawable mBMjoin_no;
-  private BitmapDrawable mBMedit_box = null;
-  private BitmapDrawable mBMedit_ok  = null;
-  private BitmapDrawable mBMedit_no  = null;
+  private BitmapDrawable mBMedit_item = null;
+  private BitmapDrawable mBMedit_box  = null;
+  private BitmapDrawable mBMedit_ok   = null;
+  private BitmapDrawable mBMedit_no   = null;
   private BitmapDrawable mBMplan;
   private BitmapDrawable mBMextend;
   private BitmapDrawable mBMcont_none;
@@ -1630,9 +1633,10 @@ public class DrawingWindow extends ItemDrawer
         mButton3[ BTN_BORDER ].setPadding(4,4,4,4);
         mButton3[ BTN_BORDER ].setTextColor( 0xffffffff );
       }
-      mBMedit_box= MyButton.getButtonBackground( mApp, res, izons[IC_BORDER_BOX] );
-      mBMedit_ok = MyButton.getButtonBackground( mApp, res, izons[IC_BORDER_OK] ); 
-      mBMedit_no = MyButton.getButtonBackground( mApp, res, izons[IC_BORDER_NO] );
+      mBMedit_item = MyButton.getButtonBackground( mApp, res, izons[IC_BORDER_ITEM] );
+      mBMedit_box  = MyButton.getButtonBackground( mApp, res, izons[IC_BORDER_BOX] );
+      mBMedit_ok   = MyButton.getButtonBackground( mApp, res, izons[IC_BORDER_OK] ); 
+      mBMedit_no   = MyButton.getButtonBackground( mApp, res, izons[IC_BORDER_NO] );
     }
     mButton3[ mNrButton3 ] = mButton1[ mNrButton1 ];
     mBMjoin_no = MyButton.getButtonBackground( mApp, res, izons[IC_JOIN_NO] );
@@ -2417,7 +2421,7 @@ public class DrawingWindow extends ItemDrawer
         //   mDrawingSurface.addItemAt( x, y, mZoom, size );
         //   return;
         // }
-        if ( ! SelectionRange.isPoint( mDoEditRange ) ) {
+        if ( SelectionRange.isRange( mDoEditRange ) ) {
           // TDandroid.setButtonBackground( mButton3[ BTN_BORDER ], mBMedit_no );
           if ( mDrawingSurface.setRangeAt( x, y, mZoom, mDoEditRange, size ) ) {
             mMode = MODE_SHIFT;
@@ -2433,6 +2437,9 @@ public class DrawingWindow extends ItemDrawer
       setButton3PrevNext();
       if ( mHasSelected ) {
         if ( SelectionRange.isPoint( mDoEditRange ) ) {
+          mMode = MODE_SHIFT;
+        } else if ( SelectionRange.isItem( mDoEditRange ) ) {
+          mDrawingSurface.setRangeAt( x, y, mZoom, mDoEditRange, size );
           mMode = MODE_SHIFT;
         }
         setButton3Item( selection.mHotItem );
@@ -4414,22 +4421,23 @@ public class DrawingWindow extends ItemDrawer
         if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) {
           // ----- DUPLICATE LINE/AREA POINT - INSERT LINE/AREA POINTS IN RANGE
           //
-          text = getString(R.string.popup_split_pt);
+          boolean pointwise = SelectionRange.isPoint( mDoEditRange );
+          text = getString( pointwise? R.string.popup_split_pt : R.string.popup_split_pts );
           myTextView2 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
             new View.OnClickListener( ) {
               public void onClick(View v) {
                 if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // LINE/AREA
-                  if ( SelectionRange.isPoint( mDoEditRange ) ) {
+                  if ( pointwise ) {
                     mDrawingSurface.splitPointHotItem(); // split point 
                   } else {
-                    mDrawingSurface.insertPointsHotItem(); // insert points
+                    mDrawingSurface.insertPointsHotItem(); // insert points in range
                   }
                   modified();
                 }
                 dismissPopupEdit();
               }
             } );
-          if ( TDLevel.overExpert && TDSetting.mCompositeActions ) {
+          if ( TDLevel.overExpert && TDSetting.mCompositeActions && pointwise ) {
             myTextView2.setOnLongClickListener( new View.OnLongClickListener() {
               public boolean onLongClick( View v ) {
                 if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // LINE/AREA
@@ -4805,6 +4813,9 @@ public class DrawingWindow extends ItemDrawer
         case SelectionRange.RANGE_HARD:
           TDandroid.setButtonBackground( mButton3[ BTN_BORDER ], mBMedit_box );
           break;
+        case SelectionRange.RANGE_ITEM:
+          TDandroid.setButtonBackground( mButton3[ BTN_BORDER ], mBMedit_item );
+          break;
       }
     }
   }
@@ -5008,7 +5019,7 @@ public class DrawingWindow extends ItemDrawer
       } else if ( b == mButton3[k3++] ) { // PREV
         if ( mHasSelected ) {
           SelectionPoint pt = mDrawingSurface.prevHotItem( );
-          if ( SelectionRange.isPoint( mDoEditRange ) ) mMode = MODE_SHIFT;
+          if ( SelectionRange.isPointOrItem( mDoEditRange ) ) mMode = MODE_SHIFT;
           setButton3Item( pt );
         } else {
           makePopupFilter( b, Drawing.mSelectModes, 6, Drawing.CODE_SELECT, dismiss );
@@ -5016,7 +5027,7 @@ public class DrawingWindow extends ItemDrawer
       } else if ( b == mButton3[k3++] ) { // NEXT
         if ( mHasSelected ) {
           SelectionPoint pt = mDrawingSurface.nextHotItem( );
-          if ( SelectionRange.isPoint( mDoEditRange ) ) mMode = MODE_SHIFT;
+          if ( SelectionRange.isPointOrItem( mDoEditRange ) ) mMode = MODE_SHIFT;
           setButton3Item( pt );
         } else {
           setButtonSelectSize( mSelectScale + 1 ); // toggle select size

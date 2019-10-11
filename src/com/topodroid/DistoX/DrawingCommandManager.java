@@ -2220,6 +2220,13 @@ class DrawingCommandManager
       // mSelected.clear();
       return false;
     }
+
+    if ( SelectionRange.isItem( type ) ) {
+      DrawingPointLinePath path = (DrawingPointLinePath)item;
+      sp1.setRangeTypeAndPoints( type, path.first(), path.last(), 0, 0 );
+      return true;
+    }
+
     float radius = TDSetting.mCloseCutoff + size / zoom;
     SelectionPoint sp2 = null;
     // synchronized ( TDPath.mSelectedLock ) {
@@ -2231,6 +2238,7 @@ class DrawingCommandManager
       mSelected.clear();
       return false;
     }
+    
     // range is sp1 -- sp2
     LinePoint lp1 = sp1.mPoint;
     LinePoint lp2 = sp2.mPoint;
@@ -2348,13 +2356,14 @@ class DrawingCommandManager
     LinePoint lp2 = sp.mRange.end();
     DrawingPointLinePath line = (DrawingPointLinePath)sp.mItem;
 
+    // lp0 if the point after lp1 - lp is inserted as midpoint between lp1 and lp0
     for ( LinePoint lp0 = lp1.mNext; lp1 != lp2 && lp0 != null; lp0 = lp0.mNext ) {
       float x = (lp1.x + lp0.x)/2;
       float y = (lp1.y + lp0.y)/2;
       LinePoint lp = line.insertPointAfter( x, y, lp1 ); 
       SelectionPoint sp1 = mSelection.insertPathPoint( line, lp );
       lp1 = lp0;
-    }
+    } 
     syncClearSelected();
   }
 
