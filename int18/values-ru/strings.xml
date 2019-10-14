@@ -8,8 +8,8 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Нажмите "НАЗАД" еще раз для выхода</string>
 
-    <!-- TODO string name="new_survey_label">New survey</string -->
-    <!-- TODO string name="distox_label">DistoX</string -->
+    <string name="new_survey_label">Новая съёмка</string>
+    <string name="distox_label">Псевдоним DistoX</string>
 
     <!-- UNUSED string name="version_ask">Обновление до новой версии TopoDroid.\nВы хотите переустановить инструменты рисования?</string -->
     <!-- REPLACED string name="symbols_ask">Вы хотите переустановить инструменты рисования?</string -->
@@ -53,12 +53,12 @@
     <!-- string name="thp_danger">опасность</string -->
     <string name="thp_user">пользовательский</string>
     <string name="thp_label">подпись</string>
-    <!-- TODO string name="thp_section">section</string -->
-    <!-- TODO string name="thp_station">station</string -->
+    <string name="thp_section">сечение</string>
+    <string name="thp_station">пикет</string>
     <!-- string name="thp_danger">опасность</string -->
     <string name="thl_user">пользовательский</string>
     <string name="thl_wall">стена</string>
-    <!-- TODO string name="thl_section">section</string -->
+    <string name="thl_section">сечение</string>
     <string name="tha_user">пользовательский</string>
     <string name="tha_water">вода</string>
 
