@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 // import java.util.Locale;
 // import java.util.Stack;
 // import java.util.List;
@@ -24,8 +26,6 @@ import java.io.IOException;
 
 import android.graphics.Paint;
 import android.graphics.Path;
-
-// import android.util.Log;
 
 class SymbolLibrary
 {
@@ -118,6 +118,7 @@ class SymbolLibrary
   int getSymbolIndexByThNameOrGroup( String th_name, String group )
   {
     int nr = mSymbols.size();
+    // Log.v("DistoX-PLOT", "ThName <" + th_name + "> group <" + ( (group == null)? "null" : group ) + ">" );
     for ( int k=0; k<nr; ++k ) if ( mSymbols.get(k).hasThName( th_name) ) return k;
     for ( int k=0; k<nr; ++k ) if ( mSymbols.get(k).hasGroup( group) ) return k;
     return -1;

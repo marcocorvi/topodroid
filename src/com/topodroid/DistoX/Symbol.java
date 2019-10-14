@@ -91,7 +91,7 @@ class Symbol implements SymbolInterface
 
   // SymbolInterface methods
   public String getThName()     { return mThName; }
-  boolean hasThName( String th_name ) { return ( mThName.equals( th_name ) ); } 
+  boolean hasThName( String th_name ) { return mThName.equals( th_name ); } 
 
   String getGroup()      { return mGroup; }
   boolean hasGroup( String group ) { return mGroup != null && mGroup.equals( group ); }

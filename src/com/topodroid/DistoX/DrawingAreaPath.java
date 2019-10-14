@@ -14,6 +14,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -32,8 +34,6 @@ import java.io.IOException;
 // import java.util.List;
 // import java.util.ArrayList;
 import java.util.Locale;
-
-// import android.util.Log;
 
 /**
  */
@@ -128,6 +128,7 @@ class DrawingAreaPath extends DrawingPointLinePath
       BrushManager.mAreaLib.tryLoadMissingArea( thname );
       type = BrushManager.mAreaLib.getSymbolIndexByThNameOrGroup( thname, group );
       // TDLog.Log( TDLog.LOG_PLOT, "A: " + thname + " " + cnt + " " + visible + " " + orientation + " NP " + npt );
+      Log.v( "DistoX-PLOT", "A: " + type + " " + thname + " " + cnt + " " + visible + " " + orientation + " NP " + npt );
       if ( type < 0 ) {
         // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.addAreaFilename( thname );
         type = 0;
