@@ -1,5 +1,6 @@
 symbol point
 name minus
+name-pt menos
 th_name u:minus
 orientation no
 color 0xffffff

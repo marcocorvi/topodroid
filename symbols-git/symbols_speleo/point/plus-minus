@@ -1,5 +1,6 @@
 symbol point
 name plus-minus
+name-pt mais-menos
 th_name u:plus-minus
 orientation no
 color 0xffffff

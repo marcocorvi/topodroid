@@ -1,5 +1,6 @@
 symbol point
 name plus
+name-pt mais
 th_name u:plus
 orientation no
 color 0xffffff
