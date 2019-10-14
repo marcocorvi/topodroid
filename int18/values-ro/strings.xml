@@ -8,6 +8,9 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Apasă înca o dată BACK pentru a ieși</string>
 
+    <!-- TODO string name="new_survey_label">New survey</string -->
+    <!-- TODO string name="distox_label">DistoX</string -->
+
     <!-- UNUSED string name="version_ask">Se actualizează TopoDroid la o nouă versiune.\nVrei să reinstalezi uneltele de desen?</string -->
     <string name="symbols_ask">Vrei să instalezi uneltele de desen v.%1$s?\n(Current v.%2$s)</string>
 
@@ -50,9 +53,12 @@
 
     <string name="thp_user">utilizator</string>
     <string name="thp_label">etichetă</string>
+    <!-- TODO string name="thp_section">section</string -->
+    <!-- TODO string name="thp_station">station</string -->
     <!-- UNUSED string name="thp_danger">pericol</string -->
     <string name="thl_user">utilizator</string>
     <string name="thl_wall">perete</string>
+    <!-- TODO string name="thl_section">section</string -->
     <string name="tha_user">utilizator</string>
     <string name="tha_water">apă</string>
 

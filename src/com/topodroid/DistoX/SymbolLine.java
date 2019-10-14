@@ -41,7 +41,6 @@ class SymbolLine extends Symbol
   boolean mStyleStraight;
   boolean mClosed;
   int mStyleX;            // X times (one out of how many point to use)
-  String mGroup;          // group of this line (null if no group)
 
   @Override public String getName()  { return mName; }
   @Override public String getThName( ) { return mThName; }
@@ -54,31 +53,29 @@ class SymbolLine extends Symbol
   // @Override public boolean setAngle( float angle ) { }
   // @Override public int getAngle() { return 0; }
 
-  String getGroup() { return mGroup; }
-
   // width = 1;
   // no effect
-  SymbolLine( String name, String th_name, String fname, String group, int color, int level )
+  SymbolLine( String name, String th_name, String group, String fname, int color, int level )
   {
-    super( th_name, fname );
-    init( name, group, color, 1 );
+    super( th_name, group, fname );
+    init( name, color, 1 );
     makePath();
     mLevel = level;
   }
 
   // no effect
-  SymbolLine( String name, String th_name, String fname, String group, int color, float width, int level )
+  SymbolLine( String name, String th_name, String group, String fname, int color, float width, int level )
   {
-    super( th_name, fname );
-    init( name, group, color, width );
+    super( th_name, group, fname );
+    init( name, color, width );
     makePath();
     mLevel = level;
   }
 
-  SymbolLine( String name, String th_name, String fname, String group, int color, float width, PathEffect effect_dir, PathEffect effect_rev, int level )
+  SymbolLine( String name, String th_name, String group, String fname, int color, float width, PathEffect effect_dir, PathEffect effect_rev, int level )
   {
-    super( th_name, fname );
-    init( name, group, color, width );
+    super( th_name, group, fname );
+    init( name, color, width );
     mPaint.setPathEffect( effect_dir );
     mRevPaint.setPathEffect( effect_rev );
     mHasEffect = true;
@@ -86,10 +83,9 @@ class SymbolLine extends Symbol
     mLevel = level;
   }
 
-  private void init( String name, String group, int color, float width )
+  private void init( String name, int color, float width )
   {
     mName   = name;
-    mGroup  = group;
     mPaint  = new Paint();
     mPaint.setDither(true);
     mPaint.setColor( color );
@@ -106,7 +102,7 @@ class SymbolLine extends Symbol
 
   SymbolLine( String filepath, String fname, String locale, String iso ) 
   {
-    super( null, fname );
+    super( null, null, fname );
     mStyleStraight = false;
     mClosed = false;
     mStyleX = 1;

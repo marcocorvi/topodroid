@@ -123,6 +123,7 @@ void readPoint( FILE * fp )
   float cy = readFloat( fp ); 
   printf("%ld= POINT: X %.3f Y %.3f\n", pos, cx, cy );
   readString( "  Type ", fp );
+  if ( VERSION >= 401147 ) readString( "  Group ", fp );
   orient = readFloat( fp );
   scale  = readInt( fp );
   lvl = (VERSION >= 401090 )? readInt( fp ) : 0xff;
@@ -138,6 +139,7 @@ void readLabel( FILE * fp )
   long pos = ftell( fp );
   float cx = readFloat( fp );
   float cy = readFloat( fp ); 
+  // if ( VERSION >= 401147 ) readString( "  Group ", fp ); // label has null group 
   azi   = readFloat( fp ); // orientation
   scale = readInt( fp );   
   lvl = (VERSION >= 401090 )? readInt( fp ) : 0xff;
@@ -175,6 +177,7 @@ void readLine( FILE * fp )
   int outline, lvl;
   printf("%ld= LINE:\n", pos);
   readString( "  Type ", fp );                // name
+  if ( VERSION >= 401147 ) readString( "  Group ", fp );
   fread( &closed, sc, 1, fp );
   fread( &reversed, sc, 1, fp );
   outline = readInt( fp );
@@ -194,6 +197,7 @@ void readArea( FILE * fp )
   float orient;
   printf("%ld= AREA: ", pos);
   readString( "  Type ", fp );         // name
+  if ( VERSION >= 401147 ) readString( "  Group ", fp );
   readString( "  Prefix ", fp );         // prefix
   cnt = readInt( fp );      // counter
   fread( &ch, sc, 1, fp );  // visibility
@@ -212,6 +216,7 @@ void readAutoStation( FILE * fp )
   float y = readFloat( fp );
   printf("%ld= STATION:\n", pos);
   readString( "  Name ", fp );          // name
+  // if ( VERSION >= 401147 ) readString( "  Group ", fp ); // no group
   lvl = (VERSION >= 401090 )? readInt( fp ) : 0xff;
   section = readInt( fp );
   printf("  X %.2f Y %.2f Level %02x X-section %d", x, y, lvl, section );
@@ -223,7 +228,7 @@ void readAutoStation( FILE * fp )
   printf("\n");
 }
 
-void readUserStation( FILE * fp )
+void readUserStation( FILE * fp ) // user station has no group
 {
   long pos = ftell( fp );
   float x = readFloat( fp );   // position
@@ -232,26 +237,28 @@ void readUserStation( FILE * fp )
   int lvl = (VERSION >= 401090 )? readInt( fp ) : 0xff;
   printf("%ld= USER-STTAION:\n", pos);
   readString( "  Name ", fp );            // name
+  // if ( VERSION >= 401147 ) readString( "  Group ", fp ); // no group
   printf("  Scale %d X %.2f Y %.2f Level %02x\n", s, x, y, lvl );
 }
 
-void readSpecial( FILE * fp )
+void readSpecial( FILE * fp ) // special path has no group
 {
   long pos = ftell( fp );
   int s   = readInt( fp );   // type
   float x = readFloat( fp ); // center X
   float y = readFloat( fp ); // center Y
   int lvl = (VERSION >= 401090 )? readInt( fp ) : 0xff;
+  // if ( VERSION >= 401147 ) readString( "  Group ", fp ); // no group
   printf("%ld= SPECIAL: Type %d X %.2f Y %.2f Level %02x\n", pos, s, x, y, lvl );
 }
 
-void readSpecialPoint( FILE * fp, const char * type ) 
+void readSpecialPoint( FILE * fp, const char * type )  // audio - photo
 {
   long pos = ftell( fp );
   float x = readFloat( fp );
   float y = readFloat( fp );
-  float o = 0; 
-  if ( VERSION > 207043 ) o = readFloat( fp ); // orientation 
+  // if ( VERSION >= 401147 ) readString( "  Group ", fp ); // no group
+  float o = ( VERSION > 207043 )? o = readFloat( fp ) : 0; // orientation 
   int s = readInt( fp ); // scale
   int lvl = (VERSION >= 401090 )? readInt( fp ) : 0xff;
   printf("%ld= SPECIAL POINT: Type %s Level %02x: ", pos, type, lvl );

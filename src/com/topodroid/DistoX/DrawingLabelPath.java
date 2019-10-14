@@ -62,6 +62,7 @@ class DrawingLabelPath extends DrawingPointPath
       ccy = y + dis.readFloat( );
       // String th_name = dis.readUTF( );
       // type = BrushManager.getPointLabelIndex();
+      // if ( version > 401147 ) group = dis.readUTF() // label has null group and is guaranteed to exist
       if ( version > 207043 ) orientation = dis.readFloat( );
       scale = dis.readInt( );
       if ( version > 401090 ) level = dis.readInt();
@@ -200,11 +201,13 @@ class DrawingLabelPath extends DrawingPointPath
   @Override
   void toDataStream( DataOutputStream dos )
   {
+    // label has null group
     try {
       dos.write( 'T' );
       dos.writeFloat( cx );
       dos.writeFloat( cy );
       // dos.writeUTF( BrushManager.mPointLib.getSymbolThName(mPointType) );
+      // if ( version >= 401147 ) dos.writeUTF( "" ); // label has null group
       dos.writeFloat( (float)mOrientation ); // from version 2.7.4e
       dos.writeInt( mScale );
       // if ( version >= 401090 ) 

@@ -26,6 +26,7 @@ class Symbol implements SymbolInterface
 
   boolean mEnabled;  //!< whether the symbol is enabled in the library
   String  mThName;   // therion name
+  String  mGroup;    // group of this symbol (null if no group)
   // String  mFilename; // filename coincide with therion name
   int     mCsxLayer;    // cSurvey layer
   int     mCsxType;
@@ -41,6 +42,7 @@ class Symbol implements SymbolInterface
   {
     mEnabled = true;
     mThName  = null;
+    mGroup   = null;
     // mFilename = null;
     mCsxLayer = -1;
     mCsxType  = -1;
@@ -51,11 +53,14 @@ class Symbol implements SymbolInterface
     mLevel = DrawingLevel.LEVEL_DEFAULT;
   }
 
-  // filename not used
-  Symbol( String th_name, String filename ) 
+  // @param th_name   therion name (must be non-null)
+  // @param group     symbol group (can be null)
+  // @param filename  not used
+  Symbol( String th_name, String group, String filename ) 
   { 
     mEnabled  = true;
     mThName   = th_name;
+    mGroup    = group;
     // mFilename = filename;
     mCsxLayer = -1;
     mCsxType  = -1;
@@ -73,6 +78,7 @@ class Symbol implements SymbolInterface
   { 
     mEnabled  = enabled; 
     mThName   = null;
+    mGroup    = null;
     // mFilename = null;
     mCsxLayer = -1;
     mCsxType  = -1;
@@ -85,6 +91,10 @@ class Symbol implements SymbolInterface
 
   // SymbolInterface methods
   public String getThName()     { return mThName; }
+  boolean hasThName( String th_name ) { return ( mThName.equals( th_name ) ); } 
+
+  String getGroup()      { return mGroup; }
+  boolean hasGroup( String group ) { return mGroup != null && mGroup.equals( group ); }
 
   // filename is not used - symbols are distinguished by their th_name
   // public String getFilename()   { return mThName.startsWith("u") ? mThName.substring(2) : mThName; /* mFilename; */ }

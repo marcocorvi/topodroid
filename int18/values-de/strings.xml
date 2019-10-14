@@ -8,6 +8,9 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Erneut ZURÜCK drücken zum verlassen</string>
 
+    <!-- TODO string name="new_survey_label">New survey</string -->
+    <!-- TODO string name="distox_label">DistoX</string -->
+
     <!-- UNUSED string name="version_ask">TopoDroid wurde auf eine neue Version aktualisiert.\nSollen die Zeichensymbole aktualisiert werden?</string -->
     <string name="symbols_ask">Zeichenwerkzeuge von v.%2$s auf v.%1$s aktualisieren?</string>
 
@@ -48,9 +51,12 @@
 <!-- names of therion items -->
     <string name="thp_user">Nutzer</string>
     <string name="thp_label">Beschriftung</string>
+    <!-- TODO string name="thp_section">section</string -->
+    <!-- TODO string name="thp_station">station</string -->
     <!-- UNUSED string name="thp_danger">Gefahr</string -->
     <string name="thl_user">Nutzer</string>
     <string name="thl_wall">Wand</string>
+    <!-- TODO string name="thl_section">section</string -->
     <string name="tha_user">Nutzer</string>
     <string name="tha_water">Wasser</string>
 

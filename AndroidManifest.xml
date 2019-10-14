@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="401145"
-      android:versionName="4.1.4z"
+      android:versionCode="401147"
+      android:versionName="4.1.4B"
     >
     <!-- android:debuggable="true" -->
     <!-- Android SDK dependencies:
@@ -80,6 +80,9 @@
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
           </intent-filter>
+          <meta-data android:name="android.app.shortcuts"
+                     android:resource="@xml/shortcuts"
+          />
         </activity>
 
         <!-- activity android:name=".ItemDrawer"

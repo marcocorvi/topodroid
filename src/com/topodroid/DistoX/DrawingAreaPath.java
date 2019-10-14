@@ -114,8 +114,10 @@ class DrawingAreaPath extends DrawingPointLinePath
     float orientation;
     int level = DrawingLevel.LEVEL_DEFAULT;
     String thname, prefix;
+    String group = null;
     try {
       thname = dis.readUTF();
+      if ( version >= 401147 ) group = dis.readUTF();
       prefix = dis.readUTF();
       cnt = dis.readInt();
       visible = ( dis.read( ) == 1 );
@@ -124,7 +126,7 @@ class DrawingAreaPath extends DrawingPointLinePath
       int npt = dis.readInt( );
 
       BrushManager.mAreaLib.tryLoadMissingArea( thname );
-      type = BrushManager.mAreaLib.getSymbolIndexByThName( thname );
+      type = BrushManager.mAreaLib.getSymbolIndexByThNameOrGroup( thname, group );
       // TDLog.Log( TDLog.LOG_PLOT, "A: " + thname + " " + cnt + " " + visible + " " + orientation + " NP " + npt );
       if ( type < 0 ) {
         // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.addAreaFilename( thname );
@@ -337,10 +339,13 @@ class DrawingAreaPath extends DrawingPointLinePath
   @Override
   void toDataStream( DataOutputStream dos )
   {
-    String name = BrushManager.mAreaLib.getSymbolThName( mAreaType );
+    String name  = BrushManager.mAreaLib.getSymbolThName( mAreaType );
+    String group = BrushManager.mAreaLib.getSymbolGroup( mAreaType );
     try {
       dos.write( 'A' );
       dos.writeUTF( name );
+      // if ( version >= 401147 )
+        dos.writeUTF( (group != null)? group : "" );
       dos.writeUTF( (mPrefix != null)? mPrefix : "" );
       dos.writeInt( mAreaCnt );
       dos.write( isVisible()? 1 : 0 );

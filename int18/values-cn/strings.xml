@@ -8,6 +8,9 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">再次点击返回键退出</string>
 
+    <!-- TODO string name="new_survey_label">New survey</string -->
+    <!-- TODO string name="distox_label">DistoX</string -->
+
     <!-- UNUSED string name="version_ask">Updating to a new version of TopoDroid.\nDo you want to reinstall drawing tools?</string -->
     <string name="symbols_ask">安装绘图工具 v.%1$s?\n(Current v.%2$s)</string>
 
@@ -49,9 +52,12 @@
 
     <string name="thp_user">用户</string>
     <string name="thp_label">标注</string>
+    <!-- TODO string name="thp_section">section</string -->
+    <!-- TODO string name="thp_station">station</string -->
     <!-- UNUSED string name="thp_danger">danger</string -->
     <string name="thl_user">用户</string>
     <string name="thl_wall">洞壁</string>
+    <!-- TODO string name="thl_section">section</string -->
     <string name="tha_user">用户</string>
     <string name="tha_water">水</string>
 

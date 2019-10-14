@@ -162,7 +162,9 @@ class BrushManager
   static void makePaths( Context ctx, Resources res )
   {
     if ( mStationSymbol == null ) {
-      mStationSymbol = new SymbolPoint( "station", "station", "station", 0xffff6633, 
+      String th_name = res.getString( R.string.p_station );
+      String name    = res.getString( R.string.thp_station );
+      mStationSymbol = new SymbolPoint( name, th_name, null, th_name, 0xffff6633, 
         "addCircle 0 0 0.4 moveTo -3.0 1.73 lineTo 3.0 1.73 lineTo 0.0 -3.46 lineTo -3.0 1.73", false, DrawingLevel.LEVEL_WALL );
     }
     // if ( mSymbolHighlight == null ) {

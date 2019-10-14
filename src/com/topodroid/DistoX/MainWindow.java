@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-// import android.util.Log;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -167,6 +167,26 @@ public class MainWindow extends Activity
   // ---------------------------------------------------------------
   // list items click
 
+  private void startDistoXActivity()
+  {
+    if ( DeviceUtil.hasAdapter() ) {
+      if ( DeviceUtil.isAdapterEnabled() ) {
+        // TDLog.Debug( "start device window");
+        startActivity( new Intent( Intent.ACTION_VIEW ).setClass( mActivity, DeviceActivity.class ) );
+      } else {
+        TDToast.makeBad( R.string.not_enabled );
+      }
+    } else {
+      TDToast.makeBad( R.string.no_bt );
+    }
+  }
+
+  private void startSurveyDialog()
+  {
+    mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true ); // new-survey dialog: tell app to clear survey name and id
+    (new SurveyNewDialog( mActivity, this, -1, -1 )).show(); 
+  }
+
   @Override
   public void onClick(View view)
   { 
@@ -195,19 +215,9 @@ public class MainWindow extends Activity
     int k2 = 0;
     {
       if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) { // mBtnDevice
-        if ( DeviceUtil.hasAdapter() ) {
-          if ( DeviceUtil.isAdapterEnabled() ) {
-            // TDLog.Debug( "start device window");
-            startActivity( new Intent( Intent.ACTION_VIEW ).setClass( mActivity, DeviceActivity.class ) );
-          } else {
-            TDToast.makeBad( R.string.not_enabled );
-          }
-        } else {
-          TDToast.makeBad( R.string.no_bt );
-        }
+        startDistoXActivity();
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // NEW SURVEY
-        mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true ); // new-survey dialog: tell app to clear survey name and id
-        (new SurveyNewDialog( mActivity, this, -1, -1 )).show(); 
+        startSurveyDialog();
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // IMPORT
         File[] files = TDPath.getImportFiles();
         File[] zips = TDPath.getZipFiles();
@@ -553,6 +563,22 @@ public class MainWindow extends Activity
       loader.start();
     }
     setTheTitle();
+
+    Intent intent = getIntent();
+    if ( intent != null ) {
+      Bundle extras = intent.getExtras();
+      if ( extras != null ) {
+        String action = intent.getExtras().getString("action");
+        if ( action != null ) {
+          // Log.v("DistoX-SHORT", "action " + action);
+          if ( action.equals("new_survey") ) {
+            startSurveyDialog( );
+          } else if ( action.equals("distox") ) {
+            startDistoXActivity();
+          }
+        }
+      }
+    }
   }
 
   private void doBackupsClear()

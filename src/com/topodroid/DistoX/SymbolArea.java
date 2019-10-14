@@ -45,7 +45,6 @@ class SymbolArea extends Symbol
   TileMode mYMode;
 
   @Override public String getName()  { return mName; }
-  @Override public String getThName( ) { return mThName; }
   @Override public Paint  getPaint() { return mPaint; }
   @Override public Path   getPath()  { return mPath; }
   @Override public boolean isOrientable() { return mOrientable; }
@@ -73,10 +72,10 @@ class SymbolArea extends Symbol
    * color 0xaarrggbb
    * level canvas level
    */
-  SymbolArea( String name, String th_name, String fname, int color, Bitmap bitmap, TileMode xmode, TileMode ymode,
+  SymbolArea( String name, String th_name, String group, String fname, int color, Bitmap bitmap, TileMode xmode, TileMode ymode,
               boolean close_horizontal, int level )
   {
-    super( th_name, fname );
+    super( th_name, group, fname );
     mName   = name;
     mColor  = color;
     mLevel  = level;
@@ -131,7 +130,7 @@ class SymbolArea extends Symbol
 
   SymbolArea( String filepath, String fname, String locale, String iso )
   {
-    super( null, fname );
+    super( null, null, fname );
     mOrientable  = false;
     // FIXME AREA_ORIENT
     mOrientation = 0;
@@ -187,10 +186,11 @@ class SymbolArea extends Symbol
    */
   private void readFile( String filename, String locale, String iso )
   {
-    // Log.v(  TopoDroidApp.TAG, "SymbolPoint::readFile " + filename + " " + locale + " " + iso );
+    // Log.v(  TopoDroidApp.TAG, "SymbolArea::readFile " + filename + " " + locale + " " + iso );
   
     String name    = null;
     String th_name = null;
+    String group   = null;
     int color      = 0;
     int alpha      = 0x66;
     int alpha_bg   = 0x33;
@@ -235,6 +235,11 @@ class SymbolArea extends Symbol
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	      if ( k < s ) {
   	        th_name = vals[k]; // should .trim(); for tab etc. ? no: require syntax without tabs etc.
+  	      }
+  	    } else if ( vals[k].equals("group") ) {  
+  	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	      if ( k < s ) {
+  	        group = vals[k]; // should .trim(); for tab etc. ? no: require syntax without tabs etc.
   	      }
             } else if ( vals[k].equals("csurvey") ) {
               // csurvey <layer> <category> <pen_type> <brush_type>
@@ -338,6 +343,7 @@ class SymbolArea extends Symbol
   	      if ( name != null && th_name != null ) { // at this point if both are not null, they have both positive length
                 mName   = name;
                 mThName = th_name;
+                mGroup  = group;
                 mPaint  = new Paint();
                 mPaint.setDither(true);
                 mColor = (alpha << 24) | color;

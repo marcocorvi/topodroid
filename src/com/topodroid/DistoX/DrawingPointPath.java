@@ -13,7 +13,7 @@
 
 package com.topodroid.DistoX;
 
-// import android.util.Log;
+import android.util.Log;
 
 import android.graphics.Canvas;
 // import android.graphics.Paint;
@@ -130,22 +130,24 @@ class DrawingPointPath extends DrawingPath
     int   scale;
     int   level = DrawingLevel.LEVEL_DEFAULT;
     String name;  // th-name
+    String group = null;
     String options = null;
     String text = null;
     try {
       ccx = x + dis.readFloat();
       ccy = y + dis.readFloat();
       name = dis.readUTF( );
+      if ( version >= 401147 ) group = dis.readUTF();
       orientation = dis.readFloat();
       scale   = dis.readInt();
       if ( version >= 401090 ) level = dis.readInt();
-      if ( version >= 303066 ) text = dis.readUTF();
+      if ( version >= 303066 ) text  = dis.readUTF();
       options = dis.readUTF();
 
       BrushManager.mPointLib.tryLoadMissingPoint( name );
-      type = BrushManager.mPointLib.getSymbolIndexByThName( name );
+      type = BrushManager.mPointLib.getSymbolIndexByThNameOrGroup( name, group );
       // TDLog.Log( TDLog.LOG_PLOT, "P " + name + " " + type + " " + ccx + " " + ccy + " " + orientation + " " + scale + " options (" + options + ")" );
-      // Log.v( "DistoX-Pt", name + " " + type + " " + ccx + " " + ccy + " " + orientation + " " + scale + " options (" + options + ")" );
+      Log.v( "DistoX-Pt", name + " " + type + " " + ccx + " " + ccy + " " + orientation + " " + scale + " options (" + options + ")" );
       if ( type < 0 ) {
         // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.addPointFilename( name ); 
         type = 0;
@@ -450,12 +452,15 @@ class DrawingPointPath extends DrawingPath
   @Override
   void toDataStream( DataOutputStream dos )
   {
-    String name = BrushManager.mPointLib.getSymbolThName(mPointType);
+    String name  = BrushManager.mPointLib.getSymbolThName(mPointType);
+    String group = BrushManager.mPointLib.getSymbolGroup(mPointType);
     try {
       dos.write( 'P' );
       dos.writeFloat( cx );
       dos.writeFloat( cy );
       dos.writeUTF( name );
+      // if ( version >= 401147 )
+        dos.writeUTF( (group != null)? group : "" );
       dos.writeFloat( (float)mOrientation );
       dos.writeInt( mScale );
       // if ( version >= 401090 )

@@ -46,4 +46,13 @@
   <string name="packet_m" translatable="false">M</string>
   <string name="packet_c" translatable="false">C</string>
   <string name="packet_x" translatable="false">X</string>
+
+  
+  <string name="p_user" translatable="false">user</string>
+  <string name="p_label" translatable="false">label</string>
+  <string name="p_station" translatable="false">station</string>
+  <string name="p_section" translatable="false">section</string>
+  <string name="p_water" translatable="false">water</string>
+  <string name="p_wall" translatable="false">wall</string>
+
 </resources>

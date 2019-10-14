@@ -81,8 +81,10 @@ class DrawingLinePath extends DrawingPointLinePath
     int outline;
     int level = DrawingLevel.LEVEL_DEFAULT;
     String thname, options;
+    String group = null;
     try {
       thname = dis.readUTF();
+      if ( version >= 401147 ) group = dis.readUTF();
       closed = (dis.read() == 1);
       // visible= (dis.read() == 1);
       reversed = (dis.read() == 1);
@@ -91,7 +93,7 @@ class DrawingLinePath extends DrawingPointLinePath
       options = dis.readUTF();
 
       BrushManager.mLineLib.tryLoadMissingLine( thname );
-      type = BrushManager.mLineLib.getSymbolIndexByThName( thname ); 
+      type = BrushManager.mLineLib.getSymbolIndexByThNameOrGroup( thname, group ); 
       if ( type < 0 ) {
         // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.addLineFilename( thname );
         type = 0;
@@ -417,10 +419,13 @@ class DrawingLinePath extends DrawingPointLinePath
   @Override
   void toDataStream( DataOutputStream dos )
   {
-    String name = BrushManager.mLineLib.getSymbolThName( mLineType );
+    String name  = BrushManager.mLineLib.getSymbolThName( mLineType );
+    String group = BrushManager.mLineLib.getSymbolGroup( mLineType );
     try {
       dos.write( 'L' );
       dos.writeUTF( name );
+      // if ( version >= 401147 )
+        dos.writeUTF( (group != null)? group : "" );
       dos.write( isClosed()? 1 : 0 );
       // dos.write( isVisible()? 1 : 0 );
       dos.write( mReversed? 1 : 0 );

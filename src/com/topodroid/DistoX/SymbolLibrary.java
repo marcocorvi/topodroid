@@ -111,7 +111,15 @@ class SymbolLibrary
   int getSymbolIndexByThName( String th_name )
   {
     int nr = mSymbols.size();
-    for ( int k=0; k<nr; ++k ) if ( mSymbols.get(k).mThName.equals( th_name) ) return k;
+    for ( int k=0; k<nr; ++k ) if ( mSymbols.get(k).hasThName( th_name) ) return k;
+    return -1;
+  }
+
+  int getSymbolIndexByThNameOrGroup( String th_name, String group )
+  {
+    int nr = mSymbols.size();
+    for ( int k=0; k<nr; ++k ) if ( mSymbols.get(k).hasThName( th_name) ) return k;
+    for ( int k=0; k<nr; ++k ) if ( mSymbols.get(k).hasGroup( group) ) return k;
     return -1;
   }
 
@@ -138,6 +146,7 @@ class SymbolLibrary
 
   String getSymbolName( int k )   { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getName(); }
   String getSymbolThName( int k ) { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getThName(); }
+  String getSymbolGroup( int k )  { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getGroup(); }
   Paint getSymbolPaint( int k )   { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getPaint(); }
   Path  getSymbolPath( int k )    { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getPath(); }
   boolean isSymbolOrientable( int k )   { return k >= 0 && k < mSymbols.size() && mSymbols.get( k ).isOrientable(); }

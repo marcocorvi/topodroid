@@ -93,24 +93,35 @@ class SymbolPointLibrary extends SymbolLibrary
 
   static final private String p_label = "moveTo 0 3 lineTo 0 -6 lineTo -3 -6 lineTo 3 -6"; // "T" shape
   static final private String p_user = "addCircle 0 0 6";                                  // "o" shape
+  static final private String p_section = "moveTo -5 -5 lineTo -5 5 lineTo 5 5 lineTo 5 -5 lineTo -5 -5"; // square
 
   private void loadSystemPoints( Resources res )
   {
     SymbolPoint symbol;
     // Log.v(  TopoDroidApp.TAG, "SymbolPointLibrary::loadSystemPoints()" );
 
-    mPointUserIndex = mSymbols.size(); // 0 = no-text, no-value
-    symbol = new SymbolPoint( res.getString(R.string.thp_user), "u:user", "user", 0xffffffff, p_user, false, 0, DrawingLevel.LEVEL_USER );
+    mPointUserIndex = mSymbols.size(); // 0 = no-text, no-value. thname   group fname
+    String user = res.getString( R.string.p_user );
+    symbol = new SymbolPoint( res.getString(R.string.thp_user), "u:user", null, user, 0xffffffff, p_user, false, 0, DrawingLevel.LEVEL_USER );
     symbol.mCsxLayer = 6;
     symbol.mCsxType  = 8;
     symbol.mCsxCategory = 81;
     addSymbol( symbol );
 
     mPointLabelIndex = mSymbols.size(); // 1 = text
-    symbol = new SymbolPoint( res.getString(R.string.thp_label), "label", "label", 0xffffffff, p_label, true, 1, DrawingLevel.LEVEL_LABEL );
+    String label = res.getString( R.string.p_label );
+    symbol = new SymbolPoint( res.getString(R.string.thp_label), label, null, label, 0xffffffff, p_label, true, 1, DrawingLevel.LEVEL_LABEL );
     symbol.mCsxLayer = 6;
     symbol.mCsxType  = 8;
     symbol.mCsxCategory = 81;
+    addSymbol( symbol );
+
+    mPointSectionIndex = mSymbols.size();
+    String section = res.getString( R.string.p_section );
+    symbol = new SymbolPoint( res.getString(R.string.thp_section), section, null, section, 0xffcccccc, p_section, false, 0, DrawingLevel.LEVEL_USER );
+    symbol.mCsxLayer = 6;
+    symbol.mCsxType  = 6;
+    symbol.mCsxCategory = 80;
     addSymbol( symbol );
   }
 
@@ -136,6 +147,8 @@ class SymbolPointLibrary extends SymbolLibrary
 
         if ( fname.equals("photo") && ! TDandroid.checkCamera( ctx ) ) continue;
         if ( fname.equals("audio") && ! TDandroid.checkMicrophone( ctx ) ) continue;
+
+        // if ( fname.equals("user") || fname.equals("label") || fname.equals("section") ) continue;
 
         SymbolPoint symbol = new SymbolPoint( file.getPath(), fname, locale, iso );
         if ( symbol.mThName == null ) {

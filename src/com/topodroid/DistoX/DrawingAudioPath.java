@@ -64,16 +64,16 @@ class DrawingAudioPath extends DrawingPointPath
   static DrawingAudioPath loadDataStream( int version, DataInputStream dis, float x, float y )
   {
     // int type;
-    int lvl = DrawingLevel.LEVEL_DEFAULT;
     try {
       float orientation = 0;
       float ccx = x + dis.readFloat( );
       float ccy = y + dis.readFloat( );
       // String th_name = dis.readUTF( );
       // type = BrushManager.getPointLabelIndex();
+      // String group = ( version >= 401147 )? dis.readUTF() : ""; // audio has no group
       if ( version > 207043 ) orientation = dis.readFloat( ); // audio-point have no orientation
       int scale = dis.readInt( );
-      if ( version >= 401090 ) lvl = dis.readInt();
+      int lvl = ( version >= 401090 )? dis.readInt() : DrawingLevel.LEVEL_DEFAULT;
       String text = dis.readUTF(); // audio-point does not have text (not used)
       String options = dis.readUTF();
       int id = dis.readInt();
@@ -138,6 +138,7 @@ class DrawingAudioPath extends DrawingPointPath
       dos.writeFloat( cx );
       dos.writeFloat( cy );
       // dos.writeUTF( BrushManager.mPointLib.getSymbolThName(mPointType) );
+      // if ( version >= 401147 ) dos.writeUTF( (group != null)? group : "" ); // audio has no group
       dos.writeFloat( (float)mOrientation ); // from version 2.7.4e
       dos.writeInt( mScale );
       // if ( version >= 401090 )

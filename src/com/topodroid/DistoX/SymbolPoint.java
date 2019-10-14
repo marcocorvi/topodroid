@@ -75,8 +75,6 @@ class SymbolPoint extends Symbol
 
   String getDxf( ) { return mDxf; }
 
-  boolean hasThName( String th_name ) { return ( th_name.equals( mThName ) ); } 
-
   @Override public Path getPath( ) { return mPath; }
 
   Path getOrigPath( ) { return mOrigPath; }
@@ -85,16 +83,16 @@ class SymbolPoint extends Symbol
 
   SymbolPoint( String pathname, String fname, String locale, String iso )
   {
-    super( null, fname );
+    super( null, null, fname );
     mOrientable = false;
     mHasText = 0;
     mOrientation = 0.0;
     readFile( pathname, locale, iso );
   }
 
-  SymbolPoint( String n1, String tn1, String fname, int c1, String path, boolean orientable, int level )
+  SymbolPoint( String n1, String tn1, String group, String fname, int c1, String path, boolean orientable, int level )
   {
-    super( tn1, fname );
+    super( tn1, group, fname );
     mName  = n1;
     mDxf   = null;
     mPaint = makePaint( c1, Paint.Style.STROKE ); // FIXME style
@@ -111,9 +109,9 @@ class SymbolPoint extends Symbol
     mLevel = level;
   }
 
-  SymbolPoint( String n1, String tn1, String fname, int c1, String path, boolean orientable, int has_text, int level )
+  SymbolPoint( String n1, String tn1, String group, String fname, int c1, String path, boolean orientable, int has_text, int level )
   {
-    super( tn1, fname ); // FIXME fname
+    super( tn1, group, fname ); // FIXME fname
     mName  = n1;
     mDxf   = null;
     mPaint = makePaint( c1, Paint.Style.STROKE ); //FIXME style
@@ -173,6 +171,7 @@ class SymbolPoint extends Symbol
  
     String name    = null;
     String th_name = null;
+    String group   = null;
     int color      = 0;
     Paint.Style style = Paint.Style.STROKE;
     String path    = null;
@@ -214,6 +213,11 @@ class SymbolPoint extends Symbol
               // Log.v("DistoX-SP", "th name " + k + " / " + s );
               if ( k < s ) {
                 th_name = vals[k];
+              }
+            } else if ( vals[k].equals("group") ) {
+              ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+              if ( k < s ) {
+                group = vals[k];
               }
             } else if ( vals[k].equals("level") ) {
               ++k; while ( k < s && vals[k].length() == 0 ) ++k;
@@ -299,15 +303,16 @@ class SymbolPoint extends Symbol
                 if ( cnt == 0 ) {
                   mName   = name;
                   mThName = th_name;
+                  mGroup  = group;
                   mPaint  = makePaint( color, style );
                   makePath( path );
                   mOrigPath = new Path( mPath );
-                  // mPoint1 = new SymbolPointBasic( name, th_name, fname, color, path );
+                  // mPoint1 = new SymbolPointBasic( name, th_name, null, fname, color, path );
                 // } else if ( cnt == 1 ) {
                 //   if ( mOrientable == true ) {
                 //     // ERROR point1 is orientable
                 //   } else {
-                //     mPoint2 = new SymbolPointBasic( name, th_name, fname, color, path );
+                //     mPoint2 = new SymbolPointBasic( name, th_name, null, fname, color, path );
                 //     mOrientable = true;
                 //   }
                 // } else {

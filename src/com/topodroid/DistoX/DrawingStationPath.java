@@ -137,8 +137,9 @@ class DrawingStationPath extends DrawingPath
       dos.write('U');
       dos.writeFloat( cx );
       dos.writeFloat( cy );
+      // if ( version >= 401147 ) dos.writeUTF( "" ); // station has no group
       dos.writeInt( mScale );
-      // if ( version > 401090 ) 
+      // if ( version >= 401090 ) 
         dos.writeInt( mLevel );
       dos.writeUTF( mName );
     } catch ( IOException e ) {
@@ -151,7 +152,9 @@ class DrawingStationPath extends DrawingPath
     try {
       float x = dis.readFloat();
       float y = dis.readFloat();
+      // group = ( version >= 401147 )? dir.readUTF() : null; // station path has no group
       int scale = dis.readInt();
+      int level = ( version >= 401090 )? dis.readInt() : 1;
       String name = dis.readUTF();
       // TDLog.Log( TDLog.LOG_PLOT, "S " + name + " " + x + " " + y );
       return new DrawingStationPath( name, x, y, scale );

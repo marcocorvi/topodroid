@@ -8,6 +8,9 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Kliknij ponownie aby zakończyć</string>
 
+    <!-- TODO string name="new_survey_label">New survey</string -->
+    <!-- TODO string name="distox_label">DistoX</string -->
+
     <!-- UNUSED string name="version_ask">Updating to a new version of TopoDroid.\nDo you want to reinstall drawing tools?</string -->
     <string name="symbols_ask">Zainstaluj narzędzia do rysowania v.%1$s?\n(Obecnie v.%2$s)</string>
 
@@ -49,9 +52,12 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
     <string name="thp_user">użytkownik</string>
     <string name="thp_label">etykieta</string>
+    <!-- TODO string name="thp_section">section</string -->
+    <!-- TODO string name="thp_station">station</string -->
     <!-- UNUSED string name="thp_danger">danger</string -->
     <string name="thl_user">użytkownik</string>
     <string name="thl_wall">ściana</string>
+    <!-- TODO string name="thl_section">section</string -->
     <string name="tha_user">użytkownik</string>
     <string name="tha_water">woda</string>
 
