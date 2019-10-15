@@ -687,7 +687,6 @@
     <!-- UNUSED string name="layer_water">Water</string -->
     <!-- UNUSED string name="layer_text">Text</string -->
 
-
     <!-- UNUSED string name="remote_title">Device Remote Control</string -->
     <string name="remote_on">Laser zapnutý</string>
     <string name="remote_off">Laser vypnutý</string>
