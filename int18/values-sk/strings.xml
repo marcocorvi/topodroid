@@ -8,8 +8,8 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Pre návrat Opätovne stlačte tlačidlo SPÄŤ</string>
 
-    <!-- TODO string name="new_survey_label">New survey</string -->
-    <!-- TODO string name="distox_label">DistoX</string -->
+    <string name="new_survey_label">Nové Mapovanie</string>
+    <string name="distox_label">DistoX</string>
 
     <!-- UNUSED string name="version_ask">Updating to a new version of TopoDroid.\nDo you want to reinstall drawing tools?</string -->
     <string name="symbols_ask">Inštalovať kresliace symboly v.%1$s?\n(Aktuálne v.%2$s)</string>
@@ -52,12 +52,12 @@
 
     <string name="thp_user">Univerzálny bod</string>
     <string name="thp_label">Poznámka</string>
-    <!-- TODO string name="thp_section">section</string -->
-    <!-- TODO string name="thp_station">station</string -->
+    <string name="thp_section">Sekcia</string>
+    <string name="thp_station">Staničenie</string>
     <!-- UNUSED string name="thp_danger">danger</string -->
     <string name="thl_user">Univerzálna čiara</string>
     <string name="thl_wall">Stena</string>
-    <!-- TODO string name="thl_section">section</string -->
+    <string name="thl_section">Sekcia</string>
     <string name="tha_user">Univerzálna oblasť</string>
     <string name="tha_water">Voda</string>
 
@@ -369,7 +369,7 @@
     <string name="popup_snap_ln">Prichytiť na blízku čiaru</string>
     <string name="popup_snap_to_splays">Prichytiť na blízku pomocnú zámeru</string>
     <string name="popup_split_pt">Duplikovať bod</string>
-    <!-- TODO string name="popup_split_pts">Adds points</string -->
+    <string name="popup_split_pts">Pridať Body</string>
     <string name="popup_split_ln">Rozdeliť čiaru v bode</string>
     <string name="popup_sharp_pt">Vyrovnať segment</string>
     <string name="popup_curve_pt">Vyhladiť segment</string>
@@ -614,7 +614,7 @@
     <string name="button_eval_cal"  >Vyhodnotiť kalibr.</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
-    <!-- TODO string name="button_manual"    >User Manual</string -->
+    <string name="button_manual"    >Používateľský Manuál</string>
     <!-- UNUSED string name="button_measure"   >Measure   </string -->
     <!-- UNUSED string name="button_photo"   >Photo</string -->
     <!-- UNUSED string name="button_sensor"  >Sensors</string -->
@@ -700,7 +700,7 @@
     <string name="btn_install">Inštalovať</string>
 
     <string name="symbol_archeo">Archeológia</string>
-    <!-- TODO string name="symbol_anthro">Anthro</string -->
+    <string name="symbol_anthro">Antropológia</string>
     <string name="symbol_bio">Biológia</string>
     <string name="symbol_geo">Geológia</string>
     <string name="symbol_karst">Kras</string>
@@ -909,7 +909,7 @@
     <string name="title_settings_svx">Survex nastavenia Exportu</string>
     <string name="title_settings_th">Therion nastavenia Exportu</string>
     <string name="title_settings_dat">Compass nastavenia Exportu</string>
-    <!-- TODO string name="title_settings_tro">VisualTopo export settings</string -->
+    <string name="title_settings_tro">VisualTopo nastavenia Exportu</string>
     <string name="title_settings_svg">SVG nastavenia Exportu</string>
     <string name="title_settings_dxf">DXF nastavenia Exportu</string>
     <string name="title_settings_png">PNG nastavenia Exportu</string>
@@ -973,8 +973,8 @@
   
   <string name="pref_locale_title">Jazyk</string>
   <string name="pref_locale_summary">Výber jazyka aplikácie</string>
-  <!-- TODO string name="pref_orientation_title">Screen orientation</string -->
-  <!-- TODO string name="pref_orientation_summary">App screen orientation</string -->
+  <string name="pref_orientation_title">Orientácia Obrazovky</string>
+  <string name="pref_orientation_summary">Orientácia obrazovky aplikácie</string>
 
   <string name="pref_raw_data_title">Surové dáta</string>
   <string name="pref_raw_data_summary">Výber typu zobrazenia surových (nespracovaných) dát</string>
@@ -1262,8 +1262,8 @@
   <string name="pref_linestraight_summary">Povolí vyrovnanie celej Čiary</string>
   <string name="pref_path_multiselect_title">Viacnásobný výber</string>
   <string name="pref_path_multiselect_summary">Povolí viacnásobný výber</string>
-  <!-- TODO string name="pref_composite_actions_title">Composite actions</string -->
-  <!-- TODO string name="pref_composite_actions_summary">Enable line/area long-tap actions</string -->
+  <string name="pref_composite_actions_title">Združené akcie</string>
+  <string name="pref_composite_actions_summary">Povolí ďalšie možnosti po "dlhom podržaní" pri Čiarach a Plochách</string>
   <string name="pref_plane_interpolation_title">Interpolácia pôdorysu</string>
   <string name="pref_plane_interpolation_summary">Povolí interpoláciu pomocných zámer v pôdoryse</string>
   <string name="pref_plot_split_title">Spojiť/Rozdeliť Nákres</string>
