@@ -8,8 +8,8 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Нажмите "НАЗАД" еще раз для выхода</string>
 
-    <!-- TODO string name="new_survey_label">New survey</string -->
-    <!-- TODO string name="distox_label">DistoX</string -->
+    <string name="new_survey_label">Новая съёмка</string>
+    <string name="distox_label">Псевдоним DistoX</string>
 
     <!-- UNUSED string name="version_ask">Обновление до новой версии TopoDroid.\nВы хотите переустановить инструменты рисования?</string -->
     <!-- REPLACED string name="symbols_ask">Вы хотите переустановить инструменты рисования?</string -->
@@ -53,12 +53,12 @@
     <!-- string name="thp_danger">опасность</string -->
     <string name="thp_user">пользовательский</string>
     <string name="thp_label">подпись</string>
-    <!-- TODO string name="thp_section">section</string -->
-    <!-- TODO string name="thp_station">station</string -->
+    <string name="thp_section">сечение</string>
+    <string name="thp_station">пикет</string>
     <!-- string name="thp_danger">опасность</string -->
     <string name="thl_user">пользовательский</string>
     <string name="thl_wall">стена</string>
-    <!-- TODO string name="thl_section">section</string -->
+    <string name="thl_section">сечение</string>
     <string name="tha_user">пользовательский</string>
     <string name="tha_water">вода</string>
 
@@ -506,8 +506,8 @@
     <string name="description">описание</string>
     <string name="name">Название</string>
     <string name="team">группа топосъёмки</string>
-    <!-- TODO string name="init_station">start station</string -->
-    <!-- TODO string name="start_station">start station [%1$s]</string -->
+    <string name="init_station">начальный пикет</string>
+    <string name="start_station">начальный пикет [%1$s]</string>
     <!-- UNUSED string name="toggle_device">Переключить устройство в режим калибровки</string -->
     <string name="toggle_failed">Не удалось переключить DistoX</string>
     <string name="toggle_ok">Переключить DistoX в режим калибровки</string>
@@ -639,7 +639,7 @@
     <!-- UNUSED string name="button_select"    >Выбрать   </string -->
     <string name="button_search"    >Поиск    </string>
     <string name="button_merge"     >Объединить     </string>
-    <!-- TODO string name="button_saved"     >Saved station</string -->
+    <string name="button_saved"     >Сохраненный пикет</string>
     <string name="button_split"     >Разделить     </string>
     <string name="button_station"   >По центру</string>
     <string name="button_store"     >Записать   </string>
@@ -806,9 +806,9 @@
     <string name="help_previous">Предыдущий выбранный элемент</string>
     <string name="help_next">Следующий элемент в выборке</string>
     <string name="help_recover">Восстановить абрис из Бекапа</string>
-    <!-- TODO string name="help_reload_prev">Display newer backup</string -->
-    <!-- TODO string name="help_reload_next">Display older backup</string -->
-    <!-- TODO string name="help_reload_plot">Reload sketch backup</string -->
+    <string name="help_reload_prev">Показать свежий бекап</string>
+    <string name="help_reload_next">Показать старый бекап</string>
+    <string name="help_reload_plot">Загрузить бекап абриса</string>
     <string name="help_zoom_fit">Вместить абрис в экран</string>
    
     <string name="help_line_point">Действия с линиями и точками: соединить, разорвать, обрезать, удалить</string>
