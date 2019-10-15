@@ -818,6 +818,9 @@
     <string name="help_previous">Prejsť na predchádzajúci objekt vo výbere</string>
     <string name="help_next">Prejsť na nasledujúci objekt vo výbere</string>
     <string name="help_recover">Obnoviť nákres zo zálohy</string>
+    <string name="help_reload_prev">Zobraz novšiu zálohu</string>
+    <string name="help_reload_next">Zobraz staršiu zálohu</string>
+    <string name="help_reload_plot">Obnov zálohu Nákresu</string>
     <string name="help_zoom_fit">Zmeniť orientáciu obrazovky Sever/Západ</string>
    
     <string name="help_line_point">Akcie pre "body" Čiary: spojiť, rozdeliť, vystrihnúť, odstrániť</string>
