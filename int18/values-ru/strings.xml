@@ -506,6 +506,8 @@
     <string name="description">описание</string>
     <string name="name">Название</string>
     <string name="team">группа топосъёмки</string>
+    <!-- TODO string name="init_station">start station</string -->
+    <!-- TODO string name="start_station">start station [%1$s]</string -->
     <!-- UNUSED string name="toggle_device">Переключить устройство в режим калибровки</string -->
     <string name="toggle_failed">Не удалось переключить DistoX</string>
     <string name="toggle_ok">Переключить DistoX в режим калибровки</string>
@@ -637,6 +639,7 @@
     <!-- UNUSED string name="button_select"    >Выбрать   </string -->
     <string name="button_search"    >Поиск    </string>
     <string name="button_merge"     >Объединить     </string>
+    <!-- TODO string name="button_saved"     >Saved station</string -->
     <string name="button_split"     >Разделить     </string>
     <string name="button_station"   >По центру</string>
     <string name="button_store"     >Записать   </string>
@@ -803,6 +806,9 @@
     <string name="help_previous">Предыдущий выбранный элемент</string>
     <string name="help_next">Следующий элемент в выборке</string>
     <string name="help_recover">Восстановить абрис из Бекапа</string>
+    <!-- TODO string name="help_reload_prev">Display newer backup</string -->
+    <!-- TODO string name="help_reload_next">Display older backup</string -->
+    <!-- TODO string name="help_reload_plot">Reload sketch backup</string -->
     <string name="help_zoom_fit">Вместить абрис в экран</string>
    
     <string name="help_line_point">Действия с линиями и точками: соединить, разорвать, обрезать, удалить</string>
@@ -945,6 +951,7 @@
   <string name="pref_cat_exportimport">ИМПОРТ</string>
   <!-- OK string name="pref_cat_exportth">Therion</string -->
   <!-- OK string name="pref_cat_exportdat">Compass</string -->
+  <!-- OK string name="pref_cat_exporttro">VisualTopo</string -->
   <!-- OK string name="pref_cat_exportsvg">SVG</string -->
   <!-- OK string name="pref_cat_exportdxf">DXF</string -->
   <!-- OK string name="pref_cat_exportpng">PNG</string -->

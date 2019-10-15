@@ -509,6 +509,8 @@
     <string name="description">Descripción</string>
     <string name="name">Nombre</string>
     <string name="team">Grupo</string>
+    <!-- TODO string name="init_station">start station</string -->
+    <!-- TODO string name="start_station">start station [%1$s]</string -->
     <!-- UNUSED string name="toggle_device">Toggle device calibration mode</string -->
     <string name="toggle_failed">Error al alternar DistoX</string>
     <string name="toggle_ok">Alternar a modo de calibración DistoX</string>
@@ -639,6 +641,7 @@
     <!-- UNUSED string name="button_select"    >Seleccionar </string -->
     <string name="button_search"    >Buscar    </string>
     <string name="button_merge"     >Unir     </string>
+    <!-- TODO string name="button_saved"     >Saved station</string -->
     <string name="button_split"     >Dividir     </string>
     <string name="button_station"   >Centro at</string>
     <string name="button_store"     >Recibir   </string>
@@ -806,6 +809,9 @@
     <string name="help_previous">Anterior elemento de la selección</string>
     <string name="help_next">Siguiente elemento de la selección</string>
     <string name="help_recover">Recuperar dibujo de copia de seguridad</string>
+    <!-- TODO string name="help_reload_prev">Display newer backup</string -->
+    <!-- TODO string name="help_reload_next">Display older backup</string -->
+    <!-- TODO string name="help_reload_plot">Reload sketch backup</string -->
     <string name="help_zoom_fit">Ajustar dibujo a la pantalla</string>
    
     <string name="help_line_point">Editar punto o línea: unir, separar, cortar, eliminar</string>
@@ -949,6 +955,7 @@
   <string name="pref_cat_exportimport">IMPORTAR</string>
   <!-- OK string name="pref_cat_exportth">Therion</string -->
   <!-- OK string name="pref_cat_exportdat">Compass</string -->
+  <!-- OK string name="pref_cat_exporttro">VisualTopo</string -->
   <!-- OK string name="pref_cat_exportsvg">SVG</string -->
   <!-- OK string name="pref_cat_exportdxf">DXF</string -->
   <!-- OK string name="pref_cat_exportpng">PNG</string -->

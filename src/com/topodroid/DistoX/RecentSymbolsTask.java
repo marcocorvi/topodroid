@@ -110,29 +110,29 @@ class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
   private void loadRecentSymbols()
   {
     // Log.v("DistoX", "load recent tools");
-    BrushManager.mPointLib.setRecentSymbols( mRecentPoint );
-    BrushManager.mLineLib.setRecentSymbols( mRecentLine );
-    BrushManager.mAreaLib.setRecentSymbols( mRecentArea );
+    BrushManager.setRecentPoints( mRecentPoint );
+    BrushManager.setRecentLines( mRecentLine );
+    BrushManager.setRecentAreas( mRecentArea );
 
     String names = mData.getValue( "recent_points" );
     if ( names != null ) {
       String[] points = names.split(" ");
       for ( String point : points ) {
-        ItemDrawer.updateRecent( BrushManager.mPointLib.getSymbolByThName( point ), mRecentPoint );
+        ItemDrawer.updateRecent( BrushManager.getPointByThName( point ), mRecentPoint );
       }
     }
     names = mData.getValue( "recent_lines" );
     if ( names != null ) {
       String[] lines = names.split(" ");
       for ( String line : lines ) {
-        ItemDrawer.updateRecent( BrushManager.mLineLib.getSymbolByThName( line ), mRecentLine );
+        ItemDrawer.updateRecent( BrushManager.getLineByThName( line ), mRecentLine );
       }
     }
     names = mData.getValue( "recent_areas" );
     if ( names != null ) {
       String[] areas = names.split(" ");
       for ( String area : areas ) {
-        ItemDrawer.updateRecent( BrushManager.mAreaLib.getSymbolByThName( area ), mRecentArea );
+        ItemDrawer.updateRecent( BrushManager.getAreaByThName( area ), mRecentArea );
       }
     }
   }

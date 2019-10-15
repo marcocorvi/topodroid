@@ -504,6 +504,8 @@
     <string name="description">descriere</string>
     <string name="name">nume</string>
     <string name="team">echipă</string>
+    <!-- TODO string name="init_station">start station</string -->
+    <!-- TODO string name="start_station">start station [%1$s]</string -->
     <!-- UNUSED string name="toggle_device">Schimbă modul de calibrare al dispozitivului</string -->
     <string name="toggle_failed">Nu a putut fi comutat DistoX-ul</string>
     <string name="toggle_ok">DistoX-ul a fost comutat în modul calibrare</string>
@@ -633,6 +635,7 @@
     <!-- UNUSED string name="button_select"    >Selectează</string -->
     <string name="button_search"    >Caută      </string>
     <string name="button_merge"     >Îmbină     </string>
+    <!-- TODO string name="button_saved"     >Saved station</string -->
     <string name="button_split"     >Desparte   </string>
     <string name="button_station"   >Centrează la</string>
     <string name="button_store"     >Stochează  </string>
@@ -799,6 +802,9 @@
     <string name="help_previous">Elemenul anterior din selecție</string>
     <string name="help_next">Elemenul următor din selecție</string>
     <string name="help_recover">Reîncarcă schița din copia de rezervă</string>
+    <!-- TODO string name="help_reload_prev">Display newer backup</string -->
+    <!-- TODO string name="help_reload_next">Display older backup</string -->
+    <!-- TODO string name="help_reload_plot">Reload sketch backup</string -->
     <string name="help_zoom_fit">Încadrează schița pe ecran</string>
    
     <string name="help_line_point">Acțiuni ale punctelor liniei: cuplare/atașare, desparțire, taiere, ștergere</string>
@@ -941,6 +947,7 @@
   <string name="pref_cat_exportimport">IMPORTĂ</string>
   <!-- OK string name="pref_cat_exportth">Therion</string -->
   <!-- OK string name="pref_cat_exportdat">Compass</string -->
+  <!-- OK string name="pref_cat_exporttro">VisualTopo</string -->
   <!-- OK string name="pref_cat_exportsvg">SVG</string -->
   <!-- OK string name="pref_cat_exportdxf">DXF</string -->
   <!-- OK string name="pref_cat_exportpng">PNG</string -->

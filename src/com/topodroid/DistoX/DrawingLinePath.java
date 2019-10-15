@@ -92,8 +92,8 @@ class DrawingLinePath extends DrawingPointLinePath
       if ( version >= 401090 ) level = dis.readInt();
       options = dis.readUTF();
 
-      BrushManager.mLineLib.tryLoadMissingLine( thname );
-      type = BrushManager.mLineLib.getSymbolIndexByThNameOrGroup( thname, group ); 
+      BrushManager.tryLoadMissingLine( thname );
+      type = BrushManager.getLineIndexByThNameOrGroup( thname, group ); 
       if ( type < 0 ) {
         // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.addLineFilename( thname );
         type = 0;

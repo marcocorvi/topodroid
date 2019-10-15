@@ -300,7 +300,7 @@ class ItemRecentDialog extends MyDialog
 
   private void setPoint( int k )
   {
-    int index = BrushManager.mPointLib.getSymbolIndex( ItemDrawer.mRecentPoint[k] );
+    int index = BrushManager.getPointIndex( ItemDrawer.mRecentPoint[k] );
     if ( index >= 0 ) {
       mParent.mCurrentPoint = index;
       mParent.pointSelected( index, true );
@@ -309,7 +309,7 @@ class ItemRecentDialog extends MyDialog
 
   private void setLine( int k )
   {
-    int index = BrushManager.mLineLib.getSymbolIndex( ItemDrawer.mRecentLine[k] );
+    int index = BrushManager.getLineIndex( ItemDrawer.mRecentLine[k] );
     if ( index >= 0 ) {
       mParent.mCurrentLine = index;
       mParent.lineSelected( index, true );
@@ -318,7 +318,7 @@ class ItemRecentDialog extends MyDialog
 
   private void setArea( int k )
   {
-    int index = BrushManager.mAreaLib.getSymbolIndex( ItemDrawer.mRecentArea[k] );
+    int index = BrushManager.getAreaIndex( ItemDrawer.mRecentArea[k] );
     if ( index >= 0 ) {
       mParent.mCurrentArea = index;
       mParent.areaSelected( index, true );

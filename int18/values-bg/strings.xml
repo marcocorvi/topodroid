@@ -503,6 +503,8 @@
     <string name="description">описание</string>
     <string name="name">име</string>
     <string name="team">картировачи</string>
+    <!-- TODO string name="init_station">start station</string -->
+    <!-- TODO string name="start_station">start station [%1$s]</string -->
     <!-- string name="toggle_device">Toggle device calibration mode</string -->
     <string name="toggle_failed">Грешка при превключване на DistoX</string>
     <string name="toggle_ok">Включен/изключен режим на калибрация на DistoX</string>
@@ -633,6 +635,7 @@
     <!-- UNUSED string name="button_select"    >Избор     </string -->
     <string name="button_search"    >Търсене   </string>
     <string name="button_merge"     >Сливане   </string>
+    <!-- TODO string name="button_saved"     >Saved station</string -->
     <string name="button_split"     >Разделяне</string>
     <string name="button_station"   >Центриране в</string>
     <string name="button_store"     >Съхраняване</string>
@@ -798,6 +801,9 @@
     <string name="help_previous">Предишен избран елемент</string>
     <string name="help_next">Следващ избран елемент</string>
     <string name="help_recover">Възстановяване на скица от резервно копие</string>
+    <!-- TODO string name="help_reload_prev">Display newer backup</string -->
+    <!-- TODO string name="help_reload_next">Display older backup</string -->
+    <!-- TODO string name="help_reload_plot">Reload sketch backup</string -->
     <string name="help_zoom_fit">Показване на цялата скица на екрана</string>
 
     <string name="help_line_point">Действия за точка от линия: съединяване, разделяне, премахване</string>
@@ -934,6 +940,7 @@
   <!-- TODO string name="pref_cat_exportimport">IMPORT</string -->
   <!-- OK string name="pref_cat_exportth">Therion</string -->
   <!-- OK string name="pref_cat_exportdat">Compass</string -->
+  <!-- OK string name="pref_cat_exporttro">VisualTopo</string -->
   <!-- OK string name="pref_cat_exportsvg">SVG</string -->
   <!-- OK string name="pref_cat_exportdxf">DXF</string -->
   <!-- OK string name="pref_cat_exportpng">PNG</string -->

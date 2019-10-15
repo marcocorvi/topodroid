@@ -144,8 +144,8 @@ class DrawingPointPath extends DrawingPath
       if ( version >= 303066 ) text  = dis.readUTF();
       options = dis.readUTF();
 
-      BrushManager.mPointLib.tryLoadMissingPoint( name );
-      type = BrushManager.mPointLib.getSymbolIndexByThNameOrGroup( name, group );
+      BrushManager.tryLoadMissingPoint( name );
+      type = BrushManager.getPointIndexByThNameOrGroup( name, group );
       // TDLog.Log( TDLog.LOG_PLOT, "P " + name + " " + type + " " + ccx + " " + ccy + " " + orientation + " " + scale + " options (" + options + ")" );
       // Log.v( "DistoX-PLOT", name + " " + type + " " + ccx + " " + ccy + " " + orientation + " " + scale + " options (" + options + ")" );
       if ( type < 0 ) {

@@ -215,13 +215,13 @@ class DrawingIO
   //               }
   //             }
 
-  //             BrushManager.mPointLib.tryLoadMissingPoint( type );
+  //             BrushManager.tryLoadMissingPoint( type );
   //             // map pre 3.1.1 thnames to 3.1.1 names
   //             String thname = type;
   //             if ( thname.equals( "user" ) )        { thname = "u:user"; }
   //             else if ( thname.equals( "danger" ) ) { thname = "u:danger"; }
   //             else if ( thname.equals( "archeo" ) ) { thname = "archeo-material"; }
-  //             ptType = BrushManager.mPointLib.getSymbolIndexByThName( thname );
+  //             ptType = BrushManager.getPointIndexByThName( thname );
   //             // Log.v("DistoX", "type " + type + " thname " + thname + " " + ptType );
   //             if ( ptType < 0 ) {
   //               if ( missingSymbols != null ) missingSymbols.addPointFilename( type ); // add "type" to the missing point-types
@@ -286,10 +286,10 @@ class DrawingIO
   //                     line = readLine( br ); // area statement
   //                     String[] vals2 = line.split( " " );
   //                     if ( vals2.length >= 2 ) {
-  //                       BrushManager.mAreaLib.tryLoadMissingArea( vals2[1] );
+  //                       BrushManager.tryLoadMissingArea( vals2[1] );
   //                       String thname = vals2[1];
   //                       if ( thname.equals( "user" ) ) { thname = "u:user"; }
-  //                       arType = BrushManager.mAreaLib.getSymbolIndexByThName( thname );
+  //                       arType = BrushManager.getAreaIndexByThName( thname );
   //                       if ( arType < 0 ) {
   //                         if ( missingSymbols != null ) missingSymbols.addAreaFilename( vals2[1] );
   //                         arType = 0; // SymbolAreaLibrary.mAreaUserIndex; // FIXME
@@ -388,10 +388,10 @@ class DrawingIO
   //               
   //               int lnType = BrushManager.mLineLib.size();
   //               DrawingLinePath path = null;
-  //               BrushManager.mLineLib.tryLoadMissingLine( type );
+  //               BrushManager.tryLoadMissingLine( type );
   //               String thname = type;
   //               if ( thname.equals( "user" ) ) { thname = "u:user"; }
-  //               lnType = BrushManager.mLineLib.getSymbolIndexByThName( thname );
+  //               lnType = BrushManager.getLineIndexByThName( thname );
   //               if ( lnType < 0 ) {
   //                 if ( missingSymbols != null ) missingSymbols.addLineFilename( type );
   //                 lnType = 0; // SymbolLineLibrary.mLineUserIndex; // FIXME

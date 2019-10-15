@@ -230,7 +230,7 @@ class ParserPocketTopo extends ImportParser
               if ( point_count > 1 ) {
 		String th_name = PtCmapActivity.getLineThName( col );
                 // add a line to the plotCanvas
-		int line_type = BrushManager.mLineLib.getSymbolIndexByThName( th_name );
+		int line_type = BrushManager.getLineIndexByThName( th_name );
 		if ( line_type < 0 ) line_type = 0;
 		DrawingLinePath line = new DrawingLinePath( line_type );
 
@@ -268,7 +268,7 @@ class ParserPocketTopo extends ImportParser
 		paths.add( line );
               } else if ( point_count == 1 ) {
 		String th_name = PtCmapActivity.getPointThName(col);
-		int point_type = BrushManager.mPointLib.getSymbolIndexByThName( th_name );
+		int point_type = BrushManager.getPointIndexByThName( th_name );
 		if ( point_type < 0 ) point_type = 0;
 
                 PTPoint point = elem.point(0);

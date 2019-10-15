@@ -503,6 +503,8 @@
     <string name="description">leírás</string>
     <string name="name">név</string>
     <string name="team">csoport</string>
+    <!-- TODO string name="init_station">start station</string -->
+    <!-- TODO string name="start_station">start station [%1$s]</string -->
     <!-- UNUSED string name="toggle_device">Toggle device calibration mode</string -->
     <string name="toggle_failed">Nem sikerült átkapcsolni a DistoX-et</string>
     <string name="toggle_ok">DistoX átkapcsolva kalibrációs üzemmódba</string>
@@ -634,6 +636,7 @@
     <!-- UNUSED string name="button_select"    >Select    </string -->
     <string name="button_search"    >Keres    </string>
     <string name="button_merge"     >Egyesít     </string>
+    <!-- TODO string name="button_saved"     >Saved station</string -->
     <string name="button_split"     >Megoszt     </string>
     <!-- TODO string name="button_station"   >Center at</string -->
     <string name="button_store"     >Tárol</string>
@@ -800,6 +803,9 @@
     <string name="help_previous">Előző elem a kiválasztásban</string>
     <string name="help_next">Következő elem a kiválasztásban</string>
     <string name="help_recover">Vázlat újratöltése biztonsági mentésből</string>
+    <!-- TODO string name="help_reload_prev">Display newer backup</string -->
+    <!-- TODO string name="help_reload_next">Display older backup</string -->
+    <!-- TODO string name="help_reload_plot">Reload sketch backup</string -->
     <string name="help_zoom_fit">Vázlat képernyőméretre igazítása</string>
    
     <string name="help_line_point">Vonal műveletek: egyesítés, felosztás, vágás, törlés</string>
@@ -934,6 +940,7 @@
   <!-- TODO string name="pref_cat_exportimport">IMPORT</string -->
   <!-- OK string name="pref_cat_exportth">Therion</string -->
   <!-- OK string name="pref_cat_exportdat">Compass</string -->
+  <!-- OK string name="pref_cat_exporttro">VisualTopo</string -->
   <!-- OK string name="pref_cat_exportsvg">SVG</string -->
   <!-- OK string name="pref_cat_exportdxf">DXF</string -->
   <!-- OK string name="pref_cat_exportpng">PNG</string -->

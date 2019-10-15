@@ -515,6 +515,8 @@
     <string name="description">Popis</string>
     <string name="name">Názov</string>
     <string name="team">Merací tím</string>
+    <!-- TODO string name="init_station">start station</string -->
+    <!-- TODO string name="start_station">start station [%1$s]</string -->
     <!-- UNUSED string name="toggle_device">Toggle device calibration mode</string -->
     <string name="toggle_failed">Zlyhalo prepnutie režimu DistaX kalibrácia/meranie</string>
     <string name="toggle_ok">DistoX prepnuté do režimu kalibrácie alebo merania</string>
@@ -648,6 +650,7 @@
     <!-- UNUSED string name="button_select"    >Select    </string -->
     <string name="button_search"    >Vyhľadať     </string>
     <string name="button_merge"     >Zlúčiť    </string>
+    <!-- TODO string name="button_saved"     >Saved station</string -->
     <string name="button_split"     >Rozdeliť   </string>
     <string name="button_station"   >Vycentrovať na</string>
     <string name="button_store"     >Zapísať    </string>
@@ -815,6 +818,9 @@
     <string name="help_previous">Prejsť na predchádzajúci objekt vo výbere</string>
     <string name="help_next">Prejsť na nasledujúci objekt vo výbere</string>
     <string name="help_recover">Obnoviť nákres zo zálohy</string>
+    <!-- TODO string name="help_reload_prev">Display newer backup</string -->
+    <!-- TODO string name="help_reload_next">Display older backup</string -->
+    <!-- TODO string name="help_reload_plot">Reload sketch backup</string -->
     <string name="help_zoom_fit">Zmeniť orientáciu obrazovky Sever/Západ</string>
    
     <string name="help_line_point">Akcie pre "body" Čiary: spojiť, rozdeliť, vystrihnúť, odstrániť</string>
@@ -959,6 +965,7 @@
   <!-- DO NOT TRANSLATE string name="pref_cat_exportsvx" translatable="false">Survex</string -->
   <!-- DO NOT TRANSLATE string name="pref_cat_exportth"  translatable="false">Therion</string -->
   <!-- DO NOT TRANSLATE string name="pref_cat_exportdat" translatable="false">Compass</string -->
+  <!-- DO NOT TRANSLATE string name="pref_cat_exporttro">VisualTopo</string -->
   <!-- DO NOT TRANSLATE string name="pref_cat_exportsvg" translatable="false">SVG</string -->
   <!-- DO NOT TRANSLATE string name="pref_cat_exportdxf" translatable="false">DXF</string -->
   <!-- DO NOT TRANSLATE string name="pref_cat_exportpng" translatable="false">PNG</string -->

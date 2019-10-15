@@ -515,6 +515,8 @@
     <string name="description">注释</string>
     <string name="name">名称</string>
     <string name="team">团队</string>
+    <!-- TODO string name="init_station">start station</string -->
+    <!-- TODO string name="start_station">start station [%1$s]</string -->
     <!-- UNUSED string name="toggle_device">Toggle device calibration mode</string -->
     <string name="toggle_failed">DistoX触发失败</string>
     <string name="toggle_ok">触发DistoX校准模式</string>
@@ -648,6 +650,7 @@
     <!-- UNUSED string name="button_select"    >Select    </string -->
     <string name="button_search"    >搜索    </string>
     <string name="button_merge"     >合并     </string>
+    <!-- TODO string name="button_saved"     >Saved station</string -->
     <string name="button_saved"     >保存测点</string>
     <string name="button_split"     >分割     </string>
     <string name="button_station"   >以 为中心</string>
@@ -815,6 +818,9 @@
     <string name="help_previous">已选项目</string>
     <string name="help_next">选项中的下一项目</string>
     <string name="help_recover">从备份中重新载入草图</string>
+    <!-- TODO string name="help_reload_prev">Display newer backup</string -->
+    <!-- TODO string name="help_reload_next">Display older backup</string -->
+    <!-- TODO string name="help_reload_plot">Reload sketch backup</string -->
     <string name="help_zoom_fit">草图适应屏幕</string>
    
     <string name="help_line_point">线点功能: 衔接,分割, 剪切, 删除</string>
@@ -959,6 +965,7 @@
   <string name="pref_cat_exportsvx" translatable="false">Survex</string>
   <string name="pref_cat_exportth"  translatable="false">Therion</string>
   <string name="pref_cat_exportdat" translatable="false">Compass</string>
+  <string name="pref_cat_exporttro" translatable="false">VisualTopo</string>
   <string name="pref_cat_exportsvg" translatable="false">SVG</string>
   <string name="pref_cat_exportdxf" translatable="false">DXF</string>
   <string name="pref_cat_exportpng" translatable="false">PNG</string>

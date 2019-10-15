@@ -512,6 +512,8 @@
     <string name="description">Beschreibung</string>
     <string name="name">Name</string>
     <string name="team">Messteam</string>
+    <!-- TODO string name="init_station">start station</string -->
+    <!-- TODO string name="start_station">start station [%1$s]</string -->
     <!-- UNUSED string name="toggle_device">Den DistoX in Betriebsmodus schalten</string -->
     <string name="toggle_failed">Fehler beim Kalibrierungsmodus-Wechsel</string>
     <string name="toggle_ok">Kalibrierungsmodus gewechselt</string>
@@ -649,6 +651,7 @@
     <!-- UNUSED string name="button_select"    >Wählen     </string -->
     <string name="button_search"    >Suche    </string>
     <string name="button_merge"     >Zusammenführen     </string>
+    <!-- TODO string name="button_saved"     >Saved station</string -->
     <string name="button_split"     >Aufteilen     </string>
     <string name="button_station"   >Zentrieren bei</string>
     <string name="button_store"     >Speichern</string>
@@ -815,6 +818,9 @@
     <string name="help_previous">Vorheriger Punkt</string>
     <string name="help_next">Nächster Punkt</string>
     <string name="help_recover">Die Skizze wiederherstellen</string>
+    <!-- TODO string name="help_reload_prev">Display newer backup</string -->
+    <!-- TODO string name="help_reload_next">Display older backup</string -->
+    <!-- TODO string name="help_reload_plot">Reload sketch backup</string -->
     <string name="help_zoom_fit">Zoomen auf ganze Skizze</string>
 
     <string name="help_line_point">Linienpunkt Aktionen: verbinden, trennen, schneiden, löschen</string>
@@ -955,6 +961,7 @@
   <string name="pref_cat_exportimport">IMPORT</string>
   <!-- OK string name="pref_cat_exportth">Therion</string -->
   <!-- OK string name="pref_cat_exportdat">Compass</string -->
+  <!-- OK string name="pref_cat_exporttro">VisualTopo</string -->
   <!-- OK string name="pref_cat_exportsvg">SVG</string -->
   <!-- OK string name="pref_cat_exportdxf">DXF</string -->
   <!-- OK string name="pref_cat_exportpng">PNG</string -->

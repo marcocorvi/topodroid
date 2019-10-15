@@ -125,8 +125,8 @@ class DrawingAreaPath extends DrawingPointLinePath
       if ( version >= 401090 ) level = dis.readInt();
       int npt = dis.readInt( );
 
-      BrushManager.mAreaLib.tryLoadMissingArea( thname );
-      type = BrushManager.mAreaLib.getSymbolIndexByThNameOrGroup( thname, group );
+      BrushManager.tryLoadMissingArea( thname );
+      type = BrushManager.getAreaIndexByThNameOrGroup( thname, group );
       // TDLog.Log( TDLog.LOG_PLOT, "A: " + thname + " " + cnt + " " + visible + " " + orientation + " NP " + npt );
       Log.v( "DistoX-PLOT", "A: " + type + " " + thname + " " + cnt + " " + visible + " " + orientation + " NP " + npt );
       if ( type < 0 ) {
@@ -280,7 +280,7 @@ class DrawingAreaPath extends DrawingPointLinePath
     toTherionPoints( pw, true );
 
     pw.format("endline\n");
-    pw.format("area %s", BrushManager.mAreaLib.getSymbolThName( mAreaType ) );
+    pw.format("area %s", BrushManager.getAreaThName( mAreaType ) );
     if ( BrushManager.isAreaOrientable( mAreaType ) ) {
       pw.format(Locale.US, " #orientation %.1f", mOrientation );
     }
