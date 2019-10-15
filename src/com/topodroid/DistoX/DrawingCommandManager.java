@@ -851,11 +851,25 @@ class DrawingCommandManager
                 eraseCmd.addAction( EraseAction.ERASE_MODIFY, path );
                 // LinePoint lp = points.get(size-1);
                 // LinePoint lp = last;
-                doRemoveLinePoint( line, first, null );
+                doRemoveLinePoint( line, last, null );
                 doRemoveLinePoint( line, pt.mPoint, pt );
                 synchronized ( TDPath.mSelectionLock ) {
-                  mSelection.removeLinePoint( line, first ); // size -1
+                  mSelection.removeLinePoint( line, last ); // size -1
                   mSelection.mPoints.remove( pt );        // size -2
+                }
+                line.retracePath();
+              }
+              else if ( pt.mPoint == last ) // erase last of multi-point line
+              {
+                // TDLog.Log( TDLog.LOG_PLOT, remove_line_last );
+                // ret = 4;
+                eraseCmd.addAction( EraseAction.ERASE_MODIFY, path );
+                // LinePoint lp = points.get(size-1);
+                // LinePoint lp = last;
+                doRemoveLinePoint( line, pt.mPoint, pt );
+                synchronized ( TDPath.mSelectionLock ) {
+                  mSelection.removeLinePoint( line, last ); // size -1
+                  // mSelection.mPoints.remove( pt );        // size -2
                 }
                 line.retracePath();
               } else { // erase a point in the middle of multi-point line
