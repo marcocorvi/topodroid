@@ -90,6 +90,7 @@
     <string name="calib_no_name">Názov je povinný</string>
     <string name="calib_gm_policy">Pravidlá kalibrácie</string>
     <string name="calib_gm_undelete">Obnoviť kalibračné dáta?</string>
+    <string name="calib_offgroup_data">Možné %1$d dáta mimo skupinu</string>
     <string name="calib_saved">Uložená kalibrácia</string>
     <string name="calib_updated">Aktualizovaná kalibrácia</string>
     <string name="calib_compute_groups">Zoradí kalibračné údaje do skupín &#8230;</string>
