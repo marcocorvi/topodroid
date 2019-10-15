@@ -516,6 +516,8 @@
     <string name="description">Popis</string>
     <string name="name">Názov</string>
     <string name="team">Merací tím</string>
+    <string name="init_station">Začiatočné staničenie</string>
+    <string name="start_station">Začiatočné staničenie [%1$s]</string>
     <!-- UNUSED string name="toggle_device">Toggle device calibration mode</string -->
     <string name="toggle_failed">Zlyhalo prepnutie režimu DistaX kalibrácia/meranie</string>
     <string name="toggle_ok">DistoX prepnuté do režimu kalibrácie alebo merania</string>
