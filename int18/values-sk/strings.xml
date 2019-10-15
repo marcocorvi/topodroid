@@ -651,6 +651,7 @@
     <!-- UNUSED string name="button_select"    >Select    </string -->
     <string name="button_search"    >Vyhľadať     </string>
     <string name="button_merge"     >Zlúčiť    </string>
+    <string name="button_saved"     >Uložené Staničenia</string>
     <string name="button_split"     >Rozdeliť   </string>
     <string name="button_station"   >Vycentrovať na</string>
     <string name="button_store"     >Zapísať    </string>
