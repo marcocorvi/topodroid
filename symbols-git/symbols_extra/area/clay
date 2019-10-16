@@ -14,6 +14,7 @@ name-hu agyag
 name-sk hlina
 name-ro argilă
 th_name clay
+group clay
 color 0xcc9933 0xcc
 csurvey 1 48 0 3
 bitmap 50 30

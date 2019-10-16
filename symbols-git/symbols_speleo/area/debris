@@ -14,6 +14,7 @@ name-hu kőtörmelék
 name-sk suť
 name-ro prăbușiri
 th_name debris
+group debris
 color 0xff6666 0x66
 csurvey 1 48 0 8
 endsymbol

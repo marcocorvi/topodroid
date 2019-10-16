@@ -2,6 +2,7 @@ symbol area
 name stalactite_stalagmite
 name-pt estalactite_estalagmite
 th_name u:stalactite_stalagmite
+group stalactite
 color 0x78e000 0x66
 csurvey 1 48 0 1
 endsymbol

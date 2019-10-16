@@ -14,6 +14,7 @@ name-hu hó
 name-sk sneh
 name-ro zăpadă
 th_name snow
+group snow
 color 0xffffff 0x66
 csurvey 1 48 0 1
 endsymbol

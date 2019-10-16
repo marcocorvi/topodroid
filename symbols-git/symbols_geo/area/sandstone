@@ -8,6 +8,7 @@ name-fr grès
 name-ro gresie
 name-de Sandstein
 th_name u:sandstone
+group sand
 color 0xcc9933 0xcc
 csurvey 1 48 0 3
 bitmap 40 15

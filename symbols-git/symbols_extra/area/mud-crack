@@ -4,6 +4,7 @@ name mud-crack
 name-de Getrockneter_Lehm
 name-pt lama_rachada
 th_name u:mud-crack
+group clay
 color 0xcc9933 0xcc
 csurvey 1 48 0 3
 bitmap 50 40

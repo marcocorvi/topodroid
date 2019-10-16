@@ -14,6 +14,7 @@ name-hu homok
 name-sk piesok
 name-ro nisip
 th_name sand
+group sand
 color 0xffff66 0x66
 csurvey 1 48 0 3
 endsymbol

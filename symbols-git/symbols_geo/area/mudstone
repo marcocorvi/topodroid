@@ -7,6 +7,7 @@ name-fr argilite
 name-ro argilită
 name-de Mudstone
 th_name u:mudstone
+group clay
 color 0xcc6666 0xcc
 csurvey 1 48 0 3
 bitmap 44 22

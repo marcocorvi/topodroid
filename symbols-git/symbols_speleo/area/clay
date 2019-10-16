@@ -13,6 +13,7 @@ name-hu agyag
 name-sk hlina
 name-ro argilă
 th_name clay
+group clay
 color 0x99ff00 0x66
 csurvey 1 48 0 3
 endsymbol
