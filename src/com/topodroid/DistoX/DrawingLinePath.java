@@ -69,9 +69,9 @@ class DrawingLinePath extends DrawingPointLinePath
 
     mLineType = line_type;
     mReversed = false;
-    mOutline  = ( mLineType == BrushManager.mLineLib.mLineWallIndex )? OUTLINE_OUT : OUTLINE_NONE;
+    mOutline  = ( BrushManager.isLineWall(mLineType) )? OUTLINE_OUT : OUTLINE_NONE;
     setPathPaint( BrushManager.mLineLib.getLinePaint( mLineType, mReversed ) );
-    mLevel     = BrushManager.mLineLib.getSymbolLevel( mLineType );
+    mLevel     = BrushManager.getLineLevel( mLineType );
   }
 
   static DrawingLinePath loadDataStream( int version, DataInputStream dis, float x, float y /*, SymbolsPalette missingSymbols */ )
@@ -373,11 +373,11 @@ class DrawingLinePath extends DrawingPointLinePath
     if ( mFirst == null ) return null;
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
-    pw.format("line %s", BrushManager.mLineLib.getSymbolThName(mLineType) );
+    pw.format("line %s", BrushManager.getLineThName(mLineType) );
     if ( isClosed() ) {
       pw.format(" -close on");
     }
-    if ( mLineType == BrushManager.mLineLib.mLineWallIndex ) {
+    if ( BrushManager.isLineWall( mLineType ) ) {
       if ( mOutline == OUTLINE_IN ) {
         pw.format(" -outline in");
       } else if ( mOutline == OUTLINE_NONE ) {
@@ -409,7 +409,7 @@ class DrawingLinePath extends DrawingPointLinePath
     // // }
     toTherionPoints( pw, isClosed() );
 
-    if ( mLineType == BrushManager.mLineLib.mLineSlopeIndex ) {
+    if ( BrushManager.isLineSlope( mLineType ) ) {
       pw.format("  l-size 40\n");
     }
     pw.format("endline\n");
@@ -419,8 +419,8 @@ class DrawingLinePath extends DrawingPointLinePath
   @Override
   void toDataStream( DataOutputStream dos )
   {
-    String name  = BrushManager.mLineLib.getSymbolThName( mLineType );
-    String group = BrushManager.mLineLib.getSymbolGroup( mLineType );
+    String name  = BrushManager.getLineThName( mLineType );
+    String group = BrushManager.getLineGroup( mLineType );
     try {
       dos.write( 'L' );
       dos.writeUTF( name );

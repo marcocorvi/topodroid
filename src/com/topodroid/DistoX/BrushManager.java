@@ -76,6 +76,14 @@ class BrushManager
   static String getLineThName( int idx ) { return (mLineLib == null)? null : mLineLib.getSymbolThName( idx ); }
   static String getAreaThName( int idx ) { return (mAreaLib == null)? null : mAreaLib.getSymbolThName( idx ); }
 
+  static String getPointGroup( int idx ) { return (mPointLib == null)? null : mPointLib.getSymbolGroup( idx ); }
+  static String getLineGroup( int idx ) { return (mLineLib == null)? null : mLineLib.getSymbolGroup( idx ); }
+  static String getAreaGroup( int idx ) { return (mAreaLib == null)? null : mAreaLib.getSymbolGroup( idx ); }
+
+  static boolean hasPoint( int idx ) { return (mPointLib == null) && idx < mPointLib.size(); }
+  static boolean hasLine( int idx ) { return (mLineLib == null) && idx < mLineLib.size(); }
+  static boolean hasArea( int idx ) { return (mAreaLib == null) && idx < mAreaLib.size(); }
+
   // -----------------------------------------------------------
   static String getPointName( int idx ) { return mPointLib.getSymbolName( idx ); }
   static int getPointLevel( int idx ) { return mPointLib.getSymbolLevel( idx ); }
@@ -93,7 +101,7 @@ class BrushManager
   static int getLineCsxType( int index ) { return mLineLib.lineCsxType( index ); }
   static int getLineCsxCategory( int index ) { return mLineLib.lineCsxCategory( index ); }
   static int getLineCsxPen( int index ) { return mLineLib.lineCsxPen( index ); }
-  static String getLineGroup( int index ) { return mLineLib.getLineGroup( index ); }
+  // static String getLineGroup( int index ) { return mLineLib.getLineGroup( index ); }
   static int getLineLevel( int idx ) { return mLineLib.getSymbolLevel( idx ); }
 
   static int getAreaCsxLayer( int index ) { return mAreaLib.areaCsxLayer( index ); }
@@ -130,6 +138,8 @@ class BrushManager
   static boolean isLineSection( int index ) { return index == mLineLib.mLineSectionIndex; }
   // static int getLineSectionIndex() { return mLineLib.mLineSectionIndex; }
   static int getLineWallIndex() { return mLineLib.mLineWallIndex; }
+  static boolean isLineWall( int idx ) { return mLineLib != null && idx == mLineLib.mLineWallIndex; }
+  static boolean isLineSlope( int idx ) { return mLineLib != null && idx == mLineLib.mLineSlopeIndex; }
 
   // FIXME AREA_ORIENT
   static boolean isAreaOrientable( int index ) { return mAreaLib.isSymbolOrientable( index ); }

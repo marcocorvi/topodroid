@@ -111,7 +111,7 @@ class DrawingPointPath extends DrawingPath
     mOrientation = 0.0;
     mOptions = options;
     mPointText = text; // getTextFromOptions( options ); // this can also reset mOptions
-    mLevel     = BrushManager.mPointLib.getSymbolLevel( type );
+    mLevel     = BrushManager.getPointLevel( type );
 
     if ( BrushManager.isPointOrientable( type ) ) {
       mOrientation = BrushManager.getPointOrientation(type);
@@ -397,7 +397,7 @@ class DrawingPointPath extends DrawingPath
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
 
-    String th_name = BrushManager.mPointLib.getSymbolThName(mPointType);
+    String th_name = BrushManager.getPointThName(mPointType);
     pw.format(Locale.US, "point %.2f %.2f %s", cx*TDSetting.mToTherion, -cy*TDSetting.mToTherion, th_name );
     toTherionOrientation( pw );
     // FIXME SECTION_RENAME
@@ -419,9 +419,9 @@ class DrawingPointPath extends DrawingPath
   private void toTherionTextOrValue( PrintWriter pw )
   {
     if ( mPointText != null && mPointText.length() > 0 ) {
-      if ( BrushManager.mPointLib.pointHasText(mPointType) ) { // label, remark
+      if ( BrushManager.pointHasText(mPointType) ) { // label, remark
         pw.format(" -text \"%s\"", mPointText );
-      } else if ( BrushManager.mPointLib.pointHasValue(mPointType) ) { // passage-height
+      } else if ( BrushManager.pointHasValue(mPointType) ) { // passage-height
         pw.format(" -value %s", mPointText );
       }
     }
@@ -452,8 +452,8 @@ class DrawingPointPath extends DrawingPath
   @Override
   void toDataStream( DataOutputStream dos )
   {
-    String name  = BrushManager.mPointLib.getSymbolThName(mPointType);
-    String group = BrushManager.mPointLib.getSymbolGroup(mPointType);
+    String name  = BrushManager.getPointThName(mPointType);
+    String group = BrushManager.getPointGroup(mPointType);
     try {
       dos.write( 'P' );
       dos.writeFloat( cx );

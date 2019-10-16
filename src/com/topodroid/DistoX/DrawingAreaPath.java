@@ -69,7 +69,7 @@ class DrawingAreaPath extends DrawingPointLinePath
     mAreaType = type;
     mAreaCnt  = cnt;
     mPrefix   = (prefix != null && prefix.length() > 0)? prefix : "a";
-    if ( mAreaType < BrushManager.mAreaLib.size() ) {
+    if ( BrushManager.hasArea( mAreaType ) ) { 
       setPathPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
     }
     mOrientation = 0.0;
@@ -81,7 +81,7 @@ class DrawingAreaPath extends DrawingPointLinePath
       resetPathPaint();
       mPaint.setShader( mLocalShader );
     }
-    mLevel = BrushManager.mAreaLib.getSymbolLevel( type );
+    mLevel = BrushManager.getAreaLevel( type );
   }
 
   // @param id   string "area id" (mPrefix + mAreaCnt )
@@ -100,10 +100,10 @@ class DrawingAreaPath extends DrawingPointLinePath
     } catch ( NumberFormatException e ) {
       TDLog.Error( "Drawing Area Path AreaCnt parse Int error: " + id.substring(1) );
     }
-    if ( mAreaType < BrushManager.mAreaLib.size() ) {
+    if ( BrushManager.hasArea( mAreaType ) ) {
       setPathPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
     }
-    mLevel = BrushManager.mAreaLib.getSymbolLevel( type );
+    mLevel = BrushManager.getAreaLevel( type );
   }
 
 
@@ -179,7 +179,7 @@ class DrawingAreaPath extends DrawingPointLinePath
   void setAreaType( int t )
   {
     mAreaType = t;
-    if ( mAreaType < BrushManager.mAreaLib.size() ) {
+    if ( BrushManager.hasArea( mAreaType ) ) {
       setPathPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
       // FIXME shader ?
     }
@@ -340,8 +340,8 @@ class DrawingAreaPath extends DrawingPointLinePath
   @Override
   void toDataStream( DataOutputStream dos )
   {
-    String name  = BrushManager.mAreaLib.getSymbolThName( mAreaType );
-    String group = BrushManager.mAreaLib.getSymbolGroup( mAreaType );
+    String name  = BrushManager.getAreaThName( mAreaType );
+    String group = BrushManager.getAreaGroup( mAreaType );
     try {
       dos.write( 'A' );
       dos.writeUTF( name );
