@@ -15,6 +15,7 @@ name-hu vízfolyás
 name-sk vodný_tok
 name-ro curs-de-apă
 th_name water-flow
+group water-flow
 orientation yes
 color 0x6699ff
 csurvey 6 6 80

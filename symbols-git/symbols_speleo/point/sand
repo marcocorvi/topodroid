@@ -14,6 +14,7 @@ name-hu homok
 name-sk piesok
 name-ro nisip
 th_name sand
+group sand
 orientation no
 color 0xffcc66
 csurvey 6 6 80

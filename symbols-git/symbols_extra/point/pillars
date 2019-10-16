@@ -11,6 +11,7 @@ name-sk stalagnát
 name-ro pilieri
 name-de Säulen
 th_name pillars
+group pillar
 orientation no
 color 0xccff66
 csurvey 6 6 80

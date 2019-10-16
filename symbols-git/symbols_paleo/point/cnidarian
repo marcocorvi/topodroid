@@ -7,6 +7,7 @@ name-fr cnidaire
 name-ro cnidarian
 name-de Nesseltier
 th_name u:cnidarian
+group paleo
 color 0x66cc99
 csurvey 0 0 0
 path

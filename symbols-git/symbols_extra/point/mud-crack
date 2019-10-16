@@ -4,6 +4,7 @@ name mud-crack
 name-de Lehmriss
 name-pt lama_rachada
 th_name u:mud-crack
+group mud
 orientation no
 color 0xff9933
 csurvey 6 6 80

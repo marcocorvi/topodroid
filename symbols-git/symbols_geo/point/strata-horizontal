@@ -8,6 +8,7 @@ name-fr strate_horizontale
 name-ro strat-orizontal
 name-de Horizontale_Bank
 th_name u:strata-horizontal
+group strata
 color 0xcccccc
 csurvey 0 0 0
 path

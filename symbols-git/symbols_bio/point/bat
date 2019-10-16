@@ -7,6 +7,7 @@ name-fr chauve-souris
 name-ro liliac
 name-de Fledermaus
 th_name u:bat
+group bat
 color 0xffcc33
 csurvey 0 0 0
 path

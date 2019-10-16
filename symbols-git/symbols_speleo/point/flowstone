@@ -5,6 +5,7 @@ name-pt escorrimento
 name-ro cruste-podea
 name-ru натёки
 th_name flowstone
+group flowstone
 orientation no
 color 0xffcc66
 csurvey 6 6 80

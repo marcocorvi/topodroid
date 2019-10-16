@@ -8,6 +8,7 @@ name-sk zvislý_sneh
 name-ro puț_zăpadă_vertical
 name-de Vertikale_Schneehöhle
 th_name u:snowpit-vertical
+group cave
 orientation no
 color 0xffffff
 csurvey 6 6 80

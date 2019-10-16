@@ -6,6 +6,7 @@ name-ru вертикально_линейно
 name-fr linéation_verticale
 name-de Vertikale_Bänderung
 th_name u:lineation-vertical
+group lineation
 color 0xffffff
 csurvey 0 0 0
 path

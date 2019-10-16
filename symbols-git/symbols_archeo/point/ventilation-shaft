@@ -9,6 +9,7 @@ name-sk vetrací_komín
 name-ro horn_de_aerisire
 name-de Luftschacht
 th_name u:ventilation-shaft
+group ceiling
 color 0xff6699
 csurvey 0 0 0
 path

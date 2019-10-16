@@ -8,6 +8,7 @@ name-fr sable
 name-ro nisip
 name-de Sand
 th_name u:sand
+group sand
 color 0xff9900
 csurvey 0 0 0
 path

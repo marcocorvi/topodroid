@@ -16,6 +16,7 @@ name-hu vízfolyás
 name-sk vodný-tok
 name-ro curs-de-apă
 th_name water-flow:intermittent
+group water-flow
 orientation yes
 color 0xff9933
 csurvey 6 6 80

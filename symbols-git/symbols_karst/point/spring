@@ -8,6 +8,7 @@ name-sk pramen_zdroj
 name-ro izvor
 name-de Quelle
 th_name u:spring
+group spring
 orientation no
 color 0x3399ff
 csurvey 6 6 80

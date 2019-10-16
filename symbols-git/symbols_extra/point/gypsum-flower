@@ -8,6 +8,7 @@ name-sk sádrovcová-ruža
 name-ro floare-de-gips
 name-de Gipsblüte
 th_name gypsum-flower
+group gypsum
 orientation no
 color 0xffffff
 csurvey 6 6 80

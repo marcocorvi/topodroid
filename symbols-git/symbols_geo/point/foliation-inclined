@@ -6,6 +6,7 @@ name-ru сланцеватость_наклонная
 name-fr schistosité_inclinée
 name-de Schräge_Blätterung
 th_name u:foliation-inclined
+group foliation
 orientation yes
 color 0xcccc99
 csurvey 0 0 0 

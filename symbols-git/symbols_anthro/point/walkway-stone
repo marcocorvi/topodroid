@@ -2,6 +2,7 @@ symbol point
 name walkway-stone
 name-pt passarela_de_pedra
 th_name u:walkway-stone
+group trail
 orientation no
 color 0x7f7f7f
 csurvey 6 6 80

@@ -8,6 +8,7 @@ name-fr strate_inversée
 name-ro strat-întors
 name-de Umgedrehte_Bank
 th_name u:strata-overturned
+group strata
 color 0xcccccc
 csurvey 0 0 0
 orientation yes

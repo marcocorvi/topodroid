@@ -7,6 +7,7 @@ name-fr éponge
 name-ro spongieri
 name-de Schwamm
 th_name u:sponge
+group paleo
 color 0xcc9966
 csurvey 0 0 0
 path

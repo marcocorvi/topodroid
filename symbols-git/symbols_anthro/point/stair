@@ -2,6 +2,7 @@ symbol point
 name stair
 name-pt escada
 th_name u:stair
+group trail
 orientation no
 color 0x993300
 csurvey 6 6 80

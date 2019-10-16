@@ -8,6 +8,7 @@ name-fr faille
 name-ro falie
 name-de Verwerfung
 th_name u:fault
+group fault
 color 0xff6666
 csurvey 0 0 0
 orientation yes

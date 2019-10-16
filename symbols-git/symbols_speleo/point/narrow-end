@@ -14,6 +14,7 @@ name-hu elszűkülő_folytatás
 name-sk zužujúce_pokračovanie
 name-ro capăt-îngust
 th_name narrow-end
+group end
 orientation no
 color 0xff6666
 csurvey 6 6 80

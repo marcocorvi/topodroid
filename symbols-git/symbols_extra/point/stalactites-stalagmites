@@ -2,6 +2,7 @@ symbol point
 name stalactites_stalagmites
 name-pt estalactites_estalagmites
 th_name u:stalactites_stalagmites
+group stalactite
 orientation no
 color 0xccff66
 csurvey 6 6 80

@@ -8,6 +8,7 @@ name-fr strate_verticale
 name-ro strat-vertical
 name-de Vertikale_Bank
 th_name u:strata-vertical
+group strata
 color 0xcccccc
 csurvey 0 0 0
 orientation yes

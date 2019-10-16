@@ -7,6 +7,7 @@ name-ro plan-sinform
 name-fr plan_synforme
 name-de Synforme_Fläche
 th_name u:plane-synform
+group plane
 color 0xcccccc
 csurvey 0 0 0
 path

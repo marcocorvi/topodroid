@@ -9,6 +9,7 @@ name-sk vertikálny_priechod
 name-ro puț
 name-de Schacht
 th_name u:shaft
+group ceiling
 color 0xff6699
 csurvey 0 0 0
 path

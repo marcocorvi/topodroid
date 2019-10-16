@@ -2,6 +2,7 @@ symbol point
 name ladder
 name-pt escada_de_mão
 th_name u:ladder
+group trail
 orientation no
 color 0xADADAD
 csurvey 6 6 80

@@ -8,6 +8,7 @@ name-fr faille_senestre
 name-ro falie-stânga
 name-de Linksverwerfung
 th_name u:fault-left
+group fault
 color 0xff6666
 csurvey 0 0 0
 orientation yes

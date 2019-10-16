@@ -8,6 +8,7 @@ name-fr faille_dextre
 name-ro falie-dreapta
 name-de Rechtsverwerfung
 th_name u:fault-right
+group fault
 color 0xff6666
 csurvey 0 0 0
 orientation yes

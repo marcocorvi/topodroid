@@ -14,6 +14,7 @@ name-hu forrás
 name-sk prúdenie_vody
 name-ro izvor
 th_name spring
+group spring
 orientation yes
 color 0x6699ff
 csurvey 6 6 80

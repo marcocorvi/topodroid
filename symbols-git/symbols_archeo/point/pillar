@@ -9,6 +9,7 @@ name-sk stĺp
 name-ro coloană
 name-de Säule
 th_name u:pillar
+group pillar
 color 0xcccccc
 csurvey 0 0 0
 path

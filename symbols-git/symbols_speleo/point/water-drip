@@ -9,6 +9,7 @@ name-hu csepegés
 name-sk kvapkanie
 name-ro infiltrație
 th_name u:water_drip
+group water-flow
 orientation no
 color 0x6699ff
 csurvey 6 6 80

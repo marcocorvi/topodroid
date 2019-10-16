@@ -14,6 +14,7 @@ name-hu ős-vízfolyás
 name-sk fosílny_tok
 name-ro cupole-de-eroziune
 th_name water-flow:paleo
+group water-flow
 orientation yes
 color 0x6699ff
 csurvey 6 6 80

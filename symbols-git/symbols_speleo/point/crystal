@@ -14,6 +14,7 @@ name-hu kristály
 name-sk krištály
 name-ro cristal
 th_name crystal
+group mineral
 orientation no
 color 0xcccccc
 csurvey 6 6 80

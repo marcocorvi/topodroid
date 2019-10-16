@@ -7,6 +7,7 @@ name-fr fissuration_horizontale
 name-ro clivaj-orizontal
 name-de Horizontale_Schieferung
 th_name u:cleavage-horizontal
+group cleavage
 color 0xcccc99
 csurvey 0 0 0 
 path

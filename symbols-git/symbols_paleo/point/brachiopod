@@ -7,6 +7,7 @@ name-ro brahiopod
 name-fr brachiopode
 name-de Brachiopod
 th_name u:brachiopod
+group paleo
 color 0xcccccc
 csurvey 0 0 0
 path

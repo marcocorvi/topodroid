@@ -2,6 +2,7 @@ symbol point
 name walkway
 name-pt passarela
 th_name u:walkway
+group trail
 orientation no
 color 0xffffff
 csurvey 6 6 80

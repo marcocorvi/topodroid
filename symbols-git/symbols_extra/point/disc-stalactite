@@ -2,6 +2,7 @@ symbol point
 name disc_stalactite
 name-pt disco_estalactite
 th_name u:disk-stalactite
+group stalactite
 orientation yes
 color 0xccff66
 csurvey 6 6 80

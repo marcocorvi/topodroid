@@ -8,6 +8,7 @@ name-sk most
 name-ro pod
 name-de Brücke
 th_name u:bridge
+group trail
 orientation no
 color 0xffffff
 csurvey 6 6 80

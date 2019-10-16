@@ -10,6 +10,7 @@ name-hu sár
 name-sk bahno
 name-ro nămol
 th_name u:mud
+group mud
 orientation no
 color 0xffcc66
 csurvey 6 6 80

@@ -14,6 +14,7 @@ name-hu víz
 name-sk voda
 name-ro apă
 th_name water
+group water
 orientation no
 color 0x6699ff
 csurvey 6 6 80

@@ -6,6 +6,7 @@ name-ru ёж
 name-ro echinoid
 name-de Seeigel
 th_name u:echinoid
+group paleo
 color 0xcc9966
 csurvey 0 0 0
 path

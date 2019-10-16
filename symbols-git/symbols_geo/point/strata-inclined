@@ -8,6 +8,7 @@ name-fr strate_inclinée
 name-ro strat-înclinat
 name-de Schräge_Bank
 th_name u:strata-inclined
+group strata
 color 0xcccccc
 csurvey 0 0 0
 orientation yes

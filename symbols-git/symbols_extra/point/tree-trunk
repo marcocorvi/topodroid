@@ -2,6 +2,7 @@ symbol point
 name tree-trunk
 name-pt tronco_de_árvore
 th_name u:tree-trunk
+group vegetable
 orientation no
 color 0xb33b00
 csurvey 6 6 80

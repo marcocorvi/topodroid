@@ -14,6 +14,7 @@ name-hu oszlop
 name-sk pilier
 name-ro pilier
 th_name pillar
+group pillar
 orientation no
 color 0xccff66
 csurvey 6 6 80

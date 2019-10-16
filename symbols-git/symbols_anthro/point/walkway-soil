@@ -2,6 +2,7 @@ symbol point
 name walkway-soil
 name-pt passarela_de_terra
 th_name u:walkway-soil
+group trail
 orientation no
 color 0xff5500
 csurvey 6 6 80

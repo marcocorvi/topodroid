@@ -8,6 +8,7 @@ name-sk vertikálna_jaskyňa
 name-ro peșteră_verticală
 name-de Vertikale_Höhle
 th_name u:cave-vertical
+group cave
 orientation no
 color 0xffcc66
 csurvey 6 6 80

@@ -8,6 +8,7 @@ name-sk horizontálny_prameň
 name-ro izvor_orizontal
 name-de Horizontale_Quelle
 th_name u:spring-horizontal
+group spring
 orientation no
 color 0x3399ff
 csurvey 6 6 80

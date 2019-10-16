@@ -2,6 +2,7 @@ symbol point
 name seed-germination
 name-pt germinação_de_sementes
 th_name u:seed-germination
+group vegetable
 orientation no
 color 0xddffcc
 csurvey 6 6 80

@@ -10,6 +10,7 @@ name-hu mésztufagát
 name-fr gour_actif
 name-ro bazin-gur
 th_name rimstone-pool
+group water
 orientation yes
 color 0x6699ff
 csurvey 6 6 80

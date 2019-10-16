@@ -7,6 +7,7 @@ name-sk zvyšky-rastlín
 name-ro resturi-vegetale
 name-de Vegetationsresten
 th_name vegetable-debris
+group vegetable
 orientation no
 color 0xffcc99
 csurvey 6 6 80

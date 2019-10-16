@@ -2,6 +2,7 @@ symbol point
 name bone
 name-pt osso
 th_name u:bone
+group paleo
 orientation no
 color 0xc2c2c2
 csurvey 6 6 80

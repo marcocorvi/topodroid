@@ -14,6 +14,7 @@ name-hu állócseppkő
 name-sk stalagmit
 name-ro stalagmită
 th_name stalagmite
+group stalagmite
 orientation no
 color 0xccff66
 csurvey 6 6 80

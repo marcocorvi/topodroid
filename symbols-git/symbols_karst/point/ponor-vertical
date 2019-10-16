@@ -8,6 +8,7 @@ name-sk vertikálny_ponor
 name-ro ponor_vertical
 name-de Vertikaler_Ponor
 th_name u:ponor-vertical
+group ponor
 orientation no
 color 0x999999
 csurvey 6 6 80

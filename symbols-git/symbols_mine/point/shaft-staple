@@ -7,6 +7,7 @@ name-ru шахтный_отвал
 name-fr puits_bâti
 name-sk šachta
 th_name u:shaft-staple
+group ceiling
 color 0xcccccc
 csurvey 0 0 0
 path

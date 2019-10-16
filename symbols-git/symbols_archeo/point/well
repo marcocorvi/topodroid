@@ -9,6 +9,7 @@ name-sk studňa
 name-ro fântână
 name-de Brunnen
 th_name u:well
+group water
 color 0x66ccff
 csurvey 0 0 0
 path
