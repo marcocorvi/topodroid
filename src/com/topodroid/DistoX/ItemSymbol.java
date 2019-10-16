@@ -80,7 +80,7 @@ class ItemSymbol
     if ( mUseText ) {
       TextView textView = new TextView( context );
       // textView.setBackgroundColor( TDColor.BLACK );
-      textView.setText( mSymbol.getFullName() );
+      textView.setText( mSymbol.getName() ); // getFullName()
       ll.addView( textView, new LinearLayout.LayoutParams(lh,lw) );
     } else {
       mButton.setClickable( true );

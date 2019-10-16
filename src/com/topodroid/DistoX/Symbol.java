@@ -102,7 +102,7 @@ class Symbol implements SymbolInterface
   public String getName()       { return "undefined"; }
 
   // FIXME this is half not-translatable: mGroup must be english
-  public String getFullName()   { return (mGroup == null)? getName() : ( getName() + " [" + mGroup + "]" ); }
+  // public String getFullName()   { return (mGroup == null)? getName() : ( getName() + " [" + mGroup + "]" ); }
 
   public Paint  getPaint()      { return null; }
   public Path   getPath()       { return null; }
