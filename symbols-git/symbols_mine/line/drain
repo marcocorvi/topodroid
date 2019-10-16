@@ -8,7 +8,7 @@ name-fr drainage
 name-sk odtok
 name-ro drenaj
 th_name u:drain
-group drain
+group water-flow
 color 0x3399ff
 width 2
 csurvey 2 1 3 5

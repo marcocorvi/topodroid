@@ -1,20 +1,20 @@
 symbol line
-  name stair
-  name-pt escada
-  th_name u:stair
-  group wall
-  color 0x993300
-  width 8
-  csurvey 2 1 3 4
-  effect
-    moveTo 0 0
-    lineTo 0 3
-    lineTo 9 9
-    lineTo 9 6
-    lineTo 0 12
-    lineTo 0 15
-    lineTo 12 9
-    lineTo 12 6
-    lineTo 0 0
-  endeffect
+name stair
+name-pt escada
+th_name u:stair
+group trail
+color 0x993300
+width 8
+csurvey 2 1 3 4
+effect
+  moveTo 0 0
+  lineTo 0 3
+  lineTo 9 9
+  lineTo 9 6
+  lineTo 0 12
+  lineTo 0 15
+  lineTo 12 9
+  lineTo 12 6
+  lineTo 0 0
+endeffect
 endsymbol

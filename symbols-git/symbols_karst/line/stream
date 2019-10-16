@@ -7,6 +7,7 @@ name-fr courant_(d'eau)
 name-ro curs_de_apă
 name-de Strom
 th_name u:stream
+group water-flow
 style straight x0
 color 0x3399ff 0xff
 width 1

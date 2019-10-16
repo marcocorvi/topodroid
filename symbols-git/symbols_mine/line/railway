@@ -8,7 +8,7 @@ name-fr rails
 name-sk kolajnice
 name-ro linie_ferată
 th_name u:railway
-group railway
+group trail
 color 0xcccccc 
 width 2
 csurvey 2 1 3 5
