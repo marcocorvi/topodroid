@@ -312,7 +312,7 @@ Settings:<ul style="margin-top=0">
 </ul><p>
 
 <b>DXF</b> (.dxf)<br>
-Sketches can be exported as 2D DXF (<i>LibreCAD</i>) files with layers for each point,
+Sketches can be exported as 2D DXF files with layers for each point,
 line and area type in addition to the layers of the survey data.
 The sketch items in the 2D DXF lie in the Z=0 plane.<br><p>
 
@@ -328,7 +328,13 @@ the drawing of the section is inserted in the export, at the "section" point</li
 </ul><p>
 
 <b>SVG</b> (.svg)<br>
-Sketches can be exported as SVG files.<br><p>
+Sketches can be exported as SVG files.<br>
+Items are organized in layers: <i>grids</i>, <i>stations</i>, <i>legs</i>, <i>splays</i>, <i>points</i>, <i>lines</i>, and <i>areas</i>.
+These layers are under a global <i>canvas</i> layer.
+<br><p>
+
+<u>Note</u>. Sketch SVG export has been verified with <i>Inkscape</i> and <i>Firefox</i>.
+<br><p>
 
 SVG settings:
 <ul style="margin-top=0">

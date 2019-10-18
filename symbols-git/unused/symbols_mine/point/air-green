@@ -1,0 +1,15 @@
+symbol point
+name air-green
+name-pt ar_verde
+th_name u:air-green
+color 0x00ff00
+csurvey 0 0 0 
+orientation yes
+path 
+  moveTo 0 7.5
+  lineTo 0 -7.5
+  lineTo 4.5 -3
+  moveTo 0 -7.5
+  lineTo -4.5 -3
+endpath
+endsymbol

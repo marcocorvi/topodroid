@@ -1,0 +1,12 @@
+symbol point
+name borehole-staple
+name-pt sondagem_lacrada
+th_name u:borehole-staple
+color 0xff9933
+csurvey 0 0 0
+path
+  addCircle 0 0 6
+  moveTo 4.5 -4.5
+  lineTo -4.5 4.5
+endpath
+endsymbol

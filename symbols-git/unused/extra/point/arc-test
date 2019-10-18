@@ -1,0 +1,9 @@
+symbol point
+name arc-test
+th_name arc-test
+color 0xffffff
+csurvey 0 0 0
+path
+  arcTo -8 -5 8 5 0 180
+endpath
+endsymbol

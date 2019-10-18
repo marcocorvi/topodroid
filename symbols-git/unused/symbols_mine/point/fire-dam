@@ -1,0 +1,16 @@
+symbol point
+name fire-dam
+name-pt barreira_incêndio
+th_name u:fire-dam
+color 0xff3333
+csurvey 0 0 0
+path
+  moveTo 6 -6
+  lineTo 6 6
+  lineTo -6 6
+  lineTo -6 -6
+  lineTo 6 -6
+  lineTo 0 6
+  lineTo -6 -6
+endpath
+endsymbol

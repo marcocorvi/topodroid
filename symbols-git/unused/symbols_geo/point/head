@@ -1,0 +1,14 @@
+symbol point
+name head
+th_name head
+color 0xcccccc
+csurvey 0 0 0
+path
+  moveTo 6 -6
+  cubicTo 0 -12 -9 -6 -9 0 
+  cubicTo -9 6 0 12 6 6
+  moveTo -3 -12
+  lineTo -3 3
+  cubicTo -3 -3 3 -3 3 3
+endpath
+endsymbol

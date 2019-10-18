@@ -1,0 +1,18 @@
+symbol point
+name gas
+name-pt gás
+th_name u:gas
+color 0xffff33
+csurvey 0 0 0
+path
+  moveTo 0 -4.5
+  lineTo 4.5 0
+  lineTo 0 4.5
+  lineTo -4.5 0
+  lineTo 0 -4.5
+  lineTo 0 -9
+  lineTo 3 -6
+  moveTo 0 -9
+  lineTo -3 -6
+endpath
+endsymbol

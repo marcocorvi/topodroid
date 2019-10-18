@@ -1,0 +1,10 @@
+symbol line
+name phone
+name-pt telefone
+th_name u:phone
+group phone
+color 0x33ff66 0xff
+width 1
+csurvey 2 1 3 5
+dash 15 9
+endsymbol

@@ -1,0 +1,16 @@
+symbol point
+name water-dam
+name-pt barreira_água
+th_name u:water-dam
+color 0x00ccff
+csurvey 0 0 0
+path
+  moveTo 6 6
+  lineTo 6 -6
+  lineTo -6 -6
+  lineTo -6 6
+  lineTo 6 6
+  lineTo 0 -6
+  lineTo -6 6
+endpath
+endsymbol

@@ -1,0 +1,17 @@
+symbol point
+name stop
+name-pt pare
+th_name u:stop
+color 0xff0000
+csurvey 0 0 0
+path
+  moveTo -7.5 -6
+  lineTo 7.5 -6
+  moveTo -4.5 -6
+  lineTo -4.5 6
+  moveTo 4.5 -6
+  lineTo 4.5 6
+  moveTo -7.5 6
+  lineTo 7.5 6
+endpath
+endsymbol

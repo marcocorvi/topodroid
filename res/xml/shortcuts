@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+  <shortcut
+     android:shortcutId="new_survey"
+     android:enabled="true"
+     android:icon="@drawable/plus"
+     android:shortcutShortLabel="@string/new_survey_label"
+     >
+     <intent 
+       android:action="android.intent.action.VIEW"
+       android:targetPackage="com.topodroid.DistoX"
+       android:targetClass="com.topodroid.DistoX.MainWindow">
+       <extra android:name="action" android:value="new_survey" />
+     </intent>
+     <categories android:name="android.shortcut.conversation" />
+  </shortcut>
+  <shortcut
+     android:shortcutId="DistoX"
+     android:enabled="true"
+     android:icon="@drawable/distox"
+     android:shortcutShortLabel="@string/distox_label"
+     >
+     <intent 
+       android:action="android.intent.action.VIEW"
+       android:targetPackage="com.topodroid.DistoX"
+       android:targetClass="com.topodroid.DistoX.MainWindow">
+       <extra android:name="action" android:value="distox" />
+     </intent>
+     <categories android:name="android.shortcut.conversation" />
+  </shortcut>
+</shortcuts>

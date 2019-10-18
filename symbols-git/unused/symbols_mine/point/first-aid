@@ -1,0 +1,18 @@
+symbol point
+name first-aid
+name-pt primeiros_socorros
+th_name u:first-aid
+color 0xffffff
+csurvey 0 0 0 
+path
+  moveTo -6 -6
+  lineTo 6 -6
+  lineTo 6 6
+  lineTo -6 6
+  lineTo -6 -6
+  moveTo 0 3
+  lineTo 0 -3
+  moveTo 3 0
+  lineTo -3 0
+endpath
+endsymbol

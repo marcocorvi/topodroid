@@ -1,0 +1,16 @@
+symbol point
+name switch
+name-pt troca
+th_name u:switch
+color 0xffffff
+csurvey 0 0 0
+path
+  moveTo -9 0
+  lineTo -3 0
+  lineTo 3 4.5
+  lineTo 3 -4.5
+  lineTo -3 0
+  moveTo 3 0
+  lineTo 9 0
+endpath
+endsymbol

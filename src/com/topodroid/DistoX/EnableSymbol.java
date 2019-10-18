@@ -64,8 +64,8 @@ class EnableSymbol implements View.OnClickListener
     }
   }
 
-  // String getName()  { return mSymbol.mThName; }
   String getName()  { return mSymbol.getName(); }
+  String getGroupName()  { return mSymbol.getGroupName(); }
 
   // boolean getEnabled() { return mSymbol.isEnabled(); }
   // void setEnabled( boolean enabled ) { mSymbol.mEnabled = enabled; }

@@ -1,0 +1,14 @@
+symbol point
+name coastal
+th_name coastal
+color 0x6699ff
+csurvey 0 0 0
+path
+  addCircle -9 0 2.25
+  addCircle 9 0 2.25
+  moveTo -9 2.25 
+  cubicTo -6 3.75 -3 3 0 0
+  moveTo 9 2.25 
+  cubicTo 9 3.75 3 3 0 0
+endpath
+endsymbol

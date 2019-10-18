@@ -1,0 +1,16 @@
+symbol point
+name temple
+name-it tempio
+th_name temple
+color 0xcccccc
+csurvey 0 0 0
+path
+  moveTo -6 4.5
+  lineTo 6 4.5
+  cubicTo 6 0 -6 0 -6 4.5
+  moveTo 3 1.5
+  cubicTo 3 -1.5 -3 -1.5 -3 1.5
+  moveTo 0 -1.5
+  lineTo 0 -7.5
+endpath
+endsymbol

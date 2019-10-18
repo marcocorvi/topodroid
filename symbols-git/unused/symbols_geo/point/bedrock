@@ -1,0 +1,14 @@
+symbol point
+name bedrock
+name-it roccia
+th_name bedrock
+color 0xcc9966
+csurvey 0 0 0
+path
+  addCircle 0 0 7
+  moveTo -7 0
+  cubicTo -5 -4 2 -4 0 0
+  moveTo 7 0
+  cubicTo 5 -4 2 -4 0 0
+endpath
+endsymbol

@@ -1,0 +1,18 @@
+symbol point
+name monastery
+name-it monastero
+th_name monastery
+color 0xcccccc
+csurvey 0 0 0
+path
+  moveTo -4.5 -4.5
+  lineTo -4.5 4.5
+  lineTo 4.5 4.5
+  lineTo 4.5 -4.5
+  lineTo -4.5 -4.5
+  moveTo 0 -4.5
+  lineTo 0 -13.5
+  moveTo 4.5 -9
+  lineTo -4.5 -9
+endpath
+endsymbol

@@ -1,0 +1,17 @@
+symbol point
+name spring
+name-pt ressurgência
+th_name u:spring
+color 0x33ccff
+csurvey 0 0 0
+orientation yes
+path
+  addCircle 0 0 5
+  addCircle 0 0 2
+  moveTo 0 0
+  lineTo 0 -9
+  lineTo 3 -6
+  moveTo 0 -9
+  lineTo -3 -6
+endpath
+endsymbol

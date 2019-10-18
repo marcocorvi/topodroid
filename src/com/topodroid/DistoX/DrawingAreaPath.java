@@ -71,6 +71,8 @@ class DrawingAreaPath extends DrawingPointLinePath
     mPrefix   = (prefix != null && prefix.length() > 0)? prefix : "a";
     if ( BrushManager.hasArea( mAreaType ) ) { 
       setPathPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
+    // } else {
+    //   Log.v("DistoX-PAINT", "area (1) not in lib " + mAreaType + " out of " + BrushManager.mAreaLib.size() );
     }
     mOrientation = 0.0;
     if ( BrushManager.isAreaOrientable( mAreaType ) ) {
@@ -102,6 +104,8 @@ class DrawingAreaPath extends DrawingPointLinePath
     }
     if ( BrushManager.hasArea( mAreaType ) ) {
       setPathPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
+    // } else {
+    //   Log.v("DistoX-PAINT", "area (2) not in lib " + mAreaType );
     }
     mLevel = BrushManager.getAreaLevel( type );
   }
@@ -128,7 +132,7 @@ class DrawingAreaPath extends DrawingPointLinePath
       BrushManager.tryLoadMissingArea( thname );
       type = BrushManager.getAreaIndexByThNameOrGroup( thname, group );
       // TDLog.Log( TDLog.LOG_PLOT, "A: " + thname + " " + cnt + " " + visible + " " + orientation + " NP " + npt );
-      Log.v( "DistoX-PLOT", "A: " + type + " " + thname + " " + cnt + " " + visible + " " + orientation + " NP " + npt );
+      // Log.v( "DistoX-PLOT", "A: " + type + " " + thname + " " + cnt + " " + visible + " " + orientation + " NP " + npt );
       if ( type < 0 ) {
         // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.addAreaFilename( thname );
         type = 0;
@@ -189,6 +193,7 @@ class DrawingAreaPath extends DrawingPointLinePath
   void setPathPaint( Paint paint ) 
   { 
     mPaint = new Paint( paint );
+    // Log.v("DistoX-PAINT", "set area color " + mPaint.getColor() );
     mPaint.setStyle( isVisible() ? Paint.Style.FILL_AND_STROKE : Paint.Style.FILL );
   }
 

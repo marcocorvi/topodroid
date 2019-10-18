@@ -1,0 +1,12 @@
+symbol point
+name lagoon
+name-it lagunare
+th_name lagoon
+color 0x3399ff
+csurvey 0 0 0
+path
+  moveTo -9 0
+  cubicTo -4.5 4.5 -4.5 4.5 0 0
+  cubicTo 4.5 4.5 4.5 4.5 9 0
+endpath
+endsymbol

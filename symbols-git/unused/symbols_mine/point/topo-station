@@ -1,0 +1,14 @@
+symbol point
+name topo-station
+name-pt base_topográfica
+th_name u:topo-station
+color 0xff9999
+csurvey 0 0 0
+path
+  addCircle 0 0 2
+  moveTo 0 -7.5
+  lineTo -5.25 3
+  lineTo 5.25 3
+  lineTo 0 -7.5
+endpath
+endsymbol

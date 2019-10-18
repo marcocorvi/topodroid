@@ -1,0 +1,17 @@
+symbol point
+name shaft-closed
+name-pt poço_fechado
+th_name u:shaft-closed
+color 0xffffff
+csurvey 0 0 0
+path
+  moveTo -6 -6
+  lineTo 6 6
+  lineTo 6 -6
+  lineTo -6 6
+  lineTo -6 -6
+  lineTo 6 -6
+  moveTo 6 6 
+  lineTo -6 6
+endpath
+endsymbol

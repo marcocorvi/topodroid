@@ -1,0 +1,14 @@
+symbol point
+name cupid
+th_name u:cupid
+orientation yes
+color 0xffffff
+csurvey 6 6 80
+path
+  moveTo 0 -3
+  cubicTo 1 -6 5 -6 5 -3
+  cubicTo 5 0 1 2 0 5 
+  cubicTo -1 2 -5 0 -5 -3
+  cubicTo -5 -6 1 -6 0 -3
+endpath
+endsymbol

@@ -1,0 +1,18 @@
+symbol point
+name shaft-abandoned
+name-pt poço_abandonado
+th_name u:shaft-abandoned
+color 0xcccccc
+csurvey 0 0 0
+path
+  moveTo 6 -6
+  lineTo 6 6
+  lineTo -6 6
+  lineTo -6 -6
+  lineTo 6 -6
+  moveTo 0 -6
+  lineTo 0 6
+  moveTo -6 0
+  lineTo 6 0
+endpath
+endsymbol

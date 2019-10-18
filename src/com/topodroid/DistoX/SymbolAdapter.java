@@ -68,6 +68,7 @@ class SymbolAdapter extends ArrayAdapter< EnableSymbol >
     CheckBox     mCheckBox;
     ItemButton   mButton;
     TextView     mTextView;
+    TextView     mGroupView;
     EnableSymbol mSymbol;
   }
 
@@ -84,6 +85,7 @@ class SymbolAdapter extends ArrayAdapter< EnableSymbol >
       holder.mCheckBox = (CheckBox) convertView.findViewById( R.id.enable_symbol_cb );
       holder.mButton   = (ItemButton) convertView.findViewById( R.id.enable_symbol_bt );
       holder.mTextView = (TextView) convertView.findViewById( R.id.enable_symbol_tv );
+      holder.mGroupView = (TextView) convertView.findViewById( R.id.enable_symbol_grp );
       convertView.setTag( holder );
     } else {
       holder = (ViewHolder) convertView.getTag();
@@ -93,6 +95,7 @@ class SymbolAdapter extends ArrayAdapter< EnableSymbol >
     holder.mCheckBox.setOnClickListener( b );
     // holder.mCheckBox.setText( b.getName() );
     holder.mTextView.setText( b.getName() );
+    holder.mGroupView.setText( b.getGroupName() );
     holder.mButton.resetPaintPath( b.mSymbol.getPaint(), b.mSymbol.getPath(), b.sx, b.sy );
     convertView.invalidate();
     return convertView;

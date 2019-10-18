@@ -18,7 +18,7 @@ interface SymbolInterface
 {
   // String getFilename();
   String getName();
-  // String getFullName(); // name + group
+  String getGroupName(); 
   String getThName();
   Paint  getPaint();
   Path   getPath();

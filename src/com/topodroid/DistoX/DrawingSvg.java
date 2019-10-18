@@ -58,7 +58,8 @@ class DrawingSvg
     if ( grid != null && grid.size() > 0 ) {
       StringWriter sw = new StringWriter();
       PrintWriter pw  = new PrintWriter(sw);
-      pw.format(Locale.US, "<g style=\"fill:none;stroke-opacity:%.1f;stroke-width=%.2f;stroke:#666666\" >\n", opacity, TDSetting.mSvgGridStroke );
+      pw.format(Locale.US, "<g id=\"grid\"\n" );
+      pw.format(Locale.US, " style=\"fill:none;stroke-opacity:%.1f;stroke-width=%.2f;stroke:#666666\" >\n", opacity, TDSetting.mSvgGridStroke );
       for ( DrawingPath p : grid ) {
         pw.format(Locale.US, "  <path stroke-width=\"%.2f\" stroke=\"#%s\" d=\"", TDSetting.mSvgGridStroke, color );
         pw.format(Locale.US, "M %.2f %.2f",  xoff+p.x1, yoff+p.y1 );
@@ -123,7 +124,9 @@ class DrawingSvg
       out.write( "    </marker>\n"); 
       out.write( "  </defs>\n");
 
-      out.write( "<g transform=\"translate(" + (int)(-xmin) + "," + (int)(-ymin) + ")\" >\n" );
+      out.write( "<g id=\"canvas\"\n" );
+      out.write( "  transform=\"translate(" + (int)(-xmin) + "," + (int)(-ymin) + ")\" >\n" );
+
 
       // ***** FIXME TODO POINT SYMBOLS
       // {
@@ -157,7 +160,8 @@ class DrawingSvg
           // FIXME OK PROFILE
 
           // Log.v("DistoXsvg", "SVG legs");
-          out.write("<g style=\"fill:none;stroke-opacity:0.6;stroke:red\" >\n");
+          out.write("<g id=\"legs\"\n" );
+          out.write("  style=\"fill:none;stroke-opacity:0.6;stroke:red\" >\n");
           for ( DrawingPath sh : plot.getLegs() ) {
             DBlock blk = sh.mBlock;
             if ( blk == null ) continue;
@@ -191,7 +195,8 @@ class DrawingSvg
 
           // Log.v("DistoXsvg", "SVG splays " + plot.getSplays().size() );
           if ( TDSetting.mSvgSplays ) {
-            out.write("<g style=\"fill:none;stroke-opacity:0.4;stroke:orange\" >\n");
+            out.write("<g id=\"splays\"\n" );
+            out.write("  style=\"fill:none;stroke-opacity:0.4;stroke:orange\" >\n");
             for ( DrawingPath sh : plot.getSplays() ) {
               DBlock blk = sh.mBlock;
               if ( blk == null ) continue;
@@ -247,6 +252,7 @@ class DrawingSvg
 	ArrayList< XSection > xsections = new ArrayList< XSection >();
 
         // Log.v("DistoXsvg", "SVG commands " + plot.getCommands().size() );
+        out.write("<g id=\"points\">\n");
         for ( ICanvasCommand cmd : plot.getCommands() ) {
           if ( cmd.commandType() != 0 ) continue;
           DrawingPath path = (DrawingPath)cmd;
@@ -255,10 +261,6 @@ class DrawingSvg
           PrintWriter pw5  = new PrintWriter(sw5);
           if ( path.mType == DrawingPath.DRAWING_PATH_STATION ) {
             toSvg( pw5, (DrawingStationPath)path, xoff, yoff );
-          } else if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
-            toSvg( pw5, (DrawingLinePath)path, color_str, xoff, yoff );
-          } else if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
-            toSvg( pw5, (DrawingAreaPath) path, color_str, xoff, yoff );
           } else if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
             DrawingPointPath point = (DrawingPointPath)path;
             if ( BrushManager.isPointSection( point.mPointType ) ) {
@@ -291,15 +293,48 @@ class DrawingSvg
           out.write( sw5.getBuffer().toString() );
           out.flush();
         }
+        out.write("</g>\n");
+
+        // Log.v("DistoXsvg", "SVG commands " + plot.getCommands().size() );
+        out.write("<g id=\"lines\">\n");
+        for ( ICanvasCommand cmd : plot.getCommands() ) {
+          if ( cmd.commandType() != 0 ) continue;
+          DrawingPath path = (DrawingPath)cmd;
+          String color_str = pathToColor( path );
+          StringWriter sw5 = new StringWriter();
+          PrintWriter pw5  = new PrintWriter(sw5);
+          if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
+            toSvg( pw5, (DrawingLinePath)path, color_str, xoff, yoff );
+          }
+          out.write( sw5.getBuffer().toString() );
+          out.flush();
+        }
+        out.write("</g>\n");
+
+        // Log.v("DistoXsvg", "SVG commands " + plot.getCommands().size() );
+        out.write("<g id=\"areas\">\n");
+        for ( ICanvasCommand cmd : plot.getCommands() ) {
+          if ( cmd.commandType() != 0 ) continue;
+          DrawingPath path = (DrawingPath)cmd;
+          String color_str = pathToColor( path );
+          StringWriter sw5 = new StringWriter();
+          PrintWriter pw5  = new PrintWriter(sw5);
+          if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
+            toSvg( pw5, (DrawingAreaPath) path, color_str, xoff, yoff );
+          } 
+          out.write( sw5.getBuffer().toString() );
+          out.flush();
+        }
+        out.write("</g>\n");
 
         // xsections
         // Log.v("DistoXsvg", "SVG xsections " + xsections.size() );
-        out.write("<g>\n");
+        out.write("<g id=\"xsections\">\n");
 	for ( XSection xsection : xsections ) {
           // Log.v("DistoXsvg", "SVG xsection " + xsection.mFilename );
           StringWriter sw7 = new StringWriter();
           PrintWriter pw7  = new PrintWriter(sw7);
-          pw7.format("<g>\n");
+          pw7.format("<g id=\"%s\">\n", xsection.mFilename );
           tdrToSvg( pw7, xsection.mFilename, xsection.mX, xsection.mY, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
           pw7.format("</g>\n");
           out.write( sw7.getBuffer().toString() );
@@ -309,6 +344,7 @@ class DrawingSvg
 
         // stations
         // Log.v("DistoXsvg", "SVG statioons " + plot.getStations().size() );
+        out.write("<g id=\"stations\">\n");
         StringWriter sw6 = new StringWriter();
         PrintWriter pw6  = new PrintWriter(sw6);
         if ( TDSetting.mAutoStations ) {
@@ -324,6 +360,7 @@ class DrawingSvg
           out.write( sw6.getBuffer().toString() );
           out.flush();
         }
+        out.write("</g>\n");
       }
       out.write("</g>\n");
       out.write("</svg>\n");
@@ -442,10 +479,18 @@ class DrawingSvg
     } else {
       SymbolPoint sp = (SymbolPoint)BrushManager.mPointLib.getSymbolByIndex( idx );
       if ( sp != null ) {
-        pw.format(Locale.US, "<g transform=\"translate(%.2f,%.2f),scale(%d),rotate(%.2f)\" \n", 
-          xoff+point.cx, yoff+point.cy, POINT_SCALE, point.mOrientation );
-        pw.format(Locale.US, " style=\"fill:none;stroke:%s;stroke-width:%.2f\" >\n", color, TDSetting.mSvgPointStroke );
+        pw.format(Locale.US, "<g style=\"fill:none;stroke:%s;stroke-width:%.2f\" >\n", color, TDSetting.mSvgPointStroke );
+        // pw.format(Locale.US, "<g transform=\"translate(%.2f,%.2f), scale(%d), rotate(%.2f)\">\n", 
+        //   xoff+point.cx, yoff+point.cy, POINT_SCALE, point.mOrientation );
+
+        float o = (float)(point.mOrientation);
+        float s = POINT_SCALE * TDMath.sind( o );
+        float c = POINT_SCALE * TDMath.cosd( o );
+        pw.format(Locale.US, "<g transform=\"matrix(%.2f,%.2f,%.2f,%.2f,%.2f,%.2f)\">\n", 
+          c, s, -s, c, xoff+point.cx, yoff+point.cy );
+
         pw.format("%s\n", sp.mSvg );
+        pw.format("</g>\n");
         pw.format("</g>\n");
       } else {
         pw.format(Locale.US, "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"%d\" ", xoff+point.cx, yoff+point.cy, POINT_RADIUS );

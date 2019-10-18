@@ -1,0 +1,14 @@
+symbol point
+name fortress
+name-it fortezza
+th_name fortress
+color 0xcccccc
+csurvey 0 0 0
+path
+  addCircle 0 0 4.5
+  moveTo 0 -4.5
+  lineTo 0 -13.5
+  lineTo 4.5 -10.5
+  lineTo 0 -7.5
+endpath
+endsymbol

@@ -1,50 +1,65 @@
 <html><body>
 <h4>DRAWING TOOL SETS</h4>
 
-TopoDroid comes with one default set of drawing tools, and other eight sets [T]:
-<table cellpadding="2">
-<tr><th>&nbsp;</th><th>Points</th><th>Lines</th><th>Areas</th></tr>
-<tr><td>speleology</td>    <td>45</td><td>16</td><td>7</td></tr>
-<tr><td>speleology (2)</td><td>42</td><td>23</td><td>8</td></tr>
-<tr><td>archeology</td>    <td>35</td><td> 0</td><td>0</td></tr>
-<tr><td>artifacts</td>     <td>14</td><td> 7</td><td>0</td></tr>
-<tr><td>geology</td>       <td>35</td><td> 5</td><td>17</td></tr>
-<tr><td>biology</td>       <td>14</td><td> 0</td><td>0</td></tr>
-<tr><td>paleonthology</td> <td>28</td><td> 0</td><td>0</td></tr>
-<tr><td>mining</td>        <td> 2</td><td> 4</td><td>0</td></tr>
-<tr><td>karst</td>         <td>14</td><td> 8</td><td>2</td></tr>
-</table><br><p>
+The drawing tools are divided in three <i>types</i>: points, lines, or areas (regions).<br><p>
 
-The drawing tools are distinguighed by the <i>name</i> and the <i>type</i> (point, line, or area).<br>
-A few tools are invluded in more than one set.
+TopoDroid comes with one default set of drawing tools, and other eight additional sets [T].
+Overall tat makes more than 200 points, 60 lines, and 30 areas.
+The basic speleology set has about 40 points, 15 lines, and less than 10 areas.
+<br><p>
+
+The drawing tool files stored in the subfolders of <i>TopoDroid/symbol</i>.
+These files can be edited and modified, or even deleted.
+Forthermore, if other custom tool files
+are placed in the proper subfolder, TopoDroid will load and use them.
+<br><p>
+
+Eight <i>system</i> tools are always present:
+the three "user" symbols, points "label" and "section",
+lines "wall" and "section",
+and area "water".
+These tools are not stored as files, and cannot be changed.
+A custom tool file with the same name as one of these tools is skipped.
 <br><p>
 
 By default only the speleology tools are installed.
-The installation of additional tools is disabled by a setting [G].
-<br><p>
-
-Current symbols are stored in the subfolders of <i>TopoDroid/symbol</i>.
-Installed symbols can be edited and modified, or even deleted. Forthermore, if other custom symbols
-are placed in the proper subfolder, TopoDroid will load and use them.
+The installation of additional tools is enabled through a setting [G].
+A few tools are included in more than one set.
 The additional symbol sets are provided mostly as examples of custom symbols.
-<br>
-Eight symbols cannot be removed, namely the three "user" symbols, points "label" and "section", lines "wall" and "section",
-and area "water".
-These symbols are not stored as files, and cannot be overridden.
-Custom symbols with the same name as these symbol are skipped.
 <br><p>
 
-With the <i>PALETTE</i> menu [G] of the <u>main window</u> you get a dialog listing the sets of tools.
+To install additional tool sets tap the
+the <i>PALETTE</i> menu [G] of the <u>main window</u>.
+The coming dialog lists the sets of tools.
 Check the tool sets you want to add and press the button <i>Install</i>.
 <br>
-If you press the button <i>Replace</i> the currently installed tools are removed before
-installing the tool sets you selected.
+If you press the button <i>Replace</i> the currently installed tools are
+removed before installing the tool sets you selected.
 <br>
 <p>
 
-After installing you must enable the tools you need, using the <i>Palette</i> button
-of the <u>main window</u>. The choice of enabled tools is stored in the database and is not lost when 
-tools are removed, therefore you will find them enabled if you re-install the set later.
+After installing new tool sets you must enable the tools you need, using the
+<i>Palette</i> button of the <u>main window</u>.
+The choice of enabled tools is stored in the database and is not lost when 
+tool files are removed, therefore you will find them enabled if you re-install
+the set later.
+<br><p>
+
+<b>Tool groups</b>
+The tools of each type are further divided in <i>groups</i> (classes).
+A tool can belong to a group or have no group.
+<br><p>
+
+Groups are used in two ways.
+<ol>
+<li>when a sketch is opened, and an item type is not found, TopoDroid tries to substitute
+it for another type in the same group. If there is none, the "user" tool is used.</li>
+<li>line continuation and joining can occur only with lines of the same group.<li>
+</ol>
+<br><p>
+
+The tools groups are displayed in the tool enabling dialog.
+Group names are in English.
 <br><p>
 
 

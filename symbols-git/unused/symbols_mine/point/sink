@@ -1,0 +1,11 @@
+symbol point
+name sink
+name-pt sumidouro
+th_name u:sink
+color 0x33ccff
+csurvey 0 0 0
+path
+  addCircle 0 0 5
+  addCircle 0 0 2
+endpath
+endsymbol

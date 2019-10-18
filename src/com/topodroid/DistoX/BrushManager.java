@@ -60,17 +60,17 @@ class BrushManager
   static Symbol getLineByThName( String thname ) { return (mLineLib == null)? null : mLineLib.getSymbolByThName( thname ); }
   static Symbol getAreaByThName( String thname ) { return (mAreaLib == null)? null : mAreaLib.getSymbolByThName( thname ); }
 
-  static boolean hasPointByThName( String thname ) { return (mPointLib == null) && mPointLib.hasSymbolByThName( thname ); }
-  static boolean hasLineByThName( String thname ) { return (mLineLib == null) && mLineLib.hasSymbolByThName( thname ); }
-  static boolean hasAreaByThName( String thname ) { return (mAreaLib == null) && mAreaLib.hasSymbolByThName( thname ); }
+  static boolean hasPointByThName( String thname ) { return (mPointLib != null) && mPointLib.hasSymbolByThName( thname ); }
+  static boolean hasLineByThName( String thname ) { return (mLineLib != null) && mLineLib.hasSymbolByThName( thname ); }
+  static boolean hasAreaByThName( String thname ) { return (mAreaLib != null) && mAreaLib.hasSymbolByThName( thname ); }
 
   static int getPointIndexByThNameOrGroup( String thname, String group ) { return (mPointLib == null)? -1 : mPointLib.getSymbolIndexByThNameOrGroup( thname, group ); }
   static int getLineIndexByThNameOrGroup( String thname, String group ) { return (mLineLib == null)? -1 : mLineLib.getSymbolIndexByThNameOrGroup( thname, group ); }
   static int getAreaIndexByThNameOrGroup( String thname, String group ) { return (mAreaLib == null)? -1 : mAreaLib.getSymbolIndexByThNameOrGroup( thname, group ); }
 
-  static void setRecentPoints( Symbol[] points ) { if (mPointLib == null) mPointLib.setRecentSymbols( points ); }
-  static void setRecentLines( Symbol[] lines )   { if (mLineLib == null)  mLineLib.setRecentSymbols( lines ); }
-  static void setRecentAreas( Symbol[] areas )   { if (mAreaLib == null)  mAreaLib.setRecentSymbols( areas ); }
+  static void setRecentPoints( Symbol[] points ) { if (mPointLib != null) mPointLib.setRecentSymbols( points ); }
+  static void setRecentLines( Symbol[] lines )   { if (mLineLib != null)  mLineLib.setRecentSymbols( lines ); }
+  static void setRecentAreas( Symbol[] areas )   { if (mAreaLib != null)  mAreaLib.setRecentSymbols( areas ); }
 
   static String getPointThName( int idx ) { return (mPointLib == null)? null : mPointLib.getSymbolThName( idx ); }
   static String getLineThName( int idx ) { return (mLineLib == null)? null : mLineLib.getSymbolThName( idx ); }
@@ -80,9 +80,9 @@ class BrushManager
   static String getLineGroup( int idx ) { return (mLineLib == null)? null : mLineLib.getSymbolGroup( idx ); }
   static String getAreaGroup( int idx ) { return (mAreaLib == null)? null : mAreaLib.getSymbolGroup( idx ); }
 
-  static boolean hasPoint( int idx ) { return (mPointLib == null) && idx < mPointLib.size(); }
-  static boolean hasLine( int idx ) { return (mLineLib == null) && idx < mLineLib.size(); }
-  static boolean hasArea( int idx ) { return (mAreaLib == null) && idx < mAreaLib.size(); }
+  static boolean hasPoint( int idx ) { return (mPointLib != null) && idx < mPointLib.size(); }
+  static boolean hasLine( int idx ) { return (mLineLib != null) && idx < mLineLib.size(); }
+  static boolean hasArea( int idx ) { return (mAreaLib != null) && idx < mAreaLib.size(); }
 
   // -----------------------------------------------------------
   static String getPointName( int idx ) { return mPointLib.getSymbolName( idx ); }
