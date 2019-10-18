@@ -6,7 +6,7 @@
     <string name="user_man_fail">Manualul de utilizare tradus nu a putut fi instalat</string>
 
     <string name="app_name">TopoDroid</string>
-    <string name="double_back">Apasă înca o dată BACK pentru a ieși</string>
+    <string name="double_back">Apasă încă odată BACK pentru a ieși</string>
 
     <!-- TODO string name="new_survey_label">New survey</string -->
     <!-- TODO string name="distox_label">DistoX</string -->
@@ -32,7 +32,7 @@
 
     <string name="POINT">PUNCT</string>
     <string name="LINE">LINIE</string>
-    <string name="AREA">SUPRAFAȚA</string>
+    <string name="AREA">SUPRAFAȚĂ</string>
     <string name="HELP">AJUTOR</string>
     <string name="STATION">STAȚIE</string>
     <string name="UP">ÎN SUS</string>
@@ -64,7 +64,7 @@
 
     <string name="make_walls">Pereți</string>
     <string name="missing_station">Stație lipsă</string>
-    <string name="station_not_found">Stație negasită</string>
+    <string name="station_not_found">Stație negăsită</string>
     <string name="shot_not_found">Nu există măsurători</string>
     <!-- UNUSED string name="missing_area">ZONĂ</string -->
     <!-- UNUSED string name="missing_hint">Activează uneltele lipsă sau reinstalează-le</string -->
@@ -159,9 +159,9 @@
     <string name="few_data">Date insuficiente</string>
     <string name="few_iter">Eșec: prea multe iterațiis</string>
     <string name="few_groups">Date insuficiente în grup</string>
-    <string name="found_groups">Au fost gasite %1$d grupuri</string>
+    <string name="found_groups">Au fost găsite %1$d grupuri</string>
     <!-- UNUSED string name="few_plots">Schițe?? insuficiente</string -->
-    <string name="few_calibs">Calibrari insufficiente</string>
+    <string name="few_calibs">Calibrări insufficiente</string>
     <string name="getting_info">Se descarcă informații din DistoX &#8230;</string>
 
     <string name="calib_import_title">Importare calibrare</string>
@@ -286,7 +286,7 @@
     <string name="no_calib_check">Lipsește măsurătoarea verificare calibrare</string>
     <string name="no_calibration">Calibrare neselectată</string>
     <string name="no_capture_app">Lipsește aplicația de captură de imagine</string>
-    <string name="no_cave3d">Cave3D nu ete instalat</string>
+    <string name="no_cave3d">Cave3D nu este instalat</string>
     <string name="no_data_reduction">Fără simplificare de date</string>
     <string name="no_db">Lipsește baza de date</string>
     <string name="no_device_address">Dispoziv neselectat</string>
