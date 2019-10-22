@@ -975,7 +975,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_cat_calib">CALIBRATIONS</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
   <string name="pref_cat_device">DEVICES</string>
-  <string name="pref_cat_geek">GEEK SETTINGS</string>
+  <string name="pref_cat_geek">CUSTOM SETTINGS</string>
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
 
   <string name="pref_locale_title">Language</string>
@@ -1148,6 +1148,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_section_splay_message">Minimum angle with the section plane for dashed splays</string>
   <string name="pref_data_backup_title">Data auto-export</string>
   <string name="pref_data_backup_summary">Automatic data export (need default format)</string>
+  <string name="pref_zipped_symbols_title">Zipped symbols files</string>
+  <string name="pref_zipped_symbols_summary">Store/load symbol files to/from zip archive</string>
   <string name="pref_fixed_origin_title">Sketch origin</string>
   <string name="pref_fixed_origin_summary">Fixed sketch origin</string>
   <string name="pref_shared_xsections_title">Shared x-sections</string>

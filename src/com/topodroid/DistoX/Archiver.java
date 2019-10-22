@@ -20,6 +20,8 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.FileInputStream;
 import java.io.BufferedInputStream;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.BufferedOutputStream;
 import java.util.zip.ZipOutputStream;
@@ -51,7 +53,6 @@ class Archiver
   private boolean addEntry( ZipOutputStream zos, File name )
   {
     if ( name == null || ! name.exists() ) return false;
-    // Log.v( "DistoX-ZIP", "zip add file " + name.getPath() );
     boolean ret = false;
     BufferedInputStream bis = null;
     try { 
@@ -70,14 +71,16 @@ class Archiver
     } catch ( IOException e ) {
       TDLog.Error( "IO exception " + e.getMessage() );
     } finally {
-      if ( bis != null ) try { bis.close(); } catch (IOException e ) { ret = false; }
+      if ( bis != null ) try { bis.close(); } catch (IOException e ) { /* ret = false; */ }
     }
+    // Log.v( "DistoX-ZIP", "zip add file " + name.getPath() + " return " + ret );
     return ret;
   }
 
   private void addOptionalEntry( ZipOutputStream zos, File name )
   {
     if ( name == null || ! name.exists() ) return;
+    // Log.v( "DistoX-ZIP", "zip optional file " + name.getPath() );
     BufferedInputStream bis = null;
     try { 
       // TDLog.Log( TDLog.LOG_IO, "zip add file " + name.getPath() );
@@ -130,6 +133,91 @@ class Archiver
     return ret;
   }
 
+  // @param zipname    name of compressed zip
+  // @param lib        symbol library
+  // @param dirpath    directory of symbol files (must end with '/') eg, TDPath.APP_POINT_PATH
+  boolean compressSymbols( String zipname, SymbolLibrary lib, String dirpath )
+  {
+    if ( lib == null ) return false;
+    if ( ! (new File(dirpath)).exists() ) return false;
+    List< Symbol > symbols = lib.getSymbols();
+    ZipOutputStream zos = null;
+    try { 
+      zos = new ZipOutputStream( new BufferedOutputStream( new FileOutputStream( zipname ) ) );
+      for ( Symbol symbol : symbols ) {
+        if ( symbol.mEnabled ) {
+          String filename = symbol.getThName();
+          if ( filename.startsWith( "u:" ) ) filename = filename.substring( 2 );
+          addOptionalEntry( zos, new File( dirpath + filename ) );
+        }
+      }
+    } catch ( FileNotFoundException e ) {
+      return false;
+    } finally {
+      if ( zos != null ) try { zos.close(); } catch ( IOException e ) { TDLog.Error("ZIP-symbol close error"); }
+    }
+    return true;
+  }
+
+  // return true is a symbol has been uncompressed
+  boolean uncompressSymbols( ZipInputStream zin, String dirpath, String prefix )
+  {
+    if ( ! TDSetting.mZipWithSymbols ) return false;
+    boolean ret = false;
+    String filename = TDPath.APP_SYMBOL_PATH + "tmp.zip";
+    FileOutputStream fout = null;
+    int c;
+    byte[] sbuffer = new byte[4096];
+    try { 
+      fout = new FileOutputStream( filename );
+      while ( ( c = zin.read( sbuffer ) ) != -1 ) {
+        fout.write(sbuffer, 0, c);
+      }
+      fout.close();
+      fout = null;
+      // uncompress symbols zip
+      ZipEntry sze;
+      FileInputStream fis = new FileInputStream( filename );
+      ZipInputStream szin = new ZipInputStream( fis );
+      while ( ( sze = szin.getNextEntry() ) != null ) {
+        String symbolfilename = dirpath + sze.getName();
+        Log.v("DistoX-ZIP", "try to uncompress symbol " + symbolfilename );
+        File symbolfile = new File( symbolfilename );
+        if ( ! symbolfile.exists() ) { // don't overwrite
+          Log.v("DistoX-ZIP", "uncompress symbol " + symbolfilename );
+          FileOutputStream sfout = new FileOutputStream( symbolfilename ); // uncompress symbols zip
+          while ( ( c = szin.read( sbuffer ) ) != -1 ) {
+            sfout.write(sbuffer, 0, c);
+          }
+          sfout.close();
+          ret = true;
+          // add symbol to library and enable it
+        }
+        szin.closeEntry();
+        // need to get the thname from the file
+        FileInputStream sfis = new FileInputStream( symbolfilename );
+        BufferedReader br = new BufferedReader( new InputStreamReader( sfis, "UTF-8" ) ); // String iso = "UTF-8";
+        String line;
+        while ( (line = br.readLine()) != null ) {
+          line = line.trim();
+          if ( line.startsWith("th_name") ) {
+            String th_name = line.substring(8).trim();
+            Log.v("DistoX-ZIP", "enable " + th_name );
+            TopoDroidApp.mData.setSymbolEnabled( prefix + th_name, true );
+            break;
+          }
+        }
+        sfis.close();
+      }
+    } catch ( FileNotFoundException e1 ) { Log.v( "DistoX-ZIP", "File Not Found " + e1.getMessage() );
+    } catch ( IOException e2 ) { Log.v( "DistoX-ZIP", "I/O exception " + e2.getMessage() );
+    } finally {
+      if ( fout != null ) { try { fout.close(); } catch ( IOException e ) { } }
+    }
+    return ret;
+  }
+
+
   boolean archive( TopoDroidApp mApp )
   {
     if ( TDInstance.sid < 0 ) return false;
@@ -142,12 +230,28 @@ class Archiver
 
     zipname = TDPath.getSurveyZipFile( survey );
     TDPath.checkPath( zipname );
-    TDLog.Log( TDLog.LOG_IO, "zip export file: " + zipname );
+    // TDLog.Log( TDLog.LOG_IO, "zip export file: " + zipname );
+    Log.v( "DistoX-ZIP", "zip export file: " + zipname + " pre " + ret );
 
     ZipOutputStream zos = null;
     try {
       String pathname;
       zos = new ZipOutputStream( new BufferedOutputStream( new FileOutputStream( zipname ) ) );
+
+      if ( TDSetting.mZipWithSymbols ) {
+        String filename = TDPath.APP_SYMBOL_PATH + "points.zip";
+        if ( compressSymbols( filename, BrushManager.mPointLib, TDPath.APP_POINT_PATH ) )  {
+          addOptionalEntry( zos, new File( filename ) );
+        }
+        filename = TDPath.APP_SYMBOL_PATH + "lines.zip";
+        if ( compressSymbols( filename, BrushManager.mLineLib, TDPath.APP_LINE_PATH ) )  {
+          addOptionalEntry( zos, new File( filename ) );
+        }
+        filename = TDPath.APP_SYMBOL_PATH + "areas.zip";
+        if ( compressSymbols( filename, BrushManager.mAreaLib, TDPath.APP_AREA_PATH ) )  {
+          addOptionalEntry( zos, new File( filename ) );
+        }
+      }
 
 /* FIXME_SKETCH_3D *
       List< Sketch3dInfo > sketches  = app_data.selectAllSketches( TDInstance.sid, TDStatus.NORMAL );
@@ -162,7 +266,7 @@ class Archiver
 
       List< PlotInfo > plots  = app_data.selectAllPlots( TDInstance.sid, TDStatus.NORMAL );
       for ( PlotInfo plt : plots ) {
-        ret &= addEntry( zos, new File( TDPath.getSurveyPlotTdrFile( survey, plt.name ) ) );
+        addOptionalEntry( zos, new File( TDPath.getSurveyPlotTdrFile( survey, plt.name ) ) ); // N.B. plot file CAN be missing
         addOptionalEntry( zos, new File( TDPath.getSurveyPlotTh2File( survey, plt.name ) ) );
         addOptionalEntry( zos, new File( TDPath.getSurveyPlotDxfFile( survey, plt.name ) ) );
         addOptionalEntry( zos, new File( TDPath.getSurveyPlotSvgFile( survey, plt.name ) ) );
@@ -189,7 +293,7 @@ class Archiver
 
       plots  = app_data.selectAllPlots( TDInstance.sid, TDStatus.DELETED );
       for ( PlotInfo plt : plots ) {
-        ret &= addEntry( zos, new File( TDPath.getSurveyPlotTdrFile( survey, plt.name ) ) );
+        addOptionalEntry( zos, new File( TDPath.getSurveyPlotTdrFile( survey, plt.name ) ) );
       }
 
       addDirectory( zos, new File( TDPath.getSurveyPhotoDir( survey ) ) );
@@ -221,10 +325,12 @@ class Archiver
       pathname = TDPath.getSqlFile( );
       app_data.dumpToFile( pathname, TDInstance.sid );
       ret &= addEntry( zos, new File(pathname) );
+      // Log.v("DistoX-ZIP", "archive post-sqlite returns " + ret );
 
       pathname = TDPath.getManifestFile();
       mApp.writeManifestFile();
       ret &= addEntry( zos, new File(pathname) );
+      // Log.v("DistoX-ZIP", "archive post-manifest returns " + ret );
 
       // ret = true;
     } catch ( FileNotFoundException e ) {
@@ -236,6 +342,7 @@ class Archiver
       if ( zos != null ) try { zos.close(); } catch ( IOException e ) { TDLog.Error("ZIP close error"); }
       TDUtil.deleteFile( TDPath.getSqlFile() );
     }
+    // Log.v("DistoX-ZIP", "archive returns " + ret );
     return ret;
   }
 
@@ -354,7 +461,20 @@ class Archiver
             pathname = TDPath.getJpgDir( surveyname );
             TDUtil.makeDir( pathname );
             pathname = TDPath.getJpgFile( surveyname, ze.getName() );
-          // } else {
+          } else if ( ze.getName().equals( "points.zip" ) ) { // POINTS
+            if ( uncompressSymbols( zin, TDPath.APP_POINT_PATH, "p_" ) ) {
+              BrushManager.reloadPointLibrary( mApp, mApp.getResources() );
+            }
+          } else if ( ze.getName().equals( "lines.zip" ) ) { // LINES
+            if ( uncompressSymbols( zin, TDPath.APP_LINE_PATH, "l_" ) ) {
+              BrushManager.reloadLineLibrary( mApp.getResources() );
+            }
+          } else if ( ze.getName().equals( "areas.zip" ) ) { // AREAS
+            if ( uncompressSymbols( zin, TDPath.APP_AREA_PATH, "a_" ) ) {
+              BrushManager.reloadAreaLibrary( mApp.getResources() );
+            }
+          } else {
+            Log.v("DistoX-ZIP", "zip entry " + ze.getName() );
             // unexpected file type
             // pathname = null; // already null
           }

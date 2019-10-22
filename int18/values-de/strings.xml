@@ -1138,6 +1138,8 @@
   <string name="pref_section_splay_message">Grenzwert in Querschnitten ab welchem Hilfslinien gestrichelt dargestellt werden; Standardwert: 60</string>
   <string name="pref_data_backup_title">Auto-Datenexport</string>
   <string name="pref_data_backup_summary">Automatischer Datenexport beim Verlassen (benötigt ein Standard Exportformat)</string>
+  <!-- TODO string name="pref_zipped_symbols_title">Zipped symbols files</string -->
+  <!-- TODO string name="pref_zipped_symbols_summary">Store/load symbol files to/from zip archive</string -->
   <string name="pref_fixed_origin_title">Skizzen fixieren</string>
   <string name="pref_fixed_origin_summary">Skizzen haben einen fixen Verankerungspunkt</string>
   <string name="pref_shared_xsections_title">Querschn. Sichtbarkeit</string>

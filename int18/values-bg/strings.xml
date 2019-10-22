@@ -1113,6 +1113,8 @@
   <string name="pref_section_splay_message">Пунктирани, ако ъгъла от равнината е по-голям</string>
   <string name="pref_data_backup_title">Автоматично експортиране на измервания</string>
   <string name="pref_data_backup_summary">Автоматично експортиране на измервания (необходим е зададен формат)</string>
+  <!-- TODO string name="pref_zipped_symbols_title">Zipped symbols files</string -->
+  <!-- TODO string name="pref_zipped_symbols_summary">Store/load symbol files to/from zip archive</string -->
   <!-- TODO string name="pref_fixed_origin_title">Sketch origin</string -->
   <!-- TODO string name="pref_fixed_origin_summary">Fixed sketch origin</string -->
   <string name="pref_lrud_vertical_title">Мин. наклон Горе/Долу</string>

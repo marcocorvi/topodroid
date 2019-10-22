@@ -76,8 +76,9 @@ public class TDPrefActivity extends Activity
   static final int PREF_GEEK_SHOT          = 29; 
   static final int PREF_GEEK_PLOT          = 30; 
   static final int PREF_GEEK_LINE          = 31; 
-  static final int PREF_GEEK_DEVICE        = 32; 
-  static final int PREF_CATEGORY_LOG       = 33; // this must be the last
+  static final int PREF_GEEK_IMPORT        = 32; 
+  static final int PREF_GEEK_DEVICE        = 33; 
+  static final int PREF_CATEGORY_LOG       = 34; // this must be the last
 
   static int[] mTitleRes = {
     R.string.title_settings_main,     // 0
@@ -112,6 +113,7 @@ public class TDPrefActivity extends Activity
     R.string.title_settings_survey,
     R.string.title_settings_plot,
     R.string.title_settings_line,     // 30
+    R.string.title_settings_import,   // 31
     R.string.title_settings_device,   // 31
     R.string.title_settings_log 
   };
@@ -233,6 +235,7 @@ public class TDPrefActivity extends Activity
       case PREF_GEEK_SHOT:          mPrefs = TDPref.makeGeekShotPrefs( this, hlp ); break;
       case PREF_GEEK_PLOT:          mPrefs = TDPref.makeGeekPlotPrefs( this, hlp ); break;
       case PREF_GEEK_LINE:          mPrefs = TDPref.makeGeekLinePrefs( this, hlp ); break;
+      case PREF_GEEK_IMPORT:        mPrefs = TDPref.makeGeekImportPrefs( this, hlp ); break;
       case PREF_GEEK_DEVICE:        mPrefs = TDPref.makeGeekDevicePrefs( this, hlp ); break;
       // case PREF_CATEGORY_SKETCH:    mPrefs = TDPref.makeSketchPrefs(   this, hlp ); break; // FIXME_SKETCH_3D
       case PREF_CATEGORY_LOG:       mPrefs = TDPref.makeLogPrefs(      this, hlp ); break;
@@ -330,6 +333,7 @@ public class TDPrefActivity extends Activity
       linkPreference( "DISTOX_GEEK_PLOT",           PREF_GEEK_PLOT );
       linkPreference( "DISTOX_GEEK_LINE",           PREF_GEEK_LINE );
       linkPreference( "DISTOX_PLOT_WALLS",          PREF_PLOT_WALLS );
+      linkPreference( "DISTOX_GEEK_IMPORT",         PREF_GEEK_IMPORT );
       linkPreference( "DISTOX_GEEK_DEVICE",         PREF_GEEK_DEVICE );
       // linkPreference( "DISTOX_SKETCH_PREF",         PREF_CATEGORY_SKETCH ); // FIXME_SKETCH_3D
     }

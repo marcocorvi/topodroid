@@ -465,22 +465,18 @@ class TDPrefKey
   static String[] EXPORT_import = { // [3]
     "DISTOX_PT_CMAP",         // 0
     "DISTOX_SPLAY_EXTEND",    // whether to set L/R extend to LRUD splay shots (Compass, VTopo import)
-    "DISTOX_IMPORT_DATAMODE" 
   };
   static int[] EXPORT_importtitle = {
     R.string.pref_pt_color_map_title,
     R.string.pref_LRExtend_title,
-    R.string.pref_import_datamode_title
   };
   static int[] EXPORT_importdesc = {
     R.string.pref_pt_color_map_summary,
     R.string.pref_LRExtend_summary,
-    R.string.pref_import_datamode_summary
   };
   static String[] EXPORT_importdef = { 
     TDString.EMPTY,
     TRUE,
-    TDString.ZERO  // SurveyInfo.DATAMODE_NORMAL
   };
   // ------------------------------------------------------------------------------
   static String[] EXPORT_CSV = { // [1]
@@ -1447,6 +1443,7 @@ class TDPrefKey
     "DISTOX_GEEK_LINE",       // FORWARD
     "DISTOX_PLOT_WALLS",      // FORWARD
     "DISTOX_GEEK_DEVICE",     // FORWARD
+    "DISTOX_GEEK_IMPORT",     // FORWARD
     // "DISTOX_SKETCH_PREF",     // FORWARD FIXME_SKETCH_3D
     null
   };
@@ -1460,6 +1457,7 @@ class TDPrefKey
     R.string.pref_tool_line_title,
     R.string.pref_plot_walls_title,
     R.string.pref_cat_device,
+    R.string.pref_cat_import_export,
     // R.string.pref_cat_sketch,
     -1
   };
@@ -1468,6 +1466,7 @@ class TDPrefKey
     R.string.pref_palettes_summary,
     R.string.pref_backups_clear_summary,
     R.string.pref_packet_logger_summary,
+    -1,
     -1,
     -1,
     -1,
@@ -1486,7 +1485,32 @@ class TDPrefKey
     TDString.EMPTY,
     TDString.EMPTY,
     TDString.EMPTY,
+    TDString.EMPTY,
     // TDString.EMPTY,
+    null
+  };
+
+  // -------------------------------------------------------------------------------
+  static String[] GEEKIMPORT = {
+    "DISTOX_ZIP_WITH_SYMBOLS",
+    "DISTOX_IMPORT_DATAMODE" 
+  };
+ 
+  static int[] GEEKIMPORTtitle = {
+    R.string.pref_zipped_symbols_title,
+    R.string.pref_import_datamode_title,
+    -1
+  };
+
+  static int[] GEEKIMPORTdesc = {
+    R.string.pref_zipped_symbols_summary,
+    R.string.pref_import_datamode_summary,
+    -1
+  };
+
+  static String[] GEEKIMPORTdef = {
+    FALSE,
+    TDString.ZERO, // SurveyInfo.DATAMODE_NORMAL
     null
   };
 

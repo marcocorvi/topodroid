@@ -38,6 +38,18 @@ class SymbolPointLibrary extends SymbolLibrary
   // int mPointDangerIndex;
   int mPointSectionIndex;
 
+  // empty poin library
+  SymbolPointLibrary( )
+  {
+    super( "p_" );
+    mPointUserIndex   = 0;
+    mPointLabelIndex  = -1;
+    mPointPhotoIndex  = -1;
+    mPointAudioIndex  = -1;
+    // mPointDangerIndex = -1;
+    mPointSectionIndex = -1;
+  }
+
   SymbolPointLibrary( Context ctx, Resources res )
   {
     super( "p_" );

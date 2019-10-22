@@ -1119,6 +1119,8 @@
   <string name="pref_section_splay_message">Nella sezione, oltre questo angolo, gli splay sono tratteggiati</string>
   <string name="pref_data_backup_title">Auto-esporta dati</string>
   <string name="pref_data_backup_summary">Esportazione automatica dei dati (necessita formato di default)</string>
+  <!-- TODO string name="pref_zipped_symbols_title">Zipped symbols files</string -->
+  <!-- TODO string name="pref_zipped_symbols_summary">Store/load symbol files to/from zip archive</string -->
   <string name="pref_fixed_origin_title">Origine disegno</string>
   <string name="pref_fixed_origin_summary">Origine disegno fissa</string>
   <string name="pref_shared_xsections_title">X-section condivise</string>

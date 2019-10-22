@@ -1133,6 +1133,8 @@
   <string name="pref_section_splay_message">Боковые замеры с углом к плоскости сечения больше заданого значения показаны пунктиром</string>
   <string name="pref_data_backup_title">Авто-экспорт данных</string>
   <string name="pref_data_backup_summary">Автоматический экспорт данных (требуется установить формат по умолчанию)</string>
+  <!-- TODO string name="pref_zipped_symbols_title">Zipped symbols files</string -->
+  <!-- TODO string name="pref_zipped_symbols_summary">Store/load symbol files to/from zip archive</string -->
   <string name="pref_fixed_origin_title">Точка отсчета абрисов</string>
   <string name="pref_fixed_origin_summary">Зафиксировать точку отсчета координат абриса</string>
   <string name="pref_shared_xsections_title">Общий поперечный разрез</string>

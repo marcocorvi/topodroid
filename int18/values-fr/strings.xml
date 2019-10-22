@@ -1120,6 +1120,8 @@
   <string name="pref_section_splay_message">Les visées latérales d\'habillage des sections transverses avec angle inférieur à ce seuil sont en pointillés</string>
   <string name="pref_data_backup_title">Auto-export des données</string>
   <string name="pref_data_backup_summary">Export automatique des données (nécessite le format par défaut)</string>
+  <!-- TODO string name="pref_zipped_symbols_title">Zipped symbols files</string -->
+  <!-- TODO string name="pref_zipped_symbols_summary">Store/load symbol files to/from zip archive</string -->
   <string name="pref_fixed_origin_title">Origine du croquis</string>
   <string name="pref_fixed_origin_summary">Origine d\'esquisse fixe</string>
   <string name="pref_shared_xsections_title">Partage des sections transverses</string>

@@ -141,6 +141,7 @@ class TDSetting
   static float mOrthogonalLRUDCosine = 1;     // cosine of the angle
 
   static boolean mExportStationsPrefix = false;  // whether to prepend cave name to station in cSurvey/compass export
+  static boolean mZipWithSymbols       = false;  // whether to add/load symbols to/from archive
 
   // static boolean mXTherionAreas = false;
   static boolean mAutoStations  = true;  // whether to add stations automatically to scrap therion files
@@ -768,7 +769,12 @@ class TDSetting
     String[] defImport = TDPrefKey.EXPORT_importdef;
     // keyImport[ 0 ] // DISTOX_PT_CMAP
     mLRExtend          = prefs.getBoolean(     keyImport[ 1], bool(defImport[ 1]) ); // DISTOX_SPLAY_EXTEND
-    mImportDatamode    = tryInt(   prefs,      keyImport[ 2],      defImport[ 2] );  // DISTOX_IMPORT_DATAMODE
+
+
+    String[] keyGeekImport = TDPrefKey.GEEKIMPORT;
+    String[] defGeekImport = TDPrefKey.GEEKIMPORTdef;
+    mZipWithSymbols = prefs.getBoolean(     keyGeekImport[ 0], bool(defGeekImport[ 0]) ); // DISTOX_ZIP_WITH_SYMBOLS
+    mImportDatamode = tryInt(   prefs,      keyGeekImport[ 1],      defGeekImport[ 1] );  // DISTOX_IMPORT_DATAMODE
 
     String[] keyExport = TDPrefKey.EXPORT;
     String[] defExport = TDPrefKey.EXPORTdef;
@@ -1043,6 +1049,7 @@ class TDSetting
       case TDPrefActivity.PREF_GEEK_SHOT:       return updatePrefGeekShot( hlp, k, v );
       case TDPrefActivity.PREF_GEEK_PLOT:       return updatePrefGeekPlot( hlp, k, v );
       case TDPrefActivity.PREF_GEEK_LINE:       return updatePrefGeekLine( hlp, k, v );
+      case TDPrefActivity.PREF_GEEK_IMPORT:     return updatePrefGeekImport( hlp, k, v );
       case TDPrefActivity.PREF_GEEK_DEVICE:     return updatePrefGeekDevice( hlp, k, v );
       case TDPrefActivity.PREF_CATEGORY_LOG:    return updatePrefLog( hlp, k, v );
       default:
@@ -1463,10 +1470,23 @@ class TDSetting
       // not handled here
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_SPLAY_EXTEND (bool)
       mLRExtend = tryBooleanValue( hlp, k, v, bool(def[ 1]) ); 
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_IMPORT_DATAMODE (choice)
-      mImportDatamode = tryIntValue( hlp, k, v, def[ 2] );
     } else {
       TDLog.Error("missing EXPORT key: " + k );
+    }
+    return null;
+  }
+
+  private static String updatePrefGeekImport( TDPrefHelper hlp, String k, String v )
+  {
+    // Log.v("DistoX", "update pref import: " + k );
+    String[] key = TDPrefKey.GEEKIMPORT;
+    String[] def = TDPrefKey.GEEKIMPORTdef;
+    if ( k.equals( key[ 0 ] ) ) {        // DISTOX_ZIP_WITH_SYMBOLS
+      mZipWithSymbols = tryBooleanValue( hlp, k, v, bool(def[ 0]) ); 
+    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_IMPORT_DATAMODE (choice)
+      mImportDatamode = tryIntValue( hlp, k, v, def[ 1] );
+    } else {
+      TDLog.Error("missing GEEK_IMPORT key: " + k );
     }
     return null;
   }
@@ -2419,7 +2439,7 @@ class TDSetting
       pw.printf(Locale.US, "L/R extend %c\n", tf(mLRExtend) );
       pw.printf(Locale.US, "U/D vertical %.1f, L/R horicontal %.1f\n", mLRUDvertical, mLRUDhorizontal );
 
-      pw.printf(Locale.US, "Import data mode %d\n", mImportDatamode );
+      pw.printf(Locale.US, "Geek Import - data mode %d, zipped symbols %c\n", mImportDatamode, tf( mZipWithSymbols) );
       pw.printf(Locale.US, "Timer: wait %d, volume %d\n", mTimerWait, mBeepVolume );
       pw.printf(Locale.US, "Recent data %c, timeout %d\n", tf(mShotRecent), mRecentTimeout );
       pw.printf(Locale.US, "Leg: closeness %.2f, nr %d, triple-shot %d, max %.2f, min %.2f\n",

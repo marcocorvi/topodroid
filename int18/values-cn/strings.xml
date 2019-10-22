@@ -1149,6 +1149,8 @@
   <string name="pref_section_splay_message">f辐测虚线剖面最小角度</string>
   <string name="pref_data_backup_title">数据自动输出</string>
   <string name="pref_data_backup_summary">自动输出数据 (需要设置默认格式)</string>
+  <!-- TODO string name="pref_zipped_symbols_title">Zipped symbols files</string -->
+  <!-- TODO string name="pref_zipped_symbols_summary">Store/load symbol files to/from zip archive</string -->
   <string name="pref_fixed_origin_title">草图原点</string>
   <string name="pref_fixed_origin_summary">修复草图原点</string>
   <string name="pref_shared_xsections_title">共享横截面</string>

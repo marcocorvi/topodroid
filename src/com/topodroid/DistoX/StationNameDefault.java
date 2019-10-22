@@ -19,7 +19,6 @@ import java.util.Set;
 import java.util.ArrayList;
 
 import android.content.Context;
-// import android.util.Log;
 
 class StationNameDefault extends StationName
 {
@@ -37,6 +36,7 @@ class StationNameDefault extends StationName
   @Override
   void assignStationsAfter( DBlock blk0, List<DBlock> list, Set<String> sts )
   {
+    // Log.v("DistoX-BLOCK", "assign station after");
     ArrayList<DBlock> unassigned = new ArrayList<DBlock>();
     // boolean started = false;
 
@@ -71,7 +71,8 @@ class StationNameDefault extends StationName
       next = DistoXStationName.incrementName( next, sts );
       station = shot_after_splays ? next : from;
     }
-    // Log.v("DistoX-SN", "F " + from + " T " + to + " N " + next + " S " + station );
+
+    // Log.v("DistoX-BLOCK", "F " + from + " T " + to + " N " + next + " S " + station );
 
     // if ( TDLog.LOG_DATA ) {
     //   TDLog.Log( TDLog.LOG_DATA, "assign after: F<" + from + "> T<" + to + "> N<" + next + "> S<" + station + "> CS " + ( (mCurrentStationName==null)? "null" : mCurrentStationName ) );
@@ -118,6 +119,7 @@ class StationNameDefault extends StationName
 	sts.add( from );
 	sts.add( to );
         // TDLog.Log( TDLog.LOG_DATA, "main leg: " + blk.mId + " F<" + from + "> T<" + to + "> S<" + station + "> bs " + bs );
+        // Log.v( "DistoX-BLOCK", "main leg: " + blk.mId + " F<" + from + "> T<" + to + "> S<" + station + "> bs " + bs );
       } else if ( blk.isBackLeg() ) {
 	if ( main_from != null /* && main_to != null */ ) {
 	  prev = blk;
@@ -130,7 +132,7 @@ class StationNameDefault extends StationName
 	}
 	main_from = main_to = null;
       } else {
-        // TDLog.Log( TDLog.LOG_DATA, "blk is skipped" + blk.mId );
+        // Log.v( "DistoX-BLOCK", "blk is skipped " + blk.mId + " prev " + prev.mId );
 	if ( /* started || */ ! blk.isRelativeDistance( prev ) ) {
 	  unassigned.add( blk );
 	  // started = true;
@@ -138,6 +140,7 @@ class StationNameDefault extends StationName
       }
     }
    
+    // processing skipped ahots ...
     if ( unassigned.size() > 0 ) assignStations( unassigned, sts );
   }
 
@@ -167,6 +170,7 @@ class StationNameDefault extends StationName
   { 
     // TDLog.Log( TDLog.LOG_DATA, "assign stations: list " + list.size() + " sts " + (sts!=null? sts.size():0) );
     // Log.v( "DistoX-BLOCK", "assign stations: list " + list.size() + " sts " + (sts!=null? sts.size():0) );
+    // for ( DBlock blk : list ) Log.v("DistoX-BLOCK", "blk " + blk.mId );
 
     if ( TDSetting.mDistoXBackshot ) {
       assignStationsBackshot( list, sts );

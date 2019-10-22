@@ -443,4 +443,5 @@ class SymbolLibrary
   private boolean isLeft( SymbolNode n ) { return ( n == n.parent.left ); }
   private boolean isRight( SymbolNode n ) { return ( n == n.parent.right ); }
   // ===========================================================================
+
 }    

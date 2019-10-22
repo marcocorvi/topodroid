@@ -593,10 +593,23 @@ class TDPref implements AdapterView.OnItemSelectedListener
     String[] def = TDPrefKey.EXPORT_importdef;
     return new TDPref[ ] {
       makeBtn( cat, key[ 0], tit[ 0], dsc[ 0], B, def[ 0],         ctx, hlp ),
-      makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], A, def[ 1],         ctx, hlp ),
-      makeLst( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2], R.array.importDatamode, R.array.importDatamodeValue, ctx, hlp )
+      makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], A, def[ 1],         ctx, hlp )
     };
   }
+
+  static TDPref[] makeGeekImportPrefs( Context ctx, TDPrefHelper hlp )
+  {
+    int cat = TDPrefActivity.PREF_GEEK_IMPORT;
+    String[] key = TDPrefKey.GEEKIMPORT;
+    int[] tit = TDPrefKey.GEEKIMPORTtitle;
+    int[] dsc = TDPrefKey.GEEKIMPORTdesc;
+    String[] def = TDPrefKey.GEEKIMPORTdef;
+    return new TDPref[ ] {
+      makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], T, def[ 0],         ctx, hlp ),
+      makeLst( cat, key[ 1], tit[ 1], dsc[ 1], T, def[ 1], R.array.importDatamode, R.array.importDatamodeValue, ctx, hlp )
+    };
+  }
+
 
   static TDPref[] makeSvxPrefs( Context ctx, TDPrefHelper hlp )
   {
@@ -1030,7 +1043,8 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeFwd( cat, key[4], tit[4],          T,          ctx, hlp ), // GEEK_PLOT
       makeFwd( cat, key[5], tit[5],          T,          ctx, hlp ), // GEEK_LINE
       makeFwd( cat, key[6], tit[6],          T,          ctx, hlp ), // PLOT_WALLS
-      makeFwd( cat, key[7], tit[7],          T,          ctx, hlp )  // GEEK_DEVICE
+      makeFwd( cat, key[7], tit[7],          T,          ctx, hlp ), // GEEK_IMPORT
+      makeFwd( cat, key[8], tit[8],          T,          ctx, hlp )  // GEEK_DEVICE
       // makeFwd( cat, key[8], tit[8],          D,          ctx, hlp )  // SKETCH // FIXME_SKETCH_3D
     };
   }
