@@ -1,6 +1,7 @@
 symbol point
 name closed
 name-pt fechado
+name-ru закрыто
 th_name u:closed
 color 0xffffff
 csurvey 0 0 0

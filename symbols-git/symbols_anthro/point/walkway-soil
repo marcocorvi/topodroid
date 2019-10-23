@@ -1,6 +1,7 @@
 symbol point
 name walkway-soil
 name-pt passarela_de_terra
+name-ru земляная_дорожка
 th_name u:walkway-soil
 group trail
 orientation no

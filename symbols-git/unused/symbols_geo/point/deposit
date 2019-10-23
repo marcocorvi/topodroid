@@ -1,6 +1,7 @@
 symbol point
 name deposit
 name-it deposito
+name-ru отложения
 th_name deposit
 color 0xff9933
 csurvey 0 0 0

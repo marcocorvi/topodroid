@@ -1,6 +1,7 @@
 symbol point
 name walkway-stone
 name-pt passarela_de_pedra
+name-ru бетонная_дорожка
 th_name u:walkway-stone
 group trail
 orientation no

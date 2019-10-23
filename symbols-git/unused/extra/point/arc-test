@@ -1,5 +1,6 @@
 symbol point
 name arc-test
+name-ru арк_тест
 th_name arc-test
 color 0xffffff
 csurvey 0 0 0

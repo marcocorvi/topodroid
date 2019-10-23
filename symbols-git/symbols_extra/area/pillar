@@ -1,6 +1,7 @@
 symbol area
 name pillar
 name-pt coluna
+name-ru колонна
 th_name u:pillar
 group pillar
 color 0xbf00ff 0x66

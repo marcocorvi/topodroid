@@ -1,6 +1,7 @@
 symbol point
 name curtain
 name-pt cortina
+name-ru занавесь
 th_name u:curtain
 color 0xff0000
 csurvey 0 0 0

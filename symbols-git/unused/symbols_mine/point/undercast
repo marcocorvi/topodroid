@@ -1,6 +1,7 @@
 symbol point
 name undercast
 name-pt subjacente
+name-ru загипсовано
 th_name u:undercast
 color 0xffffff
 csurvey 0 0 0 

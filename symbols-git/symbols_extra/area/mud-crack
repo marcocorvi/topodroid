@@ -3,6 +3,7 @@ symbol area
 name mud-crack
 name-de Getrockneter_Lehm
 name-pt lama_rachada
+name-ru растрескавшаяся_глина
 th_name u:mud-crack
 group clay
 color 0xcc9933 0xcc

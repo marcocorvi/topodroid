@@ -1,6 +1,7 @@
 symbol point
 name church
 name-it chiesa
+name-ru церковь
 th_name church
 color 0xcccccc
 csurvey 0 0 0

@@ -1,6 +1,7 @@
 symbol point
 name temple
 name-it tempio
+name-ru храм
 th_name temple
 color 0xcccccc
 csurvey 0 0 0

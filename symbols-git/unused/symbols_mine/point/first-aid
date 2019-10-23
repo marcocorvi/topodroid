@@ -1,6 +1,7 @@
 symbol point
 name first-aid
 name-pt primeiros_socorros
+name-ru первая_помощь
 th_name u:first-aid
 color 0xffffff
 csurvey 0 0 0 

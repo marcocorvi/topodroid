@@ -1,6 +1,7 @@
 symbol point
 name stair
 name-pt escada
+name-ru ступенька
 th_name u:stair
 group trail
 orientation no

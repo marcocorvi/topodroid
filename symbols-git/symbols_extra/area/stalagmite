@@ -1,6 +1,7 @@
 symbol area
 name stalagmite
 name-pt estalagmite
+name-ru сталагмит
 th_name u:stalagmite
 group stalagmite
 color 0xd0ff00 0x66

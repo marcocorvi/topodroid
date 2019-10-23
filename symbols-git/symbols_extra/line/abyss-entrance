@@ -1,6 +1,7 @@
 symbol line
 name abyss-entrance
 name-pt entrada_em_abismo
+name-ru вход_в_пропасть
 th_name u:abyss-entrance
 group wall
 color 0xff00ff 0xff

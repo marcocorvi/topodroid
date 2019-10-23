@@ -1,6 +1,7 @@
 symbol point
 name human-bone
 name-pt osso_humano
+name-ru человеческие_кости
 th_name u:human-bone
 group paleo
 orientation no

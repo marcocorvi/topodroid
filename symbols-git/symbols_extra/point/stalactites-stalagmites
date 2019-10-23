@@ -1,6 +1,7 @@
 symbol point
 name stalactites_stalagmites
 name-pt estalactites_estalagmites
+name-ru сталактиты_сталагмиты
 th_name u:stalactites_stalagmites
 group stalactite
 orientation no

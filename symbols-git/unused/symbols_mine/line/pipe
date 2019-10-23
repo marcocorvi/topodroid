@@ -1,6 +1,7 @@
 symbol line
 name pipe
 name-pt cano
+name-ru труба
 th_name u:pipe
 group pipe
 color 0x33ff66 0xff

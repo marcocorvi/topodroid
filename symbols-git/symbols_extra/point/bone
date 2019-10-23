@@ -1,6 +1,7 @@
 symbol point
 name bone
 name-pt osso
+name-ru кость
 th_name u:bone
 group paleo
 orientation no

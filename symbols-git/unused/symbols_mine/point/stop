@@ -1,6 +1,7 @@
 symbol point
 name stop
 name-pt pare
+name-ru стоп
 th_name u:stop
 color 0xff0000
 csurvey 0 0 0

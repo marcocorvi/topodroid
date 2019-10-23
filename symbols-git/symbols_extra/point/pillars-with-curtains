@@ -1,6 +1,7 @@
 symbol point
 name pillars-with-curtains
 name-pt colunas_cobertas_por_cortinas
+name-ru колонны_с_занавесями
 th_name u:pillars-with-curtains
 group pillar
 orientation no

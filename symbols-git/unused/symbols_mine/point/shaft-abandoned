@@ -1,6 +1,7 @@
 symbol point
 name shaft-abandoned
 name-pt poço_abandonado
+name-ru брошеная_шахта
 th_name u:shaft-abandoned
 color 0xcccccc
 csurvey 0 0 0

@@ -1,6 +1,7 @@
 symbol point
 name archeo-excavation
 name-pt escavação_arqueológica
+name-ru археологические_раскопки
 th_name u:archeo-excavation
 group archeo
 orientation no

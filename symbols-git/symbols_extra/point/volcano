@@ -1,6 +1,7 @@
 symbol point
 name volcano
 name-pt vulcão
+name-ru вулкан
 th_name u:volcano
 orientation no
 color 0xccff66

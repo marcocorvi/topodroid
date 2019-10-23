@@ -1,6 +1,7 @@
 symbol point
 name shaft
 name-pt poço
+name-ru шахта
 th_name u:shaft
 color 0xcccccc
 csurvey 0 0 0

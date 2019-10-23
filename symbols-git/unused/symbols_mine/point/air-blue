@@ -1,6 +1,7 @@
 symbol point
 name air-blue
 name-pt ar_azul
+name-ru воздух_голубой
 th_name u:air-blue
 color 0x0099ff
 csurvey 0 0 0 

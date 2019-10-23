@@ -1,6 +1,7 @@
 symbol point
 name nameplate
 name-pt placa_identificação
+name-ru именная_табличка
 th_name u:nameplate
 orientation no
 color 0x00b300
