@@ -2,14 +2,14 @@
 <resources>
   <plurals name="calib_saturated_values">
     <item quantity="one">AVERTISMENT. O înregistrare saturată</item>
-    <item quantity="other" >AVERTISMENT. %1$d înregistrari saturate</item>
+    <item quantity="other" >AVERTISMENT. %1$d înregistrări saturate</item>
   </plurals>
   <plurals name="read_data">
-    <item quantity="zero">Nici o inregistrare nu a fost citită</item>
-    <item quantity="other">Citește %1$d înregistrari</item>
+    <item quantity="zero">Nici o înregistrare nu a fost citită</item>
+    <item quantity="other">Citește %1$d înregistrări</item>
   </plurals>
   <plurals name="read_calib_data">
-    <item quantity="zero">Nu au fost citite date de calibrare</item>
-    <item quantity="other">Citește %1$d înregistrari (%2$d pachete)</item>
+    <item quantity="zero">Nu au fost citite datele de calibrare</item>
+    <item quantity="other">Citește %1$d înregistrări (%2$d pachete)</item>
   </plurals>
 </resources>
