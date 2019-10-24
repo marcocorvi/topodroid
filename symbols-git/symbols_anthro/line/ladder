@@ -1,6 +1,7 @@
 symbol line
 name ladder
 name-pt escada_de_mão
+name-ru лестница
 th_name u:ladder
 group trail
 color 0xff0000 0xff

@@ -1,6 +1,7 @@
 symbol point
 name gas
 name-pt gás
+name-ru газ
 th_name u:gas
 color 0xffff33
 csurvey 0 0 0

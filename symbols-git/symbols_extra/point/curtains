@@ -1,6 +1,7 @@
 symbol point
 name curtains
 name-pt cortinas
+name-ru занавеси
 th_name u:curtains
 group curtain
 orientation no

@@ -1,6 +1,7 @@
 symbol point
 name fire-dam
 name-pt barreira_incêndio
+name-ru пожарная_дамба
 th_name u:fire-dam
 color 0xff3333
 csurvey 0 0 0

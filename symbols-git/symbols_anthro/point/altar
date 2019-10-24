@@ -1,6 +1,7 @@
 symbol point
 name altar
 name-pt altar
+name-ru алтарь
 th_name u:altar
 orientation no
 color 0xffffff

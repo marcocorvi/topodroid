@@ -8,8 +8,8 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">再次点击返回键退出</string>
 
-    <!-- TODO string name="new_survey_label">New survey</string -->
-    <!-- TODO string name="distox_label">DistoX</string -->
+    <string name="new_survey_label">新建测量</string>
+    <string name="distox_label">DistoX</string>
 
     <!-- UNUSED string name="version_ask">Updating to a new version of TopoDroid.\nDo you want to reinstall drawing tools?</string -->
     <string name="symbols_ask">安装绘图工具 v.%1$s?\n(Current v.%2$s)</string>
@@ -52,12 +52,12 @@
 
     <string name="thp_user">用户</string>
     <string name="thp_label">标注</string>
-    <!-- TODO string name="thp_section">section</string -->
-    <!-- TODO string name="thp_station">station</string -->
+    <string name="thp_section">剖面</string>
+    <string name="thp_station">站点</string>
     <!-- UNUSED string name="thp_danger">danger</string -->
     <string name="thl_user">用户</string>
     <string name="thl_wall">洞壁</string>
-    <!-- TODO string name="thl_section">section</string -->
+    <string name="thl_section">剖面</string>
     <string name="tha_user">用户</string>
     <string name="tha_water">水</string>
 
@@ -100,8 +100,8 @@
     <!-- UNUSED string name="connect_failed">Failed connect</string -->
     <!-- UNUSED string name="data"> data</string -->
     <string name="using">使用 %1$s</string>
-    <!-- OLD string name="calib_error">平均误差: %1$.4f degrees</string -->
-    <!-- TODO string name="calib_error">Average error: %1$.2f degrees (BH delta %2$.3f)</string -->
+    <!-- OLD string name="calib_error">平均误差: %1$.4f 度</string -->
+    <string name="calib_error">平均误差: %1$.2f 度 (BH delta %2$.3f)</string>
     <string name="calib_stddev">标准差: %1$.4f degrees</string>
     <string name="calib_max_error">最大误差: %1$.4f degrees</string>
     <string name="calib_ave_std">精确度: %1$.4f ± %2$.4f degrees</string>
@@ -168,7 +168,7 @@
     <string name="import_title">测量导入</string>
     <!-- UNUSED string name="import_wait">Importing file &#8230; please wait &#8230;</string -->
     <string name="import_already">测量已导入</string>
-    <!-- TODO string name="import_bad">Invalid import file</string -->
+    <string name="import_bad">无效的输入文件</string>
     <string name="import_none">无文件输入</string>
     <string name="import_failed">文件导入失败</string>
     <string name="file_not_found">未发现文件</string>
@@ -266,7 +266,7 @@
     <!-- UNUSED string name="splays_toggle">Toggle splays display</string -->
     <string name="splays_on_off">副线开关</string>
     <string name="splays">副线</string>
-    <!-- TODO string name="legs">Legs</string -->
+    <string name="legs">主线</string>
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">纬度 %1$s</string>
@@ -352,19 +352,19 @@
     <string name="menu_photo">照片</string>
     <string name="menu_sensor">传感器</string>
     <string name="menu_scan">扫描</string>
-    <!-- TODO string name="menu_scan_ble">SCAN BTLE</string -->
+    <string name="menu_scan_ble">扫描低功耗蓝牙设备</string>
     <!-- UNUSED string name="menu_station">STATIONS</string -->
     <string name="menu_stats">统计</string>
     <string name="menu_survey">测量信息</string>
     <!-- UNUSED string name="menu_sync">SYNC</string -->
     <!-- UNUSED string name="menu_tdr2th2">TH2 SKETCHES</string -->
-    <!-- UPDATES string name="menu_updates">CHECK UPDATES</string -->
+    <string name="menu_updates">检测更新</string>
     <string name="menu_validate">验证</string>
     <string name="menu_zoom_fit">缩放适合</string>
 
-    <!-- TODO string name="ble_scan_failed">BLE scan failed</string -->
-    <!-- TODO string name="ble_gatt_failure">BLE failure</string -->
-    <!-- TODO string name="ble_no_remote">No remote device</string -->
+    <string name="ble_scan_failed">蓝牙设备扫描失败</string>
+    <string name="ble_gatt_failure">蓝牙故障</string>
+    <string name="ble_no_remote">无远程设备</string>
 
     <string name="popup_join_pt">接至附近点</string>
     <string name="popup_snap_ln">接至附近线</string>
@@ -399,9 +399,9 @@
     <string name="popup_cont_both">两点都</string>
     <string name="popup_cont_continue">继续</string>
 
-    <!-- TODO string name="connection_error">Connection error</string -->
-    <!-- TODO string name="connecting">Connecting &#8230;</string -->
-    <!-- UNUSED string name="connected_none">Not connected</string -->
+    <string name="connection_error">连接错误</string>
+    <string name="connecting">连接... &#8230;</string>
+    <!-- UNUSED string name="connected_none">无连接</string -->
     <!-- UNUSED string name="connected_already">Already connected</string -->
 
     <string name="not_available">BT 不可用</string>
@@ -503,13 +503,13 @@
     <string name="toporobot_warning">TopoRobot原则是实验性的!</string>
     <string name="anomaly_warning">磁力异常补偿需专业操作 !</string>
     <string name="tripod_warning">三脚架方案很高级!</string>
-    <!-- TODO string name="coverage_warning">Angle coverage below %1$d %%\nWrite coefficients?</string -->
-    <!-- TODO string name="delta_warning">Average error above %1$.1f\nWrite coefficients?</string -->
+    <string name="coverage_warning">角度错误低于 %1$d %%\n写入系数?</string>
+    <string name="delta_warning">角度错误高于 %1$.1f\n写入系数?</string>
 
-    <!-- TODO string name="cover_data">Raw data distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_calib">Calibrated data distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_g">G distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_m">M distribution: %1$.2f %%</string -->
+    <string name="cover_data">Raw数据分布: %1$.2f %%</string>
+    <string name="cover_calib">校准数据分布: %1$.2f %%</string>
+    <string name="cover_g">G 分布: %1$.2f %%</string>
+    <string name="cover_m">M 分布: %1$.2f %%</string>
 
     <string name="empty_clipboard">清空剪贴板</string>
     <string name="cannot_rename">不能重命名测量</string>
@@ -517,8 +517,8 @@
     <string name="description">注释</string>
     <string name="name">名称</string>
     <string name="team">团队</string>
-    <!-- TODO string name="init_station">start station</string -->
-    <!-- TODO string name="start_station">start station [%1$s]</string -->
+    <string name="init_station">起始站点</string>
+    <string name="start_station">起始站点 [%1$s]</string>
     <!-- UNUSED string name="toggle_device">Toggle device calibration mode</string -->
     <string name="toggle_failed">DistoX触发失败</string>
     <string name="toggle_ok">触发DistoX校准模式</string>
@@ -611,14 +611,14 @@
     <string name="button_delete"    >删除    </string>
     <string name="button_duplicate" >副本 </string>
     <string name="button_surface"   >表面   </string>
-    <!-- TODO string name="button_no_extend" >No extend </string -->
+    <string name="button_no_extend" >无延展</string>
     <string name="button_eval"      >复运算      </string>
     <string name="button_evalg"     >G      </string>
     <string name="button_evalm"     >M      </string>
     <string name="button_eval_cal"  >校准复运算</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
-    <!-- TODO string name="button_manual"    >User Manual</string -->
+    <string name="button_manual"    >用户手册</string>
     <!-- UNUSED string name="button_measure"   >Measure   </string -->
     <!-- UNUSED string name="button_photo"   >Photo</string -->
     <!-- UNUSED string name="button_sensor"  >Sensors</string -->
@@ -654,7 +654,7 @@
     <!-- UNUSED string name="button_select"    >Select    </string -->
     <string name="button_search"    >搜索    </string>
     <string name="button_merge"     >合并     </string>
-    <!-- TODO string name="button_saved"     >Saved station</string -->
+    <string name="button_saved"     >保存站点</string>
     <string name="button_saved"     >保存测点</string>
     <string name="button_split"     >分割     </string>
     <string name="button_station"   >以 为中心</string>
@@ -707,7 +707,7 @@
     <string name="btn_install">安装</string>
 
     <string name="symbol_archeo">考古学</string>
-    <!-- TODO string name="symbol_anthro">Anthro</string -->
+    <string name="symbol_anthro">人类学</string>
     <string name="symbol_bio">生物学</string>
     <string name="symbol_geo">地质学</string>
     <string name="symbol_karst">岩溶学</string>
@@ -823,9 +823,9 @@
     <string name="help_previous">已选项目</string>
     <string name="help_next">选项中的下一项目</string>
     <string name="help_recover">从备份中重新载入草图</string>
-    <!-- TODO string name="help_reload_prev">Display newer backup</string -->
-    <!-- TODO string name="help_reload_next">Display older backup</string -->
-    <!-- TODO string name="help_reload_plot">Reload sketch backup</string -->
+    <string name="help_reload_prev">显示最新的备份</string>
+    <string name="help_reload_next">显示旧的备份</string>
+    <string name="help_reload_plot">重新载入草图备份</string>
     <string name="help_zoom_fit">草图适应屏幕</string>
    
     <string name="help_line_point">线点功能: 衔接,分割, 剪切, 删除</string>
@@ -850,7 +850,7 @@
     <string name="help_read">读取和显示DistoX 的校准系数</string>
     <string name="help_info_device">设备信息</string>
     <string name="help_scan">扫描新的DistoX设备</string>
-    <!-- TODO string name="help_scan_ble">Scan for BTLE devices</string -->
+    <string name="help_scan_ble">扫描低功耗蓝牙设备</string>
     <string name="help_pair">配对最近的DistoX设备</string>
     <string name="help_open_calib">打开校准</string>
     <string name="help_export_calib">输出校准</string>
@@ -876,7 +876,7 @@
     <!-- UNUSED string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">保存测点</string>
-    <!-- TODO string name="title_search">Station/Leg search</string -->
+    <string name="title_search">站点/主线 查找</string>
     <string name="title_dangling">独立测线</string>
     <string name="title_device">DistoX设备</string>
     <string name="title_device_select">选择DistoX设备</string>
@@ -920,7 +920,7 @@
     <string name="title_settings_svx">Survex输出设置</string>
     <string name="title_settings_th">Therion输出设置</string>
     <string name="title_settings_dat">Compass输出设置</string>
-    <!-- TODO string name="title_settings_tro">VisualTopo export settings</string -->
+    <string name="title_settings_tro">VisualTopo输出设置</string>
     <string name="title_settings_svg">SVG输出设置</string>
     <string name="title_settings_dxf">DXF输出设置</string>
     <string name="title_settings_png">PNG输出设置</string>
@@ -961,7 +961,7 @@
     <string name="title_calib_export">输出校准</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-  <!-- TODO string name="pref_export_settings">Export settings</string -->
+  <string name="pref_export_settings">输出设置</string>
 
   <string name="pref_cat_survey">测量信息</string>
   <string name="pref_cat_drawing">草图</string>
@@ -987,8 +987,8 @@
 
   <string name="pref_locale_title">语言</string>
   <string name="pref_locale_summary">软件语言</string>
-  <!-- TODO string name="pref_orientation_title">Screen orientation</string -->
-  <!-- TODO string name="pref_orientation_summary">App screen orientation</string -->
+  <string name="pref_orientation_title">屏幕适应</string>
+  <string name="pref_orientation_summary">软件屏幕适应</string>
 
   <string name="pref_raw_data_title">原始数据</string>
   <string name="pref_raw_data_summary">显示原始测量数据</string>
@@ -1018,8 +1018,8 @@
   <string name="pref_size_buttons_summary">操作栏按钮的大小</string>
   <string name="pref_with_sensors_title">传感器</string>
   <string name="pref_with_sensors_summary">启用 "传感器" 数据</string>
-  <!-- TODO string name="pref_with_android_azimuth_title">Android compass</string -->
-  <!-- TODO string name="pref_with_android_azimuth_summary">Enable Android compass/clino</string -->
+  <string name="pref_with_android_azimuth_title">安卓手机罗盘</string>
+  <string name="pref_with_android_azimuth_summary">启用安卓手机罗盘/倾角</string>
   <string name="pref_with_levels_title">图层</string>
   <string name="pref_with_levels_summary">使用画布图层</string>
   <!-- UNUSED string name="pref_with_rename_title">Survey renaming</string -->
@@ -1037,16 +1037,16 @@
   <string name="pref_recent_timeout_summary">超时之后，数据不再是最近的 [s]</string>
   <string name="pref_triple_shot_title">主线测量提示声</string>
   <string name="pref_triple_shot_summary">主线测量识别声反馈</string>
-  <!-- TODO string name="pref_connect_feedback_title">Connect feedback</string -->
-  <!-- TODO string name="pref_connect_feedback_summary">Feedback on device connect</string -->
+  <string name="pref_connect_feedback_title">连接反馈</string>
+  <string name="pref_connect_feedback_summary">设备连接反馈</string>
   <string name="pref_station_prefix_title">Compass测点前缀</string>
   <string name="pref_station_prefix_summary">输出测点前缀[Compass]</string>
   <string name="pref_compass_splays_title">Compass辐测</string>
   <string name="pref_compass_splays_summary">输出辐测到Compass文件</string>
-  <!-- TODO string name="pref_vtopo_splays_title">VisualTopo splays</string -->
-  <!-- TODO string name="pref_vtopo_splays_summary">Export splays in VisualTopo files</string -->
-  <!-- TODO string name="pref_vtopo_lrud_title">LRUD at From</string -->
-  <!-- TODO string name="pref_vtopo_lrud_summary">VisualTopo LRUD at From station</string -->
+  <string name="pref_vtopo_splays_title">VisualTopo侧线</string>
+  <string name="pref_vtopo_splays_summary">在VisualTopo文件中输出侧线</string>
+  <string name="pref_vtopo_lrud_title">左右上下 来自...</string>
+  <string name="pref_vtopo_lrud_summary">VisualTopo的左右上下来自站点</string>
   <!-- UNUSED string name="pref_trobot_names_title">TopoRobot station names</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Station names are in TopoRobot style</string -->
   <string name="pref_ortho_lrud_title">左右上下辐测角度</string>
@@ -1155,15 +1155,15 @@
   <string name="pref_section_splay_message">f辐测虚线剖面最小角度</string>
   <string name="pref_data_backup_title">数据自动输出</string>
   <string name="pref_data_backup_summary">自动输出数据 (需要设置默认格式)</string>
-  <!-- TODO string name="pref_zipped_symbols_title">Zipped symbols files</string -->
-  <!-- TODO string name="pref_zipped_symbols_summary">Store/load symbol files to/from zip archive</string -->
+  <string name="pref_zipped_symbols_title">压缩符号文件</string>
+  <string name="pref_zipped_symbols_summary">存储/加载符号文件到/从压缩档案</string>
   <string name="pref_fixed_origin_title">草图原点</string>
   <string name="pref_fixed_origin_summary">修复草图原点</string>
   <string name="pref_shared_xsections_title">共享横截面</string>
   <string name="pref_shared_xsections_summary">在不同草图上共享同测点的横截面</string>
   <string name="xsections_shared">共享横截面</string>
   <string name="xsections_private">私有横截面</string>
-  <string name="pref_reduce_angle_title">j矫正角度</string>
+  <string name="pref_reduce_angle_title">矫正角度</string>
   <string name="pref_reduce_angle_summary">直线的最小转角</string>
 
 
@@ -1278,8 +1278,8 @@
   <string name="pref_linestraight_summary">启用伸直所有线操作</string>
   <string name="pref_path_multiselect_title">路径的多个选项</string>
   <string name="pref_path_multiselect_summary">启用路径的多个选项操作</string>
-  <!-- TODO string name="pref_composite_actions_title">Composite actions</string -->
-  <!-- TODO string name="pref_composite_actions_summary">Enable line/area long-tap actions</string -->
+  <string name="pref_composite_actions_title">合并操作</string>
+  <string name="pref_composite_actions_summary">启用 线/面 长按操作</string>
   <string name="pref_plane_interpolation_title">平面插值</string>
   <string name="pref_plane_interpolation_summary">启用平面插值操作</string>
   <string name="pref_plot_split_title">草图分割/合并</string>
@@ -1434,9 +1434,9 @@
 
     <string name="perms_mandatory">没有这些权限TopoDroid无法运行:</string>
     <string name="perms_optional">没有这些权限TopoDroid可能会失败:</string>
-    <!-- TODO string name="perm_location">\nLocation</string -->
-    <!-- TODO string name="perm_camera">\nCamera</string -->
-    <!-- TODO string name="perm_microphone">\nMicrophone</string -->
+    <string name="perm_location">\n位置</string>
+    <string name="perm_camera">\n相机</string>
+    <string name="perm_microphone">\n话筒</string>
 
 
     <string name="welcome_title">TopoDroid %1$s</string>

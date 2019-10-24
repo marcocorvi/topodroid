@@ -1,6 +1,7 @@
 symbol point
 name spring
 name-pt ressurgência
+name-ru источник
 th_name u:spring
 color 0x33ccff
 csurvey 0 0 0

@@ -1,6 +1,7 @@
 symbol point
 name shaft-closed
 name-pt poço_fechado
+name-ru закрытый_ствол
 th_name u:shaft-closed
 color 0xffffff
 csurvey 0 0 0

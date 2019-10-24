@@ -368,7 +368,7 @@
     <string name="popup_snap_ln">Привязать к ближайшей линии</string>
     <string name="popup_snap_to_splays">Прилепить к ближайшим боковым замерам</string>
     <string name="popup_split_pt">Дублировать точку</string>
-    <!-- TODO string name="popup_split_pts">Adds points</string -->
+    <string name="popup_split_pts">Добавить точки</string>
     <string name="popup_split_ln">Разорвать линию на точке</string>
     <string name="popup_sharp_pt">Спрямить сегмент</string>
     <string name="popup_curve_pt">Сгладить сегмент</string>
@@ -1139,8 +1139,8 @@
   <string name="pref_section_splay_message">Боковые замеры с углом к плоскости сечения больше заданого значения показаны пунктиром</string>
   <string name="pref_data_backup_title">Авто-экспорт данных</string>
   <string name="pref_data_backup_summary">Автоматический экспорт данных (требуется установить формат по умолчанию)</string>
-  <!-- TODO string name="pref_zipped_symbols_title">Zipped symbols files</string -->
-  <!-- TODO string name="pref_zipped_symbols_summary">Store/load symbol files to/from zip archive</string -->
+  <string name="pref_zipped_symbols_title">Архив условных обозначений</string>
+  <string name="pref_zipped_symbols_summary">Добавить/извлечь файлы условных обозначений в/из zip архив</string>
   <string name="pref_fixed_origin_title">Точка отсчета абрисов</string>
   <string name="pref_fixed_origin_summary">Зафиксировать точку отсчета координат абриса</string>
   <string name="pref_shared_xsections_title">Общий поперечный разрез</string>

@@ -1,6 +1,7 @@
 symbol line
 name fence
 name-pt cerca
+name-ru ограждение
 th_name u:fence
 group fence
 color 0xff00ff 

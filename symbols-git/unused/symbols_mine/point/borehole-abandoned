@@ -1,6 +1,7 @@
 symbol point
 name borehole-abandoned
 name-pt sondagem_abandonada
+name-ru скважина_брошенная
 th_name u:borehole-abandoned
 color 0xff9933
 csurvey 0 0 0

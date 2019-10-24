@@ -1,6 +1,7 @@
 symbol point
 name door
 name-pt porta
+name-ru дверь
 th_name u:door
 color 0xffffff
 csurvey 0 0 0

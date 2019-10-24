@@ -1,6 +1,7 @@
 symbol point
 name bridge
 name-pt ponte
+name-ru мост
 th_name u:bridge
 group trail
 orientation no

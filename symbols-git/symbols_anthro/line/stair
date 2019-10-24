@@ -1,6 +1,7 @@
 symbol line
 name stair
 name-pt escada
+name-ru ступени
 th_name u:stair
 group trail
 color 0x993300

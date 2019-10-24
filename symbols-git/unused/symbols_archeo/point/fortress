@@ -1,6 +1,7 @@
 symbol point
 name fortress
 name-it fortezza
+name-ru бастион
 th_name fortress
 color 0xcccccc
 csurvey 0 0 0

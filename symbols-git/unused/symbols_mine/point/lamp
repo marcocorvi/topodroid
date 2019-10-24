@@ -1,6 +1,7 @@
 symbol point
 name lamp
 name-pt luminária
+name-ru лампа
 th_name u:lamp
 color 0x33ffff
 csurvey 0 0 0

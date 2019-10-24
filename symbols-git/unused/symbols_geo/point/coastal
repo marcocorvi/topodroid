@@ -1,5 +1,6 @@
 symbol point
 name coastal
+name-ru прибрежные
 th_name coastal
 color 0x6699ff
 csurvey 0 0 0

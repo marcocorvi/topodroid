@@ -1,6 +1,7 @@
 symbol line
 name low-ceiling
 name-pt teto_baixo
+name-ru низкий_потолок
 th_name u:low-ceiling
 group ceiling
 color 0x85e0a3 0xff

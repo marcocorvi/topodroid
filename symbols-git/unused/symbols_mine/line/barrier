@@ -1,6 +1,7 @@
 symbol line
 name barrier
-name-pt barreira
+name-pt barreir
+name-ru барьер
 th_name u:barrier
 group barrier
 color 0xffcc33 

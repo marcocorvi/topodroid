@@ -1,6 +1,7 @@
 symbol point
 name switch
 name-pt troca
+name-ru переключатель
 th_name u:switch
 color 0xffffff
 csurvey 0 0 0

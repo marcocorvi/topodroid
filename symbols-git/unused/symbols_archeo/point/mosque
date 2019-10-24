@@ -1,6 +1,7 @@
 symbol point
 name mosque
 name-it moschea
+name-ru мечеть
 th_name mosque
 color 0xcccccc
 csurvey 0 0 0

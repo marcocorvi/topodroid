@@ -1,6 +1,7 @@
 symbol point
 name gate
 name-pt portão
+name-ru ворота
 th_name u:gate
 orientation no
 color 0xff0000

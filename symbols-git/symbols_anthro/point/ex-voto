@@ -1,6 +1,7 @@
 symbol point
 name ex-voto
 name-pt ex-voto
+name-ru экс_вото
 th_name u:ex-voto
 orientation no
 color 0xffea80
