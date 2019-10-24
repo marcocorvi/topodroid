@@ -334,6 +334,7 @@
     <string name="menu_reload">Препрочитане</string>
     <string name="menu_rename_delete">Преименуване/Изтриване</string>
     <string name="menu_rename">Преименуване</string>
+    <!-- TODO string name="menu_plot_scrap">SCRAPS</string -->
     <string name="menu_switch">Смяна/затваряне</string>
     <string name="menu_help">Помощ</string>
     <!-- UNUSED string name="menu_join_survey">Ко-картиране</string -->
@@ -441,6 +442,7 @@
     <string name="section_area">Площ на сечение: %1$.1f</string>
     <string name="section_name">Коментар към сечение</string>
     <string name="scrap_outline">Очертание на скицата</string>
+    <!-- TODO string name="scrap_string">Sketch scrap: %1$d / %2$d</string -->
 
     <!-- UNUSED string name="sensor">сензор</string -->
     <string name="sensor_gravity">гравитация</string>
@@ -610,6 +612,8 @@
     <string name="button_plot"    >Скица</string>
     <string name="button_more"    >Още</string>
     <string name="button_next"    >Следващ</string>
+    <!-- TODO string name="button_prev"    >Prevous</string -->
+    <!-- TODO string name="button_new"     >New scrap</string -->
     <string name="button_skip"    >Пропусни</string>
     <string name="button_done"    >Готово</string>
     <string name="button_lrud"    >Добавяне на ЛДГД</string>
@@ -781,6 +785,7 @@
     <string name="help_refs">Избор на данни, които да се показват</string>
     <string name="help_rename">Преименуване на картировката</string>
     <string name="help_plot_rename">Преименуване на скицата</string>
+    <!-- TODO string name="help_plot_scrap">Sketch scraps</string -->
     <string name="help_plot_switch">Превключване на друга скица</string>
     <string name="help_search">Търсене на репер</string>
     <string name="help_stats">Статистика за картировката</string>
@@ -877,6 +882,7 @@
     <string name="title_plot_save">Запис на скица като</string>
     <!-- UNUSED string name="title_plot_merge">Сливане на скици</string -->
     <string name="title_plot_reload">Препрочитане на скица</string>
+    <!-- TODO string name="title_plot_scraps">Sketch scraps</string -->
     <string name="title_profile_flip">Обръщане на разреза?</string>
     <string name="title_projection">Азимут на проектиран разрез %1$d</string>
     <string name="title_refs">Показване в скицата на:</string>

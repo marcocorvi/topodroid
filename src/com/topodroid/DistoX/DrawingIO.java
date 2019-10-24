@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-// import android.util.Log;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -43,7 +43,6 @@ import android.graphics.RectF;
 
 class DrawingIO
 {
-
   private static String readLine( BufferedReader br )
   {
     String line = null;
@@ -73,7 +72,6 @@ class DrawingIO
   //   float toTherion = TDSetting.mToTherion;
 
   //   // TDLog.Log( TDLog.LOG_PLOT, "Load Therion file " + filename + " delta " + dx + " " + dy );
-  //   // BrushManager.makePaths( );
   //   BrushManager.resetPointOrientations();
 
   //   // TDLog.Log( TDLog.LOG_PLOT, "after reset 0: " + BrushManager.mOrientation[0]
@@ -642,7 +640,7 @@ class DrawingIO
 
     int version = 0;
     boolean in_scrap = false;
-    // BrushManager.makePaths( );
+    int scrap_index = 0;
     BrushManager.resetPointOrientations();
     DrawingPath path = null;
     int project_dir = 0;
@@ -733,6 +731,9 @@ class DrawingIO
                 // Log.v("DistoX", "TDR type " + type );
               }
               break;
+            case 'N':
+              scrap_index = dis.readInt();
+              break;
             case 'P':
 	      // FIXME SECTION_RENAME
               path = DrawingPointPath.loadDataStream( version, dis, dx, dy /*, missingSymbols */ ).fixScrap( survey_name );
@@ -774,12 +775,17 @@ class DrawingIO
               break;
           } 
           if ( path != null && in_scrap ) {
-            // if ( plotName != null ) 
-	      path.mPlotName = plotName;
-            if ( what == 'U' ) {
-              surface.addDrawingStationPath( (DrawingStationPath)path );
+            if ( path.mScrap == scrap_index ) {
+              // if ( plotName != null ) 
+	        path.mPlotName = plotName;
+              if ( what == 'U' ) {
+                surface.addDrawingStationPath( (DrawingStationPath)path );
+              } else {
+                surface.addDrawingPath( path );
+              }
             } else {
-              surface.addDrawingPath( path );
+              TDLog.Error("Scrap/Path index mismatch " + scrap_index + " " + path.mScrap );
+              Log.v("DistoX-SCRAP", "Scrap/Path index mismatch " + scrap_index + " " + path.mScrap );
             }
           }
         }
@@ -802,6 +808,7 @@ class DrawingIO
   {
     int version = 0;
     boolean in_scrap = false;
+    int scrap_index = 0;
 
     File file = new File( filename );
     FileInputStream fis = null;
@@ -859,6 +866,9 @@ class DrawingIO
                 dis.readUTF();
                 in_scrap = true;
               }
+              break;
+            case 'N':
+              scrap_index = dis.readInt();
               break;
             case 'P':
               DrawingPointPath.loadDataStream( version, dis, dx, dy /*, null */ );
@@ -932,6 +942,9 @@ class DrawingIO
       dos.writeFloat( bbox.bottom );
       dos.writeInt( 0 ); // null north
 
+      dos.write('N'); // scrap index
+      dos.writeInt( 0 );
+
       for ( DrawingPath p : paths ) {
         if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) continue; // safety check: should not happen
         p.toDataStream( dos );
@@ -969,8 +982,9 @@ class DrawingIO
       int proj_dir,
       RectF bbox,
       DrawingPath north,
-      final List<ICanvasCommand> cstack,
-      final List<DrawingStationPath> userstations,
+      // final List<ICanvasCommand> cstack,
+      // final List<DrawingStationPath> userstations,
+      final List< Scrap > scraps,
       final List<DrawingStationName> stations )
   {
     // Log.v("DistoX", "cstack size " + cstack.size() );
@@ -1000,17 +1014,24 @@ class DrawingIO
         dos.writeInt( 0 );
       }
 
-      synchronized( cstack ) {
-        for ( ICanvasCommand cmd : cstack ) {
-          if ( cmd.commandType() != 0 ) continue;
-          DrawingPath p = (DrawingPath) cmd;
-          if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) continue; // safety check: should not happen
-          p.toDataStream( dos );
+      for ( Scrap scrap : scraps ) {
+        dos.write('N');  // scrap index
+        dos.writeInt( scrap.mScrapIdx );
+
+        List< ICanvasCommand > cstack = scrap.mCurrentStack;
+        synchronized( cstack ) {
+          for ( ICanvasCommand cmd : cstack ) {
+            if ( cmd.commandType() != 0 ) continue;
+            DrawingPath p = (DrawingPath) cmd;
+            if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) continue; // safety check: should not happen
+            p.toDataStream( dos );
+          }
         }
-      }
-      synchronized( userstations ) { // user stations are always exported to data stream
-        for ( DrawingStationPath sp : userstations ) {
-          sp.toDataStream( dos );
+        List< DrawingStationPath > userstations = scrap.mUserStations;
+        synchronized( userstations ) { // user stations are always exported to data stream
+          for ( DrawingStationPath sp : userstations ) {
+            sp.toDataStream( dos );
+          }
         }
       }
       dos.write('F'); // final: bbox and autostations (reading can skip all that follows)
@@ -1117,181 +1138,201 @@ class DrawingIO
     out.newLine();
   }
 
-  // FIXME DataHelper and SID are necessary to export splays by the station
-  //
-  // @param full_name   name of the scrap (= file_name without extension)
-  // @param proj_name   name of the projection
-  //
-  static void exportTherion( int type, BufferedWriter out, String full_name, String proj_name, int project_dir,
-        RectF bbox,
-        DrawingPath north,
-        final List<ICanvasCommand> cstack,
-        final List<DrawingStationPath> userstations,
-        final List<DrawingStationName> stations,
-        final List<DrawingPath> splays )
+  static private void exportTherionSplays( BufferedWriter out, List<DrawingPath> splays, RectF bbox ) throws IOException
   {
-    try { 
-      exportTherionHeader1( out, type, bbox, full_name );
-      // exportTherionHeader2( out );
-      if ( north != null ) { 
-        exportTherionHeader3( out, type, full_name, proj_name, 0, true, north.x1, north.y1, north.x2, north.y2 );
-      } else {
-        exportTherionHeader3( out, type, full_name, proj_name, project_dir, false, 0, 0, 0, 0 );
-      }
-        
-      synchronized( cstack ) {
-        for ( ICanvasCommand cmd : cstack ) {
-          if ( cmd.commandType() != 0 ) continue;
-          DrawingPath p = (DrawingPath) cmd;
-          if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
-            DrawingPointPath pp = (DrawingPointPath)p;
-            String pp_str = pp.toTherion();
-	    if ( pp_str != null ) {
-              out.write( pp_str );
-              out.newLine();
-	    }
-          } else if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) { // should never happen
-            // if ( ! TDSetting.mAutoStations ) {
-            //   DrawingStationPath st = (DrawingStationPath)p;
-            //   String st_str = st.toTherion();
-	    //   if ( st_str != null ) {
-            //     out.write( st_str );
-            //     out.newLine();
-            //   }
-	    // }
-          } else if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
-            DrawingLinePath lp = (DrawingLinePath)p;
-            if ( lp.size() > 1 ) {
-              String lp_str = lp.toTherion();
-	      if ( lp_str != null ) {
-                out.write( lp_str );
-                out.newLine();
-              }
-	    }
-          } else if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
-            DrawingAreaPath ap = (DrawingAreaPath)p;
-            if ( ap.size() > 2 ) {
-              String ap_str = ap.toTherion();
-	      if ( ap_str != null ) {
-                out.write( ap_str );
-                out.newLine();
-              }
-	    }
-	  }
+    float toTherion = TDSetting.mToTherion;
+    StringWriter sw = new StringWriter();
+    PrintWriter pw  = new PrintWriter(sw);
+           synchronized( splays ) {
+      for ( DrawingPath splay : splays ) {
+        // if ( bbox.left > splay.right  || bbox.right  < splay.left ) continue;
+        // if ( bbox.top  > splay.bottom || bbox.bottom < splay.top  ) continue;
+        if ( splay.intersects( bbox ) ) {
+          pw.format("line u:splay -visibility off\n");
+          pw.format( Locale.US, "  %.2f %.2f\n  %.2f %.2f\n", splay.x1*toTherion, -splay.y1*toTherion, splay.x2*toTherion, -splay.y2*toTherion );
+          pw.format("endline\n");
         }
       }
-      out.newLine();
+    }
+    out.write( sw.toString() );
+    out.newLine();
+  }
 
-      if ( TDSetting.mTherionSplays ) {
-        float toTherion = TDSetting.mToTherion;
-        StringWriter sw = new StringWriter();
-        PrintWriter pw  = new PrintWriter(sw);
-	       synchronized( splays ) {
-          for ( DrawingPath splay : splays ) {
-            // if ( bbox.left > splay.right  || bbox.right  < splay.left ) continue;
-            // if ( bbox.top  > splay.bottom || bbox.bottom < splay.top  ) continue;
-            if ( splay.intersects( bbox ) ) {
-              pw.format("line u:splay -visibility off\n");
-              pw.format( Locale.US, "  %.2f %.2f\n  %.2f %.2f\n", splay.x1*toTherion, -splay.y1*toTherion, splay.x2*toTherion, -splay.y2*toTherion );
-              pw.format("endline\n");
-            }
-          }
-	}
-        out.write( sw.toString() );
+  static private void exportTherionArea( BufferedWriter out, DrawingAreaPath ap ) throws IOException
+  {
+    if ( ap.size() > 2 ) {
+      String ap_str = ap.toTherion();
+      if ( ap_str != null ) {
+        out.write( ap_str );
         out.newLine();
       }
+    }
+  }
 
-      if ( TDSetting.mAutoStations ) {
-        synchronized( stations ) {
-          for ( DrawingStationName st : stations ) {
-            NumStation station = st.getNumStation();
-            if ( station != null && station.barriered() ) continue;
-            // FIXME if station is in the convex hull (bbox) of the lines
-            if ( bbox.left > st.cx || bbox.right  < st.cx ) continue;
-            if ( bbox.top  > st.cy || bbox.bottom < st.cy ) continue;
-	    String st_str = st.toTherion();
-	    if ( st_str != null ) {
-              out.write( st_str );
-              out.newLine();
-	    }
-/*
- * this was to export splays by the station instead of all of them
- *
-            if ( TDSetting.mTherionSplays ) {
-              float th = TDSetting.mToTherion;
-              float x = st.cx * th;
-              float y = - st.cy * th;
-              th *= DrawingUtil.SCALE_FIX;
-              List< DBlock > blks = dh.selectSplaysAt( sid, st.getName(), false );
-              if ( type == PlotInfo.PLOT_PLAN ) {
-                for ( DBlock blk : blks ) {
-                  float h = blk.mLength * TDMath.cosd( blk.mClino ) * th;
-                  float e = h * TDMath.sind( blk.mBearing );
-                  float n = h * TDMath.cosd( blk.mBearing );
-                  out.write( "line splay\n" );
-                  out.write( String.format(Locale.US, "  %.2f %.2f\n  %.2f %.2f\n", x, y, x+e, y+n ) );
-                  out.write( "endline\n" );
-                }
-              } else if ( PlotInfo.isProfile( type ) ) {
-                for ( DBlock blk : blks ) {
-                  float v = blk.mLength * TDMath.sind( blk.mClino ) * th;
-                  float h = blk.mLength * TDMath.cosd( blk.mClino ) * th * blk.getReducedExtend();
-                  out.write( "line splay\n" );
-                  out.write( String.format(Locale.US, "  %.2f %.2f\n  %.2f %.2f\n", x, y, x+h, y+v ) );
-                  out.write( "endline\n" );
-                }
-              } else if ( PlotInfo.isSection( type ) ) {
-                for ( DBlock blk : blks ) {
-                  float d = blk.mLength;
-                  float b = blk.mBearing;
-                  float c = blk.mClino;
-                  float e = blk.getReducedExtend();
-                }
-              }
-            }
-*/
-          }
-	}
-      } else {
-        synchronized( userstations ) {
-          for ( DrawingStationPath sp : userstations ) {
-            String sp_str = sp.toTherion();
-	    if ( sp_str != null ) {
-              out.write( sp_str );
-              out.newLine();
-            }
-	  }
+  static private void exportTherionLine( BufferedWriter out, DrawingLinePath lp ) throws IOException
+  {
+    if ( lp.size() > 1 ) {
+      String lp_str = lp.toTherion();
+      if ( lp_str != null ) {
+        out.write( lp_str );
+        out.newLine();
+      }
+    }
+  }
+
+  static private void exportTherionPoint( BufferedWriter out, DrawingPointPath pp ) throws IOException
+  {
+    String pp_str = pp.toTherion();
+    if ( pp_str != null ) {
+      out.write( pp_str );
+      out.newLine();
+    }
+  }
+
+  static private void exportTherionStations( BufferedWriter out, List<DrawingStationName> stations, RectF bbox ) throws IOException
+  {
+    synchronized( stations ) {
+      for ( DrawingStationName st : stations ) {
+        NumStation station = st.getNumStation();
+        if ( station != null && station.barriered() ) continue;
+        // FIXME if station is in the convex hull (bbox) of the lines
+        if ( bbox.left > st.cx || bbox.right  < st.cx ) continue;
+        if ( bbox.top  > st.cy || bbox.bottom < st.cy ) continue;
+        String st_str = st.toTherion();
+        if ( st_str != null ) {
+          out.write( st_str );
+          out.newLine();
         }
       }
-      exportTherionClose( out );
-    } catch ( IOException e ) {
-      e.printStackTrace();
+    }
+  }
+
+  static private void exportTherionUserStations( BufferedWriter out, List<DrawingStationPath> userstations ) throws IOException
+  {
+    synchronized( userstations ) {
+      for ( DrawingStationPath sp : userstations ) {
+        String sp_str = sp.toTherion();
+        if ( sp_str != null ) {
+          out.write( sp_str );
+          out.newLine();
+        }
+      }
     }
   }
 
   // FIXME DataHelper and SID are necessary to export splays by the station
-  // @param full_name    filename without extension
-  static void exportTherionMultiScrap( int type, BufferedWriter out, String full_name, String proj_name, int project_dir,
-        // RectF bbox,
-        // DrawingPath north, // no x-section
-        final List<ICanvasCommand> cstack,
-        final List<DrawingStationPath> userstations,
-        final List<DrawingStationName> stations,
-        final List<DrawingPath> splays )
+  //
+  // @param type        sketch type
+  // @param out         output writer
+  // @param full_name   name of the scrap (= file_name without extension)
+  // @param proj_name   name of the projection
+  // @param project_dir projected profile direction
+  // @param bbox        bounding box
+  // @param north       north-arrow
+  // @param scraps      number of scraps
+  //
+  static void exportTherion( int type, BufferedWriter out, String full_name, String proj_name, int project_dir,
+        RectF bbox,
+        DrawingPath north,
+        List<Scrap> scraps,
+        List<DrawingStationName> stations,
+        List<DrawingPath> splays )
   {
-    // Log.v("DistoXX", "export multiscrap type " + type + " proj " + proj_name );
-    class XSectionScrap
-    {
-      String name; // scrap name
-      float x, y;  // offset
-  
-      XSectionScrap( String nn, float xx, float yy )
-      {
-        name = nn;
-        x = xx;
-        y = yy;
+    ArrayList< XSectionScrap> xsections = new ArrayList<XSectionScrap>();
+    // int scraps,
+
+    try { 
+      exportTherionHeader1( out, type, bbox, full_name );
+      // exportTherionHeader2( out );
+      int scrap_nr = 0;
+      for ( Scrap scrap : scraps ) {
+        List<ICanvasCommand> cstack = scrap.mCurrentStack;
+        String name = (scrap_nr == 0)? full_name : full_name + scrap_nr;
+        if ( north != null ) { 
+          exportTherionHeader3( out, type, name, proj_name, 0, true, north.x1, north.y1, north.x2, north.y2 );
+        } else {
+          exportTherionHeader3( out, type, name, proj_name, project_dir, false, 0, 0, 0, 0 );
+        }
+          
+        synchronized( cstack ) {
+          for ( ICanvasCommand cmd : cstack ) {
+            if ( cmd.commandType() != 0 ) continue;
+            DrawingPath p = (DrawingPath) cmd;
+
+            if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
+              DrawingPointPath pp = (DrawingPointPath)p;
+              exportTherionPoint( out, pp );
+              if ( TDSetting.mExportPlotFormat != TDConst.DISTOX_EXPORT_TH2 ) { // if auto-export is not Therion
+                if ( BrushManager.isPointSection( pp.mPointType ) ) {
+                  if ( TDSetting.mAutoXSections ) {
+                    String scrap_name = pp.getOption("-scrap");  // xsection name
+                    // Log.v("DistoXX", "multiscrap add x-section " + name );
+                    if ( scrap_name != null && scrap_name.length() > 0 ) xsections.add( new XSectionScrap( scrap_name, pp.cx, pp.cy ) );
+                  }
+                }
+              }
+            } else if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) { // should never happen
+              // if ( ! TDSetting.mAutoStations ) {
+              //   DrawingStationPath st = (DrawingStationPath)p;
+              //   String st_str = st.toTherion();
+              //   if ( st_str != null ) {
+              //     out.write( st_str );
+              //     out.newLine();
+              //   }
+              // }
+            } else if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
+              exportTherionLine( out, (DrawingLinePath)p );
+            } else if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
+              exportTherionArea( out, (DrawingAreaPath)p );
+            }
+          }
+        }
+        out.newLine();
+
+        if ( TDSetting.mTherionSplays && scrap_nr == 0 ) { // splays only in the first scrap
+          exportTherionSplays( out, splays, bbox );
+        }
+
+        if ( TDSetting.mAutoStations ) {
+          exportTherionStations( out, stations, bbox );
+        } else {
+          List<DrawingStationPath> userstations = scrap.mUserStations;
+          if ( userstations.size() > 0 ) {
+            exportTherionUserStations( out, userstations );
+          }
+        }
+        exportTherionClose( out );
+        ++ scrap_nr;
+      }
+    } catch ( IOException e ) {
+      e.printStackTrace();
+    }
+
+    if ( TDSetting.mExportPlotFormat != TDConst.DISTOX_EXPORT_TH2 ) {
+      for ( XSectionScrap xsection : xsections ) { // write xsection scraps
+        File file = new File( TDPath.getTdrFileWithExt( xsection.name ) );
+        dataStreamToTherion( file, out, null, null, false, true, xsection.x, xsection.y );
       }
     }
+  }
+
+  // FIXME DataHelper and SID are necessary to export splays by the station
+  // This is therion export from overview window
+  // @param type         sketch type
+  // @param out          output writer
+  // @param full_name    filename without extension
+  // @param proj_name    
+  // @param project_dir  projected profile direction
+  static void exportTherionMultiPlots( int type, BufferedWriter out, String full_name, String proj_name, int project_dir,
+        // RectF bbox,
+        // DrawingPath north, // no x-section
+        // List<ICanvasCommand> cstack,
+        // List<DrawingStationPath> userstations,
+        List< Scrap > scraps,
+        List<DrawingStationName> stations,
+        List<DrawingPath> splays )
+  {
+    // Log.v("DistoXX", "export multiscrap type " + type + " proj " + proj_name );
 
     // ArraySet<String> plots = new ArraySet<String>(); // need API-23
     int NPLOTS = 8;
@@ -1302,50 +1343,56 @@ class DrawingIO
 
     float xmin=1000000f, xmax=-1000000f, 
           ymin=1000000f, ymax=-1000000f;
-    synchronized( cstack ) {
-      for ( ICanvasCommand cmd : cstack ) {
-        if ( cmd.commandType() != 0 ) continue;
-        DrawingPath p = (DrawingPath) cmd;
-        // RectF bbox = p.mBBox;
-        if ( p.left   < xmin ) xmin = p.left;
-        if ( p.right  > xmax ) xmax = p.right;
-        if ( p.top    < ymin ) ymin = p.top;
-        if ( p.bottom > ymax ) ymax = p.bottom;
+    for ( Scrap scrap : scraps ) {
+      List< ICanvasCommand > cstack = scrap.mCurrentStack;
+      synchronized( cstack ) {
+        for ( ICanvasCommand cmd : cstack ) {
+          if ( cmd.commandType() != 0 ) continue;
+          DrawingPath p = (DrawingPath) cmd;
+          // RectF bbox = p.mBBox;
+          if ( p.left   < xmin ) xmin = p.left;
+          if ( p.right  > xmax ) xmax = p.right;
+          if ( p.top    < ymin ) ymin = p.top;
+          if ( p.bottom > ymax ) ymax = p.bottom;
 
-	if ( p.mPlotName != null ) {
-	  // Log.v("DistoXX", "path with plot-name " + p.mPlotName + " type " + p.mType + " nr plots " + nplots );
-	  int k=0;
-	  for ( ; k<nplots; ++k ) if ( plots[k].equals( p.mPlotName ) ) break;
-	  if ( k == nplots ) {
-	    if ( nplots == NPLOTS ) {
-              NPLOTS += 8;
-              String[] tmp = new String[NPLOTS];
-	      for ( int j=0; j<nplots; ++j ) tmp[j] = plots[j];
-              plots = tmp;
-	    }
-	    plots[k] = p.mPlotName;
-	    nplots ++;
-	  }
-	} else {
-	  TDLog.Error("path with no plot-name, type " + p.mType );
-	}
+          if ( p.mPlotName != null ) {
+            // Log.v("DistoXX", "path with plot-name " + p.mPlotName + " type " + p.mType + " nr plots " + nplots );
+            int k=0;
+            for ( ; k<nplots; ++k ) if ( plots[k].equals( p.mPlotName ) ) break;
+            if ( k == nplots ) {
+              if ( nplots == NPLOTS ) {
+                NPLOTS += 8;
+                String[] tmp = new String[NPLOTS];
+                for ( int j=0; j<nplots; ++j ) tmp[j] = plots[j];
+                plots = tmp;
+              }
+              plots[k] = p.mPlotName;
+              nplots ++;
+            }
+          } else {
+            TDLog.Error("path with no plot-name, type " + p.mType );
+          }
+        }
       }
-      RectF bbox = new RectF( xmin, ymin, xmax, ymax ); // left top right bottom
+    }
+    RectF bbox = new RectF( xmin, ymin, xmax, ymax ); // left top right bottom
 
-      // Log.v("DistoXX", "export th2 multiscrap nr. " + nplots + "/" + plots.length + " cstack " + cstack.size() );
-      // Log.v("DistoXX", "export th2 multiscrap bbox X " + xmin + " " + xmax  + " Y " + ymin + " " + ymax );
+    // Log.v("DistoXX", "export th2 multiscrap nr. " + nplots + "/" + plots.length + " cstack " + cstack.size() );
+    // Log.v("DistoXX", "export th2 multiscrap bbox X " + xmin + " " + xmax  + " Y " + ymin + " " + ymax );
 
-      try { 
-        exportTherionHeader1( out, type, bbox, full_name );
-        // exportTherionHeader2( out );
-        for ( int k=0; k<nplots; ++k ) {
-          String plot = plots[k]; 
-          // if ( north != null ) { 
-          //   exportTherionHeader3( out, type, full_name, proj_name, 0, true, north.x1, north.y1, north.x2, north.y2 );
-          // } else {
-            exportTherionHeader3( out, type, plot, proj_name, project_dir, false, 0, 0, 0, 0 );
-          // }
+    try { 
+      exportTherionHeader1( out, type, bbox, full_name );
+      // exportTherionHeader2( out );
+      for ( int k=0; k<nplots; ++k ) {
+        String plot = plots[k]; 
+        // if ( north != null ) { 
+        //   exportTherionHeader3( out, type, full_name, proj_name, 0, true, north.x1, north.y1, north.x2, north.y2 );
+        // } else {
+          exportTherionHeader3( out, type, plot, proj_name, project_dir, false, 0, 0, 0, 0 );
+        // }
 
+        for ( Scrap scrap : scraps ) {
+          List< ICanvasCommand > cstack = scrap.mCurrentStack;
           synchronized( cstack ) {
             for ( ICanvasCommand cmd : cstack ) {
               if ( cmd.commandType() != 0 ) continue;
@@ -1353,18 +1400,14 @@ class DrawingIO
               if ( ! plot.equals( p.mPlotName ) ) continue;
               if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
                 DrawingPointPath pp = (DrawingPointPath)p;
-                String pp_str = pp.toTherion();
-                if ( pp_str != null ) {
-                  out.write( pp_str );
-                  out.newLine();
-                }
-		if ( BrushManager.isPointSection( pp.mPointType ) ) {
-		  if ( TDSetting.mAutoXSections ) {
+                exportTherionPoint( out, pp );
+                if ( BrushManager.isPointSection( pp.mPointType ) ) {
+                  if ( TDSetting.mAutoXSections ) {
                     String name = pp.getOption("-scrap");  // xsection name
-		    // Log.v("DistoXX", "multiscrap add x-section " + name );
-		    if ( name != null && name.length() > 0 ) xsections.add( new XSectionScrap( name, pp.cx, pp.cy ) );
-		  }
-		}
+                    // Log.v("DistoXX", "multiscrap add x-section " + name );
+                    if ( name != null && name.length() > 0 ) xsections.add( new XSectionScrap( name, pp.cx, pp.cy ) );
+                  }
+                }
               } else if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) { // should never happen
                 // if ( ! TDSetting.mAutoStations ) {
                 //   DrawingStationPath st = (DrawingStationPath)p;
@@ -1375,78 +1418,31 @@ class DrawingIO
                 //   }
                 // }
               } else if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
-                DrawingLinePath lp = (DrawingLinePath)p;
-                if ( lp.size() > 1 ) {
-                  String lp_str = lp.toTherion();
-                  if ( lp_str != null ) {
-                    out.write( lp_str );
-                    out.newLine();
-                  }
-                }
+                exportTherionLine( out, (DrawingLinePath)p );
               } else if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
-                DrawingAreaPath ap = (DrawingAreaPath)p;
-                if ( ap.size() > 2 ) {
-                  String ap_str = ap.toTherion();
-                  if ( ap_str != null ) {
-                    out.write( ap_str );
-                    out.newLine();
-                  }
-                }
+                exportTherionArea( out, (DrawingAreaPath)p );
               }
             }
             out.newLine();
           }
 
           // if ( TDSetting.mTherionSplays ) {
-          //   float toTherion = TDSetting.mToTherion;
-          //   StringWriter sw = new StringWriter();
-          //   PrintWriter pw  = new PrintWriter(sw);
-          //          synchronized( splays ) {
-          //     for ( DrawingPath splay : splays ) {
-          //       // if ( bbox.left > splay.right  || bbox.right  < splay.left ) continue;
-          //       // if ( bbox.top  > splay.bottom || bbox.bottom < splay.top  ) continue;
-          //       if ( splay.intersects( bbox ) ) {
-          //         pw.format("line u:splay -visibility off\n");
-          //         pw.format( Locale.US, "  %.2f %.2f\n  %.2f %.2f\n", splay.x1*toTherion, -splay.y1*toTherion, splay.x2*toTherion, -splay.y2*toTherion );
-          //         pw.format("endline\n");
-          //       }
-          //     }
-          //   }
-          //   out.write( sw.toString() );
-          //   out.newLine();
+          //   exportTherionSplays( out, splays, bbox );
           // }
 
           // if ( TDSetting.mAutoStations ) {
-          //   synchronized( stations ) {
-          //     for ( DrawingStationName st : stations ) {
-          //       NumStation station = st.getNumStation();
-          //       if ( station != null && station.barriered() ) continue;
-          //       // FIXME if station is in the convex hull (bbox) of the lines
-          //       if ( bbox.left > st.cx || bbox.right  < st.cx ) continue;
-          //       if ( bbox.top  > st.cy || bbox.bottom < st.cy ) continue;
-          //       String st_str = st.toTherion();
-          //       if ( st_str != null ) {
-          //         out.write( st_str );
-          //         out.newLine();
-          //       }
-          //     }
-          //   }
+          //   exportTherionStations( out, stations, bbox );
           // } else {
-            synchronized( userstations ) {
-              for ( DrawingStationPath sp : userstations ) {
-                String sp_str = sp.toTherion();
-                if ( sp_str != null ) {
-                  out.write( sp_str );
-                  out.newLine();
-                }
-              }
+            List<DrawingStationPath> userstations = scrap.mUserStations;
+            if ( userstations.size() > 0 ) {
+              exportTherionUserStations( out, userstations );
             }
           // }
           exportTherionClose( out );
         }
-      } catch ( IOException e ) {
-        e.printStackTrace();
       }
+    } catch ( IOException e ) {
+      e.printStackTrace();
     }
 
     // Log.v("DistoXX", "multiscrap sections " + xsections.size() );
@@ -1470,6 +1466,7 @@ class DrawingIO
   {
     int version = 0;
     boolean in_scrap = false;
+    int scrap_index = 0;
 
     boolean do_north = false;
     float north_x1=xoff, north_y1=yoff, north_x2=xoff, north_y2=yoff;
@@ -1536,6 +1533,9 @@ class DrawingIO
                 areas = dis.readUTF();
               }
               break;
+            case 'N':
+              scrap_index = dis.readInt();
+              break;
             case 'P':
               th_str = DrawingPointPath.loadDataStream( version, dis, xoff, yoff /*, null */ ).toTherion();
 	      if ( th_str != null ) out.write( th_str );
@@ -1597,6 +1597,7 @@ class DrawingIO
     if ( ! file.exists() ) return;
     int version = 0;
     boolean in_scrap = false;
+    int scrap_index = 0;
     String name = "";
     int type = 0;
     String points = "";
@@ -1649,6 +1650,9 @@ class DrawingIO
                 dis.readUTF();
               }
               break;
+            case 'N':
+              scrap_index = dis.readInt();
+              break;
             case 'P':
               paths.add( DrawingPointPath.loadDataStream( version, dis, 0, 0 /*, null */ ) );
               break;
@@ -1689,12 +1693,11 @@ class DrawingIO
         e.printStackTrace();
       }
     }
-    doExportAsCsx( pw, survey, cave, branch, /* session, */ bind, paths, null, null /* , drawingUtil */ ); // all_sections=null, sections=null
+    doExportAsCsx( pw, survey, cave, branch, /* session, */ bind, paths, null, null ); // all_sections=null, sections=null
   }
 
   static void doExportAsCsx( PrintWriter pw, String survey, String cave, String branch, /* String session, */ String bind,
-                             List<DrawingPath> paths, List< PlotInfo > all_sections, List< PlotInfo > sections
-			     /* , DrawingUtil mDrawingUtil */ )
+                             List<DrawingPath> paths, List< PlotInfo > all_sections, List< PlotInfo > sections )
   {
     int csxIndex = 0;
     pw.format("    <layers>\n");

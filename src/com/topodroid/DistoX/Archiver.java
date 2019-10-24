@@ -162,7 +162,7 @@ class Archiver
   // return true is a symbol has been uncompressed
   boolean uncompressSymbols( ZipInputStream zin, String dirpath, String prefix )
   {
-    if ( ! TDSetting.mZipWithSymbols ) return false;
+    if ( ! (TDLevel.overExpert && TDSetting.mZipWithSymbols ) ) return false;
     boolean ret = false;
     String filename = TDPath.APP_SYMBOL_PATH + "tmp.zip";
     FileOutputStream fout = null;
@@ -238,7 +238,7 @@ class Archiver
       String pathname;
       zos = new ZipOutputStream( new BufferedOutputStream( new FileOutputStream( zipname ) ) );
 
-      if ( TDSetting.mZipWithSymbols ) {
+      if ( TDLevel.overExpert && TDSetting.mZipWithSymbols ) {
         String filename = TDPath.APP_SYMBOL_PATH + "points.zip";
         if ( compressSymbols( filename, BrushManager.mPointLib, TDPath.APP_POINT_PATH ) )  {
           addOptionalEntry( zos, new File( filename ) );

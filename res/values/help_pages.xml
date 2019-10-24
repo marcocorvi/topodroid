@@ -78,6 +78,7 @@
   <string name="PlotNewDialog" translatable="false">page_new_plot.htm</string>
   <!-- string name="PlotRecoverDialog" translatable="false">page_backup.htm</string -->
   <string name="PlotRenameDialog" translatable="false">page_plot_rename.htm</string>
+  <string name="PlotScrapsDialog" translatable="false">page_plot_scraps.htm</string>
   <string name="PlotZoomFitDialog" translatable="false">page_plot_zoomfit.htm</string>
   <string name="ProjectionDialog" translatable="false">page_projection.htm</string>
   <string name="ScrapOutlineDialog" translatable="false">page_scrap_outline.htm</string>

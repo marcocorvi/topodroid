@@ -320,8 +320,6 @@ public class PlotReloadWindow extends ItemDrawer
     mButtonView1 = new MyHorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );
 
-    // BrushManager.makePaths( mApp, res ); FIXME-PATHS
-
     Bundle extras = getIntent().getExtras();
     mSid          = extras.getLong( TDTag.TOPODROID_SURVEY_ID );
     mZoom         = extras.getFloat( TDTag.TOPODROID_PLOT_ZOOM );

@@ -79,7 +79,7 @@ class DrawingUtil
 
   private static void addGridLine( int z, float x1, float x2, float y1, float y2, DrawingSurface surface )
   { 
-    DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_GRID, null );
+    DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_GRID, null, -1 );
     int k = 1;
     Paint paint = BrushManager.fixedGridPaint;
     if ( Math.abs( z % 100 ) == 0 ) {

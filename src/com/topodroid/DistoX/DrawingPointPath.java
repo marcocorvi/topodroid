@@ -66,12 +66,12 @@ class DrawingPointPath extends DrawingPath
   DrawingPointPath fixScrap( String survey_name )
   {
     if ( survey_name != null && BrushManager.isPointSection( mPointType ) ) {
-      String scrap = mOptions.replace("-scrap ", "");
-      if ( ! scrap.startsWith(survey_name) ) {
-        int pos = scrap.lastIndexOf('-');
-        scrap = survey_name + "-" + scrap.substring(pos+1);
+      String scrapname = mOptions.replace("-scrap ", "");
+      if ( ! scrapname.startsWith(survey_name) ) {
+        int pos = scrapname.lastIndexOf('-');
+        scrapname = survey_name + "-" + scrapname.substring(pos+1);
       }
-      mOptions = "-scrap " + scrap;
+      mOptions = "-scrap " + scrapname;
     }
     return this;
   }
@@ -101,9 +101,9 @@ class DrawingPointPath extends DrawingPath
   //   return null;
   // }
 
-  DrawingPointPath( int type, float x, float y, int scale, String text, String options )
+  DrawingPointPath( int type, float x, float y, int scale, String text, String options, int scrap )
   {
-    super( DrawingPath.DRAWING_PATH_POINT, null );
+    super( DrawingPath.DRAWING_PATH_POINT, null, scrap );
     // TDLog.Log( TDLog.LOG_PATH, "Point " + type + " X " + x + " Y " + y );
     mPointType = type;
     setCenter( x, y );
@@ -129,6 +129,7 @@ class DrawingPointPath extends DrawingPath
     int   type;
     int   scale;
     int   level = DrawingLevel.LEVEL_DEFAULT;
+    int   scrap = 0;
     String name;  // th-name
     String group = null;
     String options = null;
@@ -141,6 +142,7 @@ class DrawingPointPath extends DrawingPath
       orientation = dis.readFloat();
       scale   = dis.readInt();
       if ( version >= 401090 ) level = dis.readInt();
+      if ( version >= 401160 ) scrap = dis.readInt();
       if ( version >= 303066 ) text  = dis.readUTF();
       options = dis.readUTF();
 
@@ -154,11 +156,11 @@ class DrawingPointPath extends DrawingPath
       }
       // FIXME SECTION_RENAME
       // if ( BrushManager.isPointSection( type ) ) {
-      //   String scrap = options.replace("-scrap ", "");
-      //   scrap = scrap.replace( mApp.mSurvey + "-", "" ); // remove survey name from options
-      //   option = "-scrap " + scrap;
+      //   String scrapname = options.replace("-scrap ", "");
+      //   scrapname = scrapname.replace( mApp.mSurvey + "-", "" ); // remove survey name from options
+      //   option = "-scrap " + scrapname;
       // }
-      DrawingPointPath ret = new DrawingPointPath( type, ccx, ccy, scale, text, options );
+      DrawingPointPath ret = new DrawingPointPath( type, ccx, ccy, scale, text, options, scrap );
       ret.mLevel = level;
       ret.setOrientation( orientation );
       return ret;
@@ -440,8 +442,8 @@ class DrawingPointPath extends DrawingPath
     }
     // FIXME SECTION_RENAME
     // if ( BrushManager.isPointSection( type ) ) {
-    //   String scrap = mOptions.replace("-scrap ", "" );
-    //   pw.format(" -scrap %s-%s", mApp.mSurvey, scrap );
+    //   String scrapname = mOptions.replace("-scrap ", "" );
+    //   pw.format(" -scrap %s-%s", mApp.mSurvey, scrapname );
     // } else {
       if ( mOptions != null && mOptions.length() > 0 ) {
         pw.format(" %s", mOptions );
@@ -465,6 +467,8 @@ class DrawingPointPath extends DrawingPath
       dos.writeInt( mScale );
       // if ( version >= 401090 )
         dos.writeInt( mLevel );
+      // if ( version >= 401160 )
+        dos.writeInt( mScrap );
       // if ( version >= 303066 ) 
         dos.writeUTF( (mPointText != null)? mPointText : "" );
       dos.writeUTF( (mOptions != null)? mOptions : "" );

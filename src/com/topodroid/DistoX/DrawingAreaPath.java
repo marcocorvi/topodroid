@@ -63,9 +63,9 @@ class DrawingAreaPath extends DrawingPointLinePath
   //   return ret;
   // }
 
-  DrawingAreaPath( int type, int cnt, String prefix, boolean visible )
+  DrawingAreaPath( int type, int cnt, String prefix, boolean visible, int scrap )
   {
-    super( DrawingPath.DRAWING_PATH_AREA, visible, true );
+    super( DrawingPath.DRAWING_PATH_AREA, visible, true, scrap );
     mAreaType = type;
     mAreaCnt  = cnt;
     mPrefix   = (prefix != null && prefix.length() > 0)? prefix : "a";
@@ -87,10 +87,10 @@ class DrawingAreaPath extends DrawingPointLinePath
   }
 
   // @param id   string "area id" (mPrefix + mAreaCnt )
-  DrawingAreaPath( int type, String id, boolean visible )
+  DrawingAreaPath( int type, String id, boolean visible, int scrap )
   {
     // visible = ?,   closed = true
-    super( DrawingPath.DRAWING_PATH_AREA, visible, true );
+    super( DrawingPath.DRAWING_PATH_AREA, visible, true, scrap );
     // TDLog.Log( TDLog.LOG_PLOT, "Drawing Area Path cstr type " + type + " id " + id );
     mAreaType = type;
     mAreaCnt = 1;
@@ -117,6 +117,7 @@ class DrawingAreaPath extends DrawingPointLinePath
     boolean visible;
     float orientation;
     int level = DrawingLevel.LEVEL_DEFAULT;
+    int scrap = 0;
     String thname, prefix;
     String group = null;
     try {
@@ -127,6 +128,7 @@ class DrawingAreaPath extends DrawingPointLinePath
       visible = ( dis.read( ) == 1 );
       orientation = dis.readFloat( );
       if ( version >= 401090 ) level = dis.readInt();
+      if ( version >= 401160 ) scrap = dis.readInt();
       int npt = dis.readInt( );
 
       BrushManager.tryLoadMissingArea( thname );
@@ -138,7 +140,7 @@ class DrawingAreaPath extends DrawingPointLinePath
         type = 0;
       }
 
-      DrawingAreaPath ret = new DrawingAreaPath( type, cnt, prefix, visible );
+      DrawingAreaPath ret = new DrawingAreaPath( type, cnt, prefix, visible, scrap );
       ret.mLevel       = level;
       ret.mOrientation = orientation;
       // setPathPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
@@ -358,6 +360,8 @@ class DrawingAreaPath extends DrawingPointLinePath
       dos.writeFloat( (float)mOrientation );
       // if ( version >= 401090 )
         dos.writeInt( mLevel );
+      // if ( version >= 401160 )
+        dos.writeInt( mScrap );
 
       int npt = size(); // number of line points
       dos.writeInt( npt );

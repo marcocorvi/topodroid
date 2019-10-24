@@ -46,9 +46,9 @@ class DrawingStationPath extends DrawingPath
   // }
 
 
-  public DrawingStationPath( String name, float x, float y, int scale )
+  public DrawingStationPath( String name, float x, float y, int scale, int scrap )
   {
-    super( DrawingPath.DRAWING_PATH_STATION, null );
+    super( DrawingPath.DRAWING_PATH_STATION, null, scrap );
     // TDLog.Log( TDLog.LOG_PATH, "Point " + mType + " X " + x + " Y " + y );
     // Log.v( "DistoX", "User Station (1) " + mType + " X " + x + " Y " + y );
     // mType = DRAWING_PATH_STATION;
@@ -66,9 +66,9 @@ class DrawingStationPath extends DrawingPath
     // Log.v( TopoDroidApp.TAG, "Point cstr " + type + " orientation " + mOrientation + " flip " + mFlip );
   }
 
-  public DrawingStationPath( DrawingStationName st, int scale )
+  public DrawingStationPath( DrawingStationName st, int scale, int scrap )
   {
-    super( DrawingPath.DRAWING_PATH_STATION, null );
+    super( DrawingPath.DRAWING_PATH_STATION, null, scrap );
     // TDLog.Log( TDLog.LOG_PATH, "Point " + mType + " X " + st.cx + " Y " + st.cy );
     // Log.v( "DistoX", "User Station (2) " + mType + " X " + st.cx + " Y " + st.cy );
     // mType = DRAWING_PATH_STATION;
@@ -141,6 +141,8 @@ class DrawingStationPath extends DrawingPath
       dos.writeInt( mScale );
       // if ( version >= 401090 ) 
         dos.writeInt( mLevel );
+      // if ( version >= 401160 ) 
+        dos.writeInt( mScrap );
       dos.writeUTF( mName );
     } catch ( IOException e ) {
       TDLog.Error( "ERROR-dos station " + mName );
@@ -154,10 +156,11 @@ class DrawingStationPath extends DrawingPath
       float y = dis.readFloat();
       // group = ( version >= 401147 )? dir.readUTF() : null; // station path has no group
       int scale = dis.readInt();
-      int level = ( version >= 401090 )? dis.readInt() : 1;
+      int level = ( version >= 401090 )? dis.readInt() : DrawingLevel.LEVEL_DEFAULT;
+      int scrap = ( version >= 401160 )? dis.readInt() : 0;
       String name = dis.readUTF();
       // TDLog.Log( TDLog.LOG_PLOT, "S " + name + " " + x + " " + y );
-      return new DrawingStationPath( name, x, y, scale );
+      return new DrawingStationPath( name, x, y, scale, scrap );
     } catch ( IOException e ) {
       TDLog.Error( "ERROR-dis station " + e.getMessage() );
     }

@@ -232,7 +232,7 @@ class ParserPocketTopo extends ImportParser
                 // add a line to the plotCanvas
 		int line_type = BrushManager.getLineIndexByThName( th_name );
 		if ( line_type < 0 ) line_type = 0;
-		DrawingLinePath line = new DrawingLinePath( line_type );
+		DrawingLinePath line = new DrawingLinePath( line_type, 0 );
 
                 PTPoint point = elem.point(0);
                 // pw.format("line %s\n", th_name );
@@ -279,7 +279,7 @@ class ParserPocketTopo extends ImportParser
                 // FIXME drawer->insertPoint(x, y, type, canvas );
                 // pw.format("point %d %d %s \n", x, -y, th_name ); // FIXME_TH2
                 // Log.v("PTDistoX", "elem " + h + " single " + x + " " + y );
-		paths.add( new DrawingPointPath( point_type, x, y, DrawingPointPath.SCALE_M, "", "" ) ); // no text, no options
+		paths.add( new DrawingPointPath( point_type, x, y, DrawingPointPath.SCALE_M, "", "", 0 ) ); // no text, no options
               }
             } catch( ClassCastException e ) {
               throw new ParserException();

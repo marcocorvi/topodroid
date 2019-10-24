@@ -339,6 +339,7 @@
     <string name="menu_reload">NAČÍTAŤ</string>
     <string name="menu_rename_delete">PREMENOVAŤ/VYMAZAŤ</string>
     <string name="menu_rename">PREMENOVAŤ</string>
+    <!-- TODO string name="menu_plot_scrap">SCRAPS</string -->
     <string name="menu_switch">PREPNÚŤ/ZATVORIŤ</string>
     <string name="menu_help">POMOC</string>
     <!-- UNUSED string name="menu_join_survey">CO-SURVEY</string -->
@@ -452,6 +453,7 @@
     <string name="section_area">Sekcia oblasti: %1$.1f</string>
     <string name="section_name">Komentár k Priečnemu rezu</string>
     <string name="scrap_outline">Obrysy</string>
+    <!-- TODO string name="scrap_string">Sketch scrap: %1$d / %2$d</string -->
 
     <!-- UNUSED string name="sensor">sensor</string -->
     <string name="sensor_gravity">Gravitácia</string>
@@ -626,6 +628,8 @@
     <string name="button_plot"    >Nákres</string>
     <string name="button_more"    >Viac</string>
     <string name="button_next"    >Ďalší</string>
+    <!-- TODO string name="button_prev"    >Prevous</string -->
+    <!-- TODO string name="button_new"     >New scrap</string -->
     <string name="button_skip"    >Preskočiť</string>
     <string name="button_done"    >Dokončiť</string>
     <string name="button_lrud"    >Pridať LRUD</string>
@@ -798,6 +802,7 @@
     <string name="help_refs">Vybrať možnosti zobrazenia</string>
     <string name="help_rename">Premenovať názov jaskyne</string>
     <string name="help_plot_rename">Premenovať/Vymazať nákres</string>
+    <!-- TODO string name="help_plot_scrap">Sketch scraps</string -->
     <string name="help_plot_switch">Prepínanie medzi nákresmi</string>
     <string name="help_search">Vyhľadať body</string>
     <string name="help_stats">Štatistika mapovania</string>
@@ -901,6 +906,7 @@
     <string name="title_plot_save">Exportovať nákres </string>
     <!-- UNUSED string name="title_plot_merge">Merge sketch in</string -->
     <string name="title_plot_reload">Znovu načítať nákres</string>
+    <!-- TODO string name="title_plot_scraps">Sketch scraps</string -->
     <string name="title_profile_flip">Otočiť zrkadlovo nákres profilu?</string>
     <string name="title_projection">Azimut Priemetu %1$d</string>
     <string name="title_refs">Výber možností zobrazenia</string>

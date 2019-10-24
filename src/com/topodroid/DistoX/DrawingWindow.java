@@ -224,6 +224,7 @@ public class DrawingWindow extends ItemDrawer
                         R.string.menu_reload,
                         R.string.menu_zoom_fit,
                         R.string.menu_rename_delete,
+                        R.string.menu_plot_scrap,
                         R.string.menu_palette,    // 6
                         R.string.menu_overview,
                         R.string.menu_options,
@@ -266,6 +267,7 @@ public class DrawingWindow extends ItemDrawer
                         R.string.help_recover,
                         R.string.help_zoom_fit,
                         R.string.help_plot_rename,
+                        R.string.help_plot_scrap,
                         R.string.help_symbol,
                         R.string.help_overview,
                         R.string.help_prefs,
@@ -693,7 +695,7 @@ public class DrawingWindow extends ItemDrawer
   // used by H-Sections for the North line
   private void addFixedSpecial( float x1, float y1, float x2, float y2 ) // float xoff, float yoff )
   {
-    DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null );
+    DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null, -1 );
     dpath.setPathPaint( BrushManager.highlightPaint );
     // DrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
     DrawingUtil.makePath( dpath, x1, y1, x2, y2 );
@@ -708,7 +710,7 @@ public class DrawingWindow extends ItemDrawer
   {
     DrawingPath dpath = null;
     if ( splay ) {
-      dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
+      dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk, mDrawingSurface.scrapIndex() );
       dpath.setCosine( cosine ); // save cosine into path
       if ( PlotInfo.isProfile( type ) ) {
         if ( TDSetting.mDashSplay == TDSetting.DASHING_AZIMUTH ) {
@@ -724,7 +726,7 @@ public class DrawingWindow extends ItemDrawer
         }
       }
     } else {
-      dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );
+      dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk, mDrawingSurface.scrapIndex() );
       dpath.setPathPaint( BrushManager.fixedShotPaint );
       if ( blk != null ) {
 	if ( blk.isMultiBad() ) {
@@ -754,7 +756,7 @@ public class DrawingWindow extends ItemDrawer
                                      boolean blue )
   {
     // Log.v("DistoX", "Section splay angle " + a + " " + TDSetting.mVertSplay );
-    DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
+    DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk, mDrawingSurface.scrapIndex() );
     dpath.setCosine( angle ); 
     Paint paint = blk.getPaint();
     if ( paint != null ) {
@@ -1778,7 +1780,6 @@ public class DrawingWindow extends ItemDrawer
     // redoBtn.setEnabled(false);
     // undoBtn.setEnabled(false); // let undo always be there
 
-    // BrushManager.makePaths( mApp, getResources() ); // FIXME-PATHS
     setTheTitle();
 
     // mBezierInterpolator = new BezierInterpolator( );
@@ -2184,7 +2185,7 @@ public class DrawingWindow extends ItemDrawer
             if ( mLandscape ) { float t=xtt; xtt=-ytt; ytt=t; }
             // Log.v("DistoX", "TT " + tt + " " + xtt + " " + xfrom + " " + xto );
             // makeXSectionLegPoint( xtt, ytt );
-            DrawingSpecialPath path = new DrawingSpecialPath( DrawingSpecialPath.SPECIAL_DOT, DrawingUtil.toSceneX(xtt,ytt), DrawingUtil.toSceneY(xtt,ytt), DrawingLevel.LEVEL_DEFAULT );
+            DrawingSpecialPath path = new DrawingSpecialPath( DrawingSpecialPath.SPECIAL_DOT, DrawingUtil.toSceneX(xtt,ytt), DrawingUtil.toSceneY(xtt,ytt), DrawingLevel.LEVEL_DEFAULT, mDrawingSurface.scrapIndex() );
             mDrawingSurface.addDrawingPath( path );
           }
         }
@@ -2970,7 +2971,8 @@ public class DrawingWindow extends ItemDrawer
               DrawingAreaPath area = new DrawingAreaPath( mCurrentAreaPath.mAreaType,
                                                           mCurrentAreaPath.mAreaCnt, 
                                                           mCurrentAreaPath.mPrefix, 
-                                                          TDSetting.mAreaBorder );
+                                                          TDSetting.mAreaBorder, 
+                                                          mDrawingSurface.scrapIndex() );
               if ( xs - mCurrentAreaPath.mFirst.x > 20 ) { // 20 == 1.0 meter // CLOSE BOTTOM SURFACE
                 LinePoint lp = mCurrentAreaPath.mFirst; 
                 float yy = lp.y;
@@ -3032,7 +3034,7 @@ public class DrawingWindow extends ItemDrawer
                     BezierCurve c = curves.get(0);
                     Point2D p0 = c.getPoint(0);
                     if ( mSymbol == Symbol.LINE ) {
-                      DrawingLinePath lp1 = new DrawingLinePath( mCurrentLine );
+                      DrawingLinePath lp1 = new DrawingLinePath( mCurrentLine, mDrawingSurface.scrapIndex() );
                       lp1.addStartPoint( p0.x, p0.y );
                       for (int k=0; k<k0; ++k) {
                         c = curves.get(k);
@@ -3058,7 +3060,8 @@ public class DrawingWindow extends ItemDrawer
                       //   mLastLinePath = ???
                       }
                     } else { //  mSymbol == Symbol.AREA
-                      DrawingAreaPath ap = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(), mName+"-a", TDSetting.mAreaBorder ); 
+                      DrawingAreaPath ap = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(), mName+"-a", TDSetting.mAreaBorder, 
+                                                                mDrawingSurface.scrapIndex() ); 
                       ap.addStartPoint( p0.x, p0.y );
                       for (int k=0; k<k0; ++k) {
                         c = curves.get(k);
@@ -3092,7 +3095,7 @@ public class DrawingWindow extends ItemDrawer
                   if ( k0 > 1 ) {
                     Point2D p0 = points.get(0);
                     if ( mSymbol == Symbol.LINE ) {
-                      DrawingLinePath lp1 = new DrawingLinePath( mCurrentLine );
+                      DrawingLinePath lp1 = new DrawingLinePath( mCurrentLine, mDrawingSurface.scrapIndex() );
                       lp1.addStartPoint( p0.x, p0.y );
                       for (int k=1; k<k0; ++k) {
                         p0 = points.get(k);
@@ -3115,7 +3118,8 @@ public class DrawingWindow extends ItemDrawer
                       //   mLastLinePath = ???
                       }
                     } else { //  mSymbol == Symbol.AREA
-                      DrawingAreaPath ap = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(), mName+"-a", TDSetting.mAreaBorder ); 
+                      DrawingAreaPath ap = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(), mName+"-a", TDSetting.mAreaBorder, 
+                                                                mDrawingSurface.scrapIndex() ); 
                       ap.addStartPoint( p0.x, p0.y );
                       for (int k=1; k<k0; ++k) {
                         p0 = points.get(k);
@@ -3196,7 +3200,7 @@ public class DrawingWindow extends ItemDrawer
                 }
               } else {
     	        if ( mLandscape ) {
-                  DrawingPointPath point = new DrawingPointPath( mCurrentPoint, -ys, xs, mPointScale, null, null );
+                  DrawingPointPath point = new DrawingPointPath( mCurrentPoint, -ys, xs, mPointScale, null, null, mDrawingSurface.scrapIndex() );
     	          if ( BrushManager.isPointOrientable( mCurrentPoint ) ) {
 		    if ( shift > TDSetting.mPointingRadius ) {
 		      float angle = TDMath.atan2d( x_shift, -y_shift );
@@ -3207,7 +3211,7 @@ public class DrawingWindow extends ItemDrawer
     	          }
                   mDrawingSurface.addDrawingPath( point );
     	        } else {
-                  DrawingPointPath point = new DrawingPointPath( mCurrentPoint, xs, ys, mPointScale, null, null ); // no text, no options
+                  DrawingPointPath point = new DrawingPointPath( mCurrentPoint, xs, ys, mPointScale, null, null, mDrawingSurface.scrapIndex() ); // no text, no options
     	          if ( BrushManager.isPointOrientable( mCurrentPoint ) ) {
 		    if ( shift > TDSetting.mPointingRadius ) {
 		      float angle = TDMath.atan2d( x_shift, -y_shift );
@@ -3339,13 +3343,13 @@ public class DrawingWindow extends ItemDrawer
       // TDLog.Log( TDLog.LOG_PLOT, "onTouch ACTION_DOWN symbol " + mSymbol );
       mPointCnt = 0;
       if ( mSymbol == Symbol.LINE ) {
-        mCurrentLinePath = new DrawingLinePath( mCurrentLine );
+        mCurrentLinePath = new DrawingLinePath( mCurrentLine, mDrawingSurface.scrapIndex() );
         mCurrentLinePath.addStartPoint( xs, ys );
         mCurrentBrush.mouseDown( mDrawingSurface.getPreviewPath(), xc, yc );
       } else if ( mSymbol == Symbol.AREA ) {
         // TDLog.Log( TDLog.LOG_PLOT, "onTouch ACTION_DOWN area type " + mCurrentArea );
         mCurrentAreaPath = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(),
-          mName+"-a", TDSetting.mAreaBorder );
+          mName+"-a", TDSetting.mAreaBorder, mDrawingSurface.scrapIndex() );
         mCurrentAreaPath.addStartPoint( xs, ys );
         // Log.v("DistoX", "start area start " + xs + " " + ys );
         mCurrentBrush.mouseDown( mDrawingSurface.getPreviewPath(), xc, yc );
@@ -3648,7 +3652,7 @@ public class DrawingWindow extends ItemDrawer
         DrawingPointPath section_pt = new DrawingPointPath( BrushManager.getPointSectionIndex(),
                                                         x5, y5, DrawingPointPath.SCALE_M, 
                                                         null, // no text 
-                                                        scrap_option );
+                                                        scrap_option, mDrawingSurface.scrapIndex() );
 	section_pt.setLink( currentLine );
         mDrawingSurface.addDrawingPath( section_pt );
       }
@@ -3670,7 +3674,7 @@ public class DrawingWindow extends ItemDrawer
       assert( mLastLinePath == null );
       if ( label != null && label.length() > 0 ) {
 	if ( mLandscape ) { float t=x; x=-y; y=t; }
-        DrawingLabelPath label_path = new DrawingLabelPath( label, x, y, mPointScale, null );
+        DrawingLabelPath label_path = new DrawingLabelPath( label, x, y, mPointScale, null, mDrawingSurface.scrapIndex() );
 	label_path.setOrientation( BrushManager.getPointOrientation( mCurrentPoint ) ); // FIX Asenov
 	label_path.mLandscape = mLandscape;
         label_path.mLevel = level;
@@ -3693,7 +3697,7 @@ public class DrawingWindow extends ItemDrawer
     // FIXME NOTIFY ? no
     // photo file is "survey/id.jpg"
     // String filename = TDInstance.survey + "/" + Long.toString( mMediaId ) + ".jpg";
-    DrawingPhotoPath photo = new DrawingPhotoPath( mMediaComment, mMediaX, mMediaY, mPointScale, null, mMediaId );
+    DrawingPhotoPath photo = new DrawingPhotoPath( mMediaComment, mMediaX, mMediaY, mPointScale, null, mMediaId, mDrawingSurface.scrapIndex() );
     photo.mLandscape = mLandscape;
     mDrawingSurface.addDrawingPath( photo );
     modified();
@@ -3806,7 +3810,7 @@ public class DrawingWindow extends ItemDrawer
       DrawingAudioPath audio = mDrawingSurface.getAudioPoint( bid );
       if ( audio == null ) {
         // assert bid == mMediaId
-        audio = new DrawingAudioPath( mMediaX, mMediaY, mPointScale, null, bid );
+        audio = new DrawingAudioPath( mMediaX, mMediaY, mPointScale, null, bid, mDrawingSurface.scrapIndex() );
 	audio.mLandscape = mLandscape;
         mDrawingSurface.addDrawingPath( audio );
         modified();
@@ -3949,7 +3953,7 @@ public class DrawingWindow extends ItemDrawer
 	  String scrap_option = "-scrap " + TDInstance.survey + "-" + xs_id;
 	  DrawingPointPath section_pt = new DrawingPointPath( BrushManager.getPointSectionIndex(),
 							    x5, y5, DrawingPointPath.SCALE_M, 
-							    null, scrap_option ); // no text
+							    null, scrap_option, mDrawingSurface.scrapIndex() ); // no text
 	  section_pt.setLink( st );
 	  mDrawingSurface.addDrawingPath( section_pt );
         }
@@ -4099,7 +4103,7 @@ public class DrawingWindow extends ItemDrawer
     {
       // Log.v("DistoX-C", "addStationPoint " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
       assert( mLastLinePath == null );
-      DrawingStationPath path = new DrawingStationPath( st, DrawingPointPath.SCALE_M );
+      DrawingStationPath path = new DrawingStationPath( st, DrawingPointPath.SCALE_M, mDrawingSurface.scrapIndex() );
       mDrawingSurface.addDrawingStationPath( path );
       modified();
     }
@@ -5627,12 +5631,15 @@ public class DrawingWindow extends ItemDrawer
     if ( TDLevel.overAdvanced && PlotInfo.isSketch2D( type ) ) {
       mMenuAdapter.add( res.getString( menus[5] ) ); // RENAME/DELETE
     }
-    mMenuAdapter.add( res.getString( menus[6] ) ); // PALETTE
-    if ( TDLevel.overBasic && PlotInfo.isSketch2D( type ) ) {
-      mMenuAdapter.add( res.getString( menus[7] ) ); // OVERVIEW
+    if ( TDLevel.overAdvanced && PlotInfo.isSketch2D( type ) ) {
+      mMenuAdapter.add( res.getString( menus[6] ) ); // SCRAPS
     }
-    mMenuAdapter.add( res.getString( menus[8] ) ); // OPTIONS
-    mMenuAdapter.add( res.getString( menus[9] ) ); // HELP
+    mMenuAdapter.add( res.getString( menus[7] ) ); // PALETTE
+    if ( TDLevel.overBasic && PlotInfo.isSketch2D( type ) ) {
+      mMenuAdapter.add( res.getString( menus[8] ) ); // OVERVIEW
+    }
+    mMenuAdapter.add( res.getString( menus[9] ) ); // OPTIONS
+    mMenuAdapter.add( res.getString( menus[10] ) ); // HELP
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
   }
@@ -5745,10 +5752,12 @@ public class DrawingWindow extends ItemDrawer
 	}
       } else if ( TDLevel.overAdvanced && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // RENAME/DELETE
         //   askDelete();
-        (new PlotRenameDialog( mActivity, this /*, mApp */ )).show();
+        (new PlotRenameDialog( mActivity, this )).show();
+      } else if ( TDLevel.overAdvanced && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // SCRAPS
+        //   askDelete();
+        (new PlotScrapsDialog( mActivity, this )).show();
 
       } else if ( p++ == pos ) { // PALETTE
-        // BrushManager.makePaths( mApp, getResources() ); // FIXME-PATHS
         (new SymbolEnableDialog( mActivity )).show();
 
       } else if ( TDLevel.overBasic && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // OVERVIEW
@@ -6102,7 +6111,7 @@ public class DrawingWindow extends ItemDrawer
       DLNSide side = hpos.side;
       float xx = DrawingUtil.toSceneX( side.mP1.x, side.mP1.y );
       float yy = DrawingUtil.toSceneY( side.mP1.x, side.mP1.y );
-      DrawingLinePath path = new DrawingLinePath( BrushManager.getLineWallIndex() );
+      DrawingLinePath path = new DrawingLinePath( BrushManager.getLineWallIndex(), mDrawingSurface.scrapIndex() );
       path.addStartPoint( xx, yy );
       for ( DLNSideList hp : dln_wall.mPosHull ) {
         side = hp.side;
@@ -6121,7 +6130,7 @@ public class DrawingWindow extends ItemDrawer
       DLNSide side = hneg.side;
       float xx = DrawingUtil.toSceneX( side.mP1.x, side.mP1.y );
       float yy = DrawingUtil.toSceneY( side.mP1.x, side.mP1.y );
-      DrawingLinePath path = new DrawingLinePath( BrushManager.getLineWallIndex() );
+      DrawingLinePath path = new DrawingLinePath( BrushManager.getLineWallIndex(), mDrawingSurface.scrapIndex() );
       path.addStartPoint( xx, yy );
       for ( DLNSideList hn : dln_wall.mNegHull ) {
         side = hn.side;
@@ -6146,7 +6155,7 @@ public class DrawingWindow extends ItemDrawer
     DLNSide side = hull.side;
     float xx = DrawingUtil.toSceneX( side.mP1.x, side.mP1.y );
     float yy = DrawingUtil.toSceneY( side.mP1.x, side.mP1.y );
-    DrawingLinePath path = new DrawingLinePath( BrushManager.getLineWallIndex() );
+    DrawingLinePath path = new DrawingLinePath( BrushManager.getLineWallIndex(), mDrawingSurface.scrapIndex() );
     path.addStartPoint( xx, yy );
     int size = dln_wall.hullSize();
     for ( int k=0; k<size; ++k ) {
@@ -6182,7 +6191,7 @@ public class DrawingWindow extends ItemDrawer
         y0 = DrawingUtil.toSceneY( x0, y0 );
         x1 = DrawingUtil.toSceneX( x1, y1 );
         y1 = DrawingUtil.toSceneY( x1, y1 );
-        DrawingLinePath path = new DrawingLinePath( BrushManager.getLineWallIndex() );
+        DrawingLinePath path = new DrawingLinePath( BrushManager.getLineWallIndex(), mDrawingSurface.scrapIndex() );
         path.addStartPoint( x0, y0 );
         addPointsToLine( path, x0, y0, xx, yy );
         addPointsToLine( path, xx, yy, x1, y1 );
@@ -6197,7 +6206,7 @@ public class DrawingWindow extends ItemDrawer
       float y2 = y0 + uu.y * p1.x + vv.y * p1.y;
       xx = DrawingUtil.toSceneX( x2, y2 );
       yy = DrawingUtil.toSceneY( x2, y2 );
-      DrawingLinePath path = new DrawingLinePath( BrushManager.getLineWallIndex() );
+      DrawingLinePath path = new DrawingLinePath( BrushManager.getLineWallIndex(), mDrawingSurface.scrapIndex() );
       path.addStartPoint( xx, yy );
       for ( int k=1; k<pts.size(); ++k ) {
         p1 = pts.get(k);
@@ -6529,5 +6538,12 @@ public class DrawingWindow extends ItemDrawer
     super.onConfigurationChanged( new_cfg );
     mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
   }
+
+  int getScrapIndex() { return mDrawingSurface.scrapIndex(); }
+  int getScrapMaxIndex() { return mDrawingSurface.scrapMaxIndex(); }
+
+  void scrapNext() { mDrawingSurface.toggleScrapIndex( 1 ); }
+  void scrapPrev() { mDrawingSurface.toggleScrapIndex( -1 ); }
+  void scrapNew() { mDrawingSurface.newScrapIndex( ); }
 
 }

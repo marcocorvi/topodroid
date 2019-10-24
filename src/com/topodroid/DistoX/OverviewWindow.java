@@ -255,7 +255,7 @@ public class OverviewWindow extends ItemDrawer
     {
       DrawingPath dpath = null;
       if ( splay ) {
-        dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
+        dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk, mOverviewSurface.scrapIndex() );
         if ( blk.mClino > TDSetting.mVertSplay ) {
           dpath.setPathPaint( BrushManager.paintSplayXBdot );
         } else if ( blk.mClino < -TDSetting.mVertSplay ) {
@@ -264,7 +264,7 @@ public class OverviewWindow extends ItemDrawer
           dpath.setPathPaint( BrushManager.paintSplayXB );
         }
       } else {
-        dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );
+        dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk, mOverviewSurface.scrapIndex() );
         dpath.setPathPaint( BrushManager.fixedShotPaint );
       }
       // DrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
@@ -472,7 +472,6 @@ public class OverviewWindow extends ItemDrawer
       mButtonView1 = new MyHorizontalButtonView( mButton1 );
       mListView.setAdapter( mButtonView1.mAdapter );
 
-      // BrushManager.makePaths( mApp, res ); FIXME-PATHS
       setTheTitle();
 
       mData         = TopoDroidApp.mData; // new DataHelper( this );
@@ -908,7 +907,7 @@ public class OverviewWindow extends ItemDrawer
         mBaseY = mStartY;
         mOnMeasure = MEASURE_ON;
         // add reference point
-        DrawingPath path1 = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null );
+        DrawingPath path1 = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null, -1 );
         path1.setPathPaint( BrushManager.highlightPaint );
         path1.makePath( mCirclePath, new Matrix(), mStartX, mStartY );
         // Log.v("DistoX", "first ref " + mStartX + " " + mStartY );
@@ -916,7 +915,7 @@ public class OverviewWindow extends ItemDrawer
         if ( mIsContinue ) {
           mTotal   = 0;
           mDDtotal = 0;
-          DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null );
+          DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null, -1 );
           path.setPathPaint( BrushManager.fixedBluePaint );
           path.makePath( null, new Matrix(), mStartX, mStartY );
           path.mPath.moveTo( mStartX, mStartY );
@@ -957,7 +956,7 @@ public class OverviewWindow extends ItemDrawer
           mDDtotal = dd;
           mTotal   = 1;
           // replace target point
-          DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null );
+          DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null, -1 );
           path.setPathPaint( BrushManager.fixedBluePaint );
           path.makePath( mCrossPath, new Matrix(), x, y );
           path.mPath.moveTo( mStartX, mStartY );
@@ -1124,7 +1123,7 @@ public class OverviewWindow extends ItemDrawer
     mStartX = pt0.x;
     mStartY = pt0.y;
     mMeasurePts.remove( sz );
-    DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null );
+    DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null, -1 );
     path.setPathPaint( BrushManager.fixedBluePaint );
     path.makePath( null, new Matrix(), mBaseX, mBaseY );
     path.mPath.moveTo( mBaseX, mBaseY );

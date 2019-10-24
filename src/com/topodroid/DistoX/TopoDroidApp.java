@@ -1432,8 +1432,7 @@ public class TopoDroidApp extends Application
     if ( karst  ) installSymbols( R.raw.symbols_karst,  true );
 
     mDData.setValue( "symbol_version", SYMBOL_VERSION );
-    BrushManager.reloadAllLibraries( this, getResources() );
-    // BrushManager.makePaths( getResources() );
+    BrushManager.loadAllLibraries( this, getResources() );
   }
 
   static private void symbolsUncompress( InputStream fis, boolean overwrite )

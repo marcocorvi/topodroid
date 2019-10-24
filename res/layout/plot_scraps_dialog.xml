@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+  style="@style/base_padding"
+  android:layout_width="match_parent" 
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  >
+
+    <TextView android:id="@+id/scraps_nr" 
+       style="@style/edit_text_light"
+       android:layout_width="match_parent" 
+       android:layout_marginTop="@dimen/marginv"
+       />
+
+    <LinearLayout 
+       android:layout_width="wrap_content" 
+       android:layout_height="wrap_content"
+       android:layout_gravity="right"
+       android:gravity="right"
+       android:orientation="horizontal"
+       android:layout_marginTop="@dimen/marginvbig"
+       >
+      <Button android:id="@+id/btn_new"
+        style="@style/button_default"
+        android:layout_marginRight="@dimen/marginh"
+        android:text="@string/button_new"
+        />
+      <Button android:id="@+id/btn_next"
+        style="@style/button_default"
+        android:layout_marginRight="@dimen/marginh"
+        android:text="@string/button_next"
+        />
+      <Button android:id="@+id/btn_prev"
+        style="@style/button_default"
+        android:text="@string/button_prev"
+        />
+    </LinearLayout>
+
+    <LinearLayout 
+       android:layout_width="wrap_content" 
+       android:layout_height="wrap_content"
+       android:layout_gravity="right"
+       android:gravity="right"
+       android:orientation="horizontal"
+       android:layout_marginTop="@dimen/marginvbig"
+       >
+      <Button android:id="@+id/btn_back"
+        style="@style/button_default"
+        android:layout_marginRight="@dimen/marginh"
+        android:text="@string/button_cancel"
+        />
+    </LinearLayout>
+</LinearLayout>

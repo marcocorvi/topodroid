@@ -44,9 +44,9 @@ class DrawingPhotoPath extends DrawingPointPath
   //   return ret;
   // }
 
-  DrawingPhotoPath( String text, float off_x, float off_y, int scale, String options, long id )
+  DrawingPhotoPath( String text, float off_x, float off_y, int scale, String options, long id, int scrap )
   {
-    super( BrushManager.getPointPhotoIndex(), off_x, off_y, scale, text, options );
+    super( BrushManager.getPointPhotoIndex(), off_x, off_y, scale, text, options, scrap );
     mId = id;
 
     // mPointText = text;
@@ -78,12 +78,13 @@ class DrawingPhotoPath extends DrawingPointPath
       if ( version > 207043 ) orientation = dis.readFloat( );
       scale = dis.readInt( );
       int lvl = ( version >= 401090 )? dis.readInt() : DrawingLevel.LEVEL_DEFAULT;
+      int scrap = ( version >= 401160 )? dis.readInt() : 0;
       text = dis.readUTF();
       options = dis.readUTF();
       id = dis.readInt();
 
       // TDLog.Log( TDLog.LOG_PLOT, "Label <" + text + " " + ccx + " " + ccy + " scale " + scale + " (" + options + ")" );
-      DrawingPhotoPath ret = new DrawingPhotoPath( text, ccx, ccy, scale, options, id );
+      DrawingPhotoPath ret = new DrawingPhotoPath( text, ccx, ccy, scale, options, id, scrap );
       ret.setOrientation( orientation );
       ret.mLevel = lvl;
       return ret;
@@ -147,6 +148,8 @@ class DrawingPhotoPath extends DrawingPointPath
       dos.writeInt( mScale );
       // if ( version >= 401090 ) 
         dos.writeInt( mLevel );
+      // if ( version >= 401160 ) 
+        dos.writeInt( mScrap );
       dos.writeUTF( ( mPointText != null )? mPointText : "" );
       dos.writeUTF( ( mOptions != null )? mOptions : "" );
       dos.writeInt( ((int)mId) );

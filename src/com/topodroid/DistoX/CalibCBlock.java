@@ -177,7 +177,7 @@ class CalibCBlock
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
     computeBearingAndClino();
-    pw.format(Locale.US, "%d <%d> %5.1f %5.1f %5.1f %6.4f",
+    pw.format(Locale.US, "%d <%d> %5.1f %5.1f %5.1f %4.2f",
       mId, mGroup, mBearing*ua, mClino*ua, mRoll*ua, mError*TDMath.RAD2DEG );
     if ( TDSetting.mRawCData == 1 ) {
       pw.format( "  %d %d %d  %d %d %d", gx, gy, gz, mx, my, mz );

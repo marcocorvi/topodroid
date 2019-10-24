@@ -343,6 +343,7 @@
     <string name="menu_reload">FRÜHERE VERSION</string>
     <string name="menu_rename_delete">UMBENENNEN/LÖSCHEN</string>
     <string name="menu_rename">UMBENENNEN</string>
+    <!-- TODO string name="menu_plot_scrap">SCRAPS</string -->
     <string name="menu_switch">WECHSELN/SCHLIEßEN</string>
     <string name="menu_help">HILFE</string>
     <!-- UNUSED string name="menu_join_survey">CO-VERMESSUNG</string -->
@@ -450,6 +451,7 @@
     <string name="section_area">Fläche: %1$.1f</string>
     <string name="section_name">Querschnitt Kommentar</string>
     <string name="scrap_outline">Skizzenumriss</string>
+    <!-- TODO string name="scrap_string">Sketch scrap: %1$d / %2$d</string -->
 
     <!-- UNUSED string name="sensor">Sensor</string -->
     <string name="sensor_gravity">Schwerkraft</string>
@@ -626,6 +628,8 @@
     <string name="button_plot"    >Skizze</string>
     <string name="button_more"    >Mehr</string>
     <string name="button_next"    >Weiter</string>
+    <!-- TODO string name="button_prev"    >Prevous</string -->
+    <!-- TODO string name="button_new"     >New scrap</string -->
     <string name="button_skip"    >Überspringen</string>
     <string name="button_done"    >Fertig</string>
     <string name="button_lrud"    >LRUD hinzufügen</string>
@@ -798,6 +802,7 @@
     <string name="help_refs">Skizzenelemente anzeigen</string>
     <string name="help_rename">Ändere Vermessungsname</string>
     <string name="help_plot_rename">Skizze umbenennen/löschen</string>
+    <!-- TODO string name="help_plot_scrap">Sketch scraps</string -->
     <string name="help_plot_switch">Skizze wechseln</string>
     <string name="help_search">Suche Messpunkt</string>
     <string name="help_stats">Vermessungs-Statistiken</string>
@@ -897,6 +902,7 @@
     <string name="title_plot_save">Skizze speichern als</string>
     <!-- UNUSED string name="title_plot_merge">Skizze einfügen</string -->
     <string name="title_plot_reload">Skizzenbackup wiederherstellen</string>
+    <!-- TODO string name="title_plot_scraps">Sketch scraps</string -->
     <string name="title_profile_flip">Seitenansicht spiegeln?</string>
     <string name="title_projection">Projiziertes Profil Azimut %1$d</string>
     <string name="title_refs">Elemente Anzeigen</string>

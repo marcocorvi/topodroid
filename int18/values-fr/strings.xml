@@ -333,6 +333,7 @@
     <string name="menu_reload">RECHARGER</string>
     <string name="menu_rename_delete">RENOMMER/SUPPR.</string>
     <string name="menu_rename">RENOMMER</string>
+    <!-- TODO string name="menu_plot_scrap">SCRAPS</string -->
     <string name="menu_switch">BASCULER/FERMER</string>
     <string name="menu_help">AIDE</string>
     <!-- UNUSED string name="menu_join_survey">CO-RELEVÉ-TOPO</string -->
@@ -440,6 +441,7 @@
     <string name="section_area">Zone section : %1$.1f</string>
     <string name="section_name">Commentaires section</string>
     <string name="scrap_outline">Contour Esquisse</string>
+    <!-- TODO string name="scrap_string">Sketch scrap: %1$d / %2$d</string -->
 
     <!-- UNUSED string name="sensor">capteur</string -->
     <string name="sensor_gravity">gravité</string>
@@ -610,6 +612,8 @@
     <string name="button_plot"    >Dessin</string>
     <string name="button_more"    >Plus</string>
     <string name="button_next"    >Suivant</string>
+    <!-- TODO string name="button_prev"    >Prevous</string -->
+    <!-- TODO string name="button_new"     >New scrap</string -->
     <string name="button_skip"    >Sauter</string>
     <string name="button_done"    >Effectué</string>
     <string name="button_lrud"    >Ajouter GDHB LRUD</string>
@@ -782,6 +786,7 @@
     <string name="help_refs">Choix des références de dessin</string>
     <string name="help_rename">Change le nom de la topographie</string>
     <string name="help_plot_rename">Renommer/suppr croquis</string>
+    <!-- TODO string name="help_plot_scrap">Sketch scraps</string -->
     <string name="help_plot_switch">Changer de croquis</string>
     <string name="help_search">Rechercher une station</string>
     <string name="help_stats">Statistiques du relevé</string>
@@ -877,6 +882,7 @@
     <string name="title_plot_save">Enregistrer le croquis sous</string>
     <!-- UNUSED string name="title_plot_merge">Fusionner Esquisse</string -->
     <string name="title_plot_reload">Recharger le croquis</string>
+    <!-- TODO string name="title_plot_scraps">Sketch scraps</string -->
     <string name="title_profile_flip">Basculer la coupe ?</string>
     <string name="title_projection">Azimut coupe projetée %1$d</string>
     <string name="title_refs">Références du dessin</string>

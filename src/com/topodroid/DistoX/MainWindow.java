@@ -229,7 +229,6 @@ public class MainWindow extends Activity
         }
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // PALETTE
 	if ( mPaletteButtonEnabled ) {
-          // BrushManager.makePaths( mApp, getResources() ); // FIXME-PATHS
           SymbolEnableDialog dlg = new SymbolEnableDialog( mActivity );
 	  dlg.anchorTop();
 	  dlg.show();
@@ -414,7 +413,6 @@ public class MainWindow extends Activity
     int p = 0;
       Intent intent;
       if ( mWithPalette && p++ == pos ) { // PALETTE EXTRA SYMBOLS
-        // BrushManager.makePaths( getResources() );
         // (new SymbolEnableDialog( mActivity )).show();
         (new SymbolReload( mActivity, mApp, mWithPalettes )).show();
       } else if ( mWithLogs && p++ == pos ) { // LOGS

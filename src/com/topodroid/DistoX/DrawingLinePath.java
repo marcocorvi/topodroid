@@ -14,10 +14,11 @@
  */
 package com.topodroid.DistoX;
 
-// import android.graphics.Canvas;
-// import android.graphics.Paint;
-// import android.graphics.Path;
-// import android.graphics.Matrix;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.Matrix;
+import android.graphics.RectF;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -59,11 +60,10 @@ class DrawingLinePath extends DrawingPointLinePath
   //   return ret;
   // }
 
-  DrawingLinePath( int line_type )
+  DrawingLinePath( int line_type, int scrap )
   {
     // visible = true,  closed = false
-    super( DrawingPath.DRAWING_PATH_LINE, true, false );
-    // BrushManager.makePaths( );
+    super( DrawingPath.DRAWING_PATH_LINE, true, false, scrap );
     // mCnt = ++ mCount;
     // TDLog.Log( TDLog.LOG_PATH, "DrawingLinePath " + mCnt + " cstr type " + line_type );
 
@@ -80,6 +80,7 @@ class DrawingLinePath extends DrawingPointLinePath
     boolean closed, reversed;
     int outline;
     int level = DrawingLevel.LEVEL_DEFAULT;
+    int scrap = 0;
     String thname, options;
     String group = null;
     try {
@@ -90,6 +91,7 @@ class DrawingLinePath extends DrawingPointLinePath
       reversed = (dis.read() == 1);
       outline = dis.readInt();
       if ( version >= 401090 ) level = dis.readInt();
+      if ( version >= 401160 ) scrap = dis.readInt();
       options = dis.readUTF();
 
       BrushManager.tryLoadMissingLine( thname );
@@ -99,7 +101,7 @@ class DrawingLinePath extends DrawingPointLinePath
         type = 0;
       }
 
-      DrawingLinePath ret = new DrawingLinePath( type );
+      DrawingLinePath ret = new DrawingLinePath( type, scrap );
       ret.mOutline  = outline;
       ret.mLevel    = level;
       ret.mOptions  = options;
@@ -266,6 +268,17 @@ class DrawingLinePath extends DrawingPointLinePath
     setPathPaint( BrushManager.mLineLib.getLinePaint( mLineType, mReversed ) );
   }
   
+  // N.B. canvas is guaranteed ! null
+  public void drawWithPaint( Canvas canvas, Matrix matrix, RectF bbox, Paint paint )
+  {
+    if ( intersects( bbox ) ) 
+    {
+      mTransformedPath = new Path( mPath );
+      mTransformedPath.transform( matrix );
+      canvas.drawPath( mTransformedPath, paint );
+    }
+  }
+
   @Override
   void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
   {
@@ -432,6 +445,8 @@ class DrawingLinePath extends DrawingPointLinePath
       dos.writeInt( mOutline );
       // if ( version >= 401090 )
         dos.writeInt( mLevel );
+      // if ( version >= 401160 )
+        dos.writeInt( mScrap );
       dos.writeUTF( ( mOptions != null )? mOptions : "" );
       
       int npt = size(); // number of line points

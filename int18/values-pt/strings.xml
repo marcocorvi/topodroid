@@ -336,6 +336,7 @@
     <string name="menu_reload">RECARREGAR</string>
     <string name="menu_rename_delete">RENOMEAR/APAGAR</string>
     <string name="menu_rename">RENOMEAR</string>
+    <!-- TODO string name="menu_plot_scrap">SCRAPS</string -->
     <string name="menu_switch">TROCAR/FECHAR</string>
     <string name="menu_help">AJUDA</string>
     <!-- UNUSED string name="menu_join_survey">TOPOGRAFIA COLABORATIVA</string -->
@@ -442,6 +443,7 @@
     <string name="section_area">Área do corte: %1$.1f</string>
     <string name="section_name">comentário sobre corte</string>
     <string name="scrap_outline">Contorno de outro croqui</string>
+    <!-- TODO string name="scrap_string">Sketch scrap: %1$d / %2$d</string -->
 
     <!-- UNUSED string name="sensor">sensor</string -->
     <string name="sensor_gravity">gravidade</string>
@@ -611,6 +613,8 @@
     <string name="button_plot"    >Croqui</string>
     <string name="button_more"    >Mais</string>
     <string name="button_next"    >Próximo</string>
+    <!-- TODO string name="button_prev"    >Prevous</string -->
+    <!-- TODO string name="button_new"     >New scrap</string -->
     <string name="button_skip"    >Ignorar</string>
     <string name="button_done"    >Fim</string>
     <string name="button_lrud"    >Incluir EDTC</string>
@@ -784,6 +788,7 @@
     <string name="help_refs">Definir tipos de medidas apresentadas</string>
     <string name="help_rename">Mudar nome da topo</string>
     <string name="help_plot_rename">Renomear/apagar croqui</string>
+    <!-- TODO string name="help_plot_scrap">Sketch scraps</string -->
     <string name="help_plot_switch">Trocar croqui</string>
     <string name="help_search">Pesquisar base</string>
     <string name="help_stats">Estatísticas da topo</string>
@@ -880,6 +885,7 @@
     <string name="title_plot_save">Exportar croqui</string>
     <!-- UNUSED string name="title_plot_merge">Mesclar croqui</string -->
     <string name="title_plot_reload">Recarregar croqui</string>
+    <!-- TODO string name="title_plot_scraps">Sketch scraps</string -->
     <string name="title_profile_flip">Virar o corte?</string>
     <string name="title_projection">Azimute do corte projetado %1$d</string>
     <string name="title_refs">Mostrar</string>

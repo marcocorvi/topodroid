@@ -31,9 +31,9 @@ import java.util.Locale;
  */
 class DrawingLabelPath extends DrawingPointPath
 {
-  DrawingLabelPath( String text, float off_x, float off_y, int scale, String options )
+  DrawingLabelPath( String text, float off_x, float off_y, int scale, String options, int scrap )
   {
-    super( BrushManager.getPointLabelIndex(), off_x, off_y, scale, text, options );
+    super( BrushManager.getPointLabelIndex(), off_x, off_y, scale, text, options, scrap );
     // mPointText = text;
     // setPaint( BrushManager.pointPaint[ BrushManager.POINT_LABEL ] );
     // mPaint = BrushManager.pointPaint[ BrushManager.POINT_LABEL ];
@@ -54,6 +54,7 @@ class DrawingLabelPath extends DrawingPointPath
     float ccx, ccy;
     int scale;
     int level = DrawingLevel.LEVEL_DEFAULT;
+    int scrap = 0;
     float orientation = 0;
     // int type;
     String text, options;
@@ -66,11 +67,12 @@ class DrawingLabelPath extends DrawingPointPath
       if ( version > 207043 ) orientation = dis.readFloat( );
       scale = dis.readInt( );
       if ( version > 401090 ) level = dis.readInt();
+      if ( version > 401160 ) scrap = dis.readInt();
       text = dis.readUTF();
       options = dis.readUTF();
 
       // TDLog.Log( TDLog.LOG_PLOT, "Label <" + text + " " + ccx + " " + ccy + " scale " + scale + " (" + options + ")" );
-      DrawingLabelPath ret = new DrawingLabelPath( text, ccx, ccy, scale, options );
+      DrawingLabelPath ret = new DrawingLabelPath( text, ccx, ccy, scale, options, scrap );
       ret.mLevel = level;
       ret.setOrientation( orientation );
       return ret;
@@ -212,6 +214,8 @@ class DrawingLabelPath extends DrawingPointPath
       dos.writeInt( mScale );
       // if ( version >= 401090 ) 
         dos.writeInt( mLevel );
+      // if ( version >= 401160 ) 
+        dos.writeInt( mScrap );
       dos.writeUTF( ( mPointText != null )? mPointText : "" );
       dos.writeUTF( ( mOptions != null )? mOptions : "" );
       // TDLog.Log( TDLog.LOG_PLOT, "T " + " " + cx + " " + cy );

@@ -146,7 +146,7 @@ public class ProjectionSurface extends SurfaceView
     // called by DrawingWindow::computeReference
     DrawingStationName addDrawingStationName ( NumStation num_st, float x, float y )
     {
-      DrawingStationName st = new DrawingStationName( num_st, x, y );
+      DrawingStationName st = new DrawingStationName( num_st, x, y, 0 ); // 0: no scrap
       st.setPathPaint( BrushManager.duplicateStationPaint );
       mCommandManager.addStation( st );
       return st;

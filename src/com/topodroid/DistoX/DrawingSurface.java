@@ -85,15 +85,20 @@ class DrawingSurface extends SurfaceView
   static private DrawingCommandManager mCommandManager2 = null;
   static private DrawingCommandManager mCommandManager3 = null;
 
-  // private ArrayList< String > mSplayStationsOn;  // stations where to show splays
-  // private ArrayList< String > mSplayStationsOff; // stations where not to show splays
-  private DrawingStationSplay mStationSplay;
+  private DrawingStationSplay mStationSplay; // splays on/off at stations
 
   public boolean isDrawing() { return isDrawing; }
 
   // -----------------------------------------------------
-  // MANAGER CACHE
+  // SCRAPS 
 
+  int scrapIndex()              { return ( commandManager == null )? 0 : commandManager.scrapIndex(); }
+  int scrapMaxIndex()           { return ( commandManager == null )? 0 : commandManager.scrapMaxIndex(); }
+  int newScrapIndex( )          { return ( commandManager == null )? 0 : commandManager.newScrapIndex( ); }
+  int toggleScrapIndex( int k ) { return ( commandManager == null )? 0 : commandManager.toggleScrapIndex( k ); }
+
+  // -----------------------------------------------------
+  // MANAGER CACHE
   static private HashMap<String, DrawingCommandManager> mCache = new HashMap<String, DrawingCommandManager>();
 
   static void clearCache()
@@ -286,7 +291,7 @@ class DrawingSurface extends SurfaceView
   }
 
   // PATH_MULTISELECTION
-  boolean isMultiselection()  { return commandManager.isMultiselection; }
+  boolean isMultiselection()  { return commandManager.isMultiselection(); }
   int getMultiselectionType() { return commandManager.getMultiselectionType(); }
   void startMultiselection()  { commandManager.startMultiselection(); }
 
@@ -363,7 +368,7 @@ class DrawingSurface extends SurfaceView
 
   synchronized void makePreviewPath( int type, Paint paint ) // type = kind of the path
   {
-    mPreviewPath = new DrawingPath( type, null );
+    mPreviewPath = new DrawingPath( type, null, -1 );
     mPreviewPath.mPath = new Path();
     mPreviewPath.setPathPaint( paint );
   }
@@ -382,7 +387,7 @@ class DrawingSurface extends SurfaceView
         mWidth  = canvas.getWidth();
         mHeight = canvas.getHeight();
         canvas.drawColor(0, PorterDuff.Mode.CLEAR);
-        commandManager.executeAll( canvas, mZoomer.zoom(), mStationSplay /* mSplayStationsOn, mSplayStationsOff */ );
+        commandManager.executeAll( canvas, mZoomer.zoom(), mStationSplay );
         if ( mPreviewPath != null ) mPreviewPath.draw(canvas, null);
       }
     } finally {
@@ -463,7 +468,7 @@ class DrawingSurface extends SurfaceView
     // FIXME STATION_XSECTION
     // DO as when loaded
 
-    DrawingStationName st = new DrawingStationName( num_st, x, y );
+    DrawingStationName st = new DrawingStationName( num_st, x, y, scrapIndex() );
     setStationPaint( st, saved, commandManager );
 
     if ( xsections != null && parent != null ) {
@@ -486,7 +491,7 @@ class DrawingSurface extends SurfaceView
   {
     // TDLog.Log( TDLog.LOG_PLOT, "add Drawing Station Name " + name + " " + x + " " + y );
     // NOTE No station_XSection in X-Sections
-    DrawingStationName st = new DrawingStationName( name, x, y );
+    DrawingStationName st = new DrawingStationName( name, x, y, scrapIndex() );
     st.setPathPaint( BrushManager.fixedStationPaint );
     commandManager.addStation( st, false ); // NOTE make this true for selectable station in all sections
     return st;
@@ -612,7 +617,7 @@ class DrawingSurface extends SurfaceView
 
   SelectionSet getItemsAt( float x, float y, float zoom, int mode, float size ) 
   { 
-    return commandManager.getItemsAt( x, y, zoom, mode, size, mStationSplay /* mSplayStationsOn, mSplayStationsOff */ );
+    return commandManager.getItemsAt( x, y, zoom, mode, size, mStationSplay );
   }
 
   // add item to multiselection
@@ -634,7 +639,7 @@ class DrawingSurface extends SurfaceView
   boolean appendHotItemToNearestLine() { return commandManager.appendHotItemToNearestLine(); }
   
   int snapHotItemToNearestLine() { return commandManager.snapHotItemToNearestLine(); }
-  int snapHotItemToNearestSplays( float dthr ) { return commandManager.snapHotItemToNearestSplays( dthr, mStationSplay /* mSplayStationsOn, mSplayStationsOff */ ); }
+  int snapHotItemToNearestSplays( float dthr ) { return commandManager.snapHotItemToNearestSplays( dthr, mStationSplay ); }
 
   void splitPointHotItem() { commandManager.splitPointHotItem(); }
   void insertPointsHotItem() { commandManager.insertPointsHotItem(); }

@@ -201,9 +201,7 @@ class BrushManager
   // static BitmapDrawable mSymbolHighlight = null;
 
   // ===========================================================================
-  static private boolean mReloadSymbols = true; // whether to reload symbols
-
-  static void makePaths( Context ctx, Resources res )
+  static void makeStationSymbol( Resources res )
   {
     if ( mStationSymbol == null ) {
       String th_name = res.getString( R.string.p_station );
@@ -211,24 +209,11 @@ class BrushManager
       mStationSymbol = new SymbolPoint( name, th_name, null, th_name, 0xffff6633, 
         "addCircle 0 0 0.4 moveTo -3.0 1.73 lineTo 3.0 1.73 lineTo 0.0 -3.46 lineTo -3.0 1.73", false, DrawingLevel.LEVEL_WALL );
     }
-    // if ( mSymbolHighlight == null ) {
-    //   mSymbolHighlight = MyButton.getButtonBackground( mApp, res, R.drawable.symbol_highlight );
-    // }
-
-    if ( mPointLib == null ) mPointLib = new SymbolPointLibrary( ctx, res );
-    if ( mLineLib == null ) mLineLib = new SymbolLineLibrary( res );
-    if ( mAreaLib == null ) mAreaLib = new SymbolAreaLibrary( res );
-
-    if ( mReloadSymbols ) {
-      mPointLib.loadUserPoints( ctx );
-      mLineLib.loadUserLines();
-      mAreaLib.loadUserAreas();
-      mReloadSymbols = false;
-    }
   }
 
-  static void reloadAllLibraries( Context ctx, Resources res ) 
+  static void loadAllLibraries( Context ctx, Resources res ) 
   {
+    makeStationSymbol( res );
     reloadPointLibrary( ctx, res );
     reloadLineLibrary( res );
     reloadAreaLibrary( res );

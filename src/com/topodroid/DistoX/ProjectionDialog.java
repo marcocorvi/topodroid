@@ -177,10 +177,10 @@ class ProjectionDialog extends MyDialog
   {
     DrawingPath dpath = null;
     if ( splay ) {
-      dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
+      dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk, 0 );
       dpath.setPathPaint( BrushManager.fixedShotPaint );
     } else {
-      dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );
+      dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk, 0 );
       dpath.setPathPaint( BrushManager.labelPaint );
     }
     // mDrawingUtil.makePath( dpath, x1, y1, x2, y2, mOffset.x, mOffset.y );

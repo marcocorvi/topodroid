@@ -45,9 +45,9 @@ class DrawingSpecialPath extends DrawingPath
   //   return ret;
   // }
 
-  DrawingSpecialPath( int t, float x, float y, int level )
+  DrawingSpecialPath( int t, float x, float y, int level, int scrap )
   {
-    super( DrawingPath.DRAWING_PATH_NORTH, null );
+    super( DrawingPath.DRAWING_PATH_NORTH, null, scrap );
     // TDLog.Log( TDLog.LOG_PATH, "Point " + type + " X " + x + " Y " + y );
     mType = t;
     setCenter( x, y );
@@ -58,12 +58,12 @@ class DrawingSpecialPath extends DrawingPath
   static DrawingSpecialPath loadDataStream( int version, DataInputStream dis, float x, float y )
   {
     try {
-      int lvl = DrawingLevel.LEVEL_DEFAULT;
       int t = dis.readInt();
       float ccx = x + dis.readFloat();
       float ccy = y + dis.readFloat();
-      if ( version >= 401090 ) lvl = dis.readInt();
-      return new DrawingSpecialPath( t, ccx, ccy, lvl );
+      int lvl   = ( version >= 401090 )? dis.readInt() : DrawingLevel.LEVEL_DEFAULT;
+      int scrap = ( version >= 401160 )? dis.readInt() : DrawingLevel.LEVEL_DEFAULT;
+      return new DrawingSpecialPath( t, ccx, ccy, lvl, scrap );
     } catch ( IOException e ) {
       TDLog.Error( "SPECIAL in error " + e.getMessage() );
     }
@@ -160,6 +160,8 @@ class DrawingSpecialPath extends DrawingPath
       dos.writeFloat( cy );
       // if ( version > 401090 ) 
         dos.writeInt( mLevel );
+      // if ( version > 401160 ) 
+        dos.writeInt( mScrap );
       // TDLog.Log( TDLog.LOG_PLOT, "P " + name + " " + cx + " " + cy );
     } catch ( IOException e ) {
       TDLog.Error( "POINT out error " + e.toString() );

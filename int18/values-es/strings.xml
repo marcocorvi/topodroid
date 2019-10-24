@@ -332,6 +332,7 @@
     <string name="menu_reload">Importar</string>
     <string name="menu_rename_delete">Eliminar/Renombrar</string>
     <string name="menu_rename">Renombrar</string>
+    <!-- TODO string name="menu_plot_scrap">SCRAPS</string -->
     <string name="menu_switch">Cerrar/Cambiar</string>
     <string name="menu_help">Ayuda</string>
     <!-- UNUSED string name="menu_join_survey">Unir topografías</string -->
@@ -438,6 +439,7 @@
     <string name="section_area">Sección de área: %1$.1f</string>
     <string name="section_name">comentario de la sección</string>
     <string name="scrap_outline">Contornos de otros croquis</string>
+    <!-- TODO string name="scrap_string">Sketch scrap: %1$d / %2$d</string -->
 
     <!-- UNUSED string name="sensor">Sensor</string -->
     <string name="sensor_gravity">Gravedad</string>
@@ -616,6 +618,8 @@
     <string name="button_plot"    >Dibujo</string>
     <string name="button_more"    >Más</string>
     <string name="button_next"    >Siguiente</string>
+    <!-- TODO string name="button_prev"    >Prevous</string -->
+    <!-- TODO string name="button_new"     >New scrap</string -->
     <string name="button_skip"    >Omitir</string>
     <string name="button_done"    >Hecho</string>
     <string name="button_lrud"    >Añadir LRUD</string>
@@ -789,6 +793,7 @@
     <string name="help_refs">Ajustes de visualización del dibujo</string>
     <string name="help_rename">Cambio nombre topografía</string>
     <string name="help_plot_rename">Eliminar/Renombrar dibujo</string>
+    <!-- TODO string name="help_plot_scrap">Sketch scraps</string -->
     <string name="help_plot_switch">Activación dibujo</string>
     <string name="help_search">Búsqueda de estación</string>
     <string name="help_stats">Estadísticas de Topografía</string>
@@ -886,6 +891,7 @@
     <string name="title_plot_save">Guardar dibujo como</string>
     <!-- UNUSED string name="title_plot_merge">Combinar dibujo</string -->
     <string name="title_plot_reload">Actualizar dibujo</string>
+    <!-- TODO string name="title_plot_scraps">Sketch scraps</string -->
     <string name="title_profile_flip">¿Quiere cambiar al alzado del dibujo?</string>
     <string name="title_projection">Perfil de proyeccción de brújula %1$d</string>
     <string name="title_refs">Referencias de dibujo</string>

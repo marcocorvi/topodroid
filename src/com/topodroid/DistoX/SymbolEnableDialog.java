@@ -218,7 +218,7 @@ class SymbolEnableDialog extends MyDialog
       //       @Override
       //       public void onClick( DialogInterface dialog, int btn ) {
       //         mApp.installSymbols( true );
-      //         BrushManager.reloadAllLibraries( mContext.getResources() );
+      //         BrushManager.loadAllLibraries( mContext.getResources() );
       //         createAdapters();
       //         updateList();
       //       }

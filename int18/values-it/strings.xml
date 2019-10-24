@@ -332,6 +332,7 @@
     <string name="menu_reload">RICARICA</string>
     <string name="menu_rename_delete">RINOMINA/CANCELLA</string>
     <string name="menu_rename">RINOMINA</string>
+    <!-- TODO string name="menu_plot_scrap">SCRAPS</string -->
     <string name="menu_switch">CAMBIA/CHIUDI</string>
     <string name="menu_help">AIUTO</string>
     <!-- UNUSED string name="menu_join_survey">CO-RILIEVO</string --> <!-- rilievo cooperativo -->
@@ -439,6 +440,7 @@
     <string name="section_area">Area della sezione: %1$.1f</string>
     <string name="section_name">Nota sezione</string>
     <string name="scrap_outline">Contorno del disegno</string>
+    <!-- TODO string name="scrap_string">Sketch scrap: %1$d / %2$d</string -->
 
     <!-- UNUSED string name="sensor">sensore</string -->
     <string name="sensor_gravity">gravità</string>
@@ -608,6 +610,8 @@
     <string name="button_plot"    >Disegno</string>
     <string name="button_more"    >Altro</string>
     <string name="button_next"    >Prossimo</string>
+    <!-- TODO string name="button_prev"    >Prevous</string -->
+    <!-- TODO string name="button_new"     >New scrap</string -->
     <string name="button_skip"    >Salta</string>
     <string name="button_done"    >Fatto</string>
     <string name="button_lrud"    >Aggiungi LRUD</string>
@@ -780,6 +784,7 @@
     <string name="help_refs">Seleziona riferimenti per disegno</string>
     <string name="help_rename">Modifica il nome del rilievo</string>
     <string name="help_plot_rename">Rinomina/Cancella disegno</string>
+    <!-- TODO string name="help_plot_scrap">Sketch scraps</string -->
     <string name="help_plot_switch">Scambia disegno</string>
     <string name="help_search">Cerca caposaldo</string>
     <string name="help_stats">Statistiche rilievo</string>
@@ -876,6 +881,7 @@
     <string name="title_plot_save">Salva disegno come </string>
     <!-- UNUSED string name="title_plot_merge">Fondere disegno</string -->
     <string name="title_plot_reload">Ricarica disegno</string>
+    <!-- TODO string name="title_plot_scraps">Sketch scraps</string -->
     <string name="title_profile_flip">Capovolgo il profilo del disegno?</string>
     <string name="title_projection">Proiezione azimutale profilo %1$d</string>
     <string name="title_refs">Riferimenti grafici</string>

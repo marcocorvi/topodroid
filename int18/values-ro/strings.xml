@@ -335,6 +335,7 @@
     <string name="menu_reload">REÎNCĂRCARE</string>
     <string name="menu_rename_delete">REDENUMEȘTE/ȘTERGE</string>
     <string name="menu_rename">REDENUMEȘTE</string>
+    <!-- TODO string name="menu_plot_scrap">SCRAPS</string -->
     <string name="menu_switch">SCHIMBĂ/ÎNCHIDE</string>
     <string name="menu_help">AJUTOR</string>
     <!-- UNUSED string name="menu_join_survey">CO-TOPOGRAFIAZĂ</string -->
@@ -442,6 +443,7 @@
     <string name="section_area">Aria secțiunii: %1$.1f</string>
     <string name="section_name">comentariul secțiunii section comment</string>
     <string name="scrap_outline">Conturul schiței</string>
+    <!-- TODO string name="scrap_string">Sketch scrap: %1$d / %2$d</string -->
 
     <!-- UNUSED string name="sensor">senzor</string -->
     <string name="sensor_gravity">gravitație</string>
@@ -612,6 +614,8 @@
     <string name="button_plot"    >Schiță</string>
     <string name="button_more"    >Mai multe</string>
     <string name="button_next"    >Următorul</string>
+    <!-- TODO string name="button_prev"    >Prevous</string -->
+    <!-- TODO string name="button_new"     >New scrap</string -->
     <string name="button_skip"    >Omite</string>
     <string name="button_done"    >Gata</string>    
     <string name="button_lrud"    >+ LRUD</string>
@@ -782,6 +786,7 @@
     <string name="help_refs">Referințe schițare</string>
     <string name="help_rename">Schimbare numele cartării</string>
     <string name="help_plot_rename">Redenumire/Ștergere schiță</string>
+    <!-- TODO string name="help_plot_scrap">Sketch scraps</string -->
     <string name="help_plot_switch">Schimbarea schiței</string>
     <string name="help_search">Căutarea stațiilor</string>
     <string name="help_stats">Statistici cartare</string>
@@ -884,6 +889,7 @@
     <string name="title_plot_save">Exportă schița</string>
     <!-- UNUSED string name="title_plot_merge">Îmbină schița</string -->
     <string name="title_plot_reload">Reîncarcă schița</string>
+    <!-- TODO string name="title_plot_scraps">Sketch scraps</string -->
     <string name="title_profile_flip">Întoarce schița profil ?</string>
     <string name="title_projection"> Azimutul profilului proiectat %1$d</string>
     <string name="title_refs">Referințe schiță</string>

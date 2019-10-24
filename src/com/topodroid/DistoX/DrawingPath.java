@@ -53,15 +53,16 @@ class DrawingPath extends RectF
   Path mTransformedPath;
   Paint mPaint;          // drawing path paint
   int mType;             // path type
-  String mOptions;
-  float x1, y1, x2, y2; // endpoint scene coords  (not private just to write the scrap scale using mNorthLine )
+  String mOptions;       // therion options
+  float x1, y1, x2, y2;  // endpoint scene coords  (not private just to write the scrap scale using mNorthLine )
   // private int dir; // 0 x1 < x2, 1 y1 < y2, 2 x2 < x1, 3 y2 < y1
   DBlock mBlock;
   boolean mLandscape; // whether the canvas is in landscape presentation mode or not
-  private float mCosine;      // cosine value for splays (= cos of angle between splay and leg)
-                  // x-sections: angle between splay and plane-normal
-  String mPlotName; // path full plotname, ie,survey-plot (only for Overview window)
-  int mLevel;       // canvas levels flag
+  private float mCosine; // cosine value for splays (= cos of angle between splay and leg)
+                         // x-sections: angle between splay and plane-normal
+  String mPlotName;      // full plotname, ie, survey-plot (only for Overview window)
+  int mLevel;            // canvas levels flag
+  int mScrap;            // plot scrap
 
   protected float cx, cy; // midpoint scene coords
   // RectF mBBox;   // path boundig box (scene coords)
@@ -91,6 +92,7 @@ class DrawingPath extends RectF
   //   ret.mCosine    = mCosine;
   //   ret.mPlotName  = mPlotName;
   //   ret.mLevel     = mLevel;
+  //   ret.mScrap     = mScrap;
   //   ret.x1 = x1;
   //   ret.y1 = y1;
   //   ret.x2 = x2;
@@ -101,11 +103,12 @@ class DrawingPath extends RectF
   //   mTransformedPath = null;
   // }
 
-  DrawingPath( int type, DBlock blk )
+  DrawingPath( int type, DBlock blk, int scrap )
   {
-    mType  = type;
-    mOptions  = null;
-    mBlock = blk; 
+    mType    = type;
+    mOptions = null;
+    mBlock   = blk; 
+    mScrap   = scrap;
     // mBBox  = new RectF();
     mPaint = BrushManager.errorPaint;
     // dir = 4;
@@ -504,7 +507,6 @@ class DrawingPath extends RectF
     } 
     if ( mPaint != null ) canvas.drawPath( path, mPaint );
   }
-
 
   void setOrientation( double angle ) { }
 

@@ -340,6 +340,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="menu_reload">PRZEŁADUJ</string>
     <string name="menu_rename_delete">ZMIEŃ/USUŃ</string>
     <string name="menu_rename">ZMIEŃ NAZWĘ</string>
+    <!-- TODO string name="menu_plot_scrap">SCRAPS</string -->
     <string name="menu_switch">PRZEŁĄCZ/ZAMKNIJ</string>
     <string name="menu_help">POMOC</string>
     <!-- UNUSED string name="menu_join_survey">CO-SURVEY</string -->
@@ -449,6 +450,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="section_area">Obszar przekroju: %1$.1f</string>
     <string name="section_name">Komentarz przekroju</string>
     <string name="scrap_outline">Zarys szkicu</string>
+    <!-- TODO string name="scrap_string">Sketch scrap: %1$d / %2$d</string -->
 
     <!-- UNUSED string name="sensor">sensor</string -->
     <string name="sensor_gravity">grawitacja</string>
@@ -622,6 +624,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="button_plot"    >Szkic</string>
     <string name="button_more"    >Więcej</string>
     <string name="button_next"    >Następny</string>
+    <!-- TODO string name="button_prev"    >Prevous</string -->
+    <!-- TODO string name="button_new"     >New scrap</string -->
     <string name="button_skip"    >Pomiń</string>
     <string name="button_done"    >Gotowe</string>
     <string name="button_lrud"    >+ LRUD</string>
@@ -795,6 +799,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_refs">Odniesienia szkicu</string>
     <string name="help_rename">Zmień nazwę ciągu</string>
     <string name="help_plot_rename">Zmień nazwę/Usuń szkic</string>
+    <!-- TODO string name="help_plot_scrap">Sketch scraps</string -->
     <string name="help_plot_switch">Przełącz szkic</string>
     <string name="help_search">szukanie stacji (pkt. pomiarowego)</string>
     <string name="help_stats">Statystuki ciągu</string>
@@ -897,6 +902,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_plot_save">Eksport szkicu</string>
     <!-- UNUSED string name="title_plot_merge">Merge sketch in</string -->
     <string name="title_plot_reload">Ponownie załaduj szkic</string>
+    <!-- TODO string name="title_plot_scraps">Sketch scraps</string -->
     <string name="title_profile_flip">Odwrócić szkic profilu ?</string>
     <string name="title_projection">Azymut profilu rzutowanego %1$d</string>
     <string name="title_refs">Odniesienie szkicu</string>

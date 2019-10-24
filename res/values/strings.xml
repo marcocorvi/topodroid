@@ -339,6 +339,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="menu_reload">RELOAD</string>
     <string name="menu_rename_delete">RENAME/DELETE</string>
     <string name="menu_rename">RENAME</string>
+    <string name="menu_plot_scrap">SCRAPS</string>
     <string name="menu_switch">SWITCH/CLOSE</string>
     <string name="menu_help">HELP</string>
     <!-- UNUSED string name="menu_join_survey">CO-SURVEY</string -->
@@ -452,6 +453,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="section_area">Section area: %1$.1f</string>
     <string name="section_name">section comment</string>
     <string name="scrap_outline">Sketch outline</string>
+    <string name="scrap_string">Sketch scrap: %1$d / %2$d</string>
 
     <!-- UNUSED string name="sensor">sensor</string -->
     <string name="sensor_gravity">gravity</string>
@@ -626,6 +628,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="button_plot"    >Sketch</string>
     <string name="button_more"    >More</string>
     <string name="button_next"    >Next</string>
+    <string name="button_prev"    >Prevous</string>
+    <string name="button_new"     >New scrap</string>
     <string name="button_skip"    >Skip</string>
     <string name="button_done"    >Done</string>
     <string name="button_lrud"    >+ LRUD</string>
@@ -798,6 +802,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_refs">Sketching references</string>
     <string name="help_rename">Change survey name</string>
     <string name="help_plot_rename">Rename/Delete sketch</string>
+    <string name="help_plot_scrap">Sketch scraps</string>
     <string name="help_plot_switch">Switch sketch</string>
     <string name="help_search">Station search</string>
     <string name="help_stats">Survey statistics</string>
@@ -901,6 +906,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_plot_save">Export sketch</string>
     <!-- UNUSED string name="title_plot_merge">Merge sketch in</string -->
     <string name="title_plot_reload">Reload sketch</string>
+    <string name="title_plot_scraps">Sketch scraps</string>
     <string name="title_profile_flip">Flip profile sketch ?</string>
     <string name="title_projection">Projected profile azimuth %1$d</string>
     <string name="title_refs">Sketch References</string>

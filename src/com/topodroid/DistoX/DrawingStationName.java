@@ -44,12 +44,12 @@ class DrawingStationName extends DrawingPointPath
   float getXSectionX( float r ) { return cx - ((mXSectionType == PlotInfo.PLOT_NULL)? 0 : r * mDY); }
   float getXSectionY( float r ) { return cy + ((mXSectionType == PlotInfo.PLOT_NULL)? 0 : r * mDX); }
 
-  public DrawingStationName( String name, float x, float y )
+  public DrawingStationName( String name, float x, float y, int scrap )
   {
     super( BrushManager.getPointLabelIndex(),
            x, // scene coordinate
            y, 
-           DrawingPointPath.SCALE_M, null, null ); // no text no options
+           DrawingPointPath.SCALE_M, null, null, scrap ); // no text no options
     mType = DRAWING_PATH_NAME; // override DrawingPath.mType
     mStation = null;
     mName = ( name == null )? "" : name;
@@ -63,12 +63,12 @@ class DrawingStationName extends DrawingPointPath
     mPaint = BrushManager.fixedStationPaint;
   }
 
-  public DrawingStationName( NumStation num_st, float x, float y )
+  public DrawingStationName( NumStation num_st, float x, float y, int scrap )
   {
     super( BrushManager.getPointLabelIndex(),
            x, // scene coordinate
            y, 
-           DrawingPointPath.SCALE_M, null, null );
+           DrawingPointPath.SCALE_M, null, null, scrap );
     mType = DRAWING_PATH_NAME; // override DrawingPath.mType
     mStation = num_st;
     mName = (num_st.name == null)? "" : num_st.name;
@@ -183,6 +183,8 @@ class DrawingStationName extends DrawingPointPath
       dos.writeUTF( mName );
       // if ( version >= 401090 )
         dos.writeInt( mLevel );
+      // if ( version >= 401160 )
+        dos.writeInt( mScrap );
       dos.writeInt( (int)mXSectionType );
       if ( mXSectionType != PlotInfo.PLOT_NULL ) {
         dos.writeFloat( mAzimuth );
@@ -198,15 +200,15 @@ class DrawingStationName extends DrawingPointPath
     float ccx, ccy;
     String name;
     int type;
-    int lvl = DrawingLevel.LEVEL_DEFAULT;
     try {
       ccx = dis.readFloat();
       ccy = dis.readFloat();
       name = dis.readUTF();
-      if ( version >= 401090 ) lvl = dis.readInt();
+      int level = ( version >= 401090 )? dis.readInt() : DrawingLevel.LEVEL_DEFAULT;
+      int scrap = ( version >= 401160 )? dis.readInt() : 0;
       // TDLog.Log( TDLog.LOG_PATH, "SN " + ccx + " " + ccy + " " + name );
-      DrawingStationName ret = new DrawingStationName( name, ccx, ccy );
-      ret.mLevel = lvl;
+      DrawingStationName ret = new DrawingStationName( name, ccx, ccy, scrap );
+      ret.mLevel = level;
       if ( version >= 207038 ) {
         type = dis.readInt();
         if ( type != (int)PlotInfo.PLOT_NULL ) {

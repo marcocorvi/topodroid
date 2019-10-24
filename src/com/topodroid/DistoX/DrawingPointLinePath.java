@@ -53,7 +53,7 @@ class DrawingPointLinePath extends DrawingPath
   // @Override
   // DrawingPath copyPath()
   // {
-  //   DrawingPointLinePath ret = new DrawingPointLinePath( mType, mVisible, mClosed );
+  //   DrawingPointLinePath ret = new DrawingPointLinePath( mType, mVisible, mClosed, mScrap );
   //   copyTo( ret );
   //   return ret;
   // }
@@ -194,9 +194,9 @@ class DrawingPointLinePath extends DrawingPath
   }
 
 
-  DrawingPointLinePath( int path_type, boolean visible, boolean closed )
+  DrawingPointLinePath( int path_type, boolean visible, boolean closed, int scrap )
   {
-    super( path_type, null ); // DrawingPath.DRAWING_PATH_AREA );
+    super( path_type, null, scrap ); // DrawingPath.DRAWING_PATH_AREA );
     // mPoints  = new ArrayList<>();
     clear();
     mVisible = visible;
