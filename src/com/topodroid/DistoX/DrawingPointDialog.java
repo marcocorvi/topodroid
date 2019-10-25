@@ -88,7 +88,7 @@ class DrawingPointDialog extends MyDialog
     super.onCreate(savedInstanceState);
     
     initLayout(R.layout.drawing_point_dialog, 
-      "POINT " + BrushManager.mPointLib.getSymbolName( mPoint.mPointType ) );
+      "POINT " + BrushManager.getPointName( mPoint.mPointType ) );
 
     // mTVtype = (TextView) findViewById( R.id.point_type );
     mEToptions = (EditText) findViewById( R.id.point_options );
@@ -102,7 +102,7 @@ class DrawingPointDialog extends MyDialog
     mCBxsection = (CheckBox) findViewById( R.id.point_xsection );
     mBTdraw     = (Button) findViewById( R.id.button_draw );
     
-    if ( BrushManager.mPointLib.pointHasTextOrValue( mPoint.mPointType ) ) {
+    if ( BrushManager.pointHasTextOrValue( mPoint.mPointType ) ) {
       String text = mPoint.getPointText();
       mETtext.setText( (text == null)? "" : text );
     } else {
@@ -229,7 +229,7 @@ class DrawingPointDialog extends MyDialog
         mPoint.setOrientation( mOrientationWidget.mOrient );
         // Log.v("DistoX", "Point type " + mPoint.mPointType + " orientation " + mPoint.mOrientation );
       }
-      if ( BrushManager.mPointLib.pointHasTextOrValue( mPoint.mPointType ) ) {
+      if ( BrushManager.pointHasTextOrValue( mPoint.mPointType ) ) {
         mPoint.setPointText( mETtext.getText().toString().trim() );
       }
 

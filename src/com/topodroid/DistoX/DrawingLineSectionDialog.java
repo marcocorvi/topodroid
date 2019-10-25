@@ -115,12 +115,10 @@ class DrawingLineSectionDialog extends MyDialog
     // cannot use initLayout
     if ( mFrom != null && mTo != null ) {
       initLayout( R.layout.drawing_line_section_dialog,
-        String.format( mParent.getResources().getString( R.string.title_draw_line ),
-              BrushManager.mLineLib.getSymbolThName( mLine.mLineType ) ) + " " + mFrom + " " + mTo );
+        String.format( mParent.getResources().getString( R.string.title_draw_line ), BrushManager.getLineThName( mLine.mLineType ) ) + " " + mFrom + " " + mTo );
     } else {
       initLayout( R.layout.drawing_line_section_dialog, 
-        String.format( mParent.getResources().getString( R.string.title_draw_line_no_stations ),
-              BrushManager.mLineLib.getSymbolThName( mLine.mLineType ) ) );
+        String.format( mParent.getResources().getString( R.string.title_draw_line_no_stations ), BrushManager.getLineThName( mLine.mLineType ) ) );
     }
 
     mTVoptions = (TextView) findViewById( R.id.line_options );

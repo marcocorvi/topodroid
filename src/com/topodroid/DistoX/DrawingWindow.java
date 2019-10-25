@@ -808,14 +808,11 @@ public class DrawingWindow extends ItemDrawer
     Resources res = getResources();
     if ( mMode == MODE_DRAW ) { 
       if ( mSymbol == Symbol.POINT ) {
-        sb.append( String.format( res.getString(R.string.title_draw_point), 
-                                 BrushManager.getPointSymbolName( mCurrentPoint ) ) );
+        sb.append( String.format( res.getString(R.string.title_draw_point), BrushManager.getPointName( mCurrentPoint ) ) );
       } else if ( mSymbol == Symbol.LINE ) {
-        sb.append( String.format( res.getString(R.string.title_draw_line),
-                                 BrushManager.getLineSymbolName( mCurrentLine ) ) );
+        sb.append( String.format( res.getString(R.string.title_draw_line), BrushManager.getLineName( mCurrentLine ) ) );
       } else  {  // if ( mSymbol == Symbol.LINE ) 
-        sb.append( String.format( res.getString(R.string.title_draw_area),
-                                 BrushManager.getAreaSymbolName( mCurrentArea ) ) );
+        sb.append( String.format( res.getString(R.string.title_draw_area), BrushManager.getAreaName( mCurrentArea ) ) );
       }
       // boolean visible = ( mSymbol == Symbol.LINE && mCurrentLine == BrushManager.getLineWallIndex() );
       boolean visible = ( mSymbol == Symbol.LINE );
@@ -1277,17 +1274,17 @@ public class DrawingWindow extends ItemDrawer
           mActivity.setTitle( title + " " + item.mBlock.mFrom + "-." );
           break;
         case DrawingPath.DRAWING_PATH_POINT:
-          mActivity.setTitle( title + " " + BrushManager.getPointSymbolName( ((DrawingPointPath)item).mPointType ) );
+          mActivity.setTitle( title + " " + BrushManager.getPointName( ((DrawingPointPath)item).mPointType ) );
 	  deletable = true;
           break;
         case DrawingPath.DRAWING_PATH_LINE:
-          mActivity.setTitle( title + " " + BrushManager.getLineSymbolName( ((DrawingLinePath)item).mLineType ) );
+          mActivity.setTitle( title + " " + BrushManager.getLineName( ((DrawingLinePath)item).mLineType ) );
           inLinePoint = true;
           bm = mBMjoin;
 	  deletable = true;
           break;
         case DrawingPath.DRAWING_PATH_AREA:
-          mActivity.setTitle( title + " " + BrushManager.mAreaLib.getSymbolName( ((DrawingAreaPath)item).mAreaType ) );
+          mActivity.setTitle( title + " " + BrushManager.getAreaName( ((DrawingAreaPath)item).mAreaType ) );
           inLinePoint = true;
           bm = mBMjoin;
 	  deletable = true;
@@ -2030,12 +2027,9 @@ public class DrawingWindow extends ItemDrawer
     mIntersectionT = tt;
     // Log.v("DistoX", "do start() tt " + tt );
     // TDLog.Log( TDLog.LOG_PLOT, "do Start() " + mName1 + " " + mName2 );
-    mCurrentPoint = ( BrushManager.mPointLib != null && BrushManager.mPointLib.isSymbolEnabled( "label" ) )?
-                    1 : 0;
-    mCurrentLine  = ( BrushManager.mLineLib != null && BrushManager.mLineLib.isSymbolEnabled( "wall" ) )?
-                    1 : 0;
-    mCurrentArea  = ( BrushManager.mAreaLib != null && BrushManager.mAreaLib.isSymbolEnabled( "water" ) )?
-                    1 : 0;
+    mCurrentPoint = ( BrushManager.isPointEnabled( "label" ) )?  1 : 0;
+    mCurrentLine  = ( BrushManager.isLineEnabled( "wall" ) )?  1 : 0;
+    mCurrentArea  = ( BrushManager.isAreaEnabled( "water" ) )?  1 : 0;
     // mContinueLine = TDSetting.mContinueLine; // do not reset
     if ( TDLevel.overNormal ) setButtonContinue( mContinueLine );
 
@@ -4474,7 +4468,7 @@ public class DrawingWindow extends ItemDrawer
                         linepath.retracePath();
                       } else { 
                         DrawingLinePath lp = (DrawingLinePath)linepath;
-                        askDeleteItem( lp, t, BrushManager.getLineSymbolName( lp.mLineType ) );
+                        askDeleteItem( lp, t, BrushManager.getLineName( lp.mLineType ) );
                       }
                     } else if ( t == DrawingPath.DRAWING_PATH_AREA ) {
                       if ( linepath.size() > 3 ) {
@@ -4482,7 +4476,7 @@ public class DrawingWindow extends ItemDrawer
                         linepath.retracePath();
                       } else {
                         DrawingAreaPath ap = (DrawingAreaPath)linepath;
-                        askDeleteItem( ap, t, BrushManager.getAreaSymbolName( ap.mAreaType ) );
+                        askDeleteItem( ap, t, BrushManager.getAreaName( ap.mAreaType ) );
                       }
                     }
                     modified();
@@ -4868,7 +4862,7 @@ public class DrawingWindow extends ItemDrawer
           } else if ( t == DrawingPath.DRAWING_PATH_LINE ) {
             DrawingLinePath lp = (DrawingLinePath)sp.mItem;
             if ( lp.size() <= 2 ) {
-              askDeleteItem( lp, t, BrushManager.getLineSymbolName( lp.mLineType ) );
+              askDeleteItem( lp, t, BrushManager.getLineName( lp.mLineType ) );
             } else {
               removeLinePoint( lp, sp.mPoint, sp );
               lp.retracePath();
@@ -4877,7 +4871,7 @@ public class DrawingWindow extends ItemDrawer
           } else if ( t == DrawingPath.DRAWING_PATH_AREA ) {
             DrawingAreaPath ap = (DrawingAreaPath)sp.mItem;
             if ( ap.size() <= 3 ) {
-              askDeleteItem( ap, t, BrushManager.getAreaSymbolName( ap.mAreaType ) );
+              askDeleteItem( ap, t, BrushManager.getAreaName( ap.mAreaType ) );
             } else {
               removeLinePoint( ap, sp.mPoint, sp );
               ap.retracePath();
@@ -5123,10 +5117,10 @@ public class DrawingWindow extends ItemDrawer
                 name = BrushManager.getPointName( ((DrawingPointPath)p).mPointType );
                 break;
               case DrawingPath.DRAWING_PATH_LINE:
-                name = BrushManager.getLineSymbolName( ((DrawingLinePath)p).mLineType );
+                name = BrushManager.getLineName( ((DrawingLinePath)p).mLineType );
                 break;
               case DrawingPath.DRAWING_PATH_AREA:
-                name = BrushManager.getAreaSymbolName( ((DrawingAreaPath)p).mAreaType );
+                name = BrushManager.getAreaName( ((DrawingAreaPath)p).mAreaType );
                 break;
             }
             askDeleteItem( p, t, name );

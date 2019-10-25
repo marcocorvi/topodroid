@@ -208,7 +208,7 @@ class DrawingLabelPath extends DrawingPointPath
       dos.write( 'T' );
       dos.writeFloat( cx );
       dos.writeFloat( cy );
-      // dos.writeUTF( BrushManager.mPointLib.getSymbolThName(mPointType) );
+      // dos.writeUTF( BrushManager.getPointThName(mPointType) );
       // if ( version >= 401147 ) dos.writeUTF( "" ); // label has null group
       dos.writeFloat( (float)mOrientation ); // from version 2.7.4e
       dos.writeInt( mScale );

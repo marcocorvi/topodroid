@@ -132,7 +132,7 @@ class DrawingSvg
       // {
       //   // // 8 layer (0), 2 block name,
       //   for ( int n = 0; n < BrushManager.mPointLib.size(); ++ n ) {
-      //     SymbolPoint pt = (SymbolPoint)BrushManager.mPointLib.getSymbolByIndex(n);
+      //     SymbolPoint pt = (SymbolPoint)BrushManager.getPointByIndex(n);
 
       //     int block = 1+n; // block_name = 1 + therion_code
       //     writeString( out, 8, "POINT" );
@@ -432,7 +432,7 @@ class DrawingSvg
 
   static private void toSvg( PrintWriter pw, DrawingLinePath line, String color, float xoff, float yoff ) 
   {
-    String th_name = BrushManager.mLineLib.getSymbolThName( line.mLineType ); 
+    String th_name = BrushManager.getLineThName( line.mLineType ); 
     pw.format(Locale.US, "  <path stroke=\"%s\" stroke-width=\"%.2f\" fill=\"none\" class=\"%s\"", color, TDSetting.mSvgLineStroke, th_name );
     if ( th_name.equals( "arrow" ) ) pw.format(" marker-end=\"url(#Triangle)\"");
     else if ( th_name.equals( "section" ) ) pw.format(" stroke-dasharray=\"5 3 \"");
@@ -462,7 +462,7 @@ class DrawingSvg
   static private void toSvg( PrintWriter pw, DrawingPointPath point, String color, float xoff, float yoff )
   {
     int idx = point.mPointType;
-    String name = BrushManager.mPointLib.getSymbolThName( idx );
+    String name = BrushManager.getPointThName( idx );
     pw.format("<!-- point %s -->\n", name );
     if ( name.equals("label") ) {
       DrawingLabelPath label = (DrawingLabelPath)point;
@@ -477,7 +477,7 @@ class DrawingSvg
     } else if ( BrushManager.isPointSection( idx ) ) {
       /* nothing */
     } else {
-      SymbolPoint sp = (SymbolPoint)BrushManager.mPointLib.getSymbolByIndex( idx );
+      SymbolPoint sp = (SymbolPoint)BrushManager.getPointByIndex( idx );
       if ( sp != null ) {
         pw.format(Locale.US, "<g style=\"fill:none;stroke:%s;stroke-width:%.2f\" >\n", color, TDSetting.mSvgPointStroke );
         // pw.format(Locale.US, "<g transform=\"translate(%.2f,%.2f), scale(%d), rotate(%.2f)\">\n", 

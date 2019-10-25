@@ -478,17 +478,17 @@ class ItemPickerDialog extends MyDialog
         title.append( "] " );
         title.append( mContext.getResources().getString( R.string.POINT ) );
         title.append( " " );
-        title.append( mPointLib.getSymbolName( mSelectedPoint ) );
+        title.append( BrushManager.getPointName( mSelectedPoint ) );
         break;
       case Symbol.LINE: 
         title.append( mContext.getResources().getString( R.string.LINE ) );
         title.append( " " );
-        title.append( mLineLib.getSymbolName( mSelectedLine ) );
+        title.append( BrushManager.getLineName( mSelectedLine ) );
         break;
       case Symbol.AREA: 
         title.append( mContext.getResources().getString( R.string.AREA ) );
         title.append( " " );
-        title.append( mAreaLib.getSymbolName( mSelectedArea ) );
+        title.append( BrushManager.getAreaName( mSelectedArea ) );
         break;
     }
     // Log.v("DistoX", "set title " + title.toString() );

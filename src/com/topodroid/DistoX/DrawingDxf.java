@@ -886,10 +886,10 @@ class DrawingDxf
           writeEndTable( out );
 
           handle = inc(handle);
-          writeBeginTable( out, "BLOCK_RECORD", handle, BrushManager.mPointLib.size() );
+          writeBeginTable( out, "BLOCK_RECORD", handle, BrushManager.getPointLibSize() );
           {
-            for ( int n = 0; n < BrushManager.mPointLib.size(); ++ n ) {
-              String th_name = BrushManager.mPointLib.getSymbolThName(n).replace(':','-');
+            for ( int n = 0; n < BrushManager.getPointLibSize(); ++ n ) {
+              String th_name = BrushManager.getPointThName(n).replace(':','-');
               writeString( out, 0, "BLOCK_RECORD" );
               handle = inc(handle);
               writeAcDb( out, handle, AcDbSymbolTR, "AcDbBlockTableRecord" );
@@ -907,8 +907,8 @@ class DrawingDxf
       writeSection( out, "BLOCKS" );
       {
         // // 8 layer (0), 2 block name,
-        for ( int n = 0; n < BrushManager.mPointLib.size(); ++ n ) {
-          SymbolPoint pt = (SymbolPoint)BrushManager.mPointLib.getSymbolByIndex(n);
+        for ( int n = 0; n < BrushManager.getPointLibSize(); ++ n ) {
+          SymbolPoint pt = (SymbolPoint)BrushManager.getPointByIndex(n);
 	  String th_name = pt.getThName().replace(':','-');
           writeString( out, 0, "BLOCK" );
           handle = inc(handle);
@@ -1108,7 +1108,7 @@ class DrawingDxf
                 handle = toDxf( pw5, handle, point, scale, xoff, yoff );
               }
             } else {
-              String th_name = BrushManager.mPointLib.getSymbolThName( point.mPointType ).replace(':','-');
+              String th_name = BrushManager.getPointThName( point.mPointType ).replace(':','-');
               printString( pw5, 0, "INSERT" );
               printString( pw5, 8, "P_" + th_name );
               printString( pw5, 2, "B_" + th_name );
@@ -1174,7 +1174,7 @@ class DrawingDxf
                         LABEL_SCALE, "POINT", style_dejavu, xoff, yoff );
     }
 
-    String th_name = BrushManager.mPointLib.getSymbolThName( point.mPointType ).replace(':','-');
+    String th_name = BrushManager.getPointThName( point.mPointType ).replace(':','-');
     // int idx = 1 + point.mPointType;
     printString( pw, 0, "INSERT" );
     handle = inc(handle); printAcDb( pw, handle, "AcDbBlockReference" );
@@ -1190,7 +1190,7 @@ class DrawingDxf
   static private int toDxf( PrintWriter pw, int handle, DrawingLinePath line, float scale, float xoff, float yoff )
   {
     if ( line == null ) return handle;
-    String layer = "L_" + BrushManager.mLineLib.getSymbolThName( line.lineType() ).replace(':','-');
+    String layer = "L_" + BrushManager.getLineThName( line.lineType() ).replace(':','-');
     int flag = 0;
     if ( mVersion13 && checkSpline( line ) ) {
       return printSpline( pw, line, scale, handle, layer, false, xoff, yoff );
@@ -1203,7 +1203,7 @@ class DrawingDxf
   {
     if ( area == null ) return handle;
     // Log.v("DistoX", "area size " + area.size() );
-    String layer = "A_" + BrushManager.mAreaLib.getSymbolThName( area.areaType() ).replace(':','-');
+    String layer = "A_" + BrushManager.getAreaThName( area.areaType() ).replace(':','-');
     if ( mVersion13 && checkSpline( area ) ) {
       handle = printSpline( pw, area, scale, handle, layer, true, xoff, yoff );
     } else {

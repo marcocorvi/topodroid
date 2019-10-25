@@ -142,7 +142,7 @@ class DrawingPhotoPath extends DrawingPointPath
       dos.write( 'Y' );
       dos.writeFloat( cx );
       dos.writeFloat( cy );
-      // dos.writeUTF( BrushManager.mPointLib.getSymbolThName(mPointType) );
+      // dos.writeUTF( BrushManager.getPointThName(mPointType) );
       // if ( version >= 401147 ) dos.writeUTF( "" ); // photo has no group
       dos.writeFloat( (float)mOrientation ); // from version 2.7.4e
       dos.writeInt( mScale );

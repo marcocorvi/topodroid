@@ -1496,7 +1496,7 @@ class TDExporter
       writeSurvexLine(pw, "  *units compass " + uas );
       writeSurvexLine(pw, "  *units clino " + uas );
       if ( info.hasDeclination() ) { // DECLINATION in Survex
-        pw.format(Locale.US, "  *calibrate declination %.2f", info.declination ); // units DEGREES
+        pw.format(Locale.US, "  *declination %.2f", info.declination ); // units DEGREES
         writeSurvexEOL(pw);
       // } else {
       //   pw.format(Locale.US, "  *calibrate declination auto" );

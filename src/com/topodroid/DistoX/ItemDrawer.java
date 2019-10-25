@@ -51,20 +51,17 @@ abstract class ItemDrawer extends Activity
 
   static void updateRecentPoint( int point )
   {
-    // if ( BrushManager.mPointLib == null ) return;
-    updateRecent( BrushManager.mPointLib.getSymbolByIndex( point ), mRecentPoint );
+    updateRecent( BrushManager.getPointByIndex( point ), mRecentPoint );
   }
 
   static void updateRecentLine( int line )
   {
-    // if ( BrushManager.mLineLib == null ) return;
-    updateRecent( BrushManager.mLineLib.getSymbolByIndex( line ), mRecentLine );
+    updateRecent( BrushManager.getLineByIndex( line ), mRecentLine );
   }
 
   static void updateRecentArea( int area )
   {
-    // if ( BrushManager.mAreaLib == null ) return;
-    updateRecent( BrushManager.mAreaLib.getSymbolByIndex( area ), mRecentArea );
+    updateRecent( BrushManager.getAreaByIndex( area ), mRecentArea );
   }
 
   static void updateRecentPoint( Symbol point ) { updateRecent( point, mRecentPoint ); }
@@ -146,7 +143,7 @@ abstract class ItemDrawer extends Activity
   public void pointSelected( int p, boolean update_recent )
   {
     mSymbol = Symbol.POINT;
-    if ( p >= 0 && p < BrushManager.mPointLib.size() ) {
+    if ( p >= 0 && p < BrushManager.getPointLibSize() ) {
       mCurrentPoint = p;
       if ( TDSetting.mWithLevels > 0 ) {
         if ( ! DrawingLevel.isVisible( BrushManager.getPointLevel( p ) ) ) {

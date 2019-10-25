@@ -727,7 +727,7 @@ class ShpPoint extends ShpObject
       shpBuffer.putDouble( y0-scale*pt.cy );
 
       writeShxRecord( offset, shpRecLen );
-      fields[0] = BrushManager.mPointLib.getSymbolThName( pt.mPointType );
+      fields[0] = BrushManager.getPointThName( pt.mPointType );
       fields[1] = Integer.toString( (int)pt.mOrientation ); 
       fields[2] = Integer.toString( pt.mLevel );
       writeDBaseRecord( n_fld, fields, flens );
@@ -903,12 +903,12 @@ class ShpPolyline extends ShpObject
 	if ( ln.mType == DrawingPath.DRAWING_PATH_LINE ) {
           DrawingLinePath line = (DrawingLinePath)ln;
           fields[0] = "line";
-	  fields[1] = BrushManager.mLineLib.getSymbolThName( line.mLineType );
+	  fields[1] = BrushManager.getLineThName( line.mLineType );
           fields[2] = Integer.toString( line.mLevel );
 	} else if ( ln.mType == DrawingPath.DRAWING_PATH_AREA ) {
           DrawingAreaPath area = (DrawingAreaPath)ln;
           fields[0] = "area";
-	  fields[1] = BrushManager.mAreaLib.getSymbolThName( area.mAreaType );
+	  fields[1] = BrushManager.getAreaThName( area.mAreaType );
           fields[2] = Integer.toString( area.mLevel );
 	} else {
 	  fields[0] = "undef";

@@ -84,17 +84,16 @@ class DrawingLineDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
 
-    String title = String.format( mParent.getResources().getString( R.string.title_draw_line ),
-                                  BrushManager.mLineLib.getSymbolName( mLine.mLineType ) );
+    String title = String.format( mParent.getResources().getString( R.string.title_draw_line ), BrushManager.getLineName( mLine.mLineType ) );
     initLayout( R.layout.drawing_line_dialog, title );
 
     mETtype = (Spinner) findViewById( R.id.line_type );
-    // mETtype.setText( BrushManager.mLineLib.getSymbolThName( mLine.mLineType ) );
+    // mETtype.setText( BrushManager.getLineThName( mLine.mLineType ) );
 
     // FIXME TODO simplify using getSymbolNamesNoSection()
     try {
       ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, BrushManager.mLineLib.getSymbolNames() );
-      String section = BrushManager.mLineLib.getSymbolName( mTypeSection );
+      String section = BrushManager.getLineName( mTypeSection );
       if ( section != null ) adapter.remove( section );
       mETtype.setAdapter( adapter );
       mETtype.setSelection( ( mType < mTypeSection )? mType : mType-1 );

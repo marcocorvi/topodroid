@@ -144,7 +144,7 @@ class DrawingIO
   //           if ( vals.length < 4 ) {
   //             TDLog.Error( "bad point cmd: " + line );
   //           } else {
-  //             int ptType = BrushManager.mPointLib.size();
+  //             int ptType = BrushManager.getPointLibSize();
   //             boolean has_orientation = false;
   //             float orientation = 0.0f;
   //             int scale = DrawingPointPath.SCALE_M;
@@ -227,11 +227,11 @@ class DrawingIO
   //               // continue;
   //             }
 
-  //             if ( ptType == BrushManager.mPointLib.mPointLabelIndex ) {
+  //             if ( ptType == BrushManager.getPointLabelIndex() ) {
   //               if ( label_text != null ) {
   //                 // "danger" is no longer mapped on a label 
   //                 // if ( label_text.equals( "!" ) ) {    // "danger" point
-  //                 //   DrawingPointPath path = new DrawingPointPath( BrushManager.mPointLib.mPointDangerIndex, x, y, scale, text, options );
+  //                 //   DrawingPointPath path = new DrawingPointPath( BrushManager.getPointDangerIndex(), x, y, scale, text, options );
   //                 //   surface.addDrawingPath( path );
   //                 // } else {                             // regular label
   //                   DrawingLabelPath path = new DrawingLabelPath( label_text, x, y, scale, options );

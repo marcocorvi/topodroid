@@ -132,7 +132,7 @@ class DrawingXvi
       // {
       //   // // 8 layer (0), 2 block name,
       //   for ( int n = 0; n < BrushManager.mPointLib.size(); ++ n ) {
-      //     SymbolPoint pt = (SymbolPoint)BrushManager.mPointLib.getSymbolByIndex(n);
+      //     SymbolPoint pt = (SymbolPoint)BrushManager.getPointByIndex(n);
 
       //     int block = 1+n; // block_name = 1 + therion_code
       //     writeString( out, 8, "POINT" );
@@ -223,7 +223,7 @@ class DrawingXvi
             float yy = yoff+point.cy;
 	    // Log.v("DistoXX", " yoff " + yoff + " cy " + point.cy + " yy " + yy );
             // pw5.format(Locale.US, "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"%d\" ", xx, yy, RADIUS );
-            // pw5.format(" style=\"fill:grey;stroke:black;stroke-width:%.2f\" />\n", TDSetting.mSvgLabelStroke );
+            // pw5.format(Locale.US, " style=\"fill:grey;stroke:black;stroke-width:%.2f\" />\n", TDSetting.mSvgLabelStroke );
 
 	    if ( TDSetting.mAutoXSections ) {
               // GET_OPTION option: -scrap survey-xx#
@@ -350,7 +350,7 @@ class DrawingXvi
           y1 = TDSetting.mToTherion*(yof + 3 * glyph[j] ); ++j;
           x2 = TDSetting.mToTherion*(xof + 3 * (pos + glyph[j])); ++j;
           y2 = TDSetting.mToTherion*(yof + 3 * glyph[j] ); ++j;
-          pw.format("  { black %.2f %.2f %.2f %.2f }\n", x1, y1, x2, y2 );
+          pw.format(Locale.US, "  { black %.2f %.2f %.2f %.2f }\n", x1, y1, x2, y2 );
 	}
 	pos += 1 + glyph[j-2];
       }	
@@ -358,16 +358,16 @@ class DrawingXvi
     }
 
     String color = "blue";
-    String name = BrushManager.mPointLib.getSymbolThName( idx );
-    SymbolPoint sp = (SymbolPoint)BrushManager.mPointLib.getSymbolByIndex( idx );
+    String name = BrushManager.getPointThName( idx );
+    SymbolPoint sp = (SymbolPoint)BrushManager.getPointByIndex( idx );
     String path = ( sp == null )? null : sp.mXvi;
     if ( path == null ) {
       x1 = TDSetting.mToTherion*(xof - 5);
       y1 = TDSetting.mToTherion*(yof - 5);
       x2 = TDSetting.mToTherion*(xof + 5);
       y2 = TDSetting.mToTherion*(yof + 5);
-      pw.format("  { %s %.2f %.2f %.2f %.2f }\n", color, x1, y1, x2, y2 );
-      pw.format("  { %s %.2f %.2f %.2f %.2f }\n", color, x2, y1, x1, y2 );
+      pw.format(Locale.US, "  { %s %.2f %.2f %.2f %.2f }\n", color, x1, y1, x2, y2 );
+      pw.format(Locale.US, "  { %s %.2f %.2f %.2f %.2f }\n", color, x2, y1, x1, y2 );
     } else {
       float a  = (float)point.mOrientation;
       float ca = TDMath.cosd( a );
@@ -420,18 +420,18 @@ class DrawingXvi
     // if ( name.equals("label") ) {
     //   DrawingLabelPath label = (DrawingLabelPath)point;
     //   pw.format(Locale.US, "<text x=\"%.2f\" y=\"%.2f\" ", xoff+point.cx, yoff-point.cy );
-    //   pw.format(" style=\"fill:black;stroke:black;stroke-width:%.2f\">%s</text>\n", TDSetting.mSvgLabelStroke, label.mPointText );
+    //   pw.format(Locale.US, " style=\"fill:black;stroke:black;stroke-width:%.2f\">%s</text>\n", TDSetting.mSvgLabelStroke, label.mPointText );
     // } else {
-    //   SymbolPoint sp = (SymbolPoint)BrushManager.mPointLib.getSymbolByIndex( idx );
+    //   SymbolPoint sp = (SymbolPoint)BrushManager.getPointByIndex( idx );
     //   if ( sp != null ) {
     //     pw.format(Locale.US, "<g transform=\"translate(%.2f,%.2f),scale(%d),rotate(%.2f)\" \n", 
     //       xoff+point.cx, yoff-point.cy, POINT_SCALE, point.mOrientation );
-    //     pw.format(" style=\"fill:none;stroke:%s;stroke-width:%.2f\" >\n", color, TDSetting.mSvgPointStroke );
+    //     pw.format(Locale.US, " style=\"fill:none;stroke:%s;stroke-width:%.2f\" >\n", color, TDSetting.mSvgPointStroke );
     //     pw.format("%s\n", sp.mSvg );
     //     pw.format("</g>\n");
     //   } else {
     //     pw.format(Locale.US, "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"%d\" ", xoff+point.cx, yoff-point.cy, POINT_RADIUS );
-    //     pw.format(" style=\"fill:none;stroke:black;stroke-width:%.2f\" />\n", TDSetting.mSvgPointStroke );
+    //     pw.format(Locale.US, " style=\"fill:none;stroke:black;stroke-width:%.2f\" />\n", TDSetting.mSvgPointStroke );
     //   }
     // }
   }

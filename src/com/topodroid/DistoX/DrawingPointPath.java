@@ -116,7 +116,7 @@ class DrawingPointPath extends DrawingPath
     if ( BrushManager.isPointOrientable( type ) ) {
       mOrientation = BrushManager.getPointOrientation(type);
     }
-    setPathPaint( BrushManager.mPointLib.getSymbolPaint( mPointType ) );
+    setPathPaint( BrushManager.getPointPaint( mPointType ) );
     mScale = scale;
     resetPath( 1.0f );
     mLink = null;
@@ -166,7 +166,7 @@ class DrawingPointPath extends DrawingPath
       return ret;
 
       // // TODO parse option for "-text"
-      // setPathPaint( BrushManager.mPointLib.getSymbolPaint( mPointType ) );
+      // setPathPaint( BrushManager.getPointPaint( mPointType ) );
       // if ( BrushManager.isPointOrientable( mPointType ) ) {
       //   BrushManager.rotateGradPoint( mPointType, mOrientation );
       //   resetPath( 1.0f );

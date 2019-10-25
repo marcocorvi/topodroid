@@ -70,7 +70,7 @@ class DrawingAreaPath extends DrawingPointLinePath
     mAreaCnt  = cnt;
     mPrefix   = (prefix != null && prefix.length() > 0)? prefix : "a";
     if ( BrushManager.hasArea( mAreaType ) ) { 
-      setPathPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
+      setPathPaint( BrushManager.getAreaPaint( mAreaType ) );
     // } else {
     //   Log.v("DistoX-PAINT", "area (1) not in lib " + mAreaType + " out of " + BrushManager.mAreaLib.size() );
     }
@@ -103,7 +103,7 @@ class DrawingAreaPath extends DrawingPointLinePath
       TDLog.Error( "Drawing Area Path AreaCnt parse Int error: " + id.substring(1) );
     }
     if ( BrushManager.hasArea( mAreaType ) ) {
-      setPathPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
+      setPathPaint( BrushManager.getAreaPaint( mAreaType ) );
     // } else {
     //   Log.v("DistoX-PAINT", "area (2) not in lib " + mAreaType );
     }
@@ -143,7 +143,7 @@ class DrawingAreaPath extends DrawingPointLinePath
       DrawingAreaPath ret = new DrawingAreaPath( type, cnt, prefix, visible, scrap );
       ret.mLevel       = level;
       ret.mOrientation = orientation;
-      // setPathPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
+      // setPathPaint( BrushManager.getAreaPaint( mAreaType ) );
 
       int has_cp;
       float x0, y0, t;
@@ -186,7 +186,7 @@ class DrawingAreaPath extends DrawingPointLinePath
   {
     mAreaType = t;
     if ( BrushManager.hasArea( mAreaType ) ) {
-      setPathPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
+      setPathPaint( BrushManager.getAreaPaint( mAreaType ) );
       // FIXME shader ?
     }
   }

@@ -75,7 +75,7 @@ class DrawingAreaDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
     String title = String.format( mParent.getResources().getString( R.string.title_draw_area ),
-                                  BrushManager.mAreaLib.getSymbolName( mArea.mAreaType ) );
+                                  BrushManager.getAreaName( mArea.mAreaType ) );
     initLayout( R.layout.drawing_area_dialog, title );
 
     mOrientationWidget = new MyOrientationWidget( this, mOrientable, mArea.mOrientation );

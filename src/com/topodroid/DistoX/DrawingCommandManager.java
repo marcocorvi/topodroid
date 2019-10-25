@@ -49,7 +49,7 @@ import java.io.DataOutputStream;
  */
 class DrawingCommandManager
 {
-  private static final int BORDER = 20;
+  private static final int BORDER = 20; // for the bitmap
 
   static private int mDisplayMode = DisplayMode.DISPLAY_PLOT; // this display mode is shared among command managers
   private RectF mBBox;
@@ -84,12 +84,47 @@ class DrawingCommandManager
 
   private boolean mDisplayPoints;
 
-  // the current station is displayed green
-  private DrawingStationName mCurrentStationName = null;
-
-  private Matrix mMatrix;
-  private float  mScale; // current zoom: value of 1 pl in scene space
+  private Matrix  mMatrix;
+  private float   mScale; // current zoom: value of 1 pl in scene space
   private boolean mLandscape = false;
+
+
+  DrawingCommandManager()
+  {
+    mIsExtended  = false;
+    mBBox = new RectF();
+    mNorthLine       = null;
+    mFirstReference  = null;
+    mSecondReference = null;
+
+    mGridStack1   = Collections.synchronizedList(new ArrayList<DrawingPath>());
+    mGridStack10  = Collections.synchronizedList(new ArrayList<DrawingPath>());
+    mGridStack100 = Collections.synchronizedList(new ArrayList<DrawingPath>());
+    mLegsStack    = Collections.synchronizedList(new ArrayList<DrawingPath>());
+    mSplaysStack  = Collections.synchronizedList(new ArrayList<DrawingPath>());
+    mPlotOutline  = Collections.synchronizedList(new ArrayList<DrawingLinePath>());
+    mXSectionOutlines = Collections.synchronizedList(new ArrayList<DrawingOutlinePath>());
+    mStations     = Collections.synchronizedList(new ArrayList<DrawingStationName>());
+    mScraps = new ArrayList< Scrap >();
+    mCurrentScrap = new Scrap( 0 );
+    mScraps.add( mCurrentScrap );
+
+    // mCurrentStack = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
+    // mUserStations = Collections.synchronizedList(new ArrayList<DrawingStationPath>());
+    // mRedoStack    = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
+    // // mHighlight = Collections.synchronizedList(new ArrayList<DrawingPath>());
+    // // PATH_MULTISELECT
+    // mMultiselected = Collections.synchronizedList( new ArrayList< DrawingPath >());
+    // mSelection    = new Selection();
+    // mSelected     = new SelectionSet();
+
+    mMatrix       = new Matrix(); // identity
+  }
+
+  // ----------------------------------------------------------------
+  // display MODE
+  static void setDisplayMode( int mode ) { mDisplayMode = mode; }
+  static int getDisplayMode( ) { return mDisplayMode; }
 
   // ----------------------------------------------------------------
   // SCRAPS management
@@ -107,6 +142,7 @@ class DrawingCommandManager
     mScrapIdx = mScraps.size();
     mCurrentScrap = new Scrap( mScrapIdx );
     mScraps.add( mCurrentScrap ); 
+    addShotsToScrapSelection( mCurrentScrap );
     return mScrapIdx;
   }
 
@@ -134,9 +170,13 @@ class DrawingCommandManager
   void joinMultiselection( float dmin ) { mCurrentScrap.joinMultiselection( dmin ); }
 
   // ----------------------------------------------------------------
+  // the CURRENT STATION is displayed green
+  private DrawingStationName mCurrentStationName = null;
+
   void setCurrentStationName( DrawingStationName st ) { mCurrentStationName = st; }
   DrawingStationName getCurrentStationName( ) { return mCurrentStationName; }
 
+  // ----------------------------------------------------------------
   // DrawingPath              getNorth()        { return mNorthLine;    }
 
   // used by DrawingDxf and DrawingSvg, and exportAsCsx
@@ -198,8 +238,6 @@ class DrawingCommandManager
   }
 
   // ------------------------------------------------------------
-  static void setDisplayMode( int mode ) { mDisplayMode = mode; }
-  static int getDisplayMode( ) { return mDisplayMode; }
 
   /* FIXME_HIGHLIGHT
   void highlights( TopoDroidApp app ) 
@@ -301,38 +339,6 @@ class DrawingCommandManager
     Matrix m = new Matrix();
     m.postScale(z,z);
     for ( Scrap scrap : mScraps ) scrap.scaleDrawing( z, m );
-  }
-
-  DrawingCommandManager()
-  {
-    mIsExtended  = false;
-    mBBox = new RectF();
-    mNorthLine       = null;
-    mFirstReference  = null;
-    mSecondReference = null;
-
-    mGridStack1   = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    mGridStack10  = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    mGridStack100 = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    mLegsStack    = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    mSplaysStack  = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    mPlotOutline  = Collections.synchronizedList(new ArrayList<DrawingLinePath>());
-    mXSectionOutlines = Collections.synchronizedList(new ArrayList<DrawingOutlinePath>());
-    mStations     = Collections.synchronizedList(new ArrayList<DrawingStationName>());
-    mScraps = new ArrayList< Scrap >();
-    mCurrentScrap = new Scrap( 0 );
-    mScraps.add( mCurrentScrap );
-
-    // mCurrentStack = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
-    // mUserStations = Collections.synchronizedList(new ArrayList<DrawingStationPath>());
-    // mRedoStack    = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
-    // // mHighlight = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    // // PATH_MULTISELECT
-    // mMultiselected = Collections.synchronizedList( new ArrayList< DrawingPath >());
-    // mSelection    = new Selection();
-    // mSelected     = new SelectionSet();
-
-    mMatrix       = new Matrix(); // identity
   }
 
   /**
@@ -648,6 +654,19 @@ class DrawingCommandManager
         }
 	// highlightsSplays( app ); // FIXME_HIGHLIGHT
       }
+    }
+  }
+
+  private void addShotsToScrapSelection( Scrap scrap )
+  {
+    for ( DrawingPath leg : mLegsStack ) {
+      scrap.insertPathInSelection( leg );
+    }
+    for ( DrawingPath splay : mSplaysStack ) {
+      scrap.insertPathInSelection( splay );
+    }
+    for ( DrawingStationName station : mStations ) {
+      scrap.addStationToSelection( station );
     }
   }
 

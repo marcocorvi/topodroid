@@ -655,7 +655,7 @@
     <string name="button_search"    >搜索    </string>
     <string name="button_merge"     >合并     </string>
     <string name="button_saved"     >保存站点</string>
-    <string name="button_saved"     >保存测点</string>
+    <!-- TODO ALREADY DEFINED string name="button_saved"     >保存测点</string -->
     <string name="button_split"     >分割     </string>
     <string name="button_station"   >以 为中心</string>
     <string name="button_store"     >存储库     </string>
