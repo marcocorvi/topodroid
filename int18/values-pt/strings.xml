@@ -12,8 +12,8 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Clicar novamente em VOLTAR para sair</string>
 
-    <!-- TODO string name="new_survey_label">New survey</string -->
-    <!-- TODO string name="distox_label">DistoX</string -->
+    <string name="new_survey_label">Nova topo</string>
+    <string name="distox_label">DistoX</string>
 
     <!-- UNUSED string name="version_ask">Atualizando para uma nova versão do TopoDroid.\nQuer re-instalar os símbolos?</string -->
     <string name="symbols_ask">Instalar símbolos. v.%1$s?\n(Current v.%2$s)</string>
@@ -56,12 +56,12 @@
 
     <string name="thp_user">usuário</string>
     <string name="thp_label">rótulo</string>
-    <!-- TODO string name="thp_section">section</string -->
-    <!-- TODO string name="thp_station">station</string -->
+    <string name="thp_section">corte</string>
+    <string name="thp_station">base</string>
     <!-- UNUSED string name="thp_danger">perigo</string -->
     <string name="thl_user">usuário</string>
     <string name="thl_wall">parede</string>
-    <!-- TODO string name="thl_section">section</string -->
+    <string name="thl_section">corte</string>
     <string name="tha_user">usuário</string>
     <string name="tha_water">água</string>
 
@@ -336,7 +336,7 @@
     <string name="menu_reload">RECARREGAR</string>
     <string name="menu_rename_delete">RENOMEAR/APAGAR</string>
     <string name="menu_rename">RENOMEAR</string>
-    <!-- TODO string name="menu_plot_scrap">SCRAPS</string -->
+    <string name="menu_plot_scrap">TRECHOS</string>
     <string name="menu_switch">TROCAR/FECHAR</string>
     <string name="menu_help">AJUDA</string>
     <!-- UNUSED string name="menu_join_survey">TOPOGRAFIA COLABORATIVA</string -->
@@ -367,7 +367,7 @@
     <string name="popup_snap_ln">Juntar à linha mais próxima</string>
     <string name="popup_snap_to_splays">Juntar à medida auxiliar próxima</string>
     <string name="popup_split_pt">Duplicar ponto</string>
-    <!-- TODO string name="popup_split_pts">Adds points</string -->
+    <string name="popup_split_pts">Criar pontos</string>
     <string name="popup_split_ln">Corta a linha no ponto</string>
     <string name="popup_sharp_pt">Deixar segmento reto</string>
     <string name="popup_curve_pt">Suavizar segmento</string>
@@ -443,7 +443,7 @@
     <string name="section_area">Área do corte: %1$.1f</string>
     <string name="section_name">comentário sobre corte</string>
     <string name="scrap_outline">Contorno de outro croqui</string>
-    <!-- TODO string name="scrap_string">Sketch scrap: %1$d / %2$d</string -->
+    <string name="scrap_string">Trecho do croqui: %1$d / %2$d</string>
 
     <!-- UNUSED string name="sensor">sensor</string -->
     <string name="sensor_gravity">gravidade</string>
@@ -506,8 +506,8 @@
     <string name="description">descrição</string>
     <string name="name">Nome</string>
     <string name="team">equipe</string>
-    <!-- TODO string name="init_station">start station</string -->
-    <!-- TODO string name="start_station">start station [%1$s]</string -->
+    <string name="init_station">base inicial</string>
+    <string name="start_station">base inicial [%1$s]</string>
     <!-- UNUSED string name="toggle_device">Alternar estado de calibração do dispositivo</string -->
     <string name="toggle_failed">Falha ao alternar a DistoX</string>
     <string name="toggle_ok">Estado de calibração da DistoX trocado</string>
@@ -613,8 +613,8 @@
     <string name="button_plot"    >Croqui</string>
     <string name="button_more"    >Mais</string>
     <string name="button_next"    >Próximo</string>
-    <!-- TODO string name="button_prev"    >Prevous</string -->
-    <!-- TODO string name="button_new"     >New scrap</string -->
+    <string name="button_prev"    >Anterior</string>
+    <string name="button_new"     >Novo trecho</string>
     <string name="button_skip"    >Ignorar</string>
     <string name="button_done"    >Fim</string>
     <string name="button_lrud"    >Incluir EDTC</string>
@@ -641,7 +641,7 @@
     <!-- UNUSED string name="button_select"    >Selecionar    </string -->
     <string name="button_search"    >Pesquisar </string>
     <string name="button_merge"     >Mesclar   </string>
-    <!-- TODO string name="button_saved"     >Saved station</string -->
+    <string name="button_saved"     >Base salva</string>
     <string name="button_split"     >Dividir   </string>
     <string name="button_station"   >Centralizar em</string>
     <string name="button_store"     >Armazenar </string>
@@ -694,7 +694,7 @@
     <string name="btn_install">Instalar</string>
 
     <string name="symbol_archeo">Arqueologia</string>
-    <!-- TODO string name="symbol_anthro">Anthro</string -->
+    <string name="symbol_anthro">Antrópico</string>
     <string name="symbol_bio">Biologia</string>
     <string name="symbol_geo">Geologia</string>
     <string name="symbol_karst">Carste</string>
@@ -788,7 +788,7 @@
     <string name="help_refs">Definir tipos de medidas apresentadas</string>
     <string name="help_rename">Mudar nome da topo</string>
     <string name="help_plot_rename">Renomear/apagar croqui</string>
-    <!-- TODO string name="help_plot_scrap">Sketch scraps</string -->
+    <string name="help_plot_scrap">Trechos do croqui</string>
     <string name="help_plot_switch">Trocar croqui</string>
     <string name="help_search">Pesquisar base</string>
     <string name="help_stats">Estatísticas da topo</string>
@@ -809,9 +809,9 @@
     <string name="help_previous">Selecionar objeto anterior</string>
     <string name="help_next">Selecionar próximo objeto</string>
     <string name="help_recover">Recarregar croqui do backup</string>
-    <!-- TODO string name="help_reload_prev">Display newer backup</string -->
-    <!-- TODO string name="help_reload_next">Display older backup</string -->
-    <!-- TODO string name="help_reload_plot">Reload sketch backup</string -->
+    <string name="help_reload_prev">Mostrar backup mais novo</string>
+    <string name="help_reload_next">Mostrar backup mais antigo</string>
+    <string name="help_reload_plot">Recarregar backup do croqui</string>
     <string name="help_zoom_fit">Encaixar croqui na tela</string>
    
     <string name="help_line_point">Ações com linhas e pontos: juntar, separar, cortar, remover</string>
@@ -885,7 +885,7 @@
     <string name="title_plot_save">Exportar croqui</string>
     <!-- UNUSED string name="title_plot_merge">Mesclar croqui</string -->
     <string name="title_plot_reload">Recarregar croqui</string>
-    <!-- TODO string name="title_plot_scraps">Sketch scraps</string -->
+    <string name="title_plot_scraps">Trechos do croqui</string>
     <string name="title_profile_flip">Virar o corte?</string>
     <string name="title_projection">Azimute do corte projetado %1$d</string>
     <string name="title_refs">Mostrar</string>
@@ -1127,8 +1127,8 @@
   <string name="pref_section_splay_message">Acima deste ângulo com o plano do corte, a medida auxiliar será pontilhada</string>
   <string name="pref_data_backup_title">Exportação automática</string>
   <string name="pref_data_backup_summary">Exportação automática de dados (exige definição de formato padrão)</string>
-  <!-- TODO string name="pref_zipped_symbols_title">Zipped symbols files</string -->
-  <!-- TODO string name="pref_zipped_symbols_summary">Store/load symbol files to/from zip archive</string -->
+  <string name="pref_zipped_symbols_title">rquivos de símbolos zipados</string>
+  <string name="pref_zipped_symbols_summary">Armazenar/carregar arquivos de símbolos em/de arquivo zip<string>
   <string name="pref_fixed_origin_title">Origem do croqui</string>
   <string name="pref_fixed_origin_summary">Origem fixa para croqui</string>
   <string name="pref_shared_xsections_title">Cortes X compartilhados</string>
