@@ -1130,7 +1130,7 @@
   <string name="pref_data_backup_title">Exportação automática</string>
   <string name="pref_data_backup_summary">Exportação automática de dados (exige definição de formato padrão)</string>
   <string name="pref_zipped_symbols_title">rquivos de símbolos zipados</string>
-  <string name="pref_zipped_symbols_summary">Armazenar/carregar arquivos de símbolos em/de arquivo zip<string>
+  <string name="pref_zipped_symbols_summary">Armazenar/carregar arquivos de símbolos em/de arquivo zip</string>
   <string name="pref_fixed_origin_title">Origem do croqui</string>
   <string name="pref_fixed_origin_summary">Origem fixa para croqui</string>
   <string name="pref_shared_xsections_title">Cortes X compartilhados</string>
