@@ -1384,9 +1384,13 @@ public class TopoDroidApp extends Application
 
   static private void deleteObsoleteSymbols()
   {
-    String[] lines = { "blocks", "debris", "clay", "presumed", "sand", "ice" };
+    String[] lines = { "blocks", "debris", "clay", "contour", "presumed", "sand", "ice", "section", "wall:sand" };
     for ( String line : lines ) {
       TDUtil.deleteFile( TDPath.APP_LINE_PATH + line );
+    }
+    String[] points = { "breakdown-choke", "low-end", "paleo-flow", "section" };
+    for ( String point : points ) {
+      TDUtil.deleteFile( TDPath.APP_POINT_PATH + point );
     }
   }
 
@@ -1487,6 +1491,8 @@ public class TopoDroidApp extends Application
     } catch ( IOException e ) {
     }
   }
+
+  // -------------------------------------------------------------------
 
   static private void firmwareUncompress( InputStream fis, boolean overwrite )
   {

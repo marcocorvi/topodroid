@@ -1008,12 +1008,18 @@ class DrawingCommandManager
         for ( DrawingStationName st : mStations ) st.draw( canvas, mMatrix, mScale, mBBox );
       }
     }
-
-    for ( Scrap scrap : mScraps ) {
-      if ( scrap == mCurrentScrap ) {
-        scrap.drawAll( canvas, mMatrix, mScale, mBBox );
-      } else {
-        scrap.drawGreyOutline( canvas, mMatrix, mScale, mBBox );
+    
+    if ( outline ) {
+      for ( Scrap scrap : mScraps ) {
+        scrap.drawOutline( canvas, mMatrix, mScale, mBBox );
+      }
+    } else {
+      for ( Scrap scrap : mScraps ) {
+        if ( scrap == mCurrentScrap ) {
+          scrap.drawAll( canvas, mMatrix, mScale, mBBox );
+        } else {
+          scrap.drawGreyOutline( canvas, mMatrix, mScale, mBBox );
+        }
       }
     }
 
