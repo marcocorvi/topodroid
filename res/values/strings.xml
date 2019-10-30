@@ -628,7 +628,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="button_plot"    >Sketch</string>
     <string name="button_more"    >More</string>
     <string name="button_next"    >Next</string>
-    <string name="button_prev"    >Prevous</string>
+    <string name="button_prev"    >Previous</string>
     <string name="button_new"     >New scrap</string>
     <string name="button_skip"    >Skip</string>
     <string name="button_done"    >Done</string>
