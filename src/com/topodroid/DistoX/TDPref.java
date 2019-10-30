@@ -679,16 +679,17 @@ class TDPref implements AdapterView.OnItemSelectedListener
     int[] dsc = TDPrefKey.EXPORT_SVGdesc;
     String[] def = TDPrefKey.EXPORT_SVGdef;
     return new TDPref[ ] {
-      makeCbx( cat, key[0], tit[0], dsc[0], N, def[0],         ctx, hlp ),
+      makeCbx( cat, key[0], tit[0], dsc[0], T, def[0],         ctx, hlp ),
       makeCbx( cat, key[1], tit[1], dsc[1], E, def[1],         ctx, hlp ),
       makeCbx( cat, key[2], tit[2], dsc[2], E, def[2],         ctx, hlp ),
+      makeCbx( cat, key[3], tit[3], dsc[3], N, def[3],         ctx, hlp ),
       // makeCbx( cat, key[ ], tit[ ], dsc[ ], X, def[ ],         ctx, hlp ),
-      makeEdt( cat, key[3], tit[3], dsc[3], A, def[3], FLOAT,  ctx, hlp ),
       makeEdt( cat, key[4], tit[4], dsc[4], A, def[4], FLOAT,  ctx, hlp ),
       makeEdt( cat, key[5], tit[5], dsc[5], A, def[5], FLOAT,  ctx, hlp ),
       makeEdt( cat, key[6], tit[6], dsc[6], A, def[6], FLOAT,  ctx, hlp ),
       makeEdt( cat, key[7], tit[7], dsc[7], A, def[7], FLOAT,  ctx, hlp ),
-      makeEdt( cat, key[8], tit[8], dsc[8], A, def[8], FLOAT,  ctx, hlp )
+      makeEdt( cat, key[8], tit[8], dsc[8], A, def[8], FLOAT,  ctx, hlp ),
+      makeEdt( cat, key[9], tit[9], dsc[9], A, def[9], FLOAT,  ctx, hlp )
     };
   }
 

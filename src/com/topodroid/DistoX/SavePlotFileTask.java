@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import java.lang.ref.WeakReference;
 
 import java.io.File;
@@ -26,8 +28,6 @@ import android.os.Handler;
 
 import android.graphics.Bitmap;
 // import android.graphics.Bitmap.CompressFormat;
-
-import android.util.Log;
 
 class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
 {
@@ -207,7 +207,8 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         // TDLog.Log( TDLog.LOG_PLOT, "saving binary " + mFullName );
         // Log.v( "DistoX", "saving binary " + mFullName );
         if ( mSuffix == PlotSave.CREATE ) {
-          DrawingIO.exportDataStream( mPaths, mType, file1, mFullName, mProjDir );
+          // Log.v("DistoX-SPLIT", "Save Plot CREATE file " + file1 + " paths " + mPaths.size() );
+          DrawingIO.exportDataStream( mPaths, mType, file1, mFullName, mProjDir, 0 ); // set path scrap to 0
         } else {
           if ( mManager != null ) {
             DrawingIO.exportDataStream( mManager, mType, file1, mFullName, mProjDir );

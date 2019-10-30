@@ -1028,6 +1028,8 @@
   <string name="pref_survex_lrud_summary">Добавяне на Л/Д/Г/Д в Survex експорт</string>
   <string name="pref_svg_grid_title">SVG мрежа</string>
   <string name="pref_svg_grid_summary">Добавяне на мрежа в SVG експорт</string>
+  <!-- TODO string name="pref_svg_roundtrip_title">SVG round-trip</string -->
+  <!-- TODO string name="pref_svg_roundtrip_summary">Round-trip ready SVG export</string -->
   <!-- TODO string name="pref_svg_splays_title">SVG splays</string -->
   <!-- TODO string name="pref_svg_splays_summary">Include splays into SVG export</string -->
   <!-- UNUSED string name="pref_svg_in_html_title">SVG в HTML</string -->

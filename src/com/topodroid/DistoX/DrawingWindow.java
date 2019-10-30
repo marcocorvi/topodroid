@@ -42,17 +42,9 @@ import android.os.Message;
 // import android.os.StrictMode;
 // import java.lang.reflect.Method;
 
-// import android.view.Menu;
-// import android.view.SubMenu;
-// import android.view.MenuItem;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-// import android.view.ViewGroup;
-// import android.view.Display;
-// import android.util.DisplayMetrics;
-// import android.view.ContextMenu;
-// import android.view.ContextMenu.ContextMenuInfo;
 //
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -879,6 +871,7 @@ public class DrawingWindow extends ItemDrawer
       startSaveTdrTask( mType, PlotSave.SAVE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP );
       popInfo();
       doStart( false, -1 );
+      recomputeReferences( mZoom );
     } else {
       if ( doubleBack ) {
         if ( doubleBackToast != null ) doubleBackToast.cancel();
@@ -930,11 +923,11 @@ public class DrawingWindow extends ItemDrawer
   PlotSaveData makePlotSaveData( int tt, int suffix, int rotate )
   {
     if ( tt == 1 && mPlot1 != null )
-      return new PlotSaveData( mNum, /* mDrawingUtil, */ mPlot1, mDrawingSurface.getManager( mPlot1.type ), mName1, mFullName1, 0, suffix, rotate );
+      return new PlotSaveData( mNum, mPlot1, mDrawingSurface.getManager( mPlot1.type ), mName1, mFullName1, 0, suffix, rotate );
     if ( tt == 2 && mPlot2 != null )
-      return new PlotSaveData( mNum, /* mDrawingUtil, */ mPlot2, mDrawingSurface.getManager( mPlot2.type ), mName2, mFullName2, (int)mPlot2.azimuth, suffix, rotate );
+      return new PlotSaveData( mNum, mPlot2, mDrawingSurface.getManager( mPlot2.type ), mName2, mFullName2, (int)mPlot2.azimuth, suffix, rotate );
     if ( tt == 3 && mPlot3 != null )
-      return new PlotSaveData( mNum, /* mDrawingUtil, */ mPlot3, mDrawingSurface.getManager( mPlot3.type ), mName3, mFullName3, 0, suffix, rotate );
+      return new PlotSaveData( mNum, mPlot3, mDrawingSurface.getManager( mPlot3.type ), mName3, mFullName3, 0, suffix, rotate );
     return null;
   }
 
@@ -2048,7 +2041,14 @@ public class DrawingWindow extends ItemDrawer
     if ( do_load ) {
       if ( ! loadFiles( mType, list ) ) {
         TDToast.makeBad( R.string.plot_not_found );
-	finish();
+        if  ( tt >= 0 ) { // if failed to load x-section file
+          popInfo();
+          doStart( false, -1 );
+          recomputeReferences( mZoom );
+          return;
+        } else {
+	  finish();
+        }
       }
     }
 
@@ -2318,7 +2318,7 @@ public class DrawingWindow extends ItemDrawer
 
       mDrawingSurface.setStationXSections( xsection_plan, xsection_ext, mPlot2.type );
       mDrawingSurface.linkAllSections();
-    } else {
+    } else { // X_SECTION
       mTo = ( PlotInfo.isSection( type ) )? mPlot3.view : "";
       mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null, false );
       // mAllSymbols =
@@ -3175,8 +3175,7 @@ public class DrawingWindow extends ItemDrawer
         { // Symbol.POINT
           mLastLinePath = null;
           if ( ! pointerDown ) {
-	    float radius = TDSetting.mPointingRadius;
-    	    if ( BrushManager.isPointOrientable( mCurrentPoint ) ) radius *= 4;
+            float radius = ( ( BrushManager.isPointOrientable( mCurrentPoint ) )? 6 : 2 ) * TDSetting.mPointingRadius;
 	    float shift = Math.abs( x_shift ) + Math.abs( y_shift );
 	    if ( shift < radius ) {
               xs = mSaveX/mZoom - mOffset.x;
@@ -3901,8 +3900,7 @@ public class DrawingWindow extends ItemDrawer
     // if plot type = PROFILE
     //    clino = -90, 0, +90  according to horiz
     //
-    void openXSection( DrawingStationName st, String st_name, long type,
-                       float azimuth, float clino, boolean horiz, String nick )
+    void openXSection( DrawingStationName st, String st_name, long type, float azimuth, float clino, boolean horiz, String nick )
     {
       // Log.v("DistoX-C", "openXSection " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
       assert( mLastLinePath == null );
@@ -6471,7 +6469,7 @@ public class DrawingWindow extends ItemDrawer
     boolean ret = mDrawingSurface.addLoadDataStream( tdr, /* null, */ xdelta, ydelta, /* null, */ null ); // do not save plot name in paths
   }
 
-  // remove: whether to remove the paths from the current plot
+  // mSplitRemove: whether to remove the paths from the current plot
   private void doSplitPlot( )
   {
     if ( mSplitBorder.size() <= 3 ) { // too few points: nothing to split
@@ -6483,7 +6481,6 @@ public class DrawingWindow extends ItemDrawer
       TDToast.makeWarn( R.string.split_nothing );
       return;
     }
-    // Log.v("DistoX-C", "doSplitPlot " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     mLastLinePath = null;
 
     boolean extended = (mPlot2.type == PlotInfo.PLOT_EXTENDED);
@@ -6491,6 +6488,7 @@ public class DrawingWindow extends ItemDrawer
     long pid = mApp.insert2dPlot( TDInstance.sid, mSplitName, mSplitStationName, extended, azimuth );
     String name = mSplitName + ( ( mType == PlotInfo.PLOT_PLAN )? "p" : "s" );
     String fullname = TDInstance.survey + "-" + name;
+    // Log.v("DistoX-SPLIT", "Split Plot " + paths.size() + " paths: " + name );
     // PlotInfo plot = mApp_mData.getPlotInfo( TDInstance.sid, name );
     (new SavePlotFileTask( mActivity, this, null, /* mApp, */ mNum, /* mDrawingUtil, */ paths, fullname, mType, azimuth ) ).execute();
     // TODO

@@ -131,7 +131,7 @@ class DrawingStationPath extends DrawingPath
   }
 
   @Override
-  void toDataStream( DataOutputStream dos )
+  void toDataStream( DataOutputStream dos, int scrap )
   {
     try {
       dos.write('U');
@@ -142,7 +142,7 @@ class DrawingStationPath extends DrawingPath
       // if ( version >= 401090 ) 
         dos.writeInt( mLevel );
       // if ( version >= 401160 ) 
-        dos.writeInt( mScrap );
+        dos.writeInt( (scrap >= 0)? scrap : mScrap );
       dos.writeUTF( mName );
     } catch ( IOException e ) {
       TDLog.Error( "ERROR-dos station " + mName );

@@ -530,7 +530,7 @@ class DrawingIO
     }
   }
 
-  static void exportDataStream( List<DrawingPath> paths, int type, File file, String fullname, int proj_dir )
+  static void exportDataStream( List<DrawingPath> paths, int type, File file, String fullname, int proj_dir, int scrap )
   {
     try {
       FileOutputStream fos = new FileOutputStream( file );
@@ -549,7 +549,8 @@ class DrawingIO
       }
       RectF bbox = new RectF( xmin, ymin, xmax, ymax );
 
-      exportDataStream( type, dos, fullname, proj_dir, bbox, paths );
+      // Log.v("DistoX-SPLIT", "export data stream: paths " + paths.size() );
+      exportDataStream( type, dos, fullname, proj_dir, bbox, paths, scrap );
 
       dos.close();
 
@@ -922,7 +923,7 @@ class DrawingIO
 
   // used by ParserPocketTopo
   static void exportDataStream( int type, DataOutputStream dos, String scrap_name, int proj_dir,
-                                        RectF bbox, List<DrawingPath> paths )
+                                RectF bbox, List<DrawingPath> paths, int scrap )
   {
     try { 
       dos.write( 'V' ); // version
@@ -947,11 +948,11 @@ class DrawingIO
 
       for ( DrawingPath p : paths ) {
         if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) continue; // safety check: should not happen
-        p.toDataStream( dos );
+        p.toDataStream( dos, scrap );
       }
       // synchronized( userstations ) { // user stations are always exported to data stream
       //   for ( DrawingStationPath sp : userstations ) {
-      //     sp.toDataStream( dos );
+      //     sp.toDataStream( dos, scrap );
       //   }
       // }
       dos.write('F'); // final: bbox and autostations (reading can skip all that follows)
@@ -1024,13 +1025,13 @@ class DrawingIO
             if ( cmd.commandType() != 0 ) continue;
             DrawingPath p = (DrawingPath) cmd;
             if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) continue; // safety check: should not happen
-            p.toDataStream( dos );
+            p.toDataStream( dos, -1 ); // -1: use path mScrap
           }
         }
         List< DrawingStationPath > userstations = scrap.mUserStations;
         synchronized( userstations ) { // user stations are always exported to data stream
           for ( DrawingStationPath sp : userstations ) {
-            sp.toDataStream( dos );
+            sp.toDataStream( dos, -1 );
           }
         }
       }
@@ -1043,7 +1044,7 @@ class DrawingIO
             if ( station != null && station.barriered() ) continue;
             if ( bbox.left > st.cx || bbox.right  < st.cx ) continue;
             if ( bbox.top  > st.cy || bbox.bottom < st.cy ) continue;
-            st.toDataStream( dos );
+            st.toDataStream( dos, -1 );
           }
         }
       }

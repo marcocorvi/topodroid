@@ -200,6 +200,12 @@ class DrawingCommandManager
     return ret;
   }
 
+  boolean hasUserStations() 
+  {
+    for ( Scrap scrap : mScraps ) if ( scrap.hasUserStations() ) return true;
+    return false;
+  }
+
   // accessor for DrawingSvg
   List<DrawingPath> getGrid1()   { return mGridStack1; }
   List<DrawingPath> getGrid10()  { return mGridStack10; }
@@ -657,6 +663,8 @@ class DrawingCommandManager
     }
   }
 
+  // TODO shots and station selection set could be managed by the CommandManager
+  //      and shared among the scraps
   private void addShotsToScrapSelection( Scrap scrap )
   {
     for ( DrawingPath leg : mLegsStack ) {

@@ -151,7 +151,7 @@ class DrawingSpecialPath extends DrawingPath
   public String toTherion( ) { return ""; }
 
   @Override
-  void toDataStream( DataOutputStream dos )
+  void toDataStream( DataOutputStream dos, int scrap )
   {
     try {
       dos.write( 'J' );
@@ -161,7 +161,7 @@ class DrawingSpecialPath extends DrawingPath
       // if ( version > 401090 ) 
         dos.writeInt( mLevel );
       // if ( version > 401160 ) 
-        dos.writeInt( mScrap );
+        dos.writeInt( (scrap >= 0)? scrap : mScrap );
       // TDLog.Log( TDLog.LOG_PLOT, "P " + name + " " + cx + " " + cy );
     } catch ( IOException e ) {
       TDLog.Error( "POINT out error " + e.toString() );

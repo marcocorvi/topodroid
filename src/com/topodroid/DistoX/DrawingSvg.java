@@ -486,10 +486,9 @@ class DrawingSvg
         float o = (float)(point.mOrientation);
         float s = POINT_SCALE * TDMath.sind( o );
         float c = POINT_SCALE * TDMath.cosd( o );
-        pw.format(Locale.US, "<g transform=\"matrix(%.2f,%.2f,%.2f,%.2f,%.2f,%.2f)\">\n", 
-          c, s, -s, c, xoff+point.cx, yoff+point.cy );
+        pw.format(Locale.US, "<g transform=\"matrix(%.2f,%.2f,%.2f,%.2f,%.2f,%.2f)\">\n", c, s, -s, c, xoff+point.cx, yoff+point.cy );
 
-        pw.format("%s\n", sp.mSvg );
+        pw.format("%s\n", sp.getSvg() );
         pw.format("</g>\n");
         pw.format("</g>\n");
       } else {

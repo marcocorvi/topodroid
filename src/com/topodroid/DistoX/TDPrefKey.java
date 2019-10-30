@@ -573,6 +573,7 @@ class TDPrefKey
 
   // ------------------------------------------------------------------------------
   static String[] EXPORT_SVG = { // [8]
+    "DISTOX_SVG_ROUNDTRIP",   // 0 // whether to export SVG in round-trip format
     "DISTOX_SVG_GRID",        // 0 // whether to export grid in SVG 
     "DISTOX_SVG_LINE_DIR",          // whether to add line orientation ticks in SVG export
     "DISTOX_SVG_SPLAYS",
@@ -586,6 +587,7 @@ class TDPrefKey
     null
   };
   static int[] EXPORT_SVGtitle = {
+    R.string.pref_svg_roundtrip_title,
     R.string.pref_svg_grid_title,
     R.string.pref_svg_line_dir_title,
     R.string.pref_svg_splays_title,
@@ -599,6 +601,7 @@ class TDPrefKey
     -1
   };
   static int[] EXPORT_SVGdesc = {
+    R.string.pref_svg_roundtrip_summary,
     R.string.pref_svg_grid_summary,
     R.string.pref_svg_line_dir_summary,
     R.string.pref_svg_splays_summary,
@@ -612,6 +615,7 @@ class TDPrefKey
     -1
   };
   static String[] EXPORT_SVGdef = {
+    FALSE,
     FALSE,
     FALSE,
     TRUE,

@@ -39,9 +39,9 @@ class SymbolPoint extends Symbol
   Path   mPath;
   Path   mOrigPath; // PRIVATE
   String mName;
-  String mDxf; // PRIVATE
-  String mSvg;
-  String mXvi;
+  private String mDxf; // PRIVATE
+  private String mSvg;
+  private String mXvi;
 
   int mHasText;         // whether the point has a text (1), value (2), or none (0)
   boolean mOrientable; // PRIVATE
@@ -74,6 +74,8 @@ class SymbolPoint extends Symbol
   @Override public String getThName( ) { return mThName; }
 
   String getDxf( ) { return mDxf; }
+  String getSvg( ) { return mSvg; }
+  String getXvi( ) { return mXvi; }
 
   @Override public Path getPath( ) { return mPath; }
 

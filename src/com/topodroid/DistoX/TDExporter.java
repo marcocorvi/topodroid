@@ -2262,6 +2262,16 @@ class TDExporter
     }
   }
 
+  static int nextSplayInt( HashMap<String,Integer> splay_station, String name )
+  {
+    int ret = 0;
+    if ( splay_station.containsKey( name ) ) {
+      ret = splay_station.get( name ).intValue();
+    }
+    splay_station.put( name, Integer.valueOf(ret+1) );
+    return ret;
+  }
+
   static String exportSurveyAsDat( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     // Log.v("DistoX", "export as compass: " + filename + " swap LR " + TDSetting.mSwapLR );
@@ -2317,10 +2327,7 @@ class TDExporter
       boolean duplicate = false;
       LRUD lrud;
 
-      HashMap<String, Integer > splay_station = null;
-      if ( TDSetting.mCompassSplays ) {
-        splay_station = new HashMap<String, Integer >();
-      }
+      HashMap<String, Integer > splay_stations = TDSetting.mCompassSplays ?  new HashMap<String, Integer >() : null;
 
       for ( DBlock item : list ) {
         String from = item.mFrom;
@@ -2340,12 +2347,8 @@ class TDExporter
               ref_item = null; 
             }
 	    if ( TDSetting.mCompassSplays ) {
-              Integer i = splay_station.get( to );
-	      int ii = 0;
-	      if ( splay_station.containsKey(to) ) {
-                ii = splay_station.get( to ).intValue();
-              }
-	      splay_station.put( to, Integer.valueOf(ii+1) );
+              // Integer i = splay_station.get( to );
+	      int ii = nextSplayInt( splay_stations, to );
 	      printSplayToDat( pw, info.name, to, to + "ss" + ii, item, true ); // reverse
 	    }
           }
@@ -2359,12 +2362,8 @@ class TDExporter
               ref_item = null; 
             }
 	    if ( TDSetting.mCompassSplays ) {
-              Integer i = splay_station.get( from );
-	      int ii = 0;
-	      if ( splay_station.containsKey(from) ) {
-                ii = splay_station.get( from ).intValue();
-              }
-	      splay_station.put( from, Integer.valueOf(ii+1) );
+              // Integer i = splay_station.get( from );
+	      int ii = nextSplayInt( splay_stations, from );
 	      printSplayToDat( pw, info.name, from, from + "ss" + ii, item, false ); // not reverse
 	    }
           } else {

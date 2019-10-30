@@ -345,7 +345,7 @@ class DrawingAreaPath extends DrawingPointLinePath
   }
 
   @Override
-  void toDataStream( DataOutputStream dos )
+  void toDataStream( DataOutputStream dos, int scrap )
   {
     String name  = BrushManager.getAreaThName( mAreaType );
     String group = BrushManager.getAreaGroup( mAreaType );
@@ -361,7 +361,7 @@ class DrawingAreaPath extends DrawingPointLinePath
       // if ( version >= 401090 )
         dos.writeInt( mLevel );
       // if ( version >= 401160 )
-        dos.writeInt( mScrap );
+        dos.writeInt( (scrap >= 0)? scrap : mScrap );
 
       int npt = size(); // number of line points
       dos.writeInt( npt );

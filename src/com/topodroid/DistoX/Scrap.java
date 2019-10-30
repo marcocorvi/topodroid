@@ -161,6 +161,145 @@ class Scrap
   }
   // end UNDO/REDO -----------------------------------------------
 
+  // ADD etc. ----------------------------------------------------
+  SelectionSet getItemsAt( float x, float y, float radius, int mode, boolean legs, boolean splays, boolean stations, DrawingStationSplay station_splay )
+  {
+    // synchronized ( TDPath.mSelectedLock ) {
+    synchronized ( TDPath.mSelectionLock ) {
+      mSelected.clear();
+      // FIXME_LATEST latests splays are not considered in the selection
+      mSelection.selectAt( mSelected, x, y, radius, mode, legs, splays, stations, station_splay ); 
+      if ( mSelected.mPoints.size() > 0 ) {
+        // Log.v("DistoX", "seleceted " + mSelected.mPoints.size() + " points " );
+        mSelected.nextHotItem();
+      }
+    }
+    return mSelected;
+  }
+
+  void addItemAt( float x, float y, float radius )
+  {
+    synchronized ( TDPath.mSelectionLock ) {
+      mSelected.clear();
+      mSelection.selectAt( mSelected, x, y, radius, mMultiselectionType );
+      for ( SelectionPoint sp : mSelected.mPoints ) {
+        addMultiselection( sp.mItem );
+      }
+    }
+  }
+
+  void addCommand( ArrayList<DrawingPath> paths )
+  {
+    for ( ICanvasCommand cmd : mCurrentStack ) {
+      if ( cmd.commandType() == 0 ) paths.add( (DrawingPath) cmd );
+    }
+  }
+
+  void addStationToSelection( DrawingStationName st )
+  {
+    mSelection.insertStationName( st );
+  }
+
+  // PATH ACTIONS ------------------------------------------------
+
+  private void doDeletePath( DrawingPath path )
+  {
+    synchronized( mCurrentStack ) {
+      mCurrentStack.remove( path );
+    }
+    synchronized( TDPath.mSelectionLock ) {
+      mSelection.removePath( path );
+      clearSelected();
+    }
+  }
+
+  void deletePath( DrawingPath path, EraseCommand eraseCmd ) // called by DrawingSurface
+  {
+    doDeletePath( path );
+    // checkLines();
+    if ( eraseCmd != null ) eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
+  }
+
+  // deleting a section line automatically deletes the associated section point(s)
+  void deleteSectionLine( DrawingPath line, String scrap, EraseCommand cmd )
+  {
+    synchronized( mCurrentStack ) {
+      int index = BrushManager.getPointSectionIndex();
+      if ( index >= 0 ) {
+        ArrayList<DrawingPath> todo = new ArrayList<>();
+        for ( ICanvasCommand c : mCurrentStack ) {
+          if ( c.commandType() == 0 ) {
+            DrawingPath p = (DrawingPath)c;
+            if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
+              DrawingPointPath pt = (DrawingPointPath)p;
+              if ( pt.mPointType == index && scrap.equals( pt.getOption( "-scrap" ) ) ) {
+                todo.add(p);
+              }
+            }
+          }
+        }
+        for ( DrawingPath pp : todo ) deletePath( pp, cmd );
+      }
+      deletePath( line, cmd );
+    }
+  }
+
+  void deleteSectionPoint( String scrap_name, EraseCommand cmd )
+  {
+    int index = BrushManager.getPointSectionIndex();
+    synchronized( mCurrentStack ) {
+      for ( ICanvasCommand icc : mCurrentStack ) { // FIXME reverse_iterator
+        if ( icc.commandType() == 0 ) { // DrawingPath
+          DrawingPath path = (DrawingPath)icc;
+          if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
+            DrawingPointPath dpp = (DrawingPointPath) path;
+            if ( dpp.mPointType == index ) {
+              // FIXME GET_OPTION
+              if ( scrap_name.equals( dpp.getOption( "-scrap" ) ) ) {
+                deletePath( path, cmd );
+                return; // true;
+              }
+              // String vals[] = dpp.mOptions.split(" ");
+              // int len = vals.length;
+              // for ( int k = 0; k < len; ++k ) {
+              //   if ( scrap_name.equals( vals[k] ) ) {
+              //     deletePath( path, cmd );
+              //     return;
+              //   }
+              // }
+            }
+          }
+        }
+      }
+    }
+    // return false;
+  }
+
+  // LINE ACTIONS ------------------------------------------------
+
+  void splitPointHotItem()
+  { 
+    SelectionPoint sp = mSelected.mHotItem;
+    if ( sp == null ) return;
+    if ( sp.type() != DrawingPath.DRAWING_PATH_LINE && sp.type() != DrawingPath.DRAWING_PATH_AREA ) return;
+    LinePoint lp = sp.mPoint;
+    if ( lp == null ) return;
+    float x = lp.x;
+    float y = lp.y;
+    DrawingPointLinePath line = (DrawingPointLinePath)sp.mItem;
+    LinePoint p1 = line.insertPointAfter( x, y, lp );
+    SelectionPoint sp1 = null;
+    synchronized( TDPath.mSelectionLock ) {
+      sp1 = mSelection.insertPathPoint( line, p1 );
+    }
+    if ( sp1 != null ) {
+      // synchronized( TDPath.mSelectedLock ) {
+      synchronized( TDPath.mSelectionLock ) {
+        mSelected.mPoints.add( sp1 );
+      }
+    }
+  }
+
   void splitLine( DrawingLinePath line, LinePoint lp )
   {
     if ( lp == null ) return;
@@ -187,7 +326,7 @@ class Scrap
   }
 
   // called from synchronized( mCurrentStack )
-  void doRemoveLinePoint( DrawingPointLinePath line, LinePoint point, SelectionPoint sp )
+  private void doRemoveLinePoint( DrawingPointLinePath line, LinePoint point, SelectionPoint sp )
   { 
     line.remove( point );
     if ( sp != null ) { // sp can be null 
@@ -221,17 +360,99 @@ class Scrap
     return false;
   }
 
-  void doDeletePath( DrawingPath path )
+  /* Split the line at the point lp
+   * The erase command is updated with the removal of the original line and the insert
+   * of the two new pieces
+   // called from synchronized( CurrentStack ) context
+   // called only by eraseAt
+   */
+  private void doSplitLine( DrawingLinePath line, LinePoint lp, EraseCommand eraseCmd )
+  {
+    DrawingLinePath line1 = new DrawingLinePath( line.mLineType, mScrapIdx );
+    DrawingLinePath line2 = new DrawingLinePath( line.mLineType, mScrapIdx );
+    if ( line.splitAt( lp, line1, line2, true ) ) {
+      // Log.v("DistoX", "split " + line.size() + " ==> " + line1.size() + " " + line2.size() );
+      // synchronized( mCurrentStack ) // not neceessary: called in synchronized context
+      {
+        eraseCmd.addAction( EraseAction.ERASE_REMOVE, line );
+        mCurrentStack.remove( line );
+        if ( line1.size() > 1 ) {
+          eraseCmd.addAction( EraseAction.ERASE_INSERT, line1 );
+          mCurrentStack.add( line1 );
+        }
+        if ( line2.size() > 1 ) {
+          eraseCmd.addAction( EraseAction.ERASE_INSERT, line2 );
+          mCurrentStack.add( line2 );
+        }
+      }
+      synchronized( TDPath.mSelectionLock ) {
+        mSelection.removePath( line ); 
+        if ( line1.size() > 1 ) mSelection.insertLinePath( line1 );
+        if ( line2.size() > 1 ) mSelection.insertLinePath( line2 );
+      }
+    // } else {
+      // FIXME 
+      // TDLog.Error( "FAILED splitAt " + lp.x + " " + lp.y );
+      // line.dump();
+    }
+    // checkLines();
+  }
+
+  void sharpenPointLine( DrawingPointLinePath line ) 
   {
     synchronized( mCurrentStack ) {
-      mCurrentStack.remove( path );
+      line.makeSharp( );
+    }
+    // checkLines();
+  }
+
+  // @param decimation   log-decimation 
+  void reducePointLine( DrawingPointLinePath line, int decimation ) 
+  {
+    if ( decimation <= 0 ) return;
+    synchronized( TDPath.mSelectionLock ) {
+      mSelection.removePath( line );
+      clearSelected();
+    }
+    synchronized( mCurrentStack ) {
+      int min_size = (line.mType == DrawingPath.DRAWING_PATH_AREA)? 3 : 2;
+      line.makeReduce( decimation, min_size );
     }
     synchronized( TDPath.mSelectionLock ) {
-      mSelection.removePath( path );
+      mSelection.insertPath( line );
+    }
+    // checkLines();
+  }
+
+
+  void rockPointLine( DrawingPointLinePath line ) 
+  {
+    synchronized( TDPath.mSelectionLock ) {
+      mSelection.removePath( line );
       clearSelected();
+    }
+    synchronized( mCurrentStack ) {
+      line.makeRock( );
+    }
+    synchronized( TDPath.mSelectionLock ) {
+      mSelection.insertPath( line );
+    }
+    // checkLines();
+  }
+
+  void closePointLine( DrawingPointLinePath line )
+  {
+    synchronized( mCurrentStack ) {
+      SelectionPoint sp = mSelection.getSelectionPoint( line.mLast );
+      line.makeClose( );
+      // re-bucket last line point
+      synchronized ( TDPath.mSelectionLock ) {
+        mSelection.rebucket( sp );
+      }
     }
   }
 
+  // ERASE ACTIONS -----------------------------------------------
   /** 
    * return result code:
    *    0  no erasing
@@ -385,44 +606,6 @@ class Scrap
 
   void addEraseCommand( EraseCommand cmd ) { mCurrentStack.add( cmd ); }
 
-  /* Split the line at the point lp
-   * The erase command is updated with the removal of the original line and the insert
-   * of the two new pieces
-   // called from synchronized( CurrentStack ) context
-   // called only by eraseAt
-   */
-  private void doSplitLine( DrawingLinePath line, LinePoint lp, EraseCommand eraseCmd )
-  {
-    DrawingLinePath line1 = new DrawingLinePath( line.mLineType, mScrapIdx );
-    DrawingLinePath line2 = new DrawingLinePath( line.mLineType, mScrapIdx );
-    if ( line.splitAt( lp, line1, line2, true ) ) {
-      // Log.v("DistoX", "split " + line.size() + " ==> " + line1.size() + " " + line2.size() );
-      // synchronized( mCurrentStack ) // not neceessary: called in synchronized context
-      {
-        eraseCmd.addAction( EraseAction.ERASE_REMOVE, line );
-        mCurrentStack.remove( line );
-        if ( line1.size() > 1 ) {
-          eraseCmd.addAction( EraseAction.ERASE_INSERT, line1 );
-          mCurrentStack.add( line1 );
-        }
-        if ( line2.size() > 1 ) {
-          eraseCmd.addAction( EraseAction.ERASE_INSERT, line2 );
-          mCurrentStack.add( line2 );
-        }
-      }
-      synchronized( TDPath.mSelectionLock ) {
-        mSelection.removePath( line ); 
-        if ( line1.size() > 1 ) mSelection.insertLinePath( line1 );
-        if ( line2.size() > 1 ) mSelection.insertLinePath( line2 );
-      }
-    // } else {
-      // FIXME 
-      // TDLog.Error( "FAILED splitAt " + lp.x + " " + lp.y );
-      // line.dump();
-    }
-    // checkLines();
-  }
-
   List<DrawingPath> splitPlot( ArrayList< PointF > border, boolean remove ) 
   {
     ArrayList<DrawingPath> paths = new ArrayList<>();
@@ -447,91 +630,6 @@ class Scrap
     return paths;
   }
 
-  void deletePath( DrawingPath path, EraseCommand eraseCmd ) // called by DrawingSurface
-  {
-    doDeletePath( path );
-    // checkLines();
-    if ( eraseCmd != null ) eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
-  }
-
-  // deleting a section line automatically deletes the associated section point(s)
-  void deleteSectionLine( DrawingPath line, String scrap, EraseCommand cmd )
-  {
-    synchronized( mCurrentStack ) {
-      int index = BrushManager.getPointSectionIndex();
-      if ( index >= 0 ) {
-        ArrayList<DrawingPath> todo = new ArrayList<>();
-        for ( ICanvasCommand c : mCurrentStack ) {
-          if ( c.commandType() == 0 ) {
-            DrawingPath p = (DrawingPath)c;
-            if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
-              DrawingPointPath pt = (DrawingPointPath)p;
-              if ( pt.mPointType == index && scrap.equals( pt.getOption( "-scrap" ) ) ) {
-                todo.add(p);
-              }
-            }
-          }
-        }
-        for ( DrawingPath pp : todo ) deletePath( pp, cmd );
-      }
-      deletePath( line, cmd );
-    }
-  }
-
-  void sharpenPointLine( DrawingPointLinePath line ) 
-  {
-    synchronized( mCurrentStack ) {
-      line.makeSharp( );
-    }
-    // checkLines();
-  }
-
-  // @param decimation   log-decimation 
-  void reducePointLine( DrawingPointLinePath line, int decimation ) 
-  {
-    if ( decimation <= 0 ) return;
-    synchronized( TDPath.mSelectionLock ) {
-      mSelection.removePath( line );
-      clearSelected();
-    }
-    synchronized( mCurrentStack ) {
-      int min_size = (line.mType == DrawingPath.DRAWING_PATH_AREA)? 3 : 2;
-      line.makeReduce( decimation, min_size );
-    }
-    synchronized( TDPath.mSelectionLock ) {
-      mSelection.insertPath( line );
-    }
-    // checkLines();
-  }
-
-
-  void rockPointLine( DrawingPointLinePath line ) 
-  {
-    synchronized( TDPath.mSelectionLock ) {
-      mSelection.removePath( line );
-      clearSelected();
-    }
-    synchronized( mCurrentStack ) {
-      line.makeRock( );
-    }
-    synchronized( TDPath.mSelectionLock ) {
-      mSelection.insertPath( line );
-    }
-    // checkLines();
-  }
-
-  void closePointLine( DrawingPointLinePath line )
-  {
-    synchronized( mCurrentStack ) {
-      SelectionPoint sp = mSelection.getSelectionPoint( line.mLast );
-      line.makeClose( );
-      // re-bucket last line point
-      synchronized ( TDPath.mSelectionLock ) {
-        mSelection.rebucket( sp );
-      }
-    }
-  }
-
   // USER STATION ---------------------------------------------------------
   void addUserStationsToList( ArrayList<DrawingStationPath> ret )
   {
@@ -539,6 +637,8 @@ class Scrap
       for ( DrawingStationPath st : mUserStations ) ret.add( st ); 
     }
   }
+
+  boolean hasUserStations() { return mUserStations.size() > 0; }
 
   DrawingStationPath getUserStation( String name )
   {
@@ -603,37 +703,6 @@ class Scrap
     }
     
     // checkLines();
-  }
-
-  void deleteSectionPoint( String scrap_name, EraseCommand cmd )
-  {
-    int index = BrushManager.getPointSectionIndex();
-    synchronized( mCurrentStack ) {
-      for ( ICanvasCommand icc : mCurrentStack ) { // FIXME reverse_iterator
-        if ( icc.commandType() == 0 ) { // DrawingPath
-          DrawingPath path = (DrawingPath)icc;
-          if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
-            DrawingPointPath dpp = (DrawingPointPath) path;
-            if ( dpp.mPointType == index ) {
-              // FIXME GET_OPTION
-              if ( scrap_name.equals( dpp.getOption( "-scrap" ) ) ) {
-                deletePath( path, cmd );
-                return; // true;
-              }
-              // String vals[] = dpp.mOptions.split(" ");
-              // int len = vals.length;
-              // for ( int k = 0; k < len; ++k ) {
-              //   if ( scrap_name.equals( vals[k] ) ) {
-              //     deletePath( path, cmd );
-              //     return;
-              //   }
-              // }
-            }
-          }
-        }
-      }
-    }
-    // return false;
   }
 
   void getBitmapBounds( RectF bounds )
@@ -1786,6 +1855,8 @@ class Scrap
     // checkLines();
   }
 
+  // --------------------------------------------------------------
+
   boolean setRangeAt( float x, float y, float zoom, int type, float size )
   {
     SelectionPoint sp1 = mSelected.mHotItem;
@@ -1864,66 +1935,25 @@ class Scrap
     return true;
   }
 
-  SelectionSet getItemsAt( float x, float y, float radius, int mode, boolean legs, boolean splays, boolean stations, DrawingStationSplay station_splay )
-  {
-    // synchronized ( TDPath.mSelectedLock ) {
-    synchronized ( TDPath.mSelectionLock ) {
-      mSelected.clear();
-      // FIXME_LATEST latests splays are not considered in the selection
-      mSelection.selectAt( mSelected, x, y, radius, mode, legs, splays, stations, station_splay ); 
-      if ( mSelected.mPoints.size() > 0 ) {
-        // Log.v("DistoX", "seleceted " + mSelected.mPoints.size() + " points " );
-        mSelected.nextHotItem();
-      }
-    }
-    return mSelected;
-  }
+  // AREA ACTIONS ----------------------------------------------------
 
-  void addItemAt( float x, float y, float radius )
+  void shiftAreaShaders( float dx, float dy, float s, boolean landscape )
   {
-    synchronized ( TDPath.mSelectionLock ) {
-      mSelected.clear();
-      mSelection.selectAt( mSelected, x, y, radius, mMultiselectionType );
-      for ( SelectionPoint sp : mSelected.mPoints ) {
-        addMultiselection( sp.mItem );
+    synchronized ( mCurrentStack ) {
+      for ( ICanvasCommand c : mCurrentStack ) {
+        if ( c.commandType() == 0 ) {
+          DrawingPath path = (DrawingPath)c;
+          path.mLandscape = landscape;
+          if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
+            DrawingAreaPath area = (DrawingAreaPath)path;
+            area.shiftShaderBy( dx, dy, s );
+          }
+        }
       }
     }
   }
 
-  void splitPointHotItem()
-  { 
-    SelectionPoint sp = mSelected.mHotItem;
-    if ( sp == null ) return;
-    if ( sp.type() != DrawingPath.DRAWING_PATH_LINE && sp.type() != DrawingPath.DRAWING_PATH_AREA ) return;
-    LinePoint lp = sp.mPoint;
-    if ( lp == null ) return;
-    float x = lp.x;
-    float y = lp.y;
-    DrawingPointLinePath line = (DrawingPointLinePath)sp.mItem;
-    LinePoint p1 = line.insertPointAfter( x, y, lp );
-    SelectionPoint sp1 = null;
-    synchronized( TDPath.mSelectionLock ) {
-      sp1 = mSelection.insertPathPoint( line, p1 );
-    }
-    if ( sp1 != null ) {
-      // synchronized( TDPath.mSelectedLock ) {
-      synchronized( TDPath.mSelectionLock ) {
-        mSelected.mPoints.add( sp1 );
-      }
-    }
-  }
-
-  void addCommand( ArrayList<DrawingPath> paths )
-  {
-    for ( ICanvasCommand cmd : mCurrentStack ) {
-      if ( cmd.commandType() == 0 ) paths.add( (DrawingPath) cmd );
-    }
-  }
-
-  void addStationToSelection( DrawingStationName st )
-  {
-    mSelection.insertStationName( st );
-  }
+  // DRAW ACTIONS --------------------------------------------------------
 
   void drawOutline( Canvas canvas, Matrix mat, float scale, RectF bbox )
   {
@@ -2009,6 +2039,7 @@ class Scrap
       for ( DrawingStationPath p : mUserStations ) p.draw( canvas, matrix, scale, bbox );
     }
   }
+
 
   void displayPoints( Canvas canvas, Matrix matrix, RectF bbox, float dot_radius,
                       boolean spoints, boolean slines, boolean sareas, boolean splays, boolean legs_sshots, boolean sstations,
@@ -2228,24 +2259,7 @@ class Scrap
     }
   }
 
-  void shiftAreaShaders( float dx, float dy, float s, boolean landscape )
-  {
-    synchronized ( mCurrentStack ) {
-      for ( ICanvasCommand c : mCurrentStack ) {
-        if ( c.commandType() == 0 ) {
-          DrawingPath path = (DrawingPath)c;
-          path.mLandscape = landscape;
-          if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
-            DrawingAreaPath area = (DrawingAreaPath)path;
-            area.shiftShaderBy( dx, dy, s );
-          }
-        }
-      }
-    }
-  }
-
-  // ----------------------------------------------------------------
-  // PATH_MULTISELECT
+  // PATH MULTISELECT -----------------------------------------------
   // boolean isMultiselection() { return isMultiselection; }
   int getMultiselectionType() { return mMultiselectionType; }
 
@@ -2282,7 +2296,6 @@ class Scrap
     // Log.v("DistoX", "add Multi Selection " + mMultiselectionType + " " + mMultiselected.size() );
   }
 
-  // MULTISELECTION ACTIONS _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
   void deleteMultiselection()
   {
     // if ( ! isMultiselection ) return;

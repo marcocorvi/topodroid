@@ -174,7 +174,7 @@ class DrawingStationName extends DrawingPointPath
   }
 
   @Override
-  public void toDataStream( DataOutputStream dos )
+  public void toDataStream( DataOutputStream dos, int scrap )
   {
     try {
       dos.write('X');
@@ -184,7 +184,7 @@ class DrawingStationName extends DrawingPointPath
       // if ( version >= 401090 )
         dos.writeInt( mLevel );
       // if ( version >= 401160 )
-        dos.writeInt( mScrap );
+        dos.writeInt( (scrap >= 0)? scrap : mScrap );
       dos.writeInt( (int)mXSectionType );
       if ( mXSectionType != PlotInfo.PLOT_NULL ) {
         dos.writeFloat( mAzimuth );

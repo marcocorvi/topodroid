@@ -451,8 +451,9 @@ class DrawingPointPath extends DrawingPath
     // }
   }
 
+  // override mScrap with scrap
   @Override
-  void toDataStream( DataOutputStream dos )
+  void toDataStream( DataOutputStream dos, int scrap )
   {
     String name  = BrushManager.getPointThName(mPointType);
     String group = BrushManager.getPointGroup(mPointType);
@@ -468,7 +469,7 @@ class DrawingPointPath extends DrawingPath
       // if ( version >= 401090 )
         dos.writeInt( mLevel );
       // if ( version >= 401160 )
-        dos.writeInt( mScrap );
+        dos.writeInt( (scrap >= 0)? scrap : mScrap ); 
       // if ( version >= 303066 ) 
         dos.writeUTF( (mPointText != null)? mPointText : "" );
       dos.writeUTF( (mOptions != null)? mOptions : "" );

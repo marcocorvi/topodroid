@@ -153,6 +153,7 @@ class BrushManager
   static boolean isLineClosed( int index )  { return mLineLib != null && mLineLib.isClosed( index ); }
   static boolean isLineSection( int index ) { return mLineLib != null && index == mLineLib.mLineSectionIndex; }
   static boolean isLineWall( int idx )      { return mLineLib != null && idx == mLineLib.mLineWallIndex; }
+  static boolean isLineWallGroup( int idx ) { return mLineLib != null && mLineLib.isWall( idx ); }
   static boolean isLineSlope( int idx )     { return mLineLib != null && idx == mLineLib.mLineSlopeIndex; }
   // static int getLineSectionIndex()       { return (mLineLib == null)? 2 : mLineLib.mLineSectionIndex; }
   static int getLineWallIndex()             { return (mLineLib == null)? 1 : mLineLib.mLineWallIndex; }
@@ -267,9 +268,9 @@ class BrushManager
   // clear      whether the disable all symbols first
   static void makeEnabledListFromPalette( SymbolsPalette palette, boolean clear ) 
   {
-    mPointLib.makeEnabledListFromPalette( palette, clear );
-    mLineLib.makeEnabledListFromPalette( palette, clear );
-    mAreaLib.makeEnabledListFromPalette( palette, clear );
+    if ( mPointLib != null ) mPointLib.makeEnabledListFromPalette( palette, clear );
+    if ( mLineLib  != null ) mLineLib.makeEnabledListFromPalette( palette, clear );
+    if ( mAreaLib  != null ) mAreaLib.makeEnabledListFromPalette( palette, clear );
   }
 
   static private boolean doneMakePaths = false;

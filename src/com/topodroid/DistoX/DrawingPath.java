@@ -512,7 +512,7 @@ class DrawingPath extends RectF
 
   String toTherion( ) { return null; } // FIXME
 
-  void toDataStream( DataOutputStream dos ) { TDLog.Error( "ERROR DrawingPath toDataStream executed"); }
+  void toDataStream( DataOutputStream dos, int scrap ) { TDLog.Error( "ERROR DrawingPath toDataStream with scrap executed"); }
 
   void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ ) { }
 

@@ -136,7 +136,7 @@ class DrawingPhotoPath extends DrawingPointPath
   }
 
   @Override
-  void toDataStream( DataOutputStream dos )
+  void toDataStream( DataOutputStream dos, int scrap )
   {
     try {
       dos.write( 'Y' );
@@ -149,7 +149,7 @@ class DrawingPhotoPath extends DrawingPointPath
       // if ( version >= 401090 ) 
         dos.writeInt( mLevel );
       // if ( version >= 401160 ) 
-        dos.writeInt( mScrap );
+        dos.writeInt( (scrap >= 0)? scrap : mScrap );
       dos.writeUTF( ( mPointText != null )? mPointText : "" );
       dos.writeUTF( ( mOptions != null )? mOptions : "" );
       dos.writeInt( ((int)mId) );

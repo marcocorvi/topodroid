@@ -430,7 +430,7 @@ class DrawingLinePath extends DrawingPointLinePath
   }
 
   @Override
-  void toDataStream( DataOutputStream dos )
+  void toDataStream( DataOutputStream dos, int scrap )
   {
     String name  = BrushManager.getLineThName( mLineType );
     String group = BrushManager.getLineGroup( mLineType );
@@ -446,7 +446,7 @@ class DrawingLinePath extends DrawingPointLinePath
       // if ( version >= 401090 )
         dos.writeInt( mLevel );
       // if ( version >= 401160 )
-        dos.writeInt( mScrap );
+        dos.writeInt( (scrap >= 0)? scrap : mScrap );
       dos.writeUTF( ( mOptions != null )? mOptions : "" );
       
       int npt = size(); // number of line points

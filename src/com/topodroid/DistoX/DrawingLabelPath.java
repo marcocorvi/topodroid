@@ -201,7 +201,7 @@ class DrawingLabelPath extends DrawingPointPath
   }
 
   @Override
-  void toDataStream( DataOutputStream dos )
+  void toDataStream( DataOutputStream dos, int scrap )
   {
     // label has null group
     try {
@@ -215,7 +215,7 @@ class DrawingLabelPath extends DrawingPointPath
       // if ( version >= 401090 ) 
         dos.writeInt( mLevel );
       // if ( version >= 401160 ) 
-        dos.writeInt( mScrap );
+        dos.writeInt( (scrap >= 0)? scrap : mScrap );
       dos.writeUTF( ( mPointText != null )? mPointText : "" );
       dos.writeUTF( ( mOptions != null )? mOptions : "" );
       // TDLog.Log( TDLog.LOG_PLOT, "T " + " " + cx + " " + cy );
@@ -223,5 +223,6 @@ class DrawingLabelPath extends DrawingPointPath
       TDLog.Error( "LABEL out error " + e.toString() );
     }
   }
+
 }
 

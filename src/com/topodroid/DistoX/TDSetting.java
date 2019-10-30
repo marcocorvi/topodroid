@@ -252,6 +252,7 @@ class TDSetting
   static int mExportShotsFormat = -1; // DISTOX_EXPORT_NONE
   static int mExportPlotFormat  = -1; // DISTOX_EXPORT_NONE
   static boolean mTherionMaps   = false;
+  static boolean mSvgRoundTrip  = false;
   static boolean mSvgGrid       = false;
   // static boolean mSvgInHtml     = false;
   static boolean mSvgLineDirection = false;
@@ -828,16 +829,17 @@ class TDSetting
 
     String[] keyExpSvg = TDPrefKey.EXPORT_SVG;
     String[] defExpSvg = TDPrefKey.EXPORT_SVGdef;
-    mSvgGrid           = prefs.getBoolean(     keyExpSvg[0], bool(defExpSvg[0]) ); // DISTOX_SVG_GRID
-    mSvgLineDirection  = prefs.getBoolean(     keyExpSvg[1], bool(defExpSvg[1]) ); // DISTOX_SVG_LINE_DIR
-    mSvgSplays         = prefs.getBoolean(     keyExpSvg[2], bool(defExpSvg[2]) ); // DISTOX_SVG_SPLAYS
+    mSvgRoundTrip      = prefs.getBoolean(     keyExpSvg[0], bool(defExpSvg[0]) ); // DISTOX_SVG_ROUNDTRIP
+    mSvgGrid           = prefs.getBoolean(     keyExpSvg[1], bool(defExpSvg[1]) ); // DISTOX_SVG_GRID
+    mSvgLineDirection  = prefs.getBoolean(     keyExpSvg[2], bool(defExpSvg[2]) ); // DISTOX_SVG_LINE_DIR
+    mSvgSplays         = prefs.getBoolean(     keyExpSvg[3], bool(defExpSvg[3]) ); // DISTOX_SVG_SPLAYS
     // mSvgInHtml      = prefs.getBoolean(     keyExpSvg[ ], bool(defExpSvg[ ]) ); // DISTOX_SVG_IN_HTML
-    mSvgPointStroke    = tryFloat( prefs,      keyExpSvg[3],      defExpSvg[3] );  // DISTOX_SVG_POINT_STROKE
-    mSvgLabelStroke    = tryFloat( prefs,      keyExpSvg[4],      defExpSvg[4] );  // DISTOX_SVG_LABEL_STROKE
-    mSvgLineStroke     = tryFloat( prefs,      keyExpSvg[5],      defExpSvg[5] );  // DISTOX_SVG_LINE_STROKE
-    mSvgGridStroke     = tryFloat( prefs,      keyExpSvg[6],      defExpSvg[6] );  // DISTOX_SVG_GRID_STROKE
-    mSvgShotStroke     = tryFloat( prefs,      keyExpSvg[7],      defExpSvg[7] );  // DISTOX_SVG_SHOT_STROKE
-    mSvgLineDirStroke  = tryFloat( prefs,      keyExpSvg[8],      defExpSvg[8] );  // DISTOX_SVG_LINEDIR_STROKE
+    mSvgPointStroke    = tryFloat( prefs,      keyExpSvg[4],      defExpSvg[4] );  // DISTOX_SVG_POINT_STROKE
+    mSvgLabelStroke    = tryFloat( prefs,      keyExpSvg[4],      defExpSvg[5] );  // DISTOX_SVG_LABEL_STROKE
+    mSvgLineStroke     = tryFloat( prefs,      keyExpSvg[5],      defExpSvg[6] );  // DISTOX_SVG_LINE_STROKE
+    mSvgGridStroke     = tryFloat( prefs,      keyExpSvg[6],      defExpSvg[7] );  // DISTOX_SVG_GRID_STROKE
+    mSvgShotStroke     = tryFloat( prefs,      keyExpSvg[8],      defExpSvg[8] );  // DISTOX_SVG_SHOT_STROKE
+    mSvgLineDirStroke  = tryFloat( prefs,      keyExpSvg[9],      defExpSvg[9] );  // DISTOX_SVG_LINEDIR_STROKE
 
 
     String[] keyExpKml = TDPrefKey.EXPORT_KML;
@@ -1579,8 +1581,6 @@ class TDSetting
       mTherionSplays    = tryBooleanValue( hlp, k, v, bool(def[ 2]) );   
     } else if ( k.equals( key[3] ) ) { // DISTOX_SURVEX_LRUD (bool)
       mSurvexLRUD       = tryBooleanValue( hlp, k, v, bool(def[3]) );
-    // } else if ( k.equals( key[4] ) ) { // DISTOX_SVG_GRID (bool) // not good
-    //   mSvgGrid = tryBooleanValue( hlp, k, v, bool(def[4]) );
     } else if ( k.equals( key[4] ) ) { // DISTOX_TH2_SCALE
       int scale = tryIntValue( hlp, k, v, def[4] );
       if ( scale < 40 ) { scale = 40; ret = "40"; }
@@ -1708,31 +1708,33 @@ class TDSetting
     // Log.v("DistoX", "update pref SVY: " + k );
     String[] key = TDPrefKey.EXPORT_SVG;
     String[] def = TDPrefKey.EXPORT_SVGdef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_SVG_GRID (bool)
-      mSvgGrid = tryBooleanValue( hlp, k, v, bool(def[0]) );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_SVG_LINE_DIR (bool)
-      mSvgLineDirection = tryBooleanValue( hlp, k, v, bool(def[1]) );
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_SVG_SPLAYS (bool)
-      mSvgSplays = tryBooleanValue( hlp, k, v, bool(def[2]) );
+    if ( k.equals( key[ 0 ] ) ) { // DISTOX_SVG_ROUNDTRIP (bool)
+      mSvgRoundTrip = tryBooleanValue( hlp, k, v, bool(def[0]) );
+    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_SVG_GRID (bool)
+      mSvgGrid = tryBooleanValue( hlp, k, v, bool(def[1]) );
+    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_SVG_LINE_DIR (bool)
+      mSvgLineDirection = tryBooleanValue( hlp, k, v, bool(def[3]) );
+    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_SVG_SPLAYS (bool)
+      mSvgSplays = tryBooleanValue( hlp, k, v, bool(def[3]) );
     // } else if ( k.equals( key[ ? ] ) ) { // DISTOX_SVG_IN_HTML (bool)
     // } else if ( k.equals( key[ ? ] ) ) { // DISTOX_SVG_IN_HTML (bool)
     //   mSvgInHtml = tryBooleanValue( hlp, k, bool(def[ ]) );
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_SVG_POINT_STROKE
-      mSvgPointStroke    = tryFloatValue( hlp, k, v, def[3] );
+    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_SVG_POINT_STROKE
+      mSvgPointStroke    = tryFloatValue( hlp, k, v, def[4] );
       if ( mSvgPointStroke < 0.01f ) { mSvgPointStroke = 0.01f; ret = "0.01"; }
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_SVG_LABEL_STROKE
-      mSvgLabelStroke    = tryFloatValue( hlp, k, v, def[4] );
+    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_SVG_LABEL_STROKE
+      mSvgLabelStroke    = tryFloatValue( hlp, k, v, def[5] );
       if ( mSvgLabelStroke < 0.01f ) { mSvgLabelStroke = 0.01f; ret = "0.01"; }
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_SVG_LINE_STROKE
-      mSvgLineStroke     = tryFloatValue( hlp, k, v, def[5] );
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_SVG_GRID_STROKE
-      mSvgGridStroke     = tryFloatValue( hlp, k, v, def[6] );
+    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_SVG_LINE_STROKE
+      mSvgLineStroke     = tryFloatValue( hlp, k, v, def[6] );
+    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_SVG_GRID_STROKE
+      mSvgGridStroke     = tryFloatValue( hlp, k, v, def[7] );
       if ( mSvgGridStroke < 0.01f ) { mSvgGridStroke = 0.01f; ret = "0.01"; }
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_SVG_SHOT_STROKE
-      mSvgShotStroke     = tryFloatValue( hlp, k, v, def[7] );
+    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_SVG_SHOT_STROKE
+      mSvgShotStroke     = tryFloatValue( hlp, k, v, def[8] );
       if ( mSvgShotStroke < 0.01f ) { mSvgShotStroke = 0.01f; ret = "0.01"; }
-    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_SVG_LINEDIR_STROKE
-      mSvgLineDirStroke  = tryFloatValue( hlp, k, v, def[8] );
+    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_SVG_LINEDIR_STROKE
+      mSvgLineDirStroke  = tryFloatValue( hlp, k, v, def[9] );
       if ( mSvgLineStroke < 0.01f ) { mSvgLineStroke = 0.01f; ret = "0.01"; }
     // } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_BEZIER_STEP
     //   mBezierStep  = tryFloatValue( hlp, k, v, def[8] );
@@ -2412,9 +2414,9 @@ class TDSetting
         tf(mTherionMaps), tf(mAutoStations), tf(mTherionSplays), tf(mTherionXvi), mToTherion );
       pw.printf(Locale.US, "PNG scale %.2f, bg color %d\n", mBitmapScale, mBitmapBgcolor );
       pw.printf(Locale.US, "DXF: acad version %d, blocks %c \n", mAcadVersion, tf(mDxfBlocks) );
-      pw.printf(Locale.US, "SVG: shot %.1f, label %.1f, point %.1f, grid %c %.1f, line %.1f, dir %c %.1f, splays %c\n",
+      pw.printf(Locale.US, "SVG: shot %.1f, label %.1f, point %.1f, round-trip %c grid %c %.1f, line %.1f, dir %c %.1f, splays %c\n",
         mSvgShotStroke, mSvgLabelStroke, mSvgPointStroke,
-        tf(mSvgGrid), mSvgGridStroke, mSvgLineStroke, tf(mSvgLineDirection), mSvgLineDirStroke, tf(mSvgSplays) );
+        tf(mSvgRoundTrip), tf(mSvgGrid), mSvgGridStroke, mSvgLineStroke, tf(mSvgLineDirection), mSvgLineDirStroke, tf(mSvgSplays) );
       pw.printf(Locale.US, "KML: stations %c, splays %c\n", tf(mKmlStations), tf(mKmlSplays) );
       pw.printf(Locale.US, "CSV: raw %c, separator \'%c\'\n", tf(mCsvRaw), mCsvSeparator );
 

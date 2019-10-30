@@ -360,7 +360,7 @@ class DrawingXvi
     String color = "blue";
     String name = BrushManager.getPointThName( idx );
     SymbolPoint sp = (SymbolPoint)BrushManager.getPointByIndex( idx );
-    String path = ( sp == null )? null : sp.mXvi;
+    String path = ( sp == null )? null : sp.getXvi();
     if ( path == null ) {
       x1 = TDSetting.mToTherion*(xof - 5);
       y1 = TDSetting.mToTherion*(yof - 5);
