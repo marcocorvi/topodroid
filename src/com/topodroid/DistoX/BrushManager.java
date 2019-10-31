@@ -90,6 +90,7 @@ class BrushManager
 
   static Paint getPointPaint( int idx ) { return (mPointLib == null)? errorPaint : mPointLib.getSymbolPaint( idx ); }
   static Paint getLinePaint(  int idx ) { return (mLineLib  == null)? errorPaint : mLineLib.getSymbolPaint( idx ); }
+  static Paint getLinePaint(  int idx, boolean reversed ) { return (mLineLib  == null)? errorPaint : mLineLib.getLinePaint( idx, reversed ); }
   static Paint getAreaPaint(  int idx ) { return (mAreaLib  == null)? errorPaint : mAreaLib.getSymbolPaint( idx ); }
 
   static int getPointLibSize() { return ( mPointLib == null )? 0 : mPointLib.size(); }
@@ -268,6 +269,7 @@ class BrushManager
   // clear      whether the disable all symbols first
   static void makeEnabledListFromPalette( SymbolsPalette palette, boolean clear ) 
   {
+    if ( palette == null ) return;
     if ( mPointLib != null ) mPointLib.makeEnabledListFromPalette( palette, clear );
     if ( mLineLib  != null ) mLineLib.makeEnabledListFromPalette( palette, clear );
     if ( mAreaLib  != null ) mAreaLib.makeEnabledListFromPalette( palette, clear );

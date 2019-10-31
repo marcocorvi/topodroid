@@ -64,7 +64,7 @@ class SymbolLineLibrary extends SymbolLibrary
 
   Paint getLinePaint( int k, boolean reversed )
   {
-    if ( k < 0 || k >= size() ) return null;
+    if ( k < 0 || k >= size() ) return BrushManager.errorPaint;
     SymbolLine s = (SymbolLine)mSymbols.get(k);
     return reversed ? s.mRevPaint : s.mPaint;
   }

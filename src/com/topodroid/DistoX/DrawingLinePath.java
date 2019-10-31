@@ -70,7 +70,7 @@ class DrawingLinePath extends DrawingPointLinePath
     mLineType = line_type;
     mReversed = false;
     mOutline  = ( BrushManager.isLineWall(mLineType) )? OUTLINE_OUT : OUTLINE_NONE;
-    setPathPaint( BrushManager.mLineLib.getLinePaint( mLineType, mReversed ) );
+    setPathPaint( BrushManager.getLinePaint( mLineType, mReversed ) );
     mLevel     = BrushManager.getLineLevel( mLineType );
   }
 
@@ -245,7 +245,7 @@ class DrawingLinePath extends DrawingPointLinePath
     if ( reversed != mReversed ) {
       mReversed = reversed;
       // retracePath();
-      setPathPaint( BrushManager.mLineLib.getLinePaint( mLineType, mReversed ) );
+      setPathPaint( BrushManager.getLinePaint( mLineType, mReversed ) );
       computeUnitNormal();
     }
   }
@@ -254,7 +254,7 @@ class DrawingLinePath extends DrawingPointLinePath
   {
     mReversed = ! mReversed;
     // retracePath();
-    setPathPaint( BrushManager.mLineLib.getLinePaint( mLineType, mReversed ) );
+    setPathPaint( BrushManager.getLinePaint( mLineType, mReversed ) );
     computeUnitNormal();
   }
 
@@ -265,7 +265,7 @@ class DrawingLinePath extends DrawingPointLinePath
   void setLineType( int type )
   {
     mLineType = type;
-    setPathPaint( BrushManager.mLineLib.getLinePaint( mLineType, mReversed ) );
+    setPathPaint( BrushManager.getLinePaint( mLineType, mReversed ) );
   }
   
   // N.B. canvas is guaranteed ! null

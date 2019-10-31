@@ -148,7 +148,7 @@ class SymbolLibrary
   String getSymbolName( int k )   { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getName(); }
   String getSymbolThName( int k ) { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getThName(); }
   String getSymbolGroup( int k )  { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getGroup(); }
-  Paint getSymbolPaint( int k )   { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getPaint(); }
+  Paint getSymbolPaint( int k )   { return ( k < 0 || k >= mSymbols.size() )? BrushManager.errorPaint : mSymbols.get(k).getPaint(); }
   Path  getSymbolPath( int k )    { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getPath(); }
   boolean isSymbolOrientable( int k )   { return k >= 0 && k < mSymbols.size() && mSymbols.get( k ).isOrientable(); }
   boolean isSymbolEnabled( int k )      { return k >= 0 && k < mSymbols.size() && mSymbols.get( k ).isEnabled(); }
