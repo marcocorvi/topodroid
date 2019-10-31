@@ -575,7 +575,7 @@ class DrawingIO
 
   // =========================================================================
   // EXPORT details
-  // V ... S ... I ...
+  // V ... S ... I ... N nr_scraps
   // paths: P. T, L. A. U. X.
   // F
   // stations: U
@@ -587,8 +587,9 @@ class DrawingIO
     int version = 0;
     int flag = 0;
     float x, y;
+    int kmax = 3; // number of header entries 
     try {
-      for ( int k=0; k<3; ++k ) {
+      for ( int k=0; k<kmax; ++k ) {
         what = dis.read(); // 'V'
         if ( what == 'V' ) {
           flag |= 0x01;
