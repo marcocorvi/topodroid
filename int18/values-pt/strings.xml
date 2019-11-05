@@ -980,6 +980,8 @@
   <string name="pref_local_help_summary">Habilitar manual traduzido</string>
   <!-- UNUSED string name="pref_cosurvey_title">Topo colaborativa</string -->
   <!-- UNUSED string name="pref_cosurvey_summary">Habilitar topo colaborativa</string -->
+  <string name="pref_import_datamode_title">Formato de dados importação</string>
+  <string name="pref_import_datamode_summary">Formato de dados para importação de topos</string>
   <string name="pref_export_shots_title">Exportação padrão de dados</string>
   <string name="pref_export_shots_summary">Formato padrão para exportação de dados</string>
   <string name="pref_export_plot_title">Exportação padrão de croqui</string>
@@ -1129,7 +1131,7 @@
   <string name="pref_section_splay_message">Acima deste ângulo com o plano do corte, a medida auxiliar será pontilhada</string>
   <string name="pref_data_backup_title">Exportação automática</string>
   <string name="pref_data_backup_summary">Exportação automática de dados (exige definição de formato padrão)</string>
-  <string name="pref_zipped_symbols_title">rquivos de símbolos zipados</string>
+  <string name="pref_zipped_symbols_title">Arquivos de símbolos zipados</string>
   <string name="pref_zipped_symbols_summary">Armazenar/carregar arquivos de símbolos em/de arquivo zip</string>
   <string name="pref_fixed_origin_title">Origem do croqui</string>
   <string name="pref_fixed_origin_summary">Origem fixa para croqui</string>
