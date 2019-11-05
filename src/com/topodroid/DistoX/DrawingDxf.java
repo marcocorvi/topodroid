@@ -775,10 +775,12 @@ class DrawingDxf
             for ( Symbol line : linelib.getSymbols() ) {
               String lname = "L_" + line.getThName().replace(':','-');
 	      String ltype = lt_continuous;
-              if ( ! mVersion16 ) {
-	        ltype = lname.equals("L_pit") ? lt_ticks 
-                      : lname.equals("L_border" ) ? lt_center
-                      : lt_continuous;
+              if ( mVersion13 && ! mVersion16 ) {
+	        if ( lname.equals("L_pit") ) { 
+                  ltype = lt_ticks;
+                } else if ( lname.equals("L_border" ) ) {
+                  ltype = lt_center;
+                }
               }
               handle = inc(handle); printLayer( pw2, handle, lname, flag, color, ltype ); 
 	      if ( ++color >= 256 ) color = 1;

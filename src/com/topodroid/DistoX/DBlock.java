@@ -75,7 +75,7 @@ class DBlock
   // boolean mWasRecent = false; // REVISE_RECENT
 
   static final private int BLOCK_BLANK      = 0;
-  static final private int BLOCK_MAIN_LEG   = 1; // primary leg shot
+  static final         int BLOCK_MAIN_LEG   = 1; // primary leg shot
   static final private int BLOCK_SEC_LEG    = 2; // additional shot of a centerline leg
   static final private int BLOCK_BLANK_LEG  = 3; // blank centerline leg-shot
   static final private int BLOCK_BACK_LEG   = 4; // 
@@ -161,6 +161,8 @@ class DBlock
   void setTypeBackLeg() { mBlockType = BLOCK_BACK_LEG; }
   // void setTypeMainLeg()  { mBlockType = BLOCK_MAIN_LEG; }
   void setTypeSplay()   { mBlockType = BLOCK_SPLAY; }
+  
+  void resetBlockType( int type ) { mBlockType = type; }
 
   boolean isTypeBlank() { return mBlockType == BLOCK_BLANK || mBlockType == BLOCK_BLANK_LEG; }
   static boolean isTypeBlank( int t ) { return t == BLOCK_BLANK || t == BLOCK_BLANK_LEG; }

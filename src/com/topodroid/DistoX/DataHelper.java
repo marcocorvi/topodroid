@@ -1033,7 +1033,7 @@ class DataHelper extends DataSetObservable
     if ( myDB == null ) return -1;
     // if ( makesCycle( id, sid, fStation, tStation ) ) return -2;
 
-    // Log.v("DistoXX", "A8 update shot. id " + id + " leg " + leg );
+    // Log.v("DistoX-EXTEND", "A8 update shot. id " + id + " extend " + extend + " leg " + leg );
     if ( tStation == null ) tStation = TDString.EMPTY;
 
     StringWriter sw = new StringWriter();
@@ -1082,6 +1082,18 @@ class DataHelper extends DataSetObservable
     PrintWriter pw = new PrintWriter( sw );
     pw.format( Locale.US, "UPDATE shots SET fStation=\"%s\", tStation=\"%s\" WHERE surveyId=%d AND id=%d",
                fStation, tStation, sid, id );
+    doExecShotSQL( id, sw );
+  }
+
+  private void updateShotNameAndLeg( long id, long sid, String fStation, String tStation, int leg )
+  {
+    if ( myDB == null ) return;
+    if ( fStation == null ) fStation = TDString.EMPTY;
+    if ( tStation == null ) tStation = TDString.EMPTY;
+    StringWriter sw = new StringWriter();
+    PrintWriter pw = new PrintWriter( sw );
+    pw.format( Locale.US, "UPDATE shots SET fStation=\"%s\", tStation=\"%s\", leg=%d WHERE surveyId=%d AND id=%d",
+               fStation, tStation, leg, sid, id );
     doExecShotSQL( id, sw );
   }
 
@@ -2416,9 +2428,14 @@ class DataHelper extends DataSetObservable
   // mergeToNextLeg does not change anything if blk has both FROM and TO stations
   long mergeToNextLeg( DBlock blk, long sid )
   {
+    // Log.v("DistoX-EXTEND", "Merge to next leg " + blk.mId + " < " + blk.mFrom + " - " + blk.mTo + " >" );
     long ret = -1;
+    long extend = DBlock.EXTEND_LEFT;
+    long flag   = DBlock.FLAG_SURVEY;
+    long leg    = DBlock.BLOCK_MAIN_LEG;
+    String comment = "";
     if ( myDB == null ) return ret;
-    Cursor cursor = myDB.query( SHOT_TABLE, new String[] { "id", "fStation", "tStation" },
+    Cursor cursor = myDB.query( SHOT_TABLE, new String[] { "id", "fStation", "tStation", "extend", "flag", "leg", "comment" },
                                 WHERE_SID_ID_MORE, new String[] { Long.toString(sid), Long.toString(blk.mId) },
                                 null, null, "id ASC" ); 
     if (cursor.moveToFirst()) {
@@ -2427,20 +2444,28 @@ class DataHelper extends DataSetObservable
         String to   = cursor.getString(2);
         if ( from.length() > 0 && to.length() > 0 ) {
           ret = cursor.getLong( 0 );
-          // Log.v("DistoX", blk.mId + " < " + from + " - " + to + " > at k " + k );
+          extend = cursor.getLong( 3 );
+          flag   = cursor.getLong( 4 );
+          leg    = cursor.getLong( 5 );
+          comment = cursor.getString( 6 );
+          // Log.v("DistoX-EXTEND", " < " + from + " - " + to + " > at k " + k + " extend " + extend + " leg " + leg );
           if ( k > 0 ) {
             // Log.v("DistoX", blk.mId + " clear shot name " + ret );
-            updateShotName( ret, sid, "", "" );
-            updateShotLeg( ret, sid, LegType.EXTRA ); 
+            updateShotNameAndLeg( ret, sid, "", "", LegType.EXTRA );
+            // updateShotLeg( ret, sid, LegType.EXTRA ); 
             if ( k == 2 ) { // N.B. if k == 2 must set ShotLeg also to intermediate shot
               if ( cursor.moveToPrevious() ) { // overcautious
                 updateShotLeg( cursor.getLong(0), sid, LegType.EXTRA ); 
               }
             }
           }
-          updateShotName( blk.mId, sid, from, to );
+          updateShot( blk.mId, sid, from, to, extend, flag, leg, comment );
           blk.mFrom = from;
           blk.mTo   = to;
+          blk.setExtend( (int)extend, 0 );
+          blk.resetFlag( flag );
+          blk.resetBlockType( (int)leg );
+          blk.mComment   = comment;
           break;
         }
         if ( ! cursor.moveToNext() ) break;
@@ -2737,7 +2762,8 @@ class DataHelper extends DataSetObservable
       null, null, "id" );
     if (cursor.moveToFirst()) {
       do {
-        if ( cursor.getLong(11) == 0 ) { // skip leg-blocks (11 = "leg" flag)
+        int leg = (int)( cursor.getLong(11) );
+        if ( leg == 0 || leg == 2 ) { // skip leg-blocks (11 = "leg" flag): 0==splay, 1==leg, 2==x-splay
           DBlock block = new DBlock();
           fillBlock( sid, block, cursor );
           list.add( block );

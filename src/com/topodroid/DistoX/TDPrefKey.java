@@ -397,9 +397,10 @@ class TDPrefKey
     "DISTOX_EXPORT_TRO_PREF",
     "DISTOX_EXPORT_SVG_PREF",    // 11
     "DISTOX_EXPORT_DXF_PREF",
+    "DISTOX_EXPORT_SHP_PREF",    // 13
     "DISTOX_EXPORT_PNG_PREF",
-    "DISTOX_EXPORT_KML_PREF",    // 14
-    "DISTOX_EXPORT_CSV_PREF",    // 15
+    "DISTOX_EXPORT_KML_PREF",    // 15
+    "DISTOX_EXPORT_CSV_PREF",    // 16
     null
   };
 
@@ -417,6 +418,7 @@ class TDPrefKey
     R.string.pref_cat_exporttro,
     R.string.pref_cat_exportsvg,
     R.string.pref_cat_exportdxf,
+    R.string.pref_cat_exportshp,
     R.string.pref_cat_exportpng,
     R.string.pref_cat_exportkml,
     R.string.pref_cat_exportcsv,
@@ -439,6 +441,7 @@ class TDPrefKey
     -1,
     -1,
     -1,
+    -1,
   };
 
   static String[] EXPORTdef = {
@@ -448,6 +451,7 @@ class TDPrefKey
     TDString.ZERO,
     TDString.NINETY,
     "0.2",
+    TDString.EMPTY,
     TDString.EMPTY,
     TDString.EMPTY,
     TDString.EMPTY,
@@ -739,6 +743,20 @@ class TDPrefKey
     // "1.0",
     TRUE,
     "9",
+  };
+
+  // ------------------------------------------------------------------------------
+  static String[] EXPORT_SHP = {
+    "DISTOX_SHP_GEOREF",             // whether to export plan-sketch georeferenced
+  };
+  static int[] EXPORT_SHPtitle = {
+    R.string.pref_shp_georef_title,
+  };
+  static int[] EXPORT_SHPdesc = {
+    R.string.pref_shp_georef_summary,
+  };
+  static String[] EXPORT_SHPdef = {
+    FALSE,
   };
 
   // ==============================================================================

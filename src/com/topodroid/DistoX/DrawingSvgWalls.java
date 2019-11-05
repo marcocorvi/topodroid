@@ -272,7 +272,7 @@ class DrawingSvgWalls extends DrawingSvgBase
           PrintWriter pw6m  = new PrintWriter(sw6m);
           for ( DrawingStationName st : plot.getStations() ) { // auto-stations
             pw6m.format(Locale.US, 
-                        "<use xlink:href=\"#_m\" width=\"2\" height=\"2\" x=\"-1\" y=\"-1'\" transform=\"matrix(0.798 0 0 -0.798 %.2f %.2f)\" style=\"&MarkerStyle;\"/>\n", 
+                        "<use xlink:href=\"#_m\" width=\"2\" height=\"2\" x=\"-1\" y=\"-1\" transform=\"matrix(0.798 0 0 -0.798 %.2f %.2f)\" style=\"display:inline\"/>\n", 
                         xoff + st.cx, yoff + st.cy );
           }
           out.write( sw6m.getBuffer().toString() );

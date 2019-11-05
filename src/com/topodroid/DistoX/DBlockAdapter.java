@@ -80,7 +80,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     if ( flag == DBlock.FLAG_NO_EXTEND ) {
       for ( int pos=0; pos < mItems.size(); ++pos ) {
         DBlock blk = mItems.get( pos );
-        if ( blk.getIntExtend( ) > 1 ) {
+        if ( blk.getIntExtend( ) > 1 && blk.isLeg() ) {
           mSearch.add( pos );
           if ( blk.mView != null ) blk.mView.setBackgroundColor( TDColor.SEARCH );
         }

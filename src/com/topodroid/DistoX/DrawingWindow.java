@@ -689,8 +689,8 @@ public class DrawingWindow extends ItemDrawer
   {
     DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null, -1 );
     dpath.setPathPaint( BrushManager.highlightPaint );
-    // DrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
-    DrawingUtil.makePath( dpath, x1, y1, x2, y2 );
+    // DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2, xoff, yoff );
+    DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2 );
     mDrawingSurface.setNorthPath( dpath );
     // mLastLinePath = null;
   }
@@ -730,8 +730,8 @@ public class DrawingWindow extends ItemDrawer
 	}
       }
     }
-    // DrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
-    DrawingUtil.makePath( dpath, x1, y1, x2, y2 );
+    // DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2, xoff, yoff );
+    DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2 );
     mDrawingSurface.addFixedPath( dpath, splay, selectable );
   }
 
@@ -747,7 +747,7 @@ public class DrawingWindow extends ItemDrawer
                                      // float xoff, float yoff, 
                                      boolean blue )
   {
-    // Log.v("DistoX", "Section splay angle " + a + " " + TDSetting.mVertSplay );
+    // Log.v("DistoX-SPLAY", "add fixed section splay " + blue );
     DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk, mDrawingSurface.scrapIndex() );
     dpath.setCosine( angle ); 
     Paint paint = blk.getPaint();
@@ -775,8 +775,8 @@ public class DrawingWindow extends ItemDrawer
       }
     }
     // dpath.setPathPaint( blue? BrushManager.paintSplayXViewed : BrushManager.paintSplayXB );
-    // DrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
-    DrawingUtil.makePath( dpath, x1, y1, x2, y2 );
+    // DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2, xoff, yoff );
+    DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2 );
     mDrawingSurface.addFixedPath( dpath, true, false ); // true SPLAY false SELECTABLE
   }
 
@@ -2002,6 +2002,7 @@ public class DrawingWindow extends ItemDrawer
     List<DBlock> list = null;
     if ( PlotInfo.isSection( mType ) ) {
       list = mApp_mData.selectAllShotsAtStations( mSid, mFrom, mTo );
+      // Log.v("DistoX-SPLAY", "select all shots at " + mFrom + " " + mTo + " : " + list.size() );
     } else if ( PlotInfo.isXSection( mType ) ) { 
       // N.B. mTo can be null
       list = mApp_mData.selectShotsAt( mSid, mFrom, false ); // select only splays
@@ -2029,6 +2030,7 @@ public class DrawingWindow extends ItemDrawer
     List<DBlock> list = null;
     if ( PlotInfo.isSection( mType ) ) {
       list = mApp_mData.selectAllShotsAtStations( mSid, mFrom, mTo );
+      // Log.v("DistoX-SPLAY", "select all shots at " + mFrom + " " + mTo + " : " + list.size() );
     } else if ( PlotInfo.isXSection( mType ) ) { 
       // N.B. mTo can be null
       list = mApp_mData.selectShotsAt( mSid, mFrom, false ); // select only splays
@@ -2080,7 +2082,7 @@ public class DrawingWindow extends ItemDrawer
   // called by doRestart, doStart, doRecover
   private void makeSectionReferences( List<DBlock> list, float tt, int skip )
   {
-    // Log.v("DistoX-C", "makeSectionReferences " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    // Log.v("DistoX-SPLAY", "makeSectionReferences blocks " + list.size() + " skip " + skip );
     assert( mLastLinePath == null); // not needed - guaranteed by callers
     // Log.v("DistoX", "Section " + mClino + " " + mAzimuth );
     // DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface ); // FIXME_SK moved out
@@ -2191,7 +2193,10 @@ public class DrawingWindow extends ItemDrawer
     int cnt = 0;
     for ( DBlock b : list ) { // repeat for splays
       ++cnt;
-      if ( cnt < skip || ! b.isSplay() ) continue;
+      if ( cnt < skip || ! b.isSplay() ) {
+        // Log.v("DistoX-SPLAY", "cnt " + cnt + " skip " + skip + " is splay " + b.isSplay() + " " + b.getBlockType() );
+        continue;
+      }
   
       int splay_station = 3; // could use a boolean
       if ( b.mFrom.equals( mFrom ) ) {
@@ -5304,7 +5309,7 @@ public class DrawingWindow extends ItemDrawer
         if ( "csx".equals( ext ) ) {
           doSavePng( manager, type, fullname ); // , toast );
         } else {
-          doSaveWithExt( num, /* mDrawingUtil, */ manager, type, fullname, ext, true ); // toast );
+          doSaveWithExt( num, manager, type, fullname, ext, true ); // toast );
         }
       } else {
 	DrawingCommandManager manager1 = mDrawingSurface.getManager( mPlot1.type );
@@ -5320,11 +5325,16 @@ public class DrawingWindow extends ItemDrawer
     // ext can be dxf, svg
     // FIXME OK PROFILE
     // used also by SavePlotFileTask
-    void doSaveWithExt( DistoXNum num, /* DrawingUtil util, */ DrawingCommandManager manager, long type, final String filename, final String ext, boolean toast )
+    void doSaveWithExt( DistoXNum num, DrawingCommandManager manager, long type, final String filename, final String ext, boolean toast )
     {
       TDLog.Log( TDLog.LOG_IO, "save with ext: " + filename + " ext " + ext );
       // mActivity = context (only to toast)
-      new ExportPlotToFile( mActivity, num, /* util, */ manager, type, filename, ext, toast ).execute();
+      GeoReference station = null;
+      if ( type == PlotInfo.PLOT_PLAN && ext.equals("shp") ) {
+        String origin = num.getOriginStation();
+        station = TDExporter.getGeolocalizedStation( mSid, mApp_mData, 1.0f, true, origin );
+      }
+      new ExportPlotToFile( mActivity, num, manager, type, filename, ext, toast, station ).execute();
     }
 
     // private rotateBackups( String filename )

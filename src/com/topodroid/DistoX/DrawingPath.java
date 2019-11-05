@@ -219,10 +219,11 @@ class DrawingPath extends RectF
     if ( path != null ) {
       mPath = new Path( path );
       mPath.transform( m );
-      mPath.offset( off_x, off_y );
     } else {
       mPath = new Path();
+      mPath.addCircle( 0, 0, TDSetting.mLineThickness, Path.Direction.CCW );
     }
+    mPath.offset( off_x, off_y ); // FIXME-PATH this was only for path != null
   }
 
   void makeStraightPath( float x1, float y1, float x2, float y2, float off_x, float off_y )

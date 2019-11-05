@@ -267,8 +267,8 @@ public class OverviewWindow extends ItemDrawer
         dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk, mOverviewSurface.scrapIndex() );
         dpath.setPathPaint( BrushManager.fixedShotPaint );
       }
-      // DrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
-      DrawingUtil.makePath( dpath, x1, y1, x2, y2 );
+      // DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2, xoff, yoff );
+      DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2 );
       mOverviewSurface.addFixedPath( dpath, splay, false ); // false: non-selectable
     }
 
@@ -677,7 +677,12 @@ public class OverviewWindow extends ItemDrawer
        // rotate  = 0
        (new SavePlotFileTask( this, null, th2Handler, mNum, manager, fullname, mType, 0, PlotSave.OVERVIEW, 0 )).execute();
      } else {
-       (new ExportPlotToFile( this, mNum, manager, mType, fullname, ext, true )).execute();
+       GeoReference station = null;
+       if ( mType == PlotInfo.PLOT_PLAN && ext.equals("shp") ) {
+        String origin = mNum.getOriginStation();
+        station = TDExporter.getGeolocalizedStation( mSid, mData, 1.0f, true, origin );
+       }
+       (new ExportPlotToFile( this, mNum, manager, mType, fullname, ext, true, station )).execute();
      }
    }
 
@@ -917,8 +922,8 @@ public class OverviewWindow extends ItemDrawer
           mDDtotal = 0;
           DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null, -1 );
           path.setPathPaint( BrushManager.fixedBluePaint );
-          path.makePath( null, new Matrix(), mStartX, mStartY );
-          path.mPath.moveTo( mStartX, mStartY );
+          path.makePath( null, new Matrix(), mStartX, mStartY ); // default path 
+          // path.mPath.moveTo( mStartX, mStartY ); FIXME-PATH
           mOverviewSurface.setSecondReference( path );
 	  mMeasurePts.clear();
 	  mMeasurePts.add( new Point2D( mStartX, mStartY ) );
@@ -1125,8 +1130,8 @@ public class OverviewWindow extends ItemDrawer
     mMeasurePts.remove( sz );
     DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null, -1 );
     path.setPathPaint( BrushManager.fixedBluePaint );
-    path.makePath( null, new Matrix(), mBaseX, mBaseY );
-    path.mPath.moveTo( mBaseX, mBaseY );
+    path.makePath( null, new Matrix(), mBaseX, mBaseY ); // default-path
+    // path.mPath.moveTo( mBaseX, mBaseY ); FIXME-PATH
     mOverviewSurface.setSecondReference( path );
     for ( int k=1; k<sz; ++k ) {
       Point2D pt = mMeasurePts.get(k);

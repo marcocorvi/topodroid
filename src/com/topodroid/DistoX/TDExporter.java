@@ -533,6 +533,23 @@ class TDExporter
 
   static private final float EARTH_RADIUS1 = (float)(6378137 * Math.PI / 180.0f); // semimajor axis [m]
   static private final float EARTH_RADIUS2 = (float)(6356752 * Math.PI / 180.0f);
+  static private float mERadius;
+  static private float mSRadius;
+
+  static GeoReference getGeolocalizedStation( long sid, DataHelper data, float asl_factor, boolean ellipsoid_altitude, String station )
+  {
+    float decl = data.getSurveyDeclination( sid );
+    if ( decl >= SurveyInfo.DECLINATION_MAX ) decl = 0; // if unset use 0
+
+    List<DistoXNum> nums = getGeolocalizedData( sid, data, decl, asl_factor, ellipsoid_altitude );
+    if ( nums == null ) return null;
+    for ( DistoXNum num : nums ) {
+      for ( NumStation st : num.getStations() ) {
+        if ( station.equals( st.name ) ) return new GeoReference( st.e, st.s, st.v, mERadius, mSRadius );
+      }
+    }
+    return null;
+  }
 
   static private List<DistoXNum> getGeolocalizedData( long sid, DataHelper data, float decl, float asl_factor, boolean ellipsoid_altitude )
   {
@@ -555,7 +572,7 @@ class TDExporter
     return nums;
   }
 
-  static private void makeGeolocalizedData( DistoXNum num, FixedInfo origin, float asl_factor, boolean ellipsoid_altitude )
+  static private void  makeGeolocalizedData( DistoXNum num, FixedInfo origin, float asl_factor, boolean ellipsoid_altitude )
   {
 
     float lat = (float)origin.lat;
@@ -569,6 +586,9 @@ class TDExporter
 
     s_radius = 1 / s_radius;
     e_radius = 1 / e_radius;
+
+    mERadius = e_radius; // save radii factors for getGeolocalizedStation
+    mSRadius = s_radius;
 
     // Log.v("DistoX", "st cnt " + NumStation.cnt + " size " + num.getStations().size() );
 

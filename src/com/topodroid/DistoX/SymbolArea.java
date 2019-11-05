@@ -95,7 +95,7 @@ class SymbolArea extends Symbol
     mPaint.setStrokeCap(Paint.Cap.ROUND);
     mPaint.setStrokeWidth( TDSetting.mLineThickness );
     makeShader( mBitmap, mXMode, mYMode, true );
-    makePath();
+    makeAreaPath();
   }
 
   // FIXME AREA_ORIENT
@@ -115,7 +115,7 @@ class SymbolArea extends Symbol
     }
   }
 
-  private void makePath()
+  private void makeAreaPath()
   {
     mPath = new Path();
     if ( mCloseHorizontal ) {
@@ -136,7 +136,7 @@ class SymbolArea extends Symbol
     mOrientation = 0;
 
     readFile( filepath, locale, iso );
-    makePath();
+    makeAreaPath();
   }
 
   private Bitmap makeBitmap( int[] pxl, int w1, int h1 )

@@ -578,9 +578,10 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeFwd( cat, key[10], tit[10],          N,                   ctx, hlp ),
       makeFwd( cat, key[11], tit[11],          N,                   ctx, hlp ),
       makeFwd( cat, key[12], tit[12],          N,                   ctx, hlp ),
-      makeFwd( cat, key[13], tit[13],          N,                   ctx, hlp ),
-      makeFwd( cat, key[14], tit[14],          T,                   ctx, hlp ),
-      makeFwd( cat, key[15], tit[15],          T,                   ctx, hlp )
+      makeFwd( cat, key[13], tit[13],          T,                   ctx, hlp ),
+      makeFwd( cat, key[14], tit[14],          N,                   ctx, hlp ),
+      makeFwd( cat, key[15], tit[15],          T,                   ctx, hlp ),
+      makeFwd( cat, key[16], tit[16],          T,                   ctx, hlp )
     };
   }
 
@@ -610,6 +611,18 @@ class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+
+  static TDPref[] makeShpPrefs( Context ctx, TDPrefHelper hlp )
+  {
+    int cat = TDPrefActivity.PREF_CATEGORY_SHP;
+    String[] key = TDPrefKey.EXPORT_SHP;
+    int[] tit = TDPrefKey.EXPORT_SHPtitle;
+    int[] dsc = TDPrefKey.EXPORT_SHPdesc;
+    String[] def = TDPrefKey.EXPORT_SHPdef;
+    return new TDPref[ ] {
+      makeCbx( cat, key[0], tit[0], dsc[0], T, def[0],         ctx, hlp )
+    };
+  }
 
   static TDPref[] makeSvxPrefs( Context ctx, TDPrefHelper hlp )
   {

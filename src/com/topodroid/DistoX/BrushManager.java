@@ -41,7 +41,7 @@ class BrushManager
   static SymbolPointLibrary mPointLib = null;
   static SymbolLineLibrary  mLineLib  = null;
   static SymbolAreaLibrary  mAreaLib  = null;
-  static SymbolPoint mStationSymbol   = null;
+  static private SymbolPoint mStationSymbol   = null;
 
   // -----------------------------------------------------------
   static boolean tryLoadMissingPoint( String thname ) { return mPointLib != null && mPointLib.tryLoadMissingPoint( thname ); }
@@ -239,6 +239,9 @@ class BrushManager
     }
   }
 
+  static Paint getStationPaint() { return (mStationSymbol == null)? errorPaint : mStationSymbol.mPaint; }
+  static Path  getStationPath()  { return (mStationSymbol == null)? null : mStationSymbol.mPath; }
+
   static void loadAllLibraries( Context ctx, Resources res ) 
   {
     makeStationSymbol( res );
@@ -410,21 +413,21 @@ class BrushManager
     if ( points != null ) {
       for ( Symbol p : points.getSymbols() ) if ( p.isEnabled() ) {
         String fname = p.getThName();
-        if ( ! fname.equals("user") ) palette.addPointFilename( fname );
+        if ( ! "user".equals(fname) ) palette.addPointFilename( fname );
       }
     }
     SymbolLineLibrary lines = mLineLib;
     if ( lines != null ) {
       for ( Symbol p : lines.getSymbols() ) if ( p.isEnabled() ) {
         String fname = p.getThName();
-        if ( ! fname.equals("user") ) palette.addLineFilename( fname );
+        if ( ! "user".equals(fname) ) palette.addLineFilename( fname );
       }
     }
     SymbolAreaLibrary areas = mAreaLib;
     if ( areas != null ) {
       for ( Symbol p : areas.getSymbols() ) if ( p.isEnabled() ) {
         String fname = p.getThName();
-        if ( ! fname.equals("user") ) palette.addAreaFilename( fname );
+        if ( ! "user".equals(fname) ) palette.addAreaFilename( fname );
       }
     }
     return palette;

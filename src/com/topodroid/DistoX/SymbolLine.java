@@ -59,7 +59,7 @@ class SymbolLine extends Symbol
   {
     super( th_name, group, fname );
     init( name, color, 1 );
-    makePath();
+    makeLinePath();
     mLevel = level;
   }
 
@@ -68,7 +68,7 @@ class SymbolLine extends Symbol
   {
     super( th_name, group, fname );
     init( name, color, width );
-    makePath();
+    makeLinePath();
     mLevel = level;
   }
 
@@ -79,7 +79,7 @@ class SymbolLine extends Symbol
     mPaint.setPathEffect( effect_dir );
     mRevPaint.setPathEffect( effect_rev );
     mHasEffect = true;
-    makePath();
+    makeLinePath();
     mLevel = level;
   }
 
@@ -107,10 +107,10 @@ class SymbolLine extends Symbol
     mClosed = false;
     mStyleX = 1;
     readFile( filepath, locale, iso );
-    makePath();
+    makeLinePath();
   }
 
-  private void makePath()
+  private void makeLinePath()
   {
     mPath = new Path();
     mPath.moveTo(-50, 0 );

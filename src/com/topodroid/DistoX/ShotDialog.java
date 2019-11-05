@@ -502,26 +502,32 @@ class ShotDialog extends MyDialog
     boolean all_splay = mCBallSplay.isChecked();
     // FIXME_X2_SPLAY boolean x_splay = (mCBxSplay != null) && mCBxSplay.isChecked();
     boolean clear_xsplay = ( mCBxSplay != null ) && mCBxSplay.isChecked(); // FIXME_X3_SPLAY whether to clear other-splay value
-    boolean leg_next = false;
-    boolean shot_secleg = false;
+    // boolean leg_next = false;
+    // boolean shot_secleg = false;
     if ( mCBlegPrev.isChecked() ) {
-      shot_from = "";
-      shot_to   = "";
-      shot_secleg  = true;
-      // do_backleg = false;
-      all_splay = false;
-      clear_xsplay = false;
+      mBlk.setTypeSecLeg();
+      mParent.updateShot( "", "", DBlock.EXTEND_IGNORE, 0, 0, LegType.EXTRA, "", mBlk );
+      return;
+      // shot_from = "";
+      // shot_to   = "";
+      // shot_secleg  = true;
+      // // do_backleg = false;
+      // all_splay = false;
+      // clear_xsplay = false;
     } else if ( mCBlegNext.isChecked() ) {
-      leg_next  = true;
-      // shot_secleg  = false;
-      // do_backleg = false;
-      all_splay = false;
-      clear_xsplay = false;
+      long id = mParent.mergeToNextLeg( mBlk );
+      if ( id >= 0 ) {
+        shot_from = mBlk.mFrom;
+        shot_to   = mBlk.mTo;
+      }
+      return;
+      // leg_next  = true;
+      // all_splay = false;
+      // clear_xsplay = false;
     } else {
       shot_from = TDUtil.noSpaces( mETfrom.getText().toString() );
       // if ( shot_from == null ) { shot_from = ""; }
       shot_to = TDUtil.noSpaces( mETto.getText().toString() );
-      // shot_secleg = false;
       do_backleg = ( shot_from.length() > 0 ) && ( shot_to.length() > 0 );
     }
     // Log.v("DistoXX", "do backleg " + do_backleg + " value " + backleg_val );
@@ -559,23 +565,24 @@ class ShotDialog extends MyDialog
 
     mBlk.resetFlag( shot_flag );
 
-    if ( shot_secleg ) {
-      // Log.v("DistoX", "block set sec-leg type ");
-      mBlk.setTypeSecLeg();
-    } else if ( leg_next ) {
-      // do_backleg = false; // not neceessary
-      long id = mParent.mergeToNextLeg( mBlk );
-      if ( id >= 0 ) {
-        shot_from = mBlk.mFrom;
-        shot_to   = mBlk.mTo;
-      }
-    }
+    // if ( shot_secleg ) {
+    //   // Log.v("DistoX", "block set sec-leg type ");
+    //   mBlk.setTypeSecLeg();
+    // } else if ( leg_next ) { // FIXME this can go immediately after the test of the checkbox
+    //   // do_backleg = false; // not neceessary
+    //   long id = mParent.mergeToNextLeg( mBlk );
+    //   if ( id >= 0 ) {
+    //     shot_from = mBlk.mFrom;
+    //     shot_to   = mBlk.mTo;
+    //   }
+    //   return;
+    // }
  
     int extend = shot_extend;
     boolean sflen = shot_from.length() > 0;
     boolean stlen = shot_to.length() > 0;
     if ( mBlk.getIntExtend() != shot_extend ) {
-      if ( leg_next || ( sflen && stlen ) ) { // leg
+      if ( /* leg_next || */ ( sflen && stlen ) ) { // leg
         mBlk.setExtend( extend, DBlock.STRETCH_NONE ); // FIXME_STRETCH
       } else if ( ( sflen && ! stlen ) || ( stlen && ! sflen ) ) { // splay
         // extend = shot_extend + DBlock.EXTEND_FVERT;
@@ -615,9 +622,8 @@ class ShotDialog extends MyDialog
       mParent.updateSplayLegType( mBlk, LegType.NORMAL );
     } else {
       // mBlk.setName( shot_from, shot_to ); // done by parent.updateShot
-      // if ( shot_secleg ) mBlk.setTypeSecLeg(); // FIXME maybe not necessary
       long leg = mBlk.isSplay() ? mBlk.getLegType()  // HERE clear_xsplay = false 
-               : shot_secleg ? LegType.EXTRA 
+               // : shot_secleg ? LegType.EXTRA 
                : LegType.NORMAL ;
       if ( do_backleg && backleg_val ) {
         leg = LegType.BACK;

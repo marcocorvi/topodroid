@@ -889,7 +889,9 @@ class DrawingCommandManager
       }
     }
 
-    mCurrentScrap.draw( c, mat, sca );
+    for ( Scrap scrap : mScraps ) {
+      scrap.draw( c, mat, sca );
+    }
 
     // checkLines();
     return bitmap;

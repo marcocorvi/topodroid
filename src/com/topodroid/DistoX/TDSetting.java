@@ -96,6 +96,7 @@ class TDSetting
   }
 
   static boolean mDxfBlocks = true; // DXF_BLOCKS
+  static boolean mShpGeoref = false;
 
   static float mAlgoMinAlpha = 0.1f;
   static float mAlgoMinBeta  = 4.0f;
@@ -863,6 +864,10 @@ class TDSetting
     mDxfBlocks   =  prefs.getBoolean(     keyExpDxf[0], bool(defExpDxf[0]) ); // DISTOX_DXF_BLOCKS
     mAcadVersion = tryInt(   prefs,       keyExpDxf[1],      defExpDxf[1] );  // DISTOX_ACAD_VERSION choice: 9, 13, 16
   
+    String[] keyExpShp = TDPrefKey.EXPORT_SHP;
+    String[] defExpShp = TDPrefKey.EXPORT_SHPdef;
+    mShpGeoref   =  prefs.getBoolean(     keyExpShp[0], bool(defExpShp[0]) ); // DISTOX_SHP_GEOREF
+
     String[] keyData = TDPrefKey.DATA;
     String[] defData = TDPrefKey.DATAdef;
     mCloseDistance = tryFloat( prefs,          keyData[ 0],      defData[ 0] );  // DISTOX_CLOSE_DISTANCE
@@ -1033,6 +1038,7 @@ class TDSetting
       case TDPrefActivity.PREF_CATEGORY_DAT:    return updatePrefDat( hlp, k, v );
       case TDPrefActivity.PREF_CATEGORY_SVG:    return updatePrefSvg( hlp, k, v );
       case TDPrefActivity.PREF_CATEGORY_DXF:    return updatePrefDxf( hlp, k, v );
+      case TDPrefActivity.PREF_CATEGORY_SHP:    return updatePrefShp( hlp, k, v );
       case TDPrefActivity.PREF_CATEGORY_PNG:    return updatePrefPng( hlp, k, v );
       case TDPrefActivity.PREF_CATEGORY_KML:    return updatePrefKml( hlp, k, v );
       case TDPrefActivity.PREF_CATEGORY_CSV:    return updatePrefCsv( hlp, k, v );
@@ -1655,6 +1661,19 @@ class TDSetting
       mSurvexEol = ( tryStringValue( hlp, k, v, def[2] ).equals(def[0]) )? "\n" : "\r\n";
     } else {
       TDLog.Error("missing EXPORT CSV key: " + k );
+    }
+    return null;
+  }
+
+  private static String updatePrefShp( TDPrefHelper hlp, String k, String v )
+  {
+    // Log.v("DistoX", "update pref DXF: " + k );
+    String[] key = TDPrefKey.EXPORT_SHP;
+    String[] def = TDPrefKey.EXPORT_SHPdef;
+    if ( k.equals( key[ 0 ] ) ) { // DISTOX_SHP_GEOREF (bool)
+      mShpGeoref = tryBooleanValue( hlp, k, v, bool(def[ 0 ]) );
+    } else {
+      TDLog.Error("missing EXPORT SHP key: " + k );
     }
     return null;
   }
@@ -2417,6 +2436,7 @@ class TDSetting
       pw.printf(Locale.US, "SVG: shot %.1f, label %.1f, point %.1f, round-trip %c grid %c %.1f, line %.1f, dir %c %.1f, splays %c\n",
         mSvgShotStroke, mSvgLabelStroke, mSvgPointStroke,
         tf(mSvgRoundTrip), tf(mSvgGrid), mSvgGridStroke, mSvgLineStroke, tf(mSvgLineDirection), mSvgLineDirStroke, tf(mSvgSplays) );
+      pw.printf(Locale.US, "SHP: georef-plan %c\n", tf(mShpGeoref) );
       pw.printf(Locale.US, "KML: stations %c, splays %c\n", tf(mKmlStations), tf(mKmlSplays) );
       pw.printf(Locale.US, "CSV: raw %c, separator \'%c\'\n", tf(mCsvRaw), mCsvSeparator );
 

@@ -183,7 +183,7 @@ class ProjectionDialog extends MyDialog
       dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk, 0 );
       dpath.setPathPaint( BrushManager.labelPaint );
     }
-    // mDrawingUtil.makePath( dpath, x1, y1, x2, y2, mOffset.x, mOffset.y );
+    // mDrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2, mOffset.x, mOffset.y );
     dpath.mPath = new Path();
     dpath.mPath.moveTo( x1, y1 );
     dpath.mPath.lineTo( x2, y2 );

@@ -32,9 +32,10 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     private boolean mToast;
     // private final DrawingUtil mUtil;
     private String mFormat;
+    private GeoReference mStation;
 
     ExportPlotToFile( Context context, DistoXNum num, /* DrawingUtil util, */ DrawingCommandManager command,
-                         long type, String name, String ext, boolean toast )
+                      long type, String name, String ext, boolean toast, GeoReference station )
     {
       // Log.v("DistoX", "export plot to file cstr. " + name );
       // FIXME assert( ext != null );
@@ -46,6 +47,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
       mFullName = name;
       mExt      = ext;
       mToast    = toast;
+      mStation  = station;
     }
 
     @Override
@@ -69,7 +71,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
           // final FileOutputStream out = new FileOutputStream( filename );
           TDLog.Log( TDLog.LOG_IO, "export plot to file " + filename );
           if ( mExt.equals("shp") ) { 
-	    DrawingShp.write( filename, mCommand, mType );
+	    DrawingShp.write( filename, mCommand, mType, mStation );
 	  } else {
             TDPath.checkPath( filename );
             final FileWriter fw = new FileWriter( filename );

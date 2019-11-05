@@ -49,6 +49,8 @@ class DistoXNum
   private float mErr2;
   private int mLenCnt;
 
+  String getOriginStation() { return (mStartStation == null)? null : mStartStation.name; }
+
   private void resetStats()
   {
     mLenCnt = 0;

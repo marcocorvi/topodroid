@@ -36,12 +36,21 @@ class DrawingShp
 {
   // @param basepath   TopoDroid/shp/survey-plot
   // @return true if successful
-  static boolean write( String basepath, DrawingCommandManager plot, long type )
+  static boolean write( String basepath, DrawingCommandManager plot, long type, GeoReference station )
   {
     float scale = 1.0f/DrawingUtil.SCALE_FIX; // TDSetting.mDxfScale; 
+    File dir   = null;
     float xoff = 0;
     float yoff = 0;
-    File dir   = null;
+    float xscale = scale;
+    float yscale = scale;
+    if ( station != null ) {
+      xoff = station.e;
+      yoff = station.s;
+      xscale = scale * station.eradius;
+      yscale = scale * station.sradius;
+    }
+
     try {
       dir = new File( basepath );
       if ( ! dir.exists() && ! dir.mkdir() ) {
@@ -63,7 +72,7 @@ class DrawingShp
       }
       ShpSegment shp_shot = new ShpSegment( basepath + "/shot", files );
 
-      shp_shot.writeSegments( shots, xoff, yoff, scale );
+      shp_shot.writeSegments( shots, xoff, yoff, xscale, yscale );
 
       // points shapefile
       ArrayList< DrawingPointPath > points = new ArrayList< DrawingPointPath >();
@@ -81,16 +90,16 @@ class DrawingShp
         }
       }
       ShpPoint shp_point = new ShpPoint( basepath + "/point", files );
-      shp_point.writePoints( points, xoff, yoff, scale );
+      shp_point.writePoints( points, xoff, yoff, xscale, yscale );
       ShpPolyline shp_line = new ShpPolyline( basepath + "/line", DrawingPath.DRAWING_PATH_LINE, files );
-      shp_line.writeLines( lines, xoff, yoff, scale );
+      shp_line.writeLines( lines, xoff, yoff, xscale, yscale );
       ShpPolyline shp_area = new ShpPolyline( basepath + "/area", DrawingPath.DRAWING_PATH_AREA, files );
-      shp_area.writeAreas( areas, xoff, yoff, scale );
+      shp_area.writeAreas( areas, xoff, yoff, xscale, yscale );
 
       // stations: xoff+name.cx, yoff+name.cy
       List<DrawingStationName> stations = plot.getStations();
       ShpStation shp_station = new ShpStation( basepath + "/station", files );
-      shp_station.writeStations( stations, xoff, yoff, scale );
+      shp_station.writeStations( stations, xoff, yoff, xscale, yscale );
 
       // Log.v("DistoX", "SHP export stations " + stations.size() + " points " + points.size() );
       

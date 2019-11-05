@@ -62,7 +62,7 @@ class DrawingStationPath extends DrawingPath
     mScale = DrawingPointPath.SCALE_NONE; // scale
     // mPath = null;
     setScale( scale );
-    mPaint = BrushManager.mStationSymbol.mPaint;
+    mPaint = BrushManager.getStationPaint();
     // Log.v( TopoDroidApp.TAG, "Point cstr " + type + " orientation " + mOrientation + " flip " + mFlip );
   }
 
@@ -81,7 +81,7 @@ class DrawingStationPath extends DrawingPath
     mScale = DrawingPointPath.SCALE_NONE; // scale
     // mPath = null;
     setScale( scale );
-    mPaint = BrushManager.mStationSymbol.mPaint;
+    mPaint = BrushManager.getStationPaint();
     // Log.v( TopoDroidApp.TAG, "Point cstr " + type + " orientation " + mOrientation + " flip " + mFlip );
     setBBox( cx - 1, cx + 1, cy - 1, cy + 1 );
   }
@@ -108,7 +108,7 @@ class DrawingStationPath extends DrawingPath
       }
       Matrix m = new Matrix();
       m.postScale(f,f);
-      makePath( BrushManager.mStationSymbol.mPath, m, cx, cy ); // mXpos, mYpos );
+      makePath( BrushManager.getStationPath(), m, cx, cy ); // mXpos, mYpos );
     }  
   }
       

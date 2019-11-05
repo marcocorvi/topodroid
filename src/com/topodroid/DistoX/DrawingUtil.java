@@ -52,7 +52,7 @@ class DrawingUtil
   static private int toBoundY( float x, float y ) { return Math.round(y); }
 
   static
-  void makePath( DrawingPath dpath, float xx1, float yy1, float xx2, float yy2 )
+  void makeDrawingPath( DrawingPath dpath, float xx1, float yy1, float xx2, float yy2 )
   {
     dpath.mPath = new Path();
     float x1 = toSceneX( xx1, yy1 );
@@ -65,7 +65,7 @@ class DrawingUtil
   }
 
   static
-  void makePath( DrawingPath dpath, float xx1, float yy1, float xx2, float yy2, float xoff, float yoff )
+  void makeDrawingPath( DrawingPath dpath, float xx1, float yy1, float xx2, float yy2, float xoff, float yoff )
   {
     dpath.mPath = new Path();
     float x1 = toSceneX( xx1, yy1 );

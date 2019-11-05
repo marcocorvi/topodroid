@@ -137,9 +137,9 @@ class DrawingSpecialPath extends DrawingPath
   private void resetPath()
   {
     setPathPaint( BrushManager.labelPaint );
-    Path p = new Path();
-    p.addCircle( 0, 0, TDSetting.mLineThickness, Path.Direction.CCW );
-    makePath( p, new Matrix(), cx, cy );
+    // Path p = new Path();
+    // p.addCircle( 0, 0, TDSetting.mLineThickness, Path.Direction.CCW );
+    makePath( null, new Matrix(), cx, cy ); // FIXME-PATH make default path
   }
 
   // no export to cSurevy

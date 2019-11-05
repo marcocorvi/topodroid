@@ -98,11 +98,7 @@ class SymbolPoint extends Symbol
     mName  = n1;
     mDxf   = null;
     mPaint = makePaint( c1, Paint.Style.STROKE ); // FIXME style
-    if ( path != null ) {
-      makePath( path );
-    } else {
-      makePath( );
-    }
+    makePointPath( path );
     mOrigPath = new Path( mPath );
     
     mOrientable = orientable;
@@ -117,11 +113,7 @@ class SymbolPoint extends Symbol
     mName  = n1;
     mDxf   = null;
     mPaint = makePaint( c1, Paint.Style.STROKE ); //FIXME style
-    if ( path != null ) {
-      makePath( path );
-    } else {
-      makePath( );
-    }
+    makePointPath( path );
     mOrigPath = new Path( mPath );
 
     mOrientable = orientable;
@@ -307,7 +299,7 @@ class SymbolPoint extends Symbol
                   mThName = th_name;
                   mGroup  = group;
                   mPaint  = makePaint( color, style );
-                  makePath( path );
+                  makePointPath( path );
                   mOrigPath = new Path( mPath );
                   // mPoint1 = new SymbolPointBasic( name, th_name, null, fname, color, path );
                 // } else if ( cnt == 1 ) {
@@ -335,19 +327,19 @@ class SymbolPoint extends Symbol
     // Log.v(  TopoDroidApp.TAG, "Symbol Point read File " + pathname + " csurvey " + mCsxLayer );
   }
 
-  private void makePath()
-  {
-    mPath = new Path();
-    mPath.moveTo(0,0);
-    String pname = "P_" + mThName.replace(':', '-');
-    mDxf  = "  0\nLINE\n  8\n" + pname + "\n" 
-          + "  100\nAcDbEntity\n  100\nAcDbLine\n"
-          + "  10\n0.0\n  20\n0.0\n  30\n0.0\n"
-          + "  11\n1.0\n  21\n0.0\n  31\n0.0\n"; // 1 mm long
-    mCsx = "";
-    mSvg = "";
-    mXvi = "";
-  }
+  // private void makePointPath()
+  // {
+  //   mPath = new Path();
+  //   mPath.moveTo(0,0);
+  //   String pname = "P_" + mThName.replace(':', '-');
+  //   mDxf  = "  0\nLINE\n  8\n" + pname + "\n" 
+  //         + "  100\nAcDbEntity\n  100\nAcDbLine\n"
+  //         + "  10\n0.0\n  20\n0.0\n  30\n0.0\n"
+  //         + "  11\n1.0\n  21\n0.0\n  31\n0.0\n"; // 1 mm long
+  //   mCsx = "";
+  //   mSvg = "";
+  //   mXvi = "";
+  // }
 
   /* Make the path from its stringn description
    * The path string description is composed of the following directives
@@ -357,8 +349,21 @@ class SymbolPoint extends Symbol
    *     - "addCircle X Y R"
    *     - "arcTo X1 Y1 X2 Y2 A0 DA"
    */
-  private void makePath( String path )
+  private void makePointPath( String path )
   {
+    if ( path == null ) {
+      mPath = new Path();
+      mPath.moveTo(0,0);
+      String pname = "P_" + mThName.replace(':', '-');
+      mDxf  = "  0\nLINE\n  8\n" + pname + "\n" 
+            + "  100\nAcDbEntity\n  100\nAcDbLine\n"
+            + "  10\n0.0\n  20\n0.0\n  30\n0.0\n"
+            + "  11\n1.0\n  21\n0.0\n  31\n0.0\n"; // 1 mm long
+      mCsx = "";
+      mSvg = "";
+      mXvi = "";
+      return;
+    }
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter( sw ); // DXF writer
     StringWriter sv1 = new StringWriter();

@@ -2091,7 +2091,7 @@ public class ShotWindow extends Activity
     // Log.v("DistoX", "merge next leg: block " + blk.mId + " leg " + id );
     if ( id >= 0 && id != blk.mId ) {
       // mDataAdapter.updateBlockName( id, "", "" ); // name has already been updated in DB
-      updateDisplay(); // FIXME change only block with id
+      updateDisplay(); // FIXME change only block with id and blk.mId
     }
     return id;
   }

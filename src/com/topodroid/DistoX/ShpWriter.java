@@ -681,7 +681,7 @@ class ShpPoint extends ShpObject
   }
 
   // write headers for POINT
-  boolean writePoints( List<DrawingPointPath> pts, float x0, float y0, float scale ) throws IOException
+  boolean writePoints( List<DrawingPointPath> pts, float x0, float y0, float xscale, float yscale ) throws IOException
   {
     int n_pts = (pts != null)? pts.size() : 0;
     // Log.v("DistoX", "SHP write points " + n_pts );
@@ -704,7 +704,7 @@ class ShpPoint extends ShpObject
     int shxLength = 50 + n_pts * shxRecLen;
     int dbfLength = 33 + n_fld * 32 + n_pts * dbfRecLen; // [Bytes]
 
-    setBoundsPoints( pts, x0, y0, scale );
+    setBoundsPoints( pts, x0, y0, xscale, yscale );
     // Log.v("DistoX", "POINTZ " + pts.size() + " len " + shpLength + " / " + shxLength + " / " + dbfLength );
     // Log.v("DistoX", "bbox X " + xmin + " " + xmax );
 
@@ -723,8 +723,8 @@ class ShpPoint extends ShpObject
       shpBuffer.order(ByteOrder.LITTLE_ENDIAN);   
       shpBuffer.putInt( SHP_POINT );
       // Log.v("DistoX", "POINTZ " + cnt + ": " + pt.e + " " + pt.s + " " + pt.v + " offset " + offset );
-      shpBuffer.putDouble( x0+scale*pt.cx );
-      shpBuffer.putDouble( y0-scale*pt.cy );
+      shpBuffer.putDouble( x0+xscale*pt.cx );
+      shpBuffer.putDouble( y0-yscale*pt.cy );
 
       writeShxRecord( offset, shpRecLen );
       fields[0] = BrushManager.getPointThName( pt.mPointType );
@@ -742,17 +742,17 @@ class ShpPoint extends ShpObject
   @Override protected int getShpRecordLength( ) { return 14; }
     
   // Utility: set the bounding box of the set of geometries
-  private void setBoundsPoints( List<DrawingPointPath> pts, float x0, float y0, float scale ) 
+  private void setBoundsPoints( List<DrawingPointPath> pts, float x0, float y0, float xscale, float yscale ) 
   {
     if ( pts.size() == 0 ) {
       xmin = xmax = ymin = ymax = zmin = zmax = 0.0;
       return;
     }
     DrawingPointPath pt = pts.get(0);
-    initBBox( x0+scale*pt.cx, y0-scale*pt.cy );
+    initBBox( x0+xscale*pt.cx, y0-yscale*pt.cy );
     for ( int k=pts.size() - 1; k>0; --k ) {
       pt = pts.get(k);
-      updateBBox( x0+scale*pt.cx, y0-scale*pt.cy );
+      updateBBox( x0+xscale*pt.cx, y0-yscale*pt.cy );
     }
   }
 }
@@ -765,7 +765,7 @@ class ShpStation extends ShpObject
   }
 
   // write headers for POINT
-  boolean writeStations( List<DrawingStationName> pts, float x0, float y0, float scale ) throws IOException
+  boolean writeStations( List<DrawingStationName> pts, float x0, float y0, float xscale, float yscale ) throws IOException
   {
     int n_pts = (pts != null)? pts.size() : 0;
     // Log.v("DistoX", "SHP write stations " + n_pts );
@@ -786,7 +786,7 @@ class ShpStation extends ShpObject
     int shxLength = 50 + n_pts * shxRecLen;
     int dbfLength = 33 + n_fld * 32 + n_pts * dbfRecLen; // [Bytes]
 
-    setBoundsPoints( pts, x0, y0, scale );
+    setBoundsPoints( pts, x0, y0, xscale, yscale );
     // Log.v("DistoX", "POINT station " + pts.size() + " len " + shpLength + " / " + shxLength + " / " + dbfLength );
     // Log.v("DistoX", "bbox X " + xmin + " " + xmax );
 
@@ -805,8 +805,8 @@ class ShpStation extends ShpObject
       shpBuffer.order(ByteOrder.LITTLE_ENDIAN);   
       shpBuffer.putInt( SHP_POINT );
       // Log.v("DistoX", "POINT station " + cnt + ": " + st.e + " " + st.s + " " + st.v + " offset " + offset );
-      shpBuffer.putDouble( x0+scale*st.cx );
-      shpBuffer.putDouble( y0-scale*st.cy );
+      shpBuffer.putDouble( x0+xscale*st.cx );
+      shpBuffer.putDouble( y0-yscale*st.cy );
 
       writeShxRecord( offset, shpRecLen );
       fields[0] = st.getName();
@@ -822,17 +822,17 @@ class ShpStation extends ShpObject
   @Override protected int getShpRecordLength( ) { return 14; }
     
   // Utility: set the bounding box of the set of geometries
-  private void setBoundsPoints( List<DrawingStationName> pts, float x0, float y0, float scale ) 
+  private void setBoundsPoints( List<DrawingStationName> pts, float x0, float y0, float xscale, float yscale ) 
   {
     if ( pts.size() == 0 ) {
       xmin = xmax = ymin = ymax = zmin = zmax = 0.0;
       return;
     }
     DrawingStationName st = pts.get(0);
-    initBBox( x0+scale*st.cx, y0-scale*st.cy );
+    initBBox( x0+xscale*st.cx, y0-yscale*st.cy );
     for ( int k=pts.size() - 1; k>0; --k ) {
       st = pts.get(k);
-      updateBBox( x0+scale*st.cx, y0-scale*st.cy );
+      updateBBox( x0+xscale*st.cx, y0-yscale*st.cy );
     }
   }
 }
@@ -848,17 +848,17 @@ class ShpPolyline extends ShpObject
     // mPathType = path_type;
   }
 
-  void writeLines( List<DrawingPointLinePath> lns, float x0, float y0, float scale ) throws IOException
+  void writeLines( List<DrawingPointLinePath> lns, float x0, float y0, float xscale, float yscale ) throws IOException
   {
-    writwPointLines( lns, DrawingPath.DRAWING_PATH_LINE, x0, y0, scale );
+    writwPointLines( lns, DrawingPath.DRAWING_PATH_LINE, x0, y0, xscale, yscale );
   }
 
-  void writeAreas( List<DrawingPointLinePath> lns, float x0, float y0, float scale ) throws IOException
+  void writeAreas( List<DrawingPointLinePath> lns, float x0, float y0, float xscale, float yscale ) throws IOException
   {
-    writwPointLines( lns, DrawingPath.DRAWING_PATH_AREA, x0, y0, scale );
+    writwPointLines( lns, DrawingPath.DRAWING_PATH_AREA, x0, y0, xscale, yscale );
   }
 
-  private boolean writwPointLines( List<DrawingPointLinePath> lns, int path_type, float x0, float y0, float scale ) throws IOException
+  private boolean writwPointLines( List<DrawingPointLinePath> lns, int path_type, float x0, float y0, float xscale, float yscale ) throws IOException
   {
     int nrs = ( lns != null )? lns.size() : 0;
     if ( nrs == 0 ) return false;
@@ -884,7 +884,7 @@ class ShpPolyline extends ShpObject
     for (int k=0; k<n_fld; ++k ) dbfRecLen += flens[k]; 
     int dbfLength = 33 + n_fld * 32 + nrs * dbfRecLen; // Bytes, 2 fields
 
-    setBoundsLines( lns, x0, y0, scale );
+    setBoundsLines( lns, x0, y0, xscale, yscale );
     // Log.v("DistoX", "POLYLINEZ shots " + lns.size() + " len " + shpLength + " / " + shxLength + " / " + dbfLength );
     // Log.v("DistoX", "bbox X " + xmin + " " + xmax );
 
@@ -918,7 +918,7 @@ class ShpPolyline extends ShpObject
         int close = ( ln.mType == DrawingPath.DRAWING_PATH_AREA || ln.isClosed() )? 1 : 0;
 	int shp_len = getShpRecordLength( ln.size() + close );
 
-        writeShpRecord( cnt, shp_len, ln, close, x0, y0, scale );
+        writeShpRecord( cnt, shp_len, ln, close, x0, y0, xscale, yscale );
         writeShxRecord( offset, shp_len );
         writeDBaseRecord( n_fld, fields, flens );
 
@@ -931,7 +931,7 @@ class ShpPolyline extends ShpObject
     return true;
   }
 
-  private void writeShpRecord( int cnt, int len, DrawingPointLinePath ln, int close, float x0, float y0, float scale )
+  private void writeShpRecord( int cnt, int len, DrawingPointLinePath ln, int close, float x0, float y0, float xscale, float yscale )
   {
     double xmin, ymin, xmax, ymax;
     LinePoint pt = ln.mFirst;
@@ -941,10 +941,10 @@ class ShpPolyline extends ShpObject
       if (  pt.x < xmin ) { xmin =  pt.x; } else if (  pt.x > xmax ) { xmax =  pt.x; }
       if ( -pt.y < ymin ) { ymin = -pt.y; } else if ( -pt.y > ymax ) { ymax = -pt.y; }
     }
-    xmin = x0 + scale*ymin;
-    ymin = y0 + scale*ymin;
-    xmax = x0 + scale*xmax;
-    ymax = y0 + scale*ymax;
+    xmin = x0 + xscale*ymin;
+    ymin = y0 + yscale*ymin;
+    xmax = x0 + xscale*xmax;
+    ymax = y0 + yscale*ymax;
 
     writeShpRecordHeader( cnt, len );
     shpBuffer.order(ByteOrder.LITTLE_ENDIAN);   
@@ -957,13 +957,13 @@ class ShpPolyline extends ShpObject
     shpBuffer.putInt( ln.size() + close ); // total number of points
     shpBuffer.putInt( 0 ); // part 0 starts with point 0 
     for ( pt = ln.mFirst; pt != null; pt = pt.mNext ) {
-      shpBuffer.putDouble( x0+scale*pt.x );
-      shpBuffer.putDouble( y0-scale*pt.y );
+      shpBuffer.putDouble( x0+xscale*pt.x );
+      shpBuffer.putDouble( y0-yscale*pt.y );
     }
     if ( close == 1 ) {
       pt = ln.mFirst;
-      shpBuffer.putDouble( x0+scale*pt.x );
-      shpBuffer.putDouble( y0-scale*pt.y );
+      shpBuffer.putDouble( x0+xscale*pt.x );
+      shpBuffer.putDouble( y0-yscale*pt.y );
     }
   }
 
@@ -972,20 +972,20 @@ class ShpPolyline extends ShpObject
   // @Override 
   protected int getShpRecordLength( int npt ) { return 28 + npt * 8; }
 
-  private void setBoundsLines( List<DrawingPointLinePath> lns, float x0, float y0, float scale )
+  private void setBoundsLines( List<DrawingPointLinePath> lns, float x0, float y0, float xscale, float yscale )
   {
     int nrs = ( lns != null )? lns.size() : 0;
     if ( nrs > 0 ) {
       DrawingPointLinePath ln = lns.get(0);
       LinePoint pt = ln.mFirst;
-      initBBox( x0+scale*pt.x, y0-scale*pt.y );
+      initBBox( x0+xscale*pt.x, y0-yscale*pt.y );
       for ( pt = pt.mNext; pt != null; pt = pt.mNext ) {
-        updateBBox( x0+scale*pt.x, y0-scale*pt.y );
+        updateBBox( x0+xscale*pt.x, y0-yscale*pt.y );
       }
       for ( int k=1; k<nrs; ++k ) {
         ln = lns.get(k);
         for ( pt = ln.mFirst; pt != null; pt = pt.mNext ) {
-          updateBBox( x0+scale*pt.x, y0-scale*pt.y );
+          updateBBox( x0+xscale*pt.x, y0-yscale*pt.y );
         }
       }
     }
@@ -1002,7 +1002,7 @@ class ShpSegment extends ShpObject
     super( SHP_POLYLINE, path, files );
   }
 
-  boolean writeSegments( List<DrawingPath> sgms, float x0, float y0, float scale ) throws IOException
+  boolean writeSegments( List<DrawingPath> sgms, float x0, float y0, float xscale, float yscale ) throws IOException
   {
     int nrs = ( sgms != null )? sgms.size() : 0;
     if ( nrs == 0 ) return false;
@@ -1023,7 +1023,7 @@ class ShpSegment extends ShpObject
     for (int k=0; k<n_fld; ++k ) dbfRecLen += flens[k]; 
     int dbfLength = 33 + n_fld * 32 + nrs * dbfRecLen; // Bytes, 3 fields
 
-    setBoundsLines( sgms, x0, y0, scale );
+    setBoundsLines( sgms, x0, y0, xscale, yscale );
     // Log.v("DistoX", "POLYLINE shots " + lns.size() + " len " + shpLength + " / " + shxLength + " / " + dbfLength );
     // Log.v("DistoX", "bbox X " + xmin + " " + xmax );
 
@@ -1051,7 +1051,7 @@ class ShpSegment extends ShpObject
 	}
 	int shp_len = getShpRecordLength( );
 
-        writeShpRecord( cnt, shp_len, sgm, x0, y0, scale );
+        writeShpRecord( cnt, shp_len, sgm, x0, y0, xscale, yscale );
         writeShxRecord( offset, shp_len );
         writeDBaseRecord( n_fld, fields, flens );
 
@@ -1064,17 +1064,17 @@ class ShpSegment extends ShpObject
     return true;
   }
 
-  private void writeShpRecord( int cnt, int len, DrawingPath sgm, float x0, float y0, float scale )
+  private void writeShpRecord( int cnt, int len, DrawingPath sgm, float x0, float y0, float xscale, float yscale )
   {
     double xmin, ymin, xmax, ymax;
     xmin = xmax =  sgm.x1;
     ymin = ymax = -sgm.y1;
     if (  sgm.x2 < xmin ) { xmin =  sgm.x2; } else if (  sgm.x2 > xmax ) { xmax =  sgm.x2; }
     if ( -sgm.y2 < ymin ) { ymin = -sgm.y2; } else if ( -sgm.y2 > ymax ) { ymax = -sgm.y2; }
-    xmin = x0 + scale*xmin;
-    xmax = x0 + scale*xmax;
-    ymin = y0 + scale*ymin;
-    ymax = y0 + scale*ymax;
+    xmin = x0 + xscale*xmin;
+    xmax = x0 + xscale*xmax;
+    ymin = y0 + yscale*ymin;
+    ymax = y0 + yscale*ymax;
 
     writeShpRecordHeader( cnt, len );
     shpBuffer.order(ByteOrder.LITTLE_ENDIAN);   
@@ -1086,10 +1086,10 @@ class ShpSegment extends ShpObject
     shpBuffer.putInt( 1 ); // one part: number of parts
     shpBuffer.putInt( 2 ); // total number of points
     shpBuffer.putInt( 0 ); // part 0 starts with point 0 
-    shpBuffer.putDouble( x0+scale*sgm.x1 );
-    shpBuffer.putDouble( y0-scale*sgm.y1 );
-    shpBuffer.putDouble( x0+scale*sgm.x2 );
-    shpBuffer.putDouble( y0-scale*sgm.y2 );
+    shpBuffer.putDouble( x0+xscale*sgm.x1 );
+    shpBuffer.putDouble( y0-yscale*sgm.y1 );
+    shpBuffer.putDouble( x0+xscale*sgm.x2 );
+    shpBuffer.putDouble( y0-yscale*sgm.y2 );
   }
 
   // segment record length [word]: 4 + (48 + npt * 16)/2   [npt = 2]
@@ -1097,17 +1097,17 @@ class ShpSegment extends ShpObject
   // @Override 
   protected int getShpRecordLength( ) { return 28 + 2 * 8; }
 
-  private void setBoundsLines( List<DrawingPath> sgms, float x0, float y0, float scale )
+  private void setBoundsLines( List<DrawingPath> sgms, float x0, float y0, float xscale, float yscale )
   {
     int nrs = ( sgms != null )? sgms.size() : 0;
     if ( nrs > 0 ) {
       DrawingPath sgm = sgms.get(0);
-      initBBox(   x0+scale*sgm.x1, y0-scale*sgm.y1 );
-      updateBBox( x0+scale*sgm.x2, y0-scale*sgm.y2 );
+      initBBox(   x0+xscale*sgm.x1, y0-yscale*sgm.y1 );
+      updateBBox( x0+xscale*sgm.x2, y0-yscale*sgm.y2 );
       for ( int k=1; k<nrs; ++k ) {
         sgm = sgms.get(k);
-        updateBBox( x0+scale*sgm.x1, y0-scale*sgm.y1 );
-        updateBBox( x0+scale*sgm.x2, y0-scale*sgm.y2 );
+        updateBBox( x0+xscale*sgm.x1, y0-yscale*sgm.y1 );
+        updateBBox( x0+xscale*sgm.x2, y0-yscale*sgm.y2 );
       }
     }
   }
