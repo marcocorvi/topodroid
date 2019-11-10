@@ -1182,7 +1182,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_backsight_title">Strzał wsteczny</string>
   <string name="pref_backsight_summary">Pola strzału wstecznego w nowym oknie dialogowym</string>
   <string name="pref_backshot_title">Strzał wsteczny DistoX</string>
-  <string name="pref_backshot_summary">DistoX w trybie strzału wstecznego</string>
+  <!-- TODO string name="pref_backshot_summary">Swap stations to DistoX backshots</string -->
   <string name="pref_prev_next_title">Poprzedni/Neastępny przycisk</string>
   <string name="pref_prev_next_summary">Poprzedni/Następny przycisk w oknie dialogowym strzału</string>
   <!-- UNUSED string name="pref_mag_anomaly_title">Magnetic Anomaly</string -->

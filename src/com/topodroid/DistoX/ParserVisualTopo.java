@@ -29,17 +29,22 @@ class ParserVisualTopo extends ImportParser
   private float ul = 1;  // units factor [m]
   private float ub = 1;  // dec.deg
   private float uc = 1;  // dec.deg
+  private boolean mLrud;
+  private boolean mLegFirst;
 
   /** VisualTopo parser
    * @param filename name of the file to parse
    * @param apply_declination  whether to apply declination correction
    */
-  ParserVisualTopo( String filename, boolean apply_declination ) throws ParserException
+  ParserVisualTopo( String filename, boolean apply_declination, boolean lrud, boolean leg_first ) throws ParserException
   {
     super( apply_declination );
     mName = extractName( filename );
+    mLrud = lrud;
+    mLegFirst = leg_first;
     readFile( filename );
     checkValid();
+
   }
 
   private boolean isDuplicate( String flag )
@@ -56,7 +61,7 @@ class ParserVisualTopo extends ImportParser
 
   private float angle( float value, float unit, boolean dm )
   {
-    if ( dm ) {
+    if ( dm ) { // angle value in degrees.minutes
       int sign = 1;
       if ( value < 0 ) { sign = -1; value = -value; }
       int iv = (int)value;
@@ -158,7 +163,7 @@ class ParserVisualTopo extends ImportParser
                 // standard colors; ignore
               } else if ( k == 5 ) {
                 try {
-                  mDeclination = angle( Float.parseFloat( vals[k] ), 1, true );
+                  mDeclination = angle( Float.parseFloat( vals[k] ), 1, true ); // declination is in degrees.minutes
                 } catch ( NumberFormatException e ) { }
               } else {
                 // ignore colors
@@ -184,24 +189,27 @@ class ParserVisualTopo extends ImportParser
                 mLength  = Float.parseFloat(vals[k]) * ul; ++k; // 2
                 mBearing = angle( Float.parseFloat(vals[k]), ub, dmb); ++k; // 3
                 mClino   = angle( Float.parseFloat(vals[k]), uc, dmc); ++k; // 5
+                mBearing = TDMath.in360( mBearing );
                 if ( splay ) {
                   shots.add( new ParserShot( mFrom, TDString.EMPTY, mLength, mBearing, mClino, 0.0f,
-                                             DBlock.EXTEND_UNSET, 2, false, false, false, "" ) );
+                                             DBlock.EXTEND_UNSET, LegType.NORMAL, false, false, false, "" ) );
 
                 } else {
                   // Log.v("DistoX-VT", mFrom + " " + mTo + " " + mBearing + " DMB " + dmb + " UB " + ub );
                   mLeft = mRight = mUp = mDown = 0;
-                  if ( k < vals.length ) {
-                    mLeft  = vals[k].equals("*")? -1 : Float.parseFloat(vals[k]) * ul; ++k; // 5
-                  }
-                  if ( k < vals.length ) {
-                    mRight = vals[k].equals("*")? -1 : Float.parseFloat(vals[k]) * ul; ++k; // 6
-                  }
-                  if ( k < vals.length ) {
-                    mUp    = vals[k].equals("*")? -1 : Float.parseFloat(vals[k]) * ul; ++k; // 7
-                  }
-		  if ( k < vals.length ) {
-                    mDown  = vals[k].equals("*")? -1 : Float.parseFloat(vals[k]) * ul; ++k; // 8
+                  if ( mLrud ) {
+                    if ( k < vals.length ) {
+                      mLeft  = vals[k].equals("*")? -1 : Float.parseFloat(vals[k]) * ul; ++k; // 5
+                    }
+                    if ( k < vals.length ) {
+                      mRight = vals[k].equals("*")? -1 : Float.parseFloat(vals[k]) * ul; ++k; // 6
+                    }
+                    if ( k < vals.length ) {
+                      mUp    = vals[k].equals("*")? -1 : Float.parseFloat(vals[k]) * ul; ++k; // 7
+                    }
+		    if ( k < vals.length ) {
+                      mDown  = vals[k].equals("*")? -1 : Float.parseFloat(vals[k]) * ul; ++k; // 8
+                    }
                   }
                   shot_extend = DBlock.EXTEND_RIGHT;
                   if ( k < vals.length ) {
@@ -212,29 +220,36 @@ class ParserVisualTopo extends ImportParser
                     duplicate = vals[k].equals("E"); ++k;           // 'I' or 'E'
                   }
 
-                  if ( mLeft > 0 ) {
-	            float ber = mBearing + 180 + 90 * dirw;
-                    extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : DBlock.EXTEND_UNSET;
-                    shots.add( new ParserShot( station, TDString.EMPTY, mLeft, ber, 0.0f, 0.0f, extend, 2, false, false, false, "" ) );
+                  if ( mLegFirst ) {
+                    extend = ( mBearing < 90 || mBearing > 270 )? 1 : -1;
+                    shots.add( new ParserShot( mFrom, mTo, mLength, mBearing, mClino, 0.0f,
+                                               shot_extend, LegType.NORMAL, duplicate, surface, backshot, comment ) );
                   }
-                  if ( mRight > 0 ) {
-                    float ber = mBearing + 180 - 90 * dirw;
-                    if ( ber > 360 ) ber -= 360;
-                    extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : DBlock.EXTEND_UNSET;
-                    shots.add( new ParserShot( station, TDString.EMPTY, mRight, ber, 0.0f, 0.0f, -extend, 2, false, false, false, "" ) );
-                  } 
-                  if ( mUp > 0 ) {
-                    // FIXME splays
-                    shots.add( new ParserShot( station, TDString.EMPTY, mUp, 0.0f, 90.0f, 0.0f, DBlock.EXTEND_VERT, 2, false, false, false, "" ) );
+                  if ( mLrud ) {
+                    if ( mLeft > 0 ) {
+	              float ber = TDMath.in360( mBearing + 180 + 90 * dirw );
+                      extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : DBlock.EXTEND_UNSET;
+                      shots.add( new ParserShot( station, TDString.EMPTY, mLeft, ber, 0.0f, 0.0f, extend, LegType.XSPLAY, false, false, false, "" ) );
+                    }
+                    if ( mRight > 0 ) {
+                      float ber = TDMath.in360( mBearing + 180 - 90 * dirw );
+                      extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : DBlock.EXTEND_UNSET;
+                      shots.add( new ParserShot( station, TDString.EMPTY, mRight, ber, 0.0f, 0.0f, -extend, LegType.XSPLAY, false, false, false, "" ) );
+                    } 
+                    if ( mUp > 0 ) {
+                      // FIXME splays
+                      shots.add( new ParserShot( station, TDString.EMPTY, mUp, 0.0f, 90.0f, 0.0f, DBlock.EXTEND_VERT, LegType.XSPLAY, false, false, false, "" ) );
+                    }
+                    if ( mDown > 0 ) {
+                      // FIXME splays
+                      shots.add( new ParserShot( station, TDString.EMPTY, mDown, 0.0f, -90.0f, 0.0f, DBlock.EXTEND_VERT, LegType.XSPLAY, false, false, false, "" ) );
+                    }
                   }
-                  if ( mDown > 0 ) {
-                    // FIXME splays
-                    shots.add( new ParserShot( station, TDString.EMPTY, mDown, 0.0f, -90.0f, 0.0f, DBlock.EXTEND_VERT, 2, false, false, false, "" ) );
+                  if ( ! mLegFirst ) { 
+                    extend = ( mBearing < 90 || mBearing > 270 )? 1 : -1;
+                    shots.add( new ParserShot( mFrom, mTo, mLength, mBearing, mClino, 0.0f,
+                                               shot_extend, LegType.NORMAL, duplicate, surface, backshot, comment ) );
                   }
-                  
-                  extend = ( mBearing < 90 || mBearing > 270 )? 1 : -1;
-                  shots.add( new ParserShot( mFrom, mTo, mLength, mBearing, mClino, 0.0f,
-                                             shot_extend, 0, duplicate, surface, backshot, comment ) );
                 }
               } catch ( NumberFormatException e ) {
                 TDLog.Error( "ERROR " + mLineCnt + ": " + line + " " + e.getMessage() );

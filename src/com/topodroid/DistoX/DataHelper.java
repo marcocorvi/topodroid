@@ -228,7 +228,7 @@ class DataHelper extends DataSetObservable
      blk.mAcceleration = (float)( cursor.getDouble(7) );
      blk.mMagnetic     = (float)( cursor.getDouble(8) );
      blk.mDip          = (float)( cursor.getDouble(9) );
-     blk.mShotType     = (int)(  cursor.getLong(10) );
+     blk.setShotType( (int)(  cursor.getLong(10) ) );
      blk.mTime         = (long)( cursor.getLong(11) );
      blk.setAddress( cursor.getString(12) );
    }
@@ -258,7 +258,7 @@ class DataHelper extends DataSetObservable
      blk.resetFlag( cursor.getLong(10) );
      blk.setBlockType( (int)leg );
      blk.mComment  = cursor.getString(12);
-     blk.mShotType = (int)cursor.getLong(13);
+     blk.setShotType( (int)cursor.getLong(13) );
      blk.mTime     = cursor.getLong(14);
      blk.setPaintColor( (int)cursor.getLong(15) ); // color
      // blk.setStretch( (float)cursor.getDouble(16) ); // already set above
@@ -1427,15 +1427,21 @@ class DataHelper extends DataSetObservable
     } finally { myDB.endTransaction(); }
   }
 
-  void updateShotAMDR( long id, long sid, double acc, double mag, double dip, double r )
+  void updateShotAMDR( long id, long sid, double acc, double mag, double dip, double r, boolean backshot )
   {
     // if ( myDB == null ) return;
 
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter( sw );
-    pw.format( Locale.US,
+    if ( backshot ) { // shot type = -1
+      pw.format( Locale.US,
+               "UPDATE shots SET acceleration=%.6f, magnetic=%.6f, dip=%.4f, roll=%.6f, type=-1 WHERE surveyId=%d AND id=%d",
+               acc, mag, dip, r, sid, id );
+    } else { // shot type = 0 (default)
+      pw.format( Locale.US,
                "UPDATE shots SET acceleration=%.6f, magnetic=%.6f, dip=%.4f, roll=%.6f WHERE surveyId=%d AND id=%d",
                acc, mag, dip, r, sid, id );
+    }
     doExecSQL( sw, "sht AMDR" );
 /*
     if ( updateShotAMDRStmt == null ) {
@@ -2996,7 +3002,7 @@ class DataHelper extends DataSetObservable
   // @param backshot  whether the DistoX is in backshot mode
   // @return the last block with either the from station (non-backshot) or the to station (backshot)
   // used only by StationName
-  DBlock selectLastNonBlankShot( long sid, /* long status, */ boolean backshot )
+  DBlock selectLastNonBlankShot( long sid /* , long status, boolean backshot */ )
   {
     if ( myDB == null ) return null;
     DBlock ret = null;
@@ -3009,7 +3015,7 @@ class DataHelper extends DataSetObservable
       DBlock block = new DBlock();
       do { 
         fillBlock( sid, block, cursor );
-        if ( backshot ) {
+        if ( block.isDistoXBacksight() ) {
           if ( block.mTo != null && block.mTo.length() > 0 ) { ret = block; break; }
         } else {
           if ( block.mFrom != null && block.mFrom.length() > 0 ) { ret = block; break; }

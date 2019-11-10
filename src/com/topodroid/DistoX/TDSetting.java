@@ -698,7 +698,7 @@ class TDSetting
 
     String[] keyData = TDPrefKey.DATA;
     String[] defData = TDPrefKey.DATAdef;
-    mAzimuthManual = prefs.getBoolean( keyData[7], bool(defData[7]) );   // DISTOX_AZIMUTH_MANUAL 
+    mAzimuthManual = prefs.getBoolean( keyData[6], bool(defData[6]) );   // DISTOX_AZIMUTH_MANUAL 
     TDAzimuth.resetRefAzimuth( null, SurveyInfo.EXTEND_NORMAL ); // BUG ?? may call setRefAzimuthButton on non-UI thread
     
     // ------------------- DEVICE PREFERENCES -def--fallback--min-max
@@ -874,13 +874,12 @@ class TDSetting
     mMaxShotLength = tryFloat( prefs,          keyData[ 1],      defData[ 1] );  // DISTOX_MAX_SHOT_LENGTH
     mMinLegLength  = tryFloat( prefs,          keyData[ 2],      defData[ 2] );  // DISTOX_MIN_LEG_LENGTH
     mMinNrLegShots = tryInt(   prefs,          keyData[ 3],      defData[ 3] );  // DISTOX_LEG_SHOTS choice: 2, 3, 4
-    mDistoXBackshot= prefs.getBoolean(         keyData[ 4], bool(defData[ 4]) ); // DISTOX_BACKSHOT
-    mExtendThr     = tryFloat( prefs,          keyData[ 5],      defData[ 5]  ); // DISTOX_EXTEND_THR2
-    mVThreshold    = tryFloat( prefs,          keyData[ 6],      defData[ 6]  ); // DISTOX_VTHRESHOLD
+    mExtendThr     = tryFloat( prefs,          keyData[ 4],      defData[ 4]  ); // DISTOX_EXTEND_THR2
+    mVThreshold    = tryFloat( prefs,          keyData[ 5],      defData[ 5]  ); // DISTOX_VTHRESHOLD
     // DISTOX_AZIMUTH_MANUAL [7] handled in the first pass
-    mPrevNext      = prefs.getBoolean(         keyData[ 8], bool(defData[ 8]) ); // DISTOX_PREV_NEXT
-    mBacksightInput = prefs.getBoolean(        keyData[ 9], bool(defData[ 9]) ); // DISTOX_BACKSIGHT
-    mTripleShot     = tryInt(  prefs,          keyData[10],      defData[10]  ); // DISTOX_LEG_FEEDBACK
+    mPrevNext      = prefs.getBoolean(         keyData[ 7], bool(defData[ 7]) ); // DISTOX_PREV_NEXT
+    mBacksightInput = prefs.getBoolean(        keyData[ 8], bool(defData[ 8]) ); // DISTOX_BACKSIGHT
+    mTripleShot     = tryInt(  prefs,          keyData[ 9],      defData[ 9]  ); // DISTOX_LEG_FEEDBACK
     // mTimerWait     = tryInt(   prefs,          keyData[10],      defData[10] );  // DISTOX_SHOT_TIMER
     // mBeepVolume    = tryInt(   prefs,          keyData[11],      defData[11] );  // DISTOX_BEEP_VOLUME
 
@@ -892,16 +891,16 @@ class TDSetting
     mSplayClasses  = prefs.getBoolean( keyGShot[ 3], bool(defGShot[ 3]) ); // DISTOX_SPLAY_CLASSES
     mSplayColor    = prefs.getBoolean( keyGShot[ 4], bool(defGShot[ 4]) ); // DISTOX_SPLAY_COLOR
     mExtendFrac    = prefs.getBoolean( keyGShot[ 5], bool(defGShot[ 5]) ); // DISTOX_EXTEND_FRAC
-    mBedding       = prefs.getBoolean( keyGShot[ 6], bool(defGShot[ 6]) ); // DISTOX_BEDDING
-    mWithSensors   = prefs.getBoolean( keyGShot[ 7], bool(defGShot[ 7]) ); // DISTOX_WITH_SENSORS
-    setLoopClosure( tryInt(   prefs,   keyGShot[ 8],      defGShot[ 8] ) );// DISTOX_LOOP_CLOSURE_VALUE
+    mDistoXBackshot= prefs.getBoolean( keyGShot[ 6], bool(defGShot[ 6]) ); // DISTOX_BACKSHOT
+    mBedding       = prefs.getBoolean( keyGShot[ 7], bool(defGShot[ 7]) ); // DISTOX_BEDDING
+    mWithSensors   = prefs.getBoolean( keyGShot[ 8], bool(defGShot[ 8]) ); // DISTOX_WITH_SENSORS
+    setLoopClosure( tryInt(   prefs,   keyGShot[ 9],      defGShot[ 9] ) );// DISTOX_LOOP_CLOSURE_VALUE
+    mWithAzimuth   = prefs.getBoolean( keyGShot[10], bool(defGShot[10]) ); // DISTOX_ANDROID_AZIMUTH
+    mTimerWait     = tryInt(   prefs,  keyGShot[11],      defGShot[11] );  // DISTOX_SHOT_TIMER
+    mBeepVolume    = tryInt(   prefs,  keyGShot[12],      defGShot[12] );  // DISTOX_BEEP_VOLUME
     // mDistTolerance = tryFloat( prefs,  keyGShot[ 9],      defGShot[ 9]  ); // DISTOX_DIST_TOLERANCE
     // mSplayActive   = prefs.getBoolean( keyGShot[ 8], bool(defGShot[ 8]) ); // DISTOX_WITH_SENSORS
     // mWithRename    = prefs.getBoolean( keyGShot[ 9], bool(defGShot[ 9]) ); // DISTOX_WITH_RENAME
-    mWithAzimuth   = prefs.getBoolean( keyGShot[ 9], bool(defGShot[ 9]) ); // DISTOX_ANDROID_AZIMUTH
-    mTimerWait     = tryInt(   prefs,  keyGShot[10],      defGShot[10] );  // DISTOX_SHOT_TIMER
-    mBeepVolume    = tryInt(   prefs,  keyGShot[11],      defGShot[11] );  // DISTOX_BEEP_VOLUME
-
 
     String[] keyGPlot = TDPrefKey.GEEKPLOT;
     String[] defGPlot = TDPrefKey.GEEKPLOTdef;
@@ -1320,19 +1319,21 @@ class TDSetting
       mSplayColor   = tryBooleanValue( hlp, k, v, bool(def[ 4]) );
     } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_EXTEND_FRAC
       mExtendFrac   = tryBooleanValue( hlp, k, v, bool(def[ 5]) );
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_BEDDING
-      mBedding      = tryBooleanValue( hlp, k, v, bool(def[ 6]) );
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_WITH_SENSORS
-      mWithSensors  = tryBooleanValue( hlp, k, v, bool(def[ 7]) );
-    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_LOOP_CLOSURE_VALUE
-      setLoopClosure( tryIntValue( hlp, k, v, def[ 8] ) );
-    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_ANDROID_AZIMUTH
-      mWithAzimuth  = tryBooleanValue( hlp, k, v, bool(def[ 9]) );
-    } else if ( k.equals( key[ 10 ] ) ) { // DISTOX_SHOT_TIMER [3 ..)
-      mTimerWait        = tryIntValue( hlp, k, v, def[10] );
+    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_BACKSHOT (bool)
+      mDistoXBackshot = tryBooleanValue( hlp, k, v, bool(def[6]) );
+    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_BEDDING
+      mBedding      = tryBooleanValue( hlp, k, v, bool(def[ 7]) );
+    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_WITH_SENSORS
+      mWithSensors  = tryBooleanValue( hlp, k, v, bool(def[ 8]) );
+    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_LOOP_CLOSURE_VALUE
+      setLoopClosure( tryIntValue( hlp, k, v, def[ 9] ) );
+    } else if ( k.equals( key[ 10] ) ) { // DISTOX_ANDROID_AZIMUTH
+      mWithAzimuth  = tryBooleanValue( hlp, k, v, bool(def[10]) );
+    } else if ( k.equals( key[ 11 ] ) ) { // DISTOX_SHOT_TIMER [3 ..)
+      mTimerWait        = tryIntValue( hlp, k, v, def[11] );
       if ( mTimerWait < 0 ) { mTimerWait = 0; ret = TDString.ZERO; }
-    } else if ( k.equals( key[ 11 ] ) ) { // DISTOX_BEEP_VOLUME [0 .. 100]
-      mBeepVolume       = tryIntValue( hlp, k, v, def[11] );
+    } else if ( k.equals( key[ 12 ] ) ) { // DISTOX_BEEP_VOLUME [0 .. 100]
+      mBeepVolume       = tryIntValue( hlp, k, v, def[12] );
       if ( mBeepVolume <   0 ) { mBeepVolume =   0; ret =   TDString.ZERO; }
       if ( mBeepVolume > 100 ) { mBeepVolume = 100; ret = "100"; }
 
@@ -1783,32 +1784,23 @@ class TDSetting
       if ( mMinLegLength > 5 ) { mMinLegLength = 5; ret = TDString.FIVE; }
     } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_LEG_SHOTS (choice)
       mMinNrLegShots  = tryIntValue(   hlp, k, v, def[3] );
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_BACKSHOT (bool)
-      mDistoXBackshot = tryBooleanValue( hlp, k, v, bool(def[4]) );
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_EXTEND_THR2
-      mExtendThr      = tryFloatValue( hlp, k, v, def[5] );
+    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_EXTEND_THR2
+      mExtendThr      = tryFloatValue( hlp, k, v, def[4] );
       if ( mExtendThr <  0 ) { mExtendThr =  0; ret = TDString.ZERO; }
       if ( mExtendThr > 90 ) { mExtendThr = 90; ret = TDString.NINETY; }
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_VTHRESHOLD
-      mVThreshold     = tryFloatValue( hlp, k, v, def[6] );
+    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_VTHRESHOLD
+      mVThreshold     = tryFloatValue( hlp, k, v, def[5] );
       if ( mVThreshold <  0 ) { mVThreshold =  0; ret =  TDString.ZERO; }
       if ( mVThreshold > 90 ) { mVThreshold = 90; ret = TDString.NINETY; }
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_AZIMUTH_MANUAL (bool)
-      mAzimuthManual  = tryBooleanValue( hlp, k, v, bool(def[7]) ); 
+    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_AZIMUTH_MANUAL (bool)
+      mAzimuthManual  = tryBooleanValue( hlp, k, v, bool(def[6]) ); 
       TDAzimuth.resetRefAzimuth( TopoDroidApp.mShotWindow, TDAzimuth.mRefAzimuth );
-    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_PREV_NEXT (bool)
-      mPrevNext = tryBooleanValue( hlp, k, v, bool(def[ 8]) );
-    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_BACKSIGHT (bool)
-      mBacksightInput = tryBooleanValue( hlp, k, v, bool(def[ 9]) );
-    } else if ( k.equals( key[10 ] ) ) { // DISTOX_LEG_FEEDBACK
-      mTripleShot   = tryIntValue( hlp, k, v, def[10] );
-    // } else if ( k.equals( key[ 10 ] ) ) { // DISTOX_SHOT_TIMER [3 ..)
-    //   mTimerWait        = tryIntValue( hlp, k, v, def[10] );
-    //   if ( mTimerWait < 0 ) { mTimerWait = 0; ret = TDString.ZERO; }
-    // } else if ( k.equals( key[ 11 ] ) ) { // DISTOX_BEEP_VOLUME [0 .. 100]
-    //   mBeepVolume       = tryIntValue( hlp, k, v, def[11] );
-    //   if ( mBeepVolume <   0 ) { mBeepVolume =   0; ret =   TDString.ZERO; }
-    //   if ( mBeepVolume > 100 ) { mBeepVolume = 100; ret = "100"; }
+    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_PREV_NEXT (bool)
+      mPrevNext = tryBooleanValue( hlp, k, v, bool(def[ 7]) );
+    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_BACKSIGHT (bool)
+      mBacksightInput = tryBooleanValue( hlp, k, v, bool(def[ 8]) );
+    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_LEG_FEEDBACK
+      mTripleShot   = tryIntValue( hlp, k, v, def[ 9] );
     } else {
       TDLog.Error("missing DATA key: " + k );
     }
@@ -2456,7 +2448,8 @@ class TDSetting
       pw.printf(Locale.US, "Midline check: attached %c, extend %c\n", tf(mCheckAttached), tf(mCheckExtend) );
       pw.printf(Locale.US, "Location: units %d, CRS \"%s\"\n", mUnitLocation, mCRS );
       pw.printf(Locale.US, "Shots: vthr %.1f, hthr %.1f \n", mVThreshold, mHThreshold );
-      pw.printf(Locale.US, "Data: backshot %c, diving-mode %c \n", tf(mDistoXBackshot), tf(mDivingMode) );
+      pw.printf(Locale.US, "Data: DistoX-backshot-swap %c, diving-mode %c \n", tf(mDistoXBackshot), tf(mDivingMode) );
+      // pw.printf(Locale.US, "Data: diving-mode %c \n", tf(mDivingMode) );
       pw.printf(Locale.US, "Data input: backsight %c, prev/next %c\n", tf(mBacksightInput), tf(mPrevNext) );
       pw.printf(Locale.US, "L/R extend %c\n", tf(mLRExtend) );
       pw.printf(Locale.US, "U/D vertical %.1f, L/R horicontal %.1f\n", mLRUDvertical, mLRUDhorizontal );

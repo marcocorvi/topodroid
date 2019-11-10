@@ -1186,7 +1186,7 @@
   <string name="pref_backsight_title">Polia Spätnej zámery</string>
   <string name="pref_backsight_summary">Zobrazí Polia spätnej zámery v MENU bodu merania pri manuálnom zadávaní bodu</string>
   <string name="pref_backshot_title">Režim spätného merania DistoX</string>
-  <string name="pref_backshot_summary">DistoX v režime spätného merania - merajú sa VŽDY VŠETKY zámery z koncového bodu na počiatočný! Číslovanie bodov je NAOPAK!</string>
+  <!-- TODO string name="pref_backshot_summary">Swap stations to DistoX backshots</string -->
   <string name="pref_prev_next_title">Predchádzajúci/Nasledujúci</string>
   <string name="pref_prev_next_summary">Zobrazenie tlačítka predchádzajúci/nasledujúci v MENU bodu merania</string>
   <!-- UNUSED string name="pref_mag_anomaly_title">Magnetic Anomaly</string -->

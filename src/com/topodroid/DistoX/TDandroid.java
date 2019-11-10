@@ -74,7 +74,7 @@ class TDandroid
   // private static boolean MustRestart = false; // whether need to restart app
   // static boolean[] GrantedPermission = { false, false, false, false, false, false };
 /* FIXME-23 */
-  static final int TEMPERATURE      = Sensor.TYPE_AMBIENT_TEMPERATURE; // API >= 14
+  static final int TEMPERATURE      = Sensor.TYPE_AMBIENT_TEMPERATURE; // REQUIRES API-14
 
   static final int TITLE_NORMAL     = 0xff6699ff; // FIXED_BLUE same as in values/styles.xml
   static final int TITLE_NORMAL2    = 0xff99ccff; 

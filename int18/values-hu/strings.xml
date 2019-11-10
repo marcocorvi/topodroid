@@ -1154,7 +1154,7 @@
   <string name="pref_backsight_title">Visszamérés(Irányzék?)</string>
   <string name="pref_backsight_summary">Visszamérés(Irányzék?) mező az új mérés párbeszéd ablakban</string>
   <!-- TODO string name="pref_backshot_title">Backshot DistoX</string -->
-  <!-- TODO string name="pref_backshot_summary">DistoX in backshot mode</string -->
+  <!-- TODO string name="pref_backshot_summary">Swap stations to DistoX backshots</string -->
   <string name="pref_prev_next_title">Előző/Köv. gombok</string>
   <string name="pref_prev_next_summary">Előző/Köv. gombok a mérés párbeszéd ablakban</string>
   <!-- UNUSED string name="pref_mag_anomaly_title">Mágneses anomália</string -->

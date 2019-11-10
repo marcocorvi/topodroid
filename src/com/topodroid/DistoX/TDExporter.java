@@ -1829,7 +1829,7 @@ class TDExporter
         String address = b.getAddress();
         if ( address == null || address.length() == 0 ) address = "-";
         pw.format(Locale.US, "%d%c%d%c%s%s",
-          b.mTime, sep, b.mShotType, sep, address, newline );
+          b.mTime, sep, b.getShotType(), sep, address, newline );
       }
       fw.flush();
       fw.close();

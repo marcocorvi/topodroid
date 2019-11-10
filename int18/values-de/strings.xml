@@ -1176,7 +1176,7 @@
   <string name="pref_backsight_title">Rückmessungs-Feld</string>
   <string name="pref_backsight_summary">Rückmessungs-Feld im Dialog bei neuem manuellen Messzug anzeigen</string>
   <string name="pref_backshot_title">Rückwärtsmessung</string>
-  <string name="pref_backshot_summary">DistoX im Rückmessungs-Modus</string>
+  <!-- TODO string name="pref_backshot_summary">Swap stations to DistoX backshots</string -->
   <string name="pref_prev_next_title">Messtrecken-Navigation</string>
   <string name="pref_prev_next_summary">Buttons anzeigen im Messdialog zur vorherigen/nächsten Messung</string>
   <!-- UNUSED string name="pref_mag_anomaly_title">Magnetische Abweichung</string -->

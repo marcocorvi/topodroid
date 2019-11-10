@@ -53,7 +53,7 @@ import java.util.List;
 import java.util.Locale;
 
 // import java.util.concurrent.RejectedExecutionException;
-// import java.util.Deque; // only API-9
+// import java.util.Deque; // REQUIRES API-9
 
 /**
  */

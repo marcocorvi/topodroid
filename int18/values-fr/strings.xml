@@ -1156,7 +1156,7 @@
   <string name="pref_backsight_title">Visée inverse</string>
   <string name="pref_backsight_summary">Afficher les champs de saisie inverse dans la boîte de dialogue de nouvelle visée</string>
   <string name="pref_backshot_title">DistoX Visée inverse</string>
-  <string name="pref_backshot_summary">DistoX en mode de visées de cheminement inverse</string>
+  <!-- TODO string name="pref_backshot_summary">Swap stations to DistoX backshots</string -->
   <string name="pref_prev_next_title">Icônes Précédent/Suivant</string>
   <string name="pref_prev_next_summary">Boutons Précédent/Suivant dans la boîte de dialogue de nouvelle visée</string>
   <!-- UNUSED string name="pref_mag_anomaly_title">Anomalie magnétique</string -->

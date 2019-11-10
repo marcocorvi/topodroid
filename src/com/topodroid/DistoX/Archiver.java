@@ -509,7 +509,7 @@ class Archiver
       return -5;
     }
 
-    return ok_manifest; // return 0
+    return ok_manifest; // return 0 or 1
   }
 }
 

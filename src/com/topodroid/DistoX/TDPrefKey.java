@@ -766,7 +766,6 @@ class TDPrefKey
     "DISTOX_MIN_LEG_LENGTH",       // minimum length of a shot data
     "DISTOX_LEG_SHOTS",       // 3 // nr. of shots to make a leg [2, 3, 4]
     // "DISTOX_RECENT_TIMEOUT",       // recent block timeout
-    "DISTOX_BACKSHOT",             // using DistoX in backshot mode
     "DISTOX_EXTEND_THR2",     // 5 // half angle around 90 where splays have "vert" extend
     "DISTOX_VTHRESHOLD",           // if shot clino is above, LRUD are horizontal
     "DISTOX_AZIMUTH_MANUAL",  // 7 * // whether the "extend" is fixed L or R, selected by hand 
@@ -789,7 +788,6 @@ class TDPrefKey
     R.string.pref_min_leg_title,
     R.string.pref_leg_shots_title,
     // R.string.pref_recent_timeout_title,
-    R.string.pref_backshot_title,
     R.string.pref_ethr_title,
     R.string.pref_vthr_title,
     R.string.pref_azimuth_manual_title,
@@ -811,7 +809,6 @@ class TDPrefKey
     R.string.pref_min_leg_summary,
     R.string.pref_leg_shots_summary,
     // R.string.pref_recent_timeout_summary,
-    R.string.pref_backshot_summary,
     R.string.pref_ethr_summary,
     R.string.pref_vthr_summary,
     R.string.pref_azimuth_manual_summary,
@@ -833,7 +830,6 @@ class TDPrefKey
     TDString.ZERO,
     TDString.THREE,
     // "30",
-    FALSE,
     TDString.TEN,
     "80",
     FALSE, 
@@ -1310,10 +1306,11 @@ class TDPrefKey
   static String[] GEEKSHOT = {
     "DISTOX_DIVING_MODE",     // enable diving mode
     "DISTOX_RECENT_SHOT",     // highlight recent shots
-    "DISTOX_RECENT_TIMEOUT",       // recent block timeout
+    "DISTOX_RECENT_TIMEOUT",  // recent block timeout
     "DISTOX_SPLAY_CLASSES",   // splay classes
     "DISTOX_SPLAY_COLOR",     // splay color
     "DISTOX_EXTEND_FRAC",     // fractional extend
+    "DISTOX_BACKSHOT",        // using DistoX in backshot mode
     "DISTOX_BEDDING",         // splays bed plane interpolation
     "DISTOX_WITH_SENSORS",    // using sensors
     "DISTOX_LOOP_CLOSURE_VALUE",     // whether to close loop
@@ -1333,6 +1330,7 @@ class TDPrefKey
     R.string.pref_splay_classes_title,
     R.string.pref_splay_color_title,
     R.string.pref_extend_frac_title,
+    R.string.pref_backshot_title,
     R.string.pref_plane_interpolation_title,
     R.string.pref_with_sensors_title,
     R.string.pref_loopClosure_title,
@@ -1352,6 +1350,7 @@ class TDPrefKey
     R.string.pref_splay_classes_summary,
     R.string.pref_splay_color_summary,
     R.string.pref_extend_frac_summary,
+    R.string.pref_backshot_summary,
     R.string.pref_plane_interpolation_summary,
     R.string.pref_with_sensors_summary,
     R.string.pref_loopClosure_summary,
@@ -1368,6 +1367,7 @@ class TDPrefKey
     FALSE,
     FALSE,
     "30",
+    FALSE,
     FALSE,
     FALSE,
     FALSE,

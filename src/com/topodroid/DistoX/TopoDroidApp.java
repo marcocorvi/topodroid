@@ -107,11 +107,13 @@ public class TopoDroidApp extends Application
   private static int MAJOR = 0;
   private static int MINOR = 0;
   private static int SUB   = 0;
+  private static char VCH  = ' ';
 
   // minimum compatible TopoDroid version
   private static final int MAJOR_MIN = 2;
   private static final int MINOR_MIN = 1;
   private static final int SUB_MIN   = 1;
+  private static final int CODE_MIN  = 20101;
   
   boolean mWelcomeScreen;  // whether to show the welcome screen (used by MainWindow)
   boolean mSetupScreen;    // whether to show the welcome screen (used by MainWindow)
@@ -566,11 +568,32 @@ public class TopoDroidApp extends Application
       VERSION      = getPackageManager().getPackageInfo( getPackageName(), 0 ).versionName;
       VERSION_CODE = getPackageManager().getPackageInfo( getPackageName(), 0 ).versionCode;
       int v = VERSION_CODE;
-      MAJOR = v / 100000;    
-      v -= MAJOR * 100000;
-      MINOR = v /   1000;    
-      v -= MINOR *   1000;
-      SUB = v / 10;
+      String[] ver = VERSION.split("\\.");
+      if ( ver.length > 2 ) {
+        try {
+          MAJOR = Integer.parseInt( ver[0] );
+          MINOR = Integer.parseInt( ver[1] );
+        } catch ( NumberFormatException e ) {
+          TDLog.Error( "parse error: major/minor " + ver[0] + " " + ver[1] );
+        }
+        int k = 0;
+        SUB = 0;
+        while ( k < ver[2].length() ) {
+          char ch = ver[2].charAt(k);
+          if ( ch < '0' || ch > '9' ) { VCH = ch; break; }
+          SUB = 10 * SUB + (int)(ch - '0');
+          ++k;
+        }
+      } else {
+        MAJOR = v /    100000;    
+        v -= MAJOR *   100000;
+        MINOR = v /      1000;    
+        v -= MINOR *     1000;
+        SUB = v /          10;
+        v -= SUB *         10;
+        VCH = (char)('a' + v); // FIXME
+      }
+      // Log.v("DistoX", "Major " + MAJOR + " minor " + MINOR + " sub " + SUB + VCH );
     } catch ( NameNotFoundException e ) {
       // FIXME
       e.printStackTrace();
@@ -889,7 +912,7 @@ public class TopoDroidApp extends Application
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
-      pw.format( "%s\n", VERSION );
+      pw.format( "%s %d\n", VERSION, VERSION_CODE );
       pw.format( "%s\n", DataHelper.DB_VERSION );
       pw.format( "%s\n", info.name );
       pw.format("%s\n", TDUtil.currentDate() );
@@ -919,35 +942,82 @@ public class TopoDroidApp extends Application
     // if ( mData.hasSurveyName( surveyname ) ) {
     //   return -1;
     // }
+    int version_code = 0;
+    int ret = 0;
     try {
       FileReader fr = new FileReader( filename );
       BufferedReader br = new BufferedReader( fr );
       // first line is version
       line = br.readLine().trim();
-      String[] ver = line.split("\\.");
-      int major = 0;
-      int minor = 0;
-      try {
-        major = Integer.parseInt( ver[0] );
-        minor = Integer.parseInt( ver[1] );
-      } catch ( NumberFormatException e ) {
-        TDLog.Error( "parse error: major/minor " + ver[0] + " " + ver[1] );
+      String[] vers = line.split(" ");
+      for ( int k=1; k<vers.length; ++ k ) {
+        if ( vers[k].length() > 0 ) {
+          try {
+            version_code = Integer.parseInt( vers[k] );
+            break;
+          } catch ( NumberFormatException e ) { }
+        }
       }
-      int sub   = 0;
-      int k = 0;
-      while ( k < ver[2].length() ) {
-        char ch = ver[2].charAt(k);
-        if ( ch < '0' || ch > '9' ) break;
-        sub = 10 * sub + (int)(ch - '0');
-        ++k;
+      if ( version_code == 0 ) {
+        String[] ver = vers[0].split("\\.");
+        int major = 0;
+        int minor = 0;
+        int sub   = 0;
+        char vch  = ' '; // char order: ' ' < A < B < ... < a < b < ... < '}' 
+        if ( ver.length > 2 ) { // M.m.sv version code
+          try {
+            major = Integer.parseInt( ver[0] );
+            minor = Integer.parseInt( ver[1] );
+          } catch ( NumberFormatException e ) {
+            TDLog.Error( "parse error: major/minor " + ver[0] + " " + ver[1] );
+            return -2;
+          }
+          int k = 0;
+          while ( k < ver[2].length() ) {
+            char ch = ver[2].charAt(k);
+            if ( ch < '0' || ch > '9' ) { vch = ch; break; }
+            sub = 10 * sub + (int)(ch - '0');
+            ++k;
+          }
+          // Log.v( "DistoX", "Version " + major + " " + minor + " " + sub );
+          if (    ( major < MAJOR_MIN )
+               || ( major == MAJOR_MIN && minor < MINOR_MIN )
+               || ( major == MAJOR_MIN && minor == MINOR_MIN && sub < SUB_MIN ) 
+            ) {
+            TDLog.Log( TDLog.LOG_ZIP, "TopoDroid version mismatch: " + line + " < " + MAJOR_MIN + "." + MINOR_MIN + "." + SUB_MIN );
+            return -2;
+          }
+          if (    ( major > MAJOR ) 
+               || ( major == MAJOR && minor > MINOR )
+               || ( major == MAJOR && minor == MINOR && sub > SUB ) ) {
+            ret = 1; 
+          } else if ( major == MAJOR && minor == MINOR && sub == SUB && vch > ' ' ) {
+            if ( VCH == ' ' ) { 
+              ret = 1;
+            } else if ( VCH <= 'Z' && ( vch >= 'a' || vch < VCH ) ) { // a-z or vch(A-Z) < VCH
+              ret = 1;
+            } else if ( VCH >= 'a' && vch < VCH ) { // A-Z < a-z 
+              ret = 1;
+            }
+          }
+
+        } else { // version code
+          try {
+            version_code = Integer.parseInt( ver[0] );
+            if ( version_code < CODE_MIN ) {
+              TDLog.Log( TDLog.LOG_ZIP, "TopoDroid version mismatch: " + line + " < " + CODE_MIN );
+              return -2;
+            }
+          } catch ( NumberFormatException e ) {
+            TDLog.Error( "parse error: version code " + ver[0] );
+            return -2;
+          }
+          if ( version_code > VERSION_CODE ) ret = 1;
+        }
+      } else {
+        if ( version_code > VERSION_CODE ) ret = 1;
       }
-      // Log.v( "DistoX", "Version " + major + " " + minor + " " + sub );
-      if (    ( major < MAJOR_MIN )
-           || ( major == MAJOR_MIN && minor < MINOR_MIN )
-           || ( major == MAJOR_MIN && minor == MINOR_MIN && sub < SUB_MIN ) ) {
-        TDLog.Log( TDLog.LOG_ZIP, "TopDroid version mismatch: found " + line + " expected " + VERSION );
-        return -2;
-      }
+
       line = br.readLine().trim();
       try {
         mManifestDbVersion = Integer.parseInt( line );
@@ -972,7 +1042,7 @@ public class TopoDroidApp extends Application
     } catch ( FileNotFoundException e ) {
     } catch ( IOException e ) {
     }
-    return 0;
+    return ret;
   }
 
 

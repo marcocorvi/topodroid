@@ -2,9 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="401168"
-      android:versionName="401168"
+      android:versionCode="402010"
+      android:versionName="4.2.1a"
     >
+    <!-- LETTER CODE must range a-j only: a=0, b=1, ... j=9 -->
+
     <!-- android:debuggable="true" -->
     <!-- Android SDK dependencies:
 	 (1) edit src/com/topodroid/DistoX/TDandroid.java

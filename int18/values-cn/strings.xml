@@ -1187,7 +1187,7 @@
   <string name="pref_backsight_title">后测</string>
   <string name="pref_backsight_summary">新建测线对话中的后测字符</string>
   <string name="pref_backshot_title">DistoX回测</string>
-  <string name="pref_backshot_summary">DistoX在回测模式</string>
+  <!-- TODO string name="pref_backshot_summary">Swap stations to DistoX backshots</string -->
   <string name="pref_prev_next_title">上一步/下一步 按钮</string>
   <string name="pref_prev_next_summary">测线对话中的上一步/下一步 按钮</string>
   <!-- UNUSED string name="pref_mag_anomaly_title">Magnetic Anomaly</string -->

@@ -67,7 +67,7 @@ class DBlock
   private int  mExtend;
   private long mFlag;     
   private int  mBlockType;   
-  int mShotType;  // 0: DistoX, 1: manual
+  private int mShotType;  // 0: DistoX, 1: manual, -1: DistoX backshot
   boolean mWithPhoto;
   boolean mMultiBad; // whether it disagree with siblings
   private float mStretch;
@@ -86,15 +86,15 @@ class DBlock
   static final private int BLOCK_V_SPLAY    = 8; // FIXME_V_SPLAY vertical splay
 
   static final private long[] legOfBlockType = {
-    LegType.NORMAL,
-    LegType.NORMAL,
-    LegType.EXTRA,
-    LegType.NORMAL, // BLANK_LEG
-    LegType.BACK,
-    LegType.NORMAL, // SPLAY
-    LegType.XSPLAY,
-    LegType.HSPLAY,
-    LegType.VSPLAY,
+    LegType.NORMAL, // 0 BLANK
+    LegType.NORMAL, // 0 LEG
+    LegType.EXTRA,  // 1 SEC_LEG
+    LegType.NORMAL, // 0 BLANK_LEG
+    LegType.BACK,   // 3 BACK_LEG
+    LegType.NORMAL, // 0 SPLAY
+    LegType.XSPLAY, // 2
+    LegType.HSPLAY, // 4
+    LegType.VSPLAY, // 5
   };
 
   static final int[] blockOfSplayLegType = {
@@ -301,7 +301,7 @@ class DBlock
     mExtend = e;
     mFlag   = FLAG_SURVEY;
     mBlockType = type;
-    mShotType = shot_type; // distox or manual
+    mShotType = shot_type; // distox, distox-backshot, or manual
     mWithPhoto = false;
     mMultiBad = false;
     mStretch  = 0.0f;
@@ -346,6 +346,15 @@ class DBlock
     mClino = TDMath.asind( v / mLength ); // nan if |v| > mLength
     return ( Math.abs(v) <= mLength );
   }
+
+  void setShotType( int type ) { mShotType = type; }
+  int  getShotType( ) { return mShotType; }
+
+  boolean isDistoX() { return mShotType <= 0; }
+  boolean isDistoXBacksight() { return TDSetting.mDistoXBackshot && mShotType == -1; }
+  boolean isForesight() { return mShotType == 0; }
+  boolean isBacksight() { return mShotType == -1; }
+  boolean isManual() { return mShotType > 0; }
 
   void setId( long shot_id, long survey_id )
   {
@@ -582,11 +591,17 @@ class DBlock
 
   String bearingString()
   {
+    if ( mShotType == -1 ) {
+    return String.format(Locale.US, "%.1f*", mBearing * TDSetting.mUnitAngle );
+    }
     return String.format(Locale.US, "%.1f", mBearing * TDSetting.mUnitAngle );
   }
 
   String clinoString()
   {
+    if ( mShotType == -1 ) {
+      return String.format(Locale.US, "%.1f*", mClino * TDSetting.mUnitAngle );
+    }
     return String.format(Locale.US, "%.1f", mClino * TDSetting.mUnitAngle );
   }
 

@@ -1163,7 +1163,7 @@
   <string name="pref_backsight_title">Vize inverse</string>
   <string name="pref_backsight_summary">Câmpurile pt viză inversă în fereastra unei măsurători noi</string>
   <string name="pref_backshot_title">Mod DistoX viză inversă</string>
-  <string name="pref_backshot_summary">DistoX-ul în modul de citire cu viză inversă</string>
+  <!-- TODO string name="pref_backshot_summary">Swap stations to DistoX backshots</string -->
   <string name="pref_prev_next_title">Butoane antecedent/următor</string>
   <string name="pref_prev_next_summary">Butoane antecedent/următor în fereastra unei măsurători noi</string>
   <!-- UNUSED string name="pref_mag_anomaly_title">Anomalie Magnetică</string -->

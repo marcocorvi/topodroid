@@ -180,6 +180,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="import_calib_no_data">Calibration file: no data</string>
     <string name="import_calib_io_error">Calibration file: read error</string>
     <string name="import_zip_ok">Successfully imported zip file</string>
+    <string name="import_zip_newer">Imported zip from more recent version</string>
     <!-- UNUSED string name="import_zip_wait">Imported zip file may take long. Please wait &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Saving sketch &#8230; please wait &#8230;</string -->
     <string name="MT_points_none">No MobileTopographer point</string>
@@ -865,6 +866,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="audio_delete">Delete ?</string>
     <string name="audio_overwrite">Overwrite ?</string>
 
+    <string name="import_lrud">Import LRUD</string>
+    <string name="import_leg_first">Leg before LRUD splays</string>
+    <string name="import_diving_datamode">Diving datamode</string>
+
     <string name="title_azimut">Extend reference azimuth</string>
     <string name="title_audio">Audio comment</string>
     <string name="title_calib">Calibrations</string>
@@ -961,6 +966,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_plot_zoomfit">Zoom fit / Orientation</string>
     <string name="title_calib_export">Export calibration</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
+
+    <string name="title_import_tro">VisualTopo import options</string>
+    <string name="title_import_dat">Compass import options</string>
 
   <string name="pref_export_settings">Export settings</string>
 
@@ -1187,7 +1195,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_backsight_title">Backsight</string>
   <string name="pref_backsight_summary">Backsight fields in the new-shot dialog</string>
   <string name="pref_backshot_title">Backshot DistoX</string>
-  <string name="pref_backshot_summary">DistoX in backshot mode</string>
+  <string name="pref_backshot_summary">Swap stations to DistoX backshots</string>
   <string name="pref_prev_next_title">Prev/Next buttons</string>
   <string name="pref_prev_next_summary">Prev/Next buttons in the shot dialog</string>
   <!-- UNUSED string name="pref_mag_anomaly_title">Magnetic Anomaly</string -->

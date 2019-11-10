@@ -318,6 +318,16 @@ public class MainWindow extends Activity
   // ---------------------------------------------------------------
   // FILE IMPORT
 
+  void importDatFile( String filepath, int datamode, boolean lrud, boolean leg_first )
+  {
+    new ImportCompassTask( this, datamode, lrud, leg_first ).execute( filepath );
+  }
+
+  void importTroFile( String filepath, boolean lrud, boolean leg_first )
+  {
+    new ImportVisualTopoTask( this, lrud, leg_first ).execute( filepath );
+  }
+
   void importFile( String filename )
   {
     // FIXME connect-title string
@@ -335,13 +345,14 @@ public class MainWindow extends Activity
       new ImportTherionTask( this ).execute( filepath, name );
     } else if ( filename.endsWith(".dat") || filename.endsWith(".DAT") ) {
       String filepath = TDPath.getImportFile( filename );
-      new ImportCompassTask( this ).execute( filepath );
+      (new ImportTroDialog( this, this, filepath )).show();
+      // new ImportCompassTask( this ).execute( filepath );
     } else if ( filename.endsWith(".top") || filename.endsWith(".TOP") ) {
       String filepath = TDPath.getImportFile( filename );
       new ImportPocketTopoTask( this ).execute( filepath, filename ); // TODO pass the drawer as arg
     } else if ( filename.endsWith(".tro") || filename.endsWith(".TRO") ) {
       String filepath = TDPath.getImportFile( filename );
-      new ImportVisualTopoTask( this ).execute( filepath ); 
+      (new ImportTroDialog( this, this, filepath )).show();
     } else if ( filename.endsWith(".svx") || filename.endsWith(".SVX") ) {
       String filepath = TDPath.getImportFile( filename );
       new ImportSurvexTask( this ).execute( filepath ); 

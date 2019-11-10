@@ -234,9 +234,10 @@ class TopoDroidComm
       double mag  = mProtocol.mMagnetic;
       double dip  = mProtocol.mDip;
       double roll = mProtocol.mRoll;
+      boolean backshot = mProtocol.mBackshot;
       TDLog.Log( TDLog.LOG_COMM, "Comm V PACKET " + mLastShotId + " " + acc + " " + mag + " " + dip + " " + roll );
       if ( TDInstance.deviceType() == Device.DISTO_X310 ) {
-        TopoDroidApp.mData.updateShotAMDR( mLastShotId, TDInstance.sid, acc, mag, dip, roll );
+        TopoDroidApp.mData.updateShotAMDR( mLastShotId, TDInstance.sid, acc, mag, dip, roll, backshot );
         if ( TDSetting.mWaitData > 10 ) {
           TDUtil.slowDown( TDSetting.mWaitData );
         }

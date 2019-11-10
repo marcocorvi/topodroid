@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 // import android.app.Activity;
 import android.app.Dialog;
 // import android.os.Bundle;
@@ -89,10 +91,11 @@ class MyDialog extends Dialog
   // public boolean onKeyLongPress( int code, KeyEvent ev )
   public boolean onKeyDown( int code, KeyEvent ev )
   {
+    // Log.v("DistoX-KEYCODE", "code " + code );
     if ( code == KeyEvent.KEYCODE_BACK ) {
       onBackPressed();
       return true;
-    } else if ( code == KeyEvent.KEYCODE_MENU ) {
+    } else if ( code == KeyEvent.KEYCODE_MENU || code == KeyEvent.KEYCODE_VOLUME_UP ) {
       if ( mHelpPage != null ) {
         UserManualActivity.showHelpPage( mContext, mHelpPage );
       }

@@ -328,24 +328,26 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       } else {
         tvId.setVisibility( View.GONE );
       }
-      // if ( b.isLeg() ) {
-        if ( mParent.isCurrentStationName( b.mFrom ) ) {
-          tvFrom.setTextColor( TDColor.LIGHT_GREEN );
-        } else {
-          tvFrom.setTextColor( col );
-          tvTo.setTextColor( ( mParent.isCurrentStationName( b.mTo )  )? TDColor.LIGHT_GREEN : col );
-        }
-      // } else {
-      //   tvFrom.setTextColor( col );
-      //   tvTo.setTextColor(   col );
-      // }
+      tvFrom.setTextColor( ( mParent.isCurrentStationName( b.mFrom ) )? TDColor.LIGHT_GREEN : col );
+      tvTo.setTextColor(   ( mParent.isCurrentStationName( b.mTo   ) )? TDColor.LIGHT_GREEN : col );
       tvLength.setTextColor( col );
 
-      if ( b.isRecent( ) ) { 
-	// b.mWasRecent = true;
-        tvFrom.setBackgroundColor( TDColor.DARK_GREEN );
-        tvTo.setBackgroundColor( TDColor.DARK_GREEN );
-      } 
+      if ( b.isBacksight() ) {
+        if ( b.isRecent() ) { 
+	  // b.mWasRecent = true;
+          tvFrom.setBackgroundColor( TDColor.GREEN );
+          tvTo.setBackgroundColor( TDColor.GREEN );
+        } else {
+          tvFrom.setBackgroundColor( TDColor.BACK_YELLOW );
+          tvTo.setBackgroundColor( TDColor.BACK_YELLOW );
+        } 
+      } else {
+        if ( b.isRecent() ) { 
+	  // b.mWasRecent = true;
+          tvFrom.setBackgroundColor( TDColor.DARK_GREEN );
+          tvTo.setBackgroundColor( TDColor.DARK_GREEN );
+        } 
+      }
 
       if ( b.isCommented() ) {
         tvLength.setBackgroundColor( TDColor.VERYDARK_GRAY );

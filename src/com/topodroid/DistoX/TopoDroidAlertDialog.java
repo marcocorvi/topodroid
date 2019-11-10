@@ -75,7 +75,7 @@ class TopoDroidAlertDialog
 
       AlertDialog alert = alert_builder.create();
       
-      // NEED API LEVEL 11 for custom background color
+      // NEEDED API-11 for custom background color
       if ( Build.VERSION.SDK_INT > Build.VERSION_CODES.N ) {
         alert.getWindow().setBackgroundDrawableResource( R.drawable.alert_bg );
       } else {
@@ -112,7 +112,7 @@ class TopoDroidAlertDialog
       }
 
       AlertDialog alert = alert_builder.create();
-      // NEED API LEVEL 11 for custom background color
+      // NEEDED API-11 for custom background color
       if ( Build.VERSION.SDK_INT > Build.VERSION_CODES.N ) {
         alert.getWindow().setBackgroundDrawableResource( R.drawable.alert_bg );
       } else {

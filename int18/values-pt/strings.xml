@@ -1161,7 +1161,7 @@
   <string name="pref_backsight_title">Medida contra</string>
   <string name="pref_backsight_summary">Campos de contra azimute e inclinação invertida para inserção manual de medida</string>
   <string name="pref_backshot_title">Contramedida DistoX</string>
-  <string name="pref_backshot_summary">DistoX em modo de contramedida</string>
+  <!-- TODO string name="pref_backshot_summary">Swap stations to DistoX backshots</string -->
   <string name="pref_prev_next_title">Botões Ant/Próx</string>
   <string name="pref_prev_next_summary">Botões Ant/Próx na janela de medição</string>
   <!-- UNUSED string name="pref_mag_anomaly_title">Anomalia magnética</string -->

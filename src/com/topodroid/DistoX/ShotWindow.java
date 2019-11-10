@@ -1042,7 +1042,7 @@ public class ShotWindow extends Activity
     mList.setOnItemLongClickListener( this );
     mList.setDividerHeight( 2 );
     // mList.setSmoothScrollbarEnabled( true );
-    // mList.setFastScrollAlwaysVisible( true ); // API-11
+    // mList.setFastScrollAlwaysVisible( true ); // REQUIRES API-11
     // mList.setFastScrollEnabled( true );
 
     // restoreInstanceFromData();

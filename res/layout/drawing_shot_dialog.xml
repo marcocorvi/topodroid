@@ -40,6 +40,13 @@
       android:text="@string/dash"
       android:nextFocusDown="@+id/shot_comment"
       />
+    <TextView android:id="@+id/shot_type"
+      style="@style/edit_text"
+      android:layout_marginTop="@dimen/margintiny"
+      android:layout_width="0dp"
+      android:layout_weight="30"
+      android:text="@string/dash"
+      />
   </LinearLayout>
 
   <EditText android:id="@+id/shot_comment"

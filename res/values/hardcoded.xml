@@ -55,4 +55,8 @@
   <string name="p_water" translatable="false">water</string>
   <string name="p_wall" translatable="false">wall</string>
 
+  <string name="type_b" translatable="false">B</string>
+  <string name="type_d" translatable="false">D</string>
+  <string name="type_m" translatable="false">M</string>
+
 </resources>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+  android:layout_width="match_parent" 
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  >
+  <TextView android:id="@+id/dat_path"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margintiny"
+    android:textSize="@dimen/textsizebig"
+  />
+
+  <TextView android:id="@+id/dat_what"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:layout_marginTop="@dimen/margintiny"
+  />
+
+  <CheckBox android:id="@+id/dat_lrud"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:text="@string/import_lrud"
+    />
+
+  <CheckBox android:id="@+id/dat_leg_first"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:text="@string/import_leg_first"
+    />
+
+  <CheckBox android:id="@+id/dat_diving_datamode"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:text="@string/import_diving_datamode"
+    />
+
+  <LinearLayout 
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" 
+    android:layout_marginTop="@dimen/marginvbig" 
+    android:layout_gravity="right"
+    android:gravity="right"
+    >
+    <Button android:id="@+id/dat_cancel"
+      style="@style/button_default"
+      android:text="@string/button_cancel"
+      android:layout_marginRight="@dimen/marginh" 
+    />
+    <Button android:id="@+id/dat_ok"
+      style="@style/button_default"
+      android:text="@string/button_ok"
+    />
+  </LinearLayout>
+
+</LinearLayout>

@@ -107,7 +107,7 @@ public class SensorActivity extends Activity
       mRBMagnetic.setEnabled( false );
     }
 
-    sl = mSensorManager.getSensorList( TDandroid.TEMPERATURE ); // Android >= API_14
+    sl = mSensorManager.getSensorList( TDandroid.TEMPERATURE ); // REQUIRES API-14
     if ( sl.size() > 0 ) {
       mRBTemperature.setOnClickListener( this );
       mSensor.addAll( sl ); // for ( Sensor s : sl ) mSensor.add( s );

@@ -25,15 +25,20 @@ import java.util.Locale;
 
 class ParserCompass extends ImportParser
 {
+  private boolean mLrud;
+  private boolean mLegFirst;
+
   /** Compass parser
    * @param filename name of the file to parse
    * @param apply_declination whether to aapply declination correction
    */
-  ParserCompass( String filename, boolean apply_declination ) throws ParserException
+  ParserCompass( String filename, boolean apply_declination, boolean lrud, boolean leg_first ) throws ParserException
   {
     super( apply_declination );
     // Log.v("DistoX", "Parser Compass <" + filename + ">" );
     // mName = survey name is read from the file
+    mLrud     = lrud;
+    mLegFirst = leg_first;
     readFile( filename );
     checkValid();
   }
@@ -147,34 +152,43 @@ class ParserCompass extends ImportParser
                     }
                   }
                 }
+                mBearing = TDMath.in360( mBearing );
+
                 // got shot+LRUD
                 int extend = 0;
-                if ( mLeft > 0 ) {
-                  float ber = mBearing + 270;
-                  if ( ber > 360 ) ber -= 360;
-                  extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : DBlock.EXTEND_UNSET;
-                  // FIXME splays in the shots array to keep them interleaved with legs, but have leg flag 2
-                  shots.add( new ParserShot( mFrom, TDString.EMPTY, mLeft, ber, 0.0f, 0.0f, extend, 2, false, false, false, "" ) );
+                if ( mLegFirst ) {
+                  extend = ( mBearing < 90 || mBearing > 270 )? 1 : -1;
+                  shots.add( new ParserShot( mFrom, mTo, mLength, mBearing, mClino, 0.0f,
+                             extend, LegType.NORMAL, isDuplicate( mFlag ), isSurface(mFlag), isBackshot(mFlag), mComment ) );
                 }
-                if ( mRight > 0 ) {
-                  float ber = mBearing + 90;
-                  if ( ber > 360 ) ber -= 360;
-                  extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : DBlock.EXTEND_UNSET;
-                  shots.add( new ParserShot( mFrom, TDString.EMPTY, mRight, ber, 0.0f, 0.0f, extend, 2, false, false, false, "" ) );
+                if ( mLrud ) {
+                  if ( mLeft > 0 ) {
+                    float ber = TDMath.in360( mBearing + 270 );
+                    extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : DBlock.EXTEND_UNSET;
+                    // FIXME splays in the shots array to keep them interleaved with legs, but have leg flag 2
+                    shots.add( new ParserShot( mFrom, TDString.EMPTY, mLeft, ber, 0.0f, 0.0f, extend, LegType.XSPLAY, false, false, false, "" ) );
+                  }
+                  if ( mRight > 0 ) {
+                    float ber = TDMath.in360( mBearing + 90 );
+                    extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : DBlock.EXTEND_UNSET;
+                    shots.add( new ParserShot( mFrom, TDString.EMPTY, mRight, ber, 0.0f, 0.0f, extend, LegType.XSPLAY, false, false, false, "" ) );
+                  }
+                  if ( mUp > 0 ) {
+                    shots.add( new ParserShot( mFrom, TDString.EMPTY, mUp, 0.0f, 90.0f, 0.0f, DBlock.EXTEND_VERT, LegType.XSPLAY, false, false, false, "" ) );
+                  }
+                  if ( mDown > 0 ) {
+                    shots.add( new ParserShot( mFrom, TDString.EMPTY, mDown, 0.0f, -90.0f, 0.0f, DBlock.EXTEND_VERT, LegType.XSPLAY, false, false, false, "" ) );
+                  }
                 }
-                if ( mUp > 0 ) {
-                  shots.add( new ParserShot( mFrom, TDString.EMPTY, mUp, 0.0f, 90.0f, 0.0f, DBlock.EXTEND_VERT, 2, false, false, false, "" ) );
+                if ( ! mLegFirst ) {
+                  extend = ( mBearing < 90 || mBearing > 270 )? 1 : -1;
+                  shots.add( new ParserShot( mFrom, mTo, mLength, mBearing, mClino, 0.0f,
+                             extend, LegType.NORMAL, isDuplicate( mFlag ), isSurface(mFlag), isBackshot(mFlag), mComment ) );
                 }
-                if ( mDown > 0 ) {
-                  shots.add( new ParserShot( mFrom, TDString.EMPTY, mDown, 0.0f, -90.0f, 0.0f, DBlock.EXTEND_VERT, 2, false, false, false, "" ) );
-                }
-                extend = ( mBearing < 90 || mBearing > 270 )? 1 : -1;
-                shots.add( new ParserShot( mFrom, mTo, mLength, mBearing, mClino, 0.0f,
-                           extend, 0, isDuplicate( mFlag ), isSurface(mFlag), isBackshot(mFlag), mComment ) );
               } else { // got only shot
                 int extend = ( mBearing < 90 || mBearing > 270 )? 1 : -1;
                 shots.add( new ParserShot( mFrom, mTo, mLength, mBearing, mClino, 0.0f,
-                                 extend, 0, isDuplicate( mFlag ), isSurface(mFlag), isBackshot(mFlag), mComment ) );
+                                 extend, LegType.NORMAL, isDuplicate( mFlag ), isSurface(mFlag), isBackshot(mFlag), mComment ) );
               }
             } catch ( NumberFormatException e ) {
               TDLog.Error( "ERROR " + mLineCnt + ": " + line + e.getMessage() );

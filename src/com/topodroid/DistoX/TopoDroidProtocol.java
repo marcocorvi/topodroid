@@ -67,6 +67,7 @@ class TopoDroidProtocol
   protected byte mRollHigh; // high byte of roll
   long mGX, mGY, mGZ;
   long mMX, mMY, mMZ;
+  boolean mBackshot;
 
   protected byte[] mBuffer = new byte[8]; // packet buffer
   protected byte[] mAddress;        // request-reply address
@@ -163,6 +164,7 @@ class TopoDroidProtocol
     // int high, low;
     switch ( type ) {
       case 0x01: // Data
+        mBackshot = false;
         int dhh = (int)( mBuffer[0] & 0x40 );
         double d =  dhh * 1024.0 + MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
         double b = MemoryOctet.toInt( mBuffer[4], mBuffer[3] );
@@ -227,6 +229,7 @@ class TopoDroidProtocol
         return DISTOX_PACKET_M;
       case 0x04: // Vector data packet
         if ( mDeviceType == Device.DISTO_X310 ) {
+          mBackshot = ( (mBuffer[0] & 0x40) == 0x40 );
           double acc = MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
           double mag = MemoryOctet.toInt( mBuffer[4], mBuffer[3] );
           double dip = MemoryOctet.toInt( mBuffer[6], mBuffer[5] );

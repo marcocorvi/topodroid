@@ -26,6 +26,9 @@ import android.graphics.Shader.TileMode;
 import android.content.Context;
 import android.content.res.Resources;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 // import android.util.Log;
 
 /**
@@ -431,6 +434,13 @@ class BrushManager
       }
     }
     return palette;
+  }
+
+  static void toDataStream( DataOutputStream dos )
+  {
+    if ( mPointLib != null ) { mPointLib.toDataStream(dos); } else { try { dos.writeUTF(""); } catch (IOException e) { } }
+    if ( mLineLib  != null ) { mLineLib.toDataStream(dos);  } else { try { dos.writeUTF(""); } catch (IOException e) { } }
+    if ( mAreaLib  != null ) { mAreaLib.toDataStream(dos);  } else { try { dos.writeUTF(""); } catch (IOException e) { } }
   }
 
 }

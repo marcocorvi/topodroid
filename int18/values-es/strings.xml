@@ -1171,7 +1171,7 @@
   <string name="pref_backsight_title">Toma duplicada visual</string>
   <string name="pref_backsight_summary">Se duplican los datos en el diálogo de la toma manual</string>
   <string name="pref_backshot_title">visual inversa DistoX</string>
-  <string name="pref_backshot_summary">Modo visual inversa DistoX</string>
+  <!-- TODO string name="pref_backshot_summary">Swap stations to DistoX backshots</string -->
   <string name="pref_prev_next_title">Añadir botón Ant./Sig.</string>
   <string name="pref_prev_next_summary">Añade un botón Anterior/Sguiente en diálogo de toma</string>
   <!-- UNUSED string name="pref_mag_anomaly_title">Compensación magnética</string -->

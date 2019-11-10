@@ -44,10 +44,6 @@ class StationName
   {
   }
 
-  protected void assignStationsBackshot( List<DBlock> list, Set<String> sts )
-  {
-  }
-
   // ----------------------------------------------------------------
   protected void legFeedback( )
   {
@@ -82,29 +78,9 @@ class StationName
   // used only to reset/getCurrentOrLastStation name
   static private String getLastStationName( DataHelper data, long sid )
   {
-    // FIXME not efficient: use a better select with reverse order and test on FROM
-    // DBlock last = null;
-    // List<DBlock> list = data_helper.selectAllShots( sid, TDStatus.NORMAL );
-    // if ( TDSetting.mDistoXBackshot ) {
-    //   for ( DBlock blk : list ) {
-    //     if ( blk.mTo != null && blk.mTo.length() > 0 ) { last = blk; }
-    //   }
-    //   if ( last == null ) return TDString.ZERO;
-    //   if ( last.mFrom == null || last.mFrom.length() == 0 ) return last.mTo;
-    //   if ( StationPolicy.mSurveyStations == 1 ) return last.mFrom;  // forward-shot
-    //   return last.mTo;
-    // } else {
-    //   for ( DBlock blk : list ) {
-    //     if ( blk.mFrom != null && blk.mFrom.length() > 0 ) { last = blk; }
-    //   }
-    //   if ( last == null ) return TDString.ZERO;
-    //   if ( last.mTo == null || last.mTo.length() == 0 ) return last.mFrom;
-    //   if ( StationPolicy.mSurveyStations == 1 ) return last.mTo;  // forward-shot
-    //   return last.mFrom;
-    // }
-    DBlock last = data.selectLastNonBlankShot( sid, /* TDStatus.NORMAL, */ TDSetting.mDistoXBackshot );
+    DBlock last = data.selectLastNonBlankShot( sid );
     if ( last == null ) return TDSetting.mInitStation;
-    if ( TDSetting.mDistoXBackshot ) {
+    if ( last.isDistoXBacksight() ) {
       if ( last.mFrom == null || last.mFrom.length() == 0 ) return last.mTo;
       if ( StationPolicy.mSurveyStations == 1 ) return last.mFrom;  // forward-shot
       return last.mTo;
@@ -200,4 +176,30 @@ class StationName
     return true;
   }
 
+  protected void setLegName( DBlock blk, String from, String to )
+  {
+    if ( blk.isDistoXBacksight() ) { // bs
+      setBlockName( blk, to, from );
+    } else {
+      setBlockName( blk, from, to );
+    }
+  }
+
+  protected void setLegName( DBlock blk, String from, String to, boolean is_backsight_shot )
+  {
+    if ( blk.isDistoXBacksight() ) { // bs
+      setBlockName( blk, to, from, is_backsight_shot );
+    } else {
+      setBlockName( blk, from, to, is_backsight_shot );
+    }
+  }
+
+  protected void setSplayName( DBlock splay, String name ) 
+  {
+    if ( splay.isDistoXBacksight() ) {
+      setBlockName( splay, "", name );
+    } else {
+      setBlockName( splay, name, "" );
+    }
+  }
 }

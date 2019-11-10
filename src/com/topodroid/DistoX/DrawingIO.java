@@ -35,7 +35,7 @@ import java.io.IOException;
 
 import java.util.List;
 import java.util.ArrayList;
-// import android.util.ArraySet; // API 23
+// import android.util.ArraySet; // REQUIRES API-23
 // import java.util.HashMap;
 import java.util.Locale;
 
@@ -901,7 +901,7 @@ class DrawingIO
               break;
           } 
           if (    in_scrap && path != null 
-               && ( BrushManager.mLineLib.isWall( path.mLineType ) || path.hasOutline() ) ) {
+               && ( BrushManager.isLineWallGroup( path.mLineType ) || path.hasOutline() ) ) {
             // Log.v("DistoXX", "outline add path ... " + path.mFirst.x + " " + path.mFirst.y + " path size " + path.size()  );
             path.setPathPaint( BrushManager.fixedGrid100Paint );
             if ( name != null ) { // xsection outline
@@ -933,9 +933,7 @@ class DrawingIO
       dos.writeUTF( scrap_name );
       dos.writeInt( type );
       if ( type == PlotInfo.PLOT_PROJECTED ) dos.writeInt( proj_dir );
-      BrushManager.mPointLib.toDataStream( dos );
-      BrushManager.mLineLib.toDataStream( dos );
-      BrushManager.mAreaLib.toDataStream( dos );
+      BrushManager.toDataStream( dos );
 
       dos.write('I');
       dos.writeFloat( bbox.left );
@@ -997,9 +995,7 @@ class DrawingIO
       dos.writeUTF( scrap_name );
       dos.writeInt( type );
       if ( type == PlotInfo.PLOT_PROJECTED ) dos.writeInt( proj_dir );
-      BrushManager.mPointLib.toDataStream( dos );
-      BrushManager.mLineLib.toDataStream( dos );
-      BrushManager.mAreaLib.toDataStream( dos );
+      BrushManager.toDataStream( dos );
 
       dos.write('I');
       dos.writeFloat( bbox.left );
@@ -1336,7 +1332,7 @@ class DrawingIO
   {
     // Log.v("DistoXX", "export multiscrap type " + type + " proj " + proj_name );
 
-    // ArraySet<String> plots = new ArraySet<String>(); // need API-23
+    // ArraySet<String> plots = new ArraySet<String>(); // REQUIRES API-23
     int NPLOTS = 8;
     int nplots = 0;
     String[] plots = new String[NPLOTS];

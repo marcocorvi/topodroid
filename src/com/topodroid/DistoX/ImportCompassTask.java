@@ -20,11 +20,15 @@ import java.util.ArrayList;
 class ImportCompassTask extends ImportTask
 {
   private int mDatamode;
+  private boolean mLrud;
+  private boolean mLegFirst;
 
-  ImportCompassTask( MainWindow main )
+  ImportCompassTask( MainWindow main, int datamode, boolean lrud, boolean leg_first )
   {
     super( main );
-    mDatamode = TDSetting.mImportDatamode;
+    mDatamode = datamode; 
+    mLrud     = lrud;
+    mLegFirst = leg_first;
   }
 
   @Override
@@ -32,7 +36,7 @@ class ImportCompassTask extends ImportTask
   {
     long sid = 0;
     try {
-      ParserCompass parser = new ParserCompass( str[0], true ); // apply_declination = true
+      ParserCompass parser = new ParserCompass( str[0], true, mLrud, mLegFirst ); // apply_declination = true
       if ( ! parser.isValid() ) return -2L;
       if ( mApp.get() == null ) return -1L;
       DataHelper app_data = TopoDroidApp.mData;

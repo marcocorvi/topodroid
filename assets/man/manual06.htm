@@ -14,21 +14,40 @@ The title color depends on the current station assignment policy:
 <li>orange: "toporobot" policy</li>
 </ul><br><p>
 
-TopoDroid distinguishes four kinds of shots (displayed with different colors):
+TopoDroid distinguishes four kinds of shots (displayed with different colors): "leg", "repeated-leg", "splay", and "blank".
+Important shot properties are shown through the background color of the shot data and station names.
+<br><p>
+
+Shot data foreground color:
 <ol>
-<li>[red] "blank" shots, i.e, shots with the stations not set yet</li>
-<li>[blue] "splay": it has only one station, usually the "From" station. Splays can further be marked as X-splay (green), or H/V-splay (dark blue).</li>
 <li>[white] "leg" (the first shot of a group of repeated measurements): this shot has both the "From" and the "To" station set</li>
-<li>[yellow]: "backsight leg"</li>
-<li>[grey] "repeated-leg" (the following shots of a group of leg shots): these shots do not need to have the stations set</li>
+<li>[grey] repeated-leg data (the following shots of a group of leg shots): these shots do not need to have the stations set</li>
+<li>[blue] splay: it has only one station, usually the "From" station</li>
+<li>[green] X-splay</li>
+<li>[dark blue] H/V-splay</li>
+<li>[red] blank shots, i.e, shots with the stations not set yet</li>
+<li>[yellow]: backsight leg</li>
 </ol><p>
-Background colors:
+
+Station name foreground color:
 <ul>
-<li>blueish (station): last downloaded shots</li>
-<li>reddish (data): <a href="page_accuracy.htm">unreliable</a> shots, i.e. shots with "abnormal" field intensities (only DistoX2)</li>
-<li>orange (data): short leg</li>
-<li>gray: commented shot</li>
-</ul><br>
+<li>[light green] current station</li>
+</ul><p>
+
+Shot data background color:
+<ul>
+<li>[reddish] <a href="page_accuracy.htm">unreliable</a> shots, i.e. shots with "abnormal" field intensities (only DistoX2)</li>
+<li>[orange] short leg</li>
+<li>[gray] commented shot</li>
+</ul><p>
+
+Station names background color:
+<ul>
+<li>[dark green] last downloaded shots</li>
+<li>[gray] shot in multiselection set</li>
+<li>[dark yellow] DistoX backsight data</li>
+</ul><p>
+
 <img src="shots_list.png" alt="shots list"/><p>
 
 <h4>ACTIONS</h4>

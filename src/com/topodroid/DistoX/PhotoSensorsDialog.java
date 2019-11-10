@@ -180,7 +180,7 @@ class PhotoSensorsDialog extends MyDialog
       mCBleg.setChecked( false );
       layout4b.addView( mCBleg );
       mCBleg.setLayoutParams( lp );
-      if ( TDLevel.overAdvanced && mBlk.mShotType == 0 ) {
+      if ( TDLevel.overAdvanced && mBlk.isDistoX() ) {
         layout4c.setMinimumHeight( size + 20 );
         mButtonCheck  = new MyCheckBox( mContext, size, R.drawable.iz_compute_transp, R.drawable.iz_compute_transp );
         mButtonCheck.setOnClickListener( this );

@@ -177,7 +177,7 @@ class ShotDialog extends MyDialog
       shot_bearing  = blk.bearingString();
       shot_clino    = blk.clinoString();
     }
-    shot_manual   = (blk.mShotType > 0);
+    shot_manual   = blk.isManual();
 
     // Log.v("DistoX", "shot is manual " + shot_manual + " length " + shot_distance );
 

@@ -189,7 +189,7 @@ class ParserSurvex extends ImportParser
                 to = checkAlias( ParserUtil.applyCase( state.mCase, vals[0] ) );
 		if ( from != null ) { // add shot
                   shots.add( new ParserShot( from, to, len, ber, cln, 0.0f,
-                                         DBlock.EXTEND_RIGHT, 0, state.mDuplicate, state.mSurface, false, "" ) );
+                                         DBlock.EXTEND_RIGHT, LegType.NORMAL, state.mDuplicate, state.mSurface, false, "" ) );
 		}
 		from = to;
 		in_station = false; // in_data
@@ -457,7 +457,7 @@ class ParserSurvex extends ImportParser
                   from = checkAlias( ParserUtil.applyCase( state.mCase, vals[1] ) );
                   for ( int j=2; j<vals_len; ++j ) {
                     to = checkAlias( ParserUtil.applyCase( state.mCase, vals[j] ) ); 
-                    shots.add( new ParserShot( from, to, 0.0f, 0.0f, 0.0f, 0.0f, 0, 0, true, false, false, "" ) );
+                    shots.add( new ParserShot( from, to, 0.0f, 0.0f, 0.0f, 0.0f, 0, LegType.NORMAL, true, false, false, "" ) );
                   }
                 }
               } else if ( cmd.equals("data") ) {
@@ -518,7 +518,7 @@ class ParserSurvex extends ImportParser
                   to = checkAlias( ParserUtil.applyCase( state.mCase, vals[0] ) );
 		  if ( from != null ) { // add shot
                     shots.add( new ParserShot( from, to, len, ber, cln, 0.0f,
-                                           DBlock.EXTEND_RIGHT, 0, state.mDuplicate, state.mSurface, false, "" ) );
+                                           DBlock.EXTEND_RIGHT, LegType.NORMAL, state.mDuplicate, state.mSurface, false, "" ) );
 		  }
 		  from = to;
                   in_station = false;
@@ -571,24 +571,24 @@ class ParserSurvex extends ImportParser
                       // b = ber - 90; if ( b < 0 ) b += 360;
                       b = TDMath.in360( ber - 90 );
                       shots.add( new ParserShot( from, TDString.EMPTY,
-                                 dist, b, 0, 0.0f, DBlock.EXTEND_UNSET, 2, state.mDuplicate, state.mSurface, false, "" ) );
+                                 dist, b, 0, 0.0f, DBlock.EXTEND_UNSET, LegType.XSPLAY, state.mDuplicate, state.mSurface, false, "" ) );
                     }
                     if ( jRight >= 0 && jRight < vals_len) {
                       dist = Float.parseFloat( vals[jRight] ) * sLen - zLen;
                       // b = ber + 90; if ( b >= 360 ) b -= 360;
                       b = TDMath.add90( ber );
                       shots.add( new ParserShot( from, TDString.EMPTY,
-                                 dist, b, 0, 0.0f, DBlock.EXTEND_UNSET, 2, state.mDuplicate, state.mSurface, false, "" ) );
+                                 dist, b, 0, 0.0f, DBlock.EXTEND_UNSET, LegType.XSPLAY, state.mDuplicate, state.mSurface, false, "" ) );
                     }
                     if ( jUp >= 0 && jUp < vals_len) {
                       dist = Float.parseFloat( vals[jUp] ) * sLen - zLen;
                       shots.add( new ParserShot( from, TDString.EMPTY,
-                                 dist, 0, 90, 0.0f, DBlock.EXTEND_UNSET, 2, state.mDuplicate, state.mSurface, false, "" ) );
+                                 dist, 0, 90, 0.0f, DBlock.EXTEND_UNSET, LegType.XSPLAY, state.mDuplicate, state.mSurface, false, "" ) );
                     }
                     if ( jDown >= 0 && jDown < vals_len) {
                       dist = Float.parseFloat( vals[jDown] ) * sLen - zLen;
                       shots.add( new ParserShot( from, TDString.EMPTY,
-                                 dist, 0, -90, 0.0f, DBlock.EXTEND_UNSET, 2, state.mDuplicate, state.mSurface, false, "" ) );
+                                 dist, 0, -90, 0.0f, DBlock.EXTEND_UNSET, LegType.XSPLAY, state.mDuplicate, state.mSurface, false, "" ) );
                     }
 
                     // TODO add shot
@@ -596,12 +596,12 @@ class ParserSurvex extends ImportParser
                       // FIXME splays
                       shots.add( new ParserShot( from, TDString.EMPTY,
                                             len, ber, cln, 0.0f,
-                                            DBlock.EXTEND_UNSET, 0, state.mDuplicate, state.mSurface, false, "" ) );
+                                            DBlock.EXTEND_UNSET, LegType.NORMAL, state.mDuplicate, state.mSurface, false, "" ) );
                     } else {
                       // Log.v( TopoDroidApp.TAG, "add shot " + from + " -- " + to);
                       shots.add( new ParserShot( from, to,
                                            len, ber, cln, 0.0f,
-                                           DBlock.EXTEND_RIGHT, 0, state.mDuplicate, state.mSurface, false, "" ) );
+                                           DBlock.EXTEND_RIGHT, LegType.NORMAL, state.mDuplicate, state.mSurface, false, "" ) );
                     }
                   } catch ( NumberFormatException e ) {
                     TDLog.Error( "survex parser error: data " + line );

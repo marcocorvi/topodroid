@@ -776,13 +776,12 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], B, def[ 1], FLOAT,   ctx, hlp ), // MAX_SHOT_LENGTH
       makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], B, def[ 2], FLOAT,   ctx, hlp ), // MIN_LEG_LENGTH
       makeLst( cat, key[ 3], tit[ 3], dsc[ 3], E, def[ 3], R.array.legShots, R.array.legShotsValue, ctx, hlp ),
-      makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], T, def[ 4],          ctx, hlp ), // BACKSHOT DistoX
-      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], N, def[ 5], FLOAT,   ctx, hlp ), // EXTEND_THRS
-      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], N, def[ 6], FLOAT,   ctx, hlp ),
-      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7],          ctx, hlp ), // AZIMUTH_MANUAL
-      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8],          ctx, hlp ), // PREV_NEXT
-      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9],          ctx, hlp ), // BACKSIGHT
-      makeLst( cat, key[10], tit[10], dsc[10], N, def[10], R.array.feedbackMode, R.array.feedbackModeValue, ctx, hlp ) // DISTOX_LEG_FEEDBACK
+      makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], N, def[ 4], FLOAT,   ctx, hlp ), // EXTEND_THRS
+      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], N, def[ 5], FLOAT,   ctx, hlp ),
+      makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], A, def[ 6],          ctx, hlp ), // AZIMUTH_MANUAL
+      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7],          ctx, hlp ), // PREV_NEXT
+      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8],          ctx, hlp ), // BACKSIGHT
+      makeLst( cat, key[ 9], tit[ 9], dsc[ 9], N, def[ 9], R.array.feedbackMode, R.array.feedbackModeValue, ctx, hlp ) // DISTOX_LEG_FEEDBACK
       // makeEdt( cat, key[10], tit[10], dsc[10], T, def[10], INTEGER, ctx, hlp ), // TIMER
       // makeEdt( cat, key[11], tit[11], dsc[11], T, def[11], INTEGER, ctx, hlp ), // VOLUME
     };
@@ -1007,15 +1006,16 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeCbx( cat, key[ 3], tit[ 3], dsc[ 3], E, def[ 3],          ctx, hlp ), // SPLAY CLASSES
       makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], T, def[ 4],          ctx, hlp ), // SPLAY COLOR
       makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5],          ctx, hlp ), // EXTEND FRAC
-      makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], T, def[ 6],          ctx, hlp ), // BEDDING PLANE
-      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7],          ctx, hlp ), // WITH SENSORS
-      makeLst( cat, key[ 8], tit[ 8], dsc[ 8], E, def[ 8], R.array.loopClosure, R.array.loopClosureValue, ctx, hlp ),
+      makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], T, def[ 6],          ctx, hlp ), // BACHSHOT
+      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], T, def[ 7],          ctx, hlp ), // BEDDING PLANE
+      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8],          ctx, hlp ), // WITH SENSORS
+      makeLst( cat, key[ 9], tit[ 9], dsc[ 9], E, def[ 9], R.array.loopClosure, R.array.loopClosureValue, ctx, hlp ),
       // makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9], FLOAT,   ctx, hlp ), // DIST/ANGLE TOLERANCE
       // makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9],          ctx, hlp )  // SPLAYS AT ACTIVE STATION
       // makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9],          ctx, hlp )  // WITH RENAME
-      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9],          ctx, hlp ),// WITH ANDROID AZIMUTH
-      makeEdt( cat, key[10], tit[10], dsc[10], E, def[10], INTEGER, ctx, hlp ), // TIMER
-      makeEdt( cat, key[11], tit[11], dsc[11], E, def[11], INTEGER, ctx, hlp )  // VOLUME
+      makeCbx( cat, key[10], tit[10], dsc[10], A, def[10],          ctx, hlp ),// WITH ANDROID AZIMUTH
+      makeEdt( cat, key[11], tit[11], dsc[11], E, def[11], INTEGER, ctx, hlp ), // TIMER
+      makeEdt( cat, key[12], tit[12], dsc[12], E, def[12], INTEGER, ctx, hlp )  // VOLUME
     };
   }
 

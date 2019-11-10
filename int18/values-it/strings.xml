@@ -1156,8 +1156,8 @@
   <string name="pref_min_leg_summary">Minima lunghezza battuta [m]</string>
   <string name="pref_backsight_title">Backsight</string>
   <string name="pref_backsight_summary">Campi backsight nel dialogo Nuova Battuta</string>
-  <string name="pref_backshot_title">Modo Backshot</string>
-  <string name="pref_backshot_summary">DistoX in modo backshot</string>
+  <string name="pref_backshot_title">Dati Backshot</string>
+  <string name="pref_backshot_summary">Inverti capisaldi nei dati backshot</string>
   <string name="pref_prev_next_title">Pulsanti Prec/Succ</string>
   <string name="pref_prev_next_summary">Pulsanti Prec/Succ nel riquadro di tiro</string>
   <!-- UNUSED string name="pref_mag_anomaly_title">Anomalia magnetica</string -->

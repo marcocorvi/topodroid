@@ -105,4 +105,6 @@
   <string name="SetupDoneDialog" translatable="false">page_setup.htm</string>
   <string name="SetupDrawingUnitDialog" translatable="false">page_setup.htm</string>
 
+  <string name="ImportTroDialog" translatable="false">page_import_tro.htm</string>
+  <string name="ImportDatDialog" translatable="false">page_import_dat.htm</string>
 </resources>

@@ -56,6 +56,7 @@ class TDColor
   static final int DARK_RED     = 0xff331100;
   static final int BACK_GREEN   = 0x66009292; // transparent green
   static final int BACK_VIOLET  = 0x66b66dff; // transparent violet
+  static final int BACK_YELLOW  = 0x33ffff6d; // transparent yellow
   static final int LIGHT_YELLOW = 0xffffff9f;
   static final int MID_BLUE     = 0xff5992d7;
 

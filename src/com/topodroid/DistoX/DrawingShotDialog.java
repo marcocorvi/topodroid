@@ -106,6 +106,14 @@ class DrawingShotDialog extends MyDialog
     mETfrom    = (EditText) findViewById(R.id.shot_from );
     mETto      = (EditText) findViewById(R.id.shot_to );
     mETcomment = (EditText) findViewById(R.id.shot_comment );
+    TextView tvtype    = (TextView) findViewById(R.id.shot_type );
+    if (mBlock.isBacksight() ) {
+      tvtype.setText( R.string.type_b );
+    } else if (mBlock.isForesight() ) {
+      tvtype.setText( R.string.type_d );
+    } else if (mBlock.isManual() ) {
+      tvtype.setText( R.string.type_m );
+    }
 
     mETfrom.setOnLongClickListener( this );
     mETto.setOnLongClickListener( this );

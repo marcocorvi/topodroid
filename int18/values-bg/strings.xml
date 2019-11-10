@@ -1155,7 +1155,7 @@
   <string name="pref_backsight_title">Обратна отсечка</string>
   <string name="pref_backsight_summary">Въвеждане на обр. азимут/накл/разст при ръчно добавяне на отсечка</string>
   <string name="pref_backshot_title">DistoX в обратен режим</string>
-  <string name="pref_backshot_summary">DistoX в режим на обратна отсечка</string>
+  <!-- TODO string name="pref_backshot_summary">Swap stations to DistoX backshots</string -->
   <string name="pref_prev_next_title">Пред./Следваща бутони</string>
   <string name="pref_prev_next_summary">Показване на бутони за Предишна/Следваща отсечка</string>
   <!-- UNUSED string name="pref_mag_anomaly_title">Магнитна аномалия</string -->

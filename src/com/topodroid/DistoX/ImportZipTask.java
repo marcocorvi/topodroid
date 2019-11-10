@@ -54,7 +54,11 @@ class ImportZipTask extends ImportTask
         TDToast.makeBad( R.string.import_already );
       } else {
         mMain.get().updateDisplay( );
-        TDToast.make( R.string.import_zip_ok );
+        if ( result == 1 ) {
+          TDToast.makeWarn( R.string.import_zip_newer );
+        } else { // result == 0
+          TDToast.make( R.string.import_zip_ok );
+        }
       }
     }
   }

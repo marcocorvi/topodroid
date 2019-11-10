@@ -1172,7 +1172,7 @@
   <string name="pref_backsight_title">Обратный замер</string>
   <string name="pref_backsight_summary">Поле для ввода обратного замера в диалоге ручного ввода замера</string>
   <string name="pref_backshot_title">Обратный замер DistoX</string>
-  <string name="pref_backshot_summary">DistoX в режиме обратных замеров</string>
+  <!-- TODO string name="pref_backshot_summary">Swap stations to DistoX backshots</string -->
   <string name="pref_prev_next_title">Кнопки Пред/След</string>
   <string name="pref_prev_next_summary">Показывать кнопки Предыдущий/Следующий в диалоге замеров</string>
   <!-- UNUSED string name="pref_mag_anomaly_title">Магнитная Аномалия</string -->
