@@ -840,6 +840,16 @@
     <string name="help_cover">Distribuzione angolare dati calibrazione</string>
     <string name="help_compute">Calcola calibrazione</string>
     <string name="help_write">Scrivi calibrazione sul DistoX</string>
+  
+    <!-- TODO string name="audio_paused">Paused</string -->
+    <!-- TODO string name="audio_playing">Playing</string -->
+    <!-- TODO string name="audio_recording">Recording</string -->
+    <!-- TODO string name="audio_delete">Delete ?</string -->
+    <!-- TODO string name="audio_overwrite">Overwrite ?</string -->
+  
+    <!-- TODO string name="import_lrud">Import LRUD</string -->
+    <!-- TODO string name="import_leg_first">Leg before LRUD splays</string -->
+    <!-- TODO string name="import_diving_datamode">Diving datamode</string -->
 
     <string name="title_azimut">Riferimento Extend</string>
     <string name="title_audio">Commento audio</string>
@@ -941,6 +951,9 @@
     <string name="title_plot_zoomfit">Adatta Zoom / Orientamento</string>
     <string name="title_calib_export">Esporta calibrazione come </string>
     <!-- OK ENGLISH string name="title_zoom">Zoom</string -->
+
+    <!-- TODO string name="title_import_tro">VisualTopo import options</string -->
+    <!-- TODO string name="title_import_dat">Compass import options</string -->
 
   <string name="pref_export_settings">Impostazioni Export</string>
 

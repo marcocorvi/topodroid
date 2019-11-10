@@ -861,6 +861,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="audio_recording">Nagranie</string>
     <string name="audio_delete">Usunąć ?</string>
     <string name="audio_overwrite">Nadpisać ?</string>
+  
+    <!-- TODO string name="import_lrud">Import LRUD</string -->
+    <!-- TODO string name="import_leg_first">Leg before LRUD splays</string -->
+    <!-- TODO string name="import_diving_datamode">Diving datamode</string -->
 
     <string name="title_azimut">Rozciągnięcie referencji</string>
     <string name="title_audio">Komentarz audio</string>
@@ -957,6 +961,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_plot_zoomfit">Dopasuj rozmiar / Orientacja</string>
     <string name="title_calib_export">Eksportuj kalibrację</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
+
+    <!-- TODO string name="title_import_tro">VisualTopo import options</string -->
+    <!-- TODO string name="title_import_dat">Compass import options</string -->
 
   <!-- TODO string name="pref_export_settings">Export settings</string -->
 

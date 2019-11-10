@@ -852,6 +852,10 @@
     <string name="audio_recording">Запись</string>
     <string name="audio_delete">Удалить ?</string>
     <string name="audio_overwrite">Перезаписать ?</string>
+  
+    <!-- TODO string name="import_lrud">Import LRUD</string -->
+    <!-- TODO string name="import_leg_first">Leg before LRUD splays</string -->
+    <!-- TODO string name="import_diving_datamode">Diving datamode</string -->
 
     <string name="title_azimut">Опорный азимут развёртки</string>
     <string name="title_audio">Аудио заметка</string>
@@ -948,6 +952,9 @@
     <string name="title_plot_zoomfit">Вместить / Ориентация</string>
     <string name="title_calib_export">Экспорт калибровки как</string>
     <!-- UNUSED string name="title_zoom">Зум</string -->
+
+    <!-- TODO string name="title_import_tro">VisualTopo import options</string -->
+    <!-- TODO string name="title_import_dat">Compass import options</string -->
 
   <string name="pref_export_settings">Экспорт настроек</string>
 

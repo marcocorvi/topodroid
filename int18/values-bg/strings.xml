@@ -841,6 +841,16 @@
     <string name="help_cover">Показване на ъгловото разпределение на калибрацията</string>
     <string name="help_compute">Изчисляване на калибрация</string>
     <string name="help_write">Запис на калибр. коефициенти в DistoX</string>
+  
+    <!-- TODO string name="audio_paused">Paused</string -->
+    <!-- TODO string name="audio_playing">Playing</string -->
+    <!-- TODO string name="audio_recording">Recording</string -->
+    <!-- TODO string name="audio_delete">Delete ?</string -->
+    <!-- TODO string name="audio_overwrite">Overwrite ?</string -->
+
+    <!-- TODO string name="import_lrud">Import LRUD</string -->
+    <!-- TODO string name="import_leg_first">Leg before LRUD splays</string -->
+    <!-- TODO string name="import_diving_datamode">Diving datamode</string -->
 
     <string name="title_azimut">Разгъване спрямо азим.</string>
     <string name="title_audio">Аудио коментар</string>
@@ -937,6 +947,9 @@
     <string name="title_plot_zoomfit">Опт. приближаване / Ориентация</string>
     <string name="title_calib_export">Експортиране на калибрация като</string>
     <!-- string name="title_zoom">Приближаване</string -->
+
+    <!-- TODO string name="title_import_tro">VisualTopo import options</string -->
+    <!-- TODO string name="title_import_dat">Compass import options</string -->
 
   <!-- TODO string name="pref_export_settings">Export settings</string -->
 

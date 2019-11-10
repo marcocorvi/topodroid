@@ -859,7 +859,16 @@
     <string name="help_cover">Winkelverteilung der Kalibrierungsdaten</string>
     <string name="help_compute">Kalibrierungs-Koeffizienten berechnen</string>
     <string name="help_write">Kalibrierungs-Koeffizienten auf den DistoX speichern</string>
-
+  
+    <!-- TODO string name="audio_paused">Paused</string -->
+    <!-- TODO string name="audio_playing">Playing</string -->
+    <!-- TODO string name="audio_recording">Recording</string -->
+    <!-- TODO string name="audio_delete">Delete ?</string -->
+    <!-- TODO string name="audio_overwrite">Overwrite ?</string -->
+  
+    <!-- TODO string name="import_lrud">Import LRUD</string -->
+    <!-- TODO string name="import_leg_first">Leg before LRUD splays</string -->
+    <!-- TODO string name="import_diving_datamode">Diving datamode</string -->
 
 <!-- TITLES -->
     <string name="title_azimut">Seitenriss-Azimut</string>
@@ -957,6 +966,9 @@
     <string name="title_plot_zoomfit">Größe anpassen / Ausrichtung</string>
     <string name="title_calib_export">Kalibrierung speichern als</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
+
+    <!-- TODO string name="title_import_tro">VisualTopo import options</string -->
+    <!-- TODO string name="title_import_dat">Compass import options</string -->
 
   <string name="pref_export_settings">Export Einstellungen</string>
 

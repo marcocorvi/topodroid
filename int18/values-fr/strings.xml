@@ -841,6 +841,16 @@
     <string name="help_cover">Affiche la distribution des données d\'étalonnage</string>
     <string name="help_compute">Calcule l\'étalonnage</string>
     <string name="help_write">Écrit les coefficients d\'étalonnage sur le DistoX</string>
+  
+    <!-- TODO string name="audio_paused">Paused</string -->
+    <!-- TODO string name="audio_playing">Playing</string -->
+    <!-- TODO string name="audio_recording">Recording</string -->
+    <!-- TODO string name="audio_delete">Delete ?</string -->
+    <!-- TODO string name="audio_overwrite">Overwrite ?</string -->
+  
+    <!-- TODO string name="import_lrud">Import LRUD</string -->
+    <!-- TODO string name="import_leg_first">Leg before LRUD splays</string -->
+    <!-- TODO string name="import_diving_datamode">Diving datamode</string -->
 
     <string name="title_azimut">Référence extension</string>
     <string name="title_audio">Commentaire Audio</string>
@@ -937,6 +947,9 @@
     <string name="title_plot_zoomfit">Ajustement zoom / Orientation</string>
     <string name="title_calib_export">Exporter l\'étalonnage sous</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
+
+    <!-- TODO string name="title_import_tro">VisualTopo import options</string -->
+    <!-- TODO string name="title_import_dat">Compass import options</string -->
 
   <!-- TODO string name="pref_export_settings">Export settings</string -->
 

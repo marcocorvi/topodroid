@@ -848,6 +848,10 @@
     <string name="audio_recording">Înregistrare</string>
     <string name="audio_delete">Șterge ?</string>
     <string name="audio_overwrite">Suprascrie ?</string>
+  
+    <!-- TODO string name="import_lrud">Import LRUD</string -->
+    <!-- TODO string name="import_leg_first">Leg before LRUD splays</string -->
+    <!-- TODO string name="import_diving_datamode">Diving datamode</string -->
 
     <string name="title_azimut">Extinde referința</string>
     <string name="title_audio">Comentariu audio</string>
@@ -944,6 +948,9 @@
     <string name="title_plot_zoomfit">Încadrare / Orientare</string>
     <string name="title_calib_export">Exportă calibrare</string>
     <!-- UNUSED string name="title_zoom">Redimensionează</string -->
+
+    <!-- TODO string name="title_import_tro">VisualTopo import options</string -->
+    <!-- TODO string name="title_import_dat">Compass import options</string -->
 
   <!-- TODO string name="pref_export_settings">Export settings</string -->
 

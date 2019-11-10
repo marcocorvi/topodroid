@@ -864,6 +864,10 @@
     <string name="audio_recording">记录中</string>
     <string name="audio_delete">删除 ?</string>
     <string name="audio_overwrite">覆盖 ?</string>
+  
+    <!-- TODO string name="import_lrud">Import LRUD</string -->
+    <!-- TODO string name="import_leg_first">Leg before LRUD splays</string -->
+    <!-- TODO string name="import_diving_datamode">Diving datamode</string -->
 
     <string name="title_azimut">扩展参考</string>
     <string name="title_audio">音频注释</string>
@@ -960,6 +964,9 @@
     <string name="title_plot_zoomfit">缩放适应 / 定向缩放</string>
     <string name="title_calib_export">输出校准</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
+
+    <!-- TODO string name="title_import_tro">VisualTopo import options</string -->
+    <!-- TODO string name="title_import_dat">Compass import options</string -->
 
   <string name="pref_export_settings">输出设置</string>
 

@@ -60,7 +60,11 @@ class ImportDatDialog extends MyDialog
     mCBleg  = (CheckBox) findViewById( R.id.dat_leg_first );
     mCBdiving = (CheckBox) findViewById( R.id.dat_diving_datamode );
 
-    mCBdiving.setChecked( TDSetting.mImportDatamode == SurveyInfo.DATAMODE_DIVING );
+    if ( TDLevel.overExpert ) {
+      mCBdiving.setChecked( TDSetting.mImportDatamode == SurveyInfo.DATAMODE_DIVING );
+    } else {
+      mCBdiving.setVisibility( View.GONE );
+    }
 
     mBtnOK     = (Button) findViewById(R.id.dat_ok);
     // mBtnCancel = (Button) findViewById(R.id.dat_cancel);
@@ -78,7 +82,8 @@ class ImportDatDialog extends MyDialog
     Button b = (Button) v;
     hide();
     if ( b == mBtnOK ) {
-      int datamode = mCBdiving.isChecked()? SurveyInfo.DATAMODE_DIVING : SurveyInfo.DATAMODE_NORMAL;
+      int datamode = SurveyInfo.DATAMODE_NORMAL;
+      if ( TDLevel.overExpert && mCBdiving.isChecked() ) datamode = SurveyInfo.DATAMODE_DIVING;
       mParent.importDatFile( mFilepath, datamode, mCBlrud.isChecked(), mCBleg.isChecked() );
     // } else if ( b == mBtnCancel ) {
     //   /* nothing */
