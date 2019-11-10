@@ -339,7 +339,7 @@
     <string name="menu_reload">NAČÍTAŤ</string>
     <string name="menu_rename_delete">PREMENOVAŤ/VYMAZAŤ</string>
     <string name="menu_rename">PREMENOVAŤ</string>
-    <!-- TODO string name="menu_plot_scrap">SCRAPS</string -->
+    <string name="menu_plot_scrap">SCRAPY</string>
     <string name="menu_switch">PREPNÚŤ/ZATVORIŤ</string>
     <string name="menu_help">POMOC</string>
     <!-- UNUSED string name="menu_join_survey">CO-SURVEY</string -->
@@ -453,7 +453,7 @@
     <string name="section_area">Sekcia oblasti: %1$.1f</string>
     <string name="section_name">Komentár k Priečnemu rezu</string>
     <string name="scrap_outline">Obrysy</string>
-    <!-- TODO string name="scrap_string">Sketch scrap: %1$d / %2$d</string -->
+    <string name="scrap_string">Nákres - scrap: %1$d / %2$d</string>
 
     <!-- UNUSED string name="sensor">sensor</string -->
     <string name="sensor_gravity">Gravitácia</string>
@@ -628,8 +628,8 @@
     <string name="button_plot"    >Nákres</string>
     <string name="button_more"    >Viac</string>
     <string name="button_next"    >Ďalší</string>
-    <!-- TODO string name="button_prev"    >Prevous</string -->
-    <!-- TODO string name="button_new"     >New scrap</string -->
+    <string name="button_prev"    >Predchádzajúci</string>
+    <string name="button_new"     >Nový scrap</string>
     <string name="button_skip"    >Preskočiť</string>
     <string name="button_done"    >Dokončiť</string>
     <string name="button_lrud"    >Pridať LRUD</string>
@@ -802,7 +802,7 @@
     <string name="help_refs">Vybrať možnosti zobrazenia</string>
     <string name="help_rename">Premenovať názov jaskyne</string>
     <string name="help_plot_rename">Premenovať/Vymazať nákres</string>
-    <!-- TODO string name="help_plot_scrap">Sketch scraps</string -->
+    <string name="help_plot_scrap">Nákres - scrapy</string>
     <string name="help_plot_switch">Prepínanie medzi nákresmi</string>
     <string name="help_search">Vyhľadať body</string>
     <string name="help_stats">Štatistika mapovania</string>
@@ -906,7 +906,7 @@
     <string name="title_plot_save">Exportovať nákres </string>
     <!-- UNUSED string name="title_plot_merge">Merge sketch in</string -->
     <string name="title_plot_reload">Znovu načítať nákres</string>
-    <!-- TODO string name="title_plot_scraps">Sketch scraps</string -->
+    <string name="title_plot_scraps">Nákres - scrapy</string>
     <string name="title_profile_flip">Otočiť zrkadlovo nákres profilu?</string>
     <string name="title_projection">Azimut Priemetu %1$d</string>
     <string name="title_refs">Výber možností zobrazenia</string>
@@ -974,6 +974,7 @@
   <!-- DO NOT TRANSLATE string name="pref_cat_exporttro" translatable="false">VisualTopo</string -->
   <!-- DO NOT TRANSLATE string name="pref_cat_exportsvg" translatable="false">SVG</string -->
   <!-- DO NOT TRANSLATE string name="pref_cat_exportdxf" translatable="false">DXF</string -->
+  <!-- DO NOT TRANSLATE string name="pref_cat_exportshp" translatable="false">Shapefile</string -->
   <!-- DO NOT TRANSLATE string name="pref_cat_exportpng" translatable="false">PNG</string -->
   <!-- DO NOT TRANSLATE string name="pref_cat_exportkml" translatable="false">KML/GeoJSON</string -->
   <!-- DO NOT TRANSLATE string name="pref_cat_exportcsv" translatable="false">CSV</string -->
@@ -1062,8 +1063,8 @@
   <string name="pref_survex_lrud_summary">Pridanie LRUD do programu Survex/Therion </string>
   <string name="pref_svg_grid_title">Mriežka</string>
   <string name="pref_svg_grid_summary">Pridanie mriežky do exportu SVG/PNG</string>
-  <!-- TODO string name="pref_svg_roundtrip_title">SVG round-trip</string -->
-  <!-- TODO string name="pref_svg_roundtrip_summary">Round-trip ready SVG export</string -->
+  <string name="pref_svg_roundtrip_title">SVG round-trip</string>
+  <string name="pref_svg_roundtrip_summary">Round-trip pripravený na export do programu SVG</string>
   <string name="pref_svg_splays_title">SVG pomocné zámery</string>
   <string name="pref_svg_splays_summary">Zahrnutie pomocných zámer do exportu SVG</string>	
   <!-- UNUSED string name="pref_svg_in_html_title">SVG in HTML</string -->
@@ -1156,8 +1157,8 @@
   <string name="pref_section_splay_message">Pomocné zámery zvierajúce väčší ako tento uhol sú v reze čiarkované</string>
   <string name="pref_data_backup_title">Automatické exportovanie</string>
   <string name="pref_data_backup_summary">Automatický export údajov (vyžaduje predvolený formát)</string>
-  <!-- TODO string name="pref_zipped_symbols_title">Zipped symbols files</string -->
-  <!-- TODO string name="pref_zipped_symbols_summary">Store/load symbol files to/from zip archive</string -->
+  <string name="pref_zipped_symbols_title">Zip archív Symbolov</string>
+  <string name="pref_zipped_symbols_summary">Uložiť/Načítať Symboly do/zo zip archívu</string>
   <string name="pref_fixed_origin_title">Predvolené číslo meračského bodu v Nákrese</string>
   <string name="pref_fixed_origin_summary">Predvolí číslo meračského bodu v Nákrese - predvolené je rovnaké aj pri viacerých nákresoch</string>
   <string name="pref_shared_xsections_title">Zdielané priečne rezy</string>
@@ -1221,6 +1222,8 @@
   <!-- UNUSED string name="pref_dxf_scale_summary">DXF sketch scale factor</string -->
   <string name="pref_dxf_blocks_title">Koncové body pomocných zámer</string>
   <string name="pref_dxf_blocks_summary">Zahrnie Koncové body pomocných zámer pre export DXF</string>
+  <string name="pref_shp_georef_title">Georeferencovaný export Pôdorysu</string>
+  <string name="pref_shp_georef_summary">Nákres pôdorysu exportovaný v systéme WGS84</string>	
   <string name="pref_thumbnail_title">Veľkosť Náhľadov</string>
   <string name="pref_thumbnail_summary">Veľkosť náhľadov fotiek</string>
   <string name="pref_shot_timer_title">Časovač zámery smeru</string>
