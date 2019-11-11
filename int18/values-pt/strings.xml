@@ -845,15 +845,15 @@
     <string name="help_compute">Calcular calibração</string>
     <string name="help_write">Gravar coeficientes de calibração na DistoX</string>
   
-    <!-- TODO string name="audio_paused">Paused</string -->
-    <!-- TODO string name="audio_playing">Playing</string -->
-    <!-- TODO string name="audio_recording">Recording</string -->
-    <!-- TODO string name="audio_delete">Delete ?</string -->
-    <!-- TODO string name="audio_overwrite">Overwrite ?</string -->
+    <string name="audio_paused">Pausado</string>
+    <string name="audio_playing">Tocando</string>
+    <string name="audio_recording">Gravando</string>
+    <string name="audio_delete">Apagar?</string>
+    <string name="audio_overwrite">Sobreescrever?</string>
   
-    <!-- TODO string name="import_lrud">Import LRUD</string -->
-    <!-- TODO string name="import_leg_first">Leg before LRUD splays</string -->
-    <!-- TODO string name="import_diving_datamode">Diving datamode</string -->
+    <string name="import_lrud">Importar EDTC</string>
+    <string name="import_leg_first">Medida antes de EDTC</string>
+    <string name="import_diving_datamode">Modo de dados \'mergulho\'</string>
 
     <string name="title_azimut">Referência para retificar perfil</string>
     <string name="title_audio">Áudio comentário</string>
@@ -951,8 +951,8 @@
     <string name="title_calib_export">Exportar calibração</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-    <!-- TODO string name="title_import_tro">VisualTopo import options</string -->
-    <!-- TODO string name="title_import_dat">Compass import options</string -->
+    <string name="title_import_tro">Opções importação VisualTopo</string>
+    <string name="title_import_dat">Opções importação Compass</string>
 
   <string name="pref_export_settings">CONFIGURAÇÕES DE EXPORTAÇÃO</string>
 
@@ -1033,8 +1033,8 @@
   <string name="pref_compass_splays_summary">Exportar medidas auxiliares em arquivos Compass</string>
   <string name="pref_vtopo_splays_title">Medidas auxiliares VisualTopo</string>
   <string name="pref_vtopo_splays_summary">Incluir medidas auxiliares em arquivos VisualTopo</string>
-  <string name="pref_vtopo_lrud_title">EDTB em De</string>
-  <string name="pref_vtopo_lrud_summary">EDTB na base De em arquivos VisualTopo</string>
+  <string name="pref_vtopo_lrud_title">EDTC em De</string>
+  <string name="pref_vtopo_lrud_summary">EDTC na base De em arquivos VisualTopo</string>
   <!-- UNUSED string name="pref_trobot_names_title">Nomes bases TopoRobot</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Os nomes das bases usam o estilo do TopoRobot</string -->
   <string name="pref_ortho_lrud_title">Ângulo med. aux. EDTC Compass</string>
@@ -1174,7 +1174,7 @@
   <string name="pref_backsight_title">Medida contra</string>
   <string name="pref_backsight_summary">Campos de contra azimute e inclinação invertida para inserção manual de medida</string>
   <string name="pref_backshot_title">Contramedida DistoX</string>
-  <!-- TODO string name="pref_backshot_summary">Swap stations to DistoX backshots</string -->
+  <string name="pref_backshot_summary">Inverter bases nas contramedidas da DistoX</string>
   <string name="pref_prev_next_title">Botões Ant/Próx</string>
   <string name="pref_prev_next_summary">Botões Ant/Próx na janela de medição</string>
   <!-- UNUSED string name="pref_mag_anomaly_title">Anomalia magnética</string -->
