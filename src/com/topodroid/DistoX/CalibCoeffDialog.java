@@ -55,7 +55,7 @@ class CalibCoeffDialog extends MyDialog
   // private TextView mTextIter;
 
   private Button mButtonWrite;
-  // private Button   mButtonBack;
+  private Button mButtonBack;
 
   private final String bg0;
   private final String agx;
@@ -204,6 +204,8 @@ class CalibCoeffDialog extends MyDialog
     TextView textMaxError = (TextView) findViewById(R.id.coeff_max_error);
     TextView textIter     = (TextView) findViewById(R.id.coeff_iter);
     mButtonWrite  = (Button) findViewById( R.id.button_coeff_write );
+    mButtonBack  = (Button) findViewById( R.id.button_coeff_back );
+    mButtonBack.setOnClickListener( this );
 
     textBG.setText( bg0 );
     textAGx.setText( agx );
@@ -226,8 +228,6 @@ class CalibCoeffDialog extends MyDialog
       // } else {
         mButtonWrite.setEnabled( mCoeff != null );
       // }
-      // mButtonBack  = (Button) findViewById( R.id.button_coeff_back );
-      // mButtonBack.setOnClickListener( this );
     } else {
       image.setVisibility( View.GONE );
       textDelta.setVisibility( View.GONE );
@@ -249,7 +249,7 @@ class CalibCoeffDialog extends MyDialog
       } else {
         TDLog.Error("Calib Coeff Dialog null parent");
       }
-    } else {
+    } else { // b == mButtonBack
       dismiss();
     }
   }

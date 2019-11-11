@@ -30,7 +30,7 @@ class ImportDatDialog extends MyDialog
 {
   private MainWindow mParent;
   private Button mBtnOK;
-  // private Button mBtnCancel;
+  private Button mBtnCancel;
 
   private CheckBox mCBlrud;
   private CheckBox mCBleg;
@@ -67,9 +67,9 @@ class ImportDatDialog extends MyDialog
     }
 
     mBtnOK     = (Button) findViewById(R.id.dat_ok);
-    // mBtnCancel = (Button) findViewById(R.id.dat_cancel);
+    mBtnCancel = (Button) findViewById(R.id.dat_cancel);
     mBtnOK.setOnClickListener( this );
-    // mBtnCancel.setOnClickListener( this );
+    mBtnCancel.setOnClickListener( this );
 
     // setTitle( R.string.title_calib );
   }
@@ -86,7 +86,6 @@ class ImportDatDialog extends MyDialog
       if ( TDLevel.overExpert && mCBdiving.isChecked() ) datamode = SurveyInfo.DATAMODE_DIVING;
       mParent.importDatFile( mFilepath, datamode, mCBlrud.isChecked(), mCBleg.isChecked() );
     // } else if ( b == mBtnCancel ) {
-    //   /* nothing */
     }
     dismiss();
   }

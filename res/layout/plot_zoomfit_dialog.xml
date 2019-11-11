@@ -47,12 +47,20 @@
       android:layout_marginLeft="10pt" 
       android:inputType="text"
       />
-
   </LinearLayout>
 
-  <Button android:id="@+id/button_cancel"
-    style="@style/button_default"
-    android:text="@string/button_cancel"
-  />
+  <LinearLayout android:id="@+id/help"
+     android:layout_width="wrap_content" 
+     android:layout_height="wrap_content"
+     android:layout_gravity="right"
+     android:gravity="right"
+     android:orientation="horizontal"
+     android:layout_marginTop="@dimen/marginvbig"
+     >
+    <Button android:id="@+id/button_cancel"
+      style="@style/button_default"
+      android:text="@string/button_cancel"
+    />
+  </LinearLayout>
 
 </LinearLayout>

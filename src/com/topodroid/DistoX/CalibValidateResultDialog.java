@@ -17,16 +17,17 @@ import android.os.Bundle;
 import android.content.Context;
 
 import android.widget.TextView;
-// import android.widget.Button;
+import android.widget.Button;
 import android.widget.ImageView;
-// import android.view.View;
-// import android.view.View.OnClickListener;
+import android.view.View;
+import android.view.View.OnClickListener;
 
 // import android.graphics.Bitmap;
 
 // import android.util.Log;
 
 class CalibValidateResultDialog extends MyDialog
+                                implements OnClickListener
 {
   // private ImageView hist0;
   // private ImageView hist1;
@@ -41,6 +42,7 @@ class CalibValidateResultDialog extends MyDialog
   private final float[] errors0;
   private final float[] errors1;
   private final float[] errors2;
+  private Button mBtnClose;
 
   CalibValidateResultDialog( Context context,
                              float[] errs0, float[] errs1, float[] errs2,
@@ -68,6 +70,9 @@ class CalibValidateResultDialog extends MyDialog
 
     setContentView(R.layout.calib_validate_result_dialog);
 
+    mBtnClose = (Button) findViewById( R.id.button_close );
+    mBtnClose.setOnClickListener( this );
+
     ((TextView)findViewById(R.id.avestd0)).setText( avestd0 );
     ((TextView)findViewById(R.id.avestd1)).setText( avestd1 );
     ((TextView)findViewById(R.id.error1)).setText( err1 );
@@ -83,6 +88,12 @@ class CalibValidateResultDialog extends MyDialog
     hist2.setImageBitmap( CalibCoeffDialog.makeHistogramBitmap( errors2, 400, 100, 40, 2, TDColor.LIGHT_GRAY ) );
 
     setTitle( title );
+  }
+
+  @Override
+  public void onClick( View v )
+  {
+    dismiss(); // only for mBtnClose
   }
 
 }

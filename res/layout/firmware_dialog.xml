@@ -32,11 +32,20 @@
     android:layout_height="wrap_content"
   />
 
-  <Button
-    style="@style/button_default"
-    android:id="@+id/firmware_ok"
-    android:text="@string/button_ok"
-  />
+  <LinearLayout android:id="@+id/help"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" 
+    android:layout_marginTop="@dimen/marginvbig"
+    android:layout_marginBottom="@dimen/marginvbig"
+    android:gravity="right"
+    >
+    <Button
+      style="@style/button_default"
+      android:id="@+id/firmware_ok"
+      android:text="@string/button_ok"
+    />
+  </LinearLayout>
 
   <ScrollView
     android:layout_width="wrap_content"

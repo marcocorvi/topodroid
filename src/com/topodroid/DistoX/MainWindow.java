@@ -318,52 +318,62 @@ public class MainWindow extends Activity
   // ---------------------------------------------------------------
   // FILE IMPORT
 
+  private void setTitleImport()
+  {
+    mActivity.setTitle( R.string.import_title );
+    mActivity.setTitleColor( TDColor.CONNECTED );
+  }
+
   void importDatFile( String filepath, int datamode, boolean lrud, boolean leg_first )
   {
+    setTitleImport();
     new ImportCompassTask( this, datamode, lrud, leg_first ).execute( filepath );
   }
 
   void importTroFile( String filepath, boolean lrud, boolean leg_first )
   {
+    setTitleImport();
     new ImportVisualTopoTask( this, lrud, leg_first ).execute( filepath );
   }
 
   void importFile( String filename )
   {
     // FIXME connect-title string
-    mActivity.setTitle( R.string.import_title );
-    mActivity.setTitleColor( TDColor.CONNECTED );
     if ( filename.endsWith(".th") || filename.endsWith(".TH") ) {
       String filepath = TDPath.getImportFile( filename );
       String name = filename.replace(".th", "" ).replace(".TH", "");
       if ( mApp_mData.hasSurveyName( name ) ) {
         TDToast.makeBad(R.string.import_already );
-        setTheTitle();
         return;
       }
       // TDToast.make( R.string.import_wait );
+      setTitleImport();
       new ImportTherionTask( this ).execute( filepath, name );
     } else if ( filename.endsWith(".dat") || filename.endsWith(".DAT") ) {
       String filepath = TDPath.getImportFile( filename );
-      (new ImportTroDialog( this, this, filepath )).show();
+      (new ImportDatDialog( this, this, filepath )).show();
       // new ImportCompassTask( this ).execute( filepath );
     } else if ( filename.endsWith(".top") || filename.endsWith(".TOP") ) {
       String filepath = TDPath.getImportFile( filename );
+      setTitleImport();
       new ImportPocketTopoTask( this ).execute( filepath, filename ); // TODO pass the drawer as arg
     } else if ( filename.endsWith(".tro") || filename.endsWith(".TRO") ) {
       String filepath = TDPath.getImportFile( filename );
       (new ImportTroDialog( this, this, filepath )).show();
     } else if ( filename.endsWith(".svx") || filename.endsWith(".SVX") ) {
       String filepath = TDPath.getImportFile( filename );
+      setTitleImport();
       new ImportSurvexTask( this ).execute( filepath ); 
     } else if ( filename.endsWith(".csn") || filename.endsWith(".CSN") ) { // CaveSniper text file
       String filepath = TDPath.getImportFile( filename );
       new ImportCaveSniperTask( this ).execute( filepath ); 
+      setTitleImport();
     } else if ( filename.endsWith(".zip") ) {
       // TDToast.makeLong( R.string.import_zip_wait );
+      setTitleImport();
       new ImportZipTask( this ) .execute( filename );
-    } else {
-      setTheTitle( );
+    // } else {
+    //   setTheTitle( );
     }
     // FIXME SYNC updateDisplay();
   }

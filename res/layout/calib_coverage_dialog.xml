@@ -87,7 +87,7 @@
     />
   </LinearLayout>
 
-  <!-- LinearLayout 
+  <LinearLayout android:id="@+id/help"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -99,6 +99,6 @@
       style="@style/button_default"
       android:text="@string/button_close"
     />
-  </LinearLayout -->
+  </LinearLayout>
 
 </LinearLayout>

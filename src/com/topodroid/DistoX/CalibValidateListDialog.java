@@ -15,30 +15,32 @@ import java.util.List;
 // import java.util.ArrayList;
 
 import android.os.Bundle;
-// import android.app.Dialog;
 
 import android.content.Context;
 
 import android.view.View;
-// import android.view.View.OnClickListener;
+import android.view.View.OnClickListener;
 
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 // import android.widget.Button;
 
 import android.widget.TextView;
+import android.widget.Button;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 // import android.widget.AdapterView.OnItemLongClickListener;
 
 class CalibValidateListDialog extends MyDialog
                               implements OnItemClickListener
+                              , OnClickListener
 {
   private final GMActivity mParent;
   // private ArrayAdapter<String> mArrayAdapter;
 
   // private ListView mList;
   private final List<String> mCalibs;
+  private Button mBtnCancel;
 
   CalibValidateListDialog( Context context, GMActivity parent, List<String> calibs )
   {
@@ -53,6 +55,9 @@ class CalibValidateListDialog extends MyDialog
     super.onCreate(savedInstanceState);
     
     initLayout( R.layout.calib_validate_list_dialog, R.string.title_calib );
+
+    mBtnCancel = (Button) findViewById( R.id.button_cancel );
+    mBtnCancel.setOnClickListener( this );
 
     ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
 
@@ -95,6 +100,13 @@ class CalibValidateListDialog extends MyDialog
     // TDLog.Log(  TDLog.LOG_INPUT, "CalibValidate ListDialog onItemClick() " + name );
     // TODO open calibration activity
     mParent.validateCalibration( name );
+    dismiss();
+  }
+
+  @Override
+  public void onClick( View v )
+  {
+    // can be only cancel
     dismiss();
   }
 

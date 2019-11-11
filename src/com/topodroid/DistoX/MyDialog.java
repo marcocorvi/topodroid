@@ -22,10 +22,14 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 // import android.view.View.OnKeyListener;
+import android.view.View.OnLongClickListener;
 import android.view.KeyEvent;
 import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
+
+import android.widget.LinearLayout;
+
 
 class MyDialog extends Dialog
                       // implements View.OnClickListener
@@ -50,6 +54,22 @@ class MyDialog extends Dialog
     wnd.setAttributes( wlp );
   }
 
+
+  private void setHelpLayout()
+  {
+    LinearLayout help = (LinearLayout) findViewById( R.id.help );
+    if ( help != null ) {
+      help.setBackgroundColor( 0xff333333 );
+      help.setOnLongClickListener( new OnLongClickListener() {
+        @Override
+        public boolean onLongClick( View v ) {
+          if ( mHelpPage != null ) UserManualActivity.showHelpPage( mContext, mHelpPage );
+          return true;
+        }
+      } );
+    }
+  }
+
   // utility method for derived classes
   protected void initLayout( int layout_resource, int title_resource )
   {
@@ -61,6 +81,7 @@ class MyDialog extends Dialog
     if ( title_resource != -1 ) {
       setTitle( title_resource );
     }
+    setHelpLayout();
   }
 
   protected void initLayout( int layout_resource, String title )
@@ -73,6 +94,7 @@ class MyDialog extends Dialog
     if ( title != null ) {
       setTitle( title );
     }
+    setHelpLayout();
   }
 
   protected void initLayout( View v, int title_resource )
@@ -85,6 +107,7 @@ class MyDialog extends Dialog
     if ( title_resource != -1 ) {
       setTitle( title_resource );
     }
+    setHelpLayout();
   }
 
   @Override 

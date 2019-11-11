@@ -53,7 +53,7 @@ class CalibCoverageDialog extends MyDialog
   private Button mBtnEvalG;
   private Button mBtnEvalM;
   private Button mBtnEvalCal;
-  // private Button mBtnBack;
+  private Button mBtnBack;
 
   private CalibCoverage mCoverage;
 
@@ -92,7 +92,7 @@ class CalibCoverageDialog extends MyDialog
     mBtnEvalG   = (Button) findViewById( R.id.coverage_g   );
     mBtnEvalM   = (Button) findViewById( R.id.coverage_m   );
     mBtnEvalCal = (Button) findViewById( R.id.coverage_eval_cal );
-    // mBtnBack    = (Button) findViewById( R.id.coverage_back );
+    mBtnBack    = (Button) findViewById( R.id.coverage_back );
     mBtnEval.setOnClickListener( this );
     mBtnEvalG.setOnClickListener( this );
     mBtnEvalM.setOnClickListener( this );
@@ -101,7 +101,7 @@ class CalibCoverageDialog extends MyDialog
     } else {
       mBtnEvalCal.setVisibility( View.GONE );
     }
-    // mBtnBack.setOnClickListener( this );
+    mBtnBack.setOnClickListener( this );
     reset( R.string.cover_data );
   }
 
@@ -139,7 +139,7 @@ class CalibCoverageDialog extends MyDialog
       } else {
         TDToast.makeBad( R.string.no_calib );
       }
-    } else {
+    } else { // mBtnBack
       dismiss();
     }
   }

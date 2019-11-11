@@ -37,7 +37,7 @@ class ShotDeleteDialog extends MyDialog
   // private TextView mTVdata;
   private Button   mButtonDelete;
   private CheckBox mCBleg;
-  // private Button   mButtonCancel;
+  private Button   mButtonCancel;
 
   /**
    * @param context   context
@@ -62,7 +62,7 @@ class ShotDeleteDialog extends MyDialog
     // getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
     mButtonDelete = (Button) findViewById(R.id.shot_delete );
-    // mButtonCancel = (Button) findViewById(R.id.button_cancel );
+    mButtonCancel = (Button) findViewById(R.id.button_cancel );
 
     mCBleg = (CheckBox) findViewById( R.id.leg );
     mCBleg.setChecked( false );
@@ -77,7 +77,7 @@ class ShotDeleteDialog extends MyDialog
     }
 
     mButtonDelete.setOnClickListener( this );
-    // mButtonCancel.setOnClickListener( this );
+    mButtonCancel.setOnClickListener( this );
 
     if ( ! mBlk.isLeg() ) mCBleg.setVisibility( View.GONE );
 
@@ -91,7 +91,6 @@ class ShotDeleteDialog extends MyDialog
     if ( b == mButtonDelete ) {
       mParent.doDeleteShot( mBlk.mId, mBlk, TDStatus.DELETED, mCBleg.isChecked() );
     // } else if ( b == mButtonCancel ) {
-    //   /* nothing */
     }
     dismiss();
   }

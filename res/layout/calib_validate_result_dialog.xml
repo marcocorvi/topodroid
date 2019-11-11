@@ -65,4 +65,16 @@
     android:layout_height="wrap_content" 
   />
 
+  <LinearLayout android:id="@+id/help"
+         android:layout_width="match_parent" 
+         android:layout_height="wrap_content"
+         android:layout_marginTop="@dimen/marginvbig"
+         android:layout_gravity="left"
+         >
+      <Button android:id="@+id/button_close"
+            style="@style/button_default"
+            android:text="@string/button_close"
+      />
+  </LinearLayout>
+
 </LinearLayout>

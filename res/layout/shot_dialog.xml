@@ -273,7 +273,7 @@
     android:text="@string/delete_whole_leg"
     />
 -->
-  <LinearLayout android:id="@+id/layout7"
+  <LinearLayout android:id="@+id/help"
     android:layout_below="@id/layout4"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"

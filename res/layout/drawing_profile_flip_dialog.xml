@@ -12,11 +12,19 @@
     android:text="@string/flip_shots"
   />
 
-  <Button android:id="@+id/button_ok"
-    android:layout_height="match_parent"
-    style="@style/button_default"
-    android:text="@string/button_ok"
+  <LinearLayout android:id="@+id/help"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" 
+    android:layout_marginTop="@dimen/marginv"
     android:layout_gravity="right"
-  />
-
+    android:gravity="right"
+    >
+    <Button android:id="@+id/button_ok"
+      android:layout_height="match_parent"
+      style="@style/button_default"
+      android:text="@string/button_ok"
+      android:layout_gravity="right"
+    />
+  </LinearLayout>
 </LinearLayout>

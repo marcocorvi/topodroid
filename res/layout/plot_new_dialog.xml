@@ -95,7 +95,7 @@
       />
     </LinearLayout>
 
-    <LinearLayout android:id="@+id/layout5"
+    <LinearLayout android:id="@+id/help"
       android:layout_below="@id/layout4"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"

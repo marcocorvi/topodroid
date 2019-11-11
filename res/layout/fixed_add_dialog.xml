@@ -122,7 +122,7 @@
       android:nextFocusDown="@id/top"
   />
 
-  <LinearLayout android:id="@+id/layout4"
+  <LinearLayout android:id="@+id/help"
       android:layout_below="@id/edit_comment"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"

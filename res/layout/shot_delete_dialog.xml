@@ -34,10 +34,23 @@
     android:text="@string/delete_whole_leg"
   />
 
-  <Button android:id="@+id/shot_delete"
-    style="@style/button_default"
-    android:text="@string/button_delete"
-    android:textColor="@color/textdelete"
-  />
+  <LinearLayout android:id="@+id/help"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_marginBottom="@dimen/marginv"
+    >
+    <Button android:id="@+id/button_cancel"
+      style="@style/button_default"
+      android:text="@string/button_cancel"
+      android:layout_marginRight="@dimen/marginh"
+    />
+    <Button android:id="@+id/shot_delete"
+      style="@style/button_default"
+      android:text="@string/button_delete"
+      android:textColor="@color/textdelete"
+    />
+  </LinearLayout>
 
 </LinearLayout>

@@ -47,7 +47,7 @@ class ImportDialog extends MyDialog
 
   // private ArrayAdapter<String> mArrayAdapter;
   private ListView mList;
-  // private Button mBtnCancel;
+  private Button mBtnCancel;
 
   ImportDialog( Context context, MainWindow parent, File[] files, File[] zips )
   {
