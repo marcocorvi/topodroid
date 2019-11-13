@@ -9,7 +9,7 @@
     <string name="double_back">Erneut ZURÜCK drücken zum verlassen</string>
 
     <!-- TODO string name="new_survey_label">New survey</string -->
-    <!-- TODO string name="distox_label">DistoX</string -->
+    <string name="distox_label">DistoX</string>
 
     <!-- UNUSED string name="version_ask">TopoDroid wurde auf eine neue Version aktualisiert.\nSollen die Zeichensymbole aktualisiert werden?</string -->
     <string name="symbols_ask">Zeichenwerkzeuge von v.%2$s auf v.%1$s aktualisieren?</string>
@@ -51,12 +51,12 @@
 <!-- names of therion items -->
     <string name="thp_user">Nutzer</string>
     <string name="thp_label">Beschriftung</string>
-    <!-- TODO string name="thp_section">section</string -->
-    <!-- TODO string name="thp_station">station</string -->
+    <string name="thp_section">Sektion</string>
+    <string name="thp_station">Station</string>
     <!-- UNUSED string name="thp_danger">Gefahr</string -->
     <string name="thl_user">Nutzer</string>
     <string name="thl_wall">Wand</string>
-    <!-- TODO string name="thl_section">section</string -->
+    <string name="thl_section">Sektion</string>
     <string name="tha_user">Nutzer</string>
     <string name="tha_water">Wasser</string>
 
@@ -343,7 +343,7 @@
     <string name="menu_reload">FRÜHERE VERSION</string>
     <string name="menu_rename_delete">UMBENENNEN/LÖSCHEN</string>
     <string name="menu_rename">UMBENENNEN</string>
-    <!-- TODO string name="menu_plot_scrap">SCRAPS</string -->
+    <string name="menu_plot_scrap">TEILSKIZZEN</string>
     <string name="menu_switch">WECHSELN/SCHLIEßEN</string>
     <string name="menu_help">HILFE</string>
     <!-- UNUSED string name="menu_join_survey">CO-VERMESSUNG</string -->
@@ -374,7 +374,7 @@
     <string name="popup_snap_ln">Auf nächste Linie verschieben</string>
     <string name="popup_snap_to_splays">Auf nächste Hilfsmessung verschieben</string>
     <string name="popup_split_pt">Punkt verdoppeln</string>
-    <!-- TODO string name="popup_split_pts">Adds points</string -->
+    <string name="popup_split_pts">Punkte hinzufügen</string>
     <string name="popup_split_ln">Linie trennen</string>
     <string name="popup_sharp_pt">Linie begradigen</string>
     <string name="popup_curve_pt">Linie rund machen</string>
@@ -451,7 +451,7 @@
     <string name="section_area">Fläche: %1$.1f</string>
     <string name="section_name">Querschnitt Kommentar</string>
     <string name="scrap_outline">Skizzenumriss</string>
-    <!-- TODO string name="scrap_string">Sketch scrap: %1$d / %2$d</string -->
+    <string name="scrap_string">Teilskizze: %1$d / %2$d</string>
 
     <!-- UNUSED string name="sensor">Sensor</string -->
     <string name="sensor_gravity">Schwerkraft</string>
@@ -514,8 +514,8 @@
     <string name="description">Beschreibung</string>
     <string name="name">Name</string>
     <string name="team">Messteam</string>
-    <!-- TODO string name="init_station">start station</string -->
-    <!-- TODO string name="start_station">start station [%1$s]</string -->
+    <string name="init_station">Startpunkt</string>
+    <string name="start_station">Startpunkt [%1$s]</string>
     <!-- UNUSED string name="toggle_device">Den DistoX in Betriebsmodus schalten</string -->
     <string name="toggle_failed">Fehler beim Kalibrierungsmodus-Wechsel</string>
     <string name="toggle_ok">Kalibrierungsmodus gewechselt</string>
@@ -627,9 +627,9 @@
     <!-- UNUSED string name="button_azimuth">Azimut</string -->
     <string name="button_plot"    >Skizze</string>
     <string name="button_more"    >Mehr</string>
-    <string name="button_next"    >Weiter</string>
-    <!-- TODO string name="button_prev"    >Prevous</string -->
-    <!-- TODO string name="button_new"     >New scrap</string -->
+    <string name="button_next"    >Nächste</string>
+    <string name="button_prev"    >Vorherige</string>
+    <string name="button_new"     >Neue Teilskizze</string>
     <string name="button_skip"    >Überspringen</string>
     <string name="button_done"    >Fertig</string>
     <string name="button_lrud"    >LRUD hinzufügen</string>
@@ -655,7 +655,7 @@
     <!-- UNUSED string name="button_select"    >Wählen     </string -->
     <string name="button_search"    >Suche    </string>
     <string name="button_merge"     >Zusammenführen     </string>
-    <!-- TODO string name="button_saved"     >Saved station</string -->
+    <string name="button_saved"     >Gespeicherte Station</string>
     <string name="button_split"     >Aufteilen     </string>
     <string name="button_station"   >Zentrieren bei</string>
     <string name="button_store"     >Speichern</string>
@@ -707,7 +707,7 @@
     <string name="btn_install">Neu installieren</string>
 
     <string name="symbol_archeo">Archäologie</string>
-    <!-- TODO string name="symbol_anthro">Anthro</string -->
+    <string name="symbol_anthro">Anthropologie</string>
     <string name="symbol_bio">Biologie</string>
     <string name="symbol_geo">Geologie</string>
     <string name="symbol_karst">Karst</string>
@@ -802,7 +802,7 @@
     <string name="help_refs">Skizzenelemente anzeigen</string>
     <string name="help_rename">Ändere Vermessungsname</string>
     <string name="help_plot_rename">Skizze umbenennen/löschen</string>
-    <!-- TODO string name="help_plot_scrap">Sketch scraps</string -->
+    <string name="help_plot_scrap">Teilskizzen</string>
     <string name="help_plot_switch">Skizze wechseln</string>
     <string name="help_search">Suche Messpunkt</string>
     <string name="help_stats">Vermessungs-Statistiken</string>
@@ -823,9 +823,9 @@
     <string name="help_previous">Vorheriger Punkt</string>
     <string name="help_next">Nächster Punkt</string>
     <string name="help_recover">Die Skizze wiederherstellen</string>
-    <!-- TODO string name="help_reload_prev">Display newer backup</string -->
-    <!-- TODO string name="help_reload_next">Display older backup</string -->
-    <!-- TODO string name="help_reload_plot">Reload sketch backup</string -->
+    <string name="help_reload_prev">Neueren Backup anzeigen</string>
+    <string name="help_reload_next">Älteren Backup anzeigen</string>
+    <string name="help_reload_plot">Von Backup wiederherstellen</string>
     <string name="help_zoom_fit">Zoomen auf ganze Skizze</string>
 
     <string name="help_line_point">Linienpunkt Aktionen: verbinden, trennen, schneiden, löschen</string>
@@ -860,15 +860,15 @@
     <string name="help_compute">Kalibrierungs-Koeffizienten berechnen</string>
     <string name="help_write">Kalibrierungs-Koeffizienten auf den DistoX speichern</string>
   
-    <!-- TODO string name="audio_paused">Paused</string -->
-    <!-- TODO string name="audio_playing">Playing</string -->
-    <!-- TODO string name="audio_recording">Recording</string -->
-    <!-- TODO string name="audio_delete">Delete ?</string -->
-    <!-- TODO string name="audio_overwrite">Overwrite ?</string -->
+    <string name="audio_paused">Pause</string>
+    <string name="audio_playing">Abspielen</string>
+    <string name="audio_recording">Aufnehmen</string>
+    <string name="audio_delete">Löschen ?</string>
+    <string name="audio_overwrite">Überschreiben ?</string>
   
-    <!-- TODO string name="import_lrud">Import LRUD</string -->
-    <!-- TODO string name="import_leg_first">Leg before LRUD splays</string -->
-    <!-- TODO string name="import_diving_datamode">Diving datamode</string -->
+    <string name="import_lrud">LRUD importieren</string>
+    <string name="import_leg_first">Messzug vor LRUD</string>
+    <string name="import_diving_datamode">Tauchmodus</string>
 
 <!-- TITLES -->
     <string name="title_azimut">Seitenriss-Azimut</string>
@@ -911,7 +911,7 @@
     <string name="title_plot_save">Skizze speichern als</string>
     <!-- UNUSED string name="title_plot_merge">Skizze einfügen</string -->
     <string name="title_plot_reload">Skizzenbackup wiederherstellen</string>
-    <!-- TODO string name="title_plot_scraps">Sketch scraps</string -->
+    <string name="title_plot_scraps">Teilskizzen</string>
     <string name="title_profile_flip">Seitenansicht spiegeln?</string>
     <string name="title_projection">Projiziertes Profil Azimut %1$d</string>
     <string name="title_refs">Elemente Anzeigen</string>
@@ -967,10 +967,10 @@
     <string name="title_calib_export">Kalibrierung speichern als</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-    <!-- TODO string name="title_import_tro">VisualTopo import options</string -->
-    <!-- TODO string name="title_import_dat">Compass import options</string -->
+    <string name="title_import_tro">VisualTopo-Import Optionen</string>
+    <string name="title_import_dat">Compass-Import Optionen</string>
 
-  <string name="pref_export_settings">Export Einstellungen</string>
+  <string name="pref_export_settings">Export-Einstellungen</string>
 
 <!-- PREFERENCES STRINGS CAN BE LEFT UNTRANSLATED FOR NOW -->
   <string name="pref_cat_survey">Vermessung</string>
@@ -1158,8 +1158,8 @@
   <string name="pref_section_splay_message">Grenzwert in Querschnitten ab welchem Hilfslinien gestrichelt dargestellt werden; Standardwert: 60</string>
   <string name="pref_data_backup_title">Auto-Datenexport</string>
   <string name="pref_data_backup_summary">Automatischer Datenexport beim Verlassen (benötigt ein Standard Exportformat)</string>
-  <!-- TODO string name="pref_zipped_symbols_title">Zipped symbols files</string -->
-  <!-- TODO string name="pref_zipped_symbols_summary">Store/load symbol files to/from zip archive</string -->
+  <string name="pref_zipped_symbols_title">Gezippte Symbolfiles</string>
+  <string name="pref_zipped_symbols_summary">Speichere/Lade Symbole in ZIP-Files</string>
   <string name="pref_fixed_origin_title">Skizzen fixieren</string>
   <string name="pref_fixed_origin_summary">Skizzen haben einen fixen Verankerungspunkt</string>
   <string name="pref_shared_xsections_title">Querschn. Sichtbarkeit</string>
