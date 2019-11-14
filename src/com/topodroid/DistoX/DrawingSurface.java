@@ -137,7 +137,7 @@ class DrawingSurface extends SurfaceView
       if ( fullname != null ) manager = mCache.get( fullname );
       TDLog.Log( TDLog.LOG_IO, "check out PLAN from cache " + fullname + " found: " + (manager!=null) );
       if ( manager == null ) {
-        mCommandManager1 = new DrawingCommandManager();
+        mCommandManager1 = new DrawingCommandManager( DRAWING_PLAN );
       } else {
         mCommandManager1 = manager;
         mCommandManager1.setDisplayPoints( false );
@@ -148,7 +148,7 @@ class DrawingSurface extends SurfaceView
       if ( fullname != null ) manager = mCache.get( fullname );
       TDLog.Log( TDLog.LOG_IO, "check out PROFILE from cache " + fullname + " found: " + (manager!=null) );
       if ( manager == null ) {
-        mCommandManager2 = new DrawingCommandManager();
+        mCommandManager2 = new DrawingCommandManager( DRAWING_PROFILE );
 	if ( is_extended ) mCommandManager2.mIsExtended = true;
       } else {
         mCommandManager2 = manager;
@@ -158,7 +158,7 @@ class DrawingSurface extends SurfaceView
       commandManager = mCommandManager2;
     } else {
       if ( mCommandManager3 == null ) {
-        mCommandManager3 = new DrawingCommandManager();
+          mCommandManager3 = new DrawingCommandManager( mode );
       } else {
         mCommandManager3.clearDrawing();
       }
@@ -736,8 +736,7 @@ class DrawingSurface extends SurfaceView
 
   // called by OverviewWindow
   // @pre tdr != null
-  boolean addLoadDataStream( String tdr, float xdelta, float ydelta,
-    /* SymbolsPalette missingSymbols, */ String plotName )
+  boolean addLoadDataStream( String tdr, float xdelta, float ydelta, /* SymbolsPalette missingSymbols, */ String plotName )
   {
     boolean ret = false;
     SymbolsPalette localPalette = BrushManager.preparePalette();

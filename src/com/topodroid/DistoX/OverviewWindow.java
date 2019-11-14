@@ -631,14 +631,8 @@ public class OverviewWindow extends ItemDrawer
         String fullName = TDInstance.survey + "-" + plot.name;
         // Log.v( "DistoXX", "load tdr file " + fullName );
 
-        // String th2 = TDPath.getTh2FileWithExt( fullName );
-        // if ( TDSetting.mBinaryTh2 ) { // TDR BINARY
-          String tdr = TDPath.getTdrFileWithExt( fullName );
-          mOverviewSurface.addLoadDataStream( tdr, /* th2, */ xdelta, ydelta, /* null, */ fullName ); // save plot name in paths
-        // } else {
-        //   // FIXME_OVER N.B. this loads the drawing on DrawingSurface.mCommandManager3
-        //   mOverviewSurface.addloadTherion( th2, xdelta, ydelta, null ); // ignore missing symbols
-        // }
+        String tdr = TDPath.getTdrFileWithExt( fullName );
+        mOverviewSurface.addLoadDataStream( tdr, xdelta, ydelta, /* null, */ fullName ); // save plot name in paths
       }
 
       // if ( ! mAllSymbols ) {

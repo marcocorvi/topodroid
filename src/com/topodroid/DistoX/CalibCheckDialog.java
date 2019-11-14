@@ -19,7 +19,7 @@ import android.os.Bundle;
 import android.content.Context;
 
 import android.widget.TextView;
-// import android.widget.Button;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -27,7 +27,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import android.view.View;
-// import android.view.View.OnClickListener;
+import android.view.View.OnClickListener;
 
 // import android.graphics.Bitmap;
 
@@ -35,6 +35,7 @@ import android.util.Log;
 
 class CalibCheckDialog extends MyDialog
                        implements OnItemClickListener
+                                , OnClickListener
 {
   // private SurveyWindow mParent;
   private List< DBlock > mShots;
@@ -42,6 +43,7 @@ class CalibCheckDialog extends MyDialog
   // private ImageView hist0;
   private ImageView hist1;
   private ImageView hist2;
+  private Button    mBtnClose;
 
   // private ArrayAdapter<String> mArrayAdapter;
   // private ListView mList;
@@ -65,6 +67,9 @@ class CalibCheckDialog extends MyDialog
     hist1 = (ImageView) findViewById( R.id.histogram1 );
     hist2 = (ImageView) findViewById( R.id.histogram2 );
 
+    mBtnClose = (Button) findViewById( R.id.button_close );
+    mBtnClose.setOnClickListener( this );
+
     ArrayAdapter<String> array_adapter = new ArrayAdapter<>( mContext, R.layout.message );
 
     ListView list = (ListView) findViewById(R.id.list);
@@ -79,6 +84,11 @@ class CalibCheckDialog extends MyDialog
     }
   }
 
+  @Override
+  public void onClick( View v )
+  {
+    dismiss(); // only mBtnClose
+  }
 
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int position, long idx )
@@ -123,6 +133,8 @@ class CalibCheckDialog extends MyDialog
 
     if ( blk != null ) {
       // Log.v("DistoX", "check block " + blk.mFrom + " " + blk.mTo + " n1 " + n1 );
+      String b0 = blk.mFrom + "-" + blk.mTo;
+      String b2 = null;
       Vector v0 = new Vector( x, y, z ); // unit vector along the leg
       float l0 = v0.Length();            // length of leg vector
       v0.normalize();
@@ -135,6 +147,7 @@ class CalibCheckDialog extends MyDialog
           if ( b.isMainLeg() ) {
             // FIXME only the first backshot is considered
 	    if ( blk.mFrom.equals( b.mTo ) && blk.mTo.equals( b.mFrom ) ) {
+              b2 = b.mFrom + "-" + b.mTo;
               k2 = k;
               n2 = 1;
               in_leg = true;
@@ -177,6 +190,7 @@ class CalibCheckDialog extends MyDialog
           }
         }
         hist2.setImageBitmap( CalibCoeffDialog.makeHistogramBitmap( errors2, 400, 100, 40, 10, TDColor.LIGHT_GRAY ) );
+        setTitle( b0 + " " + b2 );
       } else {
 	Log.v("DistoX", "search a triangle" );
 	// k2 = n2 = 0;
@@ -235,8 +249,11 @@ class CalibCheckDialog extends MyDialog
           }
           ++k;
 	}
+        String b3 = null;
 	if ( station != null ) {
           // Log.v("DistoX", "found block2 " + blk2.mFrom + " " + blk2.mTo + " sign2 " + sign2 + " n2 " + n2 );
+          b2 = blk2.mFrom + "-" + blk2.mTo;
+          
 	  k = 0;
 	  in_leg = false;
           for ( DBlock b : mShots ) {
@@ -244,21 +261,25 @@ class CalibCheckDialog extends MyDialog
             if ( ! in_leg ) {
               if ( b.isMainLeg() ) {
 	        if ( b.mFrom.equals( blk.mFrom ) && b.mTo.equals( station ) ) {
+                  b3 = b.mFrom + "-" + b.mTo;
                   k3 = k;
 	          n3 = 1;
 		  sign3 = -1;
 		  in_leg = true;
 		} else if ( b.mFrom.equals( blk.mTo ) && b.mTo.equals( station ) ) {
+                  b3 = b.mFrom + "-" + b.mTo;
                   k3 = k;
 	          n3 = 1;
 		  sign3 = 1;
 		  in_leg = true;
 	        } else if ( b.mTo.equals( blk.mFrom ) && b.mFrom.equals( station ) ) {
+                  b3 = b.mFrom + "-" + b.mTo;
                   k3 = k;
 	          n3 = 1;
 		  sign3 = 1;
 		  in_leg = true;
 	        } else if ( b.mTo.equals( blk.mTo   ) && b.mFrom.equals( station ) ) {
+                  b3 = b.mFrom + "-" + b.mTo;
                   k3 = k;
 	          n3 = 1;
 		  sign3 = -1;
@@ -303,6 +324,7 @@ class CalibCheckDialog extends MyDialog
 	    }
           }
           hist2.setImageBitmap( CalibCoeffDialog.makeHistogramBitmap( errors3, 400, 100, 40, 10, TDColor.MID_GRAY ) );
+          setTitle( b0 + " " + b2 + " " + b3 );
         } else {
           hist2.setImageBitmap( null );
 	}

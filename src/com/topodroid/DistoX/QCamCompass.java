@@ -126,11 +126,11 @@ class QCamCompass extends Dialog
     mBDsaveoff   = MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_save_off_transp );
 
     LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 0, 10, 20, 10 );
-    LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
-    layout4.setMinimumHeight( size + 20 );
-    layout4.addView( buttonClick, lp );
-    layout4.addView( buttonSave, lp );
-    layout4.addView( buttonCancel, lp );
+    LinearLayout ll_help = (LinearLayout) findViewById( R.id.help );
+    ll_help.setMinimumHeight( size + 20 );
+    ll_help.addView( buttonClick, lp );
+    ll_help.addView( buttonSave, lp );
+    ll_help.addView( buttonCancel, lp );
 
     enableButtonSave( false );
 

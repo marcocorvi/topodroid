@@ -22,7 +22,7 @@ import android.content.Context;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.EditText;
-// import android.widget.Button;
+import android.widget.Button;
 // import android.widget.CheckBox;
 import android.view.View;
 // import android.view.ViewGroup.LayoutParams;
@@ -55,7 +55,7 @@ class DrawingLineSectionDialog extends MyDialog
   private MyCheckBox mBtnErase = null;
   private MyCheckBox mBtnSave  = null;
 
-  // private Button   mBtnCancel;
+  private Button   mBtnCancel;
   private EditText mETnick;
   private ImageView mIVimage;   // photo image
   private boolean mHSection;
@@ -191,8 +191,8 @@ class DrawingLineSectionDialog extends MyDialog
       TDLayout.setMargins( mBtnSave, 0, -10, 40, 10 );
       mBtnSave.setOnClickListener( this );
     }
-    // mBtnCancel = (Button) findViewById( R.id.button_cancel );
-    // mBtnCancel.setOnClickListener( this );
+    mBtnCancel = (Button) findViewById( R.id.button_cancel );
+    mBtnCancel.setOnClickListener( this );
 
   }
 
@@ -204,6 +204,9 @@ class DrawingLineSectionDialog extends MyDialog
       if ( mTdImage != null ) {
         (new PhotoDialog( mContext, mFilename )).show();
       }
+      return;
+    } else if ( v.getId() == R.id.button_cancel ) {
+      onBackPressed();
       return;
     } else {
       long type = mHSection ? PlotInfo.PLOT_H_SECTION : PlotInfo.PLOT_SECTION;
@@ -220,28 +223,14 @@ class DrawingLineSectionDialog extends MyDialog
         mParent.updatePlotNick( mPlotInfo, mNick );
       }
     }
-
-    // switch ( v.getId() ) {
-    //   case R.id.button_foto:
-    //     mParent.makePhotoXSection( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino );
-    //     break;
-    //   case R.id.button_draw:
-    //     mParent.makePlotXSection( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino );
-    //     break;
-    //   case R.id.button_erase:
-    //     mParent.deleteLine( mLine );
-    //     break;
-    //   case R.id.button_save:
-    //     mParent.updatePlotNick( mPlotInfo, mNick );
-    //     break;
-    //   case R.id.line_image:
-    //     TopoDroidApp.viewPhoto( mContext, mTdImage.filname() );
-    //     break;
-    //   default: // R.id.button_cancel
-    //     /* nothing */
-    // }
-    if ( mTdImage != null ) mTdImage.recycleImages();
+    recycleImage();
     dismiss();
+  }
+
+  private void recycleImage()
+  {
+    if ( mTdImage != null ) mTdImage.recycleImages();
+    mTdImage = null;
   }
 
   @Override
@@ -251,7 +240,7 @@ class DrawingLineSectionDialog extends MyDialog
       // if pressed BACK and the section did not exist, tell the parent to delete the "section" line
       mParent.deleteLine( mLine );
     }
-    if ( mTdImage != null ) mTdImage.recycleImages();
+    recycleImage();
     dismiss();
   }
 

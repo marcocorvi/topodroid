@@ -50,6 +50,7 @@ import java.io.DataOutputStream;
 class DrawingCommandManager
 {
   private static final int BORDER = 20; // for the bitmap
+  private int mMode = 0;  // command manager mode type (PLAN PROFILE SECTION OVERVIEW)
 
   static private int mDisplayMode = DisplayMode.DISPLAY_PLOT; // this display mode is shared among command managers
   private RectF mBBox;
@@ -89,8 +90,10 @@ class DrawingCommandManager
   private boolean mLandscape = false;
 
 
-  DrawingCommandManager()
+  DrawingCommandManager( int mode )
   {
+    // Log.v("DistoX-MANAGER", "command manager mode " + mode );
+    mMode = mode;
     mIsExtended  = false;
     mBBox = new RectF();
     mNorthLine       = null;
@@ -994,14 +997,16 @@ class DrawingCommandManager
 	}
       }
     }
-    if ( mPlotOutline != null && mPlotOutline.size() > 0 ) {
-      synchronized( mPlotOutline )  {
-        for (DrawingLinePath path : mPlotOutline ) path.draw( canvas, mMatrix, mScale, null /* mBBox */ );
+    if ( mMode < DrawingSurface.DRAWING_SECTION ) {
+      if ( mPlotOutline != null && mPlotOutline.size() > 0 ) {
+        synchronized( mPlotOutline )  {
+          for (DrawingLinePath path : mPlotOutline ) path.draw( canvas, mMatrix, mScale, null /* mBBox */ );
+        }
       }
-    }
-    if ( mXSectionOutlines != null && mXSectionOutlines.size() > 0 ) {
-      synchronized( TDPath.mXSectionsLock )  {
-        for ( DrawingOutlinePath path : mXSectionOutlines ) path.mPath.draw( canvas, mMatrix, mScale, null /* mBBox */ );
+      if ( mXSectionOutlines != null && mXSectionOutlines.size() > 0 ) {
+        synchronized( TDPath.mXSectionsLock )  {
+          for ( DrawingOutlinePath path : mXSectionOutlines ) path.mPath.draw( canvas, mMatrix, mScale, null /* mBBox */ );
+        }
       }
     }
  
@@ -1011,11 +1016,21 @@ class DrawingCommandManager
       }
     }
     
-    if ( outline ) {
-      for ( Scrap scrap : mScraps ) {
-        scrap.drawOutline( canvas, mMatrix, mScale, mBBox );
+    if ( ! TDSetting.mAutoStations ) {
+      mCurrentScrap.drawUserStations( canvas, mMatrix, mScale, mBBox );
+    }
+
+    if ( mMode == DrawingSurface.DRAWING_OVERVIEW ) {
+      if ( outline ) {
+        for ( Scrap scrap : mScraps ) {
+          scrap.drawOutline( canvas, mMatrix, mScale, mBBox );
+        }
+      } else {
+        for ( Scrap scrap : mScraps ) {
+          scrap.drawAll( canvas, mMatrix, mScale, mBBox );
+        }
       }
-    } else {
+    } else { // not DRAWING_OVERVIEW
       for ( Scrap scrap : mScraps ) {
         if ( scrap == mCurrentScrap ) {
           scrap.drawAll( canvas, mMatrix, mScale, mBBox );
@@ -1023,36 +1038,30 @@ class DrawingCommandManager
           scrap.drawGreyOutline( canvas, mMatrix, mScale, mBBox );
         }
       }
-    }
+      if ( mDisplayPoints ) {
+        float dot_radius = TDSetting.mDotRadius/zoom;
+        synchronized( TDPath.mSelectionLock ) {
+          mCurrentScrap.displayPoints( canvas, mMatrix, mBBox, dot_radius, spoints, slines, sareas, splays, (legs && sshots), sstations, station_splay );
 
-    if ( ! TDSetting.mAutoStations ) {
-      mCurrentScrap.drawUserStations( canvas, mMatrix, mScale, mBBox );
-    }
+          // for ( SelectionPoint pt : mSelection.mPoints ) { // FIXME SELECTION
+          //   float x, y;
+          //   if ( pt.mPoint != null ) { // line-point
+          //     x = pt.mPoint.x;
+          //     y = pt.mPoint.y;
+          //   } else {  
+          //     x = pt.mItem.cx;
+          //     y = pt.mItem.cy;
+          //   }
+          //   Path path = new Path();
+          //   path.addCircle( x, y, dot_radius, Path.Direction.CCW );
+          //   path.transform( mMatrix );
+          //   canvas.drawPath( path, BrushManager.highlightPaint2 );
+          // }
 
-    if ( mDisplayPoints ) {
-      float dot_radius = TDSetting.mDotRadius/zoom;
-      synchronized( TDPath.mSelectionLock ) {
-        mCurrentScrap.displayPoints( canvas, mMatrix, mBBox, dot_radius, spoints, slines, sareas, splays, (legs && sshots), sstations, station_splay );
+          mCurrentScrap.drawSelection( canvas, mMatrix, zoom, mScale, mIsExtended );
 
-        // for ( SelectionPoint pt : mSelection.mPoints ) { // FIXME SELECTION
-        //   float x, y;
-        //   if ( pt.mPoint != null ) { // line-point
-        //     x = pt.mPoint.x;
-        //     y = pt.mPoint.y;
-        //   } else {  
-        //     x = pt.mItem.cx;
-        //     y = pt.mItem.cy;
-        //   }
-        //   Path path = new Path();
-        //   path.addCircle( x, y, dot_radius, Path.Direction.CCW );
-        //   path.transform( mMatrix );
-        //   canvas.drawPath( path, BrushManager.highlightPaint2 );
-        // }
-
-        mCurrentScrap.drawSelection( canvas, mMatrix, zoom, mScale, mIsExtended );
-
-      }  // synch( mSelectedLock ) mSelectionLock
-
+        }  // synch( mSelectedLock ) mSelectionLock
+      }
     }
 
     synchronized( mGridStack1 ) {

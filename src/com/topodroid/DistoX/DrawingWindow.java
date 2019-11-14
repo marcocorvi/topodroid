@@ -6476,7 +6476,7 @@ public class DrawingWindow extends ItemDrawer
     ydelta *= DrawingUtil.SCALE_FIX;
     String fullName = TDInstance.survey + "-" + plt.name;
     String tdr = TDPath.getTdrFileWithExt( fullName );
-    boolean ret = mDrawingSurface.addLoadDataStream( tdr, /* null, */ xdelta, ydelta, /* null, */ null ); // do not save plot name in paths
+    boolean ret = mDrawingSurface.addLoadDataStream( tdr, xdelta, ydelta, /* null, */ null ); // do not save plot name in paths
   }
 
   // mSplitRemove: whether to remove the paths from the current plot

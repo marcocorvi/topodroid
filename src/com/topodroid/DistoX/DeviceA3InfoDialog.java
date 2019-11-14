@@ -33,7 +33,7 @@ class DeviceA3InfoDialog extends MyDialog
   private RadioButton mRBa3;
   private RadioButton mRBx310;
   private Button   mBTok;
-  // private Button   mBTcancel;
+  private Button   mBTcancel;
 
   private final DeviceActivity mParent;
   private final Device mDevice;
@@ -83,8 +83,8 @@ class DeviceA3InfoDialog extends MyDialog
 
     mBTok = (Button) findViewById( R.id.btn_ok );
     mBTok.setOnClickListener( this );
-    // mBTcancel = (Button) findViewById( R.id.button_cancel );
-    // mBTcancel.setOnClickListener( this );
+    mBTcancel = (Button) findViewById( R.id.button_cancel );
+    mBTcancel.setOnClickListener( this );
   }
 
   void updateInfo( DeviceA3Info info )
@@ -112,8 +112,8 @@ class DeviceA3InfoDialog extends MyDialog
           }
         }
       );
-    // } else if ( b == mBTcancel ) {
-    //   dismiss();
+    } else if ( b == mBTcancel ) {
+      dismiss();
     }
   }
 

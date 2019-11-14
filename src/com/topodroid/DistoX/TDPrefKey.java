@@ -284,7 +284,7 @@ class TDPrefKey
   };
 
   static String[] CALIBdef = {
-    TDString.ONE,
+    TDString.ONE, // TDString.TWO = GROUP_BY_ONLY_16
     "40",
     "0.000001",
     "200",
