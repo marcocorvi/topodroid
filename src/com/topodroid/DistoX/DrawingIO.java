@@ -1052,7 +1052,7 @@ class DrawingIO
   }
 
   // @param name filename without extension .th2
-  static private void exportTherionHeader1( BufferedWriter out, int type, RectF bbox, String name ) throws IOException
+  static private void exportTherionGlobalHeader( BufferedWriter out, int type, RectF bbox, String name ) throws IOException
   {
     out.write("encoding utf-8");
     out.newLine();
@@ -1102,7 +1102,7 @@ class DrawingIO
   //   out.write( sw.getBuffer().toString() );
   // }
   
-  static private void exportTherionHeader3( BufferedWriter out,
+  static private void exportTherionScrapHeader( BufferedWriter out,
          int type, String scrap_name, String proj_name, int project_dir,
          boolean do_north, float x1, float y1, float x2, float y2 ) throws IOException
   {
@@ -1128,7 +1128,7 @@ class DrawingIO
     out.newLine();
   }
 
-  static private void exportTherionClose( BufferedWriter out ) throws IOException
+  static private void exportTherionScrapEnd( BufferedWriter out ) throws IOException
   {
     out.newLine();
     out.newLine();
@@ -1145,7 +1145,7 @@ class DrawingIO
       for ( DrawingPath splay : splays ) {
         // if ( bbox.left > splay.right  || bbox.right  < splay.left ) continue;
         // if ( bbox.top  > splay.bottom || bbox.bottom < splay.top  ) continue;
-        if ( splay.intersects( bbox ) ) {
+        if ( bbox == null || splay.intersects( bbox ) ) {
           pw.format("line u:splay -visibility off\n");
           pw.format( Locale.US, "  %.2f %.2f\n  %.2f %.2f\n", splay.x1*toTherion, -splay.y1*toTherion, splay.x2*toTherion, -splay.y2*toTherion );
           pw.format("endline\n");
@@ -1194,8 +1194,10 @@ class DrawingIO
         NumStation station = st.getNumStation();
         if ( station != null && station.barriered() ) continue;
         // FIXME if station is in the convex hull (bbox) of the lines
-        if ( bbox.left > st.cx || bbox.right  < st.cx ) continue;
-        if ( bbox.top  > st.cy || bbox.bottom < st.cy ) continue;
+        if ( bbox != null ) {
+          if ( bbox.left > st.cx || bbox.right  < st.cx ) continue;
+          if ( bbox.top  > st.cy || bbox.bottom < st.cy ) continue;
+        }
         String st_str = st.toTherion();
         if ( st_str != null ) {
           out.write( st_str );
@@ -1240,18 +1242,20 @@ class DrawingIO
     // int scraps,
 
     try { 
-      exportTherionHeader1( out, type, bbox, full_name );
+      exportTherionGlobalHeader( out, type, bbox, full_name ); 
       // exportTherionHeader2( out );
       int scrap_nr = 0;
       for ( Scrap scrap : scraps ) {
         List<ICanvasCommand> cstack = scrap.mCurrentStack;
         String name = (scrap_nr == 0)? full_name : full_name + scrap_nr;
         if ( north != null ) { 
-          exportTherionHeader3( out, type, name, proj_name, 0, true, north.x1, north.y1, north.x2, north.y2 );
+          exportTherionScrapHeader( out, type, name, proj_name, 0, true, north.x1, north.y1, north.x2, north.y2 );
         } else {
-          exportTherionHeader3( out, type, name, proj_name, project_dir, false, 0, 0, 0, 0 );
+          exportTherionScrapHeader( out, type, name, proj_name, project_dir, false, 0, 0, 0, 0 );
         }
-          
+
+        RectF scrap_bbox = scrap.getBBox(); // IMPORTANT BBox must have been properly computed before
+
         synchronized( cstack ) {
           for ( ICanvasCommand cmd : cstack ) {
             if ( cmd.commandType() != 0 ) continue;
@@ -1288,18 +1292,18 @@ class DrawingIO
         out.newLine();
 
         if ( TDSetting.mTherionSplays && scrap_nr == 0 ) { // splays only in the first scrap
-          exportTherionSplays( out, splays, bbox );
+          exportTherionSplays( out, splays, scrap_bbox );
         }
 
         if ( TDSetting.mAutoStations ) {
-          exportTherionStations( out, stations, bbox );
+          exportTherionStations( out, stations, scrap_bbox );
         } else {
           List<DrawingStationPath> userstations = scrap.mUserStations;
           if ( userstations.size() > 0 ) {
             exportTherionUserStations( out, userstations );
           }
         }
-        exportTherionClose( out );
+        exportTherionScrapEnd( out );
         ++ scrap_nr;
       }
     } catch ( IOException e ) {
@@ -1379,17 +1383,26 @@ class DrawingIO
     // Log.v("DistoXX", "export th2 multiscrap bbox X " + xmin + " " + xmax  + " Y " + ymin + " " + ymax );
 
     try { 
-      exportTherionHeader1( out, type, bbox, full_name );
+      exportTherionGlobalHeader( out, type, bbox, full_name );
+
       // exportTherionHeader2( out );
       for ( int k=0; k<nplots; ++k ) {
         String plot = plots[k]; 
         // if ( north != null ) { 
-        //   exportTherionHeader3( out, type, full_name, proj_name, 0, true, north.x1, north.y1, north.x2, north.y2 );
+        //   exportTherionScrapHeader( out, type, full_name, proj_name, 0, true, north.x1, north.y1, north.x2, north.y2 );
         // } else {
-          exportTherionHeader3( out, type, plot, proj_name, project_dir, false, 0, 0, 0, 0 );
+          exportTherionScrapHeader( out, type, plot, proj_name, project_dir, false, 0, 0, 0, 0 );
         // }
 
+        // all the scraps together
+        RectF scraps_bbox = null;
         for ( Scrap scrap : scraps ) {
+          if ( scraps_bbox == null ) {
+            scraps_bbox = scrap.getBBox();
+          } else {
+            Scrap.union( scraps_bbox, scrap.getBBox() );
+          }
+
           List< ICanvasCommand > cstack = scrap.mCurrentStack;
           synchronized( cstack ) {
             for ( ICanvasCommand cmd : cstack ) {
@@ -1423,21 +1436,21 @@ class DrawingIO
             }
             out.newLine();
           }
-
-          // if ( TDSetting.mTherionSplays ) {
-          //   exportTherionSplays( out, splays, bbox );
-          // }
-
-          // if ( TDSetting.mAutoStations ) {
-          //   exportTherionStations( out, stations, bbox );
-          // } else {
+          if ( ! TDSetting.mAutoStations ) {
             List<DrawingStationPath> userstations = scrap.mUserStations;
             if ( userstations.size() > 0 ) {
               exportTherionUserStations( out, userstations );
             }
-          // }
-          exportTherionClose( out );
+          }
         }
+
+        if ( TDSetting.mTherionSplays ) {
+          exportTherionSplays( out, splays, scraps_bbox );
+        }
+        if ( TDSetting.mAutoStations ) {
+          exportTherionStations( out, stations, scraps_bbox );
+        }
+        exportTherionScrapEnd( out );
       }
     } catch ( IOException e ) {
       e.printStackTrace();
@@ -1508,14 +1521,14 @@ class DrawingIO
                   north_x2 = xoff + dis.readFloat();
                   north_y2 = yoff + dis.readFloat();
                 }
-                if ( bbox != null ) exportTherionHeader1( out, type, bbox, file_name );
+                if ( bbox != null ) exportTherionGlobalHeader( out, type, bbox, file_name );
                 // exportTherionHeader2( out, points, lines, areas );
                 String proj = PlotInfo.projName[ type ];
-                exportTherionHeader3( out, type, name, proj, project_dir, do_north, north_x1, north_y1, north_x2, north_y2 );
+                exportTherionScrapHeader( out, type, name, proj, project_dir, do_north, north_x1, north_y1, north_x2, north_y2 );
                 // if ( do_north ) { 
-                //   exportTherionHeader3( out, type, name, proj, 0, true, north_x1, north_y1, north_x2, north_y2 );
+                //   exportTherionScrapHeader( out, type, name, proj, 0, true, north_x1, north_y1, north_x2, north_y2 );
                 // } else {
-                //   exportTherionHeader3( out, type, name, proj, project_dir, false, 0, 0, 0, 0 );
+                //   exportTherionScrapHeader( out, type, name, proj, project_dir, false, 0, 0, 0, 0 );
                 // }
                 in_scrap = true;
               }
@@ -1574,7 +1587,7 @@ class DrawingIO
               break;
           } 
         }
-        if (endscrap ) exportTherionClose( out );
+        if (endscrap ) exportTherionScrapEnd( out );
         dis.close();
         fis.close();
       } catch ( FileNotFoundException e ) {

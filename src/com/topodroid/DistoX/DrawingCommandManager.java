@@ -1194,7 +1194,7 @@ class DrawingCommandManager
   //   mSelection = selection;
   // }
 
-
+  // get the bounding box and have scraps save their bbox
   RectF getBoundingBox( )
   {
     RectF bbox = new RectF( 0, 0, 0, 0 );
@@ -1211,13 +1211,13 @@ class DrawingCommandManager
   // @param multiscrap  whether the sketch has several scraps
   void exportTherion( int type, BufferedWriter out, String full_name, String proj_name, int proj_dir, boolean multiscrap )
   {
+    RectF bbox = getBoundingBox( );
     if ( multiscrap ) {
       // Log.v("DistoXX", "multi scrap export stack size " + mCurrentStack.size() );
       // BBox computed by export multiscrap
       DrawingIO.exportTherionMultiPlots( type, out, full_name, proj_name, proj_dir, /* bbox, mNorthLine, */ mScraps, mStations, mSplaysStack );
                                          // mCurrentStack, mUserStations, mStations, mSplaysStack 
     } else {
-      RectF bbox = getBoundingBox( );
       DrawingIO.exportTherion( type, out, full_name, proj_name, proj_dir, bbox, mNorthLine, mScraps, mStations, mSplaysStack );
                                  // scrap, mCurrentStack, mUserStations, mStations, mSplaysStack 
     }

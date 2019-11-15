@@ -34,6 +34,7 @@ class Scrap
   boolean isMultiselection = false; 
   private int mMaxAreaIndex;                   // max index of areas in this plot
   int mScrapIdx;
+  private RectF mBBox;   // this scrap bbox
 
   Scrap( int idx ) 
   {
@@ -44,10 +45,12 @@ class Scrap
     mSelected     = new SelectionSet();
     mMultiselected = new ArrayList<DrawingPath>();
     mScrapIdx     = idx;
+    mBBox = null;
     mMaxAreaIndex = 0;
   }
 
   // ----------------------------------------------------------
+  // "merge" b1 into b0
   static void union( RectF b0, RectF b1 )
   {
     if ( b0.left   > b1.left   ) b0.left   = b1.left;
@@ -1710,7 +1713,15 @@ class Scrap
         if ( p.bottom > ymax ) ymax = p.bottom;
       }
     }
-    return new RectF( xmin, ymin, xmax, ymax ); // left top right bottom
+    mBBox = new RectF( xmin, ymin, xmax, ymax ); // left top right bottom
+    return mBBox;
+  }
+
+  // get the bounding box: must have been previously computed with computeBBox()
+  // this is done by the command manager getBoundingBox()
+  RectF getBBox() 
+  {
+    return mBBox;
   }
 
   DrawingAudioPath getAudioPoint( long bid )
