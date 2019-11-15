@@ -11,16 +11,9 @@
  */
 package com.topodroid.DistoX;
 
-// import android.util.Log;
+import android.util.Log;
 
 import java.lang.ref.WeakReference;
-
-// import java.io.FileWriter;
-// import java.io.PrintWriter;
-// import java.io.IOException;
-
-// import java.util.List;
-// import java.util.ArrayList;
 
 // import android.app.Activity;
 import android.os.AsyncTask;
@@ -33,15 +26,17 @@ class SwapHotBitTask extends AsyncTask<Void, Integer, Integer>
   private String mAddress;
   private int mFrom;
   private int mTo;
+  private boolean mOnOff;
 
   // @param ht head_tail
-  SwapHotBitTask( TopoDroidApp app, int type, String address, int[] ht )
+  SwapHotBitTask( TopoDroidApp app, int type, String address, int[] ht, boolean on_off )
   {
     mApp     = new WeakReference<TopoDroidApp>( app );
     mAddress = address;
     mType    = type;
-    mFrom    = ht[0];
-    mTo      = ht[1];
+    mFrom    = ht[1]; // tail
+    mTo      = ht[0]; // head
+    mOnOff   = on_off;
     // // Log.v(TopoDroidApp.TAG, "do reset from " + from + " to " + to );
   }
 
@@ -52,7 +47,7 @@ class SwapHotBitTask extends AsyncTask<Void, Integer, Integer>
     if ( mType == Device.DISTO_X310 ) {
       res = -1;
     } else if ( mType == Device.DISTO_A3 && mApp.get() != null ) {
-      res = mApp.get().swapA3HotBit( mAddress, mFrom, mTo );
+      res = mApp.get().swapA3HotBit( mAddress, mFrom, mTo, mOnOff );
     }
     return res;
   }

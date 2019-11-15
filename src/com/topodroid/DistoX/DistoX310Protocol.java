@@ -47,7 +47,7 @@ class DistoX310Protocol extends DistoXProtocol
     super( in, out, device, context );
   }
 
-  // boolean swapA3HotBit( int addr ) // only A3
+  // boolean swapA3HotBit( int addr, boolean on_off ) // only A3
   // {
   //   try {
   //     mBuffer[0] = (byte) 0x38;
@@ -77,8 +77,11 @@ class DistoX310Protocol extends DistoXProtocol
   //       TDLog.Error( "HotBit refusing to swap addr " + addr );
   //       return false;
   //     }  
-
-  //     mBuffer[3] |= (byte)0x80; // RESET HOT BIT
+  //     if ( on_off ) {
+  //       mBuffer[3] |= (byte)0x80; // RESET HOT BIT
+  //     } else {
+  //       mBuffer[3] &= (byte)0x7f; // CLEAR HOT BIT
+  //     }
   //     mOut.write( mBuffer, 0, 7 );
   //     // if ( TDSetting.mPacketLog ) logPacket7( 1L, mBuffer );
 

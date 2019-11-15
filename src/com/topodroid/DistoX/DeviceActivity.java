@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-// import android.util.Log;
+import android.util.Log;
 
 import java.util.Set;
 // import java.util.List;
@@ -566,16 +566,24 @@ public class DeviceActivity extends Activity
 
   // -----------------------------------------------------------------------------
 
+  void doClearA3Memory()
+  {
+    int[] ht = new int[2]; // ht[0] (head) is ahead of ht[1] (tail)
+    if ( ! readDeviceHeadTail( DeviceA3Details.HeadTail, ht ) ) return;
+    // Log.v("DistoX-HT", "head " + ht[0] + " tail " +  ht[1] );
+    doResetA3DeviceHeadTail( ht, false ); // false: clear hot bit
+  }
+    
+
   // called only by DeviceA3MemoryDialog
-  void readDeviceHeadTail( byte[] command, int[] head_tail )
+  boolean readDeviceHeadTail( byte[] command, int[] head_tail )
   {
     // TDLog.Log( TDLog.LOG_DEVICE, "onClick mBtnHeadTail. Is connected " + mApp.isConnected() );
-    String ht = mApp.readA3HeadTail( mCurrDevice.mAddress, command, head_tail );
-    if ( ht == null ) {
+    if ( mApp.readA3HeadTail( mCurrDevice.mAddress, command, head_tail ) == null ) {
       TDToast.makeBad( R.string.head_tail_failed );
+      return false;
     }
-    // Log.v( TopoDroidApp.TAG, "Head " + head_tail[0] + " tail " + head_tail[1] );
-    // TDToast.make( getString(R.string.head_tail) + ht );
+    return true;
   }
 
   private boolean checkA3headtail( int[] ht )
@@ -588,15 +596,15 @@ public class DeviceActivity extends Activity
   }
 
   // reset data from stored-tail (inclusive) to current-tail (exclusive)
-  private void doResetA3DeviceHeadTail( int[] head_tail )
+  // @param on_off true: set, false: clear
+  private void doResetA3DeviceHeadTail( int[] head_tail, boolean on_off )
   {
-    // int from = head_tail[0];
-    // int to   = head_tail[1];
-    // // Log.v(TopoDroidApp.TAG, "do reset from " + from + " to " + to );
-    // int n = mApp.swapA3HotBit( mCurrDevice.mAddress, from, to );
-    if ( checkA3headtail( head_tail ) ) {
-      ( new SwapHotBitTask( mApp, Device.DISTO_A3, mCurrDevice.mAddress, head_tail ) ).execute();
-    }
+    int from = head_tail[1]; // tail
+    int to   = head_tail[0]; // head
+    if ( ! checkA3headtail( head_tail ) ) return;
+    // Log.v("DistoX-HT", "do reset from " + from + " to " + to );
+    int n = mApp.swapA3HotBit( mCurrDevice.mAddress, from, to, on_off );
+    // ( new SwapHotBitTask( mApp, Device.DISTO_A3, mCurrDevice.mAddress, head_tail, on_off ) ).execute();
   }
 
   void storeDeviceHeadTail( int[] head_tail )
@@ -645,6 +653,7 @@ public class DeviceActivity extends Activity
   // }
 
   // reset device from stored-tail to given tail
+  // called only by DeviceA3MemoryDialog
   void resetA3DeviceHeadTail( final int[] head_tail )
   {
     // Log.v(TopoDroidApp.TAG, "reset device from " + head_tail[0] + " to " + head_tail[1] );
@@ -654,7 +663,7 @@ public class DeviceActivity extends Activity
         new DialogInterface.OnClickListener() {
           @Override
           public void onClick( DialogInterface dialog, int btn ) {
-            doResetA3DeviceHeadTail( head_tail );
+            doResetA3DeviceHeadTail( head_tail, true ); // true: set hot bit
           }
         }
       );

@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-// import android.util.Log;
+import android.util.Log;
 
 // import java.nio.ByteBuffer;
 
@@ -134,8 +134,9 @@ class DistoXA3Comm extends DistoXComm
   }
 
   /** swap hot bit in the range [from, to) [only A3]
+   * from and to are memory addresses - must be multiple of 8
    */
-  int swapA3HotBit( String address, int from, int to )
+  int swapA3HotBit( String address, int from, int to, boolean on_off )
   {
     if ( ! checkCommThreadNull() ) return -1;
     if ( TDInstance.deviceType() != Device.DISTO_A3 ) return -2;
@@ -155,8 +156,8 @@ class DistoXA3Comm extends DistoXComm
           } else {
             to -= 8;
           }
-          // Log.v( TopoDroidApp.TAG, "comm swap hot bit at addr " + to/8 );
-          if ( ! protocol.swapA3HotBit( to ) ) break;
+          // Log.v( "DistoX-HT", "comm swap hot bit at addr " + to );
+          if ( ! protocol.swapA3HotBit( to, on_off ) ) break;
           ++ n;
         } while ( to != from );
         // FIXME ASYNC new CommandThread( mProtocol, SWAP_HOT_BITS, from, to ) Note...

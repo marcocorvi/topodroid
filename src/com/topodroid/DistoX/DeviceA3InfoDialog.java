@@ -34,6 +34,7 @@ class DeviceA3InfoDialog extends MyDialog
   private RadioButton mRBx310;
   private Button   mBTok;
   private Button   mBTcancel;
+  private Button   mBTresetMemory;
 
   private final DeviceActivity mParent;
   private final Device mDevice;
@@ -85,6 +86,8 @@ class DeviceA3InfoDialog extends MyDialog
     mBTok.setOnClickListener( this );
     mBTcancel = (Button) findViewById( R.id.button_cancel );
     mBTcancel.setOnClickListener( this );
+    mBTresetMemory = (Button) findViewById( R.id.btn_reset_memory );
+    mBTresetMemory.setOnClickListener( this );
   }
 
   void updateInfo( DeviceA3Info info )
@@ -103,8 +106,7 @@ class DeviceA3InfoDialog extends MyDialog
     Button b = (Button)view;
     if ( b == mBTok ) {
       // TODO ask confirm
-      TopoDroidAlertDialog.makeAlert( mParent, mParent.getResources(),
-                                mParent.getResources().getString( R.string.device_model_set ) + " ?",
+      TopoDroidAlertDialog.makeAlert( mParent, mParent.getResources(), mParent.getResources().getString( R.string.device_model_set ) + " ?",
         new DialogInterface.OnClickListener() {
           @Override
           public void onClick( DialogInterface dialog, int btn ) {
@@ -112,9 +114,24 @@ class DeviceA3InfoDialog extends MyDialog
           }
         }
       );
+    } else if ( b == mBTresetMemory ) {
+      // TODO ask confirm
+      TopoDroidAlertDialog.makeAlert( mParent, mParent.getResources(), mParent.getResources().getString( R.string.device_clear ) + " ?",
+        new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick( DialogInterface dialog, int btn ) {
+            doClearMemory( );
+          }
+        }
+      );
     } else if ( b == mBTcancel ) {
       dismiss();
     }
+  }
+
+  private void doClearMemory()
+  {
+    mParent.doClearA3Memory( );
   }
 
   private void doSetModel()

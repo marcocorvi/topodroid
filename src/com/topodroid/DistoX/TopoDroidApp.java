@@ -492,10 +492,11 @@ public class TopoDroidApp extends Application
     return ret;
   }
 
-  int swapA3HotBit( String address, int from, int to ) 
+  // swap hot bit in the range [from, to)
+  int swapA3HotBit( String address, int from, int to, boolean on_off ) 
   {
     DistoXA3Comm comm = (DistoXA3Comm)mComm;
-    int ret = comm.swapA3HotBit( address, from, to ); // FIXME_A3
+    int ret = comm.swapA3HotBit( address, from, to, on_off ); // FIXME_A3
     resetComm();
     return ret;
   }

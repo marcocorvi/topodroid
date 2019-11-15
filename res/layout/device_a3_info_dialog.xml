@@ -82,6 +82,12 @@
         android:singleLine="true"
       />
 
+      <Button android:id="@+id/btn_reset_memory"
+        android:layout_marginTop="@dimen/marginv" 
+        style="@style/button_default"
+        android:text="@string/button_clear_memory"
+      />
+
   <!-- LinearLayout 
      android:layout_width="match_parent" 
      android:layout_height="wrap_content"

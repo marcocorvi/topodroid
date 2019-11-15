@@ -125,6 +125,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="device_none">No DistoX selected</string>
     <!-- UNUSED string name="device_paired">Device is paired</string -->
     <string name="device_reset">Reset DistoX memory</string>
+    <string name="device_clear">Clear DistoX memory</string>
     <string name="device_code">DistoX code %1$4d</string>
     <string name="device_firmware">Firmware  %1$d.%2$d</string>
     <string name="device_hardware">Hardware  %1$d.%2$d</string>
@@ -652,6 +653,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="button_clear"     >Clear</string>
     <string name="button_clear_day" >Clear 1d</string>
     <string name="button_clear_week">Clear 7d</string>
+    <string name="button_clear_memory">Clear memory</string>
     <string name="button_save"      >Save</string>
     <!-- UNUSED string name="button_select"    >Select</string -->
     <string name="button_search"    >Search</string>

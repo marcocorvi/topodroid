@@ -255,8 +255,10 @@ When the joining is set to "continue" the last line that has been drawn can be m
 
 <h4>Composite actions [T]</h4>
 Composite actions are pointwise long-tap actions.<br>
-At the moment the only long-tap action is to snap a line/area point to a nearby point and duplicate it at the same time. 
-This allows to retrace a path by moving the selected point along the points of the path.
+At the moment the only long-tap action is to <i>insert a point</i> for a line/area and snap it to a nearby point at the same time.
+The selected point is first moved to the nearby point, next it is duplicated and the new point is put after it in the line/area.
+This allows to retrace a path by selecting the last point and inserting points backwards.<br>
+To retrace the path forward switch the selected point after each insertion.
 <br><p> 
 
 <h4>Portrait/Landscape presentation</h4>
