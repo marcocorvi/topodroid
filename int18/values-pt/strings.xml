@@ -1415,8 +1415,8 @@
   <!-- UNUSED string name="alt_ortho">Ortométrico</string -->
   <!-- UNUSED string name="splay_extend">Estimar extensão visada auxiliar</string -->
 
-    <string name="perms_mandatory">TopoDroid não pode ser executado sem essas permissões:</string>
-    <string name="perms_optional">TopoDroid pode apresentar erros sem essas permissões:</string>
+    <string name="perms_mandatory">O TopoDroid não pode ser executado sem essas permissões:</string>
+    <string name="perms_optional">O TopoDroid pode apresentar erros sem essas permissões:</string>
     <string name="perm_location">\nLocalização</string>
     <string name="perm_camera">\nCâmera</string>
     <string name="perm_microphone">\nMicrofone</string>
@@ -1424,13 +1424,13 @@
     <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">
 \nTopodroid é um aplicativo Android Open Source para mapeamento de cavernas com DistoX.
-\n\nNenhuma garantia: utilizando o aplicativo, você concorda com o fato de que o autor não é responsável por qualquer perda de dados ou outros danos quaisquer.
+\n\nNenhuma garantia: utilizando o aplicativo, você concorda com o fato de que o autor não é responsável por qualquer perda de dados ou quaisquer outros danos.
 \n\nAjuda: menu "Ajuda"
 \nPágina principal: botão MENU
 \nDocumentos: http://sites.google.com/site/speleoapps
 \nComentários, relatórios de bug, sugestões de novas funcionalidades: marco.corvi@gmail.com
 \nTradução para o português:
-\n  * A partir de 27/01/2017 por Rodrigo Severo (rsev@protonmail.com)
+\n  * A partir de 27/01/2017 por Rodrigo Severo (rsev@pm.me)
 \n  * Inicial por Angelo Roncolato (angelo.roncolato.110@gmail.com)
 \n
     </string>
