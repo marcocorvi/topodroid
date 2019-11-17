@@ -1,8 +1,8 @@
 symbol line
-name stair
+name steps
 name-pt escada
 name-ru ступени
-th_name u:stair
+th_name steps
 group trail
 color 0x993300
 width 8

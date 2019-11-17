@@ -2,7 +2,7 @@ symbol point
 name ladder
 name-pt escada_de_mão
 name-ru лестница
-th_name u:ladder
+th_name fixed-ladder
 group trail
 orientation no
 color 0xADADAD
