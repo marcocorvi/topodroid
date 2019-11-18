@@ -1,8 +1,8 @@
 symbol point
-name stair
+name steps
 name-pt escada
 name-ru ступенька
-th_name u:stair
+th_name steps
 group trail
 orientation no
 color 0x993300

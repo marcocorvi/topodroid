@@ -2,7 +2,7 @@ symbol point
 name bridge
 name-pt ponte
 name-ru мост
-th_name u:bridge
+th_name bridge
 group trail
 orientation no
 color 0xc46210
