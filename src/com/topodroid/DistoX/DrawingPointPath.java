@@ -179,6 +179,25 @@ class DrawingPointPath extends DrawingPath
     return null;
   }
 
+  // static void globDataStream( int version, DataInputStream dis )
+  // {
+  //   try {
+  //     dis.readFloat();
+  //     dis.readFloat();
+  //     dis.readUTF( );
+  //     if ( version >= 401147 ) dis.readUTF();
+  //     dis.readFloat();
+  //     dis.readInt();
+  //     if ( version >= 401090 ) dis.readInt();
+  //     if ( version >= 401160 ) dis.readInt();
+  //     if ( version >= 303066 ) dis.readUTF();
+  //     dis.readUTF();
+  //   } catch ( IOException e ) {
+  //     TDLog.Error( "POINT in error " + e.getMessage() );
+  //     // Log.v("DistoX", "POINT in error " + e.getMessage() );
+  //   }
+  // }
+
   void setCenter( float x, float y )
   {
     cx = x;

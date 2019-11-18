@@ -25,7 +25,7 @@
  */
 package com.topodroid.DistoX;
 
-// import android.util.Log;
+import android.util.Log;
 
 import java.io.File;
 import java.io.StringWriter;
@@ -1089,16 +1089,25 @@ class TDExporter
   {
     if ( plots.size() == 0 ) return;
     for ( PlotInfo plt : plots ) {
-        String extra = ((new File( TDPath.getSurveyPlotTh2File( info.name, plt.name ) )).exists())? "  #" : "  ##";
-        pw.format("%s input \"%s-%s.th2\"\n", extra, info.name, plt.name );
+      File plot_file = new File( TDPath.getSurveyPlotTh2File( info.name, plt.name ) );
+      if ( plot_file.exists() ) {
+        pw.format("  # input \"%s-%s.th2\"\n", info.name, plt.name );
+      }
     }
     pw.format("\n");
     for ( PlotInfo plt : plots ) {
       if ( PlotInfo.isSketch2D( plt.type ) ) {
-        String extra = ((new File( TDPath.getSurveyPlotTh2File( info.name, plt.name ) )).exists())? "  #" : "  ##";
-        pw.format("%s map m%s -projection %s\n", extra, plt.name, PlotInfo.projName[ plt.type ] );
-        pw.format("%s   %s-%s\n", extra, info.name, plt.name );
-        pw.format("%s endmap\n", extra );
+        int scrap_nr = plt.maxscrap;
+        Log.v("DistoX-EXP", plt.name + " is 2D sketch - scraps " + scrap_nr );
+        File plot_file = new File( TDPath.getSurveyPlotTh2File( info.name, plt.name ) );
+        if ( plot_file.exists() ) {
+          pw.format("  # map m%s -projection %s\n", plt.name, PlotInfo.projName[ plt.type ] );
+          pw.format("  #   %s-%s\n", info.name, plt.name );
+          for ( int k=1; k<=scrap_nr; ++k) {
+            pw.format("  #   %s-%s%d\n", info.name, plt.name, scrap_nr );
+          }
+          pw.format("  # endmap\n");
+        } 
       }
     }
     pw.format("\n");

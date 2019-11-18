@@ -182,6 +182,46 @@ class DrawingAreaPath extends DrawingPointLinePath
     return null;
   }
 
+  // static void globDataStream( int version, DataInputStream dis )
+  // {
+  //   try {
+  //     dis.readUTF();
+  //     if ( version >= 401147 ) dis.readUTF();
+  //     dis.readUTF();
+  //     dis.readInt();
+  //     dis.read( );
+  //     dis.readFloat( );
+  //     if ( version >= 401090 ) dis.readInt();
+  //     if ( version >= 401160 ) dis.readInt();
+  //     int npt = dis.readInt( );
+  //     int has_cp;
+  //     dis.readFloat( );
+  //     dis.readFloat( );
+  //     has_cp = dis.read();
+  //     if ( has_cp == 1 ) { // consume 4 floats
+  //       dis.readFloat();
+  //       dis.readFloat();
+  //       dis.readFloat();
+  //       dis.readFloat();
+  //     }
+  //     for ( int k=1; k<npt; ++k ) {
+  //       dis.readFloat();
+  //       dis.readFloat();
+  //       has_cp = dis.read();
+  //       // Log.v("DistoX", "A point " + x + " " + y + " " + has_cp );
+  //       if ( has_cp == 1 ) {
+  //         dis.readFloat();
+  //         dis.readFloat();
+  //         dis.readFloat();
+  //         dis.readFloat();
+  //       }
+  //     }
+  //   } catch ( IOException e ) {
+  //     TDLog.Error( "AREA in error " + e.getMessage() );
+  //     // Log.v("DistoX", "AREA in error " + e.getMessage() );
+  //   }
+  // }
+
   void setAreaType( int t )
   {
     mAreaType = t;

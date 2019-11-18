@@ -70,6 +70,19 @@ class DrawingSpecialPath extends DrawingPath
     return null;
   }
 
+  // static void globDataStream( int version, DataInputStream dis )
+  // {
+  //   try {
+  //     dis.readInt();
+  //     dis.readFloat();
+  //     dis.readFloat();
+  //     if ( version >= 401090 ) dis.readInt();
+  //     if ( version >= 401160 ) dis.readInt();
+  //   } catch ( IOException e ) {
+  //     TDLog.Error( "SPECIAL in error " + e.getMessage() );
+  //   }
+  // }
+
   private void setCenter( float x, float y )
   {
     cx = x;

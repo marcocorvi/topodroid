@@ -632,7 +632,7 @@ public class OverviewWindow extends ItemDrawer
         // Log.v( "DistoXX", "load tdr file " + fullName );
 
         String tdr = TDPath.getTdrFileWithExt( fullName );
-        mOverviewSurface.addLoadDataStream( tdr, xdelta, ydelta, /* null, */ fullName ); // save plot name in paths
+        mOverviewSurface.addLoadDataStream( tdr, xdelta, ydelta, /* null, */ fullName ); // save plot fullname in paths
       }
 
       // if ( ! mAllSymbols ) {

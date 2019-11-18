@@ -48,8 +48,8 @@ import java.util.HashMap;
 @SuppressWarnings("SyntaxError")
 class DataHelper extends DataSetObservable
 {
-  static final String DB_VERSION = "41";
-  static final int DATABASE_VERSION = 41;
+  static final String DB_VERSION = "42";
+  static final int DATABASE_VERSION = 42;
 
   static final int DATABASE_VERSION_MIN = 21; // was 14
 
@@ -150,9 +150,9 @@ class DataHelper extends DataSetObservable
     };
 
   static final private String[] mPlotFieldsFull =
-    { "id", "name", "type", "status", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide", "nick" };
+    { "id", "name", "type", "status", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide", "nick", "orientation", "maxscrap" };
   static final private String[] mPlotFields =
-    { "id", "name", "type", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide", "nick", "orientation" };
+    { "id", "name", "type", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide", "nick", "orientation", "maxscrap" };
 
   static private String[] mSketchFields =
     { "id", "name", "start", "st1", "st2",
@@ -2280,6 +2280,7 @@ class DataHelper extends DataSetObservable
      plot.hide    = cursor.getString(10);
      plot.nick    = cursor.getString(11);
      plot.orientation = (int)(cursor.getLong(12));
+     plot.maxscrap = (int)(cursor.getLong(13));
      return plot;
    }
 
@@ -3326,6 +3327,13 @@ class DataHelper extends DataSetObservable
     doUpdate( PLOT_TABLE, cv, "surveyId=? AND id=?", new String[] { Long.toString(sid), Long.toString(pid) }, "plot name" );
   }
 
+  void updatePlotMaxScrap( long sid, long pid, int maxscrap )
+  {
+    ContentValues cv = new ContentValues();
+    cv.put( "maxscrap", maxscrap );
+    doUpdate( PLOT_TABLE, cv, "surveyId=? AND id=?", new String[] { Long.toString(sid), Long.toString(pid) }, "plot maxscrap" );
+  }
+
   void updatePlotOrientation( long sid, long pid, int orient )
   {
     // if ( updatePlotOrientationStmt == null ) {
@@ -3687,7 +3695,7 @@ class DataHelper extends DataSetObservable
 
   private ContentValues makePlotContentValues( long sid, long id, String name, long type, long status, String start, String view,
                           double xoffset, double yoffset, double zoom, double azimuth, double clino,
-                          String hide, String nick, int orientation )
+                          String hide, String nick, int orientation, int maxscrap )
   {
     ContentValues cv = new ContentValues();
     cv.put( "surveyId", sid );
@@ -3705,6 +3713,7 @@ class DataHelper extends DataSetObservable
     cv.put( "hide",     hide );
     cv.put( "nick",     nick );
     cv.put( "orientation", orientation );
+    cv.put( "maxscrap", maxscrap );
     return cv;
   }
 
@@ -3719,8 +3728,8 @@ class DataHelper extends DataSetObservable
     if ( ret >= 0 ) return -1;
     if ( view == null ) view = TDString.EMPTY;
     if ( id == -1L ) id = maxId( PLOT_TABLE, sid );
-    ContentValues cv = makePlotContentValues( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, 
-       	     azimuth, clino, hide, nick, orientation );
+    // maxscrap = 0
+    ContentValues cv = makePlotContentValues( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation, 0 );
     if ( ! doInsert( PLOT_TABLE, cv, "plot insert" ) ) { // failed
       id = -1L;
     }
@@ -4296,22 +4305,24 @@ class DataHelper extends DataSetObservable
        if (cursor.moveToFirst()) {
          do {
            pw.format(Locale.US,
-             "INSERT into %s values( %d, %d, \"%s\", %d, %d, \"%s\", \"%s\", %.2f, %.2f, %.2f, %.2f, %.2f, \"%s\", \"%s\" );\n",
+             "INSERT into %s values( %d, %d, \"%s\", %d, %d, \"%s\", \"%s\", %.2f, %.2f, %.2f, %.2f, %.2f, \"%s\", \"%s\", %d, %d );\n",
              PLOT_TABLE,
              sid,
-             cursor.getLong(0),
-             cursor.getString(1),
-             cursor.getLong(2),
-             cursor.getLong(3),
-             cursor.getString(4),
-             cursor.getString(5),
-             cursor.getDouble(6),
+             cursor.getLong(0),    // plot id
+             cursor.getString(1),  // name
+             cursor.getLong(2),    // type
+             cursor.getLong(3),    // status
+             cursor.getString(4),  // start
+             cursor.getString(5),  // view
+             cursor.getDouble(6),  // X offset
              cursor.getDouble(7),
-             cursor.getDouble(8),
-             cursor.getDouble(9),
-             cursor.getDouble(10),
-             cursor.getString(11),
-             cursor.getString(12)
+             cursor.getDouble(8),  // zoom
+             cursor.getDouble(9),  // azimuth
+             cursor.getDouble(10), // clino
+             cursor.getString(11), // hide
+             cursor.getString(12), // nick
+             cursor.getLong(13),   // orientation
+             cursor.getLong(14)    // maxscrap
            );
          } while (cursor.moveToNext());
        }
@@ -4587,9 +4598,9 @@ class DataHelper extends DataSetObservable
                String hide  = ( db_version > 24 )? scanline1.stringValue( ) : TDString.EMPTY;
                String nick  = ( db_version > 30 )? scanline1.stringValue( ) : TDString.EMPTY;
 	       int orientation = (db_version > 32 )? (int)(scanline1.longValue()) : 0; // default PlotInfo.ORIENTATION_PORTRAIT
+	       int maxscrap = (db_version > 41 )? (int)(scanline1.longValue()) : 0; // default 0
                // if ( insertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation, false ) < 0 ) { success = false; }
-               cv = makePlotContentValues( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, 
-			       azimuth, clino, hide, nick, orientation );
+               cv = makePlotContentValues( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation, maxscrap );
                myDB.insert( PLOT_TABLE, null, cv ); 
                // TDLog.Log( TDLog.LOG_DB, "loadFromFile plot " + sid + " " + id + " " + start + " " + name );
                // Log.v( "DistoX_DB", "loadFromFile plot " + sid + " " + id + " " + start + " " + name + " success " + success );
@@ -4951,7 +4962,8 @@ class DataHelper extends DataSetObservable
              +   " clino REAL, "
              +   " hide TEXT, "
              +   " nick TEXT, "
-	     +   " orientation INTEGER "
+	     +   " orientation INTEGER, "
+	     +   " maxscrap INTEGER "
              // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
              // +   " ON DELETE CASCADE "
              +   ")"
@@ -5129,6 +5141,8 @@ class DataHelper extends DataSetObservable
 	   case 40:
              db.execSQL( "update surveys set declination=1080 where declination>720" );
 	   case 41:
+             db.execSQL( "ALTER TABLE plots ADD COLUMN maxscrap INTEGER default 0" );
+	   case 42:
              /* current version */
            default:
              break;

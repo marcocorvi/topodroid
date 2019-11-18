@@ -2557,6 +2557,7 @@ public class DrawingWindow extends ItemDrawer
       List<DBlock> list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
       mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
       // if ( mNum != null ) { // always true
+        mDrawingSurface.clearShotsAndStations( (int)mType );
         computeReferences( (int)mType, mName, TopoDroidApp.mScaleFactor, false );
         mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
         modified();
@@ -6546,6 +6547,10 @@ public class DrawingWindow extends ItemDrawer
 
   void scrapNext() { mDrawingSurface.toggleScrapIndex( 1 ); }
   void scrapPrev() { mDrawingSurface.toggleScrapIndex( -1 ); }
-  void scrapNew() { mDrawingSurface.newScrapIndex( ); }
+  void scrapNew() 
+  { 
+    int scrap_idx = mDrawingSurface.newScrapIndex( );
+    mApp_mData.updatePlotMaxScrap( mSid, mPid, scrap_idx );
+  }
 
 }

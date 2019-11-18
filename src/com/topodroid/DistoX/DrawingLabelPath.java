@@ -83,6 +83,23 @@ class DrawingLabelPath extends DrawingPointPath
     return null;
   }
 
+  // static void globDataStream( int version, DataInputStream dis )
+  // {
+  //   try {
+  //     dis.readFloat( );
+  //     dis.readFloat( );
+  //     if ( version > 207043 ) dis.readFloat( );
+  //     dis.readInt( );
+  //     if ( version > 401090 ) dis.readInt();
+  //     if ( version > 401160 ) dis.readInt();
+  //     dis.readUTF();
+  //     dis.readUTF();
+  //   } catch ( IOException e ) {
+  //     TDLog.Error( "LABEL in error " + e.getMessage() );
+  //     // Log.v("DistoX", "LABEL in error " + e.getMessage() );
+  //   }
+  // }
+
   @Override
   public void draw( Canvas canvas, RectF bbox )
   {

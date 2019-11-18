@@ -48,6 +48,7 @@ class PlotInfo
   float clino;   // inclination (0 for plan x-sections)
   int csxIndex = -1;  // numerical index for cSurvey xsection exports
   int orientation = ORIENTATION_PORTRAIT;
+  int maxscrap; // max index of a scrap
 
   // boolean isPortrait()  { return orientation == ORIENTATION_PORTRAIT; }
   boolean isLandscape() { return orientation == ORIENTATION_LANDSCAPE; }

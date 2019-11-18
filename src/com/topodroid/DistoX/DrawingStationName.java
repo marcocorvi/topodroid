@@ -222,6 +222,24 @@ class DrawingStationName extends DrawingPointPath
     return null;
   }
 
+  // static void globDataStream( int version, DataInputStream dis )
+  // {
+  //   try {
+  //     dis.readFloat();
+  //     dis.readFloat();
+  //     dis.readUTF();
+  //     if ( version >= 401090 ) dis.readInt();
+  //     if ( version >= 401160 ) dis.readInt();
+  //     if ( version >= 207038 ) {
+  //       int type = dis.readInt();
+  //       if ( type != (int)PlotInfo.PLOT_NULL ) {
+  //         dis.readFloat();
+  //         dis.readFloat();
+  //       }
+  //     }
+  //   } catch ( IOException e ) { }
+  // }
+
   // from ICanvasCommand
   @Override
   public void flipXAxis( float z )

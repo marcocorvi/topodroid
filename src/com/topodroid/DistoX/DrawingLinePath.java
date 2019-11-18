@@ -152,6 +152,46 @@ class DrawingLinePath extends DrawingPointLinePath
     return null;
   }
 
+  // static void globDataStream( int version, DataInputStream dis )
+  // {
+  //   try {
+  //     dis.readUTF();
+  //     if ( version >= 401147 ) dis.readUTF();
+  //     dis.read();
+  //     // visible= (dis.read() == 1);
+  //     dis.read();
+  //     dis.readInt();
+  //     if ( version >= 401090 ) dis.readInt();
+  //     if ( version >= 401160 ) dis.readInt();
+  //     dis.readUTF();
+  //     int npt = dis.readInt();
+  //     int has_cp;
+  //     float x1, y1, x2, y2, x0, y0;
+  //     dis.readFloat();
+  //     dis.readFloat();
+  //     has_cp = dis.read(); // this is 0
+  //     if ( has_cp == 1 ) { // consume 4 floats
+  //       dis.readFloat();
+  //       dis.readFloat();
+  //       dis.readFloat();
+  //       dis.readFloat();
+  //     }
+  //     for ( int k=1; k<npt; ++k ) {
+  //       dis.readFloat();
+  //       dis.readFloat();
+  //       has_cp = dis.read();
+  //       if ( has_cp == 1 ) {
+  //         dis.readFloat();
+  //         dis.readFloat();
+  //         dis.readFloat();
+  //         dis.readFloat();
+  //       }
+  //     }
+  //   } catch ( IOException e ) {
+  //     TDLog.Error( "LINE in error " + e.getMessage() );
+  //   }
+  // }
+
   @Override
   void computeUnitNormal()
   {

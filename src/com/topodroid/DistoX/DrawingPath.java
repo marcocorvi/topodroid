@@ -130,12 +130,12 @@ class DrawingPath extends RectF
 
   static boolean isReferenceType( int type ) 
   {
-    return type < DrawingPath.DRAWING_PATH_STATION || type >= DrawingPath.DRAWING_PATH_NAME;
+    return type < DRAWING_PATH_STATION || type >= DRAWING_PATH_NAME;
   }
 
   static boolean isDrawingType( int type ) 
   {
-    return type >= DrawingPath.DRAWING_PATH_STATION && type < DrawingPath.DRAWING_PATH_NAME;
+    return type >= DRAWING_PATH_STATION && type < DRAWING_PATH_NAME;
   }
 
   float getX() { return cx; }

@@ -125,6 +125,9 @@ class DrawingSurface extends SurfaceView
     }
   }
 
+  // @param mode     command-manager mode (plot type)
+  // @param fullname 
+  // @param is-extended
   // return true if saved manager can be used
   boolean resetManager( int mode, String fullname, boolean is_extended )
   {
@@ -137,7 +140,7 @@ class DrawingSurface extends SurfaceView
       if ( fullname != null ) manager = mCache.get( fullname );
       TDLog.Log( TDLog.LOG_IO, "check out PLAN from cache " + fullname + " found: " + (manager!=null) );
       if ( manager == null ) {
-        mCommandManager1 = new DrawingCommandManager( DRAWING_PLAN );
+        mCommandManager1 = new DrawingCommandManager( DRAWING_PLAN, fullname );
       } else {
         mCommandManager1 = manager;
         mCommandManager1.setDisplayPoints( false );
@@ -148,7 +151,7 @@ class DrawingSurface extends SurfaceView
       if ( fullname != null ) manager = mCache.get( fullname );
       TDLog.Log( TDLog.LOG_IO, "check out PROFILE from cache " + fullname + " found: " + (manager!=null) );
       if ( manager == null ) {
-        mCommandManager2 = new DrawingCommandManager( DRAWING_PROFILE );
+        mCommandManager2 = new DrawingCommandManager( DRAWING_PROFILE, fullname );
 	if ( is_extended ) mCommandManager2.mIsExtended = true;
       } else {
         mCommandManager2 = manager;
@@ -158,7 +161,7 @@ class DrawingSurface extends SurfaceView
       commandManager = mCommandManager2;
     } else {
       if ( mCommandManager3 == null ) {
-          mCommandManager3 = new DrawingCommandManager( mode );
+          mCommandManager3 = new DrawingCommandManager( mode, fullname );
       } else {
         mCommandManager3.clearDrawing();
       }
@@ -333,6 +336,13 @@ class DrawingSurface extends SurfaceView
         break;
       default:
         mCommandManager3.addScaleRef( );
+    }
+  }
+
+  void clearShotsAndStations( int type ) 
+  {
+    if ( PlotInfo.isExtended( type ) ) {
+      mCommandManager2.clearShotsAndStations();
     }
   }
 

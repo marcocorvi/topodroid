@@ -167,5 +167,20 @@ class DrawingStationPath extends DrawingPath
     return null;
   }
 
+  // static void globDataStream( int version, DataInputStream dis )
+  // {
+  //   try {
+  //     dis.readFloat();
+  //     dis.readFloat();
+  //     // group = ( version >= 401147 )? dir.readUTF() : null; // station path has no group
+  //     dis.readInt();
+  //     if ( version >= 401090 ) dis.readInt();
+  //     if ( version >= 401160 ) dis.readInt();
+  //     dis.readUTF();
+  //   } catch ( IOException e ) {
+  //     TDLog.Error( "ERROR-dis station " + e.getMessage() );
+  //   }
+  // }
+
 }
 

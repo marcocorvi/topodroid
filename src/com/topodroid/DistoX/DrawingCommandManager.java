@@ -88,9 +88,9 @@ class DrawingCommandManager
   private Matrix  mMatrix;
   private float   mScale; // current zoom: value of 1 pl in scene space
   private boolean mLandscape = false;
+  private String  mPlotName;
 
-
-  DrawingCommandManager( int mode )
+  DrawingCommandManager( int mode, String plot_name )
   {
     // Log.v("DistoX-MANAGER", "command manager mode " + mode );
     mMode = mode;
@@ -108,8 +108,9 @@ class DrawingCommandManager
     mPlotOutline  = Collections.synchronizedList(new ArrayList<DrawingLinePath>());
     mXSectionOutlines = Collections.synchronizedList(new ArrayList<DrawingOutlinePath>());
     mStations     = Collections.synchronizedList(new ArrayList<DrawingStationName>());
+    mPlotName     = plot_name;
     mScraps = new ArrayList< Scrap >();
-    mCurrentScrap = new Scrap( 0 );
+    mCurrentScrap = new Scrap( 0, mPlotName );
     mScraps.add( mCurrentScrap );
 
     // mCurrentStack = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
@@ -143,20 +144,20 @@ class DrawingCommandManager
 
   int newScrapIndex( ) { 
     mScrapIdx = mScraps.size();
-    mCurrentScrap = new Scrap( mScrapIdx );
+    mCurrentScrap = new Scrap( mScrapIdx, mPlotName );
     mScraps.add( mCurrentScrap ); 
     addShotsToScrapSelection( mCurrentScrap );
     return mScrapIdx;
   }
 
-  int setCurrentScrap( int idx ) {
+  private void setCurrentScrap( int idx ) {
     if ( idx != mScrapIdx ) {
-      if ( idx < 0 ) return -1;
+      if ( idx < 0 ) return; // -1;
       while ( idx >= mScraps.size() ) newScrapIndex();
       mScrapIdx = idx;
       mCurrentScrap = mScraps.get( mScrapIdx );
     }
-    return mScrapIdx;
+    // return mScrapIdx;
   }
 
   int scrapMaxIndex() { return mScraps.size(); }
@@ -372,6 +373,14 @@ class DrawingCommandManager
   { 
     synchronized( TDPath.mSelectionLock ) { 
       for ( Scrap scrap : mScraps ) scrap.clearSelected();
+    }
+  }
+
+  // clear the shots/stations - only extended profile
+  void clearShotsAndStations( )
+  {
+    synchronized( TDPath.mSelectionLock ) { 
+      for ( Scrap scrap : mScraps ) scrap.clearShotsAndStations();
     }
   }
 
@@ -1209,10 +1218,10 @@ class DrawingCommandManager
   // @param proj_name   
   // @param proj_dir    directoin of projected profile (if applicable)
   // @param multiscrap  whether the sketch has several scraps
-  void exportTherion( int type, BufferedWriter out, String full_name, String proj_name, int proj_dir, boolean multiscrap )
+  void exportTherion( int type, BufferedWriter out, String full_name, String proj_name, int proj_dir, boolean multisketch )
   {
     RectF bbox = getBoundingBox( );
-    if ( multiscrap ) {
+    if ( multisketch ) {
       // Log.v("DistoXX", "multi scrap export stack size " + mCurrentStack.size() );
       // BBox computed by export multiscrap
       DrawingIO.exportTherionMultiPlots( type, out, full_name, proj_name, proj_dir, /* bbox, mNorthLine, */ mScraps, mStations, mSplaysStack );

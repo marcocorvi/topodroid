@@ -492,13 +492,13 @@ class DrawingIO
   //
   // FIXME DataHelper and SID are necessary to export splays by the station
   // @param fullname  full scrap name ( filename without extension )
-  static void exportTherion( DrawingCommandManager manager, int type, File file, String fullname, String projname, int proj_dir, boolean multiscrap )
+  static void exportTherion( DrawingCommandManager manager, int type, File file, String fullname, String projname, int proj_dir, boolean multisketch )
   {
     TDLog.Log( TDLog.LOG_IO, "export Therion " + fullname + " file " + file.getPath() );
     try {
       FileWriter fw = new FileWriter( file );
       BufferedWriter bw = new BufferedWriter( fw );
-      manager.exportTherion( type, bw, fullname, projname, proj_dir, multiscrap );
+      manager.exportTherion( type, bw, fullname, projname, proj_dir, multisketch );
       bw.flush();
       bw.close();
     } catch ( IOException e ) {
@@ -787,7 +787,7 @@ class DrawingIO
               }
             } else {
               TDLog.Error("Scrap/Path index mismatch " + scrap_index + " " + path.mScrap );
-              Log.v("DistoX-SCRAP", "Scrap/Path index mismatch " + scrap_index + " " + path.mScrap );
+              // Log.v("DistoX-SCRAP", "Scrap/Path index mismatch " + scrap_index + " " + path.mScrap );
             }
           }
         }
@@ -1268,7 +1268,7 @@ class DrawingIO
                 if ( BrushManager.isPointSection( pp.mPointType ) ) {
                   if ( TDSetting.mAutoXSections ) {
                     String scrap_name = pp.getOption("-scrap");  // xsection name
-                    // Log.v("DistoXX", "multiscrap add x-section " + name );
+                    // Log.v("DistoXX", "multisketch add x-section " + name );
                     if ( scrap_name != null && scrap_name.length() > 0 ) xsections.add( new XSectionScrap( scrap_name, pp.cx, pp.cy ) );
                   }
                 }
@@ -1334,12 +1334,20 @@ class DrawingIO
         List<DrawingStationName> stations,
         List<DrawingPath> splays )
   {
-    // Log.v("DistoXX", "export multiscrap type " + type + " proj " + proj_name );
+    // Log.v("DistoXX", "export multisketch type " + type + " proj " + proj_name );
+    class PlotExport
+    {
+      String name;
+      RectF  bbox;
+
+      PlotExport( String n, RectF r ) { name = n; bbox = r; }
+    }
+
 
     // ArraySet<String> plots = new ArraySet<String>(); // REQUIRES API-23
     int NPLOTS = 8;
     int nplots = 0;
-    String[] plots = new String[NPLOTS];
+    PlotExport[] plots = new PlotExport[NPLOTS];
 
     ArrayList< XSectionScrap> xsections = new ArrayList<XSectionScrap>();
 
@@ -1357,18 +1365,27 @@ class DrawingIO
           if ( p.top    < ymin ) ymin = p.top;
           if ( p.bottom > ymax ) ymax = p.bottom;
 
-          if ( p.mPlotName != null ) {
-            // Log.v("DistoXX", "path with plot-name " + p.mPlotName + " type " + p.mType + " nr plots " + nplots );
+
+          if ( /* scrap.mPlotName == null && */ p.mPlotName != null ) { // plot_name is the fullname of the plot
+            String plot_name = p.mPlotName + p.mScrap;
+            // Log.v("DistoXX", "path with plot-name " + p.mPlotName + " scrap " + p.mScrap + " type " + p.mType + " nr plots " + nplots );
             int k=0;
-            for ( ; k<nplots; ++k ) if ( plots[k].equals( p.mPlotName ) ) break;
+            for ( ; k<nplots; ++k ) if ( plots[k].name.equals( plot_name ) ) {
+              RectF bb = plots[k].bbox;
+              if ( p.left   < bb.left   ) bb.left   = p.left;
+              if ( p.right  > bb.right  ) bb.right  = p.right;
+              if ( p.top    < bb.top    ) bb.top    = p.top;
+              if ( p.bottom > bb.bottom ) bb.bottom = p.bottom;
+              break;
+            }
             if ( k == nplots ) {
               if ( nplots == NPLOTS ) {
                 NPLOTS += 8;
-                String[] tmp = new String[NPLOTS];
+                PlotExport[] tmp = new PlotExport[NPLOTS];
                 for ( int j=0; j<nplots; ++j ) tmp[j] = plots[j];
                 plots = tmp;
               }
-              plots[k] = p.mPlotName;
+              plots[k] = new PlotExport( plot_name, new RectF( p.left, p.top, p.right, p.bottom ) );
               nplots ++;
             }
           } else {
@@ -1377,45 +1394,48 @@ class DrawingIO
         }
       }
     }
-    RectF bbox = new RectF( xmin, ymin, xmax, ymax ); // left top right bottom
+    // RectF bbox = new RectF( xmin, ymin, xmax, ymax ); // left top right bottom
 
-    // Log.v("DistoXX", "export th2 multiscrap nr. " + nplots + "/" + plots.length + " cstack " + cstack.size() );
-    // Log.v("DistoXX", "export th2 multiscrap bbox X " + xmin + " " + xmax  + " Y " + ymin + " " + ymax );
+    // Log.v("DistoXX", "export th2 multisketch nr. " + nplots + "/" + plots.length + " scraps " + scraps.size() );
+    // Log.v("DistoXX", "export th2 multisketch bbox X " + xmin + " " + xmax  + " Y " + ymin + " " + ymax );
 
     try { 
-      exportTherionGlobalHeader( out, type, bbox, full_name );
+      exportTherionGlobalHeader( out, type, new RectF( xmin, ymin, xmax, ymax ), full_name );
 
       // exportTherionHeader2( out );
       for ( int k=0; k<nplots; ++k ) {
-        String plot = plots[k]; 
+        String plot_name = plots[k].name;
+        RectF bbox = plots[k].bbox;
+        // Log.v("DistoXX", "exporting plot " + plot_name );
         // if ( north != null ) { 
         //   exportTherionScrapHeader( out, type, full_name, proj_name, 0, true, north.x1, north.y1, north.x2, north.y2 );
         // } else {
-          exportTherionScrapHeader( out, type, plot, proj_name, project_dir, false, 0, 0, 0, 0 );
+        //   exportTherionScrapHeader( out, type, plot, proj_name, project_dir, false, 0, 0, 0, 0 );
         // }
 
-        // all the scraps together
-        RectF scraps_bbox = null;
+        exportTherionScrapHeader( out, type, plot_name, proj_name, project_dir, false, 0, 0, 0, 0 );
+        // all the scraps of the plot together
+        // RectF scraps_bbox = null;
         for ( Scrap scrap : scraps ) {
-          if ( scraps_bbox == null ) {
-            scraps_bbox = scrap.getBBox();
-          } else {
-            Scrap.union( scraps_bbox, scrap.getBBox() );
-          }
+          // if ( scraps_bbox == null ) {
+          //   scraps_bbox = scrap.getBBox();
+          // } else {
+          //   Scrap.union( scraps_bbox, scrap.getBBox() );
+          // }
 
           List< ICanvasCommand > cstack = scrap.mCurrentStack;
           synchronized( cstack ) {
             for ( ICanvasCommand cmd : cstack ) {
               if ( cmd.commandType() != 0 ) continue;
               DrawingPath p = (DrawingPath) cmd;
-              if ( ! plot.equals( p.mPlotName ) ) continue;
+              if ( ! plot_name.equals( p.mPlotName + p.mScrap ) ) continue;
               if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
                 DrawingPointPath pp = (DrawingPointPath)p;
                 exportTherionPoint( out, pp );
                 if ( BrushManager.isPointSection( pp.mPointType ) ) {
                   if ( TDSetting.mAutoXSections ) {
                     String name = pp.getOption("-scrap");  // xsection name
-                    // Log.v("DistoXX", "multiscrap add x-section " + name );
+                    // Log.v("DistoXX", "multisketch add x-section " + name );
                     if ( name != null && name.length() > 0 ) xsections.add( new XSectionScrap( name, pp.cx, pp.cy ) );
                   }
                 }
@@ -1442,13 +1462,13 @@ class DrawingIO
               exportTherionUserStations( out, userstations );
             }
           }
-        }
 
+        }
         if ( TDSetting.mTherionSplays ) {
-          exportTherionSplays( out, splays, scraps_bbox );
+          exportTherionSplays( out, splays, bbox );
         }
         if ( TDSetting.mAutoStations ) {
-          exportTherionStations( out, stations, scraps_bbox );
+          exportTherionStations( out, stations, bbox );
         }
         exportTherionScrapEnd( out );
       }
@@ -1456,7 +1476,7 @@ class DrawingIO
       e.printStackTrace();
     }
 
-    // Log.v("DistoXX", "multiscrap sections " + xsections.size() );
+    // Log.v("DistoXX", "multisketch sections " + xsections.size() );
     for ( XSectionScrap xsection : xsections ) { // write xsection scraps
       File file = new File( TDPath.getTdrFileWithExt( xsection.name ) );
       dataStreamToTherion( file, out, null, null, false, true, xsection.x, xsection.y );
@@ -1467,6 +1487,88 @@ class DrawingIO
   // static public void dataStreamToTherion( File file, BufferedWriter out, String fullname, RectF bbox, boolean endscrap )
   // {
   //   dataStreamToTherion( file, out, fullname, bbox, true, endscrap, 0, 0 ); // true = beginheader
+  // }
+
+  // return maximum scrap index, or 0
+  // static int dataStreamScrapNumber( File file )
+  // { 
+  //   int scrap_index = 0;
+  //   try {
+  //     FileInputStream fis = new FileInputStream( file );
+  //     DataInputStream dis = new DataInputStream( fis );
+  //     boolean todo = true;
+  //     int version = 0;
+  //     while ( todo ) {
+  //       int what = dis.read();
+  //       switch ( what ) {
+  //         case 'V':
+  //           version = dis.readInt();
+  //           break;
+  //         case 'I': // plot info: bounding box
+  //           {
+  //             for ( int k=0; k<4; ++k)  dis.readFloat();
+  //             if ( dis.readInt() == 1 ) {
+  //               for ( int k=0; k<4; ++k)  dis.readFloat();
+  //             }
+  //           }
+  //           break;
+  //         case 'S':
+  //           {
+  //             String name = dis.readUTF();
+  //             int type = dis.readInt();
+  //             if ( type == PlotInfo.PLOT_PROJECTED ) dis.readInt();
+  //             // read palettes
+  //             dis.readUTF();
+  //             dis.readUTF();
+  //             dis.readUTF();
+  //           }
+  //           break;
+  //         case 'N':
+  //           int idx = dis.readInt();
+  //           Log.v("DistoX-EXP", "scrap index " + idx );
+  //           if ( idx > scrap_index ) scrap_index = idx;
+  //           break;
+  //         case 'P':
+  //           DrawingPointPath.globDataStream( version, dis );
+  //           break;
+  //         case 'T':
+  //           DrawingLabelPath.globDataStream( version, dis );
+  //           break;
+  //         case 'L':
+  //           DrawingLinePath.globDataStream( version, dis );
+  //           break;
+  //         case 'A':
+  //           DrawingAreaPath.globDataStream( version, dis );
+  //           break;
+  //         case 'J':
+  //           DrawingSpecialPath.globDataStream( version, dis );
+  //           break;
+  //         case 'U':
+  //           DrawingStationPath.globDataStream( version, dis );
+  //           break;
+  //         case 'X':
+  //           // NOTE need to check XSection ??? STATION_XSECTION
+  //           DrawingStationName.globDataStream( version, dis );
+  //           break;
+  //         case 'F':
+  //           break; // continue parsing stations
+  //         case 'E':
+  //           todo = false;
+  //           break;
+  //         default:
+  //           todo = false;
+  //           break;
+  //       }
+  //     }
+  //     dis.close();
+  //     fis.close();
+  //   } catch ( FileNotFoundException e ) { // this is ok
+  //     Log.v("DistoX_EXP", "file not found");
+  //     scrap_index = -1;
+  //   } catch ( IOException e ) { 
+  //     Log.v("DistoX_EXP", "IO exception " + e.getMessage() );
+  //   }
+  //   return scrap_index;
   // }
 
   // bbox != null  <==>  begeinheader true

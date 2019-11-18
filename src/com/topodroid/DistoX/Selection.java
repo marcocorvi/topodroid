@@ -33,6 +33,21 @@ class Selection
     mBuckets = new ArrayList<>();
   }
 
+  // this is clearReferencePoints
+  // void removeShotsAndStations()
+  // {
+  //   ArrayList< SelectionPoint > toRemove = new ArrayList<SelectionPoint>();
+  //   for ( SelectionPoint sp : mPoints ) {
+  //     int t = sp.type();
+  //     if ( t == DrawingPath.DRAWING_PATH_FIXED
+  //       || t == DrawingPath.DRAWING_PATH_SPLAY
+  //       || t == DrawingPath.DRAWING_PATH_STATION ) toRemove.add( sp );
+  //   }
+  //   for ( SelectionPoint sp : toRemove ) {
+  //     removePoint( sp );
+  //   }
+  // }
+
   void shiftSelectionBy( float x, float y )  // synchronized by CommandManager
   {
     for ( SelectionPoint sp : mPoints ) {

@@ -388,6 +388,7 @@ class DrawingDxf
       d = (float)Math.sqrt( xt*xt + yt*yt );
       printXYZ( pw, xt/d, -yt/d, 0, 3 );
     }
+    if ( closed ) np++;
 
     int ncp = 4 * np - 4; // np + 3 * (np-1) - 1; // 4 * NP - 4
     int nk  = 3 * np + 2; // ncp + 4 - (np - 2);  // 3 * NP + 2
@@ -421,7 +422,16 @@ class DrawingDxf
       xt = p.x;
       yt = p.y;
     }
+    if ( closed ) {
+      p = line.mFirst;
+      printXYZ( pw, (xt+xoff) * scale, -(yt+yoff) * scale, 0.0f, 0 );
+      printXYZ( pw, (p.x+xoff) * scale, -(p.y+yoff) * scale, 0.0f, 0 );
+    }
     for ( p = line.mFirst; p != null; p = p.mNext ) { 
+      printXYZ( pw, (p.x+xoff) * scale, -(p.y+yoff) * scale, 0.0f, 1 );  // fit points: NP
+    }
+    if ( closed ) {
+      p = line.mFirst;
       printXYZ( pw, (p.x+xoff) * scale, -(p.y+yoff) * scale, 0.0f, 1 );  // fit points: NP
     }
     return handle;

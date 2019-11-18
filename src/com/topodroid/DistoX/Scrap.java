@@ -32,11 +32,12 @@ class Scrap
   private int mMultiselectionType = -1;  // current multiselection type (DRAWING_PATH_POINT / LINE / AREA
   private List< DrawingPath > mMultiselected;
   boolean isMultiselection = false; 
-  private int mMaxAreaIndex;                   // max index of areas in this plot
+  private int mMaxAreaIndex;             // max index of areas in this scrap
+  String mPlotName;              // name of the plot this scrap belongs to
   int mScrapIdx;
   private RectF mBBox;   // this scrap bbox
 
-  Scrap( int idx ) 
+  Scrap( int idx, String plot_name ) 
   {
     mCurrentStack = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
     mUserStations = Collections.synchronizedList(new ArrayList<DrawingStationPath>());
@@ -47,7 +48,10 @@ class Scrap
     mScrapIdx     = idx;
     mBBox = null;
     mMaxAreaIndex = 0;
+    mPlotName = plot_name;
   }
+
+  boolean hasPlotName( String plot_name ) { return mPlotName != null && mPlotName.equals( plot_name ); }
 
   // ----------------------------------------------------------
   // "merge" b1 into b0
@@ -87,6 +91,12 @@ class Scrap
     mMultiselected.clear();
     mMultiselectionType  = -1;
     isMultiselection = false;
+  }
+
+  void clearShotsAndStations()
+  {
+    mSelection.clearReferencePoints();
+    clearSelected();
   }
 
   boolean isSelectable() { return mSelection != null; }
