@@ -2,7 +2,7 @@ symbol point
 name eletric_light
 name-pt luz_elétrica
 name-ru электрический_светильник
-th_name u:eletric_light
+th_name u:eletric-light
 orientation no
 color 0xffbf00
 csurvey 6 6 80
