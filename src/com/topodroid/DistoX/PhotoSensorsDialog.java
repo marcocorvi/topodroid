@@ -268,13 +268,13 @@ class PhotoSensorsDialog extends MyDialog
     //   mParent.highlightBlock( mBlk );
     //   dismiss();
     } else if ( mButtonPhoto != null && b == mButtonPhoto ) {  // PHOTO
-      mParent.askPhotoComment( );
+      mParent.askPhotoComment( mBlk );
       dismiss();
     } else if ( mButtonAudio != null && b == mButtonAudio ) {  // AUDIO
       mParent.startAudio( mBlk );
       dismiss();
     } else if ( mButtonSensor != null && b == mButtonSensor ) { // SENSOIR
-      mParent.askSensor( );
+      mParent.askSensor( mBlk );
       dismiss();
     // } else if ( b == mButtonExternal ) {
     //   mParent.askExternal( );

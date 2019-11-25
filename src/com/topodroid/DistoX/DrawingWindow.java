@@ -39,7 +39,6 @@ import android.os.Handler;
 import android.os.Message;
 // /* fixme-23 */
 // import android.os.Build;
-// import android.os.StrictMode;
 // import java.lang.reflect.Method;
 
 import android.view.KeyEvent;
@@ -277,6 +276,8 @@ public class DrawingWindow extends ItemDrawer
   private TopoDroidApp mApp;
   private DataHelper   mApp_mData;
   private DataDownloader mDataDownloader;
+  private MediaManager   mMediaManager;
+
   // private DrawingUtil mDrawingUtil;
   private boolean mLandscape;
   private boolean audioCheck;
@@ -1683,6 +1684,7 @@ public class DrawingWindow extends ItemDrawer
     mApp  = (TopoDroidApp)getApplication();
     mActivity = this;
     mApp_mData = TopoDroidApp.mData; // new DataHelper( this ); 
+    mMediaManager = new MediaManager( mApp_mData );
 
     mFormatClosure = getResources().getString(R.string.format_closure );
 
@@ -3682,24 +3684,38 @@ public class DrawingWindow extends ItemDrawer
       } 
     }
 
-  private String mMediaComment = null;
-  private long  mMediaId = -1L;
-  private float mMediaX, mMediaY;
-  private int   mMediaCamera = PhotoInfo.CAMERA_UNDEFINED;
+  // private String mMediaComment = null;
+  // private long  mMediaId = -1L;
+  // private int   mMediaCamera = PhotoInfo.CAMERA_UNDEFINED;
 
-  public void insertPhoto( )
+  private void createPhotoPoint()
   {
-    // Log.v("DistoX-C", "insert photo " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    assert( mLastLinePath == null );
-    // FIXME TITLE has to go
-    mApp_mData.insertPhoto( TDInstance.sid, mMediaId, -1, "", TDUtil.currentDate(), mMediaComment, mMediaCamera );
-    // FIXME NOTIFY ? no
-    // photo file is "survey/id.jpg"
-    // String filename = TDInstance.survey + "/" + Long.toString( mMediaId ) + ".jpg";
-    DrawingPhotoPath photo = new DrawingPhotoPath( mMediaComment, mMediaX, mMediaY, mPointScale, null, mMediaId, mDrawingSurface.scrapIndex() );
+    DrawingPhotoPath photo = new DrawingPhotoPath( mMediaManager.getComment(), mMediaManager.getX(), mMediaManager.getY(), mPointScale, null, mMediaManager.getPhotoId(), mDrawingSurface.scrapIndex() );
     photo.mLandscape = mLandscape;
     mDrawingSurface.addDrawingPath( photo );
     modified();
+  }
+
+  // public void insertPhoto( Bitmap bitmap )
+  // {
+  //   // Log.v("DistoX-C", "insert photo " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+  //   assert( mLastLinePath == null );
+  //   if ( mMediaManager.savePhoto( bitmap, 90 ) ) { // compression = 90
+  //     // // FIXME TITLE has to go
+  //     // mApp_mData.insertPhoto( TDInstance.sid, mMediaId, -1, "", TDUtil.currentDate(), mMediaComment, mMediaCamera );
+  //     // // FIXME NOTIFY ? no
+  //     createPhotoPoint();
+  //   } else {
+  //     Log.v("DistoX-PHOTO", "failed to save photo");
+  //   }
+  // }
+
+  // @from IPhotoInserter
+  public void insertPhoto( )
+  {
+    mApp_mData.insertPhoto( TDInstance.sid, mMediaManager.getPhotoId(), -1, "", TDUtil.currentDate(), mMediaManager.getComment(), mMediaManager.getCamera() );
+    // FIXME NOTIFY ? no
+    createPhotoPoint();
   }
 
   // NOTE this was used to let QCamCompass tell the DrawingWindow the photo azimuth/clino
@@ -3713,40 +3729,23 @@ public class DrawingWindow extends ItemDrawer
   private void doTakePointPhoto( File imagefile, boolean insert, long pid )
   {
     if ( TDandroid.checkCamera( mApp ) ) { // hasPhoto
-      mMediaCamera = PhotoInfo.CAMERA_TOPODROID;
-      new QCamCompass( this,
-            	       (new MyBearingAndClino( mApp, imagefile )),
-                       // this, pid, // pid non-negative if notify azimuth/clino // DO NOT USE THIS
-        	       ( insert ? this : null), // ImageInserter
-        	       true, false).show();  // true = with_box, false=with_delay
+      mMediaManager.setCamera( PhotoInfo.CAMERA_TOPODROID );
+      new QCamCompass( this, (new MyBearingAndClino( mApp, imagefile )), (insert ? this : null), true, false).show();  // true = with_box, false=with_delay
     } else {
-      boolean ok = TDandroid.checkStrictMode();
-      // boolean ok = true;
-      // /* fixme-23 */
-      // if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ) { // build version 24
-      //   try {
-      //     Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposed");
-      //     m.invoke( null );
-      //   } catch ( Exception e ) { ok = false; }
-      // }
-      // /* */
-      if ( ok ) {
-        try {
-          Uri outfileuri = Uri.fromFile( imagefile );
-          Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
-          intent.putExtra( MediaStore.EXTRA_OUTPUT, outfileuri );
-          intent.putExtra( "outputFormat", Bitmap.CompressFormat.JPEG.toString() );
+      try {
+        Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
+        if ( intent.resolveActivity( getPackageManager() ) != null ) {
           if ( insert ) {
-            mMediaCamera = PhotoInfo.CAMERA_INTENT;
+            mMediaManager.setCamera( PhotoInfo.CAMERA_INTENT );
             mActivity.startActivityForResult( intent, TDRequest.CAPTURE_IMAGE_DRAWWINDOW );
           } else {
             mActivity.startActivity( intent );
           }
-        } catch ( ActivityNotFoundException e ) {
+        } else {
           TDToast.makeBad( R.string.no_capture_app );
         }
-      } else {
-        TDToast.makeBad( "NOT IMPLEMENTED YET" );
+      } catch ( ActivityNotFoundException e ) {
+        TDToast.makeBad( R.string.no_capture_app );
       }
     }
   }
@@ -3755,42 +3754,41 @@ public class DrawingWindow extends ItemDrawer
   {
     // Log.v("DistoX-C", "addPhoto " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     assert( mLastLinePath == null );
-    mMediaComment = (comment == null)? "" : comment;
-    mMediaId = mApp_mData.nextPhotoId( TDInstance.sid );
     if ( mLandscape ) {
-      mMediaX = -y;
-      mMediaY = x;
+      mMediaManager.setPoint( -y, x );
     } else {
-      mMediaX = x;
-      mMediaY = y;
+      mMediaManager.setPoint( x, y );
     }
-    File imagefile = new File( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mMediaId) ) );
+    mMediaManager.prepareNextPhoto( -1, ((comment == null)? "" : comment), PhotoInfo.CAMERA_UNDEFINED );
+    // mMediaComment = (comment == null)? "" : comment;
+    // mMediaId = mApp_mData.nextPhotoId( TDInstance.sid );
+    // File imagefile = new File( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mMediaId) ) );
     // TODO TD_XSECTION_PHOTO
-    doTakePointPhoto( imagefile, true, -1L ); // with inserter, no pid
+    doTakePointPhoto( mMediaManager.getImagefile(), true, -1L ); // with inserter, no pid
   }
 
     private void addAudioPoint( float x, float y )
     {
       // Log.v("DistoX-C", "addAudio " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
       assert( mLastLinePath == null );
-      mMediaComment = "";
+      // mMediaComment = ""; // audio point do not have comment
       if ( ! audioCheck ) {
 	// TODO TDToast.makeWarn( R.string.no_feature_audio );
 	return;
       }
-      mMediaId = mApp_mData.nextAudioNegId( TDInstance.sid );
       if ( mLandscape ) {
-        mMediaX = -y;
-        mMediaY = x;
+        mMediaManager.setPoint( -y, x );
       } else {
-        mMediaX = x;
-        mMediaY = y;
+        mMediaManager.setPoint( x, y );
       }
-      File file = new File( TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString(mMediaId) ) );
+      mMediaManager.prepareNextAudioNeg( -1, "" );
+      // mMediaId = mApp_mData.nextAudioNegId( TDInstance.sid );
+      // File file = new File( TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString(mMediaId) ) );
       // TODO RECORD AUDIO
-      new AudioDialog( mActivity, this, mMediaId ).show();
+      new AudioDialog( mActivity, this, mMediaManager.getAudioId() ).show();
     }
 
+    // @from IAudioInserter
     public void deletedAudio( long bid )
     {
       // Log.v("DistoX-C", "deleteAudio " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
@@ -3799,17 +3797,19 @@ public class DrawingWindow extends ItemDrawer
       deletePoint( audio ); // if audio == null doesn't do anything
     }
 
+    // @from IAudioInserter
     // public void startRecordAudio( long bid )
     // {
     //   // nothing
     // }
 
+    // @from IAudioInserter
     public void stopRecordAudio( long bid )
     {
       DrawingAudioPath audio = mDrawingSurface.getAudioPoint( bid );
       if ( audio == null ) {
-        // assert bid == mMediaId
-        audio = new DrawingAudioPath( mMediaX, mMediaY, mPointScale, null, bid, mDrawingSurface.scrapIndex() );
+        // assert bid == mMediaManager.getAudioId()
+        audio = new DrawingAudioPath( mMediaManager.getX(), mMediaManager.getY(), mPointScale, null, bid, mDrawingSurface.scrapIndex() );
 	audio.mLandscape = mLandscape;
         mDrawingSurface.addDrawingPath( audio );
         modified();
@@ -5206,8 +5206,7 @@ public class DrawingWindow extends ItemDrawer
       return pid;
     }
 
-    void makePhotoXSection( DrawingLinePath line, String id, long type,
-                           String from, String to, String nick, float azimuth, float clino )
+    void makePhotoXSection( DrawingLinePath line, String id, long type, String from, String to, String nick, float azimuth, float clino )
     {
       long pid = prepareXSection( id, type, from, to, nick, azimuth, clino );
       if ( pid >= 0 ) {
@@ -5335,7 +5334,8 @@ public class DrawingWindow extends ItemDrawer
         String origin = num.getOriginStation();
         station = TDExporter.getGeolocalizedStation( mSid, mApp_mData, 1.0f, true, origin );
       }
-      new ExportPlotToFile( mActivity, num, manager, type, filename, ext, toast, station ).execute();
+      SurveyInfo info = mApp_mData.selectSurveyInfo( mSid );
+      new ExportPlotToFile( mActivity, info, num, manager, type, filename, ext, toast, station ).execute();
     }
 
     // private rotateBackups( String filename )
@@ -5814,6 +5814,7 @@ public class DrawingWindow extends ItemDrawer
       case TDConst.DISTOX_EXPORT_SVG: saveWithExt( mType, "svg" ); break; // , true ); break;
       case TDConst.DISTOX_EXPORT_SHP: saveWithExt( mType, "shp" ); break; // , true ); break;
       case TDConst.DISTOX_EXPORT_XVI: saveWithExt( mType, "xvi" ); break; // , true ); break;
+      case TDConst.DISTOX_EXPORT_TNL: saveWithExt( mType, "xml" ); break; // , true ); break;
     }
   }
 
@@ -6302,7 +6303,16 @@ public class DrawingWindow extends ItemDrawer
       //   break;
       case TDRequest.CAPTURE_IMAGE_DRAWWINDOW:
         if ( resCode == Activity.RESULT_OK ) {
-          insertPhoto();
+          Bundle extras = intent.getExtras();
+          Bitmap bitmap = (Bitmap) extras.get("data");
+          if ( mMediaManager.savePhoto( bitmap, 90 ) ) { // compression = 90
+            // // FIXME TITLE has to go
+            // mApp_mData.insertPhoto( TDInstance.sid, mMediaId, -1, "", TDUtil.currentDate(), mMediaComment, mMediaCamera );
+            // // FIXME NOTIFY ? no
+            createPhotoPoint();
+          } else {
+            Log.v("DistoX-PHOTO", "failed to save photo");
+          }
         }
         break;
       case TDRequest.PLOT_RELOAD:

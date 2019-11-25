@@ -168,6 +168,8 @@ class DistoXNum
     return ret;
   }
 
+  NumStation getClosestStation( long type, float x, float y ) { return mStations.getClosestStation( type, x, y ); }
+
   /** FIXME there is a problem here:               ,-----B---
    * if the reduction tree has a branch, say 0----A
    *                                               `---C----D

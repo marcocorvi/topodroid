@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -39,7 +41,6 @@ import android.view.SurfaceView;
 // import android.view.OrientationEventListener;
 
 import android.util.AttributeSet;
-// import android.util.Log;
 
 /** this is the camera preview class
  *  It access the camera via the QCamPreview
@@ -48,7 +49,7 @@ import android.util.AttributeSet;
 public class QCamDrawingSurface extends SurfaceView
                                 implements SurfaceHolder.Callback 
 {
-  private static final String TAG = "DistoX";
+  private static final String TAG = "DistoX-QCAM";
   // private final Context mContext;
   QCamCompass mQCam;
 
@@ -58,7 +59,6 @@ public class QCamDrawingSurface extends SurfaceView
   int mHeight;           // canvas height
 
   private Camera mCamera = null;
-  private Camera.Parameters mParameters;
   private Camera.PreviewCallback mPreviewCallback;
   private Camera.PictureCallback mRaw;
   private Camera.PictureCallback mJpeg;
@@ -162,11 +162,31 @@ public class QCamDrawingSurface extends SurfaceView
     return ret;
   }
 
+  int getMaxZoom()
+  {
+    return (mCamera != null )? mCamera.getParameters().getMaxZoom() : 100;
+  }
+
+  void zoom( int delta_zoom )
+  {
+    if ( mCamera != null ) {
+      Camera.Parameters params = mCamera.getParameters();
+      int max = params.getMaxZoom();
+      int zoom = params.getZoom() + delta_zoom;
+      if ( zoom > 0 && zoom < max ) {
+        Log.v("DistoX-QCAM", "set zoom " + zoom + "/" + max );
+        params.setZoom( zoom );
+        mCamera.setParameters( params );
+      }
+    }
+  }
+
+
   void close()
   {
     // if ( mOrientationListener != null ) mOrientationListener.disable( );
     if ( mCamera != null ) {
-      // Log.v("DistoX", "close qcam" );
+      // Log.v( TAG, "close qcam" );
       mCamera.stopPreview();
       mCamera.release();
       mCamera = null;
@@ -175,32 +195,32 @@ public class QCamDrawingSurface extends SurfaceView
 
   boolean open()
   {
-    // Log.v("DistoX", "open qcam" );
+    // Log.v( TAG, "open qcam" );
     close();
     try {
       mCamera = Camera.open();
-      mParameters = mCamera.getParameters();
-      mParameters.setFocusMode( Camera.Parameters.FOCUS_MODE_AUTO );
-      mParameters.setSceneMode( Camera.Parameters.SCENE_MODE_AUTO );
-      mParameters.setFlashMode( Camera.Parameters.FLASH_MODE_AUTO );
-      List< Integer > formats = mParameters.getSupportedPreviewFormats();
+      Camera.Parameters params = mCamera.getParameters();
+      params.setFocusMode( Camera.Parameters.FOCUS_MODE_AUTO );
+      params.setSceneMode( Camera.Parameters.SCENE_MODE_AUTO );
+      params.setFlashMode( Camera.Parameters.FLASH_MODE_AUTO );
+      List< Integer > formats = params.getSupportedPreviewFormats();
       for ( Integer fmt : formats ) {
         if ( fmt.intValue() == ImageFormat.JPEG ) {
           // Log.v("DistoX", "Set preview format JPEG" );
-          mParameters.setPreviewFormat( ImageFormat.JPEG );
+          params.setPreviewFormat( ImageFormat.JPEG );
         }
         // Log.v("DistoX", "QCamPreview formats " + fmt );
       }
-      mCamera.setParameters( mParameters );
+      mCamera.setParameters( params );
       mCamera.setPreviewCallback( mPreviewCallback );
-      int format = mParameters.getPreviewFormat();
+      int format = params.getPreviewFormat();
       // Log.v( "DistoX", "QCamPreview Format " + format );
-      // mOrientationListener = new MyOrientationListener( mContext, mParameters );
+      // mOrientationListener = new MyOrientationListener( mContext, params );
 
-      Camera.Size size = mParameters.getPreviewSize();
+      Camera.Size size = params.getPreviewSize();
       // mWidth  = size.width;
       // mHeight = size.height;
-      // Log.v( "DistoX", "QCamPreview size " + size.width + " " + size.height );
+      // Log.v( TAG, "QCamPreview size " + size.width + " " + size.height );
       try {
         mCamera.setDisplayOrientation( 90 );
         mCamera.setPreviewDisplay( mHolder );
@@ -248,23 +268,23 @@ public class QCamDrawingSurface extends SurfaceView
   {
     mShutter = new ShutterCallback() {
       public void onShutter( ) {
-        // Log.v( "DistoX", "Shutter callback " );
+        // Log.v( TAG, "Shutter callback " );
       }
     };
     mRaw = new PictureCallback() {
       public void onPictureTaken( byte[] data, Camera c ) {
-        // Log.v( "DistoX", "Picture Raw callback data " + ((data==null)? "null" : data.length) );
+        // Log.v( TAG, "Picture Raw callback data " + ((data==null)? "null" : data.length) );
       }
     };
     mJpeg = new PictureCallback() {
       public void onPictureTaken( byte[] data, Camera c ) { 
-        // Log.v( "DistoX", "Picture JPEG callback data " + ((data==null)? "null" : data.length) );
+        // Log.v( TAG, "Picture JPEG callback data " + ((data==null)? "null" : data.length) );
         mJpegData = data;
       }
     };
     mPreviewCallback = new PreviewCallback() { // called every time startPreview
-        public void onPreviewFrame(byte[] data, Camera arg1) {
-          // Log.v("DistoX", "on preview frame");
+        public void onPreviewFrame(byte[] data, Camera c ) {
+          // Log.v(TAG, "on preview frame");
         }
     };
   }

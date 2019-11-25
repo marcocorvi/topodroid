@@ -59,6 +59,7 @@ class AudioDialog extends MyDialog
   private boolean canPlay;
   // AudioInfo mAudio;
 
+  // @param bid    block Id
   AudioDialog( Context ctx, IAudioInserter parent, long bid )
   {
     super( ctx, R.string.AudioDialog );

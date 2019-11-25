@@ -272,6 +272,7 @@ class Archiver
         addOptionalEntry( zos, new File( TDPath.getSurveyPlotSvgFile( survey, plt.name ) ) );
         addOptionalEntry( zos, new File( TDPath.getSurveyPlotXviFile( survey, plt.name ) ) );
         addOptionalEntry( zos, new File( TDPath.getSurveyPlotPngFile( survey, plt.name ) ) );
+        addOptionalEntry( zos, new File( TDPath.getSurveyPlotTnlFile( survey, plt.name ) ) );
         if ( plt.type == PlotInfo.PLOT_PLAN ) {
           addOptionalEntry( zos, new File( TDPath.getSurveyCsxFile( survey, plt.name ) ) );
         }
@@ -431,6 +432,8 @@ class Archiver
             pathname = TDPath.getThFile( ze.getName() );
           } else if ( ze.getName().endsWith( TDPath.TH2 ) ) {
             pathname = TDPath.getTh2File( ze.getName() );
+          } else if ( ze.getName().endsWith( TDPath.TNL ) ) {
+            pathname = TDPath.getTnlFile( ze.getName() );
 	  /* FIXME_SKETCH_3D *
           } else if ( ze.getName().endsWith( TDPath.TH3 ) ) {
             pathname = TDPath.getTh3File( ze.getName() );

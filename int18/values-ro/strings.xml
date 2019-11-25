@@ -124,6 +124,7 @@
     <string name="device_none">Nici un DistoX selectat</string>
     <!-- UNUSED string name="device_paired">Dispozivul este împerecheat</string -->
     <string name="device_reset">Resetează memoria DistoX</string>
+    <!-- TODO string name="device_clear">Clear DistoX memory</string -->
     <string name="device_code">Cod DistoX %1$4d</string>
     <string name="device_firmware">Firmware  %1$d.%2$d</string>
     <string name="device_hardware">Hardware  %1$d.%2$d</string>
@@ -179,6 +180,7 @@
     <string name="import_calib_no_data">Fișier calib.: fără date</string>
     <string name="import_calib_io_error">Fișier calib.: eroare la citire</string>
     <string name="import_zip_ok">Fișierul arhivă zip importat cu succes</string>
+    <!-- TODO string name="import_zip_newer">Imported zip from more recent version</string -->
     <!-- UNUSED string name="import_zip_wait">Importarea fișierului zip ar putea dura mult. Te rog așteaptă &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Saving sketch &#8230; please wait &#8230;</string -->
     <string name="MT_points_none">Punct MobileTopographer lipsă</string>
@@ -402,7 +404,7 @@
     <!-- UNUSED string name="not_implemented">Nu a fost implementat</string -->
     <string name="null_bitmap">Nu a putut fi creată imaginea [eroare OOM]</string>
     <string name="photo">foto</string>
-    <string name="photo_camera">Aplicație cameră foto</string>
+    <!-- TODO string name="photo_camera">TopoDroid camera</string -->
     <string name="photo_comment_prompt">Introdu comentariul fotografiei</string>
     <string name="photo_azimuth_clino">Azimut: %1$.1f Clino %2$.1f</string>
     <!-- UNUSED string name="photo_name">stație/nume</string -->
@@ -635,6 +637,7 @@
     <string name="button_clear"     >Curăță     </string>
     <string name="button_clear_day" >Curăță 1z  </string>
     <string name="button_clear_week">Curăță 7z  </string>
+    <!-- TODO string name="button_clear_memory">Clear memory</string -->
     <string name="button_save"      >Salvează   </string>
     <!-- UNUSED string name="button_select"    >Selectează</string -->
     <string name="button_search"    >Caută      </string>
@@ -963,8 +966,10 @@
   <!-- OK string name="pref_cat_exporttro">VisualTopo</string -->
   <!-- OK string name="pref_cat_exportsvg">SVG</string -->
   <!-- OK string name="pref_cat_exportdxf">DXF</string -->
+  <!-- OK string name="pref_cat_exportshp">Shapefile</string -->
   <!-- OK string name="pref_cat_exportpng">PNG</string -->
   <!-- OK string name="pref_cat_exportkml">KML/GeoJSON</string -->
+  <!-- OK string name="pref_cat_exportcsv">CSV</string -->
 
   <string name="pref_cat_calib">CALIBRĂRI</string>
   <!-- UNUSED string name="pref_cat_min_algo">ALGO MIN</string -->
@@ -1205,6 +1210,8 @@
   <!-- UNUSED string name="pref_dxf_scale_summary">Factor scară schiță DXF</string -->
   <string name="pref_dxf_blocks_title">Capete radieri DXF</string>
   <string name="pref_dxf_blocks_summary">Capete radieri DXF</string>
+  <!-- TODO string name="pref_shp_georef_title">Georeferenced sketch plan export</string -->
+  <!-- TODO string name="pref_shp_georef_summary">Sketch plan exported in WGS84 long-lat</string -->
   <string name="pref_thumbnail_title">Mărime imagini miniatură</string>
   <string name="pref_thumbnail_summary">Mărimea miniaturilor de fotografie(thumbnails)</string>
   <string name="pref_shot_timer_title">Întârziere măsurare direcție</string>

@@ -123,6 +123,7 @@
     <string name="device_none">Nessun DistoX selezionato</string>
     <!-- UNUSED string name="device_paired">Device is paired</string -->
     <string name="device_reset">Resettare la memoria del DistoX</string>
+    <!-- TODO string name="device_clear">Clear DistoX memory</string -->
     <string name="device_code">Codice DistoX %1$4d</string>
     <string name="device_firmware">Firmware %1$d.%2$d</string>
     <string name="device_hardware">Hardware %1$d.%2$d</string>
@@ -177,6 +178,7 @@
     <string name="import_calib_no_data">Calib. file: no dati</string>
     <string name="import_calib_io_error">Calib. file: errore in lettura</string>
     <string name="import_zip_ok">ZIP importato con successo</string>
+    <!-- TODO string name="import_zip_newer">Imported zip from more recent version</string -->
     <!-- UNUSED string name="import_zip_wait">Importare uno ZIP richiede tempo. Attendi&#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Salvataggio disegno &#8230; attendi &#8230;</string -->
     <string name="MT_points_none">Punto GPS mancante</string>
@@ -399,7 +401,7 @@
     <!-- UNUSED string name="not_implemented">Non implementato</string -->
     <string name="null_bitmap">bitmap non valida</string>
     <string name="photo">foto</string>
-    <string name="photo_camera">App per foto</string>
+    <!-- TODO string name="photo_camera">TopoDroid camera</string -->
     <string name="photo_comment_prompt">Scrivi il commento</string>
     <string name="photo_azimuth_clino">Azimut: %1$.1f Inclinazione %2$.1f</string>
     <!-- UNUSED string name="photo_name">caposaldo/nome</string -->
@@ -633,6 +635,7 @@
     <string name="button_clear"     >Cancella  </string>
     <string name="button_clear_day" >Pulisci 1g  </string>
     <string name="button_clear_week">Pulisci 7gg  </string>
+    <!-- TODO string name="button_clear_memory">Clear memory</string -->
     <string name="button_save"      >Salva     </string>
     <!-- UNUSED string name="button_select"    >Seleziona </string -->
     <string name="button_search"    >Cerca     </string>
@@ -966,8 +969,10 @@
   <!-- OK string name="pref_cat_exporttro">VisualTopo</string -->
   <!-- OK string name="pref_cat_exportsvg">SVG</string -->
   <!-- OK string name="pref_cat_exportdxf">DXF</string -->
+  <!-- OK string name="pref_cat_exportshp">Shapefile</string -->
   <!-- OK string name="pref_cat_exportpng">PNG</string -->
   <!-- OK string name="pref_cat_exportkml">KML/GeoJSON</string -->
+  <!-- OK string name="pref_cat_exportcsv">CSV</string -->
 
   <string name="pref_cat_calib">OPZIONI CALIBRAZIONE</string>
   <string name="pref_cat_device">OPZIONI DISTOX</string>
@@ -1205,6 +1210,8 @@
   <!-- UNUSED string name="pref_dxf_scale_summary">Fattore di scala rilievo DXF</string -->
   <string name="pref_dxf_blocks_title">splay endpoint DXF </string>
   <string name="pref_dxf_blocks_summary">splay endpoint DXF </string>
+  <!-- TODO string name="pref_shp_georef_title">Georeferenced sketch plan export</string -->
+  <!-- TODO string name="pref_shp_georef_summary">Sketch plan exported in WGS84 long-lat</string -->
   <string name="pref_thumbnail_title">Dimensione thumbnails</string>
   <string name="pref_thumbnail_summary">Dimensione immagini thumbnail</string>
   <string name="pref_shot_timer_title">Timer direzioni</string>

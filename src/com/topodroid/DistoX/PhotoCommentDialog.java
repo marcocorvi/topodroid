@@ -3,11 +3,14 @@
  * @author marco corvi
  * @date may 2012
  *
- * @brief TopoDroid photo comment dialog (to enter the comment of the photo)
+ * @brief TopoDroid photo dialog 
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
+ * This is the general purpose dialog to choose how to take photos:
+ * - user can enter a comment for the photo
+ * - user can decide whether to use TopoDroid camera or a Camera App
  */
 package com.topodroid.DistoX;
 
@@ -37,6 +40,7 @@ class PhotoCommentDialog extends MyDialog
   private EditText mETcomment;     // photo comment
   private Button   mButtonOK;
   private CheckBox mCamera;        // whether to use camera app
+  private long     mSid;           // shot id
   // private Button   mButtonCancel;
   private boolean  cameraCheck;
 
@@ -44,11 +48,12 @@ class PhotoCommentDialog extends MyDialog
    * @param context   context
    * @param parent    parent shot list activity
    */
-  PhotoCommentDialog( Context context, ShotWindow parent )
+  PhotoCommentDialog( Context context, ShotWindow parent, long sid )
   {
     super( context, R.string.PhotoCommentDialog );
     mParent = parent;
-    // TDLog.Log( TDLog.LOG_PHOTO, "PhotoCommentDialog");
+    mSid    = sid;
+    // TDLog.Log( TDLog.LOG_PHOTO, "PhotoComment");
   }
 
 // -------------------------------------------------------------------
@@ -58,7 +63,7 @@ class PhotoCommentDialog extends MyDialog
     super.onCreate(savedInstanceState);
 
     cameraCheck = TDandroid.checkCamera( mContext );
-    // TDLog.Log(  TDLog.LOG_PHOTO, "PhotoCommentDialog onCreate" );
+    // TDLog.Log(  TDLog.LOG_PHOTO, "PhotoComment onCreate" );
     initLayout(R.layout.photo_comment_dialog, R.string.title_photo_comment );
     
 
@@ -67,6 +72,8 @@ class PhotoCommentDialog extends MyDialog
     mCamera    = (CheckBox) findViewById(R.id.photo_camera );
     if ( ! cameraCheck ) {
       mCamera.setVisibility( View.GONE );
+    } else {
+      mCamera.setChecked( true );
     }
 
     mButtonOK.setOnClickListener( this );
@@ -79,13 +86,13 @@ class PhotoCommentDialog extends MyDialog
   public void onClick(View v) 
   {
     Button b = (Button) v;
-    // TDLog.Log(  TDLog.LOG_INPUT, "PhotoCommentDialog onClick() " + b.getText().toString() );
+    // TDLog.Log(  TDLog.LOG_INPUT, "PhotoComment onClick() " + b.getText().toString() );
 
     if ( b == mButtonOK && mETcomment.getText() != null ) {
       // TDLog.Log( TDLog.LOG_PHOTO, "set photo comment " + mETcomment.getText().toString() );
       // mParent.insertPhoto( mETcomment.getText().toString() );
-      int camera = ( cameraCheck && ! mCamera.isChecked() )? PhotoInfo.CAMERA_TOPODROID : PhotoInfo.CAMERA_INTENT;
-      mParent.doTakePhoto( mETcomment.getText().toString(), camera );
+      int camera = ( cameraCheck && ! mCamera.isChecked() )? PhotoInfo.CAMERA_INTENT : PhotoInfo.CAMERA_TOPODROID;
+      mParent.doTakePhoto( mSid, mETcomment.getText().toString(), camera );
     // } else if ( b == mButtonCancel ) {
       /* nothing */
     }

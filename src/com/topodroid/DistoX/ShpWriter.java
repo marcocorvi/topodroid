@@ -1,18 +1,13 @@
-/*
- *    GeoTools - OpenSource mapping toolkit  
- *    http://geotools.org  
- *    (C) 2002-2006, Geotools Project Managment Committee (PMC)  
- *    (C) 2002, Centre for Computational Geography  
- *  
- *    This library is free software; you can redistribute it and/or  
- *    modify it under the terms of the GNU Lesser General Public  
- *    License as published by the Free Software Foundation; either  
- *    version 2.1 of the License, or (at your option) any later version.  
- *  
- *    This library is distributed in the hope that it will be useful,  
- *    but WITHOUT ANY WARRANTY; without even the implied warranty of  
- *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU  
- *    Lesser General Public License for more details.  
+/* @file ShpWriter.java
+ *
+ * @author marco corvi
+ * @date mar 2019
+ *
+ * @brief TopoDroid drawing: shapefile export writer
+ * --------------------------------------------------------
+ *  Copyright This software is distributed under GPL-3.0 or later
+ *  See the file COPYING.
+ * --------------------------------------------------------
  */
 package com.topodroid.DistoX;
 
@@ -44,6 +39,10 @@ class ShpObject
   final static byte BYTEC  = (byte)'C';
   final static byte BYTEN  = (byte)'N';
   final static short SHORT0 = (short)0;
+
+  static final float SCALE = 1.0f/DrawingUtil.SCALE_FIX; // TDSetting.mDxfScale; 
+  // static double xWorld( double x ) { return (x-DrawingUtil.CENTER_X)*SCALE; }
+  // static double yWorld( double y ) { return (y-DrawingUtil.CENTER_Y)*SCALE; }
 
   int geomType; // geom type
   int nr;   // nuber of objects
@@ -402,6 +401,11 @@ class ShpObject
     if ( y < ymin ) { ymin = y; } else if ( y > ymax ) { ymax = y; }
   }
 
+  // protected void updateBBoxScene( double x, double y )
+  // {
+  //   updateBBox( xWorld( x ), yWorld(y) );
+  // }
+
 }
 // ---------------------------------------------------------------------------------------------
 // 3D classes
@@ -723,8 +727,8 @@ class ShpPoint extends ShpObject
       shpBuffer.order(ByteOrder.LITTLE_ENDIAN);   
       shpBuffer.putInt( SHP_POINT );
       // Log.v("DistoX", "POINTZ " + cnt + ": " + pt.e + " " + pt.s + " " + pt.v + " offset " + offset );
-      shpBuffer.putDouble( x0+xscale*pt.cx );
-      shpBuffer.putDouble( y0-yscale*pt.cy );
+      shpBuffer.putDouble( x0 + xscale*(pt.cx - DrawingUtil.CENTER_X) );
+      shpBuffer.putDouble( y0 - yscale*(pt.cy - DrawingUtil.CENTER_Y) );
 
       writeShxRecord( offset, shpRecLen );
       fields[0] = BrushManager.getPointThName( pt.mPointType );
@@ -749,10 +753,14 @@ class ShpPoint extends ShpObject
       return;
     }
     DrawingPointPath pt = pts.get(0);
-    initBBox( x0+xscale*pt.cx, y0-yscale*pt.cy );
+    double xx = x0+xscale*(pt.cx - DrawingUtil.CENTER_X);
+    double yy = y0-yscale*(pt.cy - DrawingUtil.CENTER_Y);
+    initBBox( xx, yy );
     for ( int k=pts.size() - 1; k>0; --k ) {
       pt = pts.get(k);
-      updateBBox( x0+xscale*pt.cx, y0-yscale*pt.cy );
+      xx = x0+xscale*(pt.cx - DrawingUtil.CENTER_X);
+      yy = y0-yscale*(pt.cy - DrawingUtil.CENTER_Y);
+      updateBBox( xx, yy );
     }
   }
 }
@@ -805,8 +813,8 @@ class ShpStation extends ShpObject
       shpBuffer.order(ByteOrder.LITTLE_ENDIAN);   
       shpBuffer.putInt( SHP_POINT );
       // Log.v("DistoX", "POINT station " + cnt + ": " + st.e + " " + st.s + " " + st.v + " offset " + offset );
-      shpBuffer.putDouble( x0+xscale*st.cx );
-      shpBuffer.putDouble( y0-yscale*st.cy );
+      shpBuffer.putDouble( x0 + xscale*(st.cx - DrawingUtil.CENTER_X) );
+      shpBuffer.putDouble( y0 - yscale*(st.cy - DrawingUtil.CENTER_Y) );
 
       writeShxRecord( offset, shpRecLen );
       fields[0] = st.getName();
@@ -829,10 +837,14 @@ class ShpStation extends ShpObject
       return;
     }
     DrawingStationName st = pts.get(0);
-    initBBox( x0+xscale*st.cx, y0-yscale*st.cy );
+    double xx = x0+xscale*(st.cx - DrawingUtil.CENTER_X);
+    double yy = y0-yscale*(st.cy - DrawingUtil.CENTER_Y);
+    initBBox( xx, yy );
     for ( int k=pts.size() - 1; k>0; --k ) {
       st = pts.get(k);
-      updateBBox( x0+xscale*st.cx, y0-yscale*st.cy );
+      xx = x0+xscale*(st.cx - DrawingUtil.CENTER_X);
+      yy = y0-yscale*(st.cy - DrawingUtil.CENTER_Y);
+      updateBBox( xx, yy );
     }
   }
 }
@@ -935,16 +947,18 @@ class ShpPolyline extends ShpObject
   {
     double xmin, ymin, xmax, ymax;
     LinePoint pt = ln.mFirst;
-    xmin = xmax =  pt.x;
-    ymin = ymax = -pt.y;
-    for ( pt = pt.mNext; pt != null; pt = pt.mNext ) {
-      if (  pt.x < xmin ) { xmin =  pt.x; } else if (  pt.x > xmax ) { xmax =  pt.x; }
-      if ( -pt.y < ymin ) { ymin = -pt.y; } else if ( -pt.y > ymax ) { ymax = -pt.y; }
+    {
+      xmin = xmax =  pt.x;
+      ymin = ymax = -pt.y;
+      for ( pt = pt.mNext; pt != null; pt = pt.mNext ) {
+        if (  pt.x < xmin ) { xmin =  pt.x; } else if (  pt.x > xmax ) { xmax =  pt.x; }
+        if ( -pt.y < ymin ) { ymin = -pt.y; } else if ( -pt.y > ymax ) { ymax = -pt.y; }
+      }
     }
-    xmin = x0 + xscale*ymin;
-    ymin = y0 + yscale*ymin;
-    xmax = x0 + xscale*xmax;
-    ymax = y0 + yscale*ymax;
+    xmin = x0 + xscale*(xmin-DrawingUtil.CENTER_X);
+    ymin = y0 + yscale*(ymin-DrawingUtil.CENTER_Y);
+    xmax = x0 + xscale*(xmax-DrawingUtil.CENTER_X);
+    ymax = y0 + yscale*(ymax-DrawingUtil.CENTER_Y);
 
     writeShpRecordHeader( cnt, len );
     shpBuffer.order(ByteOrder.LITTLE_ENDIAN);   
@@ -957,13 +971,13 @@ class ShpPolyline extends ShpObject
     shpBuffer.putInt( ln.size() + close ); // total number of points
     shpBuffer.putInt( 0 ); // part 0 starts with point 0 
     for ( pt = ln.mFirst; pt != null; pt = pt.mNext ) {
-      shpBuffer.putDouble( x0+xscale*pt.x );
-      shpBuffer.putDouble( y0-yscale*pt.y );
+      shpBuffer.putDouble( x0+xscale*(pt.x-DrawingUtil.CENTER_X) );
+      shpBuffer.putDouble( y0-yscale*(pt.y-DrawingUtil.CENTER_Y) );
     }
     if ( close == 1 ) {
       pt = ln.mFirst;
-      shpBuffer.putDouble( x0+xscale*pt.x );
-      shpBuffer.putDouble( y0-yscale*pt.y );
+      shpBuffer.putDouble( x0+xscale*(pt.x-DrawingUtil.CENTER_X) );
+      shpBuffer.putDouble( y0-yscale*(pt.y-DrawingUtil.CENTER_Y) );
     }
   }
 
@@ -978,14 +992,20 @@ class ShpPolyline extends ShpObject
     if ( nrs > 0 ) {
       DrawingPointLinePath ln = lns.get(0);
       LinePoint pt = ln.mFirst;
-      initBBox( x0+xscale*pt.x, y0-yscale*pt.y );
+      double xx = x0 + xscale * (pt.x - DrawingUtil.CENTER_X);
+      double yy = y0 - yscale * (pt.y - DrawingUtil.CENTER_Y);
+      initBBox( xx, yy );
       for ( pt = pt.mNext; pt != null; pt = pt.mNext ) {
-        updateBBox( x0+xscale*pt.x, y0-yscale*pt.y );
+        xx = x0 + xscale * (pt.x - DrawingUtil.CENTER_X);
+        yy = y0 - yscale * (pt.y - DrawingUtil.CENTER_Y);
+        updateBBox( xx, yy );
       }
       for ( int k=1; k<nrs; ++k ) {
         ln = lns.get(k);
         for ( pt = ln.mFirst; pt != null; pt = pt.mNext ) {
-          updateBBox( x0+xscale*pt.x, y0-yscale*pt.y );
+          xx = x0 + xscale * (pt.x - DrawingUtil.CENTER_X);
+          yy = y0 - yscale * (pt.y - DrawingUtil.CENTER_Y);
+          updateBBox( xx, yy );
         }
       }
     }
@@ -1002,6 +1022,8 @@ class ShpSegment extends ShpObject
     super( SHP_POLYLINE, path, files );
   }
 
+  // @param x0 x-offset
+  // @param y0 y-offset
   boolean writeSegments( List<DrawingPath> sgms, float x0, float y0, float xscale, float yscale ) throws IOException
   {
     int nrs = ( sgms != null )? sgms.size() : 0;
@@ -1067,14 +1089,16 @@ class ShpSegment extends ShpObject
   private void writeShpRecord( int cnt, int len, DrawingPath sgm, float x0, float y0, float xscale, float yscale )
   {
     double xmin, ymin, xmax, ymax;
-    xmin = xmax =  sgm.x1;
-    ymin = ymax = -sgm.y1;
-    if (  sgm.x2 < xmin ) { xmin =  sgm.x2; } else if (  sgm.x2 > xmax ) { xmax =  sgm.x2; }
-    if ( -sgm.y2 < ymin ) { ymin = -sgm.y2; } else if ( -sgm.y2 > ymax ) { ymax = -sgm.y2; }
-    xmin = x0 + xscale*xmin;
-    xmax = x0 + xscale*xmax;
-    ymin = y0 + yscale*ymin;
-    ymax = y0 + yscale*ymax;
+    {
+      xmin = xmax =  sgm.x1;
+      ymin = ymax = -sgm.y1;
+      if (  sgm.x2 < xmin ) { xmin =  sgm.x2; } else if (  sgm.x2 > xmax ) { xmax =  sgm.x2; }
+      if ( -sgm.y2 < ymin ) { ymin = -sgm.y2; } else if ( -sgm.y2 > ymax ) { ymax = -sgm.y2; }
+    }
+    xmin = x0 + xscale*(xmin-DrawingUtil.CENTER_X);
+    xmax = x0 + xscale*(xmax-DrawingUtil.CENTER_X);
+    ymin = y0 + yscale*(ymin-DrawingUtil.CENTER_Y);
+    ymax = y0 + yscale*(ymax-DrawingUtil.CENTER_Y);
 
     writeShpRecordHeader( cnt, len );
     shpBuffer.order(ByteOrder.LITTLE_ENDIAN);   
@@ -1086,10 +1110,11 @@ class ShpSegment extends ShpObject
     shpBuffer.putInt( 1 ); // one part: number of parts
     shpBuffer.putInt( 2 ); // total number of points
     shpBuffer.putInt( 0 ); // part 0 starts with point 0 
-    shpBuffer.putDouble( x0+xscale*sgm.x1 );
-    shpBuffer.putDouble( y0-yscale*sgm.y1 );
-    shpBuffer.putDouble( x0+xscale*sgm.x2 );
-    shpBuffer.putDouble( y0-yscale*sgm.y2 );
+    shpBuffer.putDouble( x0+xscale*(sgm.x1-DrawingUtil.CENTER_X) );
+    shpBuffer.putDouble( y0-yscale*(sgm.y1-DrawingUtil.CENTER_Y) );
+
+    shpBuffer.putDouble( x0+xscale*(sgm.x2-DrawingUtil.CENTER_X) );
+    shpBuffer.putDouble( y0-yscale*(sgm.y2-DrawingUtil.CENTER_Y) );
   }
 
   // segment record length [word]: 4 + (48 + npt * 16)/2   [npt = 2]
@@ -1102,12 +1127,21 @@ class ShpSegment extends ShpObject
     int nrs = ( sgms != null )? sgms.size() : 0;
     if ( nrs > 0 ) {
       DrawingPath sgm = sgms.get(0);
-      initBBox(   x0+xscale*sgm.x1, y0-yscale*sgm.y1 );
-      updateBBox( x0+xscale*sgm.x2, y0-yscale*sgm.y2 );
+      double xx = x0 + xscale * ( sgm.x1 - DrawingUtil.CENTER_X );
+      double yy = y0 - xscale * ( sgm.y1 - DrawingUtil.CENTER_Y ); 
+      initBBox( xx, yy );
+      xx = x0 + xscale * ( sgm.x2 - DrawingUtil.CENTER_X );
+      yy = y0 - xscale * ( sgm.y2 - DrawingUtil.CENTER_Y ); 
+      updateBBox( xx, yy );
+
       for ( int k=1; k<nrs; ++k ) {
         sgm = sgms.get(k);
-        updateBBox( x0+xscale*sgm.x1, y0-yscale*sgm.y1 );
-        updateBBox( x0+xscale*sgm.x2, y0-yscale*sgm.y2 );
+        xx = x0 + xscale * ( sgm.x1 - DrawingUtil.CENTER_X );
+        yy = y0 - xscale * ( sgm.y1 - DrawingUtil.CENTER_Y ); 
+        updateBBox( xx, yy );
+        xx = x0 + xscale * ( sgm.x2 - DrawingUtil.CENTER_X );
+        yy = y0 - xscale * ( sgm.y2 - DrawingUtil.CENTER_Y ); 
+        updateBBox( xx, yy );
       }
     }
   }

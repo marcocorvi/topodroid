@@ -108,6 +108,7 @@ class NumStationSet
       return ( right == null )? null : right.get( name );
     }
 
+
     // initialize the subtree at this node with a distance value "p" (supposedly large)
     void initShortPathDist( float p ) 
     { 
@@ -159,6 +160,30 @@ class NumStationSet
     mStations = new ArrayList<>();
   }
 
+  NumStation getClosestStation( long type, float x, float y ) 
+  {
+    NumStation ret = null;
+    float dist2 = 16000000; // max 100 m 
+    if ( type == PlotInfo.PLOT_PLAN ) {
+      for ( NumStation st : mStations ) {
+        float d2 = (st.e-x)*(st.e-x) + (st.s-y)*(st.s-y);
+        if ( d2 < dist2 ) {
+          dist2 = d2;
+          ret = st;
+        }
+      }
+    } else if ( PlotInfo.isProfile( type ) ) {
+      for ( NumStation st : mStations ) {
+        float d2 = (st.h-x)*(st.h-x) + (st.v-y)*(st.v-y);
+        if ( d2 < dist2 ) {
+          dist2 = d2;
+          ret = st;
+        }
+      }
+    }
+    return ret;
+  }
+  
   // initialize the tree with a distance value "p" (supposedly large)
   void initShortestPath( float p ) 
   {

@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-// import android.util.Log;
+import android.util.Log;
  
 import android.content.SharedPreferences.Editor;
 
@@ -22,13 +22,6 @@ import android.content.Context;
 import java.lang.reflect.Method;
 import android.os.Build;
 import android.content.pm.PackageManager;
-/* FIXME-23 */
-import android.os.StrictMode;
-/* */
-/* FIXME-16
-import android.os.StrictMode;
-/* */
-/* FIXME-8 nothing */
 
 import android.hardware.Sensor;
 import android.widget.Button;
@@ -92,35 +85,49 @@ class TDandroid
   static boolean MustRestart = false; // whether need to restart app
   static boolean[] GrantedPermission = { false, false, false, false, false, false };
 
+  // number of times permissions are requested
+  // private static int requestTimes = 0;
+
   static void createPermissions( Context context, Activity activity )
   {
     // TDLog.Log( LOG_PERM, "create permissions" );
+    // ++ requestTimes;
+    // Log.v("DistoX-PERMS", "create perms " + requestTimes );
     MustRestart = false;
     if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.M ) return;
+    // StringBuilder sb = new StringBuilder();
+    // sb.append("Not granted" );
 
     for ( int k=0; k<NR_PERMS; ++k ) { // check whether the app has the six permissions
       // Log.v("DistoX-PERM", "Create permission " + permNames[k] );
       GrantedPermission[k] = ( context.checkSelfPermission( perms[k] ) == PackageManager.PERMISSION_GRANTED );
-      if ( ! GrantedPermission[k] && k < NR_PERMS_D ) MustRestart = true;
+      if ( ! GrantedPermission[k] && k < NR_PERMS_D ) {
+        MustRestart = true;
+        // sb.append( " " + perms[k] );
+        // if ( context.shouldShowRequestPermissionRationale( activity, perms[k] ) ) {
+        // } else {
+        //   activity.requestPermissions( new String[]{ perms[k] }, REQUEST_PERMISSIONS );
+        // }
+      }
     }
-    // Log.v("DistoXX", "FC must restart " + MustRestart );
+    // Log.v("DistoX-PERMS", "FC must restart " + MustRestart + " " + sb.toString() );
     if ( MustRestart ) { // if a permission has not been granted request it
+      // TDToast.make( "TopoDroid cannot do anything useful without" + sb.toString() );
       activity.requestPermissions( perms, REQUEST_PERMISSIONS );
+      Log.v("DistoX-PERMS", "exit 1");
       android.os.Process.killProcess( android.os.Process.myPid() );
       System.exit( 1 );
     }
   }
 
-  static boolean checkStrictMode()
+  static boolean canRun( Context context, Activity activity )
   {
-    boolean ret = true;
-    if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ) { // build version 24
-      try {
-        Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposed");
-        m.invoke( null );
-      } catch ( Exception e ) { ret = false; }
+    // if ( requestTimes < 3 ) return true;
+    if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.M ) return true;
+    for ( int k=0; k<NR_PERMS_D; ++k ) { // check whether the app has the six permissions
+      if ( context.checkSelfPermission( perms[k] ) != PackageManager.PERMISSION_GRANTED ) return false;
     }
-    return ret;
+    return true;
   }
 
   static void setButtonBackground( Button btn, BitmapDrawable drawable ) { btn.setBackground( drawable ); }
@@ -162,8 +169,6 @@ class TDandroid
     }
   }
 
-  static boolean checkStrictMode() { return true; }
-
   static void setButtonBackground( Button btn, BitmapDrawable drawable ) { btn.setBackground( drawable ); }
   static void setSeekBarBackground( SeekBar btn, BitmapDrawable drawable ) { btn.setBackground( drawable ); }
 /* */
@@ -202,8 +207,6 @@ class TDandroid
       // nothing
     }
   }
-
-  static boolean checkStrictMode() { return true; }
 
   static void setButtonBackground( Button btn, BitmapDrawable drawable ) { btn.setBackgroundDrawable( drawable ); }
   static void setSeekBarBackground( SeekBar btn, BitmapDrawable drawable ) { btn.setBackgroundDrawable( drawable ); }

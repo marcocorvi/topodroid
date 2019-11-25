@@ -32,7 +32,6 @@ import android.os.Handler;
 // /* fixme-23 */
 // import java.lang.reflect.Method;
 // import android.os.Build;
-// import android.os.StrictMode;
 
 // import android.os.Parcelable;
 // import android.os.Debug;
@@ -223,11 +222,12 @@ public class ShotWindow extends Activity
   // private TextView mSaveTextView = null;
 
   private static long    mSensorId;
-  private static long    mPhotoId;
-  private static String  mPhotoComment;
-  private static int     mPhotoCamera = PhotoInfo.CAMERA_UNDEFINED;
-  private static long    mShotId;   // photo/sensor shot id
+  // private static long    mPhotoId;
+  // private static String  mPhotoComment;
+  // private static int     mPhotoCamera = PhotoInfo.CAMERA_UNDEFINED;
+  private static long    mShotId;   // photo/sensor shot id, old shot id
   boolean mOnOpenDialog = false;
+  MediaManager mMediaManager;
 
   // ConnHandler mHandler;
 
@@ -655,7 +655,7 @@ public class ShotWindow extends Activity
   // called by ShotDialog "More" button
   void onBlockLongClick( DBlock blk )
   {
-    mShotId = blk.mId;
+    mShotId = blk.mId; // save shot id
     if ( TDLevel.overNormal ) {
       (new PhotoSensorsDialog(mActivity, this, blk ) ).show();
     } else {
@@ -727,58 +727,38 @@ public class ShotWindow extends Activity
 
   // ---------------------------------------------------------------
 
-  void askPhotoComment( )
+  void askPhotoComment( DBlock blk )
   {
-    (new PhotoCommentDialog(mActivity, this ) ).show();
+    (new PhotoCommentDialog(mActivity, this, blk.mId ) ).show();
   }
 
   /**
    * @param comment  photo comment
    * @param camera   camera type: 0 use URL, 1 use TopoDroid
    */
-  void doTakePhoto( String comment, int camera )
+  void doTakePhoto( long sid, String comment, int camera )
   {
-    mPhotoComment = comment;
-    mPhotoCamera  = camera;
-    mPhotoId = mApp_mData.nextPhotoId( TDInstance.sid );
+    mMediaManager.prepareNextPhoto( sid, comment, camera );
 
     // imageFile := PHOTO_DIR / surveyId / photoId .jpg
-    File imagefile = new File( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhotoId) ) );
     // TDLog.Log( TDLog.LOG_SHOT, "photo " + imagefile.toString() );
-    if ( mPhotoCamera == PhotoInfo.CAMERA_TOPODROID ) { // TopoDroid camera
-      new QCamCompass( this,
-                       (new MyBearingAndClino( mApp, imagefile)),
-                       // null, -1L, // drawer, pid // DO NOT USE THIS
-                       this,
-                       false, false).show();  // false = with_box, false=with_delay
+    if ( mMediaManager.isTopoDroidCamera() ) {
+      new QCamCompass( this, (new MyBearingAndClino( mApp, mMediaManager.getImagefile()) ), this, false, false).show();  // false = with_box, false=with_delay
     } else {
-      boolean ok = TDandroid.checkStrictMode();
-      // boolean ok = true;
-      // /* fixme-23 */
-      // if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ) { // build version 24
-      //   try {
-      //     Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposed");
-      //     m.invoke( null );
-      //   } catch ( Exception e ) { ok = false; }
-      // }
-      // /* */
-      if ( ok ) {
-        try {
-          Uri outfileuri = Uri.fromFile( imagefile );
-          Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
-          intent.putExtra( MediaStore.EXTRA_OUTPUT, outfileuri );
-          intent.putExtra( "outputFormat", Bitmap.CompressFormat.JPEG.toString() );
+      try {
+        Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
+        if ( intent.resolveActivity( getPackageManager() ) != null ) {
           startActivityForResult( intent, TDRequest.CAPTURE_IMAGE_SHOTWINDOW );
-        } catch ( ActivityNotFoundException e ) {
+        } else {
           TDToast.makeBad( R.string.no_capture_app );
         }
-      } else {
-        TDToast.makeBad( "NOT IMPLEMENTED YET" );
+      } catch ( ActivityNotFoundException e ) {
+        TDToast.makeBad( R.string.no_capture_app );
       }
     }
   }
 
-  void askSensor( )
+  void askSensor( DBlock blk )
   {
     mSensorId = mApp_mData.nextSensorId( TDInstance.sid );
     // TDLog.Log( TDLog.LOG_SENSOR, "sensor " + mSensorId );
@@ -847,6 +827,10 @@ public class ShotWindow extends Activity
     TopoDroidApp.mActivity.startSplitSurvey( old_sid, old_id ); // SPLIT SURVEY
   }
 
+  // @param id   shot id (actually blk.mId)
+  // @param blk  block
+  // @param status
+  // @param leg  if true delete the whole leg shots
   void doDeleteShot( long id, DBlock blk, int status, boolean leg )
   {
     mApp_mData.deleteShot( id, TDInstance.sid, status );
@@ -871,11 +855,11 @@ public class ShotWindow extends Activity
     updateDisplay( ); 
   }
 
+  // @from PhotoInserter
   public void insertPhoto( )
   {
-    // long shotid = 0;
     // FIXME TITLE has to go
-    mApp_mData.insertPhoto( TDInstance.sid, mPhotoId, mShotId, "", TDUtil.currentDate(), mPhotoComment, mPhotoCamera );
+    mApp_mData.insertPhoto( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getShotId(), "", TDUtil.currentDate(), mMediaManager.getComment(), mMediaManager.getCamera() );
     // FIXME NOTIFY ? no
   }
 
@@ -897,23 +881,23 @@ public class ShotWindow extends Activity
 
   // ---------------------------------------------------------------
   @Override
-  protected void onActivityResult( int reqCode, int resCode, Intent data )
+  protected void onActivityResult( int reqCode, int resCode, Intent intent )
   {
     TDLog.Log( TDLog.LOG_DEBUG, "on Activity Result: request " + reqCode + " result " + resCode );
     switch ( reqCode ) {
       case TDRequest.CAPTURE_IMAGE_SHOTWINDOW:
         // mApp.resetLocale(); // FIXME-LOCALE
         if ( resCode == Activity.RESULT_OK ) { // RESULT_OK = -1 (0xffffffff)
-          // (new PhotoCommentDialog(this, this) ).show();
-          insertPhoto();
-        // } else {
-          // mApp_mData.deletePhoto( TDInstance.sid, mPhotoId );
+          // (new PhotoCommentDialog(this, this, mShotId) ).show();
+          Bundle extras = intent.getExtras();
+          Bitmap bitmap = (Bitmap) extras.get("data");
+          mMediaManager.savePhoto( bitmap, 90 ); // compression = 90
         }
         break;
       case TDRequest.SENSOR_ACTIVITY_SHOTWINDOW:
       // case TDRequest.EXTERNAL_ACTIVITY:
         if ( resCode == Activity.RESULT_OK ) {
-          Bundle extras = data.getExtras();
+          Bundle extras = intent.getExtras();
           if ( extras != null ) {
             String type  = extras.getString( TDTag.TOPODROID_SENSOR_TYPE );
             String value = extras.getString( TDTag.TOPODROID_SENSOR_VALUE );
@@ -958,6 +942,8 @@ public class ShotWindow extends Activity
     mActivity = this;
     mOnOpenDialog = false;
     mSurveyAccuracy = new SurveyAccuracy( ); 
+
+    mMediaManager = new MediaManager( mApp_mData );
 
     // FIXME-28
     // RecyclerView rv = (RecyclerView) findViewById( R.id.recycler_view );
@@ -1065,6 +1051,7 @@ public class ShotWindow extends Activity
     if ( mDataDownloader != null ) {
       mApp.registerLister( this );
     }
+
 
     // mSearch = new SearchResult();
   }

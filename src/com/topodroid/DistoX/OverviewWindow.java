@@ -676,7 +676,8 @@ public class OverviewWindow extends ItemDrawer
         String origin = mNum.getOriginStation();
         station = TDExporter.getGeolocalizedStation( mSid, mData, 1.0f, true, origin );
        }
-       (new ExportPlotToFile( this, mNum, manager, mType, fullname, ext, true, station )).execute();
+       SurveyInfo info = mData.selectSurveyInfo( mSid );
+       (new ExportPlotToFile( this, info, mNum, manager, mType, fullname, ext, true, station )).execute();
      }
    }
 

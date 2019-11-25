@@ -124,6 +124,7 @@
     <string name="device_none">无可供选择DistoX设备</string>
     <!-- UNUSED string name="device_paired">Device is paired</string -->
     <string name="device_reset">重置 DistoX 内存</string>
+    <!-- TODO string name="device_clear">Clear DistoX memory</string -->
     <string name="device_code">DistoX 代码 %1$4d</string>
     <string name="device_firmware">固件  %1$d.%2$d</string>
     <string name="device_hardware">硬件  %1$d.%2$d</string>
@@ -179,6 +180,7 @@
     <string name="import_calib_no_data">校准-无文件</string>
     <string name="import_calib_io_error">校准文件: 读取错误</string>
     <string name="import_zip_ok">成功导入zip文件</string>
+    <!-- TODO string name="import_zip_newer">Imported zip from more recent version</string -->
     <!-- UNUSED string name="import_zip_wait">Imported zip file may take long. Please wait &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Saving sketch &#8230; please wait &#8230;</string -->
     <string name="MT_points_none">无GPS坐标点</string>
@@ -410,7 +412,7 @@
     <!-- UNUSED string name="not_implemented">Not implemented yet</string -->
     <string name="null_bitmap">不能新建图片 [OOM error]</string>
     <string name="photo">照片</string>
-    <string name="photo_camera">相机应用</string>
+    <!-- TODO string name="photo_camera">TopoDroid camera</string -->
     <string name="photo_comment_prompt">输入相片注释</string>
     <string name="photo_azimuth_clino">方位角: %1$.1f 倾角 %2$.1f</string>
     <!-- UNUSED string name="photo_name">station/name</string -->
@@ -650,6 +652,7 @@
     <string name="button_clear"     >清除     </string>
     <string name="button_clear_day" >清除 1天  </string>
     <string name="button_clear_week">清除 1周  </string>
+    <!-- TODO string name="button_clear_memory">Clear memory</string -->
     <string name="button_save"      >保存      </string>
     <!-- UNUSED string name="button_select"    >Select    </string -->
     <string name="button_search"    >搜索    </string>
@@ -975,15 +978,16 @@
   <string name="pref_cat_import_export">输入输出</string>
   <string name="pref_cat_exportimport">输入</string>
 <!-- DO NOT TRANSLATE THESE
-  <string name="pref_cat_exportsvx" translatable="false">Survex</string>
-  <string name="pref_cat_exportth"  translatable="false">Therion</string>
-  <string name="pref_cat_exportdat" translatable="false">Compass</string>
-  <string name="pref_cat_exporttro" translatable="false">VisualTopo</string>
-  <string name="pref_cat_exportsvg" translatable="false">SVG</string>
-  <string name="pref_cat_exportdxf" translatable="false">DXF</string>
-  <string name="pref_cat_exportpng" translatable="false">PNG</string>
-  <string name="pref_cat_exportkml" translatable="false">KML/GeoJSON</string>
-  <string name="pref_cat_exportcsv" translatable="false">CSV</string>
+  <string name="pref_cat_exportsvx">Survex</string>
+  <string name="pref_cat_exportth" >Therion</string>
+  <string name="pref_cat_exportdat">Compass</string>
+  <string name="pref_cat_exporttro">VisualTopo</string>
+  <string name="pref_cat_exportsvg">SVG</string>
+  <string name="pref_cat_exportdxf">DXF</string>
+  <string name="pref_cat_exportshp">Shapefile</string>
+  <string name="pref_cat_exportpng">PNG</string>
+  <string name="pref_cat_exportkml">KML/GeoJSON</string>
+  <string name="pref_cat_exportcsv">CSV</string>
 -->
 
   <string name="pref_cat_calib">校准</string>
@@ -1229,6 +1233,8 @@
   <!-- UNUSED string name="pref_dxf_scale_summary">DXF sketch scale factor</string -->
   <string name="pref_dxf_blocks_title">DXF 副线端点</string>
   <string name="pref_dxf_blocks_summary">DXF 副线端点</string>
+  <!-- TODO string name="pref_shp_georef_title">Georeferenced sketch plan export</string -->
+  <!-- TODO string name="pref_shp_georef_summary">Sketch plan exported in WGS84 long-lat</string -->
   <string name="pref_thumbnail_title">缩略图尺寸</string>
   <string name="pref_thumbnail_summary">照片缩略图尺寸</string>
   <string name="pref_shot_timer_title">测线方向计时器</string>

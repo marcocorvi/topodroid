@@ -477,9 +477,6 @@ public class MainWindow extends Activity
     TopoDroidApp.mActivity = this;
     mApp_mData       = TopoDroidApp.mData;
     // mApp_mCosurvey   = TopoDroidApp.mCosurvey; // IF_COSURVEY
-    mApp_mCheckPerms = TopoDroidApp.mCheckPerms;
-
-    TDandroid.createPermissions( mApp, mActivity );
 
     // mArrayAdapter = new ArrayAdapter<>( this, R.layout.message );
     mArrayAdapter = new ListItemAdapter( this, R.layout.message );
@@ -514,7 +511,23 @@ public class MainWindow extends Activity
     // setActionBar( mToolbar );
     // resetToolbar();
 
+    // if ( ! TDandroid.canRun( this, this ) ) {
+    //   Log.v("DistoX-PERMS", "cannot run");
+    //   TopoDroidAlertDialog.makeAlert( this, getResources(), "Required Permissions not granted", 
+    //     new DialogInterface.OnClickListener() {
+    //       @Override
+    //       public void onClick( DialogInterface dialog, int btn ) { 
+    //         Log.v("DistoX-PERMS", "create perms");
+    //         TDandroid.createPermissions( mApp, mActivity );
+    //       }
+    //     } );
+    // } 
+
+    mApp_mCheckPerms = TopoDroidApp.mCheckPerms;
+    TDandroid.createPermissions( mApp, mActivity );
+
     if ( mApp_mCheckPerms != 0 ) {
+      // Log.v("DistoX-PERMS", "check perms " + mApp_mCheckPerms );
       new TopoDroidPerms( this, mApp_mCheckPerms ).show();
       if ( mApp_mCheckPerms < 0 ) finish();
     } else {
@@ -531,7 +544,7 @@ public class MainWindow extends Activity
           // tda.setOnCancelListener( this );
           // tda.setOnDismissListener( this );
           // tda.show();
-	}
+        }
       }
     }
 
@@ -889,17 +902,23 @@ public class MainWindow extends Activity
   }
 
   /* FIXME-23 */
+  // this is called only for androidx.appcompat.app.AppCompatActivity so it is pretty useless
   @Override
   public void onRequestPermissionsResult( int code, final String[] perms, int[] results )
   {
+    Log.v("DistoX-PERM", "MAIN perm request result " + results.length );
     // TDLog.Log(TDLog.LOG_PERM, "MAIN req code " + code + " results length " + results.length );
     if ( code == TDandroid.REQUEST_PERMISSIONS ) {
       if ( results.length > 0 ) {
 	for ( int k = 0; k < results.length; ++ k ) {
 	  TDandroid.GrantedPermission[k] = ( results[k] == PackageManager.PERMISSION_GRANTED );
-	  // Log.v("DistoXX", "MAIN perm " + k + " perms " + perms[k] + " result " + results[k] );
+	  // Log.v("DistoX-PERM", "MAIN perm " + k + " perms " + perms[k] + " result " + results[k] );
 	}
       }
+      // if ( ! TDandroid.canRun( this, this ) ) {
+      //   // Log.v("DistoX-PERM", "MAIN perm cannot run");
+      //   // TELL THE USER TDToast.make("Cannot run");
+      // }
     }
     // Log.v("DistoXX", "MAIN must restart " + TDandroid.MustRestart );
     // if ( ! TDandroid.MustRestart ) {

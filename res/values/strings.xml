@@ -413,7 +413,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="not_implemented">Not implemented yet</string -->
     <string name="null_bitmap">Cannot create image [OOM error]</string>
     <string name="photo">photo</string>
-    <string name="photo_camera">Camera App</string>
+    <string name="photo_camera">TopoDroid camera</string>
     <string name="photo_comment_prompt">Enter the photo comment</string>
     <string name="photo_azimuth_clino">Azimuth: %1$.1f Clino %2$.1f</string>
     <!-- UNUSED string name="photo_name">station/name</string -->

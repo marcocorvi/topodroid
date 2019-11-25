@@ -18,31 +18,32 @@ class TDConst
   static final int DISTOX_EXPORT_NONE = -1;
   static final int DISTOX_EXPORT_TH  = 0;
   static final int DISTOX_EXPORT_TLX = 1;
-  static final int DISTOX_EXPORT_DAT = 2;
-  static final int DISTOX_EXPORT_SVX = 3;
-  static final int DISTOX_EXPORT_TRO = 4;
+  static final int DISTOX_EXPORT_DAT = 2; // Compass     DatFile
+  static final int DISTOX_EXPORT_SVX = 3; // Survex      SvxFile
+  static final int DISTOX_EXPORT_TRO = 4; // VisualTopo  TroFile
   static final int DISTOX_EXPORT_CSV = 5;
   static final int DISTOX_EXPORT_DXF = 6;
-  static final int DISTOX_EXPORT_CSX = 7;
-  static final int DISTOX_EXPORT_TOP = 8;
-  static final int DISTOX_EXPORT_SRV = 9;
-  static final int DISTOX_EXPORT_KML = 10;
-  static final int DISTOX_EXPORT_PLT = 11;
+  static final int DISTOX_EXPORT_CSX = 7; // cSurvey     CsxFile
+  static final int DISTOX_EXPORT_TOP = 8; // PocketTopo  TopFile
+  static final int DISTOX_EXPORT_SRV = 9; // Walls       SrvFile
+  static final int DISTOX_EXPORT_KML = 10; //Keyhole     KmlFile
+  static final int DISTOX_EXPORT_PLT = 11; // track file PltFile
 
   static final int DISTOX_EXPORT_PNG = 12;
   static final int DISTOX_EXPORT_SVG = 13;
   static final int DISTOX_EXPORT_TH2 = 14;
   static final int DISTOX_EXPORT_TH3 = 15;
 
-  static final int DISTOX_EXPORT_PLG = 16; // Polygon
-  static final int DISTOX_EXPORT_CAV = 17; // Topo
+  static final int DISTOX_EXPORT_PLG = 16; // Polygon   CaveFile
+  static final int DISTOX_EXPORT_CAV = 17; // Topo      CavFile
   static final int DISTOX_EXPORT_GRT = 18; // Grottolf
-  static final int DISTOX_EXPORT_GTX = 19; // GHTopo
-  static final int DISTOX_EXPORT_SUR = 20; // WinKarst
-  static final int DISTOX_EXPORT_TRB = 21; // TopoRobot
-  static final int DISTOX_EXPORT_JSON = 22; // GeoJSON
-  static final int DISTOX_EXPORT_SHP = 23; // Shapefile
-  static final int DISTOX_EXPORT_XVI = 24; // Shapefile
+  static final int DISTOX_EXPORT_GTX = 19; // GHTopo    GtxFile
+  static final int DISTOX_EXPORT_SUR = 20; // WinKarst  SurFile
+  static final int DISTOX_EXPORT_TRB = 21; // TopoRobot TrbFile
+  static final int DISTOX_EXPORT_JSON = 22; // GeoJSON  JsonFile
+  static final int DISTOX_EXPORT_SHP = 23; // Shapefile ShpFile
+  static final int DISTOX_EXPORT_XVI = 24; // xtherion  XviFile
+  static final int DISTOX_EXPORT_TNL = 25; // Tunnel    TnlFile
 
   static final int DISTOX_EXPORT_ZIP = 30;
 
@@ -97,7 +98,8 @@ class TDConst
       "SVG",
       "SHP",
       "PNG",
-      "XVI"
+      "XVI",
+      "Tunnel"
   };
   static final private int[] mPlotExportIndex = {
     DISTOX_EXPORT_TH2,
@@ -106,7 +108,8 @@ class TDConst
     DISTOX_EXPORT_SVG,
     DISTOX_EXPORT_SHP,
     DISTOX_EXPORT_PNG,
-    DISTOX_EXPORT_XVI
+    DISTOX_EXPORT_XVI,
+    DISTOX_EXPORT_TNL
   };
 
   static final String[] mOverviewExportTypes = {

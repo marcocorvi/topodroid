@@ -34,21 +34,22 @@ import java.io.IOException;
 
 class DrawingShp
 {
+  
   // @param basepath   TopoDroid/shp/survey-plot
   // @return true if successful
   static boolean write( String basepath, DrawingCommandManager plot, long type, GeoReference station )
   {
-    float scale = 1.0f/DrawingUtil.SCALE_FIX; // TDSetting.mDxfScale; 
+
     File dir   = null;
     float xoff = 0;
     float yoff = 0;
-    float xscale = scale;
-    float yscale = scale;
+    float xscale = ShpObject.SCALE;
+    float yscale = ShpObject.SCALE;
     if ( station != null ) {
       xoff = station.e;
       yoff = station.s;
-      xscale = scale * station.eradius;
-      yscale = scale * station.sradius;
+      xscale = ShpObject.SCALE * station.eradius;
+      yscale = ShpObject.SCALE * station.sradius;
     }
 
     try {

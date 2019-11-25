@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-// import android.util.Log;
+import android.util.Log;
 
 import java.io.FileWriter;
 import java.io.BufferedWriter;
@@ -24,6 +24,7 @@ import android.os.AsyncTask;
 class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
 {
     private final DrawingCommandManager mCommand;
+    private final SurveyInfo mInfo;
     private final DistoXNum mNum;
     private long mType;
     private String mFullName; // "survey-plotX" name ;
@@ -34,12 +35,14 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     private String mFormat;
     private GeoReference mStation;
 
-    ExportPlotToFile( Context context, DistoXNum num, /* DrawingUtil util, */ DrawingCommandManager command,
+    ExportPlotToFile( Context context, SurveyInfo info,
+                      DistoXNum num, /* DrawingUtil util, */ DrawingCommandManager command,
                       long type, String name, String ext, boolean toast, GeoReference station )
     {
       // Log.v("DistoX", "export plot to file cstr. " + name );
       // FIXME assert( ext != null );
       mFormat   = context.getResources().getString(R.string.saved_file_1);
+      mInfo     = info;
       mCommand  = command;
       // mUtil     = util;
       mNum      = num;
@@ -53,7 +56,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     @Override
     protected Boolean doInBackground(Void... arg0)
     {
-      // Log.v("DistoX", "export plot to file in bkgr. ext " + mExt );
+      // Log.v("DistoX-EXPORT", "export plot to file in bkgr. ext " + mExt );
       try {
         if ( mExt.equals("dxf") ) {
           filename = TDPath.getDxfFileWithExt( mFullName );
@@ -63,6 +66,8 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
           filename = TDPath.getShpBasepath( mFullName );
         } else if ( mExt.equals("xvi") ) {
           filename = TDPath.getXviFileWithExt( mFullName );
+        } else if ( mExt.equals("xml") ) {
+          filename = TDPath.getTnlFileWithExt( mFullName );
 	} else { // unexpected extension
 	  return false;
         }
@@ -86,6 +91,8 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
               }
             } else if ( mExt.equals("xvi") ) {
               DrawingXvi.write( bw, mNum, /* mUtil, */ mCommand, mType );
+            } else if ( mExt.equals("xml") ) {
+              (new DrawingTunnel()).write( bw, mInfo, mNum, /* mUtil, */ mCommand, mType );
             }
             fw.flush();
             fw.close();

@@ -79,8 +79,8 @@ class ShotNewDialog extends MyDialog
   private Button   mBtnSave;
   private Button   mBtnBack;
   private Button   mBtnSensor;
-  private Button   mBtnCamera = null;
-  private byte[] mJpegData = null; // camera jpeg data
+  private Button   mBtnCamera = null; // TopoDroid camera button
+  private byte[] mJpegData = null;    // camera jpeg data
 
   private static boolean mLRUDatTo = false;
   private boolean sensorCheck = false;
@@ -531,8 +531,7 @@ class ShotNewDialog extends MyDialog
       mTimer = new TimerTask( this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
       mTimer.execute();
     } else if ( cameraCheck && b == mBtnCamera ) {
-      new QCamCompass( mContext, this, /* null, -1L, */ null, true, true).show();
-                       // null drawer, -1 pid // DO NOT USE THIS
+      new QCamCompass( mContext, this, null, true, true).show();
                        // null inserter, with_box, with_delay
     } else if ( b == mBtnBack ) {
       dismiss();

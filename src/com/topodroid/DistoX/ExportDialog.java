@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 // import android.app.Dialog;
 // import android.app.Activity;
 import android.os.Bundle;
@@ -28,8 +30,6 @@ import android.view.View;
 // import android.view.View.OnKeyListener;
 // import android.view.KeyEvent;
 // import android.view.ViewGroup.LayoutParams;
-
-// import android.util.Log;
 
 class ExportDialog extends MyDialog
                    implements AdapterView.OnItemSelectedListener
@@ -85,7 +85,7 @@ class ExportDialog extends MyDialog
   @Override
   public void onClick(View v) 
   {
-    // Log.v("DistoX", "Selected " + mSelected );
+    // Log.v("DistoX-EXPORT", "Selected " + mSelected );
     Button b = (Button)v;
     if ( b == mBtnOk && mSelected != null ) {
       mParent.doExport( mSelected );

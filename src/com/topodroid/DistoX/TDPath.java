@@ -35,35 +35,36 @@ class TDPath
   final static String CSN = ".csn";  // CaveSniper
   final static String CSV = ".csv";
   final static String CSX = ".csx";
-  final static String CAVE = ".cave";
-  final static String CAV = ".cav";
+  final static String CAVE = ".cave"; // Polygon
+  final static String CAV = ".cav"; // Topo
   final static String DAT = ".dat";
-  final static String GRT = ".grt";
-  final static String GTX = ".gtx";
+  final static String GRT = ".grt"; // Grottolf
+  final static String GTX = ".gtx"; // GHTopo
   final static String DXF = ".dxf";
   final static String KML = ".kml";
   final static String JSON = ".json";
-  final static String PLT = ".plt";
+  final static String PLT = ".plt"; // trackfile
   final static String PNG = ".png";
   final static String SHP = ".shp"; // shapefile
   final static String SHX = ".shx";
   final static String DBF = ".dbf";
   final static String SHZ = ".shz"; // shapefile zip
-  final static String SRV = ".srv";
-  final static String SUR = ".sur";
+  final static String SRV = ".srv"; // Walls
+  final static String SUR = ".sur"; // WinKarst
   final static String SVG = ".svg";
-  final static String SVX = ".svx";
+  final static String SVX = ".svx"; // Survex
   final static String TDR = ".tdr";
   final static String TDR3 = ".tdr3";
   final static String TH  = ".th";
   final static String TH2 = ".th2";
   final static String TH3 = ".th3";
   final static String TMP = ".tmp";
-  final static String TOP = ".top";
-  final static String TRB = ".trb";
-  final static String TRO = ".tro";
+  final static String TNL = ".xml"; // Tunnel XML
+  final static String TOP = ".top"; // PockeTopo
+  final static String TRB = ".trb"; // TopoRobot
+  final static String TRO = ".tro"; // VisualTopo
   final static String TXT = ".txt";
-  final static String XVI = ".xvi";
+  final static String XVI = ".xvi"; // xtherion
   final static String ZIP = ".zip";
   final static String HTML = ".html";
     
@@ -95,31 +96,32 @@ class TDPath
   private static String PATH_CSX;    //  = PATH_BASE + "csx/";   // cSurvey
   private static String PATH_DAT;    //  = PATH_BASE + "dat/";   // Compass
   private static String PATH_GRT;    //  = PATH_BASE + "grt/";   // Grottolf
-  private static String PATH_GTX;    //  = PATH_BASE + "grt/";   // Grottolf
+  private static String PATH_GTX;    //  = PATH_BASE + "gtx/";   // GHTopo
   private static String PATH_DUMP;   //  = PATH_BASE + "dump/";  // DistoX memory dumps
   private static String PATH_DXF;    //  = PATH_BASE + "dxf/";
   private static String PATH_KML;    //  = PATH_BASE + "kml/";
   private static String PATH_JSON;   //  = PATH_BASE + "json/";
-  private static String PATH_PLT;    //  = PATH_BASE + "plt/";
+  private static String PATH_PLT;    //  = PATH_BASE + "plt/";   // trackfile
   private static String APP_FOTO_PATH;   //  = PATH_BASE + "photo/";
   private static String APP_AUDIO_PATH;   //  = PATH_BASE + "audio/";
   private static String PATH_IMPORT; //  = PATH_BASE + "import/";
   private static String APP_NOTE_PATH;   //  = PATH_BASE + "note/";
   private static String PATH_PNG;    //  = PATH_BASE + "png/";
-  private static String PATH_SHP;    //  = PATH_BASE + "shp/";
-  private static String PATH_SRV;    //  = PATH_BASE + "srv/";
-  private static String PATH_SUR;    //  = PATH_BASE + "sur/";
-  private static String PATH_SVG;    //  = PATH_BASE + "svg/";
-  private static String PATH_SVX;    //  = PATH_BASE + "svx/";
+  private static String PATH_SHP;    //  = PATH_BASE + "shp/";   // shapefile
+  private static String PATH_SRV;    //  = PATH_BASE + "srv/";   // Walls
+  private static String PATH_SUR;    //  = PATH_BASE + "sur/";   // WinKarst
+  private static String PATH_SVG;    //  = PATH_BASE + "svg/";   
+  private static String PATH_SVX;    //  = PATH_BASE + "svx/";   // Survex
   private static String PATH_TH;     //  = PATH_BASE + "th/";
   private static String PATH_TDR;    //  = PATH_BASE + "tdr/";
   private static String PATH_TDR3;   //  = PATH_BASE + "tdr3/";
   private static String PATH_TH2;    //  = PATH_BASE + "th2/";
   private static String PATH_TH3;    //  = PATH_BASE + "th3/";
   private static String APP_TMP_PATH;    //  = PATH_BASE + "tmp/";
-  private static String PATH_TOP;    //  = PATH_BASE + "top/";
-  private static String PATH_TRB;    //  = PATH_BASE + "trb/";
-  private static String PATH_TRO;    //  = PATH_BASE + "tro/";
+  private static String PATH_TNL;    //  = PATH_BASE + "tnl/";   // Tunnel
+  private static String PATH_TOP;    //  = PATH_BASE + "top/";   // PocketTopo
+  private static String PATH_TRB;    //  = PATH_BASE + "trb/";   // TopoRobot
+  private static String PATH_TRO;    //  = PATH_BASE + "tro/";   // VisualTopo
   private static String PATH_XVI;    //  = PATH_BASE + "xvi/";
   private static String PATH_ZIP;    //  = PATH_BASE + "zip/";
   // private static String APP_TLX_PATH ; //  = PATH_BASE + "tlx/";
@@ -199,6 +201,7 @@ class TDPath
     PATH_CSX = PATH_BASE + "csx/";      // FIXME checkDirs( PATH_CSX );
     PATH_DUMP = PATH_DEFAULT + "dump/"; // FIXME checkDirs( PATH_DUMP );
     PATH_TOP  = PATH_BASE + "top/";     // FIXME checkDirs( PATH_TOP );
+    PATH_TNL  = PATH_BASE + "tnl/";     // FIXME checkDirs( PATH_TNL );
     PATH_TH  = PATH_BASE + "th/";       // FIXME checkDirs( PATH_TH );
     PATH_TDR = PATH_BASE + "tdr/";      checkDirs( PATH_TDR );
     PATH_TH2 = PATH_BASE + "th2/";      checkDirs( PATH_TH2 );
@@ -338,6 +341,7 @@ class TDPath
   static String getTh2File( String name )    { return PATH_TH2 + name; }
   static String getTh3File( String name )    { return PATH_TH3 + name; }
   static String getTopFile( String name )    { return PATH_TOP + name; }
+  static String getTnlFile( String name )    { return PATH_TNL + name; }
   static String getTrbFile( String name )    { return PATH_TRB + name; }
   static String getTroFile( String name )    { return PATH_TRO + name; }
   static String getXviFile( String name )    { return PATH_XVI + name; }
@@ -361,6 +365,7 @@ class TDPath
   // static String getSurveyPlotHtmFile( String survey, String name ) { return PATH_SVG + survey + "-" + name + HTML ; }
   static String getSurveyPlotTdrFile( String survey, String name ) { return PATH_TDR + survey + "-" + name + TDR ; }
   static String getSurveyPlotTh2File( String survey, String name ) { return PATH_TH2 + survey + "-" + name + TH2 ; }
+  static String getSurveyPlotTnlFile( String survey, String name ) { return PATH_TNL + survey + "-" + name + TNL ; }
   static String getSurveyPlotPngFile( String survey, String name ) { return PATH_PNG + survey + "-" + name + PNG ; }
   static String getSurveyPlotXviFile( String survey, String name ) { return PATH_XVI + survey + "-" + name + XVI ; }
   static String getSurveyPlotCsxFile( String survey, String name ) { return PATH_CSX + survey + "-" + name + CSX ; }
@@ -389,6 +394,7 @@ class TDPath
   static String getTdrFileWithExt( String name ) { return getFile( PATH_TDR, name, TDR ); }
   static String getTdr3FileWithExt( String name ) { return getFile( PATH_TDR3, name, TDR3 ); }
   static String getTh2FileWithExt( String name ) { return getFile( PATH_TH2, name, TH2 ); }
+  static String getTnlFileWithExt( String name ) { return getFile( PATH_TNL, name, TNL ); }
   static String getTh3FileWithExt( String name ) { return getFile( PATH_TH3, name, TH3 ); }
   static String getDxfFileWithExt( String name ) { return getFile( PATH_DXF, name, DXF ); }
   static String getSvgFileWithExt( String name ) { return getFile( PATH_SVG, name, SVG ); }
@@ -576,6 +582,7 @@ class TDPath
     TDUtil.deleteFile( getSvxFile( survey + SVX ) );
     TDUtil.deleteFile( getThFile(  survey + TH  ) );
     TDUtil.deleteFile( getTopFile( survey + TOP ) );
+    // TDUtil.deleteFile( getTnlFile( survey + TNL ) );
     TDUtil.deleteFile( getTrbFile( survey + TRB ) );
     TDUtil.deleteFile( getTroFile( survey + TRO ) );
   }

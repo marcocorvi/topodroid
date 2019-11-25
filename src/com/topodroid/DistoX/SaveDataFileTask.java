@@ -84,7 +84,7 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
         case TDConst.DISTOX_EXPORT_CAV: // Topo
           filename = TDExporter.exportSurveyAsCav( mSid, mData, mInfo, TDPath.getSurveyCavFile( mSurvey ) );
           break;
-        case TDConst.DISTOX_EXPORT_DAT:
+        case TDConst.DISTOX_EXPORT_DAT: // Compass
           filename = TDExporter.exportSurveyAsDat( mSid, mData, mInfo, TDPath.getSurveyDatFile( mSurvey ) );
           break;
         case TDConst.DISTOX_EXPORT_DXF:
@@ -129,10 +129,10 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
           // TDToast.make( "WARNING WinKarst export is untested" );
           filename = TDExporter.exportSurveyAsSur( mSid, mData, mInfo, TDPath.getSurveySurFile( mSurvey ) );
           break;
-        case TDConst.DISTOX_EXPORT_SVX:
+        case TDConst.DISTOX_EXPORT_SVX: // Survex
           filename = TDExporter.exportSurveyAsSvx( mSid, mData, mInfo, mDevice, TDPath.getSurveySvxFile( mSurvey ) );
           break;
-        case TDConst.DISTOX_EXPORT_TRO:
+        case TDConst.DISTOX_EXPORT_TRO: // VisualTopo
           filename = TDExporter.exportSurveyAsTro( mSid, mData, mInfo, TDPath.getSurveyTroFile( mSurvey ) );
           break;
         case TDConst.DISTOX_EXPORT_TRB: // TopoRobot
