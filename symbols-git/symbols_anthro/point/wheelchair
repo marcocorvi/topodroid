@@ -1,0 +1,23 @@
+symbol point
+name wheelchair
+name-pt cadeira_de_rodas
+th_name u:wheelchair
+orientation no
+color 0xffffff
+csurvey 6 6 80
+path
+  moveTo 8 7
+  lineTo 4 1
+  lineTo 0 1
+  lineTo -2 -4
+
+  moveTo 3 -2
+  lineTo -1 -2
+
+  moveTo -4 -2
+  cubicTo -7 -2 -10 4 -6 7
+  cubicTo -2 10 3 7 3 4
+
+  addCircle -2 -6 1
+endpath
+endsymbol
