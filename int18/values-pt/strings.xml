@@ -127,7 +127,7 @@
     <string name="device_none">Nenhuma DistoX selecionada</string>
     <!-- UNUSED string name="device_paired">Dispositivo pareado</string -->
     <string name="device_reset">Reiniciar memória da DistoX</string>
-    <!-- TODO string name="device_clear">Clear DistoX memory</string -->
+    <string name="device_clear">Limpar memória da DistoX</string>
     <string name="device_code">Código da DistoX %1$4d</string>
     <string name="device_firmware">Firmware  %1$d.%2$d</string>
     <string name="device_hardware">Hardware  %1$d.%2$d</string>
@@ -182,7 +182,7 @@
     <string name="import_calib_no_data">Arquivo de calibração: nenhuma informação</string>
     <string name="import_calib_io_error">Arquivo de calibração: erro na leitura</string>
     <string name="import_zip_ok">Arquivo zip importado com sucesso</string>
-    <!-- TODO string name="import_zip_newer">Imported zip from more recent version</string -->
+    <string name="import_zip_newer">Arquivo zip importado da versão mais recente</string>
     <!-- UNUSED string name="import_zip_wait">A importação do arquivo zip pode demorar. Aguarde &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Salvando croqui &#8230; por favor espere &#8230;</string -->
     <string name="MT_points_none">Nenhum ponto MobileTopographer</string>
@@ -405,7 +405,7 @@
     <!-- UNUSED string name="not_implemented">Não implementado</string -->
     <string name="null_bitmap">Impossível criar imagem [OOM error]</string>
     <string name="photo">foto</string>
-    <!-- TODO string name="photo_camera">TopoDroid camera</string -->
+    <string name="photo_camera">Câmera do TopoDroid</string>
     <string name="photo_comment_prompt">Inserir comentário para a foto</string>
     <string name="photo_azimuth_clino">Azimute: %1$.1f Inclinação %2$.1f</string>
     <!-- UNUSED string name="photo_name">base/nome</string -->
@@ -639,7 +639,7 @@
     <string name="button_clear"     >Limpar    </string>
     <string name="button_clear_day" >Limpar 1 dia</string>
     <string name="button_clear_week">Limpar 7 dias</string>
-    <!-- TODO string name="button_clear_memory">Clear memory</string -->
+    <string name="button_clear_memory">Limpar memória</string>
     <string name="button_save"      >Salvar    </string>
     <!-- UNUSED string name="button_select"    >Selecionar    </string -->
     <string name="button_search"    >Pesquisar </string>
@@ -1213,8 +1213,8 @@
   <!-- UNUSED string name="pref_dxf_scale_summary">Fator de escala croqui DXF</string -->
   <string name="pref_dxf_blocks_title">Ponto final med. aux. DXF</string>
   <string name="pref_dxf_blocks_summary">Ponto final de medida auxiliar DXF</string>
-  <!-- TODO string name="pref_shp_georef_title">Georeferenced sketch plan export</string -->
-  <!-- TODO string name="pref_shp_georef_summary">Sketch plan exported in WGS84 long-lat</string -->
+  <string name="pref_shp_georef_title">Exportar croqui georeferenciado</string>
+  <string name="pref_shp_georef_summary">Croqui exportado em WGS84 long-lat</string>
   <string name="pref_thumbnail_title">Tamanho Thumbnails</string>
   <string name="pref_thumbnail_summary">Tamanho das fotos miniatura</string>
   <string name="pref_shot_timer_title">Temporização direção medidas</string>
