@@ -30,7 +30,7 @@ Buttons:
 <li><img src="btn_splay_group.png" > apply the station change to all splays in the group of the splay shot. It applies only to the splays with same station as the edit shot.
 Only FROM station must have been specified. (A group of splays is the set of splays between two legs)</li>
 <li><img src="btn_plan_profile.png" > restricts the display of splays to plan only or to profile only or both</li>
-<li><img src="btn_xsplay.png" > clear X-splay or H/V-splay marks for this shot. X-splays are supported by cSurvey.</li>
+<li><img src="btn_xsplay.png" > clear (or set) splay class for this splay, and possibly the previous splays.</li>
 <li><b>OK</b>: save the changes and close the dialog</li>
 <li><b>Save</b>: save the changes without closing the dialog</li>
 <li><b>More</b>: switch to the secondary <a href="page_shot_edit2.htm">edit dialog</a></li>
@@ -52,6 +52,28 @@ Long-tapping the station entry field opens the drop-down menu with the three opt
 <li>copy</li>
 <li>paste</li>
 </ul>
+
+<b>Splay classes</b><br>
+Splay classes are enabled with a "custom setting". There are four classes:
+<ul>
+<li><i>normal</i>, generic, splays. Blue</li>
+<li><i>x-section</i> splays. Green</li>
+<li><i>horizontal</i>, plan-view, splays. Dark blue</li>
+<li><i>vertical</i>, profile-view, splays. Violet</li>
+</ul>
+
+Splay claases are set with the multiselection "special actions" button.<br>
+In multiselection you can select more splays and assign them all a splay class.<br>
+If you want to set the class for a large number of splays, it is more convenient to assign the class
+to the first and the last (with multiselection), and set it to all the splays in between with the
+shot edit dialog. If you open the dialog to edit the last splay, there is a button with a cross of the 
+same color of the splay class.<br>
+If the "all splays" button is checked, when you "save" all the previous "normal" splays
+are set to the splay class.<br><p>
+
+If you tap the button it turns to the color of normal splays and upon "save" the splay cahnges to "normal".
+It the "all splays" button is checked, all the contiguous previous splays of the same class are turned to
+"normal".<br><p>
 
 
 </body>

@@ -1615,12 +1615,13 @@ public class TopoDroidApp extends Application
    * @param right    RIGHT length
    * @param up       UP length
    * @param down     DOWN length
+   * could return the long at
    */
-  void insertLRUDatStation( long at, String splay_station, float bearing, float clino,
+  long insertLRUDatStation( long at, String splay_station, float bearing, float clino,
                             String left, String right, String up, String down )
   {
-    // could return the long
-    addManualSplays( at, splay_station, left, right, up, down, bearing, false ); // horizontal=false
+    // Log.v("DistoX-LRUD", "isert LRUD " + at + " station " + splay_station );
+    return addManualSplays( at, splay_station, left, right, up, down, bearing, false, true ); // horizontal=false, true=ret +/-1;
   }
 
   /**
@@ -1635,6 +1636,7 @@ public class TopoDroidApp extends Application
     */
   long insertDuplicateLeg( String from, String to, float distance, float bearing, float clino, int extend )
   {
+    // reset current station so that the next shot does not attach to the intermediate leg
     resetCurrentOrLastStation( );
     long millis = java.lang.System.currentTimeMillis()/1000;
     distance = distance / TDSetting.mUnitLength;
@@ -1645,7 +1647,7 @@ public class TopoDroidApp extends Application
   }
 
   private long addManualSplays( long at, String splay_station, String left, String right, String up, String down,
-                                float bearing, boolean horizontal )
+                                float bearing, boolean horizontal, boolean ret_success )
   {
     long id;
     long millis = java.lang.System.currentTimeMillis()/1000;
@@ -1655,44 +1657,42 @@ public class TopoDroidApp extends Application
     float r = -1.0f;
     float u = -1.0f;
     float d = -1.0f;
+    boolean ok = false;
     if ( left != null && left.length() > 0 ) {
       try {
-        l = Float.parseFloat( left ) / TDSetting.mUnitLength;
+        l = Float.parseFloat( left ) / TDSetting.mUnitLength - calib;
       } catch ( NumberFormatException e ) {
-        TDLog.Error( "manual-shot parse error: left " + left );
+        TDLog.Error( "manual-shot parse error: left " + ((left==null)?"null":left) );
       }
-      l -= calib;
     }  
     if ( right != null && right.length() > 0 ) {
       try {
-        r = Float.parseFloat( right ) / TDSetting.mUnitLength;
+        r = Float.parseFloat( right ) / TDSetting.mUnitLength - calib;
       } catch ( NumberFormatException e ) {
-        TDLog.Error( "manual-shot parse error: right " + right );
+        TDLog.Error( "manual-shot parse error: right " + ((right==null)?"null":right) );
       }
-      r -= calib;
     }
     if ( up != null && up.length() > 0 ) {
       try {
-        u = Float.parseFloat( up ) / TDSetting.mUnitLength;
+        u = Float.parseFloat( up ) / TDSetting.mUnitLength - calib;
       } catch ( NumberFormatException e ) {
-        TDLog.Error( "manual-shot parse error: up " + up );
+        TDLog.Error( "manual-shot parse error: up " + ((up==null)?"null":up) );
       }
-      u -= calib;
     }
     if ( down != null && down.length() > 0 ) {
       try {
-        d = Float.parseFloat( down ) / TDSetting.mUnitLength;
+        d = Float.parseFloat( down ) / TDSetting.mUnitLength - calib;
       } catch ( NumberFormatException e ) {
-        TDLog.Error( "manual-shot parse error: down " + down );
+        TDLog.Error( "manual-shot parse error: down " + ((down==null)?"null":down) );
       }
-      d -= calib;
     }
 
+    extend = DBlock.EXTEND_IGNORE;
     if ( l >= 0.0f ) { // FIXME_X_SPLAY
+      ok = true;
       if ( horizontal ) { // WENS
         // extend = TDAzimuth.computeSplayExtend( 270 );
         // extend = ( TDSetting.mLRExtend )? TDAzimuth.computeSplayExtend( 270 ) : DBlock.EXTEND_UNSET;
-        extend = DBlock.EXTEND_UNSET;
         if ( at >= 0L ) {
           id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, l, 270.0f, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
           ++at;
@@ -1704,7 +1704,6 @@ public class TopoDroidApp extends Application
         if ( b < 0.0f ) b += 360.0f;
         // extend = TDAzimuth.computeSplayExtend( b );
         // extend = ( TDSetting.mLRExtend )? TDAzimuth.computeSplayExtend( b ) : DBlock.EXTEND_UNSET;
-        extend = DBlock.EXTEND_UNSET;
         // b = in360( b );
         if ( at >= 0L ) {
           id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, l, b, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
@@ -1714,12 +1713,13 @@ public class TopoDroidApp extends Application
         }
       }
       mData.updateShotName( id, TDInstance.sid, splay_station, TDString.EMPTY );
+      // Log.v("DistoX-LRUD", "insert " + id + " left " + l );
     }
     if ( r >= 0.0f ) {
+      ok = true;
       if ( horizontal ) { // WENS
         // extend = TDAzimuth.computeSplayExtend( 90 );
         // extend = ( TDSetting.mLRExtend )? TDAzimuth.computeSplayExtend( 90 ) : DBlock.EXTEND_UNSET;
-        extend = DBlock.EXTEND_UNSET;
         if ( at >= 0L ) {
           id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, r, 90.0f, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
           ++at;
@@ -1731,7 +1731,6 @@ public class TopoDroidApp extends Application
         float b = TDMath.add90( bearing );
         // extend = TDAzimuth.computeSplayExtend( b );
         // extend = ( TDSetting.mLRExtend )? TDAzimuth.computeSplayExtend( b ) : DBlock.EXTEND_UNSET;
-        extend = DBlock.EXTEND_UNSET;
         if ( at >= 0L ) {
           id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, r, b, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
           ++at;
@@ -1740,43 +1739,51 @@ public class TopoDroidApp extends Application
         }
       }
       mData.updateShotName( id, TDInstance.sid, splay_station, TDString.EMPTY );
+      // Log.v("DistoX-LRUD", "insert " + id + " right " + r );
     }
+    extend = DBlock.EXTEND_VERT;
     if ( u >= 0.0f ) {  
+      ok = true;
       if ( horizontal ) {
         if ( at >= 0L ) {
-          id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, u, 0.0f, 0.0f, 0.0f, 0L, 0.0, LegType.XSPLAY, 1 );
+          id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, u, 0.0f, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
           ++at;
         } else {
-          id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, u, 0.0f, 0.0f, 0.0f, 0L, 0.0, LegType.XSPLAY, 1 );
+          id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, u, 0.0f, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
         }
       } else {
         if ( at >= 0L ) {
-          id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, u, 0.0f, 90.0f, 0.0f, 0L, 0.0, LegType.XSPLAY, 1 );
+          id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, u, 0.0f, 90.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
           ++at;
         } else {
-          id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, u, 0.0f, 90.0f, 0.0f, 0L, 0.0, LegType.XSPLAY, 1 );
+          id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, u, 0.0f, 90.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
         }
       }
       mData.updateShotName( id, TDInstance.sid, splay_station, TDString.EMPTY );
+      // Log.v("DistoX-LRUD", "insert " + id + " up " + u );
     }
     if ( d >= 0.0f ) {
+      ok = true;
       if ( horizontal ) {
         if ( at >= 0L ) {
-          id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, d, 180.0f, 0.0f, 0.0f, 0L, 0.0, LegType.XSPLAY, 1 );
+          id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, d, 180.0f, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
           ++at;
         } else {
-          id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, d, 180.0f, 0.0f, 0.0f, 0L, 0.0, LegType.XSPLAY, 1 );
+          id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, d, 180.0f, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
         }
       } else {
         if ( at >= 0L ) {
-          id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, d, 0.0f, -90.0f, 0.0f, 0L, 0.0, LegType.XSPLAY, 1 );
+          id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, d, 0.0f, -90.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
           ++at;
         } else {
-          id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, d, 0.0f, -90.0f, 0.0f, 0L, 0.0, LegType.XSPLAY, 1 );
+          id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, d, 0.0f, -90.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
         }
       }
       mData.updateShotName( id, TDInstance.sid, splay_station, TDString.EMPTY );
+      // Log.v("DistoX-LRUD", "insert " + id + " down " + d );
     }
+    // Log.v("DistoX-LRUD", "add manual returns " + at );
+    if ( ret_success ) return (ok ? 1L : -1L);
     return at;
   }
 
@@ -1820,7 +1827,7 @@ public class TopoDroidApp extends Application
         boolean horizontal = ( Math.abs( clino ) > TDSetting.mVThreshold );
         // TDLog.Log( TDLog.LOG_SHOT, "manual-shot SID " + TDInstance.sid + " LRUD " + left + " " + right + " " + up + " " + down);
         if ( StationPolicy.mShotAfterSplays ) {
-          at = addManualSplays( at, splay_station, left, right, up, down, bearing, horizontal );
+          at = addManualSplays( at, splay_station, left, right, up, down, bearing, horizontal, false );
 
           if ( at >= 0L ) {
             id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, distance, bearing, clino, 0.0f, extend0, 0.0, LegType.NORMAL, 1 );
@@ -1845,7 +1852,7 @@ public class TopoDroidApp extends Application
           // mData.updateShotExtend( id, TDInstance.sid, DBlock.EXTEND_IGNORE, 1 );  // FIXME WHY ???
           // FIXME updateDisplay( );
 
-          addManualSplays( at, splay_station, left, right, up, down, bearing, horizontal );
+          addManualSplays( at, splay_station, left, right, up, down, bearing, horizontal, false );
         }
         ret = mData.selectShot( id, TDInstance.sid );
       }

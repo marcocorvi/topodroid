@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -1687,11 +1689,12 @@ class Scrap
           if ( BrushManager.isPointSection( pt.mPointType )  ) {
             String scrap_name = pt.getOption( "-scrap" );
             if ( scrap_name != null ) {
+              // Log.v("DistoX-SHIFT", "Shift " + scrap_name + " X-section " + xsections.size() );
               synchronized( TDPath.mXSectionsLock ) {
                 for ( DrawingOutlinePath xsection : xsections ) {
                   if ( xsection.isScrap( scrap_name ) ) {
                     xsection.mPath.shiftBy( dx, dy );
-                    break;
+                    // break;
                   }
                 }
               }

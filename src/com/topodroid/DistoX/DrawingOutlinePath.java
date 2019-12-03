@@ -27,6 +27,9 @@ class DrawingOutlinePath
     mPath  = path;
   }
 
+  // DEBUG
+  String getScrap() { return (mScrap != null )? mScrap : "none"; }
+
   boolean isScrap( String name ) { return mScrap.equals( name ); }
 
 }

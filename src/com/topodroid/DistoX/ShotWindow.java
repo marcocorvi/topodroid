@@ -609,32 +609,31 @@ public class ShotWindow extends Activity
   }
 
   // FIXME_X2_SPLAY
-  // void updateSplayLeg( int pos ) // pos = mDataAdapter pos
-  // {
-  //   DBlock blk = mDataAdapter.get(pos);
-  //   for ( ; blk != null; ) {
-  //     long leg = mApp_mData.updateSplayLeg( blk.mId, TDInstance.sid, true );
-  //     // Log.v("DistoX", "toggle splay type " + pos + " new leg " + leg );
-  //     if ( leg == LegType.NORMAL ) {
-  //       blk.setBlockType( DBlock.BLOCK_SPLAY );
-  //     } else if ( leg == LegType.XSPLAY ) {
-  //       blk.setBlockType( DBlock.BLOCK_X_SPLAY );
-  //     } else {
-  //       break;
-  //     }
-  //     // if ( blk.mView != null ) blk.mView.invalidate();
-  //     mDataAdapter.updateBlockView( blk.mId );
-  //     if ( (--pos) < 0 ) break;
-  //     blk = mDataAdapter.get(pos);
-  //   }
-  // }
+  // @param leg0   old leg type
+  // @param leg1   new leg type
+  void updateSplayLeg( int pos, long leg0, long leg1 ) // pos = mDataAdapter pos
+  {
+    Log.v("DistoX-SPLAY", "toggle splays " + leg0 + " -> " + leg1 );
+    DBlock blk = mDataAdapter.get(pos);
+    if ( blk == null || ! blk.isSplay() ) return;
+    do {
+      Log.v("DistoX-SPLAY", "toggle splay type " + pos + " is splay " + blk.isSplay() + " leg " + blk.getLegType() );
+      blk.setBlockType( (int)leg1 );
+      mApp_mData.updateShotLeg( blk.mId, TDInstance.sid, leg1 );
+      mDataAdapter.updateBlockView( blk.mId );
+      if ( (--pos) < 0 ) break;
+      blk = mDataAdapter.get(pos);
+    } while ( blk != null && blk.isSplay() && blk.getLegType() == leg0 );
+  }
 
   // FIXME_X3_SPLAY from ShotDialog
-  void updateSplayLegType( DBlock blk, int leg_type )
+  // @param leg1  new leg type
+  void updateSplayLegType( DBlock blk, long leg1 )
   {
-    int block_type = DBlock.blockOfSplayLegType[ leg_type ];
+    Log.v("DistoX-SPLAY", "update splay " + blk.mId + " leg type " + leg1 );
+    int block_type = DBlock.blockOfSplayLegType[ (int)leg1 ];
     // long leg_type = DBlock.legOfBlockType[ block_type ];
-    mApp_mData.updateShotLeg( blk.mId, TDInstance.sid, leg_type );
+    mApp_mData.updateShotLeg( blk.mId, TDInstance.sid, leg1 );
     blk.setBlockType( block_type );
     updateDisplay();
   }
@@ -781,19 +780,22 @@ public class ShotWindow extends Activity
   }
 
   // insert a manual intermediate leg
-  // called by the photo-sensor dialog
+  // called by the photo-sensor dialog only
   // return id of inserted leg
   long insertDuplicateLeg( String from, String to, float distance, float bearing, float clino, int extend )
   {
-    return mApp.insertDuplicateLeg( from, to, distance, bearing, clino, extend );
-    // updateDisplay( ); 
+    long id = mApp.insertDuplicateLeg( from, to, distance, bearing, clino, extend );
+    if  ( id >= 0L ) updateDisplay( ); 
+    return id;
   }
 
-  void insertLRUDatStation( long at, String station, float bearing, float clino,
+  boolean insertLRUDatStation( long at, String station, float bearing, float clino,
                             String left, String right, String up, String down )
   {
-    mApp.insertLRUDatStation( at, station, bearing, clino, left, right, up, down );
+    // Log.v("DistoX-LRUD", "insert LRUD " + left + "/" + right + "/" + up + "/" + down + " at " + at );
+    if ( mApp.insertLRUDatStation( at, station, bearing, clino, left, right, up, down ) < 0L ) return false;
     updateDisplay( ); 
+    return true;
   }
 
   // called by PhotoSensorDialog to split the survey

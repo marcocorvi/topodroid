@@ -453,10 +453,11 @@ class Selection
       if ( mode == Drawing.FILTER_POINT ) { type = DrawingPath.DRAWING_PATH_POINT; }
       else if ( mode == Drawing.FILTER_LINE ) { type = DrawingPath.DRAWING_PATH_LINE; }
       else if ( mode == Drawing.FILTER_AREA ) { type = DrawingPath.DRAWING_PATH_AREA; }
+      // Log.v("DistoX-SELECT", "pt " + sp.mPoint.x + " " + sp.mPoint.y + " type " + type );
       for ( SelectionBucket bucket : mBuckets ) {
         if ( bucket.contains( x, y, radius, radius ) ) {
           for ( SelectionPoint sp : bucket.mPoints ) {
-            if ( sp.type() == type && ! DrawingLevel.isLevelVisible( sp.mItem ) ) {
+            if ( sp.type() == type && DrawingLevel.isLevelVisible( sp.mItem ) ) {
               if ( sp.distance( x, y ) < radius ) sel.addPoint( sp );
             }
           }

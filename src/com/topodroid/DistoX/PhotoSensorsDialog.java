@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 // import android.app.Dialog;
 import android.os.Bundle;
 
@@ -30,8 +32,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.CheckBox;
-
-// import android.util.Log;
 
 class PhotoSensorsDialog extends MyDialog
                                 implements View.OnClickListener
@@ -239,29 +239,36 @@ class PhotoSensorsDialog extends MyDialog
     // TDLog.Log(  TDLog.LOG_INPUT, "PhotoiSensorDialog onClick() " + b.getText().toString() );
 
     if ( b == mBTlrud ) { // AT-STATION LRUD
+      float d = -1;
       long at = mBlk.mId;
       String station = null;
+      String from = null;
       if ( mRBto.isChecked() ) { // TO
         station = mBlk.mTo;
       } else if ( mRBfrom.isChecked() ) { // FROM
         station = mBlk.mFrom;
       } else { 
-	float d = -1;
 	String dstr = mETat.getText().toString().replace(',','.');
 	try { d = Float.parseFloat( dstr ); } catch ( NumberFormatException e ) { }
         // add a duplicate leg d, mBlk.mBearing, mBlk.mClino
-	String from = mBlk.mFrom;
+	from = mBlk.mFrom;
 	station = from + "-" + dstr;
-	at = mParent.insertDuplicateLeg( from, station, d, mBlk.mBearing, mBlk.mClino, mBlk.getIntExtend() );
+        // at should be -1L in this case
+        at = -1L;
       }
       if ( station != null ) {
-        // check the data
-        mParent.insertLRUDatStation( at, station, mBlk.mBearing, mBlk.mClino, 
+        // try insert intermediate LRUD
+        if ( mParent.insertLRUDatStation( at, station, mBlk.mBearing, mBlk.mClino, 
           mETleft.getText().toString().replace(',','.') ,
           mETright.getText().toString().replace(',','.') ,
           mETup.getText().toString().replace(',','.') ,
           mETdown.getText().toString().replace(',','.') 
-        );
+          ) ) {
+          if ( from != null ) {
+            // Log.v("DistoX-LRUD", "insert dup leg from " + from + " station " + station ); 
+            mParent.insertDuplicateLeg( from, station, d, mBlk.mBearing, mBlk.mClino, mBlk.getIntExtend() );
+          }
+        }
       }
       dismiss();
     // } else if ( b == mButtonPlot ) {       // PHOTO

@@ -816,7 +816,7 @@ class DrawingIO
     FileInputStream fis = null;
     DataInputStream dis = null;
 
-    // Log.v("DistoXX", "drawing I/O load outline stream " + filename + " name " + ((name == null)? "null" : name) );
+    // Log.v("DistoX-OUTLINE", "drawing I/O load outline stream " + filename + " name " + ((name == null)? "null" : name) );
     // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
     {
       try {
@@ -902,7 +902,7 @@ class DrawingIO
           } 
           if (    in_scrap && path != null 
                && ( BrushManager.isLineWallGroup( path.mLineType ) || path.hasOutline() ) ) {
-            // Log.v("DistoXX", "outline add path ... " + path.mFirst.x + " " + path.mFirst.y + " path size " + path.size()  );
+            // Log.v("DistoX-OUTLINE", "outline add path ... " + path.mFirst.x + " " + path.mFirst.y + " path size " + path.size()  );
             path.setPathPaint( BrushManager.fixedGrid100Paint );
             if ( name != null ) { // xsection outline
               surface.addXSectionOutlinePath( new DrawingOutlinePath( name, path ) );

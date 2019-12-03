@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.DataInputStream;
@@ -18,8 +20,6 @@ import java.io.DataInputStream;
 // import java.io.DataOutputStream;
 import java.io.IOException;
 // import java.io.FileNotFoundException;
-
-// import android.util.Log;
 
 class FirmwareUtils 
 {
@@ -129,13 +129,14 @@ class FirmwareUtils
   {
     int len = 0;
     switch ( fw_version ) {
-      case 21:  len = 15220; break;
-      case 22:  len = 15232; break;
-      case 23:  len = 15952; break;
-      case 24:  len = 16224; break;
-      case 25:  len = 17496; break;
-      case 240: len = 16504; break;
-      case 250: len = 17792; break;
+      case 2100: len = 15220; break;
+      case 2200: len = 15232; break;
+      case 2300: len = 15952; break;
+      case 2400: len = 16224; break;
+      case 2500: len = 17496; break;
+      case 2412: len = 16504; break;
+      case 2501: len = 17540; break;
+      case 2512: len = 17792; break;
     }
     if ( len == 0 ) return false; // bad formware version
     len /= 4; // number of int to read
@@ -150,17 +151,19 @@ class FirmwareUtils
       }
       fis.close();
     } catch ( IOException e ) {
+      // Log.v("DistoX-FW", "check " + fw_version + ": IO exception " + e.getMessage() );
       return false;
     }
-    // Log.v("DistoX", "check " + fw_version + ": " + String.format("%08x", check) );
+    // Log.v("DistoX-FW", "check " + fw_version + ": " + String.format("%08x", check) );
     switch ( fw_version ) {
-      case 21:  return ( check == 0xf58b194b );
-      case 22:  return ( check == 0x4d66d466 );
-      case 23:  return ( check == 0x6523596a );
-      case 24:  return ( check == 0x0f8a2bc1 );
-      case 25:  return ( check == 0x463c0306 );
-      case 240: return ( check == 0xfddd95a0 );
-      case 250: return ( check == 0x1ecb8dc0 );
+      case 2100: return ( check == 0xf58b194b );
+      case 2200: return ( check == 0x4d66d466 );
+      case 2300: return ( check == 0x6523596a );
+      case 2400: return ( check == 0x0f8a2bc1 );
+      case 2412: return ( check == 0xfddd95a0 ); // continuous
+      case 2500: return ( check == 0x463c0306 );
+      case 2501: return ( check == 0x20e9a198 ); // 4-calib data double beep
+      case 2512: return ( check == 0x1ecb8dc0 ); // continuous
     }
     return false;
   }

@@ -6528,10 +6528,10 @@ public class DrawingWindow extends ItemDrawer
     assert( mLastLinePath == null );
 
     mDrawingSurface.clearXSectionOutline( name );
-    // Log.v("DistoXX", "XSECTION set " + name + " on/off " + on_off + " " + x + " " + y );
+    // Log.v("DistoX-XSECTION", "XSECTION set " + name + " on/off " + on_off + " " + x + " " + y );
     if ( on_off ) {
       String tdr = TDPath.getTdrFileWithExt( name );
-      // Log.v("DistoXX", "XSECTION set " + name + " on_off " + on_off + " tdr-file " + tdr );
+      // Log.v("DistoX-XSECION", "XSECTION set " + name + " on_off " + on_off + " tdr-file " + tdr );
       mDrawingSurface.setXSectionOutline( name, tdr, x-DrawingUtil.CENTER_X, y-DrawingUtil.CENTER_Y );
     }
   }

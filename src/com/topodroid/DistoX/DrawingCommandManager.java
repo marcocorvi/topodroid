@@ -1112,11 +1112,11 @@ class DrawingCommandManager
   SelectionSet getItemsAt( float x, float y, float zoom, int mode, float size, DrawingStationSplay station_splay )
   {
     float radius = TDSetting.mCloseCutoff + size/zoom; // TDSetting.mSelectness / zoom;
-    // Log.v( "DistoX", "getItemAt " + x + " " + y + " zoom " + zoom + " mode " + mode + " size " + size + " " + radius );
     boolean legs   = (mDisplayMode & DisplayMode.DISPLAY_LEG) != 0;
     boolean splays = (mDisplayMode & DisplayMode.DISPLAY_SPLAY ) != 0;
     // boolean latest = (mDisplayMode & DisplayMode.DISPLAY_LATEST ) != 0;
     boolean stations = (mDisplayMode & DisplayMode.DISPLAY_STATION ) != 0;
+    // Log.v( "DistoX-SELECT", "getItemAt " + x + " " + y + " mode " + mode );
     return mCurrentScrap.getItemsAt( x, y, radius, mode, legs, splays, stations, station_splay );
   }
     
@@ -1299,6 +1299,7 @@ class DrawingCommandManager
     synchronized( TDPath.mXSectionsLock ) {
       mXSectionOutlines.add( path );
     }
+    // Log.v("DistoX-OUTLINE", "sections outline " + mXSectionOutlines.size() );
   }
 
   void clearXSectionOutline( String name )

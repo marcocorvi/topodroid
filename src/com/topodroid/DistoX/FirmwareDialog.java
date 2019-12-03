@@ -13,7 +13,7 @@
  */
 package com.topodroid.DistoX;
 
-// import android.util.Log;
+import android.util.Log;
 
 import java.io.File;
 // import java.io.FileInputStream;
@@ -140,8 +140,9 @@ class FirmwareDialog extends MyDialog
             TDLog.Error( "inexistent upload firmware file " + filename );
             return;    
           }
-          int fw = FirmwareUtils.readFirmwareFirmware( fp ); // gueass firmware version
+          int fw = FirmwareUtils.readFirmwareFirmware( fp ); // guass firmware version
           TDLog.LogFile( "Detected Firmware version " + fw );
+          // Log.v("DistoX-FW", "Detected Firmware version " + fw );
 	  boolean check = (fw > 0) && FirmwareUtils.firmwareChecksum( fw, fp );
           askUpload( filename, fw, check );
         }
@@ -168,8 +169,10 @@ class FirmwareDialog extends MyDialog
   // @param fw   firmware version
   private void askUpload( final String filename, int fw, boolean check )
   {
-    boolean compatible = (fw == 21 || fw == 22 || fw == 23 || fw == 24 || fw == 25 || fw == 240 || fw == 250 );
+    boolean compatible = (fw == 2100 || fw == 2200 || fw == 2300 || fw == 2400 || fw == 2500 || fw == 2412 || fw == 2501 || fw == 2512 );
     TDLog.LogFile( "FW/HW compatible " + compatible + " FW check " + check );
+    // Log.v("DistoX-FW", "FW " + fw + " compatible " + compatible + " check " + check );
+
     String title = mRes.getString( (compatible && check)? R.string.ask_upload : R.string.ask_upload_not_compatible );
     TopoDroidAlertDialog.makeAlert( mContext, mRes, title,
       new DialogInterface.OnClickListener() {
