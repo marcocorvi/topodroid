@@ -613,24 +613,67 @@ public class ShotWindow extends Activity
   // @param leg1   new leg type
   void updateSplayLeg( int pos, long leg0, long leg1 ) // pos = mDataAdapter pos
   {
-    Log.v("DistoX-SPLAY", "toggle splays " + leg0 + " -> " + leg1 );
+    // Log.v("DistoX-SPLAY", "toggle splays " + leg0 + " -> " + leg1 );
     DBlock blk = mDataAdapter.get(pos);
     if ( blk == null || ! blk.isSplay() ) return;
     do {
-      Log.v("DistoX-SPLAY", "toggle splay type " + pos + " is splay " + blk.isSplay() + " leg " + blk.getLegType() );
+      // Log.v("DistoX-SPLAY", "toggle splay type " + pos + " is splay " + blk.isSplay() + " leg " + blk.getLegType() );
       blk.setBlockType( (int)leg1 );
       mApp_mData.updateShotLeg( blk.mId, TDInstance.sid, leg1 );
       mDataAdapter.updateBlockView( blk.mId );
       if ( (--pos) < 0 ) break;
       blk = mDataAdapter.get(pos);
     } while ( blk != null && blk.isSplay() && blk.getLegType() == leg0 );
+    updateDisplay();
+  }
+
+  // assign splay classes traversing backwards: expected
+  //   V-splays from +90 to +X then -X' to -90 ... to +90
+  //   H-splays all in +/-30
+  //   X-splays from +90 to -90 and againt to +90
+  void setSplayClasses( int pos )
+  {
+    DBlock blk = null;
+    do {
+      if ( (--pos) < 0 ) return;
+      blk = mDataAdapter.get(pos);
+    } while ( blk != null && ! blk.isSplay() );
+    if ( blk == null ) return;
+
+    int flip = 0;
+    long leg1 = LegType.VSPLAY;
+    do {
+      if ( ! blk.isSplay() ) break;
+      switch ( flip ) {
+        case 0:
+          if ( blk.mClino < -60 ) flip = 1;
+          break;
+        case 1:
+          if ( blk.mClino >  60 ) flip = 2;
+          break;
+        case 2:
+          if ( Math.abs(blk.mClino) < 30 ) { flip = 3; leg1 = LegType.HSPLAY; }
+          break;
+        case 3:
+          if ( blk.mClino >  60 ) { flip = 4; leg1 = LegType.XSPLAY; }
+          break;
+      }
+      // Log.v("DistoX-SPLAY", "toggle splay type " + pos + " is splay " + blk.isSplay() + " leg " + blk.getLegType() );
+      blk.setBlockType( (int)leg1 );
+      mApp_mData.updateShotLeg( blk.mId, TDInstance.sid, leg1 );
+      mDataAdapter.updateBlockView( blk.mId );
+      if ( (--pos) < 0 ) break;
+      blk = mDataAdapter.get(pos);
+    } while ( blk != null && blk.isSplay() );
+
+    updateDisplay();
   }
 
   // FIXME_X3_SPLAY from ShotDialog
   // @param leg1  new leg type
   void updateSplayLegType( DBlock blk, long leg1 )
   {
-    Log.v("DistoX-SPLAY", "update splay " + blk.mId + " leg type " + leg1 );
+    // Log.v("DistoX-SPLAY", "update splay " + blk.mId + " leg type " + leg1 );
     int block_type = DBlock.blockOfSplayLegType[ (int)leg1 ];
     // long leg_type = DBlock.legOfBlockType[ block_type ];
     mApp_mData.updateShotLeg( blk.mId, TDInstance.sid, leg1 );

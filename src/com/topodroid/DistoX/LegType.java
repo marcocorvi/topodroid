@@ -20,4 +20,15 @@ class LegType
   static final int BACK    = 3; 
   static final int HSPLAY  = 4; // horizontal splay
   static final int VSPLAY  = 5; // vertical splay
+
+  static int nextSplayType( int type ) 
+  {
+    switch( type ) {
+      case NORMAL: return XSPLAY;
+      case XSPLAY: return HSPLAY;
+      case HSPLAY: return VSPLAY;
+      case VSPLAY: return NORMAL;
+    }
+    return INVALID;
+  }
 }

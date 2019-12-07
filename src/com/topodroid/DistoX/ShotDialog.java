@@ -101,6 +101,7 @@ class ShotDialog extends MyDialog
   private String shot_clino;     // clino    - distance
   private boolean shot_manual;
   private float shot_stretch; // FIXME_STRETCH
+
   private int set_xsplay = -1;
 
   private String shot_extra;
@@ -120,7 +121,7 @@ class ShotDialog extends MyDialog
   private static final int flagDepth    = MyKeyboard.FLAG_POINT;
 
   private boolean mFirst;
-  private int splay_type; // 0 play, 1 X, 2 H, 3 V
+  private int splay_type; // 0 plain, 2 X, 4 H, 5 V see LegType
 
   ShotDialog( Context context, ShotWindow parent, int pos, DBlock blk,
               DBlock prev, DBlock next
@@ -137,16 +138,16 @@ class ShotDialog extends MyDialog
     // TDLog.Log( TDLog.LOG_SHOT, "Shot Dialog " + blk.toString(true) );
     if ( /* TDLevel.overAdvanced && */  mBlk.isSplay() ) {
       if ( mBlk.isXSplay() ) {
-        splay_type = 1;
+        splay_type = LegType.XSPLAY;
       } else if ( mBlk.isHSplay() ) {
-        splay_type = 2;
+        splay_type = LegType.HSPLAY;
       } else if ( mBlk.isVSplay() ) {
-        splay_type = 3;
+        splay_type = LegType.VSPLAY;
       } else { // if ( mBlk.isPlainSplay() ) 
-        splay_type = 0;
+        splay_type = LegType.NORMAL;
       }
     } else {
-      splay_type = -1;
+      splay_type = LegType.INVALID;
     } 
     // Log.v("DistoX-SPLAY", "splay type " + splay_type );
   }
@@ -292,6 +293,32 @@ class ShotDialog extends MyDialog
 
 // -------------------------------------------------------------------
 
+  private void setCBxSplay( int type )
+  {
+    splay_type = type;
+    int res_splay = -1;
+    switch ( splay_type ) {
+      case LegType.NORMAL:
+        res_splay = R.drawable.iz_ysplays_plain;
+        break;
+      case LegType.XSPLAY:
+        res_splay = R.drawable.iz_ysplays_no;
+        break;
+      case LegType.HSPLAY:
+        res_splay = R.drawable.iz_ysplays_horz;
+        break;
+      case LegType.VSPLAY:
+        res_splay = R.drawable.iz_ysplays_vert;
+        break;
+    }
+    if ( res_splay > 0 ) {
+      TDandroid.setButtonBackground( mCBxSplay, MyButton.getButtonBackground( mContext, mContext.getResources(), res_splay ) );
+        // Log.v("DistoX-SPLAY", "create splay checkbox");
+    } else {
+      mCBxSplay.setVisibility( View.GONE );
+    }
+  }
+
   // @Override
   // public void onRestoreInstanceState( Bundle icicle )
   // {
@@ -393,25 +420,11 @@ class ShotDialog extends MyDialog
     //   mCBxSplay.setOnClickListener( this );
     // }
     if ( TDLevel.overAdvanced && TDSetting.mSplayClasses ) {
-      int res_splay = -1;
-      switch ( splay_type ) {
-        case 1:
-          res_splay = R.drawable.iz_ysplays_no;
-          break;
-        case 2:
-          res_splay = R.drawable.iz_ysplays_horz;
-          break;
-        case 3:
-          res_splay = R.drawable.iz_ysplays_vert;
-          break;
-      }
-      if ( splay_type > 0 ) {
-        // Log.v("DistoX-SPLAY", "create splay checkbox");
-        mCBxSplay = new MyCheckBox( mContext, size, R.drawable.iz_xsplays_ok, res_splay );
-        mCBxSplay.setOnClickListener( this );
-        nr_buttons ++;
-      }
+      mCBxSplay = new MyCheckBox( mContext, size, R.drawable.iz_xsplays_ok, R.drawable.iz_ysplays_plain );
+      mCBxSplay.setOnClickListener( this );
+      nr_buttons ++;
     }
+    setCBxSplay( splay_type );
 
     if ( TDLevel.overBasic ) {
       mCBbackLeg = new MyCheckBox( mContext, size, R.drawable.iz_backleg_ok, R.drawable.iz_backleg_no );
@@ -529,11 +542,12 @@ class ShotDialog extends MyDialog
     // boolean x_splay = (mCBxSplay != null) && mCBxSplay.isChecked();
     // Log.v("DistoX-SPLAY", "type " + splay_type + " checked " + mCBxSplay.isChecked() );
     int set_xsplay = -1;
-    if ( splay_type > 0 ) {
+    if ( splay_type >= 0 ) {
       // [1] if splay_type > 0 and now mCBxSplay is plain change splay class (possibly "all" splays of the same type) to plain
       // [0]                   otherwise change splay class to all plain splays only if "all" is set
       // [-1] else case
-      set_xsplay = ( mCBxSplay != null && mCBxSplay.isChecked() )? 0 : 1;
+      // set_xsplay = ( mCBxSplay != null && mCBxSplay.isChecked() )? 0 : splay_type;
+      set_xsplay = splay_type;
     }
     // boolean leg_next = false;
     // boolean shot_secleg = false;
@@ -627,10 +641,12 @@ class ShotDialog extends MyDialog
     if ( comment != null ) mBlk.mComment = comment.trim();
 
     boolean renumber  = false;
+    boolean splay_classes = false;
     // boolean highlight = false;
     if ( shot_from.length() > 0 ) {
       if ( shot_to.length() > 0 ) {
         renumber = mCBrenumber.isChecked();
+        if ( TDSetting.mSplayClasses ) splay_classes = all_splay;
         all_splay = false;
         set_xsplay = -1;
       // } else { // this is useless: replaced by long-tap on shot list 
@@ -646,26 +662,31 @@ class ShotDialog extends MyDialog
 
     if ( all_splay ) {
       if ( set_xsplay >= 0 ) {
-        long leg0 = LegType.NORMAL;    // old leg_type
-        long leg1 = mBlk.getLegType(); // new leg_type
-        if ( set_xsplay == 0 ) {
+        long leg0 = mBlk.getLegType(); // old leg_type: 0 plain, 2 X, 4 H, 5 V
+        long leg1 = LegType.NORMAL;    // new leg_type
+        if ( set_xsplay > 0 ) {
           leg0 = leg1;
-          leg1 = LegType.NORMAL;
+          leg1 = set_xsplay;
         }
-        // Log.v("DistoX-SPLAY", "all leg type " + leg0 + " -> " + leg1 + " " + set_xsplay );
+        // Log.v("DistoX-SPLAY", "[1] all leg type " + leg0 + " -> " + leg1 + " " + set_xsplay );
         mParent.updateSplayShots( shot_from, shot_to, extend, shot_flag, leg1, comment, mBlk );
         mParent.updateSplayLeg( mPos, leg0, leg1 );
       }
+    } else if ( splay_classes ) {
+      mParent.setSplayClasses( mPos );
+
     } else if ( set_xsplay == 0 ) {
-      long leg1 = LegType.NORMAL;
-      // Log.v("DistoX-SPLAY", "leg type " + leg1 + " " + set_xsplay );
-      mParent.updateSplayLegType( mBlk, leg1 );
+      long leg = LegType.NORMAL;
+      // Log.v("DistoX-SPLAY", "[2] leg type " + leg + " " + set_xsplay );
+      mParent.updateSplayLegType( mBlk, leg );
     } else {
       // Log.v("DistoX-SPLAY", "other " + set_xsplay );
       // mBlk.setName( shot_from, shot_to ); // done by parent.updateShot
-      long leg = mBlk.isSplay() ? mBlk.getLegType()  // HERE set_xsplay == -1
-               // : shot_secleg ? LegType.EXTRA 
-               : LegType.NORMAL ;
+      long leg = LegType.NORMAL;
+      if ( set_xsplay > 0 && mBlk.isSplay() ) {
+        leg = set_xsplay;
+      }
+      // Log.v("DistoX-SPLAY", "[3] leg type " + leg + " " + set_xsplay );
       if ( do_backleg && backleg_val ) {
         leg = LegType.BACK;
       }
@@ -731,7 +752,7 @@ class ShotDialog extends MyDialog
       // Log.v("DistoX", "CB leg clicked ");
       if ( mCBlegPrev.toggleState() ) {
         mCBallSplay.setState( false );
-        if ( mCBxSplay != null ) { mCBxSplay.setVisibility(View.GONE); splay_type= -1; } // mCBxSplay.setState( false );
+        if ( mCBxSplay != null ) setCBxSplay( -1 );
         mCBlegNext.setState( false );
       }
     } else if ( b == mCBallSplay ) {
@@ -744,16 +765,15 @@ class ShotDialog extends MyDialog
     } else if ( mCBbackLeg != null && b == mCBbackLeg ) {
       mCBbackLeg.toggleState();
     } else if ( mCBxSplay != null && b == mCBxSplay ) {
-      if ( mCBxSplay.toggleState() ) {
-        mCBallSplay.setState( false );
-        mCBlegPrev.setState( false );
-        mCBlegNext.setState( false );
-      }
+      setCBxSplay( LegType.nextSplayType( splay_type ) );
+      mCBallSplay.setState( false );
+      mCBlegPrev.setState( false );
+      mCBlegNext.setState( false );
     } else if ( b == mCBlegNext ) {
       if ( mCBlegNext.toggleState() ) {
         mCBlegPrev.setState( false );
         mCBallSplay.setState( false );
-        if ( mCBxSplay != null ) { mCBxSplay.setVisibility(View.GONE); splay_type= -1; } // mCBxSplay.setState( false );
+        if ( mCBxSplay != null ) setCBxSplay( -1 ); 
       }
 
     } else if ( mRBdup != null  && b == mRBdup ) {
@@ -797,7 +817,7 @@ class ShotDialog extends MyDialog
 
     } else if ( b == mButtonPrev ) {
       mCBallSplay.setVisibility( View.GONE );
-      if ( mCBxSplay != null ) { mCBxSplay.setVisibility(View.GONE); splay_type= -1; } // mCBxSplay.setState( false );
+      if ( mCBxSplay != null ) setCBxSplay( -1 );
       // shift:
       //               prev -- blk -- next
       // prevOfPrev -- prev -- blk
@@ -814,7 +834,7 @@ class ShotDialog extends MyDialog
 
     } else if ( b == mButtonNext ) {
       mCBallSplay.setVisibility( View.GONE );
-      if ( mCBxSplay != null ) { mCBxSplay.setVisibility(View.GONE); splay_type= -1; } // mCBxSplay.setState( false );
+      if ( mCBxSplay != null ) setCBxSplay( -1 );
       // shift:
       //        prev -- blk -- next
       //                blk -- next -- nextOfNext
