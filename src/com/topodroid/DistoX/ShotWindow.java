@@ -1294,7 +1294,7 @@ public class ShotWindow extends Activity
         
         mDataDownloader.toggleDownload();
         // setConnectionStatus( mDataDownloader.getStatus() );
-        mDataDownloader.doDataDownload( );
+        mDataDownloader.doDataDownload( DataType.SHOT );
       }
     } else if ( isButton1( b, BTN_PLOT ) ) {
       if ( TDInstance.recentPlot != null ) {
@@ -1351,7 +1351,7 @@ public class ShotWindow extends Activity
             mApp.notifyLed( mDataDownloader.toggleDownload() && mBTstatus == DataDownloader.STATUS_OFF );
             // Log.v( "DistoXDOWN", "Download, conn mode " + TDSetting.mConnectionMode + " download status " + mDataDownloader.getStatus() );
             // setConnectionStatus( mDataDownloader.getStatus() );
-            mDataDownloader.doDataDownload( );
+            mDataDownloader.doDataDownload( DataType.SHOT );
           }
 	  return;
         } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // BT RESET

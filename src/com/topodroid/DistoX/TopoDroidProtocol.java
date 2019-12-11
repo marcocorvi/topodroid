@@ -270,7 +270,7 @@ class TopoDroidProtocol
   // PACKETS I/O ------------------------------------------------------------------------
 
   // must be overridden
-  int readPacket( boolean no_timeout )
+  int readPacket( boolean no_timeout, int data_type )
   {
     return DISTOX_PACKET_NONE;
   }

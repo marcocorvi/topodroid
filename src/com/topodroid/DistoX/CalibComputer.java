@@ -26,12 +26,14 @@ class CalibComputer extends AsyncTask< String, Integer, Integer >
   private final WeakReference<GMActivity> mParent; // FIXME LEAK
   private static CalibComputer running = null;
   private final long mStartId;
+  private final int  mPolicy;   // group policy
   private final int mJob;
 
-  CalibComputer( GMActivity parent, long start, int job )
+  CalibComputer( GMActivity parent, long start, int policy, int job )
   {
     mParent  = new WeakReference<GMActivity>( parent );
     mStartId = start;
+    mPolicy  = policy;
     mJob     = job;
   }
 
@@ -47,10 +49,10 @@ class CalibComputer extends AsyncTask< String, Integer, Integer >
     if ( mJob == CALIB_RESET_GROUPS ) {
       parent.doResetGroups( mStartId );
     } else if ( mJob == CALIB_COMPUTE_GROUPS ) {
-      ret = parent.doComputeGroups( mStartId );
+      ret = parent.doComputeGroups( mStartId, mPolicy );
     } else if ( mJob == CALIB_RESET_AND_COMPUTE_GROUPS ) {
       parent.doResetGroups( mStartId );
-      ret = parent.doComputeGroups( mStartId );
+      ret = parent.doComputeGroups( mStartId, mPolicy );
     } else if ( mJob == CALIB_COMPUTE_CALIB ) {
       ret = parent.computeCalib();
     }

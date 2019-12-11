@@ -64,14 +64,14 @@ class BleComm extends TopoDroidComm
    */
   private void setConnected( boolean connected ) { mBTConnected = connected; }
 
-  private void connectBleDevice( Device device, Context context )
+  private void connectBleDevice( Device device, Context context, int data_type ) // FIXME BLE_DATA_TYPE
   {
     if ( mRemoteDevice == null ) {
       TDToast.makeBad( R.string.ble_no_remote );
     } else {
       // Log.v("DistoXBLE", "BLE comm connect remote " + mRemoteDevice.getAddress() );
       BleProtocol protocol  = new BleProtocol( this, device, context );
-      BleGattCallback callback = new BleGattCallback( protocol );
+      BleGattCallback callback = new BleGattCallback( protocol, data_type );
       mProtocol = protocol;
       mGatt = mRemoteDevice.connectGatt( context, false, callback ); // true: autoconnect as soon as the device becomes available
     }
@@ -94,8 +94,13 @@ class BleComm extends TopoDroidComm
   private class BleGattCallback extends BluetoothGattCallback
   {
     BleProtocol mProto;
+    int mDataType;
 
-    BleGattCallback( BleProtocol proto ) { mProto = proto; }
+    BleGattCallback( BleProtocol proto, int data_type ) 
+    { 
+      mProto = proto;
+      mDataType = data_type;
+    }
 
     @Override
     public void onConnectionStateChange( BluetoothGatt gatt, int status, int state )
@@ -135,7 +140,7 @@ class BleComm extends TopoDroidComm
         mReadChrt = srv.getCharacteristic( BleConst.BLE_CHAR_READ_UUID );
         mReadInitialized = gatt.setCharacteristicNotification( mReadChrt, true );
 
-        readPacket();
+        readPacket( );
       }
     }
 
@@ -159,16 +164,16 @@ class BleComm extends TopoDroidComm
           int res = mProto.handleRead( chrt );
           if ( res == 1 ) {
             ++ nReadPackets;
-            handleRegularPacket( res, mLister );
+            handleRegularPacket( res, mLister, mDataType );
           }
-          readPacket();
+          readPacket( );
         } else { 
           if ( mConnectionMode != 1 ) {
             disconnectBleGatt();
           } else if ( isConnected()  ) {
             if ( wait < 0x0400 ) wait *= 2; // max 1 sec
             Handler handler = new Handler( Looper.getMainLooper() );
-            handler.postDelayed( new Runnable() { public void run() { readPacket(); } }, wait );
+            handler.postDelayed( new Runnable() { public void run() { readPacket( ); } }, wait );
           }
         }
       }
@@ -183,7 +188,7 @@ class BleComm extends TopoDroidComm
 
   }
 
-  private boolean readPacket()
+  private boolean readPacket( )
   { 
     // Log.v("DistoXBLE", "comm read packet");
     if ( ! mBTConnected || ! mReadInitialized ) return false;
@@ -197,13 +202,13 @@ class BleComm extends TopoDroidComm
   // CONTINUOUS DATA DOWNLOAD
   private int mConnectionMode = -1;
 
-  boolean connectDevice( String address, Handler /* ILister */ lister )
+  boolean connectDevice( String address, Handler /* ILister */ lister, int data_type )
   {
     // Log.v("DistoXBLE", "comm connect device");
     mLister = lister;
     mConnectionMode = 1;
     nReadPackets = 0;
-    connectBleDevice( TDInstance.device, mApp );
+    connectBleDevice( TDInstance.device, mApp, data_type );
     return true;
   }
 
@@ -216,26 +221,26 @@ class BleComm extends TopoDroidComm
   // ON-DEMAND DATA DOWNLOAD
   private Handler mLister;
 
-  int downloadData( String address, Handler /* ILister */ lister )
+  int downloadData( String address, Handler /* ILister */ lister, int data_type )
   {
     // Log.v("DistoXBLE", "comm data downlaod");
     mConnectionMode = 0;
     mLister = lister;
     nReadPackets = 0;
-    connectBleDevice( TDInstance.device, mApp );
+    connectBleDevice( TDInstance.device, mApp, data_type );
     // nReadPackets = 0;
     // start a thread that keeps track of read packets
     // when read done stop it and return
     return 0;
   }
 
-  // protected boolean startCommThread( int to_read, Handler /* ILister */ lister ) 
+  // protected boolean startCommThread( int to_read, Handler /* ILister */ lister, int data_type ) 
   // {
   //   if ( mCommThread != null ) {
   //     TDLog.Error( "start Comm Thread already running");
   //   }
   //   // Log.v("DistoXBLE", "comm start comm thread");
-  //   mCommThread = new CommThread( TopoDroidComm.COMM_GATT, mProtocol, to_read, lister );
+  //   mCommThread = new CommThread( TopoDroidComm.COMM_GATT, mProtocol, to_read, lister, data_type );
   //   mCommThread.start();
   //   return true;
   // }

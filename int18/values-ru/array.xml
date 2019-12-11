@@ -222,7 +222,7 @@
   </string-array>
 
   <string-array name="groupBy">
-     <item name="distance">По расстоянию</item>
+     <!-- item name="distance">По расстоянию</item -->
      <item name="four">По четыре</item>
      <item name="only16">Только первые 16</item>
   </string-array>

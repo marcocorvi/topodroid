@@ -18,6 +18,7 @@ import android.content.Context;
 import android.widget.TextView;
 // import android.widget.CheckBox;
 import android.widget.Button;
+import android.widget.RadioButton;
 
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -31,6 +32,9 @@ class GMGroupsDialog extends MyDialog
   private Button mBtnReset;
   private Button mBtnOK;
   // private Button mBtnCancel;
+
+  private RadioButton mRBtd;
+  private RadioButton mRBpt;
 
   private String mPolicy;
 
@@ -57,7 +61,18 @@ class GMGroupsDialog extends MyDialog
     ( (Button) findViewById( R.id.group_cancel ) ).setOnClickListener( this );
     
     TextView policy = (TextView) findViewById( R.id.group_policy );
-    policy.setText( mPolicy );
+    if ( TDLevel.overExpert ) {
+      mRBtd = (RadioButton) findViewById( R.id.gm_policy_td );
+      mRBpt = (RadioButton) findViewById( R.id.gm_policy_pt );
+      if ( TDSetting.mGroupBy == TDSetting.GROUP_BY_ONLY_16 ) {
+        mRBpt.setChecked( true );
+      } else {
+        mRBtd.setChecked( true );
+      }
+    } else { 
+      policy.setText( mPolicy );
+      findViewById( R.id.gm_policies ).setVisibility( View.GONE );
+    }
   }
     
   @Override
@@ -65,7 +80,11 @@ class GMGroupsDialog extends MyDialog
   {
     Button b = (Button)v;
     if ( b == mBtnOK ) {
-      mParent.computeGroups( -1L );
+      int policy = TDSetting.mGroupBy;
+      if ( TDLevel.overExpert ) {
+        policy = mRBpt.isChecked() ? TDSetting.GROUP_BY_ONLY_16 : TDSetting.GROUP_BY_FOUR ;
+      }
+      mParent.computeGroups( -1L, policy );
     } else if ( b == mBtnReset ) {
       mParent.resetGroups( -1L );
     // } else if ( b == mBtnCancel ) {

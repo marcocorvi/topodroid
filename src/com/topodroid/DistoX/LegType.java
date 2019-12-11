@@ -21,7 +21,7 @@ class LegType
   static final int HSPLAY  = 4; // horizontal splay
   static final int VSPLAY  = 5; // vertical splay
 
-  static int nextSplayType( int type ) 
+  static int nextSplayClass( int type ) 
   {
     switch( type ) {
       case NORMAL: return XSPLAY;

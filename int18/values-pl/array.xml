@@ -255,7 +255,7 @@
   </string-array>
 
   <string-array name="groupBy">
-     <item name="distance">Dystans</item>
+     <!-- item name="distance">Dystans</item -->
      <item name="four">Cztery na raz</item>
      <item name="only16">Tylko pierwsze 16</item>
   </string-array>

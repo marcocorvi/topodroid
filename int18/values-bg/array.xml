@@ -231,7 +231,7 @@
   </string-array>
 
   <string-array name="groupBy">
-     <item name="distance">Разстояние</item>
+     <!-- item name="distance">Разстояние</item -->
      <item name="four">Групи по четири</item>
      <item name="only16">Само първите 16</item>
   </string-array>

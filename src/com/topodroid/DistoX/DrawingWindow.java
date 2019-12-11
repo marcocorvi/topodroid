@@ -2465,16 +2465,9 @@ public class DrawingWindow extends ItemDrawer
     if ( PlotInfo.isAnySection( mType ) )  return;
     // FIXME if ( from == null || to == null ) return;
 
-    if ( block.mFrom == null ) {
-      if (from == null) return;
-    } else {
-      if ( block.mFrom.equals(from) ) return;
-    }
-    if ( block.mTo == null ) {
-      if ( to == null ) return;
-    } else {
-      if ( block.mTo.equals( to )) return;
-    }
+    if ( from == null ) from = "";
+    if ( to   == null ) to = "";
+    if ( from.equals(block.mFrom) && to.equals( block.mTo ) ) return;
 
     block.mFrom = from;
     block.mTo   = to;
@@ -4833,7 +4826,7 @@ public class DrawingWindow extends ItemDrawer
         } else {
           mDataDownloader.toggleDownload();
           setConnectionStatus( mDataDownloader.getStatus() );
-          mDataDownloader.doDataDownload( );
+          mDataDownloader.doDataDownload( DataType.SHOT );
         }
       } else if ( TDLevel.overAdvanced && b == mButton1[ BTN_DIAL ] ) {
         if ( /* TDLevel.overAdvanced && */ mType == PlotInfo.PLOT_PLAN && TDAzimuth.mFixedExtend == 0 ) {
@@ -4964,7 +4957,7 @@ public class DrawingWindow extends ItemDrawer
         } else {
           mDataDownloader.toggleDownload();
           // setConnectionStatus( mDataDownloader.getStatus() ); // FIXME DistoXDOWN was not commenetd
-          mDataDownloader.doDataDownload( );
+          mDataDownloader.doDataDownload( DataType.SHOT );
         }
       } else if ( b == mButton1[k1++] ) { // BLUETOOTH
         doBluetooth( b, dismiss );

@@ -67,6 +67,7 @@ class TopoDroidComm
     // private long mLastShotId;   // last shot id
 
     private volatile boolean doWork = true;
+    private int mDataType;
 
     void cancelWork()
     {
@@ -79,12 +80,13 @@ class TopoDroidComm
      * @param to_read     number of data to read (use -1 to read forever until timeout or an exception)
      * @param lister      optional data lister
      */
-    CommThread( int type, TopoDroidProtocol protocol, int to_read, Handler /* ILister */ lister ) // FIXME_LISTER
+    CommThread( int type, TopoDroidProtocol protocol, int to_read, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
     {
       mType  = type;
       toRead = to_read;
       mProtocol = protocol;
-      mLister = lister;
+      mLister   = lister;
+      mDataType = data_type;
       // reset nr of read packets 
       // nReadPackets = new AtomicInteger( 0 ); // FIXME_ATOMIC_INT
       nReadPackets = 0;
@@ -106,7 +108,7 @@ class TopoDroidComm
         while ( doWork && nReadPackets /* .get() */ != toRead ) {
           // TDLog.Log( TDLog.LOG_COMM, "RF comm loop: read " + getNrReadPackets() + " to-read " + toRead );
           
-          int res = mProtocol.readPacket( toRead >= 0 );
+          int res = mProtocol.readPacket( (toRead >= 0), mDataType );
           // TDLog.Log( TDLog.LOG_COMM, "RF comm readPacket returns " + res );
           if ( res == TopoDroidProtocol.DISTOX_PACKET_NONE ) {
             if ( toRead == -1 ) {
@@ -125,11 +127,11 @@ class TopoDroidComm
             // }
             doWork = false;
           } else {
-            handleRegularPacket( res, mLister );
+            handleRegularPacket( res, mLister, mDataType );
           }
         }
       } else { // if ( mType == COMM_GATT ) 
-        mProtocol.readPacket( true ); // start reading a packet
+        mProtocol.readPacket( true, mDataType ); // start reading a packet
       }
       // TDLog.Log( TDLog.LOG_COMM, "RF comm thread run() exiting");
       mCommThread = null;
@@ -139,7 +141,7 @@ class TopoDroidComm
     }
   }
 
-  void handleRegularPacket( int res, Handler lister )
+  void handleRegularPacket( int res, Handler lister, int data_type )
   {
     if ( res == TopoDroidProtocol.DISTOX_PACKET_DATA ) {
       // nReadPackets.incrementAndGet(); // FIXME_ATOMIC_INT
@@ -300,7 +302,7 @@ class TopoDroidComm
     mProtocol = null;
   }
 
-  protected boolean startCommThread( int to_read, Handler /* ILister */ lister ) 
+  protected boolean startCommThread( int to_read, Handler /* ILister */ lister, int data_type ) 
   {
     return false;
   }
@@ -340,7 +342,7 @@ class TopoDroidComm
   // ------------------------------------------------------------------------------------
   // CONTINUOUS DATA DOWNLOAD
 
-  boolean connectDevice( String address, Handler /* ILister */ lister )
+  boolean connectDevice( String address, Handler /* ILister */ lister, int data_type )
   {
     return false;
    }
@@ -350,7 +352,8 @@ class TopoDroidComm
   // -------------------------------------------------------------------------------------
   // ON-DEMAND DATA DOWNLOAD
 
-  int downloadData( String address, Handler /* ILister */ lister )
+  // @param data_type    either shot or calib (or all)
+  int downloadData( String address, Handler /* ILister */ lister, int data_type )
   {
     return -1;
   }

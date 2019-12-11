@@ -111,7 +111,7 @@ class DeviceSelectDialog extends MyDialog
     mLister.setTheTitle();
     mDownloader.toggleDownload();
     mLister.setConnectionStatus( mDownloader.getStatus() );
-    mDownloader.doDataDownload();
+    mDownloader.doDataDownload( DataType.ALL );
   }
 
   @Override

@@ -310,7 +310,7 @@
   </string-array>
 
   <string-array name="groupBy">
-     <item name="distance">间隔</item>
+     <!-- item name="distance">间隔</item -->
      <item name="four">四个一组</item>
      <item name="only16">前16个</item>
   </string-array>

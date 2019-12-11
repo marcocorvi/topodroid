@@ -72,7 +72,7 @@ class DistoXComm extends TopoDroidComm
   }
 
   // called only by connectSocket
-  private void setupBTReceiver()
+  private void setupBTReceiver( final int data_type )
   {
     resetBTReceiver();
     // TDLog.Log( TDLog.LOG_COMM, "setup BT receiver");
@@ -106,7 +106,7 @@ class DistoXComm extends TopoDroidComm
             mApp.mDataDownloader.updateConnected( false );
             mApp.notifyStatus();
             closeSocket( );
-            mApp.notifyDisconnected();
+            mApp.notifyDisconnected( data_type );
           }
         } else if ( DeviceUtil.ACTION_BOND_STATE_CHANGED.equals( action ) ) { // NOT USED
           final int state     = data.getIntExtra(DeviceUtil.EXTRA_BOND_STATE, DeviceUtil.ERROR);
@@ -122,8 +122,8 @@ class DistoXComm extends TopoDroidComm
               mApp.mDataDownloader.setConnected( DataDownloader.STATUS_OFF );
               mApp.notifyStatus();
               closeSocket( );
-              mApp.notifyDisconnected();
-              connectSocket( mAddress ); // returns immediately if mAddress == null
+              mApp.notifyDisconnected( data_type );
+              connectSocket( mAddress, data_type ); // returns immediately if mAddress == null
             }
           } else {
             TDLog.Log( TDLog.LOG_BT, "BOND STATE CHANGED " + prevState + " --> " + state + " " + device );
@@ -392,7 +392,9 @@ class DistoXComm extends TopoDroidComm
   /** connect the socket to the device
    * @param address   remote devioce address
    */
-  protected boolean connectSocket( String address )
+  protected boolean connectSocketAny( String address ) { return connectSocket( address, DataType.ALL); }
+
+  protected boolean connectSocket( String address, int data_type )
   {
     if ( address == null ) return false;
     // TDLog.Log( TDLog.LOG_COMM, "connect socket(): " + address );
@@ -403,7 +405,7 @@ class DistoXComm extends TopoDroidComm
 
     if ( mBTSocket != null ) {
       DeviceUtil.cancelDiscovery();
-      setupBTReceiver();
+      setupBTReceiver( data_type );
 
       int port = 0;
       while ( ! mBTConnected && port < TDSetting.mCommRetry ) {
@@ -445,12 +447,12 @@ class DistoXComm extends TopoDroidComm
    * @param lister    packet calback handler
    * @return true on success
    */
-  protected boolean startCommThread( int to_read, Handler /* ILister */ lister ) // FIXME_LISTER
+  protected boolean startCommThread( int to_read, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
   {
     // TDLog.Log( TDLog.LOG_COMM, "start RFcomm thread: to_read " + to_read );
     if ( mBTSocket != null ) {
       if ( mCommThread == null ) {
-        mCommThread = new CommThread( TopoDroidComm.COMM_RFCOMM, mProtocol, to_read, lister );
+        mCommThread = new CommThread( TopoDroidComm.COMM_RFCOMM, mProtocol, to_read, lister, data_type );
         mCommThread.start();
         // TDLog.Log( TDLog.LOG_COMM, "startRFcommThread started");
       } else {
@@ -521,7 +523,7 @@ class DistoXComm extends TopoDroidComm
     boolean ret = false;
     if ( coeff != null ) {
       mCoeff = coeff;
-      if ( connectSocket( address ) ) {
+      if ( connectSocketAny( address ) ) {
         ret = mProtocol.writeCalibration( mCoeff );
         // FIXME ASYNC new CommandThread( mProtocol, WRITE_CALIBRATION, mCoeff );
       }
@@ -542,7 +544,7 @@ class DistoXComm extends TopoDroidComm
     if ( ! checkCommThreadNull() ) return false;
     boolean ret = false;
     if ( coeff != null ) {
-      if ( connectSocket( address ) ) {
+      if ( connectSocketAny( address ) ) {
         ret = mProtocol.readCalibration( coeff );
         // FIXME ASYNC new CommandThread( mProtocol, READ_CALIBRATION, coeff );
 
@@ -563,7 +565,7 @@ class DistoXComm extends TopoDroidComm
   byte[] readMemory( String address, int addr )
   {
     byte[] ret = null;
-    if ( connectSocket( address ) ) {
+    if ( connectSocketAny( address ) ) {
       ret = mProtocol.readMemory( addr );
       // FIXME ASYNC new CommandThread( mProtocol, READ_MEMORY_LOWLEVEL, addr ) Note...
     }
@@ -574,17 +576,17 @@ class DistoXComm extends TopoDroidComm
   // ------------------------------------------------------------------------------------
   // CONTINUOUS DATA DOWNLOAD
 
-  boolean connectDevice( String address, Handler /* ILister */ lister ) // FIXME_LISTER
+  boolean connectDevice( String address, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
   {
     if ( mCommThread != null ) {
       // TDLog.Log( TDLog.LOG_COMM, "DistoX Comm connect: already connected");
       return true;
     }
-    if ( ! connectSocket( address ) ) {
+    if ( ! connectSocket( address, data_type ) ) {
       // TDLog.Log( TDLog.LOG_COMM, "DistoX Comm connect: failed");
       return false;
     }
-    startCommThread( -2, lister );
+    startCommThread( -2, lister, data_type );
     return true;
   }
 
@@ -598,7 +600,7 @@ class DistoXComm extends TopoDroidComm
   // -------------------------------------------------------------------------------------
   // ON-DEMAND DATA DOWNLOAD
 
-  int downloadData( String address, Handler /* ILister */ lister ) // FIXME_LISTER
+  int downloadData( String address, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
   {
     if ( ! checkCommThreadNull() ) {
       TDLog.Error( "download data: RFcomm thread not null");
@@ -606,7 +608,7 @@ class DistoXComm extends TopoDroidComm
     }
     
     int ret = -1; // failure
-    if ( connectSocket( address ) ) {
+    if ( connectSocket( address, data_type ) ) {
       DistoXProtocol protocol = (DistoXProtocol)mProtocol;
       if ( TDSetting.mHeadTail ) {
         boolean a3 = ( TDInstance.deviceType() == Device.DISTO_A3 );
@@ -622,7 +624,7 @@ class DistoXComm extends TopoDroidComm
 	  if ( error_code < 0 ) {
             ret = error_code;
 	  } else { // read with timeout
-            startCommThread( -1, lister );
+            startCommThread( -1, lister, data_type );
             while ( mCommThread != null ) {
               TDUtil.slowDown( 100 );
             }
@@ -632,7 +634,7 @@ class DistoXComm extends TopoDroidComm
           // FIXME asyncTask ?
           // resetNtReadPackets(); // done in CommThread cstr 
 	  int packets = getNrReadPackets();
-          startCommThread( to_read, lister );
+          startCommThread( to_read, lister, data_type );
           while ( mCommThread != null ) {
 	    packets = getNrReadPackets();
 	    if ( packets >= to_read ) break;
@@ -648,7 +650,7 @@ class DistoXComm extends TopoDroidComm
 	  // }
         }
       } else {
-        startCommThread( -1, lister );
+        startCommThread( -1, lister, data_type );
         while ( mCommThread != null ) {
           TDUtil.slowDown( 100 );
         }

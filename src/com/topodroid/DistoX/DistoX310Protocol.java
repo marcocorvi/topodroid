@@ -13,7 +13,7 @@
  */
 package com.topodroid.DistoX;
 
-// import android.util.Log;
+import android.util.Log;
 
 // import java.lang.ref.WeakReference;
 
@@ -201,7 +201,7 @@ class DistoX310Protocol extends DistoXProtocol
 
           mIn.readFully( mBuffer, 0, 8 );
           // if ( TDSetting.mPacketLog ) logPacket( 0L );
-
+          // Log.v( "DistoX-DATA_TYPE", "read-memory[3]: " + String.format(" %02x", mBuffer[0] ) );
         } catch ( IOException e ) {
           TDLog.Error( "readmemory() IO failed" );
           break;
@@ -226,7 +226,7 @@ class DistoX310Protocol extends DistoXProtocol
 
           mIn.readFully( mBuffer, 0, 8 );
           // if ( TDSetting.mPacketLog ) logPacket( 0L );
-
+          // Log.v( "DistoX-DATA_TYPE", "read-memory[4]: " + String.format(" %02x", mBuffer[0] ) );
         } catch ( IOException e ) {
           TDLog.Error( "readmemory() IO failed" );
           break;
@@ -341,6 +341,7 @@ class DistoX310Protocol extends DistoXProtocol
 
             mIn.readFully( mBuffer, 0, 8 );
             // if ( TDSetting.mPacketLog ) logPacket( 0L );
+            // Log.v( "DistoX-DATA_TYPE", "upload firmware: " + String.format(" %02x", mBuffer[0] ) );
 
             int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
             if ( mBuffer[0] != (byte)0x3b || addr != reply_addr ) {
@@ -394,6 +395,7 @@ class DistoX310Protocol extends DistoXProtocol
 
           mIn.readFully( mBuffer, 0, 8 );
           // if ( TDSetting.mPacketLog ) logPacket( 0L );
+          // Log.v( "DistoX-DATA_TYPE", "dump firmware: " + String.format(" %02x", mBuffer[0] ) );
 
           int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
           if ( mBuffer[0] != (byte)0x3a || addr != reply_addr ) {
@@ -406,6 +408,7 @@ class DistoX310Protocol extends DistoXProtocol
 
           mIn.readFully( buf, 0, 256 );
           // if ( TDSetting.mPacketLog ) logPacket8( 0L, buf );
+          // Log.v( "DistoX-DATA_TYPE", "dump firmware[2]: " + String.format(" %02x", mBuffer[0] ) );
 
           boolean last = true;
           for ( int k=0; last && k<256; ++k ) {

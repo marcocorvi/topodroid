@@ -21,10 +21,12 @@ class ReconnectTask extends AsyncTask< String, Integer, Integer >
 {
   private DataDownloader mDownloader;
   private ReconnectTask  running;
+  private int mDataType;
 
-  ReconnectTask( DataDownloader downloader )
+  ReconnectTask( DataDownloader downloader, int data_type )
   {
     mDownloader = downloader;
+    mDataType = data_type;
     running = null;
   }
 
@@ -38,7 +40,7 @@ class ReconnectTask extends AsyncTask< String, Integer, Integer >
         try {
           Thread.sleep( 500 );
           // Log.v("DistoX", "notify disconnected: try reconnect status " + mDownloader.isDownloading() );
-          mDownloader.tryConnect( ); 
+          mDownloader.tryConnect( mDataType ); 
         } catch ( InterruptedException e ) { }
       }
     }

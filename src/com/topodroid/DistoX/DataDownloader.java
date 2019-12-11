@@ -78,11 +78,11 @@ class DataDownloader
     // Log.v("DistoX", "toggle download to " + mDownload );
   }
 
-  void doDataDownload()
+  void doDataDownload( int data_type )
   {
     // Log.v("DistoXDOWN", "do data download " + mDownload + " connected " + mConnected );
     if ( mDownload ) {
-      startDownloadData();
+      startDownloadData( data_type );
     } else {
       stopDownloadData();
     }
@@ -90,24 +90,24 @@ class DataDownloader
 
   /** called with mDownload == true
    */
-  private void startDownloadData( )
+  private void startDownloadData( int data_type )
   {
     // TDLog.Log( TDLog.LOG_COMM, "**** download data. status: " + mStatus );
     if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_BATCH ) {
-      tryDownloadData( );
+      tryDownloadData( data_type );
     } else if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_CONTINUOUS ) {
       // Log.v("DistoXDOWN", "start download continuous" );
       if ( TDSetting.mAutoReconnect ) {
         TDInstance.secondLastShotId = TopoDroidApp.lastShotId( ); // FIXME-LATEST
-        new ReconnectTask( this ).execute();
+        new ReconnectTask( this, data_type ).execute();
       } else {
         notifyConnectionStatus( STATUS_WAIT );
         // notifyUiThreadConnectionStatus( STATUS_WAIT );
-        tryConnect( );
+        tryConnect( data_type );
         // notifyUiThreadConnectionStatus( mConnected );
       }
     } else if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI ) {
-      tryDownloadData( );
+      tryDownloadData( data_type );
     }
   }
 
@@ -123,7 +123,7 @@ class DataDownloader
   }
 
   // called also by ReconnectTask
-  void tryConnect( )
+  void tryConnect( int data_type )
   {
     // Log.v("DistoXDOWN", "try Connect() download " + mDownload + " connected " + mConnected );
     if ( TDInstance.device != null && DeviceUtil.isAdapterEnabled() ) {
@@ -138,7 +138,7 @@ class DataDownloader
       } else {
         // if this runs the RFcomm thread, it returns true
         int connected = STATUS_ON;
-        if ( ! mApp.connectDevice( TDInstance.device.mAddress ) ) {
+        if ( ! mApp.connectDevice( TDInstance.device.mAddress, data_type ) ) {
            connected = TDSetting.mAutoReconnect ? STATUS_WAIT : STATUS_OFF;
         }
         // Log.v( "DistoXDOWN", "**** connect device returns " + connected );
@@ -164,14 +164,14 @@ class DataDownloader
 
   // BATCH ON-DEMAND DOWNLOAD
   // non-private to allow the DistoX select dialog
-  private void tryDownloadData( )
+  private void tryDownloadData( int data_type )
   {
     TDInstance.secondLastShotId = TopoDroidApp.lastShotId( ); // FIXME-LATEST
     if ( TDInstance.device != null && DeviceUtil.isAdapterEnabled() ) {
       notifyConnectionStatus( STATUS_WAIT );
       // notifyUiThreadConnectionStatus( STATUS_WAIT );
       // TDLog.Log( TDLog.LOG_COMM, "shot menu DOWNLOAD" );
-      new DataDownloadTask( mApp, mApp.mListerSet, null ).execute();
+      new DataDownloadTask( mApp, mApp.mListerSet, null, data_type ).execute();
     } else {
       mDownload = false;
       notifyConnectionStatus( STATUS_OFF );

@@ -494,7 +494,7 @@ public class GMActivity extends Activity
    * @param start_id  data id from whcih to start
    * note run on an AsyncTask
    */
-  int doComputeGroups( long start_id )
+  int doComputeGroups( long start_id, int policy )
   {
     long cid = TDInstance.cid;
     // Log.v("DistoX", "Compute CID " + cid + " from gid " + start_id );
@@ -519,23 +519,25 @@ public class GMActivity extends Activity
         }
       }
     } else {
-      if ( TDSetting.mGroupBy != TDSetting.GROUP_BY_DISTANCE ) {
-        group = 1;
-      }
+      // if ( TDSetting.mGroupBy != TDSetting.GROUP_BY_DISTANCE ) { // DEPRECATED
+      //   group = 1;
+      // }
+      group = 1;
     }
-    switch ( TDSetting.mGroupBy ) {
-      case TDSetting.GROUP_BY_DISTANCE:
-        for ( CalibCBlock item : list ) {
-          if ( start_id >= 0 && item.mId <= start_id ) continue;
-          if ( group == 0 || item.isFarFrom( b, c, thr ) ) {
-            ++ group;
-            b = item.mBearing;
-            c = item.mClino;
-          }
-          item.setGroup( group );
-          mApp_mDData.updateGMName( item.mId, item.mCalibId, Long.toString( item.mGroup ) );
-          // N.B. item.calibId == cid
-        }
+    switch ( policy ) {
+      case TDSetting.GROUP_BY_DISTANCE: // DEPRECATED
+      //   for ( CalibCBlock item : list ) {
+      //     if ( start_id >= 0 && item.mId <= start_id ) continue;
+      //     if ( group == 0 || item.isFarFrom( b, c, thr ) ) {
+      //       ++ group;
+      //       b = item.mBearing;
+      //       c = item.mClino;
+      //     }
+      //     item.setGroup( group );
+      //     mApp_mDData.updateGMName( item.mId, item.mCalibId, Long.toString( item.mGroup ) );
+      //     // N.B. item.calibId == cid
+      //   }
+        TDToast.makeBad( "GROUP BY DISTANCE IS NO LONGER SUPPORTED" );
         break;
       case TDSetting.GROUP_BY_FOUR:
         // TDLog.Log( TDLog.LOG_CALIB, "group by four");
@@ -899,7 +901,7 @@ public class GMActivity extends Activity
     if ( b == mButton1[ BTN_BT ] ) {
       // Log.v("DistoX", "BT button long click");
       // enableBluetoothButton(false);
-      new DeviceX310TakeShot( this, (TDSetting.mCalibShotDownload ? new ListerHandler(this) : null), mApp, 1 ).execute();
+      new DeviceX310TakeShot( this, (TDSetting.mCalibShotDownload ? new ListerHandler(this) : null), mApp, 1, DataType.CALIB ).execute();
       return true;
     }
     return false;
@@ -938,7 +940,7 @@ public class GMActivity extends Activity
         enableWrite( false );
         setTitleColor( TDColor.CONNECTED );
         ListerHandler handler = new ListerHandler( this ); // FIXME_LISTER
-        new DataDownloadTask( mApp, handler, this ).execute();
+        new DataDownloadTask( mApp, handler, this, DataType.CALIB ).execute();
         TDandroid.setButtonBackground( mButton1[ BTN_DOWNLOAD ], mBMdownload_on );
         enableButtons( false );
       }
@@ -948,12 +950,10 @@ public class GMActivity extends Activity
         List< CalibCBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, 0, true ); // true: includde negative-grp
         if ( list.size() >= 16 ) {
           (new GMGroupsDialog( this, this, 
-            ( TDSetting.mGroupBy == TDSetting.GROUP_BY_DISTANCE )?
-              getResources().getString( R.string.group_policy_distance )
-            : ( TDSetting.mGroupBy == TDSetting.GROUP_BY_FOUR )?
-              getResources().getString( R.string.group_policy_four )
-            : /* TDSetting.GROUP_BY_ONLY_16 */
-              getResources().getString( R.string.group_policy_sixteen ) 
+            // ( TDSetting.mGroupBy == TDSetting.GROUP_BY_DISTANCE )?  getResources().getString( R.string.group_policy_distance ) :
+            ( TDSetting.mGroupBy == TDSetting.GROUP_BY_DISTANCE )?  "Group by distance is no longer supported" : // deprecated
+            ( TDSetting.mGroupBy == TDSetting.GROUP_BY_FOUR )?  getResources().getString( R.string.group_policy_four ) :
+              getResources().getString( R.string.group_policy_sixteen ) // TDSetting.GROUP_BY_ONLY_16
           )).show();
           // new CalibComputer( this, -1L, CalibComputer.CALIB_COMPUTE_GROUPS ).execute();
         } else {
@@ -973,7 +973,7 @@ public class GMActivity extends Activity
           mAlgo = ( TDSetting.mCalibAlgo != CalibInfo.ALGO_AUTO ) ? TDSetting.mCalibAlgo : CalibInfo.ALGO_LINEAR;
           mApp.updateCalibAlgo( mAlgo );
         }
-        new CalibComputer( this, -1L, CalibComputer.CALIB_COMPUTE_CALIB ).execute();
+        new CalibComputer( this, -1L, 0, CalibComputer.CALIB_COMPUTE_CALIB ).execute();
       } else {
         TDToast.makeBad( R.string.no_calibration );
       }
@@ -1041,24 +1041,24 @@ public class GMActivity extends Activity
     }
   }
 
-  void computeGroups( long start_id )
+  void computeGroups( long start_id, int policy )
   {
     setTitle( R.string.calib_compute_groups );
     setTitleColor( TDColor.COMPUTE );
-    new CalibComputer( this, start_id, CalibComputer.CALIB_COMPUTE_GROUPS ).execute();
+    new CalibComputer( this, start_id, policy, CalibComputer.CALIB_COMPUTE_GROUPS ).execute();
   }
 
   void resetGroups( long start_id )
   {
-    new CalibComputer( this, start_id, CalibComputer.CALIB_RESET_GROUPS ).execute();
+    new CalibComputer( this, start_id, 0, CalibComputer.CALIB_RESET_GROUPS ).execute();
   }
 
-  void resetAndComputeGroups( long start_id )
+  void resetAndComputeGroups( long start_id, int policy )
   {
     // if ( ! mApp.mGMActivityVisible ) return;
     setTitle( R.string.calib_compute_groups );
     setTitleColor( TDColor.COMPUTE );
-    new CalibComputer( this, start_id, CalibComputer.CALIB_RESET_AND_COMPUTE_GROUPS ).execute();
+    new CalibComputer( this, start_id, policy, CalibComputer.CALIB_RESET_AND_COMPUTE_GROUPS ).execute();
   }
 
 

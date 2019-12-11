@@ -256,7 +256,7 @@
   </string-array>
 
   <string-array name="groupBy">
-     <item name="distance">Distanță</item>
+     <!-- item name="distance">Distanță</item -->
      <item name="four">Câte 4</item>
      <item name="only16">Doar primele 16</item>
   </string-array>

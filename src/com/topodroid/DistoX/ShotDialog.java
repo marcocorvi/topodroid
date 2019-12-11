@@ -295,6 +295,7 @@ class ShotDialog extends MyDialog
 
   private void setCBxSplay( int type )
   {
+    if ( mCBxSplay == null ) return;
     splay_type = type;
     int res_splay = -1;
     switch ( splay_type ) {
@@ -539,14 +540,11 @@ class ShotDialog extends MyDialog
     boolean backleg_val = mCBbackLeg != null && mCBbackLeg.isChecked();
     boolean all_splay = mCBallSplay.isChecked();
     // FIXME_X2_SPLAY
-    // boolean x_splay = (mCBxSplay != null) && mCBxSplay.isChecked();
-    // Log.v("DistoX-SPLAY", "type " + splay_type + " checked " + mCBxSplay.isChecked() );
     int set_xsplay = -1;
     if ( splay_type >= 0 ) {
       // [1] if splay_type > 0 and now mCBxSplay is plain change splay class (possibly "all" splays of the same type) to plain
       // [0]                   otherwise change splay class to all plain splays only if "all" is set
       // [-1] else case
-      // set_xsplay = ( mCBxSplay != null && mCBxSplay.isChecked() )? 0 : splay_type;
       set_xsplay = splay_type;
     }
     // boolean leg_next = false;
@@ -752,7 +750,7 @@ class ShotDialog extends MyDialog
       // Log.v("DistoX", "CB leg clicked ");
       if ( mCBlegPrev.toggleState() ) {
         mCBallSplay.setState( false );
-        if ( mCBxSplay != null ) setCBxSplay( -1 );
+        setCBxSplay( -1 );
         mCBlegNext.setState( false );
       }
     } else if ( b == mCBallSplay ) {
@@ -765,7 +763,7 @@ class ShotDialog extends MyDialog
     } else if ( mCBbackLeg != null && b == mCBbackLeg ) {
       mCBbackLeg.toggleState();
     } else if ( mCBxSplay != null && b == mCBxSplay ) {
-      setCBxSplay( LegType.nextSplayType( splay_type ) );
+      setCBxSplay( LegType.nextSplayClass( splay_type ) );
       mCBallSplay.setState( false );
       mCBlegPrev.setState( false );
       mCBlegNext.setState( false );
@@ -773,7 +771,7 @@ class ShotDialog extends MyDialog
       if ( mCBlegNext.toggleState() ) {
         mCBlegPrev.setState( false );
         mCBallSplay.setState( false );
-        if ( mCBxSplay != null ) setCBxSplay( -1 ); 
+        setCBxSplay( -1 ); 
       }
 
     } else if ( mRBdup != null  && b == mRBdup ) {
@@ -817,7 +815,7 @@ class ShotDialog extends MyDialog
 
     } else if ( b == mButtonPrev ) {
       mCBallSplay.setVisibility( View.GONE );
-      if ( mCBxSplay != null ) setCBxSplay( -1 );
+      setCBxSplay( -1 );
       // shift:
       //               prev -- blk -- next
       // prevOfPrev -- prev -- blk
@@ -834,7 +832,7 @@ class ShotDialog extends MyDialog
 
     } else if ( b == mButtonNext ) {
       mCBallSplay.setVisibility( View.GONE );
-      if ( mCBxSplay != null ) setCBxSplay( -1 );
+      setCBxSplay( -1 );
       // shift:
       //        prev -- blk -- next
       //                blk -- next -- nextOfNext

@@ -21,14 +21,16 @@ class DeviceX310TakeShot extends AsyncTask<Integer, Integer, Integer >
   private final ListerHandler mLister; // lister that manages downloaded shots (if null shots are not downloaded)
   private final TopoDroidApp  mApp;    // FIXME LEAK
   private final int mNr;               // number of shots to measure before download
+  private int mDataType;
  
-  DeviceX310TakeShot( ILister ilister, ListerHandler lister, TopoDroidApp app, int nr )
+  DeviceX310TakeShot( ILister ilister, ListerHandler lister, TopoDroidApp app, int nr, int data_type )
   {
     super();
     mILister  = ilister; 
     mLister   = lister; 
     mApp      = app;
     mNr       = nr;
+    mDataType = data_type;
   } 
 
   // 0 off
@@ -41,12 +43,12 @@ class DeviceX310TakeShot extends AsyncTask<Integer, Integer, Integer >
     int i = mNr;
     for ( ; i>1; --i ) {
       // Log.v("DistoX", "take shot " + i + " wait " + TDSetting.mWaitLaser + "/" + TDSetting.mWaitShot );
-      mApp.setX310Laser( 1, 0, null );
+      mApp.setX310Laser( 1, 0, null, mDataType );
       TDUtil.slowDown( TDSetting.mWaitLaser ); 
-      mApp.setX310Laser( 2, 0, null );   
+      mApp.setX310Laser( 2, 0, null, mDataType );   
       TDUtil.slowDown( TDSetting.mWaitShot );
     }
-    mApp.setX310Laser( 1, 0, null );
+    mApp.setX310Laser( 1, 0, null, mDataType );
     TDUtil.slowDown( TDSetting.mWaitLaser ); 
     // TDUtil.slowDown( TDSetting.mWaitLaser ); 
     return 0;
@@ -65,7 +67,7 @@ class DeviceX310TakeShot extends AsyncTask<Integer, Integer, Integer >
   protected void onPostExecute( Integer result ) 
   {
     int nr = ( mLister == null )? 0 : mNr; // number of shots to download
-    mApp.setX310Laser( 2, nr, mLister ); // measure and download if nr > 0
+    mApp.setX310Laser( 2, nr, mLister, mDataType ); // measure and download if nr > 0
     mILister.enableBluetoothButton(true);
   }
 }

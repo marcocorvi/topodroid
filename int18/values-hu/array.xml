@@ -249,7 +249,7 @@
   </string-array>
 
   <string-array name="groupBy">
-     <item name="distance">Távolság</item>
+     <!-- item name="distance">Távolság</item -->
      <item name="four">Négyet egy pontból</item>
      <item name="only16">Csak az első 16</item>
   </string-array>

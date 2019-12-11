@@ -61,9 +61,9 @@ class DistoX310Comm extends DistoXComm
    * @param what      command to send to the remote device
    * @param lister    callback handler
    */
-  void setX310Laser( String address, int what, int to_read, Handler /* ILister */ lister ) // FIXME_LISTER
+  void setX310Laser( String address, int what, int to_read, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
   {
-    if ( connectSocket( address ) ) {
+    if ( connectSocket( address, data_type ) ) {
       switch ( what ) {
         case 0: // LASER OFF
           sendCommand( 0x37 );
@@ -80,7 +80,7 @@ class DistoX310Comm extends DistoXComm
       }
       if ( mCommThread == null && to_read > 0 ) {
         // Log.v("DistoX", "RF comm thread start ... ");
-        startCommThread( 2*to_read, lister );  // each data has two packets
+        startCommThread( 2*to_read, lister, data_type );  // each data has two packets
         while ( mCommThread != null ) {
           TDUtil.slowDown( 100 );
         }
@@ -116,7 +116,7 @@ class DistoX310Comm extends DistoXComm
       return false;
     }
     boolean ret = false;
-    if ( connectSocket( address ) ) {
+    if ( connectSocketAny( address ) ) {
       byte[] result = null;
       byte[] fw = mProtocol.readMemory( DeviceX310Details.mFirmwareAddress ); // read firmware
       if ( fw == null ) {
@@ -146,7 +146,7 @@ class DistoX310Comm extends DistoXComm
   // {
   //   if ( ! checkCommThreadNull() ) return -1;
   //   int n = 0;
-  //   if ( connectSocket( address ) ) {
+  //   if ( connectSocketAny( address ) ) {
   //     n = mProtocol.resetX310Memory( from, to );
   //   }
   //   destroySocket( );
@@ -157,7 +157,7 @@ class DistoX310Comm extends DistoXComm
   {
     if ( ! checkCommThreadNull() ) return -1;
     int n = 0;
-    if ( connectSocket( address ) ) {
+    if ( connectSocketAny( address ) ) {
       DistoX310Protocol protocol = (DistoX310Protocol)mProtocol;
       n = protocol.readX310Memory( from, to, memory );
       // FIXME ASYNC new CommandThread( mProtocol, READ_X310_MEMORY, memory ) Note...
@@ -172,7 +172,7 @@ class DistoX310Comm extends DistoXComm
   // int readFirmwareHardware( String address )
   // {
   //   int ret = 0;
-  //   if ( connectSocket( address ) ) {
+  //   if ( connectSocketAny( address ) ) {
   //     ret = mProtocol.readFirmwareAddress( );
   //   }
   //   destroySocket( );
@@ -182,7 +182,7 @@ class DistoX310Comm extends DistoXComm
   int dumpFirmware( String address, String filepath )
   {
     int ret = 0;
-    if ( connectSocket( address ) ) {
+    if ( connectSocketAny( address ) ) {
       DistoX310Protocol protocol = (DistoX310Protocol)mProtocol;
       ret = protocol.dumpFirmware( filepath );
     }
@@ -193,7 +193,7 @@ class DistoX310Comm extends DistoXComm
   int uploadFirmware( String address, String filepath )
   {
     int ret = 0;
-    if ( connectSocket( address ) ) {
+    if ( connectSocketAny( address ) ) {
       // TDLog.LogFile( "Firmware upload: socket is ready " );
       DistoX310Protocol protocol = (DistoX310Protocol)mProtocol;
       ret = protocol.uploadFirmware( filepath );

@@ -196,7 +196,7 @@ class CutNPaste
       textview1 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
-            app.setX310Laser( 1, 0, null );
+            app.setX310Laser( 1, 0, null, DataType.ALL );
             dismissPopupBT();
           }
         } );
@@ -209,7 +209,7 @@ class CutNPaste
       textview2 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
-            app.setX310Laser( 0, 0, null );
+            app.setX310Laser( 0, 0, null, DataType.ALL );
             dismissPopupBT();
           }
         } );
@@ -224,7 +224,7 @@ class CutNPaste
           new View.OnClickListener( ) {
             public void onClick(View v) {
               // ilister.enableBluetoothButton(false);
-              new DeviceX310TakeShot( ilister, (TDSetting.mCalibShotDownload ? lister : null), app, 1 ).execute();
+              new DeviceX310TakeShot( ilister, (TDSetting.mCalibShotDownload ? lister : null), app, 1, DataType.CALIB ).execute();
               dismissPopupBT();
             }
           } );
@@ -239,7 +239,7 @@ class CutNPaste
           new View.OnClickListener( ) {
             public void onClick(View v) {
               // ilister.enableBluetoothButton(false);
-              new DeviceX310TakeShot( ilister, (TDSetting.isConnectionModeContinuous() ? lister : null), app, 1 ).execute();
+              new DeviceX310TakeShot( ilister, (TDSetting.isConnectionModeContinuous() ? lister : null), app, 1, DataType.SHOT ).execute();
               dismissPopupBT();
             }
           } );
@@ -253,7 +253,7 @@ class CutNPaste
           new View.OnClickListener( ) {
             public void onClick(View v) {
               // ilister.enableBluetoothButton(false);
-              new DeviceX310TakeShot( ilister, (TDSetting.isConnectionModeContinuous()? lister : null), app, TDSetting.mMinNrLegShots ).execute();
+              new DeviceX310TakeShot( ilister, (TDSetting.isConnectionModeContinuous()? lister : null), app, TDSetting.mMinNrLegShots, DataType.SHOT ).execute();
               dismissPopupBT();
             }
           } );

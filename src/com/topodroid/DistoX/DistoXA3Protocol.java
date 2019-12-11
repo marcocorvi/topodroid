@@ -13,7 +13,7 @@
  */
 package com.topodroid.DistoX;
 
-// import android.util.Log;
+import android.util.Log;
 
 // import java.lang.ref.WeakReference;
 
@@ -63,6 +63,7 @@ class DistoXA3Protocol extends DistoXProtocol
 
       mIn.readFully( mBuffer, 0, 8 );
       // if ( TDSetting.mPacketLog ) logPacket( 0L );
+      // Log.v( "DistoX-DATA_TYPE", "swap hot bit: " + String.format(" %02x", mBuffer[0] ) );
 
       if ( mBuffer[0] != (byte)0x38 ) { 
         TDLog.Error( "HotBit-38 wrong reply packet addr " + addr );
@@ -93,6 +94,7 @@ class DistoXA3Protocol extends DistoXProtocol
 
       mIn.readFully( mBuffer, 0, 8 );
       // if ( TDSetting.mPacketLog ) logPacket( 0L );
+      // Log.v( "DistoX-DATA_TYPE", "swap hot bit[2]: " + String.format(" %02x", mBuffer[0] ) );
 
       if ( mBuffer[0] != (byte)0x38 ) {
         TDLog.Error( "HotBit-39 wrong reply packet addr " + addr );
@@ -135,6 +137,7 @@ class DistoXA3Protocol extends DistoXProtocol
 
       mIn.readFully( mBuffer, 0, 8 );
       // if ( TDSetting.mPacketLog ) logPacket( 0L );
+      // Log.v( "DistoX-DATA_TYPE", "read A3 head-tail: " + String.format(" %02x", mBuffer[0] ) );
 
       if ( mBuffer[0] != (byte)( 0x38 ) ) { return null; }
       if ( mBuffer[1] != command[1] ) { return null; }

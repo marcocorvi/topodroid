@@ -539,12 +539,12 @@
   </string-array>
 
   <string-array name="groupBy">
-     <item name="distance">Distance</item>
+     <!-- item name="distance">Distance</item -->
      <item name="four">Four at a time</item>
      <item name="only16">Only first 16</item>
   </string-array>
   <string-array name="groupByValue" translatable="false">
-     <item name="distance">0</item>
+     <!-- item name="distance">0</item -->
      <item name="four">1</item>
      <item name="only16">2</item>
   </string-array>

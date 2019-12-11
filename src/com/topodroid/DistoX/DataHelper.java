@@ -2977,6 +2977,7 @@ class DataHelper extends DataSetObservable
     }
     // TDLog.Log( TDLog.LOG_DB, "select All Shots list size " + list.size() );
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    // FIXME catch ( SQLiteCantOpenDatabaseException e )
     return list;
   }
 

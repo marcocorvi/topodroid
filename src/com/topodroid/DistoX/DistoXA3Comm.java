@@ -78,7 +78,7 @@ class DistoXA3Comm extends DistoXComm
       return false;
     }
     boolean ret = false;
-    if ( connectSocket( address ) ) {
+    if ( connectSocketAny( address ) ) {
       byte[] result = null;
       // byte[] result = new byte[4];
       // if ( ! mProtocol.read8000( result ) ) { // FIXME ASYNC
@@ -103,7 +103,7 @@ class DistoXA3Comm extends DistoXComm
     String res = null;
     // if ( TDInstance.deviceType() == Device.DISTO_A3 ) {
       if ( ! checkCommThreadNull() ) return null;
-      if ( connectSocket( address ) ) {
+      if ( connectSocketAny( address ) ) {
         DistoXA3Protocol protocol = (DistoXA3Protocol)mProtocol;
         res = protocol.readA3HeadTail( command, head_tail );
         // FIXME ASYNC new CommandThread( mProtocol, READ_HEAD_TAIL, haed_tail ); NOTE int[] instead of byte[]
@@ -123,7 +123,7 @@ class DistoXA3Comm extends DistoXComm
     if ( to >= 0x8000 )   to   = 0x8000;
     int n = 0;
     if ( from < to ) {
-      if ( connectSocket( address ) ) {
+      if ( connectSocketAny( address ) ) {
         DistoXA3Protocol protocol = (DistoXA3Protocol)mProtocol;
         n = protocol.readMemory( from, to, memory );
         // FIXME ASYNC new CommandThread( mProtocol, READ_MEMORY, memory ) Note...
@@ -148,7 +148,7 @@ class DistoXA3Comm extends DistoXComm
 
     int n = 0;
     if ( from != to ) {
-      if ( connectSocket( address ) ) {
+      if ( connectSocketAny( address ) ) {
         DistoXA3Protocol protocol = (DistoXA3Protocol)mProtocol;
         do {
           if ( to == 0 ) {

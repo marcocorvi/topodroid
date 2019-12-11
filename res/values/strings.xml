@@ -88,7 +88,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="calib_delete">Delete calibration </string>
     <string name="calib_device_mismatch">WARNING: Calibration-Device mismatch</string>
     <string name="calib_no_name">Name is mandatory</string>
-    <string name="calib_gm_policy">Policy</string>
+    <string name="calib_gm_policy">Group policy</string>
     <string name="calib_gm_undelete">Undelete calibration data?</string>
     <string name="calib_offgroup_data">Possibly %1$d off-group data</string>
     <string name="calib_saved">Saved calibration</string>
@@ -162,6 +162,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="few_iter">Failed: too many iterations</string>
     <string name="few_groups">Not enough data with group</string>
     <string name="found_groups">Found %1$d groups</string>
+    <string name="regroup">No regroup</string>
     <!-- UNUSED string name="few_plots">Not enough sketches</string -->
     <string name="few_calibs">Not enough calibrations</string>
     <string name="getting_info">Getting DistoX info &#8230;</string>

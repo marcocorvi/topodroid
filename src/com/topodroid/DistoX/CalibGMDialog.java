@@ -31,6 +31,7 @@ import android.widget.Button;
 // import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.view.View;
+import android.view.View.OnClickListener;
 // import android.view.View.OnKeyListener;
 // import android.view.KeyEvent;
 
@@ -38,7 +39,7 @@ import android.view.View;
 // import android.view.WindowManager;
 
 class CalibGMDialog extends MyDialog
-                    implements View.OnClickListener
+                    implements OnClickListener
 {
   private final WeakReference<GMActivity> mParent; 
   private final CalibCBlock mBlk;
@@ -54,7 +55,9 @@ class CalibGMDialog extends MyDialog
   private EditText mETname;  // group number
   private Button   mButtonOK;
   private Button   mButtonDelete;
-  private MyCheckBox mCBregroup;
+  private MyCheckBox mCBregroup = null;
+  private MyStateBox mSBregroup = null;
+  private TextView   mTVregroup = null;
   private Button   mButtonCancel;
 
   private MyKeyboard mKeyboard = null;
@@ -96,18 +99,27 @@ class CalibGMDialog extends MyDialog
 
     // mButtonOK     = new MyCheckBox( mContext, size, R.drawable.iz_save, R.drawable.iz_save ); 
     mButtonDelete = new MyCheckBox( mContext, size, R.drawable.iz_delete, R.drawable.iz_delete ); 
-    mCBregroup    = new MyCheckBox( mContext, size, R.drawable.iz_numbers_ok, R.drawable.iz_numbers_no ); 
-    mCBregroup.setState( false );
-
-    layout2.addView( mCBregroup, lp );
-    // layout2.addView( mButtonOK, lp );
     layout2.addView( mButtonDelete, lp );
+
+    if ( TDLevel.overExpert ) {
+      mSBregroup = new MyStateBox( mContext, R.drawable.iz_numbers_no, R.drawable.iz_numbers_ok, R.drawable.iz_numbers_ok );
+      mSBregroup.setState( 0 );
+      mSBregroup.setOnClickListener( this );
+      layout2.addView( mSBregroup, lp );
+      mTVregroup = new TextView( mContext );
+      mTVregroup.setText( R.string.regroup );
+      layout2.addView( mTVregroup, lp );
+    } else {
+      mCBregroup    = new MyCheckBox( mContext, size, R.drawable.iz_numbers_ok, R.drawable.iz_numbers_no ); 
+      mCBregroup.setState( false );
+      layout2.addView( mCBregroup, lp );
+    }
+
+    // layout2.addView( mButtonOK, lp );
 
     mButtonOK     = (Button) findViewById(R.id.gm_ok );
     mButtonCancel = (Button) findViewById(R.id.gm_cancel );
     // mButtonDelete = (Button) findViewById(R.id.gm_delete );
-    // mCBregroup = (CheckBox) findViewById(R.id.gm_regroup );
-    // mCBregroup.setChecked( false );
 
     eTbearing.setText( String.format(Locale.US, "%.1f", mBlk.mBearing ) );
     eTclino.setText( String.format(Locale.US, "%.1f", mBlk.mClino ) );
@@ -155,8 +167,15 @@ class CalibGMDialog extends MyDialog
             return;
           }
         }
-        if ( mCBregroup.isChecked() ) {
-          parent.resetAndComputeGroups( mBlk.mId );
+        if ( TDLevel.overExpert ) {
+          switch ( mSBregroup.getState() ) {
+            case 1: parent.resetAndComputeGroups( mBlk.mId, TDSetting.GROUP_BY_FOUR ); break;
+            case 2: parent.resetAndComputeGroups( mBlk.mId, TDSetting.GROUP_BY_ONLY_16 ); break;
+          }
+        } else {
+          if ( mCBregroup.isChecked() ) {
+            parent.resetAndComputeGroups( mBlk.mId, TDSetting.mGroupBy );
+          }
         }
       } else {
         TDLog.Error("GM Dialog null parent [1]" );
@@ -170,6 +189,13 @@ class CalibGMDialog extends MyDialog
       }
     // } else if ( b == mButtonCancel ) {
       /* nothing */
+    } else if ( TDLevel.overExpert && b == mSBregroup ) {
+      switch ( mSBregroup.getState() ) {
+        case 0: mSBregroup.setState(1); mTVregroup.setText("TopoDroid"); break; 
+        case 1: mSBregroup.setState(2); mTVregroup.setText("PocketTopo"); break; 
+        case 2: mSBregroup.setState(0); mTVregroup.setText(R.string.regroup); break; 
+      }
+      return;
     }
     dismiss();
   }

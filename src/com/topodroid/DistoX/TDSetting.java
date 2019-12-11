@@ -183,7 +183,7 @@ class TDSetting
   static boolean mCalibShotDownload = true;
 
   // calibration data grouping policies
-  static final int GROUP_BY_DISTANCE = 0;
+  static final int GROUP_BY_DISTANCE = 0; // DEPRECATED
   static final int GROUP_BY_FOUR     = 1;
   static final int GROUP_BY_ONLY_16  = 2;
   // static final String GROUP_BY  = TDString.ONE;     // GROUP_BY_FOUR

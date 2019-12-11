@@ -162,11 +162,11 @@ public class TopoDroidApp extends Application
     mListerSet.setConnectionStatus( mDataDownloader.getStatus() );
   }
 
-  void notifyDisconnected()
+  void notifyDisconnected( int data_type )
   {
     if ( mListerSet.size() > 0 ) {
       try {
-        new ReconnectTask( mDataDownloader ).execute();
+        new ReconnectTask( mDataDownloader, data_type ).execute();
       } catch ( RuntimeException e ) {
         TDLog.Error("reconnect error: " + e.getMessage() );
       }
@@ -420,10 +420,10 @@ public class TopoDroidApp extends Application
   // }
 
   // FIXME_COMM
-  public boolean connectDevice( String address ) 
+  public boolean connectDevice( String address, int data_type ) 
   {
     // Log.v( "DistoXBLE", "App connect address " + address + " comm is " + ((mComm==null)? "null" : "non-null") );
-    return mComm != null && mComm.connectDevice( address, mListerSet ); // FIXME_LISTER
+    return mComm != null && mComm.connectDevice( address, mListerSet, data_type ); // FIXME_LISTER
   }
 
   public void disconnectComm()
@@ -1307,7 +1307,7 @@ public class TopoDroidApp extends Application
   // -------------------------------------------------------------
   // DATA BATCH DOWNLOAD
 
-  int downloadDataBatch( Handler /* ILister */ lister ) // FIXME_LISTER
+  int downloadDataBatch( Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
   {
     TDInstance.secondLastShotId = lastShotId();
     int ret = 0;
@@ -1315,7 +1315,7 @@ public class TopoDroidApp extends Application
       TDLog.Error( "Comm or Device null ");
     } else {
       TDLog.Log( TDLog.LOG_DATA, "Download Data Batch() device " + TDInstance.device + " comm " + mComm.toString() );
-      ret = mComm.downloadData( TDInstance.device.mAddress, lister );
+      ret = mComm.downloadData( TDInstance.device.mAddress, lister, data_type );
       // FIXME BATCH
       // if ( ret > 0 && TDSetting.mSurveyStations > 0 ) {
       //   // FIXME TODO select only shots after the last leg shots
@@ -1891,11 +1891,11 @@ public class TopoDroidApp extends Application
    * @param nr        number od data to download
    # @param lister    optional lister
    */
-  void setX310Laser( int what, int nr, Handler /* ILister */ lister ) // 0: off, 1: on, 2: measure // FIXME_LISTER
+  void setX310Laser( int what, int nr, Handler /* ILister */ lister, int data_type ) // 0: off, 1: on, 2: measure // FIXME_LISTER
   {
     if ( mComm == null || TDInstance.device == null ) return;
     DistoX310Comm comm = (DistoX310Comm)mComm;
-    if ( comm != null ) comm.setX310Laser( TDInstance.device.mAddress, what, nr, lister );
+    if ( comm != null ) comm.setX310Laser( TDInstance.device.mAddress, what, nr, lister, data_type );
   }
 
   // int readFirmwareHardware()

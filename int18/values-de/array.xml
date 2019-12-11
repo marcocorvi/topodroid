@@ -229,7 +229,7 @@
   </string-array>
 
   <string-array name="groupBy">
-     <item name="distance">Winkelabstand</item>
+     <!-- item name="distance">Winkelabstand</item -->
      <item name="four">Immer 4 Messungen</item>
      <item name="only16">Nur die ersten 16</item>
   </string-array>

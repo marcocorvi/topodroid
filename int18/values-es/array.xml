@@ -228,7 +228,7 @@
   </string-array>
 
   <string-array name="groupBy">
-     <item name="distance">Distancia</item>
+     <!-- item name="distance">Distancia</item -->
      <item name="four">De cuatro en cuatro</item>
      <item name="only16">Sólo 16 primeros</item>
   </string-array>

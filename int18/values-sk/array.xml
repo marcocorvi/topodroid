@@ -232,7 +232,7 @@
   </string-array>
 
   <string-array name="groupBy">
-     <item name="distance">Vzdialenosť</item>
+     <!-- item name="distance">Vzdialenosť</item -->
      <item name="four">Po štyroch v skupinách</item>
      <item name="only16">Len prvých 16</item>
   </string-array>

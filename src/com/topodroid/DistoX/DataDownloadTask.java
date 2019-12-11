@@ -27,14 +27,16 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
   // private ILister mLister;
   private final ListerHandler mLister; // FIXME_LISTER
   private final WeakReference<GMActivity> mGMactivity;
+  private int mDataType;
 
-  DataDownloadTask( TopoDroidApp app, ListerHandler /* ILister */ lister, GMActivity gm_activity ) // FIXME_LISTER
+  DataDownloadTask( TopoDroidApp app, ListerHandler /* ILister */ lister, GMActivity gm_activity, int data_type ) // FIXME_LISTER
   {
-    // TDLog.Error( "DataDownloadTask cstr" );
+    // TDLog.Error( "Data Download Task cstr" );
     // Log.v("DistoX", "data download task cstr");
     mApp        = new WeakReference<TopoDroidApp>( app );
     mGMactivity = new WeakReference<GMActivity>( gm_activity );
     mLister = lister;
+    mDataType = data_type;
   }
 
 // -------------------------------------------------------------------
@@ -57,7 +59,7 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
     }
     if ( ! lock() ) return null;
     // long time = System.currentTimeMillis();
-    return ( app == null )? 0 : app.downloadDataBatch( mLister );
+    return ( app == null )? 0 : app.downloadDataBatch( mLister, mDataType );
     // time = System.currentTimeMillis() - time;
     // Log.v("DistoX", "READ " + nRead + " data in " + time + " msec");
 
