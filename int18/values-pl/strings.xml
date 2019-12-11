@@ -90,7 +90,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="calib_delete">Usuń kalibrację</string>
     <string name="calib_device_mismatch">UWAGA: Niedopasowana kalibracja</string>
     <string name="calib_no_name">nazwa jest obowiązkowa</string>
-    <string name="calib_gm_policy">Polityka</string>
+    <!-- REMOVE string name="calib_gm_policy">Polityka</string -->
+    <!-- TODO string name="calib_gm_policy">Group policy</string -->
     <string name="calib_gm_undelete">Przywrócić dane kalibracyjne?</string>
     <string name="calib_saved">Kalibracja zapisana</string>
     <string name="calib_updated">Kalibracja zaktualizowana</string>
@@ -163,6 +164,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="few_iter">Błąd: za dużo iteracji</string>
     <string name="few_groups">Za mało danych w grupie</string>
     <string name="found_groups">Znaleziono %1$d grup</string>
+    <!-- TODO string name="regroup">No regroup</string -->
     <!-- UNUSED string name="few_plots">Not enough sketches</string -->
     <string name="few_calibs">Za mało kalibracji</string>
     <string name="getting_info">Pozyskiwanie damych DistoX &#8230;</string>

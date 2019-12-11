@@ -88,7 +88,7 @@
     <string name="calib_delete">Eliminare calibrazione </string>
     <string name="calib_device_mismatch">ATTENZIONE. Discrepanza tra calibrazione e dispositivo</string>
     <string name="calib_no_name">Nome della calibrazione mancante</string>
-    <string name="calib_gm_policy">Policy di calibrazione</string>
+    <string name="calib_gm_policy">Metodo di raggruppamento dati</string>
     <string name="calib_gm_undelete">Ripristina dato calibrazione?</string>
     <string name="calib_saved">Salvata calibrazione</string>
     <string name="calib_updated">Aggiornata calibrazione</string>
@@ -159,6 +159,7 @@
     <string name="few_iter">Iterazione fallita</string>
     <string name="few_groups">Dati con gruppi non sufficienti</string>
     <string name="found_groups">Trovati %1$d gruppi</string>
+    <!-- TODO string name="regroup">No regroup</string -->
     <!-- UNUSED string name="few_plots">Troppo pochi disegni</string -->
     <string name="few_calibs">Calibrazioni non sufficienti</string>
     <string name="getting_info">Scarico info dal DistoX&#8230;</string>

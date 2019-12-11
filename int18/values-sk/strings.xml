@@ -88,7 +88,8 @@
     <string name="calib_delete">Vymazať kalibráciu</string>
     <string name="calib_device_mismatch">VAROVANIE: Kalibrácia - Zariadenie nesúhlasí</string>
     <string name="calib_no_name">Názov je povinný</string>
-    <string name="calib_gm_policy">Pravidlá kalibrácie</string>
+    <!-- REMOVE string name="calib_gm_policy">Pravidlá kalibrácie</string -->
+    <!-- TODO string name="calib_gm_policy">Group policy</string -->
     <string name="calib_gm_undelete">Obnoviť kalibračné dáta?</string>
     <string name="calib_offgroup_data">Možné %1$d dáta mimo skupinu</string>
     <string name="calib_saved">Uložená kalibrácia</string>
@@ -162,6 +163,7 @@
     <string name="few_iter">Zlyhanie: príliš veľa opakovaní</string>
     <string name="few_groups">Nedostatok dát na zoradenie do skupín</string>
     <string name="found_groups">Nájdených %1$d skupín</string>
+    <!-- TODO string name="regroup">No regroup</string -->
     <!-- UNUSED string name="few_plots">Not enough sketches</string -->
     <string name="few_calibs">Nedostatočné množstvo kalibrácií</string>
     <string name="getting_info">DistoX informácie &#8230;</string>

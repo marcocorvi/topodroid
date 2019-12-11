@@ -89,7 +89,8 @@
     <string name="calib_delete">Kalibráció törlése</string>
     <string name="calib_device_mismatch">FIGYELEM: A kalibrációs fájl másik eszközzel készült</string>
     <string name="calib_no_name">Név megadása kötelező</string>
-    <string name="calib_gm_policy">Eljárás</string>
+    <!-- REMOVE string name="calib_gm_policy">Eljárás</string -->
+    <!-- TODO string name="calib_gm_policy">Group policy</string -->
     <string name="calib_gm_undelete">Helyreállítja a kalibrációs adatokat?</string>
     <string name="calib_saved">Mentett kalibráció</string>
     <string name="calib_updated">Az eszköz kalibrációja frissítve</string>
@@ -161,6 +162,7 @@
     <string name="few_iter">Iteráció nem sikerült</string>
     <string name="few_groups">Nincs elegendő csoportosítható adat</string>
     <!-- TODO string name="found_groups">Found %1$d groups</string -->
+    <!-- TODO string name="regroup">No regroup</string -->
     <!-- UNUSED string name="few_plots">Not enough sketches</string -->
     <string name="few_calibs">Nincs elegendő kalibráció</string>
     <string name="getting_info">DistoX információk letöltése &#8230;</string>

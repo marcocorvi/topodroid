@@ -88,7 +88,8 @@
     <string name="calib_delete">Kalibrierung löschen</string>
     <string name="calib_device_mismatch">WARNUNG: Kalibrierung stimmt mit Gerät nicht überein</string>
     <string name="calib_no_name">Name erforderlich</string>
-    <string name="calib_gm_policy">Methode</string>
+    <!-- REMOVE string name="calib_gm_policy">Methode</string -->
+    <!-- TODO string name="calib_gm_policy">Group policy</string -->
     <string name="calib_gm_undelete">Kalibrierung wiederherstellen?</string>
     <string name="calib_saved">Kalibrierung gespeichert</string>
     <string name="calib_updated">Kalibrierung aktualisiert</string>
@@ -164,6 +165,7 @@
     <string name="few_iter">Nicht genügend Wiederholungen</string>
     <string name="few_groups">Zu wenige Gruppen</string>
     <string name="found_groups">%1$d Gruppen gefunden</string>
+    <!-- TODO string name="regroup">No regroup</string -->
     <!-- UNUSED string name="few_plots">Nicht genügend Skizzen</string -->
     <string name="few_calibs">Nicht genügend Kalibrierungen</string>
     <string name="getting_info">DistoX wird abgefragt &#8230;</string>

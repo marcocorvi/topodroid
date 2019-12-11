@@ -89,7 +89,8 @@
     <string name="calib_delete">Изтриване на калибрация </string>
     <string name="calib_device_mismatch">Предупреждение: Различно устройство за тази калибрация</string>
     <string name="calib_no_name">Името е задължително</string>
-    <string name="calib_gm_policy">Правила</string>
+    <!-- REMOVE string name="calib_gm_policy">Правила</string -->
+    <!-- TODO string name="calib_gm_policy">Group policy</string -->
     <string name="calib_gm_undelete">Възстановяване на данни за калибрацията?</string>
     <string name="calib_saved">Калибрацията е записана</string>
     <string name="calib_updated">Калибрацията е обновена</string>
@@ -161,6 +162,7 @@
     <string name="few_iter">Невъзможни итерации</string>
     <string name="few_groups">Недостатъчно групи</string>
     <string name="found_groups">Намерени %1$d групи</string>
+    <!-- TODO string name="regroup">No regroup</string -->
     <!-- UNUSED string name="few_plots">Няма достатъчно скици</string -->
     <string name="few_calibs">Няма достатъчно калибрации</string>
     <string name="getting_info">Прочитане на DistoX инфо&#8230;</string>

@@ -92,7 +92,8 @@
     <string name="calib_delete">Apagar calibração </string>
     <string name="calib_device_mismatch">ALERTA: Dispositivo a ser calibrado incompatível</string>
     <string name="calib_no_name">Nome exigido</string>
-    <string name="calib_gm_policy">Regra</string>
+    <!-- REMOVE string name="calib_gm_policy">Regra</string -->
+    <!-- TODO string name="calib_gm_policy">Group policy</string -->
     <string name="calib_gm_undelete">Restaurar os dados de calibração?</string>
     <string name="calib_saved">Calibração salva</string>
     <string name="calib_updated">Calibração atualizada</string>
@@ -163,6 +164,7 @@
     <string name="few_iter">Falha: excesso de iterações</string>
     <string name="few_groups">Não há dados suficientes para os grupos</string>
     <string name="found_groups">Encontrados %1$d grupos</string>
+    <!-- TODO string name="regroup">No regroup</string -->
     <!-- UNUSED string name="few_plots">Esboços não suficientes</string -->
     <string name="few_calibs">Calibrações insuficientes</string>
     <string name="getting_info">Obtendo informações da DistoX &#8230;</string>
