@@ -89,7 +89,7 @@
     <string name="calib_device_mismatch">VAROVANIE: Kalibrácia - Zariadenie nesúhlasí</string>
     <string name="calib_no_name">Názov je povinný</string>
     <!-- REMOVE string name="calib_gm_policy">Pravidlá kalibrácie</string -->
-    <!-- TODO string name="calib_gm_policy">Group policy</string -->
+    <string name="calib_gm_policy">Pravidlá zoskupovania</string>
     <string name="calib_gm_undelete">Obnoviť kalibračné dáta?</string>
     <string name="calib_offgroup_data">Možné %1$d dáta mimo skupinu</string>
     <string name="calib_saved">Uložená kalibrácia</string>
@@ -126,7 +126,7 @@
     <string name="device_none">Nie je vybrané žiadne DistoX</string>
     <!-- UNUSED string name="device_paired">Device is paired</string -->
     <string name="device_reset">Reset pamäte DistoX</string>
-    <!-- TODO string name="device_clear">Clear DistoX memory</string -->
+    <string name="device_clear">Vyčistenie pamäte DistoX</string>
     <string name="device_code">DistoX kód %1$4d</string>
     <string name="device_firmware">Firmware %1$d.%2$d</string>
     <string name="device_hardware">Hardware %1$d.%2$d</string>
@@ -163,7 +163,7 @@
     <string name="few_iter">Zlyhanie: príliš veľa opakovaní</string>
     <string name="few_groups">Nedostatok dát na zoradenie do skupín</string>
     <string name="found_groups">Nájdených %1$d skupín</string>
-    <!-- TODO string name="regroup">No regroup</string -->
+    <string name="regroup">Žiadne preskupenie</string>
     <!-- UNUSED string name="few_plots">Not enough sketches</string -->
     <string name="few_calibs">Nedostatočné množstvo kalibrácií</string>
     <string name="getting_info">DistoX informácie &#8230;</string>
@@ -183,7 +183,7 @@
     <string name="import_calib_no_data">Calib. súbor: Žiadne dáta</string>
     <string name="import_calib_io_error">Calib. súbor: Chyba čítania</string>
     <string name="import_zip_ok">Import zip súboru úspešný</string>
-    <!-- TODO string name="import_zip_newer">Imported zip from more recent version</string -->
+    <string name="import_zip_newer">Importovaný zip súbor z najnovšej verzie</string>
     <!-- UNUSED string name="import_zip_wait">Imported zip file may take long. Please wait &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Saving sketch &#8230; please wait &#8230;</string -->
     <string name="MT_points_none">Chýbajúci bod MobileTopographer</string>
@@ -415,7 +415,7 @@
     <!-- UNUSED string name="not_implemented">Not implemented yet</string -->
     <string name="null_bitmap">Nie je možné vytvoriť obraz[OOM error]</string>
     <string name="photo">foto</string>
-    <!-- TODO string name="photo_camera">TopoDroid camera</string -->
+    <string name="photo_camera">TopoDroid kamera</string>
     <string name="photo_comment_prompt">Napíšte komentár</string>
     <string name="photo_azimuth_clino">Azimuth: %1$.1f Uhol %2$.1f</string>
     <!-- UNUSED string name="photo_name">station/name</string -->
@@ -655,7 +655,7 @@
     <string name="button_clear"     >Vyčistiť  </string>
     <string name="button_clear_day" >Vyčistiť 1d  </string>
     <string name="button_clear_week">Vyčistiť 7d  </string>
-    <!-- TODO string name="button_clear_memory">Clear memory</string -->
+    <string name="button_clear_memory">Vyčistiť pamäť</string>
     <string name="button_save"      >Uložiť     </string>
     <!-- UNUSED string name="button_select"    >Select    </string -->
     <string name="button_search"    >Vyhľadať     </string>
@@ -870,9 +870,9 @@
     <string name="audio_delete">Vymazať ?</string>
     <string name="audio_overwrite">Prepísať ?</string>
   
-    <!-- TODO string name="import_lrud">Import LRUD</string -->
-    <!-- TODO string name="import_leg_first">Leg before LRUD splays</string -->
-    <!-- TODO string name="import_diving_datamode">Diving datamode</string -->
+    <string name="import_lrud">Importovanie LRUD</string>
+    <string name="import_leg_first">Hlavné zámery pred LRUD pomocnými zámerami</string>
+    <string name="import_diving_datamode">Potápačský mód</string>
     
     <string name="title_azimut">Smerová orientácia</string>
     <string name="title_audio">Zvukový komentár</string>
@@ -971,8 +971,8 @@
     <string name="title_calib_export">Exportovať kalibráciu</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-    <!-- TODO string name="title_import_tro">VisualTopo import options</string -->
-    <!-- TODO string name="title_import_dat">Compass import options</string -->
+    <string name="title_import_tro">VisualTopo možnosti Importu</string>
+    <string name="title_import_dat">Compass možnosti Importu</string>
 
   <string name="pref_export_settings">EXPORT NASTAVENÍ do súboru</string>
 
@@ -1199,7 +1199,7 @@
   <string name="pref_backsight_title">Polia Spätnej zámery</string>
   <string name="pref_backsight_summary">Zobrazí Polia spätnej zámery v MENU bodu merania pri manuálnom zadávaní bodu</string>
   <string name="pref_backshot_title">Režim spätného merania DistoX</string>
-  <!-- TODO string name="pref_backshot_summary">Swap stations to DistoX backshots</string -->
+  <string name="pref_backshot_summary">Mapovanie v režime merania "NASPÄŤ" (číslovanie staničení naopak)</string>
   <string name="pref_prev_next_title">Predchádzajúci/Nasledujúci</string>
   <string name="pref_prev_next_summary">Zobrazenie tlačítka predchádzajúci/nasledujúci v MENU bodu merania</string>
   <!-- UNUSED string name="pref_mag_anomaly_title">Magnetic Anomaly</string -->
@@ -1234,8 +1234,8 @@
   <!-- UNUSED string name="pref_dxf_scale_summary">DXF sketch scale factor</string -->
   <string name="pref_dxf_blocks_title">Koncové body pomocných zámer</string>
   <string name="pref_dxf_blocks_summary">Zahrnie Koncové body pomocných zámer pre export DXF</string>
-  <!-- TODO string name="pref_shp_georef_title">Georeferenced sketch plan export</string -->
-  <!-- TODO string name="pref_shp_georef_summary">Sketch plan exported in WGS84 long-lat</string -->
+  <string name="pref_shp_georef_title">Export georeferencovaného nákresu pôdorysu</string>
+  <string name="pref_shp_georef_summary">Nákres pôdorysu je exportovaný v WGS84</string>
   <string name="pref_shp_georef_title">Georeferencovaný export Pôdorysu</string>
   <string name="pref_shp_georef_summary">Nákres pôdorysu exportovaný v systéme WGS84</string>	
   <string name="pref_thumbnail_title">Veľkosť Náhľadov</string>
