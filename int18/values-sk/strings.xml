@@ -88,7 +88,6 @@
     <string name="calib_delete">Vymazať kalibráciu</string>
     <string name="calib_device_mismatch">VAROVANIE: Kalibrácia - Zariadenie nesúhlasí</string>
     <string name="calib_no_name">Názov je povinný</string>
-    <!-- REMOVE string name="calib_gm_policy">Pravidlá kalibrácie</string -->
     <string name="calib_gm_policy">Pravidlá zoskupovania</string>
     <string name="calib_gm_undelete">Obnoviť kalibračné dáta?</string>
     <string name="calib_offgroup_data">Možné %1$d dáta mimo skupinu</string>
