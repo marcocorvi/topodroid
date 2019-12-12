@@ -1236,7 +1236,6 @@
   <string name="pref_shp_georef_title">Export georeferencovaného nákresu pôdorysu</string>
   <string name="pref_shp_georef_summary">Nákres pôdorysu je exportovaný v WGS84</string>
   <string name="pref_shp_georef_title">Georeferencovaný export Pôdorysu</string>
-  <string name="pref_shp_georef_summary">Nákres pôdorysu exportovaný v systéme WGS84</string>	
   <string name="pref_thumbnail_title">Veľkosť Náhľadov</string>
   <string name="pref_thumbnail_summary">Veľkosť náhľadov fotiek</string>
   <string name="pref_shot_timer_title">Časovač zámery smeru</string>
