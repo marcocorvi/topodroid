@@ -369,6 +369,20 @@ class DrawingAreaPath extends DrawingPointLinePath
   }
 
   @Override
+  void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /*, DrawingUtil mDrawingUtil */ )
+  {
+    // linetype: 0 spline, 1 bezier, 2 line
+    String name = BrushManager.getAreaName( mAreaType );
+    pw.format("          <item name=\"%s\" cave=\"%s\" branch=\"%s\" orientation=\"%.2f\" options=\"%s\" ",
+      name, cave, branch, mOrientation, ( (mOptions== null)? "" : mOptions )
+    );
+    if ( bind != null ) pw.format(" bind=\"%s\"", bind );
+    pw.format(" >\n" );
+    toCsurveyPoints( pw, true, false );
+    pw.format("          </item>\n");
+  }
+
+  @Override
   LinePoint next( LinePoint lp )
   {
     if ( lp == null ) return null;

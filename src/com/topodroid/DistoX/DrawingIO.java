@@ -1832,13 +1832,13 @@ class DrawingIO
     for ( DrawingPath p : paths ) {
       if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
         DrawingAreaPath ap = (DrawingAreaPath)p;
-        // ap.toTCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ ); 
+        ap.toTCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ ); 
       } else if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
         DrawingLinePath lp = (DrawingLinePath)p;
-        // lp.toTCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ );
+        lp.toTCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ );
       } else if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
         DrawingPointPath pp = (DrawingPointPath)p;
-        pp.toCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ );
+        pp.toTCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ );
       }
     }
   }

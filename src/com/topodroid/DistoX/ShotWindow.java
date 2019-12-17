@@ -648,7 +648,7 @@ public class ShotWindow extends Activity
       switch ( flip ) {
         case 0:
           if ( Math.abs(blk.mClino) < 60 ) { flip = 1; }
-          else { sign = ( blk.mClino > 0 ) ? -1 : 1;
+          else { sign = ( blk.mClino > 0 ) ? -1 : 1; }
           break;
         case 1:
           if ( sign * blk.mClino > 60 ) { flip = 2; sign = -sign; }

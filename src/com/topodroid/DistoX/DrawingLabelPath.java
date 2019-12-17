@@ -218,6 +218,20 @@ class DrawingLabelPath extends DrawingPointPath
   }
 
   @Override
+  void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
+  { 
+    // int size = mScale - SCALE_XS;
+    pw.format("<item name=\"label\" cave=\"%s\" branch=\"%s\" text=\"%s\" ",
+      cave, branch, mPointText );
+    if ( bind != null ) pw.format( " bind=\"%s\"", bind );
+    pw.format(Locale.US, "scale=\"%d\" orientation=\"%.2f\" >\n", mScale, mOrientation );
+    float x = DrawingUtil.sceneToWorldX( cx, cy ); // convert to world coords.
+    float y = DrawingUtil.sceneToWorldY( cx, cy );
+    pw.format(Locale.US, " <points data=\"%.2f %.2f \" />\n", x, y );
+    pw.format("</item>\n");
+  }
+
+  @Override
   void toDataStream( DataOutputStream dos, int scrap )
   {
     // label has null group

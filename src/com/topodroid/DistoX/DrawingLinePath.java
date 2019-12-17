@@ -322,7 +322,6 @@ class DrawingLinePath extends DrawingPointLinePath
   @Override
   void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
   {
-    float bezier_step = TDSetting.getBezierStep();
     int layer  = BrushManager.getLineCsxLayer( mLineType );
     int type   = BrushManager.getLineCsxType( mLineType );
     int cat    = BrushManager.getLineCsxCategory( mLineType );
@@ -334,89 +333,22 @@ class DrawingLinePath extends DrawingPointLinePath
     // FIXME CLOSE 
     pw.format(" mergemode=\"0\">\n" );
     pw.format("            <pen type=\"%d\" />\n", pen);
-    pw.format("            <points data=\"");
-    // boolean b = true;
-    float x3, y3;
-    float x0, y0, x1, y1, x2, y2;
-    // for ( LinePoint pt : mPoints ) 
-    if ( ! mReversed ) {
-      // NOTE do not skip tick-point if want to save section with tick
-      // if ( mLineType == BrushManager.mLineLib.mLineSectionIndex && size() > 2 ) pt = pt.mNext; // skip first point (tick)
-      LinePoint pt = mFirst; 
-      x0 = DrawingUtil.sceneToWorldX( pt.x, pt.y );
-      y0 = DrawingUtil.sceneToWorldY( pt.x, pt.y );
-      pw.format(Locale.US, "%.2f %.2f ", x0, y0 );
-      // Log.v("DistoX", "X " + x0 + " Y " + y0 );
-      // if ( b ) {
-        pw.format("B ");
-        //  b = false;
-      // }
-      for ( pt = pt.mNext; pt != null; pt = pt.mNext ) 
-      {
-        x3 = DrawingUtil.sceneToWorldX( pt.x, pt.y );
-        y3 = DrawingUtil.sceneToWorldY( pt.x, pt.y );
-	if ( pt.has_cp ) {
-          x1 = DrawingUtil.sceneToWorldX( pt.x1, pt.y1 );
-          y1 = DrawingUtil.sceneToWorldY( pt.x1, pt.y1 );
-          x2 = DrawingUtil.sceneToWorldX( pt.x2, pt.y2 );
-          y2 = DrawingUtil.sceneToWorldY( pt.x2, pt.y2 );
-	  float len = (x1-x0)*(x1-x0) + (x2-x1)*(x2-x1) + (x3-x2)*(x3-x2) + (x3-x0)*(x3-x0)
-	            + (y1-y0)*(y1-y0) + (y2-y1)*(y2-y1) + (y3-y2)*(y3-y2) + (y3-y0)*(y3-y0);
-	  int np = (int)( TDMath.sqrt( len ) * bezier_step + 0.5f );
-	  if ( np > 1 ) {
-	    BezierCurve bc = new BezierCurve( x0, y0, x1, y1, x2, y2, x3, y3 );
-	    for ( int n=1; n < np; ++n ) {
-	      Point2D p = bc.evaluate( (float)n / (float)np );
-              pw.format(Locale.US, "%.2f %.2f ", p.x, p.y );
-              // Log.v("DistoX", "N " + n + " X " + p.x + " Y " + p.y );
-            }
-	  }
-	} 
-        pw.format(Locale.US, "%.2f %.2f ", x3, y3 );
-        // Log.v("DistoX", "X " + x3 + " Y " + y3 );
-        // if ( b ) { pw.format("B "); b = false; }
-	x0 = x3;
-	y0 = y3;
-      }
-    } else {
-      LinePoint pt = mLast;
-      x0 = DrawingUtil.sceneToWorldX( pt.x, pt.y );
-      y0 = DrawingUtil.sceneToWorldY( pt.x, pt.y );
-      pw.format(Locale.US, "%.2f %.2f ", x0, y0 );
-      // Log.v("DistoX", "X " + x0 + " Y " + y0 );
-      // if ( b ) {
-        pw.format("B ");
-        // b = false;
-      // }
-      for ( pt = pt.mPrev; pt != null; pt = pt.mPrev ) 
-      {
-        x3 = DrawingUtil.sceneToWorldX( pt.x, pt.y );
-        y3 = DrawingUtil.sceneToWorldY( pt.x, pt.y );
-	if ( pt.has_cp ) {
-          x1 = DrawingUtil.sceneToWorldX( pt.x2, pt.y2 );
-          y1 = DrawingUtil.sceneToWorldY( pt.x2, pt.y2 );
-          x2 = DrawingUtil.sceneToWorldX( pt.x1, pt.y1 );
-          y2 = DrawingUtil.sceneToWorldY( pt.x1, pt.y1 );
-	  float len = (x1-x0)*(x1-x0) + (x2-x1)*(x2-x1) + (x3-x2)*(x3-x2) + (x3-x0)*(x3-x0)
-	            + (y1-y0)*(y1-y0) + (y2-y1)*(y2-y1) + (y3-y2)*(y3-y2) + (y3-y0)*(y3-y0);
-	  int np = (int)( TDMath.sqrt( len ) * bezier_step + 0.5f );
-	  if ( np > 1 ) {
-	    BezierCurve bc = new BezierCurve( x0, y0, x1, y1, x2, y2, x3, y3 );
-	    for ( int n=1; n < np; ++n ) {
-	      Point2D p = bc.evaluate( (float)n / (float)np );
-              pw.format(Locale.US, "%.2f %.2f ", p.x, p.y );
-              // Log.v("DistoX", "N " + n + " X " + p.x + " Y " + p.y );
-	    }
-	  }
-	}
-        pw.format(Locale.US, "%.2f %.2f ", x3, y3 );
-        // Log.v("DistoX", "X " + x3 + " Y " + y3 );
-        // if ( b ) { pw.format("B "); b = false; }
-	x0 = x3;
-	y0 = y3;
-      }
-    }
-    pw.format("\" />\n");
+    toCsurveyPoints( pw, false, mReversed );
+    pw.format("          </item>\n");
+  }
+
+  @Override
+  void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
+  {
+    // linetype: 0 line, 1 spline, 2 bezier
+    String name = BrushManager.getLineName( mLineType );
+    pw.format("          <item name=\"%s\" cave=\"%s\" branch=\"%s\" reversed=\"%d\" closed=\"%d\" outline=\"%d\" options=\"%s\" ",
+      name, cave, branch, (mReversed ? 1 : 0), (isClosed() ? 1 : 0), mOutline, 
+      ((mOptions   == null)? "" : mOptions)
+    );
+    if ( bind != null ) pw.format(" bind=\"%s\"", bind );
+    pw.format(" >\n" );
+    toCsurveyPoints( pw, false, mReversed );
     pw.format("          </item>\n");
   }
 

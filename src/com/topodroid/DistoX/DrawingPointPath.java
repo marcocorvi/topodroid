@@ -413,6 +413,24 @@ class DrawingPointPath extends DrawingPath
   }
 
   @Override
+  void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
+  { 
+    String name = BrushManager.getPointName( mPointType );
+    pw.format("<item name=\"%s\" cave=\"%s\" branch=\"%s\" text=\"%s\" options=\"%s\" ",
+      name, cave, branch, 
+      ((mPointText == null)? "" : mPointText),
+      ((mOptions   == null)? "" : mOptions)
+    );
+    if ( bind != null ) pw.format(" bind=\"%s\" ", bind );
+    pw.format(Locale.US, "scale=\"%d\" orientation=\"%.2f\" >\n", mScale, mOrientation );
+    float x = DrawingUtil.sceneToWorldX( cx, cy ); // convert to world coords.
+    float y = DrawingUtil.sceneToWorldY( cx, cy );
+    pw.format(Locale.US, " <points data=\"%.2f %.2f \" />\n", x, y );
+    pw.format("</item>\n");
+    // Log.v( TopoDroidApp.TAG, "toCSurevy() Point " + mPointType + " (" + x + " " + y + ") orientation " + mOrientation );
+  }
+
+  @Override
   String toTherion( )
   {
     StringWriter sw = new StringWriter();
