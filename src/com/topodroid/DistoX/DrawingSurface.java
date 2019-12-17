@@ -513,6 +513,9 @@ class DrawingSurface extends SurfaceView
     mCommandManager2.resetFixedPaint( app, true,  paint ); 
   }
 
+  // only for X-Sections autowalls
+  List<DrawingPath> getSplays() { return commandManager.getSplays(); }
+
   // called by DarwingActivity::addFixedLine
   void addFixedPath( DrawingPath path, boolean splay, boolean selectable )
   {
@@ -782,6 +785,22 @@ class DrawingSurface extends SurfaceView
 
   // -----------------------------------------------------------------------------
   // EXPORT
+
+  static void exportAsTCsx( PrintWriter pw, long type, String survey, String cave, String branch, /* String session, */
+                           DrawingCommandManager cm, List<PlotInfo> all_sections, List<PlotInfo> sections /* , DrawingUtil drawingUtil */ )
+  {
+    if ( PlotInfo.isProfile( type ) ) {
+      // FIXME OK PROFILE to check
+      if ( cm != null ) {
+        cm.exportAsTCsx( pw, survey, cave, branch, /* session, */ all_sections, sections /* , drawingUtil */ );
+      }
+    } else if ( type == PlotInfo.PLOT_PLAN ) {
+      if ( cm != null ) {
+        cm.exportAsTCsx( pw, survey, cave, branch, /* session, */ all_sections, sections /* , drawingUtil */ );
+      }
+    }
+  }
+
 
   static void exportAsCsx( PrintWriter pw, long type, String survey, String cave, String branch, /* String session, */
                            DrawingCommandManager cm, List<PlotInfo> all_sections, List<PlotInfo> sections /* , DrawingUtil drawingUtil */ )

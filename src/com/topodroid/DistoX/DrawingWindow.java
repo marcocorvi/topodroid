@@ -1108,7 +1108,7 @@ public class DrawingWindow extends ItemDrawer
 
     String parent = ( TDInstance.xsections? null : name );
 
-    if ( type == PlotInfo.PLOT_PLAN ) {
+    if ( PlotInfo.isPlan( type ) ) {
       for ( NumShot sh : shots ) {
         NumStation st1 = sh.from;
         NumStation st2 = sh.to;
@@ -5905,6 +5905,57 @@ public class DrawingWindow extends ItemDrawer
     String filename = TDPath.getSurveyPlotTdrFile( survey, section.name );
     DrawingIO.doExportCsxXSection( pw, filename, survey, cave, branch, /* session, */ section.name /* , drawingUtil */ ); // bind=section.name
   }
+  // ----------------------------------------------------------------------------------
+  // NEW CSURVEY EXPORT
+  static void exportAsTCsx( long sid, PrintWriter pw, String survey, String cave, String branch, /* String session, */ PlotSaveData psd1, PlotSaveData psd2 )
+  {
+    // Log.v("DistoX", "export as CSX <<" + cave + ">>" );
+    List< PlotInfo > all_sections = TopoDroidApp.mData.selectAllPlotsSection( sid, TDStatus.NORMAL );
+    ArrayList< PlotInfo > sections1 = new ArrayList<>(); // plan xsections
+    ArrayList< PlotInfo > sections2 = new ArrayList<>(); // profile xsections
+
+    pw.format("  <plan>\n");
+    if ( psd1 != null ) {
+      DrawingSurface.exportAsTCsx( pw, PlotInfo.PLOT_PLAN, survey, cave, branch, /* session, */ psd1.cm, all_sections, sections1 /* , psd1.util */ );
+    }
+    pw.format("  </plan>\n");
+    
+    pw.format("  <profile>\n");
+    if ( psd2 != null ) {
+      DrawingSurface.exportAsTCsx( pw, PlotInfo.PLOT_EXTENDED, survey, cave, branch, /* session, */ psd2.cm, all_sections, sections2 /* , psd2.util */ ); 
+    }
+    pw.format("  </profile>\n");
+
+    pw.format("    <crosssections>\n");
+    if ( psd1 != null ) {
+      for ( PlotInfo section1 : sections1 ) {
+        pw.format("    <crosssection id=\"%s\" design=\"0\" crosssection=\"%d\">\n", section1.name, section1.csxIndex );
+        // exportCsxXSection( pw, section1, survey, cave, branch, /* session, */ mDrawingUtil );
+        exportTCsxXSection( pw, section1, survey, cave, branch /* , session */ /* , psd1.util */ );
+        pw.format("    </crosssection>\n" );
+      }
+    }
+    if ( psd2 != null ) {
+      for ( PlotInfo section2 : sections2 ) {
+        pw.format("    <crosssection id=\"%s\" design=\"1\" crosssection=\"%d\">\n", section2.name, section2.csxIndex );
+        // exportCsxXSection( pw, section2, survey, cave, branch, /* session, */ mDrawingUtil );
+        exportTCsxXSection( pw, section2, survey, cave, branch /* , session */ /* , psd2.util */ );
+        pw.format("    </crosssection>\n" );
+      }
+    }
+    pw.format("    </crosssections>\n");
+  }
+
+  private static void exportTCsxXSection( PrintWriter pw, PlotInfo section, String survey, String cave, String branch
+		  /* , String session */ /* , DrawingUtil drawingUtil */ )
+  {
+    // String name = section.name; // binding name
+    // open xsection file
+    String filename = TDPath.getSurveyPlotTdrFile( survey, section.name );
+    DrawingIO.doExportTCsxXSection( pw, filename, survey, cave, branch, /* session, */ section.name /* , drawingUtil */ ); // bind=section.name
+  }
+
+  // ----------------------------------------------------------------------------------
 
   public void setConnectionStatus( int status )
   { 
@@ -5941,6 +5992,38 @@ public class DrawingWindow extends ItemDrawer
 
 // -------------------------------------------------------------
 // AUTO WALLS
+
+  // this is for auto-walls of x-sections
+  // void drawWallsAt( float x0, float y0 )
+  // {
+  //   if ( TDSetting.mWallsType == TDSetting.WALLS_NONE ) return;
+  //   if ( ! PlotInfo.isSection( mType ) ) return;
+
+  //   ArrayList< DLNSite > sites = null;
+  //   sites = new ArrayList<>();
+
+  //   List<DrawingPath> splays = mDrawingSurface.getSplays();
+  //   // float len2 = 0;
+  //   for ( DrawingPath sp : splays ) {
+  //     // float dx = sp.x2 - sp.x1;
+  //     // float dy = sp.y2 - sp.y1;
+  //     // float l2 = dx * dx + dy * dy;
+  //     // if ( l2 > len2 ) len2 = l2;
+  //     // len = 6.28 * TDMath.sqrt( len2 );
+  //     // if ( allSplay ) {
+  //       if (sites != null) {
+  //         // sites.add( new DLNSite( sp.x1, sp.y1 ) );
+  //         sites.add( new DLNSite( sp.x2, sp.y2 ) );
+  //       }
+  //     // } else {
+  //     //   if (pos != null) pos.add( new PointF(sp.x2, sp.y2) );
+  //     //   // if (neg != null) neg.add( new PointF(u,v) );
+  //     // }
+  //     makeDlnWall( sites, x0, y0, x0, y0 /*, len, uu, vv */ );
+  //     modified();
+  //     return;
+  //   }
+  // }
 
   void drawWallsAt( DBlock blk )
   {
@@ -5991,7 +6074,7 @@ public class DrawingWindow extends ItemDrawer
     }
     List< NumSplay > splays = mNum.getSplays();
     float xs=0, ys=0;
-    if ( mType == PlotInfo.PLOT_PLAN ) {
+    if ( PlotInfo.isPlan( mType ) ) {
       for ( NumSplay sp : splays ) {
         NumStation st = sp.from;
         boolean ok = false;
@@ -6038,7 +6121,7 @@ public class DrawingWindow extends ItemDrawer
           }
         } 
       }
-    } else { // PLOT_EXTENDED || PLOT_PROJECTED
+    } else if ( PlotInfo.isProfile( mType ) ) { // PLOT_EXTENDED || PLOT_PROJECTED
       for ( NumSplay sp : splays ) {
         NumStation st = sp.from;
         if ( st == st1 || st == st2 ) {
@@ -6071,6 +6154,8 @@ public class DrawingWindow extends ItemDrawer
           }
         }
       }
+    } else { // PlotInfo.isSection( mType )
+      return;
     }
     // (x0,y0) (x1,y1) are the segment endpoints
     // len is its length
@@ -6080,7 +6165,7 @@ public class DrawingWindow extends ItemDrawer
       makeWall( pos, x0, y0, x1, y1, len, uu, vv );
       makeWall( neg, x0, y0, x1, y1, len, uu, vv );
     } else if ( TDSetting.mWallsType == TDSetting.WALLS_DLN ) {
-      makeDlnWall( sites, x0, y0, x1, y1, len, uu, vv );
+      makeDlnWall( sites, x0, y0, x1, y1 /*, len, uu, vv */ );
     }
     modified();
   }
@@ -6099,7 +6184,7 @@ public class DrawingWindow extends ItemDrawer
     line.addPoint( xx, yy );
   }
 
-  private void makeDlnWall( ArrayList<DLNSite> sites, float x0, float y0, float x1, float y1, float len, PointF uu, PointF vv )
+  private void makeDlnWall( ArrayList<DLNSite> sites, float x0, float y0, float x1, float y1 /*, float len, PointF uu, PointF vv */ )
   {
     DLNWall dln_wall = new DLNWall( new Point2D(x0,y0), new Point2D(x1,y1) );
     dln_wall.compute( sites );

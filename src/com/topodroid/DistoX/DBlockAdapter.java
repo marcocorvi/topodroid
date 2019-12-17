@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import android.content.Context;
 
 import android.widget.ArrayAdapter;
@@ -25,8 +27,6 @@ import android.view.View.OnLongClickListener;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Locale;
-
-// import android.util.Log;
 
 class DBlockAdapter extends ArrayAdapter< DBlock >
                     implements OnLongClickListener
@@ -71,6 +71,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
         if ( blk.mView != null ) blk.mView.setBackgroundColor( TDColor.SEARCH );
       }
     }
+    // Log.v("DistoX-SEARCH", " search station " + name + " results " + mSearch.size() );
     // return (mSearch.size() > 0);
   }
 
@@ -94,6 +95,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
         }
       }
     }
+    // Log.v("DistoX-SEARCH", " search shot " + flag + " results " + mSearch.size() );
     // return (mSearch.size() > 0);
   }
     
@@ -135,10 +137,12 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   void clearSearch()
   { 
     for ( Integer pos : mSearch.getPositions() ) {
-      DBlock b = mItems.get( pos.intValue()  );
-      if ( b.mView != null ) b.mView.setBackgroundColor( TDColor.TRANSPARENT );
+      try { 
+        DBlock b = mItems.get( pos.intValue()  );
+        if ( b.mView != null ) b.mView.setBackgroundColor( TDColor.TRANSPARENT );
+      } catch ( IndexOutOfBoundsException e ) { /* nothing i can do */ }
     }
-    mSearch.clear(); 
+    mSearch.clearSearch(); 
   }
   int  nextSearchPosition() { return mSearch.nextPos(); }
   String getSearchName()    { return mSearch.getName(); }

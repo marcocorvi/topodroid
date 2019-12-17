@@ -628,9 +628,9 @@ public class ShotWindow extends Activity
   }
 
   // assign splay classes traversing backwards: expected
-  //   V-splays from +90 to +X then -X' to -90 ... to +90
-  //   H-splays all in +/-30
-  //   X-splays from +90 to -90 and againt to +90
+  //   V-splays from +/-90 to -/+90 ... to +/-90
+  //   H-splays all in [-30, +30]
+  //   X-splays from +/-90 (to -/+90 and againt to +/-90)
   void setSplayClasses( int pos )
   {
     DBlock blk = null;
@@ -641,21 +641,26 @@ public class ShotWindow extends Activity
     if ( blk == null ) return;
 
     int flip = 0;
+    int sign = 0;
     long leg1 = LegType.VSPLAY;
     do {
       if ( ! blk.isSplay() ) break;
       switch ( flip ) {
         case 0:
-          if ( blk.mClino < -60 ) flip = 1;
+          if ( Math.abs(blk.mClino) < 60 ) { flip = 1; }
+          else { sign = ( blk.mClino > 0 ) ? -1 : 1;
           break;
         case 1:
-          if ( blk.mClino >  60 ) flip = 2;
+          if ( sign * blk.mClino > 60 ) { flip = 2; sign = -sign; }
           break;
         case 2:
-          if ( Math.abs(blk.mClino) < 30 ) { flip = 3; leg1 = LegType.HSPLAY; }
+          if ( sign * blk.mClino > 60 ) { flip = 3; }
           break;
         case 3:
-          if ( blk.mClino >  60 ) { flip = 4; leg1 = LegType.XSPLAY; }
+          if ( Math.abs(blk.mClino) < 30 ) { flip = 4; leg1 = LegType.HSPLAY; }
+          break;
+        case 4:
+          if ( Math.abs(blk.mClino) > 60 ) { flip = 5; leg1 = LegType.XSPLAY; }
           break;
       }
       // Log.v("DistoX-SPLAY", "toggle splay type " + pos + " is splay " + blk.isSplay() + " leg " + blk.getLegType() );
@@ -1043,7 +1048,7 @@ public class ShotWindow extends Activity
       if ( ! diving ) mButton1[ BTN_DOWNLOAD ].setOnLongClickListener( this );
       mButton1[ BTN_PLOT - boff ].setOnLongClickListener( this );
       mButton1[ BTN_MANUAL - boff ].setOnLongClickListener( this );
-      if ( TDLevel.overExpert ) {
+      if ( TDLevel.overAdvanced ) {
         mButton1[ BTN_SEARCH - boff ].setOnLongClickListener( this );
       }
     }
@@ -1281,35 +1286,44 @@ public class ShotWindow extends Activity
     if ( closeMenu() ) return true;
     if ( CutNPaste.dismissPopupBT() ) return true;
 
-    mDataAdapter.clearSearch();
-
+    boolean ret = false;
     Button b = (Button)view;
-    if ( ! diving && b == mButton1[ BTN_DOWNLOAD ] ) { // MULTI-DISTOX
-      if (   TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI
-          && ! mDataDownloader.isDownloading() 
-          && TopoDroidApp.mDData.getDevices().size() > 1 ) {
-        (new DeviceSelectDialog( this, mApp, mDataDownloader, this )).show();
-      } else {
-        // setConnectionStatus( DataDownloader.STATUS_WAIT ); // turn arrow orange
-        
-        mDataDownloader.toggleDownload();
-        // setConnectionStatus( mDataDownloader.getStatus() );
-        mDataDownloader.doDataDownload( DataType.SHOT );
-      }
-    } else if ( isButton1( b, BTN_PLOT ) ) {
-      if ( TDInstance.recentPlot != null ) {
-        startExistingPlot( TDInstance.recentPlot, TDInstance.recentPlotType, null );
-      } else {
-        // onClick( view ); // fall back to onClick
-        new PlotListDialog( mActivity, this, mApp, null ).show();
-      }
-    } else if ( isButton1( b, BTN_MANUAL ) ) {
-      new SurveyCalibrationDialog( mActivity /*, mApp */ ).show();
-    } else if ( isButton1( b, BTN_SEARCH ) ) { // next search pos
+    if ( isButton1( b, BTN_SEARCH ) ) { // next search pos
+      int pos = mDataAdapter.nextSearchPosition();
+      // Log.v("DistoX-SEARCH", "next search pos " + pos );
+      jumpToPos( pos );
       // if ( mSearch != null ) jumpToPos( mSearch.nextPos() );
-      jumpToPos( mDataAdapter.nextSearchPosition() );
+      // jumpToPos( mDataAdapter.nextSearchPosition() );
+      ret = true;
+    } else {
+      mDataAdapter.clearSearch();
+      if ( ! diving && b == mButton1[ BTN_DOWNLOAD ] ) { // MULTI-DISTOX
+        if (   TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI
+            && ! mDataDownloader.isDownloading() 
+            && TopoDroidApp.mDData.getDevices().size() > 1 ) {
+          (new DeviceSelectDialog( this, mApp, mDataDownloader, this )).show();
+        } else {
+          // setConnectionStatus( DataDownloader.STATUS_WAIT ); // turn arrow orange
+          
+          mDataDownloader.toggleDownload();
+          // setConnectionStatus( mDataDownloader.getStatus() );
+          mDataDownloader.doDataDownload( DataType.SHOT );
+        }
+        ret = true;
+      } else if ( isButton1( b, BTN_PLOT ) ) {
+        if ( TDInstance.recentPlot != null ) {
+          startExistingPlot( TDInstance.recentPlot, TDInstance.recentPlotType, null );
+        } else {
+          // onClick( view ); // fall back to onClick
+          new PlotListDialog( mActivity, this, mApp, null ).show();
+        }
+        ret = true;
+      } else if ( isButton1( b, BTN_MANUAL ) ) {
+        new SurveyCalibrationDialog( mActivity /*, mApp */ ).show();
+        ret = true;
+      }
     }
-    return true;
+    return ret;
   } 
 
   @Override 

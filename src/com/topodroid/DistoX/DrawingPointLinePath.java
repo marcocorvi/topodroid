@@ -14,7 +14,7 @@
  */
 package com.topodroid.DistoX;
 
-// import android.util.Log;
+import android.util.Log;
 
 // import android.graphics.Canvas;
 // import android.graphics.Paint;
@@ -615,6 +615,7 @@ class DrawingPointLinePath extends DrawingPath
 
   protected void toTherionPoints( PrintWriter pw, boolean close )
   {
+    // Log.v( "DistoX-TH2", " rectF X " + left + " " + right + " Y " + bottom + " " + top );
     // for ( LinePoint pt : mPoints ) 
     LinePoint pt = mFirst; 
     pt.toTherion( pw );

@@ -1239,6 +1239,12 @@ class DrawingCommandManager
                                 // mCurrentStack, mUserStations, mStations 
   }
 
+  void exportAsTCsx( PrintWriter pw, String survey, String cave, String branch, /* String session, */
+                    List<PlotInfo> all_sections, List<PlotInfo> sections /* , DrawingUtil drawingUtil */ )
+  {
+    DrawingIO.doExportAsTCsx( pw, survey, cave, branch, /* session, */ null, getCommands(), all_sections, sections /* , drawingUtil */ ); // bind=null
+  }
+
   void exportAsCsx( PrintWriter pw, String survey, String cave, String branch, /* String session, */
                     List<PlotInfo> all_sections, List<PlotInfo> sections /* , DrawingUtil drawingUtil */ )
   {

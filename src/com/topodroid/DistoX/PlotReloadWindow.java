@@ -706,7 +706,7 @@ public class PlotReloadWindow extends ItemDrawer
   {
     ArrayAdapter< String > mMenuAdapter = new ArrayAdapter<>(mActivity, R.layout.menu );
     mMenuAdapter.add( res.getString( menus[0] ) );
-    mMenuAdapter.add( res.getString( menus[1] ) );
+    /* if ( TDLevel.overNormal ) */ mMenuAdapter.add( res.getString( menus[1] ) );
     mMenuAdapter.add( res.getString( menus[2] ) );
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
@@ -724,7 +724,7 @@ public class PlotReloadWindow extends ItemDrawer
     int p = 0;
     if ( p++ == pos ) { // CLOSE
       onBackPressed();
-    } else if ( TDLevel.overExpert && p++ == pos ) { // RELOAD : set activity result and return
+    } else if ( /* TDLevel.overNormal && */ p++ == pos ) { // RELOAD : set activity result and return
       Intent intent = new Intent();
       intent.putExtra( TDTag.TOPODROID_PLOT_TYPE, mType );
       intent.putExtra( TDTag.TOPODROID_PLOT_FILENAME, mBackups.get(mPos).filename );

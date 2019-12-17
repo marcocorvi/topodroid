@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 class SearchResult
@@ -35,12 +37,17 @@ class SearchResult
     mIdx  = -1;
   }
 
-  void clear() { mPos.clear(); mIdx = -1; }
+  void clearSearch()
+  { 
+    // Log.v("DistoX-SEARCH", "clear");
+    mPos.clear(); mIdx = -1;
+  }
 
   void add( int pos ) { mPos.add( Integer.valueOf(pos) ); }
 
   int nextPos( )
   {
+    // Log.v("DistoX-SEARCH", "size " + mPos.size() + " current index " + mIdx );
     if ( mPos.size() == 0 ) return -1;
     mIdx = ( mIdx + 1 ) % mPos.size(); // move index forward
     return mPos.get( mIdx ).intValue();

@@ -1054,17 +1054,19 @@ class DrawingIO
   // @param name filename without extension .th2
   static private void exportTherionGlobalHeader( BufferedWriter out, int type, RectF bbox, String name ) throws IOException
   {
+    // Log.v("DistoX-TH2", "bbox " + bbox.left + " " + bbox.top + " - " + bbox.right + " " + bbox.bottom + " ToTherion " + TDSetting.mToTherion );
+    float scale = TDSetting.mToTherion;
     out.write("encoding utf-8");
     out.newLine();
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
-    pw.format("##XTHERION## xth_me_area_adjust %.1f %.1f %.1f %.1f\n", bbox.left*6, 400-bbox.bottom*6, bbox.right*6, 400-bbox.top*6 );
+    pw.format("##XTHERION## xth_me_area_adjust %.1f %.1f %.1f %.1f\n",
+      bbox.left*scale-100, -bbox.bottom*scale-100, bbox.right*scale+100, -bbox.top*scale+100 );
     pw.format("##XTHERION## xth_me_area_zoom_to 25\n");
     if ( TDSetting.mTherionXvi ) {
       // xx vsb gamma - yy XVIroot
       pw.format("##XTHERION## xth_me_image_insert {%.2f 1 1.0} {%.2f 0} %s.xvi 0 {}\n",
-		      TDSetting.mToTherion*DrawingUtil.CENTER_X, -TDSetting.mToTherion*DrawingUtil.CENTER_Y, name );
-      // Log.v("DistoXX", "bbox " + bbox.left + " " + bbox.top + " - " + bbox.right + " " + bbox.bottom );
+        scale*DrawingUtil.CENTER_X, -scale*DrawingUtil.CENTER_Y, name );
     }
     pw.format("\n");
     pw.format("# %s created by TopoDroid v. %s\n\n", TDUtil.currentDate(), TopoDroidApp.VERSION );
@@ -1702,9 +1704,20 @@ class DrawingIO
   
   // -----------------------------------------------------------------------------
   // CSURVEY
-
   static void doExportCsxXSection( PrintWriter pw, String filename,
                                    String survey, String cave, String branch, /* String session, */ String bind /* , DrawingUtil drawingUtil */ )
+  {
+    doExportAnyCsxXSection( pw, filename, survey, cave, branch, /* session, */ bind, /* drawingUtil, */ 0 );
+  }
+
+  static void doExportTCsxXSection( PrintWriter pw, String filename,
+                                   String survey, String cave, String branch, /* String session, */ String bind /* , DrawingUtil drawingUtil */ )
+  {
+    doExportAnyCsxXSection( pw, filename, survey, cave, branch, /* session, */ bind, /* drawingUtil, */ 1 );
+  }
+
+  static void doExportAnyCsxXSection( PrintWriter pw, String filename,
+                                   String survey, String cave, String branch, /* String session, */ String bind /* , DrawingUtil drawingUtil */, int format )
   {
     File file = new File( filename );
     if ( ! file.exists() ) return;
@@ -1806,7 +1819,28 @@ class DrawingIO
         e.printStackTrace();
       }
     }
-    doExportAsCsx( pw, survey, cave, branch, /* session, */ bind, paths, null, null ); // all_sections=null, sections=null
+    if ( format == 0 ) {
+      doExportAsCsx( pw, survey, cave, branch, /* session, */ bind, paths, null, null ); // all_sections=null, sections=null
+    } else {
+      doExportAsTCsx( pw, survey, cave, branch, /* session, */ bind, paths, null, null ); // all_sections=null, sections=null
+    }
+  }
+
+  static void doExportAsTCsx( PrintWriter pw, String survey, String cave, String branch, /* String session, */ String bind,
+                             List<DrawingPath> paths, List< PlotInfo > all_sections, List< PlotInfo > sections )
+  {
+    for ( DrawingPath p : paths ) {
+      if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
+        DrawingAreaPath ap = (DrawingAreaPath)p;
+        // ap.toTCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ ); 
+      } else if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
+        DrawingLinePath lp = (DrawingLinePath)p;
+        // lp.toTCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ );
+      } else if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
+        DrawingPointPath pp = (DrawingPointPath)p;
+        pp.toCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ );
+      }
+    }
   }
 
   static void doExportAsCsx( PrintWriter pw, String survey, String cave, String branch, /* String session, */ String bind,
