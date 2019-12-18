@@ -5865,14 +5865,22 @@ public class DrawingWindow extends ItemDrawer
 
     pw.format("  <plan>\n");
     if ( psd1 != null ) {
-      DrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_PLAN, survey, cave, branch, /* session, */ psd1.cm, all_sections, sections1 /* , psd1.util */ );
+      if ( TDSetting.mExportTcsx ) { 
+        DrawingSurface.exportAsTCsx( pw, PlotInfo.PLOT_PLAN, survey, cave, branch, /* session, */ psd1.cm, all_sections, sections1 /* , psd1.util */ );
+      } else {
+        DrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_PLAN, survey, cave, branch, /* session, */ psd1.cm, all_sections, sections1 /* , psd1.util */ );
+      }
     }
     pw.format("    <plot />\n");
     pw.format("  </plan>\n");
     
     pw.format("  <profile>\n");
     if ( psd2 != null ) {
-      DrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_EXTENDED, survey, cave, branch, /* session, */ psd2.cm, all_sections, sections2 /* , psd2.util */ ); 
+      if ( TDSetting.mExportTcsx ) { 
+        DrawingSurface.exportAsTCsx( pw, PlotInfo.PLOT_EXTENDED, survey, cave, branch, /* session, */ psd2.cm, all_sections, sections2 /* , psd2.util */ ); 
+      } else {
+        DrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_EXTENDED, survey, cave, branch, /* session, */ psd2.cm, all_sections, sections2 /* , psd2.util */ ); 
+      }
     }
     pw.format("    <plot />\n");
     pw.format("  </profile>\n");

@@ -250,6 +250,7 @@ class TDSetting
   static final char[] CSV_SEPARATOR = { CSV_COMMA, CSV_PIPE, CSV_TAB };
 
   static int mImportDatamode    = 0;  // SurveyInfo.DATAMODE_NORMAL
+  static boolean mExportTcsx    = false;
   static int mExportShotsFormat = -1; // DISTOX_EXPORT_NONE
   static int mExportPlotFormat  = -1; // DISTOX_EXPORT_NONE
   static boolean mTherionMaps   = false;
@@ -777,6 +778,7 @@ class TDSetting
     String[] defGeekImport = TDPrefKey.GEEKIMPORTdef;
     mZipWithSymbols = prefs.getBoolean(     keyGeekImport[ 0], bool(defGeekImport[ 0]) ); // DISTOX_ZIP_WITH_SYMBOLS
     mImportDatamode = tryInt(   prefs,      keyGeekImport[ 1],      defGeekImport[ 1] );  // DISTOX_IMPORT_DATAMODE
+    mExportTcsx     = prefs.getBoolean(     keyGeekImport[ 2], bool(defGeekImport[ 2]) ); // DISTOX_TRANSFER_CSURVEY
 
     String[] keyExport = TDPrefKey.EXPORT;
     String[] defExport = TDPrefKey.EXPORTdef;
@@ -1492,8 +1494,10 @@ class TDSetting
     String[] def = TDPrefKey.GEEKIMPORTdef;
     if ( k.equals( key[ 0 ] ) ) {        // DISTOX_ZIP_WITH_SYMBOLS
       mZipWithSymbols = tryBooleanValue( hlp, k, v, bool(def[ 0]) ); 
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_IMPORT_DATAMODE (choice)
+    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_IMPORT_DATAMODE (choice)
       mImportDatamode = tryIntValue( hlp, k, v, def[ 1] );
+    } else if ( k.equals( key[ 2 ] ) ) {        // DISTOX_TRANSFER_CSURVEY
+      mExportTcsx = tryBooleanValue( hlp, k, v, bool(def[ 2]) ); 
     } else {
       TDLog.Error("missing GEEK_IMPORT key: " + k );
     }
@@ -2454,7 +2458,7 @@ class TDSetting
       pw.printf(Locale.US, "L/R extend %c\n", tf(mLRExtend) );
       pw.printf(Locale.US, "U/D vertical %.1f, L/R horicontal %.1f\n", mLRUDvertical, mLRUDhorizontal );
 
-      pw.printf(Locale.US, "Geek Import - data mode %d, zipped symbols %c\n", mImportDatamode, tf( mZipWithSymbols) );
+      pw.printf(Locale.US, "Geek Import - data mode %d, zipped symbols %c TCSX %c\n", mImportDatamode, tf( mZipWithSymbols), tf(mExportTcsx) );
       pw.printf(Locale.US, "Timer: wait %d, volume %d\n", mTimerWait, mBeepVolume );
       pw.printf(Locale.US, "Recent data %c, timeout %d\n", tf(mShotRecent), mRecentTimeout );
       pw.printf(Locale.US, "Leg: closeness %.2f, nr %d, triple-shot %d, max %.2f, min %.2f\n",

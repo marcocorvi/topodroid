@@ -240,7 +240,7 @@ class TDExporter
       PrintWriter pw = new PrintWriter( fw );
       String date = TDUtil.getDateString( "yyyy-MM-dd" );
 
-      pw.format("<csurvey version=\"1.07\" id=\"\">\n");
+      pw.format("<csurvey version=\"1.11\" id=\"\">\n");
       pw.format("<!-- %s created by TopoDroid v %s -->\n", date, TopoDroidApp.VERSION );
 
 // ++++++++++++++++ PROPERTIES

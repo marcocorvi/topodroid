@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-// import android.util.Log;
+import android.util.Log;
 
 import android.content.Context;
 // import android.content.res.Resources;
@@ -202,7 +202,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
       case R.id.checkbox: // click always switches the checkbox
 	bvalue = ((CheckBox)v).isChecked();
 	value  = ( bvalue? "true" : "false" );
-        // Log.v("DistoXPref", "[onClick] checkbox: " + name + " val " + value );
+        // Log.v("DistoX-PREF", "[onClick] checkbox: " + name + " val " + value );
 	TDSetting.updatePreference( helper, category, name, value );
         break;
       case R.id.title:
@@ -607,7 +607,8 @@ class TDPref implements AdapterView.OnItemSelectedListener
     String[] def = TDPrefKey.GEEKIMPORTdef;
     return new TDPref[ ] {
       makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], T, def[ 0],         ctx, hlp ),
-      makeLst( cat, key[ 1], tit[ 1], dsc[ 1], T, def[ 1], R.array.importDatamode, R.array.importDatamodeValue, ctx, hlp )
+      makeLst( cat, key[ 1], tit[ 1], dsc[ 1], T, def[ 1], R.array.importDatamode, R.array.importDatamodeValue, ctx, hlp ),
+      makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2],         ctx, hlp ),
     };
   }
 
@@ -1057,8 +1058,8 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeFwd( cat, key[4], tit[4],          A,          ctx, hlp ), // GEEK_PLOT
       makeFwd( cat, key[5], tit[5],          A,          ctx, hlp ), // GEEK_LINE
       makeFwd( cat, key[6], tit[6],          T,          ctx, hlp ), // PLOT_WALLS
-      makeFwd( cat, key[7], tit[7],          T,          ctx, hlp ), // GEEK_IMPORT
-      makeFwd( cat, key[8], tit[8],          A,          ctx, hlp )  // GEEK_DEVICE
+      makeFwd( cat, key[7], tit[7],          A,          ctx, hlp ), // GEEK_DEVICE
+      makeFwd( cat, key[8], tit[8],          T,          ctx, hlp )  // GEEK_IMPORT
       // makeFwd( cat, key[8], tit[8],          D,          ctx, hlp )  // SKETCH // FIXME_SKETCH_3D
     };
   }

@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-// import android.util.Log;
+import android.util.Log;
 
 import android.content.Intent;
 import android.content.Context;
@@ -77,8 +77,8 @@ public class TDPrefActivity extends Activity
   static final int PREF_GEEK_SHOT          = 30; 
   static final int PREF_GEEK_PLOT          = 31; 
   static final int PREF_GEEK_LINE          = 32; 
-  static final int PREF_GEEK_IMPORT        = 33; 
-  static final int PREF_GEEK_DEVICE        = 34; 
+  static final int PREF_GEEK_DEVICE        = 33; 
+  static final int PREF_GEEK_IMPORT        = 34; 
   static final int PREF_CATEGORY_LOG       = 35; // this must be the last
 
   static int[] mTitleRes = {
@@ -153,7 +153,6 @@ public class TDPrefActivity extends Activity
 
     TDandroid.setScreenOrientation( this );
 
-    // Log.v("DistoX", "TDPrefActivity::onCreate");
 
     // mApp = (TopoDroidApp) getApplication();
     mCtx = TDInstance.context;
@@ -165,6 +164,7 @@ public class TDPrefActivity extends Activity
         mPrefCategory = PREF_CATEGORY_ALL;
       }
     }
+    // Log.v("DistoX", "TDPrefActivity::onCreate category " + mPrefCategory );
     if ( loadPreferences() ) {
       if (mPrefCategory == PREF_CATEGORY_ALL )    { mPrefActivityAll    = this; }
       if (mPrefCategory == PREF_CATEGORY_SURVEY ) { mPrefActivitySurvey = this; }
@@ -203,7 +203,7 @@ public class TDPrefActivity extends Activity
     // Resources res = getResources();
     TDPrefHelper hlp = TopoDroidApp.mPrefHlp;
 
-    // Log.v("DistoX", "***** Pref create. category " + mPrefCategory );
+    // Log.v("DistoX-PREF", "Load Pref create. category " + mPrefCategory );
     switch ( mPrefCategory ) {
       case PREF_CATEGORY_ALL:       mPrefs = TDPref.makeMainPrefs(     this, hlp ); break;
       case PREF_CATEGORY_SURVEY:    mPrefs = TDPref.makeSurveyPrefs(   this, hlp ); break;
@@ -253,6 +253,7 @@ public class TDPrefActivity extends Activity
 	}
       }
     }
+    // Log.v("DistoX-PREF", "Level " + TDLevel.mLevel + " found " + cnt + " prefs" );
     if ( cnt == 0 ) return false;
 
     if (mPrefCategory == PREF_CATEGORY_ALL ) {
@@ -336,8 +337,8 @@ public class TDPrefActivity extends Activity
       linkPreference( "DISTOX_GEEK_PLOT",           PREF_GEEK_PLOT );
       linkPreference( "DISTOX_GEEK_LINE",           PREF_GEEK_LINE );
       linkPreference( "DISTOX_PLOT_WALLS",          PREF_PLOT_WALLS );
-      linkPreference( "DISTOX_GEEK_IMPORT",         PREF_GEEK_IMPORT );
       linkPreference( "DISTOX_GEEK_DEVICE",         PREF_GEEK_DEVICE );
+      linkPreference( "DISTOX_GEEK_IMPORT",         PREF_GEEK_IMPORT );
       // linkPreference( "DISTOX_SKETCH_PREF",         PREF_CATEGORY_SKETCH ); // FIXME_SKETCH_3D
     }
 
@@ -386,7 +387,7 @@ public class TDPrefActivity extends Activity
         @Override
         public void onClick( View v )
         {
-	  // Log.v("DistoX", "click on " + pref.name );
+	  // Log.v("DistoX-PREF", "click on " + pref.name + " categoy " + category );
           startActivity( intent );
         }
     } );
