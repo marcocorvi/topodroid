@@ -916,6 +916,7 @@
     <!-- TODO string name="title_settings_tro">VisualTopo export settings</string -->
     <string name="title_settings_svg">Parametri exportare SVG</string>
     <string name="title_settings_dxf">Parametri exportare DXF</string>
+    <!-- TODO string name="title_settings_shp">Shapefile export settings</string -->
     <string name="title_settings_png">Parametri exportare PNG</string>
     <string name="title_settings_kml">Parametri exportare KML</string>
 
@@ -958,6 +959,7 @@
     <!-- TODO string name="title_import_dat">Compass import options</string -->
 
   <!-- TODO string name="pref_export_settings">Export settings</string -->
+  <!-- TODO string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
   <string name="pref_cat_survey">DATE CARTARE</string>
   <string name="pref_cat_drawing">SCHIȚARE</string>

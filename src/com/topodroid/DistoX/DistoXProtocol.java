@@ -171,6 +171,12 @@ class DistoXProtocol extends TopoDroidProtocol
   // }
 
   // PACKETS I/O ------------------------------------------------------------------------
+  private void checkDataType( byte b, int data_type )
+  {
+    // if ( DataType.of( b ) != data_type ) { // CHECK_DATA_TYPE 
+    //   Log.v( "DistoX-DATA_TYPE", "read-available: " + String.format(" %02x", b ) + " data_type " + data_type + "/" + DataType.of( b ) );
+    // }
+  }
 
   /** try to read 8 bytes - return the number of read bytes
    * @param timeout    joining timeout
@@ -193,9 +199,7 @@ class DistoXProtocol extends TopoDroidProtocol
           {
             count[0] = mIn.read( mBuffer, dataRead[0], toRead[0] );
             // if ( TDSetting.mPacketLog ) LogPacket( 0L );
-            if ( DataType.of( mBuffer[0] ) != data_type ) { // CHECK_DATA_TYPE 
-              Log.v( "DistoX-DATA_TYPE", "read-available: " + String.format(" %02x", mBuffer[0] ) + " data_type " + data_type );
-            }
+            checkDataType( mBuffer[0], data_type );
 
             toRead[0]   -= count[0];
             dataRead[0] += count[0];
@@ -284,9 +288,7 @@ class DistoXProtocol extends TopoDroidProtocol
         if ( no_timeout || ! TDSetting.mZ6Workaround ) {
           mIn.readFully( mBuffer, 0, 8 );
           if ( TDSetting.mPacketLog ) logPacket( 0L );
-          if ( DataType.of( mBuffer[0] ) != data_type ) { // CHECK_DATA_TYPE 
-            Log.v( "DistoX-DATA_TYPE", "read-packet[1]: " + String.format(" %02x", mBuffer[0] ) + " data_type " + data_type );
-          }
+          checkDataType( mBuffer[0], data_type );
         }
 
         // DistoX packets have a sequence bit that flips between 0 and 1
@@ -296,9 +298,7 @@ class DistoXProtocol extends TopoDroidProtocol
         mSeqBit = seq;
         // if ( (mBuffer[0] & 0x0f) != 0 ) // ack every packet
         { 
-          if ( DataType.of( mBuffer[0] ) != data_type ) { // CHECK_DATA_TYPE 
-            Log.v( "DistoX-DATA_TYPE", "read-packet[2]: " + String.format(" %02x", mBuffer[0] ) + " data_type " + data_type );
-          }
+          checkDataType( mBuffer[0], data_type );
           mAcknowledge[0] = (byte)(( mBuffer[0] & 0x80 ) | 0x55);
           if ( TDLog.LOG_PROTO ) {
             TDLog.DoLog( "read packet byte " + String.format(" %02x", mBuffer[0] ) + " ... writing ack" );
@@ -362,7 +362,7 @@ class DistoXProtocol extends TopoDroidProtocol
       mIn.readFully( mBuffer, 0, 8 );
       if ( TDSetting.mPacketLog ) logPacket( 0L );
       // CHECK_DATA_TYPE 
-      //   Log.v( "DistoX-DATA_TYPE", "read-to_read: " + String.format(" %02x", mBuffer[0] ) + " data_type " + data_type );
+      // checkDataType( mBuffer[0], data_type );
 
       if ( ( mBuffer[0] != (byte)( 0x38 ) ) || ( mBuffer[1] != command[1] ) || ( mBuffer[2] != command[2] ) ) {
 	mError = DISTOX_ERR_HEADTAIL;
@@ -440,7 +440,7 @@ class DistoXProtocol extends TopoDroidProtocol
 
       mIn.readFully( mBuffer, 0, 8 );
       // if ( TDSetting.mPacketLog ) logPacket( 0L );
-      // Log.v( "DistoX-DATA_TYPE", "read-memory[1]: " + String.format(" %02x", mBuffer[0] ) );
+      // checkDataType( mBuffer[0], data_type );
 
     } catch ( IOException e ) {
       TDLog.Error( "readmemory() IO failed" );
@@ -488,7 +488,7 @@ class DistoXProtocol extends TopoDroidProtocol
 
           mIn.readFully( mBuffer, 0, 8 );
           // if ( TDSetting.mPacketLog ) logPacket( 0L );
-          // Log.v( "DistoX-DATA_TYPE", "read-memory[2]: " + String.format(" %02x", mBuffer[0] ) );
+          // checkDataType( mBuffer[0], data_type );
 
         } catch ( IOException e ) {
           TDLog.Error( "readmemory() IO failed" );
@@ -541,7 +541,7 @@ class DistoXProtocol extends TopoDroidProtocol
 
         mIn.readFully( mBuffer, 0, 8 );
         if ( TDSetting.mPacketLog ) logPacket( 0L );
-        // Log.v( "DistoX-DATA_TYPE", "write-calib: " + String.format(" %02x", mBuffer[0] ) );
+        // checkDataType( mBuffer[0], data_type );
 
         // TDLog.Log( TDLog.LOG_PROTO, "writeCalibration " + 
         //   String.format("%02x %02x %02x %02x %02x %02x %02x %02x", mBuffer[0], mBuffer[1], mBuffer[2],
@@ -586,7 +586,7 @@ class DistoXProtocol extends TopoDroidProtocol
 
         mIn.readFully( mBuffer, 0, 8 );
         // if ( TDSetting.mPacketLog ) logPacket( 0L );
-        // Log.v( "DistoX-DATA_TYPE", "read-calib: " + String.format(" %02x", mBuffer[0] ) );
+        // checkDataType( mBuffer[0], data_type );
 
         if ( mBuffer[0] != 0x38 ) { return false; }
         if ( mBuffer[1] != (byte)( addr & 0xff ) ) { return false; }

@@ -932,6 +932,7 @@
     <string name="title_settings_tro">VisualTopo nastavenia Exportu</string>
     <string name="title_settings_svg">SVG nastavenia Exportu</string>
     <string name="title_settings_dxf">DXF nastavenia Exportu</string>
+    <!-- TODO string name="title_settings_shp">Shapefile export settings</string -->
     <string name="title_settings_png">PNG nastavenia Exportu</string>
     <string name="title_settings_kml">KML nastavenia Exportu</string>
 
@@ -974,6 +975,7 @@
     <string name="title_import_dat">Compass možnosti Importu</string>
 
   <string name="pref_export_settings">EXPORT NASTAVENÍ do súboru</string>
+  <!-- TODO string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
   <string name="pref_cat_survey">NASTAVENIA MAPOVANIA</string>
   <string name="pref_cat_drawing">NASTAVENIA KRESLENIA</string>

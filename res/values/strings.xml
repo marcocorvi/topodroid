@@ -932,6 +932,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_settings_tro">VisualTopo export settings</string>
     <string name="title_settings_svg">SVG export settings</string>
     <string name="title_settings_dxf">DXF export settings</string>
+    <string name="title_settings_shp">Shapefile export settings</string>
     <string name="title_settings_png">PNG export settings</string>
     <string name="title_settings_kml">KML export settings</string>
 
@@ -974,7 +975,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_import_dat">Compass import options</string>
 
   <string name="pref_export_settings">Export settings</string>
-  <string name="pref_tcsx">Export Transfer-cSurvey</string>
+  <string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string>
 
   <string name="pref_cat_survey">SURVEY DATA</string>
   <string name="pref_cat_drawing">SKETCHING</string>
