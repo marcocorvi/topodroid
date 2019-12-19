@@ -919,7 +919,7 @@
     <string name="title_settings_tro">VisualTopo настройки экспорта</string>
     <string name="title_settings_svg">SVG настройки экспорта</string>
     <string name="title_settings_dxf">DXF настройки экспорта</string>
-    <!-- TODO string name="title_settings_shp">Shapefile export settings</string -->
+    <string name="title_settings_shp">Shapefile настройки экспортаs</string>
     <string name="title_settings_png">PNG настройки экспорта</string>
     <string name="title_settings_kml">KML настройки экспорта</string>
 
@@ -962,7 +962,7 @@
     <string name="title_import_dat">Настройки импорта Compass</string>
 
   <string name="pref_export_settings">Экспорт настроек</string>
-  <!-- TODO string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
+  <string name="pref_tcsx">Экспорт cSurvey-1.20 transfer-csx</string>
 
   <string name="pref_cat_survey">НАСТРОЙКИ ТОПОСЪЁМКИ </string>
   <string name="pref_cat_drawing">НАСТРОЙКИ РИСОВАНИЯ </string>
