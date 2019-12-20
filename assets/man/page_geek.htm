@@ -6,30 +6,32 @@
 <i>Custom settings</i> are for TopoDroid esoteric features.<br>
 They are accessible only at tester level.<br>
 However, their effects can be visible at a lower level (denoted in square brackets).<br>
-By default, the flags are disabled unless marked with "#".
+By default, the flags are disabled.
 <br><p>
 
 <b>General settings</b><br>
 <ul>
-<li>Additional <i>tool sets</i></li>
-<li>Sketch <i>backup clearing</i></li>
-<li>Packet logging</li>
+<li>Additional <i>tool sets</i>: to install tools from other sets than the basic cave-tool set</li>
+<li>Sketch <i>backup clearing</i>: the shot window has a menu to clear the sketch backups.</li>
+<li><i>Packet logging</i>: raw data packets are copied into the packed database</li>
 </ul>
 <br><p>
 
 <b>Data settings</b><br>
 <ul>
-<li>Diving mode</li>
-<li><i>Latest shots</i> highlighted in blue, and selectively displayed</li>
-<li>Recent shots timeout</li>
-<li>Splay classes and coloring</li>
-<li><i>Fractional extend</i> for legs</li>
-<li>Splay <i>plane interpolation</i></li>
+<li><i>Diving mode</i> enables data "diving-mode" - distance, azimuth and depth</li>
+<li><i>Recent shots</i> can be highlighted in blue, and selectively displayed</li>
+<li>Recent shots timeout: the time after which a shot is no longer "recent"</li>
+<li><i>Splay classes</i>: classification of splays in classes (H,V,X, and normal)</li>
+<li>Splay <i>coloring</i></li>
+<li><i>Fractional extend</i> for legs in the extended profile</li>
+<li>Swap stations for <i>DistoX backsight</i> data</li>
+<li><i>Direction and dip</i> of the plane of a set of splays</li>
 <li><i>Sensors</i> measures [A]</li>
-<li>loop closure [E]</li>
-<li>Whether to use Android compass/clino [A]</li>
-<li>Shot timer [E]</li>
-<li>Shot timer volume [E]</li>
+<li><i>Loop closure</i> [E]</li>
+<li>Using Android <i>compass/clino</i> [A]</li>
+<li>Remote control shot <i>timer</i> [E]</li>
+<li>Remote control timer <i>volume</i> [E]</li>
 </ul>
 <br><p>
 
@@ -44,23 +46,24 @@ By default, the flags are disabled unless marked with "#".
 <li><i>Splay dash angle threshold</i>: splay shots making an angle smaller than this threshold are dashed, in x-sections [60&deg;]</li>
 <li>Number of sketch <i>backups</i>, kept in a round list [5] [A]</li>
 <li><i>Minimum interval</i> between two backups [60 s] [A]</li>
-<li>Automatic inclusion of x-sections in exports [yes`]<li>
-<li>coloring saved stations orange</li>
+<li>Automatic inclusion of x-sections in exports [yes]<li>
+<li><i>Saved stations</i> colored orange in the sketches</li>
 <li><i>canvas levels</i>: none, by item, by type [none]</li>
 </ul>
 <br><p>
 
 <b>Line settings</b><br>
 <ul>
-<li><i>Minimal corner angle</i> in making lines straight (fourth button of line-item edit dialog) [45&deg;] </li>
+<li>Minimal <i>corner angle</i> in making lines straight (fourth button of line-item edit dialog) [45&deg;] </li>
 <li><i>Interpolation accuracy</i> for cubic Bezier segments [1.0]</li>
 <li><i>Corner threshold</i> for cubic Bezier segments [20.0]</li>
-<li><i>Maximal point/segment distance</i> for weeding points [0.5 m]</li>
-<li><i>Maximal segment length</i> for weeding [2.0 m]</li>
+<li>Maximal <i>point/segment distance</i> for weeding points [0.5 m]</li>
+<li>Maximal <i>segment length</i> for weeding [2.0 m]</li>
 <li><i>Line/Area snap</i> actions</li>
 <li><i>Smooth/straighten segment</i> actions</li>
-<li>whole line straigtening</li>
+<li>whole line <i>straigtening</i> action</li>
 <li><i>Multipath</i> actions</li>
+<li><i>Composite actions</i></li>
 </ul>
 <br><p>
 
@@ -80,10 +83,18 @@ By default, the flags are disabled unless marked with "#".
 <li><i>Connection delay</i>: delay [1/10 sec] before trying to connect to the DistoX [0, no delay] [B]</li>
 <li><i>Data pause</i>: pause after the download of each data [250 ms] [A]</li>
 <li><i>Ready data</i>: wait time for the data to get ready [500 ms] [A]</li>
-<li>Pause after the <i>Laser-on command</i> [1000 ms] [A]</li>
-<li>Pause after the <i>shot command</i> [2000 ms] [A]</li>
+<li>Pause after the remote <i>Laser-on command</i> [1000 ms] [A]</li>
+<li>Pause after the remote <i>shot command</i> [2000 ms] [A]</li>
 </ul>
 <br><p>
+  
+  <b>Import-Export settings</b><br>
+  <ul>
+  <li>Include <i>tool files</i> in zip archive</li>
+  <li>Survey <i>datamode</i> on import (normal, diving) [normal]</li>
+  <li>Export csx in <i>cSurvey-transfer</i> format (required cSurvey 1.20)</li> 
+  </ul>
+  <br><p>
 
 </body>
 </html>
