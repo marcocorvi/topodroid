@@ -136,6 +136,29 @@ class DrawingPhotoPath extends DrawingPointPath
   }
 
   @Override
+  void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
+  { 
+    File photofile = new File( TDPath.getSurveyJpgFile( survey, Long.toString(mId) ) );
+    if ( photofile.exists() ) {
+      byte[] buf = TDExporter.readFileBytes( photofile );
+      if ( buf != null ) {
+        pw.format("<item type=\"point\" name=\"photo\" cave=\"%s\" branch=\"%s\" text=\"%s\" ", cave, branch, ((mPointText == null)? "" : mPointText) );
+        if ( bind != null ) pw.format(" bind=\"%s\" ", bind );
+        pw.format(Locale.US, "scale=\"%d\" orientation=\"%.2f\" options=\"%s\" >\n", mScale, mOrientation, ((mOptions   == null)? "" : mOptions) );
+        pw.format(" <attachment dataformat=\"0\" data=\"%s\" name=\"\" note=\"%s\" type=\"image/jpeg\" />\n", 
+          Base64.encodeToString( buf, Base64.NO_WRAP ),
+          ((mPointText==null)?"":mPointText)
+        );
+        float x = DrawingUtil.sceneToWorldX( cx, cy ); // convert to world coords.
+        float y = DrawingUtil.sceneToWorldY( cx, cy );
+        pw.format(Locale.US, " <points data=\"%.2f %.2f \" />\n", x, y );
+        pw.format("</item>\n");
+        // Log.v( TopoDroidApp.TAG, "toCSurevy() Point " + mPointType + " (" + x + " " + y + ") orientation " + mOrientation );
+      }
+    }
+  }
+
+  @Override
   void toDataStream( DataOutputStream dos, int scrap )
   {
     try {

@@ -221,7 +221,7 @@ class DrawingLabelPath extends DrawingPointPath
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
   { 
     // int size = mScale - SCALE_XS;
-    pw.format("<item name=\"label\" cave=\"%s\" branch=\"%s\" text=\"%s\" ",
+    pw.format("<item type=\"point\" name=\"label\" cave=\"%s\" branch=\"%s\" text=\"%s\" ",
       cave, branch, mPointText );
     if ( bind != null ) pw.format( " bind=\"%s\"", bind );
     pw.format(Locale.US, "scale=\"%d\" orientation=\"%.2f\" options=\"%s\" >\n", mScale, mOrientation, ((mOptions==null)? "" : mOptions) );

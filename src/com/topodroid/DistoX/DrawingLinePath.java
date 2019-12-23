@@ -342,7 +342,7 @@ class DrawingLinePath extends DrawingPointLinePath
   {
     // linetype: 0 line, 1 spline, 2 bezier
     String name = BrushManager.getLineName( mLineType );
-    pw.format("          <item name=\"%s\" cave=\"%s\" branch=\"%s\" reversed=\"%d\" closed=\"%d\" outline=\"%d\" options=\"%s\" ",
+    pw.format("          <item type=\"line\" name=\"%s\" cave=\"%s\" branch=\"%s\" reversed=\"%d\" closed=\"%d\" outline=\"%d\" options=\"%s\" ",
       name, cave, branch, (mReversed ? 1 : 0), (isClosed() ? 1 : 0), mOutline, 
       ((mOptions   == null)? "" : mOptions)
     );

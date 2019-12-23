@@ -132,6 +132,27 @@ class DrawingAudioPath extends DrawingPointPath
   }
 
   @Override
+  void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
+  { 
+    File audiofile = new File( TDPath.getSurveyAudioFile( survey, Long.toString( mId ) ) );
+    if ( audiofile.exists() ) {
+      byte[] buf = TDExporter.readFileBytes( audiofile );
+      if ( buf != null ) {
+        pw.format("<item type=\"point\" name=\"audio\" cave=\"%s\" branch=\"%s\" text=\"%s\" ", cave, branch, ((mPointText == null)? "" : mPointText) );
+        if ( bind != null ) pw.format(" bind=\"%s\" ", bind );
+        pw.format(Locale.US, "scale=\"%d\" orientation=\"0.0\" options=\"%s\" >\n", mScale, ((mOptions   == null)? "" : mOptions) );
+        pw.format(" <attachment dataformat\"0\" data=\"%s\" name=\"\" note=\"\" type=\"audio/x-wav\" />\n", 
+          Base64.encodeToString( buf, Base64.NO_WRAP ) );
+        float x = DrawingUtil.sceneToWorldX( cx, cy ); // convert to world coords.
+        float y = DrawingUtil.sceneToWorldY( cx, cy );
+        pw.format(Locale.US, " <points data=\"%.2f %.2f \" />\n", x, y );
+        pw.format("</item>\n");
+        // Log.v( TopoDroidApp.TAG, "toCSurevy() Point " + mPointType + " (" + x + " " + y + ") orientation " + mOrientation );
+      }
+    }
+  }
+
+  @Override
   void toDataStream( DataOutputStream dos, int scrap )
   {
     try {

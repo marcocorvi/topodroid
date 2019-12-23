@@ -416,7 +416,7 @@ class DrawingPointPath extends DrawingPath
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
   { 
     String name = BrushManager.getPointName( mPointType );
-    pw.format("<item name=\"%s\" cave=\"%s\" branch=\"%s\" text=\"%s\" ", name, cave, branch, ((mPointText == null)? "" : mPointText) );
+    pw.format("<item type=\"point\" name=\"%s\" cave=\"%s\" branch=\"%s\" text=\"%s\" ", name, cave, branch, ((mPointText == null)? "" : mPointText) );
     if ( bind != null ) pw.format(" bind=\"%s\" ", bind );
     pw.format(Locale.US, "scale=\"%d\" orientation=\"%.2f\" options=\"%s\" >\n", mScale, mOrientation, ((mOptions   == null)? "" : mOptions) );
     float x = DrawingUtil.sceneToWorldX( cx, cy ); // convert to world coords.

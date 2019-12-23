@@ -47,67 +47,6 @@ class DistoX310Protocol extends DistoXProtocol
     super( in, out, device, context );
   }
 
-  // boolean swapA3HotBit( int addr, boolean on_off ) // only A3
-  // {
-  //   try {
-  //     mBuffer[0] = (byte) 0x38;
-  //     mBuffer[1] = (byte)( addr & 0xff );
-  //     mBuffer[2] = (byte)( (addr>>8) & 0xff );
-  //     mOut.write( mBuffer, 0, 3 );
-  //     // if ( TDSetting.mPacketLog ) logPacket3( 1L, mBuffer );
-
-  //     mIn.readFully( mBuffer, 0, 8 );
-  //     // if ( TDSetting.mPacketLog ) logPacket( 0L );
-
-  //     if ( mBuffer[0] != (byte)0x38 ) { 
-  //       TDLog.Error( "HotBit-38 wrong reply packet addr " + addr );
-  //       return false;
-  //     }
-
-  //     int reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
-  //     // Log.v( TopoDroidApp.TAG, "proto read ... addr " + addr + " reply addr " + reply_addr );
-  //     if ( reply_addr != addr ) {
-  //       TDLog.Error( "HotBit-38 wrong reply addr " + reply_addr + " addr " + addr );
-  //       return false;
-  //     }
-  //     mBuffer[0] = (byte)0x39;
-  //     // mBuffer[1] = (byte)( addr & 0xff );
-  //     // mBuffer[2] = (byte)( (addr>>8) & 0xff );
-  //     if ( mBuffer[3] == 0x00 ) {
-  //       TDLog.Error( "HotBit refusing to swap addr " + addr );
-  //       return false;
-  //     }  
-  //     if ( on_off ) {
-  //       mBuffer[3] |= (byte)0x80; // RESET HOT BIT
-  //     } else {
-  //       mBuffer[3] &= (byte)0x7f; // CLEAR HOT BIT
-  //     }
-  //     mOut.write( mBuffer, 0, 7 );
-  //     // if ( TDSetting.mPacketLog ) logPacket7( 1L, mBuffer );
-
-  //     mIn.readFully( mBuffer, 0, 8 );
-  //     // if ( TDSetting.mPacketLog ) logPacket( 0L );
-
-  //     if ( mBuffer[0] != (byte)0x38 ) {
-  //       TDLog.Error( "HotBit-39 wrong reply packet addr " + addr );
-  //       return false;
-  //     }
-  //     reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
-  //     // Log.v( TopoDroidApp.TAG, "proto reset ... addr " + addr + " reply addr " + reply_addr );
-  //     if ( reply_addr != addr ) {
-  //       TDLog.Error( "HotBit-39 wrong reply addr " + reply_addr + " addr " + addr );
-  //       return false;
-  //     }
-  //   } catch ( EOFException e ) {
-  //     TDLog.Error( "HotBit EOF failed addr " + addr );
-  //     return false;
-  //   } catch (IOException e ) {
-  //     TDLog.Error( "HotBit IO failed addr " + addr );
-  //     return false;
-  //   }
-  //   return true;
-  // }
-
   // PACKETS I/O ------------------------------------------------------------------------
 
   @Override

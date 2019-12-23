@@ -156,8 +156,11 @@ class DrawingSpecialPath extends DrawingPath
   }
 
   // no export to cSurevy
-  // @Override
-  public void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, DrawingUtil mDrawingUtil ) { }
+  @Override
+  public void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind ) { }
+
+  @Override
+  public void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind ) { }
 
   // no export to Therion
   @Override
