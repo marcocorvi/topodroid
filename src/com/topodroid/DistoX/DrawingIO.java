@@ -1704,20 +1704,17 @@ class DrawingIO
   
   // -----------------------------------------------------------------------------
   // CSURVEY
-  static void doExportCsxXSection( PrintWriter pw, String filename,
-                                   String survey, String cave, String branch, /* String session, */ String bind /* , DrawingUtil drawingUtil */ )
+  static void doExportCsxXSection( PrintWriter pw, String filename, String survey, String cave, String branch, /* String session, */ String bind )
   {
-    doExportAnyCsxXSection( pw, filename, survey, cave, branch, /* session, */ bind, /* drawingUtil, */ 0 );
+    doExportAnyCsxXSection( pw, filename, survey, cave, branch, /* session, */ bind, 0 );
   }
 
-  static void doExportTCsxXSection( PrintWriter pw, String filename,
-                                   String survey, String cave, String branch, /* String session, */ String bind /* , DrawingUtil drawingUtil */ )
+  static void doExportTCsxXSection( PrintWriter pw, String filename, String survey, String cave, String branch, /* String session, */ String bind )
   {
-    doExportAnyCsxXSection( pw, filename, survey, cave, branch, /* session, */ bind, /* drawingUtil, */ 1 );
+    doExportAnyCsxXSection( pw, filename, survey, cave, branch, /* session, */ bind, 1 );
   }
 
-  static void doExportAnyCsxXSection( PrintWriter pw, String filename,
-                                   String survey, String cave, String branch, /* String session, */ String bind /* , DrawingUtil drawingUtil */, int format )
+  static void doExportAnyCsxXSection( PrintWriter pw, String filename, String survey, String cave, String branch, /* String session, */ String bind, int format )
   {
     File file = new File( filename );
     if ( ! file.exists() ) return;
@@ -1829,6 +1826,7 @@ class DrawingIO
   static void doExportAsTCsx( PrintWriter pw, String survey, String cave, String branch, /* String session, */ String bind,
                              List<DrawingPath> paths, List< PlotInfo > all_sections, List< PlotInfo > sections )
   {
+    int csxIndex = 0;
     for ( DrawingPath p : paths ) {
       if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
         DrawingAreaPath ap = (DrawingAreaPath)p;
@@ -1838,7 +1836,41 @@ class DrawingIO
         lp.toTCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ );
       } else if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
         DrawingPointPath pp = (DrawingPointPath)p;
-        pp.toTCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ );
+        String section_info = null;
+        if ( TDSetting.mAutoXSections && all_sections != null && BrushManager.isPointSection( pp.mPointType ) ) {
+          // option: -scrap survey-xx# 
+          PlotInfo section = null;
+          String scrap_name = pp.getOption( "-scrap" );
+          if ( scrap_name != null ) {
+            for ( PlotInfo s : all_sections ) {
+              if ( scrap_name.endsWith( s.name ) ) {
+                // String name = survey + "-" + s.name; // scrap filename
+                section = s;
+                section.csxIndex = csxIndex;
+                ++ csxIndex;
+                if ( sections != null ) sections.add( section );
+                break;
+              }
+            }
+          }
+          if ( section != null ) {
+            StringWriter sb = new StringWriter();
+            PrintWriter  pb = new PrintWriter( sb );
+            // special toCsurvey for cross-section points
+            pb.format("sectiontext=\"%s\" sectionname=\"%s\" ", ( ( section.nick == null || section.nick.length() == 0 )? section.name : section.nick ), section.name );
+            if ( section.name.startsWith("xs-") || section.name.startsWith("xh-") ) {
+              pb.format("station=\"%s\" ", section.name.substring(3) ); // == section.start
+            } else {
+              pb.format("stationfrom=\"%s\" stationto=\"%s\" ", section.start, section.view );
+            }
+            // pw.format(" segment=\"%s\"", "undefined" );
+            pb.format(Locale.US, "sectionazimuth=\"%.2f\" sectionclino=\"%.2f\" sectionid=\"%d\"\n", section.azimuth, section.clino, section.csxIndex );
+            section_info = sb.toString();
+          }
+          pp.toTCsurvey( pw, survey, cave, branch, bind, section_info, section );
+        } else {
+          pp.toTCsurvey( pw, survey, cave, branch, bind );
+        }
       }
     }
   }

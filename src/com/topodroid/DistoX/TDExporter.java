@@ -52,6 +52,7 @@ class TDExporter
 {
                                                  // -1      0           1        2         3       4        5
   private static final String[] therion_extend = { "left", "vertical", "right", "ignore", "hide", "start", "unset", "left", "vert", "right" };
+  private static final int[] csurvey_extend = { 1, 2, 0, 0, 0, 0, 0, 1, 2, 0 };
   private static final String   therion_flags_duplicate     = "   flags duplicate\n";
   private static final String   therion_flags_not_duplicate = "   flags not duplicate\n";
   private static final String   therion_flags_surface       = "   flags surface\n";
@@ -320,7 +321,7 @@ class TDExporter
       // optional attrs of "segment": id cave branch session
 
       int cntSplay = 0;     // splay counter (index)
-      long extend = 0;      // current extend
+      int extend = 0;      // current extend
       boolean dup = false;  // duplicate
       boolean sur = false;  // surface
       // boolean bck = false;  // backshot
@@ -344,7 +345,7 @@ class TDExporter
             if ( leg.mCnt > 0 && ref_item != null ) {
               writeCsxSegment( pw, ref_item.mId, cave, branch, session, f, t ); // branch prefix
 
-              if ( extend == -1 ) pw.format(" direction=\"1\"");
+              if ( extend < 1 ) pw.format(" direction=\"%d\"", csurvey_extend[1+extend] );
               if ( dup || sur /* || bck */ ) {
                 pw.format(" exclude=\"1\"");
                 if ( dup ) { pw.format(" duplicate=\"1\""); dup = false; }
@@ -371,7 +372,7 @@ class TDExporter
             ++ cntSplay;
             pw.format(" splay=\"1\" exclude=\"1\"");
             if ( item.isCommented() ) pw.format(" commented=\"1\"");
-            if ( extend == -1 ) pw.format(" direction=\"1\"");
+            if ( extend < 1 ) pw.format(" direction=\"%d\"", csurvey_extend[1+extend] );
             pw.format(Locale.US, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"",
                                  item.mLength, item.mBearing, item.mClino );
             pw.format(Locale.US, " g=\"%.1f\" m=\"%.1f\" dip=\"%.1f\"",
@@ -389,7 +390,7 @@ class TDExporter
           if ( to == null || to.length() == 0 ) { // ONLY FROM STATION : splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // finish writing previous leg shot
               writeCsxSegment( pw, ref_item.mId, cave, branch, session, f, t ); // branch prefix
-              if ( extend == -1 ) pw.format(" direction=\"1\"");
+              if ( extend < 1 ) pw.format(" direction=\"%d\"", csurvey_extend[1+extend] );
               if ( dup || sur /* || bck */ ) {
                 pw.format(" exclude=\"1\"");
                 if ( dup ) { pw.format(" duplicate=\"1\""); dup = false; }
@@ -416,7 +417,7 @@ class TDExporter
             ++cntSplay;
             pw.format(" splay=\"1\" exclude=\"1\"");
             if ( item.isCommented() ) pw.format(" commented=\"1\"");
-            if ( extend == -1 ) pw.format(" direction=\"1\"");
+            if ( extend < 1 ) pw.format(" direction=\"%d\"", csurvey_extend[1+extend] );
             pw.format(Locale.US, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"",
                                  item.mLength, item.mBearing, item.mClino );
             pw.format(Locale.US, " g=\"%.1f\" m=\"%.1f\" dip=\"%.1f\"",
@@ -432,7 +433,7 @@ class TDExporter
           } else { // BOTH FROM AND TO STATIONS
             if ( leg.mCnt > 0 && ref_item != null ) {
               writeCsxSegment( pw, ref_item.mId, cave, branch, session, f, t ); // branch prefix
-              if ( extend == -1 ) pw.format(" direction=\"1\"");
+              if ( extend < 1 ) pw.format(" direction=\"%d\"", csurvey_extend[1+extend] );
               if ( dup || sur /* || bck */ ) {
                 pw.format(" exclude=\"1\"");
                 if ( dup ) { pw.format(" duplicate=\"1\""); dup = false; }
@@ -471,7 +472,7 @@ class TDExporter
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
         writeCsxSegment( pw, ref_item.mId, cave, branch, session, f, t ); // branch prefix
-        if ( extend == -1 ) pw.format(" direction=\"1\"");
+        if ( extend < 1 ) pw.format(" direction=\"%d\"", csurvey_extend[1+extend] );
         if ( dup || sur /* || bck */ ) {
            pw.format(" exclude=\"1\"");
            if ( dup ) { pw.format(" duplicate=\"1\"");  /* dup = false; */ }
@@ -1025,7 +1026,7 @@ class TDExporter
 
     List<DBlock> list = data.selectAllExportShots( sid, TDStatus.NORMAL );
     checkShotsClino( list );
-    long extend = 0;  // current extend
+    int extend = 0;  // current extend
     DBlock ref_item = null;
     int fromId, toId;
 
@@ -1056,7 +1057,7 @@ class TDExporter
           ref_item = item;
         }
       }
-      ptfile.addShot( (short)0, from, to, item.mLength, item.mBearing, item.mClino, item.mRoll, (int)extend, item.mComment );
+      ptfile.addShot( (short)0, from, to, item.mLength, item.mBearing, item.mClino, item.mRoll, extend, item.mComment );
     }
 
     // if ( sketch != null ) {
@@ -1229,7 +1230,7 @@ class TDExporter
       pw.format("    data normal from to length compass clino\n");
 
       boolean splay_extend = true;
-      long extend = 0;  // current extend
+      int extend = 0;  // current extend
       AverageLeg leg = new AverageLeg(0);
       HashMap<String, LRUD> lruds = null;
       if ( TDSetting.mSurvexLRUD ) {
@@ -1271,7 +1272,7 @@ class TDExporter
 	          }
 	        } else if ( item.getIntExtend() != extend || ! splay_extend ) {
               extend = item.getIntExtend();
-              pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
+              pw.format("    extend %s\n", therion_extend[1+extend] );
 	          splay_extend = true;
             }
             writeThStations( pw, ( item.isXSplay() ? "-" : "." ), to, item.isCommented() );
@@ -1306,7 +1307,7 @@ class TDExporter
 	          }
 	        } else if ( item.getIntExtend() != extend || ! splay_extend ) {
               extend = item.getIntExtend();
-              pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
+              pw.format("    extend %s\n", therion_extend[1+extend] );
 	          splay_extend = true;
             }
             writeThStations( pw, from, ( item.isXSplay() ? "-" : "." ), item.isCommented() );
@@ -1326,7 +1327,7 @@ class TDExporter
             ref_item = item;
             if ( item.getIntExtend() != extend || ! splay_extend ) {
               extend = item.getIntExtend();
-              pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
+              pw.format("    extend %s\n", therion_extend[1+extend] );
 	          splay_extend = true;
             }
             if ( item.isDuplicate() ) {
@@ -3205,7 +3206,7 @@ class TDExporter
             }
             // if ( item.getIntExtend() != extend ) {
             //   extend = item.getIntExtend();
-            //   //  FIXME pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
+            //   //  FIXME pw.format("    extend %s\n", therion_extend[1+extend] );
             // }
             writeSrvStations( pw, "-", to, item.isCommented() );
             pw.format(Locale.US, "%.2f\t%.1f\t%.1f", item.mLength*ul, item.mBearing*ua, item.mClino*ua );
@@ -3228,7 +3229,7 @@ class TDExporter
             }
             // if ( item.getIntExtend() != extend ) {
             //   extend = item.getIntExtend();
-            //   // FIXME pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
+            //   // FIXME pw.format("    extend %s\n", therion_extend[1+extend] );
             // }
             writeSrvStations( pw, from, "-", item.isCommented() );
             pw.format(Locale.US, "%.2f\t%.1f\t%.1f", item.mLength*ul, item.mBearing*ua, item.mClino*ua );
@@ -3249,7 +3250,7 @@ class TDExporter
             ref_item = item;
             // if ( item.getIntExtend() != extend ) {
             //   extend = item.getIntExtend();
-            //   // FIXME pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
+            //   // FIXME pw.format("    extend %s\n", therion_extend[1+extend] );
             // }
             if ( item.isDuplicate() ) {
               // FIXME pw.format(therion_flags_duplicate);
@@ -3348,7 +3349,7 @@ class TDExporter
     // if ( duplicate ) pw.format("#end_duplicate%s", eol);
   }
 
-  static private long printCavExtend( PrintWriter pw, long extend, long item_extend, String eol )
+  static private int printCavExtend( PrintWriter pw, int extend, int item_extend, String eol )
   {
     if ( item_extend != extend ) { 
       if ( item_extend == DBlock.EXTEND_LEFT ) {
@@ -3418,7 +3419,7 @@ class TDExporter
       AverageLeg leg = new AverageLeg(0);
       DBlock ref_item = null;
 
-      long extend = 1;
+      int extend = 1;
       long flag = 0;
       // boolean in_splay = false;
       // LRUD lrud;

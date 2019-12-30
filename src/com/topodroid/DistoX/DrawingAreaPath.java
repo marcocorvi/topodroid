@@ -372,7 +372,7 @@ class DrawingAreaPath extends DrawingPointLinePath
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /*, DrawingUtil mDrawingUtil */ )
   {
     // linetype: 0 spline, 1 bezier, 2 line
-    String name = BrushManager.getAreaName( mAreaType );
+    String name = BrushManager.getAreaThName( mAreaType );
     pw.format("          <item type=\"area\" name=\"%s\" cave=\"%s\" branch=\"%s\" orientation=\"%.2f\" options=\"%s\" ",
       name, cave, branch, mOrientation, ( (mOptions== null)? "" : mOptions )
     );

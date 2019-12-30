@@ -787,32 +787,32 @@ class DrawingSurface extends SurfaceView
   // EXPORT
 
   static void exportAsTCsx( PrintWriter pw, long type, String survey, String cave, String branch, /* String session, */
-                           DrawingCommandManager cm, List<PlotInfo> all_sections, List<PlotInfo> sections /* , DrawingUtil drawingUtil */ )
+                           DrawingCommandManager cm, List<PlotInfo> all_sections, List<PlotInfo> sections )
   {
     if ( PlotInfo.isProfile( type ) ) {
       // FIXME OK PROFILE to check
       if ( cm != null ) {
-        cm.exportAsTCsx( pw, survey, cave, branch, /* session, */ all_sections, sections /* , drawingUtil */ );
+        cm.exportAsTCsx( pw, survey, cave, branch, /* session, */ all_sections, sections );
       }
     } else if ( type == PlotInfo.PLOT_PLAN ) {
       if ( cm != null ) {
-        cm.exportAsTCsx( pw, survey, cave, branch, /* session, */ all_sections, sections /* , drawingUtil */ );
+        cm.exportAsTCsx( pw, survey, cave, branch, /* session, */ all_sections, sections );
       }
     }
   }
 
 
   static void exportAsCsx( PrintWriter pw, long type, String survey, String cave, String branch, /* String session, */
-                           DrawingCommandManager cm, List<PlotInfo> all_sections, List<PlotInfo> sections /* , DrawingUtil drawingUtil */ )
+                           DrawingCommandManager cm, List<PlotInfo> all_sections, List<PlotInfo> sections )
   {
     if ( PlotInfo.isProfile( type ) ) {
       // FIXME OK PROFILE to check
       if ( cm != null ) {
-        cm.exportAsCsx( pw, survey, cave, branch, /* session, */ all_sections, sections /* , drawingUtil */ );
+        cm.exportAsCsx( pw, survey, cave, branch, /* session, */ all_sections, sections );
       }
     } else if ( type == PlotInfo.PLOT_PLAN ) {
       if ( cm != null ) {
-        cm.exportAsCsx( pw, survey, cave, branch, /* session, */ all_sections, sections /* , drawingUtil */ );
+        cm.exportAsCsx( pw, survey, cave, branch, /* session, */ all_sections, sections );
       }
     } else { // should never happen, but it happens for X-Sections
       pw.format("    <layers>\n");

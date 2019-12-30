@@ -21,12 +21,15 @@ import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.Matrix;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Locale;
+
+import android.util.Base64;
 
 /**
  */
@@ -413,9 +416,9 @@ class DrawingPointPath extends DrawingPath
   }
 
   @Override
-  void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
+  void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind )
   { 
-    String name = BrushManager.getPointName( mPointType );
+    String name = BrushManager.getPointThName( mPointType );
     pw.format("<item type=\"point\" name=\"%s\" cave=\"%s\" branch=\"%s\" text=\"%s\" ", name, cave, branch, ((mPointText == null)? "" : mPointText) );
     if ( bind != null ) pw.format(" bind=\"%s\" ", bind );
     pw.format(Locale.US, "scale=\"%d\" orientation=\"%.2f\" options=\"%s\" >\n", mScale, mOrientation, ((mOptions   == null)? "" : mOptions) );
@@ -425,6 +428,47 @@ class DrawingPointPath extends DrawingPath
     pw.format("</item>\n");
     // Log.v( TopoDroidApp.TAG, "toCSurevy() Point " + mPointType + " (" + x + " " + y + ") orientation " + mOrientation );
   }
+
+  void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, String extra, PlotInfo section )
+  { 
+    String name = BrushManager.getPointThName( mPointType );
+    pw.format("<item type=\"point\" name=\"%s\" cave=\"%s\" branch=\"%s\" text=\"%s\" ", name, cave, branch, ((mPointText == null)? "" : mPointText) );
+    if ( bind != null ) pw.format("bind=\"%s\" ", bind );
+    if ( extra != null ) pw.format("%s ", extra );
+    pw.format(Locale.US, "scale=\"%d\" orientation=\"%.2f\" options=\"%s\" >\n", mScale, mOrientation, ((mOptions   == null)? "" : mOptions) );
+    float x = DrawingUtil.sceneToWorldX( cx, cy ); // convert to world coords.
+    float y = DrawingUtil.sceneToWorldY( cx, cy );
+    pw.format(Locale.US, " <points data=\"%.2f %.2f \" />\n", x, y );
+    // include cross-section
+    // pw.format("    <crosssection id=\"%s\" design=\"0\" crosssection=\"%d\">\n", section.name, section.csxIndex );
+    pw.format("    <crosssection>\n" );
+    exportTCsxXSection( pw, section, survey, cave, branch );
+    pw.format("    </crosssection>\n" );
+    String filename = TDPath.getSurveyJpgFile( TDInstance.survey, section.name );
+    File imagefile = new File( filename );
+    if ( imagefile.exists() ) {
+      byte[] buf = TDExporter.readFileBytes( imagefile );
+      if ( buf != null ) {
+        pw.format("    <crosssectionfile>\n" );
+        pw.format(" <attachment dataformat=\"0\" data=\"%s\" name=\"\" note=\"%s\" type=\"image/jpeg\" />\n", 
+          Base64.encodeToString( buf, Base64.NO_WRAP ),
+          ((mPointText==null)?"":mPointText)
+        );
+        pw.format("    </crosssectionfile>\n" );
+      }
+    }
+    pw.format("</item>\n");
+    // Log.v( TopoDroidApp.TAG, "toCSurevy() Point " + mPointType + " (" + x + " " + y + ") orientation " + mOrientation );
+  }
+
+  private static void exportTCsxXSection( PrintWriter pw, PlotInfo section, String survey, String cave, String branch /* , String session */ )
+  {
+    // String name = section.name; // binding name
+    // open xsection file
+    String filename = TDPath.getSurveyPlotTdrFile( survey, section.name );
+    DrawingIO.doExportTCsxXSection( pw, filename, survey, cave, branch, /* session, */ section.name /* , drawingUtil */ ); // bind=section.name
+  }
+
 
   @Override
   String toTherion( )

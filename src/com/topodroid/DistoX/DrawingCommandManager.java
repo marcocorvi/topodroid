@@ -1240,15 +1240,15 @@ class DrawingCommandManager
   }
 
   void exportAsTCsx( PrintWriter pw, String survey, String cave, String branch, /* String session, */
-                    List<PlotInfo> all_sections, List<PlotInfo> sections /* , DrawingUtil drawingUtil */ )
+                    List<PlotInfo> all_sections, List<PlotInfo> sections )
   {
-    DrawingIO.doExportAsTCsx( pw, survey, cave, branch, /* session, */ null, getCommands(), all_sections, sections /* , drawingUtil */ ); // bind=null
+    DrawingIO.doExportAsTCsx( pw, survey, cave, branch, /* session, */ null, getCommands(), all_sections, sections ); // bind=null
   }
 
   void exportAsCsx( PrintWriter pw, String survey, String cave, String branch, /* String session, */
-                    List<PlotInfo> all_sections, List<PlotInfo> sections /* , DrawingUtil drawingUtil */ )
+                    List<PlotInfo> all_sections, List<PlotInfo> sections )
   {
-    DrawingIO.doExportAsCsx( pw, survey, cave, branch, /* session, */ null, getCommands(), all_sections, sections /* , drawingUtil */ ); // bind=null
+    DrawingIO.doExportAsCsx( pw, survey, cave, branch, /* session, */ null, getCommands(), all_sections, sections ); // bind=null
   }
 
   DrawingAudioPath getAudioPoint( long bid ) { return mCurrentScrap.getAudioPoint( bid ); }
