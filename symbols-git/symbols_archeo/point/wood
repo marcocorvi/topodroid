@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name wood
 name-it legno
@@ -16,7 +17,7 @@ path
   moveTo 0 7.5
   lineTo 0 0
   moveTo -7.0 2.25
-  lineTo 0 0 
+  lineTo 0 0
   lineTo 7.0 2.25
   moveTo -4.3 -6
   lineTo 0 0

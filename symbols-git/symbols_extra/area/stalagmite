@@ -1,8 +1,9 @@
+encoding utf-8
 symbol area
 name stalagmite
 name-pt estalagmite
 name-ru сталагмит
-th_name u:stalagmite
+th_name stalagmite
 group stalagmite
 color 0xd0ff00 0x66
 csurvey 1 48 0 1

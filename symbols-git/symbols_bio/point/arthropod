@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name arthropod
 name-es antrópodo
@@ -21,9 +22,9 @@ path
    cubicTo 4 -1 4 -1 5 -3
    moveTo 1.75 0
    lineTo -1.75 0
-   lineTo -4 0 
+   lineTo -4 0
    moveTo 1.75 0
-   lineTo 4 0 
+   lineTo 4 0
    moveTo 1.5 1
    lineTo -1.5 1
    cubicTo -2.5 1 -3 0 -3 2

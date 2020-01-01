@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name danger
 name-cn 危险
@@ -14,7 +15,7 @@ name-sl nevarnost
 name-hu veszély
 name-sk nebezpečenstvo
 name-ro pericol
-th_name u:danger
+th_name danger
 orientation no
 color 0xff3333
 csurvey 6 6 80

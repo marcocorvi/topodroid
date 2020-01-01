@@ -1,3 +1,4 @@
+encoding utf-8
 symbol line
 name ceiling-meander
 name-cn 天沟
@@ -28,7 +29,7 @@ effect
   lineTo 13 3
   lineTo 13 2
   lineTo 0 2
-  moveTo 0 -3 
+  moveTo 0 -3
   lineTo 6 -3
   lineTo 6 -8
   lineTo 7 -8

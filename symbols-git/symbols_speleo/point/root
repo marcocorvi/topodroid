@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name root
 name-cn 树根
@@ -20,7 +21,7 @@ color 0xffcc99
 csurvey 6 6 80
 path
   moveTo 0 -8
-  lineTo 0 4 
+  lineTo 0 4
   lineTo 3 7
   moveTo 0 1
   lineTo 3 4

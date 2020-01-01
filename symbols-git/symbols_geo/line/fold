@@ -1,3 +1,4 @@
+encoding utf-8
 symbol line
 name fold
 name-it piega
@@ -23,6 +24,6 @@ effect
   lineTo 22.5 0
   lineTo 15 -8
   lineTo 15 0
-  lineTo 0 0 
+  lineTo 0 0
 endeffect
 endsymbol

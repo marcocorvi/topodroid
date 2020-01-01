@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name flowstone
 name-de Sinter
@@ -15,6 +16,6 @@ path
   moveTo 2 -2
   lineTo 7 -2
   moveTo -3 2
-  lineTo 3 2  
+  lineTo 3 2
 endpath
 endsymbol

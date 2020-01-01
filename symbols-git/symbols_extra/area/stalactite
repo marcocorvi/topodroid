@@ -1,8 +1,9 @@
+encoding utf-8
 symbol area
 name stalactite
 name-pt estalactite
 name-ru сталактит
-th_name u:stalactite
+th_name stalactite
 group stalactite
 color 0xfff100 0x66
 csurvey 1 48 0 1

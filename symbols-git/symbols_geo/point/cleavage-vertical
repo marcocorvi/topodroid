@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name cleavage-vertical
 name-pt clivagem_vertical
@@ -9,7 +10,7 @@ name-de Vertikale_Schieferung
 th_name u:cleavage-vertical
 group cleavage
 color 0xcccc99
-csurvey 0 0 0 
+csurvey 0 0 0
 orientation yes
 path
   moveTo -9 0

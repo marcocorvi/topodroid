@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name echinoderm
 name-pt equinodermo
@@ -8,7 +9,7 @@ name-ro echinoderm
 name-de Stachelhäuter
 th_name u:echinoderm
 group paleo
-color 0xcc6699 
+color 0xcc6699
 csurvey 0 0 0
 path
   moveTo 1 -1
@@ -17,7 +18,7 @@ path
   lineTo -4.7 -1.5
   lineTo -1 0
   lineTo -2.9 4
-  lineTo 0 1 
+  lineTo 0 1
   lineTo 2.9 4
   lineTo 1 0
   lineTo 4.7 -1.5

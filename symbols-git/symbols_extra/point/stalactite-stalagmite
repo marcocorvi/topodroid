@@ -1,8 +1,9 @@
+encoding utf-8
 symbol point
 name stalactite-stalagmite
 name-pt estalactite-estalagmite
 name-ru сталактит_сталагмит
-th_name u:stalactite-stalagmite
+th_name stalactite-stalagmite
 group stalactite
 orientation no
 color 0xccff66

@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name pendant
 name-cn 吊岩
@@ -12,7 +13,7 @@ name-ua підвіска
 name-pt pendente
 name-hu pendant
 name-ro lame_disoluție
-th_name u:pendant
+th_name pendant
 group stalactite
 orientation no
 color 0xccff66

@@ -1,3 +1,4 @@
+encoding utf-8
 symbol line
 name thrust
 name-pt empurrão
@@ -19,6 +20,6 @@ effect
   lineTo 30 0
   lineTo 22 -8
   lineTo 14 0
-  lineTo 0 0 
+  lineTo 0 0
 endeffect
 endsymbol

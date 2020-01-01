@@ -1,3 +1,4 @@
+encoding utf-8
 symbol line
 name overhang
 name-cn 洞顶凸坎
@@ -24,6 +25,6 @@ effect
   lineTo 9 0
   lineTo 6 -6
   lineTo 3 0
-  lineTo 0 0 
+  lineTo 0 0
 endeffect
 endsymbol

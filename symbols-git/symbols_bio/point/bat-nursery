@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name bat-nursery
 name-es nido_murciélago
@@ -15,10 +16,10 @@ path
   moveTo 0 0
   cubicTo 3 0 3 -6 0 -6
   cubicTo -3 -6 -3 0 0 0
-  moveTo -2 2 
+  moveTo -2 2
   lineTo -2 4
   lineTo -1 1.7
-  moveTo 2 2 
+  moveTo 2 2
   lineTo 2 4
   lineTo 1 1.7
   moveTo -1 0
@@ -32,4 +33,4 @@ path
   lineTo 3 -7
   lineTo 2 -3
 endpath
-endsymbol  
+endsymbol

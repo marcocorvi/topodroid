@@ -1,3 +1,4 @@
+encoding utf-8
 symbol line
 name railway
 name-de Eisenbahn
@@ -9,7 +10,7 @@ name-sk kolajnice
 name-ro linie_ferată
 th_name u:railway
 group trail
-color 0xcccccc 
+color 0xcccccc
 width 2
 csurvey 2 1 3 5
 dash 18 12

@@ -1,3 +1,4 @@
+encoding utf-8
 symbol line
 name joint
 name-pt fratura
@@ -5,7 +6,7 @@ name-ru сочленение
 name-fr joint-de-strate
 name-ro conexiune?
 name-de Verbindung
-th_name u:joint
+th_name joint
 group joint
 color 0xffffff 0x99
 width 1

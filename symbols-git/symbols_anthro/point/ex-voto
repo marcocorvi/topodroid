@@ -1,8 +1,9 @@
+encoding utf-8
 symbol point
 name ex-voto
 name-pt ex-voto
 name-ru экс_вото
-th_name u:ex-voto
+th_name ex-voto
 orientation no
 color 0xffea80
 csurvey 6 6 80

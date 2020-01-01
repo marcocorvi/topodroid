@@ -1,3 +1,4 @@
+encoding utf-8
 symbol line
 name water-flow
 name-cn 水流
@@ -30,5 +31,5 @@ effect
   lineTo 10 -4
   lineTo 13 -1
   lineTo 0 -1
-endeffect 
+endeffect
 endsymbol

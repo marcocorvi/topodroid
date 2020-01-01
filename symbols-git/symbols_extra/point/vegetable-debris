@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name vegetable-debris
 name-pt restos_vegetais
@@ -13,7 +14,7 @@ color 0xffcc99
 csurvey 6 6 80
 path
   moveTo -6 3
-  lineTo 7 2 
+  lineTo 7 2
   moveTo -7 -2
   lineTo 6 -3
   moveTo -2 -6

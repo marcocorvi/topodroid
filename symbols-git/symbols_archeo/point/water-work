@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name water-work
 name-it opera_idraulica
@@ -18,7 +19,7 @@ path
   cubicTo -1.5 -1.5 1.5 -1.5 3 0
   cubicTo 4.5 1.5 4.5 0 7.5 -3
   moveTo -7.5 -7.5
-  lineTo -7.5 7.5 
+  lineTo -7.5 7.5
   lineTo 7.5 7.5
   lineTo 7.5 -7.5
   lineTo -7.5 -7.5

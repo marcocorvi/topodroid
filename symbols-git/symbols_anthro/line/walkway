@@ -1,8 +1,9 @@
+encoding utf-8
 symbol line
 name walkway
 name-pt passarela
 name-ru дорожка
-th_name u:walkway
+th_name walkway
 group trail
 color 0xffffff 0x66
 width 8

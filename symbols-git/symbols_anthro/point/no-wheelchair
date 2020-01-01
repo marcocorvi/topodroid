@@ -1,7 +1,8 @@
+encoding utf-8
 symbol point
-name notwheelchair
+name no-wheelchair
 name-pt cadeira_de_rodas_(não_acessível)
-th_name u:notwheelchair
+th_name no-wheelchair
 orientation no
 color 0xffffff
 csurvey 6 6 80

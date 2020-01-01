@@ -1,8 +1,9 @@
+encoding utf-8
 symbol point
 name masonry
 name-pt alvenaria
 name-ru каменная_кладка
-th_name u:masonry
+th_name masonry
 orientation no
 color 0x993300
 csurvey 6 6 80

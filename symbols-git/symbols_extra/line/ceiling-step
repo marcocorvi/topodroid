@@ -1,4 +1,4 @@
-encoding  utf-8
+encoding utf-8
 symbol line
 name ceiling-step
 name-es resalte_techo
@@ -21,6 +21,6 @@ effect
   lineTo 8 7
   lineTo 7 7
   lineTo 7 1
-  lineTo 0 1 
+  lineTo 0 1
 endeffect
 endsymbol

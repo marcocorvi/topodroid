@@ -1,3 +1,4 @@
+encoding utf-8
 symbol line
 name nivokarstic-niche
 name-pt nicho_glaciocárstico
@@ -18,9 +19,8 @@ effect
   lineTo 7 -12
   lineTo 6 -12
   lineTo 6 0
-  lineTo 0 0 
+  lineTo 0 0
   moveTo 0 4
   lineTo 15 4
 endeffect
 endsymbol
-

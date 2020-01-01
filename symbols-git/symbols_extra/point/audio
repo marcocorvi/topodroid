@@ -1,3 +1,4 @@
+encoding utf-8
 symbol audio
 name audio
 name-pt áudio
@@ -7,7 +8,7 @@ name-fr audio
 name-sk zvuková-nahrávka
 name-ro audio
 name-de Audio
-th_name u:audio
+th_name audio
 orientation no
 has_text no
 color 0xffffff

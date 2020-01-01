@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name photo
 name-pt foto
@@ -6,7 +7,7 @@ name-fr photo
 name-sk fotografia
 name-ro fotografie
 name-de Foto
-th_name u:photo
+th_name photo
 orientation yes
 has_text yes
 color 0xffffff

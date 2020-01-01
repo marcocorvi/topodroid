@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name coral
 name-pt coral
@@ -12,13 +13,13 @@ color 0xff3333
 csurvey 0 0 0
 path
   addCircle 0 0 5
-  moveTo 0 5 
+  moveTo 0 5
   lineTo 0 3
-  moveTo 0 -5 
+  moveTo 0 -5
   lineTo 0 -3
-  moveTo 5 0 
+  moveTo 5 0
   lineTo 3 0
-  moveTo -5 0 
+  moveTo -5 0
   lineTo -3 0
   moveTo 3.5 3.5
   lineTo 2 2

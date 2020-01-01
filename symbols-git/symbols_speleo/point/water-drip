@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name water-drip
 name-de Wassertropfen
@@ -8,7 +9,7 @@ name-uа потік_води
 name-hu csepegés
 name-sk kvapkanie
 name-ro infiltrație
-th_name u:water-drip
+th_name water-drip
 group water-flow
 orientation no
 color 0x6699ff
