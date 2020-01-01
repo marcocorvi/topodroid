@@ -138,6 +138,11 @@ class DrawingPath extends RectF
     return type >= DRAWING_PATH_STATION && type < DRAWING_PATH_NAME;
   }
 
+  boolean isPoint() { return mType == DRAWING_PATH_POINT; }
+  boolean isLine()  { return mType == DRAWING_PATH_LINE; }
+  boolean isArea()  { return mType == DRAWING_PATH_AREA; }
+  boolean isLineOrArea()  { return mType == DRAWING_PATH_LINE || mType == DRAWING_PATH_AREA; }
+
   float getX() { return cx; }
   float getY() { return cy; }
 

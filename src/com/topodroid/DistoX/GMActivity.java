@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-// import android.util.Log;
+import android.util.Log;
 
 // import java.io.IOException;
 import java.util.List;
@@ -344,6 +344,8 @@ public class GMActivity extends Activity
       err1 += err;
       err2 += err * err;
       if ( err > errmax ) errmax = err;
+      // b.computeBearingAndClino(); 
+      // Log.v("DistoX-COMPARE", String.format("%.5f A %.2f C %.2f K %d", err, b.mBearing, b.mClino, ke ) );
     }
     err1 /= size0;
     err2 = Math.sqrt( err2/size0 - err1 * err1 );
