@@ -2,7 +2,7 @@ symbol point
 name human-bone
 name-pt osso_humano
 name-ru человеческие_кости
-th_name u:human-bone
+th_name human-bones
 group paleo
 orientation no
 color 0xc2c2c2

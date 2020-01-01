@@ -2,7 +2,7 @@ symbol point
 name tree-trunk
 name-pt tronco_de_árvore
 name-ru ствол_дерева
-th_name u:tree-trunk
+th_name tree-trunk
 group vegetable
 orientation no
 color 0xb33b00

@@ -2,7 +2,7 @@ symbol line
 name low-ceiling
 name-pt teto_baixo
 name-ru низкий_потолок
-th_name u:low-ceiling
+th_name low-ceiling
 group ceiling
 color 0x85e0a3 0xff
 csurvey 4 1 3 22

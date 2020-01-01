@@ -2,7 +2,7 @@ symbol point
 name altar
 name-pt altar
 name-ru алтарь
-th_name u:altar
+th_name altar
 orientation no
 color 0xffffff
 csurvey 6 6 80

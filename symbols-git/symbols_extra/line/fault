@@ -12,7 +12,7 @@ name-ua розлом
 name-fa شکست_زمین
 name-hu vető
 name-ro falieâ
-th_name u:fault
+th_name fault
 group fault
 color 0xffffff 0x99
 width 1
@@ -28,7 +28,7 @@ effect
   lineTo 14 9
   lineTo 14 1
   lineTo 0 1
-  lineTo 0 8 
+  lineTo 0 8
   lineTo 10 8
   lineTo 10 9
   lineTo 0 9

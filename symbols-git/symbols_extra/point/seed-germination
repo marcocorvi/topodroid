@@ -2,7 +2,7 @@ symbol point
 name seed-germination
 name-pt germinação_de_sementes
 name-ru прорастание_семян
-th_name u:seed-germination
+th_name seed-germination
 group vegetable
 orientation no
 color 0xddffcc

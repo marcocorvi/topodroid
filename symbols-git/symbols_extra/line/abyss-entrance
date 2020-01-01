@@ -2,7 +2,7 @@ symbol line
 name abyss-entrance
 name-pt entrada_em_abismo
 name-ru вход_в_пропасть
-th_name u:abyss-entrance
+th_name abyss-entrance
 group wall
 color 0xff00ff 0xff
 width 8
@@ -23,7 +23,7 @@ effect
   lineTo 7 -12
   lineTo 6 -12
   lineTo 6 0
-  lineTo 0 0 
+  lineTo 0 0
 endeffect
 endsymbol
 

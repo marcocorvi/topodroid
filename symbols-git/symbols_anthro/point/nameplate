@@ -2,7 +2,7 @@ symbol point
 name nameplate
 name-pt placa_identificação
 name-ru именная_табличка
-th_name u:nameplate
+th_name nameplate
 orientation no
 color 0x00b300
 csurvey 6 6 80

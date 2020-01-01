@@ -2,7 +2,7 @@ symbol point
 name walkway
 name-pt passarela
 name-ru дорожка
-th_name u:walkway
+th_name walkway
 group trail
 orientation no
 color 0xffffff

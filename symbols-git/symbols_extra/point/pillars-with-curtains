@@ -2,7 +2,7 @@ symbol point
 name pillars-with-curtains
 name-pt colunas_cobertas_por_cortinas
 name-ru колонны_с_занавесями
-th_name u:pillars-with-curtains
+th_name pillars-with-curtains
 group pillar
 orientation no
 color 0xccff66
@@ -58,6 +58,6 @@ path
   moveTo 8 2
   cubicTo 7 1 7 3 6 2
   moveTo 8 6
-  cubicTo 9 7 9 5 10 6  
+  cubicTo 9 7 9 5 10 6
 endpath
 endsymbol

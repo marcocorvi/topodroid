@@ -2,7 +2,7 @@ symbol point
 name stalactites-stalagmites
 name-pt estalactites-estalagmites
 name-ru сталактиты_сталагмиты
-th_name u:stalactites-stalagmites
+th_name stalactites-stalagmites
 group stalactite
 orientation no
 color 0xccff66

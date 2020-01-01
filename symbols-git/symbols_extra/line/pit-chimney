@@ -2,7 +2,7 @@ symbol line
 name pit-chimney
 name-pt poço_e_chaminé
 name-ru колодец_с_органной_трубой
-th_name u:pit-chimney
+th_name pit-chimney
 group floor
 color 0x990099 0xff
 width 8
@@ -24,6 +24,6 @@ effect
   lineTo 6 -14
   lineTo 6 -3
   lineTo 0 -3
-  lineTo 0 0 
+  lineTo 0 0
 endeffect
 endsymbol

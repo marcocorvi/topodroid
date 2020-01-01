@@ -2,7 +2,7 @@ symbol point
 name curtains
 name-pt cortinas
 name-ru занавеси
-th_name u:curtains
+th_name curtains
 group curtain
 orientation no
 color 0xccff66

@@ -2,7 +2,7 @@ symbol point
 name helictites
 name-pt helectites
 name-ru гелликтиты
-th_name u:helictites
+th_name helictites
 group helictite
 orientation no
 color 0xccff66

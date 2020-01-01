@@ -2,14 +2,14 @@ symbol point
 name volcano
 name-pt vulcão
 name-ru вулкан
-th_name u:volcano
+th_name volcano
 orientation no
 color 0xccff66
 csurvey 6 6 80
 path
   moveTo -5 4
   lineTo -2 -4
-  cubicTo -2 -1 2 -1 2 -4 
+  cubicTo -2 -1 2 -1 2 -4
   lineTo 5 4
 endpath
 endsymbol
