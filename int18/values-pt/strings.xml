@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- TODO TODO TODO 
+    <!-- TODO TODO TODO
          DO NOT FORGET THAT APOSTROPHE MUST BE PRECEEDED BY BACKSLASH
      -->
 
@@ -93,7 +93,7 @@
     <string name="calib_device_mismatch">ALERTA: Dispositivo a ser calibrado incompatível</string>
     <string name="calib_no_name">Nome exigido</string>
     <!-- REMOVE string name="calib_gm_policy">Regra</string -->
-    <!-- TODO string name="calib_gm_policy">Group policy</string -->
+    <string name="calib_gm_policy">Regra de agrupamento</string>
     <string name="calib_gm_undelete">Restaurar os dados de calibração?</string>
     <string name="calib_saved">Calibração salva</string>
     <string name="calib_updated">Calibração atualizada</string>
@@ -112,13 +112,13 @@
     <string name="calib_precision">Precisão</string>
     <string name="calib_iter">Iterações: %1$d</string>
     <string name="calib_reset">Reiniciar a calibração da DistoX?</string>
-    
+
     <string name="algorithm">Algoritmo:</string>
     <string name="auto">auto</string>
     <string name="linear">linear</string>
     <string name="non_linear">não linear</string>
     <string name="algo_minimum">mínimo</string>
-   
+
     <!-- UNUSED string name="device_algo_failed">Determinação automática do algoritmo mal sucedida\nUtilizando algoritmo linear</string -->
     <string name="device_address">Endereço %1$s</string>
     <!-- UNUSED string name="device_busy">Dispositivo indisponível</string -->
@@ -164,7 +164,7 @@
     <string name="few_iter">Falha: excesso de iterações</string>
     <string name="few_groups">Não há dados suficientes para os grupos</string>
     <string name="found_groups">Encontrados %1$d grupos</string>
-    <!-- TODO string name="regroup">No regroup</string -->
+    <string name="regroup">Não reagrupar</string>
     <!-- UNUSED string name="few_plots">Esboços não suficientes</string -->
     <string name="few_calibs">Calibrações insuficientes</string>
     <string name="getting_info">Obtendo informações da DistoX &#8230;</string>
@@ -188,7 +188,7 @@
     <!-- UNUSED string name="import_zip_wait">A importação do arquivo zip pode demorar. Aguarde &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Salvando croqui &#8230; por favor espere &#8230;</string -->
     <string name="MT_points_none">Nenhum ponto MobileTopographer</string>
- 
+
     <string name="pleasewait">Por favor espere</string>
     <string name="processing">processando &#8230;</string>
 
@@ -246,7 +246,7 @@
     <string name="error_station_non_existing">Base inexistente</string>
     <string name="error_sensor_required">Sensor exigido</string>
     <string name="error_value_required">Valor exigido</string>
-    
+
     <string name="group_title">Grupos dados calibração</string>
     <string name="group_policy_four">Regra: agrupar 4 a 4</string>
     <string name="group_policy_sixteen">Regra: 4 grupos de 4, o restante isolados</string>
@@ -274,7 +274,7 @@
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Latitude %1$s</string>
     <string name="fmt_longitude">Longitude %1$s</string>
-    <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string> 
+    <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string>
     <string name="fixed">fixa</string>
     <string name="painted">pintada</string>
 
@@ -493,7 +493,7 @@
     <string name="saturated_coeffs">ALERTA: coeficientes de calibração saturados</string>
     <string name="out_of_memory">ALERTA: sem memória!</string>
     <string name="disk_io_error">CRÍTICO: erro de E/S no disco!</string>
-    
+
     <string name="toporobot_warning">Política para o TopoRobot é \'Testador\'!</string>
     <string name="anomaly_warning">Compensação de anomalias magnéticas é \'Especialista\'!</string>
     <string name="tripod_warning">Política para tripés é "Avançado"!</string>
@@ -748,7 +748,7 @@
     <string name="help_measure">Medir distâncias</string>
     <string name="help_measure_type">Modo de medição: ponto fixo ou linha com diversos pontos</string>
     <string name="help_measure_undo">Descartar o último ponto da polilinha</string>
-    
+
     <string name="help_backups">Apagar backups dos croquis</string>
     <string name="help_calib_check">Medidas de verificação de calibração</string>
     <string name="help_close">Fechar janela</string>
@@ -818,7 +818,7 @@
     <string name="help_reload_next">Mostrar backup mais antigo</string>
     <string name="help_reload_plot">Recarregar backup do croqui</string>
     <string name="help_zoom_fit">Encaixar croqui na tela</string>
-   
+
     <string name="help_line_point">Ações com linhas e pontos: juntar, separar, cortar, remover</string>
 <!--
     <string name="help_to_point">Mover o ponto selecionado para juntá-lo ao ponto mais próximo</string>
@@ -849,13 +849,13 @@
     <string name="help_cover">Visualizar a distribuição angular dos dados de calibração</string>
     <string name="help_compute">Calcular calibração</string>
     <string name="help_write">Gravar coeficientes de calibração na DistoX</string>
-  
+
     <string name="audio_paused">Pausado</string>
     <string name="audio_playing">Tocando</string>
     <string name="audio_recording">Gravando</string>
     <string name="audio_delete">Apagar?</string>
     <string name="audio_overwrite">Sobreescrever?</string>
-  
+
     <string name="import_lrud">Importar EDTC</string>
     <string name="import_leg_first">Medida antes de EDTC</string>
     <string name="import_diving_datamode">Modo de dados \'mergulho\'</string>
@@ -918,7 +918,7 @@
     <string name="title_settings_tro">Configurações de exportação VisualTopo</string>
     <string name="title_settings_svg">Configurações de exportação SVG</string>
     <string name="title_settings_dxf">Configurações de exportação DXF</string>
-    <!-- TODO string name="title_settings_shp">Shapefile export settings</string -->
+    <string name="title_settings_shp">Configurações de exportação SHP</string>
     <string name="title_settings_png">Configurações de exportação PNG</string>
     <string name="title_settings_kml">Configurações de exportação KML</string>
 
@@ -961,7 +961,7 @@
     <string name="title_import_dat">Opções importação Compass</string>
 
   <string name="pref_export_settings">CONFIGURAÇÕES DE EXPORTAÇÃO</string>
-  <!-- TODO string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
+  <string name="pref_tcsx">Exportar cSurvey-1.20 transfer-csx</string>
 
   <string name="pref_cat_survey">DADOS DA TOPO</string>
   <string name="pref_cat_drawing">DESENHANDO CROQUI</string>
@@ -1469,5 +1469,5 @@
    <string name="firmware_file_dumped">Arquivo firmware salvo %1$s tamanho %2$d</string>
    <string name="firmware_file_uploaded">Arquivo firmware enviado %1$s escrito %2$d / %3$d</string>
    <string name="firmware_not_supported">Dispositivo não suporte funções relativas à firmware</string>
-   
+
 </resources>
