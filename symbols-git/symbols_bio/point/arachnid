@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name arachnid
 name-es arácnido
@@ -13,16 +14,16 @@ path
   addCircle 0 -1 1
   addCircle 0 1.5 1.5
   moveTo 5 -2.5
-  lineTo 1.5 0 
+  lineTo 1.5 0
   lineTo 4 -4
   moveTo -5 -2.5
-  lineTo -1.5 0 
+  lineTo -1.5 0
   lineTo -4 -4
   moveTo 2 5
-  lineTo 0.5 0 
+  lineTo 0.5 0
   lineTo 3 4
   moveTo -2 5
-  lineTo -0.5 0 
+  lineTo -0.5 0
   lineTo -3 4
 endpath
 endsymbol

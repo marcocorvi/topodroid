@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name fern
 name-pt samambaia
@@ -14,7 +15,7 @@ path
   moveTo 0 5
   lineTo 0 -3
   cubicTo -2 -4 2 4 0 -3
-  moveTo 0 0 
+  moveTo 0 0
   cubicTo 3 -3 3 0 0 0
   cubicTo -3 -3 -3 0 0 0
   moveTo 0 3

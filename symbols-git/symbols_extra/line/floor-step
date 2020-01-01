@@ -1,4 +1,4 @@
-encoding  utf-8
+encoding utf-8
 symbol line
 name floor-step
 name-es resalte
@@ -21,6 +21,6 @@ effect
   lineTo 7 -8
   lineTo 6 -8
   lineTo 6 0
-  lineTo 0 0 
+  lineTo 0 0
 endeffect
 endsymbol

@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name cnidarian
 name-pt cnidário
@@ -11,7 +12,7 @@ group paleo
 color 0x66cc99
 csurvey 0 0 0
 path
-  moveTo -1 0 
+  moveTo -1 0
   lineTo -1.5 5
   lineTo 1.5 5
   lineTo 1 0

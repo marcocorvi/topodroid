@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name blocks
 name-cn 块石
@@ -30,6 +31,6 @@ path
   lineTo 8 5
   moveTo -7 -4
   lineTo 2 -1
-  lineTo 7 -5 
+  lineTo 7 -5
 endpath
 endsymbol

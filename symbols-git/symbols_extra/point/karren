@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name karren
 name-pt lapiás
@@ -13,7 +14,7 @@ path
   moveTo -6 2
   lineTo -4 4
   lineTo -1 -4
-  lineTo 1 -2 
+  lineTo 1 -2
   moveTo -1 2
   lineTo 1 4
   lineTo 4 -4

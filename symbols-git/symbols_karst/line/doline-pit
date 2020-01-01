@@ -1,3 +1,4 @@
+encoding utf-8
 symbol line
 name doline-pit
 name-pt poço_de_dolina
@@ -19,7 +20,6 @@ effect
   lineTo 7 -12
   lineTo 6 -12
   lineTo 6 0
-  lineTo 0 0 
+  lineTo 0 0
 endeffect
 endsymbol
-

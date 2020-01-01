@@ -1,3 +1,4 @@
+encoding utf-8
 symbol line
 name monocline
 name-it monoclinale
@@ -21,6 +22,6 @@ effect
   lineTo 40 1
   lineTo 75 1
   lineTo 75 0
-  lineTo 0 0 
+  lineTo 0 0
 endeffect
 endsymbol

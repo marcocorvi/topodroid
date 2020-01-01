@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name fossil
 name-pt fóssil
@@ -10,7 +11,7 @@ name-de Fossil
 th_name u:fossil
 group paleo
 color 0x33ff66
-csurvey 0 0 0 
+csurvey 0 0 0
 path
   moveTo 9 0
   lineTo -9 0

@@ -1,4 +1,4 @@
-encoding  utf-8
+encoding utf-8
 symbol point
 name flowstone-choke
 name-es colmatado_por_concreción
@@ -18,7 +18,7 @@ path
   cubicTo -3 -1 -4 -4 -3 -5
   moveTo 0 5
   cubicTo -1 4 0 1 2 0
-  cubicTo 0 -1 -1 -4 0 -5  
+  cubicTo 0 -1 -1 -4 0 -5
 endpath
 endsymbol
 

@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name foliation-inclined
 name-pt foliação_oblíqua
@@ -9,9 +10,9 @@ th_name u:foliation-inclined
 group foliation
 orientation yes
 color 0xcccc99
-csurvey 0 0 0 
+csurvey 0 0 0
 path
-  moveTo -7 0 
+  moveTo -7 0
   lineTo 7 0
   moveTo 2 -5
   lineTo 2 0

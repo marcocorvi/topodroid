@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name anastomosis
 name-es anastomosis
@@ -17,7 +18,7 @@ path
   cubicTo -4 -4 -2 -4 -2 -3
   lineTo -2 3
   cubicTo -2 4 0 4 0 3
-  lineTo 0 -3 
+  lineTo 0 -3
   cubicTo 0 -4 2 -4 2 -3
   lineTo 2 3
   cubicTo 2 4 4 4 4 3

@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name plus-minus
 name-pt mais-menos
@@ -13,7 +14,7 @@ path
   lineTo 0 1
   moveTo 4 -3
   lineTo -4 -3
-  moveTo -6 3 
+  moveTo -6 3
   cubicTo -6 11 6 11 6 3
   lineTo 6 -3
   cubicTo 6 -11 -6 -11 -6 -3

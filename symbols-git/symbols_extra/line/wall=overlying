@@ -1,3 +1,4 @@
+encoding utf-8
 symbol line
 name wall_above
 name-es pared_galeria_superior
@@ -12,5 +13,5 @@ group wall
 color 0xff0000 0x99
 width 1
 csurvey 5 1 2 2
-dash 5 10 
+dash 5 10
 endsymbol

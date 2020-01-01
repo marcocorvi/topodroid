@@ -1,3 +1,4 @@
+encoding utf-8
 symbol line
 name floor-meander
 name-cn 地缝
@@ -34,5 +35,3 @@ effect
   lineTo 0 3
 endeffect
 endsymbol
-
-

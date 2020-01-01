@@ -1,3 +1,4 @@
+encoding utf-8
 symbol line
 name syncline
 name-it sinclinale
@@ -31,6 +32,6 @@ effect
   lineTo 15 -8
   lineTo 13.5 -8
   lineTo 21 0
-  lineTo 0 0 
+  lineTo 0 0
 endeffect
 endsymbol

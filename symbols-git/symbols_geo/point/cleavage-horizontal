@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name cleavage-horizontal
 name-pt clivagem_horizontal
@@ -9,7 +10,7 @@ name-de Horizontale_Schieferung
 th_name u:cleavage-horizontal
 group cleavage
 color 0xcccc99
-csurvey 0 0 0 
+csurvey 0 0 0
 path
   moveTo -9 0
   lineTo 9 0

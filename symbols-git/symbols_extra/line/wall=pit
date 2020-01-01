@@ -1,4 +1,4 @@
-encoding  utf-8
+encoding utf-8
 symbol line
 name wall-pit
 name-es pozo_pared
@@ -23,7 +23,7 @@ effect
   lineTo 12 4
   lineTo 12 7
   lineTo 0 7
-  lineTo 0 3 
+  lineTo 0 3
 endeffect
 endsymbol
 

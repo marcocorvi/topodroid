@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name till
 name-pt tilito
@@ -8,13 +9,13 @@ name-ro argilă-cu-blocuri
 name-de Gletscherablagerungen
 th_name u:till
 color 0xccff66
-csurvey 0 0 0 
+csurvey 0 0 0
 path
   moveTo 0 6
   lineTo -4.5 -3
   lineTo 4.5 -3
   lineTo 0 6
-  moveTo -9 0 
+  moveTo -9 0
   lineTo -3 0
   moveTo 9 0
   lineTo 3 0

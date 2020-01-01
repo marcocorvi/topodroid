@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name salamander
 name-de Salamander
@@ -22,11 +23,11 @@ path
   cubicTo -0.5 9.5 0 9.5 0 10
   moveTo  3 -3.5
   cubicTo 3 -4.5 3 -4.5 1 -4.5
-  moveTo  3 3 
+  moveTo  3 3
   cubicTo 3 1.5 3 1.5 1 1.5
   moveTo  -3 -3.5
   cubicTo -3 -4.5 -3 -4.5 -1 -4.5
-  moveTo  -3 3 
+  moveTo  -3 3
   cubicTo -3 1.5 -3 1.5 -1 1.5
 endpath
-endsymbol  
+endsymbol

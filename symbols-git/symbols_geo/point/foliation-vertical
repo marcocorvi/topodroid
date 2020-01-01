@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name foliation-vertical
 name-pt foliação_vertical
@@ -8,10 +9,10 @@ name-de Vertikale_Blätterung
 th_name u:foliation-vertical
 group foliation
 color 0xcccc99
-csurvey 0 0 0 
+csurvey 0 0 0
 orientation yes
 path
-  moveTo -7 0 
+  moveTo -7 0
   lineTo 7 0
   moveTo 2 4
   lineTo 2 -4

@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name sand
 name-it sabbia
@@ -15,7 +16,7 @@ path
   moveTo -9 0
   lineTo 9 0
   moveTo -4.5 0
-  lineTo 0 -4.5 
+  lineTo 0 -4.5
   lineTo 4.5 0
 endpath
 endsymbol

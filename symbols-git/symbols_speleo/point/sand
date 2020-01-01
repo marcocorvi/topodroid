@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name sand
 name-cn 砂
@@ -19,7 +20,7 @@ orientation no
 color 0xffcc66
 csurvey 6 6 80
 path
-  moveTo -7 3 
+  moveTo -7 3
   lineTo -6 3
   lineTo -6.5 2
   lineTo -7 3

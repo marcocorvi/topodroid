@@ -1,3 +1,4 @@
+encoding utf-8
 symbol line
 name valley-u
 name-pt vale_em_u
@@ -19,4 +20,3 @@ effect
   moveTo 0 60
 endeffect
 endsymbol
-

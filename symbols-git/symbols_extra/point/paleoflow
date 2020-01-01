@@ -1,3 +1,4 @@
+encoding utf-8
 symbol point
 name paleoflow
 name-cn 古水流指向
@@ -24,7 +25,7 @@ path
   lineTo 2 -5
   moveTo 0 -7
   lineTo -2 -5
-  moveTo -3 0 
+  moveTo -3 0
   cubicTo -3 -1.5 -1.5 -3 0 -3
   cubicTo 1.5 -3 3 -1.5 3 0
 endpath
