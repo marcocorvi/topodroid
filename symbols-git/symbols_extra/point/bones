@@ -1,7 +1,7 @@
 encoding utf-8
 symbol point
-name bone
-name-pt osso
+name bones
+name-pt ossos
 name-ru кость
 th_name bones
 group paleo
