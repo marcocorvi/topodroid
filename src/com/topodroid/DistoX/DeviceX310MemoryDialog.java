@@ -114,7 +114,7 @@ class DeviceX310MemoryDialog extends MyDialog
           return;
         }
         try {
-          ht[1] = Integer.parseInt( to );
+          ht[1] = Integer.parseInt( to ); 
         } catch ( NumberFormatException e ) {
           error = mParent.getResources().getString( R.string.error_invalid_number );
           mETdumpto.setError( error );

@@ -312,7 +312,7 @@ class ShotDialog extends MyDialog
         res_splay = R.drawable.iz_ysplays_vert;
         break;
     }
-    if ( res_splay > 0 ) {
+    if ( res_splay >= 0 ) {
       TDandroid.setButtonBackground( mCBxSplay, MyButton.getButtonBackground( mContext, mContext.getResources(), res_splay ) );
         // Log.v("DistoX-SPLAY", "create splay checkbox");
     } else {
@@ -575,7 +575,7 @@ class ShotDialog extends MyDialog
       shot_to = TDUtil.noSpaces( mETto.getText().toString() );
       do_backleg = ( shot_from.length() > 0 ) && ( shot_to.length() > 0 );
     }
-    // Log.v("DistoXX", "do backleg " + do_backleg + " value " + backleg_val );
+    // Log.v("DistoXX", "<" + shot_from + "-" + shot_to + "> do backleg " + do_backleg + " value " + backleg_val );
 
     shot_flag = DBlock.FLAG_SURVEY;
     if ( TDLevel.overNormal ) {
@@ -658,6 +658,8 @@ class ShotDialog extends MyDialog
 
     // Log.v("DostoXShot", "renumber " + renumber + " comment " + comment );
 
+    // Log.v("DistoXX", "all_splay " + all_splay + " set_xsplay " + set_xsplay + " splay_type " + splay_type );
+
     if ( all_splay ) {
       if ( set_xsplay >= 0 ) {
         long leg0 = mBlk.getLegType(); // old leg_type: 0 plain, 2 X, 4 H, 5 V
@@ -666,7 +668,7 @@ class ShotDialog extends MyDialog
           leg0 = leg1;
           leg1 = set_xsplay;
         }
-        // Log.v("DistoX-SPLAY", "[1] all leg type " + leg0 + " -> " + leg1 + " " + set_xsplay );
+        // Log.v("DistoXX-SPLAY", "[1] all leg type " + leg0 + " -> " + leg1 + " " + set_xsplay );
         mParent.updateSplayShots( shot_from, shot_to, extend, shot_flag, leg1, comment, mBlk );
         mParent.updateSplayLeg( mPos, leg0, leg1 );
       }
@@ -675,8 +677,9 @@ class ShotDialog extends MyDialog
 
     } else if ( set_xsplay == 0 ) {
       long leg = LegType.NORMAL;
-      // Log.v("DistoX-SPLAY", "[2] leg type " + leg + " " + set_xsplay );
-      mParent.updateSplayLegType( mBlk, leg );
+      // Log.v("DistoXX-SPLAY", "[2] leg type " + leg + " " + set_xsplay );
+      // mParent.updateSplayLegType( mBlk, leg );
+      mParent.updateShot( shot_from, shot_to, extend, shot_stretch, shot_flag, leg, comment, mBlk );
     } else {
       // Log.v("DistoX-SPLAY", "other " + set_xsplay );
       // mBlk.setName( shot_from, shot_to ); // done by parent.updateShot
@@ -688,7 +691,7 @@ class ShotDialog extends MyDialog
       if ( do_backleg && backleg_val ) {
         leg = LegType.BACK;
       }
-      // Log.v("DistoX", "Block is splay " + mBlk.isSplay() + " leg " + leg + " blk type " + mBlk.getBlockType() );
+      // Log.v("DistoXX", "Block is splay " + mBlk.isSplay() + " leg " + leg + " blk type " + mBlk.getBlockType() );
       mParent.updateShot( shot_from, shot_to, extend, shot_stretch, shot_flag, leg, comment, mBlk );
     }
     // mParent.scrollTo( mPos );

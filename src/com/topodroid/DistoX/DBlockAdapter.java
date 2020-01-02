@@ -171,7 +171,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       DBlock b = mItems.get( k );
       if ( b.mId == id ) {
         int k1 = k-1;
-        for ( ; k1 > 0; --k1 ) {
+        for ( ; k1 >= 0; --k1 ) {
           DBlock b1 = mItems.get( k1 );
           if ( ! b1.isSplay() || ! name.equals( b1.mFrom ) ) break;
         }

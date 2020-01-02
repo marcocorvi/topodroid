@@ -123,12 +123,13 @@ class DistoX310Protocol extends DistoXProtocol
     // Log.v( "DistoX", "start " + start + " end " + end );
     int cnt = 0;
     while ( start < end ) {
-      int addr = index2addrX310( start );
-      // Log.v( "DistoX", start + " addr " + addr );
-      int endaddr = addr + BYTE_PER_DATA;
       MemoryOctet result = new MemoryOctet( start );
+      // MemoryOctet result2 = new MemoryOctet( start ); // vector data
       // read only bytes 0-7 and 16-17
       int k = 0;
+      int addr = index2addrX310( start );
+      int endaddr = addr + BYTE_PER_DATA;
+      // Log.v( "DistoX", start + " addr " + addr );
       for ( ; addr < endaddr && k < 8; addr += 4, k+=4 ) {
         mBuffer[0] = (byte)( 0x38 );
         mBuffer[1] = (byte)( addr & 0xff );
@@ -154,6 +155,41 @@ class DistoX310Protocol extends DistoXProtocol
         result.data[k+2] = mBuffer[5];
         result.data[k+3] = mBuffer[6];
       }
+      // vector packet - need only the first byte
+      // k = 0;
+      addr = index2addrX310( start ) + 8;
+      // endaddr = addr + BYTE_PER_DATA;
+      // for ( ; addr < endaddr && k < 8; addr += 4, k+=4 ) {
+        mBuffer[0] = (byte)( 0x38 );
+        mBuffer[1] = (byte)( addr & 0xff );
+        mBuffer[2] = (byte)( (addr>>8) & 0xff );
+        // TODO write and read
+        try {
+          mOut.write( mBuffer, 0, 3 );
+          // if ( TDSetting.mPacketLog ) logPacket3( 1L, mBuffer );
+
+          mIn.readFully( mBuffer, 0, 8 );
+          // if ( TDSetting.mPacketLog ) logPacket( 0L );
+          // Log.v( "DistoX-DATA_TYPE", "read-memory[3]: " + String.format(" %02x", mBuffer[0] ) );
+        } catch ( IOException e ) {
+          TDLog.Error( "readmemory() IO failed" );
+          break;
+        }
+      //   if ( mBuffer[0] != (byte)( 0x38 ) ) break;
+      //   int reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1]);
+      //   if ( reply_addr != addr ) break;
+      //   // for (int i=3; i<7; ++i) result.data[k+i-3] = mBuffer[i];
+      //   result2.data[k  ] = mBuffer[3];
+      //   result2.data[k+1] = mBuffer[4];
+      //   result2.data[k+2] = mBuffer[5];
+      //   result2.data[k+3] = mBuffer[6];
+      // }
+      if ( mBuffer[0] == (byte)( 0x38 ) && addr == MemoryOctet.toInt( mBuffer[2], mBuffer[1]) ) {
+        if ( ( mBuffer[3] & MemoryOctet.BIT_BACKSIGHT) == MemoryOctet.BIT_BACKSIGHT ) {
+          result.data[0] |= MemoryOctet.BIT_BACKSIGHT2;
+        }
+      }
+
       if ( k == 8 ) {
         addr = index2addrX310( start ) + 16;
         mBuffer[0] = (byte)( 0x38 );
@@ -173,6 +209,8 @@ class DistoX310Protocol extends DistoXProtocol
         if ( mBuffer[0] != (byte)( 0x38 ) ) break;
         if ( mBuffer[3] == (byte)( 0xff ) ) result.data[0] |= (byte)( 0x80 ); 
         data.add( result );
+        // if ( mBuffer[4] == (byte)( 0xff ) ) result2.data[0] |= (byte)( 0x80 ); 
+        // data.add( result2 );
         // Log.v( TopoDroidApp.TAG, "memory " + result.toString() + " " + mBuffer[3] );
         ++ cnt;
       } else {
