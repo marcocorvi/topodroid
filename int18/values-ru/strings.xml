@@ -1252,6 +1252,8 @@
   <string name="pref_weeddistance_summary">Макс. расстояние от сегмента до точек прореживания</string>
   <string name="pref_weedlength_title">Длина сегмента прореживания</string>
   <string name="pref_weedlength_summary">Макс. длина сегмента в линии</string>
+  <string name="pref_weedbuffer_title">Буфер сегмента прореживания</string>
+  <string name="pref_weedbuffer_summary">Буфер вокруг сегмента линии [pxl]</string>
   <string name="pref_calib_algo_title">Алгоритм</string>
   <string name="pref_calib_algo_summary">Алгоритм вычисления калибровки</string>
   <string name="pref_group_by_title">Группирование данных калибровки</string>
@@ -1280,7 +1282,7 @@
   <string name="pref_linestraight_summary">Спрямить всю линию целиком</string>
   <string name="pref_path_multiselect_title">Выбор нескольких линий</string>
   <string name="pref_path_multiselect_summary">Одновременный выбор нескольких линий</string>
-  <string name="pref_composite_actions_title">Комбинированные действий=я</string>
+  <string name="pref_composite_actions_title">Комбинированные действия</string>
   <string name="pref_composite_actions_summary">Включить действия по длительному тапу для линий и областей</string>
   <string name="pref_plane_interpolation_title">Плоская интерполяция</string>
   <string name="pref_plane_interpolation_summary">Выполнить простую интерполяцию</string>
