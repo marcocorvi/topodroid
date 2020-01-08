@@ -177,6 +177,8 @@ class BrushManager
   // --------------------------------------------------------------------------
   // LINES
 
+  static boolean isLineStraight( int index ) { return (mLineLib != null) && mLineLib.isStyleStraight( index ); }
+
   // -----------------------------------------------------------------------
   // AREAS
 

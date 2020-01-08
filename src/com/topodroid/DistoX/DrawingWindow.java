@@ -3009,7 +3009,7 @@ public class DrawingWindow extends ItemDrawer
           if ( mPointCnt > mLinePointStep || mLinePointStep == POINT_MAX ) {
             if ( ! ( mSymbol == Symbol.LINE && BrushManager.isLineSection( mCurrentLine ) ) 
                  && TDSetting.isLineStyleComplex()
-                 && ( mSymbol == Symbol.AREA || ! BrushManager.mLineLib.isStyleStraight( mCurrentLine ) )
+                 && ( mSymbol == Symbol.AREA || ! BrushManager.isLineStraight( mCurrentLine ) )
                ) {
               int nPts = (mSymbol == Symbol.LINE )? mCurrentLinePath.size() 
                                                   : mCurrentAreaPath.size() ;
