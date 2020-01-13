@@ -197,15 +197,19 @@ class TDSetting
   // DEVICE
   final static int CONN_MODE_BATCH      = 0;      // DistoX connection mode
   final static int CONN_MODE_CONTINUOUS = 1;
+  final static int CONN_MODE_DOUBLE     = 3;
   final static int CONN_MODE_MULTI      = 2;
   static int mConnectionMode    = CONN_MODE_BATCH; 
 
   static boolean isConnectionModeBatch() { return mConnectionMode != CONN_MODE_CONTINUOUS; }
   static boolean isConnectionModeContinuous() { return mConnectionMode == CONN_MODE_CONTINUOUS; }
+  static boolean isConnectionModeDouble() { return mConnectionMode == CONN_MODE_DOUBLE; }
+  static boolean isConnectionModeMulti()  { return mConnectionMode == CONN_MODE_MULTI; }
 
   static boolean mZ6Workaround  = true;
 
   static boolean mAutoReconnect = false;
+  static boolean mSecondDistoX = false;
   static boolean mHeadTail      = false; // whether to use readA3HeadTail to download the data (A3 only)
   static boolean mAutoPair      = true;
   static int mConnectSocketDelay = 0; // wait time if not paired [0.1 sec]
@@ -758,15 +762,16 @@ class TDSetting
     // mCommRetry      = tryInt( prefs, keyDevice[  ], bool(defDevice[  ]) );  // DISTOX_COMM_RETRY
     mZ6Workaround   = prefs.getBoolean( keyDevice[ 5], bool(defDevice[ 5])  ); // DISTOX_Z6_WORKAROUND
     mAutoPair       = prefs.getBoolean( keyDevice[ 6], bool(defDevice[ 6]) );  // DISTOX_AUTO_PAIR
-    mConnectFeedback = tryInt( prefs,    keyDevice[ 7],      defDevice[ 7] );   // DISTOX_CONNECT_FEEDBACK
+    mConnectFeedback = tryInt( prefs,   keyDevice[ 7],      defDevice[ 7] );   // DISTOX_CONNECT_FEEDBACK
 
     String[] keyGDev = TDPrefKey.GEEKDEVICE;
     String[] defGDev = TDPrefKey.GEEKDEVICEdef;
     mConnectSocketDelay = tryInt(prefs, keyGDev[ 0],      defGDev[ 0] );   // DISTOX_SOCKET_DELAY
-    mWaitData       = tryInt( prefs,    keyGDev[ 1],      defGDev[ 1] );   // DISTOX_WAIT_DATA
-    mWaitConn       = tryInt( prefs,    keyGDev[ 2],      defGDev[ 2] );   // DISTOX_WAIT_CONN
-    mWaitLaser      = tryInt( prefs,    keyGDev[ 3],      defGDev[ 3] );   // DISTOX_WAIT_LASER
-    mWaitShot       = tryInt( prefs,    keyGDev[ 4],      defGDev[ 4] );   // DISTOX_WAIT_SHOT
+    mSecondDistoX   = prefs.getBoolean( keyGDev[ 1], bool(defGDev[ 1]) );  // DISTOX_SECOND_DISTOX
+    mWaitData       = tryInt( prefs,    keyGDev[ 2],      defGDev[ 2] );   // DISTOX_WAIT_DATA
+    mWaitConn       = tryInt( prefs,    keyGDev[ 3],      defGDev[ 3] );   // DISTOX_WAIT_CONN
+    mWaitLaser      = tryInt( prefs,    keyGDev[ 4],      defGDev[ 4] );   // DISTOX_WAIT_LASER
+    mWaitShot       = tryInt( prefs,    keyGDev[ 5],      defGDev[ 5] );   // DISTOX_WAIT_SHOT
 
     String[] keyImport = TDPrefKey.EXPORT_import;
     String[] defImport = TDPrefKey.EXPORT_importdef;
@@ -1256,26 +1261,6 @@ class TDSetting
       TopoDroidApp.checkAutoPairing();
     } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_CONNECT_FEEDBACK
       mConnectFeedback = tryIntValue( hlp, k, v, def[7] );
-    // } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_SOCKET_DELAY
-    //   mConnectSocketDelay = tryIntValue( hlp, k, v, def[7] );  
-    //   if ( mConnectSocketDelay < 0  ) { mConnectSocketDelay =  0; ret = TDString.ZERO; }
-    //   if ( mConnectSocketDelay > 60 ) { mConnectSocketDelay = 60; ret = TDString.SIXTY; } // was 100
-    // } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_WAIT_DATA
-    //   mWaitData = tryIntValue( hlp, k, v, def[8] ); 
-    //   if ( mWaitData <    0 ) { mWaitData =    0; ret = Integer.toString( mWaitData ); }
-    //   if ( mWaitData > 2000 ) { mWaitData = 2000; ret = Integer.toString( mWaitData ); }
-    // } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_WAIT_CONN
-    //   mWaitConn = tryIntValue( hlp, k, v, def[9] );
-    //   if ( mWaitConn <   50 ) { mWaitConn =   50; ret = Integer.toString( mWaitConn ); }
-    //   if ( mWaitConn > 2000 ) { mWaitConn = 2000; ret = Integer.toString( mWaitConn ); }
-    // } else if ( k.equals( key[ 10 ] ) ) { // DISTOX_WAIT_LASER
-    //   mWaitLaser = tryIntValue( hlp, k, v, def[10] );
-    //   if ( mWaitLaser <  500 ) { mWaitLaser =  500; ret = Integer.toString( mWaitLaser ); }
-    //   if ( mWaitLaser > 5000 ) { mWaitLaser = 5000; ret = Integer.toString( mWaitLaser ); }
-    // } else if ( k.equals( key[ 11 ] ) ) { // DISTOX_WAIT_SHOT
-    //   mWaitShot  = tryIntValue( hlp, k, v, def[11] );
-    //   if ( mWaitShot <   500 ) { mWaitShot =   500; ret = Integer.toString( mWaitShot ); }
-    //   if ( mWaitShot > 10000 ) { mWaitShot = 10000; ret = Integer.toString( mWaitShot ); }
     } else {
       TDLog.Error("missing DEVICE key: " + k );
     }
@@ -1413,20 +1398,22 @@ class TDSetting
       mConnectSocketDelay = tryIntValue( hlp, k, v, def[0] );  
       if ( mConnectSocketDelay < 0  ) { mConnectSocketDelay =  0; ret = TDString.ZERO; }
       if ( mConnectSocketDelay > 60 ) { mConnectSocketDelay = 60; ret = TDString.SIXTY; } // was 100
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_WAIT_DATA
-      mWaitData = tryIntValue( hlp, k, v, def[1] ); 
+    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_SECOND_DISTOX (bool)
+      mSecondDistoX = tryBooleanValue( hlp, k, v, bool(def[1]) );
+    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_WAIT_DATA
+      mWaitData = tryIntValue( hlp, k, v, def[2] ); 
       if ( mWaitData <    0 ) { mWaitData =    0; ret = Integer.toString( mWaitData ); }
       if ( mWaitData > 2000 ) { mWaitData = 2000; ret = Integer.toString( mWaitData ); }
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_WAIT_CONN
-      mWaitConn = tryIntValue( hlp, k, v, def[2] );
+    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_WAIT_CONN
+      mWaitConn = tryIntValue( hlp, k, v, def[3] );
       if ( mWaitConn <   50 ) { mWaitConn =   50; ret = Integer.toString( mWaitConn ); }
       if ( mWaitConn > 2000 ) { mWaitConn = 2000; ret = Integer.toString( mWaitConn ); }
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_WAIT_LASER
-      mWaitLaser = tryIntValue( hlp, k, v, def[3] );
+    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_WAIT_LASER
+      mWaitLaser = tryIntValue( hlp, k, v, def[4] );
       if ( mWaitLaser <  500 ) { mWaitLaser =  500; ret = Integer.toString( mWaitLaser ); }
       if ( mWaitLaser > 5000 ) { mWaitLaser = 5000; ret = Integer.toString( mWaitLaser ); }
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_WAIT_SHOT
-      mWaitShot  = tryIntValue( hlp, k, v, def[4] );
+    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_WAIT_SHOT
+      mWaitShot  = tryIntValue( hlp, k, v, def[5] );
       if ( mWaitShot <   500 ) { mWaitShot =   500; ret = Integer.toString( mWaitShot ); }
       if ( mWaitShot > 10000 ) { mWaitShot = 10000; ret = Integer.toString( mWaitShot ); }
     } else {
@@ -2439,7 +2426,7 @@ class TDSetting
       pw.printf(Locale.US, "BT: check %d, autopair %c \n", mCheckBT, tf(mAutoPair) );
       pw.printf(Locale.US, "Socket: type \"%s\" / %d, delay %d\n", mDefaultSockStrType, mSockType, mConnectSocketDelay );
       pw.printf(Locale.US, "Connection mode %d, Z6 %c, feedback %d\n", mConnectionMode, tf(mZ6Workaround), mConnectFeedback );
-      pw.printf(Locale.US, "Communication type %d, autoreconnect %c, retry %d, head/tail %c\n", mCommType, tf(mAutoReconnect), mCommRetry, tf(mHeadTail) );
+      pw.printf(Locale.US, "Communication type %d, autoreconnect %c, DistoX-B %c, retry %d, head/tail %c\n", mCommType, tf(mAutoReconnect), tf(mSecondDistoX), mCommRetry, tf(mHeadTail) );
       pw.printf(Locale.US, "Packet log %c\n", tf(mPacketLog) );
       pw.printf(Locale.US, "Wait: laser %d, shot %d, data %d, conn %d, command %d\n", mWaitLaser, mWaitShot, mWaitData, mWaitConn, mWaitCommand );
 

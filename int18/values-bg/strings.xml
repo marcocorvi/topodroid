@@ -510,6 +510,7 @@
     <string name="name">име</string>
     <string name="team">картировачи</string>
     <!-- TODO string name="init_station">start station</string -->
+    <!-- TODO string name="second_device">second device</string -->
     <!-- TODO string name="start_station">start station [%1$s]</string -->
     <!-- string name="toggle_device">Toggle device calibration mode</string -->
     <string name="toggle_failed">Грешка при превключване на DistoX</string>
@@ -807,7 +808,8 @@
     <string name="help_eraser">Изтриване на елемент</string>
     <string name="help_select_mode">Инструмент за избиране</string>
     <string name="help_erase_mode">Тип изтриване</string>
-    <string name="help_erase_size">Размер на гумата [S/M/L]</string>
+    <!-- TODO string name="help_erase_size">Размер на гумата [S/M/L]</string -->
+    <!-- TODO string name="help_select_size">Select tool size [S/M/L]</string -->
     <string name="help_previous">Предишен избран елемент</string>
     <string name="help_next">Следващ избран елемент</string>
     <string name="help_recover">Възстановяване на скица от резервно копие</string>
@@ -1099,6 +1101,8 @@
   <string name="pref_conn_mode_summary">Тип на връзката за данни с DistoX</string>
   <string name="pref_auto_reconnect_title">Автоматично възст. на връзка</string>
   <string name="pref_auto_reconnect_summary">Автоматично свързване при загуба на връзката</string>
+  <!-- TODO string name="pref_second_distox_title">Two-DistoX survey</string -->
+  <!-- TODO string name="pref_second_distox_summary">Surveying with two DistoX</string -->
   <string name="pref_auto_pair_title">Автоматично сдвояване</string>
   <string name="pref_auto_pair_summary">Сдвояване с DistoX след сканиране</string>
   <string name="pref_head_tail_title">Брой измервания при сваляне</string>

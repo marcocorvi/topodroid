@@ -226,7 +226,7 @@ public class DrawingWindow extends ItemDrawer
 
   private static final int MENU_AREA  = 10;
   private static final int MENU_CLOSE = 11;
-
+/*
   private static final int[] help_icons = {
                         R.string.help_draw,
                         R.string.help_eraser,
@@ -251,6 +251,100 @@ public class DrawingWindow extends ItemDrawer
                         R.string.help_erase_mode,
                         R.string.help_erase_size
                       };
+*/
+
+  private static final int[] izons_move = {
+                        R.drawable.iz_edit,          // 0
+                        R.drawable.iz_eraser,
+                        R.drawable.iz_select,
+                        R.drawable.iz_download,      // 3 MOVE Nr 3+6
+                        R.drawable.iz_bt,
+                        R.drawable.iz_mode,          // 5
+                        R.drawable.iz_note,          // 6
+                        R.drawable.iz_plan,          // 7
+                        R.drawable.iz_dial           // 8
+  };
+
+  private static final int[] help_icons_move = {
+                        R.string.help_draw,
+                        R.string.help_eraser,
+                        R.string.help_edit,
+                        R.string.help_download,
+                        R.string.help_remote,
+                        R.string.help_refs,
+                        R.string.help_note,
+                        R.string.help_toggle_plot,
+                        R.string.help_azimuth
+                      };
+
+
+  private static final int[] izons_draw = {
+                        R.drawable.iz_edit_ok,          // 0
+                        R.drawable.iz_eraser,
+                        R.drawable.iz_select,
+                        R.drawable.iz_undo,          // 9 DRAW Nr 3+4
+                        R.drawable.iz_redo,          // 10
+                        R.drawable.iz_tools,         // 11
+                        R.drawable.iz_cont_none
+  };
+  private static final int[] help_icons_draw = {
+                        R.string.help_draw,
+                        R.string.help_eraser,
+                        R.string.help_edit,
+                        R.string.help_undo,
+                        R.string.help_redo,
+                        R.string.help_symbol_plot,
+                        R.string.help_continue
+                      };
+
+  private static final int[] izons_edit = {
+                        R.drawable.iz_edit,          // 0
+                        R.drawable.iz_eraser,
+                        R.drawable.iz_select_ok,
+                        R.drawable.iz_back,          // 13 EDIT Nr 3+6
+                        R.drawable.iz_forw,
+                        R.drawable.iz_join,
+                        R.drawable.iz_attrib,          
+                        R.drawable.iz_delete_off,    // 17
+                        R.drawable.iz_range_no,
+                        R.drawable.iz_select_all,
+                        R.drawable.iz_medium
+  };
+  private static final int[] help_icons_edit = {
+                        R.string.help_draw,
+                        R.string.help_eraser,
+                        R.string.help_edit,
+                        R.string.help_previous,
+                        R.string.help_next,
+                        R.string.help_line_point, 
+                        R.string.help_note_plot,
+                        R.string.help_delete_item,
+                        R.string.help_range,
+                        R.string.help_select_mode,
+                        R.string.help_select_size
+                      };
+
+
+  private static final int[] izons_erase = {
+                        R.drawable.iz_edit,          // 0
+                        R.drawable.iz_eraser_ok,
+                        R.drawable.iz_select,
+                        R.drawable.iz_undo,          // 9 DRAW Nr 3+4
+                        R.drawable.iz_redo,          // 10
+                        R.drawable.iz_erase_all,
+                        R.drawable.iz_medium
+  };
+
+  private static final int[] help_icons_erase = {
+                        R.string.help_draw,
+                        R.string.help_eraser,
+                        R.string.help_edit,
+                        R.string.help_undo,
+                        R.string.help_redo,
+                        R.string.help_erase_mode,
+                        R.string.help_erase_size
+                      };
+
   private static final int[] help_menus = {
                         R.string.help_plot_switch,
                         R.string.help_save_plot,
@@ -789,9 +883,9 @@ public class DrawingWindow extends ItemDrawer
   public void setTheTitle()
   {
     StringBuilder sb = new StringBuilder();
-    if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI ) {
+    if ( TDSetting.isConnectionModeMulti() || TDSetting.isConnectionModeDouble() ) {
       sb.append( "{" );
-      if ( TDInstance.device != null ) sb.append( TDInstance.device.getNickname() );
+      if ( TDInstance.deviceA != null ) sb.append( TDInstance.deviceA.getNickname() );
       sb.append( "} " );
     }
     // sb.append( mApp.getConnectionStateTitleStr() ); // IF_COSURVEY
@@ -2960,7 +3054,7 @@ public class DrawingWindow extends ItemDrawer
             // Log.v("DistoX",
             //       "DX " + (xs - mCurrentAreaPath.mFirst.x) + " DY " + (ys - mCurrentAreaPath.mFirst.y ) );
             if (    PlotInfo.isVertical( mType )
-                 && BrushManager.mAreaLib.isCloseHorizontal( mCurrentArea ) 
+                 && BrushManager.isAreaCloseHorizontal( mCurrentArea ) 
                  && Math.abs( ys - mCurrentAreaPath.mFirst.y ) < 10  // 10 == 0.5 meter
               ) {
               DrawingAreaPath area = new DrawingAreaPath( mCurrentAreaPath.mAreaType,
@@ -4815,93 +4909,101 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-    public boolean onLongClick( View view ) 
-    {
-      Button b = (Button)view;
-      if ( TDLevel.overAdvanced && b == mButton1[ BTN_DOWNLOAD ] ) {
-        if (   TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI
-            && ! mDataDownloader.isDownloading() 
-            && TopoDroidApp.mDData.getDevices().size() > 1 ) {
+  public boolean onLongClick( View view ) 
+  {
+    Button b = (Button)view;
+    if ( TDLevel.overAdvanced && b == mButton1[ BTN_DOWNLOAD ] ) {
+      if (  ! mDataDownloader.isDownloading() ) {
+        if ( TDSetting.isConnectionModeMulti() && TopoDroidApp.mDData.getDevices().size() > 1 ) {
           (new DeviceSelectDialog( this, mApp, mDataDownloader, this )).show();
+        } else if ( TDSetting.isConnectionModeDouble() && TDInstance.deviceB != null ) {
+          if ( mApp.switchSecondDevice() ) {
+            TDToast.make( String.format( getResources().getString(R.string.using), TDInstance.deviceNickname() ) );
+          }
         } else {
           mDataDownloader.toggleDownload();
           setConnectionStatus( mDataDownloader.getStatus() );
           mDataDownloader.doDataDownload( DataType.SHOT );
         }
-      } else if ( TDLevel.overAdvanced && b == mButton1[ BTN_DIAL ] ) {
-        if ( /* TDLevel.overAdvanced && */ mType == PlotInfo.PLOT_PLAN && TDAzimuth.mFixedExtend == 0 ) {
-          mRotateAzimuth = true;
-          setButtonAzimuth();
+      } else {
+        mDataDownloader.toggleDownload();
+        setConnectionStatus( mDataDownloader.getStatus() );
+        mDataDownloader.doDataDownload( DataType.SHOT );
+      }
+    } else if ( TDLevel.overAdvanced && b == mButton1[ BTN_DIAL ] ) {
+      if ( /* TDLevel.overAdvanced && */ mType == PlotInfo.PLOT_PLAN && TDAzimuth.mFixedExtend == 0 ) {
+        mRotateAzimuth = true;
+        setButtonAzimuth();
+      } else {
+        onClick( view );
+      }
+    } else if ( b == mButton1[ BTN_PLOT ] ) {
+      if ( PlotInfo.isSketch2D( mType ) ) {
+        if ( /* TDLevel.overBasic && */ mType == PlotInfo.PLOT_EXTENDED ) {
+          new DrawingProfileFlipDialog( mActivity, this ).show();
         } else {
-          onClick( view );
+          return false; // not consumed
         }
-      } else if ( b == mButton1[ BTN_PLOT ] ) {
-	if ( PlotInfo.isSketch2D( mType ) ) {
-          if ( /* TDLevel.overBasic && */ mType == PlotInfo.PLOT_EXTENDED ) {
-            new DrawingProfileFlipDialog( mActivity, this ).show();
+      } else if ( TDLevel.overExpert ) {
+        mApp.mShowSectionSplays = ! mApp.mShowSectionSplays;
+        // Log.v("DistoX", "toggle section splays " + mShowSectionSplays );
+        mDrawingSurface.setSplayAlpha( mApp.mShowSectionSplays );
+        updateSplays( mApp.mSplayMode );
+      }
+    } else if ( TDLevel.overBasic && b == mButton3[ BTN_REMOVE ] ) {
+      SelectionPoint sp = mDrawingSurface.hotItem();
+      if ( sp != null ) {
+        int t = sp.type();
+        String name = null;
+        if ( t == DrawingPath.DRAWING_PATH_POINT ) {
+          DrawingPointPath pp = (DrawingPointPath)sp.mItem;
+          askDeleteItem( pp, t, BrushManager.getPointName( pp.mPointType ) );
+        } else if ( t == DrawingPath.DRAWING_PATH_LINE ) {
+          DrawingLinePath lp = (DrawingLinePath)sp.mItem;
+          if ( lp.size() <= 2 ) {
+            askDeleteItem( lp, t, BrushManager.getLineName( lp.mLineType ) );
           } else {
-            return false; // not consumed
-	  }
-	} else if ( TDLevel.overExpert ) {
-	  mApp.mShowSectionSplays = ! mApp.mShowSectionSplays;
-	  // Log.v("DistoX", "toggle section splays " + mShowSectionSplays );
-	  mDrawingSurface.setSplayAlpha( mApp.mShowSectionSplays );
-          updateSplays( mApp.mSplayMode );
-	}
-      } else if ( TDLevel.overBasic && b == mButton3[ BTN_REMOVE ] ) {
-        SelectionPoint sp = mDrawingSurface.hotItem();
-        if ( sp != null ) {
-          int t = sp.type();
-          String name = null;
-          if ( t == DrawingPath.DRAWING_PATH_POINT ) {
-            DrawingPointPath pp = (DrawingPointPath)sp.mItem;
-            askDeleteItem( pp, t, BrushManager.getPointName( pp.mPointType ) );
-          } else if ( t == DrawingPath.DRAWING_PATH_LINE ) {
-            DrawingLinePath lp = (DrawingLinePath)sp.mItem;
-            if ( lp.size() <= 2 ) {
-              askDeleteItem( lp, t, BrushManager.getLineName( lp.mLineType ) );
-            } else {
-              removeLinePoint( lp, sp.mPoint, sp );
-              lp.retracePath();
-              modified();
-            }
-          } else if ( t == DrawingPath.DRAWING_PATH_AREA ) {
-            DrawingAreaPath ap = (DrawingAreaPath)sp.mItem;
-            if ( ap.size() <= 3 ) {
-              askDeleteItem( ap, t, BrushManager.getAreaName( ap.mAreaType ) );
-            } else {
-              removeLinePoint( ap, sp.mPoint, sp );
-              ap.retracePath();
-              modified();
-            }
+            removeLinePoint( lp, sp.mPoint, sp );
+            lp.retracePath();
+            modified();
+          }
+        } else if ( t == DrawingPath.DRAWING_PATH_AREA ) {
+          DrawingAreaPath ap = (DrawingAreaPath)sp.mItem;
+          if ( ap.size() <= 3 ) {
+            askDeleteItem( ap, t, BrushManager.getAreaName( ap.mAreaType ) );
+          } else {
+            removeLinePoint( ap, sp.mPoint, sp );
+            ap.retracePath();
+            modified();
           }
         }
-      } else if ( TDLevel.overNormal && b == mButton2[0] ) { // drawing properties
-        Intent intent = new Intent( mActivity, TDPrefActivity.class );
-        intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_PLOT_DRAW );
-        mActivity.startActivity( intent );
-      } else if ( TDLevel.overNormal && b == mButton5[1] ) { // erase properties
-        Intent intent = new Intent( mActivity, TDPrefActivity.class );
-        intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_PLOT_ERASE );
-        mActivity.startActivity( intent );
-      } else if ( TDLevel.overNormal && b == mButton3[2] ) { // edit properties
-        Intent intent = new Intent( mActivity, TDPrefActivity.class );
-        intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_PLOT_EDIT );
-        mActivity.startActivity( intent );
       }
-      return true;
+    } else if ( TDLevel.overNormal && b == mButton2[0] ) { // drawing properties
+      Intent intent = new Intent( mActivity, TDPrefActivity.class );
+      intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_PLOT_DRAW );
+      mActivity.startActivity( intent );
+    } else if ( TDLevel.overNormal && b == mButton5[1] ) { // erase properties
+      Intent intent = new Intent( mActivity, TDPrefActivity.class );
+      intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_PLOT_ERASE );
+      mActivity.startActivity( intent );
+    } else if ( TDLevel.overNormal && b == mButton3[2] ) { // edit properties
+      Intent intent = new Intent( mActivity, TDPrefActivity.class );
+      intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_PLOT_EDIT );
+      mActivity.startActivity( intent );
     }
+    return true;
+  }
 
-    private void clearSelected()
-    {
-      // Log.v("DistoX-C", "clearSelected " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-      // assert( mLastLinePath == null ); // not needed
-      mHasSelected = false;
-      mDrawingSurface.clearSelected();
-      mMode = MODE_EDIT;
-      setButton3PrevNext();
-      setButton3Item( null );
-    }
+  private void clearSelected()
+  {
+    // Log.v("DistoX-C", "clearSelected " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    // assert( mLastLinePath == null ); // not needed
+    mHasSelected = false;
+    mDrawingSurface.clearSelected();
+    mMode = MODE_EDIT;
+    setButton3PrevNext();
+    setButton3Item( null );
+  }
 
     public void onClick(View view)
     {
@@ -4951,7 +5053,7 @@ public class DrawingWindow extends ItemDrawer
         // setConnectionStatus( DataDownloader.STATUS_WAIT ); // FIXME DistoXDOWN was not commented
         resetFixedPaint();
         updateReference();
-        if ( TDInstance.device == null ) {
+        if ( TDInstance.deviceA == null ) {
           // DBlock last_blk = null; // mApp_mData.selectLastLegShot( TDInstance.sid );
           (new ShotNewDialog( mActivity, mApp, this, null, -1L )).show();
         } else {
@@ -5184,7 +5286,7 @@ public class DrawingWindow extends ItemDrawer
                                  String from, String to, String nick, float azimuth, float clino )
     {
       mCurrentLine = BrushManager.getLineWallIndex();
-      if ( ! BrushManager.mLineLib.isSymbolEnabled( "wall" ) ) mCurrentLine = 0;
+      if ( ! BrushManager.isLineEnabled( "wall" ) ) mCurrentLine = 0;
       // Log.v("DistoX-C", "prepareXSection " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
       assert( mLastLinePath == null );
       setTheTitle();
@@ -5454,7 +5556,7 @@ public class DrawingWindow extends ItemDrawer
         doComputeReferences( false );
       }
       if ( toast ) {
-        if ( TDInstance.device.mType == Device.DISTO_X310 ) nr /= 2;
+        if ( TDInstance.deviceType() == Device.DISTO_X310 ) nr /= 2;
         TDToast.make( getResources().getQuantityString(R.plurals.read_data, nr, nr ) );
       }
     } else { // ( nr < 0 )
@@ -5778,9 +5880,25 @@ public class DrawingWindow extends ItemDrawer
         mActivity.startActivity( intent );
       } else if ( p++ == pos ) { // HELP
         // 1 for select-tool
-        int nn = 1 + NR_BUTTON1 + NR_BUTTON2 - 3 + NR_BUTTON5 - 5 + ( TDLevel.overBasic? mNrButton3 - 3: 0 );
+        // int nn = 1 + NR_BUTTON1 + NR_BUTTON2 - 3 + NR_BUTTON5 - 5 + ( TDLevel.overBasic? mNrButton3 - 3: 0 );
         // Log.v("DistoX", "Help menu, nn " + nn );
-        new HelpDialog(mActivity, izons, menus, help_icons, help_menus, nn, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
+        switch ( mMode ) {
+          case MODE_DRAW:
+            int nn_draw = 7;
+            new HelpDialog(mActivity, izons_draw, menus, help_icons_draw, help_menus, nn_draw, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
+            break;
+          case MODE_ERASE:
+            int nn_erase = 7;
+            new HelpDialog(mActivity, izons_erase, menus, help_icons_erase, help_menus, nn_erase, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
+            break;
+          case MODE_EDIT:
+            int nn_edit = 11;
+            new HelpDialog(mActivity, izons_edit, menus, help_icons_edit, help_menus, nn_edit, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
+            break;
+          default: // MODE_MOVE MODE_SPLIT
+            int nn_move = 9;
+            new HelpDialog(mActivity, izons_move, menus, help_icons_move, help_menus, nn_move, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
+        }
       }
   }
 
@@ -5969,7 +6087,7 @@ public class DrawingWindow extends ItemDrawer
 
   public void setConnectionStatus( int status )
   { 
-    if ( TDInstance.device == null ) {
+    if ( TDInstance.deviceA == null ) {
       mBTstatus = DataDownloader.STATUS_OFF;
       TDandroid.setButtonBackground( mButton1[ BTN_DOWNLOAD ], mBMadd );
       TDandroid.setButtonBackground( mButton1[ BTN_BLUETOOTH ], mBMbluetooth_no );

@@ -228,8 +228,8 @@ class DistoXComm extends TopoDroidComm
   }
 
   /** must be overridden to call create proper protocol
-   * new DistoX310Protocol( in, out, TDInstance.device, mApp ); // mApp = context
-   * new DistoXA3Protocol( in, out, TDInstance.device, mApp ); // mApp = context
+   * new DistoX310Protocol( in, out, TDInstance.deviceA, mApp ); // mApp = context
+   * new DistoXA3Protocol( in, out, TDInstance.deviceA, mApp ); // mApp = context
    */
   protected DistoXProtocol createProtocol( DataInputStream in, DataOutputStream out ) { return null; }
 
@@ -331,7 +331,7 @@ class DistoXComm extends TopoDroidComm
       if ( mBTSocket != null ) {
         // TDLog.Log( TDLog.LOG_COMM, "[6a] create Socket OK: create I/O streams");
         // mBTSocket.setSoTimeout( 200 ); // BlueToothSocket does not have timeout 
-        if ( TDInstance.device == null ) {
+        if ( TDInstance.deviceA == null ) {
           TDLog.Error( "[6b] create Socket on null device ");
           mAddress = null;
           try {

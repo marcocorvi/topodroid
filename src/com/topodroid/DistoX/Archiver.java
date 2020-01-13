@@ -240,15 +240,15 @@ class Archiver
 
       if ( TDLevel.overExpert && TDSetting.mZipWithSymbols ) {
         String filename = TDPath.APP_SYMBOL_PATH + "points.zip";
-        if ( compressSymbols( filename, BrushManager.mPointLib, TDPath.APP_POINT_PATH ) )  {
+        if ( compressSymbols( filename, BrushManager.getPointLib(), TDPath.APP_POINT_PATH ) )  {
           addOptionalEntry( zos, new File( filename ) );
         }
         filename = TDPath.APP_SYMBOL_PATH + "lines.zip";
-        if ( compressSymbols( filename, BrushManager.mLineLib, TDPath.APP_LINE_PATH ) )  {
+        if ( compressSymbols( filename, BrushManager.getLineLib(), TDPath.APP_LINE_PATH ) )  {
           addOptionalEntry( zos, new File( filename ) );
         }
         filename = TDPath.APP_SYMBOL_PATH + "areas.zip";
-        if ( compressSymbols( filename, BrushManager.mAreaLib, TDPath.APP_AREA_PATH ) )  {
+        if ( compressSymbols( filename, BrushManager.getAreaLib(), TDPath.APP_AREA_PATH ) )  {
           addOptionalEntry( zos, new File( filename ) );
         }
       }

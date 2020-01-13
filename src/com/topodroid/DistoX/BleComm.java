@@ -208,7 +208,7 @@ class BleComm extends TopoDroidComm
     mLister = lister;
     mConnectionMode = 1;
     nReadPackets = 0;
-    connectBleDevice( TDInstance.device, mApp, data_type );
+    connectBleDevice( TDInstance.deviceA, mApp, data_type );
     return true;
   }
 
@@ -227,7 +227,7 @@ class BleComm extends TopoDroidComm
     mConnectionMode = 0;
     mLister = lister;
     nReadPackets = 0;
-    connectBleDevice( TDInstance.device, mApp, data_type );
+    connectBleDevice( TDInstance.deviceA, mApp, data_type );
     // nReadPackets = 0;
     // start a thread that keeps track of read packets
     // when read done stop it and return

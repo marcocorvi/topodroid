@@ -512,6 +512,7 @@
     <string name="name">Название</string>
     <string name="team">группа топосъёмки</string>
     <string name="init_station">начальный пикет</string>
+    <!-- TODO string name="second_device">second device</string -->
     <string name="start_station">начальный пикет [%1$s]</string>
     <!-- UNUSED string name="toggle_device">Переключить устройство в режим калибровки</string -->
     <string name="toggle_failed">Не удалось переключить DistoX</string>
@@ -812,6 +813,7 @@
     <string name="help_select_mode">Инструмент выделения</string>
     <string name="help_erase_mode">Тип стираемых элементов</string>
     <string name="help_erase_size">Размер ластика [S/M/L]</string>
+    <!-- TODO string name="help_select_size">Select tool size [S/M/L]</string -->
     <string name="help_previous">Предыдущий выбранный элемент</string>
     <string name="help_next">Следующий элемент в выборке</string>
     <string name="help_recover">Восстановить абрис из Бекапа</string>
@@ -1112,6 +1114,8 @@
   <string name="pref_conn_mode_summary">Режим подключения к DistoX для передачи данных</string>
   <string name="pref_auto_reconnect_title">Авто подключение</string>
   <string name="pref_auto_reconnect_summary">Переподключиться при потере соединения с DistoX</string>
+  <!-- TODO string name="pref_second_distox_title">Two-DistoX survey</string -->
+  <!-- TODO string name="pref_second_distox_summary">Surveying with two DistoX</string -->
   <string name="pref_auto_pair_title">Автоматическое сопряжение</string>
   <string name="pref_auto_pair_summary">Автоматическое сопряжение устройства DistoX после сканирования</string>
   <string name="pref_head_tail_title">Кол-во новых замеров</string>

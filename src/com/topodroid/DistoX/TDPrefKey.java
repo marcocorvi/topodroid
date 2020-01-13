@@ -1543,6 +1543,7 @@ class TDPrefKey
   // -------------------------------------------------------------------------------
   static String[] GEEKDEVICE = {
     "DISTOX_SOCKET_DELAY",         // delay before a socket-connection attempt
+    "DISTOX_SECOND_DISTOX",
     "DISTOX_WAIT_DATA",       // 8 // msec wait after a data/vector packet
     "DISTOX_WAIT_CONN",            // msec wait after getting "NO PACKET"
     "DISTOX_WAIT_LASER",           // msec wait after command "laser ON"
@@ -1552,6 +1553,7 @@ class TDPrefKey
 
   static int[] GEEKDEVICEtitle = {
     R.string.pref_socket_delay_title,
+    R.string.pref_second_distox_title,
     R.string.pref_wait_data_title,
     R.string.pref_wait_conn_title,
     R.string.pref_wait_laser_title,
@@ -1561,6 +1563,7 @@ class TDPrefKey
 
   static int[] GEEKDEVICEdesc = {
     R.string.pref_socket_delay_summary,
+    R.string.pref_second_distox_summary,
     R.string.pref_wait_data_summary,
     R.string.pref_wait_conn_summary,
     R.string.pref_wait_laser_summary,
@@ -1570,6 +1573,7 @@ class TDPrefKey
 
   static String[] GEEKDEVICEdef = {
     TDString.ZERO,
+    FALSE,
     "250",
     "500",
     "1000",

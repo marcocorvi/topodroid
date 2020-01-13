@@ -69,6 +69,7 @@ public class DeviceActivity extends Activity
   static boolean mDeviceActivityVisible = false;
 
   private TextView mTvAddress;
+  private TextView mTvAddressB;
 
   private static final int[] izonsno = {
                         0,
@@ -142,7 +143,8 @@ public class DeviceActivity extends Activity
   private ListView mList;
 
   // private String mAddress;
-  private Device mCurrDevice;
+  private Device mCurrDevice  = null;
+  private Device mCurrDeviceB = null;
   private boolean mHasBLE = false; // BLE default to false
 
   private final BroadcastReceiver mPairReceiver = new BroadcastReceiver()
@@ -171,6 +173,16 @@ public class DeviceActivity extends Activity
     } else {
       mTvAddress.setTextColor( 0xffff0000 );
       mTvAddress.setText( R.string.no_device_address );
+    }
+    if ( TDSetting.mSecondDistoX ) {
+      if ( mCurrDeviceB != null ) { // mAddress.length() > 0 ) {
+        mTvAddressB.setTextColor( 0xffffcc33 );
+        mTvAddressB.setText( String.format( getResources().getString( R.string.using ), mCurrDeviceB.toString() ) );
+      } else {
+        mTvAddressB.setText( "" );
+      }
+    } else {
+      mTvAddressB.setVisibility( View.GONE );
     }
     // TDLog.Debug("set state updates list");
     updateList();
@@ -233,15 +245,17 @@ public class DeviceActivity extends Activity
 
     // TDLog.Debug("device activity on create");
     mApp = (TopoDroidApp) getApplication();
-    mApp_mDData = TopoDroidApp.mDData;
-    mCurrDevice = TDInstance.device;
+    mApp_mDData  = TopoDroidApp.mDData;
+    mCurrDevice  = TDInstance.deviceA;
+    mCurrDeviceB = TDInstance.deviceB;
     // mHasBLE     = TDandroid.checkBluetoothLE( this ); // FIXME_SCAN_BLE
 
     // mAddress = mCurrDevice.mAddress;
     // mAddress = getIntent().getExtras().getString(   TDTag.TOPODROID_DEVICE_ADDR );
 
     setContentView(R.layout.device_activity);
-    mTvAddress = (TextView) findViewById( R.id.device_address );
+    mTvAddress  = (TextView) findViewById( R.id.device_address );
+    mTvAddressB = (TextView) findViewById( R.id.device_address_b );
 
     mListView = (MyHorizontalListView) findViewById(R.id.listview);
     mListView.setEmptyPlacholder(true);
@@ -343,8 +357,8 @@ public class DeviceActivity extends Activity
         }
       }
     }
-    
   }
+    
 
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
@@ -376,7 +390,7 @@ public class DeviceActivity extends Activity
       // Log.v("DistoX", "Addr/Name <" + vals[2] + ">");
       if ( mCurrDevice == null || ! ( address.equals( mCurrDevice.mAddress ) || address.equals( mCurrDevice.mNickname ) ) ) {
         mApp.setDevice( address, null );
-        mCurrDevice = TDInstance.device;
+        mCurrDevice = TDInstance.deviceA;
         // mAddress = address;
         mApp.disconnectRemoteDevice( true );
         setState();
@@ -387,9 +401,13 @@ public class DeviceActivity extends Activity
   // clear the current device
   private void detachDevice()
   {
+    // if ( mCurrDeviceB != null ) {
+    //   mCurrDeviceB == null;
+    //   mApp.setDeviceB( null, null );
+    // }
     if ( mCurrDevice == null ) return;
     mApp.setDevice( null, null );
-    mCurrDevice = TDInstance.device;
+    mCurrDevice = TDInstance.deviceA;
     // mAddress = address;
     mApp.disconnectRemoteDevice( true );
     setState();
@@ -493,7 +511,7 @@ public class DeviceActivity extends Activity
         new CalibToggleTask( this, mApp ).execute();
       }
     } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // CALIBRATIONS
-      if ( TDInstance.device == null ) {
+      if ( TDInstance.deviceA == null ) {
         TDToast.makeBad( R.string.no_device_address );
       } else {
         (new CalibListDialog( this, this /*, mApp */ )).show();
@@ -617,7 +635,7 @@ public class DeviceActivity extends Activity
 
   void retrieveDeviceHeadTail( int[] head_tail )
   {
-    // Log.v(TopoDroidApp.TAG, "store HeadTail " + mCurrDevice.mAddress + " : " + head_tail[0] + " " + head_tail[1] );
+    // Log.v(TopoDroidApp.TAG, "store Head Tail " + mCurrDevice.mAddress + " : " + head_tail[0] + " " + head_tail[1] );
     mApp_mDData.getDeviceHeadTail( mCurrDevice.mAddress, head_tail );
   }
 
@@ -680,7 +698,7 @@ public class DeviceActivity extends Activity
     // if ( mCurrDevice == null || ! address.equals( mCurrDevice.mAddress ) ) { // N.B. address != null
       mApp.disconnectRemoteDevice( true );
       mApp.setDevice( address, device );
-      mCurrDevice = TDInstance.device;
+      mCurrDevice = TDInstance.deviceA;
       // mAddress = address;
       setState();
     // }
@@ -704,7 +722,7 @@ public class DeviceActivity extends Activity
             mApp.disconnectRemoteDevice( true );
             mApp.setDevice( address, null );
             DeviceUtil.checkPairing( address );
-            mCurrDevice = TDInstance.device;
+            mCurrDevice = TDInstance.deviceA;
             // mAddress = address;
             setState();
           }
@@ -886,6 +904,17 @@ public class DeviceActivity extends Activity
       (new DeviceNameDialog( this, this, device )).show();
     }
     return true;
+  }
+    
+  void setSecondDevice( String address )
+  {  
+    if ( mCurrDeviceB == null || ! address.equals( mCurrDeviceB.mAddress ) ) {
+      mApp.setDeviceB( address );
+      mCurrDeviceB = TDInstance.deviceB;
+      // mAddress = address;
+      mApp.disconnectRemoteDevice( true );
+      setState();
+    }
   }
 
   void openCalibration( String name )

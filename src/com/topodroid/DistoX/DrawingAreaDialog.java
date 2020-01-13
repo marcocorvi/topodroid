@@ -81,7 +81,7 @@ class DrawingAreaDialog extends MyDialog
     mOrientationWidget = new MyOrientationWidget( this, mOrientable, mArea.mOrientation );
 
     Spinner eTtype = (Spinner) findViewById( R.id.area_type );
-    ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, BrushManager.mAreaLib.getSymbolNames() );
+    ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, BrushManager.getAreaNames() );
     eTtype.setAdapter( adapter );
     eTtype.setSelection( mAreaType );
     eTtype.setOnItemSelectedListener( this );

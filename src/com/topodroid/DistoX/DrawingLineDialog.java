@@ -74,7 +74,7 @@ class DrawingLineDialog extends MyDialog
     mLine  = line;
     mPoint = lp;
     mType  = mLine.mLineType;
-    mTypeSection = BrushManager.mLineLib.mLineSectionIndex;
+    mTypeSection = BrushManager.getLineSectionIndex();
     mDoOptions = TDLevel.overAdvanced;
   }
 
@@ -92,7 +92,7 @@ class DrawingLineDialog extends MyDialog
 
     // FIXME TODO simplify using getSymbolNamesNoSection()
     try {
-      ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, BrushManager.mLineLib.getSymbolNames() );
+      ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, BrushManager.getLineNames() );
       String section = BrushManager.getLineName( mTypeSection );
       if ( section != null ) adapter.remove( section );
       mETtype.setAdapter( adapter );

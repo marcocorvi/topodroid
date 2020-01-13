@@ -338,7 +338,7 @@ public class ShotWindow extends Activity
         updateDisplay( );
       }
       if ( toast ) {
-        if ( TDInstance.device.mType == Device.DISTO_X310 ) nr /= 2;
+        if ( TDInstance.deviceType() == Device.DISTO_X310 ) nr /= 2;
         TDToast.make( getResources().getQuantityString(R.plurals.read_data, nr, nr ) );
         // TDToast.make( " read_data: " + nr );
       }
@@ -376,9 +376,9 @@ public class ShotWindow extends Activity
   public void setTheTitle()
   {
     StringBuilder sb = new StringBuilder();
-    if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI ) {
+    if ( TDSetting.isConnectionModeMulti() || TDSetting.isConnectionModeDouble() ) {
       sb.append( "{" );
-      if ( TDInstance.device != null ) sb.append( TDInstance.device.getNickname() );
+      if ( TDInstance.deviceA != null ) sb.append( TDInstance.deviceA.getNickname() );
       sb.append( "} " );
     }
     // sb.append( mApp.getConnectionStateTitleStr() ); // IF_COSURVEY
@@ -1297,16 +1297,20 @@ public class ShotWindow extends Activity
       ret = true;
     } else {
       mDataAdapter.clearSearch();
-      if ( ! diving && b == mButton1[ BTN_DOWNLOAD ] ) { // MULTI-DISTOX
-        if (   TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI
-            && ! mDataDownloader.isDownloading() 
-            && TopoDroidApp.mDData.getDevices().size() > 1 ) {
-          (new DeviceSelectDialog( this, mApp, mDataDownloader, this )).show();
+      if ( ! diving && b == mButton1[ BTN_DOWNLOAD ] ) { // MULTI-DISTOX or SECOND-DISTOX
+        if ( ! mDataDownloader.isDownloading() ) {
+          if ( TDSetting.isConnectionModeMulti() && TopoDroidApp.mDData.getDevices().size() > 1 ) {
+            (new DeviceSelectDialog( this, mApp, mDataDownloader, this )).show();
+          } else if ( TDSetting.isConnectionModeDouble() && TDInstance.deviceB != null ) {
+            if ( mApp.switchSecondDevice() ) {
+              TDToast.make( String.format( getResources().getString(R.string.using), TDInstance.deviceNickname() ) );
+            }
+          } else {
+            mDataDownloader.toggleDownload();
+            mDataDownloader.doDataDownload( DataType.SHOT );
+          }
         } else {
-          // setConnectionStatus( DataDownloader.STATUS_WAIT ); // turn arrow orange
-          
           mDataDownloader.toggleDownload();
-          // setConnectionStatus( mDataDownloader.getStatus() );
           mDataDownloader.doDataDownload( DataType.SHOT );
         }
         ret = true;
@@ -1354,7 +1358,7 @@ public class ShotWindow extends Activity
       // int k2 = 0;
       if ( ! diving ) {
         if ( k1 < mNrButton1 && b == mButton1[k1++] ) {        // DOWNLOAD
-          if ( TDInstance.device != null ) {
+          if ( TDInstance.deviceA != null ) {
             // mSearch = null; // invalidate search
             // if ( mBTstatus == DataDownloader.STATUS_OFF ) {
             //   TDToast.make( R.string.connecting );
@@ -2058,7 +2062,7 @@ public class ShotWindow extends Activity
   public void setConnectionStatus( int status )
   { 
     if ( diving ) return;
-    if ( TDInstance.device == null ) {
+    if ( TDInstance.deviceA == null ) {
       mBTstatus = DataDownloader.STATUS_OFF;
       // mButton1[ BTN_DOWNLOAD ].setVisibility( View.GONE );
       TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload_no );

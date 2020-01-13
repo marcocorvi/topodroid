@@ -111,7 +111,7 @@ class SymbolEnableDialog extends MyDialog
     mAreaAdapter  = new SymbolAdapter( mContext, R.layout.symbol, new ArrayList<EnableSymbol>() );
 
     if ( TDLevel.overBasic ) {
-      SymbolPointLibrary point_lib = BrushManager.mPointLib;
+      SymbolPointLibrary point_lib = BrushManager.getPointLib();
       if ( point_lib == null ) return false;
       int np = point_lib.size();
       for ( int i=0; i<np; ++i ) {
@@ -122,7 +122,7 @@ class SymbolEnableDialog extends MyDialog
       }
     }
 
-    SymbolLineLibrary line_lib   = BrushManager.mLineLib;
+    SymbolLineLibrary line_lib   = BrushManager.getLineLib();
     if ( line_lib == null ) return false;
     int nl = line_lib.size();
     for ( int j=0; j<nl; ++j ) {
@@ -130,7 +130,7 @@ class SymbolEnableDialog extends MyDialog
     }
 
     if ( TDLevel.overBasic ) {
-      SymbolAreaLibrary area_lib   = BrushManager.mAreaLib;
+      SymbolAreaLibrary area_lib   = BrushManager.getAreaLib();
       if ( area_lib == null ) return false;
       int na = area_lib.size();
       for ( int k=0; k<na; ++k ) {
@@ -269,17 +269,17 @@ class SymbolEnableDialog extends MyDialog
     { 
       if ( TDLevel.overBasic ) {
         mPtAdapter.updateSymbols( "p_" );
-        SymbolPointLibrary point_lib = BrushManager.mPointLib;
+        SymbolPointLibrary point_lib = BrushManager.getPointLib();
         if ( point_lib != null ) point_lib.makeEnabledList();
       }
 
       mLnAdapter.updateSymbols( "l_" );
-      SymbolLineLibrary line_lib   = BrushManager.mLineLib;
+      SymbolLineLibrary line_lib   = BrushManager.getLineLib();
       if ( line_lib  != null ) line_lib.makeEnabledList();
 
       if ( TDLevel.overBasic ) {
         mArAdapter.updateSymbols( "a_" );
-        SymbolAreaLibrary area_lib   = BrushManager.mAreaLib;
+        SymbolAreaLibrary area_lib   = BrushManager.getAreaLib();
         if ( area_lib  != null ) area_lib.makeEnabledList();
       }
       run = false;

@@ -522,6 +522,7 @@
     <string name="name">名称</string>
     <string name="team">团队</string>
     <string name="init_station">起始站点</string>
+    <!-- TODO string name="second_device">second device</string -->
     <string name="start_station">起始站点 [%1$s]</string>
     <!-- UNUSED string name="toggle_device">Toggle device calibration mode</string -->
     <string name="toggle_failed">DistoX触发失败</string>
@@ -824,7 +825,8 @@
     <string name="help_eraser">擦除模式</string>
     <string name="help_select_mode">选择工具</string>
     <string name="help_erase_mode">擦除工具</string>
-    <string name="help_erase_size">选择/橡皮擦尺寸 [S/M/L]</string>
+    <!-- TODO string name="help_erase_size">选择/橡皮擦尺寸 [S/M/L]</string -->
+    <!-- TODO string name="help_select_size">Select tool size [S/M/L]</string -->
     <string name="help_previous">已选项目</string>
     <string name="help_next">选项中的下一项目</string>
     <string name="help_recover">从备份中重新载入草图</string>
@@ -1128,6 +1130,8 @@
   <string name="pref_conn_mode_summary">数据下载的远程连接模式</string>
   <string name="pref_auto_reconnect_title">自动连线</string>
   <string name="pref_auto_reconnect_summary">当连接丢失时重新连接</string>
+  <!-- TODO string name="pref_second_distox_title">Two-DistoX survey</string -->
+  <!-- TODO string name="pref_second_distox_summary">Surveying with two DistoX</string -->
   <string name="pref_auto_pair_title">自动配对</string>
   <string name="pref_auto_pair_summary">扫描后与设备配对</string>
   <string name="pref_head_tail_title">新数据数量</string>

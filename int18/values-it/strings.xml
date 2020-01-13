@@ -8,8 +8,8 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Per uscire premi INDIETRO di nuovo</string>
 
-    <!-- TODO string name="new_survey_label">New survey</string -->
-    <!-- TODO string name="distox_label">DistoX</string -->
+    <string name="new_survey_label">Nuovo rilievo</string>
+    <!-- OK string name="distox_label">DistoX</string -->
 
     <!-- UNUSED string name="version_ask">Stai aggiornando ad una nuova versione di TopoDroid.\nVuoi reinstallare prototipi grafici?</string -->
     <string name="symbols_ask">Installare gli strumenti di disegno v.%1$s?\n(Current v.%2$s)</string>
@@ -52,12 +52,12 @@
 
     <string name="thp_user">utente</string>
     <string name="thp_label">testo</string>
-    <!-- TODO string name="thp_section">section</string -->
-    <!-- TODO string name="thp_station">station</string -->
+    <string name="thp_section">sezione</string>
+    <string name="thp_station">caposaldo</string>
     <!-- UNUSED string name="thp_danger">pericolo</string -->
     <string name="thl_user">utente</string>
     <string name="thl_wall">parete</string>
-    <!-- TODO string name="thl_section">section</string -->
+    <string name="thl_section">sezione</string>
     <string name="tha_user">utente</string>
     <string name="tha_water">acqua</string>
 
@@ -123,7 +123,7 @@
     <string name="device_none">Nessun DistoX selezionato</string>
     <!-- UNUSED string name="device_paired">Device is paired</string -->
     <string name="device_reset">Resettare la memoria del DistoX</string>
-    <!-- TODO string name="device_clear">Clear DistoX memory</string -->
+    <string name="device_clear">Ripulisci la memoria del DistoX</string>
     <string name="device_code">Codice DistoX %1$4d</string>
     <string name="device_firmware">Firmware %1$d.%2$d</string>
     <string name="device_hardware">Hardware %1$d.%2$d</string>
@@ -179,7 +179,7 @@
     <string name="import_calib_no_data">Calib. file: no dati</string>
     <string name="import_calib_io_error">Calib. file: errore in lettura</string>
     <string name="import_zip_ok">ZIP importato con successo</string>
-    <!-- TODO string name="import_zip_newer">Imported zip from more recent version</string -->
+    <string name="import_zip_newer">ZIP importato da una versione più recente</string>
     <!-- UNUSED string name="import_zip_wait">Importare uno ZIP richiede tempo. Attendi&#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Salvataggio disegno &#8230; attendi &#8230;</string -->
     <string name="MT_points_none">Punto GPS mancante</string>
@@ -366,7 +366,7 @@
     <string name="popup_snap_ln">Segui la linea vicina</string>
     <string name="popup_snap_to_splays">Collega agli splay vicini</string>
     <string name="popup_split_pt">Sdoppia il punto</string>
-    <!-- TODO string name="popup_split_pts">Adds points</string -->
+    <string name="popup_split_pts">Inserisci punti</string>
     <string name="popup_split_ln">Taglia la linea</string>
     <string name="popup_sharp_pt">Rendi diritto</string>
     <string name="popup_curve_pt">Rendi curvo</string>
@@ -402,7 +402,7 @@
     <!-- UNUSED string name="not_implemented">Non implementato</string -->
     <string name="null_bitmap">bitmap non valida</string>
     <string name="photo">foto</string>
-    <!-- TODO string name="photo_camera">TopoDroid camera</string -->
+    <string name="photo_camera">Foto con TopoDroid</string>
     <string name="photo_comment_prompt">Scrivi il commento</string>
     <string name="photo_azimuth_clino">Azimut: %1$.1f Inclinazione %2$.1f</string>
     <!-- UNUSED string name="photo_name">caposaldo/nome</string -->
@@ -496,18 +496,19 @@
     <string name="coverage_warning">Copertura angolo sotto %1$d %%\nScrivo coefficenti?</string>
     <string name="delta_warning">Errore medio oltre %1$.1f\nScrivo coefficenti?</string>
 
-    <!-- TODO string name="cover_data">Raw data distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_calib">Calibrated data distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_g">G distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_m">M distribution: %1$.2f %%</string -->
+    <string name="cover_data">Distribuzione dati grezzi: %1$.2f %%</string>
+    <string name="cover_calib">Distribuzione dati calibrati: %1$.2f %%</string>
+    <string name="cover_g">Distribuzione dati G: %1$.2f %%</string>
+    <string name="cover_m">Distribuzione dati M: %1$.2f %%</string>
 
     <string name="cannot_rename">Rinomina rilievo non riuscita</string>
     <string name="declination">decl. magn.</string>
     <string name="description">descrizione</string>
     <string name="name">nome</string>
     <string name="team">squadra</string>
-    <!-- TODO string name="init_station">start station</string -->
-    <!-- TODO string name="start_station">start station [%1$s]</string -->
+    <string name="init_station">Caposaldo iniziale</string>
+    <!-- TODO string name="second_device">second device</string -->
+    <string name="start_station">Caposaldo iniziale [%1$s]</string>
     <!-- UNUSED string name="toggle_device">Attiva modo calibrazione</string -->
     <string name="toggle_failed">Attivazione modo calibrazione fallita</string>
     <string name="toggle_ok">DistoX in modo calibrazione</string>
@@ -613,7 +614,7 @@
     <string name="button_plot"    >Disegno</string>
     <string name="button_more"    >Altro</string>
     <string name="button_next"    >Prossimo</string>
-    <!-- TODO string name="button_prev"    >Prevous</string -->
+    <string name="button_prev"    >Precedente</string>
     <!-- TODO string name="button_new"     >New scrap</string -->
     <string name="button_skip"    >Salta</string>
     <string name="button_done"    >Fatto</string>
@@ -636,12 +637,12 @@
     <string name="button_clear"     >Cancella  </string>
     <string name="button_clear_day" >Pulisci 1g  </string>
     <string name="button_clear_week">Pulisci 7gg  </string>
-    <!-- TODO string name="button_clear_memory">Clear memory</string -->
+    <string name="button_clear_memory">Pulisci memoria</string>
     <string name="button_save"      >Salva     </string>
     <!-- UNUSED string name="button_select"    >Seleziona </string -->
     <string name="button_search"    >Cerca     </string>
     <string name="button_merge"     >Unisci    </string>
-    <!-- TODO string name="button_saved"     >Saved station</string -->
+    <string name="button_saved"     >Caposaldo salvato</string>
     <string name="button_split"     >Dividi    </string>
     <string name="button_station"   >Centra</string>
     <string name="button_store"     >Scrivi    </string>
@@ -694,7 +695,7 @@
     <string name="btn_install">Installa</string>
 
     <string name="symbol_archeo">Archeologico</string>
-    <!-- TODO string name="symbol_anthro">Anthro</string -->
+    <string name="symbol_anthro">Antropici</string>
     <string name="symbol_bio">Biologico</string>
     <string name="symbol_geo">Geologico</string>
     <string name="symbol_karst">Carsico</string>
@@ -787,7 +788,7 @@
     <string name="help_edit">Modalità editing</string>
     <string name="help_refs">Seleziona riferimenti per disegno</string>
     <string name="help_rename">Modifica il nome del rilievo</string>
-    <string name="help_plot_rename">Rinomina/Cancella disegno</string>
+    <string name="help_plot_rename">Rinomina/Elimina disegno</string>
     <!-- TODO string name="help_plot_scrap">Sketch scraps</string -->
     <string name="help_plot_switch">Scambia disegno</string>
     <string name="help_search">Cerca caposaldo</string>
@@ -805,13 +806,14 @@
     <string name="help_eraser">Modalità cancella</string>
     <string name="help_select_mode">Strumento Selezione</string>
     <string name="help_erase_mode">Tipo di cancellino</string>
-    <string name="help_erase_size">Misura cancellino [S/M/L]</string>
+    <string name="help_erase_size">Dimensione cancellino [S/M/L]</string>
+    <string name="help_select_size">Raggio di selezione [S/M/L]</string>
     <string name="help_previous">Precedente oggetto nella selezione</string>
     <string name="help_next">Prossimo oggetto nella selezione</string>
     <string name="help_recover">Recupera disegno dal backup</string>
-    <!-- TODO string name="help_reload_prev">Display newer backup</string -->
-    <!-- TODO string name="help_reload_next">Display older backup</string -->
-    <!-- TODO string name="help_reload_plot">Reload sketch backup</string -->
+    <string name="help_reload_prev">Mostra backup seguente</string>
+    <string name="help_reload_next">Mostra backup precedente</string>
+    <string name="help_reload_plot">Ricarica disegno dal backup</string>
     <string name="help_zoom_fit">Adatta rilievo allo schermo</string>
    
     <string name="help_line_point">Azioni per punti di linee: unire, dividere, tagliare, rimuovere</string>
@@ -845,14 +847,14 @@
     <string name="help_compute">Calcola calibrazione</string>
     <string name="help_write">Scrivi calibrazione sul DistoX</string>
   
-    <!-- TODO string name="audio_paused">Paused</string -->
+    <string name="audio_paused">In pausa</string>
     <!-- TODO string name="audio_playing">Playing</string -->
-    <!-- TODO string name="audio_recording">Recording</string -->
-    <!-- TODO string name="audio_delete">Delete ?</string -->
-    <!-- TODO string name="audio_overwrite">Overwrite ?</string -->
+    <string name="audio_recording">Registrando</string>
+    <string name="audio_delete">Rimuovi ?</string>
+    <string name="audio_overwrite">Sovrascrivi ?</string>
   
-    <!-- TODO string name="import_lrud">Import LRUD</string -->
-    <!-- TODO string name="import_leg_first">Leg before LRUD splays</string -->
+    <string name="import_lrud">Importa LRUD</string>
+    <string name="import_leg_first">Battuta prima degli LRUD</string>
     <!-- TODO string name="import_diving_datamode">Diving datamode</string -->
 
     <string name="title_azimut">Riferimento Extend</string>
@@ -910,10 +912,10 @@
     <string name="title_settings_svx">Impostazioni export Survex</string>
     <string name="title_settings_th">Therion: Imposta export</string>
     <string name="title_settings_dat">Compass: Imposta export</string>
-    <!-- TODO string name="title_settings_tro">VisualTopo export settings</string -->
+    <string name="title_settings_tro">VisualTopo: Imposta export</string>
     <string name="title_settings_svg">SVG: Imposta export</string>
     <string name="title_settings_dxf">DXF: Imposta export</string>
-    <!-- TODO string name="title_settings_shp">Shapefile export settings</string -->
+    <string name="title_settings_shp">Shapefile: Imposta export</string>
     <string name="title_settings_png">PNG: Imposta export</string>
     <string name="title_settings_kml">KML: Imposta export</string>
 
@@ -957,11 +959,11 @@
     <string name="title_calib_export">Esporta calibrazione come </string>
     <!-- OK ENGLISH string name="title_zoom">Zoom</string -->
 
-    <!-- TODO string name="title_import_tro">VisualTopo import options</string -->
-    <!-- TODO string name="title_import_dat">Compass import options</string -->
+    <string name="title_import_tro">VisualTopo: Imposta import</string>
+    <string name="title_import_dat">Compass: Imposta import</string>
 
   <string name="pref_export_settings">Impostazioni Export</string>
-  <!-- TODO string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
+  <string name="pref_tcsx">Esporta per cSurvey-1.20</string>
 
   <string name="pref_cat_survey">OPZIONI RILIEVO</string>
   <string name="pref_cat_drawing">OPZIONI DISEGNO</string>
@@ -984,8 +986,8 @@
 
   <string name="pref_locale_title">Lingua</string>
   <string name="pref_locale_summary">Lingua</string>
-  <!-- TODO string name="pref_orientation_title">Screen orientation</string -->
-  <!-- TODO string name="pref_orientation_summary">App screen orientation</string -->
+  <string name="pref_orientation_title">Orientazione display</string>
+  <string name="pref_orientation_summary">Orientazione display</string>
 
   <string name="pref_raw_data_title">Dati grezzi</string>
   <string name="pref_raw_data_summary">Mostra dati grezzi</string>
@@ -1056,8 +1058,8 @@
   <string name="pref_survex_lrud_summary">Survex - Aggiungi LRUD alla export</string>
   <string name="pref_svg_grid_title">Griglia</string>
   <string name="pref_svg_grid_summary">Aggiungi griglia all\'export SVG/PNG</string>
-  <!-- TODO string name="pref_svg_roundtrip_title">SVG round-trip</string -->
-  <!-- TODO string name="pref_svg_roundtrip_summary">Round-trip ready SVG export</string -->
+  <string name="pref_svg_roundtrip_title">SVG round-trip</string>
+  <string name="pref_svg_roundtrip_summary">Esporta SVG con layer round-trip</string>
   <string name="pref_svg_splays_title">Splay SVG</string>
   <string name="pref_svg_splays_summary">Include splay in export SVG</string>
   <!-- UNUSED string name="pref_svg_in_html_title">SVG nell\'HTML</string -->
@@ -1104,6 +1106,8 @@
   <string name="pref_conn_mode_summary">Tipo di connessione dati col DistoX</string>
   <string name="pref_auto_reconnect_title">Auto reconnessione</string>
   <string name="pref_auto_reconnect_summary">Riconnetti al DistoX quando viene persa</string>
+  <!-- TODO string name="pref_second_distox_title">Two-DistoX survey</string -->
+  <!-- TODO string name="pref_second_distox_summary">Surveying with two DistoX</string -->
   <string name="pref_auto_pair_title">Associazione automatica</string>
   <string name="pref_auto_pair_summary">Associazione a DistoX dopo ricerca dispositivi</string>
   <string name="pref_head_tail_title">Numero di nuovi dati</string>
@@ -1213,8 +1217,8 @@
   <!-- UNUSED string name="pref_dxf_scale_summary">Fattore di scala rilievo DXF</string -->
   <string name="pref_dxf_blocks_title">splay endpoint DXF </string>
   <string name="pref_dxf_blocks_summary">splay endpoint DXF </string>
-  <!-- TODO string name="pref_shp_georef_title">Georeferenced sketch plan export</string -->
-  <!-- TODO string name="pref_shp_georef_summary">Sketch plan exported in WGS84 long-lat</string -->
+  <string name="pref_shp_georef_title">Esporta disegni georeferenziati</string>
+  <string name="pref_shp_georef_summary">Esporta pianta disegni in WGS84 geografiche</string>
   <string name="pref_thumbnail_title">Dimensione thumbnails</string>
   <string name="pref_thumbnail_summary">Dimensione immagini thumbnail</string>
   <string name="pref_shot_timer_title">Timer direzioni</string>
@@ -1271,8 +1275,8 @@
   <string name="pref_linestraight_summary">Azione per raddrizzare una intera linea</string>
   <string name="pref_path_multiselect_title">Multiselezione</string>
   <string name="pref_path_multiselect_summary">Azione di selezione multipla</string>
-  <!-- TODO string name="pref_composite_actions_title">Composite actions</string -->
-  <!-- TODO string name="pref_composite_actions_summary">Enable line/area long-tap actions</string -->
+  <string name="pref_composite_actions_title">Azioni composite</string>
+  <string name="pref_composite_actions_summary">Abilita azioni long-tap per linea/area</string>
   <string name="pref_plane_interpolation_title">Interpolazione piana</string>
   <string name="pref_plane_interpolation_summary">Azione di interpolazione piana</string>
   <string name="pref_plot_split_title">Divisione/Unione disegno</string>

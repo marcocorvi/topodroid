@@ -138,7 +138,7 @@ class DrawingSvgBase
     else if ( th_name.equals( "ceiling-meander" ) ) pw.format(" stroke-dasharray=\"6 2 \"");
     toSvgPointLine( pw, line, xoff, yoff, line.isClosed() );
     if ( TDSetting.mSvgLineDirection ) {
-      if ( BrushManager.mLineLib.hasEffect( line.mLineType ) ) {
+      if ( BrushManager.hasLineEffect( line.mLineType ) ) {
         if ( line.isReversed() ) {
           pw.format(" marker-start=\"url(#rev)\"");
         } else {

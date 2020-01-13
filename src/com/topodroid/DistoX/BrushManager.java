@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 // import java.lang.Math;
 
 import android.graphics.Paint;
@@ -29,7 +31,7 @@ import android.content.res.Resources;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-// import android.util.Log;
+import java.util.ArrayList;
 
 /**
  * gereric brush 
@@ -41,15 +43,22 @@ class BrushManager
   static final         int WIDTH_PREVIEW = 1;
 
   // TODO make private
-  static SymbolPointLibrary mPointLib = null;
-  static SymbolLineLibrary  mLineLib  = null;
-  static SymbolAreaLibrary  mAreaLib  = null;
+  static private SymbolPointLibrary mPointLib = null;
+  static private SymbolLineLibrary  mLineLib  = null;
+  static private SymbolAreaLibrary  mAreaLib  = null;
   static private SymbolPoint mStationSymbol   = null;
 
   // -----------------------------------------------------------
   static boolean tryLoadMissingPoint( String thname ) { return mPointLib != null && mPointLib.tryLoadMissingPoint( thname ); }
   static boolean tryLoadMissingLine( String thname )  { return mLineLib  != null && mLineLib.tryLoadMissingLine( thname ); }
   static boolean tryLoadMissingArea( String thname )  { return mAreaLib  != null && mAreaLib.tryLoadMissingArea( thname ); }
+
+  static SymbolPointLibrary getPointLib() { return mPointLib; }
+  static SymbolLineLibrary  getLineLib()  { return mLineLib; }
+  static SymbolAreaLibrary  getAreaLib()  { return mAreaLib; }
+
+  static ArrayList<String> getLineNames() { return (mLineLib == null)? (new ArrayList<String>()) : mLineLib.getSymbolNames(); }
+  static ArrayList<String> getAreaNames() { return (mAreaLib == null)? (new ArrayList<String>()) : mAreaLib.getSymbolNames(); }
 
   static int getPointIndex( Symbol point ) { return (mPointLib == null)? -1 : mPointLib.getSymbolIndex( point ); }
   static int getLineIndex( Symbol line )   { return (mLineLib  == null)? -1 : mLineLib.getSymbolIndex( line ); }
@@ -86,6 +95,7 @@ class BrushManager
   static String getPointGroup( int idx ) { return (mPointLib == null)? null : mPointLib.getSymbolGroup( idx ); }
   static String getLineGroup( int idx )  { return (mLineLib  == null)? null : mLineLib.getSymbolGroup( idx ); }
   static String getAreaGroup( int idx )  { return (mAreaLib  == null)? null : mAreaLib.getSymbolGroup( idx ); }
+  static String getLineWallGroup() { return (mLineLib == null)? "wall": getLineGroup(BrushManager.mLineLib.mLineWallIndex); }
 
   static boolean hasPoint( int idx ) { return (mPointLib != null) && idx < mPointLib.size(); }
   static boolean hasLine( int idx )  { return (mLineLib  != null) && idx < mLineLib.size(); }
@@ -100,6 +110,10 @@ class BrushManager
   static int getLineLibSize()  { return ( mLineLib  == null )? 0 : mLineLib.size(); }
   static int getAreaLibSize()  { return ( mAreaLib  == null )? 0 : mAreaLib.size(); }
 
+  static boolean hasLineEffect( int index ) { return (mLineLib == null)? false : mLineLib.hasEffect( index ); }
+  static int getLineStyleX( int index ) { return (mLineLib == null)? 1 : mLineLib.getStyleX( index ); }
+
+  static boolean isAreaCloseHorizontal( int index ) { return (mAreaLib == null)? false : mAreaLib.isCloseHorizontal( index ); }
 
   // -----------------------------------------------------------
   static int getPointLevel( int idx )   { return (mPointLib == null)? DrawingLevel.LEVEL_BASE : mPointLib.getSymbolLevel( idx ); }
@@ -159,7 +173,7 @@ class BrushManager
   static boolean isLineWall( int idx )      { return mLineLib != null && idx == mLineLib.mLineWallIndex; }
   static boolean isLineWallGroup( int idx ) { return mLineLib != null && mLineLib.isWall( idx ); }
   static boolean isLineSlope( int idx )     { return mLineLib != null && idx == mLineLib.mLineSlopeIndex; }
-  // static int getLineSectionIndex()       { return (mLineLib == null)? 2 : mLineLib.mLineSectionIndex; }
+  static int getLineSectionIndex()          { return (mLineLib == null)? 2 : mLineLib.mLineSectionIndex; }
   static int getLineWallIndex()             { return (mLineLib == null)? 1 : mLineLib.mLineWallIndex; }
 
   // FIXME AREA_ORIENT

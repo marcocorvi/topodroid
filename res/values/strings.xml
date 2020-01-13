@@ -522,6 +522,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="name">name</string>
     <string name="team">team</string>
     <string name="init_station">start station</string>
+    <string name="second_device">second device</string>
     <string name="start_station">start station [%1$s]</string>
     <!-- UNUSED string name="toggle_device">Toggle device calibration mode</string -->
     <string name="toggle_failed">Failed to toggle DistoX</string>
@@ -823,7 +824,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_eraser">Erase mode</string>
     <string name="help_select_mode">Selection tool</string>
     <string name="help_erase_mode">Eraser tool</string>
-    <string name="help_erase_size">Select/Erase size [S/M/L]</string>
+    <string name="help_erase_size">Eraser size [S/M/L]</string>
+    <string name="help_select_size">Select tool size [S/M/L]</string>
     <string name="help_previous">Previous item in the selection</string>
     <string name="help_next">Next item in the selection</string>
     <string name="help_recover">Reload sketch from backup</string>
@@ -1126,6 +1128,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_conn_mode_summary">Mode of DistoX-connection for data download</string>
   <string name="pref_auto_reconnect_title">Auto reconnect</string>
   <string name="pref_auto_reconnect_summary">Reconnect when connection is lost</string>
+  <string name="pref_second_distox_title">Two-DistoX survey</string>
+  <string name="pref_second_distox_summary">Surveying with two DistoX</string>
   <string name="pref_auto_pair_title">Auto pairing</string>
   <string name="pref_auto_pair_summary">Pair with device after scan</string>
   <string name="pref_head_tail_title">Number of new data</string>

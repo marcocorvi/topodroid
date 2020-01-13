@@ -70,10 +70,10 @@ class Device
     mType = stringToType( model );
 
     if ( name == null ) {
-      mName = "-";
+      mName = mModel;
     } else { 
       mName = name.trim();
-      if ( mName.length() == 0 || mName.equals("null") ) mName = "-";
+      if ( mName.length() == 0 || mName.equals("null") ) mName = mModel;
     }
     mNickname = nickname;
     mHead = h;
@@ -88,10 +88,10 @@ class Device
     mType = stringToType( model );
 
     if ( name == null ) {
-      mName = "-";
+      mName = mModel;
     } else { 
       mName = name.trim();
-      if ( mName.length() == 0 || mName.equals("null") ) mName = "-";
+      if ( mName.length() == 0 || mName.equals("null") ) mName = mModel;
     }
 
     mNickname = nickname;

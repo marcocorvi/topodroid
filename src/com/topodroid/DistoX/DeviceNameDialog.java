@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
+import android.widget.CheckBox;
 
 class DeviceNameDialog extends MyDialog
                        implements View.OnClickListener
@@ -32,6 +33,7 @@ class DeviceNameDialog extends MyDialog
   // private TextView mTVaddress;
   // private TextView mTVname;
   private EditText mETnickname;
+  private CheckBox mCBsecondDevice;
   private Button mBTok;
   // private Button mBTback;
 
@@ -58,6 +60,8 @@ class DeviceNameDialog extends MyDialog
     TextView mTVaddress = (TextView) findViewById( R.id.tv_address );
     mETnickname = (EditText) findViewById( R.id.tv_nickname );
 
+    mCBsecondDevice = (CheckBox) findViewById( R.id.second_device );
+
     // setTitle( mParent.getResources().getString( R.string.device_info ) );
 
     mTVmodel.setText( mDevice.mModel );
@@ -82,6 +86,9 @@ class DeviceNameDialog extends MyDialog
       if ( mETnickname.getText() != null ) {
         String nickname = mETnickname.getText().toString();
         mParent.setDeviceName( mDevice, nickname );
+      }
+      if ( mCBsecondDevice.isChecked() ) {
+        mParent.setSecondDevice( mDevice.mAddress );
       }
     // } else if ( b == mBTback ) {
     //   /* nothing */

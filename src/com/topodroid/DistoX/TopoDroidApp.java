@@ -293,7 +293,7 @@ public class TopoDroidApp extends Application
     CalibInfo info = mDData.selectCalibInfo( TDInstance.cid  );
     // TDLog.Log( TDLog.LOG_CALIB, "info.device " + ((info == null)? "null" : info.device) );
     // TDLog.Log( TDLog.LOG_CALIB, "device " + ((mDevice == null)? "null" : mDevice.mAddress) );
-    return ( TDInstance.device == null || ( info != null && info.device.equals( TDInstance.device.mAddress ) ) );
+    return ( TDInstance.deviceA == null || ( info != null && info.device.equals( TDInstance.deviceAddress() ) ) );
   }
 
   public static SurveyInfo getSurveyInfo()
@@ -339,7 +339,7 @@ public class TopoDroidApp extends Application
 
   static void setDeviceModel( Device device, int model )
   {
-    if ( device != null && device == TDInstance.device ) {
+    if ( device != null && device == TDInstance.deviceA ) {
       if ( device.mType != model ) {
         if ( model == Device.DISTO_A3 ) {
           mDData.updateDeviceModel( device.mAddress, "DistoX" );
@@ -361,7 +361,7 @@ public class TopoDroidApp extends Application
    */
   static void setDeviceName( Device device, String nickname )
   {
-    if ( device != null /* && device == TDInstance.device */ ) {
+    if ( device != null /* && device == TDInstance.deviceA */ ) {
       mDData.updateDeviceNickname( device.mAddress, nickname );
       device.mNickname = nickname;
     }
@@ -440,7 +440,7 @@ public class TopoDroidApp extends Application
     if ( ret == null ) return null;
     info.mCode = String.format( getResources().getString( R.string.device_code ), MemoryOctet.toInt( ret[1], ret[0] ) );
 
-    ret = readMemory( TDInstance.device.mAddress, 0x8000 );
+    ret = readMemory( TDInstance.deviceAddress(), 0x8000 );
     if ( ret == null ) return null;
 
     info.mAngle   = getResources().getString( 
@@ -689,9 +689,9 @@ public class TopoDroidApp extends Application
       */
 
       // TDLog.Profile("TDApp device etc.");
-      TDInstance.device = mDData.getDevice( mPrefHlp.getString( TDSetting.keyDeviceName(), TDString.EMPTY ) );
+      TDInstance.deviceA = mDData.getDevice( mPrefHlp.getString( TDSetting.keyDeviceName(), TDString.EMPTY ) );
 
-      if ( TDInstance.device != null ) {
+      if ( TDInstance.deviceA != null ) {
         createComm();
       }
       // mHighlighted = null; FIXME_HIGHLIGHT
@@ -841,7 +841,7 @@ public class TopoDroidApp extends Application
   {
     // TODO this writeCoeff shoudl be run in an AsyncTask
     if ( b != null ) b.setEnabled( false );
-    if ( mComm == null || TDInstance.device == null ) {
+    if ( mComm == null || TDInstance.deviceA == null ) {
       TDToast.makeBad( R.string.no_device_address );
     } else if ( check && ! checkCalibrationDeviceMatch() ) {
       TDToast.makeBad( R.string.calib_device_mismatch );
@@ -857,8 +857,8 @@ public class TopoDroidApp extends Application
   // called by CalibReadTask.onPostExecute
   boolean readCalibCoeff( byte[] coeff )
   {
-    if ( mComm == null || TDInstance.device == null ) return false;
-    boolean ret = mComm.readCoeff( TDInstance.device.mAddress, coeff );
+    if ( mComm == null || TDInstance.deviceA == null ) return false;
+    boolean ret = mComm.readCoeff( TDInstance.deviceAddress(), coeff );
     resetComm();
     return ret;
   }
@@ -866,8 +866,8 @@ public class TopoDroidApp extends Application
   // called by CalibToggleTask.doInBackground
   boolean toggleCalibMode( )
   {
-    if ( mComm == null || TDInstance.device == null ) return false;
-    boolean ret = mComm.toggleCalibMode( TDInstance.device.mAddress, TDInstance.device.mType );
+    if ( mComm == null || TDInstance.deviceA == null ) return false;
+    boolean ret = mComm.toggleCalibMode( TDInstance.deviceAddress(), TDInstance.deviceType() );
     resetComm();
     return ret;
   }
@@ -1067,12 +1067,13 @@ public class TopoDroidApp extends Application
           TDUtil.renameFile( TDPath.getSurveyPlotTdrFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotTdrFile( name, p.name ) );
           // rename exported plots: dxf png svg csx
           TDUtil.renameFile( TDPath.getSurveyPlotDxfFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotDxfFile( name, p.name ) );
+          TDUtil.renameFile( TDPath.getSurveyPlotShzFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotShzFile( name, p.name ) );
           TDUtil.renameFile( TDPath.getSurveyPlotSvgFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotSvgFile( name, p.name ) );
           // TDUtil.renameFile( TDPath.getSurveyPlotHtmFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotHtmFile( name, p.name ) );
+          TDUtil.renameFile( TDPath.getSurveyPlotTnlFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotTnlFile( name, p.name ) );
           TDUtil.renameFile( TDPath.getSurveyPlotPngFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotPngFile( name, p.name ) );
           TDUtil.renameFile( TDPath.getSurveyPlotCsxFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotCsxFile( name, p.name ) );
           TDUtil.renameFile( TDPath.getSurveyPlotXviFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotXviFile( name, p.name ) );
-          TDUtil.renameFile( TDPath.getSurveyPlotTnlFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotTnlFile( name, p.name ) );
         }
       }
       /* FIXME_SKETCH_3D *
@@ -1092,11 +1093,11 @@ public class TopoDroidApp extends Application
         TDUtil.renameFile( TDPath.getSurveyDatFile( TDInstance.survey ), TDPath.getSurveyDatFile( name ) );
         TDUtil.renameFile( TDPath.getSurveyDxfFile( TDInstance.survey ), TDPath.getSurveyDxfFile( name ) );
         TDUtil.renameFile( TDPath.getSurveyGrtFile( TDInstance.survey ), TDPath.getSurveyGrtFile( name ) );
-        // TDUtil.renameFile( TDPath.getSurveyGrxFile( TDInstance.survey ), TDPath.getSurveyGrxFile( name ) );
+        TDUtil.renameFile( TDPath.getSurveyGtxFile( TDInstance.survey ), TDPath.getSurveyGtxFile( name ) );
         TDUtil.renameFile( TDPath.getSurveyKmlFile( TDInstance.survey ), TDPath.getSurveyKmlFile( name ) );
         TDUtil.renameFile( TDPath.getSurveyJsonFile( TDInstance.survey ), TDPath.getSurveyJsonFile( name ) );
         TDUtil.renameFile( TDPath.getSurveyPltFile( TDInstance.survey ), TDPath.getSurveyPltFile( name ) );
-        // TDUtil.renameFile( TDPath.getSurveyShpFile( TDInstance.survey ), TDPath.getSurveyShpFile( name ) );
+        TDUtil.renameFile( TDPath.getSurveyShzFile( TDInstance.survey ), TDPath.getSurveyShzFile( name ) );
         TDUtil.renameFile( TDPath.getSurveySrvFile( TDInstance.survey ), TDPath.getSurveySrvFile( name ) );
         TDUtil.renameFile( TDPath.getSurveySurFile( TDInstance.survey ), TDPath.getSurveySurFile( name ) );
         TDUtil.renameFile( TDPath.getSurveySvxFile( TDInstance.survey ), TDPath.getSurveySvxFile( name ) );
@@ -1109,6 +1110,9 @@ public class TopoDroidApp extends Application
       }
       { // rename photo folder: photo
         TDUtil.renameFile( TDPath.getSurveyPhotoDir( TDInstance.survey ), TDPath.getSurveyPhotoDir( name ) );
+      }
+      { // rename audio folder: audio
+        TDUtil.renameFile( TDPath.getSurveyAudioDir( TDInstance.survey ), TDPath.getSurveyAudioDir( name ) );
       }
       TDInstance.survey = name;
       return true;
@@ -1268,33 +1272,33 @@ public class TopoDroidApp extends Application
     // Log.v("DistoXBLE", "set device address " + address + " BLE " + ((bt_device!=null)? "yes" : "no") );
     if ( address == null ) {
       // if ( mVirtualDistoX != null ) mVirtualDistoX.stopServer( this ); // FIXME VirtualDistoX
-      TDInstance.device = null;
+      TDInstance.deviceA = null;
       address = TDString.EMPTY;
     // } else if ( address.equals( Device.ZERO_ADDRESS )  ) { // FIXME VirtualDistoX
     //   if ( mVirtualDistoX != null ) mVirtualDistoX.startServer( this );
-    //   // boolean create = ( TDInstance.device == null || ! address.equals( TDInstance.device.mAddress ) );
+    //   // boolean create = ( TDInstance.deviceA == null || ! address.equals( TDInstance.deviceAddress() ) );
     //   boolean create = ( ! TDInstance.isDeviceAddress( address ) );
-    //   TDInstance.device = new Device( address, "DistoX0", "X000", null );
+    //   TDInstance.deviceA = new Device( address, "DistoX0", "X000", null );
     //   if ( create ) createComm();
     } else {
       // if ( mVirtualDistoX != null ) mVirtualDistoX.stopServer( this ); // FIXME VirtualDistoX
-      // boolean create = ( TDInstance.device == null || TDInstance.device.mAddress.equals( Device.ZERO_ADDRESS ) );
+      // boolean create = ( TDInstance.deviceA == null || TDInstance.deviceAddress().equals( Device.ZERO_ADDRESS ) );
       if ( bt_device != null ) { // BLE device is temporary
         deleteComm();
         // if ( TDInstance.deviceType() == Device.DISTO_BLE5 ) {
         //   Log.v("DistoXBLE", "update address " + address );
-        //   TDInstance.device.mAddress = address;
+        //   TDInstance.deviceA.mAddress = address;
         // } else {
           // address, model, head, tail, name, nickname
           // model could be "BLE5" or start with DistoX-BLE
-          TDInstance.device = new Device( address, "DistoX-BLE", 0, 0, null, null );
+          TDInstance.deviceA = new Device( address, "DistoX-BLE", 0, 0, null, null );
           TDInstance.bleDevice = bt_device;
         // }
         // Log.v("DistoXBLE", "create BLE address " + address );
         mComm = new BleComm( this, address, bt_device ); // FIXME BLE
       } else {
         boolean create = TDInstance.isDeviceZeroAddress() || (TDInstance.deviceType() == Device.DISTO_BLE5);
-        TDInstance.device = mDData.getDevice( address );
+        TDInstance.deviceA = mDData.getDevice( address );
         TDInstance.bleDevice = null;
         if ( create ) createComm();
       }
@@ -1304,6 +1308,24 @@ public class TopoDroidApp extends Application
     }
   }
 
+  // TODO BLE for the second DistoX
+  void setDeviceB( String address )
+  {
+    if ( address == null ) {
+      // if ( mVirtualDistoX != null ) mVirtualDistoX.stopServer( this ); // FIXME VirtualDistoX
+      TDInstance.deviceB = null;
+      // address = TDString.EMPTY;
+    } else {
+      TDInstance.deviceB = mDData.getDevice( address );
+    }
+  }
+
+  boolean switchSecondDevice()
+  {
+    return TDInstance.switchDevice();
+  }
+    
+
   // -------------------------------------------------------------
   // DATA BATCH DOWNLOAD
 
@@ -1311,11 +1333,11 @@ public class TopoDroidApp extends Application
   {
     TDInstance.secondLastShotId = lastShotId();
     int ret = 0;
-    if ( mComm == null || TDInstance.device == null ) {
+    if ( mComm == null || TDInstance.deviceA == null ) {
       TDLog.Error( "Comm or Device null ");
     } else {
-      TDLog.Log( TDLog.LOG_DATA, "Download Data Batch() device " + TDInstance.device + " comm " + mComm.toString() );
-      ret = mComm.downloadData( TDInstance.device.mAddress, lister, data_type );
+      TDLog.Log( TDLog.LOG_DATA, "Download Data Batch() device " + TDInstance.deviceAddress() + " comm " + mComm.toString() );
+      ret = mComm.downloadData( TDInstance.deviceA.mAddress, lister, data_type );
       // FIXME BATCH
       // if ( ret > 0 && TDSetting.mSurveyStations > 0 ) {
       //   // FIXME TODO select only shots after the last leg shots
@@ -1874,11 +1896,11 @@ public class TopoDroidApp extends Application
   
   int getCalibAlgoFromDevice()
   {
-    if ( TDInstance.device == null ) return CalibInfo.ALGO_LINEAR;
-    if ( TDInstance.device.mType == Device.DISTO_A3 ) return CalibInfo.ALGO_LINEAR; // A3
-    if ( TDInstance.device.mType == Device.DISTO_X310 ) {
+    if ( TDInstance.deviceA == null ) return CalibInfo.ALGO_LINEAR;
+    if ( TDInstance.deviceType() == Device.DISTO_A3 ) return CalibInfo.ALGO_LINEAR; // A3
+    if ( TDInstance.deviceType() == Device.DISTO_X310 ) {
       if ( mComm == null ) return 1; // should not happen
-      byte[] ret = mComm.readMemory( TDInstance.device.mAddress, 0xe000 );
+      byte[] ret = mComm.readMemory( TDInstance.deviceAddress(), 0xe000 );
       if ( ret != null && ( ret[0] >= 2 && ret[1] >= 3 ) ) return CalibInfo.ALGO_NON_LINEAR;
     }
     return CalibInfo.ALGO_LINEAR; // default
@@ -1893,38 +1915,38 @@ public class TopoDroidApp extends Application
    */
   void setX310Laser( int what, int nr, Handler /* ILister */ lister, int data_type ) // 0: off, 1: on, 2: measure // FIXME_LISTER
   {
-    if ( mComm == null || TDInstance.device == null ) return;
+    if ( mComm == null || TDInstance.deviceA == null ) return;
     DistoX310Comm comm = (DistoX310Comm)mComm;
-    if ( comm != null ) comm.setX310Laser( TDInstance.device.mAddress, what, nr, lister, data_type );
+    if ( comm != null ) comm.setX310Laser( TDInstance.deviceAddress(), what, nr, lister, data_type );
   }
 
   // int readFirmwareHardware()
   // {
-  //   return mComm.readFirmwareHardware( TDInstance.device.mAddress );
+  //   return mComm.readFirmwareHardware( TDInstance.deviceA.mAddress );
   // }
 
   int dumpFirmware( String filename )
   {
-    if ( mComm == null || TDInstance.device == null ) return -1;
+    if ( mComm == null || TDInstance.deviceA == null ) return -1;
     DistoX310Comm comm = (DistoX310Comm)mComm;
-    return comm.dumpFirmware( TDInstance.device.mAddress, TDPath.getBinFile(filename) );
+    return comm.dumpFirmware( TDInstance.deviceAddress(), TDPath.getBinFile(filename) );
   }
 
   int uploadFirmware( String filename )
   {
-    if ( mComm == null || TDInstance.device == null ) {
+    if ( mComm == null || TDInstance.deviceA == null ) {
       TDLog.Error( "Comm or Device null");
       return -1;
     }
     String pathname = TDPath.getBinFile( filename );
-    TDLog.LogFile( "Firmware upload address " + TDInstance.device.mAddress );
+    TDLog.LogFile( "Firmware upload address " + TDInstance.deviceAddress() );
     TDLog.LogFile( "Firmware upload file " + pathname );
     if ( ! pathname.endsWith( "bin" ) ) {
       TDLog.LogFile( "Firmware upload file does not end with \"bin\"");
       return 0;
     }
     DistoX310Comm comm = (DistoX310Comm)mComm;
-    return comm.uploadFirmware( TDInstance.device.mAddress, pathname );
+    return comm.uploadFirmware( TDInstance.deviceAddress(), pathname );
   }
 
   // ----------------------------------------------------------------------
@@ -2168,7 +2190,7 @@ public class TopoDroidApp extends Application
       if ( info == null ) return;
       TDLog.Log( TDLog.LOG_IO, "async-export survey " + TDInstance.survey + " type " + exportType );
       String saving = context.getResources().getString(R.string.saving_);
-      (new SaveDataFileTask( saving, TDInstance.sid, info, mData, TDInstance.survey, TDInstance.device, exportType, true )).execute();
+      (new SaveDataFileTask( saving, TDInstance.sid, info, mData, TDInstance.survey, TDInstance.deviceA, exportType, true )).execute();
     }
   }
 
@@ -2181,7 +2203,7 @@ public class TopoDroidApp extends Application
       if ( info == null ) return;
       TDLog.Log( TDLog.LOG_IO, "sync-export survey " + TDInstance.survey + " type " + exportType );
       // String saving = null; // because toast is false
-      (new SaveDataFileTask( null, TDInstance.sid, info, mData, TDInstance.survey, TDInstance.device, exportType, false )).immed_exec();
+      (new SaveDataFileTask( null, TDInstance.sid, info, mData, TDInstance.survey, TDInstance.deviceA, exportType, false )).immed_exec();
     }
   }
 }

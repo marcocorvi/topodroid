@@ -509,6 +509,7 @@
     <string name="name">Nom</string>
     <string name="team">Équipe</string>
     <!-- TODO string name="init_station">start station</string -->
+    <!-- TODO string name="second_device">second device</string -->
     <!-- TODO string name="start_station">start station [%1$s]</string -->
     <!-- UNUSED string name="toggle_device">Mettre le périphérique en mode étalonnage</string -->
     <string name="toggle_failed">Échec du changement de mode du DistoX</string>
@@ -809,6 +810,7 @@
     <string name="help_select_mode">Selection d\'outil</string>
     <string name="help_erase_mode">Type de gomme</string>
     <string name="help_erase_size">Taille de gomme [S/M/L]</string>
+    <!-- TODO string name="help_select_size">Select tool size [S/M/L]</string -->
     <string name="help_previous">Sélectionne l\'élément précédent dans la sélection</string>
     <string name="help_next">Sélectionne l\'élément suivant dans la sélection</string>
     <string name="help_recover">Récupérer dessin de la sauvegarde</string>
@@ -1104,6 +1106,8 @@
   <string name="pref_conn_mode_summary">Comment connecter le DistoX</string>
   <string name="pref_auto_reconnect_title">Reconnexion automatique</string>
   <string name="pref_auto_reconnect_summary">Reconnecter quand la connexion est perdue</string>
+  <!-- TODO string name="pref_second_distox_title">Two-DistoX survey</string -->
+  <!-- TODO string name="pref_second_distox_summary">Surveying with two DistoX</string -->
   <string name="pref_auto_pair_title">Auto association</string>
   <string name="pref_auto_pair_summary">Auto association après détection</string>
   <string name="pref_head_tail_title">Nombre de données nouvelles</string>

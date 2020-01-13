@@ -58,6 +58,15 @@
         android:paddingTop="@dimen/paddingv"
         android:paddingBottom="@dimen/paddingv"
       />
+      <TextView android:id="@+id/device_address_b"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_marginBottom="@dimen/marginvbig"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:textSize="@dimen/textsizehead"
+        android:paddingTop="@dimen/paddingv"
+        android:paddingBottom="@dimen/paddingv"
+      />
       <ListView android:id="@+id/dev_list"
         style="@style/list_top"
         android:layout_width="match_parent"

@@ -126,7 +126,7 @@ class DataDownloader
   void tryConnect( int data_type )
   {
     // Log.v("DistoXDOWN", "try Connect() download " + mDownload + " connected " + mConnected );
-    if ( TDInstance.device != null && DeviceUtil.isAdapterEnabled() ) {
+    if ( TDInstance.deviceA != null && DeviceUtil.isAdapterEnabled() ) {
       mApp.disconnectComm();
       if ( ! mDownload ) {
         mConnected = STATUS_OFF;
@@ -138,7 +138,7 @@ class DataDownloader
       } else {
         // if this runs the RFcomm thread, it returns true
         int connected = STATUS_ON;
-        if ( ! mApp.connectDevice( TDInstance.device.mAddress, data_type ) ) {
+        if ( ! mApp.connectDevice( TDInstance.deviceAddress(), data_type ) ) {
            connected = TDSetting.mAutoReconnect ? STATUS_WAIT : STATUS_OFF;
         }
         // Log.v( "DistoXDOWN", "**** connect device returns " + connected );
@@ -167,7 +167,7 @@ class DataDownloader
   private void tryDownloadData( int data_type )
   {
     TDInstance.secondLastShotId = TopoDroidApp.lastShotId( ); // FIXME-LATEST
-    if ( TDInstance.device != null && DeviceUtil.isAdapterEnabled() ) {
+    if ( TDInstance.deviceA != null && DeviceUtil.isAdapterEnabled() ) {
       notifyConnectionStatus( STATUS_WAIT );
       // notifyUiThreadConnectionStatus( STATUS_WAIT );
       // TDLog.Log( TDLog.LOG_COMM, "shot menu DOWNLOAD" );

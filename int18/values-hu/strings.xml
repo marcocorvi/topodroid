@@ -510,6 +510,7 @@
     <string name="name">név</string>
     <string name="team">csoport</string>
     <!-- TODO string name="init_station">start station</string -->
+    <!-- TODO string name="second_device">second device</string -->
     <!-- TODO string name="start_station">start station [%1$s]</string -->
     <!-- UNUSED string name="toggle_device">Toggle device calibration mode</string -->
     <string name="toggle_failed">Nem sikerült átkapcsolni a DistoX-et</string>
@@ -810,6 +811,7 @@
     <!-- TODO string name="help_select_mode">Selection tool</string -->
     <string name="help_erase_mode">Radír típus</string>
     <string name="help_erase_size">Radír mérete [S/M/L]</string>
+    <!-- TODO string name="help_select_size">Select tool size [S/M/L]</string -->
     <string name="help_previous">Előző elem a kiválasztásban</string>
     <string name="help_next">Következő elem a kiválasztásban</string>
     <string name="help_recover">Vázlat újratöltése biztonsági mentésből</string>
@@ -1103,6 +1105,8 @@
   <string name="pref_conn_mode_summary">A DistoX-el való kapcsolat típusa</string>
   <string name="pref_auto_reconnect_title">Automatikus újrakapcsolódás</string>
   <string name="pref_auto_reconnect_summary">Újrakapcsolódás, ha a kapcsolat megszakad</string>
+  <!-- TODO string name="pref_second_distox_title">Two-DistoX survey</string -->
+  <!-- TODO string name="pref_second_distox_summary">Surveying with two DistoX</string -->
   <string name="pref_auto_pair_title">Atomatikus párosítás</string>
   <string name="pref_auto_pair_summary">Párosítás a talált eszközzel</string>
   <!-- TODO string name="pref_head_tail_title">Number of new data</string -->

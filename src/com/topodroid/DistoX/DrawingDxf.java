@@ -757,10 +757,11 @@ class DrawingDxf
         writeEndTable( out );
         int nr_layers = 7;
 
-        SymbolPointLibrary pointlib = BrushManager.mPointLib;
-        SymbolLineLibrary linelib = BrushManager.mLineLib;
-        SymbolAreaLibrary arealib = BrushManager.mAreaLib;
-        nr_layers += 1 + linelib.size() + arealib.size();
+        SymbolPointLibrary pointlib = BrushManager.getPointLib();
+        SymbolLineLibrary linelib   = BrushManager.getLineLib();
+        SymbolAreaLibrary arealib   = BrushManager.getAreaLib();
+        // nr_layers += 1 + linelib.size() + arealib.size();
+        nr_layers += 1 + BrushManager.getLineLibSize() + BrushManager.getAreaLibSize();
         if ( mVersion13 ) { handle = inc(handle); } else { handle = 2; }
         writeBeginTable( out, "LAYER", handle, nr_layers );
         {
@@ -781,7 +782,7 @@ class DrawingDxf
           handle = inc(handle); printLayer( pw2, handle, "REF",     flag, color, lt_continuous ); ++color; // white
           
           color = 10;
-          // if ( linelib != null ) { // always true
+          if ( linelib != null ) { // always true
             for ( Symbol line : linelib.getSymbols() ) {
               String lname = "L_" + line.getThName().replace(':','-');
 	      String ltype = lt_continuous;
@@ -795,24 +796,24 @@ class DrawingDxf
               handle = inc(handle); printLayer( pw2, handle, lname, flag, color, ltype ); 
 	      if ( ++color >= 256 ) color = 1;
             }
-          // }
+          }
 
           color = 60;
-          // if ( arealib != null ) { // always true
+          if ( arealib != null ) { // always true
             for ( Symbol s : arealib.getSymbols() ) {
               String aname = "A_" + s.getThName().replace(':','-');
               handle = inc(handle); printLayer( pw2, handle, aname, flag, color, lt_continuous ); 
 	      if ( ++color >= 256 ) color = 1;
             }
-          // }
+          }
           color = 80;
-          // if ( pointlib != null ) { // always true
+          if ( pointlib != null ) { // always true
             for ( Symbol point : pointlib.getSymbols() ) {
               String pname = "P_" + point.getThName().replace(':','-');
               handle = inc(handle); printLayer( pw2, handle, pname, flag, color, lt_continuous ); 
 	      if ( ++color >= 256 ) color = 1;
             }
-          // }
+          }
           out.write( sw2.getBuffer().toString() );
         }
         writeEndTable( out );

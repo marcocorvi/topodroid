@@ -236,7 +236,7 @@ class DistoXProtocol extends TopoDroidProtocol
           }
           // Log.v("DistoX", "interruptor done " + dataRead[0] );
         } };
-        interruptor.start();
+        interruptor.start(); // TODO catch ( OutOfmemoryError e ) { }
 
         try {
           interruptor.join( 200 );

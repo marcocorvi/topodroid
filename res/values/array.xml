@@ -273,6 +273,8 @@
      <item name="none">none</item>
      <item name="therion">Therion</item>
      <item name="csurvey">cSurvey</item>
+     <item name="tunnel">Tunnel</item>
+     <item name="xtherion">xtherion</item>
      <item name="dxf">DXF</item>
      <item name="svg">SVG</item>
      <item name="shp">SHP</item>
@@ -282,6 +284,8 @@
      <item name="none">-1</item>
      <item name="therion">14</item>
      <item name="csurvey">7</item>
+     <item name="tunnel">25</item>
+     <item name="xtherion">24</item>
      <item name="dxf">6</item>
      <item name="svg">13</item>
      <item name="shp">23</item>
@@ -376,11 +380,13 @@
   <string-array name="connMode">
      <item name="batch">On-demand</item>
      <item name="continuous">Continuous</item>
+     <item name="double">Double</item>
      <item name="multi">Multi</item>
   </string-array>
   <string-array name="connModeValue" translatable="false">
      <item name="batch">0</item>
      <item name="continuous">1</item>
+     <item name="double">3</item>
      <item name="multi">2</item>
   </string-array>
 

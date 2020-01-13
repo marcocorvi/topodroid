@@ -511,6 +511,7 @@
     <string name="name">Nome</string>
     <string name="team">equipe</string>
     <string name="init_station">base inicial</string>
+    <!-- TODO string name="second_device">second device</string -->
     <string name="start_station">base inicial [%1$s]</string>
     <!-- UNUSED string name="toggle_device">Alternar estado de calibração do dispositivo</string -->
     <string name="toggle_failed">Falha ao alternar a DistoX</string>
@@ -811,6 +812,7 @@
     <string name="help_select_mode">Ferramenta de seleção</string>
     <string name="help_erase_mode">Tipo de borracha</string>
     <string name="help_erase_size">Tamamho da borracha [P/M/G]</string>
+    <!-- TODO string name="help_select_size">Select tool size [S/M/L]</string -->
     <string name="help_previous">Selecionar objeto anterior</string>
     <string name="help_next">Selecionar próximo objeto</string>
     <string name="help_recover">Recarregar croqui do backup</string>
@@ -1109,6 +1111,8 @@
   <string name="pref_conn_mode_summary">Tipo de conexão com DistoX</string>
   <string name="pref_auto_reconnect_title">Reconexão automática</string>
   <string name="pref_auto_reconnect_summary">Reconectar automaticamente quando a conexão for perdida</string>
+  <!-- TODO string name="pref_second_distox_title">Two-DistoX survey</string -->
+  <!-- TODO string name="pref_second_distox_summary">Surveying with two DistoX</string -->
   <string name="pref_auto_pair_title">Pareamento automático</string>
   <string name="pref_auto_pair_summary">Parear com o dispositivo após a busca</string>
   <string name="pref_head_tail_title">Quantidade de dados novos</string>

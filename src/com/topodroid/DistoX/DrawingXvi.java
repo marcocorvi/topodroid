@@ -105,7 +105,7 @@ class DrawingXvi
 
   static void write( BufferedWriter out, DistoXNum num, /* DrawingUtil util, */ DrawingCommandManager plot, long type )
   {
-    String wall_group = BrushManager.getLineGroup( BrushManager.mLineLib.mLineWallIndex );
+    String wall_group = BrushManager.getLineWallGroup( );
 
     int handle = 0;
     RectF bbox = plot.getBoundingBox( );
@@ -298,9 +298,9 @@ class DrawingXvi
   {
     String color = "brown";
     int ltype = line.lineType();
-    if ( ltype == BrushManager.mLineLib.mLineWallIndex )         { color = "red"; }
-    else if ( ltype == BrushManager.mLineLib.mLineSectionIndex ) { color = "gray"; }
-    else if ( ltype == BrushManager.mLineLib.mLineSlopeIndex )   { color = "orange"; }
+    if ( BrushManager.isLineWall( ltype ) )         { color = "red"; }
+    else if ( BrushManager.isLineSection( ltype ) ) { color = "gray"; }
+    else if ( BrushManager.isLineSlope( ltype ) )   { color = "orange"; }
     toXviPointLine( pw, line, color, xoff, yoff, line.isClosed() );
   }
 

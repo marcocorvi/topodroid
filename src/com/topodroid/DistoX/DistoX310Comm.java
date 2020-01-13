@@ -46,12 +46,12 @@ class DistoX310Comm extends DistoXComm
   /** must be overridden to call create proper protocol
    * @param in      input
    * @param out     output
-   *        device  TDInstance.device
+   *        device  TDInstance.deviceA
    *        app     context
    */
   protected DistoXProtocol createProtocol( DataInputStream in, DataOutputStream out )
   {
-    return (new DistoX310Protocol( in, out, TDInstance.device, mApp ));
+    return (new DistoX310Protocol( in, out, TDInstance.deviceA, mApp ));
   }
 
   // -------------------------------------------------------- 

@@ -36,7 +36,7 @@ class DrawingSvgWalls extends DrawingSvgBase
 {
   void write( String filename, BufferedWriter out, DistoXNum num, DrawingCommandManager plot, long type )
   {
-    String wall_group = BrushManager.getLineGroup( BrushManager.mLineLib.mLineWallIndex );
+    String wall_group = BrushManager.getLineWallGroup( );
 
     int handle = 0;
     RectF bbox = plot.getBoundingBox( );
@@ -113,7 +113,7 @@ class DrawingSvgWalls extends DrawingSvgBase
       out.flush();
       // }
       out.write( "    <icons id=\"icons\" " ); out.write( group_mode_open );
-      for ( int n = 0; n < BrushManager.mPointLib.size(); ++ n ) {
+      for ( int n = 0; n < BrushManager.getPointLibSize(); ++ n ) {
         SymbolPoint pt = (SymbolPoint)BrushManager.getPointByIndex(n);
         int block = 1+n; // block_name = 1 + therion_code
         out.write( "    <symbol id=\"" + pt.mThName + "\">\n" );

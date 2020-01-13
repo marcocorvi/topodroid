@@ -109,9 +109,9 @@ class ItemPickerDialog extends MyDialog
     mPlotType = type;
     mItemType = item_type; // mParent.mSymbol;
  
-    mPointLib = BrushManager.mPointLib;
-    mLineLib  = BrushManager.mLineLib;
-    mAreaLib  = BrushManager.mAreaLib;
+    mPointLib = BrushManager.getPointLib();
+    mLineLib  = BrushManager.getLineLib();
+    mAreaLib  = BrushManager.getAreaLib();
 
     mScale         = parent.getPointScale();
     mSelectedPoint = parent.mCurrentPoint;
@@ -132,8 +132,13 @@ class ItemPickerDialog extends MyDialog
     DIMMX = Integer.parseInt( mContext.getResources().getString( R.string.dimmx ) );
     DIMMY = Integer.parseInt( mContext.getResources().getString( R.string.dimmy ) );
 
-    createAdapters( ( TDSetting.mPickerType == TDSetting.PICKER_LIST 
-                   || TDSetting.mPickerType == TDSetting.PICKER_RECENT ) );
+    if ( mPointLib == null || mLineLib == null || mAreaLib == null ) {
+      dismiss();
+      TDToast.makeWarn( "Symbols not ready" );
+      return;
+    }
+
+    createAdapters( ( TDSetting.mPickerType == TDSetting.PICKER_LIST || TDSetting.mPickerType == TDSetting.PICKER_RECENT ) );
     
     if ( TDSetting.mPickerType == TDSetting.PICKER_GRID || TDSetting.mPickerType == TDSetting.PICKER_GRID_3 ) {
       setContentView(R.layout.item_picker2_dialog);
@@ -518,7 +523,7 @@ class ItemPickerDialog extends MyDialog
         if ( mLineAdapter != null ) {
           is = mLineAdapter.get( index );
           // Log.v( TDLog.TAG, "set TypeAndItem type line pos " + index + " index " + is.mIndex );
-          if ( mPlotType != PlotInfo.PLOT_SECTION || is.mIndex != BrushManager.mLineLib.mLineSectionIndex ) {
+          if ( mPlotType != PlotInfo.PLOT_SECTION || ! BrushManager.isLineSection( is.mIndex ) ) {
             mSelectedLine = is.mIndex;
             // mParent.get().lineSelected( is.mIndex, false ); // mLineAdapter.getSelectedItem() );
           // } else {

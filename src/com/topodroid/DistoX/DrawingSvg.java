@@ -35,7 +35,7 @@ class DrawingSvg extends DrawingSvgBase
 
   void write( BufferedWriter out, DistoXNum num, /* DrawingUtil util, */ DrawingCommandManager plot, long type )
   {
-    String wall_group = BrushManager.getLineGroup( BrushManager.mLineLib.mLineWallIndex );
+    String wall_group = BrushManager.getLineWallGroup( );
 
     int handle = 0;
     RectF bbox = plot.getBoundingBox( );

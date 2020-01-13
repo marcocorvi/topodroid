@@ -1230,7 +1230,7 @@ public class GMActivity extends Activity
       fillMenus( getResources() );
       updateDisplay( );
     } else if ( TDLevel.overAdvanced && p++ == pos ) { // VALIDATE
-      List< String > list = mApp_mDData.selectDeviceCalibs( TDInstance.device.mAddress );
+      List< String > list = mApp_mDData.selectDeviceCalibs( TDInstance.deviceAddress() );
       for ( String str : list ) {
         int len = str.indexOf(' ');
         if ( TDInstance.calib.equals( str.substring(0,len) ) ) {

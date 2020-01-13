@@ -34,18 +34,35 @@ class TDInstance
   static int     datamode = 0;      // current value of survey datamode
   // FIXME static int    extend = 90;  // current value of survey extend
 
-  static Device  device = null;
+  static Device  deviceA = null;
+  static Device  deviceB = null; // second-DistoX
   static BluetoothDevice bleDevice = null; // FIXME BLE
 
-  static int deviceType() { return (device == null)? 0 : device.mType; }
-  static String deviceAddress() { return (device == null)? null : device.mAddress; }
-  static boolean isDeviceAddress( String addr ) { return device != null && device.mAddress.equals( addr ); }
+  static int deviceType() { return (deviceA == null)? 0 : deviceA.mType; }
+  static String deviceAddress() { return (deviceA == null)? null : deviceA.mAddress; }
+  static String deviceNickname() { return (deviceA == null)? "- - -" : deviceA.getNickname(); }
+  static boolean isDeviceAddress( String addr ) { return deviceA != null && deviceA.mAddress.equals( addr ); }
+
   // FIXME VitualDistoX
-  // static boolean isDeviceZeroAddress( ) { return ( device == null || device.mAddress.equals( Device.ZERO_ADDRESS ) ); }
-  static boolean isDeviceZeroAddress( ) { return ( device == null ); }
+  // static boolean isDeviceZeroAddress( ) { return ( deviceA == null || deviceA.mAddress.equals( Device.ZERO_ADDRESS ) ); }
+  static boolean isDeviceZeroAddress( ) { return ( deviceA == null ); }
+
+  // FIXME second-DistoX
+  static int secondDeviceType() { return (deviceB == null)? 0 : deviceB.mType; }
+  static String secondDeviceAddress() { return (deviceB == null)? null : deviceB.mAddress; }
+  static boolean isSecondDeviceAddress( String addr ) { return deviceB != null && deviceB.mAddress.equals( addr ); }
 
   static String recentPlot = null;
   static long   recentPlotType = PlotInfo.PLOT_PLAN;
+
+  static boolean switchDevice()
+  {
+    if ( deviceB == null ) return false;
+    Device tmp = deviceA;
+    deviceA = deviceB;
+    deviceB = tmp;
+    return true;
+  }
 
   static Bundle toBundle()
   {
@@ -58,7 +75,8 @@ class TDInstance
     b.putString(  "TOPODROID_CALIB",  calib  );
     b.putLong(    "TOPODROID_SECOND_LAST_SHOT_ID", secondLastShotId );
     b.putBoolean( "TOPODROID_XSECTIONS", xsections );
-    b.putString(  "TOPODROID_DEVICE", ( (device == null)? "" : device.mAddress)  );
+    b.putString(  "TOPODROID_DEVICE", ( (deviceA == null)? "" : deviceA.mAddress)  );
+    b.putString(  "TOPODROID_SECOND_DEVICE", ( (deviceB == null)? "" : deviceB.mAddress)  );
     return b;
   }
 
@@ -76,10 +94,17 @@ class TDInstance
     xsections = b.getBoolean( "TOPODROID_XSECTIONS" );
     String addr = b.getString( "TOPODROID_DEVICE" );
     if ( addr == null || addr.length() == 0 ) {
-      device = null;
+      deviceA = null;
     // } else {
-      // device = TopoDroidApp.setDevice( addr ); // FIXME_DEVICE_STATIC
+      // deviceA = TopoDroidApp.getDevice( addr ); // FIXME_DEVICE_STATIC
     }
+    addr = b.getString( "TOPODROID_SECOND_DEVICE" );
+    if ( addr == null || addr.length() == 0 ) {
+      deviceB = null;
+    // } else {
+      // deviceB = TopoDroidApp.getDevice( addr ); // FIXME_DEVICE_STATIC
+    }
+    recentPlot = null;
     recentPlot = null;
     recentPlotType = PlotInfo.PLOT_PLAN;
   }

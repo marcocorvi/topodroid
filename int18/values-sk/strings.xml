@@ -522,6 +522,7 @@
     <string name="name">Názov</string>
     <string name="team">Merací tím</string>
     <string name="init_station">Začiatočné staničenie</string>
+    <!-- TODO string name="second_device">second device</string -->
     <string name="start_station">Začiatočné staničenie [%1$s]</string>
     <!-- UNUSED string name="toggle_device">Toggle device calibration mode</string -->
     <string name="toggle_failed">Zlyhalo prepnutie režimu DistaX kalibrácia/meranie</string>
@@ -823,7 +824,8 @@
     <string name="help_eraser">Režim mazania</string>
     <string name="help_select_mode">Položky na výber - indikácia</string>
     <string name="help_erase_mode">Položky na výber - mazanie</string>
-    <string name="help_erase_size">Rozsah výberu objektov/gumy [S/M/L]</string>
+    <!-- TODO string name="help_erase_size">Rozsah výberu objektov/gumy [S/M/L]</string -->
+    <!-- TODO string name="help_select_size">Select tool size [S/M/L]</string -->
     <string name="help_previous">Prejsť na predchádzajúci objekt vo výbere</string>
     <string name="help_next">Prejsť na nasledujúci objekt vo výbere</string>
     <string name="help_recover">Obnoviť nákres zo zálohy</string>
@@ -1126,6 +1128,8 @@
   <string name="pref_conn_mode_summary">Režim sťahovania dát</string>
   <string name="pref_auto_reconnect_title">Automatické pripojenie DistoX</string>
   <string name="pref_auto_reconnect_summary">Automaticky opätovne pripojí DistoX v Nepretržitom režime sťahovania dát pri strate spojenia</string>
+  <!-- TODO string name="pref_second_distox_title">Two-DistoX survey</string -->
+  <!-- TODO string name="pref_second_distox_summary">Surveying with two DistoX</string -->
   <string name="pref_auto_pair_title">Automatické pripojenie pri štarte</string>
   <string name="pref_auto_pair_summary">Automatické pripojenie DistaX pri zapnutí Topodroidu a DistaX</string>
   <string name="pref_head_tail_title">Počet nových údajov</string>

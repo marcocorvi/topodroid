@@ -548,11 +548,6 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], N, def[ 5],          ctx, hlp ),
       makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], A, def[ 6],          ctx, hlp ),
       makeLst( cat, key[ 7], tit[ 7], dsc[ 7], E, def[ 7], R.array.feedbackMode, R.array.feedbackModeValue, ctx, hlp ),
-      // makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], E, def[ 7], INTEGER, ctx, hlp ),
-      // makeEdt( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8], INTEGER, ctx, hlp ),
-      // makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9], INTEGER, ctx, hlp ),
-      // makeEdt( cat, key[10], tit[10], dsc[10], A, def[10], INTEGER, ctx, hlp ),
-      // makeEdt( cat, key[11], tit[11], dsc[11], A, def[11], INTEGER, ctx, hlp ),
       makeFwd( cat, key[ 8], tit[ 8],          B,                   ctx, hlp )
     };
   }
@@ -963,10 +958,11 @@ class TDPref implements AdapterView.OnItemSelectedListener
     String[] def = TDPrefKey.GEEKDEVICEdef;
     return new TDPref[ ] {
       makeEdt( cat, key[0], tit[0], dsc[0], E, def[0], INTEGER, ctx, hlp ),
-      makeEdt( cat, key[1], tit[1], dsc[1], A, def[1], INTEGER, ctx, hlp ),
+      makeCbx( cat, key[1], tit[1], dsc[1], T, def[1],          ctx, hlp ), // SECOND DISTOX
       makeEdt( cat, key[2], tit[2], dsc[2], A, def[2], INTEGER, ctx, hlp ),
       makeEdt( cat, key[3], tit[3], dsc[3], A, def[3], INTEGER, ctx, hlp ),
-      makeEdt( cat, key[4], tit[4], dsc[4], A, def[4], INTEGER, ctx, hlp )
+      makeEdt( cat, key[4], tit[4], dsc[4], A, def[4], INTEGER, ctx, hlp ),
+      makeEdt( cat, key[5], tit[5], dsc[5], A, def[5], INTEGER, ctx, hlp )
     };
   }
 
@@ -991,7 +987,6 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeCbx( cat, key[10], tit[10], dsc[10], T, def[10],          ctx, hlp )  // COMPOSITE ACTIONS
     };
   }
-
 
   static TDPref[] makeGeekShotPrefs( Context ctx, TDPrefHelper hlp )
   {
