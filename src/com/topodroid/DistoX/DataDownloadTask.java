@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-// import android.util.Log;
+import android.util.Log;
 
 import java.lang.ref.WeakReference;
 
@@ -79,23 +79,22 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
   protected void onPostExecute( Integer res )
   {
     // TDLog.Log( TDLog.LOG_COMM, "onPostExecute res " + res );
-    if ( res != null ) {
-      int r = res.intValue();
-      mLister.refreshDisplay( r, true );  // true: toast a message
-    }
     TopoDroidApp app = mApp.get();
     if ( app != null ) {
+      if ( res != null ) {
+        int r = res.intValue();
+        mLister.refreshDisplay( r, true );  // true: toast a message
+        unlock();
+      }
       app.mDataDownloader.setDownload( false );
       app.mDataDownloader.notifyConnectionStatus( DataDownloader.STATUS_OFF );
     }
-    unlock();
     // Log.v("DistoX", "data download task post exec");
   }
 
   private synchronized boolean lock()
   {
-    // Log.v("DistoX", "data download task lock: running is " 
-    //               + ( (running == null )? "null" : (running == this)? "this" : "other") );
+    Log.v("DistoX-DATA", "data download task lock: running is " + ( (running == null )? "null" : (running == this)? "this" : "other") );
     if ( running != null ) return false;
     running = this;
     return true;
@@ -103,8 +102,7 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
 
   private synchronized void unlock()
   {
-    // Log.v("DistoX", "data download task unlock: running is " 
-    //               + ( (running == null )? "null" : (running == this)? "this" : "other") );
+    Log.v("DistoX-DATA", "data download task unlock: running is " + ( (running == null )? "null" : (running == this)? "this" : "other") );
     if ( running == this ) running = null;
   }
 

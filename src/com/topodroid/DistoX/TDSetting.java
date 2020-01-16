@@ -197,13 +197,13 @@ class TDSetting
   // DEVICE
   final static int CONN_MODE_BATCH      = 0;      // DistoX connection mode
   final static int CONN_MODE_CONTINUOUS = 1;
-  final static int CONN_MODE_DOUBLE     = 3;
   final static int CONN_MODE_MULTI      = 2;
+  // final static int CONN_MODE_DOUBLE     = 3;
   static int mConnectionMode    = CONN_MODE_BATCH; 
 
   static boolean isConnectionModeBatch() { return mConnectionMode != CONN_MODE_CONTINUOUS; }
   static boolean isConnectionModeContinuous() { return mConnectionMode == CONN_MODE_CONTINUOUS; }
-  static boolean isConnectionModeDouble() { return mConnectionMode == CONN_MODE_DOUBLE; }
+  // static boolean isConnectionModeDouble() { return mConnectionMode == CONN_MODE_DOUBLE; }
   static boolean isConnectionModeMulti()  { return mConnectionMode == CONN_MODE_MULTI; }
 
   static boolean mZ6Workaround  = true;
@@ -315,6 +315,7 @@ class TDSetting
 
   static int mThumbSize = 200;               // thumbnail size
   static boolean mWithSensors = false;       // whether sensors are enabled
+  static boolean mWithTdManager = false;       // whether TdManager is enabled
   // static boolean mSplayActive = false;       // whether splays are attached to active station (if defined)
   // static boolean mWithRename  = false;       // whether survey rename is enabled
 
@@ -905,9 +906,7 @@ class TDSetting
     mWithAzimuth   = prefs.getBoolean( keyGShot[10], bool(defGShot[10]) ); // DISTOX_ANDROID_AZIMUTH
     mTimerWait     = tryInt(   prefs,  keyGShot[11],      defGShot[11] );  // DISTOX_SHOT_TIMER
     mBeepVolume    = tryInt(   prefs,  keyGShot[12],      defGShot[12] );  // DISTOX_BEEP_VOLUME
-    // mDistTolerance = tryFloat( prefs,  keyGShot[ 9],      defGShot[ 9]  ); // DISTOX_DIST_TOLERANCE
-    // mSplayActive   = prefs.getBoolean( keyGShot[ 8], bool(defGShot[ 8]) ); // DISTOX_WITH_SENSORS
-    // mWithRename    = prefs.getBoolean( keyGShot[ 9], bool(defGShot[ 9]) ); // DISTOX_WITH_RENAME
+    mWithTdManager = prefs.getBoolean( keyGShot[13], bool(defGShot[13]) ); // DISTOX_TDMANAGER
 
     String[] keyGPlot = TDPrefKey.GEEKPLOT;
     String[] defGPlot = TDPrefKey.GEEKPLOTdef;
@@ -1323,6 +1322,8 @@ class TDSetting
       mBeepVolume       = tryIntValue( hlp, k, v, def[12] );
       if ( mBeepVolume <   0 ) { mBeepVolume =   0; ret =   TDString.ZERO; }
       if ( mBeepVolume > 100 ) { mBeepVolume = 100; ret = "100"; }
+    } else if ( k.equals( key[13 ] ) ) { // DISTOX_TDMANAGER
+      mWithTdManager = tryBooleanValue( hlp, k, v, bool(def[13]) );
 
     // } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_DIST_TOLERANCE
     //   mDistTolerance = tryFloatValue( hlp, k, v, def[ 9]  );
@@ -2455,8 +2456,8 @@ class TDSetting
       pw.printf(Locale.US, "Extend: thr %.1f, manual %c, frac %c\n", mExtendThr, tf(mAzimuthManual), tf(mExtendFrac) );
       pw.printf(Locale.US, "Loop: %d \n", mLoopClosure );
       pw.printf(Locale.US, "Units: length %.2f [%s], angle %.2f [%s]\n", mUnitLength, mUnitLengthStr, mUnitAngle, mUnitAngleStr );
-      pw.printf(Locale.US, "ThumbSize %d, SavedStations %c, WithAzimuth %c, WithSensors %c, Bedding %c\n",
-        mThumbSize, tf(mSavedStations), tf(mWithAzimuth), tf(mWithSensors), tf(mBedding) );
+      pw.printf(Locale.US, "ThumbSize %d, SavedStations %c, WithAzimuth %c, WithSensors %c, Bedding %c TdManager %c\n",
+        mThumbSize, tf(mSavedStations), tf(mWithAzimuth), tf(mWithSensors), tf(mBedding), tf(mWithTdManager) );
 
       pw.printf(Locale.US, "Plot: zoom %d, drag %c, fix-origin %c, split %c, shift %c, levels %d\n",
         mZoomCtrl, tf(mSideDrag), tf(mFixedOrigin), tf(mPlotSplit), tf(mPlotShift), mWithLevels );

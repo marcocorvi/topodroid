@@ -1320,6 +1320,7 @@ class TDPrefKey
     "DISTOX_ANDROID_AZIMUTH",    // android azimuth+clino
     "DISTOX_SHOT_TIMER",      // 11 // bearing-clino timer [1/10 s]
     "DISTOX_BEEP_VOLUME",     // 12 // bearing-clino beep volume [%]
+    "DISTOX_TDMANAGER",
     null
   };
 
@@ -1340,6 +1341,7 @@ class TDPrefKey
     R.string.pref_with_android_azimuth_title,
     R.string.pref_shot_timer_title,
     R.string.pref_beep_volume_title,
+    R.string.pref_tdmanager_title,
     -1
   };
 
@@ -1360,6 +1362,7 @@ class TDPrefKey
     R.string.pref_with_android_azimuth_summary,
     R.string.pref_shot_timer_summary,
     R.string.pref_beep_volume_summary,
+    R.string.pref_tdmanager_summary,
     -1
   };
 
@@ -1380,6 +1383,7 @@ class TDPrefKey
     FALSE,
     TDString.TEN,
     TDString.FIFTY,
+    FALSE,
     null
   };
 

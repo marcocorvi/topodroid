@@ -1033,6 +1033,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_size_buttons_summary">Size of action-bar buttons</string>
   <string name="pref_with_sensors_title">Sensors</string>
   <string name="pref_with_sensors_summary">Enable "sensors" data</string>
+  <string name="pref_tdmanager_title">TdManager</string>
+  <string name="pref_tdmanager_summary">Use TdManager</string>
   <string name="pref_with_android_azimuth_title">Android compass</string>
   <string name="pref_with_android_azimuth_summary">Enable Android compass/clino</string>
   <string name="pref_with_levels_title">Layers</string>

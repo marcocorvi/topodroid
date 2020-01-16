@@ -30,7 +30,7 @@ class ListerSetHandler extends ListerHandler
 
   int size() { return mListers.size(); }
 
-  void registerLister( ILister lister )
+  synchronized void registerLister( ILister lister )
   {
     for ( ILister l : mListers ) {
       if ( l == lister ) return; // already registered
@@ -38,7 +38,7 @@ class ListerSetHandler extends ListerHandler
     mListers.add( lister );
   }
 
-  void unregisterLister( ILister lister )
+  synchronized void unregisterLister( ILister lister )
   {
     mListers.remove( lister );
   }
@@ -48,19 +48,19 @@ class ListerSetHandler extends ListerHandler
   //   for ( ILister lister : mListers ) lister.updateBlockList( blk_id );
   // }
 
-  public void setConnectionStatus( int status )
+  synchronized public void setConnectionStatus( int status )
   {
     for ( ILister lister : mListers ) lister.setConnectionStatus( status );
   }
 
   @Override
-  public void refreshDisplay( int nr, boolean toast )
+  synchronized public void refreshDisplay( int nr, boolean toast )
   {
     for ( ILister lister : mListers ) lister.refreshDisplay( nr, toast );
   }
 
   @Override
-  public void handleMessage( Message msg )
+  synchronized public void handleMessage( Message msg )
   {
     if ( size() == 0 ) return;
 

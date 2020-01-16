@@ -883,7 +883,7 @@ public class DrawingWindow extends ItemDrawer
   public void setTheTitle()
   {
     StringBuilder sb = new StringBuilder();
-    if ( TDSetting.isConnectionModeMulti() || TDSetting.isConnectionModeDouble() ) {
+    if ( TDSetting.isConnectionModeMulti() /* || TDSetting.isConnectionModeDouble() */ ) {
       sb.append( "{" );
       if ( TDInstance.deviceA != null ) sb.append( TDInstance.deviceA.getNickname() );
       sb.append( "} " );
@@ -4913,17 +4913,13 @@ public class DrawingWindow extends ItemDrawer
   {
     Button b = (Button)view;
     if ( TDLevel.overAdvanced && b == mButton1[ BTN_DOWNLOAD ] ) {
-      if (  ! mDataDownloader.isDownloading() ) {
-        if ( TDSetting.isConnectionModeMulti() && TopoDroidApp.mDData.getDevices().size() > 1 ) {
-          (new DeviceSelectDialog( this, mApp, mDataDownloader, this )).show();
-        } else if ( TDSetting.isConnectionModeDouble() && TDInstance.deviceB != null ) {
-          if ( mApp.switchSecondDevice() ) {
-            TDToast.make( String.format( getResources().getString(R.string.using), TDInstance.deviceNickname() ) );
-          }
+      if (  ! mDataDownloader.isDownloading() && TDSetting.isConnectionModeMulti() && TopoDroidApp.mDData.getDevices().size() > 1 ) {
+        if ( TDSetting.mSecondDistoX && TDInstance.deviceB != null ) {
+          mApp.switchSecondDevice();
+          setTheTitle();
+          // TDToast.make( String.format( getResources().getString(R.string.using), TDInstance.deviceNickname() ) );
         } else {
-          mDataDownloader.toggleDownload();
-          setConnectionStatus( mDataDownloader.getStatus() );
-          mDataDownloader.doDataDownload( DataType.SHOT );
+          (new DeviceSelectDialog( this, mApp, mDataDownloader, this )).show();
         }
       } else {
         mDataDownloader.toggleDownload();
@@ -5570,7 +5566,7 @@ public class DrawingWindow extends ItemDrawer
   // called only by updateBlockList()
   private void updateDisplay( /* boolean compute, boolean reference */ ) // always called with true, false
   {
-    // Log.v("DistoX", "updateDisplay() type " + mType + " reference " + reference );
+    // Log.v("DistoX-DATA", "update display() type " + mType + " reference " + reference );
     // if ( compute ) {
       // List<DBlock> list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
       // mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
@@ -5665,7 +5661,7 @@ public class DrawingWindow extends ItemDrawer
   @Override
   public void updateBlockList( long blk_id )
   {
-    // Log.v("DistoX", "Drawing window: update Block List block id " + blk_id ); // DATA_DOWNLOAD
+    Log.v("DistoX-DATA", "drawing window: update Block List block id " + blk_id ); // DATA_DOWNLOAD
     if ( TopoDroidApp.mShotWindow != null ) {
       TopoDroidApp.mShotWindow.updateBlockList( blk_id ); // FIXME_EXTEND needed to update sketch splays immediately on download
     }

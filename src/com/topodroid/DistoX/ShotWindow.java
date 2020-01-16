@@ -376,7 +376,7 @@ public class ShotWindow extends Activity
   public void setTheTitle()
   {
     StringBuilder sb = new StringBuilder();
-    if ( TDSetting.isConnectionModeMulti() || TDSetting.isConnectionModeDouble() ) {
+    if ( TDSetting.isConnectionModeMulti() /* || TDSetting.isConnectionModeDouble() */ ) {
       sb.append( "{" );
       if ( TDInstance.deviceA != null ) sb.append( TDInstance.deviceA.getNickname() );
       sb.append( "} " );
@@ -404,7 +404,7 @@ public class ShotWindow extends Activity
   @Override
   synchronized public void updateBlockList( long blk_id )
   {
-    // Log.v("DistoX-BLOCK", "Shot window update block list. Id: " + blk_id );
+    Log.v("DistoX-DATA", "Shot window: update block list. Id: " + blk_id );
     DBlock blk = mApp_mData.selectShot( blk_id, TDInstance.sid );
     if ( blk != null && mDataAdapter != null ) {
       // FIXME 3.3.0
@@ -752,7 +752,13 @@ public class ShotWindow extends Activity
       if ( TopoDroidApp.exportSurveyAsThSync( ) ) { // make sure to have survey exported as therion
         try {
           Intent intent = new Intent( "Cave3D.intent.action.Launch" );
-          intent.putExtra( "survey", TDPath.getSurveyThFile( TDInstance.survey ) );
+          if ( TDSetting.mWithTdManager ) {
+            // Log.v("DistoX-Cave3D", "survey " + TDInstance.survey + " base " + TDPath.getPathBase() );
+            intent.putExtra( "INPUT_SURVEY", TDInstance.survey );
+            intent.putExtra( "SURVEY_BASE", TDPath.getPathBase() );
+          } else {
+            intent.putExtra( "INPUT_FILE", TDPath.getSurveyThFile( TDInstance.survey ) );
+          }
           mActivity.startActivity( intent );
         } catch ( ActivityNotFoundException e ) {
           TDToast.makeBad( R.string.no_cave3d );
@@ -1298,16 +1304,13 @@ public class ShotWindow extends Activity
     } else {
       mDataAdapter.clearSearch();
       if ( ! diving && b == mButton1[ BTN_DOWNLOAD ] ) { // MULTI-DISTOX or SECOND-DISTOX
-        if ( ! mDataDownloader.isDownloading() ) {
-          if ( TDSetting.isConnectionModeMulti() && TopoDroidApp.mDData.getDevices().size() > 1 ) {
-            (new DeviceSelectDialog( this, mApp, mDataDownloader, this )).show();
-          } else if ( TDSetting.isConnectionModeDouble() && TDInstance.deviceB != null ) {
-            if ( mApp.switchSecondDevice() ) {
-              TDToast.make( String.format( getResources().getString(R.string.using), TDInstance.deviceNickname() ) );
-            }
+        if ( ! mDataDownloader.isDownloading() && TDSetting.isConnectionModeMulti() && TopoDroidApp.mDData.getDevices().size() > 1 ) {
+          if ( TDSetting.mSecondDistoX && TDInstance.deviceB != null ) {
+            mApp.switchSecondDevice();
+            setTheTitle();
+            // TDToast.make( String.format( getResources().getString(R.string.using), TDInstance.deviceNickname() ) );
           } else {
-            mDataDownloader.toggleDownload();
-            mDataDownloader.doDataDownload( DataType.SHOT );
+            (new DeviceSelectDialog( this, mApp, mDataDownloader, this )).show();
           }
         } else {
           mDataDownloader.toggleDownload();

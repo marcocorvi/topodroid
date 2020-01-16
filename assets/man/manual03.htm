@@ -40,17 +40,29 @@ By default TopoDroid uses the BT address as name for a DistoX. The DistoXes can 
 <h4>DEVICE SETTINGS</h4>
 <ul style="margin-top=0">
 <li><i>Bluetooth</i>: whether to enable, disable, or check on start-up [default "check"]</li>
-<li><i>Connection mode</i>: either stay connected to the DistoX to <a href="page_download.htm">download shot data</a> as soon as they are taken, or download the shots in burst, "on-demand".
-The "multi" mode is like "on-demand" mode, but a long-tap of the "Download" button in the <i>Shot Window</i> or in the <i>Sketch Window</i> lets you switch DistoX. 
-The "double" mode requires that a second DistoX has been set in the <i>Device Window</i>. A long-tap of the "Download" button
-in the <i>Shot</i> or <i>Sketch</i> windows switches between the two DistoXes.
-The connection mode applies only to data: other DistoX functions use a one-shot query mode [default "on-demand"]</li>
+<li><i>Connection mode</i>: either "on-demand", "continuous", or "multi" [default "on-demand"]</li>
 <li><i>Auto reconnect</i>: automatically reconnect if the connection is lost in "continuous" data download-mode [default "no"]</li>
 <li><i>Number of new data</i>: get the number of new data before downloading them (on-demand mode) [default "no"]</li>
 <li><i>Socket</i> type: either normal or "insecure" [default is device-dependent]</li>
 <li><i>Z6-workaround</i> Fixes a download timeout error on a Z6 phone, and possibly other devices. It is safe to leave this enabled [default "on"]</li>
 <li><i>Auto pairing</i>: whether TopoDroid should try to pair with the DistoX selected from a scan [default "no"]</li>
 </ul><br><p>
+
+<b>Connection modes</b><br>
+There are three connections modes.
+<ul>
+<li>in <i>on-demand</i> mode data are downloaded in burst, and when there is no more data to download the connection is closed.</li>
+<li>in <i>continuous</i> mode TopoDroid remains connected to the DistoX and the shots are downloaded as soon as they are taken.
+When the DistoX and Android get disconnected, TopoDroid repeatedly tries to reconnect if the <i>auto-reconnect</i> option is enabled, 
+Otherwise, the bluetooth connection is closed.</li>
+<li>the <i>multi</i> mode is like the "on-demand" mode, but a long-tap on the "download" button, in the <i>Shot</i> window or in the <i>Sketch</i> window,
+changes the DistoX. It you have set a "second" DistoX (in the <i>Device</i> window) it is swapped with the current DistoX.
+Otherwise, you get a dialog to pick one among the paired DistoXes.</li>
+</ul>
+<br>
+With the "multi" mode, the current DistoX is shown in the title of the <i>Shot</i> and <i>Sketch</i> windows.<br>
+The connection mode applies only to the data download. Other DistoX functions use a one-shot query mode.
+<br><p>
 
 <a href="page_geek.htm">Custom settings</a>: <i>Connection delay</i>, <i>Second DistoX</i>, <i>Data pause</i>, <i>Data-ready wait</i>, <i>Laser pause</i>, <i>Shot pause</i>.<br><p>
 

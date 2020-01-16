@@ -1011,7 +1011,8 @@ class TDPref implements AdapterView.OnItemSelectedListener
       // makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9],          ctx, hlp )  // WITH RENAME
       makeCbx( cat, key[10], tit[10], dsc[10], A, def[10],          ctx, hlp ),// WITH ANDROID AZIMUTH
       makeEdt( cat, key[11], tit[11], dsc[11], E, def[11], INTEGER, ctx, hlp ), // TIMER
-      makeEdt( cat, key[12], tit[12], dsc[12], E, def[12], INTEGER, ctx, hlp )  // VOLUME
+      makeEdt( cat, key[12], tit[12], dsc[12], E, def[12], INTEGER, ctx, hlp ), // VOLUME
+      makeCbx( cat, key[13], tit[13], dsc[13], T, def[13],          ctx, hlp )  // TDMANAGER
     };
   }
 

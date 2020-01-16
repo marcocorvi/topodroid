@@ -295,6 +295,7 @@ class TDPath
 
   static String getSqlFile() { return PATH_BASE + "survey.sql"; }
 
+  static String getPathBase() { return PATH_BASE; }
   static String getManifestFile() { return PATH_BASE + "manifest"; }
 
   static String getSymbolFile( String name ) { return APP_SYMBOL_PATH + name; }

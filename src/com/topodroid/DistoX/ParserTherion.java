@@ -707,7 +707,8 @@ class ParserTherion extends ImportParser
               } else {
                 TDLog.Error("Parser Therion: endsurvey out of survey");
 	      }
-              path = path.substring(survey_pos[ks]); // return to previous survey_pos in path
+              int kpos = survey_pos[ks];
+              path = ( kpos > 0 )? path.substring(kpos) : ""; // return to previous survey_pos in path
               state.in_survey = ( ks > 0 );
             }
           }
