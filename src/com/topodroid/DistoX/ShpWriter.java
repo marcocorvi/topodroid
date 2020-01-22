@@ -96,6 +96,13 @@ class ShpObject
     }
   }
 
+  void setYYMMDD( int y, int m, int d )
+  {
+    year  = y;
+    month = m;
+    day   = d;
+  }
+
   void setYYMMDD( String date )
   {
     year  = TDUtil.dateParseYear( date );
