@@ -348,7 +348,7 @@ class TDSetting
   static final int PICKER_GRID   = 2;
   static final int PICKER_GRID_3 = 3;
   static int mPickerType = PICKER_RECENT;
-  static int mRecentNr    = 4;        // nr. most recent symbols
+  static int mRecentNr     = 4;        // nr. most recent symbols
   static boolean mPalettes = false;   // extra tools palettes
 
   static final int LINE_STYLE_BEZIER = 0;  // drawing line styles

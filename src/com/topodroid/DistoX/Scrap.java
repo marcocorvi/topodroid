@@ -2204,27 +2204,16 @@ class Scrap
           Paint paint = BrushManager.fixedYellowPaint;
           DrawingLinePath line = (DrawingLinePath) item;
           lp = line.mFirst;
-          LinePoint lpn = lp1;
-          if ( lp == lp1 ) {
-            paint = BrushManager.fixedOrangePaint;
-            lpn = lp2;
-          }
-          path = new Path();
-          path.moveTo( lp.x+line.mDx*10, lp.y+line.mDy*10 );
-          path.lineTo( lp.x, lp.y );
-          for ( lp = lp.mNext; lp != lpn && lp != null; lp = lp.mNext ) {
-            if ( lp.has_cp ) {
-              path.cubicTo( lp.x1, lp.y1, lp.x2, lp.y2, lp.x, lp.y );
-            } else {
-              path.lineTo( lp.x, lp.y );
+          if ( lp != null ) { // FIXME NULL_PTR ??? lp == null ? added test 2020-01-22
+            LinePoint lpn = lp1;
+            if ( lp == lp1 ) {
+              paint = BrushManager.fixedOrangePaint;
+              lpn = lp2;
             }
-          }
-          path.transform( matrix );
-          canvas.drawPath( path, paint );
-          if ( lp != null && lp != lp2 ) {
             path = new Path();
-            path.moveTo( lp.x, lp.y );
-            for ( lp = lp.mNext; lp != lp2 && lp != null; lp = lp.mNext ) {
+            path.moveTo( lp.x+line.mDx*10, lp.y+line.mDy*10 );  
+            path.lineTo( lp.x, lp.y );
+            for ( lp = lp.mNext; lp != lpn && lp != null; lp = lp.mNext ) {
               if ( lp.has_cp ) {
                 path.cubicTo( lp.x1, lp.y1, lp.x2, lp.y2, lp.x, lp.y );
               } else {
@@ -2232,20 +2221,33 @@ class Scrap
               }
             }
             path.transform( matrix );
-            canvas.drawPath( path, BrushManager.fixedOrangePaint );
-          }
-          if ( lp != null && lp.mNext != null ) {
-            path = new Path();
-            path.moveTo( lp.x, lp.y );
-            for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
-              if ( lp.has_cp ) {
-                path.cubicTo( lp.x1, lp.y1, lp.x2, lp.y2, lp.x, lp.y );
-              } else {
-                path.lineTo( lp.x, lp.y );
+            canvas.drawPath( path, paint );
+            if ( lp != null && lp != lp2 ) {
+              path = new Path();
+              path.moveTo( lp.x, lp.y );
+              for ( lp = lp.mNext; lp != lp2 && lp != null; lp = lp.mNext ) {
+                if ( lp.has_cp ) {
+                  path.cubicTo( lp.x1, lp.y1, lp.x2, lp.y2, lp.x, lp.y );
+                } else {
+                  path.lineTo( lp.x, lp.y );
+                }
               }
+              path.transform( matrix );
+              canvas.drawPath( path, BrushManager.fixedOrangePaint );
             }
-            path.transform( matrix );
-            canvas.drawPath( path, BrushManager.fixedYellowPaint );
+            if ( lp != null && lp.mNext != null ) {
+              path = new Path();
+              path.moveTo( lp.x, lp.y );
+              for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
+                if ( lp.has_cp ) {
+                  path.cubicTo( lp.x1, lp.y1, lp.x2, lp.y2, lp.x, lp.y );
+                } else {
+                  path.lineTo( lp.x, lp.y );
+                }
+              }
+              path.transform( matrix );
+              canvas.drawPath( path, BrushManager.fixedYellowPaint );
+            }
           }
         } else if ( TDLevel.overExpert && is_extended && item.mType == DrawingPath.DRAWING_PATH_FIXED ) {
           path = new Path();

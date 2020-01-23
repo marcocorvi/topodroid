@@ -44,6 +44,7 @@ import android.os.Message;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 //
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -141,6 +142,7 @@ public class DrawingWindow extends ItemDrawer
   private static final int BTN_PLOT = 7;      // index of mButton1 plot button
   private static final int BTN_DIAL = 8;      // index of mButton1 azimuth button (level > normal)
 
+  private static final int BTN_TOOL = 5;      // index of mButton2 tools
   private static final int BTN_CONT = 6;      // index of mButton2 continue button (level > normal)
   private static final int BTN_JOIN = 5;      // index of mButton3 join button
   private static final int BTN_REMOVE = 7;    // index of mButton3 remove
@@ -445,6 +447,9 @@ public class DrawingWindow extends ItemDrawer
   // ZoomButton mZoomIn;
   private float oldDist;  // zoom pointer-sapcing
   private View mZoomView;
+  private float mZoomTranslate = 48; // pixels
+  private LinearLayout mLayoutTools;
+  private ItemButton[] mBtnRecent;
 
   // window mode
   static final int MODE_DRAW  = 1;
@@ -1818,6 +1823,7 @@ public class DrawingWindow extends ItemDrawer
     // mDrawingSurface.setBuiltInZoomControls(true);
 
     mZoomView = (View) findViewById(R.id.zoomView );
+    mZoomView.setTranslationY( -42 );
     mZoomBtnsCtrl = new ZoomButtonsController( mZoomView );
     // FIXME_ZOOM_CTRL mZoomCtrl = (ZoomControls) mZoomBtnsCtrl.getZoomControls();
     // ViewGroup vg = mZoomBtnsCtrl.getContainer();
@@ -1826,6 +1832,9 @@ public class DrawingWindow extends ItemDrawer
     mListView = (MyHorizontalListView) findViewById(R.id.listview);
     mListView.setEmptyPlacholder(true);
     mButtonSize = TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
+
+    mZoomTranslate = mButtonSize;
+    mBorderBottom -= mZoomTranslate;
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
@@ -1849,6 +1858,9 @@ public class DrawingWindow extends ItemDrawer
       mButton2[0].setOnLongClickListener( this );
       mButton5[1].setOnLongClickListener( this );
     }
+
+    mButton2[ BTN_TOOL ].setOnLongClickListener( this );
+
     if ( TDLevel.overAdvanced ) {
       mButton1[BTN_DOWNLOAD].setOnLongClickListener( this );
       mButton1[BTN_DIAL].setOnLongClickListener( this );
@@ -1918,6 +1930,41 @@ public class DrawingWindow extends ItemDrawer
 
     setMenuAdapter( getResources(), mType );
     closeMenu();
+
+    mLayoutTools = (LinearLayout) findViewById( R.id.layout_tools );
+    mLayoutTools.setVisibility( View.INVISIBLE );
+
+    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 0, LinearLayout.LayoutParams.WRAP_CONTENT );
+    lp.setMargins( 0, 0, 0, 0 );
+    lp.weight = 16;
+    lp.gravity = 0x10; // LinearLayout.LayoutParams.center_vertical;
+    ViewGroup.LayoutParams lp0 = mLayoutTools.getLayoutParams();
+    lp0.height = (int)(40 * Float.parseFloat( getResources().getString( R.string.dimyl ) ) ) + 8; // 4 pxl on both sides 
+    // Log.v("DistoX-LP", "height " + lp0.height );
+    mLayoutTools.setLayoutParams( lp0 );
+
+    mBtnRecent = new ItemButton[ NR_RECENT ];
+    for ( int k = 0; k<NR_RECENT; ++k ) {
+      mBtnRecent[k] = new ItemButton( this );
+      mLayoutTools.addView( mBtnRecent[k], lp );
+      mBtnRecent[k].setOnClickListener(
+        new View.OnClickListener() {
+          @Override public void onClick( View v ) {
+            for ( int k = 0; k<NR_RECENT; ++k ) {
+              if ( v == mBtnRecent[k] ) {
+                if ( mRecentTools == mRecentPoint )     { setPoint( k, false ); }
+                else if ( mRecentTools == mRecentLine ) { setLine( k, false ); }
+                else if ( mRecentTools == mRecentArea ) { setArea( k, false ); }
+                break;
+              }
+            }
+          }
+        }
+      );
+    }
+    mRecentTools = mRecentLine;
+    // rotateRecentToolset();
+    setBtnRecent();
 
     if ( mDataDownloader != null ) {
       mApp.registerLister( this );
@@ -2015,8 +2062,8 @@ public class DrawingWindow extends ItemDrawer
     super.onStart();
     // Log.v("DistoX", "Drawing Activity onStart " + ((mDataDownloader!=null)?"with DataDownloader":"") );
     loadRecentSymbols( mApp_mData );
-     mOutlinePlot1 = null;
-     mOutlinePlot2 = null;
+    mOutlinePlot1 = null;
+    mOutlinePlot2 = null;
     // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on start done");
   }
 
@@ -3407,6 +3454,9 @@ public class DrawingWindow extends ItemDrawer
 
     // TDLog.Log( TDLog.LOG_PLOT, "DOWN at X " + xc + " [" +mBorderInnerLeft + " " + mBorderInnerRight + "] Y " 
     //                                          + yc + " / " + mBorderBottom );
+    // bottom_from = mBorderBottom;
+    // if ( mMode == MODE_DRAW ) border_ from -= mZoomTranslate;
+
     if ( yc > mBorderBottom ) {
       if ( mZoomBtnsCtrlOn && xc > mBorderInnerLeft && xc < mBorderInnerRight ) {
         mTouchMode = MODE_ZOOM;
@@ -4241,18 +4291,21 @@ public class DrawingWindow extends ItemDrawer
       switch ( mMode ) {
         case MODE_MOVE:
           setTheTitle();
+          mLayoutTools.setVisibility( View.INVISIBLE );
           mDrawingSurface.setDisplayPoints( false );
           mListView.setAdapter( mButtonView1.mAdapter );
           mListView.invalidate();
           break;
         case MODE_DRAW:
           setTheTitle();
+          mLayoutTools.setVisibility( View.VISIBLE );
           mDrawingSurface.setDisplayPoints( false );
           mListView.setAdapter( mButtonView2.mAdapter );
           mListView.invalidate();
           break;
         case MODE_ERASE:
           setTheTitle();
+          mLayoutTools.setVisibility( View.INVISIBLE );
           mDrawingSurface.setDisplayPoints( false );
           mListView.setAdapter( mButtonView5.mAdapter );
           mListView.invalidate();
@@ -4260,6 +4313,7 @@ public class DrawingWindow extends ItemDrawer
         case MODE_EDIT:
           clearSelected();
           setTheTitle();
+          mLayoutTools.setVisibility( View.INVISIBLE );
           mDrawingSurface.setDisplayPoints( true );
           mListView.setAdapter( mButtonView3.mAdapter );
           mListView.invalidate();
@@ -4946,6 +5000,13 @@ public class DrawingWindow extends ItemDrawer
         mDrawingSurface.setSplayAlpha( mApp.mShowSectionSplays );
         updateSplays( mApp.mSplayMode );
       }
+    } else if ( b == mButton2[ BTN_TOOL ] ) {
+      if ( TDSetting.mPickerType == TDSetting.PICKER_RECENT ) { 
+        new ItemRecentDialog(mActivity, this, mType ).show();
+      } else {
+        new ItemPickerDialog(mActivity, this, mType, mSymbol ).show();
+      }
+
     } else if ( TDLevel.overBasic && b == mButton3[ BTN_REMOVE ] ) {
       SelectionPoint sp = mDrawingSurface.hotItem();
       if ( sp != null ) {
@@ -5098,11 +5159,7 @@ public class DrawingWindow extends ItemDrawer
           mDrawingSurface.redo();
         }
       } else if ( b == mButton2[k2++] ) { // pointBtn
-        if ( TDSetting.mPickerType == TDSetting.PICKER_RECENT ) { 
-          new ItemRecentDialog(mActivity, this, mType ).show();
-        } else {
-          new ItemPickerDialog(mActivity, this, mType, mSymbol ).show();
-        }
+        rotateRecentToolset();
       } else if ( TDLevel.overNormal && b == mButton2[k2++] ) { //  CONT continuation popup menu
         if ( mSymbol == Symbol.LINE && BrushManager.getLineGroup( mCurrentLine ) != null ) {
           // setButtonContinue( (mContinueLine+1) % CONT_MAX );
@@ -6763,6 +6820,78 @@ public class DrawingWindow extends ItemDrawer
   { 
     int scrap_idx = mDrawingSurface.newScrapIndex( );
     mApp_mData.updatePlotMaxScrap( mSid, mPid, scrap_idx );
+  }
+
+
+  void setBtnRecent( ) // ItemButton[] mBtnRecent, Symbol[] mRecentTools, float sx, float sy )
+  {
+    for ( int k=0; k<NR_RECENT; ++k ) {
+      Symbol p = mRecentTools[k];
+      if ( p == null ) {
+        // Log.v("DistoX-LP", "recent tool " + k + " is null" );
+        break;
+      }
+      if ( mBtnRecent[k] != null ) {
+        mBtnRecent[k].resetPaintPath( p.getPaint(), p.getPath(), mRecentDimX, mRecentDimY );
+        mBtnRecent[k].invalidate();
+      }
+    }
+  }
+
+  void rotateRecentToolset()
+  { 
+    if ( mRecentTools == mRecentPoint ) {
+      mRecentTools = mRecentLine;
+      mRecentDimX  = 
+      mRecentDimY  = Float.parseFloat( getResources().getString( R.string.dimxp ) );
+    } else if ( mRecentTools == mRecentLine ) {
+      mRecentTools = mRecentArea;
+      mRecentDimX  = Float.parseFloat( getResources().getString( R.string.dimxl ) );
+      mRecentDimY  = Float.parseFloat( getResources().getString( R.string.dimyl ) );
+    } else if ( mRecentTools == mRecentArea ) {
+      mRecentTools = mRecentPoint;
+      // mRecentDimX  = Float.parseFloat( getResources().getString( R.string.dimxl ) );
+      // mRecentDimY  = Float.parseFloat( getResources().getString( R.string.dimyl ) );
+    }
+    setBtnRecent();
+  }
+
+  @Override // from ItemDrawer
+  public void setPoint( int k, boolean update_recent )
+  {
+    int index = BrushManager.getPointIndex( mRecentPoint[k] );
+    if ( index >= 0 ) {
+      mCurrentPoint = index;
+      pointSelected( index, update_recent );
+    }
+  }
+
+  @Override
+  public void setLine( int k, boolean update_recent )
+  {
+    int index = BrushManager.getLineIndex( mRecentLine[k] );
+    if ( index >= 0 ) {
+      mCurrentLine = index;
+      lineSelected( index, update_recent );
+    }
+  }
+
+  @Override
+  public void setArea( int k, boolean update_recent )
+  {
+    int index = BrushManager.getAreaIndex( mRecentArea[k] );
+    if ( index >= 0 ) {
+      mCurrentArea = index;
+      areaSelected( index, update_recent );
+    }
+  }
+
+  @Override
+  public void onRecentSymbolsLoaded()
+  {
+    mRecentDimX  = Float.parseFloat( getResources().getString( R.string.dimxl ) );
+    mRecentDimY  = Float.parseFloat( getResources().getString( R.string.dimyl ) );
+    setBtnRecent();
   }
 
 }

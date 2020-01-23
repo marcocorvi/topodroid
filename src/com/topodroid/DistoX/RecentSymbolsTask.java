@@ -21,6 +21,7 @@ import android.content.Context;
 class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
 {
   private DataHelper mData;
+  private ItemDrawer mDrawer;
   // private WeakReference<Context> mContext;
   private Symbol[] mRecentPoint;
   private Symbol[] mRecentLine;
@@ -30,9 +31,10 @@ class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
   static final int LOAD = 0;
   static final int SAVE = 1;
 
-  RecentSymbolsTask( Context context, DataHelper data, Symbol[] points, Symbol[] lines, Symbol[] areas, int nr, int what )
+  RecentSymbolsTask( Context context, ItemDrawer drawer, DataHelper data, Symbol[] points, Symbol[] lines, Symbol[] areas, int nr, int what )
   {
     // mContext = new WeakReference<Context>( context );
+    mDrawer  = drawer;
     mData    = data;
     mRecentPoint = points;
     mRecentLine  = lines;
@@ -142,8 +144,11 @@ class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
   // {
   // }
 
-  // @Override
-  // protected void onPostExecute( Boolean result )
-  // {
-  // }
+  @Override
+  protected void onPostExecute( Boolean result )
+  {
+    if ( mWhat == LOAD && mDrawer != null ) {
+      mDrawer.onRecentSymbolsLoaded();
+    }
+  }
 }

@@ -234,8 +234,6 @@ class ItemRecentDialog extends MyDialog
     mSeekBar.setEnabled( p != null && p.isOrientable() );
   }
 
-  
-        
   // void rotatePoint( int angle )
   // {
   //   if ( mPointAdapter == null ) return;
@@ -298,32 +296,32 @@ class ItemRecentDialog extends MyDialog
     // FIXME Most-Recent can orient only points
   }
 
-  private void setPoint( int k )
-  {
-    int index = BrushManager.getPointIndex( ItemDrawer.mRecentPoint[k] );
-    if ( index >= 0 ) {
-      mParent.mCurrentPoint = index;
-      mParent.pointSelected( index, true );
-    }
-  }
+  // private void setPoint( int k, boolean update_recent )
+  // {
+  //   int index = BrushManager.getPointIndex( ItemDrawer.mRecentPoint[k] );
+  //   if ( index >= 0 ) {
+  //     mParent.mCurrentPoint = index;
+  //     mParent.pointSelected( index, update_recent );
+  //   }
+  // }
 
-  private void setLine( int k )
-  {
-    int index = BrushManager.getLineIndex( ItemDrawer.mRecentLine[k] );
-    if ( index >= 0 ) {
-      mParent.mCurrentLine = index;
-      mParent.lineSelected( index, true );
-    }
-  }
+  // private void setLine( int k, boolean update_recent )
+  // {
+  //   int index = BrushManager.getLineIndex( ItemDrawer.mRecentLine[k] );
+  //   if ( index >= 0 ) {
+  //     mParent.mCurrentLine = index;
+  //     mParent.lineSelected( index, update_recent );
+  //   }
+  // }
 
-  private void setArea( int k )
-  {
-    int index = BrushManager.getAreaIndex( ItemDrawer.mRecentArea[k] );
-    if ( index >= 0 ) {
-      mParent.mCurrentArea = index;
-      mParent.areaSelected( index, true );
-    }
-  }
+  // private void setArea( int k, boolean update_recent )
+  // {
+  //   int index = BrushManager.getAreaIndex( ItemDrawer.mRecentArea[k] );
+  //   if ( index >= 0 ) {
+  //     mParent.mCurrentArea = index;
+  //     mParent.areaSelected( index, update_recent );
+  //   }
+  // }
 
   @Override
   public boolean onLongClick(View view)
@@ -368,9 +366,9 @@ class ItemRecentDialog extends MyDialog
       new ItemPickerDialog( mContext, mParent, mPlotType, Symbol.AREA ). show();
     } else {
       for ( int k=0; k<nrRecent; ++k ) {
-        if ( b == mRecentP[k] ) { setPoint(k); break; }
-        if ( b == mRecentL[k] ) { setLine(k);  break; }
-        if ( b == mRecentA[k] ) { setArea(k);  break; }
+        if ( b == mRecentP[k] ) { mParent.setPoint(k, true); break; }
+        if ( b == mRecentL[k] ) { mParent.setLine(k, true);  break; }
+        if ( b == mRecentA[k] ) { mParent.setArea(k, true);  break; }
       }
     }
     dismiss();

@@ -34,6 +34,9 @@ abstract class ItemDrawer extends Activity
   static Symbol[] mRecentLine  = { null, null, null, null, null, null };
   static Symbol[] mRecentArea  = { null, null, null, null, null, null };
   static final int NR_RECENT = 6; // max is 6
+  static Symbol[] mRecentTools = mRecentLine;
+  static float mRecentDimX;
+  static float mRecentDimY;
 
   void setPointScale( int scale )
   {
@@ -91,13 +94,13 @@ abstract class ItemDrawer extends Activity
   //
   protected void loadRecentSymbols( DataHelper data )
   {
-    ( new RecentSymbolsTask( this, data, mRecentPoint, mRecentLine, mRecentArea, NR_RECENT, RecentSymbolsTask.LOAD ) ).execute();
+    ( new RecentSymbolsTask( this, this, data, mRecentPoint, mRecentLine, mRecentArea, NR_RECENT, RecentSymbolsTask.LOAD ) ).execute();
 
   }
 
   protected void saveRecentSymbols( DataHelper data )
   {
-    ( new RecentSymbolsTask( this, data, mRecentPoint, mRecentLine, mRecentArea, NR_RECENT, RecentSymbolsTask.SAVE ) ).execute();
+    ( new RecentSymbolsTask( this, this, data, mRecentPoint, mRecentLine, mRecentArea, NR_RECENT, RecentSymbolsTask.SAVE ) ).execute();
   }
 
   // ----------------------------------------------------------------------
@@ -159,4 +162,10 @@ abstract class ItemDrawer extends Activity
 
   public void setTheTitle() { }
 
+  public void setPoint( int k, boolean update_recent ) { }
+  public void setLine( int k, boolean update_recent ) { }
+  public void setArea( int k, boolean update_recent ) { }
+
+  // notified that recet symbols are loaded
+  public void onRecentSymbolsLoaded() { } 
 }
