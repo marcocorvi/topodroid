@@ -1370,8 +1370,8 @@
   <string name="pref_side_drag_summary">启用草图窗口中的边框拖动</string>
   <string name="pref_unit_grid_title">草图参考单位</string>
   <string name="pref_unit_grid_summary">草图网格参考单格尺寸</string>
-  <string name="pref_recent_nr_title">最近的工具数量</string>
-  <string name="pref_recent_nr_summary">项目选择器中最新使用工具的数量</string>
+  <!-- UNUSED string name="pref_recent_nr_title">最近的工具数量</string -->
+  <!-- UNUSED string name="pref_recent_nr_summary">项目选择器中最新使用工具的数量</string -->
   <string name="pref_area_border_title">区边界的可见性</string>
   <string name="pref_area_border_summary">区边界默认可见性</string>
   <string name="pref_auto_section_pt_title">截面点</string>

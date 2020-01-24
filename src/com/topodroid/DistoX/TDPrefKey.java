@@ -166,7 +166,7 @@ class TDPrefKey
 
   static String[] PLOT = { // [12]
     "DISTOX_PICKER_TYPE",    // 0 // tool picker: most-recent, list, grid, triple-grid
-    "DISTOX_RECENT_NR",           // number of most recent items (item picker)
+    // "DISTOX_RECENT_NR",           // number of most recent items (item picker)
     "DISTOX_SIDE_DRAG",           // whether to enable side-drag
     "DISTOX_ZOOM_CTRL",           // whether to have zoom-ctrl (no, temp., always)
     // "DISTOX_SECTION_STATIONS",
@@ -184,7 +184,7 @@ class TDPrefKey
 
   static int[] PLOTtitle = {
     R.string.pref_picker_type_title,
-    R.string.pref_recent_nr_title,
+    // R.string.pref_recent_nr_title,
     R.string.pref_side_drag_title,
     R.string.pref_zoom_controls_title,
     // R.string.pref_section_stations_title,
@@ -202,7 +202,7 @@ class TDPrefKey
 
   static int[] PLOTdesc = {
     R.string.pref_picker_type_summary,
-    R.string.pref_recent_nr_summary,
+    // R.string.pref_recent_nr_summary,
     R.string.pref_side_drag_summary,
     R.string.pref_zoom_controls_summary,
     // R.string.pref_section_stations_summary,
@@ -219,8 +219,8 @@ class TDPrefKey
   };
 
   static String[] PLOTdef = {
-    TDString.ZERO, 
-    TDString.FOUR, 
+    TDString.ONE, 
+    // TDString.FOUR, 
     TRUE, 
     TDString.ONE,
     // TDString.THREE,

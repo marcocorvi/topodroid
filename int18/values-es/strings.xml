@@ -1355,8 +1355,8 @@
   <string name="pref_side_drag_summary">Habilitar el lado y arrastre en la ventana de dibujo</string>
   <string name="pref_unit_grid_title">Unidades de dibujo</string>
   <string name="pref_unit_grid_summary">Tamaño de celda de la cuadrícula del dibujo</string>
-  <string name="pref_recent_nr_title">Herramientas utilizadas recientemente</string>
-  <string name="pref_recent_nr_summary">Número de herramientas más recientes seleccionadas</string>
+  <!-- UNUSED string name="pref_recent_nr_title">Herramientas utilizadas recientemente</string -->
+  <!-- UNUSED string name="pref_recent_nr_summary">Número de herramientas más recientes seleccionadas</string -->
   <string name="pref_area_border_title">Visibilidad borde área</string> 
   <string name="pref_area_border_summary">Visibilidad predeterminada en el borde de área</string>
   <string name="pref_auto_section_pt_title">Punto de sección</string>

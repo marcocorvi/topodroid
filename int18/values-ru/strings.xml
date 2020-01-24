@@ -1353,8 +1353,8 @@
   <string name="pref_side_drag_summary">Включить перетаскивание за край в окне абриса</string>
   <string name="pref_unit_grid_title">Единицы изм. сетки на абрисах</string>
   <string name="pref_unit_grid_summary">Единицы измерения шага сетки на абрисах</string>
-  <string name="pref_recent_nr_title">Кол-во. недавних инструментов</string>
-  <string name="pref_recent_nr_summary">Кол-во элементов в списке недавно использованных инструментов</string>
+  <!-- UNUSED string name="pref_recent_nr_title">Кол-во. недавних инструментов</string -->
+  <!-- UNUSED string name="pref_recent_nr_summary">Кол-во элементов в списке недавно использованных инструментов</string -->
   <string name="pref_area_border_title">Прозрачность границ области</string> 
   <string name="pref_area_border_summary">Рисовать границы областей прозрачными</string>
   <string name="pref_auto_section_pt_title">Точки сечений</string>

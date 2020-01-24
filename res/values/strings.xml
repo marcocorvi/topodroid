@@ -1370,8 +1370,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_side_drag_summary">Enable side-drag on the sketch window</string>
   <string name="pref_unit_grid_title">Sketch units</string>
   <string name="pref_unit_grid_summary">Sketch grid cell size</string>
-  <string name="pref_recent_nr_title">Recent tools number</string>
-  <string name="pref_recent_nr_summary">Number of the most recent tools in the item picker</string>
+  <!-- UNUSED string name="pref_recent_nr_title">Recent tools number</string -->
+  <!-- UNUSED string name="pref_recent_nr_summary">Number of the most recent tools in the item picker</string -->
   <string name="pref_area_border_title">Area border visibility</string>
   <string name="pref_area_border_summary">Area border default visibility</string>
   <string name="pref_auto_section_pt_title">Section points</string>

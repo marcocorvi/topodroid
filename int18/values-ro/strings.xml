@@ -1341,8 +1341,8 @@
   <string name="pref_side_drag_summary">Activează tragerea pe marginile ferestrei de schițare</string>
   <string name="pref_unit_grid_title">Unități schițare</string>
   <string name="pref_unit_grid_summary">Mărime celule ale caroiajului schiței</string>
-  <string name="pref_recent_nr_title">Număr unelte recente</string>
-  <string name="pref_recent_nr_summary">Numărul de unelte recente în selectorul de elemente de desen</string>
+  <!-- UNUSED string name="pref_recent_nr_title">Număr unelte recente</string -->
+  <!-- UNUSED string name="pref_recent_nr_summary">Numărul de unelte recente în selectorul de elemente de desen</string -->
   <string name="pref_area_border_title">Vizibilitate margine suprafațe</string>
   <string name="pref_area_border_summary">Vizibilitate implicită margine suprafațe</string>
   <string name="pref_auto_section_pt_title">Puncte secțiune</string>

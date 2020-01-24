@@ -86,8 +86,7 @@ class ItemPickerDialog extends MyDialog
   private ItemAdapter mAreaAdapter  = null;
   private ItemAdapter mAdapter = null;
 
-  private LinearLayout mRecentLayout = null;
-  private ItemButton[] mRecent = null;
+  // private ItemButton[] mRecent = null;
 
   // static int mLinePos;
   // static int mAreaPos;
@@ -138,7 +137,7 @@ class ItemPickerDialog extends MyDialog
       return;
     }
 
-    createAdapters( ( TDSetting.mPickerType == TDSetting.PICKER_LIST || TDSetting.mPickerType == TDSetting.PICKER_RECENT ) );
+    createAdapters( ( TDSetting.mPickerType == TDSetting.PICKER_LIST /* || TDSetting.mPickerType == TDSetting.PICKER_RECENT */ ) );
     
     if ( TDSetting.mPickerType == TDSetting.PICKER_GRID || TDSetting.mPickerType == TDSetting.PICKER_GRID_3 ) {
       setContentView(R.layout.item_picker2_dialog);
@@ -177,18 +176,18 @@ class ItemPickerDialog extends MyDialog
       mGridL = null;
       mGridA = null;
 
-      mRecentLayout = (LinearLayout) findViewById( R.id.layout2 );
-      mRecent = new ItemButton[ TDSetting.mRecentNr ];
-      int lw = LinearLayout.LayoutParams.WRAP_CONTENT;
-      int lh = LinearLayout.LayoutParams.WRAP_CONTENT;
-      LinearLayout.LayoutParams lllp = new LinearLayout.LayoutParams(lh,lw);
-      lllp.setMargins(DIMMX, DIMMY, DIMMX, DIMMY);
-      for ( int k=0; k<TDSetting.mRecentNr; ++k ) {
-        mRecent[k] = new ItemButton( mContext );
-        mRecent[k].setOnClickListener( this );
-        // mRecent[k].setOnLongClickListener( this );
-        mRecentLayout.addView( mRecent[k], lllp );
-      }
+      // LinearLayout recent_layout = (LinearLayout) findViewById( R.id.layout2 );
+      // mRecent = new ItemButton[ TDSetting.mRecentNr ];
+      // int lw = LinearLayout.LayoutParams.WRAP_CONTENT;
+      // int lh = LinearLayout.LayoutParams.WRAP_CONTENT;
+      // LinearLayout.LayoutParams lllp = new LinearLayout.LayoutParams(lh,lw);
+      // lllp.setMargins(DIMMX, DIMMY, DIMMX, DIMMY);
+      // for ( int k=0; k<TDSetting.mRecentNr; ++k ) {
+      //   mRecent[k] = new ItemButton( mContext );
+      //   mRecent[k].setOnClickListener( this );
+      //   // mRecent[k].setOnLongClickListener( this );
+      //   recent_layout.addView( mRecent[k], lllp );
+      // }
     }
     
     mBTpoint = (Button) findViewById(R.id.item_point);
@@ -248,7 +247,7 @@ class ItemPickerDialog extends MyDialog
 
     // Log.v( TopoDroidApp.TAG, "ItemPickerDialog ... createAdapters" );
     updateList();
-    updateRecentButtons( mItemType );
+    // updateRecentButtons( mItemType );
 
     setTypeAndItem( mItemType, getAdapterPosition() );
     // setTheTitle();
@@ -290,19 +289,19 @@ class ItemPickerDialog extends MyDialog
       mAreaAdapter.setItemOrientation( pos, angle );
       // setAreaOrientation( pos, angle );
     }
-    if ( item != null ) {
-      // item.setAngle( angle );
-      if ( symbols != null ) {
-        for ( int k=0; k<TDSetting.mRecentNr; ++k ) {
-          Symbol p = symbols[k];
-          if ( p == null ) break;
-          if ( p == item.mSymbol ) {
-            if ( mRecent != null ) mRecent[k].resetPaintPath( p.getPaint(), p.getPath(), DIMXP, DIMXP );
-            break;
-          }
-        }
-      }
-    }
+    // if ( item != null ) {
+    //   // item.setAngle( angle );
+    //   if ( symbols != null ) {
+    //     for ( int k=0; k<TDSetting.mRecentNr; ++k ) {
+    //       Symbol p = symbols[k];
+    //       if ( p == null ) break;
+    //       if ( p == item.mSymbol ) {
+    //         if ( mRecent != null ) mRecent[k].resetPaintPath( p.getPaint(), p.getPath(), DIMXP, DIMXP );
+    //         break;
+    //       }
+    //     }
+    //   }
+    // }
   }
 
   private int getAdapterPosition()
@@ -322,38 +321,38 @@ class ItemPickerDialog extends MyDialog
     return index;
   }
 
-  private void setRecentButtons( Symbol[] symbols, float sx, float sy )
-  {
-    if ( mRecent == null ) return;
-    for ( int k=0; k<TDSetting.mRecentNr; ++k ) {
-      Symbol p = symbols[k];
-      if ( p == null ) {
-        mRecent[k].setVisibility( View.INVISIBLE );
-      } else {
-        mRecent[k].resetPaintPath( p.getPaint(), p.getPath(), sx, sy );
-        mRecent[k].setVisibility( View.VISIBLE );
-      }
-    }
-  }
+  // private void setRecentButtons( Symbol[] symbols, float sx, float sy )
+  // {
+  //   if ( mRecent == null ) return;
+  //   for ( int k=0; k<TDSetting.mRecentNr; ++k ) {
+  //     Symbol p = symbols[k];
+  //     if ( p == null ) {
+  //       mRecent[k].setVisibility( View.INVISIBLE );
+  //     } else {
+  //       mRecent[k].resetPaintPath( p.getPaint(), p.getPath(), sx, sy );
+  //       mRecent[k].setVisibility( View.VISIBLE );
+  //     }
+  //   }
+  // }
 
-  private void updateRecentButtons( int item_type ) 
-  {
-    if ( TDSetting.mPickerType != TDSetting.PICKER_GRID_3 ) {
-      // float sx=1.0f, sy=1.0f;
-      if ( item_type == Symbol.POINT ) {
-        mBTsize.setVisibility( View.VISIBLE );
-        setRecentButtons( ItemDrawer.mRecentPoint, DIMXP, DIMXP );
-      } else if ( item_type == Symbol.LINE ) {
-        mBTsize.setVisibility( View.GONE );
-        setRecentButtons( ItemDrawer.mRecentLine, DIMXL, DIMYL );
-      } else if ( item_type == Symbol.AREA ) {
-        mBTsize.setVisibility( View.GONE );
-        setRecentButtons( ItemDrawer.mRecentArea, DIMXL, DIMYL );
-      }
-    // } else {
-      // nothing
-    }
-  }
+  // private void updateRecentButtons( int item_type ) 
+  // {
+  //   if ( TDSetting.mPickerType != TDSetting.PICKER_GRID_3 ) {
+  //     // float sx=1.0f, sy=1.0f;
+  //     if ( item_type == Symbol.POINT ) {
+  //       mBTsize.setVisibility( View.VISIBLE );
+  //       setRecentButtons( ItemDrawer.mRecentPoint, DIMXP, DIMXP );
+  //     } else if ( item_type == Symbol.LINE ) {
+  //       mBTsize.setVisibility( View.GONE );
+  //       setRecentButtons( ItemDrawer.mRecentLine, DIMXL, DIMYL );
+  //     } else if ( item_type == Symbol.AREA ) {
+  //       mBTsize.setVisibility( View.GONE );
+  //       setRecentButtons( ItemDrawer.mRecentArea, DIMXL, DIMYL );
+  //     }
+  //   // } else {
+  //     // nothing
+  //   }
+  // }
         
   private void createAdapters( boolean use_text )
   {
@@ -676,7 +675,7 @@ class ItemPickerDialog extends MyDialog
           if ( mItemType != Symbol.POINT ) {
             mItemType = Symbol.POINT;
             updateList();
-            updateRecentButtons( mItemType );
+            // updateRecentButtons( mItemType );
             setTypeFromCurrent( );
           }
         }
@@ -685,7 +684,7 @@ class ItemPickerDialog extends MyDialog
         if ( mItemType != Symbol.LINE ) {
           mItemType = Symbol.LINE;
           updateList();
-          updateRecentButtons( mItemType );
+          // updateRecentButtons( mItemType );
           setTypeFromCurrent( );
         }
         break;
@@ -695,7 +694,7 @@ class ItemPickerDialog extends MyDialog
           if ( mItemType != Symbol.AREA ) {
             mItemType = Symbol.AREA;
             updateList();
-            updateRecentButtons( mItemType );
+            // updateRecentButtons( mItemType );
             setTypeFromCurrent( );
           }
         }
@@ -711,22 +710,22 @@ class ItemPickerDialog extends MyDialog
         break;
     }
 
-    if ( mRecent != null ) { // this select the symbol and closes the dialog
-      try {
-        ItemButton iv = (ItemButton)view;
-        // if ( iv != null ) { // always true
-          for ( int k=0; k<TDSetting.mRecentNr; ++k ) {
-            if ( iv == mRecent[k] ) {
-              setRecent( k );
-              closeDialog();
-              return;
-            }
-          }
-        // }
-      } catch ( ClassCastException e ) {
-        TDLog.Error("View is not ItemButton"); // it is ok
-      }
-    }
+    // if ( mRecent != null ) { // this select the symbol and closes the dialog
+    //   try {
+    //     ItemButton iv = (ItemButton)view;
+    //     // if ( iv != null ) { // always true
+    //       for ( int k=0; k<TDSetting.mRecentNr; ++k ) {
+    //         if ( iv == mRecent[k] ) {
+    //           setRecent( k );
+    //           closeDialog();
+    //           return;
+    //         }
+    //       }
+    //     // }
+    //   } catch ( ClassCastException e ) {
+    //     TDLog.Error("View is not ItemButton"); // it is ok
+    //   }
+    // }
      
     // dismiss();
   }

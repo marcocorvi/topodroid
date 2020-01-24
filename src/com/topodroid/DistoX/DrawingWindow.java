@@ -69,7 +69,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.FontMetrics;
 import android.graphics.PointF;
 import android.graphics.RectF;
-// import android.graphics.Path;
+import android.graphics.Path;
 // import android.graphics.Path.Direction;
 
 import android.net.Uri;
@@ -1943,7 +1943,7 @@ public class DrawingWindow extends ItemDrawer
     // Log.v("DistoX-LP", "height " + lp0.height );
     mLayoutTools.setLayoutParams( lp0 );
 
-    mBtnRecent = new ItemButton[ NR_RECENT ];
+    mBtnRecent = new ItemButton[ NR_RECENT + 1 ];
     for ( int k = 0; k<NR_RECENT; ++k ) {
       mBtnRecent[k] = new ItemButton( this );
       mLayoutTools.addView( mBtnRecent[k], lp );
@@ -1962,6 +1962,22 @@ public class DrawingWindow extends ItemDrawer
         }
       );
     }
+    mBtnRecent[NR_RECENT] = new ItemButton( this );
+    mBtnRecent[NR_RECENT].setText( ">>" );
+    Path path = new Path();
+    path.moveTo( 0, 8 ); path.lineTo(  8, 0 ); path.lineTo( 0, -8 );
+    path.moveTo( 8, 8 ); path.lineTo( 16, 0 ); path.lineTo( 8, -8 );
+    mBtnRecent[NR_RECENT].resetPaintPath( BrushManager.labelPaint, path, 2, 2 );
+    mBtnRecent[NR_RECENT].invalidate();
+    mBtnRecent[NR_RECENT].setOnClickListener(
+      new View.OnClickListener() {
+        @Override public void onClick( View v ) {
+          startItemPickerDialog();
+        }
+      }
+    );
+    mLayoutTools.addView( mBtnRecent[NR_RECENT], lp );
+    
     mRecentTools = mRecentLine;
     // rotateRecentToolset();
     setBtnRecent();
@@ -1979,6 +1995,15 @@ public class DrawingWindow extends ItemDrawer
     // }
 
     // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on create done");
+  }
+
+  void startItemPickerDialog()
+  {
+    int symbol = mSymbol;
+    if ( mRecentTools == mRecentPoint )     { symbol = Symbol.POINT; }
+    else if ( mRecentTools == mRecentLine ) { symbol = Symbol.LINE; }
+    else if ( mRecentTools == mRecentArea ) { symbol = Symbol.AREA; }
+    new ItemPickerDialog( mActivity, this, mType, symbol ).show();
   }
 
   // ==============================================================
@@ -5001,11 +5026,11 @@ public class DrawingWindow extends ItemDrawer
         updateSplays( mApp.mSplayMode );
       }
     } else if ( b == mButton2[ BTN_TOOL ] ) {
-      if ( TDSetting.mPickerType == TDSetting.PICKER_RECENT ) { 
-        new ItemRecentDialog(mActivity, this, mType ).show();
-      } else {
+      // if ( TDSetting.mPickerType == TDSetting.PICKER_RECENT ) { 
+      //   new ItemRecentDialog(mActivity, this, mType ).show();
+      // } else {
         new ItemPickerDialog(mActivity, this, mType, mSymbol ).show();
-      }
+      // }
 
     } else if ( TDLevel.overBasic && b == mButton3[ BTN_REMOVE ] ) {
       SelectionPoint sp = mDrawingSurface.hotItem();
@@ -6822,22 +6847,6 @@ public class DrawingWindow extends ItemDrawer
     mApp_mData.updatePlotMaxScrap( mSid, mPid, scrap_idx );
   }
 
-
-  void setBtnRecent( ) // ItemButton[] mBtnRecent, Symbol[] mRecentTools, float sx, float sy )
-  {
-    for ( int k=0; k<NR_RECENT; ++k ) {
-      Symbol p = mRecentTools[k];
-      if ( p == null ) {
-        // Log.v("DistoX-LP", "recent tool " + k + " is null" );
-        break;
-      }
-      if ( mBtnRecent[k] != null ) {
-        mBtnRecent[k].resetPaintPath( p.getPaint(), p.getPath(), mRecentDimX, mRecentDimY );
-        mBtnRecent[k].invalidate();
-      }
-    }
-  }
-
   void rotateRecentToolset()
   { 
     if ( mRecentTools == mRecentPoint ) {
@@ -6856,7 +6865,25 @@ public class DrawingWindow extends ItemDrawer
     setBtnRecent();
   }
 
-  @Override // from ItemDrawer
+
+  // --------------------- from ItemDrawer
+  @Override
+  public void setBtnRecent( ) // ItemButton[] mBtnRecent, Symbol[] mRecentTools, float sx, float sy )
+  {
+    for ( int k=0; k<NR_RECENT; ++k ) {
+      Symbol p = mRecentTools[k];
+      if ( p == null ) {
+        // Log.v("DistoX-LP", "recent tool " + k + " is null" );
+        break;
+      }
+      if ( mBtnRecent[k] != null ) {
+        mBtnRecent[k].resetPaintPath( p.getPaint(), p.getPath(), mRecentDimX, mRecentDimY );
+        mBtnRecent[k].invalidate();
+      }
+    }
+  }
+
+  @Override
   public void setPoint( int k, boolean update_recent )
   {
     int index = BrushManager.getPointIndex( mRecentPoint[k] );

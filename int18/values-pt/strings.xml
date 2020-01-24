@@ -1346,8 +1346,8 @@
   <string name="pref_side_drag_summary">Habilitar o arrastamento lateral na área de desenho do croqui</string>
   <string name="pref_unit_grid_title">Unidades croqui</string>
   <string name="pref_unit_grid_summary">Tamanho dos intervalos na grade do croqui</string>
-  <string name="pref_recent_nr_title">Número símbolos recentes</string>
-  <string name="pref_recent_nr_summary">Número de símbolos mais recentes na janela de seleção</string>
+  <!-- UNUSED string name="pref_recent_nr_title">Número símbolos recentes</string -->
+  <!-- UNUSED string name="pref_recent_nr_summary">Número de símbolos mais recentes na janela de seleção</string -->
   <string name="pref_area_border_title">Visibilidade borda área</string>
   <string name="pref_area_border_summary">Visibilidade padrão das bordas da área</string>
   <string name="pref_auto_section_pt_title">Pontos corte</string>

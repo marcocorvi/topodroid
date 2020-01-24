@@ -1340,8 +1340,8 @@
   <string name="pref_side_drag_summary">Abilita side-drag sul rilievo</string>
   <string name="pref_unit_grid_title">Unità di misura disegno</string>
   <string name="pref_unit_grid_summary">Dimensione celle della griglia</string>
-  <string name="pref_recent_nr_title">Numero di strumenti recenti</string>
-  <string name="pref_recent_nr_summary">Numero di strumenti recenti nel raccoglitore</string>
+  <!-- UNUSED string name="pref_recent_nr_title">Numero di strumenti recenti</string -->
+  <!-- UNUSED string name="pref_recent_nr_summary">Numero di strumenti recenti nel raccoglitore</string -->
   <string name="pref_area_border_title">Visibilità bordi area</string> 
   <string name="pref_area_border_summary">Visibilità di default dei bordi di una area</string>
   <string name="pref_auto_section_pt_title">Punti sezione</string>

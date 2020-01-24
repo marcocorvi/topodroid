@@ -1339,8 +1339,8 @@
   <string name="pref_side_drag_summary">Скролиране с дърпане на страничната част на скицата</string>
   <string name="pref_unit_grid_title">Мерни единици на скицата</string>
   <string name="pref_unit_grid_summary">Размер на квадрат от мрежата</string>
-  <string name="pref_recent_nr_title">Брой последни инструменти</string>
-  <string name="pref_recent_nr_summary">Брой показвани последни инструменти в прозореца</string>
+  <!-- UNUSED string name="pref_recent_nr_title">Брой последни инструменти</string -->
+  <!-- UNUSED string name="pref_recent_nr_summary">Брой показвани последни инструменти в прозореца</string -->
   <string name="pref_area_border_title">Видима граница на площ</string> 
   <string name="pref_area_border_summary">Дали линията "граница" на площ да е видима</string>
   <string name="pref_auto_section_pt_title">Точки "сечение"</string>

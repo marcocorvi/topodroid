@@ -1340,8 +1340,8 @@
   <string name="pref_side_drag_summary">Activer le déroulement latéral dans la fenêtre de croquis</string>
   <string name="pref_unit_grid_title">Unités du croquis</string>
   <string name="pref_unit_grid_summary">Taille grille du croquis</string>
-  <string name="pref_recent_nr_title">Nombre d\'outils récents</string>
-  <string name="pref_recent_nr_summary">Nombres d\'outils dernièrement utilisés à afficher dans le sélectionneur d\'outils</string>
+  <!-- UNUSED string name="pref_recent_nr_title">Nombre d\'outils récents</string -->
+  <!-- UNUSED string name="pref_recent_nr_summary">Nombres d\'outils dernièrement utilisés à afficher dans le sélectionneur d\'outils</string -->
   <string name="pref_area_border_title">Visibilité bordure</string>
   <string name="pref_area_border_summary">Visibilité de la bordure</string>
   <string name="pref_auto_section_pt_title">Points de section</string>

@@ -356,7 +356,9 @@ class DrawingCommandManager
    */
   void addScaleRef( ) // boolean with_azimuth
   {
-    mScaleRef = new DrawingScaleReference( BrushManager.referencePaint, new Point(20,-20), 0.33f ); // with_azimuth
+    mScaleRef = new DrawingScaleReference( BrushManager.referencePaint, 
+      new Point(20,-(int)(20+40*Float.parseFloat( TDInstance.context.getResources().getString( R.string.dimmy ) ) )),
+      0.33f ); // with_azimuth
   }
 
   // void debug()
