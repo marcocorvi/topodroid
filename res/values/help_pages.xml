@@ -66,7 +66,6 @@
   <string name="HelpDialog" translatable="false">page_help.htm</string>
   <string name="ImportDialog" translatable="false">page_import.htm</string>
   <string name="ItemPickerDialog" translatable="false">page_tools_list.htm</string>
-  <string name="ItemRecentDialog" translatable="false">page_tools_recent.htm</string>
   <string name="MultishotDialog" translatable="false">page_todo.htm</string>
   <string name="PacketDialog" translatable="false">page_packets.htm</string>
   <string name="PhotoCommentDialog" translatable="false">page_photo_comment.htm</string>

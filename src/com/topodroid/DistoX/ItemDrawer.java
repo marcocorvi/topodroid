@@ -11,9 +11,9 @@
  */
 package com.topodroid.DistoX;
 
-import android.app.Activity;
+import android.util.Log;
 
-// import android.util.Log;
+import android.app.Activity;
 
 abstract class ItemDrawer extends Activity
 {
@@ -30,10 +30,13 @@ abstract class ItemDrawer extends Activity
   protected int mSymbol = Symbol.LINE; // kind of symbol being drawn
 
   // -----------------------------------------------------------
+  static final int NR_RECENT = 6; // max is 6
   static Symbol[] mRecentPoint = { null, null, null, null, null, null };
   static Symbol[] mRecentLine  = { null, null, null, null, null, null };
   static Symbol[] mRecentArea  = { null, null, null, null, null, null };
-  static final int NR_RECENT = 6; // max is 6
+  static int[] mRecentPointAge = { 6, 5, 4, 3, 2, 1 };
+  static int[] mRecentLineAge  = { 6, 5, 4, 3, 2, 1 };
+  static int[] mRecentAreaAge  = { 6, 5, 4, 3, 2, 1 };
   static Symbol[] mRecentTools = mRecentLine;
   static float mRecentDimX;
   static float mRecentDimY;
@@ -54,39 +57,81 @@ abstract class ItemDrawer extends Activity
 
   static void updateRecentPoint( int point )
   {
-    updateRecent( BrushManager.getPointByIndex( point ), mRecentPoint );
+    updateRecent( BrushManager.getPointByIndex( point ), mRecentPoint, mRecentPointAge );
   }
 
   static void updateRecentLine( int line )
   {
-    updateRecent( BrushManager.getLineByIndex( line ), mRecentLine );
+    updateRecent( BrushManager.getLineByIndex( line ), mRecentLine, mRecentLineAge );
   }
 
   static void updateRecentArea( int area )
   {
-    updateRecent( BrushManager.getAreaByIndex( area ), mRecentArea );
+    updateRecent( BrushManager.getAreaByIndex( area ), mRecentArea, mRecentAreaAge );
   }
 
-  static void updateRecentPoint( Symbol point ) { updateRecent( point, mRecentPoint ); }
+  static void updateRecentPoint( Symbol point ) { updateRecent( point, mRecentPoint, mRecentPointAge ); }
 
-  static void updateRecentLine( Symbol line ) { updateRecent( line, mRecentLine ); }
+  static void updateRecentLine( Symbol line ) { updateRecent( line, mRecentLine, mRecentLineAge ); }
 
-  static void updateRecentArea( Symbol area ) { updateRecent( area, mRecentArea ); }
+  static void updateRecentArea( Symbol area ) { updateRecent( area, mRecentArea, mRecentAreaAge ); }
 
   // used by RecentSymbolTask
-  static void updateRecent( Symbol symbol, Symbol[] symbols )
+  static void updateRecent( Symbol symbol, Symbol[] symbols, int[] ages )
   {
     if ( symbol == null ) return;
+    int amin = ages[0];
+    int kmin = 0;
+    int kmax = 0; 
+    for ( int k=1; k<NR_RECENT; ++k ) {
+      if ( ages[kmax] < ages[k] ) kmax = k;
+      if ( amin > ages[k] ) { amin = ages[k]; kmin = k; }
+    }
+    int amax = ages[kmax] - amin + 1;
+    StringBuilder sb = new StringBuilder();
+    sb.append("ages " + amin + " " + amax +": ");
+    for ( int k=0; k<NR_RECENT; ++k ) {
+      ages[k] -= amin;
+      sb.append( " " + ages[k] );
+    }
+    sb.append( " kmin " + kmin );
+    // Log.v("DistoX-AGE", sb.toString() );
+
     for ( int k=0; k<NR_RECENT; ++k ) {
       if ( symbol == symbols[k] ) {
-        for ( ; k > 0; --k ) symbols[k] = symbols[k-1];
-        symbols[0] = symbol;
-        break;
+        if ( k != kmax ) ages[k] = amax;
+        return;
       }
     }
-    if ( symbols[0] != symbol ) {
-      for ( int k = NR_RECENT-1; k > 0; --k ) symbols[k] = symbols[k-1];
-      symbols[0] = symbol;
+    symbols[kmin] = symbol;
+    ages[kmin] = amax;
+
+    // for ( int k=0; k<NR_RECENT; ++k ) {
+    //   if ( symbol == symbols[k] ) {
+    //     for ( ; k > 0; --k ) symbols[k] = symbols[k-1];
+    //     symbols[0] = symbol;
+    //     break;
+    //   }
+    // }
+    // if ( symbols[0] != symbol ) {
+    //   for ( int k = NR_RECENT-1; k > 0; --k ) symbols[k] = symbols[k-1];
+    //   symbols[0] = symbol;
+    // }
+  }
+
+  static void updateAge( int kk, int[] ages )
+  {
+    // Log.v("DistoX-AGE", "kk " + kk );
+    int amin = ages[0];
+    int kmax = 0; 
+    for ( int k=1; k<NR_RECENT; ++k ) {
+      if ( ages[kmax] < ages[k] ) kmax = k;
+      if ( amin > ages[k] ) amin = ages[k]; 
+    }
+    if ( kk != kmax ) {
+      int amax = ages[kmax] - amin + 1;
+      for ( int k=0; k<NR_RECENT; ++k ) ages[k] -= amin;
+      ages[kk] = amax;
     }
   }
 
@@ -94,13 +139,13 @@ abstract class ItemDrawer extends Activity
   //
   protected void loadRecentSymbols( DataHelper data )
   {
-    ( new RecentSymbolsTask( this, this, data, mRecentPoint, mRecentLine, mRecentArea, NR_RECENT, RecentSymbolsTask.LOAD ) ).execute();
+    ( new RecentSymbolsTask( this, this, data, /* mRecentPoint, mRecentLine, mRecentArea, NR_RECENT, */ RecentSymbolsTask.LOAD ) ).execute();
 
   }
 
   protected void saveRecentSymbols( DataHelper data )
   {
-    ( new RecentSymbolsTask( this, this, data, mRecentPoint, mRecentLine, mRecentArea, NR_RECENT, RecentSymbolsTask.SAVE ) ).execute();
+    ( new RecentSymbolsTask( this, this, data, /* mRecentPoint, mRecentLine, mRecentArea, NR_RECENT, */ RecentSymbolsTask.SAVE ) ).execute();
   }
 
   // ----------------------------------------------------------------------

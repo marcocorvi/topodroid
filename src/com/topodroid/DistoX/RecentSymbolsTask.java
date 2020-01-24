@@ -23,23 +23,23 @@ class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
   private DataHelper mData;
   private ItemDrawer mDrawer;
   // private WeakReference<Context> mContext;
-  private Symbol[] mRecentPoint;
-  private Symbol[] mRecentLine;
-  private Symbol[] mRecentArea;
-  private int mNr;
+  // private Symbol[] mRecentPoint;
+  // private Symbol[] mRecentLine;
+  // private Symbol[] mRecentArea;
+  // private int mNr;
   private int mWhat;
   static final int LOAD = 0;
   static final int SAVE = 1;
 
-  RecentSymbolsTask( Context context, ItemDrawer drawer, DataHelper data, Symbol[] points, Symbol[] lines, Symbol[] areas, int nr, int what )
+  RecentSymbolsTask( Context context, ItemDrawer drawer, DataHelper data, /* Symbol[] points, Symbol[] lines, Symbol[] areas, int nr, */ int what )
   {
     // mContext = new WeakReference<Context>( context );
     mDrawer  = drawer;
     mData    = data;
-    mRecentPoint = points;
-    mRecentLine  = lines;
-    mRecentArea  = areas;
-    mNr = nr;
+    // mRecentPoint = points;
+    // mRecentLine  = lines;
+    // mRecentArea  = areas;
+    // mNr = nr;
     mWhat = what;
   }
 
@@ -60,48 +60,51 @@ class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
   {
     // Log.v("DistoX", "save recent tools");
     boolean first = false;
-    if ( mRecentPoint[0] != null ) {
+    if ( ItemDrawer.mRecentPoint[0] != null ) {
       StringBuilder points = new StringBuilder( );
       // first = false;
-      for ( int k=mNr-1; k>=0; --k ) {
-        if ( mRecentPoint[k] != null ) {
+      for ( int k=ItemDrawer.NR_RECENT-1; k>=0; --k ) {
+        Symbol symbol = ItemDrawer.mRecentPoint[k];
+        if ( symbol != null ) {
           if ( first ) {
-            points.append(" ").append(mRecentPoint[k].mThName);
+            points.append(" ").append( symbol.mThName);
           } else {
             first = true;
-            points.append( mRecentPoint[k].mThName );
+            points.append( symbol.mThName );
           }
         }
       }
       mData.setValue( "recent_points", points.toString() );
     }
 
-    if ( mRecentLine[0] != null ) {
+    if ( ItemDrawer.mRecentLine[0] != null ) {
       StringBuilder lines = new StringBuilder( );
       first = false;
-      for ( int k=mNr-1; k>=0; --k ) {
-        if ( mRecentLine[k] != null ) {
+      for ( int k=ItemDrawer.NR_RECENT-1; k>=0; --k ) {
+        Symbol symbol = ItemDrawer.mRecentLine[k];
+        if ( symbol != null ) {
           if ( first ) {
-            lines.append(" ").append(mRecentLine[k].mThName);
+            lines.append(" ").append(symbol.mThName);
           } else {
             first = true;
-            lines.append( mRecentLine[k].mThName );
+            lines.append( symbol.mThName );
           }
         }
       }
       mData.setValue( "recent_lines", lines.toString() );
     }
 
-    if ( mRecentArea[0] != null ) { 
+    if ( ItemDrawer.mRecentArea[0] != null ) { 
       StringBuilder areas = new StringBuilder( );
       first = false;
-      for ( int k=mNr-1; k>=0; --k ) {
-        if ( mRecentArea[k] != null ) {
+      for ( int k=ItemDrawer.NR_RECENT-1; k>=0; --k ) {
+        Symbol symbol = ItemDrawer.mRecentArea[k];
+        if ( symbol != null ) {
           if ( first ) {
-            areas.append(" ").append(mRecentArea[k].mThName);
+            areas.append(" ").append(symbol.mThName);
           } else {
             first = true;
-            areas.append( mRecentArea[k].mThName );
+            areas.append( symbol.mThName );
           }
         }
       }
@@ -112,29 +115,29 @@ class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
   private void loadRecentSymbols()
   {
     // Log.v("DistoX", "load recent tools");
-    BrushManager.setRecentPoints( mRecentPoint );
-    BrushManager.setRecentLines( mRecentLine );
-    BrushManager.setRecentAreas( mRecentArea );
+    BrushManager.setRecentPoints( ItemDrawer.mRecentPoint );
+    BrushManager.setRecentLines(  ItemDrawer.mRecentLine );
+    BrushManager.setRecentAreas(  ItemDrawer.mRecentArea );
 
     String names = mData.getValue( "recent_points" );
     if ( names != null ) {
       String[] points = names.split(" ");
       for ( String point : points ) {
-        ItemDrawer.updateRecent( BrushManager.getPointByThName( point ), mRecentPoint );
+        ItemDrawer.updateRecent( BrushManager.getPointByThName( point ), ItemDrawer.mRecentPoint, ItemDrawer.mRecentPointAge );
       }
     }
     names = mData.getValue( "recent_lines" );
     if ( names != null ) {
       String[] lines = names.split(" ");
       for ( String line : lines ) {
-        ItemDrawer.updateRecent( BrushManager.getLineByThName( line ), mRecentLine );
+        ItemDrawer.updateRecent( BrushManager.getLineByThName( line ), ItemDrawer.mRecentLine, ItemDrawer.mRecentLineAge );
       }
     }
     names = mData.getValue( "recent_areas" );
     if ( names != null ) {
       String[] areas = names.split(" ");
       for ( String area : areas ) {
-        ItemDrawer.updateRecent( BrushManager.getAreaByThName( area ), mRecentArea );
+        ItemDrawer.updateRecent( BrushManager.getAreaByThName( area ), ItemDrawer.mRecentArea, ItemDrawer.mRecentAreaAge );
       }
     }
   }

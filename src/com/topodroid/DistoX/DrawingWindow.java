@@ -5743,7 +5743,7 @@ public class DrawingWindow extends ItemDrawer
   @Override
   public void updateBlockList( long blk_id )
   {
-    Log.v("DistoX-DATA", "drawing window: update Block List block id " + blk_id ); // DATA_DOWNLOAD
+    // Log.v("DistoX-DATA", "drawing window: update Block List block id " + blk_id ); // DATA_DOWNLOAD
     if ( TopoDroidApp.mShotWindow != null ) {
       TopoDroidApp.mShotWindow.updateBlockList( blk_id ); // FIXME_EXTEND needed to update sketch splays immediately on download
     }
@@ -6595,7 +6595,7 @@ public class DrawingWindow extends ItemDrawer
             // // FIXME NOTIFY ? no
             createPhotoPoint();
           } else {
-            Log.v("DistoX-PHOTO", "failed to save photo");
+            Log.e("DistoX-PHOTO", "failed to save photo");
           }
         }
         break;
@@ -6890,6 +6890,7 @@ public class DrawingWindow extends ItemDrawer
     if ( index >= 0 ) {
       mCurrentPoint = index;
       pointSelected( index, update_recent );
+      if ( ! update_recent ) updateAge( k, mRecentPointAge );
     }
   }
 
@@ -6900,6 +6901,7 @@ public class DrawingWindow extends ItemDrawer
     if ( index >= 0 ) {
       mCurrentLine = index;
       lineSelected( index, update_recent );
+      if ( ! update_recent ) updateAge( k, mRecentLineAge );
     }
   }
 
@@ -6910,6 +6912,7 @@ public class DrawingWindow extends ItemDrawer
     if ( index >= 0 ) {
       mCurrentArea = index;
       areaSelected( index, update_recent );
+      if ( ! update_recent ) updateAge( k, mRecentAreaAge );
     }
   }
 
