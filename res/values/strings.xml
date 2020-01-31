@@ -495,6 +495,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="survey_exists">Duplicate survey name</string>
     <!-- UNUSED string name="survey_date">yyyy.mm.dd</string -->
     <string name="survey_delete">Delete survey ?</string>
+    <string name="survey_move">Move shots to survey %1$s ?</string>
     <string name="survey_split">Split survey ?</string>
     <string name="survey_not_attached">WARNING: unattached shots</string>
     <string name="survey_not_extend">WARNING: unset shot extends</string>
@@ -572,6 +573,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="stat_angle_error">Angle errors %1$.2f ± %2$.2f</string>
     <string name="shot_title">SHOT %1$s - %2$s</string>
     <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f</string>
+    <string name="survey_split_move_title">Survey split/move</string>
 
     <string name="survey_stat_duplicate">Duplicate shots %1$d %2$.1f %3$s</string>
     <string name="survey_stat_splay">Splays %1$d</string>
@@ -631,6 +633,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Sketch</string>
     <string name="button_more"    >More</string>
+    <string name="button_move"    >Move</string>
     <string name="button_next"    >Next</string>
     <string name="button_prev"    >Previous</string>
     <string name="button_new"     >New scrap</string>

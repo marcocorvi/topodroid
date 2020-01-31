@@ -19,6 +19,10 @@ import java.util.Locale;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import java.util.List;
+import java.util.Comparator;
+import java.util.Collections;
+
 import java.io.File;
 
 import android.media.AudioManager;
@@ -294,4 +298,15 @@ class TDUtil
     }
   }
 
+  // sort strings by name (alphabetical order)
+  static void sortStringList( List<String> list )
+  {
+    if ( list.size() <= 1 ) return;
+    Comparator<String> cmp = new Comparator<String>() 
+    {
+      @Override
+      public int compare( String s1, String s2 ) { return s1.compareToIgnoreCase( s2 ); }
+    };
+    Collections.sort( list, cmp );
+  }
 }

@@ -196,7 +196,7 @@ class CutNPaste
       textview1 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
-            app.setX310Laser( 1, 0, null, DataType.ALL );
+            app.setX310Laser( Device.LASER_ON, 0, null, DataType.ALL );
             dismissPopupBT();
           }
         } );
@@ -209,7 +209,7 @@ class CutNPaste
       textview2 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
-            app.setX310Laser( 0, 0, null, DataType.ALL );
+            app.setX310Laser( Device.LASER_OFF, 0, null, DataType.ALL );
             dismissPopupBT();
           }
         } );

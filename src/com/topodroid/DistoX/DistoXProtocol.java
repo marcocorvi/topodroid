@@ -328,8 +328,8 @@ class DistoXProtocol extends TopoDroidProtocol
   @Override
   boolean sendCommand( byte cmd )
   {
-    TDLog.Log( TDLog.LOG_PROTO, "sendCommand " + String.format("Send command %02x", cmd ) );
-    // Log.v( "DistoX", "sendCommand " + String.format("Send command %02x", cmd ) );
+    TDLog.Log( TDLog.LOG_PROTO, String.format("send command %02x", cmd ) );
+    // Log.v( "DistoX", String.format("send command %02x", cmd ) );
 
     try {
       mRequestBuffer[0] = (byte)(cmd);
@@ -337,7 +337,7 @@ class DistoXProtocol extends TopoDroidProtocol
       mOut.flush();
       // if ( TDSetting.mPacketLog ) logPacket1( 1L, mRequestBuffer );
     } catch (IOException e ) {
-      TDLog.Error( "sendCommand failed" );
+      TDLog.Error( "send command failed" );
       return false;
     }
     return true;

@@ -487,6 +487,7 @@
     <string name="survey_exists">Съёмка уже существует</string>
     <!-- UNUSED string name="survey_date">ггг.мм.дд</string -->
     <string name="survey_delete">Удалить съёмку?</string>
+    <!-- TODO string name="survey_move">Move shots to survey %1$s ?</string -->
     <string name="survey_split">Разорвать съёмку ?</string>
     <string name="survey_not_attached">ВНИМАНИЕ: не соединенный пикет</string>
     <string name="survey_not_extend">ВНИМАНИЕ: замеры без направления развертки</string>
@@ -561,6 +562,7 @@
     <string name="stat_angle_error">Угловые ошибки %1$.2f ± %2$.2f"</string>
     <string name="shot_title">ПИКЕТЫ %1$s - %2$s"</string>
     <string name="shot_data">Длина %1$.2f  Азимут %2$.1f  Угол %3$.1f"</string>
+    <!-- TODO string name="survey_split_move_title">Survey split/move</string -->
 
     <string name="survey_stat_duplicate">Дублированные пикеты %1$d длина: %2$.1f %3$s</string>
     <string name="survey_stat_splay">Сплеев: %1$d</string>
@@ -619,6 +621,7 @@
     <!-- UNUSED string name="button_azimuth">Азимут</string -->
     <string name="button_plot"    >Абрис</string>
     <string name="button_more"    >Ещё</string>
+    <!-- TODO string name="button_move"    >Move</string -->
     <string name="button_next"    >Далее</string>
     <string name="button_prev"    >Предыдущий</string>
     <string name="button_new"     >Новый скрап</string>

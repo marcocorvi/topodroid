@@ -486,6 +486,7 @@
     <string name="survey_exists">Já existe uma topo com este nome</string>
     <!-- UNUSED string name="survey_date">aaaa.mm.dd</string -->
     <string name="survey_delete">Apagar a topo?</string>
+    <!-- TODO string name="survey_move">Move shots to survey %1$s ?</string -->
     <string name="survey_split">Dividir a topo?</string>
     <string name="survey_not_attached">ALERTA: visadas desconectadas</string>
     <string name="survey_not_extend">ALERTA: visadas sem medidas auxiliares</string>
@@ -559,6 +560,7 @@
     <string name="stat_angle_error">Erros de ângulo: %1$.2f ± %2$.2f</string>
     <string name="shot_title">MEDIDA %1$s - %2$s</string>
     <!-- OK string name="shot_data">D %1$.2f  A %2$.1f  I %3$.1f</string -->
+    <!-- TODO string name="survey_split_move_title">Survey split/move</string -->
 
     <string name="survey_stat_duplicate">Visadas duplicadas - Qt: %1$d Ext: %2$.1f %3$s</string>
     <string name="survey_stat_splay">Medidas auxiliares: %1$d</string>
@@ -617,6 +619,7 @@
     <!-- UNUSED string name="button_azimuth">Azimute</string -->
     <string name="button_plot"    >Croqui</string>
     <string name="button_more"    >Mais</string>
+    <!-- TODO string name="button_move"    >Move</string -->
     <string name="button_next"    >Próximo</string>
     <string name="button_prev"    >Anterior</string>
     <string name="button_new"     >Novo trecho</string>

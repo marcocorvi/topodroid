@@ -482,6 +482,7 @@
     <string name="survey_exists">Rilievo già presente</string>
     <!-- UNUSED string name="survey_date">aaaa.mm.gg</string -->
     <string name="survey_delete">Elimina rilievo?</string>
+    <!-- TODO string name="survey_move">Move shots to survey %1$s ?</string -->
     <string name="survey_split">Dividi rilievo?</string>
     <string name="survey_not_attached">ATTENZIONE: dati scollegati</string>
     <string name="survey_not_extend">WARNING: extend disabilitati</string>
@@ -555,6 +556,7 @@
     <string name="stat_angle_error">Errori angolari %1$.2f ± %2$.2f"</string>
     <string name="shot_title">BATTUTA %1$s - %2$s"</string>
     <string name="shot_data">D %1$.2f  N %2$.1f  I %3$.1f"</string>
+    <!-- TODO string name="survey_split_move_title">Survey split/move</string -->
 
     <string name="survey_stat_duplicate">Battute doppie %1$d %2$.1f %3$s</string>
     <string name="survey_stat_splay">Splay %1$d</string>
@@ -613,6 +615,7 @@
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Disegno</string>
     <string name="button_more"    >Altro</string>
+    <!-- TODO string name="button_move"    >Move</string -->
     <string name="button_next"    >Prossimo</string>
     <string name="button_prev"    >Precedente</string>
     <!-- TODO string name="button_new"     >New scrap</string -->

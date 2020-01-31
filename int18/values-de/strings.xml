@@ -495,6 +495,7 @@
     <string name="survey_exists">Vermessung bereits vorhanden</string>
     <!-- UNUSED string name="survey_date">jjjj.mm.tt</string -->
     <string name="survey_delete">Vermessung löschen?</string>
+    <!-- TODO string name="survey_move">Move shots to survey %1$s ?</string -->
     <string name="survey_split">Vermessung teilen?</string>
     <string name="survey_not_attached">WARNUNG: Unverbundene Messungen</string>
     <string name="survey_not_extend">WARNUNG: Nicht definierte Ausrichtung im Seitenriss</string>
@@ -568,6 +569,7 @@
     <string name="stat_angle_error">Winkelfehler %1$.2f ± %2$.2f"</string>
     <string name="shot_title">Messung %1$s - %2$s"</string>
     <string name="shot_data">L %1$.2f  A %2$.1f  N %3$.1f"</string>
+    <!-- TODO string name="survey_split_move_title">Survey split/move</string -->
 
     <string name="survey_stat_duplicate">Doppelmessungen %1$d %2$.1f %3$s</string>
     <string name="survey_stat_splay">Hilfszüge %1$d</string>
@@ -633,6 +635,7 @@
     <!-- UNUSED string name="button_azimuth">Azimut</string -->
     <string name="button_plot"    >Skizze</string>
     <string name="button_more"    >Mehr</string>
+    <!-- TODO string name="button_move"    >Move</string -->
     <string name="button_next"    >Nächste</string>
     <string name="button_prev"    >Vorherige</string>
     <string name="button_new"     >Neue Teilskizze</string>

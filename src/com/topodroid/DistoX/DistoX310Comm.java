@@ -65,17 +65,26 @@ class DistoX310Comm extends DistoXComm
   {
     if ( connectSocket( address, data_type ) ) {
       switch ( what ) {
-        case 0: // LASER OFF
-          sendCommand( 0x37 );
+        case Device.DISTOX_OFF:
+          sendCommand( (byte)Device.DISTOX_OFF );
           break;
-        case 1: // LASER ON
+        case Device.LASER_ON:
           sendCommand( 0x36 );
           break;
-        case 2: // MEASURE
+        case Device.LASER_OFF:
+          sendCommand( 0x37 );
+          break;
+        case Device.MEASURE:
           sendCommand( 0x38 );
           break;
-        case 3: // MEASURE and DOWNLAOD
+        case Device.MEASURE_DOWNLOAD:
           sendCommand( 0x38 );
+          break;
+        case Device.CALIB_OFF:
+          sendCommand( (byte)Device.CALIB_OFF );
+          break;
+        case Device.CALIB_ON:
+          sendCommand( (byte)Device.CALIB_ON );
           break;
       }
       if ( mCommThread == null && to_read > 0 ) {
@@ -100,7 +109,7 @@ class DistoX310Comm extends DistoXComm
    */
   // private boolean setCalibMode( boolean turn_on )
   // {
-  //   return sendCommand( turn_on? 0x31 : 0x30 ); 
+  //   return sendCommand( turn_on? Device.CALIB_ON : Device.CALIB_OFF ); 
   // }
 
   /** Toggle device calibration mode

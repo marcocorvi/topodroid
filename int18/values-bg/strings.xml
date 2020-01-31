@@ -485,6 +485,7 @@
     <string name="survey_exists">Картировката вече съществува</string>
     <!-- UNUSED string name="survey_date">гггг.мм.дд</string -->
     <string name="survey_delete">Изтриване на картировката?</string>
+    <!-- TODO string name="survey_move">Move shots to survey %1$s ?</string -->
     <string name="survey_split">Разделяне на картировката?</string>
     <string name="survey_not_attached">ВНИМАНИЕ: някои отсечки не са свързани</string>
     <string name="survey_not_extend">Внимание: отсечката не е разгъната</string>
@@ -558,6 +559,7 @@
     <string name="stat_angle_error">Ъглова грешка %1$.2f ± %2$.2f"</string>
     <string name="shot_title">Отсечка %1$s - %2$s"</string>
     <string name="shot_data">Дълж. %1$.2f  Азимут %2$.1f  Наклон %3$.1f"</string>
+    <!-- TODO string name="survey_split_move_title">Survey split/move</string -->
 
     <string name="survey_stat_duplicate">Дублирани отсечки %1$d %2$.1f %3$s</string>
     <string name="survey_stat_splay">Странични %1$d</string>
@@ -616,6 +618,7 @@
     <!-- UNUSED string name="button_azimuth">Азимут</string -->
     <string name="button_plot"    >Скица</string>
     <string name="button_more"    >Още</string>
+    <!-- TODO string name="button_move"    >Move</string -->
     <string name="button_next"    >Следващ</string>
     <!-- TODO string name="button_prev"    >Prevous</string -->
     <!-- TODO string name="button_new"     >New scrap</string -->

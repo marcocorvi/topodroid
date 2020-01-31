@@ -484,6 +484,7 @@
     <string name="survey_exists">Ce nom de relevé existe déjà.</string>
     <!-- UNUSED string name="survey_date">aaaa/mm/jj</string -->
     <string name="survey_delete">Supprimer le relevé ?</string>
+    <!-- TODO string name="survey_move">Move shots to survey %1$s ?</string -->
     <string name="survey_split">Diviser le relevé ?</string>
     <string name ="survey_not_attached">ATTENTION : visées non reliées !</string>
     <string name="survey_not_extend">ATTENTION : direction d\'extension des visées non définies !</string>
@@ -557,6 +558,7 @@
     <string name="stat_angle_error">Erreurs d\'angle %1$.2f ± %2$.2f</string>
     <string name="shot_title">VISÉE %1$s - %2$s"</string>
     <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f"</string>
+    <!-- TODO string name="survey_split_move_title">Survey split/move</string -->
 
     <string name="survey_stat_duplicate">Visées dupliquées %1$d %2$.1f %3$s</string>
     <string name="survey_stat_splay">Visées latérales d\'habillage %1$d</string>
@@ -616,6 +618,7 @@
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Dessin</string>
     <string name="button_more"    >Plus</string>
+    <!-- TODO string name="button_move"    >Move</string -->
     <string name="button_next"    >Suivant</string>
     <!-- TODO string name="button_prev"    >Prevous</string -->
     <!-- TODO string name="button_new"     >New scrap</string -->

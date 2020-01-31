@@ -485,6 +485,7 @@
     <string name="survey_exists">A felmérés már létezik</string>
     <!-- UNUSED string name="survey_date">yyyy.mm.dd</string -->
     <string name="survey_delete">Törli a felmérést?</string>
+    <!-- TODO string name="survey_move">Move shots to survey %1$s ?</string -->
     <string name="survey_split">Felosztja a felmérést?</string>
     <string name="survey_not_attached">FIGYELEM: nem kapcsolódó mérések</string>
     <!-- TODO string name="survey_not_extend">WARNING: unset shot extends</string -->
@@ -558,6 +559,7 @@
     <string name="stat_angle_error">Szöghibák %1$.2f ± %2$.2f</string>
     <string name="shot_title">MÉRÉS %1$s - %2$s</string>
     <string name="shot_data">H %1$.2f  I %2$.1f  L %3$.1f</string>
+    <!-- TODO string name="survey_split_move_title">Survey split/move</string -->
 
     <string name="survey_stat_duplicate">Kettőzött mérés %1$d %2$.1f %3$s</string>
     <string name="survey_stat_splay">Segédpontok %1$d</string>
@@ -617,6 +619,7 @@
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Vázlat</string>
     <string name="button_more"    >Több</string>
+    <!-- TODO string name="button_move"    >Move</string -->
     <!-- TODO string name="button_next"    >Next</string -->
     <!-- TODO string name="button_prev"    >Prevous</string -->
     <!-- TODO string name="button_new"     >New scrap</string -->

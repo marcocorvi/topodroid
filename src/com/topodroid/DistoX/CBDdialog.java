@@ -16,8 +16,6 @@ import java.io.FileFilter;
 import java.util.Locale;
 // import java.util.Set;
 // import java.util.ArrayList;
-// import java.util.Comparator;
-// import java.util.Collections;
 
 // import android.app.Activity;
 // import android.app.Dialog;

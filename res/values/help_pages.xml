@@ -92,6 +92,7 @@
   <string name="SurveyCalibrationDialog" translatable="false">page_survey_calib.htm</string>
   <string name="SurveyNewDialog" translatable="false">page_new_survey.htm</string>
   <string name="SurveyRenameDialog" translatable="false">page_survey_rename.htm</string>
+  <string name="SurveySplitOrMoveDialog" translatable="false">page_survey_split_move.htm</string>
   <string name="SurveyStatDialog" translatable="false">page_stat1.htm</string>
   <string name="SymbolEnableDialog" translatable="false">page_tools.htm</string>
   <string name="SymbolReload" translatable="false">page_symbol_reload.htm</string>

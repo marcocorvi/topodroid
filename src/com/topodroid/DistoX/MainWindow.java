@@ -273,6 +273,15 @@ public class MainWindow extends Activity
     (new SurveyNewDialog( mActivity, this, old_sid, old_id )).show(); // WITH SPLIT
   }
 
+  void startMoveSurvey( long old_sid, long old_id, String new_survey )
+  {
+    Log.v("DistoX-MOVE", "start move survey");
+    if ( mApp.moveSurveyData( old_sid, old_id, new_survey ) ) {
+      mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true ); // FIXME CO-SURVEY
+    } else {
+    }
+  }
+
   @Override 
   public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id)
   {

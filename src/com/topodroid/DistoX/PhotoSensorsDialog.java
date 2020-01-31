@@ -289,15 +289,20 @@ class PhotoSensorsDialog extends MyDialog
       mParent.dialogInsertShotAt( mBlk );
       dismiss();
     } else if ( mButtonSurvey != null && b == mButtonSurvey ) { // SPLIT
-      TopoDroidAlertDialog.makeAlert( mParent, mParent.getResources(), R.string.survey_split,
-        new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick( DialogInterface dialog, int btn ) {
-            mParent.doSplitSurvey();
-            dismiss();
-          }
-        } );
-      // mParent.askSurvey( );
+      if ( TDLevel.overExpert ) {
+        mParent.doSplitOrMoveSurvey( );
+        dismiss();
+      } else {
+        TopoDroidAlertDialog.makeAlert( mParent, mParent.getResources(), R.string.survey_split,
+          new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick( DialogInterface dialog, int btn ) {
+              mParent.doSplitOrMoveSurvey( null );  // null: split
+              dismiss();
+            }
+          } );
+        // mParent.askSurvey( );
+      }
     } else if ( mButtonCheck != null && b == mButtonCheck ) { // CHECK
       TopoDroidAlertDialog.makeAlert( mParent, mParent.getResources(), R.string.shot_check,
         new DialogInterface.OnClickListener() {

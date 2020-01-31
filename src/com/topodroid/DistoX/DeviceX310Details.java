@@ -75,4 +75,5 @@ class DeviceX310Details
 
   static boolean isCalibMode( byte b ) { return ( ( b & CALIB_BIT ) == CALIB_BIT ); }
   static boolean isNotCalibMode( byte b ) { return ( ( b & CALIB_BIT ) == 0 ); }
+
 }

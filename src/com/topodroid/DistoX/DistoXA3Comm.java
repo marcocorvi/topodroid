@@ -62,7 +62,7 @@ class DistoXA3Comm extends DistoXComm
    */
   // private boolean setCalibMode( boolean turn_on )
   // {
-  //   return sendCommand( turn_on? 0x31 : 0x30 ); 
+  //   return sendCommand( turn_on? Device.CALIB_ON : Device.CALIB_OFF ); 
   // }
 
   /** Toggle device calibration mode
@@ -88,9 +88,9 @@ class DistoXA3Comm extends DistoXComm
       } else {
         ret = setCalibMode( DeviceA3Details.isNotCalibMode( result[0] ) );
         // if ( DeviceA3Details.isNotCalibMode( result[0] ) ) {
-        //   ret = mProtocol.sendCommand( (byte)0x31 );  // TOGGLE CALIB ON
+        //   ret = mProtocol.sendCommand( (byte)Device.CALIB_ON ); 
         // } else {
-        //   ret = mProtocol.sendCommand( (byte)0x30 );  // TOGGLE CALIB OFF
+        //   ret = mProtocol.sendCommand( (byte)Device.CALIB_OFF ); 
         // }
       }
     }

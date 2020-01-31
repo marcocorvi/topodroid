@@ -486,6 +486,7 @@
     <string name="survey_exists">Cartarea există deja</string>
     <!-- UNUSED string name="survey_date">yyyy.mm.dd</string -->
     <string name="survey_delete">Șterge schița ?</string>
+    <!-- TODO string name="survey_move">Move shots to survey %1$s ?</string -->
     <string name="survey_split"> Desparte cartarea ?</string>
     <string name="survey_not_attached">AVERTISMENT: măsurători neatașate</string>
     <string name="survey_not_extend">AVERTISMENT: extensii măsurători nedefinite</string>
@@ -560,6 +561,7 @@
     <string name="stat_angle_error">Erori unghi %1$.2f ± %2$.2f</string>
     <string name="shot_title">MĂSURĂTOARE %1$s - %2$s</string>
     <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f</string>
+    <!-- TODO string name="survey_split_move_title">Survey split/move</string -->
 
     <string name="survey_stat_duplicate">Măsurători duplicate %1$d %2$.1f %3$s</string>
     <string name="survey_stat_splay">Radieri %1$d</string>
@@ -618,6 +620,7 @@
     <!-- UNUSED string name="button_azimuth">Azimut</string -->
     <string name="button_plot"    >Schiță</string>
     <string name="button_more"    >Mai multe</string>
+    <!-- TODO string name="button_move"    >Move</string -->
     <string name="button_next"    >Următorul</string>
     <!-- TODO string name="button_prev"    >Prevous</string -->
     <!-- TODO string name="button_new"     >New scrap</string -->

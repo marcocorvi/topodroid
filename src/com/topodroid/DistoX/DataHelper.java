@@ -2380,6 +2380,7 @@ class DataHelper extends DataSetObservable
       } while ( cursor.moveToNext() );
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    TDUtil.sortStringList( ret );
     return ret;
   }
 
@@ -3097,6 +3098,7 @@ class DataHelper extends DataSetObservable
       // ignore
     }
     // TDLog.Log( TDLog.LOG_DB, "found " + list.size() + " names " );
+    TDUtil.sortStringList( list );
     return list;
   }
 
@@ -3770,6 +3772,27 @@ class DataHelper extends DataSetObservable
     }
     return id - 1L;
   }
+  
+  boolean moveShotsBetweenSurveys( long old_sid, long old_id, long new_sid )
+  {
+    boolean ret = false;
+    long offset = getLastShotId( new_sid ) + 1 - old_id;
+    // update shots set id=id+offset, surveyId=new_sid where surveyId=old_sid && id >= old_id;
+    StringWriter sw = new StringWriter();
+    PrintWriter  pw = new PrintWriter( sw );
+    pw.format( Locale.US, "UPDATE shots SET id=id+%d, surveyId=%d WHERE surveyId=%d AND id>=%d", offset, new_sid, old_sid, old_id );
+    Log.v("DistoX-DB", sw.toString() );
+    try {
+      myDB.beginTransaction();
+      myDB.execSQL( sw.toString() );
+      myDB.setTransactionSuccessful();
+      ret = true;
+    } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
+    } catch ( SQLiteException e1 )       { logError("move shots", e1 );
+    } catch ( IllegalStateException e2 ) { logError("move shots", e2 );
+    } finally { myDB.endTransaction(); }
+    return ret;
+  }
 
   long getLastShotId( long sid )
   {
@@ -3959,29 +3982,44 @@ class DataHelper extends DataSetObservable
      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
      return sid;
    }
+   
+  // get survey id (-1L on error)
+  long getSurveyId( String name )
+  {
+    if ( myDB == null ) return -1L;
+    long id = -1L;
+    Cursor cursor = myDB.query( "surveys", new String[] { "id" },
+                                "name = ?", new String[] { name },
+                                null, null, null );
+    if (cursor.moveToFirst() ) {
+      id = cursor.getLong(0);
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return id;
+  }
 
-   String getSurveyFromId( long sid ) { return getNameFromId( SURVEY_TABLE, sid ); }
+  String getSurveyFromId( long sid ) { return getNameFromId( SURVEY_TABLE, sid ); }
 
-   String getSurveyDate( long sid ) { return getSurveyFieldAsString( sid, "day" ); }
+  String getSurveyDate( long sid ) { return getSurveyFieldAsString( sid, "day" ); }
 
-   String getSurveyComment( long sid ) { return getSurveyFieldAsString( sid, "comment" ); }
+  String getSurveyComment( long sid ) { return getSurveyFieldAsString( sid, "comment" ); }
 
-   String getSurveyTeam( long sid ) { return getSurveyFieldAsString( sid, "team" ); }
+  String getSurveyTeam( long sid ) { return getSurveyFieldAsString( sid, "team" ); }
 
-   private String getSurveyFieldAsString( long sid, String attr )
-   {
-     String ret = null;
-     if ( myDB != null ) {
-       Cursor cursor = myDB.query( SURVEY_TABLE, new String[]{ attr },
-           "id=?", new String[]{ Long.toString( sid ) },
-           null, null, null );
-       if (cursor.moveToFirst()) {
-         ret = cursor.getString( 0 );
-       }
-       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-     }
-     return ret;
-   }
+  private String getSurveyFieldAsString( long sid, String attr )
+  {
+    String ret = null;
+    if ( myDB != null ) {
+      Cursor cursor = myDB.query( SURVEY_TABLE, new String[]{ attr },
+          "id=?", new String[]{ Long.toString( sid ) },
+          null, null, null );
+      if (cursor.moveToFirst()) {
+        ret = cursor.getString( 0 );
+      }
+      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    }
+    return ret;
+  }
 
 // -------------------------------------------------------------------------------
 // SKETCH_3D

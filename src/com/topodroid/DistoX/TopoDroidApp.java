@@ -296,6 +296,12 @@ public class TopoDroidApp extends Application
     return ( TDInstance.deviceA == null || ( info != null && info.device.equals( TDInstance.deviceAddress() ) ) );
   }
 
+  public static List<String> getSurveyNames()
+  {
+    if ( mData == null ) return null;
+    return mData.selectAllSurveys();
+  }
+
   public static SurveyInfo getSurveyInfo()
   {
     if ( TDInstance.sid <= 0 ) return null;
@@ -1179,6 +1185,15 @@ public class TopoDroidApp extends Application
       return TDInstance.sid;
     }
     return 0;
+  }
+
+  boolean moveSurveyData( long old_sid, long old_id, String new_survey )
+  {
+    if ( mData == null ) return false;
+    long new_sid = mData.getSurveyId( new_survey );
+    Log.v("DistoX-MOVE", "SID " + old_sid + " " + new_sid + " ID " + old_id );
+    if ( new_sid <= 0 || new_sid == old_sid ) return false;
+    return mData.moveShotsBetweenSurveys( old_sid, old_id, new_sid );
   }
 
   boolean hasSurveyName( String name )

@@ -15,6 +15,18 @@ package com.topodroid.DistoX;
 
 class Device
 {
+  // commands
+  static final int CALIB_OFF        = 0x30;
+  static final int CALIB_ON         = 0x31;
+  static final int SILENT_ON        = 0x32;
+  static final int SILENT_OFF       = 0x33;
+  static final int DISTOX_OFF       = 0x34;
+  static final int DISTOX_35        = 0x35;
+  static final int LASER_ON         =  1; // 0x36
+  static final int LASER_OFF        =  0; // 0x37
+  static final int MEASURE          =  2; // 0x38
+  static final int MEASURE_DOWNLOAD =  3; // 0x38
+
   // FIXME VirtualDistoX
   // static final String ZERO_ADDRESS = "00-00-00-00-00-00";
 

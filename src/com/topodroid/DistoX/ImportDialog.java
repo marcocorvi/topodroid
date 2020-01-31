@@ -14,8 +14,6 @@ package com.topodroid.DistoX;
 import java.io.File;
 // import java.util.Set;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Collections;
 
 // import android.app.Activity;
 // import android.app.Dialog;
@@ -84,13 +82,7 @@ class ImportDialog extends MyDialog
       }
     }
     if ( names.size() > 0 ) { // this is guaranteed
-      // sort files by name (alphabetical order)
-      Comparator<String> cmp = new Comparator<String>() 
-      {
-          @Override
-          public int compare( String s1, String s2 ) { return s1.compareToIgnoreCase( s2 ); }
-      };
-      Collections.sort( names, cmp );
+      TDUtil.sortStringList( names );
       for ( int k=0; k<names.size(); ++k ) {
         mArrayAdapter.add( names.get(k) );
       }

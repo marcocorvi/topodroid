@@ -216,9 +216,9 @@ class TopoDroidComm
       // if ( addr[0] == (byte)0x00 && addr[1] == (byte)0x80 ) { // 0x8000
       //   // TDLog.Log( TDLog.LOG_DISTOX, "toggle reply" );
       //   // if ( (reply[0] & CALIB_BIT) == 0 ) {
-      //   //     mProtocol.sendCommand( (byte)0x31 );  // TOGGLE CALIB ON
+      //   //     mProtocol.sendCommand( (byte)Device.CALIB_ON );
       //   // } else {
-      //   //     mProtocol.sendCommand( (byte)0x30 );  // TOGGLE CALIB OFF
+      //   //     mProtocol.sendCommand( (byte)Device.CALIB_OFF );
       //   // }
       // } else if ( ( addr[1] & (byte)0x80) == (byte)0x80 ) { // REPLY TO READ/WRITE-CALIBs
       //   // TDLog.Log( TDLog.LOG_DISTOX, "write reply" );
@@ -325,7 +325,7 @@ class TopoDroidComm
         ret = mProtocol.sendCommand( (byte)cmd ); // was ret |= ...
         // TDLog.Log( TDLog.LOG_COMM, "sendCommand " + cmd + " " + k + "-ret " + ret );
         // Log.v( "DistoX", "sendCommand " + cmd + " " + k + "-ret " + ret );
-        TDUtil.slowDown( TDSetting.mWaitCommand, "SendCommand sleep interrupted"); // it is ok to be interrupted
+        TDUtil.slowDown( TDSetting.mWaitCommand, "send command sleep interrupted"); // it is ok to be interrupted
       }
     }
     return ret;

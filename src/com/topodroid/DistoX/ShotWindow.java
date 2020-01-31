@@ -404,7 +404,7 @@ public class ShotWindow extends Activity
   @Override
   synchronized public void updateBlockList( long blk_id )
   {
-    Log.v("DistoX-DATA", "Shot window: update block list. Id: " + blk_id );
+    // Log.v("DistoX-DATA", "Shot window: update block list. Id: " + blk_id );
     DBlock blk = mApp_mData.selectShot( blk_id, TDInstance.sid );
     if ( blk != null && mDataAdapter != null ) {
       // FIXME 3.3.0
@@ -855,20 +855,25 @@ public class ShotWindow extends Activity
   // called by PhotoSensorDialog to split the survey
   // void askSurvey( )
   // {
+  //   String new_survey = null; // new survey name
   //   TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.survey_split,
   //     new DialogInterface.OnClickListener() {
   //       @Override
   //       public void onClick( DialogInterface dialog, int btn ) {
-  //         doSplitSurvey();
+  //         doSplitOrMoveSurvey( new_survey );
   //       }
   //   } );
   // }
+  void doSplitOrMoveSurvey()
+  {
+    (new SurveySplitOrMoveDialog( this, this )).show();
+  }
   
-  void doSplitSurvey()
+  void doSplitOrMoveSurvey( String new_survey )
   {
     long old_sid = TDInstance.sid;
     long old_id  = mShotId;
-    // Log.v( TopoDroidApp.TAG, "split survey " + old_sid + " " + old_id );
+    // Log.v( "DistoX-SPLIT_MOVE", "split survey " + old_sid + " " + old_id + " new " + ((new_survey == null)? "null" : new_survey) );
     if ( TopoDroidApp.mShotWindow != null ) {
       if ( TDSetting.mDataBackup ) {
         TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false ); // try_save
@@ -880,7 +885,11 @@ public class ShotWindow extends Activity
       TopoDroidApp.mSurveyWindow.finish();
       TopoDroidApp.mSurveyWindow = null;
     }
-    TopoDroidApp.mActivity.startSplitSurvey( old_sid, old_id ); // SPLIT SURVEY
+    if ( new_survey == null ) {
+      TopoDroidApp.mActivity.startSplitSurvey( old_sid, old_id ); // SPLIT SURVEY
+    } else {
+      TopoDroidApp.mActivity.startMoveSurvey( old_sid, old_id, new_survey ); // MOVE SURVEY
+    }
   }
 
   // @param id   shot id (actually blk.mId)
