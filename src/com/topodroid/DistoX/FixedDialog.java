@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-// import android.util.Log;
+import android.util.Log;
 
 // import java.util.regex.Pattern;
 import java.util.Locale;
@@ -149,6 +149,7 @@ class FixedDialog extends MyDialog
     mButtonDrop    = (Button) findViewById(R.id.fix_drop );
     // mButtonOK      = (Button) findViewById(R.id.fix_ok );
     // mButtonCancel  = (Button) findViewById(R.id.fix_cancel );
+    // Log.v("DistoX-FIXED", "info " + mFxd.lng + " " + mFxd.lat );
     int flag = MyKeyboard.FLAG_POINT_DEGREE;
     if ( TDSetting.mUnitLocation == TDConst.DEGREE ) {
       mTVlng.setText( FixedInfo.double2degree( mFxd.lng ) );

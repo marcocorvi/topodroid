@@ -241,7 +241,7 @@ class QCamCompass extends Dialog
     int act = event.getAction();
     int action = act & MotionEvent.ACTION_MASK;
     boolean ret = false;
-    Log.v("DistoX-QCAM", "on touch ptr " + event.getPointerCount() + " " + event.getX(0) + " " + event.getY(0) );
+    // Log.v("DistoX-QCAM", "on touch ptr " + event.getPointerCount() + " " + event.getX(0) + " " + event.getY(0) );
     if ( action == MotionEvent.ACTION_MOVE ) { 
       if (event.getPointerCount() == 2 ) {
         float x0 = event.getX(1) - event.getX(0);

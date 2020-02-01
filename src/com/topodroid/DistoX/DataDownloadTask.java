@@ -94,7 +94,7 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
 
   private synchronized boolean lock()
   {
-    Log.v("DistoX-DATA", "data download task lock: running is " + ( (running == null )? "null" : (running == this)? "this" : "other") );
+    // Log.v("DistoX-DATA", "data download task lock: running is " + ( (running == null )? "null" : (running == this)? "this" : "other") );
     if ( running != null ) return false;
     running = this;
     return true;
@@ -102,7 +102,7 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
 
   private synchronized void unlock()
   {
-    Log.v("DistoX-DATA", "data download task unlock: running is " + ( (running == null )? "null" : (running == this)? "this" : "other") );
+    // Log.v("DistoX-DATA", "data download task unlock: running is " + ( (running == null )? "null" : (running == this)? "this" : "other") );
     if ( running == this ) running = null;
   }
 

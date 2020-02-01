@@ -4,9 +4,10 @@
 
 When working with TopoDroid, you might find useful some complementary and auxiliary apps:
 <ul>
-<li><i>Cave3D</i> is a 3D viewer for Therion files, and is used by TopoDroid for the 3D display</li>
+<li><i>Cave3D</i> is a 3D viewer used by TopoDroid for the 3D display</li>
 <li><i>Proj4</i> is a (very simple) coordinate converter app, used by TopoDroid to convert long-lat values to other coordinate systems</li>
 <li><i>ThManager</i> is a manager to put together surveys, exported in Therion format, in a cave project, ie, a thconfig file</li>
+<li><i>TdManager</i> is an alternative to ThManager. It puts together surveys directly from the TopoDroid database, without passing through exports</li>
 <li><i>MobileTopographer</i> is a geolocation app. You can use it to take the point coordinates and have TopoDroid read them from the point file in MobileTopographer pointlist.</li>
 <li><i>GPS-Impetus</i> is another geolocation app, that can be used to take coordinates and copied to TopoDroid fixed-point dialog.</li>
 <li>an app to take pictures (usually there is a <i>Camera</i> app)</li>
@@ -27,5 +28,15 @@ In addition, depending how you process your surveys, you may want to install
 </ul><br><p>
 
 Finally a <i>wakeup-touch</i> app turns out to be very convenient during the survey session in the cave. In order to save battery you may want to set the display sleep timeout very short (eg, half a minute). With a wakeup-touch app you do not have to press the power button to wake up your android, but just need to touch the proximity sensor. I use to keep my device in a protective box opening only the cover lid. The power button on the side is therefore not accessible when the device is in the box, and the wakeup-touch app is really handy.<br><p>
+
+<b>Proj4</b><br>
+TopoDroid stores point coordinates in the reference system geographical long-lat WGS-84.
+Altitudes are stored both referred to the ellipsoid and to the geoid.<br><p>
+
+The app Proj4 is used by TopoDroid in two ways to transform coordinates between WGS-84 and other coordinate systems.
+<ul>
+<li>to <a href="page_fixed.htm">convert</a> the coordinates of a point from long-lat (WGS-84) to another coordinate reference system.</li> 
+<li>to <a href="page_fixed_add.htm">enter</a> the coordinates of a point in a different coordinate system.</li>
+</ul><br><p>
 
 </body></html>

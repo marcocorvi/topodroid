@@ -181,10 +181,10 @@ class Archiver
       ZipInputStream szin = new ZipInputStream( fis );
       while ( ( sze = szin.getNextEntry() ) != null ) {
         String symbolfilename = dirpath + sze.getName();
-        Log.v("DistoX-ZIP", "try to uncompress symbol " + symbolfilename );
+        // Log.v("DistoX-ZIP", "try to uncompress symbol " + symbolfilename );
         File symbolfile = new File( symbolfilename );
         if ( ! symbolfile.exists() ) { // don't overwrite
-          Log.v("DistoX-ZIP", "uncompress symbol " + symbolfilename );
+          // Log.v("DistoX-ZIP", "uncompress symbol " + symbolfilename );
           FileOutputStream sfout = new FileOutputStream( symbolfilename ); // uncompress symbols zip
           while ( ( c = szin.read( sbuffer ) ) != -1 ) {
             sfout.write(sbuffer, 0, c);
@@ -202,7 +202,7 @@ class Archiver
           line = line.trim();
           if ( line.startsWith("th_name") ) {
             String th_name = line.substring(8).trim();
-            Log.v("DistoX-ZIP", "enable " + th_name );
+            // Log.v("DistoX-ZIP", "enable " + th_name );
             TopoDroidApp.mData.setSymbolEnabled( prefix + th_name, true );
             break;
           }
@@ -231,7 +231,7 @@ class Archiver
     zipname = TDPath.getSurveyZipFile( survey );
     TDPath.checkPath( zipname );
     // TDLog.Log( TDLog.LOG_IO, "zip export file: " + zipname );
-    Log.v( "DistoX-ZIP", "zip export file: " + zipname + " pre " + ret );
+    // Log.v( "DistoX-ZIP", "zip export file: " + zipname + " pre " + ret );
 
     ZipOutputStream zos = null;
     try {
@@ -477,8 +477,7 @@ class Archiver
               BrushManager.reloadAreaLibrary( mApp.getResources() );
             }
           } else {
-            Log.v("DistoX-ZIP", "zip entry " + ze.getName() );
-            // unexpected file type
+            TDLog.Error("unexpected file type " + ze.getName() );
             // pathname = null; // already null
           }
           TDLog.Log( TDLog.LOG_ZIP, "Zip filename \"" + pathname + "\"" );

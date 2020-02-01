@@ -114,7 +114,7 @@ class TDandroid
     if ( MustRestart ) { // if a permission has not been granted request it
       // TDToast.make( "TopoDroid cannot do anything useful without" + sb.toString() );
       activity.requestPermissions( perms, REQUEST_PERMISSIONS );
-      Log.v("DistoX-PERMS", "exit 1");
+      // Log.v("DistoX-PERMS", "exit 1");
       android.os.Process.killProcess( android.os.Process.myPid() );
       System.exit( 1 );
     }

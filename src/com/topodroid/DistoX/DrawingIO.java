@@ -679,7 +679,7 @@ class DrawingIO
           BufferedInputStream bfis = new BufferedInputStream( fis );
           dis = new DataInputStream( bfis );
         // } else {
-        //   Log.v("DistoX-IO", "cache hit " + filename );
+        //   // Log.v("DistoX-IO", "cache hit " + filename );
         //   ByteArrayInputStream bis = new ByteArrayInputStream( bos.toByteArray() );
         //   dis = new DataInputStream( bis );
         // }
@@ -828,7 +828,7 @@ class DrawingIO
           BufferedInputStream bfis = new BufferedInputStream( fis );
           dis = new DataInputStream( bfis );
         // } else {
-        //   Log.v("DistoX-IO", "cache hit " + filename );
+        //   // Log.v("DistoX-IO", "cache hit " + filename );
         //   ByteArrayInputStream bis = new ByteArrayInputStream( bos.toByteArray() );
         //   dis = new DataInputStream( bis );
         // }
@@ -1527,7 +1527,7 @@ class DrawingIO
   //           break;
   //         case 'N':
   //           int idx = dis.readInt();
-  //           Log.v("DistoX-EXP", "scrap index " + idx );
+  //           // Log.v("DistoX-EXP", "scrap index " + idx );
   //           if ( idx > scrap_index ) scrap_index = idx;
   //           break;
   //         case 'P':
@@ -1565,10 +1565,10 @@ class DrawingIO
   //     dis.close();
   //     fis.close();
   //   } catch ( FileNotFoundException e ) { // this is ok
-  //     Log.v("DistoX_EXP", "file not found");
+  //     // Log.v("DistoX_EXP", "file not found");
   //     scrap_index = -1;
   //   } catch ( IOException e ) { 
-  //     Log.v("DistoX_EXP", "IO exception " + e.getMessage() );
+  //     // Log.v("DistoX_EXP", "IO exception " + e.getMessage() );
   //   }
   //   return scrap_index;
   // }

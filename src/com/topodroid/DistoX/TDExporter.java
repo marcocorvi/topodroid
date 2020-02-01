@@ -635,8 +635,8 @@ class TDExporter
     final String multigeometry_end = "  </MultiGeometry>\n";
     final String altitudeMode = "    <altitudeMode>absolute</altitudeMode>\n";
     final String style_url = "    <styleUrl>%s</styleUrl>\n";
-    final String coordinates3 = "    <coordinates>%f,%f,%f</coordinates>\n";
-    final String coordinates6 = "    %f,%f,%f %f,%f,%f\n";
+    final String coordinates3 = "    <coordinates>%.8f,%.8f,%.1f</coordinates>\n";
+    final String coordinates6 = "    %.8f,%.8f,%.1f %.8f,%.8f,%.1f\n";
     // Log.v("DistoX", "export as KML " + filename );
     List<DistoXNum> nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false ); // false: Geoid altitude
     if ( nums == null || nums.size() == 0 ) {
@@ -878,7 +878,7 @@ class TDExporter
             pw.format("      %s \"centerline\",\n", item );
             pw.format("      %s \"%s %s\",\n", name, from.name, to.name );
             pw.format("      %s \"LineString\",\n", geom );
-            pw.format(Locale.US, "      %s [ [ %.6f, %.6f, %.1f ], [ %.6f, %.6f, %.1f ] ]\n", coords, from.e, from.s, from.v, to.e, to.s, to.v );
+            pw.format(Locale.US, "      %s [ [ %.8f, %.8f, %.1f ], [ %.8f, %.8f, %.1f ] ]\n", coords, from.e, from.s, from.v, to.e, to.s, to.v );
             pw.format("    },\n");
           }
         }
@@ -893,7 +893,7 @@ class TDExporter
             pw.format("      %s \"splay\",\n", item );
             pw.format("      %s \"%s\",\n", name, from.name );
             pw.format("      %s \"LineString\",\n", geom );
-            pw.format(Locale.US, "     %s [ [ %.6f, %.6f, %.1f ], [ %.6f, %.6f, %.1f ] ]\n", coords, from.e, from.s, from.v, sp.e, sp.s, sp.v );
+            pw.format(Locale.US, "     %s [ [ %.8f, %.8f, %.1f ], [ %.8f, %.8f, %.1f ] ]\n", coords, from.e, from.s, from.v, sp.e, sp.s, sp.v );
             pw.format("    },\n");
           }
         }
@@ -907,7 +907,7 @@ class TDExporter
             pw.format("      %s \"station\",\n", item );
             pw.format("      %s \"%s\",\n", name, st.name );
             pw.format("      %s \"Point\",\n", geom );
-            pw.format("      %s [ %.6f %.6f %.1f ]\n", coords, st.e, st.s, st.v );
+            pw.format("      %s [ %.8f %.8f %.1f ]\n", coords, st.e, st.s, st.v );
             pw.format("    },\n");
           }
         }
@@ -982,9 +982,9 @@ class TDExporter
           NumStation from = sh.from;
           NumStation to   = sh.to;
           if ( from != last ) {
-            pw.format(Locale.US, "%f, %f,1, %f,%d,,\r\n", from.e, from.s, from.v, days );
+            pw.format(Locale.US, "%.8f, %.8f,1, %.1f,%d,,\r\n", from.e, from.s, from.v, days );
           }
-          pw.format(Locale.US, "%f,%f,0,%f,%d,,\r\n", to.e, to.s, to.v, days );
+          pw.format(Locale.US, "%.8f,%.8f,0,%.1f,%d,,\r\n", to.e, to.s, to.v, days );
           last = to;
         }
       }
@@ -1099,7 +1099,7 @@ class TDExporter
     for ( PlotInfo plt : plots ) {
       if ( PlotInfo.isSketch2D( plt.type ) ) {
         int scrap_nr = plt.maxscrap;
-        Log.v("DistoX-EXP", plt.name + " is 2D sketch - scraps " + scrap_nr );
+        // Log.v("DistoX-EXP", plt.name + " is 2D sketch - scraps " + scrap_nr );
         File plot_file = new File( TDPath.getSurveyPlotTh2File( info.name, plt.name ) );
         if ( plot_file.exists() ) {
           pw.format("  # map m%s -projection %s\n", plt.name, PlotInfo.projName[ plt.type ] );

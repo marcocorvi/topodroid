@@ -3781,7 +3781,7 @@ class DataHelper extends DataSetObservable
     StringWriter sw = new StringWriter();
     PrintWriter  pw = new PrintWriter( sw );
     pw.format( Locale.US, "UPDATE shots SET id=id+%d, surveyId=%d WHERE surveyId=%d AND id>=%d", offset, new_sid, old_sid, old_id );
-    Log.v("DistoX-DB", sw.toString() );
+    // Log.v("DistoX-DB", sw.toString() );
     try {
       myDB.beginTransaction();
       myDB.execSQL( sw.toString() );

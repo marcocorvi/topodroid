@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-// import android.util.Log;
+import android.util.Log;
 
 // import java.util.regex.Pattern;
 // import java.util.Locale;
@@ -187,6 +187,7 @@ public class FixedActivity extends Activity
   private FixedInfo addLocation( String station, double lng, double lat, double h_ell, double h_geo,
                                  String comment, long source )
   {
+    // Log.v("DistoX-FIXED", "location " + station + ": " + lng + " " + lat );
     long id = TopoDroidApp.mData.insertFixed( TDInstance.sid, -1L, station, lng, lat, h_ell, h_geo, comment, 0L, source );
     return new FixedInfo( id, station, lng, lat, h_ell, h_geo, comment, source ); 
   }

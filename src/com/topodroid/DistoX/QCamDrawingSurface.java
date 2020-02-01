@@ -49,7 +49,7 @@ import android.util.AttributeSet;
 public class QCamDrawingSurface extends SurfaceView
                                 implements SurfaceHolder.Callback 
 {
-  private static final String TAG = "DistoX-QCAM";
+  // private static final String TAG = "DistoX-QCAM";
   // private final Context mContext;
   QCamCompass mQCam;
 
