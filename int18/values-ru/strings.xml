@@ -487,7 +487,7 @@
     <string name="survey_exists">Съёмка уже существует</string>
     <!-- UNUSED string name="survey_date">ггг.мм.дд</string -->
     <string name="survey_delete">Удалить съёмку?</string>
-    <!-- TODO string name="survey_move">Move shots to survey %1$s ?</string -->
+    <string name="survey_move">Переместить замеры в съёмку %1$s ?</string>
     <string name="survey_split">Разорвать съёмку ?</string>
     <string name="survey_not_attached">ВНИМАНИЕ: не соединенный пикет</string>
     <string name="survey_not_extend">ВНИМАНИЕ: замеры без направления развертки</string>
@@ -513,7 +513,7 @@
     <string name="name">Название</string>
     <string name="team">группа топосъёмки</string>
     <string name="init_station">начальный пикет</string>
-    <!-- TODO string name="second_device">second device</string -->
+    <string name="second_device">второе устройство</string>
     <string name="start_station">начальный пикет [%1$s]</string>
     <!-- UNUSED string name="toggle_device">Переключить устройство в режим калибровки</string -->
     <string name="toggle_failed">Не удалось переключить DistoX</string>
@@ -562,7 +562,7 @@
     <string name="stat_angle_error">Угловые ошибки %1$.2f ± %2$.2f"</string>
     <string name="shot_title">ПИКЕТЫ %1$s - %2$s"</string>
     <string name="shot_data">Длина %1$.2f  Азимут %2$.1f  Угол %3$.1f"</string>
-    <!-- TODO string name="survey_split_move_title">Survey split/move</string -->
+    <string name="survey_split_move_title">Разделить/переместить съёмку</string>
 
     <string name="survey_stat_duplicate">Дублированные пикеты %1$d длина: %2$.1f %3$s</string>
     <string name="survey_stat_splay">Сплеев: %1$d</string>
@@ -621,7 +621,7 @@
     <!-- UNUSED string name="button_azimuth">Азимут</string -->
     <string name="button_plot"    >Абрис</string>
     <string name="button_more"    >Ещё</string>
-    <!-- TODO string name="button_move"    >Move</string -->
+    <string name="button_move"    >Переместить</string>
     <string name="button_next"    >Далее</string>
     <string name="button_prev"    >Предыдущий</string>
     <string name="button_new"     >Новый скрап</string>
@@ -816,7 +816,7 @@
     <string name="help_select_mode">Инструмент выделения</string>
     <string name="help_erase_mode">Тип стираемых элементов</string>
     <string name="help_erase_size">Размер ластика [S/M/L]</string>
-    <!-- TODO string name="help_select_size">Select tool size [S/M/L]</string -->
+    <string name="help_select_size">Выбрать размер инструмента [S/M/L]</string>
     <string name="help_previous">Предыдущий выбранный элемент</string>
     <string name="help_next">Следующий элемент в выборке</string>
     <string name="help_recover">Восстановить абрис из Бекапа</string>
@@ -1117,8 +1117,8 @@
   <string name="pref_conn_mode_summary">Режим подключения к DistoX для передачи данных</string>
   <string name="pref_auto_reconnect_title">Авто подключение</string>
   <string name="pref_auto_reconnect_summary">Переподключиться при потере соединения с DistoX</string>
-  <!-- TODO string name="pref_second_distox_title">Two-DistoX survey</string -->
-  <!-- TODO string name="pref_second_distox_summary">Surveying with two DistoX</string -->
+  <string name="pref_second_distox_title">Съёмка двумя DistoX</string>
+  <string name="pref_second_distox_summary">Топосъёмка с одновременным использованием двух DistoX</string>
   <string name="pref_auto_pair_title">Автоматическое сопряжение</string>
   <string name="pref_auto_pair_summary">Автоматическое сопряжение устройства DistoX после сканирования</string>
   <string name="pref_head_tail_title">Кол-во новых замеров</string>
