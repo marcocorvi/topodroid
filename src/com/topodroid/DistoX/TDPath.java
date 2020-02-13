@@ -288,6 +288,8 @@ class TDPath
     return file;
   }
 
+  static String getSettingsPath() { return PATH_DEFAULT + "settings.txt"; }
+
   // ------------------------------------------------------------------
 
   // ------------------------------------------------------------------

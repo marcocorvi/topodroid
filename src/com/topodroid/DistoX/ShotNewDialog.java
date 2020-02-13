@@ -329,6 +329,18 @@ class ShotNewDialog extends MyDialog
     return true;
   }
 
+  private float divingBearing( String b )
+  {
+    float bx = 0;
+    if ( b != null && b.length() > 0 ) {
+      try {
+        bx = 360 - Float.parseFloat( b.replace(',','.') ); // DIVING_BEARING
+        if ( bx >= 360 ) bx -= 360;
+      } catch ( NumberFormatException e ) { }
+    }
+    return bx;
+  }
+
   // FIXME synchronized ?
   @Override
   public void onClick(View v) 
@@ -398,6 +410,7 @@ class ShotNewDialog extends MyDialog
       else { // let TopoDroid choose
         try {
           float bx = Float.parseFloat( bearing.replace(',','.') );
+          if ( diving ) { bx = 360 - bx; if ( bx >= 360 ) bx -= 360; } // DIVING_BEARING
           shot_extend = TDAzimuth.computeLegExtend( bx );
         } catch ( NumberFormatException e ) { }
       }
@@ -422,18 +435,29 @@ class ShotNewDialog extends MyDialog
             backdistance = distance;
           }
           if ( bearing.length() > 0 && clino.length() > 0 ) {
-            if ( (! diving) && backbearing.length() > 0 && backclino.length() > 0 ) {
-              blk = mApp.insertManualShot( mAt, shot_to, shot_from,
+            if ( backbearing.length() > 0 && backclino.length() > 0 ) {
+              if ( diving ) {
+                float bbx = divingBearing( backbearing ); // DIVING_BEARING
+                blk = mApp.insertManualShot( mAt, shot_to, shot_from,
+                             Float.parseFloat(backclino.replace(',','.') ),
+                             bbx, // DIVING_BEARING Float.parseFloat(backbearing.replace(',','.') ),
+                             Float.parseFloat(backdistance.replace(',','.') ),
+                             back_extend, DBlock.FLAG_SURVEY,
+                             null, null, null, null, null );
+              } else {
+                blk = mApp.insertManualShot( mAt, shot_to, shot_from,
                              Float.parseFloat(backdistance.replace(',','.') ),
                              Float.parseFloat(backbearing.replace(',','.') ),
                              Float.parseFloat(backclino.replace(',','.') ),
                              back_extend, DBlock.FLAG_SURVEY,
                              null, null, null, null, null );
+              }
             }
 	    if ( diving ) {
+              float bx = divingBearing( bearing ); // DIVING_BEARING
               blk = mApp.insertManualShot( mAt, shot_from, shot_to,
                                Float.parseFloat( clino.replace(',','.') ),    // diving length
-                               Float.parseFloat( bearing.replace(',','.') ),
+                               bx, // DIVING_BEARIN Float.parseFloat( bearing.replace(',','.') ),
                                Float.parseFloat( distance.replace(',','.') ), // diving depth
                                shot_extend, DBlock.FLAG_SURVEY,
                                mETleft.getText().toString().replace(',','.') ,
@@ -454,8 +478,21 @@ class ShotNewDialog extends MyDialog
                                splay_station );
 	    }
           } else {
-            if ( (! diving) && backbearing.length() > 0 && backclino.length() > 0 ) {
-              blk = mApp.insertManualShot( mAt, shot_to, shot_from,
+            if ( backbearing.length() > 0 && backclino.length() > 0 ) {
+              if ( diving ) {
+                float bbx = divingBearing( backbearing ); // DIVING_BEARING
+                blk = mApp.insertManualShot( mAt, shot_to, shot_from,
+                             Float.parseFloat( backclino.replace(',','.') ),
+                             bbx, // Float.parseFloat( backbearing.replace(',','.') ),
+                             Float.parseFloat( backdistance.replace(',','.') ),
+                             back_extend, DBlock.FLAG_SURVEY,
+                             mETleft.getText().toString().replace(',','.') ,
+                             mETright.getText().toString().replace(',','.') ,
+                             mETup.getText().toString().replace(',','.') ,
+                             mETdown.getText().toString().replace(',','.') ,
+                             splay_station );
+              } else {
+                blk = mApp.insertManualShot( mAt, shot_to, shot_from,
                              Float.parseFloat( backdistance.replace(',','.') ),
                              Float.parseFloat( backbearing.replace(',','.') ),
                              Float.parseFloat( backclino.replace(',','.') ),
@@ -465,14 +502,16 @@ class ShotNewDialog extends MyDialog
                              mETup.getText().toString().replace(',','.') ,
                              mETdown.getText().toString().replace(',','.') ,
                              splay_station );
+              }
             }
           }
         } else { // SPLAY SHOT
           if ( bearing.length() > 0 && clino.length() > 0 ) {
             if ( diving ) {
+              float bx = divingBearing( bearing ); // DIVING_BEARING
               blk = mApp.insertManualShot( mAt, shot_from, shot_to,
                                Float.parseFloat(clino.replace(',','.') ),    // diving length
-                               Float.parseFloat(bearing.replace(',','.') ),
+                               bx, // Float.parseFloat(bearing.replace(',','.') ),
                                Float.parseFloat(distance.replace(',','.') ), // diving depth
                                shot_extend, DBlock.FLAG_SURVEY,
                                null, null, null, null, null );
@@ -485,12 +524,22 @@ class ShotNewDialog extends MyDialog
                                null, null, null, null, null );
 	    }
           } else if ( (! diving) && backbearing.length() > 0 && backclino.length() > 0 ) {
-            blk = mApp.insertManualShot( mAt, shot_to, shot_from,
+            if ( diving ) {
+              float bbx = divingBearing( backbearing ); // DIVING_BEARING
+              blk = mApp.insertManualShot( mAt, shot_to, shot_from,
+                             Float.parseFloat(backclino.replace(',','.') ),
+                             bbx, // Float.parseFloat(backbearing.replace(',','.') ),
+                             Float.parseFloat(backdistance.replace(',','.') ),
+                             back_extend, DBlock.FLAG_SURVEY,
+                             null, null, null, null, null );
+            } else {
+              blk = mApp.insertManualShot( mAt, shot_to, shot_from,
                              Float.parseFloat(backdistance.replace(',','.') ),
                              Float.parseFloat(backbearing.replace(',','.') ),
                              Float.parseFloat(backclino.replace(',','.') ),
                              back_extend, DBlock.FLAG_SURVEY,
                              null, null, null, null, null );
+            }
           }
         }
         mApp.setCurrentStationName( null );

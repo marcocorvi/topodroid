@@ -285,6 +285,11 @@ public class TDPrefActivity extends Activity
                   TDSetting.exportSettings();
                   return null;
                 }
+                @Override
+                protected void onPostExecute( Void v )
+                {
+                  TDToast.make( String.format( getResources().getString( R.string.exported_settings ), TDPath.getSettingsPath() ) );
+                }
               }).execute();
               finish();
           } } );

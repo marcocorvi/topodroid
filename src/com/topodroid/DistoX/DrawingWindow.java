@@ -401,6 +401,8 @@ public class DrawingWindow extends ItemDrawer
   private DrawingBrush mCurrentBrush;
   // private Path  mCurrentPath;
 
+  private static boolean mRecentToolsForward = true;
+
   // LinearLayout popup_layout = null;
   private PopupWindow mPopupEdit   = null;
   private PopupWindow mPopupFilter = null;
@@ -4520,6 +4522,7 @@ public class DrawingWindow extends ItemDrawer
                    mHotItemType == DrawingPath.DRAWING_PATH_LINE ||
                    mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // SNAP to nearest point POINT/LINE/AREA
                 if ( mDrawingSurface.moveHotItemToNearestPoint( TDSetting.mSelectness/2 ) ) {
+                  clearSelected();
                   modified();
                 } else {
                   TDToast.makeBad( R.string.failed_snap_to_point );
@@ -5029,7 +5032,9 @@ public class DrawingWindow extends ItemDrawer
       // if ( TDSetting.mPickerType == TDSetting.PICKER_RECENT ) { 
       //   new ItemRecentDialog(mActivity, this, mType ).show();
       // } else {
-        new ItemPickerDialog(mActivity, this, mType, mSymbol ).show();
+        // new ItemPickerDialog(mActivity, this, mType, mSymbol ).show();
+        mRecentToolsForward = ! mRecentToolsForward;
+        rotateRecentToolset();
       // }
 
     } else if ( TDLevel.overBasic && b == mButton3[ BTN_REMOVE ] ) {
@@ -6847,20 +6852,36 @@ public class DrawingWindow extends ItemDrawer
     mApp_mData.updatePlotMaxScrap( mSid, mPid, scrap_idx );
   }
 
-  void rotateRecentToolset()
+  void rotateRecentToolset( )
   { 
-    if ( mRecentTools == mRecentPoint ) {
-      mRecentTools = mRecentLine;
-      mRecentDimX  = 
-      mRecentDimY  = Float.parseFloat( getResources().getString( R.string.dimxp ) );
-    } else if ( mRecentTools == mRecentLine ) {
-      mRecentTools = mRecentArea;
-      mRecentDimX  = Float.parseFloat( getResources().getString( R.string.dimxl ) );
-      mRecentDimY  = Float.parseFloat( getResources().getString( R.string.dimyl ) );
-    } else if ( mRecentTools == mRecentArea ) {
-      mRecentTools = mRecentPoint;
-      // mRecentDimX  = Float.parseFloat( getResources().getString( R.string.dimxl ) );
-      // mRecentDimY  = Float.parseFloat( getResources().getString( R.string.dimyl ) );
+    if ( mRecentToolsForward ) {
+      if ( mRecentTools == mRecentPoint ) {
+        mRecentTools = mRecentLine;
+        mRecentDimX  = 
+        mRecentDimY  = Float.parseFloat( getResources().getString( R.string.dimxp ) );
+      } else if ( mRecentTools == mRecentLine ) {
+        mRecentTools = mRecentArea;
+        mRecentDimX  = Float.parseFloat( getResources().getString( R.string.dimxl ) );
+        mRecentDimY  = Float.parseFloat( getResources().getString( R.string.dimyl ) );
+      } else if ( mRecentTools == mRecentArea ) {
+        mRecentTools = mRecentPoint;
+        // mRecentDimX  = Float.parseFloat( getResources().getString( R.string.dimxl ) );
+        // mRecentDimY  = Float.parseFloat( getResources().getString( R.string.dimyl ) );
+      }
+    } else {
+      if ( mRecentTools == mRecentPoint ) {
+        mRecentTools = mRecentArea;
+        // mRecentDimX  = Float.parseFloat( getResources().getString( R.string.dimxl ) );
+        // mRecentDimY  = Float.parseFloat( getResources().getString( R.string.dimyl ) );
+      } else if ( mRecentTools == mRecentLine ) {
+        mRecentTools = mRecentPoint;
+        mRecentDimX  = Float.parseFloat( getResources().getString( R.string.dimxl ) );
+        mRecentDimY  = Float.parseFloat( getResources().getString( R.string.dimyl ) );
+      } else if ( mRecentTools == mRecentArea ) {
+        mRecentTools = mRecentLine;
+        mRecentDimX  = 
+        mRecentDimY  = Float.parseFloat( getResources().getString( R.string.dimxp ) );
+      }
     }
     setBtnRecent();
   }

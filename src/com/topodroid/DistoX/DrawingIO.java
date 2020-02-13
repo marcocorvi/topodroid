@@ -765,6 +765,9 @@ class DrawingIO
             case 'X':
               path = DrawingStationName.loadDataStream( version, dis ); // consume DrawingStationName data
               break;
+            // case 'G':
+            //   path = DrawingFixedName.loadDataStream( version, dis ); // consume DrawingFixedName data
+            //   break;
             case 'F':
               // TDLog.Log( TDLog.LOG_PLOT, "<F>" );
               if ( complete ) break; // continue parsing stations
@@ -893,6 +896,9 @@ class DrawingIO
             case 'X':
               DrawingStationName.loadDataStream( version, dis ); // consume DrawingStationName data
               break;
+            // case 'G':
+            //   DrawingFixedName.loadDataStream( version, dis ); // consume DrawingFixedName data
+            //   break;
             case 'F':
             case 'E':
             default:
@@ -963,7 +969,14 @@ class DrawingIO
       //       if ( station != null && station.barriered() ) continue;
       //       if ( bbox.left > st.cx || bbox.right  < st.cx ) continue;
       //       if ( bbox.top  > st.cy || bbox.bottom < st.cy ) continue;
-      //       st.toDataStream( dos );
+      //       st.toDataStream( dos, -1 );
+      //     }
+      //   }
+      //   synchronized( fixeds ) {
+      //     for ( DrawingFixedName fx : fixeds ) {
+      //       if ( bbox.left > fx.cx || bbox.right  < fx.cx ) continue;
+      //       if ( bbox.top  > fx.cy || bbox.bottom < fx.cy ) continue;
+      //       fx.toDataStream( dos, -1 );
       //     }
       //   }
       // }
@@ -985,7 +998,8 @@ class DrawingIO
       // final List<ICanvasCommand> cstack,
       // final List<DrawingStationPath> userstations,
       final List< Scrap > scraps,
-      final List<DrawingStationName> stations )
+      final List<DrawingStationName> stations // , final List<DrawingFixedName> fixeds
+  )
   {
     // Log.v("DistoX", "cstack size " + cstack.size() );
     try { 
@@ -1044,6 +1058,13 @@ class DrawingIO
             st.toDataStream( dos, -1 );
           }
         }
+        // synchronized( fixeds ) {
+        //   for ( DrawingFixedName fx : fixeds ) {
+        //     if ( bbox.left > fx.cx || bbox.right  < fx.cx ) continue;
+        //     if ( bbox.top  > fx.cy || bbox.bottom < fx.cy ) continue;
+        //     fx.toDataStream( dos, -1 );
+        //   }
+        // }
       }
       dos.write('E'); // end
     } catch ( IOException e ) {

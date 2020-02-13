@@ -251,6 +251,16 @@ void readSpecial( FILE * fp ) // special path has no group
   printf("%ld= SPECIAL: Type %d X %.2f Y %.2f Level %02x Scrap %d\n", pos, s, x, y, lvl, scrap );
 }
 
+void readFixedPoint( FILE * fp ) // special path has no group
+{
+  long pos = ftell( fp );
+  float x = readFloat( fp ); // center X
+  float y = readFloat( fp ); // center Y
+  int lvl = (VERSION >= 401090 )? readInt( fp ) : 0xff;
+  int scrap = (VERSION >= 401160 )? readInt( fp ) : 0;
+  printf("%ld= FIXED: %.2f Y %.2f Level %02x Scrap %d\n", pos, x, y, lvl, scrap );
+}
+
 void readSpecialPoint( FILE * fp, const char * type )  // audio - photo
 {
   long pos = ftell( fp );
@@ -330,8 +340,12 @@ int main( int argc, char ** argv )
       case 'X': // station name
         readAutoStation( fp );
         break;
+      case 'G':
+        readFixedPoint( fp );
+        break;
       case 'J': // special
 	readSpecial( fp );
+        break;
       case 'Y': // photo
 	readSpecialPoint( fp, "Photo" );
 	break;

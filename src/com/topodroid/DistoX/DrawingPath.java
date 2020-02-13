@@ -48,6 +48,7 @@ class DrawingPath extends RectF
   static final int DRAWING_PATH_AREA    = 6;
   static final int DRAWING_PATH_NAME    = 7; // station name (from survey data)
   static final int DRAWING_PATH_NORTH   = 8; // north line (5m long)
+  static final int DRAWING_PATH_GEO     = 9; // georeferenced point
 
   Path mPath;
   Path mTransformedPath;

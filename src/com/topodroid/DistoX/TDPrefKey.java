@@ -1540,7 +1540,7 @@ class TDPrefKey
   static String[] GEEKIMPORTdef = {
     FALSE,
     TDString.ZERO, // SurveyInfo.DATAMODE_NORMAL
-    FALSE,
+    TRUE,
     null
   };
 

@@ -48,7 +48,7 @@ import java.util.HashMap;
 @SuppressWarnings("SyntaxError")
 class DataHelper extends DataSetObservable
 {
-  static final String DB_VERSION = "42";
+  static final String DB_VERSION = "42"; // FIXME agrees with Cave3DThParser values
   static final int DATABASE_VERSION = 42;
 
   static final int DATABASE_VERSION_MIN = 21; // was 14

@@ -393,7 +393,7 @@ class DrawingSurface extends SurfaceView
     try {
       canvas = holder.lockCanvas();
       // canvas.drawColor(0, PorterDuff.Mode.CLEAR);
-      if ( canvas != null ) {
+      if ( canvas != null && commandManager != null ) {
         mWidth  = canvas.getWidth();
         mHeight = canvas.getHeight();
         canvas.drawColor(0, PorterDuff.Mode.CLEAR);

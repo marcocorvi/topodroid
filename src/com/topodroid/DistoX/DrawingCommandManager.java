@@ -69,9 +69,10 @@ class DrawingCommandManager
   final private List<DrawingPath>        mLegsStack;
   final private List<DrawingPath>        mSplaysStack;
   // private List<DrawingPath>     mHighlight;  // highlighted path
-  final private List<DrawingStationName> mStations;  // survey stations
-  final private List<DrawingLinePath>    mPlotOutline;     // scrap outline
-  private List<DrawingOutlinePath> mXSectionOutlines; // xsections outlines
+  final private List<DrawingStationName> mStations;    // survey stations
+  // final private List<DrawingFixedName>   mFixeds;      // survey stations
+  final private List<DrawingLinePath>    mPlotOutline; // scrap outline
+  private List<DrawingOutlinePath> mXSectionOutlines;  // xsections outlines
 
   private int mScrapIdx = 0; // scrap index
   private ArrayList< Scrap > mScraps;
@@ -108,6 +109,7 @@ class DrawingCommandManager
     mPlotOutline  = Collections.synchronizedList(new ArrayList<DrawingLinePath>());
     mXSectionOutlines = Collections.synchronizedList(new ArrayList<DrawingOutlinePath>());
     mStations     = Collections.synchronizedList(new ArrayList<DrawingStationName>());
+    // mFixeds       = Collections.synchronizedList(new ArrayList<DrawingFixedName>());
     mPlotName     = plot_name;
     mScraps = new ArrayList< Scrap >();
     mCurrentScrap = new Scrap( 0, mPlotName );
@@ -196,6 +198,7 @@ class DrawingCommandManager
   List<DrawingPath>        getLegs()         { return mLegsStack;    } 
   List<DrawingPath>        getSplays()       { return mSplaysStack;  }
   List<DrawingStationName> getStations()     { return mStations;     } 
+  // List<DrawingFixedName>   getFixeds()       { return mFixeds;     } 
   // List<DrawingStationPath> getUserStations() { return mUserStations; }
   List<DrawingStationPath> getUserStations() 
   {
@@ -315,6 +318,7 @@ class DrawingCommandManager
  
     synchronized( mStations ) {
       for ( DrawingStationName st : mStations ) st.flipXAxis(z);
+      // for ( DrawingFixedName   fx : mFixeds )   fx.flipXAxis(z);
     }
     for ( Scrap scrap : mScraps ) scrap.flipXAxis( z );
   }
@@ -326,9 +330,8 @@ class DrawingCommandManager
   {
     // if ( mStations != null ) {
     //   synchronized( mStations ) {
-    //     for ( DrawingStationName st : mStations ) {
-    //       st.shiftBy( x, y );
-    //     }
+    //     for ( DrawingStationName st : mStations ) st.shiftBy( x, y );
+    //     for ( DrawingFixedName fx : mFixeds ) fx.shiftBy( x, y );
     //   }
     // }
     for ( Scrap scrap : mScraps ) scrap.shiftDrawing( x, y );
@@ -341,9 +344,8 @@ class DrawingCommandManager
   {
     // if ( mStations != null ) {
     //   synchronized( mStations ) {
-    //     for ( DrawingStationName st : mStations ) {
-    //       st.shiftBy( x, y );
-    //     }
+    //     for ( DrawingStationName st : mStations ) st.scaleBy( z );
+    //     for ( DrawingFixedName fx : mFixeds ) fx.scaleBy( z );
     //   }
     // }
     Matrix m = new Matrix();
@@ -404,6 +406,7 @@ class DrawingCommandManager
     synchronized( mPlotOutline ) { mPlotOutline.clear(); }
     synchronized( TDPath.mXSectionsLock   ) { mXSectionOutlines.clear(); }
     synchronized( mStations )    { mStations.clear(); }
+    // synchronized( mFixeds   )    { mFixeds.clear(); }
     syncClearSelected();
   }
 
@@ -730,6 +733,15 @@ class DrawingCommandManager
       }
     }
   }
+ 
+  // called by DrawingSurface.addDrawingFixedName
+  // void addStation( DrawingFixedName fx )
+  // {
+  //   synchronized( mFixeds ) {
+  //     mFixeds.add( fx );
+  //   }
+  // }
+ 
   
   // used by H-Sections
   void setNorthLine( DrawingPath path ) { mNorthLine = path; }
@@ -900,6 +912,11 @@ class DrawingCommandManager
             st.draw( c, mat, sca, null );
           }
         }
+        // synchronized( mFixeds ) {
+        //   for ( DrawingFixedName fx : mFixeds ) {
+        //     fx.draw( c, mat, sca, null );
+        //   }
+        // }
       }
     }
 
@@ -1021,10 +1038,17 @@ class DrawingCommandManager
       }
     }
  
-    if ( stations && mStations != null ) {  
-      synchronized( mStations ) {
-        for ( DrawingStationName st : mStations ) st.draw( canvas, mMatrix, mScale, mBBox );
+    if ( stations ) {
+      if ( mStations != null ) {  
+        synchronized( mStations ) {
+          for ( DrawingStationName st : mStations ) st.draw( canvas, mMatrix, mScale, mBBox );
+        }
       }
+      // if ( mFixeds != null ) {  
+      //   synchronized( mFixeds ) {
+      //     for ( DrawingFixedName fx : mFixeds ) fx.draw( canvas, mMatrix, mScale, mBBox );
+      //   }
+      // }
     }
     
     if ( ! TDSetting.mAutoStations ) {
@@ -1237,7 +1261,7 @@ class DrawingCommandManager
   void exportDataStream( int type, DataOutputStream dos, String scrap_name, int proj_dir )
   {
     RectF bbox = getBoundingBox( ); // global bbox
-    DrawingIO.exportDataStream( type, dos, scrap_name, proj_dir, bbox, mNorthLine, mScraps, mStations );
+    DrawingIO.exportDataStream( type, dos, scrap_name, proj_dir, bbox, mNorthLine, mScraps, mStations /* , mFixeds */ );
                                 // mCurrentStack, mUserStations, mStations 
   }
 

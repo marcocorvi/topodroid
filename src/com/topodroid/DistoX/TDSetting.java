@@ -254,7 +254,7 @@ class TDSetting
   static final char[] CSV_SEPARATOR = { CSV_COMMA, CSV_PIPE, CSV_TAB };
 
   static int mImportDatamode    = 0;  // SurveyInfo.DATAMODE_NORMAL
-  static boolean mExportTcsx    = false;
+  static boolean mExportTcsx    = true;
   static int mExportShotsFormat = -1; // DISTOX_EXPORT_NONE
   static int mExportPlotFormat  = -1; // DISTOX_EXPORT_NONE
   static boolean mTherionMaps   = false;
