@@ -165,7 +165,7 @@ abstract class ItemDrawer extends Activity
     setTheTitle();
     if ( update_recent ) {
       updateRecentArea( mCurrentArea );
-      setBtnRecent();
+      setBtnRecent( Symbol.AREA );
     }
     mLinePointStep = TDSetting.mLineType;
   }
@@ -184,7 +184,7 @@ abstract class ItemDrawer extends Activity
     setTheTitle();
     if ( update_recent ) {
       updateRecentLine( mCurrentLine );
-      setBtnRecent();
+      setBtnRecent( Symbol.LINE );
     }
     mLinePointStep = BrushManager.getLineStyleX( mCurrentLine );
     if ( mLinePointStep != POINT_MAX ) mLinePointStep *= TDSetting.mLineType;
@@ -204,11 +204,11 @@ abstract class ItemDrawer extends Activity
     setTheTitle();
     if ( update_recent ) {
       updateRecentPoint( mCurrentPoint );
-      setBtnRecent();
+      setBtnRecent( Symbol.POINT );
     }
   }
 
-  public void setBtnRecent() { }
+  public void setBtnRecent( int symbol ) { }
   public void setTheTitle() { }
 
   public void setPoint( int k, boolean update_recent ) { }

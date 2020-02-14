@@ -1333,6 +1333,8 @@
 
   <string name="pref_picker_type_title">Sélectionneur de symbole</string>
   <string name="pref_picker_type_summary">Type sélectionneur symbole</string>
+  <!-- TODO string name="pref_triple_toolbar_title">Triple bottom bar</string -->
+  <!-- TODO string name="pref_triple_toolbar_summary">Triple drawing tools bar</string -->
   <!-- UNUSED string name="pref_section_stations_title">Stations X-Section</string -->
   <!-- UNUSED string name="pref_section_stations_summary">Base de référence pour les sections transverses</string -->
   <string name="pref_station_size_title">Taille nom de station</string>

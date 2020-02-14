@@ -1348,6 +1348,8 @@
 
   <string name="pref_picker_type_title">Selector de simbología</string>
   <string name="pref_picker_type_summary">Tipo de selector de simbología</string>
+  <!-- TODO string name="pref_triple_toolbar_title">Triple bottom bar</string -->
+  <!-- TODO string name="pref_triple_toolbar_summary">Triple drawing tools bar</string -->
   <!-- UNUSED string name="pref_section_stations_title">X-Sección estaciones</string -->
   <!-- UNUSED string name="pref_section_stations_summary">X-Estaciones de la sección de referencia</string -->
   <string name="pref_station_size_title">Tamaño de la etiqueta de la estación</string>

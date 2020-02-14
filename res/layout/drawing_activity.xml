@@ -80,12 +80,30 @@
 
   <LinearLayout android:id="@+id/layout_tools"
     android:layout_width="match_parent"
-    android:layout_height="16dp"
-    android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:background="#666666"
     android:layout_gravity="bottom"
     android:gravity="bottom"
     >
+    <LinearLayout android:id="@+id/layout_tool_p"
+      android:layout_width="match_parent"
+      android:layout_height="16dp"
+      android:orientation="horizontal"
+      android:background="#666666"
+    />
+    <LinearLayout android:id="@+id/layout_tool_l"
+      android:layout_width="match_parent"
+      android:layout_height="16dp"
+      android:orientation="horizontal"
+      android:background="#666666"
+    />
+    <LinearLayout android:id="@+id/layout_tool_a"
+      android:layout_width="match_parent"
+      android:layout_height="16dp"
+      android:orientation="horizontal"
+      android:background="#666666"
+    />
   </LinearLayout>
 
 </FrameLayout>

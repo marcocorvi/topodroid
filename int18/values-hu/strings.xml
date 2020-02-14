@@ -1331,6 +1331,8 @@
 
   <string name="pref_picker_type_title">Rajzeszköz választó</string>
   <string name="pref_picker_type_summary">Rajzeszköz választó típusa</string>
+  <!-- TODO string name="pref_triple_toolbar_title">Triple bottom bar</string -->
+  <!-- TODO string name="pref_triple_toolbar_summary">Triple drawing tools bar</string -->
   <!-- UNUSED string name="pref_section_stations_title">Keresztszelvény pontjai</string -->
   <!-- UNUSED string name="pref_section_stations_summary">Keresztszelvény viszonyítási pontjai</string -->
   <string name="pref_station_size_title">Pontnév betűmérete</string>

@@ -187,7 +187,7 @@ public class TopoDroidApp extends Application
   static TDPrefHelper mPrefHlp      = null;
   static SurveyWindow mSurveyWindow = null; // FIXME ref mActivity
   static ShotWindow   mShotWindow   = null; // FIXME ref mActivity
-  // static DrawingWindow mDrawingWindow = null; // FIXME currently not used
+  static DrawingWindow mDrawingWindow = null; // FIXME currently not used
   static MainWindow mActivity = null; // FIXME ref mActivity
 
   static boolean mGMActivityVisible = false;

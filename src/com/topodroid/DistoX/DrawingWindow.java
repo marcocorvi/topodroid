@@ -94,6 +94,10 @@ public class DrawingWindow extends ItemDrawer
                                       , IPhotoInserter
                                       , IAudioInserter
 {
+  private static int ZOOM_TRANSLATION_1 = -50; // was -42
+  private static int ZOOM_TRANSLATION_3 = -200; 
+  private static int ZOOM_TRANSLATION   = ZOOM_TRANSLATION_1;
+ 
   private static final int[] izons_ok = {
                         R.drawable.iz_edit_ok, // 0
                         R.drawable.iz_eraser_ok,
@@ -451,7 +455,13 @@ public class DrawingWindow extends ItemDrawer
   private View mZoomView;
   private float mZoomTranslate = 48; // pixels
   private LinearLayout mLayoutTools;
-  private ItemButton[] mBtnRecent;
+  private LinearLayout mLayoutToolsP;
+  private LinearLayout mLayoutToolsL;
+  private LinearLayout mLayoutToolsA;
+  // private ItemButton[] mBtnRecent;
+  private ItemButton[] mBtnRecentP;
+  private ItemButton[] mBtnRecentL;
+  private ItemButton[] mBtnRecentA;
 
   // window mode
   static final int MODE_DRAW  = 1;
@@ -905,7 +915,7 @@ public class DrawingWindow extends ItemDrawer
         sb.append( String.format( res.getString(R.string.title_draw_point), BrushManager.getPointName( mCurrentPoint ) ) );
       } else if ( mSymbol == Symbol.LINE ) {
         sb.append( String.format( res.getString(R.string.title_draw_line), BrushManager.getLineName( mCurrentLine ) ) );
-      } else  {  // if ( mSymbol == Symbol.LINE ) 
+      } else  {  // if ( mSymbol == Symbol.AREA ) 
         sb.append( String.format( res.getString(R.string.title_draw_area), BrushManager.getAreaName( mCurrentArea ) ) );
       }
       // boolean visible = ( mSymbol == Symbol.LINE && mCurrentLine == BrushManager.getLineWallIndex() );
@@ -1825,7 +1835,13 @@ public class DrawingWindow extends ItemDrawer
     // mDrawingSurface.setBuiltInZoomControls(true);
 
     mZoomView = (View) findViewById(R.id.zoomView );
-    mZoomView.setTranslationY( -42 );
+    if ( TDSetting.mTripleToolbar ) {
+      ZOOM_TRANSLATION = ZOOM_TRANSLATION_3;
+    } else {
+      ZOOM_TRANSLATION = ZOOM_TRANSLATION_1;
+    }
+    mZoomView.setTranslationY( ZOOM_TRANSLATION );
+
     mZoomBtnsCtrl = new ZoomButtonsController( mZoomView );
     // FIXME_ZOOM_CTRL mZoomCtrl = (ZoomControls) mZoomBtnsCtrl.getZoomControls();
     // ViewGroup vg = mZoomBtnsCtrl.getContainer();
@@ -1934,61 +1950,118 @@ public class DrawingWindow extends ItemDrawer
     closeMenu();
 
     mLayoutTools = (LinearLayout) findViewById( R.id.layout_tools );
+    mLayoutToolsP = (LinearLayout) findViewById( R.id.layout_tool_p );
+    mLayoutToolsL = (LinearLayout) findViewById( R.id.layout_tool_l );
+    mLayoutToolsA = (LinearLayout) findViewById( R.id.layout_tool_a );
     mLayoutTools.setVisibility( View.INVISIBLE );
 
     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 0, LinearLayout.LayoutParams.WRAP_CONTENT );
     lp.setMargins( 0, 0, 0, 0 );
     lp.weight = 16;
     lp.gravity = 0x10; // LinearLayout.LayoutParams.center_vertical;
-    ViewGroup.LayoutParams lp0 = mLayoutTools.getLayoutParams();
-    lp0.height = (int)(40 * Float.parseFloat( getResources().getString( R.string.dimyl ) ) ) + 8; // 4 pxl on both sides 
-    // Log.v("DistoX-LP", "height " + lp0.height );
-    mLayoutTools.setLayoutParams( lp0 );
+    {
+      ViewGroup.LayoutParams lp0;
+      lp0 = mLayoutToolsP.getLayoutParams();
+      lp0.height = (int)(40 * Float.parseFloat( getResources().getString( R.string.dimyl ) ) ) + 8; // 4 pxl on both sides 
+      // Log.v("DistoX-LP", "height " + lp0.height );
+      mLayoutToolsP.setLayoutParams( lp0 );
 
-    mBtnRecent = new ItemButton[ NR_RECENT + 1 ];
+      lp0 = mLayoutToolsL.getLayoutParams();
+      lp0.height = (int)(40 * Float.parseFloat( getResources().getString( R.string.dimyl ) ) ) + 8; // 4 pxl on both sides 
+      mLayoutToolsL.setLayoutParams( lp0 );
+
+      lp0 = mLayoutToolsA.getLayoutParams();
+      lp0.height = (int)(40 * Float.parseFloat( getResources().getString( R.string.dimyl ) ) ) + 8; // 4 pxl on both sides 
+      mLayoutToolsA.setLayoutParams( lp0 );
+    }
+    mBtnRecentP = new ItemButton[ NR_RECENT + 1 ];
+    mBtnRecentL = new ItemButton[ NR_RECENT + 1 ];
+    mBtnRecentA = new ItemButton[ NR_RECENT + 1 ];
     for ( int k = 0; k<NR_RECENT; ++k ) {
-      mBtnRecent[k] = new ItemButton( this );
-      mLayoutTools.addView( mBtnRecent[k], lp );
-      mBtnRecent[k].setOnClickListener(
+      mBtnRecentP[k] = new ItemButton( this );
+      mBtnRecentP[k].setOnClickListener(
         new View.OnClickListener() {
           @Override public void onClick( View v ) {
             for ( int k = 0; k<NR_RECENT; ++k ) {
-              if ( v == mBtnRecent[k] ) {
-                if ( mRecentTools == mRecentPoint )     { setPoint( k, false ); }
-                else if ( mRecentTools == mRecentLine ) { setLine( k, false ); }
-                else if ( mRecentTools == mRecentArea ) { setArea( k, false ); }
+              if ( v == mBtnRecentP[k] ) {
+                setPoint( k, false );
+                // if ( mRecentTools == mRecentPoint )     { setPoint( k, false ); }
+                // else if ( mRecentTools == mRecentLine ) { setLine( k, false ); }
+                // else if ( mRecentTools == mRecentArea ) { setArea( k, false ); }
                 break;
               }
             }
           }
         }
       );
+      mBtnRecentL[k] = new ItemButton( this );
+      mBtnRecentL[k].setOnClickListener(
+        new View.OnClickListener() {
+          @Override public void onClick( View v ) {
+            for ( int k = 0; k<NR_RECENT; ++k ) if ( v == mBtnRecentL[k] ) { setLine( k, false ); break; }
+          }
+        }
+      );
+      mBtnRecentA[k] = new ItemButton( this );
+      mBtnRecentA[k].setOnClickListener(
+        new View.OnClickListener() {
+          @Override public void onClick( View v ) {
+            for ( int k = 0; k<NR_RECENT; ++k ) if ( v == mBtnRecentA[k] ) { setArea( k, false ); break; }
+          }
+        }
+      );
     }
-    mBtnRecent[NR_RECENT] = new ItemButton( this );
-    mBtnRecent[NR_RECENT].setText( ">>" );
+    mBtnRecentP[NR_RECENT] = new ItemButton( this );
+    mBtnRecentL[NR_RECENT] = new ItemButton( this );
+    mBtnRecentA[NR_RECENT] = new ItemButton( this );
+
+    mBtnRecentP[NR_RECENT].setText( ">>" );
+    mBtnRecentL[NR_RECENT].setText( ">>" );
+    mBtnRecentA[NR_RECENT].setText( ">>" );
+
     Path path = new Path();
     path.moveTo( 0, 8 ); path.lineTo(  8, 0 ); path.lineTo( 0, -8 );
     path.moveTo( 8, 8 ); path.lineTo( 16, 0 ); path.lineTo( 8, -8 );
-    mBtnRecent[NR_RECENT].resetPaintPath( BrushManager.labelPaint, path, 2, 2 );
-    mBtnRecent[NR_RECENT].invalidate();
-    mBtnRecent[NR_RECENT].setOnClickListener(
+
+    mBtnRecentP[NR_RECENT].resetPaintPath( BrushManager.labelPaint, path, 2, 2 );
+    mBtnRecentP[NR_RECENT].invalidate();
+    mBtnRecentP[NR_RECENT].setOnClickListener(
       new View.OnClickListener() {
-        @Override public void onClick( View v ) {
-          startItemPickerDialog();
-        }
+        @Override public void onClick( View v ) { startItemPickerDialog( Symbol.POINT ); }
       }
     );
-    mLayoutTools.addView( mBtnRecent[NR_RECENT], lp );
+    mBtnRecentL[NR_RECENT].resetPaintPath( BrushManager.labelPaint, path, 2, 2 );
+    mBtnRecentL[NR_RECENT].invalidate();
+    mBtnRecentL[NR_RECENT].setOnClickListener(
+      new View.OnClickListener() {
+        @Override public void onClick( View v ) { startItemPickerDialog( Symbol.LINE ); }
+      }
+    );
+    mBtnRecentA[NR_RECENT].resetPaintPath( BrushManager.labelPaint, path, 2, 2 );
+    mBtnRecentA[NR_RECENT].invalidate();
+    mBtnRecentA[NR_RECENT].setOnClickListener(
+      new View.OnClickListener() {
+        @Override public void onClick( View v ) { startItemPickerDialog( Symbol.AREA ); }
+      }
+    );
+
+    for ( int k = 0; k<=NR_RECENT; ++k ) {
+      mLayoutToolsP.addView( mBtnRecentP[k], lp );
+      mLayoutToolsL.addView( mBtnRecentL[k], lp );
+      mLayoutToolsA.addView( mBtnRecentA[k], lp );
+    }
     
     mRecentTools = mRecentLine;
     // rotateRecentToolset();
-    setBtnRecent();
+    setBtnRecentAll();
+    setToolsToolbars();
 
     if ( mDataDownloader != null ) {
       mApp.registerLister( this );
     } 
 
     mBTstatus = DataDownloader.STATUS_OFF;
+    TopoDroidApp.mDrawingWindow = this;
 
     // if ( mApp.hasHighlighted() ) {
     //   // Log.v("DistoX", "drawing window [2] highlighted " + mApp.getHighlightedSize() );
@@ -2005,6 +2078,11 @@ public class DrawingWindow extends ItemDrawer
     if ( mRecentTools == mRecentPoint )     { symbol = Symbol.POINT; }
     else if ( mRecentTools == mRecentLine ) { symbol = Symbol.LINE; }
     else if ( mRecentTools == mRecentArea ) { symbol = Symbol.AREA; }
+    startItemPickerDialog( symbol );
+  }
+
+  private void startItemPickerDialog( int symbol )
+  {
     new ItemPickerDialog( mActivity, this, mType, symbol ).show();
   }
 
@@ -2087,7 +2165,7 @@ public class DrawingWindow extends ItemDrawer
   protected synchronized void onStart()
   {
     super.onStart();
-    // Log.v("DistoX", "Drawing Activity onStart " + ((mDataDownloader!=null)?"with DataDownloader":"") );
+    // Log.v("DistoX-TRIPLE", "Drawing Activity onStart " );
     loadRecentSymbols( mApp_mData );
     mOutlinePlot1 = null;
     mOutlinePlot2 = null;
@@ -2098,7 +2176,7 @@ public class DrawingWindow extends ItemDrawer
   protected synchronized void onStop()
   {
     super.onStop();
-    // Log.v("DistoX", "Drawing Activity onStop ");
+    // Log.v("DistoX-TRIPLE", "Drawing Activity onStop ");
     saveRecentSymbols( mApp_mData );
     // doStop();
     // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on stop done");
@@ -2112,6 +2190,7 @@ public class DrawingWindow extends ItemDrawer
     if ( mDataDownloader != null ) {
       mApp.unregisterLister( this );
     }
+    TopoDroidApp.mDrawingWindow = null;
     // if ( mDataDownloader != null ) { // data-download management is left to ShotWindow
     //   mDataDownloader.onStop();
     //   mApp.disconnectRemoteDevice( false );
@@ -3484,7 +3563,10 @@ public class DrawingWindow extends ItemDrawer
     // bottom_from = mBorderBottom;
     // if ( mMode == MODE_DRAW ) border_ from -= mZoomTranslate;
 
-    if ( yc > mBorderBottom ) {
+    float bottom = mBorderBottom;
+    if ( mMode == MODE_DRAW ) bottom += ZOOM_TRANSLATION;
+
+    if ( yc > bottom ) {
       if ( mZoomBtnsCtrlOn && xc > mBorderInnerLeft && xc < mBorderInnerRight ) {
         mTouchMode = MODE_ZOOM;
         mZoomBtnsCtrl.setVisible( true );
@@ -4311,7 +4393,16 @@ public class DrawingWindow extends ItemDrawer
      */
     private void setMode( int mode )
     {
-      // if ( mMode == mode ) return;
+      if ( mMode == mode ) return;
+
+      if ( mMode == MODE_DRAW ) {  // this has annoying glitches 
+        mZoomView.setTranslationY( 0 );
+        // mZoomBtnsCtrl = new ZoomButtonsController( mZoomView );
+      } else if ( mode == MODE_DRAW ) {
+        mZoomView.setTranslationY( ZOOM_TRANSLATION );
+        // mZoomBtnsCtrl = new ZoomButtonsController( mZoomView );
+      }
+
       mMode = mode;
       // Log.v("DistoX-C", "setMode " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
       mLastLinePath = null;
@@ -5028,7 +5119,7 @@ public class DrawingWindow extends ItemDrawer
         mDrawingSurface.setSplayAlpha( mApp.mShowSectionSplays );
         updateSplays( mApp.mSplayMode );
       }
-    } else if ( b == mButton2[ BTN_TOOL ] ) {
+    } else if ( b == mButton2[ BTN_TOOL ] && ! TDSetting.mTripleToolbar ) {
       // if ( TDSetting.mPickerType == TDSetting.PICKER_RECENT ) { 
       //   new ItemRecentDialog(mActivity, this, mType ).show();
       // } else {
@@ -5189,7 +5280,11 @@ public class DrawingWindow extends ItemDrawer
           mDrawingSurface.redo();
         }
       } else if ( b == mButton2[k2++] ) { // pointBtn
-        rotateRecentToolset();
+        if ( ! TDSetting.mTripleToolbar ) {
+          rotateRecentToolset();
+        } else {
+          new ItemPickerDialog(mActivity, this, mType, mSymbol ).show();
+        }
       } else if ( TDLevel.overNormal && b == mButton2[k2++] ) { //  CONT continuation popup menu
         if ( mSymbol == Symbol.LINE && BrushManager.getLineGroup( mCurrentLine ) != null ) {
           // setButtonContinue( (mContinueLine+1) % CONT_MAX );
@@ -6600,7 +6695,8 @@ public class DrawingWindow extends ItemDrawer
             // // FIXME NOTIFY ? no
             createPhotoPoint();
           } else {
-            Log.e("DistoX-PHOTO", "failed to save photo");
+            // Log.e("DistoX-PHOTO", "failed to save photo");
+            TDLog.Error("failed to save photo");
           }
         }
         break;
@@ -6883,23 +6979,76 @@ public class DrawingWindow extends ItemDrawer
         mRecentDimY  = Float.parseFloat( getResources().getString( R.string.dimxp ) );
       }
     }
-    setBtnRecent();
+    // setBtnRecent( Symbol.??? );
+    setToolsToolbars();
+  }
+
+  void setToolsToolbars()
+  {
+    // Log.v("DistoX-TRIPLE", "set Tools Toolbar " + TDSetting.mTripleToolbar );
+    if ( TDSetting.mTripleToolbar ) {
+      ZOOM_TRANSLATION = ZOOM_TRANSLATION_3;
+      mZoomView.setTranslationY( ZOOM_TRANSLATION );
+      mLayoutToolsP.setVisibility( View.VISIBLE );
+      mLayoutToolsL.setVisibility( View.VISIBLE );
+      mLayoutToolsA.setVisibility( View.VISIBLE );
+    } else {
+      ZOOM_TRANSLATION = ZOOM_TRANSLATION_1;
+      mZoomView.setTranslationY( ZOOM_TRANSLATION );
+      if ( mRecentTools == mRecentPoint ) {
+        mLayoutToolsP.setVisibility( View.VISIBLE );
+        mLayoutToolsL.setVisibility( View.GONE );
+        mLayoutToolsA.setVisibility( View.GONE );
+      } else if ( mRecentTools == mRecentLine ) {
+        mLayoutToolsP.setVisibility( View.GONE );
+        mLayoutToolsL.setVisibility( View.VISIBLE );
+        mLayoutToolsA.setVisibility( View.GONE );
+      } else {
+        mLayoutToolsP.setVisibility( View.GONE );
+        mLayoutToolsL.setVisibility( View.GONE );
+        mLayoutToolsA.setVisibility( View.VISIBLE );
+      }
+    }
+    mLayoutTools.invalidate();
   }
 
 
   // --------------------- from ItemDrawer
   @Override
-  public void setBtnRecent( ) // ItemButton[] mBtnRecent, Symbol[] mRecentTools, float sx, float sy )
+  public void setBtnRecent( int symbol ) // ItemButton[] mBtnRecent, Symbol[] mRecentTools, float sx, float sy )
+  {
+    switch ( symbol ) {
+      case Symbol.POINT: 
+        setButtonRecent( mBtnRecentP, mRecentPoint );
+        break;
+      case Symbol.LINE: 
+        setButtonRecent( mBtnRecentL, mRecentLine  );
+        break;
+      case Symbol.AREA: 
+        setButtonRecent( mBtnRecentA, mRecentArea  );
+        break;
+    }
+    setToolsToolbars();
+  }
+
+  private void setBtnRecentAll()
+  {
+    setButtonRecent( mBtnRecentP, mRecentPoint );
+    setButtonRecent( mBtnRecentL, mRecentLine  );
+    setButtonRecent( mBtnRecentA, mRecentArea  );
+  }
+
+  private void setButtonRecent( ItemButton[] buttons, Symbol[] recents )
   {
     for ( int k=0; k<NR_RECENT; ++k ) {
-      Symbol p = mRecentTools[k];
+      Symbol p = recents[k];
       if ( p == null ) {
         // Log.v("DistoX-LP", "recent tool " + k + " is null" );
         break;
       }
-      if ( mBtnRecent[k] != null ) {
-        mBtnRecent[k].resetPaintPath( p.getPaint(), p.getPath(), mRecentDimX, mRecentDimY );
-        mBtnRecent[k].invalidate();
+      if ( buttons[k] != null ) {
+        buttons[k].resetPaintPath( p.getPaint(), p.getPath(), mRecentDimX, mRecentDimY );
+        buttons[k].invalidate();
       }
     }
   }
@@ -6942,7 +7091,7 @@ public class DrawingWindow extends ItemDrawer
   {
     mRecentDimX  = Float.parseFloat( getResources().getString( R.string.dimxl ) );
     mRecentDimY  = Float.parseFloat( getResources().getString( R.string.dimyl ) );
-    setBtnRecent();
+    setBtnRecentAll( );
   }
 
 }

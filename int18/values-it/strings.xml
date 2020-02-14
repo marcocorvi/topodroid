@@ -1333,6 +1333,8 @@
 
   <string name="pref_picker_type_title">Dialogo scelta prototipo</string>
   <string name="pref_picker_type_summary">Tipo dialogo scelta prototipo grafico</string>
+  <!-- TODO string name="pref_triple_toolbar_title">Triple bottom bar</string -->
+  <!-- TODO string name="pref_triple_toolbar_summary">Triple drawing tools bar</string -->
   <!-- UNUSED string name="pref_section_stations_title">Capisaldi X-Section</string -->
   <!-- UNUSED string name="pref_section_stations_summary">Capisaldi di riferimento per X-Section</string -->
   <string name="pref_station_size_title">Dimensione nome capisaldi</string>
