@@ -1346,8 +1346,8 @@
 
   <string name="pref_picker_type_title">Вид меню инструментов рисования</string>
   <string name="pref_picker_type_summary">Тип меню инструментов рисования</string>
-  <!-- TODO string name="pref_triple_toolbar_title">Triple bottom bar</string -->
-  <!-- TODO string name="pref_triple_toolbar_summary">Triple drawing tools bar</string -->
+  <string name="pref_triple_toolbar_title">Тройная панель инструментов</string>
+  <string name="pref_triple_toolbar_summary">Показывать все три типа инструментов рисования одновременно</string>
   <!-- UNUSED string name="pref_section_stations_title">Пикеты на поперечных сечениях</string -->
   <!-- UNUSED string name="pref_section_stations_summary">Пикеты привязки поперечных сечений</string -->
   <string name="pref_station_size_title">Размер номеров пикетов</string>
