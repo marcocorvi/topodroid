@@ -6158,60 +6158,60 @@ public class DrawingWindow extends ItemDrawer
     List< PlotInfo > all_sections = TopoDroidApp.mData.selectAllPlotsSection( sid, TDStatus.NORMAL );
     ArrayList< PlotInfo > sections1 = new ArrayList<>(); // plan xsections
     ArrayList< PlotInfo > sections2 = new ArrayList<>(); // profile xsections
-
     pw.format("  <plan>\n");
     if ( psd1 != null ) {
-      if ( TDSetting.mExportTcsx ) { 
+      // if ( TDSetting.mExportTcsx ) { 
         DrawingSurface.exportAsTCsx( pw, PlotInfo.PLOT_PLAN, survey, cave, branch, /* session, */ psd1.cm, all_sections, sections1 /* , psd1.util */ );
-      } else {
-        DrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_PLAN, survey, cave, branch, /* session, */ psd1.cm, all_sections, sections1 /* , psd1.util */ );
-      }
+      // } else {
+      //   DrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_PLAN, survey, cave, branch, /* session, */ psd1.cm, all_sections, sections1 /* , psd1.util */ );
+      // }
     }
     pw.format("    <plot />\n");
     pw.format("  </plan>\n");
     
     pw.format("  <profile>\n");
     if ( psd2 != null ) {
-      if ( TDSetting.mExportTcsx ) { 
+      // if ( TDSetting.mExportTcsx ) { 
         DrawingSurface.exportAsTCsx( pw, PlotInfo.PLOT_EXTENDED, survey, cave, branch, /* session, */ psd2.cm, all_sections, sections2 /* , psd2.util */ ); 
-      } else {
-        DrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_EXTENDED, survey, cave, branch, /* session, */ psd2.cm, all_sections, sections2 /* , psd2.util */ ); 
-      }
+      // } else {
+      //   DrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_EXTENDED, survey, cave, branch, /* session, */ psd2.cm, all_sections, sections2 /* , psd2.util */ ); 
+      // }
     }
     pw.format("    <plot />\n");
     pw.format("  </profile>\n");
-
     // if ( TDSetting.mExportTcsx ) 
       // exportTCsxXSection( pw, section1, survey, cave, branch /* , session */ /* , psd1.util */ );
       // exportTCsxXSection( pw, section2, survey, cave, branch /* , session */ /* , psd2.util */ );
-    if ( ! TDSetting.mExportTcsx ) { 
-      pw.format("    <crosssections>\n");
-      if ( psd1 != null ) {
-        for ( PlotInfo section1 : sections1 ) {
-          pw.format("    <crosssection id=\"%s\" design=\"0\" crosssection=\"%d\">\n", section1.name, section1.csxIndex );
-          exportCsxXSection( pw, section1, survey, cave, branch /* , session */ /* , psd1.util */ );
-          pw.format("    </crosssection>\n" );
-        }
-      }
-      if ( psd2 != null ) {
-        for ( PlotInfo section2 : sections2 ) {
-          pw.format("    <crosssection id=\"%s\" design=\"1\" crosssection=\"%d\">\n", section2.name, section2.csxIndex );
-          exportCsxXSection( pw, section2, survey, cave, branch /* , session */ /* , psd2.util */ );
-          pw.format("    </crosssection>\n" );
-        }
-      }
-      pw.format("    </crosssections>\n");
-    }
+
+    // if ( ! TDSetting.mExportTcsx ) { 
+    //   pw.format("    <crosssections>\n");
+    //   if ( psd1 != null ) {
+    //     for ( PlotInfo section1 : sections1 ) {
+    //       pw.format("    <crosssection id=\"%s\" design=\"0\" crosssection=\"%d\">\n", section1.name, section1.csxIndex );
+    //       exportCsxXSection( pw, section1, survey, cave, branch /* , session */ /* , psd1.util */ );
+    //       pw.format("    </crosssection>\n" );
+    //     }
+    //   }
+    //   if ( psd2 != null ) {
+    //     for ( PlotInfo section2 : sections2 ) {
+    //       pw.format("    <crosssection id=\"%s\" design=\"1\" crosssection=\"%d\">\n", section2.name, section2.csxIndex );
+    //       exportCsxXSection( pw, section2, survey, cave, branch /* , session */ /* , psd2.util */ );
+    //       pw.format("    </crosssection>\n" );
+    //     }
+    //   }
+    //   pw.format("    </crosssections>\n");
+    // }
   }
 
-  private static void exportCsxXSection( PrintWriter pw, PlotInfo section, String survey, String cave, String branch
-		  /* , String session */ /* , DrawingUtil drawingUtil */ )
-  {
-    // String name = section.name; // binding name
-    // open xsection file
-    String filename = TDPath.getSurveyPlotTdrFile( survey, section.name );
-    DrawingIO.doExportCsxXSection( pw, filename, survey, cave, branch, /* session, */ section.name /* , drawingUtil */ ); // bind=section.name
-  }
+  // private static void exportCsxXSection( PrintWriter pw, PlotInfo section, String survey, String cave, String branch
+  //       	  /* , String session */ /* , DrawingUtil drawingUtil */ )
+  // {
+  //   // String name = section.name; // binding name
+  //   // open xsection file
+  //   String filename = TDPath.getSurveyPlotTdrFile( survey, section.name );
+  //   DrawingIO.doExportCsxXSection( pw, filename, survey, cave, branch, /* session, */ section.name /* , drawingUtil */ ); // bind=section.name
+  // }
+
   // ----------------------------------------------------------------------------------
   // NEW CSURVEY EXPORT
   static void exportAsTCsx( long sid, PrintWriter pw, String survey, String cave, String branch, /* String session, */ PlotSaveData psd1, PlotSaveData psd2 )

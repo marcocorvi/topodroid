@@ -405,7 +405,12 @@ class DrawingLinePath extends DrawingPointLinePath
   void toDataStream( DataOutputStream dos, int scrap )
   {
     String name  = BrushManager.getLineThName( mLineType );
+    if ( name == null ) { // should not happen
+      TDLog.Error("null line name");
+      return;
+    }
     String group = BrushManager.getLineGroup( mLineType );
+    if ( group == null ) group = name;
     try {
       dos.write( 'L' );
       dos.writeUTF( name );

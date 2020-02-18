@@ -980,7 +980,7 @@
     <string name="title_import_dat">Compass možnosti Importu</string>
 
   <string name="pref_export_settings">EXPORT NASTAVENÍ do súboru</string>
-  <!-- TODO string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
+  <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
   <string name="pref_cat_survey">NASTAVENIA MAPOVANIA</string>
   <string name="pref_cat_drawing">NASTAVENIA KRESLENIA</string>

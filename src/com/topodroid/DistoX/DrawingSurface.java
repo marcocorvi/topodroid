@@ -802,37 +802,37 @@ class DrawingSurface extends SurfaceView
   }
 
 
-  static void exportAsCsx( PrintWriter pw, long type, String survey, String cave, String branch, /* String session, */
-                           DrawingCommandManager cm, List<PlotInfo> all_sections, List<PlotInfo> sections )
-  {
-    if ( PlotInfo.isProfile( type ) ) {
-      // FIXME OK PROFILE to check
-      if ( cm != null ) {
-        cm.exportAsCsx( pw, survey, cave, branch, /* session, */ all_sections, sections );
-      }
-    } else if ( type == PlotInfo.PLOT_PLAN ) {
-      if ( cm != null ) {
-        cm.exportAsCsx( pw, survey, cave, branch, /* session, */ all_sections, sections );
-      }
-    } else { // should never happen, but it happens for X-Sections
-      pw.format("    <layers>\n");
-      pw.format("      <layer name=\"Base\" type=\"0\">\n");
-      pw.format("         <items />\n");
-      pw.format("      </layer>\n");
-      pw.format("      <layer name=\"Soil\" type=\"1\">\n");
-      pw.format("        <items />\n");
-      pw.format("      </layer>\n");
-      pw.format("      <layer name=\"Water and floor morphologies\" type=\"2\">\n");
-      pw.format("        <items />\n");
-      pw.format("      </layer>\n");
-      pw.format("      <layer name=\"Rocks and concretions\" type=\"3\">\n");
-      pw.format("        <items />\n");
-      pw.format("      </layer>\n");
-      pw.format("      <layer name=\"Ceiling morphologies\" type=\"4\">\n");
-      pw.format("        <items />\n");
-      pw.format("      </layer>\n");
-      pw.format("      <layer name=\"Borders\" type=\"5\">\n");
-      pw.format("        <items>\n");
+  // static void exportAsCsx( PrintWriter pw, long type, String survey, String cave, String branch, /* String session, */
+  //                          DrawingCommandManager cm, List<PlotInfo> all_sections, List<PlotInfo> sections )
+  // {
+  //   if ( PlotInfo.isProfile( type ) ) {
+  //     // FIXME OK PROFILE to check
+  //     if ( cm != null ) {
+  //       cm.exportAsCsx( pw, survey, cave, branch, /* session, */ all_sections, sections );
+  //     }
+  //   } else if ( type == PlotInfo.PLOT_PLAN ) {
+  //     if ( cm != null ) {
+  //       cm.exportAsCsx( pw, survey, cave, branch, /* session, */ all_sections, sections );
+  //     }
+  //   } else { // should never happen, but it happens for X-Sections
+  //     pw.format("    <layers>\n");
+  //     pw.format("      <layer name=\"Base\" type=\"0\">\n");
+  //     pw.format("         <items />\n");
+  //     pw.format("      </layer>\n");
+  //     pw.format("      <layer name=\"Soil\" type=\"1\">\n");
+  //     pw.format("        <items />\n");
+  //     pw.format("      </layer>\n");
+  //     pw.format("      <layer name=\"Water and floor morphologies\" type=\"2\">\n");
+  //     pw.format("        <items />\n");
+  //     pw.format("      </layer>\n");
+  //     pw.format("      <layer name=\"Rocks and concretions\" type=\"3\">\n");
+  //     pw.format("        <items />\n");
+  //     pw.format("      </layer>\n");
+  //     pw.format("      <layer name=\"Ceiling morphologies\" type=\"4\">\n");
+  //     pw.format("        <items />\n");
+  //     pw.format("      </layer>\n");
+  //     pw.format("      <layer name=\"Borders\" type=\"5\">\n");
+  //     pw.format("        <items>\n");
 //       pw.format("          <item layer=\"5\" name=\"Esempio bezier\" type=\"4\" category=\"1\" linetype=\"2\" mergemode=\"0\">\n");
 //       pw.format("            <pen type="1" />
 //       pw.format("            <points data="-6.69 1.04 B -6.51 1.58 -5.85 2.21 -5.04 2.63 -3.81 2.93 -1.56 2.57 -0.45 2.06 0.00 1.46 0.87 1.31 1.20 -0.17 1.29 -1.13 1.17 -2.24 0.93 -2.75 0.18 -4.85 1.83 -5.09 2.76 -5.78 3.21 -5.93 " />
@@ -845,14 +845,14 @@ class DrawingSurface extends SurfaceView
 //       pw.format("            <pen type="1" />
 //       pw.format("            <points data="-9.60 -3.47 B -8.97 -2.81 -7.71 -2.27 -6.45 -2.21 -4.92 -2.75 -4.38 -3.11 -3.69 -3.92 -3.45 -4.70 -3.36 -6.80 -2.79 -8.06 -2.34 -8.39 -0.42 -8.93 " />
 //       pw.format("          </item>
-      pw.format("        </items>\n");
-      pw.format("      </layer>\n");
-      pw.format("      <layer name=\"Signs\" type=\"6\">\n");
-      pw.format("        <items />\n");
-      pw.format("      </layer>\n");
-      pw.format("    </layers>\n");
-    }
-  }
+  //     pw.format("        </items>\n");
+  //     pw.format("      </layer>\n");
+  //     pw.format("      <layer name=\"Signs\" type=\"6\">\n");
+  //     pw.format("        <items />\n");
+  //     pw.format("      </layer>\n");
+  //     pw.format("    </layers>\n");
+  //   }
+  // }
 
   void setSplayAlpha( boolean on ) { if ( mCommandManager3 != null ) mCommandManager3.setSplayAlpha(on); }
   

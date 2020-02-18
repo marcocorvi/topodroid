@@ -966,7 +966,7 @@
     <string name="title_import_dat">Opções importação Compass</string>
 
   <string name="pref_export_settings">CONFIGURAÇÕES DE EXPORTAÇÃO</string>
-  <string name="pref_tcsx">Exportar cSurvey-1.20 transfer-csx</string>
+  <!-- UNUSED string name="pref_tcsx">Exportar cSurvey-1.20 transfer-csx</string -->
 
   <string name="pref_cat_survey">DADOS DA TOPO</string>
   <string name="pref_cat_drawing">DESENHANDO CROQUI</string>

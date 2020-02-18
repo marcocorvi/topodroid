@@ -1523,28 +1523,28 @@ class TDPrefKey
   // -------------------------------------------------------------------------------
   static String[] GEEKIMPORT = {
     "DISTOX_ZIP_WITH_SYMBOLS",
-    "DISTOX_IMPORT_DATAMODE",
-    "DISTOX_TRANSFER_CSURVEY"
+    "DISTOX_IMPORT_DATAMODE"
+    // "DISTOX_TRANSFER_CSURVEY"
   };
  
   static int[] GEEKIMPORTtitle = {
     R.string.pref_zipped_symbols_title,
     R.string.pref_import_datamode_title,
-    R.string.pref_tcsx,
+    // R.string.pref_tcsx,
     -1
   };
 
   static int[] GEEKIMPORTdesc = {
     R.string.pref_zipped_symbols_summary,
     R.string.pref_import_datamode_summary,
-    R.string.pref_tcsx,
+    // R.string.pref_tcsx,
     -1
   };
 
   static String[] GEEKIMPORTdef = {
     FALSE,
     TDString.ZERO, // SurveyInfo.DATAMODE_NORMAL
-    TRUE,
+    // TRUE,
     null
   };
 

@@ -967,7 +967,7 @@
     <string name="title_import_dat">Настройки импорта Compass</string>
 
   <string name="pref_export_settings">Экспорт настроек</string>
-  <string name="pref_tcsx">Экспорт cSurvey-1.20 transfer-csx</string>
+  <!-- UNUSED string name="pref_tcsx">Экспорт cSurvey-1.20 transfer-csx</string -->
 
   <string name="pref_cat_survey">НАСТРОЙКИ ТОПОСЪЁМКИ </string>
   <string name="pref_cat_drawing">НАСТРОЙКИ РИСОВАНИЯ </string>

@@ -978,7 +978,7 @@
     <!-- TODO string name="title_import_dat">Compass import options</string -->
 
   <string name="pref_export_settings">Ajustes de exportación</string>
-  <!-- TODO string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
+  <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
   <string name="pref_cat_survey">Ajustes de topografía</string>
   <string name="pref_cat_drawing">Ajustes de dibujo</string>

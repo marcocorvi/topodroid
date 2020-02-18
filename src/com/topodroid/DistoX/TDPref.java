@@ -604,7 +604,7 @@ class TDPref implements AdapterView.OnItemSelectedListener
     return new TDPref[ ] {
       makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], T, def[ 0],         ctx, hlp ),
       makeLst( cat, key[ 1], tit[ 1], dsc[ 1], T, def[ 1], R.array.importDatamode, R.array.importDatamodeValue, ctx, hlp ),
-      makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2],         ctx, hlp ),
+      // makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2],         ctx, hlp ),
     };
   }
 
