@@ -1291,7 +1291,7 @@ class DrawingDxf
       int version = DrawingIO.skipTdrHeader( dis );
       // Log.v("DistoX", "tdr to svg delta " + dx + " " + dy + " Offset " + xoff + " " + yoff );
 
-      DrawingPath path = null;
+      DrawingPath path; // = null;
       boolean done = false;
       while ( ! done ) {
         int what = dis.read();
@@ -1313,20 +1313,23 @@ class DrawingDxf
             handle = toDxf( pw, handle, (DrawingAreaPath)path, scale, xoff, yoff );
             break;
           case 'U':
-            path = DrawingStationPath.loadDataStream( version, dis ); // consume DrawingStationName data
+            /* path = */ DrawingStationPath.loadDataStream( version, dis ); // consume DrawingStationName data
             break;
           case 'X':
-            path = DrawingStationName.loadDataStream( version, dis ); // consume DrawingStationName data
+            /* path = */ DrawingStationName.loadDataStream( version, dis ); // consume DrawingStationName data
             break;
           case 'Y':
-            path = DrawingPhotoPath.loadDataStream( version, dis, dx, dy );
+            /* path = */ DrawingPhotoPath.loadDataStream( version, dis, dx, dy );
             break;
           case 'Z':
-            path = DrawingAudioPath.loadDataStream( version, dis, dx, dy );
+            /* path = */ DrawingAudioPath.loadDataStream( version, dis, dx, dy );
             break;
           case 'J':
-            path = DrawingSpecialPath.loadDataStream( version, dis, dx, dy );
+            /* path = */ DrawingSpecialPath.loadDataStream( version, dis, dx, dy );
             break;
+          // case 'G':
+          //   path = DrawingFixedName.loadDataStream( version, dis ); // consume DrawingFixedName data
+          //   break;
           case 'F':
             done = true;
             break;

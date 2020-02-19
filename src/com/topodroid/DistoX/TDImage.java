@@ -123,7 +123,12 @@ class TDImage
   {
     if ( mImage == null ) return false;
 
-    hh = mImageHeight * ww / mImageWidth;
+    int h = mImageHeight * ww / mImageWidth;
+    if ( h > hh ) {
+      ww = mImageWidth * hh / mImageHeight;
+    } else {
+      hh = h;
+    }
 
     // if ( isPortrait() ) {
     //   hh = (int)( mImageHeight * ww / mImageWidth );

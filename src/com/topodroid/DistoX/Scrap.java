@@ -1,4 +1,4 @@
-/** @file Scrap.java
+/* @file Scrap.java
  *
  * @author marco corvi
  * @date oct 2019
@@ -26,9 +26,9 @@ import android.graphics.PointF;
 
 class Scrap
 {
-  List<ICanvasCommand>     mCurrentStack;
-  List<DrawingStationPath> mUserStations;  // user-inserted stations
-  private List<ICanvasCommand>     mRedoStack;
+  final List<ICanvasCommand>   mCurrentStack;
+  List<DrawingStationPath>     mUserStations;  // user-inserted stations
+  private List<ICanvasCommand> mRedoStack;
   private Selection mSelection;
   private SelectionSet mSelected;
   private int mMultiselectionType = -1;  // current multiselection type (DRAWING_PATH_POINT / LINE / AREA
@@ -74,8 +74,8 @@ class Scrap
   void clearSketchItems()
   {
     synchronized( TDPath.mSelectionLock ) { mSelection.clearSelectionPoints(); }
-    synchronized( mCurrentStack ) { mCurrentStack.clear(); }
-    synchronized( mUserStations ) { mUserStations.clear(); }
+    synchronized( TDPath.mCommandsLock ) { mCurrentStack.clear(); }
+    synchronized( TDPath.mStationsLock ) { mUserStations.clear(); }
     mRedoStack.clear();
     syncClearSelected();
   }
@@ -125,7 +125,7 @@ class Scrap
     if ( length > 0) {
       final ICanvasCommand cmd = mCurrentStack.get(  length - 1  );
 
-      synchronized( mCurrentStack ) {
+      synchronized( TDPath.mCommandsLock ) {
         mCurrentStack.remove( length - 1 );
         // cmd.undoCommand();
       }
@@ -144,14 +144,14 @@ class Scrap
           DrawingPath path = action.mPath;
           // Log.v("DistoX", "UNDO " + actionName[action.mType] + " path " + path.toString() );
           if ( action.mInitialType == EraseAction.ERASE_INSERT ) {
-            synchronized( mCurrentStack ) {
+            synchronized( TDPath.mCommandsLock ) {
               mCurrentStack.remove( path );
             }
             synchronized( TDPath.mSelectionLock ) {
               mSelection.removePath( path );
             }
           } else if ( action.mType == EraseAction.ERASE_REMOVE ) {
-            synchronized( mCurrentStack ) {
+            synchronized( TDPath.mCommandsLock ) {
               action.restorePoints( true ); // true: use old points
               mCurrentStack.add( path );
             }
@@ -162,7 +162,7 @@ class Scrap
             synchronized( TDPath.mSelectionLock ) {
               mSelection.removePath( path );
             }
-            synchronized( mCurrentStack ) {
+            synchronized( TDPath.mCommandsLock ) {
               action.restorePoints( true );
             }
             synchronized( TDPath.mSelectionLock ) {
@@ -219,7 +219,7 @@ class Scrap
 
   private void doDeletePath( DrawingPath path )
   {
-    synchronized( mCurrentStack ) {
+    synchronized( TDPath.mCommandsLock ) {
       mCurrentStack.remove( path );
     }
     synchronized( TDPath.mSelectionLock ) {
@@ -238,7 +238,7 @@ class Scrap
   // deleting a section line automatically deletes the associated section point(s)
   void deleteSectionLine( DrawingPath line, String scrap, EraseCommand cmd )
   {
-    synchronized( mCurrentStack ) {
+    synchronized( TDPath.mCommandsLock ) {
       int index = BrushManager.getPointSectionIndex();
       if ( index >= 0 ) {
         ArrayList<DrawingPath> todo = new ArrayList<>();
@@ -262,7 +262,7 @@ class Scrap
   void deleteSectionPoint( String scrap_name, EraseCommand cmd )
   {
     int index = BrushManager.getPointSectionIndex();
-    synchronized( mCurrentStack ) {
+    synchronized( TDPath.mCommandsLock ) {
       for ( ICanvasCommand icc : mCurrentStack ) { // FIXME reverse_iterator
         if ( icc.commandType() == 0 ) { // DrawingPath
           DrawingPath path = (DrawingPath)icc;
@@ -326,7 +326,7 @@ class Scrap
     DrawingLinePath line1 = new DrawingLinePath( line.mLineType, mScrapIdx );
     DrawingLinePath line2 = new DrawingLinePath( line.mLineType, mScrapIdx );
     if ( line.splitAt( lp, line1, line2, false ) ) {
-      synchronized( mCurrentStack ) {
+      synchronized( TDPath.mCommandsLock ) {
         mCurrentStack.remove( line );
         mCurrentStack.add( line1 );
         mCurrentStack.add( line2 );
@@ -340,7 +340,7 @@ class Scrap
     // checkLines();
   }
 
-  // called from synchronized( mCurrentStack )
+  // called from synchronized( TDPath.mCommandsLock )
   private void doRemoveLinePoint( DrawingPointLinePath line, LinePoint point, SelectionPoint sp )
   { 
     line.remove( point );
@@ -361,7 +361,7 @@ class Scrap
     for ( LinePoint lp = line.mFirst; lp != null; lp = lp.mNext ) 
     {
       if ( lp == point ) {
-        synchronized( mCurrentStack ) {
+        synchronized( TDPath.mCommandsLock ) {
           line.remove( point );
 	}
         synchronized( TDPath.mSelectionLock ) {
@@ -387,7 +387,7 @@ class Scrap
     DrawingLinePath line2 = new DrawingLinePath( line.mLineType, mScrapIdx );
     if ( line.splitAt( lp, line1, line2, true ) ) {
       // Log.v("DistoX", "split " + line.size() + " ==> " + line1.size() + " " + line2.size() );
-      // synchronized( mCurrentStack ) // not neceessary: called in synchronized context
+      // synchronized( TDPath.mCommandsLock ) // not neceessary: called in synchronized context
       {
         eraseCmd.addAction( EraseAction.ERASE_REMOVE, line );
         mCurrentStack.remove( line );
@@ -415,7 +415,7 @@ class Scrap
 
   void sharpenPointLine( DrawingPointLinePath line ) 
   {
-    synchronized( mCurrentStack ) {
+    synchronized( TDPath.mCommandsLock ) {
       line.makeSharp( );
     }
     // checkLines();
@@ -429,7 +429,7 @@ class Scrap
       mSelection.removePath( line );
       clearSelected();
     }
-    synchronized( mCurrentStack ) {
+    synchronized( TDPath.mCommandsLock ) {
       int min_size = ( line.isArea()? 3 : 2 );
       line.makeReduce( decimation, min_size );
     }
@@ -446,7 +446,7 @@ class Scrap
       mSelection.removePath( line );
       clearSelected();
     }
-    synchronized( mCurrentStack ) {
+    synchronized( TDPath.mCommandsLock ) {
       line.makeRock( );
     }
     synchronized( TDPath.mSelectionLock ) {
@@ -457,7 +457,7 @@ class Scrap
 
   void closePointLine( DrawingPointLinePath line )
   {
-    synchronized( mCurrentStack ) {
+    synchronized( TDPath.mCommandsLock ) {
       SelectionPoint sp = mSelection.getSelectionPoint( line.mLast );
       line.makeClose( );
       // re-bucket last line point
@@ -494,7 +494,7 @@ class Scrap
     }
     // int ret = 0;
     if ( sel.size() > 0 ) {
-      synchronized( mCurrentStack ) {
+      synchronized( TDPath.mCommandsLock ) {
         for ( SelectionPoint pt : sel.mPoints ) {
           DrawingPath path = pt.mItem;
           if ( path.isLine() ) {
@@ -624,7 +624,7 @@ class Scrap
   List<DrawingPath> splitPlot( ArrayList< PointF > border, boolean remove ) 
   {
     ArrayList<DrawingPath> paths = new ArrayList<>();
-    synchronized( mCurrentStack ) {
+    synchronized( TDPath.mCommandsLock ) {
       for ( ICanvasCommand c : mCurrentStack ) {
         if ( c.commandType() == 0 ) {
           DrawingPath p = (DrawingPath)c;
@@ -648,8 +648,9 @@ class Scrap
   // USER STATION ---------------------------------------------------------
   void addUserStationsToList( ArrayList<DrawingStationPath> ret )
   {
-    synchronized( mUserStations ) {
-      for ( DrawingStationPath st : mUserStations ) ret.add( st ); 
+    synchronized( TDPath.mStationsLock ) {
+      // for ( DrawingStationPath st : mUserStations ) ret.add( st );
+      ret.addAll( mUserStations );
     }
   }
 
@@ -666,7 +667,7 @@ class Scrap
   void removeUserStation( DrawingStationPath path )
   {
     // Log.v("DistoX", "remove user station " + path.mName );
-    synchronized( mUserStations ) {
+    synchronized( TDPath.mStationsLock ) {
       mUserStations.remove( path );
     }
   }
@@ -681,7 +682,7 @@ class Scrap
   void addUserStation( DrawingStationPath path )
   {
     // Log.v("DistoX", "add user station " + path.mName );
-    synchronized( mUserStations ) {
+    synchronized( TDPath.mStationsLock ) {
       mUserStations.add( path );
     }
   }
@@ -708,7 +709,7 @@ class Scrap
     //   Log.v("DistoX-CMD", "add path. size " + line.size() + " start " + lp.x + " " + lp.y );
     // }
     
-    synchronized( mCurrentStack ) {
+    synchronized( TDPath.mCommandsLock ) {
       mCurrentStack.add( path );
     }
     if ( path.mType != DrawingPath.DRAWING_PATH_NORTH ) {
@@ -724,7 +725,7 @@ class Scrap
   {
     RectF b = new RectF();
     if( mCurrentStack != null ){
-      synchronized( mCurrentStack ) {
+      synchronized( TDPath.mCommandsLock ) {
         for ( ICanvasCommand cmd : mCurrentStack ) {
           cmd.computeBounds( b, true );
           // bounds.union( b );
@@ -738,7 +739,7 @@ class Scrap
   void draw( Canvas c, Matrix mat, float sca )
   {
     if( mCurrentStack != null ){
-      synchronized( mCurrentStack ) {
+      synchronized( TDPath.mCommandsLock ) {
         if ( TDSetting.mWithLevels == 0 ) { // treat no-levels case by itself
           for ( ICanvasCommand cmd : mCurrentStack ) {
             if ( cmd.commandType() == 0 ) {
@@ -768,7 +769,7 @@ class Scrap
     float delta = 2 * size / zoom;
 
     DrawingLinePath ret = null;
-    synchronized( mCurrentStack ) {
+    synchronized( TDPath.mCommandsLock ) {
       for ( ICanvasCommand cmd : mCurrentStack ) {
         if ( cmd.commandType() != 0 ) continue; // FIXME EraseCommand
 
@@ -827,7 +828,7 @@ class Scrap
         synchronized( TDPath.mSelectionLock ) {
           mSelection.removePath( line );
         }
-        synchronized( mCurrentStack ) {
+        synchronized( TDPath.mCommandsLock ) {
           // line.replacePortion( lp1, lp2, line2 );
           lp1.mNext = first.mNext;
           first.mPrev = lp1;
@@ -853,7 +854,7 @@ class Scrap
     synchronized( TDPath.mSelectionLock ) {
       mSelection.removePath( line0 );
     }
-    synchronized( mCurrentStack ) {
+    synchronized( TDPath.mCommandsLock ) {
       boolean reverse = line0.mFirst.distance( line.mFirst ) < line0.mLast.distance( line.mFirst );
       if ( reverse ) line0.reversePath();
       line0.append( line );
@@ -876,7 +877,7 @@ class Scrap
 
   void addCommandsToList( ArrayList< DrawingPath > ret ) 
   {
-    synchronized( mCurrentStack ) {
+    synchronized( TDPath.mCommandsLock ) {
       for ( ICanvasCommand cmd : mCurrentStack ) {
         if ( cmd.commandType() == 0 ) {
           ret.add( (DrawingPath)cmd ); // FIXME copy path? ret.add( ((DrawingPath)cmd).clone() );
@@ -890,18 +891,18 @@ class Scrap
    */
   void checkLines()
   {
-    synchronized( mCurrentStack ) {
+    synchronized( TDPath.mCommandsLock ) {
       int size = mCurrentStack.size();
       for ( int i1 = 0; i1 < size; ++i1 ) {
         ICanvasCommand cmd1 = mCurrentStack.get( i1 );
-	if ( cmd1.commandType() != 0 ) continue;
+        if ( cmd1.commandType() != 0 ) continue;
         DrawingPath path1 = (DrawingPath)cmd1;
         if ( ! path1.isLine() ) continue;
         DrawingLinePath line1 = (DrawingLinePath)path1;
         for ( int i2 = 0; i2 < size; ++i2 ) {
           if ( i2 == i1 ) continue;
           ICanvasCommand cmd2 = mCurrentStack.get( i2 );
-	  if ( cmd2.commandType() != 0 ) continue;
+          if ( cmd2.commandType() != 0 ) continue;
           DrawingPath path2 = (DrawingPath)cmd2;
           if ( ! path2.isLine() ) continue;
           DrawingLinePath line2 = (DrawingLinePath)path2;
@@ -910,7 +911,7 @@ class Scrap
             TDLog.Error("LINE OVERLAP " + i1 + "-" + i2 + " total nr. " + size );
             // for ( int i=0; i<size; ++i ) {
             //   ICanvasCommand cmd = mCurrentStack.get( i );
-	    //   if ( cmd.commandType() != 0 ) continue;
+            //   if ( cmd.commandType() != 0 ) continue;
             //   DrawingPath path = (DrawingPath)cmd;
             //   if ( ! path.isLine() ) continue;
             //   DrawingLinePath line = (DrawingLinePath)path;
@@ -935,7 +936,7 @@ class Scrap
   {
     if ( mCurrentStack != null ) {
       Selection selection = new Selection();
-      synchronized( mCurrentStack ) {
+      synchronized( TDPath.mCommandsLock ) {
         for ( ICanvasCommand cmd : mCurrentStack ) {
           if ( cmd.commandType() == 0 ) {
             cmd.flipXAxis(z);
@@ -944,7 +945,7 @@ class Scrap
               DrawingLinePath line = (DrawingLinePath)path;
               line.flipReversed();
             }
-	    synchronized ( TDPath.mSelectionLock ) {
+            synchronized ( TDPath.mSelectionLock ) {
               selection.insertPath( path );
 	    }
           }
@@ -952,7 +953,7 @@ class Scrap
       }
       mSelection = selection;
     }
-    synchronized( mUserStations ) {
+    synchronized( TDPath.mStationsLock ) {
       for ( DrawingStationPath p : mUserStations ) {
         p.flipXAxis(z);
       }
@@ -962,7 +963,7 @@ class Scrap
   void shiftDrawing( float x, float y )
   {
     if ( mCurrentStack != null ) {
-      synchronized( mCurrentStack ) {
+      synchronized( TDPath.mCommandsLock ) {
         for ( ICanvasCommand cmd : mCurrentStack ) {
           cmd.shiftPathBy( x, y );
         }
@@ -978,7 +979,7 @@ class Scrap
   void scaleDrawing( float z, Matrix m )
   {
     if ( mCurrentStack != null ){
-      synchronized( mCurrentStack ) {
+      synchronized( TDPath.mCommandsLock ) {
         for ( ICanvasCommand cmd : mCurrentStack ) {
           cmd.scalePathBy( z, m );
         }
@@ -1075,7 +1076,7 @@ class Scrap
 
     boolean reverse1 = ( pt1 == line1.mLast );
     boolean reverse2 = ( pt2 == line2.mFirst );
-    synchronized( mCurrentStack ) {
+    synchronized( TDPath.mCommandsLock ) {
       if ( reverse2 ) line2.reversePath();
       if ( reverse1 ) line1.reversePath();
       LinePoint pt = line1.mFirst; // append to end
@@ -1491,7 +1492,7 @@ class Scrap
       ret = 2;
     }
 
-    synchronized( mCurrentStack ) {
+    synchronized( TDPath.mCommandsLock ) {
       if ( ret == 0 ) { 
         synchronized( TDPath.mSelectionLock ) {
           mSelection.removePath( area );
@@ -1714,7 +1715,7 @@ class Scrap
   {
     float xmin=1000000f, xmax=-1000000f, 
           ymin=1000000f, ymax=-1000000f;
-    synchronized( mCurrentStack ) {
+    synchronized( TDPath.mCommandsLock ) {
       for ( ICanvasCommand cmd : mCurrentStack ) {
         if ( cmd.commandType() != 0 ) continue;
         DrawingPath p = (DrawingPath) cmd;
@@ -1738,7 +1739,7 @@ class Scrap
 
   DrawingAudioPath getAudioPoint( long bid )
   {
-    synchronized( mCurrentStack ) {
+    synchronized( TDPath.mCommandsLock ) {
       for ( ICanvasCommand cmd : mCurrentStack ) {
         if ( cmd.commandType() == 0 ) {
           DrawingPath path = (DrawingPath)cmd;
@@ -1776,49 +1777,49 @@ class Scrap
 
   void linkSections( List<DrawingStationName> stations )
   {
-    synchronized( mCurrentStack ) {
+    synchronized( TDPath.mCommandsLock ) {
       for ( ICanvasCommand cmd : mCurrentStack ) {
         if ( cmd.commandType() != 0 ) continue; 
         DrawingPath p = (DrawingPath)cmd;
         if ( ! p.isPoint() ) continue;
         DrawingPointPath pt = (DrawingPointPath)p;
         if ( ! BrushManager.isPointSection( pt.mPointType ) ) continue;
-	// get the line/station
-	String scrap = p.getOption("-scrap");
+        // get the line/station
+        String scrap = p.getOption("-scrap");
         if ( scrap != null ) {
-	  // Log.v("DistoXX", "section point scrap " + scrap );
-	  int pos = scrap.lastIndexOf( "-xx" );
-	  if ( pos > 0 ) {
+          // Log.v("DistoXX", "section point scrap " + scrap );
+          int pos = scrap.lastIndexOf( "-xx" );
+          if ( pos > 0 ) {
             String id = scrap.substring(pos+1); // line id
-	    if ( /* id != null && */ id.length() > 0 ) { // id always not null [?]
+            if ( /* id != null && */ id.length() > 0 ) { // id always not null [?]
               for ( ICanvasCommand cmd2 : mCurrentStack ) {
                 if ( cmd2.commandType() != 0 ) continue; 
                 DrawingPath p2 = (DrawingPath)cmd2;
                 if ( ! p2.isLine() ) continue;
                 DrawingLinePath ln = (DrawingLinePath)p2;
                 if ( ! BrushManager.isLineSection( ln.mLineType ) ) continue;
-	        if ( id.equals( ln.getOption("-id") ) ) {
+                if ( id.equals( ln.getOption("-id") ) ) {
                   pt.setLink( ln );
-	          break;
-	        }
-	      }
-	    }
-	  } else {
+                  break;
+                }
+              }
+            }
+          } else {
             pos = scrap.lastIndexOf( "-xs-" );
-	    if ( pos < 0 ) pos = scrap.lastIndexOf( "-xh-" );
-	    if ( pos > 0 ) {
+            if ( pos < 0 ) pos = scrap.lastIndexOf( "-xh-" );
+            if ( pos > 0 ) {
               String name = scrap.substring(pos+4);
-	      if ( /* name != null && */ name.length() > 0 ) { // name always not null [?]
-	        // Log.v("DistoXX", "section station " + name );
-	        for ( DrawingStationName st : stations ) {
+              if ( /* name != null && */ name.length() > 0 ) { // name always not null [?]
+                // Log.v("DistoXX", "section station " + name );
+                for ( DrawingStationName st : stations ) {
                   if ( name.equals( st.getName() ) ) {
                     pt.setLink( st );
-	            break;
+                    break;
                   }
-	        }
-	      }
-	    }
-	  }
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -1833,7 +1834,7 @@ class Scrap
 
       if ( cmd.commandType() == 0 ) {
         DrawingPath redoCommand = (DrawingPath)cmd;
-        synchronized( mCurrentStack ) {
+        synchronized( TDPath.mCommandsLock ) {
           mCurrentStack.add( redoCommand );
         }
         synchronized( TDPath.mSelectionLock ) {
@@ -1845,14 +1846,14 @@ class Scrap
           DrawingPath path = action.mPath;
           // Log.v("DistoX", "REDO " + actionName[action.mType] + " path " + path.mType );
           if ( action.mInitialType == EraseAction.ERASE_INSERT ) {
-            synchronized( mCurrentStack ) {
+            synchronized( TDPath.mCommandsLock ) {
               mCurrentStack.add( path );
             }
             synchronized( TDPath.mSelectionLock ) {
               mSelection.insertPath( path );
             }
           } else if ( action.mType == EraseAction.ERASE_REMOVE ) {
-            synchronized( mCurrentStack ) {
+            synchronized( TDPath.mCommandsLock ) {
               mCurrentStack.remove( path );
             }
             synchronized( TDPath.mSelectionLock ) {
@@ -1862,7 +1863,7 @@ class Scrap
             synchronized( TDPath.mSelectionLock ) {
               mSelection.removePath( path );
             }
-            synchronized( mCurrentStack ) {
+            synchronized( TDPath.mCommandsLock ) {
               action.restorePoints( false ); // false: use new points
             }
             synchronized( TDPath.mSelectionLock ) {
@@ -1870,7 +1871,7 @@ class Scrap
             }
           }
         }
-        synchronized( mCurrentStack ) {
+        synchronized( TDPath.mCommandsLock ) {
           mCurrentStack.add( cmd );
         }
       }
@@ -1962,7 +1963,7 @@ class Scrap
 
   void shiftAreaShaders( float dx, float dy, float s, boolean landscape )
   {
-    synchronized ( mCurrentStack ) {
+    synchronized ( TDPath.mCommandsLock ) {
       for ( ICanvasCommand c : mCurrentStack ) {
         if ( c.commandType() == 0 ) {
           DrawingPath path = (DrawingPath)c;
@@ -1981,7 +1982,7 @@ class Scrap
   void drawOutline( Canvas canvas, Matrix mat, float scale, RectF bbox )
   {
     if ( mCurrentStack == null ) return;
-    synchronized( mCurrentStack ) {
+    synchronized( TDPath.mCommandsLock ) {
       for ( ICanvasCommand cmd : mCurrentStack  ) {
         if ( cmd.commandType() == 0 ) {
           DrawingPath path = (DrawingPath)cmd;
@@ -1997,7 +1998,7 @@ class Scrap
   void drawGreyOutline( Canvas canvas, Matrix mat, float scale, RectF bbox )
   {
     if ( mCurrentStack == null ) return;
-    synchronized( mCurrentStack ) {
+    synchronized( TDPath.mCommandsLock ) {
       for ( ICanvasCommand cmd : mCurrentStack  ) {
         if ( cmd.commandType() == 0 ) {
           DrawingPath path = (DrawingPath)cmd;
@@ -2013,7 +2014,7 @@ class Scrap
   void drawAll( Canvas canvas, Matrix matrix, float scale, RectF bbox )
   {
     if ( mCurrentStack == null ) return;
-    synchronized( mCurrentStack ) {
+    synchronized( TDPath.mCommandsLock ) {
       if ( TDSetting.mWithLevels == 0 ) { // treat no-levels case by itself
         for ( ICanvasCommand cmd : mCurrentStack  ) {
           if ( cmd.commandType() == 0 ) {
@@ -2058,7 +2059,7 @@ class Scrap
 
   void drawUserStations( Canvas canvas, Matrix matrix, float scale, RectF bbox )
   {
-    synchronized( mUserStations ) {
+    synchronized( TDPath.mStationsLock ) {
       for ( DrawingStationPath p : mUserStations ) p.draw( canvas, matrix, scale, bbox );
     }
   }
@@ -2328,7 +2329,7 @@ class Scrap
     isMultiselection = false;
     synchronized ( TDPath.mSelectionLock ) {
       for ( DrawingPath path : mMultiselected ) mSelection.removePath( path );
-      synchronized( mCurrentStack ) {
+      synchronized( TDPath.mCommandsLock ) {
         for ( DrawingPath path : mMultiselected ) mCurrentStack.remove( path );
       }
       mMultiselected.clear();
@@ -2340,7 +2341,7 @@ class Scrap
     // if ( ! isMultiselection ) return;
     synchronized ( TDPath.mSelectionLock ) {
       for ( DrawingPath path : mMultiselected ) mSelection.removePath( path );
-      synchronized( mCurrentStack ) {
+      synchronized( TDPath.mCommandsLock ) {
         for ( DrawingPath path : mMultiselected ) {
           DrawingPointLinePath line = (DrawingPointLinePath)path;
           int min_size = ( path.isArea()? 3 : 2 );
@@ -2355,7 +2356,7 @@ class Scrap
   {
     // if ( ! isMultiselection ) return;
     synchronized ( TDPath.mSelectionLock ) {
-      synchronized( mCurrentStack ) {
+      synchronized( TDPath.mCommandsLock ) {
 	int k0 = mMultiselected.size();
         for ( int k1=0; k1<k0; ++k1 ) {
           DrawingPointLinePath l1 = (DrawingPointLinePath)( mMultiselected.get(k1) );

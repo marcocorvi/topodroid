@@ -38,10 +38,10 @@ class ExportDialog extends MyDialog
   private Button   mBtnOk;
   // private Button   mBtnBack;
 
-  private IExporter mParent;
+  private final IExporter mParent;
   private String[]  mTypes;
   private String    mSelected;
-  private int mTitle;
+  private final int mTitle;
 
   ExportDialog( Context context, IExporter parent, String[] types, int title )
   {

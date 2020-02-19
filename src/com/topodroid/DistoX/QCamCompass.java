@@ -278,7 +278,7 @@ class QCamCompass extends Dialog
           mZoomBtnsCtrl.setVisible( true );
         }
       }
-    } else if (action == MotionEvent.ACTION_UP) { 
+    // } else if (action == MotionEvent.ACTION_UP) {
       // Log.v("DistoX-QCAM", "UP" );
     }
     return false;

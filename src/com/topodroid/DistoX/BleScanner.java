@@ -39,7 +39,7 @@ class BleScanner
 
   private static boolean mScanning = false;
 
-  private DeviceActivity mParent;
+  final private DeviceActivity mParent;
 
   private ScanCallback mScanCallback;
   private BluetoothAdapter.LeScanCallback mLeScanCallback;

@@ -278,7 +278,7 @@ public class MainWindow extends Activity
     // Log.v("DistoX-MOVE", "start move survey");
     if ( mApp.moveSurveyData( old_sid, old_id, new_survey ) ) {
       mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true ); // FIXME CO-SURVEY
-    } else {
+    // } else {
     }
   }
 

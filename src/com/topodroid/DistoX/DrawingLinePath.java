@@ -28,7 +28,7 @@ import java.io.IOException;
 // import java.util.Iterator;
 // import java.util.List;
 // import java.util.ArrayList;
-import java.util.Locale;
+// import java.util.Locale;
 
 // import android.util.Log;
 
@@ -407,10 +407,9 @@ class DrawingLinePath extends DrawingPointLinePath
     String name  = BrushManager.getLineThName( mLineType );
     if ( name == null ) { // should not happen
       TDLog.Error("null line name");
-      return;
+      name = "user";
     }
     String group = BrushManager.getLineGroup( mLineType );
-    if ( group == null ) group = name;
     try {
       dos.write( 'L' );
       dos.writeUTF( name );

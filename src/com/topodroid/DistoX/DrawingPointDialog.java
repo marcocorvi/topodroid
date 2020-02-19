@@ -37,7 +37,7 @@ class DrawingPointDialog extends MyDialog
   private final DrawingPointPath mPoint;
   private final DrawingWindow  mParent;
   private final boolean mOrientable;
-  private int mPointType;
+  private final int mPointType;
 
   // private TextView mTVtype;
   private EditText mEToptions;

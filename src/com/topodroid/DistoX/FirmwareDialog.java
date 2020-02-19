@@ -48,7 +48,7 @@ class FirmwareDialog extends MyDialog
   private EditText mETfile;
 
   private final TopoDroidApp   mApp;
-  private Resources mRes;
+  private final Resources mRes;
   private KeyListener    mETkeyListener;
 
   FirmwareDialog( Context context, Resources res, TopoDroidApp app )

@@ -88,13 +88,14 @@ abstract class ItemDrawer extends Activity
       if ( amin > ages[k] ) { amin = ages[k]; kmin = k; }
     }
     int amax = ages[kmax] - amin + 1;
-    StringBuilder sb = new StringBuilder();
-    sb.append("ages " + amin + " " + amax +": ");
-    for ( int k=0; k<NR_RECENT; ++k ) {
-      ages[k] -= amin;
-      sb.append( " " + ages[k] );
-    }
-    sb.append( " kmin " + kmin );
+
+    // StringBuilder sb = new StringBuilder();
+    // sb.append("ages " + amin + " " + amax +": ");
+    // for ( int k=0; k<NR_RECENT; ++k ) {
+    //   ages[k] -= amin;
+    //   sb.append( " " + ages[k] );
+    // }
+    // sb.append( " kmin " + kmin );
     // Log.v("DistoX-AGE", sb.toString() );
 
     for ( int k=0; k<NR_RECENT; ++k ) {

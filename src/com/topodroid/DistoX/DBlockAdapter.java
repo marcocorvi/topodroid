@@ -33,12 +33,12 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
                     // , OnClickListener
 {
   // private Context mContext;
-  private ShotWindow mParent;
+  private final ShotWindow mParent;
   ArrayList< DBlock > mItems;
   ArrayList< DBlock > mSelect;
   boolean show_ids;  //!< whether to show data ids
-  private LayoutInflater mLayoutInflater;
-  private boolean diving;
+  private final LayoutInflater mLayoutInflater;
+  private final boolean diving;
   private SearchResult mSearch;
 
   // private ArrayList< View > mViews;

@@ -14,7 +14,7 @@ package com.topodroid.DistoX;
 // import android.util.Log;
 
 import java.util.Locale;
-import java.util.List;
+// import java.util.List;
 import java.util.ArrayList;
 // import java.util.HashMap;
 

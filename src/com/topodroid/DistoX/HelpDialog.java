@@ -39,13 +39,13 @@ class HelpDialog extends MyDialog
   private ListView    mList;
   private HelpAdapter mAdapter;
 
-  private int[] mIcons;
-  private int[] mMenus;
-  private int[] mIconTexts;
-  private int[] mMenuTexts;
-  private int mNr0;
-  private int mNr1;
-  private String mPage;
+  private final int[] mIcons;
+  private final int[] mMenus;
+  private final int[] mIconTexts;
+  private final int[] mMenuTexts;
+  private final int mNr0;
+  private final int mNr1;
+  private final String mPage;
 
   private Button mBtnManual;
 

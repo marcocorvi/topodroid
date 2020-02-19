@@ -204,7 +204,7 @@ public class CalibActivity extends Activity
         mEditComment.setHint( R.string.description );
       }
       switch ( info.algo ) {
-        case 0: mCBAlgoAuto.setChecked( true ); break;
+        // case 0: mCBAlgoAuto.setChecked( true ); break;
         case 1: mCBAlgoLinear.setChecked( true ); break;
         case 2: mCBAlgoNonLinear.setChecked( true ); break;
         case 3: mCBAlgoMinimum.setChecked( true ); break;
@@ -467,7 +467,7 @@ public class CalibActivity extends Activity
       intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_CALIB );
       startActivity( intent );
 
-    } else if ( p++ == pos ) { // HELP
+    } else if ( p == pos ) { // HELP
       new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE )).show();
     }
   }

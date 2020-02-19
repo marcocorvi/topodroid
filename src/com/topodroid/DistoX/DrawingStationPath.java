@@ -47,7 +47,7 @@ class DrawingStationPath extends DrawingPath
   // }
 
 
-  public DrawingStationPath( String name, float x, float y, int scale, int scrap )
+  DrawingStationPath( String name, float x, float y, int scale, int scrap )
   {
     super( DrawingPath.DRAWING_PATH_STATION, null, scrap );
     // TDLog.Log( TDLog.LOG_PATH, "Point " + mType + " X " + x + " Y " + y );

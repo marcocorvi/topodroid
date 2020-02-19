@@ -747,13 +747,13 @@ class DistoXNum
           if ( ! depths.containsKey(blk.mFrom) ) depths.put( blk.mFrom, Float.valueOf( blk.mDepth ) );
         }
       }
-      boolean depth_error = false;
+      // boolean depth_error = false;
       // String error = TDString.EMPTY;
       for ( DBlock blk : data ) { // set dblock clino
 	if ( blk.mTo != null && blk.mTo.length() > 0 && depths.containsKey( blk.mTo ) ) {
           float tdepth = depths.get( blk.mTo ).floatValue();
 	  if ( ! blk.makeClino( tdepth ) ) {
-	    depth_error = true;
+	    // depth_error = true;
 	    TDLog.Error("Failed make clino: " +  blk.mFrom + "-" + blk.mTo + " (" + tdepth + ") " );
 	  }
         }

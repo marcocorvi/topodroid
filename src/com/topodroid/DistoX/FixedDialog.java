@@ -72,7 +72,7 @@ class FixedDialog extends MyDialog
 
   // private Button   mButtonCancel;
 
-  private WorldMagneticModel mWMM;
+  private final WorldMagneticModel mWMM;
 
 
   FixedDialog( Context context, FixedActivity parent, FixedInfo fxd )

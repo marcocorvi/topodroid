@@ -842,7 +842,7 @@ public class DeviceActivity extends Activity
       Intent intent = new Intent( this, TDPrefActivity.class );
       intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_DEVICE );
       startActivity( intent );
-    } else if ( p++ == pos ) { // HELP
+    } else if ( p == pos ) { // HELP
       new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
     // } else if ( TDLevel.overTester && p++ == pos ) { // CALIB_RESET
     //   doCalibReset();

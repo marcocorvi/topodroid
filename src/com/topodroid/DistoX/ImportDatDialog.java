@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-import java.util.List;
+// import java.util.List;
 // import java.util.ArrayList;
 
 import android.os.Bundle;

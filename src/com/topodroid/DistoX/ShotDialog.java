@@ -629,7 +629,7 @@ class ShotDialog extends MyDialog
     if ( mBlk.getIntExtend() != shot_extend ) {
       if ( /* leg_next || */ ( sflen && stlen ) ) { // leg
         mBlk.setExtend( extend, DBlock.STRETCH_NONE ); // FIXME_STRETCH
-      } else if ( ( sflen && ! stlen ) || ( stlen && ! sflen ) ) { // splay
+      } else if ( ( sflen /* && ! stlen */ ) || ( stlen /* && ! sflen */ ) ) { // splay
         // extend = shot_extend + DBlock.EXTEND_FVERT;
         mBlk.setExtend( extend, DBlock.STRETCH_NONE ); // FIXME_STRETCH
       }

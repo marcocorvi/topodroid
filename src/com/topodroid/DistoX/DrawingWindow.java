@@ -94,8 +94,8 @@ public class DrawingWindow extends ItemDrawer
                                       , IPhotoInserter
                                       , IAudioInserter
 {
-  private static int ZOOM_TRANSLATION_1 = -50; // was -42
-  private static int ZOOM_TRANSLATION_3 = -200; 
+  private static final int ZOOM_TRANSLATION_1 = -50; // was -42
+  private static final int ZOOM_TRANSLATION_3 = -200;
   private static int ZOOM_TRANSLATION   = ZOOM_TRANSLATION_1;
  
   private static final int[] izons_ok = {
@@ -3511,15 +3511,14 @@ public class DrawingWindow extends ItemDrawer
           }
         }
         if ( mShiftMove ) {
-          if ( Math.abs(mStartX - xc) < TDSetting.mPointingRadius
-            && Math.abs(mStartY - yc) < TDSetting.mPointingRadius ) {
+          if ( Math.abs(mStartX - xc) < TDSetting.mPointingRadius && Math.abs(mStartY - yc) < TDSetting.mPointingRadius ) {
             // mEditMove = false;
-	        // PATH_MULTISELECTION
-	        if ( mDrawingSurface.isMultiselection() ) {
-	          // TODO
-	        } else {
-	          clearSelected();
-	        }
+	    // PATH_MULTISELECTION
+	    if ( ! mDrawingSurface.isMultiselection() ) {
+              clearSelected();
+            // } else {
+            //   TODO
+	    }
           }
         }
         mShiftMove = false;
@@ -6665,7 +6664,8 @@ public class DrawingWindow extends ItemDrawer
             hh = h;
           }
         }
-        for ( int h=hh-1; h>k; --h ) pts.remove(h);
+        // for ( int h=hh-1; h>k; --h ) pts.remove(h);
+        pts.subList( k+1, hh ).clear();
       }
     }
   }

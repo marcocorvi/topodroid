@@ -402,6 +402,10 @@ class DrawingAreaPath extends DrawingPointLinePath
   void toDataStream( DataOutputStream dos, int scrap )
   {
     String name  = BrushManager.getAreaThName( mAreaType );
+    if ( name == null ) {
+      TDLog.Error("null area name");
+      name = "user";
+    }
     String group = BrushManager.getAreaGroup( mAreaType );
     try {
       dos.write( 'A' );

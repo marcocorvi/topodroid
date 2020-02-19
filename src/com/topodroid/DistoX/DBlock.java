@@ -80,10 +80,10 @@ class DBlock
   static final private int BLOCK_BLANK_LEG  = 3; // blank centerline leg-shot
   static final private int BLOCK_BACK_LEG   = 4; // 
   // splays must come last
-  static final int BLOCK_SPLAY      = 5;
-  static final int BLOCK_X_SPLAY    = 6; // FIXME_X_SPLAY cross splay
-  static final int BLOCK_H_SPLAY    = 7; // FIXME_H_SPLAY horizontal splay
-  static final int BLOCK_V_SPLAY    = 8; // FIXME_V_SPLAY vertical splay
+  static final private int BLOCK_SPLAY      = 5;
+  static final private int BLOCK_X_SPLAY    = 6; // FIXME_X_SPLAY cross splay
+  static final private int BLOCK_H_SPLAY    = 7; // FIXME_H_SPLAY horizontal splay
+  static final private int BLOCK_V_SPLAY    = 8; // FIXME_V_SPLAY vertical splay
 
   static final private long[] legOfBlockType = {
     LegType.NORMAL, // 0 BLANK

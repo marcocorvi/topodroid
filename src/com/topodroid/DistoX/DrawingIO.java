@@ -33,6 +33,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 // import java.io.EOFException;
 
+// import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 // import android.util.ArraySet; // REQUIRES API-23
@@ -583,10 +584,10 @@ class DrawingIO
 
   static int skipTdrHeader( DataInputStream dis )
   {
-    int what, type, dir;
+    int what, type; // , dir;
     int version = 0;
     int flag = 0;
-    float x, y;
+    // float x, y;
     int kmax = 3; // number of header entries 
     try {
       for ( int k=0; k<kmax; ++k ) {
@@ -599,25 +600,27 @@ class DrawingIO
           flag |= 0x02;
           String name = dis.readUTF();
           type = dis.readInt();
-          if ( type == PlotInfo.PLOT_PROJECTED ) dir = dis.readInt();
-          String lib = dis.readUTF();
-          lib = dis.readUTF();
-          lib = dis.readUTF();
+          if ( type == PlotInfo.PLOT_PROJECTED ) /* dir = */ dis.readInt();
+          /* String lib = */ dis.readUTF();
+          /* lib = */ dis.readUTF();
+          /* lib = */ dis.readUTF();
 	  // Log.v("DistoXs", "TDR header scrap: " + name + " type " + type );
         } else if ( what == 'I' ) {
           flag |= 0x04;
-          x = dis.readFloat();
-          y = dis.readFloat();
+          /* x = */ dis.readFloat();
+          /* y = */ dis.readFloat();
 	  // Log.v("DistoXs", "TDR header bbox from: " + x + " " + y );
-          x = dis.readFloat();
-          y = dis.readFloat();
+          /* x = */ dis.readFloat();
+          /* y = */ dis.readFloat();
 	  // Log.v("DistoXs", "TDR header bbox to:   " + x + " " + y );
           if ( dis.readInt() == 1 ) {
-            x = dis.readFloat();
-            y = dis.readFloat();
-            x = dis.readFloat();
-            y = dis.readFloat();
+            /* x = */ dis.readFloat();
+            /* y = */ dis.readFloat();
+            /* x = */ dis.readFloat();
+            /* y = */ dis.readFloat();
           }
+        } else if ( what == 'N' ) { // scrap index
+          /* scrap_index = */ dis.readInt();
         } else {
           break;
         }
@@ -644,28 +647,28 @@ class DrawingIO
     boolean in_scrap = false;
     int scrap_index = 0;
     BrushManager.resetPointOrientations();
-    DrawingPath path = null;
-    int project_dir = 0;
-    float north_x1, north_y1, north_x2, north_y2;
+    DrawingPath path; // = null;
+    // int project_dir = 0;
+    // float north_x1, north_y1, north_x2, north_y2;
 
     File file = new File( filename );
     if ( ! file.exists() ) return false;
 
-    FileInputStream fis = null;
-    DataInputStream dis = null;
+    FileInputStream fis; // = null;
+    DataInputStream dis; // = null;
 
     // FIXME SECTION_RENAME
     int pos = filename.lastIndexOf('/');
-    String survey_name = null;
+    String survey_name; // = null;
     if ( pos >= 0 ) {
       survey_name = filename.substring(pos+1);
     } else {
       survey_name = filename;
     }
-    if ( survey_name != null ) {
+    // if ( survey_name != null ) { // always true
       pos = survey_name.indexOf('-');
       if ( pos > 0 ) survey_name = survey_name.substring(0, pos);
-    }
+    // }
 
     // Log.v("DistoX", "drawing I/O load stream " + filename );
     // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
@@ -706,10 +709,10 @@ class DrawingIO
                   bbox.bottom = ymax;
                 }
                 if ( dis.readInt() == 1 ) {
-                  north_x1 = dis.readFloat();
-                  north_y1 = dis.readFloat();
-                  north_x2 = dis.readFloat();
-                  north_y2 = dis.readFloat();
+                  /* north_x1 = */ dis.readFloat();
+                  /* north_y1 = */ dis.readFloat();
+                  /* north_x2 = */ dis.readFloat();
+                  /* north_y2 = */ dis.readFloat();
                 }
                 // TDLog.Log(TDLog.LOG_PLOT, "TDR bbox " + xmin + "-" + xmax + " " + ymin + "-" + ymax );
               }
@@ -718,7 +721,7 @@ class DrawingIO
               {
                 String name = dis.readUTF();
                 int type = dis.readInt();
-                if ( type == PlotInfo.PLOT_PROJECTED ) project_dir = dis.readInt();
+                if ( type == PlotInfo.PLOT_PROJECTED ) /* project_dir = */ dis.readInt();
                 // read palettes
                 String points = dis.readUTF();
                 String[] vals = points.split(",");
@@ -738,7 +741,8 @@ class DrawingIO
               break;
             case 'P':
 	      // FIXME SECTION_RENAME
-              path = DrawingPointPath.loadDataStream( version, dis, dx, dy /*, missingSymbols */ ).fixScrap( survey_name );
+              path = DrawingPointPath.loadDataStream( version, dis, dx, dy /*, missingSymbols */ );
+              if ( path != null ) ((DrawingPointPath)path).fixScrap( survey_name );
               break;
             case 'T':
               path = DrawingLabelPath.loadDataStream( version, dis, dx, dy );
@@ -813,11 +817,11 @@ class DrawingIO
   {
     int version = 0;
     boolean in_scrap = false;
-    int scrap_index = 0;
+    // int scrap_index = 0;
 
     File file = new File( filename );
-    FileInputStream fis = null;
-    DataInputStream dis = null;
+    FileInputStream fis; // = null;
+    DataInputStream dis; // = null;
 
     // Log.v("DistoX-OUTLINE", "drawing I/O load outline stream " + filename + " name " + ((name == null)? "null" : name) );
     // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
@@ -873,7 +877,7 @@ class DrawingIO
               }
               break;
             case 'N':
-              scrap_index = dis.readInt();
+              /* scrap_index = */ dis.readInt();
               break;
             case 'P':
               DrawingPointPath.loadDataStream( version, dis, dx, dy /*, null */ );
@@ -895,6 +899,12 @@ class DrawingIO
               break;
             case 'X':
               DrawingStationName.loadDataStream( version, dis ); // consume DrawingStationName data
+              break;
+            case 'Y':
+              DrawingPhotoPath.loadDataStream( version, dis, dx, dy );
+              break;
+            case 'Z':
+              DrawingAudioPath.loadDataStream( version, dis, dx, dy );
               break;
             // case 'G':
             //   DrawingFixedName.loadDataStream( version, dis ); // consume DrawingFixedName data
@@ -955,7 +965,7 @@ class DrawingIO
         if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) continue; // safety check: should not happen
         p.toDataStream( dos, scrap );
       }
-      // synchronized( userstations ) { // user stations are always exported to data stream
+      // synchronized( TDPath.mStationsLock ) { // user stations are always exported to data stream
       //   for ( DrawingStationPath sp : userstations ) {
       //     sp.toDataStream( dos, scrap );
       //   }
@@ -963,7 +973,7 @@ class DrawingIO
       dos.write('F'); // final: bbox and autostations (reading can skip all that follows)
 
       // if ( TDSetting.mAutoStations ) {
-      //   synchronized( stations ) {
+      //   synchronized( TDPath.mStationsLock ) {
       //     for ( DrawingStationName st : stations ) {
       //       NumStation station = st.getNumStation();
       //       if ( station != null && station.barriered() ) continue;
@@ -972,7 +982,7 @@ class DrawingIO
       //       st.toDataStream( dos, -1 );
       //     }
       //   }
-      //   synchronized( fixeds ) {
+      //   synchronized( TDPath.mFixedsLock ) {
       //     for ( DrawingFixedName fx : fixeds ) {
       //       if ( bbox.left > fx.cx || bbox.right  < fx.cx ) continue;
       //       if ( bbox.top  > fx.cy || bbox.bottom < fx.cy ) continue;
@@ -1031,7 +1041,7 @@ class DrawingIO
         dos.writeInt( scrap.mScrapIdx );
 
         List< ICanvasCommand > cstack = scrap.mCurrentStack;
-        synchronized( cstack ) {
+        synchronized( TDPath.mCommandsLock ) {
           for ( ICanvasCommand cmd : cstack ) {
             if ( cmd.commandType() != 0 ) continue;
             DrawingPath p = (DrawingPath) cmd;
@@ -1040,7 +1050,7 @@ class DrawingIO
           }
         }
         List< DrawingStationPath > userstations = scrap.mUserStations;
-        synchronized( userstations ) { // user stations are always exported to data stream
+        synchronized( TDPath.mStationsLock ) { // user stations are always exported to data stream
           for ( DrawingStationPath sp : userstations ) {
             sp.toDataStream( dos, -1 );
           }
@@ -1049,7 +1059,7 @@ class DrawingIO
       dos.write('F'); // final: bbox and autostations (reading can skip all that follows)
 
       if ( TDSetting.mAutoStations ) {
-        synchronized( stations ) {
+        synchronized( TDPath.mStationsLock ) {
           for ( DrawingStationName st : stations ) {
             NumStation station = st.getNumStation();
             if ( station != null && station.barriered() ) continue;
@@ -1058,7 +1068,7 @@ class DrawingIO
             st.toDataStream( dos, -1 );
           }
         }
-        // synchronized( fixeds ) {
+        // synchronized( TDPath.mFixedsLock ) {
         //   for ( DrawingFixedName fx : fixeds ) {
         //     if ( bbox.left > fx.cx || bbox.right  < fx.cx ) continue;
         //     if ( bbox.top  > fx.cy || bbox.bottom < fx.cy ) continue;
@@ -1164,7 +1174,7 @@ class DrawingIO
     float toTherion = TDSetting.mToTherion;
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
-           synchronized( splays ) {
+    synchronized( TDPath.mShotsLock ) {
       for ( DrawingPath splay : splays ) {
         // if ( bbox.left > splay.right  || bbox.right  < splay.left ) continue;
         // if ( bbox.top  > splay.bottom || bbox.bottom < splay.top  ) continue;
@@ -1212,7 +1222,7 @@ class DrawingIO
 
   static private void exportTherionStations( BufferedWriter out, List<DrawingStationName> stations, RectF bbox ) throws IOException
   {
-    synchronized( stations ) {
+    synchronized( TDPath.mStationsLock ) {
       for ( DrawingStationName st : stations ) {
         NumStation station = st.getNumStation();
         if ( station != null && station.barriered() ) continue;
@@ -1232,7 +1242,7 @@ class DrawingIO
 
   static private void exportTherionUserStations( BufferedWriter out, List<DrawingStationPath> userstations ) throws IOException
   {
-    synchronized( userstations ) {
+    synchronized( TDPath.mStationsLock ) {
       for ( DrawingStationPath sp : userstations ) {
         String sp_str = sp.toTherion();
         if ( sp_str != null ) {
@@ -1269,7 +1279,6 @@ class DrawingIO
       // exportTherionHeader2( out );
       int scrap_nr = 0;
       for ( Scrap scrap : scraps ) {
-        List<ICanvasCommand> cstack = scrap.mCurrentStack;
         String name = (scrap_nr == 0)? full_name : full_name + scrap_nr;
         if ( north != null ) { 
           exportTherionScrapHeader( out, type, name, proj_name, 0, true, north.x1, north.y1, north.x2, north.y2 );
@@ -1279,7 +1288,8 @@ class DrawingIO
 
         RectF scrap_bbox = scrap.getBBox(); // IMPORTANT BBox must have been properly computed before
 
-        synchronized( cstack ) {
+        List<ICanvasCommand> cstack = scrap.mCurrentStack;
+        synchronized( TDPath.mCommandsLock ) {
           for ( ICanvasCommand cmd : cstack ) {
             if ( cmd.commandType() != 0 ) continue;
             DrawingPath p = (DrawingPath) cmd;
@@ -1360,8 +1370,8 @@ class DrawingIO
     // Log.v("DistoXX", "export multisketch type " + type + " proj " + proj_name );
     class PlotExport
     {
-      String name;
-      RectF  bbox;
+      final String name;
+      final RectF  bbox;
 
       PlotExport( String n, RectF r ) { name = n; bbox = r; }
     }
@@ -1378,7 +1388,7 @@ class DrawingIO
           ymin=1000000f, ymax=-1000000f;
     for ( Scrap scrap : scraps ) {
       List< ICanvasCommand > cstack = scrap.mCurrentStack;
-      synchronized( cstack ) {
+      synchronized( TDPath.mCommandsLock ) {
         for ( ICanvasCommand cmd : cstack ) {
           if ( cmd.commandType() != 0 ) continue;
           DrawingPath p = (DrawingPath) cmd;
@@ -1405,7 +1415,8 @@ class DrawingIO
               if ( nplots == NPLOTS ) {
                 NPLOTS += 8;
                 PlotExport[] tmp = new PlotExport[NPLOTS];
-                for ( int j=0; j<nplots; ++j ) tmp[j] = plots[j];
+                // for ( int j=0; j<nplots; ++j ) tmp[j] = plots[j];
+                System.arraycopy( plots, 0, tmp, 0, nplots );
                 plots = tmp;
               }
               plots[k] = new PlotExport( plot_name, new RectF( p.left, p.top, p.right, p.bottom ) );
@@ -1447,7 +1458,7 @@ class DrawingIO
           // }
 
           List< ICanvasCommand > cstack = scrap.mCurrentStack;
-          synchronized( cstack ) {
+          synchronized( TDPath.mCommandsLock ) {
             for ( ICanvasCommand cmd : cstack ) {
               if ( cmd.commandType() != 0 ) continue;
               DrawingPath p = (DrawingPath) cmd;
@@ -1601,8 +1612,8 @@ class DrawingIO
                                           float xoff, float yoff )
   {
     int version = 0;
-    boolean in_scrap = false;
-    int scrap_index = 0;
+    // boolean in_scrap = false;
+    // int scrap_index = 0;
 
     boolean do_north = false;
     float north_x1=xoff, north_y1=yoff, north_x2=xoff, north_y2=yoff;
@@ -1611,9 +1622,9 @@ class DrawingIO
     int type = 0;
     boolean project = false;
     int project_dir = 0;
-    String points = "";
-    String lines  = "";
-    String areas  = "";
+    // String points = "";
+    // String lines  = "";
+    // String areas  = "";
     String th_str;
 
     // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
@@ -1655,7 +1666,7 @@ class DrawingIO
                 // } else {
                 //   exportTherionScrapHeader( out, type, name, proj, project_dir, false, 0, 0, 0, 0 );
                 // }
-                in_scrap = true;
+                // in_scrap = true; // UNUSED HERE
               }
               break;
             case 'S':
@@ -1664,43 +1675,77 @@ class DrawingIO
                 type = dis.readInt();
                 if ( type == PlotInfo.PLOT_PROJECTED ) project_dir = dis.readInt();
                 // read palettes
-                points = dis.readUTF();
-                lines = dis.readUTF();
-                areas = dis.readUTF();
+                /* points = */ dis.readUTF();
+                /* lines  = */ dis.readUTF();
+                /* areas  = */ dis.readUTF();
               }
               break;
             case 'N':
-              scrap_index = dis.readInt();
+              /* scrap_index = */ dis.readInt();
               break;
             case 'P':
-              th_str = DrawingPointPath.loadDataStream( version, dis, xoff, yoff /*, null */ ).toTherion();
-	      if ( th_str != null ) out.write( th_str );
+              DrawingPointPath pointpath = DrawingPointPath.loadDataStream( version, dis, xoff, yoff /*, null */ );
+              if ( pointpath != null ) {
+                th_str = pointpath.toTherion();
+	        if ( th_str != null ) out.write( th_str );
+              }
               break;
             case 'T':
-              th_str = DrawingLabelPath.loadDataStream( version, dis, xoff, yoff ).toTherion();
-	      if ( th_str != null ) out.write( th_str );
+              DrawingLabelPath labelpath = DrawingLabelPath.loadDataStream( version, dis, xoff, yoff );
+              if ( labelpath != null ) {
+                th_str = labelpath.toTherion();
+	        if ( th_str != null ) out.write( th_str );
+              }
               break;
             case 'L':
-              th_str = DrawingLinePath.loadDataStream( version, dis, xoff, yoff /*, null */ ).toTherion();
-	      if ( th_str != null ) out.write( th_str );
+              DrawingLinePath linepath = DrawingLinePath.loadDataStream( version, dis, xoff, yoff /*, null */ );
+              if ( linepath != null ) {
+                th_str = linepath.toTherion();
+	        if ( th_str != null ) out.write( th_str );
+              }
               break;
             case 'A':
-              th_str = DrawingAreaPath.loadDataStream( version, dis, xoff, yoff /*, null */ ).toTherion();
-	      if ( th_str != null ) out.write( th_str );
+              DrawingAreaPath areapath = DrawingAreaPath.loadDataStream( version, dis, xoff, yoff /*, null */ );
+              if ( areapath != null ) {
+                th_str = areapath.toTherion();
+	        if ( th_str != null ) out.write( th_str );
+              }
               break;
             case 'J':
-              th_str = DrawingSpecialPath.loadDataStream( version, dis, xoff, yoff ).toTherion(); // empty string anyways
-	      if ( th_str != null ) out.write( th_str );
+              DrawingSpecialPath specialpath = DrawingSpecialPath.loadDataStream( version, dis, xoff, yoff );
+              if ( specialpath != null ) {
+                th_str = specialpath.toTherion(); // empty string anyways
+	        if ( th_str != null ) out.write( th_str );
+              }
               break;
             case 'U':
-              th_str = DrawingStationPath.loadDataStream( version, dis ).toTherion();
-	      if ( th_str != null ) out.write( th_str );
+              DrawingStationPath stationpath = DrawingStationPath.loadDataStream( version, dis );
+              if ( stationpath != null ) {
+                th_str = stationpath.toTherion();
+	        if ( th_str != null ) out.write( th_str );
+              }
               break;
             case 'X':
               // NOTE need to check XSection ??? STATION_XSECTION
-              th_str = DrawingStationName.loadDataStream( version, dis ).toTherion();
-	      if ( th_str != null ) out.write( th_str );
+              DrawingStationName namepath = DrawingStationName.loadDataStream( version, dis );
+              if ( namepath != null ) {
+                th_str = namepath.toTherion();
+	        if ( th_str != null ) out.write( th_str );
+              }
               break;
+            case 'Y':
+              DrawingPhotoPath photopath = DrawingPhotoPath.loadDataStream( version, dis, xoff, yoff );
+              if ( photopath != null ) {
+              }
+              break;
+            case 'Z':
+              DrawingAudioPath audiopath = DrawingAudioPath.loadDataStream( version, dis, xoff, yoff );
+              if ( audiopath != null ) {
+              }
+              break;
+            // case 'G':
+            //   DrawingFixedName.loadDataStream( version, dis ); // consume DrawingFixedName data
+            //   break;
             case 'F':
               break; // continue parsing stations
             case 'E':
@@ -1725,26 +1770,25 @@ class DrawingIO
   
   // -----------------------------------------------------------------------------
   // CSURVEY
-  static void doExportCsxXSection( PrintWriter pw, String filename, String survey, String cave, String branch, /* String session, */ String bind )
-  {
-    doExportAnyCsxXSection( pw, filename, survey, cave, branch, /* session, */ bind, 0 );
-  }
+  // static void doExportCsxXSection( PrintWriter pw, String filename, String survey, String cave, String branch, /* String session, */ String bind )
+  // {
+  //   doExportAnyCsxXSection( pw, filename, survey, cave, branch, /* session, */ bind, 0 );
+  // }
 
   static void doExportTCsxXSection( PrintWriter pw, String filename, String survey, String cave, String branch, /* String session, */ String bind )
   {
-    doExportAnyCsxXSection( pw, filename, survey, cave, branch, /* session, */ bind, 1 );
+    doExportAnyCsxXSection( pw, filename, survey, cave, branch, /* session, */ bind /*, 1 */ );
   }
 
-  static void doExportAnyCsxXSection( PrintWriter pw, String filename, String survey, String cave, String branch, /* String session, */ String bind, int format )
+  static private void doExportAnyCsxXSection( PrintWriter pw, String filename, String survey, String cave, String branch, /* String session, */ String bind /*, int format */ )
   {
     File file = new File( filename );
     if ( ! file.exists() ) return;
     int version = 0;
-    boolean in_scrap = false;
-    int scrap_index = 0;
-    String name = "";
-    int type = 0;
-    String points = "";
+    // boolean in_scrap = false;
+    // int scrap_index = 0;
+    // String name = "";
+    String points = ""; // initializer redundant
     String lines  = "";
     String areas  = "";
 
@@ -1775,13 +1819,13 @@ class DrawingIO
                   dis.readFloat();
                   dis.readFloat();
                 }
-                in_scrap = true;
+                // in_scrap = true;
               }
               break;
             case 'S':
               {
-                name = dis.readUTF();
-                type = dis.readInt();
+                /* name = */ dis.readUTF();
+                int type = dis.readInt();
                 if ( ! PlotInfo.isAnySection( type ) ) {
                   dis.close();
                   fis.close();
@@ -1795,7 +1839,7 @@ class DrawingIO
               }
               break;
             case 'N':
-              scrap_index = dis.readInt();
+              /* scrap_index = */ dis.readInt();
               break;
             case 'P':
               paths.add( DrawingPointPath.loadDataStream( version, dis, 0, 0 /*, null */ ) );
@@ -1819,6 +1863,15 @@ class DrawingIO
               // NOTE need to check XSection ??? STATION_XSECTION
               DrawingStationName.loadDataStream( version, dis );
               break;
+            case 'Y':
+              DrawingPhotoPath.loadDataStream( version, dis, 0, 0 );
+              break;
+            case 'Z':
+              DrawingAudioPath.loadDataStream( version, dis, 0, 0 );
+              break;
+            // case 'G':
+            //   DrawingFixedName.loadDataStream( version, dis ); // consume DrawingFixedName data
+            //   break;
             case 'F':
             case 'E':
               todo = false;
@@ -1837,11 +1890,11 @@ class DrawingIO
         e.printStackTrace();
       }
     }
-    if ( format == 0 ) {
-      doExportAsCsx( pw, survey, cave, branch, /* session, */ bind, paths, null, null ); // all_sections=null, sections=null
-    } else {
+    // if ( format == 0 ) {
+    //   doExportAsCsx( pw, survey, cave, branch, /* session, */ bind, paths, null, null ); // all_sections=null, sections=null
+    // } else {
       doExportAsTCsx( pw, survey, cave, branch, /* session, */ bind, paths, null, null ); // all_sections=null, sections=null
-    }
+    // }
   }
 
   static void doExportAsTCsx( PrintWriter pw, String survey, String cave, String branch, /* String session, */ String bind,
@@ -1896,184 +1949,184 @@ class DrawingIO
     }
   }
 
-  static void doExportAsCsx( PrintWriter pw, String survey, String cave, String branch, /* String session, */ String bind,
-                             List<DrawingPath> paths, List< PlotInfo > all_sections, List< PlotInfo > sections )
-  {
-    int csxIndex = 0;
-    pw.format("    <layers>\n");
+  // static void doExportAsCsx( PrintWriter pw, String survey, String cave, String branch, /* String session, */ String bind,
+  //                            List<DrawingPath> paths, List< PlotInfo > all_sections, List< PlotInfo > sections )
+  // {
+  //   int csxIndex = 0;
+  //   pw.format("    <layers>\n");
 
-    // LAYER 0: images and sketches
-    pw.format("      <layer name=\"Base\" type=\"0\">\n");
-    pw.format("         <items>\n");
-    pw.format("         </items>\n");
-    pw.format("      </layer>\n");
+  //   // LAYER 0: images and sketches
+  //   pw.format("      <layer name=\"Base\" type=\"0\">\n");
+  //   pw.format("         <items>\n");
+  //   pw.format("         </items>\n");
+  //   pw.format("      </layer>\n");
 
-    // LAYER 1: soil areas
-    pw.format("      <layer name=\"Soil\" type=\"1\">\n");
-    pw.format("        <items>\n");
-    for ( DrawingPath p : paths ) {
-      if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
-        DrawingAreaPath ap = (DrawingAreaPath)p;
-        if ( BrushManager.getAreaCsxLayer( ap.mAreaType ) != 1 ) continue;
-        ap.toCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ ); 
-      }
-    }
-    pw.format("        </items>\n");
-    pw.format("      </layer>\n");
+  //   // LAYER 1: soil areas
+  //   pw.format("      <layer name=\"Soil\" type=\"1\">\n");
+  //   pw.format("        <items>\n");
+  //   for ( DrawingPath p : paths ) {
+  //     if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
+  //       DrawingAreaPath ap = (DrawingAreaPath)p;
+  //       if ( BrushManager.getAreaCsxLayer( ap.mAreaType ) != 1 ) continue;
+  //       ap.toCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ ); 
+  //     }
+  //   }
+  //   pw.format("        </items>\n");
+  //   pw.format("      </layer>\n");
 
-    // LAYER 2: 
-    pw.format("      <layer name=\"Water and floor morphologies\" type=\"2\">\n");
-    pw.format("        <items>\n");
-    for ( DrawingPath p : paths ) {
-      if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
-        DrawingLinePath lp = (DrawingLinePath)p;
-        if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 2 ) continue;
-        lp.toCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ );
-      } else if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
-        DrawingAreaPath ap = (DrawingAreaPath)p;
-        if ( BrushManager.getAreaCsxLayer( ap.mAreaType ) != 2 ) continue;
-        ap.toCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ ); 
-      } 
-    }
-    pw.format("        </items>\n");
-    pw.format("      </layer>\n");
+  //   // LAYER 2: 
+  //   pw.format("      <layer name=\"Water and floor morphologies\" type=\"2\">\n");
+  //   pw.format("        <items>\n");
+  //   for ( DrawingPath p : paths ) {
+  //     if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
+  //       DrawingLinePath lp = (DrawingLinePath)p;
+  //       if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 2 ) continue;
+  //       lp.toCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ );
+  //     } else if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
+  //       DrawingAreaPath ap = (DrawingAreaPath)p;
+  //       if ( BrushManager.getAreaCsxLayer( ap.mAreaType ) != 2 ) continue;
+  //       ap.toCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ ); 
+  //     } 
+  //   }
+  //   pw.format("        </items>\n");
+  //   pw.format("      </layer>\n");
 
-    // LAYER 3
-    pw.format("      <layer name=\"Rocks and concretions\" type=\"3\">\n");
-    pw.format("        <items>\n");
-    for ( DrawingPath p : paths ) {
-      if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
-        DrawingLinePath lp = (DrawingLinePath)p;
-        if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 3 ) continue;
-        lp.toCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ );
-      }
-    }
-    pw.format("        </items>\n");
-    pw.format("      </layer>\n");
+  //   // LAYER 3
+  //   pw.format("      <layer name=\"Rocks and concretions\" type=\"3\">\n");
+  //   pw.format("        <items>\n");
+  //   for ( DrawingPath p : paths ) {
+  //     if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
+  //       DrawingLinePath lp = (DrawingLinePath)p;
+  //       if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 3 ) continue;
+  //       lp.toCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ );
+  //     }
+  //   }
+  //   pw.format("        </items>\n");
+  //   pw.format("      </layer>\n");
 
-    // LAYER 4
-    pw.format("      <layer name=\"Ceiling morphologies\" type=\"4\">\n");
-    pw.format("        <items>\n");
-    for ( DrawingPath p : paths ) {
-      if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
-        DrawingLinePath lp = (DrawingLinePath)p;
-        if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 4 ) continue;
-        lp.toCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ );
-      }
-    }
-    pw.format("        </items>\n");
-    pw.format("      </layer>\n");
+  //   // LAYER 4
+  //   pw.format("      <layer name=\"Ceiling morphologies\" type=\"4\">\n");
+  //   pw.format("        <items>\n");
+  //   for ( DrawingPath p : paths ) {
+  //     if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
+  //       DrawingLinePath lp = (DrawingLinePath)p;
+  //       if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 4 ) continue;
+  //       lp.toCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ );
+  //     }
+  //   }
+  //   pw.format("        </items>\n");
+  //   pw.format("      </layer>\n");
 
-    // LAYER 5:
-    pw.format("      <layer name=\"Borders\" type=\"5\">\n");
-    pw.format("        <items>\n");
-    for ( DrawingPath p : paths ) {
-      if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
-        DrawingLinePath lp = (DrawingLinePath)p;
-        if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 5 ) continue;
-        lp.toCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ );
-      }
-      // if ( lp.lineType() == BrushManager.mLineLib.mLineWallIndex ) {
-      //   // linetype: 0 line, 1 spline, 2 bezier
-      //   pw.format("          <item layer=\"5\" name=\"\" type=\"4\" category=\"1\" linetype=\"0\" mergemode=\"0\">\n");
-      //   pw.format("            <pen type=\"1\" />\n");
-      //   pw.format("            <points data=\"");
-      //   ArrayList< LinePoint > pts = lp.mPoints;
-      //   boolean b = true;
-      //   for ( LinePoint pt : pts ) {
-      //     float x = DrawingWindow.sceneToWorldX( pt.x );
-      //     float y = DrawingWindow.sceneToWorldY( pt.y );
-      //     pw.format(Locale.US, "%.2f %.2f ", x, y );
-      //     if ( b ) { pw.format("B "); b = false; }
-      //   }
-      //   pw.format("\" />\n");
-      //   pw.format("          </item>\n");
-      // }
-    }
-    pw.format("        </items>\n");
-    pw.format("      </layer>\n");
+  //   // LAYER 5:
+  //   pw.format("      <layer name=\"Borders\" type=\"5\">\n");
+  //   pw.format("        <items>\n");
+  //   for ( DrawingPath p : paths ) {
+  //     if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
+  //       DrawingLinePath lp = (DrawingLinePath)p;
+  //       if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 5 ) continue;
+  //       lp.toCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ );
+  //     }
+  //     // if ( lp.lineType() == BrushManager.mLineLib.mLineWallIndex ) {
+  //     //   // linetype: 0 line, 1 spline, 2 bezier
+  //     //   pw.format("          <item layer=\"5\" name=\"\" type=\"4\" category=\"1\" linetype=\"0\" mergemode=\"0\">\n");
+  //     //   pw.format("            <pen type=\"1\" />\n");
+  //     //   pw.format("            <points data=\"");
+  //     //   ArrayList< LinePoint > pts = lp.mPoints;
+  //     //   boolean b = true;
+  //     //   for ( LinePoint pt : pts ) {
+  //     //     float x = DrawingWindow.sceneToWorldX( pt.x );
+  //     //     float y = DrawingWindow.sceneToWorldY( pt.y );
+  //     //     pw.format(Locale.US, "%.2f %.2f ", x, y );
+  //     //     if ( b ) { pw.format("B "); b = false; }
+  //     //   }
+  //     //   pw.format("\" />\n");
+  //     //   pw.format("          </item>\n");
+  //     // }
+  //   }
+  //   pw.format("        </items>\n");
+  //   pw.format("      </layer>\n");
 
-    // LAYER 6: signs and texts
-    pw.format("      <layer name=\"Signs\" type=\"6\">\n");
-    pw.format("        <items>\n");
-    for ( DrawingPath p : paths ) {
-      if ( p.mType != DrawingPath.DRAWING_PATH_POINT ) continue;
-      DrawingPointPath pp = (DrawingPointPath)p;
-      if ( BrushManager.getPointCsxLayer( pp.mPointType ) != 6 ) continue;
+  //   // LAYER 6: signs and texts
+  //   pw.format("      <layer name=\"Signs\" type=\"6\">\n");
+  //   pw.format("        <items>\n");
+  //   for ( DrawingPath p : paths ) {
+  //     if ( p.mType != DrawingPath.DRAWING_PATH_POINT ) continue;
+  //     DrawingPointPath pp = (DrawingPointPath)p;
+  //     if ( BrushManager.getPointCsxLayer( pp.mPointType ) != 6 ) continue;
 
-      // section points are special
-      if ( all_sections != null && BrushManager.isPointSection( pp.mPointType ) ) {
-	if ( TDSetting.mAutoXSections ) {
-          // Log.v("DistoX", "Section point <" + pp.mOptions + ">");
-          // option: -scrap survey-xx#
-          // FIXME GET_OPTION
-          PlotInfo section = null;
-          String scrap_name = pp.getOption( "-scrap" );
-          if ( scrap_name != null ) {
-            for ( PlotInfo s : all_sections ) {
-              if ( scrap_name.endsWith( s.name ) ) {
-                // String name = survey + "-" + s.name; // scrap filename
-                section = s;
-                section.csxIndex = csxIndex;
-                if ( sections != null ) sections.add( section );
-                break;
-              }
-            }
-          }
-          // String[] vals = pp.mOptions.split(" ");
-          // int k0 = vals.length;
-          // for ( int k = 0; k < k0; ++k ) {
-          //   if ( vals[k].equals("-scrap") ) {
-          //     for ( ++k; k < k0; ++k ) {
-          //       if ( vals[k].length() > 0 ) break;
-          //     }
-          //     if ( k < k0 ) {
-          //       for ( PlotInfo s : all_sections ) {
-          //         if ( vals[k].endsWith( s.name ) ) {
-          //           // String name = survey + "-" + s.name; // scrap filename
-          //           section = s;
-          //           section.csxIndex = csxIndex;
-          //           if ( sections != null ) sections.add( section );
-          //           break;
-          //         }
-          //       }
-          //     }
-          //   }
-          // }
+  //     // section points are special
+  //     if ( all_sections != null && BrushManager.isPointSection( pp.mPointType ) ) {
+  //       if ( TDSetting.mAutoXSections ) {
+  //         // Log.v("DistoX", "Section point <" + pp.mOptions + ">");
+  //         // option: -scrap survey-xx#
+  //         // FIXME GET_OPTION
+  //         PlotInfo section = null;
+  //         String scrap_name = pp.getOption( "-scrap" );
+  //         if ( scrap_name != null ) {
+  //           for ( PlotInfo s : all_sections ) {
+  //             if ( scrap_name.endsWith( s.name ) ) {
+  //               // String name = survey + "-" + s.name; // scrap filename
+  //               section = s;
+  //               section.csxIndex = csxIndex;
+  //               if ( sections != null ) sections.add( section );
+  //               break;
+  //             }
+  //           }
+  //         }
+  //         // String[] vals = pp.mOptions.split(" ");
+  //         // int k0 = vals.length;
+  //         // for ( int k = 0; k < k0; ++k ) {
+  //         //   if ( vals[k].equals("-scrap") ) {
+  //         //     for ( ++k; k < k0; ++k ) {
+  //         //       if ( vals[k].length() > 0 ) break;
+  //         //     }
+  //         //     if ( k < k0 ) {
+  //         //       for ( PlotInfo s : all_sections ) {
+  //         //         if ( vals[k].endsWith( s.name ) ) {
+  //         //           // String name = survey + "-" + s.name; // scrap filename
+  //         //           section = s;
+  //         //           section.csxIndex = csxIndex;
+  //         //           if ( sections != null ) sections.add( section );
+  //         //           break;
+  //         //         }
+  //         //       }
+  //         //     }
+  //         //   }
+  //         // }
 
-          if ( section != null ) {
-            // Log.v("DistoX", "section " + section.name + " " + section.nick );
-            // special toCsurvey for cross-section points
-            float x = DrawingUtil.sceneToWorldX( pp.cx, pp.cy ); // convert to world coords.
-            float y = DrawingUtil.sceneToWorldY( pp.cx, pp.cy );
-            String text = ( section.nick == null || section.nick.length() == 0 )? section.name : section.nick;
-            pw.format("  <item layer=\"6\" cave=\"%s\" branch=\"%s\" type=\"9\" category=\"96\" direction=\"0\" ", cave, branch );
-            pw.format("text=\"%s\" textdistance=\"2\" crosswidth=\"4\" crossheight=\"4\" name=\"%s\" ", text, section.name );
-            // pw.format("crosssection=\"%d\" ", section.csxIndex );
-            if ( section.name.startsWith("xs-") || section.name.startsWith("xh-") ) {
-              pw.format("station=\"%s\" ", section.name.substring(3) ); // == section.start
-            } else {
-              pw.format("stationfrom=\"%s\" stationto=\"%s\" ", section.start, section.view );
-            }
-            // pw.format(" segment=\"%s\"", "undefined" );
-            pw.format(Locale.US, "splayborderprojectionangle=\"%.2f\" splayborderprojectionvangle=\"%.2f\" id=\"%d\">\n",
-              section.azimuth, section.clino, section.csxIndex );
-            pw.format(Locale.US, "<points data=\"%.2f %.2f \" />\n", x, y );
-            pw.format("    <font type=\"4\" />\n");
-            pw.format("  </item>\n");
-          } else {
-            TDLog.Error("xsection not found. Name: " + ((scrap_name == null)? "null" : scrap_name) );
-          }
-	}
-      } else {
-        pp.toCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ );
-      }
-      ++ csxIndex;
-      
-    }
-    pw.format("        </items>\n");
-    pw.format("      </layer>\n");
-    pw.format("    </layers>\n");
-  }
+  //         if ( section != null ) {
+  //           // Log.v("DistoX", "section " + section.name + " " + section.nick );
+  //           // special toCsurvey for cross-section points
+  //           float x = DrawingUtil.sceneToWorldX( pp.cx, pp.cy ); // convert to world coords.
+  //           float y = DrawingUtil.sceneToWorldY( pp.cx, pp.cy );
+  //           String text = ( section.nick == null || section.nick.length() == 0 )? section.name : section.nick;
+  //           pw.format("  <item layer=\"6\" cave=\"%s\" branch=\"%s\" type=\"9\" category=\"96\" direction=\"0\" ", cave, branch );
+  //           pw.format("text=\"%s\" textdistance=\"2\" crosswidth=\"4\" crossheight=\"4\" name=\"%s\" ", text, section.name );
+  //           // pw.format("crosssection=\"%d\" ", section.csxIndex );
+  //           if ( section.name.startsWith("xs-") || section.name.startsWith("xh-") ) {
+  //             pw.format("station=\"%s\" ", section.name.substring(3) ); // == section.start
+  //           } else {
+  //             pw.format("stationfrom=\"%s\" stationto=\"%s\" ", section.start, section.view );
+  //           }
+  //           // pw.format(" segment=\"%s\"", "undefined" );
+  //           pw.format(Locale.US, "splayborderprojectionangle=\"%.2f\" splayborderprojectionvangle=\"%.2f\" id=\"%d\">\n",
+  //             section.azimuth, section.clino, section.csxIndex );
+  //           pw.format(Locale.US, "<points data=\"%.2f %.2f \" />\n", x, y );
+  //           pw.format("    <font type=\"4\" />\n");
+  //           pw.format("  </item>\n");
+  //         } else {
+  //           TDLog.Error("xsection not found. Name: " + ((scrap_name == null)? "null" : scrap_name) );
+  //         }
+  //       }
+  //     } else {
+  //       pp.toCsurvey( pw, survey, cave, branch, bind /* , mDrawingUtil */ );
+  //     }
+  //     ++ csxIndex;
+  //     
+  //   }
+  //   pw.format("        </items>\n");
+  //   pw.format("      </layer>\n");
+  //   pw.format("    </layers>\n");
+  // }
 
 }

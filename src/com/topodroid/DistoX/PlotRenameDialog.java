@@ -99,14 +99,14 @@ class PlotRenameDialog extends MyDialog
         return;
       }
       mParent.renamePlot( mEtName.getText().toString() );
-    } else if ( b == mBtnBack ) {
-      /* nothing */
     } else if ( b == mBtnDelete ) {
       mParent.askDelete();
     } else if ( TDSetting.mPlotSplit && b == mBtnSplit ) {
       if ( ! handleSplit( true ) ) return;
     // } else if ( b == mBtnMerge ) {
     //   mParent.mergePlot();
+    // } else if ( b == mBtnBack ) {
+      /* nothing */
     }
     dismiss();
   }

@@ -155,8 +155,10 @@ class CalibAlgoBH extends CalibAlgo
         sumM.plusEqual( m[i] );
         sumG2.plusEqual( new Matrix(g[i],g[i]) );   // outer product
         sumM2.plusEqual( new Matrix(m[i],m[i]) );
-        if ( mNonLinear ) {
-          gl[i] = new Vector( g[i] );
+        if ( gl != null /* mNonLinear */ ) {
+          gl[i] = new Vector(g[i]);
+        }
+        if ( gs != null /* mNonLinear */ ) {
           gs[i] = new Matrix();               // zero matrix
           gs[i].x.x = g[i].x * g[i].x - 0.5f; // diagonal elements
           gs[i].y.y = g[i].y * g[i].y - 0.5f;

@@ -82,7 +82,7 @@ class SurveySplitOrMoveDialog extends MyDialog
       for ( int k=0; k<size; ++k ) mSurveys[k] = surveys.get(k);
       ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, mSurveys );
       spin.setAdapter( adapter );
-    } else {
+    // } else {
     }
   }
 

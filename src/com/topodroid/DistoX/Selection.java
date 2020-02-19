@@ -156,16 +156,16 @@ class Selection
     // LinePoint p1;
     LinePoint p2;
     switch ( path.mType ) {
-      case DrawingPath.DRAWING_PATH_FIXED:
-      case DrawingPath.DRAWING_PATH_SPLAY:
-        insertItem( path, null );
-        break;
       case DrawingPath.DRAWING_PATH_GRID:
         // nothing
         break;
+      case DrawingPath.DRAWING_PATH_FIXED:
+      case DrawingPath.DRAWING_PATH_SPLAY:
+        // insertItem( path, null );
+        // break;
       case DrawingPath.DRAWING_PATH_STATION:
-        insertItem( path, null );
-        break;
+        // insertItem( path, null );
+        // break;
       case DrawingPath.DRAWING_PATH_POINT:
         insertItem( path, null );
         break;

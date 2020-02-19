@@ -15,11 +15,12 @@ package com.topodroid.DistoX;
 
 class GeoReference
 {
-  float e;
-  float s;
-  float v;
-  float eradius;
-  float sradius;
+  final float e;
+  final float s;
+  final float v;
+  final float eradius;
+  final float sradius;
+
   GeoReference( float e0, float s0, float v0, float er, float sr )
   {
     e = e0;

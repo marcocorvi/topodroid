@@ -119,7 +119,6 @@ class DeviceHelper extends DataSetObservable
       //   TDUtil.slowDown( 200 );
       // }
 
-      //noinspection SyntaxError
       updateConfig = myDB.compileStatement( "UPDATE configs SET value=? WHERE key=?" );
 
     } catch ( SQLiteException e ) {
@@ -1128,7 +1127,6 @@ class DeviceHelper extends DataSetObservable
         // TDLog.Log( TDLog.LOG_DB, "DistoXOpenHelper onCreate done db " + db );
       }
 
-      @SuppressWarnings("SyntaxError")
       private void createTables(SQLiteDatabase db )
       {
          // db.setLockingEnabled( false );

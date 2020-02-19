@@ -108,8 +108,7 @@ class ParserVisualTopo extends ImportParser
         } else {
           comment = "";
         }
-        if ( line.length() == 0 ) {    // comment
-        } else {
+        if ( line.length() > 0 ) {    // length==0 comment
           String[] vals = splitLine(line); // line.split( "\\s+" );
           if ( line.startsWith("Version") ) {
             // IGNORE
@@ -129,7 +128,7 @@ class ParserVisualTopo extends ImportParser
                     dmb = true;
                   } else if ( vals[k].equals("Gra" ) ) {
                     ub = 0.9f; // 360/400
-                  } else { // if ( vals[k].equals("Degd" ) 
+                  // } else { // if ( vals[k].equals("Degd" )
                     /* nothing */
                   }
                 }
@@ -141,7 +140,7 @@ class ParserVisualTopo extends ImportParser
                     dmc = true;
                   } else if ( vals[k].equals("Gra" ) ) {
                     uc = 0.9f; // 360/400
-                  } else { // if ( vals[k].equals("Degd" ) 
+                  // } else { // if ( vals[k].equals("Degd" )
                     /* nothing */
                   }
                 }
@@ -165,7 +164,7 @@ class ParserVisualTopo extends ImportParser
                 try {
                   mDeclination = angle( Float.parseFloat( vals[k] ), 1, true ); // declination is in degrees.minutes
                 } catch ( NumberFormatException e ) { }
-              } else {
+              // } else {
                 // ignore colors
               }
             }

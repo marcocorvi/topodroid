@@ -36,14 +36,14 @@ class DrawingPhotoEditDialog extends MyDialog
   // private final TopoDroidApp  mApp;
   // private final DrawingWindow mParent;
   private DrawingPhotoPath mPhoto;
-  private String mFilename = null;
+  private String mFilename; // = null;
 
   private EditText mETcomment;  // photo comment
   // private ImageView mIVimage;   // photo image
   // private Button   mButtonOK;
   // private Button   mButtonDelete;
   // private Button   mButtonCancel;
-  private TDImage mTdImage = null;
+  private TDImage mTdImage; // = null;
 
   private float mAzimuth = 0;
   private float mClino   = 0;

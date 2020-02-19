@@ -16,9 +16,9 @@ import android.view.View.OnClickListener;
 
 class FilterClickListener implements OnClickListener
 {
-  private int mIndex;
-  private int mCode;
-  private IFilterClickHandler mParent;
+  private final int mIndex;
+  private final int mCode;
+  private final IFilterClickHandler mParent;
 
   FilterClickListener( IFilterClickHandler parent, int i, int c ) 
   {

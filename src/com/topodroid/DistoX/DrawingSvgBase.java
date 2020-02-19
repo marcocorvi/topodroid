@@ -63,7 +63,7 @@ class DrawingSvgBase
     return String.format( "#%02x%02x%02x", red, grn, blu );
   }
 
-  protected ArrayList getXSections( DrawingCommandManager plot, float xoff, float yoff )
+  protected ArrayList< XSection > getXSections( DrawingCommandManager plot, float xoff, float yoff )
   {
     ArrayList< XSection > xsections = new ArrayList< XSection >();
     if ( TDSetting.mAutoXSections ) {
@@ -260,7 +260,7 @@ class DrawingSvgBase
       int version = DrawingIO.skipTdrHeader( dis );
       // Log.v("DistoXsvg", "tdr to svg " + scrapfile + " delta " + dx + " " + dy + " Offset " + xoff + " " + yoff );
 
-      DrawingPath path = null;
+      DrawingPath path; // = null;
       boolean done = false;
       while ( ! done ) {
         int what = dis.read();
@@ -284,21 +284,24 @@ class DrawingSvgBase
             path = DrawingAreaPath.loadDataStream( version, dis, dx, dy /*, null */ );
             if ( path != null) toSvg( pw, (DrawingAreaPath)path, pathToColor(path), xoff, yoff );
             break;
+          case 'J':
+            /* path = */ DrawingSpecialPath.loadDataStream( version, dis, dx, dy );
+            break;
           case 'U':
-            path = DrawingStationPath.loadDataStream( version, dis ); // consume DrawingStationName data
+            /* path = */ DrawingStationPath.loadDataStream( version, dis ); // consume DrawingStationName data
             break;
           case 'X':
-            path = DrawingStationName.loadDataStream( version, dis ); // consume DrawingStationName data
+            /* path = */ DrawingStationName.loadDataStream( version, dis ); // consume DrawingStationName data
             break;
           case 'Y':
-            path = DrawingPhotoPath.loadDataStream( version, dis, dx, dy );
+            /* path = */ DrawingPhotoPath.loadDataStream( version, dis, dx, dy );
             break;
           case 'Z':
-            path = DrawingAudioPath.loadDataStream( version, dis, dx, dy );
+            /* path = */ DrawingAudioPath.loadDataStream( version, dis, dx, dy );
             break;
-          case 'J':
-            path = DrawingSpecialPath.loadDataStream( version, dis, dx, dy );
-            break;
+          // case 'G':
+          //   DrawingFixedName.loadDataStream( version, dis ); // consume DrawingFixedName data
+          //   break;
           case 'F':
             done = true;
             break;

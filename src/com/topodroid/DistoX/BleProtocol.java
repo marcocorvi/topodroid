@@ -46,7 +46,8 @@ class BleProtocol extends TopoDroidProtocol
   public int handleRead( BluetoothGattCharacteristic chrt )
   {
     byte[] bytes = chrt.getValue();
-    for ( int k=0; k<8; ++k ) mBuffer[k] = bytes[k];
+    // for ( int k=0; k<8; ++k ) mBuffer[k] = bytes[k];
+    System.arraycopy( bytes, 0, mBuffer, 0, 8 );
     return handlePacket();
     // Log.v("DistoXBLE", "proto read. ret " + ret );
   }

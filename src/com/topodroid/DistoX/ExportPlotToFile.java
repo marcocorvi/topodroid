@@ -26,14 +26,14 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     private final DrawingCommandManager mCommand;
     private final SurveyInfo mInfo;
     private final DistoXNum mNum;
-    private long mType;
-    private String mFullName; // "survey-plotX" name ;
-    private String mExt; // extension
+    private final long mType;
+    private final String mFullName; // "survey-plotX" name ;
+    private final String mExt; // extension
     private String filename = null;
-    private boolean mToast;
+    private final boolean mToast;
     // private final DrawingUtil mUtil;
-    private String mFormat;
-    private GeoReference mStation;
+    private final String mFormat;
+    private final GeoReference mStation;
 
     ExportPlotToFile( Context context, SurveyInfo info,
                       DistoXNum num, /* DrawingUtil util, */ DrawingCommandManager command,

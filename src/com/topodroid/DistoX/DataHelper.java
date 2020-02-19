@@ -45,7 +45,7 @@ import java.util.TreeSet;
 import java.util.Locale;
 import java.util.HashMap;
 
-@SuppressWarnings("SyntaxError")
+
 class DataHelper extends DataSetObservable
 {
   static final String DB_VERSION = "42"; // FIXME agrees with Cave3DThParser values
@@ -136,15 +136,15 @@ class DataHelper extends DataSetObservable
   // private SQLiteStatement dropPlotStmt = null;
   // private SQLiteStatement dropFixedStmt = null;
 
-  static private String[] mFullShotFields =
+  static final private String[] mFullShotFields =
     { "id", "fStation", "tStation", "distance", "bearing", "clino", "acceleration", "magnetic", "dip",
       "extend", "flag", "leg", "comment", "type", "millis", "color", "stretch", "address"
     };
-  static private String[] mShotFields =
+  static final private String[] mShotFields =
     { "id", "fStation", "tStation", "distance", "bearing", "clino", "acceleration", "magnetic", "dip",  // 0 .. 8
       "extend", "flag", "leg", "comment", "type", "millis", "color", "stretch" // 9 .. 16
     };
-  static private String[] mShotRawDataFields =
+  static final private String[] mShotRawDataFields =
     { "id", "fStation", "tStation", "distance", "bearing", "clino", "roll", "acceleration", "magnetic", "dip",
       "type", "millis", "address"
     };
@@ -154,14 +154,14 @@ class DataHelper extends DataSetObservable
   static final private String[] mPlotFields =
     { "id", "name", "type", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide", "nick", "orientation", "maxscrap" };
 
-  static private String[] mSketchFields =
+  static final private String[] mSketchFields =
     { "id", "name", "start", "st1", "st2",
       "xoffsettop", "yoffsettop", "zoomtop", "xoffsetside", "yoffsetside", "zoomside", "xoffset3d", "yoffset3d", "zoom3d",
       "east", "south", "vert", "azimuth", "clino" 
     };
 
   // N.B. "source" comes after "status" although it is after "cs_altitude" in the table
-  private static final String[] mFixedFields = {
+  static final private String[] mFixedFields = {
     "id", "station", "longitude", "latitude", "altitude", "altimetric", "comment", "status", "source",
     "cs_name", "cs_longitude", "cs_latitude", "cs_altitude", "cs_decimals"
   };
@@ -277,18 +277,18 @@ class DataHelper extends DataSetObservable
   // private static String qInitStation  = "select init_station from surveys where id=?";
   // private static String qXSections    = "select xsections from surveys where id=?";
   // private static String qSurveysField = "select ? from surveys where id=?";
-  private static String qInitStation  = "select init_station from surveys where id=?";
-  private static String qXSections    = "select xsections from surveys where id=?";
-  private static String qDatamode     = "select datamode from surveys where id=?";
-  private static String qDeclination  = "select declination from surveys where id=?";
-  private static String qExtend       = "select extend from surveys where id=?";
-  private static String qSurveysStat1 = "select flag, acceleration, magnetic, dip from shots where surveyId=? AND status=0 AND acceleration > 1 ";
-  private static String qSurveysStat2 =
+  private static final String qInitStation  = "select init_station from surveys where id=?";
+  private static final String qXSections    = "select xsections from surveys where id=?";
+  private static final String qDatamode     = "select datamode from surveys where id=?";
+  private static final String qDeclination  = "select declination from surveys where id=?";
+  private static final String qExtend       = "select extend from surveys where id=?";
+  private static final String qSurveysStat1 = "select flag, acceleration, magnetic, dip from shots where surveyId=? AND status=0 AND acceleration > 1 ";
+  private static final String qSurveysStat2 =
     "select flag, distance, fStation, tStation, clino, extend from shots where surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ";
   // private static String qSurveysStat3 = "select fStation, clino from shots where surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ";
   // private static String qSurveysStat4 =
   //   "select flag, distance, fStation, tStation, clino, extend from shots where surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ";
-  private static String qSurveysStat5 = " select count() from shots where surveyId=? AND status=0 AND flag=0 AND fStation!=\"\" AND tStation=\"\" ";
+  private static final String qSurveysStat5 = " select count() from shots where surveyId=? AND status=0 AND flag=0 AND fStation!=\"\" AND tStation=\"\" ";
 
   String getSurveyInitStation( long sid )
   {
@@ -443,7 +443,7 @@ class DataHelper extends DataSetObservable
     String[] args = new String[1];
     args[0] = Long.toString( sid );
 
-    Cursor cursor = null;
+    Cursor cursor; // = null;
     if ( datamode == 0 ) {
       // cursor = myDB.query( SHOT_TABLE,
       //     		   new String[] { "flag", "acceleration", "magnetic", "dip" },
@@ -1826,27 +1826,27 @@ class DataHelper extends DataSetObservable
   // ----------------------------------------------------------------------
   // SELECT STATEMENTS
 
-  private static String qShotStations = "select fStation, tStation from shots where surveyId=? AND id=? ";
-  private static String qSensors1     = "select id, shotId, title, date, comment, type, value from sensors where surveyId=? AND status=? ";
-  private static String qSensors2     = "select id, shotId, title, date, comment, type, value from sensors where surveyId=? AND shotId=? ";
-  private static String qShotAudio    = "select id, date from audios where surveyId=? AND shotId=? ";
-  private static String qAudiosAll    = "select id, shotId, date from audios where surveyId=? ";
-  private static String qPhotosAll    = "select id, shotId, status, title, date, comment, camera from photos where surveyId=? ";
-  private static String qjPhotos      =
+  private static final String qShotStations = "select fStation, tStation from shots where surveyId=? AND id=? ";
+  private static final String qSensors1     = "select id, shotId, title, date, comment, type, value from sensors where surveyId=? AND status=? ";
+  private static final String qSensors2     = "select id, shotId, title, date, comment, type, value from sensors where surveyId=? AND shotId=? ";
+  private static final String qShotAudio    = "select id, date from audios where surveyId=? AND shotId=? ";
+  private static final String qAudiosAll    = "select id, shotId, date from audios where surveyId=? ";
+  private static final String qPhotosAll    = "select id, shotId, status, title, date, comment, camera from photos where surveyId=? ";
+  private static final String qjPhotos      =
     "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment, p.camera from photos as p join shots as s on p.shotId=s.id where p.surveyId=? and s.surveyId=? and p.status=? ";
   // private static String qShotPhoto    = "select id, shotId, title, date, comment from photos where surveyId=? AND shotId=? ";
-  private static String qjShotPhoto   =
+  private static final String qjShotPhoto   =
     "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment, p.camera from photos as p join shots as s on p.shotId=s.id where p.surveyId=? AND s.surveyId=? AND p.shotId=? ";
 
-  private static String qFirstStation = "select fStation from shots where surveyId=? AND fStation!=\"\" AND tStation!=\"\" limit 1 ";
-  private static String qHasStation   = "select id, fStation, tStation from shots where surveyId=? and ( fStation=? or tStation=? ) order by id ";
-  private static String qHasPlot      = "select id, name from plots where surveyId=? AND name=? order by id ";
-  private static String qMaxPlotIndex = "select id, name from plots where surveyId=? AND type=? order by id ";
-  private static String qHasShot      = "select fStation, tStation from shots where surveyId=? AND ( ( fStation=? AND tStation=? ) OR ( fStation=? AND tStation=? ) )"; 
-  private static String qNextStation  = "select tStation from shots where surveyId=? AND fStation=? ";
-  private static String qLastStation  = "select fStation, tStation from shots where surveyId=? order by id DESC ";
-  private static String qHasFixedStation = "select id from fixeds where surveyId=? and station=? and id!=? and status=0 ";
-  private static String qjShots       =
+  private static final String qFirstStation = "select fStation from shots where surveyId=? AND fStation!=\"\" AND tStation!=\"\" limit 1 ";
+  private static final String qHasStation   = "select id, fStation, tStation from shots where surveyId=? and ( fStation=? or tStation=? ) order by id ";
+  private static final String qHasPlot      = "select id, name from plots where surveyId=? AND name=? order by id ";
+  private static final String qMaxPlotIndex = "select id, name from plots where surveyId=? AND type=? order by id ";
+  private static final String qHasShot      = "select fStation, tStation from shots where surveyId=? AND ( ( fStation=? AND tStation=? ) OR ( fStation=? AND tStation=? ) )";
+  private static final String qNextStation  = "select tStation from shots where surveyId=? AND fStation=? ";
+  private static final String qLastStation  = "select fStation, tStation from shots where surveyId=? order by id DESC ";
+  private static final String qHasFixedStation = "select id from fixeds where surveyId=? and station=? and id!=? and status=0 ";
+  private static final String qjShots       =
     "select s.flag, s.distance, s.fStation, s.tStation, s.clino, z.clino, s.extend from shots as s join shots as z on z.fStation=s.tStation where s.surveyId=? AND z.surveyId=? AND s.fStation!=\"\" AND s.tStation!=\"\" AND s.status=0 ";
 
   List< SensorInfo > selectAllSensors( long sid, long status )
@@ -4876,7 +4876,6 @@ class DataHelper extends DataSetObservable
    // ----------------------------------------------------------------------
    // DATABASE TABLES
 
-   @SuppressWarnings("SyntaxError")
    private static class DistoXOpenHelper extends SQLiteOpenHelper
    {
       private static final String create_table = "CREATE TABLE IF NOT EXISTS ";

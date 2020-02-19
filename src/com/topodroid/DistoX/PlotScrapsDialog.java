@@ -87,7 +87,7 @@ class PlotScrapsDialog extends MyDialog
       mParent.scrapPrev( );
     } else if ( b == mBtnNew ) {
       mParent.scrapNew( );
-    } else if ( b == mBtnBack ) {
+    // } else if ( b == mBtnBack ) {
       /* nothing */
     }
     dismiss();

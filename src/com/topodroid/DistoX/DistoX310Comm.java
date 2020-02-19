@@ -75,8 +75,8 @@ class DistoX310Comm extends DistoXComm
           sendCommand( 0x37 );
           break;
         case Device.MEASURE:
-          sendCommand( 0x38 );
-          break;
+          // sendCommand( 0x38 );
+          // break;
         case Device.MEASURE_DOWNLOAD:
           sendCommand( 0x38 );
           break;

@@ -76,10 +76,11 @@ class ProjectionCommandManager
   //     flipXAxes( mGridStack10 );
   //     flipXAxes( mGridStack100 );
   //   }
-  //   synchronized( mLegsStack )   { flipXAxes( mLegsStack ); }
-  //   synchronized( mSplaysStack ) { flipXAxes( mSplaysStack ); }
- 
-  //   synchronized( mStations ) {
+  //   synchronized( TDPath.mShotsLock ) {
+  //     flipXAxes( mLegsStack );
+  //     flipXAxes( mSplaysStack );
+  //   }
+  //   synchronized( TDPath.mStationsLock ) {
   //     for ( DrawingStationName st : mStations ) {
   //       st.flipXAxis(z);
   //     }
@@ -131,13 +132,11 @@ class ProjectionCommandManager
     //   mGridStack10.clear();
     //   mGridStack100.clear();
     // }
-    synchronized( mLegsStack ) {
+    synchronized( TDPath.mShotsLock ) {
       mLegsStack.clear();
-    }
-    synchronized( mSplaysStack ) {
       mSplaysStack.clear();
     }
-    synchronized( mStations ) {
+    synchronized( TDPath.mStationsLock ) {
       mStations.clear();
     }
   }
@@ -169,7 +168,7 @@ class ProjectionCommandManager
   void addLegPath( DrawingPath path )
   { 
     if ( mLegsStack == null ) return;
-    synchronized( mLegsStack ) {
+    synchronized( TDPath.mShotsLock ) {
       mLegsStack.add( path );
     }
   }  
@@ -177,7 +176,7 @@ class ProjectionCommandManager
   void addSplayPath( DrawingPath path )
   {
     if ( mSplaysStack == null ) return;
-    synchronized( mSplaysStack ) {
+    synchronized( TDPath.mShotsLock ) {
       mSplaysStack.add( path );
     }
   }  
@@ -226,16 +225,13 @@ class ProjectionCommandManager
     //   }
     // }
 
-    if ( mLegsStack != null ) {
-      synchronized( mLegsStack ) {
+    synchronized( TDPath.mShotsLock ) {
+      if ( mLegsStack != null ) {
         for ( DrawingPath path : mLegsStack ) {
           path.draw( canvas, mMatrix, mScale, mBBox );
         }
       }
-    }
-
-    if ( mSplaysStack != null ) {
-      synchronized( mSplaysStack ) {
+      if ( mSplaysStack != null ) {
         for ( DrawingPath path : mSplaysStack ) {
           path.draw( canvas, mMatrix, mScale, mBBox );
         }
@@ -243,7 +239,7 @@ class ProjectionCommandManager
     }
  
     if ( mStations != null ) {  
-      synchronized( mStations ) {
+      synchronized( TDPath.mStationsLock ) {
         for ( DrawingStationName st : mStations ) {
           st.draw( canvas, mMatrix, mScale, mBBox );
         }
@@ -254,7 +250,7 @@ class ProjectionCommandManager
   // called by DrawingSurface::addDrawingStationName
   void addStation( DrawingStationName st )
   {
-    synchronized( mStations ) {
+    synchronized( TDPath.mStationsLock ) {
       mStations.add( st );
     }
   }

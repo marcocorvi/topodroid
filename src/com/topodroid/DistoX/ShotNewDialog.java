@@ -523,7 +523,7 @@ class ShotNewDialog extends MyDialog
                                shot_extend, DBlock.FLAG_SURVEY,
                                null, null, null, null, null );
 	    }
-          } else if ( (! diving) && backbearing.length() > 0 && backclino.length() > 0 ) {
+          } else if ( /* ! diving) && */ backbearing.length() > 0 && backclino.length() > 0 ) {
             if ( diving ) {
               float bbx = divingBearing( backbearing ); // DIVING_BEARING
               blk = mApp.insertManualShot( mAt, shot_to, shot_from,

@@ -1550,10 +1550,10 @@ class TDExporter
       // first pass legs, second pass splays
       // for ( int k=0; k<2; ++k ) 
       {
-        if ( ! first ) {
-          writeSurvexEOL(pw);
-          writeSurvexLine(pw, "  *flags splay");
-        }
+        // if ( ! first ) {
+        //   writeSurvexEOL(pw);
+        //   writeSurvexLine(pw, "  *flags splay");
+        // }
         AverageLeg leg = new AverageLeg(0);
         DBlock ref_item = null;
         boolean duplicate = false;
@@ -1625,16 +1625,16 @@ class TDExporter
               }
               ref_item = item;
               if ( item.isDuplicate() || item.isSurface() ) { // FIXME SURFACE
-                if ( first ) writeSurvexLine(pw, survex_flags_duplicate);
+                /* if ( first ) */ writeSurvexLine(pw, survex_flags_duplicate);
                 duplicate = true;
               }
-              if ( first ) {
+              // if ( first ) {
                 if ( item.isCommented() ) {
                   pw.format(";   %s %s ", from, to );
                 } else {
                   pw.format("    %s %s ", from, to );
                 }
-              }
+              // }
               leg.set( item.mLength, item.mBearing, item.mClino );
             }
           }

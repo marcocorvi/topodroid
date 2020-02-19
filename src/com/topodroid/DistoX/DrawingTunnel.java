@@ -14,7 +14,7 @@ package com.topodroid.DistoX;
 import android.util.Log;
 
 import java.util.Locale;
-import java.util.List;
+// import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -33,20 +33,20 @@ import android.graphics.RectF;
 class DrawingTunnel extends DrawingSvgBase
 {
 
-  static final float FACTOR = DrawingUtil.SCALE_FIX;
+  static final private float FACTOR = DrawingUtil.SCALE_FIX;
 
-  static final String formatPTxyz  = "    <pt X=\"%.2f\" Y=\"%.2f\" Z=\"%.2f\"/>\n";
-  static final String formatPTxy0  = "    <pt X=\"%.2f\" Y=\"%.2f\" Z=\"0.0\"/>\n";
-  static final String formatPTxy   = "    <pt X=\"%.2f\" Y=\"%.2f\"/>\n";
-  static final String skpathCentreline = "  <skpath from=\"%d\" to=\"%d\" linestyle=\"centreline\">\n";
-  static final String skpathConnective = "  <skpath from=\"%d\" to=\"%d\" linestyle=\"connective\" splined=\"0\">\n";
-  static final String skpathFilled     = "  <skpath from=\"%d\" to=\"%d\" linestyle=\"filled\" splined=\"%d\">\n";
-  static final String skpathLine       = "  <skpath from=\"%d\" to=\"%d\" linestyle=\"%s\" splined=\"%d\">\n";
-  static final String endSkpath    = "  </skpath>\n";
-  static final String pctext       = "      <pctext style=\"\" nodeposxrel=\"%.2f\" nodeposyrel=\"%.2f\">\n";
-  static final String endPctext    = "      </pctext>\n";
-  static final String pathcodes    = "    <pathcodes>\n";
-  static final String endPathcodes = "    </pathcodes>\n";
+  static final private String formatPTxyz  = "    <pt X=\"%.2f\" Y=\"%.2f\" Z=\"%.2f\"/>\n";
+  static final private String formatPTxy0  = "    <pt X=\"%.2f\" Y=\"%.2f\" Z=\"0.0\"/>\n";
+  static final private String formatPTxy   = "    <pt X=\"%.2f\" Y=\"%.2f\"/>\n";
+  static final private String skpathCentreline = "  <skpath from=\"%d\" to=\"%d\" linestyle=\"centreline\">\n";
+  static final private String skpathConnective = "  <skpath from=\"%d\" to=\"%d\" linestyle=\"connective\" splined=\"0\">\n";
+  static final private String skpathFilled     = "  <skpath from=\"%d\" to=\"%d\" linestyle=\"filled\" splined=\"%d\">\n";
+  static final private String skpathLine       = "  <skpath from=\"%d\" to=\"%d\" linestyle=\"%s\" splined=\"%d\">\n";
+  static final private String endSkpath    = "  </skpath>\n";
+  static final private String pctext       = "      <pctext style=\"\" nodeposxrel=\"%.2f\" nodeposyrel=\"%.2f\">\n";
+  static final private String endPctext    = "      </pctext>\n";
+  static final private String pathcodes    = "    <pathcodes>\n";
+  static final private String endPathcodes = "    </pathcodes>\n";
 
   float toWorldX( float x ) { return (x-DrawingUtil.CENTER_X); }
   float toWorldY( float y ) { return (y-DrawingUtil.CENTER_Y); }
@@ -147,6 +147,7 @@ class DrawingTunnel extends DrawingSvgBase
 	  // }
         }
 
+        // FIXME xsections is populated but not used
 	ArrayList< XSection > xsections = new ArrayList< XSection >();
 
         // Log.v("DistoXsvg", "XML commands " + plot.getCommands().size() );
@@ -167,8 +168,8 @@ class DrawingTunnel extends DrawingSvgBase
                 String scrapfile = scrapname + ".tdr";
 	        xsections.add( new XSection( scrapfile, xx, yy ) );
               }
-	    } else {
-              // WHAT ??? nothing
+	    // } else {
+            //   WHAT ??? nothing
             }
           } else {
             String name = toTunnelPointName( BrushManager.getPointThName( point.mPointType ) );

@@ -129,6 +129,10 @@ class TDPath
   // final static Object mTherionLock   = new Object(); // FIXME-THREAD_SAFE
   final static Object mXSectionsLock = new Object();
   final static Object mSelectionLock = new Object();
+  final static Object mCommandsLock  = new Object();
+  final static Object mStationsLock  = new Object();
+  final static Object mShotsLock     = new Object();
+  // final static Object mFixedsLock    = new Object();
   // final static Object mSelectedLock  = new Object();
 
   static String getDatabase() { return getDirFile( "distox14.sqlite" ); }

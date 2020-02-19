@@ -64,7 +64,7 @@ public class DeviceList extends Activity
 
     // setTitleColor( TDColor.TITLE_NORMAL );
 
-    int command = 0;
+    int command; // = 0;
     try {
       command = getIntent().getExtras().getInt( TDTag.TOPODROID_DEVICE_ACTION );
     } catch ( NullPointerException e ) {

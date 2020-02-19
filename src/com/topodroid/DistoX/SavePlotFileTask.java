@@ -224,8 +224,14 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
           // Log.v( "DistoX", "save binary completed" + mFullName );
           String filename1 = TDPath.getTdrFileWithExt( mFullName );
           File file0 = new File( filename1 );
-          if ( file0.exists() ) file0.renameTo( new File( filename1 + TDPath.BCK_SUFFIX ) );
-          file1.renameTo( new File( filename1 ) );
+          if ( file0.exists() ) {
+            if ( ! file0.renameTo( new File( filename1 + TDPath.BCK_SUFFIX ) ) ) {
+              TDLog.Error("failed rename " + filename1 + TDPath.BCK_SUFFIX );
+            }
+          }
+          if ( ! file1.renameTo( new File( filename1 ) ) ) {
+            TDLog.Error("failed rename " + filename1 );
+          }
         }
       }
     }

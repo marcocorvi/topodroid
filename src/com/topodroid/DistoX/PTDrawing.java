@@ -100,9 +100,10 @@ class PTDrawing
 
     void setElements( ArrayList< PTElement > elements )
     {
-      for ( PTElement e : elements ) {
-        _elements.add( e ); // FIXME copy the specific type ?
-      }
+      // for ( PTElement e : elements ) {
+      //   _elements.add( e ); // FIXME copy the specific type ?
+      // }
+        _elements.addAll( elements );
     }
 
     /*

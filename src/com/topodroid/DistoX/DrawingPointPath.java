@@ -135,7 +135,7 @@ class DrawingPointPath extends DrawingPath
     int   scrap = 0;
     String name;  // th-name
     String group = null;
-    String options = null;
+    String options; // = null;
     String text = null;
     try {
       ccx = x + dis.readFloat();
@@ -533,6 +533,10 @@ class DrawingPointPath extends DrawingPath
   void toDataStream( DataOutputStream dos, int scrap )
   {
     String name  = BrushManager.getPointThName(mPointType);
+    if ( name == null ) {
+      name = "user";
+      TDLog.Error( "null point name" );
+    }
     String group = BrushManager.getPointGroup(mPointType);
     try {
       dos.write( 'P' );

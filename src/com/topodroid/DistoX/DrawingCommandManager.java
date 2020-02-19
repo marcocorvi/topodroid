@@ -255,8 +255,10 @@ class DrawingCommandManager
   /* FIXME_HIGHLIGHT
   void highlights( TopoDroidApp app ) 
   {
-    synchronized( mSplaysStack ) { highlightsSplays( app ); }
-    synchronized( mLegsStack )   { highlightsLegs( app ); }
+    synchronized( TDPath.mShotsLock ) {
+      highlightsSplays( app );
+      highlightsLegs( app );
+    }
   }
 
   private void highlightsSplays( TopoDroidApp app )
@@ -310,13 +312,15 @@ class DrawingCommandManager
       flipXAxes( mGridStack10 );
       flipXAxes( mGridStack100 );
     }
-    synchronized( mLegsStack )   { flipXAxes( mLegsStack ); }
-    synchronized( mSplaysStack ) { flipXAxes( mSplaysStack ); }
+    synchronized( TDPath.mShotsLock ) { 
+      flipXAxes( mLegsStack );
+      flipXAxes( mSplaysStack );
+    }
     // FIXME 
     synchronized( mPlotOutline ) { mPlotOutline.clear(); }
     synchronized( TDPath.mXSectionsLock ) { mXSectionOutlines.clear(); }
  
-    synchronized( mStations ) {
+    synchronized( TDPath.mStationsLock ) {
       for ( DrawingStationName st : mStations ) st.flipXAxis(z);
       // for ( DrawingFixedName   fx : mFixeds )   fx.flipXAxis(z);
     }
@@ -329,7 +333,7 @@ class DrawingCommandManager
   void shiftDrawing( float x, float y )
   {
     // if ( mStations != null ) {
-    //   synchronized( mStations ) {
+    //   synchronized( TDPath.mStationsLock ) {
     //     for ( DrawingStationName st : mStations ) st.shiftBy( x, y );
     //     for ( DrawingFixedName fx : mFixeds ) fx.shiftBy( x, y );
     //   }
@@ -343,7 +347,7 @@ class DrawingCommandManager
   void scaleDrawing( float z )
   {
     // if ( mStations != null ) {
-    //   synchronized( mStations ) {
+    //   synchronized( TDPath.mStationsLock ) {
     //     for ( DrawingStationName st : mStations ) st.scaleBy( z );
     //     for ( DrawingFixedName fx : mFixeds ) fx.scaleBy( z );
     //   }
@@ -401,12 +405,14 @@ class DrawingCommandManager
       mScaleRef = null;
     }
 
-    synchronized( mLegsStack )   { mLegsStack.clear(); }
-    synchronized( mSplaysStack ) { mSplaysStack.clear(); }
+    synchronized( TDPath.mShotsLock ) {
+      mLegsStack.clear();
+      mSplaysStack.clear();
+    }
     synchronized( mPlotOutline ) { mPlotOutline.clear(); }
     synchronized( TDPath.mXSectionsLock   ) { mXSectionOutlines.clear(); }
-    synchronized( mStations )    { mStations.clear(); }
-    // synchronized( mFixeds   )    { mFixeds.clear(); }
+    synchronized( TDPath.mStationsLock )    { mStations.clear(); }
+    // synchronized( TDPath.mFixedsLock   )    { mFixeds.clear(); }
     syncClearSelected();
   }
 
@@ -618,7 +624,7 @@ class DrawingCommandManager
   // p is the path of sp
   void deleteSplay( DrawingPath p, SelectionPoint sp )
   {
-    synchronized( mSplaysStack ) {
+    synchronized( TDPath.mShotsLock ) {
       mSplaysStack.remove( p );
     }
     synchronized( TDPath.mSelectionLock ) {
@@ -646,7 +652,7 @@ class DrawingCommandManager
   void resetFixedPaint( TopoDroidApp app, boolean profile, Paint paint )
   {
     if( mLegsStack != null ) { 
-      synchronized( mLegsStack ) {
+      synchronized( TDPath.mShotsLock ) {
         for ( DrawingPath path : mLegsStack ) {
           if ( path.mBlock == null || ( ! path.mBlock.mMultiBad ) ) {
             path.setPathPaint( paint );
@@ -656,7 +662,7 @@ class DrawingCommandManager
       }
     }
     if( mSplaysStack != null ) { 
-      synchronized( mSplaysStack ) {
+      synchronized( TDPath.mShotsLock ) {
         for ( DrawingPath path : mSplaysStack ) {
           if ( path.mBlock == null || ( ! path.mBlock.mMultiBad ) ) {
             // path.setPathPaint( paint );
@@ -698,7 +704,7 @@ class DrawingCommandManager
   void addLegPath( DrawingPath path, boolean selectable )
   { 
     if ( mLegsStack == null ) return;
-    synchronized( mLegsStack ) {
+    synchronized( TDPath.mShotsLock ) {
       mLegsStack.add( path );
       if ( selectable ) {
         synchronized( TDPath.mSelectionLock ) {
@@ -711,7 +717,7 @@ class DrawingCommandManager
   void addSplayPath( DrawingPath path, boolean selectable )
   {
     if ( mSplaysStack == null ) return;
-    synchronized( mSplaysStack ) {
+    synchronized( TDPath.mShotsLock ) {
       mSplaysStack.add( path );
       if ( selectable ) {
         synchronized( TDPath.mSelectionLock ) {
@@ -724,7 +730,7 @@ class DrawingCommandManager
   // called by DrawingSurface.addDrawingStationName
   void addStation( DrawingStationName st, boolean selectable ) 
   {
-    synchronized( mStations ) {
+    synchronized( TDPath.mStationsLock ) {
       mStations.add( st );
       if ( selectable ) {
         synchronized( TDPath.mSelectionLock ) {
@@ -737,7 +743,7 @@ class DrawingCommandManager
   // called by DrawingSurface.addDrawingFixedName
   // void addStation( DrawingFixedName fx )
   // {
-  //   synchronized( mFixeds ) {
+  //   synchronized( TDPath.mFixedsLock ) {
   //     mFixeds.add( fx );
   //   }
   // }
@@ -764,7 +770,7 @@ class DrawingCommandManager
   //   DrawingLinePath scale_bar = new DrawingLinePath( BrushManager.mLineLib.mLineSectionIndex, mScrapIdx );
   //   scale_bar.addStartPoint( x0 - 50, y0 );
   //   scale_bar.addPoint( x0 + 50, y0 );  // 5 meters
-  //   synchronized( mCurrentStack ) {
+  //   synchronized( TDPath.mCommandsLock ) {
   //     mCurrentStack.add( scale_bar );
   //   }
   // }
@@ -793,17 +799,15 @@ class DrawingCommandManager
     //               + " cmds " + mCurrentStack.size() );
     RectF bounds = new RectF(-1,-1,1,1);
     RectF b = new RectF();
-    if( mSplaysStack != null ) { 
-      synchronized( mSplaysStack ) {
+    synchronized( TDPath.mShotsLock ) {
+      if( mSplaysStack != null ) { 
         for ( DrawingPath path : mSplaysStack ) {
           path.computeBounds( b, true );
           // bounds.union( b );
           Scrap.union( bounds, b );
         }
       }
-    }
-    if( mLegsStack != null ) { 
-      synchronized( mLegsStack ) {
+      if( mLegsStack != null ) { 
         for ( DrawingPath path : mLegsStack ) {
           path.computeBounds( b, true );
           // bounds.union( b );
@@ -887,18 +891,15 @@ class DrawingCommandManager
       }
     }
 
-    if ( TDSetting.mTherionSplays ) {
-      if ( mSplaysStack != null ) {
-        synchronized( mSplaysStack ) {
+    synchronized( TDPath.mShotsLock ) {
+      if ( TDSetting.mTherionSplays ) {
+        if ( mSplaysStack != null ) {
           for ( DrawingPath path : mSplaysStack ) {
             path.draw( c, mat, sca, null );
           }
         }
       }
-    }
-
-    if ( mLegsStack != null ) {
-      synchronized( mLegsStack ) {
+      if ( mLegsStack != null ) {
         for ( DrawingPath path : mLegsStack ) {
           path.draw( c, mat, sca, null );
         }
@@ -907,12 +908,12 @@ class DrawingCommandManager
  
     if ( TDSetting.mAutoStations ) {
       if ( mStations != null ) {  
-        synchronized( mStations ) {
+        synchronized( TDPath.mStationsLock ) {
           for ( DrawingStationName st : mStations ) {
             st.draw( c, mat, sca, null );
           }
         }
-        // synchronized( mFixeds ) {
+        // synchronized( TDPath.mFixedsLock ) {
         //   for ( DrawingFixedName fx : mFixeds ) {
         //     fx.draw( c, mat, sca, null );
         //   }
@@ -1006,14 +1007,11 @@ class DrawingCommandManager
       }
     }
 
-    if ( legs && mLegsStack != null ) {
-      synchronized( mLegsStack ) {
+    synchronized( TDPath.mShotsLock ) {
+      if ( legs && mLegsStack != null ) {
         for ( DrawingPath leg: mLegsStack ) leg.draw( canvas, mMatrix, mScale, mBBox );
       }
-    }
-
-    if ( mSplaysStack != null ) {
-      synchronized( mSplaysStack ) {
+      if ( mSplaysStack != null ) {
         if ( splays ) { // draw all splays except the splays-off
           for ( DrawingPath path : mSplaysStack ) {
 	    if ( ! station_splay.isStationOFF( path ) ) path.draw( canvas, mMatrix, mScale, mBBox );
@@ -1040,12 +1038,12 @@ class DrawingCommandManager
  
     if ( stations ) {
       if ( mStations != null ) {  
-        synchronized( mStations ) {
+        synchronized( TDPath.mStationsLock ) {
           for ( DrawingStationName st : mStations ) st.draw( canvas, mMatrix, mScale, mBBox );
         }
       }
       // if ( mFixeds != null ) {  
-      //   synchronized( mFixeds ) {
+      //   synchronized( TDPath.mFixedsLock ) {
       //     for ( DrawingFixedName fx : mFixeds ) fx.draw( canvas, mMatrix, mScale, mBBox );
       //   }
       // }
@@ -1099,9 +1097,11 @@ class DrawingCommandManager
       }
     }
 
-    synchronized( mGridStack1 ) {
-      if ( mFirstReference != null )  mFirstReference.draw( canvas, mMatrix, mScale, null );
-      if ( mSecondReference != null ) mSecondReference.draw( canvas, mMatrix, mScale, null );
+    if ( mGridStack1 != null ) {
+      synchronized (mGridStack1) {
+        if (mFirstReference != null) mFirstReference.draw(canvas, mMatrix, mScale, null);
+        if (mSecondReference != null) mSecondReference.draw(canvas, mMatrix, mScale, null);
+      }
     }
 
     if ( hasEraser ) {
@@ -1112,7 +1112,7 @@ class DrawingCommandManager
   // boolean hasStationName( String name )
   // {
   //   if ( name == null ) return false;
-  //   synchronized( mCurrentStack ) {
+  //   synchronized( TDPath.mCommandsLock ) {
   //     final Iterator i = mCurrentStack.iterator();
   //     while ( i.hasNext() ){
   //       final ICanvasCommand cmd = (ICanvasCommand) i.next();
@@ -1210,7 +1210,7 @@ class DrawingCommandManager
   // void rebuildSelection()
   // {
   //   Selection selection = new Selection();
-  //   synchronized ( mCurrentStack ) {
+  //   synchronized ( TDPath.mCommandsLock ) {
   //     final Iterator i = mCurrentStack.iterator();
   //     while ( i.hasNext() ) {
   //       final ICanvasCommand cmd = (ICanvasCommand) i.next();

@@ -1,4 +1,4 @@
-/** @file Archiver.java
+/* @file Archiver.java
  *
  * @author marco corvi
  * @date june 2012
@@ -28,6 +28,8 @@ import java.util.zip.ZipOutputStream;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+
+// import java.nio.charsets.StandardCharsets; // API-19
 
 import java.util.List;
 // import java.util.Locale;
@@ -136,7 +138,7 @@ class Archiver
   // @param zipname    name of compressed zip
   // @param lib        symbol library
   // @param dirpath    directory of symbol files (must end with '/') eg, TDPath.APP_POINT_PATH
-  boolean compressSymbols( String zipname, SymbolLibrary lib, String dirpath )
+  private boolean compressSymbols( String zipname, SymbolLibrary lib, String dirpath )
   {
     if ( lib == null ) return false;
     if ( ! (new File(dirpath)).exists() ) return false;
@@ -160,7 +162,7 @@ class Archiver
   }
 
   // return true is a symbol has been uncompressed
-  boolean uncompressSymbols( ZipInputStream zin, String dirpath, String prefix )
+  private boolean uncompressSymbols( ZipInputStream zin, String dirpath, String prefix )
   {
     if ( ! (TDLevel.overExpert && TDSetting.mZipWithSymbols ) ) return false;
     boolean ret = false;
@@ -196,7 +198,7 @@ class Archiver
         szin.closeEntry();
         // need to get the thname from the file
         FileInputStream sfis = new FileInputStream( symbolfilename );
-        BufferedReader br = new BufferedReader( new InputStreamReader( sfis, "UTF-8" ) ); // String iso = "UTF-8";
+        BufferedReader br = new BufferedReader( new InputStreamReader( sfis, "UTF-8" /* StandardCharsets.UTF_8 */ ) ); // String iso = "UTF-8";
         String line;
         while ( (line = br.readLine()) != null ) {
           line = line.trim();

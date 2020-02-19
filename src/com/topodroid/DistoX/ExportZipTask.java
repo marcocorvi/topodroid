@@ -19,8 +19,8 @@ import android.content.Context;
 class ExportZipTask extends AsyncTask< Void, Void, Boolean >
 {
   private Archiver mArchiver;
-  private String   mSaved;
-  private TopoDroidApp mApp;
+  private final String   mSaved;
+  private final TopoDroidApp mApp;
   
   ExportZipTask( Context context, TopoDroidApp app )
   {

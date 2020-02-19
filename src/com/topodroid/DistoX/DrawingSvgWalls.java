@@ -13,9 +13,9 @@ package com.topodroid.DistoX;
 
 import android.util.Log;
 
-import java.util.Locale;
+// import java.util.Locale;
 
-import java.util.List;
+// import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
@@ -24,10 +24,10 @@ import java.util.Locale;
 import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.BufferedInputStream;
-import java.io.DataInputStream;
-import java.io.FileNotFoundException;
+// import java.io.FileInputStream;
+// import java.io.BufferedInputStream;
+// import java.io.DataInputStream;
+// import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import android.graphics.RectF;
@@ -114,11 +114,13 @@ class DrawingSvgWalls extends DrawingSvgBase
       // }
       out.write( "    <icons id=\"icons\" " ); out.write( group_mode_open );
       for ( int n = 0; n < BrushManager.getPointLibSize(); ++ n ) {
-        SymbolPoint pt = (SymbolPoint)BrushManager.getPointByIndex(n);
-        int block = 1+n; // block_name = 1 + therion_code
-        out.write( "    <symbol id=\"" + pt.mThName + "\">\n" );
-        out.write( "      " + pt.getSvg().replace("path", "path inkscape:connector-curvature=\"0\"" ) + "\n" );;
-        out.write( "    </symbol>\n" );
+        SymbolPoint pt = (SymbolPoint) BrushManager.getPointByIndex(n);
+        if (pt != null) {
+          int block = 1 + n; // block_name = 1 + therion_code
+          out.write("    <symbol id=\"" + pt.mThName + "\">\n");
+          out.write("      " + pt.getSvg().replace("path", "path inkscape:connector-curvature=\"0\"") + "\n");
+          out.write("    </symbol>\n");
+        }
       }
       out.write( "    </icons>\n");
       out.write( "  </defs>\n");

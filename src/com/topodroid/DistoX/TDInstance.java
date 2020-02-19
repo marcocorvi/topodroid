@@ -105,7 +105,6 @@ class TDInstance
       // deviceB = TopoDroidApp.getDevice( addr ); // FIXME_DEVICE_STATIC
     }
     recentPlot = null;
-    recentPlot = null;
     recentPlotType = PlotInfo.PLOT_PLAN;
   }
 

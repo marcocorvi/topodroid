@@ -261,10 +261,11 @@ class ParserTherion extends ImportParser
               path = path + "." + vals[1];    // add survey name to path
               ++ks;
 	      if ( ks >= ksmax ) {
-		ksmax += 10;
-                int[] tmp = new int[ksmax];
-		for ( int k=0; k<ks; ++k ) tmp[k] = survey_pos[k];
-		survey_pos = tmp;
+		    ksmax += 10;
+		    int[] tmp = new int[ksmax];
+		    // for ( int k=0; k<ks; ++k ) tmp[k] = survey_pos[k];
+		    System.arraycopy( survey_pos, 0, tmp, 0, ks );
+		    survey_pos = tmp;
 	      }
               // pushState( state );
               state = new ParserTherionState( state );

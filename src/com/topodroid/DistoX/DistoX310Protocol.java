@@ -387,11 +387,17 @@ class DistoX310Protocol extends DistoXProtocol
           // if ( TDSetting.mPacketLog ) logPacket8( 0L, buf );
           // Log.v( "DistoX-DATA_TYPE", "dump firmware[2]: " + String.format(" %02x", mBuffer[0] ) );
 
-          boolean last = true;
-          for ( int k=0; last && k<256; ++k ) {
-            if ( buf[k] != (byte)0xff ) last = false;
+          // boolean last = true;
+          // for ( int k=0; last && k<256; ++k ) {
+          //   if ( buf[k] != (byte)0xff ) last = false;
+          // }
+          // if ( last ) break;
+          int k = 0;
+          for ( ; k<256; ++k ) {
+            if ( buf[k] != (byte)0xff ) break;
           }
-          if ( last ) break;
+          if ( k == 256 ) break;
+
           dos.write( buf, 0, 256 );
           cnt += 256;
         } catch ( EOFException e ) { // OK
