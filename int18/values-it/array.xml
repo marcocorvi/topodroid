@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-  <!-- TODO string-array name="orientation">
-     <item name="unspecified">unspecified</item>
-     <item name="portrait">portrait</item>
-     <item name="landscape">landscape</item>
-  </string-array -->
+  <string-array name="orientazione">
+     <item name="unspecified">non specificato</item>
+     <item name="portrait">ritratto</item>
+     <item name="landscape">paesaggio</item>
+  </string-array>
 
-  <!-- TODO string-array name="splayDash">
-     <item name="none">none</item>
-     <item name="plan">clino</item>
-     <item name="profile">azimuth</item>
-     <item name="view">view</item>
-  </string-array -->
+  <string-array name="Trattino splay">
+     <item name="none">nessuno</item>
+     <item name="plan">inclin.</item>
+     <item name="profile">azimut</item>
+     <item name="view">vista</item>
+  </string-array>
 
-  <!-- TODO string-array name="feedbackMode">
-     <item name="none">none</item>
-     <item name="sound">sound</item>
-     <item name="heptic">haptic</item>
-  </string-array -->
+  <string-array name="Modo di feedback">
+     <item name="none">nessuna</item>
+     <item name="sound">suono</item>
+     <item name="heptic">tattile</item>
+  </string-array>
 
   <string-array name="canvasLevels">
      <item name="none">nessuno</item>
