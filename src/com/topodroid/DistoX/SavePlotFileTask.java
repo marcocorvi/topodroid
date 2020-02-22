@@ -35,7 +35,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   private Handler mHandler;
   // private TopoDroidApp mApp;
   private final WeakReference<DrawingWindow> mParent;
-  private final DistoXNum mNum;
+  private final TDNum mNum;
   // private final DrawingUtil mUtil;
   private final DrawingCommandManager mManager;
   private List<DrawingPath> mPaths;
@@ -49,7 +49,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   private PlotSaveData psd2 = null;
 
   SavePlotFileTask( Context context, DrawingWindow parent, Handler handler,
-		    DistoXNum num,
+		    TDNum num,
 		    // DrawingUtil util, 
 		    DrawingCommandManager manager, 
                     String fullname, long type, int proj_dir, int suffix, int rotate )
@@ -79,7 +79,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
 
   SavePlotFileTask( Context context, DrawingWindow parent, Handler handler,
                     // TopoDroidApp app,
-		    DistoXNum num,
+		    TDNum num,
 		    // DrawingUtil util,
 		    List<DrawingPath> paths,
                     String fullname, long type, int proj_dir )

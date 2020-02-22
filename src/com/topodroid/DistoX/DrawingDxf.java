@@ -475,7 +475,7 @@ class DrawingDxf
     return handle;
   }
 
-  static void write( BufferedWriter out, DistoXNum num, /* DrawingUtil util, */ DrawingCommandManager plot, long type )
+  static void write( BufferedWriter out, TDNum num, /* DrawingUtil util, */ DrawingCommandManager plot, long type )
   {
     mVersion13 = (TDSetting.mAcadVersion >= 13);
     mVersion16 = (TDSetting.mAcadVersion >= 16);

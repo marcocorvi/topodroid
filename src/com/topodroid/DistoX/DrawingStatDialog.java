@@ -34,14 +34,14 @@ import android.widget.LinearLayout;
 class DrawingStatDialog extends MyDialog
                        implements View.OnClickListener
 {
-    private DistoXNum mNum;
+    private TDNum mNum;
     private String mOrigin;
     private float mAzimuth;
     private SurveyStat mStat;
 
     // private Button mBtnBack;
 
-    DrawingStatDialog( Context context, DistoXNum num, String origin, float azimuth, SurveyStat stat )
+    DrawingStatDialog( Context context, TDNum num, String origin, float azimuth, SurveyStat stat )
     {
       super( context, R.string.DrawingStatDialog );
       mNum    = num;

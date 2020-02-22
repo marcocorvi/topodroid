@@ -1,4 +1,4 @@
-/* @file DistoXNum.java
+/* @file TDNum.java
  *
  * @author marco corvi
  * @date nov 2011
@@ -19,7 +19,7 @@ import java.util.HashMap;
 
 // import android.util.Log;
 
-class DistoXNum
+class TDNum
 {
   NumStation mStartStation; 
 
@@ -274,7 +274,7 @@ class DistoXNum
    * @param view     barriers list
    * @param hide     hiding list
    */
-  DistoXNum( List<DBlock> data, String start, String view, String hide, float decl, String format )
+  TDNum( List<DBlock> data, String start, String view, String hide, float decl, String format )
   {
     mDecl = decl;
     surveyExtend   = true;
@@ -285,7 +285,7 @@ class DistoXNum
 
   // public void dump()
   // {
-  //   TDLog.Log( TopoDroiaLog.LOG_NUM, "DistoXNum Stations:" );
+  //   TDLog.Log( TopoDroiaLog.LOG_NUM, "TDNum Stations:" );
   //   for ( NumStation st : mStations ) {
   //     TDLog.Log( TopoDroiaLog.LOG_NUM, "   " + st.name + " S: " + st.s + " E: " + st.e );
   //   }
@@ -825,7 +825,7 @@ class DistoXNum
     }
 
     // if ( TDLog.LOG_DEBUG ) {
-    //   Log.v( "DistoX-NUM", "DistoXNum::compute tmp-shots " + tmpshots.size() + " tmp-splays " + tmpsplays.size() );
+    //   Log.v( "DistoX-NUM", "TDNum::compute tmp-shots " + tmpshots.size() + " tmp-splays " + tmpsplays.size() );
     //   for ( TriShot ts : tmpshots ) ts.Dump();
     // }
     for ( TriShot tsh : tmpshots ) { // clear backshot, sibling, and multibad
@@ -915,7 +915,7 @@ class DistoXNum
     }
 
     // if ( TDLog.LOG_DEBUG ) {
-    //   Log.v( "DistoX-NUM", "DistoXNum::compute tmp-shots " + tmpshots.size() + " tmp-splays " + tmpsplays.size() );
+    //   Log.v( "DistoX-NUM", "TDNum::compute tmp-shots " + tmpshots.size() + " tmp-splays " + tmpsplays.size() );
     //   for ( TriShot ts : tmpshots ) ts.Dump();
     // }
 
@@ -1104,7 +1104,7 @@ class DistoXNum
         }
       }
     }
-    // if ( TDLog.LOG_DEBUG ) Log.v( TDLog.TAG, "DistoXNum::compute done leg shots, stations  " + mStations.size() );
+    // if ( TDLog.LOG_DEBUG ) Log.v( TDLog.TAG, "TDNum::compute done leg shots, stations  " + mStations.size() );
 
     // Log.v("DistoXL", "shots " + mShots.size() + " loops " + mClosures.size() + " siblings " + nrSiblings + " tmp " + tmpshots.size() );
     if ( TDSetting.mLoopClosure == TDSetting.LOOP_CYCLES ) {

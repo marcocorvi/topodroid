@@ -34,7 +34,7 @@ import android.graphics.RectF;
 
 class DrawingSvgWalls extends DrawingSvgBase
 {
-  void write( String filename, BufferedWriter out, DistoXNum num, DrawingCommandManager plot, long type )
+  void write( String filename, BufferedWriter out, TDNum num, DrawingCommandManager plot, long type )
   {
     String wall_group = BrushManager.getLineWallGroup( );
 

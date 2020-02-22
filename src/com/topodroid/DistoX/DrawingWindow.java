@@ -388,7 +388,7 @@ public class DrawingWindow extends ItemDrawer
   // long getSID() { return TDInstance.sid; }
   // String getSurvey() { return TDInstance.survey; }
 
-  private DistoXNum mNum;
+  private TDNum mNum;
   private float mDecl;
   private String mFormatClosure;
 
@@ -2538,7 +2538,7 @@ public class DrawingWindow extends ItemDrawer
 
     if ( PlotInfo.isSketch2D( type ) ) {
       if ( list.size() > 0 ) {
-        mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
+        mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
       } else {
         mNum = null;
         // TDToast.makeBad( R.string.few_data );
@@ -2797,7 +2797,7 @@ public class DrawingWindow extends ItemDrawer
     assert( mLastLinePath == null );
     if ( mType == PlotInfo.PLOT_EXTENDED ) { 
       List<DBlock> list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
-      mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
+      mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
       // if ( mNum != null ) { // always true
         mDrawingSurface.clearShotsAndStations( (int)mType );
         computeReferences( (int)mType, mName, TopoDroidApp.mScaleFactor, false );
@@ -5573,7 +5573,7 @@ public class DrawingWindow extends ItemDrawer
     // called only by doExport
     private void saveWithExt( long type, String ext ) // , boolean toast )
     {
-      DistoXNum num = mNum;
+      TDNum num = mNum;
       TDLog.Log( TDLog.LOG_IO, "export plot type " + type + " with extension " + ext );
       if ( PlotInfo.isAnySection( type ) ) { 
 	DrawingCommandManager manager = mDrawingSurface.getManager( type );
@@ -5597,7 +5597,7 @@ public class DrawingWindow extends ItemDrawer
     // ext can be dxf, svg
     // FIXME OK PROFILE
     // used also by SavePlotFileTask
-    void doSaveWithExt( DistoXNum num, DrawingCommandManager manager, long type, final String filename, final String ext, boolean toast )
+    void doSaveWithExt( TDNum num, DrawingCommandManager manager, long type, final String filename, final String ext, boolean toast )
     {
       TDLog.Log( TDLog.LOG_IO, "save with ext: " + filename + " ext " + ext );
       // mActivity = context (only to toast)
@@ -5709,7 +5709,7 @@ public class DrawingWindow extends ItemDrawer
     // mLastLinePath = null; // not needed
     // Log.v("DistoX", "do Compute References() type " + mType );
     List<DBlock> list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
-    mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
+    mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
     // doMoveTo();
     // if ( mNum != null ) { // alwayst true
       if ( mType == (int)PlotInfo.PLOT_PLAN ) {
@@ -5750,7 +5750,7 @@ public class DrawingWindow extends ItemDrawer
     // Log.v("DistoX-DATA", "update display() type " + mType + " reference " + reference );
     // if ( compute ) {
       // List<DBlock> list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
-      // mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
+      // mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
       // // doMoveTo();
       // computeReferences( (int)mPlot1.type, mPlot1.name 0.0f, 0.0f, mApp.mScaleFactor, false );
       // if ( mPlot2 != null ) {
@@ -5764,7 +5764,7 @@ public class DrawingWindow extends ItemDrawer
       updateSplays( mApp.mSplayMode );
     } else {
       List<DBlock> list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
-      mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
+      mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
       recomputeReferences( TopoDroidApp.mScaleFactor );
       // if ( mType == (int)PlotInfo.PLOT_PLAN ) {
       //   if ( mPlot2 != null ) {

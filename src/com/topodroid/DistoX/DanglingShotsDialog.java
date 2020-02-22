@@ -34,11 +34,11 @@ import android.widget.LinearLayout;
 class DanglingShotsDialog extends MyDialog
                           implements View.OnClickListener
 {
-  private DistoXNum mNum;
+  private TDNum mNum;
 
   // private Button mBtnBack;
 
-  DanglingShotsDialog( Context context, DistoXNum num )
+  DanglingShotsDialog( Context context, TDNum num )
   {
     super( context, R.string.DanglingShotsDialog );
     mNum    = num;

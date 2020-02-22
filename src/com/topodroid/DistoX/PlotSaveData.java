@@ -9,7 +9,7 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  *  @note this object is final because its field are supposed to be accessed read-only
- *        although DistoXNum, PlotInfo, and DrawingCommandManager are references and, therefore,
+ *        although TDNum, PlotInfo, and DrawingCommandManager are references and, therefore,
  *        the underlying object could be changed
  */
 package com.topodroid.DistoX;
@@ -18,7 +18,7 @@ class PlotSaveData
 {
   final PlotInfo plot;
   final long type;     // plot type
-  final DistoXNum num;
+  final TDNum num;
   // final DrawingUtil util;
   final DrawingCommandManager cm;
   final String name;   
@@ -27,7 +27,7 @@ class PlotSaveData
   final int suffix;    // plot save mode
   final int rotate;    // number of backups to rotate (??)
 
-  PlotSaveData( DistoXNum n, /* DrawingUtil u, */ PlotInfo p, DrawingCommandManager manager, String nam, String fnam, int a, int s, int r )
+  PlotSaveData( TDNum n, /* DrawingUtil u, */ PlotInfo p, DrawingCommandManager manager, String nam, String fnam, int a, int s, int r )
   {
     plot = p;
     type = p.type;

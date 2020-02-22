@@ -75,7 +75,7 @@ class ProjectionDialog extends MyDialog
   private Button  mBtnPlus;
   private Button  mBtnMinus;
   private EditText mETazimuth;
-  private DistoXNum mNum;
+  private TDNum mNum;
 
   private ZoomButtonsController mZoomBtnsCtrl = null;
   private boolean mZoomBtnsCtrlOn = false;
@@ -427,7 +427,7 @@ class ProjectionDialog extends MyDialog
         TDToast.makeBad( R.string.few_data );
       } else {
         // float decl = mApp.mData.getSurveyDeclination( mSid );
-        mNum = new DistoXNum( mList, mFrom, "", "", 0.0f, null ); // null formatClosure
+        mNum = new TDNum( mList, mFrom, "", "", 0.0f, null ); // null formatClosure
         mSeekBar.setProgress( 200 );
         float de = - mNum.surveyEmin();
         if ( mNum.surveyEmax() > de ) de = mNum.surveyEmax();

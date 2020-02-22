@@ -64,7 +64,7 @@ class TDExporter
       for ( DBlock blk : list ) {
 	if ( blk.mTo != null && blk.mTo.length() > 0 && blk.mFrom != null && blk.mFrom.length() > 0 ) {
           // sets the blocks clinos
-          DistoXNum num = new DistoXNum( list, blk.mFrom, null, null, 0.0f, null ); // no declination, null formatClosure
+          TDNum num = new TDNum( list, blk.mFrom, null, null, 0.0f, null ); // no declination, null formatClosure
 	  break;
 	}
       }
@@ -542,9 +542,9 @@ class TDExporter
     float decl = data.getSurveyDeclination( sid );
     if ( decl >= SurveyInfo.DECLINATION_MAX ) decl = 0; // if unset use 0
 
-    List<DistoXNum> nums = getGeolocalizedData( sid, data, decl, asl_factor, ellipsoid_altitude );
+    List<TDNum> nums = getGeolocalizedData( sid, data, decl, asl_factor, ellipsoid_altitude );
     if ( nums == null ) return null;
-    for ( DistoXNum num : nums ) {
+    for ( TDNum num : nums ) {
       for ( NumStation st : num.getStations() ) {
         if ( station.equals( st.name ) ) return new GeoReference( st.e, st.s, st.v, mERadius, mSRadius );
       }
@@ -552,17 +552,17 @@ class TDExporter
     return null;
   }
 
-  static private List<DistoXNum> getGeolocalizedData( long sid, DataHelper data, float decl, float asl_factor, boolean ellipsoid_altitude )
+  static private List<TDNum> getGeolocalizedData( long sid, DataHelper data, float decl, float asl_factor, boolean ellipsoid_altitude )
   {
     List< FixedInfo > fixeds = data.selectAllFixed( sid, 0 );
     // Log.v("DistoX", "get geoloc. data. Decl " + decl + " fixeds " + fixeds.size() );
     if ( fixeds.size() == 0 ) return null;
 
-    List<DistoXNum> nums = new ArrayList<DistoXNum>();
+    List<TDNum> nums = new ArrayList<TDNum>();
     List<DBlock> shots_data = data.selectAllExportShots( sid, 0 );
     FixedInfo origin = null;
     for ( FixedInfo fixed : fixeds ) {
-      DistoXNum num = new DistoXNum( shots_data, fixed.name, null, null, decl, null ); // null formatClosure
+      TDNum num = new TDNum( shots_data, fixed.name, null, null, decl, null ); // null formatClosure
       // Log.v("DistoX", "Num shots " + num.getShots().size() );
       if ( num.getShots().size() > 0 ) {
         makeGeolocalizedData( num, fixed, asl_factor, ellipsoid_altitude );
@@ -573,7 +573,7 @@ class TDExporter
     return nums;
   }
 
-  static private void  makeGeolocalizedData( DistoXNum num, FixedInfo origin, float asl_factor, boolean ellipsoid_altitude )
+  static private void  makeGeolocalizedData( TDNum num, FixedInfo origin, float asl_factor, boolean ellipsoid_altitude )
   {
 
     float lat = (float)origin.lat;
@@ -638,7 +638,7 @@ class TDExporter
     final String coordinates3 = "    <coordinates>%.8f,%.8f,%.1f</coordinates>\n";
     final String coordinates6 = "    %.8f,%.8f,%.1f %.8f,%.8f,%.1f\n";
     // Log.v("DistoX", "export as KML " + filename );
-    List<DistoXNum> nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false ); // false: Geoid altitude
+    List<TDNum> nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false ); // false: Geoid altitude
     if ( nums == null || nums.size() == 0 ) {
       TDLog.Error( "Failed KML export: no geolocalized station");
       return "";
@@ -695,7 +695,7 @@ class TDExporter
       pw.format(linestyle_end);
       pw.format(style_end);
       
-      for ( DistoXNum num : nums ) {
+      for ( TDNum num : nums ) {
         List<NumStation> stations = num.getStations();
         List<NumShot>    shots = num.getShots();
         List<NumSplay>   splays = num.getSplays();
@@ -772,7 +772,7 @@ class TDExporter
   // @param filename filepath without extension 
   static String exportSurveyAsShp( long sid, DataHelper data, SurveyInfo info, String filename )
   {
-    List<DistoXNum> nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false ); // false: Geoid altitude
+    List<TDNum> nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false ); // false: Geoid altitude
     if ( nums == null || nums.size() == 0 ) {
       TDLog.Error( "Failed SHP export: no geolocalized station");
       return "";
@@ -788,7 +788,7 @@ class TDExporter
         ArrayList<File> files = new ArrayList<File>();
         int nr = 0;
         if ( TDSetting.mKmlStations ) {
-          for ( DistoXNum num : nums ) {
+          for ( TDNum num : nums ) {
             String filepath = filename + "/stations-" + nr;
             ++ nr;
             List<NumStation> stations = num.getStations();
@@ -800,7 +800,7 @@ class TDExporter
         }
 
         nr = 0;
-        for ( DistoXNum num : nums ) {
+        for ( TDNum num : nums ) {
           String filepath = filename + "/shots-" + nr;
           ++ nr;
           List<NumShot> shots = num.getShots();
@@ -813,7 +813,7 @@ class TDExporter
 
         // if ( TDSetting.mKmlSplays ) {
         //   nr = 0;
-        //   for ( DistoXNum num : nums ) {
+        //   for ( TDNum num : nums ) {
         //     String filepath = filename + "-splays-" + nr;
         //     ++ nr;
         //     List<NumSplay> splays = num.getSplays();
@@ -848,7 +848,7 @@ class TDExporter
     final String coords  = "\"coordinates\": ";
     final String feature = "\"Feature\"";
     // Log.v("DistoX", "export as KML " + filename );
-    List<DistoXNum> nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, true ); // true: ellipsoid altitude
+    List<TDNum> nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, true ); // true: ellipsoid altitude
     if ( nums == null || nums.size() == 0 ) {
       TDLog.Error( "Failed GeoJSON export: no geolocalized station");
       return "";
@@ -867,7 +867,7 @@ class TDExporter
       pw.format("  %s \"FeatureCollection\",\n", type );
       pw.format("  \"features\": [\n");
       
-      for ( DistoXNum num : nums ) {
+      for ( TDNum num : nums ) {
         List<NumShot>    shots = num.getShots();
         for ( NumShot sh : shots ) {
           NumStation from = sh.from;
@@ -884,7 +884,7 @@ class TDExporter
         }
       }
       if ( TDSetting.mKmlSplays ) {
-        for ( DistoXNum num : nums ) {
+        for ( TDNum num : nums ) {
           List<NumSplay>   splays = num.getSplays();
           for ( NumSplay sp : splays ) {
             NumStation from = sp.from;
@@ -899,7 +899,7 @@ class TDExporter
         }
       }
       if ( TDSetting.mKmlStations ) {
-        for ( DistoXNum num : nums ) {
+        for ( TDNum num : nums ) {
           List<NumStation> stations = num.getStations();
           for ( NumStation st : stations ) {
             pw.format("    {\n");
@@ -931,7 +931,7 @@ class TDExporter
   static String exportSurveyAsPlt( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     // Log.v("DistoX", "export as trackfile: " + filename );
-    List<DistoXNum> nums = getGeolocalizedData( sid, data, info.getDeclination(), TDUtil.M2FT, false );
+    List<TDNum> nums = getGeolocalizedData( sid, data, info.getDeclination(), TDUtil.M2FT, false );
     if ( nums == null || nums.size() == 0 ) {
       TDLog.Error( "Failed PLT export: no geolocalized station");
       return "";
@@ -956,7 +956,7 @@ class TDExporter
       pw.format("0,2,1677690,%s - TopoDroid v %s,0,0,0,8421376,-1,0\r\n", TDUtil.getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
 
       int tot_stations = 0;
-      for ( DistoXNum num : nums ) {
+      for ( TDNum num : nums ) {
         List<NumStation> stations = num.getStations();
         // List<NumShot>    shots = num.getShots();
         // List<NumSplay>   splays = num.getSplays();
@@ -973,7 +973,7 @@ class TDExporter
 
       // String date = TDUtil.getDateString( "dd-MMM-yy" );
 
-      for ( DistoXNum num : nums ) {
+      for ( TDNum num : nums ) {
         List<NumStation> stations = num.getStations();
         List<NumShot>    shots = num.getShots();
         // List<NumSplay>   splays = num.getSplays();
@@ -1659,7 +1659,7 @@ class TDExporter
         }
         if ( from != null ) {
           boolean do_header = true;
-          DistoXNum num = new DistoXNum( list, from, null, null, 0.0f, null ); // no declination, null formatClosure
+          TDNum num = new TDNum( list, from, null, null, 0.0f, null ); // no declination, null formatClosure
           List<NumBranch> branches = num.makeBranches( true );
           // Log.v("DistoX", "Station " + from + " shots " + num.shotsNr() + " splays " + num.splaysNr()
           //               + " branches " + branches.size() );
@@ -3647,7 +3647,7 @@ class TDExporter
   // NOTE declination is taken into account in DXF export (used to compute num)
   // NOTE shot flags are not supported
 
-  static String exportSurveyAsDxf( long sid, DataHelper data, SurveyInfo info, DistoXNum num, String filename )
+  static String exportSurveyAsDxf( long sid, DataHelper data, SurveyInfo info, TDNum num, String filename )
   {
     // Log.v("DistoX", "export as DXF: " + filename );
     // Log.v( TAG, "export SurveyAsDxf " + filename );

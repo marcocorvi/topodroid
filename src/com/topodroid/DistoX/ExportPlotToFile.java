@@ -25,7 +25,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
 {
     private final DrawingCommandManager mCommand;
     private final SurveyInfo mInfo;
-    private final DistoXNum mNum;
+    private final TDNum mNum;
     private final long mType;
     private final String mFullName; // "survey-plotX" name ;
     private final String mExt; // extension
@@ -36,7 +36,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     private final GeoReference mStation;
 
     ExportPlotToFile( Context context, SurveyInfo info,
-                      DistoXNum num, /* DrawingUtil util, */ DrawingCommandManager command,
+                      TDNum num, /* DrawingUtil util, */ DrawingCommandManager command,
                       long type, String name, String ext, boolean toast, GeoReference station )
     {
       // Log.v("DistoX", "export plot to file cstr. " + name );

@@ -147,7 +147,7 @@ class ParserPocketTopo extends ImportParser
 
     // Log.v("PTDistoX", "start from " + mStartFrom );
     // float declination = mData.getSurveyDeclination( mSid );
-    // DistoXNum num = new DistoXNum( data, mStartFrom, null, null, declination, null ); // null formatClosure
+    // TDNum num = new TDNum( data, mStartFrom, null, null, declination, null ); // null formatClosure
     // Log.v("DistoX", "Num E " + (20*num.surveyEmin()) + " " + (20*num.surveyEmax()) +
     //                 " S " + (20*num.surveySmin()) + " " + (20*num.surveySmax()) +
     //                 " H " + (20*num.surveyHmin()) + " " + (20*num.surveyHmax()) +

@@ -103,7 +103,7 @@ class DrawingXvi
     }
   }
 
-  static void write( BufferedWriter out, DistoXNum num, /* DrawingUtil util, */ DrawingCommandManager plot, long type )
+  static void write( BufferedWriter out, TDNum num, /* DrawingUtil util, */ DrawingCommandManager plot, long type )
   {
     String wall_group = BrushManager.getLineWallGroup( );
 

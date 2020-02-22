@@ -137,7 +137,7 @@ public class OverviewWindow extends ItemDrawer
   // private static BezierInterpolator mBezierInterpolator = new BezierInterpolator();
   private DrawingSurface  mOverviewSurface;
 
-  private DistoXNum mNum;
+  private TDNum mNum;
   private Path mCrossPath;
   private Path mCirclePath;
 
@@ -607,7 +607,7 @@ public class OverviewWindow extends ItemDrawer
           // mPid = plot.id;
           // NOTE Overview only for plan or extended plots
           // float decl = mData.getSurveyDeclination( mSid );
-          mNum = new DistoXNum( mBlockList, start, null, null, 0.0f, null ); // null formatClosure
+          mNum = new TDNum( mBlockList, start, null, null, 0.0f, null ); // null formatClosure
           mStartStation = mNum.getStation( start );
           // computeReferences( (int)type, mOffset.x, mOffset.y, mZoom );
           computeReferences( (int)type, mZoom );
@@ -650,7 +650,7 @@ public class OverviewWindow extends ItemDrawer
    // called only by export menu
    private void saveWithExt( final String ext )
    {
-     DistoXNum num = mNum;
+     TDNum num = mNum;
      final String fullname = TDInstance.survey + ( (mType == PlotInfo.PLOT_PLAN )? "-p" : "-s" );
      // TDLog.Log( TDLog.LOG_IO, "export plot type " + mType + " with extension " + ext );
      // Log.v( "DistoXX", "export th2 file " + fullname );

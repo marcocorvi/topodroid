@@ -51,7 +51,7 @@ class DrawingTunnel extends DrawingSvgBase
   float toWorldX( float x ) { return (x-DrawingUtil.CENTER_X); }
   float toWorldY( float y ) { return (y-DrawingUtil.CENTER_Y); }
 
-  void write( BufferedWriter out, SurveyInfo info, DistoXNum num, /* DrawingUtil util, */ DrawingCommandManager plot, long type )
+  void write( BufferedWriter out, SurveyInfo info, TDNum num, /* DrawingUtil util, */ DrawingCommandManager plot, long type )
   {
     RectF bbox = plot.getBoundingBox( );
     float xmin = bbox.left;
@@ -278,7 +278,7 @@ class DrawingTunnel extends DrawingSvgBase
     }
   }
 
-  private static void printConnective( PrintWriter pw, int nn, DistoXNum num, long type, float x, float y, HashMap<String,Integer> map )
+  private static void printConnective( PrintWriter pw, int nn, TDNum num, long type, float x, float y, HashMap<String,Integer> map )
   {
     NumStation st = num.getClosestStation( type, x/FACTOR, y/FACTOR ); // st.name st.e, s, v
     if ( st != null ) {

@@ -158,7 +158,7 @@ class NumStation extends NumSurveyPoint
     // }
   }
 
-  // called by DistoXNum.computeNum for splays
+  // called by TDNum.computeNum for splays
   // @param b bearing [degrees]
   // @param e original splay extend
   float computeExtend( float b, float e )
