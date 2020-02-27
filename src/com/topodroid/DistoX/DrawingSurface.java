@@ -346,6 +346,12 @@ class DrawingSurface extends SurfaceView
     }
   }
 
+  void clearShotsAndStations( )
+  {
+    mCommandManager1.clearShotsAndStations();
+    mCommandManager2.clearShotsAndStations();
+  }
+
   void clearReferences( int type ) 
   {
     if ( PlotInfo.isProfile( type ) ) {

@@ -11,12 +11,12 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 // import java.util.LinkedList;
 // import java.util.ListIterator;
 import java.util.ArrayList;
 import java.util.Iterator;
-
-// import android.util.Log;
 
 import android.graphics.Matrix;
 
@@ -97,15 +97,18 @@ class Selection
   }
 
   void clearReferencePoints() // synchronized by CommandManager
-  {
+  {        
+    // int cnt = 0;
     Iterator< SelectionPoint > it = mPoints.iterator();
     while( it.hasNext() ) {
       SelectionPoint sp1 = (SelectionPoint)it.next();
       if ( sp1.isReferenceType() ) {
         sp1.setBucket( null );
         it.remove( );
+        // ++ cnt;
       }
     }
+    // Log.v("DistoX-HIDE", "selection clear reference points " + cnt );
   }
 
   // void clearDrawingPoints()
@@ -200,7 +203,7 @@ class Selection
 
   private void insertItem( DrawingPath path, LinePoint pt )
   {
-    SelectionPoint sp = new SelectionPoint( path, pt, null );
+    SelectionPoint sp = new SelectionPoint( path, pt, null ); // OOM Exception
     mPoints.add( sp );
     sp.setBucket( getBucket( sp.X(), sp.Y() ) );
 

@@ -81,8 +81,8 @@ class DrawingCommandManager
   // final private List<ICanvasCommand>     mCurrentStack;
   // final private List<DrawingStationPath> mUserStations;  // user-inserted stations
   // final private List<ICanvasCommand>     mRedoStack;
-  private Selection mSelection;
-  private SelectionSet mSelected;
+  private Selection mSelectionFixed;
+  // private SelectionSet mSelected;
 
   private boolean mDisplayPoints;
 
@@ -121,7 +121,7 @@ class DrawingCommandManager
     // // mHighlight = Collections.synchronizedList(new ArrayList<DrawingPath>());
     // // PATH_MULTISELECT
     // mMultiselected = Collections.synchronizedList( new ArrayList< DrawingPath >());
-    // mSelection    = new Selection();
+    mSelectionFixed = new Selection();
     // mSelected     = new SelectionSet();
 
     mMatrix       = new Matrix(); // identity
@@ -148,7 +148,7 @@ class DrawingCommandManager
     mScrapIdx = mScraps.size();
     mCurrentScrap = new Scrap( mScrapIdx, mPlotName );
     mScraps.add( mCurrentScrap ); 
-    addShotsToScrapSelection( mCurrentScrap );
+    // FIXME-HIDE addShotsToScrapSelection( mCurrentScrap );
     return mScrapIdx;
   }
 
@@ -388,7 +388,8 @@ class DrawingCommandManager
   void clearShotsAndStations( )
   {
     synchronized( TDPath.mSelectionLock ) { 
-      for ( Scrap scrap : mScraps ) scrap.clearShotsAndStations();
+      mSelectionFixed.clearReferencePoints();
+      // FIXME-HIDE for ( Scrap scrap : mScraps ) scrap.clearShotsAndStations();
     }
   }
 
@@ -408,6 +409,7 @@ class DrawingCommandManager
     synchronized( TDPath.mShotsLock ) {
       mLegsStack.clear();
       mSplaysStack.clear();
+      
     }
     synchronized( mPlotOutline ) { mPlotOutline.clear(); }
     synchronized( TDPath.mXSectionsLock   ) { mXSectionOutlines.clear(); }
@@ -628,7 +630,8 @@ class DrawingCommandManager
       mSplaysStack.remove( p );
     }
     synchronized( TDPath.mSelectionLock ) {
-      for ( Scrap scrap : mScraps ) scrap.deleteSplay( sp );
+      mSelectionFixed.removePoint( sp );
+      // FIXME-HIDE for ( Scrap scrap : mScraps ) scrap.deleteSplay( sp );
     }
   }
 
@@ -686,20 +689,20 @@ class DrawingCommandManager
     }
   }
 
-  // TODO shots and station selection set could be managed by the CommandManager
+  // FIXME-HIDE shots and station selection set could be managed by the CommandManager
   //      and shared among the scraps
-  private void addShotsToScrapSelection( Scrap scrap )
-  {
-    for ( DrawingPath leg : mLegsStack ) {
-      scrap.insertPathInSelection( leg );
-    }
-    for ( DrawingPath splay : mSplaysStack ) {
-      scrap.insertPathInSelection( splay );
-    }
-    for ( DrawingStationName station : mStations ) {
-      scrap.addStationToSelection( station );
-    }
-  }
+  // private void addShotsToScrapSelection( Scrap scrap )
+  // {
+  //   for ( DrawingPath leg : mLegsStack ) {
+  //     scrap.insertPathInSelection( leg );
+  //   }
+  //   for ( DrawingPath splay : mSplaysStack ) {
+  //     scrap.insertPathInSelection( splay );
+  //   }
+  //   for ( DrawingStationName station : mStations ) {
+  //     scrap.addStationToSelection( station );
+  //   }
+  // }
 
   void addLegPath( DrawingPath path, boolean selectable )
   { 
@@ -708,7 +711,8 @@ class DrawingCommandManager
       mLegsStack.add( path );
       if ( selectable ) {
         synchronized( TDPath.mSelectionLock ) {
-          for ( Scrap scrap : mScraps ) scrap.insertPathInSelection( path );
+	  mSelectionFixed.insertPath( path );
+          // FIXME-HIDE for ( Scrap scrap : mScraps ) scrap.insertPathInSelection( path );
         }
       }
     }
@@ -721,7 +725,8 @@ class DrawingCommandManager
       mSplaysStack.add( path );
       if ( selectable ) {
         synchronized( TDPath.mSelectionLock ) {
-          for ( Scrap scrap : mScraps ) scrap.insertPathInSelection( path );
+	  mSelectionFixed.insertPath( path );
+          // FIXME-HIDE for ( Scrap scrap : mScraps ) scrap.insertPathInSelection( path );
         }
       }
     }
@@ -734,7 +739,8 @@ class DrawingCommandManager
       mStations.add( st );
       if ( selectable ) {
         synchronized( TDPath.mSelectionLock ) {
-          for ( Scrap scrap : mScraps ) scrap.addStationToSelection( st );
+          mSelectionFixed.insertStationName( st );
+          // FIXME-HIDE for ( Scrap scrap : mScraps ) scrap.addStationToSelection( st );
         }
       }
     }
@@ -1074,6 +1080,7 @@ class DrawingCommandManager
       if ( mDisplayPoints ) {
         float dot_radius = TDSetting.mDotRadius/zoom;
         synchronized( TDPath.mSelectionLock ) {
+          displayFixedPoints( canvas, mMatrix, mBBox, dot_radius, splays, (legs && sshots), sstations, station_splay );
           mCurrentScrap.displayPoints( canvas, mMatrix, mBBox, dot_radius, spoints, slines, sareas, splays, (legs && sshots), sstations, station_splay );
 
           // for ( SelectionPoint pt : mSelection.mPoints ) { // FIXME SELECTION
@@ -1106,6 +1113,61 @@ class DrawingCommandManager
 
     if ( hasEraser ) {
       drawEraser( canvas );
+    }
+  }
+
+  // FIXME-HIDE
+  private void displayFixedPoints( Canvas canvas, Matrix matrix, RectF bbox, float dot_radius,
+                      boolean splays, boolean legs_sshots, boolean sstations, DrawingStationSplay station_splay )
+  {
+    if ( TDSetting.mWithLevels == 0 ) { // treat no-levels case by itself
+      for ( SelectionBucket bucket: mSelectionFixed.mBuckets ) {
+        if ( bucket.intersects( bbox ) ) {
+          for ( SelectionPoint pt : bucket.mPoints ) { 
+            int type = pt.type();
+            if ( type == DrawingPath.DRAWING_PATH_FIXED ) {
+              if ( ! legs_sshots ) continue;
+            } else if ( type == DrawingPath.DRAWING_PATH_NAME ) {
+              if ( ! sstations ) continue;
+            } else if ( type == DrawingPath.DRAWING_PATH_SPLAY ) {
+              // FIXME_LATEST latest splays
+              if ( splays ) {
+                if ( station_splay.isStationOFF( pt.mItem ) ) continue;
+              } else {
+                if ( ! station_splay.isStationON( pt.mItem ) ) continue;
+              }
+            } else if ( DrawingPath.isDrawingType( type ) ) { // FIXME-HIDE should not happen
+              // Log.v("DistoX-HIDE", "drawing type in selection fixed" );
+              continue;
+            }
+            TDGraphicUtil.drawGreenDot( canvas, matrix, pt, dot_radius );
+          }
+        }
+      }
+    } else {
+      for ( SelectionBucket bucket: mSelectionFixed.mBuckets ) {
+        if ( bucket.intersects( bbox ) ) {
+          for ( SelectionPoint pt : bucket.mPoints ) { 
+            int type = pt.type();
+            if ( type == DrawingPath.DRAWING_PATH_FIXED ) {
+              if ( ! legs_sshots ) continue;
+            } else if ( type == DrawingPath.DRAWING_PATH_NAME ) {
+              if ( ! (sstations) ) continue;
+            } else if ( type == DrawingPath.DRAWING_PATH_SPLAY ) {
+              // FIXME_LATEST latest splays
+              if ( splays ) {
+                if ( station_splay.isStationOFF( pt.mItem ) ) continue;
+              } else {
+                if ( ! station_splay.isStationON( pt.mItem ) ) continue;
+              }
+            } else if ( DrawingPath.isDrawingType( type ) ) { // FIXME-HIDE should not happen
+              // Log.v("DistoX-HIDE", "drawing type in selection fixed" );
+              continue;
+            }
+            TDGraphicUtil.drawGreenDot( canvas, matrix, pt, dot_radius );
+          }
+        }
+      }
     }
   }
 
@@ -1143,7 +1205,7 @@ class DrawingCommandManager
     // boolean latest = (mDisplayMode & DisplayMode.DISPLAY_LATEST ) != 0;
     boolean stations = (mDisplayMode & DisplayMode.DISPLAY_STATION ) != 0;
     // Log.v( "DistoX-SELECT", "getItemAt " + x + " " + y + " mode " + mode );
-    return mCurrentScrap.getItemsAt( x, y, radius, mode, legs, splays, stations, station_splay );
+    return mCurrentScrap.getItemsAt( x, y, radius, mode, legs, splays, stations, station_splay, mSelectionFixed ); // FIXME-HIDE
   }
     
   void addItemAt( float x, float y, float zoom, float size ) { 

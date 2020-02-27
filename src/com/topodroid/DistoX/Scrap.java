@@ -95,25 +95,31 @@ class Scrap
     isMultiselection = false;
   }
 
-  void clearShotsAndStations()
-  {
-    mSelection.clearReferencePoints();
-    clearSelected();
-  }
-
   boolean isSelectable() { return mSelection != null; }
 
-  void deleteSplay( SelectionPoint sp )
-  {
-    mSelection.removePoint( sp );
-    clearSelected();
-  }
+  // FIXME-HIDE UNUSED
+  // void clearShotsAndStations()
+  // {
+  //   Log.v("DistoX-HIDE", "scrap clear shots and stations");
+  //   mSelection.clearReferencePoints();
+  //   clearSelected();
+  // }
+
+  // FIXME-HIDE UNUSED
+  // void deleteSplay( SelectionPoint sp )
+  // {
+  //   Log.v("DistoX-HIDE", "scrap clear splay");
+  //   mSelection.removePoint( sp );
+  //   clearSelected();
+  // }
   
-  // used to insert leg-path and splay-path
-  void insertPathInSelection( DrawingPath path )
-  {
-    mSelection.insertPath( path );
-  }
+  // used to insert leg-path and splay-path FIXME-HIDE UNUSED
+  // void insertPathInSelection( DrawingPath path )
+  // {
+  //   Log.v("DistoX-HIDE", "scrap insert path" );
+  //   mSelection.insertPath( path );
+  // }
+
   // end SELECTION -------------------------------------------
   // UNDO/REDO -----------------------------------------------
   boolean hasMoreRedo() { return  mRedoStack.toArray().length > 0; }
@@ -121,11 +127,11 @@ class Scrap
 
   void undo ()
   {
-    final int length = currentStackLength();
+    final int length = mCurrentStack.size();
     if ( length > 0) {
-      final ICanvasCommand cmd = mCurrentStack.get(  length - 1  );
-
+      final ICanvasCommand cmd;
       synchronized( TDPath.mCommandsLock ) {
+        cmd = mCurrentStack.get(  length - 1  );
         mCurrentStack.remove( length - 1 );
         // cmd.undoCommand();
       }
@@ -177,17 +183,21 @@ class Scrap
   // end UNDO/REDO -----------------------------------------------
 
   // ADD etc. ----------------------------------------------------
-  SelectionSet getItemsAt( float x, float y, float radius, int mode, boolean legs, boolean splays, boolean stations, DrawingStationSplay station_splay )
+  SelectionSet getItemsAt( float x, float y, float radius, int mode, 
+		           boolean legs, boolean splays, boolean stations, DrawingStationSplay station_splay,
+			   Selection selection_fixed // FIXME-HIDE
+                         )
   {
     // synchronized ( TDPath.mSelectedLock ) {
     synchronized ( TDPath.mSelectionLock ) {
       mSelected.clear();
       // FIXME_LATEST latests splays are not considered in the selection
       mSelection.selectAt( mSelected, x, y, radius, mode, legs, splays, stations, station_splay ); 
-      if ( mSelected.mPoints.size() > 0 ) {
+      selection_fixed.selectAt( mSelected, x, y, radius, mode, legs, splays, stations, station_splay ); // FIXME-HIDE
+      // FIXME-HIDE if ( mSelected.mPoints.size() > 0 ) {
         // Log.v("DistoX", "seleceted " + mSelected.mPoints.size() + " points " );
         mSelected.nextHotItem();
-      }
+      // }
     }
     return mSelected;
   }
@@ -205,15 +215,19 @@ class Scrap
 
   void addCommand( ArrayList<DrawingPath> paths )
   {
-    for ( ICanvasCommand cmd : mCurrentStack ) {
-      if ( cmd.commandType() == 0 ) paths.add( (DrawingPath) cmd );
+    synchronized( TDPath.mCommandsLock ) {
+      for ( ICanvasCommand cmd : mCurrentStack ) {
+        if ( cmd.commandType() == 0 ) paths.add( (DrawingPath) cmd );
+      }
     }
   }
 
-  void addStationToSelection( DrawingStationName st )
-  {
-    mSelection.insertStationName( st );
-  }
+  // FIXME-HIDE UNUSED
+  // void addStationToSelection( DrawingStationName st )
+  // {
+  //   Log.v("DistoX-HIDE", "scrap add station");
+  //   mSelection.insertStationName( st );
+  // }
 
   // PATH ACTIONS ------------------------------------------------
 
@@ -619,7 +633,12 @@ class Scrap
     // return ret;
   }
 
-  void addEraseCommand( EraseCommand cmd ) { mCurrentStack.add( cmd ); }
+  void addEraseCommand( EraseCommand cmd ) 
+  { 
+    synchronized( TDPath.mCommandsLock ) {
+      mCurrentStack.add( cmd ); 
+    }
+  }
 
   List<DrawingPath> splitPlot( ArrayList< PointF > border, boolean remove ) 
   {
@@ -870,11 +889,6 @@ class Scrap
   }
 
   // COMMAND STACK ---------------------------------------------
-  private int currentStackLength()
-  {
-    return mCurrentStack.size();
-  }
-
   void addCommandsToList( ArrayList< DrawingPath > ret ) 
   {
     synchronized( TDPath.mCommandsLock ) {
@@ -1292,24 +1306,26 @@ class Scrap
     // find drawing path with minimal distance from (x,y)
     LinePoint pp0 = null;
 
-    for ( ICanvasCommand cmd : mCurrentStack ) {
-      if ( cmd.commandType() != 0 ) continue;
-      DrawingPath p = (DrawingPath)cmd;
-      if ( p == item ) continue;
-      if ( ! p.isLineOrArea() ) continue;
-      DrawingPointLinePath lp = (DrawingPointLinePath)p;
-      int ks = lp.size();
-      for ( LinePoint pt = lp.mFirst; pt != null && ks > 0; pt = pt.mNext )
-      {
-        -- ks;
-        // float d = pts.get(k).distance( x, y );
-        float d = pt.distance( x, y );
-        if ( d < dmin ) {
-          dmin = d;
-          // kk0 = k;
-          pp0  = pt;
-          lmin = lp;
-          min_is_area = p.isArea();
+    synchronized( TDPath.mCommandsLock ) {
+      for ( ICanvasCommand cmd : mCurrentStack ) {
+        if ( cmd.commandType() != 0 ) continue;
+        DrawingPath p = (DrawingPath)cmd;
+        if ( p == item ) continue;
+        if ( ! p.isLineOrArea() ) continue;
+        DrawingPointLinePath lp = (DrawingPointLinePath)p;
+        int ks = lp.size();
+        for ( LinePoint pt = lp.mFirst; pt != null && ks > 0; pt = pt.mNext )
+        {
+          -- ks;
+          // float d = pts.get(k).distance( x, y );
+          float d = pt.distance( x, y );
+          if ( d < dmin ) {
+            dmin = d;
+            // kk0 = k;
+            pp0  = pt;
+            lmin = lp;
+            min_is_area = p.isArea();
+          }
         }
       }
     }
@@ -1759,17 +1775,19 @@ class Scrap
   float computeSectionArea()
   {
     float ret = 0;
-    for ( ICanvasCommand icc : mCurrentStack ) {
-      if ( icc.commandType() != 0 ) continue;
-      DrawingPath p = (DrawingPath)icc;
-      if ( ! p.isLine() ) continue;
-      DrawingLinePath lp = (DrawingLinePath)p;
-      if ( ! BrushManager.isLineWall( lp.mLineType ) ) continue;
-      LinePoint pt = lp.mFirst;
-      while ( pt != lp.mLast ) {
-        LinePoint pn = pt.mNext;
-        ret += pt.y * pn.x - pt.x * pn.y;
-        pt = pn;
+    synchronized( TDPath.mCommandsLock ) {
+      for ( ICanvasCommand icc : mCurrentStack ) {
+        if ( icc.commandType() != 0 ) continue;
+        DrawingPath p = (DrawingPath)icc;
+        if ( ! p.isLine() ) continue;
+        DrawingLinePath lp = (DrawingLinePath)p;
+        if ( ! BrushManager.isLineWall( lp.mLineType ) ) continue;
+        LinePoint pt = lp.mFirst;
+        while ( pt != lp.mLast ) {
+          LinePoint pn = pt.mNext;
+          ret += pt.y * pn.x - pt.x * pn.y;
+          pt = pn;
+        }
       }
     }
     return ret / 2;
@@ -2080,20 +2098,26 @@ class Scrap
               if ( ! slines ) continue;
             } else if ( type == DrawingPath.DRAWING_PATH_AREA ) {
               if ( ! sareas ) continue;
-            } else if ( ( type == DrawingPath.DRAWING_PATH_FIXED && ! legs_sshots )
-                        // || ( type == DrawingPath.DRAWING_PATH_SPLAY && ! (splays && sshots) )
-                        || ( type == DrawingPath.DRAWING_PATH_NAME  && ! sstations ) ) {
+            } else if ( ! DrawingPath.isDrawingType( type ) ) { // FIXME-HIDE should not happen
               continue;
             }
-            if ( type == DrawingPath.DRAWING_PATH_SPLAY ) {
-              // FIXME_LATEST latest splays
-              if ( splays ) {
-                if ( station_splay.isStationOFF( pt.mItem ) ) continue;
-              } else {
-                if ( ! station_splay.isStationON( pt.mItem ) ) continue;
-              }
-            } 
-            drawGreenDot( canvas, matrix, pt, dot_radius );
+            // else if ( type == DrawingPath.DRAWING_PATH_FIXED ) {
+            //   Log.v("DistoX-HIDE", "scrap display fixed 1");
+            //   if ( ! legs_sshots ) continue;
+            // } else if ( type == DrawingPath.DRAWING_PATH_NAME ) {
+            //   Log.v("DistoX-HIDE", "scrap display station name 1");
+            //   if ( ! sstations ) continue;
+            // // else if ( type == DrawingPath.DRAWING_PATH_SPLAY && ! (splays && sshots) )
+            // } else if ( type == DrawingPath.DRAWING_PATH_SPLAY ) {
+            //   Log.v("DistoX-HIDE", "scrap display splay 1");
+            //   // FIXME_LATEST latest splays
+            //   if ( splays ) {
+            //     if ( station_splay.isStationOFF( pt.mItem ) ) continue;
+            //   } else {
+            //     if ( ! station_splay.isStationON( pt.mItem ) ) continue;
+            //   }
+            // } 
+            TDGraphicUtil.drawGreenDot( canvas, matrix, pt, dot_radius );
           }
         }
       }
@@ -2108,36 +2132,30 @@ class Scrap
               if ( ! slines || ! DrawingLevel.isLevelVisible( pt.mItem ) ) continue;
             } else if ( type == DrawingPath.DRAWING_PATH_AREA ) {
               if ( ! sareas || ! DrawingLevel.isLevelVisible( pt.mItem ) ) continue;
-            } else if ( ( type == DrawingPath.DRAWING_PATH_FIXED && ! legs_sshots )
-                        // || ( type == DrawingPath.DRAWING_PATH_SPLAY && ! (splays && sshots) )
-                        || ( type == DrawingPath.DRAWING_PATH_NAME  && ! (sstations) ) ) {
+            } else if ( ! DrawingPath.isDrawingType( type ) ) { // FIXME-HIDE should not happen
               continue;
-            }
-            if ( type == DrawingPath.DRAWING_PATH_SPLAY ) {
-              // FIXME_LATEST latest splays
-              if ( splays ) {
-                if ( station_splay.isStationOFF( pt.mItem ) ) continue;
-              } else {
-                if ( ! station_splay.isStationON( pt.mItem ) ) continue;
-              }
             } 
-            drawGreenDot( canvas, matrix, pt, dot_radius );
+            // else if ( type == DrawingPath.DRAWING_PATH_FIXED ) {
+            //   Log.v("DistoX-HIDE", "scrap display fixed 2");
+            //   if ( ! legs_sshots ) continue;
+            // } else if ( type == DrawingPath.DRAWING_PATH_NAME ) {
+            //   Log.v("DistoX-HIDE", "scrap display station name 2");
+            //   if ( ! (sstations) ) continue;
+            // // else if ( type == DrawingPath.DRAWING_PATH_SPLAY && ! (splays && sshots) )
+            // } else if ( type == DrawingPath.DRAWING_PATH_SPLAY ) {
+            //   Log.v("DistoX-HIDE", "scrap display splay 2");
+            //   // FIXME_LATEST latest splays
+            //   if ( splays ) {
+            //     if ( station_splay.isStationOFF( pt.mItem ) ) continue;
+            //   } else {
+            //     if ( ! station_splay.isStationON( pt.mItem ) ) continue;
+            //   }
+            // } 
+            TDGraphicUtil.drawGreenDot( canvas, matrix, pt, dot_radius );
           }
         }
       }
     }
-  }
-
-  private void drawGreenDot( Canvas canvas, Matrix matrix, SelectionPoint pt, float dot_radius )
-  {
-    Path path = new Path();
-    if ( pt.mPoint != null ) { // line-point
-      path.addCircle( pt.mPoint.x, pt.mPoint.y, dot_radius, Path.Direction.CCW );
-    } else {  
-      path.addCircle( pt.mItem.cx, pt.mItem.cy, dot_radius, Path.Direction.CCW );
-    }
-    path.transform( matrix );
-    canvas.drawPath( path, BrushManager.highlightPaint2 );
   }
 
   void drawSelection( Canvas canvas, Matrix matrix, float zoom, float scale, boolean is_extended )

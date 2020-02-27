@@ -66,6 +66,7 @@ class SelectionSet
 
   SelectionPoint nextHotItem( )
   {
+    mHotItem = null; // FIXME-HIDE
     if ( mPoints.size() > 0 ) {
       mIndex = ( mIndex + 1 ) % mPoints.size();
       mHotItem = mPoints.get( mIndex );
@@ -75,6 +76,7 @@ class SelectionSet
 
   SelectionPoint prevHotItem( )
   {
+    // mHotItem = null; // FIXME-HIDE
     if ( mPoints.size() > 0 ) {
       mIndex = ( mIndex + mPoints.size() - 1 ) % mPoints.size();
       mHotItem = mPoints.get( mIndex );

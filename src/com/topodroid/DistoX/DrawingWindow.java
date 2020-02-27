@@ -4276,6 +4276,8 @@ public class DrawingWindow extends ItemDrawer
       // Log.v("DistoX", "toggle station hidden: hide <" + hide + "> H " + h );
 
       if ( h != 0 ) {
+        // Log.v("DistoX-HIDE", "clear shots and stations" );
+        mDrawingSurface.clearShotsAndStations( );
         mNum.setStationHidden( st_name, h );
         recomputeReferences( mZoom );
       }
@@ -4334,6 +4336,8 @@ public class DrawingWindow extends ItemDrawer
       // Log.v("DistoX", "toggle station barrier: view <" + view + "> H " + h );
 
       if ( h != 0 ) {
+        // Log.v("DistoX-HIDE", "clear shots and stations" );
+        mDrawingSurface.clearShotsAndStations( );
         mNum.setStationBarrier( st_name, h );
         recomputeReferences( mZoom );
       }
