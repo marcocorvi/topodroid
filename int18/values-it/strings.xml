@@ -159,7 +159,7 @@
     <string name="few_iter">Iterazione fallita</string>
     <string name="few_groups">Dati con gruppi non sufficienti</string>
     <string name="found_groups">Trovati %1$d gruppi</string>
-    <!-- TODO string name="regroup">No regroup</string -->
+    <string name="regroup">Non riaggruppare</string>
     <!-- UNUSED string name="few_plots">Troppo pochi disegni</string -->
     <string name="few_calibs">Calibrazioni non sufficienti</string>
     <string name="getting_info">Scarico info dal DistoX&#8230;</string>
@@ -335,7 +335,7 @@
     <string name="menu_reload">RICARICA</string>
     <string name="menu_rename_delete">RINOMINA/CANCELLA</string>
     <string name="menu_rename">RINOMINA</string>
-    <!-- TODO string name="menu_plot_scrap">SCRAPS</string -->
+    <string name="menu_plot_scrap">SCARTI</string>
     <string name="menu_switch">CAMBIA/CHIUDI</string>
     <string name="menu_help">AIUTO</string>
     <!-- UNUSED string name="menu_join_survey">CO-RILIEVO</string --> <!-- rilievo cooperativo -->
@@ -443,7 +443,7 @@
     <string name="section_area">Area della sezione: %1$.1f</string>
     <string name="section_name">Nota sezione</string>
     <string name="scrap_outline">Contorno del disegno</string>
-    <!-- TODO string name="scrap_string">Sketch scrap: %1$d / %2$d</string -->
+    <string name="scrap_string">Disegno scartato: %1$d / %2$d</string>
 
     <!-- UNUSED string name="sensor">sensore</string -->
     <string name="sensor_gravity">gravità</string>
@@ -482,7 +482,7 @@
     <string name="survey_exists">Rilievo già presente</string>
     <!-- UNUSED string name="survey_date">aaaa.mm.gg</string -->
     <string name="survey_delete">Elimina rilievo?</string>
-    <!-- TODO string name="survey_move">Move shots to survey %1$s ?</string -->
+    <string name="survey_move">Muovere i tiri al rilievo %1$s ?</string>
     <string name="survey_split">Dividi rilievo?</string>
     <string name="survey_not_attached">ATTENZIONE: dati scollegati</string>
     <string name="survey_not_extend">WARNING: extend disabilitati</string>
@@ -508,7 +508,7 @@
     <string name="name">nome</string>
     <string name="team">squadra</string>
     <string name="init_station">Caposaldo iniziale</string>
-    <!-- TODO string name="second_device">second device</string -->
+    <string name="second_device">secondo dispositivo</string>
     <string name="start_station">Caposaldo iniziale [%1$s]</string>
     <!-- UNUSED string name="toggle_device">Attiva modo calibrazione</string -->
     <string name="toggle_failed">Attivazione modo calibrazione fallita</string>
@@ -556,7 +556,7 @@
     <string name="stat_angle_error">Errori angolari %1$.2f ± %2$.2f"</string>
     <string name="shot_title">BATTUTA %1$s - %2$s"</string>
     <string name="shot_data">D %1$.2f  N %2$.1f  I %3$.1f"</string>
-    <!-- TODO string name="survey_split_move_title">Survey split/move</string -->
+    <string name="survey_split_move_title">Dividi/Muovi rilievo</string>
 
     <string name="survey_stat_duplicate">Battute doppie %1$d %2$.1f %3$s</string>
     <string name="survey_stat_splay">Splay %1$d</string>
@@ -615,10 +615,10 @@
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Disegno</string>
     <string name="button_more"    >Altro</string>
-    <!-- TODO string name="button_move"    >Move</string -->
+    <string name="button_move"    >Muovi</string>
     <string name="button_next"    >Prossimo</string>
     <string name="button_prev"    >Precedente</string>
-    <!-- TODO string name="button_new"     >New scrap</string -->
+    <string name="button_new"     >Nuovo scarto</string>
     <string name="button_skip"    >Salta</string>
     <string name="button_done"    >Fatto</string>
     <string name="button_lrud"    >Aggiungi LRUD</string>
@@ -792,7 +792,7 @@
     <string name="help_refs">Seleziona riferimenti per disegno</string>
     <string name="help_rename">Modifica il nome del rilievo</string>
     <string name="help_plot_rename">Rinomina/Elimina disegno</string>
-    <!-- TODO string name="help_plot_scrap">Sketch scraps</string -->
+    <string name="help_plot_scrap">Scarti di disegno</string>
     <string name="help_plot_switch">Scambia disegno</string>
     <string name="help_search">Cerca caposaldo</string>
     <string name="help_stats">Statistiche rilievo</string>
@@ -851,14 +851,14 @@
     <string name="help_write">Scrivi calibrazione sul DistoX</string>
   
     <string name="audio_paused">In pausa</string>
-    <!-- TODO string name="audio_playing">Playing</string -->
-    <string name="audio_recording">Registrando</string>
+    <string name="audio_playing">Riproduzione</string>
+    <string name="audio_recording">Registrazione</string>
     <string name="audio_delete">Rimuovi ?</string>
     <string name="audio_overwrite">Sovrascrivi ?</string>
   
     <string name="import_lrud">Importa LRUD</string>
     <string name="import_leg_first">Battuta prima degli LRUD</string>
-    <!-- TODO string name="import_diving_datamode">Diving datamode</string -->
+    <string name="import_diving_datamode">Modo dati da immersione</string>
 
     <string name="title_azimut">Riferimento Extend</string>
     <string name="title_audio">Commento audio</string>
@@ -900,7 +900,7 @@
     <string name="title_plot_save">Salva disegno come </string>
     <!-- UNUSED string name="title_plot_merge">Fondere disegno</string -->
     <string name="title_plot_reload">Ricarica disegno</string>
-    <!-- TODO string name="title_plot_scraps">Sketch scraps</string -->
+    <string name="title_plot_scraps">Scarti di disegno</string>
     <string name="title_profile_flip">Capovolgo il profilo del disegno?</string>
     <string name="title_projection">Proiezione azimutale profilo %1$d</string>
     <string name="title_refs">Riferimenti grafici</string>
@@ -1109,8 +1109,8 @@
   <string name="pref_conn_mode_summary">Tipo di connessione dati col DistoX</string>
   <string name="pref_auto_reconnect_title">Auto reconnessione</string>
   <string name="pref_auto_reconnect_summary">Riconnetti al DistoX quando viene persa</string>
-  <!-- TODO string name="pref_second_distox_title">Two-DistoX survey</string -->
-  <!-- TODO string name="pref_second_distox_summary">Surveying with two DistoX</string -->
+  <string name="pref_second_distox_title">Rilievo con 2 DistoX</string>
+  <string name="pref_second_distox_summary">Rilevare con 2 DistoX</string>
   <string name="pref_auto_pair_title">Associazione automatica</string>
   <string name="pref_auto_pair_summary">Associazione a DistoX dopo ricerca dispositivi</string>
   <string name="pref_head_tail_title">Numero di nuovi dati</string>
@@ -1155,8 +1155,8 @@
   <string name="pref_section_splay_message">Nella sezione, oltre questo angolo, gli splay sono tratteggiati</string>
   <string name="pref_data_backup_title">Auto-esporta dati</string>
   <string name="pref_data_backup_summary">Esportazione automatica dei dati (necessita formato di default)</string>
-  <!-- TODO string name="pref_zipped_symbols_title">Zipped symbols files</string -->
-  <!-- TODO string name="pref_zipped_symbols_summary">Store/load symbol files to/from zip archive</string -->
+  <string name="pref_zipped_symbols_title">File simboli formato ZIP</string>
+  <string name="pref_zipped_symbols_summary">Salva/Carica simboli a/da archivio ZIP</string>
   <string name="pref_fixed_origin_title">Origine disegno</string>
   <string name="pref_fixed_origin_summary">Origine disegno fissa</string>
   <string name="pref_shared_xsections_title">X-section condivise</string>
@@ -1333,8 +1333,8 @@
 
   <string name="pref_picker_type_title">Dialogo scelta prototipo</string>
   <string name="pref_picker_type_summary">Tipo dialogo scelta prototipo grafico</string>
-  <!-- TODO string name="pref_triple_toolbar_title">Triple bottom bar</string -->
-  <!-- TODO string name="pref_triple_toolbar_summary">Triple drawing tools bar</string -->
+  <string name="pref_triple_toolbar_title">Tripla barra inferiore</string>
+  <string name="pref_triple_toolbar_summary">Tripla barra strumenti disegno</string>
   <!-- UNUSED string name="pref_section_stations_title">Capisaldi X-Section</string -->
   <!-- UNUSED string name="pref_section_stations_summary">Capisaldi di riferimento per X-Section</string -->
   <string name="pref_station_size_title">Dimensione nome capisaldi</string>

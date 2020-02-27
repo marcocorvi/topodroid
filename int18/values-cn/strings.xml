@@ -89,7 +89,7 @@
     <string name="calib_device_mismatch">警告: 校准设备不匹配</string>
     <string name="calib_no_name">强制命名</string>
     <!-- REMOVE string name="calib_gm_policy">原则</string -->
-    <!-- TODO string name="calib_gm_policy">Group policy</string -->
+    <string name="calib_gm_policy">组策略</string>
     <string name="calib_gm_undelete">还原校准数据?</string>
     <string name="calib_saved">保存校准数据</string>
     <string name="calib_updated">更新校准数据</string>
@@ -125,7 +125,7 @@
     <string name="device_none">无可供选择DistoX设备</string>
     <!-- UNUSED string name="device_paired">Device is paired</string -->
     <string name="device_reset">重置 DistoX 内存</string>
-    <!-- TODO string name="device_clear">Clear DistoX memory</string -->
+    <TODO string name="device_clear">清除DistoX内存</string>
     <string name="device_code">DistoX 代码 %1$4d</string>
     <string name="device_firmware">固件  %1$d.%2$d</string>
     <string name="device_hardware">硬件  %1$d.%2$d</string>
@@ -162,7 +162,7 @@
     <string name="few_iter">失败:迭代太多</string>
     <string name="few_groups">数据组数据不足</string>
     <string name="found_groups">发现 %1$d 组</string>
-    <!-- TODO string name="regroup">No regroup</string -->
+    <string name="regroup">无重组</string>
     <!-- UNUSED string name="few_plots">Not enough sketches</string -->
     <string name="few_calibs">校准数据不足</string>
     <string name="getting_info">获取DistoX信息 &#8230;</string>
@@ -182,7 +182,7 @@
     <string name="import_calib_no_data">校准-无文件</string>
     <string name="import_calib_io_error">校准文件: 读取错误</string>
     <string name="import_zip_ok">成功导入zip文件</string>
-    <!-- TODO string name="import_zip_newer">Imported zip from more recent version</string -->
+    <TODO string name="import_zip_newer">从最近的版本导入zip文件</string>
     <!-- UNUSED string name="import_zip_wait">Imported zip file may take long. Please wait &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Saving sketch &#8230; please wait &#8230;</string -->
     <string name="MT_points_none">无GPS坐标点</string>
@@ -374,7 +374,7 @@
     <string name="popup_snap_ln">接至附近线</string>
     <string name="popup_snap_to_splays">接至附近的副线</string>
     <string name="popup_split_pt">复制点</string>
-    <!-- TODO string name="popup_split_pts">Adds points</string -->
+    <TODO string name="popup_split_pts">添加点</string>
     <string name="popup_split_ln">在线上的点剪切</string>
     <string name="popup_sharp_pt">拉直分段</string>
     <string name="popup_curve_pt">平滑分段</string>
@@ -414,7 +414,7 @@
     <!-- UNUSED string name="not_implemented">Not implemented yet</string -->
     <string name="null_bitmap">不能新建图片 [OOM error]</string>
     <string name="photo">照片</string>
-    <!-- TODO string name="photo_camera">TopoDroid camera</string -->
+    <TODO string name="photo_camera">TopoDroid摄像头</string>
     <string name="photo_comment_prompt">输入相片注释</string>
     <string name="photo_azimuth_clino">方位角: %1$.1f 倾角 %2$.1f</string>
     <!-- UNUSED string name="photo_name">station/name</string -->
@@ -456,7 +456,7 @@
     <string name="section_area">截面区域: %1$.1f</string>
     <string name="section_name">截面注释</string>
     <string name="scrap_outline">草图轮廓</string>
-    <!-- TODO string name="scrap_string">Sketch scrap: %1$d / %2$d</string -->
+    <string name="scrap_string">草图层: %1$d / %2$d</string>
 
     <!-- UNUSED string name="sensor">sensor</string -->
     <string name="sensor_gravity">重力</string>
@@ -495,7 +495,7 @@
     <string name="survey_exists">测量已存在</string>
     <!-- UNUSED string name="survey_date">yyyy.mm.dd</string -->
     <string name="survey_delete">删除测量 ?</string>
-    <!-- TODO string name="survey_move">Move shots to survey %1$s ?</string -->
+    <string name="survey_move">移动测射到测量里 %1$s ?</string>
     <string name="survey_split">拆分测量 ?</string>
     <string name="survey_not_attached">警告:未连接的测量</string>
     <string name="survey_not_extend">警告:未设置测线扩展</string>
@@ -523,7 +523,7 @@
     <string name="name">名称</string>
     <string name="team">团队</string>
     <string name="init_station">起始站点</string>
-    <!-- TODO string name="second_device">second device</string -->
+    <string name="second_device">第二设备</string>
     <string name="start_station">起始站点 [%1$s]</string>
     <!-- UNUSED string name="toggle_device">Toggle device calibration mode</string -->
     <string name="toggle_failed">DistoX触发失败</string>
@@ -573,7 +573,7 @@
     <string name="stat_angle_error">角度错误 %1$.2f ± %2$.2f</string>
     <string name="shot_title">测线 %1$s - %2$s</string>
     <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f</string>
-    <!-- TODO string name="survey_split_move_title">Survey split/move</string -->
+    <TODO string name="survey_split_move_title">测量切分/move</string>
 
     <string name="survey_stat_duplicate">重复的测线 %1$d %2$.1f %3$s</string>
     <string name="survey_stat_splay">辐测 %1$d</string>
@@ -633,10 +633,10 @@
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >草图</string>
     <string name="button_more"    >更多</string>
-    <!-- TODO string name="button_move"    >Move</string -->
+    <string name="button_move"    >移动</string>
     <string name="button_next"    >下一步</string>
-    <!-- TODO string name="button_prev"    >Prevous</string -->
-    <!-- TODO string name="button_new"     >New scrap</string -->
+    <string name="button_prev"    >上一步</string>
+    <string name="button_new"     >新建分层</string>
     <string name="button_skip"    >跳过</string>
     <string name="button_done"    >完成</string>
     <string name="button_lrud"    >+ 左右上下</string>
@@ -658,13 +658,13 @@
     <string name="button_clear"     >清除     </string>
     <string name="button_clear_day" >清除 1天  </string>
     <string name="button_clear_week">清除 1周  </string>
-    <!-- TODO string name="button_clear_memory">Clear memory</string -->
+    <string name="button_clear_memory">清除内存</string>
     <string name="button_save"      >保存      </string>
     <!-- UNUSED string name="button_select"    >Select    </string -->
     <string name="button_search"    >搜索    </string>
     <string name="button_merge"     >合并     </string>
     <string name="button_saved"     >保存站点</string>
-    <!-- TODO ALREADY DEFINED string name="button_saved"     >保存测点</string -->
+    <string name="button_saved"     >保存测点</string>
     <string name="button_split"     >分割     </string>
     <string name="button_station"   >以 为中心</string>
     <string name="button_store"     >存储库     </string>
@@ -811,7 +811,7 @@
     <string name="help_refs">草图引用</string>
     <string name="help_rename">改变测量名称</string>
     <string name="help_plot_rename">重命名/删除 草图</string>
-    <!-- TODO string name="help_plot_scrap">Sketch scraps</string -->
+    <string name="help_plot_scrap">草图层</string>
     <string name="help_plot_switch">切换草图</string>
     <string name="help_search">查找测点</string>
     <string name="help_stats">测量项目统计</string>
@@ -828,8 +828,8 @@
     <string name="help_eraser">擦除模式</string>
     <string name="help_select_mode">选择工具</string>
     <string name="help_erase_mode">擦除工具</string>
-    <!-- TODO string name="help_erase_size">选择/橡皮擦尺寸 [S/M/L]</string -->
-    <!-- TODO string name="help_select_size">Select tool size [S/M/L]</string -->
+    <string name="help_erase_size">选择/橡皮擦尺寸 [S/M/L]</string>
+    <string name="help_select_size">选择工具尺寸 [S/M/L]</string>
     <string name="help_previous">已选项目</string>
     <string name="help_next">选项中的下一项目</string>
     <string name="help_recover">从备份中重新载入草图</string>
@@ -875,9 +875,9 @@
     <string name="audio_delete">删除 ?</string>
     <string name="audio_overwrite">覆盖 ?</string>
   
-    <!-- TODO string name="import_lrud">Import LRUD</string -->
-    <!-- TODO string name="import_leg_first">Leg before LRUD splays</string -->
-    <!-- TODO string name="import_diving_datamode">Diving datamode</string -->
+    <string name="import_lrud">输入 左右上下</string -->
+    <string name="import_leg_first">主线在左右上下侧线之前</string>
+    <string name="import_diving_datamode">潜水数据模式</string>
 
     <string name="title_azimut">扩展参考</string>
     <string name="title_audio">音频注释</string>
@@ -919,7 +919,7 @@
     <string name="title_plot_save">输出草图</string>
     <!-- UNUSED string name="title_plot_merge">Merge sketch in</string -->
     <string name="title_plot_reload">重新导入草图</string>
-    <!-- TODO string name="title_plot_scraps">Sketch scraps</string -->
+    <string name="title_plot_scraps">草图层</string>
     <string name="title_profile_flip">翻转剖面草图 ?</string>
     <string name="title_projection">投影剖面方位 %1$d</string>
     <string name="title_refs">草图参考</string>
@@ -937,7 +937,7 @@
     <string name="title_settings_tro">VisualTopo输出设置</string>
     <string name="title_settings_svg">SVG输出设置</string>
     <string name="title_settings_dxf">DXF输出设置</string>
-    <!-- TODO string name="title_settings_shp">Shapefile export settings</string -->
+    <string name="title_settings_shp">成形文件输出设定</string>
     <string name="title_settings_png">PNG输出设置</string>
     <string name="title_settings_kml">KML输出设置</string>
 
@@ -976,8 +976,8 @@
     <string name="title_calib_export">输出校准</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-    <!-- TODO string name="title_import_tro">VisualTopo import options</string -->
-    <!-- TODO string name="title_import_dat">Compass import options</string -->
+    <string name="title_import_tro">VisualTopo输入选项</string>
+    <string name="title_import_dat">Compass输入选项</string>
 
   <string name="pref_export_settings">输出设置</string>
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
@@ -1083,8 +1083,8 @@
   <string name="pref_survex_lrud_summary">添加左右上下到Survex/Therion输出</string>
   <string name="pref_svg_grid_title">参考线</string>
   <string name="pref_svg_grid_summary">添加参考线到SVG/PNG输出</string>
-  <!-- TODO string name="pref_svg_roundtrip_title">SVG round-trip</string -->
-  <!-- TODO string name="pref_svg_roundtrip_summary">Round-trip ready SVG export</string -->
+  <TODO string name="pref_svg_roundtrip_title">SVG延迟</string>
+  <TODO string name="pref_svg_roundtrip_summary">延迟确定 SVG 输出</string>
   <string name="pref_svg_splays_title">SVG 副线</string>
   <string name="pref_svg_splays_summary">将辐测线添加到SVG输出</string>
   <!-- UNUSED string name="pref_svg_in_html_title">SVG in HTML</string -->
@@ -1133,8 +1133,8 @@
   <string name="pref_conn_mode_summary">数据下载的远程连接模式</string>
   <string name="pref_auto_reconnect_title">自动连线</string>
   <string name="pref_auto_reconnect_summary">当连接丢失时重新连接</string>
-  <!-- TODO string name="pref_second_distox_title">Two-DistoX survey</string -->
-  <!-- TODO string name="pref_second_distox_summary">Surveying with two DistoX</string -->
+  <string name="pref_second_distox_title">双DistoX测量</string>
+  <string name="pref_second_distox_summary">用两部DistoX进行测量</string>
   <string name="pref_auto_pair_title">自动配对</string>
   <string name="pref_auto_pair_summary">扫描后与设备配对</string>
   <string name="pref_head_tail_title">新数据数量</string>
@@ -1206,10 +1206,10 @@
   <string name="pref_max_shot_summary">最大测量的距离 [m]</string>
   <string name="pref_min_leg_title">最小主线距离</string>
   <string name="pref_min_leg_summary">最小主线测量距离 [m]</string>
-  <string name="pref_backsight_title">后测</string>
-  <string name="pref_backsight_summary">新建测线对话中的后测字符</string>
-  <string name="pref_backshot_title">DistoX回测</string>
-  <!-- TODO string name="pref_backshot_summary">Swap stations to DistoX backshots</string -->
+  <string name="pref_backsight_title">反测</string>
+  <string name="pref_backsight_summary">新建测线对话中的反测字符</string>
+  <string name="pref_backshot_title">DistoX反测</string>
+  <string name="pref_backshot_summary">DistoX反测时转换测点名</string>
   <string name="pref_prev_next_title">上一步/下一步 按钮</string>
   <string name="pref_prev_next_summary">测线对话中的上一步/下一步 按钮</string>
   <!-- UNUSED string name="pref_mag_anomaly_title">Magnetic Anomaly</string -->
@@ -1244,8 +1244,8 @@
   <!-- UNUSED string name="pref_dxf_scale_summary">DXF sketch scale factor</string -->
   <string name="pref_dxf_blocks_title">DXF 副线端点</string>
   <string name="pref_dxf_blocks_summary">DXF 副线端点</string>
-  <!-- TODO string name="pref_shp_georef_title">Georeferenced sketch plan export</string -->
-  <!-- TODO string name="pref_shp_georef_summary">Sketch plan exported in WGS84 long-lat</string -->
+  <TODO string name="pref_shp_georef_title">地理参考草图输出</string>
+  <string name="pref_shp_georef_summary">草图输出到WGS84坐标</string>
   <string name="pref_thumbnail_title">缩略图尺寸</string>
   <string name="pref_thumbnail_summary">照片缩略图尺寸</string>
   <string name="pref_shot_timer_title">测线方向计时器</string>
@@ -1363,8 +1363,8 @@
 
   <string name="pref_picker_type_title">绘图工具选择</string>
   <string name="pref_picker_type_summary">绘图工具选择样式</string>
-  <!-- TODO string name="pref_triple_toolbar_title">Triple bottom bar</string -->
-  <!-- TODO string name="pref_triple_toolbar_summary">Triple drawing tools bar</string -->
+  <string name="pref_triple_toolbar_title">三倍工具条按钮</string>
+  <string name="pref_triple_toolbar_summary">三倍绘画工具条</string>
   <!-- UNUSED string name="pref_section_stations_title">X-Section stations</string -->
   <!-- UNUSED string name="pref_section_stations_summary">X-Section reference stations</string -->
   <string name="pref_station_size_title">测点名称尺寸</string>
