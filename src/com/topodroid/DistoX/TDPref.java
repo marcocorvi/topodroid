@@ -746,6 +746,18 @@ class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  static TDPref[] makeCsxPrefs( Context ctx, TDPrefHelper hlp )
+  {
+    int cat = TDPrefActivity.PREF_CATEGORY_CSX;
+    String[] key = TDPrefKey.EXPORT_CSX;
+    int[] tit = TDPrefKey.EXPORT_CSXtitle;
+    int[] dsc = TDPrefKey.EXPORT_CSXdesc;
+    String[] def = TDPrefKey.EXPORT_CSXdef;
+    return new TDPref[ ] {
+      makeCbx( cat, key[0], tit[0], dsc[0], N, def[0],         ctx, hlp ) // DISTOX_STATION_PREFIX
+    };
+  }
+
   static TDPref[] makeCsvPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefActivity.PREF_CATEGORY_CSV;

@@ -397,6 +397,7 @@ class TDPrefKey
     "DISTOX_EXPORT_IMPORT_PREF", // 6
     "DISTOX_EXPORT_SVX_PREF",
     "DISTOX_EXPORT_TH_PREF",
+    "DISTOX_EXPORT_CSX_PREF",
     "DISTOX_EXPORT_DAT_PREF",
     "DISTOX_EXPORT_TRO_PREF",
     "DISTOX_EXPORT_SVG_PREF",    // 11
@@ -418,6 +419,7 @@ class TDPrefKey
     R.string.pref_cat_exportimport,
     R.string.pref_cat_exportsvx,
     R.string.pref_cat_exportth,
+    R.string.pref_cat_exportcsx,
     R.string.pref_cat_exportdat,
     R.string.pref_cat_exporttro,
     R.string.pref_cat_exportsvg,
@@ -446,6 +448,7 @@ class TDPrefKey
     -1,
     -1,
     -1,
+    -1,
   };
 
   static String[] EXPORTdef = {
@@ -455,6 +458,7 @@ class TDPrefKey
     TDString.ZERO,
     TDString.NINETY,
     "0.2",
+    TDString.EMPTY,
     TDString.EMPTY,
     TDString.EMPTY,
     TDString.EMPTY,
@@ -487,6 +491,22 @@ class TDPrefKey
     TRUE,
   };
   // ------------------------------------------------------------------------------
+  static String[] EXPORT_CSX = { // [1]
+    "DISTOX_STATION_PREFIX"        // whether to add cave-name prefix to stations (cSurvey/Compass export)
+  };
+  static int[] EXPORT_CSXtitle = { // [1]
+    R.string.pref_station_prefix_title,
+    -1
+  };
+  static int[] EXPORT_CSXdesc = { // [1]
+    R.string.pref_station_prefix_summary,
+    -1
+  };
+  static String[] EXPORT_CSXdef = { // [1]
+    FALSE,
+    null
+  };
+
   static String[] EXPORT_CSV = { // [1]
     "DISTOX_CSV_RAW",
     "DISTOX_CSV_SEP",

@@ -996,6 +996,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_cat_exportshp" translatable="false">Shapefile</string>
   <string name="pref_cat_exportpng" translatable="false">PNG</string>
   <string name="pref_cat_exportkml" translatable="false">KML/GeoJSON</string>
+  <string name="pref_cat_exportcsx" translatable="false">cSurvey</string>
   <string name="pref_cat_exportcsv" translatable="false">CSV</string>
 
   <string name="pref_cat_calib">CALIBRATIONS</string>
@@ -1060,8 +1061,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_triple_shot_summary">Feedback on leg-shot recognition</string>
   <string name="pref_connect_feedback_title">Connect feedback</string>
   <string name="pref_connect_feedback_summary">Feedback on device connect</string>
-  <string name="pref_station_prefix_title">Compass station prefix</string>
-  <string name="pref_station_prefix_summary">Export station prefix [Compass]</string>
+  <string name="pref_station_prefix_title">Station prefix</string>
+  <string name="pref_station_prefix_summary">Export station prefix [Compass/cSurvey]</string>
   <string name="pref_compass_splays_title">Compass splays</string>
   <string name="pref_compass_splays_summary">Export splays in Compass files</string>
   <string name="pref_vtopo_splays_title">VisualTopo splays</string>

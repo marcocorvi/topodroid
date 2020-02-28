@@ -859,6 +859,10 @@ class TDSetting
     mKmlStations       = prefs.getBoolean(     keyExpKml[0], bool(defExpKml[0]) ); // DISTOX_KML_STATIONS
     mKmlSplays         = prefs.getBoolean(     keyExpKml[1], bool(defExpKml[1]) ); // DISTOX_KML_SPLAYS
 
+    // String[] keyExpCsx = TDPrefKey.EXPORT_CSX;
+    // String[] defExpCsx = TDPrefKey.EXPORT_CSXdef;
+    // mExportStationsPrefix = prefs.getBoolean(     keyExpCsx[0], bool(defExpCsx[0]) ); // DISTOX_STATION_PREFIX
+
     String[] keyExpCsv = TDPrefKey.EXPORT_CSV;
     String[] defExpCsv = TDPrefKey.EXPORT_CSVdef;
     mCsvRaw            = prefs.getBoolean(     keyExpCsv[0], bool(defExpCsv[0]) ); // DISTOX_CSV_RAW
@@ -1044,6 +1048,7 @@ class TDSetting
       case TDPrefActivity.PREF_CATEGORY_SVX:    return updatePrefSvx( hlp, k, v );
       case TDPrefActivity.PREF_CATEGORY_TH:     return updatePrefTh( hlp, k, v );
       case TDPrefActivity.PREF_CATEGORY_DAT:    return updatePrefDat( hlp, k, v );
+      case TDPrefActivity.PREF_CATEGORY_CSX:    return updatePrefCsx( hlp, k, v );
       case TDPrefActivity.PREF_CATEGORY_SVG:    return updatePrefSvg( hlp, k, v );
       case TDPrefActivity.PREF_CATEGORY_DXF:    return updatePrefDxf( hlp, k, v );
       case TDPrefActivity.PREF_CATEGORY_SHP:    return updatePrefShp( hlp, k, v );
@@ -1648,6 +1653,19 @@ class TDSetting
       mKmlSplays   = tryBooleanValue( hlp, k, v, bool(def[ 1 ]) );
     } else {
       TDLog.Error("missing EXPORT KML key: " + k );
+    }
+    return null;
+  }
+
+  private static String updatePrefCsx( TDPrefHelper hlp, String k, String v )
+  {
+    // Log.v("DistoX", "update pref CSX: " + k );
+    String[] key = TDPrefKey.EXPORT_CSX;
+    String[] def = TDPrefKey.EXPORT_CSXdef;
+    if ( k.equals( key[ 0 ] ) ) { // DISTOX_STATION_PREFIX
+      mExportStationsPrefix = tryBooleanValue( hlp, k, v, bool(def[ 0 ]) );
+    } else {
+      TDLog.Error("missing EXPORT CSX key: " + k );
     }
     return null;
   }

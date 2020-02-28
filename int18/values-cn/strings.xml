@@ -125,7 +125,7 @@
     <string name="device_none">无可供选择DistoX设备</string>
     <!-- UNUSED string name="device_paired">Device is paired</string -->
     <string name="device_reset">重置 DistoX 内存</string>
-    <TODO string name="device_clear">清除DistoX内存</string>
+    <string name="device_clear">清除DistoX内存</string>
     <string name="device_code">DistoX 代码 %1$4d</string>
     <string name="device_firmware">固件  %1$d.%2$d</string>
     <string name="device_hardware">硬件  %1$d.%2$d</string>
@@ -182,7 +182,7 @@
     <string name="import_calib_no_data">校准-无文件</string>
     <string name="import_calib_io_error">校准文件: 读取错误</string>
     <string name="import_zip_ok">成功导入zip文件</string>
-    <TODO string name="import_zip_newer">从最近的版本导入zip文件</string>
+    <string name="import_zip_newer">从最近的版本导入zip文件</string>
     <!-- UNUSED string name="import_zip_wait">Imported zip file may take long. Please wait &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Saving sketch &#8230; please wait &#8230;</string -->
     <string name="MT_points_none">无GPS坐标点</string>
@@ -374,7 +374,7 @@
     <string name="popup_snap_ln">接至附近线</string>
     <string name="popup_snap_to_splays">接至附近的副线</string>
     <string name="popup_split_pt">复制点</string>
-    <TODO string name="popup_split_pts">添加点</string>
+    <string name="popup_split_pts">添加点</string>
     <string name="popup_split_ln">在线上的点剪切</string>
     <string name="popup_sharp_pt">拉直分段</string>
     <string name="popup_curve_pt">平滑分段</string>
@@ -414,7 +414,7 @@
     <!-- UNUSED string name="not_implemented">Not implemented yet</string -->
     <string name="null_bitmap">不能新建图片 [OOM error]</string>
     <string name="photo">照片</string>
-    <TODO string name="photo_camera">TopoDroid摄像头</string>
+    <string name="photo_camera">TopoDroid摄像头</string>
     <string name="photo_comment_prompt">输入相片注释</string>
     <string name="photo_azimuth_clino">方位角: %1$.1f 倾角 %2$.1f</string>
     <!-- UNUSED string name="photo_name">station/name</string -->
@@ -573,7 +573,7 @@
     <string name="stat_angle_error">角度错误 %1$.2f ± %2$.2f</string>
     <string name="shot_title">测线 %1$s - %2$s</string>
     <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f</string>
-    <TODO string name="survey_split_move_title">测量切分/move</string>
+    <string name="survey_split_move_title">测量切分/move</string>
 
     <string name="survey_stat_duplicate">重复的测线 %1$d %2$.1f %3$s</string>
     <string name="survey_stat_splay">辐测 %1$d</string>
@@ -664,7 +664,7 @@
     <string name="button_search"    >搜索    </string>
     <string name="button_merge"     >合并     </string>
     <string name="button_saved"     >保存站点</string>
-    <string name="button_saved"     >保存测点</string>
+    <!-- FIXME SAME AS PREVIOUS string name="button_saved"     >保存测点</string -->
     <string name="button_split"     >分割     </string>
     <string name="button_station"   >以 为中心</string>
     <string name="button_store"     >存储库     </string>
@@ -875,7 +875,7 @@
     <string name="audio_delete">删除 ?</string>
     <string name="audio_overwrite">覆盖 ?</string>
   
-    <string name="import_lrud">输入 左右上下</string -->
+    <string name="import_lrud">输入 左右上下</string>
     <string name="import_leg_first">主线在左右上下侧线之前</string>
     <string name="import_diving_datamode">潜水数据模式</string>
 
@@ -1083,8 +1083,8 @@
   <string name="pref_survex_lrud_summary">添加左右上下到Survex/Therion输出</string>
   <string name="pref_svg_grid_title">参考线</string>
   <string name="pref_svg_grid_summary">添加参考线到SVG/PNG输出</string>
-  <TODO string name="pref_svg_roundtrip_title">SVG延迟</string>
-  <TODO string name="pref_svg_roundtrip_summary">延迟确定 SVG 输出</string>
+  <string name="pref_svg_roundtrip_title">SVG延迟</string>
+  <string name="pref_svg_roundtrip_summary">延迟确定 SVG 输出</string>
   <string name="pref_svg_splays_title">SVG 副线</string>
   <string name="pref_svg_splays_summary">将辐测线添加到SVG输出</string>
   <!-- UNUSED string name="pref_svg_in_html_title">SVG in HTML</string -->
@@ -1244,7 +1244,7 @@
   <!-- UNUSED string name="pref_dxf_scale_summary">DXF sketch scale factor</string -->
   <string name="pref_dxf_blocks_title">DXF 副线端点</string>
   <string name="pref_dxf_blocks_summary">DXF 副线端点</string>
-  <TODO string name="pref_shp_georef_title">地理参考草图输出</string>
+  <string name="pref_shp_georef_title">地理参考草图输出</string>
   <string name="pref_shp_georef_summary">草图输出到WGS84坐标</string>
   <string name="pref_thumbnail_title">缩略图尺寸</string>
   <string name="pref_thumbnail_summary">照片缩略图尺寸</string>

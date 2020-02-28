@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-  <string-array name="orientazione">
+  <string-array name="orientation">
      <item name="unspecified">non specificato</item>
      <item name="portrait">ritratto</item>
      <item name="landscape">paesaggio</item>
   </string-array>
 
-  <string-array name="Trattino splay">
+  <!-- FIXME RESOURCE NAME MUST NOT BE TRANSLATED string-array name="Trattino splay">
      <item name="none">nessuno</item>
      <item name="plan">inclin.</item>
      <item name="profile">azimut</item>
      <item name="view">vista</item>
-  </string-array>
+  </string-array -->
 
-  <string-array name="Modo di feedback">
+  <!-- FIXME RESOURCE NAME MUST NOT BE TRANSLATED string-array name="Modo di feedback">
      <item name="none">nessuna</item>
      <item name="sound">suono</item>
      <item name="heptic">tattile</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="canvasLevels">
      <item name="none">nessuno</item>
