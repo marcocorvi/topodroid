@@ -534,10 +534,10 @@ public class DrawingWindow extends ItemDrawer
 
   private boolean mModified; // whether the sketch has been modified 
 
-  private float mBorderRight      = 4096;
-  private float mBorderLeft       = 0;
-  private float mBorderInnerRight = 4096;
-  private float mBorderInnerLeft  = 0;
+  private float mBorderRight      = TopoDroidApp.mBorderRight;
+  private float mBorderLeft       = TopoDroidApp.mBorderLeft;
+  private float mBorderInnerRight = TopoDroidApp.mBorderInnerRight;
+  private float mBorderInnerLeft  = TopoDroidApp.mBorderInnerLeft;
   private float mBorderBottom     = 4096;
     
   // PLOT SPLIT
@@ -1816,10 +1816,10 @@ public class DrawingWindow extends ItemDrawer
     setContentView(R.layout.drawing_activity);
     mDataDownloader   = mApp.mDataDownloader; // new DataDownloader( this, mApp );
     mZoom             = TopoDroidApp.mScaleFactor;    // canvas zoom
-    mBorderRight      = TopoDroidApp.mDisplayWidth * 15 / 16;
-    mBorderLeft       = TopoDroidApp.mDisplayWidth / 16;
-    mBorderInnerRight = TopoDroidApp.mDisplayWidth * 3 / 4;
-    mBorderInnerLeft  = TopoDroidApp.mDisplayWidth / 4;
+    // mBorderRight      = TopoDroidApp.mBorderRight;
+    // mBorderLeft       = TopoDroidApp.mBorderLeft;
+    // mBorderInnerRight = TopoDroidApp.mBorderInnerRight;
+    // mBorderInnerLeft  = TopoDroidApp.mBorderInnerLeft;
     mBorderBottom     = TopoDroidApp.mDisplayHeight * 7 / 8;
 
     mDisplayCenter = new PointF(TopoDroidApp.mDisplayWidth  / 2, TopoDroidApp.mDisplayHeight / 2);

@@ -250,6 +250,26 @@ class DrawingCommandManager
     canvas.drawPath( path, BrushManager.highlightPaint2 );
   }
 
+  private void drawSideDrag( Canvas canvas )
+  {
+    Path path = new Path();
+    float xl = TopoDroidApp.mBorderLeft;
+    float xr = TopoDroidApp.mBorderRight;
+    float ww = TopoDroidApp.mDisplayWidth;
+    float hh = TopoDroidApp.mDisplayHeight;
+    path.moveTo( 0, 0);
+    path.lineTo( xl, 0 );
+    path.lineTo( xl, hh );
+    path.lineTo( 0,  hh );
+    path.lineTo( 0, 0);
+    path.moveTo( xr, 0);
+    path.lineTo( ww, 0 );
+    path.lineTo( ww, hh );
+    path.lineTo( xr,  hh );
+    path.lineTo( xr, 0);
+    canvas.drawPath( path, BrushManager.sideDragPaint );
+  }
+
   // ------------------------------------------------------------
 
   /* FIXME_HIGHLIGHT
@@ -997,6 +1017,10 @@ class DrawingCommandManager
       case Drawing.FILTER_STATION:
         sstations = true;
         break;
+    }
+
+    if ( TDSetting.mSideDrag ) {
+      drawSideDrag( canvas );
     }
 
     if( grids && mGridStack1 != null ) {

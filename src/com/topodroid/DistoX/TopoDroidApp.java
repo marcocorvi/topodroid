@@ -125,9 +125,14 @@ public class TopoDroidApp extends Application
 
   static String mClipboardText = null; // text clipboard
 
-  public static float mScaleFactor   = 1.0f;
-  public static float mDisplayWidth  = 200f;
-  public static float mDisplayHeight = 320f;
+  static float mScaleFactor   = 1.0f;
+  static float mDisplayWidth  = 200f;
+  static float mDisplayHeight = 320f;
+  static float mBorderRight      = 4096;
+  static float mBorderLeft       = 0;
+  static float mBorderInnerRight = 4096;
+  static float mBorderInnerLeft  = 0;
+  // static float mBorderBottom     = 4096; // in DrawingWindow
 
   // static boolean isTracing = false;
 
@@ -714,6 +719,12 @@ public class TopoDroidApp extends Application
     float density  = dm.density;
     mDisplayWidth  = dm.widthPixels;
     mDisplayHeight = dm.heightPixels;
+    mBorderRight      = TopoDroidApp.mDisplayWidth * 15 / 16;
+    mBorderLeft       = TopoDroidApp.mDisplayWidth / 16;
+    mBorderInnerRight = TopoDroidApp.mDisplayWidth * 3 / 4;
+    mBorderInnerLeft  = TopoDroidApp.mDisplayWidth / 4;
+    // mBorderBottom     = TopoDroidApp.mDisplayHeight * 7 / 8;
+
     mScaleFactor   = (mDisplayHeight / 320.0f) * density;
     // FIXME it would be nice to have this, but it breaks all existing sketches
     //       therefore must stick with initial choice
