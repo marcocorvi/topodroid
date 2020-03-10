@@ -125,6 +125,7 @@ page_plot_merge,
 page_plot_zoomfit,
 page_plot_export,
 page_overview_refs,
+page_equate_new,
 manual15
 # manual16,
 );

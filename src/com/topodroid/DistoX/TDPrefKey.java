@@ -612,6 +612,7 @@ class TDPrefKey
     "DISTOX_SVG_GRID_STROKE",  // 5 
     "DISTOX_SVG_SHOT_STROKE", 
     "DISTOX_SVG_LINEDIR_STROKE", 
+    "DISTOX_SVG_STATION_SIZE",
     null
   };
   static int[] EXPORT_SVGtitle = {
@@ -626,6 +627,7 @@ class TDPrefKey
     R.string.pref_svg_gridstroke_title,
     R.string.pref_svg_shotstroke_title,
     R.string.pref_svg_linedirstroke_title,
+    R.string.pref_svg_stationsize_title,
     -1
   };
   static int[] EXPORT_SVGdesc = {
@@ -640,6 +642,7 @@ class TDPrefKey
     R.string.pref_svg_gridstroke_summary,
     R.string.pref_svg_shotstroke_summary,
     R.string.pref_svg_linedirstroke_summary,
+    R.string.pref_svg_stationsize_summary,
     -1
   };
   static String[] EXPORT_SVGdef = {
@@ -654,6 +657,7 @@ class TDPrefKey
     "0.5",
     "0.5",
     "6.0",
+    "20",
   };
 
   // ------------------------------------------------------------------------------
@@ -1344,7 +1348,7 @@ class TDPrefKey
     "DISTOX_ANDROID_AZIMUTH",    // android azimuth+clino
     "DISTOX_SHOT_TIMER",      // 11 // bearing-clino timer [1/10 s]
     "DISTOX_BEEP_VOLUME",     // 12 // bearing-clino beep volume [%]
-    "DISTOX_TDMANAGER",
+    // "DISTOX_TDMANAGER",
     null
   };
 
@@ -1365,7 +1369,7 @@ class TDPrefKey
     R.string.pref_with_android_azimuth_title,
     R.string.pref_shot_timer_title,
     R.string.pref_beep_volume_title,
-    R.string.pref_tdmanager_title,
+    // R.string.pref_tdmanager_title,
     -1
   };
 
@@ -1386,7 +1390,7 @@ class TDPrefKey
     R.string.pref_with_android_azimuth_summary,
     R.string.pref_shot_timer_summary,
     R.string.pref_beep_volume_summary,
-    R.string.pref_tdmanager_summary,
+    // R.string.pref_tdmanager_summary,
     -1
   };
 
@@ -1407,7 +1411,7 @@ class TDPrefKey
     FALSE,
     TDString.TEN,
     TDString.FIFTY,
-    FALSE,
+    // FALSE,
     null
   };
 

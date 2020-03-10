@@ -94,30 +94,31 @@ public class TDPrefActivity extends Activity
     R.string.title_settings_svx,
     R.string.title_settings_th,
     R.string.title_settings_dat,
+    R.string.title_settings_csx,
     R.string.title_settings_tro,
-    R.string.title_settings_svg,      // 12
+    R.string.title_settings_svg,      // 13
     R.string.title_settings_dxf,
     R.string.title_settings_shp,
     R.string.title_settings_png,
-    R.string.title_settings_kml,      // 16
+    R.string.title_settings_kml,      // 17
     R.string.title_settings_csv,
     R.string.title_settings_shot,     
-    R.string.title_settings_units,    // 19
+    R.string.title_settings_units,    // 20
     R.string.title_settings_accuracy,
     R.string.title_settings_location,
-    R.string.title_settings_screen,   // 22
+    R.string.title_settings_screen,   // 23
     R.string.title_settings_line,
-    R.string.title_settings_point,    // 24
+    R.string.title_settings_point,    // 25
     R.string.title_settings_walls,
     R.string.title_settings_draw,
-    R.string.title_settings_erase,    // 27
+    R.string.title_settings_erase,    // 28
     R.string.title_settings_edit,
     R.string.title_settings_geek,
-    R.string.title_settings_survey,   // 30
+    R.string.title_settings_survey,   // 31
     R.string.title_settings_plot,
-    R.string.title_settings_line,     // 32
-    R.string.title_settings_device,   // 33
-    R.string.title_settings_import,   // 34
+    R.string.title_settings_line,     // 33
+    R.string.title_settings_device,   // 34
+    R.string.title_settings_import,   // 35
     R.string.title_settings_log 
   };
 

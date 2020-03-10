@@ -57,16 +57,18 @@ class MyDialog extends Dialog
 
   private void setHelpLayout()
   {
-    LinearLayout help = (LinearLayout) findViewById( R.id.help );
-    if ( help != null ) {
-      help.setBackgroundColor( 0xff333333 );
-      help.setOnLongClickListener( new OnLongClickListener() {
-        @Override
-        public boolean onLongClick( View v ) {
-          if ( mHelpPage != null ) UserManualActivity.showHelpPage( mContext, mHelpPage );
-          return true;
-        }
-      } );
+    if ( mHelpPage != null ) {
+      LinearLayout help = (LinearLayout) findViewById( R.id.help );
+      if ( help != null ) {
+        help.setBackgroundColor( 0xff333333 );
+        help.setOnLongClickListener( new OnLongClickListener() {
+          @Override
+          public boolean onLongClick( View v ) {
+            if ( mHelpPage != null ) UserManualActivity.showHelpPage( mContext, mHelpPage );
+            return true;
+          }
+        } );
+      }
     }
   }
 

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:layout_margin="10dp"
+  >
+    <ListView android:id="@+id/list"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:transcriptMode="alwaysScroll"
+        android:fastScrollEnabled="true"
+        android:scrollingCache="true"
+        android:layout_weight="1"
+        android:textSize="18sp"
+    />  
+
+    <LinearLayout android:id="@+id/help"
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      >
+      <Button android:id="@+id/button_back"
+        style="@style/button_default"
+        android:layout_marginRight="@dimen/marginh"
+        android:text="@string/button_close"
+      />
+    </LinearLayout>
+
+</LinearLayout>
+

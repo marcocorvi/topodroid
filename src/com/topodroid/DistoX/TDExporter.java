@@ -3503,22 +3503,37 @@ class TDExporter
   // POLYGON EXPORT 
   // shot flags are not supported
 
-  private static void printShotToPlg( PrintWriter pw, AverageLeg leg, LRUD lrud, String comment )
+  private static void printPolygonEOL( PrintWriter pw ) { pw.format( "\r\n" ); }
+  private static void printPolygonTabEOL( PrintWriter pw ) { pw.format( "\t\r\n" ); }
+  private static void printPolygonTab0EOL( PrintWriter pw ) { pw.format( "\t0\r\n" ); }
+
+  // private static void printShotToPlg( PrintWriter pw, AverageLeg leg, LRUD lrud, String comment )
+  // {
+  //   pw.format(Locale.US, "%.2f\t%.1f\t%.1f\t\t%.2f\t%.2f\t%.2f\t%.2f\t", 
+  //     leg.length(), leg.bearing(), leg.clino(), lrud.l, lrud.r, lrud.u, lrud.d );
+  //   leg.reset();
+  //   // if ( duplicate ) { pw.format(" #|L#"); }
+  //   // if ( surface   ) { pw.format(" #|S#"); }
+  //   if ( comment != null && comment.length() > 0 ) {
+  //     pw.format("%s", comment );
+  //   }
+  //   printPolygonEOL( pw );
+  // }
+
+  static private void printPolygonData( PrintWriter pw, PolygonData data )
   {
+    pw.format( "%s\t%s\t", data.from, data.to );
     pw.format(Locale.US, "%.2f\t%.1f\t%.1f\t\t%.2f\t%.2f\t%.2f\t%.2f\t", 
-      leg.length(), leg.bearing(), leg.clino(), lrud.l, lrud.r, lrud.u, lrud.d );
-    leg.reset();
-    // if ( duplicate ) { pw.format(" #|L#"); }
-    // if ( surface   ) { pw.format(" #|S#"); }
-    if ( comment != null && comment.length() > 0 ) {
-      pw.format("%s", comment );
+      data.length, data.bearing, data.clino, data.lrud.l, data.lrud.r, data.lrud.u, data.lrud.d );
+    if ( data.comment != null && data.comment.length() > 0 ) {
+      pw.format("%s", data.comment );
     }
-    pw.format( "\n" );
+    printPolygonEOL( pw );
   }
  
   static String exportSurveyAsPlg( long sid, DataHelper data, SurveyInfo info, String filename )
   {
-    // Log.v("DistoX", "export as polygon: " + filename );
+    // Log.v("DistoX-POLYGON", "polygon " + filename);
     float ul = 1; // TDSetting.mUnitLength;
     float ua = 1; // TDSetting.mUnitAngle;
     // String uls = ( ul < 1.01f )? "Meters"  : "Feet"; // FIXME
@@ -3530,21 +3545,21 @@ class TDExporter
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
 
-      pw.format("POLYGON Cave Surveying Software\n");
-      pw.format("Polygon Program Version   = 2\n");
-      pw.format("Polygon Data File Version = 1\n");
-      pw.format("1998-2001 ===> Prepostffy Zsolt\n");
-      pw.format("-------------------------------\n\n");
+      pw.format("POLYGON Cave Surveying Software"); printPolygonEOL( pw );
+      pw.format("Polygon Program Version   = 2");   printPolygonEOL( pw );
+      pw.format("Polygon Data File Version = 1");   printPolygonEOL( pw );
+      pw.format("1998-2001 ===> Prepostffy Zsolt"); printPolygonEOL( pw );
+      pw.format("-------------------------------"); printPolygonEOL( pw ); printPolygonEOL( pw );
 
-      pw.format("*** Project ***\n");
-      pw.format("Project name: %s\n", info.name );
-      pw.format("Project place: %s\n", info.name );
-      pw.format("Project code: 9999\n");
-      pw.format("Made by: TopoDroid %s\n", TopoDroidApp.VERSION );
-      pw.format(Locale.US, "Made date: %f\n", TDUtil.getDatePlg() );
-      pw.format("Last modi: 0\n");
-      pw.format("AutoCorrect: 1\n");
-      pw.format("AutoSize: 20.0\n\n");
+      pw.format("*** Project ***");                 printPolygonEOL( pw );
+      pw.format("Project name: %s", info.name );    printPolygonEOL( pw );
+      pw.format("Project place: %s", info.name );   printPolygonEOL( pw );
+      pw.format("Project code: 9999");              printPolygonEOL( pw );
+      pw.format("Made by: TopoDroid %s", TopoDroidApp.VERSION );   printPolygonEOL( pw );
+      pw.format(Locale.US, "Made date: %f", TDUtil.getDatePlg() ); printPolygonEOL( pw );
+      pw.format("Last modi: 0");   printPolygonEOL( pw );
+      pw.format("AutoCorrect: 1"); printPolygonEOL( pw );
+      pw.format("AutoSize: 20.0"); printPolygonEOL( pw ); printPolygonEOL( pw );
 
       String date = info.date;
       int y = 0;
@@ -3553,19 +3568,29 @@ class TDExporter
       if ( date != null && date.length() == 10 ) {
         try {
           y = Integer.parseInt( date.substring(0,4) );
-          m = Integer.parseInt( date.substring(5,7) );
-          d = Integer.parseInt( date.substring(8,10) );
+          m = TDUtil.parseMonth( date.substring(5,7) );
+          d = TDUtil.parseDay( date.substring(8,10) );
         } catch ( NumberFormatException e ) {
-          TDLog.Error( "exportSurveyAsSrv date parse error " + date );
+          TDLog.Error( "exportSurveyAsPlg date parse error " + date );
         }
       }
-      pw.format("*** Surveys ***\n");
-      pw.format("Survey name: %s\n", info.name );
-      pw.format("Survey team:\n");
-      pw.format("%s\n\t\n\t\n\t\n\t\n", (info.team != null)? info.team : "" );
-      pw.format(Locale.US, "Survey date: %f\n", TDUtil.getDatePlg( y, m, d ) );
-      pw.format(Locale.US, "Declination: %.1f\n", info.getDeclination() ); // DECLINATION Polygon seems to have 0.0 in general
-      pw.format("Instruments:\n\t0\n\t0\n\t0\n");
+      // Log.v("DistoX-DATE", "Y " + y + " M " + m + " d " + d + " " + date );
+      pw.format("*** Surveys ***");             printPolygonEOL( pw );
+      pw.format("Survey name: %s", info.name ); printPolygonEOL( pw );
+      pw.format("Survey team:");                printPolygonEOL( pw );
+      pw.format("%s", (info.team != null)? info.team : "" ); printPolygonEOL( pw );
+      printPolygonTabEOL( pw );
+      printPolygonTabEOL( pw );
+      printPolygonTabEOL( pw );
+      printPolygonTabEOL( pw );
+      pw.format(Locale.US, "Survey date: %f", TDUtil.getDatePlg( y, m, d ) );
+      printPolygonEOL( pw );
+      pw.format(Locale.US, "Declination: %.1f", info.getDeclination() ); // DECLINATION Polygon seems to have 0.0 in general
+      printPolygonEOL( pw );
+      pw.format("Instruments:"); printPolygonEOL( pw );
+      printPolygonTab0EOL( pw );
+      printPolygonTab0EOL( pw );
+      printPolygonTab0EOL( pw );
 
       // if ( info.comment != null ) {
       //   pw.format("; %s\n", info.comment );
@@ -3574,20 +3599,33 @@ class TDExporter
       List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
       if ( fixed.size() > 0 ) {
         for ( FixedInfo fix : fixed ) {
-          pw.format("Fix point: %s\n", fix.name );
-          pw.format(Locale.US, "%.6f\t%.6f\t%.0f\t0\t0\t0\t0\n", fix.lng, fix.lat, fix.asl );
+          pw.format("Fix point: %s", fix.name );
+          printPolygonEOL( pw );
+          pw.format(Locale.US, "%.6f\t%.6f\t%.0f\t0\t0\t0\t0", fix.lng, fix.lat, fix.asl );
+          printPolygonEOL( pw );
           break;
         }
       } else {
-        pw.format("Fix point: 0\n" );
-        pw.format(Locale.US, "0\t0\t0\t0\t0\t0\t0\n" );
+        pw.format("Fix point: 0" );
+        printPolygonEOL( pw );
+        pw.format(Locale.US, "0\t0\t0\t0\t0\t0\t0" );
+        printPolygonEOL( pw );
       }
 
-      pw.format("Survey data\n");
-      pw.format("From\tTo\tLength\tAzimuth\tVertical\tLabel\tLeft\tRight\tUp\tDown\tNote\n");
+      pw.format("Survey data");
+      printPolygonEOL( pw );
+      pw.format("From\tTo\tLength\tAzimuth\tVertical\tLabel\tLeft\tRight\tUp\tDown\tNote");
+      printPolygonEOL( pw );
 
       List<DBlock> list = data.selectAllExportShots( sid, TDStatus.NORMAL );
       checkShotsClino( list );
+
+      int size = 0; // count legs
+      for ( DBlock blk : list ) {
+        if ( blk.mFrom != null && blk.mFrom.length() > 0 && blk.mTo != null && blk.mTo.length() > 0 ) ++size;
+      }
+      PolygonData[] polygon_data = new PolygonData[ size ];
+      // Log.v("DistoX-POLYGON", "size " + size + " list " + list.size() );
 
       AverageLeg leg = new AverageLeg(0);
       DBlock ref_item = null;
@@ -3598,6 +3636,7 @@ class TDExporter
       // boolean surface   = false;
       LRUD lrud;
 
+      int nr_data = 0;
       for ( DBlock item : list ) {
         String from = item.mFrom;
         String to   = item.mTo;
@@ -3610,8 +3649,11 @@ class TDExporter
           } else { // only TO station
             if ( leg.mCnt > 0 && ref_item != null ) {
               lrud = computeLRUD( ref_item, list, true );
-              pw.format("%s\t%s\t", ref_item.mFrom, ref_item.mTo );
-              printShotToPlg( pw, leg, lrud, ref_item.mComment );
+              // FIXME_P pw.format("%s\t%s\t", ref_item.mFrom, ref_item.mTo );
+              // FIXME_P printShotToPlg( pw, leg, lrud, ref_item.mComment );
+              polygon_data[nr_data] = new PolygonData( ref_item.mFrom, ref_item.mTo, leg, lrud, ref_item.mComment );
+              nr_data ++;
+              leg.reset();
               // duplicate = false;
               // surface = false;
               ref_item = null; 
@@ -3621,8 +3663,11 @@ class TDExporter
           if ( to == null || to.length() == 0 ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
               lrud = computeLRUD( ref_item, list, true );
-              pw.format("%s\t%s\t", ref_item.mFrom, ref_item.mTo );
-              printShotToPlg( pw, leg, lrud, ref_item.mComment );
+              // FIXME_P pw.format("%s\t%s\t", ref_item.mFrom, ref_item.mTo );
+              // FIXME_P printShotToPlg( pw, leg, lrud, ref_item.mComment );
+              polygon_data[nr_data] = new PolygonData( ref_item.mFrom, ref_item.mTo, leg, lrud, ref_item.mComment );
+              nr_data ++;
+              leg.reset();
               // duplicate = false;
               // surface = false;
               ref_item = null; 
@@ -3630,8 +3675,11 @@ class TDExporter
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {
               lrud = computeLRUD( ref_item, list, true );
-              pw.format("%s\t%s\t", ref_item.mFrom, ref_item.mTo );
-              printShotToPlg( pw, leg, lrud, ref_item.mComment );
+              // FIXME_P pw.format("%s\t%s\t", ref_item.mFrom, ref_item.mTo );
+              // FIXME_P printShotToPlg( pw, leg, lrud, ref_item.mComment );
+              polygon_data[nr_data] = new PolygonData( ref_item.mFrom, ref_item.mTo, leg, lrud, ref_item.mComment );
+              nr_data ++;
+              leg.reset();
             }
             ref_item = item;
             // duplicate = item.isDuplicate();
@@ -3642,20 +3690,64 @@ class TDExporter
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
         lrud = computeLRUD( ref_item, list, true );
-        pw.format("%s\t%s\t", ref_item.mFrom, ref_item.mTo );
-        printShotToPlg( pw, leg, lrud, ref_item.mComment );
+        // FIXME_P pw.format("%s\t%s\t", ref_item.mFrom, ref_item.mTo );
+        // FIXME_P printShotToPlg( pw, leg, lrud, ref_item.mComment );
+        polygon_data[nr_data] = new PolygonData( ref_item.mFrom, ref_item.mTo, leg, lrud, ref_item.mComment );
+        nr_data ++;
+        // leg.reset(); // not necessary
       }
-      pw.format( "\n" );
-      pw.format("End of survey data.\n\n");
-      pw.format("*** Surface ***\n");
-      pw.format("End of surface data.\n\n");
-      pw.format("EOF.\n");
+
+      if ( nr_data > 0 ) {
+        PolygonData d0 = polygon_data[0];
+        printPolygonData( pw, d0 );
+        d0.used = true;
+        boolean repeat = true;
+        while ( repeat ) {
+          repeat = false;
+          for ( int n2 = 1; n2 < nr_data; ++n2 ) {
+            PolygonData d2 = polygon_data[n2];
+            if ( d2.used ) continue;
+            String from = d2.from;
+            String to   = d2.to;
+            for ( int n1 = 0; n1 < nr_data; ++n1 ) {
+              PolygonData d1 = polygon_data[n1];
+              if ( d1.used ) {
+                if ( from.equals( d1.to ) ) {
+                  printPolygonData( pw, d2 );
+                  d2.used = true;
+                  break;
+                }
+                if ( to.equals( d1.to ) ) { // try reversed
+                  d2.reverse();
+                  printPolygonData( pw, d2 );
+                  d2.used = true;
+                  break;
+                }
+              }
+            }
+            repeat |= d2.used;
+          }
+        }
+      }
+
+      printPolygonEOL( pw );
+      pw.format("End of survey data.");
+      printPolygonEOL( pw );
+      printPolygonEOL( pw );
+      pw.format("*** Surface ***");
+      printPolygonEOL( pw );
+      pw.format("End of surface data.");
+      printPolygonEOL( pw );
+      printPolygonEOL( pw );
+      pw.format("EOF.");
+      printPolygonEOL( pw );
 
       fw.flush();
       fw.close();
       return filename;
     } catch ( IOException e ) {
       TDLog.Error( "Failed Polygon export: " + e.getMessage() );
+      Log.v("DistoX-POLYGON", "Failed export: " + e.getMessage() );
       return null;
     }
   }

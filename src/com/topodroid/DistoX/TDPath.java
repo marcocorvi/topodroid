@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FilenameFilter;
 // import java.io.IOException;
 // import java.io.FileNotFoundException;
 
@@ -89,6 +90,8 @@ class TDPath
   static String APP_SAVE_POINT_PATH  = APP_SYMBOL_SAVE_PATH + "point/";
   static String APP_SAVE_LINE_PATH   = APP_SYMBOL_SAVE_PATH + "line/";
   static String APP_SAVE_AREA_PATH   = APP_SYMBOL_SAVE_PATH + "area/";
+
+  static String PATH_TDCONFIG;
 
   private static String PATH_CAVE;   //  = PATH_BASE + "cave/";  // Polygon
   private static String PATH_CAV;    //  = PATH_BASE + "cav/";   // Topo
@@ -191,6 +194,8 @@ class TDPath
 
     // APP_TLX_PATH = PATH_BASE + "tlx/";
     // checkDirs( APP_TLX_PATH );
+
+    PATH_TDCONFIG = PATH_BASE + "thconfig/"; // FIXME checkDirs( PATH_TDCONFIG );
 
     PATH_CAV = PATH_BASE + "cav/";      // FIXME checkDirs( PATH_CAV );
     PATH_DAT = PATH_BASE + "dat/";      // FIXME checkDirs( PATH_DAT );
@@ -296,6 +301,17 @@ class TDPath
 
   // ------------------------------------------------------------------
 
+  static File[] scanTdconfigDir()
+  {
+    File dir = new File( PATH_TDCONFIG );
+    FilenameFilter filter = new FilenameFilter() {
+       public boolean accept(File dir, String name) {
+         return name.endsWith( "tdconfig" );
+       }
+    };
+    return dir.listFiles( filter );
+  }
+
   // ------------------------------------------------------------------
   // FILE NAMES
 
@@ -326,6 +342,9 @@ class TDPath
   static String getZipFile( String name )    { return PATH_ZIP + name; }
   static String getTdrFile( String name )    { return PATH_TDR + name; }
   static String getTdr3File( String name )   { return PATH_TDR3 + name; }
+
+  static String getTdconfigDir( ) { return PATH_TDCONFIG; }
+  static String getTdconfigFile( String name ) { return PATH_TDCONFIG + name; }
 
   static String getCaveFile( String name )   { return PATH_CAVE + name; }
   static String getCavFile( String name )    { return PATH_CAV + name; }

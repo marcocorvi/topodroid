@@ -236,17 +236,19 @@ public class MainWindow extends Activity
 	  TDToast.makeBad( "palette not yet loaded" );
 	}
       // FIXME THMANAGER
-      } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // THERION MANAGER TdManager
+      } else if ( TDLevel.overExpert && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // THERION MANAGER TdManager
         try {
-          if ( TDSetting.mWithTdManager ) {
-            intent = new Intent( "TdManager.intent.action.Launch" );
-          } else {
-            intent = new Intent( "ThManager.intent.action.Launch" );
-            // intent.putExtra( "survey", mApp.getSurveyThFile() );
-          }
+          // if ( TDSetting.mWithTdManager ) {
+            // intent = new Intent( "TdManager.intent.action.Launch" );
+            intent = new Intent( Intent.ACTION_VIEW ).setClass( this, TdManagerActivity.class );
+          // } else {
+          //   intent = new Intent( "ThManager.intent.action.Launch" );
+          //   // intent.putExtra( "survey", mApp.getSurveyThFile() );
+          // }
           startActivity( intent );
         } catch ( ActivityNotFoundException e ) {
-          TDToast.makeBad( R.string.no_thmanager );
+          // TDToast.makeBad( R.string.no_thmanager );
+          TDLog.Error( "TdManagerActivity not started" );
         }
       }
     }

@@ -154,6 +154,10 @@ public class TopoDroidApp extends Application
   boolean mShowSectionSplays = true;
   
   // ----------------------------------------------------------------------
+  // TdManager
+  static TdmConfig mTdmConfig = null;                // current config file
+
+  // ----------------------------------------------------------------------
   // data lister
   // ListerSet mListerSet;
   ListerSetHandler mListerSet; // FIXME_LISTER
@@ -236,11 +240,11 @@ public class TopoDroidApp extends Application
     return TDSetting.mSizeButtons;
   }
 
-  // UNUSED default button size
-  // static int getScaledSize( Context context )
-  // {
-  //   return (int)( TDSetting.mSizeButtons * context.getResources().getSystem().getDisplayMetrics().density );
-  // }
+  // default button size - USED by Tdm...
+  static int getScaledSize( Context context )
+  {
+    return (int)( TDSetting.mSizeButtons * context.getResources().getSystem().getDisplayMetrics().density );
+  }
 
   // UNUSED was called by HelpEntry
   // static int getDefaultSize( Context context )
@@ -1460,17 +1464,17 @@ public class TopoDroidApp extends Application
 
   // FIXME_SYNC might be a problem with big surveys
   // this is called sync to pass the therion file to the 3D viewwer
-  static boolean exportSurveyAsThSync( )
-  {
-    SurveyInfo info = getSurveyInfo();
-    if ( info == null ) return false;
-    // if ( async ) {
-    //   String saving = context.getResources().getString(R.string.saving_);
-    //   (new SaveDataFileTask( saving, TDInstance.sid, info, mData, TDInstance.survey, null, TDConst.DISTOX_EXPORT_TH, toast )).execute();
-    //   return true;
-    // }
-    return ( TDExporter.exportSurveyAsTh( TDInstance.sid, mData, info, TDPath.getSurveyThFile( TDInstance.survey ) ) != null );
-  }
+  // static boolean exportSurveyAsThSync( )
+  // {
+  //   SurveyInfo info = getSurveyInfo();
+  //   if ( info == null ) return false;
+  //   // if ( async ) {
+  //   //   String saving = context.getResources().getString(R.string.saving_);
+  //   //   (new SaveDataFileTask( saving, TDInstance.sid, info, mData, TDInstance.survey, null, TDConst.DISTOX_EXPORT_TH, toast )).execute();
+  //   //   return true;
+  //   // }
+  //   return ( TDExporter.exportSurveyAsTh( TDInstance.sid, mData, info, TDPath.getSurveyThFile( TDInstance.survey ) ) != null );
+  // }
 
   // FIXME_SYNC ok because calib files are small
   String exportCalibAsCsv( )

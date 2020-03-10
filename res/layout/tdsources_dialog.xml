@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:layout_margin="10dp"
+  >
+   		
+    <LinearLayout android:id="@+id/help"
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      android:layout_gravity="bottom"
+      android:gravity="bottom"
+      >
+      <Button android:id="@+id/back"
+        style="@style/button_default"
+        android:layout_marginRight="@dimen/marginh"
+        android:text="@string/button_cancel"
+      />
+
+      <Button android:id="@+id/ok"
+        style="@style/button_default"
+        android:layout_marginRight="@dimen/marginh"
+        android:text="@string/button_ok"
+      />
+    </LinearLayout>
+
+  <!-- ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    -->
+    <ListView android:id="@+id/list"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:transcriptMode="alwaysScroll"
+        android:fastScrollEnabled="true"
+        android:scrollingCache="true"
+        android:layout_weight="1"
+        android:textSize="18sp"
+    />  
+  <!-- /ScrollView -->
+
+</LinearLayout>
+

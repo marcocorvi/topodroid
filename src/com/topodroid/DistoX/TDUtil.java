@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 // import java.lang.Math;
 
 import java.util.Date;
@@ -30,8 +32,6 @@ import android.media.ToneGenerator;
 
 import android.content.Context;
 import android.os.Vibrator;
-
-// import android.util.Log;
 
 class TDUtil
 {
@@ -175,6 +175,16 @@ class TDUtil
     return sdf.format( new Date() );
   }
 
+  static int parseDay( String str )
+  {
+    return 10 * ( str.charAt(0) - '0' ) + ( str.charAt(1) - '0' );
+  }
+  static int parseMonth( String str )
+  {
+    return 10 * ( str.charAt(0) - '0' ) + ( str.charAt(1) - '0' );
+  }
+
+
   static float getDatePlg( )
   {
     Calendar c = new GregorianCalendar();
@@ -184,17 +194,20 @@ class TDUtil
     return getDatePlg( y, m, d );
   }
 
-  static final private int[] mDaysByMonth = { 0, 31, 59, 90, 120, 151, 181,  212, 243, 273, 284, 294, 324 };
+  static final private int[] mDaysByMonth = { 0, 31, 59, 90, 120, 151, 181,  212, 243, 273, 304, 324, 365 };
   // m: 1 .. 12
   static float getDatePlg( int y, int m, int d )
   {
-    int days = 100 * 365 + 24;
+    int days = 36524; // 100 * 365 + 24 = from 1900.01.01 to 1999.12.31
+    boolean leap = ( (y%4) == 0 ); 
     while ( y > 2000 ) {
       days += 365;
       if ( (y % 4) == 0 ) ++ days;
       -- y;
     }
-    days += mDaysByMonth[ m ] + d;
+    days += mDaysByMonth[ m-1 ] + d + 1; //
+    if ( leap && m > 2 ) ++ days;
+    // Log.v("DistoX-DATE", "Polygon date " + y + " " + m + " " + d +  " " + days );
     return days;
   }
 

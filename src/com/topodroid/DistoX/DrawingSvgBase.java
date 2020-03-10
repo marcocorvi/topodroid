@@ -159,7 +159,7 @@ class DrawingSvgBase
   static protected void toSvg( PrintWriter pw, DrawingStationName st, float xoff, float yoff )
   {
     // pw.format("<text font-size=\"20\" font-family=\"sans-serif\" fill=\"violet\" stroke=\"none\" text-anchor=\"middle\"");
-    pw.format("<text font-size=\"20\" fill=\"violet\" stroke=\"none\" text-anchor=\"middle\"");
+    pw.format("<text font-size=\"%d\" fill=\"violet\" stroke=\"none\" text-anchor=\"middle\"", TDSetting.mSvgStationSize );
     pw.format(Locale.US, " x=\"%.2f\" y=\"%.2f\">", xoff + st.cx, yoff + st.cy );
     pw.format("%s</text>\n", st.getName() );
   }
@@ -167,7 +167,7 @@ class DrawingSvgBase
   static protected void toSvg( PrintWriter pw, DrawingStationPath sp, float xoff, float yoff )
   {
     // pw.format("<text font-size=\"20\" font-family=\"sans-serif\" fill=\"black\" stroke=\"none\" text-anchor=\"middle\"");
-    pw.format("<text font-size=\"20\" fill=\"black\" stroke=\"none\" text-anchor=\"middle\"");
+    pw.format("<text font-size=\"%d\" fill=\"black\" stroke=\"none\" text-anchor=\"middle\"", TDSetting.mSvgStationSize );
     pw.format(Locale.US, " x=\"%.2f\" y=\"%.2f\">", xoff + sp.cx, yoff + sp.cy );
     pw.format("%s</text>\n", sp.name() );
   }

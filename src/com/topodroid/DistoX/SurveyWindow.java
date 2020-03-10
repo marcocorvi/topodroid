@@ -390,20 +390,20 @@ public class SurveyWindow extends Activity
 
   private void do3D()
   {
-    if ( TopoDroidApp.exportSurveyAsThSync( ) ) { // make sure to have survey exported as therion
+    // if ( TopoDroidApp.exportSurveyAsThSync( ) ) { // make sure to have survey exported as therion
       try {
         Intent intent = new Intent( "Cave3D.intent.action.Launch" );
-        if ( TDSetting.mWithTdManager ) {
+        // if ( TDSetting.mWithTdManager ) {
           intent.putExtra( "INPUT_SURVEY", TDInstance.survey );
           intent.putExtra( "SURVEY_BASE", TDPath.getPathBase() );
-        } else {
-          intent.putExtra( "INPUT_FILE", TDPath.getSurveyThFile( TDInstance.survey ) );
-        }
+        // } else {
+        //   intent.putExtra( "INPUT_FILE", TDPath.getSurveyThFile( TDInstance.survey ) );
+        // }
         mActivity.startActivity( intent );
       } catch ( ActivityNotFoundException e ) {
         TDToast.makeBad( R.string.no_cave3d );
       }
-    }
+    // }
   }
 
   // private void doOpen()

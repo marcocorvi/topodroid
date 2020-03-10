@@ -4858,262 +4858,376 @@ class DataHelper extends DataSetObservable
      return ret;
    }
 
-   void deleteStation( long sid, String name )
-   {
-     StringWriter sw = new StringWriter();
-     PrintWriter  pw = new PrintWriter( sw );
-     pw.format( Locale.US, "DELETE FROM stations WHERE surveyId=%d AND name=\"%s\"", sid, name );
-     doExecSQL( sw, "station delete" );
+  void deleteStation( long sid, String name )
+  {
+    StringWriter sw = new StringWriter();
+    PrintWriter  pw = new PrintWriter( sw );
+    pw.format( Locale.US, "DELETE FROM stations WHERE surveyId=%d AND name=\"%s\"", sid, name );
+    doExecSQL( sw, "station delete" );
 
-     // if ( deleteStationStmt == null )
-     //   deleteStationStmt = myDB.compileStatement( "DELETE FROM stations WHERE surveyId=? AND name=?" );
-     // deleteStationStmt.bindLong(   1, sid );
-     // deleteStationStmt.bindString( 2, name );
-     // deleteStationStmt.execute();
-   }
+    // if ( deleteStationStmt == null )
+    //   deleteStationStmt = myDB.compileStatement( "DELETE FROM stations WHERE surveyId=? AND name=?" );
+    // deleteStationStmt.bindLong(   1, sid );
+    // deleteStationStmt.bindString( 2, name );
+    // deleteStationStmt.execute();
+  }
 
+  // ----------------------------------------------------------------------
+  // TdManager
 
-   // ----------------------------------------------------------------------
-   // DATABASE TABLES
+  private final static String WHERE_NAME        = "name=?";
+  // private final static String WHERE_SID         = "surveyId=?";
+  // private final static String WHERE_SID_STATUS  = "surveyId=? AND status=?";
+  // private final static String WHERE_SID_ID      = "surveyId=? AND id=?";
 
-   private static class DistoXOpenHelper extends SQLiteOpenHelper
-   {
-      private static final String create_table = "CREATE TABLE IF NOT EXISTS ";
+  static private String[] mReducedShotFields =
+    { "id", "fStation", "tStation", "distance", "bearing", "clino", "extend", "leg" };
+  // static private String[] mFullShotFields =
+  //   { "id", "fStation", "tStation", "distance", "bearing", "clino", "acceleration", "magnetic", "dip", // 0 ..  8
+  //     "extend", "flag", "leg", "comment", "type", "millis", "color", "stretch", "address"              // 9 .. 17
+  //   };
 
-      DistoXOpenHelper(Context context, String database_name ) 
-      {
-         super(context, database_name, null, DATABASE_VERSION);
-         // Log.v("DistoX", "DB NAME " + database_name );
-         // TDLog.Log( TDLog.LOG_DB, "createTables ... " + database_name + " version " + DATABASE_VERSION );
+  long getSurveyIdFromName( String name ) 
+  {
+    long id = -1;
+    if ( myDB == null ) { return -2; }
+    Cursor cursor = myDB.query( SURVEY_TABLE, new String[] { "id" },
+                                "name = ?", new String[] { name },
+                                null, null, null );
+    if (cursor != null ) {
+      if (cursor.moveToFirst() ) {
+        id = cursor.getLong(0);
       }
+      if ( ! cursor.isClosed()) cursor.close();
+    }
+    return id;
+  }
 
-      @Override
-      public void onCreate(SQLiteDatabase db) 
-      {
-        createTables( db );
-        // TDLog.Log( TDLog.LOG_DB, "DistoXOpenHelper onCreate done db " + db );
-      }
+  // SELECT STATEMENTS - SHOT
+  List<DBlock> selectAllLegShotsReduced( long sid, long status )
+  {
+    // Log.v("DistoXX", "B4 select shots all leg");
+    List< DBlock > list = new ArrayList<>();
+    if ( myDB == null ) return list;
+    Cursor cursor = myDB.query(SHOT_TABLE, mReducedShotFields, // { "id", "fStation", "tStation", "distance", "bearing", "clino", "extend", "leg" };
+                    WHERE_SID_STATUS, new String[]{ Long.toString(sid), Long.toString(status) },
+                    null, null, "id" );
+    if (cursor.moveToFirst()) {
+      do {
+        if ( cursor.getString(1).length() > 0 && cursor.getString(2).length() > 0 ) {
+          DBlock block = new DBlock();
+          reducedFillBlock( sid, block, cursor );
+          list.add( block );
+        }
+      } while (cursor.moveToNext());
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return list;
+  }
 
-      private void createTables( SQLiteDatabase db )
-      {
-         try {
-           // db.setLockingEnabled( false );
-           db.beginTransaction();
-           db.execSQL( 
-               create_table + CONFIG_TABLE
-             + " ( key TEXT NOT NULL,"
-             +   " value TEXT )"
-           );
+  private void reducedFillBlock( long sid, DBlock blk, Cursor cursor )
+  {
+    long leg = cursor.getLong(7);
+    blk.setId( cursor.getLong(0), sid );
+    blk.setBlockName( cursor.getString(1), cursor.getString(2), (leg == LegType.BACK) );  // from - to
+    blk.mLength       = (float)( cursor.getDouble(3) );  // length [meters]
+    // blk.setBearing( (float)( cursor.getDouble(4) ) ); 
+    blk.mBearing      = (float)( cursor.getDouble(4) );  // bearing [degrees]
+    float clino       = (float)( cursor.getDouble(5) );  // clino [degrees], or depth [meters]
+    blk.mClino        = clino;
+    blk.setExtend( (int)( cursor.getLong(6) ), 0 ); 
+  }
+  
+  // SURVEY
+  // List<String> selectAllSurveys( )
+  // {
+  //   List< String > list = new ArrayList<>();
+  //   if ( myDB == null ) return list;
+  //   try {
+  //     Cursor cursor = myDB.query( SURVEY_TABLE,
+  //                                 new String[] { "name" }, // columns
+  //                                 null, null, null, null, "name" );
+  //     if (cursor.moveToFirst()) {
+  //       do {
+  //         list.add( cursor.getString(0) );
+  //       } while (cursor.moveToNext());
+  //     }
+  //     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+  //   } catch ( SQLException e ) {
+  //     // ignore
+  //   }
+  //   return list;
+  // }
 
-           // db.execSQL( "insert into " + CONFIG_TABLE + " values ( \"sketch\", \"on\" )" );
+  SurveyInfo getSurveyInfo( String name )
+  {
+    SurveyInfo info = null;
+    if ( myDB == null ) return null;
+    Cursor cursor = myDB.query( SURVEY_TABLE,
+                               new String[] { "id", "name", "day", "team", "declination", "comment", "init_station", "xsections", "datamode", "extend" }, // columns
+                               WHERE_NAME, new String[] { name },
+                               null, null, "name" );
+    if (cursor.moveToFirst()) {
+      info = new SurveyInfo();
+      info.id      = cursor.getLong( 0 );
+      info.name    = cursor.getString( 1 );
+      info.date    = cursor.getString( 2 );
+      info.team    = cursor.getString( 3 );
+      info.declination = (float)(cursor.getDouble( 4 ));
+      info.comment = cursor.getString( 5 );
+      info.initStation = cursor.getString( 6 );
+      info.xsections = (int)cursor.getLong( 7 );
+      info.datamode  = (int)cursor.getLong( 8 );
+      info.mExtend   = (int)cursor.getLong( 9 );
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return info;
+  }
 
-           // db.execSQL("DROP TABLE IF EXISTS " + SHOT_TABLE);
-           // db.execSQL("DROP TABLE IF EXISTS " + SURVEY_TABLE);
-           db.execSQL(
-               create_table + SURVEY_TABLE 
-             + " ( id INTEGER, " //  PRIMARY KEY AUTOINCREMENT, "
-             +   " name TEXT, "
-             +   " day TEXT, "
-             +   " team TEXT, "
-             +   " comment TEXT, "
-             +   " declination REAL, "
-             +   " init_station TEXT, "
-             +   " xsections INTEGER, "
-	     +   " datamode INTEGER, "
-             +   " extend INTEGER "
-             +   ")"
-           );
+  public List<DBlock> getSurveyReducedData( long sid ) { return selectAllLegShotsReduced( sid, 0 ); }
 
-           db.execSQL(
-               create_table + SHOT_TABLE 
-             + " ( surveyId INTEGER, "
-             +   " id INTEGER, " //  PRIMARY KEY AUTOINCREMENT, "
-             +   " fStation TEXT, "
-             +   " tStation TEXT, "
-             +   " distance REAL, "   // distance 
-             +   " bearing REAL, "    // azimuth
-             +   " clino REAL, "      // clino | depth
-             +   " roll REAL, "
-             +   " acceleration REAL, "
-             +   " magnetic REAL, "
-             +   " dip REAL, "
-             +   " extend INTEGER, " // LEFT VERT RIGHT IGNORE etc.
-             +   " flag INTEGER, "   // NONE DUPLICATE SURFACE COMMENTED
-             +   " leg INTEGER, "    // MAIN SEC SPLAY XSPLAY BACK ...
-             +   " status INTEGER, " // NORMAL DELETED OVERSHOOT
-             +   " comment TEXT, "
-             +   " type INTEGER, "     // DISTOX MANUAL
-             +   " millis INTEGER, "   // timestamp
-	     +   " color INTEGER, "     // custom color
-	     +   " stretch REAL default 0, " // extend strech, default DBlock.STRETCH_NONE
-	     +   " address TEXT default \"\" " // distox address
-             // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
-             // +   " ON DELETE CASCADE "
-             +   ")"
-           );
 
-           db.execSQL(
-               create_table + FIXED_TABLE
-             + " ( surveyId INTEGER, "
-             +   " id INTEGER, "   //  PRIMARY KEY AUTOINCREMENT, "
-             +   " station TEXT, "
-             +   " longitude REAL, "
-             +   " latitude REAL, "
-             +   " altitude REAL, "    // WGS84 altitude
-             +   " altimetric REAL, "  // altimetric altitude (if any)
-             +   " comment TEXT, "
-             +   " status INTEGER, "
-             +   " cs_name TEXT, "
-             +   " cs_longitude REAL, "
-             +   " cs_latitude REAL, "
-             +   " cs_altitude REAL, "
-             +   " source INTEGER, "    // 0: unknown,  1: topodroid,  2: manual,   3: mobile-topographer
-	     +   " cs_decimals INTEGER"
-             // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
-             // +   " ON DELETE CASCADE "
-             +   ")"
-           );
+  // ----------------------------------------------------------------------
+  // DATABASE TABLES
 
-           db.execSQL(
-               create_table + STATION_TABLE 
-             + " ( surveyId INTEGER, " //  PRIMARY KEY AUTOINCREMENT, "
-             +   " name TEXT, "
-             +   " comment TEXT, "
-             +   " flag INTEGER default 0 "
-             +   ")"
-           );
-            
+  private static class DistoXOpenHelper extends SQLiteOpenHelper
+  {
+     private static final String create_table = "CREATE TABLE IF NOT EXISTS ";
 
-           db.execSQL(
-               create_table + PLOT_TABLE 
-             + " ( surveyId INTEGER, "
-             +   " id INTEGER, " // PRIMARY KEY AUTOINCREMENT, "
-             +   " name TEXT, "
-             +   " type INTEGER, "
-             +   " status INTEGER, "
-             +   " start TEXT, "
-             +   " view TEXT, "
-             +   " xoffset REAL, "
-             +   " yoffset REAL, "
-             +   " zoom REAL, "
-             +   " azimuth REAL, "
-             +   " clino REAL, "
-             +   " hide TEXT, "
-             +   " nick TEXT, "
-	     +   " orientation INTEGER, "
-	     +   " maxscrap INTEGER "
-             // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
-             // +   " ON DELETE CASCADE "
-             +   ")"
-           );
+     DistoXOpenHelper(Context context, String database_name ) 
+     {
+        super(context, database_name, null, DATABASE_VERSION);
+        // Log.v("DistoX", "DB NAME " + database_name );
+        // TDLog.Log( TDLog.LOG_DB, "createTables ... " + database_name + " version " + DATABASE_VERSION );
+     }
 
-           db.execSQL(
-               create_table + SKETCH_TABLE
-             + " ( surveyId INTEGER, "
-             +   " id INTEGER, " // PRIMARY KEY AUTOINCREMENT, "
-             +   " name TEXT, "
-             +   " status INTEGER, "
-             +   " start TEXT, "
-             +   " st1 TEXT, "
-             +   " st2 TEXT, "
-             +   " xoffsettop REAL, "
-             +   " yoffsettop REAL, "
-             +   " zoomtop REAL, "
-             +   " xoffsetside REAL, "
-             +   " yoffsetside REAL, "
-             +   " zoomside REAL, "
-             +   " xoffset3d REAL, "
-             +   " yoffset3d REAL, "
-             +   " zoom3d REAL, "
-             +   " east REAL, "
-             +   " south REAL, "
-             +   " vert REAL, "
-             +   " azimuth REAL, "
-             +   " clino REAL "
-             // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
-             // +   " ON DELETE CASCADE "
-             +   ")"
-           );
+     @Override
+     public void onCreate(SQLiteDatabase db) 
+     {
+       createTables( db );
+       // TDLog.Log( TDLog.LOG_DB, "DistoXOpenHelper onCreate done db " + db );
+     }
 
-           db.execSQL(
-               create_table + PHOTO_TABLE
-             + " ( surveyId INTEGER, "
-             +   " id INTEGER, " //  PRIMARY KEY AUTOINCREMENT, "
-             +   " shotId INTEGER, "
-             +   " status INTEGER default 0, "
-             +   " title TEXT, "
-             +   " date TEXT, "
-             +   " comment TEXT, "
-             +   " camera INTEGER "
-             // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
-             // +   " ON DELETE CASCADE "
-             +   ")"
-           );
+     private void createTables( SQLiteDatabase db )
+     {
+        try {
+          // db.setLockingEnabled( false );
+          db.beginTransaction();
+          db.execSQL( 
+              create_table + CONFIG_TABLE
+            + " ( key TEXT NOT NULL,"
+            +   " value TEXT )"
+          );
 
-           db.execSQL(
-               create_table + SENSOR_TABLE
-             + " ( surveyId INTEGER, "
-             +   " id INTEGER, " //  PRIMARY KEY AUTOINCREMENT, "
-             +   " shotId INTEGER, "
-             +   " status INTEGER default 0, "
-             +   " title TEXT, "
-             +   " date TEXT, "
-             +   " comment TEXT, "
-             +   " type TEXT, "
-             +   " value TEXT "
-             // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
-             // +   " ON DELETE CASCADE "
-             +   ")"
-           );
+          // db.execSQL( "insert into " + CONFIG_TABLE + " values ( \"sketch\", \"on\" )" );
 
-           db.execSQL( 
-               create_table + AUDIO_TABLE
-             + " ( surveyId INTEGER, "
-             +   " id INTEGER, " // PRIMARY KEY AUTOINCREMENT, "
-             +   " shotId INTEGER, "
-             +   " date TEXT "
-             +   ")"
-           );
+          // db.execSQL("DROP TABLE IF EXISTS " + SHOT_TABLE);
+          // db.execSQL("DROP TABLE IF EXISTS " + SURVEY_TABLE);
+          db.execSQL(
+              create_table + SURVEY_TABLE 
+            + " ( id INTEGER, " //  PRIMARY KEY AUTOINCREMENT, "
+            +   " name TEXT, "
+            +   " day TEXT, "
+            +   " team TEXT, "
+            +   " comment TEXT, "
+            +   " declination REAL, "
+            +   " init_station TEXT, "
+            +   " xsections INTEGER, "
+            +   " datamode INTEGER, "
+            +   " extend INTEGER "
+            +   ")"
+          );
 
-           // db.execSQL(
-           //     " CREATE TRIGGER fk_insert_shot BEFORE "
-           //   + " INSERT on " + SHOT_TABLE 
-           //   + " FOR EACH ROW BEGIN "
-           //   +   " SELECT RAISE "
-           //   +   " (ROLLBACK, 'insert on \"" + SHOT_TABLE + "\" violates foreing key constraint')"
-           //   +   " WHERE ( SELECT id FROM " + SURVEY_TABLE + " WHERE id = NEW.surveyId ) IS NULL; "
-           //   + " END;"
-           // );
-           // db.execSQL(
-           //     "CREATE TRIGGER fk_delete_survey BEFORE DELETE ON " + SURVEY_TABLE
-           //   + " FOR EACH ROW BEGIN "
-           //   +   " SELECT RAISE "
-           //   +   " (ROLLBACK, 'delete from \"" + SURVEY_TABLE + "\" violates constraint')"
-           //   +   " WHERE ( id IS IN ( SELECT DISTINCT surveyId FROM " + SHOT_TABLE + " ) );"
-           //   + " END;"
-           // );
+          db.execSQL(
+              create_table + SHOT_TABLE 
+            + " ( surveyId INTEGER, "
+            +   " id INTEGER, " //  PRIMARY KEY AUTOINCREMENT, "
+            +   " fStation TEXT, "
+            +   " tStation TEXT, "
+            +   " distance REAL, "   // distance 
+            +   " bearing REAL, "    // azimuth
+            +   " clino REAL, "      // clino | depth
+            +   " roll REAL, "
+            +   " acceleration REAL, "
+            +   " magnetic REAL, "
+            +   " dip REAL, "
+            +   " extend INTEGER, " // LEFT VERT RIGHT IGNORE etc.
+            +   " flag INTEGER, "   // NONE DUPLICATE SURFACE COMMENTED
+            +   " leg INTEGER, "    // MAIN SEC SPLAY XSPLAY BACK ...
+            +   " status INTEGER, " // NORMAL DELETED OVERSHOOT
+            +   " comment TEXT, "
+            +   " type INTEGER, "     // DISTOX MANUAL
+            +   " millis INTEGER, "   // timestamp
+            +   " color INTEGER, "     // custom color
+            +   " stretch REAL default 0, " // extend strech, default DBlock.STRETCH_NONE
+            +   " address TEXT default \"\" " // distox address
+            // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
+            // +   " ON DELETE CASCADE "
+            +   ")"
+          );
 
-           db.setTransactionSuccessful();
-           db.endTransaction();
-         // } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-         } catch ( SQLException e ) { TDLog.Error( "createTables exception: " + e.getMessage() );
-         // } finally {
-           // db.setLockingEnabled( true );
-         }
-      }
+          db.execSQL(
+              create_table + FIXED_TABLE
+            + " ( surveyId INTEGER, "
+            +   " id INTEGER, "   //  PRIMARY KEY AUTOINCREMENT, "
+            +   " station TEXT, "
+            +   " longitude REAL, "
+            +   " latitude REAL, "
+            +   " altitude REAL, "    // WGS84 altitude
+            +   " altimetric REAL, "  // altimetric altitude (if any)
+            +   " comment TEXT, "
+            +   " status INTEGER, "
+            +   " cs_name TEXT, "
+            +   " cs_longitude REAL, "
+            +   " cs_latitude REAL, "
+            +   " cs_altitude REAL, "
+            +   " source INTEGER, "    // 0: unknown,  1: topodroid,  2: manual,   3: mobile-topographer
+            +   " cs_decimals INTEGER"
+            // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
+            // +   " ON DELETE CASCADE "
+            +   ")"
+          );
 
-      @Override
-      public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
-      {  
-         // FIXME this is called at each start when the database file exists
-         TDLog.Log( TDLog.LOG_DB, "onUpgrade old " + oldVersion + " new " + newVersion );
-         switch ( oldVersion ) {
-           case 14: 
-             db.execSQL( "ALTER TABLE surveys ADD COLUMN declination REAL default 0" );
-             // db.execSQL( "ALTER TABLE gms ADD COLUMN status INTEGER default 0" );
-           case 15:
-             // db.execSQL( "ALTER TABLE devices ADD COLUMN name TEXT" );
-            case 16:
+          db.execSQL(
+              create_table + STATION_TABLE 
+            + " ( surveyId INTEGER, " //  PRIMARY KEY AUTOINCREMENT, "
+            +   " name TEXT, "
+            +   " comment TEXT, "
+            +   " flag INTEGER default 0 "
+            +   ")"
+          );
+           
+
+          db.execSQL(
+              create_table + PLOT_TABLE 
+            + " ( surveyId INTEGER, "
+            +   " id INTEGER, " // PRIMARY KEY AUTOINCREMENT, "
+            +   " name TEXT, "
+            +   " type INTEGER, "
+            +   " status INTEGER, "
+            +   " start TEXT, "
+            +   " view TEXT, "
+            +   " xoffset REAL, "
+            +   " yoffset REAL, "
+            +   " zoom REAL, "
+            +   " azimuth REAL, "
+            +   " clino REAL, "
+            +   " hide TEXT, "
+            +   " nick TEXT, "
+            +   " orientation INTEGER, "
+            +   " maxscrap INTEGER "
+            // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
+            // +   " ON DELETE CASCADE "
+            +   ")"
+          );
+
+          db.execSQL(
+              create_table + SKETCH_TABLE
+            + " ( surveyId INTEGER, "
+            +   " id INTEGER, " // PRIMARY KEY AUTOINCREMENT, "
+            +   " name TEXT, "
+            +   " status INTEGER, "
+            +   " start TEXT, "
+            +   " st1 TEXT, "
+            +   " st2 TEXT, "
+            +   " xoffsettop REAL, "
+            +   " yoffsettop REAL, "
+            +   " zoomtop REAL, "
+            +   " xoffsetside REAL, "
+            +   " yoffsetside REAL, "
+            +   " zoomside REAL, "
+            +   " xoffset3d REAL, "
+            +   " yoffset3d REAL, "
+            +   " zoom3d REAL, "
+            +   " east REAL, "
+            +   " south REAL, "
+            +   " vert REAL, "
+            +   " azimuth REAL, "
+            +   " clino REAL "
+            // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
+            // +   " ON DELETE CASCADE "
+            +   ")"
+          );
+
+          db.execSQL(
+              create_table + PHOTO_TABLE
+            + " ( surveyId INTEGER, "
+            +   " id INTEGER, " //  PRIMARY KEY AUTOINCREMENT, "
+            +   " shotId INTEGER, "
+            +   " status INTEGER default 0, "
+            +   " title TEXT, "
+            +   " date TEXT, "
+            +   " comment TEXT, "
+            +   " camera INTEGER "
+            // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
+            // +   " ON DELETE CASCADE "
+            +   ")"
+          );
+
+          db.execSQL(
+              create_table + SENSOR_TABLE
+            + " ( surveyId INTEGER, "
+            +   " id INTEGER, " //  PRIMARY KEY AUTOINCREMENT, "
+            +   " shotId INTEGER, "
+            +   " status INTEGER default 0, "
+            +   " title TEXT, "
+            +   " date TEXT, "
+            +   " comment TEXT, "
+            +   " type TEXT, "
+            +   " value TEXT "
+            // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
+            // +   " ON DELETE CASCADE "
+            +   ")"
+          );
+
+          db.execSQL( 
+              create_table + AUDIO_TABLE
+            + " ( surveyId INTEGER, "
+            +   " id INTEGER, " // PRIMARY KEY AUTOINCREMENT, "
+            +   " shotId INTEGER, "
+            +   " date TEXT "
+            +   ")"
+          );
+
+          // db.execSQL(
+          //     " CREATE TRIGGER fk_insert_shot BEFORE "
+          //   + " INSERT on " + SHOT_TABLE 
+          //   + " FOR EACH ROW BEGIN "
+          //   +   " SELECT RAISE "
+          //   +   " (ROLLBACK, 'insert on \"" + SHOT_TABLE + "\" violates foreing key constraint')"
+          //   +   " WHERE ( SELECT id FROM " + SURVEY_TABLE + " WHERE id = NEW.surveyId ) IS NULL; "
+          //   + " END;"
+          // );
+          // db.execSQL(
+          //     "CREATE TRIGGER fk_delete_survey BEFORE DELETE ON " + SURVEY_TABLE
+          //   + " FOR EACH ROW BEGIN "
+          //   +   " SELECT RAISE "
+          //   +   " (ROLLBACK, 'delete from \"" + SURVEY_TABLE + "\" violates constraint')"
+          //   +   " WHERE ( id IS IN ( SELECT DISTINCT surveyId FROM " + SHOT_TABLE + " ) );"
+          //   + " END;"
+          // );
+
+          db.setTransactionSuccessful();
+          db.endTransaction();
+        // } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+        } catch ( SQLException e ) { TDLog.Error( "createTables exception: " + e.getMessage() );
+        // } finally {
+          // db.setLockingEnabled( true );
+        }
+     }
+
+     @Override
+     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
+     {  
+        // FIXME this is called at each start when the database file exists
+        TDLog.Log( TDLog.LOG_DB, "onUpgrade old " + oldVersion + " new " + newVersion );
+        switch ( oldVersion ) {
+          case 14: 
+            db.execSQL( "ALTER TABLE surveys ADD COLUMN declination REAL default 0" );
+            // db.execSQL( "ALTER TABLE gms ADD COLUMN status INTEGER default 0" );
+          case 15:
+            // db.execSQL( "ALTER TABLE devices ADD COLUMN name TEXT" );
+           case 16:
 // FIXME DEVICE_DB
 //              db.execSQL( "ALTER TABLE calibs ADD COLUMN coeff BLOB" );
 //            case 17:

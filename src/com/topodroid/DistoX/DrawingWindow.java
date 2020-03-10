@@ -1866,7 +1866,7 @@ public class DrawingWindow extends ItemDrawer
     // mSelectScale = 0;
     makeButtons( );
 
-    if ( ! TDLevel.overNormal ) {
+    if ( ! TDLevel.overBasic ) {
       mButton1[2].setVisibility( View.GONE );
       mButton2[2].setVisibility( View.GONE );
       mButton3[2].setVisibility( View.GONE );

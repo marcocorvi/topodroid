@@ -17,6 +17,13 @@ class AverageLeg
   int mCnt;
   float mDecl; // magnetic declination
 
+  // AverageLeg( AverageLeg leg ) // deep copy cstr
+  // {
+  //   mAverage = new Vector( leg.mAverage );
+  //   mCnt  = leg.mCnt;
+  //   mDecl = leg.mDecl;
+  // }
+
   AverageLeg( float decl )
   {
     mAverage = new Vector( 0, 0, 0 );
@@ -54,6 +61,13 @@ class AverageLeg
     mAverage.z += (l * TDMath.sind(c) );
     mCnt ++;
   }
+
+  // void reverse()
+  // { 
+  //   mAverage.x = - mAverage.x;
+  //   mAverage.y = - mAverage.y;
+  //   mAverage.z = - mAverage.z;
+  // }
 
   float length() { return mAverage.Length() / mCnt; }
 

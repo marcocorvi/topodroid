@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="500005"
-      android:versionName="5.0.0f"
+      android:versionCode="500013"
+      android:versionName="5.0.1d"
     >
     <!-- LETTER CODE must range a-j only: a=0, b=1, ... j=9 -->
 
@@ -62,6 +62,7 @@
           android:allowBackup="false"
 	  android:icon="@mipmap/ic_launcher"
 	  android:largeHeap="true"
+          android:requestLegacyExternalStorage="true"
 	  ><!-- FIXME-23 android:largeHeap="true"
                 FIXME-16 android:largeHeap="true"
                 FIXME-8 nothing
@@ -220,6 +221,24 @@
           android:configChanges="orientation|screenSize"
           >
         </activity>
+
+        <activity android:name=".TdManagerActivity"
+	  android:theme="@style/Theme.FullScreen"
+          android:configChanges="orientation|screenSize"
+          >
+        </activity>
+        <activity android:name=".TdmConfigActivity"
+	  android:theme="@style/Theme.FullScreen"
+          android:configChanges="orientation|screenSize"
+          >
+        </activity>
+        <activity android:name=".TdmViewActivity"
+	  android:theme="@style/Theme.FullScreen"
+          android:configChanges="orientation|screenSize"
+          >
+        </activity>
+
+
 
         <!-- receiver android:name=".PairingRequest">
           <intent-filter>

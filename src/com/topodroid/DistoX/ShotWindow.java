@@ -749,21 +749,21 @@ public class ShotWindow extends Activity
     } else if ( TDSetting.mWithSensors && TDLevel.overNormal && p++ == pos ) { // SENSORS
       mActivity.startActivity( new Intent( mActivity, SensorListActivity.class ) );
     } else if ( TDLevel.overBasic && p++ == pos ) { // 3D
-      if ( TopoDroidApp.exportSurveyAsThSync( ) ) { // make sure to have survey exported as therion
+      // if ( TopoDroidApp.exportSurveyAsThSync( ) ) { // make sure to have survey exported as therion
         try {
           Intent intent = new Intent( "Cave3D.intent.action.Launch" );
-          if ( TDSetting.mWithTdManager ) {
+          // if ( TDSetting.mWithTdManager ) {
             // Log.v("DistoX-Cave3D", "survey " + TDInstance.survey + " base " + TDPath.getPathBase() );
             intent.putExtra( "INPUT_SURVEY", TDInstance.survey );
             intent.putExtra( "SURVEY_BASE", TDPath.getPathBase() );
-          } else {
-            intent.putExtra( "INPUT_FILE", TDPath.getSurveyThFile( TDInstance.survey ) );
-          }
+          // } else {
+          //   intent.putExtra( "INPUT_FILE", TDPath.getSurveyThFile( TDInstance.survey ) );
+          // }
           mActivity.startActivity( intent );
         } catch ( ActivityNotFoundException e ) {
           TDToast.makeBad( R.string.no_cave3d );
         }
-      }
+      // }
     } else if ( TDLevel.overNormal && (! diving) && p++ == pos ) { // DEVICE
       if ( DeviceUtil.isAdapterEnabled() ) {
         mActivity.startActivity( new Intent( Intent.ACTION_VIEW ).setClass( mActivity, DeviceActivity.class ) );
@@ -1116,7 +1116,6 @@ public class ShotWindow extends Activity
     if ( mDataDownloader != null ) {
       mApp.registerLister( this );
     }
-
 
     // mSearch = new SearchResult();
   }

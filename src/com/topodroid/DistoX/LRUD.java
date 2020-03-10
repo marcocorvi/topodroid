@@ -22,4 +22,13 @@ class LRUD
     u = 0.0f; // up
     d = 0.0f; // down
   }
+
+  LRUD( LRUD lrud ) // copy cstr
+  {
+    l = lrud.l;
+    r = lrud.r;
+    u = lrud.u;
+    d = lrud.d;
+  }
+
 }

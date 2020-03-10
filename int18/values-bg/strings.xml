@@ -6,6 +6,7 @@
     <string name="user_man_fail">Грешка при инсталиране на ръководството</string>
 
     <string name="app_name">TopoDroid</string>
+    <!-- TODO string name="tdm_title">TopoDroid Manager</string -->
     <string name="double_back">Натиснете отново за да излезете</string>
 
     <!-- TODO string name="new_survey_label">New survey</string -->
@@ -235,6 +236,8 @@
     <string name="error_invalid_name">Грешно име</string>
     <string name="error_lat_required">Необходима геогр. широчина</string>
     <string name="error_long_required">Необходима геогр. дължина</string>
+    <!-- TODO string name="error_name_exists">Existing project</string -->
+    <!-- TODO string name="error_name_invalid">Invalid project name</string -->
     <string name="error_name_required">Необходимо име</string>
     <string name="error_dir_exists">Директорията вече съществува</string>
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
@@ -308,7 +311,7 @@
     <string name="no_sensors">Картировката не съдържа сензорни измервания</string>
     <!-- UNUSED string name="no_shots">Картировката не съдържа отсечки.\nИзползвайте бутона за изтегляне на данни</string -->
     <string name="no_survey">Не е избрана картировка</string>
-    <string name="no_thmanager">ThManager не е инсталирана</string>
+    <!-- UNUSED string name="no_thmanager">ThManager не е инсталирана</string -->
     <!-- UNUSED string name="no_db_viewer">Програмата SQliteViewer не е инсталирана</string -->
     <string name="no_undelete">Няма елементи за възстановяване</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Азимут %5$.1f"</string>
@@ -851,6 +854,15 @@
     <string name="help_cover">Показване на ъгловото разпределение на калибрацията</string>
     <string name="help_compute">Изчисляване на калибрация</string>
     <string name="help_write">Запис на калибр. коефициенти в DistoX</string>
+
+    <!-- TODO string name="help_add_surveys">Add surveys</string -->
+    <!-- TODO string name="help_drop_surveys">Drop surveys</string -->
+    <!-- TODO string name="help_view_surveys">Display surveys</string -->
+    <!-- TODO string name="help_view_equates">List equates</string -->
+    <!-- TODO string name="help_export_config">Export project</string -->
+    <!-- TODO string name="help_delete_config">Delete project</string -->
+    <!-- TODO string name="help_add_equate">Add surveys equate</string -->
+    <!-- TODO string name="help_equates">List surveys equates</string -->
   
     <!-- TODO string name="audio_paused">Paused</string -->
     <!-- TODO string name="audio_playing">Playing</string -->
@@ -917,6 +929,7 @@
     <!-- TODO string name="title_settings_svx">Survex export settings</string -->
     <!-- TODO string name="title_settings_th">Therion export settings</string -->
     <!-- TODO string name="title_settings_dat">Compass export settings</string -->
+    <!-- TODO string name="title_settings_csx">cSurvey export settings</string -->
     <!-- TODO string name="title_settings_tro">VisualTopo export settings</string -->
     <!-- TODO string name="title_settings_svg">SVG export settings</string -->
     <!-- TODO string name="title_settings_dxf">DXF export settings</string -->
@@ -1075,6 +1088,8 @@
   <string name="pref_svg_linedirstroke_summary">Широчина на помощни черти за посока на линия в SVG</string>
   <string name="pref_svg_line_dir_title">Посока на SVG линии</string>
   <string name="pref_svg_line_dir_summary">Добавяне на помощни черти за посока на линия в SVG експорт</string>
+  <!-- TODO string name="pref_svg_stationsize_title">Station size</string -->
+  <!-- TODO string name="pref_svg_stationsize_summary">Station names text size</string -->
   <string name="pref_kml_stations_title">KML репери</string>
   <string name="pref_kml_stations_summary">Добавяне на реперите в KML експорт</string>
   <string name="pref_kml_splays_title">KML странични измервания</string>
@@ -1469,5 +1484,43 @@
    <string name="firmware_file_uploaded">Качен файл %1$s с размер %2$d / %3$d</string>
    <!-- TODO string name="firmware_not_supported">Device does not support firmware functions</string -->
 
+    <!-- TODO string name="project">Project %1$s</string -->
+    <!-- TODO string name="no_editor">Editor not found</string -->
+    <!-- TODO string name="no_file">File not found</string -->
+    <!-- TODO string name="no_extra">Missing file extra</string -->
+    <!-- TODO string name="no_path">Missing filepath</string -->
+    <!-- TODO string name="no_equate">No equate</string -->
+    <!-- TODO string name="no_surveys">No surveys</string -->
+    <!-- TODO string name="no_tdconfig">Missing tdconfig file</string -->
+    <!-- TODO string name="no_th_file">No Therion file</string -->
+    <!-- TODO string name="file_exists">File exists</string -->
+    <!-- TODO string name="file_create_fail">File create fail</string -->
+    <!-- TODO string name="oom">Warning. Out of memory</string -->
+
+    <!-- TODO string name="ask_delete_tdconfig">Delete TdConfig file</string -->
+    <!-- TODO string name="ask_remove_equate">Remove equate %1$s ?</string -->
+    <!-- TODO string name="equate_no_station">No station selected</string -->
+    <!-- TODO string name="equate_no_stations">Too few stations</string -->
+    <!-- TODO string name="equate_no_nearby">No station nearby</string -->
+
+    <!-- TODO string name="menu_new">NEW</string -->
+    <!-- TODO string name="menu_equate">ADD EQUATE</string -->
+    <!-- TODO string name="menu_equates">EQUATES</string -->
+    <!-- TODO string name="menu_save">SAVE</string -->
+
+    <!-- TODO string name="overwrite">overwrite</string -->
+
+    <!-- TODO string name="title_help">TopoDroid Manager v. %1$s</string -->
+    <!-- TODO string name="title_export">Export project as ...</string -->
+    <!-- TODO string name="title_equates">Project Equates</string -->
+    <!-- TODO string name="title_equate_new">Add equate ...</string -->
+    <!-- TODO string name="title_cwd">Current Work Directory</string -->
+    <!-- TODO string name="title_settings">TdManager Settings</string -->
+    <!-- TODO string name="title_drop">Drop surveys ?</string -->
+    <!-- TODO string name="title_tdconfig">Enter project name</string -->
+    <!-- TODO string name="title_surveys">Surveys</string -->
+
+    <!-- TODO string name="exported">Saved file %1$s</string -->
+    <!-- TODO string name="export_failed">Failed export</string -->
 
 </resources>

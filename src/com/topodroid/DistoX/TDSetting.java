@@ -315,7 +315,7 @@ class TDSetting
 
   static int mThumbSize = 200;               // thumbnail size
   static boolean mWithSensors = false;       // whether sensors are enabled
-  static boolean mWithTdManager = false;       // whether TdManager is enabled
+  // static boolean mWithTdManager  = false;       // whether TdManager is enabled
   // static boolean mSplayActive = false;       // whether splays are attached to active station (if defined)
   // static boolean mWithRename  = false;       // whether survey rename is enabled
 
@@ -415,6 +415,7 @@ class TDSetting
   static float mSvgLineDirStroke = 2f;
   static float mSvgGridStroke    = 0.5f;
   static float mSvgShotStroke    = 0.5f;
+  static int   mSvgStationSize   = 20; 
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   /* FIXME_SKETCH_3D *
@@ -852,6 +853,7 @@ class TDSetting
     mSvgGridStroke     = tryFloat( prefs,      keyExpSvg[6],      defExpSvg[7] );  // DISTOX_SVG_GRID_STROKE
     mSvgShotStroke     = tryFloat( prefs,      keyExpSvg[8],      defExpSvg[8] );  // DISTOX_SVG_SHOT_STROKE
     mSvgLineDirStroke  = tryFloat( prefs,      keyExpSvg[9],      defExpSvg[9] );  // DISTOX_SVG_LINEDIR_STROKE
+    mSvgStationSize    = tryInt(   prefs,      keyExpSvg[10],     defExpSvg[10]);  // DISTOX_SVG_STATION_SIZE
 
 
     String[] keyExpKml = TDPrefKey.EXPORT_KML;
@@ -913,7 +915,7 @@ class TDSetting
     mWithAzimuth   = prefs.getBoolean( keyGShot[10], bool(defGShot[10]) ); // DISTOX_ANDROID_AZIMUTH
     mTimerWait     = tryInt(   prefs,  keyGShot[11],      defGShot[11] );  // DISTOX_SHOT_TIMER
     mBeepVolume    = tryInt(   prefs,  keyGShot[12],      defGShot[12] );  // DISTOX_BEEP_VOLUME
-    mWithTdManager = prefs.getBoolean( keyGShot[13], bool(defGShot[13]) ); // DISTOX_TDMANAGER
+    // mWithTdManager = prefs.getBoolean( keyGShot[13], bool(defGShot[13]) ); // DISTOX_TDMANAGER
 
     String[] keyGPlot = TDPrefKey.GEEKPLOT;
     String[] defGPlot = TDPrefKey.GEEKPLOTdef;
@@ -1338,8 +1340,8 @@ class TDSetting
       mBeepVolume       = tryIntValue( hlp, k, v, def[12] );
       if ( mBeepVolume <   0 ) { mBeepVolume =   0; ret =   TDString.ZERO; }
       if ( mBeepVolume > 100 ) { mBeepVolume = 100; ret = "100"; }
-    } else if ( k.equals( key[13 ] ) ) { // DISTOX_TDMANAGER
-      mWithTdManager = tryBooleanValue( hlp, k, v, bool(def[13]) );
+    // } else if ( k.equals( key[13 ] ) ) { // DISTOX_TDMANAGER
+    //   mWithTdManager = tryBooleanValue( hlp, k, v, bool(def[13]) );
 
     // } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_DIST_TOLERANCE
     //   mDistTolerance = tryFloatValue( hlp, k, v, def[ 9]  );
@@ -1777,6 +1779,9 @@ class TDSetting
     } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_SVG_LINEDIR_STROKE
       mSvgLineDirStroke  = tryFloatValue( hlp, k, v, def[9] );
       if ( mSvgLineStroke < 0.01f ) { mSvgLineStroke = 0.01f; ret = "0.01"; }
+    } else if ( k.equals( key[10] ) ) {  // DISTOX_SVG_STATION_SIZE
+      mSvgStationSize    = tryIntValue( hlp, k, v, def[10] );
+      if ( mSvgStationSize < 1 ) { mSvgStationSize = 1; ret = "1"; }
     // } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_BEZIER_STEP
     //   mBezierStep  = tryFloatValue( hlp, k, v, def[8] );
     } else {
@@ -2446,8 +2451,8 @@ class TDSetting
         tf(mTherionMaps), tf(mAutoStations), tf(mTherionSplays), tf(mTherionXvi), mToTherion );
       pw.printf(Locale.US, "PNG scale %.2f, bg color %d\n", mBitmapScale, mBitmapBgcolor );
       pw.printf(Locale.US, "DXF: acad version %d, blocks %c \n", mAcadVersion, tf(mDxfBlocks) );
-      pw.printf(Locale.US, "SVG: shot %.1f, label %.1f, point %.1f, round-trip %c grid %c %.1f, line %.1f, dir %c %.1f, splays %c\n",
-        mSvgShotStroke, mSvgLabelStroke, mSvgPointStroke,
+      pw.printf(Locale.US, "SVG: shot %.1f, label %.1f, station %d, point %.1f, round-trip %c grid %c %.1f, line %.1f, dir %c %.1f, splays %c\n",
+        mSvgShotStroke, mSvgLabelStroke, mSvgStationSize, mSvgPointStroke,
         tf(mSvgRoundTrip), tf(mSvgGrid), mSvgGridStroke, mSvgLineStroke, tf(mSvgLineDirection), mSvgLineDirStroke, tf(mSvgSplays) );
       pw.printf(Locale.US, "SHP: georef-plan %c\n", tf(mShpGeoref) );
       pw.printf(Locale.US, "KML: stations %c, splays %c\n", tf(mKmlStations), tf(mKmlSplays) );
@@ -2485,8 +2490,8 @@ class TDSetting
       pw.printf(Locale.US, "Extend: thr %.1f, manual %c, frac %c\n", mExtendThr, tf(mAzimuthManual), tf(mExtendFrac) );
       pw.printf(Locale.US, "Loop: %d \n", mLoopClosure );
       pw.printf(Locale.US, "Units: length %.2f [%s], angle %.2f [%s]\n", mUnitLength, mUnitLengthStr, mUnitAngle, mUnitAngleStr );
-      pw.printf(Locale.US, "ThumbSize %d, SavedStations %c, WithAzimuth %c, WithSensors %c, Bedding %c TdManager %c\n",
-        mThumbSize, tf(mSavedStations), tf(mWithAzimuth), tf(mWithSensors), tf(mBedding), tf(mWithTdManager) );
+      pw.printf(Locale.US, "ThumbSize %d, SavedStations %c, WithAzimuth %c, WithSensors %c, Bedding %c \n", // TdManager %c\n",
+        mThumbSize, tf(mSavedStations), tf(mWithAzimuth), tf(mWithSensors), tf(mBedding) ); // , tf(mWithTdManager) );
 
       pw.printf(Locale.US, "Plot: zoom %d, drag %c, fix-origin %c, split %c, shift %c, levels %d\n",
         mZoomCtrl, tf(mSideDrag), tf(mFixedOrigin), tf(mPlotSplit), tf(mPlotShift), mWithLevels );
