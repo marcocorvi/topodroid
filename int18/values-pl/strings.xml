@@ -177,7 +177,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- TODO string name="import_bad">Invalid import file</string -->
     <string name="import_none">Brak pliku do importu</string>
     <string name="import_failed">Błąd importu pliku</string>
-    <string name="file_not_found">File not found</string>
+    <!-- TODO string name="file_not_found">File not found</string -->
     <string name="import_calib_ok">Pomyślny import kalibracji</string>
     <string name="import_calib_no_header">Plik kalibracji: zły nagłówek</string>
     <string name="import_calib_already">Kalibracja już istnieje</string>
@@ -529,7 +529,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="toggle_device">Toggle device calibration mode</string -->
     <string name="toggle_failed">Nie można przełączyć DistoX</string>
     <string name="toggle_ok">Przełączono tryb kalibracji DistoX</string>
-    <string name="undelete_text">Tap item to recover</string>
+    <!-- TODO string name="undelete_text">Tap item to recover</string -->
     <string name="undelete_shot">Pomiary</string>
     <string name="undelete_overshoot">Niecelne pomiary</string>
     <string name="undelete_check">Sprawdzenie</string>
@@ -619,10 +619,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- TODO string name="button_duplicate" >Duplicate </string -->
     <!-- TODO string name="button_surface"   >Surface   </string -->
     <!-- TODO string name="button_no_extend" >No extend </string -->
-    <string name="button_eval"      >Eval      </string>
+    <!-- TODO string name="button_eval"      >Eval      </string -->
     <string name="button_evalg"     >G      </string>
     <string name="button_evalm"     >M      </string>
-    <string name="button_eval_cal"  >Eval w. calib.</string>
+    <!-- TODO string name="button_eval_cal"  >Eval w. calib.</string -->
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
     <!-- TODO string name="button_manual"    >User Manual</string -->
@@ -687,7 +687,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="mode_latest">Ostatnie domiary</string>
     <string name="mode_station">Stacje</string>
     <string name="mode_grid">Siatka</string>
-    <string name="mode_fixed">Fix refs</string>
+    <!-- TODO string name="mode_fixed">Fix refs</string -->
     <string name="mode_outline">Tylko kontur</string>
     <string name="mode_scale_ref">Skaluj pasek referencji</string>
 
@@ -715,15 +715,15 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="btn_import">Importuj</string>
     <string name="btn_install">Instaluj</string>
 
-    <string name="symbol_archeo">Archeo</string>
+    <!-- TODO string name="symbol_archeo">Archeo</string -->
     <!-- TODO string name="symbol_anthro">Anthro</string -->
-    <string name="symbol_bio">Biology</string>
-    <string name="symbol_geo">Geology</string>
-    <string name="symbol_karst">Karst</string>
-    <string name="symbol_mine">Mining</string>
-    <string name="symbol_paleo">Paleo</string>
-    <string name="symbol_speleo">Speleo</string>
-    <string name="symbol_extra">Speleo (2)</string>
+    <!-- TODO string name="symbol_bio">Biology</string -->
+    <!-- TODO string name="symbol_geo">Geology</string -->
+    <!-- TODO string name="symbol_karst">Karst</string -->
+    <!-- TODO string name="symbol_mine">Mining</string -->
+    <!-- TODO string name="symbol_paleo">Paleo</string -->
+    <!-- TODO string name="symbol_speleo">Speleo</string -->
+    <!-- TODO string name="symbol_extra">Speleo (2)</string -->
 
     <string name="symbol_reload">Narzędzia rysowania</string>
 
@@ -756,8 +756,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="man_xsection">11. Przekroje</string>
     <string name="man_overview">12. Okno podglądu</string>
     <string name="man_export">13. Import/eksport</string>
-    <string name="man_threed">14. Przeglądarka 3D</string>
-    <string name="man_index">15. Indeks</string>
+    <!-- TODO string name="man_project">14. Cave projects</string -->
+    <string name="man_threed">15. Przeglądarka 3D</string>
+    <string name="man_index">16. Indeks</string>
     <string name="man_website">* Strona WWW</string>
 
     <string name="help_help">Ta pomoc</string>
@@ -780,7 +781,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_add_topodroid">Nowy ciąg/kalibracja</string>
     <string name="help_import">Import archiwum ZIP lub pliku ciągu</string>
     <string name="help_symbol">Zestaw narzędzi do rysowania</string>
-    <string name="help_therion">menadżer apki Therion</string>
+    <!-- TODO string name="help_therion">Cave project manager</string -->
     <!-- UNUSED string name="help_database">Database viewer app (SQliteViewer)</string -->
     <string name="help_prefs">Preferencje</string>
     <string name="help_log">Preferencje rejestrowania</string>
@@ -869,6 +870,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_compute">Oblicz kalibrację</string>
     <string name="help_write">Zapisz współczynniki kalibracji w DistoX</string>
 
+    <!-- TODO string name="help_add_project">Add cave project</string -->
     <!-- TODO string name="help_add_surveys">Add surveys</string -->
     <!-- TODO string name="help_drop_surveys">Drop surveys</string -->
     <!-- TODO string name="help_view_surveys">Display surveys</string -->
@@ -1185,8 +1187,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_vert_splay_title">Linia kreskowana progu upadu</string>
   <string name="pref_vert_splay_message">Upad nad progiem kreskowany</string>
   <string name="pref_horiz_splay_title">Linia kreskowana progu azymutu</string>
-  <string name="pref_horiz_splay_message">Splay off azimuth more than this are dashed</string>
-  <string name="pref_section_splay_title">Splay dash angle-threshold</string>
+  <!-- TODO string name="pref_horiz_splay_message">Splay off azimuth more than this are dashed</string -->
+  <!-- TODO string name="pref_section_splay_title">Splay dash angle-threshold</string -->
   <string name="pref_section_splay_message">Domiary nad katem w płaszczyznie przekroju kreskowane</string>
   <string name="pref_data_backup_title">Automatyczny eksport danych</string>
   <string name="pref_data_backup_summary">Automatyczny eksport danych (wymagany domyślny format)</string>
@@ -1228,7 +1230,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_azimuth_manual_title">Ustalone rozszerzone odniesienie</string>
   <string name="pref_azimuth_manual_summary">Ustalone R/L albo "ustawialne" rozszerzone odniesienie</string>
 
-  <string name="pref_team_title">Team</string>
+  <!-- TODO string name="pref_team_title">Team</string -->
   <string name="pref_team_summary">Domyślny team pomiarowy</string>
 
   <string name="pref_ethr_title">Pionowy domiar progu</string>

@@ -759,8 +759,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="man_xsection">11. Cross-sections</string>
     <string name="man_overview">12. Overview window</string>
     <string name="man_export">13. Import/export</string>
-    <string name="man_threed">14. 3D viewer</string>
-    <string name="man_index">15. Index</string>
+    <string name="man_project">14. Cave projects</string>
+    <string name="man_threed">15. 3D viewer</string>
+    <string name="man_index">16. Index</string>
     <string name="man_website">* Website</string>
 
     <string name="help_help">This help</string>
@@ -783,7 +784,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_add_topodroid">New survey/calibration</string>
     <string name="help_import">Import zip archive or survey file</string>
     <string name="help_symbol">Drawing tools sets</string>
-    <string name="help_therion">Therion manager app</string>
+    <string name="help_therion">Cave project manager</string>
     <!-- UNUSED string name="help_database">Database viewer app (SQliteViewer)</string -->
     <string name="help_prefs">Preferences</string>
     <string name="help_log">Logging preferences</string>
@@ -842,12 +843,12 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_zoom_fit">Fit sketch to screen</string>
    
     <string name="help_line_point">Line point actions: join, split, cut, remove</string>
-<!--
-    <string name="help_to_point">Move selected point to join with the nearest point</string>
-    <string name="help_split_point">Split the point into two [line/area]</string>
-    <string name="help_split_line">Split the line into two at the point</string>
-    <string name="help_kink">Use a straight line at the point [line/area]</string>
--->
+
+    <!-- UNUSED string name="help_to_point">Move selected point to join with the nearest point</string -->
+    <!-- UNUSED string name="help_split_point">Split the point into two [line/area]</string -->
+    <!-- UNUSED string name="help_split_line">Split the line into two at the point</string -->
+    <!-- UNUSED string name="help_kink">Use a straight line at the point [line/area]</string -->
+
     <string name="help_manual_calibration">Manual instruments calibration</string>
     <string name="help_note_plot">Sketch item properties</string>
     <!-- UNUSED string name="help_save">Save changes to survey info</string -->
@@ -872,6 +873,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_compute">Compute calibration</string>
     <string name="help_write">Write calibration coefficients to the DistoX</string>
 
+    <string name="help_add_project">Add cave project</string>
     <string name="help_add_surveys">Add surveys</string>
     <string name="help_drop_surveys">Drop surveys</string>
     <string name="help_view_surveys">Display surveys</string>

@@ -741,8 +741,9 @@
     <string name="man_xsection">11. Sezioni-X</string>
     <string name="man_overview">12. Finestra panoramica</string>
     <string name="man_export">13. Importa/esporta</string>
-    <string name="man_threed">14. Visualizzatore 3D</string>
-    <string name="man_index">15. Indice</string>
+    <!-- TODO string name="man_project">14. Cave projects</string -->
+    <string name="man_threed">15. Visualizzatore 3D</string>
+    <string name="man_index">16. Indice</string>
     <string name="man_website">* Sito_Web</string>
 
     <string name="help_help">Questo aiuto</string>
@@ -765,7 +766,7 @@
     <string name="help_add_topodroid">Nuovo rilievo/calibr.</string>
     <string name="help_import">Importa zip o file dati rilievo</string>
     <string name="help_symbol">Attiva/disattiva prototipi grafici</string>
-    <string name="help_therion">App Therion manager</string>
+    <!-- TODO string name="help_therion">Cave project manager</string -->
     <!-- UNUSED string name="help_database">App database (SQliteViewer)</string -->
     <string name="help_prefs">Preferenze</string>
     <string name="help_log">Attiva/disattiva opzioni di log</string>
@@ -853,6 +854,7 @@
     <string name="help_compute">Calcola calibrazione</string>
     <string name="help_write">Scrivi calibrazione sul DistoX</string>
 
+    <!-- TODO string name="help_add_project">Add cave project</string -->
     <!-- TODO string name="help_add_surveys">Add surveys</string -->
     <!-- TODO string name="help_drop_surveys">Drop surveys</string -->
     <!-- TODO string name="help_view_surveys">Display surveys</string -->
@@ -1242,7 +1244,7 @@
   <string name="pref_shot_timer_title">Timer direzioni</string>
   <string name="pref_shot_timer_summary">Secondi di attesa prima della misura</string>
   <string name="pref_beep_volume_title">Volume timer</string>
-  <string name="pref_beep_volume_summary">Percent timer-beep volume</string>
+  <!-- TODO string name="pref_beep_volume_summary">Percent timer-beep volume</string -->
   <string name="pref_extend_frac_title">Extend frazionario</string>
   <string name="pref_extend_frac_summary">Se gli "extend" possono avere decimali</string>
   <string name="pref_recent_shot_title">Tiri recenti</string>

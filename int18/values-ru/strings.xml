@@ -747,8 +747,9 @@
     <string name="man_xsection">11. Поперечные сечения</string>
     <string name="man_overview">12. Окно обзора</string>
     <string name="man_export">13. Импорт-Экспорт</string>
-    <string name="man_threed">14. Просмотр в 3D</string>
-    <string name="man_index">15. Индекс</string>
+    <!-- TODO string name="man_project">14. Cave projects</string -->
+    <string name="man_threed">15. Просмотр в 3D</string>
+    <string name="man_index">16. Индекс</string>
     <string name="man_website">* Website</string>
 
     <string name="help_help">Помощь</string>
@@ -771,7 +772,7 @@
     <string name="help_add_topodroid">Создать новую съёмку/калибровку</string>
     <string name="help_import">Импорт zip архива или файла съёмки</string>
     <string name="help_symbol">Вкл/Выкл инструментов рисования</string>
-    <string name="help_therion">Therion менеджер</string>
+    <!-- TODO string name="help_therion">Cave project manager</string -->
     <!-- UNUSED string name="help_database">Просмотр базы данных (SQliteViewer)</string -->
     <string name="help_prefs">Изменить настройки</string>
     <string name="help_log">Вкл/Выкл настройки журнала</string>
@@ -859,6 +860,7 @@
     <string name="help_compute">Рассчитать калибровку</string>
     <string name="help_write">Записать коэффициенты калибровки в DistoX</string>
 
+    <!-- TODO string name="help_add_project">Add cave project</string -->
     <!-- TODO string name="help_add_surveys">Add surveys</string -->
     <!-- TODO string name="help_drop_surveys">Drop surveys</string -->
     <!-- TODO string name="help_view_surveys">Display surveys</string -->

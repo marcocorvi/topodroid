@@ -744,8 +744,9 @@
     <string name="man_xsection">11. Secțiuni transversale</string>
     <string name="man_overview">12. Fereastră ansamblu</string>
     <string name="man_export">13. Import/export</string>
-    <string name="man_threed">14. Vizualizare 3D</string>
-    <string name="man_index">15. Index</string>
+    <!-- TODO string name="man_project">14. Cave projects</string -->
+    <string name="man_threed">15. Vizualizare 3D</string>
+    <string name="man_index">16. Index</string>
     <string name="man_website">* Site web</string>
 
     <string name="help_help">Acest manual</string>
@@ -768,7 +769,7 @@
     <string name="help_add_topodroid">Cartare/calibrare nouă</string>
     <string name="help_import">Importă arhivă zip sau fițier cartare</string>
     <string name="help_symbol">Desenul seturilor de uneltele~</string>
-    <string name="help_therion">Aplicația Therion manager</string>
+    <!-- TODO string name="help_therion">Cave project manager</string -->
     <!-- UNUSED string name="help_database">Aplicația de viz. a bazei de date (SQliteViewer)</string -->
     <string name="help_prefs">Preferințe</string>
     <string name="help_log">Preferințe înregistrare jurnal</string>
@@ -856,6 +857,7 @@
     <string name="help_compute">Calcularea calibrarea</string>
     <string name="help_write">Scrierea coeficienții calibrării în DistoX</string>
 
+    <!-- TODO string name="help_add_project">Add cave project</string -->
     <!-- TODO string name="help_add_surveys">Add surveys</string -->
     <!-- TODO string name="help_drop_surveys">Drop surveys</string -->
     <!-- TODO string name="help_view_surveys">Display surveys</string -->

@@ -72,6 +72,8 @@ public class TdManagerActivity extends Activity
   Button[] mButton1;
   int mButtonSize = 42;
 
+  private static final int HELP_PAGE = R.string.TdManager;
+
   @Override
   public void onCreate( Bundle savedInstanceState )
   {
@@ -107,17 +109,20 @@ public class TdManagerActivity extends Activity
   int mNrButton1 = 1;
   private static int izons[] = { 
     R.drawable.iz_plus,
-    // R.drawable.iz_options,
-    // R.drawable.iz_help,
-    // R.drawable.iz_exit,
+  };
+  private static final int[] help_icons = { 
+    R.string.help_add_project,
   };
 
   int mNrMenus   = 2;
   private static int menus[] = { 
-  //   R.string.menu_new,
-  //   R.string.menu_options,
     R.string.menu_close,
-    R.string.menu_help
+    // R.string.menu_options,
+    R.string.menu_help,
+  };
+  private static final int[] help_menus = {
+    R.string.help_close,
+    R.string.help_help,
   };
 
   private void resetButtonBar()
@@ -179,7 +184,8 @@ public class TdManagerActivity extends Activity
     if ( p++ == pos ) { // CLOSE
       finish();
     } else if ( p++ == pos ) { // HELP
-      new TdmHelpDialog( this ).show();
+      // new TdmHelpDialog( this ).show();
+      new HelpDialog( this, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE )).show();
     }
   }
 

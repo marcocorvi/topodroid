@@ -759,8 +759,9 @@
     <string name="man_xsection">11. 横截面</string>
     <string name="man_overview">12. 概览窗口</string>
     <string name="man_export">13. 输入/输出</string>
-    <string name="man_threed">14. 3D 视图器</string>
-    <string name="man_index">15. 索引</string>
+    <!-- TODO string name="man_project">14. Cave projects</string -->
+    <string name="man_threed">15. 3D 视图器</string>
+    <string name="man_index">16. 索引</string>
     <string name="man_website">* 网站</string>
 
     <string name="help_help">帮助</string>
@@ -783,7 +784,7 @@
     <string name="help_add_topodroid">新建测量/新建校准</string>
     <string name="help_import">输入压缩的存档或者测量文件</string>
     <string name="help_symbol">绘图工具设置</string>
-    <string name="help_therion">Therion 管理软件</string>
+    <!-- TODO string name="help_therion">Cave project manager</string -->
     <!-- UNUSED string name="help_database">Database viewer app (SQliteViewer)</string -->
     <string name="help_prefs">编辑参考选项</string>
     <string name="help_log">日志偏好设置</string>
@@ -872,6 +873,7 @@
     <string name="help_compute">计算校准</string>
     <string name="help_write">将校准系数写入DistoX</string>
 
+    <!-- TODO string name="help_add_project">Add cave project</string -->
     <!-- TODO string name="help_add_surveys">Add surveys</string -->
     <!-- TODO string name="help_drop_surveys">Drop surveys</string -->
     <!-- TODO string name="help_view_surveys">Display surveys</string -->

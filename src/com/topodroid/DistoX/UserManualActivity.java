@@ -132,6 +132,7 @@ public class UserManualActivity extends Activity
     adapter.add( getResources().getString( R.string.man_xsection ) );
     adapter.add( getResources().getString( R.string.man_overview ) );
     adapter.add( getResources().getString( R.string.man_export ) );
+    adapter.add( getResources().getString( R.string.man_project ) );
     adapter.add( getResources().getString( R.string.man_threed ) );
     adapter.add( getResources().getString( R.string.man_index ) );
     adapter.add( getResources().getString( R.string.man_website ) );
@@ -164,7 +165,7 @@ public class UserManualActivity extends Activity
     CharSequence item = ((TextView) view).getText();
     // Log.v("DistoX", "click " + item + " pos " + pos);
     mList.setVisibility( View.GONE );
-    if ( pos <= 15 ) {
+    if ( pos <= 16 ) {
       mCloseOnBack = 0;
       load( String.format(Locale.US, "manual%02d.htm", pos ) );
     } else {

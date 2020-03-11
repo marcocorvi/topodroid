@@ -744,7 +744,7 @@
     <string name="btn_horizontal">Horizontal</string>
 
     <string name="split_nothing">Nichts aufzuteilen</string>
-    <string name="flip_shots">Flip shots</string>
+    <!-- TODO string name="flip_shots">Flip shots</string -->
     <string name="copy_items">Kopieren</string>
 
     <string name="man_preface">Einführung</string>
@@ -761,8 +761,9 @@
     <string name="man_xsection">11. Querschnitte</string>
     <string name="man_overview">12. Skizzen-Übersicht</string>
     <string name="man_export">13. Import/Export</string>
-    <string name="man_threed">14. 3D-Anzeige</string>
-    <string name="man_index">15. Index</string>
+    <!-- TODO string name="man_project">14. Cave projects</string -->
+    <string name="man_threed">15. 3D-Anzeige</string>
+    <string name="man_index">16. Index</string>
     <string name="man_website">* Topodroid Webseite</string>
 <!-- HELP STRINGS CAN BE LEFT UNTRANSLATED FOR NOW -->
     <string name="help_help">Diese Hilfe</string>
@@ -785,7 +786,7 @@
     <string name="help_add_topodroid">Neue Vermessung/Kalibrierung starten</string>
     <string name="help_import">Zip oder Datei importieren</string>
     <string name="help_symbol">Zeichenwerkzeuge (de)aktivieren</string>
-    <string name="help_therion">Therion Manager App</string>
+    <!-- TODO string name="help_therion">Cave project manager</string -->
     <!-- UNUSED string name="help_database">Databanken App (SQliteViewer)</string -->
     <string name="help_prefs">Einstellungen bearbeiten</string>
     <string name="help_log">Logging-Einstellungen aktivieren</string>
@@ -874,6 +875,7 @@
     <string name="help_compute">Kalibrierungs-Koeffizienten berechnen</string>
     <string name="help_write">Kalibrierungs-Koeffizienten auf den DistoX speichern</string>
 
+    <!-- TODO string name="help_add_project">Add cave project</string -->
     <!-- TODO string name="help_add_surveys">Add surveys</string -->
     <!-- TODO string name="help_drop_surveys">Drop surveys</string -->
     <!-- TODO string name="help_view_surveys">Display surveys</string -->
@@ -1315,8 +1317,8 @@
   <string name="pref_path_multiselect_summary">Erlaube mehrere Pfade auszuwählen</string>
   <string name="pref_composite_actions_title">Zusammengesetzte Aktionen</string>
   <string name="pref_composite_actions_summary">Erlaube zusammengsetzte Aktionen für Linien/Flächen</string>
-  <string name="pref_plane_interpolation_title">Plane interpolation</string>
-  <string name="pref_plane_interpolation_summary">Plane interpolation action</string>
+  <!-- TODO string name="pref_plane_interpolation_title">Plane interpolation</string -->
+  <!-- TODO string name="pref_plane_interpolation_summary">Plane interpolation action</string -->
   <string name="pref_plot_split_title">Skizzen aufteilen</string>
   <string name="pref_plot_split_summary">Erlaube Skizzen aufzuteilen</string>
   <string name="pref_fixed_thickness_title">Liniendicke Messstrecke</string>

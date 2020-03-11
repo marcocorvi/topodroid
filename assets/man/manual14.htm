@@ -1,66 +1,84 @@
 <html><body>
-<h3>[14] 3D VIEWER</h3>
+<h3>[14] CAVE PROJECTS</h3>
 
-<b>Cave3D</b> is a 3d viewer for Therion projects, Loch files, Compass files or projects, and VisualTopo files.<br>
-TopoDroid uses it to display the 3D model of the survey.
-When you select 3D menu of the survey <a href="manual06.htm">data window</a>, the survey data is saved to a Therion file,
-which is opened in Cave3D displaying the 3D model.<br><p>
+<b>CAVE PROJECT MANAGER</b><br>
+This window is accessed from the button of the <i>Main Window</i>.<br><p>
 
-The model is shown with a reference grid (blue north, green east) or triplet (pink upward).<br><p>
+A cave project aggregates surveys that are in the TopoDroid database.
+The "cave projects" are stored in Therion-like files in the "tdconfig" folder of TopoDroid.
+A project file is saved whenever the project is closed.
+Projects can be exported as Therion or Survex files; exports are saved in the "th" and "svx" folders,
+respectively.
 
+
+When you start TopoDroid Manager it displays the list of cave projects in the "tdconfig" folder.
+The project list is empty if you have not created any project yet.
 
 <h4>BUTTONS</h4>
 <ul style="margin-top:0">
-<li><i>Tilt - Move</i>: green arrow switches the view between rotation and move modes.</li>
-<li><i>Stations</i>: button displays and hides station numbers.</li>
-<li><i>Splays</i>: button will display and hide splay shots. Splays are shown as lines or as endpoints.</li>
-<li><i>Walls</i>: button will display or hide wall models if there is any.</li>
-<li><i>Projections</i>: display the plan view built from the wall 3D reconstruction, projected on the grid plane, and/or the profile curtain</li>
-<li><i>Surface</i>: button will display surface.  Works only if ASCII surface data is specified in .th file.</li>
-<li><i>Color</i>: button will change color-coding of centreline from all grey to survey and depth.</li>
-<li><i>Grid</i>: button will switch between underlying grid or X, Y, Z axis.</li>
+<li><i>New cave</i>: opens a dialog to create a new cave project</li>
 </ul><br><p>
 
 <h4>MENU</h4>
 <ul style="margin-top:0">
-<li><i>Open file</i>: opens a dialogue to select a .th file from th subfolder in TopoDroid working directory.</li>
-<li><i>Export</i>: opens the export dialogue. Model can be exported into Therion, KML, STL or STL-bin formats, CGAL and LAS.
-There are options to include splays, walls, stations and surface in export. The model can be also serialized in a text file.</li>
-<li><i>Info</i>: will display survey statistics.</li>
-<li><i>Ico diagram</i>: displays ICO diagram.</li>
-<li><i>Rose diagram</i>: displays azimuth rose diagram.</li>
-<li><i>Viewpoint</i>: will let you select a point of view.</li>
-<li><i>Reset</i>: center the 3D model in top-view and zoom to fit it in the screen</li>
-<li><i>Wall models</i>: create or clear a wall 3D reconstruction.</li>
-<li><i>Options</i></li>
-<li><i>Help</i></li>
+<li><i>Close</i> the Cave Project Manager window</li>
+<li><i>Help</i> this help</li>
 </ul><br><p>
 
-<h4>OPTIONS</h4>
+Tapping on a project name opens the <i>Project Window</i>.<br><p>
+
+<b>CAVE PROJECT</b><br>
+The 
+<a href="page_tdm_config.htm">project window</a> lists the surveys included in the cave project.
+When a cave project is first created it does not have any survey, and the list is empty.
+To the left of each survey there is selection a checkbox.<br><p>
+
+<h4>BUTTONS</h4>
 <ul style="margin-top:0">
-  <li><i>Base path</i>: Directory containing the Therion/Loch files</li>
-  <li><i>Text size</i>: Station label text size</li>
-  <li><i>Buttons size</i>: Buttons size</li>
-  <li><i>Selection radius</i>: Radius of selection</li>
-  <li><i>Top grid</i>: Show the grid on the top</li>
-  <li><i>Projections</i>: Whether to use precompute projections</li>
-  <li><i>All splay</i>: Whether to use all the splays for the walls</li>
-  <li><i>Split triangles</i>: Whether to split intersecting wall triangles</li>
-  <li><i>Randomize points</i>: Add a small random vector to splays</li>
-  <li><i>Stretch walls</i>: Shift wall points by a small quantity along the leg</li>
+<li><i>Add surveys</i>: opens a dialog to select the surveys from TopoDroid database, that must be included in the cave project.</li>
+<li><i>Drop surveys</i>: remove from the cave project the selected surveys.</li>
+<li><i>View surveys</i>: displays the selected surveys in plan view.</li>
+<li><i>List equates</i> between surveys of the cave  project</li>
+<li><i>3D viewer</i></li>
 </ul><br><p>
 
-<b>Wall model</b><br>
-The wall envelope is not computed automatically when the file is opened, but it must be
-requested by the user thru the <i>Wall models</i> menu.
-There are two models: pseudo conevx-hull, and powercrust. The first is good when the splay are not dense. The second is for dense splays.<br>
-After the wall has been computed it can be displayed with the "wall" button.<br><p>
+<h4>MENU</h4>
+<ul style="margin-top:0">
+<li><i>Close</i> the Cave Project window</li>
+<li><i>Export</i> the cave project (as Therion or Survex)</li>
+<li><i>Delete</i> the cave project</li>
+<li><i>Help</i> this help</li>
+</ul><br><p>
 
-<b>Station actions</b><br>
-When the stations are displayed, they can be selected tapping on the station.
-The selected station can be set as origin of the model ("center"), or the distance from 
-another station can be measured.<br><p>
+The plan view of the selected surveys is displayed in the <i>Surveys View Window</i>.<br><p>
 
-<a href="manual13.htm">&lt; Import/Export</a>
+
+<b>SURVEYS VIEW WINDOW</b><br>
+
+The survey are displayed in plan view, with midline and station names.
+Each survey has a different color. After a while the colors repeat therefore you should display
+only two or three surveys at a time.
+Equates are shown as dashed red lines, and equated stations have a round background.
+The view can be panned and zoomed.
+A survey can be grabbed (tap on a station: it gets circled) and dragged around while the other surveys do not move.
+In this way you can overlap stations of different surveys that you want to equate.
+When they overlap circle them both by tapping the point: you can then insert the equate between them with the menu "add equate".
+
+<h4>BUTTONS</h4>
+<ul style="margin-top:0">
+<li><i>Add equate</i>: opens a dialog to manually add an equate between surveys of the cave project.</li>
+<li><i>List equates</i> between surveys of the cave  project</li>
+</ul><br><p>
+
+<h4>MENU</h4>
+<ul style="margin-top:0">
+<li><i>Close</i> the Cave Project window</li>
+<li><i>Help</i> this help</li>
+</ul><br><p>
+
+You can drop an equate by tapping its entry in the dialog listing the equates of the cave project.<br><p>
+
+<a href="manual13.htm">&lt; Import/Export</a> | 
+<a href="manual15.htm">3D Viewer &gt;</a>
 
 </body></html>

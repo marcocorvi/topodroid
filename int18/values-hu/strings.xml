@@ -745,8 +745,9 @@
     <!-- TODO string name="man_xsection">11. Cross-sections</string -->
     <!-- TODO string name="man_overview">12. Overview window</string -->
     <!-- TODO string name="man_export">13. Import/export</string -->
-    <!-- TODO string name="man_threed">14. 3D viewer</string -->
-    <!-- TODO string name="man_index">15. Index</string -->
+    <!-- TODO string name="man_project">14. Cave projects</string -->
+    <!-- TODO string name="man_threed">15. 3D viewer</string -->
+    <!-- TODO string name="man_index">16. Index</string -->
     <!-- TODO string name="man_website">* Website</string -->
 
     <string name="help_help">Ez a súgó</string>
@@ -769,7 +770,7 @@
     <string name="help_add_topodroid">Új felmérés/kalibráció létrehozása</string>
     <string name="help_import">ZIP archívum, vagy felmérés importálása</string>
     <string name="help_symbol">Rajzeszközök engedélyezése/tiltása</string>
-    <string name="help_therion">Therion manager alkalmazás</string>
+    <!-- TODO string name="help_therion">Cave project manager</string -->
     <!-- UNUSED string name="help_database">Database viewer app (SQliteViewer)</string -->
     <string name="help_prefs">Preferenciák szerkesztése</string>
     <string name="help_log">Naplózási beállítások engedélyezése/tiltása</string>
@@ -855,6 +856,7 @@
     <string name="help_compute">Kalibráció számítása</string>
     <string name="help_write">Kalibrációs együttható feltöltése a DistoX-be</string>
 
+    <!-- TODO string name="help_add_project">Add cave project</string -->
     <!-- TODO string name="help_add_surveys">Add surveys</string -->
     <!-- TODO string name="help_drop_surveys">Drop surveys</string -->
     <!-- TODO string name="help_view_surveys">Display surveys</string -->

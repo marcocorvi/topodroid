@@ -616,7 +616,7 @@
     <string name="button_eval"      >Eval      </string>
     <string name="button_evalg"     >G      </string>
     <string name="button_evalm"     >M      </string>
-    <string name="button_eval_cal"  >Eval w. calib.</string>
+    <!-- TODO string name="button_eval_cal"  >Eval w. calib.</string -->
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
     <!-- TODO string name="button_manual"    >User Manual</string -->
@@ -751,8 +751,9 @@
     <string name="man_xsection">11. Secciones transversales </string>
     <string name="man_overview">12. Pantalla de descripción general </string>
     <string name="man_export">13.  Importar / exportar </string>
-    <string name="man_threed">14. Visor Cave3D </string>
-    <string name="man_index">15. Índice </string>
+    <!-- TODO string name="man_project">14. Cave projects</string -->
+    <string name="man_threed">15. Visor Cave3D </string>
+    <string name="man_index">16. Índice </string>
     <string name="man_website">* Sitio web </string>
 
     <string name="help_help">Ayuda</string>
@@ -775,7 +776,7 @@
     <string name="help_add_topodroid">Crear nueva Topografía/calibración</string>
     <string name="help_import">Importar archivo zip o Therion</string>
     <string name="help_symbol">Activar/desactivar los símbolos de dibujo</string>
-    <string name="help_therion">Administrador de aplicación Therion</string>
+    <!-- TODO string name="help_therion">Cave project manager</string -->
     <!-- UNUSED string name="help_database">Aplicación Database viewer(SQliteViewer)</string -->
     <string name="help_prefs">Editar preferencias</string>
     <string name="help_log">Activar/desactivar las opciones de registro</string>
@@ -863,6 +864,7 @@
     <string name="help_compute">Cálculo de calibración</string>
     <string name="help_write">Enviar calibración a DistoX</string>
 
+    <!-- TODO string name="help_add_project">Add cave project</string -->
     <!-- TODO string name="help_add_surveys">Add surveys</string -->
     <!-- TODO string name="help_drop_surveys">Drop surveys</string -->
     <!-- TODO string name="help_view_surveys">Display surveys</string -->
@@ -897,7 +899,7 @@
     <string name="title_search">Búsqueda de estación/trayecto</string>
     <string name="title_dangling">Tomas no adjuntadas</string>
     <string name="title_device">Dispositivo DistoX</string>
-    <string name="title_device_select">Select DistoX device</string>
+    <!-- TODO string name="title_device_select">Select DistoX device</string -->
     <string name="title_discover">Buscar dispositivos DistoX &#8230; espere</string>
     <!-- UNUSED string name="title_draw">Dibujo</string -->
     <string name="title_draw_area">Área %1$s</string>
@@ -1114,7 +1116,7 @@
   <string name="pref_kml_stations_summary">Añadir estaciones a la exportación de KML</string>
   <string name="pref_kml_splays_title">Tomas radiales en KML</string>
   <string name="pref_kml_splays_summary">Añadir tomas radiales a la exportación de KML</string>
-  <string name="pref_csv_raw_title">Raw CSV</string>
+  <!-- TODO string name="pref_csv_raw_title">Raw CSV</string -->
   <string name="pref_csv_raw_summary">Exportar datos raw a CSV</string>
   <string name="pref_csv_sep_title">Separación CSV</string>
   <string name="pref_csv_sep_summary">Filas separadas CSV</string>

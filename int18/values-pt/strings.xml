@@ -746,8 +746,9 @@
     <string name="man_xsection">11. Seções</string>
     <string name="man_overview">12. Tela Visão Geral</string>
     <string name="man_export">13. Importar/exportar</string>
-    <string name="man_threed">14. Visualizador 3D</string>
-    <string name="man_index">15. Índice</string>
+    <!-- TODO string name="man_project">14. Cave projects</string -->
+    <string name="man_threed">15. Visualizador 3D</string>
+    <string name="man_index">16. Índice</string>
     <string name="man_website">* Site</string>
 
     <string name="help_help">Esta ajuda</string>
@@ -770,7 +771,7 @@
     <string name="help_add_topodroid">Criar nova topo/calibração</string>
     <string name="help_import">Importar arquivo zip ou arquivo de topo</string>
     <string name="help_symbol">Habilitar/desabilitar símbolos</string>
-    <string name="help_therion">App Gerenciador Therion</string>
+    <!-- TODO string name="help_therion">Cave project manager</string -->
     <!-- UNUSED string name="help_database">App Visualizador de banco de dados (SQliteViewer)</string -->
     <string name="help_prefs">Editar preferências</string>
     <string name="help_log">Ativar/desativar configurações de log</string>
@@ -858,6 +859,7 @@
     <string name="help_compute">Calcular calibração</string>
     <string name="help_write">Gravar coeficientes de calibração na DistoX</string>
 
+    <!-- TODO string name="help_add_project">Add cave project</string -->
     <!-- TODO string name="help_add_surveys">Add surveys</string -->
     <!-- TODO string name="help_drop_surveys">Drop surveys</string -->
     <!-- TODO string name="help_view_surveys">Display surveys</string -->

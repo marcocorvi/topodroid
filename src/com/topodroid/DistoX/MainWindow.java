@@ -105,7 +105,7 @@ public class MainWindow extends Activity
 			  // R.string.menu_updates, // UPDATES
                           R.string.menu_about,
                           R.string.menu_options,
-                          R.string.menu_help
+                          R.string.menu_help,
                           };
 
   private static final int[] help_icons = { R.string.help_device,
@@ -124,7 +124,7 @@ public class MainWindow extends Activity
                           // R.string.help_updates, // UPDATES
                           R.string.help_info_topodroid,
                           R.string.help_prefs,
-                          R.string.help_help
+                          R.string.help_help,
                         };
 
   private static final int HELP_PAGE = R.string.MainWindow;

@@ -743,8 +743,9 @@
     <!-- TODO string name="man_xsection">11. Cross-sections</string -->
     <!-- TODO string name="man_overview">12. Overview window</string -->
     <!-- TODO string name="man_export">13. Import/export</string -->
-    <!-- TODO string name="man_threed">14. 3D viewer</string -->
-    <!-- TODO string name="man_index">15. Index</string -->
+    <!-- TODO string name="man_project">14. Cave projects</string -->
+    <!-- TODO string name="man_threed">15. 3D viewer</string -->
+    <!-- TODO string name="man_index">16. Index</string -->
     <!-- TODO string name="man_website">* Website</string -->
     <!-- TODO string name="help_help">Помощ</string -->
 
@@ -767,7 +768,7 @@
     <string name="help_add_topodroid">Нова картировка/калибрация</string>
     <string name="help_import">Импортиране на архив/картировка</string>
     <string name="help_symbol">Включване/изключване на инструменти за рисуване</string>
-    <string name="help_therion">Програма Therion мениджър</string>
+    <!-- TODO string name="help_therion">Cave project manager</string -->
     <!-- UNUSED string name="help_database">Програма за преглеждане на базата данни (SQliteViewer)</string -->
     <string name="help_prefs">Настройки</string>
     <string name="help_log">Включване/изключване на лог файловете</string>
@@ -825,12 +826,12 @@
     <string name="help_zoom_fit">Показване на цялата скица на екрана</string>
 
     <string name="help_line_point">Действия за точка от линия: съединяване, разделяне, премахване</string>
-<!--
-    <string name="help_to_point">Move selected point to join with the nearest point</string>
-    <string name="help_split_point">Split the point into two [line/area]</string>
-    <string name="help_split_line">Split the line into two at the point</string>
-    <string name="help_kink">Use a straight line at the point [line/area]</string>
--->
+
+    <!-- UNUSED string name="help_to_point">Move selected point to join with the nearest point</string -->
+    <!-- UNUSED string name="help_split_point">Split the point into two [line/area]</string -->
+    <!-- UNUSED string name="help_split_line">Split the line into two at the point</string -->
+    <!-- UNUSED string name="help_kink">Use a straight line at the point [line/area]</string -->
+
     <string name="help_manual_calibration">Ръчно калибр. на инструментите</string>
     <string name="help_note_plot">Редактиране на настройки на избрания елемент</string>
     <!-- UNUSED string name="help_save">Запис на промените в информацията за картировката</string -->
@@ -855,6 +856,7 @@
     <string name="help_compute">Изчисляване на калибрация</string>
     <string name="help_write">Запис на калибр. коефициенти в DistoX</string>
 
+    <!-- TODO string name="help_add_project">Add cave project</string -->
     <!-- TODO string name="help_add_surveys">Add surveys</string -->
     <!-- TODO string name="help_drop_surveys">Drop surveys</string -->
     <!-- TODO string name="help_view_surveys">Display surveys</string -->
