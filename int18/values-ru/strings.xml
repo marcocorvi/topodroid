@@ -6,7 +6,7 @@
     <string name="user_man_fail">Не удалось установить перевод руководства</string>
 
     <string name="app_name">TopoDroid</string>
-    <!-- TODO string name="tdm_title">TopoDroid Manager</string -->
+    <string name="tdm_title">TopoDroid Manager</string>
     <string name="double_back">Нажмите "НАЗАД" еще раз для выхода</string>
 
     <string name="new_survey_label">Новая съёмка</string>
@@ -238,8 +238,8 @@
     <string name="error_invalid_name">Недопустимое название</string>
     <string name="error_lat_required">Требуется широта</string>
     <string name="error_long_required">Требуется долгота</string>
-    <!-- TODO string name="error_name_exists">Existing project</string -->
-    <!-- TODO string name="error_name_invalid">Invalid project name</string -->
+    <string name="error_name_exists">Такой проект уже существует</string>
+    <string name="error_name_invalid">Недопустимое название проекта</string>
     <string name="error_name_required">Требуется название</string>
     <string name="error_dir_exists">Директория уже существует</string>
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
@@ -747,7 +747,7 @@
     <string name="man_xsection">11. Поперечные сечения</string>
     <string name="man_overview">12. Окно обзора</string>
     <string name="man_export">13. Импорт-Экспорт</string>
-    <!-- TODO string name="man_project">14. Cave projects</string -->
+    <string name="man_project">14. Проект пещеры</string>
     <string name="man_threed">15. Просмотр в 3D</string>
     <string name="man_index">16. Индекс</string>
     <string name="man_website">* Website</string>
@@ -772,7 +772,7 @@
     <string name="help_add_topodroid">Создать новую съёмку/калибровку</string>
     <string name="help_import">Импорт zip архива или файла съёмки</string>
     <string name="help_symbol">Вкл/Выкл инструментов рисования</string>
-    <!-- TODO string name="help_therion">Cave project manager</string -->
+    <string name="help_therion">Управление проектами пещер</string>
     <!-- UNUSED string name="help_database">Просмотр базы данных (SQliteViewer)</string -->
     <string name="help_prefs">Изменить настройки</string>
     <string name="help_log">Вкл/Выкл настройки журнала</string>
@@ -860,15 +860,15 @@
     <string name="help_compute">Рассчитать калибровку</string>
     <string name="help_write">Записать коэффициенты калибровки в DistoX</string>
 
-    <!-- TODO string name="help_add_project">Add cave project</string -->
-    <!-- TODO string name="help_add_surveys">Add surveys</string -->
-    <!-- TODO string name="help_drop_surveys">Drop surveys</string -->
-    <!-- TODO string name="help_view_surveys">Display surveys</string -->
-    <!-- TODO string name="help_view_equates">List equates</string -->
-    <!-- TODO string name="help_export_config">Export project</string -->
-    <!-- TODO string name="help_delete_config">Delete project</string -->
-    <!-- TODO string name="help_add_equate">Add surveys equate</string -->
-    <!-- TODO string name="help_equates">List surveys equates</string -->
+    <string name="help_add_project">Добавить проект пещеры</string>
+    <string name="help_add_surveys">Добавить съёмки</string>
+    <string name="help_drop_surveys">Удалить съёмки</string>
+    <string name="help_view_surveys">Показать съёмки</string>
+    <string name="help_view_equates">Список соединений</string>
+    <string name="help_export_config">Экспортировать проект</string>
+    <string name="help_delete_config">Удалить проект</string>
+    <string name="help_add_equate">Добавить соединение съёмок</string>
+    <string name="help_equates">Список соединений съёмки</string>
   
     <string name="audio_paused">Пауза</string>
     <string name="audio_playing">Воспроизведение</string>
@@ -935,7 +935,7 @@
     <string name="title_settings_svx">Survex настройки экспорта</string>
     <string name="title_settings_th">Therion настройки экспорта</string>
     <string name="title_settings_dat">Compass настройки экспорта</string>
-    <!-- TODO string name="title_settings_csx">cSurvey export settings</string -->
+    <string name="title_settings_csx">cSurvey настройки экспорта</string>
     <string name="title_settings_tro">VisualTopo настройки экспорта</string>
     <string name="title_settings_svg">SVG настройки экспорта</string>
     <string name="title_settings_dxf">DXF настройки экспорта</string>
@@ -1103,8 +1103,8 @@
   <string name="pref_svg_linedirstroke_summary">Толщина линии направления мпри экспорте в SVG</string>
   <string name="pref_svg_line_dir_title">Бергштрихи линий в SVG</string>
   <string name="pref_svg_line_dir_summary">Добавить штрихи направления линии в SVG экспорт</string>
-  <!-- TODO string name="pref_svg_stationsize_title">Station size</string -->
-  <!-- TODO string name="pref_svg_stationsize_summary">Station names text size</string -->
+  <string name="pref_svg_stationsize_title">Размер пикетов</string>
+  <string name="pref_svg_stationsize_summary">Размер текста подписи пикетов>
   <string name="pref_kml_stations_title">Экспорт пикетов в KML</string>
   <string name="pref_kml_stations_summary">Добавить пикеты в экспорт KML</string>
   <string name="pref_kml_splays_title">Экспорт сплеев в KML</string>
@@ -1501,44 +1501,44 @@
    <string name="firmware_file_uploaded">Загружен файл прошивки %1$s записано %2$d / %3$d</string>
    <string name="firmware_not_supported">Устройство не поддерживает функции данной прошивки</string>
 
-    <!-- TODO string name="project">Project %1$s</string -->
-    <!-- TODO string name="no_editor">Editor not found</string -->
-    <!-- TODO string name="no_file">File not found</string -->
-    <!-- TODO string name="no_extra">Missing file extra</string -->
-    <!-- TODO string name="no_path">Missing filepath</string -->
-    <!-- TODO string name="no_equate">No equate</string -->
-    <!-- TODO string name="no_surveys">No surveys</string -->
-    <!-- TODO string name="no_tdconfig">Missing tdconfig file</string -->
-    <!-- TODO string name="no_th_file">No Therion file</string -->
-    <!-- TODO string name="file_exists">File exists</string -->
-    <!-- TODO string name="file_create_fail">File create fail</string -->
-    <!-- TODO string name="oom">Warning. Out of memory</string -->
+    <string name="project">Проект %1$s</string>
+    <string name="no_editor">Редактор не найден</string>
+    <string name="no_file">Файл не найден</string>
+    <string name="no_extra">Отсутсвует extra файла</string>
+    <string name="no_path">Отсутствует путь к файлу</string>
+    <string name="no_equate">Нет соединеия</string>
+    <string name="no_surveys">Нет съёмок</string>
+    <string name="no_tdconfig">Отсутсвует tdconfig файл</string>
+    <string name="no_th_file">Нет therion файла</string>
+    <string name="file_exists">Файл уже существует</string>
+    <string name="file_create_fail">Невозможно создать файл</string>
+    <string name="oom">Внимание. Недостаточно памяти</string>
 
-    <!-- TODO string name="ask_delete_tdconfig">Delete TdConfig file</string -->
-    <!-- TODO string name="ask_remove_equate">Remove equate %1$s ?</string -->
-    <!-- TODO string name="equate_no_station">No station selected</string -->
-    <!-- TODO string name="equate_no_stations">Too few stations</string -->
-    <!-- TODO string name="equate_no_nearby">No station nearby</string -->
+    <string name="ask_delete_tdconfig">Удалить TdConfig файл?</string>
+    <string name="ask_remove_equate">Удалить соединения %1$s ?</string>
+    <string name="equate_no_station">Пикеты не выбраны</string>
+    <string name="equate_no_stations">Слишком мало пикетов</string>
+    <string name="equate_no_nearby">Нет пикета поблизости</string>
 
-    <!-- TODO string name="menu_new">NEW</string -->
-    <!-- TODO string name="menu_equate">ADD EQUATE</string -->
-    <!-- TODO string name="menu_equates">EQUATES</string -->
-    <!-- TODO string name="menu_save">SAVE</string -->
+    <string name="menu_new">НОВЫЙ</string>
+    <string name="menu_equate">ДОБАВИТЬ СОЕДИНЕНИЕ</string>
+    <string name="menu_equates">СОЕДИНЕНИЯ</string>
+    <string name="menu_save">СОХРАНИТЬ</string>
 
-    <!-- TODO string name="overwrite">overwrite</string -->
+    <string name="overwrite">перезаписать</string>
 
-    <!-- TODO string name="title_help">TopoDroid Manager v. %1$s</string -->
-    <!-- TODO string name="title_export">Export project as ...</string -->
-    <!-- TODO string name="title_equates">Project Equates</string -->
-    <!-- TODO string name="title_equate_new">Add equate ...</string -->
-    <!-- TODO string name="title_cwd">Current Work Directory</string -->
-    <!-- TODO string name="title_settings">TdManager Settings</string -->
-    <!-- TODO string name="title_drop">Drop surveys ?</string -->
-    <!-- TODO string name="title_tdconfig">Enter project name</string -->
-    <!-- TODO string name="title_surveys">Surveys</string -->
+    <string name="title_help">TopoDroid Manager v. %1$s</string>
+    <string name="title_export">Экспортировать проект как ...</string>
+    <string name="title_equates">Соединения в проекте</string>
+    <string name="title_equate_new">Добавить соединение ...</string>
+    <string name="title_cwd">Текущий рабочий каталог</string>
+    <string name="title_settings">Настройки TdManager</string>
+    <string name="title_drop">Удалить съёмки ?</string>
+    <string name="title_tdconfig">Введине название проекта</string>
+    <string name="title_surveys">Съёмки</string>
 
-    <!-- TODO string name="exported">Saved file %1$s</string -->
-    <!-- TODO string name="export_failed">Failed export</string -->
+    <string name="exported">Файл сохранен %1$s</string>
+    <string name="export_failed">Ошибка экспорта</string>
    
 
 </resources>
