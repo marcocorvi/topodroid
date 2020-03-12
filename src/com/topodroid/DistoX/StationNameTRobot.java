@@ -67,8 +67,9 @@ class StationNameTRobot extends StationName
   // WARNING TopoRobot renumbering consider all the shots in a single series
   // @param list list of dblock to assign
   @Override
-  void assignStationsAfter( DBlock blk0, List<DBlock> list, Set<String> sts )
+  boolean assignStationsAfter( DBlock blk0, List<DBlock> list, Set<String> sts )
   {
+    boolean ret = false;
     ArrayList<DBlock> unassigned = new ArrayList<DBlock>();
     // Log.v("DistoX-SN", "assign stations after - TRobot");
 
@@ -100,6 +101,7 @@ class StationNameTRobot extends StationName
         // blk.mFrom = from;
         // blk.mTo   = to;
         setLegName( blk, from, to );
+        ret = true;
 	main_from = from;
 	main_to   = to;
 	sts.add( from );
@@ -108,6 +110,7 @@ class StationNameTRobot extends StationName
 	if ( main_from != null /* && main_to != null */ ) {
           prev = blk;
           setLegName( blk, main_to, main_from );
+          ret = true;
 	}
 	main_from = main_to = null;
       } else {
@@ -117,12 +120,14 @@ class StationNameTRobot extends StationName
 	}
       }
     }
-    if ( unassigned.size() > 0 ) assignStations( unassigned, sts );
+    if ( unassigned.size() > 0 ) ret |= assignStations( unassigned, sts );
+    return ret;
   }
 
   @Override
-  void assignStations( List<DBlock> list, Set<String> sts )
+  boolean assignStations( List<DBlock> list, Set<String> sts )
   { 
+    boolean ret = false;
     int series = getMaxTRobotSeries( list );
     // Log.v("DistoX", "TRobot assign stations. size " + list.size() );
     DBlock prev = null;
@@ -162,6 +167,7 @@ class StationNameTRobot extends StationName
                 mCurrentStationName = null;
                 // Log.v( "DistoX", "PREV " + prev.mId + " nrLegShots " + nrLegShots + " set PREV " + from + "-" + to );
                 setLegName( prev, from, to );
+                ret = true;
                 setLegExtend( prev );
                 station = to;
                 from = to;                                   // next-shot-from = this-shot-to
@@ -192,6 +198,7 @@ class StationNameTRobot extends StationName
         prev = blk;
       }
     }
+    return ret;
   }
 
 }

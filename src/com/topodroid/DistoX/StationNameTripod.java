@@ -32,8 +32,9 @@ class StationNameTripod extends StationName
   // ----------------------------------------------------------------
   // @param list list of dblock to assign
   @Override
-  void assignStationsAfter( DBlock blk0, List<DBlock> list, Set<String> sts )
+  boolean assignStationsAfter( DBlock blk0, List<DBlock> list, Set<String> sts )
   { 
+    boolean ret = false;
     ArrayList<DBlock> unassigned = new ArrayList<DBlock>();
 
     // Log.v("DistoX-SN", "assign stations after - tripod");
@@ -100,6 +101,7 @@ class StationNameTripod extends StationName
 	main_from = p_from;
 	main_to   = p_to;
         setLegName( blk, p_from, p_to );
+        ret = true;
 	sts.add( p_from );
 	sts.add( p_to );
         // Log.v("DistoX", "L:"+from+"-"+ p_to + " " + oldFrom + " " + from + "-" + back + "-" + next + ":" + station + " flip=" + (flip?"y":"n") );
@@ -107,6 +109,7 @@ class StationNameTripod extends StationName
 	if ( main_from != null /* && main_to != null */ ) {
           prev = blk;
           setLegName( blk, main_to, main_from );
+          ret = true;
 	}
 	main_from = main_to = null;
       } else {
@@ -116,12 +119,14 @@ class StationNameTripod extends StationName
 	}
       }
     }
-    if ( unassigned.size() > 0 ) assignStations( unassigned, sts );
+    if ( unassigned.size() > 0 ) ret |= assignStations( unassigned, sts );
+    return ret;
   }
 
   @Override
-  void assignStations( List<DBlock> list, Set<String> sts )
+  boolean assignStations( List<DBlock> list, Set<String> sts )
   { 
+    boolean ret = false;
     DBlock prev = null;
     String from = DistoXStationName.mSecondStation;     // 1
     String back = DistoXStationName.mInitialStation;    // 0
@@ -174,6 +179,7 @@ class StationNameTripod extends StationName
                 }
                 station = from;
                 setLegName( prev, prev_from, prev_to );
+                ret = true;
 	        if ( is_fixed_extend ) {
                   setLegFixedExtend( prev, (flip? fore_extend : back_extend) ); // flip is set when FROM ==> NEXT
 	        } else {
@@ -242,6 +248,7 @@ class StationNameTripod extends StationName
         prev = blk;
       }
     }
+    return ret;
   }
 
 }

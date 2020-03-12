@@ -594,7 +594,8 @@ public class GMActivity extends Activity
     
   private void updateCBlockList( CalibCBlock blk ) 
   { 
-    if ( blk != null ) mDataAdapter.add( blk );
+    if ( blk == null ) return;
+    mDataAdapter.add( blk );
   }
   
   @Override

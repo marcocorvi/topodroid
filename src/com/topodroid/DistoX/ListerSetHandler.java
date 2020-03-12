@@ -43,11 +43,6 @@ class ListerSetHandler extends ListerHandler
     mListers.remove( lister );
   }
 
-  // public void updateBlockList( long blk_id ) 
-  // {
-  //   for ( ILister lister : mListers ) lister.updateBlockList( blk_id );
-  // }
-
   synchronized public void setConnectionStatus( int status )
   {
     for ( ILister lister : mListers ) lister.setConnectionStatus( status );
@@ -76,7 +71,7 @@ class ListerSetHandler extends ListerHandler
         break;
       case Lister.LIST_UPDATE:
         long blk_id = bundle.getLong( Lister.BLOCK_ID );
-        // Log.v("DistoX-BLOCK", "lister set msg blk id " + blk_id );
+        // Log.v("DistoX-DATA", "lister set handler msg blk id " + blk_id + " sise " + mListers.size() );
         // TDUtil.slowDown( (int)(400 + Math.random() * 600) );
         for ( ILister lister : mListers ) lister.updateBlockList( blk_id );
         break;

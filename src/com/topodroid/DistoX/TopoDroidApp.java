@@ -211,6 +211,14 @@ public class TopoDroidApp extends Application
   // FIXME VirtualDistoX
   // VirtualDistoX mVirtualDistoX = new VirtualDistoX();
 
+  static void notifyUpdateDisplay()
+  {
+    if ( mDrawingWindow != null ) {
+      // Log.v("DistoX-DATA", "forward notify update display");
+      mDrawingWindow.notifyUpdateDisplay();
+    }
+  }
+
   // -------------------------------------------------------------------------------------
   // static SIZE methods
 
@@ -1400,10 +1408,10 @@ public class TopoDroidApp extends Application
   // the list of stations is ordered by compare
   //
   // @param list list of shot to assign
-  void assignStationsAfter( DBlock blk0, List<DBlock> list )
+  boolean assignStationsAfter( DBlock blk0, List<DBlock> list )
   { 
     Set<String> sts = mData.selectAllStationsBefore( blk0.mId, TDInstance.sid /*, TDStatus.NORMAL */ );
-    // Log.v("DistoX", "assign stations after " + blk0.Name() + " size " + list.size() + " stations " + sts.size() );
+    // Log.v("DistoX-DATA", "assign stations after " + blk0.Name() + " size " + list.size() + " stations " + sts.size() );
     // if ( TDSetting.mSurveyStations < 0 ) return;
     StationName.clearCurrentStation();
     if ( StationPolicy.doTopoRobot() ) {
@@ -1412,23 +1420,23 @@ public class TopoDroidApp extends Application
       //   TDToast.make( R.string.toporobot_warning );
       //   trobotmillis = millis;
       // }
-      new StationNameTRobot(this, mData, TDInstance.sid ).assignStationsAfter( blk0, list, sts );
+      return new StationNameTRobot(this, mData, TDInstance.sid ).assignStationsAfter( blk0, list, sts );
     } else  if ( StationPolicy.doBacksight() ) {
-      new StationNameBacksight(this, mData, TDInstance.sid ).assignStationsAfter( blk0, list, sts );
+      return new StationNameBacksight(this, mData, TDInstance.sid ).assignStationsAfter( blk0, list, sts );
     } else if ( StationPolicy.doTripod() ) {
-      new StationNameTripod( this, mData, TDInstance.sid ).assignStationsAfter( blk0, list, sts );
-    } else {
-      new StationNameDefault( this, mData, TDInstance.sid ).assignStationsAfter( blk0, list, sts );
-    }
+      return new StationNameTripod( this, mData, TDInstance.sid ).assignStationsAfter( blk0, list, sts );
+    } 
+    return new StationNameDefault( this, mData, TDInstance.sid ).assignStationsAfter( blk0, list, sts );
   }
 
   // called also by ShotWindow::updataBlockList
   // @param list blocks whose stations need to be set in the DB
+  // return true if a leg was assigned
   //
-  void assignStationsAll(  List<DBlock> list )
+  boolean assignStationsAll(  List<DBlock> list )
   { 
     Set<String> sts = mData.selectAllStations( TDInstance.sid );
-    // Log.v("DistoX", "assign stations size " + list.size() );
+    // Log.v("DistoX-DATA", "assign stations all: size " + list.size() );
     // if ( TDSetting.mSurveyStations < 0 ) return;
     if ( StationPolicy.doTopoRobot() ) {
       // long millis = SystemClock.uptimeMillis(); // TROBOT_MILLIS
@@ -1436,14 +1444,13 @@ public class TopoDroidApp extends Application
       //   TDToast.make( R.string.toporobot_warning );
       //   trobotmillis = millis;
       // }
-      new StationNameTRobot(this, mData, TDInstance.sid ).assignStations( list, sts );
+      return new StationNameTRobot(this, mData, TDInstance.sid ).assignStations( list, sts );
     } else  if ( StationPolicy.doBacksight() ) {
-      new StationNameBacksight(this, mData, TDInstance.sid ).assignStations( list, sts );
+      return new StationNameBacksight(this, mData, TDInstance.sid ).assignStations( list, sts );
     } else if ( StationPolicy.doTripod() ) {
-      new StationNameTripod( this, mData, TDInstance.sid ).assignStations( list, sts );
-    } else {
-      new StationNameDefault( this, mData, TDInstance.sid ).assignStations( list, sts );
+      return new StationNameTripod( this, mData, TDInstance.sid ).assignStations( list, sts );
     } 
+    return new StationNameDefault( this, mData, TDInstance.sid ).assignStations( list, sts );
   }
 
   // ================================================================

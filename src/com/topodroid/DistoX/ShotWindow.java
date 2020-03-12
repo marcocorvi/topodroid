@@ -408,12 +408,13 @@ public class ShotWindow extends Activity
     DBlock blk = mApp_mData.selectShot( blk_id, TDInstance.sid );
     if ( blk != null && mDataAdapter != null ) {
       // FIXME 3.3.0
-      if ( mDataAdapter.addDataBlock( blk ) ) {
+      if ( mDataAdapter.addDataBlock( blk ) ) { // avoid double block-adding
+        boolean ret = false;
         mSurveyAccuracy.addBlockAMD( blk );
         if ( StationPolicy.doBacksight() || StationPolicy.doTripod() ) {
-          mApp.assignStationsAll( mDataAdapter.mItems );
+          ret = mApp.assignStationsAll( mDataAdapter.mItems );
         } else {
-          mApp.assignStationsAll( mDataAdapter.getItemsForAssign() );
+          ret = mApp.assignStationsAll( mDataAdapter.getItemsForAssign() );
         }
         // mApp_mData.getShotName( TDInstance.sid, blk );
 
@@ -426,9 +427,16 @@ public class ShotWindow extends Activity
         } );
 	// mList.invalidate();
 	// mDataAdapter.reviseLatest();
+        if ( ret ) {
+          // Log.v("DistoX-DATA", "shot window got a leg" );
+          TopoDroidApp.notifyUpdateDisplay();
+        }
       } else {
         TDLog.Error( "block already-added " + blk.mId );
+        // Log.v("DistoX-DATA", "block already added " + blk.mId );
       }
+    // } else {
+    //   Log.v("DistoX-DATA", "null block");
     }
   }
 
@@ -1790,7 +1798,7 @@ public class ShotWindow extends Activity
     clearMultiSelect( );
   }
 
-  // called by MultishotDialog
+  // only called by MultishotDialog
   // @param blks    list of blocks to renumber
   // @param from    FROM station to assign to first block
   // @param to      TO station to assign to first block
@@ -2118,7 +2126,7 @@ public class ShotWindow extends Activity
 
   // ------------------------------------------------------------------
 
-  // called by ShotDialog
+  // only called by ShotDialog
   // @param blk   shot after which to renumber
   // no need to synchronize
   void renumberShotsAfter( DBlock blk )

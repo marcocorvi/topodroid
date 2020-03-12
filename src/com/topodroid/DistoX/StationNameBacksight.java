@@ -32,8 +32,9 @@ class StationNameBacksight extends StationName
   // @param list list of dblock to assign
   // called by TopoDroidApp
   @Override
-  void assignStationsAfter( DBlock blk0, List<DBlock> list, Set<String> sts )
+  boolean assignStationsAfter( DBlock blk0, List<DBlock> list, Set<String> sts )
   { 
+    boolean ret = false;
     ArrayList<DBlock> unassigned = new ArrayList<DBlock>();
     // Log.v("DistoX-SN", "assign stations after - backsight");
     // Log.v("DistoX", "BACKSIGHT assign stations after " + blk0.mFrom + "-" + blk0.mTo + " Size " + list.size() );
@@ -112,6 +113,7 @@ class StationNameBacksight extends StationName
           fore_clino   = blk.mClino;
         }
         setLegName( blk, from, p_to, is_backsight_shot );
+        ret = true;
 	sts.add( from );
 	sts.add( p_to );
       } else {
@@ -120,13 +122,15 @@ class StationNameBacksight extends StationName
 	}
       } 
     }
-    if ( unassigned.size() > 0 ) assignStations( unassigned, sts );
+    if ( unassigned.size() > 0 ) ret |= assignStations( unassigned, sts );
+    return ret;
   }
 
   // DistoX backshot-mode is handled separately
   @Override
-  void assignStations( List<DBlock> list, Set<String> sts )
+  boolean assignStations( List<DBlock> list, Set<String> sts )
   { 
+    boolean ret = false;
     DBlock prev = null;
     String from = DistoXStationName.mInitialStation;
     String to   = DistoXStationName.mSecondStation;
@@ -182,6 +186,7 @@ class StationNameBacksight extends StationName
                   fore_clino   = prev.mClino;
                 }
                 setLegName( prev, prev_from, prev_to, is_backsight_shot );
+                ret = true;
                 setLegExtend( prev );
                 // Log.v("DistoX", "FROM " + from + " TO " + to + " STATION " + station + " P_FROM " + prev_from + " P_TO " + prev_to + " backshot " + is_backsight_shot );
               }
@@ -232,6 +237,7 @@ class StationNameBacksight extends StationName
         prev = blk;
       }
     }
+    return ret;
   }
   
 }

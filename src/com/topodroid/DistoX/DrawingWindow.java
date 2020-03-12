@@ -103,43 +103,43 @@ public class DrawingWindow extends ItemDrawer
                         R.drawable.iz_eraser_ok,
                         R.drawable.iz_select_ok };
 
-  private static final int IC_DOWNLOAD  = 3;
-  private static final int IC_BLUETOOTH = 4;
-  private static final int IC_PLAN      = 7;
-  private static final int IC_DIAL      = 8;
-  private static final int IC_CONT_NONE = 12;  // index of continue-no icon
-  private static final int IC_PREV      = 13;
-  private static final int IC_NEXT      = 14;
-  private static final int IC_JOIN      = 15;
-  private static final int IC_BORDER_NO = 18;
-  private static final int IC_ERASE_ALL = 20;
-  private static final int IC_MEDIUM    = 21;
+  private static final int IC_DOWNLOAD   = 3;
+  private static final int IC_BLUETOOTH  = 4;
+  private static final int IC_PLAN       = 7;
+  private static final int IC_DIAL       = 8;
+  private static final int IC_CONT_NONE  = 13;  // index of continue-no icon
+  private static final int IC_PREV       = 14;
+  private static final int IC_NEXT       = 15;
+  private static final int IC_JOIN       = 16;
+  private static final int IC_DELETE_OFF = 18;
+  private static final int IC_RANGE_NO   = 19;
+  private static final int IC_ERASE_ALL  = 21;
+  private static final int IC_MEDIUM     = 22;
 
-  private static final int IC_MENU          = 21+1;
-  private static final int IC_EXTEND        = 21+2;
-  private static final int IC_JOIN_NO       = 21+3;
-  private static final int IC_CONT_START    = 21+4;     // index of continue icon
-  private static final int IC_CONT_END      = 21+5;     // index of continue icon
-  private static final int IC_CONT_BOTH     = 21+6;     // index of continue icon
-  private static final int IC_CONT_CONTINUE = 21+7;     // index of continue icon
-  private static final int IC_ADD           = 21+8;
-  private static final int IC_BORDER_OK     = 21+9;
-  private static final int IC_BORDER_BOX    = 21+10;
-  private static final int IC_BORDER_ITEM   = 21+11;
-  private static final int IC_ERASE_POINT   = 21+12;
-  private static final int IC_ERASE_LINE    = 21+13;
-  private static final int IC_ERASE_AREA    = 21+14;
-  private static final int IC_SMALL         = 21+15;
-  private static final int IC_LARGE         = 21+16;
-  private static final int IC_SELECT_ALL    = 21+17;
-  private static final int IC_SELECT_POINT  = 21+18;
-  private static final int IC_SELECT_LINE   = 21+19;
-  private static final int IC_SELECT_AREA   = 21+20;
-  private static final int IC_SELECT_SHOT   = 21+21;
-  private static final int IC_SELECT_STATION= 21+22;
-  private static final int IC_CONT_OFF      = 21+23;
-  private static final int IC_DELETE_OFF    = 17;
-  private static final int IC_DELETE_ON     = 21+24;
+  private static final int IC_MENU          = IC_MEDIUM+1;
+  private static final int IC_EXTEND        = IC_MEDIUM+2;
+  private static final int IC_JOIN_NO       = IC_MEDIUM+3;
+  private static final int IC_CONT_START    = IC_MEDIUM+4;     // index of continue icon
+  private static final int IC_CONT_END      = IC_MEDIUM+5;     // index of continue icon
+  private static final int IC_CONT_BOTH     = IC_MEDIUM+6;     // index of continue icon
+  private static final int IC_CONT_CONTINUE = IC_MEDIUM+7;     // index of continue icon
+  private static final int IC_ADD           = IC_MEDIUM+8;
+  private static final int IC_RANGE_OK      = IC_MEDIUM+9;
+  private static final int IC_RANGE_BOX     = IC_MEDIUM+10;
+  private static final int IC_RANGE_ITEM    = IC_MEDIUM+11;
+  private static final int IC_ERASE_POINT   = IC_MEDIUM+12;
+  private static final int IC_ERASE_LINE    = IC_MEDIUM+13;
+  private static final int IC_ERASE_AREA    = IC_MEDIUM+14;
+  private static final int IC_SMALL         = IC_MEDIUM+15;
+  private static final int IC_LARGE         = IC_MEDIUM+16;
+  private static final int IC_SELECT_ALL    = IC_MEDIUM+17;
+  private static final int IC_SELECT_POINT  = IC_MEDIUM+18;
+  private static final int IC_SELECT_LINE   = IC_MEDIUM+19;
+  private static final int IC_SELECT_AREA   = IC_MEDIUM+20;
+  private static final int IC_SELECT_SHOT   = IC_MEDIUM+21;
+  private static final int IC_SELECT_STATION= IC_MEDIUM+22;
+  private static final int IC_CONT_OFF      = IC_MEDIUM+23;
+  private static final int IC_DELETE_ON     = IC_MEDIUM+24;
 
   private static final int BTN_DOWNLOAD = 3;  // index of mButton1 download button
   private static final int BTN_BLUETOOTH = 4; // index of mButton1 bluetooth button
@@ -171,48 +171,49 @@ public class DrawingWindow extends ItemDrawer
                         R.drawable.iz_note,          // 6
                         R.drawable.iz_plan,          // 7
                         R.drawable.iz_dial,          // 8
+                        R.drawable.iz_refresh,       // 9
 
-                        R.drawable.iz_undo,          // 9 DRAW Nr 3+4
-                        R.drawable.iz_redo,          // 10
-                        R.drawable.iz_tools,         // 11
-                        R.drawable.iz_cont_none,     // 12
+                        R.drawable.iz_undo,          // 10 DRAW Nr 3+4
+                        R.drawable.iz_redo,          // 11
+                        R.drawable.iz_tools,         // 12
+                        R.drawable.iz_cont_none,     // 13
 
-                        R.drawable.iz_back,          // 13 EDIT Nr 3+6
+                        R.drawable.iz_back,          // 14 EDIT Nr 3+6
                         R.drawable.iz_forw,
                         R.drawable.iz_join,
                         R.drawable.iz_attrib,          
-                        R.drawable.iz_delete_off,    // 17
-                        R.drawable.iz_range_no,      // 18
+                        R.drawable.iz_delete_off,    // 18
+                        R.drawable.iz_range_no,      // 19
 
                         R.drawable.iz_select_all,    // only for help
-                        R.drawable.iz_erase_all,     // 20 ERASE Nr 3+2
-                        R.drawable.iz_medium,        // 21
+                        R.drawable.iz_erase_all,     // 21 ERASE Nr 3+2
+                        R.drawable.iz_medium,        // 22
 
-                        R.drawable.iz_menu,          // 21+1
-                        R.drawable.iz_extended,      // 21+2
-                        R.drawable.iz_join_no,       // 21+3
-                        R.drawable.iz_cont_start,    // 21+4
-                        R.drawable.iz_cont_end,      // 21+5
+                        R.drawable.iz_menu,          // 22+1
+                        R.drawable.iz_extended,      // 22+2
+                        R.drawable.iz_join_no,       // 22+3
+                        R.drawable.iz_cont_start,    // 22+4
+                        R.drawable.iz_cont_end,      // 22+5
                         R.drawable.iz_cont_both,
                         R.drawable.iz_cont_continue,
-                        R.drawable.iz_plus,           // 21+8
-                        R.drawable.iz_range_ok,       // 21+9
-                        R.drawable.iz_range_box,      // 21+10
-                        R.drawable.iz_range_item,     // 21+11
-                        R.drawable.iz_erase_point,    // 21+12
-                        R.drawable.iz_erase_line,     // 21+13
-                        R.drawable.iz_erase_area,     // 21+14
-                        R.drawable.iz_small,          // 21+15
-                        R.drawable.iz_large,          // 21+16
-                        R.drawable.iz_select_all,     // 21+17 all
-                        R.drawable.iz_select_point,   // 21+18 point
-                        R.drawable.iz_select_line,    // 21+19 line
-                        R.drawable.iz_select_area,    // 21+20 area
-                        R.drawable.iz_select_shot,    // 21+21 shot
-                        R.drawable.iz_select_station, // 21+22 station
-                        R.drawable.iz_cont_off,       // 21+23 continuation off
-			R.drawable.iz_delete,         // 21+24 do delete
-                        R.drawable.iz_dial_on,        // 21+25 set dial
+                        R.drawable.iz_plus,           // 22+8
+                        R.drawable.iz_range_ok,       // 22+9
+                        R.drawable.iz_range_box,      // 22+10
+                        R.drawable.iz_range_item,     // 22+11
+                        R.drawable.iz_erase_point,    // 22+12
+                        R.drawable.iz_erase_line,     // 22+13
+                        R.drawable.iz_erase_area,     // 22+14
+                        R.drawable.iz_small,          // 22+15
+                        R.drawable.iz_large,          // 22+16
+                        R.drawable.iz_select_all,     // 22+17 all
+                        R.drawable.iz_select_point,   // 22+18 point
+                        R.drawable.iz_select_line,    // 22+19 line
+                        R.drawable.iz_select_area,    // 22+20 area
+                        R.drawable.iz_select_shot,    // 22+21 shot
+                        R.drawable.iz_select_station, // 22+22 station
+                        R.drawable.iz_cont_off,       // 22+23 continuation off
+			R.drawable.iz_delete,         // 22+24 do delete
+                        R.drawable.iz_dial_on,        // 22+25 set dial
                       };
   private static final int[] menus = {
                         R.string.menu_switch,
@@ -268,7 +269,8 @@ public class DrawingWindow extends ItemDrawer
                         R.drawable.iz_mode,          // 5
                         R.drawable.iz_note,          // 6
                         R.drawable.iz_plan,          // 7
-                        R.drawable.iz_dial           // 8
+                        R.drawable.iz_dial,          // 8
+                        R.drawable.iz_refresh
   };
 
   private static final int[] help_icons_move = {
@@ -280,7 +282,8 @@ public class DrawingWindow extends ItemDrawer
                         R.string.help_refs,
                         R.string.help_note,
                         R.string.help_toggle_plot,
-                        R.string.help_azimuth
+                        R.string.help_azimuth,
+                        R.string.help_refresh
                       };
 
 
@@ -556,7 +559,7 @@ public class DrawingWindow extends ItemDrawer
   private Button[] mButton2; // draw
   private Button[] mButton3; // edit
   private Button[] mButton5; // eraser
-  private static final int NR_BUTTON1 = 9;
+  private static final int NR_BUTTON1 = 10;
   private static final int NR_BUTTON2 = 7;
   private static final int NR_BUTTON3 = 9;
   private static final int NR_BUTTON5 = 7;
@@ -1673,7 +1676,7 @@ public class DrawingWindow extends ItemDrawer
   private void makeButtons( )
   {
     Resources res = getResources();
-    if ( ! TDLevel.overNormal ) -- mNrButton1; // AZIMUTH requires advanced level
+    if ( ! TDLevel.overNormal ) mNrButton1 -= 2; // AZIMUTH, REFRESH requires advanced level
     mButton1 = new Button[ mNrButton1 + 1 ]; // MOVE
     int off = 0;
     int ic = 0;
@@ -1737,10 +1740,10 @@ public class DrawingWindow extends ItemDrawer
         mButton3[ BTN_BORDER ].setPadding(4,4,4,4);
         mButton3[ BTN_BORDER ].setTextColor( 0xffffffff );
       }
-      mBMedit_item = MyButton.getButtonBackground( mApp, res, izons[IC_BORDER_ITEM] );
-      mBMedit_box  = MyButton.getButtonBackground( mApp, res, izons[IC_BORDER_BOX] );
-      mBMedit_ok   = MyButton.getButtonBackground( mApp, res, izons[IC_BORDER_OK] ); 
-      mBMedit_no   = MyButton.getButtonBackground( mApp, res, izons[IC_BORDER_NO] );
+      mBMedit_item = MyButton.getButtonBackground( mApp, res, izons[IC_RANGE_ITEM] );
+      mBMedit_box  = MyButton.getButtonBackground( mApp, res, izons[IC_RANGE_BOX] );
+      mBMedit_ok   = MyButton.getButtonBackground( mApp, res, izons[IC_RANGE_OK] ); 
+      mBMedit_no   = MyButton.getButtonBackground( mApp, res, izons[IC_RANGE_NO] );
     }
     mButton3[ mNrButton3 ] = mButton1[ mNrButton1 ];
     mBMjoin_no = MyButton.getButtonBackground( mApp, res, izons[IC_JOIN_NO] );
@@ -1748,7 +1751,7 @@ public class DrawingWindow extends ItemDrawer
 
 
     mButton5 = new Button[ mNrButton5 + 1 ];    // ERASE
-    off = 9 - 3; // (mNrButton1-3) + (mNrButton2-3) + (mNrButton3-3);
+    off = 10 - 3; // (mNrButton1-3) + (mNrButton2-3) + (mNrButton3-3);
     for ( int k=0; k<mNrButton5; ++k ) {
       ic = ( k < 3 )? k : off+k;
       mButton5[k] = MyButton.getButton( mActivity, this, ((k==1)? izons_ok[ic] : izons[ic] ) );
@@ -5269,6 +5272,8 @@ public class DrawingWindow extends ItemDrawer
             // (new AzimuthDialog( mActivity, this, TDAzimuth.mRefAzimuth, mDialBitmap )).show(); // FIXME_AZIMUTH_DIAL 2
           }
         }
+      } else if ( TDLevel.overNormal && b == mButton1[k1++] ) { //  REFRESH
+        updateDisplay();
 
       } else if ( b == mButton2[k2++] || b == mButton5[k5++] ) { // UNDO
         mDrawingSurface.undo();
@@ -5751,7 +5756,7 @@ public class DrawingWindow extends ItemDrawer
   // called only by updateBlockList()
   private void updateDisplay( /* boolean compute, boolean reference */ ) // always called with true, false
   {
-    // Log.v("DistoX-DATA", "update display() type " + mType + " reference " + reference );
+    // Log.v("DistoX-DATA", "update display() type " + mType );
     // if ( compute ) {
       // List<DBlock> list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
       // mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
@@ -5829,28 +5834,19 @@ public class DrawingWindow extends ItemDrawer
     computeReferences( (int)mType, mName, zoom, false );
   }
 
-  // @Override
-  // public void updateBlockList( CalibCBlock blk ) { }
-  
-  // forward adding data to the ShotWindow
-  // @Override
-  // public void updateBlockList( DBlock blk ) 
-  // {
-  //   // Log.v("DistoX", "Drawing window: update Block List block id " + blk.mId + ": " + blk.mFrom + " - " + blk.mTo ); // DATA_DOWNLOAD
-  //   if ( TopoDroidApp.mShotWindow != null ) {
-  //     TopoDroidApp.mShotWindow.updateBlockList( blk ); // FIXME_EXTEND needed to update sketch splays immediately on download
-  //   }
-  //   updateDisplay( /* true, true */ );
-  // }
-
   @Override
   public void updateBlockList( long blk_id )
   {
     // Log.v("DistoX-DATA", "drawing window: update Block List block id " + blk_id ); // DATA_DOWNLOAD
     if ( TopoDroidApp.mShotWindow != null ) {
       TopoDroidApp.mShotWindow.updateBlockList( blk_id ); // FIXME_EXTEND needed to update sketch splays immediately on download
+      // Log.v("DistoX-DATA", "updated " + updated );
     }
-    updateDisplay( /* true, true */ );
+  }
+
+  public void notifyUpdateDisplay()
+  {
+    updateDisplay( );
   }
 
   @Override

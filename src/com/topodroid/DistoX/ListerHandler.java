@@ -50,7 +50,7 @@ class ListerHandler extends Handler
         break;
       case Lister.LIST_UPDATE:
         long blk_id = bundle.getLong( Lister.BLOCK_ID );
-        // Log.v("DistoX-BLOCK", "lister " + this.toString() + " msg blk id " + blk_id );
+        Log.v("DistoX-DATA", "lister " + this.toString() + " msg blk id " + blk_id );
         mLister.updateBlockList( blk_id );
         break;
       case Lister.LIST_REF_AZIMUTH:

@@ -34,14 +34,16 @@ class StationNameDefault extends StationName
   // @param list         list of dblock to assign
   // @param sts          station names already in use
   @Override
-  void assignStationsAfter( DBlock blk0, List<DBlock> list, Set<String> sts )
+  boolean assignStationsAfter( DBlock blk0, List<DBlock> list, Set<String> sts )
   {
+    int survey_stations = StationPolicy.mSurveyStations;
+    if ( survey_stations <= 0 ) return false; // assign always false with no policy
+
+    boolean ret = false;
     // Log.v("DistoX-BLOCK", "assign station after");
     ArrayList<DBlock> unassigned = new ArrayList<DBlock>();
     // TDLog.Log( TDLog.LOG_DATA, "assign stations after " + list.size() + " " + (sts!=null? sts.size():0) );
 
-    int survey_stations = StationPolicy.mSurveyStations;
-    if ( survey_stations <= 0 ) return;
     boolean forward_shots = ( survey_stations == 1 );
     boolean shot_after_splays = StationPolicy.mShotAfterSplays;
     // Log.v("DistoX-SN", "default assign stations after. blk0 " + blk0.mId + " bs " + bs + " survey_stations " + survey_stations + " shot_after_splay " + shot_after_splays );
@@ -104,6 +106,7 @@ class StationNameDefault extends StationName
         // blk.mFrom = from;
         // blk.mTo   = to;
         setLegName( blk, from, to );
+        ret = true;
 	sts.add( from );
 	sts.add( to );
         // TDLog.Log( TDLog.LOG_DATA, "main leg: " + blk.mId + " F<" + from + "> T<" + to + "> S<" + station + "> bs " + bs );
@@ -112,6 +115,7 @@ class StationNameDefault extends StationName
 	if ( main_from != null /* && main_to != null */ ) {
 	  prev = blk;
           setLegName( blk, main_to, main_from );
+          ret = true;
           // TDLog.Log( TDLog.LOG_DATA, "back leg: " + blk.mId + " F<" + main_from + "> T<" + main_to + "> bs " + bs );
 	}
 	main_from = main_to = null;
@@ -122,7 +126,8 @@ class StationNameDefault extends StationName
     }
    
     // processing skipped ahots ...
-    if ( unassigned.size() > 0 ) assignStations( unassigned, sts );
+    if ( unassigned.size() > 0 ) ret |= assignStations( unassigned, sts );
+    return ret;
   }
 
   // debug log
@@ -147,12 +152,14 @@ class StationNameDefault extends StationName
    * DistoX backshot-mode is handled separatedly
    */
   @Override
-  void assignStations( List<DBlock> list, Set<String> sts )
+  boolean assignStations( List<DBlock> list, Set<String> sts )
   { 
     // TDLog.Log( TDLog.LOG_DATA, "assign stations: list " + list.size() + " sts " + (sts!=null? sts.size():0) );
 
     int survey_stations = StationPolicy.mSurveyStations;
-    if ( survey_stations <= 0 ) return;
+    if ( survey_stations <= 0 ) return false; // assign always false with no policy
+
+    boolean ret = false;
     boolean forward_shots = ( survey_stations == 1 );
     boolean shot_after_splay = StationPolicy.mShotAfterSplays;
 
@@ -206,6 +213,7 @@ class StationNameDefault extends StationName
                 mCurrentStationName = null;
                 // TDLog.Log( TDLog.LOG_DATA, "PREV " + prev.mId + " nrLegShots " + nrLegShots + " set PREV " + from + "-" + to );
                 setLegName( prev, from, to );
+                ret = true;
                 setLegExtend( prev );
                 if ( forward_shots ) {
                   station = shot_after_splay  ? to : from;     // splay-station = this-shot-to if splays before shot
@@ -273,6 +281,7 @@ class StationNameDefault extends StationName
         prev = blk;
       }
     }
+    return ret;
   }
 
 }
