@@ -14,24 +14,17 @@ package com.topodroid.DistoX;
 import android.util.Log;
 
 import java.io.File;
-// import java.io.FileFilter;
 import java.io.IOException;
 import java.io.PrintWriter;
-// import java.io.PrintStream;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.BufferedReader;
 
 import java.io.InputStream;
-// import java.io.FileInputStream;
-// import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
-// import java.io.BufferedOutputStream;
-// import java.util.zip.ZipOutputStream;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipEntry;
-// import java.util.zip.ZipFile;
 
 import java.util.Locale;
 

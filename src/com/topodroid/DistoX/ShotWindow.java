@@ -13,14 +13,6 @@ package com.topodroid.DistoX;
 
 import android.util.Log;
 
-// import java.io.File;
-// import java.io.IOException;
-// import java.io.EOFException;
-// import java.io.DataInputStream;
-// import java.io.DataOutputStream;
-// import java.io.BufferedReader;
-// import java.io.FileReader;
-// import java.io.FileWriter;
 import java.util.List;
 import java.util.Set;
 import java.util.ArrayList;
@@ -563,25 +555,26 @@ public class ShotWindow extends Activity
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
+    Log.v("DistoX-EDIT", "onItemClick " + view.getId() );
     if ( CutNPaste.dismissPopupBT() ) return;
     if ( mSkipItemClick ) {
       mSkipItemClick = false;
       return;
     }
-    if ( mMenu == (ListView)parent ) {
+    if ( parent != null && mMenu == (ListView)parent ) {
       handleMenu( pos );
       return;
     }
     if ( closeMenu() ) return;
+  }
 
+  public void itemClick( View view, int pos )
+  {
     if ( mDataAdapter.isMultiSelect() ) {
       multiSelect( pos );
       return;
     }
-
-    // TDLog.Log( TDLog.LOG_INPUT, "ShotWindow onItemClick id " + id);
     DBlock blk = mDataAdapter.get(pos);
-    // Log.v( "DistoX", "ShotWindow onItemClick id " + id + " pos " + pos + " blk " + blk.mFrom + " " + blk.mTo );
     if ( blk != null ) onBlockClick( blk, pos );
   }
 
@@ -601,10 +594,14 @@ public class ShotWindow extends Activity
   @Override 
   public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id)
   {
+    Log.v("DistoX-EDIT", "onItemLongClick " + view.getId() );
     if ( closeMenu() ) return true;
     if ( CutNPaste.dismissPopupBT() ) return true;
+    return false;
+  }
 
-    // TDLog.Log( TDLog.LOG_INPUT, "ShotWindow onItemLongClick id " + id);
+  public boolean itemLongClick( View view, int pos )
+  {
     DBlock blk = mDataAdapter.get(pos);
     if ( blk == null ) return false;
     // onBlockLongClick( blk );
@@ -1096,9 +1093,9 @@ public class ShotWindow extends Activity
 
     mList = (ListView) findViewById(R.id.list);
     mList.setAdapter( mDataAdapter );
-    mList.setOnItemClickListener( this );
-    mList.setLongClickable( true );
-    mList.setOnItemLongClickListener( this );
+    // mList.setOnItemClickListener( this );
+    // mList.setLongClickable( true );
+    // mList.setOnItemLongClickListener( this );
     mList.setDividerHeight( 2 );
     // mList.setSmoothScrollbarEnabled( true );
     // mList.setFastScrollAlwaysVisible( true ); // REQUIRES API-11
@@ -1305,6 +1302,7 @@ public class ShotWindow extends Activity
   @Override 
   public boolean onLongClick( View view )
   {
+    Log.v("DistoX-EDIT", "onLongClick " + view.getId() );
     if ( closeMenu() ) return true;
     if ( CutNPaste.dismissPopupBT() ) return true;
 
@@ -1352,6 +1350,7 @@ public class ShotWindow extends Activity
   @Override 
   public void onClick(View view)
   {
+    Log.v("DistoX-EDIT", "onClick " + view.getId() );
     if ( closeMenu() ) return;
     if ( CutNPaste.dismissPopupBT() ) return;
 
@@ -1798,6 +1797,11 @@ public class ShotWindow extends Activity
     clearMultiSelect( );
   }
 
+  void updateShotName( long bid, String from, String to )
+  {
+    mApp_mData.updateShotName( bid, TDInstance.sid, from, to );
+  }
+
   // only called by MultishotDialog
   // @param blks    list of blocks to renumber
   // @param from    FROM station to assign to first block
@@ -1808,7 +1812,7 @@ public class ShotWindow extends Activity
     DBlock blk = blks.get(0); // blk is guaranteed to exists
     if ( ! ( from.equals(blk.mFrom) && to.equals(blk.mTo) ) ) {
       blk.setBlockName( from, to, blk.isBackLeg() );
-      mApp_mData.updateShotName( blk.mId, TDInstance.sid, from, to );
+      updateShotName( blk.mId, from, to );
     }
     if ( blk.isLeg() ) {
       mApp.assignStationsAfter( blk, blks /*, stations */ );
@@ -1818,7 +1822,7 @@ public class ShotWindow extends Activity
       for ( DBlock b : blks ) {
         if ( b == blk ) continue;
         b.setBlockName( from, to );
-        mApp_mData.updateShotName( b.mId, TDInstance.sid, from, to );
+        updateShotName( b.mId, from, to );
       }
       updateDisplay();
     } else {
@@ -1835,7 +1839,7 @@ public class ShotWindow extends Activity
       String to   = blk.mFrom;
       // Log.v("DistoX", "swap block to <" + from + "-" + to + ">" );
       blk.setBlockName( from, to );
-      // mApp_mData.updateShotName( blk.mId, TDInstance.sid, from, to );
+      // updateShotName( blk.mId, from, to );
     }
     mApp_mData.updateShotsName( blks, TDInstance.sid );
     updateDisplay();
@@ -1984,7 +1988,7 @@ public class ShotWindow extends Activity
         }
       } else {
         b.setBlockName( from, to );
-        mApp_mData.updateShotName( b.mId, TDInstance.sid, from, to ); // FIXME use
+        updateShotName( b.mId, from, to ); // FIXME use
 	// mApp_mData.updateShotNames( splays, TDInstance.sid );
       }
       mDataAdapter.updateBlockView( b.mId );

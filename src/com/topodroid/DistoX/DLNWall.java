@@ -11,15 +11,11 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Stack;
-
-// import java.io.FileWriter;
-// import java.io.PrintWriter;
-// import java.io.IOException;
-
-// import android.util.Log;
 
 class DLNWall
 {

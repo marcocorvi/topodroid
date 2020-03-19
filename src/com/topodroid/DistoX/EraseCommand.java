@@ -14,8 +14,6 @@ package com.topodroid.DistoX;
 
 // import android.util.Log;
 
-// import java.io.PrintWriter;
-
 import android.graphics.Canvas;
 // import android.graphics.Paint;
 // import android.graphics.Path;

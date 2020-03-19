@@ -22,7 +22,6 @@
 package com.topodroid.DistoX;
 
 import java.io.PrintWriter;
-// import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Locale;

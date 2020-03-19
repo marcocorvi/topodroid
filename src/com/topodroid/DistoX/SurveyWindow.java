@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-// import android.util.Log;
+import android.util.Log;
 
 import java.util.Locale;
 import java.util.List;
@@ -57,7 +57,8 @@ import android.view.KeyEvent;
 // import android.graphics.BitmapFactory;
 // import android.graphics.drawable.BitmapDrawable;
 
-// import android.net.Uri;
+import android.net.Uri;
+import android.net.Uri.Builder;
 
 public class SurveyWindow extends Activity
                             implements IExporter
@@ -396,6 +397,12 @@ public class SurveyWindow extends Activity
         // if ( TDSetting.mWithTdManager ) {
           intent.putExtra( "INPUT_SURVEY", TDInstance.survey );
           intent.putExtra( "SURVEY_BASE", TDPath.getPathBase() );
+          // uri string is "/storage/emulated/0/TopoDroid" so the same string as from getPathBase()
+          // Uri.Builder uri_builder = new Uri.Builder();
+          // uri_builder.path( TDPath.getPathBase() ); 
+          // Uri uri = uri_builder.build();
+          // Log.v("DistoX-URI", "TopoDroid " + uri.toString() );
+          // intent.putExtra( "BASE_URI", uri.toString() );
         // } else {
         //   intent.putExtra( "INPUT_FILE", TDPath.getSurveyThFile( TDInstance.survey ) );
         // }

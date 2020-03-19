@@ -19,8 +19,6 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
-// import java.io.File;
-// import java.io.PrintWriter;
 import java.io.DataOutputStream;
 import java.io.IOException;
 

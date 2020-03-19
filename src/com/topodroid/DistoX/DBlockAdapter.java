@@ -17,12 +17,15 @@ import android.content.Context;
 
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
+import android.widget.EditText;
 import android.widget.AdapterView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
+import android.view.KeyEvent;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -265,25 +268,80 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   //   return null;
   // }
 
-  private class ViewHolder
+  private class ViewHolder implements OnClickListener
+                           , OnLongClickListener
+                           , TextView.OnEditorActionListener
   { 
     int      pos;
+    boolean  editing;
+    // long     blkId; // DistoX-EDIT
     TextView tvId;
-    TextView tvFrom;
-    TextView tvTo;
+    EditText tvFrom;
+    EditText tvTo;
     TextView tvLength;
-    // DBlock   mBlock;   // used to make sure blocks do not hold ref to a view, that does not belog to them REVISE_RECENT
+    DBlock   mBlock;   // used to make sure blocks do not hold ref to a view, that does not belog to them REVISE_RECENT
 
-    ViewHolder( TextView id, TextView from, TextView to, TextView len )
+    ViewHolder( TextView id, EditText from, EditText to, TextView len )
     {
-      pos = 0;
+      pos       = 0;
+      editing   = false;
+      // blkId     = -1; // DistoX-EDIT
       tvId      = id;
       tvFrom    = from;
       tvTo      = to;
       tvLength  = len;
-      // mBlock    = null; // REVISE_RECENT
+      mBlock    = null; // REVISE_RECENT
     }
 
+    // OnClickListener on_click = new OnClickListener()
+    // {
+      @Override
+      public void onClick( View v )
+      {
+        // Log.v("DistoX-EDIT", "onClick " + v.getId() );
+        if ( (TextView)v == tvLength ) {
+          mParent.itemClick( v, pos );
+        } else {
+          if ( editing ) {
+            mParent.recomputeItems( ((TextView)v).getText().toString(), pos );
+            editing = false;
+          } else {
+            editing = true;
+          }
+        }
+      }
+    // };
+
+    // OnEditorActionListener on_edit = new OnEditorActionListener()
+    // {
+      @Override
+      public boolean onEditorAction( TextView v, int action, KeyEvent event )
+      {
+        // Log.v("DistoX-EDIT", "onEditor " + v.getId() );
+        if ( (TextView)v == tvLength ) return false;
+        // action EditorInfo.IME_NULL = 0
+        // Log.v("DistoX-EDIT", "FROM action " + action + " event " + ( (event == null)? "null": event.toString()) );
+        // Log.v("DistoX-EDIT", "Blk " + mBlock.mFrom + " " + mBlock.mTo + " --> " + tvFrom.getText().toString() + " " + tvTo.getText().toString() );
+        if ( mBlock != null ) {
+          String f = tvFrom.getText().toString();
+          String t = tvTo.getText().toString();
+          mParent.updateShotName( mBlock.mId, f, t );
+          mBlock.setBlockName( f, t, mBlock.isBackLeg() ); 
+          setColor( mBlock );
+        }
+        editing = false;
+        return true; // action consumed
+      }
+    // };
+      @Override
+      public boolean onLongClick( View v )
+      {
+        // Log.v("DistoX-EDIT", "onLongClick " + v.getId() );
+        if ( (TextView)v == tvLength ) {
+          return mParent.itemLongClick( v, pos );
+        }
+        return false;
+      }
 
     void setViewText( DBlock b, OnLongClickListener listener )
     {
@@ -304,19 +362,23 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
           b.toNote() ) );
       }
 
-      OnClickListener toggle = new OnClickListener() {
-        public void onClick( View v ) { mParent.recomputeItems( ((TextView)v).getText().toString(), pos ); }
-      };
+      // OnClickListener toggle = new OnClickListener() {
+      //   public void onClick( View v ) { mParent.recomputeItems( ((TextView)v).getText().toString(), pos ); }
+      // };
 
-      tvFrom.setOnClickListener( toggle );
-      tvTo.setOnClickListener( toggle );
+      tvFrom.setOnClickListener( this );
+      tvTo.setOnClickListener( this );
+      tvLength.setOnClickListener( this );
+      if ( TDLevel.overNormal ) tvLength.setOnLongClickListener( this );
 
       if ( TDLevel.overBasic ) {
         tvFrom.setOnLongClickListener( listener );
         tvTo.setOnLongClickListener( listener );
       }
 
-      int col = b.color();
+      tvFrom.setOnEditorActionListener( this );
+      tvTo.setOnEditorActionListener( this );
+
       int text_size = TDSetting.mTextSize;
 
       if ( tvFrom.getTextSize() != text_size ) {
@@ -332,6 +394,12 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       } else {
         tvId.setVisibility( View.GONE );
       }
+      setColor( b );
+   }
+
+   void setColor( DBlock b )
+   {
+      int col = b.color();
       tvFrom.setTextColor( ( mParent.isCurrentStationName( b.mFrom ) )? TDColor.LIGHT_GREEN : col );
       tvTo.setTextColor(   ( mParent.isCurrentStationName( b.mTo   ) )? TDColor.LIGHT_GREEN : col );
       tvLength.setTextColor( col );
@@ -374,8 +442,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       convertView = mLayoutInflater.inflate( R.layout.dblock_row, parent, false );
       holder = new ViewHolder( 
         (TextView)convertView.findViewById( R.id.id ),
-        (TextView)convertView.findViewById( R.id.from ),
-        (TextView)convertView.findViewById( R.id.to ),
+        (EditText)convertView.findViewById( R.id.from ),
+        (EditText)convertView.findViewById( R.id.to ),
         (TextView)convertView.findViewById( R.id.length ) );
       convertView.setTag( holder );
     } else {
@@ -383,7 +451,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     }
     holder.pos = pos;
     // if ( holder.mBlock != null ) holder.mBlock.mView = null; // REVISE_RECENT
-    // holder.mBlock = b;
+    holder.mBlock = b;
+    // holder.blkId = b.mId; // DistoX-EDIT
     b.mView = convertView;
 
     holder.setViewText( b, this );
@@ -471,6 +540,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
 
   public boolean onLongClick( View view ) 
   {
+    // Log.v("DistoX-EDIT", "onLongClick " + view.getId() );
     if ( TDLevel.overNormal ) {
       TextView tv = (TextView) view;
       if ( tv != null ) {

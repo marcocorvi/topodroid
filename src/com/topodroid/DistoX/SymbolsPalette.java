@@ -11,18 +11,15 @@
  */
 package com.topodroid.DistoX;
 
+// import android.util.Log;
+
 // import java.util.ArrayList;
 import java.util.TreeSet;
 // import java.util.Collections;
 // import java.util.Iterator;
 // import java.util.List;
 
-// import java.io.StringWriter;
-// import java.io.PrintWriter;
-
 // import android.content.res.Resources;
-
-// import android.util.Log;
 
 /**
  */

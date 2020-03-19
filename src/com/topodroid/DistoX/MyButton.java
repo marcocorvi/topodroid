@@ -29,9 +29,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.util.SparseArray;
 // import android.util.Log;
 
-// import java.io.InputStream;
-// import java.io.IOException;
-
 // import java.util.Random;
 
 class MyButton

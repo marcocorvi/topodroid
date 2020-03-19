@@ -13,14 +13,6 @@ package com.topodroid.DistoX;
 
 // import android.util.Log;
 
-// import java.io.File;
-// import java.io.FileNotFoundException;
-// import java.io.IOException;
-// import java.io.FileReader;
-// import java.io.BufferedReader;
-// import java.io.FileWriter;
-// import java.io.PrintWriter;
-
 import android.content.Context;
 import android.content.ContentValues;
 import android.database.Cursor;

@@ -11,14 +11,6 @@
  */
 package com.topodroid.DistoX;
 
-// import java.io.File;
-// import java.io.IOException;
-// import java.io.EOFException;
-// import java.io.DataInputStream;
-// import java.io.DataOutputStream;
-// import java.io.BufferedReader;
-// import java.io.FileReader;
-// import java.io.FileWriter;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -33,10 +25,6 @@ import android.app.Activity;
 // import android.content.Context;
 // import android.content.Intent;
 
-// import android.view.Menu;
-// import android.view.MenuItem;
-// import android.view.SubMenu;
-// import android.view.MenuInflater;
 import android.view.KeyEvent;
 
 // import android.location.LocationManager;
@@ -50,11 +38,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 // import android.preference.PreferenceManager;
-
-// import android.provider.MediaStore;
-// import android.graphics.Bitmap;
-// import android.graphics.Bitmap.CompressFormat;
-// import android.net.Uri;
 
 public class SensorListActivity extends Activity
                                 implements OnItemClickListener

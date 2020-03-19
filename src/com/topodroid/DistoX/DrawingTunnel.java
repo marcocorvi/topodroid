@@ -18,14 +18,9 @@ import java.util.Locale;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-// import java.io.FileWriter;
 import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.io.BufferedWriter;
-// import java.io.FileInputStream;
-// import java.io.BufferedInputStream;
-// import java.io.DataInputStream;
-// import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import android.graphics.RectF;

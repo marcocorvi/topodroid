@@ -13,8 +13,6 @@ package com.topodroid.DistoX;
 
 // import android.util.Log;
 
-// import java.io.File;
-// import java.io.FileReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;

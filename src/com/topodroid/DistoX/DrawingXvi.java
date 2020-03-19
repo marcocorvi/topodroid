@@ -15,7 +15,6 @@ package com.topodroid.DistoX;
 
 import java.util.Locale;
 
-// import java.io.FileWriter;
 import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.io.BufferedWriter;
