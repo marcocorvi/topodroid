@@ -73,53 +73,65 @@ class TDUtil
 
   // static float slope2degree( float slp ) { return (float)( Math.atan( slp/100 ) * RAD2DEG ); }
 
-  static void deleteFile( File f )
+  static void deleteFile( File f ) // DistoX-SAF
   {
     if ( f != null && f.exists() ) {
-      if ( ! f.delete() ) TDLog.Error("File delete failed " + f.getName() );
+      if ( ! f.delete() ) TDLog.Error("file delete failed " + f.getName() );
     }
   }
 
-  static void deleteDir( File dir )
+  static void deleteDir( File dir ) // DistoX-SAF
   {
     if ( dir != null && dir.exists() ) {
       File[] files = dir.listFiles();
       if ( files != null ) {
-        for (File file : files ) {
+        for ( File file : files ) {
           if (file.isFile()) {
-            if ( ! file.delete() ) TDLog.Error("File delete failed " + file.getName() ); 
+            if ( ! file.delete() ) TDLog.Error("file delete failed " + file.getName() ); 
           }
         }
       }
-      if ( ! dir.delete() ) TDLog.Error("Dir delete failed " + dir.getName() );
+      if ( ! dir.delete() ) TDLog.Error("dir delete failed " + dir.getName() );
     }
   }
 
-  static void deleteFile( String pathname ) { deleteFile( new File( pathname ) ); }
-
-  static void deleteDir( String dirname ) { deleteDir( new File( dirname ) ); }
-
-  static void renameFile( String oldname, String newname )
-  {
-    File f1 = new File( oldname );
-    File f2 = new File( newname );
-    if ( f1.exists() && ! f2.exists() ) {
-      if ( ! f1.renameTo( f2 ) ) TDLog.Error("File rename failed " + oldname + " " + newname );
-    } 
+  static void deleteFile( String pathname ) 
+  { 
+    deleteFile( new File( pathname ) ); // DistoX-SAF
   }
 
+  static void deleteDir( String dirname ) 
+  { 
+    deleteDir( new File( dirname ) ); // DistoX-SAF
+  }
+
+  // @pre oldname exists && ! newname exists
+  static void renameFile( String oldname, String newname )
+  {
+    File f1 = new File( oldname ); // DistoX-SAF
+    File f2 = new File( newname );
+    if ( f1.exists() && ! f2.exists() ) {
+      if ( ! f1.renameTo( f2 ) ) TDLog.Error("file rename: failed " + oldname + " to " + newname );
+    } else {
+      TDLog.Error("file rename: no-exist " + oldname + " or exist " + newname );
+    }
+  }
+
+  // @pre oldname exists
   static void moveFile( String oldname, String newname )
   {
-    File f1 = new File( oldname );
+    File f1 = new File( oldname ); // DistoX-SAF
     File f2 = new File( newname );
     if ( f1.exists() ) {
-      if ( ! f1.renameTo( f2 ) ) TDLog.Error("File move failed " + oldname + " " + newname );
-    } 
+      if ( ! f1.renameTo( f2 ) ) TDLog.Error("file move: failed " + oldname + " to " + newname );
+    } else {
+      TDLog.Error("file move: no-exist " + oldname );
+    }
   }
 
   static void makeDir( String pathname )
   {
-    File f = new File( pathname );
+    File f = new File( pathname ); // DistoX-SAF
     if ( f.exists() ) return;
     if ( ! f.isDirectory() ) {
       if ( ! f.mkdirs() ) TDLog.Error("Mkdir failed " + pathname );

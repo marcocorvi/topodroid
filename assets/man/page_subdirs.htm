@@ -4,7 +4,9 @@
 
 Here is some background about how the survey data, the calibration data, and the sketches are stored.<br><p>
 
-The app creates its default base directory, named "TopoDroid", in the primary external memory (usually /sdcard). This directory is not removed when you uninstall the app. In this directory the app creates two SQLite databases. The first is "device10.sqlite", where the calibration data, the DistoX informations, and other data are stored. The second is "distox14.sqlite" and stores the surveys data. The app also creates subdirectories for the different types of files. These subdirectories are created only in the "TopoDroid" base directory:
+The app creates its default base directory, named "TopoDroid", in the primary external memory (usually /sdcard),
+or, since Android 11, in the primary public external memory (usually /sdcard/Documents).
+This directory is not removed when you uninstall the app. In this directory the app creates two SQLite databases. The first is "device10.sqlite", where the calibration data, the DistoX informations, and other data are stored. The second is "distox14.sqlite" and stores the surveys data. The app also creates subdirectories for the different types of files. These subdirectories are created only in the "TopoDroid" base directory:
 <ul style="margin-top: 0">
 <li><b>bin</b>: DistoX2 firmware files</li>
 <li><b>ccsv</b>: CSV text files of exported calibrations</li>

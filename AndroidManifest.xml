@@ -62,18 +62,25 @@
           android:allowBackup="false"
 	  android:icon="@mipmap/ic_launcher"
 	  android:largeHeap="true"
-          android:requestLegacyExternalStorage="true"
+	  android:requestLegacyExternalStorage="true"
 	  ><!-- FIXME-23 android:largeHeap="true"
                 FIXME-16 android:largeHeap="true"
                 FIXME-8 nothing
 	  android:icon="@drawable/icon4"
 	  android:roundIcon="@drawable/icon4"
+                FIXME-29
 	  -->
 	  <!-- android:screenOrientation="portrait" -->
       
 	  <!-- android:extractNativeLibs="false" -->
           <!-- android:largeHeap="true"  post Gingerbread large memory -->
           <!-- android:debuggable="false" -->
+
+        <!-- activity android:name=".SplashActivity"
+	  android:theme="@style/Theme.FullScreen"
+          android:configChanges="orientation|screenSize"
+          >
+        </activity -->
 
         <activity android:name=".MainWindow"
 	  android:theme="@style/Theme.FullScreen"

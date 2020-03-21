@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import android.os.Bundle;
 import android.content.Context;
+import android.content.res.Resources;
 
 import android.bluetooth.BluetoothDevice;
 
@@ -109,6 +110,8 @@ class TDInstance
   }
 
   static void setContext( Context ctx ) { context = ctx; }
+
+  static Resources getResources() { return context.getResources(); }
 
   static void setRecentPlot( String name, long type )
   {

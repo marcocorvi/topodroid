@@ -624,95 +624,6 @@ public class TopoDroidApp extends Application
     }
     mSetupScreen = mPrefHlp.getBoolean( "DISTOX_SETUP_SCREEN", true ); // default: SetupScreen = true
 
-    mCheckPerms = TDandroid.checkPermissions( this );
-
-    if ( mCheckPerms >= 0 ) {
-      // TDLog.Profile("TDApp paths");
-      TDPath.setDefaultPaths();
-
-      // TDLog.Profile("TDApp cwd");
-      TDInstance.cwd = mPrefHlp.getString( "DISTOX_CWD", "TopoDroid" );
-      TDInstance.cbd = mPrefHlp.getString( "DISTOX_CBD", TDPath.PATH_BASEDIR );
-      TDPath.setPaths( TDInstance.cwd, TDInstance.cbd );
-
-      // TDLog.Profile("TDApp DB"); 
-      // ***** DATABASE MUST COME BEFORE PREFERENCES
-
-      // ---- IF_COSURVEY
-      // mDataListeners = new DataListenerSet( );
-      // mData  = new DataHelper( this, this, mDataListeners );
-      // mDData = new DeviceHelper( this, this, null ); 
-      //
-      // ---- ELSE ----
-      mData  = new DataHelper( this /*, this */ ); 
-      mDData = new DeviceHelper( this /*, this */ );
-
-      // mStationName = new StationName();
-
-      // TDLog.Profile("TDApp prefs");
-      // LOADING THE SETTINGS IS RATHER EXPENSIVE !!!
-      TDSetting.loadPrimaryPreferences( /* this, */ getResources(),  mPrefHlp );
-
-      // TDLog.Profile("TDApp BT");
-      // mBTAdapter = BluetoothAdapter.getDefaultAdapter();
-      // if ( mBTAdapter == null ) {
-      //   // TDToast.makeBad( R.string.not_available );
-      //   // finish(); // FIXME
-      //   // return;
-      // }
-      // TDLog.Profile("TDApp comm");
-
-      // Log.v("DistoX", "VD TDapp on create");
-      // createComm();
-
-      mListerSet = new ListerSetHandler();
-      mDataDownloader = new DataDownloader( this, this );
-
-      mEnableZip = true;
-
-      // ***** DRAWING TOOLS SYMBOLS
-      // TDLog.Profile("TDApp symbols");
-
-      // if one of the symbol dirs does not exists all of then are restored
-      String version = mDData.getValue( "version" );
-      if ( version == null || ( ! version.equals(VERSION) ) ) {
-        mDData.setValue( "version", VERSION );
-        // FIXME INSTALL_SYMBOL installSymbols( false ); // this updates symbol_version in the database
-        if ( mDData.getValue( "symbol_version" ) == null ) installSymbols( true );
-        installFirmware( false );
-        // installUserManual( );
-      }
-
-      // ***** CHECK SPECIAL EXPERIMENTAL FEATURES
-      if ( TDLevel.overTester ) {
-        String value = mDData.getValue("sketches");
-        mSketches =  value != null 
-                && value.equals("on")
-                && getPackageManager().hasSystemFeature( PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH );
-      }
-
-      /* ---- IF_COSURVEY
-      if ( TDLevel.overExpert ) {
-        String value = mDData.getValue("cosurvey");
-        mCosurvey =  value != null && value.equals("on");
-        setCoSurvey( false );
-        mPrefHlp.update( "DISTOX_COSURVEY", false );
-        if ( mCosurvey ) {
-          mSyncConn = new ConnectionHandler( this );
-          mConnListener = new ArrayList<>();
-        }
-      }
-      */
-
-      // TDLog.Profile("TDApp device etc.");
-      TDInstance.deviceA = mDData.getDevice( mPrefHlp.getString( TDSetting.keyDeviceName(), TDString.EMPTY ) );
-
-      if ( TDInstance.deviceA != null ) {
-        createComm();
-      }
-      // mHighlighted = null; FIXME_HIGHLIGHT
-    }
-
     DistoXConnectionError = new String[5];
     DistoXConnectionError[0] = getResources().getString( R.string.distox_err_ok );
     DistoXConnectionError[1] = getResources().getString( R.string.distox_err_headtail );
@@ -736,9 +647,90 @@ public class TopoDroidApp extends Application
     // DrawingUtil.CENTER_X = mDisplayWidth  / 2;
     // DrawingUtil.CENTER_Y = mDisplayHeight / 2;
 
+    mCheckPerms = TDandroid.checkPermissions( this );
+
+    if ( mCheckPerms >= 0 ) {
+      mListerSet = new ListerSetHandler();
+      mEnableZip = true;
+
+      initEnvironment(); // called by SplashActivity
+
+    }
     // mManual = getResources().getString( R.string.topodroid_man );
 
     // Log.v("DistoX-MAIN", "W " + mDisplayWidth + " H " + mDisplayHeight + " D " + density );
+  }
+
+  static void initEnvironment()
+  {
+    // TDLog.Profile("TDApp paths");
+    TDPath.setDefaultPaths();
+
+    // TDLog.Profile("TDApp cwd");
+    TDInstance.cwd = mPrefHlp.getString( "DISTOX_CWD", "TopoDroid" );
+    TDInstance.cbd = mPrefHlp.getString( "DISTOX_CBD", TDPath.PATH_BASEDIR );
+    TDPath.setPaths( TDInstance.cwd, TDInstance.cbd );
+
+    // TDLog.Profile("TDApp DB"); 
+    // ***** DATABASE MUST COME BEFORE PREFERENCES
+
+    // ---- IF_COSURVEY
+    // mDataListeners = new DataListenerSet( );
+    // mData  = new DataHelper( this, this, mDataListeners );
+    // mDData = new DeviceHelper( this, this, null ); 
+    //
+    // ---- ELSE ----
+    mData  = new DataHelper( thisApp /*, this */ ); 
+    mDData = new DeviceHelper( thisApp /*, this */ );
+
+    // mStationName = new StationName();
+
+    // TDLog.Profile("TDApp prefs");
+    // LOADING THE SETTINGS IS RATHER EXPENSIVE !!!
+    TDSetting.loadPrimaryPreferences( /* this, */ TDInstance.getResources(),  mPrefHlp );
+
+    thisApp.mDataDownloader = new DataDownloader( thisApp, thisApp );
+
+    // ***** DRAWING TOOLS SYMBOLS
+    // TDLog.Profile("TDApp symbols");
+
+    // if one of the symbol dirs does not exists all of then are restored
+    String version = mDData.getValue( "version" );
+    if ( version == null || ( ! version.equals(VERSION) ) ) {
+      mDData.setValue( "version", VERSION );
+      // FIXME INSTALL_SYMBOL installSymbols( false ); // this updates symbol_version in the database
+      if ( mDData.getValue( "symbol_version" ) == null ) thisApp.installSymbols( true );
+      thisApp.installFirmware( false );
+      // installUserManual( );
+    }
+
+    // ***** CHECK SPECIAL EXPERIMENTAL FEATURES : SKETCH
+    // if ( TDLevel.overTester ) {
+    //   String value = mDData.getValue("sketches");
+    //   mSketches =  value != null 
+    //           && value.equals("on")
+    //           && getPackageManager().hasSystemFeature( PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH );
+    // }
+
+    /* ---- IF_COSURVEY
+    if ( TDLevel.overExpert ) {
+      String value = mDData.getValue("cosurvey");
+      mCosurvey =  value != null && value.equals("on");
+      setCoSurvey( false );
+      mPrefHlp.update( "DISTOX_COSURVEY", false );
+      if ( mCosurvey ) {
+        mSyncConn = new ConnectionHandler( this );
+        mConnListener = new ArrayList<>();
+      }
+    }
+    */
+
+    // TDLog.Profile("TDApp device etc.");
+    TDInstance.deviceA = mDData.getDevice( mPrefHlp.getString( TDSetting.keyDeviceName(), TDString.EMPTY ) );
+
+    if ( TDInstance.deviceA != null ) {
+      thisApp.createComm();
+    }
   }
 
   // Led notifcation are shown only while the display is off
@@ -1490,9 +1482,9 @@ public class TopoDroidApp extends Application
   // ----------------------------------------------
   // FIRMWARE 
 
-  private void installFirmware( boolean overwrite )
+  static private void installFirmware( boolean overwrite )
   {
-    InputStream is = getResources().openRawResource( R.raw.firmware );
+    InputStream is = TDInstance.getResources().openRawResource( R.raw.firmware );
     firmwareUncompress( is, overwrite );
     try { is.close(); } catch ( IOException e ) { }
   }
@@ -1500,16 +1492,16 @@ public class TopoDroidApp extends Application
   // -------------------------------------------------------------
   // SYMBOLS
 
-  void installSymbols( boolean overwrite )
+  static void installSymbols( boolean overwrite )
   {
     deleteObsoleteSymbols();
     installSymbols( R.raw.symbols_speleo, overwrite );
     mDData.setValue( "symbol_version", SYMBOL_VERSION );
   }
 
-  void installSymbols( int res, boolean overwrite )
+  static void installSymbols( int res, boolean overwrite )
   {
-    InputStream is = getResources().openRawResource( res );
+    InputStream is = TDInstance.getResources().openRawResource( res );
     symbolsUncompress( is, overwrite );
   }
 

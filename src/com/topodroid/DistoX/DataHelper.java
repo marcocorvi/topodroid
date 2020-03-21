@@ -194,7 +194,7 @@ class DataHelper extends DataSetObservable
 
   void openDatabase( Context context )
   {
-    String database_name = TDPath.getDatabase();
+    String database_name = TDPath.getDatabase(); // DistoX-SAF
     DistoXOpenHelper openHelper = new DistoXOpenHelper( context, database_name );
 
     try {
@@ -1460,20 +1460,6 @@ class DataHelper extends DataSetObservable
 */
   }
 
-  private void renamePlotFile( String oldname, String newname )
-  {
-    File oldfile = new File( oldname );
-    File newfile = new File( newname );
-    if ( oldfile.exists() ) {
-      if ( ! newfile.exists() ) {
-        if ( ! oldfile.renameTo( newfile ) ) TDLog.Error("File rename error");
-      } else {
-        TDLog.Error("Plot rename: " + newname + " exists" );
-      }
-    // } else { // THIS IS OK
-    //   TDLog.Error( "Failed rename. Old file does not exist: " + oldname );
-    }
-  }
 
   private void transferPlots( String old_survey_name, String new_survey_name, long sid, long old_sid, String station )
   {
@@ -1481,11 +1467,11 @@ class DataHelper extends DataSetObservable
     List< PlotInfo > plots = selectPlotsAtStation( old_sid, station );
     for ( PlotInfo plot : plots ) {
       transferPlot( sid, old_sid, plot.id );
-      renamePlotFile( TDPath.getTh2File( old_survey_name + "-" + plot.name + ".th2" ),
-                      TDPath.getTh2File( new_survey_name + "-" + plot.name + ".th2" ) );
+      TDUtil.renameFile( TDPath.getTh2File( old_survey_name + "-" + plot.name + ".th2" ),
+                         TDPath.getTh2File( new_survey_name + "-" + plot.name + ".th2" ) );
 
-      renamePlotFile( TDPath.getTdrFile( old_survey_name + "-" + plot.name + ".tdr" ),
-                      TDPath.getTdrFile( new_survey_name + "-" + plot.name + ".tdr" ) );
+      TDUtil.renameFile( TDPath.getTdrFile( old_survey_name + "-" + plot.name + ".tdr" ),
+                         TDPath.getTdrFile( new_survey_name + "-" + plot.name + ".tdr" ) );
     }
   }
 
@@ -1496,13 +1482,9 @@ class DataHelper extends DataSetObservable
     List< Sketch3dInfo > sketches = selectSketchesAtStation( old_sid, station );
     for ( Sketch3dInfo sketch : sketches ) {
       transferSketch( sid, old_sid, sketch.id );
-      File oldfile = new File( TDPath.getTdr3File( old_survey_name + "-" + sketch.name + ".tdr3" ) );
-      File newfile = new File( TDPath.getTdr3File( new_survey_name + "=" + sketch.name + ".tdr3" ) );
-      if ( oldfile.exists() && ! newfile.exists() ) {
-        if ( ! oldfile.renameTo( newfile ) ) TDLog.Error("File rename error");
-      } else {
-        TDLog.Error( "Sketch rename: " + sketch.name + " exists" );
-      }
+      String oldfile = TDPath.getTdr3File( old_survey_name + "-" + sketch.name + ".tdr3" );
+      String newfile = TDPath.getTdr3File( new_survey_name + "=" + sketch.name + ".tdr3" );
+      TDUtil.renameFile( oldfile, newfile );
     }
   }
    * END_SKETCH_3D */
@@ -1575,26 +1557,18 @@ class DataHelper extends DataSetObservable
         if ( audio != null ) {
           where[1] = Long.toString( audio.shotid );
           myDB.update( AUDIO_TABLE, cv, WHERE_SID_SHOTID, where );
-          File oldfile = new File( TDPath.getSurveyAudioFile( old_survey.name, Long.toString(audio.shotid) ) );
-          File newfile = new File( TDPath.getSurveyAudioFile( new_survey.name, Long.toString(audio.shotid) ) );
-          if ( oldfile.exists() && ! newfile.exists() ) {
-            if ( ! oldfile.renameTo( newfile ) )TDLog.Error("File rename error");
-          } else {
-            TDLog.Error( "Survey rename " + old_survey.name + "/" + audio.id + ".wav exists" );
-          }
+          String oldname = TDPath.getSurveyAudioFile( old_survey.name, Long.toString(audio.shotid) );
+          String newname = TDPath.getSurveyAudioFile( new_survey.name, Long.toString(audio.shotid) );
+          TDUtil.renameFile( oldname, newname );
         }
 
         List< PhotoInfo > photos = selectPhotoAtShot( old_sid, old_id ); // transfer photos
         for ( PhotoInfo photo : photos ) {
           where[1] = Long.toString( photo.id );
           myDB.update( PHOTO_TABLE, cv, WHERE_SID_ID, where );
-          File oldfile = new File( TDPath.getSurveyJpgFile( old_survey.name, Long.toString(photo.id) ) );
-          File newfile = new File( TDPath.getSurveyJpgFile( new_survey.name, Long.toString(photo.id) ) );
-          if ( oldfile.exists() && ! newfile.exists() ) {
-            if ( ! oldfile.renameTo( newfile ) ) TDLog.Error("File rename error");
-          } else {
-            TDLog.Error( "Survey rename " + old_survey.name + "/" + photo.id + ".jpg exists" );
-          }
+          String oldname = TDPath.getSurveyJpgFile( old_survey.name, Long.toString(photo.id) );
+          String newname = TDPath.getSurveyJpgFile( new_survey.name, Long.toString(photo.id) );
+          TDUtil.renameFile( oldname, newname );
         }
 
         ++ myNextId;
@@ -4270,7 +4244,7 @@ class DataHelper extends DataSetObservable
      if ( myDB == null ) return;
      try {
        TDPath.checkPath( filename );
-       FileWriter fw = new FileWriter( filename );
+       FileWriter fw = new FileWriter( filename ); // DistoX-SAF
        PrintWriter pw = new PrintWriter( fw );
        Cursor cursor = myDB.query( SURVEY_TABLE, 
                             new String[] { "name", "day", "team", "declination", "comment", "init_station", "xsections", "datamode", "extend" },
@@ -4513,7 +4487,7 @@ class DataHelper extends DataSetObservable
 
        fw.flush();
        fw.close();
-     } catch ( FileNotFoundException e ) {// FIXME
+     } catch ( FileNotFoundException e ) {// DistoX-SAF
      } catch ( IOException e ) {// FIXME
      }
    }
@@ -4530,11 +4504,11 @@ class DataHelper extends DataSetObservable
      String line;
      try {
        // TDLog.Log( TDLog.LOG_IO, "load survey from sql file " + filename );
-       FileReader fr = new FileReader( filename );
+       FileReader fr = new FileReader( filename ); // DistoX-SAF
        BufferedReader br = new BufferedReader( fr );
        // first line is survey
        line = br.readLine();
-       // TDLog.Log( TDLog.LOG_DB, "loadFromFile: " + line );
+       // TDLog.Log( TDLog.LOG_DB, "load from file: " + line );
        // Log.v( "DistoX_DB", "load: " + line );
        String[] vals = line.split(" ", 4); 
        // if ( vals.length != 4 ) { TODO } // FIXME
@@ -4572,7 +4546,7 @@ class DataHelper extends DataSetObservable
            myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(sid) } );
 
            while ( (line = br.readLine()) != null ) {
-             TDLog.Log( TDLog.LOG_DB, "loadFromFile: " + line );
+             TDLog.Log( TDLog.LOG_DB, "load from file: " + line );
              vals = line.split(" ", 4);
              table = vals[2];
              v = vals[3];
@@ -4588,7 +4562,7 @@ class DataHelper extends DataSetObservable
                  date   = scanline1.stringValue( );
                  cv = makeAudioContentValues( sid, id, shotid, date );
                  myDB.insert( AUDIO_TABLE, null, cv ); 
-                 // TDLog.Log( TDLog.LOG_DB, "loadFromFile photo " + sid + " " + id + " " + title + " " + name );
+                 // TDLog.Log( TDLog.LOG_DB, "load from file photo " + sid + " " + id + " " + title + " " + name );
                }
 
              }
@@ -4605,7 +4579,7 @@ class DataHelper extends DataSetObservable
                if ( shotid >= 0 ) {
                  cv = makeSensorContentValues( sid, id, shotid, status, title, date, comment, type, value );
                  myDB.insert( SENSOR_TABLE, null, cv ); 
-                 // TDLog.Log( TDLog.LOG_DB, "loadFromFile photo " + sid + " " + id + " " + title + " " + name );
+                 // TDLog.Log( TDLog.LOG_DB, "load from file photo " + sid + " " + id + " " + title + " " + name );
                }
 
              }
@@ -4619,7 +4593,7 @@ class DataHelper extends DataSetObservable
                  long camera = (db_version > 39)? scanline1.longValue( ) : 0 ;
                  cv = makePhotoContentValues( sid, id, shotid, TDStatus.NORMAL, title, date, comment, camera );
                  myDB.insert( PHOTO_TABLE, null, cv ); 
-                 // TDLog.Log( TDLog.LOG_DB, "loadFromFile photo " + sid + " " + id + " " + title + " " + name );
+                 // TDLog.Log( TDLog.LOG_DB, "load from file photo " + sid + " " + id + " " + title + " " + name );
                }
              }
 	     else if ( table.equals(PLOT_TABLE) ) // ---------- PLOTS
@@ -4641,8 +4615,8 @@ class DataHelper extends DataSetObservable
                // if ( insertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation, false ) < 0 ) { success = false; }
                cv = makePlotContentValues( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation, maxscrap );
                myDB.insert( PLOT_TABLE, null, cv ); 
-               // TDLog.Log( TDLog.LOG_DB, "loadFromFile plot " + sid + " " + id + " " + start + " " + name );
-               // Log.v( "DistoX_DB", "loadFromFile plot " + sid + " " + id + " " + start + " " + name + " success " + success );
+               // TDLog.Log( TDLog.LOG_DB, "load from file plot " + sid + " " + id + " " + start + " " + name );
+               // Log.v( "DistoX_DB", "load from file plot " + sid + " " + id + " " + start + " " + name + " success " + success );
    
              }
 /* FIXME_SKETCH_3D *
@@ -4736,13 +4710,13 @@ class DataHelper extends DataSetObservable
                cv = makeFixedContentValues( sid, -1L, station, lng, lat, alt, asl, comment, status, source,
 		     cs, cs_lng, cs_lat, cs_alt, cs_n_dec );
                myDB.insert( FIXED_TABLE, null, cv ); 
-               // TDLog.Log( TDLog.LOG_DB, "loadFromFile fixed " + sid + " " + id + " " + station  );
+               // TDLog.Log( TDLog.LOG_DB, "load from file fixed " + sid + " " + id + " " + station  );
              } 
 	     else if ( table.equals(STATION_TABLE) )
 	     {
                // N.B. ONLY IF db_version > 19
                // TDLog.Error( "v <" + v + ">" );
-               // TDLog.Log( TDLog.LOG_DB, "loadFromFile station " + sid + " " + name + " " + comment + " " + flag  );
+               // TDLog.Log( TDLog.LOG_DB, "load from file station " + sid + " " + name + " " + comment + " " + flag  );
                name    = scanline1.stringValue( );
                comment = scanline1.stringValue( );
                long flag = ( db_version > 25 )? scanline1.longValue() : 0;
@@ -4759,7 +4733,7 @@ class DataHelper extends DataSetObservable
          } finally { myDB.endTransaction(); }
        }
        fr.close();
-     } catch ( FileNotFoundException e ) {
+     } catch ( FileNotFoundException e ) { // DistoX-SAF
      } catch ( IOException e ) {
      }
      // Log.v( "DistoX_DB", "success: " + success + " SID " + sid );
@@ -4997,7 +4971,6 @@ class DataHelper extends DataSetObservable
      DistoXOpenHelper(Context context, String database_name ) 
      {
         super(context, database_name, null, DATABASE_VERSION);
-        // Log.v("DistoX", "DB NAME " + database_name );
         // TDLog.Log( TDLog.LOG_DB, "createTables ... " + database_name + " version " + DATABASE_VERSION );
      }
 
