@@ -11,28 +11,22 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDTag;
+import com.topodroid.help.UserManualActivity;
+
 // import android.util.Log;
 
-// import java.io.File;
-// import java.util.List;
-// import java.util.ArrayList;
-
-// import android.app.Application;
 import android.app.Activity;
 import android.os.Bundle;
 
-// import android.content.Context;
 import android.content.Intent;
-// import android.content.res.Resources;
-
-// import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
 
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
-// import android.view.WindowManager.LayoutParams;
 import android.view.KeyEvent;
 
 public class PtCmapActivity extends Activity
@@ -100,11 +94,8 @@ public class PtCmapActivity extends Activity
     setResult( RESULT_OK, intent );
     return true;
   }
-    
 
   // ---------------------------------------------------------------
-  // list items click
-
   
   @Override
   public void onCreate( Bundle b )

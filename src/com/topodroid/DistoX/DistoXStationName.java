@@ -11,18 +11,21 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.prefs.TDSetting;
+
 import android.util.Log;
 
 import java.util.List;
 import java.util.Set;
 import java.util.ArrayList;
 
-class DistoXStationName
+public class DistoXStationName
 {
   static String mInitialStation;
   static String mSecondStation;
 
-  static void setInitialStation( String init )
+  public static void setInitialStation( String init )
   {
     if ( init == null || init.length() == 0 ) init = TDSetting.mInitStation;
     mInitialStation = init;
@@ -156,7 +159,7 @@ class DistoXStationName
   }
 
   // used by PocketTopo export
-  static int toInt( String name )
+  public static int toInt( String name )
   {
     if ( name == null ) return -1;
     if ( StationPolicy.doTopoRobot() ) {

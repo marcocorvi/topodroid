@@ -13,6 +13,10 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDString;
+import com.topodroid.prefs.TDSetting;
+
 import java.util.List;
 import java.util.Locale;
 

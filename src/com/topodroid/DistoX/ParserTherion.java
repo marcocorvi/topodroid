@@ -12,12 +12,15 @@
  */
 package com.topodroid.DistoX;
 
-// import java.io.File;
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDString;
+// import com.topodroid.prefs.TDSetting;
+
 import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.util.ArrayList;
-// import java.util.Stack;
 import java.util.regex.Pattern;
 
 // import android.util.Log;
@@ -29,30 +32,6 @@ import java.util.regex.Pattern;
 
 class ParserTherion extends ImportParser
 {
-  // String mName = null;  // survey name FROM ImportParser
-  // String mDate = null;  // survey date
-  // private String mTeam = TDString.EMPTY;
-  // String mTitle = TDString.EMPTY;
-  // private float   mDeclination = 0.0f; // one-survey declination
-  // private boolean mApplyDeclination = false;
-  // private boolean mValid = false;
-  // protected void checkValid() 
-  // {
-  //   mValid =  ( mName != null && mName.length() > 0 ) && ( mDate != null ) && ( shots.size() > 0 );
-  // }
-  // public boolean isValid() { return mValid; }
-
-  // private Stack< ParserTherionState > mStates; // states stack (LIFO)
-  // private void pushState( ParserTherionState state )
-  // {
-  //   mStates.push( state );
-  // }
-  // private ParserTherionState popState()
-  // {
-  //   return mStates.pop();
-  // }
-
-
   /** fix station:
    * fix stations are supposed to be referred to the same coord system
    */

@@ -15,13 +15,13 @@ import android.content.res.Resources;
 
 // import android.util.Log;
 
-class PlotInfo
+public class PlotInfo
 {
   // sketch types
   // TODO NEVER CHANGE - THESE ARE WRITTEN IN TDR FILES
   static final long PLOT_NULL       = -1;
   static final long PLOT_X_SECTION  = 0; // X-section at a station (defined in PLAN plot)
-  static final long PLOT_PLAN       = 1;
+  public static final long PLOT_PLAN       = 1;
   static final long PLOT_EXTENDED   = 2;
   static final long PLOT_H_SECTION  = 3; // leave the place but do not use
   static final long PLOT_PHOTO      = 4;
@@ -65,7 +65,7 @@ class PlotInfo
   { return t == PLOT_SECTION || t == PLOT_H_SECTION || t == PLOT_X_SECTION || t == PLOT_XH_SECTION || t == PLOT_PHOTO; }
 
   static boolean isSketch2D( long t ) { return t == PLOT_PLAN || t == PLOT_EXTENDED || t == PLOT_PROJECTED; }
-  static boolean isProfile(  long t ) { return t == PLOT_EXTENDED || t == PLOT_PROJECTED; }
+  public static boolean isProfile(  long t ) { return t == PLOT_EXTENDED || t == PLOT_PROJECTED; }
   static boolean isExtended( long t ) { return t == PLOT_EXTENDED; }
   static boolean isProjeted( long t ) { return t == PLOT_PROJECTED; }
   static boolean isPlan(     long t ) { return t == PLOT_PLAN; }

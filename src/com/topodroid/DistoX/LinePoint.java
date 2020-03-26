@@ -21,6 +21,10 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.math.Point2D;
+import com.topodroid.prefs.TDSetting;
+
 import java.io.PrintWriter;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -30,14 +34,14 @@ import android.graphics.Matrix;
 
 // import android.util.Log;
 
-class LinePoint extends Point2D
+public class LinePoint extends Point2D
 {
   // public float x, y; // inherited from PointF
   float x1, y1;    // first control point (to the right of the previous LinePoint)
   float x2, y2;    // second control point (to the left of this LinePoint)
   boolean has_cp;  // whether the line-point has CPs or not
-  LinePoint mPrev; // previous LinePoint on the line
-  LinePoint mNext; // next LinePoint on the line
+  public LinePoint mPrev; // previous LinePoint on the line
+  public LinePoint mNext; // next LinePoint on the line
 
   void landscapeToPortrait()
   {

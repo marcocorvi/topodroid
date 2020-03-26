@@ -11,37 +11,40 @@
  */
 package com.topodroid.DistoX;
 
-class AverageLeg
+import com.topodroid.utils.TDMath;
+import com.topodroid.math.TDVector;
+
+public class AverageLeg
 {
-  private Vector mAverage;
-  int mCnt;
-  float mDecl; // magnetic declination
+  private TDVector mAverage;
+  public  int mCnt;
+  public  float mDecl; // magnetic declination
 
   // AverageLeg( AverageLeg leg ) // deep copy cstr
   // {
-  //   mAverage = new Vector( leg.mAverage );
+  //   mAverage = new TDVector( leg.mAverage );
   //   mCnt  = leg.mCnt;
   //   mDecl = leg.mDecl;
   // }
 
-  AverageLeg( float decl )
+  public AverageLeg( float decl )
   {
-    mAverage = new Vector( 0, 0, 0 );
+    mAverage = new TDVector( 0, 0, 0 );
     mCnt = 0;
     mDecl = decl;
   }
 
-  void reset() {
+  public void reset() {
     mAverage.x = 0;
     mAverage.y = 0;
     mAverage.z = 0;
     mCnt = 0;
   }
 
-  void set( DBlock blk ) { set( blk.mLength, blk.mBearing, blk.mClino ); }
-  void add( DBlock blk ) { add( blk.mLength, blk.mBearing, blk.mClino ); }
+  public void set( DBlock blk ) { set( blk.mLength, blk.mBearing, blk.mClino ); }
+  public void add( DBlock blk ) { add( blk.mLength, blk.mBearing, blk.mClino ); }
 
-  void set( float l, float b, float c ) 
+  public void set( float l, float b, float c ) 
   {
     float cc = TDMath.cosd( c );
     mAverage.x = (l * TDMath.sind(b) * cc );
@@ -53,7 +56,7 @@ class AverageLeg
   // l length
   // b bearing
   // c clino
-  void add( float l, float b, float c ) 
+  public void add( float l, float b, float c ) 
   {
     float cc = TDMath.cosd( c );
     mAverage.x += (l * TDMath.sind(b) * cc );
@@ -69,11 +72,11 @@ class AverageLeg
   //   mAverage.z = - mAverage.z;
   // }
 
-  float length() { return mAverage.Length() / mCnt; }
+  public float length() { return mAverage.Length() / mCnt; }
 
-  float bearing() { return TDMath.in360( TDMath.atan2d( mAverage.x, mAverage.y ) + mDecl ); }
+  public float bearing() { return TDMath.in360( TDMath.atan2d( mAverage.x, mAverage.y ) + mDecl ); }
 
-  float clino() 
+  public float clino() 
   {
     float h = mAverage.x * mAverage.x + mAverage.y * mAverage.y;
     if ( h == 0 ) return ( mAverage.z > 0 )? 90 : -90;

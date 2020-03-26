@@ -11,6 +11,23 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDTag;
+import com.topodroid.utils.TDString;
+import com.topodroid.utils.TDStatus;
+import com.topodroid.utils.TDRequest;
+import com.topodroid.math.TDMatrix;
+import com.topodroid.math.TDVector;
+import com.topodroid.ui.MyButton;
+import com.topodroid.ui.MyTurnBitmap;
+import com.topodroid.ui.MyHorizontalButtonView;
+import com.topodroid.ui.MyHorizontalListView;
+import com.topodroid.help.HelpDialog;
+import com.topodroid.help.UserManualActivity;
+import com.topodroid.prefs.TDSetting;
+import com.topodroid.prefs.TDPrefCat;
+
 import android.util.Log;
 
 import java.util.List;
@@ -25,13 +42,7 @@ import android.os.Handler;
 // import java.lang.reflect.Method;
 // import android.os.Build;
 
-// import android.os.Parcelable;
-// import android.os.Debug;
-// import android.os.SystemClock;
-// import android.os.PowerManager;
-
 import android.app.Activity;
-// import android.app.Application;
 
 // import android.content.Context;
 import android.content.Intent;
@@ -39,37 +50,26 @@ import android.content.res.Resources;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 
-// import android.view.WindowManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.KeyEvent;
-// for FRAGMENT
-// import android.view.ViewGroup;
-// import android.view.LayoutInflater;
 
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.Toast;
-// import android.widget.PopupWindow;
-// import android.widget.LinearLayout;
-// import android.widget.RelativeLayout;
 import android.widget.ArrayAdapter;
-// import android.widget.TextView;
 import android.widget.ListView;
 
-// import android.preference.PreferenceManager;
 
 import android.provider.MediaStore;
 // import android.provider.Settings.System;
 
 import android.graphics.Bitmap;
-// import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-// import android.graphics.Rect;
 
 import android.net.Uri;
 
@@ -757,13 +757,8 @@ public class ShotWindow extends Activity
       // if ( TopoDroidApp.exportSurveyAsThSync( ) ) { // make sure to have survey exported as therion
         try {
           Intent intent = new Intent( "Cave3D.intent.action.Launch" );
-          // if ( TDSetting.mWithTdManager ) {
-            // Log.v("DistoX-Cave3D", "survey " + TDInstance.survey + " base " + TDPath.getPathBase() );
-            intent.putExtra( "INPUT_SURVEY", TDInstance.survey );
-            intent.putExtra( "SURVEY_BASE", TDPath.getPathBase() );
-          // } else {
-          //   intent.putExtra( "INPUT_FILE", TDPath.getSurveyThFile( TDInstance.survey ) );
-          // }
+          intent.putExtra( "INPUT_SURVEY", TDInstance.survey );
+          intent.putExtra( "SURVEY_BASE", TDPath.getPathBase() );
           mActivity.startActivity( intent );
         } catch ( ActivityNotFoundException e ) {
           TDToast.makeBad( R.string.no_cave3d );
@@ -774,8 +769,8 @@ public class ShotWindow extends Activity
         mActivity.startActivity( new Intent( Intent.ACTION_VIEW ).setClass( mActivity, DeviceActivity.class ) );
       }
     } else  if ( p++ == pos ) { // OPTIONS
-      Intent intent = new Intent( mActivity, TDPrefActivity.class );
-      intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_SURVEY );
+      Intent intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
+      intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_SURVEY );
       mActivity.startActivity( intent );
     } else if ( p++ == pos ) { // HELP
       // int nn = mNrButton1; //  + ( TDLevel.overNormal ?  mNrButton2 : 0 );
@@ -1920,18 +1915,18 @@ public class ShotWindow extends Activity
 	String strike_fmt = getResources().getString( R.string.strike_dip );
 	String strike_regex = strike_fmt.replaceAll("%\\d\\$.0f", "\\-??\\\\d+"); 
 	// Log.v("DistoX", "Strike regex: <<" + strike_regex + ">>");
-        Matrix m = new Matrix( new Vector(xx, xy, xz), new Vector(xy, yy, yz), new Vector(xz, yz, zz) );
-        Matrix minv = m.InverseT(); // m is self-transpose
-        Vector n0 = new Vector( -xn, -yn, -zn );
-        Vector n1 = minv.timesV( n0 ); // n1 = (a,b,c)
+        TDMatrix m = new TDMatrix( new TDVector(xx, xy, xz), new TDVector(xy, yy, yz), new TDVector(xz, yz, zz) );
+        TDMatrix minv = m.InverseT(); // m is self-transpose
+        TDVector n0 = new TDVector( -xn, -yn, -zn );
+        TDVector n1 = minv.timesV( n0 ); // n1 = (a,b,c)
         if ( n1.z < 0 ) { n1.x = - n1.x; n1.y = - n1.y; n1.z = - n1.z; } // make N positive Z
         n1.normalize();
         // Log.v("DistoX", "Plane normal " + n1.x + " " + n1.y + " " + n1.z );
 
-        // Vector z0 = new Vector( 0, 0, 1 );
-        // Vector stk = z0.cross( n1 );  // strike = ( -n1.y, n1.x, 0 );
+        // TDVector z0 = new TDVector( 0, 0, 1 );
+        // TDVector stk = z0.cross( n1 );  // strike = ( -n1.y, n1.x, 0 );
         // stk.normalized();
-        // Vector dip = n1.cross( stk ); // dip
+        // TDVector dip = n1.cross( stk ); // dip
         // float astk = TDMath.atan2d( stk.x, stk.y ); // TDMath.atan2d( -n1.y, n1.x );
         // float adip = TDMath.acosd( dip.z ); // TDMath.asind( n1.z );
         float astk = TDMath.atan2d( -n1.y, n1.x );
@@ -1998,24 +1993,12 @@ public class ShotWindow extends Activity
   // ------------------------------------------------------------------------
 
   @Override
-  public boolean onSearchRequested()
-  {
-    // TDLog.Error( "search requested" );
-    Intent intent = new Intent( mActivity, TDPrefActivity.class );
-    intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_SURVEY );
-    mActivity.startActivity( intent );
-    return true;
-  }
-
-  @Override
   public boolean onKeyDown( int code, KeyEvent event )
   {
     switch ( code ) {
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         onBackPressed();
         return true;
-      case KeyEvent.KEYCODE_SEARCH:
-        return onSearchRequested();
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
         UserManualActivity.showHelpPage( mActivity, getResources().getString( HELP_PAGE ));
         return true;

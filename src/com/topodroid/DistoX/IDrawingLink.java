@@ -12,6 +12,8 @@
  */
 package com.topodroid.DistoX;
 
+// import com.topodroid.math.Point2D;
+
 interface IDrawingLink
 {
   float getLinkX();

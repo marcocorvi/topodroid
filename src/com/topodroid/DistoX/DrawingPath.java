@@ -16,6 +16,9 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.prefs.TDSetting;
+
 // import android.util.Log;
 
 import java.io.PrintWriter;
@@ -36,36 +39,36 @@ import android.graphics.RectF;
  *   - DrawingStationPath
  */
 
-class DrawingPath extends RectF
+public class DrawingPath extends RectF
                   implements ICanvasCommand
 {
-  static final int DRAWING_PATH_FIXED   = 0; // leg
-  static final int DRAWING_PATH_SPLAY   = 1; // splay
-  static final int DRAWING_PATH_GRID    = 2; // grid
-  static final int DRAWING_PATH_STATION = 3; // station point (user inserted)
-  static final int DRAWING_PATH_POINT   = 4; // drawing point
-  static final int DRAWING_PATH_LINE    = 5;
-  static final int DRAWING_PATH_AREA    = 6;
-  static final int DRAWING_PATH_NAME    = 7; // station name (from survey data)
-  static final int DRAWING_PATH_NORTH   = 8; // north line (5m long)
-  static final int DRAWING_PATH_GEO     = 9; // georeferenced point
+  public static final int DRAWING_PATH_FIXED   = 0; // leg
+  public static final int DRAWING_PATH_SPLAY   = 1; // splay
+  public static final int DRAWING_PATH_GRID    = 2; // grid
+  public static final int DRAWING_PATH_STATION = 3; // station point (user inserted)
+  public static final int DRAWING_PATH_POINT   = 4; // drawing point
+  public static final int DRAWING_PATH_LINE    = 5;
+  public static final int DRAWING_PATH_AREA    = 6;
+  public static final int DRAWING_PATH_NAME    = 7; // station name (from survey data)
+  public static final int DRAWING_PATH_NORTH   = 8; // north line (5m long)
+  public static final int DRAWING_PATH_GEO     = 9; // georeferenced point
 
   Path mPath;
   Path mTransformedPath;
   Paint mPaint;          // drawing path paint
-  int mType;             // path type
+  public int mType;             // path type
   String mOptions;       // therion options
-  float x1, y1, x2, y2;  // endpoint scene coords  (not private just to write the scrap scale using mNorthLine )
+  public float x1, y1, x2, y2;  // endpoint scene coords  (not private just to write the scrap scale using mNorthLine )
   // private int dir; // 0 x1 < x2, 1 y1 < y2, 2 x2 < x1, 3 y2 < y1
-  DBlock mBlock;
+  public DBlock mBlock;
   boolean mLandscape; // whether the canvas is in landscape presentation mode or not
   private float mCosine; // cosine value for splays (= cos of angle between splay and leg)
                          // x-sections: angle between splay and plane-normal
   String mPlotName;      // full plotname, ie, survey-plot (only for Overview window)
-  int mLevel;            // canvas levels flag
+  public int mLevel;     // canvas levels flag
   int mScrap;            // plot scrap
 
-  protected float cx, cy; // midpoint scene coords
+  public float cx, cy; // midpoint scene coords
   // RectF mBBox;   // path boundig box (scene coords)
 
   void setCosine( float cosine ) { mCosine = cosine; }

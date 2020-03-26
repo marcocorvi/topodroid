@@ -11,6 +11,13 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDColor;
+import com.topodroid.math.TDVector;
+import com.topodroid.prefs.TDSetting;
+
+
 import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.util.Locale;
@@ -83,12 +90,12 @@ class CalibCBlock
     computeBearingAndClino();
     float c = c0 * TDMath.DEG2RAD;
     float b = b0 * TDMath.DEG2RAD;
-    Vector v1 = new Vector( (float)Math.cos(c) * (float)Math.cos(b), 
+    TDVector v1 = new TDVector( (float)Math.cos(c) * (float)Math.cos(b), 
                             (float)Math.cos(c) * (float)Math.sin(b),
                             (float)Math.sin(c) );
     c = mClino   * TDMath.DEG2RAD; 
     b = mBearing * TDMath.DEG2RAD;
-    Vector v2 = new Vector( (float)Math.cos(c) * (float)Math.cos(b), 
+    TDVector v2 = new TDVector( (float)Math.cos(c) * (float)Math.cos(b), 
                             (float)Math.cos(c) * (float)Math.sin(b),
                             (float)Math.sin(c) );
     float mFarCosine = v1.dot(v2);
@@ -131,30 +138,30 @@ class CalibCBlock
     // PrintWriter pw = new PrintWriter( sw );
     // pw.format("Locale.US, G %d %d %d M %d %d %d E %.2f", gx, gy, gz, mx, my, mz, mError );
     // TDLog.Log( TDLog.LOG_DATA, sw.getBuffer().toString() );
-    Vector g = new Vector( gx/f, gy/f, gz/f );
-    Vector m = new Vector( mx/f, my/f, mz/f );
+    TDVector g = new TDVector( gx/f, gy/f, gz/f );
+    TDVector m = new TDVector( mx/f, my/f, mz/f );
     doComputeBearingAndClino( g, m );
   }
 
   void computeBearingAndClino( CalibAlgo calib )
   {
     float f = TDUtil.FV;
-    Vector g = new Vector( gx/f, gy/f, gz/f );
-    Vector m = new Vector( mx/f, my/f, mz/f );
-    Vector g0 = calib.GetAG().timesV( g );
-    Vector m0 = calib.GetAM().timesV( m );
-    Vector g1 = calib.GetBG().plus( g0 );
-    Vector m1 = calib.GetBM().plus( m0 );
+    TDVector g = new TDVector( gx/f, gy/f, gz/f );
+    TDVector m = new TDVector( mx/f, my/f, mz/f );
+    TDVector g0 = calib.GetAG().timesV( g );
+    TDVector m0 = calib.GetAM().timesV( m );
+    TDVector g1 = calib.GetBG().plus( g0 );
+    TDVector m1 = calib.GetBM().plus( m0 );
     doComputeBearingAndClino( g1, m1 );
   }
 
-  private void doComputeBearingAndClino( Vector g, Vector m )
+  private void doComputeBearingAndClino( TDVector g, TDVector m )
   {
     g.normalize();
     m.normalize();
-    Vector e = new Vector( 1.0f, 0.0f, 0.0f );
-    Vector y = m.cross( g );
-    Vector x = g.cross( y );
+    TDVector e = new TDVector( 1.0f, 0.0f, 0.0f );
+    TDVector y = m.cross( g );
+    TDVector x = g.cross( y );
     y.normalize();
     x.normalize();
     float ex = e.dot( x );

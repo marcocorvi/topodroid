@@ -11,13 +11,13 @@
  */
 package com.topodroid.DistoX;
 
-import android.os.Bundle;
-// import android.app.Dialog;
-// import android.app.Activity;
-import android.content.Context;
-// import android.content.Intent;
+import com.topodroid.utils.TDLog;
+import com.topodroid.ui.MyDialog;
+import com.topodroid.prefs.TDSetting;
 
-// import android.graphics.*;
+import android.os.Bundle;
+import android.content.Context;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,7 +34,8 @@ class DrawingLabelDialog extends MyDialog
   private final float mX;
   private final float mY;
 
-  private CheckBox mCBbase  = null;
+  // GUI widgets
+  private CheckBox mCBbase  = null;  // canvas levels
   private CheckBox mCBfloor = null;
   private CheckBox mCBfill  = null;
   private CheckBox mCBceil  = null;

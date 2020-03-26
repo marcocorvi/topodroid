@@ -11,21 +11,20 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDVersion;
+import com.topodroid.num.TDNum;
+import com.topodroid.prefs.TDSetting;
+
 // import android.util.Log;
 
 import java.util.Locale;
-// import java.util.List;
 import java.util.ArrayList;
-// import java.util.HashMap;
 
-// import java.io.FileWriter;
 import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.io.BufferedWriter;
-// import java.io.FileInputStream;
-// import java.io.BufferedInputStream;
-// import java.io.DataInputStream;
-// import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import android.graphics.RectF;
@@ -63,7 +62,7 @@ class DrawingSvg extends DrawingSvgBase
       out.write( "<svg width=\"" + width + "\" height=\"" + height + "\"\n" );
       out.write( "   xmlns:svg=\"http://www.w3.org/2000/svg\"\n");
       out.write( "   xmlns=\"http://www.w3.org/2000/svg\" >\n" );
-      out.write( "<!-- SVG created by TopoDroid v. " + TopoDroidApp.VERSION + " -->\n" );
+      out.write( "<!-- SVG created by TopoDroid v. " + TDVersion.string() + " -->\n" );
       out.write( "  <defs>\n");
       out.write( "    <marker id=\"Triangle\" viewBox=\"0 0 10 10\" refX=\"0\" refY=\"5\" \n");
       out.write( "      markerUnits=\"strokeWidth\" markerWidth=\"4\" markerHeight=\"3\" orient=\"auto\" >\n");

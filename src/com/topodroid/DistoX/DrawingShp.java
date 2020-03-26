@@ -11,30 +11,25 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.shp.ShpObject;
+import com.topodroid.shp.ShpPoint;
+import com.topodroid.shp.ShpPolyline;
+import com.topodroid.shp.ShpStation;
+import com.topodroid.shp.ShpSegment;
+// import com.topodroid.prefs.TDSetting;
+
 // import android.util.Log;
 
-// import java.util.Locale;
 
 import java.util.List;
 import java.util.ArrayList;
-// import java.util.HashMap;
-// import java.util.Locale;
 
 import java.io.File;
-// import java.io.StringWriter;
-// import java.io.PrintWriter;
-// import java.io.BufferedWriter;
-// import java.io.FileInputStream;
-// import java.io.BufferedInputStream;
-// import java.io.DataInputStream;
-// import java.io.FileNotFoundException;
 import java.io.IOException;
-
-// import android.graphics.RectF;
 
 class DrawingShp
 {
-  
   // @param basepath   TopoDroid/shp/survey-plot
   // @return true if successful
   static boolean write( String basepath, DrawingCommandManager plot, long type, GeoReference station )

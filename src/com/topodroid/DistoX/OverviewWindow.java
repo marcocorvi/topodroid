@@ -11,11 +11,27 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDTag;
+import com.topodroid.utils.TDStatus;
+import com.topodroid.utils.TDColor;
+import com.topodroid.num.TDNum;
+import com.topodroid.num.NumStation;
+import com.topodroid.num.NumShot;
+import com.topodroid.num.NumSplay;
+import com.topodroid.math.Point2D;
+import com.topodroid.ui.MyButton;
+import com.topodroid.ui.MyHorizontalListView;
+import com.topodroid.ui.MyHorizontalButtonView;
+import com.topodroid.ui.MotionEventWrap;
+import com.topodroid.help.HelpDialog;
+import com.topodroid.help.UserManualActivity;
+import com.topodroid.prefs.TDSetting;
+import com.topodroid.prefs.TDPrefCat;
+
 // import android.util.Log;
 
-// import android.app.Activity;
-// import android.content.Context;
-// import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.Configuration;
@@ -24,7 +40,6 @@ import android.util.TypedValue;
 
 import android.graphics.PointF;
 import android.graphics.Path;
-// import android.graphics.Path.Direction;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.Matrix;
 
@@ -34,19 +49,9 @@ import android.os.Message;
 
 import android.view.MotionEvent;
 import android.view.View;
-// import android.widget.LinearLayout;
-// import android.view.ViewGroup;
-// import android.view.Display;
 import android.view.KeyEvent;
-// for FRAGMENT
-// import android.view.ViewGroup;
-// import android.view.LayoutInflater;
 
-// import android.view.ContextMenu;
-// import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.Button;
-// import android.widget.ZoomControls;
-// import android.widget.ZoomButton;
 import android.widget.ZoomButtonsController;
 import android.widget.ZoomButtonsController.OnZoomListener;
 import android.widget.ListView;
@@ -54,10 +59,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
-// import android.util.DisplayMetrics;
-
-// import java.io.File;
-// import java.io.FileWriter;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -134,7 +135,6 @@ public class OverviewWindow extends ItemDrawer
 
   // long getSID() { return TDInstance.sid; }
   // String getSurvey() { return TDInstance.survey; }
-  // private static BezierInterpolator mBezierInterpolator = new BezierInterpolator();
   private DrawingSurface  mOverviewSurface;
 
   private TDNum mNum;
@@ -301,8 +301,8 @@ public class OverviewWindow extends ItemDrawer
     }
 
     List< NumStation > stations = mNum.getStations();
-    List< NumShot > shots = mNum.getShots();
-    List< NumSplay > splays = mNum.getSplays();
+    List< NumShot >    shots    = mNum.getShots();
+    List< NumSplay >   splays   = mNum.getSplays();
     // Log.v("DistoX", "Overview stations " + stations.size() + " shots " + shots.size() + " splays " + splays.size() );
 
     if ( type == PlotInfo.PLOT_PLAN ) {
@@ -493,8 +493,6 @@ public class OverviewWindow extends ItemDrawer
       mBorderBottom     = TopoDroidApp.mDisplayHeight * 7 / 8;
 
       // Log.v("DistoX", "Overview from " + mFrom + " Type " + mType + " Zoom " + mZoom );
-
-      // mBezierInterpolator = new BezierInterpolator( );
 
       mImage = (Button) findViewById( R.id.handle );
       mImage.setOnClickListener( this );
@@ -1148,24 +1146,12 @@ public class OverviewWindow extends ItemDrawer
 
 
   @Override
-  public boolean onSearchRequested()
-  {
-    // TDLog.Error( "search requested" );
-    Intent intent = new Intent( mActivity, TDPrefActivity.class );
-    intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_PLOT );
-    mActivity.startActivity( intent );
-    return true;
-  }
-
-  @Override
   public boolean onKeyDown( int code, KeyEvent event )
   {
     switch ( code ) {
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         super.onBackPressed();
         return true;
-      case KeyEvent.KEYCODE_SEARCH:
-        return onSearchRequested();
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
         UserManualActivity.showHelpPage( mActivity, getResources().getString( HELP_PAGE ));
         return true;
@@ -1210,8 +1196,8 @@ public class OverviewWindow extends ItemDrawer
       new ExportDialog( mActivity, this, TDConst.mOverviewExportTypes, R.string.title_plot_save ).show();
       // saveWithExt( "th2" );
     } else if ( p++ == pos ) { // OPTIONS
-      Intent intent = new Intent( mActivity, TDPrefActivity.class );
-      intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_PLOT );
+      Intent intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
+      intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_PLOT );
       mActivity.startActivity( intent );
     } else if ( p++ == pos ) { // HELP
       new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE ) ).show();

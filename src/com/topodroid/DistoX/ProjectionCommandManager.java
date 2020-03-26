@@ -11,29 +11,18 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+
 import android.graphics.Canvas;
 import android.graphics.Matrix;
-// import android.graphics.Bitmap;
-// import android.graphics.PorterDuff;
-// import android.graphics.PointF;
-// import android.graphics.Paint;
-// import android.graphics.Path;
 import android.graphics.RectF;
-// import android.graphics.Path.Direction;
-// import android.os.Handler;
 
-// import java.util.Iterator;
 import java.util.List;
-// import java.util.Locale;
 import java.util.Collections;
 import java.util.ArrayList;
 
-// import java.util.Locale;
-
 // import android.util.Log;
 
-/**
- */
 class ProjectionCommandManager
 {
   private static final int BORDER = 20;

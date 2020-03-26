@@ -11,6 +11,10 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.ui.ItemButton;
+
+// import android.util.Log;
+
 import java.util.ArrayList;
 
 // import android.app.Activity;
@@ -23,9 +27,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
 
-// import android.widget.LinearLayout;
-
-// import android.util.Log;
 
 class SymbolAdapter extends ArrayAdapter< EnableSymbol >
 {

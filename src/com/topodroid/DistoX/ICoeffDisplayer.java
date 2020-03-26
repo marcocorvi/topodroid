@@ -11,9 +11,12 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.math.TDMatrix;
+import com.topodroid.math.TDVector;
+
 interface ICoeffDisplayer
 {
-    void displayCoeff( Vector bg, Matrix ag, Vector bm, Matrix am, Vector nL );
+    void displayCoeff( TDVector bg, TDMatrix ag, TDVector bm, TDMatrix am, TDVector nL );
     void enableButtons( boolean b );
     boolean isActivityFinishing();
 }

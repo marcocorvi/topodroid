@@ -1,4 +1,4 @@
-/* @file TDColor.java
+/* @file TDToast.java
  *
  * @author marco corvi
  * @date nov 2011
@@ -10,6 +10,8 @@
  * --------------------------------------------------------
  */
 package com.topodroid.DistoX;
+
+import com.topodroid.utils.TDColor;
 
 import android.os.Build;
 
@@ -25,7 +27,7 @@ import android.view.View.OnClickListener;
 
 // import android.content.Context;
 
-class TDToast
+public class TDToast
 {
   static final private int mFgColor = 0xff6699ff;
   static final private int mBgDrawable = R.drawable.toast_bg; // 0xff333333;
@@ -36,20 +38,20 @@ class TDToast
   static final private int LONG     = Toast.LENGTH_LONG;
 
   @SuppressLint("ShowToast")
-  static void make( int r ) { show( Toast.makeText( TDInstance.context, r, SHORT ) ); }
+  public static void make( int r ) { show( Toast.makeText( TDInstance.context, r, SHORT ) ); }
 
   @SuppressLint("ShowToast")
-  static void makeBad( int r ) { makeBG( r, TDColor.VIOLET ); }
-  static void makeWarn( int r ) { makeBG( r, TDColor.ORANGE ); }
+  public static void makeBad( int r ) { makeBG( r, TDColor.VIOLET ); }
+  public static void makeWarn( int r ) { makeBG( r, TDColor.ORANGE ); }
 
   @SuppressLint("ShowToast")
-  static void make( String text ) { show( Toast.makeText( TDInstance.context, text, SHORT ) ); }
+  public static void make( String text ) { show( Toast.makeText( TDInstance.context, text, SHORT ) ); }
   
   @SuppressLint("ShowToast")
-  static void makeBad( String text ) { makeBG( text, TDColor.VIOLET ); }
-  static void makeWarn( String text ) { makeBG( text, TDColor.ORANGE ); }
+  public static void makeBad( String text ) { makeBG( text, TDColor.VIOLET ); }
+  public static void makeWarn( String text ) { makeBG( text, TDColor.ORANGE ); }
   
-  static Toast makeToast( int r )
+  public static Toast makeToast( int r )
   {
     Toast toast = Toast.makeText( TDInstance.context, r, SHORT );
     show( toast );
@@ -57,52 +59,56 @@ class TDToast
   }
 
   @SuppressLint("ShowToast")
-  static void makeLong( int r ) { show( Toast.makeText( TDInstance.context, r, LONG ) ); }
+  public static void makeLong( int r ) { show( Toast.makeText( TDInstance.context, r, LONG ) ); }
 
   @SuppressLint("ShowToast")
-  static void makeLong( String text ) { show( Toast.makeText( TDInstance.context, text, LONG ) ); }
+  public static void makeLong( String text ) { show( Toast.makeText( TDInstance.context, text, LONG ) ); }
 
-  static void makeBG( int r, int color )
+  public static void makeBG( int r, int color )
   {
     Toast toast = Toast.makeText( TDInstance.context, r, SHORT );
     getView( toast, color );
-    toast.setGravity( mGravity, 0, 0 );
+    toast.setGravity( mGravity, 0, 0 ); // ANDROID-11 no-op
     toast.show();
   }
 
-  static void makeColor( int r, int color )
+  public static void makeColor( int r, int color )
   {
     Toast toast = Toast.makeText( TDInstance.context, r, SHORT );
-    View view = getView( toast );
-    toast.setGravity( mGravity, 0, 0 );
-    TextView tv = (TextView)view.findViewById( android.R.id.message );
-    tv.setTextColor( color );
+    View view = getView( toast );  // ANDROID-11 returns null
+    toast.setGravity( mGravity, 0, 0 ); // ANDROID-11 no-op
+    if ( view != null ) {
+      TextView tv = (TextView)view.findViewById( android.R.id.message );
+      tv.setTextColor( color );
+    }
     toast.show();
   }
 
-  static void makeBG( String str, int color )
+  public static void makeBG( String str, int color )
   {
     Toast toast = Toast.makeText( TDInstance.context, str, SHORT );
-    View view = getView( toast, color );
-    toast.setGravity( mGravity, 0, 0 );
+    getView( toast, color ); // ANDROID-11 return null
+    toast.setGravity( mGravity, 0, 0 );  // ANDROID-11 no-op
     toast.show();
   }
 
-  static void makeColor( String str, int color )
+  public static void makeColor( String str, int color )
   {
     Toast toast = Toast.makeText( TDInstance.context, str, SHORT );
-    View view = getView( toast, color );
-    toast.setGravity( mGravity, 0, 0 );
-    TextView tv = (TextView)view.findViewById( android.R.id.message );
-    tv.setTextColor( color );
+    View view = getView( toast, color ); // ANDROID-11 return null
+    toast.setGravity( mGravity, 0, 0 );  // ANDROID-11 no-op
+    if ( view != null ) {
+      TextView tv = (TextView)view.findViewById( android.R.id.message );
+      tv.setTextColor( color );
+    }
     toast.show();
   }
 
-  static void makeGravity( String str, int gravity )
+  public static void makeGravity( String str, int gravity )
   {
     Toast toast = Toast.makeText( TDInstance.context, str, SHORT );
-    View view = getView( toast );
-    toast.setGravity( gravity, 10, 10 );
+    getView( toast );
+    toast.setGravity( gravity, 10, 10 ); // ANDROID-11 no-op
     toast.show();
   }
 
@@ -110,38 +116,42 @@ class TDToast
   
   static private View getView( Toast toast )
   {
-    View view = toast.getView();
-    view.setOnClickListener( new OnClickListener() { public void onClick( View v ) { v.setVisibility( View.GONE ); } } );
-    if ( Build.VERSION.SDK_INT > Build.VERSION_CODES.O ) {
-      view.setBackgroundResource( mBgDrawable );
-    } else if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.M ) {
-      view.setBackgroundColor( mBgColor );
+    View view = toast.getView(); // ANDROID-11 returns null
+    if ( view != null ) {
+      view.setOnClickListener( new OnClickListener() { public void onClick( View v ) { v.setVisibility( View.GONE ); } } );
+      if ( Build.VERSION.SDK_INT > Build.VERSION_CODES.O ) {
+        view.setBackgroundResource( mBgDrawable );
+      } else if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.M ) {
+        view.setBackgroundColor( mBgColor );
+      }
+      // view.setClipToOutline( true );
+      TextView tv = (TextView)view.findViewById( android.R.id.message );
+      tv.setTextColor( mFgColor );
     }
-    // view.setClipToOutline( true );
-    TextView tv = (TextView)view.findViewById( android.R.id.message );
-    tv.setTextColor( mFgColor );
     return view;
   }
 
   static private View getView( Toast toast, int color )
   {
-    View view = toast.getView();
-    view.setOnClickListener( new OnClickListener() { public void onClick( View v ) { v.setVisibility( View.GONE ); } } );
-    if ( Build.VERSION.SDK_INT > Build.VERSION_CODES.O ) {
-      view.setBackgroundResource( mBgDrawable );
-    } else if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.M ) {
-      view.setBackgroundColor( mBgColor );
+    View view = toast.getView(); // ANDROID-11 returns null
+    if ( view != null ) {
+      view.setOnClickListener( new OnClickListener() { public void onClick( View v ) { v.setVisibility( View.GONE ); } } );
+      if ( Build.VERSION.SDK_INT > Build.VERSION_CODES.O ) {
+        view.setBackgroundResource( mBgDrawable );
+      } else if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.M ) {
+        view.setBackgroundColor( mBgColor );
+      }
+      // view.setClipToOutline( true );
+      TextView tv = (TextView)view.findViewById( android.R.id.message );
+      tv.setTextColor( color );
     }
-    // view.setClipToOutline( true );
-    TextView tv = (TextView)view.findViewById( android.R.id.message );
-    tv.setTextColor( color );
     return view;
   }
 
   static private void show( Toast toast )
   {
-    View view = getView( toast );
-    toast.setGravity( mGravity, 0, 0 );
+    getView( toast );
+    toast.setGravity( mGravity, 0, 0 ); // ANDROID-11 no-op
     toast.show();
   }
 }

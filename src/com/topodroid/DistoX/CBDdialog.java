@@ -11,6 +11,9 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.ui.MyDialog;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.util.Locale;

@@ -11,21 +11,15 @@
  */
 package com.topodroid.DistoX;
 
-// import java.lang.ref.WeakReference;
+import com.topodroid.utils.TDStatus;
+import com.topodroid.num.TDNum;
+import com.topodroid.prefs.TDSetting;
 
-// import java.io.File;
+// import java.lang.ref.WeakReference;
 
 import java.util.List;
 
-// import android.content.Intent;
-// import android.content.Context;
-
 import android.os.AsyncTask;
-// import android.os.Bundle;
-// import android.os.Handler;
-
-// import android.graphics.Bitmap;
-// import android.graphics.Bitmap.CompressFormat;
 
 // import android.util.Log;
 

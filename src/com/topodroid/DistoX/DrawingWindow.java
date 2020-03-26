@@ -11,13 +11,39 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDTag;
+import com.topodroid.utils.TDColor;
+import com.topodroid.utils.TDStatus;
+import com.topodroid.utils.TDRequest;
+import com.topodroid.num.TDNum;
+import com.topodroid.num.NumStation;
+import com.topodroid.num.NumShot;
+import com.topodroid.num.NumSplay;
+import com.topodroid.math.TDVector;
+import com.topodroid.math.Point2D;
+import com.topodroid.math.BezierCurve;
+import com.topodroid.math.BezierInterpolator;
+import com.topodroid.dln.DLNWall;
+import com.topodroid.dln.DLNSide;
+import com.topodroid.dln.DLNSite;
+import com.topodroid.dln.DLNSideList;
+import com.topodroid.ui.MyButton;
+import com.topodroid.ui.MyHorizontalListView;
+import com.topodroid.ui.MyHorizontalButtonView;
+import com.topodroid.ui.MyTurnBitmap;
+import com.topodroid.ui.ItemButton;
+import com.topodroid.ui.MotionEventWrap;
+import com.topodroid.help.HelpDialog;
+import com.topodroid.help.UserManualActivity;
+import com.topodroid.prefs.TDSetting;
+import com.topodroid.prefs.TDPrefCat;
+
 import android.util.Log;
 
 import java.io.File;
-// import java.io.FileWriter;
 import java.io.PrintWriter;
-// import java.io.BufferedWriter;
-// import java.io.FileOutputStream;
 import java.util.List;
 import java.util.Set;
 import java.util.ArrayList;
@@ -50,8 +76,6 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Button;
 import android.widget.Toast;
-// import android.widget.ZoomControls;
-// import android.widget.ZoomButton;
 import android.widget.ZoomButtonsController;
 import android.widget.ZoomButtonsController.OnZoomListener;
 import android.widget.ListView;
@@ -62,7 +86,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.provider.MediaStore;
 
 import android.graphics.Bitmap;
-// import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.Paint;
@@ -70,11 +93,8 @@ import android.graphics.Paint.FontMetrics;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Path;
-// import android.graphics.Path.Direction;
 
 import android.net.Uri;
-
-// import android.util.SparseArray;
 
 /**
  */
@@ -477,12 +497,12 @@ public class DrawingWindow extends ItemDrawer
   static final int MODE_SPLIT = 8;  // split the plot
 
   // line join-continue
-  static final private int CONT_OFF   = -1; // continue off
-  static final         int CONT_NONE  = 0;  // no continue
-  static final private int CONT_START = 1;  // continue: join to existing line
-  static final private int CONT_END   = 2;  // continue: join to existing line
-  static final private int CONT_BOTH  = 3;  // continue: join to existing line
-  static final private int CONT_CONTINUE  = 4;  // continue: continue existing line
+  private static final int CONT_OFF   = -1; // continue off
+  public  static final int CONT_NONE  = 0;  // no continue
+  private static final int CONT_START = 1;  // continue: join to existing line
+  private static final int CONT_END   = 2;  // continue: join to existing line
+  private static final int CONT_BOTH  = 3;  // continue: join to existing line
+  private static final int CONT_CONTINUE  = 4;  // continue: continue existing line
   // static final private int CONT_MAX   = 5;
 
   private int mMode         = MODE_MOVE;
@@ -1985,15 +2005,7 @@ public class DrawingWindow extends ItemDrawer
       mBtnRecentP[k].setOnClickListener(
         new View.OnClickListener() {
           @Override public void onClick( View v ) {
-            for ( int k = 0; k<NR_RECENT; ++k ) {
-              if ( v == mBtnRecentP[k] ) {
-                setPoint( k, false );
-                // if ( mRecentTools == mRecentPoint )     { setPoint( k, false ); }
-                // else if ( mRecentTools == mRecentLine ) { setLine( k, false ); }
-                // else if ( mRecentTools == mRecentArea ) { setArea( k, false ); }
-                break;
-              }
-            }
+            for ( int k = 0; k<NR_RECENT; ++k ) if ( v == mBtnRecentP[k] ) { setPoint( k, false ); break; }
           }
         }
       );
@@ -2365,9 +2377,9 @@ public class DrawingWindow extends ItemDrawer
     // float X2 = Y0 * Z1 - Y1 * Z0; 
     // float Y2 = Z0 * X1 - Z1 * X0;
     // float Z2 = X0 * Y1 - X1 * Y0;
-    Vector V0 = new Vector( ma, mc );
-    Vector V1 = new Vector( - (float)Math.sin( ma ), (float)Math.cos( ma ), 0 );
-    Vector V2 = V0.cross( V1 );
+    TDVector V0 = new TDVector( ma, mc );
+    TDVector V1 = new TDVector( - (float)Math.sin( ma ), (float)Math.cos( ma ), 0 );
+    TDVector V2 = V0.cross( V1 );
 
     float dist = 0;
     DBlock blk = null;
@@ -2415,7 +2427,7 @@ public class DrawingWindow extends ItemDrawer
           // float Z = (float)Math.sin( bc );
           // xfrom = -dist * (X1 * X + Y1 * Y + Z1 * Z); // neg. because it is the FROM point
           // yfrom =  dist * (X2 * X + Y2 * Y + Z2 * Z);
-	  Vector v = new Vector( blk.mBearing * TDMath.DEG2RAD, blk.mClino * TDMath.DEG2RAD );
+	  TDVector v = new TDVector( blk.mBearing * TDMath.DEG2RAD, blk.mClino * TDMath.DEG2RAD );
           xfrom = -dist * v.dot(V1); // neg. because it is the FROM point
           yfrom =  dist * v.dot(V2);
 
@@ -2471,7 +2483,7 @@ public class DrawingWindow extends ItemDrawer
       // float x =  d * (X1 * X + Y1 * Y + Z1 * Z);
       // float y = -d * (X2 * X + Y2 * Y + Z2 * Z);
       // float a = 90 - (float)(Math.acos(X0 * X + Y0 * Y + Z0 * Z) * TDMath.RAD2DEG); // cos-angle with the normal
-      Vector v = new Vector(  b.mBearing * TDMath.DEG2RAD, b.mClino * TDMath.DEG2RAD);
+      TDVector v = new TDVector(  b.mBearing * TDMath.DEG2RAD, b.mClino * TDMath.DEG2RAD);
       float x =  d * v.dot(V1);
       float y = -d * v.dot(V2);
       float a = 90 - (float)(Math.acos( v.dot(V0) ) * TDMath.RAD2DEG); // cos-angle with the normal
@@ -5163,16 +5175,16 @@ public class DrawingWindow extends ItemDrawer
         }
       }
     } else if ( TDLevel.overNormal && b == mButton2[0] ) { // drawing properties
-      Intent intent = new Intent( mActivity, TDPrefActivity.class );
-      intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_PLOT_DRAW );
+      Intent intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
+      intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_PLOT_DRAW );
       mActivity.startActivity( intent );
     } else if ( TDLevel.overNormal && b == mButton5[1] ) { // erase properties
-      Intent intent = new Intent( mActivity, TDPrefActivity.class );
-      intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_PLOT_ERASE );
+      Intent intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
+      intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_PLOT_ERASE );
       mActivity.startActivity( intent );
     } else if ( TDLevel.overNormal && b == mButton3[2] ) { // edit properties
-      Intent intent = new Intent( mActivity, TDPrefActivity.class );
-      intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_PLOT_EDIT );
+      Intent intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
+      intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_PLOT_EDIT );
       mActivity.startActivity( intent );
     }
     return true;
@@ -5850,24 +5862,12 @@ public class DrawingWindow extends ItemDrawer
   }
 
   @Override
-  public boolean onSearchRequested()
-  {
-    // TDLog.Error( "search requested" );
-    Intent intent = new Intent( mActivity, TDPrefActivity.class );
-    intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_PLOT );
-    mActivity.startActivity( intent );
-    return true;
-  }
-
-  @Override
   public boolean onKeyDown( int code, KeyEvent event )
   {
     switch ( code ) {
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         onBackPressed();
         return true;
-      case KeyEvent.KEYCODE_SEARCH:
-        return onSearchRequested();
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
         UserManualActivity.showHelpPage( mActivity, getResources().getString( HELP_PAGE ));
         return true;
@@ -6052,8 +6052,8 @@ public class DrawingWindow extends ItemDrawer
         }
       } else if ( p++ == pos ) { // OPTIONS
         updateReference();
-        Intent intent = new Intent( mActivity, TDPrefActivity.class );
-        intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_PLOT );
+        Intent intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
+        intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_PLOT );
         mActivity.startActivity( intent );
       } else if ( p++ == pos ) { // HELP
         // 1 for select-tool
@@ -7060,18 +7060,19 @@ public class DrawingWindow extends ItemDrawer
     if ( index >= 0 ) {
       mCurrentPoint = index;
       pointSelected( index, update_recent );
-      if ( ! update_recent ) updateAge( k, mRecentPointAge );
+      updateAge( k, mRecentPointAge );
     }
   }
 
   @Override
   public void setLine( int k, boolean update_recent )
   {
+    Log.v("DistoX-AGE", "set line " + k + " update " + update_recent );
     int index = BrushManager.getLineIndex( mRecentLine[k] );
     if ( index >= 0 ) {
       mCurrentLine = index;
       lineSelected( index, update_recent );
-      if ( ! update_recent ) updateAge( k, mRecentLineAge );
+      updateAge( k, mRecentLineAge );
     }
   }
 
@@ -7082,7 +7083,7 @@ public class DrawingWindow extends ItemDrawer
     if ( index >= 0 ) {
       mCurrentArea = index;
       areaSelected( index, update_recent );
-      if ( ! update_recent ) updateAge( k, mRecentAreaAge );
+      updateAge( k, mRecentAreaAge );
     }
   }
 

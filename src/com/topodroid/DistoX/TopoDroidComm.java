@@ -11,6 +11,11 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDStatus;
+import com.topodroid.utils.TDColor;
+import com.topodroid.prefs.TDSetting;
+
 import android.util.Log;
 
 import java.util.UUID;

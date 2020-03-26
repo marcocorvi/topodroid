@@ -13,22 +13,12 @@ package com.topodroid.DistoX;
 
 // import android.util.Log;
 
-// import java.util.ArrayList;
 
 import android.content.Context;
-// import android.app.Dialog;
 
 import android.widget.CheckBox;
-// import android.widget.Button;
-// import android.widget.TextView;
 
-// import android.view.LayoutInflater;
-// import android.view.MotionEvent;
 import android.view.View;
-// import android.view.View.OnClickListener;
-// import android.view.View.OnTouchListener;
-// import android.text.Layout;
-// import android.widget.LinearLayout;
 
 class EnableSymbol implements View.OnClickListener
 {
@@ -45,13 +35,6 @@ class EnableSymbol implements View.OnClickListener
   }
 
   void setEnabled( boolean enabled ) { mEnabled = enabled; }
-
-  // CheckBox     mCheckBox = null;
-  // // ItemButton   mButton   = null;
-  // TextView     mTextView = null;
-  // LinearLayout mView = null;
-
-  // private Context mContext;
 
   @Override
   public void onClick( View v ) 

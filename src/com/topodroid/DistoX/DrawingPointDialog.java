@@ -11,34 +11,35 @@
  */
 package com.topodroid.DistoX;
 
-// import android.app.Dialog;
-import android.os.Bundle;
+import com.topodroid.utils.TDLog;
+import com.topodroid.ui.MyOrientationWidget;
+import com.topodroid.ui.MyDialog;
+import com.topodroid.prefs.TDSetting;
 
+// import android.util.Log;
+
+import android.os.Bundle;
 import android.content.Context;
 
-// import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.RadioButton;
-// import android.widget.RadioGroup;
-// import android.widget.ImageView;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.view.View;
-// import android.view.ViewGroup.LayoutParams;
-
-// import android.graphics.Paint;
-
-// import android.util.Log;
 
 class DrawingPointDialog extends MyDialog
                          implements View.OnClickListener
 {
-  private final DrawingPointPath mPoint;
-  private final DrawingWindow  mParent;
-  private final boolean mOrientable;
-  private final int mPointType;
+  private DrawingWindow  mParent;
+  private DrawingPointPath mPoint;
+  private boolean mOrientable;
+  private int mPointType;
+  private boolean  mDoOptions;
+  private boolean  mHasXSectionOutline;
+  private String mXSectionName; // full section name = scrap-name
 
+  // GUI widgets
   // private TextView mTVtype;
   private EditText mEToptions;
   private EditText mETtext;
@@ -50,10 +51,8 @@ class DrawingPointDialog extends MyDialog
 
   private CheckBox mCBxsection; // to display xsection outline
   private Button   mBTdraw;
-  private boolean  mHasXSectionOutline;
-  private boolean  mDoOptions;
 
-  private CheckBox mCBbase  = null;
+  private CheckBox mCBbase  = null; // canvas levels
   private CheckBox mCBfloor = null;
   private CheckBox mCBfill  = null;
   private CheckBox mCBceil  = null;
@@ -66,8 +65,6 @@ class DrawingPointDialog extends MyDialog
  
   private Button   mBtnOk;
   private Button   mBtnCancel;
-
-  private String mXSectionName; // full section name = scrap-name
 
   DrawingPointDialog( Context context, DrawingWindow parent, DrawingPointPath point )
   {

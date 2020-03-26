@@ -11,25 +11,19 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.ui.MyColorPicker;
+import com.topodroid.ui.MyDialog;
+import com.topodroid.prefs.TDSetting;
+
 // import android.util.Log;
 
 import java.util.regex.Pattern;
 import java.util.List;
 
-// import android.app.Dialog;
 import android.os.Bundle;
-// import android.widget.RadioButton;
-
-// import android.text.method.KeyListener;
 import android.text.InputType;
 
-// import android.widget.Spinner;
-// import android.widget.ArrayAdapter;
-
-
 import android.content.Context;
-// import android.content.res.Resources;
-// import android.content.DialogInterface;
 import android.inputmethodservice.KeyboardView;
 
 import android.widget.TextView;
@@ -39,8 +33,6 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
 import android.view.View;
-// import android.view.View.OnKeyListener;
-// import android.view.KeyEvent;
 
 class MultishotDialog extends MyDialog
                       implements View.OnClickListener

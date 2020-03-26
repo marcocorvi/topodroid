@@ -11,21 +11,22 @@
  */
 package com.topodroid.DistoX;
 
-// import android.app.Dialog;
-import android.os.Bundle;
+import com.topodroid.utils.TDLog;
+import com.topodroid.ui.MyCheckBox;
+import com.topodroid.ui.MyDialog;
+import com.topodroid.ui.MyStateBox;
+import com.topodroid.ui.TDLayout;
+import com.topodroid.prefs.TDSetting;
 
+import android.os.Bundle;
 import android.content.Context;
 
-// import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
-// import android.widget.RadioButton;
-// import android.widget.RadioGroup;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.LinearLayout;
 import android.widget.AdapterView;
-// import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 
 import android.view.View;
@@ -34,13 +35,16 @@ class DrawingLineDialog extends MyDialog
                         implements View.OnClickListener
                         , AdapterView.OnItemSelectedListener
 {
-  private DrawingLinePath mLine;
   private DrawingWindow mParent;
-  private LinePoint mPoint;
-  private int mType;
+  private DrawingLinePath mLine;  // edit item
+  private LinePoint mPoint;       // edit point
+  private boolean mDoOptions;     // whether levl is over advanced (cached)
+
+  private int mType;              // line type - initialized from line item's type
   private int mTypeSection;
 
-  private Spinner mETtype;
+  // GUI widgets
+  private Spinner  mETtype;
   private EditText mEToptions;
  
   private CheckBox mBtnOutlineOut;
@@ -56,7 +60,7 @@ class DrawingLineDialog extends MyDialog
   private MyCheckBox mBtnRock = null;
   private MyCheckBox mBtnClose;
 
-  private CheckBox mCBbase  = null;
+  private CheckBox mCBbase  = null; // canvas levels
   private CheckBox mCBfloor = null;
   private CheckBox mCBfill  = null;
   private CheckBox mCBceil  = null;
@@ -65,7 +69,6 @@ class DrawingLineDialog extends MyDialog
   // private CheckBox mCBwater = null;
   // private CheckBox mCBtext  = null;
 
-  private boolean mDoOptions;
 
   DrawingLineDialog( Context context, DrawingWindow parent, DrawingLinePath line, LinePoint lp )
   {

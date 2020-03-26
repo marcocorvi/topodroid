@@ -11,6 +11,9 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.prefs.TDSetting;
+
 import android.util.Log;
  
 import android.content.SharedPreferences.Editor;
@@ -32,7 +35,7 @@ import android.graphics.drawable.BitmapDrawable;
 // import android.view.Display;
 // import android.view.Surface;
 
-class TDandroid
+public class TDandroid
 {
   /** permissions string codes
    */ 
@@ -69,15 +72,15 @@ class TDandroid
 /* FIXME-23 */
   static final int TEMPERATURE      = Sensor.TYPE_AMBIENT_TEMPERATURE; // REQUIRES API-14
 
-  static final int TITLE_NORMAL     = 0xff6699ff; // FIXED_BLUE same as in values/styles.xml
-  static final int TITLE_NORMAL2    = 0xff99ccff; 
-  static final int TITLE_BACKSHOT   = 0xff0099cc; // DARK BLUE
-  static final int TITLE_BACKSIGHT  = 0xffb66dff; // VIOLET
-  static final int TITLE_TRIPOD     = 0xffff6db6; // PINK
-  static final int TITLE_TOPOROBOT  = 0xffdbd100; // ORANGE
-  static final int TITLE_ANOMALY    = 0xffff3333; // BRIGHT RED
+  public static final int TITLE_NORMAL     = 0xff6699ff; // FIXED_BLUE same as in values/styles.xml
+  public static final int TITLE_NORMAL2    = 0xff99ccff; 
+  public static final int TITLE_BACKSHOT   = 0xff0099cc; // DARK BLUE
+  public static final int TITLE_BACKSIGHT  = 0xffb66dff; // VIOLET
+  public static final int TITLE_TRIPOD     = 0xffff6db6; // PINK
+  public static final int TITLE_TOPOROBOT  = 0xffdbd100; // ORANGE
+  public static final int TITLE_ANOMALY    = 0xffff3333; // BRIGHT RED
 
-  static void applyEditor( Editor editor )
+  public static void applyEditor( Editor editor )
   {
     editor.apply(); 
   }
@@ -130,8 +133,8 @@ class TDandroid
     return true;
   }
 
-  static void setButtonBackground( Button btn, BitmapDrawable drawable ) { btn.setBackground( drawable ); }
-  static void setSeekBarBackground( SeekBar btn, BitmapDrawable drawable ) { btn.setBackground( drawable ); }
+  public static void setButtonBackground( Button btn, BitmapDrawable drawable ) { btn.setBackground( drawable ); }
+  public static void setSeekBarBackground( SeekBar btn, BitmapDrawable drawable ) { btn.setBackground( drawable ); }
 /* */
   
 /* FIXME-16
@@ -248,7 +251,7 @@ class TDandroid
     return ret;
   }
 
-  static boolean checkLocation( Context context )
+  public static boolean checkLocation( Context context )
   {
     // TDLog.Log( LOG_PERM, "check location" );
     // Log.v("DistoX-PERM", "Check location ");
@@ -258,7 +261,7 @@ class TDandroid
         && pm.hasSystemFeature(PackageManager.FEATURE_LOCATION_GPS);
   }
 
-  static boolean checkCamera( Context context )
+  public static boolean checkCamera( Context context )
   {
     // TDLog.Log( LOG_PERM, "check camera" );
     // Log.v("DistoX-PERM", "Check camera ");
@@ -268,14 +271,14 @@ class TDandroid
         && pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_AUTOFOCUS);
   }
 
-  static boolean checkMultitouch( Context context )
+  public static boolean checkMultitouch( Context context )
   {
     // TDLog.Log( LOG_PERM, "check multitouch" );
     // Log.v("DistoX-PERM", "Check multitouch ");
     return context.getPackageManager().hasSystemFeature( PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH );
   }
 
-  static boolean checkMicrophone( Context context )
+  public static boolean checkMicrophone( Context context )
   {
     // TDLog.Log( LOG_PERM, "check microphone" );
     // Log.v("DistoX-PERM", "Check microphone ");
@@ -283,7 +286,7 @@ class TDandroid
         && context.getPackageManager().hasSystemFeature( PackageManager.FEATURE_MICROPHONE );
   }
 
-  static boolean checkBluetooth( Context context )
+  public static boolean checkBluetooth( Context context )
   {
     // TDLog.Log( LOG_PERM, "check bluetooth" );
     // Log.v("DistoX-PERM", "Check bluetooth ");
@@ -291,7 +294,7 @@ class TDandroid
         && context.getPackageManager().hasSystemFeature( PackageManager.FEATURE_BLUETOOTH );
   }
 
-  static boolean checkInternet( Context context )
+  public static boolean checkInternet( Context context )
   {
     // TDLog.Log( LOG_PERM, "check internet" );
     // Log.v("DistoX-PERM", "Check internet ");
@@ -357,7 +360,7 @@ class TDandroid
   // static void lockOrientationiLandscape( Activity act ) { act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE ); }
 
 
-  static void setScreenOrientation( Activity act )
+  public static void setScreenOrientation( Activity act )
   {
     if ( act == null ) return;
     switch ( TDSetting.mOrientation ) {

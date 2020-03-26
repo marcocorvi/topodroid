@@ -14,6 +14,10 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.ui.MyDialog;
+
+
 // import android.app.Dialog;
 import android.os.Bundle;
 

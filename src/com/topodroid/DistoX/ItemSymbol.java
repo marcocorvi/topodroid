@@ -11,23 +11,18 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDColor;
+import com.topodroid.ui.ItemButton;
+
 // import java.util.ArrayList;
 
 import android.content.Context;
-// import android.app.Dialog;
 
-// import android.graphics.Color;
 import android.view.View.OnClickListener;
 
-// import android.widget.RadioButton;
 import android.widget.CheckBox;
-// import android.widget.Button;
 import android.widget.TextView;
 
-// import android.view.LayoutInflater;
-// import android.view.MotionEvent;
-// import android.view.View;
-// import android.view.View.OnTouchListener;
 // import android.text.Layout;
 import android.widget.LinearLayout;
 

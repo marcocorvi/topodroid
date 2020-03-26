@@ -14,6 +14,8 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.num.TDNum;
+
 class PlotSaveData
 {
   final PlotInfo plot;

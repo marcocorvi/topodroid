@@ -11,13 +11,18 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.ui.MyDialog;
+import com.topodroid.prefs.TDSetting;
+
+import com.topodroid.mag.WorldMagneticModel;
+
 // import android.util.Log;
 
 import java.util.Locale;
 
 import android.net.Uri;
 
-// import android.app.Dialog;
 import android.os.Bundle;
 
 import android.content.Context;
@@ -25,18 +30,11 @@ import android.content.Intent;
 
 import android.widget.EditText;
 import android.widget.Button;
-// import android.widget.CheckBox;
 import android.view.View;
-// import android.view.ViewGroup.LayoutParams;
-// import android.view.KeyEvent;
 
 import android.text.ClipboardManager;
-// import android.content.ClipData;
-// import android.content.ClipDescription;
 
 import android.inputmethodservice.KeyboardView;
-// import android.widget.TextView;
-// import android.view.View.OnFocusChangeListener;
 
 class FixedAddDialog extends MyDialog
                      implements View.OnClickListener

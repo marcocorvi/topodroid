@@ -11,21 +11,21 @@
  */
 package com.topodroid.DistoX;
 
-// import android.app.Dialog;
-import android.os.Bundle;
+import com.topodroid.utils.TDLog;
+import com.topodroid.ui.MyStateBox;
+import com.topodroid.ui.MyOrientationWidget;
+import com.topodroid.ui.TDLayout;
+import com.topodroid.ui.MyDialog;
+import com.topodroid.prefs.TDSetting;
 
+import android.os.Bundle;
 import android.content.Context;
 
-// import android.widget.TextView;
-// import android.widget.EditText;
 import android.widget.Button;
-// import android.widget.RadioButton;
-// import android.widget.RadioGroup;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.LinearLayout;
 import android.widget.AdapterView;
-// import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 
 import android.view.View;
@@ -34,12 +34,14 @@ class DrawingAreaDialog extends MyDialog
                         implements View.OnClickListener
                         , AdapterView.OnItemSelectedListener
 {
-  private final DrawingAreaPath mArea;
-  private final DrawingWindow mParent;
-  private final boolean mOrientable;
+  private DrawingWindow mParent;
+  private DrawingAreaPath mArea;  // area item
+  private int mAreaType;          // area type initualized from area item's type
+  private boolean mOrientable;    // whether the area type is orientable
   // private boolean mDoOptions; // areas do not have options
 
-  private CheckBox mCBbase  = null;
+  // GUI widgets
+  private CheckBox mCBbase  = null; // canvas levels
   private CheckBox mCBfloor = null;
   private CheckBox mCBfill  = null;
   private CheckBox mCBceil  = null;
@@ -50,7 +52,6 @@ class DrawingAreaDialog extends MyDialog
 
   private CheckBox mCBvisible;
   // private Spinner mETtype;
-  private int mAreaType;
 
   private MyOrientationWidget mOrientationWidget; 
 
@@ -69,7 +70,7 @@ class DrawingAreaDialog extends MyDialog
     // mDoOptions = TDLevel.overAdvanced;
   }
 
-// -------------------------------------------------------------------
+  // -------------------------------------------------------------------
   @Override
   protected void onCreate(Bundle savedInstanceState) 
   {

@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.prefs.TDSetting;
+
 // import java.lang.ref.WeakReference;
 
 import android.os.AsyncTask;

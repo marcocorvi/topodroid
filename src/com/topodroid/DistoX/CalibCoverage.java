@@ -11,6 +11,9 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.math.TDVector;
+
 import android.util.Log;
 
 import java.util.List;
@@ -265,7 +268,7 @@ class CalibCoverage
     float f = TDUtil.FV;
     for ( CalibCBlock b : clist ) {
       if ( b.mGroup <= 0 ) continue;
-      Vector v = ( mode == 0 )? new Vector( b.gx/f, b.gy/f, b.gz/f ) : new Vector( b.mx/f, b.my/f, b.mz/f );
+      TDVector v = ( mode == 0 )? new TDVector( b.gx/f, b.gy/f, b.gz/f ) : new TDVector( b.mx/f, b.my/f, b.mz/f );
       float compass = TDMath.atan2( v.x, v.y ); if ( compass < 0 ) compass += TDMath.M_2PI;
       float clino   = TDMath.atan2( v.z, TDMath.sqrt( v.x * v.x + v.y * v.y ) );
       updateDirections( compass, clino, 1 );

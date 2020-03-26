@@ -14,6 +14,10 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
+// import com.topodroid.prefs.TDSetting;
+
 import android.util.Log;
 
 import android.graphics.Canvas;
@@ -37,7 +41,7 @@ import java.util.Locale;
 
 /**
  */
-class DrawingAreaPath extends DrawingPointLinePath
+public class DrawingAreaPath extends DrawingPointLinePath
 {
   // private static int area_id_cnt = 0;
   // private statis String makeId() 
@@ -248,6 +252,8 @@ class DrawingAreaPath extends DrawingPointLinePath
 
   int areaType() { return mAreaType; }
 
+  public String getThName() { return BrushManager.getAreaThName( mAreaType ); }
+
   @Override
   void setOrientation( double angle ) 
   { 
@@ -327,7 +333,7 @@ class DrawingAreaPath extends DrawingPointLinePath
     toTherionPoints( pw, true );
 
     pw.format("endline\n");
-    pw.format("area %s", BrushManager.getAreaThName( mAreaType ) );
+    pw.format("area %s", getThName( ) );
     if ( BrushManager.isAreaOrientable( mAreaType ) ) {
       pw.format(Locale.US, " #orientation %.1f", mOrientation );
     }
@@ -372,7 +378,7 @@ class DrawingAreaPath extends DrawingPointLinePath
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /*, DrawingUtil mDrawingUtil */ )
   {
     // linetype: 0 spline, 1 bezier, 2 line
-    String name = BrushManager.getAreaThName( mAreaType );
+    String name = getThName( );
     pw.format("          <item type=\"area\" name=\"%s\" cave=\"%s\" branch=\"%s\" orientation=\"%.2f\" options=\"%s\" ",
       name, cave, branch, mOrientation, ( (mOptions== null)? "" : mOptions )
     );
@@ -401,7 +407,7 @@ class DrawingAreaPath extends DrawingPointLinePath
   @Override
   void toDataStream( DataOutputStream dos, int scrap )
   {
-    String name  = BrushManager.getAreaThName( mAreaType );
+    String name  = getThName( );
     if ( name == null ) {
       TDLog.Error("null area name");
       name = "user";

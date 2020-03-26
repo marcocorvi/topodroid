@@ -11,11 +11,14 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.ui.MyButton;
+import com.topodroid.ui.TDLayout;
+import com.topodroid.prefs.TDSetting;
+
 import android.util.Log;
 
-// import android.app.Activity;
 import android.app.Dialog;
-// import android.content.Intent;
 import android.content.Context;
 
 import android.os.Bundle;
@@ -29,7 +32,6 @@ import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.Button;
 import android.widget.TextView;
-// import android.widget.FrameLayout;
 import android.widget.ZoomButtonsController;
 import android.widget.ZoomButtonsController.OnZoomListener;
 

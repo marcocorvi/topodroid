@@ -11,25 +11,23 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.ui.MyDialog;
+import com.topodroid.prefs.TDSetting;
+
 // import android.util.Log;
 
 import java.util.Locale;
 
-// import android.app.Dialog;
 import android.os.Bundle;
 
 import android.content.Context;
-// import android.text.InputType;
 import android.inputmethodservice.KeyboardView;
-
-// import android.view.Window;
 
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.CheckBox;
-// import android.widget.LinearLayout;
 import android.view.View;
-// import android.view.ViewGroup.LayoutParams;
 
 class PlotNewDialog extends MyDialog
                            implements View.OnClickListener

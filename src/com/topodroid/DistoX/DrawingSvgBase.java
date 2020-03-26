@@ -11,6 +11,11 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
+import com.topodroid.math.Point2D;
+import com.topodroid.math.BezierCurve;
+import com.topodroid.prefs.TDSetting;
 
 // import android.util.Log;
 
@@ -112,8 +117,7 @@ class DrawingSvgBase
 
   static protected void toSvgLabel( PrintWriter pw, DrawingLabelPath point, String color, float xoff, float yoff )
   {
-    int idx = point.mPointType;
-    String name = BrushManager.getPointThName( idx );
+    String name = point.getThName();
     pw.format("<!-- point %s -->\n", name );
     if ( name.equals("label") ) {
       DrawingLabelPath label = (DrawingLabelPath)point;
@@ -129,7 +133,7 @@ class DrawingSvgBase
 
   static protected void toSvg( PrintWriter pw, DrawingLinePath line, String color, float xoff, float yoff ) 
   {
-    String th_name = BrushManager.getLineThName( line.mLineType ); 
+    String th_name = line.getThName( ); 
     pw.format(Locale.US, "  <path stroke=\"%s\" stroke-width=\"%.2f\" fill=\"none\" class=\"%s\"", color, TDSetting.mSvgLineStroke, th_name );
     if ( th_name.equals( "arrow" ) ) pw.format(" marker-end=\"url(#Triangle)\"");
     else if ( th_name.equals( "section" ) ) pw.format(" stroke-dasharray=\"5 3 \"");
@@ -213,7 +217,7 @@ class DrawingSvgBase
   static protected void toSvg( PrintWriter pw, DrawingPointPath point, String color, float xoff, float yoff )
   {
     int idx = point.mPointType;
-    String name = BrushManager.getPointThName( idx );
+    String name = point.getThName( );
     pw.format("<!-- point %s -->\n", name );
     if ( name.equals("label") ) {
       DrawingLabelPath label = (DrawingLabelPath)point;

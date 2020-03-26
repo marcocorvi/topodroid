@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+
 import java.util.ArrayList;
 
 class LRUDprofile extends LRUD

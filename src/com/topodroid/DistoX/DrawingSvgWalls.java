@@ -11,23 +11,20 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDVersion;
+import com.topodroid.num.TDNum;
+import com.topodroid.prefs.TDSetting;
+
 import android.util.Log;
 
-// import java.util.Locale;
-
-// import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
-// import java.io.FileWriter;
 import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.io.BufferedWriter;
-// import java.io.FileInputStream;
-// import java.io.BufferedInputStream;
-// import java.io.DataInputStream;
-// import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import android.graphics.RectF;
@@ -73,7 +70,7 @@ class DrawingSvgWalls extends DrawingSvgBase
       out.write( xml_header ); 
       out.write( walls_header );
       out.write( compass_header );
-      out.write( "<!-- SVG created by TopoDroid v. " + TopoDroidApp.VERSION + " -->\n" );
+      out.write( "<!-- SVG created by TopoDroid v. " + TDVersion.string() + " -->\n" );
       out.write( svg_header );
       out.write( "  i:pageBounds=\"0 0 " + width + " " + (-height) + "\"\n" );
       out.write( "  width=\"" + width + "pt\"\n" );

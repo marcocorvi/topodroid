@@ -11,6 +11,17 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.math.TDMatrix;
+import com.topodroid.math.TDVector;
+import com.topodroid.ui.MyButton;
+import com.topodroid.ui.MyHorizontalListView;
+import com.topodroid.ui.MyHorizontalButtonView;
+import com.topodroid.help.HelpDialog;
+import com.topodroid.help.UserManualActivity;
+// import com.topodroid.prefs.TDSetting;
+import com.topodroid.prefs.TDPrefCat;
+
 // import java.util.ArrayList;
 
 import android.app.Activity;
@@ -285,11 +296,11 @@ public class CalibActivity extends Activity
   private void showCoeffs()
   {
     byte[] coeff = CalibAlgo.stringToCoeff( TopoDroidApp.mDData.selectCalibCoeff( TDInstance.cid ) );
-    Matrix mG = new Matrix();
-    Matrix mM = new Matrix();
-    Vector vG = new Vector();
-    Vector vM = new Vector();
-    Vector nL = new Vector();
+    TDMatrix mG = new TDMatrix();
+    TDMatrix mM = new TDMatrix();
+    TDVector vG = new TDVector();
+    TDVector vM = new TDVector();
+    TDVector nL = new TDVector();
     CalibAlgo.coeffToG( coeff, vG, mG );
     CalibAlgo.coeffToM( coeff, vM, mM );
     CalibAlgo.coeffToNL( coeff, nL );
@@ -393,24 +404,12 @@ public class CalibActivity extends Activity
   }
 
   @Override
-  public boolean onSearchRequested()
-  {
-    // TDLog.Error( "search requested" );
-    Intent intent = new Intent( this, TDPrefActivity.class );
-    intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_CALIB );
-    startActivity( intent );
-    return true;
-  }
-
-  @Override
   public boolean onKeyDown( int code, KeyEvent event )
   {
     switch ( code ) {
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         super.onBackPressed();
         return true;
-      case KeyEvent.KEYCODE_SEARCH:
-        return onSearchRequested();
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
         UserManualActivity.showHelpPage( this, getResources().getString( HELP_PAGE ));
         return true;
@@ -463,8 +462,8 @@ public class CalibActivity extends Activity
       }
 
     } else if ( p++ == pos ) { // OPTIONS
-      Intent intent = new Intent( this, TDPrefActivity.class );
-      intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_CALIB );
+      Intent intent = new Intent( this, com.topodroid.prefs.TDPrefActivity.class );
+      intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_CALIB );
       startActivity( intent );
 
     } else if ( p == pos ) { // HELP

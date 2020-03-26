@@ -14,8 +14,6 @@ package com.topodroid.DistoX;
 
 // import android.util.Log;
 
-/**
- */
 class DrawingOutlinePath
 {
   private String mScrap;  // scrap name

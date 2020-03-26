@@ -11,42 +11,35 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.ui.TDGreenDot;
+import com.topodroid.prefs.TDSetting;
+
 import android.util.Log;
 
 import android.content.res.Configuration;
 import android.app.Activity;
 import android.os.Build;
-// import android.os.Handler;
 
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Bitmap;
 import android.graphics.Point;
-// import android.graphics.PorterDuff;
 import android.graphics.PointF;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
-// import android.graphics.Path.Direction;
 import android.view.Display;
-// import android.view.Surface;
 
-// import java.util.Iterator;
 import java.util.List;
-// import java.util.Map;
-// import java.util.concurrent.ConcurrentHashMap;
-// import java.util.Locale;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.io.BufferedWriter;
-// import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.io.DataOutputStream;
 
 // import java.util.Locale;
 
-/**
- */
 class DrawingCommandManager
 {
   private static final int BORDER = 20; // for the bitmap
@@ -383,7 +376,7 @@ class DrawingCommandManager
   void addScaleRef( ) // boolean with_azimuth
   {
     mScaleRef = new DrawingScaleReference( BrushManager.referencePaint, 
-      new Point(20,-(int)(20+40*Float.parseFloat( TDInstance.context.getResources().getString( R.string.dimmy ) ) )),
+      new Point(20,-(int)(20+40*Float.parseFloat( TDInstance.getResources().getString( R.string.dimmy ) ) )),
       0.33f ); // with_azimuth
   }
 
@@ -540,7 +533,7 @@ class DrawingCommandManager
    */
   void setTransform( Activity act, float dx, float dy, float s, boolean landscape )
   {
-    // int orientation = TDInstance.context.getResources().getConfiguration().orientation;
+    // int orientation = TDInstance.getResources().getConfiguration().orientation;
     // float hh = TopoDroidApp.mDisplayHeight;
     // float ww = TopoDroidApp.mDisplayWidth;
     // if ( orientation == Configuration.ORIENTATION_LANDSCAPE ) {
@@ -1164,7 +1157,7 @@ class DrawingCommandManager
               // Log.v("DistoX-HIDE", "drawing type in selection fixed" );
               continue;
             }
-            TDGraphicUtil.drawGreenDot( canvas, matrix, pt, dot_radius );
+            TDGreenDot.draw( canvas, matrix, pt, dot_radius );
           }
         }
       }
@@ -1188,7 +1181,7 @@ class DrawingCommandManager
               // Log.v("DistoX-HIDE", "drawing type in selection fixed" );
               continue;
             }
-            TDGraphicUtil.drawGreenDot( canvas, matrix, pt, dot_radius );
+            TDGreenDot.draw( canvas, matrix, pt, dot_radius );
           }
         }
       }

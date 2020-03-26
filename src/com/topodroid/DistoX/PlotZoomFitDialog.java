@@ -11,17 +11,17 @@
  */
 package com.topodroid.DistoX;
 
-// import java.util.List;
-// import java.util.ArrayList;
+import com.topodroid.ui.MyCheckBox;
+import com.topodroid.ui.MyDialog;
+import com.topodroid.ui.TDLayout;
+import com.topodroid.prefs.TDSetting;
+
 
 import android.os.Bundle;
-// import android.app.Dialog;
-
 import android.content.Context;
 
 import android.view.View;
 import android.view.View.OnClickListener;
-// import android.view.ViewGroup.LayoutParams;
 
 import android.widget.Button;
 import android.widget.LinearLayout;

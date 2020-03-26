@@ -11,6 +11,14 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.ui.MyDialog;
+import com.topodroid.prefs.TDSetting;
+
+
+import com.topodroid.mag.MagElement;
+import com.topodroid.mag.WorldMagneticModel;
+
 import android.util.Log;
 
 // import java.util.regex.Pattern;
@@ -126,9 +134,9 @@ class FixedDialog extends MyDialog
 
     mTVdecl = (EditText) findViewById( R.id.fix_decl );
     {
-      int year = TDUtil.year();
+      int year  = TDUtil.year();
       int month = TDUtil.month();
-      int day = TDUtil.day();
+      int day   = TDUtil.day();
       MagElement elem = mWMM.computeMagElement( mFxd.lat, mFxd.lng, mFxd.alt, year, month, day );
       mTVdecl.setText( String.format(Locale.US, "%.4f", elem.Decl ) );
     }
@@ -151,10 +159,10 @@ class FixedDialog extends MyDialog
     // mButtonCancel  = (Button) findViewById(R.id.fix_cancel );
     // Log.v("DistoX-FIXED", "info " + mFxd.lng + " " + mFxd.lat );
     int flag = MyKeyboard.FLAG_POINT_DEGREE;
-    if ( TDSetting.mUnitLocation == TDConst.DEGREE ) {
+    if ( TDSetting.mUnitLocation == TDUtil.DEGREE ) {
       mTVlng.setText( FixedInfo.double2degree( mFxd.lng ) );
       mTVlat.setText( FixedInfo.double2degree( mFxd.lat ) );
-    } else { // TDConst.DDMMSS
+    } else { // TDUtil.DDMMSS
       mTVlng.setText( FixedInfo.double2ddmmss( mFxd.lng ) );
       mTVlat.setText( FixedInfo.double2ddmmss( mFxd.lat ) );
     }

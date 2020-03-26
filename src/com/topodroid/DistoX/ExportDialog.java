@@ -11,6 +11,9 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.ui.MyDialog;
+// import com.topodroid.prefs.TDSetting;
+
 import android.util.Log;
 
 // import android.app.Dialog;
@@ -31,7 +34,7 @@ import android.view.View;
 // import android.view.KeyEvent;
 // import android.view.ViewGroup.LayoutParams;
 
-class ExportDialog extends MyDialog
+public class ExportDialog extends MyDialog
                    implements AdapterView.OnItemSelectedListener
                    , View.OnClickListener
 {
@@ -43,7 +46,7 @@ class ExportDialog extends MyDialog
   private String    mSelected;
   private final int mTitle;
 
-  ExportDialog( Context context, IExporter parent, String[] types, int title )
+  public ExportDialog( Context context, IExporter parent, String[] types, int title )
   {
     super( context, R.string.ExportDialog );
     mParent = parent;

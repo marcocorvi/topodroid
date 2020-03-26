@@ -11,6 +11,9 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDColor;
+import com.topodroid.ui.MyDialog;
+
 // import android.app.Dialog;
 import android.os.Bundle;
 

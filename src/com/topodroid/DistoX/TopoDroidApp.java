@@ -11,6 +11,16 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDVersion;
+import com.topodroid.utils.TDString;
+// import com.topodroid.utils.TDStatus;
+import com.topodroid.ui.MyHorizontalListView;
+import com.topodroid.prefs.TDPrefActivity;
+import com.topodroid.prefs.TDPrefHelper;
+import com.topodroid.prefs.TDSetting;
+
 import android.util.Log;
 
 import java.io.File;
@@ -90,24 +100,6 @@ public class TopoDroidApp extends Application
   // static final String EMPTY = "";
   static private TopoDroidApp thisApp = null;
 
-  // symbol version of installed symbols is stored in the database
-  // symbol version of the current  symbols is in the app
-  static final String SYMBOL_VERSION = "35";
-
-  // TopoDroid version: this is loaded from the Manifest
-  static String VERSION = "0.0.0"; 
-  static int VERSION_CODE = 0;
-  private static int MAJOR = 0;
-  private static int MINOR = 0;
-  private static int SUB   = 0;
-  private static char VCH  = ' ';
-
-  // minimum compatible TopoDroid version
-  private static final int MAJOR_MIN = 2;
-  private static final int MINOR_MIN = 1;
-  private static final int SUB_MIN   = 1;
-  private static final int CODE_MIN  = 20101;
-  
   boolean mWelcomeScreen;  // whether to show the welcome screen (used by MainWindow)
   boolean mSetupScreen;    // whether to show the welcome screen (used by MainWindow)
   // static String mManual;  // manual url
@@ -118,13 +110,13 @@ public class TopoDroidApp extends Application
 
   static String mClipboardText = null; // text clipboard
 
-  static float mScaleFactor   = 1.0f;
-  static float mDisplayWidth  = 200f;
-  static float mDisplayHeight = 320f;
-  static float mBorderRight      = 4096;
-  static float mBorderLeft       = 0;
-  static float mBorderInnerRight = 4096;
-  static float mBorderInnerLeft  = 0;
+  public static float mScaleFactor   = 1.0f;
+  public static float mDisplayWidth  = 200f;
+  public static float mDisplayHeight = 320f;
+  public static float mBorderRight      = 4096;
+  public static float mBorderLeft       = 0;
+  public static float mBorderInnerRight = 4096;
+  public static float mBorderInnerLeft  = 0;
   // static float mBorderBottom     = 4096; // in DrawingWindow
 
   // static boolean isTracing = false;
@@ -146,9 +138,6 @@ public class TopoDroidApp extends Application
   int mSplayMode = 2; 
   boolean mShowSectionSplays = true;
   
-  // ----------------------------------------------------------------------
-  // TdManager
-  static TdmConfig mTdmConfig = null;                // current config file
 
   // ----------------------------------------------------------------------
   // data lister
@@ -183,12 +172,12 @@ public class TopoDroidApp extends Application
   // BluetoothAdapter mBTAdapter = null;     // BT connection
   private TopoDroidComm mComm = null;     // BT communication
   DataDownloader mDataDownloader = null;  // data downloader
-  static DataHelper mData = null;         // database 
+  public static DataHelper mData = null;         // database 
   static DeviceHelper mDData = null;      // device/calib database
 
-  static TDPrefHelper mPrefHlp      = null;
+  // public static TDPrefHelper mPrefHlp      = null;
   static SurveyWindow mSurveyWindow = null; // FIXME ref mActivity
-  static ShotWindow   mShotWindow   = null; // FIXME ref mActivity
+  public static ShotWindow   mShotWindow   = null; // FIXME ref mActivity
   static DrawingWindow mDrawingWindow = null; // FIXME currently not used
   static MainWindow mActivity = null; // FIXME ref mActivity
 
@@ -206,31 +195,33 @@ public class TopoDroidApp extends Application
 
   static void notifyUpdateDisplay()
   {
-    if ( mDrawingWindow != null ) {
-      // Log.v("DistoX-DATA", "forward notify update display");
-      mDrawingWindow.notifyUpdateDisplay();
-    }
+    if ( mDrawingWindow != null ) mDrawingWindow.notifyUpdateDisplay();
+  }
+
+  public static void setToolsToolbars()
+  {
+    if ( mDrawingWindow != null ) mDrawingWindow.setToolsToolbars();
   }
 
   // -------------------------------------------------------------------------------------
   // static SIZE methods
 
-  static float getDisplayDensity( )
+  public static float getDisplayDensity( )
   {
     return Resources.getSystem().getDisplayMetrics().density;
   }
 
-  static float getDisplayDensity( Context context )
+  public static float getDisplayDensity( Context context )
   {
     return Resources.getSystem().getDisplayMetrics().density;
   }
 
-  // int setListViewHeight( MyHorizontalListView listView )
+  // public int setListViewHeight( MyHorizontalListView listView )
   // {
   //   return TopoDroidApp.setListViewHeight( this, listView );
   // }
 
-  static int setListViewHeight( Context context, MyHorizontalListView listView )
+  public static int setListViewHeight( Context context, MyHorizontalListView listView )
   {
     // int size = getScaledSize( context );
     if ( listView != null ) {
@@ -246,6 +237,10 @@ public class TopoDroidApp extends Application
   {
     return (int)( TDSetting.mSizeButtons * context.getResources().getSystem().getDisplayMetrics().density );
   }
+  
+  public static void resetButtonBar() { if ( mActivity != null ) mActivity.resetButtonBar(); }
+  public static void setMenuAdapter( ) { if ( mActivity != null ) mActivity.setMenuAdapter( TDInstance.getResources() ); }
+  public static void setScreenOrientation() { if ( mActivity != null ) TDandroid.setScreenOrientation( mActivity  ); }
 
   // UNUSED was called by HelpEntry
   // static int getDefaultSize( Context context )
@@ -522,16 +517,17 @@ public class TopoDroidApp extends Application
 
   // ---------------------------------------------------------
 
-  void startupStep2()
+  void startupStep2( )
   {
+    TDPrefHelper prefHlp = new TDPrefHelper( this );
     // ***** LOG FRAMEWORK
-    TDLog.loadLogPreferences( mPrefHlp );
+    TDLog.loadLogPreferences( prefHlp );
 
     mData.compileStatements();
 
-    PtCmapActivity.setMap( mPrefHlp.getString( "DISTOX_PT_CMAP", null ) );
+    PtCmapActivity.setMap( prefHlp.getString( "DISTOX_PT_CMAP", null ) );
 
-    TDSetting.loadSecondaryPreferences( /* this, */ mPrefHlp );
+    TDSetting.loadSecondaryPreferences( prefHlp );
     checkAutoPairing();
 
     // if ( TDLog.LOG_DEBUG ) {
@@ -581,48 +577,14 @@ public class TopoDroidApp extends Application
     // dalvik.system.VMRuntime.getRuntime().setMinimumHeapSize( 64<<20 );
 
     // TDLog.Profile("TDApp onCreate");
-    try {
-      VERSION      = getPackageManager().getPackageInfo( getPackageName(), 0 ).versionName;
-      VERSION_CODE = getPackageManager().getPackageInfo( getPackageName(), 0 ).versionCode;
-      int v = VERSION_CODE;
-      String[] ver = VERSION.split("\\.");
-      if ( ver.length > 2 ) {
-        try {
-          MAJOR = Integer.parseInt( ver[0] );
-          MINOR = Integer.parseInt( ver[1] );
-        } catch ( NumberFormatException e ) {
-          TDLog.Error( "parse error: major/minor " + ver[0] + " " + ver[1] );
-        }
-        int k = 0;
-        SUB = 0;
-        while ( k < ver[2].length() ) {
-          char ch = ver[2].charAt(k);
-          if ( ch < '0' || ch > '9' ) { VCH = ch; break; }
-          SUB = 10 * SUB + (int)(ch - '0');
-          ++k;
-        }
-      } else {
-        MAJOR = v /    100000;    
-        v -= MAJOR *   100000;
-        MINOR = v /      1000;    
-        v -= MINOR *     1000;
-        SUB = v /          10;
-        v -= SUB *         10;
-        VCH = (char)('a' + v); // FIXME
-      }
-      // Log.v("DistoX", "Major " + MAJOR + " minor " + MINOR + " sub " + SUB + VCH );
-    } catch ( NameNotFoundException e ) {
-      // FIXME
-      e.printStackTrace();
-    }
+    TDVersion.setVersion( this );
+    TDPrefHelper prefHlp = new TDPrefHelper( this );
 
-    mPrefHlp    = new TDPrefHelper( this /*, this */ );
-
-    mWelcomeScreen = mPrefHlp.getBoolean( "DISTOX_WELCOME_SCREEN", true ); // default: WelcomeScreen = true
+    mWelcomeScreen = prefHlp.getBoolean( "DISTOX_WELCOME_SCREEN", true ); // default: WelcomeScreen = true
     if ( mWelcomeScreen ) {
-      setDefaultSocketType();
+      setDefaultSocketType( );
     }
-    mSetupScreen = mPrefHlp.getBoolean( "DISTOX_SETUP_SCREEN", true ); // default: SetupScreen = true
+    mSetupScreen = prefHlp.getBoolean( "DISTOX_SETUP_SCREEN", true ); // default: SetupScreen = true
 
     DistoXConnectionError = new String[5];
     DistoXConnectionError[0] = getResources().getString( R.string.distox_err_ok );
@@ -653,7 +615,7 @@ public class TopoDroidApp extends Application
       mListerSet = new ListerSetHandler();
       mEnableZip = true;
 
-      initEnvironment(); // called by SplashActivity
+      initEnvironment( prefHlp ); // called by SplashActivity
 
     }
     // mManual = getResources().getString( R.string.topodroid_man );
@@ -661,14 +623,14 @@ public class TopoDroidApp extends Application
     // Log.v("DistoX-MAIN", "W " + mDisplayWidth + " H " + mDisplayHeight + " D " + density );
   }
 
-  static void initEnvironment()
+  static void initEnvironment( TDPrefHelper prefHlp )
   {
     // TDLog.Profile("TDApp paths");
     TDPath.setDefaultPaths();
 
     // TDLog.Profile("TDApp cwd");
-    TDInstance.cwd = mPrefHlp.getString( "DISTOX_CWD", "TopoDroid" );
-    TDInstance.cbd = mPrefHlp.getString( "DISTOX_CBD", TDPath.PATH_BASEDIR );
+    TDInstance.cwd = prefHlp.getString( "DISTOX_CWD", "TopoDroid" );
+    TDInstance.cbd = prefHlp.getString( "DISTOX_CBD", TDPath.PATH_BASEDIR );
     TDPath.setPaths( TDInstance.cwd, TDInstance.cbd );
 
     // TDLog.Profile("TDApp DB"); 
@@ -687,7 +649,7 @@ public class TopoDroidApp extends Application
 
     // TDLog.Profile("TDApp prefs");
     // LOADING THE SETTINGS IS RATHER EXPENSIVE !!!
-    TDSetting.loadPrimaryPreferences( /* this, */ TDInstance.getResources(),  mPrefHlp );
+    TDSetting.loadPrimaryPreferences( /* this, */ TDInstance.getResources(),  prefHlp );
 
     thisApp.mDataDownloader = new DataDownloader( thisApp, thisApp );
 
@@ -696,8 +658,8 @@ public class TopoDroidApp extends Application
 
     // if one of the symbol dirs does not exists all of then are restored
     String version = mDData.getValue( "version" );
-    if ( version == null || ( ! version.equals(VERSION) ) ) {
-      mDData.setValue( "version", VERSION );
+    if ( version == null || ( ! version.equals( TDVersion.string() ) ) ) {
+      mDData.setValue( "version",  TDVersion.string()  );
       // FIXME INSTALL_SYMBOL installSymbols( false ); // this updates symbol_version in the database
       if ( mDData.getValue( "symbol_version" ) == null ) thisApp.installSymbols( true );
       thisApp.installFirmware( false );
@@ -717,7 +679,7 @@ public class TopoDroidApp extends Application
       String value = mDData.getValue("cosurvey");
       mCosurvey =  value != null && value.equals("on");
       setCoSurvey( false );
-      mPrefHlp.update( "DISTOX_COSURVEY", false );
+      prefHlp.update( "DISTOX_COSURVEY", false );
       if ( mCosurvey ) {
         mSyncConn = new ConnectionHandler( this );
         mConnListener = new ArrayList<>();
@@ -726,7 +688,7 @@ public class TopoDroidApp extends Application
     */
 
     // TDLog.Profile("TDApp device etc.");
-    TDInstance.deviceA = mDData.getDevice( mPrefHlp.getString( TDSetting.keyDeviceName(), TDString.EMPTY ) );
+    TDInstance.deviceA = mDData.getDevice( prefHlp.getString( TDSetting.keyDeviceName(), TDString.EMPTY ) );
 
     if ( TDInstance.deviceA != null ) {
       thisApp.createComm();
@@ -794,7 +756,7 @@ public class TopoDroidApp extends Application
   {
     // Log.v("DistoX", "reset locale to " + mLocaleStr );
     // mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
-    Resources res = TDInstance.context.getResources();
+    Resources res = TDInstance.getResources();
     DisplayMetrics dm = res.getDisplayMetrics();
     /* FIXME-23 */
     if ( android.os.Build.VERSION.SDK_INT >= 17 ) {
@@ -816,24 +778,24 @@ public class TopoDroidApp extends Application
     return TDInstance.context;
   }
 
-  static void setLocale( String locale, boolean load_symbols )
+  public static void setLocale( String locale, boolean load_symbols )
   {
     mLocaleStr = locale;
     mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
     // Log.v("DistoXPref", "set locale str <" + locale + "> " + mLocale.toString() );
 
     resetLocale();
-    Resources res = TDInstance.context.getResources();
+    Resources res = TDInstance.getResources();
     if ( load_symbols ) {
       BrushManager.reloadPointLibrary( TDInstance.context, res ); // reload symbols
       BrushManager.reloadLineLibrary( res );
       BrushManager.reloadAreaLibrary( res );
     }
     if ( mActivity != null ) mActivity.setMenuAdapter( res );
-    if ( TDPrefActivity.mPrefActivityAll != null ) TDPrefActivity.mPrefActivityAll.reloadPreferences();
+    TDPrefActivity.reloadPreferences();
   }
 
-  static void setCWD( String cwd, String cbd )
+  public static void setCWD( String cwd, String cbd )
   {
     if ( cwd == null || cwd.length() == 0 ) cwd = TDInstance.cwd;
     if ( cbd == null || cbd.length() == 0 ) cbd = TDInstance.cbd;
@@ -927,8 +889,8 @@ public class TopoDroidApp extends Application
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
-      pw.format( "%s %d\n", VERSION, VERSION_CODE );
-      pw.format( "%s\n", DataHelper.DB_VERSION );
+      pw.format( "%s %d\n",  TDVersion.string(), TDVersion.code() );
+      pw.format( "%s\n", TDVersion.DB_VERSION );
       pw.format( "%s\n", info.name );
       pw.format("%s\n", TDUtil.currentDate() );
       fw.flush();
@@ -964,74 +926,8 @@ public class TopoDroidApp extends Application
       BufferedReader br = new BufferedReader( fr );
       // first line is version
       line = br.readLine().trim();
-      String[] vers = line.split(" ");
-      for ( int k=1; k<vers.length; ++ k ) {
-        if ( vers[k].length() > 0 ) {
-          try {
-            version_code = Integer.parseInt( vers[k] );
-            break;
-          } catch ( NumberFormatException e ) { }
-        }
-      }
-      if ( version_code == 0 ) {
-        String[] ver = vers[0].split("\\.");
-        int major = 0;
-        int minor = 0;
-        int sub   = 0;
-        char vch  = ' '; // char order: ' ' < A < B < ... < a < b < ... < '}' 
-        if ( ver.length > 2 ) { // M.m.sv version code
-          try {
-            major = Integer.parseInt( ver[0] );
-            minor = Integer.parseInt( ver[1] );
-          } catch ( NumberFormatException e ) {
-            TDLog.Error( "parse error: major/minor " + ver[0] + " " + ver[1] );
-            return -2;
-          }
-          int k = 0;
-          while ( k < ver[2].length() ) {
-            char ch = ver[2].charAt(k);
-            if ( ch < '0' || ch > '9' ) { vch = ch; break; }
-            sub = 10 * sub + (int)(ch - '0');
-            ++k;
-          }
-          // Log.v( "DistoX", "Version " + major + " " + minor + " " + sub );
-          if (    ( major < MAJOR_MIN )
-               || ( major == MAJOR_MIN && minor < MINOR_MIN )
-               || ( major == MAJOR_MIN && minor == MINOR_MIN && sub < SUB_MIN ) 
-            ) {
-            TDLog.Log( TDLog.LOG_ZIP, "TopoDroid version mismatch: " + line + " < " + MAJOR_MIN + "." + MINOR_MIN + "." + SUB_MIN );
-            return -2;
-          }
-          if (    ( major > MAJOR ) 
-               || ( major == MAJOR && minor > MINOR )
-               || ( major == MAJOR && minor == MINOR && sub > SUB ) ) {
-            ret = 1; 
-          } else if ( major == MAJOR && minor == MINOR && sub == SUB && vch > ' ' ) {
-            if ( VCH == ' ' ) { 
-              ret = 1;
-            } else if ( VCH <= 'Z' && ( vch >= 'a' || vch < VCH ) ) { // a-z or vch(A-Z) < VCH
-              ret = 1;
-            } else if ( VCH >= 'a' && vch < VCH ) { // A-Z < a-z 
-              ret = 1;
-            }
-          }
-
-        } else { // version code
-          try {
-            version_code = Integer.parseInt( ver[0] );
-            if ( version_code < CODE_MIN ) {
-              TDLog.Log( TDLog.LOG_ZIP, "TopoDroid version mismatch: " + line + " < " + CODE_MIN );
-              return -2;
-            }
-          } catch ( NumberFormatException e ) {
-            TDLog.Error( "parse error: version code " + ver[0] );
-            return -2;
-          }
-          if ( version_code > VERSION_CODE ) ret = 1;
-        }
-      } else {
-        if ( version_code > VERSION_CODE ) ret = 1;
-      }
+      ret = TDVersion.check( line );
+      if ( ret < 0 ) return ret;
 
       line = br.readLine().trim();
       try {
@@ -1040,11 +936,11 @@ public class TopoDroidApp extends Application
         TDLog.Error( "parse error: db version " + line );
       }
       
-      if ( ! (    mManifestDbVersion >= DataHelper.DATABASE_VERSION_MIN
-               && mManifestDbVersion <= DataHelper.DATABASE_VERSION ) ) {
+      if ( ! (    mManifestDbVersion >= TDVersion.DATABASE_VERSION_MIN
+               && mManifestDbVersion <= TDVersion.DATABASE_VERSION ) ) {
         TDLog.Log( TDLog.LOG_ZIP,
                           "TopDroid DB version mismatch: found " + mManifestDbVersion + " expected " + 
-                          + DataHelper.DATABASE_VERSION_MIN + "-" + DataHelper.DATABASE_VERSION );
+                          + TDVersion.DATABASE_VERSION_MIN + "-" + TDVersion.DATABASE_VERSION );
         return -3;
       }
       surveyname = br.readLine().trim();
@@ -1229,34 +1125,30 @@ public class TopoDroidApp extends Application
   // -----------------------------------------------------------------
   // PREFERENCES
 
-  private void setDefaultSocketType()
+  private void setDefaultSocketType( )
   {
     String defaultSockType = ( android.os.Build.MANUFACTURER.equals("samsung") ) ? "1" : "0";
-    mPrefHlp.update( "DISTOX_SOCK_TYPE", defaultSockType ); 
+    TDPrefHelper.update( "DISTOX_SOCK_TYPE", defaultSockType ); 
   }
 
   void setCWDPreference( String cwd, String cbd )
   { 
     if ( TDInstance.cwd.equals( cwd ) && TDInstance.cbd.equals( cbd ) ) return;
     // Log.v("DistoX", "setCWDPreference " + cwd );
-    if ( mPrefHlp != null ) {
-      mPrefHlp.update( "DISTOX_CWD", cwd, "DISTOX_CBD", cbd ); 
-    }
+    TDPrefHelper.update( "DISTOX_CWD", cwd, "DISTOX_CBD", cbd ); 
     setCWD( cwd, cbd ); 
   }
 
   void setPtCmapPreference( String cmap )
   {
-    if ( mPrefHlp != null ) {
-      mPrefHlp.update( "DISTOX_PT_CMAP", cmap ); 
-    }
+    TDPrefHelper.update( "DISTOX_PT_CMAP", cmap ); 
     PtCmapActivity.setMap( cmap );
   }
 
   // unused
   // void setAccuracyPreference( float acceleration, float magnetic, float dip )
   // {
-  //   mPrefHlp.update( "DISTOX_ACCEL_THR", Float.toString( acceleration ), "DISTOX_MAG_THR", Float.toString( magnetic ), "DISTOX_DIP_THR", Float.toString( dip ) ); 
+  //   TDPrefHelper.update( "DISTOX_ACCEL_THR", Float.toString( acceleration ), "DISTOX_MAG_THR", Float.toString( magnetic ), "DISTOX_DIP_THR", Float.toString( dip ) ); 
   // }
 
   void setTextSize( int ts )
@@ -1265,29 +1157,29 @@ public class TopoDroidApp extends Application
     if ( TDSetting.setLabelSize( ts*3, false ) || TDSetting.setStationSize( ts*2, false ) ) { // false: do not update brush
       BrushManager.setTextSizes( );
     }
-    mPrefHlp.update( "DISTOX_TEXT_SIZE", Integer.toString(ts), "DISTOX_LABEL_SIZE", Float.toString(ts*3), "DISTOX_STATION_SIZE", Float.toString(ts*2) );
+    TDPrefHelper.update( "DISTOX_TEXT_SIZE", Integer.toString(ts), "DISTOX_LABEL_SIZE", Float.toString(ts*3), "DISTOX_STATION_SIZE", Float.toString(ts*2) );
   }
 
   void setButtonSize( int bs )
   {
     TDSetting.setSizeButtons( bs );
-    mPrefHlp.update( "DISTOX_SIZE_BUTTONS", Integer.toString(bs) );
+    TDPrefHelper.update( "DISTOX_SIZE_BUTTONS", Integer.toString(bs) );
   }
 
   void setDrawingUnitIcons( float u )
   {
     TDSetting.setDrawingUnitIcons( u );
-    mPrefHlp.update( "DISTOX_DRAWING_UNIT", Float.toString(u) );
+    TDPrefHelper.update( "DISTOX_DRAWING_UNIT", Float.toString(u) );
   }
 
   void setDrawingUnitLines( float u )
   {
     TDSetting.setDrawingUnitLines( u );
-    mPrefHlp.update( "DISTOX_LINE_UNITS", Float.toString(u) );
+    TDPrefHelper.update( "DISTOX_LINE_UNITS", Float.toString(u) );
   }
 
   // used for "DISTOX_WELCOME_SCREEN" and "DISTOX_TD_SYMBOL"
-  void setBooleanPreference( String preference, boolean val ) { mPrefHlp.update( preference, val ); }
+  void setBooleanPreference( String preference, boolean val ) { TDPrefHelper.update( preference, val ); }
 
   // FIXME_DEVICE_STATIC
   void setDevice( String address, BluetoothDevice bt_device )
@@ -1326,9 +1218,7 @@ public class TopoDroidApp extends Application
         if ( create ) createComm();
       }
     }
-    if ( mPrefHlp != null ) {
-      mPrefHlp.update( TDSetting.keyDeviceName(), address ); 
-    }
+    TDPrefHelper.update( TDSetting.keyDeviceName(), address ); 
   }
 
   // TODO BLE for the second DistoX
@@ -1347,7 +1237,6 @@ public class TopoDroidApp extends Application
   {
     return TDInstance.switchDevice();
   }
-    
 
   // -------------------------------------------------------------
   // DATA BATCH DOWNLOAD
@@ -1496,7 +1385,7 @@ public class TopoDroidApp extends Application
   {
     deleteObsoleteSymbols();
     installSymbols( R.raw.symbols_speleo, overwrite );
-    mDData.setValue( "symbol_version", SYMBOL_VERSION );
+    mDData.setValue( "symbol_version", TDVersion.SYMBOL_VERSION );
   }
 
   static void installSymbols( int res, boolean overwrite )
@@ -1558,7 +1447,7 @@ public class TopoDroidApp extends Application
     if ( bio    ) installSymbols( R.raw.symbols_bio,    true );
     if ( karst  ) installSymbols( R.raw.symbols_karst,  true );
 
-    mDData.setValue( "symbol_version", SYMBOL_VERSION );
+    mDData.setValue( "symbol_version", TDVersion.SYMBOL_VERSION );
     BrushManager.loadAllLibraries( this, getResources() );
   }
 
@@ -2054,7 +1943,7 @@ public class TopoDroidApp extends Application
   {
     if ( ! mCosurvey ) {
       mCoSurveyServer = false;
-      mPrefHlp.update( "DISTOX_COSURVEY", false );
+      TDPrefHelper.update( "DISTOX_COSURVEY", false );
       return;
     } 
     mCoSurveyServer = co_survey;
@@ -2168,7 +2057,7 @@ public class TopoDroidApp extends Application
 
   static PairingRequest mPairingRequest = null;
 
-  static void checkAutoPairing()
+  public static void checkAutoPairing()
   {
     if ( thisApp == null ) return;
     if ( TDSetting.mAutoPair ) {

@@ -11,25 +11,27 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.ui.MyCheckBox;
+import com.topodroid.ui.MyDialog;
+import com.topodroid.ui.TDLayout;
+import com.topodroid.ui.TDImage;
+import com.topodroid.prefs.TDSetting;
+
+// import android.util.Log;
+
 import java.io.File;
 // import java.io.IOException;
 
-// import android.app.Dialog;
 import android.os.Bundle;
-
 import android.content.Context;
 
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
-// import android.widget.CheckBox;
-import android.view.View;
-// import android.view.ViewGroup.LayoutParams;
-
 import android.widget.ImageView;
-
-// import android.util.Log;
+import android.view.View;
 
 class DrawingLineSectionDialog extends MyDialog
                                implements View.OnClickListener
@@ -115,10 +117,10 @@ class DrawingLineSectionDialog extends MyDialog
     // cannot use initLayout
     if ( mFrom != null && mTo != null ) {
       initLayout( R.layout.drawing_line_section_dialog,
-        String.format( mParent.getResources().getString( R.string.title_draw_line ), BrushManager.getLineThName( mLine.mLineType ) ) + " " + mFrom + " " + mTo );
+        String.format( mParent.getResources().getString( R.string.title_draw_line ), mLine.getThName( ) ) + " " + mFrom + " " + mTo );
     } else {
       initLayout( R.layout.drawing_line_section_dialog, 
-        String.format( mParent.getResources().getString( R.string.title_draw_line_no_stations ), BrushManager.getLineThName( mLine.mLineType ) ) );
+        String.format( mParent.getResources().getString( R.string.title_draw_line_no_stations ), mLine.getThName( ) ) );
     }
 
     mTVoptions = (TextView) findViewById( R.id.line_options );

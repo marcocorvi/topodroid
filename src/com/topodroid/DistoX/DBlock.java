@@ -11,6 +11,14 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDColor;
+import com.topodroid.utils.TDString;
+import com.topodroid.math.TDVector;
+import com.topodroid.prefs.TDSetting;
+
+
 // import java.lang.Long;
 import java.io.StringWriter;
 import java.io.PrintWriter;
@@ -22,26 +30,26 @@ import android.graphics.Paint; // custom paint
 
 // import android.util.Log;
 
-class DBlock
+public class DBlock
 {
   // public static final char[] mExtendTag = { '<', '|', '>', ' ', '-', '.', '?', '«', 'I', '»', ' ' };
   private static final char[] mExtendTag = { '<', '|', '>', ' ', '-', '.', '?', ' ', ' ', ' ', ' ' };
-  static final int EXTEND_LEFT   = -1;
-  static final int EXTEND_VERT   =  0;
-  static final int EXTEND_RIGHT  = 1;
-  static final int EXTEND_IGNORE = 2;
-  static final int EXTEND_HIDE   = 3;
-  static final int EXTEND_START  = 4;
+  public static final int EXTEND_LEFT   = -1;
+  public static final int EXTEND_VERT   =  0;
+  public static final int EXTEND_RIGHT  = 1;
+  public static final int EXTEND_IGNORE = 2;
+  public static final int EXTEND_HIDE   = 3;
+  public static final int EXTEND_START  = 4;
 
-  static final float STRETCH_NONE = 0.0f;
+  public static final float STRETCH_NONE = 0.0f;
 
-  static final int EXTEND_UNSET  = 5;
+  public static final int EXTEND_UNSET  = 5;
   // public static final int EXTEND_FLEFT  = 6; // LEFT = FLEFT - FVERT
   // public static final int EXTEND_FVERT  = 7;
   // public static final int EXTEND_FRIGHT = 8;
   // public static final int EXTEND_FIGNORE = 9; // overload of IGNORE for splays
 
-  static final int EXTEND_NONE   = EXTEND_VERT;
+  public static final int EXTEND_NONE   = EXTEND_VERT;
 
   View   mView;
   // private int    mPos;     // position in the list
@@ -53,39 +61,40 @@ class DBlock
   long   mTime;
   private long   mSurveyId;
   // private String mName;
-  String mFrom;    // N.B. mfrom and mTo must be not null
-  String mTo;
-  float mLength;   // meters
-  float mBearing;  // degrees
-  float mClino;    // degrees
-  float mRoll;     // degrees
-  float mAcceleration;
-  float mMagnetic;
-  float mDip;
-  float mDepth;     // depth at from station
-  String mComment;
+  public String mFrom;    // N.B. mfrom and mTo must be not null
+  public String mTo;
+  public float mLength;   // meters
+  public float mBearing;  // degrees
+  public float mClino;    // degrees
+  public float mRoll;     // degrees
+  public float mAcceleration;
+  public float mMagnetic;
+  public float mDip;
+  public float mDepth;     // depth at from station
+  public String mComment;
+
   private int  mExtend;
   private long mFlag;     
   private int  mBlockType;   
   private int mShotType;  // 0: DistoX, 1: manual, -1: DistoX backshot
-  boolean mWithPhoto;
-  boolean mMultiBad; // whether it disagree with siblings
+          boolean mWithPhoto;
+  public  boolean mMultiBad; // whether it disagree with siblings
   private float mStretch;
   private String mAddress; // DistoX address - used only in exports
   // boolean mWasRecent = false; // REVISE_RECENT
 
-  static final private int BLOCK_BLANK      = 0;
-  static final         int BLOCK_MAIN_LEG   = 1; // primary leg shot
-  static final private int BLOCK_SEC_LEG    = 2; // additional shot of a centerline leg
-  static final private int BLOCK_BLANK_LEG  = 3; // blank centerline leg-shot
-  static final private int BLOCK_BACK_LEG   = 4; // 
+  private static final int BLOCK_BLANK      = 0;
+  public  static final int BLOCK_MAIN_LEG   = 1; // primary leg shot
+  private static final int BLOCK_SEC_LEG    = 2; // additional shot of a centerline leg
+  private static final int BLOCK_BLANK_LEG  = 3; // blank centerline leg-shot
+  private static final int BLOCK_BACK_LEG   = 4; // 
   // splays must come last
-  static final private int BLOCK_SPLAY      = 5;
-  static final private int BLOCK_X_SPLAY    = 6; // FIXME_X_SPLAY cross splay
-  static final private int BLOCK_H_SPLAY    = 7; // FIXME_H_SPLAY horizontal splay
-  static final private int BLOCK_V_SPLAY    = 8; // FIXME_V_SPLAY vertical splay
+  private static final int BLOCK_SPLAY      = 5;
+  private static final int BLOCK_X_SPLAY    = 6; // FIXME_X_SPLAY cross splay
+  private static final int BLOCK_H_SPLAY    = 7; // FIXME_H_SPLAY horizontal splay
+  private static final int BLOCK_V_SPLAY    = 8; // FIXME_V_SPLAY vertical splay
 
-  static final private long[] legOfBlockType = {
+  private static final long[] legOfBlockType = {
     LegType.NORMAL, // 0 BLANK
     LegType.NORMAL, // 0 LEG
     LegType.EXTRA,  // 1 SEC_LEG
@@ -129,22 +138,21 @@ class DBlock
 
   static final long FLAG_NO_EXTEND  = 256; // used only in search dialog
 
-
-  boolean hasFlag( long flag )    { return (mFlag & flag) == flag; }
-  boolean isSurvey()    { return mFlag == FLAG_SURVEY; }
-  boolean isSurface()   { return (mFlag & FLAG_SURFACE)    == FLAG_SURFACE; }
-  boolean isDuplicate() { return (mFlag & FLAG_DUPLICATE)  == FLAG_DUPLICATE; }
-  boolean isCommented() { return (mFlag & FLAG_COMMENTED)  == FLAG_COMMENTED; } // FIXME_COMMENTED
-  boolean isNoPlan()    { return (mFlag & FLAG_NO_PLAN)    == FLAG_NO_PLAN; }
-  boolean isNoProfile() { return (mFlag & FLAG_NO_PROFILE) == FLAG_NO_PROFILE; }
+         boolean hasFlag( long flag )    { return (mFlag & flag) == flag; }
+  public boolean isSurvey()    { return mFlag == FLAG_SURVEY; }
+  public boolean isSurface()   { return (mFlag & FLAG_SURFACE)    == FLAG_SURFACE; }
+  public boolean isDuplicate() { return (mFlag & FLAG_DUPLICATE)  == FLAG_DUPLICATE; }
+  public boolean isCommented() { return (mFlag & FLAG_COMMENTED)  == FLAG_COMMENTED; } // FIXME_COMMENTED
+  public boolean isNoPlan()    { return (mFlag & FLAG_NO_PLAN)    == FLAG_NO_PLAN; }
+  public boolean isNoProfile() { return (mFlag & FLAG_NO_PROFILE) == FLAG_NO_PROFILE; }
   // boolean isBackshot()  { return (mFlag & FLAG_BACKSHOT)   == FLAG_BACKSHOT; }
 
   // static boolean isSurvey(int flag) { return flag == FLAG_SURVEY; }
-  static boolean isSurface(long flag)   { return (flag & FLAG_SURFACE)    == FLAG_SURFACE; }
-  static boolean isDuplicate(long flag) { return (flag & FLAG_DUPLICATE)  == FLAG_DUPLICATE; }
-  static boolean isCommented(long flag) { return (flag & FLAG_COMMENTED)  == FLAG_COMMENTED; } // FIXME_COMMENTED
-  static boolean isNoPlan(long flag)    { return (flag & FLAG_NO_PLAN)    == FLAG_NO_PLAN; }
-  static boolean isNoProfile(long flag) { return (flag & FLAG_NO_PROFILE) == FLAG_NO_PROFILE; }
+  public static boolean isSurface(long flag)   { return (flag & FLAG_SURFACE)    == FLAG_SURFACE; }
+  public static boolean isDuplicate(long flag) { return (flag & FLAG_DUPLICATE)  == FLAG_DUPLICATE; }
+  public static boolean isCommented(long flag) { return (flag & FLAG_COMMENTED)  == FLAG_COMMENTED; } // FIXME_COMMENTED
+  public static boolean isNoPlan(long flag)    { return (flag & FLAG_NO_PLAN)    == FLAG_NO_PLAN; }
+  public static boolean isNoProfile(long flag) { return (flag & FLAG_NO_PROFILE) == FLAG_NO_PROFILE; }
   // static boolean isBackshot(int flag) { return (flag & FLAG_BACKSHOT) == FLAG_BACKSHOT; }
 
   // void resetFlag() { mFlag = FLAG_SURVEY; }
@@ -152,7 +160,7 @@ class DBlock
   void setFlag( long flag ) { mFlag |= flag; }
   // void clearFlag( long flag ) { mFlag &= ~flag; }
   long getFlag() { return mFlag; }
-  int  getReducedFlag() { return (int)(0x07 & mFlag); } // survey-surface-duplicate-commented part of the flag
+  public int  getReducedFlag() { return (int)(0x07 & mFlag); } // survey-surface-duplicate-commented part of the flag
 
   int getBlockType() { return mBlockType; }
 
@@ -164,21 +172,21 @@ class DBlock
   
   void resetBlockType( int type ) { mBlockType = type; }
 
-  boolean isTypeBlank() { return mBlockType == BLOCK_BLANK || mBlockType == BLOCK_BLANK_LEG; }
-  static boolean isTypeBlank( int t ) { return t == BLOCK_BLANK || t == BLOCK_BLANK_LEG; }
-  boolean isBlank()      { return mBlockType == BLOCK_BLANK; }
-  boolean isLeg()        { return mBlockType == BLOCK_MAIN_LEG || mBlockType == BLOCK_BACK_LEG; }
-  boolean isMainLeg()    { return mBlockType == BLOCK_MAIN_LEG; }
-  boolean isBackLeg()    { return mBlockType == BLOCK_BACK_LEG; }
-  boolean isSecLeg()     { return mBlockType == BLOCK_SEC_LEG; }
+  public boolean isTypeBlank() { return mBlockType == BLOCK_BLANK || mBlockType == BLOCK_BLANK_LEG; }
+  public static boolean isTypeBlank( int t ) { return t == BLOCK_BLANK || t == BLOCK_BLANK_LEG; }
+  public boolean isBlank()      { return mBlockType == BLOCK_BLANK; }
+  public boolean isLeg()        { return mBlockType == BLOCK_MAIN_LEG || mBlockType == BLOCK_BACK_LEG; }
+  public boolean isMainLeg()    { return mBlockType == BLOCK_MAIN_LEG; }
+  public boolean isBackLeg()    { return mBlockType == BLOCK_BACK_LEG; }
+  public boolean isSecLeg()     { return mBlockType == BLOCK_SEC_LEG; }
 
-  static boolean isSplay( int t ) { return t >= BLOCK_SPLAY; }
-  boolean isSplay()      { return mBlockType >= BLOCK_SPLAY; }
-  boolean isOtherSplay() { return mBlockType >  BLOCK_SPLAY; }
-  boolean isPlainSplay() { return mBlockType == BLOCK_SPLAY; }
-  boolean isXSplay()     { return mBlockType == BLOCK_X_SPLAY; }
-  boolean isHSplay()     { return mBlockType == BLOCK_H_SPLAY; }
-  boolean isVSplay()     { return mBlockType == BLOCK_V_SPLAY; }
+  public static boolean isSplay( int t ) { return t >= BLOCK_SPLAY; }
+  public boolean isSplay()      { return mBlockType >= BLOCK_SPLAY; }
+  public boolean isOtherSplay() { return mBlockType >  BLOCK_SPLAY; }
+  public boolean isPlainSplay() { return mBlockType == BLOCK_SPLAY; }
+  public boolean isXSplay()     { return mBlockType == BLOCK_X_SPLAY; }
+  public boolean isHSplay()     { return mBlockType == BLOCK_H_SPLAY; }
+  public boolean isVSplay()     { return mBlockType == BLOCK_V_SPLAY; }
 
   long getLegType() { return legOfBlockType[ mBlockType ]; }
   // {
@@ -208,24 +216,24 @@ class DBlock
 
 
   // static int getIntExtend( int ext ) { return ( ext < EXTEND_UNSET )? ext : ext - EXTEND_FVERT; }
-  static int getIntExtend( int ext ) { return ext; }
-  static float getReducedExtend( int ext, float stretch ) 
+  public static int getIntExtend( int ext ) { return ext; }
+  public static float getReducedExtend( int ext, float stretch ) 
   {
     // if ( ext >= EXTEND_UNSET ) { ext -= EXTEND_FVERT; }
     return ( ext < 2 )? ext + stretch : 0;
   }
 
   // int getIntExtend() { return ( mExtend < EXTEND_UNSET )? mExtend : mExtend - EXTEND_FVERT; }
-  int getIntExtend() { return mExtend; }
-  float getReducedExtend() { return ( mExtend < 2 )? mExtend + mStretch : 0.0f; }
-  int   getReducedIntExtend() { return ( mExtend < 2 )? mExtend : 0; }
+  public int getIntExtend() { return mExtend; }
+  public float getReducedExtend() { return ( mExtend < 2 )? mExtend + mStretch : 0.0f; }
+  public int   getReducedIntExtend() { return ( mExtend < 2 )? mExtend : 0; }
 
   // int getFullExtend() { return mExtend; } // 20191002 same as getIntExtend()
   void setExtend( int ext, float stretch ) { mExtend = ext; mStretch = stretch; }
-  boolean hasStretch( float stretch ) { return Math.abs( mStretch - stretch ) < 0.01f; }
+  public boolean hasStretch( float stretch ) { return Math.abs( mStretch - stretch ) < 0.01f; }
   // void setStretch( float stretch ) { mStretch = stretch; } // ununsed
-  float getStretch() { return mStretch; }
-  float getStretchedExtend() { return mExtend + mStretch; }
+  public float getStretch() { return mStretch; }
+  public float getStretchedExtend() { return mExtend + mStretch; }
 
   // called only by ShotWindow
   boolean flipExtendAndStretch()
@@ -340,7 +348,7 @@ class DBlock
     mAddress  = null;
   }
 
-  boolean makeClino( float tdepth )
+  public boolean makeClino( float tdepth )
   {
     float v = mDepth - tdepth;
     mClino = TDMath.asind( v / mLength ); // nan if |v| > mLength
@@ -387,7 +395,7 @@ class DBlock
     }
   }
 
-  String Name() { return mFrom + "-" + mTo; }
+  public String Name() { return mFrom + "-" + mTo; }
   
   // x bearing [degrees]
   // public void setBearing( float x ) { // FIXME_EXTEND
@@ -418,19 +426,19 @@ class DBlock
   }
 
   // compute relative angle in radians
-  float relativeAngle( DBlock b )
+  public float relativeAngle( DBlock b )
   {
     float cc, sc, cb, sb;
     cc = TDMath.cosd( mClino );
     sc = TDMath.sind( mClino );
     cb = TDMath.cosd( mBearing ); 
     sb = TDMath.sind( mBearing ); 
-    Vector v1 = new Vector( cc * sb, cc * cb, sc );
+    TDVector v1 = new TDVector( cc * sb, cc * cb, sc );
     cc = TDMath.cosd( b.mClino );
     sc = TDMath.sind( b.mClino );
     cb = TDMath.cosd( b.mBearing ); 
     sb = TDMath.sind( b.mBearing ); 
-    Vector v2 = new Vector( cc * sb, cc * cb, sc );
+    TDVector v2 = new TDVector( cc * sb, cc * cb, sc );
     return (v1.minus(v2)).Length(); // approximation: 2 * asin( dv/2 );
   }
 
@@ -442,13 +450,13 @@ class DBlock
     sc = TDMath.sind( mClino );
     cb = TDMath.cosd( mBearing ); 
     sb = TDMath.sind( mBearing ); 
-    Vector v1 = new Vector( alen * cc * sb, alen * cc * cb, alen * sc );
+    TDVector v1 = new TDVector( alen * cc * sb, alen * cc * cb, alen * sc );
     float blen = b.mLength;
     cc = TDMath.cosd( b.mClino );
     sc = TDMath.sind( b.mClino );
     cb = TDMath.cosd( b.mBearing ); 
     sb = TDMath.sind( b.mBearing ); 
-    Vector v2 = new Vector( blen * cc * sb, blen * cc * cb, blen * sc );
+    TDVector v2 = new TDVector( blen * cc * sb, blen * cc * cb, blen * sc );
     float d = (v1.minus(v2)).Length();
     return ( d/alen + d/blen < TDSetting.mCloseDistance );
   }
@@ -459,16 +467,16 @@ class DBlock
     float alen = mLength;
     cb = TDMath.cosd( mBearing ); 
     sb = TDMath.sind( mBearing ); 
-    Vector v1 = new Vector( alen * sb, alen * cb, mDepth );
+    TDVector v1 = new TDVector( alen * sb, alen * cb, mDepth );
     float blen = b.mLength;
     cb = TDMath.cosd( b.mBearing ); 
     sb = TDMath.sind( b.mBearing ); 
-    Vector v2 = new Vector( blen * sb, blen * cb, b.mDepth );
+    TDVector v2 = new TDVector( blen * sb, blen * cb, b.mDepth );
     float d = (v1.minus(v2)).Length();
     return ( d/alen + d/blen < TDSetting.mCloseDistance );
   }
 
-  boolean isRelativeDistance( DBlock b )
+  public boolean isRelativeDistance( DBlock b )
   {
     if ( b == null ) return false;
     return ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING )? checkRelativeDistanceDiving( b ) : checkRelativeDistance( b );

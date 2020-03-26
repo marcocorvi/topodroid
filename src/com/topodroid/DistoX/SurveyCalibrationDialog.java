@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.ui.MyDialog;
+
 import java.util.Locale;
 
 import android.os.Bundle;

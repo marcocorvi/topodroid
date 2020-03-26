@@ -14,7 +14,6 @@ package com.topodroid.DistoX;
 
 class ParserUtil
 {
-
   final static int DATA_DEFAULT    = 0;
   final static int DATA_NONE       = DATA_DEFAULT;
   final static int DATA_NORMAL     = 1;
@@ -29,7 +28,6 @@ class ParserUtil
   final static int CASE_UPPER     = 0;
   final static int CASE_LOWER     = 1;
   final static int CASE_PRESERVE  = 2;
-
 
   static String applyCase( int c, String name ) 
   {

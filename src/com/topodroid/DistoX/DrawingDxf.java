@@ -11,13 +11,20 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDString;
+import com.topodroid.math.Point2D;
+import com.topodroid.math.BezierCurve;
+import com.topodroid.prefs.TDSetting;
+
+// import android.util.Log;
+
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDVersion;
+import com.topodroid.num.TDNum;
 
 import java.util.Locale;
 
-// import java.util.ArrayList;
-// import java.util.HashMap;
-
-// import java.io.FileWriter;
 import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.io.BufferedWriter;
@@ -28,8 +35,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import android.graphics.RectF;
-
-// import android.util.Log;
 
 class DrawingDxf
 {
@@ -500,7 +505,7 @@ class DrawingDxf
 
     try {
       // header
-      writeComment( out, "DXF created by TopoDroid v. " + TopoDroidApp.VERSION );
+      writeComment( out, "DXF created by TopoDroid v. " + TDVersion.string() );
       writeSection( out, "HEADER" );
 
       xmin -= 2;  xmax += 2;
@@ -1121,7 +1126,7 @@ class DrawingDxf
                 handle = toDxf( pw5, handle, point, scale, xoff, yoff );
               }
             } else {
-              String th_name = BrushManager.getPointThName( point.mPointType ).replace(':','-');
+              String th_name = point.getThName().replace(':','-');
               printString( pw5, 0, "INSERT" );
               printString( pw5, 8, "P_" + th_name );
               printString( pw5, 2, "B_" + th_name );
@@ -1187,7 +1192,7 @@ class DrawingDxf
                         LABEL_SCALE, "POINT", style_dejavu, xoff, yoff );
     }
 
-    String th_name = BrushManager.getPointThName( point.mPointType ).replace(':','-');
+    String th_name = point.getThName().replace(':','-');
     // int idx = 1 + point.mPointType;
     printString( pw, 0, "INSERT" );
     handle = inc(handle); printAcDb( pw, handle, "AcDbBlockReference" );
@@ -1203,7 +1208,7 @@ class DrawingDxf
   static private int toDxf( PrintWriter pw, int handle, DrawingLinePath line, float scale, float xoff, float yoff )
   {
     if ( line == null ) return handle;
-    String layer = "L_" + BrushManager.getLineThName( line.lineType() ).replace(':','-');
+    String layer = "L_" + line.getThName( ).replace(':','-');
     int flag = 0;
     if ( mVersion13 && checkSpline( line ) ) {
       return printSpline( pw, line, scale, handle, layer, false, xoff, yoff );
@@ -1216,7 +1221,7 @@ class DrawingDxf
   {
     if ( area == null ) return handle;
     // Log.v("DistoX", "area size " + area.size() );
-    String layer = "A_" + BrushManager.getAreaThName( area.areaType() ).replace(':','-');
+    String layer = "A_" + area.getThName( ).replace(':','-');
     if ( mVersion13 && checkSpline( area ) ) {
       handle = printSpline( pw, area, scale, handle, layer, true, xoff, yoff );
     } else {

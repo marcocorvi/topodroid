@@ -11,6 +11,11 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
+import com.topodroid.num.TDNum;
+import com.topodroid.prefs.TDSetting;
+
 // import android.util.Log;
 
 import java.util.Locale;
@@ -357,7 +362,7 @@ class DrawingXvi
     }
 
     String color = "blue";
-    String name = BrushManager.getPointThName( idx );
+    String name = point.getThName( );
     SymbolPoint sp = (SymbolPoint)BrushManager.getPointByIndex( idx );
     String path = ( sp == null )? null : sp.getXvi();
     if ( path == null ) {

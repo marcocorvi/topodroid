@@ -11,6 +11,21 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDString;
+import com.topodroid.utils.TDTag;
+import com.topodroid.utils.TDColor;
+import com.topodroid.utils.TDRequest;
+import com.topodroid.math.TDMatrix;
+import com.topodroid.math.TDVector;
+import com.topodroid.ui.MyButton;
+import com.topodroid.ui.MyHorizontalListView;
+import com.topodroid.ui.MyHorizontalButtonView;
+import com.topodroid.help.HelpDialog;
+import com.topodroid.help.UserManualActivity;
+import com.topodroid.prefs.TDSetting;
+import com.topodroid.prefs.TDPrefCat;
+
 import android.util.Log;
 
 import java.util.Set;
@@ -432,7 +447,7 @@ public class DeviceActivity extends Activity
   public boolean isActivityFinishing() { return this.isFinishing(); }
 
   // @Implements
-  public void displayCoeff( Vector bg, Matrix ag, Vector bm, Matrix am, Vector nL )
+  public void displayCoeff( TDVector bg, TDMatrix ag, TDVector bm, TDMatrix am, TDVector nL )
   {
     (new CalibCoeffDialog( this, null, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
   }
@@ -740,24 +755,12 @@ public class DeviceActivity extends Activity
   }
 
   @Override
-  public boolean onSearchRequested()
-  {
-    // TDLog.Error( "search requested" );
-    Intent intent = new Intent( this, TDPrefActivity.class );
-    intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_DEVICE );
-    startActivity( intent );
-    return true;
-  }
-
-  @Override
   public boolean onKeyDown( int code, KeyEvent event )
   {
     switch ( code ) {
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         super.onBackPressed();
         return true;
-      case KeyEvent.KEYCODE_SEARCH:
-        return onSearchRequested();
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
         UserManualActivity.showHelpPage( this, getResources().getString( HELP_PAGE ) );
         return true;
@@ -835,8 +838,8 @@ public class DeviceActivity extends Activity
       (new PacketDialog( this )).show();
 
     } else if ( p++ == pos ) { // OPTIONS
-      Intent intent = new Intent( this, TDPrefActivity.class );
-      intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_DEVICE );
+      Intent intent = new Intent( this, com.topodroid.prefs.TDPrefActivity.class );
+      intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_DEVICE );
       startActivity( intent );
     } else if ( p == pos ) { // HELP
       new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE ) ).show();

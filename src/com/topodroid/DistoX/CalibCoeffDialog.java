@@ -11,12 +11,20 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDString;
+import com.topodroid.utils.TDColor;
+import com.topodroid.math.TDMatrix;
+import com.topodroid.math.TDVector;
+import com.topodroid.ui.MyDialog;
+// import com.topodroid.prefs.TDSetting;
+
 // import android.util.Log;
 
 import java.lang.ref.WeakReference;
 import java.util.Locale;
 
-// import android.app.Dialog;
 import android.os.Bundle;
 
 import android.content.Context;
@@ -25,10 +33,8 @@ import android.widget.TextView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.view.View;
-// import android.view.View.OnClickListener;
 
 import android.graphics.Bitmap;
-// import android.graphics.Bitmap.Config;
 
 class CalibCoeffDialog extends MyDialog
                        implements View.OnClickListener
@@ -39,20 +45,6 @@ class CalibCoeffDialog extends MyDialog
   private static final int HEIGHT = 100;
   // private ImageView mImage; // error histogram
   private Bitmap mBitmap = null;
-
-  // private TextView mTextBG;
-  // private TextView mTextAGx;
-  // private TextView mTextAGy;
-  // private TextView mTextAGz;
-  // private TextView mTextBM;
-  // private TextView mTextAMx;
-  // private TextView mTextAMy;
-  // private TextView mTextAMz;
-  // private TextView mTextNL;
-  // private TextView mTextDelta;
-  // private TextView mTextDelta2;
-  // private TextView mTextMaxError;
-  // private TextView mTextIter;
 
   private Button mButtonWrite;
   private Button mButtonBack;
@@ -75,7 +67,7 @@ class CalibCoeffDialog extends MyDialog
   // private boolean mSaturated;
 
   CalibCoeffDialog( Context context, GMActivity parent,
-                    Vector bg, Matrix ag, Vector bm, Matrix am, Vector nl, float[] errors,
+                    TDVector bg, TDMatrix ag, TDVector bm, TDMatrix am, TDVector nl, float[] errors,
                     float delta_bh, float delta, float delta2, float error, long iter, byte[] coeff /*, boolean saturated */ )
   {
     super( context, R.string.CalibCoeffDialog );

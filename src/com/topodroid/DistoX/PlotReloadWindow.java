@@ -11,11 +11,19 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDTag;
+import com.topodroid.ui.MyButton;
+import com.topodroid.ui.MyHorizontalListView;
+import com.topodroid.ui.MyHorizontalButtonView;
+import com.topodroid.ui.MotionEventWrap;
+import com.topodroid.help.HelpDialog;
+import com.topodroid.help.UserManualActivity;
+import com.topodroid.prefs.TDSetting;
+
 import android.util.Log;
 
-// import android.app.Activity;
-// import android.content.Context;
-// import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.Configuration;
@@ -24,7 +32,6 @@ import android.util.TypedValue;
 
 import android.graphics.PointF;
 import android.graphics.Path;
-// import android.graphics.Path.Direction;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.Matrix;
 
@@ -34,17 +41,9 @@ import android.os.Message;
 
 import android.view.MotionEvent;
 import android.view.View;
-// import android.widget.LinearLayout;
-// import android.view.ViewGroup;
-// import android.view.Display;
 import android.view.KeyEvent;
-// for FRAGMENT
-// import android.view.ViewGroup;
-// import android.view.LayoutInflater;
 
 import android.widget.Button;
-// import android.widget.ZoomControls;
-// import android.widget.ZoomButton;
 import android.widget.ZoomButtonsController;
 import android.widget.ZoomButtonsController.OnZoomListener;
 import android.widget.ListView;
@@ -53,11 +52,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import java.io.File;
-// import java.util.List;
 import java.util.ArrayList;
 
-/**
- */
 public class PlotReloadWindow extends ItemDrawer
                              implements View.OnTouchListener
                                       , View.OnClickListener

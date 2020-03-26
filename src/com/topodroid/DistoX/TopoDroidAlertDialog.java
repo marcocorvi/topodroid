@@ -21,14 +21,14 @@ import android.content.res.Resources;
 
 // import android.widget.TextView;
 
-class TopoDroidAlertDialog 
+public class TopoDroidAlertDialog 
 {
-  static void makeAlert( Context context, Resources res, int message, DialogInterface.OnClickListener pos )
+  public static void makeAlert( Context context, Resources res, int message, DialogInterface.OnClickListener pos )
   {
     makeAlert( context, res, res.getString(message), R.string.button_cancel, R.string.button_ok, null, pos );
   }
 
-  static void makeAlert( Context context, Resources res, String message, DialogInterface.OnClickListener pos )
+  public static void makeAlert( Context context, Resources res, String message, DialogInterface.OnClickListener pos )
   {
     makeAlert( context, res, message, R.string.button_cancel, R.string.button_ok, null, pos );
   }
@@ -47,7 +47,7 @@ class TopoDroidAlertDialog
     // alert.getWindow().setBackgroundDrawableResource( R.drawable.alert_bg );
     // alert.show();
 
-  static void makeAlert( Context context, Resources res, String message, 
+  public static void makeAlert( Context context, Resources res, String message, 
              String ok, 
              String no,
              DialogInterface.OnClickListener ok_handler,
@@ -85,7 +85,7 @@ class TopoDroidAlertDialog
       alert.show();
   }
 
-  static void makeAlert( Context context, Resources res, String message, 
+  public static void makeAlert( Context context, Resources res, String message, 
              int ok, 
              int no,
              DialogInterface.OnClickListener ok_handler,

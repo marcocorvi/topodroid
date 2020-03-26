@@ -11,6 +11,10 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDString;
+import com.topodroid.utils.TDColor;
+import com.topodroid.prefs.TDSetting;
+
 import java.lang.ref.WeakReference;
 
 import android.content.Context;
@@ -22,8 +26,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import android.view.View;
-// import android.view.View.OnClickListener;
-// import android.view.View.OnTouchListener;
 import android.view.Gravity;
 import android.view.MotionEvent;
 

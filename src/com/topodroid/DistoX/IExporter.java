@@ -11,8 +11,8 @@
  */
 package com.topodroid.DistoX;
 
-interface IExporter 
+public interface IExporter 
 {
-  void doExport( String type );
+  public void doExport( String type );
 }
 

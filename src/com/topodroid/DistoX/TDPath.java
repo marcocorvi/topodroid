@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+
 import android.util.Log;
 
 import android.os.Build;
@@ -32,7 +34,7 @@ import android.os.Environment;
 // import android.os.Messenger;
 // import android.os.RemoteException;
 
-class TDPath
+public class TDPath
 {
   final static boolean ANDROID_10 = ( Build.VERSION.SDK_INT <= Build.VERSION_CODES.P );
 
@@ -82,7 +84,7 @@ class TDPath
   static String EXTERNAL_STORAGE_PATH =  // app base path
     ANDROID_10 ? Environment.getExternalStorageDirectory().getAbsolutePath()
                : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath();
-  static String PATH_BASEDIR  = EXTERNAL_STORAGE_PATH;
+  public static String PATH_BASEDIR  = EXTERNAL_STORAGE_PATH;
   // private static String PATH_DEFAULT  = ANDROID_10? "TopoDroid/" : EXTERNAL_STORAGE_PATH + "/TopoDroid/";
   // private static String PATH_BASE     = ANDROID_10? "TopoDroid/" : PATH_BASEDIR + "/TopoDroid/";
   private static String PATH_DEFAULT  = EXTERNAL_STORAGE_PATH + "/TopoDroid/";
@@ -294,30 +296,30 @@ class TDPath
     if ( ! fpp.mkdirs() ) TDLog.Error("mkdir error");
   }
 
-  static String getLogFilename()
+  public static String getLogFilename()
   {
     return PATH_DEFAULT + "log.txt";
   }
 
-  static File getLogFile() // DistoX-SAF
+  public static File getLogFile() // DistoX-SAF
   {
     File logfile = new File( PATH_DEFAULT + "log.txt" );
     checkPath( logfile );
     return logfile;
   }
 
-  static File getSettingsFile() // DistoX-SAF
+  public static File getSettingsFile() // DistoX-SAF
   {
     File file = new File( PATH_DEFAULT + "settings.txt" );
     checkPath( file );
     return file;
   }
 
-  static String getSettingsPath() { return PATH_DEFAULT + "settings.txt"; }
+  public static String getSettingsPath() { return PATH_DEFAULT + "settings.txt"; }
 
   // ------------------------------------------------------------------
 
-  static File[] scanTdconfigDir() // DistoX-SAF
+  public static File[] scanTdconfigDir() // DistoX-SAF
   {
     File dir = new File( PATH_TDCONFIG );
     FilenameFilter filter = new FilenameFilter() {
@@ -359,8 +361,8 @@ class TDPath
   static String getTdrFile( String name )    { return PATH_TDR + name; }
   static String getTdr3File( String name )   { return PATH_TDR3 + name; }
 
-  static String getTdconfigDir( ) { return PATH_TDCONFIG; }
-  static String getTdconfigFile( String name ) { return PATH_TDCONFIG + name; }
+  public static String getTdconfigDir( ) { return PATH_TDCONFIG; }
+  public static String getTdconfigFile( String name ) { return PATH_TDCONFIG + name; }
 
   static String getCaveFile( String name )   { return PATH_CAVE + name; }
   static String getCavFile( String name )    { return PATH_CAV + name; }
@@ -391,8 +393,8 @@ class TDPath
   static String getDumpFile( String name )   { return PATH_DUMP + name; }
   static String getBinFile( String name )    { return PATH_BIN + name; }
   static String getCCsvFile( String name )   { return PATH_CCSV + name; }
-  static String getManFile( String name )    { return PATH_MAN + name; }
-  static String getManPath( )    { return PATH_MAN; }
+  public static String getManFile( String name )    { return PATH_MAN + name; }
+  public static String getManPath( )    { return PATH_MAN; }
 
   static String getNoteFile( String name )   { return APP_NOTE_PATH + name; }
 

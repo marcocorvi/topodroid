@@ -127,7 +127,7 @@
     android:layout_marginBottom="@dimen/marginv"
     android:orientation="horizontal" 
     >
-    <com.topodroid.DistoX.MyHorizontalListView android:id="@+id/listview"
+    <com.topodroid.ui.MyHorizontalListView android:id="@+id/listview"
       android:layout_width="match_parent"
       android:layout_marginTop="@dimen/marginv"
       android:layout_marginBottom="@dimen/marginv"

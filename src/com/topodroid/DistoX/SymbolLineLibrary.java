@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+
 // import android.util.Log;
 
 import java.util.Locale;

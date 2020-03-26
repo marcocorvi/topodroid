@@ -11,11 +11,10 @@
  */
 package com.topodroid.DistoX;
 
-// import android.graphics.Canvas;
-// import android.graphics.Paint;
-// import android.graphics.Path;
-// import android.graphics.RectF;
-// import android.graphics.Matrix;
+import com.topodroid.utils.TDLog;
+import com.topodroid.prefs.TDSetting;
+
+// import android.util.Log;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -25,11 +24,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Locale;
 
-// import android.util.Log;
 import android.util.Base64;
 
-/**
- */
 class DrawingPhotoPath extends DrawingPointPath
 {
   long mId; // id of the photo 

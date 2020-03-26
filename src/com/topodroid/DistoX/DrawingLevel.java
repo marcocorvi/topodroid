@@ -13,6 +13,8 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.prefs.TDSetting;
+
 class DrawingLevel
 {
   static final int LEVEL_BASE   =   1;

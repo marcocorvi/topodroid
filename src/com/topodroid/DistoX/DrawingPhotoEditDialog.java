@@ -11,24 +11,21 @@
  */
 package com.topodroid.DistoX;
 
-// import java.io.IOException;
+import com.topodroid.utils.TDLog;
+import com.topodroid.ui.MyDialog;
+import com.topodroid.ui.TDImage;
+// import com.topodroid.prefs.TDSetting;
 
-// import android.app.Dialog;
+// import android.util.Log;
+
 import android.os.Bundle;
-
-// import android.content.Intent;
 import android.content.Context;
-// import android.net.Uri;
 
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Button;
 import android.view.View;
-
-// import android.media.ExifInterface;
-
-// import android.util.Log;
 
 class DrawingPhotoEditDialog extends MyDialog
                              implements View.OnClickListener

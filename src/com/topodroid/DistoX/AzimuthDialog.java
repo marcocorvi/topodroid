@@ -11,30 +11,29 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
+import com.topodroid.ui.MyTurnBitmap;
+import com.topodroid.ui.MyDialog;
+import com.topodroid.ui.MyCheckBox;
+import com.topodroid.ui.TDLayout;
+import com.topodroid.prefs.TDSetting;
+
 import java.util.Locale;
 
 import android.os.Bundle;
 
-// import android.text.method.KeyListener;
-
 import android.content.Context;
 
-// import android.widget.TextView;
-// import android.widget.TextView.OnEditorActionListener;
 import android.widget.EditText;
 import android.widget.Button;
 import android.view.View;
-// import android.view.Window;
-//  android.view.WindowManager;
-// import android.view.KeyEvent;
-// import android.view.inputmethod.EditorInfo;
 
 import android.text.TextWatcher;
 import android.text.Editable;
 
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
-// import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import android.graphics.Bitmap;
 import android.graphics.Matrix;

@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDColor;
+
 // import android.util.Log;
 
 // import java.text.SimpleDateFormat;

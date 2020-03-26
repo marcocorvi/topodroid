@@ -11,6 +11,9 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.ui.ItemButton;
+
 import java.util.ArrayList;
 
 import android.content.Context;

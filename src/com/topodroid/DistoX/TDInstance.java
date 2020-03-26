@@ -11,19 +11,22 @@
  */
 package com.topodroid.DistoX;
 
+
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.content.SharedPreferences;
 import android.content.Context;
 import android.content.res.Resources;
 
 import android.bluetooth.BluetoothDevice;
 
 // static class (singleton) with instance data
-class TDInstance
+public class TDInstance
 {
-  static Context context; // must be the application context FIXME LEAK AND BREAKS INSTANT RUN
+  public static Context context; // must be the application context FIXME LEAK AND BREAKS INSTANT RUN
 
-  static String cwd;  // current work directory
-  static String cbd;  // current base directory
+  public static String cwd;  // current work directory
+  public static String cbd;  // current base directory
 
   static long sid   = -1;   // id of the current survey
   static long cid   = -1;   // id of the current calib
@@ -32,7 +35,7 @@ class TDInstance
   static long secondLastShotId = 0L;
 
   static boolean xsections = false; // current value of mSharedSections
-  static int     datamode = 0;      // current value of survey datamode
+  public static int     datamode = 0;      // current value of survey datamode
   // FIXME static int    extend = 90;  // current value of survey extend
 
   static Device  deviceA = null;
@@ -64,6 +67,8 @@ class TDInstance
     deviceB = tmp;
     return true;
   }
+
+  public static SharedPreferences getPrefs() { return PreferenceManager.getDefaultSharedPreferences( context ); }
 
   static Bundle toBundle()
   {
@@ -111,7 +116,7 @@ class TDInstance
 
   static void setContext( Context ctx ) { context = ctx; }
 
-  static Resources getResources() { return context.getResources(); }
+  public static Resources getResources() { return context.getResources(); }
 
   static void setRecentPlot( String name, long type )
   {

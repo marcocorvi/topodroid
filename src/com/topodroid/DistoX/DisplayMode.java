@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDString;
+
 class DisplayMode
 {
   static final int DISPLAY_NONE     = 0;

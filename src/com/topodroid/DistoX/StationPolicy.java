@@ -12,20 +12,22 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDColor;
+
 // import android.util.Log;
 
-class StationPolicy
+public class StationPolicy
 {
   // must agree with res/values/array.xml surveyStationsValue
-  static int SURVEY_STATION_ZERO      = 0;
-  static int SURVEY_STATION_FOREWARD  = 1;
-  static int SURVEY_STATION_BACKWARD  = 2;
-  static int SURVEY_STATION_FOREWARD2 = 3;
-  static int SURVEY_STATION_BACKWARD2 = 4;
-  static int SURVEY_STATION_BACKSIGHT = 5;
-  static int SURVEY_STATION_TRIPOD    = 6;
-  static int SURVEY_STATION_TOPOROBOT = 7;
-  static int SURVEY_STATION_ANOMALY   = 8;
+  public static int SURVEY_STATION_ZERO      = 0;
+  public static int SURVEY_STATION_FOREWARD  = 1;
+  public static int SURVEY_STATION_BACKWARD  = 2;
+  public static int SURVEY_STATION_FOREWARD2 = 3;
+  public static int SURVEY_STATION_BACKWARD2 = 4;
+  public static int SURVEY_STATION_BACKSIGHT = 5;
+  public static int SURVEY_STATION_TRIPOD    = 6;
+  public static int SURVEY_STATION_TOPOROBOT = 7;
+  public static int SURVEY_STATION_ANOMALY   = 8;
 
   static boolean mShotAfterSplays = true;
   private static boolean mBacksightShot = false;    // backsight shooting policy
@@ -40,12 +42,12 @@ class StationPolicy
   static boolean isSurveyForward()  { return (mSurveyStations%2) == SURVEY_STATION_FOREWARD; }
   static boolean isSurveyBackward() { return mSurveyStations>0 && (mSurveyStations%2) == SURVEY_STATION_ZERO; }
   // the check on the level should not be neceessary
-  static boolean doMagAnomaly() { return mMagAnomaly && TDLevel.overAdvanced; }
-  static boolean doTopoRobot()  { return mTRobotShot && TDLevel.overExpert; }
-  static boolean doTripod()     { return mTripodShot && TDLevel.overNormal; }
-  static boolean doBacksight()  { return mBacksightShot; }
+  public static boolean doMagAnomaly() { return mMagAnomaly && TDLevel.overAdvanced; }
+  public static boolean doTopoRobot()  { return mTRobotShot && TDLevel.overExpert; }
+  public static boolean doTripod()     { return mTripodShot && TDLevel.overNormal; }
+  public static boolean doBacksight()  { return mBacksightShot; }
 
-  static int savedPolicy() { return mSavedPolicy; }
+  public static int savedPolicy() { return mSavedPolicy; }
 
   // static void dump()
   // {
@@ -56,7 +58,7 @@ class StationPolicy
   //       	    + (mTRobotShot?"R":"-") );
   // }
 		   
-  static boolean policyDowngrade( int level )
+  public static boolean policyDowngrade( int level )
   {
     // Log.v("DistoXP", "policy downgrade " + mSavedPolicy + " for level " + level );
     // dump();
@@ -66,7 +68,7 @@ class StationPolicy
              || ( doTripod()     && level < TDLevel.ADVANCED ) );
   }
 
-  static int policyUpgrade( int level )
+  public static int policyUpgrade( int level )
   {
     // Log.v("DistoXP", "policy upgrade " + mSavedPolicy + " for level " + level );
     // dump();
@@ -84,7 +86,7 @@ class StationPolicy
     return 0;
   }
 
-  static boolean setPolicy( int policy )
+  public static boolean setPolicy( int policy )
   {
     // Log.v("DistoXP", "policy set from " + mSavedPolicy + " to " + policy );
     // dump();

@@ -14,23 +14,20 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
+import com.topodroid.math.Point2D;
+import com.topodroid.math.BezierCurve;
+import com.topodroid.prefs.TDSetting;
+
 import android.util.Log;
 
-// import android.graphics.Canvas;
-// import android.graphics.Paint;
 import android.graphics.Path;
-// import android.graphics.Matrix;
-
-
-// import java.util.Iterator;
-// import java.util.List;
 import java.util.ArrayList;
 import java.io.PrintWriter;
 import java.util.Locale;
 
-/**
- */
-class DrawingPointLinePath extends DrawingPath
+public class DrawingPointLinePath extends DrawingPath
                            implements IDrawingLink
 {
   private boolean mVisible; // visible line
@@ -43,11 +40,26 @@ class DrawingPointLinePath extends DrawingPath
 
   float mDx, mDy; // unit vector in the direction of this line
 
-  int size() { return mSize; }
+
+  DrawingPointLinePath( int path_type, boolean visible, boolean closed, int scrap )
+  {
+    super( path_type, null, scrap ); // DrawingPath.DRAWING_PATH_AREA );
+    // mPoints  = new ArrayList<>();
+    clear();
+    mVisible = visible;
+    mClosed  = closed;
+    mFirst   = null;
+    mLast    = null;
+    mSize    = 0;
+    mDx = mDy = 0;
+  }
+
+  public int size() { return mSize; }
 
   // access to mFirst mLast is used only by Selection
-  LinePoint first() { return mFirst; }
-  LinePoint last()  { return mLast; }
+  public LinePoint first() { return mFirst; }
+  public LinePoint last()  { return mLast; }
+
   boolean isNotEndpoint( LinePoint lp ) { return lp != mFirst && lp != mLast; }
 
   // FIXME-COPYPATH
@@ -94,6 +106,7 @@ class DrawingPointLinePath extends DrawingPath
 
   @Override
   float getY() { return (top+bottom)/2; }
+
   // void dump() // DEBUG
   // {
   //   int k=0;
@@ -194,22 +207,9 @@ class DrawingPointLinePath extends DrawingPath
     retracePath();
   }
 
-
-  DrawingPointLinePath( int path_type, boolean visible, boolean closed, int scrap )
-  {
-    super( path_type, null, scrap ); // DrawingPath.DRAWING_PATH_AREA );
-    // mPoints  = new ArrayList<>();
-    clear();
-    mVisible = visible;
-    mClosed  = closed;
-    mFirst   = null;
-    mLast    = null;
-    mSize    = 0;
-    mDx = mDy = 0;
-  }
-
   void setClosed( boolean closed ) { mClosed = closed; }
-  boolean isClosed() { return mClosed; }
+  public boolean isClosed() { return mClosed; }
+
   boolean isPathClosed() 
   {
     if ( mSize < 2 ) return false;
@@ -219,7 +219,7 @@ class DrawingPointLinePath extends DrawingPath
   }
 
   void setVisible( boolean visible ) { mVisible = visible; }
-  boolean isVisible() { return mVisible; }
+  public boolean isVisible() { return mVisible; }
 
   void computeUnitNormal() { mDx = mDy = 0; }
 
@@ -253,6 +253,21 @@ class DrawingPointLinePath extends DrawingPath
   {
     if ( lp == null ) return null;
     return lp.mPrev;
+  }
+
+
+  private void clear()
+  {
+    mFirst = null;
+    mLast  = null;
+    mPath = new Path();
+    mSize = 0;
+    left   = 0;
+    right  = 0;
+    top    = 0;
+    bottom = 0;
+    mDx = 0;
+    mDy = 0;
   }
 
   void makeSharp( )
@@ -337,21 +352,6 @@ class DrawingPointLinePath extends DrawingPath
       }
     }    
   }
-
-  private void clear()
-  {
-    mFirst = null;
-    mLast  = null;
-    mPath = new Path();
-    mSize = 0;
-    left   = 0;
-    right  = 0;
-    top    = 0;
-    bottom = 0;
-    mDx = 0;
-    mDy = 0;
-  }
-
 
   void makeStraight( )
   {
@@ -746,5 +746,6 @@ class DrawingPointLinePath extends DrawingPath
 
     pw.format("\" />\n");
   }
+
 }
 

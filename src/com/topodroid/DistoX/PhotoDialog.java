@@ -11,20 +11,18 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.ui.MyDialog;
+import com.topodroid.ui.TDImage;
+
 // import android.util.Log;
 
-// import android.app.Dialog;
 import android.os.Bundle;
-
-// import android.content.Intent;
 import android.content.Context;
 
-// import android.widget.TextView;
 import android.widget.ImageView;
 import android.widget.Button;
 
 import android.view.View;
-// import android.view.ViewGroup.LayoutParams;
 
 class PhotoDialog extends MyDialog
                   implements View.OnClickListener

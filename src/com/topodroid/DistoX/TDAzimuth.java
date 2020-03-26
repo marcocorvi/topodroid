@@ -11,18 +11,21 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.prefs.TDSetting;
+
 // import android.util.Log;
 
-class TDAzimuth
+public class TDAzimuth
 {
   // ----------------------------------------------------------------
   static long  mFixedExtend = 0;  // -1 left, 0 unspecified, 1 right
 
   // if mFixedExtend != 0 the mRefAzimuth is the last bearing times mFixedExtend
-  static float mRefAzimuth  = SurveyInfo.EXTEND_NORMAL; // west to east
+  public static float mRefAzimuth  = SurveyInfo.EXTEND_NORMAL; // west to east
 
 
-  static void resetRefAzimuth( final ShotWindow window, float azimuth )
+  public static void resetRefAzimuth( final ShotWindow window, float azimuth )
   {
     // Log.v("DistoXE", "reset Ref Azimuth " + azimuth );
     mRefAzimuth  = azimuth;

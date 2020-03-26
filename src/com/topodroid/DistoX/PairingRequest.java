@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+
 import java.nio.ByteBuffer;
 import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;

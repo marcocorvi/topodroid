@@ -11,6 +11,10 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.ui.TDGreenDot;
+import com.topodroid.prefs.TDSetting;
+
 import android.util.Log;
 
 import java.util.List;
@@ -2117,7 +2121,7 @@ class Scrap
             //     if ( ! station_splay.isStationON( pt.mItem ) ) continue;
             //   }
             // } 
-            TDGraphicUtil.drawGreenDot( canvas, matrix, pt, dot_radius );
+            TDGreenDot.draw( canvas, matrix, pt, dot_radius );
           }
         }
       }
@@ -2151,7 +2155,7 @@ class Scrap
             //     if ( ! station_splay.isStationON( pt.mItem ) ) continue;
             //   }
             // } 
-            TDGraphicUtil.drawGreenDot( canvas, matrix, pt, dot_radius );
+            TDGreenDot.draw( canvas, matrix, pt, dot_radius );
           }
         }
       }

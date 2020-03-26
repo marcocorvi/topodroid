@@ -11,11 +11,11 @@
  */
 package com.topodroid.DistoX;
 
-// import android.app.Dialog;
-// import android.app.Activity;
-import android.os.Bundle;
+import com.topodroid.utils.TDLog;
+import com.topodroid.ui.MyDialog;
+import com.topodroid.prefs.TDSetting;
 
-// import android.content.Intent;
+import android.os.Bundle;
 import android.content.Context;
 
 import android.widget.EditText;
@@ -23,10 +23,6 @@ import android.widget.TextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.view.View;
-// import android.view.View.OnKeyListener;
-// import android.view.KeyEvent;
-// import android.view.ViewGroup.LayoutParams;
-
 
 class PlotRenameDialog extends MyDialog
                        implements View.OnClickListener

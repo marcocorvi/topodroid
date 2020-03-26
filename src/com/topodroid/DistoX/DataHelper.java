@@ -15,6 +15,13 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDVersion;
+import com.topodroid.utils.TDString;
+import com.topodroid.utils.TDStatus;
+import com.topodroid.prefs.TDSetting;
+
 import android.util.Log;
 
 import java.io.File;
@@ -46,13 +53,8 @@ import java.util.Locale;
 import java.util.HashMap;
 
 
-class DataHelper extends DataSetObservable
+public class DataHelper extends DataSetObservable
 {
-  static final String DB_VERSION = "42"; // FIXME agrees with Cave3DThParser values
-  static final int DATABASE_VERSION = 42;
-
-  static final int DATABASE_VERSION_MIN = 21; // was 14
-
   private static final String CONFIG_TABLE = "configs";
   private static final String SURVEY_TABLE = "surveys";
   private static final String FIXED_TABLE  = "fixeds";
@@ -3076,7 +3078,7 @@ class DataHelper extends DataSetObservable
     return list;
   }
 
-  List<String> selectAllSurveys() { return selectAllNames( SURVEY_TABLE ); }
+  public List<String> selectAllSurveys() { return selectAllNames( SURVEY_TABLE ); }
 
   // ----------------------------------------------------------------------
   // CONFIG DATA
@@ -4933,7 +4935,7 @@ class DataHelper extends DataSetObservable
   //   return list;
   // }
 
-  SurveyInfo getSurveyInfo( String name )
+  public SurveyInfo getSurveyInfo( String name )
   {
     SurveyInfo info = null;
     if ( myDB == null ) return null;
@@ -4970,8 +4972,8 @@ class DataHelper extends DataSetObservable
 
      DistoXOpenHelper(Context context, String database_name ) 
      {
-        super(context, database_name, null, DATABASE_VERSION);
-        // TDLog.Log( TDLog.LOG_DB, "createTables ... " + database_name + " version " + DATABASE_VERSION );
+        super(context, database_name, null, TDVersion.DATABASE_VERSION);
+        // TDLog.Log( TDLog.LOG_DB, "createTables ... " + database_name + " version " + TDVersion.DATABASE_VERSION );
      }
 
      @Override

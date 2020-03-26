@@ -11,34 +11,29 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDStatus;
+import com.topodroid.num.TDNum;
+import com.topodroid.num.NumStation;
+import com.topodroid.num.NumShot;
+import com.topodroid.num.NumSplay;
+import com.topodroid.ui.MyDialog;
+import com.topodroid.ui.MotionEventWrap;
+import com.topodroid.prefs.TDSetting;
+
+
 // import android.util.Log;
 
-// import android.app.Dialog;
 import android.content.Context;
-// import android.content.res.Resources;
 
 import android.graphics.PointF;
 import android.graphics.Path;
 
 import android.os.Bundle;
-// import android.os.Handler;
-// import android.os.Message;
-// import android.view.Menu;
-// import android.view.SubMenu;
-// import android.view.MenuItem;
-// import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-// import android.widget.LinearLayout;
-// import android.widget.PopupWindow;
-// import android.view.ViewGroup;
-// import android.view.Display;
-// import android.util.DisplayMetrics;
-// import android.view.ContextMenu;
-// import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.Button;
-// import android.widget.ZoomControls;
-// import android.widget.ZoomButton;
 import android.widget.ZoomButtonsController;
 import android.widget.ZoomButtonsController.OnZoomListener;
 import android.widget.EditText;
@@ -49,10 +44,8 @@ import android.text.TextWatcher;
 import android.text.Editable;
 
 import java.util.List;
-// import java.util.ArrayList;
 import java.util.Locale;
 
-// import java.util.concurrent.RejectedExecutionException;
 // import java.util.Deque; // REQUIRES API-9
 
 /**
@@ -65,9 +58,7 @@ class ProjectionDialog extends MyDialog
 {
   private View mZoomView;
 
-  // private final TopoDroidApp mApp;
   private final ShotWindow mParent;
-  // private final DrawingUtil mDrawingUtil;
 
   private ProjectionSurface mProjectionSurface;
   private SeekBar mSeekBar;

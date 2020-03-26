@@ -11,6 +11,11 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDColor;
+import com.topodroid.prefs.TDSetting;
+
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;

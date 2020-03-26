@@ -12,6 +12,10 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.ui.MyDialog;
+import com.topodroid.utils.TDVersion;
+
+
 import android.content.Context;
 // import android.content.Intent;
 
@@ -34,7 +38,7 @@ class TopoDroidPerms extends MyDialog
     super( context, R.string.TopoDroidPerms );
     // mContext = context;
     initLayout(R.layout.topodroid_perms,
-      String.format( context.getResources().getString(R.string.welcome_title), TopoDroidApp.VERSION ) );
+      String.format( context.getResources().getString(R.string.welcome_title), TDVersion.string() ) );
 
     StringBuilder sb = new StringBuilder();
     if ( check_perms < 0 ) {

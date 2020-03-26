@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+
 import android.view.SurfaceHolder;
 
 // import android.util.Log;

@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+
 import java.util.Locale;
 // import java.util.ArrayList;
 // import java.util.TreeSet;

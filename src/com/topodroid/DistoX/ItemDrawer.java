@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.prefs.TDSetting;
+
 import android.util.Log;
 
 import android.app.Activity;
@@ -80,60 +82,31 @@ abstract class ItemDrawer extends Activity
   static void updateRecent( Symbol symbol, Symbol[] symbols, int[] ages )
   {
     if ( symbol == null ) return;
-    int amin = ages[0];
     int kmin = 0;
-    int kmax = 0; 
-    for ( int k=1; k<NR_RECENT; ++k ) {
-      if ( ages[kmax] < ages[k] ) kmax = k;
-      if ( amin > ages[k] ) { amin = ages[k]; kmin = k; }
-    }
-    int amax = ages[kmax] - amin + 1;
-
-    // StringBuilder sb = new StringBuilder();
-    // sb.append("ages " + amin + " " + amax +": ");
-    // for ( int k=0; k<NR_RECENT; ++k ) {
-    //   ages[k] -= amin;
-    //   sb.append( " " + ages[k] );
-    // }
-    // sb.append( " kmin " + kmin );
-    // Log.v("DistoX-AGE", sb.toString() );
-
     for ( int k=0; k<NR_RECENT; ++k ) {
       if ( symbol == symbols[k] ) {
-        if ( k != kmax ) ages[k] = amax;
+        updateAge( k, ages );
         return;
+      } else if ( ages[k] < ages[kmin] ) {
+        kmin = k;
       }
     }
     symbols[kmin] = symbol;
-    ages[kmin] = amax;
-
-    // for ( int k=0; k<NR_RECENT; ++k ) {
-    //   if ( symbol == symbols[k] ) {
-    //     for ( ; k > 0; --k ) symbols[k] = symbols[k-1];
-    //     symbols[0] = symbol;
-    //     break;
-    //   }
-    // }
-    // if ( symbols[0] != symbol ) {
-    //   for ( int k = NR_RECENT-1; k > 0; --k ) symbols[k] = symbols[k-1];
-    //   symbols[0] = symbol;
-    // }
+    updateAge( kmin, ages );
   }
 
   static void updateAge( int kk, int[] ages )
   {
     // Log.v("DistoX-AGE", "kk " + kk );
-    int amin = ages[0];
-    int kmax = 0; 
-    for ( int k=1; k<NR_RECENT; ++k ) {
-      if ( ages[kmax] < ages[k] ) kmax = k;
-      if ( amin > ages[k] ) amin = ages[k]; 
+    int amax = ages[kk];
+    for ( int k=0; k<NR_RECENT; ++k ) {
+      if ( k != kk && ages[kk] < ages[k] ) { 
+        if ( amax < ages[k] ) amax = ages[k];
+        -- ages[k];
+      }
     }
-    if ( kk != kmax ) {
-      int amax = ages[kmax] - amin + 1;
-      for ( int k=0; k<NR_RECENT; ++k ) ages[k] -= amin;
-      ages[kk] = amax;
-    }
+    ages[kk] = amax;
+    Log.v("DistoX-AGE", " " + ages[0] + " " + ages[1] + " " + ages[2] + " " + ages[3] + " " + ages[4] + " " + ages[5] );
   }
 
   // recent symbols are stored with their th_names

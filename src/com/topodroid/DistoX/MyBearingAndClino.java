@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+
 // import android.util.Log;
 
 import java.io.File;
@@ -26,7 +28,7 @@ import android.graphics.Bitmap;
 
 import android.media.ExifInterface; // REQUIRES android.support
 
-class MyBearingAndClino implements IBearingAndClino
+public class MyBearingAndClino implements IBearingAndClino
 {
   private final TopoDroidApp mApp;
   private File  mFile;
@@ -101,32 +103,6 @@ class MyBearingAndClino implements IBearingAndClino
       TDLog.Error( "IO exception " + e.getMessage() );
       // Log.v( "DistoXPHOTO", "IO exception " + e.getMessage() );
     }
-  }
-  
-  //                           up
-  // 1: no rotation            6
-  // 6: rotate right    left 1-+-3 right
-  // 3: rotate 180             8
-  // 8: rotate left            down
-  static void applyOrientation( ImageView image, Bitmap bitmap, int orientation )
-  {
-    Matrix m = new Matrix();
-    int w = bitmap.getWidth();
-    int h = bitmap.getHeight();
-    if ( orientation == 6 ) {
-      m.setRotate(  90f, (float)w/2, (float)h/2 );
-      // image.setRotation(  90 ); // REQUIRES API-14
-    } else if ( orientation == 3 ) {
-      m.setRotate( 180f, (float)w/2, (float)h/2 );
-      // image.setRotation( 180 );
-    } else if ( orientation == 8 ) {
-      m.setRotate( 270f, (float)w/2, (float)h/2 );
-      // image.setRotation( 270 );
-    } else {
-      image.setImageBitmap( bitmap );
-      return;
-    }
-    image.setImageBitmap( Bitmap.createBitmap( bitmap, 0, 0, w, h, m, true ) );
   }
 
   // jpegexiforient man page has

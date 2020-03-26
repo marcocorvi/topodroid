@@ -13,43 +13,42 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.prefs.TDSetting;
+import com.topodroid.math.Point2D;
+
 import android.graphics.Paint;
-// import android.graphics.Paint.FontMetrics;
-// import android.graphics.PointF;
 import android.graphics.Path;
-// import android.graphics.Path.Direction;
 
 // import android.util.Log;
 
-
-class DrawingUtil
+public class DrawingUtil
 {
-  static final float SCALE_FIX = 20.0f; 
-  static final float CENTER_X = 100f;
-  static final float CENTER_Y = 120f;
+  public static final float SCALE_FIX = 20.0f; 
+  public static final float CENTER_X = 100f;
+  public static final float CENTER_Y = 120f;
 
   // private static final PointF mCenter = new PointF( CENTER_X, CENTER_Y );
 
-  static float toSceneX( Point2D p ) { return CENTER_X + p.x * SCALE_FIX; }
-  static float toSceneY( Point2D p ) { return CENTER_Y + p.y * SCALE_FIX; }
+  public static float toSceneX( Point2D p ) { return CENTER_X + p.x * SCALE_FIX; }
+  public static float toSceneY( Point2D p ) { return CENTER_Y + p.y * SCALE_FIX; }
 
-  static float sceneToWorldX( Point2D p ) { return (p.x - CENTER_X) / SCALE_FIX; }
-  static float sceneToWorldY( Point2D p ) { return (p.y - CENTER_Y) / SCALE_FIX; }
+  public static float sceneToWorldX( Point2D p ) { return (p.x - CENTER_X) / SCALE_FIX; }
+  public static float sceneToWorldY( Point2D p ) { return (p.y - CENTER_Y) / SCALE_FIX; }
 
   // float toSceneX( float x, float y ) { return x; } 
   // float toSceneY( float x, float y ) { return y; } 
-  static float toSceneX( float x, float y ) { return CENTER_X + x * SCALE_FIX; }
-  static float toSceneY( float x, float y ) { return CENTER_Y + y * SCALE_FIX; }
+  public static float toSceneX( float x, float y ) { return CENTER_X + x * SCALE_FIX; }
+  public static float toSceneY( float x, float y ) { return CENTER_Y + y * SCALE_FIX; }
 
   // float sceneToWorldX( float x, float y ) { return x; } 
   // float sceneToWorldY( float x, float y ) { return y; }
-  static float sceneToWorldX( float x, float y ) { return (x - CENTER_X)/SCALE_FIX; }
-  static float sceneToWorldY( float x, float y ) { return (y - CENTER_Y)/SCALE_FIX; }
+  public static float sceneToWorldX( float x, float y ) { return (x - CENTER_X)/SCALE_FIX; }
+  public static float sceneToWorldY( float x, float y ) { return (y - CENTER_Y)/SCALE_FIX; }
     
   // int toBoundX( float x, float y ) { return Math.round(x); } 
   // int toBoundY( float x, float y ) { return Math.round(y); }
-  static private int toBoundX( float x, float y ) { return Math.round(x); }
-  static private int toBoundY( float x, float y ) { return Math.round(y); }
+  private static int toBoundX( float x, float y ) { return Math.round(x); }
+  private static int toBoundY( float x, float y ) { return Math.round(y); }
 
   static
   void makeDrawingPath( DrawingPath dpath, float xx1, float yy1, float xx2, float yy2 )

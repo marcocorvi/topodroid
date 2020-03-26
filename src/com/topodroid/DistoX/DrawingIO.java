@@ -11,6 +11,11 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDVersion;
+import com.topodroid.num.NumStation;
+import com.topodroid.prefs.TDSetting;
+
 import android.util.Log;
 
 import java.io.File;
@@ -30,11 +35,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 // import java.io.EOFException;
 
-// import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 // import android.util.ArraySet; // REQUIRES API-23
-// import java.util.HashMap;
 import java.util.Locale;
 
 import android.graphics.RectF;
@@ -941,7 +944,7 @@ class DrawingIO
   {
     try { 
       dos.write( 'V' ); // version
-      dos.writeInt( TopoDroidApp.VERSION_CODE );
+      dos.writeInt( TDVersion.code() );
       dos.write( 'S' );
       dos.writeUTF( scrap_name );
       dos.writeInt( type );
@@ -1011,7 +1014,7 @@ class DrawingIO
     // Log.v("DistoX", "cstack size " + cstack.size() );
     try { 
       dos.write( 'V' ); // version
-      dos.writeInt( TopoDroidApp.VERSION_CODE );
+      dos.writeInt( TDVersion.code() );
       dos.write( 'S' );
       dos.writeUTF( scrap_name );
       dos.writeInt( type );
@@ -1097,7 +1100,7 @@ class DrawingIO
         scale*DrawingUtil.CENTER_X, -scale*DrawingUtil.CENTER_Y, name );
     }
     pw.format("\n");
-    pw.format("# %s created by TopoDroid v. %s\n\n", TDUtil.currentDate(), TopoDroidApp.VERSION );
+    pw.format("# %s created by TopoDroid v. %s\n\n", TDUtil.currentDate(), TDVersion.string() );
     out.write( sw.getBuffer().toString() );
   }
 

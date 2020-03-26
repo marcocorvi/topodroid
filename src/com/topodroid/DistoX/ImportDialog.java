@@ -11,15 +11,13 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.ui.MyDialog;
+
 import java.io.File;
-// import java.util.Set;
 import java.util.ArrayList;
 
-// import android.app.Activity;
-// import android.app.Dialog;
 import android.os.Bundle;
-
-// import android.content.Intent;
 
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,7 +28,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 
-// import android.content.IntentFilter;
 import android.content.Context;
 
 

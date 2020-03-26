@@ -11,6 +11,10 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDVersion;
+import com.topodroid.ui.MyDialog;
+
 // import android.app.Dialog;
 import android.os.Bundle;
 
@@ -102,7 +106,7 @@ class SymbolReload extends MyDialog
       mCBkarst.setVisibility( View.GONE );
       mBtnInstall.setVisibility( View.GONE );
       String version = TopoDroidApp.mDData.getValue( "symbol_version" );
-      tv.setText( String.format( mApp.getResources().getString(R.string.symbols_ask), TopoDroidApp.SYMBOL_VERSION, version ) );
+      tv.setText( String.format( mApp.getResources().getString(R.string.symbols_ask), TDVersion.SYMBOL_VERSION, version ) );
     } else {
       mBtnInstall.setOnClickListener( this );
     }

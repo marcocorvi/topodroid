@@ -14,26 +14,26 @@ package com.topodroid.DistoX;
 import android.content.Context;
 // import android.provider.Settings.Secure;
 
-class TDLevel
+public class TDLevel
 {
-  static final int BASIC    = 0;
-  static final int NORMAL   = 1;
-  static final int ADVANCED = 2;
-  static final int EXPERT   = 3;
-  static final int TESTER   = 4;
+  public static final int BASIC    = 0;
+  public static final int NORMAL   = 1;
+  public static final int ADVANCED = 2;
+  public static final int EXPERT   = 3;
+  public static final int TESTER   = 4;
   // static final private int COMPLETE = 5;
 
-  static int mLevel = 1; // activity level
+  public static int mLevel = 1; // activity level
 
-  static boolean overBasic    = true;
-  static boolean overNormal   = false;
-  static boolean overAdvanced = false;
-  static boolean overExpert   = false;
-  static boolean overTester   = false;
-  static boolean mDeveloper   = false;
+  public static boolean overBasic    = true;
+  public static boolean overNormal   = false;
+  public static boolean overAdvanced = false;
+  public static boolean overExpert   = false;
+  public static boolean overTester   = false;
+  boolean mDeveloper   = false;
   static String  mAndroidId   = null;
 
-  static void setLevel( Context ctx, int level )
+  public static void setLevel( Context ctx, int level )
   {
     mLevel = level;
 

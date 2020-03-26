@@ -14,19 +14,22 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDColor;
+import com.topodroid.ui.MyDialog;
+import com.topodroid.ui.MyButton;
+import com.topodroid.prefs.TDSetting;
+
 // import android.util.Log;
 
 import java.util.List;
 
 import android.os.Bundle;
-// import android.app.Dialog;
-// import android.app.Activity;
 import android.content.Context;
 // import android.content.Intent;
 
-// import android.graphics.*;
 import android.view.View;
-// import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;

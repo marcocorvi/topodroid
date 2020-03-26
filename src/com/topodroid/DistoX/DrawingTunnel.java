@@ -11,10 +11,15 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDVersion;
+import com.topodroid.num.TDNum;
+import com.topodroid.num.NumStation;
+import com.topodroid.prefs.TDSetting;
+
 import android.util.Log;
 
 import java.util.Locale;
-// import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -77,7 +82,7 @@ class DrawingTunnel extends DrawingSvgBase
       StringWriter sw0 = new StringWriter();
       PrintWriter pw0  = new PrintWriter(sw0);
       pw0.format("<?xml version=\"1.0\" encoding=\"us-ascii\"?>\n");
-      // pw0.format( "<!-- XML created by TopoDroid v. " + TopoDroidApp.VERSION + " -->\n" );
+      // pw0.format( "<!-- XML created by TopoDroid v. " + TDVersion.string() + " -->\n" );
       pw0.format("<tunnelxml tunnelversion=\"version2019-07-01 %s\" tunnelproject=\"%s\" tunneluser=\"%s\" tunneldate=\"%s\">\n",
         user, survey, user, date );
       pw0.format("<sketch splined=\"0\" locoffsetx=\"%d\" locoffsety=\"%d\" locoffsetz=\"0.0\" realpaperscale=\"1.0\">\n", (int)(-xmin), (int)(-ymin) );
@@ -167,7 +172,7 @@ class DrawingTunnel extends DrawingSvgBase
             //   WHAT ??? nothing
             }
           } else {
-            String name = toTunnelPointName( BrushManager.getPointThName( point.mPointType ) );
+            String name = toTunnelPointName( point.getThName( ) );
             NumStation st = num.getClosestStation( type, xx/FACTOR, yy/FACTOR ); // st.name st.e, s, v
             if ( st != null ) {
               if ( map.containsKey( st.name ) ) {
@@ -202,7 +207,7 @@ class DrawingTunnel extends DrawingSvgBase
           PrintWriter pw5  = new PrintWriter(sw5);
           int n1 = nr++;
           int n2 = nr++;
-          String name = toTunnelLineName( BrushManager.getLineThName( line.mLineType ) );
+          String name = toTunnelLineName( line.getThName( ) );
           pw5.format(Locale.US, skpathLine, n1, n2, name, 0 );
           pw5.format( pathcodes );
           pw5.format(Locale.US, pctext, -1.0f, -1.0f );

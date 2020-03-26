@@ -14,6 +14,9 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+// import com.topodroid.prefs.TDSetting;
+
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -25,16 +28,10 @@ import java.io.StringWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-// import java.util.Iterator;
-// import java.util.List;
-// import java.util.ArrayList;
-// import java.util.Locale;
 
 // import android.util.Log;
 
-/**
- */
-class DrawingLinePath extends DrawingPointLinePath
+public class DrawingLinePath extends DrawingPointLinePath
 {
   static final int OUTLINE_OUT = 1;
   static final int OUTLINE_IN = -1;
@@ -308,6 +305,8 @@ class DrawingLinePath extends DrawingPointLinePath
     setPathPaint( BrushManager.getLinePaint( mLineType, mReversed ) );
   }
   
+  public String getThName() { return BrushManager.getLineThName( mLineType ); }
+
   // N.B. canvas is guaranteed ! null
   public void drawWithPaint( Canvas canvas, Matrix matrix, RectF bbox, Paint paint )
   {
@@ -341,7 +340,7 @@ class DrawingLinePath extends DrawingPointLinePath
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
   {
     // linetype: 0 line, 1 spline, 2 bezier
-    String name = BrushManager.getLineThName( mLineType );
+    String name = getThName();
     pw.format("          <item type=\"line\" name=\"%s\" cave=\"%s\" branch=\"%s\" reversed=\"%d\" closed=\"%d\" outline=\"%d\" options=\"%s\" ",
       name, cave, branch, (mReversed ? 1 : 0), (isClosed() ? 1 : 0), mOutline, 
       ((mOptions   == null)? "" : mOptions)
@@ -358,7 +357,7 @@ class DrawingLinePath extends DrawingPointLinePath
     if ( mFirst == null ) return null;
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
-    pw.format("line %s", BrushManager.getLineThName(mLineType) );
+    pw.format("line %s", getThName() );
     if ( isClosed() ) {
       pw.format(" -close on");
     }
@@ -404,7 +403,7 @@ class DrawingLinePath extends DrawingPointLinePath
   @Override
   void toDataStream( DataOutputStream dos, int scrap )
   {
-    String name  = BrushManager.getLineThName( mLineType );
+    String name  = getThName( );
     if ( name == null ) { // should not happen
       TDLog.Error("null line name");
       name = "user";

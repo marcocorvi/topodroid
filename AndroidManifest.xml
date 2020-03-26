@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="500016"
-      android:versionName="5.0.1g"
+      android:versionCode="500017"
+      android:versionName="5.0.1h"
     >
     <!-- LETTER CODE must range a-j only: a=0, b=1, ... j=9 -->
 
@@ -27,6 +27,12 @@
        android:minSdkVersion="18"
        android:targetSdkVersion="29"
     />
+
+
+    <queries>
+      <package android:name="com.topodroid.Cave3D" />
+      <package android:name="com.topodroid.proj4" />
+    </queries>
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -185,7 +191,7 @@
           </intent-filter>
         </activity -->
 
-        <activity android:name=".UserManualActivity"
+        <activity android:name="com.topodroid.help.UserManualActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
           >
@@ -195,7 +201,7 @@
           </intent-filter>
         </activity>
 
-	<activity android:name=".TDPrefActivity"
+	<activity android:name="com.topodroid.prefs.TDPrefActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:windowSoftInputMode="stateHidden"
           android:configChanges="orientation|screenSize"
@@ -229,17 +235,17 @@
           >
         </activity>
 
-        <activity android:name=".TdManagerActivity"
+        <activity android:name="com.topodroid.tdm.TdManagerActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
           >
         </activity>
-        <activity android:name=".TdmConfigActivity"
+        <activity android:name="com.topodroid.tdm.TdmConfigActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
           >
         </activity>
-        <activity android:name=".TdmViewActivity"
+        <activity android:name="com.topodroid.tdm.TdmViewActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
           >

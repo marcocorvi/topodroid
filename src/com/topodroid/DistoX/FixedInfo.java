@@ -11,6 +11,11 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.prefs.TDSetting;
+
+import com.topodroid.mag.MagLatLong;
+
 import java.util.Locale;
 
 /** fixed (GPS) point
@@ -121,7 +126,7 @@ class FixedInfo extends MagLatLong
 
   static String double2string( double x )
   {
-    return ( TDSetting.mUnitLocation == TDConst.DDMMSS ) ? double2ddmmss( x ) : double2degree( x );
+    return ( TDSetting.mUnitLocation == TDUtil.DDMMSS ) ? double2ddmmss( x ) : double2degree( x );
   }
 
   static String double2ddmmss( double x )

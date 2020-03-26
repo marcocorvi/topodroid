@@ -12,6 +12,18 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
+import com.topodroid.num.TDNum;
+import com.topodroid.ptopo.PTFile;
+import com.topodroid.ptopo.PTTrip;
+import com.topodroid.ptopo.PTShot;
+import com.topodroid.ptopo.PTDrawing;
+import com.topodroid.ptopo.PTPolygonElement;
+import com.topodroid.ptopo.PTPoint;
+import com.topodroid.ptopo.PTMapping;
+// import com.topodroid.prefs.TDSetting;
+
 import java.io.File;
 // import java.io.FileWriter;
 import java.io.IOException;

@@ -11,6 +11,10 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDStatus;
+import com.topodroid.help.UserManualActivity;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -159,8 +163,6 @@ public class SensorListActivity extends Activity
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         super.onBackPressed();
         return true;
-      // case KeyEvent.KEYCODE_SEARCH:
-        // return onSearchRequested();
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:

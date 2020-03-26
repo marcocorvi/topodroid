@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+
 // import java.lang.ref.WeakReference;
 
 // import java.io.File;

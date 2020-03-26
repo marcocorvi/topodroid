@@ -11,6 +11,9 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDColor;
+import com.topodroid.prefs.TDSetting;
+
 // import android.util.Log;
 
 // import java.lang.Math;
@@ -36,7 +39,7 @@ import java.util.ArrayList;
 /**
  * gereric brush 
  */
-class BrushManager
+public class BrushManager
 {
   static final private int WIDTH_CURRENT = 1;
   static final private int WIDTH_FIXED   = 1;
@@ -200,51 +203,51 @@ class BrushManager
 
   // --------------------------------------------------------------------------
 
-  static final Paint sideDragPaint    = makePaint( 0x99333333,           WIDTH_CURRENT, Paint.Style.FILL );
-  static final Paint errorPaint       = makePaint( TDColor.FULL_VIOLET,  WIDTH_CURRENT, Paint.Style.FILL_AND_STROKE );
-  static final Paint highlightPaint   = makePaint( TDColor.HIGH_PINK,    WIDTH_CURRENT, Paint.Style.STROKE );
-  static final Paint highlightPaint2  = makePaint( TDColor.HIGH_GREEN,   WIDTH_CURRENT, Paint.Style.FILL );
-  static final Paint highlightPaint3  = makePaint( TDColor.HIGH_RED,     WIDTH_CURRENT, Paint.Style.STROKE );
-  static final Paint fixedShotPaint   = makePaint( 0xffbbbbbb,           WIDTH_CURRENT, Paint.Style.STROKE);
-  static final Paint fixedBluePaint   = makePaint( 0xff9999ff,           WIDTH_CURRENT, Paint.Style.STROKE);
-  static final Paint deepBluePaint    = makePaint( 0xff3366ff,           WIDTH_CURRENT, Paint.Style.STROKE);
-  static final Paint darkBluePaint    = makePaint( 0x663366ff,           WIDTH_CURRENT, Paint.Style.STROKE); // same as deepBluePaint but with alpha
-  static final Paint lightBluePaint   = makePaint( 0xff66ccff,           WIDTH_CURRENT, Paint.Style.STROKE);
-  static final Paint fixedRedPaint    = makePaint( TDColor.FIXED_RED,    WIDTH_CURRENT, Paint.Style.STROKE);
-  static final Paint fixedYellowPaint = makePaint( TDColor.FIXED_YELLOW, WIDTH_CURRENT, Paint.Style.STROKE);
-  static final Paint fixedOrangePaint = makePaint( TDColor.FIXED_ORANGE, WIDTH_CURRENT, Paint.Style.STROKE);
-  static final Paint paintSplayLRUD    = makePaint( TDColor.SPLAY_LRUD,    WIDTH_CURRENT, Paint.Style.STROKE);
-  static final Paint paintSplayXB      = makePaint( TDColor.SPLAY_LIGHT,   WIDTH_CURRENT, Paint.Style.STROKE);
-  static final Paint paintSplayComment = makePaint( TDColor.SPLAY_COMMENT,WIDTH_CURRENT, Paint.Style.STROKE);
-  static final Paint paintSplayXViewed = makePaint( TDColor.SPLAY_NORMAL,         WIDTH_CURRENT, Paint.Style.STROKE);
-  static final Paint paintSplayXBdash  = makePaint( TDColor.SPLAY_LIGHT,   WIDTH_CURRENT, Paint.Style.STROKE);
+  public static final Paint sideDragPaint    = makePaint( 0x99333333,           WIDTH_CURRENT, Paint.Style.FILL );
+  public static final Paint errorPaint       = makePaint( TDColor.FULL_VIOLET,  WIDTH_CURRENT, Paint.Style.FILL_AND_STROKE );
+  public static final Paint highlightPaint   = makePaint( TDColor.HIGH_PINK,    WIDTH_CURRENT, Paint.Style.STROKE );
+  public static final Paint highlightPaint2  = makePaint( TDColor.HIGH_GREEN,   WIDTH_CURRENT, Paint.Style.FILL );
+  public static final Paint highlightPaint3  = makePaint( TDColor.HIGH_RED,     WIDTH_CURRENT, Paint.Style.STROKE );
+  public static final Paint fixedShotPaint   = makePaint( 0xffbbbbbb,           WIDTH_CURRENT, Paint.Style.STROKE);
+  public static final Paint fixedBluePaint   = makePaint( 0xff9999ff,           WIDTH_CURRENT, Paint.Style.STROKE);
+  public static final Paint deepBluePaint    = makePaint( 0xff3366ff,           WIDTH_CURRENT, Paint.Style.STROKE);
+  public static final Paint darkBluePaint    = makePaint( 0x663366ff,           WIDTH_CURRENT, Paint.Style.STROKE); // same as deepBluePaint but with alpha
+  public static final Paint lightBluePaint   = makePaint( 0xff66ccff,           WIDTH_CURRENT, Paint.Style.STROKE);
+  public static final Paint fixedRedPaint    = makePaint( TDColor.FIXED_RED,    WIDTH_CURRENT, Paint.Style.STROKE);
+  public static final Paint fixedYellowPaint = makePaint( TDColor.FIXED_YELLOW, WIDTH_CURRENT, Paint.Style.STROKE);
+  public static final Paint fixedOrangePaint = makePaint( TDColor.FIXED_ORANGE, WIDTH_CURRENT, Paint.Style.STROKE);
+  public static final Paint paintSplayLRUD    = makePaint( TDColor.SPLAY_LRUD,    WIDTH_CURRENT, Paint.Style.STROKE);
+  public static final Paint paintSplayXB      = makePaint( TDColor.SPLAY_LIGHT,   WIDTH_CURRENT, Paint.Style.STROKE);
+  public static final Paint paintSplayComment = makePaint( TDColor.SPLAY_COMMENT,WIDTH_CURRENT, Paint.Style.STROKE);
+  public static final Paint paintSplayXViewed = makePaint( TDColor.SPLAY_NORMAL,         WIDTH_CURRENT, Paint.Style.STROKE);
+  public static final Paint paintSplayXBdash  = makePaint( TDColor.SPLAY_LIGHT,   WIDTH_CURRENT, Paint.Style.STROKE);
 
-  static final Paint paintSplayXBdot  = makePaint( TDColor.SPLAY_LIGHT,  WIDTH_CURRENT, Paint.Style.STROKE);
-  static final Paint paintSplayXVdash = makePaint( TDColor.SPLAY_NORMAL,        WIDTH_CURRENT, Paint.Style.STROKE);
-  static final Paint paintSplayXVdot  = makePaint( TDColor.SPLAY_NORMAL,       WIDTH_CURRENT, Paint.Style.STROKE);
+  public static final Paint paintSplayXBdot  = makePaint( TDColor.SPLAY_LIGHT,  WIDTH_CURRENT, Paint.Style.STROKE);
+  public static final Paint paintSplayXVdash = makePaint( TDColor.SPLAY_NORMAL,        WIDTH_CURRENT, Paint.Style.STROKE);
+  public static final Paint paintSplayXVdot  = makePaint( TDColor.SPLAY_NORMAL,       WIDTH_CURRENT, Paint.Style.STROKE);
 
-  static final Paint fixedGridPaint    = makePaint( TDColor.DARK_GRID,   WIDTH_FIXED, Paint.Style.STROKE);
-  static final Paint fixedGrid10Paint  = makePaint( TDColor.GRID,        WIDTH_FIXED, Paint.Style.STROKE);
-  static final Paint fixedGrid100Paint = makePaint( TDColor.LIGHT_GRID,  WIDTH_FIXED, Paint.Style.STROKE);
-  static Paint fixedStationPaint = makePaint( TDColor.REDDISH,     WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
-  static Paint fixedStationSavedPaint   = makePaint( TDColor.ORANGE, WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
-  static Paint fixedStationActivePaint  = makePaint( TDColor.LIGHT_GREEN, WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
-  static Paint fixedStationBarrierPaint = makePaint( TDColor.FULL_RED, WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
-  static Paint fixedStationHiddenPaint  = makePaint( 0xFF9966ff,  WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
-  static Paint labelPaint = makePaint( TDColor.WHITE, WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
-  static final Paint borderPaint = makePaint( 0x99ffffff, WIDTH_FIXED, Paint.Style.STROKE);
-  // static final Paint stationPaint = makePaint( 0xFFFF6666, WIDTH_FIXED, Paint.Style.STROKE);
-  static final Paint duplicateStationPaint = makePaint( 0xFFFF66FF, WIDTH_FIXED, Paint.Style.STROKE);
-  static final Paint referencePaint = makePaint( 0xFFffffff, WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
+  public static final Paint fixedGridPaint    = makePaint( TDColor.DARK_GRID,   WIDTH_FIXED, Paint.Style.STROKE);
+  public static final Paint fixedGrid10Paint  = makePaint( TDColor.GRID,        WIDTH_FIXED, Paint.Style.STROKE);
+  public static final Paint fixedGrid100Paint = makePaint( TDColor.LIGHT_GRID,  WIDTH_FIXED, Paint.Style.STROKE);
+  public static Paint fixedStationPaint = makePaint( TDColor.REDDISH,     WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
+  public static Paint fixedStationSavedPaint   = makePaint( TDColor.ORANGE, WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
+  public static Paint fixedStationActivePaint  = makePaint( TDColor.LIGHT_GREEN, WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
+  public static Paint fixedStationBarrierPaint = makePaint( TDColor.FULL_RED, WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
+  public static Paint fixedStationHiddenPaint  = makePaint( 0xFF9966ff,  WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
+  public static Paint labelPaint = makePaint( TDColor.WHITE, WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
+  public static final Paint borderPaint = makePaint( 0x99ffffff, WIDTH_FIXED, Paint.Style.STROKE);
+  // public static final Paint stationPaint = makePaint( 0xFFFF6666, WIDTH_FIXED, Paint.Style.STROKE);
+  public static final Paint duplicateStationPaint = makePaint( 0xFFFF66FF, WIDTH_FIXED, Paint.Style.STROKE);
+  public static final Paint referencePaint = makePaint( 0xFFffffff, WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
   // DEBUG
-  // static final Paint debugRed = makePaint( TDColor.FULL_RED, WIDTH_FIXED, Paint.Style.STROKE);
-  // static final Paint debugGreen = makePaint( TDColor.FULL_GREEN, WIDTH_FIXED, Paint.Style.STROKE);
-  // static final Paint debugBlue  = makePaint( TDColor.FULL_BLUE,  WIDTH_FIXED, Paint.Style.STROKE);
+  // public static final Paint debugRed = makePaint( TDColor.FULL_RED, WIDTH_FIXED, Paint.Style.STROKE);
+  // public static final Paint debugGreen = makePaint( TDColor.FULL_GREEN, WIDTH_FIXED, Paint.Style.STROKE);
+  // public static final Paint debugBlue  = makePaint( TDColor.FULL_BLUE,  WIDTH_FIXED, Paint.Style.STROKE);
 
   // fixedGridPaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
   // fixedGrid10Paint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
-  static final Paint mSectionPaint = makePaint( TDColor.ORANGE, 2 * WIDTH_FIXED, Paint.Style.FILL_AND_STROKE );
-  // static final Paint stationPaint = null;
+  public static final Paint mSectionPaint = makePaint( TDColor.ORANGE, 2 * WIDTH_FIXED, Paint.Style.FILL_AND_STROKE );
+  // public static final Paint stationPaint = null;
 
   // static BitmapDrawable mSymbolHighlight = null;
 
@@ -270,19 +273,19 @@ class BrushManager
     reloadAreaLibrary( res );
   }
 
-  static void reloadPointLibrary( Context ctx, Resources res )
+  public static void reloadPointLibrary( Context ctx, Resources res )
   {
     mPointLib = new SymbolPointLibrary( ctx, res );
     // mPointLib.loadUserPoints();
   }
 
-  static void reloadLineLibrary( Resources res )
+  public static void reloadLineLibrary( Resources res )
   {
     mLineLib = new SymbolLineLibrary( res );
     // mLineLib.loadUserLines();
   }
 
-  static void reloadAreaLibrary( Resources res )
+  public static void reloadAreaLibrary( Resources res )
   {
     mAreaLib = new SymbolAreaLibrary( res );
     // mAreaLib.loadUserAreas();
@@ -318,7 +321,7 @@ class BrushManager
   }
 
   // alpha in [0,100]
-  static void setSplayAlpha( int alpha )
+  public static void setSplayAlpha( int alpha )
   {
     alpha = (alpha * 255)/100;
     if ( paintSplayLRUD    != null ) paintSplayLRUD.setAlpha( alpha );
@@ -378,7 +381,7 @@ class BrushManager
     setTextSizes();
   }
 
-  static void setStrokeWidths()
+  public static void setStrokeWidths()
   {
     if (fixedShotPaint != null)    fixedShotPaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
     if (fixedBluePaint != null)    fixedBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
@@ -389,7 +392,7 @@ class BrushManager
     if (paintSplayXViewed != null) paintSplayXViewed.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
   }
 
-  static void setTextSizes()
+  public static void setTextSizes()
   {
     if ( labelPaint != null )               labelPaint.setTextSize( TDSetting.mLabelSize );
     if ( fixedStationPaint != null )        fixedStationPaint.setTextSize( TDSetting.mStationSize );

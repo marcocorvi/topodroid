@@ -11,6 +11,13 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDColor;
+import com.topodroid.math.TDVector;
+import com.topodroid.ui.MyDialog;
+// import com.topodroid.prefs.TDSetting;
+
 import java.util.List;
 
 // import android.app.Dialog;
@@ -135,7 +142,7 @@ class CalibCheckDialog extends MyDialog
       // Log.v("DistoX", "check block " + blk.mFrom + " " + blk.mTo + " n1 " + n1 );
       String b0 = blk.mFrom + "-" + blk.mTo;
       String b2 = null;
-      Vector v0 = new Vector( x, y, z ); // unit vector along the leg
+      TDVector v0 = new TDVector( x, y, z ); // unit vector along the leg
       float l0 = v0.Length();            // length of leg vector
       v0.normalize();
       boolean in_leg = false;
@@ -167,9 +174,9 @@ class CalibCheckDialog extends MyDialog
       for ( k = 0; k<n1; ++k ) {
         DBlock b = mShots.get( k1 + k );
         float h = b.mLength * TDMath.cosd( b.mClino );
-        Vector v1 = new Vector( h * TDMath.sind( b.mBearing ), h * TDMath.cosd( b.mBearing ), b.mLength * TDMath.sind( b.mClino ) );
+        TDVector v1 = new TDVector( h * TDMath.sind( b.mBearing ), h * TDMath.cosd( b.mBearing ), b.mLength * TDMath.sind( b.mClino ) );
         v1.normalize();
-        errors1[k] = (float)(Vector.arc_distance( v0, v1 ));
+        errors1[k] = (float)(TDVector.arc_distance( v0, v1 ));
       }
       hist1.setImageBitmap( CalibCoeffDialog.makeHistogramBitmap( errors1, 400, 100, 40, 50, TDColor.FIXED_ORANGE ) );
 
@@ -179,11 +186,11 @@ class CalibCheckDialog extends MyDialog
         for ( k = 0; k<n1; ++k ) {
           DBlock bb = mShots.get( k1 + k );
           float h = bb.mLength * TDMath.cosd( bb.mClino );
-          Vector w1 = new Vector( h * TDMath.sind( bb.mBearing ), h * TDMath.cosd( bb.mBearing ), bb.mLength * TDMath.sind( bb.mClino ) );
+          TDVector w1 = new TDVector( h * TDMath.sind( bb.mBearing ), h * TDMath.cosd( bb.mBearing ), bb.mLength * TDMath.sind( bb.mClino ) );
           for ( int kk = 0; kk<n2; ++kk ) {
             bb = mShots.get( k2 + kk );
             h = bb.mLength * TDMath.cosd( bb.mClino );
-            Vector w2 = new Vector( h * TDMath.sind( bb.mBearing ), h * TDMath.cosd( bb.mBearing ), bb.mLength * TDMath.sind( bb.mClino ) );
+            TDVector w2 = new TDVector( h * TDMath.sind( bb.mBearing ), h * TDMath.cosd( bb.mBearing ), bb.mLength * TDMath.sind( bb.mClino ) );
             w2.plusEqual( w1 );                      // W1 + W2
             w2.minusEqual( v0.times( v0.dot(w2) ) ); // (W1+W2) - V0 [ V0 * (W1+W2) ] part orthogonal to V0
             errors2[k*n2+kk] = w2.Length() / l0;     // angle difference
@@ -302,18 +309,18 @@ class CalibCheckDialog extends MyDialog
           for ( int h1 = 0; h1<n1; ++h1 ) {
             DBlock bb = mShots.get( k1 + h1 );
             float h = bb.mLength * TDMath.cosd( bb.mClino );
-            Vector w1 = new Vector( h * TDMath.sind( bb.mBearing ), h * TDMath.cosd( bb.mBearing ), bb.mLength * TDMath.sind( bb.mClino ) );
+            TDVector w1 = new TDVector( h * TDMath.sind( bb.mBearing ), h * TDMath.cosd( bb.mBearing ), bb.mLength * TDMath.sind( bb.mClino ) );
 	    float l1 = w1.Length();
             for ( int h2 = 0; h2<n2; ++h2 ) {
               bb = mShots.get( k2 + h2 );
               h = sign2 * bb.mLength * TDMath.cosd( bb.mClino );
-              Vector w2 = new Vector( h * TDMath.sind( bb.mBearing ), h * TDMath.cosd( bb.mBearing ), bb.mLength * TDMath.sind( bb.mClino ) );
+              TDVector w2 = new TDVector( h * TDMath.sind( bb.mBearing ), h * TDMath.cosd( bb.mBearing ), bb.mLength * TDMath.sind( bb.mClino ) );
 	      float l2 = w2.Length();
               w2.plusEqual( w1 );                      // W1 + W2
 	      for ( int h3 = 0; h3<n3; ++h3 ) {
                 bb = mShots.get( k3 + h3 );
                 h = sign3 * bb.mLength * TDMath.cosd( bb.mClino );
-                Vector w3 = new Vector( h * TDMath.sind( bb.mBearing ), h * TDMath.cosd( bb.mBearing ), bb.mLength * TDMath.sind( bb.mClino ) );
+                TDVector w3 = new TDVector( h * TDMath.sind( bb.mBearing ), h * TDMath.cosd( bb.mBearing ), bb.mLength * TDMath.sind( bb.mClino ) );
 	        float l3 = w3.Length();
                 w3.plusEqual( w2 );                    // W1 + W2 + W3
 	    	// misclosure (percent of length), the factor 1 / (10*RAD2DEG) acoounts for the same in makeHistogramBitmap()

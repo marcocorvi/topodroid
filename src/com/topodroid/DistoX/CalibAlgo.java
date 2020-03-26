@@ -14,6 +14,12 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
+import com.topodroid.math.TDMatrix;
+import com.topodroid.math.TDVector;
+// import com.topodroid.prefs.TDSetting;
+
 import java.lang.Math;
 
 import java.util.Locale;
@@ -23,13 +29,13 @@ import java.util.Locale;
 
 class CalibAlgo
 {
-  protected Matrix aG = null;
-  protected Matrix aM = null;
-  protected Vector bG = null;
-  protected Vector bM = null;
+  protected TDMatrix aG = null;
+  protected TDMatrix aM = null;
+  protected TDVector bG = null;
+  protected TDVector bM = null;
 
-  protected Vector[] g = null;
-  protected Vector[] m = null;
+  protected TDVector[] g = null;
+  protected TDVector[] m = null;
   protected long[] group = null;
   protected float[] err = null;  // errors of the data [radians] 
 
@@ -37,7 +43,7 @@ class CalibAlgo
   protected int num;
 
   protected boolean mNonLinear;
-  protected Vector nL;
+  protected TDVector nL;
 
   protected float b0=0.0f, c0=0.0f; // bearing and clino
 
@@ -48,11 +54,11 @@ class CalibAlgo
 
   // ==============================================================
 
-  static protected Vector scaledVector( Vector v ) { return scaledVector( v.x, v.y, v.z ); }
+  static protected TDVector scaledVector( TDVector v ) { return scaledVector( v.x, v.y, v.z ); }
 
-  static private Vector scaledVector( float x, float y, float z )
+  static private TDVector scaledVector( float x, float y, float z )
   {
-    return new Vector( x/TDUtil.FV, y/TDUtil.FV, z/TDUtil.FV );
+    return new TDVector( x/TDUtil.FV, y/TDUtil.FV, z/TDUtil.FV );
   }
 
   static final private double MAX_M_VALUE = 1.99993896;
@@ -83,7 +89,7 @@ class CalibAlgo
   //   }
   // }
 
-  void EnforceMax2( Vector b, Matrix a )
+  void EnforceMax2( TDVector b, TDMatrix a )
   {
     double max = Math.abs( b.x );
     double m;
@@ -121,11 +127,11 @@ class CalibAlgo
   CalibAlgo( byte[] coeff, boolean nonLinear )
   {
     mNonLinear = nonLinear;
-    bG = new Vector();
-    bM = new Vector();
-    aG = new Matrix();
-    aM = new Matrix();
-    nL = new Vector();
+    bG = new TDVector();
+    bM = new TDVector();
+    aG = new TDMatrix();
+    aM = new TDMatrix();
+    nL = new TDVector();
     coeffToG( coeff, bG, aG );
     coeffToM( coeff, bM, aM );
     coeffToNL( coeff, nL );
@@ -165,11 +171,11 @@ class CalibAlgo
   float[] Errors()     { return err; }
   float MaxError( )    { return mMaxError; }
 
-  Matrix GetAG() { return aG; }
-  Matrix GetAM() { return aM; }
-  Vector GetBG() { return bG; }
-  Vector GetBM() { return bM; }
-  Vector GetNL() { return nL; }
+  TDMatrix GetAG() { return aG; }
+  TDMatrix GetAM() { return aM; }
+  TDVector GetBG() { return bG; }
+  TDVector GetBM() { return bM; }
+  TDVector GetNL() { return nL; }
 
   // public int nrCoeff() { return mNonLinear ? 52 : 48; }
 
@@ -323,7 +329,7 @@ class CalibAlgo
     return coeff;
   }
 
-  private static void coeffToBA( byte[] coeff, Vector b, Matrix a, int off )
+  private static void coeffToBA( byte[] coeff, TDVector b, TDMatrix a, int off )
   {
     long v;
     long c0 = (int)(coeff[off/*+ 0*/]); if ( c0 < 0 ) c0 = 256+c0;
@@ -401,13 +407,13 @@ class CalibAlgo
     a.z.z = v / TDUtil.FM;
   }
 
-  static void coeffToG( byte[] coeff, Vector b, Matrix a )
+  static void coeffToG( byte[] coeff, TDVector b, TDMatrix a )
   {
     coeffToBA( coeff, b, a, 0 );
     // Log.v("DistoX", "G " + b.x + " " + b.y + " " + b.z + " " + a.x.x + " " + a.x.y + " " + a.x.z );
   }
 
-  static void coeffToM( byte[] coeff, Vector b, Matrix a )
+  static void coeffToM( byte[] coeff, TDVector b, TDMatrix a )
   {
     coeffToBA( coeff, b, a, 24 );
     // Log.v("DistoX", "M " + b.x + " " + b.y + " " + b.z + " " + a.x.x + " " + a.x.y + " " + a.x.z );
@@ -452,7 +458,7 @@ class CalibAlgo
   //   return (byte)(v & 0xff);
   // }
   
-  static void coeffToNL( byte[] coeff, Vector nl )
+  static void coeffToNL( byte[] coeff, TDVector nl )
   {
     if ( coeff != null && coeff.length >= 51 ) {
       nl.x = byteToFloatNL( coeff[48] );
@@ -477,8 +483,8 @@ class CalibAlgo
     if ( idx >= num ) {
       return;
     }
-    // g[idx] = new Vector( gx/TDUtil.FV, gy/TDUtil.FV, gz/TDUtil.FV );
-    // m[idx] = new Vector( mx/TDUtil.FV, my/TDUtil.FV, mz/TDUtil.FV );
+    // g[idx] = new TDVector( gx/TDUtil.FV, gy/TDUtil.FV, gz/TDUtil.FV );
+    // m[idx] = new TDVector( mx/TDUtil.FV, my/TDUtil.FV, mz/TDUtil.FV );
     g[idx] = scaledVector( gx, gy, gz );
     m[idx] = scaledVector( mx, my, mz );
     group[idx] = (group0 < 0)? 0 : group0;
@@ -496,8 +502,8 @@ class CalibAlgo
   {
     if ( N != num ) {
       num = N;
-      g = new Vector[N];
-      m = new Vector[N];
+      g = new TDVector[N];
+      m = new TDVector[N];
       group = new long[N];
       err   = new float[N];
     }
@@ -516,7 +522,7 @@ class CalibAlgo
     TDLog.Log( TDLog.LOG_CALIB, msg + " " + it );
   }
 
-  protected void LogMatrixVector( String msg, Matrix m1, Vector v1 ) 
+  protected void LogMatrixVector( String msg, TDMatrix m1, TDVector v1 ) 
   {
     if ( ! TDLog.LOG_CALIB ) return;
     TDLog.DoLog(
@@ -527,7 +533,7 @@ class CalibAlgo
        m1.z.x, m1.z.y, m1.z.z, v1.z ) );
   }
 
-  protected void LogVectors( String msg, long group, Vector v1, Vector v2 )
+  protected void LogVectors( String msg, long group, TDVector v1, TDVector v2 )
   {
     if ( ! TDLog.LOG_CALIB ) return;
     TDLog.DoLog(
@@ -543,7 +549,7 @@ class CalibAlgo
 
 /* ============================================================ */
 
-  protected void checkOverflow( Vector v, Matrix m )
+  protected void checkOverflow( TDVector v, TDMatrix m )
   {
     float mv = v.maxAbsValue() * TDUtil.FV;
     float mm = m.maxAbsValue() * TDUtil.FM;
@@ -562,24 +568,24 @@ class CalibAlgo
     return ix / TDUtil.FN;
   }
 
-  protected void saturate( Vector nl )
+  protected void saturate( TDVector nl )
   {
     nl.x = saturate( nl.x );
     nl.y = saturate( nl.y );
     nl.z = saturate( nl.z );
   }
 
-  protected void computeBearingAndClinoRad( Vector g0, Vector m0 )
+  protected void computeBearingAndClinoRad( TDVector g0, TDVector m0 )
   {
-    // Vector g = g0.mult( 1.0f / TDUtil.FV );
-    // Vector m = m0.mult( 1.0f / TDUtil.FV );
-    Vector g = scaledVector( g0 );
-    Vector m = scaledVector( m0 );
+    // TDVector g = g0.mult( 1.0f / TDUtil.FV );
+    // TDVector m = m0.mult( 1.0f / TDUtil.FV );
+    TDVector g = scaledVector( g0 );
+    TDVector m = scaledVector( m0 );
     g.normalize();
     m.normalize();
-    Vector e = new Vector( 1.0f, 0.0f, 0.0f );
-    Vector y = m.cross( g );
-    Vector x = g.cross( y );
+    TDVector e = new TDVector( 1.0f, 0.0f, 0.0f );
+    TDVector y = m.cross( g );
+    TDVector x = g.cross( y );
     y.normalize();
     x.normalize();
     float ex = e.dot( x );
@@ -597,14 +603,14 @@ class CalibAlgo
 
   /** compute the unit vector direction of sensor-data (g,m)
    */
-  Vector computeDirection( Vector g1, Vector m1 )
+  TDVector computeDirection( TDVector g1, TDVector m1 )
   {
-    Vector g = scaledVector( g1 );
-    Vector m = scaledVector( m1 );
-    Vector gr;
-    Vector mr = m;
+    TDVector g = scaledVector( g1 );
+    TDVector m = scaledVector( m1 );
+    TDVector gr;
+    TDVector mr = m;
     if ( mNonLinear ) {
-      Matrix gs = new Matrix();
+      TDMatrix gs = new TDMatrix();
       gs.x.x = g.x * g.x - 0.5f;
       gs.y.y = g.y * g.y - 0.5f;
       gs.z.z = g.z * g.z - 0.5f;
@@ -613,8 +619,8 @@ class CalibAlgo
       gr = bG.plus( aG.timesV( g ) );
     }
     computeBearingAndClinoRad( gr, mr );
-    return new Vector( b0, c0 );
-    // return new Vector( (float)Math.cos(c0) * (float)Math.cos(b0),
+    return new TDVector( b0, c0 );
+    // return new TDVector( (float)Math.cos(c0) * (float)Math.cos(b0),
     //                    (float)Math.cos(c0) * (float)Math.sin(b0),
     //                    (float)Math.sin(c0) );
   }
@@ -636,7 +642,7 @@ class CalibAlgo
   }
 
   // must be overridden
-  public void addStatErrors( Vector[] g1, Vector[] m1, float[] errors )
+  public void addStatErrors( TDVector[] g1, TDVector[] m1, float[] errors )
   {
     TDLog.Error("calib algo add error stats not overridden");
   }

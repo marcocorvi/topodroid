@@ -11,25 +11,27 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDColor;
+import com.topodroid.math.TDMatrix;
+import com.topodroid.math.TDVector;
+import com.topodroid.ui.MyButton;
+import com.topodroid.ui.MyHorizontalListView;
+import com.topodroid.ui.MyHorizontalButtonView;
+import com.topodroid.help.HelpDialog;
+import com.topodroid.help.UserManualActivity;
+import com.topodroid.prefs.TDSetting;
+import com.topodroid.prefs.TDPrefCat;
+
 import android.util.Log;
 
-// import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Locale;
 
-// import java.lang.Long;
-// import java.lang.reflect.Method;
-// import java.lang.reflect.InvocationTargetException;
-
-// import android.app.Application;
 import android.app.Activity;
-// import android.content.res.ColorStateList;
 import android.os.Bundle;
-// import android.os.AsyncTask;
-// import android.os.Handler;
-// import android.os.Message;
-// import android.os.Parcelable;
 
 // import android.content.Context;
 import android.content.Intent;
@@ -47,11 +49,6 @@ import android.view.KeyEvent;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
-// import android.view.Menu;
-// import android.view.MenuItem;
-
-// import android.graphics.Bitmap;
-// import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 
 public class GMActivity extends Activity
@@ -335,10 +332,10 @@ public class GMActivity extends Activity
     double errmax = 0;
     int ke = 0;
     for ( CalibCBlock b : list0 ) {
-      Vector g = new Vector( b.gx, b.gy, b.gz );
-      Vector m = new Vector( b.mx, b.my, b.mz );
-      Vector v0 = calib0.computeDirection(g,m);
-      Vector v1 = calib1.computeDirection(g,m);
+      TDVector g = new TDVector( b.gx, b.gy, b.gz );
+      TDVector m = new TDVector( b.mx, b.my, b.mz );
+      TDVector v0 = calib0.computeDirection(g,m);
+      TDVector v1 = calib1.computeDirection(g,m);
       double err = v0.minus( v1 ).Length();
       errors[ke++] = (float) err;
       err1 += err;
@@ -378,15 +375,15 @@ public class GMActivity extends Activity
       if ( list.get(j).mGroup > 0 ) {
         if ( list.get(j).mGroup != group ) {
           if ( cnt > 1 ) { // 2019.09.23 at least two data in the group
-            Vector[] g = new Vector[cnt];
-            Vector[] m = new Vector[cnt];
+            TDVector[] g = new TDVector[cnt];
+            TDVector[] m = new TDVector[cnt];
             float[]  e = new float[cnt];
             int i=0;
             for ( ; k<j; ++k ) {
               CalibCBlock b = list.get(k);
               if ( b.mGroup == group ) {
-                g[i] = new Vector( b.gx, b.gy, b.gz );
-                m[i] = new Vector( b.mx, b.my, b.mz );
+                g[i] = new TDVector( b.gx, b.gy, b.gz );
+                m[i] = new TDVector( b.mx, b.my, b.mz );
                 e[i] = -1;
                 ++i;
               }
@@ -402,15 +399,15 @@ public class GMActivity extends Activity
       }
     } 
     if ( cnt > 1 ) { // 2019.09.23 at least two data in the group
-      Vector[] g = new Vector[cnt];
-      Vector[] m = new Vector[cnt];
+      TDVector[] g = new TDVector[cnt];
+      TDVector[] m = new TDVector[cnt];
       float[]  e = new float[cnt];
       int i=0;
       for ( ; k<list.size(); ++k ) {
         CalibCBlock b = list.get(k);
         if ( b.mGroup == group ) {
-          g[i] = new Vector( b.gx, b.gy, b.gz );
-          m[i] = new Vector( b.mx, b.my, b.mz );
+          g[i] = new TDVector( b.gx, b.gy, b.gz );
+          m[i] = new TDVector( b.mx, b.my, b.mz );
           e[i] = -1;
           ++i;
         }
@@ -439,11 +436,11 @@ public class GMActivity extends Activity
           }
           // enableWrite( ! saturated );
           enableWrite( true );
-          Vector bg = mCalibration.GetBG();
-          Matrix ag = mCalibration.GetAG();
-          Vector bm = mCalibration.GetBM();
-          Matrix am = mCalibration.GetAM();
-          Vector nL = mCalibration.GetNL();
+          TDVector bg = mCalibration.GetBG();
+          TDMatrix ag = mCalibration.GetAG();
+          TDVector bm = mCalibration.GetBM();
+          TDMatrix am = mCalibration.GetAM();
+          TDVector nL = mCalibration.GetNL();
           byte[] coeff = mCalibration.GetCoeff();
           float[] errors = mCalibration.Errors();
 
@@ -845,7 +842,7 @@ public class GMActivity extends Activity
   public boolean isActivityFinishing() { return this.isFinishing(); }
 
   // @Implements
-  public void displayCoeff( Vector bg, Matrix ag, Vector bm, Matrix am, Vector nL )
+  public void displayCoeff( TDVector bg, TDMatrix ag, TDVector bm, TDMatrix am, TDVector nL )
   {
     (new CalibCoeffDialog( this, null, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
   }
@@ -1159,24 +1156,12 @@ public class GMActivity extends Activity
 
 
   @Override
-  public boolean onSearchRequested()
-  {
-    // TDLog.Error( "search requested" );
-    Intent intent = new Intent( this, TDPrefActivity.class );
-    intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_CALIB );
-    startActivity( intent );
-    return true;
-  }
-
-  @Override
   public boolean onKeyDown( int code, KeyEvent event )
   {
     switch ( code ) {
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         super.onBackPressed();
         return true;
-      case KeyEvent.KEYCODE_SEARCH:
-        return onSearchRequested();
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
         UserManualActivity.showHelpPage( this, getResources().getString( HELP_PAGE ));
         return true;
@@ -1245,8 +1230,8 @@ public class GMActivity extends Activity
         (new CalibValidateListDialog( this, this, list )).show();
       }
     } else if ( p++ == pos ) { // OPTIONS
-      Intent intent = new Intent( this, TDPrefActivity.class );
-      intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_CALIB );
+      Intent intent = new Intent( this, com.topodroid.prefs.TDPrefActivity.class );
+      intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_CALIB );
       startActivity( intent );
     } else if ( p++ == pos ) { // HELP
       new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE ) ).show();

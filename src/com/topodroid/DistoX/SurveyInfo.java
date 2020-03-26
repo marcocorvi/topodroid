@@ -11,24 +11,28 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
+
+
 import android.widget.EditText;
 
-class SurveyInfo
+public class SurveyInfo
 {
   final static int XSECTION_SHARED  = 0;
   final static int XSECTION_PRIVATE = 1;
 
-  final static int DATAMODE_NORMAL  = 0;
-  final static int DATAMODE_DIVING  = 1;
+  public final static int DATAMODE_NORMAL  = 0;
+  public final static int DATAMODE_DIVING  = 1;
 
-  final static int EXTEND_NORMAL  = 90;
-  final static int EXTEND_LEFT    = -1000;
-  final static int EXTEND_RIGHT   =  1000;
+  public final static int EXTEND_NORMAL  = 90;
+  public final static int EXTEND_LEFT    = -1000;
+  public final static int EXTEND_RIGHT   =  1000;
 
   final static float DECLINATION_MAX = 720;    // twice 360
   final static float DECLINATION_UNSET = 1080; // three times 360
 
-  long id;
+  public long id;
   String name;
   String date;
   String team;

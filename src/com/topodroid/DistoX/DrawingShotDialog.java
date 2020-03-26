@@ -11,6 +11,15 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.ui.MyCheckBox;
+import com.topodroid.ui.MyButton;
+import com.topodroid.ui.MyColorPicker;
+import com.topodroid.ui.MyDialog;
+import com.topodroid.ui.TDLayout;
+import com.topodroid.prefs.TDSetting;
+
+
 // import android.util.Log;
 
 import android.os.Bundle;

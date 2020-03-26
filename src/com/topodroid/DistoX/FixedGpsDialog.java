@@ -11,6 +11,16 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDString;
+import com.topodroid.ui.MyDialog;
+import com.topodroid.prefs.TDSetting;
+
+
+
+import com.topodroid.mag.WorldMagneticModel;
+
 // import android.util.Log;
 
 import java.util.Iterator;
@@ -104,7 +114,7 @@ class FixedGpsDialog extends MyDialog
     }
     mHasLocation = false;
     // mLocating = false;
-    // Log.v(  TopoDroidApp.TAG, "UnitLocation " + TopoDroidApp.mUnitLocation + " ddmmss " + TopoDroidApp.DDMMSS );
+    // Log.v(  TopoDroidApp.TAG, "UnitLocation " + TopoDroidApp.mUnitLocation + " ddmmss " + TDUtil.DDMMSS );
   }
 
 // -------------------------------------------------------------------

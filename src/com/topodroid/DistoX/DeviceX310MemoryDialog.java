@@ -11,16 +11,12 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.ui.MyDialog;
+
 import java.util.ArrayList;
 
 import android.os.Bundle;
-// import android.app.Dialog;
-// import android.app.Activity;
 import android.content.Context;
-// import android.content.Intent;
-// import android.content.DialogInterface;
-// import android.content.DialogInterface.OnCancelListener;
-// import android.content.DialogInterface.OnDismissListener;
 
 import android.view.View;
 

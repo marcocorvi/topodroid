@@ -11,6 +11,10 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.math.TDMatrix;
+import com.topodroid.math.TDVector;
+
 // import android.util.Log;
 
 import java.lang.ref.WeakReference;
@@ -70,11 +74,11 @@ class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
 
     if ( result ) {
       String[] items = new String[8];
-      Vector bg = new Vector();
-      Matrix ag = new Matrix();
-      Vector bm = new Vector();
-      Matrix am = new Matrix();
-      Vector nL = new Vector();
+      TDVector bg = new TDVector();
+      TDMatrix ag = new TDMatrix();
+      TDVector bm = new TDVector();
+      TDMatrix am = new TDMatrix();
+      TDVector nL = new TDVector();
       CalibAlgo.coeffToG( coeff, bg, ag );
       CalibAlgo.coeffToM( coeff, bm, am );
       CalibAlgo.coeffToNL( coeff, nL );

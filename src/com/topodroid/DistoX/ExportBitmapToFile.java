@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+
 import java.io.FileOutputStream;
 
 // import android.content.Context;

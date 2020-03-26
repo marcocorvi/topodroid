@@ -12,23 +12,21 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+
 // import android.util.Log;
 
 import android.graphics.Canvas;
-// import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.Matrix;
+// import com.topodroid.prefs.TDSetting;
 
 import java.io.PrintWriter;
-// import java.io.StringWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-// import java.util.Locale;
-
-/**
- */
+ 
 class DrawingSpecialPath extends DrawingPath
 {
   static final int SPECIAL_ANY = 0; // generic

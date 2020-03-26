@@ -11,6 +11,11 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDStatus;
+import com.topodroid.help.UserManualActivity;
+// import com.topodroid.prefs.TDSetting;
+
 // import android.util.Log;
 
 import java.util.List;
@@ -216,8 +221,6 @@ public class PhotoActivity extends Activity
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         super.onBackPressed();
         return true;
-      // case KeyEvent.KEYCODE_SEARCH:
-        // return onSearchRequested();
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:

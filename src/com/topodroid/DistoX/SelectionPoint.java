@@ -15,7 +15,7 @@ package com.topodroid.DistoX;
 
 import android.graphics.Matrix;
 
-class SelectionPoint
+public class SelectionPoint
 {
   // scene coord (x, y )
   // for DrawingStationName (x,y) = st.(x,y)
@@ -25,8 +25,9 @@ class SelectionPoint
   // for DrawingLinePath    (x.y) = midpoint between each two line points
   // for DrawingAreaPath    (x,y) = midpoint between each two border points
 
-  DrawingPath mItem;
-  LinePoint   mPoint;
+  public DrawingPath mItem;
+  public LinePoint   mPoint;
+
   SelectionBucket mBucket = null;
 
   private float mDistance; // distance from input (X,Y)

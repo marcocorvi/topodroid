@@ -13,6 +13,11 @@
 
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
+import com.topodroid.prefs.TDSetting;
+
+
 import android.util.Log;
 
 import android.graphics.Canvas;
@@ -31,9 +36,7 @@ import java.util.Locale;
 
 import android.util.Base64;
 
-/**
- */
-class DrawingPointPath extends DrawingPath
+public class DrawingPointPath extends DrawingPath
 {
   static final int SCALE_NONE = -3; // used to force scaling
   static final int SCALE_XS = -2;
@@ -52,7 +55,7 @@ class DrawingPointPath extends DrawingPath
   // float mYpos;
   int mPointType;
   protected int mScale;  //! symbol scale
-  double mOrientation;   // orientation [degrees]
+  public double mOrientation;   // orientation [degrees]
   String mPointText;
   IDrawingLink mLink;    // linked drawing item
 
@@ -281,6 +284,8 @@ class DrawingPointPath extends DrawingPath
 
   void setLink( IDrawingLink link ) { mLink = link; }
 
+  public String getThName() { return  BrushManager.getPointThName( mPointType ); }
+
   // N.B. canvas is guaranteed ! null
   @Override
   public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
@@ -418,7 +423,7 @@ class DrawingPointPath extends DrawingPath
   @Override
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind )
   { 
-    String name = BrushManager.getPointThName( mPointType );
+    String name = getThName( );
     pw.format("<item type=\"point\" name=\"%s\" cave=\"%s\" branch=\"%s\" text=\"%s\" ", name, cave, branch, ((mPointText == null)? "" : mPointText) );
     if ( bind != null ) pw.format(" bind=\"%s\" ", bind );
     pw.format(Locale.US, "scale=\"%d\" orientation=\"%.2f\" options=\"%s\" >\n", mScale, mOrientation, ((mOptions   == null)? "" : mOptions) );
@@ -431,7 +436,7 @@ class DrawingPointPath extends DrawingPath
 
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, String extra, PlotInfo section )
   { 
-    String name = BrushManager.getPointThName( mPointType );
+    String name = getThName( );
     pw.format("<item type=\"point\" name=\"%s\" cave=\"%s\" branch=\"%s\" text=\"%s\" ", name, cave, branch, ((mPointText == null)? "" : mPointText) );
     if ( bind != null ) pw.format("bind=\"%s\" ", bind );
     if ( extra != null ) pw.format("%s ", extra );
@@ -439,22 +444,24 @@ class DrawingPointPath extends DrawingPath
     float x = DrawingUtil.sceneToWorldX( cx, cy ); // convert to world coords.
     float y = DrawingUtil.sceneToWorldY( cx, cy );
     pw.format(Locale.US, " <points data=\"%.2f %.2f \" />\n", x, y );
-    // include cross-section
-    // pw.format("    <crosssection id=\"%s\" design=\"0\" crosssection=\"%d\">\n", section.name, section.csxIndex );
-    pw.format("    <crosssection>\n" );
-    exportTCsxXSection( pw, section, survey, cave, branch );
-    pw.format("    </crosssection>\n" );
-    String filename = TDPath.getSurveyJpgFile( TDInstance.survey, section.name );
-    File imagefile = new File( filename );
-    if ( imagefile.exists() ) {
-      byte[] buf = TDExporter.readFileBytes( imagefile );
-      if ( buf != null ) {
-        pw.format("    <crosssectionfile>\n" );
-        pw.format(" <attachment dataformat=\"0\" data=\"%s\" name=\"\" note=\"%s\" type=\"image/jpeg\" />\n", 
-          Base64.encodeToString( buf, Base64.NO_WRAP ),
-          ((mPointText==null)?"":mPointText)
-        );
-        pw.format("    </crosssectionfile>\n" );
+    if ( section != null ) {
+      // include cross-section
+      // pw.format("    <crosssection id=\"%s\" design=\"0\" crosssection=\"%d\">\n", section.name, section.csxIndex );
+      pw.format("    <crosssection>\n" );
+      exportTCsxXSection( pw, section, survey, cave, branch );
+      pw.format("    </crosssection>\n" );
+      String filename = TDPath.getSurveyJpgFile( TDInstance.survey, section.name );
+      File imagefile = new File( filename );
+      if ( imagefile.exists() ) {
+        byte[] buf = TDExporter.readFileBytes( imagefile );
+        if ( buf != null ) {
+          pw.format("    <crosssectionfile>\n" );
+          pw.format(" <attachment dataformat=\"0\" data=\"%s\" name=\"\" note=\"%s\" type=\"image/jpeg\" />\n", 
+            Base64.encodeToString( buf, Base64.NO_WRAP ),
+            ((mPointText==null)?"":mPointText)
+          );
+          pw.format("    </crosssectionfile>\n" );
+        }
       }
     }
     pw.format("</item>\n");
@@ -463,7 +470,7 @@ class DrawingPointPath extends DrawingPath
 
   private static void exportTCsxXSection( PrintWriter pw, PlotInfo section, String survey, String cave, String branch /* , String session */ )
   {
-    // String name = section.name; // binding name
+    if ( section == null ) return;
     // open xsection file
     String filename = TDPath.getSurveyPlotTdrFile( survey, section.name );
     DrawingIO.doExportTCsxXSection( pw, filename, survey, cave, branch, /* session, */ section.name /* , drawingUtil */ ); // bind=section.name
@@ -476,7 +483,7 @@ class DrawingPointPath extends DrawingPath
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
 
-    String th_name = BrushManager.getPointThName(mPointType);
+    String th_name = getThName();
     pw.format(Locale.US, "point %.2f %.2f %s", cx*TDSetting.mToTherion, -cy*TDSetting.mToTherion, th_name );
     toTherionOrientation( pw );
     // FIXME SECTION_RENAME
@@ -532,7 +539,7 @@ class DrawingPointPath extends DrawingPath
   @Override
   void toDataStream( DataOutputStream dos, int scrap )
   {
-    String name  = BrushManager.getPointThName(mPointType);
+    String name  = getThName();
     if ( name == null ) {
       name = "user";
       TDLog.Error( "null point name" );

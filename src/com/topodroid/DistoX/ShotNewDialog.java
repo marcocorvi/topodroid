@@ -11,24 +11,24 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.ui.MyCheckBox;
+import com.topodroid.ui.MyDialog;
+import com.topodroid.ui.TDLayout;
+import com.topodroid.prefs.TDSetting;
+
+
 import java.util.Locale;
-// import java.util.ArrayList;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-// import android.app.Dialog;
 import android.os.Bundle;
 import android.widget.RadioButton;
 
-// import android.widget.Spinner;
-// import android.widget.ArrayAdapter;
-
 import android.content.Context;
-// import android.content.Intent;
 
-// import android.text.InputType;
 import android.inputmethodservice.KeyboardView;
 
 import android.widget.TextView;
@@ -37,9 +37,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.view.View;
-// import android.view.ViewGroup.LayoutParams;
-// import android.view.View.OnKeyListener;
-// import android.view.KeyEvent;
 
 // import android.util.Log;
 

@@ -13,13 +13,12 @@
 
 package com.topodroid.DistoX;
 
-// import android.graphics.Canvas;
-// import android.graphics.Paint;
-// import android.graphics.Path;
+import com.topodroid.utils.TDLog;
+// import com.topodroid.math.Point2D;
+import com.topodroid.prefs.TDSetting;
+
 import android.graphics.Matrix;
-
 import java.util.Locale;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -30,7 +29,7 @@ import java.io.PrintWriter;
 /**
  * station points do not shift (!)
  */
-class DrawingStationPath extends DrawingPath
+public class DrawingStationPath extends DrawingPath
                          implements IDrawingLink
 {
   // float mXpos, mYpos;         // X-Y station position (scene): use cx, cy

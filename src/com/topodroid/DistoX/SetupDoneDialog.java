@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.ui.MyDialog;
+
 // import android.util.Log;
 
 import android.content.Context;

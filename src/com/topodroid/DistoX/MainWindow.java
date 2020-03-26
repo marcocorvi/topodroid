@@ -11,6 +11,20 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDTag;
+import com.topodroid.utils.TDColor;
+import com.topodroid.utils.TDRequest;
+import com.topodroid.ui.MyButton;
+import com.topodroid.ui.MyHorizontalListView;
+import com.topodroid.ui.MyHorizontalButtonView;
+import com.topodroid.help.HelpDialog;
+import com.topodroid.help.UserManualActivity;
+import com.topodroid.prefs.TDSetting;
+import com.topodroid.prefs.TDPrefCat;
+
+import com.topodroid.mag.WorldMagneticModel;
+
 import android.util.Log;
 
 import java.io.File;
@@ -19,19 +33,15 @@ import java.io.FileFilter;
 import java.util.List;
 // import java.util.ArrayList;
 
-// import android.app.Application;
 import android.app.Activity;
 import android.app.Dialog;
 
 import android.content.ActivityNotFoundException;
 import android.os.Bundle;
 import android.os.Handler;
-// import android.os.Message;
-// import android.os.Parcelable;
 
 import android.content.Context;
 import android.content.Intent;
-// import android.content.IntentFilter;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnDismissListener;
@@ -43,20 +53,13 @@ import android.widget.TextView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-// import android.widget.ImageView;
 import android.widget.Button;
-// import android.widget.LinearLayout;
-// import android.widget.RelativeLayout;
-// import android.widget.Toolbar;
 
 import android.view.View;
-// import android.view.ViewGroup.LayoutParams;
-// import android.view.View.OnClickListener;
 import android.view.KeyEvent;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-// import android.preference.PreferenceManager;
 
 /*
   Method m = device.getClass().getMethod( "createRfcommSocket", new Class[] (int.class) );
@@ -238,17 +241,11 @@ public class MainWindow extends Activity
       // FIXME THMANAGER
       } else if ( TDLevel.overExpert && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // THERION MANAGER TdManager
         try {
-          // if ( TDSetting.mWithTdManager ) {
-            // intent = new Intent( "TdManager.intent.action.Launch" );
-            intent = new Intent( Intent.ACTION_VIEW ).setClass( this, TdManagerActivity.class );
-          // } else {
-          //   intent = new Intent( "ThManager.intent.action.Launch" );
-          //   // intent.putExtra( "survey", mApp.getSurveyThFile() );
-          // }
+          intent = new Intent( Intent.ACTION_VIEW ).setClass( this, com.topodroid.tdm.TdManagerActivity.class );
           startActivity( intent );
         } catch ( ActivityNotFoundException e ) {
           // TDToast.makeBad( R.string.no_thmanager );
-          TDLog.Error( "TdManagerActivity not started" );
+          TDLog.Error( "Td Manager activity not started" );
         }
       }
     }
@@ -452,8 +449,8 @@ public class MainWindow extends Activity
         // (new SymbolEnableDialog( mActivity )).show();
         (new SymbolReload( mActivity, mApp, mWithPalettes )).show();
       } else if ( mWithLogs && p++ == pos ) { // LOGS
-        intent = new Intent( mActivity, TDPrefActivity.class );
-        intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_LOG );
+        intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
+        intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_LOG );
         startActivity( intent );
       } else if ( mWithBackupsClear && p++ == pos ) { // CLEAR_BACKUPS
         TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.ask_backups_clear,
@@ -468,8 +465,8 @@ public class MainWindow extends Activity
       } else if ( p++ == pos ) { // ABOUT
         (new TopoDroidAbout( mActivity, this, -2 )).show();
       } else if ( p++ == pos ) { // SETTINGS
-        intent = new Intent( mActivity, TDPrefActivity.class );
-        intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_ALL );
+        intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
+        intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_ALL );
         startActivity( intent );
       } else if ( p++ == pos ) { // HELP
         new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE )).show();
@@ -887,24 +884,12 @@ public class MainWindow extends Activity
   }
 
   @Override
-  public boolean onSearchRequested()
-  {
-    // TDLog.Error( "search requested" );
-    Intent intent = new Intent( mActivity, TDPrefActivity.class );
-    intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_ALL );
-    startActivity( intent );
-    return true;
-  }
-
-  @Override
   public boolean onKeyDown( int code, KeyEvent event )
   {
     switch ( code ) {
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         onBackPressed();
         return true;
-      case KeyEvent.KEYCODE_SEARCH:
-        return onSearchRequested();
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
         UserManualActivity.showHelpPage( mActivity, getResources().getString( HELP_PAGE ));
         return true;

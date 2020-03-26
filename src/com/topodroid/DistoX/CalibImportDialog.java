@@ -11,6 +11,10 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.ui.MyDialog;
+// import com.topodroid.prefs.TDSetting;
+
 import java.io.File;
 // import java.util.Set;
 import java.util.ArrayList;

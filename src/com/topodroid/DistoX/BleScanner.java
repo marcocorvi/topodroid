@@ -13,6 +13,8 @@
  */
 package com.topodroid.DistoX;
 
+// import com.topodroid.prefs.TDSetting;
+
 // import android.util.Log;
 
 import android.bluetooth.le.BluetoothLeScanner;

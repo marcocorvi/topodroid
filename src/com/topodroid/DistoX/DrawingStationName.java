@@ -12,6 +12,13 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
+import com.topodroid.num.NumStation;
+// import com.topodroid.math.Point2D;
+import com.topodroid.prefs.TDSetting;
+
+
 import java.util.Locale;
 
 import java.io.DataInputStream;
@@ -19,14 +26,13 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import android.graphics.Canvas;
-// import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.Matrix;
 
 // import android.util.Log;
 
-class DrawingStationName extends DrawingPointPath
+public class DrawingStationName extends DrawingPointPath
                          implements IDrawingLink
 {
   private String mName; // station name
@@ -83,7 +89,7 @@ class DrawingStationName extends DrawingPointPath
     makeStraightPath( 0, 0, 2*TDSetting.mStationSize*mName.length(), 0, cx, cy );
   }
 
-  String getName() { return mName; }
+  public String getName() { return mName; }
   NumStation getNumStation() { return mStation; }
 
   // @implements IDrawingLink

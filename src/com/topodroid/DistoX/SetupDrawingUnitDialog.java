@@ -11,20 +11,20 @@
  */
 package com.topodroid.DistoX;
 
+// import com.topodroid.utils.TDColor;
+import com.topodroid.ui.MyDialog;
+import com.topodroid.ui.ItemButton;
+import com.topodroid.prefs.TDSetting;
+
 // import android.util.Log;
 
 import android.content.Context;
-// import android.content.res.Resources;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-// import android.view.ViewGroup;
-// import android.view.Display;
-// import android.util.DisplayMetrics;
 import android.widget.Button;
 import android.widget.EditText;
-// import android.widget.ImageView;
 
 import android.text.TextWatcher;
 import android.text.Editable;

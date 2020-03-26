@@ -11,6 +11,10 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDMath;
+import com.topodroid.math.TDVector;
+import com.topodroid.prefs.TDSetting;
+
 // import android.util.Log;
 
 import java.lang.ref.WeakReference;
@@ -143,16 +147,16 @@ class TimerTask extends AsyncTask<String, Integer, Long >
   private void computeBearingAndClino( )
   {
     // Log.v("DistoX", "Timer Task compute B & C ");
-    Vector g = new Vector( mValAcc[0], mValAcc[1], mValAcc[2] );
-    Vector m = new Vector( mValMag[0], mValMag[1], mValMag[2] );
+    TDVector g = new TDVector( mValAcc[0], mValAcc[1], mValAcc[2] );
+    TDVector m = new TDVector( mValMag[0], mValMag[1], mValMag[2] );
     g.normalize();
 
     int o0 = 0;
 
     m.normalize();
-    // Vector e = new Vector( 1.0f, 0.0f, 0.0f );
-    Vector w = m.cross( g ); // west
-    Vector n = g.cross( w ); // north
+    // TDVector e = new TDVector( 1.0f, 0.0f, 0.0f );
+    TDVector w = m.cross( g ); // west
+    TDVector n = g.cross( w ); // north
     w.normalize();
     n.normalize();
     float b0 = 0;

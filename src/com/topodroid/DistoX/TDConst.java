@@ -13,41 +13,41 @@ package com.topodroid.DistoX;
 
 import android.text.InputType;
 
-class TDConst
+public class TDConst
 {
-  static final int DISTOX_EXPORT_NONE = -1;
-  static final int DISTOX_EXPORT_TH  = 0;
-  static final int DISTOX_EXPORT_TLX = 1;
-  static final int DISTOX_EXPORT_DAT = 2; // Compass     DatFile
-  static final int DISTOX_EXPORT_SVX = 3; // Survex      SvxFile
-  static final int DISTOX_EXPORT_TRO = 4; // VisualTopo  TroFile
-  static final int DISTOX_EXPORT_CSV = 5;
-  static final int DISTOX_EXPORT_DXF = 6;
-  static final int DISTOX_EXPORT_CSX = 7; // cSurvey     CsxFile
-  static final int DISTOX_EXPORT_TOP = 8; // PocketTopo  TopFile
-  static final int DISTOX_EXPORT_SRV = 9; // Walls       SrvFile
-  static final int DISTOX_EXPORT_KML = 10; //Keyhole     KmlFile
-  static final int DISTOX_EXPORT_PLT = 11; // track file PltFile
+  public static final int DISTOX_EXPORT_NONE = -1;
+  public static final int DISTOX_EXPORT_TH  = 0;
+  public static final int DISTOX_EXPORT_TLX = 1;
+  public static final int DISTOX_EXPORT_DAT = 2; // Compass     DatFile
+  public static final int DISTOX_EXPORT_SVX = 3; // Survex      SvxFile
+  public static final int DISTOX_EXPORT_TRO = 4; // VisualTopo  TroFile
+  public static final int DISTOX_EXPORT_CSV = 5;
+  public static final int DISTOX_EXPORT_DXF = 6;
+  public static final int DISTOX_EXPORT_CSX = 7; // cSurvey     CsxFile
+  public static final int DISTOX_EXPORT_TOP = 8; // PocketTopo  TopFile
+  public static final int DISTOX_EXPORT_SRV = 9; // Walls       SrvFile
+  public static final int DISTOX_EXPORT_KML = 10; //Keyhole     KmlFile
+  public static final int DISTOX_EXPORT_PLT = 11; // track file PltFile
 
-  static final int DISTOX_EXPORT_PNG = 12;
-  static final int DISTOX_EXPORT_SVG = 13;
-  static final int DISTOX_EXPORT_TH2 = 14;
-  static final int DISTOX_EXPORT_TH3 = 15;
+  public static final int DISTOX_EXPORT_PNG = 12;
+  public static final int DISTOX_EXPORT_SVG = 13;
+  public static final int DISTOX_EXPORT_TH2 = 14;
+  public static final int DISTOX_EXPORT_TH3 = 15;
 
-  static final int DISTOX_EXPORT_PLG = 16; // Polygon   CaveFile
-  static final int DISTOX_EXPORT_CAV = 17; // Topo      CavFile
-  static final int DISTOX_EXPORT_GRT = 18; // Grottolf
-  static final int DISTOX_EXPORT_GTX = 19; // GHTopo    GtxFile
-  static final int DISTOX_EXPORT_SUR = 20; // WinKarst  SurFile
-  static final int DISTOX_EXPORT_TRB = 21; // TopoRobot TrbFile
-  static final int DISTOX_EXPORT_JSON = 22; // GeoJSON  JsonFile
-  static final int DISTOX_EXPORT_SHP = 23; // Shapefile ShpFile
-  static final int DISTOX_EXPORT_XVI = 24; // xtherion  XviFile
-  static final int DISTOX_EXPORT_TNL = 25; // Tunnel    TnlFile
+  public static final int DISTOX_EXPORT_PLG = 16; // Polygon   CaveFile
+  public static final int DISTOX_EXPORT_CAV = 17; // Topo      CavFile
+  public static final int DISTOX_EXPORT_GRT = 18; // Grottolf
+  public static final int DISTOX_EXPORT_GTX = 19; // GHTopo    GtxFile
+  public static final int DISTOX_EXPORT_SUR = 20; // WinKarst  SurFile
+  public static final int DISTOX_EXPORT_TRB = 21; // TopoRobot TrbFile
+  public static final int DISTOX_EXPORT_JSON = 22; // GeoJSON  JsonFile
+  public static final int DISTOX_EXPORT_SHP = 23; // Shapefile ShpFile
+  public static final int DISTOX_EXPORT_XVI = 24; // xtherion  XviFile
+  public static final int DISTOX_EXPORT_TNL = 25; // Tunnel    TnlFile
 
-  static final int DISTOX_EXPORT_ZIP = 30;
+  public static final int DISTOX_EXPORT_ZIP = 30;
 
-  static final String[] mSurveyExportTypes = { "ZIP", 
+  public static final String[] mSurveyExportTypes = { "ZIP", 
     "Compass",
     "cSurvey",
     "GHTopo",
@@ -68,7 +68,7 @@ class TDConst
     "GeoJSON",
     "Shapefile"
   };
-  static final private int[] mSurveyExportIndex = {
+  private static final int[] mSurveyExportIndex = {
     DISTOX_EXPORT_ZIP,
     DISTOX_EXPORT_DAT,
     DISTOX_EXPORT_CSX,
@@ -91,7 +91,7 @@ class TDConst
     DISTOX_EXPORT_SHP
   };
 
-  static final String[] mPlotExportTypes = {
+  public static final String[] mPlotExportTypes = {
       "Therion",
       "cSurvey",
       "DXF",
@@ -101,7 +101,7 @@ class TDConst
       "XVI",
       "Tunnel"
   };
-  static final private int[] mPlotExportIndex = {
+  private static final int[] mPlotExportIndex = {
     DISTOX_EXPORT_TH2,
     DISTOX_EXPORT_CSX,
     DISTOX_EXPORT_DXF,
@@ -112,14 +112,14 @@ class TDConst
     DISTOX_EXPORT_TNL
   };
 
-  static final String[] mOverviewExportTypes = {
+  public static final String[] mOverviewExportTypes = {
       "Therion",
       "DXF",
       "SVG",
       "SHP",
       "XVI"
   };
-  static final private int[] mOverviewExportIndex = {
+  private static final int[] mOverviewExportIndex = {
     DISTOX_EXPORT_TH2,
     DISTOX_EXPORT_DXF,
     DISTOX_EXPORT_SVG,
@@ -127,11 +127,11 @@ class TDConst
     DISTOX_EXPORT_XVI
   };
 
-  static final String[] mCalibExportTypes = { "CSV" };
-  static final private int[] mCalibExportIndex = { DISTOX_EXPORT_CSV };
+  public static final String[] mCalibExportTypes = { "CSV" };
+  private static final int[] mCalibExportIndex = { DISTOX_EXPORT_CSV };
 
-  static final String[] mSketchExportTypes = { "Therion", "DXF" };
-  static final private int[] mSketchExportIndex = { DISTOX_EXPORT_TH3, DISTOX_EXPORT_DXF };
+  public static final String[] mSketchExportTypes = { "Therion", "DXF" };
+  private static final int[] mSketchExportIndex = { DISTOX_EXPORT_TH3, DISTOX_EXPORT_DXF };
 
   private static int exportIndex( String type, String[] types, int[] index )
   {
@@ -141,19 +141,16 @@ class TDConst
     return DISTOX_EXPORT_NONE;
   }
 
-  static int surveyExportIndex( String type ) { return exportIndex( type, mSurveyExportTypes, mSurveyExportIndex ); }
-  static int plotExportIndex( String type ) { return exportIndex( type, mPlotExportTypes, mPlotExportIndex ); }
-  static int overviewExportIndex( String type ) { return exportIndex( type, mOverviewExportTypes, mOverviewExportIndex ); }
-  static int calibExportIndex( String type ) { return exportIndex( type, mCalibExportTypes, mCalibExportIndex ); }
-  static int sketchExportIndex( String type ) { return exportIndex( type, mSketchExportTypes, mSketchExportIndex ); }
+  public static int surveyExportIndex( String type ) { return exportIndex( type, mSurveyExportTypes, mSurveyExportIndex ); }
+  public static int plotExportIndex( String type ) { return exportIndex( type, mPlotExportTypes, mPlotExportIndex ); }
+  public static int overviewExportIndex( String type ) { return exportIndex( type, mOverviewExportTypes, mOverviewExportIndex ); }
+  public static int calibExportIndex( String type ) { return exportIndex( type, mCalibExportTypes, mCalibExportIndex ); }
+  public static int sketchExportIndex( String type ) { return exportIndex( type, mSketchExportTypes, mSketchExportIndex ); }
 
-  static final int DDMMSS = 0;
-  static final int DEGREE = 1;
-
-  static final int NUMBER                 = InputType.TYPE_CLASS_NUMBER;
-  static final int NUMBER_DECIMAL         = NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL;
-  static final int NUMBER_SIGNED          = NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED;
-  static final int NUMBER_DECIMAL_SIGNED  = NUMBER_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED;
-  static final int TEXT                   = InputType.TYPE_CLASS_TEXT;
+  public static final int NUMBER                 = InputType.TYPE_CLASS_NUMBER;
+  public static final int NUMBER_DECIMAL         = NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL;
+  public static final int NUMBER_SIGNED          = NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED;
+  public static final int NUMBER_DECIMAL_SIGNED  = NUMBER_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED;
+  public static final int TEXT                   = InputType.TYPE_CLASS_TEXT;
 
 }

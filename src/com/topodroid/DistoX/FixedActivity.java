@@ -11,6 +11,13 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDStatus;
+import com.topodroid.ui.MyButton;
+import com.topodroid.ui.MyHorizontalListView;
+import com.topodroid.ui.MyHorizontalButtonView;
+import com.topodroid.help.UserManualActivity;
+
 import android.util.Log;
 
 // import java.util.regex.Pattern;
@@ -344,16 +351,6 @@ public class FixedActivity extends Activity
     }
   }
 
-  // @Override
-  // public boolean onSearchRequested()
-  // {
-  //   // TDLog.Error( "search requested" );
-  //   Intent intent = new Intent( this, TDPrefActivity.class );
-  //   intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_SURVEY );
-  //   startActivity( intent );
-  //   return true;
-  // }
-
   @Override
   public boolean onKeyDown( int code, KeyEvent event )
   {
@@ -365,8 +362,6 @@ public class FixedActivity extends Activity
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         super.onBackPressed();
         return true;
-      // case KeyEvent.KEYCODE_SEARCH:
-        // return onSearchRequested();
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:

@@ -11,6 +11,17 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDTag;
+import com.topodroid.utils.TDStatus;
+import com.topodroid.ui.MyButton;
+import com.topodroid.ui.MyHorizontalListView;
+import com.topodroid.ui.MyHorizontalButtonView;
+import com.topodroid.help.HelpDialog;
+import com.topodroid.help.UserManualActivity;
+import com.topodroid.prefs.TDSetting;
+import com.topodroid.prefs.TDPrefCat;
+
 import android.util.Log;
 
 import java.util.Locale;
@@ -394,18 +405,14 @@ public class SurveyWindow extends Activity
     // if ( TopoDroidApp.exportSurveyAsThSync( ) ) { // make sure to have survey exported as therion
       try {
         Intent intent = new Intent( "Cave3D.intent.action.Launch" );
-        // if ( TDSetting.mWithTdManager ) {
-          intent.putExtra( "INPUT_SURVEY", TDInstance.survey );
-          intent.putExtra( "SURVEY_BASE", TDPath.getPathBase() );
+        intent.putExtra( "INPUT_SURVEY", TDInstance.survey );
+        intent.putExtra( "SURVEY_BASE", TDPath.getPathBase() );
           // uri string is "/storage/emulated/0/TopoDroid" so the same string as from getPathBase()
           // Uri.Builder uri_builder = new Uri.Builder();
           // uri_builder.path( TDPath.getPathBase() ); 
           // Uri uri = uri_builder.build();
           // Log.v("DistoX-URI", "TopoDroid " + uri.toString() );
           // intent.putExtra( "BASE_URI", uri.toString() );
-        // } else {
-        //   intent.putExtra( "INPUT_FILE", TDPath.getSurveyThFile( TDInstance.survey ) );
-        // }
         mActivity.startActivity( intent );
       } catch ( ActivityNotFoundException e ) {
         TDToast.makeBad( R.string.no_cave3d );
@@ -534,17 +541,6 @@ public class SurveyWindow extends Activity
     // finish();
   }
 
-
-  @Override
-  public boolean onSearchRequested()
-  {
-    // TDLog.Error( "search requested" );
-    Intent intent = new Intent( mActivity, TDPrefActivity.class );
-    intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_SURVEY );
-    mActivity.startActivity( intent );
-    return true;
-  }
-
   @Override
   public boolean onKeyDown( int code, KeyEvent event )
   {
@@ -554,8 +550,6 @@ public class SurveyWindow extends Activity
         TopoDroidApp.mSurveyWindow = null;
         super.onBackPressed();
         return true;
-      case KeyEvent.KEYCODE_SEARCH:
-        return onSearchRequested();
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
         UserManualActivity.showHelpPage( mActivity, getResources().getString( HELP_PAGE ));
         return true;
@@ -623,8 +617,8 @@ public class SurveyWindow extends Activity
         new CalibCheckDialog( mActivity, this, shots ).show();
       }
     } else if ( p++ == pos ) { // OPTIONS
-      Intent intent = new Intent( mActivity, TDPrefActivity.class );
-      intent.putExtra( TDPrefActivity.PREF_CATEGORY, TDPrefActivity.PREF_CATEGORY_SURVEY );
+      Intent intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
+      intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_SURVEY );
       mActivity.startActivity( intent );
     } else if ( p++ == pos ) { // HELP
       new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
