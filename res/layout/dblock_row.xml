@@ -26,6 +26,10 @@
     android:padding="@dimen/padding"
     android:gravity="right"
   />
+  <!--
+    style="?android:attr/textViewStyle"
+    android:background="@android:color/transparent"
+  -->
 
   <EditText 
     android:id="@+id/to"

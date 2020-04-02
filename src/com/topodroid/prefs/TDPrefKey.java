@@ -881,37 +881,43 @@ public class TDPrefKey
     "DISTOX_UNIT_LENGTH",   // units of lengths [m, y, ft]
     "DISTOX_UNIT_ANGLE",    // units of angles [deg, grad]
     "DISTOX_UNIT_GRID", // plot grid unit [m, y, 2ft]
+    "DISTOX_UNIT_MEASURE", // plot grid unit [m, y, 2ft]
     null
   };
 
   static int[] UNITStitle = {
     R.string.pref_unit_length_title,
     R.string.pref_unit_angle_title,
-    R.string.pref_unit_grid_title
+    R.string.pref_unit_grid_title,
+    R.string.pref_unit_measure_title,
   };
 
   static int[] UNITSdesc = {
     R.string.pref_unit_length_summary,
     R.string.pref_unit_angle_summary,
-    R.string.pref_unit_grid_summary
+    R.string.pref_unit_grid_summary,
+    R.string.pref_unit_measure_summary,
   };
 
   public static String[] UNITSdef = {
     "meters",
     "degrees",
-    "1.0"
+    "1.0",
+    "1.0",
   };
 
   public static int[] UNITSarr = {
     R.array.unitLength,
     R.array.unitAngle,
-    R.array.unitGrid 
+    R.array.unitGrid,
+    R.array.unitMeasure, 
   };
 
   static int[] UNITSval = {
     R.array.unitLengthValue,
     R.array.unitAngleValue,
-    R.array.unitGridValue
+    R.array.unitGridValue,
+    R.array.unitMeasureValue,
   };
 
   // ------------------------------------------------------------------------------

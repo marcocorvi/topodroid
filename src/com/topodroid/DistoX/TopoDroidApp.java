@@ -317,8 +317,8 @@ public class TopoDroidApp extends Application
 
   private static int getSurveyExtend()
   {
-    if ( TDInstance.sid <= 0 ) return SurveyInfo.EXTEND_NORMAL;
-    if ( mData == null ) return SurveyInfo.EXTEND_NORMAL;
+    if ( TDInstance.sid <= 0 ) return SurveyInfo.SURVEY_EXTEND_NORMAL;
+    if ( mData == null ) return SurveyInfo.SURVEY_EXTEND_NORMAL;
     return mData.getSurveyExtend( TDInstance.sid );
   }
 
@@ -1053,7 +1053,7 @@ public class TopoDroidApp extends Application
     TDInstance.sid      = -1;       // no survey by default
     TDInstance.survey   = null;
     TDInstance.datamode = 0;
-    // TDINstance.extend   = SurveyInfo.EXTEND_NORMAL;
+    // TDINstance.extend   = SurveyInfo.SURVEY_EXTEND_NORMAL;
     StationName.clearCurrentStation();
     // resetManualCalibrations();
     ManualCalibration.reset();

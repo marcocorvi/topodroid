@@ -30,7 +30,7 @@ import com.topodroid.help.UserManualActivity;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPrefCat;
 
-// import android.util.Log;
+import android.util.Log;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -813,10 +813,10 @@ public class OverviewWindow extends ItemDrawer
   private float mBaseY = 0;
   
   private float deltaX( float x1, float x0 ) 
-  { return (  (x1 - x0) / DrawingUtil.SCALE_FIX ) / TDSetting.mUnitGrid; }
+  { return (  (x1 - x0) / DrawingUtil.SCALE_FIX ) / TDSetting.mUnitMeasure; }
 
   private float deltaY( float y1, float y0 )
-  { return ( -(y1 - y0) / DrawingUtil.SCALE_FIX ) / TDSetting.mUnitGrid; }
+  { return ( -(y1 - y0) / DrawingUtil.SCALE_FIX ) / TDSetting.mUnitMeasure; }
 
   private double angleBase( float bx, float by )
   {
@@ -847,12 +847,13 @@ public class OverviewWindow extends ItemDrawer
 
     float x_canvas = event.getX();
     float y_canvas = event.getY();
-    // Log.v("DistoX", "touch canvas " + x_canvas + " " + y_canvas ); 
+    Log.v("DistoX-TOUCH", "touch canvas " + x_canvas + " " + y_canvas + " center_y " + (DrawingUtil.CENTER_Y*2-20) ); 
 
-    if ( mZoomBtnsCtrlOn && y_canvas > DrawingUtil.CENTER_Y*2-20 ) {
-      mZoomBtnsCtrl.setVisible( true );
-      // mZoomCtrl.show( );
-    }
+    // if ( mZoomBtnsCtrlOn && y_canvas > DrawingUtil.CENTER_Y*2-20 ) {
+    //   mZoomBtnsCtrl.setVisible( true );
+    //   // mZoomCtrl.show( );
+    // }
+
     float x_scene = x_canvas/mZoom - mOffset.x;
     float y_scene = y_canvas/mZoom - mOffset.y;
     // Log.v("DistoX", "touch scene " + x_scene + " " + y_scene );

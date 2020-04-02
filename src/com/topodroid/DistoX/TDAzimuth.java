@@ -22,7 +22,7 @@ public class TDAzimuth
   static long  mFixedExtend = 0;  // -1 left, 0 unspecified, 1 right
 
   // if mFixedExtend != 0 the mRefAzimuth is the last bearing times mFixedExtend
-  public static float mRefAzimuth  = SurveyInfo.EXTEND_NORMAL; // west to east
+  public static float mRefAzimuth  = SurveyInfo.SURVEY_EXTEND_NORMAL; // west to east
 
 
   public static void resetRefAzimuth( final ShotWindow window, float azimuth )

@@ -383,8 +383,8 @@ public class DataHelper extends DataSetObservable
 
   int getSurveyExtend( long sid )
   {
-    int ret = SurveyInfo.EXTEND_NORMAL;
-    if ( myDB == null ) return SurveyInfo.EXTEND_NORMAL;
+    int ret = SurveyInfo.SURVEY_EXTEND_NORMAL;
+    if ( myDB == null ) return SurveyInfo.SURVEY_EXTEND_NORMAL;
     Cursor cursor = myDB.rawQuery( qExtend, new String[] { Long.toString(sid) } );
     if (cursor.moveToFirst()) {
       ret = (int)(cursor.getLong( 0 ));
@@ -4532,7 +4532,7 @@ public class DataHelper extends DataSetObservable
          if ( db_version > 29) xsections = (int)( scanline0.longValue( ) );
 	 int datamode  = SurveyInfo.DATAMODE_NORMAL;
          if ( db_version > 36) datamode = (int)( scanline0.longValue( ) );
-	 int extend_ref = SurveyInfo.EXTEND_NORMAL;
+	 int extend_ref = SurveyInfo.SURVEY_EXTEND_NORMAL;
          if ( db_version > 38) extend_ref = (int)( scanline0.longValue( ) );
 
          sid = setSurvey( name, datamode );

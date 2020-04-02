@@ -814,7 +814,8 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     return new TDPref[ ] {
       makeLst( cat, key[0], tit[0], dsc[0], B, def[0], arr[0], val[0], ctx, hlp ), // LENGTH
       makeLst( cat, key[1], tit[1], dsc[1], B, def[1], arr[1], val[1], ctx, hlp ), // ANGLE
-      makeLst( cat, key[2], tit[2], dsc[2], B, def[2], arr[2], val[2], ctx, hlp )  // GRID
+      makeLst( cat, key[2], tit[2], dsc[2], B, def[2], arr[2], val[2], ctx, hlp ), // GRID
+      makeLst( cat, key[3], tit[3], dsc[3], B, def[3], arr[3], val[3], ctx, hlp )  // MEASURE
     };
   }
 

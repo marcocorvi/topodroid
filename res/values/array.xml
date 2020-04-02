@@ -86,6 +86,15 @@
      <item name="ten_cm">0.1</item>
   </string-array>
 
+  <string-array name="unitMeasure">
+     <item name="meter">meter</item>
+     <item name="tf">feet</item>
+  </string-array>
+  <string-array name="unitMeasureValue" translatable="false">
+     <item name="meter">1.0</item>
+     <item name="tf">0.3048</item>
+  </string-array>
+
   <string-array name="loopClosure">
      <item name="none">None</item>
      <item name="normal">Normal</item>

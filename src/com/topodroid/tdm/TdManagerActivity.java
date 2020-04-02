@@ -232,7 +232,7 @@ public class TdManagerActivity extends Activity
       }
     );
     File[] tdconfigs = TDPath.scanTdconfigDir();
-    if ( tdconfigs.length > 0 ) {
+    if ( tdconfigs != null && tdconfigs.length > 0 ) {
       for ( File file : tdconfigs ) {
         // Log.v("DistoX-TdManager", "activity update " + file.getAbsolutePath() );
         mTdmConfigAdapter.add( new TdmConfig( file.getAbsolutePath() ) );

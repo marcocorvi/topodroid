@@ -362,7 +362,8 @@ public class TDSetting
   public static int mPointingRadius = 24;
 
   // public static final String LINE_SHIFT = "20.0";
-  public static float mUnitGrid  = 1;         // 1: meter, 0.9... yard
+  public static float mUnitGrid    = 1;         // 1: meter, 0.9... yard
+  public static float mUnitMeasure = 1;         // 1: meter, 0.9... yard
 
   // public static final int PICKER_RECENT = 0; // Drawing-tools picker type
   public static final int PICKER_LIST   = 1; 
@@ -727,7 +728,7 @@ public class TDSetting
     String[] keyData = TDPrefKey.DATA;
     String[] defData = TDPrefKey.DATAdef;
     mAzimuthManual = prefs.getBoolean( keyData[6], bool(defData[6]) );   // DISTOX_AZIMUTH_MANUAL 
-    TDAzimuth.resetRefAzimuth( null, SurveyInfo.EXTEND_NORMAL ); // BUG ?? may call setRefAzimuthButton on non-UI thread
+    TDAzimuth.resetRefAzimuth( null, SurveyInfo.SURVEY_EXTEND_NORMAL ); // BUG ?? may call setRefAzimuthButton on non-UI thread
     
     // ------------------- DEVICE PREFERENCES -def--fallback--min-max
     String[] keyDevice = TDPrefKey.DEVICE;
@@ -985,6 +986,7 @@ public class TDSetting
       mUnitAngleStr = "grad";
     }
     mUnitGrid       = tryFloat(  prefs, keyUnits[2], defUnits[2] );      // DISTOX_UNIT_GRID
+    mUnitMeasure    = tryFloat(  prefs, keyUnits[3], defUnits[3] );      // DISTOX_UNIT_MEASURE
     // Log.v("DistoX", "units grid " + mUnitGrid );
   
     String[] keyAcc = TDPrefKey.ACCURACY;
@@ -1870,6 +1872,8 @@ public class TDSetting
       }
     } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_UNIT_GRID (choice)
       mUnitGrid = tryFloatValue( hlp, k, v, def[2] ); 
+    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_UNIT_MEASURE (choice)
+      mUnitMeasure = tryFloatValue( hlp, k, v, def[3] ); 
     } else {
       TDLog.Error("missing UNITS key: " + k );
     }
@@ -2499,7 +2503,7 @@ public class TDSetting
 
       pw.printf(Locale.US, "Plot: zoom %d, drag %c, fix-origin %c, split %c, shift %c, levels %d\n",
         mZoomCtrl, tf(mSideDrag), tf(mFixedOrigin), tf(mPlotSplit), tf(mPlotShift), mWithLevels );
-      pw.printf(Locale.US, "Units: icon %.2f, line %.2f, grid %.2f\n", mUnitIcons, mUnitLines, mUnitGrid );
+      pw.printf(Locale.US, "Units: icon %.2f, line %.2f, grid %.2f, measure %.2f\n", mUnitIcons, mUnitLines, mUnitGrid, mUnitMeasure );
       pw.printf(Locale.US, "Size: station %.1f, label %.1f, fixed %.1f line %.1f\n", mStationSize, mLabelSize, mFixedThickness, mLineThickness );
       pw.printf(Locale.US, "Select: radius %.2f [min %.2f], pointing %d, shift %d, dot %.1f, multiple %c \n",
         mSelectness, mCloseCutoff, mPointingRadius, mMinShift, mDotRadius, tf(mPathMultiselect) );

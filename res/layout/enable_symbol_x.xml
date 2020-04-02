@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
         />
-    <com.topodroid.DistoX.ItemButton android:id="@+id/enable_symbol_bt"
+    <com.topodroid.ui.ItemButton android:id="@+id/enable_symbol_bt"
         android:layout_marginTop="@dimen/margintiny"
         android:layout_marginLeft="@dimen/marginh"
         android:layout_width="wrap_content"

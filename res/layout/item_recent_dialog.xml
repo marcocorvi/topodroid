@@ -36,39 +36,6 @@
         android:layout_marginLeft="@dimen/marginh"
         android:orientation="horizontal"
       >
-<!--
-          <com.topodroid.DistoX.ItemButton android:id="@+id/recent0p"
-            android:layout_width="0dp" 
-            android:layout_height="wrap_content" 
-            android:layout_weight="16"
-            android:layout_marginRight="@dimen/marginh"
-          />
-          <com.topodroid.DistoX.ItemButton android:id="@+id/recent1p"
-            android:layout_width="0dp" 
-            android:layout_height="wrap_content" 
-            android:layout_weight="16"
-            android:layout_marginRight="@dimen/marginh"
-          />
-          <com.topodroid.DistoX.ItemButton android:id="@+id/recent2p"
-            android:layout_width="0dp" 
-            android:layout_height="wrap_content" 
-            android:layout_weight="16"
-            android:layout_marginRight="@dimen/marginh"
-          />
-          <com.topodroid.DistoX.ItemButton android:id="@+id/recent3p"
-            android:layout_width="0dp" 
-            android:layout_height="wrap_content" 
-            android:layout_weight="16"
-            android:layout_marginRight="@dimen/marginh"
-          />
-          <Button android:id="@+id/point"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=">>"
-            android:textSize="@dimen/textsize"
-            android:layout_weight="10"
-          />
--->
       </LinearLayout>
 
       <LinearLayout android:id="@+id/layout_line"
@@ -80,39 +47,6 @@
         android:layout_marginLeft="@dimen/marginh"
         android:orientation="horizontal"
       >
-<!--
-          <com.topodroid.DistoX.ItemButton android:id="@+id/recent0l"
-            android:layout_width="0dp" 
-            android:layout_height="wrap_content" 
-            android:layout_weight="16"
-            android:layout_marginRight="@dimen/marginh"
-          />
-          <com.topodroid.DistoX.ItemButton android:id="@+id/recent1l"
-            android:layout_width="0dp" 
-            android:layout_height="wrap_content" 
-            android:layout_weight="16"
-            android:layout_marginRight="@dimen/marginh"
-          />
-          <com.topodroid.DistoX.ItemButton android:id="@+id/recent2l"
-            android:layout_width="0dp" 
-            android:layout_height="wrap_content" 
-            android:layout_weight="16"
-            android:layout_marginRight="@dimen/marginh"
-          />
-          <com.topodroid.DistoX.ItemButton android:id="@+id/recent3l"
-            android:layout_width="0dp" 
-            android:layout_height="wrap_content" 
-            android:layout_weight="16"
-            android:layout_marginRight="@dimen/marginh"
-          />
-          <Button android:id="@+id/line"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=">>"
-            android:textSize="@dimen/textsize"
-            android:layout_weight="10"
-          />
--->
       </LinearLayout>
 
       <LinearLayout android:id="@+id/layout_area"
@@ -124,39 +58,6 @@
         android:layout_marginLeft="@dimen/marginh"
         android:orientation="horizontal"
       >
-<!--
-          <com.topodroid.DistoX.ItemButton android:id="@+id/recent0a"
-            android:layout_width="0dp" 
-            android:layout_height="wrap_content" 
-            android:layout_weight="16"
-            android:layout_marginRight="@dimen/marginh"
-          />
-          <com.topodroid.DistoX.ItemButton android:id="@+id/recent1a"
-            android:layout_width="0dp" 
-            android:layout_height="wrap_content" 
-            android:layout_weight="16"
-            android:layout_marginRight="@dimen/marginh"
-          />
-          <com.topodroid.DistoX.ItemButton android:id="@+id/recent2a"
-            android:layout_width="0dp" 
-            android:layout_height="wrap_content" 
-            android:layout_weight="16"
-            android:layout_marginRight="@dimen/marginh"
-          />
-          <com.topodroid.DistoX.ItemButton android:id="@+id/recent3a"
-            android:layout_width="0dp" 
-            android:layout_height="wrap_content" 
-            android:layout_weight="16"
-            android:layout_marginRight="@dimen/marginh"
-          />
-          <Button android:id="@+id/area"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=">>"
-            android:textSize="@dimen/textsize"
-            android:layout_weight="10"
-          />
--->
       </LinearLayout>
 
 </LinearLayout>

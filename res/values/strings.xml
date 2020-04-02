@@ -1395,6 +1395,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_side_drag_summary">Enable side-drag on the sketch window</string>
   <string name="pref_unit_grid_title">Sketch units</string>
   <string name="pref_unit_grid_summary">Sketch grid cell size</string>
+  <string name="pref_unit_measure_title">Measure units</string>
+  <string name="pref_unit_measure_summary">Overview measure length units</string>
   <!-- UNUSED string name="pref_recent_nr_title">Recent tools number</string -->
   <!-- UNUSED string name="pref_recent_nr_summary">Number of the most recent tools in the item picker</string -->
   <string name="pref_area_border_title">Area border visibility</string>

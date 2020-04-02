@@ -302,10 +302,10 @@ public class ShotWindow extends Activity
       }
     } else if ( TDAzimuth.mFixedExtend == -1L ) {
       TDandroid.setButtonBackground( mButton1[ BTN_AZIMUTH - boff ], mBMleft );
-      TopoDroidApp.setSurveyExtend( SurveyInfo.EXTEND_LEFT );
+      TopoDroidApp.setSurveyExtend( SurveyInfo.SURVEY_EXTEND_LEFT );
     } else {
       TDandroid.setButtonBackground( mButton1[ BTN_AZIMUTH - boff ], mBMright );
-      TopoDroidApp.setSurveyExtend( SurveyInfo.EXTEND_RIGHT );
+      TopoDroidApp.setSurveyExtend( SurveyInfo.SURVEY_EXTEND_RIGHT );
     } 
   }
 
