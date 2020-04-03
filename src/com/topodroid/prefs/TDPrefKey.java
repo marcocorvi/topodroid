@@ -880,8 +880,8 @@ public class TDPrefKey
   public static String[] UNITS = { // [3]
     "DISTOX_UNIT_LENGTH",   // units of lengths [m, y, ft]
     "DISTOX_UNIT_ANGLE",    // units of angles [deg, grad]
-    "DISTOX_UNIT_GRID", // plot grid unit [m, y, 2ft]
-    "DISTOX_UNIT_MEASURE", // plot grid unit [m, y, 2ft]
+    "DISTOX_UNIT_GRID",     // plot grid unit [m, y, 2ft]
+    "DISTOX_UNIT_MEASURE",  // ruler units [cell, m, ft]
     null
   };
 
@@ -903,7 +903,7 @@ public class TDPrefKey
     "meters",
     "degrees",
     "1.0",
-    "1.0",
+    "-1.0",  // grid cell
   };
 
   public static int[] UNITSarr = {

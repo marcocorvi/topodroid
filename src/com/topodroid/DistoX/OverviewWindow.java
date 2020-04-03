@@ -128,6 +128,7 @@ public class OverviewWindow extends ItemDrawer
   private float mBorderInnerLeft  = 0;
   private float mBorderBottom     = 4096;
     
+  private float mUnitRuler = 1;
 
   private TopoDroidApp mApp;
   private DataHelper mData;
@@ -411,6 +412,8 @@ public class OverviewWindow extends ItemDrawer
 
       TDandroid.setScreenOrientation( this );
 
+      mUnitRuler = TDSetting.mUnitMeasure;
+      if ( mUnitRuler < 0 ) mUnitRuler = TDSetting.mUnitGrid;
 
       mCrossPath = new Path();
       mCrossPath.moveTo(10,10);
@@ -811,12 +814,13 @@ public class OverviewWindow extends ItemDrawer
   private float mStartY = 0;
   private float mBaseX = 0;
   private float mBaseY = 0;
+
   
   private float deltaX( float x1, float x0 ) 
-  { return (  (x1 - x0) / DrawingUtil.SCALE_FIX ) / TDSetting.mUnitMeasure; }
+  { return (  (x1 - x0) / DrawingUtil.SCALE_FIX ) / mUnitRuler; }
 
   private float deltaY( float y1, float y0 )
-  { return ( -(y1 - y0) / DrawingUtil.SCALE_FIX ) / TDSetting.mUnitMeasure; }
+  { return ( -(y1 - y0) / DrawingUtil.SCALE_FIX ) / mUnitRuler; }
 
   private double angleBase( float bx, float by )
   {

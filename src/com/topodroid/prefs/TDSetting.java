@@ -363,7 +363,7 @@ public class TDSetting
 
   // public static final String LINE_SHIFT = "20.0";
   public static float mUnitGrid    = 1;         // 1: meter, 0.9... yard
-  public static float mUnitMeasure = 1;         // 1: meter, 0.9... yard
+  public static float mUnitMeasure = -1;        // -1: grid-cell
 
   // public static final int PICKER_RECENT = 0; // Drawing-tools picker type
   public static final int PICKER_LIST   = 1; 
@@ -2503,7 +2503,7 @@ public class TDSetting
 
       pw.printf(Locale.US, "Plot: zoom %d, drag %c, fix-origin %c, split %c, shift %c, levels %d\n",
         mZoomCtrl, tf(mSideDrag), tf(mFixedOrigin), tf(mPlotSplit), tf(mPlotShift), mWithLevels );
-      pw.printf(Locale.US, "Units: icon %.2f, line %.2f, grid %.2f, measure %.2f\n", mUnitIcons, mUnitLines, mUnitGrid, mUnitMeasure );
+      pw.printf(Locale.US, "Units: icon %.2f, line %.2f, grid %.2f, ruler %.2f\n", mUnitIcons, mUnitLines, mUnitGrid, mUnitMeasure );
       pw.printf(Locale.US, "Size: station %.1f, label %.1f, fixed %.1f line %.1f\n", mStationSize, mLabelSize, mFixedThickness, mLineThickness );
       pw.printf(Locale.US, "Select: radius %.2f [min %.2f], pointing %d, shift %d, dot %.1f, multiple %c \n",
         mSelectness, mCloseCutoff, mPointingRadius, mMinShift, mDotRadius, tf(mPathMultiselect) );

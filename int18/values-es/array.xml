@@ -46,6 +46,12 @@
      <item name="ten_cm">10 cm</item>
   </string-array>
 
+  <!-- TODO string-array name="unitMeasure">
+     <item name="grid_cell">grid cell</item>
+     <item name="meter">meter</item>
+     <item name="tf">feet</item>
+  </string-array -->
+
   <string-array name="loopClosure">
      <item name="none">Nada</item>
      <item name="normal">Normal</item>
