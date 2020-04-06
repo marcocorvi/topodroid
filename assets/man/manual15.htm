@@ -26,10 +26,11 @@ The model is shown with a reference grid (blue north, green east) or triplet (pi
 <li><i>Open file</i>: opens a dialogue to select a .th file from th subfolder in TopoDroid working directory.</li>
 <li><i>Export</i>: opens the export dialogue. Model can be exported into Therion, KML, STL or STL-bin formats, CGAL and LAS.
 There are options to include splays, walls, stations and surface in export. The model can be also serialized in a text file.</li>
-<li><i>Info</i>: will display survey statistics.</li>
-<li><i>Ico diagram</i>: displays ICO diagram.</li>
-<li><i>Rose diagram</i>: displays azimuth rose diagram.</li>
-<li><i>Viewpoint</i>: will let you select a point of view.</li>
+<li><i>Info</i>: will display survey statistics</li>
+<li><i>Ico diagram</i>: displays 3D direction diagram</li>
+<li><i>Rose diagram</i>: displays 2D azimuth rose diagram</li>
+<li><i>Viewpoint</i>: will let you select a point of view</li>
+<li><i>DEM</i> Digital Terrain Model: opacity, overlay, file-load</li>
 <li><i>Reset</i>: center the 3D model in top-view and zoom to fit it in the screen</li>
 <li><i>Wall models</i>: create or clear a wall 3D reconstruction.</li>
 <li><i>Options</i></li>
@@ -43,6 +44,7 @@ There are options to include splays, walls, stations and surface in export. The 
   <li><i>Buttons size</i>: Buttons size</li>
   <li><i>Selection radius</i>: Radius of selection</li>
   <li><i>Top grid</i>: Show the grid on the top</li>
+  <li><i>DEM extent</i> around the survey</li>
   <li><i>Projections</i>: Whether to use precompute projections</li>
   <li><i>All splay</i>: Whether to use all the splays for the walls</li>
   <li><i>Split triangles</i>: Whether to split intersecting wall triangles</li>
@@ -59,7 +61,14 @@ After the wall has been computed it can be displayed with the "wall" button.<br>
 <b>Station actions</b><br>
 When the stations are displayed, they can be selected tapping on the station.
 The selected station can be set as origin of the model ("center"), or the distance from 
-another station can be measured.<br><p>
+another station can be measured.<br>
+If the model as a DEM the depth below surface is shown.<br><p>
+
+<b>DEM (Digital Elevation Model)</b><br>
+Cave3D handles DEM included in Therion or loch files.<br>
+If the TopoDroid survey has a georeferenced station, a DEM can be added to the model by loading from 
+an external file (supported formats: ascii and therion grid). The georefenced station must have also the coordinates
+transformed in the DEM Coordinate Reference System through the app Proj4.<br><p>
 
 <a href="manual14.htm">&lt; Cave Projects</a> |
 <a href="manual16.htm">Index &gt;</a> 
