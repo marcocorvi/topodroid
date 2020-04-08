@@ -33,10 +33,10 @@ class StationNameBacksight extends StationName
   // @param list list of dblock to assign
   // called by TopoDroidApp
   @Override
-  boolean assignStationsAfter( DBlock blk0, List<DBlock> list, Set<String> sts )
+  boolean assignStationsAfter( DBlock blk0, List< DBlock > list, Set<String> sts )
   { 
     boolean ret = false;
-    ArrayList<DBlock> unassigned = new ArrayList<DBlock>();
+    ArrayList< DBlock > unassigned = new ArrayList<>();
     // Log.v("DistoX-SN", "assign stations after - backsight");
     // Log.v("DistoX", "BACKSIGHT assign stations after " + blk0.mFrom + "-" + blk0.mTo + " Size " + list.size() );
     boolean increment = true;
@@ -129,7 +129,7 @@ class StationNameBacksight extends StationName
 
   // DistoX backshot-mode is handled separately
   @Override
-  boolean assignStations( List<DBlock> list, Set<String> sts )
+  boolean assignStations( List< DBlock > list, Set<String> sts )
   { 
     boolean ret = false;
     DBlock prev = null;

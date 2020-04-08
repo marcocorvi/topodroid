@@ -15,8 +15,8 @@ import java.util.ArrayList;
 
 class TriCluster
 {
-  ArrayList<TriShot> shots;
-  ArrayList<String>  stations;
+  ArrayList< TriShot > shots;
+  ArrayList< String >  stations;
 
   TriCluster() 
   {

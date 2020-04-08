@@ -34,13 +34,13 @@ import java.util.List;
 
 public class ShpPoint extends ShpObject
 {
-  public ShpPoint( String path, List<File> files ) // throws IOException
+  public ShpPoint( String path, List< File > files ) // throws IOException
   {
     super( SHP_POINT, path, files );
   }
 
   // write headers for POINT
-  public boolean writePoints( List<DrawingPointPath> pts, float x0, float y0, float xscale, float yscale ) throws IOException
+  public boolean writePoints( List< DrawingPointPath > pts, float x0, float y0, float xscale, float yscale ) throws IOException
   {
     int n_pts = (pts != null)? pts.size() : 0;
     // Log.v("DistoX", "SHP write points " + n_pts );
@@ -101,7 +101,7 @@ public class ShpPoint extends ShpObject
   @Override protected int getShpRecordLength( ) { return 14; }
     
   // Utility: set the bounding box of the set of geometries
-  private void setBoundsPoints( List<DrawingPointPath> pts, float x0, float y0, float xscale, float yscale ) 
+  private void setBoundsPoints( List< DrawingPointPath > pts, float x0, float y0, float xscale, float yscale ) 
   {
     if ( pts.size() == 0 ) {
       xmin = xmax = ymin = ymax = zmin = zmax = 0.0;

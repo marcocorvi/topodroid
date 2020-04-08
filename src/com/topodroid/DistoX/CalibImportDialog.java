@@ -72,7 +72,7 @@ class CalibImportDialog extends MyDialog
     // setTitleColor( TDColor.TITLE_NORMAL );
 
     File[] files = TDPath.getCalibFiles();
-    ArrayList<String> names = new ArrayList<>();
+    ArrayList< String > names = new ArrayList<>();
     if ( files != null ) {
       for ( File f : files ) { 
         names.add( f.getName() );

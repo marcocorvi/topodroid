@@ -155,7 +155,7 @@ public class TDUtil
   }
 
   // sort strings by name (alphabetical order)
-  public static void sortStringList( List<String> list )
+  public static void sortStringList( List< String > list )
   {
     if ( list.size() <= 1 ) return;
     Comparator<String> cmp = new Comparator<String>() 

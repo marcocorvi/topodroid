@@ -70,7 +70,7 @@ class DrawingSvgBase
 
   protected ArrayList< XSection > getXSections( DrawingCommandManager plot, float xoff, float yoff )
   {
-    ArrayList< XSection > xsections = new ArrayList< XSection >();
+    ArrayList< XSection > xsections = new ArrayList<>();
     if ( TDSetting.mAutoXSections ) {
       for ( ICanvasCommand cmd : plot.getCommands() ) {
         if ( cmd.commandType() != 0 ) continue;
@@ -92,7 +92,7 @@ class DrawingSvgBase
     return xsections;
   }
 
-  static protected void printSvgGrid( BufferedWriter out, List<DrawingPath> grid, String id, String color, float opacity, float xoff, float yoff )
+  static protected void printSvgGrid( BufferedWriter out, List< DrawingPath > grid, String id, String color, float opacity, float xoff, float yoff )
   {
     if ( grid != null && grid.size() > 0 ) {
       StringWriter sw = new StringWriter();

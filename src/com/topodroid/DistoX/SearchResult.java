@@ -19,16 +19,16 @@ class SearchResult
 {
   private String mName = null;
   private int   mIdx;    // current result-index in the array
-  private ArrayList<Integer> mPos;
+  private ArrayList< Integer > mPos;
 
   SearchResult()
   {
     mName = null;
     mIdx  = -1;
-    mPos  = new ArrayList<Integer>();
+    mPos  = new ArrayList< Integer >();
   }
 
-  ArrayList<Integer> getPositions() { return mPos; }
+  ArrayList< Integer > getPositions() { return mPos; }
 
   void reset( String name )
   {

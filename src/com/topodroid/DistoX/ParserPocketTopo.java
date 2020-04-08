@@ -208,7 +208,7 @@ class ParserPocketTopo extends ImportParser
     File file = new File( filename );
     boolean ret = false;
     // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
-    List<DrawingPath> paths = new ArrayList<DrawingPath>();
+    List< DrawingPath > paths = new ArrayList<>();
 
     {
       try {

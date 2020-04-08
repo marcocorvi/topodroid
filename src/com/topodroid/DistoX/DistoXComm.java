@@ -471,7 +471,7 @@ class DistoXComm extends TopoDroidComm
 
   // -------------------------------------------------------- 
   
-  // public boolean connectRemoteDevice( String address, Handler /* ArrayList<ILister> */ lister ) // FIXME_LISTER
+  // public boolean connectRemoteDevice( String address, Handler /* ArrayList< ILister > */ lister ) // FIXME_LISTER
   // {
   //   // TDLog.Log( TDLog.LOG_COMM, "connect remote device: address " + address );
   //   if ( connectSocket( address ) ) {

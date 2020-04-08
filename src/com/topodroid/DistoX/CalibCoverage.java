@@ -123,7 +123,7 @@ class CalibCoverage
   // @param clist    list of calib shots
   // @pre shots bearing and clino must have been precomputed
   // @return array distribution of between shots errors
-  // static float[] evalDeviations( List<CalibCBlock> clist )
+  // static float[] evalDeviations( List< CalibCBlock > clist )
   // {
   //   float[] error = new float[ 181 ]; // angle deviations among calib shots of a group
   //   for ( int k = 0; k < 181; ++ k ) error[k] = 0;
@@ -199,7 +199,7 @@ class CalibCoverage
   //   return ret;
   // }
 
-  float evalCoverage( List<CalibCBlock> clist, CalibAlgo transform )
+  float evalCoverage( List< CalibCBlock > clist, CalibAlgo transform )
   {
 
     for (int j=0; j<t_dim; ++j ) angles[j].mValue = 1.0f;
@@ -256,7 +256,7 @@ class CalibCoverage
 
   // @param clist  list of CBlocks
   // @param mode   0: G,  1: M
-  float evalCoverageGM( List<CalibCBlock> clist, int mode ) 
+  float evalCoverageGM( List< CalibCBlock > clist, int mode ) 
   {
     for (int j=0; j<t_dim; ++j ) angles[j].mValue = 1.0f;
 

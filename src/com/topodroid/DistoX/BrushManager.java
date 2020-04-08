@@ -60,8 +60,8 @@ public class BrushManager
   static SymbolLineLibrary  getLineLib()  { return mLineLib; }
   static SymbolAreaLibrary  getAreaLib()  { return mAreaLib; }
 
-  static ArrayList<String> getLineNames() { return (mLineLib == null)? (new ArrayList<String>()) : mLineLib.getSymbolNames(); }
-  static ArrayList<String> getAreaNames() { return (mAreaLib == null)? (new ArrayList<String>()) : mAreaLib.getSymbolNames(); }
+  static ArrayList< String > getLineNames() { return (mLineLib == null)? (new ArrayList< String >()) : mLineLib.getSymbolNames(); }
+  static ArrayList< String > getAreaNames() { return (mAreaLib == null)? (new ArrayList< String >()) : mAreaLib.getSymbolNames(); }
 
   static int getPointIndex( Symbol point ) { return (mPointLib == null)? -1 : mPointLib.getSymbolIndex( point ); }
   static int getLineIndex( Symbol line )   { return (mLineLib  == null)? -1 : mLineLib.getSymbolIndex( line ); }

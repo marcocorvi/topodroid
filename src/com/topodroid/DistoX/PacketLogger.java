@@ -195,7 +195,7 @@ class PacketLogger extends DataSetObservable
   // @param secs    max packet age
   List< PacketData > selectPackets( long secs ) 
   {
-    ArrayList< PacketData > ret = new ArrayList< PacketData >();
+    ArrayList< PacketData > ret = new ArrayList<>();
     long time = System.currentTimeMillis() - (1000 * secs);
     Cursor cursor = myDB.query( PACKET_TABLE,
        		         new String[] { "millis", "dir", "address", "type", "data" }, // columns
@@ -219,7 +219,7 @@ class PacketLogger extends DataSetObservable
   //               64 X
   List< PacketData > selectPackets( long secs, int filter )
   {
-    ArrayList< PacketData > ret = new ArrayList< PacketData >();
+    ArrayList< PacketData > ret = new ArrayList<>();
     long time = System.currentTimeMillis() - (1000 * secs);
     Cursor cursor = myDB.query( PACKET_TABLE,
        		         new String[] { "millis", "dir", "address", "type", "data" }, // columns
@@ -241,7 +241,7 @@ class PacketLogger extends DataSetObservable
   // @param addr    packet address
   List< PacketData > selectPackets( long secs, String addr )
   {
-    ArrayList< PacketData > ret = new ArrayList< PacketData >();
+    ArrayList< PacketData > ret = new ArrayList<>();
     long time = System.currentTimeMillis() - (1000 * secs);
     Cursor cursor = myDB.query( PACKET_TABLE,
        		         new String[] { "millis", "dir", "address", "type", "data" }, // columns

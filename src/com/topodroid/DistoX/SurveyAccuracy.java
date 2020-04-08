@@ -32,7 +32,7 @@ class SurveyAccuracy
     reset(); // not necessary
   }
 
-  SurveyAccuracy( List<DBlock> blks )
+  SurveyAccuracy( List< DBlock > blks )
   {
     reset();
     setBlocks( blks );
@@ -92,7 +92,7 @@ class SurveyAccuracy
   // -----------------------------------------------------------------------------
 
   // reset the means with a list of blocks
-  private void setBlocks( List<DBlock> blks ) 
+  private void setBlocks( List< DBlock > blks ) 
   {
     if ( blks == null || blks.size() == 0 ) return;
     for ( DBlock blk : blks ) {

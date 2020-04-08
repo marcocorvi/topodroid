@@ -2263,7 +2263,7 @@ public class DrawingWindow extends ItemDrawer
   {
     // Log.v("DistoX-C", "doRestart " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     mLastLinePath = null;
-    List<DBlock> list = null;
+    List< DBlock > list = null;
     if ( PlotInfo.isSection( mType ) ) {
       list = mApp_mData.selectAllShotsAtStations( mSid, mFrom, mTo );
       // Log.v("DistoX-SPLAY", "select all shots at " + mFrom + " " + mTo + " : " + list.size() );
@@ -2291,7 +2291,7 @@ public class DrawingWindow extends ItemDrawer
     // mContinueLine = TDSetting.mContinueLine; // do not reset
     if ( TDLevel.overNormal ) setButtonContinue( mContinueLine );
 
-    List<DBlock> list = null;
+    List< DBlock > list = null;
     if ( PlotInfo.isSection( mType ) ) {
       list = mApp_mData.selectAllShotsAtStations( mSid, mFrom, mTo );
       // Log.v("DistoX-SPLAY", "select all shots at " + mFrom + " " + mTo + " : " + list.size() );
@@ -2344,7 +2344,7 @@ public class DrawingWindow extends ItemDrawer
   // }
   
   // called by doRestart, doStart, doRecover
-  private void makeSectionReferences( List<DBlock> list, float tt, int skip )
+  private void makeSectionReferences( List< DBlock > list, float tt, int skip )
   {
     // Log.v("DistoX-SPLAY", "makeSectionReferences blocks " + list.size() + " skip " + skip );
     assert( mLastLinePath == null); // not needed - guaranteed by callers
@@ -2507,7 +2507,7 @@ public class DrawingWindow extends ItemDrawer
     // mDrawingSurface.setScaleBar( mCenter.x, mCenter.y ); // (90,160) center of the drawing
   }
 
-  private boolean loadFiles( long type, List<DBlock> list )
+  private boolean loadFiles( long type, List< DBlock > list )
   {
     // Log.v("DistoX-C", "loadFiles " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     assert( mLastLinePath == null ); // guaranteed when called
@@ -2574,8 +2574,8 @@ public class DrawingWindow extends ItemDrawer
       }
       
       String parent = ( TDInstance.xsections? null : mName);
-      List<PlotInfo> xsection_plan = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotInfo.PLOT_X_SECTION,  parent );
-      List<PlotInfo> xsection_ext  = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotInfo.PLOT_XH_SECTION, parent );
+      List< PlotInfo > xsection_plan = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotInfo.PLOT_X_SECTION,  parent );
+      List< PlotInfo > xsection_ext  = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotInfo.PLOT_XH_SECTION, parent );
 
       computeReferences( mPlot2.type, mPlot2.name, mZoom, true );
       computeReferences( mPlot1.type, mPlot1.name, mZoom, false );
@@ -2811,7 +2811,7 @@ public class DrawingWindow extends ItemDrawer
     // Log.v("DistoX-C", "recomputeProfileReference " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     assert( mLastLinePath == null );
     if ( mType == PlotInfo.PLOT_EXTENDED ) { 
-      List<DBlock> list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
+      List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
       mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
       // if ( mNum != null ) { // always true
         mDrawingSurface.clearShotsAndStations( (int)mType );
@@ -5729,7 +5729,7 @@ public class DrawingWindow extends ItemDrawer
     // Log.v("DistoX-C", "doComputeRefenrences " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     // mLastLinePath = null; // not needed
     // Log.v("DistoX", "do Compute References() type " + mType );
-    List<DBlock> list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
+    List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
     mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
     // doMoveTo();
     // if ( mNum != null ) { // alwayst true
@@ -5770,7 +5770,7 @@ public class DrawingWindow extends ItemDrawer
   {
     // Log.v("DistoX-DATA", "update display() type " + mType );
     // if ( compute ) {
-      // List<DBlock> list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
+      // List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
       // mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
       // // doMoveTo();
       // computeReferences( (int)mPlot1.type, mPlot1.name 0.0f, 0.0f, mApp.mScaleFactor, false );
@@ -5784,7 +5784,7 @@ public class DrawingWindow extends ItemDrawer
       doRestart();
       updateSplays( mApp.mSplayMode );
     } else {
-      List<DBlock> list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
+      List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
       mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
       recomputeReferences( TopoDroidApp.mScaleFactor );
       // if ( mType == (int)PlotInfo.PLOT_PLAN ) {
@@ -6307,7 +6307,7 @@ public class DrawingWindow extends ItemDrawer
   //   ArrayList< DLNSite > sites = null;
   //   sites = new ArrayList<>();
 
-  //   List<DrawingPath> splays = mDrawingSurface.getSplays();
+  //   List< DrawingPath > splays = mDrawingSurface.getSplays();
   //   // float len2 = 0;
   //   for ( DrawingPath sp : splays ) {
   //     // float dx = sp.x2 - sp.x1;
@@ -6489,7 +6489,7 @@ public class DrawingWindow extends ItemDrawer
     line.addPoint( xx, yy );
   }
 
-  private void makeDlnWall( ArrayList<DLNSite> sites, float x0, float y0, float x1, float y1 /*, float len, PointF uu, PointF vv */ )
+  private void makeDlnWall( ArrayList< DLNSite > sites, float x0, float y0, float x1, float y1 /*, float len, PointF uu, PointF vv */ )
   {
     DLNWall dln_wall = new DLNWall( new Point2D(x0,y0), new Point2D(x1,y1) );
     dln_wall.compute( sites );
@@ -6534,7 +6534,7 @@ public class DrawingWindow extends ItemDrawer
   }
 
   /*
-  void makeDlnWall( ArrayList<DLNSite> sites, float x0, float y0, float x1, float y1, float len, PointF uu, PointF vv )
+  void makeDlnWall( ArrayList< DLNSite > sites, float x0, float y0, float x1, float y1, float len, PointF uu, PointF vv )
   {
     DLNWall dln_wall = new DLNWall( new Point2D(x0,y0), new Point2D(x1,y1) );
     dln_wall.compute( sites );
@@ -6560,7 +6560,7 @@ public class DrawingWindow extends ItemDrawer
   }
   */
 
-  private void makeWall( ArrayList<PointF> pts, float x0, float y0, float x1, float y1, float len, PointF uu, PointF vv )
+  private void makeWall( ArrayList< PointF > pts, float x0, float y0, float x1, float y1, float len, PointF uu, PointF vv )
   {
     if ( pts == null ) return; // safety check
     int size = pts.size();
@@ -6613,7 +6613,7 @@ public class DrawingWindow extends ItemDrawer
 
   // sort the points on the list by increasing X
   // @param pts list of points
-  private void sortPointsOnX( ArrayList<PointF> pts ) 
+  private void sortPointsOnX( ArrayList< PointF > pts ) 
   {
     int size = pts.size();
     if ( size < 2 ) return;
@@ -6833,7 +6833,7 @@ public class DrawingWindow extends ItemDrawer
 
   // void mergePlot()
   // {
-  //   List<PlotInfo> plots = mApp_mData.selectAllPlotsWithType( TDInstance.sid, TDStatus.NORMAL, mType );
+  //   List< PlotInfo > plots = mApp_mData.selectAllPlotsWithType( TDInstance.sid, TDStatus.NORMAL, mType );
   //   if ( plots.size() <= 1 ) { // nothing to merge in
   //     return;
   //   }
@@ -6882,7 +6882,7 @@ public class DrawingWindow extends ItemDrawer
       TDToast.makeWarn( R.string.split_nothing );
       return;
     }
-    List<DrawingPath> paths = mDrawingSurface.splitPlot( mSplitBorder, mSplitRemove );
+    List< DrawingPath > paths = mDrawingSurface.splitPlot( mSplitBorder, mSplitRemove );
     if ( paths.size() == 0 ) { // nothing to split
       TDToast.makeWarn( R.string.split_nothing );
       return;

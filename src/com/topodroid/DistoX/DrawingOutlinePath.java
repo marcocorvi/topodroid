@@ -16,19 +16,19 @@ package com.topodroid.DistoX;
 
 class DrawingOutlinePath
 {
-  private String mScrap;  // scrap name
+  private String mScrapName;  // scrap name
   DrawingLinePath mPath;
 
   DrawingOutlinePath( String name, DrawingLinePath path )
   {
-    mScrap = name;
+    mScrapName = name;
     mPath  = path;
   }
 
   // DEBUG
-  String getScrap() { return (mScrap != null )? mScrap : "none"; }
+  String getScrapName() { return (mScrapName != null )? mScrapName : "none"; }
 
-  boolean isScrap( String name ) { return mScrap.equals( name ); }
+  boolean isScrapName( String name ) { return mScrapName.equals( name ); }
 
 }
 

@@ -21,7 +21,7 @@ import android.os.Bundle;
 
 class ListerSetHandler extends ListerHandler
 {
-  private ArrayList<ILister> mListers;
+  private ArrayList< ILister > mListers;
 
   ListerSetHandler()
   {

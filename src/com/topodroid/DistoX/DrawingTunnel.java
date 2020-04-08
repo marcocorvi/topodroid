@@ -148,7 +148,7 @@ class DrawingTunnel extends DrawingSvgBase
         }
 
         // FIXME xsections is populated but not used
-	ArrayList< XSection > xsections = new ArrayList< XSection >();
+	ArrayList< XSection > xsections = new ArrayList<>();
 
         // Log.v("DistoXsvg", "XML commands " + plot.getCommands().size() );
         for ( ICanvasCommand cmd : plot.getCommands() ) { // POINTS

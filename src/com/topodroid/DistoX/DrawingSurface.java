@@ -409,7 +409,7 @@ class DrawingSurface extends SurfaceView
   }
 
 
-  List<DrawingPath> splitPlot( ArrayList< PointF > border, boolean remove )
+  List< DrawingPath > splitPlot( ArrayList< PointF > border, boolean remove )
   {
     return commandManager.splitPlot( border, remove );
   }
@@ -417,7 +417,7 @@ class DrawingSurface extends SurfaceView
   // void clearDrawing() { commandManager.clearDrawing(); }
 
   // return true if the station is the current active
-  private void setStationPaint( DrawingStationName st, List<CurrentStation> saved, DrawingCommandManager manager )
+  private void setStationPaint( DrawingStationName st, List< CurrentStation > saved, DrawingCommandManager manager )
   {
     if ( st == null ) return; // 20191010 should not be necessary: crash called from setCurrentStation
     String name = st.getName();
@@ -446,7 +446,7 @@ class DrawingSurface extends SurfaceView
     }
   }
 
-  void setCurrentStation( DrawingStationName st, List<CurrentStation> saved )
+  void setCurrentStation( DrawingStationName st, List< CurrentStation > saved )
   {
     DrawingStationName st0 = commandManager.getCurrentStationName();
     if ( st0 != null && st0 != st ) {
@@ -473,7 +473,7 @@ class DrawingSurface extends SurfaceView
   // @param xsections  list of survey xsections
   // @param saved      list of saved stations
   DrawingStationName addDrawingStationName ( String parent, NumStation num_st, float x, float y, boolean selectable, 
-		                             List<PlotInfo> xsections, List<CurrentStation> saved )
+		                             List< PlotInfo > xsections, List< CurrentStation > saved )
   {
     // TDLog.Log( TDLog.LOG_PLOT, "add Drawing Station Name " + num_st.name + " " + x + " " + y );
     // FIXME STATION_XSECTION
@@ -515,7 +515,7 @@ class DrawingSurface extends SurfaceView
   }
 
   // only for X-Sections autowalls
-  List<DrawingPath> getSplays() { return commandManager.getSplays(); }
+  List< DrawingPath > getSplays() { return commandManager.getSplays(); }
 
   // called by DarwingActivity::addFixedLine
   void addFixedPath( DrawingPath path, boolean splay, boolean selectable )
@@ -788,7 +788,7 @@ class DrawingSurface extends SurfaceView
   // EXPORT
 
   static void exportAsTCsx( PrintWriter pw, long type, String survey, String cave, String branch, /* String session, */
-                           DrawingCommandManager cm, List<PlotInfo> all_sections, List<PlotInfo> sections )
+                           DrawingCommandManager cm, List< PlotInfo > all_sections, List< PlotInfo > sections )
   {
     if ( PlotInfo.isProfile( type ) ) {
       // FIXME OK PROFILE to check
@@ -804,7 +804,7 @@ class DrawingSurface extends SurfaceView
 
 
   // static void exportAsCsx( PrintWriter pw, long type, String survey, String cave, String branch, /* String session, */
-  //                          DrawingCommandManager cm, List<PlotInfo> all_sections, List<PlotInfo> sections )
+  //                          DrawingCommandManager cm, List< PlotInfo > all_sections, List< PlotInfo > sections )
   // {
   //   if ( PlotInfo.isProfile( type ) ) {
   //     // FIXME OK PROFILE to check
@@ -865,7 +865,7 @@ class DrawingSurface extends SurfaceView
   void showStationSplays( String station ) { mStationSplay.showStationSplays( station ); }
   void hideStationSplays( String station ) { mStationSplay.hideStationSplays( station ); }
   
-  void setStationXSections( List<PlotInfo> xsection_plan, List<PlotInfo> xsection_ext, long type2 )
+  void setStationXSections( List< PlotInfo > xsection_plan, List< PlotInfo > xsection_ext, long type2 )
   {
     mCommandManager1.setStationXSections( xsection_plan, PlotInfo.PLOT_PLAN );
     mCommandManager2.setStationXSections( xsection_ext,  type2 );

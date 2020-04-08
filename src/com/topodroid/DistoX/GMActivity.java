@@ -179,7 +179,7 @@ public class GMActivity extends Activity
   {
     long cid = TDInstance.cid;
     if ( cid < 0 ) return -2;
-    List<CalibCBlock> list = mApp_mDData.selectAllGMs( cid, 0, false ); // false: skip negative-grp
+    List< CalibCBlock > list = mApp_mDData.selectAllGMs( cid, 0, false ); // false: skip negative-grp
     if ( list.size() < 16 ) {
       return -1;
     }
@@ -199,7 +199,7 @@ public class GMActivity extends Activity
   }
 
 
-  private int doComputeCalib( List<CalibCBlock> list )
+  private int doComputeCalib( List< CalibCBlock > list )
   {    
     long cid = TDInstance.cid;
     switch ( mAlgo ) {
@@ -262,8 +262,8 @@ public class GMActivity extends Activity
     if ( cid < 0 ) {
       return;
     }
-    List<CalibCBlock> list0 = mApp_mDData.selectAllGMs( TDInstance.cid, 0, false ); // false: skip negative-grp
-    List<CalibCBlock> list1 = mApp_mDData.selectAllGMs( cid, 0, false );
+    List< CalibCBlock > list0 = mApp_mDData.selectAllGMs( TDInstance.cid, 0, false ); // false: skip negative-grp
+    List< CalibCBlock > list1 = mApp_mDData.selectAllGMs( cid, 0, false );
     int size0 = list0.size();
     int size1 = list1.size();
     if ( size0 < 16 || size1 < 16 ) {
@@ -360,7 +360,7 @@ public class GMActivity extends Activity
    * @param  errors   [output] errors 
    * @return number of errors in the array
    */
-  private int computeErrorStats( CalibAlgo calib, List<CalibCBlock> list, float[] errors )
+  private int computeErrorStats( CalibAlgo calib, List< CalibCBlock > list, float[] errors )
   {
     int ke = 0; // number of errors
     for ( int c=0; c<errors.length; ++c ) errors[c] = -1;
@@ -499,7 +499,7 @@ public class GMActivity extends Activity
     // Log.v("DistoX", "Compute CID " + cid + " from gid " + start_id );
     if ( cid < 0 ) return -2;
     float thr = TDMath.cosd( TDSetting.mGroupDistance );
-    List<CalibCBlock> list = mApp_mDData.selectAllGMs( cid, 0, true ); // true: negative-grp too
+    List< CalibCBlock > list = mApp_mDData.selectAllGMs( cid, 0, true ); // true: negative-grp too
     if ( list.size() < 4 ) {
       return -1;
     }
@@ -618,14 +618,14 @@ public class GMActivity extends Activity
     resetTitle( );
     mDataAdapter.clear();
     if ( mApp_mDData != null && TDInstance.cid >= 0 ) {
-      List<CalibCBlock> list = mApp_mDData.selectAllGMs( TDInstance.cid, mBlkStatus, true ); // true: include negative-grp
+      List< CalibCBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, mBlkStatus, true ); // true: include negative-grp
       // Log.v( TopoDroidApp.TAG, "update Display GMs " + list.size() );
       updateGMList( list );
       setTitle( mCalibName );
     }
   }
 
-  private void updateGMList( List<CalibCBlock> list )
+  private void updateGMList( List< CalibCBlock > list )
   {
     int n_saturated = 0;
     if ( list.size() == 0 ) {
@@ -752,7 +752,7 @@ public class GMActivity extends Activity
     mApp = (TopoDroidApp) getApplication();
     mApp_mDData = TopoDroidApp.mDData;
 
-    mDataAdapter  = new CalibCBlockAdapter( this, R.layout.row, new ArrayList<CalibCBlock>() );
+    mDataAdapter  = new CalibCBlockAdapter( this, R.layout.row, new ArrayList< CalibCBlock >() );
 
     mList = (ListView) findViewById(R.id.list);
     mList.setAdapter( mDataAdapter );
@@ -1116,7 +1116,7 @@ public class GMActivity extends Activity
 
   // public int downloadDataBatch()
   // {
-  //   ArrayList<ILister> listers = new ArrayList<>();
+  //   ArrayList< ILister > listers = new ArrayList<>();
   //   listers.add( this );
   //   return mApp.downloadDataBatch( this );
   // }

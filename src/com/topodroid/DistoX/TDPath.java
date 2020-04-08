@@ -654,7 +654,7 @@ public class TDPath
   //   }
   // } 
 
-  // static void deleteShpDirs( String survey, List<String> plots ) 
+  // static void deleteShpDirs( String survey, List< String > plots ) 
   // {
   //   deleteShpFiles( survey );
   //   if ( plots != null ) {
@@ -683,7 +683,7 @@ public class TDPath
     }
   }
 
-  static void deleteSurveyPlotFiles( String survey, List<PlotInfo> plots )
+  static void deleteSurveyPlotFiles( String survey, List< PlotInfo > plots )
   {
     for ( PlotInfo p : plots ) {
       // String filename = getSurveyPlotTh2File( survey, p.name );

@@ -119,7 +119,7 @@ class Archiver
     }
   }
 
-  boolean compressFiles( String zipname, List<File> files )
+  boolean compressFiles( String zipname, List< File > files )
   {
     ZipOutputStream zos = null;
     boolean ret = true;

@@ -156,7 +156,7 @@ public class PhotoActivity extends Activity
     setContentView(R.layout.main_photo);
     // mApp = (TopoDroidApp) getApplication();
     mApp_mData = TopoDroidApp.mData;
-    mDataAdapter = new PhotoAdapter( this, R.layout.row, new ArrayList<PhotoInfo>() );
+    mDataAdapter = new PhotoAdapter( this, R.layout.row, new ArrayList< PhotoInfo >() );
 
     mList = (ListView) findViewById(R.id.list);
     mList.setAdapter( mDataAdapter );

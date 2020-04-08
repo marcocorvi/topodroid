@@ -85,7 +85,7 @@ class DeviceSelectDialog extends MyDialog
     // if ( TDLevel.overTester ) { // FIXME VirtualDistoX
     //   array_adapter.add( "X000" );
     // }
-    ArrayList<Device> devices = TopoDroidApp.mDData.getDevices();
+    ArrayList< Device > devices = TopoDroidApp.mDData.getDevices();
     for ( Device device : devices ) {
       // String addr  = device.mAddress;
       // String model = device.mName;

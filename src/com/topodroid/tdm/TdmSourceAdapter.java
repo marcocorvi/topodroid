@@ -71,7 +71,7 @@ class TdmSourceAdapter extends ArrayAdapter< TdmSource >
    */
   ArrayList< String > getCheckedSources()
   {
-    ArrayList< String > ret = new ArrayList< String >();
+    ArrayList< String > ret = new ArrayList<>();
     for ( TdmSource source : mItems ) {
       if ( source.isChecked() ) {
         ret.add( source.getSurveyName() );

@@ -178,7 +178,7 @@ public class PlotReloadWindow extends ItemDrawer
     }
   }
 
-  private ArrayList<PlotBackup> mBackups;
+  private ArrayList< PlotBackup > mBackups;
   private int mPos = 0;
     
   // @parm filename    survey-1p without ".tdr"

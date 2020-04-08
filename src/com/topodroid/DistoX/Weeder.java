@@ -120,9 +120,9 @@ class Weeder
 
   // max_dist maximum distance from segment for point suppression
   // max_len  maximum section length
-  ArrayList<Point2D> simplify( float max_dist, float max_len )
+  ArrayList< Point2D > simplify( float max_dist, float max_len )
   {
-    ArrayList<Point2D> ret = new ArrayList<Point2D>();
+    ArrayList< Point2D > ret = new ArrayList<>();
     if ( mPoints.size() < 4 ) {
       for ( WeedPoint wp : mPoints ) ret.add( new Point2D( wp.x, wp.y ) );
       return ret;
@@ -158,7 +158,7 @@ class Weeder
   }
   
   // return Index of fartest point
-  private WeedIndex fartestPoint( List<WeedPoint> pts, WeedIndex i1, WeedIndex i2, float thr )
+  private WeedIndex fartestPoint( List< WeedPoint > pts, WeedIndex i1, WeedIndex i2, float thr )
   {
     int k1 = i1.k;
     int k2 = i2.k;
@@ -174,7 +174,7 @@ class Weeder
     return new WeedIndex( pts.get(k0), k0, i1, i2 );
   }
   
-  private WeedIndex initSections( List<WeedPoint> pts, float max_len )
+  private WeedIndex initSections( List< WeedPoint > pts, float max_len )
   {
     initLineAbscissa( pts );
   
@@ -215,7 +215,7 @@ class Weeder
     return idx0;
   }
   
-  private void simplifySection( List<WeedPoint> pts, WeedIndex i1, WeedIndex i2, float thr )
+  private void simplifySection( List< WeedPoint > pts, WeedIndex i1, WeedIndex i2, float thr )
   {
     if ( i1.k + 1 >= i2.k ) return;
     while ( i1 != i2 ) {

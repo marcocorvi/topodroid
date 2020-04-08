@@ -75,7 +75,7 @@ public class BezierCurve
       first, last;  Indices defining region	
       u;		  Parameterization of points	
   */
-  float computeMaxError( ArrayList<Point2D> d, int first, int last, float[] u )
+  float computeMaxError( ArrayList< Point2D > d, int first, int last, float[] u )
   {
     splitIndex = (last - first + 1)/2;
     float maxDist = 0.0f;
@@ -98,7 +98,7 @@ public class BezierCurve
    * @param first, last	Indices defining region
    * @param u           Current parameter values
    */
-  void reparameterize( ArrayList<Point2D> d, int first, int last, float[] u )
+  void reparameterize( ArrayList< Point2D > d, int first, int last, float[] u )
   {
     // int nPts = last-first+1;
     // float[] uPrime = new float[ nPts ]; /*  New parameter values	*/

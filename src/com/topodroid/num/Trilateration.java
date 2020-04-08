@@ -20,8 +20,8 @@ import java.util.ArrayList;
 
 class Trilateration
 {
-  ArrayList<TriLeg> legs;
-  private ArrayList<TriPoint> points;
+  ArrayList< TriLeg > legs;
+  private ArrayList< TriPoint > points;
   private double error;
   private int iter;
 

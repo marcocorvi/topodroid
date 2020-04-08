@@ -276,7 +276,7 @@ public class TdmConfigActivity extends Activity
   // ------------------------ ADD ------------------------------
   // called by TdmSourcesDialog with a list of sources filenames
   //
-  void addSources( List<String> surveynames )
+  void addSources( List< String > surveynames )
   {
     for ( String name : surveynames ) {
       // Log.v("DistoX-TdManager", "add  source " + name );
@@ -326,7 +326,7 @@ public class TdmConfigActivity extends Activity
       new DialogInterface.OnClickListener() {
 	@Override
 	public void onClick( DialogInterface dialog, int btn ) {
-          ArrayList< TdmInput > inputs = new ArrayList< TdmInput >();
+          ArrayList< TdmInput > inputs = new ArrayList<>();
           final Iterator it = mTdmConfig.mInputs.iterator();
           while ( it.hasNext() ) {
             TdmInput input = (TdmInput) it.next();

@@ -74,7 +74,7 @@ class DrawingStationDialog extends MyDialog
     // private boolean mGlobalXSections; // unused
     private float mBearing;
     private float mClino;
-    private List<DBlock> mBlk;
+    private List< DBlock > mBlk;
 
     // cannot use disabled compass, otherwise there is no way to choose x-section at junction station
     // private boolean sensorCheck; // whether android sensor is enabled
@@ -83,7 +83,7 @@ class DrawingStationDialog extends MyDialog
     DrawingStationDialog( Context context, DrawingWindow parent, TopoDroidApp app,
                           DrawingStationName station, DrawingStationPath path,
                           boolean is_barrier, boolean is_hidden, // boolean global_xsections,
-                          List<DBlock> blk )
+                          List< DBlock > blk )
     {
       super( context, R.string.DrawingStationDialog );
       mParent   = parent;

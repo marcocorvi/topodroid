@@ -204,9 +204,9 @@ class SymbolLineLibrary extends SymbolLibrary
     makeEnabledListFromStrings( palette.mPaletteLine, clear ); 
   }
 
-  // ArrayList<String> getSymbolNamesNoSection()
+  // ArrayList< String > getSymbolNamesNoSection()
   // {
-  //   ArrayList<String> ret = new ArrayList<>();
+  //   ArrayList< String > ret = new ArrayList<>();
   //   for ( int k = 0; k < mSymbols.size(); ++ k ) {
   //     if ( k != mTypeSection ) ret.add( s.getName() );
   //   }

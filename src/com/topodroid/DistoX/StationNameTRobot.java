@@ -38,7 +38,7 @@ class StationNameTRobot extends StationName
     return Integer.toString( sr ) + "." + Integer.toString( pt );
   }
 
-  private static int getMaxTRobotSeries( List<DBlock> list )
+  private static int getMaxTRobotSeries( List< DBlock > list )
   {
     int ret = 1;
     for ( DBlock blk : list ) {
@@ -68,10 +68,10 @@ class StationNameTRobot extends StationName
   // WARNING TopoRobot renumbering consider all the shots in a single series
   // @param list list of dblock to assign
   @Override
-  boolean assignStationsAfter( DBlock blk0, List<DBlock> list, Set<String> sts )
+  boolean assignStationsAfter( DBlock blk0, List< DBlock > list, Set<String> sts )
   {
     boolean ret = false;
-    ArrayList<DBlock> unassigned = new ArrayList<DBlock>();
+    ArrayList< DBlock > unassigned = new ArrayList<>();
     // Log.v("DistoX-SN", "assign stations after - TRobot");
 
     DBlock prev = blk0;
@@ -126,7 +126,7 @@ class StationNameTRobot extends StationName
   }
 
   @Override
-  boolean assignStations( List<DBlock> list, Set<String> sts )
+  boolean assignStations( List< DBlock > list, Set<String> sts )
   { 
     boolean ret = false;
     int series = getMaxTRobotSeries( list );

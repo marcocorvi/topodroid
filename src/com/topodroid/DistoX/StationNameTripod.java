@@ -35,10 +35,10 @@ class StationNameTripod extends StationName
   // ----------------------------------------------------------------
   // @param list list of dblock to assign
   @Override
-  boolean assignStationsAfter( DBlock blk0, List<DBlock> list, Set<String> sts )
+  boolean assignStationsAfter( DBlock blk0, List< DBlock > list, Set<String> sts )
   { 
     boolean ret = false;
-    ArrayList<DBlock> unassigned = new ArrayList<DBlock>();
+    ArrayList< DBlock > unassigned = new ArrayList<>();
 
     // Log.v("DistoX-SN", "assign stations after - tripod");
     // Log.v("DistoX", "assign stations after.  size " + list.size() );
@@ -127,7 +127,7 @@ class StationNameTripod extends StationName
   }
 
   @Override
-  boolean assignStations( List<DBlock> list, Set<String> sts )
+  boolean assignStations( List< DBlock > list, Set<String> sts )
   { 
     boolean ret = false;
     DBlock prev = null;

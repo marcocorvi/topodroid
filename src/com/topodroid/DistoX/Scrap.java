@@ -30,9 +30,9 @@ import android.graphics.PointF;
 
 class Scrap
 {
-  final List<ICanvasCommand>   mCurrentStack;
-  List<DrawingStationPath>     mUserStations;  // user-inserted stations
-  private List<ICanvasCommand> mRedoStack;
+  final List< ICanvasCommand >   mCurrentStack;
+  List< DrawingStationPath >     mUserStations;  // user-inserted stations
+  private List< ICanvasCommand > mRedoStack;
   private Selection mSelection;
   private SelectionSet mSelected;
   private int mMultiselectionType = -1;  // current multiselection type (DRAWING_PATH_POINT / LINE / AREA
@@ -45,12 +45,12 @@ class Scrap
 
   Scrap( int idx, String plot_name ) 
   {
-    mCurrentStack = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
-    mUserStations = Collections.synchronizedList(new ArrayList<DrawingStationPath>());
-    mRedoStack    = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
+    mCurrentStack = Collections.synchronizedList(new ArrayList< ICanvasCommand >());
+    mUserStations = Collections.synchronizedList(new ArrayList< DrawingStationPath >());
+    mRedoStack    = Collections.synchronizedList(new ArrayList< ICanvasCommand >());
     mSelection    = new Selection();
     mSelected     = new SelectionSet();
-    mMultiselected = new ArrayList<DrawingPath>();
+    mMultiselected = new ArrayList< DrawingPath >();
     mScrapIdx     = idx;
     mBBox = null;
     mMaxAreaIndex = 0;
@@ -217,7 +217,7 @@ class Scrap
     }
   }
 
-  void addCommand( ArrayList<DrawingPath> paths )
+  void addCommand( ArrayList< DrawingPath > paths )
   {
     synchronized( TDPath.mCommandsLock ) {
       for ( ICanvasCommand cmd : mCurrentStack ) {
@@ -259,7 +259,7 @@ class Scrap
     synchronized( TDPath.mCommandsLock ) {
       int index = BrushManager.getPointSectionIndex();
       if ( index >= 0 ) {
-        ArrayList<DrawingPath> todo = new ArrayList<>();
+        ArrayList< DrawingPath > todo = new ArrayList<>();
         for ( ICanvasCommand c : mCurrentStack ) {
           if ( c.commandType() == 0 ) {
             DrawingPath p = (DrawingPath)c;
@@ -644,9 +644,9 @@ class Scrap
     }
   }
 
-  List<DrawingPath> splitPlot( ArrayList< PointF > border, boolean remove ) 
+  List< DrawingPath > splitPlot( ArrayList< PointF > border, boolean remove ) 
   {
-    ArrayList<DrawingPath> paths = new ArrayList<>();
+    ArrayList< DrawingPath > paths = new ArrayList<>();
     synchronized( TDPath.mCommandsLock ) {
       for ( ICanvasCommand c : mCurrentStack ) {
         if ( c.commandType() == 0 ) {
@@ -669,7 +669,7 @@ class Scrap
   }
 
   // USER STATION ---------------------------------------------------------
-  void addUserStationsToList( ArrayList<DrawingStationPath> ret )
+  void addUserStationsToList( ArrayList< DrawingStationPath > ret )
   {
     synchronized( TDPath.mStationsLock ) {
       // for ( DrawingStationPath st : mUserStations ) ret.add( st );
@@ -1140,7 +1140,7 @@ class Scrap
   //       -1 no hot item
   //       -2 not line
   //       -3 no splay
-  int snapHotItemToNearestSplays( float dthr, DrawingStationSplay station_splay, List<DrawingPath> splays_paths, boolean splays, boolean latest )
+  int snapHotItemToNearestSplays( float dthr, DrawingStationSplay station_splay, List< DrawingPath > splays_paths, boolean splays, boolean latest )
   {
     SelectionPoint sp = mSelected.mHotItem;
     if ( sp == null ) return -1;
@@ -1697,7 +1697,7 @@ class Scrap
   }
 
   // void shiftHotItem( float dx, float dy, float range ) 
-  void shiftHotItem( float dx, float dy, List<DrawingOutlinePath> xsections )
+  void shiftHotItem( float dx, float dy, List< DrawingOutlinePath > xsections )
   { 
     synchronized( TDPath.mSelectionLock ) {
       // SelectionPoint sp = mSelected.shiftHotItem( dx, dy, range );
@@ -1712,7 +1712,7 @@ class Scrap
               // Log.v("DistoX-SHIFT", "Shift " + scrap_name + " X-section " + xsections.size() );
               synchronized( TDPath.mXSectionsLock ) {
                 for ( DrawingOutlinePath xsection : xsections ) {
-                  if ( xsection.isScrap( scrap_name ) ) {
+                  if ( xsection.isScrapName( scrap_name ) ) {
                     xsection.mPath.shiftBy( dx, dy );
                     // break;
                   }
@@ -1797,7 +1797,7 @@ class Scrap
     return ret / 2;
   }
 
-  void linkSections( List<DrawingStationName> stations )
+  void linkSections( List< DrawingStationName > stations )
   {
     synchronized( TDPath.mCommandsLock ) {
       for ( ICanvasCommand cmd : mCurrentStack ) {
@@ -2421,7 +2421,7 @@ class Scrap
   }
   // end PATH_MULTISELECT ACTIONS ------------------------------------------------
 
-  static private boolean isInside( float x, float y, ArrayList<PointF> b )
+  static private boolean isInside( float x, float y, ArrayList< PointF > b )
   {
     int n = b.size();
     PointF p = b.get( n-1 );

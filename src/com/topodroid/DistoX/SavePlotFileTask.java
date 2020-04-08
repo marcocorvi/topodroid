@@ -42,7 +42,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   private final TDNum mNum;
   // private final DrawingUtil mUtil;
   private final DrawingCommandManager mManager;
-  private List<DrawingPath> mPaths;
+  private List< DrawingPath > mPaths;
   private String mFullName; // file fullname, or shp basepath
   private int mType;        // plot type
   private int mProjDir;
@@ -85,7 +85,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
                     // TopoDroidApp app,
 		    TDNum num,
 		    // DrawingUtil util,
-		    List<DrawingPath> paths,
+		    List< DrawingPath > paths,
                     String fullname, long type, int proj_dir )
   {
      mFormat   = context.getResources().getString(R.string.saved_file_2);

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 class ListerSet implements ILister
 {
-  private ArrayList<ILister> mLister;
+  private ArrayList< ILister > mLister;
 
   ListerSet()
   {

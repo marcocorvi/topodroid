@@ -29,25 +29,25 @@ class ProjectionCommandManager
 
   private RectF mBBox = null;
 
-  // private List<DrawingPath>    mGridStack1;
-  // private List<DrawingPath>    mGridStack10;
-  // private List<DrawingPath>    mGridStack100;
+  // private List< DrawingPath >    mGridStack1;
+  // private List< DrawingPath >    mGridStack10;
+  // private List< DrawingPath >    mGridStack100;
 
-  private final List<DrawingPath>        mLegsStack;
-  private final List<DrawingPath>        mSplaysStack;
-  private final List<DrawingStationName> mStations;  // survey stations
+  private final List< DrawingPath >        mLegsStack;
+  private final List< DrawingPath >        mSplaysStack;
+  private final List< DrawingStationName > mStations;  // survey stations
 
   private boolean mDisplayPoints;
 
   private Matrix mMatrix;
   private float  mScale; // current zoom: value of 1 pl in scene space
 
-  List<DrawingPath>        getLegs()         { return mLegsStack;    }
-  List<DrawingPath>        getSplays()       { return mSplaysStack;  }
-  List<DrawingStationName> getStations()     { return mStations;     } 
+  List< DrawingPath >        getLegs()         { return mLegsStack;    }
+  List< DrawingPath >        getSplays()       { return mSplaysStack;  }
+  List< DrawingStationName > getStations()     { return mStations;     } 
 
 
-  // private void flipXAxes( List<DrawingPath> paths )
+  // private void flipXAxes( List< DrawingPath > paths )
   // {
   //   final float z = 1/mScale;
   //   final Iterator i1 = paths.iterator();
@@ -78,12 +78,12 @@ class ProjectionCommandManager
 
   ProjectionCommandManager()
   {
-    // mGridStack1   = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    // mGridStack10  = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    // mGridStack100 = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    mLegsStack    = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    mSplaysStack  = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    mStations     = Collections.synchronizedList(new ArrayList<DrawingStationName>());
+    // mGridStack1   = Collections.synchronizedList(new ArrayList< DrawingPath >());
+    // mGridStack10  = Collections.synchronizedList(new ArrayList< DrawingPath >());
+    // mGridStack100 = Collections.synchronizedList(new ArrayList< DrawingPath >());
+    mLegsStack    = Collections.synchronizedList(new ArrayList< DrawingPath >());
+    mSplaysStack  = Collections.synchronizedList(new ArrayList< DrawingPath >());
+    mStations     = Collections.synchronizedList(new ArrayList< DrawingStationName >());
     mMatrix = new Matrix(); // identity
   }
 

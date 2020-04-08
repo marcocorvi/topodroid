@@ -27,7 +27,7 @@ class MyStringAdapter extends BaseAdapter
 {
   private final Context mContext;
   private int     mResId;
-  private ArrayList<String> mStr;
+  private ArrayList< String > mStr;
 
   MyStringAdapter( Context context, int res_id )
   {

@@ -35,9 +35,9 @@ public class TdmViewCommand
   TdmSurvey  mSurvey;
   TdmViewStation mSelected;
   TdmViewStation mEquateStation;
-  List<TdmViewPath>    mFixedStack;
-  ArrayList<TdmViewStation> mStationsArray;
-  List<TdmViewStation> mStations;
+  List< TdmViewPath >    mFixedStack;
+  ArrayList< TdmViewStation > mStationsArray;
+  List< TdmViewStation > mStations;
   Matrix mMatrix;
   Paint mPaint;
   Paint mFillPaint;

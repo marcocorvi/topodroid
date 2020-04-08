@@ -82,7 +82,7 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
           filename = TDExporter.exportSurveyAsDat( mSid, mData, mInfo, TDPath.getSurveyDatFile( mSurvey ) );
           break;
         case TDConst.DISTOX_EXPORT_DXF:
-          List<DBlock> list = mData.selectAllShots( mSid, TDStatus.NORMAL );
+          List< DBlock > list = mData.selectAllShots( mSid, TDStatus.NORMAL );
           if ( list.size() > 0 ) {
             DBlock blk = list.get( 0 );
             // Log.v( TopoDroidApp.TAG, "DISTOX_EXPORT_DXF from " + blk.mFrom );

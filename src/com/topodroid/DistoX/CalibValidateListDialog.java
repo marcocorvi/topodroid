@@ -42,10 +42,10 @@ class CalibValidateListDialog extends MyDialog
   // private ArrayAdapter<String> mArrayAdapter;
 
   // private ListView mList;
-  private final List<String> mCalibs;
+  private final List< String > mCalibs;
   private Button mBtnCancel;
 
-  CalibValidateListDialog( Context context, GMActivity parent, List<String> calibs )
+  CalibValidateListDialog( Context context, GMActivity parent, List< String > calibs )
   {
     super( context, R.string.CalibValidateListDialog );
     mParent  = parent;

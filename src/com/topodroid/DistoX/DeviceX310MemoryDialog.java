@@ -75,7 +75,7 @@ class DeviceX310MemoryDialog extends MyDialog
     // setText( mTVshead, mTVstail, ht );
   }
 
-  public void updateList( ArrayList<MemoryOctet> memory )
+  public void updateList( ArrayList< MemoryOctet > memory )
   {
     mArrayAdapter.clear();
     for ( MemoryOctet m : memory ) mArrayAdapter.add( m.toString() );

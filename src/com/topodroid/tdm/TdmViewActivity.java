@@ -602,7 +602,7 @@ public class TdmViewActivity extends Activity
     updateViewEquates();
   }
 
-  void makeEquate( List<String> sts )
+  void makeEquate( List< String > sts )
   {
     if ( sts.size() <= 1 ) {
       TDToast.make( R.string.equate_no_stations );

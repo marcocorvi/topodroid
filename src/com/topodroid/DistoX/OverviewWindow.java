@@ -369,7 +369,7 @@ public class OverviewWindow extends ItemDrawer
     // private ArrayAdapter< String > mMenuAdapter;
     private boolean onMenu;
 
-    private List<DBlock> mBlockList = null;
+    private List< DBlock > mBlockList = null;
   
     public float zoom() { return mZoom; }
 
@@ -578,8 +578,8 @@ public class OverviewWindow extends ItemDrawer
 
     private void loadFiles( long type )
     {
-      // List<PlotInfo> plots = mApp.mData.selectAllPlotsWithType( mSid, TDStatus.NORMAL, type, landscape );
-      List<PlotInfo> plots = TopoDroidApp.mData.selectAllPlotsWithType( mSid, TDStatus.NORMAL, type );
+      // List< PlotInfo > plots = mApp.mData.selectAllPlotsWithType( mSid, TDStatus.NORMAL, type, landscape );
+      List< PlotInfo > plots = TopoDroidApp.mData.selectAllPlotsWithType( mSid, TDStatus.NORMAL, type );
 
       // Log.v( "DistoX", "Overview plots " + plots.size() );
 

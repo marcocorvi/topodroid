@@ -29,14 +29,14 @@ class Selection
 
   Selection( )
   {
-    mPoints  = new ArrayList<>();
-    mBuckets = new ArrayList<>();
+    mPoints  = new ArrayList< SelectionPoint >();
+    mBuckets = new ArrayList< SelectionBucket >();
   }
 
   // this is clearReferencePoints
   // void removeShotsAndStations()
   // {
-  //   ArrayList< SelectionPoint > toRemove = new ArrayList<SelectionPoint>();
+  //   ArrayList< SelectionPoint > toRemove = new ArrayList<>();
   //   for ( SelectionPoint sp : mPoints ) {
   //     int t = sp.type();
   //     if ( t == DrawingPath.DRAWING_PATH_FIXED

@@ -37,14 +37,14 @@ import java.util.List;
 // This class handles shots: les and splays
 public class ShpSegment extends ShpObject
 {
-  public ShpSegment( String path, List<File> files ) // throws IOException
+  public ShpSegment( String path, List< File > files ) // throws IOException
   {
     super( SHP_POLYLINE, path, files );
   }
 
   // @param x0 x-offset
   // @param y0 y-offset
-  public boolean writeSegments( List<DrawingPath> sgms, float x0, float y0, float xscale, float yscale ) throws IOException
+  public boolean writeSegments( List< DrawingPath > sgms, float x0, float y0, float xscale, float yscale ) throws IOException
   {
     int nrs = ( sgms != null )? sgms.size() : 0;
     if ( nrs == 0 ) return false;
@@ -142,7 +142,7 @@ public class ShpSegment extends ShpObject
   // @Override 
   protected int getShpRecordLength( ) { return 28 + 2 * 8; }
 
-  private void setBoundsLines( List<DrawingPath> sgms, float x0, float y0, float xscale, float yscale )
+  private void setBoundsLines( List< DrawingPath > sgms, float x0, float y0, float xscale, float yscale )
   {
     int nrs = ( sgms != null )? sgms.size() : 0;
     if ( nrs > 0 ) {

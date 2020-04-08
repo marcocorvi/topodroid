@@ -349,7 +349,7 @@ public class ShotWindow extends Activity
   {
     // highlightBlocks( null );
     if ( mApp_mData != null && TDInstance.sid >= 0 ) {
-      List<DBlock> list = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.NORMAL );
+      List< DBlock > list = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.NORMAL );
       mSurveyAccuracy = new SurveyAccuracy( list ); 
       // if ( list.size() > 4 ) SurveyAccuracy.setBlocks( list );
 
@@ -437,7 +437,7 @@ public class ShotWindow extends Activity
   boolean getShowIds() { return mDataAdapter.show_ids; }
 
   // called only by updateDisplay
-  private void updateShotList( List<DBlock> list, List< PhotoInfo > photos )
+  private void updateShotList( List< DBlock > list, List< PhotoInfo > photos )
   {
     // TDLog.Log( TDLog.LOG_SHOT, "updateShotList shots " + list.size() + " photos " + photos.size() );
     mDataAdapter.clear();
@@ -451,7 +451,7 @@ public class ShotWindow extends Activity
   }
 
   // called only by updateShotList
-  private void processShotList( List<DBlock> list )
+  private void processShotList( List< DBlock > list )
   {
     // Log.v("DistoX", "process shot list");
     DBlock prev = null;
@@ -692,7 +692,7 @@ public class ShotWindow extends Activity
   }
 
   // from MultiselectDialog
-  void updateSplaysLegType( List<DBlock> blks, int leg_type )
+  void updateSplaysLegType( List< DBlock > blks, int leg_type )
   {
     for ( DBlock blk : blks ) {
       int block_type = DBlock.blockOfSplayLegType[ leg_type ];
@@ -1016,7 +1016,7 @@ public class ShotWindow extends Activity
     // rv.setLayoutManager( lm );
 
     mShowSplay   = new ArrayList<>();
-    mDataAdapter = new DBlockAdapter( this, this, R.layout.dblock_row, new ArrayList<DBlock>() );
+    mDataAdapter = new DBlockAdapter( this, this, R.layout.dblock_row, new ArrayList< DBlock >() );
 
     mListView = (MyHorizontalListView) findViewById(R.id.listview);
     mListView.setEmptyPlacholder( true );
@@ -1098,7 +1098,7 @@ public class ShotWindow extends Activity
 
     // restoreInstanceFromData();
     // mLastExtend = mApp_mData.getLastShotId( TDInstance.sid );
-    // List<DBlock> list = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.NORMAL );
+    // List< DBlock > list = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.NORMAL );
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
@@ -1419,7 +1419,7 @@ public class ShotWindow extends Activity
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // SAVED STATIONS
         if ( TDLevel.overAdvanced ) {
           (new CurrentStationDialog( mActivity, this, mApp, mApp.getCurrentOrLastStation() )).show();
-          // ArrayList<DBlock> list = numberSplays(); // SPLAYS splays numbering no longer active
+          // ArrayList< DBlock > list = numberSplays(); // SPLAYS splays numbering no longer active
           // if ( list != null && list.size() > 0 ) {
           //   updateDisplay( );
           // }
@@ -1590,7 +1590,7 @@ public class ShotWindow extends Activity
         break;
       }
     }
-    List<DBlock> list = mApp_mData.selectShotsAfterId( TDInstance.sid, id , 0 );
+    List< DBlock > list = mApp_mData.selectShotsAfterId( TDInstance.sid, id , 0 );
     for ( DBlock b : list ) {
       if ( b.isTypeBlank() ) {
         // Log.v( TopoDroidApp.TAG, "BLANK " + b.mLength + " " + b.mBearing + " " + b.mClino );
@@ -1762,7 +1762,7 @@ public class ShotWindow extends Activity
   /* FIXME_HIGHLIGHT
   // open the sketch and highlight block in the sketch
   // called by MultishotDialog
-  void highlightBlocks( List<DBlock> blks )  // HIGHLIGHT
+  void highlightBlocks( List< DBlock > blks )  // HIGHLIGHT
   {
     mApp.setHighlighted( blks );
     // Log.v("DistoX", "highlight blocks [0] " + ( (blks==null)? "null" : blks.size() ) );
@@ -1777,7 +1777,7 @@ public class ShotWindow extends Activity
 
   // open the sketch and highlight block in the sketch
   // called by MultishotDialog
-  void colorBlocks( List<DBlock> blks, int color )  // HIGHLIGHT
+  void colorBlocks( List< DBlock > blks, int color )  // HIGHLIGHT
   {
     // Log.v("DistoX", "highlight blocks [0] " + ( (blks==null)? "null" : blks.size() ) );
     if ( blks == null || blks.size() == 0 ) return;
@@ -1802,7 +1802,7 @@ public class ShotWindow extends Activity
   // @param from    FROM station to assign to first block
   // @param to      TO station to assign to first block
   // no need to synchronize
-  void renumberBlocks( List<DBlock> blks, String from, String to )  // RENUMBER SELECTED BLOCKS
+  void renumberBlocks( List< DBlock > blks, String from, String to )  // RENUMBER SELECTED BLOCKS
   {
     DBlock blk = blks.get(0); // blk is guaranteed to exists
     if ( ! ( from.equals(blk.mFrom) && to.equals(blk.mTo) ) ) {
@@ -1826,7 +1826,7 @@ public class ShotWindow extends Activity
     clearMultiSelect( );
   }
 
-  void swapBlocksName( List<DBlock> blks )  // SWAP SELECTED BLOCKS STATIONS
+  void swapBlocksName( List< DBlock > blks )  // SWAP SELECTED BLOCKS STATIONS
   {
     // Log.v("DistoX", "swap list size " + blks.size() );
     for ( DBlock blk : blks ) {
@@ -1861,7 +1861,7 @@ public class ShotWindow extends Activity
    *  The dip angle is measured from the horizontal plane
    *  The strike from the north
    */
-  String computeBedding( List<DBlock> blks ) // BEDDING
+  String computeBedding( List< DBlock > blks ) // BEDDING
   {
     String strike_dip = getResources().getString(R.string.few_data);
     if ( blks != null && blks.size() > 2 ) {

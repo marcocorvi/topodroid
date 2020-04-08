@@ -89,7 +89,7 @@ public class DistoXStationName
     return n;
   }
 
-  static String incrementName( String name, List<DBlock> list )
+  static String incrementName( String name, List< DBlock > list )
   {
     String n = name;
     do {
@@ -98,7 +98,7 @@ public class DistoXStationName
     return n;
   }
 
-  static String incrementName( String name, ArrayList<String> sts )
+  static String incrementName( String name, ArrayList< String > sts )
   {
     String n = name;
     do {
@@ -147,7 +147,7 @@ public class DistoXStationName
   }
 
   // used by SketchNewShotDialog
-  static private boolean listHasName( List<DBlock> list, String name )
+  static private boolean listHasName( List< DBlock > list, String name )
   {
     if ( name != null ) {
       for ( DBlock b : list ) {

@@ -75,7 +75,7 @@ class TDExporter
   private static final String   therion_flags_surface       = "   flags surface\n";
   private static final String   therion_flags_not_surface   = "   flags not surface\n";
 
-  private static void checkShotsClino( List<DBlock> list )
+  private static void checkShotsClino( List< DBlock > list )
   {
     if ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING ) {
       for ( DBlock blk : list ) {
@@ -248,8 +248,8 @@ class TDExporter
     //   }
     // }
 
-    List<DBlock> dlist = data.selectAllExportShots( sid, TDStatus.NORMAL );
-    List<DBlock> clist = data.selectAllExportShots( sid, TDStatus.CHECK );
+    List< DBlock > dlist = data.selectAllExportShots( sid, TDStatus.NORMAL );
+    List< DBlock > clist = data.selectAllExportShots( sid, TDStatus.CHECK );
     checkShotsClino( dlist );
 
     List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
@@ -578,7 +578,7 @@ class TDExporter
     float decl = data.getSurveyDeclination( sid );
     if ( decl >= SurveyInfo.DECLINATION_MAX ) decl = 0; // if unset use 0
 
-    List<TDNum> nums = getGeolocalizedData( sid, data, decl, asl_factor, ellipsoid_altitude );
+    List< TDNum > nums = getGeolocalizedData( sid, data, decl, asl_factor, ellipsoid_altitude );
     if ( nums == null ) return null;
     for ( TDNum num : nums ) {
       for ( NumStation st : num.getStations() ) {
@@ -588,14 +588,14 @@ class TDExporter
     return null;
   }
 
-  static private List<TDNum> getGeolocalizedData( long sid, DataHelper data, float decl, float asl_factor, boolean ellipsoid_altitude )
+  static private List< TDNum > getGeolocalizedData( long sid, DataHelper data, float decl, float asl_factor, boolean ellipsoid_altitude )
   {
     List< FixedInfo > fixeds = data.selectAllFixed( sid, 0 );
     // Log.v("DistoX", "get geoloc. data. Decl " + decl + " fixeds " + fixeds.size() );
     if ( fixeds.size() == 0 ) return null;
 
-    List<TDNum> nums = new ArrayList<TDNum>();
-    List<DBlock> shots_data = data.selectAllExportShots( sid, 0 );
+    List< TDNum > nums = new ArrayList< TDNum >();
+    List< DBlock > shots_data = data.selectAllExportShots( sid, 0 );
     FixedInfo origin = null;
     for ( FixedInfo fixed : fixeds ) {
       TDNum num = new TDNum( shots_data, fixed.name, null, null, decl, null ); // null formatClosure
@@ -674,7 +674,7 @@ class TDExporter
     final String coordinates3 = "    <coordinates>%.8f,%.8f,%.1f</coordinates>\n";
     final String coordinates6 = "    %.8f,%.8f,%.1f %.8f,%.8f,%.1f\n";
     // Log.v("DistoX", "export as KML " + filename );
-    List<TDNum> nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false ); // false: Geoid altitude
+    List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false ); // false: Geoid altitude
     if ( nums == null || nums.size() == 0 ) {
       TDLog.Error( "Failed KML export: no geolocalized station");
       return "";
@@ -732,9 +732,9 @@ class TDExporter
       pw.format(style_end);
       
       for ( TDNum num : nums ) {
-        List<NumStation> stations = num.getStations();
-        List<NumShot>    shots = num.getShots();
-        List<NumSplay>   splays = num.getSplays();
+        List< NumStation > stations = num.getStations();
+        List< NumShot >    shots = num.getShots();
+        List< NumSplay >   splays = num.getSplays();
         if ( TDSetting.mKmlStations ) {
           for ( NumStation st : stations ) {
             pw.format(placemark);
@@ -808,7 +808,7 @@ class TDExporter
   // @param filename filepath without extension 
   static String exportSurveyAsShp( long sid, DataHelper data, SurveyInfo info, String filename )
   {
-    List<TDNum> nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false ); // false: Geoid altitude
+    List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false ); // false: Geoid altitude
     if ( nums == null || nums.size() == 0 ) {
       TDLog.Error( "Failed SHP export: no geolocalized station");
       return "";
@@ -821,13 +821,13 @@ class TDExporter
       // TDPath.checkPath( filename );
       File dir = new File( filename );
       if ( (dir != null) && ( dir.exists() || dir.mkdirs() ) ) {
-        ArrayList<File> files = new ArrayList<File>();
+        ArrayList< File > files = new ArrayList<>();
         int nr = 0;
         if ( TDSetting.mKmlStations ) {
           for ( TDNum num : nums ) {
             String filepath = filename + "/stations-" + nr;
             ++ nr;
-            List<NumStation> stations = num.getStations();
+            List< NumStation > stations = num.getStations();
             // Log.v("DistoX", "SHP export " + filepath + " stations " + stations.size() );
             ShpPointz shp = new ShpPointz( filepath, files );
             shp.setYYMMDD( info.date );
@@ -839,8 +839,8 @@ class TDExporter
         for ( TDNum num : nums ) {
           String filepath = filename + "/shots-" + nr;
           ++ nr;
-          List<NumShot> shots = num.getShots();
-          List<NumSplay> splays = ( TDSetting.mKmlSplays ? num.getSplays() : null );
+          List< NumShot > shots = num.getShots();
+          List< NumSplay > splays = ( TDSetting.mKmlSplays ? num.getSplays() : null );
           // Log.v("DistoX", "SHP export " + filepath + " shots " + shots.size() );
           ShpPolylinez shp = new ShpPolylinez( filepath, files );
           shp.setYYMMDD( info.date );
@@ -852,7 +852,7 @@ class TDExporter
         //   for ( TDNum num : nums ) {
         //     String filepath = filename + "-splays-" + nr;
         //     ++ nr;
-        //     List<NumSplay> splays = num.getSplays();
+        //     List< NumSplay > splays = num.getSplays();
         //     // Log.v("DistoX", "SHP export " + filepath + " splays " + splays.size() );
         //     ShpPolylinez shp = new ShpPolylinez( filepath, files );
         //     shp.setYYMMDD( info.date );
@@ -884,7 +884,7 @@ class TDExporter
     final String coords  = "\"coordinates\": ";
     final String feature = "\"Feature\"";
     // Log.v("DistoX", "export as KML " + filename );
-    List<TDNum> nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, true ); // true: ellipsoid altitude
+    List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, true ); // true: ellipsoid altitude
     if ( nums == null || nums.size() == 0 ) {
       TDLog.Error( "Failed GeoJSON export: no geolocalized station");
       return "";
@@ -904,7 +904,7 @@ class TDExporter
       pw.format("  \"features\": [\n");
       
       for ( TDNum num : nums ) {
-        List<NumShot>    shots = num.getShots();
+        List< NumShot >    shots = num.getShots();
         for ( NumShot sh : shots ) {
           NumStation from = sh.from;
           NumStation to   = sh.to;
@@ -921,7 +921,7 @@ class TDExporter
       }
       if ( TDSetting.mKmlSplays ) {
         for ( TDNum num : nums ) {
-          List<NumSplay>   splays = num.getSplays();
+          List< NumSplay >   splays = num.getSplays();
           for ( NumSplay sp : splays ) {
             NumStation from = sp.from;
             pw.format("    {\n");
@@ -936,7 +936,7 @@ class TDExporter
       }
       if ( TDSetting.mKmlStations ) {
         for ( TDNum num : nums ) {
-          List<NumStation> stations = num.getStations();
+          List< NumStation > stations = num.getStations();
           for ( NumStation st : stations ) {
             pw.format("    {\n");
             pw.format("      %s %s,\n", type, feature );
@@ -967,7 +967,7 @@ class TDExporter
   static String exportSurveyAsPlt( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     // Log.v("DistoX", "export as trackfile: " + filename );
-    List<TDNum> nums = getGeolocalizedData( sid, data, info.getDeclination(), TDUtil.M2FT, false );
+    List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), TDUtil.M2FT, false );
     if ( nums == null || nums.size() == 0 ) {
       TDLog.Error( "Failed PLT export: no geolocalized station");
       return "";
@@ -993,9 +993,9 @@ class TDExporter
 
       int tot_stations = 0;
       for ( TDNum num : nums ) {
-        List<NumStation> stations = num.getStations();
-        // List<NumShot>    shots = num.getShots();
-        // List<NumSplay>   splays = num.getSplays();
+        List< NumStation > stations = num.getStations();
+        // List< NumShot >    shots = num.getShots();
+        // List< NumSplay >   splays = num.getSplays();
 	tot_stations += stations.size();
       }
       pw.format("%d\r\n", tot_stations );
@@ -1010,9 +1010,9 @@ class TDExporter
       // String date = TDUtil.getDateString( "dd-MMM-yy" );
 
       for ( TDNum num : nums ) {
-        List<NumStation> stations = num.getStations();
-        List<NumShot>    shots = num.getShots();
-        // List<NumSplay>   splays = num.getSplays();
+        List< NumStation > stations = num.getStations();
+        List< NumShot >    shots = num.getShots();
+        // List< NumSplay >   splays = num.getSplays();
         NumStation last = null;
         for ( NumShot sh : shots ) {
           NumStation from = sh.from;
@@ -1060,7 +1060,7 @@ class TDExporter
       TDLog.Error( "exportSurveyAsTop date parse error " + info.date );
     }
 
-    List<DBlock> list = data.selectAllExportShots( sid, TDStatus.NORMAL );
+    List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
     checkShotsClino( list );
     int extend = 0;  // current extend
     DBlock ref_item = null;
@@ -1171,8 +1171,8 @@ class TDExporter
     // String uls = TDSetting.mUnitLengthStr;
     // String uas = TDSetting.mUnitAngleStr;
 
-    List<DBlock> list = data.selectAllExportShots( sid, TDStatus.NORMAL );
-    List<DBlock> clist = data.selectAllExportShots( sid, TDStatus.CHECK );
+    List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
+    List< DBlock > clist = data.selectAllExportShots( sid, TDStatus.CHECK );
     checkShotsClino( list );
 
     List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
@@ -1527,10 +1527,10 @@ class TDExporter
     String uls = ( ul < 1.01f )? "meters"  : "feet"; // FIXME
     String uas = ( ua < 1.01f )? "degrees" : "grads";
 
-    List<DBlock> list = data.selectAllExportShots( sid, TDStatus.NORMAL );
+    List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
     checkShotsClino( list );
     List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
-    List<DBlock> st_blk = new ArrayList<>(); // blocks with from station (for LRUD)
+    List< DBlock > st_blk = new ArrayList<>(); // blocks with from station (for LRUD)
 
     // float decl = info.getDeclination(); // DECLINATION not used
     try {
@@ -1696,13 +1696,13 @@ class TDExporter
         if ( from != null ) {
           boolean do_header = true;
           TDNum num = new TDNum( list, from, null, null, 0.0f, null ); // no declination, null formatClosure
-          List<NumBranch> branches = num.makeBranches( true );
+          List< NumBranch > branches = num.makeBranches( true );
           // Log.v("DistoX", "Station " + from + " shots " + num.shotsNr() + " splays " + num.splaysNr()
           //               + " branches " + branches.size() );
 
           for ( NumBranch branch : branches ) {
-            // ArrayList<String> stations = new ArrayList<>();
-            ArrayList<NumShot> shots = branch.shots;
+            // ArrayList< String > stations = new ArrayList<>();
+            ArrayList< NumShot > shots = branch.shots;
             int size = shots.size();
             // Log.v("DistoX", "branch shots " + size );
             if ( size > 0 ) {
@@ -1857,7 +1857,7 @@ class TDExporter
 
   static String exportSurveyAsRawCsv( long sid, DataHelper data, SurveyInfo info, String filename )
   {
-    List<DBlock> list = data.selectAllShotsRawData( sid );
+    List< DBlock > list = data.selectAllShotsRawData( sid );
     char sep = TDSetting.mCsvSeparator;
     String newline = TDSetting.mSurvexEol;
     try {
@@ -1891,7 +1891,7 @@ class TDExporter
     char sep = TDSetting.mCsvSeparator;
     String newline = TDSetting.mSurvexEol;
     // Log.v("DistoX", "export as CSV: " + filename );
-    List<DBlock> list = data.selectAllExportShots( sid, TDStatus.NORMAL );
+    List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
     checkShotsClino( list );
     // List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
     float ul = TDSetting.mUnitLength;
@@ -2023,7 +2023,7 @@ class TDExporter
   //     dir.mkdirs();
   //   }
   //   String filename = TopoDroidApp.APP_TLX_PATH + info.name + ".tlx";
-  //   List<DBlock> list = mData.selectAllExportShots( sid, TDStatus.NORMAL );
+  //   List< DBlock > list = mData.selectAllExportShots( sid, TDStatus.NORMAL );
   //   checkShotsClino( list );
   //   try {
   //     TDPath.checkPath( filename );
@@ -2151,7 +2151,7 @@ class TDExporter
   //   commented flag not supported
   //   surface flag handled as duplicate
 
-  static private LRUDprofile computeLRUDprofile( DBlock b, List<DBlock> list, boolean at_from )
+  static private LRUDprofile computeLRUDprofile( DBlock b, List< DBlock > list, boolean at_from )
   {
     LRUDprofile lrud = new LRUDprofile( b.mBearing );
     float n0  = TDMath.cosd( b.mBearing );
@@ -2201,7 +2201,7 @@ class TDExporter
     return lrud;
   }
 
-  static private LRUD computeLRUD( DBlock b, List<DBlock> list, boolean at_from )
+  static private LRUD computeLRUD( DBlock b, List< DBlock > list, boolean at_from )
   {
     LRUD lrud = new LRUD();
     float n0  = TDMath.cosd( b.mBearing );
@@ -2341,7 +2341,7 @@ class TDExporter
   static String exportSurveyAsDat( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     // Log.v("DistoX", "export as compass: " + filename + " swap LR " + TDSetting.mSwapLR );
-    List<DBlock> list = data.selectAllExportShots( sid, TDStatus.NORMAL );
+    List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
     checkShotsClino( list );
     try {
       // TDLog.Log( TDLog.LOG_IO, "export Compass " + filename );
@@ -2494,7 +2494,7 @@ class TDExporter
   {
     int trip = 1;
     int code = 1;
-    List<DBlock> list = data.selectAllExportShots( sid, TDStatus.NORMAL );
+    List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
     checkShotsClino( list );
     // Log.v("DistoX", "export as TopoRobot: " + filename + " data " + list.size() );
     char[] line = new char[ TRB_LINE_LENGTH ];
@@ -2736,7 +2736,7 @@ class TDExporter
   static String exportSurveyAsSur( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     // Log.v("DistoX", "export as winkarst: " + filename + " swap LR " + TDSetting.mSwapLR );
-    List<DBlock> list = data.selectAllExportShots( sid, TDStatus.NORMAL );
+    List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
     checkShotsClino( list );
     try {
       // TDLog.Log( TDLog.LOG_IO, "export WinKarst " + filename );
@@ -2879,7 +2879,7 @@ class TDExporter
                 TDUtil.getDateString("yyyy/MM/dd"), TDVersion.string() );
       pw.format("  </General>\n");
 
-      List<DBlock> list = data.selectAllExportShots( sid, TDStatus.NORMAL );
+      List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
       checkShotsClino( list );
       TRobot trobot = new TRobot( list );
       // trobot.dump(); // DEBUG
@@ -3009,7 +3009,7 @@ class TDExporter
   }
 
   static private void writeGrtLeg( PrintWriter pw, AverageLeg leg, String fr, String to, boolean first,
-                                   DBlock item, List<DBlock> list )
+                                   DBlock item, List< DBlock > list )
   {
     LRUDprofile lrud = null;
     if ( item.isCommented() ) pw.format("; ");
@@ -3024,7 +3024,7 @@ class TDExporter
     leg.reset();
   }
 
-  static private void writeGrtFix( PrintWriter pw, String station, List<FixedInfo> fixed )
+  static private void writeGrtFix( PrintWriter pw, String station, List< FixedInfo > fixed )
   {
     if ( fixed.size() > 0 ) {
       for ( FixedInfo fix : fixed ) {
@@ -3052,7 +3052,7 @@ class TDExporter
 
       List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
       boolean first = true; // first station
-      List<DBlock> list = data.selectAllExportShots( sid, TDStatus.NORMAL );
+      List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
       checkShotsClino( list );
       // int extend = 1;
       AverageLeg leg = new AverageLeg(0);
@@ -3210,7 +3210,7 @@ class TDExporter
 
       pw.format("#Units %s A=%s\n", uls, uas );
 
-      List<DBlock> list = data.selectAllExportShots( sid, TDStatus.NORMAL );
+      List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
       checkShotsClino( list );
       // int extend = 1;
       AverageLeg leg = new AverageLeg(0);
@@ -3450,7 +3450,7 @@ class TDExporter
       pw.format("#from_to%s", eol);
       pw.format("#R0%s", eol);
 
-      List<DBlock> list = data.selectAllExportShots( sid, TDStatus.NORMAL );
+      List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
       checkShotsClino( list );
       AverageLeg leg = new AverageLeg(0);
       DBlock ref_item = null;
@@ -3634,7 +3634,7 @@ class TDExporter
       pw.format("From\tTo\tLength\tAzimuth\tVertical\tLabel\tLeft\tRight\tUp\tDown\tNote");
       printPolygonEOL( pw );
 
-      List<DBlock> list = data.selectAllExportShots( sid, TDStatus.NORMAL );
+      List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
       checkShotsClino( list );
 
       int size = 0; // count legs
@@ -4002,7 +4002,7 @@ class TDExporter
   static String exportSurveyAsTro( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     // Log.v("DistoX", "export as visualtopo: " + filename );
-    List<DBlock> list = data.selectAllExportShots( sid, TDStatus.NORMAL );
+    List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
     checkShotsClino( list );
     List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
     try {
@@ -4143,7 +4143,7 @@ class TDExporter
       pw.format("# %s\n", ci.comment );
       pw.format("# %d\n", ci.algo );
 
-      List<CalibCBlock> list = data.selectAllGMs( cid, 1, true ); // status 1: all shots, true: negative_grp too
+      List< CalibCBlock > list = data.selectAllGMs( cid, 1, true ); // status 1: all shots, true: negative_grp too
       for ( CalibCBlock b : list ) {
         b.computeBearingAndClino();
         pw.format(Locale.US, "%d, %d, %d, %d, %d, %d, %d, %d, %.2f, %.2f, %.2f, %.4f, %d\n",

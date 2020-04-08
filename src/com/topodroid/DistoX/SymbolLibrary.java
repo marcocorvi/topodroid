@@ -154,9 +154,9 @@ class SymbolLibrary
   boolean isSymbolEnabled( int k )      { return k >= 0 && k < mSymbols.size() && mSymbols.get( k ).isEnabled(); }
   int getSymbolLevel( int k ) { return ( ( k<0 || k>=mSymbols.size() )? 0xff : mSymbols.get( k ).mLevel ); }
 
-  ArrayList<String> getSymbolNames()
+  ArrayList< String > getSymbolNames()
   {
-    ArrayList<String> ret = new ArrayList<>();
+    ArrayList< String > ret = new ArrayList<>();
     for ( Symbol s : mSymbols ) ret.add( s.getName() );
     return ret;
   }

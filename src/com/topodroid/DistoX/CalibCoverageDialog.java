@@ -47,7 +47,7 @@ class CalibCoverageDialog extends MyDialog
 
   private final Bitmap mBitmapUp;
   private final Bitmap mBitmapDown;
-  private final List<CalibCBlock> mList;  // list of calibration shots
+  private final List< CalibCBlock > mList;  // list of calibration shots
   private final CalibAlgo mCalib;         // calibration algorithm
 
   private TextView mText;

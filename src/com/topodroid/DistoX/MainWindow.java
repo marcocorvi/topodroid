@@ -148,7 +148,7 @@ public class MainWindow extends Activity
   {
     // DataHelper data = mApp.mData;
     if ( mApp_mData != null ) {
-      List<String> list = mApp_mData.selectAllSurveys();
+      List< String > list = mApp_mData.selectAllSurveys();
       updateList( list );
       if ( say_no_survey && list.size() == 0 ) {
         say_no_survey = false;
@@ -157,7 +157,7 @@ public class MainWindow extends Activity
     }
   }
 
-  private void updateList( List<String> list )
+  private void updateList( List< String > list )
   {
     mArrayAdapter.clear();
     if ( list.size() > 0 ) {

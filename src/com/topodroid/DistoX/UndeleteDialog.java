@@ -58,8 +58,8 @@ class UndeleteDialog extends MyDialog
   private int mStatus;
 
   UndeleteDialog( Context context, ShotWindow parent, DataHelper data, long sid,
-                         List<DBlock> shots1, List<DBlock> shots2, List<DBlock> shots3,
-                         List<PlotInfo> plots )
+                         List< DBlock > shots1, List< DBlock > shots2, List< DBlock > shots3,
+                         List< PlotInfo > plots )
   {
     super( context, R.string.UndeleteDialog );
     mParent = parent;

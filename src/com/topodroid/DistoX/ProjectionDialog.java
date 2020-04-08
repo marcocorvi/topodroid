@@ -95,7 +95,7 @@ class ProjectionDialog extends MyDialog
   private float mBorderInnerLeft  = 0;
   private float mBorderBottom     = 4096;
 
-  private List<DBlock> mList = null;
+  private List< DBlock > mList = null;
 
   private boolean mETazimuthChanged = false;
 

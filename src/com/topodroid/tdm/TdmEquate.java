@@ -47,7 +47,7 @@ class TdmEquate
 
   int dropStations( String survey )
   {
-    ArrayList< String > stations = new ArrayList< String >();
+    ArrayList< String > stations = new ArrayList<>();
     for ( String name : mStations ) {
       String[] names = name.split("@");
       if ( names.length > 1 && survey.equals( names[1] ) ) {

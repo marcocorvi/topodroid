@@ -60,14 +60,14 @@ public class TDNum
   private int mLenCnt;
 
   // FIXME make mStations a hashmap (key station name)
-  // private ArrayList<NumStation> mStations;
+  // private ArrayList< NumStation > mStations;
   private NumStationSet mStations;
-  private ArrayList<NumStation> mClosureStations;
-  private ArrayList<NumShot>    mShots;
-  private ArrayList<NumSplay>   mSplays;
-  private ArrayList<String>     mClosures;
-  private ArrayList<NumNode>    mNodes;
-  private ArrayList<DBlock>     mUnattachedShots;
+  private ArrayList< NumStation > mClosureStations;
+  private ArrayList< NumShot >    mShots;
+  private ArrayList< NumSplay >   mSplays;
+  private ArrayList< String >     mClosures;
+  private ArrayList< NumNode >    mNodes;
+  private ArrayList< DBlock >     mUnattachedShots;
 
   private void resetStats()
   {
@@ -161,14 +161,14 @@ public class TDNum
   public float surveyVmin() { return mVmin; }
   public float surveyVmax() { return mVmax; }
 
-  public List<NumStation> getStations() { return mStations.getStations(); }
-  public List<NumStation> getClosureStations() { return mClosureStations; }
-  public List<NumShot>    getShots()    { return mShots; }
-  public List<NumSplay>   getSplays()   { return mSplays; }
-  public List<String>     getClosures() { return mClosures; }
-  public List<DBlock>     getUnattached() { return mUnattachedShots; }
+  public List< NumStation > getStations() { return mStations.getStations(); }
+  public List< NumStation > getClosureStations() { return mClosureStations; }
+  public List< NumShot >    getShots()    { return mShots; }
+  public List< NumSplay >   getSplays()   { return mSplays; }
+  public List< String >     getClosures() { return mClosures; }
+  public List< DBlock >     getUnattached() { return mUnattachedShots; }
 
-  public List<NumSplay>   getSplaysAt( NumStation st )
+  public List< NumSplay >   getSplaysAt( NumStation st )
   {
     ArrayList< NumSplay > ret = new ArrayList<>();
     for ( NumSplay splay : mSplays ) {
@@ -180,9 +180,9 @@ public class TDNum
   }
 
   // get shots at station st, except shot [st,except]
-  public List<NumShot> getShotsAt( NumStation st, NumStation except )
+  public List< NumShot > getShotsAt( NumStation st, NumStation except )
   {
-    ArrayList<NumShot> ret = new ArrayList<>();
+    ArrayList< NumShot > ret = new ArrayList<>();
     for ( NumShot shot : mShots ) {
       if ( ( shot.from == st && shot.to   != except ) 
         || ( shot.to   == st && shot.from != except ) ) {
@@ -298,7 +298,7 @@ public class TDNum
    * @param view     barriers list
    * @param hide     hiding list
    */
-  public TDNum( List<DBlock> data, String start, String view, String hide, float decl, String format )
+  public TDNum( List< DBlock > data, String start, String view, String hide, float decl, String format )
   {
     mDecl = decl;
     surveyExtend   = true;
@@ -477,7 +477,7 @@ public class TDNum
   //  *
   //  * @note the new shots are assumed not to close any loop
   //  */
-  // public boolean addNewData( List<DBlock> data )
+  // public boolean addNewData( List< DBlock > data )
   // {
   //   NumShot lastLeg = null;
   //
@@ -616,9 +616,9 @@ public class TDNum
   /** correct temporary shots using trilateration
    * @param shots temporary shot list
    */
-  private void makeTrilateration( List<TriShot> shots )
+  private void makeTrilateration( List< TriShot > shots )
   {
-    ArrayList<TriCluster> clusters = new ArrayList<>();
+    ArrayList< TriCluster > clusters = new ArrayList<>();
     for ( TriShot sh : shots ) sh.cluster = null;
     boolean repeat = true;
     while ( repeat ) {
@@ -721,7 +721,7 @@ public class TDNum
     // Log.v("DistoX", "make shot " + sf.name + "-" + st.name + " blocks " + ts.blocks.size() + " E " + blk.getIntExtend() + " S " + blk.getStretch() );
     // NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), 1, anomaly, mDecl ); // FIXME DIRECTION
     NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), direction, anomaly, mDecl );
-    ArrayList<DBlock> blks = ts.getBlocks();
+    ArrayList< DBlock > blks = ts.getBlocks();
     for ( int k = 1; k < blks.size(); ++k ) {
       sh.addBlock( blks.get(k) );
     }
@@ -737,7 +737,7 @@ public class TDNum
     // Log.v("DistoX", "make shot " + sf.name + "-" + st.name + " blocks " + ts.blocks.size() + " E " + blk.getIntExtend() + " S " + blk.getStretch() );
     // NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), 1, anomaly, mDecl ); // FIXME DIRECTION
     NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), direction, anomaly, mDecl );
-    ArrayList<DBlock> blks = ts.getBlocks();
+    ArrayList< DBlock > blks = ts.getBlocks();
     for ( int k = 1; k < blks.size(); ++k ) {
       sh.addBlock( blks.get(k) );
     }
@@ -747,7 +747,7 @@ public class TDNum
   /** survey data reduction 
    * return true if all shots are attached
    */
-  private boolean computeNum( List<DBlock> data, String start, String format )
+  private boolean computeNum( List< DBlock > data, String start, String format )
   {
     if ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING ) {
       HashMap< String, Float > depths = new HashMap< String, Float >();
@@ -791,8 +791,8 @@ public class TDNum
     mUnattachedShots = new ArrayList<>();
 
     TriShot lastLeg = null;
-    List<TriShot> tmpshots   = new ArrayList<>();
-    List<TriSplay> tmpsplays = new ArrayList<>();
+    List< TriShot > tmpshots   = new ArrayList<>();
+    List< TriSplay > tmpsplays = new ArrayList<>();
 
     for ( DBlock blk : data ) {
       // Log.v("DistoX", "NUM blk type " + blk.mType );
@@ -1268,7 +1268,7 @@ public class TDNum
     return cycle;
   }
 
-  private void makeCycles( ArrayList<NumCycle> cycles, ArrayList<NumBranch> branches ) 
+  private void makeCycles( ArrayList< NumCycle > cycles, ArrayList< NumBranch > branches ) 
   {
     int bs = branches.size();
     NumStack stack = new NumStack( bs );
@@ -1314,7 +1314,7 @@ public class TDNum
   }
 
 
-  private void makeSingleLoops( ArrayList<NumBranch> branches, ArrayList<NumShot> shots )
+  private void makeSingleLoops( ArrayList< NumBranch > branches, ArrayList< NumShot > shots )
   {
     for ( NumShot shot : shots ) {
       if ( shot.branch != null ) continue;
@@ -1354,7 +1354,7 @@ public class TDNum
   /** for each branch compute the error and distribute it over the
    * branch shots
    */
-  private void compensateSingleLoops( ArrayList<NumBranch> branches )
+  private void compensateSingleLoops( ArrayList< NumBranch > branches )
   {
     for ( NumBranch br : branches ) {
       br.computeError();
@@ -1365,9 +1365,9 @@ public class TDNum
 
   // follow a shot
   // good for a single line without crosses
-  private ArrayList<NumShot> followShot( NumBranch br, NumStation st, boolean after )
+  private ArrayList< NumShot > followShot( NumBranch br, NumStation st, boolean after )
   {
-    ArrayList<NumShot> ret = new ArrayList<>();
+    ArrayList< NumShot > ret = new ArrayList<>();
     boolean found = true;
     while ( found ) {
       found = false;
@@ -1395,13 +1395,13 @@ public class TDNum
   /* make branches from this num nodes
    * @param also_cross_end     whether to include branches to end-points
    */
-  public ArrayList<NumBranch> makeBranches( boolean also_cross_end ) { return makeBranches( mNodes, also_cross_end ); }
+  public ArrayList< NumBranch > makeBranches( boolean also_cross_end ) { return makeBranches( mNodes, also_cross_end ); }
   
   /** from the list of nodes make the branches of type cross-cross
    * FIXME there is a flaw:
    * this method does not detect single loops with no hair attached
    */
-  private ArrayList<NumBranch> makeBranches( ArrayList<NumNode> nodes, boolean also_cross_end )
+  private ArrayList< NumBranch > makeBranches( ArrayList< NumNode > nodes, boolean also_cross_end )
   {
     // for ( NumNode nd : nodes ) {
     //   Log.v("DistoX-NUM", "node " + nd.station.name + " branches " + nd.branches.size() );
@@ -1534,13 +1534,13 @@ public class TDNum
 
   private void doLoopCompensation( ArrayList< NumNode > nodes, ArrayList< NumShot > shots )
   {
-    ArrayList<NumBranch> branches = makeBranches( nodes, false );
+    ArrayList< NumBranch > branches = makeBranches( nodes, false );
 
     ArrayList< NumBranch > singleBranches = new ArrayList<>();
     makeSingleLoops( singleBranches, shots ); // check all shots without branch
     compensateSingleLoops( singleBranches );
 
-    ArrayList<NumCycle> cycles = new ArrayList<>();
+    ArrayList< NumCycle > cycles = new ArrayList<>();
     makeCycles( cycles, branches );
 
     for ( NumBranch branch : branches ) { // compute branches and cycles errors
@@ -1551,7 +1551,7 @@ public class TDNum
       // TDLog.Log( TDLog.LOG_NUM, "cycle error " + cycle.e + " " + cycle.s + " " + cycle.v ); 
     }
 
-    ArrayList<NumCycle> indep_cycles = new ArrayList<>(); // independent cycles
+    ArrayList< NumCycle > indep_cycles = new ArrayList<>(); // independent cycles
     for ( NumCycle cycle : cycles ) {
       if ( ! cycle.isBranchCovered( indep_cycles ) ) {
         indep_cycles.add( cycle );

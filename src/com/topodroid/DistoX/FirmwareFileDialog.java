@@ -70,7 +70,7 @@ class FirmwareFileDialog extends MyDialog
     // setTitleColor( TDColor.TITLE_NORMAL );
 
     File[] files = TDPath.getBinFiles();
-    ArrayList<String> names = new ArrayList<>();
+    ArrayList< String > names = new ArrayList<>();
     if ( files != null ) {
       for ( File f : files ) { 
         names.add( f.getName() );

@@ -90,7 +90,7 @@ class TdmSourcesDialog extends MyDialog
   {
     if ( v.getId() == R.id.ok ) {
       hide();
-      List<String> sources = mTdmSourceAdapter.getCheckedSources();
+      List< String > sources = mTdmSourceAdapter.getCheckedSources();
       mParent.addSources( sources );
     // } else if ( v.getId() == R.id/back ) {
     //   // nothing

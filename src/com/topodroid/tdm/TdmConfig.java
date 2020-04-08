@@ -63,7 +63,7 @@ class TdmConfig extends TdmFile
   {
     // Log.v("TdManager", "drop equates with " + survey + " before " + mEquates.size() );
     if ( survey == null || survey.length() == 0 ) return;
-    ArrayList< TdmEquate > equates = new ArrayList< TdmEquate >();
+    ArrayList< TdmEquate > equates = new ArrayList<>();
     for ( TdmEquate equate : mEquates ) {
       if ( equate.dropStations( survey ) > 1 ) {
         equates.add( equate );

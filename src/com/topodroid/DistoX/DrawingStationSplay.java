@@ -40,7 +40,7 @@ class DrawingStationSplay
   // used to decide whether to display splays
   // @param p         drawing path 
   // @param stations  array of station names
-  private boolean containsStation( DrawingPath p, ArrayList<String> splays )
+  private boolean containsStation( DrawingPath p, ArrayList< String > splays )
   {
     DBlock blk = p.mBlock;
     if ( blk == null ) return false;
@@ -71,7 +71,7 @@ class DrawingStationSplay
     setStationSplays( mSplaysOff, station, off );
   }
 
-  private void setStationSplays( ArrayList<String> splayStations, String station, boolean on )
+  private void setStationSplays( ArrayList< String > splayStations, String station, boolean on )
   {
     if ( splayStations.contains( station ) ) {
       if ( ! on ) splayStations.remove( station );

@@ -1099,7 +1099,7 @@ public class DataHelper extends DataSetObservable
     doExecShotSQL( id, sw );
   }
 
-  void updateShotsName( List<DBlock> blks, long sid )
+  void updateShotsName( List< DBlock > blks, long sid )
   {
     if ( myDB == null ) return;
     try {
@@ -1310,7 +1310,7 @@ public class DataHelper extends DataSetObservable
   long insertImportShotsDiving( long sid, long id, ArrayList< ParserShot > shots )
   {
     // [1] compute stations depth
-    ArrayList< ParserShot > stack   = new ArrayList< ParserShot >();
+    ArrayList< ParserShot > stack   = new ArrayList<>();
     HashMap< String, Float > depths = new HashMap< String, Float >();
     String start = shots.get(0).from; // FIXME
     depths.put( start, Float.valueOf(0) );
@@ -1414,7 +1414,7 @@ public class DataHelper extends DataSetObservable
     // return doStatement( updateShotColorStmt, "Color" );
   }
 
-  void updateShotsColor( List<DBlock> blks, long sid, int color )
+  void updateShotsColor( List< DBlock > blks, long sid, int color )
   {
     if ( myDB == null ) return;
     myDB.beginTransaction();
@@ -2345,10 +2345,10 @@ public class DataHelper extends DataSetObservable
   }
 
   // select all the plot names of a survey to delete shp exports
-  List<String> selectPlotNames( long sid )
+  List< String > selectPlotNames( long sid )
   {
     if ( myDB == null ) return null;
-    ArrayList< String > ret = new ArrayList< String >();
+    ArrayList< String > ret = new ArrayList<>();
     Cursor cursor = myDB.rawQuery( "select name from plots where surveyId=?", new String[] { Long.toString(sid) } );
     if ( cursor.moveToFirst() ) {
       do {
@@ -2622,7 +2622,7 @@ public class DataHelper extends DataSetObservable
   //   return ret;
   // }
 
-  List<DBlock> selectShotsBetweenStations( long sid, String st1, String st2, long status )
+  List< DBlock > selectShotsBetweenStations( long sid, String st1, String st2, long status )
   {
     List< DBlock > list = new ArrayList<>();
     if ( myDB == null ) return list;
@@ -2641,7 +2641,7 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
-  List<DBlock> selectShotsAfterId( long sid, long id , long status )
+  List< DBlock > selectShotsAfterId( long sid, long id , long status )
   {
     // Log.v("DistoXX", "B1 select shots after id " + id );
     List< DBlock > list = new ArrayList<>();
@@ -2663,7 +2663,7 @@ public class DataHelper extends DataSetObservable
 
   // select shots (either legs or splays) at a station
   // in the case of legs, select only "independent" legs (one for each neighbor station)
-  List<DBlock> selectShotsAt( long sid, String station, boolean leg )
+  List< DBlock > selectShotsAt( long sid, String station, boolean leg )
   {
     List< DBlock > list = new ArrayList<>();
     if ( station == null || station.length() == 0 ) return list;
@@ -2707,7 +2707,7 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
-  List<DBlock> selectSplaysAt( long sid, String station, boolean leg )
+  List< DBlock > selectSplaysAt( long sid, String station, boolean leg )
   {
     List< DBlock > list = new ArrayList<>();
     if ( station == null || station.length() == 0 ) return list;
@@ -2732,7 +2732,7 @@ public class DataHelper extends DataSetObservable
   }
 
   // called by DrawingWindow to splay select shots for x-sections
-  List<DBlock> selectAllShotsAtStations( long sid, String station1, String station2 )
+  List< DBlock > selectAllShotsAtStations( long sid, String station1, String station2 )
   {
     if ( station2 == null ) return selectAllShotsAtStation( sid, station1 );
 
@@ -2762,7 +2762,7 @@ public class DataHelper extends DataSetObservable
   // @param sid        survey id
   // @param stations   stations names (must be unique)
   // @param with_leg   whether to include legs or not
-  List<DBlock> selectAllShotsAtStations( long sid, List<String> stations, boolean with_legs )
+  List< DBlock > selectAllShotsAtStations( long sid, List< String > stations, boolean with_legs )
   {
     List< DBlock > list = new ArrayList<>();
     if ( stations == null || myDB == null ) return list;
@@ -2800,7 +2800,7 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
-  private List<DBlock> selectAllShotsAtStation( long sid, String station )
+  private List< DBlock > selectAllShotsAtStation( long sid, String station )
   {
     List< DBlock > list = new ArrayList<>();
     if ( station == null ) return list;
@@ -2824,7 +2824,7 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
-  List<DBlock> selectAllShotsToStation( long sid, String station )
+  List< DBlock > selectAllShotsToStation( long sid, String station )
   {
     List< DBlock > list = new ArrayList<>();
     if ( myDB == null ) return list;
@@ -2872,7 +2872,7 @@ public class DataHelper extends DataSetObservable
     return set;
   }
 
-  List<DBlock> selectAllShotsAfter( long id, long sid, long status )
+  List< DBlock > selectAllShotsAfter( long id, long sid, long status )
   {
     // Log.v("DistoXX", "B2 select shots after id " + id );
     List< DBlock > list = new ArrayList<>();
@@ -2919,7 +2919,7 @@ public class DataHelper extends DataSetObservable
   /** select all shots, used by CSV raw export
    * @param sid surveyId
    */
-  List<DBlock> selectAllShotsRawData( long sid )
+  List< DBlock > selectAllShotsRawData( long sid )
   {
     // Log.v("DistoXX", "B3 select shots all");
     List< DBlock > list = new ArrayList<>();
@@ -2937,7 +2937,7 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
-  List<DBlock> selectAllShots( long sid, long status )
+  List< DBlock > selectAllShots( long sid, long status )
   {
     // Log.v("DistoXX", "B3 select shots all");
     List< DBlock > list = new ArrayList<>();
@@ -2958,7 +2958,7 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
-  List<DBlock> selectAllExportShots( long sid, long status )
+  List< DBlock > selectAllExportShots( long sid, long status )
   {
     // Log.v("DistoXX", "B3 select shots all");
     List< DBlock > list = new ArrayList<>();
@@ -3005,7 +3005,7 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
-  List<DBlock> selectAllLegShots( long sid, long status )
+  List< DBlock > selectAllLegShots( long sid, long status )
   {
     // Log.v("DistoXX", "B4 select shots all leg");
     List< DBlock > list = new ArrayList<>();
@@ -3054,7 +3054,7 @@ public class DataHelper extends DataSetObservable
   // ----------------------------------------------------------------------
   // SELECT: LIST SURVEY / CABIL NAMES
 
-  private List<String> selectAllNames( String table )
+  private List< String > selectAllNames( String table )
   {
     // TDLog.Log( TDLog.LOG_DB, "selectAllNames table " + table );
 
@@ -3078,7 +3078,7 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
-  public List<String> selectAllSurveys() { return selectAllNames( SURVEY_TABLE ); }
+  public List< String > selectAllSurveys() { return selectAllNames( SURVEY_TABLE ); }
 
   // ----------------------------------------------------------------------
   // CONFIG DATA
@@ -4880,7 +4880,7 @@ public class DataHelper extends DataSetObservable
   }
 
   // SELECT STATEMENTS - SHOT
-  List<DBlock> selectAllLegShotsReduced( long sid, long status )
+  List< DBlock > selectAllLegShotsReduced( long sid, long status )
   {
     // Log.v("DistoXX", "B4 select shots all leg");
     List< DBlock > list = new ArrayList<>();
@@ -4915,7 +4915,7 @@ public class DataHelper extends DataSetObservable
   }
   
   // SURVEY
-  // List<String> selectAllSurveys( )
+  // List< String > selectAllSurveys( )
   // {
   //   List< String > list = new ArrayList<>();
   //   if ( myDB == null ) return list;
@@ -4960,7 +4960,7 @@ public class DataHelper extends DataSetObservable
     return info;
   }
 
-  public List<DBlock> getSurveyReducedData( long sid ) { return selectAllLegShotsReduced( sid, 0 ); }
+  public List< DBlock > getSurveyReducedData( long sid ) { return selectAllLegShotsReduced( sid, 0 ); }
 
 
   // ----------------------------------------------------------------------

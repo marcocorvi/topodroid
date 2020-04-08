@@ -122,8 +122,8 @@ public class TopoDroidApp extends Application
   // static boolean isTracing = false;
 
   /* FIXME_HIGHLIGHT
-  private List<DBlock> mHighlighted = null;
-  void    setHighlighted( List<DBlock> blks ) { mHighlighted = blks; }
+  private List< DBlock > mHighlighted = null;
+  void    setHighlighted( List< DBlock > blks ) { mHighlighted = blks; }
   // int     getHighlightedSize() { return (mHighlighted != null)? -1 : mHighlighted.size(); }
   boolean hasHighlighted() { return mHighlighted != null && mHighlighted.size() > 0; }
   boolean hasHighlightedId( long id )
@@ -301,7 +301,7 @@ public class TopoDroidApp extends Application
     return ( TDInstance.deviceA == null || ( info != null && info.device.equals( TDInstance.deviceAddress() ) ) );
   }
 
-  public static List<String> getSurveyNames()
+  public static List< String > getSurveyNames()
   {
     if ( mData == null ) return null;
     return mData.selectAllSurveys();
@@ -1253,7 +1253,7 @@ public class TopoDroidApp extends Application
       // FIXME BATCH
       // if ( ret > 0 && TDSetting.mSurveyStations > 0 ) {
       //   // FIXME TODO select only shots after the last leg shots
-      //   List<DBlock> list = mData.selectAllShots( TDInstance.sid, TDStataus.NORMAL );
+      //   List< DBlock > list = mData.selectAllShots( TDInstance.sid, TDStataus.NORMAL );
       //   assign Stations( list );
       // }
     }
@@ -1282,7 +1282,7 @@ public class TopoDroidApp extends Application
   // the list of stations is ordered by compare
   //
   // @param list list of shot to assign
-  boolean assignStationsAfter( DBlock blk0, List<DBlock> list )
+  boolean assignStationsAfter( DBlock blk0, List< DBlock > list )
   { 
     Set<String> sts = mData.selectAllStationsBefore( blk0.mId, TDInstance.sid /*, TDStatus.NORMAL */ );
     // Log.v("DistoX-DATA", "assign stations after " + blk0.Name() + " size " + list.size() + " stations " + sts.size() );
@@ -1307,7 +1307,7 @@ public class TopoDroidApp extends Application
   // @param list blocks whose stations need to be set in the DB
   // return true if a leg was assigned
   //
-  boolean assignStationsAll(  List<DBlock> list )
+  boolean assignStationsAll(  List< DBlock > list )
   { 
     Set<String> sts = mData.selectAllStations( TDInstance.sid );
     // Log.v("DistoX-DATA", "assign stations all: size " + list.size() );

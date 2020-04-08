@@ -76,7 +76,7 @@ class BleScanner
           stopScan();
         }
 
-        @Override public void onBatchScanResults( List<ScanResult> results )
+        @Override public void onBatchScanResults( List< ScanResult > results )
         {
           for ( ScanResult result : results ) {
             setRemoteDevice( result.getDevice() );
@@ -96,7 +96,7 @@ class BleScanner
         // .setDeviceAddress( address )
         // .setDeviceName( name )
         .build();
-      List<ScanFilter> filters = new ArrayList<ScanFilter>();
+      List< ScanFilter > filters = new ArrayList<>();
       filters.add( filter );
 
       ScanSettings settings = new ScanSettings.Builder()

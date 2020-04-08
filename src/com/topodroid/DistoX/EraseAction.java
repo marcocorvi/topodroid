@@ -65,7 +65,7 @@ class EraseAction // implements ICanvasCommand
     setPoints( mNewPoints, line );
   }
 
-  private void setPoints( ArrayList<LinePoint> pts, DrawingPointLinePath line )
+  private void setPoints( ArrayList< LinePoint > pts, DrawingPointLinePath line )
   {
     LinePoint prev = null;
     for ( LinePoint lp = line.mFirst; lp != null; lp = lp.mNext ) {

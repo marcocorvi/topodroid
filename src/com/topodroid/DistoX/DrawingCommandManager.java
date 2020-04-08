@@ -53,27 +53,27 @@ class DrawingCommandManager
   private DrawingPath mFirstReference;
   private DrawingPath mSecondReference;
 
-  final private List<DrawingPath>    mGridStack1;
-  final private List<DrawingPath>    mGridStack10;
-  final private List<DrawingPath>    mGridStack100;
+  final private List< DrawingPath >    mGridStack1;
+  final private List< DrawingPath >    mGridStack10;
+  final private List< DrawingPath >    mGridStack100;
 
   private DrawingScaleReference mScaleRef; /*[AR] this is the instance of scale reference line*/
 
-  final private List<DrawingPath>        mLegsStack;
-  final private List<DrawingPath>        mSplaysStack;
-  // private List<DrawingPath>     mHighlight;  // highlighted path
-  final private List<DrawingStationName> mStations;    // survey stations
-  // final private List<DrawingFixedName>   mFixeds;      // survey stations
-  final private List<DrawingLinePath>    mPlotOutline; // scrap outline
-  private List<DrawingOutlinePath> mXSectionOutlines;  // xsections outlines
+  final private List< DrawingPath >        mLegsStack;
+  final private List< DrawingPath >        mSplaysStack;
+  // private List< DrawingPath >     mHighlight;  // highlighted path
+  final private List< DrawingStationName > mStations;    // survey stations
+  // final private List< DrawingFixedName >   mFixeds;      // survey stations
+  final private List< DrawingLinePath >    mPlotOutline; // scrap outline
+  private List< DrawingOutlinePath > mXSectionOutlines;  // xsections outlines
 
   private int mScrapIdx = 0; // scrap index
-  private ArrayList< Scrap > mScraps;
+  private List< Scrap > mScraps;
   private Scrap mCurrentScrap; // mScraps[ mScrapIdx ]
 
-  // final private List<ICanvasCommand>     mCurrentStack;
-  // final private List<DrawingStationPath> mUserStations;  // user-inserted stations
-  // final private List<ICanvasCommand>     mRedoStack;
+  // final private List< ICanvasCommand >     mCurrentStack;
+  // final private List< DrawingStationPath > mUserStations;  // user-inserted stations
+  // final private List< ICanvasCommand >     mRedoStack;
   private Selection mSelectionFixed;
   // private SelectionSet mSelected;
 
@@ -94,24 +94,24 @@ class DrawingCommandManager
     mFirstReference  = null;
     mSecondReference = null;
 
-    mGridStack1   = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    mGridStack10  = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    mGridStack100 = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    mLegsStack    = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    mSplaysStack  = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    mPlotOutline  = Collections.synchronizedList(new ArrayList<DrawingLinePath>());
-    mXSectionOutlines = Collections.synchronizedList(new ArrayList<DrawingOutlinePath>());
-    mStations     = Collections.synchronizedList(new ArrayList<DrawingStationName>());
-    // mFixeds       = Collections.synchronizedList(new ArrayList<DrawingFixedName>());
+    mGridStack1   = Collections.synchronizedList(new ArrayList< DrawingPath >());
+    mGridStack10  = Collections.synchronizedList(new ArrayList< DrawingPath >());
+    mGridStack100 = Collections.synchronizedList(new ArrayList< DrawingPath >());
+    mLegsStack    = Collections.synchronizedList(new ArrayList< DrawingPath >());
+    mSplaysStack  = Collections.synchronizedList(new ArrayList< DrawingPath >());
+    mPlotOutline  = Collections.synchronizedList(new ArrayList< DrawingLinePath >());
+    mXSectionOutlines = Collections.synchronizedList(new ArrayList< DrawingOutlinePath >());
+    mStations     = Collections.synchronizedList(new ArrayList< DrawingStationName >());
+    // mFixeds       = Collections.synchronizedList(new ArrayList< DrawingFixedName >());
     mPlotName     = plot_name;
-    mScraps = new ArrayList< Scrap >();
+    mScraps       = Collections.synchronizedList(new ArrayList< Scrap >());
     mCurrentScrap = new Scrap( 0, mPlotName );
     mScraps.add( mCurrentScrap );
 
-    // mCurrentStack = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
-    // mUserStations = Collections.synchronizedList(new ArrayList<DrawingStationPath>());
-    // mRedoStack    = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
-    // // mHighlight = Collections.synchronizedList(new ArrayList<DrawingPath>());
+    // mCurrentStack = Collections.synchronizedList(new ArrayList< ICanvasCommand >());
+    // mUserStations = Collections.synchronizedList(new ArrayList< DrawingStationPath >());
+    // mRedoStack    = Collections.synchronizedList(new ArrayList< ICanvasCommand >());
+    // // mHighlight = Collections.synchronizedList(new ArrayList< DrawingPath >());
     // // PATH_MULTISELECT
     // mMultiselected = Collections.synchronizedList( new ArrayList< DrawingPath >());
     mSelectionFixed = new Selection();
@@ -130,9 +130,10 @@ class DrawingCommandManager
   int scrapIndex() { return mScrapIdx; }
 
   int toggleScrapIndex( int k ) { 
+    int size = mScraps.size();
     mScrapIdx += k;
-    if ( mScrapIdx >= mScraps.size() ) { mScrapIdx = 0; } 
-    else if ( mScrapIdx < 0 ) { mScrapIdx = mScraps.size() - 1; }
+    if ( mScrapIdx >= size ) { mScrapIdx = 0; } 
+    else if ( mScrapIdx < 0 ) { mScrapIdx = size - 1; }
     mCurrentScrap = mScraps.get( mScrapIdx );
     return mScrapIdx;
   }
@@ -182,34 +183,41 @@ class DrawingCommandManager
   // return a copy of the drawing objects
   List< DrawingPath > getCommands()
   { 
-    ArrayList<DrawingPath> ret = new ArrayList<>();
-    for ( Scrap scrap : mScraps ) scrap.addCommandsToList( ret );
+    ArrayList< DrawingPath > ret = new ArrayList<>();
+    synchronized( mScraps ) {
+      for ( Scrap scrap : mScraps ) scrap.addCommandsToList( ret );
+    }
     return ret;
   }
 
   // accessors used by DrawingDxf and DrawingSvg
-  List<DrawingPath>        getLegs()         { return mLegsStack;    } 
-  List<DrawingPath>        getSplays()       { return mSplaysStack;  }
-  List<DrawingStationName> getStations()     { return mStations;     } 
-  // List<DrawingFixedName>   getFixeds()       { return mFixeds;     } 
-  // List<DrawingStationPath> getUserStations() { return mUserStations; }
-  List<DrawingStationPath> getUserStations() 
+  List< DrawingPath >        getLegs()         { return mLegsStack;    } 
+  List< DrawingPath >        getSplays()       { return mSplaysStack;  }
+  List< DrawingStationName > getStations()     { return mStations;     } 
+  // List< DrawingFixedName >   getFixeds()       { return mFixeds;     } 
+  // List< DrawingStationPath > getUserStations() { return mUserStations; }
+  List< DrawingStationPath > getUserStations() 
   {
-    ArrayList< DrawingStationPath > ret = new ArrayList< DrawingStationPath >();
-    for ( Scrap scrap : mScraps ) scrap.addUserStationsToList( ret ); 
+    ArrayList< DrawingStationPath > ret = new ArrayList<>();
+    synchronized( mScraps ) {
+      for ( Scrap scrap : mScraps ) scrap.addUserStationsToList( ret ); 
+    }
     return ret;
   }
 
   boolean hasUserStations() 
   {
-    for ( Scrap scrap : mScraps ) if ( scrap.hasUserStations() ) return true;
-    return false;
+    boolean ret = false;
+    synchronized( mScraps ) {
+      for ( Scrap scrap : mScraps ) if ( scrap.hasUserStations() ) { ret = true; break; }
+    }
+    return ret;
   }
 
   // accessor for DrawingSvg
-  List<DrawingPath> getGrid1()   { return mGridStack1; }
-  List<DrawingPath> getGrid10()  { return mGridStack10; }
-  List<DrawingPath> getGrid100() { return mGridStack100; }
+  List< DrawingPath > getGrid1()   { return mGridStack1; }
+  List< DrawingPath > getGrid10()  { return mGridStack10; }
+  List< DrawingPath > getGrid100() { return mGridStack100; }
 
   private int mSelectMode = Drawing.FILTER_ALL;
   void setSelectMode( int mode ) { mSelectMode = mode; }
@@ -308,7 +316,7 @@ class DrawingCommandManager
   /* Flip the X-axis
    * flip the drawing about the vertical direction
    */
-  private void flipXAxes( List<DrawingPath> paths )
+  private void flipXAxes( List< DrawingPath > paths )
   {
     final float z = 1/mScale;
     for ( DrawingPath path : paths ) {
@@ -337,7 +345,9 @@ class DrawingCommandManager
       for ( DrawingStationName st : mStations ) st.flipXAxis(z);
       // for ( DrawingFixedName   fx : mFixeds )   fx.flipXAxis(z);
     }
-    for ( Scrap scrap : mScraps ) scrap.flipXAxis( z );
+    synchronized( mScraps ) {
+      for ( Scrap scrap : mScraps ) scrap.flipXAxis( z );
+    }
   }
 
   /* Shift the drawing
@@ -351,7 +361,9 @@ class DrawingCommandManager
     //     for ( DrawingFixedName fx : mFixeds ) fx.shiftBy( x, y );
     //   }
     // }
-    for ( Scrap scrap : mScraps ) scrap.shiftDrawing( x, y );
+    synchronized( mScraps ) {
+      for ( Scrap scrap : mScraps ) scrap.shiftDrawing( x, y );
+    }
   }
 
   /* Scale the drawing
@@ -367,7 +379,9 @@ class DrawingCommandManager
     // }
     Matrix m = new Matrix();
     m.postScale(z,z);
-    for ( Scrap scrap : mScraps ) scrap.scaleDrawing( z, m );
+    synchronized( mScraps ) {
+      for ( Scrap scrap : mScraps ) scrap.scaleDrawing( z, m );
+    }
   }
 
   /**
@@ -393,8 +407,10 @@ class DrawingCommandManager
   void syncClearSelected()
   { 
     synchronized( TDPath.mSelectionLock ) { 
-      for ( Scrap scrap : mScraps ) scrap.clearSelected();
-    }
+      synchronized( mScraps ) {
+        for ( Scrap scrap : mScraps ) scrap.clearSelected();
+      }
+   }
   }
 
   // clear the shots/stations - only extended profile
@@ -402,7 +418,7 @@ class DrawingCommandManager
   {
     synchronized( TDPath.mSelectionLock ) { 
       mSelectionFixed.clearReferencePoints();
-      // FIXME-HIDE for ( Scrap scrap : mScraps ) scrap.clearShotsAndStations();
+      // FIXME-HIDE synchronized( mScraps ) for ( Scrap scrap : mScraps ) scrap.clearShotsAndStations();
     }
   }
 
@@ -433,7 +449,9 @@ class DrawingCommandManager
 
   private void clearSketchItems()
   {
-    for ( Scrap scrap : mScraps ) scrap.clearSketchItems();
+    synchronized( mScraps ) {
+      for ( Scrap scrap : mScraps ) scrap.clearSketchItems();
+    }
     syncClearSelected();
     mDisplayPoints = false;
   }
@@ -575,7 +593,9 @@ class DrawingCommandManager
     }
     mMatrix.postScale( s, s );
 
-    for ( Scrap scrap : mScraps ) scrap.shiftAreaShaders( dx, dy, s, landscape );
+    synchronized( mScraps ) {
+      for ( Scrap scrap : mScraps ) scrap.shiftAreaShaders( dx, dy, s, landscape );
+    }
 
     // FIXME 
     // TUNING this is to see how many buckets are on the canvas and how many points they contain
@@ -633,7 +653,7 @@ class DrawingCommandManager
 
   boolean removeLinePoint( DrawingPointLinePath line, LinePoint point, SelectionPoint sp ) { return mCurrentScrap.removeLinePoint( line, point, sp ); }
 
-  List<DrawingPath> splitPlot( ArrayList< PointF > border, boolean remove ) { return mCurrentScrap.splitPlot( border, remove ); }
+  List< DrawingPath > splitPlot( ArrayList< PointF > border, boolean remove ) { return mCurrentScrap.splitPlot( border, remove ); }
     
 
   // p is the path of sp
@@ -644,7 +664,7 @@ class DrawingCommandManager
     }
     synchronized( TDPath.mSelectionLock ) {
       mSelectionFixed.removePoint( sp );
-      // FIXME-HIDE for ( Scrap scrap : mScraps ) scrap.deleteSplay( sp );
+      // FIXME-HIDE synchronized( mScraps ) for ( Scrap scrap : mScraps ) scrap.deleteSplay( sp );
     }
   }
 
@@ -725,7 +745,7 @@ class DrawingCommandManager
       if ( selectable ) {
         synchronized( TDPath.mSelectionLock ) {
 	  mSelectionFixed.insertPath( path );
-          // FIXME-HIDE for ( Scrap scrap : mScraps ) scrap.insertPathInSelection( path );
+          // FIXME-HIDE synchronized( mScraps ) for ( Scrap scrap : mScraps ) scrap.insertPathInSelection( path );
         }
       }
     }
@@ -739,7 +759,7 @@ class DrawingCommandManager
       if ( selectable ) {
         synchronized( TDPath.mSelectionLock ) {
 	  mSelectionFixed.insertPath( path );
-          // FIXME-HIDE for ( Scrap scrap : mScraps ) scrap.insertPathInSelection( path );
+          // FIXME-HIDE synchronized( mScraps ) for ( Scrap scrap : mScraps ) scrap.insertPathInSelection( path );
         }
       }
     }
@@ -753,7 +773,7 @@ class DrawingCommandManager
       if ( selectable ) {
         synchronized( TDPath.mSelectionLock ) {
           mSelectionFixed.insertStationName( st );
-          // FIXME-HIDE for ( Scrap scrap : mScraps ) scrap.addStationToSelection( st );
+          // FIXME-HIDE synchronized( mScraps ) for ( Scrap scrap : mScraps ) scrap.addStationToSelection( st );
         }
       }
     }
@@ -834,7 +854,9 @@ class DrawingCommandManager
         }
       }
     }
-    for ( Scrap scrap : mScraps ) scrap.getBitmapBounds( bounds );
+    synchronized( mScraps ) {
+      for ( Scrap scrap : mScraps ) scrap.getBitmapBounds( bounds );
+    }
     // Log.v("DistoX", "bounds " + bounds.left + " " + bounds.top + " " + bounds.right + " " + bounds.bottom );
     return bounds;
   }
@@ -940,8 +962,8 @@ class DrawingCommandManager
       }
     }
 
-    for ( Scrap scrap : mScraps ) {
-      scrap.draw( c, mat, sca );
+    synchronized( mScraps ) {
+      for ( Scrap scrap : mScraps ) scrap.draw( c, mat, sca );
     }
 
     // checkLines();
@@ -1078,20 +1100,22 @@ class DrawingCommandManager
 
     if ( mMode == DrawingSurface.DRAWING_OVERVIEW ) {
       if ( outline ) {
-        for ( Scrap scrap : mScraps ) {
-          scrap.drawOutline( canvas, mMatrix, mScale, mBBox );
+        synchronized( mScraps ) {
+          for ( Scrap scrap : mScraps ) scrap.drawOutline( canvas, mMatrix, mScale, mBBox );
         }
       } else {
-        for ( Scrap scrap : mScraps ) {
-          scrap.drawAll( canvas, mMatrix, mScale, mBBox );
+        synchronized( mScraps ) {
+          for ( Scrap scrap : mScraps ) scrap.drawAll( canvas, mMatrix, mScale, mBBox );
         }
       }
     } else { // not DRAWING_OVERVIEW
-      for ( Scrap scrap : mScraps ) {
-        if ( scrap == mCurrentScrap ) {
-          scrap.drawAll( canvas, mMatrix, mScale, mBBox );
-        } else {
-          scrap.drawGreyOutline( canvas, mMatrix, mScale, mBBox );
+      synchronized( mScraps ) {
+        for ( Scrap scrap : mScraps ) {
+          if ( scrap == mCurrentScrap ) {
+            scrap.drawAll( canvas, mMatrix, mScale, mBBox );
+          } else {
+            scrap.drawGreyOutline( canvas, mMatrix, mScale, mBBox );
+          }
         }
       }
       if ( mDisplayPoints ) {
@@ -1312,7 +1336,9 @@ class DrawingCommandManager
   RectF getBoundingBox( )
   {
     RectF bbox = new RectF( 0, 0, 0, 0 );
-    for ( Scrap scrap : mScraps ) bbox.union( scrap.computeBBox() );
+    synchronized( mScraps ) {
+      for ( Scrap scrap : mScraps ) bbox.union( scrap.computeBBox() );
+    }
     return bbox;
   }
 
@@ -1345,13 +1371,13 @@ class DrawingCommandManager
   }
 
   void exportAsTCsx( PrintWriter pw, String survey, String cave, String branch, /* String session, */
-                    List<PlotInfo> all_sections, List<PlotInfo> sections )
+                    List< PlotInfo > all_sections, List< PlotInfo > sections )
   {
     DrawingIO.doExportAsTCsx( pw, survey, cave, branch, /* session, */ null, getCommands(), all_sections, sections ); // bind=null
   }
 
   // void exportAsCsx( PrintWriter pw, String survey, String cave, String branch, /* String session, */
-  //                   List<PlotInfo> all_sections, List<PlotInfo> sections )
+  //                   List< PlotInfo > all_sections, List< PlotInfo > sections )
   // {
   //   DrawingIO.doExportAsCsx( pw, survey, cave, branch, /* session, */ null, getCommands(), all_sections, sections ); // bind=null
   // }
@@ -1360,7 +1386,7 @@ class DrawingCommandManager
 
   // this is not efficient: the station names should be stored in a tree (key = name) for log-time search
   // type = type of the plot
-  void setStationXSections( List<PlotInfo> xsections, long type )
+  void setStationXSections( List< PlotInfo > xsections, long type )
   {
     for ( DrawingStationName st : mStations ) {
       String name = st.getName();
@@ -1399,7 +1425,7 @@ class DrawingCommandManager
     if ( mXSectionOutlines == null || mXSectionOutlines.size() == 0 ) return false;
     synchronized( TDPath.mXSectionsLock )  {
       for ( DrawingOutlinePath path : mXSectionOutlines ) {
-        if ( path.isScrap( name ) ) return true;
+        if ( path.isScrapName( name ) ) return true;
       }
     }
     return false;
@@ -1415,10 +1441,10 @@ class DrawingCommandManager
 
   void clearXSectionOutline( String name )
   {
-    List<DrawingOutlinePath> xsection_outlines = Collections.synchronizedList(new ArrayList<DrawingOutlinePath>());
+    List< DrawingOutlinePath > xsection_outlines = Collections.synchronizedList(new ArrayList< DrawingOutlinePath >());
     synchronized( TDPath.mXSectionsLock ) {
       for ( DrawingOutlinePath path : mXSectionOutlines  ) {
-        if ( ! path.isScrap( name ) ) xsection_outlines.add( path );
+        if ( ! path.isScrapName( name ) ) xsection_outlines.add( path );
       }
       mXSectionOutlines.clear(); // not necessary
     }

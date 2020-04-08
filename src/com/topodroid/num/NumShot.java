@@ -24,7 +24,7 @@ public class NumShot
   public final NumStation to;
 
   final DBlock firstBlock;
-  final ArrayList<DBlock> blocks;
+  final ArrayList< DBlock > blocks;
 
   public int mBranchDir; // branch direction
   public int mDirection; // direction of the block (1 same, -1 opposite)

@@ -78,7 +78,7 @@ class SurveySplitOrMoveDialog extends MyDialog
 
     // setTitleColor( TDColor.TITLE_NORMAL );
 
-    List<String> surveys = TopoDroidApp.getSurveyNames();
+    List< String > surveys = TopoDroidApp.getSurveyNames();
     int size = surveys.size();
     if ( size > 0 ) {
 

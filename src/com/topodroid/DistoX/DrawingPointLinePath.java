@@ -460,7 +460,7 @@ public class DrawingPointLinePath extends DrawingPath
     // computeUnitNormal();
   }
 
-  void resetPath( ArrayList<LinePoint> pts )
+  void resetPath( ArrayList< LinePoint > pts )
   {
     clear();
     // if ( pts == null ) return;

@@ -38,7 +38,7 @@ class TriShot
   boolean commented;
   int     backshot; // 0 forward, +1 sibling forward, -1 sibling backshot
   TriShot sibling;  // sibling shot with same stations
-  ArrayList<DBlock> blocks;
+  ArrayList< DBlock > blocks;
   AverageLeg mAvgLeg;
   TriCluster cluster;
 
@@ -83,7 +83,7 @@ class TriShot
 
   DBlock getFirstBlock( ) { return blocks.get(0); }
 
-  ArrayList<DBlock> getBlocks() { return blocks; }
+  ArrayList< DBlock > getBlocks() { return blocks; }
 
   /** get the temp-shot distance
    * note if the temp-shot is reversed the distance is negative

@@ -33,12 +33,12 @@ import java.util.List;
 
 public class ShpPolylinez extends ShpObject
 {
-  public ShpPolylinez( String path, List<File> files ) // throws IOException
+  public ShpPolylinez( String path, List< File > files ) // throws IOException
   {
     super( SHP_POLYLINEZ, path, files );
   }
 
-  public boolean writeShots( List<NumShot> lns, List<NumSplay> lms ) throws IOException
+  public boolean writeShots( List< NumShot > lns, List< NumSplay > lms ) throws IOException
   {
     int nrs = ( lns != null )? lns.size() : 0;
     int mrs = ( lms != null )? lms.size() : 0;
@@ -151,7 +151,7 @@ public class ShpPolylinez extends ShpObject
 
   @Override protected int getShpRecordLength( ) { return 76; }
 
-  private void setBoundsShots( List<NumShot> lns, List<NumSplay> lms )
+  private void setBoundsShots( List< NumShot > lns, List< NumSplay > lms )
   {
     int nrs = ( lns != null )? lns.size() : 0;
     int mrs = ( lms != null )? lms.size() : 0;
@@ -194,7 +194,7 @@ public class ShpPolylinez extends ShpObject
     }
   }
 
-  // private void setBoundsSplays( List<NumSplay> lns )
+  // private void setBoundsSplays( List< NumSplay > lns )
   // {
   //   if ( lns.size() == 0 ) {
   //     xmin = xmax = ymin = ymax = zmin = zmax = 0.0;

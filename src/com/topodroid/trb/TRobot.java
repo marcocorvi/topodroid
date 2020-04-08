@@ -41,7 +41,7 @@ public class TRobot
     }
   }
 
-  private boolean populateSeries( List<DBlock> blks )
+  private boolean populateSeries( List< DBlock > blks )
   {
     TRobotSeries sf, st;
     TRobotPoint pf, pt;
@@ -106,7 +106,7 @@ public class TRobot
   }
     
 
-  private void buildSeries( List<DBlock> blks )
+  private void buildSeries( List< DBlock > blks )
   {
     int mSrCnt = 0;
     ArrayList< DBlock > repeat = new ArrayList<>();

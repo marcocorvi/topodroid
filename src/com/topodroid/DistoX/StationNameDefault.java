@@ -37,14 +37,14 @@ class StationNameDefault extends StationName
   // @param list         list of dblock to assign
   // @param sts          station names already in use
   @Override
-  boolean assignStationsAfter( DBlock blk0, List<DBlock> list, Set<String> sts )
+  boolean assignStationsAfter( DBlock blk0, List< DBlock > list, Set<String> sts )
   {
     int survey_stations = StationPolicy.mSurveyStations;
     if ( survey_stations <= 0 ) return false; // assign always false with no policy
 
     boolean ret = false;
     // Log.v("DistoX-BLOCK", "assign station after");
-    ArrayList<DBlock> unassigned = new ArrayList<DBlock>();
+    ArrayList< DBlock > unassigned = new ArrayList<>();
     // TDLog.Log( TDLog.LOG_DATA, "assign stations after " + list.size() + " " + (sts!=null? sts.size():0) );
 
     boolean forward_shots = ( survey_stations == 1 );
@@ -155,7 +155,7 @@ class StationNameDefault extends StationName
    * DistoX backshot-mode is handled separatedly
    */
   @Override
-  boolean assignStations( List<DBlock> list, Set<String> sts )
+  boolean assignStations( List< DBlock > list, Set<String> sts )
   { 
     // TDLog.Log( TDLog.LOG_DATA, "assign stations: list " + list.size() + " sts " + (sts!=null? sts.size():0) );
 

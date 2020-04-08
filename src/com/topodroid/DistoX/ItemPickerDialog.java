@@ -355,7 +355,7 @@ class ItemPickerDialog extends MyDialog
     // if ( TDLevel.overBasic ) 
     {
       mPointAdapter = new ItemAdapter( mContext, this, Symbol.POINT, 
-                                       R.layout.item, new ArrayList<ItemSymbol>() );
+                                       R.layout.item, new ArrayList< ItemSymbol >() );
       int np = mPointLib.size();
       for ( int i=0; i<np; ++i ) {
         SymbolPoint p = (SymbolPoint)mPointLib.getSymbolByIndex( i );
@@ -366,7 +366,7 @@ class ItemPickerDialog extends MyDialog
     }
 
     mLineAdapter  = new ItemAdapter( mContext, this, Symbol.LINE,
-                                     R.layout.item, new ArrayList<ItemSymbol>() );
+                                     R.layout.item, new ArrayList< ItemSymbol >() );
     int nl = mLineLib.size();
     for ( int j=0; j<nl; ++j ) {
       SymbolLine l = (SymbolLine)mLineLib.getSymbolByIndex( j );
@@ -378,7 +378,7 @@ class ItemPickerDialog extends MyDialog
     // if ( TDLevel.overBasic )
     {
       mAreaAdapter  = new ItemAdapter( mContext, this, Symbol.AREA,
-                                       R.layout.item, new ArrayList<ItemSymbol>() );
+                                       R.layout.item, new ArrayList< ItemSymbol >() );
       int na = mAreaLib.size();
       for ( int k=0; k<na; ++k ) {
         SymbolArea a = (SymbolArea)mAreaLib.getSymbolByIndex( k );

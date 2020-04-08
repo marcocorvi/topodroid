@@ -123,7 +123,7 @@ class NumCycle
   }
 
   // return true if every branch in this cycle is equal to a branch of one of the cycles
-  boolean isBranchCovered( ArrayList<NumCycle> cycles )
+  boolean isBranchCovered( ArrayList< NumCycle > cycles )
   {
     for ( NumCycleBranch branch : branches ) {
       NumBranch br = branch.mBranch;

@@ -112,7 +112,7 @@ class TdmEquateNewDialog extends MyDialog
   {
     Button b = (Button) v;
     if ( b == mBTok ) {
-      ArrayList<String> sts = new ArrayList<String>();
+      ArrayList< String > sts = new ArrayList<>();
       for ( int k=0; k<size; ++k ) {
         TdmViewCommand vc = mCommands.get( k );
         String survey = vc.name();

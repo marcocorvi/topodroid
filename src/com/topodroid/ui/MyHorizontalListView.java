@@ -44,7 +44,7 @@ public class MyHorizontalListView extends AdapterView<ListAdapter>
   private int mDisplayOffset = 0;
   private Scroller mScroller;
   private GestureDetector mGesture;
-  private Queue<View> mRemovedViewQueue = new LinkedList<View>();
+  private Queue<View> mRemovedViewQueue = new LinkedList< View >();
 
   private OnItemSelectedListener  mOnItemSelected;    // listeners
   private OnItemClickListener     mOnItemClicked;

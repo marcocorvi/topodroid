@@ -67,7 +67,7 @@ class ImportDialog extends MyDialog
     // mBtnCancel.setOnClickListener( this );
     ( (Button)findViewById( R.id.button_cancel ) ).setOnClickListener( this );
 
-    ArrayList<String> names = new ArrayList<>();
+    ArrayList< String > names = new ArrayList<>();
     if ( mFiles != null ) {
       for ( File f : mFiles ) { 
         names.add( f.getName() );

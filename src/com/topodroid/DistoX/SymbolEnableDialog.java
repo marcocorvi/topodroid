@@ -111,9 +111,9 @@ class SymbolEnableDialog extends MyDialog
 
   private boolean createAdapters()
   {
-    mPointAdapter = new SymbolAdapter( mContext, R.layout.symbol, new ArrayList<EnableSymbol>() );
-    mLineAdapter  = new SymbolAdapter( mContext, R.layout.symbol, new ArrayList<EnableSymbol>() );
-    mAreaAdapter  = new SymbolAdapter( mContext, R.layout.symbol, new ArrayList<EnableSymbol>() );
+    mPointAdapter = new SymbolAdapter( mContext, R.layout.symbol, new ArrayList< EnableSymbol >() );
+    mLineAdapter  = new SymbolAdapter( mContext, R.layout.symbol, new ArrayList< EnableSymbol >() );
+    mAreaAdapter  = new SymbolAdapter( mContext, R.layout.symbol, new ArrayList< EnableSymbol >() );
 
     if ( TDLevel.overBasic ) {
       SymbolPointLibrary point_lib = BrushManager.getPointLib();

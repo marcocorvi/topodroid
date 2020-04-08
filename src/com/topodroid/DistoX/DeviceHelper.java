@@ -72,7 +72,7 @@ class DeviceHelper extends DataSetObservable
   // private SQLiteStatement updateDeviceModelStmt = null;
   // private SQLiteStatement updateDeviceNicknameStmt = null;
 
-  // private ArrayList<DataListener> mListeners; // IF_COSURVEY
+  // private ArrayList< DataListener > mListeners; // IF_COSURVEY
   // ----------------------------------------------------------------------
   // DATABASE
 
@@ -81,7 +81,7 @@ class DeviceHelper extends DataSetObservable
 
   SQLiteDatabase getDb() { return myDB; }
 
-  // DeviceHelper( Context context, TopoDroidApp app, ArrayList<DataListener> listeners ) // IF_COSURVEY
+  // DeviceHelper( Context context, TopoDroidApp app, ArrayList< DataListener > listeners ) // IF_COSURVEY
   DeviceHelper( Context context /* , TopoDroidApp app */ )
   {
     mContext = context;
@@ -267,7 +267,7 @@ class DeviceHelper extends DataSetObservable
     // } catch (SQLiteException e ) { logError( "reset GM " + cid + "/" + start_id, e ); }
   }
 
-  List<CalibCBlock> selectAllGMs( long cid, int status, boolean negative_too )
+  List< CalibCBlock > selectAllGMs( long cid, int status, boolean negative_too )
   {
     List< CalibCBlock > list = new ArrayList<>();
     // if ( myDB == null ) return list;
@@ -455,7 +455,7 @@ class DeviceHelper extends DataSetObservable
   // ----------------------------------------------------------------------
   // SELECT: LIST SURVEY / CABIL NAMES
 
-  private List<String> selectAllNames( String table )
+  private List< String > selectAllNames( String table )
   {
     TDLog.Log( TDLog.LOG_DB, "selectAllNames table " + table );
 
@@ -477,11 +477,11 @@ class DeviceHelper extends DataSetObservable
     return list;
   }
 
-  List<String> selectAllCalibs() { return selectAllNames( CALIB_TABLE ); }
+  List< String > selectAllCalibs() { return selectAllNames( CALIB_TABLE ); }
 
-  List<String> selectDeviceCalibs( String device )
+  List< String > selectDeviceCalibs( String device )
   {
-    List<String> ret = new ArrayList<>();
+    List< String > ret = new ArrayList<>();
     Cursor cursor = null;
     try {
       cursor = myDB.query( CALIB_TABLE,
@@ -499,9 +499,9 @@ class DeviceHelper extends DataSetObservable
     return ret;
   }
 
-  List<CalibInfo> selectDeviceCalibsInfo( String device ) 
+  List< CalibInfo > selectDeviceCalibsInfo( String device ) 
   {
-    List<CalibInfo> ret = new ArrayList<>();
+    List< CalibInfo > ret = new ArrayList<>();
     Cursor cursor = null;
     try {
       cursor = myDB.query( CALIB_TABLE,
@@ -743,7 +743,7 @@ class DeviceHelper extends DataSetObservable
 
   ArrayList< Device > getDevices( ) 
   {
-    ArrayList<Device> ret = new ArrayList<>();
+    ArrayList< Device > ret = new ArrayList<>();
     // if ( myDB == null ) return ret;
     Cursor cursor = null;
     try {

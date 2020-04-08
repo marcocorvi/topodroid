@@ -53,11 +53,11 @@ class DrawingShp
         TDLog.Error("mkdir error");
         return false;
       }
-      ArrayList<File> files = new ArrayList<File>();
+      ArrayList< File > files = new ArrayList<>();
 
       // centerline data: shepafile of segments (fields: type, fron, to)
       // xoff+sh.x1, yoff+sh.y1  --  xoff+sh.x2, yoff+sh.y2
-      ArrayList<DrawingPath> shots = new ArrayList<DrawingPath>();
+      ArrayList< DrawingPath > shots = new ArrayList<>();
       if ( PlotInfo.isSketch2D( type ) ) { 
         for ( DrawingPath sh : plot.getLegs() ) {
           if ( sh.mBlock != null ) shots.add( sh );
@@ -71,9 +71,9 @@ class DrawingShp
       shp_shot.writeSegments( shots, xoff, yoff, xscale, yscale );
 
       // points shapefile
-      ArrayList< DrawingPointPath > points = new ArrayList< DrawingPointPath >();
-      ArrayList< DrawingPointLinePath > lines  = new ArrayList< DrawingPointLinePath >();
-      ArrayList< DrawingPointLinePath > areas  = new ArrayList< DrawingPointLinePath >();
+      ArrayList< DrawingPointPath > points     = new ArrayList<>();
+      ArrayList< DrawingPointLinePath > lines  = new ArrayList<>();
+      ArrayList< DrawingPointLinePath > areas  = new ArrayList<>();
       for ( ICanvasCommand cmd : plot.getCommands() ) {
         if ( cmd.commandType() != 0 ) continue;
         DrawingPath path = (DrawingPath)cmd;
@@ -93,7 +93,7 @@ class DrawingShp
       shp_area.writeAreas( areas, xoff, yoff, xscale, yscale );
 
       // stations: xoff+name.cx, yoff+name.cy
-      List<DrawingStationName> stations = plot.getStations();
+      List< DrawingStationName > stations = plot.getStations();
       ShpStation shp_station = new ShpStation( basepath + "/station", files );
       shp_station.writeStations( stations, xoff, yoff, xscale, yscale );
 

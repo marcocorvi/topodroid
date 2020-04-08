@@ -39,7 +39,7 @@ class MultishotDialog extends MyDialog
 			       , MyColorPicker.IColorChanged
 {
   private final ShotWindow mParent;
-  private List<DBlock> mBlks;
+  private List< DBlock > mBlks;
   private DBlock mBlk = null;
 
   private boolean mColoring = false;
@@ -63,7 +63,7 @@ class MultishotDialog extends MyDialog
 
   private MyKeyboard mKeyboard = null;
 
-  MultishotDialog( Context context, ShotWindow parent, List<DBlock> blks )
+  MultishotDialog( Context context, ShotWindow parent, List< DBlock > blks )
   {
     super( context, R.string.MultishotDialog );
     mParent = parent;

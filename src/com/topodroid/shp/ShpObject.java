@@ -69,12 +69,12 @@ public class ShpObject
   FileOutputStream shxFos;
   FileOutputStream dbfFos;
 
-  List<File> mFiles; // list of files to which append my files
+  List< File > mFiles; // list of files to which append my files
 
   // @param yy year [four digit]
   // @param mm month [1..12]
   // @param dd day [1..31]
-  public ShpObject( int typ, String pth, List<File> files ) // throws IOException
+  public ShpObject( int typ, String pth, List< File > files ) // throws IOException
   { 
     geomType  = typ;
     nr    = 0;

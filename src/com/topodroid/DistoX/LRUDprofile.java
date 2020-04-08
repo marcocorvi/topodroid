@@ -30,7 +30,7 @@ class LRUDprofile extends LRUD
   }
 
   float bearing;
-  private ArrayList<Profile> data;
+  private ArrayList< Profile > data;
 
   LRUDprofile( float b )
   {

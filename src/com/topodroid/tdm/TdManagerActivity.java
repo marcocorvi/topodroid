@@ -220,7 +220,7 @@ public class TdManagerActivity extends Activity
     
   void updateTdmConfigList()
   {
-    mTdmConfigAdapter = new TdmConfigAdapter( this, R.layout.row, new ArrayList<TdmConfig>(),
+    mTdmConfigAdapter = new TdmConfigAdapter( this, R.layout.row, new ArrayList< TdmConfig >(),
       new View.OnClickListener() {
         @Override
         public void onClick( View v ) {

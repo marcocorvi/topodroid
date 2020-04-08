@@ -42,23 +42,23 @@ public class ShpPolyline extends ShpObject
   // int mPathType; 
 
   // @param path_type   either DRAWING_PATH_LINE or DRAWING_PATH_AREA
-  public ShpPolyline( String path, int path_type, List<File> files ) // throws IOException
+  public ShpPolyline( String path, int path_type, List< File > files ) // throws IOException
   {
     super( ( (path_type == DrawingPath.DRAWING_PATH_LINE)? SHP_POLYLINE : SHP_POLYGON ), path, files );
     // mPathType = path_type;
   }
 
-  public void writeLines( List<DrawingPointLinePath> lns, float x0, float y0, float xscale, float yscale ) throws IOException
+  public void writeLines( List< DrawingPointLinePath > lns, float x0, float y0, float xscale, float yscale ) throws IOException
   {
     writwPointLines( lns, DrawingPath.DRAWING_PATH_LINE, x0, y0, xscale, yscale );
   }
 
-  public void writeAreas( List<DrawingPointLinePath> lns, float x0, float y0, float xscale, float yscale ) throws IOException
+  public void writeAreas( List< DrawingPointLinePath > lns, float x0, float y0, float xscale, float yscale ) throws IOException
   {
     writwPointLines( lns, DrawingPath.DRAWING_PATH_AREA, x0, y0, xscale, yscale );
   }
 
-  private boolean writwPointLines( List<DrawingPointLinePath> lns, int path_type, float x0, float y0, float xscale, float yscale ) throws IOException
+  private boolean writwPointLines( List< DrawingPointLinePath > lns, int path_type, float x0, float y0, float xscale, float yscale ) throws IOException
   {
     int nrs = ( lns != null )? lns.size() : 0;
     if ( nrs == 0 ) return false;
@@ -174,7 +174,7 @@ public class ShpPolyline extends ShpObject
   // @Override 
   protected int getShpRecordLength( int npt ) { return 28 + npt * 8; }
 
-  private void setBoundsLines( List<DrawingPointLinePath> lns, float x0, float y0, float xscale, float yscale )
+  private void setBoundsLines( List< DrawingPointLinePath > lns, float x0, float y0, float xscale, float yscale )
   {
     int nrs = ( lns != null )? lns.size() : 0;
     if ( nrs > 0 ) {

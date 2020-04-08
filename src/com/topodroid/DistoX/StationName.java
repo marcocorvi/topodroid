@@ -39,12 +39,12 @@ class StationName
   private static final int TRIPLE_SHOT_BELL_TIME = 200; // ms
   private static final int TRIPLE_SHOT_VIBRATE_TIME = 200; // ms
 
-  boolean assignStations( List<DBlock> list, Set<String> sts )
+  boolean assignStations( List< DBlock > list, Set<String> sts )
   {
     return false;
   }
 
-  boolean assignStationsAfter( DBlock blk0, List<DBlock> list, Set<String> sts )
+  boolean assignStationsAfter( DBlock blk0, List< DBlock > list, Set<String> sts )
   {
     return false;
   }

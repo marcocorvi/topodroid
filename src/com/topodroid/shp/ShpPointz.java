@@ -33,13 +33,13 @@ import java.util.List;
 
 public class ShpPointz extends ShpObject
 {
-  public ShpPointz( String path, List<File> files ) // throws IOException
+  public ShpPointz( String path, List< File > files ) // throws IOException
   {
     super( SHP_POINTZ, path, files );
   }
 
   // write headers for POINTZ
-  public boolean writeStations( List<NumStation> pts ) throws IOException
+  public boolean writeStations( List< NumStation > pts ) throws IOException
   {
     int n_pts = (pts != null)? pts.size() : 0;
     if ( n_pts == 0 ) return false;
@@ -97,7 +97,7 @@ public class ShpPointz extends ShpObject
   @Override protected int getShpRecordLength( ) { return 22; }
     
   // Utility: set the bounding box of the set of geometries
-  private void setBoundsStations( List<NumStation> pts ) 
+  private void setBoundsStations( List< NumStation > pts ) 
   {
     if ( pts.size() == 0 ) {
       xmin = xmax = ymin = ymax = zmin = zmax = 0.0;

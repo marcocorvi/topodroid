@@ -124,7 +124,7 @@ public class TdmViewSurface extends SurfaceView
         command.clearEquates();
       }
       for ( TdmEquate equate : equates ) {
-        ArrayList< TdmViewStation > vst = new ArrayList< TdmViewStation >();
+        ArrayList< TdmViewStation > vst = new ArrayList<>();
         for ( TdmViewCommand command : mCommandManager ) {
           String survey_name = command.mSurvey.mName;
           int len = survey_name.length();
@@ -152,7 +152,7 @@ public class TdmViewSurface extends SurfaceView
     void addSurvey( TdmSurvey survey, int color, float xoff, float yoff, ArrayList< TdmEquate > equates )
     {
       TdmViewCommand command = new TdmViewCommand( survey, color, xoff, yoff );
-      ArrayList< String > equate_stations = new ArrayList<String>();
+      ArrayList< String > equate_stations = new ArrayList<>();
 
       String survey_name = survey.getName();
       int len = survey_name.length();

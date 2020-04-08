@@ -262,7 +262,7 @@ public class TDVector
    * Need to require that the points are traversed righthand wise,
    * going around the normal.
    */
-  // static TDVector computeVectorsNormal( ArrayList<TDVector> pts )
+  // static TDVector computeVectorsNormal( ArrayList< TDVector > pts )
   // {
   //   int s = pts.size();
   //   if ( s < 3 ) return new TDVector();
@@ -293,7 +293,7 @@ public class TDVector
   
   /** compute the mean vector (CoM) of the vectors of an array
    */
-  public static TDVector computeMeanVector( ArrayList<TDVector> pts ) // PRIVATE
+  public static TDVector computeMeanVector( ArrayList< TDVector > pts ) // PRIVATE
   {
     float x0 = 0.0f;
     float y0 = 0.0f;
@@ -307,7 +307,7 @@ public class TDVector
     return new TDVector( x0/n, y0/n, z0/n );
   }
 
-  public static TDVector computeNormal( ArrayList<TDVector> pts )
+  public static TDVector computeNormal( ArrayList< TDVector > pts )
   {
     TDVector normal = new TDVector();
     TDVector m = computeMeanVector( pts );
@@ -332,7 +332,7 @@ public class TDVector
     return normal;
   }
 
-  public static float computeLength( ArrayList<TDVector> pts )
+  public static float computeLength( ArrayList< TDVector > pts )
   {
     float d = 0f;
     TDVector p0 = pts.get(0);
@@ -349,7 +349,7 @@ public class TDVector
    * @param pts2 list of vectors
    * @param normal  normal to the plane
    */
-  public float angleAroundVectors( ArrayList<TDVector> pts2, TDVector normal )
+  public float angleAroundVectors( ArrayList< TDVector > pts2, TDVector normal )
   {
     TDVector last_point = pts2.get( pts2.size() - 1 );
     // TDVector w1 = normal.orthogonal( this );

@@ -195,7 +195,7 @@ class DrawingSvg extends DrawingSvgBase
           out.flush();
         }
 
-	ArrayList< XSection > xsections = new ArrayList< XSection >();
+	ArrayList< XSection > xsections = new ArrayList<>();
 
         // Log.v("DistoXsvg", "SVG commands " + plot.getCommands().size() );
         out.write("<g id=\"points\">\n");
