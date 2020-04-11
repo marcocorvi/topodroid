@@ -3,6 +3,7 @@ symbol point
 name bones
 name-pt ossos
 name-ru кость
+name-ro oase
 th_name bones
 group paleo
 orientation no

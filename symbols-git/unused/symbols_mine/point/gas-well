@@ -2,6 +2,7 @@ symbol point
 name gas-well
 name-pt poço_gás
 name-ru газовая_скважина
+name-ro puț-gaz
 th_name u:gas-well
 color 0xffff33
 csurvey 0 0 0

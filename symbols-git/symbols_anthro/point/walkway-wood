@@ -3,6 +3,7 @@ symbol point
 name walkway-wood
 name-pt passarela_de_madeira
 name-ru деревянный_настил
+name-ro trotuar-lemn
 th_name u:walkway-wood
 group trail
 orientation no

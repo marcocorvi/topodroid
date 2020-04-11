@@ -2,6 +2,7 @@ symbol point
 name switch
 name-pt troca
 name-ru переключатель
+name-ro întrerupător
 th_name u:switch
 color 0xffffff
 csurvey 0 0 0

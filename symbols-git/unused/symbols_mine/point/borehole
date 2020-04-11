@@ -2,6 +2,7 @@ symbol point
 name borehole
 name-pt sondagem
 name-ru скважина
+name-ro foraj
 th_name u:borehole
 color 0xff9933
 csurvey 0 0 0

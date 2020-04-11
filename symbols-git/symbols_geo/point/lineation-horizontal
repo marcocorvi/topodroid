@@ -6,6 +6,7 @@ name-es lineación_horizontal
 name-ru горизонтально_линейно
 name-fr linéation_horizontale
 name-de Horizontale_Bänderung
+name-ro aliniere-orizontală
 th_name u:lineation-horizontal
 group lineation
 color 0xffffff

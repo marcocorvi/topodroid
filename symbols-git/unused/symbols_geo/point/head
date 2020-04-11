@@ -2,6 +2,7 @@ symbol point
 name head
 name-pt cabeça
 name-ru головной
+name-ro cap
 th_name head
 color 0xcccccc
 csurvey 0 0 0

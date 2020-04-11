@@ -3,6 +3,7 @@ symbol point
 name steps
 name-pt escada
 name-ru ступенька
+name-ro trepte
 th_name steps
 group trail
 orientation no

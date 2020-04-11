@@ -3,7 +3,8 @@ symbol line
   name walkway-wood
   name-pt passarela_de_madeira
   name-ru деревянный_настил
-  th_name u:walkway-wood
+  name-ro trotuar-lemn
+th_name u:walkway-wood
   group trail
   color 0x993300 0x66
   width 8

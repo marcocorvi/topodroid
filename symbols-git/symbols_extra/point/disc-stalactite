@@ -3,6 +3,7 @@ symbol point
 name disc_stalactite
 name-pt disco_estalactite
 name-ru дисковый_сталактит
+name-ro disc_stalactitic
 th_name disc-stalactite
 group stalactite
 orientation yes

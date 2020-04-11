@@ -2,6 +2,7 @@ symbol point
 name path
 name-pt caminho
 name-ru проход
+name-ro cale
 th_name u:path
 color 0xffffff
 csurvey 0 0 0

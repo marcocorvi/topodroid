@@ -2,6 +2,7 @@ symbol line
 name barrier
 name-pt barreir
 name-ru барьер
+name-ro barieră
 th_name u:barrier
 group barrier
 color 0xffcc33 
