@@ -1,6 +1,7 @@
 symbol point
 name cupid
 name-ru купидон
+name-ro cupid
 th_name u:cupid
 orientation yes
 color 0xffffff

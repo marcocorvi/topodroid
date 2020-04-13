@@ -3,6 +3,7 @@ symbol point
 name minus
 name-pt menos
 name-ru минус
+name-ro minus
 th_name u:minus
 orientation no
 color 0xffffff

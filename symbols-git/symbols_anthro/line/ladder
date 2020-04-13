@@ -3,6 +3,7 @@ symbol line
 name ladder
 name-pt escada_de_mão
 name-ru лестница
+name-ro scară
 th_name fixed-ladder
 group trail
 color 0xff0000 0xff

@@ -3,6 +3,7 @@ symbol point
 name bridge
 name-pt ponte
 name-ru мост
+name-ro pod
 th_name bridge
 group trail
 orientation no

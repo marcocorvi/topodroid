@@ -3,6 +3,7 @@ symbol area
 name pillar-with-curtains
 name-pt coluna_coberta_por_cortinas
 name-ru колонна_с_занавесью
+name-ro pilier-cu-cortine
 th_name pillar-with-curtains
 group pillar
 color 0xff1966 0x66

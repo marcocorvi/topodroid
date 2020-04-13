@@ -3,6 +3,7 @@ symbol point
 name masonry
 name-pt alvenaria
 name-ru каменная_кладка
+name-ro zidărie
 th_name masonry
 orientation no
 color 0x993300

@@ -3,6 +3,7 @@ symbol point
 name walkway
 name-pt passarela
 name-ru дорожка
+name-ro trotuar
 th_name walkway
 group trail
 orientation no

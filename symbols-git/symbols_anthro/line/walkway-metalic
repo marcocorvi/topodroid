@@ -3,6 +3,7 @@ symbol line
 name walkway-metalic
 name-pt passarela_metálica
 name-ru металлический_настил
+name-ro pasarelă-metalică
 th_name u:walkway-metalic
 group trail
 color 0xcccccc 0x66

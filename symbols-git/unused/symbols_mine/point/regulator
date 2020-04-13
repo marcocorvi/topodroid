@@ -2,6 +2,7 @@ symbol point
 name regulator
 name-pt regulador
 name-ru регулятор
+name-ro regulator
 th_name u:regulator
 color 0xffffff
 csurvey 0 0 0

@@ -2,6 +2,7 @@ symbol line
 name powerline
 name-pt linha_elétrica
 name-ru линия_электропередач
+name-ro linie-curent
 th_name u:powerline
 group powerline
 color 0xff0000

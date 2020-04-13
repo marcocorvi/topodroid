@@ -2,6 +2,7 @@ encoding utf-8
 symbol point
 name wheelchair
 name-pt cadeira_de_rodas
+name-ro scaun-cu-rotile
 th_name wheelchair
 orientation no
 color 0xffffff

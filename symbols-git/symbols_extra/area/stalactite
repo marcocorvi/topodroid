@@ -3,6 +3,7 @@ symbol area
 name stalactite
 name-pt estalactite
 name-ru сталактит
+name-ro stalactită
 th_name stalactite
 group stalactite
 color 0xfff100 0x66

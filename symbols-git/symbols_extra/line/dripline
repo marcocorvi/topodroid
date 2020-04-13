@@ -3,6 +3,7 @@ symbol line
 name dripline
 name-pt linha_de_gotejamento
 name-ru линия_капежа
+name-ro linie-de-picurare
 th_name dripline
 group wall
 color 0xff00ff 0xff

@@ -3,6 +3,7 @@ symbol point
 name plus
 name-pt mais
 name-ru плюс
+name-ro plus
 th_name u:plus
 orientation no
 color 0xffffff
