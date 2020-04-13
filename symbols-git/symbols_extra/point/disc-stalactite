@@ -2,7 +2,7 @@ encoding utf-8
 symbol point
 name disc_stalactite
 name-pt disco_estalactite
-name-ru дисковый_сталактит
+name-ru диск_на_сталактите
 th_name disc-stalactite
 group stalactite
 orientation yes
