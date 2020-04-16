@@ -2,6 +2,7 @@ encoding utf-8
 symbol point
 name no-wheelchair
 name-pt cadeira_de_rodas_(não_acessível)
+name-ro fără-scaun-cu-rotile
 th_name no-wheelchair
 orientation no
 color 0xffffff

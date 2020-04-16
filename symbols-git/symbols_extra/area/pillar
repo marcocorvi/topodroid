@@ -3,6 +3,7 @@ symbol area
 name pillar
 name-pt coluna
 name-ru колонна
+name-ro pilier
 th_name pillar
 group pillar
 color 0xbf00ff 0x66

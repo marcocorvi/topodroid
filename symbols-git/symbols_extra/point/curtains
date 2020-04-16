@@ -3,6 +3,7 @@ symbol point
 name curtains
 name-pt cortinas
 name-ru занавеси
+name-ro draperii
 th_name curtains
 group curtain
 orientation no

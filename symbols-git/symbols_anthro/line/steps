@@ -3,6 +3,7 @@ symbol line
 name steps
 name-pt escada
 name-ru ступени
+name-ro trepte
 th_name steps
 group trail
 color 0x993300

@@ -2,6 +2,7 @@ symbol point
 name borehole-staple
 name-pt sondagem_lacrada
 name-ru скобы_скважины
+name-ro foraj-legătură
 th_name u:borehole-staple
 color 0xff9933
 csurvey 0 0 0
