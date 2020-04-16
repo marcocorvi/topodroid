@@ -18,7 +18,7 @@ import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDColor;
 import com.topodroid.prefs.TDSetting;
 
-// import android.util.Log;
+import android.util.Log;
 
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
@@ -185,12 +185,12 @@ class SymbolPoint extends Symbol
       line = br.readLine();
       boolean insymbol = false;
       while ( line != null ) {
-        line = line.trim();
+        line = line.trim().replaceAll("\\s+", " ");
         String[] vals = line.split(" ");
         int s = vals.length;
         for (int k=0; k<s; ++k ) {
           if ( vals[k].startsWith( "#" ) ) break;
-          if ( vals[k].length() == 0 ) continue;
+          if ( vals[k].length() == 0 ) continue; // not needed
           if ( ! insymbol ) {
             if ( vals[k].equals("symbol" ) ) {
               name = null;
@@ -206,12 +206,13 @@ class SymbolPoint extends Symbol
                 // name = (new String( vals[k].getBytes(iso) )).replace("_", " ");
                 name = vals[k].replace("_", " ");
                 // Log.v(  TopoDroidApp.TAG, "set name " + name );
+                // Log.v("DistoX-POINT", "name " + k + " / " + s + " " + name );
               }
             } else if ( vals[k].equals("th_name") ) {
               ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-              // Log.v("DistoX-SP", "th name " + k + " / " + s );
               if ( k < s ) {
                 th_name = vals[k];
+                // Log.v("DistoX-POINT", "symbol " + pathname + " th name " + k + " / " + s + " " + th_name );
               }
             } else if ( vals[k].equals("group") ) {
               ++k; while ( k < s && vals[k].length() == 0 ) ++k;
@@ -306,6 +307,7 @@ class SymbolPoint extends Symbol
                   mPaint  = makePaint( color, style );
                   makePointPath( path );
                   mOrigPath = new Path( mPath );
+                  // Log.v("DistoX-POINT", "Name " + mName + " ThName " + mThName );
                   // mPoint1 = new SymbolPointBasic( name, th_name, null, fname, color, path );
                 // } else if ( cnt == 1 ) {
                 //   if ( mOrientable == true ) {
@@ -314,8 +316,8 @@ class SymbolPoint extends Symbol
                 //     mPoint2 = new SymbolPointBasic( name, th_name, null, fname, color, path );
                 //     mOrientable = true;
                 //   }
-                // } else {
-                //   // ERROR only two points max
+                } else {
+                  TDLog.Error("Only one point per file " + pathname);
                 }
                 ++ cnt;
               }

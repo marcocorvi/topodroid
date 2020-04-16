@@ -221,7 +221,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="fmt_error_m">Error %1$.1f m</string>
     <string name="fmt_h_geoid">Geoid alt. %1$.0f m</string>
     <string name="fmt_h_ellipsoid">Ellipsoid alt. %1$.0f m</string>
-    <!-- UNUSED string name="depth_error">Waring. Data depth error</string -->
+    <!-- UNUSED string name="depth_error">Warning. Data depth error</string -->
 
     <string name="error_azimuth_required">Azimuth required</string>
     <string name="error_length_required">Length required</string>
@@ -608,7 +608,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="ask_close_survey">Close survey?</string -->
     <string name="ask_gps_service">Set GPS service?</string>
     <string name="ask_backups_clear">Delete sketch backups?</string>
-    <string name="ask_manual_update">Update user manual translation?</string>
+    <string name="ask_manual_update">Update user manual translation?\nCurrent v. %1$d Installed v. %2$d</string>
 
     <!-- UNUSED string name="button_add"       >Add       </string -->
     <string name="button_back"      >Back</string>
@@ -1553,9 +1553,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="overwrite">overwrite</string>
 
     <string name="title_help">TopoDroid Manager v. %1$s</string>
-    <string name="title_export">Export project as ...</string>
+    <string name="title_export">Export project as &#8230;</string>
     <string name="title_equates">Project Equates</string>
-    <string name="title_equate_new">Add equate ...</string>
+    <string name="title_equate_new">Add equate &#8230;</string>
     <string name="title_cwd">Current Work Directory</string>
     <string name="title_settings">TdManager Settings</string>
     <string name="title_drop">Drop surveys ?</string>

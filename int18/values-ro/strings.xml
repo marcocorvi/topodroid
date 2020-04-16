@@ -166,7 +166,7 @@
     <string name="regroup">Fără regrupare</string>
     <!-- UNUSED string name="few_plots">Schițe?? insuficiente</string -->
     <string name="few_calibs">Calibrări insufficiente</string>
-    <string name="getting_info">Se descarcă informații din DistoX …</string>
+    <string name="getting_info">Se descarcă informații din DistoX &#8230;</string>
 
     <string name="calib_import_title">Importare calibrare</string>
     <string name="import_title">Importare cartare</string>
@@ -399,7 +399,7 @@
     <string name="popup_cont_continue">Continuă</string>
 
     <string name="connection_error">Eroare la conexiune</string>
-    <string name="connecting">Se conectează …</string>
+    <string name="connecting">Se conectează &#8230;</string>
     <!-- UNUSED string name="connected_none">Neconectat</string -->
     <!-- UNUSED string name="connected_already">Deja conectat</string -->
 
@@ -528,7 +528,7 @@
     <string name="delete_whole_leg">Șterge întreagul segment de drumuri (și cu radieri)?</string>
     <string name="visible_border">contur vizibil</string>
     <!-- UNUSED string name="vthreshold">limită verticală</string -->
-    <string name="wait_scan">Scanează: așteaptă …</string>
+    <string name="wait_scan">Scanează: așteaptă &#8230;</string>
     <string name="write_failed">Eroare la scrierea DistoX</string>
     <string name="write_ok">Calibrarea a fost scrisă în DistoX</string>
     <string name="zip_saved">Salvat </string>
@@ -595,7 +595,7 @@
     <!-- UNUSED string name="ask_close_survey">Închide cartarea?</string -->
     <string name="ask_gps_service">Definește serviciul GPS?</string>
     <string name="ask_backups_clear">Ștergi copiile de siguranță ale schiței?</string>
-    <!-- TODO string name="ask_manual_update">Update user manual translation?</string -->
+    <!-- TODO string name="ask_manual_update">Update user manual translation?\nCurrent v. %1$d Installed v. %2$d</string -->
 
     <!-- UNUSED string name="button_add"       >Adaugă    </string -->
     <string name="button_back"      >Înapoi    </string>
@@ -894,7 +894,7 @@
     <string name="title_dangling">Măsurători neatașate</string>
     <string name="title_device">Dispozitive DistoX</string>
     <string name="title_device_select">Selectează dispozitivul DistoX</string>
-    <string name="title_discover">Se scanează după dispozitive DistoX … așteaptă</string>
+    <string name="title_discover">Se scanează după dispozitive DistoX &#8230; așteaptă</string>
     <!-- UNUSED string name="title_draw">Desen</string -->
     <string name="title_draw_area">SUPRAFAȚA %1$s</string>
     <string name="title_draw_line">LINIE %1$s</string>
@@ -1522,9 +1522,9 @@
     <string name="overwrite">suprascrie</string>
 
     <string name="title_help">TopoDroid Manager v. %1$s</string>
-    <string name="title_export">Exportă proiectul ca ...</string>
+    <string name="title_export">Exportă proiectul ca &#8230;</string>
     <string name="title_equates">Vize echivalente Proiect</string>
-    <string name="title_equate_new">Adaugă viză echivalentă ...</string>
+    <string name="title_equate_new">Adaugă viză echivalentă &#8230;</string>
     <string name="title_cwd">Director de lucru actual</string>
     <string name="title_settings">Parametri TdManager</string>
     <string name="title_drop">Înlătură cartări ?</string>

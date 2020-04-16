@@ -22,7 +22,7 @@
     <string name="setup_buttonsample">Dimensione pulsanti</string>
 
     <string name="setup_textsize">Imposta la dimensione testo.\nPuoi sempre cambiarla in seguito dalla finestra di configurazione.</string>
-    <string name="setup_buttonsize">Imposta la dimensione pulsanti.\nPuoi sempre cambiarla in seguito dalla finestra di configurazione..</string>
+    <string name="setup_buttonsize">Imposta la dimensione pulsanti.\nPuoi sempre cambiarla in seguito dalla finestra di configurazione &#8230;</string>
     <string name="setup_drawingunit">Imposta la dimensione delle icone disegno.\nPuoi sempre cambiarla in seguito dalla finestra di configurazione.</string>
     <string name="setup_done">Fine delle impostazioni di base.\n\n
 	    Se hai problemi con la connessione al DistoX, prova ad impostare il socket non sicuro.\n\n
@@ -590,7 +590,7 @@
     <!-- UNUSED string name="ask_close_survey">Chiudere rilievo?</string -->
     <string name="ask_gps_service">Impostare il servizio GPS?</string>
     <string name="ask_backups_clear">Cancellare backup disegni?</string>
-    <!-- TODO string name="ask_manual_update">Update user manual translation?</string -->
+    <!-- TODO string name="ask_manual_update">Update user manual translation?\nCurrent v. %1$d Installed v. %2$d</string -->
 
     <!-- UNUSED string name="button_add"       >Inserisci </string -->
     <string name="button_back"      >Indietro  </string>
@@ -1520,9 +1520,9 @@
     <!-- TODO string name="overwrite">overwrite</string -->
 
     <!-- TODO string name="title_help">TopoDroid Manager v. %1$s</string -->
-    <!-- TODO string name="title_export">Export project as ...</string -->
+    <!-- TODO string name="title_export">Export project as &#8230;</string -->
     <!-- TODO string name="title_equates">Project Equates</string -->
-    <!-- TODO string name="title_equate_new">Add equate ...</string -->
+    <!-- TODO string name="title_equate_new">Add equate &#8230;</string -->
     <!-- TODO string name="title_cwd">Current Work Directory</string -->
     <!-- TODO string name="title_settings">TdManager Settings</string -->
     <!-- TODO string name="title_drop">Drop surveys ?</string -->

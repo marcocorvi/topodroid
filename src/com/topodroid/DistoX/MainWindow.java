@@ -1029,7 +1029,8 @@ public class MainWindow extends Activity
           int current = Integer.parseInt( getResources().getString( res ) );
           if ( current > version ) { // prompt user
             final String url = getResources().getString( man );
-            TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.ask_manual_update,
+            String msg = String.format( getResources().getString( R.string.ask_manual_update ), current, version );
+            TopoDroidAlertDialog.makeAlert( this, getResources(), msg, 
               new DialogInterface.OnClickListener() {
                 @Override public void onClick( DialogInterface dialog, int btn ) { 
                   (new UserManDownload( url )).execute();

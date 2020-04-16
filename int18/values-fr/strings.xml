@@ -593,7 +593,7 @@
      <!-- UNUSED string name="ask_close_survey">Quitter le relevé ?</string -->
     <string name="ask_gps_service">Activer le service GPS ?</string>
     <string name="ask_backups_clear">Supprimer des sauvegardes d\'esquisses ?</string>
-    <!-- TODO string name="ask_manual_update">Update user manual translation?</string -->
+    <!-- TODO string name="ask_manual_update">Update user manual translation?\nCurrent v. %1$d Installed v. %2$d</string -->
 
     <!-- UNUSED string name="button_add"       >Ajouter       </string -->
     <string name="button_back"      >Retour     </string>
@@ -1522,9 +1522,9 @@
     <!-- TODO string name="overwrite">overwrite</string -->
 
     <!-- TODO string name="title_help">TopoDroid Manager v. %1$s</string -->
-    <!-- TODO string name="title_export">Export project as ...</string -->
+    <!-- TODO string name="title_export">Export project as &#8230;</string -->
     <!-- TODO string name="title_equates">Project Equates</string -->
-    <!-- TODO string name="title_equate_new">Add equate ...</string -->
+    <!-- TODO string name="title_equate_new">Add equate &#8230;</string -->
     <!-- TODO string name="title_cwd">Current Work Directory</string -->
     <!-- TODO string name="title_settings">TdManager Settings</string -->
     <!-- TODO string name="title_drop">Drop surveys ?</string -->

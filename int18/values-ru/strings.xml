@@ -596,7 +596,7 @@
     <!-- UNUSED string name="ask_close_survey">Закрыть съёмку?</string -->
     <string name="ask_gps_service">Включить сервис GPS?</string>
     <string name="ask_backups_clear">Удалить резервные копии абрисов?</string>
-    <!-- TODO string name="ask_manual_update">Update user manual translation?</string -->
+    <!-- TODO string name="ask_manual_update">Update user manual translation?\nCurrent v. %1$d Installed v. %2$d</string -->
 
     <!-- UNUSED string name="button_add"       >Добавить  </string -->
     <string name="button_back"      >Назад     </string>
@@ -1532,9 +1532,9 @@
     <string name="overwrite">перезаписать</string>
 
     <string name="title_help">TopoDroid Manager v. %1$s</string>
-    <string name="title_export">Экспортировать проект как ...</string>
+    <string name="title_export">Экспортировать проект как &#8230;</string>
     <string name="title_equates">Соединения в проекте</string>
-    <string name="title_equate_new">Добавить соединение ...</string>
+    <string name="title_equate_new">Добавить соединение &#8230;</string>
     <string name="title_cwd">Текущий рабочий каталог</string>
     <string name="title_settings">Настройки TdManager</string>
     <string name="title_drop">Удалить съёмки ?</string>

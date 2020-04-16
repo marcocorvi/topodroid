@@ -407,7 +407,7 @@
     <string name="popup_cont_continue">继续</string>
 
     <string name="connection_error">连接错误</string>
-    <string name="connecting">连接... &#8230;</string>
+    <string name="connecting">连接 &#8230;</string>
     <!-- UNUSED string name="connected_none">无连接</string -->
     <!-- UNUSED string name="connected_already">Already connected</string -->
 
@@ -607,7 +607,7 @@
     <!-- UNUSED string name="ask_close_survey">Close survey?</string -->
     <string name="ask_gps_service">设置GPS服务?</string>
     <string name="ask_backups_clear">删除草图备份?</string>
-    <!-- TODO string name="ask_manual_update">Update user manual translation?</string -->
+    <!-- TODO string name="ask_manual_update">Update user manual translation?\nCurrent v. %1$d Installed v. %2$d</string -->
 
     <!-- UNUSED string name="button_add"       >Add       </string -->
     <string name="button_back"      >返回      </string>
@@ -1084,7 +1084,7 @@
   <string name="pref_compass_splays_summary">输出辐测到Compass文件</string>
   <string name="pref_vtopo_splays_title">VisualTopo侧线</string>
   <string name="pref_vtopo_splays_summary">在VisualTopo文件中输出侧线</string>
-  <string name="pref_vtopo_lrud_title">左右上下 来自...</string>
+  <string name="pref_vtopo_lrud_title">左右上下 来自 &#8230;</string>
   <string name="pref_vtopo_lrud_summary">VisualTopo的左右上下来自站点</string>
   <!-- UNUSED string name="pref_trobot_names_title">TopoRobot station names</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Station names are in TopoRobot style</string -->
@@ -1551,9 +1551,9 @@
     <!-- TODO string name="overwrite">overwrite</string -->
 
     <!-- TODO string name="title_help">TopoDroid Manager v. %1$s</string -->
-    <!-- TODO string name="title_export">Export project as ...</string -->
+    <!-- TODO string name="title_export">Export project as &#8230;</string -->
     <!-- TODO string name="title_equates">Project Equates</string -->
-    <!-- TODO string name="title_equate_new">Add equate ...</string -->
+    <!-- TODO string name="title_equate_new">Add equate &#8230;</string -->
     <!-- TODO string name="title_cwd">Current Work Directory</string -->
     <!-- TODO string name="title_settings">TdManager Settings</string -->
     <!-- TODO string name="title_drop">Drop surveys ?</string -->
