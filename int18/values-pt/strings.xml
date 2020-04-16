@@ -594,6 +594,7 @@
     <!-- UNUSED string name="ask_close_survey">Fechar mapa?</string -->
     <string name="ask_gps_service">Configurar o serviço GPS?</string>
     <string name="ask_backups_clear">Apagar backups dos croquis?</string>
+    <!-- TODO string name="ask_manual_update">Update user manual translation?</string -->
 
     <!-- UNUSED string name="button_add"       >Novo       </string -->
     <string name="button_back"      >Voltar     </string>
@@ -1028,6 +1029,9 @@
   <string name="pref_export_shots_summary">Formato padrão para exportação de dados</string>
   <string name="pref_export_plot_title">Exportação padrão de croqui</string>
   <string name="pref_export_plot_summary">Formato padrão para exportação de croqui</string>
+
+  <!-- TODO string name="pref_therion_config_title">Therion config file</string -->
+  <!-- TODO string name="pref_therion_config_summary">Create Therion config file</string -->
   <string name="pref_therion_maps_title">Mapas Therion primeiro</string>
   <string name="pref_therion_maps_summary">Mapas de Therion antes dos dados da topo</string>
   <string name="pref_extra_buttons_title">Nível de recursos</string>

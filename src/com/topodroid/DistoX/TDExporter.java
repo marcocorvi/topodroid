@@ -1128,7 +1128,11 @@ class TDExporter
     for ( PlotInfo plt : plots ) {
       File plot_file = new File( TDPath.getSurveyPlotTh2File( info.name, plt.name ) );
       if ( plot_file.exists() ) {
-        pw.format("  # input \"%s-%s.th2\"\n", info.name, plt.name );
+        if ( TDSetting.mTherionConfig ) {
+          pw.format("  # input \"../th2/%s-%s.th2\"\n", info.name, plt.name );
+        } else {
+          pw.format("  # input \"%s-%s.th2\"\n", info.name, plt.name );
+        }
       }
     }
     pw.format("\n");
@@ -1161,6 +1165,25 @@ class TDExporter
 
   static String exportSurveyAsTh( long sid, DataHelper data, SurveyInfo info, String filename )
   {
+    if ( TDSetting.mTherionConfig ) { // craete thconfig
+      File dir = new File( TDPath.getThconfigDir() );
+      if ( ! dir.exists() ) dir.mkdirs();
+      try {
+        FileWriter fcw = new FileWriter( TDPath.getSurveyThConfigFile( info.name ) );
+        BufferedWriter bcw = new BufferedWriter( fcw );
+        PrintWriter pcw = new PrintWriter( bcw );
+        pcw.format("# %s created by TopoDroid v %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
+        pcw.format("source \"../th/%s.th\"\n\n", info.name );
+        pcw.format("export map -o %s-p.pdf -proj plan \n\n", info.name );
+        pcw.format("export map -o %s-s.pdf -proj extended \n\n", info.name );
+        bcw.flush();
+        // fcw.flush();
+        fcw.close();
+      } catch ( IOException e ) {
+        TDLog.Error( "Failed Therion config export: " + e.getMessage() );
+      }
+    }
+
     // Log.v("DistoX", "export as therion: " + filename );
     float ul = TDSetting.mUnitLength;
     float ua = TDSetting.mUnitAngle;

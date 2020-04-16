@@ -326,8 +326,8 @@ class DistoXComm extends TopoDroidComm
           TDLog.Error( "create Socket IO " + e.getMessage() );
           if ( mBTSocket != null ) { mBTSocket = null; }
         }
-      // } else {
-      //   TDLog.Log( TDLog.LOG_BT, "device not paired. state " + mBTDevice.getBondState() );
+      } else {
+        TDLog.Error( "device not paired. state " + mBTDevice.getBondState() );
       }
 
       mProtocol = null;

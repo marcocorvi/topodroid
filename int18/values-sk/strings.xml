@@ -607,6 +607,7 @@
     <!-- UNUSED string name="ask_close_survey">Close survey?</string -->
     <string name="ask_gps_service">Nastaviť službu GPS?</string>
     <string name="ask_backups_clear">Vymazať zálohy Nákresov?</string>
+    <!-- TODO string name="ask_manual_update">Update user manual translation?</string -->
 
     <!-- UNUSED string name="button_add"       >Add       </string -->
     <string name="button_back"      >Späť </string>
@@ -1043,6 +1044,9 @@
   <string name="pref_export_shots_summary">Predvolený formát exportu dát</string>
   <string name="pref_export_plot_title"> Formát exportu - nákresu</string>
   <string name="pref_export_plot_summary">Predvolený formát exportu nákresu</string>
+
+  <!-- TODO string name="pref_therion_config_title">Therion config file</string -->
+  <!-- TODO string name="pref_therion_config_summary">Create Therion config file</string -->
   <string name="pref_therion_maps_title">Therion mapy ako prvé</string>
   <string name="pref_therion_maps_summary">Therion mapy pred dátami</string>
   <string name="pref_extra_buttons_title">Úroveň príkazov</string>

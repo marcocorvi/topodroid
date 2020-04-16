@@ -560,6 +560,7 @@ public class TDPrefKey
   };
 
   public static String[] EXPORT_TH = { // [8]
+    "DISTOX_THERION_CONFIG",   // whether to write survey.thconfig file
     "DISTOX_THERION_MAPS",     // whether to put map commands before centerline in therion
     "DISTOX_AUTO_STATIONS",    // whether to add stations to therion th2 exports
     // "DISTOX_XTHERION_AREAS",    // save areas a-la xtherion
@@ -570,6 +571,7 @@ public class TDPrefKey
     "DISTOX_TH2_XVI"           // th2 with xvi image comment
   };
   static int[] EXPORT_THtitle = {
+    R.string.pref_therion_config_title,
     R.string.pref_therion_maps_title,
     R.string.pref_autoStations_title,
     // R.string.pref_xtherion_areas_title,
@@ -581,6 +583,7 @@ public class TDPrefKey
     -1
   };
   static int[] EXPORT_THdesc = {
+    R.string.pref_therion_config_summary,
     R.string.pref_therion_maps_summary,
     R.string.pref_autoStations_summary,
     // R.string.pref_xtherion_areas_summary,
@@ -592,6 +595,7 @@ public class TDPrefKey
     -1
   };
   public static String[] EXPORT_THdef = {
+    FALSE,
     FALSE,
     TRUE,
     // FALSE,

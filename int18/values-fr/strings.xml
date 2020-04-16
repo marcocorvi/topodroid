@@ -593,6 +593,7 @@
      <!-- UNUSED string name="ask_close_survey">Quitter le relevé ?</string -->
     <string name="ask_gps_service">Activer le service GPS ?</string>
     <string name="ask_backups_clear">Supprimer des sauvegardes d\'esquisses ?</string>
+    <!-- TODO string name="ask_manual_update">Update user manual translation?</string -->
 
     <!-- UNUSED string name="button_add"       >Ajouter       </string -->
     <string name="button_back"      >Retour     </string>
@@ -1021,6 +1022,9 @@
   <string name="pref_export_shots_summary">Format export des données par défaut</string>
   <string name="pref_export_plot_title">Format export dessins</string>
   <string name="pref_export_plot_summary">Format par défaut d\'exportation des dessins</string>
+
+  <!-- TODO string name="pref_therion_config_title">Therion config file</string -->
+  <!-- TODO string name="pref_therion_config_summary">Create Therion config file</string -->
   <string name="pref_therion_maps_title">Topographies Therion en premier</string>
   <string name="pref_therion_maps_summary">Export des topographies Therion avant les données</string>
   <string name="pref_extra_buttons_title">Niveau d\'utilisation</string>

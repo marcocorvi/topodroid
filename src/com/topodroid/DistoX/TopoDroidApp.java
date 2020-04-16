@@ -102,6 +102,7 @@ public class TopoDroidApp extends Application
 
   boolean mWelcomeScreen;  // whether to show the welcome screen (used by MainWindow)
   boolean mSetupScreen;    // whether to show the welcome screen (used by MainWindow)
+  static boolean mCheckManualTranslation = false;
   // static String mManual;  // manual url
 
   static Locale mLocale;
@@ -664,6 +665,7 @@ public class TopoDroidApp extends Application
       if ( mDData.getValue( "symbol_version" ) == null ) thisApp.installSymbols( true );
       thisApp.installFirmware( false );
       // installUserManual( );
+      mCheckManualTranslation = true;
     }
 
     // ***** CHECK SPECIAL EXPERIMENTAL FEATURES : SKETCH

@@ -20,6 +20,7 @@ import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
 import com.topodroid.help.HelpDialog;
 import com.topodroid.help.UserManualActivity;
+import com.topodroid.help.UserManDownload;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPrefCat;
 
@@ -29,6 +30,10 @@ import android.util.Log;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import java.util.List;
 // import java.util.ArrayList;
@@ -784,7 +789,12 @@ public class MainWindow extends Activity
     //    [off] onSaveInstanceState
     //    [on]  onResume
     updateDisplay( );
+    if ( TopoDroidApp.mCheckManualTranslation ) {
+      TopoDroidApp.mCheckManualTranslation = false;
+      checkManualTranslation();
+    }
   }
+          
 
   @Override
   protected synchronized void onPause() 
@@ -969,5 +979,67 @@ public class MainWindow extends Activity
     }
   }
 
+  // check whether ask user to update manual translation
+  private void checkManualTranslation()
+  {
+    File manifest = new File( TDPath.getManFile( "manifest" ) );
+    if ( manifest.exists() ) {
+      String lang = null;
+      int version = -1;
+      try {
+        FileReader fr = new FileReader( manifest );
+        BufferedReader br = new BufferedReader( fr );
+        while ( lang == null || version < 0 ) {
+          String line = br.readLine();
+          if ( line == null ) break;
+          String[] token = line.trim().replaceAll("\\s+", "").split("=");
+          if ( token.length > 1 ) {
+            String key = token[0].toUpperCase();
+            if ( key.equals("LANG") ) { 
+              lang = token[1].toLowerCase();
+            } else if ( key.equals("VERSION") ) {
+              try {
+                version = Integer.parseInt( token[1] );
+              } catch ( NumberFormatException e ) { }
+            }
+          }
+        }
+        br.close();
+      } catch ( FileNotFoundException e ) {
+      } catch ( IOException e ) {
+      }
+      Log.v("DistoX-MAN", "manifest " + lang + " " + version );
+      if ( lang != null && version > 0 ) {
+        int res = 0;
+        int man = 0;
+        if ( "ru".equals( lang ) ) { 
+          res = R.string.man_version_ru;
+          man = R.string.user_man_ru;
+        } else if ( "it".equals( lang ) ) {
+          res = R.string.man_version_it;
+          man = R.string.user_man_it;
+        } else if ( "fr".equals( lang ) ) {
+          res = R.string.man_version_fr;
+          man = R.string.user_man_fr;
+        } else if ( "es".equals( lang ) ) {
+          res = R.string.man_version_es;
+          man = R.string.user_man_es;
+        }
+        if ( res > 0 ) {
+          int current = Integer.parseInt( getResources().getString( res ) );
+          if ( current > version ) { // prompt user
+            final String url = getResources().getString( man );
+            TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.ask_manual_update,
+              new DialogInterface.OnClickListener() {
+                @Override public void onClick( DialogInterface dialog, int btn ) { 
+                  (new UserManDownload( url )).execute();
+                }
+              }
+            );
+          }
+        }
+      }
+    }
+  }
 
 }

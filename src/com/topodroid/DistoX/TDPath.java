@@ -77,6 +77,9 @@ public class TDPath
   final static String ZIP = ".zip";
   final static String HTML = ".html";
 
+  final static String THCONFIG = ".thconfig";
+  final static String TDCONFIG = ".tdconfig";
+
   // ------------------------------------------------------------
   // PATHS
 
@@ -104,6 +107,7 @@ public class TDPath
   static String APP_SAVE_AREA_PATH   = APP_SYMBOL_SAVE_PATH + "area/";
 
   static String PATH_TDCONFIG;
+  static String PATH_THCONFIG;
 
   private static String PATH_CAVE;   //  = PATH_BASE + "cave/";  // Polygon
   private static String PATH_CAV;    //  = PATH_BASE + "cav/";   // Topo
@@ -214,6 +218,7 @@ public class TDPath
     // checkDirs( APP_TLX_PATH );
 
     PATH_TDCONFIG = PATH_BASE + "thconfig/"; // FIXME checkDirs( PATH_TDCONFIG );
+    PATH_THCONFIG = PATH_TDCONFIG;
 
     PATH_CAV = PATH_BASE + "cav/";      // FIXME checkDirs( PATH_CAV );
     PATH_DAT = PATH_BASE + "dat/";      // FIXME checkDirs( PATH_DAT );
@@ -363,6 +368,8 @@ public class TDPath
 
   public static String getTdconfigDir( ) { return PATH_TDCONFIG; }
   public static String getTdconfigFile( String name ) { return PATH_TDCONFIG + name; }
+  public static String getThconfigDir( ) { return PATH_THCONFIG; }
+  public static String getSurveyThConfigFile( String survey ) { return PATH_THCONFIG + survey + THCONFIG; }
 
   static String getCaveFile( String name )   { return PATH_CAVE + name; }
   static String getCavFile( String name )    { return PATH_CAV + name; }
@@ -418,6 +425,7 @@ public class TDPath
 
   static String getSurveySketchInFile( String survey, String name ) { return PATH_TH3 + survey + "-" + name + TH3 ; }
   static String getSurveySketchOutFile( String survey, String name ) { return PATH_TDR3 + survey + "-" + name + TDR3 ; }
+
 
   private static String getFile( String directory, String name, String ext ) 
   {

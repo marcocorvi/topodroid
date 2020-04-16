@@ -593,6 +593,7 @@
     <!-- UNUSED string name="ask_close_survey">Затваряне на картировката?</string -->
     <string name="ask_gps_service">Избор на GPS услуга?</string>
     <!-- TODO string name="ask_backups_clear">Delete sketch backups?</string -->
+    <!-- TODO string name="ask_manual_update">Update user manual translation?</string -->
 
     <!-- UNUSED string name="button_add"       >Добавяне  </string -->
     <string name="button_back"      >Обратно   </string>
@@ -1023,6 +1024,9 @@
   <string name="pref_export_shots_summary">Формат на експортираните измервания</string>
   <string name="pref_export_plot_title">Експортиране на скици</string>
   <string name="pref_export_plot_summary">Формат на експортираните скици</string>
+
+  <!-- TODO string name="pref_therion_config_title">Therion config file</string -->
+  <!-- TODO string name="pref_therion_config_summary">Create Therion config file</string -->
   <string name="pref_therion_maps_title">Therion дефиниции "maps"</string>
   <string name="pref_therion_maps_summary">Дефиниции "maps" преди антената в Therion</string>
   <string name="pref_extra_buttons_title">Ниво на функциите</string>

@@ -4,4 +4,9 @@
   <string name="user_man_es" translatable="false">https://github.com/xguerrero/Topodroid_manual_es/archive/master.zip</string>
   <string name="user_man_it" translatable="false">https://github.com/fato63/TopoItMan/raw/master/TopodroidItManual.zip</string>
   <string name="user_man_ru" translatable="false">https://github.com/akozhenkov/TD_manual_RU/archive/master.zip</string>
+
+  <string name="man_version_fr" translatable="false">0</string>
+  <string name="man_version_es" translatable="false">0</string>
+  <string name="man_version_it" translatable="false">13</string>
+  <string name="man_version_ru" translatable="false">0</string>
 </resources>

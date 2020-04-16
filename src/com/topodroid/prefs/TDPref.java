@@ -649,13 +649,14 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     String[] def = TDPrefKey.EXPORT_THdef;
     return new TDPref[ ] {
       makeCbx( cat, key[0], tit[0], dsc[0], A, def[0], ctx, hlp ),
-      makeCbx( cat, key[1], tit[1], dsc[1], N, def[1], ctx, hlp ),
+      makeCbx( cat, key[1], tit[1], dsc[1], A, def[1], ctx, hlp ),
+      makeCbx( cat, key[2], tit[2], dsc[2], N, def[2], ctx, hlp ),
       // makeCbx( cat, key[ ], tit[ ], dsc[ ], X, def[ ], ctx, hlp ),
-      makeCbx( cat, key[2], tit[2], dsc[2], A, def[2], ctx, hlp ),
       makeCbx( cat, key[3], tit[3], dsc[3], A, def[3], ctx, hlp ),
+      makeCbx( cat, key[4], tit[4], dsc[4], A, def[4], ctx, hlp ),
       // makeCbx( cat, key[4], tit[4], dsc[4], A, def[4], ctx, hlp ),
-      makeEdt( cat, key[4], tit[4], dsc[4], E, def[4], INTEGER,  ctx, hlp ),
-      makeCbx( cat, key[5], tit[5], dsc[5], E, def[5], ctx, hlp )
+      makeEdt( cat, key[5], tit[5], dsc[5], E, def[5], INTEGER,  ctx, hlp ),
+      makeCbx( cat, key[6], tit[6], dsc[6], E, def[6], ctx, hlp )
     };
   }
 

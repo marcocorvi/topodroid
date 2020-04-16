@@ -590,6 +590,7 @@
     <!-- UNUSED string name="ask_close_survey">Chiudere rilievo?</string -->
     <string name="ask_gps_service">Impostare il servizio GPS?</string>
     <string name="ask_backups_clear">Cancellare backup disegni?</string>
+    <!-- TODO string name="ask_manual_update">Update user manual translation?</string -->
 
     <!-- UNUSED string name="button_add"       >Inserisci </string -->
     <string name="button_back"      >Indietro  </string>
@@ -1025,6 +1026,9 @@
   <string name="pref_export_shots_summary">Formato esportazione dati preferenziale</string>
   <string name="pref_export_plot_title">Default export disegno</string>
   <string name="pref_export_plot_summary">Formato di default export disegno</string>
+
+  <!-- TODO string name="pref_therion_config_title">Therion config file</string -->
+  <!-- TODO string name="pref_therion_config_summary">Create Therion config file</string -->
   <string name="pref_therion_maps_title">Mappe Therion per prime</string>
   <string name="pref_therion_maps_summary">Mappe Therion prima dei dati del rilievo</string>
   <string name="pref_extra_buttons_title">Livello di comandi</string>

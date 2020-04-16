@@ -608,6 +608,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="ask_close_survey">Close survey?</string -->
     <string name="ask_gps_service">Set GPS service?</string>
     <string name="ask_backups_clear">Delete sketch backups?</string>
+    <string name="ask_manual_update">Update user manual translation?</string>
 
     <!-- UNUSED string name="button_add"       >Add       </string -->
     <string name="button_back"      >Back</string>
@@ -1046,6 +1047,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_export_shots_summary">Default data export format</string>
   <string name="pref_export_plot_title">Default sketch export</string>
   <string name="pref_export_plot_summary">Default sketch export format</string>
+
+  <string name="pref_therion_config_title">Therion config file</string>
+  <string name="pref_therion_config_summary">Create Therion config file</string>
   <string name="pref_therion_maps_title">Therion maps first</string>
   <string name="pref_therion_maps_summary">Put Therion maps before survey data</string>
   <string name="pref_extra_buttons_title">Activity level</string>

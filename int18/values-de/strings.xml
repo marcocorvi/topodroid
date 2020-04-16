@@ -610,6 +610,7 @@
     <!-- UNUSED string name="ask_close_survey">Vermessung schließen?</string -->
     <string name="ask_gps_service">GPS aktiveren?</string>
     <string name="ask_backups_clear">Skizzenbackups löschen?</string>
+    <!-- TODO string name="ask_manual_update">Update user manual translation?</string -->
 
     <!-- UNUSED string name="button_add"       >Erstellen       </string -->
     <string name="button_back"      >Zurück    </string>
@@ -1044,6 +1045,9 @@
   <string name="pref_export_shots_summary">Standarddatenexportformat</string>
   <string name="pref_export_plot_title">Skizzenformat</string>
   <string name="pref_export_plot_summary">Standardformat für Skizzen-Exporte</string>
+
+  <!-- TODO string name="pref_therion_config_title">Therion config file</string -->
+  <!-- TODO string name="pref_therion_config_summary">Create Therion config file</string -->
   <string name="pref_therion_maps_title">Therion: &quot;map&quot; vor Messzug</string>
   <string name="pref_therion_maps_summary">Therion map-Elemente vor den Messungen platzieren</string>
   <string name="pref_extra_buttons_title">Modus</string>

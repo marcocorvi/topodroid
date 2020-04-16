@@ -605,6 +605,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="ask_close_survey">Close survey?</string -->
     <string name="ask_gps_service">Ustawić usługę GPS?</string>
     <!-- TODO string name="ask_backups_clear">Delete sketch backups?</string -->
+    <!-- TODO string name="ask_manual_update">Update user manual translation?</string -->
 
     <!-- UNUSED string name="button_add"       >Add       </string -->
     <string name="button_back"      >Powrót      </string>
@@ -1043,6 +1044,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_export_shots_summary">Domyślny format eksportu danych</string>
   <string name="pref_export_plot_title">Domyślny eksport szkicu</string>
   <string name="pref_export_plot_summary">Domyślny format eksportu szkicu</string>
+
+  <!-- TODO string name="pref_therion_config_title">Therion config file</string -->
+  <!-- TODO string name="pref_therion_config_summary">Create Therion config file</string -->
   <string name="pref_therion_maps_title">Najpierw mapy Theriona</string>
   <string name="pref_therion_maps_summary">Umieć mapy Theriona przed danymi ciągu</string>
   <string name="pref_extra_buttons_title">Poziom aktywności</string>
