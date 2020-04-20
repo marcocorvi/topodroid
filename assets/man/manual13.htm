@@ -63,9 +63,23 @@ The <i>Therion</i> export includes the calibration-check shots, as comment.<br><
 
 Settings
 <ul>
+<li><u>Therion thconfig</u>: if enabled a basic "thconfig" file is created in the "thconfig" folder.</li>
 <li><u>Therion maps</u>: if enabled the "map" commands are placed before the survey centerline.</li>
 <li>add <u>LRUD</u> to export</li>
 </ul><p>
+
+<b>thconfig</b><br>
+The generated "thconfig" file contains the basic commands to create the pdf of the plan and extended profile maps.<br>
+Basically you can see the Android "sdcard" from your PC, you can create the pdf's executing therion with
+the generated <i>thconfig</i> file.<br><p>
+
+The TopoDroid survey name is used for the Therion cave name, with underscore '_' replaced by space.<br>
+The TopoDroid team string is splitted into the Therion <i>team</i> commands: team persons must be listed
+with the lastname possibly preceeded by the firstname initial(s). For example
+the team string "A.W. Smith, B. Ford" becomes <i>team "A.W. Smith"</i> and <i>team "B. Ford"</i>.<br>
+WHen the thconfig is enabled the input of the sketch files are not commented.<br><p>
+
+
 
 Import Therion files must have extension ".th".<br>
 TopoDroid parsing of <i>Therion</i> data syntax is very limited. Basically only data in "normal" form are understood. The Therion data commands "units", "flag", "extend", "mark" and "station" are supported.<br>
@@ -115,6 +129,7 @@ Settings:<ul style="margin-top=0">
 
 
 <b>cSurvey</b> (.csx)<br>
+The cSurvey export files require cSurvey v. 1.20 or later.<br>
 The <i>cSurvey</i> export from the survey <u>info window</u> includes only the 
 survey data, and does not have any sketch.<br>
 The make a <i>cSurvey</i> export with a sketch (both plan and profile),
@@ -308,6 +323,7 @@ From v. 4.1.2 TopoDroid does not load any more sketches in Therion format.<br>
 -->
 
 <b>cSurvey</b> (.csx)<br>
+The cSurvey export files require cSurvey v. 1.20 or later.<br>
 These exports contain both the plan and profile sketches, as well as the survey data.
 When "section" points are define the section drawings are added at the point.<br>
 

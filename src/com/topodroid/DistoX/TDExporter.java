@@ -223,13 +223,18 @@ class TDExporter
     pw.format("      </attachments>\n");
   }
 
+  private static String toXml( String s )
+  { 
+    return s.replaceAll("&", "&amp;").replaceAll("\"", "&quot;").replaceAll(">", "&gt;").replaceAll("<", "&lt;").replaceAll("\'", "&apos"); 
+  }
+
   // @return filename or null on error
   static String exportSurveyAsCsx( long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2,
                                    String origin, String filename )
   {
     // Log.v("DistoX", "export as csurvey: " + filename );
-    String cave = info.name.toUpperCase(Locale.US);
-    String survey = info.name;
+    String cave   = toXml( info.name.toUpperCase(Locale.US) );
+    String survey = toXml( info.name );
 
     String prefix = cave + "-";
     String branch = "";
@@ -237,6 +242,7 @@ class TDExporter
       branch  = psd1.name; // sketch.getName();
       int len = branch.length();
       if ( len > 1 ) branch = branch.substring(0, len-1);
+      branch = toXml( branch );
     }
 
     // STATIONS_PREFIX
@@ -295,7 +301,7 @@ class TDExporter
       pw.format("      <session date=\"%s\" ", info.date); // FIXME yyyy-mm-dd
       pw.format(         "description=\"%s\" ", cave ); // title
       if ( info.team != null && info.team.length() > 0 ) {
-        pw.format(" team=\"%s\" ", info.team );
+        pw.format(" team=\"%s\" ", toXml(info.team) );
       }
       if ( info.hasDeclination() ) { // DECLINATION in cSurvey
         pw.format(Locale.US, "nordtype=\"0\" manualdeclination=\"1\" declination=\"%.4f\" ", info.declination ); 
@@ -315,7 +321,7 @@ class TDExporter
       pw.format("      <caveinfo name=\"%s\"", cave );
       // pw.format( " color=\"\"");
       if ( info.comment != null && info.comment.length() > 0 ) {
-        pw.format( " comment=\"%s\"\n", info.comment );
+        pw.format( " comment=\"%s\"\n", toXml( info.comment ) );
       }
       pw.format(" >\n");
       pw.format("        <branches>\n");
@@ -346,7 +352,7 @@ class TDExporter
         pw.format(Locale.US, " g=\"%.1f\" m=\"%.1f\" dip=\"%.1f\"", blk.mAcceleration, blk.mMagnetic, blk.mDip );
         // pw.format(" l=\"0.0\" r=\"0.0\" u=\"0.0\" d=\"0.0\"");
         if ( blk.mComment != null && blk.mComment.length() > 0 ) {
-          pw.format(" note=\"%s\"", blk.mComment.replaceAll("\"", "") );
+          pw.format(" note=\"%s\"", toXml( blk.mComment.replaceAll("\"", "") ) );
         }
 	pw.format(" distox=\"%s\"", blk.getAddress() ); // MAC-address
         pw.format(" >\n");
@@ -393,7 +399,7 @@ class TDExporter
               writeCsxLeg( pw, leg, ref_item );
               pw.format(" l=\"0.0\" r=\"0.0\" u=\"0.0\" d=\"0.0\"");
               if ( com != null && com.length() > 0 ) {
-                pw.format(" note=\"%s\"", com.replaceAll("\"", "") );
+                pw.format(" note=\"%s\"", toXml( com ) );
                 com = null;
               }
 	      pw.format(" distox=\"%s\"", ref_item.getAddress() ); // MAC-address
@@ -415,7 +421,7 @@ class TDExporter
                                  item.mAcceleration, item.mMagnetic, item.mDip );
             pw.format(" l=\"0\" r=\"0\" u=\"0\" d=\"0\"");
             if ( item.mComment != null && item.mComment.length() > 0 ) {
-              pw.format(" note=\"%s\"", item.mComment.replaceAll("\"", "") );
+              pw.format(" note=\"%s\"", toXml( item.mComment.replaceAll("\"", "") ) );
             }
 	    pw.format(" distox=\"%s\"", item.getAddress() ); // MAC-address
             pw.format(" >\n");
@@ -438,7 +444,7 @@ class TDExporter
               writeCsxLeg( pw, leg, ref_item );
               pw.format(" l=\"0.0\" r=\"0.0\" u=\"0.0\" d=\"0.0\"");
               if ( com != null && com.length() > 0 ) {
-                pw.format(" note=\"%s\"", com.replaceAll("\"", "") );
+                pw.format(" note=\"%s\"", toXml( com ) );
                 com = null;
               }
 	      pw.format(" distox=\"%s\"", ref_item.getAddress() ); // MAC-address
@@ -460,7 +466,7 @@ class TDExporter
                                  item.mAcceleration, item.mMagnetic, item.mDip );
             pw.format(" l=\"0\" r=\"0\" u=\"0\" d=\"0\"");
             if ( item.mComment != null && item.mComment.length() > 0 ) {
-              pw.format(" note=\"%s\"", item.mComment.replaceAll("\"", "") );
+              pw.format(" note=\"%s\"", toXml( item.mComment.replaceAll("\"", "") ) );
             }
 	    pw.format(" distox=\"%s\"", item.getAddress() ); // MAC-address
             pw.format(" >\n");
@@ -480,7 +486,7 @@ class TDExporter
               writeCsxLeg( pw, leg, ref_item );
               pw.format(" l=\"0\" r=\"0\" u=\"0\" d=\"0\"");
               if ( com != null && com.length() > 0 ) {
-                pw.format(" note=\"%s\"", com.replaceAll("\"", "") );
+                pw.format(" note=\"%s\"", toXml( com ) );
                 com = null;
               }
 	      pw.format(" distox=\"%s\"", ref_item.getAddress() ); // MAC-address
@@ -519,7 +525,7 @@ class TDExporter
         writeCsxLeg( pw, leg, ref_item );
         pw.format(" l=\"0\" r=\"0\" u=\"0\" d=\"0\"");
         if ( com != null && com.length() > 0 ) {
-          pw.format(" note=\"%s\"", com.replaceAll("\"", "") );
+          pw.format(" note=\"%s\"", toXml( com ) );
           // com = null;
         }
 	pw.format(" distox=\"%s\"", ref_item.getAddress() ); // MAC-address
@@ -1129,7 +1135,7 @@ class TDExporter
       File plot_file = new File( TDPath.getSurveyPlotTh2File( info.name, plt.name ) );
       if ( plot_file.exists() ) {
         if ( TDSetting.mTherionConfig ) {
-          pw.format("  # input \"../th2/%s-%s.th2\"\n", info.name, plt.name );
+          pw.format("  input \"../th2/%s-%s.th2\"\n", info.name, plt.name );
         } else {
           pw.format("  # input \"%s-%s.th2\"\n", info.name, plt.name );
         }
@@ -1174,8 +1180,15 @@ class TDExporter
         PrintWriter pcw = new PrintWriter( bcw );
         pcw.format("# %s created by TopoDroid v %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
         pcw.format("source \"../th/%s.th\"\n\n", info.name );
-        pcw.format("export map -o %s-p.pdf -proj plan \n\n", info.name );
-        pcw.format("export map -o %s-s.pdf -proj extended \n\n", info.name );
+        pcw.format("layout topodroid\n");
+        pcw.format("  legend on\n");
+        pcw.format("  symbol-hide group centerline\n");
+        pcw.format("  symbol-show point station\n");
+        pcw.format("  debug station-names\n");
+        pcw.format("endlayout\n");
+        pcw.format("\n");
+        pcw.format("export map -layout topodroid -o %s-p.pdf -proj plan \n\n", info.name );
+        pcw.format("export map -layout topodroid -o %s-s.pdf -proj extended \n\n", info.name );
         bcw.flush();
         // fcw.flush();
         fcw.close();
@@ -1209,7 +1222,8 @@ class TDExporter
       PrintWriter pw = new PrintWriter( bw );
 
       pw.format("# %s created by TopoDroid v %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
-      pw.format("survey %s -title \"%s\"\n", info.name, info.name );
+      String title = info.name.replaceAll("_", " ");
+      pw.format("survey %s -title \"%s\"\n", info.name, title );
       if ( info.comment != null && info.comment.length() > 0 ) {
         pw.format("    # %s \n", info.comment );
       }
@@ -1245,7 +1259,30 @@ class TDExporter
       }
       pw.format("    date %s \n", info.date );
       if ( info.team != null && info.team.length() > 0 ) {
-        pw.format("    # team %s \n", info.team );
+        if ( TDSetting.mTherionConfig ) { 
+          String[] names = info.team.replaceAll(",", " ").replaceAll(";", " ").replaceAll("\\s+", " ").split(" ");
+          int len = names.length;
+          int k = 0;
+          while ( k<len ) {
+            pw.format("    team \"");
+            String name = names[k];
+            int kk = k;
+            while ( k < len-1 && ( name.length() == 1 || name.endsWith(".") ) ) {
+              pw.format("%s", name );
+              if ( name.length() == 1 ) pw.format(".");
+              ++k;
+              name = names[k];
+            } 
+            if ( k > kk ) {
+              pw.format(" %s\"\n", name );
+            } else {
+              pw.format("%s\"\n", name );
+            }
+            ++k;
+          }
+        } else {
+          pw.format("    # team %s \n", info.team );
+        }
       }
 
       if ( info.hasDeclination() ) { // DECLINATION in Therion

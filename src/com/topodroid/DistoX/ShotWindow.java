@@ -51,6 +51,7 @@ import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.KeyEvent;
@@ -62,6 +63,8 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 
 
 import android.provider.MediaStore;
@@ -78,8 +81,8 @@ import android.net.Uri;
 // import androidx.recyclerview.widget.LinearLayoutManager;
 
 public class ShotWindow extends Activity
-                          implements OnItemClickListener
-                          , OnItemLongClickListener
+                        implements OnItemClickListener
+                        , OnItemLongClickListener
                         , OnClickListener
                         , OnLongClickListener
                         , ILister
@@ -1087,6 +1090,17 @@ public class ShotWindow extends Activity
     onMultiselect = false;
 
     mList = (ListView) findViewById(R.id.list);
+    // view_group.setDescendantFocusbility( ViewGroup.FOCUS_BLOCK_DESCENDANTS ); //  FOCUS_BEFORE_DESCENDANTS FOCUS_AFTER_DESCENDANTS
+    mList.setOnScrollListener( new OnScrollListener() {
+      @Override public void onScroll( AbsListView listview, int first, int count, int total ) { }
+
+      @Override public void onScrollStateChanged( AbsListView list_view, int state ) { 
+        if ( OnScrollListener.SCROLL_STATE_TOUCH_SCROLL == state ) {
+          View focus_view = getCurrentFocus();
+          if ( focus_view != null ) focus_view.clearFocus();
+        }
+      }
+    } );
     mList.setAdapter( mDataAdapter );
     // mList.setOnItemClickListener( this );
     // mList.setLongClickable( true );
