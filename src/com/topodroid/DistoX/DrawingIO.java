@@ -1097,7 +1097,7 @@ class DrawingIO
       bbox.left*scale-100, -bbox.bottom*scale-100, bbox.right*scale+100, -bbox.top*scale+100 );
     pw.format("##XTHERION## xth_me_area_zoom_to 25\n");
     if ( TDSetting.mTherionXvi ) {
-      // xx vsb gamma - yy XVIroot
+      // xx vsb gamma - yy XVIroot -- filename -- index -- data
       pw.format("##XTHERION## xth_me_image_insert {%.2f 1 1.0} {%.2f 0} %s.xvi 0 {}\n",
         scale*DrawingUtil.CENTER_X, -scale*DrawingUtil.CENTER_Y, name );
     }

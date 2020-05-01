@@ -86,7 +86,7 @@ class DrawingCommandManager
 
   DrawingCommandManager( int mode, String plot_name )
   {
-    // Log.v("DistoX-MANAGER", "command manager mode " + mode );
+    Log.v("DistoX-MANAGER", plot_name + " command manager mode " + mode );
     mMode = mode;
     mIsExtended  = false;
     mBBox = new RectF();
@@ -129,29 +129,37 @@ class DrawingCommandManager
   // SCRAPS management
   int scrapIndex() { return mScrapIdx; }
 
-  int toggleScrapIndex( int k ) { 
-    int size = mScraps.size();
-    mScrapIdx += k;
-    if ( mScrapIdx >= size ) { mScrapIdx = 0; } 
-    else if ( mScrapIdx < 0 ) { mScrapIdx = size - 1; }
-    mCurrentScrap = mScraps.get( mScrapIdx );
+  int toggleScrapIndex( int k )
+  { 
+    if ( mMode < 3 ) {
+      int size = mScraps.size();
+      mScrapIdx += k;
+      if ( mScrapIdx >= size ) { mScrapIdx = 0; } 
+      else if ( mScrapIdx < 0 ) { mScrapIdx = size - 1; }
+      mCurrentScrap = mScraps.get( mScrapIdx );
+    }
     return mScrapIdx;
   }
 
   int newScrapIndex( ) { 
-    mScrapIdx = mScraps.size();
-    mCurrentScrap = new Scrap( mScrapIdx, mPlotName );
-    mScraps.add( mCurrentScrap ); 
-    // FIXME-HIDE addShotsToScrapSelection( mCurrentScrap );
+    if ( mMode < 3 ) {
+      Log.v("DistoX-MANAGER", mPlotName + " new scrap. currently " + mScraps.size() );
+      mScrapIdx = mScraps.size();
+      mCurrentScrap = new Scrap( mScrapIdx, mPlotName );
+      mScraps.add( mCurrentScrap ); 
+      // FIXME-HIDE addShotsToScrapSelection( mCurrentScrap );
+    }
     return mScrapIdx;
   }
 
   private void setCurrentScrap( int idx ) {
-    if ( idx != mScrapIdx ) {
-      if ( idx < 0 ) return; // -1;
-      while ( idx >= mScraps.size() ) newScrapIndex();
-      mScrapIdx = idx;
-      mCurrentScrap = mScraps.get( mScrapIdx );
+    if ( mMode < 3 ) {
+      if ( idx != mScrapIdx ) {
+        if ( idx < 0 ) return; // -1;
+        while ( idx >= mScraps.size() ) newScrapIndex();
+        mScrapIdx = idx;
+        mCurrentScrap = mScraps.get( mScrapIdx );
+      }
     }
     // return mScrapIdx;
   }

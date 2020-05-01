@@ -206,6 +206,8 @@ class DrawingXvi
         }
 	out.write("}\n\n");
         out.flush();
+      } else {
+        printXviGrid( out, xmin, ymin, xmax, ymax, xoff, yoff );
       }
 
       out.write("set XVIsketchlines {\n");
