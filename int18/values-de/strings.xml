@@ -6,7 +6,7 @@
     <string name="user_man_fail">Fehler beim installieren des übersetzten Handbuchs</string>
 
     <string name="app_name">TopoDroid</string>
-    <!-- TODO string name="tdm_title">TopoDroid Manager</string -->
+    <string name="tdm_title">TopoDroid Manager</string>
     <string name="double_back">Erneut ZURÜCK drücken zum verlassen</string>
 
     <!-- Actions when long-pressing the icon to create shortcuts on the homescreen -->
@@ -90,7 +90,7 @@
     <string name="calib_device_mismatch">WARNUNG: Kalibrierung stimmt mit Gerät nicht überein</string>
     <string name="calib_no_name">Name erforderlich</string>
     <!-- REMOVE string name="calib_gm_policy">Methode</string -->
-    <!-- TODO string name="calib_gm_policy">Group policy</string -->
+    <string name="calib_gm_policy">Gruppierung</string>
     <string name="calib_gm_undelete">Kalibrierung wiederherstellen?</string>
     <string name="calib_saved">Kalibrierung gespeichert</string>
     <string name="calib_updated">Kalibrierung aktualisiert</string>
@@ -125,7 +125,7 @@
     <string name="device_none">Kein DistoX ausgewählt</string>
     <!-- UNUSED string name="device_paired">Gerät ist verbunden</string -->
     <string name="device_reset">DistoX Speicher zurücksetzen</string>
-    <!-- TODO string name="device_clear">Clear DistoX memory</string -->
+    <string name="device_clear">DistoX Speicher löschen</string>
     <string name="device_code">DistoX Code %1$4d</string>
     <string name="device_firmware">Firmware  %1$d.%2$d</string>
     <string name="device_hardware">Hardware  %1$d.%2$d</string>
@@ -166,7 +166,7 @@
     <string name="few_iter">Nicht genügend Wiederholungen</string>
     <string name="few_groups">Zu wenige Gruppen</string>
     <string name="found_groups">%1$d Gruppen gefunden</string>
-    <!-- TODO string name="regroup">No regroup</string -->
+    <string name="regroup">Neu gruppieren</string>
     <!-- UNUSED string name="few_plots">Nicht genügend Skizzen</string -->
     <string name="few_calibs">Nicht genügend Kalibrierungen</string>
     <string name="getting_info">DistoX wird abgefragt &#8230;</string>
@@ -186,7 +186,7 @@
     <string name="import_calib_no_data">Kalibrierungsdatei: Keine Daten</string>
     <string name="import_calib_io_error">Kalibrierungsdatei: Lesefehler</string>
     <string name="import_zip_ok">Zip-Datei erfolgreich importiert</string>
-    <!-- TODO string name="import_zip_newer">Imported zip from more recent version</string -->
+    <string name="import_zip_newer">Neuere Zip-Datei importiert</string>
     <!-- UNUSED string name="import_zip_wait">Importiere Zip-Datei, bitte warten&#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Skizze speichern, bitte warten&#8230;</string -->
     <string name="MT_points_none">Keine MobileTopographer Punkte</string>
@@ -240,8 +240,8 @@
     <string name="error_invalid_name">Ungültiger Name</string>
     <string name="error_lat_required">Breite erforderlich</string>
     <string name="error_long_required">Länge erforderlich</string>
-    <!-- TODO string name="error_name_exists">Existing project</string -->
-    <!-- TODO string name="error_name_invalid">Invalid project name</string -->
+    <string name="error_name_exists">Project existiert bereits</string>
+    <string name="error_name_invalid">Ungültiger Projektname</string>
     <string name="error_name_required">Name erforderlich</string>
     <string name="error_dir_exists">Verzeichnis existiert bereits</string>
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
@@ -498,7 +498,7 @@
     <string name="survey_exists">Vermessung bereits vorhanden</string>
     <!-- UNUSED string name="survey_date">jjjj.mm.tt</string -->
     <string name="survey_delete">Vermessung löschen?</string>
-    <!-- TODO string name="survey_move">Move shots to survey %1$s ?</string -->
+    <string name="survey_move">Messungen verschieben nach %1$s ?</string>
     <string name="survey_split">Vermessung teilen?</string>
     <string name="survey_not_attached">WARNUNG: Unverbundene Messungen</string>
     <string name="survey_not_extend">WARNUNG: Nicht definierte Ausrichtung im Seitenriss</string>
@@ -524,7 +524,7 @@
     <string name="name">Name</string>
     <string name="team">Messteam</string>
     <string name="init_station">Startpunkt</string>
-    <!-- TODO string name="second_device">second device</string -->
+    <string name="second_device">Zweiter DistoX</string>
     <string name="start_station">Startpunkt [%1$s]</string>
     <!-- UNUSED string name="toggle_device">Den DistoX in Betriebsmodus schalten</string -->
     <string name="toggle_failed">Fehler beim Kalibrierungsmodus-Wechsel</string>
@@ -572,7 +572,7 @@
     <string name="stat_angle_error">Winkelfehler %1$.2f ± %2$.2f"</string>
     <string name="shot_title">Messung %1$s - %2$s"</string>
     <string name="shot_data">L %1$.2f  A %2$.1f  N %3$.1f"</string>
-    <!-- TODO string name="survey_split_move_title">Survey split/move</string -->
+    <string name="survey_split_move_title">Vermessung teilen/verschieben</string>
 
     <string name="survey_stat_duplicate">Doppelmessungen %1$d %2$.1f %3$s</string>
     <string name="survey_stat_splay">Hilfszüge %1$d</string>
@@ -610,7 +610,7 @@
     <!-- UNUSED string name="ask_close_survey">Vermessung schließen?</string -->
     <string name="ask_gps_service">GPS aktiveren?</string>
     <string name="ask_backups_clear">Skizzenbackups löschen?</string>
-    <!-- TODO string name="ask_manual_update">Update user manual translation?\nCurrent v. %1$d Installed v. %2$d</string -->
+    <string name="ask_manual_update">Übersetztes Handbuch updaten?\nAktuell v%1$d Installiert v%2$d</string>
 
     <!-- UNUSED string name="button_add"       >Erstellen       </string -->
     <string name="button_back"      >Zurück    </string>
@@ -639,7 +639,7 @@
     <!-- UNUSED string name="button_azimuth">Azimut</string -->
     <string name="button_plot"    >Skizze</string>
     <string name="button_more"    >Mehr</string>
-    <!-- TODO string name="button_move"    >Move</string -->
+    <string name="button_move"    >Verschieben</string>
     <string name="button_next"    >Nächste</string>
     <string name="button_prev"    >Vorherige</string>
     <string name="button_new"     >Neue Teilskizze</string>
@@ -664,7 +664,7 @@
     <string name="button_clear"     >Entfernen</string>
     <string name="button_clear_day" >1 Tag löschen</string>
     <string name="button_clear_week">1 Woche löschen</string>
-    <!-- TODO string name="button_clear_memory">Clear memory</string -->
+    <string name="button_clear_memory">Speicher löschen</string>
     <string name="button_save"      >Speichern</string>
     <!-- UNUSED string name="button_select"    >Wählen     </string -->
     <string name="button_search"    >Suche    </string>
@@ -745,7 +745,7 @@
     <string name="btn_horizontal">Horizontal</string>
 
     <string name="split_nothing">Nichts aufzuteilen</string>
-    <!-- TODO string name="flip_shots">Flip shots</string -->
+    <string name="flip_shots">Profil-Ausrichtung drehen</string>
     <string name="copy_items">Kopieren</string>
 
     <string name="man_preface">Einführung</string>
@@ -762,7 +762,7 @@
     <string name="man_xsection">11. Querschnitte</string>
     <string name="man_overview">12. Skizzen-Übersicht</string>
     <string name="man_export">13. Import/Export</string>
-    <!-- TODO string name="man_project">14. Cave projects</string -->
+    <string name="man_project">14. Weitere Projekte</string>
     <string name="man_threed">15. 3D-Anzeige</string>
     <string name="man_index">16. Index</string>
     <string name="man_website">* Topodroid Webseite</string>
@@ -787,7 +787,7 @@
     <string name="help_add_topodroid">Neue Vermessung/Kalibrierung starten</string>
     <string name="help_import">Zip oder Datei importieren</string>
     <string name="help_symbol">Zeichenwerkzeuge (de)aktivieren</string>
-    <!-- TODO string name="help_therion">Cave project manager</string -->
+    <string name="help_therion">Project Manager</string>
     <!-- UNUSED string name="help_database">Databanken App (SQliteViewer)</string -->
     <string name="help_prefs">Einstellungen bearbeiten</string>
     <string name="help_log">Logging-Einstellungen aktivieren</string>
@@ -835,7 +835,7 @@
     <string name="help_select_mode">Auswahlmodus</string>
     <string name="help_erase_mode">Löschmodus</string>
     <string name="help_erase_size">Löschgröße [S/M/L]</string>
-    <!-- TODO string name="help_select_size">Select tool size [S/M/L]</string -->
+    <string name="help_select_size">Werkzeuggrösse [S/M/L]</string >
     <string name="help_previous">Vorheriger Punkt</string>
     <string name="help_next">Nächster Punkt</string>
     <string name="help_recover">Die Skizze wiederherstellen</string>
@@ -876,15 +876,15 @@
     <string name="help_compute">Kalibrierungs-Koeffizienten berechnen</string>
     <string name="help_write">Kalibrierungs-Koeffizienten auf den DistoX speichern</string>
 
-    <!-- TODO string name="help_add_project">Add cave project</string -->
-    <!-- TODO string name="help_add_surveys">Add surveys</string -->
-    <!-- TODO string name="help_drop_surveys">Drop surveys</string -->
-    <!-- TODO string name="help_view_surveys">Display surveys</string -->
-    <!-- TODO string name="help_view_equates">List equates</string -->
-    <!-- TODO string name="help_export_config">Export project</string -->
-    <!-- TODO string name="help_delete_config">Delete project</string -->
-    <!-- TODO string name="help_add_equate">Add surveys equate</string -->
-    <!-- TODO string name="help_equates">List surveys equates</string -->
+    <string name="help_add_project">Projekt hinzufügen</string>
+    <string name="help_add_surveys">Vermessungen hinzufügen</string>
+    <string name="help_drop_surveys">Vermessungen entfernen</string>
+    <string name="help_view_surveys">Vermessungen anzeigen</string>
+    <string name="help_view_equates">Verbindungspunkte anzeigen</string>
+    <string name="help_export_config">Projekt exportieren</string>
+    <string name="help_delete_config">Projekt löschen</string>
+    <string name="help_add_equate">Verbindungen hinzufügen</string>
+    <string name="help_equates">Verbindungspunkte</string>
   
     <string name="audio_paused">Pause</string>
     <string name="audio_playing">Abspielen</string>
@@ -952,11 +952,11 @@
     <string name="title_settings_svx">Survex-Export Einstellungen</string>
     <string name="title_settings_th">Therion-Export Einstellungen</string>
     <string name="title_settings_dat">Compass-Export Einstellungen</string>
-    <!-- TODO string name="title_settings_csx">cSurvey export settings</string -->
+    <string name="title_settings_csx">cSurvey-Export Einstellungen</string>
     <string name="title_settings_tro">VisualTopo-Export Einstellungen</string>
     <string name="title_settings_svg">SVG-Export Einstellungen</string>
     <string name="title_settings_dxf">DXF-Export Einstellungen</string>
-    <!-- TODO string name="title_settings_shp">Shapefile export settings</string -->
+    <string name="title_settings_shp">Shapefile-Export Einstellungen</string>
     <string name="title_settings_png">PNG-Export Einstellungen</string>
     <string name="title_settings_kml">KML-Export Einstellungen</string>
 
@@ -998,7 +998,7 @@
     <string name="title_import_tro">VisualTopo-Import Optionen</string>
     <string name="title_import_dat">Compass-Import Optionen</string>
 
-  <string name="pref_export_settings">Export-Einstellungen</string>
+  <string name="pref_export_settings">Einstellungen exportieren</string>
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
 <!-- PREFERENCES STRINGS CAN BE LEFT UNTRANSLATED FOR NOW -->
@@ -1046,8 +1046,8 @@
   <string name="pref_export_plot_title">Skizzenformat</string>
   <string name="pref_export_plot_summary">Standardformat für Skizzen-Exporte</string>
 
-  <!-- TODO string name="pref_therion_config_title">Therion config file</string -->
-  <!-- TODO string name="pref_therion_config_summary">Create Therion config file</string -->
+  <string name="pref_therion_config_title">Therion Konfiguration</string>
+  <string name="pref_therion_config_summary">Therion Konfiguration erstellen (&lt;projekt&gt;.thconfig)</string>
   <string name="pref_therion_maps_title">Therion: &quot;map&quot; vor Messzug</string>
   <string name="pref_therion_maps_summary">Therion map-Elemente vor den Messungen platzieren</string>
   <string name="pref_extra_buttons_title">Modus</string>
@@ -1119,8 +1119,8 @@
   <string name="pref_svg_linedirstroke_summary">Dicke der Ausrichtungslinie in SVG</string>
   <string name="pref_svg_line_dir_title">SVG Ausrichtungslinie</string>
   <string name="pref_svg_line_dir_summary">Ausrichtungslinienpfeile in SVG Export</string>
-  <!-- TODO string name="pref_svg_stationsize_title">Station size</string -->
-  <!-- TODO string name="pref_svg_stationsize_summary">Station names text size</string -->
+  <string name="pref_svg_stationsize_title">Messpunktgröße</string>
+  <string name="pref_svg_stationsize_summary">Textgröße der Messpunktnamen</string>
   <string name="pref_kml_stations_title">KML/GeoJson: Messpunkte</string>
   <string name="pref_kml_stations_summary">Messpunkte zu KML/GeoJson Export hinzufügen</string>
   <string name="pref_kml_splays_title">KML/GeoJson: Hilfslinien</string>
@@ -1150,8 +1150,8 @@
   <string name="pref_conn_mode_summary">Art der Verbindung mit DistoX</string>
   <string name="pref_auto_reconnect_title">Autom. Verbindung</string>
   <string name="pref_auto_reconnect_summary">Wiederverbindung nach Verbindungsverlust</string>
-  <!-- TODO string name="pref_second_distox_title">Two-DistoX survey</string -->
-  <!-- TODO string name="pref_second_distox_summary">Surveying with two DistoX</string -->
+  <string name="pref_second_distox_title">2 DistoX</string>
+  <string name="pref_second_distox_summary">Vermessen mit zwei verbundenen DistoX</string>
   <string name="pref_auto_pair_title">Autom. Verbinden</string>
   <string name="pref_auto_pair_summary">Automatische Verbindung nach dem scannen</string>
   <string name="pref_head_tail_title">Anzahl Daten abfragen</string>
@@ -1208,7 +1208,7 @@
   <string name="pref_reduce_angle_summary">Minimaler Winkel um Linien zu begradigen</string>
 
 
-  <string name="pref_survey_stations_title">Vermessungs-Strategie</string>
+  <string name="pref_survey_stations_title">Strategie</string>
   <string name="pref_survey_stations_summary">Art der Vermessung und Zuweisung der Messpunkte</string>
   <string name="pref_accel_thr_title">Beschleunigungstoleranz</string>
   <string name="pref_accel_thr_summary">Toleranz gegenüber Durchschnittswert der Beschleunigung um Messung als anomal zu markieren (%)</string>
@@ -1247,7 +1247,7 @@
   <string name="pref_init_station_title">Name Startmesspunkt</string>
   <string name="pref_init_station_summary">Standard Startmesspunkt</string>
   <string name="pref_station_names_title">Messpunktnamen</string>
-  <string name="pref_station_names_summary">Art der Messpunktnamen</string>
+  <string name="pref_station_names_summary">Format der Messpunktnamen</string>
 
   <string name="pref_hthr_title">Grenzwert Schnitte</string>
   <string name="pref_hthr_summary">Winkelgrenzwert ab welchem Querschnitte horizontal sind</string>
@@ -1261,8 +1261,8 @@
   <!-- UNUSED string name="pref_dxf_scale_summary">Massstab-Faktor DXF-Skizze</string -->
   <string name="pref_dxf_blocks_title">DXF: Hilfszüge</string>
   <string name="pref_dxf_blocks_summary">DXF: Enden der Hilfszüge markieren</string>
-  <!-- TODO string name="pref_shp_georef_title">Georeferenced sketch plan export</string -->
-  <!-- TODO string name="pref_shp_georef_summary">Sketch plan exported in WGS84 long-lat</string -->
+  <string name="pref_shp_georef_title">Georeferenzierter Skizzenexport</string>
+  <string name="pref_shp_georef_summary">Skizzen georeferenziert exportieren als shapefile mit WGS84 Koordinaten</string>
   <string name="pref_thumbnail_title">Thumbnails Größe</string>
   <string name="pref_thumbnail_summary">Thumbnails Größe</string>
   <string name="pref_shot_timer_title">Auslöseverzögerung</string>
@@ -1321,8 +1321,8 @@
   <string name="pref_path_multiselect_summary">Erlaube mehrere Pfade auszuwählen</string>
   <string name="pref_composite_actions_title">Zusammengesetzte Aktionen</string>
   <string name="pref_composite_actions_summary">Erlaube zusammengsetzte Aktionen für Linien/Flächen</string>
-  <!-- TODO string name="pref_plane_interpolation_title">Plane interpolation</string -->
-  <!-- TODO string name="pref_plane_interpolation_summary">Plane interpolation action</string -->
+  <string name="pref_plane_interpolation_title">Ebene interpolieren</string>
+  <string name="pref_plane_interpolation_summary">Interpoliere die Ebene anhand der Hilfszüge</string>
   <string name="pref_plot_split_title">Skizzen aufteilen</string>
   <string name="pref_plot_split_summary">Erlaube Skizzen aufzuteilen</string>
   <string name="pref_fixed_thickness_title">Liniendicke Messstrecke</string>
@@ -1374,8 +1374,8 @@
 
   <string name="pref_picker_type_title">Zeichenwerkzeuge</string>
   <string name="pref_picker_type_summary">Darstellung der Zeichenwerkzeuge</string>
-  <!-- TODO string name="pref_triple_toolbar_title">Triple bottom bar</string -->
-  <!-- TODO string name="pref_triple_toolbar_summary">Triple drawing tools bar</string -->
+  <string name="pref_triple_toolbar_title">Drei Zeichenwerkzeugreihen</string>
+  <string name="pref_triple_toolbar_summary">Drei Reihen von Zeichenwerkzeugen am unteren Bildrand</string>
   <!-- UNUSED string name="pref_section_stations_title">Querschnitts-Stationen</string -->
   <!-- UNUSED string name="pref_section_stations_summary">Querschnitts-Referenz-Stationen</string -->
   <string name="pref_station_size_title">Messpunkt Schriftgröße</string>
@@ -1525,43 +1525,43 @@
    <string name="firmware_file_uploaded">Firmware %1$s aktualisiert (%2$d / %3$d geschrieben)</string>
    <string name="firmware_not_supported">Gerät unterstützt keine Firmware-Funktionen</string>
 
-    <!-- TODO string name="project">Project %1$s</string -->
-    <!-- TODO string name="no_editor">Editor not found</string -->
-    <!-- TODO string name="no_file">File not found</string -->
-    <!-- TODO string name="no_extra">Missing file extra</string -->
-    <!-- TODO string name="no_path">Missing filepath</string -->
-    <!-- TODO string name="no_equate">No equate</string -->
-    <!-- TODO string name="no_surveys">No surveys</string -->
-    <!-- TODO string name="no_tdconfig">Missing tdconfig file</string -->
-    <!-- TODO string name="no_th_file">No Therion file</string -->
-    <!-- TODO string name="file_exists">File exists</string -->
-    <!-- TODO string name="file_create_fail">File create fail</string -->
-    <!-- TODO string name="oom">Warning. Out of memory</string -->
+    <string name="project">Projekt %1$s</string>
+    <string name="no_editor">Editor nicht gefunden</string>
+    <string name="no_file">Datei nicht gefunden</string>
+    <string name="no_extra">Fehlende Datei</string>
+    <string name="no_path">Fehlender Pfad</string>
+    <string name="no_equate">Keine Überschneidungen</string>
+    <string name="no_surveys">Keine Vermessungen ausgewählt</string>
+    <string name="no_tdconfig">tdconfig fehlt</string>
+    <string name="no_th_file">Keine Therion datei</string>
+    <string name="file_exists">Datei existiert bereits</string>
+    <string name="file_create_fail">Datei konnte nicht erstellt ewrden</string>
+    <string name="oom">Warnung: Arbeitsspeicher voll</string>
 
-    <!-- TODO string name="ask_delete_tdconfig">Delete TdConfig file</string -->
-    <!-- TODO string name="ask_remove_equate">Remove equate %1$s ?</string -->
-    <!-- TODO string name="equate_no_station">No station selected</string -->
-    <!-- TODO string name="equate_no_stations">Too few stations</string -->
-    <!-- TODO string name="equate_no_nearby">No station nearby</string -->
+    <string name="ask_delete_tdconfig">TdConfig-Datei löschen</string>
+    <string name="ask_remove_equate">Entferne Überschneidung %1$s ?</string>
+    <string name="equate_no_station">Kein Messpunkt ausgewählt</string>
+    <string name="equate_no_stations">Zu wenige Messpunkte</string>
+    <string name="equate_no_nearby">Kein Messpunkt in der Nähe</string>
 
-    <!-- TODO string name="menu_new">NEW</string -->
-    <!-- TODO string name="menu_equate">ADD EQUATE</string -->
-    <!-- TODO string name="menu_equates">EQUATES</string -->
-    <!-- TODO string name="menu_save">SAVE</string -->
+    <string name="menu_new">NEU</string>
+    <string name="menu_equate">NEUE ÜBERSCHNEIDUNG</string>
+    <string name="menu_equates">ÜBERSCHNEIDUNGEN</string>
+    <string name="menu_save">SPEICHERN</string>
 
-    <!-- TODO string name="overwrite">overwrite</string -->
+    <string name="overwrite">überschreiben</string>
 
-    <!-- TODO string name="title_help">TopoDroid Manager v. %1$s</string -->
-    <!-- TODO string name="title_export">Export project as &#8230;</string -->
-    <!-- TODO string name="title_equates">Project Equates</string -->
-    <!-- TODO string name="title_equate_new">Add equate &#8230;</string -->
-    <!-- TODO string name="title_cwd">Current Work Directory</string -->
-    <!-- TODO string name="title_settings">TdManager Settings</string -->
-    <!-- TODO string name="title_drop">Drop surveys ?</string -->
-    <!-- TODO string name="title_tdconfig">Enter project name</string -->
-    <!-- TODO string name="title_surveys">Surveys</string -->
+    <string name="title_help">TopoDroid Manager v. %1$s</string>
+    <string name="title_export">Project exportieren als &#8230;</string>
+    <string name="title_equates">Überschneidungen</string>
+    <string name="title_equate_new">Überschneidung definieren &#8230;</string>
+    <string name="title_cwd">Arbeitsverzeichnis</string>
+    <string name="title_settings">TdManager Einstellungen</string>
+    <string name="title_drop">Vermessungen entfernen?</string>
+    <string name="title_tdconfig">Projektname</string>
+    <string name="title_surveys">Vermessungen</string>
 
-    <!-- TODO string name="exported">Saved file %1$s</string -->
-    <!-- TODO string name="export_failed">Failed export</string -->
+    <string name="exported">Gespeichert als %1$s</string>
+    <string name="export_failed">Export fehlgeschlagen</string>
 
 </resources>
