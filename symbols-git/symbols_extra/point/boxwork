@@ -1,0 +1,23 @@
+encoding utf-8
+symbol point
+name boxwork
+th_name boxwork
+orientation no
+color 0xccffff
+csurvey 6 6 80
+path
+  moveTo -7 -6
+  lineTo -7 -1
+  lineTo  3 -1
+  moveTo -3 -5
+  lineTo -3  5
+  moveTo  0 -3
+  lineTo  0  7
+  moveTo -1  5
+  lineTo  6  5
+  moveTo  2  2
+  lineTo  6  2
+  moveTo  2 -2
+  lineTo  2  6
+endpath
+endsymbol

@@ -422,7 +422,7 @@ public class ShotWindow extends Activity
         } );
 	// mList.invalidate();
 	// mDataAdapter.reviseLatest();
-        if ( ret ) {
+        if ( ret || TDSetting.mAlwaysUpdate ) {
           // Log.v("DistoX-DATA", "shot window got a leg" );
           TopoDroidApp.notifyUpdateDisplay();
         }

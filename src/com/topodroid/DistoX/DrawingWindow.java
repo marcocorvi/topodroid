@@ -2005,7 +2005,11 @@ public class DrawingWindow extends ItemDrawer
       mBtnRecentP[k].setOnClickListener(
         new View.OnClickListener() {
           @Override public void onClick( View v ) {
-            for ( int k = 0; k<NR_RECENT; ++k ) if ( v == mBtnRecentP[k] ) { setPoint( k, false ); break; }
+            for ( int k = 0; k<NR_RECENT; ++k ) if ( v == mBtnRecentP[k] ) {
+              setPoint( k, false );
+              setHighlight( Symbol.POINT, k );
+              break;
+            }
           }
         }
       );
@@ -2013,7 +2017,11 @@ public class DrawingWindow extends ItemDrawer
       mBtnRecentL[k].setOnClickListener(
         new View.OnClickListener() {
           @Override public void onClick( View v ) {
-            for ( int k = 0; k<NR_RECENT; ++k ) if ( v == mBtnRecentL[k] ) { setLine( k, false ); break; }
+            for ( int k = 0; k<NR_RECENT; ++k ) if ( v == mBtnRecentL[k] ) {
+              setLine( k, false );
+              setHighlight( Symbol.LINE, k );
+              break;
+            }
           }
         }
       );
@@ -2021,7 +2029,11 @@ public class DrawingWindow extends ItemDrawer
       mBtnRecentA[k].setOnClickListener(
         new View.OnClickListener() {
           @Override public void onClick( View v ) {
-            for ( int k = 0; k<NR_RECENT; ++k ) if ( v == mBtnRecentA[k] ) { setArea( k, false ); break; }
+            for ( int k = 0; k<NR_RECENT; ++k ) if ( v == mBtnRecentA[k] ) {
+              setArea( k, false );
+              setHighlight( Symbol.AREA, k );
+              break;
+            }
           }
         }
       );
@@ -7017,19 +7029,49 @@ public class DrawingWindow extends ItemDrawer
   @Override
   public void setBtnRecent( int symbol ) // ItemButton[] mBtnRecent, Symbol[] mRecentTools, float sx, float sy )
   {
+    int index = -1;
     switch ( symbol ) {
       case Symbol.POINT: 
         setButtonRecent( mBtnRecentP, mRecentPoint );
+        index = getCurrentPointIndex();
         break;
       case Symbol.LINE: 
         setButtonRecent( mBtnRecentL, mRecentLine  );
+        index = getCurrentLineIndex();
         break;
       case Symbol.AREA: 
         setButtonRecent( mBtnRecentA, mRecentArea  );
+        index = getCurrentAreaIndex();
         break;
     }
     setToolsToolbars();
+    setHighlight( symbol, index );
   }
+
+  private int getCurrentPointIndex()
+  {
+    for ( int k=0; k < NR_RECENT; ++k ) {
+      if ( mCurrentPoint == BrushManager.getPointIndex( mRecentPoint[k] ) ) return k;
+    }
+    return -1;
+  }
+
+  private int getCurrentLineIndex()
+  {
+    for ( int k=0; k < NR_RECENT; ++k ) {
+      if ( mCurrentLine == BrushManager.getLineIndex( mRecentLine[k] ) ) return k;
+    }
+    return -1;
+  }
+
+  private int getCurrentAreaIndex()
+  {
+    for ( int k=0; k < NR_RECENT; ++k ) {
+      if ( mCurrentArea == BrushManager.getAreaIndex( mRecentArea[k] ) ) return k;
+    }
+    return -1;
+  }
+
 
   private void setBtnRecentAll()
   {
@@ -7053,6 +7095,46 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  private int highlightType = Symbol.UNDEF;
+  private int highlightIndex = -1;
+
+  private void setHighlight( int type, int index )
+  {
+    if ( highlightIndex >= 0 && highlightIndex < NR_RECENT ) { // clear previous highlight
+      switch ( highlightType ) {
+        case Symbol.POINT:
+          mBtnRecentP[ highlightIndex ].highlight( false );
+          break;
+        case Symbol.LINE:
+          mBtnRecentL[ highlightIndex ].highlight( false );
+          break;
+        case Symbol.AREA:
+          mBtnRecentA[ highlightIndex ].highlight( false );
+          break;
+      }
+    }
+    if ( index < 0 || index >= NR_RECENT ) {
+      highlightIndex = -1;
+      highlightType  = Symbol.UNDEF;
+    } else {
+      highlightIndex = index;
+      highlightType  = type;
+      switch ( highlightType ) {
+        case Symbol.POINT:
+          mBtnRecentP[ highlightIndex ].highlight( true );
+          break;
+        case Symbol.LINE:
+          mBtnRecentL[ highlightIndex ].highlight( true );
+          break;
+        case Symbol.AREA:
+          mBtnRecentA[ highlightIndex ].highlight( true );
+          break;
+      }
+    }
+  }
+   
+
+
   @Override
   public void setPoint( int k, boolean update_recent )
   {
@@ -7067,7 +7149,7 @@ public class DrawingWindow extends ItemDrawer
   @Override
   public void setLine( int k, boolean update_recent )
   {
-    Log.v("DistoX-AGE", "set line " + k + " update " + update_recent );
+    // Log.v("DistoX-AGE", "set line " + k + " update " + update_recent );
     int index = BrushManager.getLineIndex( mRecentLine[k] );
     if ( index >= 0 ) {
       mCurrentLine = index;

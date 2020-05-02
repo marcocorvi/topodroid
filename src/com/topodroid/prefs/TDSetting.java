@@ -388,6 +388,7 @@ public class TDSetting
   public static float mLineCorner    = 20;    // corner threshold
   public static int   mContinueLine  = DrawingWindow.CONT_NONE; // 0
   public static boolean mCompositeActions = false;
+  public static boolean mAlwaysUpdate = false; // whether to update display of drawing window at every shot (not just at legs)
 
   public static float mWeedDistance  = 0.5f;  // max weeding distance
   public static float mWeedLength    = 2.0f;  // max weeding length
@@ -945,7 +946,8 @@ public class TDSetting
     // setBackupsClear( prefs.getBoolean( keyGPlot[ 9], bool(defGPlot[ 9]) ) ); // DISTOX_BACKUPS_CLEAR moved to GEEK
     mAutoXSections  = prefs.getBoolean( keyGPlot[ 9], bool(defGPlot[ 9]) ); // DISTOX_AUTO_XSECTIONS
     mSavedStations  = prefs.getBoolean( keyGPlot[10], bool(defGPlot[10]) ); // DISTOX_SAVED_STATIONS
-    mWithLevels     = tryInt( prefs,   keyGPlot[11],      defGPlot[11] );  // DISTOX_WITH_LEVELS
+    mAlwaysUpdate   = prefs.getBoolean( keyGPlot[11], bool(defGPlot[10]) ); // DISTOX_ALWAYS_UPDATE
+    mWithLevels     = tryInt( prefs,   keyGPlot[12],      defGPlot[12] );   // DISTOX_WITH_LEVELS
 
     String[] keyGLine = TDPrefKey.GEEKLINE;
     String[] defGLine = TDPrefKey.GEEKLINEdef;
@@ -1406,8 +1408,10 @@ public class TDSetting
       mAutoXSections = tryBooleanValue( hlp, k, v, bool(def[ 9]) );
     } else if ( k.equals( key[10 ] ) ) { // DISTOX_SAVED_STATIONS
       mSavedStations = tryBooleanValue( hlp, k, v, bool(def[10]) );
-    } else if ( k.equals( key[11 ] ) ) { // DISTOX_WITH_LEVELS
-      mWithLevels    = tryIntValue( hlp, k, v, def[11] );
+    } else if ( k.equals( key[11 ] ) ) { // DISTOX_ALWYAS_UPDATE
+      mAlwaysUpdate   = tryBooleanValue( hlp, k, v, bool(def[11]) );
+    } else if ( k.equals( key[12 ] ) ) { // DISTOX_WITH_LEVELS
+      mWithLevels    = tryIntValue( hlp, k, v, def[12] );
     } else {
       TDLog.Error("missing GEEK_PLOT key: " + k );
     }
@@ -2472,8 +2476,8 @@ public class TDSetting
       pw.printf(Locale.US, "Extend: thr %.1f, manual %c, frac %c\n", mExtendThr, tf(mAzimuthManual), tf(mExtendFrac) );
       pw.printf(Locale.US, "Loop: %d \n", mLoopClosure );
       pw.printf(Locale.US, "Units: length %.2f [%s], angle %.2f [%s]\n", mUnitLength, mUnitLengthStr, mUnitAngle, mUnitAngleStr );
-      pw.printf(Locale.US, "ThumbSize %d, SavedStations %c, WithAzimuth %c, WithSensors %c, Bedding %c \n", // TdManager %c\n",
-        mThumbSize, tf(mSavedStations), tf(mWithAzimuth), tf(mWithSensors), tf(mBedding) ); // , tf(mWithTdManager) );
+      pw.printf(Locale.US, "ThumbSize %d, SavedStations %c, AlwaysUpdate%c, WithAzimuth %c, WithSensors %c, Bedding %c \n", // TdManager %c\n",
+        mThumbSize, tf(mSavedStations), tf(mAlwaysUpdate), tf(mWithAzimuth), tf(mWithSensors), tf(mBedding) ); // , tf(mWithTdManager) );
 
       pw.printf(Locale.US, "Plot: zoom %d, drag %c, fix-origin %c, split %c, shift %c, levels %d\n",
         mZoomCtrl, tf(mSideDrag), tf(mFixedOrigin), tf(mPlotSplit), tf(mPlotShift), mWithLevels );

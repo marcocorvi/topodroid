@@ -69,6 +69,11 @@ public class ItemButton extends Button
     mPaint = null;
   }
 
+  public void highlight( boolean on )
+  {
+    setBackgroundColor( on ? 0xff663300 : TDColor.BLACK );
+  }
+
   public ItemButton(Context context, Paint paint, Path path, float sx, float sy )
   {
     super(context);

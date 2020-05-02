@@ -18,6 +18,7 @@ import android.graphics.Path;
 
 class Symbol implements SymbolInterface
 {
+  static final int UNDEF = 0; // undefined
   static final int POINT = 1;
   static final int LINE  = 2;
   static final int AREA  = 3;
