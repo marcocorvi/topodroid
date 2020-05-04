@@ -14,6 +14,8 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDMath;
 import com.topodroid.math.TDVector;
 
+import android.util.Log;
+
 public class AverageLeg
 {
   private TDVector mAverage;
@@ -29,6 +31,7 @@ public class AverageLeg
 
   public AverageLeg( float decl )
   {
+    Log.v("DistoX-DECL", "average leg with " + decl );
     mAverage = new TDVector( 0, 0, 0 );
     mCnt = 0;
     mDecl = decl;

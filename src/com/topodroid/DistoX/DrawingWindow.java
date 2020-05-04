@@ -236,23 +236,23 @@ public class DrawingWindow extends ItemDrawer
                         R.drawable.iz_dial_on,        // 22+25 set dial
                       };
   private static final int[] menus = {
-                        R.string.menu_switch,
-                        R.string.menu_export,     // 0
-                        R.string.menu_stats,      // 1
+                        R.string.menu_switch,     // 0
+                        R.string.menu_export,     // 1
+                        R.string.menu_stats,      // 2
                         R.string.menu_reload,
                         R.string.menu_zoom_fit,
                         R.string.menu_rename_delete,
                         R.string.menu_plot_scrap,
-                        R.string.menu_palette,    // 6
+                        R.string.menu_palette,    // 7
                         R.string.menu_overview,
                         R.string.menu_options,
                         R.string.menu_help,
-                        R.string.menu_area,       // 10
-                        R.string.menu_close       // 11
+                        R.string.menu_area,       // 11
+                        R.string.menu_close       // 12
                      };
 
-  private static final int MENU_AREA  = 10;
-  private static final int MENU_CLOSE = 11;
+  private static final int MENU_AREA  = 11;
+  private static final int MENU_CLOSE = 12;
 /*
   private static final int[] help_icons = {
                         R.string.help_draw,

@@ -49,7 +49,7 @@
         android:layout_weight="20"
           android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/margintiny"
-        android:text="@string/size_xs"
+        android:text="@string/size_m"
       />
       <RadioButton android:id="@+id/btn_l"
         android:layout_width="0dp"

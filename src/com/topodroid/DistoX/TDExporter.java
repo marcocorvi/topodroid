@@ -597,7 +597,7 @@ class TDExporter
   static private List< TDNum > getGeolocalizedData( long sid, DataHelper data, float decl, float asl_factor, boolean ellipsoid_altitude )
   {
     List< FixedInfo > fixeds = data.selectAllFixed( sid, 0 );
-    // Log.v("DistoX", "get geoloc. data. Decl " + decl + " fixeds " + fixeds.size() );
+    Log.v("DistoX-DECL", "get geoloc. data. Decl " + decl + " fixeds " + fixeds.size() );
     if ( fixeds.size() == 0 ) return null;
 
     List< TDNum > nums = new ArrayList< TDNum >();

@@ -21,7 +21,7 @@ import com.topodroid.DistoX.DBlock;
 import com.topodroid.DistoX.StationPolicy;
 import com.topodroid.DistoX.SurveyInfo;
 
-// import android.util.Log;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -125,6 +125,7 @@ public class TDNum
   // --------------------------------------------------------
 
   public String getOriginStation() { return (mStartStation == null)? null : mStartStation.name; }
+  public NumStation getOrigin()    { return mStartStation; }
 
   // --------------------------------------------------------
   public int stationsNr()  { return mStations.size(); }
@@ -300,6 +301,7 @@ public class TDNum
    */
   public TDNum( List< DBlock > data, String start, String view, String hide, float decl, String format )
   {
+    Log.v("DistoX-DECL", "num decl " + decl + " start " + start );
     mDecl = decl;
     surveyExtend   = true;
     surveyAttached = computeNum( data, start, format );
@@ -1038,7 +1040,7 @@ public class TDNum
                 // if ( TDLog.LOG_DEBUG ) Log.v( TDLog.TAG, "do not close loop");
                 // keep loop open: new station( id=ts.to, from=sf, ... )
                 float bearing = ts.b() - sf.mAnomaly;
-                NumStation st1 = new NumStation( ts.to, sf, ts.d(), bearing, ts.c(), ext, has_coords );
+                NumStation st1 = new NumStation( ts.to, sf, ts.d(), bearing + mDecl, ts.c(), ext, has_coords ); // 20200503 added mDecl
                 if ( ! mStations.addStation( st1 ) ) mClosureStations.add( st1 );
 
                 st1.addAzimuth( (ts.b()+180)%360, -iext );
@@ -1064,7 +1066,7 @@ public class TDNum
             else // st null || st isBarrier
             { // forward shot: from --> to
               float bearing = ts.b() - sf.mAnomaly;
-              st = new NumStation( ts.to, sf, ts.d(), bearing, ts.c(), ext, has_coords );
+              st = new NumStation( ts.to, sf, ts.d(), bearing + mDecl, ts.c(), ext, has_coords ); // 20200503 added mDecl
               if ( ! mStations.addStation( st ) ) mClosureStations.add( st );
 
               st.addAzimuth( (ts.b()+180)%360, -iext );
@@ -1090,7 +1092,7 @@ public class TDNum
             // if ( TDLog.LOG_DEBUG ) Log.v( TDLog.TAG, "reversed shot " + ts.from + " " + ts.to + " id " + ts.blocks.get(0).mId );
             st.addAzimuth( (ts.b()+180)%360, -iext );
             float bearing = ts.b() - st.mAnomaly;
-            sf = new NumStation( ts.from, st, - ts.d(), bearing, ts.c(), ext, has_coords );
+            sf = new NumStation( ts.from, st, - ts.d(), bearing + mDecl, ts.c(), ext, has_coords ); // 20200503 added mDecl
             if ( ! mStations.addStation( sf ) ) mClosureStations.add( sf );
 
             sf.addAzimuth( ts.b(), iext );
@@ -1140,7 +1142,8 @@ public class TDNum
           NumStation s1 = sh2.from;
           NumStation s2 = sh2.to;
           float c2 = sh2.clino();
-          float b2 = sh2.bearing() + mDecl;
+          float b2 = sh2.bearing(); // 20200503 bearing() already has declination; was + mDecl;
+          Log.v("DistoX-DECL", "shot " + s1.name + " " + s2.name + " clino " + c2 + " bearing " + b2 );
           if ( s1.mHasCoords && ! s2.mHasCoords ) {
             // reset s2 values from the shot
             // float d = sh2.length() * sh2.mDirection; // FIXME DIRECTION

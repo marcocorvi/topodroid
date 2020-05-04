@@ -1097,9 +1097,12 @@ class DrawingIO
       bbox.left*scale-100, -bbox.bottom*scale-100, bbox.right*scale+100, -bbox.top*scale+100 );
     pw.format("##XTHERION## xth_me_area_zoom_to 25\n");
     if ( TDSetting.mTherionXvi ) {
+      float xoff = 0.0f;
+      float yoff = 0.0f;
+      XviBBox bb = new XviBBox( bbox );
       // xx vsb gamma - yy XVIroot -- filename -- index -- data
       pw.format("##XTHERION## xth_me_image_insert {%.2f 1 1.0} {%.2f 0} %s.xvi 0 {}\n",
-        scale*DrawingUtil.CENTER_X, -scale*DrawingUtil.CENTER_Y, name );
+        scale*(xoff+bb.xmin), scale*(yoff-bb.ymax), name ); // this is fine is sketch origin is first station
     }
     pw.format("\n");
     pw.format("# %s created by TopoDroid v. %s\n\n", TDUtil.currentDate(), TDVersion.string() );
@@ -1148,15 +1151,15 @@ class DrawingIO
          || type == PlotInfo.PLOT_H_SECTION 
          || type == PlotInfo.PLOT_X_SECTION ) {
       if ( do_north ) { // H_SECTION (horizontal section) : north line is 5 m long
-        pw.format("scrap %s -projection %s -scale [%.0f %.0f %.0f %.0f 0 5 0 0 m]", scrap_name, proj_name, 
+        pw.format("scrap %s -projection %s -scale [%.4f %.4f %.4f %.4f 0 5 0 0 m]", scrap_name, proj_name, 
           x1*TDSetting.mToTherion, -y1*TDSetting.mToTherion, x2*TDSetting.mToTherion, -y2*TDSetting.mToTherion );
       } else {
-        pw.format("scrap %s -projection %s -scale [0 0 %.0f 0 0 0 1 0 m]", scrap_name, proj_name, oneMeter );
+        pw.format("scrap %s -projection %s -scale [0 0 %.4f 0 0 0 1 0 m]", scrap_name, proj_name, oneMeter );
       }
     } else if ( type == PlotInfo.PLOT_PROJECTED ) {
-      pw.format("scrap %s -projection [%s %d] -scale [0 0 %.0f 0 0 0 1 0 m]", scrap_name, proj_name, project_dir, oneMeter );
+      pw.format("scrap %s -projection [%s %d] -scale [0 0 %.4f 0 0 0 1 0 m]", scrap_name, proj_name, project_dir, oneMeter );
     } else {
-      pw.format("scrap %s -projection %s -scale [0 0 %.0f 0 0 0 1 0 m]", scrap_name, proj_name, oneMeter );
+      pw.format("scrap %s -projection %s -scale [0 0 %.4f 0 0 0 1 0 m]", scrap_name, proj_name, oneMeter );
     }
     out.write( sw.getBuffer().toString() );
     out.newLine();

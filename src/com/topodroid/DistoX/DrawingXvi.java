@@ -14,9 +14,10 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.num.TDNum;
+import com.topodroid.num.NumStation;
 import com.topodroid.prefs.TDSetting;
 
-// import android.util.Log;
+import android.util.Log;
 
 import java.util.Locale;
 
@@ -91,14 +92,15 @@ class DrawingXvi
   };
 
   // X_orig Y_orig X_cell 0.0 0.0 Y_cell X_nr Y_nr
-  private static void printXviGrid( BufferedWriter out, float x1, float y1, float x2, float y2, float xoff, float yoff )
+  // private static void printXviGrid( BufferedWriter out, float x1, float y1, float x2, float y2, float xoff, float yoff )
+  private static void printXviGrid( BufferedWriter out, XviBBox bb, float xoff, float yoff )
   {
-    int nx = (int)((x2-x1)/CELL);
-    int ny = (int)((y2-y1)/CELL);
+    int nx = (int)((bb.xmax - bb.xmin)/CELL);
+    int ny = (int)((bb.ymax - bb.ymin)/CELL);
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
     pw.format(Locale.US, "set XVIgrid { %.2f %.2f %.2f 0.0 0.0 %.2f %d %d }\n\n",
-              TDSetting.mToTherion*(xoff+x1), TDSetting.mToTherion*(yoff-y2), TDSetting.mToTherion*CELL, TDSetting.mToTherion*CELL, nx, ny );
+              TDSetting.mToTherion*(xoff+bb.xmin), TDSetting.mToTherion*(yoff-bb.ymax), TDSetting.mToTherion*CELL, TDSetting.mToTherion*CELL, nx, ny );
     try {
       out.write( sw.getBuffer().toString() );
       out.flush();
@@ -107,26 +109,21 @@ class DrawingXvi
     }
   }
 
-  static void write( BufferedWriter out, TDNum num, /* DrawingUtil util, */ DrawingCommandManager plot, long type )
+  static void write( BufferedWriter out, TDNum num, DrawingCommandManager plot, long type )
   {
     String wall_group = BrushManager.getLineWallGroup( );
 
+    // origin is always at (0,0)
+    // NumStation origin = num.getOrigin();
+    // Log.v("DistoX-XVI", "origin " + origin.name + " " + origin.e + " " + origin.s + " " + origin.h + " " + origin.v + " type " + type );
+
     int handle = 0;
-    RectF bbox = plot.getBoundingBox( );
-    float xmin = bbox.left;
-    float xmax = bbox.right;
-    float ymin = bbox.top;
-    float ymax = bbox.bottom;
-    int dx = (int)(xmax - xmin);
-    int dy = (int)(ymax - ymin);
-    if ( dx > 200 ) dx = 200;
-    if ( dy > 200 ) dy = 200;
-    xmin -= dx;  xmax += dx;
-    ymin -= dy;  ymax += dy;
+    XviBBox bb = new XviBBox( plot );
+
     float xoff = 0; // xmin; // offset
     float yoff = 0; // ymin;
-    int width = (int)((xmax - xmin));
-    int height = (int)((ymax - ymin));
+
+    // Log.v("DistoX-XVI", "offset " + xoff + " " + yoff );
 
     try {
       // header
@@ -137,7 +134,6 @@ class DrawingXvi
       //   // // 8 layer (0), 2 block name,
       //   for ( int n = 0; n < BrushManager.mPointLib.size(); ++ n ) {
       //     SymbolPoint pt = (SymbolPoint)BrushManager.getPointByIndex(n);
-
       //     int block = 1+n; // block_name = 1 + therion_code
       //     writeString( out, 8, "POINT" );
       //     writeComment( out, pt.mName );
@@ -146,7 +142,6 @@ class DrawingXvi
       //     writeString( out, 10, "0.0" );
       //     writeString( out, 20, "0.0" );
       //     writeString( out, 30, "0.0" );
-
       //     out.write( pt.getDxf() );
       //   }
       // }
@@ -177,7 +172,7 @@ class DrawingXvi
 
 	// GRID always necessary
         // if ( TDSetting.mSvgGrid ) {
-          printXviGrid( out, xmin, ymin, xmax, ymax, xoff, yoff );
+          printXviGrid( out, bb, xoff, yoff );
         // }
 
 	// SHOTS
@@ -207,7 +202,7 @@ class DrawingXvi
 	out.write("}\n\n");
         out.flush();
       } else {
-        printXviGrid( out, xmin, ymin, xmax, ymax, xoff, yoff );
+        printXviGrid( out, bb, xoff, yoff );
       }
 
       out.write("set XVIsketchlines {\n");
@@ -261,6 +256,7 @@ class DrawingXvi
 
   static private void toXvi( PrintWriter pw, DrawingStationName st, float xoff, float yoff )
   {
+    // Log.v("DistoX-XVI", st.getName() + " " + st.cx + " " + st.cy + " off " + xoff + " " + yoff);
     pw.format(Locale.US, "  { %.2f %.2f %s }\n", TDSetting.mToTherion*(xoff+st.cx), TDSetting.mToTherion*(yoff-st.cy), st.getName() );
   }
 
