@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Stack;
 
+import java.util.Locale;
+
 public class DLNWall
 {
   private ArrayList< DLNTriangle > mTri;
@@ -55,7 +57,7 @@ public class DLNWall
     //   FileWriter fw = new FileWriter( "/sdcard/test.txt" );
     //   PrintWriter pw = new PrintWriter( fw );
     //   for ( DLNSite s : pts ) {
-    //     pw.format("%.4f %.2f\n", s.x, s.y );
+    //     pw.format(Locale.US, "%.4f %.2f\n", s.x, s.y );
     //   }
     //   pw.flush();
     //   fw.close();

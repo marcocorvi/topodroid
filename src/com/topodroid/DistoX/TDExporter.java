@@ -202,8 +202,7 @@ class TDExporter
       if ( audiofile.exists() ) {
         byte[] buf = readFileBytes( audiofile );
         if ( buf != null ) {
-          pw.format(
-            "        <attachment dataformat=\"0\" data=\"%s\" name=\"\" note=\"\" type=\"audio/x-wav\" />\n",
+          pw.format("        <attachment dataformat=\"0\" data=\"%s\" name=\"\" note=\"\" type=\"audio/x-wav\" />\n",
             Base64.encodeToString( buf, Base64.NO_WRAP ) );
         }
       }
@@ -214,8 +213,7 @@ class TDExporter
       if ( photofile.exists() ) {
         byte[] buf = readFileBytes( photofile );
         if ( buf != null ) {
-          pw.format(
-            "        <attachment dataformat=\"0\" data=\"%s\" name=\"\" note=\"%s\" type=\"image/jpeg\" />\n",
+          pw.format("        <attachment dataformat=\"0\" data=\"%s\" name=\"\" note=\"%s\" type=\"image/jpeg\" />\n",
             Base64.encodeToString( buf, Base64.NO_WRAP ), photo.mComment );
         }
       }
@@ -347,8 +345,7 @@ class TDExporter
         writeCsxSegment( pw, blk.mId, cave, branch, session, prefix, blk.mFrom, blk.mTo );
         pw.format(" exclude=\"1\"");
         pw.format(" calibration=\"1\""); 
-        pw.format(Locale.US, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"",
-                             blk.mLength, blk.mBearing, blk.mClino);
+        pw.format(Locale.US, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"", blk.mLength, blk.mBearing, blk.mClino);
         pw.format(Locale.US, " g=\"%.1f\" m=\"%.1f\" dip=\"%.1f\"", blk.mAcceleration, blk.mMagnetic, blk.mDip );
         // pw.format(" l=\"0.0\" r=\"0.0\" u=\"0.0\" d=\"0.0\"");
         if ( blk.mComment != null && blk.mComment.length() > 0 ) {
@@ -415,10 +412,8 @@ class TDExporter
             pw.format(" splay=\"1\" exclude=\"1\"");
             if ( item.isCommented() ) pw.format(" commented=\"1\"");
             if ( extend < 1 ) pw.format(" direction=\"%d\"", csurvey_extend[1+extend] );
-            pw.format(Locale.US, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"",
-                                 item.mLength, item.mBearing, item.mClino );
-            pw.format(Locale.US, " g=\"%.1f\" m=\"%.1f\" dip=\"%.1f\"",
-                                 item.mAcceleration, item.mMagnetic, item.mDip );
+            pw.format(Locale.US, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"", item.mLength, item.mBearing, item.mClino );
+            pw.format(Locale.US, " g=\"%.1f\" m=\"%.1f\" dip=\"%.1f\"", item.mAcceleration, item.mMagnetic, item.mDip );
             pw.format(" l=\"0\" r=\"0\" u=\"0\" d=\"0\"");
             if ( item.mComment != null && item.mComment.length() > 0 ) {
               pw.format(" note=\"%s\"", toXml( item.mComment.replaceAll("\"", "") ) );
@@ -460,10 +455,8 @@ class TDExporter
             pw.format(" splay=\"1\" exclude=\"1\"");
             if ( item.isCommented() ) pw.format(" commented=\"1\"");
             if ( extend < 1 ) pw.format(" direction=\"%d\"", csurvey_extend[1+extend] );
-            pw.format(Locale.US, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"",
-                                 item.mLength, item.mBearing, item.mClino );
-            pw.format(Locale.US, " g=\"%.1f\" m=\"%.1f\" dip=\"%.1f\"",
-                                 item.mAcceleration, item.mMagnetic, item.mDip );
+            pw.format(Locale.US, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"", item.mLength, item.mBearing, item.mClino );
+            pw.format(Locale.US, " g=\"%.1f\" m=\"%.1f\" dip=\"%.1f\"", item.mAcceleration, item.mMagnetic, item.mDip );
             pw.format(" l=\"0\" r=\"0\" u=\"0\" d=\"0\"");
             if ( item.mComment != null && item.mComment.length() > 0 ) {
               pw.format(" note=\"%s\"", toXml( item.mComment.replaceAll("\"", "") ) );
@@ -540,8 +533,7 @@ class TDExporter
       if ( fixed.size() > 0 ) {
         for ( FixedInfo fix : fixed ) {
           pw.format("     <trigpoint name=\"%s\" labelsymbol=\"0\" >\n", fix.name );
-          pw.format(Locale.US, 
-                    "       <coordinate latv=\"%.7f\" longv=\"%.7f\" altv=\"%.2f\" lat=\"%.7f N\" long=\"%.7f E\" format=\"dd.ddddddd N\" alt=\"%.2f\" />\n",
+          pw.format(Locale.US, "       <coordinate latv=\"%.7f\" longv=\"%.7f\" altv=\"%.2f\" lat=\"%.7f N\" long=\"%.7f E\" format=\"dd.ddddddd N\" alt=\"%.2f\" />\n",
                     fix.lat, fix.lng, fix.asl, fix.lat, fix.lng, fix.asl );
           pw.format("     </trigpoint>\n");
         }
@@ -949,7 +941,7 @@ class TDExporter
             pw.format("      %s \"station\",\n", item );
             pw.format("      %s \"%s\",\n", name, st.name );
             pw.format("      %s \"Point\",\n", geom );
-            pw.format("      %s [ %.8f %.8f %.1f ]\n", coords, st.e, st.s, st.v );
+            pw.format(Locale.US, "      %s [ %.8f %.8f %.1f ]\n", coords, st.e, st.s, st.v );
             pw.format("    },\n");
           }
         }
@@ -1459,9 +1451,7 @@ class TDExporter
         pw.format("    data dimensions station left right up down\n");
         for ( String station : lruds.keySet() ) {
           LRUD lrud = lruds.get( station );
-          pw.format(Locale.US, 
-                    "    %s %.2f %.2f %.2f %.2f\n",
-                    station, lrud.l * ul, lrud.r * ul, lrud.r * ul, lrud.d * ul );
+          pw.format(Locale.US, "    %s %.2f %.2f %.2f %.2f\n", station, lrud.l * ul, lrud.r * ul, lrud.r * ul, lrud.d * ul );
         }
       }
 
@@ -1934,8 +1924,7 @@ class TDExporter
 	  b.mLength, sep, b.mBearing, sep, b.mClino, sep, b.mRoll, sep, b.mAcceleration, sep, b.mMagnetic, sep, b.mDip, sep );
         String address = b.getAddress();
         if ( address == null || address.length() == 0 ) address = "-";
-        pw.format(Locale.US, "%d%c%d%c%s%s",
-          b.mTime, sep, b.getShotType(), sep, address, newline );
+        pw.format(Locale.US, "%d%c%d%c%s%s", b.mTime, sep, b.getShotType(), sep, address, newline );
       }
       fw.flush();
       fw.close();
@@ -2569,21 +2558,19 @@ class TDExporter
       pw.format("# %s\r\n", TDUtil.getDateString("MM dd yyyy") );
 
       //           5 11 15 19 23
-      pw.format("%6d%6d%4d%4d%4d %s\r\n", -6, 1, 1, 1, 1, info.name ); // [-6] cave name
+      pw.format(Locale.US, "%6d%6d%4d%4d%4d %s\r\n", -6, 1, 1, 1, 1, info.name ); // [-6] cave name
 
       List< FixedInfo > fixeds = data.selectAllFixed( sid, TDStatus.NORMAL );
       if ( fixeds.size() > 0 ) {
         for ( FixedInfo fixed : fixeds ) {
           // get TR-station from fixed name
           int pos = fixed.name.indexOf('.');
-          int st = (pos < 0)? Integer.parseInt( fixed.name )
-                 : Integer.parseInt( fixed.name.substring( pos+1 ) );
-          pw.format("%6d%6d%4d%4d%4d%12.2f%12.2f%12.2f%8d%8d\r\n", -5, 1, 1, 1, 1, 
-            fixed.lng, fixed.lat, fixed.alt, 1, st );
-          pw.format("(%5d%6d%4d%4d%4d %s \r\n", -5, 1, 1, 1, 1, fixed.name );
+          int st = (pos < 0)? Integer.parseInt( fixed.name ) : Integer.parseInt( fixed.name.substring( pos+1 ) );
+          pw.format(Locale.US, "%6d%6d%4d%4d%4d%12.2f%12.2f%12.2f%8d%8d\r\n", -5, 1, 1, 1, 1, fixed.lng, fixed.lat, fixed.alt, 1, st );
+          pw.format(Locale.US, "(%5d%6d%4d%4d%4d %s \r\n", -5, 1, 1, 1, 1, fixed.name );
         }
       } else {
-        pw.format("%6d%6d%4d%4d%4d%12.2f%12.2f%12.2f%8d%8d\r\n", -5, 1, 1, 1, 1, 0.0, 0.0, 0.0, 1, 0 );
+        pw.format(Locale.US, "%6d%6d%4d%4d%4d%12.2f%12.2f%12.2f%8d%8d\r\n", -5, 1, 1, 1, 1, 0.0, 0.0, 0.0, 1, 0 );
       }
       pw.format("\r\n" );
 
@@ -2598,20 +2585,20 @@ class TDExporter
           d = Integer.parseInt( date.substring(8,10) );
         } catch ( NumberFormatException e ) { }
       }
-      pw.format("%6d%6d%4d%4d%4d %02d/%02d/%02d\r\n", -4, 1, 1, 1, 1, d, m, y );
+      pw.format(Locale.US, "%6d%6d%4d%4d%4d %02d/%02d/%02d\r\n", -4, 1, 1, 1, 1, d, m, y );
 
       if ( info.comment != null ) {                   // [-4, -3]A bla-bla
-        pw.format("%6d%6d%4d%4d%4d %s\r\n", -3, 1, 1, 1, 1, info.comment );
+        pw.format(Locale.US, "%6d%6d%4d%4d%4d %s\r\n", -3, 1, 1, 1, 1, info.comment );
       }
 
       String team = (info.team != null)? info.team : "";
       if ( team.length() > 26 ) team = team.substring(0,26);
       int auto_declination = (info.hasDeclination()? 0 : 1); // DECLINATION TopoRobot: 0 = provided, 1 = to be calculated
-      pw.format("%6d%6d%4d%4d%4d %02d/%02d/%02d %26s%4d%8.2f%4d%4d\r\n",
+      pw.format(Locale.US, "%6d%6d%4d%4d%4d %02d/%02d/%02d %26s%4d%8.2f%4d%4d\r\n",
         -2, 1, 1, 1, 1, d, m, y, team, auto_declination, info.getDeclination(), 0, 1 ); 
 
       //           5 11 15 19 23   31   39   47   55   63   71   79
-      pw.format("%6d%6d%4d%4d%4d%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f\r\n",
+      pw.format(Locale.US, "%6d%6d%4d%4d%4d%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f\r\n",
         -1, 1, 1, 1, 1, 360.0, 360.0, 0.05, 0.5, 0.5, 100.0, 0.0 );
 
       int max_series = 0;
@@ -2665,7 +2652,7 @@ class TDExporter
         }
       }
 
-      pw.format("%6d%6d%4d%4d%4d%8d%8d%8d%8d%8d%8d%8d\r\n",
+      pw.format(Locale.US, "%6d%6d%4d%4d%4d%8d%8d%8d%8d%8d%8d%8d\r\n",
         1, -1, 1, 1, 1, first_sr, first_st, last_sr, last_st, nr_pts, 1, 0 );
 
       AverageLeg leg = new AverageLeg(0);
@@ -2705,16 +2692,16 @@ class TDExporter
               lrud = computeLRUD( ref_item, list, true );
               if ( srt != series ) {
                 series = srt;
-                pw.format("%6d%6d%4d%4d%4d%8d%8d%8d%8d%8d%8d%8d\r\n",
+                pw.format(Locale.US, "%6d%6d%4d%4d%4d%8d%8d%8d%8d%8d%8d%8d\r\n",
                   srt, -1, 1, 1, 1, start_sr[srt], start_st[srt], srt, end_st[srt], nr_st[srt], 0, 0 );
                 // if ( series == first_sr ) 
                 if ( stt != 0 ) {
-                  pw.format("%6d%6d%4d%4d%4d%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f\r\n",
+                  pw.format(Locale.US, "%6d%6d%4d%4d%4d%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f\r\n",
                     srt, 0, 1, 1, 1, 0.0, 0.0, 0.0, lrud.l, lrud.r, lrud.u, lrud.d );
                 }
               }
               //           5 11 15 19 23   31   39   47   55   63   71   79
-              pw.format("%6d%6d%4d%4d%4d%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f\r\n",
+              pw.format(Locale.US, "%6d%6d%4d%4d%4d%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f\r\n",
                 srt, stt, 1, 1, trip, leg.length(), leg.bearing(), leg.clino(), 
                 lrud.l, lrud.r, lrud.u, lrud.d );
               leg.reset();
@@ -2726,7 +2713,7 @@ class TDExporter
             //   int srt = getTrbSeries( ref_item.mTo );
             //   if ( srt != series ) {
             //     series = srt;
-            //     pw.format("%6d%6d%4d%4d%4d%8d%8d%8d%8d%8d%8d%8d\r\n",
+            //     pw.format(Locale.US, "%6d%6d%4d%4d%4d%8d%8d%8d%8d%8d%8d%8d\r\n",
             //       srt, -1, 1, 1, 1, start_sr[srt], start_st[srt], srt, end_st[srt], nr_st[srt], 0, 0 );
             //   }
             // }
@@ -2740,7 +2727,7 @@ class TDExporter
         int srt = getTrbSeries( ref_item.mTo );
         int stt = getTrbStation( ref_item.mTo );
         lrud = computeLRUD( ref_item, list, true );
-        pw.format("%6d%6d%4d%4d%4d%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f\r\n",
+        pw.format(Locale.US, "%6d%6d%4d%4d%4d%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f\r\n",
                 srt, stt, 1, 1, trip, leg.length(), leg.bearing(), leg.clino(), 
                 lrud.l, lrud.r, lrud.u, lrud.d );
         leg.reset();
@@ -2960,8 +2947,7 @@ class TDExporter
         pw.format("  </Entrances>\n");
       }
       pw.format("  <Networks>\n");
-      pw.format("    <Network Name=\"%s\" Type=\"0\" ColorB=\"0\" ColorG=\"0\" ColorR=\"255\" Numero=\"1\" Comments=\"\"/>\n",
-                 info.name );
+      pw.format("    <Network Name=\"%s\" Type=\"0\" ColorB=\"0\" ColorG=\"0\" ColorR=\"255\" Numero=\"1\" Comments=\"\"/>\n", info.name );
       pw.format("  </Networks>\n");
 
       pw.format("  <Codes>\n");

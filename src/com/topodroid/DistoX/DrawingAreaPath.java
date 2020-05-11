@@ -379,7 +379,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
   {
     // linetype: 0 spline, 1 bezier, 2 line
     String name = getThName( );
-    pw.format("          <item type=\"area\" name=\"%s\" cave=\"%s\" branch=\"%s\" orientation=\"%.2f\" options=\"%s\" ",
+    pw.format(Locale.US, "          <item type=\"area\" name=\"%s\" cave=\"%s\" branch=\"%s\" orientation=\"%.2f\" options=\"%s\" ",
       name, cave, branch, mOrientation, ( (mOptions== null)? "" : mOptions )
     );
     if ( bind != null ) pw.format(" bind=\"%s\"", bind );

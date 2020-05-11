@@ -139,18 +139,18 @@ class CalibAlgo
 
   // void dump()
   // {
-  //   // Log.v("DistoX", String.format("G %8.4f %8.4f %8.4f", bG.x, bG.y, bG.z ) );
+  //   // Log.v("DistoX", String.format(Locale.US, "G %8.4f %8.4f %8.4f", bG.x, bG.y, bG.z ) );
   //   // Log.v("DistoX", "aG " + aG.x.x + " " + aG.x.y + " " + aG.x.z );
   //   // Log.v("DistoX", "   " + aG.y.x + " " + aG.y.y + " " + aG.y.z );
   //   // Log.v("DistoX", "   " + aG.z.x + " " + aG.z.y + " " + aG.z.z );
   //
-  //   // Log.v("DistoX", String.format("M %8.4f %8.4f %8.4f", bM.x, bM.y, bM.z ) );
+  //   // Log.v("DistoX", String.format(Locale.US, "M %8.4f %8.4f %8.4f", bM.x, bM.y, bM.z ) );
   //   // 
   //   // Log.v("DistoX", "aM " + aM.x.x + " " + aM.x.y + " " + aM.x.z );
   //   // Log.v("DistoX", "   " + aM.y.x + " " + aM.y.y + " " + aM.y.z );
   //   // Log.v("DistoX", "   " + aM.z.x + " " + aM.z.y + " " + aM.z.z );
   //
-  //   // Log.v("DistoX", String.format("NL %8.4f %8.4f %8.4f", nL.x, nL.y, nL.z ) );
+  //   // Log.v("DistoX", String.format(Locale.US, "NL %8.4f %8.4f %8.4f", nL.x, nL.y, nL.z ) );
   // }
 
   // @param N         number of data

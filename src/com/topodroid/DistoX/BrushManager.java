@@ -415,21 +415,36 @@ public class BrushManager
     if ( points != null ) {
       for ( Symbol p : points.getSymbols() ) if ( p.isEnabled() ) {
         String fname = p.getThName();
-        if ( ! "user".equals(fname) ) palette.addPointFilename( fname );
+        if ( fname == null ) {
+          TDLog.Error("point symbol with null ThName" );
+          p.setEnabled( false ); // disable
+        } else {
+          if ( ! "user".equals(fname) ) palette.addPointFilename( fname );
+        }
       }
     }
     SymbolLineLibrary lines = mLineLib;
     if ( lines != null ) {
       for ( Symbol p : lines.getSymbols() ) if ( p.isEnabled() ) {
         String fname = p.getThName();
-        if ( ! "user".equals(fname) ) palette.addLineFilename( fname );
+        if ( fname == null ) {
+          TDLog.Error("line symbol with null ThName" );
+          p.setEnabled( false ); // disable
+        } else {
+          if ( ! "user".equals(fname) ) palette.addLineFilename( fname );
+        }
       }
     }
     SymbolAreaLibrary areas = mAreaLib;
     if ( areas != null ) {
       for ( Symbol p : areas.getSymbols() ) if ( p.isEnabled() ) {
         String fname = p.getThName();
-        if ( ! "user".equals(fname) ) palette.addAreaFilename( fname );
+        if ( fname == null ) {
+          TDLog.Error("area symbol with null ThName" );
+          p.setEnabled( false ); // disable
+        } else {
+          if ( ! "user".equals(fname) ) palette.addAreaFilename( fname );
+        }
       }
     }
     return palette;
