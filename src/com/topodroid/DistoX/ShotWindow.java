@@ -1311,7 +1311,7 @@ public class ShotWindow extends Activity
   @Override 
   public boolean onLongClick( View view )
   {
-    Log.v("DistoX-EDIT", "on longClick " + view.getId() );
+    // Log.v("DistoX-EDIT", "on longClick " + view.getId() );
     if ( closeMenu() ) return true;
     if ( CutNPaste.dismissPopupBT() ) return true;
 

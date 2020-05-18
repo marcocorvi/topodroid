@@ -2078,7 +2078,7 @@ public class TopoDroidApp extends Application
     }
   }
 
-  void startPairingRequest()
+  private void startPairingRequest()
   {
     if ( mPairingRequest == null ) {
       // Log.v("DistoX", "start pairing" );

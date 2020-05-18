@@ -107,7 +107,7 @@ class DrawingSurface extends SurfaceView
   //   for ( String key : mCache.keySet() ) TDLog.Log( TDLog.LOG_IO, "Key: " + key );
   // }
 
-  static void addManagerToCache( String fullname ) 
+  private static void addManagerToCache( String fullname ) 
   { 
     if ( commandManager != null ) {
       // if ( mCache.get( fullname ) != null ) {
@@ -761,7 +761,7 @@ class DrawingSurface extends SurfaceView
   }
 
   // called only by DrawingWindow
-  boolean modeloadDataStream( String tdr1 /*, SymbolsPalette missingSymbols */ )
+  boolean modeloadDataStream( String tdr1, String fullname, boolean link_sections /*, SymbolsPalette missingSymbols */ )
   {
     boolean ret = false;
     SymbolsPalette localPalette = BrushManager.preparePalette();
@@ -771,13 +771,16 @@ class DrawingSurface extends SurfaceView
         ret = DrawingIO.doLoadDataStream( this, tdr1, 0, 0, /* missingSymbols, */ localPalette, null, false, null ); // no plot_name
         if ( ret ) {
           BrushManager.makeEnabledListFromPalette( localPalette, false );
+          if ( link_sections ) linkSections();
+          if ( fullname != null ) addManagerToCache( fullname );
         }
       }
     }
     return ret;
   }
 
-  void linkSections() { commandManager.linkSections(); }
+  private void linkSections() { commandManager.linkSections(); }
+
   void linkAllSections() 
   {
     mCommandManager1.linkSections();

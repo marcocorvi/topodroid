@@ -230,9 +230,9 @@ public class TDSetting
   public static boolean mZ6Workaround  = true;
 
   public static boolean mAutoReconnect = false;
-  public static boolean mSecondDistoX = false;
+  public static boolean mSecondDistoX  = false;
   public static boolean mHeadTail      = false; // whether to use readA3HeadTail to download the data (A3 only)
-  public static boolean mAutoPair      = true;
+  public static boolean mAutoPair      = false;
   public static int mConnectSocketDelay = 0; // wait time if not paired [0.1 sec]
 
   // public static final boolean CHECK_BT = true;

@@ -63,6 +63,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.AsyncTask;
 // /* fixme-23 */
 // import android.os.Build;
 // import java.lang.reflect.Method;
@@ -2576,13 +2577,13 @@ public class DrawingWindow extends ItemDrawer
 
       if ( ! mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, mFullName1, false ) ) {
         // mAllSymbols =
-        mDrawingSurface.modeloadDataStream( filename1b /*, filename1, FIXME-MISSING missingSymbols */ );
-        DrawingSurface.addManagerToCache( mFullName1 );
+        mDrawingSurface.modeloadDataStream( filename1b, mFullName1, false /*, FIXME-MISSING missingSymbols */ );
+        // DrawingSurface.addManagerToCache( mFullName1 );
       }
       if ( ! mDrawingSurface.resetManager( DrawingSurface.DRAWING_PROFILE, mFullName2, PlotInfo.isExtended(mPlot2.type) ) ) {
         // mAllSymbols = mAllSymbols &&
-        mDrawingSurface.modeloadDataStream( filename2b /*, filename2, FIXME-MISSING missingSymbols */ );
-        DrawingSurface.addManagerToCache( mFullName2 );
+        mDrawingSurface.modeloadDataStream( filename2b, mFullName2, false /*, FIXME-MISSING missingSymbols */ );
+        // DrawingSurface.addManagerToCache( mFullName2 );
       }
       
       String parent = ( TDInstance.xsections? null : mName);
@@ -2603,7 +2604,7 @@ public class DrawingWindow extends ItemDrawer
       mTo = ( PlotInfo.isSection( type ) )? mPlot3.view : "";
       mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null, false );
       // mAllSymbols =
-      mDrawingSurface.modeloadDataStream( filename3b /*, filename3, FIXME-MISSING missingSymbols */ );
+      mDrawingSurface.modeloadDataStream( filename3b, null, false /*, FIXME-MISSING missingSymbols */ );
       mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)type );
     }
 
@@ -4866,6 +4867,18 @@ public class DrawingWindow extends ItemDrawer
               new View.OnClickListener( ) {
                 public void onClick(View v) {
                   if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE ) {
+                    // modified();
+                    // new AsyncTask<Void, Void, Boolean >()
+                    // {
+                    //   @Override public Boolean doInBackground( Void ... v )
+                    //   {
+                    //     return mDrawingSurface.appendHotItemToNearestLine();
+                    //   }
+                    //   @Override protected void onPostExecute( Boolean b ) 
+                    //   { 
+                    //     if ( ! b ) TDToast.makeBad( R.string.failed_append_to_line );
+                    //   }
+                    // }.execute();
                     if ( mDrawingSurface.appendHotItemToNearestLine() ) {
                       modified();
                     } else {
@@ -6138,21 +6151,20 @@ public class DrawingWindow extends ItemDrawer
     // Log.v("DistoX-RELOAD", "recover " + type + " <" + filename + "> TRD " + tdr );
     if ( type == PlotInfo.PLOT_PLAN ) {
       mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, null, false );
-      mDrawingSurface.modeloadDataStream( tdr /*, th2, null */ ); // no missing symbols
-      mDrawingSurface.linkSections();
-      DrawingSurface.addManagerToCache( mFullName1 );
+      mDrawingSurface.modeloadDataStream( tdr, mFullName1, true /*, null */ ); // no missing symbols
+      // mDrawingSurface.linkSections();
+      // DrawingSurface.addManagerToCache( mFullName1 );
       setPlotType1( true );
     } else if ( PlotInfo.isProfile( type ) ) {
       mDrawingSurface.resetManager( DrawingSurface.DRAWING_PROFILE, null, PlotInfo.isExtended(type) );
-      mDrawingSurface.modeloadDataStream( tdr /*, th2,  null */ );
-      mDrawingSurface.linkSections();
-      DrawingSurface.addManagerToCache( mFullName2 );
+      mDrawingSurface.modeloadDataStream( tdr, mFullName2, true /*, null */ );
+      // mDrawingSurface.linkSections();
+      // DrawingSurface.addManagerToCache( mFullName2 );
       // now switch to extended view FIXME-VIEW
       setPlotType2( true );
     } else {
       mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null, false );
-      mDrawingSurface.modeloadDataStream( tdr /*, th2, null */ );
-      // DrawingSurface.addManagerToCache( mFullName2 ); // sections are not cached
+      mDrawingSurface.modeloadDataStream( tdr, null, false /*, null */ ); // sections are not cached
       setPlotType3( );
       DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
       makeSectionReferences( mApp_mData.selectAllShots( mSid, TDStatus.NORMAL ), -1, 0 );
