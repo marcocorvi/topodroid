@@ -110,6 +110,9 @@ public class BrushManager
   static Paint getLinePaint(  int idx, boolean reversed ) { return (mLineLib  == null)? errorPaint : mLineLib.getLinePaint( idx, reversed ); }
   static Paint getAreaPaint(  int idx ) { return (mAreaLib  == null)? errorPaint : mAreaLib.getSymbolPaint( idx ); }
 
+  static int getLineColor(  int idx ) { return (mLineLib  == null)? 0xffffffff : mLineLib.getSymbolPaint( idx ).getColor(); }
+  static int getAreaColor(  int idx ) { return (mAreaLib  == null)? 0xffffffff : mAreaLib.getSymbolPaint( idx ).getColor(); }
+
   static int getPointLibSize() { return ( mPointLib == null )? 0 : mPointLib.size(); }
   static int getLineLibSize()  { return ( mLineLib  == null )? 0 : mLineLib.size(); }
   static int getAreaLibSize()  { return ( mAreaLib  == null )? 0 : mAreaLib.size(); }
@@ -196,11 +199,6 @@ public class BrushManager
   // LINES
 
   static boolean isLineStraight( int index ) { return mLineLib != null && mLineLib.isStyleStraight( index ); }
-
-  // -----------------------------------------------------------------------
-  // AREAS
-
-  static int getAreaColor( int index ) { return mAreaLib.getAreaColor( index ); }
 
   // --------------------------------------------------------------------------
 

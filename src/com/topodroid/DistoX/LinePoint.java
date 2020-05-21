@@ -25,6 +25,8 @@ import com.topodroid.utils.TDMath;
 import com.topodroid.math.Point2D;
 import com.topodroid.prefs.TDSetting;
 
+import com.topodroid.num.TDNum;
+
 import java.io.PrintWriter;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -238,6 +240,12 @@ public class LinePoint extends Point2D
         dos.write( 0 );
       }
     } catch ( IOException e ) { }
+  }
+
+  void toCave3D( PrintWriter pw, DrawingCommandManager cmd, TDNum num )
+  {
+    float v = cmd.getCave3Dv( x, y, num ); // x: east, y:south, v:down
+    pw.format( Locale.US, "%.1f %.1f %.1f\n", x, -y, -v );
   }
 
 }

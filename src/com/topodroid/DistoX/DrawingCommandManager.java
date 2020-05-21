@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.ui.TDGreenDot;
+import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
 
 import android.util.Log;
@@ -1457,6 +1458,57 @@ class DrawingCommandManager
       mXSectionOutlines.clear(); // not necessary
     }
     mXSectionOutlines = xsection_outlines;
+  }
+
+  // -----------------------------------------------------------------------
+
+  void prepareCave3Dlegs() 
+  {
+    for ( DrawingPath p : mLegsStack ) {
+      if ( p.mType == DrawingPath.DRAWING_PATH_FIXED ) {
+        p.prepareCave3D();
+      }
+    }
+  }
+
+  // @pre must have called prepareCave3Dlegs() before
+  // given a point (x,y) find the closest leg and return it (=best)
+  // and the abscissa (smin) of the closest point on the leg 
+  float getCave3Dv( float x, float y, TDNum num )
+  {
+    float min2 = Float.MAX_VALUE;
+    float smin = 0;
+    DrawingPath best = null;
+    for ( DrawingPath p : mLegsStack ) {
+      if ( p.mType == DrawingPath.DRAWING_PATH_FIXED && p.len2 > 0 ) {
+        float s = (x-p.x1)*p.deltaX + (y-p.y1)*p.deltaY;
+        float d2 = Float.MAX_VALUE;
+        if ( s <= 0 ) {
+          d2 = (x-p.x1)*(x-p.x1) + (y-p.y1)*(y-p.y1);
+          s = 0;
+        } else if ( s >= p.len2 ) {
+          d2 = (x-p.x2)*(x-p.x2) + (y-p.y2)*(y-p.y2);
+          s = 1;
+        } else {
+          d2 = (y-p.y1) * p.deltaX - (x-p.x1) * p.deltaY; 
+          d2 = d2 * d2 / p.len2;
+          s = s / p.len2;
+        }
+        if ( d2 < min2 ) {
+          min2 = d2;
+          best = p;
+          smin = s;
+        }
+      }
+    }
+    // now get V for smin abscissa of the best leg
+    return num.getCave3Dz( smin, best.mBlock );
+  }
+
+  void exportCave3D( int type, PrintWriter pw, TDNum num, String scrap_name, int proj_dir, float xoff, float yoff, float zoff )
+  {
+    prepareCave3Dlegs();
+    DrawingIO.exportCave3D( type, pw, this, num, scrap_name, proj_dir, mScraps, xoff, yoff, zoff );
   }
 
 }

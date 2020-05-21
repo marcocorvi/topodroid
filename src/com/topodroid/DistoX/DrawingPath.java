@@ -17,6 +17,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
 
 // import android.util.Log;
@@ -69,6 +70,7 @@ public class DrawingPath extends RectF
   int mScrap;            // plot scrap
 
   public float cx, cy; // midpoint scene coords
+  float deltaX, deltaY, len2; // used for Cave3D export
   // RectF mBBox;   // path boundig box (scene coords)
 
   void setCosine( float cosine ) { mCosine = cosine; }
@@ -573,4 +575,14 @@ public class DrawingPath extends RectF
   String getOptionString() { return ( mOptions == null )? "" : mOptions; }
 
   void setOptions( String options ) { mOptions = options; }
+
+  void prepareCave3D() 
+  {
+    deltaX = x2 - x1;
+    deltaY = y2 - y1;
+    len2   = deltaX * deltaX + deltaY * deltaY;
+  }
+
+  void toCave3D( PrintWriter pw, DrawingCommandManager cmd, TDNum num ) { }
+
 }

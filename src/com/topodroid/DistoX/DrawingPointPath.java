@@ -17,6 +17,7 @@ import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 
+import com.topodroid.num.TDNum;
 
 import android.util.Log;
 
@@ -566,6 +567,14 @@ public class DrawingPointPath extends DrawingPath
     } catch ( IOException e ) {
       TDLog.Error( "POINT out error " + e.toString() );
     }
+  }
+
+  @Override
+  void toCave3D( PrintWriter pw, DrawingCommandManager cmd, TDNum num )
+  {
+    String name  = getThName();
+    float v = cmd.getCave3Dv( cx, cy, num );
+    pw.format( Locale.US, "POINT %s %.1f %.1f %.1f %.1f\n", name, mOrientation, cx, -cy, -v );
   }
 
 }

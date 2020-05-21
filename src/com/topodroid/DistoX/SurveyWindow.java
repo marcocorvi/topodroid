@@ -125,8 +125,6 @@ public class SurveyWindow extends Activity
   // private Context mContext;
   private Activity mActivity = null;
 
-  private boolean mSplayColor;
-
   private EditText mTextName;
   private Button   mEditDate;
   private EditText mEditTeam;
@@ -156,6 +154,8 @@ public class SurveyWindow extends Activity
   // private boolean mustOpen; // unused
   private int mNameColor;
 
+  private boolean mSplayColor = false;
+
   // String getSurveyName() { return TDInstance.survey; }
 
   void renameSurvey( String name ) 
@@ -175,7 +175,7 @@ public class SurveyWindow extends Activity
   // called only once by onCreate
   boolean updateDisplay()
   {
-    mSplayColor = TDLevel.overExpert && TDSetting.mSplayClasses;
+    mSplayColor = TDLevel.overExpert && TDSetting.mSplayColor;
 
     // TDLog.Log( TDLog.LOG_SURVEY, "app SID " + TDInstance.sid );
     if ( TDInstance.sid < 0 ) return false;
@@ -285,9 +285,13 @@ public class SurveyWindow extends Activity
     if ( ! TDSetting.mWithSensors ) mNrButton1 --;
 
     mButton1 = new Button[ mNrButton1 + 1 ];
+    int kb = 0;
     for ( int k=0; k < mNrButton1; ++k ) {
-      mButton1[k] = MyButton.getButton( mActivity, this, izons[k] );
+      if ( k != 2 || TDPath.NOT_ANDROID_11 ) {
+        mButton1[kb++] = MyButton.getButton( mActivity, this, izons[k] );
+      }
     }
+    mNrButton1 = kb;
     mButton1[mNrButton1] = MyButton.getButton( mActivity, this, R.drawable.iz_empty );
 
     mButtonView1 = new MyHorizontalButtonView( mButton1 );
@@ -352,7 +356,7 @@ public class SurveyWindow extends Activity
       doNotes();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // INFO STATISTICS
       new SurveyStatDialog( mActivity, mApp_mData.getSurveyStat( TDInstance.sid ) ).show();
-    } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // 3D
+    } else if ( TDPath.NOT_ANDROID_11 && k < mNrButton1 && b == mButton1[k++] ) {  // 3D
       do3D();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // GPS LOCATION
       mActivity.startActivity( new Intent( mActivity, FixedActivity.class ) );

@@ -36,7 +36,9 @@ import android.os.Environment;
 
 public class TDPath
 {
-  final static boolean ANDROID_10 = ( Build.VERSION.SDK_INT <= Build.VERSION_CODES.P );
+  // whether not having ANDROID 10
+  final static public boolean NOT_ANDROID_10 = ( Build.VERSION.SDK_INT <= Build.VERSION_CODES.P );
+  final static public boolean NOT_ANDROID_11 = ( Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q );
 
   final static int NR_BACKUP = 5;
   final static String BCK_SUFFIX = ".bck";
@@ -84,12 +86,19 @@ public class TDPath
   // PATHS
 
   // if BUILD
+  // If PATH_BASEDIR is left null the path is set in the method setPaths():
+  //    this works with Android-10 but the data are erased when TopoDroid is uninstalled
+  //    because the path is Android/data/com.topodroid.DistoX/files
+  // With "/sdcard" they remain
   static String EXTERNAL_STORAGE_PATH =  // app base path
-    ANDROID_10 ? Environment.getExternalStorageDirectory().getAbsolutePath()
-               : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath();
+    NOT_ANDROID_11 ? Environment.getExternalStorageDirectory().getAbsolutePath()
+                   // : Environment.getExternalStorageDirectory().getAbsolutePath();
+                   // this is what i shuld use but on the emulator it is a data file
+                   // : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath();
+                   // : "/sdcard";
+                   : null; 
+
   public static String PATH_BASEDIR  = EXTERNAL_STORAGE_PATH;
-  // private static String PATH_DEFAULT  = ANDROID_10? "TopoDroid/" : EXTERNAL_STORAGE_PATH + "/TopoDroid/";
-  // private static String PATH_BASE     = ANDROID_10? "TopoDroid/" : PATH_BASEDIR + "/TopoDroid/";
   private static String PATH_DEFAULT  = EXTERNAL_STORAGE_PATH + "/TopoDroid/";
   private static String PATH_BASE     = PATH_BASEDIR + "/TopoDroid/";
 
@@ -161,12 +170,13 @@ public class TDPath
   // when this is called basedir exists and is writable
   static boolean checkBasePath( String path, String basedir )
   {
+    // Log.v("DistoX-PATH", "BASE " + PATH_BASEDIR + " next " + basedir + " path " + path );
     PATH_BASEDIR = basedir;
     String cwd = PATH_BASEDIR + "/" + path;
     TDLog.Log( TDLog.LOG_PATH, "base path " + PATH_BASEDIR );
     File dir = new File( cwd ); // DistoX-SAF
     if ( ! dir.exists() ) {
-      if ( ! dir.mkdir() ) TDLog.Error("mkdir error");
+      if ( ! dir.mkdirs() ) TDLog.Error("mkdir error");
     }
 
     boolean ret = false;
@@ -181,20 +191,35 @@ public class TDPath
   //
   static void setPaths( String path, String base )
   {
+    if ( PATH_BASEDIR == null ) {
+      File basedir = TDInstance.context.getExternalFilesDir( null );
+      PATH_BASEDIR = basedir.getPath();
+      PATH_BASE    = PATH_BASEDIR + "/TopoDroid/";
+      PATH_DEFAULT = PATH_BASEDIR;
+      setDefaultPaths();
+    }
+
+    // Log.v("DistoX-PATH", "Not Android 10 " + NOT_ANDROID_10 + " 11 " + NOT_ANDROID_11 + " SDK " + Build.VERSION.SDK_INT );
+    // Log.v("DistoX-PATH", "EXT. " + EXTERNAL_STORAGE_PATH );
+    // Log.v("DistoX-PATH", "BASE " + PATH_BASEDIR + " base " + base + " path " + path );
+
     File dir = null; // DistoX-SAF
     if ( base != null ) {
       dir = new File( base );
       try {
+        if ( ! dir.exists() ) dir.mkdirs();
         if ( dir.exists() && dir.canWrite() ) PATH_BASEDIR = base;
       } catch ( SecurityException e ) { }
+      // boolean b1 = android.os.Environment.isExternalStorageLegacy();
+      // boolean b2 = android.os.Environment.isExternalStorageLegacy( dir );
+      // Log.v("DistoX-PATH", "ext storage legacy base " + b2 );
     }
     TDLog.Log( TDLog.LOG_PATH, "set paths. path basedir " + PATH_BASEDIR );
     if ( path != null ) {
       String cwd = PATH_BASEDIR + "/" + path;
       dir = new File( cwd ); // DistoX-SAF
       try {
-        dir.mkdir();
-        // if ( ! dir.exists() ) {
+        if ( ! dir.exists() ) dir.mkdirs();
         //   if ( ! dir.mkdirs() ) TDLog.Error("mkdir error");
         // }
         if ( dir.isDirectory() && dir.canWrite() ) PATH_BASE = cwd + "/";
@@ -207,7 +232,7 @@ public class TDPath
     dir = new File( PATH_BASE );
     if ( ! dir.exists() ) {
       // Log.v("DistoX-SAF", "path base " + PATH_BASE + " does not exist" );
-      if ( ! dir.mkdir() ) {
+      if ( ! dir.mkdirs() ) {
         TDLog.Error( "failed mkdir " + PATH_BASE );
         PATH_BASE = PATH_DEFAULT;
       }
@@ -264,7 +289,7 @@ public class TDPath
     PATH_BIN = PATH_DEFAULT + "bin/";
     checkDirs( PATH_BIN );
 
-    // PATH_MAN = PATH_DEFAULT + "man/";
+    PATH_MAN = PATH_DEFAULT + "man/";
     // checkDirs( PATH_MAN );
 
     PATH_CCSV = PATH_DEFAULT + "ccsv/";

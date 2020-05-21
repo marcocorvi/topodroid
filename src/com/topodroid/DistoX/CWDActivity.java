@@ -16,7 +16,7 @@ import com.topodroid.utils.TDTag;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.help.UserManualActivity;
 
-// import android.util.Log;
+import android.util.Log;
 
 import java.io.File;
 import java.util.Locale;
@@ -191,7 +191,7 @@ public class CWDActivity extends Activity
     mBtnCancel = (Button) findViewById( R.id.button_cancel );
     mBtnCancel.setOnClickListener( this );
     mBtnChange = (Button) findViewById( R.id.button_change );
-    if ( TDPath.ANDROID_10 && TDLevel.overExpert ) {
+    if ( TDPath.NOT_ANDROID_10 && TDLevel.overExpert ) {
       mBtnChange.setOnClickListener( this );
     } else {
       mBtnChange.setVisibility( View.GONE );

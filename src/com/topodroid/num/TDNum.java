@@ -1677,6 +1677,21 @@ public class TDNum
     // return String.format(Locale.US, "%s-%s %.1f/%.1f m [%.1f %.1f] %.1f%% (%.2f &#00b0;)", fr.name, at.name,  dl, len, dh, dv, error, angle );
     return String.format(Locale.US, format, fr.name, at.name, nr, dl, len, dh, dv, error, angle );
   }
+
+  // s abscissa
+  // N.B. offset for geocoord of origin must be handled by caller
+  public float getCave3Dz( float s, DBlock blk )
+  {
+    if ( s <= 0 ) {
+      return getStation( blk.mFrom ).v;
+    } else if ( s >= 1 ) {
+      return getStation( blk.mTo ).v;
+    }
+    NumStation st1 = getStation( blk.mFrom );
+    NumStation st2 = getStation( blk.mTo );
+    return st1.v + ( st2.v - st1.v)*s;
+  }
+      
 }
 
 

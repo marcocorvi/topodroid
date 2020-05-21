@@ -14,6 +14,7 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.num.NumStation;
+import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
 
 import android.util.Log;
@@ -2138,5 +2139,72 @@ class DrawingIO
   //   pw.format("      </layer>\n");
   //   pw.format("    </layers>\n");
   // }
+
+  // this is called by DrawingCommandManager
+  static void exportCave3D(
+      int type,
+      PrintWriter pw,
+      DrawingCommandManager manager,
+      TDNum num,
+      String scrap_name,
+      int proj_dir,
+      final List< Scrap > scraps,
+      float xoff, float yoff, float zoff
+  )
+  {
+    // XYZefoffsets are on the header-line
+    pw.format("SCRAP %s %d %d %.2f %.2f %.2f\n", scrap_name, type, proj_dir, xoff, yoff, zoff );
+    // TODO export points library
+    synchronized( scraps ) {
+      for ( Scrap scrap : scraps ) {
+        // pw.format("N %d\n", scrap.mScrapIdx );
+        List< ICanvasCommand > cstack = scrap.mCurrentStack;
+        synchronized( TDPath.mCommandsLock ) {
+          for ( ICanvasCommand cmd : cstack ) {
+            if ( cmd.commandType() != 0 ) continue;
+            DrawingPath p = (DrawingPath) cmd;
+            if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) continue; // safety check: should not happen
+            p.toCave3D( pw, manager, num );
+          }
+        }
+      }
+    }
+  }
+
+  // interface for DrawingWindow
+  static void exportCave3D( DrawingCommandManager manager, TDNum num, PlotInfo plot, FixedInfo fix, File file, String fullname, int proj_dir )
+  {
+    float xoff = 0;
+    float yoff = 0;
+    float zoff = 0;
+    String start_station = plot.start; // start station has "num" coords (0,0,0)
+    String fixed_station = fix.name;
+    NumStation fixed = num.getStation( fix.name );
+    if ( fixed == null ) { // cannot export Cave3D
+      return;
+    }
+    if ( fix.cs != null ) {
+      xoff = (float)(fix.cs_lng - fixed.e);
+      yoff = (float)(fix.cs_lat + fixed.s);
+      zoff = (float)(fix.cs_alt + fixed.v);
+    } else {
+      xoff = (float)(fix.lng - fixed.e);
+      yoff = (float)(fix.lat + fixed.s);
+      zoff = (float)(fix.alt + fixed.v);
+    }
+
+    try {
+      FileWriter fw = new FileWriter( file );
+      BufferedWriter bw = new BufferedWriter( fw );
+      PrintWriter pw = new PrintWriter( bw );
+
+      manager.exportCave3D( plot.type, pw, num, fullname, proj_dir, xoff, yoff, zoff );
+      fw.close();
+    } catch ( FileNotFoundException e ) {
+      TDLog.Error( "Export Data file: " + e.getMessage() );
+    } catch ( IOException e ) {
+      TDLog.Error( "Export Data i/o: " + e.getMessage() );
+    }
+  }
 
 }

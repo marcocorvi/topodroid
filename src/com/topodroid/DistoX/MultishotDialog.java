@@ -136,7 +136,7 @@ class MultishotDialog extends MyDialog
     // }
 
     mColoring = false;
-    if ( TDLevel.overExpert && TDSetting.mSplayClasses ) {
+    if ( TDLevel.overExpert && TDSetting.mSplayColor ) {
       mColoring = true;
       for ( DBlock blk : mBlks ) {
         if ( blk.mTo != null && blk.mTo.length() > 0 ) {

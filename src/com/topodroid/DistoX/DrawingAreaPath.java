@@ -18,6 +18,8 @@ import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 // import com.topodroid.prefs.TDSetting;
 
+import com.topodroid.num.TDNum;
+
 import android.util.Log;
 
 import android.graphics.Canvas;
@@ -438,6 +440,24 @@ public class DrawingAreaPath extends DrawingPointLinePath
       TDLog.Error( "AREA out error " + e.toString() );
     }
     // return 'A';
+  }
+
+
+  @Override
+  void toCave3D( PrintWriter pw, DrawingCommandManager cmd, TDNum num )
+  {
+    if ( size() < 2 ) return;
+    String name = getThName();
+    int color   = BrushManager.getLineColor( mAreaType );
+    float red   = ((color >> 16)&0xff)/255.0f;
+    float green = ((color >>  8)&0xff)/255.0f;
+    float blue  = ((color      )&0xff)/255.0f;
+    pw.format( Locale.US, "AREA %s %.2f %.2f %.2f\n", name, red, green, blue );
+    for ( LinePoint pt = mFirst; pt != null; pt = pt.mNext ) {
+      pt.toCave3D( pw, cmd, num );
+    }
+    mFirst.toCave3D( pw, cmd, num );
+    pw.format( Locale.US, "ENDAREA\n" );
   }
 
 }

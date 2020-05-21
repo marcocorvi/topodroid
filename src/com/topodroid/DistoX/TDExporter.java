@@ -223,7 +223,7 @@ class TDExporter
 
   private static String toXml( String s )
   { 
-    return s.replaceAll("&", "&amp;").replaceAll("\"", "&quot;").replaceAll(">", "&gt;").replaceAll("<", "&lt;").replaceAll("\'", "&apos"); 
+    return s.replaceAll("&", "&amp;").replaceAll("\"", "&quot;").replaceAll(">", "&gt;").replaceAll("<", "&lt;").replaceAll("\'", "&apos;"); 
   }
 
   // @return filename or null on error

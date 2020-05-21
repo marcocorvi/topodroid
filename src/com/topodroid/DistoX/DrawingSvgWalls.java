@@ -72,7 +72,7 @@ class DrawingSvgWalls extends DrawingSvgBase
       out.write( compass_header );
       out.write( "<!-- SVG created by TopoDroid v. " + TDVersion.string() + " -->\n" );
       out.write( svg_header );
-      out.write( "  i:pageBounds=\"0 0 " + width + " " + (-height) + "\"\n" );
+      out.write( "  i:pageBounds=\"0 0 " + width + " " + (-height) + "\"\n" ); // FIXME i: ???
       out.write( "  width=\"" + width + "pt\"\n" );
       out.write( "  height=\"" + height + "pt\"\n" );
       out.write( "  viewBox=\"" + vbox + "\"\n" );

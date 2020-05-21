@@ -36,10 +36,10 @@ class FixedInfo extends MagLatLong
   double asl;      // geoid altitude [m] 
   String comment;
   String cs;
-  private double cs_lng;
-  private double cs_lat;
-  private double cs_alt;
-  private long   cs_n_dec;
+  double cs_lng;
+  double cs_lat;
+  double cs_alt;
+  long   cs_n_dec;
 
   FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid,
                     String cmt, long src )

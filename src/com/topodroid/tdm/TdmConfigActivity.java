@@ -21,6 +21,7 @@ import com.topodroid.DistoX.TopoDroidApp;
 import com.topodroid.DistoX.TopoDroidAlertDialog;
 import com.topodroid.DistoX.DataHelper;
 import com.topodroid.DistoX.TDToast;
+import com.topodroid.DistoX.TDPath;
 import com.topodroid.DistoX.R;
 import com.topodroid.DistoX.ExportDialog;
 import com.topodroid.DistoX.IExporter;
@@ -58,7 +59,7 @@ public class TdmConfigActivity extends Activity
                               , OnItemClickListener
                               , IExporter
 {
-  int mNrButton1 = 5;
+  int mNrButton1 = TDPath.NOT_ANDROID_11 ? 5 : 4; 
   private static int izons[] = { 
     R.drawable.iz_add,
     R.drawable.iz_drop,
@@ -393,7 +394,7 @@ public class TdmConfigActivity extends Activity
       startTdmSurveysActivity();
     } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // EQUATES
       (new TdmEquatesDialog( this, mTdmConfig, null )).show();
-    } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // 3D
+    } else if ( TDPath.NOT_ANDROID_11 && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // 3D
       try {
         // Log.v("DistoX-TdManager", "Cave3D of " + mTdmConfig.getFilepath() );
         Intent intent = new Intent( "Cave3D.intent.action.Launch" );

@@ -74,9 +74,6 @@ class DrawingShotDialog extends MyDialog
   // private CheckBox mRBbackshot;
   private Button mRBwalls;
 
-  private boolean mSplayColor;
-  private boolean mFracExtend;
-
   private final DrawingWindow mParent;
   private DBlock mBlock;
   private int mColor;    // bock color
@@ -144,18 +141,15 @@ class DrawingShotDialog extends MyDialog
     // mRBsurf = (CheckBox) findViewById( R.id.surface );
     // mRBbackshot  = (CheckBox) findViewById( R.id.backshot );
 
-    mSplayColor = TDSetting.mSplayClasses;
-    mFracExtend = TDSetting.mExtendFrac;
-
     mBtnColor = (Button) findViewById( R.id.btn_color );
     if ( TDLevel.overExpert ) {
       if ( mBlock.isSplay() ) {
-	if ( mSplayColor ) {
+	if ( TDSetting.mSplayColor ) {
           mBtnColor.setBackgroundColor( mColor ); 
           mBtnColor.setOnClickListener( this );
 	}
       } else if ( mParent.isExtendedProfile() && mBlock.isMainLeg() ) {
-	if ( mFracExtend ) {
+	if ( TDSetting.mExtendFrac ) {
 	  Bitmap bitmap =  MyButton.getLVRseekbarBackGround( mContext, (int)(TopoDroidApp.mDisplayWidth), 20 );
 	  if ( bitmap != null ) {
 	    BitmapDrawable background = new BitmapDrawable( mContext.getResources(), bitmap );
@@ -197,8 +191,8 @@ class DrawingShotDialog extends MyDialog
       }
     }
 
-    if ( ! mSplayColor ) mBtnColor.setVisibility( View.GONE );
-    if ( ! mFracExtend ) mStretchBar.setVisibility( View.GONE );
+    if ( ! TDSetting.mSplayColor ) mBtnColor.setVisibility( View.GONE );
+    if ( ! TDSetting.mExtendFrac ) mStretchBar.setVisibility( View.GONE );
 
     LinearLayout layout3  = (LinearLayout) findViewById( R.id.layout3 );
     LinearLayout layout3b = (LinearLayout) findViewById( R.id.layout3b );
@@ -342,7 +336,7 @@ class DrawingShotDialog extends MyDialog
   @Override
   public void colorChanged( int color )
   {
-    if ( ! mSplayColor ) return;
+    if ( ! TDSetting.mSplayColor ) return;
     mColor = color;
     mParent.updateBlockColor( mBlock, mColor );
     mBtnColor.setBackgroundColor( mColor );
@@ -356,13 +350,13 @@ class DrawingShotDialog extends MyDialog
 
     Button b = (Button)view;
 
-    if ( mSplayColor && b == mBtnColor ) {
+    if ( TDSetting.mSplayColor && b == mBtnColor ) {
       new MyColorPicker( mContext, this, mColor ).show();
       return;
     } else if ( b == mRBleft ) {
       mRBvert.setChecked( false );
       mRBright.setChecked( false );
-      if ( mFracExtend ) {
+      if ( TDSetting.mExtendFrac ) {
         mIntExtend = mRBleft.isChecked() ? -1 : 0;
         mStretch = 0;
         mStretchBar.setProgress(  150+100*mIntExtend );
@@ -370,7 +364,7 @@ class DrawingShotDialog extends MyDialog
     } else if ( b == mRBvert ) {
       mRBleft.setChecked( false );
       mRBright.setChecked( false );
-      if ( mFracExtend ) {
+      if ( TDSetting.mExtendFrac ) {
         mIntExtend = 0;
         mStretch = 0;
         mStretchBar.setProgress( 150 );
@@ -378,7 +372,7 @@ class DrawingShotDialog extends MyDialog
     } else if ( b == mRBright ) {
       mRBleft.setChecked( false );
       mRBvert.setChecked( false );
-      if ( mFracExtend ) {
+      if ( TDSetting.mExtendFrac ) {
         mIntExtend = mRBright.isChecked() ? 1 : 0;
         mStretch = 0;
         mStretchBar.setProgress(  150+100*mIntExtend );

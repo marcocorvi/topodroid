@@ -660,9 +660,13 @@ public class TopoDroidApp extends Application
     // if one of the symbol dirs does not exists all of then are restored
     String version = mDData.getValue( "version" );
     if ( version == null || ( ! version.equals( TDVersion.string() ) ) ) {
+      // Log.v("DistoX-PATH", "version " + version + " " + TDVersion.string() );
       mDData.setValue( "version",  TDVersion.string()  );
       // FIXME INSTALL_SYMBOL installSymbols( false ); // this updates symbol_version in the database
-      if ( mDData.getValue( "symbol_version" ) == null ) thisApp.installSymbols( true );
+      if ( mDData.getValue( "symbol_version" ) == null ) {
+        // Log.v("DistoX-PATH", "symbol version " + symbol_version );
+        thisApp.installSymbols( true );
+      }
       thisApp.installFirmware( false );
       // installUserManual( );
       mCheckManualTranslation = true;
@@ -1386,6 +1390,7 @@ public class TopoDroidApp extends Application
   static void installSymbols( boolean overwrite )
   {
     deleteObsoleteSymbols();
+    // Log.v("DistoX-PATH", "install symbol version " + TDVersion.SYMBOL_VERSION );
     installSymbols( R.raw.symbols_speleo, overwrite );
     mDData.setValue( "symbol_version", TDVersion.SYMBOL_VERSION );
   }
@@ -1455,6 +1460,7 @@ public class TopoDroidApp extends Application
 
   static private void symbolsUncompress( InputStream fis, boolean overwrite )
   {
+    // Log.v("DistoX-PATH", "uncompress symbols");
     TDPath.symbolsCheckDirs();
     try {
       // byte buffer[] = new byte[36768];
@@ -1470,6 +1476,7 @@ public class TopoDroidApp extends Application
             filepath = filepath.substring( pos );
           }
           String pathname = TDPath.getSymbolFile( filepath );
+          // Log.v("DistoX-PATH", "uncompress symbol " + pathname );
           File file = new File( pathname );
           if ( overwrite || ! file.exists() ) {
             // APP_SAVE SYMBOLS
