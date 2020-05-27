@@ -2166,7 +2166,7 @@ class DrawingIO
             if ( cmd.commandType() != 0 ) continue;
             DrawingPath p = (DrawingPath) cmd;
             if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) continue; // safety check: should not happen
-            p.toCave3D( pw, manager, num );
+            p.toCave3D( pw, type, manager, num );
           }
         }
       }

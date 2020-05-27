@@ -1680,18 +1680,20 @@ public class TDNum
 
   // s abscissa
   // N.B. offset for geocoord of origin must be handled by caller
-  public float getCave3Dz( float s, DBlock blk )
+  public TDVector getCave3Dz( float s, DBlock blk )
   {
     if ( s <= 0 ) {
-      return getStation( blk.mFrom ).v;
+      NumStation st = getStation( blk.mFrom );
+      return new TDVector( st.e, st.s, st.v );
     } else if ( s >= 1 ) {
-      return getStation( blk.mTo ).v;
+      NumStation st = getStation( blk.mTo );
+      return new TDVector( st.e, st.s, st.v );
     }
     NumStation st1 = getStation( blk.mFrom );
     NumStation st2 = getStation( blk.mTo );
-    return st1.v + ( st2.v - st1.v)*s;
+    return new TDVector( st1.e + (st2.e-st1.e)*s, st1.s + (st2.s-st1.s)*s, st1.v + ( st2.v - st1.v)*s);
   }
-      
+
 }
 
 

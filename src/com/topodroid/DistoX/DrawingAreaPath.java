@@ -444,7 +444,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
 
 
   @Override
-  void toCave3D( PrintWriter pw, DrawingCommandManager cmd, TDNum num )
+  void toCave3D( PrintWriter pw, int type, DrawingCommandManager cmd, TDNum num )
   {
     if ( size() < 2 ) return;
     String name = getThName();
@@ -455,9 +455,9 @@ public class DrawingAreaPath extends DrawingPointLinePath
     float alpha = ((color >> 24)&0xff)/255.0f;
     pw.format( Locale.US, "AREA %s %.2f %.2f %.2f %.2f\n", name, red, green, blue, alpha );
     for ( LinePoint pt = mFirst; pt != null; pt = pt.mNext ) {
-      pt.toCave3D( pw, cmd, num );
+      pt.toCave3D( pw, type, cmd, num );
     }
-    mFirst.toCave3D( pw, cmd, num );
+    mFirst.toCave3D( pw, type, cmd, num );
     pw.format( Locale.US, "ENDAREA\n" );
   }
 

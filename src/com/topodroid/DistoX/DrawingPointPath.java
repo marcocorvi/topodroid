@@ -13,6 +13,7 @@
 
 package com.topodroid.DistoX;
 
+import com.topodroid.math.TDVector;
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
@@ -570,12 +571,22 @@ public class DrawingPointPath extends DrawingPath
   }
 
   @Override
-  void toCave3D( PrintWriter pw, DrawingCommandManager cmd, TDNum num )
+  void toCave3D( PrintWriter pw, int type, DrawingCommandManager cmd, TDNum num )
   {
+    // cx,cy are in pixels divide by 20 to write coords in meters
     String name  = getThName();
-    float v = cmd.getCave3Dv( cx, cy, num );
-    // cx,cy are in pixels divide by 40 to write coords in meters
-    pw.format( Locale.US, "POINT %s %.1f %.3f %.3f %.3f\n", name, mOrientation, (cx-100)/20.0f, -(cy-120)/20.0f, -v );
+    float x = (cx - 100)/20.0f;
+    float y = (cy - 120)/20.0f;
+    float v = 0;
+    TDVector vv = cmd.getCave3Dv( cx, cy, num );
+    if ( type == PlotInfo.PLOT_PLAN ) {
+      v = vv.z;
+    } else {
+      v = y;
+      x = vv.x;
+      y = vv.y;
+    }
+    pw.format( Locale.US, "POINT %s %.1f %.3f %.3f %.3f\n", name, mOrientation, x, -y, -v );
   }
 
 }

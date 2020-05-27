@@ -583,6 +583,6 @@ public class DrawingPath extends RectF
     len2   = deltaX * deltaX + deltaY * deltaY;
   }
 
-  void toCave3D( PrintWriter pw, DrawingCommandManager cmd, TDNum num ) { }
+  void toCave3D( PrintWriter pw, int type, DrawingCommandManager cmd, TDNum num ) { }
 
 }

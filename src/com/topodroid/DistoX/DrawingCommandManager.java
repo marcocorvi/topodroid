@@ -14,6 +14,7 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.ui.TDGreenDot;
 import com.topodroid.num.TDNum;
+import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
 
 import android.util.Log;
@@ -1474,7 +1475,7 @@ class DrawingCommandManager
   // @pre must have called prepareCave3Dlegs() before
   // given a point (x,y) find the closest leg and return it (=best)
   // and the abscissa (smin) of the closest point on the leg 
-  float getCave3Dv( float x, float y, TDNum num )
+  TDVector getCave3Dv( float x, float y, TDNum num )
   {
     float min2 = Float.MAX_VALUE;
     float smin = 0;

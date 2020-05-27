@@ -439,7 +439,7 @@ public class DrawingLinePath extends DrawingPointLinePath
   }
 
   @Override
-  void toCave3D( PrintWriter pw, DrawingCommandManager cmd, TDNum num )
+  void toCave3D( PrintWriter pw, int type, DrawingCommandManager cmd, TDNum num )
   {
     if ( size() < 2 ) return;
     String name = getThName();
@@ -449,10 +449,10 @@ public class DrawingLinePath extends DrawingPointLinePath
     float blue  = ((color      )&0xff)/255.0f;
     pw.format( Locale.US, "LINE %s %.2f %.2f %.2f\n", name, red, green, blue );
     for ( LinePoint pt = mFirst; pt != null; pt = pt.mNext ) {
-      pt.toCave3D( pw, cmd, num );
+      pt.toCave3D( pw, type, cmd, num );
     }
     if ( isClosed() ) {
-      mFirst.toCave3D( pw, cmd, num );
+      mFirst.toCave3D( pw, type, cmd, num );
     }
     pw.format( Locale.US, "ENDLINE\n" );
   }

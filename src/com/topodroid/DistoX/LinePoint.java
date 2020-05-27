@@ -23,6 +23,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.math.Point2D;
+import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
 
 import com.topodroid.num.TDNum;
@@ -242,11 +243,22 @@ public class LinePoint extends Point2D
     } catch ( IOException e ) { }
   }
 
-  void toCave3D( PrintWriter pw, DrawingCommandManager cmd, TDNum num )
+  void toCave3D( PrintWriter pw, int type, DrawingCommandManager cmd, TDNum num )
   {
-    float v = cmd.getCave3Dv( x, y, num ); // x: east, y:south, v:down
-    // x,y are in pixels divide by 40 to write coords in meters
-    pw.format( Locale.US, "%.3f %.3f %.3f\n", (x-100)/20.0f, -(y-120)/20.0f, -v );
+    // x: east, y:south, v:down
+    // cx, cy are in pixels divide by 20 to write coords in meters
+    float x0 = (x - 100)/20.0f;
+    float y0 = (y - 120)/20.0f;
+    float v0 = 0;
+    TDVector vv = cmd.getCave3Dv( x, y, num );
+    if ( type == PlotInfo.PLOT_PLAN ) {
+      v0 = vv.z;
+    } else {
+      v0 = y0;
+      x0 = vv.x;
+      y0 = vv.y;
+    }
+    pw.format( Locale.US, "%.3f %.3f %.3f\n", x0, -y0, -v0 );
   }
 
 }

@@ -132,9 +132,12 @@ public class TdmViewSurface extends SurfaceView
           survey_name = survey_name.substring( 0, len );
           String st = equate.getSurveyStation( survey_name );
           if ( st != null ) {
-            vst.add( command.getViewStation( st ) );
-          // } else {
-          //   Log.v("TdManager", "survey " + survey_name + " has no equate");
+            TdmViewStation vt = command.getViewStation( st );
+            if ( vt != null ) {
+              vst.add( vt );
+            } else {
+              TDLog.Error("TdManager survey " + survey_name + " station " + st + " not in cmd-manager" );
+            }
           }
         }
         if ( vst.size() > 1 ) {
