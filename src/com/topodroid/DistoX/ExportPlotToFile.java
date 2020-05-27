@@ -35,26 +35,28 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     private final String mExt; // extension
     private String filename = null;
     private final boolean mToast;
-    // private final DrawingUtil mUtil;
     private final String mFormat;
     private final GeoReference mStation;
+    private final FixedInfo mFixedInfo;
+    private final PlotInfo  mPlotInfo;
 
-    ExportPlotToFile( Context context, SurveyInfo info,
-                      TDNum num, /* DrawingUtil util, */ DrawingCommandManager command,
+    ExportPlotToFile( Context context, SurveyInfo info, PlotInfo plot, FixedInfo fixed,
+                      TDNum num, DrawingCommandManager command,
                       long type, String name, String ext, boolean toast, GeoReference station )
     {
       // Log.v("DistoX", "export plot to file cstr. " + name );
       // FIXME assert( ext != null );
-      mFormat   = context.getResources().getString(R.string.saved_file_1);
-      mInfo     = info;
-      mCommand  = command;
-      // mUtil     = util;
-      mNum      = num;
-      mType     = type;
-      mFullName = name;
-      mExt      = ext;
-      mToast    = toast;
-      mStation  = station;
+      mFormat    = context.getResources().getString(R.string.saved_file_1);
+      mInfo      = info;
+      mPlotInfo  = plot;
+      mFixedInfo = fixed;
+      mNum       = num;
+      mCommand   = command;
+      mType      = type;
+      mFullName  = name;
+      mExt       = ext;
+      mToast     = toast;
+      mStation   = station;
     }
 
     @Override
@@ -72,9 +74,12 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
           filename = TDPath.getXviFileWithExt( mFullName );
         } else if ( mExt.equals("xml") ) {
           filename = TDPath.getTnlFileWithExt( mFullName );
+        } else if ( mExt.equals("c3d") ) {
+          filename = TDPath.getC3dFileWithExt( mFullName );
 	} else { // unexpected extension
 	  return false;
         }
+        boolean ret = true;
         // Log.v("DistoX", "Export to File: " + filename );
         // if ( filename != null ) { // always true
           // final FileOutputStream out = new FileOutputStream( filename );
@@ -86,22 +91,24 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
             final FileWriter fw = new FileWriter( filename );
             BufferedWriter bw = new BufferedWriter( fw );
             if ( mExt.equals("dxf") ) {
-              DrawingDxf.write( bw, mNum, /* mUtil, */ mCommand, mType );
+              DrawingDxf.write( bw, mNum, mCommand, mType );
             } else if ( mExt.equals("svg") ) {
               if ( TDSetting.mSvgRoundTrip ) {
-                (new DrawingSvgWalls()).write( filename, bw, mNum, /* mUtil, */ mCommand, mType );
+                (new DrawingSvgWalls()).write( filename, bw, mNum, mCommand, mType );
               } else {
-                (new DrawingSvg()).write( bw, mNum, /* mUtil, */ mCommand, mType );
+                (new DrawingSvg()).write( bw, mNum, mCommand, mType );
               }
             } else if ( mExt.equals("xvi") ) {
-              DrawingXvi.write( bw, mNum, /* mUtil, */ mCommand, mType );
+              DrawingXvi.write( bw, mNum, mCommand, mType );
             } else if ( mExt.equals("xml") ) {
-              (new DrawingTunnel()).write( bw, mInfo, mNum, /* mUtil, */ mCommand, mType );
+              (new DrawingTunnel()).write( bw, mInfo, mNum, mCommand, mType );
+            } else if ( mExt.equals("c3d") ) {
+              ret = DrawingIO.exportCave3D( bw, mCommand, mNum, mPlotInfo, mFixedInfo, mFullName );
             }
-            fw.flush();
-            fw.close();
+            bw.flush();
+            bw.close();
 	  }
-          return true;
+          return ret;
         // }
       } catch (Exception e) {
         e.printStackTrace();

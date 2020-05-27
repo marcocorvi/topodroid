@@ -5617,7 +5617,7 @@ public class DrawingWindow extends ItemDrawer
 
     // used to save "dxf", "svg"
     // called only by doExport
-    private void saveWithExt( long type, String ext ) // , boolean toast )
+    private void saveWithExt( long type, String ext ) 
     {
       TDNum num = mNum;
       TDLog.Log( TDLog.LOG_IO, "export plot type " + type + " with extension " + ext );
@@ -5625,17 +5625,26 @@ public class DrawingWindow extends ItemDrawer
 	DrawingCommandManager manager = mDrawingSurface.getManager( type );
 	String fullname = mFullName3;
         if ( "csx".equals( ext ) ) {
-          doSavePng( manager, type, fullname ); // , toast );
+          doSavePng( manager, type, fullname ); 
         } else {
-          doSaveWithExt( num, manager, type, fullname, ext, true ); // toast );
+          doSaveWithExt( num, manager, type, fullname, ext, true ); 
         }
       } else {
-	DrawingCommandManager manager1 = mDrawingSurface.getManager( mPlot1.type );
-	DrawingCommandManager manager2 = mDrawingSurface.getManager( mPlot2.type );
-	String fullname1 = mFullName1;
-	String fullname2 = mFullName2;
-        doSaveWithExt( num, /* mDrawingUtil, */ manager1, mPlot1.type, fullname1, ext, true); // toast );
-        doSaveWithExt( num, /* mDrawingUtil, */ manager2, mPlot2.type, fullname2, ext, true); // toast );
+        if ( ext.equals("c3d") ) {
+	  DrawingCommandManager manager = mDrawingSurface.getManager( type );
+          if ( PlotInfo.isProfile( type ) ) {
+            doSaveWithExt( num, manager, type, mFullName2, ext, true ); 
+          } else if ( type == PlotInfo.PLOT_PLAN ) {
+            doSaveWithExt( num, manager, type, mFullName1, ext, true ); 
+          }
+        } else {
+	  DrawingCommandManager manager1 = mDrawingSurface.getManager( mPlot1.type );
+	  DrawingCommandManager manager2 = mDrawingSurface.getManager( mPlot2.type );
+	  String fullname1 = mFullName1;
+	  String fullname2 = mFullName2;
+          doSaveWithExt( num, manager1, mPlot1.type, fullname1, ext, true); 
+          doSaveWithExt( num, manager2, mPlot2.type, fullname2, ext, true); 
+        }
       }
     }
 
@@ -5651,9 +5660,19 @@ public class DrawingWindow extends ItemDrawer
       if ( type == PlotInfo.PLOT_PLAN && ext.equals("shp") ) {
         String origin = num.getOriginStation();
         station = TDExporter.getGeolocalizedStation( mSid, mApp_mData, 1.0f, true, origin );
+      } else if ( ext.equals("c3d") ) {
+        String origin = num.getOriginStation();
+        station = TDExporter.getGeolocalizedStation( mSid, mApp_mData, 1.0f, true, origin );
+      }  
+      SurveyInfo info  = mApp_mData.selectSurveyInfo( mSid );
+      PlotInfo   plot  = null;
+      FixedInfo  fixed = null;
+      if ( ext.equals("c3d") ) {
+        plot  = PlotInfo.isAnySection(type) ? mPlot3 : PlotInfo.isProfile( type )? mPlot2 : mPlot1;
+        List<FixedInfo> fixeds = mApp_mData.selectAllFixed( mSid, TDStatus.NORMAL );
+        if ( fixeds != null && fixeds.size() > 0 ) fixed = fixeds.get( 0 );
       }
-      SurveyInfo info = mApp_mData.selectSurveyInfo( mSid );
-      new ExportPlotToFile( mActivity, info, num, manager, type, filename, ext, toast, station ).execute();
+      new ExportPlotToFile( mActivity, info, plot, fixed, num, manager, type, filename, ext, toast, station ).execute();
     }
 
     // private rotateBackups( String filename )
@@ -5712,7 +5731,7 @@ public class DrawingWindow extends ItemDrawer
     }
     try { 
       // Log.v("DistoXX", "save th2 origin " + mPlot1.xoffset + " " + mPlot1.yoffset + " toTherion " + TDSetting.mToTherion );
-      (new SavePlotFileTask( mActivity, this, th2Handler, /* mApp, */ mNum, /* mDrawingUtil, */ manager, name, type, azimuth, suffix, 0 )).execute();
+      (new SavePlotFileTask( mActivity, this, th2Handler, mNum, manager, name, type, azimuth, suffix, 0 )).execute();
     } catch ( RejectedExecutionException e ) { }
   }
 
@@ -6128,6 +6147,9 @@ public class DrawingWindow extends ItemDrawer
       case TDConst.DISTOX_EXPORT_SHP: saveWithExt( mType, "shp" ); break; // , true ); break;
       case TDConst.DISTOX_EXPORT_XVI: saveWithExt( mType, "xvi" ); break; // , true ); break;
       case TDConst.DISTOX_EXPORT_TNL: saveWithExt( mType, "xml" ); break; // , true ); break;
+      case TDConst.DISTOX_EXPORT_C3D: 
+        if ( ! PlotInfo.isAnySection( mType ) ) saveWithExt( mType, "c3d" );
+        break;
     }
   }
 

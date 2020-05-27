@@ -574,7 +574,8 @@ public class DrawingPointPath extends DrawingPath
   {
     String name  = getThName();
     float v = cmd.getCave3Dv( cx, cy, num );
-    pw.format( Locale.US, "POINT %s %.1f %.1f %.1f %.1f\n", name, mOrientation, cx, -cy, -v );
+    // cx,cy are in pixels divide by 40 to write coords in meters
+    pw.format( Locale.US, "POINT %s %.1f %.3f %.3f %.3f\n", name, mOrientation, (cx-100)/20.0f, -(cy-120)/20.0f, -v );
   }
 
 }

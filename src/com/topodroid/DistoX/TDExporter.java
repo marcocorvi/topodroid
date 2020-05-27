@@ -589,7 +589,7 @@ class TDExporter
   static private List< TDNum > getGeolocalizedData( long sid, DataHelper data, float decl, float asl_factor, boolean ellipsoid_altitude )
   {
     List< FixedInfo > fixeds = data.selectAllFixed( sid, 0 );
-    Log.v("DistoX-DECL", "get geoloc. data. Decl " + decl + " fixeds " + fixeds.size() );
+    // Log.v("DistoX-DECL", "get geoloc. data. Decl " + decl + " fixeds " + fixeds.size() );
     if ( fixeds.size() == 0 ) return null;
 
     List< TDNum > nums = new ArrayList< TDNum >();
@@ -678,6 +678,8 @@ class TDExporter
       return "";
     }
 
+    String date = info.date.replaceAll("\\.", "-");
+
     // now write the KML
     try {
       // TDLog.Log( TDLog.LOG_IO, "export KML " + filename );
@@ -691,6 +693,7 @@ class TDExporter
 
       pw.format(name, info.name );
       pw.format("<description>%s - TopoDroid v %s</description>\n",  TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
+      pw.format("<TimeStamp><when>%s</when></TimeStamp>\n", date );
 
       pw.format(style, "centerline");
       pw.format(linestyle);

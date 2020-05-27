@@ -245,7 +245,8 @@ public class LinePoint extends Point2D
   void toCave3D( PrintWriter pw, DrawingCommandManager cmd, TDNum num )
   {
     float v = cmd.getCave3Dv( x, y, num ); // x: east, y:south, v:down
-    pw.format( Locale.US, "%.1f %.1f %.1f\n", x, -y, -v );
+    // x,y are in pixels divide by 40 to write coords in meters
+    pw.format( Locale.US, "%.3f %.3f %.3f\n", (x-100)/20.0f, -(y-120)/20.0f, -v );
   }
 
 }

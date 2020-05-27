@@ -84,7 +84,6 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   SavePlotFileTask( Context context, DrawingWindow parent, Handler handler,
                     // TopoDroidApp app,
 		    TDNum num,
-		    // DrawingUtil util,
 		    List< DrawingPath > paths,
                     String fullname, long type, int proj_dir )
   {
@@ -93,7 +92,6 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      mHandler  = handler;
      // mApp      = app;
      mNum      = num;
-     // mUtil     = util;
      mManager  = null;
      mPaths    = paths;
      mFullName = fullname;
@@ -133,24 +131,29 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
             break;
           case TDConst.DISTOX_EXPORT_DXF:
 	    if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
-              mParent.get().doSaveWithExt( mNum, /* mUtil, */ mManager, mType, mFullName, "dxf", false );
+              mParent.get().doSaveWithExt( mNum, mManager, mType, mFullName, "dxf", false );
 	    }
             break;
           case TDConst.DISTOX_EXPORT_SVG:
 	    if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
-              mParent.get().doSaveWithExt( mNum, /* mUtil, */ mManager, mType, mFullName, "svg", false );
+              mParent.get().doSaveWithExt( mNum, mManager, mType, mFullName, "svg", false );
 	    }
             break;
           case TDConst.DISTOX_EXPORT_SHP:
 	    if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
-              mParent.get().doSaveWithExt( mNum, /* mUtil, */ mManager, mType, mFullName, "shp", false );
+              mParent.get().doSaveWithExt( mNum, mManager, mType, mFullName, "shp", false );
 	    }
             break;
           case TDConst.DISTOX_EXPORT_XVI:
 	    if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
-              mParent.get().doSaveWithExt( mNum, /* mUtil, */ mManager, mType, mFullName, "xvi", false );
+              mParent.get().doSaveWithExt( mNum, mManager, mType, mFullName, "xvi", false );
 	    }
             break;
+          // case TDConst.DISTOX_EXPORT_C3D:
+	  //   if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
+          //     mParent.get().doSaveWithExt( mNum, mManager, mType, mFullName, "c3d", false );
+	  //   }
+          //   break;
           case TDConst.DISTOX_EXPORT_CSX: // IMPORTANT CSX must come before PNG
             if ( PlotInfo.isSketch2D( mType ) ) {
 	      if ( mParent.get() != null && ! mParent.get().isFinishing() ) {

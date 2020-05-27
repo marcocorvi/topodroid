@@ -448,11 +448,12 @@ public class DrawingAreaPath extends DrawingPointLinePath
   {
     if ( size() < 2 ) return;
     String name = getThName();
-    int color   = BrushManager.getLineColor( mAreaType );
+    int color   = BrushManager.getAreaColor( mAreaType );
     float red   = ((color >> 16)&0xff)/255.0f;
     float green = ((color >>  8)&0xff)/255.0f;
     float blue  = ((color      )&0xff)/255.0f;
-    pw.format( Locale.US, "AREA %s %.2f %.2f %.2f\n", name, red, green, blue );
+    float alpha = ((color >> 24)&0xff)/255.0f;
+    pw.format( Locale.US, "AREA %s %.2f %.2f %.2f %.2f\n", name, red, green, blue, alpha );
     for ( LinePoint pt = mFirst; pt != null; pt = pt.mNext ) {
       pt.toCave3D( pw, cmd, num );
     }

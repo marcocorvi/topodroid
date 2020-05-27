@@ -106,7 +106,7 @@ abstract class ItemDrawer extends Activity
       }
     }
     ages[kk] = amax;
-    Log.v("DistoX-AGE", " " + ages[0] + " " + ages[1] + " " + ages[2] + " " + ages[3] + " " + ages[4] + " " + ages[5] );
+    // Log.v("DistoX-AGE", " " + ages[0] + " " + ages[1] + " " + ages[2] + " " + ages[3] + " " + ages[4] + " " + ages[5] );
   }
 
   // recent symbols are stored with their th_names

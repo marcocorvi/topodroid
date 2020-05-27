@@ -31,7 +31,7 @@ public class AverageLeg
 
   public AverageLeg( float decl )
   {
-    Log.v("DistoX-DECL", "average leg with " + decl );
+    // Log.v("DistoX-DECL", "average leg with " + decl );
     mAverage = new TDVector( 0, 0, 0 );
     mCnt = 0;
     mDecl = decl;

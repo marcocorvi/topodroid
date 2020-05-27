@@ -30,6 +30,7 @@ import java.io.IOException;
 
 import android.graphics.RectF;
 
+// extends for XSection class
 class DrawingTunnel extends DrawingSvgBase
 {
 

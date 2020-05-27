@@ -44,6 +44,7 @@ public class TDConst
   public static final int DISTOX_EXPORT_SHP = 23; // Shapefile ShpFile
   public static final int DISTOX_EXPORT_XVI = 24; // xtherion  XviFile
   public static final int DISTOX_EXPORT_TNL = 25; // Tunnel    TnlFile
+  public static final int DISTOX_EXPORT_C3D = 26; // Cave3D    C3dFile
 
   public static final int DISTOX_EXPORT_ZIP = 30;
 
@@ -99,7 +100,8 @@ public class TDConst
       "SHP",
       "PNG",
       "XVI",
-      "Tunnel"
+      "Tunnel",
+      "Cave3D",
   };
   private static final int[] mPlotExportIndex = {
     DISTOX_EXPORT_TH2,
@@ -109,7 +111,8 @@ public class TDConst
     DISTOX_EXPORT_SHP,
     DISTOX_EXPORT_PNG,
     DISTOX_EXPORT_XVI,
-    DISTOX_EXPORT_TNL
+    DISTOX_EXPORT_TNL,
+    DISTOX_EXPORT_C3D
   };
 
   public static final String[] mOverviewExportTypes = {

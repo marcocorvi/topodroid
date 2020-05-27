@@ -508,6 +508,7 @@ class DrawingIO
     }
   }
 
+  // entry point to export data-stream
   static void exportDataStream( DrawingCommandManager manager, int type, File file, String fullname, int proj_dir )
   {
     try {
@@ -532,6 +533,7 @@ class DrawingIO
     }
   }
 
+  // entry point to export a set of paths to data-stream
   static void exportDataStream( List< DrawingPath > paths, int type, File file, String fullname, int proj_dir, int scrap )
   {
     try {
@@ -2171,8 +2173,9 @@ class DrawingIO
     }
   }
 
-  // interface for DrawingWindow
-  static void exportCave3D( DrawingCommandManager manager, TDNum num, PlotInfo plot, FixedInfo fix, File file, String fullname, int proj_dir )
+  // interface for ExportPlotToFile
+  // bw is flushed and closed by the caller
+  static boolean exportCave3D( BufferedWriter bw, DrawingCommandManager manager, TDNum num, PlotInfo plot, FixedInfo fix, String fullname )
   {
     float xoff = 0;
     float yoff = 0;
@@ -2181,30 +2184,26 @@ class DrawingIO
     String fixed_station = fix.name;
     NumStation fixed = num.getStation( fix.name );
     if ( fixed == null ) { // cannot export Cave3D
-      return;
+      Log.v("DistoX-C3D", "cannot export: fixed null");
+      return false;
     }
+    Log.v("DistoX-C3D", "Fixed " + fixed.name + ": " + fixed.e + " " + fixed.s + " " + fixed.v );
     if ( fix.cs != null ) {
+      Log.v("DistoX-C3D", "CS " + fix.cs_lng + " " + fix.cs_lat + " " + fix.cs_alt );
       xoff = (float)(fix.cs_lng - fixed.e);
       yoff = (float)(fix.cs_lat + fixed.s);
       zoff = (float)(fix.cs_alt + fixed.v);
     } else {
+      Log.v("DistoX-C3D", "WGS84 " + fix.lng + " " + fix.lat + " " + fix.alt );
       xoff = (float)(fix.lng - fixed.e);
       yoff = (float)(fix.lat + fixed.s);
       zoff = (float)(fix.alt + fixed.v);
     }
+    int proj_dir = (int)(plot.azimuth);
 
-    try {
-      FileWriter fw = new FileWriter( file );
-      BufferedWriter bw = new BufferedWriter( fw );
-      PrintWriter pw = new PrintWriter( bw );
-
-      manager.exportCave3D( plot.type, pw, num, fullname, proj_dir, xoff, yoff, zoff );
-      fw.close();
-    } catch ( FileNotFoundException e ) {
-      TDLog.Error( "Export Data file: " + e.getMessage() );
-    } catch ( IOException e ) {
-      TDLog.Error( "Export Data i/o: " + e.getMessage() );
-    }
+    PrintWriter pw = new PrintWriter( bw );
+    manager.exportCave3D( plot.type, pw, num, fullname, proj_dir, xoff, yoff, zoff );
+    return true;
   }
 
 }

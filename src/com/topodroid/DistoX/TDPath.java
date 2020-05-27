@@ -43,17 +43,19 @@ public class TDPath
   final static int NR_BACKUP = 5;
   final static String BCK_SUFFIX = ".bck";
 
+  final static String C3D = ".c3d";
+  final static String CAV = ".cav"; // Topo
+  final static String CAVE = ".cave"; // Polygon
   final static String CSN = ".csn";  // CaveSniper
   final static String CSV = ".csv";
   final static String CSX = ".csx";
-  final static String CAVE = ".cave"; // Polygon
-  final static String CAV = ".cav"; // Topo
   final static String DAT = ".dat";
+  final static String DXF = ".dxf";
   final static String GRT = ".grt"; // Grottolf
   final static String GTX = ".gtx"; // GHTopo
-  final static String DXF = ".dxf";
-  final static String KML = ".kml";
+  final static String HTML = ".html";
   final static String JSON = ".json";
+  final static String KML = ".kml";
   final static String PLT = ".plt"; // trackfile
   final static String PNG = ".png";
   final static String SHP = ".shp"; // shapefile
@@ -66,18 +68,17 @@ public class TDPath
   final static String SVX = ".svx"; // Survex
   final static String TDR = ".tdr";
   final static String TDR3 = ".tdr3";
-  final static String TH  = ".th";
-  final static String TH2 = ".th2";
-  final static String TH3 = ".th3";
   final static String TMP = ".tmp";
   final static String TNL = ".xml"; // Tunnel XML
   final static String TOP = ".top"; // PockeTopo
+  final static String TH  = ".th";
+  final static String TH2 = ".th2";
+  final static String TH3 = ".th3";
   final static String TRB = ".trb"; // TopoRobot
   final static String TRO = ".tro"; // VisualTopo
   final static String TXT = ".txt";
   final static String XVI = ".xvi"; // xtherion
   final static String ZIP = ".zip";
-  final static String HTML = ".html";
 
   final static String THCONFIG = ".thconfig";
   final static String TDCONFIG = ".tdconfig";
@@ -118,6 +119,7 @@ public class TDPath
   static String PATH_TDCONFIG;
   static String PATH_THCONFIG;
 
+  private static String PATH_C3D;    //  = PATH_BASE + "c3d/";   // Cave3D
   private static String PATH_CAVE;   //  = PATH_BASE + "cave/";  // Polygon
   private static String PATH_CAV;    //  = PATH_BASE + "cav/";   // Topo
   private static String PATH_CSV;    //  = PATH_BASE + "csv/";   // CSV text
@@ -245,38 +247,39 @@ public class TDPath
     PATH_TDCONFIG = PATH_BASE + "thconfig/"; // FIXME checkDirs( PATH_TDCONFIG );
     PATH_THCONFIG = PATH_TDCONFIG;
 
-    PATH_CAV = PATH_BASE + "cav/";      // FIXME checkDirs( PATH_CAV );
-    PATH_DAT = PATH_BASE + "dat/";      // FIXME checkDirs( PATH_DAT );
-    PATH_GRT = PATH_BASE + "grt/";      // FIXME checkDirs( PATH_GRT );
-    PATH_GTX = PATH_BASE + "gtx/";      // FIXME checkDirs( PATH_GTX );
+    PATH_C3D  = PATH_BASE + "c3d/";     // FIXME checkDirs( PATH_C3D );
+    PATH_CAV  = PATH_BASE + "cav/";     // FIXME checkDirs( PATH_CAV );
     PATH_CAVE = PATH_BASE + "cave/";    // FIXME checkDirs( PATH_CAVE );
-    PATH_SHP = PATH_BASE + "shp/";      // FIXME checkDirs( PATH_SHP );
-    PATH_SRV = PATH_BASE + "srv/";      // FIXME checkDirs( PATH_SRV );
-    PATH_SUR = PATH_BASE + "sur/";      // FIXME checkDirs( PATH_SUR );
-    PATH_SVX = PATH_BASE + "svx/";      // FIXME checkDirs( PATH_SVX );
-    PATH_CSV = PATH_BASE + "csv/";      // FIXME checkDirs( PATH_CSV );
-    PATH_CSX = PATH_BASE + "csx/";      // FIXME checkDirs( PATH_CSX );
+    PATH_CSV  = PATH_BASE + "csv/";     // FIXME checkDirs( PATH_CSV );
+    PATH_CSX  = PATH_BASE + "csx/";     // FIXME checkDirs( PATH_CSX );
+    PATH_DAT  = PATH_BASE + "dat/";     // FIXME checkDirs( PATH_DAT );
     PATH_DUMP = PATH_DEFAULT + "dump/"; // FIXME checkDirs( PATH_DUMP );
-    PATH_TOP  = PATH_BASE + "top/";     // FIXME checkDirs( PATH_TOP );
-    PATH_TNL  = PATH_BASE + "tnl/";     // FIXME checkDirs( PATH_TNL );
-    PATH_TH  = PATH_BASE + "th/";       // FIXME checkDirs( PATH_TH );
-    PATH_TDR = PATH_BASE + "tdr/";      checkDirs( PATH_TDR );
-    PATH_TH2 = PATH_BASE + "th2/";      checkDirs( PATH_TH2 );
-    PATH_TH3 = PATH_BASE + "th3/";      checkDirs( PATH_TH3 );
-    PATH_TDR3 = PATH_BASE + "tdr3/";    checkDirs( PATH_TDR3 );
-    APP_TMP_PATH = PATH_BASE + "tmp/";  checkDirs( APP_TMP_PATH );
-    PATH_DXF = PATH_BASE + "dxf/";      // FIXME checkDirs( PATH_DXF );
-    PATH_KML = PATH_BASE + "kml/";      // FIXME checkDirs( PATH_KML );
+    PATH_DXF  = PATH_BASE + "dxf/";     // FIXME checkDirs( PATH_DXF );
+    PATH_GRT  = PATH_BASE + "grt/";     // FIXME checkDirs( PATH_GRT );
+    PATH_GTX  = PATH_BASE + "gtx/";     // FIXME checkDirs( PATH_GTX );
     PATH_JSON = PATH_BASE + "json/";    // FIXME checkDirs( PATH_JSON );
-    PATH_PLT = PATH_BASE + "plt/";      // FIXME checkDirs( PATH_PLT );
-    PATH_SVG = PATH_BASE + "svg/";      // FIXME checkDirs( PATH_SVG );
-    PATH_TRO = PATH_BASE + "tro/";      // FIXME checkDirs( PATH_TRO );
-    PATH_TRB = PATH_BASE + "trb/";      // FIXME checkDirs( PATH_TRB );
-    PATH_PNG = PATH_BASE + "png/";      // FIXME checkDirs( PATH_PNG );
-    PATH_XVI = PATH_BASE + "xvi/";      // FIXME checkDirs( PATH_XVI );
+    PATH_KML  = PATH_BASE + "kml/";     // FIXME checkDirs( PATH_KML );
+    PATH_PLT  = PATH_BASE + "plt/";     // FIXME checkDirs( PATH_PLT );
+    PATH_PNG  = PATH_BASE + "png/";     // FIXME checkDirs( PATH_PNG );
+    PATH_SHP  = PATH_BASE + "shp/";     // FIXME checkDirs( PATH_SHP );
+    PATH_SRV  = PATH_BASE + "srv/";     // FIXME checkDirs( PATH_SRV );
+    PATH_SUR  = PATH_BASE + "sur/";     // FIXME checkDirs( PATH_SUR );
+    PATH_SVG  = PATH_BASE + "svg/";     // FIXME checkDirs( PATH_SVG );
+    PATH_SVX  = PATH_BASE + "svx/";     // FIXME checkDirs( PATH_SVX );
+    PATH_TDR  = PATH_BASE + "tdr/";     checkDirs( PATH_TDR );
+    PATH_TDR3 = PATH_BASE + "tdr3/";    checkDirs( PATH_TDR3 );
+    PATH_TH   = PATH_BASE + "th/";      // FIXME checkDirs( PATH_TH );
+    PATH_TH2  = PATH_BASE + "th2/";     checkDirs( PATH_TH2 );
+    PATH_TH3  = PATH_BASE + "th3/";     checkDirs( PATH_TH3 );
+    PATH_TNL  = PATH_BASE + "tnl/";     // FIXME checkDirs( PATH_TNL );
+    PATH_TOP  = PATH_BASE + "top/";     // FIXME checkDirs( PATH_TOP );
+    PATH_TRB  = PATH_BASE + "trb/";     // FIXME checkDirs( PATH_TRB );
+    PATH_TRO  = PATH_BASE + "tro/";     // FIXME checkDirs( PATH_TRO );
+    PATH_XVI  = PATH_BASE + "xvi/";     // FIXME checkDirs( PATH_XVI );
 
-    APP_NOTE_PATH = PATH_BASE + "note/";   checkDirs( APP_NOTE_PATH );
-    APP_FOTO_PATH = PATH_BASE + "photo/";  checkDirs( APP_FOTO_PATH );
+    APP_TMP_PATH   = PATH_BASE + "tmp/";   checkDirs( APP_TMP_PATH );
+    APP_NOTE_PATH  = PATH_BASE + "note/";  checkDirs( APP_NOTE_PATH );
+    APP_FOTO_PATH  = PATH_BASE + "photo/"; checkDirs( APP_FOTO_PATH );
     APP_AUDIO_PATH = PATH_BASE + "audio/"; checkDirs( APP_AUDIO_PATH );
 
     PATH_IMPORT = PATH_BASE + "import/";   checkDirs( PATH_IMPORT );
@@ -421,6 +424,7 @@ public class TDPath
   static String getTrbFile( String name )    { return PATH_TRB + name; }
   static String getTroFile( String name )    { return PATH_TRO + name; }
   static String getXviFile( String name )    { return PATH_XVI + name; }
+  static String getC3dFile( String name )    { return PATH_C3D + name; }
 
   static String getDumpFile( String name )   { return PATH_DUMP + name; }
   static String getBinFile( String name )    { return PATH_BIN + name; }
@@ -445,6 +449,7 @@ public class TDPath
   static String getSurveyPlotPngFile( String survey, String name ) { return PATH_PNG + survey + "-" + name + PNG ; }
   static String getSurveyPlotXviFile( String survey, String name ) { return PATH_XVI + survey + "-" + name + XVI ; }
   static String getSurveyPlotCsxFile( String survey, String name ) { return PATH_CSX + survey + "-" + name + CSX ; }
+  static String getSurveyPlotC3dFile( String survey, String name ) { return PATH_C3D + survey + "-" + name + C3D ; }
   // static String getSurveyPlotShpDir( String survey, String name ) { return PATH_SHP + survey + "-" + name ; }
   static String getSurveyPlotShzFile( String survey, String name ) { return PATH_SHP + survey + "-" + name + SHZ ; }
 
@@ -477,6 +482,7 @@ public class TDPath
   static String getSvgFileWithExt( String name ) { return getFile( PATH_SVG, name, SVG ); }
   static String getXviFileWithExt( String name ) { return getFile( PATH_XVI, name, XVI ); }
   static String getPngFileWithExt( String name ) { return getFile( PATH_PNG, name, PNG ); }
+  static String getC3dFileWithExt( String name ) { return getFile( PATH_C3D, name, C3D ); }
 
   static String getShzFileWithExt( String name ) { return getFile( PATH_SHP, name, SHZ ); }
   static String getShpBasepath( String name )    { return getPath( PATH_SHP, name ); }
