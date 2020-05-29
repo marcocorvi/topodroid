@@ -6025,7 +6025,11 @@ public class DrawingWindow extends ItemDrawer
           super.onBackPressed();
         }
       } else if ( p++ == pos ) { // EXPORT
-        new ExportDialog( mActivity, this, TDConst.mPlotExportTypes, R.string.title_plot_save ).show();
+        if ( TDLevel.overExpert ) {
+          new ExportDialog( mActivity, this, TDConst.mPlotExportTypesTest, R.string.title_plot_save ).show();
+        } else {
+          new ExportDialog( mActivity, this, TDConst.mPlotExportTypes, R.string.title_plot_save ).show();
+        }
       } else if ( p++ == pos ) { // INFO / AREA
         if ( PlotInfo.isAnySection( mType ) ) {
           float area = mDrawingSurface.computeSectionArea() / (DrawingUtil.SCALE_FIX * DrawingUtil.SCALE_FIX);

@@ -49,6 +49,7 @@ class StationNameDefault extends StationName
 
     boolean forward_shots = ( survey_stations == 1 );
     boolean shot_after_splays = StationPolicy.mShotAfterSplays;
+    // String  current_station = mCurrentStationName;
     // Log.v("DistoX-SN", "default assign stations after. blk0 " + blk0.mId + " bs " + bs + " survey_stations " + survey_stations + " shot_after_splay " + shot_after_splays );
 
     String main_from = null;
@@ -79,7 +80,7 @@ class StationNameDefault extends StationName
 
     // Log.v("DistoX-BLOCK", "F " + from + " T " + to + " N " + next + " S " + station );
     // if ( TDLog.LOG_DATA ) {
-    //   TDLog.Log( TDLog.LOG_DATA, "assign after: F<" + from + "> T<" + to + "> N<" + next + "> S<" + station + "> CS " + ( (mCurrentStationName==null)? "null" : mCurrentStationName ) );
+    //   TDLog.Log( TDLog.LOG_DATA, "assign after: F<" + from + "> T<" + to + "> N<" + next + "> S<" + station + "> CS " + ( (current_station==null)? "null" : current_station ) );
     //   StringBuilder sb = new StringBuilder();
     //   for ( String st : sts ) sb.append(st + " " );
     //   TDLog.Log(TDLog.LOG_DATA, "set " + sb.toString() );
@@ -129,7 +130,11 @@ class StationNameDefault extends StationName
     }
    
     // processing skipped ahots ...
-    if ( unassigned.size() > 0 ) ret |= assignStations( unassigned, sts );
+    if ( unassigned.size() > 0 ) {
+      ret |= assignStations( unassigned, sts );
+    } else {
+      mCurrentStationName = null;
+    }
     return ret;
   }
 
@@ -166,6 +171,8 @@ class StationNameDefault extends StationName
     boolean ret = false;
     boolean forward_shots = ( survey_stations == 1 );
     boolean shot_after_splay = StationPolicy.mShotAfterSplays;
+    String  current_station  = mCurrentStationName; // steal current station name
+    mCurrentStationName = null;
 
     // // TDLog.Log( TDLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
 
@@ -174,10 +181,10 @@ class StationNameDefault extends StationName
                                    : DistoXStationName.mSecondStation;
     String to   = ( forward_shots )? DistoXStationName.mSecondStation   // next TO station
                                    : DistoXStationName.mInitialStation;
-    String station = ( mCurrentStationName != null )? mCurrentStationName
+    String station = ( current_station != null )? current_station;
                    : (shot_after_splay ? from : "");  // splays station
 
-    // TDLog.Log( TDLog.LOG_DATA, "F<" + from + "> T<" + to + "> S<" + station + "> CS " + ( (mCurrentStationName==null)? "null" : mCurrentStationName ) );
+    // TDLog.Log( TDLog.LOG_DATA, "F<" + from + "> T<" + to + "> S<" + station + "> CS " + ( (current_station==null)? "null" : current_station ) );
     // if ( TDLog.LOG_DATA ) {
     //   StringBuilder sb = new StringBuilder();
     //   for ( String st : sts ) sb.append(st + " " );
@@ -200,11 +207,11 @@ class StationNameDefault extends StationName
             if ( prev.isRelativeDistance( blk ) ) {
               if ( nrLegShots == 0 ) {
                 // checkCurrentStationName
-                if ( mCurrentStationName != null ) {
+                if ( current_station != null ) {
                   if ( forward_shots ) { 
-                    from = mCurrentStationName;
+                    from = current_station;
                   } else if ( survey_stations == 2 ) {
-                    to = mCurrentStationName;
+                    to = current_station;
                   }
                 }
                 nrLegShots = 2; // prev and this shot
@@ -214,7 +221,7 @@ class StationNameDefault extends StationName
               }
               if ( nrLegShots == TDSetting.mMinNrLegShots ) {
                 legFeedback( );
-                mCurrentStationName = null;
+                current_station = null;
                 // TDLog.Log( TDLog.LOG_DATA, "PREV " + prev.mId + " nrLegShots " + nrLegShots + " set PREV " + from + "-" + to );
                 setLegName( prev, from, to );
                 ret = true;
@@ -252,7 +259,7 @@ class StationNameDefault extends StationName
             to   = from;
             to   = DistoXStationName.incrementName( to, sts );
             logJump( blk, from, to, sts );
-            if ( mCurrentStationName == null ) {
+            if ( current_station == null ) {
               if ( blk.isDistoXBacksight() ) {
                 station = shot_after_splay ? blk.mFrom
                                            : blk.mTo;
@@ -260,7 +267,7 @@ class StationNameDefault extends StationName
                 station = shot_after_splay ? blk.mTo    // 1,   1, 1-2, [ 2, 2, ..., 2-3 ] ...
                                            : blk.mFrom; // 1-2, 1, 1,   [ 2-3, 2, 2, ... ] ...
               }
-            } // otherwise station = mCurrentStationName
+            } // otherwise station = current_station
           } else { // backward shots: ..., 1-0, 2-1 ==> from=Next(2)=3 to=2 ie 3-2
             to = blk.isDistoXBacksight()? blk.mTo : blk.mFrom;
             from = to;
@@ -285,6 +292,7 @@ class StationNameDefault extends StationName
         prev = blk;
       }
     }
+    mCurrentStationName = current_station; // reset current station name
     return ret;
   }
 

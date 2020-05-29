@@ -11,6 +11,8 @@
  */
 package com.topodroid.tdm;
 
+import com.topodroid.utils.TDLog;
+
 import android.content.Context;
 
 import android.graphics.Matrix;

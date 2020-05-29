@@ -61,7 +61,13 @@ class StationName
 
   // ----------------------------------------------------------------
   // current station(s)
-  protected static String mCurrentStationName = null;
+  protected static volatile String mCurrentStationName = null;
+
+  static String getCurrentStationName() { return mCurrentStationName; }
+
+  static boolean isCurrentStationName( String name ) { return name.equals(mCurrentStationName); }
+
+  static void clearCurrentStation() { mCurrentStationName = null; }
 
   static boolean setCurrentStationName( String name ) 
   { 
@@ -76,10 +82,19 @@ class StationName
   // unused
   // static void resetCurrentStationName( String name ) { mCurrentStationName = name; }
 
-  static String getCurrentStationName() { return mCurrentStationName; }
+  static void resetCurrentOrLastStation( DataHelper data, long sid )
+  {
+    if ( mCurrentStationName == null ) mCurrentStationName = getLastStationName( data, sid );
+  }
 
-  static boolean isCurrentStationName( String name ) { return name.equals(mCurrentStationName); }
-
+  static String getCurrentOrLastStation( DataHelper data, long sid )
+  {
+    return ( mCurrentStationName != null )? mCurrentStationName : getLastStationName( data, sid );
+  }
+  
+  // String getFirstStation( ) { return mData.getFirstStation( mSid ); }
+  static String getFirstStation( DataHelper data, long sid ) { return data.getFirstStation( sid ); }
+  
   // used only to reset/getCurrentOrLastStation name
   static private String getLastStationName( DataHelper data, long sid )
   {
@@ -96,21 +111,6 @@ class StationName
     }
     // return TDString.ZERO;
   }
-
-  static void resetCurrentOrLastStation( DataHelper data, long sid )
-  {
-    if ( mCurrentStationName == null ) mCurrentStationName = getLastStationName( data, sid );
-  }
-
-  static String getCurrentOrLastStation( DataHelper data, long sid )
-  {
-    return ( mCurrentStationName != null )? mCurrentStationName : getLastStationName( data, sid );
-  }
-  
-  // String getFirstStation( ) { return mData.getFirstStation( mSid ); }
-  static String getFirstStation( DataHelper data, long sid ) { return data.getFirstStation( sid ); }
-  
-  static void clearCurrentStation() { mCurrentStationName = null; }
 
   // ------------------------------------------------------------------------------------------------
   // setting the leg extend automatically, sets also stretch to 0

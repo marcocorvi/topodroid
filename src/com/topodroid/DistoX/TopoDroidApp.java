@@ -1316,7 +1316,10 @@ public class TopoDroidApp extends Application
   boolean assignStationsAll(  List< DBlock > list )
   { 
     Set<String> sts = mData.selectAllStations( TDInstance.sid );
-    // Log.v("DistoX-DATA", "assign stations all: size " + list.size() );
+    int sz = list.size();
+    if ( sz == 0 ) return false;
+    TDLog.Log( TDLog.LOG_DATA, "assign stations all: size " + sz + " blk[0] id " + list.get(0).mId );
+
     // if ( TDSetting.mSurveyStations < 0 ) return;
     if ( StationPolicy.doTopoRobot() ) {
       // long millis = SystemClock.uptimeMillis(); // TROBOT_MILLIS
