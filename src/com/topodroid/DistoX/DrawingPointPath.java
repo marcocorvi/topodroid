@@ -586,7 +586,7 @@ public class DrawingPointPath extends DrawingPath
       x = vv.x;
       y = vv.y;
     }
-    pw.format( Locale.US, "POINT %s %.1f %.3f %.3f %.3f\n", name, mOrientation, x, -y, -v );
+    pw.format( Locale.US, "POINT %s %.1f %f %f %f\n", name, mOrientation, x, -y, -v );
   }
 
 }

@@ -1364,8 +1364,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_auto_xsections_summary">Add x-sections automatically to save/export [csx/svg/dxf/xvi]</string>
   <string name="pref_saved_stations_title">Saved stations</string>
   <string name="pref_saved_stations_summary">Color saved stations orange</string>
-  <string name="pref_always_update_title">Splay refresh</string>
-  <string name="pref_always_update_summary">Refresh drawing window also at splays</string>
+  <string name="pref_legonly_update_title">Legs-only refresh</string>
+  <string name="pref_legonly_update_summary">Redraw midline only on legs download</string>
   <string name="pref_loopClosure_title">Loop closure</string>
   <string name="pref_loopClosure_summary">Loop closure-error compensation</string>
   <!-- UNUSED string name="pref_splayExtend_title">Estimate splay extend</string -->

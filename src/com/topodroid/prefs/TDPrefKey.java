@@ -1442,7 +1442,7 @@ public class TDPrefKey
     // "DISTOX_BACKUPS_CLEAR",
     "DISTOX_AUTO_XSECTIONS",  // automatically add xsections on export/save
     "DISTOX_SAVED_STATIONS",  // whether to color saved stations
-    "DISTOX_ALWYAS_UPDATE",   // whether to update drawing windows at every shot
+    "DISTOX_LEGONLY_UPDATE",   // whether to update drawing windows at every shot
     "DISTOX_WITH_LEVELS",    
     null
   };
@@ -1461,7 +1461,7 @@ public class TDPrefKey
     // R.string.pref_backups_clear_title,
     R.string.pref_auto_xsections_title,
     R.string.pref_saved_stations_title,
-    R.string.pref_always_update_title,
+    R.string.pref_legonly_update_title,
     R.string.pref_with_levels_title,
     -1
   };
@@ -1480,7 +1480,7 @@ public class TDPrefKey
     // R.string.pref_backups_clear_summary,
     R.string.pref_auto_xsections_summary,
     R.string.pref_saved_stations_summary,
-    R.string.pref_always_update_summary,
+    R.string.pref_legonly_update_summary,
     R.string.pref_with_levels_summary,
     -1
   };

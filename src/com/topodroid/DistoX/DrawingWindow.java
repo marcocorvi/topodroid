@@ -825,8 +825,7 @@ public class DrawingWindow extends ItemDrawer
   {
     DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null, -1 );
     dpath.setPathPaint( BrushManager.highlightPaint );
-    // DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2, xoff, yoff );
-    DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2 );
+    DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2 ); // xoff, yoff );
     mDrawingSurface.setNorthPath( dpath );
     // mLastLinePath = null;
   }
@@ -1007,7 +1006,7 @@ public class DrawingWindow extends ItemDrawer
       startSaveTdrTask( mType, PlotSave.SAVE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP );
       popInfo();
       doStart( false, -1 );
-      recomputeReferences( mZoom );
+      recomputeReferences( mNum, mZoom );
     } else {
       if ( doubleBack ) {
         if ( doubleBackToast != null ) doubleBackToast.cancel();
@@ -1199,14 +1198,14 @@ public class DrawingWindow extends ItemDrawer
   }
 
   // this is called only for PLAN / PROFILE
-  private boolean computeReferences( int type, String name,
+  private boolean computeReferences( TDNum num, int type, String name,
                                   // float xoff, float yoff,
                                   float zoom, boolean can_toast )
   {
     // Log.v("DistoX", "compute references() zoom " + zoom + " landscape " + mLandscape );
     if ( ! PlotInfo.isSketch2D( type ) ) return false;
-    mDrawingSurface.clearReferences( type );
-    // Log.v("DistoX-C", "computeReference " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    if ( num == null ) return false;
+
     mLastLinePath = null;
 
     // float xoff = 0; float yoff = 0;
@@ -1214,32 +1213,37 @@ public class DrawingWindow extends ItemDrawer
     float cosp = 0;
     float sinp = 0;
 
+    float e1=-50, e2=50, s1=-50, s2=50;
+    int manager_type = DrawingSurface.DRAWING_PLAN;
     if ( type == PlotInfo.PLOT_PLAN ) {
-      mDrawingSurface.setManager( DrawingSurface.DRAWING_PLAN, type );
-      if ( mNum != null ) {
-        DrawingUtil.addGrid( mNum.surveyEmin(), mNum.surveyEmax(), mNum.surveySmin(), mNum.surveySmax(), mDrawingSurface );
-      } else {
-        DrawingUtil.addGrid( -50, 50, -50 , 50, mDrawingSurface );
-      }
-      mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_PLAN, type );
+      manager_type = DrawingSurface.DRAWING_PLAN;
+      e1 = num.surveyEmin();
+      e2 = num.surveyEmax();
+      s1 = num.surveySmin();
+      s2 = num.surveySmax();
     } else {
-      mDrawingSurface.setManager( DrawingSurface.DRAWING_PROFILE, type );
-      if ( mNum != null ) {
-        DrawingUtil.addGrid( mNum.surveyHmin(), mNum.surveyHmax(), mNum.surveyVmin(), mNum.surveyVmax(), mDrawingSurface );
-      } else {
-        DrawingUtil.addGrid( -50, 50, -50 , 50, mDrawingSurface );
-      }
-      mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_PROFILE, type );
-      if ( type == PlotInfo.PLOT_PROJECTED ) {
-        cosp = TDMath.cosd( mPlot2.azimuth );
-        sinp = TDMath.sind( mPlot2.azimuth );
-      }
+      manager_type = DrawingSurface.DRAWING_PROFILE;
+      e1 = num.surveyHmin();
+      e2 = num.surveyHmax();
+      s1 = num.surveyVmin();
+      s2 = num.surveyVmax();
     }
-    if ( mNum == null ) return false;
 
-    List< NumStation > stations = mNum.getStations();
-    List< NumShot > shots       = mNum.getShots();
-    List< NumSplay > splays     = mNum.getSplays();
+    mDrawingSurface.newReferences( manager_type, type );
+    // mDrawingSurface.clearReferences( type );
+    // mDrawingSurface.setManager( manager_type, type );
+
+    DrawingUtil.addGrid( e1, e2, s1, s2, mDrawingSurface );
+    mDrawingSurface.addScaleRef( manager_type, type );
+
+    if ( type == PlotInfo.PLOT_PROJECTED ) {
+      cosp = TDMath.cosd( mPlot2.azimuth );
+      sinp = TDMath.sind( mPlot2.azimuth );
+    }
+
+    List< NumStation > stations = num.getStations();
+    List< NumShot > shots       = num.getShots();
+    List< NumSplay > splays     = num.getSplays();
 
     String parent = ( TDInstance.xsections? null : name );
 
@@ -1340,14 +1344,16 @@ public class DrawingWindow extends ItemDrawer
       }
     }
 
+    mDrawingSurface.commitReferences();
+
     if ( can_toast ) {
-      if ( (! mNum.surveyAttached) && TDSetting.mCheckAttached ) {
-        if ( (! mNum.surveyExtend) && TDSetting.mCheckExtend && type == PlotInfo.PLOT_EXTENDED ) {
+      if ( (! num.surveyAttached) && TDSetting.mCheckAttached ) {
+        if ( (! num.surveyExtend) && TDSetting.mCheckExtend && type == PlotInfo.PLOT_EXTENDED ) {
           TDToast.makeWarn( R.string.survey_not_attached_extend );
         } else {
           TDToast.makeWarn( R.string.survey_not_attached );
         }
-      } else if ( (! mNum.surveyExtend) && TDSetting.mCheckExtend && type == PlotInfo.PLOT_EXTENDED ) {
+      } else if ( (! num.surveyExtend) && TDSetting.mCheckExtend && type == PlotInfo.PLOT_EXTENDED ) {
         TDToast.makeWarn( R.string.survey_not_extend );
       }
     }
@@ -2323,7 +2329,7 @@ public class DrawingWindow extends ItemDrawer
         if  ( tt >= 0 ) { // if failed to load x-section file
           popInfo();
           doStart( false, -1 );
-          recomputeReferences( mZoom );
+          recomputeReferences( mNum, mZoom );
           return;
         } else {
 	  finish();
@@ -2394,6 +2400,8 @@ public class DrawingWindow extends ItemDrawer
     TDVector V1 = new TDVector( - (float)Math.sin( ma ), (float)Math.cos( ma ), 0 );
     TDVector V2 = V0.cross( V1 );
 
+    mDrawingSurface.newReferences( DrawingSurface.DRAWING_SECTION, (int)mType );
+
     float dist = 0;
     DBlock blk = null;
     float xn = 0;  // X-North // Rotate as NORTH is upward
@@ -2459,7 +2467,7 @@ public class DrawingWindow extends ItemDrawer
             // Log.v("DistoX", "TT " + tt + " " + xtt + " " + xfrom + " " + xto );
             // makeXSectionLegPoint( xtt, ytt );
             DrawingSpecialPath path = new DrawingSpecialPath( DrawingSpecialPath.SPECIAL_DOT, DrawingUtil.toSceneX(xtt,ytt), DrawingUtil.toSceneY(xtt,ytt), DrawingLevel.LEVEL_DEFAULT, mDrawingSurface.scrapIndex() );
-            mDrawingSurface.addDrawingPath( path );
+            mDrawingSurface.addDrawingDotPath( path );
           }
         }
       } else { // if ( PlotInfo.isXSection( mType ) ) 
@@ -2518,6 +2526,8 @@ public class DrawingWindow extends ItemDrawer
     }
     mSectionSkip = cnt;
     // mDrawingSurface.setScaleBar( mCenter.x, mCenter.y ); // (90,160) center of the drawing
+
+    mDrawingSurface.commitReferences();
   }
 
   private boolean loadFiles( long type, List< DBlock > list )
@@ -2590,8 +2600,8 @@ public class DrawingWindow extends ItemDrawer
       List< PlotInfo > xsection_plan = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotInfo.PLOT_X_SECTION,  parent );
       List< PlotInfo > xsection_ext  = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotInfo.PLOT_XH_SECTION, parent );
 
-      computeReferences( mPlot2.type, mPlot2.name, mZoom, true );
-      computeReferences( mPlot1.type, mPlot1.name, mZoom, false );
+      computeReferences( mNum, mPlot2.type, mPlot2.name, mZoom, true );
+      computeReferences( mNum, mPlot1.type, mPlot1.name, mZoom, false );
       if ( mNum == null ) {
         TDToast.makeBad( R.string.survey_no_data_reduction );
       }
@@ -2828,7 +2838,7 @@ public class DrawingWindow extends ItemDrawer
       mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
       // if ( mNum != null ) { // always true
         mDrawingSurface.clearShotsAndStations( (int)mType );
-        computeReferences( (int)mType, mName, TopoDroidApp.mScaleFactor, false );
+        computeReferences( mNum, (int)mType, mName, TopoDroidApp.mScaleFactor, false );
         mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
         modified();
       // }
@@ -4307,7 +4317,7 @@ public class DrawingWindow extends ItemDrawer
         // Log.v("DistoX-HIDE", "clear shots and stations" );
         mDrawingSurface.clearShotsAndStations( );
         mNum.setStationHidden( st_name, h );
-        recomputeReferences( mZoom );
+        recomputeReferences( mNum, mZoom );
       }
     }
     //  mNum.setStationHidden( st_name, (hidden? -1 : +1) ); // if hidden un-hide(-1), else hide(+1)
@@ -4367,7 +4377,7 @@ public class DrawingWindow extends ItemDrawer
         // Log.v("DistoX-HIDE", "clear shots and stations" );
         mDrawingSurface.clearShotsAndStations( );
         mNum.setStationBarrier( st_name, h );
-        recomputeReferences( mZoom );
+        recomputeReferences( mNum, mZoom );
       }
     }
    
@@ -5011,7 +5021,7 @@ public class DrawingWindow extends ItemDrawer
       TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], mBMextend );
       mDrawingSurface.setManager( DrawingSurface.DRAWING_PROFILE, (int)mType );
       if ( compute && mNum != null ) {
-        computeReferences( mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, false );
+        computeReferences( mNum, mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, false );
       }
       resetReference( mPlot2 );
       if ( TopoDroidApp.mShotWindow != null ) {
@@ -5033,7 +5043,7 @@ public class DrawingWindow extends ItemDrawer
       TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], mBMplan );
       mDrawingSurface.setManager( DrawingSurface.DRAWING_PLAN, (int)mType );
       if ( compute && mNum != null ) {
-        computeReferences( mPlot1.type, mPlot1.name, TopoDroidApp.mScaleFactor, false );
+        computeReferences( mNum, mPlot1.type, mPlot1.name, TopoDroidApp.mScaleFactor, false );
       }
       resetReference( mPlot1 );
       if ( TopoDroidApp.mShotWindow != null ) {
@@ -5621,6 +5631,7 @@ public class DrawingWindow extends ItemDrawer
     {
       TDNum num = mNum;
       TDLog.Log( TDLog.LOG_IO, "export plot type " + type + " with extension " + ext );
+      // Log.v( "DistoX-C3D", "export plot type " + type + " with extension " + ext );
       if ( PlotInfo.isAnySection( type ) ) { 
 	DrawingCommandManager manager = mDrawingSurface.getManager( type );
 	String fullname = mFullName3;
@@ -5663,6 +5674,7 @@ public class DrawingWindow extends ItemDrawer
       } else if ( ext.equals("c3d") ) {
         String origin = num.getOriginStation();
         station = TDExporter.getGeolocalizedStation( mSid, mApp_mData, 1.0f, true, origin );
+        // Log.v( "DistoX-C3D", "save with ext: " + filename + " ext " + ext );
       }  
       SurveyInfo info  = mApp_mData.selectSurveyInfo( mSid );
       PlotInfo   plot  = null;
@@ -5671,6 +5683,7 @@ public class DrawingWindow extends ItemDrawer
         plot  = PlotInfo.isAnySection(type) ? mPlot3 : PlotInfo.isProfile( type )? mPlot2 : mPlot1;
         List<FixedInfo> fixeds = mApp_mData.selectAllFixed( mSid, TDStatus.NORMAL );
         if ( fixeds != null && fixeds.size() > 0 ) fixed = fixeds.get( 0 );
+        // Log.v("DistoX-C3D", "saving " + filename + " fixeds " + fixeds.size() );
       }
       new ExportPlotToFile( mActivity, info, plot, fixed, num, manager, type, filename, ext, toast, station ).execute();
     }
@@ -5770,23 +5783,18 @@ public class DrawingWindow extends ItemDrawer
   // called by updateBlockName and refreshDisplay
   private void doComputeReferences( boolean reset )
   {
-    // Log.v("DistoX-C", "doComputeRefenrences " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    // mLastLinePath = null; // not needed
     // Log.v("DistoX", "do Compute References() type " + mType );
     List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
     mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
-    // doMoveTo();
-    // if ( mNum != null ) { // alwayst true
-      if ( mType == (int)PlotInfo.PLOT_PLAN ) {
-        computeReferences( mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, true );
-        computeReferences( mPlot1.type, mPlot1.name, TopoDroidApp.mScaleFactor, false );
-        if ( reset ) resetReference( mPlot1 );
-      } else if ( PlotInfo.isProfile( mType ) ) {
-        computeReferences( mPlot1.type, mPlot1.name, TopoDroidApp.mScaleFactor, false );
-        computeReferences( mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, true );
-        if ( reset ) resetReference( mPlot2 );
-      }
-    // }
+    if ( mType == (int)PlotInfo.PLOT_PLAN ) {
+      computeReferences( mNum, mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, true );
+      computeReferences( mNum, mPlot1.type, mPlot1.name, TopoDroidApp.mScaleFactor, false );
+      if ( reset ) resetReference( mPlot1 );
+    } else if ( PlotInfo.isProfile( mType ) ) {
+      computeReferences( mNum, mPlot1.type, mPlot1.name, TopoDroidApp.mScaleFactor, false );
+      computeReferences( mNum, mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, true );
+      if ( reset ) resetReference( mPlot2 );
+    }
   }
 
   public void refreshDisplay( int nr, boolean toast )
@@ -5813,15 +5821,6 @@ public class DrawingWindow extends ItemDrawer
   private void updateDisplay( /* boolean compute, boolean reference */ ) // always called with true, false
   {
     // Log.v("DistoX-DATA", "update display() type " + mType );
-    // if ( compute ) {
-      // List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
-      // mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
-      // // doMoveTo();
-      // computeReferences( (int)mPlot1.type, mPlot1.name 0.0f, 0.0f, mApp.mScaleFactor, false );
-      // if ( mPlot2 != null ) {
-      //   computeReferences( (int)mPlot2.type, mPlot2.name 0.0f, 0.0f, mApp.mScaleFactor, false );
-      // }
-    // }
     if ( mType != (int)PlotInfo.PLOT_PLAN && ! PlotInfo.isProfile( mType ) ) {
       // FIXME_SK resetReference( mPlot3 );
       // Log.v("DistoX", "update display() type " + mType + " section skip " + mSectionSkip );
@@ -5829,22 +5828,9 @@ public class DrawingWindow extends ItemDrawer
       updateSplays( mApp.mSplayMode );
     } else {
       List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
-      mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
-      recomputeReferences( TopoDroidApp.mScaleFactor );
-      // if ( mType == (int)PlotInfo.PLOT_PLAN ) {
-      //   if ( mPlot2 != null ) {
-      //     computeReferences( (int)mPlot2.type, mPlot2.name, mApp.mScaleFactor, false );
-      //   }
-      //   computeReferences( (int)mPlot1.type, mPlot1.name, mApp.mScaleFactor, false );
-      //   // resetReference( mPlot1 ); // DATA_DOWNLOAD
-      // } else if ( PlotInfo.isProfile( mType ) ) {
-      //   computeReferences( (int)mPlot1.type, mPlot1.name, mApp.mScaleFactor, false );
-      //   if ( mPlot2 != null ) {
-      //     computeReferences( (int)mPlot2.type, mPlot2.name, mApp.mScaleFactor, false );
-      //   }
-      //   // resetReference( mPlot2 ); // DATA_DOWNLOAD
-      // } else {
-      // }
+      TDNum num = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
+      recomputeReferences( num, TopoDroidApp.mScaleFactor );
+      mNum = num;
     }
   }
 
@@ -5876,18 +5862,18 @@ public class DrawingWindow extends ItemDrawer
   }
 
   // called when the data reduction changes (hidden/barrier)
-  private void recomputeReferences( float zoom )
+  private void recomputeReferences( TDNum num, float zoom )
   {
-    if ( mNum == null ) return;
+    if ( num == null ) return;
     // Log.v("DistoX-C", "recomputeRefenrences " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     // mLastLinePath = null; // not needed
 
     if ( mType == (int)PlotInfo.PLOT_PLAN ) {
-      if ( mPlot2 != null ) computeReferences( mPlot2.type, mPlot2.name, zoom, false );
+      if ( mPlot2 != null ) computeReferences( num, mPlot2.type, mPlot2.name, zoom, false );
     } else if ( PlotInfo.isProfile( mType ) ) {
-      computeReferences( mPlot1.type, mPlot1.name, zoom, false );
+      computeReferences( num, mPlot1.type, mPlot1.name, zoom, false );
     }
-    computeReferences( (int)mType, mName, zoom, false );
+    computeReferences( num, (int)mType, mName, zoom, false );
   }
 
   @Override
@@ -6025,11 +6011,7 @@ public class DrawingWindow extends ItemDrawer
           super.onBackPressed();
         }
       } else if ( p++ == pos ) { // EXPORT
-        if ( TDLevel.overExpert ) {
-          new ExportDialog( mActivity, this, TDConst.mPlotExportTypesTest, R.string.title_plot_save ).show();
-        } else {
-          new ExportDialog( mActivity, this, TDConst.mPlotExportTypes, R.string.title_plot_save ).show();
-        }
+        new ExportDialog( mActivity, this, TDConst.mPlotExportTypes, R.string.title_plot_save ).show();
       } else if ( p++ == pos ) { // INFO / AREA
         if ( PlotInfo.isAnySection( mType ) ) {
           float area = mDrawingSurface.computeSectionArea() / (DrawingUtil.SCALE_FIX * DrawingUtil.SCALE_FIX);
@@ -6152,6 +6134,7 @@ public class DrawingWindow extends ItemDrawer
       case TDConst.DISTOX_EXPORT_XVI: saveWithExt( mType, "xvi" ); break; // , true ); break;
       case TDConst.DISTOX_EXPORT_TNL: saveWithExt( mType, "xml" ); break; // , true ); break;
       case TDConst.DISTOX_EXPORT_C3D: 
+        // Log.v("DistoX-C3D", "export c3d");
         if ( ! PlotInfo.isAnySection( mType ) ) saveWithExt( mType, "c3d" );
         break;
     }

@@ -2155,7 +2155,7 @@ class DrawingIO
   )
   {
     // XYZefoffsets are on the header-line
-    pw.format("SCRAP %s %d %d %.2f %.2f %.2f\n", scrap_name, type, proj_dir, xoff, yoff, zoff );
+    pw.format(Locale.US, "SCRAP %s %d %d %f %f %f\n", scrap_name, type, proj_dir, xoff, yoff, zoff );
     // TODO export points library
     synchronized( scraps ) {
       for ( Scrap scrap : scraps ) {
@@ -2184,17 +2184,17 @@ class DrawingIO
     String fixed_station = fix.name;
     NumStation fixed = num.getStation( fix.name );
     if ( fixed == null ) { // cannot export Cave3D
-      Log.v("DistoX-C3D", "cannot export: fixed null");
+      Log.e("DistoX-C3D", "cannot export: fixed null");
       return false;
     }
-    Log.v("DistoX-C3D", "Fixed " + fixed.name + ": " + fixed.e + " " + fixed.s + " " + fixed.v );
+    // Log.v("DistoX-C3D", "Fixed " + fixed.name + ": " + fixed.e + " " + fixed.s + " " + fixed.v );
     if ( fix.cs != null ) {
-      Log.v("DistoX-C3D", "CS " + fix.cs_lng + " " + fix.cs_lat + " " + fix.cs_alt );
+      // Log.v("DistoX-C3D", "CS " + fix.cs_lng + " " + fix.cs_lat + " " + fix.cs_alt );
       xoff = (float)(fix.cs_lng - fixed.e);
       yoff = (float)(fix.cs_lat + fixed.s);
       zoff = (float)(fix.cs_alt + fixed.v);
     } else {
-      Log.v("DistoX-C3D", "WGS84 " + fix.lng + " " + fix.lat + " " + fix.alt );
+      // Log.v("DistoX-C3D", "WGS84 " + fix.lng + " " + fix.lat + " " + fix.alt );
       xoff = (float)(fix.lng - fixed.e);
       yoff = (float)(fix.lat + fixed.s);
       zoff = (float)(fix.alt + fixed.v);

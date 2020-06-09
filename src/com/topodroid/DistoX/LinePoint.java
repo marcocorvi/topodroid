@@ -258,7 +258,7 @@ public class LinePoint extends Point2D
       x0 = vv.x;
       y0 = vv.y;
     }
-    pw.format( Locale.US, "%.3f %.3f %.3f\n", x0, -y0, -v0 );
+    pw.format( Locale.US, "%f %f %f\n", x0, -y0, -v0 );
   }
 
 }

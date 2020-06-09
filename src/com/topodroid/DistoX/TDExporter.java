@@ -566,6 +566,25 @@ class TDExporter
   // KML export Keyhole Markup Language
   //   NOTE shot flags are ignored
 
+  /* ref. T. Soler, L.D. Hothem
+   *      Coordinate systems usd in geodesy: basic definitions and concepts, 1988
+   */
+  static private final double EARTH_A = 6378137;
+  static private final double EARTH_B = 6356752;
+  static private final double EARTH_C = Math.sqrt( EARTH_A * EARTH_A - EARTH_B * EARTH_B );
+  static private final double EARTH_E = EARTH_C / EARTH_A;
+  // F = 1 - B/A, flattening
+  // 2 * F - F*F = ( 1 + B/A )*( 1 - B/A ) 
+  //             = (1 - B^2/A^2) 
+  //             = C^2 / A^2
+  //             = E^2
+  static private final double EARTH_E2 = EARTH_E * EARTH_E;
+  static private final double EARTH_1E2 = 1.0 - EARTH_E2; // (1- e^2)
+  // double s = Math.sin( latitude * Math.PI/180 );
+  // double W = Math.sqrt( 1 - EARTH_E2 * s * s );
+  // RADIUS_WE = EARTH_A / W; // principal radius of curvature in the prime vertical plane
+  // RADIUS_NS = EARTH_A * EARTH_1E2 / W;
+
   static private final float EARTH_RADIUS1 = (float)(6378137 * Math.PI / 180.0f); // semimajor axis [m]
   static private final float EARTH_RADIUS2 = (float)(6356752 * Math.PI / 180.0f);
   static private float mERadius;

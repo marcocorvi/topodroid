@@ -159,14 +159,14 @@ class CalibCBlock
   {
     g.normalize();
     m.normalize();
-    TDVector e = new TDVector( 1.0f, 0.0f, 0.0f );
-    TDVector y = m.cross( g );
-    TDVector x = g.cross( y );
+    TDVector e = new TDVector( 1.0f, 0.0f, 0.0f ); // laser axis (DistoX frame)
+    TDVector y = m.cross( g ); // west (DistoX frame)
+    TDVector x = g.cross( y ); // north 
     y.normalize();
     x.normalize();
-    float ex = e.dot( x );
-    float ey = e.dot( y );
-    float ez = e.dot( g );
+    float ex = e.dot( x ); // north component
+    float ey = e.dot( y ); // west component
+    float ez = e.dot( g ); // downward component
     mBearing =   TDMath.atan2( -ey, ex );
     mClino   = - TDMath.atan2( ez, (float)Math.sqrt(ex*ex+ey*ey) );
     mRoll    =   TDMath.atan2( g.y, g.z );

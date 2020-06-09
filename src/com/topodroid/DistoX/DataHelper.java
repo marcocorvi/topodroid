@@ -4424,7 +4424,7 @@ public class DataHelper extends DataSetObservable
        if (cursor.moveToFirst()) {
          do { // values in the order of the fields of the table
            pw.format(Locale.US,
-             "INSERT into %s values( %d, %d, \"%s\", %.6f, %.6f, %.2f, %.2f \"%s\", %d, \"%s\", %.6f, %.6f, %.1f, %d, %d );\n",
+             "INSERT into %s values( %d, %d, \"%s\", %.6f, %.6f, %.2f, %.2f \"%s\", %d, %d, \"%s\", %.6f, %.6f, %.1f, %d, %d );\n",
              FIXED_TABLE,
              sid,
              cursor.getLong(0),
@@ -4435,6 +4435,7 @@ public class DataHelper extends DataSetObservable
              cursor.getDouble(5),
              cursor.getString(6),
              cursor.getLong(7),   // status
+             cursor.getLong(8),   // source
              cursor.getString(9), // cs_name
              cursor.getDouble(10),
              cursor.getDouble(11),

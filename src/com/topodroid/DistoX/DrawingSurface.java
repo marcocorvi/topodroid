@@ -185,6 +185,17 @@ class DrawingSurface extends SurfaceView
     }
   }
 
+  void newReferences( int mode, int type )
+  {
+    setManager( mode, type );
+    commandManager.newReferences();
+  }
+
+  void commitReferences()
+  {
+    commandManager.commitReferences();
+  }
+
 
   // -----------------------------------------------------
 
@@ -492,7 +503,7 @@ class DrawingSurface extends SurfaceView
         }
       }
     }
-    commandManager.addStation( st, selectable ); // NOTE make this always true if you want station selectable on all sections
+    commandManager.addTmpStation( st, selectable ); // NOTE make this always true if you want station selectable on all sections
     return st;
   }
 
@@ -504,7 +515,7 @@ class DrawingSurface extends SurfaceView
     // NOTE No station_XSection in X-Sections
     DrawingStationName st = new DrawingStationName( name, x, y, scrapIndex() );
     st.setPathPaint( BrushManager.fixedStationPaint );
-    commandManager.addStation( st, false ); // NOTE make this true for selectable station in all sections
+    commandManager.addTmpStation( st, false ); // NOTE make this true for selectable station in all sections
     return st;
   }
 
@@ -521,9 +532,9 @@ class DrawingSurface extends SurfaceView
   void addFixedPath( DrawingPath path, boolean splay, boolean selectable )
   {
     if ( splay ) {
-      commandManager.addSplayPath( path, selectable );
+      commandManager.addTmpSplayPath( path, selectable );
     } else {
-      commandManager.addLegPath( path, selectable );
+      commandManager.addTmpLegPath( path, selectable );
     }
     // commandManager.addFixedPath( path, selectable );
   }
@@ -538,14 +549,16 @@ class DrawingSurface extends SurfaceView
   public void addSecondReference( float x, float y ) { commandManager.addSecondReference( x, y ); }
 
   // k : grid type 1, 10, 100
-  public void addGridPath( DrawingPath path, int k ) { commandManager.addGrid( path, k ); }
+  public void addGridPath( DrawingPath path, int k ) { commandManager.addTmpGrid( path, k ); }
 
   public void addDrawingPath (DrawingPath drawingPath) { commandManager.addCommand(drawingPath); }
 
+  // public void addDrawingDotPath (DrawingPath drawingPath) { commandManager.addDotCommand(drawingPath); }
+  public void addDrawingDotPath (DrawingPath drawingPath) { commandManager.addCommand(drawingPath); }
+
   public void addScrapOutlinePath( DrawingLinePath path ) { commandManager.addScrapOutlinePath( path ); }
 
-  public void addXSectionOutlinePath( DrawingOutlinePath path )
-  { commandManager.addXSectionOutlinePath( path ); }
+  public void addXSectionOutlinePath( DrawingOutlinePath path ) { commandManager.addXSectionOutlinePath( path ); } 
 
   // return true if point has been deleted
   void deleteSectionPoint( String scrap_name )

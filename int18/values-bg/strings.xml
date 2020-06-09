@@ -1334,8 +1334,8 @@
   <!-- TODO string name="pref_auto_xsections_summary">Add x-sections automatically to save/export [csx/svg/dxf/xvi]</string -->
   <!-- TODO string name="pref_saved_stations_title">Saved stations</string -->
   <!-- TODO string name="pref_saved_stations_summary">Color saved stations orange</string -->
-  <!-- TODO string name="pref_always_update_title">Splay refresh</string -->
-  <!-- TODO string name="pref_always_update_summary">Refresh drawing window also at splays</string -->
+  <!-- TODO string name="pref_legonly_update_title">Legs-only refresh</string -->
+  <!-- TODO string name="pref_legonly_update_summary">Redraw midline only on legs download</string -->
   <string name="pref_loopClosure_title">Затваряне на полигони</string>
   <string name="pref_loopClosure_summary">Дали да се корегира грешката при затваряне на полигони</string>
   <!-- UNUSED string name="pref_splayExtend_title">Разгъване на странични отсечки</string -->

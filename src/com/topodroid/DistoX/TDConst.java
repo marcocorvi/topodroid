@@ -101,18 +101,7 @@ public class TDConst
       "PNG",
       "XVI",
       "Tunnel",
-  };
-
-  public static final String[] mPlotExportTypesTest = {
-      "Therion",
-      "cSurvey",
-      "DXF",
-      "SVG",
-      "SHP",
-      "PNG",
-      "XVI",
-      "Tunnel",
-      "Cave3D",
+      "Cave3D"
   };
 
   private static final int[] mPlotExportIndex = {

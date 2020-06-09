@@ -88,7 +88,7 @@ public class ExportDialog extends MyDialog
   @Override
   public void onClick(View v) 
   {
-    // Log.v("DistoX-EXPORT", "Selected " + mSelected );
+    // Log.v("DistoX-C3D", "Selected " + mSelected );
     Button b = (Button)v;
     if ( b == mBtnOk && mSelected != null ) {
       mParent.doExport( mSelected );

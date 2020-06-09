@@ -162,6 +162,7 @@ public class TDPath
   final static Object mCommandsLock  = new Object();
   final static Object mStationsLock  = new Object();
   final static Object mShotsLock     = new Object();
+  final static Object mGridsLock     = new Object();
   // final static Object mFixedsLock    = new Object();
   // final static Object mSelectedLock  = new Object();
 

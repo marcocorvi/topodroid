@@ -51,23 +51,34 @@ class DrawingCommandManager
   private RectF mBBox;
   boolean mIsExtended = false;
 
-  private DrawingPath mNorthLine;
   private DrawingPath mFirstReference;
   private DrawingPath mSecondReference;
 
-  final private List< DrawingPath >    mGridStack1;
-  final private List< DrawingPath >    mGridStack10;
-  final private List< DrawingPath >    mGridStack100;
-
+  private DrawingPath mNorthLine;
   private DrawingScaleReference mScaleRef; /*[AR] this is the instance of scale reference line*/
-
-  final private List< DrawingPath >        mLegsStack;
-  final private List< DrawingPath >        mSplaysStack;
+  private List< DrawingPath >        mGridStack1;
+  private List< DrawingPath >        mGridStack10;
+  private List< DrawingPath >        mGridStack100;
+  private List< DrawingPath >        mLegsStack;
+  private List< DrawingPath >        mSplaysStack;
   // private List< DrawingPath >     mHighlight;  // highlighted path
-  final private List< DrawingStationName > mStations;    // survey stations
-  // final private List< DrawingFixedName >   mFixeds;      // survey stations
-  final private List< DrawingLinePath >    mPlotOutline; // scrap outline
+  private List< DrawingStationName > mStations;    // survey stations
+  // private List< DrawingFixedName >   mFixeds;      // survey stations
+
+  private List< DrawingLinePath >    mPlotOutline; // scrap outline
   private List< DrawingOutlinePath > mXSectionOutlines;  // xsections outlines
+
+  // buffer references
+  private List< DrawingPath >        mTmpGridStack1   = null;
+  private List< DrawingPath >        mTmpGridStack10  = null;
+  private List< DrawingPath >        mTmpGridStack100 = null;
+  private List< DrawingPath >        mTmpLegsStack    = null;
+  private List< DrawingPath >        mTmpSplaysStack  = null;
+  private List< DrawingStationName > mTmpStations     = null;    // survey stations
+  // private List< DrawingLinePath >    mTmpPlotOutline; // scrap outline
+  // private List< DrawingOutlinePath > mTmpXSectionOutlines;  // xsections outlines
+
+
 
   private int mScrapIdx = 0; // scrap index
   private List< Scrap > mScraps;
@@ -101,10 +112,10 @@ class DrawingCommandManager
     mGridStack100 = Collections.synchronizedList(new ArrayList< DrawingPath >());
     mLegsStack    = Collections.synchronizedList(new ArrayList< DrawingPath >());
     mSplaysStack  = Collections.synchronizedList(new ArrayList< DrawingPath >());
+    mStations     = Collections.synchronizedList(new ArrayList< DrawingStationName >());
     mPlotOutline  = Collections.synchronizedList(new ArrayList< DrawingLinePath >());
     mXSectionOutlines = Collections.synchronizedList(new ArrayList< DrawingOutlinePath >());
-    mStations     = Collections.synchronizedList(new ArrayList< DrawingStationName >());
-    // mFixeds       = Collections.synchronizedList(new ArrayList< DrawingFixedName >());
+
     mPlotName     = plot_name;
     mScraps       = Collections.synchronizedList(new ArrayList< Scrap >());
     mCurrentScrap = new Scrap( 0, mPlotName );
@@ -187,8 +198,6 @@ class DrawingCommandManager
   DrawingStationName getCurrentStationName( ) { return mCurrentStationName; }
 
   // ----------------------------------------------------------------
-  // DrawingPath              getNorth()        { return mNorthLine;    }
-
   // used by DrawingDxf and DrawingSvg, and exportAsCsx
   // return a copy of the drawing objects
   List< DrawingPath > getCommands()
@@ -337,7 +346,7 @@ class DrawingCommandManager
   // from ICanvasCommand
   public void flipXAxis( float z )
   {
-    synchronized( mGridStack1 ) {
+    synchronized( TDPath.mGridsLock ) {
       flipXAxes( mGridStack1 );
       if ( mNorthLine != null ) mNorthLine.flipXAxis(z);
       flipXAxes( mGridStack10 );
@@ -399,9 +408,10 @@ class DrawingCommandManager
    */
   void addScaleRef( ) // boolean with_azimuth
   {
-    mScaleRef = new DrawingScaleReference( BrushManager.referencePaint, 
+    DrawingScaleReference scale_ref = new DrawingScaleReference( BrushManager.referencePaint, 
       new Point(20,-(int)(20+40*Float.parseFloat( TDInstance.getResources().getString( R.string.dimmy ) ) )),
       0.33f ); // with_azimuth
+    synchronized ( TDPath.mGridsLock ) { mScaleRef = scale_ref; }
   }
 
   // void debug()
@@ -435,7 +445,7 @@ class DrawingCommandManager
   void clearReferences()
   {
     // Log.v("DistoX", "clear references");
-    synchronized( mGridStack1 ) {
+    synchronized( TDPath.mGridsLock ) {
       mNorthLine       = null;
       mFirstReference  = null;
       mSecondReference = null;
@@ -450,11 +460,67 @@ class DrawingCommandManager
       mSplaysStack.clear();
       
     }
-    synchronized( mPlotOutline ) { mPlotOutline.clear(); }
+    synchronized( mPlotOutline )            { mPlotOutline.clear(); }
     synchronized( TDPath.mXSectionsLock   ) { mXSectionOutlines.clear(); }
     synchronized( TDPath.mStationsLock )    { mStations.clear(); }
     // synchronized( TDPath.mFixedsLock   )    { mFixeds.clear(); }
     syncClearSelected();
+  }
+
+  void clearTmpReferences()
+  {
+    // Log.v("DistoX", "clear references");
+    synchronized( TDPath.mGridsLock ) {
+      mNorthLine       = null;
+      mFirstReference  = null;
+      mSecondReference = null;
+      mScaleRef = null;
+    }
+    mTmpGridStack1   = Collections.synchronizedList(new ArrayList< DrawingPath >());
+    mTmpGridStack10  = Collections.synchronizedList(new ArrayList< DrawingPath >());
+    mTmpGridStack100 = Collections.synchronizedList(new ArrayList< DrawingPath >());
+
+    mTmpLegsStack    = Collections.synchronizedList(new ArrayList< DrawingPath >());
+    mTmpSplaysStack  = Collections.synchronizedList(new ArrayList< DrawingPath >());
+
+    mTmpStations     = Collections.synchronizedList(new ArrayList< DrawingStationName >());
+
+    // mTmpPlotOutline  = Collections.synchronizedList(new ArrayList< DrawingLinePath >());
+    // mTmpXSectionOutlines = Collections.synchronizedList(new ArrayList< DrawingOutlinePath >());
+    // mFixeds       = Collections.synchronizedList(new ArrayList< DrawingFixedName >());
+
+    synchronized( mPlotOutline )            { mPlotOutline.clear(); }
+    synchronized( TDPath.mXSectionsLock   ) { mXSectionOutlines.clear(); }
+    // synchronized( TDPath.mFixedsLock   )    { mTmpFixeds.clear(); }
+
+    syncClearSelected();
+  }
+
+  void newReferences()
+  {
+    clearTmpReferences();
+  }
+
+  void commitReferences()
+  {
+    synchronized( TDPath.mGridsLock ) {
+      mGridStack1   = mTmpGridStack1;
+      mGridStack10  = mTmpGridStack10;
+      mGridStack100 = mTmpGridStack100;
+    }
+    synchronized( TDPath.mShotsLock ) {
+      mLegsStack   = mTmpLegsStack;
+      mSplaysStack = mTmpSplaysStack;
+    }
+    synchronized( TDPath.mStationsLock ) { 
+      mStations = mTmpStations;
+    }
+    mTmpGridStack1   = null;
+    mTmpGridStack10  = null;
+    mTmpGridStack100 = null;
+    mTmpLegsStack    = null;
+    mTmpSplaysStack  = null;
+    mTmpStations     = null;
   }
 
   private void clearSketchItems()
@@ -474,13 +540,13 @@ class DrawingCommandManager
   }
 
   // first and second references are used only by the OverviewWindow
-  void setFirstReference( DrawingPath path ) { synchronized( mGridStack1 ) { mFirstReference = path; } }
+  void setFirstReference( DrawingPath path ) { synchronized( TDPath.mGridsLock ) { mFirstReference = path; } }
 
-  void setSecondReference( DrawingPath path ) { synchronized( mGridStack1 ) { mSecondReference = path; } }
+  void setSecondReference( DrawingPath path ) { synchronized( TDPath.mGridsLock ) { mSecondReference = path; } }
 
   void addSecondReference( float x, float y ) 
   {
-    synchronized( mGridStack1 ) { 
+    synchronized( TDPath.mGridsLock ) { 
       if ( mSecondReference != null ) mSecondReference.pathAddLineTo(x,y); 
     }
   }
@@ -747,44 +813,39 @@ class DrawingCommandManager
   //   }
   // }
 
-  void addLegPath( DrawingPath path, boolean selectable )
+  void addTmpLegPath( DrawingPath path, boolean selectable )
   { 
-    if ( mLegsStack == null ) return;
-    synchronized( TDPath.mShotsLock ) {
-      mLegsStack.add( path );
-      if ( selectable ) {
-        synchronized( TDPath.mSelectionLock ) {
-	  mSelectionFixed.insertPath( path );
-          // FIXME-HIDE synchronized( mScraps ) for ( Scrap scrap : mScraps ) scrap.insertPathInSelection( path );
-        }
+    // if ( mTmpLegsStack == null ) return;
+    mTmpLegsStack.add( path );
+    if ( selectable ) {
+      synchronized( TDPath.mSelectionLock ) {
+        mSelectionFixed.insertPath( path );
+        // FIXME-HIDE synchronized( mScraps ) for ( Scrap scrap : mScraps ) scrap.insertPathInSelection( path );
       }
     }
   }  
 
-  void addSplayPath( DrawingPath path, boolean selectable )
+  void addTmpSplayPath( DrawingPath path, boolean selectable )
   {
-    if ( mSplaysStack == null ) return;
-    synchronized( TDPath.mShotsLock ) {
-      mSplaysStack.add( path );
-      if ( selectable ) {
-        synchronized( TDPath.mSelectionLock ) {
-	  mSelectionFixed.insertPath( path );
-          // FIXME-HIDE synchronized( mScraps ) for ( Scrap scrap : mScraps ) scrap.insertPathInSelection( path );
-        }
+    // if ( mTmpSplaysStack == null ) return;
+    mTmpSplaysStack.add( path );
+    if ( selectable ) {
+      synchronized( TDPath.mSelectionLock ) {
+        mSelectionFixed.insertPath( path );
+        // FIXME-HIDE synchronized( mScraps ) for ( Scrap scrap : mScraps ) scrap.insertPathInSelection( path );
       }
     }
   }  
  
   // called by DrawingSurface.addDrawingStationName
-  void addStation( DrawingStationName st, boolean selectable ) 
+  void addTmpStation( DrawingStationName st, boolean selectable ) 
   {
-    synchronized( TDPath.mStationsLock ) {
-      mStations.add( st );
-      if ( selectable ) {
-        synchronized( TDPath.mSelectionLock ) {
-          mSelectionFixed.insertStationName( st );
-          // FIXME-HIDE synchronized( mScraps ) for ( Scrap scrap : mScraps ) scrap.addStationToSelection( st );
-        }
+    // if ( mTmpStations == null ) return;
+    mTmpStations.add( st );
+    if ( selectable ) {
+      synchronized( TDPath.mSelectionLock ) {
+        mSelectionFixed.insertStationName( st );
+        // FIXME-HIDE synchronized( mScraps ) for ( Scrap scrap : mScraps ) scrap.addStationToSelection( st );
       }
     }
   }
@@ -799,17 +860,18 @@ class DrawingCommandManager
  
   
   // used by H-Sections
-  void setNorthLine( DrawingPath path ) { mNorthLine = path; }
-
-  void addGrid( DrawingPath path, int k )
+  void setNorthLine( DrawingPath path ) 
   { 
-    if ( mGridStack1 == null ) return;
-    synchronized( mGridStack1 ) {
-      switch (k) {
-        case 1:   mGridStack1.add( path );   break;
-        case 10:  mGridStack10.add( path );  break;
-        case 100: mGridStack100.add( path ); break;
-      }
+    synchronized( TDPath.mGridsLock ) { mNorthLine = path; }
+  }
+
+  void addTmpGrid( DrawingPath path, int k )
+  { 
+    if ( mTmpGridStack1 == null ) return;
+    switch (k) {
+      case 1:   mTmpGridStack1.add( path );   break;
+      case 10:  mTmpGridStack10.add( path );  break;
+      case 100: mTmpGridStack100.add( path ); break;
     }
   }
 
@@ -926,7 +988,7 @@ class DrawingCommandManager
     mat.postScale( mBitmapScale, mBitmapScale );
     if ( TDSetting.mSvgGrid ) {
       if ( mGridStack1 != null ) {
-        synchronized( mGridStack1 ) {
+        synchronized( TDPath.mGridsLock ) {
           for ( DrawingPath p1 : mGridStack1 ) {
             p1.draw( c, mat, sca, null );
           }
@@ -1049,7 +1111,7 @@ class DrawingCommandManager
     }
 
     if( grids && mGridStack1 != null ) {
-      synchronized( mGridStack1 ) {
+      synchronized( TDPath.mGridsLock ) {
         if ( mScale < 1 ) {
           for ( DrawingPath p1 : mGridStack1 ) p1.draw( canvas, mMatrix, mScale, mBBox );
         }
@@ -1156,7 +1218,7 @@ class DrawingCommandManager
     }
 
     if ( mGridStack1 != null ) {
-      synchronized (mGridStack1) {
+      synchronized (TDPath.mGridsLock) {
         if (mFirstReference != null) mFirstReference.draw(canvas, mMatrix, mScale, null);
         if (mSecondReference != null) mSecondReference.draw(canvas, mMatrix, mScale, null);
       }

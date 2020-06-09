@@ -181,7 +181,7 @@ class StationNameDefault extends StationName
                                    : DistoXStationName.mSecondStation;
     String to   = ( forward_shots )? DistoXStationName.mSecondStation   // next TO station
                                    : DistoXStationName.mInitialStation;
-    String station = ( current_station != null )? current_station;
+    String station = ( current_station != null )? current_station
                    : (shot_after_splay ? from : "");  // splays station
 
     // TDLog.Log( TDLog.LOG_DATA, "F<" + from + "> T<" + to + "> S<" + station + "> CS " + ( (current_station==null)? "null" : current_station ) );
