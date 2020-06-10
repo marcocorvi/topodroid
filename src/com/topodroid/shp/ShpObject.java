@@ -47,7 +47,7 @@ public class ShpObject
   final static byte BYTEN  = (byte)'N';
   final static short SHORT0 = (short)0;
 
-  public static final float SCALE = 1.0f/DrawingUtil.SCALE_FIX; // TDSetting.mDxfScale; 
+  public static final double SCALE = 1.0/DrawingUtil.SCALE_FIX; // TDSetting.mDxfScale; 
   // static double xWorld( double x ) { return (x-DrawingUtil.CENTER_X)*SCALE; }
   // static double yWorld( double y ) { return (y-DrawingUtil.CENTER_Y)*SCALE; }
 

@@ -40,7 +40,7 @@ public class ShpPoint extends ShpObject
   }
 
   // write headers for POINT
-  public boolean writePoints( List< DrawingPointPath > pts, float x0, float y0, float xscale, float yscale ) throws IOException
+  public boolean writePoints( List< DrawingPointPath > pts, double x0, double y0, double xscale, double yscale ) throws IOException
   {
     int n_pts = (pts != null)? pts.size() : 0;
     // Log.v("DistoX", "SHP write points " + n_pts );
@@ -101,7 +101,7 @@ public class ShpPoint extends ShpObject
   @Override protected int getShpRecordLength( ) { return 14; }
     
   // Utility: set the bounding box of the set of geometries
-  private void setBoundsPoints( List< DrawingPointPath > pts, float x0, float y0, float xscale, float yscale ) 
+  private void setBoundsPoints( List< DrawingPointPath > pts, double x0, double y0, double xscale, double yscale ) 
   {
     if ( pts.size() == 0 ) {
       xmin = xmax = ymin = ymax = zmin = zmax = 0.0;

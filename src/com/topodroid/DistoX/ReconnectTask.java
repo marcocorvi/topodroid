@@ -57,11 +57,6 @@ class ReconnectTask extends AsyncTask< String, Integer, Integer >
   @Override
   protected void onPostExecute( Integer res )
   {
-    // Log.v("DistoX", "reconnect task post-exec");
-    // if ( res != null ) {
-    //   int r = res.intValue();
-    // }
-
     // mDownloader.notifyConnectionStatus( mDownloader.isConnected()? DataDownloader.STATUS_ON : DataDownloader.STATUS_WAIT );
     unlock();
   }

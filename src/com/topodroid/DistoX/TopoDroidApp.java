@@ -150,8 +150,11 @@ public class TopoDroidApp extends Application
 
   void notifyStatus( )
   { 
-    // Log.v("DistoXDOWN", "app notify status");
-    mListerSet.setConnectionStatus( mDataDownloader.getStatus() );
+    TopoDroidApp.mActivity.runOnUiThread( new Runnable() { 
+      public void run () { 
+        mListerSet.setConnectionStatus( mDataDownloader.getStatus() );
+      }
+    } );
   }
 
   void notifyDisconnected( int data_type )

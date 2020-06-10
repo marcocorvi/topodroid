@@ -34,6 +34,7 @@ import com.topodroid.num.NumStation;
 import com.topodroid.num.NumShot;
 import com.topodroid.num.NumSplay;
 import com.topodroid.num.NumBranch;
+import com.topodroid.mag.Geodetic;
 import com.topodroid.ptopo.PTFile;
 import com.topodroid.shp.ShpPointz;
 import com.topodroid.shp.ShpPolylinez;
@@ -74,6 +75,9 @@ class TDExporter
   private static final String   therion_flags_not_duplicate = "   flags not duplicate\n";
   private static final String   therion_flags_surface       = "   flags surface\n";
   private static final String   therion_flags_not_surface   = "   flags not surface\n";
+
+  private static double mERadius = Geodetic.EARTH_A;
+  private static double mSRadius = Geodetic.EARTH_A;
 
   private static void checkShotsClino( List< DBlock > list )
   {
@@ -566,30 +570,6 @@ class TDExporter
   // KML export Keyhole Markup Language
   //   NOTE shot flags are ignored
 
-  /* ref. T. Soler, L.D. Hothem
-   *      Coordinate systems usd in geodesy: basic definitions and concepts, 1988
-   */
-  static private final double EARTH_A = 6378137;
-  static private final double EARTH_B = 6356752;
-  static private final double EARTH_C = Math.sqrt( EARTH_A * EARTH_A - EARTH_B * EARTH_B );
-  static private final double EARTH_E = EARTH_C / EARTH_A;
-  // F = 1 - B/A, flattening
-  // 2 * F - F*F = ( 1 + B/A )*( 1 - B/A ) 
-  //             = (1 - B^2/A^2) 
-  //             = C^2 / A^2
-  //             = E^2
-  static private final double EARTH_E2 = EARTH_E * EARTH_E;
-  static private final double EARTH_1E2 = 1.0 - EARTH_E2; // (1- e^2)
-  // double s = Math.sin( latitude * Math.PI/180 );
-  // double W = Math.sqrt( 1 - EARTH_E2 * s * s );
-  // RADIUS_WE = EARTH_A / W; // principal radius of curvature in the prime vertical plane
-  // RADIUS_NS = EARTH_A * EARTH_1E2 / W;
-
-  static private final float EARTH_RADIUS1 = (float)(6378137 * Math.PI / 180.0f); // semimajor axis [m]
-  static private final float EARTH_RADIUS2 = (float)(6356752 * Math.PI / 180.0f);
-  static private float mERadius;
-  static private float mSRadius;
-
   static GeoReference getGeolocalizedStation( long sid, DataHelper data, float asl_factor, boolean ellipsoid_altitude, String station )
   {
     float decl = data.getSurveyDeclination( sid );
@@ -629,17 +609,12 @@ class TDExporter
   static private void  makeGeolocalizedData( TDNum num, FixedInfo origin, float asl_factor, boolean ellipsoid_altitude )
   {
 
-    float lat = (float)origin.lat;
-    float lng = (float)origin.lng;
-    float asl = ellipsoid_altitude ? (float)origin.alt 
-                                   : (float)origin.asl; // KML uses Geoid altitude (unless altitudeMode is set)
-    float alat = TDMath.abs( lat );
-
-    float s_radius = ((90 - alat) * EARTH_RADIUS1 + alat * EARTH_RADIUS2)/90;
-    float e_radius = s_radius * TDMath.cosd( alat );
-
-    s_radius = 1 / s_radius;
-    e_radius = 1 / e_radius;
+    double lat = origin.lat;
+    double lng = origin.lng;
+    double asl = ellipsoid_altitude ? origin.alt 
+                                    : origin.asl; // KML uses Geoid altitude (unless altitudeMode is set)
+    double s_radius = 1 / Geodetic.meridianRadius( lat );
+    double e_radius = 1 / Geodetic.parallelRadius( lat );
 
     mERadius = e_radius; // save radii factors for getGeolocalizedStation
     mSRadius = s_radius;
@@ -647,19 +622,19 @@ class TDExporter
     // Log.v("DistoX", "st cnt " + NumStation.cnt + " size " + num.getStations().size() );
 
     for ( NumStation st : num.getStations() ) {
-      st.s = lat - st.s * s_radius;
-      st.e = lng + st.e * e_radius;
-      st.v = (asl - st.v) * asl_factor;
+      st.s = (float)(lat - st.s * s_radius);
+      st.e = (float)(lng + st.e * e_radius);
+      st.v = (float)(asl - st.v) * asl_factor;
     }
     for ( NumStation cst : num.getClosureStations() ) {
-      cst.s = lat - cst.s * s_radius;
-      cst.e = lng + cst.e * e_radius;
-      cst.v = (asl - cst.v) * asl_factor;
+      cst.s = (float)(lat - cst.s * s_radius);
+      cst.e = (float)(lng + cst.e * e_radius);
+      cst.v = (float)(asl - cst.v) * asl_factor;
     }
     for ( NumSplay sp : num.getSplays() ) {
-      sp.s = lat - sp.s * s_radius;
-      sp.e = lng + sp.e * e_radius;
-      sp.v = (asl - sp.v) * asl_factor;
+      sp.s = (float)(lat - sp.s * s_radius);
+      sp.e = (float)(lng + sp.e * e_radius);
+      sp.v = (float)(asl - sp.v) * asl_factor;
     }
   }
 

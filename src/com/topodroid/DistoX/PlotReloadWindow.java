@@ -65,23 +65,25 @@ public class PlotReloadWindow extends ItemDrawer
   private static final int[] izons = {
                         R.drawable.iz_back,       // 0
                         R.drawable.iz_forw,          // 1
+                        R.drawable.iz_reload,
 			R.drawable.iz_empty
                       };
   // FIXME_OVER private static int BTN_PLOT = 2;
 
   private static final int[] menus = {
                         R.string.menu_close,
-                        R.string.menu_reload,
+                        // R.string.menu_reload,
                         R.string.menu_help
                      };
 
   private static final int[] help_icons = {
                         R.string.help_reload_prev,
                         R.string.help_reload_next,
+                        R.string.help_reload_plot
                       };
   private static final int[] help_menus = {
                         R.string.help_close,
-			R.string.help_reload_plot,
+			// R.string.help_reload_plot,
                         R.string.help_help
                       };
 
@@ -230,7 +232,7 @@ public class PlotReloadWindow extends ItemDrawer
   // BUTTON BAR
   
   private Button[] mButton1;  // primary
-  private int mNrButton1 = 2; // main-primary
+  private int mNrButton1 = 3; // main-primary
   private MyHorizontalListView mListView;
   private MyHorizontalButtonView mButtonView1;
   private ListView   mMenu;
@@ -406,12 +408,12 @@ public class PlotReloadWindow extends ItemDrawer
 
   private void loadFile( )
   {
+    if ( mPos < 0 || mPos >= mBackups.size() ) return;
+    PlotBackup plot = mBackups.get( mPos );
     mReloadSurface.resetManager( DrawingSurface.DRAWING_OVERVIEW, null, false ); // is_extended = false
-    String tdr      = mBackups.get(mPos).tdr;
-    String filename = mBackups.get(mPos).filename;
-    setTitle( mBackups.get(mPos).desc );
-    // Log.v("DistoX-RELOAD", "file pos " + mPos + " " + tdr );
-    mReloadSurface.addLoadDataStream( tdr, 0, 0, filename ); // save plot name in paths
+    setTitle( plot.desc );
+    // Log.v("DistoX-RELOAD", "file pos " + mPos + " " + plot.tdr );
+    mReloadSurface.addLoadDataStream( plot.tdr, 0, 0, plot.filename ); // save plot name in paths
   } 
 
   private float mSave0X, mSave0Y;
@@ -667,6 +669,8 @@ public class PlotReloadWindow extends ItemDrawer
         ++mPos;
         loadFile();
       }
+    } else if ( b == mButton1[2] ) { // reload plot
+      doReloadPlot();
     }
   }
 
@@ -702,8 +706,8 @@ public class PlotReloadWindow extends ItemDrawer
   {
     ArrayAdapter< String > mMenuAdapter = new ArrayAdapter<>(mActivity, R.layout.menu );
     mMenuAdapter.add( res.getString( menus[0] ) );
-    /* if ( TDLevel.overNormal ) */ mMenuAdapter.add( res.getString( menus[1] ) );
-    mMenuAdapter.add( res.getString( menus[2] ) );
+    mMenuAdapter.add( res.getString( menus[1] ) );
+    // mMenuAdapter.add( res.getString( menus[2] ) );
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
   }
@@ -720,15 +724,20 @@ public class PlotReloadWindow extends ItemDrawer
     int p = 0;
     if ( p++ == pos ) { // CLOSE
       onBackPressed();
-    } else if ( /* TDLevel.overNormal && */ p++ == pos ) { // RELOAD : set activity result and return
-      Intent intent = new Intent();
-      intent.putExtra( TDTag.TOPODROID_PLOT_TYPE, mType );
-      intent.putExtra( TDTag.TOPODROID_PLOT_FILENAME, mBackups.get(mPos).filename );
-      setResult( RESULT_OK, intent );
-      finish();
+    // } else if ( p++ == pos ) { // RELOAD : set activity result and return
+    //   doReloadPlot();
     } else if ( p++ == pos ) { // HELP
       new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
     }
+  }
+ 
+  private void doReloadPlot()
+  {
+    Intent intent = new Intent();
+    intent.putExtra( TDTag.TOPODROID_PLOT_TYPE, mType );
+    intent.putExtra( TDTag.TOPODROID_PLOT_FILENAME, mBackups.get(mPos).filename );
+    setResult( RESULT_OK, intent );
+    finish();
   }
 
 

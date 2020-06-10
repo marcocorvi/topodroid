@@ -36,10 +36,10 @@ class DrawingShp
   {
 
     File dir   = null;
-    float xoff = 0;
-    float yoff = 0;
-    float xscale = ShpObject.SCALE;
-    float yscale = ShpObject.SCALE;
+    double xoff = 0;
+    double yoff = 0;
+    double xscale = ShpObject.SCALE;
+    double yscale = ShpObject.SCALE;
     if ( station != null ) {
       xoff = station.e;
       yoff = station.s;

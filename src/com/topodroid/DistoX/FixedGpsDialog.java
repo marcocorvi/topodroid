@@ -17,8 +17,7 @@ import com.topodroid.utils.TDString;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
 
-
-
+import com.topodroid.mag.Geodetic;
 import com.topodroid.mag.WorldMagneticModel;
 
 // import android.util.Log;
@@ -268,7 +267,7 @@ class FixedGpsDialog extends MyDialog
   private final double mW0 = 0.8;
   private final double mW1 = 1 - mW0;
   private final double mW2 = mW1 / mW0;
-  private final double mR = 6371000; // approx earth radius
+  private final double mR = Geodetic.EARTH_A; // approx earth radius
 
   private void displayLocation( Location loc /*, boolean do_error*/ )
   {

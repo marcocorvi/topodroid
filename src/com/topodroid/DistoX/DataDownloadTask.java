@@ -52,7 +52,6 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
       if ( algo == CalibInfo.ALGO_AUTO ) { 
         algo = app.getCalibAlgoFromDevice();
         if ( algo < CalibInfo.ALGO_AUTO ) {
-          // TDToast.makeBad( R.string.device_algo_failed );
           algo = CalibInfo.ALGO_LINEAR; 
         }
         app.updateCalibAlgo( algo );
@@ -60,14 +59,7 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
       }
     }
     if ( ! lock() ) return null;
-    // long time = System.currentTimeMillis();
     return ( app == null )? 0 : app.downloadDataBatch( mLister, mDataType );
-    // time = System.currentTimeMillis() - time;
-    // Log.v("DistoX", "READ " + nRead + " data in " + time + " msec");
-
-    // if ( nRead < 0 ) {
-    //   TDToast.makeBad( app.DistoXConnectionError[ -nRead ] );
-    // TDLog.Error( "doInBackground read " + nRead );
   }
 
   // @Override

@@ -153,16 +153,14 @@ class DataDownloader
   private void notifyUiThreadConnectionStatus( int connected )
   {
     mConnected = connected;
-    // Log.v("DistoXDOWN", "notify UI thread " + connected );
-    TopoDroidApp.mActivity.runOnUiThread( new Runnable() { public void run () { mApp.notifyStatus( ); } } );
+    mApp.notifyStatus( ); // this is run on UI thread
   }
 
   // this must be called on UI thread (onPostExecute)
   void notifyConnectionStatus( int connected )
   {
     mConnected = connected;
-    // Log.v("DistoXDOWN", "notify thread " + connected );
-    mApp.notifyStatus( );
+    mApp.notifyStatus( ); // this is run on UI thread
   }
 
   // BATCH ON-DEMAND DOWNLOAD

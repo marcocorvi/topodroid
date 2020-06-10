@@ -48,17 +48,17 @@ public class ShpPolyline extends ShpObject
     // mPathType = path_type;
   }
 
-  public void writeLines( List< DrawingPointLinePath > lns, float x0, float y0, float xscale, float yscale ) throws IOException
+  public void writeLines( List< DrawingPointLinePath > lns, double x0, double y0, double xscale, double yscale ) throws IOException
   {
     writwPointLines( lns, DrawingPath.DRAWING_PATH_LINE, x0, y0, xscale, yscale );
   }
 
-  public void writeAreas( List< DrawingPointLinePath > lns, float x0, float y0, float xscale, float yscale ) throws IOException
+  public void writeAreas( List< DrawingPointLinePath > lns, double x0, double y0, double xscale, double yscale ) throws IOException
   {
     writwPointLines( lns, DrawingPath.DRAWING_PATH_AREA, x0, y0, xscale, yscale );
   }
 
-  private boolean writwPointLines( List< DrawingPointLinePath > lns, int path_type, float x0, float y0, float xscale, float yscale ) throws IOException
+  private boolean writwPointLines( List< DrawingPointLinePath > lns, int path_type, double x0, double y0, double xscale, double yscale ) throws IOException
   {
     int nrs = ( lns != null )? lns.size() : 0;
     if ( nrs == 0 ) return false;
@@ -131,7 +131,7 @@ public class ShpPolyline extends ShpObject
     return true;
   }
 
-  private void writeShpRecord( int cnt, int len, DrawingPointLinePath ln, int close, float x0, float y0, float xscale, float yscale )
+  private void writeShpRecord( int cnt, int len, DrawingPointLinePath ln, int close, double x0, double y0, double xscale, double yscale )
   {
     double xmin, ymin, xmax, ymax;
     LinePoint pt = ln.first();
@@ -174,7 +174,7 @@ public class ShpPolyline extends ShpObject
   // @Override 
   protected int getShpRecordLength( int npt ) { return 28 + npt * 8; }
 
-  private void setBoundsLines( List< DrawingPointLinePath > lns, float x0, float y0, float xscale, float yscale )
+  private void setBoundsLines( List< DrawingPointLinePath > lns, double x0, double y0, double xscale, double yscale )
   {
     int nrs = ( lns != null )? lns.size() : 0;
     if ( nrs > 0 ) {
