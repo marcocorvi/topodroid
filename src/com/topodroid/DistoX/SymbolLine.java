@@ -57,26 +57,26 @@ class SymbolLine extends Symbol
 
   // width = 1;
   // no effect
-  SymbolLine( String name, String th_name, String group, String fname, int color, int level )
+  SymbolLine( String name, String th_name, String group, String fname, int color, int level, int rt )
   {
-    super( th_name, group, fname );
+    super( th_name, group, fname, rt );
     init( name, color, 1 );
     makeLinePath();
     mLevel = level;
   }
 
   // no effect
-  SymbolLine( String name, String th_name, String group, String fname, int color, float width, int level )
+  SymbolLine( String name, String th_name, String group, String fname, int color, float width, int level, int rt )
   {
-    super( th_name, group, fname );
+    super( th_name, group, fname, rt );
     init( name, color, width );
     makeLinePath();
     mLevel = level;
   }
 
-  SymbolLine( String name, String th_name, String group, String fname, int color, float width, PathEffect effect_dir, PathEffect effect_rev, int level )
+  SymbolLine( String name, String th_name, String group, String fname, int color, float width, PathEffect effect_dir, PathEffect effect_rev, int level, int rt )
   {
-    super( th_name, group, fname );
+    super( th_name, group, fname, rt );
     init( name, color, width );
     mPaint.setPathEffect( effect_dir );
     mRevPaint.setPathEffect( effect_rev );
@@ -104,7 +104,7 @@ class SymbolLine extends Symbol
 
   SymbolLine( String filepath, String fname, String locale, String iso ) 
   {
-    super( null, null, fname );
+    super( null, null, fname, Symbol.W2D_DETAIL_SHP );
     mStyleStraight = false;
     mClosed = false;
     mStyleX = 1;
@@ -228,6 +228,13 @@ class SymbolLine extends Symbol
                   mLevel = ( Integer.parseInt( vals[k] ) );
                 } catch( NumberFormatException e ) { }
               }
+            } else if ( vals[k].equals("roundtrip") ) {
+              ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+              if ( k < s ) {
+                try {
+                  mRoundTrip = ( Integer.parseInt( vals[k] ) );
+                } catch( NumberFormatException e ) { }
+              }
   	    } else if ( vals[k].equals("closed") ) {
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	      if ( k < s && vals[k].equals("yes") ) {
@@ -236,31 +243,15 @@ class SymbolLine extends Symbol
             } else if ( vals[k].equals("csurvey") ) {
               // syntax: 
               //    csurvey <layer> <type> <category> <pen>
-              try {
-                kval = k;
-                mCsxLayer    = nextInt( vals, s );
-                mCsxType     = nextInt( vals, s );
-                mCsxCategory = nextInt( vals, s );
-                mCsxPen      = nextInt( vals, s );
-                // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-                // if ( k < s ) {
-                //   mCsxLayer = Integer.parseInt( vals[k] );
-                // }
-                // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-                // if ( k < s ) {
-                //   mCsxType = Integer.parseInt( vals[k] );
-                // }
-                // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-                // if ( k < s ) {
-                //   mCsxCategory = Integer.parseInt( vals[k] );
-                // }
-                // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-                // if ( k < s ) {
-                //   mCsxPen = Integer.parseInt( vals[k] );
-                // }
-              } catch ( NumberFormatException e ) {
-                TDLog.Error( filename + " parse csurvey error: " + line );
-              }
+              // try {
+              //   kval = k;
+              //   mCsxLayer    = nextInt( vals, s );
+              //   mCsxType     = nextInt( vals, s );
+              //   mCsxCategory = nextInt( vals, s );
+              //   mCsxPen      = nextInt( vals, s );
+              // } catch ( NumberFormatException e ) {
+              //   TDLog.Error( filename + " parse csurvey error: " + line );
+              // }
   	    } else if ( vals[k].equals("color") ) {
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	      if ( k < s ) {

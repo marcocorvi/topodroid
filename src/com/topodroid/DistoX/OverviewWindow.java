@@ -288,7 +288,9 @@ public class OverviewWindow extends ItemDrawer
     // Log.v("DistoX", "Overview compute reference. off " + xoff + " " + yoff + " zoom " + zoom );
     // FIXME_OVER
     // mOverviewSurface.clearReferences( type );
-    mOverviewSurface.setManager( DrawingSurface.DRAWING_OVERVIEW, type ); 
+    // mOverviewSurface.setManager( DrawingSurface.DRAWING_OVERVIEW, type ); 
+    mOverviewSurface.newReferences( DrawingSurface.DRAWING_OVERVIEW, type ); 
+   
     mOverviewSurface.addScaleRef( DrawingSurface.DRAWING_OVERVIEW, type );
 
     // float xoff = 0; float yoff = 0;
@@ -347,6 +349,8 @@ public class OverviewWindow extends ItemDrawer
         dst = mOverviewSurface.addDrawingStationName( null, st, DrawingUtil.toSceneX(st.h,st.v), DrawingUtil.toSceneY(st.h,st.v), true, null, null );
       }
     }
+
+    mOverviewSurface.commitReferences();
 
     // FIXME mCheckExtend
     // if ( (! mNum.surveyAttached) && TDSetting.mCheckAttached ) {

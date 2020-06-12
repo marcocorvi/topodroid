@@ -321,23 +321,23 @@ public class DrawingLinePath extends DrawingPointLinePath
     }
   }
 
-  @Override
-  void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
-  {
-    int layer  = BrushManager.getLineCsxLayer( mLineType );
-    int type   = BrushManager.getLineCsxType( mLineType );
-    int cat    = BrushManager.getLineCsxCategory( mLineType );
-    int pen    = BrushManager.getLineCsxPen( mLineType );
-    // linetype: 0 line, 1 spline, 2 bezier
-    pw.format("          <item layer=\"%d\" cave=\"%s\" branch=\"%s\" name=\"\" type=\"%d\" category=\"%d\" linetype=\"0\"",
-      layer, cave, branch, type, cat );
-    if ( bind != null ) pw.format(" bind=\"%s\"", bind );
-    // FIXME CLOSE 
-    pw.format(" mergemode=\"0\">\n" );
-    pw.format("            <pen type=\"%d\" />\n", pen);
-    toCsurveyPoints( pw, false, mReversed );
-    pw.format("          </item>\n");
-  }
+//   @Override
+//   void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
+//   {
+//     int layer  = BrushManager.getLineCsxLayer( mLineType );
+//     int type   = BrushManager.getLineCsxType( mLineType );
+//     int cat    = BrushManager.getLineCsxCategory( mLineType );
+//     int pen    = BrushManager.getLineCsxPen( mLineType );
+//     // linetype: 0 line, 1 spline, 2 bezier
+//     pw.format("          <item layer=\"%d\" cave=\"%s\" branch=\"%s\" name=\"\" type=\"%d\" category=\"%d\" linetype=\"0\"",
+//       layer, cave, branch, type, cat );
+//     if ( bind != null ) pw.format(" bind=\"%s\"", bind );
+//     // FIXME CLOSE 
+//     pw.format(" mergemode=\"0\">\n" );
+//     pw.format("            <pen type=\"%d\" />\n", pen);
+//     toCsurveyPoints( pw, false, mReversed );
+//     pw.format("          </item>\n");
+//   }
 
   @Override
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )

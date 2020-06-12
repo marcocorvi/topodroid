@@ -61,6 +61,13 @@ public class BrushManager
   static SymbolLineLibrary  getLineLib()  { return mLineLib; }
   static SymbolAreaLibrary  getAreaLib()  { return mAreaLib; }
 
+  static boolean isPointRoundTrip( DrawingPointPath path, int rt )
+  { return (mPointLib != null) && mPointLib.getSymbolByIndex( path.mPointType ).mRoundTrip == rt; }
+  static boolean isLineRoundTrip( DrawingLinePath path, int rt )
+  { return (mLineLib != null) && mLineLib.getSymbolByIndex( path.mLineType ).mRoundTrip == rt; }
+  static boolean isAreaRoundTrip( DrawingAreaPath path, int rt )
+  { return (mAreaLib != null) && mAreaLib.getSymbolByIndex( path.mAreaType ).mRoundTrip == rt; }
+
   static ArrayList< String > getLineNames() { return (mLineLib == null)? (new ArrayList< String >()) : mLineLib.getSymbolNames(); }
   static ArrayList< String > getAreaNames() { return (mAreaLib == null)? (new ArrayList< String >()) : mAreaLib.getSymbolNames(); }
 
@@ -129,23 +136,24 @@ public class BrushManager
   static boolean pointHasValue( int index )       { return mPointLib != null && mPointLib.pointHasValue( index ); }
   static boolean pointHasTextOrValue( int index ) { return mPointLib != null && mPointLib.pointHasTextOrValue( index ); }
 
-  static int getPointCsxLayer( int index )    { return (mPointLib == null)? 0 : mPointLib.pointCsxLayer( index ); }
-  static int getPointCsxType( int index )     { return (mPointLib == null)? 0 : mPointLib.pointCsxType( index ); }
-  static int getPointCsxCategory( int index ) { return (mPointLib == null)? 0 : mPointLib.pointCsxCategory( index ); }
-  static String getPointCsx( int index )      { return (mPointLib == null)? "" : mPointLib.pointCsx( index ); }
+  // static int getPointCsxLayer( int index )    { return (mPointLib == null)? 0 : mPointLib.pointCsxLayer( index ); }
+  // static int getPointCsxType( int index )     { return (mPointLib == null)? 0 : mPointLib.pointCsxType( index ); }
+  // static int getPointCsxCategory( int index ) { return (mPointLib == null)? 0 : mPointLib.pointCsxCategory( index ); }
+  // static String getPointCsx( int index )      { return (mPointLib == null)? "" : mPointLib.pointCsx( index ); }
 
-  static int getLineCsxLayer( int index )    { return (mLineLib == null)? 0 : mLineLib.lineCsxLayer( index ); }
-  static int getLineCsxType( int index )     { return (mLineLib == null)? 0 : mLineLib.lineCsxType( index ); }
-  static int getLineCsxCategory( int index ) { return (mLineLib == null)? 0 : mLineLib.lineCsxCategory( index ); }
-  static int getLineCsxPen( int index )      { return (mLineLib == null)? 0 : mLineLib.lineCsxPen( index ); }
+  // static int getLineCsxLayer( int index )    { return (mLineLib == null)? 0 : mLineLib.lineCsxLayer( index ); }
+  // static int getLineCsxType( int index )     { return (mLineLib == null)? 0 : mLineLib.lineCsxType( index ); }
+  // static int getLineCsxCategory( int index ) { return (mLineLib == null)? 0 : mLineLib.lineCsxCategory( index ); }
+  // static int getLineCsxPen( int index )      { return (mLineLib == null)? 0 : mLineLib.lineCsxPen( index ); }
+
   // static String getLineGroup( int index ) { return (mLineLib == null)? "" : mLineLib.getLineGroup( index ); }
   static int getLineLevel( int idx )         { return (mLineLib == null)? DrawingLevel.LEVEL_BASE : mLineLib.getSymbolLevel( idx ); }
 
-  static int getAreaCsxLayer( int index )    { return (mAreaLib == null)? 0 : mAreaLib.areaCsxLayer( index ); }
-  static int getAreaCsxType( int index )     { return (mAreaLib == null)? 0 : mAreaLib.areaCsxType( index ); }
-  static int getAreaCsxCategory( int index ) { return (mAreaLib == null)? 0 : mAreaLib.areaCsxCategory( index ); }
-  static int getAreaCsxPen( int index )      { return (mAreaLib == null)? 0 : mAreaLib.areaCsxPen( index ); }
-  static int getAreaCsxBrush( int index )    { return (mAreaLib == null)? 0 : mAreaLib.areaCsxBrush( index ); }
+  // static int getAreaCsxLayer( int index )    { return (mAreaLib == null)? 0 : mAreaLib.areaCsxLayer( index ); }
+  // static int getAreaCsxType( int index )     { return (mAreaLib == null)? 0 : mAreaLib.areaCsxType( index ); }
+  // static int getAreaCsxCategory( int index ) { return (mAreaLib == null)? 0 : mAreaLib.areaCsxCategory( index ); }
+  // static int getAreaCsxPen( int index )      { return (mAreaLib == null)? 0 : mAreaLib.areaCsxPen( index ); }
+  // static int getAreaCsxBrush( int index )    { return (mAreaLib == null)? 0 : mAreaLib.areaCsxBrush( index ); }
   static int getAreaLevel( int idx )         { return (mAreaLib == null)? DrawingLevel.LEVEL_BASE : mAreaLib.getSymbolLevel( idx ); }
 
   static boolean isPointOrientable( int index )  { return mPointLib != null && mPointLib.isSymbolOrientable( index ); }
@@ -257,7 +265,7 @@ public class BrushManager
       String th_name = res.getString( R.string.p_station );
       String name    = res.getString( R.string.thp_station );
       mStationSymbol = new SymbolPoint( name, th_name, null, th_name, 0xffff6633, 
-        "addCircle 0 0 0.4 moveTo -3.0 1.73 lineTo 3.0 1.73 lineTo 0.0 -3.46 lineTo -3.0 1.73", false, DrawingLevel.LEVEL_WALL );
+        "addCircle 0 0 0.4 moveTo -3.0 1.73 lineTo 3.0 1.73 lineTo 0.0 -3.46 lineTo -3.0 1.73", false, DrawingLevel.LEVEL_WALL, Symbol.W2D_WALLS_SYM );
     }
   }
 

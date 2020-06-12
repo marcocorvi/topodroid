@@ -69,10 +69,10 @@ class SymbolLineLibrary extends SymbolLibrary
     return reversed ? s.mRevPaint : s.mPaint;
   }
 
-  int lineCsxLayer( int k )    { return getSymbolCsxLayer(k); }
-  int lineCsxType( int k )     { return getSymbolCsxType(k); }
-  int lineCsxCategory( int k ) { return getSymbolCsxCategory(k); }
-  int lineCsxPen( int k )      { return getSymbolCsxPen(k); }
+  // int lineCsxLayer( int k )    { return getSymbolCsxLayer(k); }
+  // int lineCsxType( int k )     { return getSymbolCsxType(k); }
+  // int lineCsxCategory( int k ) { return getSymbolCsxCategory(k); }
+  // int lineCsxPen( int k )      { return getSymbolCsxPen(k); }
   
   // ========================================================================
 
@@ -80,19 +80,19 @@ class SymbolLineLibrary extends SymbolLibrary
   {
     if ( mSymbols.size() > 0 ) return;                                  //  th_name   group fname
     String user = res.getString ( R.string.p_user );
-    SymbolLine symbol = new SymbolLine( res.getString( R.string.thl_user ), "u:user", null, user, 0xffffffff, 1, DrawingLevel.LEVEL_USER );
-    symbol.mCsxLayer    = 0; // base
-    symbol.mCsxType     = 1; // free-hand
-    symbol.mCsxCategory = 0; // cSurvey line cat: NONE
-    symbol.mCsxPen      = 2; // generic border
+    SymbolLine symbol = new SymbolLine( res.getString( R.string.thl_user ), "u:user", null, user, 0xffffffff, 1, DrawingLevel.LEVEL_USER, Symbol.W2D_DETAIL_SHP );
+    // symbol.mCsxLayer    = 0; // base
+    // symbol.mCsxType     = 1; // free-hand
+    // symbol.mCsxCategory = 0; // cSurvey line cat: NONE
+    // symbol.mCsxPen      = 2; // generic border
     addSymbol( symbol );
 
     String wall = res.getString ( R.string.p_wall );
-    symbol = new SymbolLine( res.getString( R.string.thl_wall ), wall, wall, wall, 0xffff0000, 2, DrawingLevel.LEVEL_WALL );
-    symbol.mCsxLayer    = 5; //
-    symbol.mCsxType     = 4; // inverted free-hand
-    symbol.mCsxCategory = 1; // cSurvey line cat: CAVE_BORDER
-    symbol.mCsxPen      = 1; // cave border
+    symbol = new SymbolLine( res.getString( R.string.thl_wall ), wall, wall, wall, 0xffff0000, 2, DrawingLevel.LEVEL_WALL, Symbol.W2D_WALLS_SHP );
+    // symbol.mCsxLayer    = 5; //
+    // symbol.mCsxType     = 4; // inverted free-hand
+    // symbol.mCsxCategory = 1; // cSurvey line cat: CAVE_BORDER
+    // symbol.mCsxPen      = 1; // cave border
     addSymbol( symbol );
 
     float[] x = new float[2];
@@ -100,11 +100,11 @@ class SymbolLineLibrary extends SymbolLibrary
     x[1] = 10;
     DashPathEffect dash = new DashPathEffect( x, 0 );
     String section = res.getString ( R.string.p_section );
-    symbol = new SymbolLine( res.getString( R.string.thl_section ),  section, null, section, 0xffcccccc, 1, dash, dash, DrawingLevel.LEVEL_USER );
-    symbol.mCsxLayer    = 6; //
-    symbol.mCsxType     = 9; // inverted free-hand
-    symbol.mCsxCategory = 96; // cSurvey line cat: CAVE_BORDER
-    symbol.mCsxPen      = 3; // cave border
+    symbol = new SymbolLine( res.getString( R.string.thl_section ),  section, null, section, 0xffcccccc, 1, dash, dash, DrawingLevel.LEVEL_USER, Symbol.W2D_DETAIL_SHP );
+    // symbol.mCsxLayer    = 6; //
+    // symbol.mCsxType     = 9; // inverted free-hand
+    // symbol.mCsxCategory = 96; // cSurvey line cat: CAVE_BORDER
+    // symbol.mCsxPen      = 3; // cave border
     addSymbol( symbol );
 
     // mSymbolNr = mSymbols.size();

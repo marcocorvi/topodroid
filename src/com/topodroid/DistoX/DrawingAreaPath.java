@@ -345,36 +345,36 @@ public class DrawingAreaPath extends DrawingPointLinePath
     return sw.getBuffer().toString();
   }
 
-  @Override
-  void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /*, DrawingUtil mDrawingUtil */ )
-  {
-    int layer  = BrushManager.getAreaCsxLayer( mAreaType );
-    int type   = 3;
-    int cat    = BrushManager.getAreaCsxCategory( mAreaType );
-    int pen    = BrushManager.getAreaCsxPen( mAreaType );
-    int brush  = BrushManager.getAreaCsxBrush( mAreaType );
-
-    // linetype: 0 spline, 1 bezier, 2 line
-    pw.format("          <item layer=\"%d\" cave=\"%s\" branch=\"%s\" name=\"\" type=\"3\" category=\"%d\" linetype=\"2\"",
-      layer, cave, branch, cat );
-    if ( bind != null ) pw.format(" bind=\"%s\"", bind );
-    // FIXME CLOSE
-    pw.format(" mergemode=\"0\">\n" );
-    pw.format("            <pen type=\"%d\" />\n", pen);
-    pw.format("            <brush type=\"%d\" />\n", brush);
-    pw.format("            <points data=\"");
-    boolean b = true;
-    // for ( LinePoint pt : mPoints ) 
-    for ( LinePoint pt = mFirst; pt != null; pt = pt.mNext ) 
-    {
-      float x = DrawingUtil.sceneToWorldX( pt.x, pt.y );
-      float y = DrawingUtil.sceneToWorldY( pt.x, pt.y );
-      pw.format(Locale.US, "%.2f %.2f ", x, y );
-      if ( b ) { pw.format("B "); b = false; }
-    }
-    pw.format("\" />\n");
-    pw.format("          </item>\n");
-  }
+//   @Override
+//   void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /*, DrawingUtil mDrawingUtil */ )
+//   {
+//     int layer  = BrushManager.getAreaCsxLayer( mAreaType );
+//     int type   = 3;
+//     int cat    = BrushManager.getAreaCsxCategory( mAreaType );
+//     int pen    = BrushManager.getAreaCsxPen( mAreaType );
+//     int brush  = BrushManager.getAreaCsxBrush( mAreaType );
+// 
+//     // linetype: 0 spline, 1 bezier, 2 line
+//     pw.format("          <item layer=\"%d\" cave=\"%s\" branch=\"%s\" name=\"\" type=\"3\" category=\"%d\" linetype=\"2\"",
+//       layer, cave, branch, cat );
+//     if ( bind != null ) pw.format(" bind=\"%s\"", bind );
+//     // FIXME CLOSE
+//     pw.format(" mergemode=\"0\">\n" );
+//     pw.format("            <pen type=\"%d\" />\n", pen);
+//     pw.format("            <brush type=\"%d\" />\n", brush);
+//     pw.format("            <points data=\"");
+//     boolean b = true;
+//     // for ( LinePoint pt : mPoints ) 
+//     for ( LinePoint pt = mFirst; pt != null; pt = pt.mNext ) 
+//     {
+//       float x = DrawingUtil.sceneToWorldX( pt.x, pt.y );
+//       float y = DrawingUtil.sceneToWorldY( pt.x, pt.y );
+//       pw.format(Locale.US, "%.2f %.2f ", x, y );
+//       if ( b ) { pw.format("B "); b = false; }
+//     }
+//     pw.format("\" />\n");
+//     pw.format("          </item>\n");
+//   }
 
   @Override
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /*, DrawingUtil mDrawingUtil */ )

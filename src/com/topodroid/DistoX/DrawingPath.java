@@ -41,7 +41,7 @@ import android.graphics.RectF;
  */
 
 public class DrawingPath extends RectF
-                  implements ICanvasCommand
+                         implements ICanvasCommand
 {
   public static final int DRAWING_PATH_FIXED   = 0; // leg
   public static final int DRAWING_PATH_SPLAY   = 1; // splay
@@ -526,7 +526,7 @@ public class DrawingPath extends RectF
 
   void toDataStream( DataOutputStream dos, int scrap ) { TDLog.Error( "ERROR DrawingPath toDataStream with scrap executed"); }
 
-  void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ ) { }
+  // void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ ) { }
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ ) { }
 
   // ICanvasCommand interface

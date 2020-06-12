@@ -19,5 +19,6 @@ group wall
 color 0xff0000 0xff
 width 1
 csurvey 5 4 1 8
+roundtrip 1
 dash 15 5
 endsymbol

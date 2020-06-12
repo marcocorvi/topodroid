@@ -200,25 +200,25 @@ public class DrawingLabelPath extends DrawingPointPath
     return sw.getBuffer().toString();
   }
 
-  @Override
-  void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
-  { 
-    // int size = mScale - SCALE_XS;
-    // int layer  = 6;
-    // int type   = 8;
-    // int cat    = 81;
-    pw.format("<item layer=\"6\" cave=\"%s\" branch=\"%s\" type=\"8\" category=\"81\" transparency=\"0.00\"",
-      cave, branch );
-    if ( bind != null ) pw.format( " bind=\"%s\"", bind );
-    pw.format(" text=\"%s\" textrotatemode=\"1\" >\n", mPointText );
-    pw.format("  <pen type=\"10\" />\n");
-    pw.format("  <brush type=\"7\" />\n");
-    float x = DrawingUtil.sceneToWorldX( cx, cy ); // convert to world coords.
-    float y = DrawingUtil.sceneToWorldY( cx, cy );
-    pw.format(Locale.US, " <points data=\"%.2f %.2f \" />\n", x, y );
-    pw.format("  <font type=\"0\" />\n");
-    pw.format("</item>\n");
-  }
+//   @Override
+//   void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
+//   { 
+//     // int size = mScale - SCALE_XS;
+//     // int layer  = 6;
+//     // int type   = 8;
+//     // int cat    = 81;
+//     pw.format("<item layer=\"6\" cave=\"%s\" branch=\"%s\" type=\"8\" category=\"81\" transparency=\"0.00\"",
+//       cave, branch );
+//     if ( bind != null ) pw.format( " bind=\"%s\"", bind );
+//     pw.format(" text=\"%s\" textrotatemode=\"1\" >\n", mPointText );
+//     pw.format("  <pen type=\"10\" />\n");
+//     pw.format("  <brush type=\"7\" />\n");
+//     float x = DrawingUtil.sceneToWorldX( cx, cy ); // convert to world coords.
+//     float y = DrawingUtil.sceneToWorldY( cx, cy );
+//     pw.format(Locale.US, " <points data=\"%.2f %.2f \" />\n", x, y );
+//     pw.format("  <font type=\"0\" />\n");
+//     pw.format("</item>\n");
+//   }
 
   @Override
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )

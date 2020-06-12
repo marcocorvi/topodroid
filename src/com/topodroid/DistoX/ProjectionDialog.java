@@ -187,6 +187,7 @@ class ProjectionDialog extends MyDialog
   {
     mProjectionSurface.clearReferences( );
     // Log.v("DistoX", "refs " + mOffset.x + " " + mOffset.y + " " + mZoom + " " + mAzimuth );
+    // mProjectionSurface.newReferences( ... ); DoubleBuffer NOT NEEDED
 
     float cosp = TDMath.cosd( mAzimuth );
     float sinp = TDMath.sind( mAzimuth );
@@ -194,6 +195,7 @@ class ProjectionDialog extends MyDialog
     List< NumStation > stations = mNum.getStations();
     List< NumShot > shots       = mNum.getShots();
     List< NumSplay > splays     = mNum.getSplays();
+
 
     float h1, h2, v1, v2;
     // float dx = 0; // mOffset.x;
@@ -236,6 +238,8 @@ class ProjectionDialog extends MyDialog
         mProjectionSurface.addDrawingStationName( st, h1, v1 );
       }
     }
+
+    // mProjectionSurface.commitReferences();... ); // DoubleBuffer NOT NEEDED
 
     setTitle( String.format( mContext.getResources().getString(R.string.title_projection), mAzimuth ) );
   }

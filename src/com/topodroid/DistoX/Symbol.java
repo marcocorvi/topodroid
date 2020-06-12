@@ -23,17 +23,26 @@ class Symbol implements SymbolInterface
   static final int LINE  = 2;
   static final int AREA  = 3;
 
+  static final int W2D_NONE       = 0; // Walls roundtrip values
+  static final int W2D_WALLS_SHP  = 1;
+  static final int W2D_WALLS_SYM  = 2;
+  static final int W2D_DETAIL_SHP = 3;
+  static final int W2D_DETAIL_SYM = 4;
+
   boolean mEnabled;  //!< whether the symbol is enabled in the library
   String  mThName;   // therion name
   String  mGroup;    // group of this symbol (null if no group)
   // String  mFilename; // filename coincide with therion name
-  int     mCsxLayer;    // cSurvey layer
-  int     mCsxType;
-  int     mCsxCategory;
-  int     mCsxPen;      // pen (for lines)
-  int     mCsxBrush;    // brush type (for areas)
-  String  mCsx;         // clipart path 
+
+  // int     mCsxLayer;    // cSurvey layer
+  // int     mCsxType;
+  // int     mCsxCategory;
+  // int     mCsxPen;      // pen (for lines)
+  // int     mCsxBrush;    // brush type (for areas)
+  // String  mCsx;         // clipart path 
+
   int     mLevel;       // canvas levels [flag]
+  int     mRoundTrip;
 
   /** default cstr
    */
@@ -43,31 +52,33 @@ class Symbol implements SymbolInterface
     mThName  = null;
     mGroup   = null;
     // mFilename = null;
-    mCsxLayer = -1;
-    mCsxType  = -1;
-    mCsxCategory = -1;
-    mCsxPen   = 1;     // default pen is "1"
-    mCsxBrush = 1;     // default brush is "1"
-    mCsx = null;
+    // mCsxLayer = -1;
+    // mCsxType  = -1;
+    // mCsxCategory = -1;
+    // mCsxPen   = 1;     // default pen is "1"
+    // mCsxBrush = 1;     // default brush is "1"
+    // mCsx = null;
     mLevel = DrawingLevel.LEVEL_DEFAULT;
+    mRoundTrip = W2D_NONE;
   }
 
   // @param th_name   therion name (must be non-null)
   // @param group     symbol group (can be null)
   // @param filename  not used
-  Symbol( String th_name, String group, String filename ) 
+  Symbol( String th_name, String group, String filename, int rt ) 
   { 
     mEnabled  = true;
     mThName   = th_name;
     mGroup    = group;
     // mFilename = filename;
-    mCsxLayer = -1;
-    mCsxType  = -1;
-    mCsxCategory = -1;
-    mCsxPen   = 1;
-    mCsxBrush = 1; 
-    mCsx = null;
+    // mCsxLayer = -1;
+    // mCsxType  = -1;
+    // mCsxCategory = -1;
+    // mCsxPen   = 1;
+    // mCsxBrush = 1; 
+    // mCsx = null;
     mLevel = DrawingLevel.LEVEL_DEFAULT;
+    mRoundTrip = rt;
   }
 
   /** cstr 
@@ -79,13 +90,14 @@ class Symbol implements SymbolInterface
     mThName   = null;
     mGroup    = null;
     // mFilename = null;
-    mCsxLayer = -1;
-    mCsxType  = -1;
-    mCsxCategory = -1;
-    mCsxPen   = 1;
-    mCsxBrush = 1; 
-    mCsx = null;
+    // mCsxLayer = -1;
+    // mCsxType  = -1;
+    // mCsxCategory = -1;
+    // mCsxPen   = 1;
+    // mCsxBrush = 1; 
+    // mCsx = null;
     mLevel = DrawingLevel.LEVEL_DEFAULT;
+    mRoundTrip = W2D_NONE;
   }
 
   // SymbolInterface methods

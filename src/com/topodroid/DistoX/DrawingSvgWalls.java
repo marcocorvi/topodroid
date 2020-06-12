@@ -31,6 +31,45 @@ import android.graphics.RectF;
 
 class DrawingSvgWalls extends DrawingSvgBase
 {
+
+  private void writePath( BufferedWriter out, DrawingPath path, float xoff, float yoff, int rt ) throws IOException
+  {
+    if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
+      DrawingLinePath line = (DrawingLinePath)path;
+      if ( ! BrushManager.isLineRoundTrip( line, rt ) ) return;
+      StringWriter sw5w = new StringWriter();
+      PrintWriter pw5w  = new PrintWriter(sw5w);
+      toSvg( pw5w, line, pathToColor(path), xoff, yoff );
+      out.write( sw5w.getBuffer().toString() );
+    } else if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
+      DrawingPointPath point = (DrawingPointPath)path;
+      if ( ! BrushManager.isPointRoundTrip( point, rt ) ) return;
+      if ( BrushManager.isPointLabel( point.mPointType ) ) return;
+      if ( BrushManager.isPointSection( point.mPointType ) ) {
+        if ( TDSetting.mAutoStations ) return;
+        float xx = xoff+point.cx;
+        float yy = yoff+point.cy;
+        StringWriter sw5 = new StringWriter();
+        PrintWriter pw5  = new PrintWriter(sw5);
+        pw5.format(Locale.US, "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"%d\" ", xx, yy, RADIUS );
+        pw5.format(Locale.US, " style=\"fill:grey;stroke:black;stroke-width:%.2f\" />\n", TDSetting.mSvgLabelStroke );
+        out.write( sw5.getBuffer().toString() );
+      } else {
+        StringWriter sw5p = new StringWriter();
+        PrintWriter pw5p  = new PrintWriter(sw5p);
+        toSvg( pw5p, point, pathToColor(path), xoff, yoff );
+        out.write( sw5p.getBuffer().toString() );
+      }
+    } else if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
+      DrawingAreaPath area = (DrawingAreaPath)path;
+      if ( ! BrushManager.isAreaRoundTrip( area, rt ) ) return;
+      StringWriter sw5 = new StringWriter();
+      PrintWriter pw5  = new PrintWriter(sw5);
+      toSvg( pw5, area, pathToColor(path), xoff, yoff );
+      out.write( sw5.getBuffer().toString() );
+    }
+  }
+
   void write( String filename, BufferedWriter out, TDNum num, DrawingCommandManager plot, long type )
   {
     String wall_group = BrushManager.getLineWallGroup( );
@@ -147,30 +186,21 @@ class DrawingSvgWalls extends DrawingSvgBase
 
       out.write(     detail );       out.write( group_mode_open );
       out.write(       detail_shp ); out.write( group_mode_open );
-      for ( ICanvasCommand cmd : plot.getCommands() ) {
-        if ( cmd.commandType() != 0 ) continue;
-        DrawingPath path = (DrawingPath)cmd;
-        if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
-          DrawingLinePath line = (DrawingLinePath)path;
-          if ( BrushManager.isLineWall( line.mLineType ) ) continue;
-          StringWriter sw5 = new StringWriter();
-          PrintWriter pw5  = new PrintWriter(sw5);
-          toSvg( pw5, line, pathToColor(path), xoff, yoff );
-          out.write( sw5.getBuffer().toString() );
-        }
-        out.flush();
-      }
       for ( ICanvasCommand cmd : plot.getCommands() ) { // areas
         if ( cmd.commandType() != 0 ) continue;
         DrawingPath path = (DrawingPath)cmd;
-        if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
-          StringWriter sw5 = new StringWriter();
-          PrintWriter pw5  = new PrintWriter(sw5);
-          toSvg( pw5, (DrawingAreaPath) path, pathToColor(path), xoff, yoff );
-          out.write( sw5.getBuffer().toString() );
-        } 
-        out.flush();
+        writePath( out, path, xoff, yoff, Symbol.W2D_DETAIL_SHP );
       }
+      out.write( "      " + end_grp ); // detail_shp
+      out.flush();
+
+      out.write( detail_sym ); out.write( group_mode_open );
+      for ( ICanvasCommand cmd : plot.getCommands() ) {
+        if ( cmd.commandType() != 0 ) continue;
+        DrawingPath path = (DrawingPath)cmd;
+        writePath( out, path, xoff, yoff, Symbol.W2D_DETAIL_SYM );
+      }
+      out.flush();
       if ( TDSetting.mAutoXSections ) {
         for ( XSection xsection : xsections ) {
           StringWriter sw7 = new StringWriter();
@@ -179,59 +209,30 @@ class DrawingSvgWalls extends DrawingSvgBase
           tdrToSvg( pw7, xsection.mFilename, xsection.mX, xsection.mY, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
           pw7.format("</g>\n");
           out.write( sw7.getBuffer().toString() );
-          out.flush();
         }
-      }
-      out.write( "      " + end_grp ); // detail_shp
-
-      out.write( detail_sym ); out.write( group_mode_open );
-      for ( ICanvasCommand cmd : plot.getCommands() ) {
-        if ( cmd.commandType() != 0 ) continue;
-        DrawingPath path = (DrawingPath)cmd;
-        String color_str = pathToColor( path );
-        if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
-          DrawingPointPath point = (DrawingPointPath)path;
-          if ( BrushManager.isPointLabel( point.mPointType ) ) continue;
-          if ( BrushManager.isPointSection( point.mPointType ) ) {
-            if ( TDSetting.mAutoStations ) continue;
-            float xx = xoff+point.cx;
-            float yy = yoff+point.cy;
-            StringWriter sw5 = new StringWriter();
-            PrintWriter pw5  = new PrintWriter(sw5);
-            pw5.format(Locale.US, "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"%d\" ", xx, yy, RADIUS );
-            pw5.format(Locale.US, " style=\"fill:grey;stroke:black;stroke-width:%.2f\" />\n", TDSetting.mSvgLabelStroke );
-            out.write( sw5.getBuffer().toString() );
-          } else {
-            StringWriter sw5p = new StringWriter();
-            PrintWriter pw5p  = new PrintWriter(sw5p);
-            toSvg( pw5p, point, color_str, xoff, yoff );
-            out.write( sw5p.getBuffer().toString() );
-          }
-        }
-        out.flush();
       }
       out.write( "      " + end_grp ); // detail_sym
       out.write( "    " + end_grp ); // detail
+      out.flush();
 
       out.write(     walls ); out.write( group_mode_open );
       out.write(       walls_shp ); out.write( group_mode_open );
       for ( ICanvasCommand cmd : plot.getCommands() ) {
         if ( cmd.commandType() != 0 ) continue;
         DrawingPath path = (DrawingPath)cmd;
-        if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
-          DrawingLinePath line = (DrawingLinePath)path;
-          if ( BrushManager.isLineWall( line.mLineType ) ) {
-            StringWriter sw5w = new StringWriter();
-            PrintWriter pw5w  = new PrintWriter(sw5w);
-            toSvg( pw5w, line, pathToColor(path), xoff, yoff );
-            out.write( sw5w.getBuffer().toString() );
-          }
-        }
-        out.flush();
+        writePath( out, path, xoff, yoff, Symbol.W2D_WALLS_SHP );
       }
       out.write( "      " + end_grp ); // walls_shp
+      out.flush();
+
       out.write( walls_sym ); out.write( group_mode_close );
+      for ( ICanvasCommand cmd : plot.getCommands() ) {
+        if ( cmd.commandType() != 0 ) continue;
+        DrawingPath path = (DrawingPath)cmd;
+        writePath( out, path, xoff, yoff, Symbol.W2D_WALLS_SYM );
+      }
       out.write( "    " + end_grp ); // walls
+      out.flush();
 
       // SURVEY: VECTORS
       out.write(     survey ); out.write( group_mode_open );

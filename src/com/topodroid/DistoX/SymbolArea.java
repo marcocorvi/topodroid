@@ -76,9 +76,9 @@ class SymbolArea extends Symbol
    * level canvas level
    */
   SymbolArea( String name, String th_name, String group, String fname, int color, Bitmap bitmap, TileMode xmode, TileMode ymode,
-              boolean close_horizontal, int level )
+              boolean close_horizontal, int level, int rt )
   {
-    super( th_name, group, fname );
+    super( th_name, group, fname, rt );
     mName   = name;
     mColor  = color;
     mLevel  = level;
@@ -133,7 +133,7 @@ class SymbolArea extends Symbol
 
   SymbolArea( String filepath, String fname, String locale, String iso )
   {
-    super( null, null, fname );
+    super( null, null, fname, Symbol.W2D_DETAIL_SHP );
     mOrientable  = false;
     // FIXME AREA_ORIENT
     mOrientation = 0;
@@ -246,31 +246,38 @@ class SymbolArea extends Symbol
   	      }
             } else if ( vals[k].equals("csurvey") ) {
               // csurvey <layer> <category> <pen_type> <brush_type>
-              try {
-                ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-                if ( k < s ) {
-                  mCsxLayer = Integer.parseInt( vals[k] );
-                }
-                ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-                if ( k < s ) {
-                  mCsxCategory = Integer.parseInt( vals[k] );
-                }
-                ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-                if ( k < s ) {
-                  mCsxPen = Integer.parseInt( vals[k] );
-                }
-                ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-                if ( k < s ) {
-                  mCsxBrush = Integer.parseInt( vals[k] );
-                }
-              } catch ( NumberFormatException e ) {
-                TDLog.Error( filename + " parse error: " + line );
-              }
+              // try {
+              //   ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+              //   if ( k < s ) {
+              //     mCsxLayer = Integer.parseInt( vals[k] );
+              //   }
+              //   ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+              //   if ( k < s ) {
+              //     mCsxCategory = Integer.parseInt( vals[k] );
+              //   }
+              //   ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+              //   if ( k < s ) {
+              //     mCsxPen = Integer.parseInt( vals[k] );
+              //   }
+              //   ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+              //   if ( k < s ) {
+              //     mCsxBrush = Integer.parseInt( vals[k] );
+              //   }
+              // } catch ( NumberFormatException e ) {
+              //   TDLog.Error( filename + " parse error: " + line );
+              // }
             } else if ( vals[k].equals("level") ) {
               ++k; while ( k < s && vals[k].length() == 0 ) ++k;
               if ( k < s ) {
                 try {
                   mLevel = ( Integer.parseInt( vals[k] ) );
+                } catch( NumberFormatException e ) { }
+              }
+            } else if ( vals[k].equals("roundtrip") ) {
+              ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+              if ( k < s ) {
+                try {
+                  mRoundTrip = ( Integer.parseInt( vals[k] ) );
                 } catch( NumberFormatException e ) { }
               }
   	    } else if ( vals[k].equals("color") ) {

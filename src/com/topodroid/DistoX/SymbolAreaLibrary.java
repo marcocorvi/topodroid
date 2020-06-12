@@ -104,11 +104,11 @@ class SymbolAreaLibrary extends SymbolLibrary
     return ( s == null )? 0xffffffff : s.mColor;
   }
   
-  int areaCsxLayer( int k )    { return getSymbolCsxLayer(k); }
-  int areaCsxType( int k )     { return getSymbolCsxType(k); }
-  int areaCsxCategory( int k ) { return getSymbolCsxCategory(k); }
-  int areaCsxPen( int k )      { return getSymbolCsxPen(k); }
-  int areaCsxBrush( int k )    { return getSymbolCsxBrush(k); }
+  // int areaCsxLayer( int k )    { return getSymbolCsxLayer(k); }
+  // int areaCsxType( int k )     { return getSymbolCsxType(k); }
+  // int areaCsxCategory( int k ) { return getSymbolCsxCategory(k); }
+  // int areaCsxPen( int k )      { return getSymbolCsxPen(k); }
+  // int areaCsxBrush( int k )    { return getSymbolCsxBrush(k); }
 
   // ========================================================================
 
@@ -118,21 +118,21 @@ class SymbolAreaLibrary extends SymbolLibrary
     if ( size() > 0 ) return;
 
     String user = res.getString( R.string.p_user );
-    SymbolArea symbol = new SymbolArea( res.getString( R.string.tha_user ),  "u:user", null, user, 0x67cccccc, null, TileMode.REPEAT, TileMode.REPEAT, false, DrawingLevel.LEVEL_USER );
-    symbol.mCsxLayer = 2;
-    symbol.mCsxType  = 3;   
-    symbol.mCsxCategory = 46;
-    symbol.mCsxPen   = 1;
-    symbol.mCsxBrush = 2;
+    SymbolArea symbol = new SymbolArea( res.getString( R.string.tha_user ),  "u:user", null, user, 0x67cccccc, null, TileMode.REPEAT, TileMode.REPEAT, false, DrawingLevel.LEVEL_USER, Symbol.W2D_DETAIL_SHP );
+    // symbol.mCsxLayer = 2;
+    // symbol.mCsxType  = 3;   
+    // symbol.mCsxCategory = 46;
+    // symbol.mCsxPen   = 1;
+    // symbol.mCsxBrush = 2;
     addSymbol( symbol );
 
     String water = res.getString( R.string.p_water );
-    symbol = new SymbolArea( res.getString( R.string.tha_water ), water, null, water, 0x663366ff, null, TileMode.REPEAT, TileMode.REPEAT, true, DrawingLevel.LEVEL_WATER );
-    symbol.mCsxLayer = 2;
-    symbol.mCsxType  = 3;   
-    symbol.mCsxCategory = 46;
-    symbol.mCsxPen   = 1;
-    symbol.mCsxBrush = 2;
+    symbol = new SymbolArea( res.getString( R.string.tha_water ), water, null, water, 0x663366ff, null, TileMode.REPEAT, TileMode.REPEAT, true, DrawingLevel.LEVEL_WATER, Symbol.W2D_DETAIL_SHP );
+    // symbol.mCsxLayer = 2;
+    // symbol.mCsxType  = 3;   
+    // symbol.mCsxCategory = 46;
+    // symbol.mCsxPen   = 1;
+    // symbol.mCsxBrush = 2;
     addSymbol( symbol );
   }
 

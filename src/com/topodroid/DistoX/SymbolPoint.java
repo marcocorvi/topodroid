@@ -90,16 +90,16 @@ class SymbolPoint extends Symbol
 
   SymbolPoint( String pathname, String fname, String locale, String iso )
   {
-    super( null, null, fname );
+    super( null, null, fname, Symbol.W2D_DETAIL_SYM );
     mOrientable = false;
     mHasText = 0;
     mOrientation = 0.0;
     readFile( pathname, locale, iso );
   }
 
-  SymbolPoint( String n1, String tn1, String group, String fname, int c1, String path, boolean orientable, int level )
+  SymbolPoint( String n1, String tn1, String group, String fname, int c1, String path, boolean orientable, int level, int rt )
   {
-    super( tn1, group, fname );
+    super( tn1, group, fname, rt );
     mName  = n1;
     mDxf   = null;
     mPaint = makePaint( c1, Paint.Style.STROKE ); // FIXME style
@@ -112,9 +112,9 @@ class SymbolPoint extends Symbol
     mLevel = level;
   }
 
-  SymbolPoint( String n1, String tn1, String group, String fname, int c1, String path, boolean orientable, int has_text, int level )
+  SymbolPoint( String n1, String tn1, String group, String fname, int c1, String path, boolean orientable, int has_text, int level, int rt )
   {
-    super( tn1, group, fname ); // FIXME fname
+    super( tn1, group, fname, rt ); // FIXME fname
     mName  = n1;
     mDxf   = null;
     mPaint = makePaint( c1, Paint.Style.STROKE ); //FIXME style
@@ -226,6 +226,13 @@ class SymbolPoint extends Symbol
                   mLevel = ( Integer.parseInt( vals[k] ) );
                 } catch( NumberFormatException e ) { }
               }
+            } else if ( vals[k].equals("roundtrip") ) {
+              ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+              if ( k < s ) {
+                try {
+                  mRoundTrip = ( Integer.parseInt( vals[k] ) );
+                } catch( NumberFormatException e ) { }
+              }
             } else if ( vals[k].equals("orientation") ) {
               if ( cnt == 0 ) {
                 ++k; while ( k < s && vals[k].length() == 0 ) ++k;
@@ -268,22 +275,22 @@ class SymbolPoint extends Symbol
                 } catch ( NumberFormatException e ) { }
               }
             } else if ( vals[k].equals("csurvey") ) {
-              try {
-                ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-                if ( k < s ) {
-                  mCsxLayer = Integer.parseInt( vals[k] );
-                }
-                ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-                if ( k < s ) {
-                  mCsxType = Integer.parseInt( vals[k] );
-                }
-                ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-                if ( k < s ) {
-                  mCsxCategory = Integer.parseInt( vals[k] );
-                }
-              } catch ( NumberFormatException e ) {
-                TDLog.Error( pathname + " parse csurvey error: " + line );
-              }
+              // try {
+              //   ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+              //   if ( k < s ) {
+              //     mCsxLayer = Integer.parseInt( vals[k] );
+              //   }
+              //   ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+              //   if ( k < s ) {
+              //     mCsxType = Integer.parseInt( vals[k] );
+              //   }
+              //   ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+              //   if ( k < s ) {
+              //     mCsxCategory = Integer.parseInt( vals[k] );
+              //   }
+              // } catch ( NumberFormatException e ) {
+              //   TDLog.Error( pathname + " parse csurvey error: " + line );
+              // }
             } else if ( vals[k].equals("path") ) {
               path = br.readLine();
               if ( path != null ) {
@@ -366,7 +373,7 @@ class SymbolPoint extends Symbol
             + "  100\nAcDbEntity\n  100\nAcDbLine\n"
             + "  10\n0.0\n  20\n0.0\n  30\n0.0\n"
             + "  11\n1.0\n  21\n0.0\n  31\n0.0\n"; // 1 mm long
-      mCsx = "";
+      // mCsx = "";
       mSvg = "";
       mXvi = "";
       return;
@@ -700,7 +707,7 @@ class SymbolPoint extends Symbol
       }
     }
     mDxf = sw.getBuffer().toString();
-    mCsx = "&lt;path d=&quot;" + sv1.getBuffer().toString() + "&quot; /&gt;" + sv2.getBuffer().toString();
+    // mCsx = "&lt;path d=&quot;" + sv1.getBuffer().toString() + "&quot; /&gt;" + sv2.getBuffer().toString();
     mSvg = "<path d=\"" + sv1.getBuffer().toString() + "\"/> " + sv3.getBuffer().toString();
     mXvi = sv4.getBuffer().toString();
   }

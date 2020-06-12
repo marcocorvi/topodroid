@@ -21,7 +21,7 @@ The area tool file contains lines specifying the property of the drawing tool.
 <li>"level" view_flag [optional, 1 if missing]</li>
 <li>"bitmap WIDTH HEIGHT X_TILE Y_TILE" starts of the bitmap pattern. The tile modes can be M (mirror) or R (repeat). This line must be followed by HEIGHT lines of length WIDTH with the bitmap pixels (1: foreground, 0: background).</li>
 <li>"endbitmap" marks the end of a bitmap</li>
-<li>"csurvey LAYER CATEGORY PEN BRUSH"</li>
+<li>"roundtrip VALUE" [optional SVG-roundtrip, VALUE can be 1 (walls_shp), 2 (walls_sym), 3 (detail_shp), 4 (detail_sym) - default 3]</li>
 <li>"endsymbol"</li>
 </ul>
 
