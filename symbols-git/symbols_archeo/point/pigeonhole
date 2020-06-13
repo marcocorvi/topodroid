@@ -11,7 +11,6 @@ name-ro volieră_porumbei
 name-de Taubenloch
 th_name u:pigeonhole
 color 0xcccccc
-csurvey 0 0 0
 path
   moveTo 6 6
   lineTo -6 6

@@ -10,7 +10,6 @@ name-ro cantină
 name-de Speisesaal
 th_name u:refectory
 color 0xff9966
-csurvey 0 0 0
 path
   moveTo -7.5 -7.5
   lineTo -7.5 7.5

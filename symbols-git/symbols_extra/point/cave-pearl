@@ -14,7 +14,6 @@ name-ro perlă_de_cavernă
 th_name cave-pearl
 orientation no
 color 0xffffff
-csurvey 6 6 80
 path
   addCircle 0 -2 2
   addCircle -2 2 2

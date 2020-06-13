@@ -10,7 +10,6 @@ name-de Findling
 name-ro întâmplător
 th_name u:erratic
 color 0xcc9966
-csurvey 0 0 0
 path
   addCircle 0 0 7.5
   moveTo 4.5 -4.5

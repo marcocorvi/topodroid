@@ -12,7 +12,6 @@ th_name u:ponor-horizontal
 group ponor
 orientation no
 color 0x999999
-csurvey 6 6 80
 path
   moveTo -7 2
   lineTo 7 2

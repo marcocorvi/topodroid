@@ -9,7 +9,6 @@ name-ro opiliones
 name-de Weberknechte
 th_name u:opiliones
 color 0xff9966
-csurvey 0 0 0
 path
   moveTo -2 0
   cubicTo -2 1 2 1 2 0

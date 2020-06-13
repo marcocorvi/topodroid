@@ -10,7 +10,6 @@ name-de Wirbeltiere
 th_name u:vertebrate
 group paleo
 color 0xcc9966
-csurvey 6 6 80
 path
   addCircle -5  2 1
   addCircle -4  4 1

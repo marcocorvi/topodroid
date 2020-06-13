@@ -12,7 +12,6 @@ group doline
 style straight x0
 color 0xcc9966 0xff
 width 8
-csurvey 5 1 2 2
 effect
   moveTo 0 0
   lineTo 10 0

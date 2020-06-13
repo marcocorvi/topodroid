@@ -95,15 +95,6 @@ class SymbolPointLibrary extends SymbolLibrary
     return ( k < 0 || k >= size() )? null : ((SymbolPoint)mSymbols.get(k)).getOrigPath( );
   }
 
-  // int pointCsxLayer( int k ) { return getSymbolCsxLayer( k ); }
-  // int pointCsxType( int k )  { return getSymbolCsxType( k ); }
-  // int pointCsxCategory( int k ) { return getSymbolCsxCategory( k ); }
-
-  // String pointCsx( int k )
-  // {
-  //   return ( k < 0 || k >= size() )? "" : ((SymbolPoint)mSymbols.get(k)).mCsx;
-  // }
-
   // ========================================================================
 
   static final private String p_label = "moveTo 0 3 lineTo 0 -6 lineTo -3 -6 lineTo 3 -6"; // "T" shape
@@ -118,25 +109,16 @@ class SymbolPointLibrary extends SymbolLibrary
     mPointUserIndex = mSymbols.size(); // 0 = no-text, no-value. thname   group fname
     String user = res.getString( R.string.p_user );
     symbol = new SymbolPoint( res.getString(R.string.thp_user), "u:user", null, user, 0xffffffff, p_user, false, 0, DrawingLevel.LEVEL_USER, Symbol.W2D_DETAIL_SYM );
-    // symbol.mCsxLayer = 6;
-    // symbol.mCsxType  = 8;
-    // symbol.mCsxCategory = 81;
     addSymbol( symbol );
 
     mPointLabelIndex = mSymbols.size(); // 1 = text
     String label = res.getString( R.string.p_label );
     symbol = new SymbolPoint( res.getString(R.string.thp_label), label, null, label, 0xffffffff, p_label, true, 1, DrawingLevel.LEVEL_LABEL, Symbol.W2D_NONE );
-    // symbol.mCsxLayer = 6;
-    // symbol.mCsxType  = 8;
-    // symbol.mCsxCategory = 81;
     addSymbol( symbol );
 
     mPointSectionIndex = mSymbols.size();
     String section = res.getString( R.string.p_section );
     symbol = new SymbolPoint( res.getString(R.string.thp_section), section, null, section, 0xffcccccc, p_section, false, 0, DrawingLevel.LEVEL_USER, Symbol.W2D_DETAIL_SYM );
-    // symbol.mCsxLayer = 6;
-    // symbol.mCsxType  = 6;
-    // symbol.mCsxCategory = 80;
     addSymbol( symbol );
   }
 

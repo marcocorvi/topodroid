@@ -10,7 +10,6 @@ name-de Stromatoporen
 th_name u:stromatoporoid
 group paleo
 color 0xcccccc
-csurvey 0 0 0
 path
   moveTo 0 -1.4
   cubicTo 0 -2.4 2.5 -3.5 3.5 -3.5

@@ -246,26 +246,6 @@ class SymbolArea extends Symbol
   	      }
             } else if ( vals[k].equals("csurvey") ) {
               // csurvey <layer> <category> <pen_type> <brush_type>
-              // try {
-              //   ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-              //   if ( k < s ) {
-              //     mCsxLayer = Integer.parseInt( vals[k] );
-              //   }
-              //   ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-              //   if ( k < s ) {
-              //     mCsxCategory = Integer.parseInt( vals[k] );
-              //   }
-              //   ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-              //   if ( k < s ) {
-              //     mCsxPen = Integer.parseInt( vals[k] );
-              //   }
-              //   ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-              //   if ( k < s ) {
-              //     mCsxBrush = Integer.parseInt( vals[k] );
-              //   }
-              // } catch ( NumberFormatException e ) {
-              //   TDLog.Error( filename + " parse error: " + line );
-              // }
             } else if ( vals[k].equals("level") ) {
               ++k; while ( k < s && vals[k].length() == 0 ) ++k;
               if ( k < s ) {

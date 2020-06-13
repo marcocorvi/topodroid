@@ -10,7 +10,6 @@ name-de Nivokarst
 th_name u:nivokarstic_niche
 color 0xcccccc 0xff
 width 12
-csurvey 2 1 3 4
 effect
   moveTo 0 1
   lineTo 15 1

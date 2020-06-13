@@ -10,7 +10,6 @@ name-ro şistozitate-verticală
 th_name u:foliation-vertical
 group foliation
 color 0xcccc99
-csurvey 0 0 0
 orientation yes
 path
   moveTo -7 0

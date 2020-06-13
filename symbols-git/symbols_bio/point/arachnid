@@ -9,7 +9,6 @@ name-ro arahnidă
 name-de Spinne
 th_name u:arachnid
 color 0xffcc66
-csurvey 0 0 0
 path
   addCircle 0 -1 1
   addCircle 0 1.5 1.5

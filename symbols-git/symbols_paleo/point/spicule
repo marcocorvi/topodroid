@@ -10,7 +10,6 @@ name-de Spiculen
 th_name u:spicule
 group paleo
 color 0xffffff
-csurvey 0 0 0
 path
   moveTo 4 3
   lineTo 1 0

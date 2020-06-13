@@ -12,7 +12,6 @@ th_name audio
 orientation no
 has_text no
 color 0xffffff
-csurvey 6 6 80
 path
   moveTo -6 3
   lineTo 0 3

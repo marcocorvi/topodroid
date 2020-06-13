@@ -10,7 +10,6 @@ name-ro pietriș
 name-de Schotter
 th_name u:gravel
 color 0xcc9966
-csurvey 0 0 0
 path
   addCircle 0 0 6
   moveTo -12 0

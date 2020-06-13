@@ -10,7 +10,6 @@ name-de Schwamm
 th_name u:sponge
 group paleo
 color 0xcc9966
-csurvey 0 0 0
 path
   moveTo 2 0
   lineTo -2 0

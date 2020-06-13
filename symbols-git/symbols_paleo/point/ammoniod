@@ -10,7 +10,6 @@ name-de Ammonit
 th_name u:ammonoid
 group paleo
 color 0xcccccc
-csurvey 0 0 0
 path
   moveTo 0 0
   cubicTo 0 2 -4 3 -4 5

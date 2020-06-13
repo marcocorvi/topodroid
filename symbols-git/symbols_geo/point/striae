@@ -10,7 +10,6 @@ name-ro striație
 name-de Riefen
 th_name u:striae
 color 0xcccc99
-csurvey 0 0 0
 orientation yes
 path
   addCircle 0 0 4

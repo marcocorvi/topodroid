@@ -10,7 +10,6 @@ name-de Palynomorphe
 th_name u:palynomorph
 group paleo
 color 0xcccccc
-csurvey 0 0 0
 path
   addCircle 0 0 1.5
   addCircle 3.5 0 2

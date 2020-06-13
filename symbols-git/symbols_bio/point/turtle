@@ -7,7 +7,6 @@ name-ru черепаха
 name-ro broască țestoasă
 th_name u:turtle
 color 0xffcc66
-csurvey 0 0 0
 path
   addCircle 0 0 1.5
   moveTo 0 -4.5

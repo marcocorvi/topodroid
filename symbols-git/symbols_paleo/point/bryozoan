@@ -10,7 +10,6 @@ name-de Moostierchen
 th_name u:bryozoan
 group paleo
 color 0x66cc99
-csurvey 0 0 0
 path
   moveTo -0.7 5
   lineTo 0.7 5

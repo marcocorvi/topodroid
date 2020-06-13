@@ -7,7 +7,6 @@ name-ro ex-voto
 th_name ex-voto
 orientation no
 color 0xffea80
-csurvey 6 6 80
 path
   moveTo 0 10
   lineTo 0 5

@@ -11,6 +11,5 @@ th_name u:doline-slope
 group doline
 color 0x66cc33 0xff
 width 1
-csurvey 2 1 3 4
 dash 15 5
 endsymbol

@@ -17,7 +17,6 @@ th_name fault
 group fault
 color 0xffffff 0x99
 width 1
-csurvey 5 1 2 2
 effect
   moveTo 0 0
   lineTo 21 0

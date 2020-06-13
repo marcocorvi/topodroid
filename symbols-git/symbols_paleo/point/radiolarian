@@ -10,7 +10,6 @@ name-de Radiolarien
 th_name u:radiolarian
 group paleo
 color 0xff6699
-csurvey 0 0 0
 path
   addCircle 0 0 2
   moveTo 0 2

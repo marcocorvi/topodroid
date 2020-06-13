@@ -17,7 +17,6 @@ name-ro linguriță
 th_name scallop
 orientation yes
 color 0x6666ff
-csurvey 6 6 80
 path
   moveTo 0 6
   lineTo -3 0

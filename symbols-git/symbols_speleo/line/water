@@ -18,7 +18,6 @@ th_name water-flow
 group water-flow
 color 0x6666ff
 width 1
-csurvey 2 3 64 2
 dash 14 7
 effect
   moveTo 0 0

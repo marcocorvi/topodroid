@@ -9,7 +9,6 @@ name-ro polydesmus
 name-de Tausendfüßer
 th_name u:polydesmus
 color 0xffffff
-csurvey 0 0 0
 path
   addCircle 0 -5 0.5
   moveTo -0.5 -5

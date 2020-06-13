@@ -10,7 +10,6 @@ name-ro avanpost
 name-de Tritt
 th_name u:foothold
 color 0xcccccc
-csurvey 0 0 0
 path
   moveTo 3 6
   lineTo 3 3

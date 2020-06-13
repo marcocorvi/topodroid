@@ -10,7 +10,6 @@ name-de Fledermauskolonie
 th_name u:bat-rooster
 group bat
 color 0xffffff
-csurvey 0 0 0
 path
   addCircle 0 2 2
   moveTo 0 0

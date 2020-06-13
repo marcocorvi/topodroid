@@ -6,7 +6,6 @@ name-ro scaun-cu-rotile
 th_name wheelchair
 orientation no
 color 0xffffff
-csurvey 6 6 80
 path
   moveTo 8 7
   lineTo 4 1

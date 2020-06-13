@@ -10,7 +10,6 @@ name-de Brachiopod
 th_name u:brachiopod
 group paleo
 color 0xcccccc
-csurvey 0 0 0
 path
   moveTo -5 -1
   cubicTo -4 1 0 1 0 -1

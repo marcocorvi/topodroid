@@ -10,7 +10,6 @@ name-de Belemnit
 th_name u:belemnoid
 group paleo
 color 0x33cc99
-csurvey 0 0 0
 path
   moveTo -5 0
   lineTo 5 3

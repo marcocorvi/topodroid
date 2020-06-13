@@ -12,7 +12,6 @@ name-ro cisternă
 name-de Zisterne
 th_name u:cistern
 color 0x66ccff
-csurvey 0 0 0
 path
   moveTo -7.5 -4.5
   lineTo -3 7.5

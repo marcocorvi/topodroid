@@ -12,7 +12,6 @@ group water-flow
 style straight x0
 color 0x3399ff 0xff
 width 1
-csurvey 5 1 2 2
 effect
   moveTo 0 0
   lineTo 15 0

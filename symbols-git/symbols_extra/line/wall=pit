@@ -10,7 +10,6 @@ name-de Schachtwand
 th_name wall:pit
 group wall
 color 0xff0000 0xff
-csurvey 5 4 1 1
 roundtrip 1
 effect
   moveTo 0 1

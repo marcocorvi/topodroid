@@ -7,7 +7,6 @@ name-ro minus
 th_name u:minus
 orientation no
 color 0xffffff
-csurvey 6 6 80
 path
   moveTo 4 0
   lineTo -4 0

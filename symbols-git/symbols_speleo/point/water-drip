@@ -13,7 +13,6 @@ th_name water-drip
 group water-flow
 orientation no
 color 0x6699ff
-csurvey 6 6 80
 path
   moveTo 0 -8
   lineTo 0 -4

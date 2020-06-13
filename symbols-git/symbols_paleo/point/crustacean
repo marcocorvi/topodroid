@@ -10,7 +10,6 @@ name-de Krebs
 th_name u:crustacean
 group paleo
 color 0xff9900
-csurvey 0 0 0
 path
   addCircle 0 -1 2
   moveTo 1 1

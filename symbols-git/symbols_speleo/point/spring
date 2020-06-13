@@ -18,7 +18,6 @@ th_name spring
 group spring
 orientation yes
 color 0x6699ff
-csurvey 6 6 80
 path
   addCircle 0 0 4
   addCircle 0 0 1

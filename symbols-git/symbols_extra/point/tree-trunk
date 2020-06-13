@@ -8,7 +8,6 @@ th_name tree-trunk
 group vegetable
 orientation no
 color 0xb33b00
-csurvey 6 6 80
 path
   moveTo -7 0
   cubicTo -10 0 -10 6 -7 6

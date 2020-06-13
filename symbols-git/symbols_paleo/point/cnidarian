@@ -10,7 +10,6 @@ name-de Nesseltier
 th_name u:cnidarian
 group paleo
 color 0x66cc99
-csurvey 0 0 0
 path
   moveTo -1 0
   lineTo -1.5 5

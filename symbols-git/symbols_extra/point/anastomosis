@@ -10,7 +10,6 @@ name-de Labyrinth
 th_name anastomosis
 orientation no
 color 0xcccccc
-csurvey 6 6 80
 path
   moveTo -6 3
   cubicTo -6 4 -4 4 -4 3

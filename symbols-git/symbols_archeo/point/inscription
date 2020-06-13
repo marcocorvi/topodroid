@@ -11,7 +11,6 @@ name-ro inscripție
 name-de Inschrift
 th_name u:inscription
 color 0xff00cc
-csurvey 0 0 0
 path
   moveTo 0 6
   lineTo 0 -9

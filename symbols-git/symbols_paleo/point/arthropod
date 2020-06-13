@@ -10,7 +10,6 @@ name-de Gliederfüßer
 th_name u:arthropod
 group paleo
 color 0xcc9933
-csurvey 0 0 0
 path
    moveTo -2 -1
    lineTo -1.5 1

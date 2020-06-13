@@ -10,7 +10,6 @@ name-de Fledermaus-Wochenstube
 th_name u:bat-nursery
 group bat
 color 0xff99cc
-csurvey 0 0 0
 path
   addCircle 0 2 2
   moveTo 0 0

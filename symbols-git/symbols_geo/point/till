@@ -9,7 +9,6 @@ name-ro argilă-cu-blocuri
 name-de Gletscherablagerungen
 th_name u:till
 color 0xccff66
-csurvey 0 0 0
 path
   moveTo 0 6
   lineTo -4.5 -3

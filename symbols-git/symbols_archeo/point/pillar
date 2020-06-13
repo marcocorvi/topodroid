@@ -12,7 +12,6 @@ name-de Säule
 th_name u:pillar
 group pillar
 color 0xcccccc
-csurvey 0 0 0
 path
   moveTo 6 6
   lineTo 6 -6

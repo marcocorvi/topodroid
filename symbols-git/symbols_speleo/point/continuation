@@ -18,7 +18,6 @@ th_name continuation
 orientation no
 has_text yes
 color 0xff3333
-csurvey 6 6 80
 path
   moveTo 0 3
   lineTo 0 0

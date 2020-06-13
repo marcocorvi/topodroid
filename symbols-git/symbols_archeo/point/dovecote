@@ -11,7 +11,6 @@ name-ro foișor
 name-de Taubenschlag
 th_name u:dovecote
 color 0xcccccc
-csurvey 0 0 0
 path
   moveTo -7.5 -7.5
   lineTo -7.5 7.5

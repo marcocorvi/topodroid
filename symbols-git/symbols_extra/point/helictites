@@ -8,7 +8,6 @@ th_name helictites
 group helictite
 orientation no
 color 0xccff66
-csurvey 6 6 80
 path
   moveTo -7 -10
   lineTo -7 2

@@ -10,7 +10,6 @@ name-de Mittlere_Steigung
 th_name slope:sheer
 group slope
 color 0x997a00 0xff
-csurvey 2 1 3 12
 effect
   moveTo 0 0
   lineTo 0 -8

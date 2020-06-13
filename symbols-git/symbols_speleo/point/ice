@@ -17,7 +17,6 @@ name-ro gheață
 th_name ice
 orientation no
 color 0xffffff
-csurvey 6 6 80
 path
   moveTo -5 0
   lineTo 5 0

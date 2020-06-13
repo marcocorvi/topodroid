@@ -15,7 +15,6 @@ th_name stalagmites
 group stalagmite
 orientation no
 color 0xccff66
-csurvey 6 6 80
 path
   moveTo -8 8
   lineTo -6 6

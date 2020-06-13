@@ -17,5 +17,4 @@ name-ro blocuri
 th_name blocks
 group blocks
 color 0xff3333 0x66
-csurvey 1 48 0 9
 endsymbol

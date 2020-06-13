@@ -11,7 +11,6 @@ name-ro mâner
 name-de Handgriff
 th_name u:handhold
 color 0xcccccc
-csurvey 0 0 0
 path
   moveTo -6 -6
   lineTo -1.5 -6

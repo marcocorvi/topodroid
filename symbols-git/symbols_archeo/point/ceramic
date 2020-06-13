@@ -12,7 +12,6 @@ name-ro ceramică
 name-de Keramik
 th_name u:ceramic
 color 0x66ffcc
-csurvey 0 0 0
 path
   moveTo -6 -4.5
   cubicTo -3 -1.5 -6 -1.5 -6 1.5

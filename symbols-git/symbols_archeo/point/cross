@@ -12,7 +12,6 @@ name-ro cruce
 name-de Kreuz
 th_name u:cross
 color 0xff00ff
-csurvey 0 0 0
 path
   moveTo 0 6
   lineTo 0 -6

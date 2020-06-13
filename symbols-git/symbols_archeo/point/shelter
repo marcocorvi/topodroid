@@ -11,7 +11,6 @@ name-ro adăpost
 name-de Unterstand
 th_name u:shelter
 color 0xffffff
-csurvey 0 0 0
 path
   addCircle 0 0 7.5
   addCircle 0 0 1.5

@@ -17,7 +17,6 @@ name-sk aragonit
 th_name aragonite
 orientation no
 color 0xccff66
-csurvey 6 6 80
 path
   moveTo  0 -5
   lineTo  0  7

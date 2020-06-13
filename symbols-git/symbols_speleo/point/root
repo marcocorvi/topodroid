@@ -18,7 +18,6 @@ th_name root
 group vegetable
 orientation no
 color 0xffcc99
-csurvey 6 6 80
 path
   moveTo 0 -8
   lineTo 0 4

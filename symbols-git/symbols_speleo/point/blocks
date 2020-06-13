@@ -18,7 +18,6 @@ th_name blocks
 group blocks
 orientation no
 color 0xffcc66
-csurvey 6 6 80
 path
   moveTo -7 4
   lineTo 6 6

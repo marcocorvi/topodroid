@@ -8,7 +8,6 @@ th_name seed-germination
 group vegetable
 orientation no
 color 0xddffcc
-csurvey 6 6 80
 path
   moveTo 0 0
   cubicTo 0 -12 5 -12 5 -8

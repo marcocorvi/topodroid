@@ -10,7 +10,6 @@ name-de Kalzithalbkugel
 th_name raft-cone
 orientation no
 color 0xccff66
-csurvey 6 6 80
 path
   moveTo -3 4
   lineTo 0 -4

@@ -10,7 +10,6 @@ name-ro cupolă-suspendată
 name-de Deckenring
 th_name u:ceiling-ring
 color 0xcccccc
-csurvey 0 0 0
 path
   addCircle 0 0 6
   moveTo -3 -4

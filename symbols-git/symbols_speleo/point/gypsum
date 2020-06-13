@@ -18,7 +18,6 @@ th_name gypsum
 group gypsum
 orientation no
 color 0xffffff
-csurvey 6 6 80
 path
   moveTo -5 0
   lineTo 0 -5

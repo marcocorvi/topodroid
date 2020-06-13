@@ -18,7 +18,6 @@ th_name narrow-end
 group end
 orientation no
 color 0xff6666
-csurvey 6 6 80
 path
   moveTo -2 -6
   lineTo -2 6

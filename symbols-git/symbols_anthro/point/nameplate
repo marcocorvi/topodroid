@@ -7,7 +7,6 @@ name-ro tăbliță
 th_name nameplate
 orientation no
 color 0x00b300
-csurvey 6 6 80
 path
   moveTo -8 -5
   lineTo 8 -5

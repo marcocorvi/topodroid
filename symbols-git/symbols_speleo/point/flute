@@ -8,7 +8,6 @@ name-de Kolk
 th_name flute
 orientation yes
 color 0x6666ff
-csurvey 6 6 80
 path
   moveTo -7 0
   lineTo 7 0

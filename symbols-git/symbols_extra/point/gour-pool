@@ -14,7 +14,6 @@ th_name rimstone-pool
 group water
 orientation yes
 color 0x6699ff
-csurvey 6 6 80
 path
   arcTo -8 -4 0 4 0 180
   arcTo 0 -4 8 4 0 180

@@ -18,7 +18,6 @@ th_name paleo-material
 group paleo
 orientation no
 color 0xcc6633
-csurvey 6 6 80
 path
   addCircle -5  2 1
   addCircle -4  4 1

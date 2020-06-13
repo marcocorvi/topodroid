@@ -10,7 +10,6 @@ name-ro marmură
 name-de Marmor
 th_name u:marble
 color 0x99cccc 0xcc
-csurvey 1 48 0 3
 orientable
 bitmap 40 30
   0000000001000000000000000000000000000000

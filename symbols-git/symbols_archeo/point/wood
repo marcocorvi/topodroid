@@ -12,7 +12,6 @@ name-de Holz
 th_name u:wood
 group vegetable
 color 0xcc9966
-csurvey 0 0 0
 path
   moveTo 0 7.5
   lineTo 0 0

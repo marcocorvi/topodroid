@@ -18,7 +18,6 @@ th_name crystal
 group mineral
 orientation no
 color 0xcccccc
-csurvey 6 6 80
 path
   moveTo -5 0
   lineTo 5 0

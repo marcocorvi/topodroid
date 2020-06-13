@@ -8,7 +8,6 @@ th_name curtains
 group curtain
 orientation no
 color 0xccff66
-csurvey 6 6 80
 path
   moveTo -10 -8
   lineTo -8 -6

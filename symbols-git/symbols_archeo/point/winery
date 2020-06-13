@@ -11,7 +11,6 @@ name-ro cramă
 name-de Weinkeller
 th_name u:winery
 color 0x9933ff
-csurvey 0 0 0
 path
   moveTo -3 -6
   lineTo 3 -6

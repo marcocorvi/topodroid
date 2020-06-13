@@ -10,7 +10,6 @@ name-de Synklinale_Fläche
 th_name u:plane-syncline
 group plane
 color 0xcccccc
-csurvey 0 0 0
 path
   moveTo -5 -7
   lineTo 5 7

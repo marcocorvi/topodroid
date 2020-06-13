@@ -10,7 +10,6 @@ name-de Stromatolith
 th_name u:stromatolite
 group paleo
 color 0xcccccc
-csurvey 0 0 0
 path
   moveTo -5 2
   cubicTo -5 -4 5 -4 5 2

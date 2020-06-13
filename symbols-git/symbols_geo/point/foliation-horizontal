@@ -10,7 +10,6 @@ name-ro şistozitate-orizontală
 th_name u:foliation-horizontal
 group foliation
 color 0xcccc99
-csurvey 0 0 0
 path
   moveTo -7 2
   lineTo 7 2

@@ -8,7 +8,6 @@ th_name pillar-with-curtains
 group pillar
 orientation no
 color 0xccff66
-csurvey 6 6 80
 path
   moveTo -3 -7
   lineTo 0 -4

@@ -11,7 +11,6 @@ name-ro scară
 th_name u:ladder
 group trail
 color 0xcccccc
-csurvey 0 0 0
 path
   moveTo -3 -7.5
   lineTo -3 7.5

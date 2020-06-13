@@ -12,7 +12,6 @@ name-ro stupină
 name-de Bienenhaus
 th_name u:apiary
 color 0xff9966
-csurvey 0 0 0
 path
   moveTo -7 -7
   lineTo -7 7

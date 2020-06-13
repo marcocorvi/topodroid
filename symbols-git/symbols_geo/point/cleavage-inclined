@@ -10,7 +10,6 @@ name-de Schräge_Schieferung
 th_name u:cleavage-inclined
 group cleavage
 color 0xcccc99
-csurvey 0 0 0
 orientation yes
 path
   moveTo -9 0

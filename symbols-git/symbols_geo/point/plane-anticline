@@ -10,7 +10,6 @@ name-de Antiklinale_Fläche
 th_name u:plane-anticline
 group plane
 color 0xcccccc
-csurvey 0 0 0
 path
   moveTo 0 -7
   lineTo 5 0

@@ -12,7 +12,6 @@ name-ro cavitate
 name-de Hohlraum
 th_name u:cavity
 color 0xffffff
-csurvey 0 0 0
 path
   moveTo -8 5
   lineTo 8 5

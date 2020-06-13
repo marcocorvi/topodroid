@@ -11,7 +11,6 @@ name-de Lehm
 th_name u:claystone
 group clay
 color 0xcc9933 0xcc
-csurvey 1 48 0 3
 orientable
 bitmap 50 30
   00000000000000000000000000000000000000000000000000

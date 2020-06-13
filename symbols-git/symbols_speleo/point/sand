@@ -18,7 +18,6 @@ th_name sand
 group sand
 orientation no
 color 0xffcc66
-csurvey 6 6 80
 path
   moveTo -7 3
   lineTo -6 3

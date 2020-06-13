@@ -8,7 +8,6 @@ th_name disc-stalactite
 group stalactite
 orientation yes
 color 0xccff66
-csurvey 6 6 80
 path
   addCircle 0 3 3
   moveTo -3 -3

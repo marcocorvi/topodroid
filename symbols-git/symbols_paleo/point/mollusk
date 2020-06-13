@@ -10,7 +10,6 @@ name-de Mollusken
 th_name u:molusk
 group paleo
 color 0xcc6699
-csurvey 0 0 0
 path
   moveTo -2 -2
   cubicTo -6 2 -5 5 0 5

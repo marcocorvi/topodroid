@@ -12,7 +12,6 @@ th_name wall:overlying
 group wall
 color 0xff0000 0x99
 width 1
-csurvey 5 1 2 2
 roundtrip 1
 dash 5 10
 endsymbol

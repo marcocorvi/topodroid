@@ -9,7 +9,6 @@ name-de Steile_Steigung
 th_name slope:steep
 group slope
 color 0xffe066 0xff
-csurvey 2 1 3 12
 effect
   moveTo 0 0
   lineTo 0 -8

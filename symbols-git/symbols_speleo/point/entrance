@@ -18,7 +18,6 @@ th_name entrance
 group entrance
 orientation yes
 color 0xff3333
-csurvey 6 6 80
 path
   moveTo 0 -6
   lineTo -3 3

@@ -94,7 +94,7 @@ public class TDPath
   static String EXTERNAL_STORAGE_PATH =  // app base path
     NOT_ANDROID_11 ? Environment.getExternalStorageDirectory().getAbsolutePath()
                    // : Environment.getExternalStorageDirectory().getAbsolutePath();
-                   // this is what i shuld use but on the emulator it is a data file
+                   // FIXME ANDROID 11 this is what i should use but on the emulator it is a data file
                    // : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath();
                    // : "/sdcard";
                    : null; 

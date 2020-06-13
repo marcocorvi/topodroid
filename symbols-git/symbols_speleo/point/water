@@ -18,7 +18,6 @@ th_name water
 group water
 orientation no
 color 0x6699ff
-csurvey 6 6 80
 path
   moveTo -6 -3
   lineTo -1 -3

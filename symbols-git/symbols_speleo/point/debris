@@ -17,7 +17,6 @@ name-ro prăbușiri
 th_name debris
 orientation no
 color 0xffcc66
-csurvey 6 6 80
 path
   moveTo 0 0
   lineTo 4 1

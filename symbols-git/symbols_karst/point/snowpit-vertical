@@ -12,7 +12,6 @@ th_name u:snowpit-vertical
 group cave
 orientation no
 color 0xffffff
-csurvey 6 6 80
 path
   moveTo 0 8
   lineTo 7 -4

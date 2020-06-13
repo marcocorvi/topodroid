@@ -8,7 +8,6 @@ th_name fixed-ladder
 group trail
 orientation no
 color 0xADADAD
-csurvey 6 6 80
 path
   moveTo -2 -7
   lineTo -2 7

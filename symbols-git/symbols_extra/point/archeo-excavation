@@ -8,7 +8,6 @@ th_name archeo-excavation
 group archeo
 orientation no
 color 0xc39953
-csurvey 6 6 80
 path
   moveTo -10 0
   lineTo -7 0

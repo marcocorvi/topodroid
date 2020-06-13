@@ -10,7 +10,6 @@ name-de Fledermaus
 th_name bat
 group bat
 color 0xffcc33
-csurvey 0 0 0
 path
   addCircle 0 -2 2
   moveTo 0 0

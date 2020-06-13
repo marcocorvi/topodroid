@@ -11,7 +11,6 @@ name-ro gaură-de-traversă
 name-de Balkenloch
 th_name u:bar-hole
 color 0x66ffcc
-csurvey 0 0 0
 path
   addCircle 0 0 6
   addCircle 0 0 2

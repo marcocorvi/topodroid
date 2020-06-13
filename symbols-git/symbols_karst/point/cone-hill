@@ -11,7 +11,6 @@ name-de Konischer_Hügel
 th_name u:cone-hill
 orientation no
 color 0xffffff
-csurvey 6 6 80
 path
   addCircle 0 0 3
   moveTo 0 3

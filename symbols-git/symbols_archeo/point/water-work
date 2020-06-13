@@ -12,7 +12,6 @@ name-de Wasserwerk
 th_name u:water-work
 group water
 color 0x66ccff
-csurvey 0 0 0
 path
   moveTo -7.5 -3
   cubicTo -4.5 0 -4.5 1.5 -3 0

@@ -11,7 +11,6 @@ name-fr calcaire
 name-ro calcar
 th_name u:limestone
 color 0x99cccc 0xcc
-csurvey 1 48 0 3
 orientable
 bitmap 40 30
   0000000100000000000000000000000000000000

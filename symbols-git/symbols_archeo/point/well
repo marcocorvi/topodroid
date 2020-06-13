@@ -12,7 +12,6 @@ name-de Brunnen
 th_name u:well
 group water
 color 0x66ccff
-csurvey 0 0 0
 path
   moveTo -7.5 -7.5
   lineTo 7.5 -7.5

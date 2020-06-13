@@ -10,7 +10,6 @@ name-ro aliniere-verticală
 th_name u:lineation-vertical
 group lineation
 color 0xffffff
-csurvey 0 0 0
 path
   moveTo -7.5 0
   lineTo 0 -7.5

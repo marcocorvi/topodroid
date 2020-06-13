@@ -8,7 +8,6 @@ th_name stalactites-stalagmites
 group stalactite
 orientation no
 color 0xccff66
-csurvey 6 6 80
 path
   moveTo -8 -10
   lineTo -6 -8

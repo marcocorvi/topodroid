@@ -7,7 +7,6 @@ name-ro altar
 th_name altar
 orientation no
 color 0xffffff
-csurvey 6 6 80
 path
   addCircle 0 -8 2
 

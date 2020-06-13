@@ -11,7 +11,6 @@ name-ro urme_de_excavare
 name-de Schnittspuren
 th_name u:cut-marks
 color 0xffffff
-csurvey 0 0 0
 orientation yes
 path
   moveTo -1.5 9

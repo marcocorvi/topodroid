@@ -12,7 +12,6 @@ th_name wall:underlying
 group wall
 color 0xff0000 0xcc
 width 1
-csurvey 5 1 2 2
 roundtrip 1
 dash 10 10
 endsymbol

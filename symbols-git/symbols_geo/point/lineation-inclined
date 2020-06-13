@@ -10,9 +10,7 @@ name-ro aliniere-înclinată
 th_name u:lineation-inclined
 group lineation
 color 0xffffff
-csurvey 0 0 0
 orientation yes
-csurvey 0 0 0
 path
   moveTo -4.5 -4.5
   lineTo 0 -9

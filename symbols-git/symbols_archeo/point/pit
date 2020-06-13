@@ -12,7 +12,6 @@ name-de Loch
 th_name u:pit
 group floor
 color 0xff6699
-csurvey 0 0 0
 path
   moveTo -7.5 -7.5
   lineTo 7.5 -7.5

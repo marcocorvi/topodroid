@@ -11,7 +11,6 @@ th_name passage-height
 orientation no
 has_value yes
 color 0xcccccc
-csurvey 6 6 80
 path
   moveTo -4 -3
   lineTo  0 -7

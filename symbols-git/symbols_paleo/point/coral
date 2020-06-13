@@ -10,7 +10,6 @@ name-de Koralle
 th_name u:coral
 group paleo
 color 0xff3333
-csurvey 0 0 0
 path
   addCircle 0 0 5
   moveTo 0 5

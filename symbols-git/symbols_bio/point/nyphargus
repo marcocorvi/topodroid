@@ -9,7 +9,6 @@ name-ro niphargus
 name-de Höhlenflohkrebs
 th_name u:nyphargus
 color 0x6699ff
-csurvey 0 0 0
 path
   moveTo -4 0
   cubicTo -2 -2 -2 -2 0 0

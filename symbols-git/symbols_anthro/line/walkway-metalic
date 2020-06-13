@@ -8,7 +8,6 @@ th_name u:walkway-metalic
 group trail
 color 0xcccccc 0x66
 width 8
-csurvey 2 1 3 4
 effect
   moveTo 0 0
   lineTo 0 8

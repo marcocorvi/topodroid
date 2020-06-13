@@ -10,7 +10,6 @@ name-de Stachelhäuter
 th_name u:echinoderm
 group paleo
 color 0xcc6699
-csurvey 0 0 0
 path
   moveTo 1 -1
   lineTo 0 -5

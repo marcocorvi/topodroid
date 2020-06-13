@@ -170,15 +170,6 @@ class SymbolLibrary
   void resetOrientations() { for ( Symbol s : mSymbols ) s.setAngle(0); }
   
   // ========================================================================
-  // CSURVEY attributes
-
-  // int getSymbolCsxLayer( int k )    { return ( k < 0 || k >= mSymbols.size() )? -1 : mSymbols.get(k).mCsxLayer; }
-  // int getSymbolCsxType( int k )     { return ( k < 0 || k >= mSymbols.size() )? -1 : mSymbols.get(k).mCsxType; }
-  // int getSymbolCsxCategory( int k ) { return ( k < 0 || k >= mSymbols.size() )? -1 : mSymbols.get(k).mCsxCategory; }
-  // int getSymbolCsxPen( int k )      { return ( k < 0 || k >= mSymbols.size() )? -1 : mSymbols.get(k).mCsxPen; }
-  // int getSymbolCsxBrush( int k )    { return ( k < 0 || k >= mSymbols.size() )? -1 : mSymbols.get(k).mCsxBrush; }
-
-  // ========================================================================
 
   void sortSymbolByName( int start )
   {

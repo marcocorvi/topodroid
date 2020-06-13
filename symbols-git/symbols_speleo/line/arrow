@@ -18,7 +18,6 @@ th_name arrow
 style straight x0
 color 0xcccccc 0xff
 width 1
-csurvey 5 1 2 2
 effect
   moveTo 0 0
   lineTo 15 0

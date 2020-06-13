@@ -8,7 +8,6 @@ th_name bridge
 group trail
 orientation no
 color 0xc46210
-csurvey 6 6 80
 path
   moveTo -10 -6
   lineTo -7 -2

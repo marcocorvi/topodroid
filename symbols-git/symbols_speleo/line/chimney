@@ -18,7 +18,6 @@ th_name chimney
 group ceiling
 color 0xcc00cc 0xff
 width 1
-csurvey 4 1 3 14
 dash 15 5
 effect
   moveTo 0 0

@@ -10,7 +10,6 @@ name-de Schieferung
 th_name u:cleavage
 group cleavage
 color 0xcccc99
-csurvey 0 0 0
 orientation yes
 path
   moveTo 3 9

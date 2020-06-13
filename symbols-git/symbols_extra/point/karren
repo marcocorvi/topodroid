@@ -9,7 +9,6 @@ name-de Karren
 th_name karren
 orientation no
 color 0xffffff
-csurvey 6 6 80
 path
   moveTo -6 2
   lineTo -4 4

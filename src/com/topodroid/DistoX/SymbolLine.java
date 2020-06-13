@@ -241,17 +241,7 @@ class SymbolLine extends Symbol
                 mClosed = true;
               }
             } else if ( vals[k].equals("csurvey") ) {
-              // syntax: 
-              //    csurvey <layer> <type> <category> <pen>
-              // try {
-              //   kval = k;
-              //   mCsxLayer    = nextInt( vals, s );
-              //   mCsxType     = nextInt( vals, s );
-              //   mCsxCategory = nextInt( vals, s );
-              //   mCsxPen      = nextInt( vals, s );
-              // } catch ( NumberFormatException e ) {
-              //   TDLog.Error( filename + " parse csurvey error: " + line );
-              // }
+              // syntax: csurvey <layer> <type> <category> <pen>
   	    } else if ( vals[k].equals("color") ) {
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	      if ( k < s ) {

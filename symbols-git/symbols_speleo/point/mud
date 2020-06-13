@@ -14,7 +14,6 @@ th_name mud
 group mud
 orientation no
 color 0xffcc66
-csurvey 6 6 80
 path
   moveTo -6 3
   lineTo 0 -3

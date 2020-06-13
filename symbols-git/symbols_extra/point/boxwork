@@ -4,7 +4,6 @@ name boxwork
 th_name boxwork
 orientation no
 color 0xccffff
-csurvey 6 6 80
 path
   moveTo -7 -6
   lineTo -7 -1

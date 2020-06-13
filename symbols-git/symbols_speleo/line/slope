@@ -18,7 +18,6 @@ th_name slope
 group slope
 color 0xffcc00 0xff
 width 1
-csurvey 2 1 3 7
 dash 17 15
 effect
   moveTo 0 0

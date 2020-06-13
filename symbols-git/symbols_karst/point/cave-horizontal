@@ -12,7 +12,6 @@ th_name u:cave-horizontal
 group cave
 orientation no
 color 0xffcc66
-csurvey 6 6 80
 path
   moveTo -7 2
   lineTo 7 2

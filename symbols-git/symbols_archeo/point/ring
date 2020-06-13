@@ -11,7 +11,6 @@ name-ro inel
 name-de Ring
 th_name u:ring
 color 0xcccccc
-csurvey 0 0 0
 path
   moveTo -4.5 -6
   cubicTo 1.5 -6 1.5 6 -4.5 6

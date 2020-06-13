@@ -17,7 +17,6 @@ name-ro cupolă_eroziune
 th_name flute
 orientation yes
 color 0x6699ff
-csurvey 6 6 80
 path
   moveTo -3 0
   cubicTo -2 4 2 4 3 0

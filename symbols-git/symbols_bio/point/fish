@@ -7,7 +7,6 @@ name-ru рыба
 name-ro pește
 th_name u:fish
 color 0x66ccff
-csurvey 0 0 0
 path
   moveTo -9 -2
   cubicTo -6 0.5 2 -1.8 6 -1.8

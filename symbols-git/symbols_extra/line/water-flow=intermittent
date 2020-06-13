@@ -17,7 +17,6 @@ th_name water-flow:intermittent
 group water-flow
 color 0xff9933
 width 1
-csurvey 2 3 64 2
 dash 14 7
 effect
   moveTo 0 0
