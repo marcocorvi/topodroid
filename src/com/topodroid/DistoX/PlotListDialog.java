@@ -131,6 +131,7 @@ class PlotListDialog extends MyDialog
         }
       if ( list.size() == 0 && ( slist == null || slist.size() == 0 ) ) 
        * END_SKETCH_3D */
+      // TDLog("DistoX-PLOT", "list size " + list.size() );
       if ( list.size() == 0 )
       {
         TDToast.makeBad( R.string.no_plots );

@@ -198,83 +198,100 @@ class DrawingSvg extends DrawingSvgBase
 	ArrayList< XSection > xsections = new ArrayList<>();
 
         // Log.v("DistoXsvg", "SVG commands " + plot.getCommands().size() );
-        out.write("<g id=\"points\">\n");
-        for ( ICanvasCommand cmd : plot.getCommands() ) {
-          if ( cmd.commandType() != 0 ) continue;
-          DrawingPath path = (DrawingPath)cmd;
-          String color_str = pathToColor( path );
-          StringWriter sw5 = new StringWriter();
-          PrintWriter pw5  = new PrintWriter(sw5);
-          if ( path.mType == DrawingPath.DRAWING_PATH_STATION ) {
-            toSvg( pw5, (DrawingStationPath)path, xoff, yoff );
-          } else if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
-            DrawingPointPath point = (DrawingPointPath)path;
-            if ( BrushManager.isPointSection( point.mPointType ) ) {
-              float xx = xoff+point.cx;
-              float yy = yoff+point.cy;
-	      if ( TDSetting.mAutoXSections ) {
-                // pw5.format(Locale.US, "<g transform=\"translate(%.2f,%.2f)\" >\n", xx, yy );
-                // pw5.format(Locale.US, " style=\"fill:none;stroke:%s;stroke-width:0.1\" >\n", color_str );
-                // Log.v("DistoX", "Section point <" + point.mOptions + "> " + point.cx + " " + point.cy );
-                // option: -scrap survey-xx#
-                // FIXME GET_OPTION
-                String scrapname = point.getOption("-scrap");
-                if ( scrapname != null ) {
-                  String scrapfile = scrapname + ".tdr";
-                  // String scrapfile = point.mOptions.substring( 7 ) + ".tdr";
+        for ( Scrap scrap : plot.getScraps() ) {
+          ArrayList< DrawingPath > paths = new ArrayList<>();
+          scrap.addCommandsToList( paths );
+          out.write( "<g id=\"scrap_" + scrap.mScrapIdx + "\">\n" );
 
-                  // TODO open file survey-xx#.tdr and convert it to svg
-                  // tdrToSvg( pw5, scrapfile, xx, yy, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
-	          xsections.add( new XSection( scrapfile, xx, yy ) );
-                }
-                // pw5.format( end_grp );
-	      } else {
-                pw5.format(Locale.US, "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"%d\" ", xx, yy, RADIUS );
-                pw5.format(Locale.US, " style=\"fill:grey;stroke:black;stroke-width:%.2f\" />\n", TDSetting.mSvgLabelStroke );
-	      }
-            } else {
-              toSvg( pw5, point, color_str, xoff, yoff );
+          out.write("<g id=\"points\">\n");
+/*
+          for ( ICanvasCommand cmd : plot.getCommands() ) {
+            if ( cmd.commandType() != 0 ) continue;
+            DrawingPath path = (DrawingPath)cmd;
+*/
+          for ( DrawingPath path : paths ) {
+            StringWriter sw5 = new StringWriter();
+            PrintWriter pw5  = new PrintWriter(sw5);
+            if ( path.mType == DrawingPath.DRAWING_PATH_STATION ) {
+              toSvg( pw5, (DrawingStationPath)path, xoff, yoff );
+            } else if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
+              DrawingPointPath point = (DrawingPointPath)path;
+              if ( BrushManager.isPointSection( point.mPointType ) ) {
+                float xx = xoff+point.cx;
+                float yy = yoff+point.cy;
+  	        if ( TDSetting.mAutoXSections ) {
+                  // String color_str = pathToColor( path );
+                  // pw5.format(Locale.US, "<g transform=\"translate(%.2f,%.2f)\" >\n", xx, yy );
+                  // pw5.format(Locale.US, " style=\"fill:none;stroke:%s;stroke-width:0.1\" >\n", color_str );
+                  // Log.v("DistoX", "Section point <" + point.mOptions + "> " + point.cx + " " + point.cy );
+                  // option: -scrap survey-xx#
+                  // FIXME GET_OPTION
+                  String scrapname = point.getOption("-scrap");
+                  if ( scrapname != null ) {
+                    String scrapfile = scrapname + ".tdr";
+                    // String scrapfile = point.mOptions.substring( 7 ) + ".tdr";
+  
+                    // TODO open file survey-xx#.tdr and convert it to svg
+                    // tdrToSvg( pw5, scrapfile, xx, yy, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
+  	          xsections.add( new XSection( scrapfile, xx, yy ) );
+                  }
+                  // pw5.format( end_grp );
+  	        } else {
+                  pw5.format(Locale.US, "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"%d\" ", xx, yy, RADIUS );
+                  pw5.format(Locale.US, " style=\"fill:grey;stroke:black;stroke-width:%.2f\" />\n", TDSetting.mSvgLabelStroke );
+  	        }
+              } else {
+                String color_str = pathToColor( path );
+                toSvg( pw5, point, color_str, xoff, yoff );
+              }
             }
-          }
-          out.write( sw5.getBuffer().toString() );
-          out.flush();
-        }
-        out.write( end_grp );
-
-        // Log.v("DistoXsvg", "SVG commands " + plot.getCommands().size() );
-        out.write("<g id=\"lines\">\n");
-        for ( ICanvasCommand cmd : plot.getCommands() ) {
-          if ( cmd.commandType() != 0 ) continue;
-          DrawingPath path = (DrawingPath)cmd;
-          if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
-            StringWriter sw5 = new StringWriter();
-            PrintWriter pw5  = new PrintWriter(sw5);
-            toSvg( pw5, (DrawingLinePath)path, pathToColor(path), xoff, yoff );
             out.write( sw5.getBuffer().toString() );
+            out.flush();
           }
-          out.flush();
-        }
-        out.write( end_grp );
+          out.write( end_grp ); // point
 
-        // Log.v("DistoXsvg", "SVG commands " + plot.getCommands().size() );
-        out.write("<g id=\"areas\">\n");
-        for ( ICanvasCommand cmd : plot.getCommands() ) {
-          if ( cmd.commandType() != 0 ) continue;
-          DrawingPath path = (DrawingPath)cmd;
-          if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
-            StringWriter sw5 = new StringWriter();
-            PrintWriter pw5  = new PrintWriter(sw5);
-            toSvg( pw5, (DrawingAreaPath) path, pathToColor(path), xoff, yoff );
-            out.write( sw5.getBuffer().toString() );
-          } 
-          out.flush();
+          out.write( "<g id=\"lines\">\n" );
+/*
+          for ( ICanvasCommand cmd : plot.getCommands() ) {
+            if ( cmd.commandType() != 0 ) continue;
+            DrawingPath path = (DrawingPath)cmd;
+*/
+          for ( DrawingPath path : paths ) {
+            if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
+              StringWriter sw5 = new StringWriter();
+              PrintWriter pw5  = new PrintWriter(sw5);
+              toSvg( pw5, (DrawingLinePath)path, pathToColor(path), xoff, yoff );
+              out.write( sw5.getBuffer().toString() );
+            }
+            out.flush();
+          }
+          out.write( end_grp ); // lines
+
+          // Log.v("DistoXsvg", "SVG commands " + plot.getCommands().size() );
+          out.write( "<g id=\"areas\">\n" );
+/*
+          for ( ICanvasCommand cmd : plot.getCommands() ) {
+            if ( cmd.commandType() != 0 ) continue;
+            DrawingPath path = (DrawingPath)cmd;
+*/
+          for ( DrawingPath path : paths ) {
+            if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
+              StringWriter sw5 = new StringWriter();
+              PrintWriter pw5  = new PrintWriter(sw5);
+              toSvg( pw5, (DrawingAreaPath) path, pathToColor(path), xoff, yoff );
+              out.write( sw5.getBuffer().toString() );
+            } 
+            out.flush();
+          }
+          out.write( end_grp ); // areas
+
+          out.write( end_grp ); // scrap
         }
-        out.write( end_grp );
 
         // xsections
         // Log.v("DistoXsvg", "SVG xsections " + xsections.size() );
         out.write("<g id=\"xsections\">\n");
-	for ( XSection xsection : xsections ) {
+        for ( XSection xsection : xsections ) {
           // Log.v("DistoXsvg", "SVG xsection " + xsection.mFilename );
           StringWriter sw7 = new StringWriter();
           PrintWriter pw7  = new PrintWriter(sw7);
@@ -283,7 +300,7 @@ class DrawingSvg extends DrawingSvgBase
           pw7.format( end_grp );
           out.write( sw7.getBuffer().toString() );
           out.flush();
-	}
+        }
         out.write( end_grp );
 
         // stations

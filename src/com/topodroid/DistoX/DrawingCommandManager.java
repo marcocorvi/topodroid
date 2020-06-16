@@ -178,6 +178,9 @@ class DrawingCommandManager
   }
 
   int scrapMaxIndex() { return mScraps.size(); }
+
+  // for export classes
+  List< Scrap > getScraps() { return mScraps; }
   
   // ----------------------------------------------------------------
   // PATH_MULTISELECT

@@ -184,21 +184,30 @@ class DrawingSvgWalls extends DrawingSvgBase
 
       out.write( mask ); out.write( group_mode_close );
 
-      out.write(     detail );       out.write( group_mode_open );
-      out.write(       detail_shp ); out.write( group_mode_open );
-      for ( ICanvasCommand cmd : plot.getCommands() ) { // areas
-        if ( cmd.commandType() != 0 ) continue;
-        DrawingPath path = (DrawingPath)cmd;
-        writePath( out, path, xoff, yoff, Symbol.W2D_DETAIL_SHP );
+
+      out.write( detail );     out.write( group_mode_open );
+      out.write( detail_shp ); out.write( group_mode_open );
+      for ( Scrap scrap : plot.getScraps() ) {
+        ArrayList<DrawingPath> paths = new ArrayList<>();
+        scrap.addCommandsToList( paths );
+        out.write( "        <g id=\"scrap_" + scrap.mScrapIdx + "\">\n" );
+        for ( DrawingPath path : paths ) {
+          writePath( out, path, xoff, yoff, Symbol.W2D_DETAIL_SHP );
+        }
+        out.write( "        " + end_grp );
       }
       out.write( "      " + end_grp ); // detail_shp
       out.flush();
 
       out.write( detail_sym ); out.write( group_mode_open );
-      for ( ICanvasCommand cmd : plot.getCommands() ) {
-        if ( cmd.commandType() != 0 ) continue;
-        DrawingPath path = (DrawingPath)cmd;
-        writePath( out, path, xoff, yoff, Symbol.W2D_DETAIL_SYM );
+      for ( Scrap scrap : plot.getScraps() ) {
+        ArrayList<DrawingPath> paths = new ArrayList<>();
+        scrap.addCommandsToList( paths );
+        out.write( "        <g id=\"scrap_" + scrap.mScrapIdx + "\">\n" );
+        for ( DrawingPath path : paths ) {
+          writePath( out, path, xoff, yoff, Symbol.W2D_DETAIL_SYM );
+        }
+        out.write( "        " + end_grp );
       }
       out.flush();
       if ( TDSetting.mAutoXSections ) {
@@ -215,22 +224,31 @@ class DrawingSvgWalls extends DrawingSvgBase
       out.write( "    " + end_grp ); // detail
       out.flush();
 
-      out.write(     walls ); out.write( group_mode_open );
-      out.write(       walls_shp ); out.write( group_mode_open );
-      for ( ICanvasCommand cmd : plot.getCommands() ) {
-        if ( cmd.commandType() != 0 ) continue;
-        DrawingPath path = (DrawingPath)cmd;
-        writePath( out, path, xoff, yoff, Symbol.W2D_WALLS_SHP );
+      out.write( walls );     out.write( group_mode_open );
+      out.write( walls_shp ); out.write( group_mode_open );
+      for ( Scrap scrap : plot.getScraps() ) {
+        ArrayList<DrawingPath> paths = new ArrayList<>();
+        scrap.addCommandsToList( paths );
+        out.write( "        <g id=\"scrap_" + scrap.mScrapIdx + "\">\n" );
+        for ( DrawingPath path : paths ) {
+          writePath( out, path, xoff, yoff, Symbol.W2D_WALLS_SHP );
+        }
+        out.write( "        " + end_grp );
       }
       out.write( "      " + end_grp ); // walls_shp
       out.flush();
 
       out.write( walls_sym ); out.write( group_mode_close );
-      for ( ICanvasCommand cmd : plot.getCommands() ) {
-        if ( cmd.commandType() != 0 ) continue;
-        DrawingPath path = (DrawingPath)cmd;
-        writePath( out, path, xoff, yoff, Symbol.W2D_WALLS_SYM );
+      for ( Scrap scrap : plot.getScraps() ) {
+        ArrayList<DrawingPath> paths = new ArrayList<>();
+        scrap.addCommandsToList( paths );
+        out.write( "        <g id=\"scrap_" + scrap.mScrapIdx + "\">\n" );
+        for ( DrawingPath path : paths ) {
+          writePath( out, path, xoff, yoff, Symbol.W2D_WALLS_SYM );
+        }
+        out.write( "        " + end_grp );
       }
+      out.write( "      " + end_grp ); // walls_sym
       out.write( "    " + end_grp ); // walls
       out.flush();
 
@@ -265,7 +283,7 @@ class DrawingSvgWalls extends DrawingSvgBase
       }
       out.write( "      " + end_grp ); // vectors
 
-      // SURVEY:  MARKERS
+      // survey:  MARKERS
       out.write(       markers ); out.write( group_mode_open ); 
         if ( TDSetting.mAutoStations ) {
           StringWriter sw6m = new StringWriter();
@@ -277,9 +295,10 @@ class DrawingSvgWalls extends DrawingSvgBase
           }
           out.write( sw6m.getBuffer().toString() );
         } 
-      out.write( "      " + end_grp ); // vectors
+      out.write( "      " + end_grp ); // markers
       out.write(       flags ); out.write( group_mode_close );
-      // SURVEY: LABELS
+
+      // survey: LABELS
       out.write(       labels ); out.write( group_mode_open );
       if ( TDSetting.mAutoStations ) {
         StringWriter sw6s = new StringWriter();
@@ -310,20 +329,24 @@ class DrawingSvgWalls extends DrawingSvgBase
       }
       out.flush();
 
-      for ( ICanvasCommand cmd : plot.getCommands() ) {
-        if ( cmd.commandType() != 0 ) continue;
-        DrawingPath path = (DrawingPath)cmd;
-        if ( path.mType != DrawingPath.DRAWING_PATH_POINT ) continue;
-        DrawingPointPath point = (DrawingPointPath)path;
-        if ( ! BrushManager.isPointLabel( point.mPointType ) ) continue;
-        StringWriter sw5l = new StringWriter();
-        PrintWriter pw5l  = new PrintWriter( sw5l );
-        toSvgLabel( pw5l, (DrawingLabelPath)point, pathToColor( path ), xoff, yoff );
-        out.write( sw5l.getBuffer().toString() );
+      for ( Scrap scrap : plot.getScraps() ) {
+        ArrayList<DrawingPath> paths = new ArrayList<>();
+        scrap.addCommandsToList( paths );
+        out.write( "        <g id=\"scrap_" + scrap.mScrapIdx + "\">\n" );
+        for ( DrawingPath path : paths ) {
+          if ( path.mType != DrawingPath.DRAWING_PATH_POINT ) continue;
+          DrawingPointPath point = (DrawingPointPath)path;
+          if ( ! BrushManager.isPointLabel( point.mPointType ) ) continue;
+          StringWriter sw5l = new StringWriter();
+          PrintWriter pw5l  = new PrintWriter( sw5l );
+          toSvgLabel( pw5l, (DrawingLabelPath)point, pathToColor( path ), xoff, yoff );
+          out.write( sw5l.getBuffer().toString() );
+        }
+        out.write( "      " + end_grp ); // scrap
       }
-      out.flush();
       out.write( "      " + end_grp ); // labels
       out.write( "    " + end_grp ); // survey
+      out.flush();
 
       // NOTES, GRID, LEGEND (SCALEBAR, NORTH), FRAME
       out.write(      notes ); out.write( group_mode_close );

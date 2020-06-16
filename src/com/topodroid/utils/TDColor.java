@@ -70,6 +70,10 @@ public class TDColor
   public static final int TITLE_TOPOROBOT  = TDandroid.TITLE_TOPOROBOT; // ORANGE
   public static final int TITLE_ANOMALY    = TDandroid.TITLE_ANOMALY; // BRIGHT RED
 
+  public static final int TOAST_NORMAL  = 0xff7faaff; // 0xff6699ff;
+  public static final int TOAST_WARNING = 0xfffdf322; // 0xffebe110; // 0xffdbd100;
+  public static final int TOAST_ERROR   = 0xfff687c2; // 0xfff676df; // 0xffb66dff;
+
   public static final int NORMAL       = WHITE;
   public static final int NORMAL2      = LIGHT_GRAY;
   public static final int CONNECTED    = FIXED_RED;

@@ -29,7 +29,6 @@ import android.view.View.OnClickListener;
 
 public class TDToast
 {
-  static final private int mFgColor = 0xff6699ff;
   static final private int mBgDrawable = R.drawable.toast_bg; // 0xff333333;
   static final private int mBgColor = 0xff333333;
 
@@ -41,15 +40,15 @@ public class TDToast
   public static void make( int r ) { show( Toast.makeText( TDInstance.context, r, SHORT ) ); }
 
   @SuppressLint("ShowToast")
-  public static void makeBad( int r ) { makeBG( r, TDColor.VIOLET ); }
-  public static void makeWarn( int r ) { makeBG( r, TDColor.ORANGE ); }
+  public static void makeBad( int r )  { makeBG( r, TDColor.TOAST_ERROR ); }
+  public static void makeWarn( int r ) { makeBG( r, TDColor.TOAST_WARNING ); }
 
   @SuppressLint("ShowToast")
   public static void make( String text ) { show( Toast.makeText( TDInstance.context, text, SHORT ) ); }
   
   @SuppressLint("ShowToast")
-  public static void makeBad( String text ) { makeBG( text, TDColor.VIOLET ); }
-  public static void makeWarn( String text ) { makeBG( text, TDColor.ORANGE ); }
+  public static void makeBad( String text )  { makeBG( text, TDColor.TOAST_ERROR ); }
+  public static void makeWarn( String text ) { makeBG( text, TDColor.TOAST_WARNING ); }
   
   public static Toast makeToast( int r )
   {
@@ -126,7 +125,7 @@ public class TDToast
       }
       // view.setClipToOutline( true );
       TextView tv = (TextView)view.findViewById( android.R.id.message );
-      tv.setTextColor( mFgColor );
+      tv.setTextColor( TDColor.TOAST_NORMAL );
     }
     return view;
   }
