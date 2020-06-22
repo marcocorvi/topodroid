@@ -28,6 +28,8 @@ import android.view.ViewGroup;
 import android.view.LayoutInflater;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
+import android.view.inputmethod.InputMethodManager;
+import android.view.inputmethod.EditorInfo;
 import android.view.KeyEvent;
 
 import java.util.List;
@@ -109,25 +111,28 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
 
   boolean multiSelect(int pos ) 
   {
-    DBlock blk = mItems.get( pos );
-    if ( blk != null ) {
-      if ( mSelect.size() > 0 ) {
-        if ( mSelect.remove( blk ) ) {
-          blk.mMultiSelected = false;
-          if ( blk.mView != null ) blk.mView.setBackgroundColor( TDColor.TRANSPARENT );
+    if ( pos >= 0 && pos < mItems.size() ) {
+      DBlock blk = mItems.get( pos );
+      if ( blk != null ) {
+        if ( mSelect.size() > 0 ) {
+          if ( mSelect.remove( blk ) ) {
+            blk.mMultiSelected = false;
+            if ( blk.mView != null ) blk.mView.setBackgroundColor( TDColor.TRANSPARENT );
+          } else {
+            mSelect.add( blk );
+            blk.mMultiSelected = true;
+            if ( blk.mView != null ) blk.mView.setBackgroundColor( TDColor.GRID );
+          }
         } else {
           mSelect.add( blk );
           blk.mMultiSelected = true;
           if ( blk.mView != null ) blk.mView.setBackgroundColor( TDColor.GRID );
         }
-      } else {
-        mSelect.add( blk );
-        blk.mMultiSelected = true;
-        if ( blk.mView != null ) blk.mView.setBackgroundColor( TDColor.GRID );
       }
     // } else {
       // Log.v("DistoX", "adapter multiselect. null blk. size " + mSelect.size() );
     }
+   
     return ( mSelect.size() > 0 );
   }
 
@@ -326,11 +331,15 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
         // Log.v("DistoX-EDIT", "FROM action " + action + " event " + ( (event == null)? "null": event.toString()) );
         // Log.v("DistoX-EDIT", "Blk " + mBlock.mFrom + " " + mBlock.mTo + " --> " + tvFrom.getText().toString() + " " + tvTo.getText().toString() );
         if ( mBlock != null ) {
-          String f = tvFrom.getText().toString();
-          String t = tvTo.getText().toString();
-          mParent.updateShotName( mBlock.mId, f, t );
-          mBlock.setBlockName( f, t, mBlock.isBackLeg() ); 
-          setColor( mBlock );
+          if ( ( event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER ) || action == EditorInfo.IME_ACTION_DONE ) {
+            String f = tvFrom.getText().toString();
+            String t = tvTo.getText().toString();
+            mParent.updateShotName( mBlock.mId, f, t );
+            mBlock.setBlockName( f, t, mBlock.isBackLeg() ); 
+            setColor( mBlock );
+            InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow( v.getWindowToken(), 0);
+          }
         }
         editing = false;
         return true; // action consumed

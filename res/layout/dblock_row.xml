@@ -25,6 +25,8 @@
     android:typeface="monospace"
     android:padding="@dimen/padding"
     android:gravity="right"
+    android:inputType="text"
+    android:imeOptions="actionDone"
   />
   <!--
     style="?android:attr/textViewStyle"
@@ -41,6 +43,8 @@
     android:typeface="monospace"
     android:padding="@dimen/padding"
     android:gravity="right"
+    android:inputType="text"
+    android:imeOptions="actionDone"
   />
 
   <TextView 

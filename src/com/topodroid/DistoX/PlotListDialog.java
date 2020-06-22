@@ -134,7 +134,7 @@ class PlotListDialog extends MyDialog
       // TDLog("DistoX-PLOT", "list size " + list.size() );
       if ( list.size() == 0 )
       {
-        TDToast.makeBad( R.string.no_plots );
+        TDToast.make( R.string.no_plots );
         dismiss();
       }
       // mList.setAdapter( mArrayAdapter );

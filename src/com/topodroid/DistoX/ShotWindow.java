@@ -558,7 +558,7 @@ public class ShotWindow extends Activity
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
-    Log.v("DistoX-EDIT", "on item click " + view.getId() );
+    // Log.v("DistoX-EDIT", "on item click " + view.getId() );
     if ( CutNPaste.dismissPopupBT() ) return;
     if ( mSkipItemClick ) {
       mSkipItemClick = false;
@@ -583,7 +583,7 @@ public class ShotWindow extends Activity
 
   void onBlockClick( DBlock blk, int pos )
   {
-    Log.v("DistoX-EDIT", "on block click: on_open " + mOnOpenDialog );
+    // Log.v("DistoX-EDIT", "on block click: on_open " + mOnOpenDialog );
     if ( mOnOpenDialog ) return;
     mOnOpenDialog = true;
     mShotPos = pos;
@@ -597,7 +597,7 @@ public class ShotWindow extends Activity
   @Override 
   public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id)
   {
-    Log.v("DistoX-EDIT", "on item longClick " + view.getId() );
+    // Log.v("DistoX-EDIT", "on item longClick " + view.getId() );
     if ( closeMenu() ) return true;
     if ( CutNPaste.dismissPopupBT() ) return true;
     return false;
@@ -1359,7 +1359,7 @@ public class ShotWindow extends Activity
   @Override 
   public void onClick(View view)
   {
-    Log.v("DistoX-EDIT", "on click " + view.getId() );
+    // Log.v("DistoX-EDIT", "on click " + view.getId() );
     if ( closeMenu() ) return;
     if ( CutNPaste.dismissPopupBT() ) return;
 
