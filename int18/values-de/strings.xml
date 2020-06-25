@@ -885,6 +885,32 @@
     <string name="help_delete_config">Projekt löschen</string>
     <string name="help_add_equate">Verbindungen hinzufügen</string>
     <string name="help_equates">Verbindungspunkte</string>
+
+    <!-- TODO string name="export_bgcolor">Background color</string -->
+    <!-- TODO string name="export_config">Config file</string -->
+    <!-- TODO string name="export_dxf_blocks">DXF blocks</string -->
+    <!-- TODO string name="export_georeference">Georeference</string -->
+    <!-- TODO string name="export_grid">Grid</string -->
+    <!-- TODO string name="export_linedir">Line direction</string -->
+    <!-- TODO string name="export_lrud">LRUD</string -->
+    <!-- TODO string name="export_lrud_from">LRUD at FROM station</string -->
+    <!-- TODO string name="export_maps">Maps before data</string -->
+    <!-- TODO string name="export_prefix">Cave-prefix in station names</string -->
+    <!-- TODO string name="export_roundtrip">Roundtrip</string -->
+    <!-- TODO string name="export_scale_png">Resolution</string -->
+    <!-- TODO string name="export_scale_th">Scale 1 :</string -->
+    <!-- TODO string name="export_splays">Splays</string -->
+    <!-- TODO string name="export_stations">Stations</string -->
+    <!-- TODO string name="export_swap_lr">Swap L/R</string -->
+    <!-- TODO string name="export_xvi">Xvi images</string -->
+
+    <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
+    <!-- UNUSED string name="export_station_stroke">Station stroke</string -->
+    <!-- UNUSED string name="export_grid_stroke">Grid stroke</string -->
+    <!-- UNUSED string name="export_line_stroke">Line stroke</string -->
+    <!-- UNUSED string name="export_shot_stroke">Shot stroke</string -->
+    <!-- UNUSED string name="export_point_stroke">Point stroke</string -->
+    <!-- UNUSED string name="export_label_stroke">Label stroke</string -->
   
     <string name="audio_paused">Pause</string>
     <string name="audio_playing">Abspielen</string>

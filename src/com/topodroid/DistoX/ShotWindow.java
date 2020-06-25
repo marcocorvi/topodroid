@@ -756,7 +756,7 @@ public class ShotWindow extends Activity
       mActivity.startActivity( new Intent( mActivity, PhotoActivity.class ) );
     } else if ( TDSetting.mWithSensors && TDLevel.overNormal && p++ == pos ) { // SENSORS
       mActivity.startActivity( new Intent( mActivity, SensorListActivity.class ) );
-    } else if ( TDPath.NOT_ANDROID_11 && TDLevel.overBasic && p++ == pos ) { // 3D
+    } else if ( /* TDPath.NOT_ANDROID_11 && */ TDLevel.overBasic && p++ == pos ) { // 3D
       // if ( TopoDroidApp.exportSurveyAsThSync( ) ) { // make sure to have survey exported as therion
         try {
           Intent intent = new Intent( "Cave3D.intent.action.Launch" );
@@ -2038,7 +2038,7 @@ public class ShotWindow extends Activity
     if ( TDLevel.overBasic  ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_recover
     if ( TDLevel.overNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_photo  
     if ( TDSetting.mWithSensors && TDLevel.overNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_sensor
-    if ( TDPath.NOT_ANDROID_11 && TDLevel.overBasic  ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_3d
+    if ( /* TDPath.NOT_ANDROID_11 && */ TDLevel.overBasic  ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_3d
     if ( TDLevel.overNormal && ! diving ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_distox
     mMenuAdapter.add( res.getString( menus[k++] ) );  // menu_options
     mMenuAdapter.add( res.getString( menus[k++] ) );  // menu_help

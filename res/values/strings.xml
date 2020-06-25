@@ -883,7 +883,33 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_delete_config">Delete project</string>
     <string name="help_add_equate">Add surveys equate</string>
     <string name="help_equates">List surveys equates</string>
-  
+
+    <string name="export_bgcolor">Background color</string>
+    <string name="export_config">Config file</string>
+    <string name="export_dxf_blocks">DXF blocks</string>
+    <string name="export_georeference">Georeference</string>
+    <string name="export_grid">Grid</string>
+    <string name="export_linedir">Line direction</string>
+    <string name="export_lrud">LRUD</string>
+    <string name="export_lrud_from">LRUD at FROM station</string>
+    <string name="export_maps">Maps before data</string>
+    <string name="export_prefix">Cave-prefix in station names</string>
+    <string name="export_roundtrip">Roundtrip</string>
+    <string name="export_scale_png">Resolution</string>
+    <string name="export_scale_th">Scale 1 :</string>
+    <string name="export_splays">Splays</string>
+    <string name="export_stations">Stations</string>
+    <string name="export_swap_lr">Swap L/R</string>
+    <string name="export_xvi">Xvi images</string>
+
+    <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
+    <!-- UNUSED string name="export_station_stroke">Station stroke</string -->
+    <!-- UNUSED string name="export_grid_stroke">Grid stroke</string -->
+    <!-- UNUSED string name="export_line_stroke">Line stroke</string -->
+    <!-- UNUSED string name="export_shot_stroke">Shot stroke</string -->
+    <!-- UNUSED string name="export_point_stroke">Point stroke</string -->
+    <!-- UNUSED string name="export_label_stroke">Label stroke</string -->
+
     <string name="audio_paused">Paused</string>
     <string name="audio_playing">Playing</string>
     <string name="audio_recording">Recording</string>

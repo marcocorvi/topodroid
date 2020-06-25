@@ -95,9 +95,9 @@ public class TDPath
     NOT_ANDROID_11 ? Environment.getExternalStorageDirectory().getAbsolutePath()
                    // : Environment.getExternalStorageDirectory().getAbsolutePath();
                    // FIXME ANDROID 11 this is what i should use but on the emulator it is a data file
-                   // : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath();
+                   : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath();
                    // : "/sdcard";
-                   : null; 
+                   // : null; 
 
   public static String PATH_BASEDIR  = EXTERNAL_STORAGE_PATH;
   private static String PATH_DEFAULT  = EXTERNAL_STORAGE_PATH + "/TopoDroid/";

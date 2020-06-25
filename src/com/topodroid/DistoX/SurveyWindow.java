@@ -604,7 +604,7 @@ public class SurveyWindow extends Activity
       TopoDroidApp.mSurveyWindow = null;
       super.onBackPressed();
     } else if ( p++ == pos ) { // EXPORT
-      new ExportDialog( mActivity, this, TDConst.mSurveyExportTypes, R.string.title_survey_export ).show();
+      new ExportDialogShot( mActivity, this, TDConst.mSurveyExportTypes, R.string.title_survey_export ).show();
     } else if ( TDLevel.overExpert && p++ == pos ) { // RENAME
       new SurveyRenameDialog( mActivity, this ).show();
     } else if ( TDLevel.overNormal && p++ == pos ) { // DELETE

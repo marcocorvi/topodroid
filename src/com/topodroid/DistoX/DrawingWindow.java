@@ -5704,7 +5704,7 @@ public class DrawingWindow extends ItemDrawer
 
   // static private Handler th2Handler = null;
 
-  // called (indirectly) only by ExportDialog: save as th2 even if there are missing symbols
+  // called (indirectly) only by ExportDialogPlot: save as th2 even if there are missing symbols
   // no backup_rotate (rotate = 0)
   //
   private void doSaveTh2( long type, final boolean toast )
@@ -6011,7 +6011,7 @@ public class DrawingWindow extends ItemDrawer
           super.onBackPressed();
         }
       } else if ( p++ == pos ) { // EXPORT
-        new ExportDialog( mActivity, this, TDConst.mPlotExportTypes, R.string.title_plot_save ).show();
+        new ExportDialogPlot( mActivity, this, TDConst.mPlotExportTypes, R.string.title_plot_save ).show();
       } else if ( p++ == pos ) { // INFO / AREA
         if ( PlotInfo.isAnySection( mType ) ) {
           float area = mDrawingSurface.computeSectionArea() / (DrawingUtil.SCALE_FIX * DrawingUtil.SCALE_FIX);

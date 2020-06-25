@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+  style="@style/base_padding"
+  android:layout_width="match_parent" 
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  >
+
+  <Spinner android:id="@+id/spin"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/marginvbig"
+    android:drawSelectorOnTop="true"
+  />
+
+  <LinearLayout android:id="@+id/layout_therion"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:layout_marginTop="@dimen/marginvbig"
+    android:layout_marginBottom="@dimen/marginvbig"
+    >
+    <CheckBox android:id="@+id/therion_splays"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/export_splays"
+      />
+    <CheckBox android:id="@+id/therion_xvi"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/export_xvi"
+      />
+    <LinearLayout 
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      >
+      <TextView 
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content"
+        android:text="@string/export_scale_th"
+        />
+      <EditText android:id="@+id/therion_scale"
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content"
+        />
+    </LinearLayout>
+  </LinearLayout>
+
+  <LinearLayout android:id="@+id/layout_svg"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:layout_marginTop="@dimen/marginvbig"
+    android:layout_marginBottom="@dimen/marginvbig"
+    >
+    <CheckBox android:id="@+id/svg_roundtrip"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/export_roundtrip"
+      />
+    <CheckBox android:id="@+id/svg_grid"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/export_grid"
+      />
+    <CheckBox android:id="@+id/svg_linedir"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/export_linedir"
+      />
+    <CheckBox android:id="@+id/svg_splays"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/export_splays"
+      />
+    <!-- LinearLayout 
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      >
+      <TextView 
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content"
+        android:text="@string/export_point_stroke"
+        />
+      <EditText android:id="@+id/svg_point_stroke"
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content"
+        />
+    </LinearLayout -->
+    <!-- LinearLayout 
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      >
+      <TextView 
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content"
+        android:text="@string/export_label_stroke"
+        />
+      <EditText android:id="@+id/svg_label_stroke"
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content"
+        />
+    </LinearLayout -->
+    <!-- LinearLayout 
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      >
+      <TextView 
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content"
+        android:text="@string/export_line_stroke"
+        />
+      <EditText android:id="@+id/svg_line_stroke"
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content"
+        />
+    </LinearLayout -->
+    <!-- LinearLayout 
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      >
+      <TextView 
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content"
+        android:text="@string/export_grid_stroke"
+        />
+      <EditText android:id="@+id/svg_grid_stroke"
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content"
+        />
+    </LinearLayout -->
+    <!-- LinearLayout 
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      >
+      <TextView 
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content"
+        android:text="@string/export_shot_stroke"
+        />
+      <EditText android:id="@+id/svg_shot_stroke"
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content"
+        />
+    </LinearLayout -->
+    <!-- LinearLayout 
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      >
+      <TextView 
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content"
+        android:text="@string/export_linedir_stroke"
+        />
+      <EditText android:id="@+id/svg_linedir_stroke"
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content"
+        />
+    </LinearLayout -->
+    <!-- LinearLayout 
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      >
+      <TextView 
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content"
+        android:text="@string/export_station_stroke"
+        />
+      <EditText android:id="@+id/svg_station_stroke"
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content"
+        />
+    </LinearLayout -->
+  </LinearLayout>
+
+  <LinearLayout android:id="@+id/layout_dxf"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:layout_marginTop="@dimen/marginvbig"
+    android:layout_marginBottom="@dimen/marginvbig"
+    >
+    <CheckBox android:id="@+id/dxf_blocks"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/export_dxf_blocks"
+      />
+  </LinearLayout>
+
+  <LinearLayout android:id="@+id/layout_shp"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:layout_marginTop="@dimen/marginvbig"
+    android:layout_marginBottom="@dimen/marginvbig"
+    >
+    <CheckBox android:id="@+id/shp_georeference"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/export_georeference"
+      />
+  </LinearLayout>
+
+  <LinearLayout android:id="@+id/layout_csurvey"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:layout_marginTop="@dimen/marginvbig"
+    android:layout_marginBottom="@dimen/marginvbig"
+    >
+    <CheckBox android:id="@+id/csurvey_prefix"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/export_prefix"
+      />
+  </LinearLayout>
+
+  <LinearLayout android:id="@+id/layout_png"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:layout_marginTop="@dimen/marginvbig"
+    android:layout_marginBottom="@dimen/marginvbig"
+    >
+    <CheckBox android:id="@+id/png_grid"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/export_grid"
+      />
+    <CheckBox android:id="@+id/png_splays"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/export_splays"
+      />
+    <LinearLayout 
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      >
+      <TextView 
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content"
+        android:text="@string/export_scale_png"
+        />
+      <EditText android:id="@+id/png_scale"
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content"
+        />
+    </LinearLayout>
+    <!-- LinearLayout 
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      >
+      <TextView 
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content"
+        android:text="@string/export_bgcolor"
+        />
+      <EditText android:id="@+id/png_bgcolor"
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content"
+        />
+    </LinearLayout -->
+  </LinearLayout>
+      				  
+  <LinearLayout android:id="@+id/help"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" 
+    android:layout_marginTop="@dimen/marginvbig"
+    android:layout_marginBottom="@dimen/marginvbig"
+    android:gravity="right"
+    >
+    <Button android:id="@+id/button_back"
+      style="@style/button_default"
+      android:text="@string/button_cancel"
+      android:layout_marginRight="@dimen/marginh"
+    />
+    <Button android:id="@+id/button_ok"
+      style="@style/button_default"
+      android:text="@string/button_save"
+    />
+  </LinearLayout>
+   		
+</LinearLayout>

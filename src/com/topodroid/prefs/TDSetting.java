@@ -174,6 +174,7 @@ public class TDSetting
   public static boolean mVTopoLrudAtFrom = false; 
   public static final float THERION_SCALE = 196.8503937f; // 200 * 39.3700787402 / 40;
   public static float   mToTherion = THERION_SCALE / 100;
+  public static int     mTherionScale = 100;
 
   public static float mBitmapScale = 1.5f;
   public static float mBezierStep  = 0.2f;
@@ -839,8 +840,8 @@ public class TDSetting
     // mXTherionAreas  = prefs.getBoolean( keyExpTh[ ], bool(defExpTh[ ]) ); // DISTOX_XTHERION_AREAS
     mTherionSplays     = prefs.getBoolean( keyExpTh[3], bool(defExpTh[3]) ); // DISTOX_THERION_SPLAYS
     // mSurvexLRUD     =   prefs.getBoolean(   keyExpTh[4], bool(defExpTh[4]) ); // DISTOX_SURVEX_LRUD
-    int scale = tryInt( prefs, keyExpTh[5], defExpTh[5] );  // DISTOX_TH2_SCALE
-    mToTherion = THERION_SCALE / scale;
+    mTherionScale = tryInt( prefs, keyExpTh[5], defExpTh[5] );  // DISTOX_TH2_SCALE
+    mToTherion = THERION_SCALE / mTherionScale;
     mTherionXvi        = prefs.getBoolean( keyExpTh[6], bool(defExpTh[6]) ); // DISTOX_TH2_XVI
 
     String[] keyExpDat = TDPrefKey.EXPORT_DAT;
@@ -1595,6 +1596,7 @@ public class TDSetting
       int scale = tryIntValue( hlp, k, v, def[5] );
       if ( scale < 40 ) { scale = 40; ret = "40"; }
       if ( scale > 2000 ) { scale = 2000; ret = "2000"; }
+      mTherionScale = scale;
       mToTherion = THERION_SCALE / scale;
     } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_TH2_XVI (bool)
       mTherionXvi = tryBooleanValue( hlp, k, v, bool(def[6]) );
