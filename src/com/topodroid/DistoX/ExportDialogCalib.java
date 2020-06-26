@@ -1,9 +1,9 @@
-/* @file ExportDialog.java
+/* @file ExportDialogCalib.java
  *
  * @author marco corvi
  * @date nov 2011
  *
- * @brief TopoDroid survey export dialog
+ * @brief TopoDroid calib export dialog
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -34,7 +34,7 @@ import android.view.View;
 // import android.view.KeyEvent;
 // import android.view.ViewGroup.LayoutParams;
 
-public class ExportDialog extends MyDialog
+public class ExportDialogCalib extends MyDialog
                    implements AdapterView.OnItemSelectedListener
                    , View.OnClickListener
 {
@@ -46,7 +46,7 @@ public class ExportDialog extends MyDialog
   private String    mSelected;
   private final int mTitle;
 
-  public ExportDialog( Context context, IExporter parent, String[] types, int title )
+  public ExportDialogCalib( Context context, IExporter parent, String[] types, int title )
   {
     super( context, R.string.ExportDialog );
     mParent = parent;
@@ -61,7 +61,7 @@ public class ExportDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
 
-    initLayout( R.layout.export_dialog, mTitle );
+    initLayout( R.layout.export_dialog_calib, mTitle );
 
     Spinner spin = (Spinner)findViewById( R.id.spin );
     spin.setOnItemSelectedListener( this );

@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date nov 2011
  *
- * @brief TopoDroid survey export dialog
+ * @brief TopoDroid survey sketch export dialog
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.

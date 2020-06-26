@@ -23,7 +23,7 @@ import com.topodroid.DistoX.DataHelper;
 import com.topodroid.DistoX.TDToast;
 import com.topodroid.DistoX.TDPath;
 import com.topodroid.DistoX.R;
-import com.topodroid.DistoX.ExportDialog;
+import com.topodroid.DistoX.ExportDialogTdm;
 import com.topodroid.DistoX.IExporter;
 
 import java.util.List;
@@ -240,7 +240,7 @@ public class TdmConfigActivity extends Activity
       onBackPressed();
     } else if ( p++ == pos ) {  // EXPORT
       if ( mTdmConfig != null ) {
-        new ExportDialog( this, this, mExportTypes, R.string.title_export ).show();
+        new ExportDialogTdm( this, this, mExportTypes, R.string.title_export ).show();
       }
     } else if ( p++ == pos ) { // DELETE
       askDelete();

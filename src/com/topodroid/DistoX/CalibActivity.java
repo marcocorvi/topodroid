@@ -284,8 +284,6 @@ public class CalibActivity extends Activity
         TDToast.makeBad( R.string.calib_device_mismatch );
       }
       doOpen();
-    // } else if ( k < mNrButton1 && b == mButton1[k++] ) { // EXPORT
-    //   new CalibExportDialog( this, this ).show();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) { // COEFF
       showCoeffs();
     // } else if ( k < mNrButton1 && b == mButton1[k++] ) {
@@ -452,8 +450,7 @@ public class CalibActivity extends Activity
     int p = 0;
     if ( TDLevel.overNormal && p++ == pos ) { // EXPORT
       if ( TDInstance.calib != null ) {
-        // new CalibExportDialog( this, this ).show();
-        new ExportDialog( this, this, TDConst.mCalibExportTypes, R.string.title_calib_export ).show();
+        new ExportDialogCalib( this, this, TDConst.mCalibExportTypes, R.string.title_calib_export ).show();
       }
 
     } else if ( TDLevel.overBasic && p++ == pos ) { // DELETE 

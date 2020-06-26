@@ -152,7 +152,8 @@ public class ExportDialogShot extends MyDialog
       case 8: mLayoutTherion.setVisibility( View.VISIBLE ); break;
       case 11: mLayoutVTopo.setVisibility( View.VISIBLE ); break;
       // case 15: mLayoutDxf.setVisibility( View.VISIBLE ); break;
-      case 16: mLayoutKml.setVisibility( View.VISIBLE ); break;
+      case 16: 
+      case 18: mLayoutKml.setVisibility( View.VISIBLE ); break;
       case 19: mLayoutShp.setVisibility( View.VISIBLE ); break;
     }
   }
@@ -203,6 +204,7 @@ public class ExportDialogShot extends MyDialog
       //   }
       //   break;
       case 16: // KML
+      case 18: // GeoJSON
         {
           TDSetting.mKmlSplays = ((CheckBox) findViewById( R.id.kml_splays )).isChecked();
           TDSetting.mKmlStations = ((CheckBox) findViewById( R.id.kml_stations )).isChecked();
