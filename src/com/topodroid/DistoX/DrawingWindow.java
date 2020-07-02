@@ -21,6 +21,7 @@ import com.topodroid.num.TDNum;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.NumShot;
 import com.topodroid.num.NumSplay;
+import com.topodroid.mag.Geodetic;
 import com.topodroid.math.TDVector;
 import com.topodroid.math.Point2D;
 import com.topodroid.math.BezierCurve;
@@ -5017,7 +5018,7 @@ public class DrawingWindow extends ItemDrawer
       // Log.v("DistoX", "set plot type 2 mType " + mType );
       mPid  = mPid2;
       mName = mName2;
-      mType = mPlot2.type;
+      mType = mPlot2.type; // FIXME if ( mPlot2 == null ) { what ? }
       TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], mBMextend );
       mDrawingSurface.setManager( DrawingSurface.DRAWING_PROFILE, (int)mType );
       if ( compute && mNum != null ) {
@@ -5622,6 +5623,7 @@ public class DrawingWindow extends ItemDrawer
     // used also by SavePlotFileTask
     void doSaveCsx( String origin, PlotSaveData psd1, PlotSaveData psd2, boolean toast )
     {
+      // Log.v("DistoX-SAVE", "save csx");
       TopoDroidApp.exportSurveyAsCsxAsync( mActivity, origin, psd1, psd2, toast );
     }
 
@@ -5667,23 +5669,21 @@ public class DrawingWindow extends ItemDrawer
     {
       TDLog.Log( TDLog.LOG_IO, "save with ext: " + filename + " ext " + ext );
       // mActivity = context (only to toast)
+      SurveyInfo info  = mApp_mData.selectSurveyInfo( mSid );
+      PlotInfo   plot  = null;
+      FixedInfo  fixed = null;
       GeoReference station = null;
+
       if ( type == PlotInfo.PLOT_PLAN && ext.equals("shp") ) {
         String origin = num.getOriginStation();
         station = TDExporter.getGeolocalizedStation( mSid, mApp_mData, 1.0f, true, origin );
       } else if ( ext.equals("c3d") ) {
-        String origin = num.getOriginStation();
-        station = TDExporter.getGeolocalizedStation( mSid, mApp_mData, 1.0f, true, origin );
-        // Log.v( "DistoX-C3D", "save with ext: " + filename + " ext " + ext );
-      }  
-      SurveyInfo info  = mApp_mData.selectSurveyInfo( mSid );
-      PlotInfo   plot  = null;
-      FixedInfo  fixed = null;
-      if ( ext.equals("c3d") ) {
+        // c3d export uses pplot and fixed instead of station 
         plot  = PlotInfo.isAnySection(type) ? mPlot3 : PlotInfo.isProfile( type )? mPlot2 : mPlot1;
         List<FixedInfo> fixeds = mApp_mData.selectAllFixed( mSid, TDStatus.NORMAL );
         if ( fixeds != null && fixeds.size() > 0 ) fixed = fixeds.get( 0 );
-        // Log.v("DistoX-C3D", "saving " + filename + " fixeds " + fixeds.size() );
+        // Log.v("DistoX-C3D", "saving " + filename + " fixeds " + fixeds.size() + " fixed " + fixed );
+        if ( fixed == null ) fixed = new FixedInfo( -1, num.getOriginStation(), 0, 0, 0, 0, "", 0 );
       }
       new ExportPlotToFile( mActivity, info, plot, fixed, num, manager, type, filename, ext, toast, station ).execute();
     }

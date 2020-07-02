@@ -2182,6 +2182,8 @@ class DrawingIO
     float zoff = 0;
     String start_station = plot.start; // start station has "num" coords (0,0,0)
     String fixed_station = fix.name;
+    Log.v("DistoX-C3D", "start " + start_station + " fix " + fixed_station );
+
     NumStation fixed = num.getStation( fix.name );
     if ( fixed == null ) { // cannot export Cave3D
       Log.e("DistoX-C3D", "cannot export: fixed null");

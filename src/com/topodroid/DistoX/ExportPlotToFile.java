@@ -17,6 +17,7 @@ import com.topodroid.prefs.TDSetting;
 
 import android.util.Log;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 
@@ -36,15 +37,15 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     private String filename = null;
     private final boolean mToast;
     private final String mFormat;
-    private final GeoReference mStation;
-    private final FixedInfo mFixedInfo;
+    private final GeoReference mStation; // for shp
+    private final FixedInfo mFixedInfo;  // for c3d
     private final PlotInfo  mPlotInfo;
 
     ExportPlotToFile( Context context, SurveyInfo info, PlotInfo plot, FixedInfo fixed,
                       TDNum num, DrawingCommandManager command,
                       long type, String name, String ext, boolean toast, GeoReference station )
     {
-      // Log.v("DistoX", "export plot to file cstr. " + name );
+      // Log.v("DistoX-C3D", "export plot to file cstr. " + name + " fixed " + fixed );
       // FIXME assert( ext != null );
       mFormat    = context.getResources().getString(R.string.saved_file_1);
       mInfo      = info;
@@ -80,33 +81,42 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
 	  return false;
         }
         boolean ret = true;
-        // Log.v("DistoX", "Export to File: " + filename );
         // if ( filename != null ) { // always true
           // final FileOutputStream out = new FileOutputStream( filename );
+          // Log.v("DistoX-SAVE", "Export to File: " + filename );
           TDLog.Log( TDLog.LOG_IO, "export plot to file " + filename );
           if ( mExt.equals("shp") ) { 
-	    DrawingShp.write( filename, mCommand, mType, mStation );
+            // FIXME too-big synch
+            synchronized ( TDPath.mFilesLock ) {
+	      DrawingShp.writeShp( filename, mCommand, mType, mStation );
+            }
 	  } else {
-            TDPath.checkPath( filename );
-            final FileWriter fw = new FileWriter( filename );
+            File temp = File.createTempFile( mFullName, null );
+            final FileWriter fw = new FileWriter( temp );
             BufferedWriter bw = new BufferedWriter( fw );
             if ( mExt.equals("dxf") ) {
-              DrawingDxf.write( bw, mNum, mCommand, mType );
+              DrawingDxf.writeDxf( bw, mNum, mCommand, mType );
             } else if ( mExt.equals("svg") ) {
               if ( TDSetting.mSvgRoundTrip ) {
-                (new DrawingSvgWalls()).write( filename, bw, mNum, mCommand, mType );
+                (new DrawingSvgWalls()).writeSvg( filename, bw, mNum, mCommand, mType );
               } else {
-                (new DrawingSvg()).write( bw, mNum, mCommand, mType );
+                (new DrawingSvg()).writeSvg( bw, mNum, mCommand, mType );
               }
             } else if ( mExt.equals("xvi") ) {
-              DrawingXvi.write( bw, mNum, mCommand, mType );
+              DrawingXvi.writeXvi( bw, mNum, mCommand, mType );
             } else if ( mExt.equals("xml") ) {
-              (new DrawingTunnel()).write( bw, mInfo, mNum, mCommand, mType );
+              (new DrawingTunnel()).writeXml( bw, mInfo, mNum, mCommand, mType );
             } else if ( mExt.equals("c3d") ) {
+              // Log.v("DistoX-C3D", "Export to Cave3D: " + mFullName );
               ret = DrawingIO.exportCave3D( bw, mCommand, mNum, mPlotInfo, mFixedInfo, mFullName );
             }
             bw.flush();
             bw.close();
+            synchronized( TDPath.mFilesLock ) { 
+              TDPath.checkPath( filename );
+              File file = new File( filename );
+              temp.renameTo( file );
+            }
 	  }
           return ret;
         // }

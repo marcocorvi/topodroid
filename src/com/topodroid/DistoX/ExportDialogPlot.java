@@ -193,6 +193,7 @@ public class ExportDialogPlot extends MyDialog
         {
           TDSetting.mTherionSplays = ((CheckBox) findViewById( R.id.png_splays )).isChecked();
           TDSetting.mSvgGrid   = ((CheckBox) findViewById( R.id.png_grid )).isChecked();
+          if ( ((CheckBox) findViewById( R.id.png_bgcolor )).isChecked() ) TDSetting.mBitmapBgcolor = 0xffffffff;
           try { 
             float sc = Float.parseFloat( ((EditText) findViewById( R.id.therion_scale )).getText().toString() );
             if ( sc > 0 ) TDSetting.mBitmapScale = sc;
@@ -222,6 +223,7 @@ public class ExportDialogPlot extends MyDialog
 
     ((CheckBox) findViewById( R.id.png_splays )).setChecked( TDSetting.mTherionSplays );
     ((CheckBox) findViewById( R.id.png_grid )).setChecked( TDSetting.mSvgGrid );
+    ((CheckBox) findViewById( R.id.png_bgcolor )).setChecked( TDSetting.mBitmapBgcolor == 0xffffffff );
     ((EditText) findViewById( R.id.png_scale )).setText( Float.toString( TDSetting.mBitmapScale ) );
   }
 

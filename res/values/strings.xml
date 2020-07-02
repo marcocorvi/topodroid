@@ -884,7 +884,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_add_equate">Add surveys equate</string>
     <string name="help_equates">List surveys equates</string>
 
-    <string name="export_bgcolor">Background color</string>
+    <string name="export_bgcolor">White background</string>
     <string name="export_config">Config file</string>
     <string name="export_dxf_blocks">DXF blocks</string>
     <string name="export_georeference">Georeference</string>

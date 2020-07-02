@@ -1347,12 +1347,15 @@ public class TopoDroidApp extends Application
     SurveyInfo info = getSurveyInfo();
     if ( info == null ) {
       TDLog.Error("Error: null survey info");
+      // Log.v("DistoX-SAVE", "null survey info");
       return;
     }
-    String filename = ( psd1 == null )? TDPath.getSurveyCsxFile(TDInstance.survey)
-                                      : TDPath.getSurveyCsxFile(TDInstance.survey, psd1.name /* = sketch.mName1 */ );
-    TDLog.Log( TDLog.LOG_IO, "exporting as CSX " + filename );
-    (new SaveFullFileTask( context, TDInstance.sid, mData, info, psd1, psd2, origin, filename, toast )).execute();
+    String fullname = ( psd1 == null )? TDInstance.survey
+                                      : TDInstance.survey + "-" + psd1.name;
+    String filename = TDPath.getSurveyCsxFile( fullname );
+    TDLog.Log( TDLog.LOG_IO, "exporting as CSX " + fullname + " " + filename );
+    // Log.v("DistoX-SAVE", "exporting as CSX " + filename );
+    (new SaveFullFileTask( context, TDInstance.sid, mData, info, psd1, psd2, origin, filename, fullname, toast )).execute();
   }
 
   // FIXME_SYNC might be a problem with big surveys

@@ -15,9 +15,9 @@ import com.topodroid.utils.TDLog;
 
 // import java.lang.ref.WeakReference;
 
-// import java.io.File;
+import java.io.File;
+import java.io.IOException;
 
-// import java.util.List;
 
 // import android.content.Intent;
 import android.content.Context;
@@ -26,10 +26,7 @@ import android.os.AsyncTask;
 // import android.os.Bundle;
 // import android.os.Handler;
 
-// import android.graphics.Bitmap;
-// import android.graphics.Bitmap.CompressFormat;
-
-// import android.util.Log;
+import android.util.Log;
 
 class SaveFullFileTask extends AsyncTask<Void,Void,String>
 {
@@ -37,18 +34,21 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
   private DataHelper mData;
   private SurveyInfo mInfo;
   private String mFilename;
+  private String mFullname;
   private String mOrigin = null;
   private PlotSaveData mPsd1 = null;
   private PlotSaveData mPsd2 = null;
   private boolean mToast;
   private String mFormat;
 
-  SaveFullFileTask( Context context, long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2, String origin, String filename, boolean toast )
+  SaveFullFileTask( Context context, long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2, String origin, String filename,
+                    String fullname, boolean toast )
   {
     mSid      = sid;
     mData     = data;
     mInfo     = info.copy();
     mFilename = filename;
+    mFullname = fullname;
     mOrigin   = origin;
     mPsd1     = psd1;
     mPsd2     = psd2;
@@ -58,12 +58,28 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
 
   protected String doInBackground(Void... arg0)
   {
-    String ret = null;
     // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
-    {
-      ret = TDExporter.exportSurveyAsCsx( mSid, mData, mInfo, mPsd1, mPsd2, mOrigin, mFilename );
+    File temp = null;
+    try {
+      temp = File.createTempFile( mFullname, null );
+    } catch ( IOException e ) { 
+      // Log.v("DistoX-SAVE", "cannot create temp file with " + mFullname );
+      TDLog.Error("cannot create temp file with " + mFullname );
+      return null;
     }
-    return ret;
+
+    if ( temp == null ) return null;
+    int res = TDExporter.exportSurveyAsCsx( mSid, mData, mInfo, mPsd1, mPsd2, mOrigin, temp );
+    if ( res == 1 ) {
+      synchronized( TDPath.mFilesLock ) {
+        // TDPath.checkDirs( TDPath.PATH_CSX ); // private
+        File file = new File( mFilename );
+        temp.renameTo( file );
+      }
+      return mFilename;
+    } else {
+      return null;
+    }
   }
 
   @Override

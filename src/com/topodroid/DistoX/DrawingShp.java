@@ -32,7 +32,7 @@ class DrawingShp
 {
   // @param basepath   TopoDroid/shp/survey-plot
   // @return true if successful
-  static boolean write( String basepath, DrawingCommandManager plot, long type, GeoReference station )
+  static boolean writeShp( String basepath, DrawingCommandManager plot, long type, GeoReference station )
   {
 
     File dir   = null;

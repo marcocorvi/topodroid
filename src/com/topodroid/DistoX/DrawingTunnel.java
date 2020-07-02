@@ -52,7 +52,7 @@ class DrawingTunnel extends DrawingSvgBase
   float toWorldX( float x ) { return (x-DrawingUtil.CENTER_X); }
   float toWorldY( float y ) { return (y-DrawingUtil.CENTER_Y); }
 
-  void write( BufferedWriter out, SurveyInfo info, TDNum num, /* DrawingUtil util, */ DrawingCommandManager plot, long type )
+  void writeXml( BufferedWriter out, SurveyInfo info, TDNum num, /* DrawingUtil util, */ DrawingCommandManager plot, long type )
   {
     RectF bbox = plot.getBoundingBox( );
     float xmin = bbox.left;

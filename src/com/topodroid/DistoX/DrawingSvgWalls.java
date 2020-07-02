@@ -70,7 +70,7 @@ class DrawingSvgWalls extends DrawingSvgBase
     }
   }
 
-  void write( String filename, BufferedWriter out, TDNum num, DrawingCommandManager plot, long type )
+  void writeSvg( String filename, BufferedWriter out, TDNum num, DrawingCommandManager plot, long type )
   {
     String wall_group = BrushManager.getLineWallGroup( );
 
