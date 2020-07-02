@@ -69,6 +69,28 @@ public class TDConst
     "GeoJSON",
     "Shapefile"
   };
+  public static final String[] mSurveyExportTypesNoGeo = { "ZIP", 
+    "Compass",
+    "cSurvey",
+    "GHTopo",
+    "Grottolf",
+    "PocketTopo",
+    "Polygon",
+    "Survex",
+    "Therion",
+    "Topo",
+    "TopoRobot",
+    "VisualTopo",
+    "Walls", 
+    "WinKarst",
+    "CSV",
+    "DXF"
+    // "KML",
+    // "OziExplorer",
+    // "GeoJSON",
+    // "Shapefile"
+  };
+
   private static final int[] mSurveyExportIndex = {
     DISTOX_EXPORT_ZIP,
     DISTOX_EXPORT_DAT,

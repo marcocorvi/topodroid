@@ -41,12 +41,83 @@ On import from file formats that have LRUD values, these are converted to x-spla
 
 
 <h4>SURVEY DATA EXPORT</h4>
+TopoDroid exports survey data to the following cave-program formats:
+<ul>
+<li><a href="#compass">Compass</a></li>
+<li><a href="#csurvey">cSurvey</a></li>
+<li><a href="#survex">Survex</a></li>
+<li><a href="#therion">Therion</a></li>
+<li><a href="#trobot">TopoRobot</a></li>
+<li><a href="#vtopo">VisualTopo</a></li>
+<li><a href="#walls">Walls</a></li>
+<li><a href="#winkarst">WinKarst</a></li>
+<li><a href="#ghtopo">GHTopo</a></li>
+<li><a href="#grottolf">Grottolf</a></li>
+<li><a href="#ptopo">PocketTopo</a></li>
+<li><a href="#polygon">Polygon</a></li>
+<li><a href="#topo">Topo</a></li>
+</ul>
 
-Note. Fixed points are exported with coordinates latitude-longitude [decimal degrees] and altitude above
+Furthermore it exports survey data as
+<ul>
+<li><a href="#csv">CSV</a></li>
+<li><a href="#dxf">DXF</a></li>
+<li><a href="#kml">KML</a></li>
+<li><a href="#geojson">GeoJSON</a></li>
+<li><a href="#plt">trackfile</a></li>
+<li><a href="#shp">shapefile</a></li>
+</ul>
+If the survey is not georeferenced the last four export formats are not shown in the
+export dialog.<br><p>
+
+Georeference points are exported with coordinates latitude-longitude [decimal degrees] and altitude above
 mean sea level [m].<br>
 H/V-splays are treated as normal splays in the exports.<br><p>
 
-<b>Therion</b> (.th)<br>
+
+<b id="compass">Compass</b> (.dat)<br>
+<i>Compass</i> data file are supported both in import and in export.<br>
+Import compass files must have extension either ".dat" or ".DAT".<br>
+Supported data format are "normal" and "diving".<br>
+Data units are 'feet' and 'degrees' (converted to meters and degrees inside TopoDroid).<br><p>
+
+Settings:
+<ul style="margin-top=0">
+<li><u>Station prefix</u></li>
+<li><u>splays</u></li>
+<li><u>L/R swap</u></li>
+</ul>
+<br><p>
+
+
+<b id="csurvey">cSurvey</b> (.csx)<br>
+The cSurvey export files require cSurvey v. 1.20 or later.<br>
+The <i>cSurvey</i> export from the survey <u>info window</u> includes only the 
+survey data, and does not have any sketch.<br>
+The make a <i>cSurvey</i> export with a sketch (both plan and profile),
+you should export from the <u>drawing window</u>.
+<br><p>
+
+The <i>cSurvey</i> export includes the calibration-check shots and media files
+(audio and photo).<br><p>
+
+Settings:<ul style="margin-top=0">
+<li><u>station prefix</u> whether to add a prefix to the station names</li>
+</ul><p>
+
+
+<b id="survex">Survex</b> (.svx)<br>
+Survey data can be exported as <i>Survex</i> files.<br>
+Data units follow the user options.<br><p>
+Import Survex files must have extension ".svx".<br>
+
+Settings:<ul style="margin-top=0">
+<li><u>line termination</u> can be either Unix or Windows</li>
+<li><u>named TO station</u> for splay shots (the TO name is the FROM station with a letter appended)</li>
+<li>add <u>LRUD</u> to export</li>
+</ul><p>
+
+<b id="therion">Therion</b> (.th)<br>
 Survey data are exported in <i>Therion</i> format, using the data "normal" form.<br>
 Data units follow the user options.<br>
 The team names are listed but the command is commented.<br>
@@ -68,7 +139,7 @@ Settings
 <li>add <u>LRUD</u> to export</li>
 </ul><p>
 
-<b>thconfig</b><br>
+<u>thconfig</u><br>
 The generated "thconfig" file contains the basic commands to create the pdf of the plan and extended profile maps.<br>
 Basically you can see the Android "sdcard" from your PC, you can create the pdf's executing therion with
 the generated <i>thconfig</i> file.<br><p>
@@ -86,22 +157,11 @@ TopoDroid parsing of <i>Therion</i> data syntax is very limited. Basically only 
 Fixed points ("fix") are parsed but not taken into account as "cs" is not supported.<br><p>
 
 
-<b>Compass</b> (.dat)<br>
-<i>Compass</i> data file are supported both in import and in export.<br>
-Import compass files must have extension either ".dat" or ".DAT".<br>
-Supported data format are "normal" and "diving".<br>
-Data units are 'feet' and 'degrees' (converted to meters and degrees inside TopoDroid).<br><p>
+<b id="trobot">TopoRobot</b> (.trb)<br>
+Survey data can be exported as <i>TopoRobot</i> files. The <i>TopoRobot</i> station naming policy
+must have been selected. If the station names follow TopoRobot convention "series.number", they are used.<br><p>
 
-Settings:
-<ul style="margin-top=0">
-<li><u>Station prefix</u></li>
-<li><u>splays</u></li>
-<li><u>L/R swap</u></li>
-</ul>
-<br><p>
-
-
-<b>VisualTopo</b> (.tro)<br>
+<b id="vtopo">VisualTopo</b> (.tro)<br>
 <i>VisualTopo</i> data file are supported both in import and in export.<br>
 Import VisualTopo files must have extension either ".tro" or ".TRO".<br>
 VisualTopo splays are included if enabled.<br>
@@ -115,48 +175,15 @@ Settings:
 </ul>
 <br><p>
 
-
-<b>Survex</b> (.svx)<br>
-Survey data can be exported as <i>Survex</i> files.<br>
-Data units follow the user options.<br><p>
-Import Survex files must have extension ".svx".<br>
-
-Settings:<ul style="margin-top=0">
-<li><u>line termination</u> can be either Unix or Windows</li>
-<li><u>named TO station</u> for splay shots (the TO name is the FROM station with a letter appended)</li>
-<li>add <u>LRUD</u> to export</li>
-</ul><p>
-
-
-<b>cSurvey</b> (.csx)<br>
-The cSurvey export files require cSurvey v. 1.20 or later.<br>
-The <i>cSurvey</i> export from the survey <u>info window</u> includes only the 
-survey data, and does not have any sketch.<br>
-The make a <i>cSurvey</i> export with a sketch (both plan and profile),
-you should export from the <u>drawing window</u>.
-<br><p>
-
-The <i>cSurvey</i> export includes the calibration-check shots and media files
-(audio and photo).<br><p>
-
-Settings:<ul style="margin-top=0">
-<li><u>station prefix</u> whether to add a prefix to the station names</li>
-</ul><p>
-
-
-<b>TopoRobot</b> (.trb)<br>
-Survey data can be exported as <i>TopoRobot</i> files. The <i>TopoRobot</i> station naming policy
-must have been selected. If the station names follow TopoRobot convention "series.number", they are used.<br><p>
-
-<b>Walls</b> (.srv)<br>
+<b id="walls">Walls</b> (.srv)<br>
 Survey data can be exported as <i>Walls</i> files (partially tested).<br>
 Data units follow the user options.<br><p>
 
-<b>WinKarst</b> (.sur)<br>
+<b id="winkarst">WinKarst</b> (.sur)<br>
 Survey data can be exported as <i>WinKarst</i> files (untested).<br><p>
 
 
-<b>PocketTopo</b> (.top)<br>
+<b id="ptopo">PocketTopo</b> (.top)<br>
 TopoDroid supports <i>PocketTopo</i> both in import and in export.<br><p>
 
 PocketTopo export contains only the survey data.<br><p>
@@ -173,23 +200,23 @@ It may happen that the imported sketch is not aligned with the survey data. In t
 <u>sketch window</u>, to fit the centerline.<br><p>
 
 
-<b>Polygon</b> (.cave)<br>
+<b id="polygon">Polygon</b> (.cave)<br>
 TopoDroid can export survey data in <i>Polygon</i> format. 
 Fixed points are exported as lat-long.<br><p>
 
 
-<b>GHTopo</b> (.gtx)<br>
+<b id="ghtopo">GHTopo</b> (.gtx)<br>
 TopoDroid can export survey data in <i>GHTopo</i> format (partially tested).<br><p>
 
 
-<b>Grottolf</b> (.grt)<br>
+<b id="grottolf">Grottolf</b> (.grt)<br>
 TopoDroid can export survey data in <i>Grottolf</i> format (untested). 
 If the first station has geographical coordinates these are exported, otherwise local coordinates are used.
 The profile at the stations are computed by projecting the splay shots onto a vertical plane perpendicular to the
 leg.<br><p>
 
 
-<b>Topo</b> (.cav)<br>
+<b id="topo">Topo</b> (.cav)<br>
 Survey data can be exported as <i>Topo</i> files.<br><p>
 
 Settings (under "Survex"settings):
@@ -197,64 +224,8 @@ Settings (under "Survex"settings):
 <li><u>line termination</u> can be either Unix or Windows</li>
 </ul><p>
 
-<b>PLT</b> (.plt)<br>
-Survey data can be exported as track file (<i>OziExplorer</i>) if you have georeferenced a station.
-If the survey contains disjoint pieces, the track file includes all the pieces with a georeferenced station.
-Data are corrected with the magnetic declination.<br><p>
 
-<b>KML</b> (.kml)<br>
-Survey data can be exported as KML file (<i>Keyhole Markup Language</i>) if you have georeferenced at least a station.
-If the survey contains disjoint pieces, the KML export includes all the pieces with a georeferenced station.
-Data are corrected with the magnetic declination.<br><p>
-
-Settings:
-<ul style="margin-top=0">
-<li><u>stations</u></li>
-<li><u>splays</u></li>
-</ul>
-<br><p>
-
-<b>GeoJSON</b> (.json)<br>
-Survey data can be exported as GeoJSON file (<i>RFC 7946</i>) if you have georeferenced at least a station.
-Shots are exported as <i>LineString</i>, stations as <i>Point</i>. 
-If the survey contains disjoint pieces, the GeoJSON export includes all the pieces with a georeferenced station.
-Data are corrected with the magnetic declination.<br><p>
-
-Settings:
-<ul style="margin-top=0">
-<li><u>stations</u></li>
-<li><u>splays</u></li>
-</ul>
-<br><p>
-
-
-<b>Shapefile</b> (.shp .shx .dbf)<br>
-Survey data can be exported as shapefile if you have georeferenced at least a station.
-There is a shapefile for the stations and one for the shots (both legs and splays).
-If the survey contains disjoint pieces, a shapefile is exported for each pieces with a georeferenced station.
-Data are corrected with the magnetic declination.
-Each shapefile consists of three files: the data file (shp), the index file (shx), and the attributes file (dbf).
-The files are zip-compressed and the zip is saved in the folder "shp" with extension ".shz".
-<br><p>
-
-The "stations" DBF contains only the field "name".<br><p>
-
-The "shots" DBF contains the fields
-<ul style="margin-top=0">
-<li><i>type</i>: either "leg" or "splay"</li>
-<li><i>from</i> station</li>
-<li><i>to</i> station ("-" for splays)</li>
-<li>shot <i>flag</i> as hex: 1-surface, 2-duplicate, 4-commented</li>
-<li>shot <i>comment</i></li>
-</ul><br>
-
-Settings:
-<ul style="margin-top=0">
-<li><u>stations</u>: whether to export the stations file</li>
-<li><u>splays</u>: whether to include the splays</li>
-</ul><br><p>
-
-<b>CSV</b> (.csv)<br>
+<b id="csv">CSV</b> (.csv)<br>
 Survey data can be exported as a list of records with comma-separated fields:
 <ul style="margin-top=0">
 <li>"from" and "to" stations</li>
@@ -280,7 +251,7 @@ Settings:
 </ul><br><p>
 
 
-<b>DXF</b> (.dxf)<br>
+<b id="dxf">DXF</b> (.dxf)<br>
 Survey data are exported as 3D DXF (<i>LibreCAD</i>) with layers
 <ul style="margin-top=0">
 <li>stations</li>
@@ -290,39 +261,82 @@ Survey data are exported as 3D DXF (<i>LibreCAD</i>) with layers
 Data are corrected with the magnetic declination.<br><p>
 
 
-<h4>SKETCH EXPORT</h4>
+<b id="plt">PLT</b> (.plt)<br>
+Survey data can be exported as track file (<i>OziExplorer</i>) if you have georeferenced a station.
+If the survey contains disjoint pieces, the track file includes all the pieces with a georeferenced station.
+Data are corrected with the magnetic declination.<br><p>
 
-<b>Therion</b> (.th2)<br>
-Sketches are exported in Therion format as one sketch per file, if exported from the <u>sketch window</u>,
-or as a file containing all the sketches with the same view, plan or extended, if exported
-from the <u>overview window</u>. In the latter there is a scrap for each sketch, and x-section scraps
-are included if the automatic "section" points are enabled.
+<b id="kml">KML</b> (.kml)<br>
+Survey data can be exported as KML file (<i>Keyhole Markup Language</i>) if you have georeferenced at least a station.
+If the survey contains disjoint pieces, the KML export includes all the pieces with a georeferenced station.
+Data are corrected with the magnetic declination.<br><p>
+
+Settings:
+<ul style="margin-top=0">
+<li><u>stations</u></li>
+<li><u>splays</u></li>
+</ul>
 <br><p>
 
-The Therion <i>scrap</i> names are composed of the survey name, the sketch name and a suffix, either 'p', for plan, or 's', for profile.<br>
-For multi-scrap sketches the Therion <i>scrap</i> names of the scraps, beyond the first, are appended also a scrap number, beginning
-with 1.<br>
-X-section Therion <i>scrap</i> names are composed of the survey name, a two letter code, 'xx', and a number.<br><p>
+<b id="geojson">GeoJSON</b> (.json)<br>
+Survey data can be exported as GeoJSON file (<i>RFC 7946</i>) if you have georeferenced at least a station.
+Shots are exported as <i>LineString</i>, stations as <i>Point</i>. 
+If the survey contains disjoint pieces, the GeoJSON export includes all the pieces with a georeferenced station.
+Data are corrected with the magnetic declination.<br><p>
 
-When a sketch with section points is exported through the <u>export</u> dialog, the x-sections of the section points are
-also exported.<br><p>
+Settings:
+<ul style="margin-top=0">
+<li><u>stations</u></li>
+<li><u>splays</u></li>
+</ul>
+<br><p>
 
 
-Settings:<ul style="margin-top=0">
-<li>automatic <u>station-points</u>. [default: on].</li>
-<li>add <u>splays</u> to the scrap (as lines of type "u:splay") [default: off].</li>
-<li><u>point spacing</u> minimum distance between points on polylines. Intermediate points are not exported. Default 20 cm</li>
-<li>export <u>scale</u>. Default 1:100</li>
-</ul><p>
+<b id="shp">Shapefile</b> (.shp .shx .dbf)<br>
+Survey data can be exported as shapefile if you have georeferenced at least a station.
+There is a shapefile for the stations and one for the shots (both legs and splays).
+If the survey contains disjoint pieces, a shapefile is exported for each pieces with a georeferenced station.
+Data are corrected with the magnetic declination.
+Each shapefile consists of three files: the data file (shp), the index file (shx), and the attributes file (dbf).
+The files are zip-compressed and the zip is saved in the folder "shp" with extension ".shz".
+<br><p>
 
-<!--
-<u>Note</u>. With version 3.1 TopoDroid saves sketches "natively" in its binary format.<br>
-Previous versions used Therion format.
-The conversion from Therion to binary is "automatic" when you open a sketch: if TopoDroid does not find the binary file, it looks for the Therion file.<br>
-From v. 4.1.2 TopoDroid does not load any more sketches in Therion format.<br>
--->
+The "stations" DBF contains only the field "name".<br><p>
 
-<b>cSurvey</b> (.csx)<br>
+The "shots" DBF contains the fields
+<ul style="margin-top=0">
+<li><i>type</i>: either "leg" or "splay"</li>
+<li><i>from</i> station</li>
+<li><i>to</i> station ("-" for splays)</li>
+<li>shot <i>flag</i> as hex: 1-surface, 2-duplicate, 4-commented</li>
+<li>shot <i>comment</i></li>
+</ul><br>
+
+Settings:
+<ul style="margin-top=0">
+<li><u>stations</u>: whether to export the stations file</li>
+<li><u>splays</u>: whether to include the splays</li>
+</ul><br><p>
+
+
+
+<h4>SKETCH EXPORT</h4>
+
+TopoDroid exports survey sketches to the following formats:
+<ul>
+<li><a href="#csx">cSurvey</a></li>
+<li><a href="#th2">Therion</a></li>
+<li><a href="#tunnel">Tunnel</a></li>
+<li><a href="#xvi">xtherion</a></li>
+<li><a href="#cave3d">Cave3D</a></li>
+<li><a href="#dxf2">DXF</a></li>
+<li><a href="#png">PNG image</a></li>
+<li><a href="#shp2">shapefile</a></li>
+<li><a href="#svg">SVG</a></li>
+</ul>
+
+
+<b id="csx">cSurvey</b> (.csx)<br>
 The cSurvey export files require cSurvey v. 1.20 or later.<br>
 These exports contain both the plan and profile sketches, as well as the survey data.
 When "section" points are define the section drawings are added at the point.<br>
@@ -340,7 +354,36 @@ Settings:<ul style="margin-top=0">
 <li><u>point spacing</u> maximum distance between interpolating points on smooth lines</li>
 </ul><p>
 
-<b>Tunnel</b> (.xml)<br>
+<b id="th2">Therion</b> (.th2)<br>
+Sketches are exported in Therion format as one sketch per file, if exported from the <u>sketch window</u>,
+or as a file containing all the sketches with the same view, plan or extended, if exported
+from the <u>overview window</u>. In the latter there is a scrap for each sketch, and x-section scraps
+are included if the automatic "section" points are enabled.
+<br><p>
+
+The Therion <i>scrap</i> names are composed of the survey name, the sketch name and a suffix, either 'p', for plan, or 's', for profile.<br>
+For multi-scrap sketches the Therion <i>scrap</i> names of the scraps, beyond the first, are appended also a scrap number, beginning
+with 1.<br>
+X-section Therion <i>scrap</i> names are composed of the survey name, a two letter code, 'xx', and a number.<br><p>
+
+When a sketch with section points is exported through the <u>export</u> dialog, the x-sections of the section points are
+also exported.<br><p>
+
+Settings:<ul style="margin-top=0">
+<li>automatic <u>station-points</u>. [default: on].</li>
+<li>add <u>splays</u> to the scrap (as lines of type "u:splay") [default: off].</li>
+<li><u>point spacing</u> minimum distance between points on polylines. Intermediate points are not exported. Default 20 cm</li>
+<li>export <u>scale</u>. Default 1:100</li>
+</ul><p>
+
+<!--
+<u>Note</u>. With version 3.1 TopoDroid saves sketches "natively" in its binary format.<br>
+Previous versions used Therion format.
+The conversion from Therion to binary is "automatic" when you open a sketch: if TopoDroid does not find the binary file, it looks for the Therion file.<br>
+From v. 4.1.2 TopoDroid does not load any more sketches in Therion format.<br>
+-->
+
+<b id="tunnel">Tunnel</b> (.xml)<br>
 Sketch can be exported in Tunnel XML format. The files are saved in the "tnl" subdirectory.<br>
 The following lines are mapped to Tunnel lines: wall, presumed, pit, chimney, and slope. 
 All the other lines are mapped to Tunnel line "details".<br>
@@ -350,8 +393,29 @@ guano, mud, pebbles, popcorn, sand, soda-straw, stalactite, stalagmite, water, w
 All the other points are mapped to Tunnel point "bedrock".<br>
 <p>
 
+<b id="xvi">Xtherion</b> (.xvi)<br>
+The "xvi" export can be inserted as background image in xtherion.<br>
+Lines of type "wall" are red, "slope" orange, "section" gray, all others are brown.
+Area borders are black.
+Point icons are rendered in a simplified way.
+Label rendering supports only latin characters and digits and a few characters ('+', '-', '/', '_', '&gt;', '&lt;', '?').
+Other characters are replaced by a "diamond".<br>
+The grid cell are 1 m.
+<br><p>
 
-<b>DXF</b> (.dxf)<br>
+The XVI settings are among Therion settings:
+<ul style="margin-top=0">
+<li>Drawing <u>section-point</u>: if section points are automatically added to section lines,
+the section drawing is inserted in the xvi file, at the "section" point</li>
+<li><u>grid</u> lines added to the export (cell size in the current grid units). Default no</li>
+<li>export <u>scale</u>. Default 1:100</li>
+</ul><p>
+
+<b id="cave3d">Cave3D</b> (.c3d)<br>
+Sketch exported in "c3d" format can be lifted in the 3D model inside Cave3D.<br>
+<br><p>
+
+<b id="dxf2">DXF</b> (.dxf)<br>
 Sketches can be exported as 2D DXF files with layers for each point,
 line and area type in addition to the layers of the survey data.
 The sketch items in the 2D DXF lie in the Z=0 plane.<br><p>
@@ -367,57 +431,7 @@ the drawing of the section is inserted in the export, at the "section" point</li
 <li>DXF version: 6 (dxf-9), 12 (dxf-13), or 16 (dxf-16). Default "6"</li>
 </ul><p>
 
-<b>SVG</b> (.svg)<br>
-Sketches can be exported as SVG files.<br>
-Items are organized in layers: <i>grids</i>, <i>stations</i>, <i>legs</i>, <i>splays</i>,
-<i>points</i>, <i>lines</i>, and <i>areas</i>.<br>
-These layers are under a global <i>canvas</i> layer.<br>
-Each "scrap" has its  <i>points</i>, <i>lines</i>, and <i>areas</i> layers.<br>
-<br><p>
-
-<u>Note</u>. Sketch SVG export has been verified with <i>Inkscape</i> and <i>Firefox</i>.
-<br><p>
-
-SVG settings:
-<ul style="margin-top=0">
-<li>Drawing <u>section-point</u>: if section points are automatically added to section lines,
-the section drawing is inserted in the export, at the "section" point</li>
-<li>automatic <u>station-points</u>: if enabled all stations are included in the export,
-otherwise only the user-chosen stations are included</li>
-<li><u>point spacing</u> maximum distance between interpolating points on smooth lines</li>
-<li><u>round-trip</u>: sketches are exported ready for Walls/Compass round-trip. Default no</li>
-<li><u>grid</u> lines added to the export (cell size in the current grid units). Default no</li>
-<li><u>line orientation</u> tick. Default no</li> 
-<li><u>lines width</u>: labels, icons, lines (and area borders), grid lines, shots, orientation stroke</li>
-<li><u>station size</u>: station names text-size. Default 20</li>
-</ul><p>
-
-<b>Shapefile</b> (.shp)<br>
-Sketches can be exported as shapefile, with stations, shots, and lines.
-Each item has three files: the shape data file, the shape index file, and the database file.
-The files comprising the shapefile export are zip-compressed and the zip file is saved in the
-folder "shp" with extension ".shz".<br><p>
-
-<b>Xtherion</b> (.xvi)<br>
-The "xvi" export can be inserted as background image in xtherion.<br>
-Lines of type "wall" are red, "slope" orange, "section" gray, all others are brown.
-Area borders are black.
-Point icons are rendered in a simplified way.
-Label rendering supports only latin characters and digits and a few characters ('+', '-', '/', '_', '&gt;', '&lt;', '?').
-Other characters are replaced by a "diamond".<br>
-The grid cell are 1 m.
-<br><p>
-
-XVI settings are among Therion settings:
-<ul style="margin-top=0">
-<li>Drawing <u>section-point</u>: if section points are automatically added to section lines,
-the section drawing is inserted in the xvi file, at the "section" point</li>
-<li><u>grid</u> lines added to the export (cell size in the current grid units). Default no</li>
-<li>export <u>scale</u>. Default 1:100</li>
-</ul><p>
-
-
-<b>PNG</b> (.png)<br>
+<b id="png">PNG</b> (.png)<br>
 Image file in PNG format is used only to export sketches.<br><p>
 
 Settings:<ul style="margin-top=0">
@@ -432,9 +446,37 @@ If the system does not have enough memory to create the image at the set resolut
 Finally the setting "levels" affects PNG exports: if levels are used the export will include only visible items.
 <br><p>
 
-<b>Cave3D</b> (.c3d)<br>
-Sketch exported in "c3d" format can be lifted in the 3D model inside Cave3D.<br>
+<b id="shp2">Shapefile</b> (.shp)<br>
+Sketches can be exported as shapefile, with stations, shots, and lines.
+Each item has three files: the shape data file, the shape index file, and the database file.
+The files comprising the shapefile export are zip-compressed and the zip file is saved in the
+folder "shp" with extension ".shz".<br><p>
+
+<b id="svg">SVG</b> (.svg)<br>
+Sketches can be exported as SVG files.<br>
+Items are organized in layers: <i>grids</i>, <i>stations</i>, <i>legs</i>, <i>splays</i>,
+<i>points</i>, <i>lines</i>, and <i>areas</i>.<br>
+These layers are under a global <i>canvas</i> layer.<br>
+Each "scrap" has its  <i>points</i>, <i>lines</i>, and <i>areas</i> layers.<br>
 <br><p>
+
+<u>Note</u>. Sketch SVG export has been verified with <i>Inkscape</i> and <i>Firefox</i>.
+<br><p>
+
+Settings:
+<ul style="margin-top=0">
+<li>Drawing <u>section-point</u>: if section points are automatically added to section lines,
+the section drawing is inserted in the export, at the "section" point</li>
+<li>automatic <u>station-points</u>: if enabled all stations are included in the export,
+otherwise only the user-chosen stations are included</li>
+<li><u>point spacing</u> maximum distance between interpolating points on smooth lines</li>
+<li><u>round-trip</u>: sketches are exported ready for Walls/Compass round-trip. Default no</li>
+<li><u>grid</u> lines added to the export (cell size in the current grid units). Default no</li>
+<li><u>line orientation</u> tick. Default no</li> 
+<li><u>lines width</u>: labels, icons, lines (and area borders), grid lines, shots, orientation stroke</li>
+<li><u>station size</u>: station names text-size. Default 20</li>
+</ul><p>
+
 
 <h4>CALIBRATION EXPORT</h4>
 

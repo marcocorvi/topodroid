@@ -2096,6 +2096,18 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
+  boolean hasFixed( long sid, int status )
+  {
+    if ( myDB == null ) return false;
+    Cursor cursor = myDB.query( FIXED_TABLE,
+                                mFixedFields,
+                                WHERE_SID_STATUS, new String[] { Long.toString(sid), Long.toString(status) }, 
+                                null, null, null );
+    boolean ret = cursor.moveToFirst();
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return ret;
+  }
+
   List< FixedInfo > selectAllFixed( long sid, int status )
   {
     List< FixedInfo > list = new ArrayList<>();
