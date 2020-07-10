@@ -873,6 +873,7 @@
 
     <string name="export_bgcolor">Цвет фона</string>
     <string name="export_config">Файл ThConfig</string>
+    <!-- TODO string name="export_csv_rawdata">Raw data</string -->
     <string name="export_dxf_blocks">Блоки DXF</string>
     <string name="export_georeference">Геопривязка</string>
     <string name="export_grid">Сетка</string>
@@ -885,6 +886,7 @@
     <string name="export_scale_png">Разрешение</string>
     <string name="export_scale_th">Масштаб 1 :</string>
     <string name="export_splays">Сплеи</string>
+    <!-- TODO string name="export_splays_named">Named splays</string -->
     <string name="export_stations">Пикеты</string>
     <string name="export_swap_lr">Поменять местами расстояния ЛЕВО и ПРАВО</string>
     <string name="export_xvi">Xvi изображение</string>

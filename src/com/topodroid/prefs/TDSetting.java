@@ -154,7 +154,7 @@ public class TDSetting
   public static float   mLRUDhorizontal     = 45;     // horizontal splay for LR 
 
   public static String mSurvexEol           = "\n";
-  public static boolean mSurvexSplay        = false;
+  public static boolean mSurvexSplay        = false; // splays with named TO
   public static boolean mSurvexLRUD         = false;
   public static boolean mSwapLR             = false; // swap LR in Compass export
   public static boolean mOrthogonalLRUD     = false; // whether angle > 0 
@@ -268,6 +268,7 @@ public class TDSetting
   public static float mHThreshold;         // horizontal plot threshold
   public static boolean mDataBackup = false; // whether to export data when shotwindow is closed
   public static boolean mDistoXBackshot = false;
+  public static boolean mEditableStations = false;
   // public static int mTitleColor = TDColor.TITLE_NORMAL;
   
   public static final char CSV_COMMA = ',';
@@ -750,8 +751,9 @@ public class TDSetting
     mStationNames = (prefs.getString(    keySurvey[2],      defSurvey[2] ).equals("number"))? 1 : 0; // DISTOX_STATION_NAMES
     mThumbSize    = tryInt(   prefs,     keySurvey[4],      defSurvey[4] );       // DISTOX_THUMBNAIL
     mDataBackup   = prefs.getBoolean(    keySurvey[5], bool(defSurvey[5]) ); // DISTOX_DATA_BACKUP
-    mFixedOrigin  = prefs.getBoolean(    keySurvey[6], bool(defSurvey[6]) ); // DISTOX_FIXED_ORIGIN
-    mSharedXSections = prefs.getBoolean( keySurvey[7], bool(defSurvey[7]) ); // DISTOX_SHARED_XSECTIONS
+    mEditableStations = prefs.getBoolean(keySurvey[6], bool(defSurvey[6]) ); // DISTOX_EDITABLE_STATIONS
+    mFixedOrigin  = prefs.getBoolean(    keySurvey[7], bool(defSurvey[7]) ); // DISTOX_FIXED_ORIGIN
+    mSharedXSections = prefs.getBoolean( keySurvey[8], bool(defSurvey[8]) ); // DISTOX_SHARED_XSECTIONS
 
     String[] keyPlot = TDPrefKey.PLOT;
     String[] defPlot = TDPrefKey.PLOTdef;
@@ -1168,10 +1170,12 @@ public class TDSetting
       else if ( mThumbSize > 400 ) { mThumbSize = 400; ret = Integer.toString( mThumbSize ); }
     } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_DATA_BACKUP (bool)
       mDataBackup = tryBooleanValue( hlp, k, v, bool(def[5]) );
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_FIXED_ORIGIN (bool)
-      mFixedOrigin = tryBooleanValue( hlp, k, v, bool(def[6]) );
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_SHARED_XSECTIONS (bool)
-      mSharedXSections  = tryBooleanValue( hlp, k, v, bool(def[7]) );
+    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_EDITABLE_STATIONS (bool)
+      mEditableStations = tryBooleanValue( hlp, k, v, bool(def[6]) );
+    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_FIXED_ORIGIN (bool)
+      mFixedOrigin = tryBooleanValue( hlp, k, v, bool(def[7]) );
+    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_SHARED_XSECTIONS (bool)
+      mSharedXSections  = tryBooleanValue( hlp, k, v, bool(def[8]) );
     } else {
       TDLog.Error("missing SURVEY key: " + k );
     }

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+  <TextView 
+    android:id="@+id/id"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="@dimen/textsize"
+    android:singleLine="true"
+    android:typeface="monospace"
+    android:padding="@dimen/padding"
+    android:gravity="left"
+  />
+
+  <EditText 
+    android:id="@+id/from"
+    android:layout_weight="20"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:singleLine="true"
+    android:textSize="@dimen/textsize"
+    android:typeface="monospace"
+    android:padding="@dimen/padding"
+    android:gravity="right"
+    android:editable="false"
+  />
+  <!-- 
+    android:inputType="text"
+    android:imeOptions="actionDone"
+  -->
+  <!--
+    style="?android:attr/textViewStyle"
+    android:background="@android:color/transparent"
+  -->
+
+  <EditText 
+    android:id="@+id/to"
+    android:layout_weight="20"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:singleLine="true"
+    android:textSize="@dimen/textsize"
+    android:typeface="monospace"
+    android:padding="@dimen/padding"
+    android:gravity="right"
+    android:editable="false"
+  />
+  <!-- 
+    android:inputType="text"
+    android:imeOptions="actionDone"
+  -->
+
+  <TextView 
+    android:id="@+id/length"
+    android:layout_weight="340"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:textSize="@dimen/textsize"
+    android:singleLine="true"
+    android:typeface="monospace"
+    android:padding="@dimen/padding"
+    android:gravity="left"
+  />
+
+</LinearLayout>

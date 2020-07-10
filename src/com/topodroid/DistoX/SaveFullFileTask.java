@@ -35,6 +35,7 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
   private SurveyInfo mInfo;
   private String mFilename;
   private String mFullname;
+  private String mDirname;
   private String mOrigin = null;
   private PlotSaveData mPsd1 = null;
   private PlotSaveData mPsd2 = null;
@@ -42,13 +43,14 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
   private String mFormat;
 
   SaveFullFileTask( Context context, long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2, String origin, String filename,
-                    String fullname, boolean toast )
+                    String fullname, String dirname, boolean toast )
   {
     mSid      = sid;
     mData     = data;
     mInfo     = info.copy();
     mFilename = filename;
     mFullname = fullname;
+    mDirname  = dirname;
     mOrigin   = origin;
     mPsd1     = psd1;
     mPsd2     = psd2;
@@ -61,7 +63,7 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
     // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
     File temp = null;
     try {
-      temp = File.createTempFile( mFullname, null );
+      temp = File.createTempFile( "tmp", null, new File( mDirname ) );
     } catch ( IOException e ) { 
       // Log.v("DistoX-SAVE", "cannot create temp file with " + mFullname );
       TDLog.Error("cannot create temp file with " + mFullname );

@@ -148,7 +148,7 @@ public class DataHelper extends DataSetObservable
     };
   static final private String[] mShotRawDataFields =
     { "id", "fStation", "tStation", "distance", "bearing", "clino", "roll", "acceleration", "magnetic", "dip",
-      "type", "millis", "address"
+      "type", "millis", "address", "extend", "flag", "leg", "status", "comment"
     };
 
   static final private String[] mPlotFieldsFull =
@@ -218,11 +218,12 @@ public class DataHelper extends DataSetObservable
      }
    }
 
-   private void fillBlockRawData( long sid, DBlock blk, Cursor cursor )
+   private void fillBlockRawData( long sid, RawDBlock blk, Cursor cursor )
    {
-     blk.setId( cursor.getLong(0), sid );
-     blk.mFrom = cursor.getString(1);
-     blk.mTo   = cursor.getString(2);
+     blk.mId           = cursor.getLong(0);
+     blk.mSurveyId     = sid;
+     blk.mFrom         = cursor.getString(1);
+     blk.mTo           = cursor.getString(2);
      blk.mLength       = (float)( cursor.getDouble(3) );  // length [meters]
      blk.mBearing      = (float)( cursor.getDouble(4) );  // bearing [degrees]
      blk.mClino        = (float)( cursor.getDouble(5) );  // clino [degrees], or depth [meters]
@@ -230,9 +231,14 @@ public class DataHelper extends DataSetObservable
      blk.mAcceleration = (float)( cursor.getDouble(7) );
      blk.mMagnetic     = (float)( cursor.getDouble(8) );
      blk.mDip          = (float)( cursor.getDouble(9) );
-     blk.setShotType( (int)(  cursor.getLong(10) ) );
+     blk.mShotType     = (int)(  cursor.getLong(10) );
      blk.mTime         = (long)( cursor.getLong(11) );
-     blk.setAddress( cursor.getString(12) );
+     blk.mAddress      = cursor.getString(12);
+     blk.mExtend       = (int)(  cursor.getLong(13) );
+     blk.mFlag         = cursor.getLong(14);
+     blk.mLeg          = (int)(  cursor.getLong(15) );
+     blk.mStatus       = (int)(  cursor.getLong(16) );
+     blk.mComment      = cursor.getString( 17 );
    }
 
    private void fillBlock( long sid, DBlock blk, Cursor cursor )
@@ -2931,15 +2937,15 @@ public class DataHelper extends DataSetObservable
   /** select all shots, used by CSV raw export
    * @param sid surveyId
    */
-  List< DBlock > selectAllShotsRawData( long sid )
+  List< RawDBlock > selectAllShotsRawData( long sid )
   {
     // Log.v("DistoXX", "B3 select shots all");
-    List< DBlock > list = new ArrayList<>();
+    List< RawDBlock > list = new ArrayList<>();
     if ( myDB == null ) return list;
     Cursor cursor = myDB.query(SHOT_TABLE, mShotRawDataFields, WHERE_SID, new String[]{ Long.toString(sid) }, null, null, "id" );
     if (cursor.moveToFirst()) {
       do {
-        DBlock block = new DBlock();
+        RawDBlock block = new RawDBlock();
         fillBlockRawData( sid, block, cursor );
         list.add( block );
       } while (cursor.moveToNext());

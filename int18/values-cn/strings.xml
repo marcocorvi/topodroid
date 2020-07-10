@@ -886,6 +886,7 @@
 
     <!-- TODO string name="export_bgcolor">Background color</string -->
     <!-- TODO string name="export_config">Config file</string -->
+    <!-- TODO string name="export_csv_rawdata">Raw data</string -->
     <!-- TODO string name="export_dxf_blocks">DXF blocks</string -->
     <!-- TODO string name="export_georeference">Georeference</string -->
     <!-- TODO string name="export_grid">Grid</string -->
@@ -898,6 +899,7 @@
     <!-- TODO string name="export_scale_png">Resolution</string -->
     <!-- TODO string name="export_scale_th">Scale 1 :</string -->
     <!-- TODO string name="export_splays">Splays</string -->
+    <!-- TODO string name="export_splays_named">Named splays</string -->
     <!-- TODO string name="export_stations">Stations</string -->
     <!-- TODO string name="export_swap_lr">Swap L/R</string -->
     <!-- TODO string name="export_xvi">Xvi images</string -->

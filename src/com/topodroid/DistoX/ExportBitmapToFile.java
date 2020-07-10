@@ -51,7 +51,7 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
     boolean exec()
     {
       try {
-        File temp = File.createTempFile( mFullName, null );
+        File temp = File.createTempFile( "tmp", null, new File( TDPath.getPngFile("") ) );
         final FileOutputStream out = new FileOutputStream( temp );
         mBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
         out.flush();

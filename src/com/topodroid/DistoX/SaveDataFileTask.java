@@ -64,11 +64,14 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
     int ret = 0;
     String filename = null;
     String pathname = null;
+    String dirname  = null;
     // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
     if ( mType == TDConst.DISTOX_EXPORT_SHP ) {
-      // FIXME big-lock
       pathname = TDPath.getShpPath( mSurvey );
-      filename = TDExporter.exportSurveyAsShp( mSid, mData, mInfo, pathname );
+      // FIXME too-big synch
+      synchronized ( TDPath.mFilesLock ) {
+        filename = TDExporter.exportSurveyAsShp( mSid, mData, mInfo, pathname );
+      }
     } else { 
       switch ( mType ) {
         // case TDConst.DISTOX_EXPORT_TLX:
@@ -76,67 +79,87 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
         //   break;
         case TDConst.DISTOX_EXPORT_CSX: // cSurvey (only mInfo, no plot-data)
           pathname = TDPath.getSurveyCsxFile( mSurvey );
+          dirname  = TDPath.getCsxFile( "" );
           break;
         case TDConst.DISTOX_EXPORT_CSV:
           pathname = TDPath.getSurveyCsvFile( mSurvey );
+          dirname  = TDPath.getCsvFile( "" );
           break;
         case TDConst.DISTOX_EXPORT_CAV: // Topo
           pathname = TDPath.getSurveyCavFile( mSurvey );
+          dirname  = TDPath.getCavFile( "" );
           break;
         case TDConst.DISTOX_EXPORT_DAT: // Compass
           pathname = TDPath.getSurveyDatFile( mSurvey );
+          dirname  = TDPath.getDatFile( "" );
           break;
         case TDConst.DISTOX_EXPORT_DXF:
           pathname = TDPath.getSurveyDxfFile( mSurvey );
+          dirname  = TDPath.getDxfFile( "" );
           break;
         case TDConst.DISTOX_EXPORT_GRT: // Grottolf
           pathname = TDPath.getSurveyGrtFile( mSurvey );
+          dirname  = TDPath.getGrtFile( "" );
           break;
         case TDConst.DISTOX_EXPORT_GTX: // GHTopo
           pathname = TDPath.getSurveyGtxFile( mSurvey );
+          dirname  = TDPath.getGtxFile( "" );
           break;
         case TDConst.DISTOX_EXPORT_KML: // KML
           pathname = TDPath.getSurveyKmlFile( mSurvey );
+          dirname  = TDPath.getKmlFile( "" );
           break;
         case TDConst.DISTOX_EXPORT_JSON: // GeoJSON
           pathname = TDPath.getSurveyJsonFile( mSurvey );
+          dirname  = TDPath.getJsonFile( "" );
           break;
         case TDConst.DISTOX_EXPORT_SHP: // Shapefile
           // pathname = TDPath.getShpPath( mSurvey );
-          break;
+          // dirname  = TDPath.getShzFile( "" );
+          return null; // cannot happen
+          // break;
         case TDConst.DISTOX_EXPORT_PLT: // Track file
           pathname = TDPath.getSurveyPltFile( mSurvey );
+          dirname  = TDPath.getPltFile( "" );
           break;
         case TDConst.DISTOX_EXPORT_PLG: // Polygon CAVE
           pathname = TDPath.getSurveyCaveFile( mSurvey );
+          dirname  = TDPath.getCaveFile( "" );
           break;
         case TDConst.DISTOX_EXPORT_SRV: // Walls
           pathname = TDPath.getSurveySrvFile( mSurvey );
+          dirname  = TDPath.getSrvFile( "" );
           break;
         case TDConst.DISTOX_EXPORT_SUR: // WinKarst
           pathname = TDPath.getSurveySurFile( mSurvey );
+          dirname  = TDPath.getSurFile( "" );
           break;
         case TDConst.DISTOX_EXPORT_SVX: // Survex
           pathname = TDPath.getSurveySvxFile( mSurvey );
+          dirname  = TDPath.getSvxFile( "" );
           break;
         case TDConst.DISTOX_EXPORT_TRO: // VisualTopo
           pathname = TDPath.getSurveyTroFile( mSurvey );
+          dirname  = TDPath.getTroFile( "" );
           break;
         case TDConst.DISTOX_EXPORT_TRB: // TopoRobot
           pathname = TDPath.getSurveyTrbFile( mSurvey );
+          dirname  = TDPath.getTrbFile( "" );
           break;
         case TDConst.DISTOX_EXPORT_TOP: // PocketTopo
           pathname = TDPath.getSurveyTopFile( mSurvey );
+          dirname  = TDPath.getTopFile( "" );
           break;
         case TDConst.DISTOX_EXPORT_TH:
-        default:
           pathname = TDPath.getSurveyThFile( mSurvey );
+          dirname  = TDPath.getThFile( "" );
           break;
+        default:
+          return null;
       }
-      if ( pathname == null ) return null;
       File temp = null;
       try {
-        temp = File.createTempFile( mSurvey, null );
+        temp = File.createTempFile( "tmp", null, new File( dirname ) );
       } catch ( IOException e ) { return null; }
 
       switch ( mType ) {

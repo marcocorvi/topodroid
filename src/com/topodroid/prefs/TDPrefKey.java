@@ -112,6 +112,7 @@ public class TDPrefKey
     "DISTOX_INIT_STATION",      // 3 * // default initial station name
     "DISTOX_THUMBNAIL",                // size of photo thumbnails
     "DISTOX_DATA_BACKUP", //
+    "DISTOX_EDITABLE_STATIONS",
     "DISTOX_FIXED_ORIGIN",
     "DISTOX_SHARED_XSECTIONS",  // 7 // whether at-station X-sections are shared among plots
     "DISTOX_SHOT_UNITS_SCREEN", // 8  FORWARD
@@ -128,6 +129,7 @@ public class TDPrefKey
     R.string.pref_init_station_title,
     R.string.pref_thumbnail_title,
     R.string.pref_data_backup_title,
+    R.string.pref_editable_stations_title,
     R.string.pref_fixed_origin_title,
     R.string.pref_shared_xsections_title,
     R.string.pref_shot_units_title,
@@ -143,6 +145,7 @@ public class TDPrefKey
     R.string.pref_init_station_summary,
     R.string.pref_thumbnail_summary,  
     R.string.pref_data_backup_summary,
+    R.string.pref_editable_stations_summary,
     R.string.pref_fixed_origin_summary,
     R.string.pref_shared_xsections_summary,
     -1,
@@ -157,6 +160,7 @@ public class TDPrefKey
     "alpha",
     TDString.ZERO,
     "200",
+    FALSE,
     FALSE,
     FALSE,
     FALSE,
@@ -401,14 +405,14 @@ public class TDPrefKey
     "DISTOX_EXPORT_SVX_PREF",
     "DISTOX_EXPORT_TH_PREF",
     "DISTOX_EXPORT_CSX_PREF",
-    "DISTOX_EXPORT_DAT_PREF",
+    "DISTOX_EXPORT_DAT_PREF",    // 10
     "DISTOX_EXPORT_TRO_PREF",
-    "DISTOX_EXPORT_SVG_PREF",    // 11
+    "DISTOX_EXPORT_SVG_PREF",    // 12
     "DISTOX_EXPORT_DXF_PREF",
-    "DISTOX_EXPORT_SHP_PREF",    // 13
+    "DISTOX_EXPORT_SHP_PREF",    // 14
     "DISTOX_EXPORT_PNG_PREF",
-    "DISTOX_EXPORT_KML_PREF",    // 15
-    "DISTOX_EXPORT_CSV_PREF",    // 16
+    "DISTOX_EXPORT_KML_PREF",    // 16
+    "DISTOX_EXPORT_CSV_PREF",    // 17
     null
   };
 

@@ -1355,7 +1355,8 @@ public class TopoDroidApp extends Application
     String filename = TDPath.getSurveyCsxFile( fullname );
     TDLog.Log( TDLog.LOG_IO, "exporting as CSX " + fullname + " " + filename );
     // Log.v("DistoX-SAVE", "exporting as CSX " + filename );
-    (new SaveFullFileTask( context, TDInstance.sid, mData, info, psd1, psd2, origin, filename, fullname, toast )).execute();
+    (new SaveFullFileTask( context, TDInstance.sid, mData, info, psd1, psd2, origin, filename, fullname, 
+       TDPath.getCsxFile(""), toast )).execute();
   }
 
   // FIXME_SYNC might be a problem with big surveys

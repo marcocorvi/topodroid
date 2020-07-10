@@ -886,6 +886,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
     <string name="export_bgcolor">White background</string>
     <string name="export_config">Config file</string>
+    <string name="export_csv_rawdata">Raw data</string>
     <string name="export_dxf_blocks">DXF blocks</string>
     <string name="export_georeference">Georeference</string>
     <string name="export_grid">Grid</string>
@@ -898,6 +899,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="export_scale_png">Resolution</string>
     <string name="export_scale_th">Scale 1 :</string>
     <string name="export_splays">Splays</string>
+    <string name="export_splays_named">Named splays</string>
     <string name="export_stations">Stations</string>
     <string name="export_swap_lr">Swap L/R</string>
     <string name="export_xvi">Xvi images</string>
@@ -1229,6 +1231,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_section_splay_message">Minimum angle with the section plane for dashed splays</string>
   <string name="pref_data_backup_title">Data auto-export</string>
   <string name="pref_data_backup_summary">Automatic data export (need default format)</string>
+  <string name="pref_editable_stations_title">Editable stations</string>
+  <string name="pref_editable_stations_summary">Editable station names in the shot list</string>
   <string name="pref_zipped_symbols_title">Zipped symbols files</string>
   <string name="pref_zipped_symbols_summary">Store/load symbol files to/from zip archive</string>
   <string name="pref_fixed_origin_title">Sketch origin</string>

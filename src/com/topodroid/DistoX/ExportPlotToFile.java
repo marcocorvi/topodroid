@@ -64,19 +64,26 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     protected Boolean doInBackground(Void... arg0)
     {
       // Log.v("DistoX-EXPORT", "export plot to file in bkgr. ext " + mExt );
+      String dirname = null;
       try {
         if ( mExt.equals("dxf") ) {
           filename = TDPath.getDxfFileWithExt( mFullName );
+          dirname  = TDPath.getDxfFile( "" );
         } else if ( mExt.equals("svg") ) {
           filename = TDPath.getSvgFileWithExt( mFullName );
+          dirname  = TDPath.getSvgFile( "" );
         } else if ( mExt.equals("shp") ) {
           filename = TDPath.getShpBasepath( mFullName );
+          dirname  = TDPath.getShzFile( "" );
         } else if ( mExt.equals("xvi") ) {
           filename = TDPath.getXviFileWithExt( mFullName );
+          dirname  = TDPath.getXviFile( "" );
         } else if ( mExt.equals("xml") ) {
           filename = TDPath.getTnlFileWithExt( mFullName );
+          dirname  = TDPath.getTnlFile( "" );
         } else if ( mExt.equals("c3d") ) {
           filename = TDPath.getC3dFileWithExt( mFullName );
+          dirname  = TDPath.getC3dFile( "" );
 	} else { // unexpected extension
 	  return false;
         }
@@ -91,7 +98,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
 	      DrawingShp.writeShp( filename, mCommand, mType, mStation );
             }
 	  } else {
-            File temp = File.createTempFile( mFullName, null );
+            File temp = File.createTempFile( "tmp", null, new File( dirname ) );
             final FileWriter fw = new FileWriter( temp );
             BufferedWriter bw = new BufferedWriter( fw );
             if ( mExt.equals("dxf") ) {

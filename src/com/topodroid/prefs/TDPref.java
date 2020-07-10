@@ -479,12 +479,13 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeEdt( cat, key[ 3], tit[ 3], dsc[3], B, def[3], STRING, ctx, hlp ),
       makeEdt( cat, key[ 4], tit[ 4], dsc[4], A, def[4], INTEGER, ctx, hlp ),
       makeCbx( cat, key[ 5], tit[ 5], dsc[5], B, def[5], ctx, hlp ),
-      makeCbx( cat, key[ 6], tit[ 6], dsc[6], B, def[6], ctx, hlp ),
+      makeCbx( cat, key[ 6], tit[ 6], dsc[6], E, def[6], ctx, hlp ),
       makeCbx( cat, key[ 7], tit[ 7], dsc[7], B, def[7], ctx, hlp ),
-      makeFwd( cat, key[ 8], tit[ 8],         B,         ctx, hlp ),
+      makeCbx( cat, key[ 8], tit[ 8], dsc[8], B, def[8], ctx, hlp ),
       makeFwd( cat, key[ 9], tit[ 9],         B,         ctx, hlp ),
-      makeFwd( cat, key[10], tit[10],         N,         ctx, hlp ),
-      makeFwd( cat, key[11], tit[11],         A,         ctx, hlp )
+      makeFwd( cat, key[10], tit[10],         B,         ctx, hlp ),
+      makeFwd( cat, key[11], tit[11],         N,         ctx, hlp ),
+      makeFwd( cat, key[12], tit[12],         A,         ctx, hlp )
     };
   }
 
@@ -582,7 +583,8 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeFwd( cat, key[13], tit[13],          T,                   ctx, hlp ),
       makeFwd( cat, key[14], tit[14],          N,                   ctx, hlp ),
       makeFwd( cat, key[15], tit[15],          T,                   ctx, hlp ),
-      makeFwd( cat, key[16], tit[16],          T,                   ctx, hlp )
+      makeFwd( cat, key[16], tit[16],          T,                   ctx, hlp ),
+      makeFwd( cat, key[17], tit[17],          T,                   ctx, hlp )
     };
   }
 

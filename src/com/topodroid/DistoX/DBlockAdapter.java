@@ -388,8 +388,10 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
         tvTo.setOnLongClickListener( listener );
       }
 
-      tvFrom.setOnEditorActionListener( this );
-      tvTo.setOnEditorActionListener( this );
+      if ( TDSetting.mEditableStations ) {
+        tvFrom.setOnEditorActionListener( this );
+        tvTo.setOnEditorActionListener( this );
+      }
 
       int text_size = TDSetting.mTextSize;
 
@@ -451,7 +453,11 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     DBlock b = mItems.get( pos );
     ViewHolder holder; // = null;
     if ( convertView == null ) {
-      convertView = mLayoutInflater.inflate( R.layout.dblock_row, parent, false );
+      if ( TDSetting.mEditableStations ) {
+        convertView = mLayoutInflater.inflate( R.layout.dblock_row, parent, false );
+      } else {
+        convertView = mLayoutInflater.inflate( R.layout.dblock_row_noedit, parent, false );
+      }
       holder = new ViewHolder( 
         (TextView)convertView.findViewById( R.id.id ),
         (EditText)convertView.findViewById( R.id.from ),

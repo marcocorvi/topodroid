@@ -1898,7 +1898,7 @@ class TDExporter
 
   static int exportSurveyAsRawCsv( long sid, DataHelper data, SurveyInfo info, File file )
   {
-    List< DBlock > list = data.selectAllShotsRawData( sid );
+    List< RawDBlock > list = data.selectAllShotsRawData( sid );
     char sep = TDSetting.mCsvSeparator;
     String newline = TDSetting.mSurvexEol;
     try {
@@ -1906,15 +1906,16 @@ class TDExporter
       PrintWriter pw = new PrintWriter( fw );
       pw.format("# %s [*] created by TopoDroid v %s%s", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string(), newline );
       pw.format("# %s%s", info.name, newline );
-      for ( DBlock b : list ) {
+      for ( RawDBlock b : list ) {
 	// String f = ( b.mFrom == null )? "" : b.mFrom;
 	// String t = ( b.mTo   == null )? "" : b.mTo;
         pw.format(Locale.US, "%d%c%s%c%s%c", b.mId, sep, b.mFrom, sep, b.mTo, sep );
         pw.format(Locale.US, "%.3f%c%.2f%c%.2f%c%.2f%c%.2f%c%.2f%c%.2f%c",
 	  b.mLength, sep, b.mBearing, sep, b.mClino, sep, b.mRoll, sep, b.mAcceleration, sep, b.mMagnetic, sep, b.mDip, sep );
-        String address = b.getAddress();
+        String address = b.mAddress;
         if ( address == null || address.length() == 0 ) address = "-";
-        pw.format(Locale.US, "%d%c%d%c%s%s", b.mTime, sep, b.getShotType(), sep, address, newline );
+        pw.format(Locale.US, "%d%c%d%c%s%c", b.mTime, sep, b.mShotType, sep, address, sep );
+        pw.format(Locale.US, "%d%c%d%c%d%c%d%c%s%s", b.mExtend, sep, b.mFlag, sep, b.mLeg, sep, b.mStatus, sep, b.mComment, newline );
       }
       fw.flush();
       fw.close();

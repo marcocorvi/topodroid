@@ -81,14 +81,12 @@ Import compass files must have extension either ".dat" or ".DAT".<br>
 Supported data format are "normal" and "diving".<br>
 Data units are 'feet' and 'degrees' (converted to meters and degrees inside TopoDroid).<br><p>
 
-Settings:
-<ul style="margin-top=0">
+Settings:<ul style="margin-top=0">
 <li><u>Station prefix</u></li>
 <li><u>splays</u></li>
 <li><u>L/R swap</u></li>
 </ul>
 <br><p>
-
 
 <b id="csurvey">cSurvey</b> (.csx)<br>
 The cSurvey export files require cSurvey v. 1.20 or later.<br>
@@ -132,8 +130,7 @@ Furthermore "input" of the th2 files and definitions of maps for each scrap are 
 
 The <i>Therion</i> export includes the calibration-check shots, as comment.<br><p>
 
-Settings
-<ul>
+Settings:<ul style="margin-top=0">
 <li><u>Therion thconfig</u>: if enabled a basic "thconfig" file is created in the "thconfig" folder.</li>
 <li><u>Therion maps</u>: if enabled the "map" commands are placed before the survey centerline.</li>
 <li>add <u>LRUD</u> to export</li>
@@ -168,8 +165,7 @@ VisualTopo splays are included if enabled.<br>
 By default LRUD are at the TO station, but they can be set at the FROM station.<br> 
 Data units are 'meters' and 'degrees'.<br><p>
 
-Settings:
-<ul style="margin-top=0">
+Settings:<ul style="margin-top=0">
 <li><u>splays</u></li>
 <li><u>LRUD at From</u></li>
 </ul>
@@ -219,8 +215,7 @@ leg.<br><p>
 <b id="topo">Topo</b> (.cav)<br>
 Survey data can be exported as <i>Topo</i> files.<br><p>
 
-Settings (under "Survex"settings):
-<ul style="margin-top=0">
+Settings (under "Survex" settings):<ul style="margin-top=0">
 <li><u>line termination</u> can be either Unix or Windows</li>
 </ul><p>
 
@@ -230,7 +225,7 @@ Survey data can be exported as a list of records with comma-separated fields:
 <ul style="margin-top=0">
 <li>"from" and "to" stations</li>
 <li>distance, azimuth, clino</li>
-<li>if present the flag</li>
+<li>flag</li>
 </ul><br>
 Shot comments are not exported. A brief header is prepended to the data list.<br>
 
@@ -241,10 +236,11 @@ The survey raw data can be exported in CSV format. In this case each record (lin
 <li>distance, azimuth, clino, roll</li>
 <li>acceleration, magnetic field, dip</li>
 <li>timestamp, type (DistoX or manual), DistoX-address</li>
+<li>extend, flag, leg_type, status, comment</li>
 </ul><br>
+In the raw data export the leg shots are not averaged, but exported individually.<br><p>
 
-Settings:
-<ul style="margin-top=0">
+Settings:<ul style="margin-top=0">
 <li><u>raw data</u>: whether to export the raw data</li>
 <li><u>separator</u>: fields separator (comma, pipe or tab)</li>
 <li><u>EOL</u>: record separator (lf or cr+lf)</li>
@@ -271,8 +267,7 @@ Survey data can be exported as KML file (<i>Keyhole Markup Language</i>) if you 
 If the survey contains disjoint pieces, the KML export includes all the pieces with a georeferenced station.
 Data are corrected with the magnetic declination.<br><p>
 
-Settings:
-<ul style="margin-top=0">
+Settings:<ul style="margin-top=0">
 <li><u>stations</u></li>
 <li><u>splays</u></li>
 </ul>
@@ -284,8 +279,7 @@ Shots are exported as <i>LineString</i>, stations as <i>Point</i>.
 If the survey contains disjoint pieces, the GeoJSON export includes all the pieces with a georeferenced station.
 Data are corrected with the magnetic declination.<br><p>
 
-Settings:
-<ul style="margin-top=0">
+Settings:<ul style="margin-top=0">
 <li><u>stations</u></li>
 <li><u>splays</u></li>
 </ul>
@@ -312,8 +306,7 @@ The "shots" DBF contains the fields
 <li>shot <i>comment</i></li>
 </ul><br>
 
-Settings:
-<ul style="margin-top=0">
+Settings:<ul style="margin-top=0">
 <li><u>stations</u>: whether to export the stations file</li>
 <li><u>splays</u>: whether to include the splays</li>
 </ul><br><p>
@@ -403,8 +396,7 @@ Other characters are replaced by a "diamond".<br>
 The grid cell are 1 m.
 <br><p>
 
-The XVI settings are among Therion settings:
-<ul style="margin-top=0">
+The XVI settings are among Therion settings:<ul style="margin-top=0">
 <li>Drawing <u>section-point</u>: if section points are automatically added to section lines,
 the section drawing is inserted in the xvi file, at the "section" point</li>
 <li><u>grid</u> lines added to the export (cell size in the current grid units). Default no</li>
@@ -463,8 +455,7 @@ Each "scrap" has its  <i>points</i>, <i>lines</i>, and <i>areas</i> layers.<br>
 <u>Note</u>. Sketch SVG export has been verified with <i>Inkscape</i> and <i>Firefox</i>.
 <br><p>
 
-Settings:
-<ul style="margin-top=0">
+Settings:<ul style="margin-top=0">
 <li>Drawing <u>section-point</u>: if section points are automatically added to section lines,
 the section drawing is inserted in the export, at the "section" point</li>
 <li>automatic <u>station-points</u>: if enabled all stations are included in the export,

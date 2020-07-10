@@ -73,11 +73,12 @@ public class DBlock
   public float mDepth;     // depth at from station
   public String mComment;
 
-  private int  mExtend;
-  private long mFlag;     
-  private int  mBlockType;   
-  private int mShotType;  // 0: DistoX, 1: manual, -1: DistoX backshot
-          boolean mWithPhoto;
+  int  mExtend;
+  long mFlag;     
+  int  mBlockType;   
+  int  mShotType;  // 0: DistoX, 1: manual, -1: DistoX backshot
+  boolean mWithPhoto;
+
   public  boolean mMultiBad; // whether it disagree with siblings
   private float mStretch;
   private String mAddress; // DistoX address - used only in exports
