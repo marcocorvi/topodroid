@@ -28,6 +28,10 @@
         style="@style/button_default"
         android:text="@string/undelete_shot"
       />
+      <Button android:id="@+id/button_ok"
+        style="@style/button_default"
+        android:text="@string/button_ok"
+      />
     </LinearLayout>
 
     <ListView android:id="@+id/list_undelete"

@@ -18,6 +18,7 @@ import com.topodroid.ui.MyDialog;
 
 // import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -37,23 +38,30 @@ import android.view.View;
 // import android.view.View.OnClickListener;
 
 class UndeleteDialog extends MyDialog
-                            implements OnItemClickListener
-                            , View.OnClickListener
+                     implements View.OnClickListener
+                     // , OnItemClickListener
 {
+
   private long mSid;
   private final DataHelper mData;
   private final ShotWindow mParent;
 
   // private Button mBtnCancel;
   private Button mBtnStatus;
+  private Button mBtnOk;
 
   // ArrayAdapter< String >  mArrayAdapter;
-  private MyStringAdapter mArrayAdapter;
+  // private MyStringAdapter mArrayAdapter;
+  private UndeleteAdapter mArrayAdapter0 = null;
+  private UndeleteAdapter mArrayAdapter1 = null;
+  private UndeleteAdapter mArrayAdapter2 = null;
+  private UndeleteAdapter mArrayAdapter3 = null;
+
   private ListView mList;
-  private List< DBlock > mShots1; // deleted
-  private List< DBlock > mShots2; // overshoot
-  private List< DBlock > mShots3; // check
-  private List< PlotInfo >     mPlots;
+  private ArrayList< UndeleteItem > mPlots  = null;
+  private ArrayList< UndeleteItem > mShots1 = null; // deleted
+  private ArrayList< UndeleteItem > mShots2 = null; // overshoot
+  private ArrayList< UndeleteItem > mShots3 = null; // check
 
   private int mStatus;
 
@@ -65,10 +73,30 @@ class UndeleteDialog extends MyDialog
     mParent = parent;
     mData   = data;
     mSid    = sid;
-    mShots1 = shots1;
-    mShots2 = shots2;
-    mShots3 = shots3;
-    mPlots  = plots;
+    if ( shots1.size() > 0 ) {
+      mShots1 = new ArrayList< UndeleteItem >();
+      for ( DBlock b : shots1 ) {
+        mShots1.add( new UndeleteItem( b.mId, String.format(Locale.US, "%d <%s> %.2f %.1f %.1f", b.mId, b.Name(), b.mLength, b.mBearing, b.mClino ), UndeleteItem.UNDELETE_SHOT ) );
+      }
+    }
+    if ( shots2.size() > 0 ) {
+      mShots2 = new ArrayList< UndeleteItem >();
+      for ( DBlock b : shots2 ) {
+        mShots2.add( new UndeleteItem( b.mId, String.format(Locale.US, "%d %.2f %.1f %.1f", b.mId, b.mLength, b.mBearing, b.mClino ), UndeleteItem.UNDELETE_OVERSHOOT ) );
+      }
+    }
+    if ( shots3.size() > 0 ) {
+      mShots3 = new ArrayList< UndeleteItem >();
+      for ( DBlock b : shots3 ) {
+        mShots3.add( new UndeleteItem( b.mId, String.format(Locale.US, "%d %.2f %.1f %.1f", b.mId, b.mLength, b.mBearing, b.mClino ), UndeleteItem.UNDELETE_CALIB_CHECK ) );
+      }
+    }
+    if ( plots.size() > 0 ) {
+      mPlots  = new ArrayList< UndeleteItem >();
+      for ( PlotInfo p : plots ) {
+        mPlots.add( new UndeleteItem( p.id, String.format(Locale.US, "%d <%s> %s", p.id, p.name, p.getTypeString() ), UndeleteItem.UNDELETE_PLOT ) );
+      }
+    }
   }
 
   @Override
@@ -77,34 +105,74 @@ class UndeleteDialog extends MyDialog
     Button b = (Button)v;
     if ( b == mBtnStatus ) {
       incrementStatus( );
+      return;
+    } else if ( b == mBtnOk ) {
+      recoverData();
     } else {
       // TDLog.Log( TDLog.LOG_INPUT, "UndeleteDialog onClick()" );
-      dismiss();
-    }
-  }
-
-  @Override
-  public void onItemClick(AdapterView<?> parent, View view, int position, long index)
-  {
-    CharSequence item = ((TextView) view).getText();
-    // TDLog.Log( TDLog.LOG_INPUT, "UndeleteDialog onItemClick() " + item.toString() );
-
-    String[] value = item.toString().split( " " );
-    
-    if ( value.length >= 2 ) {
-      long id = Long.parseLong( value[1] );
-      try {
-        if ( value[0].equals( "shot" ) ) {
-          mData.undeleteShot( id, mSid );
-          mParent.updateDisplay(); // this recomputes DistoX accuracy
-        } else {
-          mData.undeletePlot( id, mSid );
-        }
-      } catch ( NumberFormatException e ) {
-        TDLog.Error( "undelete parse error: item " + item.toString() );
-      }
     }
     dismiss();
+  }
+
+  // @Override
+  // public void onItemClick(AdapterView<?> parent, View view, int pos, long index)
+  // {
+  //   switch ( mStatus ) {
+  //     case 0:
+  //       mPlots.get( pos ).flipFlag();
+  //       break;
+  //     case 1:
+  //       mShots1.get( pos ).flipFlag();
+  //       break;
+  //     case 2:
+  //       mShots2.get( pos ).flipFlag();
+  //       break;
+  //     case 3:
+  //       mShots3.get( pos ).flipFlag();
+  //       break;
+  //   }
+  //   updateList();
+  // }
+
+  private void recoverData()
+  {
+    boolean update = false;
+    switch ( mStatus ) {
+      case 0:
+        if ( mPlots != null ) {
+          for ( UndeleteItem item : mPlots ) if ( item.flag ) {
+            mData.undeletePlot( item.id, mSid );
+          }
+        }
+        break;
+      case 1:
+        if ( mShots1 != null ) {
+          for ( UndeleteItem item : mShots1 ) if ( item.flag ) {
+            update = true;
+            mData.undeleteShot( item.id, mSid );
+          }
+        }
+        break;
+      case 2:
+        if ( mShots2 != null ) {
+          for ( UndeleteItem item : mShots2 ) if ( item.flag ) {
+            update = true;
+            mData.undeleteShot( item.id, mSid );
+          }
+        }
+        break;
+      case 3:
+        if ( mShots3 != null ) {
+          for ( UndeleteItem item : mShots3 ) if ( item.flag ) {
+            update = true;
+            mData.undeleteShot( item.id, mSid );
+          }
+        }
+        break;
+    }
+    if ( update ) {
+      mParent.updateDisplay(); // this recomputes DistoX accuracy
+    }
   }
 
   public void onCreate(Bundle savedInstanceState)
@@ -112,11 +180,16 @@ class UndeleteDialog extends MyDialog
     super.onCreate( savedInstanceState );
 
     setContentView(R.layout.undelete_dialog);
-    // mArrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
-    mArrayAdapter = new MyStringAdapter( mContext, R.layout.message );
+    // mArrayAdapter = new MyStringAdapter( mContext, R.layout.message );
+    if ( mPlots != null )  mArrayAdapter0 = new UndeleteAdapter( mContext, this, R.layout.undelete_row, mPlots );
+    if ( mShots1 != null ) mArrayAdapter1 = new UndeleteAdapter( mContext, this, R.layout.undelete_row, mShots1 );
+    if ( mShots2 != null ) mArrayAdapter2 = new UndeleteAdapter( mContext, this, R.layout.undelete_row, mShots2 );
+    if ( mShots3 != null ) mArrayAdapter3 = new UndeleteAdapter( mContext, this, R.layout.undelete_row, mShots3 );
+
+
     mList = (ListView) findViewById(R.id.list_undelete);
-    mList.setAdapter( mArrayAdapter );
-    mList.setOnItemClickListener( this );
+    // mList.setAdapter( mArrayAdapter );
+    // mList.setOnItemClickListener( this );
     mList.setDividerHeight( 2 );
 
     // mBtnCancel = (Button) findViewById( R.id.button_cancel );
@@ -125,65 +198,60 @@ class UndeleteDialog extends MyDialog
 
     mBtnStatus = (Button) findViewById( R.id.button_status );
     mBtnStatus.setOnClickListener( this );
+    mBtnOk = (Button) findViewById( R.id.button_ok );
+    mBtnOk.setOnClickListener( this );
+
+    setTitle( R.string.undelete_text );
 
     mStatus = 0;
-    incrementStatus();
-    setTitle( R.string.undelete_text );
+    incrementStatus(); // calls updateList();
+  }
+
+  private void updateList()
+  {
+    // mArrayAdapter.clear();
+    switch ( mStatus ) {
+      case 0:
+        mBtnStatus.setText( R.string.undelete_plot );
+        // for ( UndeleteItem item : mPlots ) mArrayAdapter.add( item.getText() );
+        mList.setAdapter( mArrayAdapter0 );
+        break;
+      case 1:
+        mBtnStatus.setText( R.string.undelete_shot );
+        // for ( UndeleteItem item : mShots1 ) mArrayAdapter.add( item.getText() );
+        mList.setAdapter( mArrayAdapter1 );
+        break;
+      case 2:
+        mBtnStatus.setText( R.string.undelete_overshoot );
+        // for ( UndeleteItem item : mShots2 ) mArrayAdapter.add( item.getText() );
+        mList.setAdapter( mArrayAdapter2 );
+        break;
+      case 3:
+        mBtnStatus.setText( R.string.undelete_check );
+        // for ( UndeleteItem item : mShots3 ) mArrayAdapter.add( item.getText() );
+        mList.setAdapter( mArrayAdapter3 );
+        break;
+    }
+    // mList.setAdapter( mArrayAdapter );
+    // mList.invalidate( );
   }
 
   private void incrementStatus( )
   {
-    mArrayAdapter.clear();
-    switch ( mStatus ) {
-      case 0:
-        if ( mShots1 != null && mShots1.size() > 0 ) { mStatus = 1; break; }
-      case 1:
-        if ( mShots2 != null && mShots2.size() > 0 ) { mStatus = 2; break; }
-      case 2:
-        if ( mShots3 != null && mShots3.size() > 0 ) { mStatus = 3; break; }
-      case 3:
-        if ( mPlots  != null && mPlots.size() > 0  ) { mStatus = 0; break; }
-      default:
-        if ( mShots1 != null && mShots1.size() > 0 ) { mStatus = 1; break; }
-        if ( mShots2 != null && mShots2.size() > 0 ) { mStatus = 2; break; }
-        if ( mShots3 != null && mShots3.size() > 0 ) { mStatus = 3; break; }
+    for ( int k=0; k<4; ++k) {
+      mStatus = (mStatus + 1)%4;
+      if ( mStatus == 0 ) {
+        if ( mPlots != null ) break;
+      } else if ( mStatus == 1 ) {
+        if ( mShots1 != null ) break;
+      } else if ( mStatus == 2 ) {
+        if ( mShots2 != null ) break;
+      } else if ( mStatus == 3 ) {
+        if ( mShots3 != null ) break;
+      }
     }
     // Log.v("DistoX", "Undelete status " + mStatus );
-    switch ( mStatus ) {
-      case 0:
-        if ( mPlots != null ) for ( PlotInfo p : mPlots ) {
-          if ( p.type == PlotInfo.PLOT_PLAN ) {
-            mArrayAdapter.add( String.format(Locale.US, "plot %d <%s> %s", p.id, p.name, p.getTypeString() ) );
-          // } else { // this is OK extended do not show up in this dialog
-          //   TDLog.Log( TDLog.LOG_PLOT, " plot " + p.id + " <" + p.name + "> " +  p.getTypeString() );
-          }
-        }
-        mBtnStatus.setText( R.string.undelete_plot );
-        break;
-      case TDStatus.DELETED:
-        if ( mShots1 != null ) for ( DBlock b : mShots1 ) {
-          mArrayAdapter.add( 
-            String.format(Locale.US, "shot %d <%s> %.2f %.1f %.1f", b.mId, b.Name(), b.mLength, b.mBearing, b.mClino ) );
-        }
-        mBtnStatus.setText( R.string.undelete_shot );
-        break;
-      case TDStatus.OVERSHOOT:
-        if ( mShots2 != null ) for ( DBlock b : mShots2 ) {
-          mArrayAdapter.add( 
-            String.format(Locale.US, "shot %d %.2f %.1f %.1f", b.mId, b.mLength, b.mBearing, b.mClino ) );
-        }
-        mBtnStatus.setText( R.string.undelete_overshoot );
-        break;
-      case TDStatus.CHECK:
-        if ( mShots3 != null ) for ( DBlock b : mShots3 ) {
-          mArrayAdapter.add( 
-            String.format(Locale.US, "shot %d %.2f %.1f %.1f", b.mId, b.mLength, b.mBearing, b.mClino ) );
-        }
-        mBtnStatus.setText( R.string.undelete_check );
-        break;
-    }
-    mList.setAdapter( mArrayAdapter );
-    // mList.invalidate( );
+    updateList();
   }
 
 }

@@ -70,9 +70,6 @@ import android.widget.ListView;
 // import android.location.Location;
 // import android.location.LocationListener;
 import android.location.LocationManager;
-// import android.location.GpsStatus;
-// import android.location.GpsSatellite;
-// import android.location.GpsStatus.Listener;
 
 public class FixedActivity extends Activity
                            implements View.OnClickListener
