@@ -158,7 +158,7 @@ public class ExportDialogShot extends MyDialog
       // case 15: mLayoutDxf.setVisibility( View.VISIBLE ); break;
       case 16: 
       case 18: mLayoutKml.setVisibility( View.VISIBLE ); break;
-      case 19: mLayoutShp.setVisibility( View.VISIBLE ); break;
+      case 19: if ( TDLevel.overExpert) mLayoutShp.setVisibility( View.VISIBLE ); break;
     }
   }
 

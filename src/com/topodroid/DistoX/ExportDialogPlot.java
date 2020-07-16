@@ -86,6 +86,16 @@ public class ExportDialogPlot extends MyDialog
     mLayoutShp     = (LinearLayout) findViewById( R.id.layout_shp );
     mLayoutPng     = (LinearLayout) findViewById( R.id.layout_png );
 
+    if ( ! TDLevel.overAdvanced ) {
+      ((CheckBox) findViewById( R.id.therion_xvi )).setVisibility( View.GONE );
+      ((CheckBox) findViewById( R.id.therion_scale )).setVisibility( View.GONE );
+      ((CheckBox) findViewById( R.id.svg_grid )).setVisibility( View.GONE );
+      ((CheckBox) findViewById( R.id.svg_linedir )).setVisibility( View.GONE );
+      if ( ! TDLevel.overExpert ) {
+        ((CheckBox) findViewById( R.id.svg_roundtrip )).setVisibility( View.GONE );
+      }
+    }
+
     mBtnOk   = (Button) findViewById(R.id.button_ok );
     mBtnOk.setOnClickListener( this );
     // mBtnBack = (Button) findViewById(R.id.button_back );
@@ -144,7 +154,7 @@ public class ExportDialogPlot extends MyDialog
       case 1: mLayoutCSurvey.setVisibility( View.VISIBLE ); break;
       case 2: mLayoutDxf.setVisibility( View.VISIBLE ); break;
       case 3: mLayoutSvg.setVisibility( View.VISIBLE ); break;
-      case 4: mLayoutShp.setVisibility( View.VISIBLE ); break;
+      case 4: if ( TDLevel.overExpert ) mLayoutShp.setVisibility( View.VISIBLE ); break;
       case 5: mLayoutPng.setVisibility( View.VISIBLE ); break;
     }
   }

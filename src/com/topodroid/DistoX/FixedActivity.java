@@ -127,7 +127,8 @@ public class FixedActivity extends Activity
     mListView = (MyHorizontalListView) findViewById(R.id.listview);
     // mListView.setEmptyPlacholder(true);
     /* int size = */ TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
-    mNrButton1 = (hasGps)? 3 : 2;
+    mNrButton1 = ( TDPath.NOT_ANDROID_11 )? 2 : 1;
+    if ( hasGps ) ++ mNrButton1;
     mButton1 = new Button[ mNrButton1 ];
     int kz = (hasGps)? 0 : 1; // index of izons
     for ( int k=0; k<mNrButton1; ++k ) {
@@ -203,7 +204,7 @@ public class FixedActivity extends Activity
     Button b = (Button) v;
 
     int k = 0;
-    if ( hasGps && b == mButton1[k++] ) { // GPS
+    if ( hasGps && /* k < mNrButton1 && */ b == mButton1[k++] ) { // GPS
       final LocationManager lm = (LocationManager)getSystemService( Context.LOCATION_SERVICE );
       if ( lm != null ) {
         if ( ! lm.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
@@ -220,9 +221,9 @@ public class FixedActivity extends Activity
       } else {
         TDLog.Error("No location manager" );
       }
-    } else if ( b == mButton1[k++] ) { // ADD
+    } else if ( /* k < mNrButton1 && */ b == mButton1[k++] ) { // ADD
       new FixedAddDialog( mContext, this ).show();
-    } else if ( b == mButton1[k++] ) { // IMPORT MOBILE TOPOGRAPHER
+    } else if ( TDPath.NOT_ANDROID_11 && k < mNrButton1 && b == mButton1[k++] ) { // IMPORT MOBILE TOPOGRAPHER
       FixedImportDialog dialog = new FixedImportDialog( mContext, this );
       if ( dialog.getNrPoints() > 0 ) {
 	dialog.show();
