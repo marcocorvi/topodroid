@@ -715,6 +715,7 @@
     <string name="popup_do_gm_data">Zámera kalibrácie</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
+    <!-- TODO string name="btn_export">Export</string -->
     <string name="btn_import">Importovať</string>
     <string name="btn_install">Inštalovať</string>
 
@@ -917,6 +918,7 @@
     <string name="audio_delete">Vymazať ?</string>
     <string name="audio_overwrite">Prepísať ?</string>
   
+    <!-- TODO string name="import_functional">Import only functional settings</string -->
     <string name="import_lrud">Importovanie LRUD</string>
     <string name="import_leg_first">Hlavné zámery pred LRUD pomocnými zámerami</string>
     <string name="import_diving_datamode">Potápačský mód</string>
@@ -1577,6 +1579,7 @@ DO NOT REMOVE THIS LINE -->
     <!-- TODO string name="overwrite">overwrite</string -->
 
     <!-- TODO string name="title_help">TopoDroid Manager v. %1$s</string -->
+    <!-- TODO string name="title_export_settings">Settings import/export</string -->
     <!-- TODO string name="title_export">Export project as &#8230;</string -->
     <!-- TODO string name="title_equates">Project Equates</string -->
     <!-- TODO string name="title_equate_new">Add equate &#8230;</string -->
@@ -1587,6 +1590,7 @@ DO NOT REMOVE THIS LINE -->
     <!-- TODO string name="title_surveys">Surveys</string -->
 
     <!-- TODO string name="exported">Saved file %1$s</string -->
+  <!-- TODO string name="imported_settings">Imported settings</string -->
     <!-- TODO string name="export_failed">Failed export</string -->
 
 </resources>

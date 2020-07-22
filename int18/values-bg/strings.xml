@@ -700,6 +700,7 @@
     <string name="popup_do_gm_data">Контр. измерване</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
+    <!-- TODO string name="btn_export">Export</string -->
     <string name="btn_import">Импортиране</string>
     <string name="btn_install">Инсталиране</string>
 
@@ -901,6 +902,7 @@
     <!-- TODO string name="audio_delete">Delete ?</string -->
     <!-- TODO string name="audio_overwrite">Overwrite ?</string -->
 
+    <!-- TODO string name="import_functional">Import only functional settings</string -->
     <!-- TODO string name="import_lrud">Import LRUD</string -->
     <!-- TODO string name="import_leg_first">Leg before LRUD splays</string -->
     <!-- TODO string name="import_diving_datamode">Diving datamode</string -->
@@ -1270,6 +1272,7 @@
   <string name="pref_dxf_blocks_summary">DXF краища на странични измервания</string>
   <!-- TODO string name="pref_shp_georef_title">Georeferenced sketch plan export</string -->
   <!-- TODO string name="pref_shp_georef_summary">Sketch plan exported in WGS84 long-lat</string -->
+  <!-- TODO string name="imported_settings">Imported settings</string -->
   <string name="pref_thumbnail_title">Резолюция на мини-картинки</string>
   <string name="pref_thumbnail_summary">Резолюция на мини-картинки</string>
   <string name="pref_shot_timer_title">Таймер на измерването</string>
@@ -1549,6 +1552,7 @@
     <!-- TODO string name="overwrite">overwrite</string -->
 
     <!-- TODO string name="title_help">TopoDroid Manager v. %1$s</string -->
+    <!-- TODO string name="title_export_settings">Settings import/export</string -->
     <!-- TODO string name="title_export">Export project as &#8230;</string -->
     <!-- TODO string name="title_equates">Project Equates</string -->
     <!-- TODO string name="title_equate_new">Add equate &#8230;</string -->

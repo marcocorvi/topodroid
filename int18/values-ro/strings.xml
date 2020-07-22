@@ -702,6 +702,7 @@
     <string name="popup_do_gm_data">Măs. calibrare</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
+    <!-- TODO string name="btn_export">Export</string -->
     <string name="btn_import">Importă</string>
     <string name="btn_install">Instalează</string>
 
@@ -903,6 +904,7 @@
     <string name="audio_delete">Șterge ?</string>
     <string name="audio_overwrite">Suprascrie ?</string>
   
+    <!-- TODO string name="import_functional">Import only functional settings</string -->
     <string name="import_lrud">Importă LRUD(măs. laterale)</string>
     <string name="import_leg_first">Viză înaintea radierilor LRUD</string>
     <string name="import_diving_datamode">Mod scufundare</string>
@@ -1554,6 +1556,7 @@
     <string name="overwrite">suprascrie</string>
 
     <string name="title_help">TopoDroid Manager v. %1$s</string>
+    <!-- TODO string name="title_export_settings">Settings import/export</string -->
     <string name="title_export">Exportă proiectul ca &#8230;</string>
     <string name="title_equates">Vize echivalente Proiect</string>
     <string name="title_equate_new">Adaugă viză echivalentă &#8230;</string>
@@ -1564,6 +1567,7 @@
     <string name="title_surveys">Cartări</string>
 
     <string name="exported">Fișierul a fost salvat: %1$s</string>
+  <!-- TODO string name="imported_settings">Imported settings</string -->
     <string name="export_failed">Export eșuat</string>
    
 </resources>

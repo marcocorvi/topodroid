@@ -698,6 +698,7 @@
     <string name="popup_do_gm_data">Tiro di calib.</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
+    <!-- TODO string name="btn_export">Export</string -->
     <string name="btn_import">Importa</string>
     <string name="btn_install">Installa</string>
 
@@ -899,6 +900,7 @@
     <string name="audio_delete">Rimuovi ?</string>
     <string name="audio_overwrite">Sovrascrivi ?</string>
   
+    <!-- TODO string name="import_functional">Import only functional settings</string -->
     <string name="import_lrud">Importa LRUD</string>
     <string name="import_leg_first">Battuta prima degli LRUD</string>
     <string name="import_diving_datamode">Modo dati da immersione</string>
@@ -1552,6 +1554,7 @@
     <string name="overwrite">Sovrascrivi</string>
 
     <string name="title_help">Gestore TopoDroid v. %1$s</string>
+    <!-- TODO string name="title_export_settings">Settings import/export</string -->
     <string name="title_export">Esporta progetto come &#8230;</string>
     <string name="title_equates">Progetto Equivalenti</string>
     <string name="title_equate_new">Aggiungi equivalente &#8230;</string>
@@ -1562,6 +1565,7 @@
     <string name="title_surveys">Rilievi</string>
 
     <string name="exported">Salvato file %1$s</string>
+  <!-- TODO string name="imported_settings">Imported settings</string -->
     <string name="export_failed">Esportazione fallita</string>
 
 </resources>
