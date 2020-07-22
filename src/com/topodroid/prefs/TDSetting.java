@@ -39,6 +39,8 @@ import java.util.Locale;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.io.IOException;
 
@@ -249,7 +251,7 @@ public class TDSetting
   public static int mSockType = TD_SOCK_DEFAULT;
 
   public static int mCommRetry = 1; 
-  public static int mCommType  = 0; // 0: on-demand, 1: continuous, 2: multi
+  // public static int mCommType  = 0; // 0: on-demand, 1: continuous, 2: multi REPLACED BY mConnectionMode
 
   public static int mWaitLaser = 1000;
   public static int mWaitShot  = 4000;
@@ -307,7 +309,7 @@ public class TDSetting
 
   public static int     mMinNrLegShots = 3;
   public static String  mInitStation   = TDString.ZERO; // guaranteed non-null non-empty
-  public static boolean mBacksightInput = false;   // whether to add backsight fields in shot anual-input dialog
+  public static boolean mBacksightInput = false;   // whether to add backsight fields in shot manual-input dialog
   public static float   mSplayVertThrs = 80;
   public static boolean mAzimuthManual = false;    // whether to manually set extend / or use reference azimuth
   public static int     mDashSplay     = DASHING_NONE; // whether dash-splay are plan-type (1), profile-type (2), or independent (0)
@@ -650,7 +652,7 @@ public class TDSetting
 
   public static boolean setSizeButtons( int size )
   {
-    int sz = mSizeBtns;
+    int sz = mSizeButtons;
     switch ( size ) {
       case 0: sz = BTN_SIZE_SMALL;  break;
       case 1: sz = BTN_SIZE_NORMAL; break;
@@ -658,9 +660,9 @@ public class TDSetting
       case 4: sz = BTN_SIZE_LARGE;  break;
       case 2: sz = BTN_SIZE_HUGE;   break;
     }
-    if ( sz != mSizeBtns ) {
-      mSizeBtns = sz;
-      mSizeButtons = (int)( mSizeBtns * TopoDroidApp.getDisplayDensity() * 0.86f );
+    if ( sz != mSizeButtons ) {
+      mSizeBtns = size;
+      mSizeButtons = (int)( sz * TopoDroidApp.getDisplayDensity() * 0.86f );
       // Log.v("DistoX", "Size " + size + " Btns " + mSizeBtns + " " + mSizeButtons );
       if ( mSizeButtons < MIN_SIZE_BUTTONS ) mSizeButtons = MIN_SIZE_BUTTONS;
       return true;
@@ -671,7 +673,7 @@ public class TDSetting
   // get tentative size of buttons
   public static int getSizeButtons( int size )
   {
-    int sz = mSizeBtns;
+    int sz = mSizeButtons;
     switch ( size ) {
       case 0: sz = BTN_SIZE_SMALL;  break;
       case 1: sz = BTN_SIZE_NORMAL; break;
@@ -1942,8 +1944,8 @@ public class TDSetting
       ret = setPointingRadius( tryIntValue( hlp, k, v, def[6] ) );
     } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_SPLAY_ALPHA
       mSplayAlpha = tryIntValue( hlp, k, v, def[ 7] ); 
-      if ( mSplayAlpha < 0 ) { mSplayAlpha = 0; ret = Float.toString(mSplayAlpha); }
-      if ( mSplayAlpha > 100 ) { mSplayAlpha = 100; ret = Float.toString(mSplayAlpha); }
+      if ( mSplayAlpha < 0 ) { mSplayAlpha = 0; ret = Float.toString( mSplayAlpha ); }
+      if ( mSplayAlpha > 100 ) { mSplayAlpha = 100; ret = Float.toString( mSplayAlpha ); }
       BrushManager.setSplayAlpha( mSplayAlpha );
     } else {
       TDLog.Error("missing SCREEN key: " + k );
@@ -2384,6 +2386,13 @@ public class TDSetting
     TDandroid.applyEditor( editor );
   }
 
+  private static void setPreference( Editor editor, String name, String value )  { editor.putString( name, value ); }
+  private static void setPreference( Editor editor, String name, boolean value ) { editor.putBoolean( name, value ); }
+  // private static void setPreference( Editor editor, String name, long value )    { editor.putLong( name, value ); }
+  private static void setPreference( Editor editor, String name, int value )     { editor.putString( name, Integer.toString(value) ); }
+  private static void setPreference( Editor editor, String name, float value )   { editor.putString( name, Float.toString(value) ); }
+  private static void commitEditor( Editor editor ) { TDandroid.applyEditor( editor ); }
+
   public static long getLongPreference( SharedPreferences sp, String name, long def_value )
   {
     return sp.getLong( name, def_value ); 
@@ -2425,35 +2434,36 @@ public class TDSetting
     try {
       FileWriter fw = new FileWriter( file, false ); // true = append
       PrintWriter pw = new PrintWriter( fw, true ); // true = autoflush
-      pw.printf(Locale.US, "TopoDroid v. %s\n", TDVersion.string() );
-      pw.printf(Locale.US, "Buttons Size %2d %3d\n", mSizeBtns, mSizeButtons);
-      pw.printf(Locale.US, "Text Size %3d\n", mTextSize);
-      pw.printf(Locale.US, "Keyboard %c, no-cursor %c\n", tf(mKeyboard), tf(mNoCursor) );
-      pw.printf(Locale.US, "Local man %c\n", tf(mLocalManPages) );
-      pw.printf(Locale.US, "Palettes %c\n", tf(mPalettes) );
-      pw.printf(Locale.US, "Orientation %d\n", mOrientation );
+      pw.printf(Locale.US, "TopoDroid v. %s %d\n", TDVersion.string(), TDVersion.code() );
+      pw.printf(Locale.US, "Buttons Size %d %d\n", mSizeBtns, mSizeButtons);
+      pw.printf(Locale.US, "Text Size %d \n", mTextSize);
+      pw.printf(Locale.US, "Level %d \n", TDLevel.mLevel );
+      pw.printf(Locale.US, "Keyboard %c no-cursor %c \n", tf(mKeyboard), tf(mNoCursor) );
+      pw.printf(Locale.US, "Local man %c \n", tf(mLocalManPages) );
+      pw.printf(Locale.US, "Palettes %c \n", tf(mPalettes) );
+      pw.printf(Locale.US, "Orientation %d \n", mOrientation );
 
-      pw.printf(Locale.US, "Auto-export: data %c / %d, plot %d \n", tf(mDataBackup), mExportShotsFormat, mExportPlotFormat );
+      pw.printf(Locale.US, "Auto-export %c data %d, plot %d \n", tf(mDataBackup), mExportShotsFormat, mExportPlotFormat );
       String eol = "\\n"; if ( mSurvexEol.equals("\r\n") ) eol = "\\r\\n";
-      pw.printf(Locale.US, "Survex: eol \"%s\", splay %c LRUD %c \n", eol, tf(mSurvexSplay), tf(mSurvexLRUD) );
-      pw.printf(Locale.US, "Compass: swap LR %c, station prefix %c, splays %c\n", tf(mSwapLR), tf(mExportStationsPrefix), tf(mCompassSplays) );
-      pw.printf(Locale.US, "VisualTopo: splays %c at-from %c\n", tf(mVTopoSplays), tf(mVTopoLrudAtFrom) ); 
-      pw.printf(Locale.US, "Ortho LRUD %c, angle %.2f cos %.2f \n", tf(mOrthogonalLRUD), mOrthogonalLRUDAngle, mOrthogonalLRUDCosine );
-      pw.printf(Locale.US, "Therion: config %c, maps %c, stations %c, splays %c, xvi %c, scale %.2f\n",
+      pw.printf(Locale.US, "Survex: eol \"%s\", splay %c, LRUD %c \n", eol, tf(mSurvexSplay), tf(mSurvexLRUD) );
+      pw.printf(Locale.US, "Compass: swap_LR %c, prefix %c, splays %c \n", tf(mSwapLR), tf(mExportStationsPrefix), tf(mCompassSplays) );
+      pw.printf(Locale.US, "VisualTopo: splays %c, at-from %c \n", tf(mVTopoSplays), tf(mVTopoLrudAtFrom) ); 
+      pw.printf(Locale.US, "Ortho LRUD %c, angle %.2f, cos %.2f \n", tf(mOrthogonalLRUD), mOrthogonalLRUDAngle, mOrthogonalLRUDCosine );
+      pw.printf(Locale.US, "Therion: config %c, maps %c, stations %c, splays %c, xvi %c, scale %.2f \n",
         tf(mTherionConfig), tf(mTherionMaps), tf(mAutoStations), tf(mTherionSplays), tf(mTherionXvi), mToTherion );
-      pw.printf(Locale.US, "PNG scale %.2f, bg color %d\n", mBitmapScale, mBitmapBgcolor );
-      pw.printf(Locale.US, "DXF: acad version %d, blocks %c \n", mAcadVersion, tf(mDxfBlocks) );
-      pw.printf(Locale.US, "SVG: shot %.1f, label %.1f, station %d, point %.1f, round-trip %c grid %c %.1f, line %.1f, dir %c %.1f, splays %c\n",
+      pw.printf(Locale.US, "PNG scale %.2f, bg_color %d \n", mBitmapScale, (mBitmapBgcolor & 0xffffff) );
+      pw.printf(Locale.US, "DXF: acad_version %d, blocks %c \n", mAcadVersion, tf(mDxfBlocks) );
+      pw.printf(Locale.US, "SVG: shot %.1f, label %.1f, station %d, point %.1f, round-trip %c, grid %c %.1f, line %.1f, dir %c %.1f, splays %c \n",
         mSvgShotStroke, mSvgLabelStroke, mSvgStationSize, mSvgPointStroke,
         tf(mSvgRoundTrip), tf(mSvgGrid), mSvgGridStroke, mSvgLineStroke, tf(mSvgLineDirection), mSvgLineDirStroke, tf(mSvgSplays) );
-      pw.printf(Locale.US, "SHP: georef-plan %c\n", tf(mShpGeoref) );
-      pw.printf(Locale.US, "KML: stations %c, splays %c\n", tf(mKmlStations), tf(mKmlSplays) );
-      pw.printf(Locale.US, "CSV: raw %c, separator \'%c\'\n", tf(mCsvRaw), mCsvSeparator );
+      pw.printf(Locale.US, "SHP: georef-plan %c \n", tf(mShpGeoref) );
+      pw.printf(Locale.US, "KML: stations %c, splays %c \n", tf(mKmlStations), tf(mKmlSplays) );
+      pw.printf(Locale.US, "CSV: raw %c, separator \'%c\' \n", tf(mCsvRaw), mCsvSeparator );
 
       pw.printf(Locale.US, "BT: check %d, autopair %c \n", mCheckBT, tf(mAutoPair) );
-      pw.printf(Locale.US, "Socket: type \"%s\" / %d, delay %d\n", mDefaultSockStrType, mSockType, mConnectSocketDelay );
-      pw.printf(Locale.US, "Connection mode %d, Z6 %c, feedback %d\n", mConnectionMode, tf(mZ6Workaround), mConnectFeedback );
-      pw.printf(Locale.US, "Communication type %d, autoreconnect %c, DistoX-B %c, retry %d, head/tail %c\n", mCommType, tf(mAutoReconnect), tf(mSecondDistoX), mCommRetry, tf(mHeadTail) );
+      pw.printf(Locale.US, "Socket: type \"%s\" %d, delay %d\n", mDefaultSockStrType, mSockType, mConnectSocketDelay );
+      pw.printf(Locale.US, "Connection mode %d Z6 %c, feedback %d\n", mConnectionMode, tf(mZ6Workaround), mConnectFeedback );
+      pw.printf(Locale.US, "Communication autoreconnect %c, DistoX-B %c, retry %d, head/tail %c\n", tf(mAutoReconnect), tf(mSecondDistoX), mCommRetry, tf(mHeadTail) );
       pw.printf(Locale.US, "Packet log %c\n", tf(mPacketLog) );
       pw.printf(Locale.US, "Wait: laser %d, shot %d, data %d, conn %d, command %d\n", mWaitLaser, mWaitShot, mWaitData, mWaitConn, mWaitCommand );
 
@@ -2467,7 +2477,6 @@ public class TDSetting
       pw.printf(Locale.US, "Location: units %d, CRS \"%s\"\n", mUnitLocation, mCRS );
       pw.printf(Locale.US, "Shots: vthr %.1f, hthr %.1f \n", mVThreshold, mHThreshold );
       pw.printf(Locale.US, "Data: DistoX-backshot-swap %c, diving-mode %c \n", tf(mDistoXBackshot), tf(mDivingMode) );
-      // pw.printf(Locale.US, "Data: diving-mode %c \n", tf(mDivingMode) );
       pw.printf(Locale.US, "Data input: backsight %c, prev/next %c\n", tf(mBacksightInput), tf(mPrevNext) );
       pw.printf(Locale.US, "L/R extend %c\n", tf(mLRExtend) );
       pw.printf(Locale.US, "U/D vertical %.1f, L/R horicontal %.1f\n", mLRUDvertical, mLRUDhorizontal );
@@ -2482,15 +2491,15 @@ public class TDSetting
       pw.printf(Locale.US, "Extend: thr %.1f, manual %c, frac %c\n", mExtendThr, tf(mAzimuthManual), tf(mExtendFrac) );
       pw.printf(Locale.US, "Loop: %d \n", mLoopClosure );
       pw.printf(Locale.US, "Units: length %.2f [%s], angle %.2f [%s]\n", mUnitLength, mUnitLengthStr, mUnitAngle, mUnitAngleStr );
-      pw.printf(Locale.US, "ThumbSize %d, SavedStations %c, LegonlyUpdate%c, WithAzimuth %c, WithSensors %c, Bedding %c \n", // TdManager %c\n",
+      pw.printf(Locale.US, "ThumbSize %d, SavedStations %c, LegonlyUpdate %c, WithAzimuth %c, WithSensors %c, Bedding %c \n", // TdManager %c\n",
         mThumbSize, tf(mSavedStations), tf(mLegonlyUpdate), tf(mWithAzimuth), tf(mWithSensors), tf(mBedding) ); // , tf(mWithTdManager) );
 
       pw.printf(Locale.US, "Plot: zoom %d, drag %c, fix-origin %c, split %c, shift %c, levels %d\n",
         mZoomCtrl, tf(mSideDrag), tf(mFixedOrigin), tf(mPlotSplit), tf(mPlotShift), mWithLevels );
       pw.printf(Locale.US, "Units: icon %.2f, line %.2f, grid %.2f, ruler %.2f\n", mUnitIcons, mUnitLines, mUnitGrid, mUnitMeasure );
       pw.printf(Locale.US, "Size: station %.1f, label %.1f, fixed %.1f line %.1f\n", mStationSize, mLabelSize, mFixedThickness, mLineThickness );
-      pw.printf(Locale.US, "Select: radius %.2f [min %.2f], pointing %d, shift %d, dot %.1f, multiple %c \n",
-        mSelectness, mCloseCutoff, mPointingRadius, mMinShift, mDotRadius, tf(mPathMultiselect) );
+      pw.printf(Locale.US, "Select: radius %.2f, pointing %d, shift %d, dot %.1f, multiple %c \n",
+        mSelectness, mPointingRadius, mMinShift, mDotRadius, tf(mPathMultiselect) );
       pw.printf(Locale.US, "Erase: radius %.2f\n", mEraseness );
       pw.printf(Locale.US, "Picker: type %d\n", mPickerType );
       pw.printf(Locale.US, "Point: unscaled %c\n", tf(mUnscaledPoints) );
@@ -2513,5 +2522,466 @@ public class TDSetting
 
       fw.close();
     } catch ( IOException e ) { TDLog.Error("failed to export settings"); }
+  }
+
+  private static String getQuotedString( String line )
+  {
+    int from = line.indexOf( '"' );
+    if ( from < 0 ) return null;
+    int to = line.indexOf( '"', from+1 );
+    if ( to < 0 ) return line.substring( from+1 );
+    return line.substring( from+1, to );
+  }
+
+  private static String removeBrackets( String in )
+  { 
+    return in.substring( 1, in.length() -1 );
+  }
+
+  private static String getString( String[] vals, int idx ) { return vals[idx]; }
+
+  private static char getQuotedChar( String line )
+  { 
+    int from = line.indexOf( '\'' );
+    if ( from < 0 ) return 0;
+    return line.charAt( from+1 );
+  }
+
+  private static boolean getBoolean( String[] vals, int idx ) { return vals[idx].equals("T"); }
+
+  private static float getFloat( String[] vals, int idx )
+  {
+    try { 
+      return Float.parseFloat(vals[idx]);
+    } catch ( NumberFormatException e ) { }
+    return 0;
+  }
+
+  private static int getInt( String[] vals, int idx )
+  {
+    try { 
+      return Integer.parseInt(vals[idx]);
+    } catch ( NumberFormatException e ) { }
+    return 0;
+  }
+
+  public static void importSettings( SharedPreferences prefs, boolean all )
+  {
+    // Log.v("DistoX", "TDSetting import settings");
+    Editor editor = prefs.edit();
+    File file = TDPath.getSettingsFile();
+    try {
+      FileReader fr = new FileReader( file ); // true = append
+      BufferedReader br = new BufferedReader( fr ); // true = autoflush
+      String line;
+      while ( ( line = br.readLine() ) != null ) {
+        String[] vals = line.replaceAll(",", "").split(" ");
+        if ( line.startsWith("TopoDroid" ) ) {
+          if ( getInt( vals, 3 ) < 500053 ) return;
+          continue;
+        }
+        if ( line.startsWith("Buttons Size" ) && all ) {
+          setSizeButtons( getInt( vals, 2 ) ); setPreference( editor, "DISTOX_SIZE_BUTTONS", mSizeBtns );
+          // must run on UI thread
+          // TopoDroidApp.resetButtonBar();
+          continue;
+        }
+        if ( line.startsWith("Text Size" ) && all ) {
+          setTextSize( getInt(vals, 2 ) ); setPreference( editor, "DISTOX_TEXT_SIZE", mTextSize );
+          continue;
+        }
+        if ( line.startsWith("Level") && all ) { 
+          continue;
+        }
+        if ( line.startsWith("Keyboard") && all ) {
+          mKeyboard = getBoolean( vals, 1 ); setPreference( editor, "DISTOX_MKEYBOARD", mKeyboard );
+          mNoCursor = getBoolean( vals, 3 ); setPreference( editor, "DISTOX_NO_CURSOR", mNoCursor );
+          continue;
+        }
+        if ( line.startsWith("Local man") && all ) {
+          // setPreference( editor, "DISTOX_LOCAL_MAN", mLocalManPages );
+          continue;
+        }
+        if ( line.startsWith("Palettes") ) {
+          setPalettes( getBoolean( vals, 1 ) ); setPreference( editor, "DISTOX_PALETTES", mPalettes );
+          continue;
+        }
+        if ( line.startsWith("Orientation") && all ) {
+          mOrientation = getInt( vals, 1 ); setPreference( editor, "DISTOX_ORIENTATION", mOrientation );
+          // must run on UI thread
+          // TopoDroidApp.setScreenOrientation( );
+          TDandroid.setScreenOrientation( TDPrefActivity.mPrefActivityAll );
+          continue;
+        }
+        if ( line.startsWith("Auto-export") ) {
+          mDataBackup = getBoolean( vals, 1 ); setPreference( editor, "DISTOX_DATA_BACKUP", mDataBackup );
+          mExportShotsFormat = getInt( vals, 3 ); setPreference( editor, "DISTOX_EXPORT_SHOTS", mExportShotsFormat );
+          mExportPlotFormat  = getInt( vals, 5 ); setPreference( editor, "DISTOX_EXPORT_PLOT",  mExportPlotFormat );
+          continue;
+        }
+        if ( line.startsWith("Survex") ) { 
+          mSurvexEol   = getQuotedString( line ); 
+          setPreference( editor, "DISTOX_SURVEX_EOL", ( mSurvexEol.equals("\n")? "LF" : "LFCR" ) );
+          mSurvexSplay = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_SURVEX_SPLAY", mSurvexSplay );
+          mSurvexLRUD  = getBoolean( vals, 6 ); setPreference( editor, "DISTOX_SURVEX_LRUD",  mSurvexLRUD );
+          // Log.v("DistoX", "TDSetting import survex settings " + mSurvexEol + " " + mSurvexSplay + " " + mSurvexLRUD );
+          continue;
+        }
+        if ( line.startsWith("Compass") ) {
+          mSwapLR = getBoolean( vals, 2 ); setPreference( editor, "DISTOX_SWAP_LR", mSwapLR );
+          mExportStationsPrefix = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_STATION_PREFIX", mExportStationsPrefix );
+          mCompassSplays = getBoolean( vals, 6 ); setPreference( editor, "DISTOX_COMPASS_SPLAYS", mCompassSplays );
+          continue;
+        }
+        if ( line.startsWith("VisualTopo") ) {
+          mVTopoSplays = getBoolean( vals, 2 ); setPreference( editor, "DISTOX_VTOPO_SPLAYS", mVTopoSplays );
+          mVTopoLrudAtFrom = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_VTOPO_LRUD", mVTopoLrudAtFrom );
+          continue;
+        }
+        if ( line.startsWith("Ortho") ) {
+          mOrthogonalLRUDAngle = getFloat( vals, 4 ); setPreference( editor, "DISTOX_ORTHO_LRUD", mOrthogonalLRUDAngle );
+          mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
+          mOrthogonalLRUD       = ( mOrthogonalLRUDAngle > 0.000001f ); 
+          continue;
+        }
+        if ( line.startsWith("Therion") ) {
+          mTherionConfig = getBoolean( vals, 2 );  setPreference( editor, "DISTOX_THERION_CONFIG", mTherionConfig );
+          mTherionMaps   = getBoolean( vals, 4 );  setPreference( editor, "DISTOX_THERION_MAPS",   mTherionMaps );
+          mAutoStations  = getBoolean( vals, 6);   setPreference( editor, "DISTOX_AUTO_STATIONS",  mAutoStations );
+          mTherionSplays = getBoolean( vals, 8 );  setPreference( editor, "DISTOX_THERION_SPLAYS", mTherionSplays );
+          mTherionXvi    = getBoolean( vals, 10 ); setPreference( editor, "DISTOX_TH2_XVI",       mTherionXvi );
+          mTherionScale  = getInt( vals, 12 );     setPreference( editor, "DISTOX_TH2_SCALE", mTherionScale );
+          mToTherion = THERION_SCALE / mTherionScale;
+          // Log.v("DistoX", "TDSetting import therion settings " + mTherionConfig + " " + mTherionMaps + " " + mTherionSplays );
+          continue;
+        }
+        if ( line.startsWith("PNG") ) {
+          mBitmapScale   = getFloat( vals, 2 ); setPreference( editor, "DISTOX_BITMAP_SCALE", mBitmapScale );
+          mBitmapBgcolor = getInt( vals, 4 );   setPreference( editor, "DISTOX_BITMAP_BGCOLOR", mBitmapBgcolor );
+          mBitmapBgcolor |= 0xff000000;
+          continue;
+        }
+        if ( line.startsWith("DXF") ) {
+          mAcadVersion = getInt( vals, 2 ); setPreference( editor, "DISTOX_ACAD_VERSION", mAcadVersion );
+          mDxfBlocks   = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_DXF_BLOCKS", mDxfBlocks );
+          continue;
+        }
+        if ( line.startsWith("SVG") ) {
+          mSvgShotStroke  = getFloat( vals, 2 );      setPreference( editor, "DISTOX_SVG_SHOT_STROKE", mSvgShotStroke );
+          mSvgLabelStroke = getFloat( vals, 4 );      setPreference( editor, "DISTOX_SVG_LABEL_STROKE", mSvgLabelStroke );
+          mSvgStationSize = getInt( vals, 6 );        setPreference( editor, "DISTOX_SVG_STATION_SIZE", mSvgStationSize );
+          mSvgPointStroke = getFloat( vals, 8 );      setPreference( editor, "DISTOX_SVG_POINT_STROKE", mSvgPointStroke );
+          mSvgRoundTrip   = getBoolean( vals, 10 );   setPreference( editor, "DISTOX_SVG_ROUNDTRIP", mSvgRoundTrip );
+          mSvgGrid        = getBoolean( vals, 12 );   setPreference( editor, "DISTOX_SVG_GRID", mSvgGrid );
+          mSvgGridStroke  = getFloat( vals, 13 );     setPreference( editor, "DISTOX_SVG_GRID_STROKE", mSvgGridStroke );
+          mSvgLineStroke  = getFloat( vals, 15 );     setPreference( editor, "DISTOX_SVG_LINE_STROKE", mSvgLineStroke );
+          mSvgLineDirection = getBoolean( vals, 17 ); setPreference( editor, "DISTOX_SVG_LINE_DIR", mSvgLineDirection );
+          mSvgLineDirStroke = getFloat( vals, 18 );   setPreference( editor, "DISTOX_SVG_LINEDIR_STROKE", mSvgLineDirStroke );
+          mSvgSplays = getBoolean( vals, 20 );        setPreference( editor, "DISTOX_SVG_SPLAYS", mSvgSplays );
+          continue;
+        }
+        if ( line.startsWith("SHP") ) {
+          mShpGeoref = getBoolean( vals, 2 ); setPreference( editor, "DISTOX_SHP_GEOREF", mShpGeoref );
+          continue;
+        }
+        if ( line.startsWith("KML") ) {
+          mKmlStations = getBoolean( vals, 2 ); setPreference( editor, "DISTOX_KML_STATIONS", mKmlStations );
+          mKmlSplays   = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_KML_SPLAYS",   mKmlSplays );
+          continue;
+        }
+        if ( line.startsWith("CSV") ) {
+          mCsvRaw = getBoolean( vals, 2 ); setPreference( editor, "DISTOX_CSV_RAW", mCsvRaw );
+          mCsvSeparator = getQuotedChar( line ); 
+          // Log.v("DistoX", "csv separator <" + mCsvSeparator + ">" );
+          int sep = ( mCsvSeparator == CSV_COMMA )? 0 : ( mCsvSeparator == CSV_PIPE )? 1 : 2; // CSV_TAB
+          setPreference( editor, "DISTOX_CSV_SEP", sep );
+          continue;
+        }
+        if ( line.startsWith("BT") && all ) {
+          mCheckBT  = getInt( vals, 2 ); setPreference( editor, "DISTOX_BLUETOOTH", mCheckBT );
+          mAutoPair = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_AUTO_PAIR", mAutoPair );
+          continue;
+        }
+        if ( line.startsWith("Socket") && all ) {
+          // mDefaultSockStrType = getQuotedString( line ); setPreference( editor, DISTOX_ );
+          mSockType = getInt( vals, 3 ); setPreference( editor, "DISTOX_SOCK_TYPE", mSockType );
+          mConnectSocketDelay = getInt( vals, 5 ); setPreference( editor, "DISTOX_SOCKET_DELAY", mConnectSocketDelay );
+          continue;
+        }
+        if ( line.startsWith("Connection") && all ) {
+          mConnectionMode  = getInt( vals, 2 );     setPreference( editor, "DISTOX_CONN_MODE", mConnectionMode );
+          mZ6Workaround    = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_Z6_WORKAROUND", mZ6Workaround );
+          mConnectFeedback = getInt( vals, 6 );     setPreference( editor, "DISTOX_CONNECT_FEEDBACK", mConnectFeedback );
+          continue;
+        }
+        if ( line.startsWith("Communication") && all ) {
+          mAutoReconnect = getBoolean( vals, 2 );  setPreference( editor, "DISTOX_AUTO_RECONNECT", mAutoReconnect );
+          mSecondDistoX  = getBoolean( vals, 4 );  setPreference( editor, "DISTOX_SECOND_DISTOX", mSecondDistoX );
+          mCommRetry     = getInt( vals, 6 );      setPreference( editor, "DISTOX_COMM_RETRY", mCommRetry );
+          mHeadTail      = getBoolean( vals, 8 ); setPreference( editor, "DISTOX_HEAD_TAIL",  mHeadTail );
+          continue;
+        }
+        if ( line.startsWith("Packet log") && all ) {
+          mPacketLog = getBoolean( vals, 2 ); setPreference( editor, "DISTOX_PACKET_LOGGER", mPacketLog );
+          continue;
+        }
+        if ( line.startsWith("Wait") && all ) {
+          mWaitLaser   = getInt( vals, 2 );  setPreference( editor, "DISTOX_WAIT_LASER", mWaitLaser );
+          mWaitShot    = getInt( vals, 4 );  setPreference( editor, "DISTOX_WAIT_SHOT",  mWaitShot );
+          mWaitData    = getInt( vals, 6 );  setPreference( editor, "DISTOX_WAIT_DATA",  mWaitData );
+          mWaitConn    = getInt( vals, 8 );  setPreference( editor, "DISTOX_WAIT_CONN",  mWaitConn );
+          // mWaitCommand = getInt( vals, 10 ); setPreference( editor, "DISTOX_WAIT_COMMAND", mWaitCommand );
+          continue;
+        }
+        if ( line.startsWith("Calib groups") ) {
+          mGroupBy       = getInt( vals, 2 ); setPreference( editor, "DISTOX_GROUP_BY", mGroupBy );
+          mGroupDistance = getFloat( vals, 4 ); setPreference( editor, "DISTOX_GROUP_DISTANCE", mGroupDistance );
+          continue;
+        }
+        if ( line.startsWith("Calib algo") ) {
+          mCalibAlgo  = getInt( vals, 2 );   setPreference( editor, "DISTOX_CALIB_ALGO", mCalibAlgo );
+          mCalibEps   = getFloat( vals, 4 ); setPreference( editor, "DISTOX_CALIB_EPS", mCalibEps );
+          mCalibMaxIt = getInt( vals, 6 );   setPreference( editor, "DISTOX_CALIB_MAX_IT", mCalibMaxIt );
+          continue;
+        }
+        if ( line.startsWith("Calib shot") && all ) {
+          mCalibShotDownload = getBoolean( vals, 3 ); setPreference( editor, "DISTOX_CALIB_SHOT_DOWNLOAD", mCalibShotDownload );
+          mRawCData = getInt( vals, 6 );              setPreference( editor, "DISTOX_RAW_CDATA", mRawCData );
+          continue;
+        }
+        if ( line.startsWith("Min_Algo") ) {
+          // mAlgoMinAlpha = getFloat( vals, 2 ); setPreference( editor, "DISTOX_MIN_ALPHA", mAlgoMinAlpha );
+          // mAlgoMinBeta  = getFloat( vals, 4 ); setPreference( editor, "DISTOX_MIN_BETA",  mAlgoMinBeta );
+          // mAlgoMinGamma = getFloat( vals, 6 ); setPreference( editor, "DISTOX_MIN_GAMMA", mAlgoMinGamma );
+          // mAlgoMinDelta = getFloat( vals, 8 ); setPreference( editor, "DISTOX_MIN_DELTA", mAlgoMinDelta );
+          continue;
+        }
+        if ( line.startsWith("Default Team") && all ) {
+          mDefaultTeam = getQuotedString( line ); setPreference( editor, "DISTOX_TEAM", mDefaultTeam );
+          // Log.v("DistoX", "team <" + mDefaultTeam + ">" );
+          continue;
+        }
+        if ( line.startsWith("Midline check") ) {
+          mCheckAttached = getBoolean( vals, 3 ); setPreference( editor, "DISTOX_CHECK_ATTACHED", mCheckAttached );
+          mCheckExtend   = getBoolean( vals, 5 ); setPreference( editor, "DISTOX_CHECK_EXTEND",   mCheckExtend );
+          continue;
+        }
+        if ( line.startsWith("Location") ) {
+          mUnitLocation = getInt( vals, 2 );
+          setPreference( editor, "DISTOX_UNIT_LOCATION", ( mUnitLocation == TDUtil.DDMMSS ? "ddmmss" : "degrees" ) );
+          mCRS = getQuotedString( line ); 
+          // Log.v("DistoX", "crs <" + mCRS + ">" );
+          setPreference( editor, "DISTOX_CRS", mCRS );
+          continue;
+        }
+        if ( line.startsWith("Shots") ) {
+          mVThreshold = getFloat( vals, 2 ); setPreference( editor, "DISTOX_VTHRESHOLD", mVThreshold );
+          mHThreshold = getFloat( vals, 4 ); setPreference( editor, "DISTOX_HTHRESHOLD", mHThreshold );
+          continue;
+        }
+        if ( line.startsWith("Data:") && all ) {
+          mDistoXBackshot = getBoolean( vals, 2 ); setPreference( editor, "DISTOX_BACKSHOT", mDistoXBackshot );
+          mDivingMode     = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_DIVING_MODE", mDivingMode );
+          continue;
+        }
+        if ( line.startsWith("Data input") ) {
+          mBacksightInput = getBoolean( vals, 3 ); setPreference( editor, "DISTOX_BACKSIGHT", mBacksightInput );
+          mPrevNext       = getBoolean( vals, 5 ); setPreference( editor, "DISTOX_PREV_NEXT", mPrevNext );
+          continue;
+        }
+        if ( line.startsWith("L/R extend") ) {
+          mLRExtend = getBoolean( vals, 2 ); setPreference( editor, "DISTOX_SPLAY_EXTEND", mLRExtend );
+          continue;
+        }
+        if ( line.startsWith("U/D") ) {
+          mLRUDvertical   = getFloat( vals, 2 ); setPreference( editor, "DISTOX_LRUD_VERTICAL",   mLRUDvertical );
+          mLRUDhorizontal = getFloat( vals, 4 ); setPreference( editor, "DISTOX_LRUD_HORIZONTAL", mLRUDhorizontal );
+          continue;
+        }
+        if ( line.startsWith("Geek Import") ) {
+          mImportDatamode = getInt( vals, 5 ); setPreference( editor, "DISTOX_IMPORT_DATAMODE", mImportDatamode );
+          mZipWithSymbols = getBoolean( vals, 8 ); setPreference( editor, "DISTOX_ZIP_WITH_SYMBOLS", mZipWithSymbols );
+          continue;
+        }
+        if ( line.startsWith("Timer") && all ) {
+          mTimerWait  = getInt( vals, 2 ); setPreference( editor, "DISTOX_SHOT_TIMER",  mTimerWait );
+          mBeepVolume = getInt( vals, 4 ); setPreference( editor, "DISTOX_BEEP_VOLUME", mBeepVolume );
+          continue;
+        }
+        if ( line.startsWith("Recent data") && all ) {
+          mShotRecent = getBoolean( vals, 2 ); setPreference( editor, "DISTOX_RECENT_SHOT",    mShotRecent );
+          mRecentTimeout = getInt( vals, 4 );  setPreference( editor, "DISTOX_RECENT_TIMEOUT", mRecentTimeout );
+          continue;
+        }
+        if ( line.startsWith("Leg:") ) {
+          mCloseDistance = getFloat( vals, 2 ); setPreference( editor, "DISTOX_CLOSE_DISTANCE", mCloseDistance );
+          mMinNrLegShots = getInt( vals, 4 ); setPreference( editor, "DISTOX_LEG_SHOTS", mMinNrLegShots );
+          mTripleShot    = getInt( vals, 6 ); setPreference( editor, "DISTOX_LEG_FEEDBACK", mTripleShot );
+          mMaxShotLength = getFloat( vals, 8 ); setPreference( editor, "DISTOX_MAX_SHOT_LENGTH", mMaxShotLength );
+          mMinLegLength  = getFloat( vals, 10 ); setPreference( editor, "DISTOX_MIN_LEG_LENGTH", mMinLegLength );
+          continue;
+        }
+        if ( line.startsWith("Splay: vtr") ) {
+          mSplayVertThrs = getFloat( vals, 2 ); setPreference( editor, "DISTOX_SPLAY_VERT_THRS", mSplayVertThrs );
+          mSplayClasses  = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_SPLAY_CLASSES", mSplayClasses );
+          continue;
+        }
+        if ( line.startsWith("Stations:") ) {
+          mStationNames = getInt( vals, 2 ); setPreference( editor, "DISTOX_STATION_NAMES", mStationNames );
+          mInitStation  = getQuotedString( line ); if ( mInitStation.length() > 0 ) setPreference( editor, "DISTOX_INIT_STATION", mInitStation );
+          // Log.v("DistoX", "init station <" + mInitStation + ">" );
+          continue;
+        }
+        if ( line.startsWith("Extend:") ) {
+          mExtendThr     = getFloat( vals, 2 );   setPreference( editor, "DISTOX_EXTEND_THR2", mExtendThr );
+          mAzimuthManual = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_AZIMUTH_MANUAL", mAzimuthManual );
+          mExtendFrac    = getBoolean( vals, 6 ); setPreference( editor, "DISTOX_EXTEND_FRAC", mExtendFrac );
+          continue;
+        }
+        if ( line.startsWith("Loop") ) {
+          mLoopClosure = getInt( vals, 1 ); setPreference( editor, "DISTOX_LOOP_CLOSURE_VALUE", mLoopClosure );
+          continue;
+        }
+        if ( line.startsWith("Units: length") ) {
+          mUnitLength    = getFloat( vals, 2 ); 
+          mUnitLengthStr = removeBrackets( getString( vals, 3 ) ); 
+          mUnitAngle     = getFloat( vals, 5 ); 
+          mUnitAngleStr  = removeBrackets( getString( vals, 6 ) ); 
+          setPreference( editor, "DISTOX_UNIT_LENGTH", ( mUnitLength > 0.99f ? "meters" : "feet" ) );
+          setPreference( editor, "DISTOX_UNIT_ANGLE",  ( mUnitAngle > 0.99f ?  "degrees" : "grads" ) );
+          continue;
+        }
+        if ( line.startsWith("ThumbSize") ) {
+          mThumbSize     = getInt( vals, 1 );      setPreference( editor, "DISTOX_THUMBNAIL", mThumbSize );
+          mSavedStations = getBoolean( vals, 3 );  setPreference( editor, "DISTOX_SAVED_STATIONS", mSavedStations );
+          mLegonlyUpdate = getBoolean( vals, 5 );  setPreference( editor, "DISTOX_LEGONLY_UPDATE", mLegonlyUpdate );
+          mWithAzimuth   = getBoolean( vals, 7 );  setPreference( editor, "DISTOX_ANDROID_AZIMUTH", mWithAzimuth );
+          mWithSensors   = getBoolean( vals, 9 );  setPreference( editor, "DISTOX_WITH_SENSORS", mWithSensors );
+          mBedding       = getBoolean( vals, 11 ); setPreference( editor, "DISTOX_BEDDING", mBedding );
+          continue;
+        }
+        if ( line.startsWith("Plot: zoom") ) {
+          if ( all ) {
+            mZoomCtrl = getInt( vals, 2 );
+            setZoomControls( vals[2], TDandroid.checkMultitouch( TDInstance.context ) );
+            setPreference( editor, "DISTOX_ZOOM_CTRL", mZoomCtrl );
+            mSideDrag = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_SIDE_DRAG", mSideDrag );
+          }
+          mFixedOrigin = getBoolean( vals, 6 );  setPreference( editor, "DISTOX_FIXED_ORIGIN", mFixedOrigin );
+          mPlotSplit   = getBoolean( vals, 8 );  setPreference( editor, "DISTOX_PLOT_SPLIT", mPlotSplit );
+          mPlotShift   = getBoolean( vals, 10 ); setPreference( editor, "DISTOX_PLOT_SHIFT", mPlotShift );
+          mWithLevels  = getInt( vals, 12 );     setPreference( editor, "DISTOX_WITH_LEVELS", mWithLevels );
+          continue;
+        }
+        if ( line.startsWith("Units: icon") && all ) {
+          setDrawingUnitIcons( getFloat( vals, 2 ) ); setPreference( editor, "DISTOX_DRAWING_UNIT", mUnitIcons );
+          setDrawingUnitLines( getFloat( vals, 4 ) ); setPreference( editor, "DISTOX_LINE_UNITS", mUnitLines );
+          mUnitGrid  = getFloat( vals, 6 );    setPreference( editor, "DISTOX_UNIT_GRID", mUnitGrid );
+          mUnitMeasure = getFloat( vals,  8 ); setPreference( editor, "DISTOX_UNIT_MEASURE", mUnitMeasure );
+          continue;
+        }
+        if ( line.startsWith("Size: station") && all ) {
+          mStationSize    = getFloat( vals, 2 ); setPreference( editor, "DISTOX_STATION_SIZE", mStationSize );
+          mLabelSize      = getFloat( vals, 4 ); setPreference( editor, "DISTOX_LABEL_SIZE", mLabelSize );
+          mFixedThickness = getFloat( vals, 6 ); setPreference( editor, "DISTOX_FIXED_THICKNESS", mFixedThickness );
+          mLineThickness  = getFloat( vals, 8 ); setPreference( editor, "DISTOX_LINE_THICKNESS", mLineThickness );
+          continue;
+        }
+        if ( line.startsWith("Select:") && all ) {
+          mSelectness = getFloat( vals, 2 );         setPreference( editor, "DISTOX_CLOSENESS", mSelectness );
+          mPointingRadius = getInt( vals, 4 );       setPreference( editor, "DISTOX_POINTING", mPointingRadius );
+          mMinShift = getInt( vals, 6 );             setPreference( editor, "DISTOX_MIN_SHIFT", mMinShift );
+          mDotRadius = getFloat( vals, 8 );          setPreference( editor, "DISTOX_DOT_RADIUS", mDotRadius );
+          mPathMultiselect = getBoolean( vals, 10 ); setPreference( editor, "DISTOX_PATH_MULTISELECT", mPathMultiselect );
+          continue;
+        }
+        if ( line.startsWith("Erase:") && all ) {
+          mEraseness = getFloat( vals, 2 ); setPreference( editor, "DISTOX_ERASENESS", mEraseness );
+          continue;
+        }
+        if ( line.startsWith("Picker:") && all ) {
+          mPickerType = getInt( vals, 2 ); setPreference( editor, "DISTOX_PICKER_TYPE", mPickerType );
+          continue;
+        }
+        if ( line.startsWith("Point:") && all ) {
+          mUnscaledPoints = getBoolean( vals, 2 ); setPreference( editor, "DISTOX_UNSCALED_POINTS", mUnscaledPoints );
+          continue;
+        }
+        if ( line.startsWith("Line: style") ) {
+          setLineStyleAndType( vals[2] ); 
+          setPreference( editor, "DISTOX_LINE_STYLE", mLineStyle );
+          // mLineType     = getInt( vals, 4 ); setPreference( editor, DISTOX_L );
+          setLineSegment( getInt( vals, 6 ) ); 
+          setPreference( editor, "DISTOX_LINE_SEGMENT", mLineSegment );
+          mContinueLine = getInt( vals, 8 ); setPreference( editor, "DISTOX_LINE_CONTINUE", mContinueLine );
+          mArrowLength  = getFloat( vals, 10 ); setPreference( editor, "DISTOX_ARROW_LENGTH", mArrowLength );
+          continue;
+        }
+        if ( line.startsWith("Bezier: step") ) {
+          mBezierStep   = getFloat( vals, 2 ); setPreference( editor, "DISTOX_BEZIER_STEP", mBezierStep );
+          mLineAccuracy = getFloat( vals, 4 ); setPreference( editor, "DISTOX_LINE_ACCURACY", mLineAccuracy );
+          mLineCorner   = getFloat( vals, 6 ); setPreference( editor, "DISTOX_LINE_CORNER", mLineCorner );
+          continue;
+        }
+        if ( line.startsWith("Weed:") ) {
+          mWeedDistance = getFloat( vals, 2 ); setPreference( editor, "DISTOX_WEED_DISTANCE", mWeedDistance );
+          mWeedLength   = getFloat( vals, 4 ); setPreference( editor, "DISTOX_WEED_LENGTH", mWeedLength );
+          mWeedBuffer   = getFloat( vals, 6 ); setPreference( editor, "DISTOX_WEED_BUFFER", mWeedBuffer );
+          continue;
+        }
+        if ( line.startsWith("Area:") ) {
+          mAreaBorder = getBoolean( vals, 2 ); setPreference( editor, "DISTOX_AREA_BORDER", mAreaBorder );
+          continue;
+        }
+        if ( line.startsWith("Backup:") ) {
+          mBackupNumber = getInt( vals, 2 );   setPreference( editor, "DISTOX_BACKUP_NUMBER", mBackupNumber );
+          mBackupInterval = getInt( vals, 4 ); setPreference( editor, "DISTOX_BACKUP_INTERVAL", mBackupInterval );
+          if ( all ) mBackupsClear = getBoolean( vals, 6 ); setPreference( editor, "DISTOX_BACKUPS_CLEAR", mBackupsClear );
+          continue;
+        }
+        if ( line.startsWith("XSections:") ) {
+          mSharedXSections = getBoolean( vals, 2 ); setPreference( editor, "DISTOX_SHARED_XSECTIONS", mSharedXSections );
+          mAutoXSections   = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_AUTO_XSECTIONS", mAutoXSections );
+          mAutoSectionPt   = getBoolean( vals, 6 ); setPreference( editor, "DISTOX_AUTO_SECTION_PT", mAutoSectionPt );
+          continue;
+        }
+        if ( line.startsWith("Actions") ) {
+          mLineSnap     = getBoolean( vals, 2 ); setPreference( editor, "DISTOX_LINE_SNAP", mLineSnap );
+          mLineCurve    = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_LINE_CURVE", mLineCurve );
+          mLineStraight = getBoolean( vals, 6 ); setPreference( editor, "DISTOX_LINE_STRAIGHT", mLineStraight );
+          setReduceAngle( getFloat( vals, 7 ) ); setPreference( editor, "DISTOX_REDUCE_ANGLE", mReduceAngle );
+          continue;
+        }
+        if ( line.startsWith("Splay: alpha") && all ) {
+          mSplayAlpha = getInt( vals, 2 );      setPreference( editor, "DISTOX_SPLAY_ALPHA", mSplayAlpha );
+          mSplayColor = getBoolean( vals, 4 );  setPreference( editor, "DISTOX_SPLAY_COLOR", mSplayColor );
+          mDashSplay  = getInt( vals, 6 );      setPreference( editor, "DISTOX_SPLAY_DASH",  mDashSplay );
+          mVertSplay  = getFloat( vals, 8 );    setPreference( editor, "DISTOX_VERT_SPLAY",  mVertSplay );
+          mHorizSplay = getFloat( vals, 10 );   setPreference( editor, "DISTOX_HORIZ_SPLAY", mHorizSplay );
+          mCosHorizSplay = TDMath.cosd( mHorizSplay );  
+          mSectionSplay = getFloat( vals, 12 ); setPreference( editor, "DISTOX_SECTION_SPLAY", mSectionSplay );
+          continue;
+        }
+        if ( line.startsWith("Accuracy:") ) {
+          mAccelerationThr = getFloat( vals, 2 ); setPreference( editor, "DISTOX_ACCEL_PERCENT", mAccelerationThr );
+          mMagneticThr     = getFloat( vals, 4 ); setPreference( editor, "DISTOX_MAG_PERCENT",   mMagneticThr );
+          mDipThr          = getFloat( vals, 6 ); setPreference( editor, "DISTOX_DIP_THR",       mDipThr );
+          continue;
+        }
+        // pw.printf(Locale.US, "Sketch: type %d, size %.2f, extrude %.2f\n", mSketchModelType, mSketchSideSize, mDeltaExtrude );
+        if ( line.startsWith("Walls: type") ) {
+          mWallsType        = getInt( vals, 2 );    setPreference( editor, "DISTOX_WALLS_TYPE",         mWallsType );
+          mWallsPlanThr     = getFloat( vals, 5 );  setPreference( editor, "DISTOX_WALLS_PLAN_THR",     mWallsPlanThr );
+          mWallsExtendedThr = getFloat( vals, 7 );  setPreference( editor, "DISTOX_WALLS_EXTENDED_THR", mWallsExtendedThr );
+          mWallsXClose      = getFloat( vals, 9 );  setPreference( editor, "DISTOX_WALLS_XCLOSE",       mWallsXClose );
+          mWallsXStep       = getFloat( vals, 11 ); setPreference( editor, "DISTOX_WALLS_XSTEP",        mWallsXStep );
+          mWallsConcave     = getFloat( vals, 13 ); setPreference( editor, "DISTOX_WALLS_CONCAVE",      mWallsConcave );
+          continue;
+        }
+        if ( line.startsWith("Log stream") ) break; 
+      }
+      fr.close();
+    } catch ( IOException e ) { TDLog.Error("failed to export settings"); }
+    commitEditor( editor );
   }
 }

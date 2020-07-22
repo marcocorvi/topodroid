@@ -17,8 +17,13 @@ package com.topodroid.DistoX;
 
 class ImportZipTask extends ImportTask
 {
+  boolean mForce;
 
-  ImportZipTask( MainWindow main ) { super(main); }
+  ImportZipTask( MainWindow main, boolean force )
+  { 
+    super(main);
+    mForce = force;
+  }
 
   @Override
   protected Long doInBackground( String... str )
@@ -27,7 +32,7 @@ class ImportZipTask extends ImportTask
     TopoDroidApp app = mApp.get();
     if ( app == null ) return -6L;
     Archiver archiver = new Archiver( );
-    int ret = archiver.unArchive( app, TDPath.getZipFile( filename ), filename.replace(".zip", ""));
+    int ret = archiver.unArchive( app, TDPath.getZipFile( filename ), filename.replace(".zip", ""), mForce );
     return (long)ret;
   }
 

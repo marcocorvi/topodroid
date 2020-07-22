@@ -79,7 +79,7 @@ public class TDLog
   static public void exportLogSettings( PrintWriter pw )
   {
     // Log.v("DistoX", "TDLog exports settings");
-    pw.printf("Log stream %d\n", mLogStream );
+    pw.printf("Log stream %d\n", mLogStream ); // THIS MUST BE THE FIRST LINE
     pw.printf("ERROR %c, DEBUG %c, MAIN %c, PREFS %c, PERM %c, DB %c \n",
       tf(LOG_ERR), tf(LOG_DEBUG), tf(LOG_MAIN), tf(LOG_PREFS), tf(LOG_PERM), tf(LOG_DB) );
     pw.printf("BT %c, COMM %c, DISTOX %c, DEVICE %c, PROTO %c, SYNC %c \n",

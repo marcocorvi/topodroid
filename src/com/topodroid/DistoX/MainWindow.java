@@ -388,7 +388,7 @@ public class MainWindow extends Activity
     } else if ( filename.endsWith(".zip") ) {
       // TDToast.makeLong( R.string.import_zip_wait );
       setTitleImport();
-      new ImportZipTask( this ) .execute( filename );
+      new ImportZipTask( this, false ) .execute( filename ); // force = true (skip version checks)
     // } else {
     //   setTheTitle( );
     }

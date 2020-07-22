@@ -49,6 +49,7 @@ public class ExportDialogPlot extends MyDialog
   private String    mSelected;
   private final int mTitle;
   private int mSelectedPos;
+  private int mParentType;
 
   private LinearLayout mLayoutTherion;
   private LinearLayout mLayoutCSurvey;
@@ -57,13 +58,14 @@ public class ExportDialogPlot extends MyDialog
   private LinearLayout mLayoutShp;
   private LinearLayout mLayoutPng;
 
-  public ExportDialogPlot( Context context, IExporter parent, String[] types, int title )
+  public ExportDialogPlot( Context context, IExporter parent, String[] types, int title, int parent_type )
   {
     super( context, R.string.ExportDialog );
     mParent = parent;
     mTypes  = types;
     mSelected = null;
     mTitle = title;
+    mParentType = parent_type;
   }
 
 // -------------------------------------------------------------------
@@ -88,7 +90,7 @@ public class ExportDialogPlot extends MyDialog
 
     if ( ! TDLevel.overAdvanced ) {
       ((CheckBox) findViewById( R.id.therion_xvi )).setVisibility( View.GONE );
-      ((CheckBox) findViewById( R.id.therion_scale )).setVisibility( View.GONE );
+      ((LinearLayout) findViewById( R.id.layout_therion_scale )).setVisibility( View.GONE );
       ((CheckBox) findViewById( R.id.svg_grid )).setVisibility( View.GONE );
       ((CheckBox) findViewById( R.id.svg_linedir )).setVisibility( View.GONE );
       if ( ! TDLevel.overExpert ) {
@@ -149,13 +151,24 @@ public class ExportDialogPlot extends MyDialog
     mLayoutSvg.setVisibility( View.GONE );
     mLayoutShp.setVisibility( View.GONE );
     mLayoutPng.setVisibility( View.GONE );
-    switch ( mSelectedPos ) {
-      case 0: mLayoutTherion.setVisibility( View.VISIBLE ); break;
-      case 1: mLayoutCSurvey.setVisibility( View.VISIBLE ); break;
-      case 2: mLayoutDxf.setVisibility( View.VISIBLE ); break;
-      case 3: mLayoutSvg.setVisibility( View.VISIBLE ); break;
-      case 4: if ( TDLevel.overExpert ) mLayoutShp.setVisibility( View.VISIBLE ); break;
-      case 5: mLayoutPng.setVisibility( View.VISIBLE ); break;
+    if ( mParentType == 0 ) { // SketchWindow
+      switch ( mSelectedPos ) {
+        case 0: mLayoutTherion.setVisibility( View.VISIBLE ); break;
+        case 1: mLayoutCSurvey.setVisibility( View.VISIBLE ); break;
+        case 2: mLayoutDxf.setVisibility( View.VISIBLE ); break;
+        case 3: mLayoutSvg.setVisibility( View.VISIBLE ); break;
+        case 4: if ( TDLevel.overExpert ) mLayoutShp.setVisibility( View.VISIBLE ); break;
+        case 5: mLayoutPng.setVisibility( View.VISIBLE ); break;
+      }
+    } else { // mParentType == 1 // OverviewWindow
+      switch ( mSelectedPos ) {
+        case 0: mLayoutTherion.setVisibility( View.VISIBLE ); break;
+        // case 1: mLayoutCSurvey.setVisibility( View.VISIBLE ); break;
+        case 1: mLayoutDxf.setVisibility( View.VISIBLE ); break;
+        case 2: mLayoutSvg.setVisibility( View.VISIBLE ); break;
+        case 3: if ( TDLevel.overExpert ) mLayoutShp.setVisibility( View.VISIBLE ); break;
+        // case 4: mLayoutPng.setVisibility( View.VISIBLE ); break;
+      }
     }
   }
 

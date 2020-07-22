@@ -31,7 +31,6 @@ import android.content.Context;
 import android.content.res.Configuration;
 
 import android.os.Bundle;
-import android.os.AsyncTask;
 import android.app.Activity;
 
 import android.widget.LinearLayout;
@@ -129,6 +128,11 @@ public class TDPrefActivity extends Activity
     setTitle( getResources().getString( TDPrefCat.mTitleRes[ mPrefCategory ] ) );
   }
 
+  void startExportDialog()
+  {
+    (new ExportDialogSettings( this, R.string.title_export_settings ) ).show();
+  }
+
   private boolean loadPreferences( )
   {
     setContentView( R.layout.pref_activity );
@@ -212,23 +216,8 @@ public class TDPrefActivity extends Activity
         if ( v != null ) {
           v.setOnClickListener( new OnClickListener() {
             @Override
-            public void onClick( View v ) {
-              ( new AsyncTask< Void, Void, Void >() { // FIXME static or LEAK
-                @Override
-                protected Void doInBackground(Void... v)
-                {
-                  // Log.v("DistoX", "export settings");
-                  TDSetting.exportSettings();
-                  return null;
-                }
-                @Override
-                protected void onPostExecute( Void v )
-                {
-                  TDToast.make( String.format( getResources().getString( R.string.exported_settings ), TDPath.getSettingsPath() ) );
-                }
-              }).execute();
-              finish();
-          } } );
+            public void onClick( View v ) { startExportDialog(); }
+          } );
         }
       }
       

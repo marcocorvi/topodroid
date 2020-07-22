@@ -6011,7 +6011,7 @@ public class DrawingWindow extends ItemDrawer
           super.onBackPressed();
         }
       } else if ( p++ == pos ) { // EXPORT
-        new ExportDialogPlot( mActivity, this, TDConst.mPlotExportTypes, R.string.title_plot_save ).show();
+        new ExportDialogPlot( mActivity, this, TDConst.mPlotExportTypes, R.string.title_plot_save, 0 ).show();
       } else if ( p++ == pos ) { // INFO / AREA
         if ( PlotInfo.isAnySection( mType ) ) {
           float area = mDrawingSurface.computeSectionArea() / (DrawingUtil.SCALE_FIX * DrawingUtil.SCALE_FIX);

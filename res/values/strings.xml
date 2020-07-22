@@ -716,6 +716,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="popup_do_gm_data">Calib. shot</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
+    <string name="btn_export">Export</string>
     <string name="btn_import">Import</string>
     <string name="btn_install">Install</string>
 
@@ -918,6 +919,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="audio_delete">Delete ?</string>
     <string name="audio_overwrite">Overwrite ?</string>
 
+    <string name="import_functional">Import only functional settings</string>
     <string name="import_lrud">Import LRUD</string>
     <string name="import_leg_first">Leg before LRUD splays</string>
     <string name="import_diving_datamode">Diving datamode</string>
@@ -1024,7 +1026,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_import_tro">VisualTopo import options</string>
     <string name="title_import_dat">Compass import options</string>
 
-  <string name="exported_settings">Written file %1$s</string>
+  <string name="exported_settings">Exported settings %1$s</string>
+  <string name="imported_settings">Imported settings</string>
   <string name="pref_export_settings">Export settings to file</string>
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
@@ -1585,6 +1588,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="overwrite">overwrite</string>
 
     <string name="title_help">TopoDroid Manager v. %1$s</string>
+    <string name="title_export_settings">Settings import/export</string>
     <string name="title_export">Export project as &#8230;</string>
     <string name="title_equates">Project Equates</string>
     <string name="title_equate_new">Add equate &#8230;</string>

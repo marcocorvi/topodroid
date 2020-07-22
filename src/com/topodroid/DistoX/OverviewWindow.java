@@ -1203,7 +1203,7 @@ public class OverviewWindow extends ItemDrawer
     if ( p++ == pos ) { // CLOSE
       super.onBackPressed();
     } else if ( TDLevel.overExpert && p++ == pos ) { // EXPORT THERION
-      new ExportDialogPlot( mActivity, this, TDConst.mOverviewExportTypes, R.string.title_plot_save ).show();
+      new ExportDialogPlot( mActivity, this, TDConst.mOverviewExportTypes, R.string.title_plot_save, 1 ).show();
       // saveWithExt( "th2" );
     } else if ( p++ == pos ) { // OPTIONS
       Intent intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );

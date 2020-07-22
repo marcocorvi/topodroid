@@ -30,7 +30,7 @@
       android:layout_height="wrap_content"
       android:text="@string/export_xvi"
       />
-    <LinearLayout 
+    <LinearLayout android:id="@+id/layout_therion_scale"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 

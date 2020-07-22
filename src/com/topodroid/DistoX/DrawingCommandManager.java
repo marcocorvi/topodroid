@@ -563,7 +563,7 @@ class DrawingCommandManager
   List< DrawingPathIntersection > getIntersectionShot( LinePoint p1, LinePoint p2 )
   {
     List< DrawingPathIntersection > ret = new ArrayList<>();
-    Float pt = Float.valueOf( 0 );
+    // Float pt = Float.valueOf( 0 );
     for ( DrawingPath p : mLegsStack ) {
       if ( p.mType == DrawingPath.DRAWING_PATH_FIXED ) {
         float t = p.intersectSegment( p1.x, p1.y, p2.x, p2.y );
