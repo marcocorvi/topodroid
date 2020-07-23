@@ -1171,6 +1171,7 @@ public class TopoDroidApp extends Application
 
   void setButtonSize( int bs )
   {
+    // Log.v("DistoX-BUTTON", "set button size " + bs );
     TDSetting.setSizeButtons( bs );
     TDPrefHelper.update( "DISTOX_SIZE_BUTTONS", Integer.toString(bs) );
   }

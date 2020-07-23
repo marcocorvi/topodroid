@@ -139,8 +139,8 @@ public class TDSetting
   public static final int BTN_SIZE_MEDIUM  = 48;
   public static final int BTN_SIZE_LARGE   = 64;
   public static final int BTN_SIZE_HUGE    = 84;
-  public static int mSizeBtns     = 0;      // action bar buttons scale (either 1 or 2)
-  public static int mSizeButtons  = 42;     // default 42 minimum MIN_SIZE_BUTTONS
+  public static int mSizeBtns     = 0;      // action bar buttons scale 
+  public static int mSizeButtons  = 0; // 42;     // default 42 minimum MIN_SIZE_BUTTONS
   public static int mTextSize     = 16;     // list text size 
   public static boolean mKeyboard = true;
   public static boolean mNoCursor = false;
@@ -650,6 +650,7 @@ public class TDSetting
     return ret;
   }
 
+  // called only by TopoDroidApp.setButtonSize and internally
   public static boolean setSizeButtons( int size )
   {
     int sz = mSizeButtons;
@@ -660,10 +661,11 @@ public class TDSetting
       case 4: sz = BTN_SIZE_LARGE;  break;
       case 2: sz = BTN_SIZE_HUGE;   break;
     }
+    // Log.v("DistoX-BUTTON", "set button size " + size + " mSizeButtons " + mSizeButtons + " sz " + sz );
+    mSizeBtns = size;
     if ( sz != mSizeButtons ) {
-      mSizeBtns = size;
       mSizeButtons = (int)( sz * TopoDroidApp.getDisplayDensity() * 0.86f );
-      // Log.v("DistoX", "Size " + size + " Btns " + mSizeBtns + " " + mSizeButtons );
+      // Log.v("DistoX-BUTTON", "Size " + size + " Btns " + mSizeBtns + " " + mSizeButtons );
       if ( mSizeButtons < MIN_SIZE_BUTTONS ) mSizeButtons = MIN_SIZE_BUTTONS;
       return true;
     }
@@ -696,6 +698,7 @@ public class TDSetting
     // defaultButtonSize = my_app.getResources().getString( R.string.default_buttonsize );
     defaultTextSize   = res.getString( R.string.default_textsize );
     defaultButtonSize = res.getString( R.string.default_buttonsize );
+    // Log.v("DistoX_BUTTON", "default button size " + defaultButtonSize );
 
     // ------------------- GENERAL PREFERENCES
     String[] keyMain = TDPrefKey.MAIN;

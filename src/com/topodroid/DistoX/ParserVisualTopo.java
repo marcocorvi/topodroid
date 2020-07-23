@@ -47,19 +47,19 @@ class ParserVisualTopo extends ImportParser
 
   }
 
-  private boolean isDuplicate( String flag )
+  private static boolean isDuplicate( String flag )
   {
     if ( flag == null ) return false;
     return ( flag.indexOf('L') >= 0 );
   }
 
-  private boolean isSurface( String flag )
+  private static boolean isSurface( String flag )
   {
     if ( flag == null ) return false;
     return ( flag.indexOf('X') >= 0 );
   }
 
-  private float angle( float value, float unit, boolean dm )
+  private static float angle( float value, float unit, boolean dm )
   {
     if ( dm ) { // angle value in degrees.minutes
       int sign = 1;
