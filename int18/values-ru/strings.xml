@@ -289,7 +289,7 @@
     <string name="bad_line">Недопустимый тип линии</string>
     <string name="bad_point">Недопустимый тип точки</string>
 
-    <!-- TODO string name="no_audio">No audio record</string -->
+    <string name="no_audio">Отсутсвует аудио запись</string>
     <string name="no_bt">Нет Блютуфа</string>
     <string name="no_calib">Отсутствует калибровка</string>
     <string name="no_calib_check">Нет замеров проверки-калибровки</string>
@@ -324,7 +324,7 @@
     <!-- OK string name="menu_3d">3D</string -->
     <string name="menu_about">Описание</string>
     <string name="menu_area">ОБЛАСТЬ</string>
-    <!-- TODO string name="menu_audio">AUDIO</string -->
+    <string name="menu_audio">АУДИО</string>
     <!-- UNUSED string name="menu_attach">СОЕДИНИТЬ</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
@@ -762,7 +762,7 @@
     <string name="help_measure_type">Режим измерений: по прямой или ломаной</string>
     <string name="help_measure_undo">Удалить последнюю точку полилинии</string>
     
-    <!-- TODO string name="help_audio">Audio records list</string -->
+    <string name="help_audio">Список аудио заметок</string>
     <string name="help_backups">Удалить резервные копии абрисов</string>
     <string name="help_calib_check">Контрольные замеры</string>
     <string name="help_close">Закрыть Окно</string>
@@ -916,7 +916,7 @@
 
     <string name="title_azimut">Опорный азимут развёртки</string>
     <string name="title_audio">Аудио заметка</string>
-    <!-- TODO string name="title_audio_list">Audio records</string -->
+    <string name="title_audio_list">Аудио заметки</string>
     <string name="title_calib">Калибровки</string>
     <string name="title_calib_check">Замеры контроля калибровки</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->
