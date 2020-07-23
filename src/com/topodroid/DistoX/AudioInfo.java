@@ -36,4 +36,9 @@ class AudioInfo
     return id + " <" + mDate  + "> ";
   }
 
+  public String getFullString( String shot_name )
+  {
+    return id + ": " + shot_name + " <" + mDate  + "> ";
+  }
+
 }

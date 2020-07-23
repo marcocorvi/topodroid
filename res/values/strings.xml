@@ -292,6 +292,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="bad_line">Bad line type</string>
     <string name="bad_point">Bad point type</string>
 
+    <string name="no_audio">No audio record</string>
     <string name="no_bt">No Bluetooth</string>
     <string name="no_calib">No calibration</string>
     <string name="no_calib_check">No calibration-check shot</string>
@@ -326,6 +327,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="menu_3d">3D</string>
     <string name="menu_about">ABOUT</string>
     <string name="menu_area">AREA</string>
+    <string name="menu_audio">AUDIO</string>
     <!-- UNUSED string name="menu_attach">CONNECT</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
@@ -772,6 +774,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_measure_type">Measuring mode: fixed point or polyline</string>
     <string name="help_measure_undo">Drop the last polyline point</string>
     
+    <string name="help_audio">Audio records list</string>
     <string name="help_backups">Delete sketch backups</string>
     <string name="help_calib_check">Calibration-check shots</string>
     <string name="help_close">Close window</string>
@@ -926,6 +929,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
     <string name="title_azimut">Extend reference azimuth</string>
     <string name="title_audio">Audio comment</string>
+    <string name="title_audio_list">Audio records</string>
     <string name="title_calib">Calibrations</string>
     <string name="title_calib_check">Calibration-check shots</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->

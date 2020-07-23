@@ -286,6 +286,7 @@
 <string name="bad_line">Mauvais type de ligne</string>
 <string name="bad_point">Mauvais type de point</string>
 
+    <!-- TODO string name="no_audio">No audio record</string -->
 <string name="no_bt">Pas de Bluetooth</string>
 <string name="no_calib">Pas d\'étalonnage</string>
 <string name="no_calib_check">Pas de visée de contrôle d\'étalonnage</string>
@@ -320,6 +321,7 @@
 <string name="menu_3d">3D</string>
 <string name="menu_about">A PROPOS</string>
 <string name="menu_area">ZONE</string>
+    <!-- TODO string name="menu_audio">AUDIO</string -->
 <!-- UNUSED string name="menu_attach">CONNECTER</string -->
 <!-- UNUSED string name="menu_attached">Connecté</string -->
 <!-- UNUSED string name="menu_ready">Prêt</string -->
@@ -758,6 +760,7 @@
     <string name="help_measure_type">Mode de mesure : point fixe ou polyligne</string>
     <string name="help_measure_undo">Abandonner le dernier point de la polyligne</string>
 
+    <!-- TODO string name="help_audio">Audio records list</string -->
     <string name="help_backups">Supprimer des sauvegardes d\'esquisse</string>
     <string name="help_calib_check">Visées de contrôle étalonnage</string>
     <string name="help_close">Fermer fenêtre</string>
@@ -909,6 +912,7 @@
 
     <string name="title_azimut">Référence extension</string>
     <string name="title_audio">Commentaire Audio</string>
+    <!-- TODO string name="title_audio_list">Audio records</string -->
     <string name="title_calib">Étalonnage</string>
     <string name="title_calib_check">Visée de contrôle étalonnage</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->

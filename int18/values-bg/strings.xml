@@ -287,6 +287,7 @@
     <string name="bad_line">Невалиден тип линия</string>
     <string name="bad_point">Невалиден тип точка</string>
 
+    <!-- TODO string name="no_audio">No audio record</string -->
     <string name="no_bt">Липсва Bluetooth</string>
     <string name="no_calib">Липсва калибрация</string>
     <string name="no_calib_check">Липсва контролно измерване</string>
@@ -321,6 +322,7 @@
     <!-- OK string name="menu_3d">3D</string -->
     <string name="menu_about">За програмата</string>
     <string name="menu_area">Площ</string>
+    <!-- TODO string name="menu_audio">AUDIO</string -->
     <!-- UNUSED string name="menu_attach">Свързване</string -->
     <!-- UNUSED string name="menu_attached">connected</string -->
     <!-- UNUSED string name="menu_ready">ready</string -->
@@ -756,6 +758,7 @@
     <string name="help_measure_type">Режим измерване: фиксирана точка или поли-линия</string>
     <!-- TODO string name="help_measure_undo">Drop the last polyline point</string -->
 
+    <!-- TODO string name="help_audio">Audio records list</string -->
     <!-- TODO string name="help_backups">Delete sketch backups</string -->
     <string name="help_calib_check">Контролни измервания</string>
     <string name="help_close">Затваряне на прозореца</string>
@@ -909,6 +912,7 @@
 
     <string name="title_azimut">Разгъване спрямо азим.</string>
     <string name="title_audio">Аудио коментар</string>
+    <!-- TODO string name="title_audio_list">Audio records</string -->
     <string name="title_calib">Калибрации</string>
     <string name="title_calib_check">Контролни измервания</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->

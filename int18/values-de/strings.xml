@@ -291,6 +291,7 @@
     <string name="bad_line">Ungültiger Linientyp</string>
     <string name="bad_point">Ungültiger Punkttyp</string>
 <!-- ERRORS: MISSING SOMETHING -->
+    <!-- TODO string name="no_audio">No audio record</string -->
     <string name="no_bt">Bluetooth nicht aktiv</string>
     <string name="no_calib">Keine Kalibrierung</string>
     <string name="no_calib_check">Keine Kalibrierungs-Testmessung</string>
@@ -331,6 +332,7 @@
     <string name="menu_3d">3D</string>
     <string name="menu_about">ÜBER</string>
     <string name="menu_area">FLÄCHE</string>
+    <!-- TODO string name="menu_audio">AUDIO</string -->
     <!-- UNUSED string name="menu_attach">VERBINDEN</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
@@ -774,6 +776,7 @@
     <string name="help_measure_type">Messmodus: Fixpunkt oder Polygonzug</string>
     <string name="help_measure_undo">Letzten Polygonzug-Punkt löschen</string>
 
+    <!-- TODO string name="help_audio">Audio records list</string -->
     <string name="help_backups">Skizzenbackups löschen</string>
     <string name="help_calib_check">Testmessungen</string>
     <string name="help_close">Fenster schließen</string>
@@ -929,6 +932,7 @@
 <!-- TITLES -->
     <string name="title_azimut">Seitenriss-Azimut</string>
     <string name="title_audio">Audio-Kommentar</string>
+    <!-- TODO string name="title_audio_list">Audio records</string -->
     <string name="title_calib">Kalibrierung</string>
     <string name="title_calib_check">Kalibrierungs-Testmessungen</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->

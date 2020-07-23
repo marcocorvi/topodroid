@@ -291,6 +291,7 @@
     <string name="bad_line">错误的线型</string>
     <string name="bad_point">错误的点型</string>
 
+    <!-- TODO string name="no_audio">No audio record</string -->
     <string name="no_bt">蓝牙未启动</string>
     <string name="no_calib">无校准</string>
     <string name="no_calib_check">无校准检测测量</string>
@@ -325,6 +326,7 @@
     <string name="menu_3d">3D</string>
     <string name="menu_about">关于</string>
     <string name="menu_area">区</string>
+    <!-- TODO string name="menu_audio">AUDIO</string -->
     <!-- UNUSED string name="menu_attach">CONNECT</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
@@ -772,6 +774,7 @@
     <string name="help_measure_type">测量模式:定点或折线</string>
     <string name="help_measure_undo">删除最后一个折线点</string>
     
+    <!-- TODO string name="help_audio">Audio records list</string -->
     <string name="help_backups">删除草图备份</string>
     <string name="help_calib_check">校准检验测量</string>
     <string name="help_close">关闭窗口</string>
@@ -926,6 +929,7 @@
 
     <string name="title_azimut">扩展参考</string>
     <string name="title_audio">音频注释</string>
+    <!-- TODO string name="title_audio_list">Audio records</string -->
     <string name="title_calib">校准</string>
     <string name="title_calib_check">校准检测测线</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->

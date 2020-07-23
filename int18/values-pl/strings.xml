@@ -293,6 +293,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="bad_line">Zły typ lini</string>
     <string name="bad_point">Zły typ punktu</string>
 
+    <!-- TODO string name="no_audio">No audio record</string -->
     <string name="no_bt">brak Bluetooth</string>
     <string name="no_calib">brak kalibracji</string>
     <string name="no_calib_check">brak calibration-sprawdz strzał</string>
@@ -327,6 +328,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="menu_3d">3D</string>
     <string name="menu_about">o&#8230;</string>
     <string name="menu_area">Obszar</string>
+    <!-- TODO string name="menu_audio">AUDIO</string -->
     <!-- UNUSED string name="menu_attach">CONNECT</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
@@ -769,6 +771,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_measure_type">Tryb pomiaru: stały punkt albo polilinia</string>
     <string name="help_measure_undo">Upuść ostatni punkt polilinii</string>
     
+    <!-- TODO string name="help_audio">Audio records list</string -->
     <!-- TODO string name="help_backups">Delete sketch backups</string -->
     <string name="help_calib_check">Sprawdz strzały kalibracyjne</string>
     <string name="help_close">Zamknij okno</string>
@@ -923,6 +926,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
     <string name="title_azimut">Rozciągnięcie referencji</string>
     <string name="title_audio">Komentarz audio</string>
+    <!-- TODO string name="title_audio_list">Audio records</string -->
     <string name="title_calib">Kalibracje</string>
     <string name="title_calib_check">Kalibracja-sprawdzenie strzałów</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->

@@ -111,7 +111,7 @@ public class ItemButton extends Button
   public void onDraw(Canvas canvas) 
   {
     // draw the button background
-    if ( mPath != null ) {
+    if ( mPath != null && mPaint != null ) {
       // canvas.clipRect( mClip, Region.Op.REPLACE );
       canvas.drawPath( mPath, mPaint );
     }

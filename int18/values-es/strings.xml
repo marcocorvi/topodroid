@@ -285,6 +285,7 @@
     <string name="bad_line">Tipo de línea mala</string>
     <string name="bad_point">Tipo de punto malo</string>
 
+    <!-- TODO string name="no_audio">No audio record</string -->
     <string name="no_bt">No hay Bluetooth</string>
     <string name="no_calib">No hay calibración</string>
     <string name="no_calib_check">Ninguna toma de calibración</string>
@@ -319,6 +320,7 @@
     <string name="menu_3d">Cave3D</string>
     <string name="menu_about">Acerca de &#8230;</string>
     <string name="menu_area">Área</string>
+    <!-- TODO string name="menu_audio">AUDIO</string -->
     <!-- UNUSED string name="menu_attach">Conectar</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
@@ -764,6 +766,7 @@
     <string name="help_measure_type">Modo de medición: punto fijo o polilínea</string>
     <string name="help_measure_undo">Suelta el último punto de polilínea</string>
     
+    <!-- TODO string name="help_audio">Audio records list</string -->
     <string name="help_backups">Eliminar copia de seguridad de croquis</string>
     <string name="help_calib_check">Calibración: compruebe las tomas</string>
     <string name="help_close">Cerrar ventana</string>
@@ -918,6 +921,7 @@
 
     <string name="title_azimut">Referencia declinación Magnética</string>
     <string name="title_audio">Comentario de audio</string>
+    <!-- TODO string name="title_audio_list">Audio records</string -->
     <string name="title_calib">Calibración</string>
     <string name="title_calib_check">Calibración: compruebe las tomas</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->

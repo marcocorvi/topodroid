@@ -144,6 +144,7 @@ public class ShotWindow extends Activity
                         R.string.menu_survey,
                         R.string.menu_recover,
                         R.string.menu_photo,
+                        R.string.menu_audio,
                         R.string.menu_sensor,
                         R.string.menu_3d,
                         R.string.menu_distox,
@@ -168,6 +169,7 @@ public class ShotWindow extends Activity
                           R.string.help_survey_info,
                           R.string.help_undelete,
                           R.string.help_photo,
+                          R.string.help_audio,
                           R.string.help_sensor,
                           R.string.help_3d,
                           R.string.help_device,
@@ -754,6 +756,14 @@ public class ShotWindow extends Activity
       // updateDisplay( );
     } else if ( TDLevel.overNormal && p++ == pos ) { // PHOTO
       mActivity.startActivity( new Intent( mActivity, PhotoActivity.class ) );
+    } else if ( TDLevel.overExpert && p++ == pos ) { // AUDIO
+      List< AudioInfo > audios = mApp_mData.selectAllAudios( TDInstance.sid );
+      if ( audios.size() > 0 ) {  
+        List< DBlock > shots = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.NORMAL );
+        (new AudioListDialog( this, audios, shots )).show();
+      } else { 
+        TDToast.makeWarn( R.string.no_audio );
+      }
     } else if ( TDSetting.mWithSensors && TDLevel.overNormal && p++ == pos ) { // SENSORS
       mActivity.startActivity( new Intent( mActivity, SensorListActivity.class ) );
     } else if ( /* TDPath.NOT_ANDROID_11 && */ TDLevel.overBasic && p++ == pos ) { // 3D
@@ -2037,6 +2047,7 @@ public class ShotWindow extends Activity
     mMenuAdapter.add( res.getString( menus[k++] ) );                                      // menu_close
     if ( TDLevel.overBasic  ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_recover
     if ( TDLevel.overNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_photo  
+    if ( TDLevel.overExpert ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_audio  
     if ( TDSetting.mWithSensors && TDLevel.overNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_sensor
     if ( /* TDPath.NOT_ANDROID_11 && */ TDLevel.overBasic  ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_3d
     if ( TDLevel.overNormal && ! diving ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_distox

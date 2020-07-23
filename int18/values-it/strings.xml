@@ -284,6 +284,7 @@
     <string name="bad_line">Tipo linea errato</string>
     <string name="bad_point">Tipo punto errato</string>
 
+    <!-- TODO string name="no_audio">No audio record</string -->
     <string name="no_bt">No Bluetooth</string>
     <string name="no_calib">Nessuna calibrazione</string>
     <string name="no_calib_check">Nessun tiro di controllo calibrazione</string>
@@ -318,6 +319,7 @@
     <!-- OK string name="menu_3d">3D</string -->
     <string name="menu_about">INFO</string>
     <!-- OK string name="menu_area">AREA</string -->
+    <!-- TODO string name="menu_audio">AUDIO</string -->
     <!-- UNUSED string name="menu_attach">CONNETTI</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
@@ -754,6 +756,7 @@
     <string name="help_measure_type">Metodo misura: punti fissi o polilinea</string>
     <string name="help_measure_undo">Cancella l\'ultimo punto della polilinea</string>
     
+    <!-- TODO string name="help_audio">Audio records list</string -->
     <string name="help_backups">Cancella backup disegni</string>
     <string name="help_calib_check">Tiri di controllo calib.</string>
     <string name="help_close">Chiusura finestra</string>
@@ -907,6 +910,7 @@
 
     <string name="title_azimut">Riferimento Extend</string>
     <string name="title_audio">Commento audio</string>
+    <!-- TODO string name="title_audio_list">Audio records</string -->
     <string name="title_calib">Calibrazioni</string>
     <string name="title_calib_check">Tiri di controllo calib.</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->

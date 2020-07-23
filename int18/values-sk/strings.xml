@@ -291,6 +291,7 @@
     <string name="bad_line">Nesprávny typ riadku</string>
     <string name="bad_point">Nesprávny typ bodu</string>
 
+    <!-- TODO string name="no_audio">No audio record</string -->
     <string name="no_bt">Nie je Bluetooth</string>
     <string name="no_calib">Žiadna kalibrácia</string>
     <string name="no_calib_check">Bez kalibrácie - Kontrolných meraní kalibrácie</string>
@@ -325,6 +326,7 @@
     <string name="menu_3d">3D</string>
     <string name="menu_about">O PROGRAME</string>
     <string name="menu_area">OBLASŤ</string>
+    <!-- TODO string name="menu_audio">AUDIO</string -->
     <!-- UNUSED string name="menu_attach">CONNECT</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
@@ -771,6 +773,7 @@
     <string name="help_measure_type">Metódy merania: jednotlivo / viacnásobne</string>
     <string name="help_measure_undo">Späť</string>
     
+    <!-- TODO string name="help_audio">Audio records list</string -->
     <string name="help_backups">Vymazať zálohy Nákresov</string>
     <string name="help_calib_check">Kalibrácia - Kontrolné merania</string>
     <string name="help_close">Zavrieť okno</string>
@@ -925,6 +928,7 @@
     
     <string name="title_azimut">Smerová orientácia</string>
     <string name="title_audio">Zvukový komentár</string>
+    <!-- TODO string name="title_audio_list">Audio records</string -->
     <string name="title_calib">Kalibrácie</string>
     <string name="title_calib_check">Kalibrácia - Kontrolné merania</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->

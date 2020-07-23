@@ -287,6 +287,7 @@
     <string name="bad_line">Rossz vonaltípus</string>
     <string name="bad_point">Rossz pont típus</string>
 
+    <!-- TODO string name="no_audio">No audio record</string -->
     <string name="no_bt">Nincs bluetooth</string>
     <string name="no_calib">Nincs kalibráció</string>
     <string name="no_calib_check">Nincs kalibrációt ell. mérés</string>
@@ -321,6 +322,7 @@
     <string name="menu_3d">3D</string>
     <string name="menu_about">INFO</string>
     <string name="menu_area">TERÜLET</string>
+    <!-- TODO string name="menu_audio">AUDIO</string -->
     <!-- UNUSED string name="menu_attach">KAPCSOL</string -->
     <!-- UNUSED string name="menu_attached">ÖSSZEKAPCSOLT</string -->
     <!-- UNUSED string name="menu_ready">KÉSZ</string -->
@@ -758,6 +760,7 @@
     <string name="help_measure_type">Mérési mód: fix pont vagy vonallánc</string>
     <!-- TODO string name="help_measure_undo">Drop the last polyline point</string -->
     
+    <!-- TODO string name="help_audio">Audio records list</string -->
     <!-- TODO string name="help_backups">Delete sketch backups</string -->
     <string name="help_calib_check">Kalibr. ell. mérések</string>
     <string name="help_close">Súgó bezárása</string>
@@ -909,6 +912,7 @@
 
     <string name="title_azimut">Vonatkozási rendszer</string>
     <string name="title_audio">Hangjegyzet</string>
+    <!-- TODO string name="title_audio_list">Audio records</string -->
     <string name="title_calib">Kalibrációk</string>
     <string name="title_calib_check">Kalir. ell. mérések</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->

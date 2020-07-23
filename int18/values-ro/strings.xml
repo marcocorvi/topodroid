@@ -288,6 +288,7 @@
     <string name="bad_line">Tip de linie invalid</string>
     <string name="bad_point">Tip de punct invalid</string>
 
+    <!-- TODO string name="no_audio">No audio record</string -->
     <string name="no_bt">Lipsește Bluetooth</string>
     <string name="no_calib">Lipsește calibrarea</string>
     <string name="no_calib_check">Lipsește măsurătoarea verificare calibrare</string>
@@ -322,6 +323,7 @@
     <string name="menu_3d">3D</string>
     <string name="menu_about">DESPRE</string>
     <string name="menu_area">SUPRAFAȚA</string>
+    <!-- TODO string name="menu_audio">AUDIO</string -->
     <!-- UNUSED string name="menu_attach">CONECTEAZĂ</string -->
     <!-- UNUSED string name="menu_attached">Conectat</string -->
     <!-- UNUSED string name="menu_ready">Pregătit</string -->
@@ -758,6 +760,7 @@
     <string name="help_measure_type">Mod măsurătoare: punct fix sau polilinie</string>
     <string name="help_measure_undo">Șterge ultimul punct al poliliniei</string>
     
+    <!-- TODO string name="help_audio">Audio records list</string -->
     <string name="help_backups">Șterge copiile de siguranță ale schiței</string>
     <string name="help_calib_check">Măsurători verificare-calibrare</string>
     <string name="help_close">Închide fereastra</string>
@@ -911,6 +914,7 @@
 
     <string name="title_azimut">Extinde referința</string>
     <string name="title_audio">Comentariu audio</string>
+    <!-- TODO string name="title_audio_list">Audio records</string -->
     <string name="title_calib">Calibrări</string>
     <string name="title_calib_check">Măsurători verificare-calibrare</string>
     <!-- UNUSED string name="title_check">Verificare-calibrare</string -->
