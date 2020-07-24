@@ -923,6 +923,7 @@
     <string name="audio_recording">Aufnehmen</string>
     <string name="audio_delete">Löschen ?</string>
     <string name="audio_overwrite">Überschreiben ?</string>
+    <!-- UNUSED string name="playing">Playing %1$s</string -->
   
     <!-- TODO string name="import_functional">Import only functional settings</string -->
     <string name="import_lrud">LRUD importieren</string>

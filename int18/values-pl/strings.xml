@@ -918,6 +918,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="audio_recording">Nagranie</string>
     <string name="audio_delete">Usunąć ?</string>
     <string name="audio_overwrite">Nadpisać ?</string>
+    <!-- UNUSED string name="playing">Playing %1$s</string -->
   
     <!-- TODO string name="import_functional">Import only functional settings</string -->
     <!-- TODO string name="import_lrud">Import LRUD</string -->

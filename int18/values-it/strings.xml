@@ -902,6 +902,7 @@
     <string name="audio_recording">Registrazione</string>
     <string name="audio_delete">Rimuovi ?</string>
     <string name="audio_overwrite">Sovrascrivi ?</string>
+    <!-- UNUSED string name="playing">Playing %1$s</string -->
   
     <!-- TODO string name="import_functional">Import only functional settings</string -->
     <string name="import_lrud">Importa LRUD</string>

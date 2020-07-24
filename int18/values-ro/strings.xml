@@ -906,6 +906,7 @@
     <string name="audio_recording">Înregistrare</string>
     <string name="audio_delete">Șterge ?</string>
     <string name="audio_overwrite">Suprascrie ?</string>
+    <!-- UNUSED string name="playing">Playing %1$s</string -->
   
     <!-- TODO string name="import_functional">Import only functional settings</string -->
     <string name="import_lrud">Importă LRUD(măs. laterale)</string>

@@ -908,6 +908,7 @@
     <string name="audio_recording">Запись</string>
     <string name="audio_delete">Удалить ?</string>
     <string name="audio_overwrite">Перезаписать ?</string>
+    <!-- UNUSED string name="playing">Playing %1$s</string -->
   
     <string name="import_functional">Импортировать только функциональные настройки</string>
     <string name="import_lrud">Импорт ЛПВН</string>

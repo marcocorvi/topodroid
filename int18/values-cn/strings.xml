@@ -921,6 +921,7 @@
     <string name="audio_recording">记录中</string>
     <string name="audio_delete">删除 ?</string>
     <string name="audio_overwrite">覆盖 ?</string>
+    <!-- UNUSED string name="playing">Playing %1$s</string -->
   
     <!-- TODO string name="import_functional">Import only functional settings</string -->
     <string name="import_lrud">输入 左右上下</string>

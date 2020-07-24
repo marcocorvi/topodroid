@@ -41,6 +41,7 @@ class AudioListDialog extends MyDialog
 
   private List< AudioInfo > mAudios;
   private List< DBlock > mShots;
+  private MediaPlayer mMP = null;
 
   /**
    * @param context   context
@@ -112,14 +113,16 @@ class AudioListDialog extends MyDialog
 
   private void startPlay( String filepath )
   {
+    // TDToast.make( String.format( mContext.getResources().getString( R.string.playing ), filepath ) );
     try {
-      MediaPlayer mMP = new MediaPlayer();
+      mMP = new MediaPlayer();
       mMP.setDataSource( filepath );
       mMP.setOnCompletionListener( new MediaPlayer.OnCompletionListener() {
         @Override
         public void onCompletion( MediaPlayer mp ) 
         { 
-          /* nothing */
+          mp.release();
+          mMP = null;
         }
       } );
       mMP.prepare();
@@ -128,6 +131,22 @@ class AudioListDialog extends MyDialog
       TDLog.Error("Illegal state " + e.getMessage() );
     } catch ( IOException e ) {
       TDLog.Error("I/O error " + e.getMessage() );
+    }
+  }
+
+  @Override
+  public void onBackPressed()
+  {
+    releaseMP();
+    super.onBackPressed();
+  }
+
+  private void releaseMP()
+  {
+    if ( mMP != null ) {
+      mMP.stop();
+      mMP.release();
+      mMP = null;
     }
   }
 
