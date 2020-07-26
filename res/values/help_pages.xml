@@ -57,6 +57,7 @@
   <string name="DrawingStationDialog" translatable="false">page_sketch_station.htm</string>
   <string name="OverviewModeDialog" translatable="false">page_overview_refs.htm</string>
   <string name="ExportDialog" translatable="false">manual13.htm</string>
+  <string name="ExportSettings" translatable="false">page_settings.htm</string>
   <string name="FirmwareDialog" translatable="false">page_firmware.htm</string>
   <string name="FirmwareFileDialog" translatable="false">page_firmware.htm</string>
   <string name="FixedDialog" translatable="false">page_fixed.htm</string>

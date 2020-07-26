@@ -39,7 +39,7 @@ public class ExportDialogSettings extends MyDialog
 
   public ExportDialogSettings( Context context, int title )
   {
-    super( context, R.string.ExportDialog );
+    super( context, R.string.ExportSettings );
     mTitle = title;
   }
 
