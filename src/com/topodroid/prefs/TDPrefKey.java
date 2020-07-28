@@ -323,10 +323,6 @@ public class TDPrefKey
     "DISTOX_AUTO_PAIR",       // 6 // whether to auto-pair the discovered DistoX
     "DISTOX_CONNECT_FEEDBACK",   
     // "DISTOX_SOCKET_DELAY",         // delay before a socket-connection attempt
-    // "DISTOX_WAIT_DATA",       // 8 // msec wait after a data/vector packet
-    // "DISTOX_WAIT_CONN",            // msec wait after getting "NO PACKET"
-    // "DISTOX_WAIT_LASER",           // msec wait after command "laser ON"
-    // "DISTOX_WAIT_SHOT",       // 11 // msec wait after command "take shot"
     "DISTOX_CALIB_PREF",      // 12 FORWARD
     null
   };
@@ -344,10 +340,6 @@ public class TDPrefKey
     R.string.pref_auto_pair_title,
     R.string.pref_connect_feedback_title,
     // R.string.pref_socket_delay_title,
-    // R.string.pref_wait_data_title,
-    // R.string.pref_wait_conn_title,
-    // R.string.pref_wait_laser_title,
-    // R.string.pref_wait_shot_title,
     R.string.pref_cat_calib,
     -1
   };
@@ -365,10 +357,6 @@ public class TDPrefKey
     R.string.pref_auto_pair_summary,
     R.string.pref_connect_feedback_summary,
     // R.string.pref_socket_delay_summary,
-    // R.string.pref_wait_data_summary,
-    // R.string.pref_wait_conn_summary,
-    // R.string.pref_wait_laser_summary,
-    // R.string.pref_wait_shot_summary,
     -1,
     -1
   };
@@ -386,10 +374,6 @@ public class TDPrefKey
     FALSE,
     TDString.ZERO,
     // TDString.ZERO,
-    // "250",
-    // "500",
-    // "1000",
-    // "2000",
     TDString.EMPTY
   };
 
@@ -570,7 +554,6 @@ public class TDPrefKey
     // "DISTOX_XTHERION_AREAS",    // save areas a-la xtherion
     "DISTOX_THERION_SPLAYS",   // whether to add u:splay lines to Therion th2 export
     "DISTOX_SURVEX_LRUD",      // whether to add LRUD to Survex export
-    // "DISTOX_SVG_GRID",         // whether to export grid in SVG/DXF/XVI
     "DISTOX_TH2_SCALE",        // th2/xvi scale
     "DISTOX_TH2_XVI"           // th2 with xvi image comment
   };
@@ -911,7 +894,7 @@ public class TDPrefKey
     "meters",
     "degrees",
     "1.0",
-    "-1.0",  // grid cell
+    "-1.0",  // neg.: use grid cell
   };
 
   public static int[] UNITSarr = {

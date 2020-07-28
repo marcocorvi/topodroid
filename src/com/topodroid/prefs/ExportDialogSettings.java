@@ -69,18 +69,21 @@ public class ExportDialogSettings extends MyDialog
     // Log.v("DistoX-C3D", "Selected " + mSelected );
     Button b = (Button)v;
     if ( b == mBtnExport ) {
-      ( new AsyncTask< Void, Void, Void >() { // FIXME static or LEAK
+      ( new AsyncTask< Void, Void, Boolean >() { // FIXME static or LEAK
         @Override
-        protected Void doInBackground(Void... v)
+        protected Boolean doInBackground(Void... v)
         {
           // Log.v("DistoX", "export settings");
-          TDSetting.exportSettings();
-          return null;
+          return TDSetting.exportSettings();
         }
         @Override
-        protected void onPostExecute( Void v )
+        protected void onPostExecute( Boolean v )
         {
-          TDToast.make( String.format( mContext.getResources().getString( R.string.exported_settings ), TDPath.getSettingsPath() ) );
+          if ( v ) {
+            TDToast.make( String.format( mContext.getResources().getString( R.string.exported_settings ), TDPath.getSettingsPath() ) );
+          } else {
+            TDToast.makeWarn( R.string.export_settings_failed );
+          }
         }
       }).execute();
 
@@ -88,20 +91,23 @@ public class ExportDialogSettings extends MyDialog
 
       final boolean functional = mCBfunctional.isChecked();
       final boolean all = ! functional;
-      ( new AsyncTask< Void, Void, Void >() { // FIXME static or LEAK
+      ( new AsyncTask< Void, Void, Boolean >() { // FIXME static or LEAK
           TDPrefHelper hlp = new TDPrefHelper( mContext );
           SharedPreferences prefs = hlp.getSharedPrefs();
         @Override
-        protected Void doInBackground(Void... v)
+        protected Boolean doInBackground(Void... v)
         {
           // Log.v("DistoX", "import settings - functional " + functional );
-          TDSetting.importSettings( prefs, all );
-          return null;
+          return TDSetting.importSettings( prefs, all );
         }
         @Override
-        protected void onPostExecute( Void v )
+        protected void onPostExecute( Boolean v )
         {
-          TDToast.make( R.string.imported_settings );
+          if ( v ) {
+            TDToast.make( R.string.imported_settings );
+          } else {
+            TDToast.makeWarn( R.string.imported_settings_failed );
+          }
         }
       }).execute();
       

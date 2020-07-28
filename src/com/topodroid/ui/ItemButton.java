@@ -113,7 +113,7 @@ public class ItemButton extends Button
     // draw the button background
     if ( mPath != null && mPaint != null ) {
       // canvas.clipRect( mClip, Region.Op.REPLACE );
-      canvas.drawPath( mPath, mPaint );
+      canvas.drawPath( mPath, mPaint ); // FIXME apparently called with null canvas
     }
   }
 }
