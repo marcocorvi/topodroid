@@ -143,6 +143,7 @@ public class PTTrip
     void read( FileInputStream fs )
     {
       _time = PTFile.readLong( fs );
+      setDate();
       _comment.read( fs );
       _declination = PTFile.readShort( fs );
     }

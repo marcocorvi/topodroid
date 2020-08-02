@@ -68,6 +68,7 @@ public class NumStation extends NumSurveyPoint
     name = id;
     v = from.v - d * TDMath.sind( c );
     float h0 = d * TDMath.abs( TDMath.cosd( c ) );
+    assert( extend <= 2 ); // 2020-07-29 PREREQ
     h = from.h + extend * h0;
     s = from.s - h0 * TDMath.cosd( b );
     e = from.e + h0 * TDMath.sind( b );
@@ -89,6 +90,7 @@ public class NumStation extends NumSurveyPoint
   void addAzimuth( float azimuth, float extend ) 
   {
     // Log.v("DistoX-SPLAY", "Station " + name + " add azimuth " + azimuth + " extend " + extend );
+    if ( extend > 1 ) return;
     NumAzimuth leg = new NumAzimuth( azimuth, extend );
     for ( int k=0; k<mLegs.size(); ++k ) {
       if ( azimuth < mLegs.get(k).mAzimuth ) {

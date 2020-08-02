@@ -79,6 +79,7 @@ class ParserVisualTopo extends ImportParser
   {
     float mLength, mBearing, mClino, mLeft, mUp, mDown, mRight;
     String mFlag=null, mFrom=null, mTo=null;
+    String last_to = "";
 
     int dirw = 1;  // width direction
     int dirb = 1;  // bearing direction
@@ -181,8 +182,9 @@ class ParserVisualTopo extends ImportParser
               boolean splay = false;
               int k = 0;
               mFrom = vals[k]; ++k; // 0
+              if ( mFrom.equals("*") ) mFrom = last_to;
               mTo   = vals[k]; ++k; // 1
-              if ( mTo.equals( "*" ) ) splay = true;
+              if ( mTo.equals( "*" ) ) { splay = true; } else { last_to = mTo; }
               try {
                 String station = ( (splayAtFrom || splay )? mFrom : mTo );
                 mLength  = Float.parseFloat(vals[k]) * ul; ++k; // 2
