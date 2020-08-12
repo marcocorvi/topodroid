@@ -208,10 +208,12 @@ class SurveyNewDialog extends MyDialog
     // }
 
     String init_station = TDSetting.mInitStation;
-    if ( mEditStation.getText() != null ) {
-      String station = mEditStation.getText().toString().replaceAll("\\s+", TDString.EMPTY);
+    CharSequence station_text = mEditStation.getText(); // split in pieces: 202007 crashes
+    if ( station_text != null ) {
+      String station = station_text.toString();
       if ( station.length() > 0 ) {
-        init_station = station;
+        station = station.replaceAll("\\s+", TDString.EMPTY);
+        if ( station.length() > 0 ) init_station = station;
       }
     } // if mEditStation text is empty use setting mInitStation
     if ( init_station == null || init_station.length() == 0 ) init_station = TDString.ZERO;

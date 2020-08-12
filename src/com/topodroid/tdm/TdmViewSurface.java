@@ -59,7 +59,7 @@ public class TdmViewSurface extends SurfaceView
 
     ArrayList< TdmViewCommand > mCommandManager; // FIXME not private only to export DXF
     TdmViewCommand mCommand = null;
-    ArrayList< TdmViewEquate > mEquates;
+    final List< TdmViewEquate > mEquates;
 
     float mXoffset;
     float mYoffset;
@@ -102,7 +102,7 @@ public class TdmViewSurface extends SurfaceView
       mHolder = getHolder();
       mHolder.addCallback(this);
       mCommandManager = new ArrayList< TdmViewCommand >();
-      mEquates = new ArrayList< TdmViewEquate >();
+      mEquates = Collections.synchronizedList( new ArrayList< TdmViewEquate >() );
     }
 
     void resetStation()
@@ -121,10 +121,14 @@ public class TdmViewSurface extends SurfaceView
     void addEquates( ArrayList< TdmEquate > equates )
     {
       // Log.v("TdManager", "add equates: size " + equates.size() );
-      mEquates.clear();
-      for ( TdmViewCommand command : mCommandManager ) {
-        command.clearEquates();
+      synchronized( mEquates ) {
+        mEquates.clear();
+        for ( TdmViewCommand command : mCommandManager ) {
+          command.clearEquates();
+        }
       }
+
+      ArrayList< TdmViewEquate > tmp_equates = new ArrayList<>();
       for ( TdmEquate equate : equates ) {
         ArrayList< TdmViewStation > vst = new ArrayList<>();
         for ( TdmViewCommand command : mCommandManager ) {
@@ -148,10 +152,12 @@ public class TdmViewSurface extends SurfaceView
             veq.addViewStation( vs );
             vs.setEquated();
           }
-          mEquates.add( veq );
+          tmp_equates.add( veq );
         }
       }
-      // for ( TdmViewEquate veq : mEquates ) veq.dump();
+      synchronized( mEquates ) {
+        for ( TdmViewEquate equate : tmp_equates ) mEquates.add( equate );
+      }
     }
 
     void addSurvey( TdmSurvey survey, int color, float xoff, float yoff, ArrayList< TdmEquate > equates )

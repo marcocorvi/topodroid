@@ -527,7 +527,7 @@ public class TopoDroidApp extends Application
     // ***** LOG FRAMEWORK
     TDLog.loadLogPreferences( prefHlp );
 
-    mData.compileStatements();
+    // mData.compileStatements(); // this method is now empty (and commented)
 
     PtCmapActivity.setMap( prefHlp.getString( "DISTOX_PT_CMAP", null ) );
 

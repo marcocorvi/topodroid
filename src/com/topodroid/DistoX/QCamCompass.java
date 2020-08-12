@@ -187,7 +187,7 @@ class QCamCompass extends Dialog
   }
 
 
-  public void setJpegData( byte[] data ) { }
+  public boolean setJpegData( byte[] data ) { return false; }
 
   @Override
   public void onClick(View v)
@@ -218,8 +218,7 @@ class QCamCompass extends Dialog
         if ( mCallback != null ) {
           // Log.v("DistoX", "Orientation " + mOrientation );
           mCallback.setBearingAndClino( mBearing, mClino, mOrientation );
-          mCallback.setJpegData( mSurface.mJpegData );
-          mHasSaved = true;
+          mHasSaved = mCallback.setJpegData( mSurface.mJpegData );
         }
       }
     // } else if ( b == buttonCancel ) {

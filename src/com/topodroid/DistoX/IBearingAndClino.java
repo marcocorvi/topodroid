@@ -18,6 +18,6 @@ interface IBearingAndClino
   // @param o0 orienatation
   void setBearingAndClino( float b0, float c0, int o0 );
 
-  void setJpegData( byte[] data );
+  boolean setJpegData( byte[] data );
 
 }

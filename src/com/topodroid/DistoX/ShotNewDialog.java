@@ -317,7 +317,11 @@ class ShotNewDialog extends MyDialog
     mETclino.setText( String.format(Locale.US, "%.1f", c ) );
   } 
 
-  public void setJpegData( byte[] data ) { mJpegData = data; }
+  public boolean setJpegData( byte[] data )
+  {
+    mJpegData = data;
+    return mJpegData != null;
+  }
 
   @Override
   public boolean onLongClick( View v )

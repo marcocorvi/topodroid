@@ -187,7 +187,7 @@ class AzimuthDialog extends MyDialog
     updateEditText();
   }
 
-  public void setJpegData( byte[] data ) { }
+  public boolean setJpegData( byte[] data ) { return false; }
 
   private TimerTask mTimer = null;
 

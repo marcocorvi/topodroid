@@ -59,8 +59,9 @@ public class MyBearingAndClino implements IBearingAndClino
     mOrientation = o0;
   }
 
-  public void setJpegData( byte[] data )
+  public boolean setJpegData( byte[] data )
   {
+    if ( data == null ) return false; // FIXME crash 2020-08-09
     try {
       FileOutputStream fos = new FileOutputStream( mFile );
       fos.write( data );
@@ -68,6 +69,7 @@ public class MyBearingAndClino implements IBearingAndClino
       fos.close();
     } catch ( IOException e ) {
       TDLog.Error( "IO exception " + e.getMessage() );
+      return false;
     }
     setExifBearingAndClino( mFile, mBearing, mClino, mOrientation );
     // ExifInterface exif = new ExifInterface( mFile.getPath() );
@@ -81,6 +83,7 @@ public class MyBearingAndClino implements IBearingAndClino
     // exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE, String.format(Locale.US, "%d/100", (int)(mBearing*100) ) );
     // exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE_REF, "E" );
     // exif.saveAttributes();
+    return true;
   }
 
   static void setExifBearingAndClino( File file, float b, float c, int o )

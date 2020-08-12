@@ -117,12 +117,12 @@ public class DataHelper extends DataSetObservable
   // private SQLiteStatement updatePhotoStmt = null;
   // private SQLiteStatement updateSensorStmt = null;
 
-  private SQLiteStatement transferShotStmt = null;
+  private SQLiteStatement transferShotStmt = null; // on-demand compile
   // private SQLiteStatement transferSensorStmt = null;
   // private SQLiteStatement transferPhotoStmt = null;
   // private SQLiteStatement transferFixedStmt = null;
-  private SQLiteStatement transferPlotStmt = null;
-  private SQLiteStatement transferSketchStmt = null;
+  private SQLiteStatement transferPlotStmt = null;  // on-demand compile
+  private SQLiteStatement transferSketchStmt = null;  // on-demand compile
   // private SQLiteStatement transferStationStmt = null;
 
   // private SQLiteStatement updateFixedStationStmt = null;
@@ -689,7 +689,7 @@ public class DataHelper extends DataSetObservable
   }
 
   // --------------------------------------------------------------------
-  // compile statements
+  /* compile statements
 
   void compileStatements()
   {
@@ -722,9 +722,9 @@ public class DataHelper extends DataSetObservable
       // updatePlotNickStmt = myDB.compileStatement( "UPDATE plots set nick=? WHERE surveyId=? AND id=?" );
       // dropPlotStmt    = myDB.compileStatement( "DELETE FROM plots WHERE surveyId=? AND id=?" );
 
-      /* FIXME_SKETCH_3D
-      updateSketchStmt = myDB.compileStatement( "UPDATE sketches set st1=?, st2=?, xoffsettop=?, yoffsettop=?, zoomtop=?, xoffsetside=?, yoffsetside=?, zoomside=?, xoffset3d=?, yoffset3d=?, zoom3d=?, east=?, south=?, vert=?, azimuth=?, clino=? WHERE surveyId=? AND id=?" );
-       * END_SKETCH_3D */
+      // FIXME_SKETCH_3D
+      // updateSketchStmt = myDB.compileStatement( "UPDATE sketches set st1=?, st2=?, xoffsettop=?, yoffsettop=?, zoomtop=?, xoffsetside=?, yoffsetside=?, zoomside=?, xoffset3d=?, yoffset3d=?, zoom3d=?, east=?, south=?, vert=?, azimuth=?, clino=? WHERE surveyId=? AND id=?" );
+      // END_SKETCH_3D 
 
       // deleteSketchStmt = myDB.compileStatement( "UPDATE sketches set status=1 WHERE surveyId=? AND id=?" );
       // updatePhotoStmt  = myDB.compileStatement( "UPDATE photos set comment=? WHERE surveyId=? AND id=?" );
@@ -732,9 +732,10 @@ public class DataHelper extends DataSetObservable
       // deleteSensorStmt = myDB.compileStatement( "UPDATE sensors set status=1 WHERE surveyId=? AND id=?" );
       // updateSensorStmt = myDB.compileStatement( "UPDATE sensors set comment=? WHERE surveyId=? AND id=?" );
 
-      transferShotStmt   = myDB.compileStatement( "UPDATE shots SET surveyId=?, id=? where surveyId=? and id=?" );
-      transferPlotStmt   = myDB.compileStatement( "UPDATE plots set surveyId=? WHERE surveyId=? AND id=?" );
-      transferSketchStmt = myDB.compileStatement( "UPDATE sketches set surveyId=? WHERE surveyId=? AND id=?" );
+      // commented because of crash 202007 -> on-demand compile
+      // transferShotStmt   = myDB.compileStatement( "UPDATE shots SET surveyId=?, id=? where surveyId=? and id=?" );
+      // transferPlotStmt   = myDB.compileStatement( "UPDATE plots set surveyId=? WHERE surveyId=? AND id=?" );
+      // transferSketchStmt = myDB.compileStatement( "UPDATE sketches set surveyId=? WHERE surveyId=? AND id=?" );
       // transferSensorStmt  = myDB.compileStatement( "UPDATE sensors set surveyId=?, shotId=? WHERE surveyId=? AND id=?" );
       // transferPhotoStmt   = myDB.compileStatement( "UPDATE photos set surveyId=?, shotId=? WHERE surveyId=? AND id=?" );
       // transferFixedStmt   = myDB.compileStatement( "UPDATE fixeds set surveyId=? WHERE surveyId=? AND id=?" );
@@ -752,6 +753,7 @@ public class DataHelper extends DataSetObservable
     }
     // Log.v("DistoX", "compile statements done");
   }
+  */
 
   private void logError( String msg, Exception e )
   {

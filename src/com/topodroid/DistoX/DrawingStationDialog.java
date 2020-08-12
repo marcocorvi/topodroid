@@ -410,7 +410,7 @@ class DrawingStationDialog extends MyDialog
       dismiss();
     }
 
-    public void setJpegData( byte[] data ) { }
+    public boolean setJpegData( byte[] data ) { return false; }
   
 }
         
