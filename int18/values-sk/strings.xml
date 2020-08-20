@@ -639,7 +639,7 @@
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Nákres</string>
     <string name="button_more"    >Viac</string>
-    <!-- TODO string name="button_move"    >Move</string -->
+    <string name="button_move"    >Posun</string>
     <string name="button_next"    >Ďalší</string>
     <string name="button_prev"    >Predchádzajúci</string>
     <string name="button_new"     >Nový scrap</string>
@@ -717,7 +717,7 @@
     <string name="popup_do_gm_data">Zámera kalibrácie</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
-    <!-- TODO string name="btn_export">Export</string -->
+    <string name="btn_export">Export</string>
     <string name="btn_import">Importovať</string>
     <string name="btn_install">Inštalovať</string>
 
@@ -748,24 +748,24 @@
     <string name="flip_shots">Obrátiť aj zámery (nezaškrtnuté otočí len krezbu)</string>
     <string name="copy_items">Kopírovanie položiek</string>
 
-    <!-- TODO string name="man_preface">Preface</string -->
-    <!-- TODO string name="man_intro">1. Introduction</string -->
-    <!-- TODO string name="man_main">2. Main window</string -->
-    <!-- TODO string name="man_device">3. Device window</string -->
-    <!-- TODO string name="man_calib">4. Calibration window</string -->
-    <!-- TODO string name="man_gm">5. Calibration data</string -->
-    <!-- TODO string name="man_survey">6. Survey data</string -->
-    <!-- TODO string name="man_shot">7. Shot list</string -->
-    <!-- TODO string name="man_info">8. Survey info</string -->
-    <!-- TODO string name="man_sketch">9. Sketch window</string -->
-    <!-- TODO string name="man_draw">10. Sketch drawing</string -->
-    <!-- TODO string name="man_xsection">11. Cross-sections</string -->
-    <!-- TODO string name="man_overview">12. Overview window</string -->
-    <!-- TODO string name="man_export">13. Import/export</string -->
-    <!-- TODO string name="man_project">14. Cave projects</string -->
-    <!-- TODO string name="man_threed">15. 3D viewer</string -->
-    <!-- TODO string name="man_index">16. Index</string -->
-    <!-- TODO string name="man_website">* Website</string -->
+    <string name="man_preface">Preface</string>
+    <string name="man_intro">1. Introduction</string>
+    <string name="man_main">2. Main window</string>
+    <string name="man_device">3. Device window</string>
+    <string name="man_calib">4. Calibration window</string>
+    <string name="man_gm">5. Calibration data</string>
+    <string name="man_survey">6. Survey data</string>
+    <string name="man_shot">7. Shot list</string>
+    <string name="man_info">8. Survey info</string>
+    <string name="man_sketch">9. Sketch window</string>
+    <string name="man_draw">10. Sketch drawing</string>
+    <string name="man_xsection">11. Cross-sections</string>
+    <string name="man_overview">12. Overview window</string>
+    <string name="man_export">13. Import/export</string>
+    <string name="man_project">14. Cave projects</string>
+    <string name="man_threed">15. 3D viewer</string>
+    <string name="man_index">16. Index</string>
+    <string name="man_website">* Website</string>
 
     <string name="help_help">Táto pomoc</string>
     <!-- UNUSED string name="help_manual">User manual</string -->
@@ -773,7 +773,7 @@
     <string name="help_measure_type">Metódy merania: jednotlivo / viacnásobne</string>
     <string name="help_measure_undo">Späť</string>
     
-    <!-- TODO string name="help_audio">Audio records list</string -->
+    <string name="help_audio">Zoznam Audio nahrávok</string>
     <string name="help_backups">Vymazať zálohy Nákresov</string>
     <string name="help_calib_check">Kalibrácia - Kontrolné merania</string>
     <string name="help_close">Zavrieť okno</string>
@@ -788,7 +788,7 @@
     <string name="help_add_topodroid">Začať nové Mapovanie</string>
     <string name="help_import">Importovať zip súbor alebo meračský súbor</string>
     <string name="help_symbol">Pridať Symboly do Palety</string>
-    <!-- TODO string name="help_therion">Cave project manager</string -->
+    <string name="help_therion">Projekt Manager</string>
     <!-- UNUSED string name="help_database">Database viewer app (SQliteViewer)</string -->
     <string name="help_prefs">Nastavenia</string>
     <string name="help_log">Nastaviť možnosti záznamu log-u</string>
@@ -836,8 +836,8 @@
     <string name="help_eraser">Režim mazania</string>
     <string name="help_select_mode">Položky na výber - indikácia</string>
     <string name="help_erase_mode">Položky na výber - mazanie</string>
-    <!-- TODO string name="help_erase_size">Rozsah výberu objektov/gumy [S/M/L]</string -->
-    <!-- TODO string name="help_select_size">Select tool size [S/M/L]</string -->
+    <string name="help_erase_size">Rozsah výberu objektov/gumy [S/M/L]</string>
+    <string name="help_select_size">Vyber veľkosť nástroja [S/M/L]</string>
     <string name="help_previous">Prejsť na predchádzajúci objekt vo výbere</string>
     <string name="help_next">Prejsť na nasledujúci objekt vo výbere</string>
     <string name="help_recover">Obnoviť nákres zo zálohy</string>
@@ -877,35 +877,35 @@
     <string name="help_compute">Vypočítať kalibráciu</string>
     <string name="help_write">Zapísať kalibráčné koeficienty do DistaX</string>
 
-    <!-- TODO string name="help_add_project">Add cave project</string -->
-    <!-- TODO string name="help_add_surveys">Add surveys</string -->
-    <!-- TODO string name="help_drop_surveys">Drop surveys</string -->
-    <!-- TODO string name="help_view_surveys">Display surveys</string -->
-    <!-- TODO string name="help_view_equates">List equates</string -->
-    <!-- TODO string name="help_export_config">Export project</string -->
-    <!-- TODO string name="help_delete_config">Delete project</string -->
-    <!-- TODO string name="help_add_equate">Add surveys equate</string -->
-    <!-- TODO string name="help_equates">List surveys equates</string -->
+    <string name="help_add_project">Pridaj Projekt</string>
+    <string name="help_add_surveys">Pridač Mapovania</string>
+    <string name="help_drop_surveys">Zahodiť Mapovania</string>
+    <string name="help_view_surveys">Zobraziť Mapovania</string>
+    <string name="help_view_equates">Porovnanie</string>
+    <string name="help_export_config">Export Projektu</string>
+    <string name="help_delete_config">Vymazať Projekt</string>
+    <string name="help_add_equate">Pridať Mapovania na porovnanie</string>
+    <string name="help_equates">Zoznam porovnaní</string>
 
-    <!-- TODO string name="export_bgcolor">Background color</string -->
-    <!-- TODO string name="export_config">Config file</string -->
-    <!-- TODO string name="export_csv_rawdata">Raw data</string -->
-    <!-- TODO string name="export_dxf_blocks">DXF blocks</string -->
-    <!-- TODO string name="export_georeference">Georeference</string -->
-    <!-- TODO string name="export_grid">Grid</string -->
-    <!-- TODO string name="export_linedir">Line direction</string -->
-    <!-- TODO string name="export_lrud">LRUD</string -->
-    <!-- TODO string name="export_lrud_from">LRUD at FROM station</string -->
-    <!-- TODO string name="export_maps">Maps before data</string -->
-    <!-- TODO string name="export_prefix">Cave-prefix in station names</string -->
-    <!-- TODO string name="export_roundtrip">Roundtrip</string -->
-    <!-- TODO string name="export_scale_png">Resolution</string -->
-    <!-- TODO string name="export_scale_th">Scale 1 :</string -->
-    <!-- TODO string name="export_splays">Splays</string -->
-    <!-- TODO string name="export_splays_named">Named splays</string -->
-    <!-- TODO string name="export_stations">Stations</string -->
-    <!-- TODO string name="export_swap_lr">Swap L/R</string -->
-    <!-- TODO string name="export_xvi">Xvi images</string -->
+    <string name="export_bgcolor">Biele pozadie</string>
+    <string name="export_config">Config súbor</string>
+    <string name="export_csv_rawdata">Surové dáta</string>
+    <string name="export_dxf_blocks">DXF blocks</string>
+    <string name="export_georeference">Georeferencia</string>
+    <string name="export_grid">Mriežka</string>
+    <string name="export_linedir">Smer Čiary</string>
+    <string name="export_lrud">LRUD</string>
+    <string name="export_lrud_from">LRUD na POČIATOČNOM staničení</string>
+    <string name="export_maps">Mapy pred dátami</string>
+    <string name="export_prefix">Cave-prefix v staničeniach</string>
+    <string name="export_roundtrip">Roundtrip</string>
+    <string name="export_scale_png">Rozlíšenie</string>
+    <string name="export_scale_th">Mierka 1 :</string>
+    <string name="export_splays">Pomocné zámery</string>
+    <string name="export_splays_named">Pomenované pomocné zámery</string>
+    <string name="export_stations">Staničenia</string>
+    <string name="export_swap_lr">Vymeniť L/R</string>
+    <string name="export_xvi">Xvi obrázky</string>
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
     <!-- UNUSED string name="export_station_stroke">Station stroke</string -->
@@ -922,7 +922,7 @@
     <string name="audio_overwrite">Prepísať ?</string>
     <!-- UNUSED string name="playing">Playing %1$s</string -->
   
-    <!-- TODO string name="import_functional">Import only functional settings</string -->
+    <string name="import_functional">Import - Iba Funkčné Nastavenia</string>
     <string name="import_lrud">Importovanie LRUD</string>
     <string name="import_leg_first">Hlavné zámery pred LRUD pomocnými zámerami</string>
     <string name="import_diving_datamode">Potápačský mód</string>
