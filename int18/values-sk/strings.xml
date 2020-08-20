@@ -6,7 +6,7 @@
     <string name="user_man_ok">Preklad používateľského manuálu bol nainštalovaný</string>
     <string name="user_man_fail">Inštalácia prekladu používateľského manuálu zlyhala</string>
     <string name="app_name">TopoDroid</string>
-    <!-- TODO string name="tdm_title">TopoDroid Manager</string -->
+    <string name="tdm_title">TopoDroid Manager</string>
     <string name="double_back">Pre návrat Opätovne stlačte tlačidlo SPÄŤ</string>
 
     <string name="new_survey_label">Nové Mapovanie</string>
@@ -239,8 +239,8 @@
     <string name="error_invalid_name">Chybné meno</string>
     <string name="error_lat_required">Vyžaduje sa zem.šírka</string>
     <string name="error_long_required">Vyžaduje sa zem.dĺžka</string>
-    <!-- TODO string name="error_name_exists">Existing project</string -->
-    <!-- TODO string name="error_name_invalid">Invalid project name</string -->
+    <string name="error_name_exists">Existujúci projekt</string>
+    <string name="error_name_invalid">Nevhodné meno projektu</string>
     <string name="error_name_required">Vyžaduje sa meno</string>
     <string name="error_dir_exists">Adresár už existuje</string>
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
@@ -291,7 +291,7 @@
     <string name="bad_line">Nesprávny typ riadku</string>
     <string name="bad_point">Nesprávny typ bodu</string>
 
-    <!-- TODO string name="no_audio">No audio record</string -->
+    <string name="no_audio">Žiadna Audio nahrávka</string>
     <string name="no_bt">Nie je Bluetooth</string>
     <string name="no_calib">Žiadna kalibrácia</string>
     <string name="no_calib_check">Bez kalibrácie - Kontrolných meraní kalibrácie</string>
@@ -326,7 +326,7 @@
     <string name="menu_3d">3D</string>
     <string name="menu_about">O PROGRAME</string>
     <string name="menu_area">OBLASŤ</string>
-    <!-- TODO string name="menu_audio">AUDIO</string -->
+    <string name="menu_audio">AUDIO</string>
     <!-- UNUSED string name="menu_attach">CONNECT</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
@@ -500,8 +500,8 @@
     <string name="survey_exists">Mapovanie už existuje</string>
     <!-- UNUSED string name="survey_date">yyyy.mm.dd</string -->
     <string name="survey_delete">Vymazať mapovanie ?</string>
-    <!-- TODO string name="survey_move">Move shots to survey %1$s ?</string -->
-    <string name="survey_split">Rozdeliť mapovanie ?</string>
+    <string name="survey_move">Presunúť zámery k Mapovaniu %1$s ?</string>
+    <string name="survey_split">Rozdeliť Mapovanie ?</string>
     <string name="survey_not_attached">VAROVANIE: Nepripojené merania</string>
     <string name="survey_not_extend">VAROVANIE: Nenastavená Smerová orientácia</string>
     <string name="survey_not_attached_extend">VAROVANIE: Nepripojené merania a Nenastavená Smerová orientácia</string>
@@ -528,7 +528,7 @@
     <string name="name">Názov</string>
     <string name="team">Merací tím</string>
     <string name="init_station">Začiatočné staničenie</string>
-    <!-- TODO string name="second_device">second device</string -->
+    <string name="second_device">Druhé zariadenie</string>
     <string name="start_station">Začiatočné staničenie [%1$s]</string>
     <!-- UNUSED string name="toggle_device">Toggle device calibration mode</string -->
     <string name="toggle_failed">Zlyhalo prepnutie režimu DistaX kalibrácia/meranie</string>
@@ -578,7 +578,7 @@
     <string name="stat_angle_error">Uhlové chyby %1$.2f ± %2$.2f"</string>
     <string name="shot_title">Meranie %1$s - %2$s"</string>
     <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f"</string>
-    <!-- TODO string name="survey_split_move_title">Survey split/move</string -->
+    <string name="survey_split_move_title">Mapovanie rozdeliť/presunúť</string>
 
     <string name="survey_stat_duplicate">Opakované zámery (počet-dĺžka) %1$d %2$.1f %3$s</string>
     <string name="survey_stat_splay">Pomocné zámery %1$d</string>
@@ -609,7 +609,7 @@
     <!-- UNUSED string name="ask_close_survey">Close survey?</string -->
     <string name="ask_gps_service">Nastaviť službu GPS?</string>
     <string name="ask_backups_clear">Vymazať zálohy Nákresov?</string>
-    <!-- TODO string name="ask_manual_update">Update user manual translation?\nCurrent v. %1$d Installed v. %2$d</string -->
+    <string name="ask_manual_update">Aktualizovať Preklad používateľskej príručky?\nSúčašná v. %1$d Inštalovaná v. %2$d</string>
 
     <!-- UNUSED string name="button_add"       >Add       </string -->
     <string name="button_back"      >Späť </string>
