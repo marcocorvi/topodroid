@@ -1031,6 +1031,10 @@
     <string name="title_import_tro">VisualTopo možnosti Importu</string>
     <string name="title_import_dat">Compass možnosti Importu</string>
 
+  <string name="exported_settings">Exportované Nastavenia %1$s</string>
+  <string name="imported_settings">Importované Nastavenia</string>
+  <string name="imported_settings_failed">Chyba pri Importe Nastavení</string>
+  <string name="export_settings_failed">Chyba pri Exporte Nastavení</string>
   <string name="pref_export_settings">EXPORT NASTAVENÍ do súboru</string>
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
