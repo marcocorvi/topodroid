@@ -242,6 +242,7 @@
     <string name="error_name_exists">Existujúci projekt</string>
     <string name="error_name_invalid">Nevhodné meno projektu</string>
     <string name="error_name_required">Vyžaduje sa meno</string>
+	
     <string name="error_dir_exists">Adresár už existuje</string>
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Vyžaduje sa referenčný bod</string>
