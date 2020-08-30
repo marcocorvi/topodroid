@@ -38,6 +38,7 @@ class ImportTherionTask extends ImportTask
       app_data.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle );
       app_data.updateSurveyDeclination( sid, parser.surveyDeclination() );
       app_data.updateSurveyInitStation( sid, parser.initStation() );
+      app_data.updateSurveyTeam( sid, parser.mTeam );
 
       ArrayList< ParserShot > shots  = parser.getShots();
       long id = app_data.insertImportShots( sid, 1, shots ); // start id = 1

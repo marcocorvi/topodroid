@@ -532,6 +532,7 @@ class DistoXProtocol extends TopoDroidProtocol
     try {
       int k = 0;
       while ( k < len ) {
+        TDLog.Log( TDLog.LOG_PROTO, "write calibration " + k + " of " + len );
         mBuffer[0] = 0x39;
         mBuffer[1] = (byte)( addr & 0xff );
         mBuffer[2] = (byte)( (addr>>8) & 0xff );
@@ -581,6 +582,7 @@ class DistoXProtocol extends TopoDroidProtocol
     try {
       int k = 0;
       while ( k < len ) { 
+        TDLog.Log( TDLog.LOG_PROTO, "read calibration " + k + " of 52");
         mBuffer[0] = 0x38;
         mBuffer[1] = (byte)( addr & 0xff );
         mBuffer[2] = (byte)( (addr>>8) & 0xff );

@@ -715,7 +715,7 @@ public class DrawingWindow extends ItemDrawer
 
         mFullName1 = fullName1;
         mFullName2 = fullName2;
-        // mApp.mShotWindow.setRecentPlot( name, mType );
+        // TopoDroidApp.mShotWindow.setRecentPlot( name, mType );
         TDInstance.setRecentPlot( name, mType );
       } else {
         TDToast.makeBad( R.string.plot_duplicate_name );
@@ -1104,7 +1104,7 @@ public class DrawingWindow extends ItemDrawer
         saveHandler = new Handler(){
           @Override
           public void handleMessage(Message msg) {
-            // mApp.mShotWindow.enableSketchButton( true );
+            // TopoDroidApp.mShotWindow.enableSketchButton( true );
             TopoDroidApp.mEnableZip = true;
           }
         };
@@ -1114,7 +1114,7 @@ public class DrawingWindow extends ItemDrawer
         saveHandler = new Handler(){
           @Override
           public void handleMessage(Message msg) {
-            // mApp.mShotWindow.enableSketchButton( true );
+            // TopoDroidApp.mShotWindow.enableSketchButton( true );
             TopoDroidApp.mEnableZip = true;
           }
         };
@@ -1131,14 +1131,14 @@ public class DrawingWindow extends ItemDrawer
             if ( mModified ) {
               doStartSaveTdrTask( psd1, psd2, PlotSave.HANDLER, TDSetting.mBackupNumber, 0 ); 
             } else {
-              // mApp.mShotWindow.enableSketchButton( true );
+              // TopoDroidApp.mShotWindow.enableSketchButton( true );
               TopoDroidApp.mEnableZip = true;
             }
           }
         };
         ++ mNrSaveTh2Task;
 
-        // mApp.mShotWindow.enableSketchButton( false );
+        // TopoDroidApp.mShotWindow.enableSketchButton( false );
         TopoDroidApp.mEnableZip = false;
     }
     resetModified();
@@ -2101,7 +2101,7 @@ public class DrawingWindow extends ItemDrawer
     // if ( mApp.hasHighlighted() ) {
     //   // Log.v("DistoX", "drawing window [2] highlighted " + mApp.getHighlightedSize() );
     //   mDrawingSurface.highlights( mApp );
-    //   mApp.mShotWindow.clearMultiSelect();
+    //   TopoDroidApp.mShotWindow.clearMultiSelect();
     // }
 
     // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on create done");
@@ -2126,7 +2126,7 @@ public class DrawingWindow extends ItemDrawer
   // called by PlotListDialog
   void switchNameAndType( String name, long tt ) // SWITCH
   {
-    // mApp.mShotWindow.setRecentPlot( name, tt );
+    // TopoDroidApp.mShotWindow.setRecentPlot( name, tt );
     TDInstance.setRecentPlot( name, tt );
 
     PlotInfo p1 = mApp_mData.getPlotInfo( TDInstance.sid, name+"p" );
@@ -4411,7 +4411,7 @@ public class DrawingWindow extends ItemDrawer
     {
       mApp_mData.deletePlot( mPid1, mSid );
       if ( mPid2 >= 0 ) mApp_mData.deletePlot( mPid2, mSid );
-      // mApp.mShotWindow.setRecentPlot( null, 0 );
+      // TopoDroidApp.mShotWindow.setRecentPlot( null, 0 );
       TDInstance.setRecentPlot( null, 0 );
       finish();
     }
@@ -5025,12 +5025,12 @@ public class DrawingWindow extends ItemDrawer
         computeReferences( mNum, mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, false );
       }
       resetReference( mPlot2 );
-      if ( TopoDroidApp.mShotWindow != null ) {
-        // mApp.mShotWindow.mRecentPlotType = mType;
-        TDInstance.recentPlotType = mType;
-      } else {
-        TDLog.Error("Null app mShotWindow on recent plot type2");
-      }
+      TDInstance.recentPlotType = mType;
+      // if ( TopoDroidApp.mShotWindow != null ) {
+      //   // TopoDroidApp.mShotWindow.mRecentPlotType = mType;
+      // } else {
+      //   TDLog.Error("Null app mShotWindow on recent plot type2");
+      // }
     } 
 
     // called by setPlotType, switchPlotType and doRecover
@@ -5047,12 +5047,12 @@ public class DrawingWindow extends ItemDrawer
         computeReferences( mNum, mPlot1.type, mPlot1.name, TopoDroidApp.mScaleFactor, false );
       }
       resetReference( mPlot1 );
-      if ( TopoDroidApp.mShotWindow != null ) {
-        // mApp.mShotWindow.mRecentPlotType = mType;
-        TDInstance.recentPlotType = mType;
-      } else {
-        TDLog.Error("Null app mShotWindow on recent plot type1");
-      }
+      TDInstance.recentPlotType = mType;
+      // if ( TopoDroidApp.mShotWindow != null ) {
+      //   // TopoDroidApp.mShotWindow.mRecentPlotType = mType;
+      // } else {
+      //   TDLog.Error("Null app mShotWindow on recent plot type1");
+      // }
     }
 
     private void flipBlock( DBlock blk )

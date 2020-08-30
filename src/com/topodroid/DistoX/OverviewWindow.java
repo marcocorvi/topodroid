@@ -483,8 +483,7 @@ public class OverviewWindow extends ItemDrawer
 
       mData         = TopoDroidApp.mData; // new DataHelper( this );
       Bundle extras = getIntent().getExtras();
-      // extra can be null [ Galaxy S7 ] 
-      // if ( extra == null ) { finish(); return; }
+      if ( extras == null ) { finish(); return; } // extra can be null [ Galaxy S7, Galaxy A30s ] 
       mSid          = extras.getLong( TDTag.TOPODROID_SURVEY_ID );
       // mFrom      = extras.getString( TDTag.TOPODROID_PLOT_FROM );
       mZoom         = extras.getFloat( TDTag.TOPODROID_PLOT_ZOOM );

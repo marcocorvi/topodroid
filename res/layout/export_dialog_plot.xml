@@ -204,11 +204,43 @@
     android:layout_marginTop="@dimen/marginvbig"
     android:layout_marginBottom="@dimen/marginvbig"
     >
+    <RadioGroup android:id="@+id/dxf_version"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      >
+      <TextView
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:text="@string/export_dxf_version"
+        android:layout_marginRight="@dimen/marginh"
+        />
+      <RadioButton android:id="@+id/acad_9"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:text="9"
+        android:checked="true"
+        android:layout_marginRight="@dimen/marginh"
+      />
+      <RadioButton android:id="@+id/acad_12"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:text="12"
+        android:layout_marginRight="@dimen/marginh"
+      />
+      <RadioButton android:id="@+id/acad_16"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:text="16"
+        android:layout_marginRight="@dimen/marginh"
+      />
+    </RadioGroup>
     <CheckBox android:id="@+id/dxf_blocks"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:text="@string/export_dxf_blocks"
       />
+     
   </LinearLayout>
 
   <LinearLayout android:id="@+id/layout_shp"

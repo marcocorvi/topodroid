@@ -844,7 +844,7 @@ public class TDNum
     for ( TriShot tsh : tmpshots ) { // clear backshot, sibling, and multibad
       tsh.backshot = 0;
       tsh.sibling  = null;
-      tsh.getFirstBlock().mMultiBad = false;
+      tsh.getFirstBlock().setMultiBad( false );
     }
 
     // dump tmpshots
@@ -865,20 +865,24 @@ public class TDNum
       TriShot ts1 = ts0; // last sibling (head = the shot itself)
       for ( int j=i+1; j < tmpshots.size(); ++j ) {
         TriShot ts2 = tmpshots.get( j );
-        if ( from.equals( ts2.from ) && to.equals( ts2.to ) ) { // chain a positive sibling
+        if ( from.equals( ts2.from ) && to.equals( ts2.to ) ) { 
+          // Log.v("DistoX-NUM", "chain a positive sibling" );
           ts1.sibling = ts2;
           ts1 = ts2;
           ts2.backshot = +1;
 	  ++ nrSiblings;
-        } else if ( from.equals( ts2.to ) && to.equals( ts2.from ) ) { // chain a negative sibling
+        } else if ( from.equals( ts2.to ) && to.equals( ts2.from ) ) { 
+          // Log.v("DistoX-NUM", "chain a negative sibling" );
           ts1.sibling = ts2;
           ts1 = ts2;
           ts2.backshot = -1;
 	  ++ nrSiblings;
         }
       }
-      // Log.v("DistoXL", "worked shot " + from + "-" + to + " siblings " + nrSiblings );
-      if ( ts0.sibling != null ) { // (2) check sibling shots agreement
+      // Log.v("DistoX-NUM", "worked shot " + from + "-" + to + " siblings " + nrSiblings );
+
+      if ( ts0.sibling != null ) { 
+        // Log.v("DistoX-NUM", "check sibling shots agreement" );
         float dmax = 0.0f;
         float cc = TDMath.cosd( blk0.mClino );
         float sc = TDMath.sind( blk0.mClino );
@@ -899,7 +903,7 @@ public class TDNum
           ts1 = ts1.sibling;
         }
         if ( ( ! StationPolicy.doMagAnomaly() ) && ( dmax > TDSetting.mCloseDistance ) ) {
-          blk0.mMultiBad = true;
+          blk0.setMultiBad( true );
         }
         // Log.v( "DistoX", "DMAX " + from + "-" + to + " " + dmax );
         
@@ -1017,11 +1021,12 @@ public class TDNum
           //     ( ( sf == null )? "null" : sf.name ) + " " + (( st == null )? "null" : st.name ) );
           // }
 
-          int  iext = DBlock.getIntExtend( ts.extend );
+          int  iext = DBlock.getIntExtend( ts.extend ); // integer extend
           boolean has_coords = (iext <= 1);
-          float ext = DBlock.getReducedExtend( ts.extend, ts.stretch );
+          float fext = DBlock.getReducedExtend( ts.extend, ts.stretch ); // float extend - used for station coords
+          float aext = fext; // station azimuth extends
           if ( sf != null ) {
-            sf.addAzimuth( ts.b(), iext );
+            sf.addAzimuth( ts.b(), aext );
 	    // Log.v("DistoX-LOOP", "process " + ts.from + " " + ts.to + " using " + sf.name ); 
 
             if ( st != null ) { // loop-closure
@@ -1040,10 +1045,10 @@ public class TDNum
                 // if ( TDLog.LOG_DEBUG ) Log.v( TDLog.TAG, "do not close loop");
                 // keep loop open: new station( id=ts.to, from=sf, ... )
                 float bearing = ts.b() - sf.mAnomaly;
-                NumStation st1 = new NumStation( ts.to, sf, ts.d(), bearing + mDecl, ts.c(), ext, has_coords ); // 20200503 added mDecl
+                NumStation st1 = new NumStation( ts.to, sf, ts.d(), bearing + mDecl, ts.c(), fext, has_coords ); // 20200503 added mDecl
                 if ( ! mStations.addStation( st1 ) ) mClosureStations.add( st1 );
 
-                st1.addAzimuth( (ts.b()+180)%360, -iext );
+                st1.addAzimuth( (ts.b()+180)%360, -aext );
                 st1.mAnomaly = anomaly + sf.mAnomaly;
 	        // Log.v("DistoXX", "station " + st1.name + " anomaly " + st1.mAnomaly );
                 updateBBox( st1 );
@@ -1066,10 +1071,10 @@ public class TDNum
             else // st null || st isBarrier
             { // forward shot: from --> to
               float bearing = ts.b() - sf.mAnomaly;
-              st = new NumStation( ts.to, sf, ts.d(), bearing + mDecl, ts.c(), ext, has_coords ); // 20200503 added mDecl
+              st = new NumStation( ts.to, sf, ts.d(), bearing + mDecl, ts.c(), fext, has_coords ); // 20200503 added mDecl
               if ( ! mStations.addStation( st ) ) mClosureStations.add( st );
 
-              st.addAzimuth( (ts.b()+180)%360, -iext );
+              st.addAzimuth( (ts.b()+180)%360, -aext );
               st.mAnomaly = anomaly + sf.mAnomaly;
 	      // Log.v("DistoXX", "station " + st.name + " anomaly " + st.mAnomaly );
               updateBBox( st );
@@ -1090,12 +1095,12 @@ public class TDNum
           else if ( st != null ) 
           { // sf == null: reversed shot only difference is '-' sign in new NumStation, and the new station is sf
             // if ( TDLog.LOG_DEBUG ) Log.v( TDLog.TAG, "reversed shot " + ts.from + " " + ts.to + " id " + ts.blocks.get(0).mId );
-            st.addAzimuth( (ts.b()+180)%360, -iext );
+            st.addAzimuth( (ts.b()+180)%360, -aext );
             float bearing = ts.b() - st.mAnomaly;
-            sf = new NumStation( ts.from, st, - ts.d(), bearing + mDecl, ts.c(), ext, has_coords ); // 20200503 added mDecl
+            sf = new NumStation( ts.from, st, - ts.d(), bearing + mDecl, ts.c(), fext, has_coords ); // 20200503 added mDecl
             if ( ! mStations.addStation( sf ) ) mClosureStations.add( sf );
 
-            sf.addAzimuth( ts.b(), iext );
+            sf.addAzimuth( ts.b(), aext );
             sf.mAnomaly = anomaly + st.mAnomaly; // FIXME
 	    // Log.v("DistoXX", "station " + sf.name + " anomaly " + sf.mAnomaly );
             // if ( TDLog.LOG_DEBUG ) {

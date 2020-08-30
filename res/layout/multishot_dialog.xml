@@ -99,19 +99,17 @@
     android:layout_below="@id/layout_color"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
-    android:orientation="horizontal" 
+    android:orientation="vertical" 
     android:layout_marginTop="@dimen/marginv"
     >
     <Button android:id="@+id/splays"
       style="@style/button_default"
-      android:layout_width="0sp"
-      android:layout_weight="50"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
       android:text="@string/button_splays"
       />
-    <RadioGroup 
-      android:id="@+id/group_xsplay"
-      android:layout_width="0sp"
-      android:layout_weight="100"
+    <RadioGroup android:id="@+id/group_xsplay"
+      android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
       >
@@ -136,6 +134,27 @@
 	    android:text="@string/vsplay"
             />
     </RadioGroup>
+    <LinearLayout android:id="@+id/group_plan_profile"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      >
+      <TextView 
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+	    android:text="@string/display_view"
+            />
+      <CheckBox android:id="@+id/rb_noprofile"
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+	    android:text="@string/plan_view"
+            />
+      <CheckBox android:id="@+id/rb_noplan"
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+	    android:text="@string/profile_view"
+            />
+    </LinearLayout>
   </LinearLayout>				  
 
   <LinearLayout android:id="@+id/layout_bedding"

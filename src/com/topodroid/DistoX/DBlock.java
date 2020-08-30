@@ -79,7 +79,7 @@ public class DBlock
   int  mShotType;  // 0: DistoX, 1: manual, -1: DistoX backshot
   boolean mWithPhoto;
 
-  public  boolean mMultiBad; // whether it disagree with siblings
+  private boolean mMultiBad; // whether it disagree with siblings
   private float mStretch;
   private String mAddress; // DistoX address - used only in exports
   // boolean mWasRecent = false; // REVISE_RECENT
@@ -262,6 +262,7 @@ public class DBlock
   private boolean isTimeRecent( long time ) { return mId >= TDInstance.secondLastShotId && (time-mTime) < TDSetting.mRecentTimeout; }
 
   boolean isMultiBad() { return mMultiBad; }
+  public void setMultiBad( boolean multibad ) { mMultiBad = multibad; }
 
   Paint getPaint() { return mPaint; }
 

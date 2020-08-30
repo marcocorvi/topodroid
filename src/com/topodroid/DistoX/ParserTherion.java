@@ -23,7 +23,7 @@ import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-// import android.util.Log;
+import android.util.Log;
 
 // TODO this class can be made extend ImportParser
 //
@@ -103,7 +103,7 @@ class ParserTherion extends ImportParser
 
   // private String nextLine( BufferedReader br ) throws IOException // FROM ImportParser
   // {
-  //   StringBuilder ret = new StringBuilder();
+  //   StringBuffer ret = new StringBuffer();
   //   {
   //     String line = br.readLine();
   //     if ( line == null ) return null; // EOF
@@ -148,6 +148,7 @@ class ParserTherion extends ImportParser
     int jDown  = -1;
 
     Pattern pattern = Pattern.compile( "\\s+" );
+    StringBuffer team = new StringBuffer();
 
     try {
       String dirname = "./";
@@ -281,7 +282,7 @@ class ParserTherion extends ImportParser
                       if ( vals[j].endsWith( "\"" ) ) {
                         mTitle = vals[j].substring(1,vals[j].length()-1);
                       } else {
-                        StringBuilder sb = new StringBuilder();
+                        StringBuffer sb = new StringBuffer();
                         sb.append( vals[j].substring(1) );
                         for ( ++j; j<vals_len; ++j ) {
                           if ( vals[j].length() == 0 ) continue;
@@ -313,13 +314,7 @@ class ParserTherion extends ImportParser
                 String date = vals[1];
                 if ( mDate == null ) mDate = date; // save centerline date
               } else if ( cmd.equals("team") ) {
-                // StringBuilder sb = new StringBuilder();
-                // for ( int j = 1; j < vals_len; ++j ) {
-                //   sb.append(" ").append( vals[j] );
-                //   // mTeam +=  " " + vals[j];
-                // }
-                // mTeam += sb.toString();
-                mTeam += TDUtil.concat( vals, 1 );
+                TDUtil.concat( team, vals, 1 );
               // } else if ( cmd.equals("explo-date") ) {
               // } else if ( cmd.equals("explo-team") ) {
               // } else if ( cmd.equals("instrument") ) {
@@ -461,7 +456,7 @@ class ParserTherion extends ImportParser
                     if ( comment.endsWith( "\"" ) ) {
                       comment = comment.substring(1,comment.length()-1);
                     } else {
-                      StringBuilder sb = new StringBuilder();
+                      StringBuffer sb = new StringBuffer();
                       sb.append( comment.substring( 1 ) );
                       for ( int kk=3; kk<vals_len; ++kk ) {
                         if ( vals[kk].endsWith("\"") ) {
@@ -695,6 +690,8 @@ class ParserTherion extends ImportParser
         }
         line = nextLine( br );
       }
+      mTeam = team.toString();
+
     } catch ( IOException e ) {
       // TODO
       throw new ParserException();

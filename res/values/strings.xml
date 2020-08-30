@@ -216,6 +216,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="loop_closure_errors">Loop closure errors</string>
     <string name="loop_none">no loop</string>
     <!-- UNUSED string name="long_lat">Long-Lat</string -->
+    <!-- UNUSED string name="multistation_plane">Multiple-station plane</string -->
 
     <string name="error_m">Error [m]</string>
     <string name="fmt_error_m">Error %1$.1f m</string>
@@ -599,6 +600,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="h_section">H-SECTION</string>
     <!-- UNUSED string name="landscape">landscape</string -->
 
+    <string name="display_view">Display</string>
+    <string name="plan_view">plan</string>
+    <string name="profile_view">profile</string>
+
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Failed DistoX memory-read</string>
     <string name="distox_err_headtail_io">DistoX memory I/O error</string>
@@ -892,6 +897,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="export_config">Config file</string>
     <string name="export_csv_rawdata">Raw data</string>
     <string name="export_dxf_blocks">DXF blocks</string>
+    <string name="export_dxf_version">Version</string>
     <string name="export_georeference">Georeference</string>
     <string name="export_grid">Grid</string>
     <string name="export_linedir">Line direction</string>

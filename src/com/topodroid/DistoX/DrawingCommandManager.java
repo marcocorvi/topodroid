@@ -47,7 +47,7 @@ class DrawingCommandManager
   private static final int BORDER = 20; // for the bitmap
   private int mMode = 0;  // command manager mode type (PLAN PROFILE SECTION OVERVIEW)
 
-  static private int mDisplayMode = DisplayMode.DISPLAY_PLOT; // this display mode is shared among command managers
+  static private volatile int mDisplayMode = DisplayMode.DISPLAY_PLOT; // this display mode is shared among command managers
   private RectF mBBox;
   boolean mIsExtended = false;
 
@@ -769,7 +769,7 @@ class DrawingCommandManager
     if( mLegsStack != null ) { 
       synchronized( TDPath.mShotsLock ) {
         for ( DrawingPath path : mLegsStack ) {
-          if ( path.mBlock == null || ( ! path.mBlock.mMultiBad ) ) {
+          if ( path.mBlock == null || ( ! path.mBlock.isMultiBad() ) ) {
             path.setPathPaint( paint );
           }
         }
@@ -779,7 +779,7 @@ class DrawingCommandManager
     if( mSplaysStack != null ) { 
       synchronized( TDPath.mShotsLock ) {
         for ( DrawingPath path : mSplaysStack ) {
-          if ( path.mBlock == null || ( ! path.mBlock.mMultiBad ) ) {
+          if ( path.mBlock == null || ( ! path.mBlock.isMultiBad() ) ) {
             // path.setPathPaint( paint );
             if ( profile ) {
               if ( TDSetting.mDashSplay == TDSetting.DASHING_AZIMUTH ) {

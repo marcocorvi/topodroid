@@ -150,7 +150,8 @@ public class TopoDroidApp extends Application
 
   void notifyStatus( )
   { 
-    TopoDroidApp.mActivity.runOnUiThread( new Runnable() { 
+    if ( mActivity == null ) return;
+    mActivity.runOnUiThread( new Runnable() { 
       public void run () { 
         mListerSet.setConnectionStatus( mDataDownloader.getStatus() );
       }
@@ -180,10 +181,10 @@ public class TopoDroidApp extends Application
   static DeviceHelper mDData = null;      // device/calib database
 
   // public static TDPrefHelper mPrefHlp      = null;
-  static SurveyWindow mSurveyWindow = null; // FIXME ref mActivity
-  public static ShotWindow   mShotWindow   = null; // FIXME ref mActivity
-  static DrawingWindow mDrawingWindow = null; // FIXME currently not used
-  static MainWindow mActivity = null; // FIXME ref mActivity
+  static SurveyWindow mSurveyWindow    = null; // FIXME ref mActivity
+  public static ShotWindow mShotWindow = null; // FIXME ref mActivity - public for prefs/TDSetting
+  static DrawingWindow mDrawingWindow  = null; // FIXME currently not used
+  static MainWindow mActivity          = null; // FIXME ref mActivity
 
   static boolean mGMActivityVisible = false;
 

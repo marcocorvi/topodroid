@@ -697,13 +697,14 @@ public class ShotWindow extends Activity
   }
 
   // from MultiselectDialog
-  void updateSplaysLegType( List< DBlock > blks, int leg_type )
+  void updateSplaysLegType( List< DBlock > blks, int leg_type, long flag )
   {
+    int block_type = DBlock.blockOfSplayLegType[ leg_type ];
     for ( DBlock blk : blks ) {
-      int block_type = DBlock.blockOfSplayLegType[ leg_type ];
       // long leg_type = DBlock.legOfBlockType[ block_type ];
-      mApp_mData.updateShotLeg( blk.mId, TDInstance.sid, leg_type );
+      mApp_mData.updateShotLegFlag( blk.mId, TDInstance.sid, leg_type, flag );
       blk.setBlockType( block_type );
+      blk.resetFlag( flag );
     }
     updateDisplay();
     clearMultiSelect();

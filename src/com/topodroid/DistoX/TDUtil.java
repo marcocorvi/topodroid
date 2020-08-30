@@ -129,7 +129,7 @@ public class TDUtil
   public static String concat( String[] vals, int k )
   {
     if ( k < vals.length ) {
-      StringBuilder sb = new StringBuilder();
+      StringBuffer sb = new StringBuffer();
       for ( ; k<vals.length; ++k ) if ( vals[k].length() > 0 ) {
         sb.append(vals[k]);
         break;
@@ -140,6 +140,20 @@ public class TDUtil
       return sb.toString();
     }
     return "";
+  }
+
+  public static void concat( StringBuffer sb, String[] vals, int k )
+  {
+    if ( k < vals.length ) {
+      for ( ; k<vals.length; ++k ) if ( vals[k].length() > 0 ) {
+        sb.append(vals[k]);
+        break;
+      }
+      for (++k; k < vals.length; ++k) {
+        if ( vals[k].length() > 0 ) sb.append(" ").append(vals[k]);
+      }
+      sb.append(" ");
+    }
   }
 
   public static String noSpaces( String s )

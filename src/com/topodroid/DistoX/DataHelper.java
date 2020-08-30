@@ -4546,15 +4546,13 @@ public class DataHelper extends DataSetObservable
          name          = scanline0.stringValue( );
          date          = scanline0.stringValue( );
          String team   = scanline0.stringValue( );
-         double decl   = 0; if ( db_version > 14 ) scanline0.doubleValue( );
+         double decl   = ( db_version > 14 )? scanline0.doubleValue( ) : 0;
          comment       = scanline0.stringValue( );
-         String init_station = "0"; if ( db_version > 22) init_station = scanline0.stringValue( );
-         int xsections = SurveyInfo.XSECTION_SHARED; // old at-sationx-sections were "shared"
-         if ( db_version > 29) xsections = (int)( scanline0.longValue( ) );
-	 int datamode  = SurveyInfo.DATAMODE_NORMAL;
-         if ( db_version > 36) datamode = (int)( scanline0.longValue( ) );
-	 int extend_ref = SurveyInfo.SURVEY_EXTEND_NORMAL;
-         if ( db_version > 38) extend_ref = (int)( scanline0.longValue( ) );
+         String init_station = ( db_version > 22)? scanline0.stringValue( ) : "0";
+         int xsections = ( db_version > 29)? (int)( scanline0.longValue( ) )
+                                           : SurveyInfo.XSECTION_SHARED; // old at-sationx-sections were "shared"
+	 int datamode  = ( db_version > 36)? (int)( scanline0.longValue( ) ) : SurveyInfo.DATAMODE_NORMAL;
+	 int extend_ref = ( db_version > 38)? (int)( scanline0.longValue( ) ) : SurveyInfo.SURVEY_EXTEND_NORMAL;
 
          sid = setSurvey( name, datamode );
 

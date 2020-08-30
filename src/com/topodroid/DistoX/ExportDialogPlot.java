@@ -31,6 +31,7 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 
 import android.view.View;
 // import android.view.View.OnKeyListener;
@@ -197,6 +198,13 @@ public class ExportDialogPlot extends MyDialog
         {
           TDSetting.mDxfBlocks = ((CheckBox) findViewById( R.id.dxf_blocks )).isChecked();
           // TDSetting.mAcadVersion
+          if ( ((RadioButton) findViewById( R.id.acad_12 )).isChecked() ) {
+            TDSetting.mAcadVersion = 13;
+          } else if ( ((RadioButton) findViewById( R.id.acad_16 )).isChecked() ) {
+            TDSetting.mAcadVersion = 16;
+          } else {
+            TDSetting.mAcadVersion =  9;
+          }
         }
         break;
       case 3: // SVG

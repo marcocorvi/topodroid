@@ -31,6 +31,7 @@ import android.widget.EditText;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.CheckBox;
 
 import android.view.View;
 
@@ -43,7 +44,7 @@ class MultishotDialog extends MyDialog
   private DBlock mBlk = null;
 
   private boolean mColoring = false;
-  private boolean mBedding  = false;
+  private int mBedding  = 0;
 
   private Pattern mPattern; // name pattern
 
@@ -116,6 +117,8 @@ class MultishotDialog extends MyDialog
     
     // LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
     // layout4.setMinimumHeight( size + 20 );
+    ((CheckBox)findViewById( R.id.rb_noplan )).setChecked( true );
+    ((CheckBox)findViewById( R.id.rb_noprofile )).setChecked( true );
 
     mButtonRenumber  = (Button) findViewById(R.id.renumber );
     mButtonSwap      = (Button) findViewById(R.id.swap );
@@ -155,20 +158,20 @@ class MultishotDialog extends MyDialog
       ((LinearLayout) findViewById( R.id.layout_splays )).setVisibility( View.GONE );
     }
 
-    mBedding = false;
+    mBedding = 0;
     if ( TDLevel.overExpert && TDSetting.mBedding ) {
       String from = mBlk.mFrom;
-      mBedding = ( mBlks.size() > 1 && from != null && from.length() > 0 );
-      if ( mBedding ) {
+      if ( mBlks.size() > 1 && from != null && from.length() > 0 ) {
+        mBedding = 1;
         for ( DBlock blk : mBlks ) {
           if ( ! from.equals( blk.mFrom ) ) {
-            mBedding = false;
+            mBedding = 2;
             break;
           }
         }
       }
     }
-    if ( mBedding ) {
+    if ( mBedding > 0 ) {
       mButtonBedding.setOnClickListener( this );
     } else {
       ((LinearLayout) findViewById( R.id.layout_bedding )).setVisibility( View.GONE );
@@ -227,9 +230,18 @@ class MultishotDialog extends MyDialog
         } else if ( ((RadioButton)findViewById( R.id.rb_vsplay )).isChecked() ) {
           leg_type = LegType.VSPLAY;
         }
-        mParent.updateSplaysLegType( mBlks, leg_type );
+        long flag = DBlock.FLAG_SURVEY;
+        if ( ! ((CheckBox)findViewById( R.id.rb_noplan )).isChecked() ) {
+          flag |= DBlock.FLAG_NO_PLAN;
+        } else if ( ! ((CheckBox)findViewById( R.id.rb_noprofile )).isChecked() ) {
+          flag |= DBlock.FLAG_NO_PROFILE;
+        }
+        mParent.updateSplaysLegType( mBlks, leg_type, flag );
       }
-    } else if ( mBedding && b == mButtonBedding ) {
+    } else if ( mBedding > 0 && b == mButtonBedding ) {
+      // if ( mBedding > 1 ) { // warning toast
+      //   TDToast.makeWarn( R.string.multistation_plane );
+      // }
       mTVstrikeDip.setText( mParent.computeBedding( mBlks ) );
       return;
     // } else {
