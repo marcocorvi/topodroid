@@ -49,7 +49,7 @@
      <item name="grid_cell">Podľa Mriežky</item>
      <item name="meter">Metre</item>
      <item name="tf">Stopy</item>
-  </string-array -->
+  </string-array>
      
   <string-array name="loopClosure">
      <item name="none">Žiadne</item>
