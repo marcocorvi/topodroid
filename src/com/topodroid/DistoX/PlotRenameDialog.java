@@ -29,6 +29,7 @@ class PlotRenameDialog extends MyDialog
                        , View.OnLongClickListener
 {
   private EditText mEtName;
+  private EditText mEtOrigin;
   private Button   mBtnRename;
   private Button   mBtnBack;
   private Button   mBtnDelete;
@@ -38,12 +39,14 @@ class PlotRenameDialog extends MyDialog
 
   private final DrawingWindow mParent;
   private String mStation;
+  private String mName;
 
   PlotRenameDialog( Context context, DrawingWindow parent /*, TopoDroidApp app */ )
   {
     super( context, R.string.PlotRenameDialog );
     mParent = parent;
     mStation = mParent.getPlotStation();
+    mName    = mParent.getPlotName();
   }
 
 // -------------------------------------------------------------------
@@ -62,9 +65,11 @@ class PlotRenameDialog extends MyDialog
     mCBcopy    = (CheckBox) findViewById( R.id.cb_copy );
 
     mEtName = (EditText) findViewById( R.id.et_name );
-    mEtName.setText( mParent.getPlotName( ) );
+    mEtName.setText( mName );
 
-    ((TextView) findViewById( R.id.et_station )).setText( mStation );
+    mEtOrigin = (EditText) findViewById( R.id.et_station );
+    mEtOrigin.setText( mStation );
+    if ( ! TDLevel.overExpert ) mEtOrigin.setInputType( 0 ); // 0 = not editable
 
     mBtnRename.setOnClickListener( this );
     mBtnBack.setOnClickListener( this );
@@ -89,12 +94,22 @@ class PlotRenameDialog extends MyDialog
 
     if ( b == mBtnRename ) {
       String name = mEtName.getText().toString();
-      INewPlot maker = TopoDroidApp.mShotWindow; // FIXME
-      if ( maker.hasSurveyPlot( name ) ) {
-        mEtName.setError( mContext.getResources().getString( R.string.plot_duplicate_name ) );
-        return;
+      if ( ! mName.equals( name ) ) {
+        INewPlot maker = TopoDroidApp.mShotWindow; // FIXME
+        if ( maker.hasSurveyPlot( name ) ) {
+          mEtName.setError( mContext.getResources().getString( R.string.plot_duplicate_name ) );
+          return;
+        }
+        // mParent.renamePlot( mEtName.getText().toString() );
+        mParent.renamePlot( name );
       }
-      mParent.renamePlot( mEtName.getText().toString() );
+
+      if ( TDLevel.overExpert ) {
+        String station = mEtOrigin.getText().toString();
+        if ( ! mStation.equals( station ) ) { // change origin name
+          mParent.setPlotOrigin( station );
+        }
+      }
     } else if ( b == mBtnDelete ) {
       mParent.askDelete();
     } else if ( TDSetting.mPlotSplit && b == mBtnSplit ) {

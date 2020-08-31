@@ -598,6 +598,7 @@
     <!-- TODO string name="ask_manual_update">Update user manual translation?\nCurrent v. %1$d Installed v. %2$d</string -->
 
     <!-- UNUSED string name="button_add"       >Ajouter       </string -->
+    <!-- TODO string name="button_apply"     >Apply</string -->
     <string name="button_back"      >Retour     </string>
     <string name="button_cancel"    >Annuler    </string>
     <string name="button_change"    >Changer    </string>

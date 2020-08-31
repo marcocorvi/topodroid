@@ -724,6 +724,19 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  void setPlotOrigin( String station )
+  {
+    if ( PlotInfo.isAnySection( mType ) ) return;
+    mApp_mData.updatePlotOrigin( TDInstance.sid, mPid1, station );
+    mApp_mData.updatePlotOrigin( TDInstance.sid, mPid2, station );
+    List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
+    mPlot1.start = station;
+    mPlot2.start = station;
+    mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
+    computeReferences( mNum, mPlot2.type, mPlot2.name, mZoom, false );
+    computeReferences( mNum, mPlot1.type, mPlot1.name, mZoom, false );
+  }
+
   long getPlotType()   { return mType; }
 
   boolean isExtendedProfile() { return mType == PlotInfo.PLOT_EXTENDED; }

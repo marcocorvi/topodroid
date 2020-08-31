@@ -615,6 +615,7 @@
     <string name="ask_manual_update">Übersetztes Handbuch updaten?\nAktuell v%1$d Installiert v%2$d</string>
 
     <!-- UNUSED string name="button_add"       >Erstellen       </string -->
+    <!-- TODO string name="button_apply"     >Apply</string -->
     <string name="button_back"      >Zurück    </string>
     <string name="button_cancel"    >Abbrechen </string>
     <string name="button_change"    >Ändern    </string>

@@ -1697,6 +1697,16 @@ public class DataHelper extends DataSetObservable
     // updatePlotStmt.bindLong( 5, pid );
     // try { updatePlotStmt.execute(); } catch (SQLiteException e) { logError("plt updt", e); }
   }
+
+  void updatePlotOrigin( long sid, long pid, String station )
+  {
+    if ( myDB == null ) return; // false;
+    if ( station == null ) station = "";
+    StringWriter sw = new StringWriter();
+    PrintWriter  pw = new PrintWriter( sw );
+    pw.format( Locale.US, "UPDATE plots set start=\"%s\" WHERE surveyId=%d AND id=%d", station, sid, pid );
+    doExecSQL( sw, "plt origin" );
+  }
  
   void updatePlotNick( long pid, long sid, String nick )
   {

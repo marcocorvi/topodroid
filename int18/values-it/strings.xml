@@ -595,6 +595,7 @@
     <string name="ask_manual_update">Aggiornare la traduzione del manuale?\nAttuale v. %1$d Istallata v. %2$d</string>
 
     <!-- UNUSED string name="button_add"       >Inserisci </string -->
+    <!-- TODO string name="button_apply"     >Apply</string -->
     <string name="button_back"      >Indietro  </string>
     <string name="button_cancel"    >Annulla   </string>
     <string name="button_change"    >Cambia    </string>

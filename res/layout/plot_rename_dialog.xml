@@ -26,11 +26,16 @@
         android:text="@string/plot_start"
         />
 
-      <TextView android:id="@+id/et_station" 
+      <EditText android:id="@+id/et_station" 
         style="@style/edit_text_light"
         android:layout_width="0sp" 
         android:layout_height="wrap_content"
 	android:layout_weight="60"
+        android:singleLine="true"
+        android:textSize="@dimen/textsize"
+        android:typeface="monospace"
+        android:padding="@dimen/padding"
+        android:inputType="text"
         />
     </LinearLayout>
 
@@ -83,7 +88,7 @@
         />
       <Button android:id="@+id/btn_rename"
         style="@style/button_default"
-        android:text="@string/button_rename"
+        android:text="@string/button_apply"
         />
     </LinearLayout>
 

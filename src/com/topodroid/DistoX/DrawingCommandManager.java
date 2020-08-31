@@ -779,7 +779,7 @@ class DrawingCommandManager
     if( mSplaysStack != null ) { 
       synchronized( TDPath.mShotsLock ) {
         for ( DrawingPath path : mSplaysStack ) {
-          if ( path.mBlock == null || ( ! path.mBlock.isMultiBad() ) ) {
+          if ( path.mBlock == null /* || ( ! path.mBlock.isMultiBad() ) */ ) { // splays cannot be multibad
             // path.setPathPaint( paint );
             if ( profile ) {
               if ( TDSetting.mDashSplay == TDSetting.DASHING_AZIMUTH ) {

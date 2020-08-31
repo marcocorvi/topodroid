@@ -601,6 +601,7 @@
     <string name="ask_manual_update">Обновить перевод руководства пользователя?\nТекущая v. %1$d Установленная v. %2$d</string>
 
     <!-- UNUSED string name="button_add"       >Добавить  </string -->
+    <!-- TODO string name="button_apply"     >Apply</string -->
     <string name="button_back"      >Назад     </string>
     <string name="button_cancel"    >Отмена    </string>
     <string name="button_change"    >Изменить    </string>
