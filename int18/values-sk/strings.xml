@@ -6,7 +6,7 @@
     <string name="user_man_ok">Preklad používateľského manuálu bol nainštalovaný</string>
     <string name="user_man_fail">Inštalácia prekladu používateľského manuálu zlyhala</string>
     <string name="app_name">TopoDroid</string>
-    <!-- TODO string name="tdm_title">TopoDroid Manager</string -->
+    <string name="tdm_title">TopoDroid Manager</string>
     <string name="double_back">Pre návrat Opätovne stlačte tlačidlo SPÄŤ</string>
 
     <string name="new_survey_label">Nové Mapovanie</string>
@@ -239,9 +239,10 @@
     <string name="error_invalid_name">Chybné meno</string>
     <string name="error_lat_required">Vyžaduje sa zem.šírka</string>
     <string name="error_long_required">Vyžaduje sa zem.dĺžka</string>
-    <!-- TODO string name="error_name_exists">Existing project</string -->
-    <!-- TODO string name="error_name_invalid">Invalid project name</string -->
+    <string name="error_name_exists">Existujúci projekt</string>
+    <string name="error_name_invalid">Nevhodné meno projektu</string>
     <string name="error_name_required">Vyžaduje sa meno</string>
+	
     <string name="error_dir_exists">Adresár už existuje</string>
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Vyžaduje sa referenčný bod</string>
@@ -291,7 +292,7 @@
     <string name="bad_line">Nesprávny typ riadku</string>
     <string name="bad_point">Nesprávny typ bodu</string>
 
-    <!-- TODO string name="no_audio">No audio record</string -->
+    <string name="no_audio">Žiadna Audio nahrávka</string>
     <string name="no_bt">Nie je Bluetooth</string>
     <string name="no_calib">Žiadna kalibrácia</string>
     <string name="no_calib_check">Bez kalibrácie - Kontrolných meraní kalibrácie</string>
@@ -326,7 +327,7 @@
     <string name="menu_3d">3D</string>
     <string name="menu_about">O PROGRAME</string>
     <string name="menu_area">OBLASŤ</string>
-    <!-- TODO string name="menu_audio">AUDIO</string -->
+    <string name="menu_audio">AUDIO</string>
     <!-- UNUSED string name="menu_attach">CONNECT</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
@@ -500,8 +501,8 @@
     <string name="survey_exists">Mapovanie už existuje</string>
     <!-- UNUSED string name="survey_date">yyyy.mm.dd</string -->
     <string name="survey_delete">Vymazať mapovanie ?</string>
-    <!-- TODO string name="survey_move">Move shots to survey %1$s ?</string -->
-    <string name="survey_split">Rozdeliť mapovanie ?</string>
+    <string name="survey_move">Presunúť zámery k Mapovaniu %1$s ?</string>
+    <string name="survey_split">Rozdeliť Mapovanie ?</string>
     <string name="survey_not_attached">VAROVANIE: Nepripojené merania</string>
     <string name="survey_not_extend">VAROVANIE: Nenastavená Smerová orientácia</string>
     <string name="survey_not_attached_extend">VAROVANIE: Nepripojené merania a Nenastavená Smerová orientácia</string>
@@ -528,7 +529,7 @@
     <string name="name">Názov</string>
     <string name="team">Merací tím</string>
     <string name="init_station">Začiatočné staničenie</string>
-    <!-- TODO string name="second_device">second device</string -->
+    <string name="second_device">Druhé zariadenie</string>
     <string name="start_station">Začiatočné staničenie [%1$s]</string>
     <!-- UNUSED string name="toggle_device">Toggle device calibration mode</string -->
     <string name="toggle_failed">Zlyhalo prepnutie režimu DistaX kalibrácia/meranie</string>
@@ -578,7 +579,7 @@
     <string name="stat_angle_error">Uhlové chyby %1$.2f ± %2$.2f"</string>
     <string name="shot_title">Meranie %1$s - %2$s"</string>
     <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f"</string>
-    <!-- TODO string name="survey_split_move_title">Survey split/move</string -->
+    <string name="survey_split_move_title">Mapovanie rozdeliť/presunúť</string>
 
     <string name="survey_stat_duplicate">Opakované zámery (počet-dĺžka) %1$d %2$.1f %3$s</string>
     <string name="survey_stat_splay">Pomocné zámery %1$d</string>
@@ -609,7 +610,7 @@
     <!-- UNUSED string name="ask_close_survey">Close survey?</string -->
     <string name="ask_gps_service">Nastaviť službu GPS?</string>
     <string name="ask_backups_clear">Vymazať zálohy Nákresov?</string>
-    <!-- TODO string name="ask_manual_update">Update user manual translation?\nCurrent v. %1$d Installed v. %2$d</string -->
+    <string name="ask_manual_update">Aktualizovať Preklad používateľskej príručky?\nSúčašná v. %1$d Inštalovaná v. %2$d</string>
 
     <!-- UNUSED string name="button_add"       >Add       </string -->
     <!-- TODO string name="button_apply"     >Apply</string -->
@@ -640,7 +641,7 @@
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Nákres</string>
     <string name="button_more"    >Viac</string>
-    <!-- TODO string name="button_move"    >Move</string -->
+    <string name="button_move"    >Posun</string>
     <string name="button_next"    >Ďalší</string>
     <string name="button_prev"    >Predchádzajúci</string>
     <string name="button_new"     >Nový scrap</string>
@@ -718,7 +719,7 @@
     <string name="popup_do_gm_data">Zámera kalibrácie</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
-    <!-- TODO string name="btn_export">Export</string -->
+    <string name="btn_export">Export</string>
     <string name="btn_import">Importovať</string>
     <string name="btn_install">Inštalovať</string>
 
@@ -749,24 +750,24 @@
     <string name="flip_shots">Obrátiť aj zámery (nezaškrtnuté otočí len krezbu)</string>
     <string name="copy_items">Kopírovanie položiek</string>
 
-    <!-- TODO string name="man_preface">Preface</string -->
-    <!-- TODO string name="man_intro">1. Introduction</string -->
-    <!-- TODO string name="man_main">2. Main window</string -->
-    <!-- TODO string name="man_device">3. Device window</string -->
-    <!-- TODO string name="man_calib">4. Calibration window</string -->
-    <!-- TODO string name="man_gm">5. Calibration data</string -->
-    <!-- TODO string name="man_survey">6. Survey data</string -->
-    <!-- TODO string name="man_shot">7. Shot list</string -->
-    <!-- TODO string name="man_info">8. Survey info</string -->
-    <!-- TODO string name="man_sketch">9. Sketch window</string -->
-    <!-- TODO string name="man_draw">10. Sketch drawing</string -->
-    <!-- TODO string name="man_xsection">11. Cross-sections</string -->
-    <!-- TODO string name="man_overview">12. Overview window</string -->
-    <!-- TODO string name="man_export">13. Import/export</string -->
-    <!-- TODO string name="man_project">14. Cave projects</string -->
-    <!-- TODO string name="man_threed">15. 3D viewer</string -->
-    <!-- TODO string name="man_index">16. Index</string -->
-    <!-- TODO string name="man_website">* Website</string -->
+    <string name="man_preface">Preface</string>
+    <string name="man_intro">1. Introduction</string>
+    <string name="man_main">2. Main window</string>
+    <string name="man_device">3. Device window</string>
+    <string name="man_calib">4. Calibration window</string>
+    <string name="man_gm">5. Calibration data</string>
+    <string name="man_survey">6. Survey data</string>
+    <string name="man_shot">7. Shot list</string>
+    <string name="man_info">8. Survey info</string>
+    <string name="man_sketch">9. Sketch window</string>
+    <string name="man_draw">10. Sketch drawing</string>
+    <string name="man_xsection">11. Cross-sections</string>
+    <string name="man_overview">12. Overview window</string>
+    <string name="man_export">13. Import/export</string>
+    <string name="man_project">14. Cave projects</string>
+    <string name="man_threed">15. 3D viewer</string>
+    <string name="man_index">16. Index</string>
+    <string name="man_website">* Website</string>
 
     <string name="help_help">Táto pomoc</string>
     <!-- UNUSED string name="help_manual">User manual</string -->
@@ -774,7 +775,7 @@
     <string name="help_measure_type">Metódy merania: jednotlivo / viacnásobne</string>
     <string name="help_measure_undo">Späť</string>
     
-    <!-- TODO string name="help_audio">Audio records list</string -->
+    <string name="help_audio">Zoznam Audio nahrávok</string>
     <string name="help_backups">Vymazať zálohy Nákresov</string>
     <string name="help_calib_check">Kalibrácia - Kontrolné merania</string>
     <string name="help_close">Zavrieť okno</string>
@@ -789,7 +790,7 @@
     <string name="help_add_topodroid">Začať nové Mapovanie</string>
     <string name="help_import">Importovať zip súbor alebo meračský súbor</string>
     <string name="help_symbol">Pridať Symboly do Palety</string>
-    <!-- TODO string name="help_therion">Cave project manager</string -->
+    <string name="help_therion">Projekt Manager</string>
     <!-- UNUSED string name="help_database">Database viewer app (SQliteViewer)</string -->
     <string name="help_prefs">Nastavenia</string>
     <string name="help_log">Nastaviť možnosti záznamu log-u</string>
@@ -837,8 +838,8 @@
     <string name="help_eraser">Režim mazania</string>
     <string name="help_select_mode">Položky na výber - indikácia</string>
     <string name="help_erase_mode">Položky na výber - mazanie</string>
-    <!-- TODO string name="help_erase_size">Rozsah výberu objektov/gumy [S/M/L]</string -->
-    <!-- TODO string name="help_select_size">Select tool size [S/M/L]</string -->
+    <string name="help_erase_size">Rozsah výberu objektov/gumy [S/M/L]</string>
+    <string name="help_select_size">Vyber veľkosť nástroja [S/M/L]</string>
     <string name="help_previous">Prejsť na predchádzajúci objekt vo výbere</string>
     <string name="help_next">Prejsť na nasledujúci objekt vo výbere</string>
     <string name="help_recover">Obnoviť nákres zo zálohy</string>
@@ -878,35 +879,35 @@
     <string name="help_compute">Vypočítať kalibráciu</string>
     <string name="help_write">Zapísať kalibráčné koeficienty do DistaX</string>
 
-    <!-- TODO string name="help_add_project">Add cave project</string -->
-    <!-- TODO string name="help_add_surveys">Add surveys</string -->
-    <!-- TODO string name="help_drop_surveys">Drop surveys</string -->
-    <!-- TODO string name="help_view_surveys">Display surveys</string -->
-    <!-- TODO string name="help_view_equates">List equates</string -->
-    <!-- TODO string name="help_export_config">Export project</string -->
-    <!-- TODO string name="help_delete_config">Delete project</string -->
-    <!-- TODO string name="help_add_equate">Add surveys equate</string -->
-    <!-- TODO string name="help_equates">List surveys equates</string -->
+    <string name="help_add_project">Pridaj Projekt</string>
+    <string name="help_add_surveys">Pridač Mapovania</string>
+    <string name="help_drop_surveys">Zahodiť Mapovania</string>
+    <string name="help_view_surveys">Zobraziť Mapovania</string>
+    <string name="help_view_equates">Porovnanie</string>
+    <string name="help_export_config">Export Projektu</string>
+    <string name="help_delete_config">Vymazať Projekt</string>
+    <string name="help_add_equate">Pridať Mapovania na porovnanie</string>
+    <string name="help_equates">Zoznam porovnaní</string>
 
-    <!-- TODO string name="export_bgcolor">Background color</string -->
-    <!-- TODO string name="export_config">Config file</string -->
-    <!-- TODO string name="export_csv_rawdata">Raw data</string -->
-    <!-- TODO string name="export_dxf_blocks">DXF blocks</string -->
-    <!-- TODO string name="export_georeference">Georeference</string -->
-    <!-- TODO string name="export_grid">Grid</string -->
-    <!-- TODO string name="export_linedir">Line direction</string -->
-    <!-- TODO string name="export_lrud">LRUD</string -->
-    <!-- TODO string name="export_lrud_from">LRUD at FROM station</string -->
-    <!-- TODO string name="export_maps">Maps before data</string -->
-    <!-- TODO string name="export_prefix">Cave-prefix in station names</string -->
-    <!-- TODO string name="export_roundtrip">Roundtrip</string -->
-    <!-- TODO string name="export_scale_png">Resolution</string -->
-    <!-- TODO string name="export_scale_th">Scale 1 :</string -->
-    <!-- TODO string name="export_splays">Splays</string -->
-    <!-- TODO string name="export_splays_named">Named splays</string -->
-    <!-- TODO string name="export_stations">Stations</string -->
-    <!-- TODO string name="export_swap_lr">Swap L/R</string -->
-    <!-- TODO string name="export_xvi">Xvi images</string -->
+    <string name="export_bgcolor">Biele pozadie</string>
+    <string name="export_config">Config súbor</string>
+    <string name="export_csv_rawdata">Surové dáta</string>
+    <string name="export_dxf_blocks">DXF blocks</string>
+    <string name="export_georeference">Georeferencia</string>
+    <string name="export_grid">Mriežka</string>
+    <string name="export_linedir">Smer Čiary</string>
+    <string name="export_lrud">LRUD</string>
+    <string name="export_lrud_from">LRUD na POČIATOČNOM staničení</string>
+    <string name="export_maps">Mapy pred dátami</string>
+    <string name="export_prefix">Cave-prefix v staničeniach</string>
+    <string name="export_roundtrip">Roundtrip</string>
+    <string name="export_scale_png">Rozlíšenie</string>
+    <string name="export_scale_th">Mierka 1 :</string>
+    <string name="export_splays">Pomocné zámery</string>
+    <string name="export_splays_named">Pomenované pomocné zámery</string>
+    <string name="export_stations">Staničenia</string>
+    <string name="export_swap_lr">Vymeniť L/R</string>
+    <string name="export_xvi">Xvi obrázky</string>
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
     <!-- UNUSED string name="export_station_stroke">Station stroke</string -->
@@ -923,14 +924,14 @@
     <string name="audio_overwrite">Prepísať ?</string>
     <!-- UNUSED string name="playing">Playing %1$s</string -->
   
-    <!-- TODO string name="import_functional">Import only functional settings</string -->
+    <string name="import_functional">Import - Iba Funkčné Nastavenia</string>
     <string name="import_lrud">Importovanie LRUD</string>
     <string name="import_leg_first">Hlavné zámery pred LRUD pomocnými zámerami</string>
     <string name="import_diving_datamode">Potápačský mód</string>
     
     <string name="title_azimut">Smerová orientácia</string>
     <string name="title_audio">Zvukový komentár</string>
-    <!-- TODO string name="title_audio_list">Audio records</string -->
+    <string name="title_audio_list">Audio nahrávky</string>
     <string name="title_calib">Kalibrácie</string>
     <string name="title_calib_check">Kalibrácia - Kontrolné merania</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->
@@ -985,11 +986,11 @@
     <string name="title_settings_svx">Survex nastavenia Exportu</string>
     <string name="title_settings_th">Therion nastavenia Exportu</string>
     <string name="title_settings_dat">Compass nastavenia Exportu</string>
-    <!-- TODO string name="title_settings_csx">cSurvey export settings</string -->
+    <string name="title_settings_csx">cSurvey nastavenia Exportu</string>
     <string name="title_settings_tro">VisualTopo nastavenia Exportu</string>
     <string name="title_settings_svg">SVG nastavenia Exportu</string>
     <string name="title_settings_dxf">DXF nastavenia Exportu</string>
-    <!-- TODO string name="title_settings_shp">Shapefile export settings</string -->
+    <string name="title_settings_shp">Shapefile nastavenia Exportu</string>
     <string name="title_settings_png">PNG nastavenia Exportu</string>
     <string name="title_settings_kml">KML nastavenia Exportu</string>
 
@@ -1031,6 +1032,10 @@
     <string name="title_import_tro">VisualTopo možnosti Importu</string>
     <string name="title_import_dat">Compass možnosti Importu</string>
 
+  <string name="exported_settings">Exportované Nastavenia %1$s</string>
+  <string name="imported_settings">Importované Nastavenia</string>
+  <string name="imported_settings_failed">Chyba pri Importe Nastavení</string>
+  <string name="export_settings_failed">Chyba pri Exporte Nastavení</string>
   <string name="pref_export_settings">EXPORT NASTAVENÍ do súboru</string>
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
@@ -1047,6 +1052,7 @@
   <!-- DO NOT TRANSLATE string name="pref_cat_exportshp" translatable="false">Shapefile</string -->
   <!-- DO NOT TRANSLATE string name="pref_cat_exportpng" translatable="false">PNG</string -->
   <!-- DO NOT TRANSLATE string name="pref_cat_exportkml" translatable="false">KML/GeoJSON</string -->
+  <!-- DO NOT TRANSLATE string name="pref_cat_exportcsx" translatable="false">cSurvey</string -->
   <!-- DO NOT TRANSLATE string name="pref_cat_exportcsv" translatable="false">CSV</string -->
  
   <string name="pref_cat_calib">NASTAVENIA KALIBRÁCIE</string>
@@ -1081,8 +1087,8 @@
   <string name="pref_export_plot_title"> Formát exportu - nákresu</string>
   <string name="pref_export_plot_summary">Predvolený formát exportu nákresu</string>
 
-  <!-- TODO string name="pref_therion_config_title">Therion config file</string -->
-  <!-- TODO string name="pref_therion_config_summary">Create Therion config file</string -->
+  <string name="pref_therion_config_title">Therion config súbor</string>
+  <string name="pref_therion_config_summary">Vytvoriť Therion config súbor</string>
   <string name="pref_therion_maps_title">Therion mapy ako prvé</string>
   <string name="pref_therion_maps_summary">Therion mapy pred dátami</string>
   <string name="pref_extra_buttons_title">Úroveň príkazov</string>
@@ -1091,6 +1097,8 @@
   <string name="pref_size_buttons_summary">Veľkosť ikon tlačidiel</string>
   <string name="pref_with_sensors_title">Sensory</string>
   <string name="pref_with_sensors_summary">Povolí zaznamenávanie dát zo sensorov smartphonu</string>
+  <!-- UNUSED string name="pref_tdmanager_title">TdManager</string -->
+  <!-- UNUSED string name="pref_tdmanager_summary">Use TdManager</string -->
   <string name="pref_with_android_azimuth_title">Android Kompas</string>
   <string name="pref_with_android_azimuth_summary">Povolí používanie interného kompasu Android zariadenia</string>	
   <string name="pref_with_levels_title">Vrstvy</string>
@@ -1147,17 +1155,17 @@
   <string name="pref_svg_labelstroke_title">SVG, šírka textu</string>
   <string name="pref_svg_labelstroke_summary">SVG: šírka textu</string>
   <string name="pref_svg_linestroke_title">SVG, line stroke</string>
-  <!-- TODO string name="pref_svg_linestroke_summary">SVG: line stroke</string -->
-  <!-- TODO string name="pref_svg_gridstroke_title">SVG, grid stroke</string -->
-  <!-- TODO string name="pref_svg_gridstroke_summary">SVG: grid stroke</string -->
-  <!-- TODO string name="pref_svg_shotstroke_title">SVG, shot stroke</string -->
-  <!-- TODO string name="pref_svg_shotstroke_summary">SVG: shot stroke</string -->
-  <!-- TODO string name="pref_svg_linedirstroke_title">SVG, orientation stroke</string -->
-  <!-- TODO string name="pref_svg_linedirstroke_summary">SVG: orientation stroke</string -->
-  <!-- TODO string name="pref_svg_line_dir_title">SVG line orientation</string -->
-  <!-- TODO string name="pref_svg_line_dir_summary">SVG: line orientation</string -->
-  <!-- TODO string name="pref_svg_stationsize_title">Station size</string -->
-  <!-- TODO string name="pref_svg_stationsize_summary">Station names text size</string -->
+  <string name="pref_svg_linestroke_summary">Šírka Čiar</string>
+  <string name="pref_svg_gridstroke_title">Mriežka</string>
+  <string name="pref_svg_gridstroke_summary">Šírka čiar Mriežky</string>
+  <string name="pref_svg_shotstroke_title">Bod</string>
+  <string name="pref_svg_shotstroke_summary">Širka bodu</string>
+  <string name="pref_svg_linedirstroke_title">Značka orientovania</string>
+  <string name="pref_svg_linedirstroke_summary">Dĺžka orientovanej značky, ktorá bude pridaná k Čiaram</string>
+  <string name="pref_svg_line_dir_title">Orientované Čiary</string>
+  <string name="pref_svg_line_dir_summary">Pridá značku k "orientovaným" Čiarám</string>
+  <string name="pref_svg_stationsize_title">Veľkosť staničenia</string>
+  <string name="pref_svg_stationsize_summary">Veľkosť názvu Staničení</string>
   <string name="pref_kml_stations_title">KML staničenia</string>
   <string name="pref_kml_stations_summary">Pridanie staničení do exportu KML</string>
   <string name="pref_kml_splays_title">KML pomocné zámery</string>
@@ -1188,8 +1196,8 @@
   <string name="pref_conn_mode_summary">Režim sťahovania dát</string>
   <string name="pref_auto_reconnect_title">Automatické pripojenie DistoX</string>
   <string name="pref_auto_reconnect_summary">Automaticky opätovne pripojí DistoX v Nepretržitom režime sťahovania dát pri strate spojenia</string>
-  <!-- TODO string name="pref_second_distox_title">Two-DistoX survey</string -->
-  <!-- TODO string name="pref_second_distox_summary">Surveying with two DistoX</string -->
+  <string name="pref_second_distox_title">Dvakrát DistoX Mód</string>
+  <string name="pref_second_distox_summary">Mapovanie spoločne s dvoma DistoX prístrojmi</string>
   <string name="pref_auto_pair_title">Automatické pripojenie pri štarte</string>
   <string name="pref_auto_pair_summary">Automatické pripojenie DistaX pri zapnutí Topodroidu a DistaX</string>
   <string name="pref_head_tail_title">Počet nových údajov</string>
@@ -1234,6 +1242,8 @@
   <string name="pref_section_splay_message">Pomocné zámery zvierajúce väčší ako tento uhol sú v reze čiarkované</string>
   <string name="pref_data_backup_title">Automatické exportovanie</string>
   <string name="pref_data_backup_summary">Automatický export údajov (vyžaduje predvolený formát)</string>
+  <string name="pref_editable_stations_title">Editovateľné Staničenia</string>
+  <string name="pref_editable_stations_summary">Umožní prepisovať Číslovanie Staničení</string>	
   <string name="pref_zipped_symbols_title">Zip archív Symbolov</string>
   <string name="pref_zipped_symbols_summary">Uložiť/Načítať Symboly do/zo zip archívu</string>
   <string name="pref_fixed_origin_title">Predvolené číslo meračského bodu v Nákrese</string>
@@ -1395,8 +1405,8 @@
   <string name="pref_auto_xsections_summary">Pridá automaticky priečne rezy do uloženia/exportu [csx/svg/dxf/xvi]</string>
   <string name="pref_saved_stations_title">Uložené meračské body</string>
   <string name="pref_saved_stations_summary">Zafarbí číslo uložených meračských bodov na žlto (oranžovo)</string>	
-  <!-- TODO string name="pref_legonly_update_title">Legs-only refresh</string -->
-  <!-- TODO string name="pref_legonly_update_summary">Redraw midline only on legs download</string -->
+  <string name="pref_legonly_update_title">Obnovenie iba pri Hlavných zámerách</string>
+  <string name="pref_legonly_update_summary">Prekreslí čiary iba keď sa stiahne Hlavná zámera</string>
   <string name="pref_loopClosure_title">Vyrovnanie polygoného ťahu</string>
   <string name="pref_loopClosure_summary">Výber možností Vyrovnania polygoného ťahu</string>
   <!-- UNUSED string name="pref_splayExtend_title">Estimate splay extend</string -->
@@ -1420,8 +1430,8 @@
 
   <string name="pref_picker_type_title">Paleta v režime kreslenia</string>
   <string name="pref_picker_type_summary">Spôsob zobrazenia výberu z Palety v režime kreslenia</string>
-  <!-- TODO string name="pref_triple_toolbar_title">Triple bottom bar</string -->
-  <!-- TODO string name="pref_triple_toolbar_summary">Triple drawing tools bar</string -->
+  <string name="pref_triple_toolbar_title">Tri Mriežky na Ploche</string>
+  <string name="pref_triple_toolbar_summary">Zobrazí zjednodušené tri mriežky (Body, Čiary, Plochy) priamo na pracovnej ploche v režime kreslenia</string>
   <!-- UNUSED string name="pref_section_stations_title">X-Section stations</string -->
   <!-- UNUSED string name="pref_section_stations_summary">X-Section reference stations</string -->
   <string name="pref_station_size_title">Veľkosť názvu meračského bodu</string>
@@ -1432,6 +1442,8 @@
   <string name="pref_side_drag_summary">Povolí bočný presun krezby v nákrese - po povolení voľby Bočný Posun v režime Kreslenia</string>
   <string name="pref_unit_grid_title">Jednotky nákresu</string>
   <string name="pref_unit_grid_summary">Výber Jednotiek mriežky pri kreslení</string>
+  <string name="pref_unit_measure_title">Jednotky Pravítka</string>
+  <string name="pref_unit_measure_summary">Výber Jednotiek, ktoré používa Pravítko pri meraní</string>
   <!-- UNUSED string name="pref_recent_nr_title">Najpoužívanejšie Symboly</string -->
   <!-- UNUSED string name="pref_recent_nr_summary">Počet symbolov, ktoré sa nedávno použili na zobrazenie v nástroji na výber</string -->
   <string name="pref_area_border_title">Viditeľnosť hraníc Oblastí</string> 
@@ -1522,7 +1534,6 @@ DO NOT REMOVE THIS LINE -->
     <string name="perm_camera">\nKamera</string>
     <string name="perm_microphone">\nMikrofón</string>
 
-
     <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">
 \nTopoDroid je open-source aplikácia pre Android, ktorá umožňuje mapovanie jaskýň pomocou DistaX
@@ -1558,45 +1569,44 @@ DO NOT REMOVE THIS LINE -->
    <string name="firmware_file_uploaded">Firmware  %1$s úspešne nahraný %2$d / %3$d</string>
    <string name="firmware_not_supported">Zariadenie nepodporuje funkcie firmwéru</string>
 
-    <!-- TODO string name="project">Project %1$s</string -->
-    <!-- TODO string name="no_editor">Editor not found</string -->
-    <!-- TODO string name="no_file">File not found</string -->
-    <!-- TODO string name="no_extra">Missing file extra</string -->
-    <!-- TODO string name="no_path">Missing filepath</string -->
-    <!-- TODO string name="no_equate">No equate</string -->
-    <!-- TODO string name="no_surveys">No surveys</string -->
-    <!-- TODO string name="no_tdconfig">Missing tdconfig file</string -->
-    <!-- TODO string name="no_th_file">No Therion file</string -->
-    <!-- TODO string name="file_exists">File exists</string -->
-    <!-- TODO string name="file_create_fail">File create fail</string -->
-    <!-- TODO string name="oom">Warning. Out of memory</string -->
+   <string name="project">Projekt %1$s</string>
+    <string name="no_editor">Editor nenájdený</string>
+    <string name="no_file">Súbor nenájdený</string>
+    <string name="no_extra">Chýba ďalší súbor</string>
+    <string name="no_path">Chýba cesta k súboru</string>
+    <string name="no_equate">Žiadne porovnanie</string>
+    <string name="no_surveys">Žiadne Mapovania</string>
+    <string name="no_tdconfig">Chýba tdconfig súbor</string>
+    <string name="no_th_file">Žiadny Therion súbor</string>
+    <string name="file_exists">Súbor existuje</string>
+    <string name="file_create_fail">Súbor spôsobuje zlyhanie</string>
+    <string name="oom">Varovanie. Nedostatok pamäte</string>
 
-    <!-- TODO string name="ask_delete_tdconfig">Delete TdConfig file</string -->
-    <!-- TODO string name="ask_remove_equate">Remove equate %1$s ?</string -->
-    <!-- TODO string name="equate_no_station">No station selected</string -->
-    <!-- TODO string name="equate_no_stations">Too few stations</string -->
-    <!-- TODO string name="equate_no_nearby">No station nearby</string -->
+    <string name="ask_delete_tdconfig">Vymazať TdConfig súbor</string>
+    <string name="ask_remove_equate">Odstrániť porovnanie %1$s ?</string>
+    <string name="equate_no_station">Nie je vybrané žiadne Staničenie</string>
+    <string name="equate_no_stations">Príliš málo Staničení</string>
+    <string name="equate_no_nearby">V blízkosti nie je žiadne Staničenie</string>
 
-    <!-- TODO string name="menu_new">NEW</string -->
-    <!-- TODO string name="menu_equate">ADD EQUATE</string -->
-    <!-- TODO string name="menu_equates">EQUATES</string -->
-    <!-- TODO string name="menu_save">SAVE</string -->
+    <string name="menu_new">NOVÝ</string>
+    <string name="menu_equate">PRIDAJ POROVNANIE</string>
+    <string name="menu_equates">POROVNANIA</string>
+    <string name="menu_save">ULOŽIŤ</string>
 
-    <!-- TODO string name="overwrite">overwrite</string -->
+    <string name="overwrite">Prepísať</string>
 
-    <!-- TODO string name="title_help">TopoDroid Manager v. %1$s</string -->
-    <!-- TODO string name="title_export_settings">Settings import/export</string -->
-    <!-- TODO string name="title_export">Export project as &#8230;</string -->
-    <!-- TODO string name="title_equates">Project Equates</string -->
-    <!-- TODO string name="title_equate_new">Add equate &#8230;</string -->
-    <!-- TODO string name="title_cwd">Current Work Directory</string -->
-    <!-- TODO string name="title_settings">TdManager Settings</string -->
-    <!-- TODO string name="title_drop">Drop surveys ?</string -->
-    <!-- TODO string name="title_tdconfig">Enter project name</string -->
-    <!-- TODO string name="title_surveys">Surveys</string -->
+    <string name="title_help">TopoDroid Manager v. %1$s</string>
+    <string name="title_export_settings">Nastavenia Import/Export</string>
+    <string name="title_export">Export projekt ako &#8230;</string>
+    <string name="title_equates">Projekt Porovnanie</string>
+    <string name="title_equate_new">Pridaj Porovnanie &#8230;</string>
+    <string name="title_cwd">Aktuálny Pracovný Adresár</string>
+    <string name="title_settings">TdManager Nastavenia</string>
+    <string name="title_drop">Zahodiť Mapovania ?</string>
+    <string name="title_tdconfig">Zadaj Meno projektu</string>
+    <string name="title_surveys">)Mapovania</string>
 
-    <!-- TODO string name="exported">Saved file %1$s</string -->
-  <!-- TODO string name="imported_settings">Imported settings</string -->
-    <!-- TODO string name="export_failed">Failed export</string -->
+    <string name="exported">Uložený súbor %1$s</string>
+    <string name="export_failed">Export zlyhal</string>
 
 </resources>
