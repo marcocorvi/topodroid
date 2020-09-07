@@ -6,7 +6,7 @@
     <string name="user_man_fail">无法安装用户手册译本</string>
 
     <string name="app_name">TopoDroid</string>
-    <!-- TODO string name="tdm_title">TopoDroid Manager</string -->
+    <string name="tdm_title">TopoDroid管理</string>
     <string name="double_back">再次点击返回键退出</string>
 
     <string name="new_survey_label">新建测量</string>
@@ -239,8 +239,8 @@
     <string name="error_invalid_name">无效名</string>
     <string name="error_lat_required">输入纬度</string>
     <string name="error_long_required">输入经度</string>
-    <!-- TODO string name="error_name_exists">Existing project</string -->
-    <!-- TODO string name="error_name_invalid">Invalid project name</string -->
+    <string name="error_name_exists">项目已存在</string>
+    <string name="error_name_invalid">无效的项目名称</string>
     <string name="error_name_required">输入名称</string>
     <string name="error_dir_exists">目录已经存在</string>
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
@@ -291,7 +291,7 @@
     <string name="bad_line">错误的线型</string>
     <string name="bad_point">错误的点型</string>
 
-    <!-- TODO string name="no_audio">No audio record</string -->
+    <string name="no_audio">无音频录音</string>
     <string name="no_bt">蓝牙未启动</string>
     <string name="no_calib">无校准</string>
     <string name="no_calib_check">无校准检测测量</string>
@@ -326,7 +326,7 @@
     <string name="menu_3d">3D</string>
     <string name="menu_about">关于</string>
     <string name="menu_area">区</string>
-    <!-- TODO string name="menu_audio">AUDIO</string -->
+    <string name="menu_audio">音频</string>
     <!-- UNUSED string name="menu_attach">CONNECT</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
@@ -609,10 +609,10 @@
     <!-- UNUSED string name="ask_close_survey">Close survey?</string -->
     <string name="ask_gps_service">设置GPS服务?</string>
     <string name="ask_backups_clear">删除草图备份?</string>
-    <!-- TODO string name="ask_manual_update">Update user manual translation?\nCurrent v. %1$d Installed v. %2$d</string -->
+    <string name="ask_manual_update">升级用户手册翻译?\n现在安装 v. %1$d 已经安装 v. %2$d</string>
 
     <!-- UNUSED string name="button_add"       >Add       </string -->
-    <!-- TODO string name="button_apply"     >Apply</string -->
+    <string name="button_apply"     >应用</string>
     <string name="button_back"      >返回      </string>
     <string name="button_cancel"    >取消    </string>
     <string name="button_change"    >更换    </string>
@@ -719,7 +719,7 @@
     <string name="popup_do_gm_data">校准测量</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
-    <!-- TODO string name="btn_export">Export</string -->
+    <string name="btn_export">输出</string>
     <string name="btn_import">输入</string>
     <string name="btn_install">安装</string>
 
@@ -775,7 +775,7 @@
     <string name="help_measure_type">测量模式:定点或折线</string>
     <string name="help_measure_undo">删除最后一个折线点</string>
     
-    <!-- TODO string name="help_audio">Audio records list</string -->
+    <string name="help_audio">音频录音列表</string>
     <string name="help_backups">删除草图备份</string>
     <string name="help_calib_check">校准检验测量</string>
     <string name="help_close">关闭窗口</string>
@@ -790,7 +790,7 @@
     <string name="help_add_topodroid">新建测量/新建校准</string>
     <string name="help_import">输入压缩的存档或者测量文件</string>
     <string name="help_symbol">绘图工具设置</string>
-    <!-- TODO string name="help_therion">Cave project manager</string -->
+    <string name="help_therion">洞穴项目管理</string>
     <!-- UNUSED string name="help_database">Database viewer app (SQliteViewer)</string -->
     <string name="help_prefs">编辑参考选项</string>
     <string name="help_log">日志偏好设置</string>
@@ -879,14 +879,14 @@
     <string name="help_compute">计算校准</string>
     <string name="help_write">将校准系数写入DistoX</string>
 
-    <!-- TODO string name="help_add_project">Add cave project</string -->
-    <!-- TODO string name="help_add_surveys">Add surveys</string -->
-    <!-- TODO string name="help_drop_surveys">Drop surveys</string -->
-    <!-- TODO string name="help_view_surveys">Display surveys</string -->
-    <!-- TODO string name="help_view_equates">List equates</string -->
-    <!-- TODO string name="help_export_config">Export project</string -->
-    <!-- TODO string name="help_delete_config">Delete project</string -->
-    <!-- TODO string name="help_add_equate">Add surveys equate</string -->
+    <!-- TODO string name="help_add_project">添加洞穴项目</string -->
+    <!-- TODO string name="help_add_surveys">添加测量</string -->
+    <!-- TODO string name="help_drop_surveys">终止测量</string -->
+    <!-- TODO string name="help_view_surveys">显示测量项目</string -->
+    <!-- TODO string name="help_view_equates">显示相同</string -->
+    <!-- TODO string name="help_export_config">输出项目</string -->
+    <!-- TODO string name="help_delete_config">删除项目</string -->
+    <!-- TODO string name="help_add_equate">添加等同的测量</string -->
     <!-- TODO string name="help_equates">List surveys equates</string -->
 
     <!-- TODO string name="export_bgcolor">Background color</string -->
