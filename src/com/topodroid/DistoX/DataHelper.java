@@ -3133,6 +3133,7 @@ public class DataHelper extends DataSetObservable
         value = cursor.getString( 0 );
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } catch ( SQLiteException e ) { logError( "config update " + key + " " + value, e ); }
     } finally {
       if ( cursor != null && ! cursor.isClosed()) cursor.close();
     }
