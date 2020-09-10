@@ -44,6 +44,8 @@ import java.io.DataOutputStream;
 
 class DrawingCommandManager
 {
+  // FIXED_ZOOM static float gScale = 1.0f;
+
   private static final int BORDER = 20; // for the bitmap
   private int mMode = 0;  // command manager mode type (PLAN PROFILE SECTION OVERVIEW)
 
@@ -1115,6 +1117,8 @@ class DrawingCommandManager
 
     if( grids && mGridStack1 != null ) {
       synchronized( TDPath.mGridsLock ) {
+        // FIXED_ZOOM (fail) Matrix gMatrix = new Matrix( mMatrix );
+        // gMatrix.postScale( gScale, gScale );
         if ( mScale < 1 ) {
           for ( DrawingPath p1 : mGridStack1 ) p1.draw( canvas, mMatrix, mScale, mBBox );
         }
@@ -1122,6 +1126,7 @@ class DrawingCommandManager
           for ( DrawingPath p10 : mGridStack10 ) p10.draw( canvas, mMatrix, mScale, mBBox );
         }
         for ( DrawingPath p100 : mGridStack100 ) p100.draw( canvas, mMatrix, mScale, mBBox );
+
         if ( mNorthLine != null ) mNorthLine.draw( canvas, mMatrix, mScale, mBBox );
         if ( scaleRef && (mScaleRef != null)) mScaleRef.draw(canvas, zoom, mLandscape);
       }

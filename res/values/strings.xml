@@ -373,6 +373,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="menu_validate">VALIDATE</string>
     <string name="menu_zoom_fit">ZOOM FIT</string>
 
+    <!-- UNUSED FIXED_ZOOM string name="zoom_fixed">Fixed scale</string -->
+
     <string name="ble_scan_failed">BLE scan failed</string>
     <string name="ble_gatt_failure">BLE failure</string>
     <string name="ble_no_remote">No remote device</string>

@@ -473,6 +473,11 @@ public class DrawingWindow extends ItemDrawer
   static final float ZOOM_DEC = 1.0f/ZOOM_INC;
   private ZoomButtonsController mZoomBtnsCtrl = null;
   private boolean mZoomBtnsCtrlOn = false;
+ 
+  // FIXED_ZOOM
+  // private int mFixedZoom = 0; // 0= variable, 1= 1:100, 2= 1:200
+  // private static final float[] gZoom = { 1.0f, 0.10f, 0.20f, 0.30f, 0.40f, 0.50f };
+
   // FIXME_ZOOM_CTRL ZoomControls mZoomCtrl = null;
   // ZoomButton mZoomOut;
   // ZoomButton mZoomIn;
@@ -779,6 +784,7 @@ public class DrawingWindow extends ItemDrawer
   @Override
   public void onVisibilityChanged(boolean visible)
   {
+    // FIXED_ZOOM if ( mFixedZoom > 0 ) return;
     if ( mZoomBtnsCtrlOn && mZoomBtnsCtrl != null ) {
       mZoomBtnsCtrl.setVisible( visible || ( TDSetting.mZoomCtrl > 1 ) );
     }
@@ -793,6 +799,7 @@ public class DrawingWindow extends ItemDrawer
 
   private void changeZoom( float f ) 
   {
+    // FIXED_ZOOM if ( mFixedZoom > 0 ) return;
     float zoom = mZoom;
     mZoom     *= f;
     // Log.v( TopoDroidApp.TAG, "zoom " + mZoom );
@@ -802,6 +809,27 @@ public class DrawingWindow extends ItemDrawer
     // mZoomCtrl.hide();
     // if ( mZoomBtnsCtrlOn ) mZoomBtnsCtrl.setVisible( false );
   }
+
+  // FIXED_ZOOM
+  // int getFixedZoom() { return mFixedZoom; }
+  // 
+  // void setFixedZoom( int fixed_zoom )
+  // {
+  //   mFixedZoom = ( fixed_zoom < 0 )? 0 : ( fixed_zoom > 5 )? 5 : fixed_zoom;
+  //   DrawingCommandManager.gScale = gZoom[ mFixedZoom ];
+  //   if ( mFixedZoom > 0 ) {
+  //     int dpi = TopoDroidApp.getDisplayDensityDpi();
+  //     // 1 in = 2.54 cm
+  //     // float dp2mm = dpi / (mFixedZoom * 25.4f); // 25.4 is a scale of 2 cm : 10 m (1:500)
+  //     float dp2mm = dpi * mFixedZoom / 127.0f; // 50.8 is a scale of 2 cm : 2 m (1:100)
+  //     float zoom = 32 / dp2mm; // 32 = 40 / 1.25
+  //     // Log.v("DistoX-ZOOM", "set zoom " + mZoom + " -> " + zoom + " dpi " + dpi );
+  //     mOffset.x *= mZoom / zoom;
+  //     mOffset.y *= mZoom / zoom;
+  //     mZoom = zoom;
+  //     updateDisplay();
+  //   }
+  // }
 
   public void zoomIn()  { changeZoom( ZOOM_INC ); }
   public void zoomOut() { changeZoom( ZOOM_DEC ); }
@@ -1595,6 +1623,8 @@ public class DrawingWindow extends ItemDrawer
   private void switchZoomCtrl( int ctrl )
   {
     // Log.v("DistoX", "DEBUG switchZoomCtrl " + ctrl + " ctrl is " + ((mZoomBtnsCtrl == null )? "null" : "not null") );
+    // FIXED_ZOOM if ( mFixedZoom > 0 ) return;
+
     if ( mZoomBtnsCtrl == null ) return;
     mZoomBtnsCtrlOn = (ctrl > 0);
     switch ( ctrl ) {
@@ -3079,6 +3109,7 @@ public class DrawingWindow extends ItemDrawer
   public void checkZoomBtnsCtrl()
   {
     // if ( mZoomBtnsCtrl == null ) return; // not necessary
+    // FIXED_ZOOM if ( mFixedZoom > 0 ) return;
     if ( TDSetting.mZoomCtrl == 2 && ! mZoomBtnsCtrl.isVisible() ) {
       mZoomBtnsCtrl.setVisible( true );
     }
@@ -3618,7 +3649,7 @@ public class DrawingWindow extends ItemDrawer
     if ( mMode == MODE_DRAW ) bottom += ZOOM_TRANSLATION;
 
     if ( yc > bottom ) {
-      if ( mZoomBtnsCtrlOn && xc > mBorderInnerLeft && xc < mBorderInnerRight ) {
+      if ( /* (mFixedZoom == 0) && */ mZoomBtnsCtrlOn && xc > mBorderInnerLeft && xc < mBorderInnerRight ) {
         mTouchMode = MODE_ZOOM;
         mZoomBtnsCtrl.setVisible( true );
         // mZoomCtrl.show( );
@@ -5972,6 +6003,7 @@ public class DrawingWindow extends ItemDrawer
 
   private void doZoomFit()
   {
+    // FIXED_ZOOM if ( mFixedZoom > 0 ) return;
     // FIXME for big sketches this leaves out some bits at the ends
     // maybe should increse the bitmap bounds by a small factor ...
     RectF b = mDrawingSurface.getBitmapBounds();

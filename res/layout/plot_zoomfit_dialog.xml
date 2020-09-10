@@ -11,7 +11,7 @@
     android:text="@string/button_zoomfit"
     / -->
 
-  <LinearLayout android:id="@+id/layout1"
+  <LinearLayout android:id="@+id/layout_orientation"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" 
@@ -30,7 +30,29 @@
     / -->
   </LinearLayout>
 
-  <LinearLayout android:id="@+id/layout2"
+  <!-- FIXED_ZOOM LinearLayout android:id="@+id/layout_zoom"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:layout_marginTop="10pt" 
+    android:layout_marginBottom="10pt" 
+    >
+
+    <Button android:id="@+id/button_zoom"
+      style="@style/button_default"
+      android:text="@string/zoom_fixed"
+    />
+
+    <!- - CheckBox android:id="@+id/cb_zoom"
+    / - ->
+
+    <Spinner android:id="@+id/spin_zoom"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content" 
+    />
+  </LinearLayouti -->
+
+  <LinearLayout android:id="@+id/layout_station"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" 

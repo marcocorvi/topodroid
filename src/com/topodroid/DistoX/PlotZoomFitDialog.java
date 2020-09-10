@@ -26,9 +26,15 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.EditText;
+// import android.widget.CheckBox;
+import android.widget.Spinner;
+import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 
 class PlotZoomFitDialog extends MyDialog
-                               implements OnClickListener
+                        implements OnClickListener
+                                 // FIXED_ZOOM 
+                                 // , AdapterView.OnItemSelectedListener
 {
   private final DrawingWindow mParent;
   private Button mBtnPortrait;
@@ -36,6 +42,13 @@ class PlotZoomFitDialog extends MyDialog
   private Button mBtnStation;
   private EditText mETstation;
   // private Button mBtnZoomFit;
+
+  // FIXED_ZOOM
+  // private Button mBtnZoomFix = null;
+  // // private CheckBox mCBZoomFix = null;
+  // private Spinner mSpinZoom;
+  // private int mSelectedPos;
+  // private static final String[] mZooms = { "---", "1 : 100", "1 : 200", "1 : 300", "1 : 400", "1 : 500" };
 
   PlotZoomFitDialog( Context context, DrawingWindow parent )
   {
@@ -51,14 +64,14 @@ class PlotZoomFitDialog extends MyDialog
 
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
 
-    LinearLayout layout1 = (LinearLayout) findViewById( R.id.layout1 );
-    layout1.setMinimumHeight( size + 20 );
+    LinearLayout layout_orientation = (LinearLayout) findViewById( R.id.layout_orientation );
+    layout_orientation.setMinimumHeight( size + 20 );
     
     LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 0, 10, 20 ,10 );
 
     // mBtnZoomFit = new MyCheckBox( mContext, size, R.drawable.iz_zoomfit, R.drawable.iz_zoomfit );
     // mBtnZoomFit.setOnClickListener( this );
-    // layout1.addView( mBtnZoomFit );
+    // layout_orientation.addView( mBtnZoomFit );
     // mBtnZoomFit.setLayoutParams( lp );
 
     // ((Button) findViewById( R.id.button_zoomfit )).setOnClickListener( this );
@@ -69,16 +82,36 @@ class PlotZoomFitDialog extends MyDialog
     // if ( mParent.isLandscape() ) {
       mBtnPortrait = new MyCheckBox( mContext, size, R.drawable.iz_northup, R.drawable.iz_northup );
       mBtnPortrait.setOnClickListener( this );
-      layout1.addView( mBtnPortrait );
+      layout_orientation.addView( mBtnPortrait );
       mBtnPortrait.setLayoutParams( lp );
       // mBtnLandscape.setText( R.string.button_zoomfit );
     // } else {
       mBtnLandscape = new MyCheckBox( mContext, size, R.drawable.iz_northleft, R.drawable.iz_northleft );
       mBtnLandscape.setOnClickListener( this );
-      layout1.addView( mBtnLandscape );
+      layout_orientation.addView( mBtnLandscape );
       mBtnLandscape.setLayoutParams( lp );
       // mBtnPortrait.setText( R.string.button_zoomfit );
     // }
+
+    // FIXED_ZOOM
+    // if ( TDLevel.overExpert ) {
+    //   mBtnZoomFix = (Button) findViewById( R.id.button_zoom );
+    //   mBtnZoomFix.setOnClickListener( this );
+    //   // mCBZoomFix = (CheckBox) findViewById( R.id.cb_zoom );
+    //   // mCBZoomFix.setChecked( mParent.getFixedZoom() );
+    //   mSpinZoom = (Spinner)findViewById( R.id.spin_zoom );
+    //   mSpinZoom.setOnItemSelectedListener( this );
+    //   ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, mZooms );
+    //   mSpinZoom.setAdapter( adapter );
+    //   
+    //   mSelectedPos = mParent.getFixedZoom();
+    //   if ( mSelectedPos < 0 || mSelectedPos >= adapter.getCount() ) mSelectedPos = 0;
+    //   mSpinZoom.setSelection( mSelectedPos );
+    // } else { 
+    //   LinearLayout layout_zoom = (LinearLayout) findViewById( R.id.layout_zoom );
+    //   layout_zoom.setVisibility( View.GONE );
+    // }
+
     ((Button) findViewById( R.id.button_cancel )).setOnClickListener( this );
 
     mBtnStation  = (Button) findViewById( R.id.button_station );
@@ -87,6 +120,18 @@ class PlotZoomFitDialog extends MyDialog
   }
  
   // ---------------------------------------------------------------
+  // FIXED_ZOOM
+  // @Override
+  // public void onItemSelected( AdapterView av, View v, int pos, long id ) 
+  // {
+  //   mSelectedPos = pos;
+  // }
+  // 
+  // @Override
+  // public void onNothingSelected( AdapterView av ) 
+  // { 
+  //   mSelectedPos = -1;
+  // }
 
   @Override 
   public void onClick( View v ) 
@@ -101,6 +146,10 @@ class PlotZoomFitDialog extends MyDialog
         mParent.setOrientation( PlotInfo.ORIENTATION_LANDSCAPE );
       // } else if ( btn == mBtnZoomFit ) {
       //   mParent.doZoomFit();
+      // FIXED_ZOOM
+      // } else if ( TDLevel.overExpert && btn == mBtnZoomFix ) {
+      //   // mParent.setFixedZoom( mCBZoomFix.isChecked() );
+      //   mParent.setFixedZoom( (mSelectedPos < 0)? 0 : mSelectedPos );
       } else if ( btn == mBtnStation ) {
         String station = mETstation.getText().toString();
 	if ( station == null || station.length() == 0 ) {
