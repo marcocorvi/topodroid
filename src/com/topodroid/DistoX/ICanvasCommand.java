@@ -27,6 +27,7 @@ interface ICanvasCommand {
     void flipXAxis(float z);
     void shiftPathBy( float x, float y );
     void scalePathBy( float z, Matrix m );
+    void affineTransformPathBy( float[] mm, Matrix m );
     void computeBounds( RectF bounds, boolean b );
 
 }

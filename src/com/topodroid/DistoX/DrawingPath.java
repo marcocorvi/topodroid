@@ -327,6 +327,8 @@ public class DrawingPath extends RectF
 
   void scaleBy( float z, Matrix m ) { }
 
+  void affineTransformBy( float[] mm, Matrix m ) { }
+
   // by default does not rotate (return false)
   boolean rotateBy( float dy ) { return false; }
 
@@ -362,6 +364,33 @@ public class DrawingPath extends RectF
     bottom *= z;
   }
 
+  // x' = a x + b y + c
+  // y' = d x + e y + f
+  public void affineTransformPathBy( float[] mm, Matrix m )
+  {
+    float x  = mm[0] * x1 + mm[1] * y1 + mm[2];
+          y1 = mm[3] * x1 + mm[4] * y1 + mm[5];
+          x1 = x;
+          x  = mm[0] * x2 + mm[1] * y2 + mm[2];
+          y2 = mm[3] * x2 + mm[4] * y2 + mm[5];
+          x2 = x;
+          x  = mm[0] * cx + mm[1] * cy + mm[2];
+          cy = mm[3] * cx + mm[4] * cy + mm[5];
+          cx = x;
+    mPath.transform( m );
+    float xlt = mm[0] * left + mm[1] * top + mm[2];
+    float ylt = mm[3] * left + mm[4] * top + mm[5];
+    float xlb = mm[0] * left + mm[1] * bottom + mm[2];
+    float ylb = mm[3] * left + mm[4] * bottom + mm[5];
+    float xrt = mm[0] * right + mm[1] * top + mm[2];
+    float yrt = mm[3] * right + mm[4] * top + mm[5];
+    float xrb = mm[0] * right + mm[1] * bottom + mm[2];
+    float yrb = mm[3] * right + mm[4] * bottom + mm[5];
+    left   = (xlt < xlb)? xlt : xlb;
+    right  = (xrt > xrb)? xrt : xrb;
+    top    = (ylt < yrt)? ylt : yrt;
+    bottom = (ylb > yrb)? ylb : yrb;
+  }
 
   // this is used only by the Selection 
   float distanceToPoint( float x, float y )
@@ -373,6 +402,11 @@ public class DrawingPath extends RectF
   }
 
   // int type() { return mType; }
+
+  public void draw( Canvas canvas )
+  {
+    drawPath( mPath, canvas );
+  }
 
   public void draw( Canvas canvas, RectF bbox )
   {

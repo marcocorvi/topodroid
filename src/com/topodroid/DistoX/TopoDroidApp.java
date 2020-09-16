@@ -222,10 +222,10 @@ public class TopoDroidApp extends Application
   }
 
   // FIXED_ZOOM
-  // public static int getDisplayDensityDpi( )
-  // {
-  //   return Resources.getSystem().getDisplayMetrics().densityDpi;
-  // }
+  public static int getDisplayDensityDpi( )
+  {
+    return Resources.getSystem().getDisplayMetrics().densityDpi;
+  }
 
   // public int setListViewHeight( MyHorizontalListView listView )
   // {

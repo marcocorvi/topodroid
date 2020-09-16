@@ -73,6 +73,7 @@ class EraseCommand implements ICanvasCommand
   public void flipXAxis(float z) { } 
   public void shiftPathBy( float x, float y ) { }
   public void scalePathBy( float z, Matrix m ) { }
+  public void affineTransformPathBy( float[] mm, Matrix m ) { }
   public void computeBounds( RectF bounds, boolean b ) { }
   
   // public void undoCommand() 

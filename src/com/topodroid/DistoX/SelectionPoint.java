@@ -252,6 +252,22 @@ public class SelectionPoint
       mItem.scaleBy( z, m );
     }
   }
+
+  void affineTransformSelectionBy( float[] mm, Matrix m )
+  {
+    if ( mPoint != null ) {
+      // switch ( mMin ) {
+      //  case 1 : mPoint.shiftCP1By( dx, dy ); break;
+      //  case 2 : mPoint.shiftCP2By( dx, dy ); break;
+      //  default: mPoint.shiftBy( dx, dy ); break;
+      // }
+      mPoint.affineTransformBy( mm, m );
+      DrawingPointLinePath item = (DrawingPointLinePath)mItem;
+      item.retracePath();
+    } else if ( mItem.mType == DrawingPath.DRAWING_PATH_POINT ) {
+      mItem.affineTransformBy( mm, m );
+    }
+  }
  
   void setBucket( SelectionBucket bucket )
   {

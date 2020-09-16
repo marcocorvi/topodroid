@@ -1010,6 +1010,22 @@ class Scrap
     }
   }
 
+  void affineTransformDrawing( float[] mm, Matrix m )
+  {
+    if ( mCurrentStack != null ){
+      synchronized( TDPath.mCommandsLock ) {
+        for ( ICanvasCommand cmd : mCurrentStack ) {
+          cmd.affineTransformPathBy( mm, m );
+        }
+      }
+    }
+    if ( mSelection != null ) {
+      synchronized( TDPath.mSelectionLock ) {
+        mSelection.affineTransformSelectionBy( mm, m );
+      }
+    }
+  }
+
   /** insert points in the range of the selected point
    */
   void insertPointsHotItem()

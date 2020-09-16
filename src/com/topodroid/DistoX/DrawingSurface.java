@@ -525,6 +525,9 @@ class DrawingSurface extends SurfaceView
     mCommandManager2.resetFixedPaint( app, true,  paint ); 
   }
 
+  // FIXED_ZOOM
+  void setFixedZoom( boolean fixed_zoom ) { commandManager.setFixedZoom( fixed_zoom ); }
+
   // only for X-Sections autowalls
   List< DrawingPath > getSplays() { return commandManager.getSplays(); }
 
@@ -689,6 +692,8 @@ class DrawingSurface extends SurfaceView
   void shiftDrawing( float x, float y ) { commandManager.shiftDrawing( x, y ); }
 
   void scaleDrawing( float z ) { commandManager.scaleDrawing( z ); }
+
+  void affineTransformDrawing( float a, float b, float c, float d, float e, float f ) { commandManager.affineTransformDrawing( a,b,c, d,e,f ); }
 
   // ---------------------------------------------------------------------
 

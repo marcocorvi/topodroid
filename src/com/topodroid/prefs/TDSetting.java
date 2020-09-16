@@ -393,6 +393,7 @@ public class TDSetting
   public static int   mContinueLine  = DrawingWindow.CONT_NONE; // 0
   public static boolean mCompositeActions = false;
   public static boolean mLegonlyUpdate = false; // whether to update display of drawing window at every shot (not just at legs)
+  public static boolean mFullAffine = false; // whether to do full affine transform or shift+scale only
 
   public static float mWeedDistance  = 0.5f;  // max weeding distance
   public static float mWeedLength    = 2.0f;  // max weeding length
@@ -954,8 +955,9 @@ public class TDSetting
     // setBackupsClear( prefs.getBoolean( keyGPlot[ 9], bool(defGPlot[ 9]) ) ); // DISTOX_BACKUPS_CLEAR moved to GEEK
     mAutoXSections  = prefs.getBoolean( keyGPlot[ 9], bool(defGPlot[ 9]) ); // DISTOX_AUTO_XSECTIONS
     mSavedStations  = prefs.getBoolean( keyGPlot[10], bool(defGPlot[10]) ); // DISTOX_SAVED_STATIONS
-    mLegonlyUpdate   = prefs.getBoolean( keyGPlot[11], bool(defGPlot[10]) ); // DISTOX_LEGONLY_UPDATE
-    mWithLevels     = tryInt( prefs,   keyGPlot[12],      defGPlot[12] );   // DISTOX_WITH_LEVELS
+    mLegonlyUpdate  = prefs.getBoolean( keyGPlot[11], bool(defGPlot[11]) ); // DISTOX_LEGONLY_UPDATE
+    mFullAffine     = prefs.getBoolean( keyGPlot[12], bool(defGPlot[12]) ); // DISTOX_FULL_UPDATE
+    mWithLevels     = tryInt( prefs,   keyGPlot[13],      defGPlot[13] );   // DISTOX_WITH_LEVELS
 
     String[] keyGLine = TDPrefKey.GEEKLINE;
     String[] defGLine = TDPrefKey.GEEKLINEdef;
@@ -1419,9 +1421,11 @@ public class TDSetting
     } else if ( k.equals( key[10 ] ) ) { // DISTOX_SAVED_STATIONS
       mSavedStations = tryBooleanValue( hlp, k, v, bool(def[10]) );
     } else if ( k.equals( key[11 ] ) ) { // DISTOX_LEGONLY_UPDATE
-      mLegonlyUpdate   = tryBooleanValue( hlp, k, v, bool(def[11]) );
-    } else if ( k.equals( key[12 ] ) ) { // DISTOX_WITH_LEVELS
-      mWithLevels    = tryIntValue( hlp, k, v, def[12] );
+      mLegonlyUpdate = tryBooleanValue( hlp, k, v, bool(def[11]) );
+    } else if ( k.equals( key[12 ] ) ) { // DISTOX_FULL_AFFINE
+      mFullAffine    = tryBooleanValue( hlp, k, v, bool(def[12]) );
+    } else if ( k.equals( key[13 ] ) ) { // DISTOX_WITH_LEVELS
+      mWithLevels    = tryIntValue( hlp, k, v, def[13] );
     } else {
       TDLog.Error("missing GEEK_PLOT key: " + k );
     }
@@ -2497,8 +2501,8 @@ public class TDSetting
       pw.printf(Locale.US, "ThumbSize %d, SavedStations %c, LegonlyUpdate %c, WithAzimuth %c, WithSensors %c, Bedding %c \n", // TdManager %c\n",
         mThumbSize, tf(mSavedStations), tf(mLegonlyUpdate), tf(mWithAzimuth), tf(mWithSensors), tf(mBedding) ); // , tf(mWithTdManager) );
 
-      pw.printf(Locale.US, "Plot: zoom %d, drag %c, fix-origin %c, split %c, shift %c, levels %d\n",
-        mZoomCtrl, tf(mSideDrag), tf(mFixedOrigin), tf(mPlotSplit), tf(mPlotShift), mWithLevels );
+      pw.printf(Locale.US, "Plot: zoom %d, drag %c, fix-origin %c, split %c, shift %c, levels %d, affine %c\n",
+        mZoomCtrl, tf(mSideDrag), tf(mFixedOrigin), tf(mPlotSplit), tf(mPlotShift), mWithLevels, tf(mFullAffine) );
       pw.printf(Locale.US, "Units: icon %.2f, line %.2f, grid %.2f, ruler %.2f\n", mUnitIcons, mUnitLines, mUnitGrid, mUnitMeasure );
       pw.printf(Locale.US, "Size: station %.1f, label %.1f, fixed %.1f line %.1f\n", mStationSize, mLabelSize, mFixedThickness, mLineThickness );
       pw.printf(Locale.US, "Select: radius %.2f, pointing %d, shift %d, dot %.1f, multiple %c \n",
@@ -3022,9 +3026,10 @@ public class TDSetting
               mSideDrag = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_SIDE_DRAG", mSideDrag );
             }
             mFixedOrigin = getBoolean( vals, 6 );  setPreference( editor, "DISTOX_FIXED_ORIGIN", mFixedOrigin );
-            mPlotSplit   = getBoolean( vals, 8 );  setPreference( editor, "DISTOX_PLOT_SPLIT", mPlotSplit );
-            mPlotShift   = getBoolean( vals, 10 ); setPreference( editor, "DISTOX_PLOT_SHIFT", mPlotShift );
-            mWithLevels  = getInt( vals, 12, 0 );  setPreference( editor, "DISTOX_WITH_LEVELS", mWithLevels );
+            mPlotSplit   = getBoolean( vals, 8 );  setPreference( editor, "DISTOX_PLOT_SPLIT",   mPlotSplit );
+            mPlotShift   = getBoolean( vals, 10 ); setPreference( editor, "DISTOX_PLOT_SHIFT",   mPlotShift );
+            mWithLevels  = getInt( vals, 12, 0 );  setPreference( editor, "DISTOX_WITH_LEVELS",  mWithLevels );
+            mFullAffine  = getBoolean( vals, 14 ); setPreference( editor, "DISTOX_FULL_AFFINE",  mFullAffine );
           }
           continue;
         }

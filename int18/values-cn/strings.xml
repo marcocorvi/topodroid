@@ -371,6 +371,9 @@
     <string name="menu_validate">验证</string>
     <string name="menu_zoom_fit">缩放适合</string>
 
+    <!-- FIXED_ZOOM -->
+    <!-- TODO string name="zoom_fixed">Graph-paper</string -->
+
     <string name="ble_scan_failed">蓝牙设备扫描失败</string>
     <string name="ble_gatt_failure">蓝牙故障</string>
     <string name="ble_no_remote">无远程设备</string>
@@ -1108,6 +1111,8 @@
   <string name="pref_bezier_step_summary">最大点间距(多条曲线) [m]</string>
   <string name="pref_leg_shots_title">最少主线测量</string>
   <string name="pref_leg_shots_summary">最少主线测量次数</string>
+  <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
+  <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent [s]</string -->
   <string name="pref_recent_timeout_title">最近的数据超时</string>
   <string name="pref_recent_timeout_summary">超时之后，数据不再是最近的 [s]</string>
   <string name="pref_triple_shot_title">主线测量提示声</string>

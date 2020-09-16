@@ -15,15 +15,22 @@ By this means you can reverse only a portion of the survey data.
 Shots "extend" can also be reversed with a multi-selection in the survey <u>data window</u>.
 <br><p>
 
-<b>Sketch shift</b> [E]<br>
+<b>Sketch transform</b> [E]<br>
 
-Shifting and scaling is enabled by a setting [G].<br><p>
+Shifting, scaling and arbitrary affine transformations are enabled by custom settings [G].<br><p>
 
 The drawing can be shifted as a whole by selecting the <i>Fix ref</i> checkbox in the sketch reference dialog.
 Then in <i>move/zoom</i> mode the drawing can be shifted by dragging it with two fingers.<br><p>
 
+Scaling and affine transformation are accomplished by touching the screen with three fingers. The motion of the fingers
+defines the parameters of the affine transformation. In this way the sketch can be arbitrarily scaled, rotated
+and skewed.<br>
+If the general affine transform is not enabled, the sketch is only scaled.<br><p>
+
+
 <b>WARNING</b><br>
-Shifting is CPU intensive CPU because it changes the coordinates of every drawing point, 
+Sketch transformation is CPU intensive, expecially for large sketches,
+because it changes the coordinates of every drawing point, 
 and the app may appear unresponsive if the sketch is big.<br><p>
 
 

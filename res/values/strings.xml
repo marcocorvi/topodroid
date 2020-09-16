@@ -373,7 +373,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="menu_validate">VALIDATE</string>
     <string name="menu_zoom_fit">ZOOM FIT</string>
 
-    <!-- UNUSED FIXED_ZOOM string name="zoom_fixed">Fixed scale</string -->
+    <!-- FIXED_ZOOM -->
+    <string name="zoom_fixed">Graph-paper</string>
 
     <string name="ble_scan_failed">BLE scan failed</string>
     <string name="ble_gatt_failure">BLE failure</string>
@@ -1415,6 +1416,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_saved_stations_summary">Color saved stations orange</string>
   <string name="pref_legonly_update_title">Legs-only refresh</string>
   <string name="pref_legonly_update_summary">Redraw midline only on legs download</string>
+  <string name="pref_full_affine_title">Affine transform</string>
+  <string name="pref_full_affine_summary">Enable sketch affine transformation</string>
   <string name="pref_loopClosure_title">Loop closure</string>
   <string name="pref_loopClosure_summary">Loop closure-error compensation</string>
   <!-- UNUSED string name="pref_splayExtend_title">Estimate splay extend</string -->

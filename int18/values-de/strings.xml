@@ -375,6 +375,9 @@
     <!-- UNUSED string name="menu_tdr2th2">TH2 SKIZZEN</string -->
     <string name="menu_validate">VALIDIEREN</string>
     <string name="menu_zoom_fit">AUF SKIZZE ZOOMEN</string>
+
+    <!-- FIXED_ZOOM -->
+    <!-- TODO string name="zoom_fixed">Graph-paper</string -->
     
     <string name="ble_scan_failed">BLE scan fehlgeschlagen</string>
     <string name="ble_gatt_failure">BLE Fehler</string>
@@ -1105,6 +1108,8 @@
   <string name="pref_bezier_step_summary">Max. Punkteabstand auf exportierter Linie [m]</string>
   <string name="pref_leg_shots_title">Minimum für Messzüge</string>
   <string name="pref_leg_shots_summary">Minimale Anzahl Messungen zur Erkennung als Messzug</string>
+  <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
+  <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent [s]</string -->
   <string name="pref_recent_timeout_title">Zeitdauer neue Daten</string>
   <string name="pref_recent_timeout_summary">Zeit nach welcher Daten nicht mehr als \'neu\' markiert werden</string>
   <string name="pref_triple_shot_title">Messlinienton</string>

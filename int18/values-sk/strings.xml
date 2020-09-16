@@ -372,6 +372,9 @@
     <string name="menu_validate">POROVNAŤ</string>
     <string name="menu_zoom_fit">ORIENTÁCIA</string>
 
+    <!-- FIXED_ZOOM -->
+    <!-- TODO string name="zoom_fixed">Graph-paper</string -->
+
     <string name="ble_scan_failed">BLE sken neúspešný</string>
     <string name="ble_gatt_failure">BLE failzlyhanieure</string>
     <string name="ble_no_remote">Bez diaľkového ovládania</string>
@@ -1114,6 +1117,8 @@
   <string name="pref_bezier_step_summary">Vzdialenosť medzi bodmi Čiary pri exporte do Therionu [m]</string>
   <string name="pref_leg_shots_title">Minimum zámer hlavnej zámery</string>
   <string name="pref_leg_shots_summary">Minimálny počet jednotlivých zámer hlavnej zámery, ktoré program vyhodnotí ako hlavnú zámeru</string>
+  <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
+  <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent [s]</string -->
   <string name="pref_recent_timeout_title">Posledne stiahnuté dáta - čas</string>
   <string name="pref_recent_timeout_summary">Čas po ktorom uplynutí dáta už nie sú označené ako "Posledne stiahnuté"</string>
   <string name="pref_triple_shot_title">Zvuk pri hlavnej zámere</string>

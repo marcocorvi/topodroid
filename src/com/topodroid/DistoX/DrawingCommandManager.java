@@ -44,7 +44,8 @@ import java.io.DataOutputStream;
 
 class DrawingCommandManager
 {
-  // FIXED_ZOOM static float gScale = 1.0f;
+  // FIXED_ZOOM 
+  private boolean mFixedZoom = false;
 
   private static final int BORDER = 20; // for the bitmap
   private int mMode = 0;  // command manager mode type (PLAN PROFILE SECTION OVERVIEW)
@@ -80,7 +81,8 @@ class DrawingCommandManager
   // private List< DrawingLinePath >    mTmpPlotOutline; // scrap outline
   // private List< DrawingOutlinePath > mTmpXSectionOutlines;  // xsections outlines
 
-
+  float mOffx = 0;
+  float mOffy = 0;
 
   private int mScrapIdx = 0; // scrap index
   private List< Scrap > mScraps;
@@ -139,6 +141,9 @@ class DrawingCommandManager
   // display MODE
   static void setDisplayMode( int mode ) { mDisplayMode = mode; }
   static int getDisplayMode( ) { return mDisplayMode; }
+
+  // FIXED_ZOOM
+  void setFixedZoom( boolean fixed_zoom ) { mFixedZoom = fixed_zoom; }
 
   // ----------------------------------------------------------------
   // SCRAPS management
@@ -408,6 +413,20 @@ class DrawingCommandManager
     }
   }
 
+  void affineTransformDrawing( float a, float b, float c, float d, float e, float f ) 
+  {
+    Matrix m = new Matrix();
+    float[] mm = new float[9];
+    mm[0] = a; mm[1] = b; mm[2] = c;
+    mm[3] = d; mm[4] = e; mm[5] = f;
+    mm[6] = 0; mm[7] = 0; mm[8] = 1;
+    m.setValues( mm );
+    synchronized( mScraps ) {
+      for ( Scrap scrap : mScraps ) scrap.affineTransformDrawing( mm, m );
+    }
+  }
+
+
   /**
    * this is the only place DrawuingScaleReference is instantiated
    */
@@ -673,6 +692,8 @@ class DrawingCommandManager
       mMatrix.postTranslate( dx, dy );
     }
     mMatrix.postScale( s, s );
+    mOffx = dx * s;
+    mOffy = dy * s;
 
     synchronized( mScraps ) {
       for ( Scrap scrap : mScraps ) scrap.shiftAreaShaders( dx, dy, s, landscape );
@@ -1117,16 +1138,50 @@ class DrawingCommandManager
 
     if( grids && mGridStack1 != null ) {
       synchronized( TDPath.mGridsLock ) {
-        // FIXED_ZOOM (fail) Matrix gMatrix = new Matrix( mMatrix );
-        // gMatrix.postScale( gScale, gScale );
-        if ( mScale < 1 ) {
-          for ( DrawingPath p1 : mGridStack1 ) p1.draw( canvas, mMatrix, mScale, mBBox );
+        if ( mFixedZoom ) {
+          // 1 in = 2.54 cm
+          float step = 0.9f * TopoDroidApp.getDisplayDensityDpi() / 25.4f; // pixel/mm
+          int i = (int)( mOffx / step );
+          float x = mOffx - ( i * step );
+          i = -i;
+          for ( ; x<TopoDroidApp.mDisplayWidth; x += step ) {
+            DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_GRID, null, -1 );
+            if ( i % 10 == 0 ) { 
+              dpath.setPathPaint( BrushManager.fixedGrid10Paint );
+            } else {
+              dpath.setPathPaint( BrushManager.fixedGridPaint );
+            }
+            ++i;
+            dpath.mPath  = new Path();
+            dpath.mPath.moveTo( x, 0 );
+            dpath.mPath.lineTo( x, TopoDroidApp.mDisplayHeight );
+            dpath.draw( canvas );
+          }
+          int j = (int)( mOffy / step );
+          float y = mOffy - ( j * step );
+          j = - j;
+          for ( ; y<TopoDroidApp.mDisplayHeight; y += step ) {
+            DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_GRID, null, -1 );
+            if ( j % 10 == 0 ) { 
+              dpath.setPathPaint( BrushManager.fixedGrid10Paint );
+            } else {
+              dpath.setPathPaint( BrushManager.fixedGridPaint );
+            }
+            ++j;
+            dpath.mPath  = new Path();
+            dpath.mPath.moveTo( 0, y );
+            dpath.mPath.lineTo( TopoDroidApp.mDisplayWidth, y );
+            dpath.draw( canvas );
+          }
+        } else {
+          if ( mScale < 1 ) {
+            for ( DrawingPath p1 : mGridStack1 ) p1.draw( canvas, mMatrix, mScale, mBBox );
+          }
+          if ( mScale < 10 ) {
+            for ( DrawingPath p10 : mGridStack10 ) p10.draw( canvas, mMatrix, mScale, mBBox );
+          }
+          for ( DrawingPath p100 : mGridStack100 ) p100.draw( canvas, mMatrix, mScale, mBBox );
         }
-        if ( mScale < 10 ) {
-          for ( DrawingPath p10 : mGridStack10 ) p10.draw( canvas, mMatrix, mScale, mBBox );
-        }
-        for ( DrawingPath p100 : mGridStack100 ) p100.draw( canvas, mMatrix, mScale, mBBox );
-
         if ( mNorthLine != null ) mNorthLine.draw( canvas, mMatrix, mScale, mBBox );
         if ( scaleRef && (mScaleRef != null)) mScaleRef.draw(canvas, zoom, mLandscape);
       }

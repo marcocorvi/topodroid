@@ -30,7 +30,8 @@
     / -->
   </LinearLayout>
 
-  <!-- FIXED_ZOOM LinearLayout android:id="@+id/layout_zoom"
+  <!-- FIXED_ZOOM -->
+  <LinearLayout android:id="@+id/layout_zoom"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" 
@@ -43,14 +44,15 @@
       android:text="@string/zoom_fixed"
     />
 
-    <!- - CheckBox android:id="@+id/cb_zoom"
-    / - ->
+    <!-- CheckBox android:id="@+id/cb_zoom"
+    / -->
 
     <Spinner android:id="@+id/spin_zoom"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content" 
     />
-  </LinearLayouti -->
+  </LinearLayout>
+  <!-- END FIXED_ZOOM -->
 
   <LinearLayout android:id="@+id/layout_station"
     android:orientation="horizontal"

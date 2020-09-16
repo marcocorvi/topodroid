@@ -366,6 +366,9 @@
     <string name="menu_validate">ELLENŐRZÉS</string>
     <string name="menu_zoom_fit">ABLAK KITÖLTÉSE</string>
 
+    <!-- FIXED_ZOOM -->
+    <!-- TODO string name="zoom_fixed">Graph-paper</string -->
+
     <!-- TODO string name="ble_scan_failed">BLE scan failed</string -->
     <!-- TODO string name="ble_gatt_failure">BLE failure</string -->
     <!-- TODO string name="ble_no_remote">No remote device</string -->
@@ -1084,6 +1087,8 @@
   <!-- TODO string name="pref_bezier_step_summary">Distance between points on an export line [m]</string -->
   <string name="pref_leg_shots_title">Minimális poligon mérés</string>
   <string name="pref_leg_shots_summary">Poligon mérések minmális száma poligonhosszanként</string>
+  <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
+  <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent [s]</string -->
   <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
   <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent</string -->
   <!-- TODO string name="pref_triple_shot_title">Leg-shot bell</string -->

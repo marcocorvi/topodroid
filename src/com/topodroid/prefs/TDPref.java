@@ -1060,7 +1060,8 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9],          ctx, hlp ), // AUTO XSECTIONS on export/save
       makeCbx( cat, key[10], tit[10], dsc[10], T, def[10],          ctx, hlp ), // SAVED STATIONS
       makeCbx( cat, key[11], tit[11], dsc[11], T, def[11],          ctx, hlp ), // ALWAYS UPDATE
-      makeLst( cat, key[12], tit[12], dsc[12], T, def[12], R.array.canvasLevels, R.array.canvasLevelsValue, ctx, hlp )  // WITH LEVELS
+      makeCbx( cat, key[12], tit[12], dsc[12], T, def[12],          ctx, hlp ), // FULL AFFINE
+      makeLst( cat, key[13], tit[13], dsc[13], T, def[13], R.array.canvasLevels, R.array.canvasLevelsValue, ctx, hlp )  // WITH LEVELS
     };
   }
   public static TDPref[] makeGeekPrefs( Context ctx, TDPrefHelper hlp )

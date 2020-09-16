@@ -475,8 +475,8 @@ public class DrawingWindow extends ItemDrawer
   private boolean mZoomBtnsCtrlOn = false;
  
   // FIXED_ZOOM
-  // private int mFixedZoom = 0; // 0= variable, 1= 1:100, 2= 1:200
-  // private static final float[] gZoom = { 1.0f, 0.10f, 0.20f, 0.30f, 0.40f, 0.50f };
+  private int mFixedZoom = 0; // 0= variable, 1= 1:100, 2= 1:200
+  private static final float[] gZoom = { 1.0f, 0.10f, 0.20f, 0.30f, 0.40f, 0.50f };
 
   // FIXME_ZOOM_CTRL ZoomControls mZoomCtrl = null;
   // ZoomButton mZoomOut;
@@ -523,6 +523,8 @@ public class DrawingWindow extends ItemDrawer
   private float mSave0Y;
   private float mSave1X;
   private float mSave1Y;
+  private float mSave2X;
+  private float mSave2Y;
   private float mStartX; // line shift scene start point
   private float mStartY;
 
@@ -784,7 +786,8 @@ public class DrawingWindow extends ItemDrawer
   @Override
   public void onVisibilityChanged(boolean visible)
   {
-    // FIXED_ZOOM if ( mFixedZoom > 0 ) return;
+    // FIXED_ZOOM 
+    if ( mFixedZoom > 0 ) return;
     if ( mZoomBtnsCtrlOn && mZoomBtnsCtrl != null ) {
       mZoomBtnsCtrl.setVisible( visible || ( TDSetting.mZoomCtrl > 1 ) );
     }
@@ -799,7 +802,9 @@ public class DrawingWindow extends ItemDrawer
 
   private void changeZoom( float f ) 
   {
-    // FIXED_ZOOM if ( mFixedZoom > 0 ) return;
+    // FIXED_ZOOM 
+    if ( mFixedZoom > 0 ) return;
+    if ( f < 0.05f || f > 4.0f ) return;
     float zoom = mZoom;
     mZoom     *= f;
     // Log.v( TopoDroidApp.TAG, "zoom " + mZoom );
@@ -811,25 +816,26 @@ public class DrawingWindow extends ItemDrawer
   }
 
   // FIXED_ZOOM
-  // int getFixedZoom() { return mFixedZoom; }
-  // 
-  // void setFixedZoom( int fixed_zoom )
-  // {
-  //   mFixedZoom = ( fixed_zoom < 0 )? 0 : ( fixed_zoom > 5 )? 5 : fixed_zoom;
-  //   DrawingCommandManager.gScale = gZoom[ mFixedZoom ];
-  //   if ( mFixedZoom > 0 ) {
-  //     int dpi = TopoDroidApp.getDisplayDensityDpi();
-  //     // 1 in = 2.54 cm
-  //     // float dp2mm = dpi / (mFixedZoom * 25.4f); // 25.4 is a scale of 2 cm : 10 m (1:500)
-  //     float dp2mm = dpi * mFixedZoom / 127.0f; // 50.8 is a scale of 2 cm : 2 m (1:100)
-  //     float zoom = 32 / dp2mm; // 32 = 40 / 1.25
-  //     // Log.v("DistoX-ZOOM", "set zoom " + mZoom + " -> " + zoom + " dpi " + dpi );
-  //     mOffset.x *= mZoom / zoom;
-  //     mOffset.y *= mZoom / zoom;
-  //     mZoom = zoom;
-  //     updateDisplay();
-  //   }
-  // }
+  int getFixedZoom() { return mFixedZoom; }
+  
+  void setFixedZoom( int fixed_zoom )
+  {
+    mFixedZoom = ( fixed_zoom < 0 )? 0 : ( fixed_zoom > 5 )? 5 : fixed_zoom;
+    mDrawingSurface.setFixedZoom( mFixedZoom > 0 );
+    if ( mFixedZoom > 0 ) {
+      int dpi = TopoDroidApp.getDisplayDensityDpi();
+      // 1 in = 2.54 cm
+      // float dp2mm = dpi / (mFixedZoom * 25.4f); // 25.4 is a scale of 2 cm : 10 m (1:500)
+      float dp2mm = dpi * mFixedZoom / 127.0f; // 50.8 is a scale of 2 cm : 2 m (1:100)
+      float zoom = 32 / dp2mm; // 32 = 40 / 1.25
+      // Log.v("DistoX-ZOOM", "set zoom " + mZoom + " -> " + zoom + " dpi " + dpi );
+      mOffset.x *= mZoom / zoom;
+      mOffset.y *= mZoom / zoom;
+      mZoom = zoom;
+      mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
+      // updateDisplay();
+    }
+  }
 
   public void zoomIn()  { changeZoom( ZOOM_INC ); }
   public void zoomOut() { changeZoom( ZOOM_DEC ); }
@@ -1623,7 +1629,8 @@ public class DrawingWindow extends ItemDrawer
   private void switchZoomCtrl( int ctrl )
   {
     // Log.v("DistoX", "DEBUG switchZoomCtrl " + ctrl + " ctrl is " + ((mZoomBtnsCtrl == null )? "null" : "not null") );
-    // FIXED_ZOOM if ( mFixedZoom > 0 ) return;
+    // FIXED_ZOOM 
+    if ( mFixedZoom > 0 ) return;
 
     if ( mZoomBtnsCtrl == null ) return;
     mZoomBtnsCtrlOn = (ctrl > 0);
@@ -3058,9 +3065,18 @@ public class DrawingWindow extends ItemDrawer
       if ( np >= 2 ) {
         mSave1X = ev.getX(1);
         mSave1Y = ev.getY(1);
+        if ( np >= 3 ) {
+          mSave2X = ev.getX(2);
+          mSave2Y = ev.getY(2);
+        } else {
+          // mSave2X = (mSave1X + mSave0X)/2;
+          // mSave2Y = (mSave1Y + mSave0Y)/2;
+        }
       } else {
         mSave1X = mSave0X;
-        mSave1Y = mSave0Y;
+        mSave1X = mSave0X;
+        // mSave2X = mSave0X;
+        // mSave2Y = mSave0Y;
       } 
     }
   }
@@ -3097,6 +3113,68 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  // x0 = a saveX0 + b saveY0 + c
+  // x1 = a saveX1 + b saveY1 + c
+  // x2 = a saveX2 + b saveY2 + c
+  // 
+  // let M = | saveX0  saveY0  1 |
+  //         | saveX1  saveY1  1 |
+  //         | saveX2  saveY2  1 |
+  // then (a,b,c) = M^-1 ( x1, x1, x2 )
+  //
+  private int affineTransformByEvent( MotionEventWrap ev )
+  {
+    int np = ev.getPointerCount();
+    if ( np < 3 ) return -1;
+    float x0 = ev.getX(0);
+    float y0 = ev.getY(0);
+    if ( Math.abs( x0 - mSave0X ) > 32 || Math.abs( y0 - mSave0Y ) > 32 ) return -10;
+    float x1 = ev.getX(1);
+    float y1 = ev.getY(1);
+    if ( Math.abs( x1 - mSave1X ) > 32 || Math.abs( y1 - mSave1Y ) > 32 ) return -11;
+    float x2 = ev.getX(2);
+    float y2 = ev.getY(2);
+    if ( Math.abs( x2 - mSave2X ) > 32 || Math.abs( y2 - mSave2Y ) > 32 ) return -12;
+    float det12 = mSave1X * mSave2Y - mSave1Y * mSave2X;
+    float det20 = mSave2X * mSave0Y - mSave2Y * mSave0X;
+    float det01 = mSave0X * mSave1Y - mSave0Y * mSave1X;
+    float det = det12 + det20 + det01;
+    if ( Math.abs(det) < 0.01 ) return -2;
+    // M^-1 = | (saveY1 - saveY2)  (saveY2 - saveY0)  (saveY0 - saveY1) |
+    //        | (saveX2 - saveX1)  (saveX0 - saveX2)  (saveX1 - saveX0) | / det
+    //        |       det12              det20              det01       | 
+    float minv00 = mSave1Y - mSave2Y; 
+    float minv01 = mSave2Y - mSave0Y; 
+    float minv02 = mSave0Y - mSave1Y; 
+    float minv10 = mSave2X - mSave1X; 
+    float minv11 = mSave0X - mSave2X; 
+    float minv12 = mSave1X - mSave0X; 
+    float a = (minv00 * x0 + minv01 * x1 + minv02 * x2)/det;
+    float b = (minv10 * x0 + minv11 * x1 + minv12 * x2)/det;
+    float d = (minv00 * y0 + minv01 * y1 + minv02 * y2)/det;
+    float e = (minv10 * y0 + minv11 * y1 + minv12 * y2)/det;
+    float c = 0;
+    float f = 0;
+    if ( ! TDSetting.mFullAffine ) {
+      a = a * e - b * d;
+      if ( a < 0.10f ) return -3; // sqrt(0.10) ~ 0.32
+      if ( a > 10.0f ) return -3; // sqrt(10) ~ 3.2
+      e = a = TDMath.sqrt( a );
+      b = d = 0;
+    } else {
+      // float minv20 = det12;
+      // float minv21 = det20;
+      // float minv22 = det01;
+      // c = (minv20 * x0 + minv21 * x1 + minv22 * x2)/det;
+      // f = (minv20 * y0 + minv21 * y1 + minv22 * y2)/det;
+      c = (det12 * x0 + det20 * x1 + det01 * x2)/det;
+      f = (det12 * y0 + det20 * y1 + det01 * y2)/det;
+    } 
+    // apply affine transform to sketch
+    mDrawingSurface.affineTransformDrawing( a, b, c, d, e, f );
+    return 0;
+  }
+
   private void moveCanvas( float x_shift, float y_shift )
   {
     if ( Math.abs( x_shift ) < TDSetting.mMinShift && Math.abs( y_shift ) < TDSetting.mMinShift ) {
@@ -3109,7 +3187,8 @@ public class DrawingWindow extends ItemDrawer
   public void checkZoomBtnsCtrl()
   {
     // if ( mZoomBtnsCtrl == null ) return; // not necessary
-    // FIXED_ZOOM if ( mFixedZoom > 0 ) return;
+    // FIXED_ZOOM 
+    if ( mFixedZoom > 0 ) return;
     if ( TDSetting.mZoomCtrl == 2 && ! mZoomBtnsCtrl.isVisible() ) {
       mZoomBtnsCtrl.setVisible( true );
     }
@@ -3216,7 +3295,7 @@ public class DrawingWindow extends ItemDrawer
     int id = 0;
 
     if (action == MotionEvent.ACTION_POINTER_DOWN) {
-      threePointers = (event.getPointerCount() >= 3);
+      threePointers = (event.getPointerCount() == 3);
       if ( mTouchMode == MODE_MOVE ) {
         if ( mMode == MODE_ERASE ) {
 	  finishErasing();
@@ -3649,7 +3728,7 @@ public class DrawingWindow extends ItemDrawer
     if ( mMode == MODE_DRAW ) bottom += ZOOM_TRANSLATION;
 
     if ( yc > bottom ) {
-      if ( /* (mFixedZoom == 0) && */ mZoomBtnsCtrlOn && xc > mBorderInnerLeft && xc < mBorderInnerRight ) {
+      if ( (mFixedZoom == 0) && mZoomBtnsCtrlOn && xc > mBorderInnerLeft && xc < mBorderInnerRight ) {
         mTouchMode = MODE_ZOOM;
         mZoomBtnsCtrl.setVisible( true );
         // mZoomCtrl.show( );
@@ -3837,7 +3916,7 @@ public class DrawingWindow extends ItemDrawer
       modified();
     } else { // mTouchMode == MODE_ZOOM
       float newDist = spacing( event );
-      float factor = ( newDist > 16.0f && oldDist > 16.0f )? newDist/oldDist : 0 ;
+      float factor = ( newDist > 32.0f && oldDist > 32.0f )? newDist/oldDist : 0 ;
 
       if ( mMode == MODE_MOVE && mShiftDrawing ) {
         float x_shift = xc - mSaveX; // compute shift
@@ -3854,21 +3933,21 @@ public class DrawingWindow extends ItemDrawer
         // } else {
         //   moveCanvas( x_shift, y_shift );
         }
-        if ( factor > 0.05f && factor < 4.0f ) {
-          if ( threePointers ) {
-            mDrawingSurface.scaleDrawing( 1+(factor-1)*0.01f );
-          } else {
-            changeZoom( factor );
-            oldDist = newDist;
-          }
-        }
-        mSaveX = xc;
-        mSaveY = yc;
-      } else {
-        if ( factor > 0.05f && factor < 4.0f ) {
+        if ( threePointers ) {
+            // int ret =
+            affineTransformByEvent( event );
+            // Log.v("DistoX-AFFINE", "affine transform returns " + ret );
+            // mDrawingSurface.scaleDrawing( 1+(factor-1)*0.01f );
+            saveEventPoint( event );
+        } else {
           changeZoom( factor );
           oldDist = newDist;
         }
+        mSaveX = xc;
+        mSaveY = yc;
+      } else { // MOVE but not shift-drawing
+        changeZoom( factor );
+        oldDist = newDist;
         shiftByEvent( event );
       }
     }
@@ -6003,7 +6082,8 @@ public class DrawingWindow extends ItemDrawer
 
   private void doZoomFit()
   {
-    // FIXED_ZOOM if ( mFixedZoom > 0 ) return;
+    // FIXED_ZOOM 
+    if ( mFixedZoom > 0 ) return;
     // FIXME for big sketches this leaves out some bits at the ends
     // maybe should increse the bitmap bounds by a small factor ...
     RectF b = mDrawingSurface.getBitmapBounds();

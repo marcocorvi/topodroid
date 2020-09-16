@@ -118,6 +118,23 @@ public class LinePoint extends Point2D
     }
   }
 
+  void affineTransformBy( float[] mm, Matrix m )
+  {
+    float xx = mm[0] * x + mm[1] * y + mm[2];
+           y = mm[3] * x + mm[4] * y + mm[5];
+           x = xx;
+    if ( has_cp ) {
+      xx = mm[0] * x2 + mm[1] * y2 + mm[2];
+      y2 = mm[3] * x2 + mm[4] * y2 + mm[5];
+      x2 = xx;
+    }
+    if ( mNext != null && mNext.has_cp ) {
+      xx = mm[0] * mNext.x1 + mm[1] * mNext.y1 + mm[2];
+      mNext.y1 = mm[3] * mNext.x1 + mm[4] * mNext.y1 + mm[5];
+      mNext.x1 = xx;
+    }
+  }
+
   // make isolated line-point copying coords from another
   LinePoint( LinePoint lp )
   { 

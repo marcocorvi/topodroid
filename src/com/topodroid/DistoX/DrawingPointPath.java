@@ -250,6 +250,19 @@ public class DrawingPointPath extends DrawingPath
     bottom *= z;
   }
 
+  @Override
+  void affineTransformBy( float[] mm, Matrix m )
+  {
+    float x = mm[0] * cx + mm[1] * cy + mm[2];
+         cy = mm[3] * cx + mm[4] * cy + mm[5];
+         cx = x;
+    mPath.transform( m );
+    left   = cx;   // simplified
+    right  = cx+1;
+    top    = cy;
+    bottom = cy+1;
+  }
+
   // from ICanvasCommand
   @Override
   public void shiftPathBy( float dx, float dy ) 
@@ -283,6 +296,11 @@ public class DrawingPointPath extends DrawingPath
     // right  *= z;
     // top    *= z;
     // bottom *= z;
+  }
+
+  @Override // empty
+  public void affineTransformPathBy( float[] mm, Matrix m )
+  {
   }
 
   void setLink( IDrawingLink link ) { mLink = link; }

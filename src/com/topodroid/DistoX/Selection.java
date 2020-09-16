@@ -90,6 +90,27 @@ class Selection
     }
   }
 
+  void affineTransformSelectionBy( float[] mm, Matrix m ) // synchronized by CommandManager
+  {
+    for ( SelectionPoint sp : mPoints ) {
+      int t = sp.type();
+      if ( t == DrawingPath.DRAWING_PATH_POINT
+        || t == DrawingPath.DRAWING_PATH_LINE
+        || t == DrawingPath.DRAWING_PATH_AREA ) {
+        sp.affineTransformSelectionBy( mm, m );
+        float x1 = sp.X();
+        float y1 = sp.Y();
+        if ( sp.mBucket != null ) {
+          if ( ! sp.mBucket.contains( x1, y1 ) ) {
+            sp.setBucket( getBucket( x1, y1 ) );
+          }
+        } else {
+          sp.setBucket( getBucket( x1, y1 ) );
+        }
+      }
+    }
+  }
+
   void clearSelectionPoints() // synchronized by CommandManager
   {
     mPoints.clear();

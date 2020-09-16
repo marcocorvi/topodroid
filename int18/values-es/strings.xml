@@ -364,6 +364,9 @@
     <string name="menu_validate">Validar</string>
     <string name="menu_zoom_fit">Ajustar a pantalla</string>
 
+    <!-- FIXED_ZOOM -->
+    <!-- TODO string name="zoom_fixed">Graph-paper</string -->
+
     <string name="ble_scan_failed">Fallo escaneo BLE</string>
     <string name="ble_gatt_failure">Fallo BLE</string>
     <string name="ble_no_remote">Sin dispositivo remoto</string>
@@ -1100,6 +1103,8 @@
   <string name="pref_bezier_step_summary">Distancia entre puntos en una línea de exportación [m]</string>
   <string name="pref_leg_shots_title">Repeticiones de una visual</string>
   <string name="pref_leg_shots_summary">Número mínimo de tomas por visual</string>
+  <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
+  <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent [s]</string -->
   <string name="pref_recent_timeout_title">Tiempo de espera de datos reciente</string>
   <string name="pref_recent_timeout_summary">Tiempo de espera después del cual los datos ya no son recientes</string>
   <string name="pref_triple_shot_title">Campana de la toma de una visual</string>
