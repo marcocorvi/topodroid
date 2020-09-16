@@ -853,10 +853,10 @@
    
     <string name="help_line_point">线点功能: 衔接,分割, 剪切, 删除</string>
 <!--
-    <string name="help_to_point">Move selected point to join with the nearest point</string>
-    <string name="help_split_point">Split the point into two [line/area]</string>
-    <string name="help_split_line">Split the line into two at the point</string>
-    <string name="help_kink">Use a straight line at the point [line/area]</string>
+    <string name="help_to_point">移动选定的点以与最近的点相连</string>
+    <string name="help_split_point">把这个点一分为二 [line/area]</string>
+    <string name="help_split_line">把线在选定的点出一分为二</string>
+    <string name="help_kink">在点处画一天直线 [line/area]</string>
 -->
     <string name="help_manual_calibration">手动校准仪器</string>
     <string name="help_note_plot">编辑选定的草图项目属性</string>
@@ -882,35 +882,35 @@
     <string name="help_compute">计算校准</string>
     <string name="help_write">将校准系数写入DistoX</string>
 
-    <!-- TODO string name="help_add_project">添加洞穴项目</string -->
-    <!-- TODO string name="help_add_surveys">添加测量</string -->
-    <!-- TODO string name="help_drop_surveys">终止测量</string -->
-    <!-- TODO string name="help_view_surveys">显示测量项目</string -->
-    <!-- TODO string name="help_view_equates">显示相同</string -->
-    <!-- TODO string name="help_export_config">输出项目</string -->
-    <!-- TODO string name="help_delete_config">删除项目</string -->
-    <!-- TODO string name="help_add_equate">添加等同的测量</string -->
-    <!-- TODO string name="help_equates">List surveys equates</string -->
+    <string name="help_add_project">添加洞穴项目</string>
+    <string name="help_add_surveys">添加测量</string>
+    <string name="help_drop_surveys">终止测量</string>
+    <string name="help_view_surveys">显示测量项目</string>
+    <string name="help_view_equates">显示相同</string>
+    <string name="help_export_config">输出项目</string>
+    <string name="help_delete_config">删除项目</string>
+    <string name="help_add_equate">添加等同的测量</string>
+    <string name="help_equates">同等显示测量数据</string>
 
-    <!-- TODO string name="export_bgcolor">Background color</string -->
-    <!-- TODO string name="export_config">Config file</string -->
-    <!-- TODO string name="export_csv_rawdata">Raw data</string -->
-    <!-- TODO string name="export_dxf_blocks">DXF blocks</string -->
-    <!-- TODO string name="export_georeference">Georeference</string -->
-    <!-- TODO string name="export_grid">Grid</string -->
-    <!-- TODO string name="export_linedir">Line direction</string -->
-    <!-- TODO string name="export_lrud">LRUD</string -->
-    <!-- TODO string name="export_lrud_from">LRUD at FROM station</string -->
-    <!-- TODO string name="export_maps">Maps before data</string -->
-    <!-- TODO string name="export_prefix">Cave-prefix in station names</string -->
-    <!-- TODO string name="export_roundtrip">Roundtrip</string -->
-    <!-- TODO string name="export_scale_png">Resolution</string -->
-    <!-- TODO string name="export_scale_th">Scale 1 :</string -->
-    <!-- TODO string name="export_splays">Splays</string -->
-    <!-- TODO string name="export_splays_named">Named splays</string -->
-    <!-- TODO string name="export_stations">Stations</string -->
-    <!-- TODO string name="export_swap_lr">Swap L/R</string -->
-    <!-- TODO string name="export_xvi">Xvi images</string -->
+    <string name="export_bgcolor">背景颜色</string>
+    <string name="export_config">配置文件</string>
+    <string name="export_csv_rawdata">Raw数据</string>
+    <string name="export_dxf_blocks">DXF块</string>
+    <string name="export_georeference">地理参考</string>
+    <string name="export_grid">网格</string>
+    <string name="export_linedir">线方向</string>
+    <string name="export_lrud">左右上下</string>
+    <string name="export_lrud_from">测量点的左右上下</string>
+    <string name="export_maps">地图在数据之前</string>
+    <string name="export_prefix">测量点名称里的洞穴前缀</string>
+    <string name="export_roundtrip">往返</string>
+    <string name="export_scale_png">分辨率</string>
+    <string name="export_scale_th">比例 1 :</string>
+    <string name="export_splays">辐测</string>
+    <string name="export_splays_named">辐测名称</string>
+    <string name="export_stations">测量点</string>
+    <string name="export_swap_lr">左右交换 L/R</string>
+    <string name="export_xvi">Xvi 图像</string>
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
     <!-- UNUSED string name="export_station_stroke">Station stroke</string -->
@@ -927,14 +927,14 @@
     <string name="audio_overwrite">覆盖 ?</string>
     <!-- UNUSED string name="playing">Playing %1$s</string -->
   
-    <!-- TODO string name="import_functional">Import only functional settings</string -->
+    <string name="import_functional">只导入功能设置</string>
     <string name="import_lrud">输入 左右上下</string>
     <string name="import_leg_first">主线在左右上下侧线之前</string>
     <string name="import_diving_datamode">潜水数据模式</string>
 
     <string name="title_azimut">扩展参考</string>
     <string name="title_audio">音频注释</string>
-    <!-- TODO string name="title_audio_list">Audio records</string -->
+    <string name="title_audio_list">音频记录</string>
     <string name="title_calib">校准</string>
     <string name="title_calib_check">校准检测测线</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->
@@ -988,7 +988,7 @@
     <string name="title_settings_svx">Survex输出设置</string>
     <string name="title_settings_th">Therion输出设置</string>
     <string name="title_settings_dat">Compass输出设置</string>
-    <!-- TODO string name="title_settings_csx">cSurvey export settings</string -->
+    <string name="title_settings_csx">cSurvey输出设置</string>
     <string name="title_settings_tro">VisualTopo输出设置</string>
     <string name="title_settings_svg">SVG输出设置</string>
     <string name="title_settings_dxf">DXF输出设置</string>
@@ -1086,8 +1086,8 @@
   <string name="pref_export_plot_title">默认草图输出</string>
   <string name="pref_export_plot_summary">默认草图输出格式</string>
 
-  <!-- TODO string name="pref_therion_config_title">Therion config file</string -->
-  <!-- TODO string name="pref_therion_config_summary">Create Therion config file</string -->
+  <string name="pref_therion_config_title">Therion配置文件</string>
+  <string name="pref_therion_config_summary">建立Therion配置文件</string>
   <string name="pref_therion_maps_title">Therion地图优先</string>
   <string name="pref_therion_maps_summary">把Therion地图放在数据之前</string>
   <string name="pref_extra_buttons_title">激活等级</string>
@@ -1163,8 +1163,8 @@
   <string name="pref_svg_linedirstroke_summary">标记方向的长度</string>
   <string name="pref_svg_line_dir_title">线方向</string>
   <string name="pref_svg_line_dir_summary">添加方向标记到线方向</string>
-  <!-- TODO string name="pref_svg_stationsize_title">Station size</string -->
-  <!-- TODO string name="pref_svg_stationsize_summary">Station names text size</string -->
+  <string name="pref_svg_stationsize_title">测量点大小</string>
+  <name="pref_svg_stationsize_summary">测量点名称文本大小</string>
   <string name="pref_kml_stations_title">KML/JSON 测点</string>
   <string name="pref_kml_stations_summary">添加测点到KML/GeoJSON输出</string>
   <string name="pref_kml_splays_title">KML/JSON 辐测</string>
@@ -1402,8 +1402,8 @@
   <string name="pref_auto_xsections_summary">自动添加截面到 保存/输出[csx/svg/dxf/xvi]</string>
   <string name="pref_saved_stations_title">保存测点</string>
   <string name="pref_saved_stations_summary">保存测点颜色为橙色</string>
-  <!-- TODO string name="pref_legonly_update_title">Legs-only refresh</string -->
-  <!-- TODO string name="pref_legonly_update_summary">Redraw midline only on legs download</string -->
+  <string name="pref_legonly_update_title">只更新主线</string>
+  <string name="pref_legonly_update_summary">只在主线下载时重画中线</string --
   <string name="pref_loopClosure_title">圈测闭合</string>
   <string name="pref_loopClosure_summary">圈测闭合错误补偿</string>
   <!-- UNUSED string name="pref_splayExtend_title">Estimate splay extend</string -->
@@ -1564,47 +1564,47 @@
    <string name="ask_upload_not_compatible">固件文件不正确.\n强行上载??</string>
    <string name="firmware_file_dumped">保存固件文件 %1$s size %2$d</string>
    <string name="firmware_file_uploaded">升级固件文件 %1$s written %2$d / %3$d</string>
-   <!-- TODO string name="firmware_not_supported">Device does not support firmware functions</string -->
+   <!-- TODO string name="firmware_not_supported">设备不支持固件功能</string -->
    
 
-    <!-- TODO string name="project">Project %1$s</string -->
-    <!-- TODO string name="no_editor">Editor not found</string -->
-    <!-- TODO string name="no_file">File not found</string -->
-    <!-- TODO string name="no_extra">Missing file extra</string -->
-    <!-- TODO string name="no_path">Missing filepath</string -->
-    <!-- TODO string name="no_equate">No equate</string -->
-    <!-- TODO string name="no_surveys">No surveys</string -->
-    <!-- TODO string name="no_tdconfig">Missing tdconfig file</string -->
-    <!-- TODO string name="no_th_file">No Therion file</string -->
-    <!-- TODO string name="file_exists">File exists</string -->
-    <!-- TODO string name="file_create_fail">File create fail</string -->
-    <!-- TODO string name="oom">Warning. Out of memory</string -->
+    <string name="project">项目 %1$s</string>
+    <string name="no_editor">编者未发现</string>
+    <string name="no_file">文件未发现</string>
+    <string name="no_extra">额外文件丢失</string>
+    <string name="no_path">文件路径丢失</string>
+    <string name="no_equate">无相同</string>
+    <string name="no_surveys">无测量</string>
+    <string name="no_tdconfig">Td配置文件丢失</string>
+    <string name="no_th_file">无Therion文件</string>
+    <string name="file_exists">文件存在</string>
+    <string name="file_create_fail">文件建立失败</string>
+    <string name="oom">警告. 内存不足</string>
 
-    <!-- TODO string name="ask_delete_tdconfig">Delete TdConfig file</string -->
-    <!-- TODO string name="ask_remove_equate">Remove equate %1$s ?</string -->
-    <!-- TODO string name="equate_no_station">No station selected</string -->
-    <!-- TODO string name="equate_no_stations">Too few stations</string -->
-    <!-- TODO string name="equate_no_nearby">No station nearby</string -->
+    <string name="ask_delete_tdconfig">删除Td配置文件</string>
+    <string name="ask_remove_equate">移除相同 %1$s ?</string>
+    <string name="equate_no_station">无选定的测量点</string>
+    <string name="equate_no_stations">测量点太少</string>
+    <string name="equate_no_nearby">无附近测量点</string>
 
-    <!-- TODO string name="menu_new">NEW</string -->
-    <!-- TODO string name="menu_equate">ADD EQUATE</string -->
-    <!-- TODO string name="menu_equates">EQUATES</string -->
-    <!-- TODO string name="menu_save">SAVE</string -->
+    <string name="menu_new">新建</string>
+    <string name="menu_equate">添加相同</string>
+    <string name="menu_equates">相同</string>
+    <string name="menu_save">保存</string>
 
-    <!-- TODO string name="overwrite">overwrite</string -->
+    <string name="overwrite">重写</string>
 
-    <!-- TODO string name="title_help">TopoDroid Manager v. %1$s</string -->
-    <!-- TODO string name="title_export_settings">Settings import/export</string -->
-    <!-- TODO string name="title_export">Export project as &#8230;</string -->
-    <!-- TODO string name="title_equates">Project Equates</string -->
-    <!-- TODO string name="title_equate_new">Add equate &#8230;</string -->
-    <!-- TODO string name="title_cwd">Current Work Directory</string -->
-    <!-- TODO string name="title_settings">TdManager Settings</string -->
-    <!-- TODO string name="title_drop">Drop surveys ?</string -->
-    <!-- TODO string name="title_tdconfig">Enter project name</string -->
-    <!-- TODO string name="title_surveys">Surveys</string -->
+    <string name="title_help">TopoDroid 管理 v. %1$s</string>
+    <string name="title_export_settings">设置 输入/输出</string>
+    <string name="title_export">项目输出 &#8230;</string>
+    <string name="title_equates">相同项目</string>
+    <string name="title_equate_new">添加相同 &#8230;</string>
+    <string name="title_cwd">当前工作目录</string>
+    <string name="title_settings">TdManager设置</string>
+    <string name="title_drop">停止测量 ?</string>
+    <string name="title_tdconfig">输入项目名称</string>
+    <string name="title_surveys">测量</string>
 
-    <!-- TODO string name="exported">Saved file %1$s</string -->
-  <!-- TODO string name="imported_settings">Imported settings</string -->
-    <!-- TODO string name="export_failed">Failed export</string -->
+    <string name="exported">保存文件 %1$s</string>
+  <string name="imported_settings">输入设置</string>
+    <string name="export_failed">输出失败</string>
 </resources>
