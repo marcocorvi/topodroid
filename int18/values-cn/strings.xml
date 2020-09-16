@@ -1164,7 +1164,7 @@
   <string name="pref_svg_line_dir_title">线方向</string>
   <string name="pref_svg_line_dir_summary">添加方向标记到线方向</string>
   <string name="pref_svg_stationsize_title">测量点大小</string>
-  <name="pref_svg_stationsize_summary">测量点名称文本大小</string>
+  <string name="pref_svg_stationsize_summary">测量点名称文本大小</string>
   <string name="pref_kml_stations_title">KML/JSON 测点</string>
   <string name="pref_kml_stations_summary">添加测点到KML/GeoJSON输出</string>
   <string name="pref_kml_splays_title">KML/JSON 辐测</string>
@@ -1403,7 +1403,7 @@
   <string name="pref_saved_stations_title">保存测点</string>
   <string name="pref_saved_stations_summary">保存测点颜色为橙色</string>
   <string name="pref_legonly_update_title">只更新主线</string>
-  <string name="pref_legonly_update_summary">只在主线下载时重画中线</string --
+  <string name="pref_legonly_update_summary">只在主线下载时重画中线</string>
   <string name="pref_loopClosure_title">圈测闭合</string>
   <string name="pref_loopClosure_summary">圈测闭合错误补偿</string>
   <!-- UNUSED string name="pref_splayExtend_title">Estimate splay extend</string -->
