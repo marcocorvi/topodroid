@@ -901,7 +901,8 @@
     <string name="export_config">Config súbor</string>
     <string name="export_csv_rawdata">Surové dáta</string>
     <string name="export_dxf_blocks">DXF blocks</string>
-    <string name="export_georeference">Georeferencia</string>
+    <string name="export_dxf_version">Verzia</string>
+    <string name="export_georeference">Georeferencovanie</string>
     <string name="export_grid">Mriežka</string>
     <string name="export_linedir">Smer Čiary</string>
     <string name="export_lrud">LRUD</string>
