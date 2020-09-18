@@ -216,6 +216,7 @@
     <string name="loop_closure_errors">Chyby v uzavretí polygónového ťahu</string>
     <string name="loop_none">Žiadne uzavretie polygónu</string>
     <!-- UNUSED string name="long_lat">Long-Lat</string -->
+    <!-- UNUSED string name="multistation_plane">Multiple-station plane</string -->
 
     <string name="error_m">Chyba [m]</string>
     <string name="fmt_error_m">Chyba %1$.1f m</string>
