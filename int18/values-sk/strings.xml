@@ -602,6 +602,10 @@
     <!-- UNUSED string name="v_section">V-SECTION</string -->
     <string name="h_section">HORIZONTÁLNY</string>
     <!-- UNUSED string name="landscape">landscape</string -->
+	
+    <string name="display_view">Zobrazenie</string>
+    <string name="plan_view">Pôdorys</string>
+    <string name="profile_view">Rozvinutý rez</string>
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Čítanie pamäte DistoX zlyhalo</string>
