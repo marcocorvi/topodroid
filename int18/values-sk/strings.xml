@@ -373,7 +373,7 @@
     <string name="menu_zoom_fit">ORIENTÁCIA</string>
 
     <!-- FIXED_ZOOM -->
-    <!-- TODO string name="zoom_fixed">Graph-paper</string -->
+    <string name="zoom_fixed">Milimetrový papier</string>
 
     <string name="ble_scan_failed">BLE sken neúspešný</string>
     <string name="ble_gatt_failure">BLE failzlyhanieure</string>
@@ -616,7 +616,7 @@
     <string name="ask_manual_update">Aktualizovať Preklad používateľskej príručky?\nSúčašná v. %1$d Inštalovaná v. %2$d</string>
 
     <!-- UNUSED string name="button_add"       >Add       </string -->
-    <!-- TODO string name="button_apply"     >Apply</string -->
+    <string name="button_apply"     >Aplikovať</string>
     <string name="button_back"      >Späť </string>
     <string name="button_cancel"    >Zrušiť   </string>
     <string name="button_change"    >Zmena   </string>
@@ -1117,8 +1117,8 @@
   <string name="pref_bezier_step_summary">Vzdialenosť medzi bodmi Čiary pri exporte do Therionu [m]</string>
   <string name="pref_leg_shots_title">Minimum zámer hlavnej zámery</string>
   <string name="pref_leg_shots_summary">Minimálny počet jednotlivých zámer hlavnej zámery, ktoré program vyhodnotí ako hlavnú zámeru</string>
-  <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
-  <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent [s]</string -->
+  <string name="pref_recent_timeout_title">Časový limit "Posledne stiahnuté"</string>
+  <string name="pref_recent_timeout_summary">Časový limit, po ktorom dáta už nie sú označené ako "Posledne stiahnuté" [s]</string>
   <string name="pref_recent_timeout_title">Posledne stiahnuté dáta - čas</string>
   <string name="pref_recent_timeout_summary">Čas po ktorom uplynutí dáta už nie sú označené ako "Posledne stiahnuté"</string>
   <string name="pref_triple_shot_title">Zvuk pri hlavnej zámere</string>
