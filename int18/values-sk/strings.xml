@@ -1123,10 +1123,8 @@
   <string name="pref_bezier_step_summary">Vzdialenosť medzi bodmi Čiary pri exporte do Therionu [m]</string>
   <string name="pref_leg_shots_title">Minimum zámer hlavnej zámery</string>
   <string name="pref_leg_shots_summary">Minimálny počet jednotlivých zámer hlavnej zámery, ktoré program vyhodnotí ako hlavnú zámeru</string>
-  <string name="pref_recent_timeout_title">Časový limit "Posledne stiahnuté"</string>
+  <string name="pref_recent_timeout_title">Časový limit pre "Posledne stiahnuté"</string>
   <string name="pref_recent_timeout_summary">Časový limit, po ktorom dáta už nie sú označené ako "Posledne stiahnuté" [s]</string>
-  <string name="pref_recent_timeout_title">Posledne stiahnuté dáta - čas</string>
-  <string name="pref_recent_timeout_summary">Čas po ktorom uplynutí dáta už nie sú označené ako "Posledne stiahnuté"</string>
   <string name="pref_triple_shot_title">Zvuk pri hlavnej zámere</string>
   <string name="pref_triple_shot_summary">Zvuková spätná vázba pri rozoznaní hlavnej zámery</string>
   <string name="pref_connect_feedback_title">Pripojenie - Spätná väzba</string>
