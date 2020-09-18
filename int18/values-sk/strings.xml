@@ -1416,6 +1416,8 @@
   <string name="pref_saved_stations_summary">Zafarbí číslo uložených meračských bodov na žlto (oranžovo)</string>	
   <string name="pref_legonly_update_title">Obnovenie iba pri Hlavných zámerách</string>
   <string name="pref_legonly_update_summary">Prekreslí čiary iba keď sa stiahne Hlavná zámera</string>
+  <string name="pref_full_affine_title">Affiná transformácia</string>
+  <string name="pref_full_affine_summary">Povoli afinnú transformáciu Nákresu</string>
   <string name="pref_loopClosure_title">Vyrovnanie polygoného ťahu</string>
   <string name="pref_loopClosure_summary">Výber možností Vyrovnania polygoného ťahu</string>
   <!-- UNUSED string name="pref_splayExtend_title">Estimate splay extend</string -->
