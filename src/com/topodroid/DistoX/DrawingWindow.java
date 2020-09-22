@@ -424,7 +424,7 @@ public class DrawingWindow extends ItemDrawer
   private DrawingSurface  mDrawingSurface;
   private DrawingLinePath mCurrentLinePath;
   private DrawingLinePath mLastLinePath = null;
-  private DrawingAreaPath mCurrentAreaPath;
+  private DrawingAreaPath mCurrentAreaPath = null;
   // private DrawingPath mFixedDrawingPath;
   // private Paint mCurrentPaint;
   private DrawingBrush mCurrentBrush;
@@ -2342,6 +2342,7 @@ public class DrawingWindow extends ItemDrawer
       list = mApp_mData.selectShotsAt( mSid, mFrom, false ); // select only splays
     }
     if ( list != null && list.size() > mSectionSkip ) {
+      // Log.v("DistoX-GRID", "doRestart section" );
       makeSectionReferences( list, mIntersectionT, mSectionSkip );
     }
   }
@@ -2396,7 +2397,8 @@ public class DrawingWindow extends ItemDrawer
     // X_SECTION, XH_SECTION: mFrom != null, mTo == null, splays only 
 
     if ( PlotInfo.isAnySection( mType ) ) {
-      DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
+      // Log.v("DistoX-GRID", "doStart section" );
+      // FIXME MOVED_BACK_IN DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
       makeSectionReferences( list, tt, 0 );
     // } else {
     //   Log.v("DistoX-PLOT", "try to highlight [1] ");
@@ -2416,10 +2418,13 @@ public class DrawingWindow extends ItemDrawer
   // called by doRestart, doStart, doRecover
   private void makeSectionReferences( List< DBlock > list, float tt, int skip )
   {
+
     // Log.v("DistoX-SPLAY", "makeSectionReferences blocks " + list.size() + " skip " + skip );
     assert( mLastLinePath == null); // not needed - guaranteed by callers
+
+    mDrawingSurface.newReferences( DrawingSurface.DRAWING_SECTION, (int)mType );
     // Log.v("DistoX", "Section " + mClino + " " + mAzimuth );
-    // DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface ); // FIXME_SK moved out
+    DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface ); // FIXME_SK moved out
     float xfrom=0;
     float yfrom=0;
     float xto=0;
@@ -2450,8 +2455,6 @@ public class DrawingWindow extends ItemDrawer
     TDVector V0 = new TDVector( ma, mc );
     TDVector V1 = new TDVector( - (float)Math.sin( ma ), (float)Math.cos( ma ), 0 );
     TDVector V2 = V0.cross( V1 );
-
-    mDrawingSurface.newReferences( DrawingSurface.DRAWING_SECTION, (int)mType );
 
     float dist = 0;
     DBlock blk = null;
@@ -3361,58 +3364,61 @@ public class DrawingWindow extends ItemDrawer
           mDrawingSurface.resetPreviewPath();
 
           if ( mSymbol == Symbol.LINE ) {
-            if (    ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2 || ( mPointCnt % mLinePointStep ) > 0 ) {
-              if ( mCurrentLinePath != null ) mCurrentLinePath.addPoint( xs, ys );
+            if ( mCurrentLinePath != null ) { // SAFETY CHECK
+              if (    ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2 || ( mPointCnt % mLinePointStep ) > 0 ) {
+                mCurrentLinePath.addPoint( xs, ys );
+              }
+              if ( mLandscape ) mCurrentLinePath.landscapeToPortrait();
             }
-            if ( mLandscape ) mCurrentLinePath.landscapeToPortrait(); // may produce null_pointer_exc.
           } else if ( mSymbol == Symbol.AREA ) {
-            // Log.v("DistoX",
-            //       "DX " + (xs - mCurrentAreaPath.mFirst.x) + " DY " + (ys - mCurrentAreaPath.mFirst.y ) );
-            if (    PlotInfo.isVertical( mType )
-                 && BrushManager.isAreaCloseHorizontal( mCurrentArea ) 
-                 && Math.abs( ys - mCurrentAreaPath.mFirst.y ) < 10  // 10 == 0.5 meter
-              ) {
-              DrawingAreaPath area = new DrawingAreaPath( mCurrentAreaPath.mAreaType,
-                                                          mCurrentAreaPath.mAreaCnt, 
-                                                          mCurrentAreaPath.mPrefix, 
-                                                          TDSetting.mAreaBorder, 
-                                                          mDrawingSurface.scrapIndex() );
-              if ( xs - mCurrentAreaPath.mFirst.x > 20 ) { // 20 == 1.0 meter // CLOSE BOTTOM SURFACE
-                LinePoint lp = mCurrentAreaPath.mFirst; 
-                float yy = lp.y;
-                mCurrentAreaPath.addPoint( xs, yy-0.001f );
-                area.addStartPoint( lp.x, lp.y );
-                for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
-                  if ( lp.y <= yy ) {
-                    area.addPoint( lp.x, yy );
-                    break;
-                  } else {
-                    area.addPoint( lp.x, lp.y );
+            if ( mCurrentAreaPath != null ) { // SAFETY CHECK
+              // Log.v("DistoX", "DX " + (xs - mCurrentAreaPath.mFirst.x) + " DY " + (ys - mCurrentAreaPath.mFirst.y ) );
+              if (    PlotInfo.isVertical( mType )
+                   && BrushManager.isAreaCloseHorizontal( mCurrentArea ) 
+                   && Math.abs( ys - mCurrentAreaPath.mFirst.y ) < 10  // 10 == 0.5 meter
+                ) {
+                DrawingAreaPath area = new DrawingAreaPath( mCurrentAreaPath.mAreaType,
+                                                            mCurrentAreaPath.mAreaCnt, 
+                                                            mCurrentAreaPath.mPrefix, 
+                                                            TDSetting.mAreaBorder, 
+                                                            mDrawingSurface.scrapIndex() );
+                if ( xs - mCurrentAreaPath.mFirst.x > 20 ) { // 20 == 1.0 meter // CLOSE BOTTOM SURFACE
+                  LinePoint lp = mCurrentAreaPath.mFirst; 
+                  float yy = lp.y;
+                  mCurrentAreaPath.addPoint( xs, yy-0.001f );
+                  area.addStartPoint( lp.x, lp.y );
+                  for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
+                    if ( lp.y <= yy ) {
+                      area.addPoint( lp.x, yy );
+                      break;
+                    } else {
+                      area.addPoint( lp.x, lp.y );
+                    }
                   }
-                }
-                mCurrentAreaPath = area; // area is empty if not recreated
-              } else if ( mCurrentAreaPath.mFirst.x - xs > 20 ) { // 20 == 1.0 meter // CLOSE TOP SURFACE
-                LinePoint lp = mCurrentAreaPath.mFirst; 
-                float yy = lp.y;
-                mCurrentAreaPath.addPoint( xs, yy-0.001f );
-                area.addStartPoint( lp.x, lp.y );
-                for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
-                  if ( lp.y >= yy ) {
-                    area.addPoint( lp.x, yy );
-                    break;
-                  } else {
-                    area.addPoint( lp.x, lp.y );
+                  mCurrentAreaPath = area; // area is empty if not recreated
+                } else if ( mCurrentAreaPath.mFirst.x - xs > 20 ) { // 20 == 1.0 meter // CLOSE TOP SURFACE
+                  LinePoint lp = mCurrentAreaPath.mFirst; 
+                  float yy = lp.y;
+                  mCurrentAreaPath.addPoint( xs, yy-0.001f );
+                  area.addStartPoint( lp.x, lp.y );
+                  for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
+                    if ( lp.y >= yy ) {
+                      area.addPoint( lp.x, yy );
+                      break;
+                    } else {
+                      area.addPoint( lp.x, lp.y );
+                    }
                   }
+                  mCurrentAreaPath = area; // area is empty if not recreated
                 }
-                mCurrentAreaPath = area; // area is empty if not recreated
+              } else {  
+                if (    ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2
+                     || ( mPointCnt % mLinePointStep ) > 0 ) {
+                  mCurrentAreaPath.addPoint( xs, ys );
+                }
               }
-            } else {  
-              if (    ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2
-                   || ( mPointCnt % mLinePointStep ) > 0 ) {
-                mCurrentAreaPath.addPoint( xs, ys );
-              }
-            }
-    	    if ( mLandscape ) mCurrentAreaPath.landscapeToPortrait();
+    	      if ( mLandscape ) mCurrentAreaPath.landscapeToPortrait();
+            } 
           }
           
           if ( mPointCnt > mLinePointStep || mLinePointStep == POINT_MAX ) {
@@ -3540,40 +3546,44 @@ public class DrawingWindow extends ItemDrawer
             }
             else
             {
-              if ( mSymbol == Symbol.LINE && mCurrentLinePath != null ) {
-                // N.B.
-                // section direction is in the direction of the tick
-                // and splay reference are taken from the station the section looks towards
-                // section line points: right-end -- left-end -- tick-end
-                //
-                if ( BrushManager.isLineSection(  mCurrentLinePath.mLineType ) ) {
-                  mLastLinePath = null;
-                  doSectionLine( mCurrentLinePath );
-                } else { // not section line
-                  boolean addline= true;
-                  if ( mContinueLine > CONT_NONE && ! BrushManager.isLineSection( mCurrentLine ) ) {
-                    addline = tryToJoin( mCurrentLinePath, mCurrentLinePath );
-                  }
-                  if ( addline ) {
-                    mCurrentLinePath.computeUnitNormal();
-                    if ( mSymbol == Symbol.LINE && BrushManager.isLineClosed( mCurrentLine ) ) {
-                      // mCurrentLine == mCurrentLinePath.mLineType
-                      mCurrentLinePath.setClosed( true );
-                      mCurrentLinePath.closePath();
+              if ( mSymbol == Symbol.LINE ) {
+                if ( mCurrentLinePath != null ) {
+                  // N.B.
+                  // section direction is in the direction of the tick
+                  // and splay reference are taken from the station the section looks towards
+                  // section line points: right-end -- left-end -- tick-end
+                  //
+                  if ( BrushManager.isLineSection(  mCurrentLinePath.mLineType ) ) {
+                    mLastLinePath = null;
+                    doSectionLine( mCurrentLinePath );
+                  } else { // not section line
+                    boolean addline= true;
+                    if ( mContinueLine > CONT_NONE && ! BrushManager.isLineSection( mCurrentLine ) ) {
+                      addline = tryToJoin( mCurrentLinePath, mCurrentLinePath );
                     }
-                    mDrawingSurface.addDrawingPath( mCurrentLinePath );
-                    mLastLinePath = mCurrentLinePath;
-                  // } else {
-                  //   mLastLinePath = ???
+                    if ( addline ) {
+                      mCurrentLinePath.computeUnitNormal();
+                      if ( mSymbol == Symbol.LINE && BrushManager.isLineClosed( mCurrentLine ) ) {
+                        // mCurrentLine == mCurrentLinePath.mLineType
+                        mCurrentLinePath.setClosed( true );
+                        mCurrentLinePath.closePath();
+                      }
+                      mDrawingSurface.addDrawingPath( mCurrentLinePath );
+                      mLastLinePath = mCurrentLinePath;
+                    // } else {
+                    //   mLastLinePath = ???
+                    }
                   }
+                  mCurrentLinePath = null;
                 }
-                mCurrentLinePath = null;
-              } else if ( mSymbol == Symbol.AREA && mCurrentAreaPath != null ) {
-                mCurrentAreaPath.closePath();
-                mCurrentAreaPath.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
-                mDrawingSurface.addDrawingPath( mCurrentAreaPath );
-                mCurrentAreaPath = null;
-                mLastLinePath = null;
+              } else if ( mSymbol == Symbol.AREA ) {
+                if ( mCurrentAreaPath != null ) {
+                  mCurrentAreaPath.closePath();
+                  mCurrentAreaPath.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
+                  mDrawingSurface.addDrawingPath( mCurrentAreaPath );
+                  mCurrentAreaPath = null;
+                  mLastLinePath = null;
+                }
               }
             }
             // undoBtn.setEnabled(true);
@@ -6297,10 +6307,11 @@ public class DrawingWindow extends ItemDrawer
       // now switch to extended view FIXME-VIEW
       setPlotType2( true );
     } else {
+      // Log.v("DistoX-GRID", "doRecover section" );
       mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null, false );
       mDrawingSurface.modeloadDataStream( tdr, null, false /*, null */ ); // sections are not cached
       setPlotType3( );
-      DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
+      // FIXME MOVED_BACK_IN DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
       makeSectionReferences( mApp_mData.selectAllShots( mSid, TDStatus.NORMAL ), -1, 0 );
     }
     mOffset.x = x;

@@ -4223,6 +4223,9 @@ class TDExporter
           ret = -2; // CALIB NAME ALREADY EXISTS
         } else {
           String date   = nextLineAtPos( br, 2 );
+          if ( date == null || date.length() < 10 ) {
+            date = TDUtil.currentDate();
+          }
           String device = nextLineAtPos( br, 2 );
           if ( ! device.equals( device_name ) ) {
             ret = -3; // DEVICE MISMATCH

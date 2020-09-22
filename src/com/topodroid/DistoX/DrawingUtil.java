@@ -19,7 +19,7 @@ import com.topodroid.math.Point2D;
 import android.graphics.Paint;
 import android.graphics.Path;
 
-// import android.util.Log;
+import android.util.Log;
 
 public class DrawingUtil
 {
@@ -78,6 +78,7 @@ public class DrawingUtil
 
   private static void addGridLine( int z, float x1, float x2, float y1, float y2, DrawingSurface surface )
   { 
+    // Log.v("DistoX-GRID", "add grid-line Z " + z + " X " + x1 + " " + x2 + " Y " + y1 + " " + y2 );
     DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_GRID, null, -1 );
     int k = 1;
     Paint paint = BrushManager.fixedGridPaint;
@@ -100,9 +101,11 @@ public class DrawingUtil
     surface.addGridPath( dpath, k );
   }
 
+  // used for plan/profile
   static
   void addGrid( float xmin, float xmax, float ymin, float ymax, DrawingSurface surface )
   {
+    // Log.v("DistoX-GRID", "add grid min/max X " + xmin + " " + xmax + " Y " + ymin + " " + ymax );
     if ( xmin > xmax ) { float x = xmin; xmin = xmax; xmax = x; }
     if ( ymin > ymax ) { float y = ymin; ymin = ymax; ymax = y; }
     xmin = (xmin - 100.0f) / TDSetting.mUnitGrid;
@@ -137,9 +140,11 @@ public class DrawingUtil
     }
   }
 
+  // used for x-sections
   static
   void addGrid( float xmin, float xmax, float ymin, float ymax, float xoff, float yoff, DrawingSurface surface )
   {
+    // Log.v("DistoX-GRID", "add grid min/max X " + xmin + " " + xmax + " Y " + ymin + " " + ymax + " off " + xoff + " " + yoff );
     if ( xmin > xmax ) { float x = xmin; xmin = xmax; xmax = x; }
     if ( ymin > ymax ) { float y = ymin; ymin = ymax; ymax = y; }
     xmin = (xmin - 100.0f) / TDSetting.mUnitGrid;
@@ -161,17 +166,20 @@ public class DrawingUtil
     if ( xx1 > xx2 ) { int x = xx1; xx1 = xx2; xx2 = x; }
     if ( yy1 > yy2 ) { int y = yy1; yy1 = yy2; yy2 = y; }
 
+    // Log.v("DistoX-GRID", "add grid Y-lines X " + xx1 + " " + xx2 + " Y " + y1 + " " + y2 );
     DrawingPath dpath = null;
     for ( int x = xx1; x <= xx2; x += 1 ) {
       float x0 = x * TDSetting.mUnitGrid;
       x0 = toSceneX( x0, x0) - xoff;
       addGridLine( x, x0, x0, y1, y2, surface );
     }
+    // Log.v("DistoX-GRID", "add grid X-lines X " + x1 + " " + x2 + " Y " + yy1 + " " + yy2 );
     for ( int y = yy1; y <= yy2; y += 1 ) {
       float y0 = y * TDSetting.mUnitGrid;
       y0 = toSceneY( y0, y0 ) - yoff;
       addGridLine( y, x1, x2, y0, y0, surface );
     }
+    // Log.v("DistoX-GRID", "grid sizes " + surface.getGrid1Size() + " " + surface.getGrid10Size() );
   }
 
 }

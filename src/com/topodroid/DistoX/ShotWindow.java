@@ -44,7 +44,7 @@ import android.os.Handler;
 
 import android.app.Activity;
 
-// import android.content.Context;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.ActivityNotFoundException;
@@ -55,6 +55,7 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.KeyEvent;
+import android.view.inputmethod.InputMethodManager;
 
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.AdapterView;
@@ -63,6 +64,7 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.EditText;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 
@@ -1112,6 +1114,22 @@ public class ShotWindow extends Activity
         }
       }
     } );
+
+    // https://stackoverflow.com/questions/7100555/preventing-catching-illegalargumentexception-parameter-must-be-a-descendant-of
+    mList.setRecyclerListener( new AbsListView.RecyclerListener() {
+        @Override
+        public void onMovedToScrapHeap(View view) {
+            if ( view.hasFocus()){
+                view.clearFocus(); //we can put it inside the second if as well, but it makes sense to do it to all scraped views
+                //Optional: also hide keyboard in that case
+                if ( view instanceof EditText) {
+                    InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
+            }
+        }
+    });
+
     mList.setAdapter( mDataAdapter );
     // mList.setOnItemClickListener( this );
     // mList.setLongClickable( true );

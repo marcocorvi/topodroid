@@ -2102,14 +2102,14 @@ class Scrap
     }
   }
 
-
+  // called under TDPath.mSelectionLock
   void displayPoints( Canvas canvas, Matrix matrix, RectF bbox, float dot_radius,
                       boolean spoints, boolean slines, boolean sareas, boolean splays, boolean legs_sshots, boolean sstations,
                       DrawingStationSplay station_splay )
   {
     if ( TDSetting.mWithLevels == 0 ) { // treat no-levels case by itself
       for ( SelectionBucket bucket: mSelection.mBuckets ) {
-        if ( bucket.intersects( bbox ) ) {
+        if ( bucket.intersects( bbox ) && bucket.mPoints != null ) { // SAFETY CHECK
           for ( SelectionPoint pt : bucket.mPoints ) { 
             int type = pt.type();
             if ( type == DrawingPath.DRAWING_PATH_POINT ) {
@@ -2143,7 +2143,7 @@ class Scrap
       }
     } else {
       for ( SelectionBucket bucket: mSelection.mBuckets ) {
-        if ( bucket.intersects( bbox ) ) {
+        if ( bucket.intersects( bbox ) && bucket.mPoints != null ) { // SAFETY CHECK
           for ( SelectionPoint pt : bucket.mPoints ) { 
             int type = pt.type();
             if ( type == DrawingPath.DRAWING_PATH_POINT ) {
@@ -2178,6 +2178,7 @@ class Scrap
     }
   }
 
+  // called under TDPath.mSelectionLock
   void drawSelection( Canvas canvas, Matrix matrix, float zoom, float scale, boolean is_extended )
   {
     // PATH_SELECTION

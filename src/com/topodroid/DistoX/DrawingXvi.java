@@ -147,9 +147,9 @@ class DrawingXvi
       // }
       
       // centerline data
-      if ( PlotInfo.isSketch2D( type ) ) { 
+      // if ( PlotInfo.isSketch2D( type ) ) { 
         // FIXME OK PROFILE
-
+        // FIXME OK X-SECTIONS
 
         // STATIONS
         out.write("set XVIstations {\n");
@@ -201,9 +201,9 @@ class DrawingXvi
         }
 	out.write("}\n\n");
         out.flush();
-      } else {
-        printXviGrid( out, bb, xoff, yoff );
-      }
+      // } else {
+      //   printXviGrid( out, bb, xoff, yoff );
+      // }
 
       out.write("set XVIsketchlines {\n");
       for ( ICanvasCommand cmd : plot.getCommands() ) {

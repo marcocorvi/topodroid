@@ -103,7 +103,7 @@ class DrawingCommandManager
 
   DrawingCommandManager( int mode, String plot_name )
   {
-    Log.v("DistoX-MANAGER", plot_name + " command manager mode " + mode );
+    // Log.v("DistoX-MANAGER", plot_name + " command manager mode " + mode );
     mMode = mode;
     mIsExtended  = false;
     mBBox = new RectF();
@@ -163,7 +163,7 @@ class DrawingCommandManager
 
   int newScrapIndex( ) { 
     if ( mMode < 3 ) {
-      Log.v("DistoX-MANAGER", mPlotName + " new scrap. currently " + mScraps.size() );
+      // Log.v("DistoX-MANAGER", mPlotName + " new scrap. currently " + mScraps.size() );
       mScrapIdx = mScraps.size();
       mCurrentScrap = new Scrap( mScrapIdx, mPlotName );
       mScraps.add( mCurrentScrap ); 
@@ -1486,6 +1486,7 @@ class DrawingCommandManager
   // @param multiscrap  whether the sketch has several scraps
   void exportTherion( int type, BufferedWriter out, String full_name, String proj_name, int proj_dir, boolean multisketch )
   {
+    // Log.v("DistoX-EXPORT", "Therion " + full_name + " splays " + mSplaysStack.size() );
     RectF bbox = getBoundingBox( );
     if ( multisketch ) {
       // Log.v("DistoXX", "multi scrap export stack size " + mCurrentStack.size() );

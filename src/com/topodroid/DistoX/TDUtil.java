@@ -239,28 +239,34 @@ public class TDUtil
 
   public static int dateParseYear( String date )
   {
-    try {
-      return Integer.parseInt( date.substring(0, 4) );
-    } catch ( NumberFormatException e ) { }
-    return 2000;
+    if ( date != null && date.length() >= 4 ) {
+      try {
+        return Integer.parseInt( date.substring(0, 4) );
+      } catch ( NumberFormatException e ) { }
+    }
+    return 1970;
   }
 
   public static int dateParseMonth( String date )
   {
     int ret = 0;
-    if ( date.charAt(5) == '1' ) ret += 10;
-    char ch = date.charAt(6);
-    if ( ch >= '0' && ch <= '9' ) ret += (ch - '0');
+    if ( date != null && date.length() >= 7 ) {
+      if ( date.charAt(5) == '1' ) ret += 10;
+      char ch = date.charAt(6);
+      if ( ch >= '0' && ch <= '9' ) ret += (ch - '0');
+    }
     return (ret > 0)? ret-1 : 0;
   }
 
   public static int dateParseDay( String date )
   {
-    int ret = 0;
-    char ch = date.charAt(8);
-    if ( ch >= '1' && ch <= '3' ) ret += 10*(ch - '0');
-    ch = date.charAt(9);
-    if ( ch >= '1' && ch <= '9' ) ret += (ch - '0');
+    int ret = 1;
+    if ( date != null && date.length() >= 10 ) {
+      char ch = date.charAt(8);
+      if ( ch >= '1' && ch <= '3' ) ret += 10*(ch - '0');
+      ch = date.charAt(9);
+      if ( ch >= '1' && ch <= '9' ) ret += (ch - '0');
+    }
     return Math.max(ret, 0);
   }
 

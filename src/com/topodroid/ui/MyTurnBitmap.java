@@ -64,6 +64,7 @@ public class MyTurnBitmap
     for (int j=0; j<mPxlSize; ++j ) for ( int i=0; i<mPxlSize; ++i ) {
       bm1.setPixel( i, j, mPxl[j*mPxlSize+i] );
     }
+    if ( w < 32 ) return bm1; // SAFETY CHECK
     Bitmap bm2 = Bitmap.createScaledBitmap( bm1, w, w, true );
     bm1.recycle();
     return bm2;

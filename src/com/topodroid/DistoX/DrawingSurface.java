@@ -554,6 +554,10 @@ class DrawingSurface extends SurfaceView
   // k : grid type 1, 10, 100
   public void addGridPath( DrawingPath path, int k ) { commandManager.addTmpGrid( path, k ); }
 
+  // DEBUG
+  // public int getGrid1Size() { return commandManager.getGrid1().size(); }
+  // public int getGrid10Size() { return commandManager.getGrid10().size(); }
+
   public void addDrawingPath (DrawingPath drawingPath) { commandManager.addCommand(drawingPath); }
 
   // public void addDrawingDotPath (DrawingPath drawingPath) { commandManager.addDotCommand(drawingPath); }
