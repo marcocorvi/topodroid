@@ -363,11 +363,17 @@ When a sketch with section points is exported through the <u>export</u> dialog, 
 also exported.<br><p>
 
 Settings:<ul style="margin-top=0">
-<li>automatic <u>station-points</u>. [default: on].</li>
-<li>add <u>splays</u> to the scrap (as lines of type "u:splay") [default: off].</li>
-<li><u>point spacing</u> minimum distance between points on polylines. Intermediate points are not exported. Default 20 cm</li>
+<li>automatic <u>station-points</u>. [default: yes].</li>
+<li>add <u>splays</u> to the scrap (as lines of type "u:splay") [default: no].</li>
+<li>add a xtherion command to read the <u>XVI</u> image of the sketch [default: no].</li>
 <li>export <u>scale</u>. Default 1:100</li>
+<li><u>point spacing</u> minimum distance between points on polylines. Intermediate points are not exported. Default 20 cm</li>
 </ul><p>
+
+XVI images are not automatically exported with the Therion "th2" file, even if a xtherion command to include it is added to
+the therion file, because it would not contain more information than the therion file.
+The command can be used to load in xtherion an XVI image created by another program.
+<br><p>
 
 <!--
 <u>Note</u>. With version 3.1 TopoDroid saves sketches "natively" in its binary format.<br>

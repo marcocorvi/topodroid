@@ -149,7 +149,7 @@ class DrawingXvi
       // centerline data
       // if ( PlotInfo.isSketch2D( type ) ) { 
         // FIXME OK PROFILE
-        // FIXME OK X-SECTIONS
+        // FIXME OK X-SECTIONS before 2020.09.22 (5.0.5h) this was disabled for x-sections
 
         // STATIONS
         out.write("set XVIstations {\n");
