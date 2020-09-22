@@ -216,6 +216,7 @@
     <string name="loop_closure_errors">Chyby v uzavretí polygónového ťahu</string>
     <string name="loop_none">Žiadne uzavretie polygónu</string>
     <!-- UNUSED string name="long_lat">Long-Lat</string -->
+    <!-- UNUSED string name="multistation_plane">Multiple-station plane</string -->
 
     <string name="error_m">Chyba [m]</string>
     <string name="fmt_error_m">Chyba %1$.1f m</string>
@@ -373,7 +374,7 @@
     <string name="menu_zoom_fit">ORIENTÁCIA</string>
 
     <!-- FIXED_ZOOM -->
-    <!-- TODO string name="zoom_fixed">Graph-paper</string -->
+    <string name="zoom_fixed">Milimetrový papier</string>
 
     <string name="ble_scan_failed">BLE sken neúspešný</string>
     <string name="ble_gatt_failure">BLE failzlyhanieure</string>
@@ -601,6 +602,10 @@
     <!-- UNUSED string name="v_section">V-SECTION</string -->
     <string name="h_section">HORIZONTÁLNY</string>
     <!-- UNUSED string name="landscape">landscape</string -->
+	
+    <string name="display_view">Zobrazenie</string>
+    <string name="plan_view">Pôdorys</string>
+    <string name="profile_view">Rozvinutý rez</string>
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Čítanie pamäte DistoX zlyhalo</string>
@@ -616,7 +621,7 @@
     <string name="ask_manual_update">Aktualizovať Preklad používateľskej príručky?\nSúčašná v. %1$d Inštalovaná v. %2$d</string>
 
     <!-- UNUSED string name="button_add"       >Add       </string -->
-    <!-- TODO string name="button_apply"     >Apply</string -->
+    <string name="button_apply"     >Aplikovať</string>
     <string name="button_back"      >Späť </string>
     <string name="button_cancel"    >Zrušiť   </string>
     <string name="button_change"    >Zmena   </string>
@@ -896,7 +901,8 @@
     <string name="export_config">Config súbor</string>
     <string name="export_csv_rawdata">Surové dáta</string>
     <string name="export_dxf_blocks">DXF blocks</string>
-    <string name="export_georeference">Georeferencia</string>
+    <string name="export_dxf_version">Verzia</string>
+    <string name="export_georeference">Georeferencovanie</string>
     <string name="export_grid">Mriežka</string>
     <string name="export_linedir">Smer Čiary</string>
     <string name="export_lrud">LRUD</string>
@@ -1117,10 +1123,8 @@
   <string name="pref_bezier_step_summary">Vzdialenosť medzi bodmi Čiary pri exporte do Therionu [m]</string>
   <string name="pref_leg_shots_title">Minimum zámer hlavnej zámery</string>
   <string name="pref_leg_shots_summary">Minimálny počet jednotlivých zámer hlavnej zámery, ktoré program vyhodnotí ako hlavnú zámeru</string>
-  <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
-  <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent [s]</string -->
-  <string name="pref_recent_timeout_title">Posledne stiahnuté dáta - čas</string>
-  <string name="pref_recent_timeout_summary">Čas po ktorom uplynutí dáta už nie sú označené ako "Posledne stiahnuté"</string>
+  <string name="pref_recent_timeout_title">Časový limit pre "Posledne stiahnuté"</string>
+  <string name="pref_recent_timeout_summary">Časový limit, po ktorom dáta už nie sú označené ako "Posledne stiahnuté" [s]</string>
   <string name="pref_triple_shot_title">Zvuk pri hlavnej zámere</string>
   <string name="pref_triple_shot_summary">Zvuková spätná vázba pri rozoznaní hlavnej zámery</string>
   <string name="pref_connect_feedback_title">Pripojenie - Spätná väzba</string>
@@ -1412,6 +1416,8 @@
   <string name="pref_saved_stations_summary">Zafarbí číslo uložených meračských bodov na žlto (oranžovo)</string>	
   <string name="pref_legonly_update_title">Obnovenie iba pri Hlavných zámerách</string>
   <string name="pref_legonly_update_summary">Prekreslí čiary iba keď sa stiahne Hlavná zámera</string>
+  <string name="pref_full_affine_title">Affiná transformácia</string>
+  <string name="pref_full_affine_summary">Povoli afinnú transformáciu Nákresu</string>
   <string name="pref_loopClosure_title">Vyrovnanie polygoného ťahu</string>
   <string name="pref_loopClosure_summary">Výber možností Vyrovnania polygoného ťahu</string>
   <!-- UNUSED string name="pref_splayExtend_title">Estimate splay extend</string -->

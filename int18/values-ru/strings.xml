@@ -369,7 +369,7 @@
     <string name="menu_zoom_fit">ВМЕСТИТЬ</string>
 
     <!-- FIXED_ZOOM -->
-    <!-- TODO string name="zoom_fixed">Graph-paper</string -->
+    <string name="zoom_fixed">Милиметровая-бумага</string>
 
     <string name="ble_scan_failed">Сбой сканирования BLE</string>
     <string name="ble_gatt_failure">Сбой BLE</string>
@@ -1096,8 +1096,8 @@
   <string name="pref_bezier_step_summary">Маскисмальное расстояние между точками при апроксимации кривых полилиниями [м]</string>
   <string name="pref_leg_shots_title">Мин. кол-во измерений между пикетами</string>
   <string name="pref_leg_shots_summary">Количество одинаковых повторяющихся замеров на отрезке между пикетами</string>
-  <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
-  <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent [s]</string -->
+  <!-- TODO string name="pref_recent_timeout_title">Время свежести замеров</string -->
+  <!-- TODO string name="pref_recent_timeout_summary">Отрезок времени в течении которого данные считаются новыми (свежими) [сек]</string -->
   <string name="pref_recent_timeout_title">Время свежести замеров</string>
   <string name="pref_recent_timeout_summary">Отрезок времени после скачивания в течении которого данные выделены на абрисе как новые. [с]</string>
   <string name="pref_triple_shot_title">Сигнал одинаковых измерений</string>
