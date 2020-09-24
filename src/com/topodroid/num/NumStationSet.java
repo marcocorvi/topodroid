@@ -118,12 +118,12 @@ class NumStationSet
       if ( right != null ) right.initShortPathDist( p );
     }
 
-    // used to reset the flag mHas3DCoords to stations in a station set
-    void reset3DCoords( boolean b )
+    // used to reset the flag "has 3D Coords" to stations in a station set
+    void reset3DCoords( )
     {
-      value.mHas3DCoords = b;
-      if ( left  != null ) left.reset3DCoords( b );
-      if ( right != null ) right.reset3DCoords( b );
+      value.clearHas3DCoords( );
+      if ( left  != null ) left.reset3DCoords( );
+      if ( right != null ) right.reset3DCoords( );
     }
 
     void setAzimuths()
@@ -193,10 +193,10 @@ class NumStationSet
     mRoot.initShortPathDist( p );
   }
 
-  // reset the flag mHas3DCoords in the stations of this set
-  void reset3DCoords( boolean b ) 
+  // reset the flag "has 3D Coords" in the stations of this set
+  void reset3DCoords( ) 
   {
-    if ( mRoot != null ) mRoot.reset3DCoords( b );
+    if ( mRoot != null ) mRoot.reset3DCoords( );
   }
 
   void setAzimuths( )

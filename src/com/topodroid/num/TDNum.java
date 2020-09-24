@@ -937,7 +937,7 @@ public class TDNum
     // }
 
     mStartStation = new NumStation( start );
-    mStartStation.mHasExtend = true;
+    mStartStation.setHasExtend( true );
     mStations.addStation( mStartStation );
 
     // if ( TDLog.LOG_DEBUG ) Log.v( TDLog.TAG, "start station " + start +  " shots " + tmpshots.size() );
@@ -1134,8 +1134,8 @@ public class TDNum
       for ( NumShot sh1 : mShots ) {
         sh1.mUsed = false;
       }
-      mStations.reset3DCoords( false );
-      mStartStation.mHas3DCoords = true;
+      mStations.reset3DCoords( );       // reset the stations "Has 3D Coords" to false
+      mStartStation.setHas3DCoords( );  // except for the start station 
 
       boolean repeat = true;
       while ( repeat ) {
@@ -1147,7 +1147,7 @@ public class TDNum
           float c2 = sh2.clino();
           float b2 = sh2.bearing(); // 20200503 bearing() already has declination; was + mDecl;
           // Log.v("DistoX-DECL", "shot " + s1.name + " " + s2.name + " clino " + c2 + " bearing " + b2 );
-          if ( s1.mHas3DCoords && ! s2.mHas3DCoords ) {
+          if ( s1.has3DCoords() && ! s2.has3DCoords() ) {
             // reset s2 values from the shot
             // float d = sh2.length() * sh2.mDirection; // FIXME DIRECTION
             float d = sh2.length();
@@ -1158,11 +1158,11 @@ public class TDNum
             s2.e = s1.e + e;
             s2.s = s1.s + s;
             s2.v = s1.v + v;
-            s2.mHas3DCoords = true;
+            s2.setHas3DCoords( );
             sh2.mUsed = true;
             repeat = true;
             // if ( TDLog.LOG_DEBUG )  Log.v( "DistoX-NUM", "reset " + s1.name + "->" + s2.name + " " + e + " " + s + " " + v );
-          } else if ( s2.mHas3DCoords && ! s1.mHas3DCoords ) {
+          } else if ( s2.has3DCoords() && ! s1.has3DCoords() ) {
             // reset s1 values from the shot
             // float d = - sh2.length() * sh2.mDirection; // FIXME DIRECTION
             float d = - sh2.length();
@@ -1173,7 +1173,7 @@ public class TDNum
             s1.e = s2.e + e;
             s1.s = s2.s + s;
             s1.v = s2.v + v;
-            s1.mHas3DCoords = true;
+            s1.setHas3DCoords( );
             sh2.mUsed = true;
             repeat = true;
             // if ( TDLog.LOG_DEBUG )  Log.v( "DistoX-NUM", "reset " + s1.name + "<-" + s2.name + " " + e + " " + s + " " + v );

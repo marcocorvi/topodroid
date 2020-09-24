@@ -24,8 +24,13 @@ public class NumStation extends NumSurveyPoint
 {
   public String name;  // station name
   public boolean mDuplicate; // whether this is a duplicate station
-  public boolean mHas3DCoords; // whether the station has got coords after loop-closure
-  public boolean mHasExtend; // whether the station has "extend"
+
+  private boolean mHas3DCoords; // whether the station has got coords after loop-closure
+                                // this flag is checked by the GeoJSON export, besides by TDNum
+  private boolean mHasExtend; // whether the station has "extend"
+                              // set by TDNum only for the start station when it does data reduction
+                              // used to check in the export
+
   NumShot s1;
   NumShot s2;
   NumNode node;
@@ -42,6 +47,13 @@ public class NumStation extends NumSurveyPoint
   public boolean unbarriered() { return mHidden >= -1; }
   public boolean barrier() { return mBarrierAndHidden || mHidden < 0; }
   public boolean hidden()  { return mBarrierAndHidden || mHidden > 0; }
+
+  public boolean has3DCoords() { return mHas3DCoords; }
+  public void clearHas3DCoords( ) { mHas3DCoords = false; }
+  public void setHas3DCoords( ) { mHas3DCoords = true; }
+
+  public boolean hasExtend() { return mHasExtend; }
+  public void setHasExtend( boolean has_extend ) { mHasExtend = has_extend; }
 
   private ArrayList< NumAzimuth > mLegs; // ordered list of legs at the shot (used to compute extends)
 

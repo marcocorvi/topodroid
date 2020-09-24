@@ -58,7 +58,7 @@ public class NumShot
     to   = t;
     // block = blk;
     // mIgnoreExtend = ( blk.getIntExtend() == DBlock.EXTEND_IGNORE);
-    mIgnoreExtend = !( f.mHasExtend && t.mHasExtend );
+    mIgnoreExtend = !( f.hasExtend() && t.hasExtend() );
     mUsed = false;
     mDirection = dir;
     mBranchDir = 0;
