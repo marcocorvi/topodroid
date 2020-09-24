@@ -118,11 +118,12 @@ class NumStationSet
       if ( right != null ) right.initShortPathDist( p );
     }
 
-    void setCoords( boolean b )
+    // used to reset the flag mHas3DCoords to stations in a station set
+    void reset3DCoords( boolean b )
     {
-      value.mHasCoords = b;
-      if ( left  != null ) left.setCoords( b );
-      if ( right != null ) right.setCoords( b );
+      value.mHas3DCoords = b;
+      if ( left  != null ) left.reset3DCoords( b );
+      if ( right != null ) right.reset3DCoords( b );
     }
 
     void setAzimuths()
@@ -192,22 +193,20 @@ class NumStationSet
     mRoot.initShortPathDist( p );
   }
 
-  void setCoords( boolean b ) 
+  // reset the flag mHas3DCoords in the stations of this set
+  void reset3DCoords( boolean b ) 
   {
-    if ( mRoot == null ) return;
-    mRoot.setCoords( b );
+    if ( mRoot != null ) mRoot.reset3DCoords( b );
   }
 
   void setAzimuths( )
   {
-    if ( mRoot == null ) return;
-    mRoot.setAzimuths();
+    if ( mRoot != null ) mRoot.setAzimuths();
   }
 
   void updateHidden( NumStation st, int dh, Stack<NumStation> stack )
   {
-    if ( mRoot == null ) return;
-    mRoot.updateHidden( st, dh, stack );
+    if ( mRoot != null ) mRoot.updateHidden( st, dh, stack );
   }
 
   int size() { return mStations.size(); }

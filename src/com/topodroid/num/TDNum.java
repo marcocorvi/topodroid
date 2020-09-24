@@ -937,7 +937,7 @@ public class TDNum
     // }
 
     mStartStation = new NumStation( start );
-    mStartStation.mHasCoords = true;
+    mStartStation.mHasExtend = true;
     mStations.addStation( mStartStation );
 
     // if ( TDLog.LOG_DEBUG ) Log.v( TDLog.TAG, "start station " + start +  " shots " + tmpshots.size() );
@@ -1022,6 +1022,7 @@ public class TDNum
           // }
 
           int  iext = DBlock.getIntExtend( ts.extend ); // integer extend
+          // Log.v("DistoX-EXTEND", "block <" + ts.from + "-" + ts.to + "> etxend " + iext );
           boolean has_coords = (iext <= 1);
           float fext = DBlock.getReducedExtend( ts.extend, ts.stretch ); // float extend - used for station coords
           float aext = fext; // station azimuth extends
@@ -1133,11 +1134,8 @@ public class TDNum
       for ( NumShot sh1 : mShots ) {
         sh1.mUsed = false;
       }
-      mStations.setCoords( false );
-      // for ( NumStation st : mStations ) { // mark stations as unset
-      //   st.mHasCoords = false;
-      // }
-      mStartStation.mHasCoords = true;
+      mStations.reset3DCoords( false );
+      mStartStation.mHas3DCoords = true;
 
       boolean repeat = true;
       while ( repeat ) {
@@ -1148,8 +1146,8 @@ public class TDNum
           NumStation s2 = sh2.to;
           float c2 = sh2.clino();
           float b2 = sh2.bearing(); // 20200503 bearing() already has declination; was + mDecl;
-          Log.v("DistoX-DECL", "shot " + s1.name + " " + s2.name + " clino " + c2 + " bearing " + b2 );
-          if ( s1.mHasCoords && ! s2.mHasCoords ) {
+          // Log.v("DistoX-DECL", "shot " + s1.name + " " + s2.name + " clino " + c2 + " bearing " + b2 );
+          if ( s1.mHas3DCoords && ! s2.mHas3DCoords ) {
             // reset s2 values from the shot
             // float d = sh2.length() * sh2.mDirection; // FIXME DIRECTION
             float d = sh2.length();
@@ -1160,11 +1158,11 @@ public class TDNum
             s2.e = s1.e + e;
             s2.s = s1.s + s;
             s2.v = s1.v + v;
-            s2.mHasCoords = true;
+            s2.mHas3DCoords = true;
             sh2.mUsed = true;
             repeat = true;
             // if ( TDLog.LOG_DEBUG )  Log.v( "DistoX-NUM", "reset " + s1.name + "->" + s2.name + " " + e + " " + s + " " + v );
-          } else if ( s2.mHasCoords && ! s1.mHasCoords ) {
+          } else if ( s2.mHas3DCoords && ! s1.mHas3DCoords ) {
             // reset s1 values from the shot
             // float d = - sh2.length() * sh2.mDirection; // FIXME DIRECTION
             float d = - sh2.length();
@@ -1175,7 +1173,7 @@ public class TDNum
             s1.e = s2.e + e;
             s1.s = s2.s + s;
             s1.v = s2.v + v;
-            s1.mHasCoords = true;
+            s1.mHas3DCoords = true;
             sh2.mUsed = true;
             repeat = true;
             // if ( TDLog.LOG_DEBUG )  Log.v( "DistoX-NUM", "reset " + s1.name + "<-" + s2.name + " " + e + " " + s + " " + v );

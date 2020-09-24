@@ -16,7 +16,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.DistoX.DBlock;
 
 
-// import android.util.Log;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -24,7 +24,8 @@ public class NumStation extends NumSurveyPoint
 {
   public String name;  // station name
   public boolean mDuplicate; // whether this is a duplicate station
-  public boolean mHasCoords; // whether the station has got coords after loop-closure
+  public boolean mHas3DCoords; // whether the station has got coords after loop-closure
+  public boolean mHasExtend; // whether the station has "extend"
   NumShot s1;
   NumShot s2;
   NumNode node;
@@ -49,7 +50,8 @@ public class NumStation extends NumSurveyPoint
     super();
     name = id;
     mDuplicate = false;
-    mHasCoords = false;
+    mHas3DCoords = false;
+    mHasExtend = true;
     s1 = null;
     s2 = null;
     node = null;
@@ -60,7 +62,7 @@ public class NumStation extends NumSurveyPoint
     mLegs = new ArrayList<>();
   }
 
-  NumStation( String id, NumStation from, float d, float b, float c, float extend, boolean has_coords )
+  NumStation( String id, NumStation from, float d, float b, float c, float extend, boolean has_extend )
   {
     super();
 
@@ -73,7 +75,8 @@ public class NumStation extends NumSurveyPoint
     s = from.s - h0 * TDMath.cosd( b );
     e = from.e + h0 * TDMath.sind( b );
     mDuplicate = false;
-    mHasCoords = has_coords && from.mHasCoords;
+    mHas3DCoords = true;
+    mHasExtend = has_extend && from.mHasExtend;
     s1 = null;
     s2 = null;
     node = null;
@@ -82,7 +85,7 @@ public class NumStation extends NumSurveyPoint
     mBarrierAndHidden = false;
     mParent  = from;
     mLegs = new ArrayList<>();
-    // Log.v( "DistoX", "NumStation cstr " + id + " extend " + extend + " H " + h + " V " + v );
+    // Log.v( "DistoX-EXTEND", "NumStation cstr " + id + " from " + from.name + " has coords " + mHasExtend + " " + from.mHasExtend );
   }
 
   // azimuth [degrees]

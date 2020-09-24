@@ -1332,14 +1332,14 @@ public class DrawingWindow extends ItemDrawer
           NumStation st1 = sh.from;
           NumStation st2 = sh.to;
 	  DBlock blk = sh.getFirstBlock();
-          if ( blk != null && st1.mHasCoords && st2.mHasCoords && st1.show() && st2.show() ) {
+          if ( blk != null && st1.mHasExtend && st2.mHasExtend && st1.show() && st2.show() ) {
             addFixedLine( type, blk, st1.h, st1.v, st2.h, st2.v, sh.getReducedExtend(), false, true );
           }
         }
       } 
       for ( NumSplay sp : splays ) {
         NumStation st = sp.from;
-        if ( st.mHasCoords && st.show() ) {
+        if ( st.mHasExtend && st.show() ) {
           DBlock blk = sp.getBlock();
           if ( ! blk.isNoProfile() ) {
             addFixedLine( type, blk, st.h, st.v, sp.h, sp.v, sp.getCosine(), true, true );
@@ -1349,7 +1349,8 @@ public class DrawingWindow extends ItemDrawer
       List< PlotInfo > xhsections = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotInfo.PLOT_XH_SECTION, parent );
       List< CurrentStation > saved = TDSetting.mSavedStations ? mApp_mData.getStations( TDInstance.sid ) : null;
       for ( NumStation st : stations ) {
-        if ( st.mHasCoords && st.show() ) {
+        // Log.v("DistoX-EXTEND", "station " + st.name + " has extend " + st.mHasExtend );
+        if ( st.mHasExtend && st.show() ) {
           DrawingStationName dst;
           dst = mDrawingSurface.addDrawingStationName( name, st,
                   DrawingUtil.toSceneX(st.h, st.v), DrawingUtil.toSceneY(st.h, st.v), true, xhsections, saved );

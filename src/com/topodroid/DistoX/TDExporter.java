@@ -751,14 +751,14 @@ class TDExporter
         for ( NumShot sh : shots ) {
           NumStation from = sh.from;
           NumStation to   = sh.to;
-          if ( from.mHasCoords && to.mHasCoords ) {
+          if ( from.mHasExtend && to.mHasExtend ) {
             pw.format(linestring_id, from.name, to.name );
             // pw.format("      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
             // pw.format("      <extrude>1</extrude>\n"); // extends the line down to the ground
             pw.format(Locale.US, coordinates6, from.e, from.s, from.v, to.e, to.s, to.v );
             pw.format(linestring_end);
           // } else {
-          //   // Log.v("DistoX", "missing coords " + from.name + " " + from.mHasCoords + " " + to.name + " " + to.mHasCoords );
+          //   // Log.v("DistoX", "missing coords " + from.name + " " + from.mHasExtend + " " + to.name + " " + to.mHasExtend );
           }
         }
         pw.format(multigeometry_end);
@@ -900,7 +900,7 @@ class TDExporter
         for ( NumShot sh : shots ) {
           NumStation from = sh.from;
           NumStation to   = sh.to;
-          if ( from.mHasCoords && to.mHasCoords ) {
+          if ( from.mHas3DCoords && to.mHas3DCoords ) {
             pw.format("    {\n");
             pw.format("      %s %s,\n", type, feature );
             pw.format("      %s \"centerline\",\n", item );

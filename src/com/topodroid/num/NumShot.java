@@ -57,7 +57,8 @@ public class NumShot
     from = f;
     to   = t;
     // block = blk;
-    mIgnoreExtend = ( blk.getIntExtend() == DBlock.EXTEND_IGNORE);
+    // mIgnoreExtend = ( blk.getIntExtend() == DBlock.EXTEND_IGNORE);
+    mIgnoreExtend = !( f.mHasExtend && t.mHasExtend );
     mUsed = false;
     mDirection = dir;
     mBranchDir = 0;
@@ -99,6 +100,7 @@ public class NumShot
   }
 
   // compute the coords of "st" from those of "sf"
+  // N.B. this uses the "reduced extend" which is 0 if the DBlock extend is not set (ie > 1)
   private void compute( NumStation st, NumStation sf )
   {
     float l = length();
