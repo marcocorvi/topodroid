@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
+import java.util.Iterator;
 
 import android.util.Log;
 
@@ -33,21 +34,22 @@ class TdmConfig extends TdmFile
   String mParentDir;            // parent directory
   String mSurveyName;
   TdmSurvey mSurvey;             // inline survey in the tdconfig file
-  ArrayList< TdmSurvey > mViewSurveys = null; // current view surveys
-  ArrayList< TdmInput >  mInputs; // surveys: th files on input
-  ArrayList< TdmEquate > mEquates;
-  private boolean mRead;        // whether the TdmConfig has read the file
+  private ArrayList< TdmSurvey > mViewSurveys = null; // current view surveys
+  private ArrayList< TdmInput >  mInputs; // input surveys
+  private ArrayList< TdmEquate > mEquates;
+  private boolean mRead;        // whether this Tdm_Config has read the file
+  private boolean mSave;        // whether this Tdm_Config needs to be saved
 
-  public TdmConfig( String filepath )
+  public TdmConfig( String filepath, boolean save )
   {
     super( filepath, null );
-
-    // Log.v("TdManager", "TdmConfig cstr filepath " + filepath );
+    // Log.v("TdManager", "Tdm_Config cstr filepath " + filepath );
     mParentDir = (new File( filepath )).getParentFile().getName() + "/";
-    mSurvey  = null;
-    mInputs      = new ArrayList< TdmInput >();
-    mEquates     = new ArrayList< TdmEquate >();
-    mRead = false;
+    mSurvey    = null;
+    mInputs    = new ArrayList< TdmInput >();
+    mEquates   = new ArrayList< TdmEquate >();
+    mRead      = false;
+    mSave      = save;
   }
 
   void populateViewSurveys( ArrayList< TdmSurvey > surveys )
@@ -67,6 +69,7 @@ class TdmConfig extends TdmFile
     for ( TdmEquate equate : mEquates ) {
       if ( equate.dropStations( survey ) > 1 ) {
         equates.add( equate );
+        setSave();
       }
     }
     mEquates = equates;
@@ -81,64 +84,109 @@ class TdmConfig extends TdmFile
   }
 
   // unconditionally remove an equate
-  void removeEquate( TdmEquate equate ) { mEquates.remove( equate ); }
-
-  void readTdmConfig()
-  {
-    if ( mRead ) return;
-    // Log.v( TdManagerApp.TAG, "readTdmConfig() for file " + mName );
-    readFile();
-    // Log.v( TdManagerApp.TAG, "TdmConfig() inputs " + mInputs.size() + " equates " + mEquates.size() );
-    mRead = true;
+  void removeEquate( TdmEquate equate ) 
+  { 
+    mEquates.remove( equate );
+    setSave();
   }
     
   boolean hasInput( String name )
   {
     if ( name == null ) return false;
-    // Log.v("TdManager", "TdmConfig check input name " + name );
+    // Log.v("TdManager", "Tdm_Config check input name " + name );
     for ( TdmInput input : mInputs ) {
-      // Log.v("TdManager", "TdmConfig check input " + input.mName );
+      // Log.v("TdManager", "Tdm_Config check input " + input.mName );
       if ( name.equals( input.getSurveyName() ) ) return true;
     }
     return false;
   }
 
-  private void addInput( String name )
+  // this is called by readFile
+  private void insertInput( String name )
   {
     if ( name == null ) return;
-    // Log.v("TdManager", "add input name " + surveyname );
+    // Log.v("DistoX-MANAGER", "insert input " + name );
     mInputs.add( new TdmInput( name ) );
   }
+
+  // this is called by the Config activity 
+  void addInput( TdmInput input )
+  {
+    if ( input == null ) return;
+    // Log.v("DistoX-MANAGER", "add input " + input.mName );
+    mInputs.add( input );
+    setSave();
+  }
+
+  Iterator getInputsIterator() { return mInputs.iterator(); }
+
+  int getInputsSize() { return mInputs.size(); }
+
+  ArrayList< TdmInput > getInputs() { return mInputs; }
+
+  ArrayList< TdmSurvey > getViewSurveys() { return mViewSurveys; }
+
+  ArrayList< TdmEquate > getEquates() { return mEquates; }
 
   private void dropInput( String name )
   {
     if ( name == null ) return;
+    // Log.v("DistoX-MANAGER", "drop input " + name );
     for ( TdmInput input : mInputs ) {
       if ( name.equals( input.getSurveyName() ) ) {
         mInputs.remove( input );
+        setSave();
         return;
       }
     }
   }
 
+  // this is called by the Config Activity
+  void setInputs( ArrayList< TdmInput > inputs ) 
+  {
+    if ( inputs != null ) {
+      // Log.v("DistoX-MANAGER", "set inputs " + inputs.size() );
+      mInputs = inputs;
+      setSave();
+    }
+  }
 
-// ---------------------------------------------------------------
-// READ and WRITE
+  // used also by Config Activity when a source is added
+  void setSave() { mSave = true; }
+
+  // ---------------------------------------------------------------
   static String currentDate()
   {
     SimpleDateFormat sdf = new SimpleDateFormat( "yyyy.MM.dd", Locale.US );
     return sdf.format( new Date() );
   }
 
+  // ---------------------------------------------------------------
 
+  // this is called by the TdmConfigActivity when it goes on pause
   void writeTdmConfig( boolean force )
   {
-    if ( mRead || force ) {
+    // Log.v("DistoX-MANAGER", "save tdconfig " + this + " " + mSave );
+    if ( mSave || force ) { // was mRead || force
       writeTd( getFilepath() );
+      mSave = false;
     }
   }
 
-  void writeTd( String filepath )
+  void readTdmConfig()
+  {
+    // Log.v("DistoX-MANAGER", "read tdconfig " + this + " " + mRead );
+    if ( mRead ) return;
+    // Log.v( TdManagerApp.TAG, "readTdmConfig() for file " + mName );
+    readFile();
+    // Log.v( TdManagerApp.TAG, "TdmC_onfig() inputs " + mInputs.size() + " equates " + mEquates.size() );
+    mRead = true;
+  }
+
+  // ---------------------------------------------------------
+  // READ and WRITE
+
+  private void writeTd( String filepath )
   {
     try {
       FileWriter fw = new FileWriter( filepath );
@@ -165,6 +213,71 @@ class TdmConfig extends TdmFile
       TDLog.Error("TdManager write file " + getFilepath() + " I/O error " + e.getMessage() );
     }
   }
+
+  private void readFile( )
+  {
+    // if the file does not exists creates it and write an empty tdconfig file
+    // Log.v("DistoX-MANAGER", "read file path " + getFilepath() );
+    File file = new File( getFilepath() );
+    if ( ! file.exists() ) {
+      // Log.v("TdManager", "file does not exist");
+      writeTdmConfig( true );
+      return;
+    }
+
+    try {
+      FileReader fr = new FileReader( file );
+      BufferedReader br = new BufferedReader( fr );
+      String line = br.readLine();
+      int cnt = 1;
+      // Log.v( "DistoX-MANAGER", Integer.toString(cnt) + ":" + line );
+      while ( line != null ) {
+        line = line.trim();
+        int pos = line.indexOf( '#' );
+        if ( pos >= 0 ) line = line.substring( 0, pos );
+        if ( line.length() > 0 ) {
+          String[] vals = line.split( " " );
+          if ( vals.length > 0 ) {
+            if ( vals[0].equals( "source" ) ) {
+            } else if ( vals[0].equals( "survey" ) ) {
+              for (int k=1; k<vals.length; ++k ) {
+                if ( vals[k].length() > 0 ) {
+                  mSurveyName = vals[k];
+                  break;
+                }
+              }
+            } else if ( vals[0].equals( "load" ) ) {
+              for (int k=1; k<vals.length; ++k ) {
+                if ( vals[k].length() > 0 ) {
+                  String surveyname = vals[k];
+                  insertInput( surveyname );
+                  break;
+                }
+              }    
+            } else if ( vals[0].equals( "equate" ) ) {
+              TdmEquate equate = new TdmEquate();
+              for (int k=1; k<vals.length; ++k ) {
+                if ( vals[k].length() > 0 ) {
+                  equate.addStation( vals[k] );
+                }
+              }
+              mEquates.add( equate );
+            }
+          }
+        }
+        line = br.readLine();
+        ++ cnt;
+      }
+      fr.close();
+    } catch ( IOException e ) {
+      // TODO
+      TDLog.Error( "TdManager exception " + e.getMessage() );
+    }
+    // Log.v( "TdManager", "Tdm_Config read file: nr. sources " + mInputs.size() );
+  }
+ 
+  // ---------------------------------------------------------
+  // EXPORT
 
   String exportTherion( boolean overwrite )
   {
@@ -250,75 +363,6 @@ class TdmConfig extends TdmFile
     } catch ( IOException e ) { 
       TDLog.Error("TdManager write file " + getFilepath() + " I/O error " + e.getMessage() );
     }
-  }
-
-  // private void loadFile()
-  // {
-  //   // Log.v("TdManager", "load file path " + getFilepath() );
-  //   mSurvey = new TdmSurvey( "." );
-  //   new TdParser( getFilepath(), mSurvey, new TdUnits() );
-  // }
-
-  private void readFile( )
-  {
-    // if the file does not exists creates it and write an empty tdconfig file
-    // Log.v("TdManager", "read file path " + getFilepath() );
-    File file = new File( getFilepath() );
-    if ( ! file.exists() ) {
-      // Log.v("TdManager", "file does not exist");
-      writeTdmConfig( true );
-      return;
-    }
-
-    try {
-      FileReader fr = new FileReader( file );
-      BufferedReader br = new BufferedReader( fr );
-      String line = br.readLine();
-      int cnt = 1;
-      // Log.v( TdManagerApp.TAG, cnt + ":" + line );
-      while ( line != null ) {
-        line = line.trim();
-        int pos = line.indexOf( '#' );
-        if ( pos >= 0 ) line = line.substring( 0, pos );
-        if ( line.length() > 0 ) {
-          String[] vals = line.split( " " );
-          if ( vals.length > 0 ) {
-            if ( vals[0].equals( "source" ) ) {
-            } else if ( vals[0].equals( "survey" ) ) {
-              for (int k=1; k<vals.length; ++k ) {
-                if ( vals[k].length() > 0 ) {
-                  mSurveyName = vals[k];
-                  break;
-                }
-              }
-            } else if ( vals[0].equals( "load" ) ) {
-              for (int k=1; k<vals.length; ++k ) {
-                if ( vals[k].length() > 0 ) {
-                  String surveyname = vals[k];
-                  addInput( surveyname );
-                  break;
-                }
-              }    
-            } else if ( vals[0].equals( "equate" ) ) {
-              TdmEquate equate = new TdmEquate();
-              for (int k=1; k<vals.length; ++k ) {
-                if ( vals[k].length() > 0 ) {
-                  equate.addStation( vals[k] );
-                }
-              }
-              mEquates.add( equate );
-            }
-          }
-        }
-        line = br.readLine();
-        ++ cnt;
-      }
-      fr.close();
-    } catch ( IOException e ) {
-      // TODO
-      TDLog.Error( "TdManager exception " + e.getMessage() );
-    }
-    // Log.v( "TdManager", "TdmConfig read file: nr. sources " + mInputs.size() );
   }
 
 }

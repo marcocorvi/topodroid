@@ -54,8 +54,8 @@ class TdmEquatesDialog extends MyDialog
     mContext = context;
     mConfig  = config;
     mActivity = activity;
-    if ( mConfig != null && mConfig.mEquates != null ) {
-      mEquates = mConfig.mEquates;
+    if ( mConfig != null && mConfig.getEquates() != null ) {
+      mEquates = mConfig.getEquates();
     } else {
       mEquates = new ArrayList< TdmEquate >();
     }

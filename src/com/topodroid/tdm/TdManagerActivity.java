@@ -235,10 +235,10 @@ public class TdManagerActivity extends Activity
     if ( tdconfigs != null && tdconfigs.length > 0 ) {
       for ( File file : tdconfigs ) {
         // Log.v("DistoX-TdManager", "activity update " + file.getAbsolutePath() );
-        mTdmConfigAdapter.add( new TdmConfig( file.getAbsolutePath() ) );
+        mTdmConfigAdapter.add( new TdmConfig( file.getAbsolutePath(), false ) ); // false: no save
       }
     } else {
-      mTdmConfigAdapter.add( new TdmConfig( TDPath.getTdconfigFile( "test.tdconfig" ) ) );
+      mTdmConfigAdapter.add( new TdmConfig( TDPath.getTdconfigFile( "test.tdconfig" ), false ) ); // false: no save
     }
     mList.setAdapter( mTdmConfigAdapter );
     // Log.v("DistoX-TdManager", "set adapter: size " + mTdmConfigAdapter.size() );
@@ -298,7 +298,7 @@ public class TdManagerActivity extends Activity
       TDToast.make( R.string.error_name_exists );
       return;
     }
-    TdmConfig tdconfig = new TdmConfig( path );
+    TdmConfig tdconfig = new TdmConfig( path, true ); // true: save
     // updateTdmConfigList();
     mTdmConfigAdapter.add( tdconfig );
     // Log.v("DistoX-TdManager", "path >" + path + "< size " + mTdmConfigAdapter.size() );

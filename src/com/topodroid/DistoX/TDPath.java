@@ -81,7 +81,7 @@ public class TDPath
   final static String ZIP = ".zip";
 
   final static String THCONFIG = ".thconfig";
-  final static String TDCONFIG = ".tdconfig";
+  // final static String TDCONFIG = ".tdconfig";
 
   // ------------------------------------------------------------
   // PATHS
@@ -357,6 +357,12 @@ public class TDPath
   public static File[] scanTdconfigDir() // DistoX-SAF
   {
     File dir = new File( PATH_TDCONFIG );
+    if ( ! dir.exists() ) {
+      if ( ! dir.mkdirs() ) {
+        TDLog.Error("mkdir error");
+        return null;
+      }
+    }
     FilenameFilter filter = new FilenameFilter() {
        public boolean accept( File dir, String name ) {
          return name.endsWith( "tdconfig" );

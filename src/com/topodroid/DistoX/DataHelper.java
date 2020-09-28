@@ -2442,7 +2442,7 @@ public class DataHelper extends DataSetObservable
   // mergeToNextLeg does not change anything if blk has both FROM and TO stations
   long mergeToNextLeg( DBlock blk, long sid )
   {
-    // Log.v("DistoX-EXTEND", "Merge to next leg " + blk.mId + " < " + blk.mFrom + " - " + blk.mTo + " >" );
+    // Log.v("DistoX-NEXT_LEG", "Merge to next leg " + blk.mId + " < " + blk.mFrom + " - " + blk.mTo + " >" );
     long ret = -1;
     long extend = DBlock.EXTEND_LEFT;
     long flag   = DBlock.FLAG_SURVEY;
@@ -2462,9 +2462,9 @@ public class DataHelper extends DataSetObservable
           flag   = cursor.getLong( 4 );
           leg    = cursor.getLong( 5 );
           comment = cursor.getString( 6 );
-          // Log.v("DistoX-EXTEND", " < " + from + " - " + to + " > at k " + k + " extend " + extend + " leg " + leg );
+          // Log.v("DistoX-NEXT_LEG", " < " + from + " - " + to + " > at k " + k + " extend " + extend + " leg " + leg );
           if ( k > 0 ) {
-            // Log.v("DistoX", blk.mId + " clear shot name " + ret );
+            // `Log.v("DistoX-NEXT_LEG", blk.mId + " clear shot name at id " + ret );
             updateShotNameAndLeg( ret, sid, "", "", LegType.EXTRA );
             // updateShotLeg( ret, sid, LegType.EXTRA ); 
             if ( k == 2 ) { // N.B. if k == 2 must set ShotLeg also to intermediate shot

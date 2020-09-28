@@ -253,10 +253,10 @@ public class TdmViewActivity extends Activity
 
     private void doStart()
     {
-      ArrayList< TdmSurvey > surveys = TdmConfigActivity.mTdmConfig.mViewSurveys;
+      ArrayList< TdmSurvey > surveys = TdmConfigActivity.mTdmConfig.getViewSurveys();
       if ( surveys == null ) return;
       // TdmConfig config = mApp.mConfig;
-      ArrayList< TdmEquate > equates = TdmConfigActivity.mTdmConfig.mEquates;
+      ArrayList< TdmEquate > equates = TdmConfigActivity.mTdmConfig.getEquates();
 
       // Log.v( "DistoX-TdManager", "TdmView nr. surveys " + surveys.size() + " equates " + equates.size() );
 
@@ -619,7 +619,7 @@ public class TdmViewActivity extends Activity
 
   void updateViewEquates()
   {
-    mDrawingSurface.addEquates( TdmConfigActivity.mTdmConfig.mEquates );
+    mDrawingSurface.addEquates( TdmConfigActivity.mTdmConfig.getEquates() );
   }
 
   @Override

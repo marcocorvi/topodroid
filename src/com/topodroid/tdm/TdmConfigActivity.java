@@ -91,22 +91,22 @@ public class TdmConfigActivity extends Activity
   };
   private static final int HELP_PAGE = R.string.TdmConfigWindow;
 
-  TdmInputAdapter mTdmInputAdapter;
+  private TdmInputAdapter mTdmInputAdapter;
   // TdManagerApp mApp;
-  DataHelper mAppData = TopoDroidApp.mData;
-  static TdmConfig mTdmConfig = null;                // current config file
+
+  static TdmConfig mTdmConfig = null;  // current config file
 
   private static String[] mExportTypes = { "Therion", "Survex" };
 
   // ----------------------------------------------------------------------
-  MyHorizontalListView mListView;
-  MyHorizontalButtonView mButtonView1;
+  private MyHorizontalListView mListView;
+  private MyHorizontalButtonView mButtonView1;
 
-  ListView mList;
-  Button   mImage;
-  ListView mMenu;
-  ArrayAdapter<String> mMenuAdapter;
-  Button[] mButton1;
+  private ListView mList;
+  private Button   mImage;
+  private ListView mMenu;
+  private ArrayAdapter<String> mMenuAdapter;
+  private Button[] mButton1;
   private int mButtonSize;
 
   @Override
@@ -121,7 +121,7 @@ public class TdmConfigActivity extends Activity
     if ( extras != null ) {
       String path = extras.getString( TDRequest.TDCONFIG_PATH );
       if ( path != null ) {
-        mTdmConfig = new TdmConfig( path );
+        mTdmConfig = new TdmConfig( path, false ); // false: no save 
         if ( mTdmConfig != null ) {
           mTdmConfig.readTdmConfig();
           setTitle( String.format( getResources().getString(R.string.project),  mTdmConfig.toString() ) );
@@ -164,7 +164,7 @@ public class TdmConfigActivity extends Activity
   protected void onPause()
   {
     super.onPause();
-    // Log.v("DistoX-TdManager", "TdmConfig activity on pause");
+    // Log.v("DistoX-MANAGER", "TdmConfig activity on pause");
     if ( mTdmConfig != null ) mTdmConfig.writeTdmConfig( false );
   }
 
@@ -178,8 +178,8 @@ public class TdmConfigActivity extends Activity
   void updateList()
   {
     if ( mTdmConfig != null ) {
-      Log.v("DistoX-TdManager", "TdmConfig update list input nr. " + mTdmConfig.mInputs.size() );
-      mTdmInputAdapter = new TdmInputAdapter( this, R.layout.row, mTdmConfig.mInputs );
+      // Log.v("DistoX-MANAGER", "TdmConfig update list input nr. " + mTdmConfig.getInputsSize() );
+      mTdmInputAdapter = new TdmInputAdapter( this, R.layout.row, mTdmConfig.getInputs() );
       mList.setAdapter( mTdmInputAdapter );
       mList.invalidate();
     } else {
@@ -254,9 +254,11 @@ public class TdmConfigActivity extends Activity
   {
     TdmSurvey mySurvey = new TdmSurvey( "." );
 
-    for ( TdmInput input : mTdmConfig.mInputs ) {
+    // Log.v("DistoX-MANAGER", "start Config activity. inputs " + mTdmConfig.getInputsSize() );
+    for ( TdmInput input : mTdmConfig.getInputs() ) {
       if ( input.isChecked() ) {
-        input.loadSurveyData ( mAppData );
+        // DataHelper mAppData = TopoDroidApp.mData;
+        input.loadSurveyData ( TopoDroidApp.mData );
         mySurvey.addSurvey( input );
         // Log.v("DistoX-TdManager", "parse file " + input.getSurveyName() );
         // TdParser parser = new TdParser( mAppData, input.getSurveyName(), mySurvey );
@@ -280,8 +282,11 @@ public class TdmConfigActivity extends Activity
   void addSources( List< String > surveynames )
   {
     for ( String name : surveynames ) {
-      // Log.v("DistoX-TdManager", "add  source " + name );
-      mTdmInputAdapter.add( new TdmInput( name ) ) ;
+      // Log.v("DistoX-MANAGER", "add source " + name );
+      TdmInput input = new TdmInput( name );
+      // mTdmConfig.addInput( input );
+      mTdmConfig.setSave();
+      mTdmInputAdapter.add( input );
     }
     updateList();
   }
@@ -289,8 +294,7 @@ public class TdmConfigActivity extends Activity
   // ------------------------ DELETE ------------------------------
   private void askDelete()
   {
-    TopoDroidAlertDialog.makeAlert( this, getResources(), 
-                             getResources().getString( R.string.ask_delete_tdconfig ),
+    TopoDroidAlertDialog.makeAlert( this, getResources(), getResources().getString( R.string.ask_delete_tdconfig ),
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {
@@ -328,7 +332,7 @@ public class TdmConfigActivity extends Activity
 	@Override
 	public void onClick( DialogInterface dialog, int btn ) {
           ArrayList< TdmInput > inputs = new ArrayList<>();
-          final Iterator it = mTdmConfig.mInputs.iterator();
+          final Iterator it = mTdmConfig.getInputsIterator();
           while ( it.hasNext() ) {
             TdmInput input = (TdmInput) it.next();
             if ( ! input.isChecked() ) {
@@ -339,7 +343,7 @@ public class TdmConfigActivity extends Activity
               mTdmConfig.dropEquates( survey );
             }
           }
-          mTdmConfig.mInputs = inputs;
+          mTdmConfig.setInputs( inputs );
           updateList();
 	} 
     } );
@@ -351,7 +355,7 @@ public class TdmConfigActivity extends Activity
   public void onBackPressed()
   {
     // Log.v("DistoX-TdManager", "TdmConfig activity back pressed");
-    // if ( mTdmConfig != null ) mTdmConfig.writeTdmConfig( false );
+    // if ( mTdmConfig != null ) mTdmConfig.writeTdmConfig( false ); // already done by onPause
     doFinish( TDRequest.RESULT_TDCONFIG_OK );
   }
 
@@ -380,7 +384,7 @@ public class TdmConfigActivity extends Activity
       (new TdmSourcesDialog(this, this)).show();
     } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // DROP
       boolean drop = false;
-      final Iterator it = mTdmConfig.mInputs.iterator();
+      final Iterator it = mTdmConfig.getInputsIterator();
       while ( it.hasNext() ) {
         TdmInput input = (TdmInput) it.next();
         if ( input.isChecked() ) { drop = true; break; }

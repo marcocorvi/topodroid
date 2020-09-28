@@ -12,6 +12,7 @@
 package com.topodroid.tdm;
 
 import com.topodroid.ui.MyDialog;
+import com.topodroid.DistoX.TopoDroidApp;
 import com.topodroid.DistoX.TDToast;
 import com.topodroid.DistoX.R;
 
@@ -68,7 +69,8 @@ class TdmSourcesDialog extends MyDialog
   void updateList()
   {
     mTdmSourceAdapter = new TdmSourceAdapter( mContext, R.layout.tdsource_adapter, mSources );
-    List< String > surveys = mParent.mAppData.selectAllSurveys(); 
+    // List< String > surveys = mParent.mAppData.selectAllSurveys(); 
+    List< String > surveys = TopoDroidApp.mData.selectAllSurveys(); 
     for ( String name : surveys ) {
       if ( ! mParent.hasSource( name ) ) {
         // Log.v("TdManager", "source name " + name + " path " + path );
