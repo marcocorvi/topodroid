@@ -40,6 +40,8 @@ class DeviceHelper extends DataSetObservable
   static final private int DATABASE_VERSION = 27;
   // static final private int DATABASE_VERSION_MIN = 21;
 
+  static final private String ERROR_NULL_DB = "null device DB ";
+
   private static final String CONFIG_TABLE = "configs";
   private static final String CALIB_TABLE  = "calibs";
   private static final String GM_TABLE     = "gms";
@@ -118,7 +120,7 @@ class DeviceHelper extends DataSetObservable
 
     } catch ( SQLiteException e ) {
       myDB = null;
-      TDLog.Error( "DeviceHelper cstr failed to get DB " + e.getMessage() );
+      TDLog.Error( "Failed to get device DB " + e.getMessage() );
     }
   }
   
@@ -136,6 +138,10 @@ class DeviceHelper extends DataSetObservable
 
   private boolean doUpdate( String table, ContentValues cv, String where, String[] args, String msg )
   {
+    if ( myDB == null ) {
+      TDLog.Error( ERROR_NULL_DB + "do update");
+      return false; 
+    }
     boolean ret = false;
     try {
       myDB.beginTransaction();
@@ -154,7 +160,10 @@ class DeviceHelper extends DataSetObservable
 
   void deleteGM( long cid, long id, boolean delete )
   {
-    // if ( myDB == null ) return;
+    if ( myDB == null ) {
+      TDLog.Error( ERROR_NULL_DB + "delete GM");
+      return;
+    }
     if ( deleteGMStmt == null )
         deleteGMStmt = myDB.compileStatement( "UPDATE gms set status=? WHERE calibID=? AND id=?" );
     deleteGMStmt.bindLong( 1, delete? 1 : 0 );
@@ -168,7 +177,10 @@ class DeviceHelper extends DataSetObservable
 
   void doDeleteCalib( long cid )
   {
-    // if ( myDB == null ) return;
+    if ( myDB == null ) {
+      TDLog.Error( ERROR_NULL_DB + "delete calib");
+      return;
+    }
     if ( doDeleteGMStmt == null )
         doDeleteGMStmt    = myDB.compileStatement( "DELETE FROM gms where calibId=?" );
     if ( doDeleteCalibStmt == null )
@@ -184,7 +196,6 @@ class DeviceHelper extends DataSetObservable
 
   void updateGMName( long gid, long cid, String grp )
   {
-    // if ( myDB == null ) return -1;
     ContentValues cv = new ContentValues();
     cv.put( "grp", grp );
     doUpdate( "gms", cv, WHERE_CID_ID, new String[] { Long.toString(cid), Long.toString(gid) }, "GM name" );
@@ -203,7 +214,6 @@ class DeviceHelper extends DataSetObservable
 
   void updateGMError( long gid, long cid, double error )
   {
-    // if ( myDB == null ) return -1;
     ContentValues cv = new ContentValues();
     cv.put( "error", error );
     doUpdate( "gms", cv, WHERE_CID_ID, new String[] { Long.toString(cid), Long.toString(gid) }, "GM error" );
@@ -222,7 +232,10 @@ class DeviceHelper extends DataSetObservable
 
   long insertGM( long cid, long gx, long gy, long gz, long mx, long my, long mz )
   {
-    // if ( myDB == null ) return -1;
+    if ( myDB == null ) {
+      TDLog.Error( ERROR_NULL_DB + "insert GM");
+      return -1L;
+    }
     ++ myNextCId;
     ContentValues cv = new ContentValues();
     cv.put( "calibId", cid );
@@ -270,7 +283,10 @@ class DeviceHelper extends DataSetObservable
   List< CalibCBlock > selectAllGMs( long cid, int status, boolean negative_too )
   {
     List< CalibCBlock > list = new ArrayList<>();
-    // if ( myDB == null ) return list;
+    if ( myDB == null ) {
+      TDLog.Error( ERROR_NULL_DB + "select all GM");
+      return list;
+    }
     Cursor cursor = null;
     try {
       cursor = myDB.query(GM_TABLE,
@@ -309,8 +325,11 @@ class DeviceHelper extends DataSetObservable
 
   CalibCBlock selectGM( long id, long cid )
   {
+    if ( myDB == null ) {
+      TDLog.Error( ERROR_NULL_DB + "select GM");
+      return null;
+    }
     CalibCBlock block = null;
-    // if ( myDB == null ) return null;
     Cursor cursor = null;
     try { 
       cursor = myDB.query(GM_TABLE,
@@ -342,8 +361,11 @@ class DeviceHelper extends DataSetObservable
 
   int selectCalibAlgo( long cid )
   {
-    int algo = CalibInfo.ALGO_AUTO; // default 
-    // if ( myDB == null ) return algo;
+    if ( myDB == null ) {
+      TDLog.Error( ERROR_NULL_DB + "select algo");
+      return CalibInfo.ALGO_AUTO;
+    }
+    int algo = CalibInfo.ALGO_AUTO;  // default 
     Cursor cursor = null;
     try {
       cursor = myDB.query( CALIB_TABLE,
@@ -361,6 +383,10 @@ class DeviceHelper extends DataSetObservable
 
   long getCalibCID( String name, String device )
   {
+    if ( myDB == null ) {
+      TDLog.Error( ERROR_NULL_DB + "get CID");
+      return -1L;
+    }
     long id = -1L;
     Cursor cursor = null;
     try {
@@ -379,8 +405,11 @@ class DeviceHelper extends DataSetObservable
  
   CalibInfo selectCalibInfo( long cid )
   {
+    if ( myDB == null ) {
+      TDLog.Error( ERROR_NULL_DB + "select calib info");
+      return null;
+    }
     CalibInfo info = null;
-    // if ( myDB == null ) return null;
     Cursor cursor = null;
     try {
       cursor = myDB.query( CALIB_TABLE,
@@ -404,7 +433,10 @@ class DeviceHelper extends DataSetObservable
 
   void selectCalibError( long cid, CalibResult res )
   {
-    // if ( myDB == null ) return;
+    if ( myDB == null ) {
+      TDLog.Error( ERROR_NULL_DB + "select calib error");
+      return;
+    }
     Cursor cursor = null;
     try {
       cursor = myDB.query( CALIB_TABLE,
@@ -435,8 +467,11 @@ class DeviceHelper extends DataSetObservable
 
   String selectCalibCoeff( long cid )
   {
+    if ( myDB == null ) {
+      TDLog.Error( ERROR_NULL_DB + "select calib coeff");
+      return null;
+    }
     String coeff = null;
-    // if ( myDB == null ) return null;
     Cursor cursor = null;
     try {
       cursor = myDB.query( CALIB_TABLE,
@@ -457,10 +492,12 @@ class DeviceHelper extends DataSetObservable
 
   private List< String > selectAllNames( String table )
   {
-    TDLog.Log( TDLog.LOG_DB, "selectAllNames table " + table );
-
+    // TDLog.Log( TDLog.LOG_DB, "selectAllNames table " + table );
     List< String > list = new ArrayList<>();
-    // if ( myDB == null ) return list;
+    if ( myDB == null ) {
+      TDLog.Error( ERROR_NULL_DB + "select all names");
+      return list;
+    }
     Cursor cursor = null;
     try {
       cursor = myDB.query( table,
@@ -482,6 +519,10 @@ class DeviceHelper extends DataSetObservable
   List< String > selectDeviceCalibs( String device )
   {
     List< String > ret = new ArrayList<>();
+    if ( myDB == null ) {
+      TDLog.Error( ERROR_NULL_DB + "select calibs");
+      return ret;
+    }
     Cursor cursor = null;
     try {
       cursor = myDB.query( CALIB_TABLE,
@@ -502,6 +543,10 @@ class DeviceHelper extends DataSetObservable
   List< CalibInfo > selectDeviceCalibsInfo( String device ) 
   {
     List< CalibInfo > ret = new ArrayList<>();
+    if ( myDB == null ) {
+      TDLog.Error( ERROR_NULL_DB + "select calibs info");
+      return ret;
+    }
     Cursor cursor = null;
     try {
       cursor = myDB.query( CALIB_TABLE,
@@ -531,7 +576,7 @@ class DeviceHelper extends DataSetObservable
   String getValue( String key )
   {
     if ( myDB == null ) {
-      TDLog.Error( "DeviceHelper::getValue null DB");
+      TDLog.Error( ERROR_NULL_DB + "get value" );
       return null;
     }
     if ( key == null || key.length() == 0 ) {
@@ -556,7 +601,7 @@ class DeviceHelper extends DataSetObservable
   void setValue( String key, String value )
   {
     if ( myDB == null ) {
-      TDLog.Error( "DeviceHelper::setValue null DB");
+      TDLog.Error( ERROR_NULL_DB + "set value" );
       return;
     }
     if ( key == null || key.length() == 0 ) {
@@ -600,6 +645,10 @@ class DeviceHelper extends DataSetObservable
 
   boolean isSymbolEnabled( String name )
   { 
+    if ( myDB == null ) {
+      TDLog.Error( ERROR_NULL_DB + "is symbol enabled" );
+      return true;
+    }
     String enabled = getValue( name );
     if ( enabled != null ) {
       return enabled.equals(TDString.ONE);
@@ -623,8 +672,11 @@ class DeviceHelper extends DataSetObservable
 
   private String getNameFromId( String table, long id )
   {
+    if ( myDB == null ) {
+      TDLog.Error( ERROR_NULL_DB + "get name from id" );
+      return null;
+    }
     String ret = null;
-    // if ( myDB == null ) return null;
     Cursor cursor = null;
     try {
       cursor = myDB.query( table, new String[] { "name" },
@@ -638,26 +690,33 @@ class DeviceHelper extends DataSetObservable
     return ret;
   }
 
-  private long getIdFromName( String table, String name ) 
-  {
-    long id = -1;
-    // if ( myDB == null ) { return -2; }
-    Cursor cursor = null;
-    try {
-      cursor = myDB.query( table, new String[] { "id" },
-                           "name = ?", new String[] { name },
-                           null, null, null );
-      if (cursor != null && cursor.moveToFirst() ) {
-        id = cursor.getLong(0);
-      }
-    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
-    return id;
-  }
+  // private long getIdFromName( String table, String name ) 
+  // {
+  //   if ( myDB == null ) {
+  //     TDLog.Error( ERROR_NULL_DB + "get id from name" );
+  //     return -1L;
+  //   }
+  //   long id = -1L;
+  //   Cursor cursor = null;
+  //   try {
+  //     cursor = myDB.query( table, new String[] { "id" },
+  //                          "name = ?", new String[] { name },
+  //                          null, null, null );
+  //     if (cursor != null && cursor.moveToFirst() ) {
+  //       id = cursor.getLong(0);
+  //     }
+  //   } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+  //   } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
+  //   return id;
+  // }
 
   // this must be called when the calib name is not yet in the db
   long insertCalibInfo( String name, String date, String device, String comment, long algo )
   {
+    if ( myDB == null ) {
+      TDLog.Error( ERROR_NULL_DB + "insert calib info");
+      return -1L;
+    }
     if ( hasCalibName( name ) ) return -1L;
     long id = 1;
     Cursor cursor = null;
@@ -685,10 +744,10 @@ class DeviceHelper extends DataSetObservable
   }
 
   // used only by setCalib
+  // DB non-null
   private long setCalibName( String name ) 
   {
     long id = -1;
-    // if ( myDB == null ) { return 0; }
     // TDLog.Log( TDLog.LOG_DB, "set Calib Name >" + name + "< table " + table );
     Cursor cursor = null;
     try {
@@ -723,28 +782,34 @@ class DeviceHelper extends DataSetObservable
     return id;
   }
 
-  private long maxId( String table, long sid )
-  {
-    long id = 1;
-    // if ( myDB == null ) return 1L;
-    Cursor cursor = null;
-    try {
-      cursor = myDB.query( table, new String[] { "max(id)" },
-                         "surveyId=?", 
-                         new String[] { Long.toString(sid) },
-                         null, null, null );
-      if (cursor != null && cursor.moveToFirst() ) {
-        id = 1 + cursor.getLong(0);
-      }
-    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
-    return id;
-  }
+  // private long maxId( String table, long sid )
+  // {
+  //   if ( myDB == null ) {
+  //     TDLog.Error( ERROR_NULL_DB + "max ID");
+  //     return 1L;
+  //   }
+  //   long id = 1L;
+  //   Cursor cursor = null;
+  //   try {
+  //     cursor = myDB.query( table, new String[] { "max(id)" },
+  //                        "surveyId=?", 
+  //                        new String[] { Long.toString(sid) },
+  //                        null, null, null );
+  //     if (cursor != null && cursor.moveToFirst() ) {
+  //       id = 1 + cursor.getLong(0);
+  //     }
+  //   } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+  //   } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
+  //   return id;
+  // }
 
   ArrayList< Device > getDevices( ) 
   {
     ArrayList< Device > ret = new ArrayList<>();
-    // if ( myDB == null ) return ret;
+    if ( myDB == null ) {
+      TDLog.Error( ERROR_NULL_DB + "get devices");
+      return ret;
+    }
     Cursor cursor = null;
     try {
       cursor = myDB.query( DEVICE_TABLE, new String[] { "address", "model", "head", "tail", "name", "nickname" }, 
@@ -768,7 +833,10 @@ class DeviceHelper extends DataSetObservable
   // get device by address or by nickname
   Device getDevice( String addr )
   {
-    // if ( myDB == null ) return null;
+    if ( myDB == null ) {
+      TDLog.Error( ERROR_NULL_DB + "get device");
+      return null;
+    }
     Device ret = getDeviceByAddress( addr );
     if ( ret == null ) {
       ret = getDeviceByNickname( addr );
@@ -776,9 +844,9 @@ class DeviceHelper extends DataSetObservable
     return ret;
   }
        
+  // DB non-null
   private Device getDeviceByNickname( String nickname )
   {
-    if ( myDB == null ) return null;
     Device ret = null;
     Cursor cursor = null;
     try {
@@ -798,9 +866,9 @@ class DeviceHelper extends DataSetObservable
     return ret;
   }
 
+  // DB non-null
   private Device getDeviceByAddress( String addr )
   {
-    if ( myDB == null ) return null;
     Device ret = null;
     Cursor cursor = null;
     try {
@@ -822,7 +890,10 @@ class DeviceHelper extends DataSetObservable
 
   int getDeviceTail( String address )
   { 
-    // if ( myDB == null ) return 0;
+    if ( myDB == null ) {
+      TDLog.Error( ERROR_NULL_DB + "get device tail");
+      return 0;
+    }
     int ret = 0;
     Cursor cursor = null;
     try {
@@ -840,8 +911,10 @@ class DeviceHelper extends DataSetObservable
 
   void getDeviceHeadTail( String address, int[] head_tail )
   {
-    // if ( myDB == null ) return false;
-    // boolean ret = false;
+    if ( myDB == null ) {
+      TDLog.Error( ERROR_NULL_DB + "get device head-tail");
+      return;
+    }
     Cursor cursor = null;
     try {
       cursor = myDB.query( DEVICE_TABLE, new String[] { "head", "tail" },
@@ -851,17 +924,17 @@ class DeviceHelper extends DataSetObservable
       if (cursor != null && cursor.moveToFirst() ) {
         head_tail[0] = (int)( cursor.getLong(0) );
         head_tail[1] = (int)( cursor.getLong(1) );
-        // ret = true;
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
-    // return ret;
   }
 
   void insertDevice( String address, String model, String name )
   {
-    if ( myDB == null ) return; // false;
-    // boolean ret = false;
+    if ( myDB == null ) {
+      TDLog.Error( ERROR_NULL_DB + "insert device");
+      return;
+    }
     Cursor cursor = null;
     try {
       cursor = myDB.query( DEVICE_TABLE, new String[] { "model" },
@@ -878,32 +951,29 @@ class DeviceHelper extends DataSetObservable
           cv.put( "head",    0 );
           cv.put( "tail",    0 );
           cv.put( "name",    name );
-          cv.put( "nickname", TDString.EMPTY );  // FIXME empty nickname
+          cv.put( "nickname", TDString.EMPTY );  // DB_NOTE empty nickname
           myDB.insert( DEVICE_TABLE, null, cv );
-	         // ret = true;
         }
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch (SQLiteException e ) { logError( "insert device", e ); 
     } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
-    // return ret;
   }
 
-  private void insertDeviceHeadTail( String address, String model, int[] head_tail, String name )
-  {
-    // if ( myDB == null ) return;
-    ContentValues cv = new ContentValues();
-    cv.put( "address", address );
-    cv.put( "model",   model );
-    cv.put( "head",    head_tail[0] );
-    cv.put( "tail",    head_tail[1] );
-    cv.put( "name",    name );
-    cv.put( "nickname", TDString.EMPTY );  // FIXME empty nickname
-    try {
-      myDB.insert( DEVICE_TABLE, null, cv );
-    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } catch (SQLiteException e ) { logError( "insert device H-T", e ); }
-  }
+  // private void insertDeviceHeadTail( String address, String model, int[] head_tail, String name )
+  // {
+  //   ContentValues cv = new ContentValues();
+  //   cv.put( "address", address );
+  //   cv.put( "model",   model );
+  //   cv.put( "head",    head_tail[0] );
+  //   cv.put( "tail",    head_tail[1] );
+  //   cv.put( "name",    name );
+  //   cv.put( "nickname", TDString.EMPTY );  // FIXME empty nickname
+  //   try {
+  //     myDB.insert( DEVICE_TABLE, null, cv );
+  //   } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+  //   } catch (SQLiteException e ) { logError( "insert device H-T", e ); }
+  // }
 
   void updateDeviceModel( String address, String model )
   {
@@ -937,8 +1007,8 @@ class DeviceHelper extends DataSetObservable
 
   boolean updateDeviceHeadTail( String address, int[] head_tail )
   {
-    // if ( myDB == null ) return false;
     boolean ret = false;
+    if ( myDB == null ) return ret; // DB_NOTE should not happen
     // if ( updateDeviceHeadTailStmt == null )
     //     updateDeviceHeadTailStmt = myDB.compileStatement( "UPDATE devices set head=?, tail=? WHERE address=?" );
     Cursor cursor = null;
@@ -978,8 +1048,11 @@ class DeviceHelper extends DataSetObservable
 
   private boolean hasName( String name, String table )
   {
+    if ( myDB == null ) {
+      TDLog.Error( ERROR_NULL_DB + "has name");
+      return false;
+    }
     boolean ret = false;
-    // if ( myDB == null ) return ret;
     Cursor cursor = null;
     try {
       cursor = myDB.query( table, new String[] { "id" },
@@ -1083,8 +1156,11 @@ class DeviceHelper extends DataSetObservable
 
    long setCalib( String calib )
    {
+     if ( myDB == null ) {
+      TDLog.Error( ERROR_NULL_DB + "set calib");
+       return 0L; 
+     }
      myNextCId = 0;
-     // if ( myDB == null ) return 0L;
      long cid = setCalibName( calib );
      Cursor cursor = null;
      try {
