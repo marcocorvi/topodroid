@@ -553,11 +553,11 @@
     <string name="stat_component">Компоненты %1$d</string>
     <string name="stat_depth">Глубина %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Дублированные пикеты %1$d # %2$d длина: %3$.1f %4$s</string>
-    <string name="stat_leg">Отрезки %1$d общая длина: %2$.1f %3$.1f длина в плане %4$.1f %5$s</string>
+    <string name="stat_leg">Отрезки %1$d общая длина: %2$.1f ; длина в развертке: %3$.1f ; длина в плане: %4$.1f %5$s</string>
     <string name="stat_length">Длина нитки на абрисе: %1$.1f %2$s</string>
     <string name="stat_extlen">Длина в 3D %1$.1f %2$s</string>
     <string name="stat_projlen">Длина в плане %1$.1f %2$s</string>
-    <string name="stat_cycle">Циклов %1$d</string>
+    <string name="stat_cycle">Колец %1$d</string>
     <string name="stat_loop">Кольца %1$d</string>
     <string name="stat_origin">Пикет начала координат абриса: %1$s</string>
     <string name="stat_azimuth">Азимут проекции разреза-развёртки: %1$.1f</string>
