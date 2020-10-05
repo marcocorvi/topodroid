@@ -3616,7 +3616,10 @@ public class DataHelper extends DataSetObservable
   //   transferStationStmt.bindString( 3, name );
   //   try { transferStationStmt.execute(); } catch (SQLiteException e ) { logError("...", e);  }
   // }
-      
+  
+
+  // myDB is checked non-null before transfer methods are called
+  //
   private void transferPlot( long sid, long old_sid, long pid )
   {
     if ( transferPlotStmt == null ) {

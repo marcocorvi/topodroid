@@ -134,7 +134,7 @@ class DistoX310Comm extends DistoXComm
         TDLog.Error( "toggle Calib Mode X310 failed read E000" );
       } else {
         // Log.v("DistoX", "firmware " + fw[0] + " " + fw[1] );
-        if ( fw[1] >= 0 || fw[1] < DeviceX310Details.mStatusAddress.length ) {
+        if ( fw[1] >= 0 && fw[1] < DeviceX310Details.mStatusAddress.length ) {
           result = mProtocol.readMemory( DeviceX310Details.mStatusAddress[ fw[1] ] );
           if ( result == null ) { 
             TDLog.Error( "toggle Calib Mode X310 failed read status word" ); // C044
