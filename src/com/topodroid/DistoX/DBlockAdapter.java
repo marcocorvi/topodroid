@@ -413,26 +413,42 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
 
    void setColor( DBlock b )
    {
-      int col = b.color();
+      int col = b.getColorByType();
       tvFrom.setTextColor( ( mParent.isCurrentStationName( b.mFrom ) )? TDColor.LIGHT_GREEN : col );
       tvTo.setTextColor(   ( mParent.isCurrentStationName( b.mTo   ) )? TDColor.LIGHT_GREEN : col );
       tvLength.setTextColor( col );
 
       if ( b.isBacksight() ) {
         if ( b.isRecent() ) { 
-	  // b.mWasRecent = true;
-          tvFrom.setBackgroundColor( TDColor.GREEN );
+          // b.mWasRecent = true;
+          if ( b.isSplay() && ( col = b.getPaintColor() ) != 0 ) {
+            tvFrom.setBackgroundColor( col & 0x99ffffff );
+          } else {
+            tvFrom.setBackgroundColor( TDColor.GREEN );
+          }
           tvTo.setBackgroundColor( TDColor.GREEN );
         } else {
-          tvFrom.setBackgroundColor( TDColor.BACK_YELLOW );
+          if ( b.isSplay() && ( col = b.getPaintColor() ) != 0 ) {
+            tvFrom.setBackgroundColor( col & 0x99ffffff );
+          } else {
+            tvFrom.setBackgroundColor( TDColor.BACK_YELLOW );
+          }
           tvTo.setBackgroundColor( TDColor.BACK_YELLOW );
         } 
       } else {
         if ( b.isRecent() ) { 
-	  // b.mWasRecent = true;
-          tvFrom.setBackgroundColor( TDColor.DARK_GREEN );
+          // b.mWasRecent = true;
+          if ( b.isSplay() && ( col = b.getPaintColor() ) != 0 ) {
+            tvFrom.setBackgroundColor( col & 0x99ffffff );
+          } else {
+            tvFrom.setBackgroundColor( TDColor.DARK_GREEN );
+          }
           tvTo.setBackgroundColor( TDColor.DARK_GREEN );
-        } 
+        } else {
+          if ( b.isSplay() && ( col = b.getPaintColor() ) != 0 ) {
+            tvFrom.setBackgroundColor( col & 0x99ffffff );
+          }
+        }
       }
 
       if ( b.isCommented() ) {
@@ -521,8 +537,9 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
           if ( v != null ) {
             TextView tvFrom = (TextView) v.findViewById( R.id.from );
             TextView tvTo   = (TextView) v.findViewById( R.id.to );
-            tvFrom.setTextColor( b.color() );
-            tvTo.setTextColor( b.color() );
+            int col = b.getColorByType( );
+            tvFrom.setTextColor( col );
+            tvTo.setTextColor( col );
           }
         // }
       }
@@ -533,8 +550,9 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
           if ( v != null ) {
             TextView tvFrom = (TextView) v.findViewById( R.id.from );
             TextView tvTo   = (TextView) v.findViewById( R.id.to );
-            tvFrom.setTextColor( b.color() );
-            tvTo.setTextColor( b.color() );
+            int col = b.getColorByType( );
+            tvFrom.setTextColor( col );
+            tvTo.setTextColor( col );
             if ( mParent.isCurrentStationName( b.mFrom ) ) {
               tvFrom.setTextColor( TDColor.LIGHT_GREEN );
             } else if ( mParent.isCurrentStationName( b.mTo ) ) {

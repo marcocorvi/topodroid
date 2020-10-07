@@ -80,6 +80,7 @@ class TdmConfig extends TdmFile
   {
     if ( equate == null ) return;
     mEquates.add( equate );
+    setSave();
     // Log.v("TdManager", "nr. equates " + mEquates.size() );
   }
 

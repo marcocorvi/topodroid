@@ -25,6 +25,7 @@ import java.io.PrintWriter;
 import java.util.Locale;
 
 import android.view.View;
+import android.widget.TextView;
 
 import android.graphics.Paint; // custom paint
 
@@ -276,12 +277,24 @@ public class DBlock
   void setPaintColor( int color )
   {
     // Log.v("DistoX", "Block " + mId + " set paint color " + color );
-    if ( color == 0 ) { mPaint = null; return; }
-    if ( mPaint == null ) { 
-      mPaint = BrushManager.makePaint( color );
+    if ( color == 0 ) { 
+      mPaint = null;
+      // if ( mView != null ) {
+      //   TextView tvFrom = (TextView)mView.findViewById( R.id.from );
+      //   tvFrom.setBackgroundColor( 0 );
+      // }
     } else {
-      mPaint.setColor( color );
+      if ( mPaint == null ) { 
+        mPaint = BrushManager.makePaint( color );
+      } else {
+        mPaint.setColor( color );
+      }
+      // if ( mView != null ) {
+      //   TextView tvFrom = (TextView)mView.findViewById( R.id.from );
+      //   tvFrom.setBackgroundColor( color & 0x99ffffff );
+      // }
     }
+
   }
 
   // used by PocketTopo parser only
@@ -422,7 +435,8 @@ public class DBlock
   //   return BLOCK_MAIN_LEG;
   // }
 
-  int color() { 
+  
+  int getColorByType() { 
     // Log.v("DistoX", "Block " + mId + " color() block type " + mBlockType );
     return colors[ mBlockType ];
   }

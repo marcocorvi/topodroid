@@ -1833,6 +1833,8 @@ public class ShotWindow extends Activity
     //   startExistingPlot( TDInstance.recentPlot, TDInstance.recentPlotType, blks.get(0).mFrom );
     // }
     clearMultiSelect( );
+    // ... and refresh list
+    updateDisplay();
   }
 
   void updateShotName( long bid, String from, String to )
