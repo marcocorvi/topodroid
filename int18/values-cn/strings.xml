@@ -347,7 +347,7 @@
     <string name="menu_reload">重新导入</string>
     <string name="menu_rename_delete">重命名/删除</string>
     <string name="menu_rename">重命名</string>
-    <!-- TODO string name="menu_plot_scrap">SCRAPS</string -->
+    <string name="menu_plot_scrap">SCRAPS</string>
     <string name="menu_switch">切换/关闭</string>
     <string name="menu_help">帮助</string>
     <!-- UNUSED string name="menu_join_survey">CO-SURVEY</string -->
@@ -372,7 +372,7 @@
     <string name="menu_zoom_fit">缩放适合</string>
 
     <!-- FIXED_ZOOM -->
-    <!-- TODO string name="zoom_fixed">Graph-paper</string -->
+    <string name="zoom_fixed">方格纸</string>
 
     <string name="ble_scan_failed">蓝牙设备扫描失败</string>
     <string name="ble_gatt_failure">蓝牙故障</string>
@@ -767,7 +767,7 @@
     <string name="man_xsection">11. 横截面</string>
     <string name="man_overview">12. 概览窗口</string>
     <string name="man_export">13. 输入/输出</string>
-    <!-- TODO string name="man_project">14. Cave projects</string -->
+    <string name="man_project">14. 洞穴项目</string>
     <string name="man_threed">15. 3D 视图器</string>
     <string name="man_index">16. 索引</string>
     <string name="man_website">* 网站</string>
@@ -1111,8 +1111,8 @@
   <string name="pref_bezier_step_summary">最大点间距(多条曲线) [m]</string>
   <string name="pref_leg_shots_title">最少主线测量</string>
   <string name="pref_leg_shots_summary">最少主线测量次数</string>
-  <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
-  <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent [s]</string -->
+  <string name="pref_recent_timeout_title">最近的数据超时</string>
+  <string name="pref_recent_timeout_summary">超时之后，数据不再是最近的 [s]</string>
   <string name="pref_recent_timeout_title">最近的数据超时</string>
   <string name="pref_recent_timeout_summary">超时之后，数据不再是最近的 [s]</string>
   <string name="pref_triple_shot_title">主线测量提示声</string>
@@ -1410,7 +1410,7 @@
   <!-- UNUSED string name="pref_splayExtend_summary">Estimate splay extend</string -->
   <string name="pref_swapLR_title">罗盘角转换左右</string>
   <string name="pref_swapLR_summary">在输出中转换左右罗盘角</string>
-  <string name="pref_LRExtend_title">评估 做/右 输出</string>
+  <string name="pref_LRExtend_title">评估 左/右 输出</string>
   <string name="pref_LRExtend_summary">评估左右输出 (Compass/VisualTopo输入)</string>
   <string name="pref_diving_mode_title">洞潜模式</string>
   <string name="pref_diving_mode_summary">启用洞潜模式</string>
@@ -1564,7 +1564,7 @@
    <string name="ask_upload_not_compatible">固件文件不正确.\n强行上载??</string>
    <string name="firmware_file_dumped">保存固件文件 %1$s size %2$d</string>
    <string name="firmware_file_uploaded">升级固件文件 %1$s written %2$d / %3$d</string>
-   <!-- TODO string name="firmware_not_supported">设备不支持固件功能</string -->
+   <string name="firmware_not_supported">设备不支持固件功能</string>
    
 
     <string name="project">项目 %1$s</string>
