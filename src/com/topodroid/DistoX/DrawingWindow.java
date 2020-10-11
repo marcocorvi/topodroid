@@ -5137,7 +5137,8 @@ public class DrawingWindow extends ItemDrawer
     private void setPlotType3( )
     {
       assert( mLastLinePath == null);
-      // Log.v("DistoX", "set plot type 2 mType " + mType );
+      // Log.v("DistoX", "set plot type 3 mType " + mType );
+      if ( mPlot3 == null ) return;
       mPid  = mPid3;
       mName = mName3;
       mType = mPlot3.type;
@@ -5150,6 +5151,7 @@ public class DrawingWindow extends ItemDrawer
     {
       assert( mLastLinePath == null);
       // Log.v("DistoX", "set plot type 2 mType " + mType );
+      if ( mPlot2 == null ) return;
       mPid  = mPid2;
       mName = mName2;
       mType = mPlot2.type; // FIXME if ( mPlot2 == null ) { what ? }
@@ -5172,6 +5174,7 @@ public class DrawingWindow extends ItemDrawer
     {
       assert( mLastLinePath == null);
       // Log.v("DistoX", "set plot type 1 mType " + mType );
+      if ( mPlot1 == null ) return;
       mPid  = mPid1;
       mName = mName1;
       mType = mPlot1.type;
@@ -6295,25 +6298,37 @@ public class DrawingWindow extends ItemDrawer
     TDLog.Log( TDLog.LOG_IO, "reload file " + filename + " path " + tdr );
     // Log.v("DistoX-RELOAD", "recover " + type + " <" + filename + "> TRD " + tdr );
     if ( type == PlotInfo.PLOT_PLAN ) {
-      mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, null, false );
-      mDrawingSurface.modeloadDataStream( tdr, mFullName1, true /*, null */ ); // no missing symbols
-      // mDrawingSurface.linkSections();
-      // DrawingSurface.addManagerToCache( mFullName1 );
-      setPlotType1( true );
+      if ( mPlot1 != null ) {
+        mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, null, false );
+        mDrawingSurface.modeloadDataStream( tdr, mFullName1, true /*, null */ ); // no missing symbols
+        // mDrawingSurface.linkSections();
+        // DrawingSurface.addManagerToCache( mFullName1 );
+        setPlotType1( true );
+      } else {
+        TDLog.Error("null Plot 1");
+      }
     } else if ( PlotInfo.isProfile( type ) ) {
-      mDrawingSurface.resetManager( DrawingSurface.DRAWING_PROFILE, null, PlotInfo.isExtended(type) );
-      mDrawingSurface.modeloadDataStream( tdr, mFullName2, true /*, null */ );
-      // mDrawingSurface.linkSections();
-      // DrawingSurface.addManagerToCache( mFullName2 );
-      // now switch to extended view FIXME-VIEW
-      setPlotType2( true );
+      if ( mPlot2 != null ) {
+        mDrawingSurface.resetManager( DrawingSurface.DRAWING_PROFILE, null, PlotInfo.isExtended(type) );
+        mDrawingSurface.modeloadDataStream( tdr, mFullName2, true /*, null */ );
+        // mDrawingSurface.linkSections();
+        // DrawingSurface.addManagerToCache( mFullName2 );
+        // now switch to extended view FIXME-VIEW
+        setPlotType2( true );
+      } else {
+        TDLog.Error("null Plot 2");
+      }
     } else {
       // Log.v("DistoX-GRID", "doRecover section" );
-      mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null, false );
-      mDrawingSurface.modeloadDataStream( tdr, null, false /*, null */ ); // sections are not cached
-      setPlotType3( );
-      // FIXME MOVED_BACK_IN DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
-      makeSectionReferences( mApp_mData.selectAllShots( mSid, TDStatus.NORMAL ), -1, 0 );
+      if ( mPlot3 != null ) {
+        mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null, false );
+        mDrawingSurface.modeloadDataStream( tdr, null, false /*, null */ ); // sections are not cached
+        setPlotType3( );
+        // FIXME MOVED_BACK_IN DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
+        makeSectionReferences( mApp_mData.selectAllShots( mSid, TDStatus.NORMAL ), -1, 0 );
+      } else {
+        TDLog.Error("null Plot 3");
+      }
     }
     mOffset.x = x;
     mOffset.y = y;

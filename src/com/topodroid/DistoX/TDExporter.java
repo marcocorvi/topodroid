@@ -75,6 +75,7 @@ class TDExporter
   private static final String   therion_flags_not_duplicate = "   flags not duplicate\n";
   private static final String   therion_flags_surface       = "   flags surface\n";
   private static final String   therion_flags_not_surface   = "   flags not surface\n";
+  private static final String   extend_auto = "    # extend auto\n";
 
   private static double mERadius = Geodetic.EARTH_A;
   private static double mSRadius = Geodetic.EARTH_A;
@@ -1111,6 +1112,23 @@ class TDExporter
     leg.reset();
   }
 
+  // if this return 1, the variable extend must be updated
+  // if this return 0 or 1, splay_extend must be updated false or true, respectively
+  static private int writeSplayExtend( PrintWriter pw, DBlock item, boolean splay_extend, int extend )
+  {
+    int item_extend = item.getIntExtend();
+    if ( item_extend > 1 ) {
+      if ( splay_extend ) {
+        pw.format( extend_auto );
+        return 0; // splay_extend <- false
+      }
+    } else if ( item_extend != extend || ! splay_extend ) {
+      pw.format("    extend %s\n", therion_extend[1+item_extend] );
+      return 1; // extend <- item_extend, splay_extend <- true
+    }
+    return -1;
+  }
+
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // Therion scraps and maps
   static private void doTherionMaps( PrintWriter pw, SurveyInfo info, List< PlotInfo > plots )
@@ -1187,7 +1205,6 @@ class TDExporter
     // Log.v("DistoX", "export as therion: " + file.getName() );
     float ul = TDSetting.mUnitLength;
     float ua = TDSetting.mUnitAngle;
-    final String extend_auto = "    # extend auto\n";
 
     String uls = ( ul < 1.01f )? "meters"  : "feet"; // FIXME
     String uas = ( ua < 1.01f )? "degrees" : "grads";
@@ -1313,6 +1330,7 @@ class TDExporter
 
       boolean splay_extend = true;
       int extend = 0;  // current extend
+      int extend_ratio = 100; // 100 percent, ie no shrink nor stretch
       AverageLeg leg = new AverageLeg(0);
       HashMap<String, LRUD> lruds = null;
       if ( TDSetting.mSurvexLRUD ) {
@@ -1347,16 +1365,14 @@ class TDExporter
             if ( item.mComment != null && item.mComment.length() > 0 ) {
               pw.format("  # %s\n", item.mComment );
             }
-            if ( item.getIntExtend() > 1 ) {
-	          if ( splay_extend ) {
-                pw.format( extend_auto );
-	            splay_extend = false;
-	          }
-	        } else if ( item.getIntExtend() != extend || ! splay_extend ) {
+            int tmp = writeSplayExtend( pw, item, splay_extend, extend );
+            if ( tmp == 0 ) {
+              splay_extend = false;
+            } else if ( tmp == 1 ) {
+              splay_extend = true;
               extend = item.getIntExtend();
-              pw.format("    extend %s\n", therion_extend[1+extend] );
-	          splay_extend = true;
             }
+
             writeThStations( pw, ( item.isXSplay() ? "-" : "." ), to, item.isCommented() );
             pw.format(Locale.US, "%.2f %.1f %.1f\n", item.mLength * ul, item.mBearing * ua, item.mClino * ua );
           }
@@ -1382,16 +1398,14 @@ class TDExporter
             if ( item.mComment != null && item.mComment.length() > 0 ) {
               pw.format("  # %s\n", item.mComment );
             }
-            if ( item.getIntExtend() > 1 ) {
-	          if ( splay_extend ) {
-                pw.format( extend_auto );
-	            splay_extend = false;
-	          }
-	        } else if ( item.getIntExtend() != extend || ! splay_extend ) {
+            int tmp = writeSplayExtend( pw, item, splay_extend, extend );
+            if ( tmp == 0 ) {
+              splay_extend = false;
+            } else if ( tmp == 1 ) {
+              splay_extend = true;
               extend = item.getIntExtend();
-              pw.format("    extend %s\n", therion_extend[1+extend] );
-	          splay_extend = true;
             }
+            
             writeThStations( pw, from, ( item.isXSplay() ? "-" : "." ), item.isCommented() );
             pw.format(Locale.US, "%.2f %.1f %.1f\n", item.mLength * ul, item.mBearing * ua, item.mClino * ua );
           } else { // with both FROM and TO stations
@@ -1410,7 +1424,21 @@ class TDExporter
             if ( item.getIntExtend() != extend || ! splay_extend ) {
               extend = item.getIntExtend();
               pw.format("    extend %s\n", therion_extend[1+extend] );
-	          splay_extend = true;
+              // handle extend stretch
+              if ( item.hasStretch() ) {
+                int ratio = (int)( 100 * (1 + item.getStretch() ) );
+                if ( ratio < 0 ) { ratio = 0; }
+                else if ( ratio > 200 ) { ratio = 200; }
+                if ( ratio != extend_ratio ) { 
+                  extend_ratio = ratio;
+                  pw.format("    extend %d\n", extend_ratio );
+                }
+              } else if ( extend_ratio != 100 ) {
+                extend_ratio = 100;
+                pw.format("    extend %d\n", extend_ratio );
+              }
+               
+	      splay_extend = true;
             }
             if ( item.isDuplicate() ) {
               pw.format(therion_flags_duplicate);

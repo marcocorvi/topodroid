@@ -147,6 +147,10 @@ with the lastname possibly preceeded by the firstname initial(s). For example
 the team string "A.W. Smith, B. Ford" becomes <i>team "A.W. Smith"</i> and <i>team "B. Ford"</i>.<br>
 WHen the thconfig is enabled the input of the sketch files are not commented.<br><p>
 
+For the extend the syntax "extend &lt;flag&gt;" is used before any leg, with flag equals to "left", "right",
+or "vert". For splays that do not have extend, TopoDroid writes "# extend auto", as a comment because it is not a
+valid Therion command.<br>
+Fractional extend is supported in Therion since v. 5.2.2 and it is exported if it is set.<br><p>
 
 
 Import Therion files must have extension ".th".<br>
