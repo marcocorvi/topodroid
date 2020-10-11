@@ -1113,8 +1113,6 @@
   <string name="pref_leg_shots_summary">最少主线测量次数</string>
   <string name="pref_recent_timeout_title">最近的数据超时</string>
   <string name="pref_recent_timeout_summary">超时之后，数据不再是最近的 [s]</string>
-  <string name="pref_recent_timeout_title">最近的数据超时</string>
-  <string name="pref_recent_timeout_summary">超时之后，数据不再是最近的 [s]</string>
   <string name="pref_triple_shot_title">主线测量提示声</string>
   <string name="pref_triple_shot_summary">主线测量识别声反馈</string>
   <string name="pref_connect_feedback_title">连接反馈</string>
