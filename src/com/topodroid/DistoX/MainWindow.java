@@ -793,6 +793,12 @@ public class MainWindow extends Activity
       TopoDroidApp.mCheckManualTranslation = false;
       checkManualTranslation();
     }
+    TDToast.make( ( TDPath.hasPath11()? "Path 11 " : "No Path 11 " ) + TDPath.EXTERNAL_STORAGE_PATH );
+    if ( ( ! TDPath.NOT_ANDROID_10 ) && TDPath.NOT_ANDROID_11 ) {
+      if ( ! TDPath.hasPath11() && ! TopoDroidApp.hasPath11NoAgain() ) {
+        ( new Path11Dialog( this, mApp )).show();
+      }
+    }
   }
           
 

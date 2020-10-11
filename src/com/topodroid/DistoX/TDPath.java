@@ -91,15 +91,17 @@ public class TDPath
   //    this works with Android-10 but the data are erased when TopoDroid is uninstalled
   //    because the path is Android/data/com.topodroid.DistoX/files
   // With "/sdcard" they remain
+  static String EXTERNAL_STORAGE_PATH_11 = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath();
   static String EXTERNAL_STORAGE_PATH =  // app base path
-    NOT_ANDROID_11 ? Environment.getExternalStorageDirectory().getAbsolutePath()
-                   // : Environment.getExternalStorageDirectory().getAbsolutePath();
-                   // FIXME ANDROID 11 this is what i should use but on the emulator it is a data file
-                   : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath();
-                   // : "/sdcard";
-                   // : null; 
+    (new File( EXTERNAL_STORAGE_PATH_11, "TopoDroid" ).exists() )? EXTERNAL_STORAGE_PATH_11
+    : NOT_ANDROID_11 ? Environment.getExternalStorageDirectory().getAbsolutePath()
+                     // : Environment.getExternalStorageDirectory().getAbsolutePath();
+                     // FIXME ANDROID 11 this is what i should use but on the emulator it is a data file
+                     : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath();
+                     // : "/sdcard";
+                     // : null; 
 
-  public static String PATH_BASEDIR  = EXTERNAL_STORAGE_PATH;
+  public static  String PATH_BASEDIR  = EXTERNAL_STORAGE_PATH;
   private static String PATH_DEFAULT  = EXTERNAL_STORAGE_PATH + "/TopoDroid/";
   private static String PATH_BASE     = PATH_BASEDIR + "/TopoDroid/";
 
@@ -175,10 +177,9 @@ public class TDPath
   static boolean checkBasePath( String path, String basedir )
   {
     // Log.v("DistoX-PATH", "BASE " + PATH_BASEDIR + " next " + basedir + " path " + path );
-    PATH_BASEDIR = basedir;
-    String cwd = PATH_BASEDIR + "/" + path;
+    PATH_BASEDIR = hasPath11() ? EXTERNAL_STORAGE_PATH_11 : basedir;
     TDLog.Log( TDLog.LOG_PATH, "base path " + PATH_BASEDIR );
-    File dir = new File( cwd ); // DistoX-SAF
+    File dir = new File( PATH_BASEDIR, path ); // DistoX-SAF
     if ( ! dir.exists() ) {
       if ( ! dir.mkdirs() ) TDLog.Error("mkdir error");
     }
@@ -190,14 +191,19 @@ public class TDPath
     return ret;
   }
 
+  static boolean hasPath11() 
+  {
+    File path11 = new File( EXTERNAL_STORAGE_PATH_11, "TopoDroid" );
+    return path11.exists();
+  }
+
   // FIXME BASEPATH 
   // remove comments when ready to swicth to new Android app path system
   //
   static void setPaths( String path, String base )
   {
     if ( PATH_BASEDIR == null ) {
-      File basedir = TDInstance.context.getExternalFilesDir( null );
-      PATH_BASEDIR = basedir.getPath();
+      PATH_BASEDIR = hasPath11() ? EXTERNAL_STORAGE_PATH_11 : TDInstance.context.getExternalFilesDir( null ).getPath();
       PATH_BASE    = PATH_BASEDIR + "/TopoDroid/";
       PATH_DEFAULT = PATH_BASEDIR;
       setDefaultPaths();
@@ -208,7 +214,7 @@ public class TDPath
     // Log.v("DistoX-PATH", "BASE " + PATH_BASEDIR + " base " + base + " path " + path );
 
     File dir = null; // DistoX-SAF
-    if ( base != null ) {
+    if ( base != null && ! hasPath11() ) {
       dir = new File( base );
       try {
         if ( ! dir.exists() ) dir.mkdirs();
@@ -221,7 +227,7 @@ public class TDPath
     TDLog.Log( TDLog.LOG_PATH, "set paths. path basedir " + PATH_BASEDIR );
     if ( path != null ) {
       String cwd = PATH_BASEDIR + "/" + path;
-      dir = new File( cwd ); // DistoX-SAF
+      dir = new File( PATH_BASEDIR, path ); // DistoX-SAF
       try {
         if ( ! dir.exists() ) dir.mkdirs();
         //   if ( ! dir.mkdirs() ) TDLog.Error("mkdir error");

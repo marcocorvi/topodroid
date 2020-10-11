@@ -2144,4 +2144,22 @@ public class TopoDroidApp extends Application
       (new SaveDataFileTask( null, TDInstance.sid, info, mData, TDInstance.survey, TDInstance.deviceA, exportType, false )).immed_exec();
     }
   }
+
+  // ==================================================================
+  // PATH_11
+
+  static void setPath11NoAgain()
+  {
+    if ( mData != null ) mData.setValue( "Path11", "1" );
+  }
+
+  static boolean hasPath11NoAgain()
+  {
+    if ( mData != null ) {
+      String no_again = mData.getValue( "Path11" );
+      return ( no_again != null && no_again.equals("1") );
+    }
+    return false;
+  }
+
 }
