@@ -2426,6 +2426,7 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.newReferences( DrawingSurface.DRAWING_SECTION, (int)mType );
     // Log.v("DistoX", "Section " + mClino + " " + mAzimuth );
     DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface ); // FIXME_SK moved out
+    mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)mType );
     float xfrom=0;
     float yfrom=0;
     float xto=0;
