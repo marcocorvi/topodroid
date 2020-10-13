@@ -5,15 +5,15 @@
     <string name="user_man_ok">Перевод руководства установлен</string>
     <string name="user_man_fail">Не удалось установить перевод руководства</string>
 
-    <!-- TODO string name="path11_title">IMPORTANT - Android 11</string -->
-    <!-- TODO string name="path11_text">
-Starting with Android 11 the app folders must be under "Documents".\n
-There is nothing to do for a new install of the app on Android-11.\n
-For an old install, before a system upgrade to Android-11, make a backup of your data, copy your "TopoDroid" folder under "Documents"
-and hard-restart TopoDroid.\n\n
-WARNING. From v. 5.0.60 "TopoDroid" uses the folder under Documents if it exists, even on Android-10 and below.
-</string -->
-    <!-- TODO string name="button_no_again">Don\'t ask again</string -->
+    <string name="path11_title">ВАЖНО - Android 11</string>
+    <string name="path11_text">
+Начиная с Android 11 папки приложения должны находиться в каталоге «Documents».\n
+Для новой установки приложения на Android-11 делать ничего не нужно.\n
+Для существующей установки перед обновлением системы до Android-11 сделайте резервную копию своих данных, скопируйте папку "TopoDroid" в кталог "Documents"
+и принудительно перезапустите TopoDroid.\n\n
+ВНИМАНИЕ. Начиная с v. 5.0.60 "TopoDroid" использует каталог "Documents", если таковой существует, даже на Android-10 и ниже.
+</string>
+    <string name="button_no_again">Не спрашивать о этом снова.</string>
 
     <string name="app_name">TopoDroid</string>
     <string name="tdm_title">TopoDroid Manager</string>
