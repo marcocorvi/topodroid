@@ -1100,8 +1100,6 @@ WARNING. From v. 5.0.60 "TopoDroid" uses the folder under Documents if it exists
   <string name="pref_leg_shots_summary">Минимален брой поредни еднакви измервания за да се считат за антена</string>
   <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
   <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent [s]</string -->
-  <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
-  <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent</string -->
   <!-- TODO string name="pref_triple_shot_title">Leg-shot bell</string -->
   <!-- TODO string name="pref_triple_shot_summary">Sound feedback on leg-shot recognition</string -->
   <!-- TODO string name="pref_connect_feedback_title">Connect feedback</string -->

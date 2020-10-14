@@ -1113,10 +1113,9 @@ WARNING. From v. 5.0.60 "TopoDroid" uses the folder under Documents if it exists
   <string name="pref_bezier_step_summary">Distancia entre puntos en una línea de exportación [m]</string>
   <string name="pref_leg_shots_title">Repeticiones de una visual</string>
   <string name="pref_leg_shots_summary">Número mínimo de tomas por visual</string>
-  <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
-  <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent [s]</string -->
   <string name="pref_recent_timeout_title">Tiempo de espera de datos reciente</string>
   <string name="pref_recent_timeout_summary">Tiempo de espera después del cual los datos ya no son recientes</string>
+  <!-- TODO CHECK PREVIOUS string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent [s]</string -->
   <string name="pref_triple_shot_title">Campana de la toma de una visual</string>
   <string name="pref_triple_shot_summary">Avisos sonoros sobre el reconocimiento de la toma de una visual</string>
   <string name="pref_connect_feedback_title">Conectar avisos</string>

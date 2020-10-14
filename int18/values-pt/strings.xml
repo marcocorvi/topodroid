@@ -1103,10 +1103,9 @@ WARNING. From v. 5.0.60 "TopoDroid" uses the folder under Documents if it exists
   <string name="pref_bezier_step_summary">Distância entre pontos em uma linha exportada [m]</string>
   <string name="pref_leg_shots_title">Mínimo medidas por visada</string>
   <string name="pref_leg_shots_summary">Quantidade mínima de medidas para uma visada</string>
-  <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
-  <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent [s]</string -->
   <string name="pref_recent_timeout_title">Prazo "dados recentes"</string>
   <string name="pref_recent_timeout_summary">Limite de tempo para dados ser considerado recente</string>
+  <!-- TODO CHECK PREVIOUS string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent [s]</string -->
   <string name="pref_triple_shot_title">Som visada</string>
   <string name="pref_triple_shot_summary">Aviso sonoro reconhecimento de visada</string>
   <string name="pref_connect_feedback_title">Feedback conexão</string>

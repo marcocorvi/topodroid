@@ -1100,10 +1100,9 @@ WARNING. From v. 5.0.60 "TopoDroid" uses the folder under Documents if it exists
   <string name="pref_bezier_step_summary">Distanța între puncte pe o linie export [m]</string>
   <string name="pref_leg_shots_title">Nr. min. măsurători/viză</string>
   <string name="pref_leg_shots_summary">Nr. minim de măsurători pe viză</string>
-  <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
-  <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent [s]</string -->
   <string name="pref_recent_timeout_title">Timeout date recente</string>
   <string name="pref_recent_timeout_summary">Timeout după care datele nu mai sunt recente</string>
+  <!-- TODO CHECK PREVIOUS string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent [s]</string -->
   <string name="pref_triple_shot_title">Sunet avertizare viză</string>
   <string name="pref_triple_shot_summary">Sunet avertizare la recunoașterea unei vize noi(segment de drumuire)</string>
   <string name="pref_connect_feedback_title">Feedback conectare</string>

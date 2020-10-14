@@ -1117,10 +1117,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_bezier_step_summary">Max. odstęp między punktami (przybliżenie krzywych) [m]</string>
   <string name="pref_leg_shots_title">Min. ilość strzałów na pomiar</string>
   <string name="pref_leg_shots_summary">Minimalna ilość strzałó aby uzyskać pomiar</string>
-  <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
-  <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent [s]</string -->
   <string name="pref_recent_timeout_title">Limit czasu dla danych</string>
   <string name="pref_recent_timeout_summary">Limit czasu, po którym dane nie są już aktualne</string>
+  <!-- TODO CHECK PREVIOUS string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent [s]</string -->
   <!-- TODO string name="pref_triple_shot_title">Leg-shot bell</string -->
   <!-- TODO string name="pref_triple_shot_summary">Sound feedback on leg-shot recognition</string -->
   <!-- TODO string name="pref_connect_feedback_title">Connect feedback</string -->
