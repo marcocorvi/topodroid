@@ -55,8 +55,8 @@
 
   <TextView 
     android:id="@+id/length"
-    android:layout_weight="340"
-    android:layout_width="0dp"
+    android:layout_weight="540"
+    android:layout_width="540dp"
     android:layout_height="wrap_content"
     android:textSize="@dimen/textsize"
     android:singleLine="true"
