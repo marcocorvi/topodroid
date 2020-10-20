@@ -5,15 +5,15 @@
     <string name="user_man_ok">Istallata la traduzione del manuale utente</string>
     <string name="user_man_fail">Errore nella istallazione del manuale utente</string>
 
-    <!-- TODO string name="path11_title">IMPORTANT - Android 11</string -->
-    <!-- TODO string name="path11_text">
-Starting with Android 11 the app folders must be under "Documents".\n
-There is nothing to do for a new install of the app on Android-11.\n
-For an old install, before a system upgrade to Android-11, make a backup of your data, copy your "TopoDroid" folder under "Documents"
-and hard-restart TopoDroid.\n\n
-WARNING. From v. 5.0.60 "TopoDroid" uses the folder under Documents if it exists, even on Android-10 and below.
-</string -->
-    <!-- TODO string name="button_no_again">Don\'t ask again</string -->
+    <string name="path11_title">IMPORTANTE - Android 11</string>
+    <string name="path11_text">
+A partire da Android 11 le cartelle della app dovranno essere sotto "Documents".\n
+C\'e\' nulla da fare per una nuova installazione della app su Android 11.\n 
+Per una vecchia installazione, prima di un aggornamento di sistema ad Android 11,\n
+ fate un salvataggio dei vostri dati, copiate la vostra cartella "Topodroid" sotto "Documents" e fate ripartire Topodroid.\n\n 
+ATTENZIONE: Dalla v. 5.0.60 "TopoDroid" usa la cartella sotto "Documents", se esiste, anche su Android 10 e precedenti.
+</string>
+    <string name="button_no_again">Non chiedere di nuovo</string>
 
     <string name="app_name">TopoDroid</string>
     <string name="tdm_title">Gestione TopoDroid</string>
@@ -294,7 +294,7 @@ WARNING. From v. 5.0.60 "TopoDroid" uses the folder under Documents if it exists
     <string name="bad_line">Tipo linea errato</string>
     <string name="bad_point">Tipo punto errato</string>
 
-    <!-- TODO string name="no_audio">No audio record</string -->
+    <string name="no_audio">No registrazione audio</string>
     <string name="no_bt">No Bluetooth</string>
     <string name="no_calib">Nessuna calibrazione</string>
     <string name="no_calib_check">Nessun tiro di controllo calibrazione</string>
@@ -329,7 +329,7 @@ WARNING. From v. 5.0.60 "TopoDroid" uses the folder under Documents if it exists
     <!-- OK string name="menu_3d">3D</string -->
     <string name="menu_about">INFO</string>
     <!-- OK string name="menu_area">AREA</string -->
-    <!-- TODO string name="menu_audio">AUDIO</string -->
+    <string name="menu_audio">AUDIO</string>
     <!-- UNUSED string name="menu_attach">CONNETTI</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
@@ -374,7 +374,7 @@ WARNING. From v. 5.0.60 "TopoDroid" uses the folder under Documents if it exists
     <string name="menu_zoom_fit">ADATTA ZOOM</string>
 
     <!-- FIXED_ZOOM -->
-    <!-- TODO string name="zoom_fixed">Graph-paper</string -->
+    <string name="zoom_fixed">Carta millimetrata</string>
 
     <string name="ble_scan_failed">Scan BLE fallita</string>
     <string name="ble_gatt_failure">Guasto BLE</string>
@@ -608,7 +608,7 @@ WARNING. From v. 5.0.60 "TopoDroid" uses the folder under Documents if it exists
     <string name="ask_manual_update">Aggiornare la traduzione del manuale?\nAttuale v. %1$d Istallata v. %2$d</string>
 
     <!-- UNUSED string name="button_add"       >Inserisci </string -->
-    <!-- TODO string name="button_apply"     >Apply</string -->
+    <string name="button_apply"     >Applica</string>
     <string name="button_back"      >Indietro  </string>
     <string name="button_cancel"    >Annulla   </string>
     <string name="button_change"    >Cambia    </string>
@@ -714,7 +714,7 @@ WARNING. From v. 5.0.60 "TopoDroid" uses the folder under Documents if it exists
     <string name="popup_do_gm_data">Tiro di calib.</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
-    <!-- TODO string name="btn_export">Export</string -->
+    <string name="btn_export">Esporta</string>
     <string name="btn_import">Importa</string>
     <string name="btn_install">Installa</string>
 
@@ -770,7 +770,7 @@ WARNING. From v. 5.0.60 "TopoDroid" uses the folder under Documents if it exists
     <string name="help_measure_type">Metodo misura: punti fissi o polilinea</string>
     <string name="help_measure_undo">Cancella l\'ultimo punto della polilinea</string>
     
-    <!-- TODO string name="help_audio">Audio records list</string -->
+    <string name="help_audio">Lista registrazioni audio</string>
     <string name="help_backups">Cancella backup disegni</string>
     <string name="help_calib_check">Tiri di controllo calib.</string>
     <string name="help_close">Chiusura finestra</string>
@@ -918,14 +918,14 @@ WARNING. From v. 5.0.60 "TopoDroid" uses the folder under Documents if it exists
     <string name="audio_overwrite">Sovrascrivi ?</string>
     <!-- UNUSED string name="playing">Playing %1$s</string -->
   
-    <!-- TODO string name="import_functional">Import only functional settings</string -->
+    <string name="import_functional">Importa solo impostazioni funzionali</string>
     <string name="import_lrud">Importa LRUD</string>
     <string name="import_leg_first">Battuta prima degli LRUD</string>
     <string name="import_diving_datamode">Modo dati da immersione</string>
 
     <string name="title_azimut">Riferimento Extend</string>
     <string name="title_audio">Commento audio</string>
-    <!-- TODO string name="title_audio_list">Audio records</string -->
+    <string name="title_audio_list">Registrazioni audio</string>
     <string name="title_calib">Calibrazioni</string>
     <string name="title_calib_check">Tiri di controllo calib.</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->
@@ -1100,8 +1100,7 @@ WARNING. From v. 5.0.60 "TopoDroid" uses the folder under Documents if it exists
   <string name="pref_leg_shots_title">Misure per battuta</string>
   <string name="pref_leg_shots_summary">Minimo numero di misure per tiro di poligonale</string>
   <string name="pref_recent_timeout_title">Dati Timeout recenti</string>
-  <string name="pref_recent_timeout_summary">Timeout dopo i quali un dato non e\' piu\' recente</string>
-  <!-- TODO CHECK PREVIOUS string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent [s]</string -->
+  <string name="pref_recent_timeout_summary">Tempo dopo il quale un dato non e\' piu\' recente [s]</string>
   <string name="pref_triple_shot_title">Suono Misura-Tiro</string>
   <string name="pref_triple_shot_summary">Feedback sonoro al riconoscimento di Misura-Tiro</string>
   <string name="pref_connect_feedback_title">Feedback connessione</string>
@@ -1574,7 +1573,7 @@ WARNING. From v. 5.0.60 "TopoDroid" uses the folder under Documents if it exists
     <string name="overwrite">Sovrascrivi</string>
 
     <string name="title_help">Gestore TopoDroid v. %1$s</string>
-    <!-- TODO string name="title_export_settings">Settings import/export</string -->
+    <string name="title_export_settings">Impostazioni importa/esporta</string>
     <string name="title_export">Esporta progetto come &#8230;</string>
     <string name="title_equates">Progetto Equivalenti</string>
     <string name="title_equate_new">Aggiungi equivalente &#8230;</string>
@@ -1585,7 +1584,7 @@ WARNING. From v. 5.0.60 "TopoDroid" uses the folder under Documents if it exists
     <string name="title_surveys">Rilievi</string>
 
     <string name="exported">Salvato file %1$s</string>
-  <!-- TODO string name="imported_settings">Imported settings</string -->
+  <string name="imported_settings">Impostazioni importate</string>
     <string name="export_failed">Esportazione fallita</string>
 
 </resources>
