@@ -197,6 +197,22 @@ public class TDPath
     return path11.exists();
   }
 
+  static boolean moveToPath11()
+  { 
+    File path11 = new File( EXTERNAL_STORAGE_PATH_11, "TopoDroid" );
+    if ( path11.exists() ) return false;
+
+    File path = new File( PATH_BASE );
+    if ( ! path.exists() ) return false;
+
+    File dir11 = new File( EXTERNAL_STORAGE_PATH_11 );
+    if ( ! dir11.exists() ) dir11.mkdirs();
+    path.renameTo( path11 );
+    PATH_BASEDIR = EXTERNAL_STORAGE_PATH_11;
+    TopoDroidApp.setCWDPreference( "TopoDroid", EXTERNAL_STORAGE_PATH_11 );
+    return true;
+  }
+
   // FIXME BASEPATH 
   // remove comments when ready to swicth to new Android app path system
   //

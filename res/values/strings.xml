@@ -11,10 +11,13 @@ Starting with Android 11 the app folders must be under "Documents".\n
 There is nothing to do for a new install of the app on Android-11.\n
 For an old install, before a system upgrade to Android-11, make a backup of your data, copy your "TopoDroid" folder under "Documents"
 and hard-restart TopoDroid.\n\n
-WARNING. From v. 5.0.60 "TopoDroid" uses the folder under Documents if it exists, even on Android-10 and below.
+WARNING. From v. 5.0.60 "TopoDroid" uses the folder under Documents if it exists, even on Android-10 and below.\n\n
+Tap "Move" to move your TopoDroid folder to Documents.\n
+Tap "Close" not to take any action.
 </string>
     <string name="button_no_again">Don\'t ask again</string>
-    
+    <string name="path11_move">Moved to folder Documents/TopoDroid.\nPlease restart TopoDroid</string>
+    <string name="path11_not_move">Failed to move to folder Documents/TopoDroid</string>
 
     <string name="app_name">TopoDroid</string>
     <string name="tdm_title">TopoDroid Manager</string>
@@ -1443,6 +1446,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_splay_classes_summary">Enable splay classes</string>
   <string name="pref_splay_color_title">Splay coloring</string>
   <string name="pref_splay_color_summary">Enable splay coloring</string>
+  <string name="pref_splay_as_dot_title">Splay endpoint</string>
+  <string name="pref_splay_as_dot_summary">Display splays as endpoints</string>
   <!-- UNUSED string name="pref_splay_active_title">Splay at active station</string -->
   <!-- UNUSED string name="pref_splay_active_summary">Enable splay at the active station</string -->
   <string name="pref_plot_shift_title">Sketch shift/scale</string>

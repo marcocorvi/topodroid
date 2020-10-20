@@ -269,7 +269,7 @@ public class OverviewWindow extends ItemDrawer
         dpath.setPathPaint( BrushManager.fixedShotPaint );
       }
       // DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2, xoff, yoff );
-      DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2 );
+      DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2, splay );
       mOverviewSurface.addFixedPath( dpath, splay, false ); // false: non-selectable
     }
 

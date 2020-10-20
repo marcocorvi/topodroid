@@ -53,6 +53,18 @@ public class MyStateBox extends CompoundButton
     setState( 0 );
   }
 
+  public MyStateBox( Context context, int id0, int id1, int id2, int id3 )
+  {
+    super( context );
+    mContext = context;
+    mBG = new BitmapDrawable[4];
+    mBG[0] = MyButton.getButtonBackground( mContext, mContext.getResources(), id0 );
+    mBG[1] = MyButton.getButtonBackground( mContext, mContext.getResources(), id1 );
+    mBG[2] = MyButton.getButtonBackground( mContext, mContext.getResources(), id2 );
+    mBG[3] = MyButton.getButtonBackground( mContext, mContext.getResources(), id3 );
+    setState( 0 );
+  }
+
   public void setState( int s )
   {
     if ( s >= 0 && s < mBG.length ) {
@@ -62,6 +74,8 @@ public class MyStateBox extends CompoundButton
   }
 
   public int getState() { return mState; }
+
+  public int getNrStates() { return (mBG == null)? 0 : mBG.length; }
 
 }
 

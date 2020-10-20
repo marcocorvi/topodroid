@@ -258,8 +258,10 @@ class ShotDialog extends MyDialog
       else if ( DBlock.isSurface(shot_flag) )   { mRBsurf.setState( true ); }
       else if ( DBlock.isCommented(shot_flag) ) { mRBcmtd.setState( true ); } // FIXME_COMMENTED
       else if ( mRBsplay != null ) {
-        if ( DBlock.isNoProfile(shot_flag) )   { mRBsplay.setState( 1 ); }
-        else if ( DBlock.isNoPlan(shot_flag) ) { mRBsplay.setState( 2 ); }
+        if ( DBlock.isNoPlan(shot_flag) && DBlock.isNoProfile(shot_flag) ) { mRBsplay.setState( 3 ); }
+        else if ( DBlock.isNoPlan(shot_flag) )        { mRBsplay.setState( 2 ); }
+        else if ( DBlock.isNoProfile(shot_flag) )     { mRBsplay.setState( 1 ); }
+        else                                          { mRBsplay.setState( 0 ); }
       }
       // else if ( DBlock.isBackshot(shot_flag) ) { mRBback.setChecked( true ); }
     }
@@ -445,7 +447,8 @@ class ShotDialog extends MyDialog
     }
 
     if ( TDLevel.overExpert && TDSetting.mSplayClasses ) {
-      mRBsplay = new MyStateBox( mContext, R.drawable.iz_plan_profile, R.drawable.iz_plan, R.drawable.iz_extended );
+      mRBsplay = new MyStateBox( mContext, 
+        R.drawable.iz_plan_profile, R.drawable.iz_plan, R.drawable.iz_extended, R.drawable.iz_none );
       mRBsplay.setOnClickListener( this );
       nr_buttons ++;
     } // else mRBsplay = null;
@@ -596,6 +599,8 @@ class ShotDialog extends MyDialog
       else if ( mRBsplay != null ) {
         if ( mRBsplay.getState() == 1 )      { shot_flag = DBlock.FLAG_NO_PROFILE; }
         else if ( mRBsplay.getState() == 2 ) { shot_flag = DBlock.FLAG_NO_PLAN; }
+        else if ( mRBsplay.getState() == 3 ) { shot_flag = DBlock.FLAG_NO_PLAN | DBlock.FLAG_NO_PROFILE; }
+        // FIXME TODO add another state for both NO_PLAN and NO_PROFILE
       }
     }
     // else if ( mRBback.isChecked() ) { shot_flag = DBlock.FLAG_BACKSHOT; }
@@ -807,7 +812,7 @@ class ShotDialog extends MyDialog
         if ( mRBsplay != null ) mRBsplay.setState( 0 );
       }
     } else if ( mRBsplay != null && b == mRBsplay ) {
-      mRBsplay.setState( ( mRBsplay.getState() + 1 ) % 3 );
+      mRBsplay.setState( ( mRBsplay.getState() + 1 ) % mRBsplay.getNrStates() );
       if ( mRBsplay.getState() > 0 ) {
         mRBdup.setState( false );
         mRBsurf.setState( false );

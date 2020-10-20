@@ -319,6 +319,7 @@ public class TDSetting
   public static float   mSectionSplay  = 60;
   public static int     mStationNames  = 0;        // type of station names (0: alpha, 1: number)
   public static int     mSplayAlpha    = 80;       // splay alpha [default 80 out of 100]
+  public static boolean mSplayAsDot    = false;    // draw splays as dots
 
   public static final int LOOP_NONE      = 0;
   public static final int LOOP_CYCLES    = 1;
@@ -944,20 +945,21 @@ public class TDSetting
     String[] defGPlot = TDPrefKey.GEEKPLOTdef;
     mPlotShift     = prefs.getBoolean( keyGPlot[ 0], bool(defGPlot[ 0]) ); // DISTOX_PLOT_SHIFT
     mPlotSplit     = prefs.getBoolean( keyGPlot[ 1], bool(defGPlot[ 1]) ); // DISTOX_PLOT_SPLIT
-    mSplayVertThrs  = tryFloat( prefs, keyGPlot[ 2],      defGPlot[ 2]  ); // DISTOX_SPLAY_VERT_THRS
-    mDashSplay      = tryInt( prefs,   keyGPlot[ 3],      defGPlot[ 3] );  // DISTOX_SPLAY_DASH
-    mVertSplay      = tryFloat( prefs, keyGPlot[ 4],      defGPlot[ 4] );  // DISTOX_VERT_SPLAY
-    mHorizSplay     = tryFloat( prefs, keyGPlot[ 5],      defGPlot[ 5] );  // DISTOX_HORIZ_SPLAY
+    mSplayAsDot    = prefs.getBoolean( keyGPlot[ 2], bool(defGPlot[ 2]) ); // DISTOX_SPLAY_AS_DOT
+    mSplayVertThrs  = tryFloat( prefs, keyGPlot[ 3],      defGPlot[ 3]  ); // DISTOX_SPLAY_VERT_THRS
+    mDashSplay      = tryInt( prefs,   keyGPlot[ 4],      defGPlot[ 4] );  // DISTOX_SPLAY_DASH
+    mVertSplay      = tryFloat( prefs, keyGPlot[ 5],      defGPlot[ 5] );  // DISTOX_VERT_SPLAY
+    mHorizSplay     = tryFloat( prefs, keyGPlot[ 6],      defGPlot[ 6] );  // DISTOX_HORIZ_SPLAY
     mCosHorizSplay = TDMath.cosd( mHorizSplay );  
-    mSectionSplay   = tryFloat( prefs, keyGPlot[ 6],      defGPlot[ 6] );  // DISTOX_SECTION_SPLAY
-    mBackupNumber   = tryInt( prefs,   keyGPlot[ 7],      defGPlot[ 7] );  // DISTOX_BACKUP_NUMBER
-    mBackupInterval = tryInt( prefs,   keyGPlot[ 8],      defGPlot[ 8] );  // DISTOX_BACKUP_INTERVAL
+    mSectionSplay   = tryFloat( prefs, keyGPlot[ 7],      defGPlot[ 7] );  // DISTOX_SECTION_SPLAY
+    mBackupNumber   = tryInt( prefs,   keyGPlot[ 8],      defGPlot[ 8] );  // DISTOX_BACKUP_NUMBER
+    mBackupInterval = tryInt( prefs,   keyGPlot[ 9],      defGPlot[ 9] );  // DISTOX_BACKUP_INTERVAL
     // setBackupsClear( prefs.getBoolean( keyGPlot[ 9], bool(defGPlot[ 9]) ) ); // DISTOX_BACKUPS_CLEAR moved to GEEK
-    mAutoXSections  = prefs.getBoolean( keyGPlot[ 9], bool(defGPlot[ 9]) ); // DISTOX_AUTO_XSECTIONS
-    mSavedStations  = prefs.getBoolean( keyGPlot[10], bool(defGPlot[10]) ); // DISTOX_SAVED_STATIONS
-    mLegonlyUpdate  = prefs.getBoolean( keyGPlot[11], bool(defGPlot[11]) ); // DISTOX_LEGONLY_UPDATE
-    mFullAffine     = prefs.getBoolean( keyGPlot[12], bool(defGPlot[12]) ); // DISTOX_FULL_UPDATE
-    mWithLevels     = tryInt( prefs,   keyGPlot[13],      defGPlot[13] );   // DISTOX_WITH_LEVELS
+    mAutoXSections  = prefs.getBoolean( keyGPlot[10], bool(defGPlot[10]) ); // DISTOX_AUTO_XSECTIONS
+    mSavedStations  = prefs.getBoolean( keyGPlot[11], bool(defGPlot[11]) ); // DISTOX_SAVED_STATIONS
+    mLegonlyUpdate  = prefs.getBoolean( keyGPlot[12], bool(defGPlot[12]) ); // DISTOX_LEGONLY_UPDATE
+    mFullAffine     = prefs.getBoolean( keyGPlot[13], bool(defGPlot[13]) ); // DISTOX_FULL_UPDATE
+    mWithLevels     = tryInt( prefs,   keyGPlot[14],      defGPlot[14] );   // DISTOX_WITH_LEVELS
 
     String[] keyGLine = TDPrefKey.GEEKLINE;
     String[] defGLine = TDPrefKey.GEEKLINEdef;
@@ -1387,45 +1389,47 @@ public class TDSetting
       mPlotShift    = tryBooleanValue( hlp, k, v, bool(def[0]) );
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_PLOT_SPLIT
       mPlotSplit = tryBooleanValue( hlp, k, v, bool(def[ 1]) );
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_SPLAY_VERT_THRS
-      mSplayVertThrs = tryFloatValue( hlp, k, v, def[ 2] );
+    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_SPLAY_AS_DOT
+      mSplayAsDot = tryBooleanValue( hlp, k, v, bool(def[ 2]) );
+    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_SPLAY_VERT_THRS
+      mSplayVertThrs = tryFloatValue( hlp, k, v, def[ 3] );
       if ( mSplayVertThrs <  0 ) { mSplayVertThrs =  0; ret = TDString.ZERO; }
       if ( mSplayVertThrs > 91 ) { mSplayVertThrs = 91; ret = TDString.NINETYONE; }
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_SPLAY_DASH (0,1,2)
-      mDashSplay = tryIntValue( hlp, k, v, def[ 3] );      
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_VERT_SPLAY
-      mVertSplay   = tryFloatValue( hlp, k, v, def[ 4] );
+    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_SPLAY_DASH (0,1,2)
+      mDashSplay = tryIntValue( hlp, k, v, def[ 4] );      
+    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_VERT_SPLAY
+      mVertSplay   = tryFloatValue( hlp, k, v, def[ 5] );
       if ( mVertSplay <  0 ) { mVertSplay =  0; ret = TDString.ZERO; }
       if ( mVertSplay > 91 ) { mVertSplay = 91; ret = TDString.NINETYONE; }
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_HORIZ_SPLAY
-      mHorizSplay  = tryFloatValue( hlp, k, v, def[ 5] );
+    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_HORIZ_SPLAY
+      mHorizSplay  = tryFloatValue( hlp, k, v, def[ 6] );
       if ( mHorizSplay <  0 ) { mHorizSplay =  0; ret = TDString.ZERO; }
       if ( mHorizSplay > 91 ) { mHorizSplay = 91; ret = TDString.NINETYONE; }
       mCosHorizSplay = TDMath.cosd( mHorizSplay );
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_SECTION_SPLAY
-      mSectionSplay = tryFloatValue( hlp, k, v, def[ 6] );
+    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_SECTION_SPLAY
+      mSectionSplay = tryFloatValue( hlp, k, v, def[ 7] );
       if ( mSectionSplay <  0 ) { mSectionSplay =  0; ret = TDString.ZERO; }
       if ( mSectionSplay > 91 ) { mSectionSplay = 91; ret = TDString.NINETYONE; }
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_BACKUP_NUMBER
-      mBackupNumber  = tryIntValue( hlp, k, v, def[ 7] ); 
+    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_BACKUP_NUMBER
+      mBackupNumber  = tryIntValue( hlp, k, v, def[ 8] ); 
       if ( mBackupNumber <  4 ) { mBackupNumber =  4; ret = Integer.toString( mBackupNumber ); }
       if ( mBackupNumber > 10 ) { mBackupNumber = 10; ret = Integer.toString( mBackupNumber ); }
-    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_BACKUP_INTERVAL
-      mBackupInterval = tryIntValue( hlp, k, v, def[ 8] );  
+    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_BACKUP_INTERVAL
+      mBackupInterval = tryIntValue( hlp, k, v, def[ 9] );  
       if ( mBackupInterval <  10 ) { mBackupInterval =  10; ret = Integer.toString( mBackupInterval ); }
       if ( mBackupInterval > 600 ) { mBackupInterval = 600; ret = Integer.toString( mBackupInterval ); }
     // } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_BACKUPS_CLEAR moved to GEEK
     //   setBackupsClear( tryBooleanValue( hlp, k, v, bool(def[ 9]) ) );
-    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_AUTO_XSECTIONS
-      mAutoXSections = tryBooleanValue( hlp, k, v, bool(def[ 9]) );
-    } else if ( k.equals( key[10 ] ) ) { // DISTOX_SAVED_STATIONS
-      mSavedStations = tryBooleanValue( hlp, k, v, bool(def[10]) );
-    } else if ( k.equals( key[11 ] ) ) { // DISTOX_LEGONLY_UPDATE
-      mLegonlyUpdate = tryBooleanValue( hlp, k, v, bool(def[11]) );
-    } else if ( k.equals( key[12 ] ) ) { // DISTOX_FULL_AFFINE
-      mFullAffine    = tryBooleanValue( hlp, k, v, bool(def[12]) );
-    } else if ( k.equals( key[13 ] ) ) { // DISTOX_WITH_LEVELS
-      mWithLevels    = tryIntValue( hlp, k, v, def[13] );
+    } else if ( k.equals( key[ 10 ] ) ) { // DISTOX_AUTO_XSECTIONS
+      mAutoXSections = tryBooleanValue( hlp, k, v, bool(def[ 10]) );
+    } else if ( k.equals( key[11 ] ) ) { // DISTOX_SAVED_STATIONS
+      mSavedStations = tryBooleanValue( hlp, k, v, bool(def[11]) );
+    } else if ( k.equals( key[12 ] ) ) { // DISTOX_LEGONLY_UPDATE
+      mLegonlyUpdate = tryBooleanValue( hlp, k, v, bool(def[12]) );
+    } else if ( k.equals( key[13 ] ) ) { // DISTOX_FULL_AFFINE
+      mFullAffine    = tryBooleanValue( hlp, k, v, bool(def[13]) );
+    } else if ( k.equals( key[14 ] ) ) { // DISTOX_WITH_LEVELS
+      mWithLevels    = tryIntValue( hlp, k, v, def[14] );
     } else {
       TDLog.Error("missing GEEK_PLOT key: " + k );
     }

@@ -796,12 +796,22 @@ public class MainWindow extends Activity
     // TDToast.make( ( TDPath.hasPath11()? "Path 11 " : "No Path 11 " ) + TDPath.EXTERNAL_STORAGE_PATH );
     if ( ( ! TDPath.NOT_ANDROID_10 ) && TDPath.NOT_ANDROID_11 ) {
       // only for Android 10
+      // Log.v( "DistoX-PATH11", "has path11 " + TDPath.hasPath11() + " " + TopoDroidApp.hasPath11NoAgain() );
       if ( ! TDPath.hasPath11() && ! TopoDroidApp.hasPath11NoAgain() ) {
-        ( new Path11Dialog( this, mApp )).show();
+        ( new Path11Dialog( this, this, mApp )).show();
       }
     }
   }
-          
+
+  void moveToPath11()
+  { 
+    if ( TDPath.moveToPath11() ) {
+      TDToast.make(R.string.path11_move );
+      finish();
+    } else {
+      TDToast.make(R.string.path11_not_move );
+    }
+  }
 
   @Override
   protected synchronized void onPause() 

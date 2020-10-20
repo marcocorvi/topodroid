@@ -12,9 +12,13 @@ Starting with Android 11 the app folders must be under "Documents".\n
 There is nothing to do for a new install of the app on Android-11.\n
 For an old install, before a system upgrade to Android-11, make a backup of your data, copy your "TopoDroid" folder under "Documents"
 and hard-restart TopoDroid.\n\n
-WARNING. From v. 5.0.60 "TopoDroid" uses the folder under Documents if it exists, even on Android-10 and below.
+WARNING. From v. 5.0.60 "TopoDroid" uses the folder under Documents if it exists, even on Android-10 and below.\n\n
+Tap "Move" to move your TopoDroid folder to Documents.\n
+Tap "Close" not to take any action.
 </string -->
     <!-- TODO string name="button_no_again">Don\'t ask again</string -->
+    <!-- TODO string name="path11_move">Moved to folder Documents/TopoDroid.\nPlease restart TopoDroid</string -->
+    <!-- TODO string name="path11_not_move">Failed to move to folder Documents/TopoDroid</string -->
 
     <string name="app_name">TopoDroid</string>
     <string name="tdm_title">TopoDroid Manager</string>

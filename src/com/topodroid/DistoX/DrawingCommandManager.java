@@ -761,6 +761,7 @@ class DrawingCommandManager
   // p is the path of sp
   void deleteSplay( DrawingPath p, SelectionPoint sp )
   {
+    if ( TDSetting.mSplayAsDot ) return; // FIXME-SPLAY_AS_DOT
     synchronized( TDPath.mShotsLock ) {
       mSplaysStack.remove( p );
     }
@@ -855,6 +856,7 @@ class DrawingCommandManager
   {
     // if ( mTmpSplaysStack == null ) return;
     mTmpSplaysStack.add( path );
+    if ( TDSetting.mSplayAsDot ) return;  // FIXME-SPLAY_AS_DOT
     if ( selectable ) {
       synchronized( TDPath.mSelectionLock ) {
         mSelectionFixed.insertPath( path );

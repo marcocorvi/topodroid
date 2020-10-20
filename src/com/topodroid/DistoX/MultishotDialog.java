@@ -233,7 +233,8 @@ class MultishotDialog extends MyDialog
         long flag = DBlock.FLAG_SURVEY;
         if ( ! ((CheckBox)findViewById( R.id.rb_noplan )).isChecked() ) {
           flag |= DBlock.FLAG_NO_PLAN;
-        } else if ( ! ((CheckBox)findViewById( R.id.rb_noprofile )).isChecked() ) {
+        } 
+        if ( ! ((CheckBox)findViewById( R.id.rb_noprofile )).isChecked() ) {
           flag |= DBlock.FLAG_NO_PROFILE;
         }
         mParent.updateSplaysLegType( mBlks, leg_type, flag );

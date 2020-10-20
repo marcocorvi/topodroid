@@ -1147,7 +1147,7 @@ public class TopoDroidApp extends Application
     TDPrefHelper.update( "DISTOX_SOCK_TYPE", defaultSockType ); 
   }
 
-  void setCWDPreference( String cwd, String cbd )
+  static void setCWDPreference( String cwd, String cbd )
   { 
     if ( TDInstance.cwd.equals( cwd ) && TDInstance.cbd.equals( cbd ) ) return;
     // Log.v("DistoX", "setCWDPreference " + cwd );
@@ -1155,7 +1155,7 @@ public class TopoDroidApp extends Application
     setCWD( cwd, cbd ); 
   }
 
-  void setPtCmapPreference( String cmap )
+  static void setPtCmapPreference( String cmap )
   {
     TDPrefHelper.update( "DISTOX_PT_CMAP", cmap ); 
     PtCmapActivity.setMap( cmap );
@@ -1167,7 +1167,7 @@ public class TopoDroidApp extends Application
   //   TDPrefHelper.update( "DISTOX_ACCEL_THR", Float.toString( acceleration ), "DISTOX_MAG_THR", Float.toString( magnetic ), "DISTOX_DIP_THR", Float.toString( dip ) ); 
   // }
 
-  void setTextSize( int ts )
+  static void setTextSize( int ts )
   {
     TDSetting.setTextSize( ts );
     if ( TDSetting.setLabelSize( ts*3, false ) || TDSetting.setStationSize( ts*2, false ) ) { // false: do not update brush
@@ -1176,27 +1176,27 @@ public class TopoDroidApp extends Application
     TDPrefHelper.update( "DISTOX_TEXT_SIZE", Integer.toString(ts), "DISTOX_LABEL_SIZE", Float.toString(ts*3), "DISTOX_STATION_SIZE", Float.toString(ts*2) );
   }
 
-  void setButtonSize( int bs )
+  static void setButtonSize( int bs )
   {
     // Log.v("DistoX-BUTTON", "set button size " + bs );
     TDSetting.setSizeButtons( bs );
     TDPrefHelper.update( "DISTOX_SIZE_BUTTONS", Integer.toString(bs) );
   }
 
-  void setDrawingUnitIcons( float u )
+  static void setDrawingUnitIcons( float u )
   {
     TDSetting.setDrawingUnitIcons( u );
     TDPrefHelper.update( "DISTOX_DRAWING_UNIT", Float.toString(u) );
   }
 
-  void setDrawingUnitLines( float u )
+  static void setDrawingUnitLines( float u )
   {
     TDSetting.setDrawingUnitLines( u );
     TDPrefHelper.update( "DISTOX_LINE_UNITS", Float.toString(u) );
   }
 
   // used for "DISTOX_WELCOME_SCREEN" and "DISTOX_TD_SYMBOL"
-  void setBooleanPreference( String preference, boolean val ) { TDPrefHelper.update( preference, val ); }
+  static void setBooleanPreference( String preference, boolean val ) { TDPrefHelper.update( preference, val ); }
 
   // FIXME_DEVICE_STATIC
   void setDevice( String address, BluetoothDevice bt_device )

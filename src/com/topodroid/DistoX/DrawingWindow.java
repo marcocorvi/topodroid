@@ -873,7 +873,7 @@ public class DrawingWindow extends ItemDrawer
   {
     DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null, -1 );
     dpath.setPathPaint( BrushManager.highlightPaint );
-    DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2 ); // xoff, yoff );
+    DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2, false ); // xoff, yoff );
     mDrawingSurface.setNorthPath( dpath );
     // mLastLinePath = null;
   }
@@ -914,7 +914,7 @@ public class DrawingWindow extends ItemDrawer
       }
     }
     // DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2, xoff, yoff );
-    DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2 );
+    DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2, splay );
     mDrawingSurface.addFixedPath( dpath, splay, selectable );
   }
 
@@ -959,7 +959,7 @@ public class DrawingWindow extends ItemDrawer
     }
     // dpath.setPathPaint( blue? BrushManager.paintSplayXViewed : BrushManager.paintSplayXB );
     // DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2, xoff, yoff );
-    DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2 );
+    DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2, true );
     mDrawingSurface.addFixedPath( dpath, true, false ); // true SPLAY false SELECTABLE
   }
 

@@ -27,27 +27,35 @@ class Path11Dialog extends Dialog
 {
   private Context mContext;
   private TopoDroidApp mApp;
+  private MainWindow mParent;
 
-  Path11Dialog( Context context, TopoDroidApp app )
+  Path11Dialog( Context context, MainWindow parent, TopoDroidApp app )
   {
     super( context );
     mContext = context;
+    mParent  = parent;
     mApp     = app;
     setContentView(R.layout.path11);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
     setTitle( R.string.path11_title );
 
-    ((Button)findViewById(R.id.btn_ok)).setOnClickListener( this );
+    ((Button)findViewById(R.id.btn_move)).setOnClickListener( this );
+    ((Button)findViewById(R.id.btn_close)).setOnClickListener( this );
   }
 
   @Override
   public void onClick( View v ) 
   {
-    if ( v.getId() == R.id.btn_ok ) {
+    if ( v.getId() == R.id.btn_close ) {
       if ( ((CheckBox)findViewById(R.id.btn_no_again)).isChecked() ) {
         mApp.setPath11NoAgain();
       }
+    } else if ( v.getId() == R.id.btn_move ) {
+      if ( ((CheckBox)findViewById(R.id.btn_no_again)).isChecked() ) {
+        mApp.setPath11NoAgain();
+      }
+      mParent.moveToPath11();
     }
     dismiss();
   }

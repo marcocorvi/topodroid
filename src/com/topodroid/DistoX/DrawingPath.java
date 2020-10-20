@@ -237,6 +237,15 @@ public class DrawingPath extends RectF
     mPath.offset( off_x, off_y ); // FIXME-PATH this was only for path != null
   }
 
+  // implemented in DrawingUtil
+  // void makeDotPath( float x2, float y2, float off_x, float off_y )
+  // {
+  //   mPath = new Path();
+  //   mPath.addCircle( x2, y2, TDSetting.mLineThickness, Path.Direction.CCW );
+  //   mPath.offset( off_x, off_y );
+  //   // mPaint = BrushManager.mDotPaint; 
+  // }
+
   void makeStraightPath( float x1, float y1, float x2, float y2, float off_x, float off_y )
   {
     mPath = new Path();

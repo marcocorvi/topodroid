@@ -11,9 +11,13 @@
 Для новой установки приложения на Android-11 делать ничего не нужно.\n
 Для существующей установки перед обновлением системы до Android-11 сделайте резервную копию своих данных, скопируйте папку "TopoDroid" в кталог "Documents"
 и принудительно перезапустите TopoDroid.\n\n
-ВНИМАНИЕ. Начиная с v. 5.0.60 "TopoDroid" использует каталог "Documents", если таковой существует, даже на Android-10 и ниже.
+ВНИМАНИЕ. Начиная с v. 5.0.60 "TopoDroid" использует каталог "Documents", если таковой существует, даже на Android-10 и ниже.\n\n
+Tap "Move" to move your TopoDroid folder to Documents.\n
+Tap "Close" not to take any action.
 </string>
     <string name="button_no_again">Не спрашивать о этом снова.</string>
+    <!-- TODO string name="path11_move">Moved to folder Documents/TopoDroid.\nPlease restart TopoDroid</string -->
+    <!-- TODO string name="path11_not_move">Failed to move to folder Documents/TopoDroid</string -->
 
     <string name="app_name">TopoDroid</string>
     <string name="tdm_title">TopoDroid Manager</string>
