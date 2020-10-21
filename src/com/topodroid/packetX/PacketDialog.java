@@ -9,11 +9,11 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.DistoX;
+package com.topodroid.packetX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
-
+import com.topodroid.DistoX.R;
 
 // import android.util.Log;
 
@@ -35,8 +35,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 
-class PacketDialog extends MyDialog
-                   implements OnClickListener
+public class PacketDialog extends MyDialog
+                          implements OnClickListener
 {
   // private MainWindow mParent;
   private PacketLogger mLogger;
@@ -56,7 +56,7 @@ class PacketDialog extends MyDialog
 
   private ListView mList;
 
-  PacketDialog( Context context )
+  public PacketDialog( Context context )
   {
     super( context, R.string.PacketDialog );
     // mParent      = parent;

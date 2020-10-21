@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.packetX.MemoryOctet;
+
 import java.util.ArrayList;
 
 interface IMemoryDialog

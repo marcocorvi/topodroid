@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.ui.MyDialog;
+import com.topodroid.packetX.MemoryOctet;
 
 import java.util.ArrayList;
 

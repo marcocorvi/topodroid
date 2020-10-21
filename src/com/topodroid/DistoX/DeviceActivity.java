@@ -25,6 +25,7 @@ import com.topodroid.help.HelpDialog;
 import com.topodroid.help.UserManualActivity;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPrefCat;
+import com.topodroid.packetX.PacketDialog;
 
 import android.util.Log;
 

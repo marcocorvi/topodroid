@@ -13,9 +13,10 @@
  *     String[] vals for String.split
  *     ContentValues cv
  */
-package com.topodroid.DistoX;
+package com.topodroid.packetX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.DistoX.TDPath;
 
 // import android.util.Log;
 
@@ -44,7 +45,7 @@ import java.util.Locale;
 // import java.util.HashMap;
 
 
-class PacketLogger extends DataSetObservable
+public class PacketLogger extends DataSetObservable
 {
   static final String DB_VERSION = "1";
   static final int DATABASE_VERSION = 1;
@@ -181,7 +182,7 @@ class PacketLogger extends DataSetObservable
   // @param dir    packet direction
   // @param addr   packet address
   // @param data   packet data
-  long insertPacket( long millis, long dir, String addr, int type, String data )
+  public long insertPacket( long millis, long dir, String addr, int type, String data )
   {
     // TDLog.Log( TDLog.LOG_DB, "...) );
     // Log.v("DistoXX", "...");

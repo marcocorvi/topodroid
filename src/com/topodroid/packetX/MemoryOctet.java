@@ -9,26 +9,26 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.DistoX;
+package com.topodroid.packetX;
 
 import java.io.StringWriter;
 import java.io.PrintWriter;
 
 import java.util.Locale;
 
-class MemoryOctet
+public class MemoryOctet
 {
   private int index; // memory index
   // A3:   index = address/8
   // X310: index = 56*(address/1024) + (address%1024)/18
 
-  byte[] data;
-  static final byte BIT_BACKSIGHT2 = 0x20;
-  static final byte BIT_BACKSIGHT  = 0x40; // backsight bit of vector packet
+  public byte[] data;
+  public static final byte BIT_BACKSIGHT2 = 0x20;
+  public static final byte BIT_BACKSIGHT  = 0x40; // backsight bit of vector packet
 
   // ------------------------------------------------------------
 
-  static private double toDistance( byte b0, byte b1, byte b2 )
+  private static double toDistance( byte b0, byte b1, byte b2 )
   {
     int dhh = (int)( b0 & 0x40 );
     double d =  dhh * 1024.0 + toInt( b2, b1 );
@@ -38,13 +38,13 @@ class MemoryOctet
     return 100 + (d-100000) / 100.0;
   }
 
-  static private double toAzimuth( byte b1, byte b2 ) // b1 low, b2 high
+  private static double toAzimuth( byte b1, byte b2 ) // b1 low, b2 high
   {
     int b = toInt( b2, b1 );
     return b * 180.0 / 32768.0; // 180/0x8000;
   }
 
-  static private double toClino( byte b1, byte b2 ) // b1 low, b2 high
+  private static double toClino( byte b1, byte b2 ) // b1 low, b2 high
   {
     int c = toInt( b2, b1 );
     double cc = c * 90.0  / 16384.0; // 90/0x4000;
@@ -52,14 +52,14 @@ class MemoryOctet
     return cc;
   }
 
-  static int toInt( byte b ) 
+  public static int toInt( byte b ) 
   {
     int ret = (int)(b & 0xff);
     if ( ret < 0 ) ret += 256;
     return ret;
   }
 
-  static int toInt( byte bh, byte bl )
+  public static int toInt( byte bh, byte bl )
   {
     int h = (int)(bh & 0xff);   // high
     if ( h < 0 ) h += 256;
@@ -69,13 +69,13 @@ class MemoryOctet
   }
   // ------------------------------------------------------------
 
-  MemoryOctet( int idx )
+  public MemoryOctet( int idx )
   {
     index = idx;
     data  = new byte[8];
   }
 
-  void printHexString( PrintWriter pw )
+  public void printHexString( PrintWriter pw )
   {
     boolean hot  = (int)( data[0] & 0x80 ) == 0x80; // test hot bit
     pw.format( "%4d %c %02x %02x %02x %02x %02x %02x %02x %02x",

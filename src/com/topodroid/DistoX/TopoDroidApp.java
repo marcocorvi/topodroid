@@ -20,6 +20,7 @@ import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.prefs.TDPrefActivity;
 import com.topodroid.prefs.TDPrefHelper;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.packetX.MemoryOctet;
 
 import android.util.Log;
 

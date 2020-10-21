@@ -33,57 +33,83 @@ import android.graphics.Paint; // custom paint
 
 public class DBlock
 {
-  // public static final char[] mExtendTag = { '<', '|', '>', ' ', '-', '.', '?', '«', 'I', '»', ' ' };
-  private static final char[] mExtendTag = { '<', '|', '>', ' ', '-', '.', '?', ' ', ' ', ' ', ' ' };
-  public static final int EXTEND_LEFT   = -1;
-  public static final int EXTEND_VERT   =  0;
-  public static final int EXTEND_RIGHT  = 1;
-  public static final int EXTEND_IGNORE = 2;
-  public static final int EXTEND_HIDE   = 3;
-  public static final int EXTEND_START  = 4;
 
-  public static final float STRETCH_NONE = 0.0f;
-
-  public static final int EXTEND_UNSET  = 5;
-  // public static final int EXTEND_FLEFT  = 6; // LEFT = FLEFT - FVERT
-  // public static final int EXTEND_FVERT  = 7;
-  // public static final int EXTEND_FRIGHT = 8;
-  // public static final int EXTEND_FIGNORE = 9; // overload of IGNORE for splays
-
-  public static final int EXTEND_NONE   = EXTEND_VERT;
-
-  View   mView;
+  View   mView;           // view of this dblock in the list
   // private int    mPos;     // position in the list
-  int    mVisible; // whether is visible in the list
+  int     mVisible;       // whether this data is visible in the list
   boolean mMultiSelected; // whether the block is in multiselect list
   private Paint mPaint;   // user-set block color
 
+  // shot data:
   long   mId;
   long   mTime;
   private long   mSurveyId;
   // private String mName;
-  public String mFrom;    // N.B. mfrom and mTo must be not null
+  public String mFrom;     // N.B. mfrom and mTo must be not null - can be empty
   public String mTo;
-  public float mLength;   // meters
-  public float mBearing;  // degrees
-  public float mClino;    // degrees
-  public float mRoll;     // degrees
+  public float mLength;    // meters
+  public float mBearing;   // degrees
+  public float mClino;     // degrees
+  public float mRoll;      // degrees
   public float mAcceleration;
   public float mMagnetic;
-  public float mDip;
+  public float mDip;       // degrees
   public float mDepth;     // depth at from station
   public String mComment;
 
   int  mExtend;
   long mFlag;     
   int  mBlockType;   
-  int  mShotType;  // 0: DistoX, 1: manual, -1: DistoX backshot
+  int  mShotType;      // 0: DistoX, 1: manual, -1: DistoX backshot
   boolean mWithPhoto;
 
   private boolean mMultiBad; // whether it disagree with siblings
   private float mStretch;
   private String mAddress; // DistoX address - used only in exports
   // boolean mWasRecent = false; // REVISE_RECENT
+
+  // ------------------------------------------------------------------
+  // FLAGS
+
+  static final long FLAG_SURVEY     =  0; // flags
+  static final long FLAG_SURFACE    =  1;
+  static final long FLAG_DUPLICATE  =  2;
+  static final long FLAG_COMMENTED  =  4; // unused // FIXME_COMMENTED
+  static final long FLAG_NO_PLAN    =  8;
+  static final long FLAG_NO_PROFILE = 16;
+  static final long FLAG_NONE       = 24; // 16 | 8
+  // static final long FLAG_BACKSHOT   = 32;
+
+  static final long FLAG_NO_EXTEND  = 256; // used only in search dialog
+
+         boolean hasFlag( long flag )    { return (mFlag & flag) == flag; }
+  public boolean isSurvey()    { return mFlag == FLAG_SURVEY; }
+  public boolean isSurface()   { return (mFlag & FLAG_SURFACE)    == FLAG_SURFACE; }
+  public boolean isDuplicate() { return (mFlag & FLAG_DUPLICATE)  == FLAG_DUPLICATE; }
+  public boolean isCommented() { return (mFlag & FLAG_COMMENTED)  == FLAG_COMMENTED; } // FIXME_COMMENTED
+  public boolean isNoPlan()    { return (mFlag & FLAG_NO_PLAN)    == FLAG_NO_PLAN; }
+  public boolean isNoProfile() { return (mFlag & FLAG_NO_PROFILE) == FLAG_NO_PROFILE; }
+  public boolean isNone()      { return (mFlag & FLAG_NONE)       == FLAG_NONE; }
+  // boolean isBackshot()  { return (mFlag & FLAG_BACKSHOT)   == FLAG_BACKSHOT; }
+
+  // static boolean isSurvey(int flag) { return flag == FLAG_SURVEY; }
+  public static boolean isSurface(long flag)   { return (flag & FLAG_SURFACE)    == FLAG_SURFACE; }
+  public static boolean isDuplicate(long flag) { return (flag & FLAG_DUPLICATE)  == FLAG_DUPLICATE; }
+  public static boolean isCommented(long flag) { return (flag & FLAG_COMMENTED)  == FLAG_COMMENTED; } // FIXME_COMMENTED
+  public static boolean isNoPlan(long flag)    { return (flag & FLAG_NO_PLAN)    == FLAG_NO_PLAN; }
+  public static boolean isNoProfile(long flag) { return (flag & FLAG_NO_PROFILE) == FLAG_NO_PROFILE; }
+  public static boolean isNone(long flag)      { return (flag & FLAG_NONE)       == FLAG_NONE; }
+  // static boolean isBackshot(int flag) { return (flag & FLAG_BACKSHOT) == FLAG_BACKSHOT; }
+
+  // void resetFlag() { mFlag = FLAG_SURVEY; }
+  void resetFlag( long flag ) { mFlag = flag; }
+  void setFlag( long flag ) { mFlag |= flag; }
+  // void clearFlag( long flag ) { mFlag &= ~flag; }
+  long getFlag() { return mFlag; }
+  public int  getReducedFlag() { return (int)(0x07 & mFlag); } // survey-surface-duplicate-commented part of the flag
+
+  // ------------------------------------------------------------------
+  // BLOCK TYPE
 
   private static final int BLOCK_BLANK      = 0;
   public  static final int BLOCK_MAIN_LEG   = 1; // primary leg shot
@@ -96,6 +122,7 @@ public class DBlock
   private static final int BLOCK_H_SPLAY    = 7; // FIXME_H_SPLAY horizontal splay
   private static final int BLOCK_V_SPLAY    = 8; // FIXME_V_SPLAY vertical splay
 
+  // block type to leg type table
   private static final long[] legOfBlockType = {
     LegType.NORMAL, // 0 BLANK
     LegType.NORMAL, // 0 LEG
@@ -117,6 +144,7 @@ public class DBlock
     BLOCK_V_SPLAY,
   };
 
+  // block type to color table
   private static final int[] colors = {
     TDColor.LIGHT_PINK,   // 0 blank
     TDColor.WHITE,        // 1 midline
@@ -129,40 +157,6 @@ public class DBlock
     TDColor.DEEP_BLUE,    // 8 V_SPLAY
     TDColor.GREEN
   };
-
-  static final long FLAG_SURVEY     =  0; // flags
-  static final long FLAG_SURFACE    =  1;
-  static final long FLAG_DUPLICATE  =  2;
-  static final long FLAG_COMMENTED  =  4; // unused // FIXME_COMMENTED
-  static final long FLAG_NO_PLAN    =  8;
-  static final long FLAG_NO_PROFILE = 16;
-  // static final long FLAG_BACKSHOT   = 32;
-
-  static final long FLAG_NO_EXTEND  = 256; // used only in search dialog
-
-         boolean hasFlag( long flag )    { return (mFlag & flag) == flag; }
-  public boolean isSurvey()    { return mFlag == FLAG_SURVEY; }
-  public boolean isSurface()   { return (mFlag & FLAG_SURFACE)    == FLAG_SURFACE; }
-  public boolean isDuplicate() { return (mFlag & FLAG_DUPLICATE)  == FLAG_DUPLICATE; }
-  public boolean isCommented() { return (mFlag & FLAG_COMMENTED)  == FLAG_COMMENTED; } // FIXME_COMMENTED
-  public boolean isNoPlan()    { return (mFlag & FLAG_NO_PLAN)    == FLAG_NO_PLAN; }
-  public boolean isNoProfile() { return (mFlag & FLAG_NO_PROFILE) == FLAG_NO_PROFILE; }
-  // boolean isBackshot()  { return (mFlag & FLAG_BACKSHOT)   == FLAG_BACKSHOT; }
-
-  // static boolean isSurvey(int flag) { return flag == FLAG_SURVEY; }
-  public static boolean isSurface(long flag)   { return (flag & FLAG_SURFACE)    == FLAG_SURFACE; }
-  public static boolean isDuplicate(long flag) { return (flag & FLAG_DUPLICATE)  == FLAG_DUPLICATE; }
-  public static boolean isCommented(long flag) { return (flag & FLAG_COMMENTED)  == FLAG_COMMENTED; } // FIXME_COMMENTED
-  public static boolean isNoPlan(long flag)    { return (flag & FLAG_NO_PLAN)    == FLAG_NO_PLAN; }
-  public static boolean isNoProfile(long flag) { return (flag & FLAG_NO_PROFILE) == FLAG_NO_PROFILE; }
-  // static boolean isBackshot(int flag) { return (flag & FLAG_BACKSHOT) == FLAG_BACKSHOT; }
-
-  // void resetFlag() { mFlag = FLAG_SURVEY; }
-  void resetFlag( long flag ) { mFlag = flag; }
-  void setFlag( long flag ) { mFlag |= flag; }
-  // void clearFlag( long flag ) { mFlag &= ~flag; }
-  long getFlag() { return mFlag; }
-  public int  getReducedFlag() { return (int)(0x07 & mFlag); } // survey-surface-duplicate-commented part of the flag
 
   int getBlockType() { return mBlockType; }
 
@@ -212,10 +206,39 @@ public class DBlock
        default: /* nothing */
      }
   }
+  
+  int getColorByType() { 
+    // Log.v("DistoX", "Block " + mId + " color() block type " + mBlockType );
+    return colors[ mBlockType ];
+  }
+
+  // ---------------------------------------------------------------
+  // ADDRESS
 
   void setAddress( String address ) { mAddress = address; } // used by DataHelper
   String getAddress() { return mAddress; } // used by the data exported
 
+  // ---------------------------------------------------------------
+  // EXTEND and STRETCH
+
+  // public static final char[] mExtendTag = { '<', '|', '>', ' ', '-', '.', '?', '«', 'I', '»', ' ' };
+  private static final char[] mExtendTag = { '<', '|', '>', ' ', '-', '.', '?', ' ', ' ', ' ', ' ' };
+  public static final int EXTEND_LEFT   = -1;
+  public static final int EXTEND_VERT   =  0;
+  public static final int EXTEND_RIGHT  = 1;
+  public static final int EXTEND_IGNORE = 2;
+  public static final int EXTEND_HIDE   = 3;
+  public static final int EXTEND_START  = 4;
+
+  public static final float STRETCH_NONE = 0.0f;
+
+  public static final int EXTEND_UNSET  = 5;
+  // public static final int EXTEND_FLEFT  = 6; // LEFT = FLEFT - FVERT
+  // public static final int EXTEND_FVERT  = 7;
+  // public static final int EXTEND_FRIGHT = 8;
+  // public static final int EXTEND_FIGNORE = 9; // overload of IGNORE for splays
+
+  public static final int EXTEND_NONE   = EXTEND_VERT;
 
   // static int getIntExtend( int ext ) { return ( ext < EXTEND_UNSET )? ext : ext - EXTEND_FVERT; }
   public static int getIntExtend( int ext ) { return ext; }
@@ -252,6 +275,9 @@ public class DBlock
     return ( Math.abs( mStretch ) > 0.01f );
   }
 
+  // ----------------------------------------------------------------
+  // RECENT
+
   // a block is recent if
   //   - its id comes after the given id
   //   - its time is no more than 10 seconds before the given time
@@ -266,6 +292,9 @@ public class DBlock
 
   boolean isMultiBad() { return mMultiBad; }
   public void setMultiBad( boolean multibad ) { mMultiBad = multibad; }
+
+  // ----------------------------------------------------------------
+  // PAINT and VIEW
 
   Paint getPaint() { return mPaint; }
 
@@ -296,8 +325,9 @@ public class DBlock
       //   tvFrom.setBackgroundColor( color & 0x99ffffff );
       // }
     }
-
   }
+
+  // ----------------------------------------------------------------
 
   // used by PocketTopo parser only
   DBlock( String f, String t, float d, float b, float c, float r, int e, int type, int shot_type )
@@ -437,12 +467,6 @@ public class DBlock
   //   return BLOCK_MAIN_LEG;
   // }
 
-  
-  int getColorByType() { 
-    // Log.v("DistoX", "Block " + mId + " color() block type " + mBlockType );
-    return colors[ mBlockType ];
-  }
-
   // compute relative angle in radians
   public float relativeAngle( DBlock b )
   {
@@ -499,32 +523,9 @@ public class DBlock
     if ( b == null ) return false;
     return ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING )? checkRelativeDistanceDiving( b ) : checkRelativeDistance( b );
   }
-  
-  private void formatFlagPhoto( PrintWriter pw )
-  {
-    if ( isNoPlan() ) {
-      pw.format("]\u00A7");       // section symbol
-    } else if ( isNoProfile() ) {
-      pw.format("]_");            // low_line
-    } else if ( isDuplicate() ) {
-      pw.format( "]\u00B2" );     // superscript 2
-    } else if ( isSurface() ) {
-      pw.format( "]\u00F7" );     // division sign
-    // } else if ( isCommented() ) { // commented = gray background
-    //   pw.format( "^" );
-    // } else if ( isBackshot() ) {
-    //   pw.format( "+" );
-    } else {
-      pw.format("]");
-    }
-    if ( mWithPhoto ) { pw.format("#"); }
-  }
 
-  private void formatComment( PrintWriter pw )
-  {
-    if ( mComment == null || mComment.length() == 0 ) return;
-    pw.format(" %s", mComment);
-  }
+  // -------------------------------------------------------------
+  // STRING presentations
 
   String toStringNormal( boolean show_id )
   {
@@ -644,6 +645,34 @@ public class DBlock
   //     accu.deltaDip( mDip ) * TDSetting.mUnitAngle
   //   );
   // }
+  
+  private void formatFlagPhoto( PrintWriter pw )
+  {
+    if ( isNone() ) {
+      pw.format("]x");       // section symbol
+    } else if ( isNoPlan() ) {
+      pw.format("]\u00A7");       // section symbol
+    } else if ( isNoProfile() ) {
+      pw.format("]_");            // low_line
+    } else if ( isDuplicate() ) {
+      pw.format( "]\u00B2" );     // superscript 2
+    } else if ( isSurface() ) {
+      pw.format( "]\u00F7" );     // division sign
+    // } else if ( isCommented() ) { // commented = gray background
+    //   pw.format( "^" );
+    // } else if ( isBackshot() ) {
+    //   pw.format( "+" );
+    } else {
+      pw.format("]");
+    }
+    if ( mWithPhoto ) { pw.format("#"); }
+  }
+
+  private void formatComment( PrintWriter pw )
+  {
+    if ( mComment == null || mComment.length() == 0 ) return;
+    pw.format(" %s", mComment);
+  }
 
 }
 

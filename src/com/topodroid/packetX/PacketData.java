@@ -9,9 +9,10 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.DistoX;
+package com.topodroid.packetX;
 
 import com.topodroid.utils.TDColor;
+import com.topodroid.DistoX.TDUtil;
 
 // import android.util.Log;
 
