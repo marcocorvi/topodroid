@@ -7,18 +7,18 @@
      <item name="landscape">paesaggio</item>
   </string-array>
 
-  <!-- FIXME RESOURCE NAME MUST NOT BE TRANSLATED string-array name="Trattino splay">
+  <string-array name="splayDash">
      <item name="none">nessuno</item>
      <item name="plan">inclin.</item>
      <item name="profile">azimut</item>
      <item name="view">vista</item>
-  </string-array -->
+  </string-array>
 
-  <!-- FIXME RESOURCE NAME MUST NOT BE TRANSLATED string-array name="Modo di feedback">
+  <string-array name="feedbackMode">
      <item name="none">nessuna</item>
      <item name="sound">suono</item>
      <item name="heptic">tattile</item>
-  </string-array -->
+  </string-array>
 
   <string-array name="canvasLevels">
      <item name="none">nessuno</item>
@@ -46,11 +46,11 @@
      <item name="ten_cm">10 cm</item>
   </string-array>
 
-  <!-- TODO string-array name="unitMeasure">
-     <item name="grid_cell">grid cell</item>
-     <item name="meter">meter</item>
-     <item name="tf">feet</item>
-  </string-array -->
+  <string-array name="unitMeasure">
+     <item name="grid_cell">cella di griglia</item>
+     <item name="meter">metri</item>
+     <item name="tf">piedi</item>
+  </string-array>
 
   <string-array name="loopClosure">
      <item name="none">Nessuna</item>
