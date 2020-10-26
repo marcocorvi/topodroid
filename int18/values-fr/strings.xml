@@ -995,6 +995,7 @@ Tap "Close" not to take any action.
 
     <string name="title_settings_sketch">TopoDroid : paramètrage de l\'esquisse 3D</string>
     <string name="title_settings_survey">TopoDroid : paramètrage du relevé topo</string>
+    <!-- TODO string name="title_settings_splay">TopoDroid splay settings</string -->
     <string name="title_settings_shot">TopoDroid : paramètrage des visées</string>
     <string name="title_settings_units">TopoDroid : paramètrage des unités</string>
     <string name="title_settings_location">TopoDroid : paramètrage de la localisation </string>
@@ -1035,6 +1036,7 @@ Tap "Close" not to take any action.
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
   <string name="pref_cat_survey">OPTIONS DU RELEVÉ</string>
+  <!-- TODO string name="pref_cat_splay">SPLAY DATA</string -->
   <string name="pref_cat_drawing">OPTIONS DE DESSIN</string>
   <string name="pref_cat_import_export">IMPORT - EXPORT</string>
   <string name="pref_cat_exportimport">IMPORT</string>
@@ -1360,6 +1362,8 @@ Tap "Close" not to take any action.
   <!-- TODO string name="pref_plane_interpolation_summary">Active l'\interpolation de plan</string -->
   <string name="pref_plot_split_title">Esquisse fractionner / fusionner</string>
   <string name="pref_plot_split_summary">Action de fractionner ou de fusionner les esquisses</string>
+  <!-- TODO string name="pref_stylus_size_title">Stylus size</string -->
+  <!-- TODO string name="pref_stylus_size_summary">Stylus size [0: ignore]</string -->
   <string name="pref_fixed_thickness_title">Épaisseur ligne croquis</string>
   <string name="pref_fixed_thickness_summary">Épaisseur de ligne du croquis</string>
   <!-- UNUSED string name="pref_device_title">Périphériques</string -->

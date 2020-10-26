@@ -1004,6 +1004,7 @@ Tap "Close" not to take any action.
 
     <string name="title_settings_sketch">Ajuste de dibujo 3D en TopoDroid</string>
     <string name="title_settings_survey">Ajustes de la topografía en TopoDroid</string>
+    <!-- TODO string name="title_settings_splay">TopoDroid splay settings</string -->
     <string name="title_settings_shot">Ajustes de datos de tomas en TopoDroid</string>
     <string name="title_settings_units">Ajustes de las unidades en TopoDroid</string>
     <string name="title_settings_location">Ajustes de ubicación en TopoDroid</string>
@@ -1050,6 +1051,7 @@ Tap "Close" not to take any action.
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
   <string name="pref_cat_survey">Ajustes de topografía</string>
+  <!-- TODO string name="pref_cat_splay">SPLAY DATA</string -->
   <string name="pref_cat_drawing">Ajustes de dibujo</string>
   <string name="pref_cat_import_export">Importar/Exportar</string>
   <string name="pref_cat_exportimport">IMPORTAR</string>
@@ -1375,6 +1377,8 @@ Tap "Close" not to take any action.
   <string name="pref_plane_interpolation_summary">Acción de interpolación plana</string>
   <string name="pref_plot_split_title">Dibujar dividir/fusionar</string>
   <string name="pref_plot_split_summary">Dibujar acciones de división y fusión</string>
+  <!-- TODO string name="pref_stylus_size_title">Stylus size</string -->
+  <!-- TODO string name="pref_stylus_size_summary">Stylus size [0: ignore]</string -->
   <string name="pref_fixed_thickness_title">Grosor de la línea topografía</string>
   <string name="pref_fixed_thickness_summary">Grosor de la línea topografía</string>
   <!-- UNUSED string name="pref_device_title">Dispositivo</string -->

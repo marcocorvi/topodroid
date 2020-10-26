@@ -1012,6 +1012,7 @@ Tap "Close" not to take any action.
 
     <string name="title_settings_sketch">TopoDroid 3d草图设置</string>
     <string name="title_settings_survey">TopoDroid测量设置</string>
+    <!-- TODO string name="title_settings_splay">TopoDroid splay settings</string -->
     <string name="title_settings_shot">TopoDroid测线数据设置</string>
     <string name="title_settings_units">TopoDroid单位设置</string>
     <string name="title_settings_location">TopoDroid位置设置</string>
@@ -1052,6 +1053,7 @@ Tap "Close" not to take any action.
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
   <string name="pref_cat_survey">测量信息</string>
+  <!-- TODO string name="pref_cat_splay">SPLAY DATA</string -->
   <string name="pref_cat_drawing">草图</string>
   <string name="pref_cat_import_export">输入输出</string>
   <string name="pref_cat_exportimport">输入</string>
@@ -1384,6 +1386,8 @@ Tap "Close" not to take any action.
   <string name="pref_plane_interpolation_summary">启用平面插值操作</string>
   <string name="pref_plot_split_title">草图分割/合并</string>
   <string name="pref_plot_split_summary">启用草图分割和合并操作</string>
+  <!-- TODO string name="pref_stylus_size_title">Stylus size</string -->
+  <!-- TODO string name="pref_stylus_size_summary">Stylus size [0: ignore]</string -->
   <string name="pref_fixed_thickness_title">测量线宽度</string>
   <string name="pref_fixed_thickness_summary">测量线宽度</string>
   <!-- UNUSED string name="pref_device_title">Device</string -->

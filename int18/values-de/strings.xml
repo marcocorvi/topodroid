@@ -1015,6 +1015,7 @@ Tap "Close" not to take any action.
 
     <string name="title_settings_sketch">Einstellungen: 3D</string>
     <string name="title_settings_survey">Einstellungen: Vermessung</string>
+    <!-- TODO string name="title_settings_splay">TopoDroid splay settings</string -->
     <string name="title_settings_shot">Einstellungen: Daten</string>
     <string name="title_settings_units">Einstellungen: Einheiten</string>
     <string name="title_settings_location">Einstellungen: Koordinaten</string>
@@ -1056,6 +1057,7 @@ Tap "Close" not to take any action.
 
 <!-- PREFERENCES STRINGS CAN BE LEFT UNTRANSLATED FOR NOW -->
   <string name="pref_cat_survey">Vermessung</string>
+  <!-- TODO string name="pref_cat_splay">SPLAY DATA</string -->
   <string name="pref_cat_drawing">Skizzen</string>
   <string name="pref_cat_import_export">Import/Export</string>
   <string name="pref_cat_exportimport">IMPORT</string>
@@ -1379,6 +1381,8 @@ Tap "Close" not to take any action.
   <string name="pref_plane_interpolation_summary">Interpoliere die Ebene anhand der Hilfszüge</string>
   <string name="pref_plot_split_title">Skizzen aufteilen</string>
   <string name="pref_plot_split_summary">Erlaube Skizzen aufzuteilen</string>
+  <!-- TODO string name="pref_stylus_size_title">Stylus size</string -->
+  <!-- TODO string name="pref_stylus_size_summary">Stylus size [0: ignore]</string -->
   <string name="pref_fixed_thickness_title">Liniendicke Messstrecke</string>
   <string name="pref_fixed_thickness_summary">Liniendicke der Messstrecken</string>
   <!-- UNUSED string name="pref_device_title">Device</string -->

@@ -996,6 +996,7 @@ Tap "Close" not to take any action.
 
     <!-- TODO string name="title_settings_sketch">TopoDroid 3d sketch settings</string -->
     <!-- TODO string name="title_settings_survey">TopoDroid survey settings</string -->
+    <!-- TODO string name="title_settings_splay">TopoDroid splay settings</string -->
     <!-- TODO string name="title_settings_shot">TopoDroid shot data settings</string -->
     <!-- TODO string name="title_settings_units">TopoDroid units settings</string -->
     <!-- TODO string name="title_settings_location">TopoDroid location settings</string -->
@@ -1036,6 +1037,7 @@ Tap "Close" not to take any action.
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
   <string name="pref_cat_survey">Настройки Картировка</string>
+  <!-- TODO string name="pref_cat_splay">SPLAY DATA</string -->
   <string name="pref_cat_drawing">Настройки Скици</string>
   <string name="pref_cat_import_export">Настройки Импорт/Експорт</string>
   <!-- TODO string name="pref_cat_exportimport">IMPORT</string -->
@@ -1359,6 +1361,8 @@ Tap "Close" not to take any action.
   <!-- TODO string name="pref_plane_interpolation_summary">Plane interpolation action</string -->
   <!-- TODO string name="pref_plot_split_title">Sketch split/merge</string -->
   <!-- TODO string name="pref_plot_split_summary">Sketch split and merge actions</string -->
+  <!-- TODO string name="pref_stylus_size_title">Stylus size</string -->
+  <!-- TODO string name="pref_stylus_size_summary">Stylus size [0: ignore]</string -->
   <string name="pref_fixed_thickness_title">Широчина на линия от антената</string>
   <string name="pref_fixed_thickness_summary">Широчина на линия от антената</string>
   <!-- UNUSED string name="pref_device_title">Устройство</string -->

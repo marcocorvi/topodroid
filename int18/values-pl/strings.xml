@@ -1009,6 +1009,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
     <string name="title_settings_sketch">UStawienia szkicu 3D TopoDroid</string>
     <string name="title_settings_survey">Ustawienia ciągu pomiarowego TopoDroid</string>
+    <!-- TODO string name="title_settings_splay">TopoDroid splay settings</string -->
     <string name="title_settings_shot">Ustawienia strzałów pomiarowych TopoDroid</string>
     <string name="title_settings_units">Ustawienia jednostek TopoDroid</string>
     <string name="title_settings_location">Ustawienia lokalizacji TopoDroid</string>
@@ -1049,6 +1050,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
   <string name="pref_cat_survey">DANE CIĄGU</string>
+  <!-- TODO string name="pref_cat_splay">SPLAY DATA</string -->
   <string name="pref_cat_drawing">SZKICOWANIE</string>
   <string name="pref_cat_import_export">IMPORT_EKSPORT</string>
   <string name="pref_cat_exportimport">IMPORT</string>
@@ -1380,6 +1382,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <!-- TODO string name="pref_plane_interpolation_summary">Plane interpolation action</string -->
   <!-- TODO string name="pref_plot_split_title">Sketch split/merge</string -->
   <!-- TODO string name="pref_plot_split_summary">Sketch split and merge actions</string -->
+  <!-- TODO string name="pref_stylus_size_title">Stylus size</string -->
+  <!-- TODO string name="pref_stylus_size_summary">Stylus size [0: ignore]</string -->
   <string name="pref_fixed_thickness_title">Szerokość lini ciągu</string>
   <string name="pref_fixed_thickness_summary">Szerokość lini ciągu</string>
   <!-- UNUSED string name="pref_device_title">Device</string -->

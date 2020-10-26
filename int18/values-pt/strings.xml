@@ -998,6 +998,7 @@ Tap "Close" not to take any action.
 
     <string name="title_settings_sketch">Configurações de croquis 3D do TopoDroid</string>
     <string name="title_settings_survey">Configurações de topo do TopoDroid</string>
+    <!-- TODO string name="title_settings_splay">TopoDroid splay settings</string -->
     <string name="title_settings_shot">Configirações de dados de medidas do TopoDroid</string>
     <string name="title_settings_units">Configurações de unidades do TopoDroid</string>
     <string name="title_settings_location">Configurações de coordenadas do TopoDroid</string>
@@ -1038,6 +1039,7 @@ Tap "Close" not to take any action.
   <!-- UNUSED string name="pref_tcsx">Exportar cSurvey-1.20 transfer-csx</string -->
 
   <string name="pref_cat_survey">DADOS DA TOPO</string>
+  <!-- TODO string name="pref_cat_splay">SPLAY DATA</string -->
   <string name="pref_cat_drawing">DESENHANDO CROQUI</string>
   <string name="pref_cat_import_export">IMPORTAR/EXPORTAR</string>
   <string name="pref_cat_exportimport">IMPORTAR</string>
@@ -1363,6 +1365,8 @@ Tap "Close" not to take any action.
   <string name="pref_plane_interpolation_summary">Habilitar função de interpolação de plano</string>
   <string name="pref_plot_split_title">Quebra/união de croquis</string>
   <string name="pref_plot_split_summary">Habilitar função de quebra/união de croquis</string>
+  <!-- TODO string name="pref_stylus_size_title">Stylus size</string -->
+  <!-- TODO string name="pref_stylus_size_summary">Stylus size [0: ignore]</string -->
   <string name="pref_fixed_thickness_title">Espessura linha trena</string>
   <string name="pref_fixed_thickness_summary">Espessura das linhas de trena</string>
   <!-- UNUSED string name="pref_device_title">Dispositivo</string -->

@@ -999,6 +999,7 @@
 
     <string name="title_settings_sketch">TopoDroid настройки 3d абриса</string>
     <string name="title_settings_survey">TopoDroid настройки топосъёмки</string>
+    <!-- TODO string name="title_settings_splay">TopoDroid splay settings</string -->
     <string name="title_settings_shot">TopoDroid настройки данных пикетов</string>
     <string name="title_settings_units">TopoDroid настройки единиц измерения</string>
     <string name="title_settings_location">TopoDroid настройки местоположения</string>
@@ -1039,6 +1040,7 @@
   <!-- UNUSED string name="pref_tcsx">Экспорт cSurvey-1.20 transfer-csx</string -->
 
   <string name="pref_cat_survey">НАСТРОЙКИ ТОПОСЪЁМКИ </string>
+  <!-- TODO string name="pref_cat_splay">SPLAY DATA</string -->
   <string name="pref_cat_drawing">НАСТРОЙКИ РИСОВАНИЯ </string>
   <string name="pref_cat_import_export">НАСТРОЙКИ ИМПОРТА-ЭКСПОРТА</string>
   <string name="pref_cat_exportimport">ИМПОРТ</string>
@@ -1369,6 +1371,8 @@
   <string name="pref_plane_interpolation_summary">Выполнить простую интерполяцию</string>
   <string name="pref_plot_split_title">Разделить/Склеить абрис</string>
   <string name="pref_plot_split_summary">Разделить абрис на куски или склеить несколько абрисов в один</string>
+  <!-- TODO string name="pref_stylus_size_title">Stylus size</string -->
+  <!-- TODO string name="pref_stylus_size_summary">Stylus size [0: ignore]</string -->
   <string name="pref_fixed_thickness_title">Толщина нитки хода</string>
   <string name="pref_fixed_thickness_summary">Толщина нитки хода</string>
   <!-- UNUSED string name="pref_device_title">Устройство</string -->
