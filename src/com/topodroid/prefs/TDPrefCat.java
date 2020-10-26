@@ -48,11 +48,12 @@ public class TDPrefCat
   public static final int PREF_PLOT_EDIT          = 29; 
   public static final int PREF_CATEGORY_GEEK      = 30; 
   public static final int PREF_GEEK_SHOT          = 31; 
-  public static final int PREF_GEEK_PLOT          = 32; 
-  public static final int PREF_GEEK_LINE          = 33; 
-  public static final int PREF_GEEK_DEVICE        = 34; 
-  public static final int PREF_GEEK_IMPORT        = 35; 
-  public static final int PREF_CATEGORY_LOG       = 36; // this must be the last
+  public static final int PREF_GEEK_SPLAY         = 32; 
+  public static final int PREF_GEEK_PLOT          = 33; 
+  public static final int PREF_GEEK_LINE          = 34; 
+  public static final int PREF_GEEK_DEVICE        = 35; 
+  public static final int PREF_GEEK_IMPORT        = 36; 
+  public static final int PREF_CATEGORY_LOG       = 37; // this must be the last
 
   static int[] mTitleRes = {
     R.string.title_settings_main,     // 0
@@ -87,10 +88,11 @@ public class TDPrefCat
     R.string.title_settings_edit,
     R.string.title_settings_geek,
     R.string.title_settings_survey,   // 31
+    R.string.title_settings_splay,    // 32
     R.string.title_settings_plot,
-    R.string.title_settings_line,     // 33
-    R.string.title_settings_device,   // 34
-    R.string.title_settings_import,   // 35
+    R.string.title_settings_line,     // 34
+    R.string.title_settings_device,   // 35
+    R.string.title_settings_import,   // 36
     R.string.title_settings_log 
   };
 }

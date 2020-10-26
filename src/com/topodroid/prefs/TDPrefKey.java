@@ -1418,12 +1418,7 @@ public class TDPrefKey
   public static String[] GEEKPLOT = {
     "DISTOX_PLOT_SHIFT",      // plot shift and scale
     "DISTOX_PLOT_SPLIT",      // plot split and merge
-    "DISTOX_SPLAY_AS_DOT",    // plot splays as dots
-    "DISTOX_SPLAY_VERT_THRS", // splays with clino over mSplayVertThrs are not displayed in plan view
-    "DISTOX_SPLAY_DASH",      // whether dash-splay are coherent from plan (1), profile (2), or independent (0)
-    "DISTOX_VERT_SPLAY",      // splays with clino over this are shown with dashed/dotted line
-    "DISTOX_HORIZ_SPLAY",     // splays off-azimuth over this are shown with dashed/dotted line
-    "DISTOX_SECTION_SPLAY",   // splays with angle over this are shown with dashed/dotted line
+    "DISTOX_STYLUS_SIZE",     // size of stylus (0: no stylus)
     // "DISTOX_HTHRESHOLD",      // if clino is over thr, H_SECTION is horizontal (has north arrow)
     "DISTOX_BACKUP_NUMBER",   // number of plot backups
     "DISTOX_BACKUP_INTERVAL", // minimum interval between plot backups [60 s]
@@ -1439,12 +1434,7 @@ public class TDPrefKey
   static int[] GEEKPLOTtitle = {
     R.string.pref_plot_shift_title,
     R.string.pref_plot_split_title,
-    R.string.pref_splay_as_dot_title,
-    R.string.pref_plan_vthr_title,
-    R.string.pref_dash_splay_title,
-    R.string.pref_vert_splay_title,
-    R.string.pref_horiz_splay_title,
-    R.string.pref_section_splay_title,
+    R.string.pref_stylus_size_title,
     // R.string.pref_hthr_title,
     R.string.pref_backup_number_title,
     R.string.pref_backup_interval_title,
@@ -1460,12 +1450,7 @@ public class TDPrefKey
   static int[] GEEKPLOTdesc = {
     R.string.pref_plot_shift_summary,
     R.string.pref_plot_split_summary,
-    R.string.pref_splay_as_dot_summary,
-    R.string.pref_plan_vthr_summary,      
-    R.string.pref_dash_splay_message, 
-    R.string.pref_vert_splay_message,  
-    R.string.pref_horiz_splay_message,  
-    R.string.pref_section_splay_message, 
+    R.string.pref_stylus_size_summary,
     // R.string.pref_hthr_summary,
     R.string.pref_backup_number_summary,
     R.string.pref_backup_interval_summary,
@@ -1481,12 +1466,7 @@ public class TDPrefKey
   public static String[] GEEKPLOTdef = {
     FALSE,
     FALSE,
-    FALSE,
-    "80",
     TDString.ZERO,
-    TDString.FIFTY,
-    TDString.SIXTY,
-    TDString.SIXTY,
     // "70",
     TDString.FIVE,
     TDString.SIXTY,
@@ -1499,12 +1479,49 @@ public class TDPrefKey
     null
   };
 
+  public static String[] GEEKsplay = {
+    "DISTOX_SPLAY_AS_DOT",    // plot splays as dots
+    "DISTOX_SPLAY_VERT_THRS", // splays with clino over mSplayVertThrs are not displayed in plan view
+    "DISTOX_SPLAY_DASH",      // whether dash-splay are coherent from plan (1), profile (2), or independent (0)
+    "DISTOX_VERT_SPLAY",      // splays with clino over this are shown with dashed/dotted line
+    "DISTOX_HORIZ_SPLAY",     // splays off-azimuth over this are shown with dashed/dotted line
+    "DISTOX_SECTION_SPLAY",   // splays with angle over this are shown with dashed/dotted line
+  };
+
+  public static int[] GEEKsplaytitle = {
+    R.string.pref_splay_as_dot_title,
+    R.string.pref_plan_vthr_title,
+    R.string.pref_dash_splay_title,
+    R.string.pref_vert_splay_title,
+    R.string.pref_horiz_splay_title,
+    R.string.pref_section_splay_title,
+  };
+
+  public static int[] GEEKsplaydesc = {
+    R.string.pref_splay_as_dot_summary,
+    R.string.pref_plan_vthr_summary,      
+    R.string.pref_dash_splay_message, 
+    R.string.pref_vert_splay_message,  
+    R.string.pref_horiz_splay_message,  
+    R.string.pref_section_splay_message, 
+  };
+
+  public static String[] GEEKsplaydef = {
+    FALSE,
+    "80",
+    TDString.ZERO,
+    TDString.FIFTY,
+    TDString.SIXTY,
+    TDString.SIXTY,
+  };
+
 
   public static String[] GEEK = {
     "DISTOX_PALETTES",
     "DISTOX_BACKUPS_CLEAR",
     "DISTOX_PACKET_LOGGER",
     "DISTOX_GEEK_SHOT",       // FORWARD
+    "DISTOX_GEEK_SPLAY",      // FORWARD
     "DISTOX_GEEK_PLOT",       // FORWARD
     "DISTOX_GEEK_LINE",       // FORWARD
     "DISTOX_PLOT_WALLS",      // FORWARD
@@ -1519,6 +1536,7 @@ public class TDPrefKey
     R.string.pref_backups_clear_title,
     R.string.pref_packet_logger_title,
     R.string.pref_cat_survey,
+    R.string.pref_cat_splay,
     R.string.pref_cat_drawing,
     R.string.pref_tool_line_title,
     R.string.pref_plot_walls_title,
@@ -1546,6 +1564,7 @@ public class TDPrefKey
     FALSE,
     FALSE,
     FALSE,
+    TDString.EMPTY,
     TDString.EMPTY,
     TDString.EMPTY,
     TDString.EMPTY,

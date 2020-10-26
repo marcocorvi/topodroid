@@ -221,7 +221,8 @@ public class TDPath
     if ( PATH_BASEDIR == null ) {
       PATH_BASEDIR = hasPath11() ? EXTERNAL_STORAGE_PATH_11 : TDInstance.context.getExternalFilesDir( null ).getPath();
       PATH_BASE    = PATH_BASEDIR + "/TopoDroid/";
-      PATH_DEFAULT = PATH_BASEDIR;
+      PATH_DEFAULT = PATH_BASE;
+      Log.v("DistoX-PATH", "[1] BaseDir " + PATH_BASEDIR + " Default " + PATH_DEFAULT + " hasPath11 " + hasPath11() );
       setDefaultPaths();
     }
 
@@ -234,13 +235,19 @@ public class TDPath
       dir = new File( base );
       try {
         if ( ! dir.exists() ) dir.mkdirs();
-        if ( dir.exists() && dir.canWrite() ) PATH_BASEDIR = base;
+        if ( dir.exists() && dir.canWrite() ) {
+          PATH_BASEDIR = base;
+          PATH_BASE    = PATH_BASEDIR + "/TopoDroid/";
+          PATH_DEFAULT = PATH_BASE;
+          Log.v("DistoX-PATH", "[2] BaseDir " + PATH_BASEDIR + " Default " + PATH_DEFAULT + " hasPath11 " + hasPath11() );
+          setDefaultPaths();
+        }
       } catch ( SecurityException e ) { }
       // boolean b1 = android.os.Environment.isExternalStorageLegacy();
       // boolean b2 = android.os.Environment.isExternalStorageLegacy( dir );
       // Log.v("DistoX-PATH", "ext storage legacy base " + b2 );
     }
-    TDLog.Log( TDLog.LOG_PATH, "set paths. path basedir " + PATH_BASEDIR );
+    // TDLog.Log( TDLog.LOG_PATH, "set paths. path basedir " + PATH_BASEDIR );
     if ( path != null ) {
       String cwd = PATH_BASEDIR + "/" + path;
       dir = new File( PATH_BASEDIR, path ); // DistoX-SAF
@@ -268,6 +275,8 @@ public class TDPath
     // APP_TLX_PATH = PATH_BASE + "tlx/";
     // checkDirs( APP_TLX_PATH );
 
+    Log.v("DistoX-PATH", "[2] BaseDir " + PATH_BASEDIR + " Default " + PATH_DEFAULT + " hasPath11 " + hasPath11() );
+
     PATH_TDCONFIG = PATH_BASE + "thconfig/"; // FIXME checkDirs( PATH_TDCONFIG );
     PATH_THCONFIG = PATH_TDCONFIG;
 
@@ -277,7 +286,6 @@ public class TDPath
     PATH_CSV  = PATH_BASE + "csv/";     // FIXME checkDirs( PATH_CSV );
     PATH_CSX  = PATH_BASE + "csx/";     // FIXME checkDirs( PATH_CSX );
     PATH_DAT  = PATH_BASE + "dat/";     // FIXME checkDirs( PATH_DAT );
-    PATH_DUMP = PATH_DEFAULT + "dump/"; // FIXME checkDirs( PATH_DUMP );
     PATH_DXF  = PATH_BASE + "dxf/";     // FIXME checkDirs( PATH_DXF );
     PATH_GRT  = PATH_BASE + "grt/";     // FIXME checkDirs( PATH_GRT );
     PATH_GTX  = PATH_BASE + "gtx/";     // FIXME checkDirs( PATH_GTX );
@@ -316,11 +324,14 @@ public class TDPath
     PATH_BIN = PATH_DEFAULT + "bin/";
     checkDirs( PATH_BIN );
 
-    PATH_MAN = PATH_DEFAULT + "man/";
-    // checkDirs( PATH_MAN );
+    PATH_MAN = PATH_DEFAULT + "man/";   
+    checkDirs( PATH_MAN );
 
-    PATH_CCSV = PATH_DEFAULT + "ccsv/";
-    // FIXME checkDirs( PATH_CCSV );
+    PATH_CCSV = PATH_DEFAULT + "ccsv/"; 
+    checkDirs( PATH_CCSV );
+
+    PATH_DUMP = PATH_DEFAULT + "dump/"; 
+    checkDirs( PATH_DUMP );
 
     APP_SYMBOL_PATH  = PATH_DEFAULT + "symbol/";
     APP_POINT_PATH  = APP_SYMBOL_PATH + "point/";

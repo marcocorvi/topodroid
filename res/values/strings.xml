@@ -1019,6 +1019,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
     <string name="title_settings_sketch">TopoDroid 3d sketch settings</string>
     <string name="title_settings_survey">TopoDroid survey settings</string>
+    <string name="title_settings_splay">TopoDroid splay settings</string>
     <string name="title_settings_shot">TopoDroid shot data settings</string>
     <string name="title_settings_units">TopoDroid units settings</string>
     <string name="title_settings_location">TopoDroid location settings</string>
@@ -1063,6 +1064,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
   <string name="pref_cat_survey">SURVEY DATA</string>
+  <string name="pref_cat_splay">SPLAY DATA</string>
   <string name="pref_cat_drawing">SKETCHING</string>
   <string name="pref_cat_import_export">IMPORT_EXPORT</string>
   <string name="pref_cat_exportimport">IMPORT</string>
@@ -1398,6 +1400,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_plane_interpolation_summary">Enable plane interpolation action</string>
   <string name="pref_plot_split_title">Sketch split/merge</string>
   <string name="pref_plot_split_summary">Enable sketch split and merge actions</string>
+  <string name="pref_stylus_size_title">Stylus size</string>
+  <string name="pref_stylus_size_summary">Stylus size [0: ignore]</string>
   <string name="pref_fixed_thickness_title">Survey line width</string>
   <string name="pref_fixed_thickness_summary">Survey line width</string>
   <!-- UNUSED string name="pref_device_title">Device</string -->

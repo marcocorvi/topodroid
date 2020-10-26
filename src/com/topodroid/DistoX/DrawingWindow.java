@@ -458,11 +458,16 @@ public class DrawingWindow extends ItemDrawer
   // protected static int mEditRadius = 0; 
   private int mDoEditRange = SelectionRange.RANGE_POINT; // 0 no, 1 smooth, 2 boxed
 
-  private boolean mRotateAzimuth;
-  private boolean mEditMove;    // whether moving the selected point
-  private boolean mShiftMove;   // whether to move the canvas in point-shift mode
-  boolean mShiftDrawing;        // whether to shift the drawing (this is set only thru the DrawingModeDialog)
+  private boolean mRotateAzimuth; // whether to rotate azimuth button
+  private boolean mPointerDown = false;
+  private boolean mEditMove;      // whether moving the selected point
+  private boolean mShiftMove;     // whether to move the canvas in point-shift mode
+  private boolean mShiftDrawing;  // whether to shift the drawing 
   private EraseCommand mEraseCommand = null;
+
+  // used only by the DrawingModeDialog
+  void setShiftDrawing( boolean shift_drawing ) { mShiftDrawing = shift_drawing; }
+  boolean isShiftDrawing() { return mShiftDrawing; }
 
   private int mHotItemType     = -1;
   private boolean mHasSelected = false;
@@ -878,8 +883,15 @@ public class DrawingWindow extends ItemDrawer
     // mLastLinePath = null;
   }
 
-  // used to add legs and splays
-  // @param cosine  used only for splays
+  /** used to add legs and splays
+   * @param type
+   * @param blk     data block
+   * @param x1,y1   first endpoint
+   * @param x2,y2   second endpoint
+   * @param cosine  used only for splays
+   * @param splay   whether the shot is a splay
+   * @param selectable whether the shot is selectable
+   */
   private void addFixedLine( long type, DBlock blk, float x1, float y1, float x2, float y2,
                              float cosine, boolean splay, boolean selectable )
   {
@@ -919,13 +931,15 @@ public class DrawingWindow extends ItemDrawer
   }
 
 
-  // used for splays in x-sections
-  // the DBlock comes from a query in the DB and it is not the DBlock in the plan/profile
-  //     therefore coloring the splays of those blocks does not affect the X-Section splay coloring
-  //
-  // @param angle  angle between splay and normal to the plane
-  // @param blue   true for splays at TO station
-  //
+  /** used for splays in x-sections
+   * the DBlock comes from a query in the DB and it is not the DBlock in the plan/profile
+   *     therefore coloring the splays of those blocks does not affect the X-Section splay coloring
+   * @param blk    data block
+   * @param x1,y1  first endpoint
+   * @param x2,y2  second endpoint
+   * @param angle  angle between splay and normal to the plane
+   * @param blue   true for splays at TO station
+   */
   private void addFixedSectionSplay( DBlock blk, float x1, float y1, float x2, float y2, float angle,
                                      // float xoff, float yoff, 
                                      boolean blue )
@@ -1097,6 +1111,9 @@ public class DrawingWindow extends ItemDrawer
 
   // static private Handler saveHandler = null;
 
+  /** get the plot origin station
+   * @return the name of the plot origin station 
+   */
   String getOrigin() { return mPlot1.start; }
 
   // called by SavePlotFileTask
@@ -1245,7 +1262,14 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  // this is called only for PLAN / PROFILE
+  /** compute the plot refrences
+   *  this is called only for PLAN / PROFILE
+   * @param num     data reduction
+   * @param type    plot type
+   * @param name
+   * @param zoom    zoom factor
+   * @param can_toast whether the method can toast
+   */
   private boolean computeReferences( TDNum num, int type, String name,
                                   // float xoff, float yoff,
                                   float zoom, boolean can_toast )
@@ -1295,7 +1319,7 @@ public class DrawingWindow extends ItemDrawer
 
     String parent = ( TDInstance.xsections? null : name );
 
-    if ( PlotInfo.isPlan( type ) ) {
+    if ( PlotInfo.isPlan( type ) ) { // -------------- PLAN VIEW ------------------------------
       for ( NumShot sh : shots ) {
         NumStation st1 = sh.from;
         NumStation st2 = sh.to;
@@ -1326,7 +1350,9 @@ public class DrawingWindow extends ItemDrawer
                   DrawingUtil.toSceneX(st.e, st.s), DrawingUtil.toSceneY(st.e, st.s), true, xsections, saved );
         }
       }
-    } else if ( type == PlotInfo.PLOT_EXTENDED ) {
+    }
+    else if ( type == PlotInfo.PLOT_EXTENDED ) // ------------- EXTENDED PROFILE -----------------
+    {
       for ( NumShot sh : shots ) {
         if  ( ! sh.mIgnoreExtend ) {
           NumStation st1 = sh.from;
@@ -1356,7 +1382,9 @@ public class DrawingWindow extends ItemDrawer
                   DrawingUtil.toSceneX(st.h, st.v), DrawingUtil.toSceneY(st.h, st.v), true, xhsections, saved );
         }
       }
-    } else { // if ( type == PlotInfo.PLOT_PROJECTED ) 
+    } 
+    else                                        // ------------- PROJECTED PROFILE ---------------
+    { // if ( type == PlotInfo.PLOT_PROJECTED ) 
       float h1, h2;
       for ( NumShot sh : shots ) {
         // Log.v("DistoX", "shot " + sh.from.name + "-" + sh.to.name + " from " + sh.from.show() + " to " + sh.to.show() );
@@ -1658,98 +1686,6 @@ public class DrawingWindow extends ItemDrawer
         mZoomBtnsCtrl.setZoomOutEnabled( true );
         break;
     }
-  }
-
-  private long mSavedType;
-
-  private void resetStatus()
-  {
-    mSectionName  = null; 
-    mLastLinePath = null;
-    mShiftDrawing = false;
-    // mContinueLine = TDSetting.mContinueLine; // do not reset cont-mode
-    resetModified();
-    setMode( MODE_MOVE );
-    mTouchMode    = MODE_MOVE;
-    setMenuAdapter( getResources(), mType );
-  }
-
-  private int mSavedMode;
-  // private int mSplayMode;
-  
-  private void popInfo()
-  {
-    PlotInfo plot = ( mSavedType == PlotInfo.PLOT_PLAN )? mPlot1 : mPlot2;
-    mType    = plot.type;
-    mName    = plot.name;
-    mFrom    = plot.start; 
-    mTo      = "";
-    mAzimuth = plot.azimuth;
-    mClino   = plot.clino;
-    mDrawingSurface.setDisplayMode( mSavedMode );
-    // Log.v("DistoX", "pop " + mType + " " + mName + " from " + mFrom + " A " + mAzimuth + " C " + mClino );
-    resetStatus();
-    // FIXME_SK mButton1[ BTN_DOWNLOAD ].setVisibility( View.VISIBLE );
-    // FIXME_SK mButton1[ BTN_BLUETOOTH ].setVisibility( View.VISIBLE );
-
-    // mButton1[ BTN_PLOT ].setVisibility( View.VISIBLE );
-    if ( ! TDLevel.overExpert ) mButton1[BTN_PLOT].setOnLongClickListener( this );
-    if ( TDLevel.overNormal && BTN_DIAL < mButton1.length ) mButton1[ BTN_DIAL ].setVisibility( View.VISIBLE );
-  }
-
-  private void updateSplays( int mode )
-  {
-    mApp.mSplayMode = mode;
-    switch ( mode ) {
-      case 0:
-        TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], (mApp.mShowSectionSplays? mBMsplayNone : mBMsplayNoneBlack) );
-        if ( PlotInfo.isSection( mType ) ) mDrawingSurface.hideStationSplays( mTo );
-        mDrawingSurface.hideStationSplays( mFrom );
-        break;
-      case 1:
-        TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], (mApp.mShowSectionSplays? mBMsplayFront : mBMsplayFrontBlack) );
-        if ( PlotInfo.isSection( mType ) ) mDrawingSurface.showStationSplays( mTo );
-        mDrawingSurface.hideStationSplays( mFrom );
-        break;
-      case 2:
-        TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], (mApp.mShowSectionSplays? mBMsplayBoth : mBMsplayBothBlack) );
-        if ( PlotInfo.isSection( mType ) ) mDrawingSurface.showStationSplays( mTo );
-        mDrawingSurface.showStationSplays( mFrom );
-        break;
-      case 3:
-        TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], (mApp.mShowSectionSplays? mBMsplayBack : mBMsplayBackBlack) );
-        if ( PlotInfo.isSection( mType ) ) mDrawingSurface.hideStationSplays( mTo );
-        mDrawingSurface.showStationSplays( mFrom );
-        break;
-    }
-    mDrawingSurface.setSplayAlpha( mApp.mShowSectionSplays ); // not necessary ?
-  }
-
-
-  private void pushInfo( long type, String name, String from, String to, float azimuth, float clino, float tt )
-  {
-    // Log.v("DistoX", "push info " + type + " " + name + " from " + from + " " + to + " A " + azimuth + " C " + clino + " TT " + tt );
-    mSavedType = mType;
-    mName = mName3 = name;
-    mFullName3 = TDInstance.survey + "-" + mName;
-    mType    = type;
-    mFrom    = from;
-    mTo      = to;
-    mAzimuth = azimuth;
-    mClino   = clino;
-    mSavedMode = mDrawingSurface.getDisplayMode();
-    // mDrawingSurface.setDisplayMode( DisplayMode.DISPLAY_SECTION | ( mSavedMode & DisplayMode.DISPLAY_SCALEBAR ) );
-    mDrawingSurface.setDisplayMode( DisplayMode.DISPLAY_SECTION & mSavedMode );
-    resetStatus();
-    doStart( true, tt );
-    updateSplays( mApp.mSplayMode );
-
-    // FIXME_SK mButton1[ BTN_DOWNLOAD ].setVisibility( View.GONE );
-    // FIXME_SK mButton1[ BTN_BLUETOOTH ].setVisibility( View.GONE );
-
-    // mButton1[ BTN_PLOT ].setVisibility( View.GONE );
-    if ( ! TDLevel.overExpert ) mButton1[BTN_PLOT].setOnLongClickListener( null );
-    if ( TDLevel.overNormal && BTN_DIAL < mButton1.length ) mButton1[ BTN_DIAL ].setVisibility( View.GONE );
   }
 
   private void makeButtons( )
@@ -2158,21 +2094,97 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on create done");
   }
 
-  void startItemPickerDialog()
+  // ------------------------------------- PUSH / POP INFO --------------------------------
+  private long mSavedType;
+  private int mSavedMode;
+  // private int mSplayMode;
+
+  private void resetStatus()
   {
-    int symbol = mSymbol;
-    if ( mRecentTools == mRecentPoint )     { symbol = Symbol.POINT; }
-    else if ( mRecentTools == mRecentLine ) { symbol = Symbol.LINE; }
-    else if ( mRecentTools == mRecentArea ) { symbol = Symbol.AREA; }
-    startItemPickerDialog( symbol );
+    mSectionName  = null; 
+    mLastLinePath = null;
+    mShiftDrawing = false;
+    // mContinueLine = TDSetting.mContinueLine; // do not reset cont-mode
+    resetModified();
+    setMode( MODE_MOVE );
+    mTouchMode    = MODE_MOVE;
+    setMenuAdapter( getResources(), mType );
+  }
+  
+  private void popInfo()
+  {
+    PlotInfo plot = ( mSavedType == PlotInfo.PLOT_PLAN )? mPlot1 : mPlot2;
+    mType    = plot.type;
+    mName    = plot.name;
+    mFrom    = plot.start; 
+    mTo      = "";
+    mAzimuth = plot.azimuth;
+    mClino   = plot.clino;
+    mDrawingSurface.setDisplayMode( mSavedMode );
+    // Log.v("DistoX", "pop " + mType + " " + mName + " from " + mFrom + " A " + mAzimuth + " C " + mClino );
+    resetStatus();
+    // FIXME_SK mButton1[ BTN_DOWNLOAD ].setVisibility( View.VISIBLE );
+    // FIXME_SK mButton1[ BTN_BLUETOOTH ].setVisibility( View.VISIBLE );
+
+    // mButton1[ BTN_PLOT ].setVisibility( View.VISIBLE );
+    if ( ! TDLevel.overExpert ) mButton1[BTN_PLOT].setOnLongClickListener( this );
+    if ( TDLevel.overNormal && BTN_DIAL < mButton1.length ) mButton1[ BTN_DIAL ].setVisibility( View.VISIBLE );
   }
 
-  private void startItemPickerDialog( int symbol )
+  private void updateSplays( int mode )
   {
-    new ItemPickerDialog( mActivity, this, mType, symbol ).show();
+    mApp.mSplayMode = mode;
+    switch ( mode ) {
+      case 0:
+        TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], (mApp.mShowSectionSplays? mBMsplayNone : mBMsplayNoneBlack) );
+        if ( PlotInfo.isSection( mType ) ) mDrawingSurface.hideStationSplays( mTo );
+        mDrawingSurface.hideStationSplays( mFrom );
+        break;
+      case 1:
+        TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], (mApp.mShowSectionSplays? mBMsplayFront : mBMsplayFrontBlack) );
+        if ( PlotInfo.isSection( mType ) ) mDrawingSurface.showStationSplays( mTo );
+        mDrawingSurface.hideStationSplays( mFrom );
+        break;
+      case 2:
+        TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], (mApp.mShowSectionSplays? mBMsplayBoth : mBMsplayBothBlack) );
+        if ( PlotInfo.isSection( mType ) ) mDrawingSurface.showStationSplays( mTo );
+        mDrawingSurface.showStationSplays( mFrom );
+        break;
+      case 3:
+        TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], (mApp.mShowSectionSplays? mBMsplayBack : mBMsplayBackBlack) );
+        if ( PlotInfo.isSection( mType ) ) mDrawingSurface.hideStationSplays( mTo );
+        mDrawingSurface.showStationSplays( mFrom );
+        break;
+    }
+    mDrawingSurface.setSplayAlpha( mApp.mShowSectionSplays ); // not necessary ?
   }
 
-  // ==============================================================
+
+  private void pushInfo( long type, String name, String from, String to, float azimuth, float clino, float tt )
+  {
+    // Log.v("DistoX", "push info " + type + " " + name + " from " + from + " " + to + " A " + azimuth + " C " + clino + " TT " + tt );
+    mSavedType = mType;
+    mName = mName3 = name;
+    mFullName3 = TDInstance.survey + "-" + mName;
+    mType    = type;
+    mFrom    = from;
+    mTo      = to;
+    mAzimuth = azimuth;
+    mClino   = clino;
+    mSavedMode = mDrawingSurface.getDisplayMode();
+    // mDrawingSurface.setDisplayMode( DisplayMode.DISPLAY_SECTION | ( mSavedMode & DisplayMode.DISPLAY_SCALEBAR ) );
+    mDrawingSurface.setDisplayMode( DisplayMode.DISPLAY_SECTION & mSavedMode );
+    resetStatus();
+    doStart( true, tt );
+    updateSplays( mApp.mSplayMode );
+
+    // FIXME_SK mButton1[ BTN_DOWNLOAD ].setVisibility( View.GONE );
+    // FIXME_SK mButton1[ BTN_BLUETOOTH ].setVisibility( View.GONE );
+
+    // mButton1[ BTN_PLOT ].setVisibility( View.GONE );
+    if ( ! TDLevel.overExpert ) mButton1[BTN_PLOT].setOnLongClickListener( null );
+    if ( TDLevel.overNormal && BTN_DIAL < mButton1.length ) mButton1[ BTN_DIAL ].setVisibility( View.GONE );
+  }
 
   // called by PlotListDialog
   void switchNameAndType( String name, long tt ) // SWITCH
@@ -2222,6 +2234,23 @@ public class DrawingWindow extends ItemDrawer
       doStart( true, -1 );
     }
   }
+
+  // ==============================================================
+  void startItemPickerDialog()
+  {
+    int symbol = mSymbol;
+    if ( mRecentTools == mRecentPoint )     { symbol = Symbol.POINT; }
+    else if ( mRecentTools == mRecentLine ) { symbol = Symbol.LINE; }
+    else if ( mRecentTools == mRecentArea ) { symbol = Symbol.AREA; }
+    startItemPickerDialog( symbol );
+  }
+
+  private void startItemPickerDialog( int symbol )
+  {
+    new ItemPickerDialog( mActivity, this, mType, symbol ).show();
+  }
+
+  // ==============================================================
 
   @Override
   protected synchronized void onResume()
@@ -3283,8 +3312,6 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  private boolean pointerDown = false;
-  private boolean threePointers = false;
 
   public boolean onTouch( View view, MotionEvent rawEvent )
   {
@@ -3298,30 +3325,42 @@ public class DrawingWindow extends ItemDrawer
     int act = event.getAction();
     int action = act & MotionEvent.ACTION_MASK;
     int id = 0;
+    boolean threePointers = false;
 
-    if (action == MotionEvent.ACTION_POINTER_DOWN) {
-      threePointers = (event.getPointerCount() == 3);
-      if ( mTouchMode == MODE_MOVE ) {
-        if ( mMode == MODE_ERASE ) {
-	  finishErasing();
-	}
-      }
-      mTouchMode = MODE_ZOOM;
-      oldDist = spacing( event );
-      saveEventPoint( event );
-      pointerDown = true;
-      return true;
-    } else if ( action == MotionEvent.ACTION_POINTER_UP) {
+    if ( TDSetting.mStylusOnly ) {
       int np = event.getPointerCount();
-      threePointers = (np > 3);
-      if ( np > 2 ) return true;
-      mTouchMode = MODE_MOVE;
-      id = 1 - ((act & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT);
-      // int idx = rawEvent.findPointerIndex( id );
-      if ( mSymbol != Symbol.POINT ) {
-        action = MotionEvent.ACTION_DOWN; // force next case
+      for ( id = 0; id < np; ++id ) {
+        if ( rawEvent.getToolMajor( id ) < TDSetting.mStylusSize ) {
+          Log.v("DistoX-STYLUS", "tool size " + rawEvent.getSize( id ) + " " + rawEvent.getToolMajor( id )  );
+          break;
+        }
       }
-      /* fall through */
+      if ( id == np ) return true;
+    } else {
+      if (action == MotionEvent.ACTION_POINTER_DOWN) {
+        threePointers = (event.getPointerCount() == 3);
+        if ( mTouchMode == MODE_MOVE ) {
+          if ( mMode == MODE_ERASE ) {
+            finishErasing();
+          }
+        }
+        mTouchMode = MODE_ZOOM;
+        oldDist = spacing( event );
+        saveEventPoint( event );
+        mPointerDown = true;
+        return true;
+      } else if ( action == MotionEvent.ACTION_POINTER_UP) {
+        int np = event.getPointerCount();
+        threePointers = (np > 3);
+        if ( np > 2 ) return true;
+        mTouchMode = MODE_MOVE;
+        id = 1 - ((act & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT);
+        // int idx = rawEvent.findPointerIndex( id );
+        if ( mSymbol != Symbol.POINT ) {
+          action = MotionEvent.ACTION_DOWN; // force next case
+        }
+        /* fall through */
+      }
     }
     float x_canvas = event.getX(id);
     float y_canvas = event.getY(id);
@@ -3332,7 +3371,7 @@ public class DrawingWindow extends ItemDrawer
       return onTouchDown( x_canvas, y_canvas, x_scene, y_scene );
 
     } else if ( action == MotionEvent.ACTION_MOVE ) { // ------------------------------- MOVE
-      return onTouchMove( x_canvas, y_canvas, x_scene, y_scene, event );
+      return onTouchMove( x_canvas, y_canvas, x_scene, y_scene, event, threePointers );
 
     } else if (action == MotionEvent.ACTION_UP) { // ----------------------------------- UP
       return onTouchUp( x_canvas, y_canvas, x_scene, y_scene );
@@ -3360,6 +3399,8 @@ public class DrawingWindow extends ItemDrawer
       float x_shift = xc - mSaveX; // compute shift
       float y_shift = yc - mSaveY;
       if ( mMode == MODE_DRAW ) {
+        float squared_shift = x_shift*x_shift + y_shift*y_shift;
+
         if ( mSymbol == Symbol.LINE || mSymbol == Symbol.AREA ) {
 
           mCurrentBrush.mouseUp( mDrawingSurface.getPreviewPath(), xc, yc );
@@ -3367,8 +3408,10 @@ public class DrawingWindow extends ItemDrawer
 
           if ( mSymbol == Symbol.LINE ) {
             if ( mCurrentLinePath != null ) { // SAFETY CHECK
-              if (    ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2 || ( mPointCnt % mLinePointStep ) > 0 ) {
-                mCurrentLinePath.addPoint( xs, ys );
+              if ( squared_shift > TDSetting.mLineSegment2 || ( mPointCnt % mLinePointStep ) > 0 ) {
+                if ( ( ! TDSetting.mStylusOnly ) || squared_shift < 10 * TDSetting.mLineSegment2 ) {
+                  mCurrentLinePath.addPoint( xs, ys );
+                }
               }
               if ( mLandscape ) mCurrentLinePath.landscapeToPortrait();
             }
@@ -3414,8 +3457,7 @@ public class DrawingWindow extends ItemDrawer
                   mCurrentAreaPath = area; // area is empty if not recreated
                 }
               } else {  
-                if (    ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2
-                     || ( mPointCnt % mLinePointStep ) > 0 ) {
+                if ( squared_shift > TDSetting.mLineSegment2 || ( mPointCnt % mLinePointStep ) > 0 ) {
                   mCurrentAreaPath.addPoint( xs, ys );
                 }
               }
@@ -3596,7 +3638,7 @@ public class DrawingWindow extends ItemDrawer
         else
         { // Symbol.POINT
           mLastLinePath = null;
-          if ( ! pointerDown ) {
+          if ( ! mPointerDown ) {
             float radius = ( ( BrushManager.isPointOrientable( mCurrentPoint ) )? 6 : 2 ) * TDSetting.mPointingRadius;
 	    float shift = Math.abs( x_shift ) + Math.abs( y_shift );
 	    if ( shift < radius ) {
@@ -3643,7 +3685,7 @@ public class DrawingWindow extends ItemDrawer
 	    }
           }
         }
-        pointerDown = false;
+        mPointerDown = false;
         modified();
       } else if ( mMode == MODE_EDIT ) {
         if ( Math.abs(mStartX - xc) < TDSetting.mPointingRadius 
@@ -3848,7 +3890,7 @@ public class DrawingWindow extends ItemDrawer
     return true;
   }
 
-  private boolean onTouchMove( float xc, float yc, float xs, float ys, MotionEventWrap event )
+  private boolean onTouchMove( float xc, float yc, float xs, float ys, MotionEventWrap event, boolean threePointers )
   {
     // Log.v(  TopoDroidApp.TAG, "action MOVE mode " + mMode + " touch-mode " + mTouchMode);
     if ( mTouchMode == MODE_MOVE) {
@@ -3858,8 +3900,12 @@ public class DrawingWindow extends ItemDrawer
       // mSaveX = xc; 
       // mSaveY = yc;
       if ( mMode == MODE_DRAW ) {
+        float squared_shift = x_shift*x_shift + y_shift*y_shift;
+        if ( TDSetting.mStylusOnly ) {
+          if ( squared_shift > 10 * TDSetting.mLineSegment2 ) return false;
+        }
         if ( mSymbol == Symbol.LINE ) {
-          if ( ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2 ) {
+          if ( squared_shift > TDSetting.mLineSegment2 ) {
             if ( ++mPointCnt % mLinePointStep == 0 ) {
               if ( mCurrentLinePath != null ) mCurrentLinePath.addPoint( xs, ys );
             }
@@ -3868,7 +3914,7 @@ public class DrawingWindow extends ItemDrawer
             save = false;
           }
         } else if ( mSymbol == Symbol.AREA ) {
-          if ( ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2 ) {
+          if ( squared_shift > TDSetting.mLineSegment2 ) {
             if ( ++mPointCnt % mLinePointStep == 0 ) {
               mCurrentAreaPath.addPoint( xs, ys );
               // Log.v("DistoX", "start area add " + xs + " " + ys );
@@ -3878,8 +3924,8 @@ public class DrawingWindow extends ItemDrawer
             save = false;
           }
         } else if ( mSymbol == Symbol.POINT ) {
-          // if ( ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2 ) {
-          //   pointerDown = 0;
+          // if ( squared_shift > TDSetting.mLineSegment2 ) {
+          //   mPointerDown = 0;
           // }
 	  save = false;
         }

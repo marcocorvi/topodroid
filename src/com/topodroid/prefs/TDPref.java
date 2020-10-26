@@ -1049,24 +1049,38 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     return new TDPref[ ] {
       makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], T, def[ 0],          ctx, hlp ), // PLOT SHIFT
       makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], T, def[ 1],          ctx, hlp ), // PLOT SPLIT MERGE
-      makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2],          ctx, hlp ), // SPLAY AS DOT
-      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], A, def[ 3], INTEGER, ctx, hlp ), // MAX CLINO SPLAY-PLAN
-      makeLst( cat, key[ 4], tit[ 4], dsc[ 4], T, def[ 4], R.array.splayDash, R.array.splayDashValue,       ctx, hlp ), // DASH COHERENCE
-      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5], FLOAT,   ctx, hlp ), // DASH PLAN
-      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], T, def[ 6], FLOAT,   ctx, hlp ), // DASH PROFILE
-      makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], T, def[ 7], FLOAT,   ctx, hlp ), // DASH X-SCETION
-      makeLst( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8], R.array.backupNumber, R.array.backupNumberValue, ctx, hlp ),
-      makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9], INTEGER, ctx, hlp ), // BACKUP INTERVAL
+      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2], INTEGER, ctx, hlp ), // STYLUS SIZE
+      makeLst( cat, key[ 3], tit[ 3], dsc[ 3], A, def[ 3], R.array.backupNumber, R.array.backupNumberValue, ctx, hlp ),
+      makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], A, def[ 4], INTEGER, ctx, hlp ), // BACKUP INTERVAL
       // makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9],          ctx, hlp ), // BACKUPS CLEAR
-      makeCbx( cat, key[10], tit[10], dsc[10], T, def[10],          ctx, hlp ), // AUTO XSECTIONS on export/save
-      makeCbx( cat, key[11], tit[11], dsc[11], T, def[11],          ctx, hlp ), // SAVED STATIONS
-      makeCbx( cat, key[12], tit[12], dsc[12], T, def[12],          ctx, hlp ), // ALWAYS UPDATE
-      makeCbx( cat, key[13], tit[13], dsc[13], T, def[13],          ctx, hlp ), // FULL AFFINE
-      makeLst( cat, key[14], tit[14], dsc[14], T, def[14], R.array.canvasLevels, R.array.canvasLevelsValue, ctx, hlp )  // WITH LEVELS
+      makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5],          ctx, hlp ), // AUTO XSECTIONS on export/save
+      makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], T, def[ 6],          ctx, hlp ), // SAVED STATIONS
+      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], T, def[ 7],          ctx, hlp ), // ALWAYS UPDATE
+      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], T, def[ 8],          ctx, hlp ), // FULL AFFINE
+      makeLst( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9], R.array.canvasLevels, R.array.canvasLevelsValue, ctx, hlp )  // WITH LEVELS
     };
   }
+
+  public static TDPref[] makeGeekSplayPrefs( Context ctx, TDPrefHelper hlp )
+  {
+    int cat = TDPrefCat.PREF_GEEK_SPLAY;
+    String[] key = TDPrefKey.GEEKsplay;
+    int[] tit    = TDPrefKey.GEEKsplaytitle;
+    int[] dsc    = TDPrefKey.GEEKsplaydesc;
+    String[] def = TDPrefKey.GEEKsplaydef;
+    return new TDPref[ ] {
+      makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], T, def[ 0],          ctx, hlp ), // SPLAY AS DOT
+      makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], A, def[ 1], INTEGER, ctx, hlp ), // MAX CLINO SPLAY-PLAN
+      makeLst( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2], R.array.splayDash, R.array.splayDashValue,       ctx, hlp ), // DASH COHERENCE
+      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], T, def[ 3], FLOAT,   ctx, hlp ), // DASH PLAN
+      makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], T, def[ 4], FLOAT,   ctx, hlp ), // DASH PROFILE
+      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5], FLOAT,   ctx, hlp ), // DASH X-SCETION
+    };
+  }
+
   public static TDPref[] makeGeekPrefs( Context ctx, TDPrefHelper hlp )
   {
+    // Log.v("DistoX", "make Geek Prefs");
     int cat = TDPrefCat.PREF_CATEGORY_GEEK;
     String[] key = TDPrefKey.GEEK;
     int[] tit    = TDPrefKey.GEEKtitle;
@@ -1077,11 +1091,12 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeCbx( cat, key[1], tit[1], dsc[1],  T, def[1],  ctx, hlp ), // BACKUP CLEAR
       makeCbx( cat, key[2], tit[2], dsc[2],  T, def[2],  ctx, hlp ), // PACKET LOGGER
       makeFwd( cat, key[3], tit[3],          A,          ctx, hlp ), // GEEK_SHOT
-      makeFwd( cat, key[4], tit[4],          A,          ctx, hlp ), // GEEK_PLOT
-      makeFwd( cat, key[5], tit[5],          A,          ctx, hlp ), // GEEK_LINE
-      makeFwd( cat, key[6], tit[6],          T,          ctx, hlp ), // PLOT_WALLS
-      makeFwd( cat, key[7], tit[7],          A,          ctx, hlp ), // GEEK_DEVICE
-      makeFwd( cat, key[8], tit[8],          T,          ctx, hlp )  // GEEK_IMPORT
+      makeFwd( cat, key[4], tit[4],          T,          ctx, hlp ), // GEEK_SPLAY
+      makeFwd( cat, key[5], tit[5],          A,          ctx, hlp ), // GEEK_PLOT
+      makeFwd( cat, key[6], tit[6],          A,          ctx, hlp ), // GEEK_LINE
+      makeFwd( cat, key[7], tit[7],          T,          ctx, hlp ), // PLOT_WALLS
+      makeFwd( cat, key[8], tit[8],          A,          ctx, hlp ), // GEEK_DEVICE
+      makeFwd( cat, key[9], tit[9],          T,          ctx, hlp )  // GEEK_IMPORT
       // makeFwd( cat, key[8], tit[8],          D,          ctx, hlp )  // SKETCH // FIXME_SKETCH_3D
     };
   }

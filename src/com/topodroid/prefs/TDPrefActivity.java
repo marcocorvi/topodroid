@@ -99,7 +99,8 @@ public class TDPrefActivity extends Activity
         mPrefCategory = TDPrefCat.PREF_CATEGORY_ALL;
       }
     }
-    // Log.v("DistoX", "TDPrefActivity::onCreate category " + mPrefCategory );
+
+    Log.v("DistoX", "TDPrefActivity::onCreate category " + mPrefCategory );
     if ( loadPreferences() ) {
       if (mPrefCategory == TDPrefCat.PREF_CATEGORY_ALL )    { mPrefActivityAll    = this; }
       if (mPrefCategory == TDPrefCat.PREF_CATEGORY_SURVEY ) { mPrefActivitySurvey = this; }
@@ -176,6 +177,7 @@ public class TDPrefActivity extends Activity
       case TDPrefCat.PREF_PLOT_EDIT:          mPrefs = TDPref.makeEditPrefs(     this, hlp ); break;
       case TDPrefCat.PREF_CATEGORY_GEEK:      mPrefs = TDPref.makeGeekPrefs(     this, hlp ); break;
       case TDPrefCat.PREF_GEEK_SHOT:          mPrefs = TDPref.makeGeekShotPrefs( this, hlp ); break;
+      case TDPrefCat.PREF_GEEK_SPLAY:         mPrefs = TDPref.makeGeekSplayPrefs( this, hlp ); break;
       case TDPrefCat.PREF_GEEK_PLOT:          mPrefs = TDPref.makeGeekPlotPrefs( this, hlp ); break;
       case TDPrefCat.PREF_GEEK_LINE:          mPrefs = TDPref.makeGeekLinePrefs( this, hlp ); break;
       case TDPrefCat.PREF_GEEK_IMPORT:        mPrefs = TDPref.makeGeekImportPrefs( this, hlp ); break;
@@ -266,6 +268,7 @@ public class TDPrefActivity extends Activity
       linkPreference( "DISTOX_CALIB_PREF",          TDPrefCat.PREF_CATEGORY_CALIB );
     } else if (mPrefCategory == TDPrefCat.PREF_CATEGORY_GEEK ) {
       linkPreference( "DISTOX_GEEK_SHOT",           TDPrefCat.PREF_GEEK_SHOT );
+      linkPreference( "DISTOX_GEEK_SPLAY",          TDPrefCat.PREF_GEEK_SPLAY );
       linkPreference( "DISTOX_GEEK_PLOT",           TDPrefCat.PREF_GEEK_PLOT );
       linkPreference( "DISTOX_GEEK_LINE",           TDPrefCat.PREF_GEEK_LINE );
       linkPreference( "DISTOX_PLOT_WALLS",          TDPrefCat.PREF_PLOT_WALLS );
