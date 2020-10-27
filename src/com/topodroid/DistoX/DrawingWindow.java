@@ -3330,12 +3330,17 @@ public class DrawingWindow extends ItemDrawer
     if ( TDSetting.mStylusOnly ) {
       int np = event.getPointerCount();
       for ( id = 0; id < np; ++id ) {
+        // Log.v("DistoX-STYLUS", "tool " + id + " size " + rawEvent.getSize( id ) + " " + rawEvent.getToolMajor( id )  );
         if ( rawEvent.getToolMajor( id ) < TDSetting.mStylusSize ) {
-          Log.v("DistoX-STYLUS", "tool size " + rawEvent.getSize( id ) + " " + rawEvent.getToolMajor( id )  );
           break;
         }
       }
       if ( id == np ) return true;
+      if (action == MotionEvent.ACTION_POINTER_DOWN) {
+        action = MotionEvent.ACTION_DOWN;
+      } else if ( action == MotionEvent.ACTION_POINTER_UP) {
+        action = MotionEvent.ACTION_UP;
+      }
     } else {
       if (action == MotionEvent.ACTION_POINTER_DOWN) {
         threePointers = (event.getPointerCount() == 3);

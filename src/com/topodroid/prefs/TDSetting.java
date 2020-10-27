@@ -943,16 +943,14 @@ public class TDSetting
     mDivingMode    = prefs.getBoolean( keyGShot[ 0], bool(defGShot[ 0]) ); // DISTOX_DIVING_MODE
     mShotRecent    = prefs.getBoolean( keyGShot[ 1], bool(defGShot[ 1]) ); // DISTOX_RECENT_SHOT
     mRecentTimeout = tryInt(   prefs,  keyGShot[ 2],      defGShot[ 2] );  // DISTOX_RECENT_TIMEOUT
-    mSplayClasses  = prefs.getBoolean( keyGShot[ 3], bool(defGShot[ 3]) ); // DISTOX_SPLAY_CLASSES
-    mSplayColor    = prefs.getBoolean( keyGShot[ 4], bool(defGShot[ 4]) ); // DISTOX_SPLAY_COLOR
-    mExtendFrac    = prefs.getBoolean( keyGShot[ 5], bool(defGShot[ 5]) ); // DISTOX_EXTEND_FRAC
-    mDistoXBackshot= prefs.getBoolean( keyGShot[ 6], bool(defGShot[ 6]) ); // DISTOX_BACKSHOT
-    mBedding       = prefs.getBoolean( keyGShot[ 7], bool(defGShot[ 7]) ); // DISTOX_BEDDING
-    mWithSensors   = prefs.getBoolean( keyGShot[ 8], bool(defGShot[ 8]) ); // DISTOX_WITH_SENSORS
-    setLoopClosure( tryInt(   prefs,   keyGShot[ 9],      defGShot[ 9] ) );// DISTOX_LOOP_CLOSURE_VALUE
-    mWithAzimuth   = prefs.getBoolean( keyGShot[10], bool(defGShot[10]) ); // DISTOX_ANDROID_AZIMUTH
-    mTimerWait     = tryInt(   prefs,  keyGShot[11],      defGShot[11] );  // DISTOX_SHOT_TIMER
-    mBeepVolume    = tryInt(   prefs,  keyGShot[12],      defGShot[12] );  // DISTOX_BEEP_VOLUME
+    mExtendFrac    = prefs.getBoolean( keyGShot[ 3], bool(defGShot[ 3]) ); // DISTOX_EXTEND_FRAC
+    mDistoXBackshot= prefs.getBoolean( keyGShot[ 4], bool(defGShot[ 4]) ); // DISTOX_BACKSHOT
+    mBedding       = prefs.getBoolean( keyGShot[ 5], bool(defGShot[ 5]) ); // DISTOX_BEDDING
+    mWithSensors   = prefs.getBoolean( keyGShot[ 6], bool(defGShot[ 6]) ); // DISTOX_WITH_SENSORS
+    setLoopClosure( tryInt(   prefs,   keyGShot[ 7],      defGShot[ 7] ) );// DISTOX_LOOP_CLOSURE_VALUE
+    mWithAzimuth   = prefs.getBoolean( keyGShot[ 8], bool(defGShot[ 8]) ); // DISTOX_ANDROID_AZIMUTH
+    mTimerWait     = tryInt(   prefs,  keyGShot[ 9],      defGShot[ 9] );  // DISTOX_SHOT_TIMER
+    mBeepVolume    = tryInt(   prefs,  keyGShot[10],      defGShot[10] );  // DISTOX_BEEP_VOLUME
     // mWithTdManager = prefs.getBoolean( keyGShot[13], bool(defGShot[13]) ); // DISTOX_TDMANAGER
 
     String[] keyGPlot = TDPrefKey.GEEKPLOT;
@@ -971,13 +969,15 @@ public class TDSetting
 
     String[] keyGPlotSplay = TDPrefKey.GEEKsplay;
     String[] defGPlotSplay = TDPrefKey.GEEKsplaydef;
-    mSplayAsDot    = prefs.getBoolean( keyGPlotSplay[ 0], bool(defGPlotSplay[ 0]) ); // DISTOX_SPLAY_AS_DOT
-    mSplayVertThrs  = tryFloat( prefs, keyGPlotSplay[ 1],      defGPlotSplay[ 1]  ); // DISTOX_SPLAY_VERT_THRS
-    mDashSplay      = tryInt( prefs,   keyGPlotSplay[ 2],      defGPlotSplay[ 2] );  // DISTOX_SPLAY_DASH
-    mVertSplay      = tryFloat( prefs, keyGPlotSplay[ 3],      defGPlotSplay[ 3] );  // DISTOX_VERT_SPLAY
-    mHorizSplay     = tryFloat( prefs, keyGPlotSplay[ 4],      defGPlotSplay[ 4] );  // DISTOX_HORIZ_SPLAY
+    mSplayClasses  = prefs.getBoolean( keyGPlotSplay[ 0], bool(defGPlotSplay[ 0]) ); // DISTOX_SPLAY_CLASSES
+    mSplayColor    = prefs.getBoolean( keyGPlotSplay[ 1], bool(defGPlotSplay[ 1]) ); // DISTOX_SPLAY_COLOR
+    mSplayAsDot    = prefs.getBoolean( keyGPlotSplay[ 2], bool(defGPlotSplay[ 2]) ); // DISTOX_SPLAY_AS_DOT
+    mSplayVertThrs  = tryFloat( prefs, keyGPlotSplay[ 3],      defGPlotSplay[ 3]  ); // DISTOX_SPLAY_VERT_THRS
+    mDashSplay      = tryInt( prefs,   keyGPlotSplay[ 4],      defGPlotSplay[ 4] );  // DISTOX_SPLAY_DASH
+    mVertSplay      = tryFloat( prefs, keyGPlotSplay[ 5],      defGPlotSplay[ 5] );  // DISTOX_VERT_SPLAY
+    mHorizSplay     = tryFloat( prefs, keyGPlotSplay[ 6],      defGPlotSplay[ 6] );  // DISTOX_HORIZ_SPLAY
     mCosHorizSplay = TDMath.cosd( mHorizSplay );  
-    mSectionSplay   = tryFloat( prefs, keyGPlotSplay[ 5],      defGPlotSplay[ 5] );  // DISTOX_SECTION_SPLAY
+    mSectionSplay   = tryFloat( prefs, keyGPlotSplay[ 7],      defGPlotSplay[ 7] );  // DISTOX_SECTION_SPLAY
 
     String[] keyGLine = TDPrefKey.GEEKLINE;
     String[] defGLine = TDPrefKey.GEEKLINEdef;
@@ -1359,27 +1359,23 @@ public class TDSetting
     } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_RECENT_TIMEOUT
       mRecentTimeout = tryIntValue( hlp, k, v, def[2] );
       if ( mRecentTimeout < 0 ) { mRecentTimeout = 0; ret = TDString.ZERO; }
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_SPLAY_CLASSES
-      mSplayClasses = tryBooleanValue( hlp, k, v, bool(def[ 3]) );
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_SPLAY_COLOR
-      mSplayColor   = tryBooleanValue( hlp, k, v, bool(def[ 4]) );
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_EXTEND_FRAC
-      mExtendFrac   = tryBooleanValue( hlp, k, v, bool(def[ 5]) );
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_BACKSHOT (bool)
-      mDistoXBackshot = tryBooleanValue( hlp, k, v, bool(def[6]) );
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_BEDDING
-      mBedding      = tryBooleanValue( hlp, k, v, bool(def[ 7]) );
-    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_WITH_SENSORS
-      mWithSensors  = tryBooleanValue( hlp, k, v, bool(def[ 8]) );
-    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_LOOP_CLOSURE_VALUE
-      setLoopClosure( tryIntValue( hlp, k, v, def[ 9] ) );
-    } else if ( k.equals( key[ 10] ) ) { // DISTOX_ANDROID_AZIMUTH
-      mWithAzimuth  = tryBooleanValue( hlp, k, v, bool(def[10]) );
-    } else if ( k.equals( key[ 11 ] ) ) { // DISTOX_SHOT_TIMER [3 ..)
-      mTimerWait        = tryIntValue( hlp, k, v, def[11] );
+    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_EXTEND_FRAC
+      mExtendFrac   = tryBooleanValue( hlp, k, v, bool(def[ 3]) );
+    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_BACKSHOT (bool)
+      mDistoXBackshot = tryBooleanValue( hlp, k, v, bool(def[4]) );
+    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_BEDDING
+      mBedding      = tryBooleanValue( hlp, k, v, bool(def[ 5]) );
+    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_WITH_SENSORS
+      mWithSensors  = tryBooleanValue( hlp, k, v, bool(def[ 6]) );
+    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_LOOP_CLOSURE_VALUE
+      setLoopClosure( tryIntValue( hlp, k, v, def[ 7] ) );
+    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_ANDROID_AZIMUTH
+      mWithAzimuth  = tryBooleanValue( hlp, k, v, bool(def[ 8]) );
+    } else if ( k.equals( key[ 9  ] ) ) { // DISTOX_SHOT_TIMER [3 ..)
+      mTimerWait        = tryIntValue( hlp, k, v, def[ 9] );
       if ( mTimerWait < 0 ) { mTimerWait = 0; ret = TDString.ZERO; }
-    } else if ( k.equals( key[ 12 ] ) ) { // DISTOX_BEEP_VOLUME [0 .. 100]
-      mBeepVolume       = tryIntValue( hlp, k, v, def[12] );
+    } else if ( k.equals( key[ 10 ] ) ) { // DISTOX_BEEP_VOLUME [0 .. 100]
+      mBeepVolume       = tryIntValue( hlp, k, v, def[10] );
       if ( mBeepVolume <   0 ) { mBeepVolume =   0; ret =   TDString.ZERO; }
       if ( mBeepVolume > 100 ) { mBeepVolume = 100; ret = "100"; }
     // } else if ( k.equals( key[13 ] ) ) { // DISTOX_TDMANAGER
@@ -1443,25 +1439,29 @@ public class TDSetting
     // Log.v("DistoX", "update pref data: " + k );
     String[] key = TDPrefKey.GEEKsplay;
     String[] def = TDPrefKey.GEEKsplaydef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_SPLAY_AS_DOT
-      mSplayAsDot = tryBooleanValue( hlp, k, v, bool(def[ 0]) );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_SPLAY_VERT_THRS
-      mSplayVertThrs = tryFloatValue( hlp, k, v, def[ 1] );
+    if ( k.equals( key[ 0 ] ) ) { // DISTOX_SPLAY_CLASSES
+      mSplayClasses = tryBooleanValue( hlp, k, v, bool(def[ 0]) );
+    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_SPLAY_COLOR
+      mSplayColor   = tryBooleanValue( hlp, k, v, bool(def[ 1]) );
+    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_SPLAY_AS_DOT
+      mSplayAsDot = tryBooleanValue( hlp, k, v, bool(def[ 2]) );
+    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_SPLAY_VERT_THRS
+      mSplayVertThrs = tryFloatValue( hlp, k, v, def[ 3] );
       if ( mSplayVertThrs <  0 ) { mSplayVertThrs =  0; ret = TDString.ZERO; }
       if ( mSplayVertThrs > 91 ) { mSplayVertThrs = 91; ret = TDString.NINETYONE; }
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_SPLAY_DASH (0,1,2)
-      mDashSplay = tryIntValue( hlp, k, v, def[ 2] );      
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_VERT_SPLAY
-      mVertSplay   = tryFloatValue( hlp, k, v, def[ 3] );
+    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_SPLAY_DASH (0,1,2)
+      mDashSplay = tryIntValue( hlp, k, v, def[ 4] );      
+    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_VERT_SPLAY
+      mVertSplay   = tryFloatValue( hlp, k, v, def[ 5] );
       if ( mVertSplay <  0 ) { mVertSplay =  0; ret = TDString.ZERO; }
       if ( mVertSplay > 91 ) { mVertSplay = 91; ret = TDString.NINETYONE; }
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_HORIZ_SPLAY
-      mHorizSplay  = tryFloatValue( hlp, k, v, def[ 4] );
+    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_HORIZ_SPLAY
+      mHorizSplay  = tryFloatValue( hlp, k, v, def[ 6] );
       if ( mHorizSplay <  0 ) { mHorizSplay =  0; ret = TDString.ZERO; }
       if ( mHorizSplay > 91 ) { mHorizSplay = 91; ret = TDString.NINETYONE; }
       mCosHorizSplay = TDMath.cosd( mHorizSplay );
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_SECTION_SPLAY
-      mSectionSplay = tryFloatValue( hlp, k, v, def[ 5] );
+    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_SECTION_SPLAY
+      mSectionSplay = tryFloatValue( hlp, k, v, def[ 7] );
       if ( mSectionSplay <  0 ) { mSectionSplay =  0; ret = TDString.ZERO; }
       if ( mSectionSplay > 91 ) { mSectionSplay = 91; ret = TDString.NINETYONE; }
     } else {
@@ -2531,7 +2531,7 @@ public class TDSetting
       pw.printf(Locale.US, "Recent data %c, timeout %d\n", tf(mShotRecent), mRecentTimeout );
       pw.printf(Locale.US, "Leg: closeness %.2f, nr %d, triple-shot %d, max %.2f, min %.2f\n",
         mCloseDistance, mMinNrLegShots, mTripleShot, mMaxShotLength, mMinLegLength );
-      pw.printf(Locale.US, "Splay: vthr %.1f, classes %c\n", mSplayVertThrs, tf(mSplayClasses) );
+      pw.printf(Locale.US, "Splay: vthr %.1f, classes %c, as_dot %c\n", mSplayVertThrs, tf(mSplayClasses), tf(mSplayAsDot) );
       pw.printf(Locale.US, "Stations: names %d, init \"%s\"\n", mStationNames, mInitStation );
       pw.printf(Locale.US, "Extend: thr %.1f, manual %c, frac %c\n", mExtendThr, tf(mAzimuthManual), tf(mExtendFrac) );
       pw.printf(Locale.US, "Loop: %d \n", mLoopClosure );
@@ -2539,8 +2539,8 @@ public class TDSetting
       pw.printf(Locale.US, "ThumbSize %d, SavedStations %c, LegonlyUpdate %c, WithAzimuth %c, WithSensors %c, Bedding %c \n", // TdManager %c\n",
         mThumbSize, tf(mSavedStations), tf(mLegonlyUpdate), tf(mWithAzimuth), tf(mWithSensors), tf(mBedding) ); // , tf(mWithTdManager) );
 
-      pw.printf(Locale.US, "Plot: zoom %d, drag %c, fix-origin %c, split %c, shift %c, levels %d, affine %c\n",
-        mZoomCtrl, tf(mSideDrag), tf(mFixedOrigin), tf(mPlotSplit), tf(mPlotShift), mWithLevels, tf(mFullAffine) );
+      pw.printf(Locale.US, "Plot: zoom %d, drag %c, fix-origin %c, split %c, shift %c, levels %d, affine %c, stylus %d\n",
+        mZoomCtrl, tf(mSideDrag), tf(mFixedOrigin), tf(mPlotSplit), tf(mPlotShift), mWithLevels, tf(mFullAffine), mStylusSize );
       pw.printf(Locale.US, "Units: icon %.2f, line %.2f, grid %.2f, ruler %.2f\n", mUnitIcons, mUnitLines, mUnitGrid, mUnitMeasure );
       pw.printf(Locale.US, "Size: station %.1f, label %.1f, fixed %.1f line %.1f\n", mStationSize, mLabelSize, mFixedThickness, mLineThickness );
       pw.printf(Locale.US, "Select: radius %.2f, pointing %d, shift %d, dot %.1f, multiple %c \n",
@@ -3008,6 +3008,7 @@ public class TDSetting
           if ( vals.length > 4 ) {
             mSplayVertThrs = getFloat( vals, 2, 80.0f ); setPreference( editor, "DISTOX_SPLAY_VERT_THRS", mSplayVertThrs );
             mSplayClasses  = getBoolean( vals, 4 );      setPreference( editor, "DISTOX_SPLAY_CLASSES", mSplayClasses );
+            mSplayAsDot    = getBoolean( vals, 6 );      setPreference( editor, "DISTOX_SPLAY_AS_DOT", mSplayAsDot );
           }
           continue;
         }
@@ -3068,6 +3069,7 @@ public class TDSetting
             mPlotShift   = getBoolean( vals, 10 ); setPreference( editor, "DISTOX_PLOT_SHIFT",   mPlotShift );
             mWithLevels  = getInt( vals, 12, 0 );  setPreference( editor, "DISTOX_WITH_LEVELS",  mWithLevels );
             mFullAffine  = getBoolean( vals, 14 ); setPreference( editor, "DISTOX_FULL_AFFINE",  mFullAffine );
+            setStylusSize( getInt( vals, 16, 0 ) ); setPreference( editor, "DISTOX_STYLUS_SIZE", mStylusSize );
           }
           continue;
         }

@@ -1335,8 +1335,6 @@ public class TDPrefKey
     "DISTOX_DIVING_MODE",     // enable diving mode
     "DISTOX_RECENT_SHOT",     // highlight recent shots
     "DISTOX_RECENT_TIMEOUT",  // recent block timeout
-    "DISTOX_SPLAY_CLASSES",   // splay classes
-    "DISTOX_SPLAY_COLOR",     // splay color
     "DISTOX_EXTEND_FRAC",     // fractional extend
     "DISTOX_BACKSHOT",        // using DistoX in backshot mode
     "DISTOX_BEDDING",         // splays bed plane interpolation
@@ -1356,8 +1354,6 @@ public class TDPrefKey
     R.string.pref_diving_mode_title,
     R.string.pref_recent_shot_title,
     R.string.pref_recent_timeout_title,
-    R.string.pref_splay_classes_title,
-    R.string.pref_splay_color_title,
     R.string.pref_extend_frac_title,
     R.string.pref_backshot_title,
     R.string.pref_plane_interpolation_title,
@@ -1377,8 +1373,6 @@ public class TDPrefKey
     R.string.pref_diving_mode_summary,
     R.string.pref_recent_shot_summary,
     R.string.pref_recent_timeout_summary,
-    R.string.pref_splay_classes_summary,
-    R.string.pref_splay_color_summary,
     R.string.pref_extend_frac_summary,
     R.string.pref_backshot_summary,
     R.string.pref_plane_interpolation_summary,
@@ -1398,8 +1392,6 @@ public class TDPrefKey
     FALSE,
     FALSE,
     "30",
-    FALSE,
-    FALSE,
     FALSE,
     FALSE,
     FALSE,
@@ -1480,6 +1472,8 @@ public class TDPrefKey
   };
 
   public static String[] GEEKsplay = {
+    "DISTOX_SPLAY_CLASSES",   // splay classes
+    "DISTOX_SPLAY_COLOR",     // splay color
     "DISTOX_SPLAY_AS_DOT",    // plot splays as dots
     "DISTOX_SPLAY_VERT_THRS", // splays with clino over mSplayVertThrs are not displayed in plan view
     "DISTOX_SPLAY_DASH",      // whether dash-splay are coherent from plan (1), profile (2), or independent (0)
@@ -1489,6 +1483,8 @@ public class TDPrefKey
   };
 
   public static int[] GEEKsplaytitle = {
+    R.string.pref_splay_classes_title,
+    R.string.pref_splay_color_title,
     R.string.pref_splay_as_dot_title,
     R.string.pref_plan_vthr_title,
     R.string.pref_dash_splay_title,
@@ -1498,6 +1494,8 @@ public class TDPrefKey
   };
 
   public static int[] GEEKsplaydesc = {
+    R.string.pref_splay_classes_summary,
+    R.string.pref_splay_color_summary,
     R.string.pref_splay_as_dot_summary,
     R.string.pref_plan_vthr_summary,      
     R.string.pref_dash_splay_message, 
@@ -1507,6 +1505,8 @@ public class TDPrefKey
   };
 
   public static String[] GEEKsplaydef = {
+    FALSE,
+    FALSE,
     FALSE,
     "80",
     TDString.ZERO,
