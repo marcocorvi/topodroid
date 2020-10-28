@@ -53,9 +53,11 @@ public class BrushManager
   static private SymbolPoint mStationSymbol   = null;
 
   // -----------------------------------------------------------
+  /* LOAD_MISSING
   static boolean tryLoadMissingPoint( String thname ) { return mPointLib != null && mPointLib.tryLoadMissingPoint( thname ); }
   static boolean tryLoadMissingLine( String thname )  { return mLineLib  != null && mLineLib.tryLoadMissingLine( thname ); }
   static boolean tryLoadMissingArea( String thname )  { return mAreaLib  != null && mAreaLib.tryLoadMissingArea( thname ); }
+  */
 
   static SymbolPointLibrary getPointLib() { return mPointLib; }
   static SymbolLineLibrary  getLineLib()  { return mLineLib; }

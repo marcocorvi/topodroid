@@ -72,13 +72,16 @@ public class CWDActivity extends Activity
   private boolean setCwdPreference()
   {
     String dir_name  = mETcwd.getText().toString();
-    String base_name = TDLevel.overExpert ? mBaseName : TDInstance.cbd ;
-    if ( base_name == null ) {
-      base_name = TDPath.PATH_BASEDIR;
-    } else {
-      base_name = base_name.trim();
-      if ( base_name.length() == 0 ) base_name = TDPath.PATH_BASEDIR;
+
+    String base_name = TDPath.getBaseDir();
+    if ( ! TDPath.hasPath11() ) {
+      String b_name = TDLevel.overExpert ? mBaseName : TDInstance.cbd ;
+      if ( b_name != null ) {
+        b_name = b_name.trim();
+        if ( b_name.length() > 0 ) base_name = b_name;
+      }
     }
+
     // make sure base_dir exists and is writable
     File base_dir = new File( base_name );
     try {

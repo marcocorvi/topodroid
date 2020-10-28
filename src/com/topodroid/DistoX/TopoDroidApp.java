@@ -642,7 +642,10 @@ public class TopoDroidApp extends Application
 
     // TDLog.Profile("TDApp cwd");
     TDInstance.cwd = prefHlp.getString( "DISTOX_CWD", "TopoDroid" );
-    TDInstance.cbd = prefHlp.getString( "DISTOX_CBD", TDPath.PATH_BASEDIR );
+    TDInstance.cbd = TDPath.getBaseDir();
+    if ( ! TDPath.hasPath11() ) {
+      TDInstance.cbd = prefHlp.getString( "DISTOX_CBD", TDPath.getBaseDir() );
+    }
     TDPath.setPaths( TDInstance.cwd, TDInstance.cbd );
 
     // TDLog.Profile("TDApp DB"); 
@@ -815,14 +818,19 @@ public class TopoDroidApp extends Application
   public static void setCWD( String cwd, String cbd )
   {
     if ( cwd == null || cwd.length() == 0 ) cwd = TDInstance.cwd;
-    if ( cbd == null || cbd.length() == 0 ) cbd = TDInstance.cbd;
-    if ( cbd.equals( TDInstance.cbd ) && cwd.equals( TDInstance.cwd ) ) return;
+    TDInstance.cwd = cwd;
+
+    if ( ! TDPath.hasPath11() ) {
+      if ( cbd == null || cbd.length() == 0 ) cbd = TDInstance.cbd;
+      if ( cbd.equals( TDInstance.cbd ) && cwd.equals( TDInstance.cwd ) ) return;
+      TDInstance.cbd = cbd;
+    }
     TDLog.Log( TDLog.LOG_PATH, "set cwd " + cwd + " " + cbd );
     mData.closeDatabase();
-    TDInstance.cbd = cbd;
-    TDInstance.cwd = cwd;
+
     TDPath.setPaths( TDInstance.cwd, TDInstance.cbd );
     mData.openDatabase( TDInstance.context );
+
     if ( mActivity != null ) mActivity.setTheTitle( );
   }
 
@@ -1424,32 +1432,13 @@ public class TopoDroidApp extends Application
   {
     String[] lines = { "blocks", "debris", "clay", "contour", "presumed", "sand", "ice", "section", "wall:sand" };
     for ( String line : lines ) {
-      TDUtil.deleteFile( TDPath.APP_LINE_PATH + line );
+      TDUtil.deleteFile( TDPath.getSymbolLinePath( line ) );
     }
     String[] points = { "breakdown-choke", "low-end", "paleo-flow", "section" };
     for ( String point : points ) {
-      TDUtil.deleteFile( TDPath.APP_POINT_PATH + point );
+      TDUtil.deleteFile( TDPath.getSymbolPointPath( point ) );
     }
   }
-
-  private void clearSymbolsDir( String dirname )
-  {
-    // Log.v("DistoX", "clear " + dirname );
-    File dir = new File( dirname );
-    File [] files = dir.listFiles();
-    if ( files == null ) return;
-    for ( int i=0; i<files.length; ++i ) {
-      if ( files[i].isDirectory() ) continue;
-      if ( ! files[i].delete() ) TDLog.Error("File delete failed ");
-    }
-  }
-    
-  private void clearSymbols( )
-  {
-    clearSymbolsDir( TDPath.APP_POINT_PATH );
-    clearSymbolsDir( TDPath.APP_LINE_PATH );
-    clearSymbolsDir( TDPath.APP_AREA_PATH );
-  }  
 
   void reloadSymbols( boolean clear, 
                       boolean speleo, boolean extra, boolean mine, boolean geo, boolean archeo, boolean anthro, boolean paleo,
@@ -1460,7 +1449,7 @@ public class TopoDroidApp extends Application
 
     if ( clear ) {
       if (speleo || extra || mine || geo || archeo || anthro || paleo || bio || karst ) { 
-        clearSymbols();
+        TDPath.clearSymbols();
       }
     }
     if ( speleo ) installSymbols( R.raw.symbols_speleo, true );
@@ -1498,10 +1487,10 @@ public class TopoDroidApp extends Application
           // Log.v("DistoX-PATH", "uncompress symbol " + pathname );
           File file = new File( pathname );
           if ( overwrite || ! file.exists() ) {
-            // APP_SAVE SYMBOLS
-            if ( file.exists() ) {
-              if ( ! file.renameTo( new File( TDPath.getSymbolSaveFile( filepath ) ) ) ) TDLog.Error("File rename error");
-            }
+            // APP_SAVE SYMBOLS LOAD_MISSING
+            // if ( file.exists() ) {
+            //   if ( ! file.renameTo( new File( TDPath.getSymbolSaveFile( filepath ) ) ) ) TDLog.Error("File rename error");
+            // }
 
             TDPath.checkPath( pathname );
             FileOutputStream fout = new FileOutputStream( pathname );
@@ -1510,18 +1499,6 @@ public class TopoDroidApp extends Application
               fout.write(buffer, 0, c); // offset 0 in buffer
             }
             fout.close();
-          
-            // pathname =  APP_SYMBOL_SAVE_PATH + filepath;
-            // file = new File( pathname );
-            // if ( ! file.exists() ) {
-            //   TDPath.checkPath( pathname );
-            //   FileOutputStream fout = new FileOutputStream( pathname );
-            //   int c;
-            //   while ( ( c = zin.read( buffer ) ) != -1 ) {
-            //     fout.write(buffer, 0, c); // offset 0 in buffer
-            //   }
-            //   fout.close();
-            // }
           }
         }
         zin.closeEntry();

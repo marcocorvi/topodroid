@@ -128,7 +128,7 @@ class SymbolAreaLibrary extends SymbolLibrary
     // if ( locale.equals( "name-es" ) ) iso = "ISO-8859-1";
     // Log.v("DistoX", "area user symbols. locale <" + locale + ">");
 
-    File dir = new File( TDPath.APP_AREA_PATH );
+    File dir = new File( TDPath.getSymbolAreaDir() );
     if ( dir.exists() ) {
       int systemNr = size();
       File[] files = dir.listFiles();
@@ -163,6 +163,7 @@ class SymbolAreaLibrary extends SymbolLibrary
     }
   }
 
+  /* LOAD_MISSING
   boolean tryLoadMissingArea( String thname )
   {
     String locale = "name-" + Locale.getDefault().toString().substring(0,2);
@@ -173,7 +174,7 @@ class SymbolAreaLibrary extends SymbolLibrary
     // APP_SAVE SYMBOLS
     if ( symbol == null ) {
       String filename = thname.startsWith("u:")? thname.substring(2) : thname; 
-      File file = new File( TDPath.APP_SAVE_AREA_PATH + filename );
+      File file = new File( TDPath.getSymbolSaveAreaPath( filename ) );
       if ( ! file.exists() ) return false;
       symbol = new SymbolArea( file.getPath(), file.getName(), locale, iso );
       addSymbol( symbol );
@@ -185,6 +186,7 @@ class SymbolAreaLibrary extends SymbolLibrary
     }
     return true;
   }
+  */
 
   void makeEnabledListFromPalette( SymbolsPalette palette, boolean clear )
   {

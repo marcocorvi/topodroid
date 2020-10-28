@@ -100,7 +100,7 @@ class SymbolLineLibrary extends SymbolLibrary
     // String iso = "UTF-8";
     // if ( locale.equals( "name-es" ) ) iso = "ISO-8859-1";
 
-    File dir = new File( TDPath.APP_LINE_PATH );
+    File dir = new File( TDPath.getSymbolLineDir() );
     if ( dir.exists() ) {
       int systemNr = mSymbols.size();
       File[] files = dir.listFiles();
@@ -142,6 +142,7 @@ class SymbolLineLibrary extends SymbolLibrary
     }
   }
 
+  /* LOAD_MISSING
   // thname  symbol th-name
   boolean tryLoadMissingLine( String thname )
   {
@@ -156,7 +157,7 @@ class SymbolLineLibrary extends SymbolLibrary
     if ( symbol == null ) {
       String filename = thname.startsWith("u:")? thname.substring(2) : thname; 
       // Log.v( "DistoX", "load missing line " + thname + " filename " + filename );
-      File file = new File( TDPath.APP_SAVE_LINE_PATH + filename );
+      File file = new File( TDPath.getSymbolSaveLinePath( filename ) );
       if ( ! file.exists() ) return false;
       symbol = new SymbolLine( file.getPath(), file.getName(), locale, iso );
       addSymbol( symbol );
@@ -170,6 +171,7 @@ class SymbolLineLibrary extends SymbolLibrary
     makeEnabledList();
     return true;
   }
+  */
   
   @Override
   protected void makeEnabledList()

@@ -131,7 +131,7 @@ class SymbolPointLibrary extends SymbolLibrary
     // if ( locale.equals( "name-es" ) ) iso = "ISO-8859-1";
     // Charset.forName("ISO-8859-1")
 
-    File dir = new File( TDPath.APP_POINT_PATH );
+    File dir = new File( TDPath.getSymbolPointDir() );
     if ( dir.exists() ) {
       int systemNr = mSymbols.size();
       File[] files = dir.listFiles();
@@ -182,6 +182,7 @@ class SymbolPointLibrary extends SymbolLibrary
     }
   }
 
+  /* LOAD_MISSING
   // thname   symbol th-name
   boolean tryLoadMissingPoint( String thname )
   {
@@ -196,7 +197,7 @@ class SymbolPointLibrary extends SymbolLibrary
     if ( symbol == null ) {
       String filename = thname.startsWith("u:")? thname.substring(2) : thname ;
       // Log.v( "DistoX", "load missing point " + thname + " filename " + filename );
-      File file = new File( TDPath.APP_SAVE_POINT_PATH + filename );
+      File file = new File( TDPath.getSymbolSavePointPath( filename ) );
       if ( ! file.exists() ) return false;
       symbol = new SymbolPoint( file.getPath(), file.getName(), locale, iso );
       if ( symbol.mThName == null || symbol.mThName.length() == 0 ) return false;
@@ -210,6 +211,7 @@ class SymbolPointLibrary extends SymbolLibrary
     makeEnabledList();
     return true;
   }
+  */
 
 // ------------------------------------------------------------------
   

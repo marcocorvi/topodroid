@@ -170,7 +170,7 @@ class Archiver
   {
     if ( ! (TDLevel.overExpert && TDSetting.mZipWithSymbols ) ) return false;
     boolean ret = false;
-    String filename = TDPath.APP_SYMBOL_PATH + "tmp.zip";
+    String filename = TDPath.getSymbolFile( "tmp.zip" );
     FileOutputStream fout = null;
     int c;
     byte[] sbuffer = new byte[4096];
@@ -245,16 +245,16 @@ class Archiver
       zos = new ZipOutputStream( new BufferedOutputStream( new FileOutputStream( zipname ) ) );
 
       if ( TDLevel.overExpert && TDSetting.mZipWithSymbols ) {
-        String filename = TDPath.APP_SYMBOL_PATH + "points.zip";
-        if ( compressSymbols( filename, BrushManager.getPointLib(), TDPath.APP_POINT_PATH ) )  {
+        String filename = TDPath.getSymbolFile( "points.zip" );
+        if ( compressSymbols( filename, BrushManager.getPointLib(), TDPath.getSymbolPointDir() ) )  {
           addOptionalEntry( zos, new File( filename ) );
         }
-        filename = TDPath.APP_SYMBOL_PATH + "lines.zip";
-        if ( compressSymbols( filename, BrushManager.getLineLib(), TDPath.APP_LINE_PATH ) )  {
+        filename = TDPath.getSymbolFile( "lines.zip" );
+        if ( compressSymbols( filename, BrushManager.getLineLib(), TDPath.getSymbolLineDir() ) )  {
           addOptionalEntry( zos, new File( filename ) );
         }
-        filename = TDPath.APP_SYMBOL_PATH + "areas.zip";
-        if ( compressSymbols( filename, BrushManager.getAreaLib(), TDPath.APP_AREA_PATH ) )  {
+        filename = TDPath.getSymbolFile( "areas.zip" );
+        if ( compressSymbols( filename, BrushManager.getAreaLib(), TDPath.getSymbolAreaDir() ) )  {
           addOptionalEntry( zos, new File( filename ) );
         }
       }
@@ -473,15 +473,15 @@ class Archiver
             TDUtil.makeDir( pathname );
             pathname = TDPath.getJpgFile( surveyname, ze.getName() );
           } else if ( ze.getName().equals( "points.zip" ) ) { // POINTS
-            if ( uncompressSymbols( zin, TDPath.APP_POINT_PATH, "p_" ) ) {
+            if ( uncompressSymbols( zin, TDPath.getSymbolPointDir(), "p_" ) ) {
               BrushManager.reloadPointLibrary( mApp, mApp.getResources() );
             }
           } else if ( ze.getName().equals( "lines.zip" ) ) { // LINES
-            if ( uncompressSymbols( zin, TDPath.APP_LINE_PATH, "l_" ) ) {
+            if ( uncompressSymbols( zin, TDPath.getSymbolLineDir(), "l_" ) ) {
               BrushManager.reloadLineLibrary( mApp.getResources() );
             }
           } else if ( ze.getName().equals( "areas.zip" ) ) { // AREAS
-            if ( uncompressSymbols( zin, TDPath.APP_AREA_PATH, "a_" ) ) {
+            if ( uncompressSymbols( zin, TDPath.getSymbolAreaDir(), "a_" ) ) {
               BrushManager.reloadAreaLibrary( mApp.getResources() );
             }
           } else {

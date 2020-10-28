@@ -12,7 +12,7 @@ C\'e\' nulla da fare per una nuova installazione della app su Android 11.\n
 Per una vecchia installazione, prima di un aggornamento di sistema ad Android 11,\n
  fate un salvataggio dei vostri dati, copiate la vostra cartella "Topodroid" sotto "Documents" e fate ripartire Topodroid.\n\n 
 ATTENZIONE: Dalla v. 5.0.60 "TopoDroid" usa la cartella sotto "Documents", se esiste, anche su Android 10 e precedenti.\n
-Tap "Move" to move your TopoDroid folder to Documents.\n
+Tap "Move" to move your TopoDroid folder to Documents. You must force-stop the app and clear-storage before restarting TopoDroid.\n\n
 Tap "Close" not to take any action.
 </string>
     <string name="button_no_again">Non chiedere di nuovo</string>

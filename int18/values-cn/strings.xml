@@ -12,7 +12,7 @@ There is nothing to do for a new install of the app on Android-11.\n
 For an old install, before a system upgrade to Android-11, make a backup of your data, copy your "TopoDroid" folder under "Documents"
 and hard-restart TopoDroid.\n\n
 WARNING. From v. 5.0.60 "TopoDroid" uses the folder under Documents if it exists, even on Android-10 and below.\n\n
-Tap "Move" to move your TopoDroid folder to Documents.\n
+Tap "Move" to move your TopoDroid folder to Documents. You must force-stop the app and clear-storage before restarting TopoDroid.\n\n
 Tap "Close" not to take any action.
 </string -->
     <!-- TODO string name="button_no_again">Don\'t ask again</string -->

@@ -1137,7 +1137,7 @@ public class TDSetting
     // Log.v("DistoX", "update pref main: " + k );
     if ( k.equals( key[0] ) ) {// DISTOX_CWD
       // handled independently
-      TopoDroidApp.setCWD( tryStringValue( hlp, k, v, "TopoDroid" ), hlp.getString( "DISTOX_CBD", TDPath.PATH_BASEDIR ) );
+      TopoDroidApp.setCWD( tryStringValue( hlp, k, v, "TopoDroid" ), hlp.getString( "DISTOX_CBD", TDPath.getBaseDir() ) );
     } else if ( k.equals( key[ 1 ] ) ) {              // DISTOX_TEXT_SIZE
       ret = setTextSize( tryIntValue( hlp, k, v, defaultTextSize ) );
     } else if ( k.equals( key[ 2 ] ) ) {              // DISTOX_SIZE_BUTTONS (choice)

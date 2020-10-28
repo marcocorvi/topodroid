@@ -137,7 +137,9 @@ public class DrawingAreaPath extends DrawingPointLinePath
       if ( version >= 401160 ) scrap = dis.readInt();
       int npt = dis.readInt( );
 
-      BrushManager.tryLoadMissingArea( thname );
+      
+      // BrushManager.tryLoadMissingArea( thname ); // LOAD_MISSING
+
       type = BrushManager.getAreaIndexByThNameOrGroup( thname, group );
       // TDLog.Log( TDLog.LOG_PLOT, "A: " + thname + " " + cnt + " " + visible + " " + orientation + " NP " + npt );
       // Log.v( "DistoX-PLOT", "A: " + type + " " + thname + " " + cnt + " " + visible + " " + orientation + " NP " + npt );

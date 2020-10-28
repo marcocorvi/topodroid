@@ -91,17 +91,16 @@ public class TDPath
   //    this works with Android-10 but the data are erased when TopoDroid is uninstalled
   //    because the path is Android/data/com.topodroid.DistoX/files
   // With "/sdcard" they remain
-  static String EXTERNAL_STORAGE_PATH_11 = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath();
-  static String EXTERNAL_STORAGE_PATH =  // app base path
+  static final String EXTERNAL_STORAGE_PATH_11 = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath();
+  static final String EXTERNAL_STORAGE_PATH =  // app base path
     (new File( EXTERNAL_STORAGE_PATH_11, "TopoDroid" ).exists() )? EXTERNAL_STORAGE_PATH_11
     : NOT_ANDROID_11 ? Environment.getExternalStorageDirectory().getAbsolutePath()
                      // : Environment.getExternalStorageDirectory().getAbsolutePath();
                      // FIXME ANDROID 11 this is what i should use but on the emulator it is a data file
-                     : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath();
-                     // : "/sdcard";
-                     // : null; 
+                     : EXTERNAL_STORAGE_PATH_11;
+                     // : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath();
 
-  public static  String PATH_BASEDIR  = EXTERNAL_STORAGE_PATH;
+  private static String PATH_BASEDIR  = EXTERNAL_STORAGE_PATH;
   private static String PATH_DEFAULT  = EXTERNAL_STORAGE_PATH + "/TopoDroid/";
   private static String PATH_BASE     = PATH_BASEDIR + "/TopoDroid/";
 
@@ -109,14 +108,28 @@ public class TDPath
   private static String PATH_CCSV = PATH_DEFAULT + "ccsv/";  // calib CSV text
   private static String PATH_MAN  = PATH_DEFAULT + "man/"; // User Manual
 
-  static String APP_SYMBOL_PATH = PATH_DEFAULT + "symbol/";
-  static String APP_POINT_PATH  = APP_SYMBOL_PATH + "point/";
-  static String APP_LINE_PATH   = APP_SYMBOL_PATH + "line/";
-  static String APP_AREA_PATH   = APP_SYMBOL_PATH + "area/";
-  static String APP_SYMBOL_SAVE_PATH = APP_SYMBOL_PATH + "save/";
-  static String APP_SAVE_POINT_PATH  = APP_SYMBOL_SAVE_PATH + "point/";
-  static String APP_SAVE_LINE_PATH   = APP_SYMBOL_SAVE_PATH + "line/";
-  static String APP_SAVE_AREA_PATH   = APP_SYMBOL_SAVE_PATH + "area/";
+  private static String APP_SYMBOL_PATH = PATH_DEFAULT + "symbol/";
+  private static String APP_POINT_PATH  = APP_SYMBOL_PATH + "point/";
+  private static String APP_LINE_PATH   = APP_SYMBOL_PATH + "line/";
+  private static String APP_AREA_PATH   = APP_SYMBOL_PATH + "area/";
+
+  static String getSymbolPointDir() { return APP_POINT_PATH; }
+  static String getSymbolLineDir()  { return APP_LINE_PATH; }
+  static String getSymbolAreaDir()  { return APP_AREA_PATH; }
+  static String getSymbolPointPath( String filename ) { return APP_POINT_PATH + filename; }
+  static String getSymbolLinePath( String filename )  { return APP_LINE_PATH + filename; }
+  static String getSymbolAreaPath( String filename )  { return APP_AREA_PATH + filename; }
+
+  /* LOAD_MISSING
+  private static String APP_SYMBOL_SAVE_PATH = APP_SYMBOL_PATH + "save/";
+  private static String APP_SAVE_POINT_PATH  = APP_SYMBOL_SAVE_PATH + "point/";
+  private static String APP_SAVE_LINE_PATH   = APP_SYMBOL_SAVE_PATH + "line/";
+  private static String APP_SAVE_AREA_PATH   = APP_SYMBOL_SAVE_PATH + "area/";
+  
+  static String getSymbolSavePointPath( String filename ) { return APP_SAVE_POINT_PATH + filename; }
+  static String getSymbolSaveLinePath( String filename )  { return APP_SAVE_LINE_PATH + filename; }
+  static String getSymbolSaveAreaPath( String filename )  { return APP_SAVE_AREA_PATH + filename; }
+  */
 
   static String PATH_TDCONFIG;
   static String PATH_THCONFIG;
@@ -177,8 +190,7 @@ public class TDPath
   static boolean checkBasePath( String path, String basedir )
   {
     // Log.v("DistoX-PATH", "BASE " + PATH_BASEDIR + " next " + basedir + " path " + path );
-    PATH_BASEDIR = hasPath11() ? EXTERNAL_STORAGE_PATH_11 : basedir;
-    TDLog.Log( TDLog.LOG_PATH, "base path " + PATH_BASEDIR );
+    setBaseDir( basedir );
     File dir = new File( PATH_BASEDIR, path ); // DistoX-SAF
     if ( ! dir.exists() ) {
       if ( ! dir.mkdirs() ) TDLog.Error("mkdir error");
@@ -208,20 +220,43 @@ public class TDPath
     File dir11 = new File( EXTERNAL_STORAGE_PATH_11 );
     if ( ! dir11.exists() ) dir11.mkdirs();
     path.renameTo( path11 );
-    PATH_BASEDIR = EXTERNAL_STORAGE_PATH_11;
-    TopoDroidApp.setCWDPreference( "TopoDroid", EXTERNAL_STORAGE_PATH_11 );
+    setBaseDir( EXTERNAL_STORAGE_PATH_11 );
+    TopoDroidApp.setCWDPreference( "TopoDroid", PATH_BASEDIR );
     return true;
   }
 
   // FIXME BASEPATH 
   // remove comments when ready to swicth to new Android app path system
   //
+  private static void setBaseDir( String basedir )
+  {
+    PATH_BASEDIR = hasPath11() ? EXTERNAL_STORAGE_PATH_11 : basedir;
+    PATH_DEFAULT = PATH_BASEDIR + "/TopoDroid/";
+    PATH_BASE    = PATH_DEFAULT;
+    TDLog.Log( TDLog.LOG_PATH, "set basedir path " + PATH_BASEDIR );
+  }
+
+  private static void setDefault()
+  {
+    PATH_DEFAULT = PATH_BASEDIR + "/TopoDroid/";
+    PATH_BASE    = PATH_DEFAULT;
+    TDLog.Log( TDLog.LOG_PATH, "set default path " + PATH_DEFAULT );
+  }
+
+  private static void setBase()
+  {
+    PATH_BASE    = PATH_DEFAULT;
+    TDLog.Log( TDLog.LOG_PATH, "set base path " + PATH_BASE );
+  }
+ 
+  public static String getBaseDir() { return PATH_BASEDIR; }
+
+ 
   static void setPaths( String path, String base )
   {
     if ( PATH_BASEDIR == null ) {
-      PATH_BASEDIR = hasPath11() ? EXTERNAL_STORAGE_PATH_11 : TDInstance.context.getExternalFilesDir( null ).getPath();
-      PATH_BASE    = PATH_BASEDIR + "/TopoDroid/";
-      PATH_DEFAULT = PATH_BASE;
+      // PATH_BASEDIR = hasPath11() ? EXTERNAL_STORAGE_PATH_11 : TDInstance.context.getExternalFilesDir( null ).getPath();
+      setBaseDir( TDInstance.context.getExternalFilesDir( null ).getPath() );
       Log.v("DistoX-PATH", "[1] BaseDir " + PATH_BASEDIR + " Default " + PATH_DEFAULT + " hasPath11 " + hasPath11() );
       setDefaultPaths();
     }
@@ -236,9 +271,7 @@ public class TDPath
       try {
         if ( ! dir.exists() ) dir.mkdirs();
         if ( dir.exists() && dir.canWrite() ) {
-          PATH_BASEDIR = base;
-          PATH_BASE    = PATH_BASEDIR + "/TopoDroid/";
-          PATH_DEFAULT = PATH_BASE;
+          setBaseDir( base );
           Log.v("DistoX-PATH", "[2] BaseDir " + PATH_BASEDIR + " Default " + PATH_DEFAULT + " hasPath11 " + hasPath11() );
           setDefaultPaths();
         }
@@ -267,7 +300,7 @@ public class TDPath
       // Log.v("DistoX-SAF", "path base " + PATH_BASE + " does not exist" );
       if ( ! dir.mkdirs() ) {
         TDLog.Error( "failed mkdir " + PATH_BASE );
-        PATH_BASE = PATH_DEFAULT;
+        setBase();
       }
     }
     // Log.v(TAG, "Base Path \"" + PATH_BASE + "\"" );
@@ -321,28 +354,55 @@ public class TDPath
   static void setDefaultPaths()
   {
     // Log.v("DistoX-SAF", "default path " + PATH_DEFAULT );
-    PATH_BIN = PATH_DEFAULT + "bin/";
-    checkDirs( PATH_BIN );
+    Log.v("DistoX", "set default paths from " + PATH_DEFAULT );
 
-    PATH_MAN = PATH_DEFAULT + "man/";   
-    checkDirs( PATH_MAN );
-
+    PATH_BIN  = PATH_DEFAULT + "bin/";
+    PATH_MAN  = PATH_DEFAULT + "man/";   
     PATH_CCSV = PATH_DEFAULT + "ccsv/"; 
-    checkDirs( PATH_CCSV );
-
     PATH_DUMP = PATH_DEFAULT + "dump/"; 
-    checkDirs( PATH_DUMP );
 
     APP_SYMBOL_PATH  = PATH_DEFAULT + "symbol/";
     APP_POINT_PATH  = APP_SYMBOL_PATH + "point/";
     APP_LINE_PATH   = APP_SYMBOL_PATH + "line/";
     APP_AREA_PATH   = APP_SYMBOL_PATH + "area/";
+    /* LOAD_MISSING
     APP_SYMBOL_SAVE_PATH  = APP_SYMBOL_PATH + "save/";
     APP_SAVE_POINT_PATH  = APP_SYMBOL_SAVE_PATH + "point/";
     APP_SAVE_LINE_PATH   = APP_SYMBOL_SAVE_PATH + "line/";
     APP_SAVE_AREA_PATH   = APP_SYMBOL_SAVE_PATH + "area/";
+    */
+
+    checkDefaultPaths();
+  }
+
+  private static void checkDefaultPaths()
+  {
+    Log.v("DistoX", "check default paths from " + PATH_DEFAULT );
+    checkDirs( PATH_BIN );
+    checkDirs( PATH_MAN );
+    checkDirs( PATH_CCSV );
+    checkDirs( PATH_DUMP );
     symbolsCheckDirs();
   }
+
+  private static void clearSymbolsDir( String dirname )
+  {
+    // Log.v("DistoX", "clear " + dirname );
+    File dir = new File( dirname );
+    File [] files = dir.listFiles();
+    if ( files == null ) return;
+    for ( int i=0; i<files.length; ++i ) {
+      if ( files[i].isDirectory() ) continue;
+      if ( ! files[i].delete() ) TDLog.Error("File delete failed ");
+    }
+  }
+    
+  static void clearSymbols( )
+  {
+    clearSymbolsDir( APP_POINT_PATH );
+    clearSymbolsDir( APP_LINE_PATH );
+    clearSymbolsDir( APP_AREA_PATH );
+  }  
 
   static String noSpaces( String s )
   {
@@ -413,7 +473,8 @@ public class TDPath
   static String getManifestFile() { return PATH_BASE + "manifest"; }
 
   static String getSymbolFile( String name ) { return APP_SYMBOL_PATH + name; }
-  static String getSymbolSaveFile( String name ) { return APP_SYMBOL_SAVE_PATH + name; }
+  // LOAD_MISSING
+  // static String getSymbolSaveFile( String name ) { return APP_SYMBOL_SAVE_PATH + name; }
 
   static boolean hasTdrDir() { return (new File( PATH_TDR )).exists(); } // DistoX-SAF
   // static boolean hasTdr3Dir() { return (new File( PATH_TDR3 )).exists(); }
@@ -633,10 +694,12 @@ public class TDPath
     checkDirs( APP_POINT_PATH );
     checkDirs( APP_LINE_PATH );
     checkDirs( APP_AREA_PATH );
+    /* LOAD_MISSING
     checkDirs( APP_SYMBOL_SAVE_PATH );
     checkDirs( APP_SAVE_POINT_PATH );
     checkDirs( APP_SAVE_LINE_PATH );
     checkDirs( APP_SAVE_AREA_PATH );
+    */
   }
 
   static void checkCCsvDir() { checkDirs( PATH_CCSV ); }
