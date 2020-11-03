@@ -76,7 +76,7 @@ class DistoXA3Comm extends DistoXComm
   @Override
   boolean toggleCalibMode( String address, int type )
   {
-    if ( ! checkCommThreadNull() ) {
+    if ( ! isCommThreadNull() ) {
       TDLog.Error( "toggle Calib Mode address " + address + " not null RFcomm thread" );
       return false;
     }
@@ -105,7 +105,7 @@ class DistoXA3Comm extends DistoXComm
   {
     String res = null;
     // if ( TDInstance.deviceType() == Device.DISTO_A3 ) {
-      if ( ! checkCommThreadNull() ) return null;
+      if ( ! isCommThreadNull() ) return null;
       if ( connectSocketAny( address ) ) {
         DistoXA3Protocol protocol = (DistoXA3Protocol)mProtocol;
         res = protocol.readA3HeadTail( command, head_tail );
@@ -119,7 +119,7 @@ class DistoXA3Comm extends DistoXComm
   
   int readA3Memory( String address, int from, int to, List< MemoryOctet > memory )
   {
-    if ( ! checkCommThreadNull() ) return -1;
+    if ( ! isCommThreadNull() ) return -1;
     from &= 0xfff8; // was 0x7ff8
     to   &= 0xfff8;
     if ( from >= 0x8000 ) from = 0;
@@ -141,7 +141,7 @@ class DistoXA3Comm extends DistoXComm
    */
   int swapA3HotBit( String address, int from, int to, boolean on_off )
   {
-    if ( ! checkCommThreadNull() ) return -1;
+    if ( ! isCommThreadNull() ) return -1;
     if ( TDInstance.deviceType() != Device.DISTO_A3 ) return -2;
 
     from &= 0xfff8; // was 0x7ff8

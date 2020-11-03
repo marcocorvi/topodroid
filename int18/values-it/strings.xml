@@ -12,7 +12,7 @@ C\'e\' nulla da fare per una nuova installazione della app su Android 11.\n
 Per una vecchia installazione, prima di un aggornamento di sistema ad Android 11,\n
  fate un salvataggio dei vostri dati, copiate la vostra cartella "Topodroid" sotto "Documents" e fate ripartire Topodroid.\n\n 
 ATTENZIONE: Dalla v. 5.0.60 "TopoDroid" usa la cartella sotto "Documents", se esiste, anche su Android 10 e precedenti.\n
-Tap "Move" to move your TopoDroid folder to Documents. You must force-stop the app and clear-storage before restarting TopoDroid.\n\n
+Tap "Move" to move your TopoDroid folder to Documents.\n\n
 Tap "Close" not to take any action.
 </string>
     <string name="button_no_again">Non chiedere di nuovo</string>
@@ -1183,8 +1183,8 @@ Tap "Close" not to take any action.
   <string name="pref_wait_conn_summary">Attesa che i dati siano pronti [ms]</string>
   <string name="pref_conn_mode_title">Tipo connessione</string>
   <string name="pref_conn_mode_summary">Tipo di connessione dati col DistoX</string>
-  <string name="pref_auto_reconnect_title">Auto reconnessione</string>
-  <string name="pref_auto_reconnect_summary">Riconnetti al DistoX quando viene persa</string>
+  <!-- UNUSED string name="pref_auto_reconnect_title">Auto reconnessione</string -->
+  <!-- UNUSED string name="pref_auto_reconnect_summary">Riconnetti al DistoX quando viene persa</string -->
   <string name="pref_second_distox_title">Rilievo con 2 DistoX</string>
   <string name="pref_second_distox_summary">Rilevare con 2 DistoX</string>
   <string name="pref_auto_pair_title">Associazione automatica</string>

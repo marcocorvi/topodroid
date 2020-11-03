@@ -315,7 +315,7 @@ public class TDPrefKey
     // "DISTOX_DEVICE_TYPE",
     "DISTOX_BLUETOOTH",       // 0 * // whether to check bluetooth on start
     "DISTOX_CONN_MODE",              // data download mode [on-demand, continuous]
-    "DISTOX_AUTO_RECONNECT",         // whether to try to reconnect if DistoX is lost [continuos mode]
+    // "DISTOX_AUTO_RECONNECT",         // whether to try to reconnect if DistoX is lost [continuos mode]
     "DISTOX_HEAD_TAIL",       // 3 // whether to read head-tail to get the number of packets to download
     "DISTOX_SOCK_TYPE",            // socket type
     // "DISTOX_COMM_RETRY",        // number of socket connection attempts
@@ -332,7 +332,7 @@ public class TDPrefKey
     // R.string.pref_device_type_title,
     R.string.pref_checkBT_title,
     R.string.pref_conn_mode_title,
-    R.string.pref_auto_reconnect_title,
+    // R.string.pref_auto_reconnect_title,
     R.string.pref_head_tail_title,
     R.string.pref_sock_type_title,
     // R.string.pref_comm_retry_title,
@@ -349,7 +349,7 @@ public class TDPrefKey
     // R.string.pref_device_type_summary,
     R.string.pref_checkBT_summary,
     R.string.pref_conn_mode_summary,
-    R.string.pref_auto_reconnect_summary,
+    // R.string.pref_auto_reconnect_summary,
     R.string.pref_head_tail_summary,
     R.string.pref_sock_type_summary,
     // R.string.pref_comm_retry_summary,
@@ -366,7 +366,7 @@ public class TDPrefKey
     // TDString.ONE,
     TDString.ONE,
     TDString.ZERO,
-    FALSE,
+    // TRUE,
     FALSE,
     TDString.ZERO,
     // TDString.ONE,

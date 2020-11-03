@@ -28,6 +28,7 @@ import java.io.FilenameFilter;
 import java.util.List;
 import java.util.Locale;
 
+import android.content.Context;
 import android.os.Environment;
 // import android.os.Handler;
 // import android.os.Message;
@@ -189,7 +190,7 @@ public class TDPath
   // when this is called basedir exists and is writable
   static boolean checkBasePath( String path, String basedir )
   {
-    // Log.v("DistoX-PATH", "BASE " + PATH_BASEDIR + " next " + basedir + " path " + path );
+    // Log.v("DistoX-PATH11", "check base path: BASE " + PATH_BASEDIR + " basedir " + basedir + " path " + path );
     setBaseDir( basedir );
     File dir = new File( PATH_BASEDIR, path ); // DistoX-SAF
     if ( ! dir.exists() ) {
@@ -211,6 +212,7 @@ public class TDPath
 
   static boolean moveToPath11()
   { 
+    // Log.v("DistoX-PATH11", "move to path11");
     File path11 = new File( EXTERNAL_STORAGE_PATH_11, "TopoDroid" );
     if ( path11.exists() ) return false;
 
@@ -220,8 +222,10 @@ public class TDPath
     File dir11 = new File( EXTERNAL_STORAGE_PATH_11 );
     if ( ! dir11.exists() ) dir11.mkdirs();
     path.renameTo( path11 );
+
     setBaseDir( EXTERNAL_STORAGE_PATH_11 );
     TopoDroidApp.setCWDPreference( "TopoDroid", PATH_BASEDIR );
+    setDefaultPaths();  
     return true;
   }
 
@@ -234,6 +238,7 @@ public class TDPath
     PATH_DEFAULT = PATH_BASEDIR + "/TopoDroid/";
     PATH_BASE    = PATH_DEFAULT;
     TDLog.Log( TDLog.LOG_PATH, "set basedir path " + PATH_BASEDIR );
+    // Log.v("DistoX-PATH11", "basedir " + basedir + "has path11 " + hasPath11() + " " + PATH_BASEDIR );
   }
 
   private static void setDefault()
@@ -257,7 +262,7 @@ public class TDPath
     if ( PATH_BASEDIR == null ) {
       // PATH_BASEDIR = hasPath11() ? EXTERNAL_STORAGE_PATH_11 : TDInstance.context.getExternalFilesDir( null ).getPath();
       setBaseDir( TDInstance.context.getExternalFilesDir( null ).getPath() );
-      Log.v("DistoX-PATH", "[1] BaseDir " + PATH_BASEDIR + " Default " + PATH_DEFAULT + " hasPath11 " + hasPath11() );
+      // Log.v("DistoX-PATH11", "set paths: BaseDir " + PATH_BASEDIR + " Default " + PATH_DEFAULT + " hasPath11 " + hasPath11() );
       setDefaultPaths();
     }
 
@@ -272,7 +277,7 @@ public class TDPath
         if ( ! dir.exists() ) dir.mkdirs();
         if ( dir.exists() && dir.canWrite() ) {
           setBaseDir( base );
-          Log.v("DistoX-PATH", "[2] BaseDir " + PATH_BASEDIR + " Default " + PATH_DEFAULT + " hasPath11 " + hasPath11() );
+          // Log.v("DistoX-PATH11", "[2] BaseDir " + PATH_BASEDIR + " Default " + PATH_DEFAULT + " hasPath11 " + hasPath11() );
           setDefaultPaths();
         }
       } catch ( SecurityException e ) { }
@@ -308,7 +313,7 @@ public class TDPath
     // APP_TLX_PATH = PATH_BASE + "tlx/";
     // checkDirs( APP_TLX_PATH );
 
-    Log.v("DistoX-PATH", "[2] BaseDir " + PATH_BASEDIR + " Default " + PATH_DEFAULT + " hasPath11 " + hasPath11() );
+    // Log.v("DistoX-PATH11", "[3] BaseDir " + PATH_BASEDIR + " Default " + PATH_DEFAULT + " hasPath11 " + hasPath11() );
 
     PATH_TDCONFIG = PATH_BASE + "thconfig/"; // FIXME checkDirs( PATH_TDCONFIG );
     PATH_THCONFIG = PATH_TDCONFIG;
@@ -354,7 +359,7 @@ public class TDPath
   static void setDefaultPaths()
   {
     // Log.v("DistoX-SAF", "default path " + PATH_DEFAULT );
-    Log.v("DistoX", "set default paths from " + PATH_DEFAULT );
+    // Log.v("DistoX-PATH11", "set default paths from " + PATH_DEFAULT );
 
     PATH_BIN  = PATH_DEFAULT + "bin/";
     PATH_MAN  = PATH_DEFAULT + "man/";   
@@ -377,7 +382,7 @@ public class TDPath
 
   private static void checkDefaultPaths()
   {
-    Log.v("DistoX", "check default paths from " + PATH_DEFAULT );
+    // Log.v("DistoX", "check default paths from " + PATH_DEFAULT );
     checkDirs( PATH_BIN );
     checkDirs( PATH_MAN );
     checkDirs( PATH_CCSV );
@@ -690,6 +695,7 @@ public class TDPath
 
   static void symbolsCheckDirs()
   {
+    // Log.v("DistoX-PATH11", "check symbols dir " + APP_SYMBOL_PATH );
     checkDirs( APP_SYMBOL_PATH );
     checkDirs( APP_POINT_PATH );
     checkDirs( APP_LINE_PATH );
@@ -860,4 +866,5 @@ public class TDPath
     }
   }
    * END_SKETCH_3D */
+
 }

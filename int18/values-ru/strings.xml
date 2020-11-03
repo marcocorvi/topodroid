@@ -12,8 +12,7 @@
 Для существующей установки перед обновлением системы до Android-11 сделайте резервную копию своих данных, скопируйте папку "TopoDroid" в кталог "Documents"
 и принудительно перезапустите TopoDroid.\n\n
 ВНИМАНИЕ. Начиная с v. 5.0.60 "TopoDroid" использует каталог "Documents", если таковой существует, даже на Android-10 и ниже.\n\n
-Нажмите "Перенметить" чтобы перенести каталог TopoDroid в папку Documents.
-You must force-stop the app and clear-storage before restarting TopoDroid.\n\n
+Нажмите "Перенметить" чтобы перенести каталог TopoDroid в папку Documents.\n\n
 Нажмите "Закрыть" чтобы не выполнять никаких действий.
 </string>
     <string name="button_no_again">Не спрашивать о этом снова.</string>
@@ -1192,8 +1191,8 @@ You must force-stop the app and clear-storage before restarting TopoDroid.\n\n
   <string name="pref_wait_conn_summary">Время ожидания до следующей попытки скачивания данных [мс]</string>
   <string name="pref_conn_mode_title">Режим передачи данных</string>
   <string name="pref_conn_mode_summary">Режим подключения к DistoX для передачи данных</string>
-  <string name="pref_auto_reconnect_title">Авто подключение</string>
-  <string name="pref_auto_reconnect_summary">Переподключиться при потере соединения с DistoX</string>
+  <!-- UNUSED string name="pref_auto_reconnect_title">Авто подключение</string -->
+  <!-- UNUSED string name="pref_auto_reconnect_summary">Переподключиться при потере соединения с DistoX</string -->
   <string name="pref_second_distox_title">Съёмка двумя DistoX</string>
   <string name="pref_second_distox_summary">Топосъёмка с одновременным использованием двух DistoX</string>
   <string name="pref_auto_pair_title">Автоматическое сопряжение</string>

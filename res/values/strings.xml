@@ -12,7 +12,7 @@ There is nothing to do for a new install of the app on Android-11.\n
 For an old install, before a system upgrade to Android-11, make a backup of your data, copy your "TopoDroid" folder under "Documents"
 and hard-restart TopoDroid.\n\n
 WARNING. From v. 5.0.60 "TopoDroid" uses the folder under Documents if it exists, even on Android-10 and below.\n\n
-Tap <b>Move</b> to move your TopoDroid folder to Documents. <b>You must force-stop the app and clear-storage before restarting TopoDroid</b>.\n\n
+Tap <b>Move</b> to move your TopoDroid folder to Documents.\n\n
 Tap <b>Close</b> not to take any action.
 </string>
     <string name="button_no_again">Don\'t ask again</string>
@@ -1219,8 +1219,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_wait_conn_summary">Delay waiting for data to be ready [ms]</string>
   <string name="pref_conn_mode_title">Data connection mode</string>
   <string name="pref_conn_mode_summary">Mode of DistoX-connection for data download</string>
-  <string name="pref_auto_reconnect_title">Auto reconnect</string>
-  <string name="pref_auto_reconnect_summary">Reconnect when connection is lost</string>
+  <!-- UNUSED string name="pref_auto_reconnect_title">Auto reconnect</string -->
+  <!-- UNUSED string name="pref_auto_reconnect_summary">Reconnect when connection is lost</string -->
   <string name="pref_second_distox_title">Two-DistoX survey</string>
   <string name="pref_second_distox_summary">Surveying with two DistoX</string>
   <string name="pref_auto_pair_title">Auto pairing</string>

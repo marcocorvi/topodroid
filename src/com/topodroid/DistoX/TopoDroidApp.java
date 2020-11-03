@@ -413,7 +413,7 @@ public class TopoDroidApp extends Application
   {
     // return mComm != null && mComm.mBTConnected;
     // return mComm != null && mComm.mBTConnected && mComm.mCommThread != null;
-    return mComm != null && mComm.isConnected() && ! mComm.checkCommThreadNull(); // FIXME BLE to check
+    return mComm != null && mComm.isConnected() && ! mComm.isCommThreadNull(); // FIXME BLE to check
   }
 
   void disconnectRemoteDevice( boolean force )
@@ -646,6 +646,7 @@ public class TopoDroidApp extends Application
     if ( ! TDPath.hasPath11() ) {
       TDInstance.cbd = prefHlp.getString( "DISTOX_CBD", TDPath.getBaseDir() );
     }
+    // Log.v("DistoX-PATH11", "cwd " + TDInstance.cwd + " cbd " + TDInstance.cbd );
     TDPath.setPaths( TDInstance.cwd, TDInstance.cbd );
 
     // TDLog.Profile("TDApp DB"); 

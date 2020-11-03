@@ -12,7 +12,7 @@ There is nothing to do for a new install of the app on Android-11.\n
 For an old install, before a system upgrade to Android-11, make a backup of your data, copy your "TopoDroid" folder under "Documents"
 and hard-restart TopoDroid.\n\n
 WARNING. From v. 5.0.60 "TopoDroid" uses the folder under Documents if it exists, even on Android-10 and below.\n\n
-Tap "Move" to move your TopoDroid folder to Documents. You must force-stop the app and clear-storage before restarting TopoDroid.\n\n
+Tap "Move" to move your TopoDroid folder to Documents.\n\n
 Tap "Close" not to take any action.
 </string -->
     <!-- TODO string name="button_no_again">Don\'t ask again</string -->
@@ -1207,8 +1207,8 @@ Tap "Close" not to take any action.
   <string name="pref_wait_conn_summary">延迟等待数据准备好 [ms]</string>
   <string name="pref_conn_mode_title">数据连接方式</string>
   <string name="pref_conn_mode_summary">数据下载的远程连接模式</string>
-  <string name="pref_auto_reconnect_title">自动连线</string>
-  <string name="pref_auto_reconnect_summary">当连接丢失时重新连接</string>
+  <!-- UNUSED string name="pref_auto_reconnect_title">自动连线</string -->
+  <!-- UNUSED string name="pref_auto_reconnect_summary">当连接丢失时重新连接</string -->
   <string name="pref_second_distox_title">双DistoX测量</string>
   <string name="pref_second_distox_summary">用两部DistoX进行测量</string>
   <string name="pref_auto_pair_title">自动配对</string>

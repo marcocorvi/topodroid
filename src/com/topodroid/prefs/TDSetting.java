@@ -232,7 +232,7 @@ public class TDSetting
 
   public static boolean mZ6Workaround  = true;
 
-  public static boolean mAutoReconnect = false;
+  public static boolean mAutoReconnect = true;
   public static boolean mSecondDistoX  = false;
   public static boolean mHeadTail      = false; // whether to use readA3HeadTail to download the data (A3 only)
   public static boolean mAutoPair      = false;
@@ -808,13 +808,12 @@ public class TDSetting
     String[] keyDevice = TDPrefKey.DEVICE;
     String[] defDevice = TDPrefKey.DEVICEdef;
     mConnectionMode = tryInt( prefs,    keyDevice[ 1],      defDevice[ 1] );   // DISTOX_CONN_MODE choice: 0, 1, 2
-    mAutoReconnect  = prefs.getBoolean( keyDevice[ 2], bool(defDevice[ 2]) );  // DISTOX_AUTO_RECONNECT
-    mHeadTail       = prefs.getBoolean( keyDevice[ 3], bool(defDevice[ 3]) );  // DISTOX_HEAD_TAIL
-    mSockType       = tryInt( prefs,    keyDevice[ 4], mDefaultSockStrType );  // DISTOX_SOCK_TYPE choice: 0, 1, (2, 3)
-    // mCommRetry      = tryInt( prefs, keyDevice[  ], bool(defDevice[  ]) );  // DISTOX_COMM_RETRY
-    mZ6Workaround   = prefs.getBoolean( keyDevice[ 5], bool(defDevice[ 5])  ); // DISTOX_Z6_WORKAROUND
-    mAutoPair       = prefs.getBoolean( keyDevice[ 6], bool(defDevice[ 6]) );  // DISTOX_AUTO_PAIR
-    mConnectFeedback = tryInt( prefs,   keyDevice[ 7],      defDevice[ 7] );   // DISTOX_CONNECT_FEEDBACK
+    // mAutoReconnect  = prefs.getBoolean( keyDevice[ 2], bool(defDevice[ 2]) );  // DISTOX_AUTO_RECONNECT
+    mHeadTail       = prefs.getBoolean( keyDevice[ 2], bool(defDevice[ 2]) );  // DISTOX_HEAD_TAIL
+    mSockType       = tryInt( prefs,    keyDevice[ 3], mDefaultSockStrType );  // DISTOX_SOCK_TYPE choice: 0, 1, (2, 3)
+    mZ6Workaround   = prefs.getBoolean( keyDevice[ 4], bool(defDevice[ 4])  ); // DISTOX_Z6_WORKAROUND
+    mAutoPair       = prefs.getBoolean( keyDevice[ 5], bool(defDevice[ 5]) );  // DISTOX_AUTO_PAIR
+    mConnectFeedback = tryInt( prefs,   keyDevice[ 6],      defDevice[ 6] );   // DISTOX_CONNECT_FEEDBACK
 
     String[] keyGDev = TDPrefKey.GEEKDEVICE;
     String[] defGDev = TDPrefKey.GEEKDEVICEdef;
@@ -1302,24 +1301,20 @@ public class TDSetting
       mCheckBT  = tryIntValue( hlp, k, v, def[0] ); 
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_CONN_MODE (choice)
       mConnectionMode = tryIntValue( hlp, k, v, def[1] ); 
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_AUTO_RECONNECT (bool)
-      mAutoReconnect = tryBooleanValue( hlp, k, v, bool(def[2]) );
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_HEAD_TAIL (bool)
-      mHeadTail = tryBooleanValue( hlp, k, v, bool(def[3]) ); 
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_SOCK_TYPE (choice)
+    // } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_AUTO_RECONNECT (bool)
+    //   mAutoReconnect = tryBooleanValue( hlp, k, v, bool(def[2]) );
+    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_HEAD_TAIL (bool)
+      mHeadTail = tryBooleanValue( hlp, k, v, bool(def[2]) ); 
+    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_SOCK_TYPE (choice)
       mSockType = tryIntValue( hlp, k, v, mDefaultSockStrType ); 
-    // } else if ( k.equals( key[ ] ) ) { // DISTOX_COMM_RETRY
-    //   mCommRetry = tryIntValue( hlp, k, v, def[ ] );
-    //   if ( mCommRetry < 1 ) { mCommRetry = 1; ret = Integer.toString( mCommRetry ); }
-    //   if ( mCommRetry > 5 ) { mCommRetry = 5; ret = Integer.toString( mCommRetry ); }
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_Z6_WORKAROUND (bool)
-      mZ6Workaround = tryBooleanValue( hlp, k, v, bool(def[5]) );
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_AUTO_PAIR (bool)
-      mAutoPair = tryBooleanValue( hlp, k, v, bool(def[6]) );
+    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_Z6_WORKAROUND (bool)
+      mZ6Workaround = tryBooleanValue( hlp, k, v, bool(def[4]) );
+    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_AUTO_PAIR (bool)
+      mAutoPair = tryBooleanValue( hlp, k, v, bool(def[5]) );
       // hlp.getApp().checkAutoPairing();
       TopoDroidApp.checkAutoPairing();
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_CONNECT_FEEDBACK
-      mConnectFeedback = tryIntValue( hlp, k, v, def[7] );
+    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_CONNECT_FEEDBACK
+      mConnectFeedback = tryIntValue( hlp, k, v, def[6] );
     } else {
       TDLog.Error("missing DEVICE key: " + k );
     }
@@ -2508,7 +2503,8 @@ public class TDSetting
       pw.printf(Locale.US, "BT: check %d, autopair %c \n", mCheckBT, tf(mAutoPair) );
       pw.printf(Locale.US, "Socket: type \"%s\" %d, delay %d\n", mDefaultSockStrType, mSockType, mConnectSocketDelay );
       pw.printf(Locale.US, "Connection mode %d Z6 %c, feedback %d\n", mConnectionMode, tf(mZ6Workaround), mConnectFeedback );
-      pw.printf(Locale.US, "Communication autoreconnect %c, DistoX-B %c, retry %d, head/tail %c\n", tf(mAutoReconnect), tf(mSecondDistoX), mCommRetry, tf(mHeadTail) );
+      // pw.printf(Locale.US, "Communication autoreconnect %c, DistoX-B %c, retry %d, head/tail %c\n", tf(mAutoReconnect), tf(mSecondDistoX), mCommRetry, tf(mHeadTail) );
+      pw.printf(Locale.US, "Communication DistoX-B %c, retry %d, head/tail %c\n", tf(mSecondDistoX), mCommRetry, tf(mHeadTail) );
       pw.printf(Locale.US, "Packet log %c\n", tf(mPacketLog) );
       pw.printf(Locale.US, "Wait: laser %d, shot %d, data %d, conn %d, command %d\n", mWaitLaser, mWaitShot, mWaitData, mWaitConn, mWaitCommand );
 
@@ -2844,10 +2840,10 @@ public class TDSetting
         if ( line.startsWith("Communication") ) {
           if ( all ) {
             if ( vals.length > 8 ) {
-              mAutoReconnect = getBoolean( vals, 2 );  setPreference( editor, "DISTOX_AUTO_RECONNECT", mAutoReconnect );
-              mSecondDistoX  = getBoolean( vals, 4 );  setPreference( editor, "DISTOX_SECOND_DISTOX", mSecondDistoX );
-              mCommRetry     = getInt( vals, 6, 1 );      setPreference( editor, "DISTOX_COMM_RETRY", mCommRetry );
-              mHeadTail      = getBoolean( vals, 8 ); setPreference( editor, "DISTOX_HEAD_TAIL",  mHeadTail );
+              // mAutoReconnect = getBoolean( vals, 2 );  setPreference( editor, "DISTOX_AUTO_RECONNECT", mAutoReconnect );
+              mSecondDistoX  = getBoolean( vals, 2 );  setPreference( editor, "DISTOX_SECOND_DISTOX", mSecondDistoX );
+              mCommRetry     = getInt( vals, 4, 1 );      setPreference( editor, "DISTOX_COMM_RETRY", mCommRetry );
+              mHeadTail      = getBoolean( vals, 6 ); setPreference( editor, "DISTOX_HEAD_TAIL",  mHeadTail );
             }
           }
           continue;

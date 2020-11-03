@@ -239,9 +239,10 @@ class DistoXComm extends TopoDroidComm
   /** create a socket (not connected)
    *  and a connection protocol on it
    */
-  private void createSocket( String address, int port )
+  private void createSocket( String address )
   {
     if ( address == null ) return;
+    final int port = 1;
     // TDLog.Log( TDLog.LOG_COMM, "create Socket() addr " + address + " mAddress " + mAddress);
     if ( mProtocol == null || ! address.equals( mAddress ) ) {
       if ( mProtocol != null /* && ! address.equals( mAddress ) */ ) {
@@ -401,7 +402,7 @@ class DistoXComm extends TopoDroidComm
   {
     if ( address == null ) return false;
     // TDLog.Log( TDLog.LOG_COMM, "connect socket(): " + address );
-    createSocket( address, 1 ); // default port == 1
+    createSocket( address );
 
     // DEBUG
     getUuids();
@@ -409,12 +410,13 @@ class DistoXComm extends TopoDroidComm
     if ( mBTSocket != null ) {
       DeviceUtil.cancelDiscovery();
       setupBTReceiver( data_type );
+      TDUtil.yieldDown( 100 ); // wait 100 msec
 
-      int port = 0;
-      while ( ! mBTConnected && port < TDSetting.mCommRetry ) {
-        ++ port;
+      int trial = 0;
+      while ( ! mBTConnected && trial < TDSetting.mCommRetry ) {
+        ++ trial;
         if ( mBTSocket != null ) {
-          // TDLog.Log( TDLog.LOG_COMM, "connect socket() try port " + port );
+          // TDLog.Log( TDLog.LOG_COMM, "connect socket() trial " + trial );
           try {
             // TDLog.Log( TDLog.LOG_BT, "[3] device state " + mBTDevice.getBondState() );
             mBTSocket.connect();
@@ -427,16 +429,16 @@ class DistoXComm extends TopoDroidComm
             //     TDToast.makeBad( R.string.connection_error  );
             //   }
             // } );
-            TDLog.Error( "connect socket() (port " + port + ") IO error " + e.getMessage() );
+            TDLog.Error( "connect socket() (trial " + trial + ") IO error " + e.getMessage() );
             // TDLog.LogStackTrace( e );
             closeSocket();
             // mBTSocket = null;
           }
         }
-        if ( mBTSocket == null && port < TDSetting.mCommRetry ) {
-          createSocket( address, port );
+        if ( mBTSocket == null && trial < TDSetting.mCommRetry ) { // retry: create the socket again
+          createSocket( address );
         }
-        // TDLog.Log( TDLog.LOG_COMM, "connect socket() port " + port + " connected " + mBTConnected );
+        // TDLog.Log( TDLog.LOG_COMM, "connect socket() trial " + trial + " connected " + mBTConnected );
       }
     } else {
       TDLog.Error( "connect socket() null socket");
@@ -523,7 +525,7 @@ class DistoXComm extends TopoDroidComm
    */
   boolean writeCoeff( String address, byte[] coeff )
   {
-    if ( ! checkCommThreadNull() ) return false;
+    if ( ! isCommThreadNull() ) return false;
     boolean ret = false;
     if ( coeff != null ) {
       mCoeff = coeff;
@@ -545,7 +547,7 @@ class DistoXComm extends TopoDroidComm
    */
   boolean readCoeff( String address, byte[] coeff )
   {
-    if ( ! checkCommThreadNull() ) return false;
+    if ( ! isCommThreadNull() ) return false;
     boolean ret = false;
     if ( coeff != null ) {
       if ( connectSocketAny( address ) ) {
@@ -570,6 +572,7 @@ class DistoXComm extends TopoDroidComm
   {
     byte[] ret = null;
     if ( connectSocketAny( address ) ) {
+      TDLog.Log( TDLog.LOG_COMM, "DistoX read memory " + addr + " socket ok" );
       ret = mProtocol.readMemory( addr );
       // FIXME ASYNC new CommandThread( mProtocol, READ_MEMORY_LOWLEVEL, addr ) Note...
     }
@@ -606,7 +609,7 @@ class DistoXComm extends TopoDroidComm
 
   int downloadData( String address, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
   {
-    if ( ! checkCommThreadNull() ) {
+    if ( ! isCommThreadNull() ) {
       TDLog.Error( "download data: RFcomm thread not null");
       return TopoDroidProtocol.DISTOX_ERR_CONNECTED;
     }

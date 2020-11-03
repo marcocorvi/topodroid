@@ -548,14 +548,14 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       // makeLst( cat, key[  ], tit[  ], dsc[  ], X, def[  ], R.array.deviceType, R.array.deviceTypeValue, ctx, hlp ),
       makeLst( cat, key[ 0], tit[ 0], dsc[ 0], N, def[ 0], R.array.deviceBT, R.array.deviceBTValue, ctx, hlp ),
       makeLst( cat, key[ 1], tit[ 1], dsc[ 1], B, def[ 1], R.array.connMode, R.array.connModeValue, ctx, hlp ),
+      // makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], B, def[ 2],          ctx, hlp ),
       makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], B, def[ 2],          ctx, hlp ),
-      makeCbx( cat, key[ 3], tit[ 3], dsc[ 3], B, def[ 3],          ctx, hlp ),
-      makeLst( cat, key[ 4], tit[ 4], dsc[ 4], B, def[ 4], R.array.sockType, R.array.sockTypeValue, ctx, hlp ),
+      makeLst( cat, key[ 3], tit[ 3], dsc[ 3], B, def[ 3], R.array.sockType, R.array.sockTypeValue, ctx, hlp ),
       // makeEdt( cat, key[  ], tit[  ], dsc[  ], X, def[  ], INTEGER, ctx, hlp ),
-      makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], N, def[ 5],          ctx, hlp ),
-      makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], A, def[ 6],          ctx, hlp ),
-      makeLst( cat, key[ 7], tit[ 7], dsc[ 7], E, def[ 7], R.array.feedbackMode, R.array.feedbackModeValue, ctx, hlp ),
-      makeFwd( cat, key[ 8], tit[ 8],          B,                   ctx, hlp )
+      makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], N, def[ 4],          ctx, hlp ),
+      makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], A, def[ 5],          ctx, hlp ),
+      makeLst( cat, key[ 6], tit[ 6], dsc[ 6], E, def[ 6], R.array.feedbackMode, R.array.feedbackModeValue, ctx, hlp ),
+      makeFwd( cat, key[ 7], tit[ 7],          B,                   ctx, hlp )
     };
   }
 

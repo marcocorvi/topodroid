@@ -202,11 +202,13 @@ class TopoDroidComm
       }
       if ( ! mHasG ) {
         TDLog.Error( "data without G packet " + nReadPackets /* getNrReadPackets() */ );
-        TopoDroidApp.mActivity.runOnUiThread( new Runnable() {
-          public void run() {
-            TDToast.makeBG("data without G: " + nReadPackets /* getNrReadPackets() */, TDColor.FIXED_RED );
-          }
-        } );
+        // if ( TopoDroidApp.mActivity != null ) { // skip toast
+        //   TopoDroidApp.mActivity.runOnUiThread( new Runnable() {
+        //     public void run() {
+        //       TDToast.makeBG("data without G: " + nReadPackets /* getNrReadPackets() */, TDColor.FIXED_RED );
+        //     }
+        //   } );
+        // }
       }
       mHasG = false;
     } else if ( res == TopoDroidProtocol.DISTOX_PACKET_REPLY ) {
@@ -319,7 +321,7 @@ class TopoDroidComm
     closeProtocol();
   }
 
-  protected boolean checkCommThreadNull( ) { return ( mCommThread == null ); }
+  protected boolean isCommThreadNull( ) { return ( mCommThread == null ); }
 
   protected boolean sendCommand( int cmd )
   {

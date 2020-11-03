@@ -123,7 +123,7 @@ class DistoX310Comm extends DistoXComm
   @Override
   boolean toggleCalibMode( String address, int type )
   {
-    if ( ! checkCommThreadNull() ) {
+    if ( ! isCommThreadNull() ) {
       TDLog.Error( "toggle Calib Mode address " + address + " not null RFcomm thread" );
       return false;
     }
@@ -158,7 +158,7 @@ class DistoX310Comm extends DistoXComm
   // X310 data memory is read-only
   // public int resetX310Memory( String address, int from, int to )
   // {
-  //   if ( ! checkCommThreadNull() ) return -1;
+  //   if ( ! isCommThreadNull() ) return -1;
   //   int n = 0;
   //   if ( connectSocketAny( address ) ) {
   //     n = mProtocol.resetX310Memory( from, to );
@@ -169,7 +169,7 @@ class DistoX310Comm extends DistoXComm
 
   int readX310Memory( String address, int from, int to, List< MemoryOctet > memory )
   {
-    if ( ! checkCommThreadNull() ) return -1;
+    if ( ! isCommThreadNull() ) return -1;
     int n = 0;
     if ( connectSocketAny( address ) ) {
       DistoX310Protocol protocol = (DistoX310Protocol)mProtocol;
