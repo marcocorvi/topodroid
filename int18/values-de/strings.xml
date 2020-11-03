@@ -5,19 +5,18 @@
     <string name="user_man_ok">Übersetztes Handbuch installiert</string>
     <string name="user_man_fail">Fehler beim installieren des übersetzten Handbuchs</string>
 
-    <!-- TODO string name="path11_title">IMPORTANT - Android 11</string -->
-    <!-- TODO string name="path11_text">
-Starting with Android 11 the app folders must be under "Documents".\n
-There is nothing to do for a new install of the app on Android-11.\n
-For an old install, before a system upgrade to Android-11, make a backup of your data, copy your "TopoDroid" folder under "Documents"
-and hard-restart TopoDroid.\n\n
-WARNING. From v. 5.0.60 "TopoDroid" uses the folder under Documents if it exists, even on Android-10 and below.\n\n
-Tap "Move" to move your TopoDroid folder to Documents.\n\n
-Tap "Close" not to take any action.
-</string -->
-    <!-- TODO string name="button_no_again">Don\'t ask again</string -->
-    <!-- TODO string name="path11_move">Moved to folder Documents/TopoDroid.\nPlease restart TopoDroid</string -->
-    <!-- TODO string name="path11_not_move">Failed to move to folder Documents/TopoDroid</string -->
+    <string name="path11_title">WICHTIG - Android 11</string>
+    <string name="path11_text">
+Ab Android 11, der TopoDroid Ordner muss unter "Dokumente" sein.\n
+Bei neuen Installationen unter Android 11 muss nichts unternommen werden.\n
+Für bestehende Installationen, mache einen BAckup vor dem Upgrade auf Android 11 und kopiere den "TopoDroid"-Ordner danach nach "Dokumente" und starte TopoDroid neu.\n\n
+WARNUNG. Ab v.5.0.60 wird ein "TopoDroid"-Ordner automatisch verwendet wenn es einen unter den Dokumenten gibt, auch für Android vor Version 11.\n\n
+"Verschieben" um den TopoDroid-Ordner in den Dokumente-Ordner zu verschieben.\n\n
+"Schliessen" um nichts zu verändern.
+</string>
+    <string name="button_no_again">Nicht nochmals fragen.</string>
+    <string name="path11_move">Verschoben nach Documents/TopoDroid.\nBitte TopoDroid neu starten.</string>
+    <string name="path11_not_move">Fehler beim verschieben nach Documents/TopoDroid</string>
 
     <string name="app_name">TopoDroid</string>
     <string name="tdm_title">TopoDroid Manager</string>
@@ -305,7 +304,7 @@ Tap "Close" not to take any action.
     <string name="bad_line">Ungültiger Linientyp</string>
     <string name="bad_point">Ungültiger Punkttyp</string>
 <!-- ERRORS: MISSING SOMETHING -->
-    <!-- TODO string name="no_audio">No audio record</string -->
+    <string name="no_audio">Keine Audio-Aufnahme</string>
     <string name="no_bt">Bluetooth nicht aktiv</string>
     <string name="no_calib">Keine Kalibrierung</string>
     <string name="no_calib_check">Keine Kalibrierungs-Testmessung</string>
@@ -346,7 +345,7 @@ Tap "Close" not to take any action.
     <string name="menu_3d">3D</string>
     <string name="menu_about">ÜBER</string>
     <string name="menu_area">FLÄCHE</string>
-    <!-- TODO string name="menu_audio">AUDIO</string -->
+    <string name="menu_audio">AUDIO</string>
     <!-- UNUSED string name="menu_attach">VERBINDEN</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
@@ -391,7 +390,7 @@ Tap "Close" not to take any action.
     <string name="menu_zoom_fit">AUF SKIZZE ZOOMEN</string>
 
     <!-- FIXED_ZOOM -->
-    <!-- TODO string name="zoom_fixed">Graph-paper</string -->
+    <string name="zoom_fixed">Papier-Massstab</string>
     
     <string name="ble_scan_failed">BLE scan fehlgeschlagen</string>
     <string name="ble_gatt_failure">BLE Fehler</string>
@@ -632,7 +631,7 @@ Tap "Close" not to take any action.
     <string name="ask_manual_update">Übersetztes Handbuch updaten?\nAktuell v%1$d Installiert v%2$d</string>
 
     <!-- UNUSED string name="button_add"       >Erstellen       </string -->
-    <!-- TODO string name="button_apply"     >Apply</string -->
+    <string name="button_apply"     >Anwenden</string>
     <string name="button_back"      >Zurück    </string>
     <string name="button_cancel"    >Abbrechen </string>
     <string name="button_change"    >Ändern    </string>
@@ -675,7 +674,7 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="button_regroup"   >Umgruppieren   </string -->
     <string name="button_dump"      >Lesen</string>
     <string name="button_rename"    >Umbenennen    </string>
-    <string name="button_renumber"  >Neu nummerieren</string>
+    <string name="button_renumber"  >Umnummerieren</string>
     <string name="button_bedding"   >Streichen und Fallen</string>
     <string name="button_replace"   >Ersetzen   </string>
     <string name="button_reset"     >Zurücksetzen</string>
@@ -693,7 +692,7 @@ Tap "Close" not to take any action.
     <string name="button_split"     >Aufteilen     </string>
     <string name="button_station"   >Zentrieren bei</string>
     <string name="button_store"     >Speichern</string>
-    <string name="button_swap"      >Stationen vertauschen</string>
+    <string name="button_swap"      >Tausche Stationen</string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
     <string name="button_upload"    >Schreiben</string>
@@ -737,7 +736,7 @@ Tap "Close" not to take any action.
     <string name="popup_do_gm_data">Testmessung</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
-    <!-- TODO string name="btn_export">Export</string -->
+    <string name="btn_export">Exportieren</string>
     <string name="btn_import">Importieren</string>
     <string name="btn_install">Neu installieren</string>
 
@@ -794,7 +793,7 @@ Tap "Close" not to take any action.
     <string name="help_measure_type">Messmodus: Fixpunkt oder Polygonzug</string>
     <string name="help_measure_undo">Letzten Polygonzug-Punkt löschen</string>
 
-    <!-- TODO string name="help_audio">Audio records list</string -->
+    <string name="help_audio">Audioaufnahmen</string>
     <string name="help_backups">Skizzenbackups löschen</string>
     <string name="help_calib_check">Testmessungen</string>
     <string name="help_close">Fenster schließen</string>
@@ -908,25 +907,25 @@ Tap "Close" not to take any action.
     <string name="help_add_equate">Verbindungen hinzufügen</string>
     <string name="help_equates">Verbindungspunkte</string>
 
-    <!-- TODO string name="export_bgcolor">Background color</string -->
-    <!-- TODO string name="export_config">Config file</string -->
-    <!-- TODO string name="export_csv_rawdata">Raw data</string -->
-    <!-- TODO string name="export_dxf_blocks">DXF blocks</string -->
-    <!-- TODO string name="export_georeference">Georeference</string -->
-    <!-- TODO string name="export_grid">Grid</string -->
-    <!-- TODO string name="export_linedir">Line direction</string -->
-    <!-- TODO string name="export_lrud">LRUD</string -->
-    <!-- TODO string name="export_lrud_from">LRUD at FROM station</string -->
-    <!-- TODO string name="export_maps">Maps before data</string -->
-    <!-- TODO string name="export_prefix">Cave-prefix in station names</string -->
-    <!-- TODO string name="export_roundtrip">Roundtrip</string -->
-    <!-- TODO string name="export_scale_png">Resolution</string -->
-    <!-- TODO string name="export_scale_th">Scale 1 :</string -->
-    <!-- TODO string name="export_splays">Splays</string -->
-    <!-- TODO string name="export_splays_named">Named splays</string -->
-    <!-- TODO string name="export_stations">Stations</string -->
-    <!-- TODO string name="export_swap_lr">Swap L/R</string -->
-    <!-- TODO string name="export_xvi">Xvi images</string -->
+    <string name="export_bgcolor">Hintergrundfarbe</string>
+    <string name="export_config">thconfig</string>
+    <string name="export_csv_rawdata">Rohdaten</string>
+    <string name="export_dxf_blocks">DXF Blöcke</string>
+    <string name="export_georeference">Georeferenzierung</string>
+    <string name="export_grid">Gitter</string>
+    <string name="export_linedir">Linienrichtung</string>
+    <string name="export_lrud">LRUD</string>
+    <string name="export_lrud_from">LRUD an der Ausgangsstation</string>
+    <string name="export_maps">Pläne/Karten vor Daten</string>
+    <string name="export_prefix">Name der Vermessung in Messpunkten</string>
+    <string name="export_roundtrip">Rundschluss</string>
+    <string name="export_scale_png">Auflösung</string>
+    <string name="export_scale_th">Massstab 1 :</string>
+    <string name="export_splays">Hilfslinien</string>
+    <string name="export_splays_named">Benannte Hilfslinien</string>
+    <string name="export_stations">Messpunkte</string>
+    <string name="export_swap_lr">L/R vertauschen</string>
+    <string name="export_xvi">Xvi Bilder</string>
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
     <!-- UNUSED string name="export_station_stroke">Station stroke</string -->
@@ -943,7 +942,7 @@ Tap "Close" not to take any action.
     <string name="audio_overwrite">Überschreiben ?</string>
     <!-- UNUSED string name="playing">Playing %1$s</string -->
   
-    <!-- TODO string name="import_functional">Import only functional settings</string -->
+    <string name="import_functional">Importiere nur vorhandene Einstellungen</string>
     <string name="import_lrud">LRUD importieren</string>
     <string name="import_leg_first">Messzug vor LRUD</string>
     <string name="import_diving_datamode">Tauchmodus</string>
@@ -951,7 +950,7 @@ Tap "Close" not to take any action.
 <!-- TITLES -->
     <string name="title_azimut">Seitenriss-Azimut</string>
     <string name="title_audio">Audio-Kommentar</string>
-    <!-- TODO string name="title_audio_list">Audio records</string -->
+    <string name="title_audio_list">Audioaufnahmen</string>
     <string name="title_calib">Kalibrierung</string>
     <string name="title_calib_check">Kalibrierungs-Testmessungen</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->
@@ -1015,7 +1014,7 @@ Tap "Close" not to take any action.
 
     <string name="title_settings_sketch">Einstellungen: 3D</string>
     <string name="title_settings_survey">Einstellungen: Vermessung</string>
-    <!-- TODO string name="title_settings_splay">TopoDroid splay settings</string -->
+    <string name="title_settings_splay">Einstellungen: Hilfslinien</string>
     <string name="title_settings_shot">Einstellungen: Daten</string>
     <string name="title_settings_units">Einstellungen: Einheiten</string>
     <string name="title_settings_location">Einstellungen: Koordinaten</string>
@@ -1057,7 +1056,7 @@ Tap "Close" not to take any action.
 
 <!-- PREFERENCES STRINGS CAN BE LEFT UNTRANSLATED FOR NOW -->
   <string name="pref_cat_survey">Vermessung</string>
-  <!-- TODO string name="pref_cat_splay">SPLAY DATA</string -->
+  <string name="pref_cat_splay">Hilfslinien</string>
   <string name="pref_cat_drawing">Skizzen</string>
   <string name="pref_cat_import_export">Import/Export</string>
   <string name="pref_cat_exportimport">IMPORT</string>
@@ -1126,7 +1125,6 @@ Tap "Close" not to take any action.
   <string name="pref_leg_shots_summary">Minimale Anzahl Messungen zur Erkennung als Messzug</string>
   <string name="pref_recent_timeout_title">Zeitdauer neue Daten</string>
   <string name="pref_recent_timeout_summary">Zeit nach welcher Daten nicht mehr als \'neu\' markiert werden</string>
-  <!-- TODO CHECK PREVIOUS string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent [s]</string -->
   <string name="pref_triple_shot_title">Messlinienton</string>
   <string name="pref_triple_shot_summary">Ton abspielen wenn Messlinie erkannt</string>
   <string name="pref_connect_feedback_title">Aktion bei Verbindung</string>
@@ -1381,8 +1379,8 @@ Tap "Close" not to take any action.
   <string name="pref_plane_interpolation_summary">Interpoliere die Ebene anhand der Hilfszüge</string>
   <string name="pref_plot_split_title">Skizzen aufteilen</string>
   <string name="pref_plot_split_summary">Erlaube Skizzen aufzuteilen</string>
-  <!-- TODO string name="pref_stylus_size_title">Stylus size</string -->
-  <!-- TODO string name="pref_stylus_size_summary">Stylus size [0: ignore]</string -->
+  <string name="pref_stylus_size_title">Stiftgrösse</string>
+  <string name="pref_stylus_size_summary">Stiftgrösse [0: ignoriere]</string>
   <string name="pref_fixed_thickness_title">Liniendicke Messstrecke</string>
   <string name="pref_fixed_thickness_summary">Liniendicke der Messstrecken</string>
   <!-- UNUSED string name="pref_device_title">Device</string -->
@@ -1413,8 +1411,8 @@ Tap "Close" not to take any action.
   <string name="pref_auto_xsections_summary">Querschnitte werden mit exportiert [csx/svg/dxf/xvi]</string>
   <string name="pref_saved_stations_title">Gespeicherte Messpunkte</string>
   <string name="pref_saved_stations_summary">Gespeicherte Messpunkte orange darstellen</string>
-  <!-- TODO string name="pref_legonly_update_title">Legs-only refresh</string -->
-  <!-- TODO string name="pref_legonly_update_summary">Redraw midline only on legs download</string -->
+  <string name="pref_legonly_update_title">Update nur bei neuen Messlinien</string>
+  <string name="pref_legonly_update_summary">Skizze nur aktualisieren bei neuen Messlinien</string>
   <string name="pref_loopClosure_title">Ringschluss</string>
   <string name="pref_loopClosure_summary">Ringschlussfehler Kompensation</string>
   <!-- UNUSED string name="pref_splayExtend_title">Splay extend</string -->
@@ -1614,7 +1612,7 @@ Tap "Close" not to take any action.
     <string name="overwrite">überschreiben</string>
 
     <string name="title_help">TopoDroid Manager v. %1$s</string>
-    <!-- TODO string name="title_export_settings">Settings import/export</string -->
+    <string name="title_export_settings">Einstellungen Import/Export</string>
     <string name="title_export">Project exportieren als &#8230;</string>
     <string name="title_equates">Überschneidungen</string>
     <string name="title_equate_new">Überschneidung definieren &#8230;</string>
@@ -1625,7 +1623,7 @@ Tap "Close" not to take any action.
     <string name="title_surveys">Vermessungen</string>
 
     <string name="exported">Gespeichert als %1$s</string>
-  <!-- TODO string name="imported_settings">Imported settings</string -->
+    <string name="imported_settings">Einstellungen importiert</string>
     <string name="export_failed">Export fehlgeschlagen</string>
 
 </resources>
