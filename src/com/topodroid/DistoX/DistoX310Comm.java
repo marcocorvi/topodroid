@@ -172,9 +172,14 @@ class DistoX310Comm extends DistoXComm
     if ( ! isCommThreadNull() ) return -1;
     int n = 0;
     if ( connectSocketAny( address ) ) {
-      DistoX310Protocol protocol = (DistoX310Protocol)mProtocol;
-      n = protocol.readX310Memory( from, to, memory );
-      // FIXME ASYNC new CommandThread( mProtocol, READ_X310_MEMORY, memory ) Note...
+      try {
+        DistoX310Protocol protocol = (DistoX310Protocol)mProtocol;
+        n = protocol.readX310Memory( from, to, memory );
+        // FIXME ASYNC new CommandThread( mProtocol, READ_X310_MEMORY, memory ) Note...
+      } catch ( ClassCastException e ) {
+        TDLog.Error("read A3 memory: class cast exception");
+      }
+      return -1;
     }
     destroySocket( );
     return n;
@@ -197,8 +202,13 @@ class DistoX310Comm extends DistoXComm
   {
     int ret = 0;
     if ( connectSocketAny( address ) ) {
-      DistoX310Protocol protocol = (DistoX310Protocol)mProtocol;
-      ret = protocol.dumpFirmware( filepath );
+      try { 
+        DistoX310Protocol protocol = (DistoX310Protocol)mProtocol;
+        ret = protocol.dumpFirmware( filepath );
+      } catch ( ClassCastException e ) {
+        TDLog.Error("read A3 memory: class cast exception");
+      }
+      return -1;
     }
     destroySocket( );
     return ret;
@@ -208,9 +218,14 @@ class DistoX310Comm extends DistoXComm
   {
     int ret = 0;
     if ( connectSocketAny( address ) ) {
-      // TDLog.LogFile( "Firmware upload: socket is ready " );
-      DistoX310Protocol protocol = (DistoX310Protocol)mProtocol;
-      ret = protocol.uploadFirmware( filepath );
+      try { 
+        // TDLog.LogFile( "Firmware upload: socket is ready " );
+        DistoX310Protocol protocol = (DistoX310Protocol)mProtocol;
+        ret = protocol.uploadFirmware( filepath );
+      } catch ( ClassCastException e ) {
+        TDLog.Error("read A3 memory: class cast exception");
+      }
+      return -1;
     }
     destroySocket( );
     return ret;

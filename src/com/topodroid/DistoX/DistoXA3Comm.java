@@ -101,16 +101,22 @@ class DistoXA3Comm extends DistoXComm
     return ret;
   }
 
+  // @return HeadTail string, null on failure
   String readA3HeadTail( String address, byte[] command, int[] head_tail )
   {
     String res = null;
     // if ( TDInstance.deviceType() == Device.DISTO_A3 ) {
       if ( ! isCommThreadNull() ) return null;
       if ( connectSocketAny( address ) ) {
-        DistoXA3Protocol protocol = (DistoXA3Protocol)mProtocol;
-        res = protocol.readA3HeadTail( command, head_tail );
-        // FIXME ASYNC new CommandThread( mProtocol, READ_HEAD_TAIL, haed_tail ); NOTE int[] instead of byte[]
-        // TDLog.Log( TDLog.LOG_COMM, "read Head Tail() result " + res );
+        try { 
+          DistoXA3Protocol protocol = (DistoXA3Protocol)mProtocol;
+          res = protocol.readA3HeadTail( command, head_tail );
+          // FIXME ASYNC new CommandThread( mProtocol, READ_HEAD_TAIL, haed_tail ); NOTE int[] instead of byte[]
+          // TDLog.Log( TDLog.LOG_COMM, "read Head Tail() result " + res );
+        } catch ( ClassCastException e ) {
+          TDLog.Error("read A3 memory: class cast exception");
+        }
+        return null;
       }
       destroySocket( );
     // }
@@ -127,9 +133,14 @@ class DistoXA3Comm extends DistoXComm
     int n = 0;
     if ( from < to ) {
       if ( connectSocketAny( address ) ) {
-        DistoXA3Protocol protocol = (DistoXA3Protocol)mProtocol;
-        n = protocol.readMemory( from, to, memory );
-        // FIXME ASYNC new CommandThread( mProtocol, READ_MEMORY, memory ) Note...
+        try {
+          DistoXA3Protocol protocol = (DistoXA3Protocol)mProtocol;
+          n = protocol.readMemory( from, to, memory );
+          // FIXME ASYNC new CommandThread( mProtocol, READ_MEMORY, memory ) Note...
+        } catch ( ClassCastException e ) {
+          TDLog.Error("read A3 memory: class cast exception");
+        }
+        return -1;
       }
       destroySocket( );
     }
@@ -138,6 +149,7 @@ class DistoXA3Comm extends DistoXComm
 
   /** swap hot bit in the range [from, to) [only A3]
    * from and to are memory addresses - must be multiple of 8
+   * @return the number of bits that have been swapped
    */
   int swapA3HotBit( String address, int from, int to, boolean on_off )
   {
@@ -152,19 +164,24 @@ class DistoXA3Comm extends DistoXComm
     int n = 0;
     if ( from != to ) {
       if ( connectSocketAny( address ) ) {
-        DistoXA3Protocol protocol = (DistoXA3Protocol)mProtocol;
-        do {
-          if ( to == 0 ) {
-            to = 0x8000 - 8;
-          } else {
-            to -= 8;
-          }
-          // Log.v( "DistoX-HT", "comm swap hot bit at addr " + to );
-          if ( ! protocol.swapA3HotBit( to, on_off ) ) break;
-          ++ n;
-        } while ( to != from );
-        // FIXME ASYNC new CommandThread( mProtocol, SWAP_HOT_BITS, from, to ) Note...
-        // TDLog.Log( TDLog.LOG_COMM, "swap Hot Bit swapped " + n + "data" );
+        try {
+          DistoXA3Protocol protocol = (DistoXA3Protocol)mProtocol;
+          do {
+            if ( to == 0 ) {
+              to = 0x8000 - 8;
+            } else {
+              to -= 8;
+            }
+            // Log.v( "DistoX-HT", "comm swap hot bit at addr " + to );
+            if ( ! protocol.swapA3HotBit( to, on_off ) ) break;
+            ++ n;
+          } while ( to != from );
+          // FIXME ASYNC new CommandThread( mProtocol, SWAP_HOT_BITS, from, to ) Note...
+          // TDLog.Log( TDLog.LOG_COMM, "swap Hot Bit swapped " + n + "data" );
+        } catch ( ClassCastException e ) {
+          TDLog.Error("read A3 memory: class cast exception");
+        }
+        return -1;
       }
       destroySocket( );
     }

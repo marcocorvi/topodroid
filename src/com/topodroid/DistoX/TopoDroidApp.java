@@ -507,21 +507,33 @@ public class TopoDroidApp extends Application
   // @param address    device address
   // @param command
   // @param head_tail  return array with positions of head and tail
+  // @return HeadTail string, null on failure
   String readA3HeadTail( String address, byte[] command, int[] head_tail )
   {
-    DistoXA3Comm comm = (DistoXA3Comm)mComm;
-    String ret = comm.readA3HeadTail( address, command, head_tail );
-    resetComm();
-    return ret;
+    try {
+      DistoXA3Comm comm = (DistoXA3Comm)mComm;
+      String ret = comm.readA3HeadTail( address, command, head_tail );
+      resetComm();
+      return ret;
+    } catch ( ClassCastException e ) {
+      TDLog.Error("read A3 HeadTail: class cast exception");
+    }
+    return null;
   }
 
   // swap hot bit in the range [from, to)
+  // @return the number of bit that have been swapped
   int swapA3HotBit( String address, int from, int to, boolean on_off ) 
   {
-    DistoXA3Comm comm = (DistoXA3Comm)mComm;
-    int ret = comm.swapA3HotBit( address, from, to, on_off ); // FIXME_A3
-    resetComm();
-    return ret;
+    try {
+      DistoXA3Comm comm = (DistoXA3Comm)mComm;
+      int ret = comm.swapA3HotBit( address, from, to, on_off ); // FIXME_A3
+      resetComm();
+      return ret;
+    } catch ( ClassCastException e ) {
+      TDLog.Error("swap A3 HeadTail: class cast exception");
+    }
+    return -1; // failure
   }
 
   static boolean mEnableZip = true;  // whether zip saving is enabled or must wait (locked by th2. saving thread)
@@ -885,19 +897,29 @@ public class TopoDroidApp extends Application
   int readX310Memory( String address, int h0, int h1, ArrayList< MemoryOctet > memory )
   {
     if ( mComm == null || isCommConnected() ) return -1;
-    DistoX310Comm comm = (DistoX310Comm)mComm;
-    int ret = comm.readX310Memory( address, h0, h1, memory );
-    resetComm();
-    return ret;
+    try {
+      DistoX310Comm comm = (DistoX310Comm)mComm;
+      int ret = comm.readX310Memory( address, h0, h1, memory );
+      resetComm();
+      return ret;
+    } catch ( ClassCastException e ) {
+      TDLog.Error("read A3 memory: class cast exception");
+    }
+    return -1;
   }
 
   int readA3Memory( String address, int h0, int h1, ArrayList< MemoryOctet > memory )
   {
     if ( mComm == null || isCommConnected() ) return -1;
-    DistoXA3Comm comm = (DistoXA3Comm)mComm;
-    int ret = comm.readA3Memory( address, h0, h1, memory );
-    resetComm();
-    return ret;
+    try {
+      DistoXA3Comm comm = (DistoXA3Comm)mComm;
+      int ret = comm.readA3Memory( address, h0, h1, memory );
+      resetComm();
+      return ret;
+    } catch ( ClassCastException e ) {
+      TDLog.Error("read A3 memory: class cast exception");
+    }
+    return -1;
   }
 
   // ------------------------------------------------------------------
@@ -1833,8 +1855,12 @@ public class TopoDroidApp extends Application
   void setX310Laser( int what, int nr, Handler /* ILister */ lister, int data_type ) // 0: off, 1: on, 2: measure // FIXME_LISTER
   {
     if ( mComm == null || TDInstance.deviceA == null ) return;
-    DistoX310Comm comm = (DistoX310Comm)mComm;
-    if ( comm != null ) comm.setX310Laser( TDInstance.deviceAddress(), what, nr, lister, data_type );
+    try { 
+      DistoX310Comm comm = (DistoX310Comm)mComm;
+      if ( comm != null ) comm.setX310Laser( TDInstance.deviceAddress(), what, nr, lister, data_type );
+    } catch ( ClassCastException e ) {
+      TDLog.Error("read A3 memory: class cast exception");
+    }
   }
 
   // int readFirmwareHardware()
@@ -1845,8 +1871,13 @@ public class TopoDroidApp extends Application
   int dumpFirmware( String filename )
   {
     if ( mComm == null || TDInstance.deviceA == null ) return -1;
-    DistoX310Comm comm = (DistoX310Comm)mComm;
-    return comm.dumpFirmware( TDInstance.deviceAddress(), TDPath.getBinFile(filename) );
+    try {
+      DistoX310Comm comm = (DistoX310Comm)mComm;
+      return comm.dumpFirmware( TDInstance.deviceAddress(), TDPath.getBinFile(filename) );
+    } catch ( ClassCastException e ) {
+      TDLog.Error("read A3 memory: class cast exception");
+    }
+    return -1;
   }
 
   int uploadFirmware( String filename )
@@ -1862,8 +1893,13 @@ public class TopoDroidApp extends Application
       TDLog.LogFile( "Firmware upload file does not end with \"bin\"");
       return 0;
     }
-    DistoX310Comm comm = (DistoX310Comm)mComm;
-    return comm.uploadFirmware( TDInstance.deviceAddress(), pathname );
+    try { 
+      DistoX310Comm comm = (DistoX310Comm)mComm;
+      return comm.uploadFirmware( TDInstance.deviceAddress(), pathname );
+    } catch ( ClassCastException e ) {
+      TDLog.Error("read A3 memory: class cast exception");
+    }
+    return -1;
   }
 
   // ----------------------------------------------------------------------

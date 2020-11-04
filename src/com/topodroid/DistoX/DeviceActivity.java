@@ -635,6 +635,9 @@ public class DeviceActivity extends Activity
     // Log.v("DistoX-HT", "do reset from " + from + " to " + to );
     int n = mApp.swapA3HotBit( mCurrDevice.mAddress, from, to, on_off );
     // ( new SwapHotBitTask( mApp, Device.DISTO_A3, mCurrDevice.mAddress, head_tail, on_off ) ).execute();
+    if ( n < 0 ) {
+      TDLog.Error("failed reset A3 device HeadTail");
+    }
   }
 
   void storeDeviceHeadTail( int[] head_tail )

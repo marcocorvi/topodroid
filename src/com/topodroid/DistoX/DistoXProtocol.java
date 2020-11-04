@@ -49,7 +49,7 @@ class DistoXProtocol extends TopoDroidProtocol
   protected DataOutputStream mOut;
 
   // protected byte[] mHeadTailA3;  // head/tail for Protocol A3
-  protected byte[] mAddr8000;     // cpuld be used by DistoXA3Protocol.read8000 
+  protected byte[] mAddr8000;     // could be used by DistoXA3Protocol.read8000 
   private byte[] mAcknowledge;
   private byte   mSeqBit;         // sequence bit: 0x00 or 0x80
 

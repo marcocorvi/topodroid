@@ -54,6 +54,7 @@ class DistoXA3Protocol extends DistoXProtocol
 
   /** swap hot bit in a data in DistoX A3 memory
    * @param addr  memory address
+   * @return true if successful
    */
   // @Override
   boolean swapA3HotBit( int addr, boolean on_off ) // only A3
