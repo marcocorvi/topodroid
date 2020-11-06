@@ -14,13 +14,13 @@ The point tool file contains lines specifying the property of the drawing tool.
 <ul>
 <li>"symbol point" [mandatory]</li>
 <li>"name NAME", where NAME is the point default name [mandatory]</li>
-<li>translated names, eg, "name-es ..." [optional]</li>
+<li>translated names, eg, "name-es ..." [translated names are optional]</li>
 <li>"th_name NAME", where NAME is the Therion name. The filename must be the same as the Therion name, witout the possible prefix "u": [mandatory]</li>
-<li>"color rgb" (rgb in hex format) [mandatory]</li>
+<li>"color rgb" (rgb in hex format, for example red is '0xff0000') [mandatory]</li>
 <li>"orientation FLAG" [optional, false if missing, true if FLAG is '1' or 'yes']</li>
 <li>"has_text FLAG" [optional, false if missing, true if FLAG is '1' or 'yes']</li>
-<li>"roundtrip VALUE" [optional SVG-roundtrip, VALUE can be 1 (walls_shp), 2 (walls_sym), 3 (detail_shp), 4 (detail_sym) - default 4]</li>
-<li>"level" view_flag [optional, 1 if missing]</li>
+<li>"roundtrip VALUE" [optional, for SVG-roundtrip, VALUE can be 1 (walls_shp), 2 (walls_sym), 3 (detail_shp), 4 (detail_sym) - default 4]</li>
+<li>"level" view_flag [optional, viewing level of the point; if missing level is set to 1]</li>
 <li>"path" begins the point symbol path. This is specified with the following commands
 <ul>
 <li>"moveTo X Y"</li>
@@ -33,8 +33,17 @@ The point tool file contains lines specifying the property of the drawing tool.
 <li>"endsymbol"</li>
 </ul>
 
+<b>Name</b><br>
+The English point "name" is mandatory.<br>
+Translation of the name in otther languages are optional.<br>
+Names must not contain spaces; use underscore '_' in their place.<br>
+The Therion name must coincide with the filename. This may cause a problem when the Therion name contains
+a dash '-' and this is an illegal character in filenames. In this case use the equal character '=' in the filename,
+the script that creates the zip archive of the symbols files replaces '=' with '-' in the filenames.<br>
+Therion names and filename must not contain spaces.<br><p>
+
 <b>Orientation</b><br>
-If the attribute "orientation" is set, the point symbol can be rotated.<br><p>
+If the attribute "orientation" is set, the point symbol can be drawn at an angle, and it can be rotated.<br><p>
 
 <b>Level</b><br>
 The "level" attribute takes value the flag for the views enabled on this point items.<br>

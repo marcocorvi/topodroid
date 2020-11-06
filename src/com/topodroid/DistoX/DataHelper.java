@@ -1425,8 +1425,8 @@ public class DataHelper extends DataSetObservable
   void updateShotsColor( List< DBlock > blks, long sid, int color )
   {
     if ( myDB == null ) return;
-    myDB.beginTransaction();
     try {
+      myDB.beginTransaction();
       String stmt = "UPDATE shots SET color=" + color + " WHERE surveyId=" + sid + " AND id=";
       for ( DBlock blk : blks ) {
         myDB.execSQL( stmt + blk.mId );
@@ -1770,8 +1770,8 @@ public class DataHelper extends DataSetObservable
   void dropPlot( long pid, long sid )
   {
     if ( myDB == null ) return;
-    myDB.beginTransaction();
     try {
+      myDB.beginTransaction();
       myDB.delete( PLOT_TABLE, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(pid) } );
       myDB.setTransactionSuccessful();
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -1790,8 +1790,8 @@ public class DataHelper extends DataSetObservable
   void deletePlotByName( String name, long sid )
   {
     if ( myDB == null ) return;
-    myDB.beginTransaction();
     try {
+      myDB.beginTransaction();
       myDB.delete( PLOT_TABLE, WHERE_SID_NAME, new String[]{ Long.toString(sid), name } );
       myDB.setTransactionSuccessful();
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -3155,31 +3155,33 @@ public class DataHelper extends DataSetObservable
       return;
     }
 
-    Cursor cursor = myDB.query( CONFIG_TABLE,
-                               new String[] { "value" }, // columns
-                               "key = ?", new String[] { key },
-                               null, null, null );
-    if ( cursor != null ) {
-      ContentValues cv = new ContentValues();
-      cv.put( "value",   value );
-      try {
+    Cursor cursor = null;
+    try {
+      myDB.beginTransaction();
+      cursor = myDB.query( CONFIG_TABLE,
+                           new String[] { "value" }, // columns
+                           "key = ?", new String[] { key },
+                           null, null, null );
+      if ( cursor != null ) {
+        ContentValues cv = new ContentValues();
+        cv.put( "value",   value );
         if (cursor.moveToFirst()) {
           // updateConfig.bindString( 1, value );
           // updateConfig.bindString( 2, key );
-          try {
-            // updateConfig.execute();
-            myDB.update( CONFIG_TABLE, cv, "key=?", new String[] { key } );
-          } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-          } catch (SQLiteException e ) { logError( "config update " + key + " " + value, e ); }
+          // updateConfig.execute();
+          myDB.update( CONFIG_TABLE, cv, "key=?", new String[] { key } );
         } else {
           cv.put( "key",     key );
-          try {
-            myDB.insert( CONFIG_TABLE, null, cv );
-          } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-          } catch ( SQLiteException e ) { logError("config insert " + key + " " + value, e ); }
+          myDB.insert( CONFIG_TABLE, null, cv );
         }
-      } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e ); }
-      if ( ! cursor.isClosed()) cursor.close();
+      } else {
+        TDLog.Error( "set value cannot get cursor" );
+      }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e ); 
+    } catch (SQLiteException e ) { logError( "set value " + key + " " + value, e ); 
+    } finally {
+      if ( ! (cursor == null) && ! cursor.isClosed()) cursor.close();
+      myDB.endTransaction();
     }
   }
 
@@ -3491,8 +3493,8 @@ public class DataHelper extends DataSetObservable
     if ( myDB == null ) return false;
     ContentValues cv = new ContentValues();
     cv.put( "comment", comment );
-    myDB.beginTransaction();
     try {
+      myDB.beginTransaction();
       myDB.update( PHOTO_TABLE, cv, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
       myDB.setTransactionSuccessful();
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -3504,8 +3506,8 @@ public class DataHelper extends DataSetObservable
   void deletePhoto( long sid, long id )
   {
     if ( myDB == null ) return;
-    myDB.beginTransaction();
     try {
+      myDB.beginTransaction();
       myDB.delete( PHOTO_TABLE, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
       myDB.setTransactionSuccessful();
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -3565,8 +3567,8 @@ public class DataHelper extends DataSetObservable
     if ( myDB == null ) return false;
     ContentValues cv = new ContentValues();
     cv.put( "comment", comment );
-    myDB.beginTransaction();
     try {
+      myDB.beginTransaction();
       myDB.update( SENSOR_TABLE, cv, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
       myDB.setTransactionSuccessful();
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -3868,8 +3870,8 @@ public class DataHelper extends DataSetObservable
    */
   private void dropDeletedFixed( long sid, String station )
   {
-    myDB.beginTransaction();
     try {
+      myDB.beginTransaction();
       myDB.delete( FIXED_TABLE, "surveyId=? and station=? and status=1", new String[]{ Long.toString(sid), station } );
       myDB.setTransactionSuccessful();
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );

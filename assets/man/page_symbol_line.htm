@@ -16,21 +16,37 @@ The line tool file contains lines specifying the property of the drawing tool.
 <li>translated names, eg, "name-es ..." [optional]</li>
 <li>"th_name NAME", where NAME is the Therion name. The filename must be the same as the Therion name, witout the possible prefix "u": [mandatory]</li>
 <lI>"group GROUP", specifies the group this line belongs to [optional, default no group]</li>
-<li>"color rgb alpha" (rgb and alpha in hex format) [rgb mandatory, alpha is optional]</li>
-<li>"width SIZE" [optional, multiple of the <i>line width</i> setting]</li>
-<li>"dash PATTERN" [optional dash pattern]</li>
-<li>"style STYLE" where STYLE can be 'straight' or 'xN'</li>
+<li>"color rgb alpha" (rgb and alpha in hex format, for example '0x00ff00' is green, and '0xff' is fully opaque) [rgb mandatory, alpha is optional,
+if not specifed 0xff is taken]</li>
+<li>"width SIZE", line width in units of the <i>line width</i> setting [optional, default 1]</li>
+<li>"dash PATTERN", example "15 5" [optional dash pattern]</li>
+<li>"style STYLE" where STYLE can be 'straight' or 'xN' [optional]</li>
 <li>"effect" begins the line path-effect and is followed by path commands, and closed by</li>
 <li>"endeffect"</li>
-<li>"roundtrip VALUE" [optional SVG-roundtrip, VALUE can be 1 (walls_shp), 2 (walls_sym), 3 (detail_shp), 4 (detail_sym) - default 3]</li>
+<li>"roundtrip VALUE" [optional, for SVG-roundtrip, VALUE can be 1 (walls_shp), 2 (walls_sym), 3 (detail_shp), 4 (detail_sym) - default 3]</li>
 <li>"level" view_flag [optional, 1 if missing]</li>
 <li>"endsymbol"</li>
 </ul>
+
+<b>Name</b><br>
+Refer to the <a href="page_symbol_point.htm">Point Tool</a> for how to specify the names.
+<br><p> 
 
 <b>Group</b><br>
 Line tools in the same group can be joined together by "continuation".<br><p>
 
 The "group" attribute is used to specify that the various "wall" line types can be joined together.<br><p>
+
+<b>Dash</b><br>
+The "dash" directive specifies that the line is drawn with a dashed scheme.
+For example, "dash 15 5" means that the line is drawn with segments of 15 units, separated by 5 units spaces.
+<br><p>
+
+<b>Style</b><br> 
+The "style" directive is used to draw lines using sparse points.<br>
+A "style x3" means that the line is drawn using one every three points. The effect is that the line is less "curvy".<br>
+If you want straight segments us "style straight".
+<br><p>
 
 <b>Effect path</b><br>
 This option is used to define lines with complex style.<br><p>

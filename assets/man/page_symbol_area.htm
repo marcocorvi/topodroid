@@ -15,15 +15,19 @@ The area tool file contains lines specifying the property of the drawing tool.
 <li>"name NAME", where NAME is the area default name [mandatory]</li>
 <li>translated names, eg, "name-es ..." [optional]</li>
 <li>"th_name NAME", where NAME is the Therion name. The filename must be the same as the Therion name, without the possible prefix "u": [mandatory]</li>
-<li>"color rgb alpha" (rgb and alpha in hex format) [mandatory]</li>
+<li>"color rgb alpha" (rgb and alpha in hex format, for example '0x0000ff' is blue, and '0x99' is semi-transparent) [mandatory]</li>
 <li>"close-horizontal" [optional, false if missing]</li>
 <li>"orientable" [optional, false if missing]</li>
 <li>"level" view_flag [optional, 1 if missing]</li>
 <li>"bitmap WIDTH HEIGHT X_TILE Y_TILE" starts of the bitmap pattern. The tile modes can be M (mirror) or R (repeat). This line must be followed by HEIGHT lines of length WIDTH with the bitmap pixels (1: foreground, 0: background).</li>
 <li>"endbitmap" marks the end of a bitmap</li>
-<li>"roundtrip VALUE" [optional SVG-roundtrip, VALUE can be 1 (walls_shp), 2 (walls_sym), 3 (detail_shp), 4 (detail_sym) - default 3]</li>
+<li>"roundtrip VALUE" [optional, for SVG-roundtrip, VALUE can be 1 (walls_shp), 2 (walls_sym), 3 (detail_shp), 4 (detail_sym) - default 3]</li>
 <li>"endsymbol"</li>
 </ul>
+
+<b>Name</b><br>
+Refer to the <a href="page_symbol_point.htm">Point Tool</a> for how to specify the names.
+<br><p> 
 
 <b>Close-horizontal</b><br>
 If this attribute is set the area border is closed horizontally in the profile view
