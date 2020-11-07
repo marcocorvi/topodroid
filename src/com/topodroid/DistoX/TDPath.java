@@ -38,8 +38,8 @@ import android.os.Environment;
 public class TDPath
 {
   // whether not having ANDROID 10
-  final static public boolean NOT_ANDROID_10 = ( Build.VERSION.SDK_INT <= Build.VERSION_CODES.P );
-  final static public boolean NOT_ANDROID_11 = ( Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q );
+  final static public boolean BELOW_ANDROID_10 = ( Build.VERSION.SDK_INT <= Build.VERSION_CODES.P );
+  final static public boolean BELOW_ANDROID_11 = ( Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q );
 
   final static int NR_BACKUP = 5;
   final static String BCK_SUFFIX = ".bck";
@@ -92,14 +92,13 @@ public class TDPath
   //    this works with Android-10 but the data are erased when TopoDroid is uninstalled
   //    because the path is Android/data/com.topodroid.DistoX/files
   // With "/sdcard" they remain
+  static final String EXTERNAL_STORAGE_PATH_10 = Environment.getExternalStorageDirectory().getAbsolutePath();
   static final String EXTERNAL_STORAGE_PATH_11 = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath();
   static final String EXTERNAL_STORAGE_PATH =  // app base path
     (new File( EXTERNAL_STORAGE_PATH_11, "TopoDroid" ).exists() )? EXTERNAL_STORAGE_PATH_11
-    : NOT_ANDROID_11 ? Environment.getExternalStorageDirectory().getAbsolutePath()
-                     // : Environment.getExternalStorageDirectory().getAbsolutePath();
-                     // FIXME ANDROID 11 this is what i should use but on the emulator it is a data file
-                     : EXTERNAL_STORAGE_PATH_11;
-                     // : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath();
+      : BELOW_ANDROID_10 ? EXTERNAL_STORAGE_PATH_10
+        : ( BELOW_ANDROID_11  && new File( EXTERNAL_STORAGE_PATH_10, "TopoDroid").exists() )? EXTERNAL_STORAGE_PATH_10 
+          : EXTERNAL_STORAGE_PATH_11;
 
   private static String PATH_BASEDIR  = EXTERNAL_STORAGE_PATH;
   private static String PATH_DEFAULT  = EXTERNAL_STORAGE_PATH + "/TopoDroid/";
@@ -204,10 +203,14 @@ public class TDPath
     return ret;
   }
 
+  static boolean hasPath10() 
+  {
+    return (new File( EXTERNAL_STORAGE_PATH_10, "TopoDroid" )).exists();
+  }
+
   static boolean hasPath11() 
   {
-    File path11 = new File( EXTERNAL_STORAGE_PATH_11, "TopoDroid" );
-    return path11.exists();
+    return (new File( EXTERNAL_STORAGE_PATH_11, "TopoDroid" )).exists();
   }
 
   static boolean moveToPath11()
@@ -266,7 +269,7 @@ public class TDPath
       setDefaultPaths();
     }
 
-    // Log.v("DistoX-PATH", "Not Android 10 " + NOT_ANDROID_10 + " 11 " + NOT_ANDROID_11 + " SDK " + Build.VERSION.SDK_INT );
+    // Log.v("DistoX-PATH", "Not Android 10 " + BELOW_ANDROID_10 + " 11 " + BELOW_ANDROID_11 + " SDK " + Build.VERSION.SDK_INT );
     // Log.v("DistoX-PATH", "EXT. " + EXTERNAL_STORAGE_PATH );
     // Log.v("DistoX-PATH", "BASE " + PATH_BASEDIR + " base " + base + " path " + path );
 

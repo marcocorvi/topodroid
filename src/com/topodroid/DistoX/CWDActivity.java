@@ -194,7 +194,7 @@ public class CWDActivity extends Activity
     mBtnCancel = (Button) findViewById( R.id.button_cancel );
     mBtnCancel.setOnClickListener( this );
     mBtnChange = (Button) findViewById( R.id.button_change );
-    if ( TDPath.NOT_ANDROID_10 && TDLevel.overExpert ) {
+    if ( TDPath.BELOW_ANDROID_10 && TDLevel.overExpert ) {
       mBtnChange.setOnClickListener( this );
     } else {
       mBtnChange.setVisibility( View.GONE );

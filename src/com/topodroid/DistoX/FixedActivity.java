@@ -127,7 +127,7 @@ public class FixedActivity extends Activity
     mListView = (MyHorizontalListView) findViewById(R.id.listview);
     // mListView.setEmptyPlacholder(true);
     /* int size = */ TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
-    mNrButton1 = ( TDPath.NOT_ANDROID_11 )? 2 : 1;
+    mNrButton1 = ( TDPath.BELOW_ANDROID_11 )? 2 : 1;
     if ( hasGps ) ++ mNrButton1;
     mButton1 = new Button[ mNrButton1 ];
     int kz = (hasGps)? 0 : 1; // index of izons
@@ -223,7 +223,7 @@ public class FixedActivity extends Activity
       }
     } else if ( /* k < mNrButton1 && */ b == mButton1[k++] ) { // ADD
       new FixedAddDialog( mContext, this ).show();
-    } else if ( TDPath.NOT_ANDROID_11 && k < mNrButton1 && b == mButton1[k++] ) { // IMPORT MOBILE TOPOGRAPHER
+    } else if ( TDPath.BELOW_ANDROID_11 && k < mNrButton1 && b == mButton1[k++] ) { // IMPORT MOBILE TOPOGRAPHER
       FixedImportDialog dialog = new FixedImportDialog( mContext, this );
       if ( dialog.getNrPoints() > 0 ) {
 	dialog.show();

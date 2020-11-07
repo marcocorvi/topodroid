@@ -31,9 +31,9 @@ import android.widget.Button;
 class DeviceX310InfoDialog extends MyDialog
                            implements View.OnClickListener
 {
-  private RadioButton mRBa3;
-  private RadioButton mRBx310;
-  private Button mBTok;
+  // private RadioButton mRBa3;
+  // private RadioButton mRBx310;
+  // private Button mBTok;
   private Button mBTback;
 
   private final DeviceActivity mParent;
@@ -59,10 +59,10 @@ class DeviceX310InfoDialog extends MyDialog
 
     Resources res = mParent.getResources();
 
-    mRBa3   = (RadioButton) findViewById( R.id.rb_a3 );
-    mRBx310 = (RadioButton) findViewById( R.id.rb_x310 );
-    // mRBa3.setChecked( false );
-    mRBx310.setChecked( true );
+    // mRBa3   = (RadioButton) findViewById( R.id.rb_a3 );
+    // mRBx310 = (RadioButton) findViewById( R.id.rb_x310 );
+    // // mRBa3.setChecked( false );
+    // mRBx310.setChecked( true );
 
     TextView tv_address  = (TextView) findViewById( R.id.tv_address );
     tv_code     = (TextView) findViewById( R.id.tv_code );
@@ -75,9 +75,9 @@ class DeviceX310InfoDialog extends MyDialog
     // tv_hardware.setText( TDString.EMPTY );
     mParent.readX310Info( this );
 
-    mBTok = (Button) findViewById( R.id.btn_ok );
+    // mBTok = (Button) findViewById( R.id.btn_ok );
+    // mBTok.setOnClickListener( this );
     mBTback = (Button) findViewById( R.id.button_cancel );
-    mBTok.setOnClickListener( this );
     mBTback.setOnClickListener( this );
   }
 
@@ -93,29 +93,30 @@ class DeviceX310InfoDialog extends MyDialog
   public void onClick(View view)
   {
     Button b = (Button)view;
-    if ( b == mBTok ) {
-      // TODO ask confirm
-      TopoDroidAlertDialog.makeAlert( mContext, mParent.getResources(),
-                                mParent.getResources().getString( R.string.device_model_set ) + " ?",
-        new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick( DialogInterface dialog, int btn ) {
-            doSetModel( );
-          }
-        }
-      );
-    } else if ( b == mBTback ) {
+    // if ( b == mBTok ) {
+    //   // TODO ask confirm
+    //   TopoDroidAlertDialog.makeAlert( mContext, mParent.getResources(),
+    //                             mParent.getResources().getString( R.string.device_model_set ) + " ?",
+    //     new DialogInterface.OnClickListener() {
+    //       @Override
+    //       public void onClick( DialogInterface dialog, int btn ) {
+    //         doSetModel( );
+    //       }
+    //     }
+    //   );
+    // } else
+    if ( b == mBTback ) {
       dismiss();
     }
   }
 
-  private void doSetModel()
-  {
-    if ( mRBa3.isChecked() ) {
-      mParent.setDeviceModel( mDevice, Device.DISTO_A3 );
-    } else if ( mRBx310.isChecked() ) {
-      mParent.setDeviceModel( mDevice, Device.DISTO_X310 );
-    }
-  }
+  // private void doSetModel()
+  // {
+  //   if ( mRBa3.isChecked() ) {
+  //     mParent.setDeviceModel( mDevice, Device.DISTO_A3 );
+  //   } else if ( mRBx310.isChecked() ) {
+  //     mParent.setDeviceModel( mDevice, Device.DISTO_X310 );
+  //   }
+  // }
 
 }

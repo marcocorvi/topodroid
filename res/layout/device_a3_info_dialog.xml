@@ -6,7 +6,7 @@
     android:orientation="vertical"
     >
 
-    <RadioGroup 
+    <!-- RadioGroup 
       android:id="@+id/device_model"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
         android:text="@string/button_save"
       />
 
-     </RadioGroup>
+     </RadioGroup -->
 
       <TextView android:id="@+id/tv_address" 
         android:layout_marginTop="@dimen/margintiny"

@@ -287,7 +287,7 @@ public class SurveyWindow extends Activity
     mButton1 = new Button[ mNrButton1 + 1 ];
     int kb = 0;
     for ( int k=0; k < mNrButton1; ++k ) {
-      if ( k != 2 || TDPath.NOT_ANDROID_11 ) {
+      if ( k != 2 || TDPath.BELOW_ANDROID_11 ) {
         mButton1[kb++] = MyButton.getButton( mActivity, this, izons[k] );
       }
     }
@@ -356,7 +356,7 @@ public class SurveyWindow extends Activity
       doNotes();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // INFO STATISTICS
       new SurveyStatDialog( mActivity, mApp_mData.getSurveyStat( TDInstance.sid ) ).show();
-    } else if ( TDPath.NOT_ANDROID_11 && k < mNrButton1 && b == mButton1[k++] ) {  // 3D
+    } else if ( TDPath.BELOW_ANDROID_11 && k < mNrButton1 && b == mButton1[k++] ) {  // 3D
       do3D();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // GPS LOCATION
       mActivity.startActivity( new Intent( mActivity, FixedActivity.class ) );

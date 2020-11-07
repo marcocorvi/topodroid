@@ -794,10 +794,9 @@ public class MainWindow extends Activity
       checkManualTranslation();
     }
     // TDToast.make( ( TDPath.hasPath11()? "Path 11 " : "No Path 11 " ) + TDPath.EXTERNAL_STORAGE_PATH );
-    if ( ( ! TDPath.NOT_ANDROID_10 ) && TDPath.NOT_ANDROID_11 ) {
-      // only for Android 10
+    if ( ( ! TDPath.BELOW_ANDROID_10 ) && TDPath.BELOW_ANDROID_11 ) { // only for Android 10
       // Log.v( "DistoX-PATH11", "has path11 " + TDPath.hasPath11() + " no-again " + TopoDroidApp.hasPath11NoAgain() );
-      if ( ! TDPath.hasPath11() && ! TopoDroidApp.hasPath11NoAgain() ) {
+      if ( ! TDPath.hasPath11() && ! TopoDroidApp.hasPath11NoAgain() && TDPath.hasPath10() ) {
         ( new Path11Dialog( this, this, mApp )).show();
       }
     }
