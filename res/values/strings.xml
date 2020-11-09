@@ -103,6 +103,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="calib_delete">Delete calibration </string>
     <string name="calib_device_mismatch">WARNING: Calibration-Device mismatch</string>
     <string name="calib_no_name">Name is mandatory</string>
+    <string name="calib_no_coeff">Calibration coefficients not set</string>
     <string name="calib_gm_policy">Group policy</string>
     <string name="calib_gm_undelete">Undelete calibration data?</string>
     <string name="calib_offgroup_data">Possibly %1$d off-group data</string>

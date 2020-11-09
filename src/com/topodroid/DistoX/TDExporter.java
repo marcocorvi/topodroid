@@ -29,6 +29,8 @@ import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.utils.TDStatus;
+import com.topodroid.math.TDVector;
+import com.topodroid.math.TDMatrix;
 import com.topodroid.num.TDNum;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.NumShot;
@@ -4197,13 +4199,42 @@ class TDExporter
       pw.format("# %s\n", ci.comment );
       pw.format("# %d\n", ci.algo );
 
-      List< CalibCBlock > list = data.selectAllGMs( cid, 1, true ); // status 1: all shots, true: negative_grp too
-      for ( CalibCBlock b : list ) {
+      List< CBlock > list = data.selectAllGMs( cid, 1, true ); // status 1: all shots, true: negative_grp too
+      for ( CBlock b : list ) {
         b.computeBearingAndClino();
         pw.format(Locale.US, "%d, %d, %d, %d, %d, %d, %d, %d, %.2f, %.2f, %.2f, %.4f, %d\n",
           b.mId, b.gx, b.gy, b.gz, b.mx, b.my, b.mz, b.mGroup, b.mBearing, b.mClino, b.mRoll, b.mError, b.mStatus );
       }
       fw.flush();
+  
+      CalibResult res = new CalibResult();
+      data.selectCalibError( cid, res );
+      pw.format(Locale.US, "# error %.2f stddev %.2f max %.2f delta %.2f iter %d\n",
+        res.error, res.stddev, res.max_error, res.delta_bh, res.iterations );
+
+      String coeff_str = data.selectCalibCoeff( cid );
+      if ( coeff_str != null ) {
+        byte[] coeff = CalibAlgo.stringToCoeff( coeff_str );
+        TDMatrix mG = new TDMatrix();
+        TDMatrix mM = new TDMatrix();
+        TDVector vG = new TDVector();
+        TDVector vM = new TDVector();
+        TDVector nL = new TDVector();
+        CalibAlgo.coeffToG( coeff, vG, mG );
+        CalibAlgo.coeffToM( coeff, vM, mM );
+        CalibAlgo.coeffToNL( coeff, nL );
+        pw.format(Locale.US, "# GB %.4f %.4f %.4f\n", vG.x,   vG.y,   vG.z );
+        pw.format(Locale.US, "# GA %.4f %.4f %.4f\n", mG.x.x, mG.x.y, mG.x.z );
+        pw.format(Locale.US, "#    %.4f %.4f %.4f\n", mG.y.x, mG.y.y, mG.y.z );
+        pw.format(Locale.US, "#    %.4f %.4f %.4f\n", mG.z.x, mG.z.y, mG.z.z );
+        pw.format(Locale.US, "# MB %.4f %.4f %.4f\n", vM.x,   vM.y,   vM.z );
+        pw.format(Locale.US, "# MA %.4f %.4f %.4f\n", mM.x.x, mM.x.y, mM.x.z );
+        pw.format(Locale.US, "#    %.4f %.4f %.4f\n", mM.y.x, mM.y.y, mM.y.z );
+        pw.format(Locale.US, "#    %.4f %.4f %.4f\n", mM.z.x, mM.z.y, mM.z.z );
+        pw.format(Locale.US, "# NL %.4f %.4f %.4f\n", nL.x,   nL.y,   nL.z );
+      }
+      fw.flush();
+       
       fw.close();
       return filename;
     } catch ( IOException e ) {
@@ -4272,25 +4303,27 @@ class TDExporter
             } else {
               long cid = data.insertCalibInfo( name, date, device, comment, algo );
               while ( line != null ) {
-                // FIXME
-                //   (1) replace ' '* with nothing
-                //   (2) split on ','
-                line = line.replaceAll( " ", "" );
-                String[] vals = line.split(",");
-                if ( vals.length > 7 ) {
-                  // Log.v("DistoX-Calib", vals.length + " <" + vals[1] + "><" + vals[2] + "><" + vals[3] + ">" );
-                  try {
-                    long gx = Long.parseLong( vals[1] );
-                    long gy = Long.parseLong( vals[2] );
-                    long gz = Long.parseLong( vals[3] );
-                    long mx = Long.parseLong( vals[4] );
-                    long my = Long.parseLong( vals[5] );
-                    long mz = Long.parseLong( vals[6] );
-                    long gid = data.insertGM( cid, gx, gy, gz, mx, my, mz );
-                    String grp = vals[7].trim();
-                    data.updateGMName( gid, cid, grp );
-                  } catch ( NumberFormatException e ) { 
-                    TDLog.Error( e.getMessage() );
+                if ( ! line.startsWith("#") ) {
+                  // FIXME
+                  //   (1) replace ' '* with nothing
+                  //   (2) split on ','
+                  line = line.replaceAll( " ", "" );
+                  String[] vals = line.split(",");
+                  if ( vals.length > 7 ) {
+                    // Log.v("DistoX-Calib", vals.length + " <" + vals[1] + "><" + vals[2] + "><" + vals[3] + ">" );
+                    try {
+                      long gx = Long.parseLong( vals[1] );
+                      long gy = Long.parseLong( vals[2] );
+                      long gz = Long.parseLong( vals[3] );
+                      long mx = Long.parseLong( vals[4] );
+                      long my = Long.parseLong( vals[5] );
+                      long mz = Long.parseLong( vals[6] );
+                      long gid = data.insertGM( cid, gx, gy, gz, mx, my, mz );
+                      String grp = vals[7].trim();
+                      data.updateGMName( gid, cid, grp );
+                    } catch ( NumberFormatException e ) { 
+                      TDLog.Error( e.getMessage() );
+                    }
                   }
                 }
                 line = br.readLine();

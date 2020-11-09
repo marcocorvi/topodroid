@@ -123,14 +123,14 @@ class CalibCoverage
   // @param clist    list of calib shots
   // @pre shots bearing and clino must have been precomputed
   // @return array distribution of between shots errors
-  // static float[] evalDeviations( List< CalibCBlock > clist )
+  // static float[] evalDeviations( List< CBlock > clist )
   // {
   //   float[] error = new float[ 181 ]; // angle deviations among calib shots of a group
   //   for ( int k = 0; k < 181; ++ k ) error[k] = 0;
   //   int sz = clist.size();
   //   int cnt = 0;
   //   for ( int i1 = 0; i1 < sz; ++ i1 ) {
-  //     CalibCBlock b1 = clist.get( i1 );
+  //     CBlock b1 = clist.get( i1 );
   //     if ( b1.mGroup == 0 ) continue;
   //     float compass = b1.mBearing * TDMath.DEG2RAD;
   //     float clino   = b1.mClino   * TDMath.DEG2RAD;
@@ -139,7 +139,7 @@ class CalibCoverage
   //     float n1 = h1 * TDMath.cos( compass );
   //     float e1 = h1 * TDMath.sin( compass );
   //     for ( int i2 = i1+1; i2 < sz; ++i2 ) {
-  //       CalibCBlock b2 = clist.get( i2 );
+  //       CBlock b2 = clist.get( i2 );
   //       if ( b2.mGroup == 0 ) continue;
   //       if ( b2.mGroup != b1.mGroup ) break;
   //       // compute difference
@@ -159,14 +159,14 @@ class CalibCoverage
   // @param clist    list of calib shots
   // @param thr      deviation threshold
   // @return number of shots above threshold
-  // static int evalShotDeviations( List< CalibCBlock > clist, float thr )
+  // static int evalShotDeviations( List< CBlock > clist, float thr )
   // {
   //   int sz = clist.size();
   //   int ret = 0;
   //   long old_grp = 0;
   //   int i0 = 0;
   //   for ( int i1 = 0; i1 < sz; ++ i1 ) {
-  //     CalibCBlock b1 = clist.get( i1 );
+  //     CBlock b1 = clist.get( i1 );
   //     if ( b1.mGroup == 0 ) continue;
   //     if ( old_grp != b1.mGroup ) {
   //       i0 = i1;
@@ -182,7 +182,7 @@ class CalibCoverage
   //     float dev = 0;
   //     for ( int i2 = i0; i2 < sz; ++i2 ) {
   //       if ( i2 == i1 ) continue;
-  //       CalibCBlock b2 = clist.get( i2 );
+  //       CBlock b2 = clist.get( i2 );
   //       if ( b2.mGroup == 0 ) continue;
   //       if ( b2.mGroup != b1.mGroup ) break;
   //       // compute difference
@@ -199,7 +199,7 @@ class CalibCoverage
   //   return ret;
   // }
 
-  float evalCoverage( List< CalibCBlock > clist, CalibAlgo transform )
+  float evalCoverage( List< CBlock > clist, CalibAlgo transform )
   {
 
     for (int j=0; j<t_dim; ++j ) angles[j].mValue = 1.0f;
@@ -208,7 +208,7 @@ class CalibCoverage
     float compass_avg = 0.0f;
     float clino_avg   = 0.0f;
     int cnt_avg = 0;
-    for ( CalibCBlock b : clist ) {
+    for ( CBlock b : clist ) {
       if ( b.mGroup == 0 ) continue;
       if ( transform == null ) {
         b.computeBearingAndClino( );
@@ -256,7 +256,7 @@ class CalibCoverage
 
   // @param clist  list of CBlocks
   // @param mode   0: G,  1: M
-  float evalCoverageGM( List< CalibCBlock > clist, int mode ) 
+  float evalCoverageGM( List< CBlock > clist, int mode ) 
   {
     for (int j=0; j<t_dim; ++j ) angles[j].mValue = 1.0f;
 
@@ -266,7 +266,7 @@ class CalibCoverage
     int cnt_avg = 0;
 
     float f = TDUtil.FV;
-    for ( CalibCBlock b : clist ) {
+    for ( CBlock b : clist ) {
       if ( b.mGroup <= 0 ) continue;
       TDVector v = ( mode == 0 )? new TDVector( b.gx/f, b.gy/f, b.gz/f ) : new TDVector( b.mx/f, b.my/f, b.mz/f );
       float compass = TDMath.atan2( v.x, v.y ); if ( compass < 0 ) compass += TDMath.M_2PI;

@@ -47,7 +47,7 @@ class CalibCoverageDialog extends MyDialog
 
   private final Bitmap mBitmapUp;
   private final Bitmap mBitmapDown;
-  private final List< CalibCBlock > mList;  // list of calibration shots
+  private final List< CBlock > mList;  // list of calibration shots
   private final CalibAlgo mCalib;         // calibration algorithm
 
   private TextView mText;
@@ -61,7 +61,7 @@ class CalibCoverageDialog extends MyDialog
 
   private CalibCoverage mCoverage;
 
-  CalibCoverageDialog( Context context, List< CalibCBlock > list, CalibAlgo cal )
+  CalibCoverageDialog( Context context, List< CBlock > list, CalibAlgo cal )
   {
     super( context, R.string.CalibCoverageDialog );
     

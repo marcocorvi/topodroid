@@ -65,14 +65,14 @@ public class GMActivity extends Activity
 
   private String mSaveData;                // saved GM text representation
   private TextView mSaveTextView;          // view of the saved GM
-  private CalibCBlock mSaveCBlock = null;  // data of the saved GM
+  private CBlock mSaveCBlock = null;  // data of the saved GM
   private long mGMid = -1;     // id of the GM
   private int mBlkStatus = 0;   // min display Group (can be either 1 [only active] or 0 [all])
   private int mAlgo;            // calibration algorithm
 
   private ListView mList;                  // display list
 
-  private CalibCBlockAdapter mDataAdapter;  // adapter for the list of GM's
+  private CBlockAdapter mDataAdapter;  // adapter for the list of GM's
 
   private String mCalibName;
   // private ConnHandler mHandler;
@@ -179,12 +179,12 @@ public class GMActivity extends Activity
   {
     long cid = TDInstance.cid;
     if ( cid < 0 ) return -2;
-    List< CalibCBlock > list = mApp_mDData.selectAllGMs( cid, 0, false ); // false: skip negative-grp
+    List< CBlock > list = mApp_mDData.selectAllGMs( cid, 0, false ); // false: skip negative-grp
     if ( list.size() < 16 ) {
       return -1;
     }
     int ng = 0; // cb with group
-    for ( CalibCBlock cb : list ) {
+    for ( CBlock cb : list ) {
       if ( cb.mGroup > 0 ) ++ng;
     }
     if ( ng < 16 ) {
@@ -199,7 +199,7 @@ public class GMActivity extends Activity
   }
 
 
-  private int doComputeCalib( List< CalibCBlock > list )
+  private int doComputeCalib( List< CBlock > list )
   {    
     long cid = TDInstance.cid;
     switch ( mAlgo ) {
@@ -218,7 +218,7 @@ public class GMActivity extends Activity
     }
 
     mCalibration.Reset( list.size() );
-    for ( CalibCBlock item : list ) mCalibration.AddValues( item );
+    for ( CBlock item : list ) mCalibration.AddValues( item );
     // Log.v("DistoXCalib", "Data " + list.size() + " ok " + ng );
     
     int iter = mCalibration.Calibrate();
@@ -227,7 +227,7 @@ public class GMActivity extends Activity
     if ( iter > 0 && iter < TDSetting.mCalibMaxIt ) {
       float[] errors = mCalibration.Errors();
       for ( int k = 0; k < list.size(); ++k ) {
-        CalibCBlock cb = list.get( k );
+        CBlock cb = list.get( k );
         mApp_mDData.updateGMError( cb.mId, cid, errors[k] );
         // cb.setError( errors[k] );
       }
@@ -262,8 +262,8 @@ public class GMActivity extends Activity
     if ( cid < 0 ) {
       return;
     }
-    List< CalibCBlock > list0 = mApp_mDData.selectAllGMs( TDInstance.cid, 0, false ); // false: skip negative-grp
-    List< CalibCBlock > list1 = mApp_mDData.selectAllGMs( cid, 0, false );
+    List< CBlock > list0 = mApp_mDData.selectAllGMs( TDInstance.cid, 0, false ); // false: skip negative-grp
+    List< CBlock > list1 = mApp_mDData.selectAllGMs( cid, 0, false );
     int size0 = list0.size();
     int size1 = list1.size();
     if ( size0 < 16 || size1 < 16 ) {
@@ -331,7 +331,7 @@ public class GMActivity extends Activity
     double err2   = 0;
     double errmax = 0;
     int ke = 0;
-    for ( CalibCBlock b : list0 ) {
+    for ( CBlock b : list0 ) {
       TDVector g = new TDVector( b.gx, b.gy, b.gz );
       TDVector m = new TDVector( b.mx, b.my, b.mz );
       TDVector v0 = calib0.computeDirection(g,m);
@@ -360,7 +360,7 @@ public class GMActivity extends Activity
    * @param  errors   [output] errors 
    * @return number of errors in the array
    */
-  private int computeErrorStats( CalibAlgo calib, List< CalibCBlock > list, float[] errors )
+  private int computeErrorStats( CalibAlgo calib, List< CBlock > list, float[] errors )
   {
     int ke = 0; // number of errors
     for ( int c=0; c<errors.length; ++c ) errors[c] = -1;
@@ -380,7 +380,7 @@ public class GMActivity extends Activity
             float[]  e = new float[cnt];
             int i=0;
             for ( ; k<j; ++k ) {
-              CalibCBlock b = list.get(k);
+              CBlock b = list.get(k);
               if ( b.mGroup == group ) {
                 g[i] = new TDVector( b.gx, b.gy, b.gz );
                 m[i] = new TDVector( b.mx, b.my, b.mz );
@@ -404,7 +404,7 @@ public class GMActivity extends Activity
       float[]  e = new float[cnt];
       int i=0;
       for ( ; k<list.size(); ++k ) {
-        CalibCBlock b = list.get(k);
+        CBlock b = list.get(k);
         if ( b.mGroup == group ) {
           g[i] = new TDVector( b.gx, b.gy, b.gz );
           m[i] = new TDVector( b.mx, b.my, b.mz );
@@ -499,7 +499,7 @@ public class GMActivity extends Activity
     // Log.v("DistoX", "Compute CID " + cid + " from gid " + start_id );
     if ( cid < 0 ) return -2;
     float thr = TDMath.cosd( TDSetting.mGroupDistance );
-    List< CalibCBlock > list = mApp_mDData.selectAllGMs( cid, 0, true ); // true: negative-grp too
+    List< CBlock > list = mApp_mDData.selectAllGMs( cid, 0, true ); // true: negative-grp too
     if ( list.size() < 4 ) {
       return -1;
     }
@@ -508,7 +508,7 @@ public class GMActivity extends Activity
     float b = 0.0f;
     float c = 0.0f;
     if ( start_id >= 0 ) {
-      for ( CalibCBlock item : list ) {
+      for ( CBlock item : list ) {
         if ( item.mId == start_id ) {
           group = item.mGroup;
           cnt = 1;
@@ -525,7 +525,7 @@ public class GMActivity extends Activity
     }
     switch ( policy ) {
       case TDSetting.GROUP_BY_DISTANCE: // DEPRECATED
-      //   for ( CalibCBlock item : list ) {
+      //   for ( CBlock item : list ) {
       //     if ( start_id >= 0 && item.mId <= start_id ) continue;
       //     if ( group == 0 || item.isFarFrom( b, c, thr ) ) {
       //       ++ group;
@@ -540,7 +540,7 @@ public class GMActivity extends Activity
         break;
       case TDSetting.GROUP_BY_FOUR:
         // TDLog.Log( TDLog.LOG_CALIB, "group by four");
-        for ( CalibCBlock item : list ) {
+        for ( CBlock item : list ) {
           if ( start_id >= 0 && item.mId <= start_id ) continue;
           item.setGroupIfNonZero( group );
           mApp_mDData.updateGMName( item.mId, item.mCalibId, Long.toString( item.mGroup ) );
@@ -552,7 +552,7 @@ public class GMActivity extends Activity
         }
         break;
       case TDSetting.GROUP_BY_ONLY_16:
-        for ( CalibCBlock item : list ) {
+        for ( CBlock item : list ) {
           if ( start_id >= 0 && item.mId <= start_id ) continue;
           item.setGroupIfNonZero( group );
           mApp_mDData.updateGMName( item.mId, item.mCalibId, Long.toString( item.mGroup ) );
@@ -589,7 +589,7 @@ public class GMActivity extends Activity
     enableButtons( true );
   }
     
-  private void updateCBlockList( CalibCBlock blk ) 
+  private void updateCBlockList( CBlock blk ) 
   { 
     if ( blk == null ) return;
     mDataAdapter.add( blk );
@@ -618,14 +618,14 @@ public class GMActivity extends Activity
     resetTitle( );
     mDataAdapter.clear();
     if ( mApp_mDData != null && TDInstance.cid >= 0 ) {
-      List< CalibCBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, mBlkStatus, true ); // true: include negative-grp
+      List< CBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, mBlkStatus, true ); // true: include negative-grp
       // Log.v( TopoDroidApp.TAG, "update Display GMs " + list.size() );
       updateGMList( list );
       setTitle( mCalibName );
     }
   }
 
-  private void updateGMList( List< CalibCBlock > list )
+  private void updateGMList( List< CBlock > list )
   {
     int n_saturated = 0;
     if ( list.size() == 0 ) {
@@ -636,10 +636,10 @@ public class GMActivity extends Activity
     float thr = TDSetting.mGroupDistance;
     long group = 0;
     int i0 = 0;
-    CalibCBlock ref = null;
+    CBlock ref = null;
     int sz = list.size();
     for ( int i1 = 0; i1 < sz; ++i1 ) {
-      CalibCBlock b1 = list.get( i1 );
+      CBlock b1 = list.get( i1 );
       if ( b1.isSaturated() ) ++ n_saturated;
 
       if ( b1.mGroup > 0 ) {
@@ -649,7 +649,7 @@ public class GMActivity extends Activity
           i0    = i1;
           b1.computeBearingAndClino();
           for (int i2 = i1+1; i2 < sz; ++i2 ) {
-            CalibCBlock b2 = list.get( i2 );
+            CBlock b2 = list.get( i2 );
             if ( b2.mGroup == 0 ) continue;
             if ( b2.mGroup != group ) break;
             b2.computeBearingAndClino();
@@ -665,7 +665,7 @@ public class GMActivity extends Activity
         float dev = 0;
         for (int i2=i0; i2<sz; ++ i2 ) {
           if ( i2 == i1 ) continue;
-          CalibCBlock b2 = list.get( i2 );
+          CBlock b2 = list.get( i2 );
           if ( b2.mGroup == 0 ) continue;
           if ( b2.mGroup != group ) break;
           compass = b2.mBearing * TDMath.DEG2RAD;
@@ -752,7 +752,7 @@ public class GMActivity extends Activity
     mApp = (TopoDroidApp) getApplication();
     mApp_mDData = TopoDroidApp.mDData;
 
-    mDataAdapter  = new CalibCBlockAdapter( this, R.layout.row, new ArrayList< CalibCBlock >() );
+    mDataAdapter  = new CBlockAdapter( this, R.layout.cblock_row, new ArrayList< CBlock >() );
 
     mList = (ListView) findViewById(R.id.list);
     mList.setAdapter( mDataAdapter );
@@ -947,7 +947,7 @@ public class GMActivity extends Activity
 
     } else if ( b == mButton1[BTN_GROUP] ) { // GROUP
       if ( TDInstance.cid >= 0 ) {
-        List< CalibCBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, 0, true ); // true: includde negative-grp
+        List< CBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, 0, true ); // true: includde negative-grp
         if ( list.size() >= 16 ) {
           (new GMGroupsDialog( this, this, 
             // ( TDSetting.mGroupBy == TDSetting.GROUP_BY_DISTANCE )?  getResources().getString( R.string.group_policy_distance ) :
@@ -982,7 +982,7 @@ public class GMActivity extends Activity
       // if ( mCalibration == null ) {
       //   TDToast.makeBad( R.string.no_calibration );
       // } else {
-        List< CalibCBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, 0, false ); // false: skip negative-grp
+        List< CBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, 0, false ); // false: skip negative-grp
         if ( list.size() >= 16 ) {
           ( new CalibCoverageDialog( this, list, mCalibration ) ).show();
         } else {
@@ -1020,7 +1020,7 @@ public class GMActivity extends Activity
   {
     String warning = null;
     // if ( warning == null ) { // check coverage
-      List< CalibCBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, 0, false ); // false: skip negative-grp
+      List< CBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, 0, false ); // false: skip negative-grp
       CalibCoverage coverage = new CalibCoverage( );
       float cover_value = coverage.evalCoverage( list, null );
       if ( cover_value < 95 ) warning = String.format( getResources().getString( R.string.coverage_warning ), 95 );
@@ -1135,7 +1135,7 @@ public class GMActivity extends Activity
   {
     mApp_mDData.updateGMName( mGMid, TDInstance.cid, name );
     // String id = Long.toString(mGMid);
-    // CalibCBlock blk = mApp.mDData.selectGM( mGMid, TDInstance.cid );
+    // CBlock blk = mApp.mDData.selectGM( mGMid, TDInstance.cid );
     mSaveCBlock.setGroup( value );
 
     // if ( mApp.mListRefresh ) {

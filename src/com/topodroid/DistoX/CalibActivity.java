@@ -293,20 +293,25 @@ public class CalibActivity extends Activity
 
   private void showCoeffs()
   {
-    byte[] coeff = CalibAlgo.stringToCoeff( TopoDroidApp.mDData.selectCalibCoeff( TDInstance.cid ) );
-    TDMatrix mG = new TDMatrix();
-    TDMatrix mM = new TDMatrix();
-    TDVector vG = new TDVector();
-    TDVector vM = new TDVector();
-    TDVector nL = new TDVector();
-    CalibAlgo.coeffToG( coeff, vG, mG );
-    CalibAlgo.coeffToM( coeff, vM, mM );
-    CalibAlgo.coeffToNL( coeff, nL );
+    String coeff_str = TopoDroidApp.mDData.selectCalibCoeff( TDInstance.cid );
+    if ( coeff_str != null ) {
+      byte[] coeff = CalibAlgo.stringToCoeff( coeff_str );
+      TDMatrix mG = new TDMatrix();
+      TDMatrix mM = new TDMatrix();
+      TDVector vG = new TDVector();
+      TDVector vM = new TDVector();
+      TDVector nL = new TDVector();
+      CalibAlgo.coeffToG( coeff, vG, mG );
+      CalibAlgo.coeffToM( coeff, vM, mM );
+      CalibAlgo.coeffToNL( coeff, nL );
    
-    CalibResult res = new CalibResult();
-    TopoDroidApp.mDData.selectCalibError( TDInstance.cid, res );
-    (new CalibCoeffDialog( this, null, vG, mG, vM, mM, nL, null,
-                           res.delta_bh, res.error, res.stddev, res.max_error, res.iterations, coeff /*, false */ )).show();
+      CalibResult res = new CalibResult();
+      TopoDroidApp.mDData.selectCalibError( TDInstance.cid, res );
+      (new CalibCoeffDialog( this, null, vG, mG, vM, mM, nL, null,
+                             res.delta_bh, res.error, res.stddev, res.max_error, res.iterations, coeff /*, false */ )).show();
+    } else {
+      TDToast.make( R.string.calib_no_coeff );
+    }
   }
 
   private void askDelete()

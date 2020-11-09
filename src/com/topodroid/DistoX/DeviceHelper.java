@@ -280,9 +280,9 @@ class DeviceHelper extends DataSetObservable
     // } catch (SQLiteException e ) { logError( "reset GM " + cid + "/" + start_id, e ); }
   }
 
-  List< CalibCBlock > selectAllGMs( long cid, int status, boolean negative_too )
+  List< CBlock > selectAllGMs( long cid, int status, boolean negative_too )
   {
-    List< CalibCBlock > list = new ArrayList<>();
+    List< CBlock > list = new ArrayList<>();
     if ( myDB == null ) {
       TDLog.Error( ERROR_NULL_DB + "select all GM");
       return list;
@@ -301,7 +301,7 @@ class DeviceHelper extends DataSetObservable
           if ( status >= (int)sts ) { // status == 0 --> only good shots
                                       // status == 1 --> all shots
             if ( negative_too || grp >= 0 ) {
-              CalibCBlock block = new CalibCBlock();
+              CBlock block = new CBlock();
               block.setId( cursor.getLong(0), cid );
               block.setData( 
                 cursor.getLong(1),
@@ -323,13 +323,13 @@ class DeviceHelper extends DataSetObservable
     return list;
   }
 
-  CalibCBlock selectGM( long id, long cid )
+  CBlock selectGM( long id, long cid )
   {
     if ( myDB == null ) {
       TDLog.Error( ERROR_NULL_DB + "select GM");
       return null;
     }
-    CalibCBlock block = null;
+    CBlock block = null;
     Cursor cursor = null;
     try { 
       cursor = myDB.query(GM_TABLE,
@@ -340,7 +340,7 @@ class DeviceHelper extends DataSetObservable
                                null,  // having
                                null ); // order by
       if ( cursor != null && cursor.moveToFirst()) {
-        block = new CalibCBlock();
+        block = new CBlock();
         block.setId( cursor.getLong(0), cid );
         block.setData( 
           cursor.getLong(1),

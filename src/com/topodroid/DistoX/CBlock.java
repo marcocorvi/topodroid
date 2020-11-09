@@ -1,4 +1,4 @@
-/* @file CalibCBlock.java
+/* @file CBlock.java
  *
  * @author marco corvi
  * @date nov 2011
@@ -22,7 +22,7 @@ import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.util.Locale;
 
-class CalibCBlock
+class CBlock
 {
   private static final int[] colors = { // 0xffcccccc, 0xffffcccc, 0xffccccff
     TDColor.LIGHT_GRAY,
@@ -65,12 +65,12 @@ class CalibCBlock
   boolean isFar() { return mFarness; }
   // float   getFarCosine() { return mFarCosine; }
 
-  // void computeFarness( CalibCBlock ref, float thr )
+  // void computeFarness( CBlock ref, float thr )
   // {
   //   mFarness = isFarFrom( ref.mBearing, ref.mClino, thr );
   // }
 
-  CalibCBlock()
+  CBlock()
   {
     mId = 0;
     mCalibId = 0;

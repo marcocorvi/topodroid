@@ -50,14 +50,13 @@ class CalibGMDialog extends MyDialog
                     implements OnClickListener
 {
   private final WeakReference<GMActivity> mParent; 
-  private final CalibCBlock mBlk;
+  private final CBlock mBlk;
   private final String mErrorGroupRequired;
   private final String mErrorGroupNonInt;
 
   // private EditText mETbearing;
   // private EditText mETclino;
   // private EditText mETroll;
-
   // private TextView mTVerror;
   
   private EditText mETname;  // group number
@@ -75,7 +74,7 @@ class CalibGMDialog extends MyDialog
    * @param parent    parent GM activity
    * @param blk       calibration data
    */
-  CalibGMDialog( Context context, GMActivity parent, CalibCBlock blk )
+  CalibGMDialog( Context context, GMActivity parent, CBlock blk )
   {
     super( context, R.string.CalibGMDialog );
     mParent = new WeakReference<GMActivity>( parent );
@@ -107,6 +106,7 @@ class CalibGMDialog extends MyDialog
 
     // mButtonOK     = new MyCheckBox( mContext, size, R.drawable.iz_save, R.drawable.iz_save ); 
     mButtonDelete = new MyCheckBox( mContext, size, R.drawable.iz_delete, R.drawable.iz_delete ); 
+    mButtonDelete.setOnClickListener( this );
     layout2.addView( mButtonDelete, lp );
 
     if ( TDLevel.overExpert ) {
@@ -126,8 +126,9 @@ class CalibGMDialog extends MyDialog
     // layout2.addView( mButtonOK, lp );
 
     mButtonOK     = (Button) findViewById(R.id.gm_ok );
+    mButtonOK.setOnClickListener( this );
     mButtonCancel = (Button) findViewById(R.id.gm_cancel );
-    // mButtonDelete = (Button) findViewById(R.id.gm_delete );
+    mButtonCancel.setOnClickListener( this );
 
     eTbearing.setText( String.format(Locale.US, "%.1f", mBlk.mBearing ) );
     eTclino.setText( String.format(Locale.US, "%.1f", mBlk.mClino ) );
@@ -135,9 +136,6 @@ class CalibGMDialog extends MyDialog
     tVerror.setText( String.format(Locale.US, "%.4f", mBlk.mError ) );
 
     mETname.setText( String.format(Locale.US, "%d", mBlk.mGroup ) );
-    mButtonOK.setOnClickListener( this );
-    mButtonDelete.setOnClickListener( this );
-    mButtonCancel.setOnClickListener( this );
 
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), R.xml.my_keyboard_base_sign, -1 );
     if ( TDSetting.mKeyboard ) {

@@ -472,7 +472,7 @@ class CalibAlgo
     }
   }
 
-  void AddValues( CalibCBlock b )
+  void AddValues( CBlock b )
   {
     // add also group-0 CBlocks to keep CBlock list and calib vectors aligned
     AddValues( b.gx, b.gy, b.gz, b.mx, b.my, b.mz, b.mGroup );

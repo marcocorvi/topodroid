@@ -20,7 +20,7 @@ class CalibInfo
   final static int ALGO_NON_LINEAR = 2;
   // final static int ALGO_MINIMUM    = 3;
 
-  private long id;           //!< database ID
+  private long id;          //!< database ID
   public String name;       //!< name 
   public String date;       //!< date
   public String device;     //!< device address

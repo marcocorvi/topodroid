@@ -41,14 +41,17 @@
      android:layout_height="match_parent"
      android:orientation="vertical"
      >
-
-    <ListView android:id="@+id/list"
-      style="@style/list_bottom"
+    <HorizontalScrollView 
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:fastScrollEnabled="true"
-    />  
-
+      >
+      <ListView android:id="@+id/list"
+        style="@style/list_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fastScrollEnabled="true"
+      />  
+    </HorizontalScrollView>
     <ListView android:id="@+id/menu"
       style="@style/menu_default"
     />

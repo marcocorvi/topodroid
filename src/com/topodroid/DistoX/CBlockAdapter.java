@@ -1,4 +1,4 @@
-/* @file CalibCBlockAdapter.java
+/* @file CBlockAdapter.java
  *
  * @author marco corvi
  * @date apr 2012
@@ -28,20 +28,25 @@ import android.view.LayoutInflater;
 
 import java.util.ArrayList;
 
-class CalibCBlockAdapter extends ArrayAdapter< CalibCBlock >
+class CBlockAdapter extends ArrayAdapter< CBlock >
 {
-  private ArrayList< CalibCBlock > items;  // list if calibration data
+  private ArrayList< CBlock > items;  // list if calibration data
   private final Context context;                 // context
+  private final LayoutInflater mLayoutInflater;
 
-
-  CalibCBlockAdapter( Context ctx, int id, ArrayList< CalibCBlock > items )
+  // @param ctx    context
+  // @param id     resource layout of the array entries
+  // @param items  array items
+  CBlockAdapter( Context ctx, int id, ArrayList< CBlock > items )
   {
     super( ctx, id, items );
     this.context = ctx;
     this.items = items;
+    mLayoutInflater = (LayoutInflater)ctx.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
   }
 
-  CalibCBlock get( int pos ) { return items.get(pos); }
+  // @return the CBlock item at the gival position in the array
+  CBlock get( int pos ) { return items.get(pos); }
  
   @Override
   // @NonNull
@@ -49,21 +54,21 @@ class CalibCBlockAdapter extends ArrayAdapter< CalibCBlock >
   {
     View v = convertView;
     if ( v == null ) {
-      LayoutInflater li = (LayoutInflater)context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
       try { 
-        v = li.inflate( R.layout.row, parent, false ); // FIXME inflate may produce NullPointerException
+        v = mLayoutInflater.inflate( R.layout.cblock_row, parent, false ); // FIXME inflate may produce NullPointerException
       } catch ( NullPointerException e ) {
         TDLog.Error("CBlock adapter inflate view: null pointer");
         return null;
       }
     }
 
-    CalibCBlock b = items.get( pos );
+    CBlock b = items.get( pos );
     if ( b != null ) {
       TextView tw = (TextView) v.findViewById( R.id.row_text );
       tw.setText( b.toString() );
       tw.setTextSize( TDSetting.mTextSize );
       tw.setTextColor( b.color() );
+      tw.setWidth( (int)(TopoDroidApp.mDisplayWidth * 1.5) );
       if ( b.isSaturated() ) {      // saturated data
         tw.setBackgroundColor( TDColor.DARK_BROWN );
       } else if ( b.isGZero() ) {   // G=0 data
