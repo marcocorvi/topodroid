@@ -175,6 +175,10 @@ class DistoXProtocol extends TopoDroidProtocol
   // }
 
   // PACKETS I/O ------------------------------------------------------------------------
+  /** check that the byte has the proper data type
+   * @param b    byte
+   * @param data_type expected data type
+   */
   private void checkDataType( byte b, int data_type )
   {
     // if ( DataType.of( b ) != data_type ) { // CHECK_DATA_TYPE 
@@ -256,6 +260,8 @@ class DistoXProtocol extends TopoDroidProtocol
   }
 
   /**
+   * @param no_timeout  whether not to timeout
+   * @param data_type   expected packet datatype (either shot or calib)
    * @return packet type (if successful)
    */
   @Override

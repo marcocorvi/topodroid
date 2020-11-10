@@ -298,6 +298,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       tvFrom    = from;
       tvTo      = to;
       tvLength  = len;
+      tvLength.setWidth( (int)(TopoDroidApp.mDisplayWidth) );
       mBlock    = null; // REVISE_RECENT
     }
 

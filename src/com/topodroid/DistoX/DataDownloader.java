@@ -165,6 +165,7 @@ class DataDownloader
 
   // BATCH ON-DEMAND DOWNLOAD
   // non-private to allow the DistoX select dialog
+  // @param data_type   packet datatype
   private void tryDownloadData( int data_type )
   {
     TDInstance.secondLastShotId = TopoDroidApp.lastShotId( ); // FIXME-LATEST

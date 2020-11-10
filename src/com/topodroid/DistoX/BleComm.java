@@ -224,6 +224,12 @@ class BleComm extends TopoDroidComm
   // ON-DEMAND DATA DOWNLOAD
   private Handler mLister;
 
+  /** download data
+   * @param address    device address
+   * @param lister     data lister
+   * @param data_type  packet datatype
+   * @return always 0
+   */
   int downloadData( String address, Handler /* ILister */ lister, int data_type )
   {
     // Log.v("DistoXBLE", "comm data downlaod");

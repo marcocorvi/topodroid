@@ -72,7 +72,7 @@ class TopoDroidComm
     // private long mLastShotId;   // last shot id
 
     private volatile boolean doWork = true;
-    private int mDataType;
+    private int mDataType;   // packet datatype
 
     void cancelWork()
     {
@@ -84,6 +84,7 @@ class TopoDroidComm
      * @param protocol    communication protocol
      * @param to_read     number of data to read (use -1 to read forever until timeout or an exception)
      * @param lister      optional data lister
+     * @param data_type   packet datatype (either shot or calib)
      */
     CommThread( int type, TopoDroidProtocol protocol, int to_read, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
     {
@@ -359,7 +360,11 @@ class TopoDroidComm
   // -------------------------------------------------------------------------------------
   // ON-DEMAND DATA DOWNLOAD
 
-  // @param data_type    either shot or calib (or all)
+  /** 
+   * @param lister    data lister
+   * @param data_type packet datatype, either shot or calib (or all)
+   * @return ialways -1: number of packet received - must be overridden
+   */
   int downloadData( String address, Handler /* ILister */ lister, int data_type )
   {
     return -1;

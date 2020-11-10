@@ -1290,6 +1290,13 @@ public class TopoDroidApp extends Application
   // -------------------------------------------------------------
   // DATA BATCH DOWNLOAD
 
+  /** 
+   * @param lister    data lister
+   * @param data_type packet datatype
+   * @return number of packet received
+   *
+   * NOTE called only by DataDownloadTask
+   */
   int downloadDataBatch( Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
   {
     TDInstance.secondLastShotId = lastShotId();

@@ -63,6 +63,7 @@ class DistoX310Comm extends DistoXComm
    * @param address   remote device address
    * @param what      command to send to the remote device
    * @param lister    callback handler
+   * @param data_type packet datatype 
    */
   void setX310Laser( String address, int what, int to_read, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
   {

@@ -450,6 +450,7 @@ class DistoXComm extends TopoDroidComm
   /** start the communication thread
    * @param to_read   number of packets to read
    * @param lister    packet calback handler
+   * @param data_type packet datatype (either shot of calib)
    * @return true on success
    */
   protected boolean startCommThread( int to_read, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
@@ -583,6 +584,12 @@ class DistoXComm extends TopoDroidComm
   // ------------------------------------------------------------------------------------
   // CONTINUOUS DATA DOWNLOAD
 
+  /**
+   * @param address    device address
+   * @param lister
+   * @param data_type  packet datatype
+   * @return true if successful
+   */
   boolean connectDevice( String address, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
   {
     if ( mCommThread != null ) {
@@ -607,6 +614,12 @@ class DistoXComm extends TopoDroidComm
   // -------------------------------------------------------------------------------------
   // ON-DEMAND DATA DOWNLOAD
 
+  /**
+   * @param address    device address
+   * @param lister     data lister
+   * @param data_type  packet datatype
+   * @return number of packets (-1 failure)
+   */
   int downloadData( String address, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
   {
     if ( ! isCommThreadNull() ) {
