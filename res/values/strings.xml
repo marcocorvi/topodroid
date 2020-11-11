@@ -175,7 +175,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="strike_dip">Strike %1$.0f Dip %2$.0f</string>
 
     <string name="few_data">Not enough data</string>
-    <string name="few_iter">Failed: too many iterations</string>
+    <string name="few_iter">Failed: too many iterations\nCheck your data</string>
     <string name="few_groups">Not enough data with group</string>
     <string name="found_groups">Found %1$d groups</string>
     <string name="regroup">No regroup</string>

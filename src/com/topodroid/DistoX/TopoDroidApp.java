@@ -2172,13 +2172,13 @@ public class TopoDroidApp extends Application
 
   static void setPath11NoAgain()
   {
-    if ( mData != null ) mData.setValue( "Path11", "1" );
+    if ( mDData != null ) mDData.setValue( "Path11", "1" );
   }
 
   static boolean hasPath11NoAgain()
   {
-    if ( mData != null ) {
-      String no_again = mData.getValue( "Path11" );
+    if ( mDData != null ) {
+      String no_again = mDData.getValue( "Path11" );
       return ( no_again != null && no_again.equals("1") );
     }
     return false;
