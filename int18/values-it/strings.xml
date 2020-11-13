@@ -103,6 +103,7 @@ Tap "Close" not to take any action.
     <string name="calib_delete">Eliminare calibrazione </string>
     <string name="calib_device_mismatch">ATTENZIONE. Discrepanza tra calibrazione e dispositivo</string>
     <string name="calib_no_name">Nome della calibrazione mancante</string>
+    <!-- TODO string name="calib_no_coeff">Calibration coefficients not set</string -->
     <string name="calib_gm_policy">Metodo di raggruppamento dati</string>
     <string name="calib_gm_undelete">Ripristina dato calibrazione?</string>
     <string name="calib_saved">Salvata calibrazione</string>
@@ -134,7 +135,7 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="device_busy">Dispositivo occupato</string -->
     <string name="device_illegal_addr">Indirizzo di memoria illegale</string>
     <string name="device_info">Dati dispositivo</string>
-    <string name="device_model_set">Vuoi davvero cambiare il modello del dispositivo</string>
+    <!-- UNUSED string name="device_model_set">Vuoi davvero cambiare il modello del dispositivo</string -->
     <string name="device_none">Nessun DistoX selezionato</string>
     <!-- UNUSED string name="device_paired">Device is paired</string -->
     <string name="device_reset">Resettare la memoria del DistoX</string>

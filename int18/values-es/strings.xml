@@ -104,6 +104,7 @@ Tap "Close" not to take any action.
     <string name="calib_delete">Eliminar calibración </string>
     <string name="calib_device_mismatch">ADVERTENCIA: Desajuste en la calibración del dispositivo</string>
     <string name="calib_no_name">Escriba el nombre de la calibración</string>
+    <!-- TODO string name="calib_no_coeff">Calibration coefficients not set</string -->
     <!-- REMOVE string name="calib_gm_policy">Política</string -->
     <!-- TODO string name="calib_gm_policy">Group policy</string -->
     <string name="calib_gm_undelete">¿Quiere eliminar los datos de calibración?</string>
@@ -136,7 +137,7 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="device_busy">Dispositivo ocupado</string -->
     <string name="device_illegal_addr">Dirección de memoria no válida</string>
     <string name="device_info">Información del dispositivo</string>
-    <string name="device_model_set">¿Quiere cambiar de dispositivo?</string>
+    <!-- UNUSED string name="device_model_set">¿Quiere cambiar de dispositivo?</string -->
     <string name="device_none">DistoX no seleccionado</string>
     <!-- UNUSED string name="device_paired">El dispositivo está emparejado</string -->
     <string name="device_reset">Reseteo memoria de DistoX </string>

@@ -102,6 +102,7 @@ WARNUNG. Ab v.5.0.60 wird ein "TopoDroid"-Ordner automatisch verwendet wenn es e
     <string name="calib_delete">Kalibrierung löschen</string>
     <string name="calib_device_mismatch">WARNUNG: Kalibrierung stimmt mit Gerät nicht überein</string>
     <string name="calib_no_name">Name erforderlich</string>
+    <!-- TODO string name="calib_no_coeff">Calibration coefficients not set</string -->
     <!-- REMOVE string name="calib_gm_policy">Methode</string -->
     <string name="calib_gm_policy">Gruppierung</string>
     <string name="calib_gm_undelete">Kalibrierung wiederherstellen?</string>
@@ -134,7 +135,7 @@ WARNUNG. Ab v.5.0.60 wird ein "TopoDroid"-Ordner automatisch verwendet wenn es e
     <!-- UNUSED string name="device_busy">Gerät arbeitet</string -->
     <string name="device_illegal_addr">Ungültige Speicheradresse</string>
     <string name="device_info">Geräte-Info</string>
-    <string name="device_model_set">Gerätemodell wirklich ändern</string>
+    <!-- UNUSED string name="device_model_set">Gerätemodell wirklich ändern</string -->
     <string name="device_none">Kein DistoX ausgewählt</string>
     <!-- UNUSED string name="device_paired">Gerät ist verbunden</string -->
     <string name="device_reset">DistoX Speicher zurücksetzen</string>

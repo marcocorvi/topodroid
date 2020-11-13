@@ -107,6 +107,7 @@ Tap "Close" not to take any action.
     <string name="calib_delete">Apagar calibração </string>
     <string name="calib_device_mismatch">ALERTA: Dispositivo a ser calibrado incompatível</string>
     <string name="calib_no_name">Nome exigido</string>
+    <!-- TODO string name="calib_no_coeff">Calibration coefficients not set</string -->
     <!-- REMOVE string name="calib_gm_policy">Regra</string -->
     <string name="calib_gm_policy">Regra de agrupamento</string>
     <string name="calib_gm_undelete">Restaurar os dados de calibração?</string>
@@ -139,7 +140,7 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="device_busy">Dispositivo indisponível</string -->
     <string name="device_illegal_addr">Endereço de memória inválido</string>
     <string name="device_info">Tipo de dispositivo</string>
-    <string name="device_model_set">Quer realmente mudar o modelo do dispositivo</string>
+    <!-- UNUSED string name="device_model_set">Quer realmente mudar o modelo do dispositivo</string -->
     <string name="device_none">Nenhuma DistoX selecionada</string>
     <!-- UNUSED string name="device_paired">Dispositivo pareado</string -->
     <string name="device_reset">Reiniciar memória da DistoX</string>

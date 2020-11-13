@@ -103,6 +103,7 @@ Tap "Close" not to take any action.
     <string name="calib_delete">删除校准 </string>
     <string name="calib_device_mismatch">警告: 校准设备不匹配</string>
     <string name="calib_no_name">强制命名</string>
+    <!-- TODO string name="calib_no_coeff">Calibration coefficients not set</string -->
     <!-- REMOVE string name="calib_gm_policy">原则</string -->
     <string name="calib_gm_policy">组策略</string>
     <string name="calib_gm_undelete">还原校准数据?</string>
@@ -136,7 +137,7 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="device_busy">Device busy</string -->
     <string name="device_illegal_addr">非法的存储地址</string>
     <string name="device_info">设备信息</string>
-    <string name="device_model_set">你是否想要切换设备</string>
+    <!-- UNUSED string name="device_model_set">你是否想要切换设备</string -->
     <string name="device_none">无可供选择DistoX设备</string>
     <!-- UNUSED string name="device_paired">Device is paired</string -->
     <string name="device_reset">重置 DistoX 内存</string>

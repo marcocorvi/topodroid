@@ -105,6 +105,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="calib_delete">Usuń kalibrację</string>
     <string name="calib_device_mismatch">UWAGA: Niedopasowana kalibracja</string>
     <string name="calib_no_name">nazwa jest obowiązkowa</string>
+    <!-- TODO string name="calib_no_coeff">Calibration coefficients not set</string -->
     <!-- REMOVE string name="calib_gm_policy">Polityka</string -->
     <!-- TODO string name="calib_gm_policy">Group policy</string -->
     <string name="calib_gm_undelete">Przywrócić dane kalibracyjne?</string>
@@ -138,7 +139,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="device_busy">Device busy</string -->
     <string name="device_illegal_addr">Niedozwolony adres pamięci</string>
     <string name="device_info">Informacje o urządzeniu</string>
-    <string name="device_model_set">Na pewno zmienić model urządzenia</string>
+    <!-- UNUSED string name="device_model_set">Na pewno zmienić model urządzenia</string -->
     <string name="device_none">Nie wybrano DistoX</string>
     <!-- UNUSED string name="device_paired">Device is paired</string -->
     <string name="device_reset">Reset pamięci DistoX</string>

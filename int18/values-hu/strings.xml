@@ -104,6 +104,7 @@ Tap "Close" not to take any action.
     <string name="calib_delete">Kalibráció törlése</string>
     <string name="calib_device_mismatch">FIGYELEM: A kalibrációs fájl másik eszközzel készült</string>
     <string name="calib_no_name">Név megadása kötelező</string>
+    <!-- TODO string name="calib_no_coeff">Calibration coefficients not set</string -->
     <!-- REMOVE string name="calib_gm_policy">Eljárás</string -->
     <!-- TODO string name="calib_gm_policy">Group policy</string -->
     <string name="calib_gm_undelete">Helyreállítja a kalibrációs adatokat?</string>
@@ -137,7 +138,7 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="device_busy">Az eszköz használatban</string -->
     <string name="device_illegal_addr">Helytelen memória cím</string>
     <string name="device_info">Eszköz információ</string>
-    <string name="device_model_set">Valóban meg akarja változtatni az eszköz típusát?</string>
+    <!-- UNUSED string name="device_model_set">Valóban meg akarja változtatni az eszköz típusát?</string -->
     <string name="device_none">Nincs kiválasztva DistoX</string>
     <!-- UNUSED string name="device_paired">Device is paired</string -->
     <string name="device_reset">DistoX memóriájának újraindítása</string>

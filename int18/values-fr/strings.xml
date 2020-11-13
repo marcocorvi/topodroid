@@ -105,6 +105,7 @@ Tap "Close" not to take any action.
     <string name="calib_delete">Supprimer cet étalonnage</string>
     <string name="calib_device_mismatch">ATTENTION : Étalonnage et Appareil ne correspondent pas</string>
     <string name="calib_no_name">Vous devez nommer cet étalonnage</string>
+    <!-- TODO string name="calib_no_coeff">Calibration coefficients not set</string -->
     <!-- REMOVE string name="calib_gm_policy">Politique</string -->
     <!-- TODO string name="calib_gm_policy">Group policy</string -->
     <string name="calib_gm_undelete">Récupérer ces données d\'étalonnage ?</string>
@@ -137,7 +138,7 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="device_busy">Périphérique occupé</string -->
     <string name="device_illegal_addr">Adresse mémoire non valide</string>
     <string name="device_info">Informations sur le périphérique</string>
-    <string name="device_model_set">Êtes-vous sûr de vouloir changer le modèle du périphérique ?</string>
+    <!-- UNUSED string name="device_model_set">Êtes-vous sûr de vouloir changer le modèle du périphérique ?</string -->
     <string name="device_none">Aucun DistoX sélectionné</string>
     <!-- UNUSED string name="device_paired">le Disto est appairée</string -->
     <string name="device_reset">Vider et importer mémoire DistoX</string>

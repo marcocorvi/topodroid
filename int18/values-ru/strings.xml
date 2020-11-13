@@ -104,6 +104,7 @@
     <string name="calib_delete">Удалить калибровку </string>
     <string name="calib_device_mismatch">ВНИМАНИЕ: Несоответствие калибровчных данных и прибора</string>
     <string name="calib_no_name">Необходимо задать название</string>
+    <!-- TODO string name="calib_no_coeff">Calibration coefficients not set</string -->
     <string name="calib_gm_policy">Правила группирования</string>
     <string name="calib_gm_undelete">Восстановить калибровчные данные?</string>
     <string name="calib_offgroup_data">Возможно отклонение %1$d от данных в группе</string>
@@ -137,7 +138,7 @@
     <!-- UNUSED string name="device_busy">Устройство занято</string -->
     <string name="device_illegal_addr">Недопустимый адрес памяти</string>
     <string name="device_info">Информация об устройстве</string>
-    <string name="device_model_set">Вы уверенны что хотите сменить модель прибора</string>
+    <!-- UNUSED string name="device_model_set">Вы уверенны что хотите сменить модель прибора</string -->
     <string name="device_none">DistoX не выбран</string>
     <!-- UNUSED string name="device_paired">Прибор сопряжен</string -->
     <string name="device_reset">Сброс памяти DistoX</string>

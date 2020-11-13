@@ -105,6 +105,7 @@ Tap "Close" not to take any action.
     <string name="calib_delete">Изтриване на калибрация </string>
     <string name="calib_device_mismatch">Предупреждение: Различно устройство за тази калибрация</string>
     <string name="calib_no_name">Името е задължително</string>
+    <!-- TODO string name="calib_no_coeff">Calibration coefficients not set</string -->
     <!-- REMOVE string name="calib_gm_policy">Правила</string -->
     <!-- TODO string name="calib_gm_policy">Group policy</string -->
     <string name="calib_gm_undelete">Възстановяване на данни за калибрацията?</string>
@@ -138,7 +139,7 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="device_busy">Устройството е заето</string -->
     <string name="device_illegal_addr">Грешен адрес в паметта</string>
     <string name="device_info">Информация за устройството</string>
-    <string name="device_model_set">Наистина ли искате да промените модела на устройството?</string>
+    <!-- UNUSED string name="device_model_set">Наистина ли искате да промените модела на устройството?</string -->
     <string name="device_none">Не е избрано DistoX устройство</string>
     <!-- UNUSED string name="device_paired">Устройството е свързано</string -->
     <string name="device_reset">Изчистване на DistoX паметта</string>

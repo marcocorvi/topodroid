@@ -949,12 +949,11 @@ public class GMActivity extends Activity
       if ( TDInstance.cid >= 0 ) {
         List< CBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, 0, true ); // true: includde negative-grp
         if ( list.size() >= 16 ) {
-          (new GMGroupsDialog( this, this, 
-            // ( TDSetting.mGroupBy == TDSetting.GROUP_BY_DISTANCE )?  getResources().getString( R.string.group_policy_distance ) :
-            ( TDSetting.mGroupBy == TDSetting.GROUP_BY_DISTANCE )?  "Group by distance is no longer supported" : // deprecated
-            ( TDSetting.mGroupBy == TDSetting.GROUP_BY_FOUR )?  getResources().getString( R.string.group_policy_four ) :
-              getResources().getString( R.string.group_policy_sixteen ) // TDSetting.GROUP_BY_ONLY_16
-          )).show();
+          (new GMGroupsDialog( this, this )).show();
+            // // ( TDSetting.mGroupBy == TDSetting.GROUP_BY_DISTANCE )?  getResources().getString( R.string.group_policy_distance ) :
+            // ( TDSetting.mGroupBy == TDSetting.GROUP_BY_DISTANCE )?  "Group by distance is no longer supported" : // deprecated
+            // ( TDSetting.mGroupBy == TDSetting.GROUP_BY_FOUR )?  getResources().getString( R.string.group_policy_four ) :
+            //   getResources().getString( R.string.group_policy_sixteen ) // TDSetting.GROUP_BY_ONLY_16
           // new CalibComputer( this, -1L, CalibComputer.CALIB_COMPUTE_GROUPS ).execute();
         } else {
           resetTitle( );

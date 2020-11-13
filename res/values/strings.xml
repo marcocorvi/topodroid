@@ -137,7 +137,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="device_busy">Device busy</string -->
     <string name="device_illegal_addr">Illegal memory address</string>
     <string name="device_info">Device info</string>
-    <string name="device_model_set">DO YOU REALLY WANT TO CHANGE THE MODEL OF THE DEVICE</string>
+    <!-- UNUSED string name="device_model_set">DO YOU REALLY WANT TO CHANGE THE MODEL OF THE DEVICE</string -->
     <string name="device_none">No DistoX selected</string>
     <!-- UNUSED string name="device_paired">Device is paired</string -->
     <string name="device_reset">Reset DistoX memory</string>

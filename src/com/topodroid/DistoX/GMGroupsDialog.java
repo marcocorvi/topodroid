@@ -39,13 +39,13 @@ class GMGroupsDialog extends MyDialog
   private RadioButton mRBtd;
   private RadioButton mRBpt;
 
-  private String mPolicy;
+  // private String mPolicy;
 
-  GMGroupsDialog( Context context, GMActivity parent, String policy )
+  GMGroupsDialog( Context context, GMActivity parent /* , String policy */ )
   {
     super( context, R.string.GMGroupsDialog );
     mParent  = parent;
-    mPolicy  = policy;
+    // mPolicy  = policy;
   }
 
   @Override
@@ -64,7 +64,7 @@ class GMGroupsDialog extends MyDialog
     ( (Button) findViewById( R.id.group_cancel ) ).setOnClickListener( this );
     
     TextView policy = (TextView) findViewById( R.id.group_policy );
-    if ( TDLevel.overExpert ) {
+    // if ( TDLevel.overExpert ) {
       mRBtd = (RadioButton) findViewById( R.id.gm_policy_td );
       mRBpt = (RadioButton) findViewById( R.id.gm_policy_pt );
       if ( TDSetting.mGroupBy == TDSetting.GROUP_BY_ONLY_16 ) {
@@ -72,10 +72,10 @@ class GMGroupsDialog extends MyDialog
       } else {
         mRBtd.setChecked( true );
       }
-    } else { 
-      policy.setText( mPolicy );
-      findViewById( R.id.gm_policies ).setVisibility( View.GONE );
-    }
+    // } else { 
+    //   policy.setText( mPolicy );
+    //   findViewById( R.id.gm_policies ).setVisibility( View.GONE );
+    // }
   }
     
   @Override
@@ -84,9 +84,9 @@ class GMGroupsDialog extends MyDialog
     Button b = (Button)v;
     if ( b == mBtnOK ) {
       int policy = TDSetting.mGroupBy;
-      if ( TDLevel.overExpert ) {
+      // if ( TDLevel.overExpert ) {
         policy = mRBpt.isChecked() ? TDSetting.GROUP_BY_ONLY_16 : TDSetting.GROUP_BY_FOUR ;
-      }
+      // }
       mParent.computeGroups( -1L, policy );
     } else if ( b == mBtnReset ) {
       mParent.resetGroups( -1L );
