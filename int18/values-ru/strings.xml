@@ -175,7 +175,7 @@
     <string name="strike_dip">Простирание %1$.0f Падение %2$.0f</string>
 
     <string name="few_data">Недостаточно данных</string>
-    <string name="few_iter">Ошибка: Недостаточно итераций</string>
+    <string name="few_iter">Ошибка: Слишком много итераций\nПроверьте данные калибровки</string>
     <string name="few_groups">Недостаточно данных с номером группы</string>
     <string name="found_groups">Найдено %1$d групп</string>
     <string name="regroup">Не перегруппировать</string>
