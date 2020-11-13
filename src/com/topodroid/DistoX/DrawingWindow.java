@@ -1068,7 +1068,7 @@ public class DrawingWindow extends ItemDrawer
       startSaveTdrTask( mType, PlotSave.SAVE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP );
       popInfo();
       doStart( false, -1 );
-      recomputeReferences( mNum, mZoom );
+      // FIXME_POPINFO recomputeReferences( mNum, mZoom );
     } else {
       if ( doubleBack ) {
         if ( doubleBackToast != null ) doubleBackToast.cancel();
@@ -2123,12 +2123,39 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.setDisplayMode( mSavedMode );
     // Log.v("DistoX", "pop " + mType + " " + mName + " from " + mFrom + " A " + mAzimuth + " C " + mClino );
     resetStatus();
+    resetReference( plot );
     // FIXME_SK mButton1[ BTN_DOWNLOAD ].setVisibility( View.VISIBLE );
     // FIXME_SK mButton1[ BTN_BLUETOOTH ].setVisibility( View.VISIBLE );
 
     // mButton1[ BTN_PLOT ].setVisibility( View.VISIBLE );
     if ( ! TDLevel.overExpert ) mButton1[BTN_PLOT].setOnLongClickListener( this );
     if ( TDLevel.overNormal && BTN_DIAL < mButton1.length ) mButton1[ BTN_DIAL ].setVisibility( View.VISIBLE );
+  }
+
+  private void pushInfo( long type, String name, String from, String to, float azimuth, float clino, float tt )
+  {
+    // Log.v("DistoX", "push info " + type + " " + name + " from " + from + " " + to + " A " + azimuth + " C " + clino + " TT " + tt );
+    mSavedType = mType;
+    mName = mName3 = name;
+    mFullName3 = TDInstance.survey + "-" + mName;
+    mType    = type;
+    mFrom    = from;
+    mTo      = to;
+    mAzimuth = azimuth;
+    mClino   = clino;
+    mSavedMode = mDrawingSurface.getDisplayMode();
+    // mDrawingSurface.setDisplayMode( DisplayMode.DISPLAY_SECTION | ( mSavedMode & DisplayMode.DISPLAY_SCALEBAR ) );
+    mDrawingSurface.setDisplayMode( DisplayMode.DISPLAY_SECTION & mSavedMode );
+    resetStatus();
+    doStart( true, tt );
+    updateSplays( mApp.mSplayMode );
+
+    // FIXME_SK mButton1[ BTN_DOWNLOAD ].setVisibility( View.GONE );
+    // FIXME_SK mButton1[ BTN_BLUETOOTH ].setVisibility( View.GONE );
+
+    // mButton1[ BTN_PLOT ].setVisibility( View.GONE );
+    if ( ! TDLevel.overExpert ) mButton1[BTN_PLOT].setOnLongClickListener( null );
+    if ( TDLevel.overNormal && BTN_DIAL < mButton1.length ) mButton1[ BTN_DIAL ].setVisibility( View.GONE );
   }
 
   private void updateSplays( int mode )
@@ -2159,32 +2186,6 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.setSplayAlpha( mApp.mShowSectionSplays ); // not necessary ?
   }
 
-
-  private void pushInfo( long type, String name, String from, String to, float azimuth, float clino, float tt )
-  {
-    // Log.v("DistoX", "push info " + type + " " + name + " from " + from + " " + to + " A " + azimuth + " C " + clino + " TT " + tt );
-    mSavedType = mType;
-    mName = mName3 = name;
-    mFullName3 = TDInstance.survey + "-" + mName;
-    mType    = type;
-    mFrom    = from;
-    mTo      = to;
-    mAzimuth = azimuth;
-    mClino   = clino;
-    mSavedMode = mDrawingSurface.getDisplayMode();
-    // mDrawingSurface.setDisplayMode( DisplayMode.DISPLAY_SECTION | ( mSavedMode & DisplayMode.DISPLAY_SCALEBAR ) );
-    mDrawingSurface.setDisplayMode( DisplayMode.DISPLAY_SECTION & mSavedMode );
-    resetStatus();
-    doStart( true, tt );
-    updateSplays( mApp.mSplayMode );
-
-    // FIXME_SK mButton1[ BTN_DOWNLOAD ].setVisibility( View.GONE );
-    // FIXME_SK mButton1[ BTN_BLUETOOTH ].setVisibility( View.GONE );
-
-    // mButton1[ BTN_PLOT ].setVisibility( View.GONE );
-    if ( ! TDLevel.overExpert ) mButton1[BTN_PLOT].setOnLongClickListener( null );
-    if ( TDLevel.overNormal && BTN_DIAL < mButton1.length ) mButton1[ BTN_DIAL ].setVisibility( View.GONE );
-  }
 
   // called by PlotListDialog
   void switchNameAndType( String name, long tt ) // SWITCH
@@ -2377,7 +2378,8 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  // @param tt   used only by leg x-sections when created to insert leg intersection point
+  // @param do_load whether to load plot from file
+  // @param tt      used only by leg x-sections when created to insert leg intersection point
   // called by onCreate, switchPlotType, onBackPressed and pushInfo
   private void doStart( boolean do_load, float tt )
   {
@@ -2411,7 +2413,7 @@ public class DrawingWindow extends ItemDrawer
         if  ( tt >= 0 ) { // if failed to load x-section file
           popInfo();
           doStart( false, -1 );
-          recomputeReferences( mNum, mZoom );
+          // FIXME_POPINFO recomputeReferences( mNum, mZoom );
           return;
         } else {
 	  finish();
