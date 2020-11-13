@@ -1176,11 +1176,7 @@ public class ShotWindow extends Activity
   {
     super.onDestroy();
     // Log.v("DistoXLIFE", "ShotWindow onDestroy()" );
-    // if ( mDataDownloader != null ) {
-    //   mApp.unregisterLister( this );
-    //   mDataDownloader.onStop();
-    // }
-    // mApp.disconnectRemoteDevice( false );
+    // new DataStopTask( mApp, this, mDataDownloader ).execute();
 
     if ( doubleBackHandler != null ) {
       doubleBackHandler.removeCallbacks( doubleBackRunnable );
@@ -1246,11 +1242,7 @@ public class ShotWindow extends Activity
 
   void doFinish()
   {
-    if ( mDataDownloader != null ) {
-      mApp.unregisterLister( this );
-      mDataDownloader.onStop();
-    }
-    mApp.disconnectRemoteDevice( false );
+    new DataStopTask( mApp, this, mDataDownloader ).execute();
     TopoDroidApp.mShotWindow = null;
     finish();
   }
@@ -1269,11 +1261,8 @@ public class ShotWindow extends Activity
       if ( doubleBackToast != null ) doubleBackToast.cancel();
       doubleBackToast = null;
       DrawingSurface.clearCache();
-      if ( mDataDownloader != null ) {
-        mApp.unregisterLister( this );
-        mDataDownloader.onStop();
-      }
-      mApp.disconnectRemoteDevice( false );
+
+      new DataStopTask( mApp, this, mDataDownloader ).execute();
 
       if ( TDSetting.mDataBackup ) {
         TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false ); // try_save

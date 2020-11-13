@@ -404,7 +404,7 @@ public class DeviceActivity extends Activity
         mApp.setDevice( address, null );
         mCurrDevice = TDInstance.deviceA;
         // mAddress = address;
-        mApp.disconnectRemoteDevice( true );
+        mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
         setState();
       }
     }
@@ -421,7 +421,7 @@ public class DeviceActivity extends Activity
     mApp.setDevice( null, null );
     mCurrDevice = TDInstance.deviceA;
     // mAddress = address;
-    mApp.disconnectRemoteDevice( true );
+    mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
     setState();
   }
 
@@ -711,7 +711,7 @@ public class DeviceActivity extends Activity
     if ( device == null ) return;
     String address = device.getAddress();
     // if ( mCurrDevice == null || ! address.equals( mCurrDevice.mAddress ) ) { // N.B. address != null
-      mApp.disconnectRemoteDevice( true );
+      mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
       mApp.setDevice( address, device );
       mCurrDevice = TDInstance.deviceA;
       // mAddress = address;
@@ -734,7 +734,7 @@ public class DeviceActivity extends Activity
           if ( address == null ) {
             TDLog.Error( "onActivityResult REQUEST DEVICE: null address");
           } else if ( mCurrDevice == null || ! address.equals( mCurrDevice.mAddress ) ) { // N.B. address != null
-            mApp.disconnectRemoteDevice( true );
+            mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
             mApp.setDevice( address, null );
             DeviceUtil.checkPairing( address );
             mCurrDevice = TDInstance.deviceA;
@@ -915,7 +915,7 @@ public class DeviceActivity extends Activity
       mApp.setDeviceB( address );
       mCurrDeviceB = TDInstance.deviceB;
       // mAddress = address;
-      mApp.disconnectRemoteDevice( true );
+      mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
       setState();
     }
   }
