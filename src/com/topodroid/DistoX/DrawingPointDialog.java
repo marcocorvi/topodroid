@@ -12,11 +12,12 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDString;
 import com.topodroid.ui.MyOrientationWidget;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
 
-// import android.util.Log;
+import android.util.Log;
 
 import android.os.Bundle;
 import android.content.Context;
@@ -112,17 +113,8 @@ class DrawingPointDialog extends MyDialog
     if ( BrushManager.isPointSection( mPoint.mPointType ) ) {
       // FIXME SECTION_RENAME
       // scrap option contains only section nickname (no survey prefix)
-      mXSectionName = mPoint.getOption("-scrap"); 
-
-      // String[] vals = mPoint.mOptions.split(" ");
-      // for ( int k = 0; k < vals.length; ++k ) {
-      //   if ( vals[k].equals("-scrap") ) {
-      //     for ( ++k; k < vals.length; ++k ) {
-      //       if ( vals[k].length() > 0 ) break;
-      //     }
-      //     if ( k < vals.length ) mXSectionName = vals[k];
-      //   }
-      // }
+      mXSectionName = TDUtil.replacePrefix( TDInstance.survey, mPoint.getOption(TDString.OPTION_SCRAP) ); 
+      // Log.v("DistoX-SECTION", "name " + mXSectionName );
       if ( mXSectionName != null ) {
 	// FIXME SECTION_RENAME
 	// mXSectionName = mApp.mSurvey + "-" + mXSectionName;

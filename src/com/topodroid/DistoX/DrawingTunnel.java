@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDString;
 // import com.topodroid.utils.TDVersion;
 import com.topodroid.num.TDNum;
 import com.topodroid.num.NumStation;
@@ -164,7 +165,7 @@ class DrawingTunnel extends DrawingSvgBase
           float yy = toWorldY( yoff+point.cy );
           if ( BrushManager.isPointSection( point.mPointType ) ) {
 	    if ( TDSetting.mAutoXSections ) {
-              String scrapname = point.getOption("-scrap");
+              String scrapname = TDUtil.replacePrefix( TDInstance.survey, point.getOption( TDString.OPTION_SCRAP ) );
               if ( scrapname != null ) {
                 String scrapfile = scrapname + ".tdr";
 	        xsections.add( new XSection( scrapfile, xx, yy ) );

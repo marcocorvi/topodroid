@@ -346,4 +346,17 @@ public class TDUtil
     }
   }
 
+  // @param surveyname   name of the survey
+  // @param scrapname    name of the Xsection scrap
+  public static String replacePrefix( String surveyname, String scrapname ) 
+  {
+    if ( scrapname == null ) return null;
+    int pos = scrapname.lastIndexOf( "-xx" );
+    if ( pos < 0 ) pos = scrapname.lastIndexOf( "-xs-" );
+    if ( pos < 0 ) pos = scrapname.lastIndexOf( "-xh-" );
+    if ( pos < 0 ) return null;
+    return surveyname + scrapname.substring( pos );
+  }
+   
+
 }

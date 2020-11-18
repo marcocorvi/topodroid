@@ -75,7 +75,7 @@ public class DrawingPointPath extends DrawingPath
   DrawingPointPath fixScrap( String survey_name )
   {
     if ( survey_name != null && BrushManager.isPointSection( mPointType ) ) {
-      String scrapname = mOptions.replace("-scrap ", "");
+      String scrapname = TDUtil.replacePrefix( TDInstance.survey, mOptions.replace("-scrap ", "") );
       if ( ! scrapname.startsWith(survey_name) ) {
         int pos = scrapname.lastIndexOf('-');
         scrapname = survey_name + "-" + scrapname.substring(pos+1);
@@ -166,7 +166,7 @@ public class DrawingPointPath extends DrawingPath
       }
       // FIXME SECTION_RENAME
       // if ( BrushManager.isPointSection( type ) ) {
-      //   String scrapname = options.replace("-scrap ", "");
+      //   String scrapname = TDUtil.replacePrefix( TDInstance.survey, options.replace("-scrap ", "") );
       //   scrapname = scrapname.replace( mApp.mSurvey + "-", "" ); // remove survey name from options
       //   option = "-scrap " + scrapname;
       // }
@@ -548,7 +548,7 @@ public class DrawingPointPath extends DrawingPath
     }
     // FIXME SECTION_RENAME
     // if ( BrushManager.isPointSection( type ) ) {
-    //   String scrapname = mOptions.replace("-scrap ", "" );
+    //   String scrapname = TDUtil.replacePrefix( TDInstance.survey, mOptions.replace("-scrap ", "") );
     //   pw.format(" -scrap %s-%s", mApp.mSurvey, scrapname );
     // } else {
       if ( mOptions != null && mOptions.length() > 0 ) {

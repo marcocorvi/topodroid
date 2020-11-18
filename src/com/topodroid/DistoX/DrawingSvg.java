@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
@@ -226,7 +227,7 @@ class DrawingSvg extends DrawingSvgBase
                   // Log.v("DistoX", "Section point <" + point.mOptions + "> " + point.cx + " " + point.cy );
                   // option: -scrap survey-xx#
                   // FIXME GET_OPTION
-                  String scrapname = point.getOption("-scrap");
+                  String scrapname = TDUtil.replacePrefix( TDInstance.survey, point.getOption( TDString.OPTION_SCRAP ) );
                   if ( scrapname != null ) {
                     String scrapfile = scrapname + ".tdr";
                     // String scrapfile = point.mOptions.substring( 7 ) + ".tdr";

@@ -1115,7 +1115,7 @@ class DrawingDxf
 		if ( TDSetting.mAutoXSections ) {
                   // FIXME GET_OPTION
                   // String scrapfile = point.mOptions.substring( 7 ) + ".tdr";
-                  String scrapname = point.getOption( "-scrap" );
+                  String scrapname = TDUtil.replacePrefix( TDInstance.survey, point.getOption( TDString.OPTION_SCRAP ) );
                   if ( scrapname != null ) {
                     String scrapfile = scrapname + ".tdr";
                     handle = tdrToDxf( pw5, handle, scrapfile, 

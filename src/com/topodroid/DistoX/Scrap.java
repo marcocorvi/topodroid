@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDString;
 import com.topodroid.ui.TDGreenDot;
 import com.topodroid.prefs.TDSetting;
 
@@ -265,7 +266,7 @@ class Scrap
             DrawingPath p = (DrawingPath)c;
             if ( p.isPoint() ) {
               DrawingPointPath pt = (DrawingPointPath)p;
-              if ( pt.mPointType == index && scrap.equals( pt.getOption( "-scrap" ) ) ) {
+              if ( pt.mPointType == index && scrap.equals( TDUtil.replacePrefix( TDInstance.survey, pt.getOption( TDString.OPTION_SCRAP ) ) ) ) {
                 todo.add(p);
               }
             }
@@ -288,7 +289,7 @@ class Scrap
             DrawingPointPath dpp = (DrawingPointPath) path;
             if ( dpp.mPointType == index ) {
               // FIXME GET_OPTION
-              if ( scrap_name.equals( dpp.getOption( "-scrap" ) ) ) {
+              if ( scrap_name.equals( TDUtil.replacePrefix( TDInstance.survey, dpp.getOption( TDString.OPTION_SCRAP ) ) ) ) {
                 deletePath( path, cmd );
                 return; // true;
               }
@@ -1723,7 +1724,7 @@ class Scrap
         if ( path.isPoint() ) {
           DrawingPointPath pt = (DrawingPointPath)path;
           if ( BrushManager.isPointSection( pt.mPointType )  ) {
-            String scrap_name = pt.getOption( "-scrap" );
+            String scrap_name = TDUtil.replacePrefix( TDInstance.survey, pt.getOption( TDString.OPTION_SCRAP ) );
             if ( scrap_name != null ) {
               // Log.v("DistoX-SHIFT", "Shift " + scrap_name + " X-section " + xsections.size() );
               synchronized( TDPath.mXSectionsLock ) {
@@ -1823,7 +1824,7 @@ class Scrap
         DrawingPointPath pt = (DrawingPointPath)p;
         if ( ! BrushManager.isPointSection( pt.mPointType ) ) continue;
         // get the line/station
-        String scrap = p.getOption("-scrap");
+        String scrap = TDUtil.replacePrefix( TDInstance.survey, p.getOption( TDString.OPTION_SCRAP ) );
         if ( scrap != null ) {
           // Log.v("DistoXX", "section point scrap " + scrap );
           int pos = scrap.lastIndexOf( "-xx" );

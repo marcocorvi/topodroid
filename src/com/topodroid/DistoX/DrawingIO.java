@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.TDNum;
@@ -1309,9 +1310,9 @@ class DrawingIO
                 if ( TDSetting.mExportPlotFormat != TDConst.DISTOX_EXPORT_TH2 ) { // if auto-export is not Therion
                   if ( BrushManager.isPointSection( pp.mPointType ) ) {
                     if ( TDSetting.mAutoXSections ) {
-                      String scrap_name = pp.getOption("-scrap");  // xsection name
-                      // Log.v("DistoXX", "multisketch add x-section " + name );
-                      if ( scrap_name != null && scrap_name.length() > 0 ) xsections.add( new XSectionScrap( scrap_name, pp.cx, pp.cy ) );
+                      String scrapname = TDUtil.replacePrefix( TDInstance.survey, pp.getOption( TDString.OPTION_SCRAP ) ); // x-section name
+                      // Log.v("DistoXX", "multisketch add x-section " + scrapname );
+                      if ( scrapname != null && scrapname.length() > 0 ) xsections.add( new XSectionScrap( scrapname, pp.cx, pp.cy ) );
                     }
                   }
                 }
@@ -1481,9 +1482,9 @@ class DrawingIO
                   exportTherionPoint( out, pp );
                   if ( BrushManager.isPointSection( pp.mPointType ) ) {
                     if ( TDSetting.mAutoXSections ) {
-                      String name = pp.getOption("-scrap");  // xsection name
-                      // Log.v("DistoXX", "multisketch add x-section " + name );
-                      if ( name != null && name.length() > 0 ) xsections.add( new XSectionScrap( name, pp.cx, pp.cy ) );
+                      String scrapname = TDUtil.replacePrefix( TDInstance.survey, pp.getOption( TDString.OPTION_SCRAP ) ); // x-section name
+                      // Log.v("DistoXX", "multisketch add x-section " + scrapname );
+                      if ( scrapname != null && scrapname.length() > 0 ) xsections.add( new XSectionScrap( scrapname, pp.cx, pp.cy ) );
                     }
                   }
                 } else if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) { // should never happen
@@ -1927,10 +1928,10 @@ class DrawingIO
         if ( TDSetting.mAutoXSections && all_sections != null && BrushManager.isPointSection( pp.mPointType ) ) {
           // option: -scrap survey-xx# 
           PlotInfo section = null;
-          String scrap_name = pp.getOption( "-scrap" );
-          if ( scrap_name != null ) {
+          String scrapname = TDUtil.replacePrefix( TDInstance.survey, pp.getOption( TDString.OPTION_SCRAP ) );
+          if ( scrapname != null ) {
             for ( PlotInfo s : all_sections ) {
-              if ( scrap_name.endsWith( s.name ) ) {
+              if ( scrapname.endsWith( s.name ) ) {
                 // String name = survey + "-" + s.name; // scrap filename
                 section = s;
                 section.csxIndex = csxIndex;
@@ -2074,10 +2075,10 @@ class DrawingIO
   //         // option: -scrap survey-xx#
   //         // FIXME GET_OPTION
   //         PlotInfo section = null;
-  //         String scrap_name = pp.getOption( "-scrap" );
-  //         if ( scrap_name != null ) {
+  //         String scrapname = TDUtil.replacePrefix( TDInstance.survey, pp.getOption( TDString.OPTION_SCRAP ) );
+  //         if ( scrapname != null ) {
   //           for ( PlotInfo s : all_sections ) {
-  //             if ( scrap_name.endsWith( s.name ) ) {
+  //             if ( scrapname.endsWith( s.name ) ) {
   //               // String name = survey + "-" + s.name; // scrap filename
   //               section = s;
   //               section.csxIndex = csxIndex;
@@ -2086,27 +2087,6 @@ class DrawingIO
   //             }
   //           }
   //         }
-  //         // String[] vals = pp.mOptions.split(" ");
-  //         // int k0 = vals.length;
-  //         // for ( int k = 0; k < k0; ++k ) {
-  //         //   if ( vals[k].equals("-scrap") ) {
-  //         //     for ( ++k; k < k0; ++k ) {
-  //         //       if ( vals[k].length() > 0 ) break;
-  //         //     }
-  //         //     if ( k < k0 ) {
-  //         //       for ( PlotInfo s : all_sections ) {
-  //         //         if ( vals[k].endsWith( s.name ) ) {
-  //         //           // String name = survey + "-" + s.name; // scrap filename
-  //         //           section = s;
-  //         //           section.csxIndex = csxIndex;
-  //         //           if ( sections != null ) sections.add( section );
-  //         //           break;
-  //         //         }
-  //         //       }
-  //         //     }
-  //         //   }
-  //         // }
-
   //         if ( section != null ) {
   //           // Log.v("DistoX", "section " + section.name + " " + section.nick );
   //           // special toCsurvey for cross-section points
@@ -2128,7 +2108,7 @@ class DrawingIO
   //           pw.format("    <font type=\"4\" />\n");
   //           pw.format("  </item>\n");
   //         } else {
-  //           TDLog.Error("xsection not found. Name: " + ((scrap_name == null)? "null" : scrap_name) );
+  //           TDLog.Error("xsection not found. Name: " + ((scrapname == null)? "null" : scrapname) );
   //         }
   //       }
   //     } else {

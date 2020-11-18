@@ -29,4 +29,6 @@ public class TDString
   public static final String SIXTY     = "60";
   public static final String NINETY    = "90";
   public static final String NINETYONE = "91";
+
+  public static final String OPTION_SCRAP = "-scrap";
 }

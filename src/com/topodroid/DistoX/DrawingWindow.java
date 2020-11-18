@@ -16,6 +16,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDStatus;
+import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDRequest;
 import com.topodroid.num.TDNum;
 import com.topodroid.num.NumStation;
@@ -2945,7 +2946,7 @@ public class DrawingWindow extends ItemDrawer
       mApp_mData.deleteAudio( TDInstance.sid, audio.mId );
       TDUtil.deleteFile( TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString( audio.mId ) ) );
     } else if ( BrushManager.isPointSection( point.mPointType ) ) {
-      mDrawingSurface.clearXSectionOutline( point.getOption( "-scrap" ) );
+      mDrawingSurface.clearXSectionOutline( TDUtil.replacePrefix( TDInstance.survey, point.getOption( TDString.OPTION_SCRAP ) ) );
     }
     modified();
   }
