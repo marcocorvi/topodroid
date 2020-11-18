@@ -34,7 +34,7 @@ import android.graphics.Paint; // custom paint
 public class DBlock
 {
 
-  View   mView;           // view of this dblock in the list
+  private View mView;           // view of this dblock in the list
   // private int    mPos;     // position in the list
   int     mVisible;       // whether this data is visible in the list
   boolean mMultiSelected; // whether the block is in multiselect list
@@ -296,6 +296,16 @@ public class DBlock
   // ----------------------------------------------------------------
   // PAINT and VIEW
 
+  View getView() { return mView; }
+
+  void setView( View view ) { mView = view; }
+
+  void setBackgroundColor( int color ) { if ( mView != null ) mView.setBackgroundColor( color ); }
+
+  // void setTextColor( int color ) { if ( mView != null ) mView.setTextColor( color ); }
+
+  void invalidate( ) { if ( mView != null ) mView.invalidate( ); }
+
   Paint getPaint() { return mPaint; }
 
   int getPaintColor() { return (mPaint==null)? 0 : mPaint.getColor(); }
@@ -333,66 +343,68 @@ public class DBlock
   DBlock( String f, String t, float d, float b, float c, float r, int e, int type, int shot_type )
   {
     // assert( f != null && t != null );
-    mView = null; // view is set by the DBlockAdapter
     // mPos  = 0;
+    mView    = null; // view is set by the DBlockAdapter
     mVisible = View.VISIBLE;
     mMultiSelected = false;
-    mPaint = null;
-    mId = 0;
-    mTime = 0;
+    mPaint    = null;
+    mId       = 0;
+    mTime     = 0;
     mSurveyId = 0;
     // mName = TDString.EMPTY;
-    mFrom = f;
-    mTo   = t;
-    mLength = d;
+    mFrom    = f;
+    mTo      = t;
+    mLength  = d;
     mBearing = b;
-    mClino = c;
-    mDepth = 0.0f;
-    mRoll = r;
+    mClino   = c;
+    mDepth   = 0.0f;
+    mRoll    = r;
     mAcceleration = 0.0f;
-    mMagnetic = 0.0f;
-    mDip = 0.0f;
-    mComment = TDString.EMPTY;
-    mExtend = e;
-    mFlag   = FLAG_SURVEY;
+    mMagnetic     = 0.0f;
+    mDip          = 0.0f;
+    mComment   = TDString.EMPTY;
+    mExtend    = e;
+    mFlag      = FLAG_SURVEY;
     mBlockType = type;
-    mShotType = shot_type; // distox, distox-backshot, or manual
+    mShotType  = shot_type; // distox, distox-backshot, or manual
     mWithPhoto = false;
-    mMultiBad = false;
-    mStretch  = 0.0f;
-    mAddress  = null;
+    mMultiBad  = false;
+    mStretch   = 0.0f;
+    mAddress   = null;
   }
 
   DBlock()
   {
-    mView = null; // view is set by the DBlockAdapter
-    // mPos  = 0;
-    mVisible = View.VISIBLE;
-    mMultiSelected = false;
-    mPaint = null;
-    mId = 0;
-    mTime = 0;
-    mSurveyId = 0;
-    // mName = TDString.EMPTY;
-    mFrom = TDString.EMPTY;
-    mTo   = TDString.EMPTY;
-    mLength = 0.0f;
-    mBearing = 0.0f;
-    mClino = 0.0f;
-    mDepth = 0.0f;
-    mRoll = 0.0f;
-    mAcceleration = 0.0f;
-    mMagnetic = 0.0f;
-    mDip = 0.0f;
-    mComment = TDString.EMPTY;
-    mExtend = EXTEND_RIGHT;
-    mFlag   = FLAG_SURVEY;
-    mBlockType   = BLOCK_BLANK;
-    mShotType = 0;  // distox
-    mWithPhoto = false;
-    mMultiBad = false;
-    mStretch  = 0.0f;
-    mAddress  = null;
+    // ( String f, String t, float d, float b, float c, float r, int e, int type, int shot_type )
+    this( TDString.EMPTY, TDString.EMPTY, 0, 0, 0, 0, EXTEND_RIGHT, BLOCK_BLANK, 0 );
+    // // mPos  = 0;
+    // mView    = null; // view is set by the DBlockAdapter
+    // mVisible = View.VISIBLE;
+    // mMultiSelected = false;
+    // mPaint    = null;
+    // mId       = 0;
+    // mTime     = 0;
+    // mSurveyId = 0;
+    // // mName = TDString.EMPTY;
+    // mFrom = TDString.EMPTY;
+    // mTo   = TDString.EMPTY;
+    // mLength  = 0.0f;
+    // mBearing = 0.0f;
+    // mClino   = 0.0f;
+    // mDepth   = 0.0f;
+    // mRoll    = 0.0f;
+    // mAcceleration = 0.0f;
+    // mMagnetic     = 0.0f;
+    // mDip          = 0.0f;
+    // mComment   = TDString.EMPTY;
+    // mExtend    = EXTEND_RIGHT;
+    // mFlag      = FLAG_SURVEY;
+    // mBlockType = BLOCK_BLANK;
+    // mShotType  = 0;  // distox
+    // mWithPhoto = false;
+    // mMultiBad  = false;
+    // mStretch   = 0.0f;
+    // mAddress   = null;
   }
 
   public boolean makeClino( float tdepth )

@@ -119,7 +119,7 @@ public class TopoDroidApp extends Application
   public static float mBorderLeft       = 0;
   public static float mBorderInnerRight = 4096;
   public static float mBorderInnerLeft  = 0;
-  // static float mBorderBottom     = 4096; // in DrawingWindow
+  public static float mBorderBottom     = 4096; // in DrawingWindow
 
   // static boolean isTracing = false;
 
@@ -588,6 +588,22 @@ public class TopoDroidApp extends Application
       }
     // }
   }
+ 
+  // @param dm     metrics
+  // @param landscape whether the screen orientation is landscape
+  static private void setDisplayParams( DisplayMetrics dm /* , boolean landscape */ )
+  {
+    float density  = dm.density;
+    float dim = dm.widthPixels;
+    mBorderRight      = dim * 15 / 16;
+    mBorderLeft       = dim / 16;
+    mBorderInnerRight = dim * 3 / 4;
+    mBorderInnerLeft  = dim / 4;
+    mBorderBottom     = dm.heightPixels * 7 / 8;
+    mDisplayWidth  = dm.widthPixels;
+    mDisplayHeight = dm.heightPixels;
+    // Log.v("DistoX-ConfigChange", "set display params " + mDisplayWidth + " " + mDisplayHeight + " landscape " + landscape + " dim " + dim );
+  }
 
   @Override
   public void onCreate()
@@ -618,16 +634,9 @@ public class TopoDroidApp extends Application
     DistoXConnectionError[4] = getResources().getString( R.string.distox_err_connected );
 
     DisplayMetrics dm = getResources().getDisplayMetrics();
-    float density  = dm.density;
-    mDisplayWidth  = dm.widthPixels;
-    mDisplayHeight = dm.heightPixels;
-    mBorderRight      = TopoDroidApp.mDisplayWidth * 15 / 16;
-    mBorderLeft       = TopoDroidApp.mDisplayWidth / 16;
-    mBorderInnerRight = TopoDroidApp.mDisplayWidth * 3 / 4;
-    mBorderInnerLeft  = TopoDroidApp.mDisplayWidth / 4;
-    // mBorderBottom     = TopoDroidApp.mDisplayHeight * 7 / 8;
+    setDisplayParams( dm /* , getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE */ );
 
-    mScaleFactor   = (mDisplayHeight / 320.0f) * density;
+    mScaleFactor   = (mDisplayHeight / 320.0f) * dm.density;
     // FIXME it would be nice to have this, but it breaks all existing sketches
     //       therefore must stick with initial choice
     // DrawingUtil.CENTER_X = mDisplayWidth  / 2;
@@ -781,13 +790,16 @@ public class TopoDroidApp extends Application
   public void onConfigurationChanged( Configuration cfg )
   {
     super.onConfigurationChanged( cfg );
-    resetLocale();
+    // boolean landscape = cfg.orientation == Configuration.ORIENTATION_LANDSCAPE;
+    // Log.v("DistoX-ConfigChange", "TopoDroid app " + landscape );
+    resetLocale( );
+    DisplayMetrics dm = getResources().getDisplayMetrics();
+    setDisplayParams( dm /* , landscape */ );
   }
 
   // called by MainWindow
-  static Context resetLocale()
+  static Context resetLocale( )
   {
-    // Log.v("DistoX", "reset locale to " + mLocaleStr );
     // mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
     Resources res = TDInstance.getResources();
     DisplayMetrics dm = res.getDisplayMetrics();
@@ -817,8 +829,8 @@ public class TopoDroidApp extends Application
     mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
     // Log.v("DistoXPref", "set locale str <" + locale + "> " + mLocale.toString() );
 
-    resetLocale();
     Resources res = TDInstance.getResources();
+    resetLocale( );
     if ( load_symbols ) {
       BrushManager.reloadPointLibrary( TDInstance.context, res ); // reload symbols
       BrushManager.reloadLineLibrary( res );

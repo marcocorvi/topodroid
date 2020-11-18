@@ -571,12 +571,6 @@ public class DrawingWindow extends ItemDrawer
 
   private boolean mModified; // whether the sketch has been modified 
 
-  private float mBorderRight      = TopoDroidApp.mBorderRight;
-  private float mBorderLeft       = TopoDroidApp.mBorderLeft;
-  private float mBorderInnerRight = TopoDroidApp.mBorderInnerRight;
-  private float mBorderInnerLeft  = TopoDroidApp.mBorderInnerLeft;
-  private float mBorderBottom     = 4096;
-    
   // PLOT SPLIT
   private String mSplitName;
   // private DrawingStationName mSplitStation;
@@ -1834,11 +1828,6 @@ public class DrawingWindow extends ItemDrawer
     setContentView(R.layout.drawing_activity);
     mDataDownloader   = mApp.mDataDownloader; // new DataDownloader( this, mApp );
     mZoom             = TopoDroidApp.mScaleFactor;    // canvas zoom
-    // mBorderRight      = TopoDroidApp.mBorderRight;
-    // mBorderLeft       = TopoDroidApp.mBorderLeft;
-    // mBorderInnerRight = TopoDroidApp.mBorderInnerRight;
-    // mBorderInnerLeft  = TopoDroidApp.mBorderInnerLeft;
-    mBorderBottom     = TopoDroidApp.mDisplayHeight * 7 / 8;
 
     mDisplayCenter = new PointF(TopoDroidApp.mDisplayWidth  / 2, TopoDroidApp.mDisplayHeight / 2);
 
@@ -1870,7 +1859,6 @@ public class DrawingWindow extends ItemDrawer
     mButtonSize = TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
     mZoomTranslate = mButtonSize;
-    mBorderBottom -= mZoomTranslate;
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
@@ -3780,23 +3768,22 @@ public class DrawingWindow extends ItemDrawer
     float d0 = TDSetting.mCloseCutoff + mSelectSize / mZoom;
     // Log.v("DistoX", "on touch down. mode " + mMode + " " + mTouchMode );
 
-    // TDLog.Log( TDLog.LOG_PLOT, "DOWN at X " + xc + " [" +mBorderInnerLeft + " " + mBorderInnerRight + "] Y " 
-    //                                          + yc + " / " + mBorderBottom );
-    // bottom_from = mBorderBottom;
+    // TDLog.Log( TDLog.LOG_PLOT, "DOWN at X " + xc + " [" +TopoDroidApp.mBorderInnerLeft + " " + TopoDroidApp.mBorderInnerRight + "] Y " 
+    // Log.v( "DistoX-Config", "DOWN at X " + xc + " [" +TopoDroidApp.mBorderInnerLeft + " " + TopoDroidApp.mBorderInnerRight + "] Y " + yc + " / " + mBorderBottom );
     // if ( mMode == MODE_DRAW ) border_ from -= mZoomTranslate;
 
-    float bottom = mBorderBottom;
+    float bottom = TopoDroidApp.mBorderBottom - mZoomTranslate;
     if ( mMode == MODE_DRAW ) bottom += ZOOM_TRANSLATION;
 
     if ( yc > bottom ) {
-      if ( (mFixedZoom == 0) && mZoomBtnsCtrlOn && xc > mBorderInnerLeft && xc < mBorderInnerRight ) {
+      if ( (mFixedZoom == 0) && mZoomBtnsCtrlOn && xc > TopoDroidApp.mBorderInnerLeft && xc < TopoDroidApp.mBorderInnerRight ) {
         mTouchMode = MODE_ZOOM;
         mZoomBtnsCtrl.setVisible( true );
         // mZoomCtrl.show( );
       } else if ( TDSetting.mSideDrag ) {
         mTouchMode = MODE_ZOOM;
       }
-    } else if ( TDSetting.mSideDrag && ( xc > mBorderRight || xc < mBorderLeft ) ) {
+    } else if ( TDSetting.mSideDrag && ( xc > TopoDroidApp.mBorderRight || xc < TopoDroidApp.mBorderLeft ) ) {
       mTouchMode = MODE_ZOOM;
       SelectionPoint sp = mDrawingSurface.hotItem();
       if ( sp != null && sp.type() == DrawingPath.DRAWING_PATH_POINT ) {
@@ -7173,6 +7160,7 @@ public class DrawingWindow extends ItemDrawer
   public void onConfigurationChanged( Configuration new_cfg )
   {
     super.onConfigurationChanged( new_cfg );
+    // Log.v("DistoX-ConfigChange", "Drawing window");
     mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
   }
 

@@ -475,9 +475,10 @@ public class ShotWindow extends Activity
           cur.setTypeSecLeg();
           mApp_mData.updateShotLeg( cur.mId, TDInstance.sid, LegType.EXTRA ); // cur.mType ); // FIXME 20140616
         }
-
-        // if ( prev != null && prev.isBlank() ) prev.setBlockType( DBlock.BLOCK_BLANK_LEG );
-        if ( prev != null ) prev.setTypeBlankLeg();
+        else if ( ! cur.isSecLeg() ) { // FIXME 20201118
+          // if ( prev != null && prev.isBlank() ) prev.setBlockType( DBlock.BLOCK_BLANK_LEG );
+          if ( prev != null ) prev.setTypeBlankLeg();
+        }
 
         if ( mFlagLeg ) { // flag: hide leg extra shots
           // TDLog.Log( TDLog.LOG_SHOT, "close distance");
@@ -1979,7 +1980,7 @@ public class ShotWindow extends Activity
 	}
 	// Log.v("DistoX", "Comment <<" + b0.mComment + ">>");
 	mApp_mData.updateShotComment( b0.mId, TDInstance.sid, b0.mComment );
-	if ( b0.mView != null ) b0.mView.invalidate();
+	b0.invalidate();
       }
     }
     // clearMultiSelect( );

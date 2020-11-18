@@ -89,12 +89,6 @@ class ProjectionDialog extends MyDialog
   private String mFrom;
   private int  mAzimuth = 0;
 
-  private float mBorderRight      = 4096;
-  private float mBorderLeft       = 0;
-  private float mBorderInnerRight = 4096;
-  private float mBorderInnerLeft  = 0;
-  private float mBorderBottom     = 4096;
-
   private List< DBlock > mList = null;
 
   private boolean mETazimuthChanged = false;
@@ -305,12 +299,6 @@ class ProjectionDialog extends MyDialog
     float displayWidth = TopoDroidApp.mDisplayWidth;
     float displayHeight = TopoDroidApp.mDisplayHeight;
     
-    mBorderRight  = displayWidth * 15 / 16;
-    mBorderLeft   = displayWidth / 16;
-    mBorderInnerRight  = displayWidth * 3 / 4;
-    mBorderInnerLeft   = displayWidth / 4;
-    mBorderBottom = displayHeight * 7 / 8;
-
     mDisplayCenter = new PointF( displayWidth / 2, displayHeight / 2);
     // Log.v("DistoX", "surface " + mOffset.x + " " + mOffset.y + " " + mZoom );
 
@@ -548,17 +536,15 @@ class ProjectionDialog extends MyDialog
 
       // ---------------------------------------- DOWN
       if (action == MotionEvent.ACTION_DOWN) {
-        // TDLog.Log( TDLog.LOG_PLOT, "DOWN at X " + x_canvas + " [" +mBorderInnerLeft + " " + mBorderInnerRight + "] Y " 
-        //                                          + y_canvas + " / " + mBorderBottom );
-        if ( y_canvas > mBorderBottom ) {
-          if ( mZoomBtnsCtrlOn && x_canvas > mBorderInnerLeft && x_canvas < mBorderInnerRight ) {
+        if ( y_canvas > TopoDroidApp.mBorderBottom ) {
+          if ( mZoomBtnsCtrlOn && x_canvas > TopoDroidApp.mBorderInnerLeft && x_canvas < TopoDroidApp.mBorderInnerRight ) {
             mTouchMode = DrawingWindow.MODE_ZOOM;
             mZoomBtnsCtrl.setVisible( true );
             // mZoomCtrl.show( );
           } else if ( TDSetting.mSideDrag ) {
             mTouchMode = DrawingWindow.MODE_ZOOM;
           }
-        } else if ( TDSetting.mSideDrag && ( x_canvas > mBorderRight || x_canvas < mBorderLeft ) ) {
+        } else if ( TDSetting.mSideDrag && ( x_canvas > TopoDroidApp.mBorderRight || x_canvas < TopoDroidApp.mBorderLeft ) ) {
           mTouchMode = DrawingWindow.MODE_ZOOM;
         }
 

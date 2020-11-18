@@ -73,10 +73,10 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       DBlock blk = mItems.get( pos );
       if ( blk.isSplay() && splays && name.equals( blk.mFrom ) ) {
         mSearch.add( pos );
-        if ( blk.mView != null ) blk.mView.setBackgroundColor( TDColor.SEARCH );
+        blk.setBackgroundColor( TDColor.SEARCH );
       } else if ( blk.isLeg() && ( name.equals( blk.mFrom ) || name.equals( blk.mTo ) ) ) {
         mSearch.add( pos );
-        if ( blk.mView != null ) blk.mView.setBackgroundColor( TDColor.SEARCH );
+        blk.setBackgroundColor( TDColor.SEARCH );
       }
     }
     // Log.v("DistoX-SEARCH", " search station " + name + " results " + mSearch.size() );
@@ -91,7 +91,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
         DBlock blk = mItems.get( pos );
         if ( blk.getIntExtend( ) > 1 && blk.isLeg() ) {
           mSearch.add( pos );
-          if ( blk.mView != null ) blk.mView.setBackgroundColor( TDColor.SEARCH );
+          blk.setBackgroundColor( TDColor.SEARCH );
         }
       }
     } else { // real flag
@@ -99,7 +99,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
         DBlock blk = mItems.get( pos );
         if ( blk.hasFlag( flag ) ) {
           mSearch.add( pos );
-          if ( blk.mView != null ) blk.mView.setBackgroundColor( TDColor.SEARCH );
+          blk.setBackgroundColor( TDColor.SEARCH );
         }
       }
     }
@@ -117,16 +117,16 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
         if ( mSelect.size() > 0 ) {
           if ( mSelect.remove( blk ) ) {
             blk.mMultiSelected = false;
-            if ( blk.mView != null ) blk.mView.setBackgroundColor( TDColor.TRANSPARENT );
+            blk.setBackgroundColor( TDColor.TRANSPARENT );
           } else {
             mSelect.add( blk );
             blk.mMultiSelected = true;
-            if ( blk.mView != null ) blk.mView.setBackgroundColor( TDColor.GRID );
+            blk.setBackgroundColor( TDColor.GRID );
           }
         } else {
           mSelect.add( blk );
           blk.mMultiSelected = true;
-          if ( blk.mView != null ) blk.mView.setBackgroundColor( TDColor.GRID );
+          blk.setBackgroundColor( TDColor.GRID );
         }
       }
     // } else {
@@ -139,7 +139,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   void clearMultiSelect() 
   { 
     for ( DBlock b : mSelect ) {
-      if ( b.mView != null ) b.mView.setBackgroundColor( TDColor.TRANSPARENT );
+      b.setBackgroundColor( TDColor.TRANSPARENT );
       b.mMultiSelected = false;
     }
     mSelect.clear();
@@ -150,7 +150,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     for ( Integer pos : mSearch.getPositions() ) {
       try { 
         DBlock b = mItems.get( pos.intValue()  );
-        if ( b.mView != null ) b.mView.setBackgroundColor( TDColor.TRANSPARENT );
+        b.setBackgroundColor( TDColor.TRANSPARENT );
       } catch ( IndexOutOfBoundsException e ) { /* nothing i can do */ }
     }
     mSearch.clearSearch(); 
@@ -488,13 +488,13 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     // if ( holder.mBlock != null ) holder.mBlock.mView = null; // REVISE_RECENT
     holder.mBlock = b;
     // holder.blkId = b.mId; // DistoX-EDIT
-    b.mView = convertView;
+    b.setView( convertView );
 
     holder.setViewText( b, this );
     if ( mSearch.contains( pos ) ) {
-      b.mView.setBackgroundColor( TDColor.SEARCH );
+      b.setBackgroundColor( TDColor.SEARCH );
     } else {
-      b.mView.setBackgroundColor( b.mMultiSelected ? TDColor.GRID : TDColor.TRANSPARENT );
+      b.setBackgroundColor( b.mMultiSelected ? TDColor.GRID : TDColor.TRANSPARENT );
     }
     convertView.setVisibility( b.mVisible );
     return convertView;
@@ -514,7 +514,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   {
     for ( DBlock b : mItems ) {
       if ( b.mId == blk_id ) { // use block id instead of block itself
-        View v = b.mView;
+        View v = b.getView();
         if ( v != null ) {
           ViewHolder holder = (ViewHolder) v.getTag();
           if ( holder != null ) holder.setViewText( b, this );
@@ -534,7 +534,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     if ( ! set ) {
       for ( DBlock b : mItems ) {
         // if ( b.isLeg() ) {
-          View v = b.mView;
+          View v = b.getView();
           if ( v != null ) {
             TextView tvFrom = (TextView) v.findViewById( R.id.from );
             TextView tvTo   = (TextView) v.findViewById( R.id.to );
@@ -547,7 +547,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     } else {
       for ( DBlock b : mItems ) {
         // if ( b.isLeg() ) {
-          View v = b.mView;
+          View v = b.getView();
           if ( v != null ) {
             TextView tvFrom = (TextView) v.findViewById( R.id.from );
             TextView tvTo   = (TextView) v.findViewById( R.id.to );
@@ -597,13 +597,13 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   // {
   //   int revised = 0;
   //   for ( DBlock blk : mItems ) {
-  //     if ( blk.mView != null && blk.mWasRecent ) {
+  //     if ( blk.getView() != null && blk.mWasRecent ) {
   //       if ( ! blk.isRecent() ) {
   //         blk.mWasRecent = false;
-  //         ViewHolder holder = (ViewHolder) blk.mView.getTag();
+  //         ViewHolder holder = (ViewHolder) blk.getView().getTag();
   //         holder.tvFrom.setBackgroundColor( TDColor.BLACK );
   //         holder.tvTo.setBackgroundColor( TDColor.BLACK );
-  //         blk.mView.invalidate();
+  //         blk.getView().invalidate();
   //         ++ revised;
   //       }
   //     }

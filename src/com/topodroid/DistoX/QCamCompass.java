@@ -48,9 +48,6 @@ class QCamCompass extends Dialog
   private final Context mContext;
   // DrawingWindow mDrawer;
   // long mPid;
-  private float mBorderInnerRight = 4096;
-  private float mBorderInnerLeft  = 0;
-  private float mBorderBottom     = 4096;
 
   private IPhotoInserter mInserter;
   private QCamDrawingSurface mSurface;
@@ -120,10 +117,6 @@ class QCamCompass extends Dialog
     super.onCreate(savedInstanceState);
     requestWindowFeature( Window.FEATURE_NO_TITLE );
     setContentView(R.layout.qcam_compass);
-
-    mBorderInnerRight = TopoDroidApp.mDisplayWidth * 3 / 4;
-    mBorderInnerLeft  = TopoDroidApp.mDisplayWidth / 4;
-    mBorderBottom     = TopoDroidApp.mDisplayHeight * 7 / 8;
 
     mSurface = (QCamDrawingSurface) findViewById( R.id.drawingSurface );
     mSurface.mQCam = this;
@@ -274,8 +267,8 @@ class QCamCompass extends Dialog
       float x0 = event.getX(0);
       float y0 = event.getY(0);
       // Log.v("DistoX-QCAM", "DOWNi " + x0 + " " + y0 );
-      if ( y0 > mBorderBottom ) {
-        if ( mZoomBtnsCtrlOn && x0 > mBorderInnerLeft && x0 < mBorderInnerRight ) {
+      if ( y0 > TopoDroidApp.mBorderBottom ) {
+        if ( mZoomBtnsCtrlOn && x0 > TopoDroidApp.mBorderInnerLeft && x0 < TopoDroidApp.mBorderInnerRight ) {
           mZoomBtnsCtrl.setVisible( true );
         }
       }

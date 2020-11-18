@@ -122,12 +122,6 @@ public class OverviewWindow extends ItemDrawer
   private float mDDtotal = 0;
   private int mTotal = 0;
 
-  private float mBorderRight      = 4096;
-  private float mBorderLeft       = 0;
-  private float mBorderInnerRight = 4096;
-  private float mBorderInnerLeft  = 0;
-  private float mBorderBottom     = 4096;
-    
   private float mUnitRuler = 1;
 
   private TopoDroidApp mApp;
@@ -491,12 +485,6 @@ public class OverviewWindow extends ItemDrawer
       mLandscape    = extras.getBoolean( TDTag.TOPODROID_PLOT_LANDSCAPE );
       // // mDrawingUtil = mLandscape ? (new DrawingUtilLandscape()) : (new DrawingUtilPortrait());
       // mDrawingUtil = new DrawingUtilPortrait();
-
-      mBorderRight      = TopoDroidApp.mDisplayWidth * 15 / 16;
-      mBorderLeft       = TopoDroidApp.mDisplayWidth / 16;
-      mBorderInnerRight = TopoDroidApp.mDisplayWidth * 3 / 4;
-      mBorderInnerLeft  = TopoDroidApp.mDisplayWidth / 4;
-      mBorderBottom     = TopoDroidApp.mDisplayHeight * 7 / 8;
 
       // Log.v("DistoX", "Overview from " + mFrom + " Type " + mType + " Zoom " + mZoom );
 
@@ -890,8 +878,8 @@ public class OverviewWindow extends ItemDrawer
 
     } else if (action == MotionEvent.ACTION_DOWN) {
       // check side-drag and zoom controls
-      if ( y_canvas > mBorderBottom ) {
-        if ( mZoomBtnsCtrlOn && x_canvas > mBorderInnerLeft && x_canvas < mBorderInnerRight ) {
+      if ( y_canvas > TopoDroidApp.mBorderBottom ) {
+        if ( mZoomBtnsCtrlOn && x_canvas > TopoDroidApp.mBorderInnerLeft && x_canvas < TopoDroidApp.mBorderInnerRight ) {
           mTouchMode = MODE_ZOOM;
           mZoomBtnsCtrl.setVisible( true );
           // mZoomCtrl.show( );
@@ -900,7 +888,7 @@ public class OverviewWindow extends ItemDrawer
           mTouchMode = MODE_ZOOM;
           return true;
         }
-      } else if ( TDSetting.mSideDrag && ( x_canvas > mBorderRight || x_canvas < mBorderLeft ) ) {
+      } else if ( TDSetting.mSideDrag && ( x_canvas > TopoDroidApp.mBorderRight || x_canvas < TopoDroidApp.mBorderLeft ) ) {
         mTouchMode = MODE_ZOOM;
         return true;
       }
