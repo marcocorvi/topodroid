@@ -150,7 +150,6 @@ public class DeviceActivity extends Activity
 
   private static final int HELP_PAGE = R.string.DeviceActivity;
 
-  // private ArrayAdapter<String> mArrayAdapter;
   private ListItemAdapter mArrayAdapter;
   private ListView mList;
 
@@ -208,9 +207,6 @@ public class DeviceActivity extends Activity
   private MyHorizontalButtonView mButtonView1;
   private ListView   mMenu;
   private Button     mImage;
-  // HOVER
-  // MyMenuAdapter mMenuAdapter;
-  private ArrayAdapter< String > mMenuAdapter;
   private boolean onMenu;
 
 
@@ -301,7 +297,6 @@ public class DeviceActivity extends Activity
     mButtonView1 = new MyHorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );
 
-    // mArrayAdapter = new ArrayAdapter<>( this, R.layout.message );
     mArrayAdapter = new ListItemAdapter( this, R.layout.message );
     mList = (ListView) findViewById(R.id.dev_list);
     mList.setAdapter( mArrayAdapter );
@@ -321,7 +316,6 @@ public class DeviceActivity extends Activity
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter( res );
     closeMenu();
-    // HOVER
     mMenu.setOnItemClickListener( this );
     // TDLog.Debug("device activity create done");
   }
@@ -329,7 +323,6 @@ public class DeviceActivity extends Activity
   private void updateList( )
   {
     // TDLog.Debug("device activity update list" );
-    // mList.setAdapter( mArrayAdapter );
     mArrayAdapter.clear();
     // if ( TDLevel.overTester ) { // FIXME VirtualDistoX
     //   mArrayAdapter.add( "X000" );
@@ -780,29 +773,25 @@ public class DeviceActivity extends Activity
 
   private void setMenuAdapter( Resources res )
   {
-    // HOVER
-    // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
-    mMenuAdapter = new ArrayAdapter<>(this, R.layout.menu );
+    ArrayAdapter< String > nemu_adapter = new ArrayAdapter<>(this, R.layout.menu );
 
     int k = 0;
-    if ( TDLevel.overBasic    ) mMenuAdapter.add( res.getString( menus[k] ) );         // SCAN
-    // ++k; if ( TDLevel.overBasic && mHasBLE ) mMenuAdapter.add( res.getString( menus[k] ) ); // FIXME_SCAN_BLE
-    ++k; if ( TDLevel.overBasic    ) mMenuAdapter.add( res.getString( menus[k] ) );
-    ++k; if ( TDLevel.overNormal   ) mMenuAdapter.add( res.getString( menus[k] ) );
-    ++k; if ( TDLevel.overAdvanced ) mMenuAdapter.add( res.getString( menus[k] ) );
-    ++k; if ( TDLevel.overExpert && TDSetting.mPacketLog ) mMenuAdapter.add( res.getString( menus[k] ) ); // PACKET_LOG
-    ++k; mMenuAdapter.add( res.getString( menus[k] ) );
-    ++k; mMenuAdapter.add( res.getString( menus[k] ) );
-    // ++k; if ( TDLevel.overTester ) mMenuAdapter.add( res.getString( menus[8] ) ); // CALIB_RESET
-    mMenu.setAdapter( mMenuAdapter );
+    if ( TDLevel.overBasic    ) nemu_adapter.add( res.getString( menus[k] ) );         // SCAN
+    // ++k; if ( TDLevel.overBasic && mHasBLE ) nemu_adapter.add( res.getString( menus[k] ) ); // FIXME_SCAN_BLE
+    ++k; if ( TDLevel.overBasic    ) nemu_adapter.add( res.getString( menus[k] ) );
+    ++k; if ( TDLevel.overNormal   ) nemu_adapter.add( res.getString( menus[k] ) );
+    ++k; if ( TDLevel.overAdvanced ) nemu_adapter.add( res.getString( menus[k] ) );
+    ++k; if ( TDLevel.overExpert && TDSetting.mPacketLog ) nemu_adapter.add( res.getString( menus[k] ) ); // PACKET_LOG
+    ++k; nemu_adapter.add( res.getString( menus[k] ) );
+    ++k; nemu_adapter.add( res.getString( menus[k] ) );
+    // ++k; if ( TDLevel.overTester ) nemu_adapter.add( res.getString( menus[8] ) ); // CALIB_RESET
+    mMenu.setAdapter( nemu_adapter );
     mMenu.invalidate();
   }
 
   private void closeMenu()
   {
     mMenu.setVisibility( View.GONE );
-    // HOVER
-    // mMenuAdapter.resetBgColor();
     onMenu = false;
   }
 

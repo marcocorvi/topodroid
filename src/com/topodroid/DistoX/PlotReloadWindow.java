@@ -230,9 +230,6 @@ public class PlotReloadWindow extends ItemDrawer
   private MyHorizontalButtonView mButtonView1;
   private ListView   mMenu;
   private Button     mImage;
-  // HOVER
-  // MyMenuAdapter mMenuAdapter;
-  // private ArrayAdapter< String > mMenuAdapter;
   private boolean onMenu;
 
   public float zoom() { return mZoom; }

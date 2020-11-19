@@ -144,9 +144,6 @@ public class CalibActivity extends Activity
   private MyHorizontalButtonView mButtonView1;
   private ListView   mMenu;
   private Button     mImage;
-  // HOVER
-  // MyMenuAdapter mMenuAdapter;
-  private ArrayAdapter< String > mMenuAdapter;
   private boolean onMenu;
 
   @Override
@@ -240,7 +237,6 @@ public class CalibActivity extends Activity
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter( res );
     closeMenu();
-    // HOVER
     mMenu.setOnItemClickListener( this );
   }
 
@@ -428,23 +424,19 @@ public class CalibActivity extends Activity
 
   private void setMenuAdapter( Resources res )
   {
-    // HOVER
-    // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
-    mMenuAdapter = new ArrayAdapter<>(this, R.layout.menu );
+    ArrayAdapter< String > menu_adapter = new ArrayAdapter<>(this, R.layout.menu );
 
-    if ( TDLevel.overNormal ) mMenuAdapter.add( res.getString( menus[0] ) );
-    if ( TDLevel.overBasic  ) mMenuAdapter.add( res.getString( menus[1] ) );
-    mMenuAdapter.add( res.getString( menus[2] ) );
-    mMenuAdapter.add( res.getString( menus[3] ) );
-    mMenu.setAdapter( mMenuAdapter );
+    if ( TDLevel.overNormal ) menu_adapter.add( res.getString( menus[0] ) );
+    if ( TDLevel.overBasic  ) menu_adapter.add( res.getString( menus[1] ) );
+    menu_adapter.add( res.getString( menus[2] ) );
+    menu_adapter.add( res.getString( menus[3] ) );
+    mMenu.setAdapter( menu_adapter );
     mMenu.invalidate();
   }
 
   private void closeMenu()
   {
     mMenu.setVisibility( View.GONE );
-    // HOVER
-    // mMenuAdapter.resetBgColor();
     onMenu = false;
   }
 

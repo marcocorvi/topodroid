@@ -45,7 +45,6 @@ public class DeviceList extends Activity
   static final int DEVICE_SCAN = 0x2;
   
   private ArrayAdapter<String> mArrayAdapter;
-  // private ListView mList;
 
   @Override
   public void onCreate(Bundle savedInstanceState)
@@ -58,7 +57,6 @@ public class DeviceList extends Activity
     mApp = (TopoDroidApp) getApplication();
 
     mArrayAdapter = new ArrayAdapter<>( this, R.layout.message );
-    // mDataAdapter = new ArrayAdapter<>( this, R.layout.data );
 
     ListView list = (ListView) findViewById(R.id.list);
     list.setAdapter( mArrayAdapter );

@@ -33,10 +33,6 @@ import android.os.Bundle;
 import android.text.method.KeyListener;
 import android.text.InputType;
 
-// import android.widget.Spinner;
-// import android.widget.ArrayAdapter;
-
-
 import android.content.Context;
 // import android.content.res.Resources;
 // import android.content.DialogInterface;

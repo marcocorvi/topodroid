@@ -656,9 +656,6 @@ public class DrawingWindow extends ItemDrawer
   private MyHorizontalListView mListView;
   private ListView   mMenu;
   private Button     mImage;
-  // HOVER
-  // MyMenuAdapter mMenuAdapter;
-  // private ArrayAdapter< String > mMenuAdapter;
   private boolean onMenu;
 
   private int mNrSaveTh2Task = 0; // current number of save tasks
@@ -1866,7 +1863,6 @@ public class DrawingWindow extends ItemDrawer
     // mImage.setBackgroundResource( icons00[ IC_MENU ] );
     TDandroid.setButtonBackground( mImage, MyButton.getButtonBackground( mApp, getResources(), izons[IC_MENU] ) );
     mMenu = (ListView) findViewById( R.id.menu );
-    // HOVER
     mMenu.setOnItemClickListener( this );
 
     // mEraseScale = 0;  done in makeButtons()
@@ -6093,46 +6089,41 @@ public class DrawingWindow extends ItemDrawer
 
   private void setMenuAdapter( Resources res, long type )
   {
-    ArrayAdapter< String > mMenuAdapter = new ArrayAdapter<>(mActivity, R.layout.menu );
-    // HOVER
-    // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
-
+    ArrayAdapter< String > menu_adapter = new ArrayAdapter<>(mActivity, R.layout.menu );
     if ( PlotInfo.isSketch2D( type ) && TDLevel.overNormal ) {
-      mMenuAdapter.add( res.getString( menus[0] ) ); // SWITCH/CLOSE
+      menu_adapter.add( res.getString( menus[0] ) ); // SWITCH/CLOSE
     } else {
-      mMenuAdapter.add( res.getString( menus[MENU_CLOSE] ) );  // CLOSE
+      menu_adapter.add( res.getString( menus[MENU_CLOSE] ) );  // CLOSE
     }
-    mMenuAdapter.add( res.getString( menus[1] ) );  // EXPORT
+    menu_adapter.add( res.getString( menus[1] ) );  // EXPORT
     if ( PlotInfo.isAnySection( type ) ) {
-      mMenuAdapter.add( res.getString( menus[MENU_AREA] ) );  // AREA
+      menu_adapter.add( res.getString( menus[MENU_AREA] ) );  // AREA
     } else {
-      mMenuAdapter.add( res.getString( menus[2] ) );  // INFO
+      menu_adapter.add( res.getString( menus[2] ) );  // INFO
     }
     if ( TDLevel.overNormal ) {
-      mMenuAdapter.add( res.getString( menus[3] ) );  // RELOAD
-      mMenuAdapter.add( res.getString( menus[4] ) );  // ZOOM_FIT
+      menu_adapter.add( res.getString( menus[3] ) );  // RELOAD
+      menu_adapter.add( res.getString( menus[4] ) );  // ZOOM_FIT
     }
     if ( TDLevel.overAdvanced && PlotInfo.isSketch2D( type ) ) {
-      mMenuAdapter.add( res.getString( menus[5] ) ); // RENAME/DELETE
+      menu_adapter.add( res.getString( menus[5] ) ); // RENAME/DELETE
     }
     if ( TDLevel.overAdvanced && PlotInfo.isSketch2D( type ) ) {
-      mMenuAdapter.add( res.getString( menus[6] ) ); // SCRAPS
+      menu_adapter.add( res.getString( menus[6] ) ); // SCRAPS
     }
-    mMenuAdapter.add( res.getString( menus[7] ) ); // PALETTE
+    menu_adapter.add( res.getString( menus[7] ) ); // PALETTE
     if ( TDLevel.overBasic && PlotInfo.isSketch2D( type ) ) {
-      mMenuAdapter.add( res.getString( menus[8] ) ); // OVERVIEW
+      menu_adapter.add( res.getString( menus[8] ) ); // OVERVIEW
     }
-    mMenuAdapter.add( res.getString( menus[9] ) ); // OPTIONS
-    mMenuAdapter.add( res.getString( menus[10] ) ); // HELP
-    mMenu.setAdapter( mMenuAdapter );
+    menu_adapter.add( res.getString( menus[9] ) ); // OPTIONS
+    menu_adapter.add( res.getString( menus[10] ) ); // HELP
+    mMenu.setAdapter( menu_adapter );
     mMenu.invalidate();
   }
 
   private void closeMenu()
   {
     mMenu.setVisibility( View.GONE );
-    // HOVER
-    // mMenuAdapter.resetBgColor();
     onMenu = false;
   }
 

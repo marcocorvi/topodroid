@@ -27,7 +27,6 @@ import android.os.Bundle;
 import android.content.Context;
 // import android.content.Intent;
 
-// import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -50,8 +49,6 @@ class UndeleteDialog extends MyDialog
   private Button mBtnStatus;
   private Button mBtnOk;
 
-  // ArrayAdapter< String >  mArrayAdapter;
-  // private MyStringAdapter mArrayAdapter;
   private UndeleteAdapter mArrayAdapter0 = null;
   private UndeleteAdapter mArrayAdapter1 = null;
   private UndeleteAdapter mArrayAdapter2 = null;
@@ -180,7 +177,6 @@ class UndeleteDialog extends MyDialog
     super.onCreate( savedInstanceState );
 
     setContentView(R.layout.undelete_dialog);
-    // mArrayAdapter = new MyStringAdapter( mContext, R.layout.message );
     if ( mPlots != null )  mArrayAdapter0 = new UndeleteAdapter( mContext, this, R.layout.undelete_row, mPlots );
     if ( mShots1 != null ) mArrayAdapter1 = new UndeleteAdapter( mContext, this, R.layout.undelete_row, mShots1 );
     if ( mShots2 != null ) mArrayAdapter2 = new UndeleteAdapter( mContext, this, R.layout.undelete_row, mShots2 );
@@ -188,7 +184,6 @@ class UndeleteDialog extends MyDialog
 
 
     mList = (ListView) findViewById(R.id.list_undelete);
-    // mList.setAdapter( mArrayAdapter );
     // mList.setOnItemClickListener( this );
     mList.setDividerHeight( 2 );
 
@@ -209,30 +204,24 @@ class UndeleteDialog extends MyDialog
 
   private void updateList()
   {
-    // mArrayAdapter.clear();
     switch ( mStatus ) {
       case 0:
         mBtnStatus.setText( R.string.undelete_plot );
-        // for ( UndeleteItem item : mPlots ) mArrayAdapter.add( item.getText() );
         mList.setAdapter( mArrayAdapter0 );
         break;
       case 1:
         mBtnStatus.setText( R.string.undelete_shot );
-        // for ( UndeleteItem item : mShots1 ) mArrayAdapter.add( item.getText() );
         mList.setAdapter( mArrayAdapter1 );
         break;
       case 2:
         mBtnStatus.setText( R.string.undelete_overshoot );
-        // for ( UndeleteItem item : mShots2 ) mArrayAdapter.add( item.getText() );
         mList.setAdapter( mArrayAdapter2 );
         break;
       case 3:
         mBtnStatus.setText( R.string.undelete_check );
-        // for ( UndeleteItem item : mShots3 ) mArrayAdapter.add( item.getText() );
         mList.setAdapter( mArrayAdapter3 );
         break;
     }
-    // mList.setAdapter( mArrayAdapter );
     // mList.invalidate( );
   }
 

@@ -22,7 +22,6 @@ import android.os.Bundle;
 // import android.os.Handler;
 // import android.os.Message;
 
-// import android.app.Application;
 import android.app.Activity;
 
 // import android.content.res.ColorStateList;
@@ -33,7 +32,6 @@ import android.view.KeyEvent;
 
 // import android.location.LocationManager;
 
-// import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.ListView;
 // import android.widget.Button;
@@ -41,7 +39,6 @@ import android.view.View;
 // import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-// import android.preference.PreferenceManager;
 
 public class SensorListActivity extends Activity
                                 implements OnItemClickListener

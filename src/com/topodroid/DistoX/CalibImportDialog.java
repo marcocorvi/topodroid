@@ -44,7 +44,6 @@ class CalibImportDialog extends MyDialog
 { 
   private final DeviceActivity mParent;
 
-  // private ArrayAdapter<String> mArrayAdapter;
   private ListView mList;
   // private Button mBtnCancel;
 

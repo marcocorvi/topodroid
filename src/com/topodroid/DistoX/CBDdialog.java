@@ -46,7 +46,6 @@ class CBDdialog extends MyDialog
 { 
   private CWDActivity mParent;
 
-  // private ArrayAdapter<String> mArrayAdapter;
   private ListView mList;
   private TextView mTVcbd;
   private EditText mETsubdir;

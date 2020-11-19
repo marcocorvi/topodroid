@@ -239,9 +239,6 @@ public class ShotWindow extends Activity
   private MyHorizontalButtonView mButtonViewF;
   private ListView   mMenu = null;
   private Button     mImage;
-  // HOVER
-  // MyMenuAdapter mMenuAdapter;
-  private ArrayAdapter< String > mMenuAdapter;
   private boolean onMenu = false;
   private boolean onMultiselect = false;
 
@@ -1152,7 +1149,6 @@ public class ShotWindow extends Activity
     setMenuAdapter( getResources() );
     onMenu = true;
     closeMenu();
-    // HOVER
     mMenu.setOnItemClickListener( this );
 
     // CutNPaste.dismissPopupBT();
@@ -2050,21 +2046,19 @@ public class ShotWindow extends Activity
   private void setMenuAdapter( Resources res )
   {
     int k = 0;
-    // HOVER
-    // mMenuAdapter = new MyMenuAdapter( mActivity, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
-    mMenuAdapter = new ArrayAdapter<>(mActivity, R.layout.menu );
+    ArrayAdapter< String > menu_adapter = new ArrayAdapter<>(mActivity, R.layout.menu );
 
-    mMenuAdapter.add( res.getString( menus[k++] ) );                                      // menu_survey
-    mMenuAdapter.add( res.getString( menus[k++] ) );                                      // menu_close
-    if ( TDLevel.overBasic  ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_recover
-    if ( TDLevel.overNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_photo  
-    if ( TDLevel.overExpert ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_audio  
-    if ( TDSetting.mWithSensors && TDLevel.overNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_sensor
-    if ( /* TDPath.BELOW_ANDROID_11 && */ TDLevel.overBasic  ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_3d
-    if ( TDLevel.overNormal && ! diving ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_distox
-    mMenuAdapter.add( res.getString( menus[k++] ) );  // menu_options
-    mMenuAdapter.add( res.getString( menus[k++] ) );  // menu_help
-    mMenu.setAdapter( mMenuAdapter );
+    menu_adapter.add( res.getString( menus[k++] ) );                                      // menu_survey
+    menu_adapter.add( res.getString( menus[k++] ) );                                      // menu_close
+    if ( TDLevel.overBasic  ) menu_adapter.add( res.getString( menus[k] ) ); k++; // menu_recover
+    if ( TDLevel.overNormal ) menu_adapter.add( res.getString( menus[k] ) ); k++; // menu_photo  
+    if ( TDLevel.overExpert ) menu_adapter.add( res.getString( menus[k] ) ); k++; // menu_audio  
+    if ( TDSetting.mWithSensors && TDLevel.overNormal ) menu_adapter.add( res.getString( menus[k] ) ); k++; // menu_sensor
+    if ( /* TDPath.BELOW_ANDROID_11 && */ TDLevel.overBasic  ) menu_adapter.add( res.getString( menus[k] ) ); k++; // menu_3d
+    if ( TDLevel.overNormal && ! diving ) menu_adapter.add( res.getString( menus[k] ) ); k++; // menu_distox
+    menu_adapter.add( res.getString( menus[k++] ) );  // menu_options
+    menu_adapter.add( res.getString( menus[k++] ) );  // menu_help
+    mMenu.setAdapter( menu_adapter );
     mMenu.invalidate();
   }
 
@@ -2072,8 +2066,6 @@ public class ShotWindow extends Activity
   {
     if ( onMenu ) {
       mMenu.setVisibility( View.GONE );
-      // HOVER
-      // mMenuAdapter.resetBgColor();
       onMenu = false;
       return true;
     }

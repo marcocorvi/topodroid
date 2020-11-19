@@ -141,9 +141,6 @@ public class SurveyWindow extends Activity
   private MyHorizontalButtonView mButtonView1;
   private ListView   mMenu;
   private Button     mImage;
-  // HOVER
-  // MyMenuAdapter mMenuAdapter;
-  private ArrayAdapter< String > mMenuAdapter;
   private boolean onMenu;
   private String mInitStation = null;
   private int mXSections;
@@ -303,7 +300,6 @@ public class SurveyWindow extends Activity
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter( res );
     closeMenu();
-    // HOVER
     mMenu.setOnItemClickListener( this );
   }
 
@@ -569,29 +565,26 @@ public class SurveyWindow extends Activity
   // called after updateDisplay
   private void setMenuAdapter( Resources res )
   {
-    // HOVER
-    // mMenuAdapter = new MyMenuAdapter( mActivity, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
-    mMenuAdapter = new ArrayAdapter<>(mActivity, R.layout.menu );
+    ArrayAdapter< String > menu_adapter;
+    menu_adapter = new ArrayAdapter<>(mActivity, R.layout.menu );
 
-    mMenuAdapter.add( res.getString( menus[0] ) );
-    mMenuAdapter.add( res.getString( menus[1] ) );
-    if ( TDLevel.overExpert   ) mMenuAdapter.add( res.getString( menus[2] ) );
-    if ( TDLevel.overNormal   ) mMenuAdapter.add( res.getString( menus[3] ) );
-    if ( mSplayColor          ) mMenuAdapter.add( res.getString( menus[4] ) );
-    if ( TDLevel.overAdvanced ) mMenuAdapter.add( res.getString( menus[5] ) );
-    if ( TDLevel.overAdvanced ) mMenuAdapter.add( res.getString( menus[6] ) );
-    mMenuAdapter.add( res.getString( menus[7] ) );
-    mMenuAdapter.add( res.getString( menus[8] ) );
+    menu_adapter.add( res.getString( menus[0] ) );
+    menu_adapter.add( res.getString( menus[1] ) );
+    if ( TDLevel.overExpert   ) menu_adapter.add( res.getString( menus[2] ) );
+    if ( TDLevel.overNormal   ) menu_adapter.add( res.getString( menus[3] ) );
+    if ( mSplayColor          ) menu_adapter.add( res.getString( menus[4] ) );
+    if ( TDLevel.overAdvanced ) menu_adapter.add( res.getString( menus[5] ) );
+    if ( TDLevel.overAdvanced ) menu_adapter.add( res.getString( menus[6] ) );
+    menu_adapter.add( res.getString( menus[7] ) );
+    menu_adapter.add( res.getString( menus[8] ) );
 
-    mMenu.setAdapter( mMenuAdapter );
+    mMenu.setAdapter( menu_adapter );
     mMenu.invalidate();
   }
 
   private void closeMenu()
   {
     mMenu.setVisibility( View.GONE );
-    // HOVER
-    // mMenuAdapter.resetBgColor();
     onMenu = false;
   }
 

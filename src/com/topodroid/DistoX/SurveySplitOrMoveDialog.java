@@ -44,7 +44,6 @@ class SurveySplitOrMoveDialog extends MyDialog
 { 
   private final ShotWindow mParent;
 
-  // private ArrayAdapter<String> mArrayAdapter;
   private Button mBtnCancel;
   private Button mBtnSplit;
   private Button mBtnMove;

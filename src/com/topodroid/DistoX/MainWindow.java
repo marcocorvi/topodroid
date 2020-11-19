@@ -402,9 +402,6 @@ public class MainWindow extends Activity
   private MyHorizontalButtonView mButtonView1;
   private Button     mImage;
   private ListView   mMenu;
-  // HOVER
-  // MyMenuAdapter mMenuAdapter = null;
-  private ArrayAdapter< String > mMenuAdapter;
   
   // FIXME TOOLBAR Toolbar mToolbar;
   
@@ -415,32 +412,28 @@ public class MainWindow extends Activity
 
   void setMenuAdapter( Resources res )
   {
-    // HOVER
-    // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
-    mMenuAdapter = new ArrayAdapter<>(mActivity, R.layout.menu );
+    ArrayAdapter< String > menu_adapter = new ArrayAdapter<>(mActivity, R.layout.menu );
 
     mWithPalette  = TDLevel.overNormal;
     mWithPalettes = TDLevel.overExpert && TDSetting.mPalettes; // mWithPalettes ==> mWithPalette
     mWithLogs     = TDLevel.overAdvanced;
     mWithBackupsClear = TDLevel.overExpert && TDSetting.mBackupsClear;
 
-    if ( mWithPalette ) mMenuAdapter.add( res.getString( menus[0] ) ); // PALETTE
-    if ( mWithLogs )    mMenuAdapter.add( res.getString( menus[1] ) ); // LOGS
-    if ( mWithBackupsClear ) mMenuAdapter.add( res.getString( menus[2] ) ); // CLEAR_BACKUPS
-    // if ( TDLevel.overExpert && mApp_mCosurvey ) mMenuAdapter.add( res.getString( menus[2] ) ); // IF_COSURVEY
-    // if ( TDLevel.overExpert )   mMenuAdapter.add( res.getString( menus[3] ) ); // UPDATES
-    mMenuAdapter.add( res.getString( menus[3] ) ); // ABOUT
-    mMenuAdapter.add( res.getString( menus[4] ) ); // SETTINGS
-    mMenuAdapter.add( res.getString( menus[5] ) ); // HELP
-    mMenu.setAdapter( mMenuAdapter );
+    if ( mWithPalette ) menu_adapter.add( res.getString( menus[0] ) ); // PALETTE
+    if ( mWithLogs )    menu_adapter.add( res.getString( menus[1] ) ); // LOGS
+    if ( mWithBackupsClear ) menu_adapter.add( res.getString( menus[2] ) ); // CLEAR_BACKUPS
+    // if ( TDLevel.overExpert && mApp_mCosurvey ) menu_adapter.add( res.getString( menus[2] ) ); // IF_COSURVEY
+    // if ( TDLevel.overExpert )   menu_adapter.add( res.getString( menus[3] ) ); // UPDATES
+    menu_adapter.add( res.getString( menus[3] ) ); // ABOUT
+    menu_adapter.add( res.getString( menus[4] ) ); // SETTINGS
+    menu_adapter.add( res.getString( menus[5] ) ); // HELP
+    mMenu.setAdapter( menu_adapter );
     mMenu.invalidate();
   }
 
   private void closeMenu()
   {
     mMenu.setVisibility( View.GONE );
-    // HOVER
-    // mMenuAdapter.resetBgColor();
     onMenu = false;
   }
 
@@ -512,11 +505,9 @@ public class MainWindow extends Activity
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
     mMenu = (ListView) findViewById( R.id.menu );
-    mMenuAdapter = null;
 
     setMenuAdapter( getResources() );
     closeMenu();
-    // HOVER
     mMenu.setOnItemClickListener( this );
 
     // TDLog.Profile("TDActivity buttons");

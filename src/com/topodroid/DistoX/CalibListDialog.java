@@ -40,7 +40,6 @@ class CalibListDialog extends MyDialog
   private DeviceActivity mParent;
   // private TopoDroidApp mApp; // unused
   private ArrayAdapter<String> mArrayAdapter;
-  // private ListItemAdapter mArrayAdapter;
   private Button mBtnNew;
   private Button mBtnImport;
   // private Button mBtnCancel;
@@ -63,7 +62,6 @@ class CalibListDialog extends MyDialog
     initLayout( R.layout.calib_list_dialog, R.string.title_calib );
 
     mArrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
-    // mArrayAdapter = new ListItemAdapter( mContext, R.layout.message );
 
     mList = (ListView) findViewById(R.id.list);
     mList.setAdapter( mArrayAdapter );
@@ -92,7 +90,6 @@ class CalibListDialog extends MyDialog
   {
     if ( TopoDroidApp.mDData != null && TDInstance.deviceA != null ) {
       List< String > list = TopoDroidApp.mDData.selectDeviceCalibs( TDInstance.deviceAddress() );
-      // mList.setAdapter( mArrayAdapter );
       mArrayAdapter.clear();
       for ( String item : list ) {
         mArrayAdapter.add( item );

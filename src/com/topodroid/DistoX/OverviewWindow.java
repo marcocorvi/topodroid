@@ -362,9 +362,6 @@ public class OverviewWindow extends ItemDrawer
     private MyHorizontalButtonView mButtonView1;
     private ListView   mMenu;
     private Button     mImage;
-    // HOVER
-    // MyMenuAdapter mMenuAdapter;
-    // private ArrayAdapter< String > mMenuAdapter;
     private boolean onMenu;
 
     private List< DBlock > mBlockList = null;
@@ -494,7 +491,6 @@ public class OverviewWindow extends ItemDrawer
       mMenu = (ListView) findViewById( R.id.menu );
       setMenuAdapter( res );
       closeMenu();
-      // HOVER
       mMenu.setOnItemClickListener( this );
 
       doStart();
@@ -1163,23 +1159,19 @@ public class OverviewWindow extends ItemDrawer
 
   private void setMenuAdapter( Resources res )
   {
-    // HOVER
-    // mMenuAdapter = new MyMenuAdapter( mActivity, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
-    ArrayAdapter< String > mMenuAdapter = new ArrayAdapter<>(mActivity, R.layout.menu );
+    ArrayAdapter< String > menu_adapter = new ArrayAdapter<>(mActivity, R.layout.menu );
 
-    mMenuAdapter.add( res.getString( menus[0] ) );
-    if ( TDLevel.overExpert ) mMenuAdapter.add( res.getString( menus[1] ) );
-    mMenuAdapter.add( res.getString( menus[2] ) );
-    mMenuAdapter.add( res.getString( menus[3] ) );
-    mMenu.setAdapter( mMenuAdapter );
+    menu_adapter.add( res.getString( menus[0] ) );
+    if ( TDLevel.overExpert ) menu_adapter.add( res.getString( menus[1] ) );
+    menu_adapter.add( res.getString( menus[2] ) );
+    menu_adapter.add( res.getString( menus[3] ) );
+    mMenu.setAdapter( menu_adapter );
     mMenu.invalidate();
   }
 
   private void closeMenu()
   {
     mMenu.setVisibility( View.GONE );
-    // HOVER
-    // mMenuAdapter.resetBgColor();
     onMenu = false;
   }
 

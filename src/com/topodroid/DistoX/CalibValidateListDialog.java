@@ -39,9 +39,7 @@ class CalibValidateListDialog extends MyDialog
                               , OnClickListener
 {
   private final GMActivity mParent;
-  // private ArrayAdapter<String> mArrayAdapter;
 
-  // private ListView mList;
   private final List< String > mCalibs;
   private Button mBtnCancel;
 

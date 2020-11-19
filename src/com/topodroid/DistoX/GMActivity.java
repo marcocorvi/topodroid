@@ -142,9 +142,6 @@ public class GMActivity extends Activity
   private boolean mEnableWrite;
   private ListView   mMenu;
   private Button     mImage;
-  // HOVER
-  // MyMenuAdapter mMenuAdapter;
-  private ArrayAdapter< String > mMenuAdapter;
   private boolean onMenu;
 
   private BitmapDrawable mBMtoggle;
@@ -810,7 +807,6 @@ public class GMActivity extends Activity
     setMenuAdapter( res );
     onMenu = true;
     closeMenu();
-    // HOVER
     mMenu.setOnItemClickListener( this );
   }
 
@@ -1176,30 +1172,21 @@ public class GMActivity extends Activity
 
   private void setMenuAdapter( Resources res )
   {
-    // HOVER
-    // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
-    mMenuAdapter = new ArrayAdapter<>(this, R.layout.menu );
+    ArrayAdapter< String > menu_adapter = new ArrayAdapter<>(this, R.layout.menu );
 
-    fillMenus( res );
-    mMenu.setAdapter( mMenuAdapter );
+    menu_adapter.add( res.getString( (mBlkStatus == 0)? menus[0] : menus[4] ) );
+    if ( TDLevel.overAdvanced ) menu_adapter.add( res.getString( menus[1] ) );
+    menu_adapter.add( res.getString( menus[2] ) );
+    menu_adapter.add( res.getString( menus[3] ) );
+
+    mMenu.setAdapter( menu_adapter );
     mMenu.invalidate();
-  }
-
-  private void fillMenus( Resources res )
-  {
-    mMenuAdapter.clear();
-    mMenuAdapter.add( res.getString( (mBlkStatus == 0)? menus[0] : menus[4] ) );
-    if ( TDLevel.overAdvanced ) mMenuAdapter.add( res.getString( menus[1] ) );
-    mMenuAdapter.add( res.getString( menus[2] ) );
-    mMenuAdapter.add( res.getString( menus[3] ) );
   }
 
   private boolean closeMenu()
   {
     if ( onMenu ) {
       mMenu.setVisibility( View.GONE );
-      // HOVER
-      // mMenuAdapter.resetBgColor();
       onMenu = false;
       return true;
     }
@@ -1212,7 +1199,7 @@ public class GMActivity extends Activity
     int p = 0;
     if ( p++ == pos ) { // DISPLAY
       mBlkStatus = 1 - mBlkStatus;       // 0 --> 1;  1 --> 0
-      fillMenus( getResources() );
+      setMenuAdapter( getResources() );
       updateDisplay( );
     } else if ( TDLevel.overAdvanced && p++ == pos ) { // VALIDATE
       List< String > list = mApp_mDData.selectDeviceCalibs( TDInstance.deviceAddress() );

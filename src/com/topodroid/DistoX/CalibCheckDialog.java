@@ -52,9 +52,6 @@ class CalibCheckDialog extends MyDialog
   private ImageView hist2;
   private Button    mBtnClose;
 
-  // private ArrayAdapter<String> mArrayAdapter;
-  // private ListView mList;
-
   CalibCheckDialog( Context context, SurveyWindow parent, List< DBlock > shots )
   {
     super( context, R.string.CalibCheckDialog );
