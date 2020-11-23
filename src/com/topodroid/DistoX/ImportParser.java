@@ -31,7 +31,7 @@ class ImportParser
   String mDate = null;  // survey date
   String mTeam = TDString.EMPTY;
   String mTitle = TDString.EMPTY;
-  float  mDeclination = 0.0f; // one-survey declination
+  float  mDeclination = SurveyInfo.DECLINATION_UNSET; // 0.0f; // one-survey declination
   protected boolean mApplyDeclination = false;
   protected boolean mValid = false;  // whether the parser is valid
 
@@ -63,12 +63,25 @@ class ImportParser
 
   Pattern pattern = Pattern.compile( "\\s+" );
 
+  // cstr
+  // @param apply_declination  whether to apply the declination read from the file
   ImportParser( boolean apply_declination ) // throws ParserException
   {
-    mDate = TDUtil.currentDate();
+    mDate  = TDUtil.currentDate();
     shots  = new ArrayList<>();
     splays = new ArrayList<>();
     mApplyDeclination = apply_declination;
+  }
+
+  // update survey metadata in the DB: data, title, declination, init_station
+  // @param sid           survey ID
+  // @param data_helper   database helper class
+  protected boolean updateSurveyMetadata( long sid, DataHelper data_helper ) 
+  {
+    boolean b1 = data_helper.updateSurveyDayAndComment( sid, mDate, mTitle );
+    boolean b2 = data_helper.updateSurveyDeclination( sid, mDeclination );
+    boolean b3 = data_helper.updateSurveyInitStation( sid, initStation() );
+    return b1 && b2 && b3; // try all the three actions
   }
   
   String nextLine( BufferedReader br ) throws IOException

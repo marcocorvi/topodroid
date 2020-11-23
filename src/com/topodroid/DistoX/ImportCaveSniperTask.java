@@ -35,9 +35,11 @@ class ImportCaveSniperTask extends ImportTask
         return -1L;
       }
       sid = mApp.get().setSurveyFromName( parser.mName, SurveyInfo.DATAMODE_NORMAL, false ); // IMPORT CaveSniper no update
-      app_data.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle );
-      // app_data.updateSurveyDeclination( sid, parser.mDeclination );
-      app_data.updateSurveyInitStation( sid, parser.initStation() );
+
+      // app_data.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle );
+      // // app_data.updateSurveyDeclination( sid, parser.mDeclination );
+      // app_data.updateSurveyInitStation( sid, parser.initStation() );
+      parser.updateSurveyMetadata( sid, app_data );
 
       ArrayList< ParserShot > shots  = parser.getShots();
       // ArrayList< ParserShot > splays = parser.getSplays();

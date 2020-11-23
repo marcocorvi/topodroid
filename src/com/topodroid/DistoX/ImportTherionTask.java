@@ -35,10 +35,13 @@ class ImportTherionTask extends ImportTask
       if ( mApp.get() == null ) return -1L;
 
       sid = mApp.get().setSurveyFromName( str[1], SurveyInfo.DATAMODE_NORMAL, false ); // IMPORT TH no update
-      app_data.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle );
-      app_data.updateSurveyDeclination( sid, parser.surveyDeclination() );
-      app_data.updateSurveyInitStation( sid, parser.initStation() );
-      app_data.updateSurveyTeam( sid, parser.mTeam );
+
+      // app_data.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle );
+      // app_data.updateSurveyDeclination( sid, parser.surveyDeclination() );
+      // app_data.updateSurveyInitStation( sid, parser.initStation() );
+      parser.updateSurveyMetadata( sid, app_data ); // TODO check return ( boolean )
+
+      app_data.updateSurveyTeam( sid, parser.mTeam ); // TODO check return ( boolean )
 
       ArrayList< ParserShot > shots  = parser.getShots();
       long id = app_data.insertImportShots( sid, 1, shots ); // start id = 1

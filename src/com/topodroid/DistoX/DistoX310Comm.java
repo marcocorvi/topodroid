@@ -132,7 +132,7 @@ class DistoX310Comm extends DistoXComm
     if ( connectSocketAny( address ) ) {
       byte[] result = null;
       byte[] fw = mProtocol.readMemory( DeviceX310Details.mFirmwareAddress ); // read firmware
-      if ( fw == null ) {
+      if ( fw == null || fw.length < 2 ) {
         TDLog.Error( "toggle Calib Mode X310 failed read E000" );
       } else {
         // Log.v("DistoX", "firmware " + fw[0] + " " + fw[1] );

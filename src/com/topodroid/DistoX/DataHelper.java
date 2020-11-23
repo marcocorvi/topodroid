@@ -834,16 +834,19 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
-  private void doUpdateSurvey( long id, ContentValues cv, String msg )
+  private boolean doUpdateSurvey( long id, ContentValues cv, String msg )
   {
+    if ( myDB == null ) return false;
     try {
       myDB.beginTransaction();
       myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(id) } );
       myDB.setTransactionSuccessful();
+      return true;
     } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
     } catch ( SQLiteException e1 )       { logError(msg, e1 ); 
     } catch ( IllegalStateException e2 ) { logError(msg, e2 );
     } finally { myDB.endTransaction(); }
+    return false;
   }
 
   private boolean doUpdate( String table, ContentValues cv, long sid, long id, String msg )
@@ -943,29 +946,29 @@ public class DataHelper extends DataSetObservable
     ContentValues cv = new ContentValues();
     cv.put( "day", date );
     cv.put( "comment", (comment != null)? comment : TDString.EMPTY );
-    doUpdateSurvey( id, cv, "survey day+cmt" );
-    return true;
+    return doUpdateSurvey( id, cv, "survey day+cmt" );
   }
 
-  void updateSurveyTeam( long id, String team )
+  boolean updateSurveyTeam( long id, String team )
   {
     ContentValues cv = new ContentValues();
     cv.put( "team", team );
-    doUpdateSurvey( id, cv, "survey team" );
+    return doUpdateSurvey( id, cv, "survey team" );
   }
 
-  void updateSurveyInitStation( long id, String station )
+  boolean updateSurveyInitStation( long id, String station )
   {
     ContentValues cv = new ContentValues();
     // Log.v("DistoX_DB", "update survey init_station <" + station + ">" );
     cv.put( "init_station", station );
-    doUpdateSurvey( id, cv, "survey init_station" );
+    return doUpdateSurvey( id, cv, "survey init_station" );
   }
-  void updateSurveyDeclination( long id, double decl )
+  
+  boolean updateSurveyDeclination( long id, double decl )
   {
     ContentValues cv = new ContentValues();
     cv.put( "declination", decl );
-    doUpdateSurvey( id, cv, "survey decl" );
+    return doUpdateSurvey( id, cv, "survey decl" );
   }
 
   // -----------------------------------------------------------------------
