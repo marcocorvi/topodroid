@@ -1281,12 +1281,11 @@ public class ShotWindow extends Activity
     String shots = mApp_mData.getValue( "DISTOX_SHOTS" );
     if ( shots != null ) {
       String[] vals = shots.split( " " );
-      // FIXME assert( vals.length > 3 );
-      mFlagSplay  = vals[0].equals( TDString.ONE );
-      mFlagLeg    = vals[1].equals( TDString.ONE );
-      mFlagBlank  = vals[2].equals( TDString.ONE );
-      setShowIds( vals[3].equals( TDString.ONE ) );
-      mFlagLatest = ( vals.length > 4) && vals[4].equals( TDString.ONE );
+      mFlagSplay  = ( vals.length > 0 ) && vals[0].equals( TDString.ONE );
+      mFlagLeg    = ( vals.length > 1 ) && vals[1].equals( TDString.ONE );
+      mFlagBlank  = ( vals.length > 2 ) && vals[2].equals( TDString.ONE );
+      setShowIds(   ( vals.length > 3 ) && vals[3].equals( TDString.ONE ) );
+      mFlagLatest = ( vals.length > 4 ) && vals[4].equals( TDString.ONE );
       // Log.v("DistoX", "restore from data mFlagSplay " + mFlagSplay );
     }
   }

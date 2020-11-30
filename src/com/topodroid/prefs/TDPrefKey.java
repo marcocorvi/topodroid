@@ -392,8 +392,8 @@ public class TDPrefKey
     "DISTOX_EXPORT_DAT_PREF",    // 10
     "DISTOX_EXPORT_TRO_PREF",
     "DISTOX_EXPORT_SVG_PREF",    // 12
-    "DISTOX_EXPORT_DXF_PREF",
     "DISTOX_EXPORT_SHP_PREF",    // 14
+    "DISTOX_EXPORT_DXF_PREF",
     "DISTOX_EXPORT_PNG_PREF",
     "DISTOX_EXPORT_KML_PREF",    // 16
     "DISTOX_EXPORT_CSV_PREF",    // 17
@@ -414,8 +414,8 @@ public class TDPrefKey
     R.string.pref_cat_exportdat,
     R.string.pref_cat_exporttro,
     R.string.pref_cat_exportsvg,
-    R.string.pref_cat_exportdxf,
     R.string.pref_cat_exportshp,
+    R.string.pref_cat_exportdxf,
     R.string.pref_cat_exportpng,
     R.string.pref_cat_exportkml,
     R.string.pref_cat_exportcsv,

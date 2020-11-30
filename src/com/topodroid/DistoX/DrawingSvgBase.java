@@ -59,6 +59,27 @@ class DrawingSvgBase
     }
   }
 
+  static protected void printPoint( PrintWriter pw, String prefix, float x, float y )
+  {
+    pw.format(Locale.US, "%s %.2f %.2f", prefix, x*TDSetting.mToSvg, y*TDSetting.mToSvg );
+  }
+
+  static protected void printPointWithXY( PrintWriter pw, String prefix, float x, float y )
+  {
+    pw.format(Locale.US, "%s x=\"%.2f\" y=\"%.2f\" ", prefix, x*TDSetting.mToSvg, y*TDSetting.mToSvg );
+  }
+
+  static protected void printPointWithCXCY( PrintWriter pw, String prefix, float x, float y )
+  {
+    pw.format(Locale.US, "%s cx=\"%.2f\" cy=\"%.2f\" ", prefix, x*TDSetting.mToSvg, y*TDSetting.mToSvg );
+  }
+
+  static protected void printSegmentWithClose( PrintWriter pw, float x1, float y1, float x2, float y2 )
+  {
+    pw.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />",
+      x1*TDSetting.mToSvg, y1*TDSetting.mToSvg, x2*TDSetting.mToSvg, y2*TDSetting.mToSvg );
+  }
+
   static protected String pathToColor( DrawingPath path )
   {
     int color = path.color();
@@ -93,7 +114,8 @@ class DrawingSvgBase
     return xsections;
   }
 
-  static protected void printSvgGrid( BufferedWriter out, List< DrawingPath > grid, String id, String color, float opacity, float xoff, float yoff )
+  static protected void printSvgGrid( BufferedWriter out, List< DrawingPath > grid, String id, String color, float opacity, 
+                                      float xoff, float yoff, float xmin, float xmax, float ymin, float ymax )
   {
     if ( grid != null && grid.size() > 0 ) {
       StringWriter sw = new StringWriter();
@@ -101,9 +123,20 @@ class DrawingSvgBase
       pw.format(Locale.US, "<g id=\"%s\"\n", id );
       pw.format(Locale.US, " style=\"fill:none;stroke-opacity:%.1f;stroke-width=%.2f;stroke:#666666\" >\n", opacity, TDSetting.mSvgGridStroke );
       for ( DrawingPath p : grid ) {
+        float x1 = xmin;
+        float x2 = xmax;
+        float y1 = ymin;
+        float y2 = ymax;
+        if ( p.x1 == p.x2 ) {
+          if (p.x1 < xmin || p.x2 > xmax ) continue;
+          x1 = x2 = p.x1;
+        } else {
+          if (p.y1 < ymin || p.y2 > ymax ) continue;
+          y1 = y2 = p.y1;
+        }
         pw.format(Locale.US, "  <path stroke-width=\"%.2f\" stroke=\"#%s\" d=\"", TDSetting.mSvgGridStroke, color );
-        pw.format(Locale.US, "M %.2f %.2f",  xoff+p.x1, yoff+p.y1 );
-        pw.format(Locale.US, " L %.2f %.2f", xoff+p.x2, yoff+p.y2 );
+        printPoint( pw, "M",  xoff+x1, yoff+y1 );
+        printPoint( pw, " L", xoff+x2, yoff+y2 );
         pw.format("\" />\n");
       }
       pw.format( end_grp );
@@ -122,7 +155,7 @@ class DrawingSvgBase
     pw.format("<!-- point %s -->\n", name );
     if ( name.equals("label") ) {
       DrawingLabelPath label = (DrawingLabelPath)point;
-      pw.format(Locale.US, "<text x=\"%.2f\" y=\"%.2f\" ", xoff+point.cx, yoff+point.cy );
+      printPointWithXY( pw, "<text", xoff+point.cx, yoff+point.cy );
       pw.format(Locale.US, " style=\"fill:black;stroke:black;stroke-width:%.2f\">%s</text>\n", TDSetting.mSvgLabelStroke, label.mPointText );
     }
   }
@@ -165,16 +198,16 @@ class DrawingSvgBase
   {
     // pw.format("<text font-size=\"20\" font-family=\"sans-serif\" fill=\"violet\" stroke=\"none\" text-anchor=\"middle\"");
     pw.format("<text font-size=\"%d\" fill=\"violet\" stroke=\"none\" text-anchor=\"middle\"", TDSetting.mSvgStationSize );
-    pw.format(Locale.US, " x=\"%.2f\" y=\"%.2f\">", xoff + st.cx, yoff + st.cy );
-    pw.format("%s</text>\n", st.getName() );
+    printPointWithXY( pw, "", xoff+st.cx, yoff+st.cy );
+    pw.format(">%s</text>\n", st.getName() );
   }
 
   static protected void toSvg( PrintWriter pw, DrawingStationPath sp, float xoff, float yoff )
   {
     // pw.format("<text font-size=\"20\" font-family=\"sans-serif\" fill=\"black\" stroke=\"none\" text-anchor=\"middle\"");
     pw.format("<text font-size=\"%d\" fill=\"black\" stroke=\"none\" text-anchor=\"middle\"", TDSetting.mSvgStationSize );
-    pw.format(Locale.US, " x=\"%.2f\" y=\"%.2f\">", xoff + sp.cx, yoff + sp.cy );
-    pw.format("%s</text>\n", sp.name() );
+    printPointWithXY( pw, "", xoff+sp.cx, yoff+sp.cy );
+    pw.format(">%s</text>\n", sp.name() );
   }
 
   static protected void toSvgPointLine( PrintWriter pw, DrawingPointLinePath lp, float xoff, float yoff, boolean closed )
@@ -184,7 +217,7 @@ class DrawingSvgBase
     LinePoint p = lp.mFirst;
     float x0 = xoff+p.x;
     float y0 = yoff+p.y;
-    pw.format(Locale.US, "M %.2f %.2f", xoff+p.x, yoff+p.y );
+    printPoint( pw, "M", xoff+p.x, yoff+p.y );
     for ( p = p.mNext; p != null; p = p.mNext ) { 
       float x3 = xoff+p.x;
       float y3 = yoff+p.y;
@@ -200,11 +233,11 @@ class DrawingSvgBase
 	  BezierCurve bc = new BezierCurve( x0, y0, x1, y1, x2, y2, x3, y3 );
 	  for ( int n=1; n < np; ++n ) {
 	    Point2D pb = bc.evaluate( (float)n / (float)np );
-            pw.format(Locale.US, " L %.2f %.2f", pb.x, pb.y );
+            printPoint( pw, " L", pb.x, pb.y );
           }
 	}
       } 
-      pw.format(Locale.US, " L %.2f %.2f", x3, y3 );
+      printPoint( pw, " L", x3, y3 );
       x0 = x3;
       y0 = y3;
     }
@@ -222,13 +255,13 @@ class DrawingSvgBase
     pw.format("<!-- point %s -->\n", name );
     if ( name.equals("label") ) {
       DrawingLabelPath label = (DrawingLabelPath)point;
-      pw.format(Locale.US, "<text x=\"%.2f\" y=\"%.2f\" ", xoff+point.cx, yoff+point.cy );
+      printPointWithXY( pw, "<text", xoff+point.cx, yoff+point.cy );
       pw.format(Locale.US, " style=\"fill:black;stroke:black;stroke-width:%.2f\">%s</text>\n", TDSetting.mSvgLabelStroke, label.mPointText );
     // } else if ( name.equals("continuation") ) {
-    //   pw.format(Locale.US, "<text x=\"%.2f\" y=\"%.2f\" ", xoff+point.cx, yoff+point.cy );
+    //   printPointWithXY( pw, "<text", xoff+point.cx, yoff+point.cy );
     //   pw.format(Locale.US, " style=\"fill:none;stroke:black;stroke-width:%.2f\">\?</text>\n", TDSetting.mSvgLabelStroke );
     // } else if ( name.equals("danger") ) {
-    //   pw.format(Locale.US, "<text x=\"%.2f\" y=\"%.2f\" ", xoff+point.cx, yoff+point.cy );
+    //   printPointWithXY( pw, "<text", xoff+point.cx, yoff+point.cy );
     //   pw.format(Locale.US, " style=\"fill:none;stroke:red;stroke-width:%.2f\">!</text>\n", TDSetting.mSvgLabelStroke );
     } else if ( BrushManager.isPointSection( idx ) ) {
       /* nothing */
@@ -237,19 +270,20 @@ class DrawingSvgBase
       if ( sp != null ) {
         pw.format(Locale.US, "<g style=\"fill:none;stroke:%s;stroke-width:%.2f\" >\n", color, TDSetting.mSvgPointStroke );
         // pw.format(Locale.US, "<g transform=\"translate(%.2f,%.2f), scale(%d), rotate(%.2f)\">\n", 
-        //   xoff+point.cx, yoff+point.cy, POINT_SCALE, point.mOrientation );
+        //   (xoff+point.cx)*TDSetting.mToSvg, (yoff+point.cy)*TDSetting.mToSvg, POINT_SCALE, point.mOrientation );
 
         float o = (float)(point.mOrientation);
         float s = POINT_SCALE * TDMath.sind( o );
         float c = POINT_SCALE * TDMath.cosd( o );
         pw.format(Locale.US, "<g transform=\"matrix(%.2f,%.2f,%.2f,%.2f,%.2f,%.2f)\">\n", 
-          c, s, -s, c, xoff+point.cx, yoff+point.cy );
+          c, s, -s, c, (xoff+point.cx)*TDSetting.mToSvg, (yoff+point.cy)*TDSetting.mToSvg );
 
         pw.format("%s\n", sp.getSvg() );
         pw.format( end_grp );
         pw.format( end_grp );
       } else {
-        pw.format(Locale.US, "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"%d\" ", xoff+point.cx, yoff+point.cy, POINT_RADIUS );
+        printPointWithCXCY( pw, "<circle", xoff+point.cx, yoff+point.cy );
+        pw.format(Locale.US, " r=\"%d\" ", POINT_RADIUS );
         pw.format(Locale.US, " style=\"fill:none;stroke:black;stroke-width:%.2f\" />\n", TDSetting.mSvgPointStroke );
       }
     }

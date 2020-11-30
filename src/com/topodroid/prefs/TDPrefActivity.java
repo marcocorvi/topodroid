@@ -100,7 +100,7 @@ public class TDPrefActivity extends Activity
       }
     }
 
-    Log.v("DistoX", "TDPrefActivity::onCreate category " + mPrefCategory );
+    // Log.v("DistoX-PREF", "TDPrefActivity::onCreate category " + mPrefCategory );
     if ( loadPreferences() ) {
       if (mPrefCategory == TDPrefCat.PREF_CATEGORY_ALL )    { mPrefActivityAll    = this; }
       if (mPrefCategory == TDPrefCat.PREF_CATEGORY_SURVEY ) { mPrefActivitySurvey = this; }
@@ -159,8 +159,8 @@ public class TDPrefActivity extends Activity
       case TDPrefCat.PREF_CATEGORY_CSX:       mPrefs = TDPref.makeCsxPrefs(      this, hlp ); break;
       case TDPrefCat.PREF_CATEGORY_TRO:       mPrefs = TDPref.makeTroPrefs(      this, hlp ); break;
       case TDPrefCat.PREF_CATEGORY_SVG:       mPrefs = TDPref.makeSvgPrefs(      this, hlp ); break;
-      case TDPrefCat.PREF_CATEGORY_DXF:       mPrefs = TDPref.makeDxfPrefs(      this, hlp ); break;
       case TDPrefCat.PREF_CATEGORY_SHP:       mPrefs = TDPref.makeShpPrefs(      this, hlp ); break;
+      case TDPrefCat.PREF_CATEGORY_DXF:       mPrefs = TDPref.makeDxfPrefs(      this, hlp ); break;
       case TDPrefCat.PREF_CATEGORY_PNG:       mPrefs = TDPref.makePngPrefs(      this, hlp ); break;
       case TDPrefCat.PREF_CATEGORY_KML:       mPrefs = TDPref.makeKmlPrefs(      this, hlp ); break;
       case TDPrefCat.PREF_CATEGORY_CSV:       mPrefs = TDPref.makeCsvPrefs(      this, hlp ); break;
@@ -249,8 +249,8 @@ public class TDPrefActivity extends Activity
       linkPreference( "DISTOX_EXPORT_CSX_PREF",     TDPrefCat.PREF_CATEGORY_CSX );
       linkPreference( "DISTOX_EXPORT_TRO_PREF",     TDPrefCat.PREF_CATEGORY_TRO );
       linkPreference( "DISTOX_EXPORT_SVG_PREF",     TDPrefCat.PREF_CATEGORY_SVG );
-      linkPreference( "DISTOX_EXPORT_DXF_PREF",     TDPrefCat.PREF_CATEGORY_DXF );
       linkPreference( "DISTOX_EXPORT_SHP_PREF",     TDPrefCat.PREF_CATEGORY_SHP );
+      linkPreference( "DISTOX_EXPORT_DXF_PREF",     TDPrefCat.PREF_CATEGORY_DXF );
       linkPreference( "DISTOX_EXPORT_PNG_PREF",     TDPrefCat.PREF_CATEGORY_PNG );
       linkPreference( "DISTOX_EXPORT_KML_PREF",     TDPrefCat.PREF_CATEGORY_KML );
       linkPreference( "DISTOX_EXPORT_CSV_PREF",     TDPrefCat.PREF_CATEGORY_CSV );

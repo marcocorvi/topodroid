@@ -51,7 +51,9 @@ class DrawingSvgWalls extends DrawingSvgBase
         float yy = yoff+point.cy;
         StringWriter sw5 = new StringWriter();
         PrintWriter pw5  = new PrintWriter(sw5);
-        pw5.format(Locale.US, "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"%d\" ", xx, yy, RADIUS );
+        printPointWithCXCY( pw5, "<circle", xx, yy );
+        pw5.format(Locale.US, " r=\"%d\" ", RADIUS );
+        // pw5.format(Locale.US, "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"%d\" ", xx, yy, RADIUS );
         pw5.format(Locale.US, " style=\"fill:grey;stroke:black;stroke-width:%.2f\" />\n", TDSetting.mSvgLabelStroke );
         out.write( sw5.getBuffer().toString() );
       } else {
@@ -262,7 +264,8 @@ class DrawingSvgWalls extends DrawingSvgBase
         StringWriter sw4 = new StringWriter();
         PrintWriter pw4  = new PrintWriter(sw4);
         pw4.format(Locale.US, "        <path id=\"%s\" stroke-width=\"%.2f\" stroke=\"black\" d=\"", id, TDSetting.mSvgShotStroke );
-        pw4.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
+        printSegmentWithClose( pw4, xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
+        // pw4.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
         out.write( sw4.getBuffer().toString() );
         out.flush();
       }
@@ -275,7 +278,8 @@ class DrawingSvgWalls extends DrawingSvgBase
           StringWriter sw41 = new StringWriter();
           PrintWriter pw41  = new PrintWriter(sw41);
           pw41.format(Locale.US, "        <path id=\"%s\" stroke-width=\"%.2f\" stroke=\"grey\" d=\"", id, TDSetting.mSvgShotStroke );
-          pw41.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
+          printSegmentWithClose( pw41, xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
+          // pw41.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
 
           out.write( sw41.getBuffer().toString() );
           out.flush();
@@ -290,8 +294,8 @@ class DrawingSvgWalls extends DrawingSvgBase
           PrintWriter pw6m  = new PrintWriter(sw6m);
           for ( DrawingStationName st : plot.getStations() ) { // auto-stations
             pw6m.format(Locale.US, 
-                        "<use xlink:href=\"#_m\" width=\"2\" height=\"2\" x=\"-1\" y=\"-1\" transform=\"matrix(0.798 0 0 -0.798 %.2f %.2f)\" style=\"display:inline\"/>\n", 
-                        xoff + st.cx, yoff + st.cy );
+              "<use xlink:href=\"#_m\" width=\"2\" height=\"2\" x=\"-1\" y=\"-1\" transform=\"matrix(0.798 0 0 -0.798 %.2f %.2f)\" style=\"display:inline\"/>\n", 
+              (xoff + st.cx)*TDSetting.mToSvg, (yoff + st.cy)*TDSetting.mToSvg );
           }
           out.write( sw6m.getBuffer().toString() );
         } 
@@ -352,9 +356,9 @@ class DrawingSvgWalls extends DrawingSvgBase
       out.write(      notes ); out.write( group_mode_close );
       out.write(      grid); out.write( group_mode_open );
       if ( TDSetting.mSvgGrid ) {
-        printSvgGrid( out, plot.getGrid1(),   "grid1",   "999999", 0.4f, xoff, yoff );
-        printSvgGrid( out, plot.getGrid10(),  "grid10",  "666666", 0.6f, xoff, yoff );
-        printSvgGrid( out, plot.getGrid100(), "grid100", "333333", 0.8f, xoff, yoff );
+        printSvgGrid( out, plot.getGrid1(),   "grid1",   "999999", 0.4f, xoff, yoff, xmin, xmax, ymin, ymax );
+        printSvgGrid( out, plot.getGrid10(),  "grid10",  "666666", 0.6f, xoff, yoff, xmin, xmax, ymin, ymax );
+        printSvgGrid( out, plot.getGrid100(), "grid100", "333333", 0.8f, xoff, yoff, xmin, xmax, ymin, ymax );
       }
       out.write( "    " + end_grp ); // grid
 

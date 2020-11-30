@@ -98,11 +98,24 @@ class DrawingSvg extends DrawingSvgBase
 
         // centerline data
         if ( PlotInfo.isSketch2D( type ) ) { 
+          // float xmin, xmax, ymax, ymin;
+          // if ( PlotInfo.isPlan( type ) ) {
+          //   xmin = num.surveyEmin();
+          //   xmax = num.surveyEmax();
+          //   ymin = num.surveySmin();
+          //   ymax = num.surveySmax();
+          // } else {
+          //   xmin = num.surveyHmin();
+          //   xmax = num.surveyHmax();
+          //   ymin = num.surveyVmin();
+          //   ymax = num.surveyVmax();
+          // }
+            
           if ( TDSetting.mSvgGrid ) {
             // Log.v("DistoXsvg", "SVG grid");
-            printSvgGrid( out, plot.getGrid1(),   "grid1",   "999999", 0.4f, xoff, yoff );
-            printSvgGrid( out, plot.getGrid10(),  "grid10",  "666666", 0.6f, xoff, yoff );
-            printSvgGrid( out, plot.getGrid100(), "grid100", "333333", 0.8f, xoff, yoff );
+            printSvgGrid( out, plot.getGrid1(),   "grid1",   "999999", 0.4f, xoff, yoff, xmin, xmax, ymin, ymax );
+            printSvgGrid( out, plot.getGrid10(),  "grid10",  "666666", 0.6f, xoff, yoff, xmin, xmax, ymin, ymax );
+            printSvgGrid( out, plot.getGrid100(), "grid100", "333333", 0.8f, xoff, yoff, xmin, xmax, ymin, ymax );
           }
           // FIXME OK PROFILE
 
@@ -134,7 +147,8 @@ class DrawingSvg extends DrawingSvgBase
             //     pw4.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x1, y1 );
             //   }
             // // }
-            pw4.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
+            printSegmentWithClose( pw4, xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
+            // pw4.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
             out.write( sw4.getBuffer().toString() );
             out.flush();
           }
@@ -169,7 +183,8 @@ class DrawingSvg extends DrawingSvgBase
               //   }
               // // }
               pw41.format(Locale.US, "  <path stroke-width=\"%.2f\" stroke=\"grey\" d=\"", TDSetting.mSvgShotStroke );
-              pw41.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
+              printSegmentWithClose( pw41, xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
+              // pw41.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
 
               out.write( sw41.getBuffer().toString() );
               out.flush();
@@ -238,7 +253,9 @@ class DrawingSvg extends DrawingSvgBase
                   }
                   // pw5.format( end_grp );
   	        } else {
-                  pw5.format(Locale.US, "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"%d\" ", xx, yy, RADIUS );
+                  printPointWithCXCY( pw5, "<circle", xx, yy );
+                  pw5.format(Locale.US, " r=\"%d\" ", RADIUS );
+                  // pw5.format(Locale.US, "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"%d\" ", xx, yy, RADIUS );
                   pw5.format(Locale.US, " style=\"fill:grey;stroke:black;stroke-width:%.2f\" />\n", TDSetting.mSvgLabelStroke );
   	        }
               } else {

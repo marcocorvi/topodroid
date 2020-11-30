@@ -1892,7 +1892,7 @@ public class DrawingWindow extends ItemDrawer
       if ( BTN_REMOVE < mButton3.length ) mButton3[BTN_REMOVE].setOnLongClickListener( this );
     }
  
-    setConnectionStatus( mDataDownloader.getStatus() );
+    // setConnectionStatus( mDataDownloader.getStatus() ); // 20201123 this is done in onResume
     mListView.setAdapter( mButtonView1.mAdapter );
     // mListView.invalidate();
 

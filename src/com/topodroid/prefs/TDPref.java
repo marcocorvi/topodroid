@@ -580,8 +580,8 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeFwd( cat, key[10], tit[10],          N,                   ctx, hlp ),
       makeFwd( cat, key[11], tit[11],          N,                   ctx, hlp ),
       makeFwd( cat, key[12], tit[12],          N,                   ctx, hlp ),
-      makeFwd( cat, key[13], tit[13],          T,                   ctx, hlp ),
-      makeFwd( cat, key[14], tit[14],          N,                   ctx, hlp ),
+      makeFwd( cat, key[13], tit[13],          T,                   ctx, hlp ), // shp
+      makeFwd( cat, key[14], tit[14],          T,                   ctx, hlp ), // dxf
       makeFwd( cat, key[15], tit[15],          T,                   ctx, hlp ),
       makeFwd( cat, key[16], tit[16],          T,                   ctx, hlp ),
       makeFwd( cat, key[17], tit[17],          T,                   ctx, hlp )
