@@ -59,15 +59,15 @@ class ShotDisplayDialog extends MyDialog
         // mBtnRefresh = (Button) findViewById(R.id.button_mode_refresh);
         // mBtnRefresh.setOnClickListener( this );
 
-        mCBids.setChecked(     mParent.getShowIds() );
-        mCBsplay.setChecked( ! mParent.mFlagSplay );
+        mCBids.setChecked(     mParent.isShowIds() );
+        mCBsplay.setChecked( ! mParent.isFlagSplay() );
 	if ( TDSetting.mShotRecent ) {
-          mCBlatest.setChecked(  mParent.mFlagLatest );
+          mCBlatest.setChecked(  mParent.isFlagLatest() );
 	} else {
 	  mCBlatest.setVisibility( View.GONE );
 	}
-        mCBblank.setChecked( ! mParent.mFlagBlank );
-        mCBleg.setChecked(   ! mParent.mFlagLeg );
+        mCBblank.setChecked( ! mParent.isFlagBlank() );
+        mCBleg.setChecked(   ! mParent.isFlagLeg() );
 
     }
 
@@ -99,11 +99,16 @@ class ShotDisplayDialog extends MyDialog
 
     private void setParent()
     {
-      mParent.setShowIds( mCBids.isChecked() );
-      mParent.mFlagSplay = ! mCBsplay.isChecked();
-      if ( TDSetting.mShotRecent ) mParent.mFlagLatest =  mCBlatest.isChecked();
-      mParent.mFlagBlank = ! mCBblank.isChecked();
-      mParent.mFlagLeg   = ! mCBleg.isChecked();
-      mParent.updateDisplay( );
+      // mParent.setShowIds( mCBids.isChecked() );
+      // mParent.mFlagSplay = ! mCBsplay.isChecked();
+      // if ( TDSetting.mShotRecent ) mParent.mFlagLatest =  mCBlatest.isChecked();
+      // mParent.mFlagBlank = ! mCBblank.isChecked();
+      // mParent.mFlagLeg   = ! mCBleg.isChecked();
+      mParent.setFlags( mCBids.isChecked(),
+                        ! mCBsplay.isChecked(),
+                        mCBlatest.isChecked(),
+                        ! mCBleg.isChecked(),
+                        ! mCBblank.isChecked() );
+      // mParent.updateDisplay( );
     }
 }

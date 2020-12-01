@@ -175,7 +175,7 @@ public class TDSetting
   public static boolean mVTopoSplays = true;    // whether to add splays to VisualTopo export
   public static boolean mVTopoLrudAtFrom = false; 
   public static final float THERION_SCALE = 196.8503937f; // 200 * 39.3700787402 / 40;
-  public static float   mToSvg     = THERION_SCALE / 200;
+  public static float   mToSvg     = 0.94488189f; // 10 * 96 px/in / ( 25.4 mm/in * 40 px/m ) -> scale 1 : 100
   public static float   mToTherion = THERION_SCALE / 100;
   public static int     mTherionScale = 100;
 

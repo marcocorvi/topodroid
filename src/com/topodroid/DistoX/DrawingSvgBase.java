@@ -35,6 +35,26 @@ import java.io.DataInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/* Inkscape units
+ * - The root element can have width and height with units, which with the proper viewbox
+ *   determines the scale for the drawing (real-world value of the SVG user units)
+ * - User-unit: unit length in the current user coord system
+ * - Unit-id: can be mm, cm, in, pt, px, pc ...
+ * - Scale-factor: (from SVG root width/height and viewbox) maps user-units in the doc to real-world units
+ *
+ * Example <svg width="100cm" height="60cm" viewBox="0 0, 50 30">
+ *   the nominal size of the drawing is 100x60 cm
+ *   if the unit-id is missing the user-unit is intended
+ *   the drawing is 50x30 unser-units ( 1 user-unit = 2 cm )
+ *     width="10"  -> 10 user-units = 2 in (at nominal drawing size)
+ *     width="1in" -> 96 user-units = 19.2 in
+ *   the user-unit can be scaled by a transform="scale(0.75,0.75)" -> user-unit is scaled to 3/4
+ *   
+ * The scale factor is 0.2 in/user-unit ( therefore 10 user-unit = 2 in, above ) 
+ * Initial user-unit is 96 px / in
+ * has a CSS value of 96 pxl / inch ( 1 in = 25.4 mm )
+ *
+ */
 class DrawingSvgBase
 {
   // FIXME station scale is 0.3

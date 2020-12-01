@@ -188,10 +188,32 @@ public class ShotWindow extends Activity
 
   // TODO replace flags with DisplayMode-flag 
   //      N.B. id is in the data adapter
-  boolean mFlagSplay  = true;  //!< whether to hide splay shots
-  boolean mFlagLatest = false; //!< whether to show the latest splay shots
-  boolean mFlagLeg    = true;  //!< whether to hide leg extra shots
-  boolean mFlagBlank  = false; //!< whether to hide blank shots
+  private boolean mFlagSplay  = true;  //!< whether to hide splay shots
+  private boolean mFlagLatest = false; //!< whether to show the latest splay shots
+  private boolean mFlagLeg    = true;  //!< whether to hide leg extra shots
+  private boolean mFlagBlank  = false; //!< whether to hide blank shots
+
+  boolean isFlagSplay()  { return mFlagSplay; }
+  boolean isFlagLatest() { return mFlagLatest; }
+  boolean isFlagLeg()    { return mFlagLeg; }
+  boolean isFlagBlank()  { return mFlagBlank; }
+  boolean isShowIds()    { return mDataAdapter.show_ids; }
+
+  // void setShowIds( boolean show ) { mDataAdapter.show_ids = show; }
+
+  void setFlags( boolean ids, boolean splay, boolean latest, boolean leg, boolean blank )
+  {
+    mDataAdapter.show_ids = ids;
+    mFlagSplay = splay;
+    if ( TDSetting.mShotRecent ) mFlagLatest = latest;
+    mFlagLatest = latest;
+    mFlagLeg    = leg;
+    mFlagBlank  = blank;
+    saveInstanceToData();
+    updateDisplay();
+  }
+
+
 
   // private Bundle mSavedState = null;
   // private String mRecentPlot     = null; // moved to TDInstance
@@ -435,10 +457,6 @@ public class ShotWindow extends Activity
     //   Log.v("DistoX-DATA", "null block");
     }
   }
-
-  void setShowIds( boolean show ) { mDataAdapter.show_ids = show; }
-
-  boolean getShowIds() { return mDataAdapter.show_ids; }
 
   // called only by updateDisplay
   private void updateShotList( List< DBlock > list, List< PhotoInfo > photos )
@@ -1193,7 +1211,7 @@ public class ShotWindow extends Activity
   {
     super.onPause();
     // Log.v("DistoXLIFE", "ShotWindow onPause()" );
-    saveInstanceToData();
+    // saveInstanceToData();
 
     // mApp.unregisterConnListener( mHandler );
     // if ( mApp.mComm != null ) { mApp.mComm.suspend(); }
@@ -1278,25 +1296,29 @@ public class ShotWindow extends Activity
   // FIXME NOTIFY: the display mode is local - do not notify
   private void restoreInstanceFromData()
   { 
+    // Log.v("DistoX-MODE", "restore from data");
     String shots = mApp_mData.getValue( "DISTOX_SHOTS" );
     if ( shots != null ) {
       String[] vals = shots.split( " " );
       mFlagSplay  = ( vals.length > 0 ) && vals[0].equals( TDString.ONE );
       mFlagLeg    = ( vals.length > 1 ) && vals[1].equals( TDString.ONE );
       mFlagBlank  = ( vals.length > 2 ) && vals[2].equals( TDString.ONE );
-      setShowIds(   ( vals.length > 3 ) && vals[3].equals( TDString.ONE ) );
+      mDataAdapter.show_ids = ( vals.length > 3 ) && vals[3].equals( TDString.ONE );
+      // setShowIds(   ( vals.length > 3 ) && vals[3].equals( TDString.ONE ) );
       mFlagLatest = ( vals.length > 4 ) && vals[4].equals( TDString.ONE );
-      // Log.v("DistoX", "restore from data mFlagSplay " + mFlagSplay );
+    } else {
+      TDLog.Error("no saved data");
     }
   }
     
   private void saveInstanceToData()
   {
-    // TODO run in a Thread
+    // TODO run in a Thread - this is executed when the displaymode is changed ... no need for a thread
+    // Log.v("DistoX-MODE", "save to data");
     (new Thread() {
       public void run() {
         mApp_mData.setValue( "DISTOX_SHOTS",
-          String.format(Locale.US, "%d %d %d %d %d", mFlagSplay?1:0, mFlagLeg?1:0, mFlagBlank?1:0, getShowIds()?1:0, mFlagLatest?1:0 ) );
+          String.format(Locale.US, "%d %d %d %d %d", mFlagSplay?1:0, mFlagLeg?1:0, mFlagBlank?1:0, isShowIds()?1:0, mFlagLatest?1:0 ) );
       }
     } ).start();
     // Log.v("DistoX", "save to data mFlagSplay " + mFlagSplay );

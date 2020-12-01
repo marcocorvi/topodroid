@@ -2302,6 +2302,7 @@ public class DrawingWindow extends ItemDrawer
   private void doResume() // restoreInstanceFromData
   {
     // Log.v("DistoX", "doResume()" );
+    // Log.v("DistoX-MODE", "restore drawing display mode");
     String mode = mApp_mData.getValue( "DISTOX_PLOT_MODE" );
     DrawingCommandManager.setDisplayMode( DisplayMode.parseString( mode ) );
 
@@ -2317,7 +2318,7 @@ public class DrawingWindow extends ItemDrawer
     setPlotType( mType );
   }
 
-  private void doPause()
+  private void doPause() // saveInstanceToData
   {
     switchZoomCtrl( 0 );
     mDrawingSurface.isDrawing = false;
@@ -2329,6 +2330,7 @@ public class DrawingWindow extends ItemDrawer
       }
     }
     // TODO exec this line in a Thread
+    // Log.v("DistoX-MODE", "save drawing display mode");
     (new Thread() {
        public void run() {
          mApp_mData.setValue( "DISTOX_PLOT_MODE", DisplayMode.toString( DrawingCommandManager.getDisplayMode() ) );

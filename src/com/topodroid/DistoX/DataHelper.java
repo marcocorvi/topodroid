@@ -3158,6 +3158,7 @@ public class DataHelper extends DataSetObservable
       return;
     }
 
+    // Log.v("DistoX-MODE", "set " + key + ": <" + value + ">" );
     Cursor cursor = null;
     try {
       myDB.beginTransaction();
@@ -3167,6 +3168,7 @@ public class DataHelper extends DataSetObservable
                            null, null, null );
       if ( cursor != null ) {
         ContentValues cv = new ContentValues();
+        cv.put( "key",     key );
         cv.put( "value",   value );
         if (cursor.moveToFirst()) {
           // updateConfig.bindString( 1, value );
@@ -3174,12 +3176,13 @@ public class DataHelper extends DataSetObservable
           // updateConfig.execute();
           myDB.update( CONFIG_TABLE, cv, "key=?", new String[] { key } );
         } else {
-          cv.put( "key",     key );
+          // cv.put( "key",     key );
           myDB.insert( CONFIG_TABLE, null, cv );
         }
       } else {
         TDLog.Error( "set value cannot get cursor" );
       }
+      myDB.setTransactionSuccessful();
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e ); 
     } catch (SQLiteException e ) { logError( "set value " + key + " " + value, e ); 
     } finally {
