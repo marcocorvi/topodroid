@@ -159,40 +159,37 @@ class DrawingSvg extends DrawingSvgBase
 
           // Log.v("DistoXsvg", "SVG splays " + plot.getSplays().size() );
           if ( TDSetting.mSvgSplays ) {
-            out.write("<g id=\"splays\"\n" );
-            out.write("  style=\"fill:none;stroke-opacity:0.4;stroke:orange\" >\n");
-            for ( DrawingPath sh : plot.getSplays() ) {
-              DBlock blk = sh.mBlock;
-              if ( blk == null ) continue;
-
-              StringWriter sw41 = new StringWriter();
-              PrintWriter pw41  = new PrintWriter(sw41);
-              // // if ( sh.mType == DrawingPath.DRAWING_PATH_SPLAY ) {
-              //   NumStation f = num.getStation( blk.mFrom );
-              //   pw41.format(Locale.US, "  <path stroke-width=\"%.2f\" stroke=\"grey\" d=\"", TDSetting.mSvgShotStroke );
-              //   float dh = blk.mLength * (float)Math.cos( blk.mClino * TDMath.DEG2RAD )*SCALE_FIX;
-              //   if ( type == PlotInfo.PLOT_PLAN ) {
-              //     float x = xoff + DrawingUtil.toSceneX( f.e, f.s ); 
-              //     float y = yoff + DrawingUtil.toSceneY( f.e, f.s );
-              //     float de =   dh * (float)Math.sin( blk.mBearing * TDMath.DEG2RAD);
-              //     float ds = - dh * (float)Math.cos( blk.mBearing * TDMath.DEG2RAD);
-              //     pw41.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x + de, (y+ds) );
-              //   } else if ( PlotInfo.isProfile( type ) ) { // FIXME OK PROFILE
-              //     float x = xoff + DrawingUtil.toSceneX( f.h, f.v );
-              //     float y = yoff + DrawingUtil.toSceneY( f.h, f.v );
-              //     float dv = - blk.mLength * (float)Math.sin( blk.mClino * TDMath.DEG2RAD )*SCALE_FIX;
-              //     float ext = blk.getReducedExtend();
-              //     pw41.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x+dh*ext, (y+dv) );
-              //   }
-              // // }
-              pw41.format(Locale.US, "  <path stroke-width=\"%.2f\" stroke=\"grey\" d=\"", TDSetting.mSvgShotStroke );
-              printSegmentWithClose( pw41, xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
-              // pw41.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
-
-              out.write( sw41.getBuffer().toString() );
-              out.flush();
+            ArrayList< DrawingPath > normal = new ArrayList<>();
+            if ( TDSetting.mSplayClasses ) {
+              // split splays in classes
+              ArrayList< DrawingPath > horiz  = new ArrayList<>();
+              ArrayList< DrawingPath > vert   = new ArrayList<>();
+              ArrayList< DrawingPath > xsect  = new ArrayList<>();
+              for ( DrawingPath sh : plot.getSplays() ) {
+                DBlock blk = sh.mBlock;
+                if ( blk == null ) continue;
+                if ( blk.isHSplay() ) {
+                  horiz.add( sh );
+                } else if ( blk.isVSplay() ) {
+                  vert.add( sh );
+                } else if ( blk.isXSplay() ) {
+                  xsect.add( sh );
+                } else {
+                  normal.add( sh );
+                }
+              }
+              writeSplays( out, normal, "splays", "grey", xoff, yoff );
+              writeSplays( out, horiz,  "h-splays", "lightseagreen", xoff, yoff );
+              writeSplays( out, vert,   "v-splays", "lightsteelblue", xoff, yoff );
+              writeSplays( out, xsect,  "x-splays", "lightseablue", xoff, yoff );
+            } else {
+              for ( DrawingPath sh : plot.getSplays() ) {
+                DBlock blk = sh.mBlock;
+                if ( blk == null ) continue;
+                normal.add( sh );
+              }
+              writeSplays( out, normal, "splays", "grey", xoff, yoff );
             }
-            out.write( end_grp );
 	  }
         }
 
@@ -352,11 +349,30 @@ class DrawingSvg extends DrawingSvgBase
 
       out.flush();
     } catch ( IOException e ) {
-      // FIXME
       TDLog.Error( "SVG io-exception " + e.getMessage() );
     }
   }
 
+  private void writeSplays( BufferedWriter out, ArrayList< DrawingPath > splays, String group, String color, float xoff, float yoff )
+  {
+    if ( splays.size() == 0 ) return;
+    try {
+      out.write("<g id=\"" + group + "\"\n" );
+      out.write("  style=\"fill:none;stroke-opacity:0.4;stroke:" + color + "\" >\n");
+      for ( DrawingPath sh : splays ) {
+        StringWriter sw41x = new StringWriter();
+        PrintWriter pw41x  = new PrintWriter(sw41x);
+        pw41x.format(Locale.US, "  <path stroke-width=\"%.2f\" stroke=\"%s\" d=\"", TDSetting.mSvgShotStroke, color );
+        printSegmentWithClose( pw41x, xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
+        // pw41x.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
+        out.write( sw41x.getBuffer().toString() );
+        out.flush();
+      }
+      out.write( end_grp );
+    } catch ( IOException e ) {
+      TDLog.Error( "SVG splay-io exception " + e.getMessage() );
+    }
+  }
 
 }
 

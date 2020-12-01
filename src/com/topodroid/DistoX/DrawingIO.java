@@ -746,7 +746,7 @@ class DrawingIO
             case 'P':
 	      // FIXME SECTION_RENAME
               path = DrawingPointPath.loadDataStream( version, dis, dx, dy /*, missingSymbols */ );
-              if ( path != null ) ((DrawingPointPath)path).fixScrap( survey_name );
+              if ( path != null ) path = ((DrawingPointPath)path).fixScrap( survey_name );
               break;
             case 'T':
               path = DrawingLabelPath.loadDataStream( version, dis, dx, dy );

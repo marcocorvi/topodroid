@@ -75,12 +75,18 @@ public class DrawingPointPath extends DrawingPath
   DrawingPointPath fixScrap( String survey_name )
   {
     if ( survey_name != null && BrushManager.isPointSection( mPointType ) ) {
-      String scrapname = TDUtil.replacePrefix( TDInstance.survey, mOptions.replace("-scrap ", "") );
-      if ( ! scrapname.startsWith(survey_name) ) {
-        int pos = scrapname.lastIndexOf('-');
-        scrapname = survey_name + "-" + scrapname.substring(pos+1);
+      String scrapname = mOptions.replace("-scrap ", "");
+      if ( scrapname != null ) scrapname = TDUtil.replacePrefix( TDInstance.survey, scrapname );
+      if ( scrapname != null ) {
+        if ( ! scrapname.startsWith(survey_name) ) {
+          int pos = scrapname.lastIndexOf('-');
+          scrapname = survey_name + "-" + scrapname.substring(pos+1);
+        }
+        mOptions = "-scrap " + scrapname;
+      } else {
+        TDLog.Error("section point without scrap-name");
+        return null;
       }
-      mOptions = "-scrap " + scrapname;
     }
     return this;
   }
