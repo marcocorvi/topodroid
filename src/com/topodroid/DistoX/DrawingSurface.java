@@ -96,7 +96,7 @@ class DrawingSurface extends SurfaceView
   // MANAGER CACHE
   static private HashMap<String, DrawingCommandManager> mCache = new HashMap<String, DrawingCommandManager>();
 
-  static void clearCache()
+  static void clearManagersCache()
   {
     mCache.clear();
     // TDLog.Log( TDLog.LOG_IO, "clear managers cache");

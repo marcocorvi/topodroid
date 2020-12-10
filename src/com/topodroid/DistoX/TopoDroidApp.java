@@ -1503,6 +1503,7 @@ public class TopoDroidApp extends Application
 
     mDData.setValue( "symbol_version", TDVersion.SYMBOL_VERSION );
     BrushManager.loadAllLibraries( this, getResources() );
+    DrawingSurface.clearManagersCache();
   }
 
   static private void symbolsUncompress( InputStream fis, boolean overwrite )

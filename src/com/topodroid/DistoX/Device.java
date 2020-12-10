@@ -56,6 +56,9 @@ class Device
     if ( model.startsWith("DistoX-") ) {
       return model.replace("DistoX-", "" );
     } 
+    if ( model.startsWith("Shetland") ) {
+      return model.replace("Shetland", "" );
+    }
     // if ( model.startsWith("Ble-") ) { // FIXME BLE
     //   return model.replace("Ble-", "" );
     // }

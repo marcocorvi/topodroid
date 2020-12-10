@@ -343,6 +343,9 @@ public class DeviceActivity extends Activity
             String name  = Device.modelToName( model );
             mApp_mDData.insertDevice( addr, model, name );
             dev = mApp_mDData.getDevice( addr );
+          } else if ( model.startsWith( "Shetland", 0 ) ) { // FIXME SHETLAND
+            String name  = Device.modelToName( model );
+            Log.v("DistoX-SAP", model + " " + name );
           // } else if ( model.startsWith( "Ble", 0 ) ) { // FIXME BLE
           //   String name  = Device.modelToName( model );
           //   mApp_mDData.insertDevice( addr, model, name );

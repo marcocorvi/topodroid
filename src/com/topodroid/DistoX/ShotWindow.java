@@ -1275,7 +1275,7 @@ public class ShotWindow extends Activity
     if ( doubleBack ) {
       if ( doubleBackToast != null ) doubleBackToast.cancel();
       doubleBackToast = null;
-      DrawingSurface.clearCache();
+      DrawingSurface.clearManagersCache();
 
       new DataStopTask( mApp, this, mDataDownloader ).execute();
 
