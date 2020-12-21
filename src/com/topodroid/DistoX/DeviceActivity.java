@@ -118,7 +118,7 @@ public class DeviceActivity extends Activity
 
   private static final int[] menus = {
                         R.string.menu_scan,
-                        // R.string.menu_scan_ble, // FIXME_SCAN_BLE
+                        // R.string.menu_scan_ble, // FIXME_SCAN_BLEX
                         R.string.menu_pair,
                         R.string.menu_detach,
                         R.string.menu_firmware,
@@ -139,7 +139,7 @@ public class DeviceActivity extends Activity
                      };
   private static final int[] help_menus = {
                         R.string.help_scan,
-                        // R.string.help_scan_ble, // FIXME_SCAN_BLE
+                        // R.string.help_scan_ble, // FIXME_SCAN_BLEX
                         R.string.help_pair,
                         R.string.help_detach,
                         R.string.help_firmware,
@@ -156,7 +156,7 @@ public class DeviceActivity extends Activity
   // private String mAddress;
   private Device mCurrDevice  = null;
   private Device mCurrDeviceB = null;
-  private boolean mHasBLE = false; // BLE default to false
+  // private boolean mHasBLE     = false; // BLEX default to false
 
   private final BroadcastReceiver mPairReceiver = new BroadcastReceiver()
   {
@@ -256,7 +256,7 @@ public class DeviceActivity extends Activity
     mApp_mDData  = TopoDroidApp.mDData;
     mCurrDevice  = TDInstance.deviceA;
     mCurrDeviceB = TDInstance.deviceB;
-    // mHasBLE     = TDandroid.checkBluetoothLE( this ); // FIXME_SCAN_BLE
+    // mHasBLE      = TDandroid.checkBluetoothLE( this ); // FIXME_SCAN_BLEX
 
     // mAddress = mCurrDevice.mAddress;
     // mAddress = getIntent().getExtras().getString(   TDTag.TOPODROID_DEVICE_ADDR );
@@ -343,10 +343,12 @@ public class DeviceActivity extends Activity
             String name  = Device.modelToName( model );
             mApp_mDData.insertDevice( addr, model, name );
             dev = mApp_mDData.getDevice( addr );
-          } else if ( model.startsWith( "Shetland", 0 ) ) { // FIXME SHETLAND
+          } else if ( TDLevel.overExpert && model.startsWith( "Shetland", 0 ) ) { // FIXME SHETLAND
             String name  = Device.modelToName( model );
-            Log.v("DistoX-SAP", model + " " + name );
-          // } else if ( model.startsWith( "Ble", 0 ) ) { // FIXME BLE
+            // Log.v("DistoX-SAP", model + " " + name );
+            mApp_mDData.insertDevice( addr, model, name );
+            dev = mApp_mDData.getDevice( addr );
+          // } else if ( model.startsWith( "Ble", 0 ) ) { // FIXME BLEX
           //   String name  = Device.modelToName( model );
           //   mApp_mDData.insertDevice( addr, model, name );
           //   dev = mApp_mDData.getDevice( addr );
@@ -381,8 +383,11 @@ public class DeviceActivity extends Activity
       return;
     }
 
+    if ( ! ( view instanceof TextView ) ) {
+      TDLog.Error("device activity view instance of " + view.toString() );
+      return;
+    }
     CharSequence item = ((TextView) view).getText();
-    // TDLog.Log( TDLog.LOG_INPUT, "DeviceActivity onItemClick() " + item.toString() );
     // String value = item.toString();
     // if ( value.startsWith( "DistoX", 0 ) ) 
     {
@@ -702,7 +707,7 @@ public class DeviceActivity extends Activity
 
   // -----------------------------------------------------------------------------
 
-  public void addBleDevice( BluetoothDevice device ) // TODO BLE
+  public void addBleDevice( BluetoothDevice device ) // TODO BLEX
   {
     if ( device == null ) return;
     String address = device.getAddress();
@@ -714,7 +719,7 @@ public class DeviceActivity extends Activity
       setState();
     // }
     updateList();
-    // Log.v("DistoXBLE", "add BLE device " + mCurrDevice.mName + "/" + mCurrDevice.mAddress + "/" + mCurrDevice.mModel );
+    // Log.v("DistoX-BLEX", "add ble device " + mCurrDevice.mName + "/" + mCurrDevice.mAddress + "/" + mCurrDevice.mModel );
   }
 
   public void onActivityResult( int request, int result, Intent intent ) 
@@ -780,7 +785,7 @@ public class DeviceActivity extends Activity
 
     int k = 0;
     if ( TDLevel.overBasic    ) nemu_adapter.add( res.getString( menus[k] ) );         // SCAN
-    // ++k; if ( TDLevel.overBasic && mHasBLE ) nemu_adapter.add( res.getString( menus[k] ) ); // FIXME_SCAN_BLE
+    // ++k; if ( TDLevel.overBasic && mHasBLE ) nemu_adapter.add( res.getString( menus[k] ) ); // FIXME_SCAN_BLEX
     ++k; if ( TDLevel.overBasic    ) nemu_adapter.add( res.getString( menus[k] ) );
     ++k; if ( TDLevel.overNormal   ) nemu_adapter.add( res.getString( menus[k] ) );
     ++k; if ( TDLevel.overAdvanced ) nemu_adapter.add( res.getString( menus[k] ) );
@@ -808,7 +813,7 @@ public class DeviceActivity extends Activity
       startActivityForResult( scanIntent, TDRequest.REQUEST_DEVICE );
       TDToast.makeLong(R.string.wait_scan );
 
-    // } else if ( TDLevel.overBasic && mHasBLE && p++ == pos ) { // FIXME_SCAN_BLE
+    // } else if ( TDLevel.overBasic && mHasBLE && p++ == pos ) { // FIXME_SCAN_BLEX
     //   BleScanner scanner = new BleScanner( this );
     //   if ( scanner.startScan() ) {
     //     // TODO anything ?

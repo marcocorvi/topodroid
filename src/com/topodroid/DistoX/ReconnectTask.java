@@ -21,7 +21,7 @@ class ReconnectTask extends AsyncTask< String, Integer, Integer >
 {
   private DataDownloader mDownloader;
   private ReconnectTask  running;
-  private int mDataType;
+  private int mDataType; // data type, passed to data_douwnloader try_connect()
 
   ReconnectTask( DataDownloader downloader, int data_type )
   {

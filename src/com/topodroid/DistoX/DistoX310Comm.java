@@ -92,13 +92,13 @@ class DistoX310Comm extends DistoXComm
           break;
       }
       if ( mCommThread == null && to_read > 0 ) {
-        // Log.v("DistoX", "RF comm thread start ... ");
+        // Log.v("DistoX-BLEZ", "RF comm thread start ... ");
         startCommThread( 2*to_read, lister, data_type );  // each data has two packets
         while ( mCommThread != null ) {
           TDUtil.slowDown( 100 );
         }
       // } else {
-      //   Log.v("DistoX-COMM", "RF comm thread not null ");
+      //   Log.v("DistoX-BLEZ", "RF comm thread not null ");
       }
     }
     destroySocket( );

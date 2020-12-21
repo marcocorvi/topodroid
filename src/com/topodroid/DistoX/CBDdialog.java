@@ -154,6 +154,10 @@ class CBDdialog extends MyDialog
   @Override
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {
+    if ( ! ( view instanceof TextView ) ) {
+      TDLog.Error("CBD view instance of " + view.toString() );
+      return;
+    }
     String item = ((TextView) view).getText().toString();
     if ( item.equals("..") ) {
       File base = new File( mBasename );

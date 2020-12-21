@@ -136,11 +136,13 @@ class CalibListDialog extends MyDialog
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {
-    CharSequence item = ((TextView) view).getText();
-    String name = item.toString();
+    if ( ! ( view instanceof TextView ) ) {
+      TDLog.Error("calib list view instance of " + view.toString() );
+      return;
+    }
+    String name = ((TextView) view).getText().toString();
     int len = name.indexOf(" ");
     name = name.substring(0, len);
-    // TDLog.Log(  TDLog.LOG_INPUT, "CalibListDialog onItemClick() " + name );
     // TODO open calibration activity
     mParent.openCalibration( name );
     dismiss();

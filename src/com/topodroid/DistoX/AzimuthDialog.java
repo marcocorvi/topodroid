@@ -198,40 +198,38 @@ class AzimuthDialog extends MyDialog
       mTimer = null;
     }
 
-    Button b = (Button) v;
-    // TDLog.Log( TDLog.LOG_INPUT, "Azimuth Dialog onClick button " + b.getText().toString() );
-
-    // if ( b == mBTback ) {
-    //   mAzimuth = TDMath.in360( mAzimuth-5 );
-    //   updateSeekBar();
-    //   updateView();
-    //   updateEditText();
-    // } else if ( b == mBTfore ) {
-    //   mAzimuth = TDMath.in360( mAzimuth+5 );
-    //   updateSeekBar();
-    //   updateView();
-    //   updateEditText();
-    // } else 
-    if ( b == mBtnCancel ) {
+    int id = v.getId();
+    if ( id == R.id.button_cancel ) {
       dismiss();
-    } else if ( b == mBTazimuth ) {
+    } else if ( id == R.id.btn_azimuth ) {
       // mAzimuth += 90; if ( mAzimuth >= 360 ) mAzimuth -= 360;
       mAzimuth = TDMath.add90( mAzimuth );
       updateSeekBar();
       updateView();
       updateEditText();
-    } else if ( b == mBTsensor ) {
+    // } else if ( id == mBTsensor.getId() ) {
+    } else if ( (Button)v == mBTsensor ) {
       mTimer = new TimerTask( this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
       mTimer.execute();
-    } else if ( b == mBTok ) {
+    } else if ( id == R.id.btn_ok ) {
       mParent.setRefAzimuth( mAzimuth, 0 );
       dismiss();
-    } else if ( b == mBTleft ) {
+    } else if ( id == R.id.btn_left ) {
       mParent.setRefAzimuth( mAzimuth, -1L );
       dismiss();
-    } else if ( b == mBTright ) {
+    } else if ( id == R.id.btn_right ) {
       mParent.setRefAzimuth( mAzimuth, 1L );
       dismiss();
+    // } else if ( id == R.id.btn_back ) {
+    //   mAzimuth = TDMath.in360( mAzimuth-5 );
+    //   updateSeekBar();
+    //   updateView();
+    //   updateEditText();
+    // } else if ( id == R.id.btn_fore ) {
+    //   mAzimuth = TDMath.in360( mAzimuth+5 );
+    //   updateSeekBar();
+    //   updateView();
+    //   updateEditText();
     } else {
       dismiss();
     }

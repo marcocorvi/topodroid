@@ -233,15 +233,15 @@ class CalibCoeffDialog extends MyDialog
   @Override
   public void onClick(View v) 
   {
-    Button b = (Button)v;
-    if ( b == mButtonWrite ) {
+    int id = v.getId();
+    if ( id == R.id.button_coeff_write ) { 
       GMActivity parent = mParent.get();
       if ( parent != null ) {
-        parent.uploadCoefficients( mDelta, mCoeff, true, b );
+        parent.uploadCoefficients( mDelta, mCoeff, true, mButtonWrite );
       } else {
         TDLog.Error("Calib Coeff Dialog null parent");
       }
-    } else { // b == mButtonBack
+    } else { // id == R.id.coeff_back
       dismiss();
     }
   }

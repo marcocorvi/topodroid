@@ -252,6 +252,7 @@ public class CalibActivity extends Activity
 
     // TDLog.Log( TDLog.LOG_INPUT, "onClick(View) " + view.toString() );
     Button b = (Button)view;
+    // int id = v.getId(); FIXME 
 
     if ( b == mImage ) {
       if ( mMenu.getVisibility() == View.VISIBLE ) {

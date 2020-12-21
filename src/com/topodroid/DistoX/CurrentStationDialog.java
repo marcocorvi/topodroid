@@ -146,8 +146,11 @@ class CurrentStationDialog extends MyDialog
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {
-    CharSequence item = ((TextView) view).getText();
-    String name = item.toString();
+    if ( ! ( view instanceof TextView ) ) {
+      TDLog.Error("current station view instance of " + view.toString() );
+      return;
+    }
+    String name = ((TextView) view).getText().toString();
     String[] token = name.split(" ");
     if ( token.length == 1 ) {
       name = name.trim();

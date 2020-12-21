@@ -90,16 +90,19 @@ public class DeviceList extends Activity
   @Override
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {
+    if ( ! ( view instanceof TextView ) ) {
+      TDLog.Error("device list view instance of " + view.toString() );
+      return;
+    }
     CharSequence item = ((TextView) view).getText();
     String value = item.toString();
-    // TDLog.Log( TDLog.LOG_BT, "onItemClick " + mDistoX.StatusName() + " value: " + value + " pos " + position );
     if ( value.startsWith( "DistoX", 0 ) || value.startsWith( "A3", 0 ) || value.startsWith( "X310", 0 ) ) 
     {
       StringBuffer buf = new StringBuffer( item );
       int k = buf.lastIndexOf(" ");
       String address = buf.substring(k+1);
       // TDToast.make( address );
-      TDLog.Log( TDLog.LOG_BT, "DeviceList item click Address " + address );
+      TDLog.Log( TDLog.LOG_BT, "device list item click Address " + address );
       Intent intent = new Intent();
       intent.putExtra( TDTag.TOPODROID_DEVICE_ACTION, address );
       setResult( RESULT_OK, intent );

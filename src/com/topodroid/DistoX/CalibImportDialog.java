@@ -100,8 +100,11 @@ class CalibImportDialog extends MyDialog
   @Override
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {
+    if ( ! ( view instanceof TextView ) ) {
+      TDLog.Error("calib import view instance of " + view.toString() );
+      return;
+    }
     String item = ((TextView) view).getText().toString();
-    // TDLog.Log(  TDLog.LOG_INPUT, "CalibImportDialog onItemClick() " + item );
 
     // hide();
     mList.setOnItemClickListener( null );

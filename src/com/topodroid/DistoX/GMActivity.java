@@ -48,6 +48,7 @@ import android.view.View.OnLongClickListener;
 import android.view.KeyEvent;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.LinearLayout;
 
 import android.graphics.drawable.BitmapDrawable;
 
@@ -702,17 +703,14 @@ public class GMActivity extends Activity
     }
     if ( closeMenu() ) return;
 
-    CharSequence item = ((TextView) view).getText();
-    String value = item.toString();
-    // TDLog.Log(  TDLog.LOG_INPUT, "GMActivity onItemClick() " + item.toString() );
-
     // if ( value.equals( getResources().getString( R.string.back_to_calib ) ) ) {
     //   setStatus( TDStatus.CALIB );
     //   updateDisplay( );
     //   return;
     // }
     mSaveCBlock   = mDataAdapter.get( pos );
-    mSaveTextView = (TextView) view;
+    LinearLayout ll = (LinearLayout)view;
+    mSaveTextView = (TextView) ll.findViewById( R.id.row_text );
     String msg = mSaveTextView.getText().toString();
     String[] st = msg.split( " ", 3 );
     try {    

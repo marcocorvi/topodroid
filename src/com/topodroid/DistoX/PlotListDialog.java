@@ -216,9 +216,12 @@ class PlotListDialog extends MyDialog
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {
-    CharSequence item = ((TextView) view).getText();
-    String value = item.toString();
-    // TDLog.Log(  TDLog.LOG_INPUT, "PlotListDialog onItemClick() " + value );
+    if ( ! ( view instanceof TextView ) ) {
+      TDLog.Error("plot list view instance of " + view.toString() );
+      return;
+    }
+    String value = ((TextView) view).getText().toString();
+    // TDLog.Log(  TDLog.LOG_INPUT, "PlotList dialog item click() " + value );
 
     int from = value.indexOf('<');
     if ( from < 0 ) return;

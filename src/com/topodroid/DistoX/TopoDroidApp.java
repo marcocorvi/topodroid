@@ -90,7 +90,7 @@ import android.widget.Button;
 import android.util.DisplayMetrics;
 
 import android.bluetooth.BluetoothDevice;
-// import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothAdapter;
 // import android.bluetooth.BluetoothDevice; // COSURVEY
 
 public class TopoDroidApp extends Application
@@ -146,16 +146,27 @@ public class TopoDroidApp extends Application
   void registerLister( ILister lister ) { mListerSet.registerLister( lister ); }
   void unregisterLister( ILister lister ) { mListerSet.unregisterLister( lister ); }
 
-  void notifyStatus( )
+  // void notifyStatus( )
+  // { 
+  //   if ( mActivity == null ) return;
+  //   mActivity.runOnUiThread( new Runnable() { 
+  //     public void run () { 
+  //       mListerSet.setConnectionStatus( mDataDownloader.getStatus() );
+  //     }
+  //   } );
+  // }
+  void notifyStatus( final int status )
   { 
     if ( mActivity == null ) return;
     mActivity.runOnUiThread( new Runnable() { 
       public void run () { 
-        mListerSet.setConnectionStatus( mDataDownloader.getStatus() );
+        mListerSet.setConnectionStatus( status );
       }
     } );
   }
 
+
+  // @param data_type ...
   void notifyDisconnected( int data_type )
   {
     if ( mListerSet.size() > 0 ) {
@@ -410,21 +421,21 @@ public class TopoDroidApp extends Application
   {
     // return mComm != null && mComm.mBTConnected;
     // return mComm != null && mComm.mBTConnected && mComm.mCommThread != null;
-    return mComm != null && mComm.isConnected() && ! mComm.isCommThreadNull(); // FIXME BLE to check
+    return mComm != null && mComm.isConnected() && ! mComm.isCommThreadNull(); // FIXME BLE5 to check
   }
 
   void disconnectRemoteDevice( boolean force )
   {
-    // Log.v( "DistoXBLE", "App disconnect remote device. force " + force );
+    // Log.v( "DistoX-BLEZ", "App disconnect remote device. force " + force );
     // TDLog.Log( TDLog.LOG_COMM, "App disconnect RemoteDevice listers " + mListerSet.size() + " force " + force );
     if ( force || mListerSet.size() == 0 ) {
       if ( mComm != null && mComm.isConnected() ) {
-        mComm.disconnectRemoteDevice( ); // FIXME BLE to check
+        mComm.disconnectRemoteDevice( ); // FIXME BLE5 to check
       }
     }
   }
 
-  private void deleteComm() // FIXME BLE
+  private void deleteComm() // FIXME BLE5
   {
     if ( mComm != null ) {
       if ( mComm.isConnected() ) {
@@ -440,15 +451,17 @@ public class TopoDroidApp extends Application
   // }
 
   // FIXME_COMM
+  // @param address   device address
+  // @param data_type data type ...
   public boolean connectDevice( String address, int data_type ) 
   {
-    // Log.v( "DistoXBLE", "App connect address " + address + " comm is " + ((mComm==null)? "null" : "non-null") );
+    Log.v( "DistoX-BLE5", "App connect device address " + address + " comm is " + ((mComm==null)? "null" : "non-null") );
     return mComm != null && mComm.connectDevice( address, mListerSet, data_type ); // FIXME_LISTER
   }
 
   public void disconnectComm()
   {
-    // Log.v( "DistoXBLE", "App disconnect. comm is " + ((mComm==null)? "null" : "non-null") );
+    Log.v( "DistoX-BLE5", "App disconnect. comm is " + ((mComm==null)? "null" : "non-null") );
     if ( mComm != null ) mComm.disconnectDevice();
   }
   // end FIXME_COMM
@@ -565,7 +578,7 @@ public class TopoDroidApp extends Application
       mComm.disconnectRemoteDevice( );
       mComm = null;
     }
-    // Log.v("DistoXBLE", "create comm. type " + TDInstance.deviceType() );
+    // Log.v("DistoX-BLE5", "create comm. type " + TDInstance.deviceType() );
     // if ( TDInstance.isDeviceAddress( Device.ZERO_ADDRESS ) ) { // FIXME VirtualDistoX
     //   mComm = new VirtualDistoXComm( this, mVirtualDistoX );
     // } else {
@@ -576,15 +589,33 @@ public class TopoDroidApp extends Application
         case Device.DISTO_A3:
           mComm = new DistoXA3Comm( this );
           break;
-        case Device.DISTO_BLE5: // FIXME BLE
+        case Device.DISTO_SAP5: // FIXME BLEX
           String address = TDInstance.deviceAddress();
-          BluetoothDevice bt_device = TDInstance.bleDevice;
-          // Log.v("DistoXBLE", "create BLE comm. address " + address + " BT " + ((bt_device==null)? "null" : bt_device.getAddress() ) );
+          BluetoothDevice bt_device = getBleDevice();
+          Log.v("DistoX-BLE5", "create sap comm [1] address " + address + " BT " + ((bt_device==null)? "null" : bt_device.getAddress() ) );
           mComm = new BleComm( this, address, bt_device );
+          // Log.v("DistoX-BLE5", "create sap comm. address " + address );
+          // mComm = new DistoSapComm( this );
           break;
+        // case Device.DISTO_BLEX: // FIXME BLEX
+        //   address = TDInstance.deviceAddress();
+        //   BluetoothDevice bt_device = getBleDevice();
+        //   // Log.v("DistoX-BLEX", "create ble comm. address " + address + " BT " + ((bt_device==null)? "null" : bt_device.getAddress() ) );
+        //   mComm = new BleComm( this, address, bt_device );
+        //   break;
       }
     // }
   }
+
+  private BluetoothDevice getBleDevice( )
+  {
+    if ( TDInstance.bleDevice == null ) {
+      BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+      TDInstance.bleDevice = adapter.getRemoteDevice( TDInstance.deviceAddress() );
+    }
+    return TDInstance.bleDevice;
+  }
+
  
   // @param dm     metrics
   // @param landscape whether the screen orientation is landscape
@@ -1242,7 +1273,7 @@ public class TopoDroidApp extends Application
   // FIXME_DEVICE_STATIC
   void setDevice( String address, BluetoothDevice bt_device )
   { 
-    // Log.v("DistoXBLE", "set device address " + address + " BLE " + ((bt_device!=null)? "yes" : "no") );
+    // Log.v("DistoX-BLE5", "set device address " + address + " BLE " + ((bt_device!=null)? "yes" : "no") );
     if ( address == null ) {
       // if ( mVirtualDistoX != null ) mVirtualDistoX.stopServer( this ); // FIXME VirtualDistoX
       TDInstance.deviceA = null;
@@ -1256,21 +1287,17 @@ public class TopoDroidApp extends Application
     } else {
       // if ( mVirtualDistoX != null ) mVirtualDistoX.stopServer( this ); // FIXME VirtualDistoX
       // boolean create = ( TDInstance.deviceA == null || TDInstance.deviceAddress().equals( Device.ZERO_ADDRESS ) );
-      if ( bt_device != null ) { // BLE device is temporary
+      if ( bt_device != null ) { // BLE5 device is temporary
         deleteComm();
-        // if ( TDInstance.deviceType() == Device.DISTO_BLE5 ) {
-        //   Log.v("DistoXBLE", "update address " + address );
-        //   TDInstance.deviceA.mAddress = address;
-        // } else {
-          // address, model, head, tail, name, nickname
-          // model could be "BLE5" or start with DistoX-BLE
-          TDInstance.deviceA = new Device( address, "DistoX-BLE", 0, 0, null, null );
-          TDInstance.bleDevice = bt_device;
-        // }
-        // Log.v("DistoXBLE", "create BLE address " + address );
-        mComm = new BleComm( this, address, bt_device ); // FIXME BLE
+
+        String model = Device.typeToString( TDInstance.deviceType() );
+        // address, model, head, tail, name, nickname
+        TDInstance.deviceA = new Device( address, model, 0, 0, null, null );
+        TDInstance.bleDevice = bt_device;
+        Log.v("DistoX-BLE5", "create ble comm [2] address " + address + " model " + model + " device " + (bt_device==null? "null" : bt_device.getAddress() ) );
+        mComm = new BleComm( this, address, bt_device ); // FIXME BLE5
       } else {
-        boolean create = TDInstance.isDeviceZeroAddress() || (TDInstance.deviceType() == Device.DISTO_BLE5);
+        boolean create = TDInstance.isDeviceZeroAddress() || Device.isBle( TDInstance.deviceType() );
         TDInstance.deviceA = mDData.getDevice( address );
         TDInstance.bleDevice = null;
         if ( create ) createComm();
@@ -1308,12 +1335,14 @@ public class TopoDroidApp extends Application
    */
   int downloadDataBatch( Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
   {
+    Log.v("DistoX-BLE5", "app download data batch");
     TDInstance.secondLastShotId = lastShotId();
     int ret = 0;
     if ( mComm == null || TDInstance.deviceA == null ) {
       TDLog.Error( "Comm or Device null ");
     } else {
-      TDLog.Log( TDLog.LOG_DATA, "Download Data Batch() device " + TDInstance.deviceAddress() + " comm " + mComm.toString() );
+      // TDLog.Log( TDLog.LOG_DATA, "Download Data Batch() device " + TDInstance.deviceAddress() + " comm " + mComm.toString() );
+      Log.v( "DistoX-BLE5", "Download Data Batch() device " + TDInstance.deviceAddress() + " " + TDInstance.deviceA.mAddress + " comm " + mComm.toString() );
       ret = mComm.downloadData( TDInstance.deviceA.mAddress, lister, data_type );
       // FIXME BATCH
       // if ( ret > 0 && TDSetting.mSurveyStations > 0 ) {

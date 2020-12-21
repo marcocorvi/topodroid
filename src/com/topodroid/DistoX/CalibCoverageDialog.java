@@ -122,20 +122,20 @@ class CalibCoverageDialog extends MyDialog
   @Override
   public void onClick(View v) 
   {
-    Button btn = (Button)v;
-    if ( btn == mBtnEval ) {
+    int id = v.getId();
+    if ( id == R.id.coverage_eval ) { 
       mCoverageValue = mCoverage.evalCoverage( mList, null );
       fillImage();
       reset( R.string.cover_data );
-    } else if ( btn == mBtnEvalG ) {
+    } else if ( id == R.id.coverage_g ) {
       mCoverageValue = mCoverage.evalCoverageGM( mList, 0 );
       fillImage();
       reset( R.string.cover_g );
-    } else if ( btn == mBtnEvalM ) {
+    } else if ( id == R.id.coverage_m ) { 
       mCoverageValue = mCoverage.evalCoverageGM( mList, 1 );
       fillImage();
       reset( R.string.cover_m );
-    } else if ( btn == mBtnEvalCal ) {
+    } else if ( id == R.id.coverage_eval_cal ) {
       if ( mCalib.GetAG() != null ) {
         mCoverageValue = mCoverage.evalCoverage( mList, mCalib );
         fillImage();
@@ -143,7 +143,7 @@ class CalibCoverageDialog extends MyDialog
       } else {
         TDToast.makeBad( R.string.no_calib );
       }
-    } else { // mBtnBack
+    } else { // id == R.id. mBtnBack
       dismiss();
     }
   }

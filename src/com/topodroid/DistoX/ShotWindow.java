@@ -364,7 +364,7 @@ public class ShotWindow extends Activity
       if ( toast ) {
         if ( nr <= -5 ) {
           TDToast.makeBad( getString(R.string.read_fail_with_code) + nr );
-	       } else {
+	} else {
           TDToast.makeBad( mApp.DistoXConnectionError[ -nr ] );
         }
       }
@@ -1433,6 +1433,8 @@ public class ShotWindow extends Activity
             // Log.v( "DistoXDOWN", "Download, conn mode " + TDSetting.mConnectionMode + " download status " + mDataDownloader.getStatus() );
             // setConnectionStatus( mDataDownloader.getStatus() );
             mDataDownloader.doDataDownload( DataType.SHOT );
+          } else {
+            Log.v("DistoX-BLE_5", "null device A");
           }
 	  return;
         } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // BT RESET

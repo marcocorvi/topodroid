@@ -99,8 +99,11 @@ class DeviceSelectDialog extends MyDialog
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
     dismiss();
+    if ( ! ( view instanceof TextView ) ) {
+      TDLog.Error("device select view instance of " + view.toString() );
+      return;
+    }
     CharSequence item = ((TextView) view).getText();
-    // TDLog.Log( TDLog.LOG_INPUT, "DeviceActivity onItemClick() " + item.toString() );
     StringBuffer buf = new StringBuffer( item );
     int k = buf.lastIndexOf(" ");
     String[] vals = item.toString().split(" ", 3 );
@@ -109,7 +112,7 @@ class DeviceSelectDialog extends MyDialog
     // String address = ( vals[0].equals("X000") )? Device.ZERO_ADDRESS : vals[2];
     String address = vals[2];
 
-    mApp.setDevice( address, null ); // FIXME BLE only BT devices
+    mApp.setDevice( address, null ); // FIXME BLEX only BT devices
     mLister.setTheTitle();
     mDownloader.toggleDownload();
     mLister.setConnectionStatus( mDownloader.getStatus() );

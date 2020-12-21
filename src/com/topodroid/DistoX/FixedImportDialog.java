@@ -256,8 +256,11 @@ class FixedImportDialog extends MyDialog
   @Override
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {
+    if ( ! ( view instanceof TextView ) ) {
+      TDLog.Error("fixed import view instance of " + view.toString() );
+      return;
+    }
     String item = ((TextView) view).getText().toString();
-    // TDLog.Log(  TDLog.LOG_INPUT, "FixedImportDialog onItemClick() " + item.toString() );
     String[] vals = item.split(" ");
     if ( vals.length == 4 ) {
       String lngstr = vals[0].trim();

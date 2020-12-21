@@ -51,13 +51,13 @@ class TopoDroidComm
 
 // -----------------------------------------------------------
 
-  // private AtomicInteger nReadPackets; // FIXME_ATOMIC_INT
-  protected volatile int nReadPackets;
+  // private AtomicInteger mNrPacketsRead; // FIXME_ATOMIC_INT
+  protected volatile int mNrPacketsRead;
 
-  // int getNrReadPackets() { return ( nReadPackets == null )? 0 : nreadPackets.get(); } // FIXME_ATOMIC_INT 
-  int getNrReadPackets() { return nReadPackets; }
-  // void incNrReadPackets() { ++nReadPackets; }
-  // void resetNrReadPackets() { nReadPackets = 0; }
+  // int getNrPacketsRead() { return ( mNrPacketsRead == null )? 0 : mNrPacketsRead.get(); } // FIXME_ATOMIC_INT 
+  int getNrReadPackets() { return mNrPacketsRead; }
+  // void incNrReadPackets() { ++mNrPacketsRead; }
+  // void resetNrReadPackets() { mNrPacketsRead = 0; }
 
   public boolean isConnected() { return mBTConnected; }
 
@@ -72,7 +72,7 @@ class TopoDroidComm
     // private long mLastShotId;   // last shot id
 
     private volatile boolean doWork = true;
-    private int mDataType;   // packet datatype
+    private int mDataType;   // packet datatype 
 
     void cancelWork()
     {
@@ -94,13 +94,12 @@ class TopoDroidComm
       mLister   = lister;
       mDataType = data_type;
       // reset nr of read packets 
-      // nReadPackets = new AtomicInteger( 0 ); // FIXME_ATOMIC_INT
-      nReadPackets = 0;
+      // mNrPacketsRead = new AtomicInteger( 0 ); // FIXME_ATOMIC_INT
+      mNrPacketsRead = 0;
       // mLastShotId = 0;
-      // TDLog.Log( TDLog.LOG_COMM, "RF comm thread cstr ToRead " + toRead );
     }
 
-    /** This thread blocks on readPacket (socket read) and when a packet arrives 
+    /** This thread blocks on read_Packet (socket read) and when a packet arrives 
      * it handles it
      */
     public void run()
@@ -109,13 +108,13 @@ class TopoDroidComm
       mHasG  = false;
 
       // TDLog.Log( TDLog.LOG_COMM, "RF comm thread running ... to_read " + toRead );
-      // Log.v( "DistoX-COMM", "RF comm thread ... to_read " + toRead );
+      // Log.v( "DistoX-BLEZ", "RF comm thread ... to_read " + toRead );
       if ( mType == COMM_RFCOMM ) {
-        while ( doWork && nReadPackets /* .get() */ != toRead ) {
+        while ( doWork && mNrPacketsRead /* .get() */ != toRead ) {
           // TDLog.Log( TDLog.LOG_COMM, "RF comm loop: read " + getNrReadPackets() + " to-read " + toRead );
           
           int res = mProtocol.readPacket( (toRead >= 0), mDataType );
-          // TDLog.Log( TDLog.LOG_COMM, "RF comm readPacket returns " + res );
+          // TDLog.Log( TDLog.LOG_COMM, "RF comm read_packet returns " + res );
           if ( res == TopoDroidProtocol.DISTOX_PACKET_NONE ) {
             if ( toRead == -1 ) {
               doWork = false;
@@ -124,7 +123,7 @@ class TopoDroidComm
               TDUtil.slowDown( TDSetting.mWaitConn, "RF comm thread sleep interrupt");
             }
           } else if ( res == TopoDroidProtocol.DISTOX_ERR_OFF ) {
-            // TDLog.Error( "RF comm readPacket returns ERR_OFF " );
+            // TDLog.Error( "RF comm read_packet returns ERR_OFF " );
             // if ( TDSetting.mCommType == 1 && TDSetting.mAutoReconnect ) { // FIXME ACL_DISCONNECT
             //   mApp.mDataDownloader.setConnected( false );
             //   mApp.notifyStatus();
@@ -137,6 +136,7 @@ class TopoDroidComm
           }
         }
       } else { // if ( mType == COMM_GATT ) 
+        // Log.v("DistoX-BLEZ", "TD comm -> proto read_pckets");
         mProtocol.readPacket( true, mDataType ); // start reading a packet
       }
       // TDLog.Log( TDLog.LOG_COMM, "RF comm thread run() exiting");
@@ -147,19 +147,22 @@ class TopoDroidComm
     }
   }
 
+  // @param res    packet type (as returned by handlePacket)
+  // @param lister data lister
+  // @param data_type unused
   void handleRegularPacket( int res, Handler lister, int data_type )
   {
     if ( res == TopoDroidProtocol.DISTOX_PACKET_DATA ) {
-      // nReadPackets.incrementAndGet(); // FIXME_ATOMIC_INT
-      ++nReadPackets;
+      // mNrPacketsRead.incrementAndGet(); // FIXME_ATOMIC_INT
+      ++mNrPacketsRead;
       double d = mProtocol.mDistance;
       double b = mProtocol.mBearing;
       double c = mProtocol.mClino;
       double r = mProtocol.mRoll;
       // extend is unset to start
       // long extend = TDAzimuth.computeLegExtend( b ); // DBlock.EXTEND_UNSET; FIXME_EXTEND 
-      TDLog.Log( TDLog.LOG_COMM, "Comm D PACKET " + d + " " + b + " " + c );
-      // Log.v( "DistoXBLE", "Comm D PACKET " + d + " " + b + " " + c );
+      // TDLog.Log( TDLog.LOG_COMM, "Comm D PACKET " + d + " " + b + " " + c );
+      Log.v( "DistoX-BLE5", "Comm D PACKET " + d + " " + b + " " + c );
       // NOTE type=0 shot is DistoX-type
       long status = ( d > TDSetting.mMaxShotLength )? TDStatus.OVERSHOOT : TDStatus.NORMAL;
       mLastShotId = TopoDroidApp.mData.insertDistoXShot( TDInstance.sid, -1L, d, b, c, r, DBlock.EXTEND_IGNORE, status, TDInstance.deviceAddress() );
@@ -184,13 +187,13 @@ class TopoDroidComm
       // }
     } else if ( res == TopoDroidProtocol.DISTOX_PACKET_G ) {
       TDLog.Log( TDLog.LOG_COMM, "Comm G PACKET" );
-      // nReadPackets.incrementAndGet(); // FIXME_ATOMIC_INT
-      ++nReadPackets;
+      // mNrPacketsRead.incrementAndGet(); // FIXME_ATOMIC_INT
+      ++mNrPacketsRead;
       mHasG = true;
     } else if ( res == TopoDroidProtocol.DISTOX_PACKET_M ) {
       TDLog.Log( TDLog.LOG_COMM, "Comm M PACKET" );
-      // nReadPackets.incrementAndGet(); // FIXME_ATOMIC_INT
-      ++nReadPackets;
+      // mNrPacketsRead.incrementAndGet(); // FIXME_ATOMIC_INT
+      ++mNrPacketsRead;
       // get G and M from mProtocol and save them to store
       TDLog.Log( TDLog.LOG_COMM, "G " + mProtocol.mGX + " " + mProtocol.mGY + " " + mProtocol.mGZ + " M " + mProtocol.mMX + " " + mProtocol.mMY + " " + mProtocol.mMZ );
       long cblk = TopoDroidApp.mDData.insertGM( TDInstance.cid, mProtocol.mGX, mProtocol.mGY, mProtocol.mGZ, mProtocol.mMX, mProtocol.mMY, mProtocol.mMZ );
@@ -202,11 +205,11 @@ class TopoDroidComm
         lister.sendMessage(msg);
       }
       if ( ! mHasG ) {
-        TDLog.Error( "data without G packet " + nReadPackets /* getNrReadPackets() */ );
+        TDLog.Error( "data without G packet " + mNrPacketsRead /* getNrReadPackets() */ );
         // if ( TopoDroidApp.mActivity != null ) { // skip toast
         //   TopoDroidApp.mActivity.runOnUiThread( new Runnable() {
         //     public void run() {
-        //       TDToast.makeBG("data without G: " + nReadPackets /* getNrReadPackets() */, TDColor.FIXED_RED );
+        //       TDToast.makeBG("data without G: " + mNrPacketsRead /* getNrReadPackets() */, TDColor.FIXED_RED );
         //     }
         //   } );
         // }
@@ -238,8 +241,8 @@ class TopoDroidComm
       // }
     } else if ( res == TopoDroidProtocol.DISTOX_PACKET_VECTOR ) {
       // vector packet do count
-      // nReadPackets.incrementAndGet(); // FIXME_ATOMIC_INT
-      ++nReadPackets;
+      // mNrPacketsRead.incrementAndGet(); // FIXME_ATOMIC_INT
+      ++mNrPacketsRead;
       double acc  = mProtocol.mAcceleration;
       double mag  = mProtocol.mMagnetic;
       double dip  = mProtocol.mDip;
@@ -284,7 +287,7 @@ class TopoDroidComm
   protected void cancelCommThread()
   {
     // TDLog.Log( TDLog.LOG_COMM, "VD comm cancel Comm thread");
-    if ( mCommThread != null ) {
+    if ( mCommThread != null ) { // FIXME check that comm-thread is really alive
       // TDLog.Log( TDLog.LOG_COMM, "cancel Comm thread: thread is active");
       mCommThread.cancelWork();
       try {
@@ -367,6 +370,8 @@ class TopoDroidComm
    */
   int downloadData( String address, Handler /* ILister */ lister, int data_type )
   {
+    // TDLog.Error("generic download data always fails");
+    Log.v("DistoX-BLEZ", "generic download data always fails");
     return -1;
   }
 

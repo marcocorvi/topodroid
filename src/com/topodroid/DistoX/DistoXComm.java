@@ -98,16 +98,16 @@ class DistoXComm extends TopoDroidComm
           if ( DeviceUtil.ACTION_ACL_CONNECTED.equals( action ) ) {
             // TDLog.Log( TDLog.LOG_BT, "[C] ACL_CONNECTED " + device + " addr " + mAddress );
             mApp.mDataDownloader.updateConnected( true );
-            mApp.notifyStatus();
+            mApp.notifyStatus( DataDownloader.STATUS_ON );
           } else if ( DeviceUtil.ACTION_ACL_DISCONNECT_REQUESTED.equals( action ) ) {
             // TDLog.Log( TDLog.LOG_BT, "[C] ACL_DISCONNECT_REQUESTED " + device + " addr " + mAddress );
             mApp.mDataDownloader.updateConnected( false );
-            mApp.notifyStatus();
+            mApp.notifyStatus( DataDownloader.STATUS_OFF );
             closeSocket( );
           } else if ( DeviceUtil.ACTION_ACL_DISCONNECTED.equals( action ) ) {
             // TDLog.Log( TDLog.LOG_BT, "[C] ACL_DISCONNECTED " + device + " addr " + mAddress );
             mApp.mDataDownloader.updateConnected( false );
-            mApp.notifyStatus();
+            mApp.notifyStatus( DataDownloader.STATUS_OFF );
             closeSocket( );
             mApp.notifyDisconnected( data_type );
           }
@@ -123,7 +123,7 @@ class DistoXComm extends TopoDroidComm
             if ( mBTSocket != null ) {
               // TDLog.Error( "[*] socket is not null: close and retry connect ");
               mApp.mDataDownloader.setConnected( DataDownloader.STATUS_OFF );
-              mApp.notifyStatus();
+              mApp.notifyStatus( DataDownloader.STATUS_OFF );
               closeSocket( );
               mApp.notifyDisconnected( data_type );
               connectSocket( mAddress, data_type ); // returns immediately if mAddress == null
@@ -456,6 +456,7 @@ class DistoXComm extends TopoDroidComm
   protected boolean startCommThread( int to_read, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
   {
     // TDLog.Log( TDLog.LOG_COMM, "start RFcomm thread: to_read " + to_read );
+    // Log.v("DistoX-BLEZ", "start comm thread: to read " + to_read );
     if ( mBTSocket != null ) {
       if ( mCommThread == null ) {
         mCommThread = new CommThread( TopoDroidComm.COMM_RFCOMM, mProtocol, to_read, lister, data_type );
@@ -495,7 +496,6 @@ class DistoXComm extends TopoDroidComm
     super.disconnectRemoteDevice();
     // cancelCommThread();
     // closeProtocol();
-
     destroySocket( );
   }
 
@@ -624,6 +624,7 @@ class DistoXComm extends TopoDroidComm
   {
     if ( ! isCommThreadNull() ) {
       TDLog.Error( "download data: RFcomm thread not null");
+      Log.v( "DistoX-BLE5", "download data: RFcomm thread not null");
       return TopoDroidProtocol.DISTOX_ERR_CONNECTED;
     }
     
@@ -680,6 +681,7 @@ class DistoXComm extends TopoDroidComm
       }
     } else {
       TDLog.Error( "download data: fail to connect socket");
+      Log.v("DostoX-BLE5", "download data: fail to connect socket");
     }
     destroySocket( );
     

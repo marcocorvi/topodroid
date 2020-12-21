@@ -13,7 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
 
-// import android.util.Log;
+import android.util.Log;
 
 class Device
 {
@@ -44,12 +44,20 @@ class Device
   final static int DISTO_A3   = 1;
   final static int DISTO_X310 = 2;
   // final static int DISTO_X000 = 3; // FIXME VirtualDistoX
-  final static int DISTO_BLE5 = 4;
+  final static int DISTO_BLEX = 4;
+  final static int DISTO_SAP5 = 5; // SAP5 is not bluetooth LE
 
-  final static String[] typeString = { "Unknown", "A3", "X310", "X000", "BLE5" };
-  final static private String[] typeSimpleString = { "Unknown", "DistoX", "DistoX2", "DistoX0", "Ble5" };
+  final static String[] typeString = { "Unknown", "A3", "X310", "X000", "BLEX", "SAP5" };
+  final static private String[] typeSimpleString = { "Unknown", "DistoX", "DistoX2", "DistoX0", "Ble5", "Sap5" };
   
-  static String typeToString( int type ) { return typeString[ type ]; }
+  static String typeToString( int type )
+  {
+    if ( type < 0 || type >= typeString.length ) return null;
+    return typeString[ type ];
+  }
+
+  static boolean isBle( int type ) { return type == DISTO_BLEX || type == DISTO_SAP5; }
+  // static boolean isBle( int type ) { return type == DISTO_BLEX; }
 
   static String modelToName( String model )
   {
@@ -57,9 +65,9 @@ class Device
       return model.replace("DistoX-", "" );
     } 
     if ( model.startsWith("Shetland") ) {
-      return model.replace("Shetland", "" );
+      return model.replace("Shetland_", "SAP-" );
     }
-    // if ( model.startsWith("Ble-") ) { // FIXME BLE
+    // if ( model.startsWith("Ble-") ) { // FIXME BLE_5
     //   return model.replace("Ble-", "" );
     // }
     return "-";
@@ -69,7 +77,8 @@ class Device
   {
     if ( model != null ) {
       // TDLog.Log( TDLog.LOG_DEBUG, "stringToType " + model );
-      if ( model.equals( "BLE5" ) || model.startsWith( "DistoX-BLE" ) ) return DISTO_BLE5; // FIXME BLE
+      if ( model.equals( "BLEX" ) ) return DISTO_BLEX; // FIXME BLE_5
+      if ( model.equals( "SAP5" ) || model.startsWith( "Shetland_" ) ) return DISTO_SAP5;
       if ( model.equals( "X310" ) || model.startsWith( "DistoX-" ) ) return DISTO_X310;
       if ( model.equals( "A3" ) || model.equals( "DistoX" ) ) return DISTO_A3;
       // if ( model.equals( "X000" ) || model.equals( "DistoX0" ) ) return DISTO_X000; // FIXME VirtualDistoX
@@ -82,16 +91,11 @@ class Device
   // nickname can be null
   Device( String addr, String model, int h, int t, String name, String nickname )
   {
+    // Log.v("DistoX-BLEX", "device " + addr + " " + model + " " + name );
     mAddress = addr;
     mModel = model;
     mType = stringToType( model );
-
-    if ( name == null ) {
-      mName = mModel;
-    } else { 
-      mName = name.trim();
-      if ( mName.length() == 0 || mName.equals("null") ) mName = mModel;
-    }
+    mName = fromName( name );
     mNickname = nickname;
     mHead = h;
     mTail = t;
@@ -100,20 +104,23 @@ class Device
   // nickname can be null
   Device( String addr, String model, String name, String nickname )
   {
+    // Log.v("DistoX-BLEX", "device " + addr + " " + model + " " + name );
     mAddress = addr;
     mModel = model;
     mType = stringToType( model );
-
-    if ( name == null ) {
-      mName = mModel;
-    } else { 
-      mName = name.trim();
-      if ( mName.length() == 0 || mName.equals("null") ) mName = mModel;
-    }
-
+    mName = fromName( name );
     mNickname = nickname;
     mHead = 0;
     mTail = 0;
+  }
+
+  private String fromName( String name )
+  {
+    if ( name != null ) name = name.trim();
+    if ( name == null || name.length() == 0 || name.equals("null") ){
+      name = mModel;
+    }
+    return name.replace("SAP5_", "");
   }
 
   public String getNickname()

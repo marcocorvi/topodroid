@@ -15,7 +15,7 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 
-// import android.util.Log;
+import android.util.Log;
 
 // import java.util.ArrayList;
 
@@ -83,7 +83,7 @@ class DataDownloader
 
   void doDataDownload( int data_type )
   {
-    // Log.v("DistoXDOWN", "do data download " + mDownload + " connected " + mConnected );
+    // Log.v("DistoX-BLEZ", "do data download " + mDownload + " connected " + mConnected );
     if ( mDownload ) {
       startDownloadData( data_type );
     } else {
@@ -126,6 +126,7 @@ class DataDownloader
   }
 
   // called also by ReconnectTask
+  // @param data_type ...
   void tryConnect( int data_type )
   {
     // Log.v("DistoXDOWN", "try Connect() download " + mDownload + " connected " + mConnected );
@@ -153,14 +154,14 @@ class DataDownloader
   private void notifyUiThreadConnectionStatus( int connected )
   {
     mConnected = connected;
-    mApp.notifyStatus( ); // this is run on UI thread
+    mApp.notifyStatus( getStatus() ); // this is run on UI thread
   }
 
   // this must be called on UI thread (onPostExecute)
   void notifyConnectionStatus( int connected )
   {
     mConnected = connected;
-    mApp.notifyStatus( ); // this is run on UI thread
+    mApp.notifyStatus( getStatus() ); // this is run on UI thread
   }
 
   // BATCH ON-DEMAND DOWNLOAD
@@ -173,18 +174,19 @@ class DataDownloader
       notifyConnectionStatus( STATUS_WAIT );
       // notifyUiThreadConnectionStatus( STATUS_WAIT );
       // TDLog.Log( TDLog.LOG_COMM, "shot menu DOWNLOAD" );
+      // Log.v( "DistoX-BLEZ", "try download type " + data_type );
       new DataDownloadTask( mApp, mApp.mListerSet, null, data_type ).execute();
     } else {
       mDownload = false;
       notifyConnectionStatus( STATUS_OFF );
       // notifyUiThreadConnectionStatus( STATUS_OFF );
       TDLog.Error( "download data: no device selected" );
-      if ( TDInstance.sid < 0 ) {
-        TDLog.Error( "download data: no survey selected" );
-      // } else {
-        // DBlock last_blk = mApp.mData.selectLastLegShot( TDInstance.sid );
-        // (new ShotNewDialog( mContext, mApp, lister, last_blk, -1L )).show();
-      }
+      // if ( TDInstance.sid < 0 ) {
+      //   TDLog.Error( "download data: no survey selected" );
+      // // } else {
+      //   // DBlock last_blk = mApp.mData.selectLastLegShot( TDInstance.sid );
+      //   // (new ShotNewDialog( mContext, mApp, lister, last_blk, -1L )).show();
+      // }
     }
   }
 

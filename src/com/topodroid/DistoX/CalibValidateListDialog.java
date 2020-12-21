@@ -94,11 +94,13 @@ class CalibValidateListDialog extends MyDialog
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {
-    CharSequence item = ((TextView) view).getText();
-    String name = item.toString();
+    if ( ! ( view instanceof TextView ) ) {
+      TDLog.Error("calib validate view instance of " + view.toString() );
+      return;
+    }
+    String name = ((TextView) view).getText().toString();
     int len = name.indexOf(" ");
     name = name.substring(0, len);
-    // TDLog.Log(  TDLog.LOG_INPUT, "CalibValidate ListDialog onItemClick() " + name );
     // TODO open calibration activity
     mParent.validateCalibration( name );
     dismiss();

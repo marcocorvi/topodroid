@@ -97,8 +97,11 @@ class CalibCheckDialog extends MyDialog
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int position, long idx )
   {
-    CharSequence item = ((TextView) view).getText();
-    String str = item.toString();
+    if ( ! ( view instanceof TextView ) ) {
+      TDLog.Error("calib check view instance of " + view.toString() );
+      return;
+    }
+    String str = ((TextView) view).getText().toString();
     int len = str.indexOf(" ");
     int id = Integer.parseInt( str.substring(0, len) );
     // Log.v("DistoX", "check item " + id );

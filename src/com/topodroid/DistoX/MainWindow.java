@@ -308,7 +308,6 @@ public class MainWindow extends Activity
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
-    CharSequence item = ((TextView) view).getText();
     if ( mMenu == (ListView)parent ) {
       handleMenu( pos );
       return;
@@ -318,6 +317,11 @@ public class MainWindow extends Activity
       return;
     }
 
+    if ( ! ( view instanceof TextView ) ) {
+      TDLog.Error("import view instance of " + view.toString() );
+      return;
+    }
+    CharSequence item = ((TextView) view).getText();
     mApp.setSurveyFromName( item.toString(), -1, true ); 
     Intent openIntent = new Intent( this, ShotWindow.class );
     startActivity( openIntent );

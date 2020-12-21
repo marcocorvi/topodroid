@@ -96,8 +96,12 @@ class ImportDialog extends MyDialog
   @Override
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {
+    if ( ! ( view instanceof TextView ) ) {
+      TDLog.Error("import view instance of " + view.toString() );
+      return;
+    }
     String item = ((TextView) view).getText().toString();
-    TDLog.Log(  TDLog.LOG_INPUT, "ImportDialog onItemClick() <" + item + ">" );
+    // TDLog.Log(  TDLog.LOG_INPUT, "Import dialog item <" + item + ">" );
 
     // hide();
     mList.setOnItemClickListener( null );

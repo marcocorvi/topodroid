@@ -153,6 +153,10 @@ public class CWDActivity extends Activity
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
+    if ( ! ( view instanceof TextView ) ) {
+      TDLog.Error("CWD view instance of " + view.toString() );
+      return;
+    }
     CharSequence item = ((TextView) view).getText();
     mETcwd.setText( item );
   }

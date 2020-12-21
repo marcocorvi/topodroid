@@ -78,6 +78,7 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
   protected void onPostExecute( Integer res )
   {
     // TDLog.Log( TDLog.LOG_COMM, "onPostExecute res " + res );
+    Log.v( "DistoX-BLE5", "data download post execute: res " + res );
     TopoDroidApp app = mApp.get();
     if ( app != null ) {
       if ( res != null ) {

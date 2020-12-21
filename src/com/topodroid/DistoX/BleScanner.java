@@ -15,7 +15,7 @@ package com.topodroid.DistoX;
 
 // import com.topodroid.prefs.TDSetting;
 
-// import android.util.Log;
+import android.util.Log;
 
 import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
@@ -37,7 +37,7 @@ import java.util.ArrayList;
 // -----------------------------------------------------------------------------
 class BleScanner
 {
-  private static final long BLE_SCAN_PERIOD = 10000; // 10 secs
+  private static final long SAP5_SCAN_PERIOD = 10000; // 10 secs
 
   private static boolean mScanning = false;
 
@@ -63,7 +63,7 @@ class BleScanner
 
     if ( mScanning ) return true; // already scanning
     mScanning = true;
-    // Log.v("DistoXBLE", "start scan");
+    Log.v("DistoX-BLEX", "start scan");
 
     // FIXME mParent.disconnectGatt();
     if ( Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT ) {
@@ -92,7 +92,7 @@ class BleScanner
       };
 
       ScanFilter filter = new ScanFilter.Builder()
-        .setServiceUuid( new ParcelUuid( BleConst.BLE_SERVICE_UUID ) )
+        .setServiceUuid( new ParcelUuid( BleConst.SAP5_SERVICE_UUID ) )
         // .setDeviceAddress( address )
         // .setDeviceName( name )
         .build();
@@ -105,7 +105,7 @@ class BleScanner
       scanner.startScan( filters, settings, mScanCallback );
       mScanHandler = new Handler();
       mScanHandlerRunnable = new Runnable() { public void run() { stopScan(); } };
-      mScanHandler.postDelayed( mScanHandlerRunnable, BLE_SCAN_PERIOD );
+      mScanHandler.postDelayed( mScanHandlerRunnable, SAP5_SCAN_PERIOD );
     } else {
       mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
         // FIXME allocate device
@@ -122,7 +122,7 @@ class BleScanner
 
   private void stopScan()
   {
-    // Log.v("DistoXBLE", "stop scan");
+    Log.v("DistoX-BLEX", "stop scan");
     if ( mScanHandler != null && mScanHandlerRunnable != null ) {
       mScanHandler.removeCallbacks( mScanHandlerRunnable );
     }
@@ -144,7 +144,7 @@ class BleScanner
 
   private void setRemoteDevice( final BluetoothDevice device )
   {
-    // Log.v("DistoXBLE", "remote device " + device.getName() );
+    Log.v("DistoX-BLEX", "remote device " + device.getName() );
     mParent.runOnUiThread( new Runnable() { public void run() { mParent.addBleDevice( device ); } } );
   }
 

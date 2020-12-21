@@ -1365,7 +1365,7 @@ public class TDNum
     for ( NumBranch br : branches ) {
       br.computeError();
       // TDLog.Log( TDLog.LOG_NUM, "Single loop branch error " + br.e + " " + br.s + " " + br.v );
-      br.compensateError( br.e, br.s, br.v );
+      br.compensateError( -br.e, -br.s, -br.v );
     }
   }
 

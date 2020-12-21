@@ -16,7 +16,7 @@ import com.topodroid.prefs.TDSetting;
 import com.topodroid.packetX.MemoryOctet;
 import com.topodroid.packetX.PacketLogger;
 
-// import android.util.Log;
+import android.util.Log;
 
 // import java.lang.ref.WeakReference;
 
@@ -74,10 +74,10 @@ class TopoDroidProtocol
   long mMX, mMY, mMZ;
   boolean mBackshot;
 
-  protected byte[] mBuffer = new byte[8]; // packet buffer
+  // protected byte[] mBuffer;
   protected byte[] mAddress;        // request-reply address
-  protected byte[] mRequestBuffer;  // request buffer
-  protected byte[] mReplyBuffer;    // reply data
+  // protected byte[] mRequest_Buffer;  // request buffer
+  // private byte[] mReplyBuffer;    // reply data
   
   int mMaxTimeout = 8;
 
@@ -88,28 +88,29 @@ class TopoDroidProtocol
 
   protected TopoDroidProtocol( Device device, Context context )
   {
-    mDeviceType = device.mType;
+    // Log.v("DistoX-BLEZ", "topodroid proto: type " + device.mType + " addr " + device.mAddress );
+    mDeviceType    = device.mType;
     mDeviceAddress = device.mAddress;
     mPacketLogger  = new PacketLogger( context );
 
     // allocated buffers
+    // mBuffer        = new byte[8];
     mAddress       = new byte[2];
-    mReplyBuffer   = new byte[4];
-    mRequestBuffer = new byte[8];
+    // mReplyBuffer   = new byte[4];
+    // mRequest_Buffer = new byte[8];
   }
 
   void closeIOstreams() { }
 
   // PACKET LOGGER ----------------------------------------------------------------
-  protected void logPacket( long dir )
+  protected void logPacket( long dir, byte[] buf )
   {
     mPacketLogger.insertPacket(
         System.currentTimeMillis(),
         dir,
         mDeviceAddress,
-        (int)(mBuffer[0] & 0x3f),
-        String.format("%02x %02x %02x %02x %02x %02x %02x %02x",
-          mBuffer[0], mBuffer[1], mBuffer[2], mBuffer[3], mBuffer[4], mBuffer[5], mBuffer[6], mBuffer[7] ) );
+        (int)(buf[0] & 0x3f),
+        String.format("%02x %02x %02x %02x %02x %02x %02x %02x", buf[0], buf[1], buf[2], buf[3], buf[4], buf[5], buf[6], buf[7] ) );
   }
 
   protected void logPacket1( long dir, byte[] buf )
@@ -156,29 +157,32 @@ class TopoDroidProtocol
 
   /** packet dispatcher
    */
-  protected int handlePacket( ) 
+  protected int handlePacket( byte[] buffer )
   {
-    byte type = (byte)(mBuffer[0] & 0x3f);
+    byte type = (byte)(buffer[0] & 0x3f);
     if ( TDLog.LOG_PROTO ) {
       TDLog.DoLog( "handle packet type " + type + " " + 
-        String.format("%02x %02x %02x %02x %02x %02x %02x %02x", mBuffer[0], mBuffer[1], mBuffer[2],
-        mBuffer[3], mBuffer[4], mBuffer[5], mBuffer[6], mBuffer[7] ) );
+        String.format("%02x %02x %02x %02x %02x %02x %02x %02x", buffer[0], buffer[1], buffer[2],
+        buffer[3], buffer[4], buffer[5], buffer[6], buffer[7] ) );
     }
-    if ( TDSetting.mPacketLog ) logPacket( 0L );
+    if ( TDSetting.mPacketLog ) logPacket( 0L, buffer );
+    Log.v( "DistoX-BLEX", "handle packet type " + type + " " + 
+        String.format("%02x %02x %02x %02x %02x %02x %02x %02x", buffer[0], buffer[1], buffer[2],
+        buffer[3], buffer[4], buffer[5], buffer[6], buffer[7] ) );
 
     // int high, low;
     switch ( type ) {
       case 0x01: // Data
         mBackshot = false;
-        int dhh = (int)( mBuffer[0] & 0x40 );
-        double d =  dhh * 1024.0 + MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
-        double b = MemoryOctet.toInt( mBuffer[4], mBuffer[3] );
-        double c = MemoryOctet.toInt( mBuffer[6], mBuffer[5] );
+        int dhh = (int)( buffer[0] & 0x40 );
+        double d =  dhh * 1024.0 + MemoryOctet.toInt( buffer[2], buffer[1] );
+        double b = MemoryOctet.toInt( buffer[4], buffer[3] );
+        double c = MemoryOctet.toInt( buffer[6], buffer[5] );
         // X31--ready
-        mRollHigh = mBuffer[7];
+        mRollHigh = buffer[7];
 
-        int r7 = (int)(mBuffer[7] & 0xff); if ( r7 < 0 ) r7 += 256;
-        // double r = (mBuffer[7] & 0xff);
+        int r7 = (int)(buffer[7] & 0xff); if ( r7 < 0 ) r7 += 256;
+        // double r = (buffer[7] & 0xff);
         double r = r7;
 
         // if ( mDeviceType == Device.DISTO_A3 || mDeviceType == Device.DISTO_X000) // FIXME VirtualDistoX
@@ -193,7 +197,13 @@ class TopoDroidProtocol
               mDistance = 100 + (d-100000) / 100.0;
             }
             break;
-          // case Device.DISTO_BLE5: // FIXME BLE
+          case Device.DISTO_BLEX: // FIXME BLEX
+            // Log.v("DistoX-BLEX", "did not handle packet BLE");
+            break;
+          case Device.DISTO_SAP5: // FIXME BLEX
+            Log.v("DistoX-BLE5", "handle packet SAP");
+            mDistance = d / 1000.0;
+            break;
           default:
             mDistance = d / 1000.0;
             break;
@@ -208,14 +218,12 @@ class TopoDroidProtocol
           TDLog.DoLog( "Proto packet D " +
             String.format(Locale.US, " %7.2f %6.1f %6.1f (%6.1f)", mDistance, mBearing, mClino, mRoll ) );
         }
-        // Log.v( "Proto packet D ",
-        //     String.format(Locale.US, " %7.2f %6.1f %6.1f (%6.1f)", mDistance, mBearing, mClino, mRoll ) );
-
+        Log.v( "DistoX-BLEX", String.format(Locale.US, "Packet-D %7.2f %6.1f %6.1f (%6.1f)", mDistance, mBearing, mClino, mRoll ) );
         return DISTOX_PACKET_DATA;
       case 0x02: // G
-        mGX = MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
-        mGY = MemoryOctet.toInt( mBuffer[4], mBuffer[3] );
-        mGZ = MemoryOctet.toInt( mBuffer[6], mBuffer[5] );
+        mGX = MemoryOctet.toInt( buffer[2], buffer[1] );
+        mGY = MemoryOctet.toInt( buffer[4], buffer[3] );
+        mGZ = MemoryOctet.toInt( buffer[6], buffer[5] );
 
         if ( mGX > TDUtil.ZERO ) mGX = mGX - TDUtil.NEG;
         if ( mGY > TDUtil.ZERO ) mGY = mGY - TDUtil.NEG;
@@ -223,9 +231,9 @@ class TopoDroidProtocol
         TDLog.Log( TDLog.LOG_PROTO, "Proto packet G " + String.format(" %x %x %x", mGX, mGY, mGZ ) );
         return DISTOX_PACKET_G;
       case 0x03: // M
-        mMX = MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
-        mMY = MemoryOctet.toInt( mBuffer[4], mBuffer[3] );
-        mMZ = MemoryOctet.toInt( mBuffer[6], mBuffer[5] );
+        mMX = MemoryOctet.toInt( buffer[2], buffer[1] );
+        mMY = MemoryOctet.toInt( buffer[4], buffer[3] );
+        mMZ = MemoryOctet.toInt( buffer[6], buffer[5] );
 
         if ( mMX > TDUtil.ZERO ) mMX = mMX - TDUtil.NEG;
         if ( mMY > TDUtil.ZERO ) mMY = mMY - TDUtil.NEG;
@@ -234,11 +242,11 @@ class TopoDroidProtocol
         return DISTOX_PACKET_M;
       case 0x04: // Vector data packet
         if ( mDeviceType == Device.DISTO_X310 ) {
-          mBackshot = ( (mBuffer[0] & 0x40) == 0x40 );
-          double acc = MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
-          double mag = MemoryOctet.toInt( mBuffer[4], mBuffer[3] );
-          double dip = MemoryOctet.toInt( mBuffer[6], mBuffer[5] );
-          double rh = MemoryOctet.toInt( mRollHigh, mBuffer[7] );
+          mBackshot = ( (buffer[0] & 0x40) == 0x40 );
+          double acc = MemoryOctet.toInt( buffer[2], buffer[1] );
+          double mag = MemoryOctet.toInt( buffer[4], buffer[3] );
+          double dip = MemoryOctet.toInt( buffer[6], buffer[5] );
+          double rh = MemoryOctet.toInt( mRollHigh, buffer[7] );
           mAcceleration = acc;
           mMagnetic = mag;
           mDip = dip * 90.0  / 16384.0; // 90/0x4000;
@@ -253,19 +261,23 @@ class TopoDroidProtocol
         }
         return DISTOX_PACKET_VECTOR;
       case 0x38:  // Reply packet
-        mAddress[0] = mBuffer[1];
-        mAddress[1] = mBuffer[2];
-        mReplyBuffer[0] = mBuffer[3];
-        mReplyBuffer[1] = mBuffer[4];
-        mReplyBuffer[2] = mBuffer[5];
-        mReplyBuffer[3] = mBuffer[6];
-        TDLog.Log( TDLog.LOG_PROTO, "handle Packet mReplyBuffer" );
+        mAddress[0] = buffer[1];
+        mAddress[1] = buffer[2];
+        {
+          byte[] mReplyBuffer = new byte[4];
+          mReplyBuffer[0] = buffer[3];
+          mReplyBuffer[1] = buffer[4];
+          mReplyBuffer[2] = buffer[5];
+          mReplyBuffer[3] = buffer[6];
+          TDLog.Log( TDLog.LOG_PROTO, "handle Packet mReplyBuffer" );
+          // TODO
+        }
         return DISTOX_PACKET_REPLY;
       default:
         TDLog.Error( 
           "packet error. type " + type + " " + 
-          String.format("%02x %02x %02x %02x %02x %02x %02x %02x", mBuffer[0], mBuffer[1], mBuffer[2],
-          mBuffer[3], mBuffer[4], mBuffer[5], mBuffer[6], mBuffer[7] ) );
+          String.format("%02x %02x %02x %02x %02x %02x %02x %02x", buffer[0], buffer[1], buffer[2],
+          buffer[3], buffer[4], buffer[5], buffer[6], buffer[7] ) );
       //   return DISTOX_PACKET_NONE;
     }
     return DISTOX_PACKET_NONE;
@@ -275,8 +287,11 @@ class TopoDroidProtocol
   // PACKETS I/O ------------------------------------------------------------------------
 
   // must be overridden
+  // @param no_timeout
+  // @param data_type  packet data type (to filter packet of different type)
   int readPacket( boolean no_timeout, int data_type )
   {
+    Log.v("DistoX-BLEX", "TD proto read_packet returns NONE");
     return DISTOX_PACKET_NONE;
   }
 

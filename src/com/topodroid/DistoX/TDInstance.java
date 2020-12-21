@@ -40,7 +40,7 @@ public class TDInstance
 
   static Device  deviceA = null;
   static Device  deviceB = null; // second-DistoX
-  static BluetoothDevice bleDevice = null; // FIXME BLE
+  static BluetoothDevice bleDevice = null; // FIXME BLE_5
 
   static int deviceType() { return (deviceA == null)? 0 : deviceA.mType; }
   static String deviceAddress() { return (deviceA == null)? null : deviceA.mAddress; }

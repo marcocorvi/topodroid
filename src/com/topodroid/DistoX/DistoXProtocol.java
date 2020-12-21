@@ -52,6 +52,7 @@ class DistoXProtocol extends TopoDroidProtocol
   protected byte[] mAddr8000;     // could be used by DistoXA3Protocol.read8000 
   private byte[] mAcknowledge;
   private byte   mSeqBit;         // sequence bit: 0x00 or 0x80
+  protected byte[] mBuffer;
 
   // protected static final UUID MY_UUID = UUID.fromString( "00001101-0000-1000-8000-00805F9B34FB" );
 
@@ -74,6 +75,7 @@ class DistoXProtocol extends TopoDroidProtocol
     mAddr8000[1] = 0x00; // address 0x8000 - already assigned but repeat for completeness
     mAddr8000[2] = (byte)0x80;
     mAcknowledge = new byte[1];
+    mBuffer = new byte[8];
     // mAcknowledge[0] = ( b & 0x80 ) | 0x55;
     // mHeadTailA3 = new byte[3];   // to read head/tail for Protocol A3
     // mHeadTailA3[0] = 0x38;
@@ -107,72 +109,6 @@ class DistoXProtocol extends TopoDroidProtocol
     }
   }
 
-  // ACTIONS -----------------------------------------------------------
-
-  /* swap hot bit in a data in DistoX A3 memory
-   * @param addr  memory address
-   */
-  // @Override
-  // boolean swapA3HotBit( int addr, boolean on_off ) // only A3
-  // {
-  //   try {
-  //     mBuffer[0] = (byte) 0x38;
-  //     mBuffer[1] = (byte)( addr & 0xff );
-  //     mBuffer[2] = (byte)( (addr>>8) & 0xff );
-  //     mOut.write( mBuffer, 0, 3 );
-  //     // if ( TDSetting.mPacketLog ) logPacket3( 1L, mBuffer );
-
-  //     mIn.readFully( mBuffer, 0, 8 );
-  //     // if ( TDSetting.mPacketLog ) logPacket( 0L );
-
-  //     if ( mBuffer[0] != (byte)0x38 ) { 
-  //       TDLog.Error( "HotBit-38 wrong reply packet addr " + addr );
-  //       return false;
-  //     }
-
-  //     int reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
-  //     // Log.v( TopoDroidApp.TAG, "proto read ... addr " + addr + " reply addr " + reply_addr );
-  //     if ( reply_addr != addr ) {
-  //       TDLog.Error( "HotBit-38 wrong reply addr " + reply_addr + " addr " + addr );
-  //       return false;
-  //     }
-  //     mBuffer[0] = (byte)0x39;
-  //     // mBuffer[1] = (byte)( addr & 0xff );
-  //     // mBuffer[2] = (byte)( (addr>>8) & 0xff );
-  //     if ( mBuffer[3] == 0x00 ) {
-  //       TDLog.Error( "HotBit refusing to swap addr " + addr );
-  //       return false;
-  //     }  
-  //     if ( on_off ) {
-  //       mBuffer[3] |= (byte)0x80; // RESET HOT BIT
-  //     } else {
-  //       mBuffer[3] &= (byte)0x7f; // CLEAR HOT BIT
-  //     }
-  //     mOut.write( mBuffer, 0, 7 );
-  //     // if ( TDSetting.mPacketLog ) logPacket7( 1L, mBuffer );
-
-  //     mIn.readFully( mBuffer, 0, 8 );
-  //     // if ( TDSetting.mPacketLog ) logPacket( 0L );
-
-  //     if ( mBuffer[0] != (byte)0x38 ) {
-  //       TDLog.Error( "HotBit-39 wrong reply packet addr " + addr );
-  //       return false;
-  //     }
-  //     reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
-  //     // Log.v( TopoDroidApp.TAG, "proto reset ... addr " + addr + " reply addr " + reply_addr );
-  //     if ( reply_addr != addr ) {
-  //       TDLog.Error( "HotBit-39 wrong reply addr " + reply_addr + " addr " + addr );
-  //       return false;
-  //     }
-  //   } catch ( EOFException e ) {
-  //     TDLog.Error( "HotBit EOF failed addr " + addr );
-  //     return false;
-  //   } catch (IOException e ) {
-  //     TDLog.Error( "HotBit IO failed addr " + addr );
-  //     return false;
-  //   }
-  //   return true;
-  // }
 
   // PACKETS I/O ------------------------------------------------------------------------
   /** check that the byte has the proper data type
@@ -270,8 +206,8 @@ class DistoXProtocol extends TopoDroidProtocol
     // int min_available = ( mDeviceType == Device.DISTO_X000)? 8 : 1; // FIXME 8 should work in every case // FIXME VirtualDistoX
     int min_available = 1; // FIXME 8 should work in every case
 
-    TDLog.Log( TDLog.LOG_PROTO, "Protocol read packet no-timeout " + (no_timeout?"no":"yes") );
-    // Log.v( "DistoX", "VD Proto read packet no-timeout " + (no_timeout?"no":"yes") );
+    // TDLog.Log( TDLog.LOG_PROTO, "Protocol read packet no-timeout " + (no_timeout?"true":"false") );
+    // Log.v( "DistoX-BLEZ", "Proto read packet no-timeout " + (no_timeout?"true":"false") );
     try {
       final int maxtimeout = 8;
       int timeout = 0;
@@ -291,13 +227,13 @@ class DistoXProtocol extends TopoDroidProtocol
           }
         }
       }
-      TDLog.Log( TDLog.LOG_PROTO, "Protocol read packet available " + available );
-      // Log.v( "DistoX", "VD Proto read packet available " + available );
+      // TDLog.Log( TDLog.LOG_PROTO, "Protocol read packet available " + available );
+      // Log.v( "DistoX-BLEZ", "VD Proto read packet available " + available );
       // if ( available > 0 ) 
       if ( available >= min_available ) {
         if ( no_timeout || ! TDSetting.mZ6Workaround ) {
           mIn.readFully( mBuffer, 0, 8 );
-          if ( TDSetting.mPacketLog ) logPacket( 0L );
+          if ( TDSetting.mPacketLog ) logPacket( 0L, mBuffer );
           checkDataType( mBuffer[0], data_type );
         }
 
@@ -316,7 +252,7 @@ class DistoXProtocol extends TopoDroidProtocol
           mOut.write( mAcknowledge, 0, 1 );
           if ( TDSetting.mPacketLog ) logPacket1( 1L, mAcknowledge );
         }
-        if ( ok ) return handlePacket();
+        if ( ok ) return handlePacket( mBuffer );
       } // else timedout with no packet
     } catch ( EOFException e ) {
       TDLog.Log( TDLog.LOG_PROTO, "Proto read packet EOFException" + e.toString() );
@@ -340,12 +276,13 @@ class DistoXProtocol extends TopoDroidProtocol
   {
     TDLog.Log( TDLog.LOG_PROTO, String.format("send command %02x", cmd ) );
     // Log.v( "DistoX", String.format("send command %02x", cmd ) );
+    byte[] buffer = new byte[8];  // request buffer
 
     try {
-      mRequestBuffer[0] = (byte)(cmd);
-      mOut.write( mRequestBuffer, 0, 1 );
+      buffer[0] = (byte)(cmd);
+      mOut.write( buffer, 0, 1 );
       mOut.flush();
-      // if ( TDSetting.mPacketLog ) logPacket1( 1L, mRequestBuffer );
+      // if ( TDSetting.mPacketLog ) logPacket1( 1L, buffer );
     } catch (IOException e ) {
       TDLog.Error( "send command failed" );
       return false;
@@ -370,7 +307,7 @@ class DistoXProtocol extends TopoDroidProtocol
       // if ( TDSetting.mPacketLog ) logPacket3( 1L, command );
 
       mIn.readFully( mBuffer, 0, 8 );
-      if ( TDSetting.mPacketLog ) logPacket( 0L );
+      if ( TDSetting.mPacketLog ) logPacket( 0L, mBuffer );
       // CHECK_DATA_TYPE 
       // checkDataType( mBuffer[0], data_type );
 
@@ -415,7 +352,7 @@ class DistoXProtocol extends TopoDroidProtocol
   //     // if ( TDSetting.mPacketLog ) logPacket3( 1L, command );
 
   //     mIn.readFully( mBuffer, 0, 8 );
-  //     // if ( TDSetting.mPacketLog ) logPacket( 0L );
+  //     // if ( TDSetting.mPacketLog ) logPacket( 0L, mBuffer );
 
   //     if ( mBuffer[0] != (byte)( 0x38 ) ) { return null; }
   //     if ( mBuffer[1] != command[1] ) { return null; }
@@ -449,7 +386,7 @@ class DistoXProtocol extends TopoDroidProtocol
       // if ( TDSetting.mPacketLog ) logPacket3( 1L, mBuffer );
 
       mIn.readFully( mBuffer, 0, 8 );
-      // if ( TDSetting.mPacketLog ) logPacket( 0L );
+      // if ( TDSetting.mPacketLog ) logPacket( 0L, mBuffer );
       // checkDataType( mBuffer[0], data_type );
 
     } catch ( IOException e ) {
@@ -497,7 +434,7 @@ class DistoXProtocol extends TopoDroidProtocol
           // if ( TDSetting.mPacketLog ) logPacket3( 1L, mBuffer );
 
           mIn.readFully( mBuffer, 0, 8 );
-          // if ( TDSetting.mPacketLog ) logPacket( 0L );
+          // if ( TDSetting.mPacketLog ) logPacket( 0L, mBuffer );
           // checkDataType( mBuffer[0], data_type );
 
         } catch ( IOException e ) {
@@ -551,7 +488,7 @@ class DistoXProtocol extends TopoDroidProtocol
         if ( TDSetting.mPacketLog ) logPacket7( 1L, mBuffer );
 
         mIn.readFully( mBuffer, 0, 8 );
-        if ( TDSetting.mPacketLog ) logPacket( 0L );
+        if ( TDSetting.mPacketLog ) logPacket( 0L, mBuffer );
         // checkDataType( mBuffer[0], data_type );
 
         // TDLog.Log( TDLog.LOG_PROTO, "writeCalibration " + 
@@ -597,7 +534,7 @@ class DistoXProtocol extends TopoDroidProtocol
         // if ( TDSetting.mPacketLog ) logPacket3( 1L, mBuffer );
 
         mIn.readFully( mBuffer, 0, 8 );
-        // if ( TDSetting.mPacketLog ) logPacket( 0L );
+        // if ( TDSetting.mPacketLog ) logPacket( 0L, mBuffer );
         // checkDataType( mBuffer[0], data_type );
 
         if ( mBuffer[0] != 0x38 ) { return false; }
