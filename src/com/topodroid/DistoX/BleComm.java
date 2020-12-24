@@ -69,13 +69,17 @@ class BleComm extends TopoDroidComm
   private void setConnected( boolean connected ) 
   { 
     mBTConnected = connected;
-    Log.v("DistoX-BLEX", "set connected: " + connected );
-    // notify ???
     if ( ! connected ) {
       TDUtil.yieldDown( 500 );
-      Log.v("DistoX-BLEX", "try re-connect");
-      // connectDevice( TDInstance.deviceAddress(), mLister, DataType.SHOT );
     }
+    // if ( ! connected ) {
+    //   TDUtil.yieldDown( 500 );
+    //   Log.v("DistoX-BLEX", "try re-connect: does not do anything");
+    //   // connectDevice( TDInstance.deviceAddress(), mLister, DataType.SHOT );
+    // } else {
+    //   Log.v("DistoX-BLEX", "set connected: does not do anything " + connected );
+    //   // notify ???
+    // }
   }
 
   // Device has mAddress, mModel, mName, mNickname, mType
@@ -85,10 +89,10 @@ class BleComm extends TopoDroidComm
   {
     if ( mRemoteBtDevice == null ) {
       // TDToast.makeBad( R.string.ble_no_remote );
-      Log.v("DistoX-BLEX", "null remote device");
+      Log.v("DistoX-BLEX", "ERROR null remote device");
     } else {
       // check that device.mAddress.equals( mRemoteBtDevice.getAddress() 
-      Log.v("DistoX-BLEX", "comm connect remote addr " + mRemoteBtDevice.getAddress() + " " + device.mAddress );
+      // Log.v("DistoX-BLEX", "comm connect remote addr " + mRemoteBtDevice.getAddress() + " " + device.mAddress );
       BleProtocol protocol     = new BleProtocol( this, device, context );
       BleGattCallback callback = new BleGattCallback( protocol, data_type );
       mProtocol = protocol;
@@ -138,26 +142,26 @@ class BleComm extends TopoDroidComm
     {
       // super.onConnectionStateChange( gatt, status, state );
       if ( status == BluetoothGatt.GATT_FAILURE ) {
-        Log.v("DistoX-BLEX", "conn state changed: failure");
+        Log.v("DistoX-BLEX", "FAIL state changed");
         disconnectBleGatt();
         return;
       } 
       if ( status != BluetoothGatt.GATT_SUCCESS ) {
-        Log.v("DistoX-BLEX", "conn state changed: unsuccessful");
+        // Log.v("DistoX-BLEX", "state changed: unsuccessful"); // apparently this is ok
         // disconnectBleGatt();
         mApp.notifyStatus( DataDownloader.STATUS_WAIT );
         return;
       } 
       if ( state == BluetoothProfile.STATE_CONNECTED ) {
-        Log.v("DistoX-BLEX", "conn state changed: connected");
+        // Log.v("DistoX-BLEX", "conn state changed: connected");
         if ( ! gatt.discoverServices() ) {
-          Log.v("DistoX-BLEX", "conn failed service discovery");
+          Log.v("DistoX-BLEX", "FAIL service discovery");
           mApp.notifyStatus( DataDownloader.STATUS_OFF );
         } else {
           mApp.notifyStatus( DataDownloader.STATUS_ON );
         }
       } else if ( state == BluetoothProfile.STATE_DISCONNECTED ) {
-        Log.v("DistoX-BLEX", "conn state changed: disconnected");
+        // Log.v("DistoX-BLEX", "conn state changed: disconnected");
         disconnectBleGatt();
       }
     }
@@ -167,10 +171,10 @@ class BleComm extends TopoDroidComm
     {
       // super.onServicesDiscovered( gatt, status );
       if ( status != BluetoothGatt.GATT_SUCCESS ) {
-        Log.v("DistoX-BLEX", "comm service: unsuccessful");
+        Log.v("DistoX-BLEX", "FAIL service discover");
         return;
       }
-      Log.v("DistoX-BLEX", "comm service discovered ok" );
+      // Log.v("DistoX-BLEX", "comm service discovered ok" );
       BluetoothGattService srv = gatt.getService( BleConst.SAP5_SERVICE_UUID );
 
       mReadChrt  = srv.getCharacteristic( BleConst.SAP5_CHAR_READ_UUID );
@@ -188,7 +192,7 @@ class BleComm extends TopoDroidComm
 
       BluetoothGattDescriptor readDesc = mReadChrt.getDescriptor( BleConst.CCCD );
       if ( readDesc == null ) {
-        Log.v("DistoX-BLEX", "no R-desc CCCD ");
+        Log.v("DistoX-BLEX", "FAIL no R-desc CCCD ");
         return;
       }
       int readProp  = mReadChrt.getProperties();
@@ -202,11 +206,11 @@ class BleComm extends TopoDroidComm
         // Log.v("DistoX-BLEX", "R-prop NOTIFY ");
         readDesc.setValue( BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE );
       } else {
-        Log.v("DistoX-BLEX", "R-prop NO indicate/notify property ");
+        Log.v("DistoX-BLEX", "FAIL no indicate/notify R-property ");
         return; // FAILURE
       }
       if ( ! gatt.writeDescriptor( readDesc ) ) {
-        Log.v("DistoX-BLEX", "Error writing readDesc");
+        Log.v("DistoX-BLEX", "ERROR writing readDesc");
         return; // FAILURE
       }
 
@@ -216,16 +220,16 @@ class BleComm extends TopoDroidComm
     public void onDescriptorWrite( BluetoothGatt gatt, BluetoothGattDescriptor desc, int status ) 
     {
       if ( status != BluetoothGatt.GATT_SUCCESS ) {
-        Log.v("DistoX-BLEX", "on descriptor write: unsuccessful");
+        Log.v("DistoX-BLEX", "FAIL on descriptor write");
         return;
       }
       if ( desc.getCharacteristic() == mReadChrt ) { // everything is ok
         // tell the protocol it is connected
         setConnected( true );
       } else if ( desc.getCharacteristic() == mWriteChrt ) { // should not happen
-        Log.v("DistoX-BLEX", "write-descriptor write: ?? should not happen");
+        Log.v("DistoX-BLEX", "ERROR write-descriptor write: ?? should not happen");
       } else {
-        Log.v("DistoX-BLEX", "unknown descriptor write");
+        Log.v("DistoX-BLEX", "ERROR unknown descriptor write");
         super.onDescriptorWrite( gatt, desc, status );
       }
     }
@@ -234,16 +238,16 @@ class BleComm extends TopoDroidComm
     public void onCharacteristicWrite( BluetoothGatt gatt, BluetoothGattCharacteristic chrt, int status )
     {
       if ( status != BluetoothGatt.GATT_SUCCESS ) {
-        Log.v("DistoX-BLEX", "on char write: unsuccessful");
+        Log.v("DistoX-BLEX", "FAIL on char write");
         return;
       }
       if ( chrt != mWriteChrt ) {
-        Log.v("DistoX-BLEX", "on char read: not my write chrt");
+        Log.v("DistoX-BLEX", "ERROR not my write chrt");
         super.onCharacteristicWrite( gatt, chrt, status );
         return;
       }
       if ( ! mWriteInitialized ) {
-        Log.v("DistoX-BLEX", "comm chrt write: not initialized" );
+        Log.v("DistoX-BLEX", "ERROR write-uninitialized chrt" );
         return;
       }
       Log.v("DistoX-BLEX", "comm on char write ok");
@@ -258,16 +262,16 @@ class BleComm extends TopoDroidComm
     public void onCharacteristicRead( BluetoothGatt gatt, BluetoothGattCharacteristic chrt, int status )
     {
       if ( status != BluetoothGatt.GATT_SUCCESS ) {
-        Log.v("DistoX-BLEX", "on char read: unsuccessful");
+        Log.v("DistoX-BLEX", "FAIL on char read");
         return;
       }
       if ( chrt != mReadChrt ) {
-        Log.v("DistoX-BLEX", "on char read: not my read chrt");
+        Log.v("DistoX-BLEX", "ERROR not my read chrt");
         super.onCharacteristicRead( gatt, chrt, status );
         return;
       }
       if ( ! mReadInitialized ) {
-        Log.v("DistoX-BLEX", "comm chrt read: not initialized");
+        Log.v("DistoX-BLEX", "ERROR read-uninitialized chrt");
         return;
       }
       Log.v("DistoX-BLEX", "comm on char read ok");
@@ -282,7 +286,7 @@ class BleComm extends TopoDroidComm
     public void onCharacteristicChanged( BluetoothGatt gatt, BluetoothGattCharacteristic chrt )
     {
       if ( chrt == mReadChrt ) {
-        Log.v("DistoX-BLEX", "read chrt changed");
+        // Log.v("DistoX-BLEX", "read chrt changed");
         int res = mProto.handleNotify( chrt, true ); // true = READ
         if ( res == TopoDroidProtocol.DISTOX_PACKET_DATA ) {
           handleRegularPacket( res, mLister, DataType.SHOT );
@@ -312,7 +316,7 @@ class BleComm extends TopoDroidComm
 
   boolean connectDevice( String address, Handler /* ILister */ lister, int data_type )
   {
-    Log.v("DistoX-BLEX", "comm connect device (continuous data download)");
+    // Log.v("DistoX-BLEX", "comm connect device (continuous data download)");
     mLister = lister;
     mConnectionMode = 1;
     mNrPacketsRead = 0;
@@ -322,7 +326,7 @@ class BleComm extends TopoDroidComm
 
   void disconnectDevice() 
   {
-    Log.v("DistoX-BLEX", "comm disconnect device");
+    // Log.v("DistoX-BLEX", "comm disconnect device");
     disconnectBleGatt();
   }
 

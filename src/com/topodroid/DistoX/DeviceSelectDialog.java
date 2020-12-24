@@ -90,7 +90,9 @@ class DeviceSelectDialog extends MyDialog
       // String model = device.mName;
       // String name  = device.mName;
       // String nick  = device.mNickname;
-      array_adapter.add( device.toString() );
+      if ( device.mType != Device.DISTO_SAP5 ) {
+        array_adapter.add( device.toString() );
+      }
     }
     mList.setAdapter( array_adapter );
   }

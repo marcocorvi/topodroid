@@ -42,7 +42,7 @@ class BleProtocol extends TopoDroidProtocol
     super( device, context );
     mComm   = comm;
     mWriteBuffer = new ArrayList< byte[] >();
-    Log.v("DistoX-BLEX", "new BLE proto");
+    // Log.v("DistoX-BLEX", "new BLE proto");
   }
 
   public void addToWriteBuffer( byte[] bytes )
@@ -78,7 +78,7 @@ class BleProtocol extends TopoDroidProtocol
   public int handleRead( BluetoothGattCharacteristic chrt )
   {
     byte[] bytes = chrt.getValue();
-    Log.v("DistoX-BLEX", "proto read bytes " + bytes.length );
+    // Log.v("DistoX-BLEX", "proto read bytes " + bytes.length );
     byte[] buffer = new byte[8];
     System.arraycopy( bytes, 0, buffer, 0, 8 );
     return handlePacket( buffer );
@@ -88,7 +88,7 @@ class BleProtocol extends TopoDroidProtocol
   // @param read   whether the chrt is read or write
   public int handleNotify( BluetoothGattCharacteristic chrt, boolean read )
   {
-    Log.v("DistoX-BLEX", "proto notify: read " + read );
+    // Log.v("DistoX-BLEX", "proto notify: read " + read );
     if ( read ) {
       return handleRead( chrt );
     } 

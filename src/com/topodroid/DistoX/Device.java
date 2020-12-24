@@ -45,10 +45,10 @@ class Device
   final static int DISTO_X310 = 2;
   // final static int DISTO_X000 = 3; // FIXME VirtualDistoX
   final static int DISTO_BLEX = 4;
-  final static int DISTO_SAP5 = 5; // SAP5 is not bluetooth LE
+  final static int DISTO_SAP5 = 5; // SAP5 uses bluetooth LE "notify"
 
   final static String[] typeString = { "Unknown", "A3", "X310", "X000", "BLEX", "SAP5" };
-  final static private String[] typeSimpleString = { "Unknown", "DistoX", "DistoX2", "DistoX0", "Ble5", "Sap5" };
+  final static private String[] typeSimpleString = { "Unknown", "DistoX", "DistoX2", "DistoX0", "BleX", "Sap5" };
   
   static String typeToString( int type )
   {

@@ -166,9 +166,9 @@ class TopoDroidProtocol
         buffer[3], buffer[4], buffer[5], buffer[6], buffer[7] ) );
     }
     if ( TDSetting.mPacketLog ) logPacket( 0L, buffer );
-    Log.v( "DistoX-BLEX", "handle packet type " + type + " " + 
-        String.format("%02x %02x %02x %02x %02x %02x %02x %02x", buffer[0], buffer[1], buffer[2],
-        buffer[3], buffer[4], buffer[5], buffer[6], buffer[7] ) );
+    // Log.v( "DistoX-BLEX", "handle packet type " + type + " " + 
+    //     String.format("%02x %02x %02x %02x %02x %02x %02x %02x", buffer[0], buffer[1], buffer[2],
+    //     buffer[3], buffer[4], buffer[5], buffer[6], buffer[7] ) );
 
     // int high, low;
     switch ( type ) {
@@ -201,7 +201,7 @@ class TopoDroidProtocol
             // Log.v("DistoX-BLEX", "did not handle packet BLE");
             break;
           case Device.DISTO_SAP5: // FIXME BLEX
-            Log.v("DistoX-BLE5", "handle packet SAP");
+            // Log.v("DistoX-BLE5", "handle packet SAP");
             mDistance = d / 1000.0;
             break;
           default:

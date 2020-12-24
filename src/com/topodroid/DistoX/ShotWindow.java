@@ -1363,15 +1363,20 @@ public class ShotWindow extends Activity
     } else {
       mDataAdapter.clearSearch();
       if ( ! diving && b == mButton1[ BTN_DOWNLOAD ] ) { // MULTI-DISTOX or SECOND-DISTOX
-        if ( ! mDataDownloader.isDownloading() && TDSetting.isConnectionModeMulti() && TopoDroidApp.mDData.getDevices().size() > 1 ) {
-          if ( TDSetting.mSecondDistoX && TDInstance.deviceB != null ) {
-            mApp.switchSecondDevice();
-            setTheTitle();
-            // TDToast.make( String.format( getResources().getString(R.string.using), TDInstance.deviceNickname() ) );
+        if ( TDInstance.deviceType() != Device.DISTO_SAP5 ) {
+          if ( ! mDataDownloader.isDownloading() && TDSetting.isConnectionModeMulti() && TopoDroidApp.mDData.getDevices().size() > 1 ) {
+            if ( TDSetting.mSecondDistoX && TDInstance.deviceB != null ) {
+              mApp.switchSecondDevice();
+              setTheTitle();
+              // TDToast.make( String.format( getResources().getString(R.string.using), TDInstance.deviceNickname() ) );
+            } else {
+              (new DeviceSelectDialog( this, mApp, mDataDownloader, this )).show();
+            }
           } else {
-            (new DeviceSelectDialog( this, mApp, mDataDownloader, this )).show();
+            mDataDownloader.toggleDownload();
+            mDataDownloader.doDataDownload( DataType.SHOT );
           }
-        } else {
+        } else { // TODO something cleverer than falling back to short click
           mDataDownloader.toggleDownload();
           mDataDownloader.doDataDownload( DataType.SHOT );
         }

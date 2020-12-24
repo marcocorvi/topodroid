@@ -49,13 +49,10 @@ class DrawingDxf
   static final private float STATION_SCALE =  6.0f / DrawingUtil.SCALE_FIX; // scale of station names
   static final private float LABEL_SCALE   =  8.0f / DrawingUtil.SCALE_FIX; // scale of label text
   static final private float AXIS_SCALE    = 10.0f / DrawingUtil.SCALE_FIX; // scale of text on the axes
-  static final private String zero = "0.0";
-  static final private String one  = "1.0";
   static final private String two  = "2.0";
   static final private String half = "0.5";
   static final private String two_n_half = "2.5";
   // static final String ten = "10";
-  static final private String empty = TDString.EMPTY;
   static final private String style_dejavu  = "DejaVu";
   static final private String standard      = "Standard";
   static final private String lt_continuous = "Continuous";
@@ -136,6 +133,18 @@ class DrawingDxf
   {
     out.write( "  " + code + EOL + name + EOL );
   }
+  static private void writeStringEmpty(  BufferedWriter out, int code ) throws IOException
+  {
+    out.write( "  " + code + EOL + TDString.EMPTY + EOL );
+  }
+  static private void writeStringOne(  BufferedWriter out, int code ) throws IOException
+  {
+    out.write( "  " + code + EOL + "1.0" + EOL );
+  }
+  static private void writeStringZero(  BufferedWriter out, int code ) throws IOException
+  {
+    out.write( "  " + code + EOL + "0.0" + EOL );
+  }
 
   static void printString(  PrintWriter pw, int code, String name )
   {
@@ -183,11 +192,11 @@ class DrawingDxf
        base+10, EOL, x, EOL, base+20, EOL, y, EOL, base+30, EOL, z, EOL );
   }
 
-  static void printIntXYZ( PrintWriter pw, int x, int y, int z, int base )
-  {
-    pw.printf(Locale.US, "  %d%s%d%s  %d%s%d%s  %d%s%d%s",
-       base+10, EOL, x, EOL, base+20, EOL, y, EOL, base+30, EOL, z, EOL );
-  }
+  // static void printIntXYZ( PrintWriter pw, int x, int y, int z, int base )
+  // {
+  //   pw.printf(Locale.US, "  %d%s%d%s  %d%s%d%s  %d%s%d%s",
+  //      base+10, EOL, x, EOL, base+20, EOL, y, EOL, base+30, EOL, z, EOL );
+  // }
 
   // -----------------------------------------
 
@@ -575,7 +584,7 @@ class DrawingDxf
             writeXY( out, (int)xmax, -(int)ymin, 1 ); // upper-right corner
             writeXY( out, (int)(xmin+xmax)/2, -(int)(ymin+ymax)/2, 2 ); // center point
             writeXY( out, 286, 148, 2 );
-            writeXY( out, 0, 0, 3 );     // snap base-point
+            writeXY( out, 0, 0, 3 );   // snap base-point
             writeXY( out, 1, 1, 4 );   // snap-spacing
             writeXY( out, 1, 1, 5 );   // grid-spacing
             writeXYZ( out, 0, 0, 1, 6 ); // view direction
@@ -610,8 +619,8 @@ class DrawingDxf
             //writeInt( out, 61, 5 );
             //writeInt( out, 292, 1 );
             //writeInt( out, 282, 1 );
-            //writeString( out, 141, zero );
-            //writeString( out, 142, zero );
+            //writeStringZero( out, 141 );
+            //writeStringZero( out, 142 );
             //writeInt( out, 63, 250 );
             //writeString( out, 361, "6D" );
           }
@@ -626,26 +635,26 @@ class DrawingDxf
             handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbTextStyleTableRecord" );
             writeString( out, 2, standard );  // name
             writeInt( out, 70, 0 );           // flag (1: shape, 4:vert text, ... )
-            writeString( out, 40, zero );     // text-height: not fixed
-            writeString( out, 41, one  );
-            writeString( out, 50, zero  );
+            writeStringZero( out, 40 );     // text-height: not fixed
+            writeStringOne(  out, 41 );
+            writeStringZero( out, 50 );
             writeInt( out, 71, 0 );
             writeString( out, 42, two_n_half  );
             writeString( out, 3, "txt" );  // fonts
-            writeString( out, 4, empty );
+            writeStringEmpty( out, 4 );
 
             writeString( out, 0, "STYLE" );
             handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbTextStyleTableRecord" );
 	    p_style = handle;
             writeString( out, 2, style_dejavu );  // name
             writeInt( out, 70, 0 );               // flag
-            writeString( out, 40, zero );
-            writeString( out, 41, one  );
-            writeString( out, 50, zero  );
+            writeStringZero( out, 40 );
+            writeStringOne(  out, 41 );
+            writeStringZero( out, 50 );
             writeInt( out, 71, 0 );
             writeString( out, 42, two_n_half  );
             writeString( out, 3, "Sans Serif.ttf" );  // fonts
-            writeString( out, 4, empty );
+            writeStringEmpty( out, 4 );
             writeString( out, 1001, "ACAD" );
             writeString( out, 1000, "DejaVu Sans" );
             writeInt( out, 1071, 0 );
@@ -670,7 +679,7 @@ class DrawingDxf
             writeString( out, 3, "Std by block" );
             writeInt( out, 72, 65 );
             writeInt( out, 73, 0 );
-            writeString( out, 40, zero );
+            writeStringZero( out, 40 );
 
 	    writeString( out, 0, "LTYPE" );
             handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
@@ -680,7 +689,7 @@ class DrawingDxf
             writeString( out, 3, "Std by layer" );
             writeInt( out, 72, 65 );
             writeInt( out, 73, 0 );
-            writeString( out, 40, zero );
+            writeStringZero( out, 40 );
 
             writeString( out, 0, "LTYPE" );
             handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
@@ -690,7 +699,7 @@ class DrawingDxf
             writeString( out, 3, "Solid line ------" );
             writeInt( out, 72, 65 );
             writeInt( out, 73, 0 );
-            writeString( out, 40, zero );
+            writeStringZero( out, 40 );
 
             if ( ! mVersion16 ) {
 	      writeString( out, 0, "LTYPE" );
@@ -715,13 +724,13 @@ class DrawingDxf
               writeString( out, 3, "Ticks ____|____|____|____" ); // description
               writeInt( out, 72, 65 );
               writeInt( out, 73, 3 );        // number of elements
-              writeString( out, 40, one ); // pattern length
+              writeStringOne( out, 40 ); // pattern length
               writeString( out, 49, half );  writeInt( out, 74, 0 ); // segment
               writeString( out, 49, "-0.2" ); writeInt( out, 74, 2 ); // embedded text
 	        writeInt( out, 75, 0 );   // SHAPE number must be 0
 	        writeInt( out, 340, p_style );  // STYLE pointer FIXME
 	        writeString( out, 46, "0.1" );  // scale
-	        writeString( out, 50, zero );   // rotation
+	        writeStringZero( out, 50 );   // rotation
 	        writeString( out, 44, "-0.1" ); // X offset
 	        writeString( out, 45, "-0.1" ); // Y offset
 	        writeString( out, 9, "|" ); // text
@@ -742,9 +751,9 @@ class DrawingDxf
 	    //   writeInt( out, 75, 1 );   // SHAPE number
 	    //   writeInt( out, 340, 1 );  // STYLE pointer
 	    //   writeString( out, 46, "0.1" );  // scale
-	    //   writeString( out, 50, zero );   // rotation
+	    //   writeStringZero( out, 50 );   // rotation
 	    //   writeString( out, 44, "-0.1" ); // X offset
-	    //   writeString( out, 45, zero );   // Y offset
+	    //   writeStringZero( out, 45 );   // Y offset
             // writeString( out, 49, "-0.1" ); writeInt( out, 74, 0 );
             // writeString( out, 49, "1.0" );  writeInt( out, 74, 0 );
 
@@ -756,7 +765,7 @@ class DrawingDxf
             writeString( out, 3, "Solid line" );
             writeInt( out, 72, 65 );
             writeInt( out, 73, 0 );
-            writeString( out, 40, zero );
+            writeStringZero( out, 40 );
           }
         }
         writeEndTable( out );
@@ -852,20 +861,20 @@ class DrawingDxf
 	    writeHex( out, 105, handle ); 
             writeAcDb( out, -1, AcDbSymbolTR, "AcDbDimStyleTableRecord" );
             writeString( out, 2, standard );
-            writeString( out, 3, empty );
-            writeString( out, 4, empty );
-            writeString( out, 5, empty );
-            writeString( out, 6, empty );
-            writeString( out, 7, empty );
-            writeString( out, 40, one );
+            writeStringEmpty( out, 3 );
+            writeStringEmpty( out, 4 );
+            writeStringEmpty( out, 5 );
+            writeStringEmpty( out, 6 );
+            writeStringEmpty( out, 7 );
+            writeStringOne( out, 40 );
             writeString( out, 41, two_n_half );
             writeString( out, 42, "0.625" );
             writeString( out, 43, "3.75" );
             writeString( out, 44, "1.25" );
-            writeString( out, 45, zero );
-            writeString( out, 46, zero );
-            writeString( out, 47, zero );
-            writeString( out, 48, zero );
+            writeStringZero( out, 45 );
+            writeStringZero( out, 46 );
+            writeStringZero( out, 47 );
+            writeStringZero( out, 48 );
             writeInt( out, 70, 0 );
             writeInt( out, 71, 0 );
             writeInt( out, 72, 0 );
@@ -878,11 +887,11 @@ class DrawingDxf
             writeInt( out, 78, 8 );
             writeString( out, 140, two_n_half );
             writeString( out, 141, two_n_half );
-            writeString( out, 142, zero );
+            writeStringZero( out, 142 );
             writeString( out, 143, "0.04" );
-            writeString( out, 144, one );
-            writeString( out, 145, zero );
-            writeString( out, 146, one );
+            writeStringOne( out, 144 );
+            writeStringZero( out, 145 );
+            writeStringOne( out, 146 );
             writeString( out, 147, "0.625" );
             writeInt( out, 170, 0 );
             writeInt( out, 171, 3 );
@@ -1424,7 +1433,7 @@ class DrawingDxf
       handle = inc(handle); printAcDb( pwx, handle, "AcDbMlineStyle" );
       printString( pwx, 2, "STANDARD" );
       printInt( pwx, 70, 0 );
-      printString( pwx, 3, empty );
+      printStringEmpty( pwx, 3 );
       printInt( pwx, 62, 256 );
       printInt( pwx, 51, 90 );
       printInt( pwx, 52, 90 );
@@ -1450,10 +1459,10 @@ class DrawingDxf
 
       printString( pwx, 0, "LAYOUT" );
       handle = inc(handle); printAcDb( pwx, handle, "AcDbPlotSetting" );
-      printString( pwx, 1, empty );
+      printStringEmpty( pwx, 1 );
       printString( pwx, 2, "" );
-      printString( pwx, 4, empty );
-      printString( pwx, 6, empty );
+      printStringEmpty( pwx, 4 );
+      printStringEmpty( pwx, 6 );
       printZero( pwx, 40, 50 );
       printInt( pwx, 140, 0 );
       printInt( pwx, 141, 0 );
@@ -1463,7 +1472,7 @@ class DrawingDxf
       printInt( pwx, 72, 0 );
       printInt( pwx, 73, 0 );
       printInt( pwx, 74, 5 );
-      printString( pwx, 7, empty );
+      printStringEmpty( pwx, 7 );
       printInt( pwx, 75, 16 );
       printInt( pwx, 147, 1 );
       printInt( pwx, 148, 0 );
@@ -1486,10 +1495,10 @@ class DrawingDxf
   
       printString( pwx, 0, "LAYOUT" );
       handle = inc(handle); printAcDb( pwx, handle, "AcDbPlotSetting" );
-      printString( pwx, 1, empty );
+      printStringEmpty( pwx, 1 );
       printString( pwx, 2, "" );
-      printString( pwx, 4, empty );
-      printString( pwx, 6, empty );
+      printStringEmpty( pwx, 4 );
+      printStringEmpty( pwx, 6 );
       printZero( pwx, 40, 50 );
       printInt( pwx, 140, 0 );
       printInt( pwx, 141, 0 );
@@ -1499,7 +1508,7 @@ class DrawingDxf
       printInt( pwx, 72, 0 );
       printInt( pwx, 73, 0 );
       printInt( pwx, 74, 0 );
-      printString( pwx, 7, empty );
+      printStringEmpty( pwx, 7 );
       printInt( pwx, 75, 0 );
       printInt( pwx, 147, 1 );
       printInt( pwx, 148, 0 );
@@ -1515,10 +1524,10 @@ class DrawingDxf
 
       printString( pwx, 0, "LAYOUT" );
       handle = inc(handle); printAcDb( pwx, handle, "AcDbPlotSetting" );
-      printString( pwx, 1, empty );
+      printStringEmpty( pwx, 1 );
       printString( pwx, 2, "" );
-      printString( pwx, 4, empty );
-      printString( pwx, 6, empty );
+      printStringEmpty( pwx, 4 );
+      printStringEmpty( pwx, 6 );
       printZero( pwx, 40, 50 );
       printInt( pwx, 140, 0 );
       printInt( pwx, 141, 0 );
@@ -1528,7 +1537,7 @@ class DrawingDxf
       printInt( pwx, 72, 0 );
       printInt( pwx, 73, 0 );
       printInt( pwx, 74, 5 );
-      printString( pwx, 7, empty );
+      printStringEmpty( pwx, 7 );
       printInt( pwx, 75, 16 );
       printInt( pwx, 147, 1 );
       printInt( pwx, 148, 0 );
