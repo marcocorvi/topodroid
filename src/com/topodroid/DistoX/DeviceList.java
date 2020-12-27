@@ -13,6 +13,8 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDTag;
+import com.topodroid.dev.Device;
+import com.topodroid.dev.DeviceUtil;
 
 import java.util.Set;
 
@@ -169,7 +171,7 @@ public class DeviceList extends Activity
               String name = Device.modelToName( model );
               // Log.v( "DistoX", "scan receiver <" + name + "> " + device_addr ); 
               TopoDroidApp.mDData.insertDevice( device_addr, model, name );
-              mArrayAdapter.add( Device.typeString[ Device.stringToType(model) ] + " " + name + " " + device_addr );
+              mArrayAdapter.add( Device.modelToString(model) + " " + name + " " + device_addr );
             }
           }
         // } else if ( DeviceUtil.ACTION_ACL_CONNECTED.equals( action ) ) {

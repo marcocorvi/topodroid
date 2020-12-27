@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.ui.MyDialog;
 import com.topodroid.packetX.MemoryOctet;
+import com.topodroid.dev.DeviceA3Details;
 
 import java.util.ArrayList;
 import java.util.Locale;

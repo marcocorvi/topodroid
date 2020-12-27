@@ -3,16 +3,20 @@
  * @author marco corvi
  * @date nov 2011
  *
- * @brief TopoDroid-DistoX BlueTooth communication 
+ * @brief TopoDroid DistoX bluetooth communication 
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.DistoX;
+package com.topodroid.dev;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.DistoX.DataDownloader;
+import com.topodroid.DistoX.TDUtil;
+import com.topodroid.DistoX.TDInstance;
+import com.topodroid.DistoX.TopoDroidApp;
 
 import android.util.Log;
 
@@ -51,7 +55,7 @@ import android.content.BroadcastReceiver;
 
 // import android.database.DataSetObserver;
 
-class DistoXComm extends TopoDroidComm
+public class DistoXComm extends TopoDroidComm
 {
   protected BluetoothDevice mBTDevice;
   protected BluetoothSocket mBTSocket;
@@ -490,7 +494,7 @@ class DistoXComm extends TopoDroidComm
   //   return false;
   // }
 
-  void disconnectRemoteDevice( )
+  public void disconnectRemoteDevice( )
   {
     // TDLog.Log( TDLog.LOG_COMM, "disconnect remote device ");
     super.disconnectRemoteDevice();
@@ -517,14 +521,14 @@ class DistoXComm extends TopoDroidComm
    * @param type       device type
    * @return true if success
    */
-  boolean toggleCalibMode( String address, int type ) { return false; }
+  public boolean toggleCalibMode( String address, int type ) { return false; }
 
   /** write the calibration coeff to the remote DistoX device
    * @param address   remote device address
    * @param coeff     coeffs byte array 
    * @return true on success
    */
-  boolean writeCoeff( String address, byte[] coeff )
+  public boolean writeCoeff( String address, byte[] coeff )
   {
     if ( ! isCommThreadNull() ) return false;
     boolean ret = false;
@@ -546,7 +550,7 @@ class DistoXComm extends TopoDroidComm
    * 
    * called only by CalibReadTask
    */
-  boolean readCoeff( String address, byte[] coeff )
+  public boolean readCoeff( String address, byte[] coeff )
   {
     if ( ! isCommThreadNull() ) return false;
     boolean ret = false;
@@ -569,7 +573,7 @@ class DistoXComm extends TopoDroidComm
 
   // low-level memory read
   // called by TopoDroidApp.readMemory
-  byte[] readMemory( String address, int addr )
+  public byte[] readMemory( String address, int addr )
   {
     byte[] ret = null;
     if ( connectSocketAny( address ) ) {
@@ -590,7 +594,7 @@ class DistoXComm extends TopoDroidComm
    * @param data_type  packet datatype
    * @return true if successful
    */
-  boolean connectDevice( String address, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
+  public boolean connectDevice( String address, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
   {
     if ( mCommThread != null ) {
       // TDLog.Log( TDLog.LOG_COMM, "DistoX Comm connect: already connected");
@@ -604,7 +608,7 @@ class DistoXComm extends TopoDroidComm
     return true;
   }
 
-  void disconnectDevice()
+  public void disconnectDevice()
   {
     // TDLog.Log( TDLog.LOG_COMM, "disconnect device");
     cancelCommThread();
@@ -620,7 +624,7 @@ class DistoXComm extends TopoDroidComm
    * @param data_type  packet datatype
    * @return number of packets (-1 failure)
    */
-  int downloadData( String address, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
+  public int downloadData( String address, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
   {
     if ( ! isCommThreadNull() ) {
       TDLog.Error( "download data: RFcomm thread not null");

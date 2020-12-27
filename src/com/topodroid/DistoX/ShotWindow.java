@@ -27,6 +27,9 @@ import com.topodroid.help.HelpDialog;
 import com.topodroid.help.UserManualActivity;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPrefCat;
+import com.topodroid.dev.Device;
+import com.topodroid.dev.DeviceUtil;
+import com.topodroid.dev.DataType;
 
 import android.util.Log;
 
@@ -356,7 +359,7 @@ public class ShotWindow extends Activity
         updateDisplay( );
       }
       if ( toast ) {
-        if ( TDInstance.deviceType() == Device.DISTO_X310 ) nr /= 2;
+        if ( TDInstance.isDeviceX310() ) nr /= 2;
         TDToast.make( getResources().getQuantityString(R.plurals.read_data, nr, nr ) );
         // TDToast.make( " read_data: " + nr );
       }
@@ -1329,8 +1332,8 @@ public class ShotWindow extends Activity
   {
     if ( ! mDataDownloader.isDownloading() ) {
       if ( TDLevel.overAdvanced
-             && TDInstance.deviceType() == Device.DISTO_X310 
-	     && TDSetting.mConnectionMode != TDSetting.CONN_MODE_MULTI
+             && TDInstance.isDeviceX310() 
+	     && ! TDSetting.isConnectionModeMulti()
 	  ) {
         CutNPaste.showPopupBT( mActivity, this, mApp, b, false );
       } else {
@@ -1363,7 +1366,7 @@ public class ShotWindow extends Activity
     } else {
       mDataAdapter.clearSearch();
       if ( ! diving && b == mButton1[ BTN_DOWNLOAD ] ) { // MULTI-DISTOX or SECOND-DISTOX
-        if ( TDInstance.deviceType() != Device.DISTO_SAP5 ) {
+        if ( TDInstance.isDeviceDistoX() ) {
           if ( ! mDataDownloader.isDownloading() && TDSetting.isConnectionModeMulti() && TopoDroidApp.mDData.getDevices().size() > 1 ) {
             if ( TDSetting.mSecondDistoX && TDInstance.deviceB != null ) {
               mApp.switchSecondDevice();

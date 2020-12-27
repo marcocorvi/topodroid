@@ -1,9 +1,9 @@
-/* @file BleComm.java
+/* @file SapComm.java
  *
  * @author marco corvi
  * @date nov 2011
  *
- * @brief TopoDroid BLE devices client communication REQUIRES API-18
+ * @brief TopoDroid SAP5 communication REQUIRES API-18
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -11,10 +11,13 @@
  *
  * WARNING TO BE FINISHED
  */
-package com.topodroid.DistoX;
+package com.topodroid.dev;
 
 import com.topodroid.utils.TDLog;
 // import com.topodroid.prefs.TDSetting;
+import com.topodroid.DistoX.TDInstance;
+import com.topodroid.DistoX.DataDownloader;
+import com.topodroid.DistoX.TopoDroidApp;
 
 import android.util.Log;
 
@@ -33,7 +36,7 @@ import android.bluetooth.BluetoothGattCallback;
 import android.bluetooth.BluetoothGattCharacteristic;
 
 // -----------------------------------------------------------------------------
-class BleComm extends TopoDroidComm
+public class SapComm extends TopoDroidComm
 {
   // -----------------------------------------------
   private boolean mWriteInitialized = false;
@@ -48,17 +51,17 @@ class BleComm extends TopoDroidComm
   private BluetoothDevice mRemoteBtDevice;
 
 
-  BleComm( TopoDroidApp app, String address, BluetoothDevice bt_device ) 
+  public SapComm( TopoDroidApp app, String address, BluetoothDevice bt_device ) 
   {
     super( app );
     mRemoteAddress = address;
     mRemoteBtDevice  = bt_device;
-    // Log.v("DistoX-BLEX", "new comm " + address );
+    // Log.v("DistoX-BLE-C", "new comm " + address );
   }
 
   // void setRemoteDevice( BluetoothDevice device ) 
   // { 
-  //   Log.v("DistoX-BLEX", "comm set remote " + device.getAddress() );
+  //   Log.v("DistoX-BLE-C", "comm set remote " + device.getAddress() );
   //   mRemoteBtDevice = device;
   // }
 
@@ -69,15 +72,12 @@ class BleComm extends TopoDroidComm
   private void setConnected( boolean connected ) 
   { 
     mBTConnected = connected;
-    if ( ! connected ) {
-      TDUtil.yieldDown( 500 );
-    }
     // if ( ! connected ) {
     //   TDUtil.yieldDown( 500 );
-    //   Log.v("DistoX-BLEX", "try re-connect: does not do anything");
+    //   Log.v("DistoX-BLE-C", "try re-connect: does not do anything");
     //   // connectDevice( TDInstance.deviceAddress(), mLister, DataType.SHOT );
     // } else {
-    //   Log.v("DistoX-BLEX", "set connected: does not do anything " + connected );
+    //   Log.v("DistoX-BLE-C", "set connected: does not do anything " + connected );
     //   // notify ???
     // }
   }
@@ -85,16 +85,16 @@ class BleComm extends TopoDroidComm
   // Device has mAddress, mModel, mName, mNickname, mType
   // the only thing that coincide with the remote_device is the address
   //
-  private void connectBleDevice( Device device, Context context, int data_type ) // FIXME BLEX_DATA_TYPE
+  private void connectSapDevice( Device device, Context context, int data_type ) // FIXME BLEX_DATA_TYPE
   {
     if ( mRemoteBtDevice == null ) {
       // TDToast.makeBad( R.string.ble_no_remote );
-      Log.v("DistoX-BLEX", "ERROR null remote device");
+      Log.v("DistoX-BLE-C", "ERROR null remote device");
     } else {
       // check that device.mAddress.equals( mRemoteBtDevice.getAddress() 
-      // Log.v("DistoX-BLEX", "comm connect remote addr " + mRemoteBtDevice.getAddress() + " " + device.mAddress );
-      BleProtocol protocol     = new BleProtocol( this, device, context );
-      BleGattCallback callback = new BleGattCallback( protocol, data_type );
+      // Log.v("DistoX-BLE-C", "comm connect remote addr " + mRemoteBtDevice.getAddress() + " " + device.mAddress );
+      SapProtocol protocol     = new SapProtocol( this, device, context );
+      SapGattCallback callback = new SapGattCallback( protocol, data_type );
       mProtocol = protocol;
       if ( Build.VERSION.SDK_INT < 23 ) {
         // mGatt = mRemoteBtDevice.connectGatt( context, false, callback ); // true: autoconnect as soon as the device becomes available
@@ -107,9 +107,9 @@ class BleComm extends TopoDroidComm
 
   private boolean mDisconnecting = false;
 
-  private void disconnectBleGatt()
+  private void disconnectSapGatt()
   {
-    // Log.v("DistoX-BLEX", "disconnect Gatt");
+    // Log.v("DistoX-BLE-C", "disconnect Gatt");
     if ( mDisconnecting ) return;
     mDisconnecting = true;
     mConnectionMode = -1;
@@ -126,12 +126,12 @@ class BleComm extends TopoDroidComm
   }
 
   // -------------------------------------------------------------
-  private class BleGattCallback extends BluetoothGattCallback
+  private class SapGattCallback extends BluetoothGattCallback
   {
-    BleProtocol mProto;
+    SapProtocol mProto;
     int mDataType;
 
-    BleGattCallback( BleProtocol proto, int data_type ) 
+    SapGattCallback( SapProtocol proto, int data_type ) 
     { 
       mProto = proto;
       mDataType = data_type;
@@ -142,27 +142,27 @@ class BleComm extends TopoDroidComm
     {
       // super.onConnectionStateChange( gatt, status, state );
       if ( status == BluetoothGatt.GATT_FAILURE ) {
-        Log.v("DistoX-BLEX", "FAIL state changed");
-        disconnectBleGatt();
+        // Log.v("DistoX-BLE-C", "FAIL state changed");
+        disconnectSapGatt();
         return;
       } 
       if ( status != BluetoothGatt.GATT_SUCCESS ) {
-        // Log.v("DistoX-BLEX", "state changed: unsuccessful"); // apparently this is ok
-        // disconnectBleGatt();
+        // Log.v("DistoX-BLE-C", "state changed: unsuccessful"); // apparently this is ok
+        // disconnectSapGatt();
         mApp.notifyStatus( DataDownloader.STATUS_WAIT );
         return;
       } 
       if ( state == BluetoothProfile.STATE_CONNECTED ) {
-        // Log.v("DistoX-BLEX", "conn state changed: connected");
+        // Log.v("DistoX-BLE-C", "conn state changed: connected");
         if ( ! gatt.discoverServices() ) {
-          Log.v("DistoX-BLEX", "FAIL service discovery");
+          // Log.v("DistoX-BLE-C", "FAIL service discovery");
           mApp.notifyStatus( DataDownloader.STATUS_OFF );
         } else {
           mApp.notifyStatus( DataDownloader.STATUS_ON );
         }
       } else if ( state == BluetoothProfile.STATE_DISCONNECTED ) {
-        // Log.v("DistoX-BLEX", "conn state changed: disconnected");
-        disconnectBleGatt();
+        // Log.v("DistoX-BLE-C", "conn state changed: disconnected");
+        disconnectSapGatt();
       }
     }
 
@@ -171,46 +171,46 @@ class BleComm extends TopoDroidComm
     {
       // super.onServicesDiscovered( gatt, status );
       if ( status != BluetoothGatt.GATT_SUCCESS ) {
-        Log.v("DistoX-BLEX", "FAIL service discover");
+        Log.v("DistoX-BLE-C", "FAIL service discover");
         return;
       }
-      // Log.v("DistoX-BLEX", "comm service discovered ok" );
-      BluetoothGattService srv = gatt.getService( BleConst.SAP5_SERVICE_UUID );
+      // Log.v("DistoX-BLE-C", "comm service discovered ok" );
+      BluetoothGattService srv = gatt.getService( SapConst.SAP5_SERVICE_UUID );
 
-      mReadChrt  = srv.getCharacteristic( BleConst.SAP5_CHAR_READ_UUID );
-      mWriteChrt = srv.getCharacteristic( BleConst.SAP5_CHAR_WRITE_UUID );
+      mReadChrt  = srv.getCharacteristic( SapConst.SAP5_CHAR_READ_UUID );
+      mWriteChrt = srv.getCharacteristic( SapConst.SAP5_CHAR_WRITE_UUID );
 
       int writeProp = mWriteChrt.getProperties();
       boolean write_has_write = ( writeProp & BluetoothGattCharacteristic.PROPERTY_WRITE ) != 0;
       boolean write_has_write_no_response = ( writeProp & BluetoothGattCharacteristic.PROPERTY_WRITE_NO_RESPONSE ) != 0;
-      // Log.v("DistoX-BLEX", "W has write " + write_has_write );
+      // Log.v("DistoX-BLE-C", "W has write " + write_has_write );
 
       mWriteChrt.setWriteType( BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT );
       mWriteInitialized = gatt.setCharacteristicNotification( mWriteChrt, true );
 
       mReadInitialized = gatt.setCharacteristicNotification( mReadChrt, true );
 
-      BluetoothGattDescriptor readDesc = mReadChrt.getDescriptor( BleConst.CCCD );
+      BluetoothGattDescriptor readDesc = mReadChrt.getDescriptor( SapConst.CCCD );
       if ( readDesc == null ) {
-        Log.v("DistoX-BLEX", "FAIL no R-desc CCCD ");
-        return;
+        Log.v("DistoX-BLE-C", "FAIL no R-desc CCCD ");
+        return; // FAILURE
       }
       int readProp  = mReadChrt.getProperties();
       boolean read_has_write  = ( readProp  & BluetoothGattCharacteristic.PROPERTY_WRITE) != 0;
-      // Log.v("DistoX-BLEX", "R has write " + read_has_write );
+      // Log.v("DistoX-BLE-C", "R has write " + read_has_write );
 
       if ( ( readProp & BluetoothGattCharacteristic.PROPERTY_INDICATE ) != 0 ) {
-        // Log.v("DistoX-BLEX", "R-prop INDICATE ");
+        // Log.v("DistoX-BLE-C", "R-prop INDICATE ");
         readDesc.setValue( BluetoothGattDescriptor.ENABLE_INDICATION_VALUE );
       } else if ( ( readProp & BluetoothGattCharacteristic.PROPERTY_NOTIFY ) != 0 ) {
-        // Log.v("DistoX-BLEX", "R-prop NOTIFY ");
+        // Log.v("DistoX-BLE-C", "R-prop NOTIFY ");
         readDesc.setValue( BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE );
       } else {
-        Log.v("DistoX-BLEX", "FAIL no indicate/notify R-property ");
+        Log.v("DistoX-BLE-C", "FAIL no indicate/notify R-property ");
         return; // FAILURE
       }
       if ( ! gatt.writeDescriptor( readDesc ) ) {
-        Log.v("DistoX-BLEX", "ERROR writing readDesc");
+        Log.v("DistoX-BLE-C", "ERROR writing readDesc");
         return; // FAILURE
       }
 
@@ -220,16 +220,16 @@ class BleComm extends TopoDroidComm
     public void onDescriptorWrite( BluetoothGatt gatt, BluetoothGattDescriptor desc, int status ) 
     {
       if ( status != BluetoothGatt.GATT_SUCCESS ) {
-        Log.v("DistoX-BLEX", "FAIL on descriptor write");
+        Log.v("DistoX-BLE-C", "FAIL on descriptor write");
         return;
       }
       if ( desc.getCharacteristic() == mReadChrt ) { // everything is ok
         // tell the protocol it is connected
         setConnected( true );
       } else if ( desc.getCharacteristic() == mWriteChrt ) { // should not happen
-        Log.v("DistoX-BLEX", "ERROR write-descriptor write: ?? should not happen");
+        Log.v("DistoX-BLE-C", "ERROR write-descriptor write: ?? should not happen");
       } else {
-        Log.v("DistoX-BLEX", "ERROR unknown descriptor write");
+        Log.v("DistoX-BLE-C", "ERROR unknown descriptor write");
         super.onDescriptorWrite( gatt, desc, status );
       }
     }
@@ -238,19 +238,19 @@ class BleComm extends TopoDroidComm
     public void onCharacteristicWrite( BluetoothGatt gatt, BluetoothGattCharacteristic chrt, int status )
     {
       if ( status != BluetoothGatt.GATT_SUCCESS ) {
-        Log.v("DistoX-BLEX", "FAIL on char write");
+        Log.v("DistoX-BLE-C", "FAIL on char write");
         return;
       }
       if ( chrt != mWriteChrt ) {
-        Log.v("DistoX-BLEX", "ERROR not my write chrt");
+        // Log.v("DistoX-BLE-C", "ERROR not my write chrt");
         super.onCharacteristicWrite( gatt, chrt, status );
         return;
       }
       if ( ! mWriteInitialized ) {
-        Log.v("DistoX-BLEX", "ERROR write-uninitialized chrt" );
+        Log.v("DistoX-BLE-C", "ERROR write-uninitialized chrt" );
         return;
       }
-      Log.v("DistoX-BLEX", "comm on char write ok");
+      Log.v("DistoX-BLE-C", "comm on char write ok");
       if ( mProto.handleWrite( chrt ) > 0 ) {
         mGatt.writeCharacteristic( chrt );
       } else {
@@ -262,19 +262,19 @@ class BleComm extends TopoDroidComm
     public void onCharacteristicRead( BluetoothGatt gatt, BluetoothGattCharacteristic chrt, int status )
     {
       if ( status != BluetoothGatt.GATT_SUCCESS ) {
-        Log.v("DistoX-BLEX", "FAIL on char read");
+        Log.v("DistoX-BLE-C", "FAIL on char read");
         return;
       }
       if ( chrt != mReadChrt ) {
-        Log.v("DistoX-BLEX", "ERROR not my read chrt");
+        // Log.v("DistoX-BLE-C", "ERROR not my read chrt");
         super.onCharacteristicRead( gatt, chrt, status );
         return;
       }
       if ( ! mReadInitialized ) {
-        Log.v("DistoX-BLEX", "ERROR read-uninitialized chrt");
+        Log.v("DistoX-BLE-C", "ERROR read-uninitialized chrt");
         return;
       }
-      Log.v("DistoX-BLEX", "comm on char read ok");
+      Log.v("DistoX-BLE-C", "comm on char read ok");
       int res = mProto.handleRead( chrt );
       if ( res == TopoDroidProtocol.DISTOX_PACKET_DATA ) {
         ++ mNrPacketsRead;
@@ -286,14 +286,15 @@ class BleComm extends TopoDroidComm
     public void onCharacteristicChanged( BluetoothGatt gatt, BluetoothGattCharacteristic chrt )
     {
       if ( chrt == mReadChrt ) {
-        // Log.v("DistoX-BLEX", "read chrt changed");
+        // Log.v("DistoX-BLE-C", "read chrt changed");
         int res = mProto.handleNotify( chrt, true ); // true = READ
         if ( res == TopoDroidProtocol.DISTOX_PACKET_DATA ) {
+          // mProto.handleWrite( mWriteChrt ); // ACKNOWLEDGMENT
           handleRegularPacket( res, mLister, DataType.SHOT );
         }
-        // readBlePacket();
+        // readSapPacket();
       } else if ( chrt == mWriteChrt ) {
-        Log.v("DistoX-BLEX", "write chrt changed");
+        Log.v("DistoX-BLE-C", "write chrt changed");
         mProto.handleNotify( chrt, false ); // false = WRITE
       } else {
         super.onCharacteristicChanged( gatt, chrt );
@@ -301,11 +302,11 @@ class BleComm extends TopoDroidComm
     }
   }
 
-  private boolean readBlePacket( )
+  private boolean readSapPacket( )
   { 
-    Log.v("DistoX-BLEX", "comm reading packet");
-    // BluetoothGattService srv = mGatt.getService( BleConst.SAP5_SERVICE_UUID );
-    // BluetoothGattCharacteristic chrt = srv.getCharacteristic( BleConst.SAP5_CHAR_READ_UUID );
+    Log.v("DistoX-BLE-C", "comm reading packet");
+    // BluetoothGattService srv = mGatt.getService( SapConst.SAP5_SERVICE_UUID );
+    // BluetoothGattCharacteristic chrt = srv.getCharacteristic( SapConst.SAP5_CHAR_READ_UUID );
     // return mGatt.readCharacteristic( chrt );
     return mGatt.readCharacteristic( mReadChrt );
   }
@@ -314,20 +315,20 @@ class BleComm extends TopoDroidComm
   // CONTINUOUS DATA DOWNLOAD
   private int mConnectionMode = -1;
 
-  boolean connectDevice( String address, Handler /* ILister */ lister, int data_type )
+  public boolean connectDevice( String address, Handler /* ILister */ lister, int data_type )
   {
-    // Log.v("DistoX-BLEX", "comm connect device (continuous data download)");
+    // Log.v("DistoX-BLE-C", "comm connect device (continuous data download)");
     mLister = lister;
     mConnectionMode = 1;
     mNrPacketsRead = 0;
-    connectBleDevice( TDInstance.deviceA, mApp, data_type );
+    connectSapDevice( TDInstance.deviceA, mApp, data_type );
     return true;
   }
 
-  void disconnectDevice() 
+  public void disconnectDevice() 
   {
-    // Log.v("DistoX-BLEX", "comm disconnect device");
-    disconnectBleGatt();
+    // Log.v("DistoX-BLE-C", "comm disconnect device");
+    disconnectSapGatt();
   }
 
   // -------------------------------------------------------------------------------------
@@ -340,13 +341,13 @@ class BleComm extends TopoDroidComm
    * @param data_type  packet datatype
    * @return always 0
    */
-  int downloadData( String address, Handler /* ILister */ lister, int data_type )
+  public int downloadData( String address, Handler /* ILister */ lister, int data_type )
   {
-    Log.v("DistoX-BLEX", "comm batch data downlaod");
+    Log.v("DistoX-BLE-C", "comm batch data downlaod");
     mConnectionMode = 0;
     mLister = lister;
     mNrPacketsRead = 0;
-    connectBleDevice( TDInstance.deviceA, mApp, data_type );
+    connectSapDevice( TDInstance.deviceA, mApp, data_type );
     // start a thread that keeps track of read packets
     // when read done stop it and return
     return 0;
@@ -357,7 +358,7 @@ class BleComm extends TopoDroidComm
   //   if ( mCommThread != null ) {
   //     TDLog.Error( "start Comm Thread already running");
   //   }
-  //   // Log.v("DistoX-BLEZ", "comm start comm thread");
+  //   // Log.v("DistoX-BLE-C", "comm start comm thread");
   //   mCommThread = new CommThread( TopoDroidComm.COMM_GATT, mProtocol, to_read, lister, data_type );
   //   mCommThread.start();
   //   return true;

@@ -418,7 +418,7 @@ public class TDPath
       : s.trim().replaceAll("\\s+", "_").replaceAll("/", "-").replaceAll("\\*", "+").replaceAll("\\\\", "");
   }
 
-  static void checkPath( String filename )
+  public static void checkPath( String filename )
   {
     if ( filename == null ) return;
     checkPath( new File( filename ) ); // DistoX-SAF

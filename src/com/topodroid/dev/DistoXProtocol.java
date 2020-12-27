@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date nov 2011
  *
- * @brief TopoDroid TopoDroid-DistoX communication protocol
+ * @brief TopoDroid TopoDroid DistoX communication protocol
  *
  * a DistoXProtocol is created by the DistoXComm to handle data
  * --------------------------------------------------------
@@ -11,11 +11,13 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.DistoX;
+package com.topodroid.dev;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.packetX.MemoryOctet;
+import com.topodroid.DistoX.TDPath;
+import com.topodroid.DistoX.TDUtil;
 
 import android.util.Log;
 
@@ -115,12 +117,12 @@ class DistoXProtocol extends TopoDroidProtocol
    * @param b    byte
    * @param data_type expected data type
    */
-  private void checkDataType( byte b, int data_type )
-  {
-    // if ( DataType.of( b ) != data_type ) { // CHECK_DATA_TYPE 
-    //   Log.v( "DistoX-DATA_TYPE", "read-available: " + String.format(" %02x", b ) + " data_type " + data_type + "/" + DataType.of( b ) );
-    // }
-  }
+  // private void checkDataType( byte b, int data_type )
+  // {
+  //   // if ( DataType.of( b ) != data_type ) { // CHECK_DATA_TYPE 
+  //   //   Log.v( "DistoX-DATA_TYPE", "read-available: " + String.format(" %02x", b ) + " data_type " + data_type + "/" + DataType.of( b ) );
+  //   // }
+  // }
 
   /** try to read 8 bytes - return the number of read bytes
    * @param timeout    joining timeout
@@ -143,7 +145,7 @@ class DistoXProtocol extends TopoDroidProtocol
           {
             count[0] = mIn.read( mBuffer, dataRead[0], toRead[0] );
             // if ( TDSetting.mPacketLog ) LogPacket( 0L );
-            checkDataType( mBuffer[0], data_type );
+            // checkDataType( mBuffer[0], data_type );
 
             toRead[0]   -= count[0];
             dataRead[0] += count[0];
@@ -234,7 +236,7 @@ class DistoXProtocol extends TopoDroidProtocol
         if ( no_timeout || ! TDSetting.mZ6Workaround ) {
           mIn.readFully( mBuffer, 0, 8 );
           if ( TDSetting.mPacketLog ) logPacket( 0L, mBuffer );
-          checkDataType( mBuffer[0], data_type );
+          // checkDataType( mBuffer[0], data_type );
         }
 
         // DistoX packets have a sequence bit that flips between 0 and 1
@@ -244,12 +246,10 @@ class DistoXProtocol extends TopoDroidProtocol
         mSeqBit = seq;
         // if ( (mBuffer[0] & 0x0f) != 0 ) // ack every packet
         { 
-          checkDataType( mBuffer[0], data_type );
+          // checkDataType( mBuffer[0], data_type );
           mAcknowledge[0] = (byte)(( mBuffer[0] & 0x80 ) | 0x55);
-          if ( TDLog.LOG_PROTO ) {
-            TDLog.DoLog( "read packet byte " + String.format(" %02x", mBuffer[0] ) + " ... writing ack" );
-          }
           mOut.write( mAcknowledge, 0, 1 );
+          if ( TDLog.LOG_PROTO ) TDLog.DoLog( "read packet byte " + String.format(" %02x", mBuffer[0] ) + " ... writing ack" );
           if ( TDSetting.mPacketLog ) logPacket1( 1L, mAcknowledge );
         }
         if ( ok ) return handlePacket( mBuffer );
@@ -322,8 +322,7 @@ class DistoXProtocol extends TopoDroidProtocol
 
       // DEBUG
       if ( TDLog.LOG_PROTO ) {
-        TDLog.DoLog(
-          "Proto read-to-read Head-Tail " + 
+        TDLog.DoLog( "Proto read-to-read Head-Tail " + 
           String.format("%02x%02x-%02x%02x", mBuffer[4], mBuffer[3], mBuffer[6], mBuffer[5] )
           + " " + head + " - " + tail + " = " + ret );
       }

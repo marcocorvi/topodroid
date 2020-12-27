@@ -519,6 +519,10 @@ public class DrawingPointLinePath extends DrawingPath
     if ( mSize == 0 ) return;
     mPath = new Path();
     LinePoint lp  = mFirst;
+    if ( lp == null ) { // should not happen but it did 20201227
+      mSize = 0;
+      return;
+    }
     left = right  = lp.x;
     top  = bottom = lp.y;
     mPath.moveTo( lp.x, lp.y );

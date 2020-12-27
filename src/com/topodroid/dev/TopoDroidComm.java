@@ -3,18 +3,23 @@
  * @author marco corvi
  * @date nov 2011
  *
- * @brief TopoDroid-DistoX BlueTooth communication 
+ * @brief TopoDroid bluetooth communication 
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.DistoX;
+package com.topodroid.dev;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.utils.TDColor;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.DistoX.TDUtil;
+import com.topodroid.DistoX.TDInstance;
+import com.topodroid.DistoX.TopoDroidApp;
+import com.topodroid.DistoX.Lister;
+import com.topodroid.DistoX.DBlock;
 
 import android.util.Log;
 
@@ -31,7 +36,7 @@ import android.os.Message;
 // import android.content.IntentFilter;
 // import android.content.BroadcastReceiver;
 
-class TopoDroidComm
+public class TopoDroidComm
 {
   static final int COMM_RFCOMM = 0;
   static final int COMM_GATT   = 1;
@@ -108,7 +113,7 @@ class TopoDroidComm
       mHasG  = false;
 
       // TDLog.Log( TDLog.LOG_COMM, "RF comm thread running ... to_read " + toRead );
-      // Log.v( "DistoX-BLEZ", "RF comm thread ... to_read " + toRead );
+      // Log.v( "DistoX-BLE-TC", "RF comm thread ... to_read " + toRead );
       if ( mType == COMM_RFCOMM ) {
         while ( doWork && mNrPacketsRead /* .get() */ != toRead ) {
           // TDLog.Log( TDLog.LOG_COMM, "RF comm loop: read " + getNrReadPackets() + " to-read " + toRead );
@@ -136,7 +141,7 @@ class TopoDroidComm
           }
         }
       } else { // if ( mType == COMM_GATT ) 
-        // Log.v("DistoX-BLEZ", "TD comm -> proto read_pckets");
+        // Log.v("DistoX-BLE-TC", "TD comm -> proto read_pckets");
         mProtocol.readPacket( true, mDataType ); // start reading a packet
       }
       // TDLog.Log( TDLog.LOG_COMM, "RF comm thread run() exiting");
@@ -150,7 +155,7 @@ class TopoDroidComm
   // @param res    packet type (as returned by handlePacket)
   // @param lister data lister
   // @param data_type unused
-  void handleRegularPacket( int res, Handler lister, int data_type )
+  protected void handleRegularPacket( int res, Handler lister, int data_type )
   {
     if ( res == TopoDroidProtocol.DISTOX_PACKET_DATA ) {
       // mNrPacketsRead.incrementAndGet(); // FIXME_ATOMIC_INT
@@ -162,7 +167,7 @@ class TopoDroidComm
       // extend is unset to start
       // long extend = TDAzimuth.computeLegExtend( b ); // DBlock.EXTEND_UNSET; FIXME_EXTEND 
       // TDLog.Log( TDLog.LOG_COMM, "Comm D PACKET " + d + " " + b + " " + c );
-      Log.v( "DistoX-BLE5", "Comm D PACKET " + d + " " + b + " " + c );
+      Log.v( "DistoX-BLE-TC", "Comm D PACKET " + d + " " + b + " " + c );
       // NOTE type=0 shot is DistoX-type
       long status = ( d > TDSetting.mMaxShotLength )? TDStatus.OVERSHOOT : TDStatus.NORMAL;
       mLastShotId = TopoDroidApp.mData.insertDistoXShot( TDInstance.sid, -1L, d, b, c, r, DBlock.EXTEND_IGNORE, status, TDInstance.deviceAddress() );
@@ -273,12 +278,12 @@ class TopoDroidComm
     // TDLog.Log( TDLog.LOG_COMM, "TopoDroid Comm cstr");
   }
 
-  void resume()
+  public void resume()
   {
     // if ( mCommThread != null ) { mCommThread.resume(); }
   }
 
-  void suspend()
+  public void suspend()
   {
     // if ( mCommThread != null ) { mCommThread.suspend(); }
   }
@@ -318,14 +323,14 @@ class TopoDroidComm
     return false;
   }
 
-  void disconnectRemoteDevice( )
+  public void disconnectRemoteDevice( )
   {
     // TDLog.Log( TDLog.LOG_COMM, "disconnect remote device ");
     cancelCommThread();
     closeProtocol();
   }
 
-  protected boolean isCommThreadNull( ) { return ( mCommThread == null ); }
+  public boolean isCommThreadNull( ) { return ( mCommThread == null ); }
 
   protected boolean sendCommand( int cmd )
   {
@@ -342,23 +347,23 @@ class TopoDroidComm
     return ret;
   }
 
-  boolean toggleCalibMode( String address, int type ) { return false; }
+  public boolean toggleCalibMode( String address, int type ) { return false; }
 
-  boolean writeCoeff( String address, byte[] coeff ) { return false; }
+  public boolean writeCoeff( String address, byte[] coeff ) { return false; }
 
-  boolean readCoeff( String address, byte[] coeff ) { return false; }
+  public boolean readCoeff( String address, byte[] coeff ) { return false; }
 
-  byte[] readMemory( String address, int addr ) { return null; }
+  public byte[] readMemory( String address, int addr ) { return null; }
 
   // ------------------------------------------------------------------------------------
   // CONTINUOUS DATA DOWNLOAD
 
-  boolean connectDevice( String address, Handler /* ILister */ lister, int data_type )
+  public boolean connectDevice( String address, Handler /* ILister */ lister, int data_type )
   {
     return false;
    }
 
-  void disconnectDevice() { }
+  public void disconnectDevice() { }
 
   // -------------------------------------------------------------------------------------
   // ON-DEMAND DATA DOWNLOAD
@@ -368,10 +373,10 @@ class TopoDroidComm
    * @param data_type packet datatype, either shot or calib (or all)
    * @return ialways -1: number of packet received - must be overridden
    */
-  int downloadData( String address, Handler /* ILister */ lister, int data_type )
+  public int downloadData( String address, Handler /* ILister */ lister, int data_type )
   {
     // TDLog.Error("generic download data always fails");
-    Log.v("DistoX-BLEZ", "generic download data always fails");
+    Log.v("DistoX-BLE-TC", "generic download data always fails");
     return -1;
   }
 

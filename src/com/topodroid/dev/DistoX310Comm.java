@@ -3,48 +3,37 @@
  * @author marco corvi
  * @date nov 2011
  *
- * @brief TopoDroid-DistoX BlueTooth communication 
+ * @brief TopoDroid  DistoX2 (X310) bluetooth communication 
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.DistoX;
+package com.topodroid.dev;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.packetX.MemoryOctet;
+import com.topodroid.DistoX.TDInstance;
+import com.topodroid.DistoX.TDUtil;
+import com.topodroid.DistoX.TopoDroidApp;
 
-// import android.util.Log;
+import android.util.Log;
 
 // import java.nio.ByteBuffer;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.util.List;
-// import java.util.ArrayList;
-// import java.util.concurrent.atomic.AtomicInteger;
 
-// import android.os.Bundle;
 import android.os.Handler;
-// import android.os.Message;
 
-class DistoX310Comm extends DistoXComm
+public class DistoX310Comm extends DistoXComm
 {
 
-  DistoX310Comm( TopoDroidApp app )
+  public DistoX310Comm( TopoDroidApp app )
   {
     super( app );
   }
-
-  // public void resume()
-  // {
-  //   // if ( mCommThread != null ) { mCommThread.resume(); }
-  // }
-
-  // public void suspend()
-  // {
-  //   // if ( mCommThread != null ) { mCommThread.suspend(); }
-  // }
 
   /** must be overridden to call create proper protocol
    * @param in      input
@@ -65,7 +54,7 @@ class DistoX310Comm extends DistoXComm
    * @param lister    callback handler
    * @param data_type packet datatype 
    */
-  void setX310Laser( String address, int what, int to_read, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
+  public void setX310Laser( String address, int what, int to_read, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
   {
     if ( connectSocket( address, data_type ) ) {
       switch ( what ) {
@@ -122,7 +111,7 @@ class DistoX310Comm extends DistoXComm
    * @return true if success
    */
   @Override
-  boolean toggleCalibMode( String address, int type )
+  public boolean toggleCalibMode( String address, int type )
   {
     if ( ! isCommThreadNull() ) {
       TDLog.Error( "toggle Calib Mode address " + address + " not null RFcomm thread" );
@@ -130,25 +119,27 @@ class DistoX310Comm extends DistoXComm
     }
     boolean ret = false;
     if ( connectSocketAny( address ) ) {
-      byte[] result = null;
-      byte[] fw = mProtocol.readMemory( DeviceX310Details.mFirmwareAddress ); // read firmware
-      if ( fw == null || fw.length < 2 ) {
-        TDLog.Error( "toggle Calib Mode X310 failed read E000" );
-      } else {
-        // Log.v("DistoX", "firmware " + fw[0] + " " + fw[1] );
-        if ( fw[1] >= 0 && fw[1] < DeviceX310Details.mStatusAddress.length ) {
-          result = mProtocol.readMemory( DeviceX310Details.mStatusAddress[ fw[1] ] );
-          if ( result == null ) { 
-            TDLog.Error( "toggle Calib Mode X310 failed read status word" ); // C044
-            mCalibMode = ! mCalibMode;
-            ret = setCalibMode( mCalibMode );
-          } else {
-            ret = setCalibMode( DeviceX310Details.isNotCalibMode( result[0] ) );
-          }
+      if ( mProtocol instanceof DistoX310Protocol ) {
+        byte[] result = null;
+        byte[] fw = mProtocol.readMemory( DeviceX310Details.mFirmwareAddress ); // read firmware
+        if ( fw == null || fw.length < 2 ) {
+          TDLog.Error( "toggle Calib Mode X310 failed read E000" );
         } else {
-          mCalibMode = ! mCalibMode;
-          // TDLog.Log( TDLog.LOG_COMM, "toggle Calib Mode X310 setX310CalibMode " + mCalibMode );
-          ret = setCalibMode( mCalibMode );
+          // Log.v("DistoX", "firmware " + fw[0] + " " + fw[1] );
+          if ( fw[1] >= 0 && fw[1] < DeviceX310Details.mStatusAddress.length ) {
+            result = mProtocol.readMemory( DeviceX310Details.mStatusAddress[ fw[1] ] );
+            if ( result == null ) { 
+              TDLog.Error( "toggle Calib Mode X310 failed read status word" ); // C044
+              mCalibMode = ! mCalibMode;
+              ret = setCalibMode( mCalibMode );
+            } else {
+              ret = setCalibMode( DeviceX310Details.isNotCalibMode( result[0] ) );
+            }
+          } else {
+            mCalibMode = ! mCalibMode;
+            // TDLog.Log( TDLog.LOG_COMM, "toggle Calib Mode X310 setX310CalibMode " + mCalibMode );
+            ret = setCalibMode( mCalibMode );
+          }
         }
       }
     }
@@ -168,19 +159,17 @@ class DistoX310Comm extends DistoXComm
   //   return n;
   // }
 
-  int readX310Memory( String address, int from, int to, List< MemoryOctet > memory )
+  public int readX310Memory( String address, int from, int to, List< MemoryOctet > memory )
   {
     if ( ! isCommThreadNull() ) return -1;
     int n = 0;
     if ( connectSocketAny( address ) ) {
-      try {
-        DistoX310Protocol protocol = (DistoX310Protocol)mProtocol;
-        n = protocol.readX310Memory( from, to, memory );
+      if ( mProtocol instanceof DistoX310Protocol ) {
+        n = ((DistoX310Protocol)mProtocol).readX310Memory( from, to, memory );
         // FIXME ASYNC new CommandThread( mProtocol, READ_X310_MEMORY, memory ) Note...
-      } catch ( ClassCastException e ) {
-        TDLog.Error("read A3 memory: class cast exception");
+      } else { 
+        n= -1;
       }
-      return -1;
     }
     destroySocket( );
     return n;
@@ -189,44 +178,29 @@ class DistoX310Comm extends DistoXComm
   // ====================================================================================
   // FIRMWARE
 
-  // int readFirmwareHardware( String address )
-  // {
-  //   int ret = 0;
-  //   if ( connectSocketAny( address ) ) {
-  //     ret = mProtocol.readFirmwareAddress( );
-  //   }
-  //   destroySocket( );
-  //   return ret;
-  // }
-    
-  int dumpFirmware( String address, String filepath )
+  public int dumpFirmware( String address, String filepath )
   {
     int ret = 0;
     if ( connectSocketAny( address ) ) {
-      try { 
-        DistoX310Protocol protocol = (DistoX310Protocol)mProtocol;
-        ret = protocol.dumpFirmware( filepath );
-      } catch ( ClassCastException e ) {
-        TDLog.Error("read A3 memory: class cast exception");
+      if ( mProtocol instanceof DistoX310Protocol ) {
+        ret = ((DistoX310Protocol)mProtocol).dumpFirmware( filepath );
+      } else {
+        ret = -1;
       }
-      return -1;
     }
     destroySocket( );
     return ret;
   }
 
-  int uploadFirmware( String address, String filepath )
+  public int uploadFirmware( String address, String filepath )
   {
     int ret = 0;
     if ( connectSocketAny( address ) ) {
-      try { 
-        // TDLog.LogFile( "Firmware upload: socket is ready " );
-        DistoX310Protocol protocol = (DistoX310Protocol)mProtocol;
-        ret = protocol.uploadFirmware( filepath );
-      } catch ( ClassCastException e ) {
-        TDLog.Error("read A3 memory: class cast exception");
+      if ( mProtocol instanceof DistoX310Protocol ) {
+        ret = ((DistoX310Protocol)mProtocol).uploadFirmware( filepath );
+      } else {
+        ret = -1;
       }
-      return -1;
     }
     destroySocket( );
     return ret;

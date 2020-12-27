@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date nov 2011
  *
- * @brief TopoDroid TopoDroid-DistoX communication protocol
+ * @brief TopoDroid TopoDroid DistoX2 (X310) communication protocol
  *
  * a DistoX310Protocol is created by the DistoXComm to handle data for DistoX2 X310
  * --------------------------------------------------------
@@ -11,11 +11,12 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.DistoX;
+package com.topodroid.dev;
 
 import com.topodroid.utils.TDLog;
 // import com.topodroid.prefs.TDSetting;
 import com.topodroid.packetX.MemoryOctet;
+import com.topodroid.DistoX.TDPath;
 
 import android.util.Log;
 
@@ -124,7 +125,7 @@ class DistoX310Protocol extends DistoXProtocol
   // @Override
   int readX310Memory( int start, int end, List< MemoryOctet > data )
   {
-    // Log.v( "DistoX", "start " + start + " end " + end );
+    // Log.v( "DistoX-PROTO", "memory start " + start + " end " + end );
     int cnt = 0;
     while ( start < end ) {
       MemoryOctet result = new MemoryOctet( start );
@@ -133,19 +134,18 @@ class DistoX310Protocol extends DistoXProtocol
       int k = 0;
       int addr = index2addrX310( start );
       int endaddr = addr + BYTE_PER_DATA;
-      // Log.v( "DistoX", start + " addr " + addr );
+      // Log.v( "DistoX", start + " addr " + addr + " end " + endaddr );
       for ( ; addr < endaddr && k < 8; addr += 4, k+=4 ) {
         mBuffer[0] = (byte)( 0x38 );
         mBuffer[1] = (byte)( addr & 0xff );
         mBuffer[2] = (byte)( (addr>>8) & 0xff );
-        // TODO write and read
         try {
           mOut.write( mBuffer, 0, 3 );
           // if ( TDSetting.mPacketLog ) logPacket3( 1L, mBuffer );
 
           mIn.readFully( mBuffer, 0, 8 );
           // if ( TDSetting.mPacketLog ) logPacket( 0L );
-          // Log.v( "DistoX-DATA_TYPE", "read-memory[3]: " + String.format(" %02x", mBuffer[0] ) );
+          // Log.v( "DistoX-DATA_TYPE", "read-memory[1]: " + String.format(" %02x", mBuffer[0] ) );
         } catch ( IOException e ) {
           TDLog.Error( "readmemory() IO failed" );
           break;
@@ -167,14 +167,13 @@ class DistoX310Protocol extends DistoXProtocol
         mBuffer[0] = (byte)( 0x38 );
         mBuffer[1] = (byte)( addr & 0xff );
         mBuffer[2] = (byte)( (addr>>8) & 0xff );
-        // TODO write and read
         try {
           mOut.write( mBuffer, 0, 3 );
           // if ( TDSetting.mPacketLog ) logPacket3( 1L, mBuffer );
 
           mIn.readFully( mBuffer, 0, 8 );
           // if ( TDSetting.mPacketLog ) logPacket( 0L );
-          // Log.v( "DistoX-DATA_TYPE", "read-memory[3]: " + String.format(" %02x", mBuffer[0] ) );
+          // Log.v( "DistoX-DATA_TYPE", "read-memory[2]: " + String.format(" %02x", mBuffer[0] ) );
         } catch ( IOException e ) {
           TDLog.Error( "readmemory() IO failed" );
           break;
@@ -205,7 +204,7 @@ class DistoX310Protocol extends DistoXProtocol
 
           mIn.readFully( mBuffer, 0, 8 );
           // if ( TDSetting.mPacketLog ) logPacket( 0L );
-          // Log.v( "DistoX-DATA_TYPE", "read-memory[4]: " + String.format(" %02x", mBuffer[0] ) );
+          // Log.v( "DistoX-DATA_TYPE", "read-memory[3]: " + String.format(" %02x", mBuffer[0] ) );
         } catch ( IOException e ) {
           TDLog.Error( "readmemory() IO failed" );
           break;
@@ -215,7 +214,7 @@ class DistoX310Protocol extends DistoXProtocol
         data.add( result );
         // if ( mBuffer[4] == (byte)( 0xff ) ) result2.data[0] |= (byte)( 0x80 ); 
         // data.add( result2 );
-        // Log.v( TopoDroidApp.TAG, "memory " + result.toString() + " " + mBuffer[3] );
+        // Log.v( "DistoX-PROTO", "memory " + result.toString() + " " + mBuffer[3] );
         ++ cnt;
       } else {
         break;

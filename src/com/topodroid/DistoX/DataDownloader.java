@@ -14,6 +14,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.dev.DeviceUtil;
 
 import android.util.Log;
 
@@ -22,12 +23,12 @@ import android.util.Log;
 import android.content.Context;
 
 
-class DataDownloader
+public class DataDownloader
 {
   // int mStatus = 0; // 0 disconnected, 1 connected, 2 connecting
-  final static int STATUS_OFF  = 0;
-  final static int STATUS_ON   = 1;
-  final static int STATUS_WAIT = 2;
+  public final static int STATUS_OFF  = 0;
+  public final static int STATUS_ON   = 1;
+  public final static int STATUS_WAIT = 2;
 
   private int mConnected = STATUS_OFF;  // whetehr it is "connected": 0 unconnected, 1 connecting, 2 connected
   private boolean mDownload  = false;  // whether it is "downloading"
@@ -35,15 +36,17 @@ class DataDownloader
   boolean isConnected() { return mConnected == STATUS_ON; }
   boolean isDownloading() { return mDownload; }
   boolean needReconnect() { return mDownload && mConnected != STATUS_ON; }
-  void setConnected( int connected ) { mConnected = connected; }
+  public void setConnected( int connected ) { mConnected = connected; }
   void setDownload( boolean download ) { mDownload = download; }
-  void updateConnected( boolean on_off )
+
+  public void updateConnected( boolean on_off )
   {
     if ( on_off ) {
       mConnected = STATUS_ON;
     } else {
       if ( mDownload ) {
-        mConnected = ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_CONTINUOUS && TDSetting.mAutoReconnect )? STATUS_WAIT : STATUS_OFF;
+        // mConnected = ( TDSetting.isConnectionModeContinuous() && TDSetting.mAutoReconnect )? STATUS_WAIT : STATUS_OFF;
+        mConnected = STATUS_WAIT; // auto-reconnect is always true
       } else {
         mConnected = STATUS_OFF;
       }
@@ -83,7 +86,7 @@ class DataDownloader
 
   void doDataDownload( int data_type )
   {
-    // Log.v("DistoX-BLEZ", "do data download " + mDownload + " connected " + mConnected );
+    Log.v("DistoX-BLE-DD", "do data download " + mDownload + " connected " + mConnected );
     if ( mDownload ) {
       startDownloadData( data_type );
     } else {
@@ -96,8 +99,8 @@ class DataDownloader
   private void startDownloadData( int data_type )
   {
     // TDLog.Log( TDLog.LOG_COMM, "**** download data. status: " + mStatus );
-    if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_CONTINUOUS || TDInstance.deviceType() == Device.DISTO_SAP5 ) {
-      // Log.v("DistoXDOWN", "start download continuous" );
+    if ( TDInstance.isContinuousMode() ) {
+      Log.v("DistoX-BLE-DD", "start download continuous. autoreconnect " + TDSetting.mAutoReconnect );
       if ( TDSetting.mAutoReconnect ) {
         TDInstance.secondLastShotId = TopoDroidApp.lastShotId( ); // FIXME-LATEST
         new ReconnectTask( this, data_type ).execute();
@@ -105,9 +108,9 @@ class DataDownloader
         notifyConnectionStatus( STATUS_WAIT );
         tryConnect( data_type );
       }
-    } else if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_BATCH ) {
+    } else if ( TDSetting.isConnectionModeBatch() ) {
       tryDownloadData( data_type );
-    } else if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI ) {
+    } else if ( TDSetting.isConnectionModeMulti() ) {
       tryDownloadData( data_type );
     }
   }
@@ -126,7 +129,7 @@ class DataDownloader
   // @param data_type ...
   void tryConnect( int data_type )
   {
-    Log.v("DistoX-BLEA", "try Connect() download " + mDownload + " connected " + mConnected );
+    Log.v("DistoX-BLE-DD", "try Connect() download " + mDownload + " connected " + mConnected );
     if ( TDInstance.deviceA != null && DeviceUtil.isAdapterEnabled() ) {
       mApp.disconnectComm();
       if ( ! mDownload ) {
@@ -143,8 +146,8 @@ class DataDownloader
         if ( mApp.connectDevice( TDInstance.deviceAddress(), data_type ) ) {
           connected = STATUS_ON;
         }
-        Log.v( "DistoX-BLEA", "**** connect device returns " + connected );
-        if ( TDInstance.deviceType() == Device.DISTO_SAP5 && connected == STATUS_ON ) {
+        Log.v( "DistoX-BLE-DD", "**** connect device returns " + connected );
+        if ( TDInstance.isDeviceSap() && connected == STATUS_ON ) {
           mConnected = connected;
           mApp.notifyStatus( STATUS_WAIT );
         } else {
@@ -176,7 +179,7 @@ class DataDownloader
     if ( TDInstance.deviceA != null && DeviceUtil.isAdapterEnabled() ) {
       notifyConnectionStatus( STATUS_WAIT );
       // TDLog.Log( TDLog.LOG_COMM, "shot menu DOWNLOAD" );
-      // Log.v( "DistoX-BLEZ", "try download type " + data_type );
+      // Log.v( "DistoX-BLE-DD", "try download type " + data_type );
       new DataDownloadTask( mApp, mApp.mListerSet, null, data_type ).execute();
     } else {
       mDownload = false;

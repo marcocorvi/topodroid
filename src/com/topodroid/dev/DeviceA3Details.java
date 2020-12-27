@@ -10,9 +10,9 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.DistoX;
+package com.topodroid.dev;
 
-class DeviceA3Details
+public class DeviceA3Details
 {
   static final int MAX_ADDRESS_A3 = 0x8000;
 
@@ -21,10 +21,14 @@ class DeviceA3Details
 
   private static final byte CALIB_BIT = (byte)0x08; // X1 calib bit
 
-  static boolean isCalibMode( byte b ) { return ( ( b & CALIB_BIT ) == CALIB_BIT ); }
-  static boolean isNotCalibMode( byte b ) { return ( ( b & CALIB_BIT ) == 0 ); }
+  public static boolean isCalibMode( byte b ) { return ( ( b & CALIB_BIT ) == CALIB_BIT ); }
+  public static boolean isNotCalibMode( byte b ) { return ( ( b & CALIB_BIT ) == 0 ); }
 
   // heat-tail command
-  static final byte[] HeadTail = { 0x38, 0x20, (byte)0xc0 }; // address 0xc020
+  public static final byte[] HeadTail = { 0x38, 0x20, (byte)0xc0 }; // address 0xc020
 
+  public static boolean checkHeadTail( int[] ht ) 
+  {
+    return ( ht[0] < 0 || ht[0] >= DeviceA3Details.MAX_ADDRESS_A3 || ht[1] < 0 || ht[1] >= DeviceA3Details.MAX_ADDRESS_A3 );
+  }
 }

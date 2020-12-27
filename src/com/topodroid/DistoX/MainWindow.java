@@ -23,6 +23,7 @@ import com.topodroid.help.UserManualActivity;
 import com.topodroid.help.UserManDownload;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPrefCat;
+import com.topodroid.dev.DeviceUtil;
 
 import com.topodroid.mag.WorldMagneticModel;
 

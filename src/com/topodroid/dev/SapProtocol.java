@@ -1,9 +1,9 @@
-/* @file BleProtocol.java
+/* @file SapProtocol.java
  *
  * @author marco corvi
  * @date nov 2011
  *
- * @brief TopoDroid BLE devices protocol REQUIRES API-18
+ * @brief TopoDroid SAP5 protocol REQUIRES API-18
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -11,7 +11,7 @@
  *
  * WARNING TO BE FINISHED
  */
-package com.topodroid.DistoX;
+package com.topodroid.dev;
 
 import com.topodroid.utils.TDLog;
 // import com.topodroid.prefs.TDSetting;
@@ -32,17 +32,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 // -----------------------------------------------------------------------------
-class BleProtocol extends TopoDroidProtocol
+class SapProtocol extends TopoDroidProtocol
 {
-  private BleComm mComm;
+  // private SapComm mComm; // UNUSED
   ArrayList< byte[] > mWriteBuffer;  // write buffer
   
-  BleProtocol( BleComm comm, Device device, Context context )
+  SapProtocol( SapComm comm, Device device, Context context )
   {
     super( device, context );
-    mComm   = comm;
+    // mComm   = comm;
     mWriteBuffer = new ArrayList< byte[] >();
-    // Log.v("DistoX-BLEX", "new BLE proto");
+    // Log.v("DistoX-BLE-P", "new BLE proto");
   }
 
   public void addToWriteBuffer( byte[] bytes )
@@ -60,7 +60,7 @@ class BleProtocol extends TopoDroidProtocol
   // @return number of bytes set into the write characteristic
   public int handleWrite( BluetoothGattCharacteristic chrt )
   {
-    Log.v("DistoX-BLEX", "proto write - pending " + mWriteBuffer.size() );
+    Log.v("DistoX-BLE-P", "proto write - pending " + mWriteBuffer.size() );
     byte[] bytes = null;
     synchronized ( mWriteBuffer ) {
       while ( ! mWriteBuffer.isEmpty() ) {
@@ -78,17 +78,21 @@ class BleProtocol extends TopoDroidProtocol
   public int handleRead( BluetoothGattCharacteristic chrt )
   {
     byte[] bytes = chrt.getValue();
-    // Log.v("DistoX-BLEX", "proto read bytes " + bytes.length );
+    // Log.v("DistoX-BLE-P", "proto read bytes " + bytes.length );
     byte[] buffer = new byte[8];
     System.arraycopy( bytes, 0, buffer, 0, 8 );
+    // ACKNOWLEDGMENT
+    // byte[] ack = new byte[1];
+    // ack[0] = (byte)( ( buffer[0] & 0x80 ) | 0x55 );
+    // addToWriteBuffer( ack );
     return handlePacket( buffer );
   }
 
-  // @param chrt   Ble Gatt characteristic
+  // @param chrt   Sap Gatt characteristic
   // @param read   whether the chrt is read or write
   public int handleNotify( BluetoothGattCharacteristic chrt, boolean read )
   {
-    // Log.v("DistoX-BLEX", "proto notify: read " + read );
+    // Log.v("DistoX-BLE-P", "proto notify: read " + read );
     if ( read ) {
       return handleRead( chrt );
     } 

@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.dev.Device;
 
 import android.os.AsyncTask;
  

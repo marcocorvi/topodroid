@@ -44,6 +44,7 @@ import com.topodroid.trb.TRobotPoint;
 import com.topodroid.trb.TRobotSeries;
 import com.topodroid.trb.TRobot;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.dev.Device;
 
 import android.util.Log;
 

@@ -14,6 +14,8 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDColor;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.dev.Device;
+import com.topodroid.dev.DataType;
 
 import java.lang.ref.WeakReference;
 

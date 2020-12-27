@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.prefs.TDSetting;
+import com.topodroid.dev.Device;
 
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -28,8 +30,8 @@ public class TDInstance
   public static String cwd;  // current work directory
   public static String cbd;  // current base directory
 
-  static long sid   = -1;   // id of the current survey
-  static long cid   = -1;   // id of the current calib
+  public static long sid   = -1;   // id of the current survey
+  public static long cid   = -1;   // id of the current calib
   static String survey;   // current survey name
   static String calib;    // current calib name
   static long secondLastShotId = 0L;
@@ -38,14 +40,25 @@ public class TDInstance
   public static int     datamode = 0;      // current value of survey datamode
   // FIXME static int    extend = 90;  // current value of survey extend
 
-  static Device  deviceA = null;
+  public static Device  deviceA = null;
   static Device  deviceB = null; // second-DistoX
   static BluetoothDevice bleDevice = null; // FIXME BLE_5
 
-  static int deviceType() { return (deviceA == null)? 0 : deviceA.mType; }
-  static String deviceAddress() { return (deviceA == null)? null : deviceA.mAddress; }
-  static String deviceNickname() { return (deviceA == null)? "- - -" : deviceA.getNickname(); }
-  static boolean isDeviceAddress( String addr ) { return deviceA != null && deviceA.mAddress.equals( addr ); }
+  public static int deviceType() { return (deviceA == null)? 0 : deviceA.mType; }
+  public static String deviceAddress() { return (deviceA == null)? null : deviceA.mAddress; }
+  public static String deviceNickname() { return (deviceA == null)? "- - -" : deviceA.getNickname(); }
+  public static boolean isDeviceAddress( String addr ) { return deviceA != null && deviceA.mAddress.equals( addr ); }
+
+  static boolean isDeviceA3()     { return deviceA != null && deviceA.isA3(); }
+  static boolean isDeviceX310()   { return deviceA != null && deviceA.isX310(); }
+  static boolean isDeviceDistoX() { return deviceA != null && deviceA.isDistoX(); }
+  static boolean isDeviceSap()    { return deviceA != null && deviceA.isSap(); }
+  static boolean isDeviceBric()   { return deviceA != null && deviceA.isBric(); }
+
+  static boolean isContinuousMode() 
+  {
+    return TDSetting.isConnectionModeContinuous() || deviceType() == Device.DISTO_SAP5;
+  }
 
   // FIXME VitualDistoX
   // static boolean isDeviceZeroAddress( ) { return ( deviceA == null || deviceA.mAddress.equals( Device.ZERO_ADDRESS ) ); }

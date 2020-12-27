@@ -35,7 +35,7 @@ class ReconnectTask extends AsyncTask< String, Integer, Integer >
   protected Integer doInBackground( String... statuses )
   {
     if ( ! lock() ) return null;
-    if ( TDSetting.mAutoReconnect && TDSetting.mConnectionMode == TDSetting.CONN_MODE_CONTINUOUS ) {
+    if ( TDSetting.mAutoReconnect && TDInstance.isContinuousMode() ) {
       while ( mDownloader.needReconnect() ) {
         try {
           Thread.sleep( 500 );

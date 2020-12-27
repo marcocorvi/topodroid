@@ -14,6 +14,7 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.dev.Device;
 
 // import java.lang.ref.WeakReference;
 

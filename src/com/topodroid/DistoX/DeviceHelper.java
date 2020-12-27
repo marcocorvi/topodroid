@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
+import com.topodroid.dev.Device;
 
 // import android.util.Log;
 
@@ -33,7 +34,7 @@ import java.util.List;
 // import java.util.Locale;
 // import java.util.HashMap;
 
-class DeviceHelper extends DataSetObservable
+public class DeviceHelper extends DataSetObservable
 {
 
   // static final private String DB_VERSION = "27";
@@ -230,7 +231,7 @@ class DeviceHelper extends DataSetObservable
     // // return 0;
   }
 
-  long insertGM( long cid, long gx, long gy, long gz, long mx, long my, long mz )
+  public long insertGM( long cid, long gx, long gy, long gz, long mx, long my, long mz )
   {
     if ( myDB == null ) {
       TDLog.Error( ERROR_NULL_DB + "insert GM");

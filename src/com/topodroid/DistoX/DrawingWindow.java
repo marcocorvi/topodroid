@@ -41,6 +41,7 @@ import com.topodroid.help.HelpDialog;
 import com.topodroid.help.UserManualActivity;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPrefCat;
+import com.topodroid.dev.DataType;
 
 import android.util.Log;
 
@@ -5270,8 +5271,8 @@ public class DrawingWindow extends ItemDrawer
     if ( dismiss == DISMISS_BT ) return;
     if ( ! mDataDownloader.isDownloading() ) {
 	// FIXME
-      if ( TDLevel.overExpert && TDInstance.deviceType() == Device.DISTO_X310 
-	      && TDSetting.mConnectionMode != TDSetting.CONN_MODE_MULTI
+      if ( TDLevel.overExpert && TDInstance.isDeviceX310() 
+	      && ! TDSetting.isConnectionModeMulti()
 	  ) {
         CutNPaste.showPopupBT( mActivity, this, mApp, b, false );
       } else {
@@ -5983,7 +5984,7 @@ public class DrawingWindow extends ItemDrawer
         doComputeReferences( false );
       }
       if ( toast ) {
-        if ( TDInstance.deviceType() == Device.DISTO_X310 ) nr /= 2;
+        if ( TDInstance.isDeviceX310() ) nr /= 2;
         TDToast.make( getResources().getQuantityString(R.plurals.read_data, nr, nr ) );
       }
     } else { // ( nr < 0 )

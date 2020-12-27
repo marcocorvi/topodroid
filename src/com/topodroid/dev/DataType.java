@@ -10,18 +10,18 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.DistoX;
+package com.topodroid.dev;
 
 /** packet data types
  *  data   0000.0111
  *  memory 0011.1000
  */
-class DataType
+public class DataType
 {
-  final static int ALL   = 0;
-  final static int SHOT  = 1;   // shot data packets
-  final static int CALIB = 2;   // calib data packets
-  final static int MEM   = 3;   // memory packet
+  public final static int ALL   = 0;
+  public final static int SHOT  = 1;   // shot data packets
+  public final static int CALIB = 2;   // calib data packets
+  public final static int MEM   = 3;   // memory packet
 
   static int of( byte b ) 
   {

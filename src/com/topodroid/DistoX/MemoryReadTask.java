@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.packetX.MemoryOctet;
+import com.topodroid.dev.Device;
 
 // import android.util.Log;
 

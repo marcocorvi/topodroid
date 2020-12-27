@@ -11,9 +11,13 @@
  *
  * WARNING TO BE FINISHED
  */
-package com.topodroid.DistoX;
+package com.topodroid.dev;
 
 // import com.topodroid.prefs.TDSetting;
+
+import com.topodroid.DistoX.TDToast;
+import com.topodroid.DistoX.R;
+import com.topodroid.DistoX.DeviceActivity;
 
 import android.util.Log;
 

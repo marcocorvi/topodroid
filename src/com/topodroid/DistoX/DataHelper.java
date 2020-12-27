@@ -1366,13 +1366,13 @@ public class DataHelper extends DataSetObservable
     return insertImportShots( sid, id, shots );
   }
 
-  long insertDistoXShot( long sid, long id, double d, double b, double c, double r, long extend, long status, String addr )
+  public long insertDistoXShot( long sid, long id, double d, double b, double c, double r, long extend, long status, String addr )
   { // 0L=leg, status, 0L=type DISTOX
     // stretch = 0.0;
     return doInsertShot( sid, id, System.currentTimeMillis()/1000, 0L, "", "",  d, b, c, r, extend, 0.0, DBlock.FLAG_SURVEY, 0L, status, 0L, "", addr );
   }
 
-  long insertShot( long sid, long id, long millis, long color, double d, double b, double c, double r,
+  public long insertShot( long sid, long id, long millis, long color, double d, double b, double c, double r,
 		   long extend, double stretch, long leg,
                    long shot_type, String addr )
   { // leg, 0L=status, type 
@@ -1440,7 +1440,7 @@ public class DataHelper extends DataSetObservable
     } finally { myDB.endTransaction(); }
   }
 
-  void updateShotAMDR( long id, long sid, double acc, double mag, double dip, double r, boolean backshot )
+  public void updateShotAMDR( long id, long sid, double acc, double mag, double dip, double r, boolean backshot )
   {
     // if ( myDB == null ) return;
 
@@ -3137,6 +3137,7 @@ public class DataHelper extends DataSetObservable
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch ( SQLiteException e ) { logError( "config update " + key + " " + value, e );
+    // } catch ( android.database.CursorWindowAllocationException e ) {
     } finally {
       if ( cursor != null && ! cursor.isClosed()) cursor.close();
     }

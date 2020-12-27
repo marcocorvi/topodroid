@@ -26,6 +26,9 @@ import com.topodroid.help.UserManualActivity;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPrefCat;
 import com.topodroid.packetX.PacketDialog;
+import com.topodroid.dev.Device;
+import com.topodroid.dev.DeviceA3Details;
+import com.topodroid.dev.DeviceUtil;
 
 import android.util.Log;
 
@@ -153,7 +156,6 @@ public class DeviceActivity extends Activity
   private ListItemAdapter mArrayAdapter;
   private ListView mList;
 
-  // private String mAddress;
   private Device mCurrDevice  = null;
   private Device mCurrDeviceB = null;
   // private boolean mHasBLE     = false; // BLEX default to false
@@ -177,7 +179,7 @@ public class DeviceActivity extends Activity
   private void setState()
   {
     boolean cntd = mApp.isCommConnected();
-    if ( mCurrDevice != null ) { // mAddress.length() > 0 ) {
+    if ( mCurrDevice != null ) {
       mTvAddress.setTextColor( 0xffffffff );
       mTvAddress.setText( String.format( getResources().getString( R.string.using ), mCurrDevice.toString() ) );
       // setButtonRemote();
@@ -186,7 +188,7 @@ public class DeviceActivity extends Activity
       mTvAddress.setText( R.string.no_device_address );
     }
     if ( TDSetting.mSecondDistoX ) {
-      if ( mCurrDeviceB != null ) { // mAddress.length() > 0 ) {
+      if ( mCurrDeviceB != null ) { 
         mTvAddressB.setTextColor( 0xffffcc33 );
         mTvAddressB.setText( String.format( getResources().getString( R.string.using ), mCurrDeviceB.toString() ) );
       } else {
@@ -318,6 +320,8 @@ public class DeviceActivity extends Activity
     closeMenu();
     mMenu.setOnItemClickListener( this );
     // TDLog.Debug("device activity create done");
+
+    enableButtons( TDInstance.isDeviceDistoX() );
   }
 
   private void updateList( )
@@ -333,7 +337,7 @@ public class DeviceActivity extends Activity
     } else {
       setTitle( R.string.title_device );
       for ( BluetoothDevice device : device_set ) {
-        String addr  = device.getAddress();
+        String addr = device.getAddress();
         Device dev = mApp_mDData.getDevice( addr );
         if ( dev == null ) {
           String model = device.getName();
@@ -404,7 +408,6 @@ public class DeviceActivity extends Activity
       if ( mCurrDevice == null || ! ( address.equals( mCurrDevice.mAddress ) || address.equals( mCurrDevice.mNickname ) ) ) {
         mApp.setDevice( address, null );
         mCurrDevice = TDInstance.deviceA;
-        // mAddress = address;
         mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
         setState();
       }
@@ -421,8 +424,8 @@ public class DeviceActivity extends Activity
     if ( mCurrDevice == null ) return;
     mApp.setDevice( null, null );
     mCurrDevice = TDInstance.deviceA;
-    // mAddress = address;
     mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
+    enableButtons( false );
     setState();
   }
 
@@ -517,7 +520,7 @@ public class DeviceActivity extends Activity
       setState();
       TDToast.make( R.string.bt_reset );
     } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // CALIBRATION MODE TOGGLE
-      if ( mCurrDevice == null ) { // mAddress.length() < 1 ) {
+      if ( mCurrDevice == null ) { 
         TDToast.makeBad( R.string.no_device_address );
       } else {
         enableButtons( false );
@@ -546,7 +549,7 @@ public class DeviceActivity extends Activity
       }
 
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {   // CALIB_READ TDLevel.overNormal
-      if ( mCurrDevice == null ) { // mAddress.length() < 1 ) {
+      if ( mCurrDevice == null ) { 
         TDToast.makeBad( R.string.no_device_address );
       } else {
         enableButtons( false );
@@ -554,7 +557,7 @@ public class DeviceActivity extends Activity
       }
 
     } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // DISTOX MEMORY TDLevel.overAdvanced
-      if ( mCurrDevice == null ) { // mAddress.length() < 1 ) {
+      if ( mCurrDevice == null ) {
         TDToast.makeBad( R.string.no_device_address );
       } else {
         if ( mCurrDevice.mType == Device.DISTO_A3 ) {
@@ -619,7 +622,7 @@ public class DeviceActivity extends Activity
 
   private boolean checkA3headtail( int[] ht )
   {
-    if ( ht[0] < 0 || ht[0] >= DeviceA3Details.MAX_ADDRESS_A3 || ht[1] < 0 || ht[1] >= DeviceA3Details.MAX_ADDRESS_A3 ) {
+    if ( ! DeviceA3Details.checkHeadTail( ht ) ) {
       TDToast.makeBad(R.string.device_illegal_addr );
       return false;
     }
@@ -715,7 +718,7 @@ public class DeviceActivity extends Activity
       mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
       mApp.setDevice( address, device );
       mCurrDevice = TDInstance.deviceA;
-      // mAddress = address;
+      enableButtons( TDInstance.isDeviceDistoX() );
       setState();
     // }
     updateList();
@@ -739,7 +742,7 @@ public class DeviceActivity extends Activity
             mApp.setDevice( address, null );
             DeviceUtil.checkPairing( address );
             mCurrDevice = TDInstance.deviceA;
-            // mAddress = address;
+            enableButtons( TDInstance.isDeviceDistoX() );
             setState();
           }
         } else if ( result == RESULT_CANCELED ) {
@@ -911,7 +914,6 @@ public class DeviceActivity extends Activity
     if ( mCurrDeviceB == null || ! address.equals( mCurrDeviceB.mAddress ) ) {
       mApp.setDeviceB( address );
       mCurrDeviceB = TDInstance.deviceB;
-      // mAddress = address;
       mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
       setState();
     }

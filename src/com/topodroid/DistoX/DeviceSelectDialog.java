@@ -13,6 +13,8 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
+import com.topodroid.dev.Device;
+import com.topodroid.dev.DataType;
 
 // import android.util.Log;
 
@@ -90,7 +92,7 @@ class DeviceSelectDialog extends MyDialog
       // String model = device.mName;
       // String name  = device.mName;
       // String nick  = device.mNickname;
-      if ( device.mType != Device.DISTO_SAP5 ) {
+      if ( device.isBT() ) {
         array_adapter.add( device.toString() );
       }
     }

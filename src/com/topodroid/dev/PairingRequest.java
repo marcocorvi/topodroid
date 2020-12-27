@@ -9,7 +9,7 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.DistoX;
+package com.topodroid.dev;
 
 import com.topodroid.utils.TDLog;
 
@@ -25,7 +25,7 @@ import android.bluetooth.BluetoothDevice;
 
 // import android.util.Log;
 
-class PairingRequest extends BroadcastReceiver
+public class PairingRequest extends BroadcastReceiver
 {
 
   @Override

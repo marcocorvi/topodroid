@@ -9,9 +9,9 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.DistoX;
+package com.topodroid.dev;
 
-class DeviceX310Details
+public class DeviceX310Details
 {
   static final int MAX_INDEX_X310 = 1064;
 
@@ -25,6 +25,13 @@ class DeviceX310Details
   // head-tail command
   // final static int mHeadTailAddress = 0xe008;
   static final byte[] HeadTail = { 0x38, 0x08, (byte)0xe0 }; // address 0xe008
+
+  public static boolean boundHeadTail( int[] ht )
+  {
+    if ( ht[0] < 0 ) ht[0] = 0;
+    if ( ht[1] > MAX_INDEX_X310 ) ht[1] = MAX_INDEX_X310;
+    return ( ht[0] < ht[1] );
+  }
 
   // returns two 16-bit values
   // first value  = head segment index

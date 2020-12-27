@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.ui.MyDialog;
 import com.topodroid.packetX.MemoryOctet;
+import com.topodroid.dev.DeviceX310Details;
 
 import java.util.ArrayList;
 
@@ -117,9 +118,7 @@ class DeviceX310MemoryDialog extends MyDialog
           mETdumpto.setError( error );
           return;
         }
-        if ( ht[0] < 0 ) ht[0] = 0;
-        if ( ht[1] > DeviceX310Details.MAX_INDEX_X310 )  ht[1] = DeviceX310Details.MAX_INDEX_X310;
-        if ( ht[0] < ht[1] ) {
+        if ( DeviceX310Details.boundHeadTail( ht ) ) {
           String file = null;
           if ( mETdumpfile.getText() != null ) file = mETdumpfile.getText().toString();
           mParent.readX310Memory( this, ht, file );

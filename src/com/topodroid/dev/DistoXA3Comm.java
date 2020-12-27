@@ -3,16 +3,18 @@
  * @author marco corvi
  * @date nov 2011
  *
- * @brief TopoDroid-DistoX BlueTooth communication 
+ * @brief TopoDroid DistoX (A3) bluetooth communication 
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.DistoX;
+package com.topodroid.dev;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.packetX.MemoryOctet;
+import com.topodroid.DistoX.TDInstance;
+import com.topodroid.DistoX.TopoDroidApp;
 
 import android.util.Log;
 
@@ -21,28 +23,15 @@ import android.util.Log;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.util.List;
-// import java.util.ArrayList;
-// import java.util.concurrent.atomic.AtomicInteger;
 
 
-class DistoXA3Comm extends DistoXComm
+public class DistoXA3Comm extends DistoXComm
 {
 
-  DistoXA3Comm( TopoDroidApp app )
+  public DistoXA3Comm( TopoDroidApp app )
   {
     super( app );
   }
-
-  // public void resume()
-  // {
-  //   // if ( mCommThread != null ) { mCommThread.resume(); }
-  // }
-
-  // public void suspend()
-  // {
-  //   // if ( mCommThread != null ) { mCommThread.suspend(); }
-  // }
-
 
   /** must be overridden to call create proper protocol
    * @param in      input
@@ -74,7 +63,7 @@ class DistoXA3Comm extends DistoXComm
    * @return true if success
    */
   @Override
-  boolean toggleCalibMode( String address, int type )
+  public boolean toggleCalibMode( String address, int type )
   {
     if ( ! isCommThreadNull() ) {
       TDLog.Error( "toggle Calib Mode address " + address + " not null RFcomm thread" );
@@ -102,28 +91,24 @@ class DistoXA3Comm extends DistoXComm
   }
 
   // @return HeadTail string, null on failure
-  String readA3HeadTail( String address, byte[] command, int[] head_tail )
+  public String readA3HeadTail( String address, byte[] command, int[] head_tail )
   {
+    if ( ! isCommThreadNull() ) return null;
     String res = null;
     // if ( TDInstance.deviceType() == Device.DISTO_A3 ) {
-      if ( ! isCommThreadNull() ) return null;
       if ( connectSocketAny( address ) ) {
-        try { 
-          DistoXA3Protocol protocol = (DistoXA3Protocol)mProtocol;
-          res = protocol.readA3HeadTail( command, head_tail );
+        if ( mProtocol instanceof DistoXA3Protocol ) {
+          res = ((DistoXA3Protocol)mProtocol).readA3HeadTail( command, head_tail );
           // FIXME ASYNC new CommandThread( mProtocol, READ_HEAD_TAIL, haed_tail ); NOTE int[] instead of byte[]
           // TDLog.Log( TDLog.LOG_COMM, "read Head Tail() result " + res );
-        } catch ( ClassCastException e ) {
-          TDLog.Error("read A3 memory: class cast exception");
         }
-        return null;
       }
       destroySocket( );
     // }
     return res;
   }
   
-  int readA3Memory( String address, int from, int to, List< MemoryOctet > memory )
+  public int readA3Memory( String address, int from, int to, List< MemoryOctet > memory )
   {
     if ( ! isCommThreadNull() ) return -1;
     from &= 0xfff8; // was 0x7ff8
@@ -133,14 +118,12 @@ class DistoXA3Comm extends DistoXComm
     int n = 0;
     if ( from < to ) {
       if ( connectSocketAny( address ) ) {
-        try {
-          DistoXA3Protocol protocol = (DistoXA3Protocol)mProtocol;
-          n = protocol.readMemory( from, to, memory );
+        if ( mProtocol instanceof DistoXA3Protocol ) {
+          n = ((DistoXA3Protocol)mProtocol).readMemory( from, to, memory );
           // FIXME ASYNC new CommandThread( mProtocol, READ_MEMORY, memory ) Note...
-        } catch ( ClassCastException e ) {
-          TDLog.Error("read A3 memory: class cast exception");
+        } else {
+          n = -1;
         }
-        return -1;
       }
       destroySocket( );
     }
@@ -151,7 +134,7 @@ class DistoXA3Comm extends DistoXComm
    * from and to are memory addresses - must be multiple of 8
    * @return the number of bits that have been swapped
    */
-  int swapA3HotBit( String address, int from, int to, boolean on_off )
+  public int swapA3HotBit( String address, int from, int to, boolean on_off )
   {
     if ( ! isCommThreadNull() ) return -1;
     if ( TDInstance.deviceType() != Device.DISTO_A3 ) return -2;
@@ -164,7 +147,7 @@ class DistoXA3Comm extends DistoXComm
     int n = 0;
     if ( from != to ) {
       if ( connectSocketAny( address ) ) {
-        try {
+        if ( mProtocol instanceof DistoXA3Protocol ) {
           DistoXA3Protocol protocol = (DistoXA3Protocol)mProtocol;
           do {
             if ( to == 0 ) {
@@ -178,15 +161,13 @@ class DistoXA3Comm extends DistoXComm
           } while ( to != from );
           // FIXME ASYNC new CommandThread( mProtocol, SWAP_HOT_BITS, from, to ) Note...
           // TDLog.Log( TDLog.LOG_COMM, "swap Hot Bit swapped " + n + "data" );
-        } catch ( ClassCastException e ) {
-          TDLog.Error("read A3 memory: class cast exception");
+        } else {
+          n = -1;
         }
-        return -1;
       }
       destroySocket( );
     }
     return n;
   }
-
 
 }

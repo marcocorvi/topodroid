@@ -220,11 +220,11 @@ public class TDSetting
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // DEVICE
-  public final static int CONN_MODE_BATCH      = 0;      // DistoX connection mode
-  public final static int CONN_MODE_CONTINUOUS = 1;
-  public final static int CONN_MODE_MULTI      = 2;
-  // public final static int CONN_MODE_DOUBLE     = 3;
-  public static int mConnectionMode    = CONN_MODE_BATCH; 
+  private final static int CONN_MODE_BATCH      = 0;      // DistoX connection mode
+  private final static int CONN_MODE_CONTINUOUS = 1;
+  private final static int CONN_MODE_MULTI      = 2;
+  // private final static int CONN_MODE_DOUBLE     = 3;
+  private static int mConnectionMode    = CONN_MODE_BATCH; 
 
   public static boolean isConnectionModeBatch() { return mConnectionMode != CONN_MODE_CONTINUOUS; }
   public static boolean isConnectionModeContinuous() { return mConnectionMode == CONN_MODE_CONTINUOUS; }
