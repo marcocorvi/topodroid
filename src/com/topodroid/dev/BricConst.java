@@ -15,7 +15,7 @@ package com.topodroid.dev;
 
 import java.util.UUID;
 
-class BleConst 
+class BricConst 
 {
   static final UUID CCCD = UUID.fromString("00002902-0000-1000-8000-00805f9b34fb");
 

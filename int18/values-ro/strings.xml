@@ -523,6 +523,7 @@ Tap "Close" not to take any action.
     <string name="tripod_warning">Metoda tripod este pentru utilizatori avansați !</string>
     <string name="coverage_warning">Acoperire unghiuri sub %1$d %%\nScrieți coeficienții?</string>
     <string name="delta_warning">Eroarea medie peste %1$.1f\nScrieți coeficienții?</string>
+    <!-- TODO string name="sap_warning">Warning\n\nSAP surveys attain only BCRA grade 3.</string -->
 
     <string name="cover_data">Distribuție date brute: %1$.2f %%</string>
     <string name="cover_calib">Distribuție date calibrate: %1$.2f %%</string>

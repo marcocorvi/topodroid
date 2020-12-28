@@ -321,7 +321,7 @@ public class DeviceActivity extends Activity
     mMenu.setOnItemClickListener( this );
     // TDLog.Debug("device activity create done");
 
-    enableButtons( TDInstance.isDeviceDistoX() );
+    showDistoXButtons();
   }
 
   private void updateList( )
@@ -410,6 +410,7 @@ public class DeviceActivity extends Activity
         mCurrDevice = TDInstance.deviceA;
         mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
         setState();
+        showDistoXButtons();
       }
     }
   }
@@ -479,6 +480,18 @@ public class DeviceActivity extends Activity
       TDandroid.setButtonBackground( mButton1[IDX_CALIB], mBMcalib_no );
       if ( TDLevel.overNormal ) {
         TDandroid.setButtonBackground( mButton1[IDX_READ], mBMread_no );
+      }
+    }
+  }
+
+  public void showDistoXButtons( )
+  {
+    if ( TDInstance.isDeviceDistoX() ) {
+      for ( int k=1; k<mNrButton1; ++k ) mButton1[k].setVisibility( View.VISIBLE );
+    } else {
+      for ( int k=1; k<mNrButton1; ++k ) mButton1[k].setVisibility( View.GONE );
+      if ( TDInstance.isDeviceSap() ) {
+        TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.sap_warning );
       }
     }
   }
@@ -718,7 +731,7 @@ public class DeviceActivity extends Activity
       mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
       mApp.setDevice( address, device );
       mCurrDevice = TDInstance.deviceA;
-      enableButtons( TDInstance.isDeviceDistoX() );
+      // showDistoXButtons();
       setState();
     // }
     updateList();
@@ -742,7 +755,7 @@ public class DeviceActivity extends Activity
             mApp.setDevice( address, null );
             DeviceUtil.checkPairing( address );
             mCurrDevice = TDInstance.deviceA;
-            enableButtons( TDInstance.isDeviceDistoX() );
+            showDistoXButtons();
             setState();
           }
         } else if ( result == RESULT_CANCELED ) {

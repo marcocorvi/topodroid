@@ -322,7 +322,20 @@ public class MainWindow extends Activity
       TDLog.Error("import view instance of " + view.toString() );
       return;
     }
-    CharSequence item = ((TextView) view).getText();
+    final CharSequence item = ((TextView) view).getText();
+    if ( TDInstance.isDeviceSap() ) {
+      TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.sap_warning,
+        new DialogInterface.OnClickListener() {
+          @Override public void onClick( DialogInterface dialog, int btn ) { startShowWindow( item ); }
+        }
+      );
+    } else {
+      startShowWindow( item );
+    }
+  }
+
+  public void startShowWindow( CharSequence item )
+  {
     mApp.setSurveyFromName( item.toString(), -1, true ); 
     Intent openIntent = new Intent( this, ShotWindow.class );
     startActivity( openIntent );

@@ -33,6 +33,11 @@ public class TopoDroidAlertDialog
     makeAlert( context, res, message, R.string.button_cancel, R.string.button_ok, null, pos );
   }
 
+  public static void makeAlert( Context context, Resources res, int message )
+  {
+    makeAlert( context, res, res.getString(message), -1, R.string.button_ok, null, null );
+  }
+
     // AlertDialog.Builder alert_builder = new AlertDialog.Builder( context );
     // alert_builder.setMessage( message );
     // alert_builder.setPositiveButton( res.getString( R.string.button_cancel ), 
