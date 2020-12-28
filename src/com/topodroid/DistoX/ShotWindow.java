@@ -1051,7 +1051,11 @@ public class ShotWindow extends Activity
     // rv.setLayoutManager( lm );
 
     mShowSplay   = new ArrayList<>();
-    mDataAdapter = new DBlockAdapter( this, this, R.layout.dblock_row, new ArrayList< DBlock >() );
+    if ( TDSetting.mEditableStations ) {
+       mDataAdapter = new DBlockAdapter( this, this, R.layout.dblock_row, new ArrayList< DBlock >() );
+    } else {
+       mDataAdapter = new DBlockAdapter( this, this, R.layout.dblock_row_noedit, new ArrayList< DBlock >() );
+    }
 
     mListView = (MyHorizontalListView) findViewById(R.id.listview);
     mListView.setEmptyPlacholder( true );
