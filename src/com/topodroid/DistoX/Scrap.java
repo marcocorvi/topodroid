@@ -264,7 +264,7 @@ class Scrap
         for ( ICanvasCommand c : mCurrentStack ) {
           if ( c.commandType() == 0 ) {
             DrawingPath p = (DrawingPath)c;
-            if ( p.isPoint() ) {
+            if ( p.isPoint() ) { // p instanceof DrawingPointPath
               DrawingPointPath pt = (DrawingPointPath)p;
               if ( pt.mPointType == index && scrap.equals( TDUtil.replacePrefix( TDInstance.survey, pt.getOption( TDString.OPTION_SCRAP ) ) ) ) {
                 todo.add(p);
@@ -285,7 +285,7 @@ class Scrap
       for ( ICanvasCommand icc : mCurrentStack ) { // FIXME reverse_iterator
         if ( icc.commandType() == 0 ) { // DrawingPath
           DrawingPath path = (DrawingPath)icc;
-          if ( path.isPoint() ) {
+          if ( path.isPoint() ) { // path  instanceof DrawingPointPath
             DrawingPointPath dpp = (DrawingPointPath) path;
             if ( dpp.mPointType == index ) {
               // FIXME GET_OPTION
@@ -516,7 +516,7 @@ class Scrap
       synchronized( TDPath.mCommandsLock ) {
         for ( SelectionPoint pt : sel.mPoints ) {
           DrawingPath path = pt.mItem;
-          if ( path.isLine() ) {
+          if ( path.isLine() ) { // path  instanceof DrawingLinePath
             if ( erase_mode == Drawing.FILTER_ALL || erase_mode == Drawing.FILTER_LINE ) {
               DrawingLinePath line = (DrawingLinePath)path;
 	      if ( BrushManager.isLineSection( line.mLineType ) ) {
@@ -602,7 +602,7 @@ class Scrap
                 break; // IMPORTANT break the for-loop
               }
             }
-          } else if ( path.isArea() ) {
+          } else if ( path.isArea() ) { // path  instanceof DrawingAreaPath
             if ( erase_mode == Drawing.FILTER_ALL || erase_mode == Drawing.FILTER_AREA ) {
               DrawingAreaPath area = (DrawingAreaPath)path;
               if ( area.size() <= 3 ) {
@@ -621,7 +621,7 @@ class Scrap
                 area.retracePath();
               }
             }
-          } else if ( path.isPoint() ) {
+          } else if ( path.isPoint() ) { // path  instanceof DrawingPointPath
             if ( erase_mode == Drawing.FILTER_ALL || erase_mode == Drawing.FILTER_POINT ) {
               // ret = 1;
               eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
@@ -720,14 +720,14 @@ class Scrap
 
     mRedoStack.clear();
 
-    if ( path.isArea() ) {
+    if ( path.isArea() ) { // path instanceof DrawingAreaPath
       DrawingAreaPath area = (DrawingAreaPath)path;
       if ( area.mAreaCnt > mMaxAreaIndex ) {
         mMaxAreaIndex = area.mAreaCnt;
       }
     }
 
-    // if ( path.isLine() ) {
+    // if ( path.isLine() ) { // path instanceof DrawingLinePath
     //   DrawingLinePath line = (DrawingLinePath)path;
     //   LinePoint lp = line.mFirst;
     //   Log.v("DistoX-CMD", "add path. size " + line.size() + " start " + lp.x + " " + lp.y );
@@ -797,15 +797,15 @@ class Scrap
       for ( ICanvasCommand cmd : mCurrentStack ) {
         if ( cmd.commandType() != 0 ) continue; // FIXME EraseCommand
 
-        final DrawingPath drawingPath = (DrawingPath)cmd;
-        if ( drawingPath.isLine() ) {
-          DrawingLinePath linePath = (DrawingLinePath)drawingPath;
-          // if ( linePath.mLineType == type ) 
-          if ( group.equals( BrushManager.getLineGroup( linePath.mLineType ) ) )
+        final DrawingPath path = (DrawingPath)cmd;
+        if ( path.isLine() ) { // path instanceof DrawingLinePath
+          DrawingLinePath line = (DrawingLinePath)path;
+          // if ( line.mLineType == type ) 
+          if ( group.equals( BrushManager.getLineGroup( line.mLineType ) ) )
           {
-            if ( linePath.mFirst.distance( lp ) < delta || linePath.mLast.distance( lp ) < delta ) {
+            if ( line.mFirst.distance( lp ) < delta || line.mLast.distance( lp ) < delta ) {
               if ( ret != null ) return null; // ambiguity
-              ret = linePath;
+              ret = line;
             }
           }
         }
@@ -916,14 +916,14 @@ class Scrap
         ICanvasCommand cmd1 = mCurrentStack.get( i1 );
         if ( cmd1.commandType() != 0 ) continue;
         DrawingPath path1 = (DrawingPath)cmd1;
-        if ( ! path1.isLine() ) continue;
+        if ( ! path1.isLine() ) continue; // !(path1 instanceof DrawingLinePath)
         DrawingLinePath line1 = (DrawingLinePath)path1;
         for ( int i2 = 0; i2 < size; ++i2 ) {
           if ( i2 == i1 ) continue;
           ICanvasCommand cmd2 = mCurrentStack.get( i2 );
           if ( cmd2.commandType() != 0 ) continue;
           DrawingPath path2 = (DrawingPath)cmd2;
-          if ( ! path2.isLine() ) continue;
+          if ( ! path2.isLine() ) continue; // !(path2 instanceof DrawingLinePath)
           DrawingLinePath line2 = (DrawingLinePath)path2;
           // if every point in line2 overlaps a point in line1 
           if ( line1.overlap( line1 ) == line2.size() ) {
@@ -932,7 +932,7 @@ class Scrap
             //   ICanvasCommand cmd = mCurrentStack.get( i );
             //   if ( cmd.commandType() != 0 ) continue;
             //   DrawingPath path = (DrawingPath)cmd;
-            //   if ( ! path.isLine() ) continue;
+            //   if ( ! path.isLine() ) continue; // !(path instanceof DrawingLinePath)
             //   DrawingLinePath line = (DrawingLinePath)path;
             //   line.dump();
             // }
@@ -960,9 +960,8 @@ class Scrap
           if ( cmd.commandType() == 0 ) {
             cmd.flipXAxis(z);
             DrawingPath path = (DrawingPath)cmd;
-            if ( path.isLine() ) {
-              DrawingLinePath line = (DrawingLinePath)path;
-              line.flipReversed();
+            if ( path.isLine() ) { // path instanceof DrawingLinePath
+              ((DrawingLinePath)path).flipReversed();
             }
             synchronized ( TDPath.mSelectionLock ) {
               selection.insertPath( path );
@@ -1332,7 +1331,7 @@ class Scrap
         if ( cmd.commandType() != 0 ) continue;
         DrawingPath p = (DrawingPath)cmd;
         if ( p == item ) continue;
-        if ( ! p.isLineOrArea() ) continue;
+        if ( ! p.isLineOrArea() ) continue; // !(p instanceof DrawingPointLinePath)
         DrawingPointLinePath lp = (DrawingPointLinePath)p;
         int ks = lp.size();
         for ( LinePoint pt = lp.mFirst; pt != null && ks > 0; pt = pt.mNext )
@@ -1346,6 +1345,7 @@ class Scrap
             pp0  = pt;
             lmin = lp;
             min_is_area = p.isArea();
+            // min_is_area = (p instanceof DrawingAreaPath);
           }
         }
       }
@@ -1721,7 +1721,7 @@ class Scrap
       SelectionPoint sp = mSelected.shiftHotItem( dx, dy );
       if ( sp != null ) {
         DrawingPath path = sp.mItem;
-        if ( path.isPoint() ) {
+        if ( path.isPoint() ) { // path instanceof DrawingPointPath
           DrawingPointPath pt = (DrawingPointPath)path;
           if ( BrushManager.isPointSection( pt.mPointType )  ) {
             String scrap_name = TDUtil.replacePrefix( TDInstance.survey, pt.getOption( TDString.OPTION_SCRAP ) );
@@ -1780,7 +1780,7 @@ class Scrap
       for ( ICanvasCommand cmd : mCurrentStack ) {
         if ( cmd.commandType() == 0 ) {
           DrawingPath path = (DrawingPath)cmd;
-          if ( path.isPoint() ) {
+          if ( path.isPoint() ) { // path instanceof DrawingPointPath
             DrawingPointPath pt = (DrawingPointPath)path;
             if ( BrushManager.isPointAudio( pt.mPointType ) ) {
               DrawingAudioPath audio = (DrawingAudioPath)pt;
@@ -1800,7 +1800,7 @@ class Scrap
       for ( ICanvasCommand icc : mCurrentStack ) {
         if ( icc.commandType() != 0 ) continue;
         DrawingPath p = (DrawingPath)icc;
-        if ( ! p.isLine() ) continue;
+        if ( ! p.isLine() ) continue; // !(p instanceof DrawingLinePath)
         DrawingLinePath lp = (DrawingLinePath)p;
         if ( ! BrushManager.isLineWall( lp.mLineType ) ) continue;
         LinePoint pt = lp.mFirst;
@@ -1820,7 +1820,7 @@ class Scrap
       for ( ICanvasCommand cmd : mCurrentStack ) {
         if ( cmd.commandType() != 0 ) continue; 
         DrawingPath p = (DrawingPath)cmd;
-        if ( ! p.isPoint() ) continue;
+        if ( ! p.isPoint() ) continue; // !(p instanceof DrawingPointPath)
         DrawingPointPath pt = (DrawingPointPath)p;
         if ( ! BrushManager.isPointSection( pt.mPointType ) ) continue;
         // get the line/station
@@ -1834,7 +1834,7 @@ class Scrap
               for ( ICanvasCommand cmd2 : mCurrentStack ) {
                 if ( cmd2.commandType() != 0 ) continue; 
                 DrawingPath p2 = (DrawingPath)cmd2;
-                if ( ! p2.isLine() ) continue;
+                if ( ! p2.isLine() ) continue; // !(p2 instanceof DrawingLinePath)
                 DrawingLinePath ln = (DrawingLinePath)p2;
                 if ( ! BrushManager.isLineSection( ln.mLineType ) ) continue;
                 if ( id.equals( ln.getOption("-id") ) ) {
@@ -1928,7 +1928,7 @@ class Scrap
       return false;
     }
     DrawingPath item = sp1.mItem;
-    if ( ! item.isLineOrArea() ) {
+    if ( ! item.isLineOrArea() ) { // !(item instanceof DrawingPointLinePath)
       // Log.v("DistoX", "set range at: item not line/area" );
       // mSelected.clear();
       return false;
@@ -2007,7 +2007,7 @@ class Scrap
         if ( c.commandType() == 0 ) {
           DrawingPath path = (DrawingPath)c;
           path.mLandscape = landscape;
-          if ( path.isArea() ) {
+          if ( path.isArea() ) { // path instanceof DrawingAreaPath
             DrawingAreaPath area = (DrawingAreaPath)path;
             area.shiftShaderBy( dx, dy, s );
           }
@@ -2025,9 +2025,8 @@ class Scrap
       for ( ICanvasCommand cmd : mCurrentStack  ) {
         if ( cmd.commandType() == 0 ) {
           DrawingPath path = (DrawingPath)cmd;
-          if ( path.isLine() ) {
-            DrawingLinePath line = (DrawingLinePath)path;
-            if ( line.hasOutline() ) cmd.draw( canvas, mat, scale, bbox );
+          if ( path.isLine() ) { // path instanceof DrawingLinePath
+            if ( ((DrawingLinePath)path).hasOutline() ) cmd.draw( canvas, mat, scale, bbox );
           }
         }
       }
@@ -2041,7 +2040,7 @@ class Scrap
       for ( ICanvasCommand cmd : mCurrentStack  ) {
         if ( cmd.commandType() == 0 ) {
           DrawingPath path = (DrawingPath)cmd;
-          if ( path.isLine() ) {
+          if ( path.isLine() ) { // path instanceof DrawingLinePath
             DrawingLinePath line = (DrawingLinePath)path;
             if ( line.hasOutline() ) line.drawWithPaint( canvas, mat, bbox, BrushManager.fixedGrid100Paint );
           }
@@ -2059,7 +2058,7 @@ class Scrap
           if ( cmd.commandType() == 0 ) {
             DrawingPath path = (DrawingPath)cmd;
             cmd.draw( canvas, matrix, scale, bbox );
-            if ( path.isLine() ) {
+            if ( path.isLine() ) { // path instanceof DrawingLinePath
               DrawingLinePath line = (DrawingLinePath)path;
               if ( BrushManager.isLineSection( line.mLineType ) ) { // add direction-tick to section-lines
                 LinePoint lp = line.mFirst;
@@ -2078,7 +2077,7 @@ class Scrap
             DrawingPath path = (DrawingPath)cmd;
             if ( DrawingLevel.isLevelVisible( (DrawingPath)cmd ) ) {
               cmd.draw( canvas, matrix, scale, bbox );
-              if ( path.isLine() ) {
+              if ( path.isLine() ) { // path instanceof DrawingLinePath
                 DrawingLinePath line = (DrawingLinePath)path;
                 if ( BrushManager.isLineSection( line.mLineType ) ) { // add direction-tick to section-lines
                   LinePoint lp = line.mFirst;
@@ -2241,7 +2240,7 @@ class Scrap
           path.transform( matrix );
           canvas.drawPath( path, BrushManager.highlightPaint3 );
         }
-        if ( item.isLine() ) {
+        if ( item.isLine() ) { // item instanceof DrawingLinePath
           Paint paint = BrushManager.fixedYellowPaint;
           DrawingLinePath line = (DrawingLinePath) item;
           lp = line.mFirst;

@@ -522,7 +522,7 @@ Tap "Close" not to take any action.
     <!-- TODO string name="tripod_warning">Tripod policy is advanced !</string -->
     <!-- TODO string name="coverage_warning">Angle coverage below %1$d %%\nWrite coefficients?</string -->
     <!-- TODO string name="delta_warning">Average error above %1$.1f\nWrite coefficients?</string -->
-    <!-- TODO string name="sap_warning">Warning\n\nSAP surveys attain only BCRA grade 3.</string -->
+    <!-- TODO string name="sap_warning">Warning\n\nSAP surveys attain only UISv2 grade 3.</string -->
 
     <!-- TODO string name="cover_data">Raw data distribution: %1$.2f %%</string -->
     <!-- TODO string name="cover_calib">Calibrated data distribution: %1$.2f %%</string -->

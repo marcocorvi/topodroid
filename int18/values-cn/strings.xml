@@ -533,7 +533,7 @@ Tap "Close" not to take any action.
     <string name="tripod_warning">三脚架方案很高级!</string>
     <string name="coverage_warning">角度错误低于 %1$d %%\n写入系数?</string>
     <string name="delta_warning">角度错误高于 %1$.1f\n写入系数?</string>
-    <!-- TODO string name="sap_warning">Warning\n\nSAP surveys attain only BCRA grade 3.</string -->
+    <!-- TODO string name="sap_warning">Warning\n\nSAP surveys attain only UISv2 grade 3.</string -->
 
     <string name="cover_data">Raw数据分布: %1$.2f %%</string>
     <string name="cover_calib">校准数据分布: %1$.2f %%</string>

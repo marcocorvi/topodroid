@@ -524,7 +524,7 @@
     <string name="tripod_warning">Политика Штатив доступна в продвинутом уровне функций!</string>
     <string name="coverage_warning">Angle coverage below %1$d %%\nЗаписать коэффициенты?</string>
     <string name="delta_warning">Average error above %1$.1f\nЗаписать коэффициенты?</string>
-    <!-- TODO string name="sap_warning">Warning\n\nSAP surveys attain only BCRA grade 3.</string -->
+    <!-- TODO string name="sap_warning">Warning\n\nSAP surveys attain only UISv2 grade 3.</string -->
 
     <string name="cover_data">Распределение сырых данных: %1$.2f %%</string>
     <string name="cover_calib">Распределение откалиброванных данных: %1$.2f %%</string>

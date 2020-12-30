@@ -519,7 +519,7 @@ Tap "Close" not to take any action.
     <string name="tripod_warning">Tripod e\' liv. avanzato !</string>
     <string name="coverage_warning">Copertura angolo sotto %1$d %%\nScrivo coefficenti?</string>
     <string name="delta_warning">Errore medio oltre %1$.1f\nScrivo coefficenti?</string>
-    <!-- TODO string name="sap_warning">Warning\n\nSAP surveys attain only BCRA grade 3.</string -->
+    <!-- TODO string name="sap_warning">Warning\n\nSAP surveys attain only UISv2 grade 3.</string -->
 
     <string name="cover_data">Distribuzione dati grezzi: %1$.2f %%</string>
     <string name="cover_calib">Distribuzione dati calibrati: %1$.2f %%</string>
