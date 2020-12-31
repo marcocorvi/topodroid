@@ -104,7 +104,7 @@
     <string name="calib_delete">Удалить калибровку </string>
     <string name="calib_device_mismatch">ВНИМАНИЕ: Несоответствие калибровчных данных и прибора</string>
     <string name="calib_no_name">Необходимо задать название</string>
-    <!-- TODO string name="calib_no_coeff">Calibration coefficients not set</string -->
+    <string name="calib_no_coeff">Калибровочные коэффициенты не установлены</string>
     <string name="calib_gm_policy">Правила группирования</string>
     <string name="calib_gm_undelete">Восстановить калибровчные данные?</string>
     <string name="calib_offgroup_data">Возможно отклонение %1$d от данных в группе</string>
@@ -522,9 +522,9 @@
     <string name="toporobot_warning">ВНИМАНИЕ: нумерация пикетов TopoRobot экспериментальняа функция!</string>
     <string name="anomaly_warning">Компенсация магнитной аномалии доступна в экспертном уровне!</string>
     <string name="tripod_warning">Политика Штатив доступна в продвинутом уровне функций!</string>
-    <string name="coverage_warning">Angle coverage below %1$d %%\nЗаписать коэффициенты?</string>
-    <string name="delta_warning">Average error above %1$.1f\nЗаписать коэффициенты?</string>
-    <!-- TODO string name="sap_warning">Warning\n\nSAP surveys attain only UISv2 grade 3.</string -->
+    <string name="coverage_warning">Угловое покрытие менее %1$d %%\nЗаписать коэффициенты?</string>
+    <string name="delta_warning">Средняя ошибка превышает %1$.1f\nЗаписать коэффициенты?</string>
+    <string name="sap_warning">Внимание\n\nSAP съёмки не могут быть точнее класса UISv2 3.</string>
 
     <string name="cover_data">Распределение сырых данных: %1$.2f %%</string>
     <string name="cover_calib">Распределение откалиброванных данных: %1$.2f %%</string>
