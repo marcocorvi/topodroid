@@ -17,19 +17,19 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
 
-class ListerHandler extends Handler
+public class ListerHandler extends Handler
 {
   private ILister mLister = null;
 
   // default cstr
-  ListerHandler( ) { mLister = null; }
+  public ListerHandler( ) { mLister = null; }
 
-  ListerHandler( ILister lister )
+  public ListerHandler( ILister lister )
   { 
     mLister = lister;
   }
 
-  void refreshDisplay( int nr, boolean toast )
+  public void refreshDisplay( int nr, boolean toast )
   {
     if ( mLister != null ) mLister.refreshDisplay( nr, toast );
   }

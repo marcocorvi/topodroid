@@ -50,23 +50,23 @@ import android.text.method.KeyListener;
 
 /* you need to override EditText::onTouchListener()
  */
-class MyKeyboard // FIXME DIALOG extends Dialog
+public class MyKeyboard // FIXME DIALOG extends Dialog
                         implements OnKeyListener
                                  , OnKeyboardActionListener 
 {
   private static final String TAG = "DistoX0";
 
-  static final int FLAG_SIGN   = 0x01;
-  static final int FLAG_POINT  = 0x02;
-  static final int FLAG_DEGREE = 0x04;
-  static final int FLAG_LCASE  = 0x08;
-  static final int FLAG_NOEDIT = 0x10;
-  static final int FLAG_2ND    = 0x20;
-  static final int FLAG_POINT_SIGN        = 0x03; // FLAG_POINT | FLAG_SIGN
-  static final int FLAG_POINT_DEGREE      = 0x06; // FLAG_POINT | FLAG_DEGREE
-  static final int FLAG_POINT_SIGN_DEGREE = 0x07; // FLAG_POINT | FLAG_SIGN | FLAG_DEGREE
-  static final int FLAG_POINT_LCASE       = 0x0a; // FLAG_POINT | FLAG_LCASE
-  static final int FLAG_POINT_LCASE_2ND   = 0x2a; // FLAG_POINT | FLAG_LCASE | FLAG_2ND
+  public static final int FLAG_SIGN   = 0x01;
+  public static final int FLAG_POINT  = 0x02;
+  public static final int FLAG_DEGREE = 0x04;
+  public static final int FLAG_LCASE  = 0x08;
+  public static final int FLAG_NOEDIT = 0x10;
+  public static final int FLAG_2ND    = 0x20;
+  public static final int FLAG_POINT_SIGN        = 0x03; // FLAG_POINT | FLAG_SIGN
+  public static final int FLAG_POINT_DEGREE      = 0x06; // FLAG_POINT | FLAG_DEGREE
+  public static final int FLAG_POINT_SIGN_DEGREE = 0x07; // FLAG_POINT | FLAG_SIGN | FLAG_DEGREE
+  public static final int FLAG_POINT_LCASE       = 0x0a; // FLAG_POINT | FLAG_LCASE
+  public static final int FLAG_POINT_LCASE_2ND   = 0x2a; // FLAG_POINT | FLAG_LCASE | FLAG_2ND
 
   private boolean hasDegree;
   private boolean hasPoint;
@@ -84,7 +84,7 @@ class MyKeyboard // FIXME DIALOG extends Dialog
   private Keyboard mKeyboard1;
   private Keyboard mKeyboard2; // secondary kbd
 
-  EditText getEditText() { return mEdit; }
+  public EditText getEditText() { return mEdit; }
   // Context  getContext() { return mContext; }
 
   // Keyboard.Key mKeySign;
@@ -108,7 +108,7 @@ class MyKeyboard // FIXME DIALOG extends Dialog
     return mFlags.put( e, Integer.valueOf(f) );
   }
 
-  static void registerEditText( final MyKeyboard kbd, final EditText e, int flag )
+  public static void registerEditText( final MyKeyboard kbd, final EditText e, int flag )
   { 
     if ( kbd == null ) return;
     if ( kbd.addFlag( e, flag ) == null ) {
@@ -198,7 +198,7 @@ class MyKeyboard // FIXME DIALOG extends Dialog
     // }    
   }
 
-  void hide()
+  public void hide()
   {
     mKeyboardView.setVisibility( View.GONE );
     mKeyboardView.setEnabled( false );
@@ -232,7 +232,7 @@ class MyKeyboard // FIXME DIALOG extends Dialog
     return mKeyboardView.isShown();
   }
 
-  MyKeyboard( Context context, KeyboardView view, int kbdid1, int kbdid2 )
+  public MyKeyboard( Context context, KeyboardView view, int kbdid1, int kbdid2 )
   {
     // FIXME DIALOG super( context );
     mContext = context;
@@ -270,7 +270,7 @@ class MyKeyboard // FIXME DIALOG extends Dialog
     return false;
   }
 
-  static private void setCursor( EditText e )
+  private static void setCursor( EditText e )
   {
     if ( e == null || TDSetting.mNoCursor ) return;
     Editable cs = e.getText();
@@ -282,7 +282,7 @@ class MyKeyboard // FIXME DIALOG extends Dialog
 
   private void clearCursor( ) { clearCursor( mEdit ); }
 
-  static private void clearCursor( EditText e )
+  private static void clearCursor( EditText e )
   {
     if ( e == null || TDSetting.mNoCursor ) return;
     Editable cs = e.getText();
@@ -300,15 +300,15 @@ class MyKeyboard // FIXME DIALOG extends Dialog
     return false;
   }
 
-  final static private char CHAR_MINUS      = (char)'-';
-  final static char CHAR_PLUS_MINUS = (char)177;
-  final static private char CHAR_DEGREE     = (char)176;
-  final static private char CHAR_MINUTE     = (char)39;
-  final static private char CHAR_POINT      = (char)46;
-  final static private char CHAR_CURSOR     = (char)95; // 95 underscore, 124 vert bar, 63 question mark 166 broken vert bar
-  final static private String STR_DEGREE  = Character.toString( CHAR_DEGREE );
-  final static private String STR_MINUTE  = Character.toString( CHAR_MINUTE );
-  final static private String STR_POINT   = Character.toString( CHAR_POINT  );
+  public final static char CHAR_MINUS      = (char)'-';
+  public final static char CHAR_PLUS_MINUS = (char)177;
+  public final static char CHAR_DEGREE     = (char)176;
+  public final static char CHAR_MINUTE     = (char)39;
+  public final static char CHAR_POINT      = (char)46;
+  public final static char CHAR_CURSOR     = (char)95; // 95 underscore, 124 vert bar, 63 question mark 166 broken vert bar
+  public final static String STR_DEGREE  = Character.toString( CHAR_DEGREE );
+  public final static String STR_MINUTE  = Character.toString( CHAR_MINUTE );
+  public final static String STR_POINT   = Character.toString( CHAR_POINT  );
 
 
   @Override
@@ -488,7 +488,7 @@ class MyKeyboard // FIXME DIALOG extends Dialog
     // Log.d(TAG, "onPress? primaryCode=" + primaryCode);
   }
 
-  static void setEditable( EditText et, MyKeyboard kbd, KeyListener kl, boolean editable, int flag )
+  public static void setEditable( EditText et, MyKeyboard kbd, KeyListener kl, boolean editable, int flag )
   {
     if ( TDSetting.mKeyboard ) {
       et.setKeyListener( null );
@@ -519,7 +519,7 @@ class MyKeyboard // FIXME DIALOG extends Dialog
     }
   }
 
-  static boolean close( MyKeyboard kbd )
+  public static boolean close( MyKeyboard kbd )
   {
     if ( kbd == null ) return false;
     kbd.clearCursor();

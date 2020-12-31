@@ -17,6 +17,8 @@ import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDString;
 import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.common.LegType;
+import com.topodroid.common.ExtendType;
 
 
 // import java.lang.Long;
@@ -41,8 +43,8 @@ public class DBlock
   private Paint mPaint;   // user-set block color
 
   // shot data:
-  long   mId;
-  long   mTime;
+  public long   mId;
+  public long   mTime;
   private long   mSurveyId;
   // private String mName;
   public String mFrom;     // N.B. mfrom and mTo must be not null - can be empty
@@ -221,34 +223,15 @@ public class DBlock
   // ---------------------------------------------------------------
   // EXTEND and STRETCH
 
-  // public static final char[] mExtendTag = { '<', '|', '>', ' ', '-', '.', '?', '«', 'I', '»', ' ' };
-  private static final char[] mExtendTag = { '<', '|', '>', ' ', '-', '.', '?', ' ', ' ', ' ', ' ' };
-  public static final int EXTEND_LEFT   = -1;
-  public static final int EXTEND_VERT   =  0;
-  public static final int EXTEND_RIGHT  = 1;
-  public static final int EXTEND_IGNORE = 2;
-  public static final int EXTEND_HIDE   = 3;
-  public static final int EXTEND_START  = 4;
-
-  public static final float STRETCH_NONE = 0.0f;
-
-  public static final int EXTEND_UNSET  = 5;
-  // public static final int EXTEND_FLEFT  = 6; // LEFT = FLEFT - FVERT
-  // public static final int EXTEND_FVERT  = 7;
-  // public static final int EXTEND_FRIGHT = 8;
-  // public static final int EXTEND_FIGNORE = 9; // overload of IGNORE for splays
-
-  public static final int EXTEND_NONE   = EXTEND_VERT;
-
-  // static int getIntExtend( int ext ) { return ( ext < EXTEND_UNSET )? ext : ext - EXTEND_FVERT; }
+  // static int getIntExtend( int ext ) { return ( ext < ExtendType.EXTEND_UNSET )? ext : ext - ExtendType.EXTEND_FVERT; }
   public static int getIntExtend( int ext ) { return ext; }
   public static float getReducedExtend( int ext, float stretch ) 
   {
-    // if ( ext >= EXTEND_UNSET ) { ext -= EXTEND_FVERT; }
+    // if ( ext >= ExtendType.EXTEND_UNSET ) { ext -= ExtendType.EXTEND_FVERT; }
     return ( ext < 2 )? ext + stretch : 0;
   }
 
-  // int getIntExtend() { return ( mExtend < EXTEND_UNSET )? mExtend : mExtend - EXTEND_FVERT; }
+  // int getIntExtend() { return ( mExtend < ExtendType.EXTEND_UNSET )? mExtend : mExtend - ExtendType.EXTEND_FVERT; }
   public int getIntExtend() { return mExtend; }
   public float getReducedExtend() { return ( mExtend < 2 )? mExtend + mStretch : 0.0f; }
   public int   getReducedIntExtend() { return ( mExtend < 2 )? mExtend : 0; }
@@ -267,10 +250,10 @@ public class DBlock
   {
     mStretch = - mStretch;
     switch ( mExtend ) {
-      case EXTEND_LEFT:   mExtend = EXTEND_RIGHT;  return true;
-      case EXTEND_RIGHT:  mExtend = EXTEND_LEFT;   return true;
-      // case EXTEND_FLEFT:  mExtend = EXTEND_FRIGHT; return true;
-      // case EXTEND_FRIGHT: mExtend = EXTEND_FLEFT;  return true;
+      case ExtendType.EXTEND_LEFT:   mExtend = ExtendType.EXTEND_RIGHT;  return true;
+      case ExtendType.EXTEND_RIGHT:  mExtend = ExtendType.EXTEND_LEFT;   return true;
+      // case ExtendType.EXTEND_FLEFT:  mExtend = ExtendType.EXTEND_FRIGHT; return true;
+      // case ExtendType.EXTEND_FRIGHT: mExtend = ExtendType.EXTEND_FLEFT;  return true;
     }
     return ( Math.abs( mStretch ) > 0.01f );
   }
@@ -376,7 +359,7 @@ public class DBlock
   DBlock()
   {
     // ( String f, String t, float d, float b, float c, float r, int e, int type, int shot_type )
-    this( TDString.EMPTY, TDString.EMPTY, 0, 0, 0, 0, EXTEND_RIGHT, BLOCK_BLANK, 0 );
+    this( TDString.EMPTY, TDString.EMPTY, 0, 0, 0, 0, ExtendType.EXTEND_RIGHT, BLOCK_BLANK, 0 );
     // // mPos  = 0;
     // mView    = null; // view is set by the DBlockAdapter
     // mVisible = View.VISIBLE;
@@ -397,7 +380,7 @@ public class DBlock
     // mMagnetic     = 0.0f;
     // mDip          = 0.0f;
     // mComment   = TDString.EMPTY;
-    // mExtend    = EXTEND_RIGHT;
+    // mExtend    = ExtendType.EXTEND_RIGHT;
     // mFlag      = FLAG_SURVEY;
     // mBlockType = BLOCK_BLANK;
     // mShotType  = 0;  // distox
@@ -460,9 +443,9 @@ public class DBlock
   // public void setBearing( float x ) { // FIXME_EXTEND
   //   mBearing = x;
   //   if ( mBearing < 180 ) {  // east to the right, west to the left
-  //     mExtend = EXTEND_RIGHT;
+  //     mExtend = ExtendType.EXTEND_RIGHT;
   //   } else {
-  //     mExtend = EXTEND_LEFT;
+  //     mExtend = ExtendType.EXTEND_LEFT;
   //   }
   // }
 
@@ -551,7 +534,7 @@ public class DBlock
     if ( show_id ) pw.format("%d ", mId );
     pw.format(Locale.US, "<%s-%s> %.2f %.1f %.1f [%c",
       mFrom, mTo,
-      mLength*ul, mBearing*ua, mClino*ua, mExtendTag[ mExtend + 1 ] ); // FIXME mStretch
+      mLength*ul, mBearing*ua, mClino*ua, ExtendType.mExtendTag[ mExtend + 1 ] ); // FIXME mStretch
     formatFlagPhoto( pw );
     formatComment( pw );
     // TDLog.Log( TDLog.LOG_DATA, sw.getBuffer().toString() );
@@ -570,14 +553,14 @@ public class DBlock
     if ( show_id ) pw.format("%d ", mId );
     pw.format(Locale.US, "<%s-%s> %.2f %.1f %.2f [%c",
       mFrom, mTo,
-      mLength*ul, mBearing*ua, mDepth*ul, mExtendTag[ mExtend + 1 ] ); // FIXME mStretch
+      mLength*ul, mBearing*ua, mDepth*ul, ExtendType.mExtendTag[ mExtend + 1 ] ); // FIXME mStretch
     formatFlagPhoto( pw );
     formatComment( pw );
     // TDLog.Log( TDLog.LOG_DATA, sw.getBuffer().toString() );
     return sw.getBuffer().toString();
   }
 
-  String toShortStringNormal( boolean show_id )
+  public String toShortStringNormal( boolean show_id )
   {
     float ul = TDSetting.mUnitLength;
     float ua = TDSetting.mUnitAngle;
@@ -603,7 +586,7 @@ public class DBlock
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
-    pw.format("[%c", mExtendTag[ mExtend + 1 ] ); // FIXME mStretch
+    pw.format("[%c", ExtendType.mExtendTag[ mExtend + 1 ] ); // FIXME mStretch
     formatFlagPhoto( pw );
     formatComment( pw );
     return sw.getBuffer().toString();

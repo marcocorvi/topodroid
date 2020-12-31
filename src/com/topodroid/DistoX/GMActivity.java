@@ -25,6 +25,25 @@ import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPrefCat;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.DataType;
+import com.topodroid.dev.DeviceX310TakeShot;
+import com.topodroid.calib.CBlock;
+import com.topodroid.calib.CBlockAdapter;
+import com.topodroid.calib.CalibComputer;
+import com.topodroid.calib.CalibCoverage;
+import com.topodroid.calib.CalibInfo;
+import com.topodroid.calib.CalibToggleTask;
+import com.topodroid.calib.CalibReadTask;
+import com.topodroid.calib.CalibCoeffDialog;
+import com.topodroid.calib.CalibGMDialog;
+import com.topodroid.calib.CalibCoverageDialog;
+import com.topodroid.calib.CalibValidateListDialog;
+import com.topodroid.calib.CalibValidateResultDialog;
+import com.topodroid.calib.CalibAlgo;
+import com.topodroid.calib.CalibAlgoBH;
+// import com.topodroid.calib.CalibAlgoMin;
+import com.topodroid.calib.ICoeffDisplayer;
+import com.topodroid.calib.GMGroupsDialog;
+
 
 import android.util.Log;
 
@@ -63,6 +82,8 @@ public class GMActivity extends Activity
 {
   private TopoDroidApp mApp;
   private DeviceHelper mApp_mDData;
+
+  public static boolean mGMActivityVisible = false;
 
   private CalibAlgo mCalibration = null;
 
@@ -167,15 +188,15 @@ public class GMActivity extends Activity
 
   // -------------------------------------------------------------
 
-  int getAlgo() { return mAlgo; }
+  public int getAlgo() { return mAlgo; }
 
-  void setAlgo( int algo ) { mAlgo = algo; }
+  public void setAlgo( int algo ) { mAlgo = algo; }
 
   /** called by CalibComputer Task
    * @return nr of iterations (neg. error)
    * note run on an AsyncTask
    */
-  int computeCalib()
+  public int computeCalib()
   {
     long cid = TDInstance.cid;
     if ( cid < 0 ) return -2;
@@ -254,7 +275,7 @@ public class GMActivity extends Activity
    * *-0 vars are computed on list0 using calib1, ie, the other calib on the data of this calib
    * *-1 vars are computed on list1 using calib0, iw, this calib on the data of the other calib
    */
-  void validateCalibration( String name )
+  public void validateCalibration( String name )
   {
     String address = TDInstance.deviceAddress();
     if ( address == null ) return;
@@ -419,9 +440,9 @@ public class GMActivity extends Activity
   }
 
 
-  void handleComputeCalibResult( int job, int result )
+  public void handleComputeCalibResult( int job, int result )
   {
-    if ( ! TopoDroidApp.mGMActivityVisible ) return;
+    if ( ! mGMActivityVisible ) return;
     switch ( job ) {
       case CalibComputer.CALIB_COMPUTE_CALIB:
         resetTitle( );
@@ -483,7 +504,7 @@ public class GMActivity extends Activity
    * @param start_id id of the GM-data to start with
    * note run on an AsyncTask
    */
-  void doResetGroups( long start_id )
+  public void doResetGroups( long start_id )
   {
     // Log.v("DistoX", "Reset CID " + TDInstance.cid + " from gid " + start_id );
     mApp_mDData.resetAllGMs( TDInstance.cid, start_id ); // reset all groups where status=0, and id >= start_id
@@ -493,7 +514,7 @@ public class GMActivity extends Activity
    * @param start_id  data id from whcih to start
    * note run on an AsyncTask
    */
-  int doComputeGroups( long start_id, int policy )
+  public int doComputeGroups( long start_id, int policy )
   {
     long cid = TDInstance.cid;
     // Log.v("DistoX", "Compute CID " + cid + " from gid " + start_id );
@@ -1011,7 +1032,7 @@ public class GMActivity extends Activity
     }
   }
 
-  void uploadCoefficients( float delta, final byte[] coeff, final boolean mode, final Button b )
+  public void uploadCoefficients( float delta, final byte[] coeff, final boolean mode, final Button b )
   {
     String warning = null;
     // if ( warning == null ) { // check coverage
@@ -1036,21 +1057,21 @@ public class GMActivity extends Activity
     }
   }
 
-  void computeGroups( long start_id, int policy )
+  public void computeGroups( long start_id, int policy )
   {
     setTitle( R.string.calib_compute_groups );
     setTitleColor( TDColor.COMPUTE );
     new CalibComputer( this, start_id, policy, CalibComputer.CALIB_COMPUTE_GROUPS ).execute();
   }
 
-  void resetGroups( long start_id )
+  public void resetGroups( long start_id )
   {
     new CalibComputer( this, start_id, 0, CalibComputer.CALIB_RESET_GROUPS ).execute();
   }
 
-  void resetAndComputeGroups( long start_id, int policy )
+  public void resetAndComputeGroups( long start_id, int policy )
   {
-    // if ( ! mApp.mGMActivityVisible ) return;
+    // if ( ! mGMActivityVisible ) return;
     setTitle( R.string.calib_compute_groups );
     setTitleColor( TDColor.COMPUTE );
     new CalibComputer( this, start_id, policy, CalibComputer.CALIB_RESET_AND_COMPUTE_GROUPS ).execute();
@@ -1080,14 +1101,14 @@ public class GMActivity extends Activity
     // Log.v( TopoDroidApp.TAG, "onResume ");
     updateDisplay( );
     // mApp.registerConnListener( mHandler );
-    TopoDroidApp.mGMActivityVisible = true;
+    mGMActivityVisible = true;
   }
 
   @Override
   protected synchronized void onPause() 
   { 
     super.onPause();
-    TopoDroidApp.mGMActivityVisible = false;
+    mGMActivityVisible = false;
     // mApp.unregisterConnListener( mHandler );
     // if ( mApp.mComm != null ) { mApp.mComm.suspend(); }
   }
@@ -1126,7 +1147,7 @@ public class GMActivity extends Activity
   //   }
   // }
  
-  void updateGM( long value, String name )
+  public void updateGM( long value, String name )
   {
     mApp_mDData.updateGMName( mGMid, TDInstance.cid, name );
     // String id = Long.toString(mGMid);
@@ -1143,7 +1164,7 @@ public class GMActivity extends Activity
     // }
   }
 
-  void deleteGM( boolean delete )
+  public void deleteGM( boolean delete )
   {
     mApp_mDData.deleteGM( TDInstance.cid, mGMid, delete );
     updateDisplay( );

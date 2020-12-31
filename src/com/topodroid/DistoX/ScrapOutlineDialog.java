@@ -14,6 +14,7 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.common.PlotType;
 
 // import android.util.Log;
 
@@ -96,7 +97,7 @@ class ScrapOutlineDialog extends MyDialog
     mArrayAdapter.clear();
     for ( PlotInfo item : mPlots ) {
       String name = item.name.substring( 0, item.name.length() - 1 );
-      mArrayAdapter.add( String.format("<%s> %s", name, PlotInfo.plotTypeString( (int)PlotInfo.PLOT_PLAN, res ) ) );
+      mArrayAdapter.add( String.format("<%s> %s", name, PlotType.plotTypeString( (int)PlotType.PLOT_PLAN, res ) ) );
     }
     mList.setAdapter( mArrayAdapter );
   }
@@ -130,12 +131,12 @@ class ScrapOutlineDialog extends MyDialog
     // String plot_name = value.substring( from+1, to );
     // String type = value.substring( to+2 );
 
-    // long plot_type = PlotInfo.PLOT_PLAN;
+    // long plot_type = PlotType.PLOT_PLAN;
     // Resources res = mApp.getResources();
     // if ( res.getString( R.string.plan ).equals( type ) ) {
-    //   plot_type = PlotInfo.PLOT_PLAN;
+    //   plot_type = PlotType.PLOT_PLAN;
     // } else if ( res.getString( R.string.extended ).equals( type ) ) {
-    //   plot_type = PlotInfo.PLOT_EXTENDED;
+    //   plot_type = PlotType.PLOT_EXTENDED;
     // }
     mParent.addScrap( mPlots.get( pos ) );
     dismiss();

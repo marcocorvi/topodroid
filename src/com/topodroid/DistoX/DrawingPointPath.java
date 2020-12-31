@@ -17,6 +17,8 @@ import com.topodroid.math.TDVector;
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.common.PlotType;
+import com.topodroid.common.PointScale;
 
 import com.topodroid.num.TDNum;
 
@@ -40,20 +42,6 @@ import android.util.Base64;
 
 public class DrawingPointPath extends DrawingPath
 {
-  static final int SCALE_NONE = -3; // used to force scaling
-  static final int SCALE_XS = -2;
-  static final int SCALE_S  = -1;
-  static final int SCALE_M  = 0;
-  static final int SCALE_L  = 1;
-  static final int SCALE_XL = 2;
-  static private final String[] SCALE_STR = { "xs", "s", "m", "l", "xl" };
-  static private final String[] SCALE_STR_UC = { "XS", "S", "M", "L", "XL" };
-
-  static private String scaleToString( int scale ) 
-  { return ( scale >= SCALE_XS && scale <= SCALE_XL )? SCALE_STR[ scale+2 ] : "-"; }
-  static String scaleToStringUC( int scale ) 
-  { return ( scale >= SCALE_XS && scale <= SCALE_XL )? SCALE_STR_UC[ scale+2 ] : "-"; }
-
   // float mXpos;        // scene coords
   // float mYpos;
   int mPointType;
@@ -72,7 +60,7 @@ public class DrawingPointPath extends DrawingPath
   // }
 
   // FIXME SECTION_RENAME
-  DrawingPointPath fixScrap( String survey_name )
+  public DrawingPointPath fixScrap( String survey_name )
   {
     if ( survey_name != null && BrushManager.isPointSection( mPointType ) ) {
       String scrapname = mOptions.replace("-scrap ", "");
@@ -116,13 +104,13 @@ public class DrawingPointPath extends DrawingPath
   //   return null;
   // }
 
-  DrawingPointPath( int type, float x, float y, int scale, String text, String options, int scrap )
+  public DrawingPointPath( int type, float x, float y, int scale, String text, String options, int scrap )
   {
     super( DrawingPath.DRAWING_PATH_POINT, null, scrap );
     // TDLog.Log( TDLog.LOG_PATH, "Point " + type + " X " + x + " Y " + y );
     mPointType = type;
     setCenter( x, y );
-    // mScale   = SCALE_NONE;
+    // mScale   = PointScale.SCALE_NONE;
     mOrientation = 0.0;
     mOptions = options;
     mPointText = text; // getTextFromOptions( options ); // this can also reset mOptions
@@ -358,10 +346,10 @@ public class DrawingPointPath extends DrawingPath
   float getScaleValue() // FIX Asenov
   {
     switch ( mScale ) {
-      case SCALE_XS: return 0.50f;
-      case SCALE_S:  return 0.72f;
-      case SCALE_L:  return 1.41f;
-      case SCALE_XL: return 2.00f;
+      case PointScale.SCALE_XS: return 0.50f;
+      case PointScale.SCALE_S:  return 0.72f;
+      case PointScale.SCALE_L:  return 1.41f;
+      case PointScale.SCALE_XL: return 2.00f;
     }
     return 1;
   }
@@ -376,10 +364,10 @@ public class DrawingPointPath extends DrawingPath
         m.postRotate( (float)mOrientation );
       }
       switch ( mScale ) {
-        case SCALE_XS: f *= 0.50f; break;
-        case SCALE_S:  f *= 0.72f; break;
-        case SCALE_L:  f *= 1.41f; break;
-        case SCALE_XL: f *= 2.00f; break;
+        case PointScale.SCALE_XS: f *= 0.50f; break;
+        case PointScale.SCALE_S:  f *= 0.72f; break;
+        case PointScale.SCALE_L:  f *= 1.41f; break;
+        case PointScale.SCALE_XL: f *= 2.00f; break;
       }
       m.postScale(f,f);
       makePath( BrushManager.getPointOrigPath( mPointType ), m, cx, cy );
@@ -424,7 +412,7 @@ public class DrawingPointPath extends DrawingPath
 //   @Override
 //   void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
 //   { 
-//     int size = mScale - SCALE_XS;
+//     int size = mScale - PointScale.SCALE_XS;
 //     int layer  = BrushManager.getPointCsxLayer( mPointType );
 //     int type   = BrushManager.getPointCsxType( mPointType );
 //     int cat    = BrushManager.getPointCsxCategory( mPointType );
@@ -543,13 +531,13 @@ public class DrawingPointPath extends DrawingPath
 
   void toTherionOptions( PrintWriter pw )
   {
-    if ( mScale != SCALE_M ) {
-      pw.format( " -scale %s", scaleToString( mScale ) );
+    if ( mScale != PointScale.SCALE_M ) {
+      pw.format( " -scale %s", PointScale.scaleToString( mScale ) );
       // switch ( mScale ) {
-      //   case SCALE_XS: pw.format( " -scale xs" ); break;
-      //   case SCALE_S:  pw.format( " -scale s" ); break;
-      //   case SCALE_L:  pw.format( " -scale l" ); break;
-      //   case SCALE_XL: pw.format( " -scale xl" ); break;
+      //   case PointScale.SCALE_XS: pw.format( " -scale xs" ); break;
+      //   case PointScale.SCALE_S:  pw.format( " -scale s" ); break;
+      //   case PointScale.SCALE_L:  pw.format( " -scale l" ); break;
+      //   case PointScale.SCALE_XL: pw.format( " -scale xl" ); break;
       // }
     }
     // FIXME SECTION_RENAME
@@ -604,7 +592,7 @@ public class DrawingPointPath extends DrawingPath
     float y = (cy - 120)/20.0f;
     float v = 0;
     TDVector vv = cmd.getCave3Dv( cx, cy, num );
-    if ( type == PlotInfo.PLOT_PLAN ) {
+    if ( type == PlotType.PLOT_PLAN ) {
       v = vv.z;
     } else {
       v = y;

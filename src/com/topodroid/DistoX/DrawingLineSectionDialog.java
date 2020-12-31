@@ -17,6 +17,7 @@ import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.TDLayout;
 import com.topodroid.ui.TDImage;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.common.PlotType;
 
 // import android.util.Log;
 
@@ -103,7 +104,7 @@ class DrawingLineSectionDialog extends MyDialog
         mNick     = mPlotInfo.nick;
         mAzimuth  = mPlotInfo.azimuth;
         mClino    = mPlotInfo.clino;
-        mHSection = (mPlotInfo.type == PlotInfo.PLOT_H_SECTION);
+        mHSection = (mPlotInfo.type == PlotType.PLOT_H_SECTION);
       }
     }
     // Log.v( TopoDroidApp.TAG, "line id " + mId );
@@ -211,7 +212,7 @@ class DrawingLineSectionDialog extends MyDialog
       onBackPressed();
       return;
     } else {
-      long type = mHSection ? PlotInfo.PLOT_H_SECTION : PlotInfo.PLOT_SECTION;
+      long type = mHSection ? PlotType.PLOT_H_SECTION : PlotType.PLOT_SECTION;
       mNick = ( mETnick.getText() != null )? mETnick.getText().toString() : "";
       MyCheckBox cb = (MyCheckBox)v;
       if ( cb == mBtnFoto ) {

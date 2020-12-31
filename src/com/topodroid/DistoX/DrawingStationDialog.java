@@ -20,6 +20,7 @@ import com.topodroid.utils.TDColor;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.MyButton;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.common.PlotType;
 
 // import android.util.Log;
 
@@ -189,7 +190,7 @@ class DrawingStationDialog extends MyDialog
         if ( TDLevel.overNormal ) {
           mBtnXDelete.setOnClickListener( this );
 
-          if ( mStation.mXSectionType == PlotInfo.PLOT_NULL ) {
+          if ( mStation.mXSectionType == PlotType.PLOT_NULL ) {
             int leg_size = mBlk.size();
             String direct  = null;
             String inverse = null;
@@ -236,7 +237,7 @@ class DrawingStationDialog extends MyDialog
               inverse = to + ">" + from;
               cb = true;
             }
-            if ( mParent.getPlotType() == PlotInfo.PLOT_PLAN ) {
+            if ( mParent.getPlotType() == PlotType.PLOT_PLAN ) {
               mClino = 0;
               mCBhorizontal.setVisibility( View.GONE );
             } else {
@@ -402,9 +403,9 @@ class DrawingStationDialog extends MyDialog
       //   mETnick.setError( mContext.getResources().getString( R.string.error_nick_required ) );
       //   return;
       // }
-      if ( mParent.getPlotType() == PlotInfo.PLOT_PLAN ) {
+      if ( mParent.getPlotType() == PlotType.PLOT_PLAN ) {
         c = 0;
-      } else { // PlotInfo.isProfile( type )
+      } else { // PlotType.isProfile( type )
       }
       mParent.openXSection( mStation, mStationName, mParent.getPlotType(), b, c, mCBhorizontal.isChecked(), nick );
       dismiss();

@@ -14,6 +14,9 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
 import com.topodroid.dev.Device;
+import com.topodroid.calib.CBlock;
+import com.topodroid.calib.CalibInfo;
+import com.topodroid.calib.CalibResult;
 
 // import android.util.Log;
 
@@ -360,7 +363,7 @@ public class DeviceHelper extends DataSetObservable
   }
 
 
-  int selectCalibAlgo( long cid )
+  public int selectCalibAlgo( long cid )
   {
     if ( myDB == null ) {
       TDLog.Error( ERROR_NULL_DB + "select algo");
@@ -404,7 +407,7 @@ public class DeviceHelper extends DataSetObservable
     return id;
   }
  
-  CalibInfo selectCalibInfo( long cid )
+  public CalibInfo selectCalibInfo( long cid )
   {
     if ( myDB == null ) {
       TDLog.Error( ERROR_NULL_DB + "select calib info");
@@ -432,7 +435,7 @@ public class DeviceHelper extends DataSetObservable
     return info;
   }
 
-  void selectCalibError( long cid, CalibResult res )
+  public void selectCalibError( long cid, CalibResult res )
   {
     if ( myDB == null ) {
       TDLog.Error( ERROR_NULL_DB + "select calib error");
@@ -517,7 +520,7 @@ public class DeviceHelper extends DataSetObservable
 
   List< String > selectAllCalibs() { return selectAllNames( CALIB_TABLE ); }
 
-  List< String > selectDeviceCalibs( String device )
+  public List< String > selectDeviceCalibs( String device )
   {
     List< String > ret = new ArrayList<>();
     if ( myDB == null ) {
@@ -541,7 +544,7 @@ public class DeviceHelper extends DataSetObservable
     return ret;
   }
 
-  List< CalibInfo > selectDeviceCalibsInfo( String device ) 
+  public List< CalibInfo > selectDeviceCalibsInfo( String device ) 
   {
     List< CalibInfo > ret = new ArrayList<>();
     if ( myDB == null ) {

@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-interface ILister 
+public interface ILister 
 {
   /**
    * @param nr    number of new shots
@@ -22,7 +22,7 @@ interface ILister
    *   - ShotNewDialog.onClick
    *   - ListerHandler.handleMessage Lister.LIST_REFRESH
    */
-  void refreshDisplay( int nr, boolean toast );
+  public void refreshDisplay( int nr, boolean toast );
 
   /** 
    * @param blk_id id (of the data-block) from which to update the list
@@ -30,7 +30,7 @@ interface ILister
    *  updateBlockList is called by
    *   - ListerHandler.handleMessage Lister.BLOCK_ID
    */
-  void updateBlockList( long blk_id );
+  public void updateBlockList( long blk_id );
 
   /**
    * @param status   current status ( 0: off,  1: on,  2: wait )A
@@ -48,7 +48,7 @@ interface ILister
    * ShotWindow: change button[0] background
    * SketchWindow: nothing (TODO)
    */
-  void setConnectionStatus( int status ); 
+  public void setConnectionStatus( int status ); 
  
   // void notifyDisconnected();
 
@@ -63,17 +63,17 @@ interface ILister
    * ShotWindow
    * SketchWindow: TODO
    */
-  void setRefAzimuth( float azimuth, long fixed_extend );
+  public void setRefAzimuth( float azimuth, long fixed_extend );
 
   /** set the title
    *
    */
-  void setTheTitle();
+  public void setTheTitle();
 
   /** enable/disable theBluetooth button
    * @param enable whether to enable or disable
    */
-  void enableBluetoothButton( boolean enable );
+  public void enableBluetoothButton( boolean enable );
 
 }
 

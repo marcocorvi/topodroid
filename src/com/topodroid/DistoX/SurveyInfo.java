@@ -29,8 +29,8 @@ public class SurveyInfo
   public final static int SURVEY_EXTEND_LEFT    = -1000;
   public final static int SURVEY_EXTEND_RIGHT   =  1000;
 
-  final static float DECLINATION_MAX = 720;    // twice 360
-  final static float DECLINATION_UNSET = 1080; // three times 360
+  public final static float DECLINATION_MAX = 720;    // twice 360
+  public final static float DECLINATION_UNSET = 1080; // three times 360
 
   public long id;
   String name;

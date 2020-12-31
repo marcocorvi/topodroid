@@ -14,7 +14,7 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDColor;
 import com.topodroid.ui.MyDialog;
-
+import com.topodroid.common.SymbolType;
 
 // import android.util.Log;
 
@@ -66,7 +66,7 @@ class SymbolEnableDialog extends MyDialog
   SymbolEnableDialog( Context context )
   {
     super( context, R.string.SymbolEnableDialog );
-    mType    = Symbol.LINE; // default symbols are lines
+    mType    = SymbolType.LINE; // default symbols are lines
   }
 
   @Override
@@ -122,7 +122,7 @@ class SymbolEnableDialog extends MyDialog
       for ( int i=0; i<np; ++i ) {
 	Symbol point = point_lib.getSymbolByIndex( i );
 	if ( ! point.mThName.equals("section") ) { // FIXME_SECTION_POINT always enabled
-          mPointAdapter.add( new EnableSymbol( mContext, Symbol.POINT, i, point ) );
+          mPointAdapter.add( new EnableSymbol( mContext, SymbolType.POINT, i, point ) );
         }
       }
     }
@@ -131,7 +131,7 @@ class SymbolEnableDialog extends MyDialog
     if ( line_lib == null ) return false;
     int nl = line_lib.size();
     for ( int j=0; j<nl; ++j ) {
-      mLineAdapter.add( new EnableSymbol( mContext, Symbol.LINE, j, line_lib.getSymbolByIndex( j ) ) );
+      mLineAdapter.add( new EnableSymbol( mContext, SymbolType.LINE, j, line_lib.getSymbolByIndex( j ) ) );
     }
 
     if ( TDLevel.overBasic ) {
@@ -139,7 +139,7 @@ class SymbolEnableDialog extends MyDialog
       if ( area_lib == null ) return false;
       int na = area_lib.size();
       for ( int k=0; k<na; ++k ) {
-        mAreaAdapter.add( new EnableSymbol( mContext, Symbol.AREA, k, area_lib.getSymbolByIndex( k ) ) );
+        mAreaAdapter.add( new EnableSymbol( mContext, SymbolType.AREA, k, area_lib.getSymbolByIndex( k ) ) );
       }
     }
 
@@ -151,18 +151,18 @@ class SymbolEnableDialog extends MyDialog
   {
     // Log.v( TopoDroidApp.TAG, "Symbol-Enable dialog ... updateList type " + mType );
     // switch ( old_type ) {
-    //   case Symbol.POINT:
+    //   case SymbolType.POINT:
     //     mBTpoint.setTextColor( TDColor.SYMBOL_TAB );
     //     break;
-    //   case Symbol.LINE:
+    //   case SymbolType.LINE:
     //     mBTline.setTextColor( TDColor.SYMBOL_TAB );
     //     break;
-    //   case Symbol.AREA:
+    //   case SymbolType.AREA:
     //     mBTarea.setTextColor( TDColor.SYMBOL_TAB );
     //     break;
     // }
     switch ( new_type ) {
-      case Symbol.POINT:
+      case SymbolType.POINT:
         if ( TDLevel.overBasic ) {
           mList.setAdapter( mPointAdapter );
           // mBTpoint.getBackground().setColorFilter( TDColor.LIGHT_BLUE, PorterDuff.Mode.LIGHTEN );
@@ -173,7 +173,7 @@ class SymbolEnableDialog extends MyDialog
           mBTarea.setTextColor(  TDColor.SYMBOL_TAB );
         }
         break;
-      case Symbol.LINE:
+      case SymbolType.LINE:
         mList.setAdapter( mLineAdapter );
         // mBTpoint.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
         // mBTline.getBackground().setColorFilter(  TDColor.LIGHT_BLUE, PorterDuff.Mode.LIGHTEN );
@@ -182,7 +182,7 @@ class SymbolEnableDialog extends MyDialog
         mBTline.setTextColor(  TDColor.SYMBOL_ON );
         mBTarea.setTextColor(  TDColor.SYMBOL_TAB );
         break;
-      case Symbol.AREA:
+      case SymbolType.AREA:
         if ( TDLevel.overBasic ) {
           mList.setAdapter( mAreaAdapter );
           // mBTpoint.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
@@ -205,13 +205,13 @@ class SymbolEnableDialog extends MyDialog
     int type = -1;
     switch (view.getId()) {
       case R.id.symbol_point:
-        if ( TDLevel.overBasic ) type = Symbol.POINT;
+        if ( TDLevel.overBasic ) type = SymbolType.POINT;
         break;
       case R.id.symbol_line:
-        type = Symbol.LINE;
+        type = SymbolType.LINE;
         break;
       case R.id.symbol_area:
-        if ( TDLevel.overBasic ) type = Symbol.AREA;
+        if ( TDLevel.overBasic ) type = SymbolType.AREA;
         break;
       // case R.id.symbol_reload:
       //   String old_version = mApp.mDData.getValue( "symbol_version" );

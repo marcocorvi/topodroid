@@ -13,15 +13,15 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDString;
 
-class CurrentStation
+public class CurrentStation
 {
   final String mName;
   final String mComment;
   final int mFlag;
 
-  static final int STATION_NONE    = 0;
-  static final int STATION_FIXED   = 1;
-  static final int STATION_PAINTED = 2;
+  public static final int STATION_NONE    = 0;
+  public static final int STATION_FIXED   = 1;
+  public static final int STATION_PAINTED = 2;
 
   static final private String[] flag_str = { " ", " [F] ", " [P] " };
 

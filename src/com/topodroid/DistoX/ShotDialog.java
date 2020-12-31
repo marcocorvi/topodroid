@@ -20,7 +20,8 @@ import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
-
+import com.topodroid.common.LegType;
+import com.topodroid.common.ExtendType;
 
 import android.util.Log;
 
@@ -269,17 +270,17 @@ class ShotDialog extends MyDialog
     mRBvert.setChecked(  false );
     mRBright.setChecked( false );
     // mRBignore.setChecked( false );
-    if ( shot_extend == DBlock.EXTEND_LEFT )       { mRBleft.setChecked(  true ); }
-    else if ( shot_extend == DBlock.EXTEND_VERT )  { mRBvert.setChecked(  true ); }
-    else if ( shot_extend == DBlock.EXTEND_RIGHT ) { mRBright.setChecked( true ); }
-    // else if ( shot_extend == DBlock.EXTEND_IGNORE ) { mRBignore.setChecked( true ); }
+    if ( shot_extend == ExtendType.EXTEND_LEFT )       { mRBleft.setChecked(  true ); }
+    else if ( shot_extend == ExtendType.EXTEND_VERT )  { mRBvert.setChecked(  true ); }
+    else if ( shot_extend == ExtendType.EXTEND_RIGHT ) { mRBright.setChecked( true ); }
+    // else if ( shot_extend == ExtendType.EXTEND_IGNORE ) { mRBignore.setChecked( true ); }
 
     // Spinner
     // switch ( shot_extend ) {
-    //   case DBlock.EXTEND_LEFT: break;
-    //   case DBlock.EXTEND_VERT: break;
-    //   case DBlock.EXTEND_RIGHT: break;
-    //   case DBlock.EXTEND_IGNORE: break;
+    //   case ExtendType.EXTEND_LEFT: break;
+    //   case ExtendType.EXTEND_VERT: break;
+    //   case ExtendType.EXTEND_RIGHT: break;
+    //   case ExtendType.EXTEND_IGNORE: break;
     // }
 
     mButtonNext.setEnabled( mNextBlk != null );
@@ -561,7 +562,7 @@ class ShotDialog extends MyDialog
     // boolean shot_secleg = false;
     if ( mCBlegPrev.isChecked() ) {
       mBlk.setTypeSecLeg();
-      mParent.updateShot( "", "", DBlock.EXTEND_IGNORE, 0, 0, LegType.EXTRA, "", mBlk );
+      mParent.updateShot( "", "", ExtendType.EXTEND_IGNORE, 0, 0, LegType.EXTRA, "", mBlk );
       return;
       // shot_from = "";
       // shot_to   = "";
@@ -604,10 +605,10 @@ class ShotDialog extends MyDialog
     // Log.v("DistoXA", "shot flag " + shot_flag );
 
     shot_extend = mBlk.getIntExtend();
-    if ( mRBleft.isChecked() )       { shot_extend = DBlock.EXTEND_LEFT; }
-    else if ( mRBvert.isChecked() )  { shot_extend = DBlock.EXTEND_VERT; }
-    else if ( mRBright.isChecked() ) { shot_extend = DBlock.EXTEND_RIGHT; }
-    else                             { shot_extend = DBlock.EXTEND_IGNORE; }
+    if ( mRBleft.isChecked() )       { shot_extend = ExtendType.EXTEND_LEFT; }
+    else if ( mRBvert.isChecked() )  { shot_extend = ExtendType.EXTEND_VERT; }
+    else if ( mRBright.isChecked() ) { shot_extend = ExtendType.EXTEND_RIGHT; }
+    else                             { shot_extend = ExtendType.EXTEND_IGNORE; }
 
     // Log.v("DistoXShot", "clr xsplay " + set_xsplay
     //                     + " all splay " + all_splay 
@@ -640,10 +641,10 @@ class ShotDialog extends MyDialog
     boolean stlen = shot_to.length() > 0;
     if ( mBlk.getIntExtend() != shot_extend ) {
       if ( /* leg_next || */ ( sflen && stlen ) ) { // leg
-        mBlk.setExtend( extend, DBlock.STRETCH_NONE ); // FIXME_STRETCH
+        mBlk.setExtend( extend, ExtendType.STRETCH_NONE ); // FIXME_STRETCH
       } else if ( ( sflen /* && ! stlen */ ) || ( stlen /* && ! sflen */ ) ) { // splay
-        // extend = shot_extend + DBlock.EXTEND_FVERT;
-        mBlk.setExtend( extend, DBlock.STRETCH_NONE ); // FIXME_STRETCH
+        // extend = shot_extend + ExtendType.EXTEND_FVERT;
+        mBlk.setExtend( extend, ExtendType.STRETCH_NONE ); // FIXME_STRETCH
       }
     }
 
@@ -751,15 +752,15 @@ class ShotDialog extends MyDialog
     if ( b == mRBleft ) {
       mRBvert.setChecked( false );
       mRBright.setChecked( false );
-      // shot_extend = mRBleft.isChecked() ? DBlock.EXTEND_LEFT : DBlock.EXTEND_IGNORE;
+      // shot_extend = mRBleft.isChecked() ? ExtendType.EXTEND_LEFT : ExtendType.EXTEND_IGNORE;
     } else if ( b == mRBvert ) {
       mRBleft.setChecked( false );
       mRBright.setChecked( false );
-      // shot_extend = mRBvert.isChecked() ? DBlock.EXTEND_VERT : DBlock.EXTEND_IGNORE;
+      // shot_extend = mRBvert.isChecked() ? ExtendType.EXTEND_VERT : ExtendType.EXTEND_IGNORE;
     } else if ( b == mRBright ) {
       mRBleft.setChecked( false );
       mRBvert.setChecked( false );
-      // shot_extend = mRBright.isChecked() ? DBlock.EXTEND_RIGHT : DBlock.EXTEND_IGNORE;
+      // shot_extend = mRBright.isChecked() ? ExtendType.EXTEND_RIGHT : ExtendType.EXTEND_IGNORE;
 
     } else if ( b == mCBlegPrev ) {
       // Log.v("DistoX", "CB leg clicked ");
@@ -876,11 +877,11 @@ class ShotDialog extends MyDialog
         if ( mRBleft.isChecked() ) {
 	  mRBleft.setChecked( false );
 	  mRBright.setChecked( true );
-          // shot_extend = DBlock.EXTEND_RIGHT;
+          // shot_extend = ExtendType.EXTEND_RIGHT;
 	} else if ( mRBright.isChecked() ) {
 	  mRBleft.setChecked( true );
 	  mRBright.setChecked( false );
-          // shot_extend = DBlock.EXTEND_LEFT;
+          // shot_extend = ExtendType.EXTEND_LEFT;
 	}
       }
     // } else if ( b == mButtonDrop ) {

@@ -21,6 +21,7 @@ import com.topodroid.ui.MotionEventWrap;
 import com.topodroid.help.HelpDialog;
 import com.topodroid.help.UserManualActivity;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.common.PlotType;
 
 import android.util.Log;
 
@@ -512,7 +513,7 @@ public class PlotReloadWindow extends ItemDrawer
     double ba = Math.atan2( bx, by ) * 180 / Math.PI;
     if ( ba < 0 ) ba += 360;
 
-    if ( mType == PlotInfo.PLOT_PLAN ) {
+    if ( mType == PlotType.PLOT_PLAN ) {
       /* nothing */
     } else {
       if ( ba <= 180 ) {

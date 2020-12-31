@@ -42,13 +42,13 @@ public class PtCmapActivity extends Activity
 
   private Button mBtOk;
 
-  static String getLineThName( int k ) 
+  public static String getLineThName( int k ) 
   {
     if ( k < 1 || k > 7 ) return "user";
     return mCmapLine[k-1];
   }
 
-  static String getPointThName( int k ) 
+  public static String getPointThName( int k ) 
   {
     if ( k < 1 || k > 7 ) return "user";
     return mCmapPoint[k-1];

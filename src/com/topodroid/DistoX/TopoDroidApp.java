@@ -25,8 +25,16 @@ import com.topodroid.dev.Device;
 import com.topodroid.dev.TopoDroidComm;
 import com.topodroid.dev.DistoX310Comm;
 import com.topodroid.dev.DistoXA3Comm;
+import com.topodroid.dev.DeviceA3Info;
+import com.topodroid.dev.DeviceX310Info;
 import com.topodroid.dev.SapComm;
 import com.topodroid.dev.PairingRequest;
+import com.topodroid.common.LegType;
+import com.topodroid.common.ExtendType;
+import com.topodroid.common.PlotType;
+// import com.topodroid.calib.CalibCoeffDialog;
+// import com.topodroid.calib.CalibReadTask;
+import com.topodroid.calib.CalibInfo;
 
 
 import android.util.Log;
@@ -201,8 +209,6 @@ public class TopoDroidApp extends Application
   public static ShotWindow mShotWindow = null; // FIXME ref mActivity - public for prefs/TDSetting
   static DrawingWindow mDrawingWindow  = null; // FIXME currently not used
   static MainWindow mActivity          = null; // FIXME ref mActivity
-
-  static boolean mGMActivityVisible = false;
 
   static long lastShotId( ) { return mData.getLastShotId( TDInstance.sid ); }
   static StationName mStationName = null;
@@ -479,7 +485,7 @@ public class TopoDroidApp extends Application
   }
   // end FIXME_COMM
 
-  DeviceA3Info readDeviceA3Info( String address )
+  public DeviceA3Info readDeviceA3Info( String address )
   {
     DeviceA3Info info = new DeviceA3Info();
     byte[] ret = readMemory( address, 0x8008 );
@@ -501,7 +507,7 @@ public class TopoDroidApp extends Application
     return info;
   }
 
-  DeviceX310Info readDeviceX310Info( String address )
+  public DeviceX310Info readDeviceX310Info( String address )
   {
     DeviceX310Info info = new DeviceX310Info();
     byte[] ret = readMemory( address, 0x8008 );
@@ -531,7 +537,7 @@ public class TopoDroidApp extends Application
   // @param command
   // @param head_tail  return array with positions of head and tail
   // @return HeadTail string, null on failure
-  String readA3HeadTail( String address, byte[] command, int[] head_tail )
+  public String readA3HeadTail( String address, byte[] command, int[] head_tail )
   {
     try {
       DistoXA3Comm comm = (DistoXA3Comm)mComm;
@@ -546,7 +552,7 @@ public class TopoDroidApp extends Application
 
   // swap hot bit in the range [from, to)
   // @return the number of bit that have been swapped
-  int swapA3HotBit( String address, int from, int to, boolean on_off ) 
+  public int swapA3HotBit( String address, int from, int to, boolean on_off ) 
   {
     try {
       DistoXA3Comm comm = (DistoXA3Comm)mComm;
@@ -903,7 +909,7 @@ public class TopoDroidApp extends Application
 
   // called by GMActivity and by CalibCoeffDialog 
   // and DeviceActivity (to reset coeffs)
-  void uploadCalibCoeff( byte[] coeff, boolean check, Button b )
+  public void uploadCalibCoeff( byte[] coeff, boolean check, Button b )
   {
     // TODO this writeCoeff shoudl be run in an AsyncTask
     if ( b != null ) b.setEnabled( false );
@@ -921,7 +927,7 @@ public class TopoDroidApp extends Application
   }
 
   // called by CalibReadTask.onPostExecute
-  boolean readCalibCoeff( byte[] coeff )
+  public boolean readCalibCoeff( byte[] coeff )
   {
     if ( mComm == null || TDInstance.deviceA == null ) return false;
     boolean ret = mComm.readCoeff( TDInstance.deviceAddress(), coeff );
@@ -930,7 +936,7 @@ public class TopoDroidApp extends Application
   }
 
   // called by CalibToggleTask.doInBackground
-  boolean toggleCalibMode( )
+  public boolean toggleCalibMode( )
   {
     if ( mComm == null || TDInstance.deviceA == null ) return false;
     boolean ret = mComm.toggleCalibMode( TDInstance.deviceAddress(), TDInstance.deviceType() );
@@ -938,7 +944,7 @@ public class TopoDroidApp extends Application
     return ret;
   }
 
-  byte[] readMemory( String address, int addr )
+  public byte[] readMemory( String address, int addr )
   {
     if ( mComm == null || isCommConnected() ) return null;
     byte[] ret = mComm.readMemory( address, addr );
@@ -946,7 +952,7 @@ public class TopoDroidApp extends Application
     return ret;
   }
 
-  int readX310Memory( String address, int h0, int h1, ArrayList< MemoryOctet > memory )
+  public int readX310Memory( String address, int h0, int h1, ArrayList< MemoryOctet > memory )
   {
     if ( mComm == null || isCommConnected() ) return -1;
     try {
@@ -960,7 +966,7 @@ public class TopoDroidApp extends Application
     return -1;
   }
 
-  int readA3Memory( String address, int h0, int h1, ArrayList< MemoryOctet > memory )
+  public int readA3Memory( String address, int h0, int h1, ArrayList< MemoryOctet > memory )
   {
     if ( mComm == null || isCommConnected() ) return -1;
     try {
@@ -1148,7 +1154,7 @@ public class TopoDroidApp extends Application
    * @param name      survey name
    * @param datamode  survey datamode
    */
-  long setSurveyFromName( String name, int datamode, boolean update )
+  public long setSurveyFromName( String name, int datamode, boolean update )
   { 
     TDInstance.sid      = -1;       // no survey by default
     TDInstance.survey   = null;
@@ -1710,12 +1716,12 @@ public class TopoDroidApp extends Application
       }
     }
 
-    extend = DBlock.EXTEND_IGNORE;
+    extend = ExtendType.EXTEND_IGNORE;
     if ( l >= 0.0f ) { // FIXME_X_SPLAY
       ok = true;
       if ( horizontal ) { // WENS
         // extend = TDAzimuth.computeSplayExtend( 270 );
-        // extend = ( TDSetting.mLRExtend )? TDAzimuth.computeSplayExtend( 270 ) : DBlock.EXTEND_UNSET;
+        // extend = ( TDSetting.mLRExtend )? TDAzimuth.computeSplayExtend( 270 ) : ExtendType.EXTEND_UNSET;
         if ( at >= 0L ) {
           id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, l, 270.0f, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
           ++at;
@@ -1726,7 +1732,7 @@ public class TopoDroidApp extends Application
         float b = bearing - 90.0f;
         if ( b < 0.0f ) b += 360.0f;
         // extend = TDAzimuth.computeSplayExtend( b );
-        // extend = ( TDSetting.mLRExtend )? TDAzimuth.computeSplayExtend( b ) : DBlock.EXTEND_UNSET;
+        // extend = ( TDSetting.mLRExtend )? TDAzimuth.computeSplayExtend( b ) : ExtendType.EXTEND_UNSET;
         // b = in360( b );
         if ( at >= 0L ) {
           id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, l, b, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
@@ -1742,7 +1748,7 @@ public class TopoDroidApp extends Application
       ok = true;
       if ( horizontal ) { // WENS
         // extend = TDAzimuth.computeSplayExtend( 90 );
-        // extend = ( TDSetting.mLRExtend )? TDAzimuth.computeSplayExtend( 90 ) : DBlock.EXTEND_UNSET;
+        // extend = ( TDSetting.mLRExtend )? TDAzimuth.computeSplayExtend( 90 ) : ExtendType.EXTEND_UNSET;
         if ( at >= 0L ) {
           id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, r, 90.0f, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
           ++at;
@@ -1753,7 +1759,7 @@ public class TopoDroidApp extends Application
         // float b = bearing + 90.0f; if ( b >= 360.0f ) b -= 360.0f;
         float b = TDMath.add90( bearing );
         // extend = TDAzimuth.computeSplayExtend( b );
-        // extend = ( TDSetting.mLRExtend )? TDAzimuth.computeSplayExtend( b ) : DBlock.EXTEND_UNSET;
+        // extend = ( TDSetting.mLRExtend )? TDAzimuth.computeSplayExtend( b ) : ExtendType.EXTEND_UNSET;
         if ( at >= 0L ) {
           id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, r, b, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
           ++at;
@@ -1764,7 +1770,7 @@ public class TopoDroidApp extends Application
       mData.updateShotName( id, TDInstance.sid, splay_station, TDString.EMPTY );
       // Log.v("DistoX-LRUD", "insert " + id + " right " + r );
     }
-    extend = DBlock.EXTEND_VERT;
+    extend = ExtendType.EXTEND_VERT;
     if ( u >= 0.0f ) {  
       ok = true;
       if ( horizontal ) {
@@ -1860,7 +1866,7 @@ public class TopoDroidApp extends Application
           // String name = from + "-" + to;
           mData.updateShotName( id, TDInstance.sid, from, to );
           // mData.updateShotExtend( id, TDInstance.sid, extend0, stretch0 );
-          // mData.updateShotExtend( id, TDInstance.sid, DBlock.EXTEND_IGNORE, 1 ); // FIXME WHY ???
+          // mData.updateShotExtend( id, TDInstance.sid, ExtendType.EXTEND_IGNORE, 1 ); // FIXME WHY ???
           // FIXME updateDisplay( );
         } else {
           if ( at >= 0L ) {
@@ -1872,7 +1878,7 @@ public class TopoDroidApp extends Application
           // String name = from + "-" + to;
           mData.updateShotName( id, TDInstance.sid, from, to );
           // mData.updateShotExtend( id, TDInstance.sid, extend0, stretch0 );
-          // mData.updateShotExtend( id, TDInstance.sid, DBlock.EXTEND_IGNORE, 1 );  // FIXME WHY ???
+          // mData.updateShotExtend( id, TDInstance.sid, ExtendType.EXTEND_IGNORE, 1 );  // FIXME WHY ???
           // FIXME updateDisplay( );
 
           addManualSplays( at, splay_station, left, right, up, down, bearing, horizontal, false );
@@ -1914,7 +1920,7 @@ public class TopoDroidApp extends Application
    * @param nr        number od data to download
    # @param lister    optional lister
    */
-  void setX310Laser( int what, int nr, Handler /* ILister */ lister, int data_type ) // 0: off, 1: on, 2: measure // FIXME_LISTER
+  public void setX310Laser( int what, int nr, Handler /* ILister */ lister, int data_type ) // 0: off, 1: on, 2: measure // FIXME_LISTER
   {
     if ( mComm == null || TDInstance.deviceA == null ) return;
     try { 
@@ -1966,18 +1972,18 @@ public class TopoDroidApp extends Application
 
   // ----------------------------------------------------------------------
 
-  long insert2dPlot( long sid , String name, String start, boolean extended, int project )
+  public long insert2dPlot( long sid , String name, String start, boolean extended, int project )
   {
     // PlotInfo.ORIENTATION_PORTRAIT = 0
     // TDLog.Log( TDLog.LOG_PLOT, "new plot " + name + " start " + start );
     long pid_p = mData.insertPlot( sid, -1L, name+"p",
-                 PlotInfo.PLOT_PLAN, 0L, start, TDString.EMPTY, 0, 0, mScaleFactor, 0, 0, TDString.EMPTY, TDString.EMPTY, 0 );
+                 PlotType.PLOT_PLAN, 0L, start, TDString.EMPTY, 0, 0, mScaleFactor, 0, 0, TDString.EMPTY, TDString.EMPTY, 0 );
     if ( extended ) {
       long pid_s = mData.insertPlot( sid, -1L, name+"s",
-                   PlotInfo.PLOT_EXTENDED, 0L, start, TDString.EMPTY, 0, 0, mScaleFactor, 0, 0, TDString.EMPTY, TDString.EMPTY, 0 );
+                   PlotType.PLOT_EXTENDED, 0L, start, TDString.EMPTY, 0, 0, mScaleFactor, 0, 0, TDString.EMPTY, TDString.EMPTY, 0 );
     } else {
       long pid_s = mData.insertPlot( sid, -1L, name+"s",
-                   PlotInfo.PLOT_PROJECTED, 0L, start, TDString.EMPTY, 0, 0, mScaleFactor, project, 0, TDString.EMPTY, TDString.EMPTY, 0 );
+                   PlotType.PLOT_PROJECTED, 0L, start, TDString.EMPTY, 0, 0, mScaleFactor, project, 0, TDString.EMPTY, TDString.EMPTY, 0 );
     }
     return pid_p;
   }
@@ -1985,7 +1991,7 @@ public class TopoDroidApp extends Application
   // @param azimuth clino : projected profile azimuth / section plane direction 
   // @param parent parent plot name
   // NOTE field "hide" is overloaded for x_sections with the parent plot name
-  long insert2dSection( long sid, String name, long type, String from, String to, float azimuth, float clino, String parent, String nickname )
+  public long insert2dSection( long sid, String name, long type, String from, String to, float azimuth, float clino, String parent, String nickname )
   {
     // FIXME COSURVEY 2d sections are not forwarded
     // 0 0 mScaleFactor : offset and zoom

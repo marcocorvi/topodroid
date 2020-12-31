@@ -12,6 +12,8 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.common.SymbolType;
+import com.topodroid.common.PointScale;
 
 import android.util.Log;
 
@@ -29,7 +31,7 @@ abstract class ItemDrawer extends Activity
   protected int mPointScale;
   protected int mLinePointStep = 1;
 
-  protected int mSymbol = Symbol.LINE; // kind of symbol being drawn
+  protected int mSymbol = SymbolType.LINE; // kind of symbol being drawn
 
   // -----------------------------------------------------------
   static final int NR_RECENT = 6; // max is 6
@@ -45,7 +47,7 @@ abstract class ItemDrawer extends Activity
 
   void setPointScale( int scale )
   {
-    if ( scale >= DrawingPointPath.SCALE_XS && scale <= DrawingPointPath.SCALE_XL ) mPointScale = scale;
+    if ( scale >= PointScale.SCALE_XS && scale <= PointScale.SCALE_XL ) mPointScale = scale;
   }
 
   int getPointScale() { return mPointScale; }
@@ -127,7 +129,7 @@ abstract class ItemDrawer extends Activity
 
   public void areaSelected( int k, boolean update_recent ) 
   {
-    mSymbol = Symbol.AREA;
+    mSymbol = SymbolType.AREA;
     if ( k >= 0 && k < BrushManager.getAreaLibSize() ) {
       mCurrentArea = k;
       if ( TDSetting.mWithLevels > 0 ) {
@@ -139,14 +141,14 @@ abstract class ItemDrawer extends Activity
     setTheTitle();
     if ( update_recent ) {
       updateRecentArea( mCurrentArea );
-      setBtnRecent( Symbol.AREA );
+      setBtnRecent( SymbolType.AREA );
     }
     mLinePointStep = TDSetting.mLineType;
   }
 
   public void lineSelected( int k, boolean update_recent ) 
   {
-    mSymbol = Symbol.LINE;
+    mSymbol = SymbolType.LINE;
     if ( k >= 0 && k < BrushManager.getLineLibSize() ) {
       mCurrentLine = k;
       if ( TDSetting.mWithLevels > 0 ) {
@@ -158,7 +160,7 @@ abstract class ItemDrawer extends Activity
     setTheTitle();
     if ( update_recent ) {
       updateRecentLine( mCurrentLine );
-      setBtnRecent( Symbol.LINE );
+      setBtnRecent( SymbolType.LINE );
     }
     mLinePointStep = BrushManager.getLineStyleX( mCurrentLine );
     if ( mLinePointStep != POINT_MAX ) mLinePointStep *= TDSetting.mLineType;
@@ -166,7 +168,7 @@ abstract class ItemDrawer extends Activity
 
   public void pointSelected( int p, boolean update_recent )
   {
-    mSymbol = Symbol.POINT;
+    mSymbol = SymbolType.POINT;
     if ( p >= 0 && p < BrushManager.getPointLibSize() ) {
       mCurrentPoint = p;
       if ( TDSetting.mWithLevels > 0 ) {
@@ -178,7 +180,7 @@ abstract class ItemDrawer extends Activity
     setTheTitle();
     if ( update_recent ) {
       updateRecentPoint( mCurrentPoint );
-      setBtnRecent( Symbol.POINT );
+      setBtnRecent( SymbolType.POINT );
     }
   }
 

@@ -13,6 +13,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.common.LegType;
 
 // import android.util.Log;
 

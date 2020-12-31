@@ -11,7 +11,7 @@
  */
 package com.topodroid.num;
 
-import com.topodroid.DistoX.PlotInfo;
+import com.topodroid.common.PlotType;
 
 import java.util.Stack;
 import java.util.List;
@@ -166,7 +166,7 @@ class NumStationSet
   {
     NumStation ret = null;
     float dist2 = 16000000; // max 100 m 
-    if ( type == PlotInfo.PLOT_PLAN ) {
+    if ( type == PlotType.PLOT_PLAN ) {
       for ( NumStation st : mStations ) {
         float d2 = (st.e-x)*(st.e-x) + (st.s-y)*(st.s-y);
         if ( d2 < dist2 ) {
@@ -174,7 +174,7 @@ class NumStationSet
           ret = st;
         }
       }
-    } else if ( PlotInfo.isProfile( type ) ) {
+    } else if ( PlotType.isProfile( type ) ) {
       for ( NumStation st : mStations ) {
         float d2 = (st.h-x)*(st.h-x) + (st.v-y)*(st.v-y);
         if ( d2 < dist2 ) {

@@ -19,7 +19,8 @@ import com.topodroid.DistoX.TDUtil;
 import com.topodroid.DistoX.TDInstance;
 import com.topodroid.DistoX.TopoDroidApp;
 import com.topodroid.DistoX.Lister;
-import com.topodroid.DistoX.DBlock;
+// import com.topodroid.DistoX.DBlock;
+import com.topodroid.common.ExtendType;
 
 import android.util.Log;
 
@@ -165,12 +166,12 @@ public class TopoDroidComm
       double c = mProtocol.mClino;
       double r = mProtocol.mRoll;
       // extend is unset to start
-      // long extend = TDAzimuth.computeLegExtend( b ); // DBlock.EXTEND_UNSET; FIXME_EXTEND 
+      // long extend = TDAzimuth.computeLegExtend( b ); // ExtendType.EXTEND_UNSET; FIXME_EXTEND 
       // TDLog.Log( TDLog.LOG_COMM, "Comm D PACKET " + d + " " + b + " " + c );
       Log.v( "DistoX-BLE-TC", "Comm D PACKET " + d + " " + b + " " + c );
       // NOTE type=0 shot is DistoX-type
       long status = ( d > TDSetting.mMaxShotLength )? TDStatus.OVERSHOOT : TDStatus.NORMAL;
-      mLastShotId = TopoDroidApp.mData.insertDistoXShot( TDInstance.sid, -1L, d, b, c, r, DBlock.EXTEND_IGNORE, status, TDInstance.deviceAddress() );
+      mLastShotId = TopoDroidApp.mData.insertDistoXShot( TDInstance.sid, -1L, d, b, c, r, ExtendType.EXTEND_IGNORE, status, TDInstance.deviceAddress() );
       if ( lister != null ) { // FIXME_LISTER sendMessage with mLastShotId only
         Message msg = lister.obtainMessage( Lister.LIST_UPDATE );
         Bundle bundle = new Bundle();

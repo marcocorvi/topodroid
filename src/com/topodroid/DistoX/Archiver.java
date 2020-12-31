@@ -14,6 +14,7 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.common.PlotType;
 
 import android.util.Log;
 
@@ -42,7 +43,7 @@ import java.util.List;
 // import android.content.Context;
 // import android.content.Intent;
 
-class Archiver
+public class Archiver
 {
   // private final TopoDroidApp mApp;
   private static final int BUF_SIZE = 4096;
@@ -50,7 +51,7 @@ class Archiver
 
   String zipname;
 
-  Archiver( ) // TopoDroidApp app
+  public Archiver( ) // TopoDroidApp app
   {
     // mApp = app;
     data = new byte[ BUF_SIZE ];
@@ -279,7 +280,7 @@ class Archiver
         addOptionalEntry( zos, new File( TDPath.getSurveyPlotXviFile( survey, plt.name ) ) );
         addOptionalEntry( zos, new File( TDPath.getSurveyPlotPngFile( survey, plt.name ) ) );
         addOptionalEntry( zos, new File( TDPath.getSurveyPlotTnlFile( survey, plt.name ) ) );
-        if ( plt.type == PlotInfo.PLOT_PLAN ) {
+        if ( plt.type == PlotType.PLOT_PLAN ) {
           addOptionalEntry( zos, new File( TDPath.getSurveyCsxFile( survey, plt.name ) ) );
         }
 	addOptionalEntry( zos, new File( TDPath.getSurveyPlotShzFile( survey, plt.name ) ) );
@@ -353,7 +354,7 @@ class Archiver
     return ret;
   }
 
-  int unArchive( TopoDroidApp mApp, String filename, String surveyname, boolean force )
+  public int unArchive( TopoDroidApp mApp, String filename, String surveyname, boolean force )
   {
     boolean sql_success = false;
     int ok_manifest = -2;

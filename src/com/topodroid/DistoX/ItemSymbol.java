@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDColor;
 import com.topodroid.ui.ItemButton;
+// import com.topodroid.common.SymbolType;
 
 // import java.util.ArrayList;
 
@@ -82,7 +83,7 @@ class ItemSymbol
     }
 
     // FIXME
-    // if ( mType == Symbol.POINT ) {
+    // if ( mType == SymbolType.POINT ) {
     //   SymbolPoint point = (SymbolPoint) mSymbol;
     //   if ( point.isOrientable() ) {
     //     Button btn = new Button( context );

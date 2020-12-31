@@ -17,6 +17,7 @@ import com.topodroid.utils.TDString;
 import com.topodroid.num.TDNum;
 import com.topodroid.num.NumStation;
 import com.topodroid.prefs.TDSetting;
+// import com.topodroid.common.PlotType;
 
 import android.util.Log;
 
@@ -148,7 +149,7 @@ class DrawingXvi
       // }
       
       // centerline data
-      // if ( PlotInfo.isSketch2D( type ) ) { 
+      // if ( PlotType.isSketch2D( type ) ) { 
         // FIXME OK PROFILE
         // FIXME OK X-SECTIONS before 2020.09.22 (5.0.5h) this was disabled for x-sections
 

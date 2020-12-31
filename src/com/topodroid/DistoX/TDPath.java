@@ -500,7 +500,7 @@ public class TDPath
 
   static String getDirFile( String name )    { return PATH_BASE + name; }
   static String getImportFile( String name ) { return PATH_IMPORT + name; }
-  static String getZipFile( String name )    { return PATH_ZIP + name; }
+  public static String getZipFile( String name )    { return PATH_ZIP + name; }
   static String getTdrFile( String name )    { return PATH_TDR + name; }
   static String getTdr3File( String name )   { return PATH_TDR3 + name; }
 
@@ -536,7 +536,7 @@ public class TDPath
   static String getXviFile( String name )    { return PATH_XVI + name; }
   static String getC3dFile( String name )    { return PATH_C3D + name; }
 
-  static String getDumpFile( String name )   { return PATH_DUMP + name; }
+  public static String getDumpFile( String name )   { return PATH_DUMP + name; }
   static String getBinFile( String name )    { return PATH_BIN + name; }
   static String getCCsvFile( String name )   { return PATH_CCSV + name; }
   public static String getManFile( String name )    { return PATH_MAN + name; }
@@ -583,7 +583,7 @@ public class TDPath
 
   static String getSurveyNoteFile( String title ) { return getFile( APP_NOTE_PATH, title, TXT ); }
   static String getTmpFileWithExt( String name ) { return getFile( APP_TMP_PATH, name, TMP ); }
-  static String getTdrFileWithExt( String name ) { return getFile( PATH_TDR, name, TDR ); }
+  public static String getTdrFileWithExt( String name ) { return getFile( PATH_TDR, name, TDR ); }
   static String getTdr3FileWithExt( String name ) { return getFile( PATH_TDR3, name, TDR3 ); }
   static String getTh2FileWithExt( String name ) { return getFile( PATH_TH2, name, TH2 ); }
   static String getTnlFileWithExt( String name ) { return getFile( PATH_TNL, name, TNL ); }
@@ -642,7 +642,7 @@ public class TDPath
     return null;
   }
 
-  static File[] getCalibFiles() { return getFiles( PATH_CCSV, new String[] {""} ); } // DistoX-SAF
+  public static File[] getCalibFiles() { return getFiles( PATH_CCSV, new String[] {""} ); } // DistoX-SAF
 
   static File[] getTopoDroidFiles( String basename ) // DistoX-SAF
   {

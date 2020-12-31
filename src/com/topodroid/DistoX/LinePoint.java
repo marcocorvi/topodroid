@@ -25,6 +25,7 @@ import com.topodroid.utils.TDMath;
 import com.topodroid.math.Point2D;
 import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.common.PlotType;
 
 import com.topodroid.num.TDNum;
 
@@ -268,7 +269,7 @@ public class LinePoint extends Point2D
     float y0 = (y - 120)/20.0f;
     float v0 = 0;
     TDVector vv = cmd.getCave3Dv( x, y, num );
-    if ( type == PlotInfo.PLOT_PLAN ) {
+    if ( type == PlotType.PLOT_PLAN ) {
       v0 = vv.z;
     } else {
       v0 = y0;

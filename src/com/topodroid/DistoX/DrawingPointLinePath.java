@@ -369,7 +369,7 @@ public class DrawingPointLinePath extends DrawingPath
     // Log.v( TopoDroidApp.TAG, "make straight final size " + mPoints.size() );
   }
     
-  void addStartPoint( float x, float y ) 
+  public void addStartPoint( float x, float y ) 
   {
     // mPrevPoint = new LinePoint(x,y, null);
     // mPoints.add( mPrevPoint );
@@ -381,7 +381,7 @@ public class DrawingPointLinePath extends DrawingPath
     top  = bottom = y;
   }
 
-  void addPoint( float x, float y ) 
+  public void addPoint( float x, float y ) 
   {
     if ( Float.isNaN(x) || Float.isNaN(y) ) return;
     if ( mFirst == null ) {

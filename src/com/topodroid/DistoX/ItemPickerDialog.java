@@ -16,6 +16,9 @@ import com.topodroid.utils.TDColor;
 import com.topodroid.ui.MyDialog;
 // import com.topodroid.ui.ItemButton;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.common.PlotType;
+import com.topodroid.common.SymbolType;
+import com.topodroid.common.PointScale;
 
 // import android.util.Log;
 
@@ -209,7 +212,7 @@ class ItemPickerDialog extends MyDialog
     // mBTsize.setOnLongClickListener( new View.OnLongClickListener() {
     //   @Override
     //   public boolean onLongClick( View v ) {
-    //     if ( mScale < DrawingPointPath.SCALE_XL ) {
+    //     if ( mScale < PointScale.SCALE_XL ) {
     //       ++mScale;
     //       mParent.get().setPointScale( mScale );
     //       setTheTitle();
@@ -253,9 +256,9 @@ class ItemPickerDialog extends MyDialog
   {
     boolean orientable = false;
     ItemSymbol item = null;
-    if ( mItemType == Symbol.POINT &&  mPointAdapter != null ) {
+    if ( mItemType == SymbolType.POINT &&  mPointAdapter != null ) {
       item = mPointAdapter.get( mPointAdapter.getSelectedPos() );
-    } else if ( mItemType == Symbol.AREA &&  mAreaAdapter != null ) {
+    } else if ( mItemType == SymbolType.AREA &&  mAreaAdapter != null ) {
       item = mAreaAdapter.get( mAreaAdapter.getSelectedPos() );
     }
     if ( item != null ) {
@@ -272,13 +275,13 @@ class ItemPickerDialog extends MyDialog
   {
     ItemSymbol item = null;
     Symbol[] symbols = null;
-    if ( mItemType == Symbol.POINT && mPointAdapter != null ) {
+    if ( mItemType == SymbolType.POINT && mPointAdapter != null ) {
       int pos = mPointAdapter.getSelectedPos();
       item = mPointAdapter.get( pos );
       symbols = ItemDrawer.mRecentPoint;
       mPointAdapter.setItemOrientation( pos, angle );
       // setPointOrientation( pos, angle );
-    } else if ( mItemType == Symbol.AREA && mAreaAdapter != null ) {
+    } else if ( mItemType == SymbolType.AREA && mAreaAdapter != null ) {
       int pos = mAreaAdapter.getSelectedPos();
       item = mAreaAdapter.get( pos );
       symbols = ItemDrawer.mRecentArea;
@@ -304,13 +307,13 @@ class ItemPickerDialog extends MyDialog
   {
     int index = 0;
     switch ( mItemType ) {
-      case Symbol.POINT:
+      case SymbolType.POINT:
         if ( mPointAdapter != null ) index = mPointAdapter.getSelectedPos();
         break;
-      case Symbol.LINE:
+      case SymbolType.LINE:
         if ( mLineAdapter != null ) index = mLineAdapter.getSelectedPos();
         break;
-      case Symbol.AREA:
+      case SymbolType.AREA:
         if ( mAreaAdapter != null ) index = mAreaAdapter.getSelectedPos();
         break;
     }
@@ -335,13 +338,13 @@ class ItemPickerDialog extends MyDialog
   // {
   //   if ( TDSetting.mPickerType != TDSetting.PICKER_GRID_3 ) {
   //     // float sx=1.0f, sy=1.0f;
-  //     if ( item_type == Symbol.POINT ) {
+  //     if ( item_type == SymbolType.POINT ) {
   //       mBTsize.setVisibility( View.VISIBLE );
   //       setRecentButtons( ItemDrawer.mRecentPoint, DIMXP, DIMXP );
-  //     } else if ( item_type == Symbol.LINE ) {
+  //     } else if ( item_type == SymbolType.LINE ) {
   //       mBTsize.setVisibility( View.GONE );
   //       setRecentButtons( ItemDrawer.mRecentLine, DIMXL, DIMYL );
-  //     } else if ( item_type == Symbol.AREA ) {
+  //     } else if ( item_type == SymbolType.AREA ) {
   //       mBTsize.setVisibility( View.GONE );
   //       setRecentButtons( ItemDrawer.mRecentArea, DIMXL, DIMYL );
   //     }
@@ -354,36 +357,36 @@ class ItemPickerDialog extends MyDialog
   {
     // if ( TDLevel.overBasic ) 
     {
-      mPointAdapter = new ItemAdapter( mContext, this, Symbol.POINT, 
+      mPointAdapter = new ItemAdapter( mContext, this, SymbolType.POINT, 
                                        R.layout.item, new ArrayList< ItemSymbol >() );
       int np = mPointLib.size();
       for ( int i=0; i<np; ++i ) {
         SymbolPoint p = (SymbolPoint)mPointLib.getSymbolByIndex( i );
         if ( p.isEnabled() && ( TDLevel.overAdvanced || ! p.mThName.equals("section") ) ) { // FIXME_SECTION_POINT 
-          mPointAdapter.add( new ItemSymbol( mContext, this, Symbol.POINT, i, p, use_text ) );
+          mPointAdapter.add( new ItemSymbol( mContext, this, SymbolType.POINT, i, p, use_text ) );
         }
       }
     }
 
-    mLineAdapter  = new ItemAdapter( mContext, this, Symbol.LINE,
+    mLineAdapter  = new ItemAdapter( mContext, this, SymbolType.LINE,
                                      R.layout.item, new ArrayList< ItemSymbol >() );
     int nl = mLineLib.size();
     for ( int j=0; j<nl; ++j ) {
       SymbolLine l = (SymbolLine)mLineLib.getSymbolByIndex( j );
       if ( l.isEnabled() ) {
-        mLineAdapter.add( new ItemSymbol( mContext, this, Symbol.LINE, j, l, use_text ) );
+        mLineAdapter.add( new ItemSymbol( mContext, this, SymbolType.LINE, j, l, use_text ) );
       }
     }
 
     // if ( TDLevel.overBasic )
     {
-      mAreaAdapter  = new ItemAdapter( mContext, this, Symbol.AREA,
+      mAreaAdapter  = new ItemAdapter( mContext, this, SymbolType.AREA,
                                        R.layout.item, new ArrayList< ItemSymbol >() );
       int na = mAreaLib.size();
       for ( int k=0; k<na; ++k ) {
         SymbolArea a = (SymbolArea)mAreaLib.getSymbolByIndex( k );
         if ( a.isEnabled() ) {
-          mAreaAdapter.add( new ItemSymbol( mContext, this, Symbol.AREA, k, a, use_text ) );
+          mAreaAdapter.add( new ItemSymbol( mContext, this, SymbolType.AREA, k, a, use_text ) );
         }
       }
     }
@@ -397,7 +400,7 @@ class ItemPickerDialog extends MyDialog
     // Log.v( TopoDroidApp.TAG, "ItemPickerDialog ... update List type " + mItemType );
     if ( TDSetting.mPickerType != TDSetting.PICKER_GRID_3 ) {
       switch ( mItemType ) {
-        case Symbol.POINT:
+        case SymbolType.POINT:
           // if ( TDLevel.overBasic )
           {
             mAdapter = mPointAdapter;
@@ -408,14 +411,14 @@ class ItemPickerDialog extends MyDialog
             setSeekBarProgress();
           }
           break;
-        case Symbol.LINE:
+        case SymbolType.LINE:
           mAdapter = mLineAdapter;
           mBTpoint.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
           mBTline.getBackground().setColorFilter( TDColor.LIGHT_BLUE, PorterDuff.Mode.LIGHTEN );
           mBTarea.getBackground().setColorFilter( TDColor.LIGHT_GRAY, PorterDuff.Mode.DARKEN );
           mSeekBar.setVisibility( View.INVISIBLE );
           break;
-        case Symbol.AREA:
+        case SymbolType.AREA:
           // if ( TDLevel.overBasic )
           {
             mAdapter = mAreaAdapter;
@@ -450,17 +453,17 @@ class ItemPickerDialog extends MyDialog
   private void setShowSelected()
   {
       switch ( mItemType ) {
-        case Symbol.POINT:
+        case SymbolType.POINT:
           mPointAdapter.setShowSelected( true );
           mLineAdapter.setShowSelected( false );
           mAreaAdapter.setShowSelected( false );
         break;
-        case Symbol.LINE:
+        case SymbolType.LINE:
           mPointAdapter.setShowSelected( false );
           mLineAdapter.setShowSelected( true );
           mAreaAdapter.setShowSelected( false );
         break;
-        case Symbol.AREA:
+        case SymbolType.AREA:
           mPointAdapter.setShowSelected( false );
           mLineAdapter.setShowSelected( false );
           mAreaAdapter.setShowSelected( true );
@@ -472,20 +475,20 @@ class ItemPickerDialog extends MyDialog
   {
     StringBuilder title = new StringBuilder();
     switch ( mItemType ) {
-      case Symbol.POINT: 
+      case SymbolType.POINT: 
         title.append( "[" );
-        title.append( DrawingPointPath.scaleToStringUC( mScale ) );
+        title.append( PointScale.scaleToStringUC( mScale ) );
         title.append( "] " );
         title.append( mContext.getResources().getString( R.string.POINT ) );
         title.append( " " );
         title.append( BrushManager.getPointName( mSelectedPoint ) );
         break;
-      case Symbol.LINE: 
+      case SymbolType.LINE: 
         title.append( mContext.getResources().getString( R.string.LINE ) );
         title.append( " " );
         title.append( BrushManager.getLineName( mSelectedLine ) );
         break;
-      case Symbol.AREA: 
+      case SymbolType.AREA: 
         title.append( mContext.getResources().getString( R.string.AREA ) );
         title.append( " " );
         title.append( BrushManager.getAreaName( mSelectedArea ) );
@@ -502,7 +505,7 @@ class ItemPickerDialog extends MyDialog
     mItemType = type;
     ItemSymbol is;
     switch ( type ) {
-      case Symbol.POINT: 
+      case SymbolType.POINT: 
         if ( mPointAdapter != null /* && TDLevel.overBasic */ ) {
           is = mPointAdapter.get( index );
           // Log.v( TDLog.TAG, "set TypeAndItem type point pos " + index + " index " + is.mIndex );
@@ -514,11 +517,11 @@ class ItemPickerDialog extends MyDialog
           // mBTarea.setTextColor(  TDColor.SYMBOL_TAB );
         }
         break;
-      case Symbol.LINE: 
+      case SymbolType.LINE: 
         if ( mLineAdapter != null ) {
           is = mLineAdapter.get( index );
           // Log.v( TDLog.TAG, "set TypeAndItem type line pos " + index + " index " + is.mIndex );
-          if ( mPlotType != PlotInfo.PLOT_SECTION || ! BrushManager.isLineSection( is.mIndex ) ) {
+          if ( mPlotType != PlotType.PLOT_SECTION || ! BrushManager.isLineSection( is.mIndex ) ) {
             mSelectedLine = is.mIndex;
             // mParent.get().lineSelected( is.mIndex, false ); // mLineAdapter.getSelectedItem() );
           // } else {
@@ -530,7 +533,7 @@ class ItemPickerDialog extends MyDialog
           // mBTarea.setTextColor(  TDColor.SYMBOL_TAB );
         }
         break;
-      case Symbol.AREA: 
+      case SymbolType.AREA: 
         if ( mAreaAdapter != null /* && TDLevel.overBasic */ ) {
           // mAreaPos = index;
           is = mAreaAdapter.get( index );
@@ -553,7 +556,7 @@ class ItemPickerDialog extends MyDialog
   private void setTypeFromCurrent( )
   {
     switch ( mItemType ) {
-      case Symbol.POINT: 
+      case SymbolType.POINT: 
         // if ( TDLevel.overBasic ) 
         {
           // mParent.get().pointSelected( mSelectedPoint, false );
@@ -564,8 +567,8 @@ class ItemPickerDialog extends MyDialog
           mBTarea.setTextColor(  TDColor.SYMBOL_TAB );
         }
         break;
-      case Symbol.LINE: 
-        // if ( ! PlotInfo.isAnySection( mPlotType ) ) {
+      case SymbolType.LINE: 
+        // if ( ! PlotType.isAnySection( mPlotType ) ) {
         //   mParent.get().lineSelected( mSelectedLine, false );
         // } else {
         // }
@@ -574,7 +577,7 @@ class ItemPickerDialog extends MyDialog
         mBTline.setTextColor(  TDColor.SYMBOL_ON );
         mBTarea.setTextColor(  TDColor.SYMBOL_TAB );
         break;
-      case Symbol.AREA: 
+      case SymbolType.AREA: 
         // if ( TDLevel.overBasic ) 
         {
           // mParent.get().areaSelected( mSelectedArea, false );
@@ -592,7 +595,7 @@ class ItemPickerDialog extends MyDialog
   // void rotatePoint( int angle )
   // {
   //   if ( mPointAdapter == null ) return;
-  //   if ( TDLevel.overBasic && mItemType == Symbol.POINT ) {
+  //   if ( TDLevel.overBasic && mItemType == SymbolType.POINT ) {
   //     // Log.v( TopoDroidApp.TAG, "rotate point " + mSelectedPoint );
   //     mPointAdapter.rotatePoint( mSelectedPoint, angle );
   //   }
@@ -601,7 +604,7 @@ class ItemPickerDialog extends MyDialog
   private void setPointOrientation( int pos, int angle )
   {
     if ( mPointAdapter == null ) return;
-    if ( /* TDLevel.overBasic && */ mItemType == Symbol.POINT ) {
+    if ( /* TDLevel.overBasic && */ mItemType == SymbolType.POINT ) {
       mPointAdapter.setItemOrientation( pos, angle );
       // ItemSymbol item = mPointAdapter.getSelectedItem();
       // if ( item != null ) {
@@ -615,7 +618,7 @@ class ItemPickerDialog extends MyDialog
   private void setAreaOrientation( int pos, int angle )
   {
     if ( mAreaAdapter == null ) return;
-    if ( /* TDLevel.overBasic && */ mItemType == Symbol.AREA ) {
+    if ( /* TDLevel.overBasic && */ mItemType == SymbolType.AREA ) {
       mAreaAdapter.setItemOrientation( pos, angle );
       // ItemSymbol item = mAreaAdapter.getSelectedItem();
       // if ( item != null ) {
@@ -637,20 +640,20 @@ class ItemPickerDialog extends MyDialog
   private void itemSelected()
   {
     switch ( mItemType ) {
-      case Symbol.POINT: 
+      case SymbolType.POINT: 
         // if ( TDLevel.overBasic )
         if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
           // Log.v("DistoX", "selected point " + mSelectedPoint );
           mParent.get().pointSelected( mSelectedPoint, true );
         }
         break;
-      case Symbol.LINE: 
+      case SymbolType.LINE: 
         if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
           // Log.v("DistoX", "selected line " + mSelectedLine );
           mParent.get().lineSelected( mSelectedLine, true ); 
 	}
         break;
-      case Symbol.AREA: 
+      case SymbolType.AREA: 
         // if ( TDLevel.overBasic )
         if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
           // Log.v("DistoX", "selected area " + mSelectedArea );
@@ -668,8 +671,8 @@ class ItemPickerDialog extends MyDialog
       case R.id.item_point:
         // if ( TDLevel.overBasic )
         {
-          if ( mItemType != Symbol.POINT ) {
-            mItemType = Symbol.POINT;
+          if ( mItemType != SymbolType.POINT ) {
+            mItemType = SymbolType.POINT;
             updateList();
             // updateRecentButtons( mItemType );
             setTypeFromCurrent( );
@@ -677,8 +680,8 @@ class ItemPickerDialog extends MyDialog
         }
         break;
       case R.id.item_line:
-        if ( mItemType != Symbol.LINE ) {
-          mItemType = Symbol.LINE;
+        if ( mItemType != SymbolType.LINE ) {
+          mItemType = SymbolType.LINE;
           updateList();
           // updateRecentButtons( mItemType );
           setTypeFromCurrent( );
@@ -687,8 +690,8 @@ class ItemPickerDialog extends MyDialog
       case R.id.item_area:
         // if ( TDLevel.overBasic )
         {
-          if ( mItemType != Symbol.AREA ) {
-            mItemType = Symbol.AREA;
+          if ( mItemType != SymbolType.AREA ) {
+            mItemType = SymbolType.AREA;
             updateList();
             // updateRecentButtons( mItemType );
             setTypeFromCurrent( );
@@ -696,10 +699,10 @@ class ItemPickerDialog extends MyDialog
         }
         break;
       case R.id.size:
-        if ( mScale < DrawingPointPath.SCALE_XL ) {
+        if ( mScale < PointScale.SCALE_XL ) {
           ++ mScale;
         } else {
-          mScale = DrawingPointPath.SCALE_XS;
+          mScale = PointScale.SCALE_XS;
         }
         if ( mParent.get() != null && ! mParent.get().isFinishing() ) mParent.get().setPointScale( mScale );
         setTheTitle();
@@ -735,15 +738,15 @@ class ItemPickerDialog extends MyDialog
   //       if ( mRecent[k] == ib ) {
   //         // Log.v("DistoX", "long click view " + k + " " + ItemDrawer.mRecentPoint[k].mThName );
   //         if ( k > 0 ) {
-  //           if ( mItemType == Symbol.POINT ) {
+  //           if ( mItemType == SymbolType.POINT ) {
   //             Symbol pt = ItemDrawer.mRecentPoint[k];
   //             for ( ; k > 0; --k ) ItemDrawer.mRecentPoint[k] = ItemDrawer.mRecentPoint[k-1];
   //             ItemDrawer.mRecentPoint[0] = pt;
-  //           } else if ( mItemType == Symbol.LINE ) {
+  //           } else if ( mItemType == SymbolType.LINE ) {
   //             Symbol ln = ItemDrawer.mRecentLine[k];
   //             for ( ; k > 0; --k ) ItemDrawer.mRecentLine[k] = ItemDrawer.mRecentLine[k-1];
   //             ItemDrawer.mRecentLine[0] = ln;
-  //           } else if ( mItemType == Symbol.AREA ) {
+  //           } else if ( mItemType == SymbolType.AREA ) {
   //             Symbol ar = ItemDrawer.mRecentArea[k];
   //             for ( ; k > 0; --k ) ItemDrawer.mRecentArea[k] = ItemDrawer.mRecentArea[k-1];
   //             ItemDrawer.mRecentArea[0] = ar;
@@ -769,11 +772,11 @@ class ItemPickerDialog extends MyDialog
 
   private void setRecent( int k )
   {
-    if ( mItemType == Symbol.POINT ) {
+    if ( mItemType == SymbolType.POINT ) {
       mSelectedPoint = setRecentSymbol( ItemDrawer.mRecentPoint[k] );
-    } else if ( mItemType == Symbol.LINE ) {
+    } else if ( mItemType == SymbolType.LINE ) {
       mSelectedLine  = setRecentSymbol( ItemDrawer.mRecentLine[k] );
-    } else if ( mItemType == Symbol.AREA ) {
+    } else if ( mItemType == SymbolType.AREA ) {
       mSelectedArea  = setRecentSymbol( ItemDrawer.mRecentArea[k] );
     }
   }

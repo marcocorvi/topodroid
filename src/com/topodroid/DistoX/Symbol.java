@@ -12,17 +12,13 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.common.SymbolType;
 
 import android.graphics.Paint;
 import android.graphics.Path;
 
 class Symbol implements SymbolInterface
 {
-  static final int UNDEF = 0; // undefined
-  static final int POINT = 1;
-  static final int LINE  = 2;
-  static final int AREA  = 3;
-
   static final int W2D_NONE       = 0; // Walls roundtrip values
   static final int W2D_WALLS_SHP  = 1;
   static final int W2D_WALLS_SYM  = 2;
@@ -102,7 +98,7 @@ class Symbol implements SymbolInterface
   public boolean setAngle( float angle ) { return false; }
   public int getAngle() { return 0; }
 
-  static float sizeX( int type ) { return ( type == POINT )? TDSetting.mUnitIcons * 1.5f : TDSetting.mUnitIcons * 2.2f; }
-  static float sizeY( int type ) { return ( type == POINT )? TDSetting.mUnitIcons * 1.5f : TDSetting.mUnitIcons * 1.7f; }
+  static float sizeX( int type ) { return ( type == SymbolType.POINT )? TDSetting.mUnitIcons * 1.5f : TDSetting.mUnitIcons * 2.2f; }
+  static float sizeY( int type ) { return ( type == SymbolType.POINT )? TDSetting.mUnitIcons * 1.5f : TDSetting.mUnitIcons * 1.7f; }
 
 }

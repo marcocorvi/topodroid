@@ -24,6 +24,16 @@ import com.topodroid.help.UserManDownload;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPrefCat;
 import com.topodroid.dev.DeviceUtil;
+import com.topodroid.inport.ImportCompassTask;
+import com.topodroid.inport.ImportVisualTopoTask;
+import com.topodroid.inport.ImportTherionTask;
+import com.topodroid.inport.ImportPocketTopoTask;
+import com.topodroid.inport.ImportSurvexTask;
+import com.topodroid.inport.ImportCaveSniperTask;
+import com.topodroid.inport.ImportZipTask;
+import com.topodroid.inport.ImportDialog;
+import com.topodroid.inport.ImportDatDialog;
+import com.topodroid.inport.ImportTroDialog;
 
 import com.topodroid.mag.WorldMagneticModel;
 
@@ -148,7 +158,7 @@ public class MainWindow extends Activity
 
   // -------------------------------------------------------------------
 
-  TopoDroidApp getApp() { return mApp; }
+  public TopoDroidApp getApp() { return mApp; }
     
   public void updateDisplay( )
   {
@@ -341,7 +351,7 @@ public class MainWindow extends Activity
     startActivity( openIntent );
   }
 
-  void setTheTitle()
+  public void setTheTitle()
   {
     // String title = getResources().getString( R.string.app_name );
     setTitle( // mApp.getConnectionStateTitleStr() + // IF_COSURVEY
@@ -359,19 +369,19 @@ public class MainWindow extends Activity
     mActivity.setTitleColor( TDColor.CONNECTED );
   }
 
-  void importDatFile( String filepath, int datamode, boolean lrud, boolean leg_first )
+  public void importDatFile( String filepath, int datamode, boolean lrud, boolean leg_first )
   {
     setTitleImport();
     new ImportCompassTask( this, datamode, lrud, leg_first ).execute( filepath );
   }
 
-  void importTroFile( String filepath, boolean lrud, boolean leg_first )
+  public void importTroFile( String filepath, boolean lrud, boolean leg_first )
   {
     setTitleImport();
     new ImportVisualTopoTask( this, lrud, leg_first ).execute( filepath );
   }
 
-  void importFile( String filename )
+  public void importFile( String filename )
   {
     // FIXME connect-title string
     if ( filename.endsWith(".th") || filename.endsWith(".TH") ) {

@@ -14,7 +14,7 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.ui.MyDialog;
-
+import com.topodroid.common.PlotType;
 
 // import android.util.Log;
 
@@ -142,12 +142,12 @@ class PlotListDialog extends MyDialog
       // mArrayAdapter.add( res.getString(R.string.back_to_survey) );
       mPlots = 0;
       for ( PlotInfo item : list ) {
-        // if ( item.type == PlotInfo.PLOT_PLAN /* || item.type == PlotInfo.PLOT_EXTENDED */ ) 
-        if ( PlotInfo.isProfile( item.type ) )
+        // if ( item.type == PlotType.PLOT_PLAN /* || item.type == PlotType.PLOT_EXTENDED */ ) 
+        if ( PlotType.isProfile( item.type ) )
         {
           String name = item.name.substring( 0, item.name.length() - 1 );
-          mArrayAdapter.add( String.format("<%s> %s", name, PlotInfo.plotTypeString( (int)PlotInfo.PLOT_PLAN, res ) ) );
-          mArrayAdapter.add( String.format("<%s> %s", name, PlotInfo.plotTypeString( item.type, res ) ) );
+          mArrayAdapter.add( String.format("<%s> %s", name, PlotType.plotTypeString( (int)PlotType.PLOT_PLAN, res ) ) );
+          mArrayAdapter.add( String.format("<%s> %s", name, PlotType.plotTypeString( item.type, res ) ) );
           mPlots += 2;
         }
       }
@@ -155,7 +155,7 @@ class PlotListDialog extends MyDialog
         if ( slist != null ) {
           for ( Sketch3dInfo sketch : slist ) {
             mArrayAdapter.add(
-              String.format("<%s> %s", sketch.name, PlotInfo.plotTypeString( (int)PlotInfo.PLOT_SKETCH_3D, res ) ) );
+              String.format("<%s> %s", sketch.name, PlotType.plotTypeString( (int)PlotType.PLOT_SKETCH_3D, res ) ) );
           }
         }
        * END_SKETCH_3D */
@@ -230,17 +230,17 @@ class PlotListDialog extends MyDialog
       String plot_name = value.substring( from+1, to );
       String type = value.substring( to+2 );
 
-      long plot_type = PlotInfo.PLOT_PLAN;
+      long plot_type = PlotType.PLOT_PLAN;
       Resources res = mApp.getResources();
       if ( res.getString( R.string.plan ).equals( type ) ) {
-        plot_type = PlotInfo.PLOT_PLAN; // already assigned
+        plot_type = PlotType.PLOT_PLAN; // already assigned
       } else if ( res.getString( R.string.extended ).equals( type ) ) {
-        plot_type = PlotInfo.PLOT_EXTENDED;
+        plot_type = PlotType.PLOT_EXTENDED;
       } else if ( res.getString( R.string.profile ).equals( type ) ) {
-        plot_type = PlotInfo.PLOT_PROJECTED;
+        plot_type = PlotType.PLOT_PROJECTED;
       }
 
-      // long plot_type = (( position % 2 ) == 0 )? PlotInfo.PLOT_PLAN : PlotInfo.PLOT_EXTENDED;
+      // long plot_type = (( position % 2 ) == 0 )? PlotType.PLOT_PLAN : PlotType.PLOT_EXTENDED;
       if ( mParent != null ) {
         mParent.startExistingPlot( plot_name, plot_type, null ); // context of current SID
       } else {

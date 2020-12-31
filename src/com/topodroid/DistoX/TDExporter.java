@@ -45,6 +45,12 @@ import com.topodroid.trb.TRobotSeries;
 import com.topodroid.trb.TRobot;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.dev.Device;
+import com.topodroid.common.ExtendType;
+import com.topodroid.common.PlotType;
+import com.topodroid.calib.CBlock;
+import com.topodroid.calib.CalibAlgo;
+import com.topodroid.calib.CalibResult;
+import com.topodroid.calib.CalibInfo;
 
 import android.util.Log;
 
@@ -1149,12 +1155,12 @@ class TDExporter
     }
     pw.format("\n");
     for ( PlotInfo plt : plots ) {
-      if ( PlotInfo.isSketch2D( plt.type ) ) {
+      if ( PlotType.isSketch2D( plt.type ) ) {
         int scrap_nr = plt.maxscrap;
         // Log.v("DistoX-EXP", plt.name + " is 2D sketch - scraps " + scrap_nr );
         File plot_file = new File( TDPath.getSurveyPlotTh2File( info.name, plt.name ) );
         if ( plot_file.exists() ) {
-          pw.format("  # map m%s -projection %s\n", plt.name, PlotInfo.projName[ plt.type ] );
+          pw.format("  # map m%s -projection %s\n", plt.name, PlotType.projName( plt.type ) );
           pw.format("  #   %s-%s\n", info.name, plt.name );
           for ( int k=1; k<=scrap_nr; ++k) {
             pw.format("  #   %s-%s%d\n", info.name, plt.name, scrap_nr );
@@ -3449,11 +3455,11 @@ class TDExporter
   static private int printCavExtend( PrintWriter pw, int extend, int item_extend, String eol )
   {
     if ( item_extend != extend ) { 
-      if ( item_extend == DBlock.EXTEND_LEFT ) {
+      if ( item_extend == ExtendType.EXTEND_LEFT ) {
         pw.format("#R180%s", eol );
-      } else if ( item_extend == DBlock.EXTEND_RIGHT ) {
+      } else if ( item_extend == ExtendType.EXTEND_RIGHT ) {
         pw.format("#R0%s", eol );
-      } else if ( item_extend == DBlock.EXTEND_VERT ) {
+      } else if ( item_extend == ExtendType.EXTEND_VERT ) {
         pw.format("#PR[0]%s", eol );
       }
       return item_extend;

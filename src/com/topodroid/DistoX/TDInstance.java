@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.dev.Device;
+import com.topodroid.common.PlotType;
 
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -70,7 +71,7 @@ public class TDInstance
   static boolean isSecondDeviceAddress( String addr ) { return deviceB != null && deviceB.mAddress.equals( addr ); }
 
   static String recentPlot = null;
-  static long   recentPlotType = PlotInfo.PLOT_PLAN;
+  static long   recentPlotType = PlotType.PLOT_PLAN;
 
   static boolean switchDevice()
   {
@@ -124,7 +125,7 @@ public class TDInstance
       // deviceB = TopoDroidApp.getDevice( addr ); // FIXME_DEVICE_STATIC
     }
     recentPlot = null;
-    recentPlotType = PlotInfo.PLOT_PLAN;
+    recentPlotType = PlotType.PLOT_PLAN;
   }
 
   static void setContext( Context ctx ) { context = ctx; }

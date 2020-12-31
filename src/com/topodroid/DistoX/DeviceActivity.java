@@ -29,6 +29,21 @@ import com.topodroid.packetX.PacketDialog;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.DeviceA3Details;
 import com.topodroid.dev.DeviceUtil;
+import com.topodroid.dev.MemoryReadTask;
+import com.topodroid.dev.InfoReadA3Task;
+import com.topodroid.dev.InfoReadX310Task;
+import com.topodroid.dev.IMemoryDialog;
+import com.topodroid.dev.DeviceX310MemoryDialog;
+import com.topodroid.dev.DeviceA3MemoryDialog;
+import com.topodroid.dev.DeviceA3InfoDialog;
+import com.topodroid.dev.DeviceX310InfoDialog;
+import com.topodroid.calib.CalibCoeffDialog;
+import com.topodroid.calib.CalibImportDialog;
+import com.topodroid.calib.CalibListDialog;
+import com.topodroid.calib.CalibToggleTask;
+import com.topodroid.calib.CalibReadTask;
+import com.topodroid.calib.CalibAlgo;
+import com.topodroid.calib.ICoeffDisplayer;
 
 import android.util.Log;
 
@@ -81,7 +96,7 @@ public class DeviceActivity extends Activity
   private TopoDroidApp mApp;
   private DeviceHelper mApp_mDData;
 
-  static boolean mDeviceActivityVisible = false;
+  public static boolean mDeviceActivityVisible = false;
 
   private TextView mTvAddress;
   private TextView mTvAddressB;
@@ -613,7 +628,7 @@ public class DeviceActivity extends Activity
 
   // -----------------------------------------------------------------------------
 
-  void doClearA3Memory()
+  public void doClearA3Memory()
   {
     int[] ht = new int[2]; // ht[0] (head) is ahead of ht[1] (tail)
     if ( ! readDeviceHeadTail( DeviceA3Details.HeadTail, ht ) ) return;
@@ -623,7 +638,7 @@ public class DeviceActivity extends Activity
     
 
   // called only by DeviceA3MemoryDialog
-  boolean readDeviceHeadTail( byte[] command, int[] head_tail )
+  public boolean readDeviceHeadTail( byte[] command, int[] head_tail )
   {
     // TDLog.Log( TDLog.LOG_DEVICE, "onClick mBtnHeadTail. Is connected " + mApp.isConnected() );
     if ( mApp.readA3HeadTail( mCurrDevice.mAddress, command, head_tail ) == null ) {
@@ -657,7 +672,7 @@ public class DeviceActivity extends Activity
     }
   }
 
-  void storeDeviceHeadTail( int[] head_tail )
+  public void storeDeviceHeadTail( int[] head_tail )
   {
     // Log.v(TopoDroidApp.TAG, "store HeadTail " + mCurrDevice.mAddress + " : " + head_tail[0] + " " + head_tail[1] );
     if ( ! mApp_mDData.updateDeviceHeadTail( mCurrDevice.mAddress, head_tail ) ) {
@@ -665,30 +680,30 @@ public class DeviceActivity extends Activity
     }
   }
 
-  void retrieveDeviceHeadTail( int[] head_tail )
+  public void retrieveDeviceHeadTail( int[] head_tail )
   {
     // Log.v(TopoDroidApp.TAG, "store Head Tail " + mCurrDevice.mAddress + " : " + head_tail[0] + " " + head_tail[1] );
     mApp_mDData.getDeviceHeadTail( mCurrDevice.mAddress, head_tail );
   }
 
-  void readX310Info( DeviceX310InfoDialog dialog )
+  public void readX310Info( DeviceX310InfoDialog dialog )
   {
     ( new InfoReadX310Task( mApp, dialog, mCurrDevice.mAddress ) ).execute();
   }
 
-  void readA3Info( DeviceA3InfoDialog dialog )
+  public void readA3Info( DeviceA3InfoDialog dialog )
   {
     ( new InfoReadA3Task( mApp, dialog, mCurrDevice.mAddress ) ).execute();
   }
 
   // @param head_tail indices
-  void readX310Memory( IMemoryDialog dialog, int[] head_tail, String dumpfile )
+  public void readX310Memory( IMemoryDialog dialog, int[] head_tail, String dumpfile )
   {
     ( new MemoryReadTask( mApp, dialog, Device.DISTO_X310, mCurrDevice.mAddress, head_tail, dumpfile ) ).execute();
   }
  
   // @param head_tail addresses
-  void readA3Memory( IMemoryDialog dialog, int[] head_tail, String dumpfile )
+  public void readA3Memory( IMemoryDialog dialog, int[] head_tail, String dumpfile )
   {
     if ( checkA3headtail( head_tail ) ) {
       ( new MemoryReadTask( mApp, dialog, Device.DISTO_A3, mCurrDevice.mAddress, head_tail, dumpfile ) ).execute();
@@ -704,7 +719,7 @@ public class DeviceActivity extends Activity
 
   // reset device from stored-tail to given tail
   // called only by DeviceA3MemoryDialog
-  void resetA3DeviceHeadTail( final int[] head_tail )
+  public void resetA3DeviceHeadTail( final int[] head_tail )
   {
     // Log.v(TopoDroidApp.TAG, "reset device from " + head_tail[0] + " to " + head_tail[1] );
     if ( checkA3headtail( head_tail ) ) {
@@ -865,7 +880,7 @@ public class DeviceActivity extends Activity
     }
   }
 
-  void askCalibReset( final Button b )
+  public void askCalibReset( final Button b )
   {
     TopoDroidAlertDialog.makeAlert( this, getResources(), getResources().getString( R.string.calib_reset ),
       new DialogInterface.OnClickListener() {
@@ -932,7 +947,7 @@ public class DeviceActivity extends Activity
     }
   }
 
-  void openCalibration( String name )
+  public void openCalibration( String name )
   {
     int mustOpen = 0;
     mApp.setCalibFromName( name );
@@ -941,14 +956,14 @@ public class DeviceActivity extends Activity
     startActivity( calibIntent );
   }
 
-  void openCalibrationImportDialog()
+  public void openCalibrationImportDialog()
   {
     if ( mCurrDevice != null ) {
       (new CalibImportDialog( this, this )).show();
     }
   }
 
-  void importCalibFile( String name )
+  public void importCalibFile( String name )
   {
     String filename = TDPath.getCCsvFile( name );
     File file = new File( filename );

@@ -29,6 +29,7 @@ import com.topodroid.help.HelpDialog;
 import com.topodroid.help.UserManualActivity;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPrefCat;
+import com.topodroid.common.PlotType;
 
 import android.util.Log;
 
@@ -210,11 +211,11 @@ public class OverviewWindow extends ItemDrawer
     //   mOffset.y = h/4;
     //   mZoom = mApp.mScaleFactor;
     //   // TDLog.Log(TDLog.LOG_PLOT, "zoom one " + mZoom + " off " + mOffset.x + " " + mOffset.y );
-    //   if ( mType == PlotInfo.PLOT_PLAN ) {
+    //   if ( mType == PlotType.PLOT_PLAN ) {
     //     float zx = w/(mNum.surveyEmax() - mNum.surveyEmin());
     //     float zy = h/(mNum.surveySmax() - mNum.surveySmin());
     //     mZoom = (( zx < zy )? zx : zy)/40;
-    //   } else if ( PlotInfo.isProfile( mType ) ) { // FIXME OK PROFILE
+    //   } else if ( PlotType.isProfile( mType ) ) { // FIXME OK PROFILE
     //     float zx = w/(mNum.surveyHmax() - mNum.surveyHmin());
     //     float zy = h/(mNum.surveyVmax() - mNum.surveyVmin());
     //     mZoom = (( zx < zy )? zx : zy)/40;
@@ -289,7 +290,7 @@ public class OverviewWindow extends ItemDrawer
 
     // float xoff = 0; float yoff = 0;
 
-    if ( type == PlotInfo.PLOT_PLAN ) {
+    if ( type == PlotType.PLOT_PLAN ) {
       DrawingUtil.addGrid( mNum.surveyEmin(), mNum.surveyEmax(), mNum.surveySmin(), mNum.surveySmax(), mOverviewSurface );
                            // xoff, yoff, mOverviewSurface );
     } else {
@@ -302,7 +303,7 @@ public class OverviewWindow extends ItemDrawer
     List< NumSplay >   splays   = mNum.getSplays();
     // Log.v("DistoX", "Overview stations " + stations.size() + " shots " + shots.size() + " splays " + splays.size() );
 
-    if ( type == PlotInfo.PLOT_PLAN ) {
+    if ( type == PlotType.PLOT_PLAN ) {
       for ( NumShot sh : shots ) {
         NumStation st1 = sh.from;
         NumStation st2 = sh.to;
@@ -322,7 +323,7 @@ public class OverviewWindow extends ItemDrawer
         //                                                   DrawingUtil.toSceneY(st.e,st.s) - yoff, true, null );
         dst = mOverviewSurface.addDrawingStationName( null, st, DrawingUtil.toSceneX(st.e,st.s), DrawingUtil.toSceneY(st.e,st.s), true, null, null );
       }
-    } else { // if ( PlotInfo.isProfile( type ) // FIXME OK PROFILE
+    } else { // if ( PlotType.isProfile( type ) // FIXME OK PROFILE
       for ( NumShot sh : shots ) {
         if  ( ! sh.mIgnoreExtend ) {
           NumStation st1 = sh.from;
@@ -603,7 +604,7 @@ public class OverviewWindow extends ItemDrawer
         } else {
           NumStation st = mNum.getStation( start );
           if ( st == null ) continue;
-          if ( type == PlotInfo.PLOT_PLAN ) {
+          if ( type == PlotType.PLOT_PLAN ) {
             xdelta = st.e - mStartStation.e; // FIXME SCALE FACTORS ???
             ydelta = st.s - mStartStation.s;
           } else {
@@ -639,7 +640,7 @@ public class OverviewWindow extends ItemDrawer
    private void saveWithExt( final String ext )
    {
      TDNum num = mNum;
-     final String fullname = TDInstance.survey + ( (mType == PlotInfo.PLOT_PLAN )? "-p" : "-s" );
+     final String fullname = TDInstance.survey + ( (mType == PlotType.PLOT_PLAN )? "-p" : "-s" );
      // TDLog.Log( TDLog.LOG_IO, "export plot type " + mType + " with extension " + ext );
      // Log.v( "DistoXX", "export th2 file " + fullname );
      DrawingCommandManager manager = mOverviewSurface.getManager( DrawingSurface.DRAWING_OVERVIEW );
@@ -660,7 +661,7 @@ public class OverviewWindow extends ItemDrawer
        (new SavePlotFileTask( this, null, th2Handler, mNum, manager, fullname, mType, 0, PlotSave.OVERVIEW, 0 )).execute();
      } else {
        GeoReference station = null;
-       if ( mType == PlotInfo.PLOT_PLAN && ext.equals("shp") ) {
+       if ( mType == PlotType.PLOT_PLAN && ext.equals("shp") ) {
         String origin = mNum.getOriginStation();
         station = TDExporter.getGeolocalizedStation( mSid, mData, 1.0f, true, origin );
        }
@@ -815,7 +816,7 @@ public class OverviewWindow extends ItemDrawer
     double ba = Math.atan2( bx, by ) * 180 / Math.PI;
     if ( ba < 0 ) ba += 360;
 
-    if ( mType == PlotInfo.PLOT_PLAN ) {
+    if ( mType == PlotType.PLOT_PLAN ) {
       /* nothing */
     } else {
       if ( ba <= 180 ) {
@@ -932,7 +933,7 @@ public class OverviewWindow extends ItemDrawer
         float dd = TDMath.sqrt( dx * dx + dy * dy );
         float bb = TDMath.sqrt( bx * bx + by * by );
 
-        String format = ( mType == PlotInfo.PLOT_PLAN )?
+        String format = ( mType == PlotType.PLOT_PLAN )?
           getResources().getString( R.string.format_measure_plan ) :
           getResources().getString( R.string.format_measure_profile );
 
@@ -1025,14 +1026,14 @@ public class OverviewWindow extends ItemDrawer
     /* FIXME_OVER
     private void switchPlotType()
     {
-      if ( mType == PlotInfo.PLOT_PLAN ) {
+      if ( mType == PlotType.PLOT_PLAN ) {
         // saveReference( mPlot1, mPid1 );
         // mPid  = mPid2;
         mType = PlotInfo.mPlot2.type; 
         TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], mBMextend );
         mOverviewSurface.setManager( DrawingSurface.DRAWING_PLAN, (int)mType ); 
         resetReference( mPlot2 );
-      } else if ( mType == PlotInfo.PLOT_EXTENDED ) { // PROJECTED not supported on overview
+      } else if ( mType == PlotType.PLOT_EXTENDED ) { // PROJECTED not supported on overview
         // saveReference( mPlot2, mPid2 );
         // mPid  = mPid1;
         // mName = mName1;
@@ -1124,7 +1125,7 @@ public class OverviewWindow extends ItemDrawer
       mOverviewSurface.addSecondReference( pt.x, pt.y );
     }
 
-    String format = ( mType == PlotInfo.PLOT_PLAN )?
+    String format = ( mType == PlotType.PLOT_PLAN )?
       getResources().getString( R.string.format_measure_plan ) :
       getResources().getString( R.string.format_measure_profile );
 

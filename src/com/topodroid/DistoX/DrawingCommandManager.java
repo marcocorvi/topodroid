@@ -636,7 +636,7 @@ class DrawingCommandManager
   // public DBlock setHighlight( int plot_type, float x, float y )
   // {
   //   clearHighlight();
-  //   if ( ! PlotInfo.isSketch2d( plot_type ) ) return null;
+  //   if ( ! PlotType.isSketch2d( plot_type ) ) return null;
   //   boolean legs   = (mDisplayMode & DisplayMode.DISPLAY_LEG) != 0;
   //   boolean splays = (mDisplayMode & DisplayMode.DISPLAY_SPLAY) != 0;
   //   boolean latest = (mDisplayMode & DisplayMode.DISPLAY_LATEST) != 0;

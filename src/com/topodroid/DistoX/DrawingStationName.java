@@ -19,7 +19,8 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.num.NumStation;
 // import com.topodroid.math.Point2D;
 import com.topodroid.prefs.TDSetting;
-
+import com.topodroid.common.PlotType;
+import com.topodroid.common.PointScale;
 
 import java.util.Locale;
 
@@ -47,19 +48,19 @@ public class DrawingStationName extends DrawingPointPath
   private float mDX, mDY;     // X-section direction
 
   // get coords for a "section" point
-  float getXSectionX( float r ) { return cx - ((mXSectionType == PlotInfo.PLOT_NULL)? 0 : r * mDY); }
-  float getXSectionY( float r ) { return cy + ((mXSectionType == PlotInfo.PLOT_NULL)? 0 : r * mDX); }
+  float getXSectionX( float r ) { return cx - ((mXSectionType == PlotType.PLOT_NULL)? 0 : r * mDY); }
+  float getXSectionY( float r ) { return cy + ((mXSectionType == PlotType.PLOT_NULL)? 0 : r * mDX); }
 
   public DrawingStationName( String name, float x, float y, int scrap )
   {
     super( BrushManager.getPointLabelIndex(),
            x, // scene coordinate
            y, 
-           DrawingPointPath.SCALE_M, null, null, scrap ); // no text no options
+           PointScale.SCALE_M, null, null, scrap ); // no text no options
     mType = DRAWING_PATH_NAME; // override DrawingPath.mType
     mStation = null;
     mName = ( name == null )? "" : name;
-    mXSectionType = PlotInfo.PLOT_NULL;
+    mXSectionType = PlotType.PLOT_NULL;
 
     // TDLog.Log( TDLog.LOG_PLOT, "DrawingStationName cstr " + mName + " " + x + " " + y );
 
@@ -74,11 +75,11 @@ public class DrawingStationName extends DrawingPointPath
     super( BrushManager.getPointLabelIndex(),
            x, // scene coordinate
            y, 
-           DrawingPointPath.SCALE_M, null, null, scrap );
+           PointScale.SCALE_M, null, null, scrap );
     mType = DRAWING_PATH_NAME; // override DrawingPath.mType
     mStation = num_st;
     mName = (num_st.name == null)? "" : num_st.name;
-    mXSectionType = PlotInfo.PLOT_NULL;
+    mXSectionType = PlotType.PLOT_NULL;
 
     // TDLog.Log( TDLog.LOG_PLOT, "DrawingStationName cstr " + mName + " " + x + " " + y );
     mPaint = ( num_st.mDuplicate )? BrushManager.duplicateStationPaint
@@ -103,10 +104,10 @@ public class DrawingStationName extends DrawingPointPath
     mXSectionType = type;
     mAzimuth      = azimuth;
     mClino        = clino;
-    if ( type == PlotInfo.PLOT_PLAN ) {
+    if ( type == PlotType.PLOT_PLAN ) {
       mDX =   TDMath.sind( azimuth );
       mDY = - TDMath.cosd( azimuth );
-    } else if ( PlotInfo.isProfile( type ) ) {
+    } else if ( PlotType.isProfile( type ) ) {
       if ( clino > 89 ) {
         mDX = 0;
         mDY = -1;
@@ -120,7 +121,7 @@ public class DrawingStationName extends DrawingPointPath
     }
   }
 
-  void resetXSection( ) { mXSectionType = PlotInfo.PLOT_NULL; }
+  void resetXSection( ) { mXSectionType = PlotType.PLOT_NULL; }
 
   // defined in DrawingPointPath
   // float distance( float x, float y )
@@ -136,7 +137,7 @@ public class DrawingStationName extends DrawingPointPath
     if ( intersects( bbox ) ) {
       // TDLog.Log( TDLog.LOG_PATH, "DrawingStationName::draw LABEL " + mName );
       canvas.drawTextOnPath( mName, mPath, 0f, 0f, mPaint );
-      if ( mXSectionType != PlotInfo.PLOT_NULL ) {
+      if ( mXSectionType != PlotType.PLOT_NULL ) {
         Path path = new Path();
         path.moveTo( cx, cy );
         path.lineTo( cx+mDX*TDSetting.mArrowLength, cy+mDY*TDSetting.mArrowLength );
@@ -155,7 +156,7 @@ public class DrawingStationName extends DrawingPointPath
         mTransformedPath.transform( matrix );
         canvas.drawTextOnPath( mName, mTransformedPath, 0f, 0f, mPaint );
       }
-      if ( mXSectionType != PlotInfo.PLOT_NULL ) {
+      if ( mXSectionType != PlotType.PLOT_NULL ) {
         Path path = new Path();
         path.moveTo( cx, cy );
         path.lineTo( cx+mDX*TDSetting.mArrowLength, cy+mDY*TDSetting.mArrowLength );
@@ -193,7 +194,7 @@ public class DrawingStationName extends DrawingPointPath
       // if ( version >= 401160 )
         dos.writeInt( (scrap >= 0)? scrap : mScrap );
       dos.writeInt( (int)mXSectionType );
-      if ( mXSectionType != PlotInfo.PLOT_NULL ) {
+      if ( mXSectionType != PlotType.PLOT_NULL ) {
         dos.writeFloat( mAzimuth );
         dos.writeFloat( mClino );
       }
@@ -218,7 +219,7 @@ public class DrawingStationName extends DrawingPointPath
       ret.mLevel = level;
       if ( version >= 207038 ) {
         type = dis.readInt();
-        if ( type != (int)PlotInfo.PLOT_NULL ) {
+        if ( type != (int)PlotType.PLOT_NULL ) {
           ccx = dis.readFloat();
           ccy = dis.readFloat();
           ret.setXSection( ccx, ccy, type );
@@ -239,7 +240,7 @@ public class DrawingStationName extends DrawingPointPath
   //     if ( version >= 401160 ) dis.readInt();
   //     if ( version >= 207038 ) {
   //       int type = dis.readInt();
-  //       if ( type != (int)PlotInfo.PLOT_NULL ) {
+  //       if ( type != (int)PlotType.PLOT_NULL ) {
   //         dis.readFloat();
   //         dis.readFloat();
   //       }
@@ -254,7 +255,7 @@ public class DrawingStationName extends DrawingPointPath
     super.flipXAxis(z);
     // mPath.offset( -2 * cx, 0 );
 
-    if ( mXSectionType != PlotInfo.PLOT_NULL ) {
+    if ( mXSectionType != PlotType.PLOT_NULL ) {
       mDX = - mDX; // FLIP flip direction
     }
   }

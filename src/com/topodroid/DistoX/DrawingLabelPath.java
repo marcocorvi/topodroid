@@ -14,6 +14,7 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.common.PointScale;
 
 
 import android.graphics.Canvas;
@@ -132,10 +133,10 @@ public class DrawingLabelPath extends DrawingPointPath
   private float fontSize( )
   {
     switch ( mScale ) {
-      case SCALE_XS: return 0.50f;
-      case SCALE_S:  return 0.72f;
-      case SCALE_L:  return 1.41f;
-      case SCALE_XL: return 2.00f;
+      case PointScale.SCALE_XS: return 0.50f;
+      case PointScale.SCALE_S:  return 0.72f;
+      case PointScale.SCALE_L:  return 1.41f;
+      case PointScale.SCALE_XL: return 2.00f;
     }
     return 1;
   }
@@ -180,10 +181,10 @@ public class DrawingLabelPath extends DrawingPointPath
   {
     float f = 1.0f;
     switch ( mScale ) {
-      case SCALE_XS: f = 0.50f; break;
-      case SCALE_S:  f = 0.72f; break;
-      case SCALE_L:  f = 1.41f; break;
-      case SCALE_XL: f = 2.00f; break;
+      case PointScale.SCALE_XS: f = 0.50f; break;
+      case PointScale.SCALE_S:  f = 0.72f; break;
+      case PointScale.SCALE_L:  f = 1.41f; break;
+      case PointScale.SCALE_XL: f = 2.00f; break;
     }
     mPaint.setTextSize( TDSetting.mLabelSize * f );
   }
@@ -203,7 +204,7 @@ public class DrawingLabelPath extends DrawingPointPath
 //   @Override
 //   void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
 //   { 
-//     // int size = mScale - SCALE_XS;
+//     // int size = mScale - PointScale.SCALE_XS;
 //     // int layer  = 6;
 //     // int type   = 8;
 //     // int cat    = 81;
@@ -223,7 +224,7 @@ public class DrawingLabelPath extends DrawingPointPath
   @Override
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
   { 
-    // int size = mScale - SCALE_XS;
+    // int size = mScale - PointScale.SCALE_XS;
     pw.format("<item type=\"point\" name=\"label\" cave=\"%s\" branch=\"%s\" text=\"%s\" ",
       cave, branch, mPointText );
     if ( bind != null ) pw.format( " bind=\"%s\"", bind );

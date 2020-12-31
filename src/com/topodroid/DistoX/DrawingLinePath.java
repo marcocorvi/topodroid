@@ -60,7 +60,7 @@ public class DrawingLinePath extends DrawingPointLinePath
   //   return ret;
   // }
 
-  DrawingLinePath( int line_type, int scrap )
+  public DrawingLinePath( int line_type, int scrap )
   {
     // visible = true,  closed = false
     super( DrawingPath.DRAWING_PATH_LINE, true, false, scrap );

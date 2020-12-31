@@ -18,7 +18,8 @@ import com.topodroid.ui.MyColorPicker;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.TDLayout;
 import com.topodroid.prefs.TDSetting;
-
+import com.topodroid.common.ExtendType;
+import com.topodroid.common.PlotType;
 
 // import android.util.Log;
 
@@ -263,7 +264,7 @@ class DrawingShotDialog extends MyDialog
     if ( TDSetting.mWallsType != TDSetting.WALLS_NONE 
       && TDLevel.overExpert 
       && mBlock.isMainLeg()
-      && ( PlotInfo.isSketch2D( mParent.getPlotType() ) ) ) {
+      && ( PlotType.isSketch2D( mParent.getPlotType() ) ) ) {
       mRBwalls.setOnClickListener( this );
     } else {
       mRBwalls.setVisibility( View.GONE );
@@ -282,16 +283,16 @@ class DrawingShotDialog extends MyDialog
       }
 
       switch ( mBlock.getIntExtend() ) {
-        case DBlock.EXTEND_LEFT:
+        case ExtendType.EXTEND_LEFT:
           mRBleft.setChecked( true );
           break;
-        case DBlock.EXTEND_VERT:
+        case ExtendType.EXTEND_VERT:
           mRBvert.setChecked( true );
           break;
-        case DBlock.EXTEND_RIGHT:
+        case ExtendType.EXTEND_RIGHT:
           mRBright.setChecked( true );
           break;
-        // case DBlock.EXTEND_IGNORE:
+        // case ExtendType.EXTEND_IGNORE:
         //   mRBignore.setChecked( true );
         //   break;
       }
@@ -430,10 +431,10 @@ class DrawingShotDialog extends MyDialog
       }
 
       // int extend = mBlock.getIntExtend();
-      int extend = DBlock.EXTEND_IGNORE;
-      if ( mRBleft.isChecked() )       { extend = DBlock.EXTEND_LEFT; }
-      else if ( mRBvert.isChecked() )  { extend = DBlock.EXTEND_VERT; }
-      else if ( mRBright.isChecked() ) { extend = DBlock.EXTEND_RIGHT; }
+      int extend = ExtendType.EXTEND_IGNORE;
+      if ( mRBleft.isChecked() )       { extend = ExtendType.EXTEND_LEFT; }
+      else if ( mRBvert.isChecked() )  { extend = ExtendType.EXTEND_VERT; }
+      else if ( mRBright.isChecked() ) { extend = ExtendType.EXTEND_RIGHT; }
       // Log.v("DistoX", "Extend " + extend + " Stretch " + mStretch );
       mParent.updateBlockExtend( mBlock, extend, mStretch ); // FIXME_STRETCH equal extend checked by the method
 

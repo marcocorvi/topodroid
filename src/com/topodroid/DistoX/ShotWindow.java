@@ -30,6 +30,9 @@ import com.topodroid.prefs.TDPrefCat;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.DeviceUtil;
 import com.topodroid.dev.DataType;
+import com.topodroid.common.PlotType;
+import com.topodroid.common.LegType;
+import com.topodroid.common.ExtendType;
 
 import android.util.Log;
 
@@ -220,7 +223,7 @@ public class ShotWindow extends Activity
 
   // private Bundle mSavedState = null;
   // private String mRecentPlot     = null; // moved to TDInstance
-  // long   mRecentPlotType = PlotInfo.PLOT_PLAN;
+  // long   mRecentPlotType = PlotType.PLOT_PLAN;
 
   private int mButtonSize = 42;
   private Button[] mButton1;
@@ -1499,8 +1502,8 @@ public class ShotWindow extends Activity
 
       } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // LEFT reset stretch
         for ( DBlock blk : mDataAdapter.mSelect ) {
-          blk.setExtend( DBlock.EXTEND_LEFT, DBlock.STRETCH_NONE );
-          mApp_mData.updateShotExtend( blk.mId, TDInstance.sid, DBlock.EXTEND_LEFT, DBlock.STRETCH_NONE );
+          blk.setExtend( ExtendType.EXTEND_LEFT, ExtendType.STRETCH_NONE );
+          mApp_mData.updateShotExtend( blk.mId, TDInstance.sid, ExtendType.EXTEND_LEFT, ExtendType.STRETCH_NONE );
         }
         clearMultiSelect( );
         updateDisplay();
@@ -1514,8 +1517,8 @@ public class ShotWindow extends Activity
         updateDisplay();
       } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // RIGHT reset stretch
         for ( DBlock blk : mDataAdapter.mSelect ) {
-          blk.setExtend( DBlock.EXTEND_RIGHT, DBlock.STRETCH_NONE );
-          mApp_mData.updateShotExtend( blk.mId, TDInstance.sid, DBlock.EXTEND_RIGHT, DBlock.STRETCH_NONE );
+          blk.setExtend( ExtendType.EXTEND_RIGHT, ExtendType.STRETCH_NONE );
+          mApp_mData.updateShotExtend( blk.mId, TDInstance.sid, ExtendType.EXTEND_RIGHT, ExtendType.STRETCH_NONE );
         }
         clearMultiSelect( );
         updateDisplay();
@@ -2244,7 +2247,7 @@ public class ShotWindow extends Activity
 
     if ( mPIDp >= 0 ) {
       long mPIDs = mPIDp + 1L; // FIXME !!! this is true but not guaranteed
-      startDrawingWindow( start, name+"p", mPIDp, name+"s", mPIDs, PlotInfo.PLOT_PLAN, start, false ); // default no-landscape
+      startDrawingWindow( start, name+"p", mPIDp, name+"s", mPIDs, PlotType.PLOT_PLAN, start, false ); // default no-landscape
     // } else {
     //   TDToast.makeBad( R.string.plot_duplicate_name );
     }
@@ -2310,7 +2313,7 @@ public class ShotWindow extends Activity
   void startExistingPlot( String name, long type, String station ) // name = plot/sketch3d name
   {
     // TDLog.Log( TDLog.LOG_SHOT, "start Existing Plot \"" + name + "\" type " + type + " sid " + TDInstance.sid );
-    if ( type != PlotInfo.PLOT_SKETCH_3D ) {
+    if ( type != PlotType.PLOT_SKETCH_3D ) {
       PlotInfo plot1 =  mApp_mData.getPlotInfo( TDInstance.sid, name+"p" );
       if ( plot1 != null ) {
         TDInstance.setRecentPlot( name, type );

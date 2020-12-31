@@ -13,7 +13,7 @@ package com.topodroid.num;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
-import com.topodroid.DistoX.DBlock;
+import com.topodroid.common.ExtendType;
 
 
 import android.util.Log;
@@ -185,16 +185,16 @@ public class NumStation extends NumSurveyPoint
   // @param e original splay extend
   float computeExtend( float b, float e )
   {
-    // if ( e >= DBlock.EXTEND_UNSET ) { 
-    //   e -= DBlock.EXTEND_FVERT;
-    //   return ( e > DBlock.EXTEND_RIGHT )? DBlock.EXTEND_VERT : e;
+    // if ( e >= ExtendType.EXTEND_UNSET ) { 
+    //   e -= ExtendType.EXTEND_FVERT;
+    //   return ( e > ExtendType.EXTEND_RIGHT )? ExtendType.EXTEND_VERT : e;
     // }
-    if ( e < DBlock.EXTEND_IGNORE ) {
+    if ( e < ExtendType.EXTEND_IGNORE ) {
       return e;
     } else {
-      e = DBlock.EXTEND_VERT;
+      e = ExtendType.EXTEND_VERT;
     }
-    // if ( e > DBlock.EXTEND_RIGHT ) e = DBlock.EXTEND_VERT;
+    // if ( e > ExtendType.EXTEND_RIGHT ) e = ExtendType.EXTEND_VERT;
 
     if ( mLegs.size() == 0 ) return e;
     NumAzimuth a1 = mLegs.get(0);

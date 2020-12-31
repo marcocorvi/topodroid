@@ -16,6 +16,7 @@ import com.topodroid.utils.TDString;
 import com.topodroid.ui.MyOrientationWidget;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.common.PointScale;
 
 import android.util.Log;
 
@@ -138,11 +139,11 @@ class DrawingPointDialog extends MyDialog
     mBtnScaleL  = (RadioButton) findViewById( R.id.point_scale_l  );
     mBtnScaleXL = (RadioButton) findViewById( R.id.point_scale_xl );
     switch ( mPoint.getScale() ) {
-      case DrawingPointPath.SCALE_XS: mBtnScaleXS.setChecked( true ); break;
-      case DrawingPointPath.SCALE_S:  mBtnScaleS.setChecked( true ); break;
-      case DrawingPointPath.SCALE_M:  mBtnScaleM.setChecked( true ); break;
-      case DrawingPointPath.SCALE_L:  mBtnScaleL.setChecked( true ); break;
-      case DrawingPointPath.SCALE_XL: mBtnScaleXL.setChecked( true ); break;
+      case PointScale.SCALE_XS: mBtnScaleXS.setChecked( true ); break;
+      case PointScale.SCALE_S:  mBtnScaleS.setChecked( true ); break;
+      case PointScale.SCALE_M:  mBtnScaleM.setChecked( true ); break;
+      case PointScale.SCALE_L:  mBtnScaleL.setChecked( true ); break;
+      case PointScale.SCALE_XL: mBtnScaleXL.setChecked( true ); break;
     }
 
     if ( TDSetting.mWithLevels > 1 ) {
@@ -202,11 +203,11 @@ class DrawingPointDialog extends MyDialog
       if ( mDoOptions && mEToptions.getText() != null ) {
         mPoint.mOptions = mEToptions.getText().toString().trim();
       }
-      if ( mBtnScaleXS.isChecked() )      mPoint.setScale( DrawingPointPath.SCALE_XS );
-      else if ( mBtnScaleS.isChecked() )  mPoint.setScale( DrawingPointPath.SCALE_S  );
-      else if ( mBtnScaleM.isChecked() )  mPoint.setScale( DrawingPointPath.SCALE_M  );
-      else if ( mBtnScaleL.isChecked() )  mPoint.setScale( DrawingPointPath.SCALE_L  );
-      else if ( mBtnScaleXL.isChecked() ) mPoint.setScale( DrawingPointPath.SCALE_XL );
+      if ( mBtnScaleXS.isChecked() )      mPoint.setScale( PointScale.SCALE_XS );
+      else if ( mBtnScaleS.isChecked() )  mPoint.setScale( PointScale.SCALE_S  );
+      else if ( mBtnScaleM.isChecked() )  mPoint.setScale( PointScale.SCALE_M  );
+      else if ( mBtnScaleL.isChecked() )  mPoint.setScale( PointScale.SCALE_L  );
+      else if ( mBtnScaleXL.isChecked() ) mPoint.setScale( PointScale.SCALE_XL );
 
       if ( mXSectionName != null ) {
         if ( TDLevel.overAdvanced && mHasXSectionOutline != mCBxsection.isChecked() ) {

@@ -14,6 +14,7 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.common.PlotType;
 
 import android.util.Log;
 
@@ -119,14 +120,14 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
       if ( mSuffix == PlotSave.EXPORT ) {
         if ( mManager != null ) {
           File file2 = new File( TDPath.getTh2FileWithExt( mFullName ) );
-          DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotInfo.projName[ mType ], mProjDir, false ); // single sketch
+          DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false ); // single sketch
         }
       } else if ( mSuffix == PlotSave.SAVE ) {
         switch ( TDSetting.mExportPlotFormat ) { // auto-export format
           case TDConst.DISTOX_EXPORT_TH2:
             if ( mManager != null ) {
               File file2 = new File( TDPath.getTh2FileWithExt( mFullName ) );
-              DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotInfo.projName[ mType ], mProjDir, false ); // single sketch
+              DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false ); // single sketch
             }
             break;
           case TDConst.DISTOX_EXPORT_DXF:
@@ -155,7 +156,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
 	  //   }
           //   break;
           case TDConst.DISTOX_EXPORT_CSX: // IMPORTANT CSX must come before PNG
-            if ( PlotInfo.isSketch2D( mType ) ) {
+            if ( PlotType.isSketch2D( mType ) ) {
 	      if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
                 mParent.get().doSaveCsx( origin, psd1, psd2, false );
 	      }
@@ -185,7 +186,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
       } else if ( mSuffix == PlotSave.OVERVIEW ) {
 	Log.v("DistoXX", "save plot file OVERVIEW " + mFullName );
         File file = new File( TDPath.getTh2FileWithExt( mFullName ) );
-        DrawingIO.exportTherion( mManager, mType, file, mFullName, PlotInfo.projName[ mType ], mProjDir, true ); // multi-sketch
+        DrawingIO.exportTherion( mManager, mType, file, mFullName, PlotType.projName( mType ), mProjDir, true ); // multi-sketch
 	return true;
       }
       

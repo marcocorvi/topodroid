@@ -15,6 +15,7 @@ import com.topodroid.utils.TDString;
 import com.topodroid.math.Point2D;
 import com.topodroid.math.BezierCurve;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.common.PlotType;
 
 // import android.util.Log;
 
@@ -1008,7 +1009,7 @@ class DrawingDxf
         out.flush();
 
         // centerline data
-        if ( PlotInfo.isSketch2D( type ) ) {
+        if ( PlotType.isSketch2D( type ) ) {
           for ( DrawingPath sh : plot.getLegs() ) {
             DBlock blk = sh.mBlock;
             if ( blk == null ) continue;
@@ -1024,21 +1025,21 @@ class DrawingDxf
             // // if ( sh.mType == DrawingPath.DRAWING_PATH_FIXED ) {
             //   NumStation f = num.getStation( blk.mFrom );
             //   NumStation t = num.getStation( blk.mTo );
-            //   if ( type == PlotInfo.PLOT_PLAN ) {
+            //   if ( type == PlotType.PLOT_PLAN ) {
             //     float x0 = scale *( xoff + DrawingUtil.toSceneX( f.e, f.s ) );
             //     float y0 = scale *( yoff + DrawingUtil.toSceneY( f.e, f.s ) );
             //     float x1 = scale *( xoff + DrawingUtil.toSceneX( t.e, t.s ) );
             //     float y1 = scale *( yoff + DrawingUtil.toSceneY( t.e, t.s ) );
             //     printXYZ( pw4, x0, -y0, 0.0f, 0 );
             //     printXYZ( pw4, x1, -y1, 0.0f, 1 );
-            //   } else if ( PlotInfo.isProfile( type ) ) {
+            //   } else if ( PlotType.isProfile( type ) ) {
             //     float x0 = scale *( xoff + DrawingUtil.toSceneX( f.h, f.v ) );
             //     float y0 = scale *( yoff + DrawingUtil.toSceneY( f.h, f.v ) );
             //     float x1 = scale *( xoff + DrawingUtil.toSceneX( t.h, t.v ) );
             //     float y1 = scale *( yoff + DrawingUtil.toSceneY( t.h, t.v ) );
             //     printXYZ( pw4, x0, -y0, 0.0f, 0 );
             //     printXYZ( pw4, x1, -y1, 0.0f, 1 );
-            //   // } else if ( type == PlotInfo.PLOT_SECTION ) {
+            //   // } else if ( type == PlotType.PLOT_SECTION ) {
             //   //   /* nothing */
             //   }
             // // }
@@ -1062,20 +1063,20 @@ class DrawingDxf
             //   // printInt( pw41, 39, 1 );         // line thickness
 
             //   float dhs = scale * blk.mLength * (float)Math.cos( blk.mClino * TDMath.DEG2RAD )*sc1/10; // scaled dh
-            //   if ( type == PlotInfo.PLOT_PLAN ) {
+            //   if ( type == PlotType.PLOT_PLAN ) {
             //     float x = scale * DrawingUtil.toSceneX( f.e, f.s );
             //     float y = scale * DrawingUtil.toSceneY( f.e, f.s );
             //     float de =   dhs * (float)Math.sin( blk.mBearing * TDMath.DEG2RAD);
             //     float ds = - dhs * (float)Math.cos( blk.mBearing * TDMath.DEG2RAD);
             //     printXYZ( pw41, x, -y, 0.0f, 0 );
             //     printXYZ( pw41, x + de, -(y+ds), 0.0f, 1 );
-            //   } else if ( PlotInfo.isProfile( type ) ) {
+            //   } else if ( PlotType.isProfile( type ) ) {
             //     float x = scale * DrawingUtil.toSceneX( f.h, f.v );
             //     float y = scale * DrawingUtil.toSceneY( f.h, f.v );
             //     float dv = - blk.mLength * (float)Math.sin( blk.mClino * TDMath.DEG2RAD )*sc1/10;
             //     printXYZ( pw41, x, -y, 0.0f, 0 );
             //     printXYZ( pw41, x+dhs*blk.getReducedExtend(), -(y+dv), 0.0f, 1 ); 
-            //   } else if ( type == PlotInfo.PLOT_SECTION ) {
+            //   } else if ( type == PlotType.PLOT_SECTION ) {
             //     // nothing
             //   }
             // // }

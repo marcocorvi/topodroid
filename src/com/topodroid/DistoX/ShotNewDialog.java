@@ -16,6 +16,7 @@ import com.topodroid.ui.MyCheckBox;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.TDLayout;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.common.ExtendType;
 
 
 import java.util.Locale;
@@ -404,10 +405,10 @@ class ShotNewDialog extends MyDialog
       notDone = false;
       // Log.v( TopoDroidApp.TAG, "data " + distance + " " + bearing + " " + clino );
 
-      long shot_extend = DBlock.EXTEND_RIGHT; // DBlock.EXTEND_UNSET; // FIXME_EXTEND
-      if ( mRadioLeft.isChecked() ) { shot_extend = DBlock.EXTEND_LEFT; }
-      else if ( mRadioVert.isChecked() ) { shot_extend = DBlock.EXTEND_VERT; }
-      else if ( mRadioRight.isChecked() ) { shot_extend = DBlock.EXTEND_RIGHT; } // already assigned
+      long shot_extend = ExtendType.EXTEND_RIGHT; // ExtendType.EXTEND_UNSET; // FIXME_EXTEND
+      if ( mRadioLeft.isChecked() ) { shot_extend = ExtendType.EXTEND_LEFT; }
+      else if ( mRadioVert.isChecked() ) { shot_extend = ExtendType.EXTEND_VERT; }
+      else if ( mRadioRight.isChecked() ) { shot_extend = ExtendType.EXTEND_RIGHT; } // already assigned
       else { // let TopoDroid choose
         try {
           float bx = Float.parseFloat( bearing.replace(',','.') );

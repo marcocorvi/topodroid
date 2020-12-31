@@ -77,8 +77,8 @@ public class BrushManager
   static int getLineIndex( Symbol line )   { return (mLineLib  == null)? -1 : mLineLib.getSymbolIndex( line ); }
   static int getAreaIndex( Symbol area )   { return (mAreaLib  == null)? -1 : mAreaLib.getSymbolIndex( area ); }
 
-  static int getPointIndexByThName( String thname ) { return (mPointLib == null)? -1 : mPointLib.getSymbolIndexByThName( thname ); }
-  static int getLineIndexByThName( String thname )  { return (mLineLib  == null)? -1 : mLineLib.getSymbolIndexByThName( thname ); }
+  public static int getPointIndexByThName( String thname ) { return (mPointLib == null)? -1 : mPointLib.getSymbolIndexByThName( thname ); }
+  public static int getLineIndexByThName( String thname )  { return (mLineLib  == null)? -1 : mLineLib.getSymbolIndexByThName( thname ); }
   static int getAreaIndexByThName( String thname )  { return (mAreaLib  == null)? -1 : mAreaLib.getSymbolIndexByThName( thname ); }
 
   static Symbol getPointByThName( String thname ) { return (mPointLib == null)? null : mPointLib.getSymbolByThName( thname ); }

@@ -17,6 +17,8 @@ import com.topodroid.utils.TDVersion;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.common.PlotType;
+// import com.topodroid.common.PointScale;
 
 import android.util.Log;
 
@@ -44,7 +46,7 @@ import java.util.Locale;
 
 import android.graphics.RectF;
 
-class DrawingIO
+public class DrawingIO
 {
   private static String readLine( BufferedReader br )
   {
@@ -150,7 +152,7 @@ class DrawingIO
   //             int ptType = BrushManager.getPointLibSize();
   //             boolean has_orientation = false;
   //             float orientation = 0.0f;
-  //             int scale = DrawingPointPath.SCALE_M;
+  //             int scale = PointScale.SCALE_M;
   //             String options = null;
 
   //             try {
@@ -185,13 +187,13 @@ class DrawingIO
   //               } else if ( vals[k].equals( "-scale" ) ) {
   //                 // FIXME assert (vals.length > k+1 );
   //                 if ( vals[k+1].equals("xs") ) {
-  //                   scale = DrawingPointPath.SCALE_XS;
+  //                   scale = PointScale.SCALE_XS;
   //                 } else if ( vals[k+1].equals("s") ) {
-  //                   scale = DrawingPointPath.SCALE_S;
+  //                   scale = PointScale.SCALE_S;
   //                 } else if ( vals[k+1].equals("l") ) {
-  //                   scale = DrawingPointPath.SCALE_L;
+  //                   scale = PointScale.SCALE_L;
   //                 } else if ( vals[k+1].equals("xl") ) {
-  //                   scale = DrawingPointPath.SCALE_XL;
+  //                   scale = PointScale.SCALE_XL;
   //                 } 
   //                 k += 2;
   //               } else if ( vals[k].equals( "-text" ) ) {
@@ -510,7 +512,7 @@ class DrawingIO
   }
 
   // entry point to export data-stream
-  static void exportDataStream( DrawingCommandManager manager, int type, File file, String fullname, int proj_dir )
+  public static void exportDataStream( DrawingCommandManager manager, int type, File file, String fullname, int proj_dir )
   {
     try {
       FileOutputStream fos = new FileOutputStream( file );
@@ -535,7 +537,7 @@ class DrawingIO
   }
 
   // entry point to export a set of paths to data-stream
-  static void exportDataStream( List< DrawingPath > paths, int type, File file, String fullname, int proj_dir, int scrap )
+  public static void exportDataStream( List< DrawingPath > paths, int type, File file, String fullname, int proj_dir, int scrap )
   {
     try {
       FileOutputStream fos = new FileOutputStream( file );
@@ -604,7 +606,7 @@ class DrawingIO
           flag |= 0x02;
           String name = dis.readUTF();
           type = dis.readInt();
-          if ( type == PlotInfo.PLOT_PROJECTED ) /* dir = */ dis.readInt();
+          if ( type == PlotType.PLOT_PROJECTED ) /* dir = */ dis.readInt();
           /* String lib = */ dis.readUTF();
           /* lib = */ dis.readUTF();
           /* lib = */ dis.readUTF();
@@ -725,7 +727,7 @@ class DrawingIO
               {
                 String name = dis.readUTF();
                 int type = dis.readInt();
-                if ( type == PlotInfo.PLOT_PROJECTED ) /* project_dir = */ dis.readInt();
+                if ( type == PlotType.PLOT_PROJECTED ) /* project_dir = */ dis.readInt();
                 // read palettes
                 String points = dis.readUTF();
                 String[] vals = points.split(",");
@@ -872,7 +874,7 @@ class DrawingIO
               {
                 dis.readUTF();
                 int type = dis.readInt();
-                if ( type == PlotInfo.PLOT_PROJECTED ) dis.readInt();
+                if ( type == PlotType.PLOT_PROJECTED ) dis.readInt();
                 // read palettes
                 dis.readUTF();
                 dis.readUTF();
@@ -943,7 +945,7 @@ class DrawingIO
   }
 
   // used by ParserPocketTopo
-  static void exportDataStream( int type, DataOutputStream dos, String scrap_name, int proj_dir,
+  public static void exportDataStream( int type, DataOutputStream dos, String scrap_name, int proj_dir,
                                 RectF bbox, List< DrawingPath > paths, int scrap )
   {
     try { 
@@ -952,7 +954,7 @@ class DrawingIO
       dos.write( 'S' );
       dos.writeUTF( scrap_name );
       dos.writeInt( type );
-      if ( type == PlotInfo.PLOT_PROJECTED ) dos.writeInt( proj_dir );
+      if ( type == PlotType.PLOT_PROJECTED ) dos.writeInt( proj_dir );
       BrushManager.toDataStream( dos );
 
       dos.write('I');
@@ -1002,7 +1004,7 @@ class DrawingIO
   }
 
   // this is called by DrawingCommandManager
-  static void exportDataStream(
+  public static void exportDataStream(
       int type,
       DataOutputStream dos,
       String scrap_name,
@@ -1022,7 +1024,7 @@ class DrawingIO
       dos.write( 'S' );
       dos.writeUTF( scrap_name );
       dos.writeInt( type );
-      if ( type == PlotInfo.PLOT_PROJECTED ) dos.writeInt( proj_dir );
+      if ( type == PlotType.PLOT_PROJECTED ) dos.writeInt( proj_dir );
       BrushManager.toDataStream( dos );
 
       dos.write('I');
@@ -1151,16 +1153,16 @@ class DrawingIO
     float oneMeter  = DrawingUtil.SCALE_FIX * TDSetting.mToTherion;
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
-    if (    type == PlotInfo.PLOT_SECTION
-         || type == PlotInfo.PLOT_H_SECTION 
-         || type == PlotInfo.PLOT_X_SECTION ) {
+    if (    type == PlotType.PLOT_SECTION
+         || type == PlotType.PLOT_H_SECTION 
+         || type == PlotType.PLOT_X_SECTION ) {
       if ( do_north ) { // H_SECTION (horizontal section) : north line is 5 m long
         pw.format(Locale.US, "scrap %s -projection %s -scale [%.4f %.4f %.4f %.4f 0 5 0 0 m]", scrap_name, proj_name, 
           x1*TDSetting.mToTherion, -y1*TDSetting.mToTherion, x2*TDSetting.mToTherion, -y2*TDSetting.mToTherion );
       } else {
         pw.format(Locale.US, "scrap %s -projection %s -scale [0 0 %.4f 0 0 0 1 0 m]", scrap_name, proj_name, oneMeter );
       }
-    } else if ( type == PlotInfo.PLOT_PROJECTED ) {
+    } else if ( type == PlotType.PLOT_PROJECTED ) {
       pw.format(Locale.US, "scrap %s -projection [%s %d] -scale [0 0 %.4f 0 0 0 1 0 m]", scrap_name, proj_name, project_dir, oneMeter );
     } else {
       pw.format(Locale.US, "scrap %s -projection %s -scale [0 0 %.4f 0 0 0 1 0 m]", scrap_name, proj_name, oneMeter );
@@ -1564,7 +1566,7 @@ class DrawingIO
   //           {
   //             String name = dis.readUTF();
   //             int type = dis.readInt();
-  //             if ( type == PlotInfo.PLOT_PROJECTED ) dis.readInt();
+  //             if ( type == PlotType.PLOT_PROJECTED ) dis.readInt();
   //             // read palettes
   //             dis.readUTF();
   //             dis.readUTF();
@@ -1673,7 +1675,7 @@ class DrawingIO
                 }
                 if ( bbox != null ) exportTherionGlobalHeader( out, type, bbox, file_name );
                 // exportTherionHeader2( out, points, lines, areas );
-                String proj = PlotInfo.projName[ type ];
+                String proj = PlotType.projName( type );
                 exportTherionScrapHeader( out, type, name, proj, project_dir, do_north, north_x1, north_y1, north_x2, north_y2 );
                 // if ( do_north ) { 
                 //   exportTherionScrapHeader( out, type, name, proj, 0, true, north_x1, north_y1, north_x2, north_y2 );
@@ -1687,7 +1689,7 @@ class DrawingIO
               {
                 name = dis.readUTF();
                 type = dis.readInt();
-                if ( type == PlotInfo.PLOT_PROJECTED ) project_dir = dis.readInt();
+                if ( type == PlotType.PLOT_PROJECTED ) project_dir = dis.readInt();
                 // read palettes
                 /* points = */ dis.readUTF();
                 /* lines  = */ dis.readUTF();
@@ -1840,7 +1842,7 @@ class DrawingIO
               {
                 /* name = */ dis.readUTF();
                 int type = dis.readInt();
-                if ( ! PlotInfo.isAnySection( type ) ) {
+                if ( ! PlotType.isAnySection( type ) ) {
                   dis.close();
                   fis.close();
                   return;

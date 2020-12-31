@@ -61,7 +61,7 @@ public class TDAzimuth
 
   // commented use for manually entered shots, 
   // commenetd used by by Compass/VisualTopo parser
-  static long computeSplayExtend( double bearing )
+  public static long computeSplayExtend( double bearing )
   {
     while ( bearing < mRefAzimuth ) bearing += 360;
     bearing -= mRefAzimuth;

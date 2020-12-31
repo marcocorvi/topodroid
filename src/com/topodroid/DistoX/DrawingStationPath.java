@@ -16,6 +16,7 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDLog;
 // import com.topodroid.math.Point2D;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.common.PointScale;
 
 import android.graphics.Matrix;
 import java.util.Locale;
@@ -59,7 +60,7 @@ public class DrawingStationPath extends DrawingPath
     mName = (name == null)? "" : name;
     setBBox( cx-10, cx+10, cy-10, cy+10 );
 
-    mScale = DrawingPointPath.SCALE_NONE; // scale
+    mScale = PointScale.SCALE_NONE; // scale
     // mPath = null;
     setScale( scale );
     mPaint = BrushManager.getStationPaint();
@@ -78,7 +79,7 @@ public class DrawingStationPath extends DrawingPath
     cy = st.cy;
     mName = st.getName(); // N.B. st.getName() is not null
 
-    mScale = DrawingPointPath.SCALE_NONE; // scale
+    mScale = PointScale.SCALE_NONE; // scale
     // mPath = null;
     setScale( scale );
     mPaint = BrushManager.getStationPaint();
@@ -101,10 +102,10 @@ public class DrawingStationPath extends DrawingPath
       // station point does not have text
       float f = 1.0f;
       switch ( mScale ) {
-        case DrawingPointPath.SCALE_XS: f = 0.50f; break;
-        case DrawingPointPath.SCALE_S:  f = 0.72f; break;
-        case DrawingPointPath.SCALE_L:  f = 1.41f; break;
-        case DrawingPointPath.SCALE_XL: f = 2.00f; break;
+        case PointScale.SCALE_XS: f = 0.50f; break;
+        case PointScale.SCALE_S:  f = 0.72f; break;
+        case PointScale.SCALE_L:  f = 1.41f; break;
+        case PointScale.SCALE_XL: f = 2.00f; break;
       }
       Matrix m = new Matrix();
       m.postScale(f,f);
@@ -185,7 +186,7 @@ public class DrawingStationPath extends DrawingPath
 //   @Override
 //   void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ ) { }
   // { 
-  //   int size = mScale - SCALE_XS;
+  //   int size = mScale - PointScale.SCALE_XS;
   //   int layer  = BrushManager.getPointCsxLayer( mPointType );
   //   int type   = BrushManager.getPointCsxType( mPointType );
   //   int cat    = BrushManager.getPointCsxCategory( mPointType );

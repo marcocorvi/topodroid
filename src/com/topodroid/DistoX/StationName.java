@@ -14,6 +14,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.common.ExtendType;
 
 import android.util.Log;
 
@@ -122,8 +123,8 @@ class StationName
     {
       long extend = TDAzimuth.computeLegExtend( blk.mBearing );
       TDLog.Log( TDLog.LOG_SHOT, blk.mId + " set extend " + extend );
-      blk.setExtend( (int)extend, DBlock.STRETCH_NONE ); 
-      mData.updateShotExtend( blk.mId, mSid, extend, DBlock.STRETCH_NONE );
+      blk.setExtend( (int)extend, ExtendType.STRETCH_NONE ); 
+      mData.updateShotExtend( blk.mId, mSid, extend, ExtendType.STRETCH_NONE );
     }
   }
 
@@ -132,8 +133,8 @@ class StationName
   protected void setLegFixedExtend( DBlock blk, long extend )
   {
     TDLog.Log( TDLog.LOG_SHOT, blk.mId + " set fixed extend " + extend );
-    blk.setExtend( (int)extend, DBlock.STRETCH_NONE );
-    mData.updateShotExtend( blk.mId, mSid, extend, DBlock.STRETCH_NONE );
+    blk.setExtend( (int)extend, ExtendType.STRETCH_NONE );
+    mData.updateShotExtend( blk.mId, mSid, extend, ExtendType.STRETCH_NONE );
   }
 
   // ------------------------------------------------------------------------------------------------

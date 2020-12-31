@@ -21,6 +21,10 @@ import com.topodroid.utils.TDVersion;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.inport.ParserShot;
+import com.topodroid.common.LegType;
+import com.topodroid.common.ExtendType;
+import com.topodroid.common.PlotType;
 
 import android.util.Log;
 
@@ -824,7 +828,7 @@ public class DataHelper extends DataSetObservable
     } finally { myDB.endTransaction(); }
   }
 
-  boolean updateSurveyDayAndComment( String name, String date, String comment )
+  public boolean updateSurveyDayAndComment( String name, String date, String comment )
   {
     boolean ret = false;
     long id = getIdFromName( SURVEY_TABLE, name );
@@ -940,7 +944,7 @@ public class DataHelper extends DataSetObservable
 
   // -----------------------------------------------------------------
 
-  boolean updateSurveyDayAndComment( long id, String date, String comment )
+  public boolean updateSurveyDayAndComment( long id, String date, String comment )
   {
     if ( date == null ) return false;
     ContentValues cv = new ContentValues();
@@ -949,14 +953,14 @@ public class DataHelper extends DataSetObservable
     return doUpdateSurvey( id, cv, "survey day+cmt" );
   }
 
-  boolean updateSurveyTeam( long id, String team )
+  public boolean updateSurveyTeam( long id, String team )
   {
     ContentValues cv = new ContentValues();
     cv.put( "team", team );
     return doUpdateSurvey( id, cv, "survey team" );
   }
 
-  boolean updateSurveyInitStation( long id, String station )
+  public boolean updateSurveyInitStation( long id, String station )
   {
     ContentValues cv = new ContentValues();
     // Log.v("DistoX_DB", "update survey init_station <" + station + ">" );
@@ -964,7 +968,7 @@ public class DataHelper extends DataSetObservable
     return doUpdateSurvey( id, cv, "survey init_station" );
   }
   
-  boolean updateSurveyDeclination( long id, double decl )
+  public boolean updateSurveyDeclination( long id, double decl )
   {
     ContentValues cv = new ContentValues();
     cv.put( "declination", decl );
@@ -1225,7 +1229,7 @@ public class DataHelper extends DataSetObservable
   }
   
   // called by the importXXXTask's
-  long insertImportShots( long sid, long id, ArrayList< ParserShot > shots )
+  public long insertImportShots( long sid, long id, ArrayList< ParserShot > shots )
   {
     // if ( myDB == null ) return -1L;
     long millis = 0L;
@@ -1318,7 +1322,7 @@ public class DataHelper extends DataSetObservable
   }
   
   // called by the importXXXTask's
-  long insertImportShotsDiving( long sid, long id, ArrayList< ParserShot > shots )
+  public long insertImportShotsDiving( long sid, long id, ArrayList< ParserShot > shots )
   {
     // [1] compute stations depth
     ArrayList< ParserShot > stack   = new ArrayList<>();
@@ -1813,7 +1817,7 @@ public class DataHelper extends DataSetObservable
                                 WHERE_SID_ID,
                                 new String[] { Long.toString(sid), Long.toString(pid) },
                                 null, null, null );
-    if ( cursor.moveToFirst() && cursor.getLong(0) == PlotInfo.PLOT_PLAN ) {
+    if ( cursor.moveToFirst() && cursor.getLong(0) == PlotType.PLOT_PLAN ) {
       updateStatus( PLOT_TABLE, pid+1, sid, TDStatus.NORMAL );
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
@@ -2254,7 +2258,7 @@ public class DataHelper extends DataSetObservable
      if (cursor.moveToFirst()) {
        do {
          // int type = cursor.getInt(2);     
-         // if ( type == PlotInfo.PLOT_PLAN ) { // FIXME || type == PlotInfo.PLOT_EXTENDED || type == PlotInfo.PLOT_PROJECTED
+         // if ( type == PlotType.PLOT_PLAN ) { // FIXME || type == PlotType.PLOT_EXTENDED || type == PlotType.PLOT_PROJECTED
            int r = 0;
            byte[] name = cursor.getString(1).getBytes();
            for ( int k=0; k<name.length; ++k ) {
@@ -2447,7 +2451,7 @@ public class DataHelper extends DataSetObservable
   {
     // Log.v("DistoX-NEXT_LEG", "Merge to next leg " + blk.mId + " < " + blk.mFrom + " - " + blk.mTo + " >" );
     long ret = -1;
-    long extend = DBlock.EXTEND_LEFT;
+    long extend = ExtendType.EXTEND_LEFT;
     long flag   = DBlock.FLAG_SURVEY;
     long leg    = DBlock.BLOCK_MAIN_LEG;
     String comment = "";
@@ -3315,7 +3319,7 @@ public class DataHelper extends DataSetObservable
           int type    = cursor.getInt(1);    // type is not used
           String name = cursor.getString(2);
           // Log.v( TopoDroidApp.TAG, "plot name " + name + " prefix " + prefix );
-          if ( name.startsWith( prefix ) /* && ( type == PlotInfo.PLOT_PHOTO || type == PlotInfo.PLOT_SECTION ) */ ) {
+          if ( name.startsWith( prefix ) /* && ( type == PlotType.PLOT_PHOTO || type == PlotType.PLOT_SECTION ) */ ) {
             try {
               int k = Integer.parseInt( name.substring( prefix_length ) );
               if ( k >= max ) max = k+1;
@@ -3667,7 +3671,7 @@ public class DataHelper extends DataSetObservable
    *       Before inserting a location drop existing deleted fixeds for the station
    * N.B. this must be called with id == -1L ( currently called only by SurveyWindow )
    */
-  long insertFixed( long sid, long id, String station, double lng, double lat, double alt, double asl,
+  public long insertFixed( long sid, long id, String station, double lng, double lat, double alt, double asl,
                            String comment, long status, long source )
   {
     return insertFixed( sid, id, station, lng, lat, alt, asl, comment, status, source, "", 0, 0, 0, 2 );
@@ -3965,7 +3969,7 @@ public class DataHelper extends DataSetObservable
     doUpdate( FIXED_TABLE, cv, sid, id, "fix cs" );
   }
 
-  boolean hasSurveyName( String name )  { return hasName( name, SURVEY_TABLE ); }
+  public boolean hasSurveyName( String name )  { return hasName( name, SURVEY_TABLE ); }
 
   private boolean hasName( String name, String table )
   {
@@ -4796,7 +4800,7 @@ public class DataHelper extends DataSetObservable
      return cv;
    }
 
-   void insertStation( long sid, String name, String comment, long flag )
+   public void insertStation( long sid, String name, String comment, long flag )
    {
      if ( myDB == null ) return; // false;
      // boolean ret = false;
@@ -5076,7 +5080,7 @@ public class DataHelper extends DataSetObservable
             +   " type INTEGER, "     // DISTOX MANUAL
             +   " millis INTEGER, "   // timestamp
             +   " color INTEGER, "     // custom color
-            +   " stretch REAL default 0, " // extend strech, default DBlock.STRETCH_NONE
+            +   " stretch REAL default 0, " // extend strech, default ExtendType.STRETCH_NONE
             +   " address TEXT default \"\" " // distox address
             // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
             // +   " ON DELETE CASCADE "

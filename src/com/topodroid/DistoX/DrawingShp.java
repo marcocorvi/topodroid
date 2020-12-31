@@ -18,6 +18,7 @@ import com.topodroid.shp.ShpPolyline;
 import com.topodroid.shp.ShpStation;
 import com.topodroid.shp.ShpSegment;
 // import com.topodroid.prefs.TDSetting;
+import com.topodroid.common.PlotType;
 
 // import android.util.Log;
 
@@ -58,7 +59,7 @@ class DrawingShp
       // centerline data: shepafile of segments (fields: type, fron, to)
       // xoff+sh.x1, yoff+sh.y1  --  xoff+sh.x2, yoff+sh.y2
       ArrayList< DrawingPath > shots = new ArrayList<>();
-      if ( PlotInfo.isSketch2D( type ) ) { 
+      if ( PlotType.isSketch2D( type ) ) { 
         for ( DrawingPath sh : plot.getLegs() ) {
           if ( sh.mBlock != null ) shots.add( sh );
         }

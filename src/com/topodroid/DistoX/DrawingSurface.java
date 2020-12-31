@@ -14,6 +14,7 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.num.NumStation;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.common.PlotType;
 
 import android.content.Context;
 
@@ -347,7 +348,7 @@ class DrawingSurface extends SurfaceView
 
   void clearShotsAndStations( int type ) 
   {
-    if ( PlotInfo.isExtended( type ) ) {
+    if ( PlotType.isExtended( type ) ) {
       mCommandManager2.clearShotsAndStations();
     }
   }
@@ -360,9 +361,9 @@ class DrawingSurface extends SurfaceView
 
   void clearReferences( int type ) 
   {
-    if ( PlotInfo.isProfile( type ) ) {
+    if ( PlotType.isProfile( type ) ) {
       mCommandManager2.clearReferences();
-    } else if ( type == PlotInfo.PLOT_PLAN ) {
+    } else if ( type == PlotType.PLOT_PLAN ) {
       mCommandManager1.clearReferences();
     } else {
       mCommandManager3.clearReferences();
@@ -743,8 +744,8 @@ class DrawingSurface extends SurfaceView
 
   DrawingCommandManager getManager( long type )
   {
-    if ( PlotInfo.isProfile( type ) ) return mCommandManager2;
-    if ( type == PlotInfo.PLOT_PLAN ) return mCommandManager1;
+    if ( PlotType.isProfile( type ) ) return mCommandManager2;
+    if ( type == PlotType.PLOT_PLAN ) return mCommandManager1;
     return mCommandManager3;
   }
 
@@ -815,12 +816,12 @@ class DrawingSurface extends SurfaceView
   static void exportAsTCsx( PrintWriter pw, long type, String survey, String cave, String branch, /* String session, */
                            DrawingCommandManager cm, List< PlotInfo > all_sections, List< PlotInfo > sections )
   {
-    if ( PlotInfo.isProfile( type ) ) {
+    if ( PlotType.isProfile( type ) ) {
       // FIXME OK PROFILE to check
       if ( cm != null ) {
         cm.exportAsTCsx( pw, survey, cave, branch, /* session, */ all_sections, sections );
       }
-    } else if ( type == PlotInfo.PLOT_PLAN ) {
+    } else if ( type == PlotType.PLOT_PLAN ) {
       if ( cm != null ) {
         cm.exportAsTCsx( pw, survey, cave, branch, /* session, */ all_sections, sections );
       }
@@ -831,12 +832,12 @@ class DrawingSurface extends SurfaceView
   // static void exportAsCsx( PrintWriter pw, long type, String survey, String cave, String branch, /* String session, */
   //                          DrawingCommandManager cm, List< PlotInfo > all_sections, List< PlotInfo > sections )
   // {
-  //   if ( PlotInfo.isProfile( type ) ) {
+  //   if ( PlotType.isProfile( type ) ) {
   //     // FIXME OK PROFILE to check
   //     if ( cm != null ) {
   //       cm.exportAsCsx( pw, survey, cave, branch, /* session, */ all_sections, sections );
   //     }
-  //   } else if ( type == PlotInfo.PLOT_PLAN ) {
+  //   } else if ( type == PlotType.PLOT_PLAN ) {
   //     if ( cm != null ) {
   //       cm.exportAsCsx( pw, survey, cave, branch, /* session, */ all_sections, sections );
   //     }
@@ -892,7 +893,7 @@ class DrawingSurface extends SurfaceView
   
   void setStationXSections( List< PlotInfo > xsection_plan, List< PlotInfo > xsection_ext, long type2 )
   {
-    mCommandManager1.setStationXSections( xsection_plan, PlotInfo.PLOT_PLAN );
+    mCommandManager1.setStationXSections( xsection_plan, PlotType.PLOT_PLAN );
     mCommandManager2.setStationXSections( xsection_ext,  type2 );
   }
 

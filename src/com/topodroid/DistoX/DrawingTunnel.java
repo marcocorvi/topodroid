@@ -17,6 +17,7 @@ import com.topodroid.utils.TDString;
 import com.topodroid.num.TDNum;
 import com.topodroid.num.NumStation;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.common.PlotType;
 
 import android.util.Log;
 
@@ -93,7 +94,7 @@ class DrawingTunnel extends DrawingSvgBase
       out.flush();
       
       {
-        if ( PlotInfo.isSketch2D( type ) ) { // centerline data
+        if ( PlotType.isSketch2D( type ) ) { // centerline data
           for ( DrawingPath sh : plot.getLegs() ) { // LEGS
             DBlock blk = sh.mBlock;
             if ( blk == null ) continue;
@@ -124,10 +125,10 @@ class DrawingTunnel extends DrawingSvgBase
             pw4.format(Locale.US, pctext, -1.0f, -1.0f );
             pw4.format(Locale.US, endPctext );
             pw4.format(           endPathcodes );
-            if ( PlotInfo.isPlan( type ) ) { 
+            if ( PlotType.isPlan( type ) ) { 
               pw4.format(Locale.US, formatPTxyz, FACTOR*f.e, FACTOR*f.s, FACTOR*f.v );
               pw4.format(Locale.US, formatPTxyz, FACTOR*t.e, FACTOR*t.s, FACTOR*t.v );
-            } else { // if ( PlotInfo.isProfile( type )
+            } else { // if ( PlotType.isProfile( type )
               pw4.format(Locale.US, formatPTxy0, FACTOR*f.h, FACTOR*f.v );
               pw4.format(Locale.US, formatPTxy0, FACTOR*t.h, FACTOR*t.v );
             }
@@ -186,9 +187,9 @@ class DrawingTunnel extends DrawingSvgBase
                 pw5.format(Locale.US, endPctext );
                 pw5.format(Locale.US, "    	<pcsymbol rname=\"%s\"/>\n", name);
                 pw5.format( endPathcodes );
-                if ( PlotInfo.isPlan( type ) ) { 
+                if ( PlotType.isPlan( type ) ) { 
                   pw5.format(Locale.US, formatPTxyz, FACTOR*st.e, FACTOR*st.s, FACTOR*st.v );
-                } else { // if ( PlotInfo.isProfile( type )
+                } else { // if ( PlotType.isProfile( type )
                   pw5.format(Locale.US, formatPTxy0, FACTOR*st.h, FACTOR*st.v );
                 }
                 pw5.format(Locale.US, formatPTxy, xx, yy );
@@ -288,9 +289,9 @@ class DrawingTunnel extends DrawingSvgBase
         int nt = map.get( st.name ).intValue();
         pw.format(Locale.US, skpathConnective, nn, nt );
         pw.format(Locale.US, formatPTxy, x, y );
-        if ( PlotInfo.isPlan( type ) ) { 
+        if ( PlotType.isPlan( type ) ) { 
           pw.format(Locale.US, formatPTxyz, FACTOR*st.e, FACTOR*st.s, FACTOR*st.v );
-        } else { // if ( PlotInfo.isProfile( type )
+        } else { // if ( PlotType.isProfile( type )
           pw.format(Locale.US, formatPTxy0, FACTOR*st.h, FACTOR*st.v );
         }
         pw.format( endSkpath );

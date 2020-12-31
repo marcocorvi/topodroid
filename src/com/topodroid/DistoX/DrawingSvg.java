@@ -17,6 +17,7 @@ import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.common.PlotType;
 
 // import android.util.Log;
 
@@ -97,9 +98,9 @@ class DrawingSvg extends DrawingSvgBase
       {
 
         // centerline data
-        if ( PlotInfo.isSketch2D( type ) ) { 
+        if ( PlotType.isSketch2D( type ) ) { 
           // float xmin, xmax, ymax, ymin;
-          // if ( PlotInfo.isPlan( type ) ) {
+          // if ( PlotType.isPlan( type ) ) {
           //   xmin = num.surveyEmin();
           //   xmax = num.surveyEmax();
           //   ymin = num.surveySmin();
@@ -136,13 +137,13 @@ class DrawingSvg extends DrawingSvgBase
             //   NumStation f = num.getStation( blk.mFrom );
             //   NumStation t = num.getStation( blk.mTo );
  
-            //   if ( type == PlotInfo.PLOT_PLAN ) {
+            //   if ( type == PlotType.PLOT_PLAN ) {
             //     float x  = xoff + DrawingUtil.toSceneX( f.e, f.s ); 
             //     float y  = yoff + DrawingUtil.toSceneY( f.e, f.s );
             //     float x1 = xoff + DrawingUtil.toSceneX( t.e, t.s );
             //     float y1 = yoff + DrawingUtil.toSceneY( t.e, t.s );
             //     pw4.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x1, y1 );
-            //   } else if ( PlotInfo.isProfile( type ) ) { // FIXME OK PROFILE
+            //   } else if ( PlotType.isProfile( type ) ) { // FIXME OK PROFILE
             //     float x  = xoff + DrawingUtil.toSceneX( f.h, f.v );
             //     float y  = yoff + DrawingUtil.toSceneY( f.h, f.v );
             //     float x1 = xoff + DrawingUtil.toSceneX( t.h, t.v );
