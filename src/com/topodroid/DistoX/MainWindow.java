@@ -77,6 +77,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 
+import android.graphics.drawable.BitmapDrawable;
+
 /*
   Method m = device.getClass().getMethod( "createRfcommSocket", new Class[] (int.class) );
   socket = (BluetoothSocket) m.invoke( device, 2 );
@@ -106,12 +108,20 @@ public class MainWindow extends Activity
   private ListItemAdapter mArrayAdapter;
 
   private Button[] mButton1;
+  private BitmapDrawable  mButtonDistoX1;
+  private BitmapDrawable  mButtonDistoX2;
+  private BitmapDrawable  mButtonSap5;
+  private BitmapDrawable  mButtonBric4;
+
+  private final  int BTN_DEVICE = 0;
+
   private static final int[] izons = {
                           R.drawable.iz_disto2b, // iz_disto,
                           R.drawable.iz_plus,
                           R.drawable.iz_import,
                           R.drawable.iz_palette,
                           R.drawable.iz_manager, // FIXME THMANAGER
+                          R.drawable.iz_3d,      // FIXME CAVE3D
                           // R.drawable.iz_database
 			  R.drawable.iz_empty
                           };
@@ -131,8 +141,8 @@ public class MainWindow extends Activity
                           R.string.help_add_topodroid,
                           R.string.help_import,
                           R.string.help_symbol,
-                          R.string.help_therion,
-                          // FIXME THMANAGER
+                          R.string.help_therion, // FIXME THMANAGER
+                          R.string.help_cave3d,
                           // R.string.help_database
                           };
   private static final int[] help_menus = {
@@ -262,6 +272,13 @@ public class MainWindow extends Activity
         } catch ( ActivityNotFoundException e ) {
           // TDToast.makeBad( R.string.no_thmanager );
           TDLog.Error( "Td Manager activity not started" );
+        }
+      } else if ( TDLevel.overExpert && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // CAVE3D
+        try {
+          intent = new Intent( "Cave3D.intent.action.Launch" );
+          startActivity( intent );
+        } catch ( ActivityNotFoundException e ) {
+          TDToast.makeBad( R.string.no_cave3d );
         }
       }
     }
@@ -679,13 +696,14 @@ public class MainWindow extends Activity
     int size = TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
     MyButton.resetCache( /* mApp, */ size );
     // TDToast.make( "SIZE " + size );
+    Resources res = getResources();
 
     // FIXME THMANAGER
     mNrButton1 = 4;
-    if ( TDLevel.overExpert ) mNrButton1 ++; // TH MANAGER
+    if ( TDLevel.overExpert ) mNrButton1 += 2; // TH MANAGER and CAVE3D
     mButton1 = new Button[ mNrButton1 + 1 ];
 
-    TDandroid.setButtonBackground( mImage, MyButton.getButtonBackground( mApp, getResources(), R.drawable.iz_menu ) );
+    TDandroid.setButtonBackground( mImage, MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
     for (int k=0; k < mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( mActivity, this, izons[k] );
       // mButton1[k].setElevation(40);
@@ -695,6 +713,12 @@ public class MainWindow extends Activity
     mButtonView1 = new MyHorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );
 
+    mButtonDistoX2 = MyButton.getButtonBackground( mApp, res, R.drawable.iz_disto2b );
+    mButtonDistoX1 = MyButton.getButtonBackground( mApp, res, R.drawable.iz_disto1b );
+    mButtonSap5    = MyButton.getButtonBackground( mApp, res, R.drawable.iz_sap5 );
+    mButtonBric4   = MyButton.getButtonBackground( mApp, res, R.drawable.iz_bric4 );
+
+    setButtonDevice();
     // mRelLayout.invalidate();
   }
 
@@ -719,6 +743,22 @@ public class MainWindow extends Activity
   //   TDandroid.setButtonBackground( mImage, MyButton.getButtonBackground( mApp, getResources(), R.drawable.iz_menu ) );
   //   mToolbar.addView( mImage, params );
   // }
+
+  public void setButtonDevice()
+  {
+    if ( TDInstance.isDeviceX310() ) {
+      TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonDistoX2 );
+    } else if ( TDInstance.isDeviceA3() ) {
+      TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonDistoX1 );
+    } else if ( TDInstance.isDeviceSap() ) {
+      TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonSap5 );
+    } else if ( TDInstance.isDeviceBric() ) {
+      TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonBric4 );
+    } else {
+      TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonDistoX2 );
+    }
+  }
+    
 
   @Override
   public void onDismiss( DialogInterface d )

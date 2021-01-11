@@ -1312,7 +1312,7 @@ public class TopoDroidApp extends Application
         // address, model, head, tail, name, nickname
         TDInstance.deviceA = new Device( address, model, 0, 0, null, null );
         TDInstance.bleDevice = bt_device;
-        Log.v("DistoX-BLE-A", "create ble comm [2] address " + address + " model " + model + " device " + (bt_device==null? "null" : bt_device.getAddress() ) );
+        // Log.v("DistoX-BLE-A", "create ble comm [2] address " + address + " model " + model + " device " + (bt_device==null? "null" : bt_device.getAddress() ) );
         // if ( address.startsWith("") {
           mComm = new SapComm( this, address, bt_device ); 
         // } else if ( address.startsWith("") {
@@ -1326,6 +1326,7 @@ public class TopoDroidApp extends Application
       }
     }
     TDPrefHelper.update( TDSetting.keyDeviceName(), address ); 
+    if ( mActivity != null ) mActivity.setButtonDevice();
   }
 
   // TODO BLE for the second DistoX

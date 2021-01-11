@@ -38,6 +38,8 @@ import android.os.Environment;
 public class TDPath
 {
   // whether not having ANDROID 10
+  final static public boolean BELOW_ANDROID_4  = ( Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT ); // API_19
+  final static public boolean BELOW_ANDROID_5  = ( Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP ); // API_21
   final static public boolean BELOW_ANDROID_10 = ( Build.VERSION.SDK_INT <= Build.VERSION_CODES.P );
   final static public boolean BELOW_ANDROID_11 = ( Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q );
 
@@ -93,12 +95,14 @@ public class TDPath
   //    because the path is Android/data/com.topodroid.DistoX/files
   // With "/sdcard" they remain
   static final String EXTERNAL_STORAGE_PATH_10 = Environment.getExternalStorageDirectory().getAbsolutePath();
-  static final String EXTERNAL_STORAGE_PATH_11 = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath();
+  static final String EXTERNAL_STORAGE_PATH_11 =
+    BELOW_ANDROID_4 ? null : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath();
   static final String EXTERNAL_STORAGE_PATH =  // app base path
-    (new File( EXTERNAL_STORAGE_PATH_11, "TopoDroid" ).exists() )? EXTERNAL_STORAGE_PATH_11
-      : BELOW_ANDROID_10 ? EXTERNAL_STORAGE_PATH_10
-        : ( BELOW_ANDROID_11  && new File( EXTERNAL_STORAGE_PATH_10, "TopoDroid").exists() )? EXTERNAL_STORAGE_PATH_10 
-          : EXTERNAL_STORAGE_PATH_11;
+    BELOW_ANDROID_4 ? EXTERNAL_STORAGE_PATH_10
+      : ( new File( EXTERNAL_STORAGE_PATH_11, "TopoDroid" ).exists() )? EXTERNAL_STORAGE_PATH_11
+        : BELOW_ANDROID_10 ? EXTERNAL_STORAGE_PATH_10
+          : ( BELOW_ANDROID_11  && new File( EXTERNAL_STORAGE_PATH_10, "TopoDroid").exists() )? EXTERNAL_STORAGE_PATH_10 
+            : EXTERNAL_STORAGE_PATH_11;
 
   private static String PATH_BASEDIR  = EXTERNAL_STORAGE_PATH;
   private static String PATH_DEFAULT  = EXTERNAL_STORAGE_PATH + "/TopoDroid/";
@@ -210,11 +214,13 @@ public class TDPath
 
   static boolean hasPath11() 
   {
-    return (new File( EXTERNAL_STORAGE_PATH_11, "TopoDroid" )).exists();
+    if ( BELOW_ANDROID_4 ) return false;
+    return ( new File( EXTERNAL_STORAGE_PATH_11, "TopoDroid" )).exists();
   }
 
   static boolean moveToPath11()
   { 
+    if ( BELOW_ANDROID_4 ) return false;
     // Log.v("DistoX-PATH11", "move to path11");
     File path11 = new File( EXTERNAL_STORAGE_PATH_11, "TopoDroid" );
     if ( path11.exists() ) return false;

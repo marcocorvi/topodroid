@@ -816,6 +816,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_import">Import zip archive or survey file</string>
     <string name="help_symbol">Drawing tools sets</string>
     <string name="help_therion">Cave project manager</string>
+    <string name="help_cave3d">Cave3D, 3D viewer</string>
     <!-- UNUSED string name="help_database">Database viewer app (SQliteViewer)</string -->
     <string name="help_prefs">Preferences</string>
     <string name="help_log">Logging preferences</string>
