@@ -222,7 +222,7 @@ class TopoDroidProtocol
           TDLog.DoLog( "Proto packet D " +
             String.format(Locale.US, " %7.2f %6.1f %6.1f (%6.1f)", mDistance, mBearing, mClino, mRoll ) );
         }
-        Log.v( "DistoX-BLE-TP", String.format(Locale.US, "Packet-D %7.2f %6.1f %6.1f (%6.1f)", mDistance, mBearing, mClino, mRoll ) );
+        // Log.v( "DistoX-BLE-TP", String.format(Locale.US, "Packet-D %7.2f %6.1f %6.1f (%6.1f)", mDistance, mBearing, mClino, mRoll ) );
         return DISTOX_PACKET_DATA;
       case 0x02: // G
         mGX = MemoryOctet.toInt( buffer[2], buffer[1] );

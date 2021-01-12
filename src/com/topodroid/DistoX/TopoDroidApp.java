@@ -220,9 +220,9 @@ public class TopoDroidApp extends Application
   // FIXME VirtualDistoX
   // VirtualDistoX mVirtualDistoX = new VirtualDistoX();
 
-  static void notifyUpdateDisplay()
+  static void notifyUpdateDisplay( long blk_id, boolean got_leg )
   {
-    if ( mDrawingWindow != null ) mDrawingWindow.notifyUpdateDisplay();
+    if ( mDrawingWindow != null ) mDrawingWindow.notifyUpdateDisplay( blk_id, got_leg );
   }
 
   public static void setToolsToolbars()
@@ -474,13 +474,13 @@ public class TopoDroidApp extends Application
   // @param data_type data type ...
   public boolean connectDevice( String address, int data_type ) 
   {
-    Log.v( "DistoX-BLE-A", "connect address " + address + " comm is " + ((mComm==null)? "null" : "non-null") );
+    // Log.v( "DistoX-BLE-A", "connect address " + address + " comm is " + ((mComm==null)? "null" : "non-null") );
     return mComm != null && mComm.connectDevice( address, mListerSet, data_type ); // FIXME_LISTER
   }
 
   public void disconnectComm()
   {
-    Log.v( "DistoX-BLE-A", "disconnect. comm is " + ((mComm==null)? "null" : "non-null") );
+    // Log.v( "DistoX-BLE-A", "disconnect. comm is " + ((mComm==null)? "null" : "non-null") );
     if ( mComm != null ) mComm.disconnectDevice();
   }
   // end FIXME_COMM
@@ -607,7 +607,7 @@ public class TopoDroidApp extends Application
       } else if ( TDInstance.isDeviceSap() ) {
           String address = TDInstance.deviceAddress();
           BluetoothDevice bt_device = getBleDevice();
-          Log.v("DistoX-BLE-A", "create sap comm [1] address " + address + " BT " + ((bt_device==null)? "null" : bt_device.getAddress() ) );
+          // Log.v("DistoX-BLE-A", "create sap comm [1] address " + address + " BT " + ((bt_device==null)? "null" : bt_device.getAddress() ) );
           mComm = new SapComm( this, address, bt_device );
       // } else if ( TDInstance.isDeviceBric() ) {
       //   String address = TDInstance.deviceAddress();
@@ -1429,7 +1429,8 @@ public class TopoDroidApp extends Application
     Set<String> sts = mData.selectAllStations( TDInstance.sid );
     int sz = list.size();
     if ( sz == 0 ) return false;
-    TDLog.Log( TDLog.LOG_DATA, "assign stations all: size " + sz + " blk[0] id " + list.get(0).mId );
+    // TDLog.Log( TDLog.LOG_DATA, "assign stations all: size " + sz + " blk[0] id " + list.get(0).mId );
+    // Log.v( "DistoX-DATA", "assign stations all: size " + sz + " blk[0] id " + list.get(0).mId );
 
     // if ( TDSetting.mSurveyStations < 0 ) return;
     if ( StationPolicy.doTopoRobot() ) {

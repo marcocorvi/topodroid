@@ -508,6 +508,16 @@ class DrawingSurface extends SurfaceView
     return st;
   }
 
+  DrawingStationName appendDrawingStationName ( long type, NumStation num_st, float x, float y, boolean selectable )
+  {
+    DrawingCommandManager cmd = ( type == DRAWING_PLAN )? mCommandManager1 : mCommandManager2;
+    DrawingStationName st = new DrawingStationName( num_st, x, y, scrapIndex() );
+    setStationPaint( st, null, cmd );
+
+    cmd.appendStation( st, selectable ); // NOTE make this always true if you want station selectable on all sections
+    return st;
+  }
+
   // called by DrawingWindow (for SECTION)
   // note: not selectable
   DrawingStationName addDrawingStationName( String name, float x, float y )
@@ -541,6 +551,22 @@ class DrawingSurface extends SurfaceView
       commandManager.addTmpLegPath( path, selectable );
     }
     // commandManager.addFixedPath( path, selectable );
+  }
+
+  void appendFixedPath( int type, DrawingPath path, boolean splay, boolean selectable )
+  {
+    DrawingCommandManager cmd = ( type == DRAWING_PLAN )? mCommandManager1 : mCommandManager2;
+    if ( splay ) {
+      cmd.appendSplayPath( path, selectable );
+    } else {
+      cmd.appendLegPath( path, selectable );
+    }
+  }
+
+  void dropLastSplayPath( int type )
+  {
+    DrawingCommandManager cmd = ( type == DRAWING_PLAN )? mCommandManager1 : mCommandManager2;
+    cmd.dropLastSplayPath( );
   }
 
   // used only by H-Sections

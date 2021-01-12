@@ -893,6 +893,21 @@ public class DrawingWindow extends ItemDrawer
   private void addFixedLine( long type, DBlock blk, float x1, float y1, float x2, float y2,
                              float cosine, boolean splay, boolean selectable )
   {
+    DrawingPath dpath = makeFixedLine( type, blk, x1, y1, x2, y2, cosine, splay );
+    mDrawingSurface.addFixedPath( dpath, splay, selectable );
+  }
+
+  private void appendFixedLine( long type, DBlock blk, float x1, float y1, float x2, float y2,
+                                float cosine, boolean splay, boolean selectable )
+  {
+    DrawingPath dpath = makeFixedLine( type, blk, x1, y1, x2, y2, cosine, splay );
+    int typ = PlotType.isPlan( type )? DrawingSurface.DRAWING_PLAN : DrawingSurface.DRAWING_PROFILE;
+    mDrawingSurface.appendFixedPath( typ, dpath, splay, selectable );
+  }
+
+
+  private DrawingPath makeFixedLine( long type, DBlock blk, float x1, float y1, float x2, float y2, float cosine, boolean splay )
+  {
     DrawingPath dpath = null;
     if ( splay ) {
       dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk, mDrawingSurface.scrapIndex() );
@@ -911,6 +926,7 @@ public class DrawingWindow extends ItemDrawer
         }
       }
     } else {
+      // Log.v("DistoX-DATA", "make fixed path " + blk.mId + " <" + blk.mFrom + "-" + blk.mTo + ">" );
       dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk, mDrawingSurface.scrapIndex() );
       dpath.setPathPaint( BrushManager.fixedShotPaint );
       if ( blk != null ) {
@@ -925,7 +941,7 @@ public class DrawingWindow extends ItemDrawer
     }
     // DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2, xoff, yoff );
     DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2, splay );
-    mDrawingSurface.addFixedPath( dpath, splay, selectable );
+    return dpath;
   }
 
 
@@ -1264,7 +1280,7 @@ public class DrawingWindow extends ItemDrawer
    *  this is called only for PLAN / PROFILE
    * @param num     data reduction
    * @param type    plot type
-   * @param name
+   * @param name    plot name
    * @param zoom    zoom factor
    * @param can_toast whether the method can toast
    */
@@ -1343,8 +1359,8 @@ public class DrawingWindow extends ItemDrawer
       List< CurrentStation > saved = TDSetting.mSavedStations ? mApp_mData.getStations( TDInstance.sid ) : null;
       for ( NumStation st : stations ) {
         if ( st.show() ) {
-          DrawingStationName dst;
-          dst = mDrawingSurface.addDrawingStationName( name, st,
+          // DrawingStationName dst =
+          mDrawingSurface.addDrawingStationName( name, st,
                   DrawingUtil.toSceneX(st.e, st.s), DrawingUtil.toSceneY(st.e, st.s), true, xsections, saved );
         }
       }
@@ -1375,8 +1391,8 @@ public class DrawingWindow extends ItemDrawer
       for ( NumStation st : stations ) {
         // Log.v("DistoX-EXTEND", "station " + st.name + " has extend " + st.hasExtend() );
         if ( st.hasExtend() && st.show() ) {
-          DrawingStationName dst;
-          dst = mDrawingSurface.addDrawingStationName( name, st,
+          // DrawingStationName dst =
+          mDrawingSurface.addDrawingStationName( name, st,
                   DrawingUtil.toSceneX(st.h, st.v), DrawingUtil.toSceneY(st.h, st.v), true, xhsections, saved );
         }
       }
@@ -1409,9 +1425,9 @@ public class DrawingWindow extends ItemDrawer
       List< CurrentStation > saved = TDSetting.mSavedStations ? mApp_mData.getStations( TDInstance.sid ) : null;
       for ( NumStation st : stations ) {
         if ( st.show() ) {
-          DrawingStationName dst;
           h1 = st.e * cosp + st.s * sinp;
-          dst = mDrawingSurface.addDrawingStationName( name, st,
+          // DrawingStationName dst =
+          mDrawingSurface.addDrawingStationName( name, st,
                   DrawingUtil.toSceneX(h1, st.v), DrawingUtil.toSceneY(h1, st.v), true, xhsections, saved );
         // } else {
         //   Log.v("DistoX-PLOT", "station not showing " + st.name );
@@ -6017,6 +6033,76 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  private void incrementalUpdateDisplay( long blk_id, boolean got_leg )
+  {
+    if ( mType != (int)PlotType.PLOT_PLAN && ! PlotType.isProfile( mType ) ) return;
+    if ( mNum == null ) {
+      List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
+      TDNum num = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
+      recomputeReferences( num, TopoDroidApp.mScaleFactor );
+      mNum = num;
+    } else {
+      DBlock blk = mApp_mData.selectShot( blk_id, mSid );
+      DBlock leg = got_leg ? mApp_mData.selectLastLegShot( mSid ) : null;
+      boolean ret = mNum.appendData( blk, leg, mFormatClosure );
+      // Log.v("DistoX-DATA", "drawing window calls append data " + blk.mId + " ret " + ret );
+      if ( ret ) {
+        if ( got_leg ) { // drop last splay - insert last leg
+          mNum.dropLastSplay();
+          mDrawingSurface.dropLastSplayPath( mPlot1.type );
+          mDrawingSurface.dropLastSplayPath( mPlot2.type );
+          // 
+          NumShot sh = mNum.getLastShot();
+          NumStation st1 = sh.from;
+          NumStation st2 = sh.to;
+          NumStation st0 = StationPolicy.isSurveyBackward() ? st1 : st2;
+          if ( st1.show() && st2.show() ) {
+            // DBlock blk1 = sh.getFirstBlock(); // same as leg
+            // Log.v("DistoX-DATA", "LEG blk " + blk.mId + " blk1 " + blk1.mId + " leg " + leg.mId );
+            appendFixedLine( PlotType.PLOT_PLAN, leg, st1.e, st1.s, st2.e, st2.s, sh.getReducedExtend(), false, true );
+            mDrawingSurface.appendDrawingStationName( mPlot1.type, st0, DrawingUtil.toSceneX(st0.e, st0.s), DrawingUtil.toSceneY(st0.e, st0.s), true );
+            if ( PlotType.isExtended( mPlot2.type ) ) {
+              if ( st1.hasExtend() && st2.hasExtend() ) {
+                appendFixedLine( mPlot2.type, leg, st1.h, st1.v, st2.h, st2.v, sh.getReducedExtend(), false, true );
+              }
+              mDrawingSurface.appendDrawingStationName( mPlot2.type, st0, DrawingUtil.toSceneX(st0.h, st0.v), DrawingUtil.toSceneY(st0.h, st0.v), true );
+            } else if ( PlotType.isProfile( mPlot2.type ) ) {
+              float cosp = TDMath.cosd( mPlot2.azimuth );
+              float sinp = TDMath.sind( mPlot2.azimuth );
+              float h1 = st1.e * cosp + st1.s * sinp;
+              float h2 = st2.e * cosp + st2.s * sinp;
+              float h0 = StationPolicy.isSurveyBackward() ? h1 : h2;
+              appendFixedLine( mPlot2.type, leg, h1, st1.v, h2, st2.v, sh.getReducedExtend(), false, true );
+              mDrawingSurface.appendDrawingStationName( mPlot2.type, st0, DrawingUtil.toSceneX(h0, st0.v), DrawingUtil.toSceneY(h0, st0.v), true );
+            } 
+          }
+        } else { // insert last splay
+          NumSplay sp = mNum.getLastSplay();
+          if ( Math.abs( sp.getBlock().mClino ) < TDSetting.mSplayVertThrs ) { // include only splays with clino below mSplayVertThrs
+            NumStation st = sp.from;
+            if ( st.show() ) {
+              DBlock blk2 = sp.getBlock();
+              if ( ! blk2.isNoPlan() ) appendFixedLine( mPlot1.type, blk2, st.e, st.s, sp.e, sp.s, sp.getCosine(), true, true );
+              if ( ! blk2.isNoProfile() ) {
+                if ( PlotType.isExtended( mPlot2.type ) ) {
+                  if ( st.hasExtend() ) {
+                    appendFixedLine( mPlot2.type, blk2, st.h, st.v, sp.h, sp.v, sp.getCosine(), true, true );
+                  }
+                } else if ( PlotType.isProfile( mPlot2.type ) ) {
+                  float cosp = TDMath.cosd( mPlot2.azimuth );
+                  float sinp = TDMath.sind( mPlot2.azimuth );
+                  float h1 = st.e * cosp + st.s * sinp;
+                  float h2 = sp.e * cosp + sp.s * sinp;
+                  appendFixedLine( mPlot2.type, blk2, h1, st.v, h2, sp.v, sp.getCosine(), true, true );
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
   private void zoomFit( RectF b )
   {
     float tb = (b.top + b.bottom)/2;
@@ -6069,9 +6155,18 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  public void notifyUpdateDisplay()
+  /**
+   * @param blk_id  update starting with this blk id
+   * @param got_leg whether the latest splay is actually a leg
+   */
+  public void notifyUpdateDisplay( long blk_id, boolean got_leg )
   {
-    updateDisplay( );
+    // Log.v("DistoX-DATA", "drawing window: notified update display id " + blk_id ); 
+    if ( TDLevel.overExpert ) {
+      incrementalUpdateDisplay( blk_id, got_leg );
+    } else {
+      updateDisplay( );
+    }
   }
 
   @Override
@@ -7080,7 +7175,7 @@ public class DrawingWindow extends ItemDrawer
 
     if ( plt.type != mType ) return;
     NumStation st1 = mNum.getStation( plt.start );
-    NumStation st0 = mNum.mStartStation; // start-station has always coords (0,0)
+    NumStation st0 = mNum.getOrigin(); // start-station has always coords (0,0)
     if ( st1 == null || st0 == null ) return;
 
     float xdelta = 0.0f;

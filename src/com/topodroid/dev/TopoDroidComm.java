@@ -167,8 +167,8 @@ public class TopoDroidComm
       double r = mProtocol.mRoll;
       // extend is unset to start
       // long extend = TDAzimuth.computeLegExtend( b ); // ExtendType.EXTEND_UNSET; FIXME_EXTEND 
-      // TDLog.Log( TDLog.LOG_COMM, "Comm D PACKET " + d + " " + b + " " + c );
-      Log.v( "DistoX-BLE-TC", "Comm D PACKET " + d + " " + b + " " + c );
+      TDLog.Log( TDLog.LOG_COMM, "Comm D PACKET " + d + " " + b + " " + c );
+      // Log.v( "DistoX-BLE-TC", "Comm D PACKET " + d + " " + b + " " + c );
       // NOTE type=0 shot is DistoX-type
       long status = ( d > TDSetting.mMaxShotLength )? TDStatus.OVERSHOOT : TDStatus.NORMAL;
       mLastShotId = TopoDroidApp.mData.insertDistoXShot( TDInstance.sid, -1L, d, b, c, r, ExtendType.EXTEND_IGNORE, status, TDInstance.deviceAddress() );

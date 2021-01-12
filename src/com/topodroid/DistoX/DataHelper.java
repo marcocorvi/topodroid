@@ -2459,6 +2459,7 @@ public class DataHelper extends DataSetObservable
     Cursor cursor = myDB.query( SHOT_TABLE, new String[] { "id", "fStation", "tStation", "extend", "flag", "leg", "comment" },
                                 WHERE_SID_ID_MORE, new String[] { Long.toString(sid), Long.toString(blk.mId) },
                                 null, null, "id ASC" ); 
+                                // null, null, "id ASC", "LIMIT 1" );  // cannot limit
     if (cursor.moveToFirst()) {
       for ( int k = 0; k < 3; ++ k ) {
         String from = cursor.getString(1);
@@ -2533,11 +2534,13 @@ public class DataHelper extends DataSetObservable
   private DBlock selectPreviousLegShot( long shot_id, long sid )
   {
     // TDLog.Log( TDLog.LOG_DB, "select previous leg shot " + shot_id + "/" + sid );
+    // Log.v( "DistoX-DATA", "select previous leg shot " + shot_id + "/" + sid );
     if ( myDB == null ) return null;
     Cursor cursor = myDB.query( SHOT_TABLE, mShotFields,
                                 "surveyId=? and id<?",
                                 new String[] { Long.toString(sid), Long.toString(shot_id) },
                                 null, null, "id DESC" );
+                                // null, null, "id DESC", "LIMIT 1" ); // cannot limit
     DBlock block = null;
     if (cursor.moveToFirst()) {
       do {
@@ -2621,6 +2624,7 @@ public class DataHelper extends DataSetObservable
                                 "surveyId=? and id>?",
                                 new String[] { Long.toString(sid), Long.toString(shot_id) },
                                 null, null, "id ASC" );
+                                // null, null, "id ASC", "LIMIT 1" ); // cannot limit
     DBlock block = null;
     if (cursor.moveToFirst()) {
       do {

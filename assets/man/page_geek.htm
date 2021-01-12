@@ -56,11 +56,14 @@ By default, the flags are disabled.
 <li><i>Minimum interval</i> between two backups [60 s] [A]</li>
 <li>Automatic inclusion of x-sections in exports [yes]<li>
 <li><i>Saved stations</i> colored orange in the sketches</li>
-<li><i>Leg-only refresh</i> recompute (and redraw) the midline only when a leg is downloaded</li>
+<li><i>Leg-only refresh</i> recompute (and redraw) the midline only when a leg is downloaded (in continuous data-download mode) [not T]</li>
 <li><i>Affine transform</i> enable the sketch affine transformation</li>
 <li><i>Canvas levels</i>: none, by item, by type [none]</li>
 </ul>
 <br><p>
+
+<i>Leg-only</i> refresh does not affect <i>on-demand</i> data-download mode.
+It is also not used at tester level, because, at this level there is an experimental incremental refresh.<br><p>
 
 <b>Line settings</b><br>
 <ul>

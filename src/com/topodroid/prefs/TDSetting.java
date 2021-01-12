@@ -396,7 +396,7 @@ public class TDSetting
   public static float mLineCorner    = 20;    // corner threshold
   public static int   mContinueLine  = DrawingWindow.CONT_NONE; // 0
   public static boolean mCompositeActions = false;
-  public static boolean mLegonlyUpdate = false; // whether to update display of drawing window at every shot (not just at legs)
+  public static boolean mLegOnlyUpdate = false; // whether to update display of drawing window at every shot (not just at legs)
   public static boolean mFullAffine = false; // whether to do full affine transform or shift+scale only
 
   public static float mWeedDistance  = 0.5f;  // max weeding distance
@@ -963,7 +963,7 @@ public class TDSetting
     // setBackupsClear( prefs.getBoolean( keyGPlot[ 9], bool(defGPlot[ 9]) ) ); // DISTOX_BACKUPS_CLEAR moved to GEEK
     mAutoXSections  = prefs.getBoolean( keyGPlot[ 5], bool(defGPlot[ 5]) ); // DISTOX_AUTO_XSECTIONS
     mSavedStations  = prefs.getBoolean( keyGPlot[ 6], bool(defGPlot[ 6]) ); // DISTOX_SAVED_STATIONS
-    mLegonlyUpdate  = prefs.getBoolean( keyGPlot[ 7], bool(defGPlot[ 7]) ); // DISTOX_LEGONLY_UPDATE
+    mLegOnlyUpdate  = prefs.getBoolean( keyGPlot[ 7], bool(defGPlot[ 7]) ); // DISTOX_LEGONLY_UPDATE
     mFullAffine     = prefs.getBoolean( keyGPlot[ 8], bool(defGPlot[ 8]) ); // DISTOX_FULL_UPDATE
     mWithLevels     = tryInt( prefs,   keyGPlot[ 9],      defGPlot[ 9] );   // DISTOX_WITH_LEVELS
 
@@ -1417,7 +1417,7 @@ public class TDSetting
     } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_SAVED_STATIONS
       mSavedStations = tryBooleanValue( hlp, k, v, bool(def[ 6 ]) );
     } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_LEGONLY_UPDATE
-      mLegonlyUpdate = tryBooleanValue( hlp, k, v, bool(def[ 7 ]) );
+      mLegOnlyUpdate = tryBooleanValue( hlp, k, v, bool(def[ 7 ]) );
     } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_FULL_AFFINE
       mFullAffine    = tryBooleanValue( hlp, k, v, bool(def[ 8 ]) );
     } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_WITH_LEVELS
@@ -2534,7 +2534,7 @@ public class TDSetting
       pw.printf(Locale.US, "Loop: %d \n", mLoopClosure );
       pw.printf(Locale.US, "Units: length %.2f [%s], angle %.2f [%s]\n", mUnitLength, mUnitLengthStr, mUnitAngle, mUnitAngleStr );
       pw.printf(Locale.US, "ThumbSize %d, SavedStations %c, LegonlyUpdate %c, WithAzimuth %c, WithSensors %c, Bedding %c \n", // TdManager %c\n",
-        mThumbSize, tf(mSavedStations), tf(mLegonlyUpdate), tf(mWithAzimuth), tf(mWithSensors), tf(mBedding) ); // , tf(mWithTdManager) );
+        mThumbSize, tf(mSavedStations), tf(mLegOnlyUpdate), tf(mWithAzimuth), tf(mWithSensors), tf(mBedding) ); // , tf(mWithTdManager) );
 
       pw.printf(Locale.US, "Plot: zoom %d, drag %c, fix-origin %c, split %c, shift %c, levels %d, affine %c, stylus %d\n",
         mZoomCtrl, tf(mSideDrag), tf(mFixedOrigin), tf(mPlotSplit), tf(mPlotShift), mWithLevels, tf(mFullAffine), mStylusSize );
@@ -3046,7 +3046,7 @@ public class TDSetting
           if ( vals.length > 11 ) {
             mThumbSize     = getInt( vals, 1, 200 ); setPreference( editor, "DISTOX_THUMBNAIL", mThumbSize );
             mSavedStations = getBoolean( vals, 3 );  setPreference( editor, "DISTOX_SAVED_STATIONS", mSavedStations );
-            mLegonlyUpdate = getBoolean( vals, 5 );  setPreference( editor, "DISTOX_LEGONLY_UPDATE", mLegonlyUpdate );
+            mLegOnlyUpdate = getBoolean( vals, 5 );  setPreference( editor, "DISTOX_LEGONLY_UPDATE", mLegOnlyUpdate );
             mWithAzimuth   = getBoolean( vals, 7 );  setPreference( editor, "DISTOX_ANDROID_AZIMUTH", mWithAzimuth );
             mWithSensors   = getBoolean( vals, 9 );  setPreference( editor, "DISTOX_WITH_SENSORS", mWithSensors );
             mBedding       = getBoolean( vals, 11 ); setPreference( editor, "DISTOX_BEDDING", mBedding );

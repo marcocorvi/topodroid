@@ -45,7 +45,7 @@ By default TopoDroid uses the bluetooth address as name for a DistoX. The DistoX
 <ul style="margin-top=0">
 <li><i>Bluetooth</i>: whether to enable, disable, or check on start-up [default "check"]</li>
 <li><i>Connection mode</i>: either "on-demand", "continuous", or "multi" [default "on-demand"]</li>
-<li><i>Auto reconnect</i>: automatically reconnect if the connection is lost in "continuous" data download-mode [default "no"]</li>
+<!-- li><i>Auto reconnect</i>: automatically reconnect if the connection is lost in "continuous" data download-mode [default "no"]</li -->
 <li><i>Number of new data</i>: get the number of new data before downloading them (on-demand mode) [default "no"]</li>
 <li><i>Socket</i> type: either normal or "insecure" [default is device-dependent]</li>
 <li><i>Z6-workaround</i> Fixes a download timeout error on a Z6 phone, and possibly other devices. It is safe to leave this enabled [default "on"]</li>
@@ -57,7 +57,7 @@ There are three connections modes.
 <ul>
 <li>in <i>on-demand</i> mode data are downloaded in burst, and when there is no more data to download the connection is closed.</li>
 <li>in <i>continuous</i> mode TopoDroid remains connected to the DistoX and the shots are downloaded as soon as they are taken.
-When the DistoX and Android get disconnected, TopoDroid repeatedly tries to reconnect if the <i>auto-reconnect</i> option is enabled, 
+When the DistoX and Android get disconnected, TopoDroid repeatedly tries to reconnect.
 Otherwise, the bluetooth connection is closed.</li>
 <li>the <i>multi</i> mode is like the "on-demand" mode, but a long-tap on the "download" button, in the <i>Shot</i> window or in the <i>Sketch</i> window,
 changes the DistoX. It you have set a "second" DistoX (in the <i>Device</i> window) it is swapped with the current DistoX.

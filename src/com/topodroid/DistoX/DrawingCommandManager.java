@@ -877,6 +877,57 @@ class DrawingCommandManager
       }
     }
   }
+
+  // incremental insert
+  void appendStation( DrawingStationName st, boolean selectable )
+  {
+    synchronized( TDPath.mStationsLock ) {
+      mStations.add( st );
+    }
+    if ( selectable ) {
+      synchronized( TDPath.mSelectionLock ) {
+        mSelectionFixed.insertStationName( st );
+      }
+    }
+  }
+
+  void appendSplayPath( DrawingPath path, boolean selectable )
+  {
+    synchronized( TDPath.mShotsLock ) {
+      mSplaysStack.add( path );
+    }
+    if ( selectable ) {
+      synchronized( TDPath.mSelectionLock ) {
+        mSelectionFixed.insertPath( path );
+      }
+    }
+  }
+
+  void appendLegPath( DrawingPath path, boolean selectable )
+  {
+    synchronized( TDPath.mShotsLock ) {
+      mLegsStack.add( path );
+    }
+    if ( selectable ) {
+      synchronized( TDPath.mSelectionLock ) {
+        mSelectionFixed.insertPath( path );
+      }
+    }
+  }
+
+  void dropLastSplayPath( )
+  {
+    synchronized( TDPath.mShotsLock ) {
+      int sz = mSplaysStack.size() - 1;
+      if ( sz >= 0 ) {
+        DrawingPath path = mSplaysStack.get( sz );
+        synchronized( TDPath.mSelectionLock ) {
+          mSelectionFixed.removeSplayPath( path );
+        }
+        mSplaysStack.remove( sz );
+      }
+    }
+  }
  
   // called by DrawingSurface.addDrawingFixedName
   // void addStation( DrawingFixedName fx )

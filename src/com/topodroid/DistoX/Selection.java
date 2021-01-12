@@ -339,6 +339,17 @@ class Selection
     mPoints.remove( sp ); 
   }
 
+  // for incremental update
+  void removeSplayPath( DrawingPath path ) // synchronized by CommandManager
+  {
+    for ( SelectionPoint sp : mPoints ) {
+      if ( sp.mItem == path ) {
+        removePoint( sp );
+        break;
+      }
+    }
+  }
+
   void removePath( DrawingPath path ) // synchronized by CommandManager
   {
     if ( path.mType == DrawingPath.DRAWING_PATH_LINE || path.mType == DrawingPath.DRAWING_PATH_AREA ) {

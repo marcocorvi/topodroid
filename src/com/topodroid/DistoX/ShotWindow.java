@@ -451,12 +451,14 @@ public class ShotWindow extends Activity
         } );
 	// mList.invalidate();
 	// mDataAdapter.reviseLatest();
-        if ( ret || ! TDSetting.mLegonlyUpdate ) {
-          // Log.v("DistoX-DATA", "shot window got a leg" );
-          TopoDroidApp.notifyUpdateDisplay();
+        if ( ret ) {
+          // Log.v("DistoX-DATA", "shot window got a leg. ret " + ret );
+          TopoDroidApp.notifyUpdateDisplay( blk_id, ret );
+        } else if ( TDLevel.overExpert || ! TDSetting.mLegOnlyUpdate ) {
+          TopoDroidApp.notifyUpdateDisplay( blk_id, ret );
         }
       } else {
-        TDLog.Error( "block already-added " + blk.mId );
+        // TDLog.Error( "block already-added " + blk.mId ); // this is not an error
         // Log.v("DistoX-DATA", "block already added " + blk.mId );
       }
     // } else {

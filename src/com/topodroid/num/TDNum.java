@@ -39,7 +39,7 @@ public class TDNum
    */
   public TDNum( List< DBlock > data, String start, String view, String hide, float decl, String format )
   {
-    Log.v("DistoX-DECL", "num decl " + decl + " start " + start );
+    // Log.v("DistoX-DATA", "num cstr: decl " + decl + " start " + start );
     mDecl = decl;
     surveyExtend   = true;
     surveyAttached = computeNum( data, start, format );
@@ -245,6 +245,25 @@ public class TDNum
     return ret;
   }
 
+  // these are for the incremental update
+  public void dropLastSplay()
+  {
+    int sz = mSplays.size();
+    if ( sz > 0 ) mSplays.remove( sz - 1 );
+  }
+
+  public NumSplay getLastSplay() 
+  {
+    int sz = mSplays.size();
+    return ( sz == 0 )? null : mSplays.get( sz - 1 );
+  }
+
+  public NumShot getLastShot() 
+  {
+    int sz = mShots.size();
+    return ( sz == 0 )? null : mShots.get( sz - 1 );
+  }
+
   // get shots at station st, except shot [st,except]
   public List< NumShot > getShotsAt( NumStation st, NumStation except )
   {
@@ -405,7 +424,7 @@ public class TDNum
     int N;
     int pos;
     DBlock[] mBlk;
-
+  
     DBlockBuffer( int n ) 
     {
       N = n;
@@ -413,13 +432,21 @@ public class TDNum
       mBlk = new DBlock[ N ];
       for ( n=0; n<N; ++n ) mBlk[n] = null;
     }
-
+  
     void put( DBlock blk ) { pos = (pos+1)%N; mBlk[pos] = blk; }
    
-    DBlock get( int k ) { return mBlk[k%N]; }
+    DBlock get( ) 
+    { 
+      DBlock ret = mBlk[pos];
+      mBlk[pos] = null;
+      pos = (pos+N-1)%N;
+      return ret;
+    }
   }
 
   private DBlockBuffer mBuffer = new DBlockBuffer( 4 );
+
+  private TriSplay     mLastSplay;
   private TriShot      mLastLeg;      // last leg
 
   /** insert a new shot into the survey
@@ -428,50 +455,83 @@ public class TDNum
    * @return true if the shot has been appended
    * @note the new shot is assumed not to close any loop
    */
-  public boolean appendData( DBlock blk, String format )
+  public boolean appendData( DBlock blk, DBlock leg, String format )
   {
-    mBuffer.put( blk );
     if ( blk == null ) return false;
+    mBuffer.put( blk );
 
-    if ( blk.isSplay() ) {
-      if ( mLastLeg != null ) insertLeg( mLastLeg, format );
-      mLastLeg = null;  // clear last-leg
-      TriSplay splay = null;
-      if ( blk.mFrom != null && blk.mFrom.length() > 0 ) { // normal splay
-        splay = new TriSplay( blk, blk.mFrom, blk.getIntExtend(), +1 );
-      } else if ( blk.mTo != null && blk.mTo.length() > 0 ) { // reversed splay
-        splay = new TriSplay( blk, blk.mTo, blk.getIntExtend(), -1 );
-      }
-      return insertSplay( splay ); // add splay to network (null is checked by the routine)
-    } else if ( blk.isSecLeg() ) {
-      if (mLastLeg == null) return false;
-      mLastLeg.addBlock( blk );
-    } else if ( blk.isTypeBlank() ) {
-      if (mLastLeg == null || ! blk.isRelativeDistance( mLastLeg.getFirstBlock() ) ) return false;
-      mLastLeg.addBlock( blk );
+    if ( leg != null && mLastSplay != null ) {
+      // Log.v("DistoX-DATA", "num got_leg ");
+      removeSplay( mLastSplay );
+      appendLeg( mLastSplay.block, leg, format );
+      mLastSplay = null;
     } else {
-      if ( blk.isMainLeg() ) {
-        mLastLeg = new TriShot( blk, blk.mFrom, blk.mTo, blk.getIntExtend(), blk.getStretch(), +1 );
-        mLastLeg.duplicate = ( blk.isDuplicate() );
-        mLastLeg.surface   = ( blk.isSurface() );
-        mLastLeg.commented = ( blk.isCommented() ); // FIXME_COMMENTED
-        // mLastLeg.backshot  = 0;
-        if ( blk.getIntExtend() > 1 ) surveyExtend = false;
-        addToInLegError( mLastLeg );
-        computeInLegError();
-      } else if ( blk.isBackLeg() ) {
-        mLastLeg = new TriShot( blk, blk.mFrom, blk.mTo, blk.getIntExtend(), blk.getStretch(), +1 );
-        mLastLeg.duplicate = true;
-        mLastLeg.surface   = ( blk.isSurface() );
-        mLastLeg.commented = false;
-        // mLastLeg.backshot  = 0;
-        if ( blk.getIntExtend() > 1 ) surveyExtend = false;
-        addToInLegError( mLastLeg );
-        computeInLegError();
+      if ( blk.isSplay() ) {
+        // if ( mLastLeg != null ) {
+        //   Log.v("DistoX-DATA", "num insert leg ");
+        //   insertLeg( mLastLeg, format );
+        // }
+        mLastLeg = null;  // clear last-leg
+        TriSplay splay = null;
+        if ( blk.mFrom != null && blk.mFrom.length() > 0 ) { // normal splay
+          splay = new TriSplay( blk, blk.mFrom, blk.getIntExtend(), +1 );
+          mLastSplay = splay;
+        } else if ( blk.mTo != null && blk.mTo.length() > 0 ) { // reversed splay
+          splay = new TriSplay( blk, blk.mTo, blk.getIntExtend(), -1 );
+          mLastSplay = splay;
+        }
+        // Log.v("DistoX-DATA", "num append SPLAY " + blk.mId + " splays " + mSplays.size() );
+        return insertSplay( splay ); // add splay to network (null is checked by the routine)
+      } else if ( blk.isSecLeg() ) {
+        // Log.v("DistoX-DATA", "num append SEC-LEG " + blk.mId );
+        // if (mLastLeg == null) return false;
+        // mLastLeg.addBlock( blk );
+        return false;
+      } else if ( blk.isTypeBlank() ) {
+        // Log.v("DistoX-DATA", "num append BLANK " + blk.mId );
+        // if (mLastLeg == null || ! blk.isRelativeDistance( mLastLeg.getFirstBlock() ) ) return false;
+        // mLastLeg.addBlock( blk );
+        return false;
       } else {
-        return false; // should not happen
+        TDLog.Error("num: append LEG " + blk.mId + " should not happen ");
+        // return appendLeg( blk );
+        return false;
       }
     }
+    return true;
+  }
+
+  private boolean appendLeg( DBlock blk, DBlock leg, String format ) 
+  {
+    if ( leg.isMainLeg() ) {
+      // Log.v("DistoX-DATA", "num append with leg " + leg.mId + " <" + leg.mFrom + "-" + leg.mTo + ">" );
+      mLastLeg = new TriShot( leg, leg.mFrom, leg.mTo, leg.getIntExtend(), leg.getStretch(), +1 );
+      mLastLeg.duplicate = ( leg.isDuplicate() );
+      mLastLeg.surface   = ( leg.isSurface() );
+      mLastLeg.commented = ( leg.isCommented() ); // FIXME_COMMENTED
+      // mLastLeg.backshot  = 0;
+      if ( leg.getIntExtend() > 1 ) surveyExtend = false;
+      addToInLegError( mLastLeg );
+      computeInLegError();
+    } else if ( leg.isBackLeg() ) {
+      // Log.v("DistoX-DATA", "num append with backleg " + leg.mId + " <" + leg.mFrom + "-" + leg.mTo + ">" );
+      mLastLeg = new TriShot( leg, leg.mFrom, leg.mTo, leg.getIntExtend(), leg.getStretch(), +1 );
+      mLastLeg.duplicate = true;
+      mLastLeg.surface   = ( leg.isSurface() );
+      mLastLeg.commented = false;
+      // mLastLeg.backshot  = 0;
+      if ( leg.getIntExtend() > 1 ) surveyExtend = false;
+      addToInLegError( mLastLeg );
+      computeInLegError();
+    } else {
+      TDLog.Error("num: append should not happen " + leg.mId + " <" + leg.mFrom + "-" + leg.mTo + ">" );
+      return false; // should not happen
+    }
+    DBlock blk1 = mBuffer.get();
+    for ( ; blk1 != null && blk1 != blk; blk1 = mBuffer.get() ) {
+      mLastLeg.addBlock( blk1 );
+    }
+    insertLeg( mLastLeg, format );
     return true;
   }
 
@@ -961,6 +1021,20 @@ public class TDNum
       return true;
     }
     return false;
+  }
+
+  // this is calle dto remove the last splay added
+  private void removeSplay( TriSplay ts )
+  {
+    int sz = mSplays.size() - 1;
+    while ( sz >= 0 ) {
+      NumSplay sp = mSplays.get( sz );
+      if ( sp.getBlock() == ts.block ) {
+        // Log.v("DistoX-DATA", "removing splay " + sz + " for " + ts.block.mId );
+        mSplays.remove( sz );
+        break;
+      }
+    }
   }
 
   /** add a shot to a station (possibly forwarded to the station's node)
