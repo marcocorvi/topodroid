@@ -528,7 +528,7 @@ Tap "Close" not to take any action.
     <string name="tripod_warning">¡La política de trípode está en modo avanzado!</string>
     <string name="coverage_warning">Ángulo de cobertura por debajo de %1$d %%\nEscribir coeficientes?</string>
     <string name="delta_warning">Error promedio superior %1$.1f\nEscribir coeficientes?</string>
-    <!-- TODO string name="sap_warning">Warning\n\nSAP surveys attain only UISv2 grade 3.</string -->
+    <!-- UNUSED string name="sap_warning">Warning\n\nSAP surveys attain only UISv2 grade 3.</string -->
 
     <!-- TODO string name="cover_data">Raw data distribution: %1$.2f %%</string -->
     <!-- TODO string name="cover_calib">Calibrated data distribution: %1$.2f %%</string -->

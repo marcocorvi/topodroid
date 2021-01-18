@@ -350,15 +350,15 @@ public class MainWindow extends Activity
       return;
     }
     final CharSequence item = ((TextView) view).getText();
-    if ( TDInstance.isDeviceSap() ) {
-      TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.sap_warning,
-        new DialogInterface.OnClickListener() {
-          @Override public void onClick( DialogInterface dialog, int btn ) { startShowWindow( item ); }
-        }
-      );
-    } else {
+    // if ( TDInstance.isDeviceSap() ) {
+    //   TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.sap_warning,
+    //     new DialogInterface.OnClickListener() {
+    //       @Override public void onClick( DialogInterface dialog, int btn ) { startShowWindow( item ); }
+    //     }
+    //   );
+    // } else {
       startShowWindow( item );
-    }
+    // }
   }
 
   public void startShowWindow( CharSequence item )

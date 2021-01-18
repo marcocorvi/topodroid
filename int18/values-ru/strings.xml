@@ -524,7 +524,7 @@
     <string name="tripod_warning">Политика Штатив доступна в продвинутом уровне функций!</string>
     <string name="coverage_warning">Угловое покрытие менее %1$d %%\nЗаписать коэффициенты?</string>
     <string name="delta_warning">Средняя ошибка превышает %1$.1f\nЗаписать коэффициенты?</string>
-    <string name="sap_warning">Внимание\n\nSAP съёмки не могут быть точнее класса UISv2 3.</string>
+    <!-- UNUSED string name="sap_warning">Внимание\n\nSAP съёмки не могут быть точнее класса UISv2 3.</string -->
 
     <string name="cover_data">Распределение сырых данных: %1$.2f %%</string>
     <string name="cover_calib">Распределение откалиброванных данных: %1$.2f %%</string>

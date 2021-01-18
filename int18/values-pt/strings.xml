@@ -523,7 +523,7 @@ Tap "Close" not to take any action.
     <string name="tripod_warning">Política para tripés é "Avançado"!</string>
     <string name="coverage_warning">Amplitude angular abaixo de %1$d %%\nGravar coeficientes?</string>
     <string name="delta_warning">Erro mpédio acima de %1$.1f\nGravar coeficientes?</string>
-    <!-- TODO string name="sap_warning">Warning\n\nSAP surveys attain only UISv2 grade 3.</string -->
+    <!-- UNUSED string name="sap_warning">Warning\n\nSAP surveys attain only UISv2 grade 3.</string -->
 
     <string name="cover_data">Distribuição dos dados brutos: %1$.2f %%</string>
     <string name="cover_calib">Distribuição dos dados calibrados: %1$.2f %%</string>

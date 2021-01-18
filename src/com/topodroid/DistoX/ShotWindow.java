@@ -451,11 +451,13 @@ public class ShotWindow extends Activity
         } );
 	// mList.invalidate();
 	// mDataAdapter.reviseLatest();
-        if ( ret ) {
+        if ( ret ) { // always update when a leg is received 
           // Log.v("DistoX-DATA", "shot window got a leg. ret " + ret );
           TopoDroidApp.notifyUpdateDisplay( blk_id, ret );
-        } else if ( TDLevel.overExpert || ! TDSetting.mLegOnlyUpdate ) {
-          TopoDroidApp.notifyUpdateDisplay( blk_id, ret );
+        } else if ( ! StationPolicy.isSurveyBackward1() ) {
+          if ( TDLevel.overExpert || ! TDSetting.mLegOnlyUpdate ) {
+            TopoDroidApp.notifyUpdateDisplay( blk_id, ret );
+          }
         }
       } else {
         // TDLog.Error( "block already-added " + blk.mId ); // this is not an error

@@ -505,9 +505,9 @@ public class DeviceActivity extends Activity
       for ( int k=1; k<mNrButton1; ++k ) mButton1[k].setVisibility( View.VISIBLE );
     } else {
       for ( int k=1; k<mNrButton1; ++k ) mButton1[k].setVisibility( View.GONE );
-      if ( TDInstance.isDeviceSap() ) {
-        TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.sap_warning );
-      }
+      // if ( TDInstance.isDeviceSap() ) {
+      //   TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.sap_warning );
+      // }
     }
   }
 

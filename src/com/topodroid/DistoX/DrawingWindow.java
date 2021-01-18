@@ -852,24 +852,12 @@ public class DrawingWindow extends ItemDrawer
   // }
 
   // -----------------------------------------------------------------
-  @Override
-  public void lineSelected( int k, boolean update_recent )
-  {
-    super.lineSelected( k, update_recent );
-    if ( TDLevel.overNormal ) {
-      if ( BrushManager.getLineGroup( mCurrentLine ) == null ) {
-        setButtonContinue( CONT_OFF );
-      } else {
-        setButtonContinue( mContinueLine ); // was CONT_NONE
-      }
-    }
-  }
+  // SPLAY+LEG REFERENCE
 
   private void resetFixedPaint( )
   {
     mDrawingSurface.resetFixedPaint( mApp, BrushManager.fixedShotPaint );
   }
-
   
   // used by H-Sections for the North line
   private void addFixedSpecial( float x1, float y1, float x2, float y2 ) // float xoff, float yoff )
@@ -996,6 +984,36 @@ public class DrawingWindow extends ItemDrawer
   // final static String titlePortrait  = " P ";
 
   @Override
+  public void lineSelected( int k, boolean update_recent )
+  {
+    super.lineSelected( k, update_recent );
+    if ( TDLevel.overNormal ) {
+      if ( BrushManager.getLineGroup( mCurrentLine ) == null ) {
+        setButtonContinue( CONT_OFF );
+      } else {
+        setButtonContinue( mContinueLine ); // was CONT_NONE
+      }
+    }
+  }
+
+  /** called by Drawing Shot Dialog to change shot color
+   *   @param blk   data block
+   *   @param color color (0 to clear)
+   */
+  void updateBlockColor( DBlock blk, int color )
+  {
+    blk.setPaintColor( color );
+    mApp_mData.updateShotColor( blk.mId, TDInstance.sid, color );
+  }
+
+  @Override
+  public void onConfigurationChanged( Configuration new_cfg )
+  {
+    super.onConfigurationChanged( new_cfg );
+    mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
+  }
+
+  @Override
   public void setTheTitle()
   {
     StringBuilder sb = new StringBuilder();
@@ -1040,18 +1058,6 @@ public class DrawingWindow extends ItemDrawer
   }
 
   // --------------------------------------------------------------
-
-  // private void AlertMissingSymbols()
-  // {
-  //   TopoDroidAlertDialog.makeAlert( mActivity, getResources(), R.string.missing-symbols,
-  //     new DialogInterface.OnClickListener() {
-  //       @Override
-  //       public void onClick( DialogInterface dialog, int btn ) {
-  //         mAllSymbols = true;
-  //       }
-  //     }
-  //   );
-  // }
 
   private boolean doubleBack = false;
   private Handler doubleBackHandler = new Handler();
@@ -1145,12 +1151,13 @@ public class DrawingWindow extends ItemDrawer
     return null;
   }
 
-  // called by doSaveTdr and doSaveTh2
-  //    prepare struct and forwards to doStartSaveTdrTask
-  // @param type      plot type (-1 to save both plan and profile)
-  // @param suffix    plot save mode (see PlotSave) - called only with TOGGLE, SAVE, MODIFIED
-  // @param maxTasks
-  // @param rotate    backup_rotate
+  /** called by doSaveTdr and doSaveTh2
+   *    prepare struct and forwards to doStartSaveTdrTask
+   * @param type      plot type (-1 to save both plan and profile)
+   * @param suffix    plot save mode (see PlotSave) - called only with TOGGLE, SAVE, MODIFIED
+   * @param maxTasks
+   * @param rotate    backup_rotate
+   */
   private void startSaveTdrTask( final long type, int suffix, int maxTasks, int rotate )
   {
     PlotSaveData psd1 = null;
@@ -1174,8 +1181,6 @@ public class DrawingWindow extends ItemDrawer
     int r = ( rotate == 0 )? 0 : psd1.rotate;
     Handler saveHandler = null;
 
-    // Log.v("DistoX", "start save Th2 task. type " + type + " suffix " + suffix 
-    //                 + " maxTasks " + maxTasks + " rotate " + rotate ); 
     switch ( suffix ) {
       case PlotSave.EXPORT:
         // Log.v("DistoX-SAVE", "exporting plot ... " + maxTasks );
@@ -1242,6 +1247,21 @@ public class DrawingWindow extends ItemDrawer
 
   // ---------------------------------------------------------------------------------------
 
+  /** execute a "move to" on both plan and profile view
+   */
+  private void doMoveTo()
+  {
+    if ( mMoveTo != null ) {
+      moveTo( mPlot1.type, mMoveTo );
+      moveTo( mPlot2.type, mMoveTo );
+      mMoveTo = null;
+    }
+  }
+
+  /** movo to a station
+   * @param type    plot type
+   * @param move_to station name
+   */
   private void moveTo( int type, String move_to )
   {
     // if ( move_to == null ) return; // move_to guaranteed non-null
@@ -1482,7 +1502,9 @@ public class DrawingWindow extends ItemDrawer
     } 
   }
 
-  // set the button3 by the type of the hot-item
+  /** set the button3 by the type of the hot-item
+   * @param pt   hot item
+   */
   private void setButton3Item( SelectionPoint pt )
   {
     boolean deletable = false;
@@ -1535,6 +1557,8 @@ public class DrawingWindow extends ItemDrawer
     TDandroid.setButtonBackground( mButton3[ BTN_REMOVE ], (deletable ? mBMdelete_on : mBMdelete_off) );
   }
 
+  /** set the button3 to display "prev/next" 
+   */
   private void setButton3PrevNext( )
   {
     if ( mHasSelected ) {
@@ -1546,7 +1570,10 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  // must be called only if TDLevel.overNormal
+  /** set the button "continue"
+   * @param continue_line    type of line-continuation
+   * @note must be called only if TDLevel.overNormal
+   */
   private void setButtonContinue( int continue_line )
   {
     mContinueLine = continue_line;
@@ -1576,11 +1603,19 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** set button "continue"
+   * @param join_mode    type of join
+   * @param code         unused
+   */
   public void setButtonJoinMode( int join_mode, int code )
   {
     if ( TDLevel.overNormal ) setButtonContinue( join_mode );
   }
 
+  /** set button "filter"
+   * @param filter_mode  type of filter
+   * @param code         either ERASE or SELECT
+   */
   public void setButtonFilterMode( int filter_mode, int code )
   {
     if ( code == Drawing.CODE_ERASE ) {
@@ -1625,6 +1660,9 @@ public class DrawingWindow extends ItemDrawer
     }
   } 
 
+  /** set button "size" to display a given scale
+   * @param scale    scale
+   */
   private void setButtonEraseSize( int scale )
   {
     mEraseScale = scale % Drawing.SCALE_MAX;
@@ -1644,11 +1682,17 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** set button "delete" on/off
+   * @param on    ON or OFF
+   */
   private void setButtonDelete( boolean on ) 
   {
     TDandroid.setButtonBackground( mButton3[ BTN_REMOVE ], (on ? mBMdelete_on : mBMdelete_off) );
   }
 
+  /** set button "size" to display a given scale
+   * @param scale    scale
+   */
   private void setButtonSelectSize( int scale )
   {
     mSelectScale = scale % Drawing.SCALE_MAX;
@@ -1668,7 +1712,10 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  // this method is a callback to let other objects tell the activity to use zooms or not
+  /** switch the ZOOM controls
+   * @param ctrl      type of controls
+   * @note this method is a callback to let other objects tell the activity to use zooms or not
+   */
   private void switchZoomCtrl( int ctrl )
   {
     // Log.v("DistoX", "DEBUG switchZoomCtrl " + ctrl + " ctrl is " + ((mZoomBtnsCtrl == null )? "null" : "not null") );
@@ -5969,17 +6016,10 @@ public class DrawingWindow extends ItemDrawer
   //   return super.onOptionsItemSelected( item );
   // }
 
-  private void doMoveTo()
-  {
-    if ( mMoveTo != null ) {
-      // Log.v("DistoX", "do move to" );
-      moveTo( mPlot1.type, mMoveTo );
-      moveTo( mPlot2.type, mMoveTo );
-      mMoveTo = null;
-    }
-  }
-
-  // called by updateBlockName and refreshDisplay
+  /** (re)compute the reference, for both plan and profile
+   * @param reset whether to reset the reference
+   * @note called by updateBlockName and refreshDisplay
+   */
   private void doComputeReferences( boolean reset )
   {
     // Log.v("DistoX", "do Compute References() type " + mType );
@@ -5996,9 +6036,12 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** refresh the display
+   * @param nr    error code (if negative), OK if positive
+   * @param toast whether to toast a message
+   */
   public void refreshDisplay( int nr, boolean toast )
   {
-    // Log.v("DistoX", "refresh Display() type " + mType + " nr " + nr ); // DATA_DOWNLOAD
     mActivity.setTitleColor( TDColor.TITLE_NORMAL );
     if ( nr >= 0 ) {
       if ( nr > 0 ) {
@@ -6016,13 +6059,15 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  // called only by updateBlockList()
-  private void updateDisplay( /* boolean compute, boolean reference */ ) // always called with true, false
+  /** update the shot+leg reference
+   * @note called only by updateBlockList()
+   * boolean compute = true
+   * boolean reference = false
+   */
+  private void updateDisplay( )
   {
-    // Log.v("DistoX-DATA", "update display() type " + mType );
     if ( mType != (int)PlotType.PLOT_PLAN && ! PlotType.isProfile( mType ) ) {
       // FIXME_SK resetReference( mPlot3 );
-      // Log.v("DistoX", "update display() type " + mType + " section skip " + mSectionSkip );
       doRestart();
       updateSplays( mApp.mSplayMode );
     } else {
@@ -6033,6 +6078,10 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** incremental update of the shot+leg reference
+   * @param blk_id    last data block ID
+   * @param got_leg   whether a leg has been received
+   */
   private void incrementalUpdateDisplay( long blk_id, boolean got_leg )
   {
     if ( mType != (int)PlotType.PLOT_PLAN && ! PlotType.isProfile( mType ) ) return;
@@ -6103,6 +6152,9 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** fit the view to the sketch
+   * @param b    fitting rectangle
+   */
   private void zoomFit( RectF b )
   {
     float tb = (b.top + b.bottom)/2;
@@ -6145,24 +6197,27 @@ public class DrawingWindow extends ItemDrawer
     computeReferences( num, (int)mType, mName, zoom, false );
   }
 
+  /** forward the update request to the Shot Window
+   * @param blk_id    data block id
+   */
   @Override
   public void updateBlockList( long blk_id )
   {
-    // Log.v("DistoX-DATA", "drawing window: update Block List block id " + blk_id ); // DATA_DOWNLOAD
     if ( TopoDroidApp.mShotWindow != null ) {
       TopoDroidApp.mShotWindow.updateBlockList( blk_id ); // FIXME_EXTEND needed to update sketch splays immediately on download
-      // Log.v("DistoX-DATA", "updated " + updated );
     }
   }
 
-  /**
+  /** handle data update notifications
    * @param blk_id  update starting with this blk id
    * @param got_leg whether the latest splay is actually a leg
    */
   public void notifyUpdateDisplay( long blk_id, boolean got_leg )
   {
     // Log.v("DistoX-DATA", "drawing window: notified update display id " + blk_id ); 
-    if ( TDLevel.overExpert ) {
+    if ( StationPolicy.isSurveyBackward1() ) { // splays+backward can update display only on receiving a leg
+      if ( got_leg ) updateDisplay( );
+    } else if ( TDLevel.overExpert ) { // tester-level uses incremental update
       incrementalUpdateDisplay( blk_id, got_leg );
     } else {
       updateDisplay( );
@@ -6190,6 +6245,10 @@ public class DrawingWindow extends ItemDrawer
   // ---------------------------------------------------------
   // MENU
 
+  /** initialize the menu list
+   * @param res      app resources
+   * @param type     plot type
+   */
   private void setMenuAdapter( Resources res, long type )
   {
     ArrayAdapter< String > menu_adapter = new ArrayAdapter<>(mActivity, R.layout.menu );
@@ -6230,16 +6289,20 @@ public class DrawingWindow extends ItemDrawer
     onMenu = false;
   }
 
+
+
   private void doZoomFit()
   {
-    // FIXED_ZOOM 
     if ( mFixedZoom > 0 ) return;
-    // FIXME for big sketches this leaves out some bits at the ends
+    // FIXME FIXED_ZOOM for big sketches this leaves out some bits at the ends
     // maybe should increse the bitmap bounds by a small factor ...
     RectF b = mDrawingSurface.getBitmapBounds();
     zoomFit( b );
   }
 
+  /** center the view at a station
+   * @param station   station name
+   */
   void centerAtStation( String station )
   {
     NumStation st = mNum.getStation( station );
@@ -6252,6 +6315,9 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** set the view orientation
+   * @param orientation   requested view-orientation
+   */
   void setOrientation( int orientation )
   {
     boolean landscape = (orientation == PlotInfo.ORIENTATION_LANDSCAPE);
@@ -6384,11 +6450,12 @@ public class DrawingWindow extends ItemDrawer
       }
   }
 
-  // interface IExporter
+  /** interface IExporter: export sketch
+   * @param export_type    export format
+   */
   public void doExport( String export_type )
   {
     int index = TDConst.plotExportIndex( export_type );
-    // Log.v( "DistoX-SAVE", "export request type " + index );
     switch ( index ) {
       case TDConst.DISTOX_EXPORT_TH2: doSaveTh2( mType, true ); break;
       case TDConst.DISTOX_EXPORT_CSX: 
@@ -6430,7 +6497,6 @@ public class DrawingWindow extends ItemDrawer
     float y = mOffset.y;
     float z = mZoom;
     String tdr  = TDPath.getTdrFile( filename );
-    // String th2  = TDPath.getTh2File( filename );
     TDLog.Log( TDLog.LOG_IO, "reload file " + filename + " path " + tdr );
     // Log.v("DistoX-RELOAD", "recover " + type + " <" + filename + "> TRD " + tdr );
     if ( type == PlotType.PLOT_PLAN ) {
@@ -6472,9 +6538,17 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
   }
 
+  /** export sketch as CSX file
+   * @param sid     survey ID
+   * @param pw      output printer
+   * @param survey  survey name
+   * @param cave    CSX cave name
+   * @param branch  CSX branch name
+   * @param psd1    plan view save-data
+   * @param psd2    profile view save-data
+   */
   static void exportAsCsx( long sid, PrintWriter pw, String survey, String cave, String branch, /* String session, */ PlotSaveData psd1, PlotSaveData psd2 )
   {
-    // Log.v("DistoX", "export as CSX <<" + cave + ">>" );
     List< PlotInfo > all_sections = TopoDroidApp.mData.selectAllPlotsSection( sid, TDStatus.NORMAL );
     ArrayList< PlotInfo > sections1 = new ArrayList<>(); // plan xsections
     ArrayList< PlotInfo > sections2 = new ArrayList<>(); // profile xsections
@@ -6614,7 +6688,6 @@ public class DrawingWindow extends ItemDrawer
     TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], enable ? mBMbluetooth : mBMbluetooth_no );
     mButton1[BTN_BLUETOOTH].setEnabled( enable );
   }
-
 
 // -------------------------------------------------------------
 // AUTO WALLS
@@ -6991,6 +7064,8 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  // --------------------------------------------------------------------------
+
   @Override
   protected void onActivityResult( int reqCode, int resCode, Intent intent )
   {
@@ -7036,7 +7111,18 @@ public class DrawingWindow extends ItemDrawer
 
 
   // ------------------------------------------------------------------
-  // SCRAP OUTLINE 
+  // SCRAPS, X-SECTIONS, OUTLINES 
+
+  int getScrapIndex() { return mDrawingSurface.scrapIndex(); }
+  int getScrapMaxIndex() { return mDrawingSurface.scrapMaxIndex(); }
+
+  void scrapNext() { mDrawingSurface.toggleScrapIndex( 1 ); }
+  void scrapPrev() { mDrawingSurface.toggleScrapIndex( -1 ); }
+  void scrapNew() 
+  { 
+    int scrap_idx = mDrawingSurface.newScrapIndex( );
+    mApp_mData.updatePlotMaxScrap( mSid, mPid, scrap_idx );
+  }
 
   void scrapOutlineDialog()
   {
@@ -7101,6 +7187,24 @@ public class DrawingWindow extends ItemDrawer
     String tdr = TDPath.getTdrFileWithExt( fullName );
     // Log.v("DistoX0", "add outline " + tdr + " delta " + xdelta + " " + ydelta );
     mDrawingSurface.addScrapDataStream( tdr, xdelta, ydelta );
+  }
+
+  // @param name xsection scrap_name = survey_name + "-" + xsection_id
+  //                      tdr_path = tdr_dir + scrap_name + ".tdr"
+  boolean hasXSectionOutline( String name ) { return mDrawingSurface.hasXSectionOutline( name ); }
+
+  void setXSectionOutline( String name, boolean on_off, float x, float y )
+  { 
+    // Log.v("DistoX-C", "setXSectionOutline " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    assert( mLastLinePath == null );
+
+    mDrawingSurface.clearXSectionOutline( name );
+    // Log.v("DistoX-XSECTION", "XSECTION set " + name + " on/off " + on_off + " " + x + " " + y );
+    if ( on_off ) {
+      String tdr = TDPath.getTdrFileWithExt( name );
+      // Log.v("DistoX-XSECION", "XSECTION set " + name + " on_off " + on_off + " tdr-file " + tdr );
+      mDrawingSurface.setXSectionOutline( name, tdr, x-DrawingUtil.CENTER_X, y-DrawingUtil.CENTER_Y );
+    }
   }
 
   // ------------------------------------------------------------------
@@ -7223,52 +7327,8 @@ public class DrawingWindow extends ItemDrawer
     // [2] save the Tdr for the new plot and remove the items from the commandManager
   }
 
-
-  // @param name xsection scrap_name = survey_name + "-" + xsection_id
-  //                      tdr_path = tdr_dir + scrap_name + ".tdr"
-  boolean hasXSectionOutline( String name ) { return mDrawingSurface.hasXSectionOutline( name ); }
-
-  void setXSectionOutline( String name, boolean on_off, float x, float y )
-  { 
-    // Log.v("DistoX-C", "setXSectionOutline " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    assert( mLastLinePath == null );
-
-    mDrawingSurface.clearXSectionOutline( name );
-    // Log.v("DistoX-XSECTION", "XSECTION set " + name + " on/off " + on_off + " " + x + " " + y );
-    if ( on_off ) {
-      String tdr = TDPath.getTdrFileWithExt( name );
-      // Log.v("DistoX-XSECION", "XSECTION set " + name + " on_off " + on_off + " tdr-file " + tdr );
-      mDrawingSurface.setXSectionOutline( name, tdr, x-DrawingUtil.CENTER_X, y-DrawingUtil.CENTER_Y );
-    }
-  }
-
-  // called by DrawingShotDialog to change shot color
-  //   @param blk   data block
-  //   @param color color (0 to clear)
-  void updateBlockColor( DBlock blk, int color )
-  {
-    blk.setPaintColor( color );
-    mApp_mData.updateShotColor( blk.mId, TDInstance.sid, color );
-  }
-
-  @Override
-  public void onConfigurationChanged( Configuration new_cfg )
-  {
-    super.onConfigurationChanged( new_cfg );
-    // Log.v("DistoX-ConfigChange", "Drawing window");
-    mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
-  }
-
-  int getScrapIndex() { return mDrawingSurface.scrapIndex(); }
-  int getScrapMaxIndex() { return mDrawingSurface.scrapMaxIndex(); }
-
-  void scrapNext() { mDrawingSurface.toggleScrapIndex( 1 ); }
-  void scrapPrev() { mDrawingSurface.toggleScrapIndex( -1 ); }
-  void scrapNew() 
-  { 
-    int scrap_idx = mDrawingSurface.newScrapIndex( );
-    mApp_mData.updatePlotMaxScrap( mSid, mPid, scrap_idx );
-  }
+  // -------------------------------------------------------
+  // TOOLSET 
 
   void rotateRecentToolset( )
   { 
@@ -7333,7 +7393,6 @@ public class DrawingWindow extends ItemDrawer
     }
     mLayoutTools.invalidate();
   }
-
 
   // --------------------- from ItemDrawer
   @Override
@@ -7486,5 +7545,17 @@ public class DrawingWindow extends ItemDrawer
     mRecentDimY  = Float.parseFloat( getResources().getString( R.string.dimyl ) );
     setBtnRecentAll( );
   }
+
+  // private void AlertMissingSymbols()
+  // {
+  //   TopoDroidAlertDialog.makeAlert( mActivity, getResources(), R.string.missing-symbols,
+  //     new DialogInterface.OnClickListener() {
+  //       @Override
+  //       public void onClick( DialogInterface dialog, int btn ) {
+  //         mAllSymbols = true;
+  //       }
+  //     }
+  //   );
+  // }
 
 }

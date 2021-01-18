@@ -531,7 +531,7 @@ WARNUNG. Ab v.5.0.60 wird ein "TopoDroid"-Ordner automatisch verwendet wenn es e
     <string name="tripod_warning">Stativmessungen sind Fortgeschrittenenlevel!</string>
     <string name="coverage_warning">Winkelabdeckung unter %1$d %%\nKoeffizienten trotzdem schreiben?</string>
     <string name="delta_warning">Durchschnittlicher Fehler über %1$.1f\nKoeffizienten trotzdem schreiben?</string>
-    <!-- TODO string name="sap_warning">Warning\n\nSAP surveys attain only UISv2 grade 3.</string -->
+    <!-- UNUSED string name="sap_warning">Warning\n\nSAP surveys attain only UISv2 grade 3.</string -->
 
     <string name="cover_data">Rohdaten-Verteilung: %1$.2f %%</string>
     <string name="cover_calib">Kalibrierte Daten Verteilung: %1$.2f %%</string>
