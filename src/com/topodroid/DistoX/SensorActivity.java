@@ -190,7 +190,6 @@ public class SensorActivity extends Activity
     }
   }
 
-
   private void registerSensorEventListener()
   {
     if ( mSensorType != -1 ) {
@@ -267,8 +266,8 @@ public class SensorActivity extends Activity
     switch (view.getId()) {
       case R.id.sensor_ok:
       {
-        String type = mETtype.getText().toString().trim();
-        String value = mETvalue.getText().toString().trim();
+        String type    = mETtype.getText().toString().trim();
+        String value   = mETvalue.getText().toString().trim();
         String comment = mETcomment.getText().toString().trim();
         if ( type.length() == 0 ) {
           error = getResources().getString( R.string.error_sensor_required );

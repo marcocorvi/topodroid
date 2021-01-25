@@ -27,6 +27,7 @@ import com.topodroid.dev.DistoX310Comm;
 import com.topodroid.dev.DistoXA3Comm;
 import com.topodroid.dev.DeviceA3Info;
 import com.topodroid.dev.DeviceX310Info;
+import com.topodroid.dev.DeviceX310Details;
 import com.topodroid.dev.SapComm;
 import com.topodroid.dev.PairingRequest;
 import com.topodroid.common.LegType;
@@ -511,17 +512,31 @@ public class TopoDroidApp extends Application
   {
     DeviceX310Info info = new DeviceX310Info();
     byte[] ret = readMemory( address, 0x8008 );
-    if ( ret == null ) return null;
+    if ( ret == null ) {
+      TDLog.Error("Failed read 8008");
+      return null;
+    }
+    // TDLog.Log( TDLog.LOG_COMM, "Addr 8008 (code): " + ret[0] + " " + ret[1] );
     info.mCode = String.format( getResources().getString( R.string.device_code ), MemoryOctet.toInt( ret[1], ret[0] ) );
 
-    ret = readMemory( address, 0xe000 );
-    if ( ret == null ) return null;
+    // ret = readMemory( address, 0xe000 );
+    ret = readMemory( address, DeviceX310Details.FIRMWARE_ADDRESS );
+    if ( ret == null ) {
+      TDLog.Error("Failed read e000" );
+      return null;
+    }
+    // TDLog.Log( TDLog.LOG_COMM, "Addr e000 (fw): " + ret[0] + " " + ret[1] );
     info.mFirmware = String.format( getResources().getString( R.string.device_firmware ), ret[0], ret[1] );
     // int fw0 = ret[0]; // this is always 2
     int fw1 = ret[1]; // firmware 2.X
 
-    ret = readMemory( address, 0xe004 );
-    if ( ret == null ) return null;
+    // ret = readMemory( address, 0xe004 );
+    ret = readMemory( address, DeviceX310Details.HARDWARE_ADDRESS );
+    if ( ret == null ) {
+      TDLog.Error("Failed read e004" );
+      return null;
+    }
+    // TDLog.Log( TDLog.LOG_COMM, "Addr e004 (hw): " + ret[0] + " " + ret[1] );
     info.mHardware = String.format( getResources().getString( R.string.device_hardware ), ret[0], ret[1] );
 
     // ret = readMemory( address, 0xc044 );
@@ -634,6 +649,24 @@ public class TopoDroidApp extends Application
     return TDInstance.bleDevice;
   }
 
+  void doBluetoothButton( Context ctx, ILister lister, Button b )
+  {
+    if ( ! mDataDownloader.isDownloading() ) {
+      if ( TDLevel.overAdvanced
+             && TDInstance.isDeviceX310() 
+	     && ! TDSetting.isConnectionModeMulti()
+	  ) {
+        CutNPaste.showPopupBT( ctx, lister, this, b, false );
+      } else {
+        mDataDownloader.setDownload( false );
+        mDataDownloader.stopDownloadData();
+        lister.setConnectionStatus( mDataDownloader.getStatus() );
+        this.resetComm();
+        TDToast.make(R.string.bt_reset );
+      }
+    // } else { // downloading: nothing
+    }
+  }
  
   // @param dm     metrics
   // @param landscape whether the screen orientation is landscape

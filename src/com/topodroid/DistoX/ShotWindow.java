@@ -1012,7 +1012,7 @@ public class ShotWindow extends Activity
             // TDLog.Log( TDLog.LOG_SENSOR, "insert sensor " + type + " " + value + " " + comment );
 
             mApp_mData.insertSensor( TDInstance.sid, mSensorId, mShotId, "",
-                                  TDUtil.currentDate(),
+                                  TDUtil.currentDateTime(),
                                   comment,
                                   type,
                                   value );
@@ -1341,21 +1341,7 @@ public class ShotWindow extends Activity
   // --------------------------------------------------------------
   void doBluetooth( Button b ) // BLUETOOTH
   {
-    if ( ! mDataDownloader.isDownloading() ) {
-      if ( TDLevel.overAdvanced
-             && TDInstance.isDeviceX310() 
-	     && ! TDSetting.isConnectionModeMulti()
-	  ) {
-        CutNPaste.showPopupBT( mActivity, this, mApp, b, false );
-      } else {
-        mDataDownloader.setDownload( false );
-        mDataDownloader.stopDownloadData();
-        setConnectionStatus( mDataDownloader.getStatus() );
-        mApp.resetComm();
-        TDToast.make(R.string.bt_reset );
-      }
-    // } else { // downloading: nothing
-    }
+    mApp.doBluetoothButton( mActivity, this, b );
   }
 
   @Override 

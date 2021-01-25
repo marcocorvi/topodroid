@@ -74,7 +74,7 @@ public class DistoXA3Comm extends DistoXComm
       byte[] result = null;
       // byte[] result = new byte[4];
       // if ( ! mProtocol.read8000( result ) ) { // FIXME ASYNC
-      result = mProtocol.readMemory( DeviceA3Details.mStatusAddress ); // TODO TEST THIS
+      result = mProtocol.readMemory( DeviceA3Details.STATUS_ADDRESS ); // TODO TEST THIS
       if ( result == null ) { 
         TDLog.Error( "toggle Calib Mode A3 failed read 8000" );
       } else {
@@ -113,8 +113,10 @@ public class DistoXA3Comm extends DistoXComm
     if ( ! isCommThreadNull() ) return -1;
     from &= 0xfff8; // was 0x7ff8
     to   &= 0xfff8;
-    if ( from >= 0x8000 ) from = 0;
-    if ( to >= 0x8000 )   to   = 0x8000;
+    // if ( from >= 0x8000 ) from = 0;
+    // if ( to >= 0x8000 )   to   = 0x8000;
+    if ( from >= DeviceA3Details.MAX_ADDRESS_A3 ) from = 0;
+    if ( to >= DeviceA3Details.MAX_ADDRESS_A3 )   to   = DeviceA3Details.MAX_ADDRESS_A3;
     int n = 0;
     if ( from < to ) {
       if ( connectSocketAny( address ) ) {
@@ -141,8 +143,10 @@ public class DistoXA3Comm extends DistoXComm
 
     from &= 0xfff8; // was 0x7ff8
     to   &= 0xfff8;
-    if ( from >= 0x8000 ) from = 0;
-    if ( to >= 0x8000 )   to   = 0x8000;
+    // if ( from >= 0x8000 ) from = 0;
+    // if ( to >= 0x8000 )   to   = 0x8000;
+    if ( from >= DeviceA3Details.MAX_ADDRESS_A3 ) from = 0;
+    if ( to >= DeviceA3Details.MAX_ADDRESS_A3 )   to   = DeviceA3Details.MAX_ADDRESS_A3;
 
     int n = 0;
     if ( from != to ) {
@@ -151,7 +155,8 @@ public class DistoXA3Comm extends DistoXComm
           DistoXA3Protocol protocol = (DistoXA3Protocol)mProtocol;
           do {
             if ( to == 0 ) {
-              to = 0x8000 - 8;
+              // to = 0x8000 - 8;
+              to = DeviceA3Details.MAX_ADDRESS_A3 - 8;
             } else {
               to -= 8;
             }

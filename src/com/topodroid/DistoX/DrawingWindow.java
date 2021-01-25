@@ -5337,21 +5337,7 @@ public class DrawingWindow extends ItemDrawer
   private void doBluetooth( Button b, int dismiss )
   {
     if ( dismiss == DISMISS_BT ) return;
-    if ( ! mDataDownloader.isDownloading() ) {
-	// FIXME
-      if ( TDLevel.overExpert && TDInstance.isDeviceX310() 
-	      && ! TDSetting.isConnectionModeMulti()
-	  ) {
-        CutNPaste.showPopupBT( mActivity, this, mApp, b, false );
-      } else {
-        mDataDownloader.setDownload( false );
-        mDataDownloader.stopDownloadData();
-        setConnectionStatus( mDataDownloader.getStatus() );
-        mApp.resetComm();
-        TDToast.make(R.string.bt_reset );
-      }
-    // } else { // downloading: nothing
-    }
+    mApp.doBluetoothButton( mActivity, this, b );
   }
 
   private void setButtonAzimuth()

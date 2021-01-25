@@ -17,7 +17,7 @@ public class DeviceA3Details
   static final int MAX_ADDRESS_A3 = 0x8000;
 
   // address of status word in DistoX2 memory
-  final static int mStatusAddress = 0x8000;
+  final static int STATUS_ADDRESS = 0x8000;
 
   private static final byte CALIB_BIT = (byte)0x08; // X1 calib bit
 

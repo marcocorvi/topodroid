@@ -49,8 +49,6 @@ public class TopoDroidComm
   protected String mAddress;
   protected TopoDroidProtocol mProtocol;
 
-  protected boolean mCalibMode;   //!< whether the device is in calib-mode
-
   protected boolean mBTConnected;
 
   byte[] mCoeff;
@@ -274,7 +272,6 @@ public class TopoDroidComm
     mProtocol     = null;
     mAddress      = null;
     mCommThread = null;
-    mCalibMode    = false;
     mBTConnected  = false;
     // TDLog.Log( TDLog.LOG_COMM, "TopoDroid Comm cstr");
   }

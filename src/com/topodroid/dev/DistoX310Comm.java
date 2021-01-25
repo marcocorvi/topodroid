@@ -29,10 +29,12 @@ import android.os.Handler;
 
 public class DistoX310Comm extends DistoXComm
 {
+  private static boolean mCalibMode = false;   //!< whether the device is in calib-mode
 
   public DistoX310Comm( TopoDroidApp app )
   {
     super( app );
+    // TDLog.Log( TDLog.LOG_COMM, "Disto X310 Comm cstr");
   }
 
   /** must be overridden to call create proper protocol
@@ -121,24 +123,27 @@ public class DistoX310Comm extends DistoXComm
     if ( connectSocketAny( address ) ) {
       if ( mProtocol instanceof DistoX310Protocol ) {
         byte[] result = null;
-        byte[] fw = mProtocol.readMemory( DeviceX310Details.mFirmwareAddress ); // read firmware
+        byte[] fw = mProtocol.readMemory( DeviceX310Details.FIRMWARE_ADDRESS ); // read firmware
         if ( fw == null || fw.length < 2 ) {
           TDLog.Error( "toggle Calib Mode X310 failed read E000" );
         } else {
-          // Log.v("DistoX", "firmware " + fw[0] + " " + fw[1] );
-          if ( fw[1] >= 0 && fw[1] < DeviceX310Details.mStatusAddress.length ) {
-            result = mProtocol.readMemory( DeviceX310Details.mStatusAddress[ fw[1] ] );
+          // TDLog.Log( TDLog.LOG_COMM, "firmware " + fw[0] + " " + fw[1] );
+          if ( fw[1] >= 0 && fw[1] < DeviceX310Details.STATUS_ADDRESS.length ) {
+            result = mProtocol.readMemory( DeviceX310Details.STATUS_ADDRESS[ fw[1] ] );
             if ( result == null ) { 
-              TDLog.Error( "toggle Calib Mode X310 failed read status word" ); // C044
               mCalibMode = ! mCalibMode;
               ret = setCalibMode( mCalibMode );
+              // TDLog.Log( TDLog.LOG_COMM, "toggle Calib Mode X310 " + fw[1] + " to " + mCalibMode );
             } else {
+              if ( result.length >= 2 ) {
+                TDLog.Log( TDLog.LOG_COMM, "toggle Calib Mode X310 " + fw[1] + " to " + mCalibMode + " res " + result[0] + " " + result[1] );
+              }
               ret = setCalibMode( DeviceX310Details.isNotCalibMode( result[0] ) );
             }
           } else {
             mCalibMode = ! mCalibMode;
-            // TDLog.Log( TDLog.LOG_COMM, "toggle Calib Mode X310 setX310CalibMode " + mCalibMode );
             ret = setCalibMode( mCalibMode );
+            // TDLog.Log( TDLog.LOG_COMM, "toggle Calib Mode X310 to " + mCalibMode );
           }
         }
       }

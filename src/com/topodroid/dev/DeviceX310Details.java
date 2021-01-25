@@ -16,11 +16,12 @@ public class DeviceX310Details
   static final int MAX_INDEX_X310 = 1064;
 
   // address of status word in DistoX2 memory
-  final static int[] mStatusAddress = {
-    0xc006, 0xc006, 0xc006, 0xc034, 0xc044, 0xc044,
+  final static int[] STATUS_ADDRESS = {
+    0xc006, 0xc006, 0xc006, 0xc034, 0xc044, 0xc044, 0xc044,
   };
 
-  final static int mFirmwareAddress = 0xe000;
+  public final static int FIRMWARE_ADDRESS = 0xe000;
+  public final static int HARDWARE_ADDRESS = 0xe004;
 
   // head-tail command
   // final static int mHeadTailAddress = 0xe008;
