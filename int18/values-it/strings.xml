@@ -16,8 +16,8 @@ Tap "Move" to move your TopoDroid folder to Documents.\n\n
 Tap "Close" not to take any action.
 </string>
     <string name="button_no_again">Non chiedere di nuovo</string>
-    <!-- TODO string name="path11_move">Moved to folder Documents/TopoDroid.\nPlease restart TopoDroid</string -->
-    <!-- TODO string name="path11_not_move">Failed to move to folder Documents/TopoDroid</string -->
+    <string name="path11_move">Spostata nella cartella Documents/TopoDroid.\nFar ripartire TopoDroid</string>
+    <string name="path11_not_move">Errore nello spostare alla cartella Documents/TopoDroid</string>
 
     <string name="app_name">TopoDroid</string>
     <string name="tdm_title">Gestione TopoDroid</string>
@@ -103,7 +103,7 @@ Tap "Close" not to take any action.
     <string name="calib_delete">Eliminare calibrazione </string>
     <string name="calib_device_mismatch">ATTENZIONE. Discrepanza tra calibrazione e dispositivo</string>
     <string name="calib_no_name">Nome della calibrazione mancante</string>
-    <!-- TODO string name="calib_no_coeff">Calibration coefficients not set</string -->
+    <string name="calib_no_coeff">Coefficienti di calibrazione non impostati</string>
     <string name="calib_gm_policy">Metodo di raggruppamento dati</string>
     <string name="calib_gm_undelete">Ripristina dato calibrazione?</string>
     <string name="calib_saved">Salvata calibrazione</string>
@@ -995,7 +995,7 @@ Tap "Close" not to take any action.
 
     <string name="title_settings_sketch">Impostazione disegno 3D</string>
     <string name="title_settings_survey">Impostazione rilievo</string>
-    <!-- TODO string name="title_settings_splay">TopoDroid splay settings</string -->
+    <string name="title_settings_splay">Impostazione splay TopoDroid</string>
     <string name="title_settings_shot">Impostazione dati battute</string>
     <string name="title_settings_units">Impostazione unita\'</string>
     <string name="title_settings_location">Impostazione posizione</string>
@@ -1041,7 +1041,7 @@ Tap "Close" not to take any action.
   <!-- UNUSED string name="pref_tcsx">Esporta per cSurvey-1.20</string -->
 
   <string name="pref_cat_survey">OPZIONI RILIEVO</string>
-  <!-- TODO string name="pref_cat_splay">SPLAY DATA</string -->
+  <string name="pref_cat_splay">DATI SPLAY</string>
   <string name="pref_cat_drawing">OPZIONI DISEGNO</string>
   <string name="pref_cat_import_export">OPZIONI IMPORT/EXPORT</string>
   <!-- FT_NO_TR string name="pref_cat_exportimport">IMPORT</string -->
@@ -1362,8 +1362,8 @@ Tap "Close" not to take any action.
   <string name="pref_plane_interpolation_summary">Azione di interpolazione piana</string>
   <string name="pref_plot_split_title">Divisione/Unione disegno</string>
   <string name="pref_plot_split_summary">Azione per dividere o unire disegni</string>
-  <!-- TODO string name="pref_stylus_size_title">Stylus size</string -->
-  <!-- TODO string name="pref_stylus_size_summary">Stylus size [0: ignore]</string -->
+  <string name="pref_stylus_size_title">Grandezza Stilo</string>
+  <string name="pref_stylus_size_summary">Grandezza Stilo [0: ignora]</string>
   <string name="pref_fixed_thickness_title">Spessore poligonale</string>
   <string name="pref_fixed_thickness_summary">Spessore linee di poligonale</string>
   <!-- UNUSED string name="pref_device_title">Dispositivo</string -->
