@@ -36,7 +36,7 @@ import android.content.Context;
 // import android.bluetooth.BluetoothServerSocket;
 // import android.bluetooth.BluetoothSocket;
 
-class TopoDroidProtocol
+public class TopoDroidProtocol
 {
   protected int    mDeviceType;
   protected String mDeviceAddress;
@@ -63,17 +63,17 @@ class TopoDroidProtocol
   protected int  mError; // readToRead error code
   int getErrorCode() { return mError; }
 
-  double mDistance;
-  double mBearing;
-  double mClino;
-  double mRoll;
-  double mAcceleration; // G intensity
-  double mMagnetic;     // M intensity
-  double mDip;          // magnetic dip
-  protected byte mRollHigh; // high byte of roll
-  long mGX, mGY, mGZ;
-  long mMX, mMY, mMZ;
-  boolean mBackshot;
+  public double mDistance;
+  public double mBearing;
+  public double mClino;
+  public double mRoll;
+  public double mAcceleration; // G intensity
+  public double mMagnetic;     // M intensity
+  public double mDip;          // magnetic dip
+  public byte mRollHigh; // high byte of roll
+  public long mGX, mGY, mGZ;
+  public long mMX, mMY, mMZ;
+  public boolean mBackshot;
 
   // protected byte[] mBuffer;
   protected byte[] mAddress;        // request-reply address
@@ -305,7 +305,7 @@ class TopoDroidProtocol
    *
    * must be overridden - default fails
    */
-  boolean sendCommand( byte cmd ) { return false; }
+  public boolean sendCommand( byte cmd ) { return false; }
 
   /** read the number of data to download
    * @param command command to send to the DistoX

@@ -29,6 +29,7 @@ import com.topodroid.dev.DeviceA3Info;
 import com.topodroid.dev.DeviceX310Info;
 import com.topodroid.dev.DeviceX310Details;
 import com.topodroid.dev.SapComm;
+import com.topodroid.dev.bric.BricComm;
 import com.topodroid.dev.PairingRequest;
 import com.topodroid.common.LegType;
 import com.topodroid.common.ExtendType;
@@ -616,26 +617,24 @@ public class TopoDroidApp extends Application
     //   mComm = new VirtualDistoXComm( this, mVirtualDistoX );
     // } else {
       if ( TDInstance.isDeviceX310() ) {
-          mComm = new DistoX310Comm( this );
+        mComm = new DistoX310Comm( this );
       } else if ( TDInstance.isDeviceA3() ) {
-          mComm = new DistoXA3Comm( this );
+        mComm = new DistoXA3Comm( this );
       } else if ( TDInstance.isDeviceSap() ) {
-          String address = TDInstance.deviceAddress();
-          BluetoothDevice bt_device = getBleDevice();
-          // Log.v("DistoX-BLE-A", "create sap comm [1] address " + address + " BT " + ((bt_device==null)? "null" : bt_device.getAddress() ) );
-          mComm = new SapComm( this, address, bt_device );
-      // } else if ( TDInstance.isDeviceBric() ) {
-      //   String address = TDInstance.deviceAddress();
-      //   BluetoothDevice bt_device = getBleDevice();
-      //   Log.v("DistoX-BLE-A", "create bric comm [1] address " + address + " BT " + ((bt_device==null)? "null" : bt_device.getAddress() ) );
-      //   mComm = new BricComm( this, address, bt_device );
-      //   break;
+        String address = TDInstance.deviceAddress();
+        BluetoothDevice bt_device = getBleDevice();
+        // Log.v("DistoX-BLE-A", "create sap comm [1] address " + address + " BT " + ((bt_device==null)? "null" : bt_device.getAddress() ) );
+        mComm = new SapComm( this, address, bt_device );
+      } else if ( TDInstance.isDeviceBric() ) {
+        String address = TDInstance.deviceAddress();
+        BluetoothDevice bt_device = getBleDevice();
+        Log.v("DistoX-BLE-A", "create bric comm [1] address " + address + " BT " + ((bt_device==null)? "null" : bt_device.getAddress() ) );
+        mComm = new BricComm( this, this, address, bt_device );
       // } else if ( TDInstance.isDeviceBlex() ) {
       //   address = TDInstance.deviceAddress();
       //   BluetoothDevice bt_device = getBleDevice();
       //   // Log.v("DistoX-BLE-A", "create ble comm. address " + address + " BT " + ((bt_device==null)? "null" : bt_device.getAddress() ) );
       //   mComm = new BleComm( this, address, bt_device );
-      //   break;
       }
     // }
   }

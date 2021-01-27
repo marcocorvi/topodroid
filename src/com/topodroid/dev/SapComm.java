@@ -315,6 +315,7 @@ public class SapComm extends TopoDroidComm
   // CONTINUOUS DATA DOWNLOAD
   private int mConnectionMode = -1;
 
+  @Override
   public boolean connectDevice( String address, Handler /* ILister */ lister, int data_type )
   {
     // Log.v("DistoX-BLE-C", "comm connect device (continuous data download)");
@@ -325,6 +326,7 @@ public class SapComm extends TopoDroidComm
     return true;
   }
 
+  @Override
   public void disconnectDevice() 
   {
     // Log.v("DistoX-BLE-C", "comm disconnect device");

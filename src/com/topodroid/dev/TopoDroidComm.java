@@ -15,8 +15,8 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.utils.TDColor;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.DistoX.TDUtil;
 import com.topodroid.DistoX.TDInstance;
+import com.topodroid.DistoX.TDUtil;
 import com.topodroid.DistoX.TopoDroidApp;
 import com.topodroid.DistoX.Lister;
 // import com.topodroid.DistoX.DBlock;
@@ -271,7 +271,7 @@ public class TopoDroidComm
     mApp          = app;
     mProtocol     = null;
     mAddress      = null;
-    mCommThread = null;
+    mCommThread   = null;
     mBTConnected  = false;
     // TDLog.Log( TDLog.LOG_COMM, "TopoDroid Comm cstr");
   }
@@ -359,7 +359,7 @@ public class TopoDroidComm
   public boolean connectDevice( String address, Handler /* ILister */ lister, int data_type )
   {
     return false;
-   }
+  }
 
   public void disconnectDevice() { }
 

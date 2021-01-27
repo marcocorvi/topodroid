@@ -73,16 +73,20 @@ public class Device
   public static boolean isSap( int type )     { return type == DISTO_SAP5; }
   public static boolean isBric( int type )    { return type == DISTO_BRIC4; }
 
+  public boolean canSendCommand() { return mType == DISTO_X310 || mType == DISTO_BRIC4; }
+  public static boolean canSendCommand( int type ) { return type == DISTO_X310 || type == DISTO_BRIC4; }
+
   public static String modelToName( String model )
   {
+    Log.v("BRIC", "model to name <" + model + ">");
     if ( model.startsWith("DistoX-") ) {
       return model.replace("DistoX-", "" );
     } 
     if ( model.startsWith("Shetland") ) {
       return model.replace("Shetland_", "SAP-" );
     }
-    if ( model.startsWith("BRIC4-") ) {
-      return model.replace("BRIC4-", "" );
+    if ( model.startsWith("BRIC4_") ) {
+      return model.replace("BRIC4_", "" );
     }
     // if ( model.startsWith("Ble-") ) { // FIXME BLE_5
     //   return model.replace("Ble-", "" );
@@ -94,10 +98,10 @@ public class Device
   {
     if ( model != null ) {
       // TDLog.Log( TDLog.LOG_DEBUG, "modelToType " + model );
-      if ( model.equals( "X310" ) || model.startsWith( "DistoX-" ) ) return DISTO_X310;
-      if ( model.equals( "A3" ) || model.equals( "DistoX" ) ) return DISTO_A3;
-      if ( model.equals( "BRIC4" ) ) return DISTO_BRIC4; 
-      if ( model.equals( "SAP5" ) || model.startsWith( "Shetland_" ) ) return DISTO_SAP5;
+      if ( model.equals( "X310" )  || model.startsWith( "DistoX-" ) )   return DISTO_X310;
+      if ( model.equals( "A3" )    || model.equals( "DistoX" ) )        return DISTO_A3;
+      if ( model.equals( "BRIC4" ) || model.startsWith( "BRIC4" ) )     return DISTO_BRIC4; 
+      if ( model.equals( "SAP5" )  || model.startsWith( "Shetland_" ) ) return DISTO_SAP5;
       // if ( model.equals( "BLEX" ) ) return DISTO_BLEX; // FIXME BLE_5
       // if ( model.equals( "X000" ) || model.equals( "DistoX0" ) ) return DISTO_X000; // FIXME VirtualDistoX
     }
@@ -143,7 +147,9 @@ public class Device
     if ( name == null || name.length() == 0 || name.equals("null") ){
       name = mModel;
     }
-    return name.replace("SAP5_", "");
+    if ( name.startsWith("SAP5_" ) ) return name.replace("SAP5_", "");
+    if ( name.startsWith("BRIC-" ) ) return name.replace("BRIC-", "");
+    return name;
   }
 
   public String getNickname()

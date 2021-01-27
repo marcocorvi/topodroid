@@ -24,6 +24,7 @@
   <string name="AzimuthDialog" translatable="false">page_azimuth.htm</string>
   <string name="AudioDialog" translatable="false">page_audio.htm</string>
   <string name="AudioListDialog" translatable="false">page_audio_list.htm</string>
+  <string name="BleScanDialog" translatable="false">page_ble_scan.htm</string>
   <string name="CalibCheckDialog" translatable="false">page_calib_check.htm</string>
   <string name="CalibCoeffDialog" translatable="false">page_calib_coeffs.htm</string>
   <string name="CalibCoverageDialog" translatable="false">page_calib_distrib.htm</string>
@@ -117,4 +118,6 @@
   <string name="TdmEquatesDialog" translatable="false">page_tdm_equates.htm</string>
   <string name="TdmSourcesDialog" translatable="false">page_tdm_sources.htm</string>
   <!-- string name="TdmViewEquatesDialog" translatable="false">page_view_equates.htm</string -->
+
+  <string name="PageTodo" translatable="false">page_todo.htm</string>
 </resources>
