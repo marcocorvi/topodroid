@@ -392,9 +392,20 @@ Tap "Close" not to take any action.
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Milimetrový papier</string>
 
+    <!-- TODO string name="start_scan">Start scan</string -->
+    <!-- TODO string name="stop_scan">Stop scan</string -->
+    <!-- TODO string name="title_scan">BLE scan</string -->
     <string name="ble_scan_failed">BLE sken neúspešný</string>
     <string name="ble_gatt_failure">BLE failzlyhanieure</string>
     <string name="ble_no_remote">Bez diaľkového ovládania</string>
+    <!-- TODO string name="ble_control">Control</string -->
+    <!-- TODO string name="ble_connect">Connect</string -->
+    <!-- TODO string name="ble_disconnect">Disconnect</string -->
+    <!-- TODO string name="bric_scan">Scan</string -->
+    <!-- TODO string name="bric_shot">Shot</string -->
+    <!-- TODO string name="bric_laser">Laser</string -->
+    <!-- TODO string name="bric_off">Off</string -->
+
 
     <string name="popup_join_pt">Prichytiť na blízky bod</string>
     <string name="popup_snap_ln">Prichytiť na blízku čiaru</string>

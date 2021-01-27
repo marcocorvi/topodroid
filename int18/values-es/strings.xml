@@ -382,9 +382,20 @@ Tap "Close" not to take any action.
     <!-- FIXED_ZOOM -->
     <!-- TODO string name="zoom_fixed">Graph-paper</string -->
 
+    <!-- TODO string name="start_scan">Start scan</string -->
+    <!-- TODO string name="stop_scan">Stop scan</string -->
+    <!-- TODO string name="title_scan">BLE scan</string -->
     <string name="ble_scan_failed">Fallo escaneo BLE</string>
     <string name="ble_gatt_failure">Fallo BLE</string>
     <string name="ble_no_remote">Sin dispositivo remoto</string>
+    <!-- TODO string name="ble_control">Control</string -->
+    <!-- TODO string name="ble_connect">Connect</string -->
+    <!-- TODO string name="ble_disconnect">Disconnect</string -->
+    <!-- TODO string name="bric_scan">Scan</string -->
+    <!-- TODO string name="bric_shot">Shot</string -->
+    <!-- TODO string name="bric_laser">Laser</string -->
+    <!-- TODO string name="bric_off">Off</string -->
+
 
     <string name="popup_join_pt">Unir al punto más cercano</string>
     <string name="popup_snap_ln">Ajustar a la línea más cercana</string>
