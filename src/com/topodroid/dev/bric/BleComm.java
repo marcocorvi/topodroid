@@ -26,6 +26,9 @@ import java.util.UUID;
 
 public interface BleComm
 {
+  public void changedMtu( int mtu );
+  public void readedRemoteRssi( int rssi );
+
   public void changedChrt( BluetoothGattCharacteristic chrt );
 
   public void readedChrt( String uuid_str, byte[] bytes );
@@ -41,7 +44,7 @@ public interface BleComm
   public boolean readChrt( UUID srvUuid, UUID chrtUuid );
   public boolean writeChrt( UUID srv_uuid, UUID chrt_uuid, byte[] bytes );
 
-  public boolean enableNotify( BluetoothGattCharacteristic chrt );
+  public boolean enablePNotify( UUID srcUuid, BluetoothGattCharacteristic chrt );
 
   public void connectGatt( Context ctx, BluetoothDevice device );
   public void disconnectGatt();

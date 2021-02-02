@@ -41,7 +41,9 @@ import com.topodroid.help.HelpDialog;
 import com.topodroid.help.UserManualActivity;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPrefCat;
+import com.topodroid.dev.ConnectionState;
 import com.topodroid.dev.DataType;
+import com.topodroid.dev.ConnectionState;
 import com.topodroid.common.PlotType;
 import com.topodroid.common.ExtendType;
 import com.topodroid.common.LegType;
@@ -2136,7 +2138,7 @@ public class DrawingWindow extends ItemDrawer
       mApp.registerLister( this );
     } 
 
-    mBTstatus = DataDownloader.STATUS_OFF;
+    mBTstatus = ConnectionState.CONN_DISCONNECTED;
     TopoDroidApp.mDrawingWindow = this;
 
     // if ( mApp.hasHighlighted() ) {
@@ -5383,7 +5385,7 @@ public class DrawingWindow extends ItemDrawer
       } else {
         mDataDownloader.toggleDownload();
         setConnectionStatus( mDataDownloader.getStatus() );
-        mDataDownloader.doDataDownload( DataType.SHOT );
+        mDataDownloader.doDataDownload( DataType.DATA_SHOT );
       }
     } else if ( TDLevel.overAdvanced && b == mButton1[ BTN_DIAL ] ) {
       if ( /* TDLevel.overAdvanced && */ mType == PlotType.PLOT_PLAN && TDAzimuth.mFixedExtend == 0 ) {
@@ -5514,7 +5516,7 @@ public class DrawingWindow extends ItemDrawer
       //   makeModePopup( b );
 
       } else if ( b == mButton1[k1++] ) { // DOWNLOAD
-        // setConnectionStatus( DataDownloader.STATUS_WAIT ); // FIXME DistoXDOWN was not commented
+        // setConnectionStatus( ConnectionState.CONN_WAITING ); // FIXME DistoXDOWN was not commented
         resetFixedPaint();
         updateReference();
         if ( TDInstance.deviceA == null ) {
@@ -5523,7 +5525,7 @@ public class DrawingWindow extends ItemDrawer
         } else {
           mDataDownloader.toggleDownload();
           // setConnectionStatus( mDataDownloader.getStatus() ); // FIXME DistoXDOWN was not commenetd
-          mDataDownloader.doDataDownload( DataType.SHOT );
+          mDataDownloader.doDataDownload( DataType.DATA_SHOT );
         }
       } else if ( b == mButton1[k1++] ) { // BLUETOOTH
         doBluetooth( b, dismiss );
@@ -6646,18 +6648,22 @@ public class DrawingWindow extends ItemDrawer
   public void setConnectionStatus( int status )
   { 
     if ( TDInstance.deviceA == null ) {
-      mBTstatus = DataDownloader.STATUS_OFF;
+      mBTstatus = ConnectionState.CONN_DISCONNECTED;
       TDandroid.setButtonBackground( mButton1[ BTN_DOWNLOAD ], mBMadd );
       TDandroid.setButtonBackground( mButton1[ BTN_BLUETOOTH ], mBMbluetooth_no );
     } else {
       if ( status != mBTstatus ) {
         mBTstatus = status;
         switch ( status ) {
-          case DataDownloader.STATUS_ON:
+          case ConnectionState.CONN_CONNECTED:
             TDandroid.setButtonBackground( mButton1[ BTN_DOWNLOAD ], mBMdownload_on );
-            TDandroid.setButtonBackground( mButton1[ BTN_BLUETOOTH ], mBMbluetooth_no );
+            if ( TDInstance.isDeviceBric() ) {
+              TDandroid.setButtonBackground( mButton1[ BTN_BLUETOOTH ], mBMbluetooth );
+            } else {
+              TDandroid.setButtonBackground( mButton1[ BTN_BLUETOOTH ], mBMbluetooth_no );
+            }
             break;
-          case DataDownloader.STATUS_WAIT:
+          case ConnectionState.CONN_WAITING:
             TDandroid.setButtonBackground( mButton1[ BTN_DOWNLOAD ], mBMdownload_wait );
             TDandroid.setButtonBackground( mButton1[ BTN_BLUETOOTH ], mBMbluetooth_no );
             break;
@@ -6671,6 +6677,8 @@ public class DrawingWindow extends ItemDrawer
 
   public void enableBluetoothButton( boolean enable )
   {
+    if ( TDInstance.isDivingMode() ) return;
+    if ( TDInstance.isBleDevice() ) enable = true;
     TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], enable ? mBMbluetooth : mBMbluetooth_no );
     mButton1[BTN_BLUETOOTH].setEnabled( enable );
   }

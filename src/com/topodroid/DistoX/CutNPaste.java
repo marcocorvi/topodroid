@@ -17,6 +17,7 @@ import com.topodroid.prefs.TDSetting;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.DataType;
 import com.topodroid.dev.DeviceX310TakeShot;
+import com.topodroid.dev.bric.BricConst;
 
 import java.lang.ref.WeakReference;
 
@@ -35,6 +36,7 @@ import android.view.MotionEvent;
 import android.graphics.Paint.FontMetrics;
 
 import android.util.TypedValue;
+import android.util.Log;
 
 class CutNPaste
 {
@@ -194,6 +196,8 @@ class CutNPaste
     Button textview2 = null;
     Button textview3 = null;
     Button textview4 = null;
+    // Log.v("DistoX-BLE-CnP", "device type " + TDInstance.deviceType() );
+
     if ( TDInstance.deviceType() == Device.DISTO_X310 ) {
       // ----- TURN LASER ON
       //
@@ -201,7 +205,7 @@ class CutNPaste
       textview1 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
-            app.setX310Laser( Device.LASER_ON, 0, null, DataType.ALL );
+            app.setX310Laser( Device.LASER_ON, 0, null, DataType.DATA_ALL );
             dismissPopupBT();
           }
         } );
@@ -214,7 +218,7 @@ class CutNPaste
       textview2 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
-            app.setX310Laser( Device.LASER_OFF, 0, null, DataType.ALL );
+            app.setX310Laser( Device.LASER_OFF, 0, null, DataType.DATA_ALL );
             dismissPopupBT();
           }
         } );
@@ -229,7 +233,7 @@ class CutNPaste
           new View.OnClickListener( ) {
             public void onClick(View v) {
               // ilister.enableBluetoothButton(false);
-              new DeviceX310TakeShot( ilister, (TDSetting.mCalibShotDownload ? lister : null), app, 1, DataType.CALIB ).execute();
+              new DeviceX310TakeShot( ilister, (TDSetting.mCalibShotDownload ? lister : null), app, 1, DataType.DATA_CALIB ).execute();
               dismissPopupBT();
             }
           } );
@@ -244,7 +248,7 @@ class CutNPaste
           new View.OnClickListener( ) {
             public void onClick(View v) {
               // ilister.enableBluetoothButton(false);
-              new DeviceX310TakeShot( ilister, (TDSetting.isConnectionModeContinuous() ? lister : null), app, 1, DataType.SHOT ).execute();
+              new DeviceX310TakeShot( ilister, (TDSetting.isConnectionModeContinuous() ? lister : null), app, 1, DataType.DATA_SHOT ).execute();
               dismissPopupBT();
             }
           } );
@@ -258,13 +262,75 @@ class CutNPaste
           new View.OnClickListener( ) {
             public void onClick(View v) {
               // ilister.enableBluetoothButton(false);
-              new DeviceX310TakeShot( ilister, (TDSetting.isConnectionModeContinuous()? lister : null), app, TDSetting.mMinNrLegShots, DataType.SHOT ).execute();
+              new DeviceX310TakeShot( ilister, (TDSetting.isConnectionModeContinuous()? lister : null), app, TDSetting.mMinNrLegShots, DataType.DATA_SHOT ).execute();
               dismissPopupBT();
             }
           } );
         ww = textview4.getPaint().measureText( text );
         if ( ww > w ) w = ww;
       }
+    } 
+    else if ( TDInstance.deviceType() == Device.DISTO_BRIC4 ) // -----------------------------------------------------
+    {
+      // ----- TURN LASER ON/OFF
+      //
+      text = res.getString(R.string.popup_do_laser);
+      textview1 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+        new View.OnClickListener( ) {
+          public void onClick(View v) {
+            app.sendBricCommand( BricConst.CMD_LASER );
+            dismissPopupBT();
+          }
+        } );
+      float ww = textview1.getPaint().measureText( text );
+      if ( ww > w ) w = ww;
+
+      // ----- SCAN MEASURE 
+      //
+      text = res.getString( R.string.popup_do_scan );
+      textview2 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+        new View.OnClickListener( ) {
+          public void onClick(View v) {
+            app.sendBricCommand( BricConst.CMD_LASER );
+            dismissPopupBT();
+          }
+        } );
+      ww = textview2.getPaint().measureText( text );
+      if ( ww > w ) w = ww;
+
+      // ----- MEASURE ONE SPLAY AND DOWNLOAD IT IF MODE IS CONTINUOUS
+      //
+      text = res.getString( R.string.popup_do_splay );
+      textview3 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+        new View.OnClickListener( ) {
+          public void onClick(View v) {
+            dismissPopupBT();
+            app.sendBricCommand( BricConst.CMD_LASER );
+            TDUtil.slowDown(200);
+            app.sendBricCommand( BricConst.CMD_SHOT );
+          }
+        } );
+      ww = textview3.getPaint().measureText( text );
+      if ( ww > w ) w = ww;
+
+      // ----- MEASURE ONE LEG AND DOWNLOAD IT IF MODE IS CONTINUOUS
+      //
+      text = res.getString(R.string.popup_do_leg);
+      textview4 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+        new View.OnClickListener( ) {
+          public void onClick(View v) {
+            dismissPopupBT();
+            for (int k = 0; k < TDSetting.mMinNrLegShots; ++k ) {
+              if ( k > 0 ) TDUtil.slowDown(500);
+              app.sendBricCommand( BricConst.CMD_LASER );
+              TDUtil.slowDown(200);
+              app.sendBricCommand( BricConst.CMD_SHOT );
+            }
+          }
+        } );
+      ww = textview4.getPaint().measureText( text );
+      if ( ww > w ) w = ww;
+
     }
     int iw = (int)(w + 10);
     textview0.setWidth( iw );

@@ -13,35 +13,35 @@ package com.topodroid.dev.bric;
 
 import java.util.UUID; 
 
-class BricConst
+public class BricConst
 {
-  final static String MEAS_SRV  = "58d0";
-  final static String MEAS_PRIM = "58d1";
-  final static String MEAS_META = "58d2";
-  final static String MEAS_ERR  = "58d3";
-  final static String LAST_TIME = "58d4";
+  public final static String MEAS_SRV  = "58d0";
+  public final static String MEAS_PRIM = "58d1";
+  public final static String MEAS_META = "58d2";
+  public final static String MEAS_ERR  = "58d3";
+  public final static String LAST_TIME = "58d4";
  
-  final static UUID MEAS_SRV_UUID  = BleUtils.toUuid( MEAS_SRV );
-  final static UUID MEAS_PRIM_UUID = BleUtils.toUuid( MEAS_PRIM );
-  final static UUID MEAS_META_UUID = BleUtils.toUuid( MEAS_META );
-  final static UUID MEAS_ERR_UUID  = BleUtils.toUuid( MEAS_ERR );
-  final static UUID LAST_TIME_UUID = BleUtils.toUuid( LAST_TIME );
+  public final static UUID MEAS_SRV_UUID  = BleUtils.toUuid( MEAS_SRV );
+  public final static UUID MEAS_PRIM_UUID = BleUtils.toUuid( MEAS_PRIM );
+  public final static UUID MEAS_META_UUID = BleUtils.toUuid( MEAS_META );
+  public final static UUID MEAS_ERR_UUID  = BleUtils.toUuid( MEAS_ERR );
+  public final static UUID LAST_TIME_UUID = BleUtils.toUuid( LAST_TIME );
 
-  final static String CTRL_SRV  = "58e0";
-  final static String CTRL_CHRT = "58e1";
+  public final static String CTRL_SRV  = "58e0";
+  public final static String CTRL_CHRT = "58e1";
 
-  final static UUID CTRL_SRV_UUID  = BleUtils.toUuid( CTRL_SRV );
-  final static UUID CTRL_CHRT_UUID = BleUtils.toUuid( CTRL_CHRT );
+  public final static UUID CTRL_SRV_UUID  = BleUtils.toUuid( CTRL_SRV );
+  public final static UUID CTRL_CHRT_UUID = BleUtils.toUuid( CTRL_CHRT );
 
-  final static byte[] COMMAND_OFF   = { (byte)0x70, (byte)0x6f, (byte)0x77, (byte)0x65, (byte)0x72, (byte)0x20, (byte)0x6f, (byte)0x66, (byte)0x66 };
-  final static byte[] COMMAND_SCAN  = { (byte)0x73, (byte)0x63, (byte)0x61, (byte)0x6e };
-  final static byte[] COMMAND_SHOT  = { (byte)0x73, (byte)0x68, (byte)0x6f, (byte)0x74 };
-  final static byte[] COMMAND_LASER = { (byte)0x6c, (byte)0x61, (byte)0x73, (byte)0x65, (byte)0x72 };
+  public final static byte[] COMMAND_OFF   = { (byte)0x70, (byte)0x6f, (byte)0x77, (byte)0x65, (byte)0x72, (byte)0x20, (byte)0x6f, (byte)0x66, (byte)0x66 };
+  public final static byte[] COMMAND_SCAN  = { (byte)0x73, (byte)0x63, (byte)0x61, (byte)0x6e };
+  public final static byte[] COMMAND_SHOT  = { (byte)0x73, (byte)0x68, (byte)0x6f, (byte)0x74 };
+  public final static byte[] COMMAND_LASER = { (byte)0x6c, (byte)0x61, (byte)0x73, (byte)0x65, (byte)0x72 };
 
-  final static byte CMD_OFF   = (byte)0x00;
-  final static byte CMD_SCAN  = (byte)0x01;
-  final static byte CMD_SHOT  = (byte)0x02;
-  final static byte CMD_LASER = (byte)0x03;
+  public final static int CMD_OFF   = 1;
+  public final static int CMD_SCAN  = 2;
+  public final static int CMD_SHOT  = 3;
+  public final static int CMD_LASER = 4;
 
   static float getDistance( byte[] bytes ) { return BleUtils.getFloat( bytes,  8 ); }
   static float getAzimuth( byte[] bytes )  { return BleUtils.getFloat( bytes, 12 ); }

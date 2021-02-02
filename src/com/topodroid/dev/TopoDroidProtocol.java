@@ -44,13 +44,6 @@ public class TopoDroidProtocol
 
   protected static final UUID MY_UUID = UUID.fromString( "00001101-0000-1000-8000-00805F9B34FB" );
 
-  // protocol packet types
-  static final int DISTOX_PACKET_NONE   = 0;
-  static final int DISTOX_PACKET_DATA   = 1;
-  static final int DISTOX_PACKET_G      = 2;
-  static final int DISTOX_PACKET_M      = 3;
-  static final int DISTOX_PACKET_VECTOR = 4;
-  static final int DISTOX_PACKET_REPLY  = 5;
 
   static final int DISTOX_ERR_OK           =  0; // OK: no error
   static final int DISTOX_ERR_HEADTAIL     = -1;
@@ -160,13 +153,13 @@ public class TopoDroidProtocol
    */
   protected int handlePacket( byte[] buffer )
   {
-    byte type = (byte)(buffer[0] & 0x3f);
-    if ( TDLog.LOG_PROTO ) {
-      TDLog.DoLog( "handle packet type " + type + " " + 
-        String.format("%02x %02x %02x %02x %02x %02x %02x %02x", buffer[0], buffer[1], buffer[2],
-        buffer[3], buffer[4], buffer[5], buffer[6], buffer[7] ) );
-    }
     if ( TDSetting.mPacketLog ) logPacket( 0L, buffer );
+    byte type = (byte)(buffer[0] & 0x3f);
+    // if ( TDLog.LOG_PROTO ) {
+    //   TDLog.DoLog( "handle packet type " + type + " " + 
+    //     String.format("%02x %02x %02x %02x %02x %02x %02x %02x", buffer[0], buffer[1], buffer[2],
+    //     buffer[3], buffer[4], buffer[5], buffer[6], buffer[7] ) );
+    // }
     // Log.v( "DistoX-BLE-TP", "handle packet type " + type + " " + 
     //     String.format("%02x %02x %02x %02x %02x %02x %02x %02x", buffer[0], buffer[1], buffer[2],
     //     buffer[3], buffer[4], buffer[5], buffer[6], buffer[7] ) );
@@ -218,12 +211,12 @@ public class TopoDroidProtocol
         if ( c >= 32768 ) { mClino = (65536 - c) * (-90.0) / 16384.0; }
         mRoll = r * 180.0 / 128.0;
 
-        if ( TDLog.LOG_PROTO ) {
-          TDLog.DoLog( "Proto packet D " +
-            String.format(Locale.US, " %7.2f %6.1f %6.1f (%6.1f)", mDistance, mBearing, mClino, mRoll ) );
-        }
+        // if ( TDLog.LOG_PROTO ) {
+        //   TDLog.DoLog( "Proto packet D " +
+        //     String.format(Locale.US, " %7.2f %6.1f %6.1f (%6.1f)", mDistance, mBearing, mClino, mRoll ) );
+        // }
         // Log.v( "DistoX-BLE-TP", String.format(Locale.US, "Packet-D %7.2f %6.1f %6.1f (%6.1f)", mDistance, mBearing, mClino, mRoll ) );
-        return DISTOX_PACKET_DATA;
+        return DataType.PACKET_DATA;
       case 0x02: // G
         mGX = MemoryOctet.toInt( buffer[2], buffer[1] );
         mGY = MemoryOctet.toInt( buffer[4], buffer[3] );
@@ -232,8 +225,8 @@ public class TopoDroidProtocol
         if ( mGX > TDUtil.ZERO ) mGX = mGX - TDUtil.NEG;
         if ( mGY > TDUtil.ZERO ) mGY = mGY - TDUtil.NEG;
         if ( mGZ > TDUtil.ZERO ) mGZ = mGZ - TDUtil.NEG;
-        TDLog.Log( TDLog.LOG_PROTO, "Proto packet G " + String.format(" %x %x %x", mGX, mGY, mGZ ) );
-        return DISTOX_PACKET_G;
+        // TDLog.Log( TDLog.LOG_PROTO, "Proto packet G " + String.format(" %x %x %x", mGX, mGY, mGZ ) );
+        return DataType.PACKET_G;
       case 0x03: // M
         mMX = MemoryOctet.toInt( buffer[2], buffer[1] );
         mMY = MemoryOctet.toInt( buffer[4], buffer[3] );
@@ -242,8 +235,8 @@ public class TopoDroidProtocol
         if ( mMX > TDUtil.ZERO ) mMX = mMX - TDUtil.NEG;
         if ( mMY > TDUtil.ZERO ) mMY = mMY - TDUtil.NEG;
         if ( mMZ > TDUtil.ZERO ) mMZ = mMZ - TDUtil.NEG;
-        TDLog.Log( TDLog.LOG_PROTO, "Proto packet M " + String.format(" %x %x %x", mMX, mMY, mMZ ) );
-        return DISTOX_PACKET_M;
+        // TDLog.Log( TDLog.LOG_PROTO, "Proto packet M " + String.format(" %x %x %x", mMX, mMY, mMZ ) );
+        return DataType.PACKET_M;
       case 0x04: // Vector data packet
         if ( mDeviceType == Device.DISTO_X310 ) {
           mBackshot = ( (buffer[0] & 0x40) == 0x40 );
@@ -256,14 +249,14 @@ public class TopoDroidProtocol
           mDip = dip * 90.0  / 16384.0; // 90/0x4000;
           if ( dip >= 32768 ) { mDip = (65536 - dip) * (-90.0) / 16384.0; }
           mRoll  = rh * 180.0 / 32768.0; // 180/0x8000;
-          if ( TDLog.LOG_PROTO ) {
-            TDLog.DoLog( "Proto packet V " +
-              String.format(Locale.US, " %.2f %.2f %.2f roll %.1f", mAcceleration, mMagnetic, mDip, mRoll ) );
-	  }
+          // if ( TDLog.LOG_PROTO ) {
+          //   TDLog.DoLog( "Proto packet V " +
+          //     String.format(Locale.US, " %.2f %.2f %.2f roll %.1f", mAcceleration, mMagnetic, mDip, mRoll ) );
+	  // }
           // Log.v( "Proto packet V ",
           //     String.format(Locale.US, " %.2f %.2f %.2f roll %.1f", mAcceleration, mMagnetic, mDip, mRoll ) );
         }
-        return DISTOX_PACKET_VECTOR;
+        return DataType.PACKET_VECTOR;
       case 0x38:  // Reply packet
         mAddress[0] = buffer[1];
         mAddress[1] = buffer[2];
@@ -273,18 +266,18 @@ public class TopoDroidProtocol
           mReplyBuffer[1] = buffer[4];
           mReplyBuffer[2] = buffer[5];
           mReplyBuffer[3] = buffer[6];
-          TDLog.Log( TDLog.LOG_PROTO, "handle Packet mReplyBuffer" );
+          // TDLog.Log( TDLog.LOG_PROTO, "handle Packet mReplyBuffer" );
           // TODO
         }
-        return DISTOX_PACKET_REPLY;
+        return DataType.PACKET_REPLY;
       default:
         TDLog.Error( 
           "packet error. type " + type + " " + 
           String.format("%02x %02x %02x %02x %02x %02x %02x %02x", buffer[0], buffer[1], buffer[2],
           buffer[3], buffer[4], buffer[5], buffer[6], buffer[7] ) );
-      //   return DISTOX_PACKET_NONE;
+      //   return DataType.PACKET_NONE;
     }
-    return DISTOX_PACKET_NONE;
+    return DataType.PACKET_NONE;
   } 
 
 
@@ -296,7 +289,7 @@ public class TopoDroidProtocol
   int readPacket( boolean no_timeout, int data_type )
   {
     Log.v("DistoX-BLE-TP", "TD proto read_packet returns NONE");
-    return DISTOX_PACKET_NONE;
+    return DataType.PACKET_NONE;
   }
 
   /** write a command to the out channel

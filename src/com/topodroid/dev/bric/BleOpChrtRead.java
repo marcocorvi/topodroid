@@ -11,6 +11,8 @@
  */
 package com.topodroid.dev.bric;
 
+import com.topodroid.utils.TDLog; 
+
 import android.content.Context;
 
 import android.bluetooth.BluetoothDevice;
@@ -31,11 +33,16 @@ class BleOpChrtRead extends BleOperation
     mChrtUuid = chrt_uuid;
   }
 
+  String name() { return "ChrtRead"; }
+
   @Override 
   void execute()
   {
-    // Log.v("BLEX", "exec chrt read");
-    if ( mPipe == null ) { Log.v("BLEX", "ERROR null pipe" ); return; }
+    // Log.v("DistoX-BLE_B", "BleOp exec chrt read");
+    if ( mPipe == null ) { 
+      TDLog.Error("BleOp chrt read: ERROR null pipe" );
+      return;
+    }
     mPipe.readChrt( mSrvUuid, mChrtUuid );
   }
 }

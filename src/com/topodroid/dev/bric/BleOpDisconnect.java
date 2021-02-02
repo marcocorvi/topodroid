@@ -24,12 +24,14 @@ class BleOpDisconnect extends BleOperation
     super( ctx, pipe );
   }
 
+  String name() { return "Disconnect"; }
+
   @Override 
   void execute()
   {
-    // Log.v("BRIC", "exec disconnect");
+    // Log.v("DistoX-BLE_B", "BleOp exec disconnect");
     if ( mPipe == null ) { 
-      TDLog.Error("BRIC error: disconnect null pipe" );
+      TDLog.Error("BleOp disconnect error: null pipe" );
       return;
     }
     if ( mPipe != null ) mPipe.disconnectGatt();

@@ -64,7 +64,7 @@ public class BleScanDialog extends MyDialog
     mBTadapter = adapter;
     uuid_str   = uuid;
     mDevices   = new ArrayList< BluetoothDevice >();
-    // Log.v("BLEX", "scan dialog cstr");
+    // Log.v("DistoX-BLE-B", "Ble scan cstr");
   }  
 
   @Override
@@ -94,14 +94,14 @@ public class BleScanDialog extends MyDialog
     }
     dismiss();
     BluetoothDevice device = mDevices.get( pos );
-    // Log.v( "BRIC", "scan dialog on item click: " + BleUtils.deviceToString( device ) );
+    // Log.v( "DistoX-BLE-B", "BLE scan on item click: " + BleUtils.deviceToString( device ) );
     mActivity.setBLEDevice( device );
   }
 
   @Override
   public void onClick( View v )
   {
-    // Log.v( "BLEX", "scan dialog on click" );
+    // Log.v( "DistoX-BLE-B", "BLE scan on click" );
     if ( v.getId() == R.id.stop_scan ) {
       if ( mBleScanner != null ) { 
         stopScan();
@@ -125,7 +125,7 @@ public class BleScanDialog extends MyDialog
 
   private void startScan( )
   {
-    // Log.v( "BLEX", "==== start scan");
+    // Log.v( "DistoX-BLE-B", "BLE scan ==== start");
     mAdapter.clear();
     mDevices.clear();
     // mList.invalidate();
@@ -137,7 +137,7 @@ public class BleScanDialog extends MyDialog
 
   private void stopScan()
   {
-    // Log.v( "BLEX", "==== stop scan");
+    // Log.v( "DistoX-BLE-B", "BLE scan ==== stop");
     mBtnStop.setText( mContext.getResources().getString( R.string.start_scan ) );
     if ( mBleScanner != null ) {
       mBleScanner.stopScan();

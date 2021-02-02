@@ -119,7 +119,7 @@ public class TopoDroidComm
           
           int res = mProtocol.readPacket( (toRead >= 0), mDataType );
           // TDLog.Log( TDLog.LOG_COMM, "RF comm read_packet returns " + res );
-          if ( res == TopoDroidProtocol.DISTOX_PACKET_NONE ) {
+          if ( res == DataType.PACKET_NONE ) {
             if ( toRead == -1 ) {
               doWork = false;
             } else {
@@ -151,12 +151,14 @@ public class TopoDroidComm
     }
   }
 
-  // @param res    packet type (as returned by handlePacket)
+  // @param res    packet type (as returned by handlePacket / or set by Protocol )
   // @param lister data lister
   // @param data_type unused
-  protected void handleRegularPacket( int res, Handler lister, int data_type )
+  public void handleRegularPacket( int res, Handler lister, int data_type )
   {
-    if ( res == TopoDroidProtocol.DISTOX_PACKET_DATA ) {
+    // Log.v( "DistoX-BLE-TC", "Comm PACKET " + res + "/" + DataType.PACKET_DATA + " type " + data_type );
+    if ( res == DataType.PACKET_DATA ) {
+      // Log.v("DistoX-BLE-TC", "packet DATA");
       // mNrPacketsRead.incrementAndGet(); // FIXME_ATOMIC_INT
       ++mNrPacketsRead;
       double d = mProtocol.mDistance;
@@ -165,8 +167,8 @@ public class TopoDroidComm
       double r = mProtocol.mRoll;
       // extend is unset to start
       // long extend = TDAzimuth.computeLegExtend( b ); // ExtendType.EXTEND_UNSET; FIXME_EXTEND 
-      TDLog.Log( TDLog.LOG_COMM, "Comm D PACKET " + d + " " + b + " " + c );
-      // Log.v( "DistoX-BLE-TC", "Comm D PACKET " + d + " " + b + " " + c );
+      // TDLog.Log( TDLog.LOG_COMM, "Comm D PACKET " + d + " " + b + " " + c );
+      Log.v("DistoX-BLE-TC", "Comm D PACKET " + d + " " + b + " " + c );
       // NOTE type=0 shot is DistoX-type
       long status = ( d > TDSetting.mMaxShotLength )? TDStatus.OVERSHOOT : TDStatus.NORMAL;
       mLastShotId = TopoDroidApp.mData.insertDistoXShot( TDInstance.sid, -1L, d, b, c, r, ExtendType.EXTEND_IGNORE, status, TDInstance.deviceAddress() );
@@ -179,6 +181,8 @@ public class TopoDroidComm
         if ( TDInstance.deviceType() == Device.DISTO_A3 && TDSetting.mWaitData > 10 ) {
           TDUtil.slowDown( TDSetting.mWaitData );
         }
+      } else {
+        Log.v("DistoX-BLE-TC", "null Lister");
       }
       // if ( lister != null ) {
       //   DBlock blk = new DBlock( );
@@ -189,17 +193,19 @@ public class TopoDroidComm
       //   blk.mRoll    = (float)r;
       //   lister.updateBlockList( blk );
       // }
-    } else if ( res == TopoDroidProtocol.DISTOX_PACKET_G ) {
-      TDLog.Log( TDLog.LOG_COMM, "Comm G PACKET" );
+    } else if ( res == DataType.PACKET_G ) {
+      // Log.v("DistoX-BLE-TC", "packet G");
+      /// TDLog.Log( TDLog.LOG_COMM, "Comm G PACKET" );
       // mNrPacketsRead.incrementAndGet(); // FIXME_ATOMIC_INT
       ++mNrPacketsRead;
       mHasG = true;
-    } else if ( res == TopoDroidProtocol.DISTOX_PACKET_M ) {
-      TDLog.Log( TDLog.LOG_COMM, "Comm M PACKET" );
+    } else if ( res == DataType.PACKET_M ) {
+      // Log.v("DistoX-BLE-TC", "packet M");
+      // TDLog.Log( TDLog.LOG_COMM, "Comm M PACKET" );
       // mNrPacketsRead.incrementAndGet(); // FIXME_ATOMIC_INT
       ++mNrPacketsRead;
       // get G and M from mProtocol and save them to store
-      TDLog.Log( TDLog.LOG_COMM, "G " + mProtocol.mGX + " " + mProtocol.mGY + " " + mProtocol.mGZ + " M " + mProtocol.mMX + " " + mProtocol.mMY + " " + mProtocol.mMZ );
+      // TDLog.Log( TDLog.LOG_COMM, "G " + mProtocol.mGX + " " + mProtocol.mGY + " " + mProtocol.mGZ + " M " + mProtocol.mMX + " " + mProtocol.mMY + " " + mProtocol.mMZ );
       long cblk = TopoDroidApp.mDData.insertGM( TDInstance.cid, mProtocol.mGX, mProtocol.mGY, mProtocol.mGZ, mProtocol.mMX, mProtocol.mMY, mProtocol.mMZ );
       if ( lister != null ) {
         Message msg = lister.obtainMessage( Lister.LIST_UPDATE );
@@ -219,7 +225,8 @@ public class TopoDroidComm
         // }
       }
       mHasG = false;
-    } else if ( res == TopoDroidProtocol.DISTOX_PACKET_REPLY ) {
+    } else if ( res == DataType.PACKET_REPLY ) {
+      // Log.v("DistoX-BLE-TC", "packet REPLY");
       // TODO handle packet reply
       //
       // byte[] addr = mProtocol.getAddress();
@@ -243,7 +250,8 @@ public class TopoDroidComm
       //   // mHead = (int)( reply[0] | ( (int)(reply[1]) << 8 ) );
       //   // mTail = (int)( reply[2] | ( (int)(reply[3]) << 8 ) );
       // }
-    } else if ( res == TopoDroidProtocol.DISTOX_PACKET_VECTOR ) {
+    } else if ( res == DataType.PACKET_VECTOR ) {
+      // Log.v("DistoX-BLE-TC", "packet VECTOR");
       // vector packet do count
       // mNrPacketsRead.incrementAndGet(); // FIXME_ATOMIC_INT
       ++mNrPacketsRead;
@@ -252,13 +260,15 @@ public class TopoDroidComm
       double dip  = mProtocol.mDip;
       double roll = mProtocol.mRoll;
       boolean backshot = mProtocol.mBackshot;
-      TDLog.Log( TDLog.LOG_COMM, "Comm V PACKET " + mLastShotId + " " + acc + " " + mag + " " + dip + " " + roll );
+      // TDLog.Log( TDLog.LOG_COMM, "Comm V PACKET " + mLastShotId + " " + acc + " " + mag + " " + dip + " " + roll );
       if ( TDInstance.deviceType() == Device.DISTO_X310 ) {
         TopoDroidApp.mData.updateShotAMDR( mLastShotId, TDInstance.sid, acc, mag, dip, roll, backshot );
         if ( TDSetting.mWaitData > 10 ) {
           TDUtil.slowDown( TDSetting.mWaitData );
         }
       }
+    } else {
+      TDLog.Error("DistoX packet UNKNOWN");
     }
   }
 
@@ -330,7 +340,7 @@ public class TopoDroidComm
 
   public boolean isCommThreadNull( ) { return ( mCommThread == null ); }
 
-  protected boolean sendCommand( int cmd )
+  public boolean sendCommand( int cmd )
   {
     // TDLog.Log( TDLog.LOG_COMM, "VD comm send cmd " + cmd );
     boolean ret = false;

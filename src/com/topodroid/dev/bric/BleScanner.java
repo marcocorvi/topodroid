@@ -57,7 +57,7 @@ public class BleScanner
   {
     mParent    = parent;
     mBTAdapter = adapter;
-    // Log.v("BRIC", "ble scanner cstr");
+    // Log.v("DistoX-BLE-B", "BLE scanner cstr");
   }
 
   /** 
@@ -72,11 +72,11 @@ public class BleScanner
     // if ( adapter == null ) return false;
 
     if ( mScanning ) {
-      Log.v("BRIC", "scanner already scanning");
+      Log.v("DistoX-BLE-B", "BLE scanner already scanning");
       return true; // already scanning
     }
     mScanning = true;
-    // Log.v("BRIC", "scanner start scan");
+    // Log.v("DistoX-BLE-B", "BLE scanner start scan");
 
     // FIXME mParent.disconnectGatt();
     if ( Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT ) {
@@ -85,7 +85,7 @@ public class BleScanner
       mScanCallback = new ScanCallback() {
         @Override public void onScanResult( int type, ScanResult result ) 
         {
-          // Log.v("BRIC", "on scan result");
+          // Log.v("DistoX-BLE-B", "BLE scanner on scan result");
           BluetoothDevice device = getDevice( result );
           if ( device != null ) setRemoteDevice( device );
           stopScan();
@@ -93,7 +93,7 @@ public class BleScanner
 
         @Override public void onBatchScanResults( List< ScanResult > results )
         {
-          // Log.v("BRIC", "on batch scan result");
+          // Log.v("DistoX-BLE-B", "BLE scanner on batch scan result");
           for ( ScanResult result : results ) {
             BluetoothDevice device = getDevice( result );
             if ( device != null ) setRemoteDevice( device );
@@ -104,7 +104,7 @@ public class BleScanner
 
         @Override public void onScanFailed( int error )
         {
-          Log.v("BRIC", "on scan fail");
+          Log.v("DistoX-BLE-B", "BLE scanner on scan fail");
           mParent.notifyBleScan( null );
         }
       };
@@ -144,13 +144,13 @@ public class BleScanner
   private BluetoothDevice getDevice( ScanResult result )
   {
     int rssi = result.getRssi();
-    // Log.v("BRIC", "device RSSI " + rssi );
+    // Log.v("DistoX-BLE-B", "BLE scanner device RSSI " + rssi );
     ScanRecord record = result.getScanRecord();
     if ( record != null ) {
-      // Log.v("BRIC", "device name " + record.getDeviceName() );
+      // Log.v("DistoX-BLE-B", "BLE scanner device name " + record.getDeviceName() );
       List< ParcelUuid > uuids = record.getServiceUuids();
       if ( uuids != null ) {
-        for ( ParcelUuid uuid : uuids ) Log.v("BRIC", uuid.toString() );
+        for ( ParcelUuid uuid : uuids ) Log.v("DistoX-BLE-B", "BLE scanner uuid " + uuid.toString() );
       }
     }
     return result.getDevice();
@@ -158,7 +158,7 @@ public class BleScanner
 
   void stopScan()
   {
-    // Log.v("BRIC", "stop scan");
+    // Log.v("DistoX-BLE-B", "BLE scanner stop scan");
     if ( mScanHandler != null && mScanHandlerRunnable != null ) {
       mScanHandler.removeCallbacks( mScanHandlerRunnable );
     }
@@ -180,7 +180,7 @@ public class BleScanner
 
   private void setRemoteDevice( final BluetoothDevice device )
   {
-    // Log.v("BRIC", "set remote device " + device.getName() );
+    // Log.v("DistoX-BLE-B", "BLE scanner set remote device " + device.getName() );
     mParent.notifyBleScan( device );
   }
 

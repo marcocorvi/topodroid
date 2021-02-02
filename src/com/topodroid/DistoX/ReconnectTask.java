@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.dev.ConnectionState;
 
 // import android.util.Log;
 
@@ -57,7 +58,7 @@ class ReconnectTask extends AsyncTask< String, Integer, Integer >
   @Override
   protected void onPostExecute( Integer res )
   {
-    // mDownloader.notifyConnectionStatus( mDownloader.isConnected()? DataDownloader.STATUS_ON : DataDownloader.STATUS_WAIT );
+    // mDownloader.notifyConnectionStatus( mDownloader.isConnected()? ConnectionState.CONN_CONNECTED : ConnectionState.CONN_WAITING );
     unlock();
   }
 

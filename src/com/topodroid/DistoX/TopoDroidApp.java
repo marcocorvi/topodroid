@@ -22,13 +22,14 @@ import com.topodroid.prefs.TDPrefHelper;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.packetX.MemoryOctet;
 import com.topodroid.dev.Device;
+import com.topodroid.dev.ConnectionState;
 import com.topodroid.dev.TopoDroidComm;
 import com.topodroid.dev.DistoX310Comm;
 import com.topodroid.dev.DistoXA3Comm;
 import com.topodroid.dev.DeviceA3Info;
 import com.topodroid.dev.DeviceX310Info;
 import com.topodroid.dev.DeviceX310Details;
-import com.topodroid.dev.SapComm;
+import com.topodroid.dev.sap.SapComm;
 import com.topodroid.dev.bric.BricComm;
 import com.topodroid.dev.PairingRequest;
 import com.topodroid.common.LegType;
@@ -485,7 +486,15 @@ public class TopoDroidApp extends Application
     // Log.v( "DistoX-BLE-A", "disconnect. comm is " + ((mComm==null)? "null" : "non-null") );
     if ( mComm != null ) mComm.disconnectDevice();
   }
+
+  public void notifyConnectionState( int state )
+  {
+    // TODO
+    Log.v("DistoX-BLE-T", "notify conn state " + state + " TODO" );
+  }
   // end FIXME_COMM
+
+  // --------------------------------------------------------------------------------------
 
   public DeviceA3Info readDeviceA3Info( String address )
   {
@@ -622,49 +631,51 @@ public class TopoDroidApp extends Application
         mComm = new DistoXA3Comm( this );
       } else if ( TDInstance.isDeviceSap() ) {
         String address = TDInstance.deviceAddress();
-        BluetoothDevice bt_device = getBleDevice();
-        // Log.v("DistoX-BLE-A", "create sap comm [1] address " + address + " BT " + ((bt_device==null)? "null" : bt_device.getAddress() ) );
+        BluetoothDevice bt_device = TDInstance.getBleDevice();
+        Log.v("DistoX-BLE-A", "create sap comm [1] address " + address + " BT " + ((bt_device==null)? "null" : bt_device.getAddress() ) );
         mComm = new SapComm( this, address, bt_device );
       } else if ( TDInstance.isDeviceBric() ) {
         String address = TDInstance.deviceAddress();
-        BluetoothDevice bt_device = getBleDevice();
+        BluetoothDevice bt_device = TDInstance.getBleDevice();
         Log.v("DistoX-BLE-A", "create bric comm [1] address " + address + " BT " + ((bt_device==null)? "null" : bt_device.getAddress() ) );
         mComm = new BricComm( this, this, address, bt_device );
       // } else if ( TDInstance.isDeviceBlex() ) {
       //   address = TDInstance.deviceAddress();
-      //   BluetoothDevice bt_device = getBleDevice();
+      //   BluetoothDevice bt_device = TDInstance.getBleDevice();
       //   // Log.v("DistoX-BLE-A", "create ble comm. address " + address + " BT " + ((bt_device==null)? "null" : bt_device.getAddress() ) );
       //   mComm = new BleComm( this, address, bt_device );
       }
     // }
   }
 
-  private BluetoothDevice getBleDevice( )
-  {
-    if ( TDInstance.bleDevice == null ) {
-      BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-      TDInstance.bleDevice = adapter.getRemoteDevice( TDInstance.deviceAddress() );
-    }
-    return TDInstance.bleDevice;
-  }
-
   void doBluetoothButton( Context ctx, ILister lister, Button b )
   {
-    if ( ! mDataDownloader.isDownloading() ) {
+    if ( TDInstance.isDeviceBric() ) {
+      if ( TDLevel.overAdvanced ) {
+        CutNPaste.showPopupBT( ctx, lister, this, b, false );
+      } else {
+        doBluetoothReset( lister );
+      }
+    } else if ( ! mDataDownloader.isDownloading() ) {
       if ( TDLevel.overAdvanced
-             && TDInstance.isDeviceX310() 
+             && TDInstance.hasDeviceRemoteControl()
 	     && ! TDSetting.isConnectionModeMulti()
 	  ) {
         CutNPaste.showPopupBT( ctx, lister, this, b, false );
       } else {
-        mDataDownloader.setDownload( false );
-        mDataDownloader.stopDownloadData();
-        lister.setConnectionStatus( mDataDownloader.getStatus() );
-        this.resetComm();
-        TDToast.make(R.string.bt_reset );
+        doBluetoothReset( lister );
       }
     // } else { // downloading: nothing
     }
+  }
+
+  private void doBluetoothReset( ILister lister )
+  {
+    mDataDownloader.setDownload( false );
+    mDataDownloader.stopDownloadData();
+    lister.setConnectionStatus( mDataDownloader.getStatus() );
+    this.resetComm();
+    TDToast.make(R.string.bt_reset );
   }
  
   // @param dm     metrics
@@ -1343,17 +1354,17 @@ public class TopoDroidApp extends Application
         String model = Device.typeToString( TDInstance.deviceType() );
         // address, model, head, tail, name, nickname
         TDInstance.deviceA = new Device( address, model, 0, 0, null, null );
-        TDInstance.bleDevice = bt_device;
+        TDInstance.setBleDevice( bt_device );
         // Log.v("DistoX-BLE-A", "create ble comm [2] address " + address + " model " + model + " device " + (bt_device==null? "null" : bt_device.getAddress() ) );
-        // if ( address.startsWith("") {
+        if ( TDInstance.deviceA.isSap() ) {
           mComm = new SapComm( this, address, bt_device ); 
-        // } else if ( address.startsWith("") {
-        //   mComm = new BricComm( this, address, bt_device );
-        // }
+        } else if ( TDInstance.deviceA.isBric() ) {
+          mComm = new BricComm( this, this, address, bt_device );
+        }
       } else {
         boolean create = TDInstance.isDeviceZeroAddress() || Device.isBle( TDInstance.deviceType() );
         TDInstance.deviceA = mDData.getDevice( address );
-        TDInstance.bleDevice = null;
+        TDInstance.setBleDevice( null );
         if ( create ) createComm();
       }
     }
@@ -1948,6 +1959,15 @@ public class TopoDroidApp extends Application
   }  
 
   // --------------------------------------------------------
+
+  public boolean sendBricCommand( int cmd )
+  {
+    if ( mComm != null && mComm instanceof BricComm ) {
+      Log.v("DistoX-BLE-T", "TD app send bric command " + cmd );
+      return mComm.sendCommand( cmd );
+    }
+    return false;
+  }
 
   /** 
    * @param what      what to do

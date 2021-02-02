@@ -105,6 +105,7 @@ class BleUtils
 
   static String bytesToString( byte[] bytes )
   {
+    if ( bytes == null ) return "null";
     StringBuilder sb = new StringBuilder();
     for ( byte b : bytes ) sb.append( (int)b ).append(" ");
     return sb.toString();

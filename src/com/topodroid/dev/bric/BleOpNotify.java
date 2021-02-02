@@ -24,28 +24,34 @@ import java.util.UUID;
 
 class BleOpNotify extends BleOperation 
 {
-  BluetoothGattCharacteristic mChrt;
   boolean mEnable;
+  UUID mSrvUuid;
+  // UUID mChrtUuid;
+  BluetoothGattCharacteristic mChrt;
 
-  BleOpNotify( Context ctx, BleComm pipe, BluetoothGattCharacteristic chrt, boolean enable )
+  BleOpNotify( Context ctx, BleComm pipe, UUID srvUuid, BluetoothGattCharacteristic chrt, boolean enable )
   {
     super( ctx, pipe );
+    mSrvUuid  = srvUuid;
+    // mChrtUuid = chrtUuid;
     mChrt = chrt;
-    mEnable = enable;
+    mEnable   = enable;
   }
+
+  String name() { return "Notify"; }
 
   @Override 
   void execute()
   {
-    // Log.v("BRIC", "exec notify " + mEnable );
+    // Log.v("DistoX-BLE-B", "BleOp exec notify " + mEnable );
     if ( mPipe == null ) { 
-      TDLog.Error("BRIC error: notify null pipe" );
+      TDLog.Error("BleOp notify error: null pipe" );
       return;
     }
     if ( mEnable ) {
-      mPipe.enableNotify( mChrt );
+      mPipe.enablePNotify( mSrvUuid, mChrt );
     } else {
-      // mPipe.disableNotify( mChrt );
+      // mPipe.disablePNotify( mSrvUuid, mChrt );
     }
   }
 }

@@ -29,12 +29,14 @@ class BleOpConnect extends BleOperation
     mDevice = device;
   }
 
+  String name() { return "Connect"; }
+
   @Override 
   void execute()
   {
-    // Log.v("BRIC", "exec connect");
+    // Log.v("DistoX-BLE-B", "BleOp exec connect");
     if ( mPipe == null ) { 
-      TDLog.Error("BRIC error: null pipe" );
+      TDLog.Error("BleOp connect error: null pipe" );
       return;
     }
     mPipe.connectGatt( mContext, mDevice );

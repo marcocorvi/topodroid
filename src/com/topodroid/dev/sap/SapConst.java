@@ -11,7 +11,7 @@
  *
  * WARNING TO BE FINISHED
  */
-package com.topodroid.dev;
+package com.topodroid.dev.sap;
 
 import java.util.UUID;
 

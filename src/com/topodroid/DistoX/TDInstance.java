@@ -22,6 +22,9 @@ import android.content.Context;
 import android.content.res.Resources;
 
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothAdapter;
+
+import android.util.Log;
 
 // static class (singleton) with instance data
 public class TDInstance
@@ -43,7 +46,26 @@ public class TDInstance
 
   public static Device  deviceA = null;
   static Device  deviceB = null; // second-DistoX
-  static BluetoothDevice bleDevice = null; // FIXME BLE_5
+
+  private static BluetoothDevice bleDevice = null; // FIXME BLE_5
+
+  static BluetoothDevice getBleDevice()
+  {
+    if ( bleDevice == null ) {
+      BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+      bleDevice = adapter.getRemoteDevice( TDInstance.deviceAddress() );
+    }
+    Log.v("DistoX-BLE-TD", "get ble device " + ((bleDevice == null)? "null" : bleDevice.getName() ) );
+    return bleDevice;
+  }
+
+  static void setBleDevice( BluetoothDevice dev ) 
+  { 
+    bleDevice = dev;
+    Log.v("DistoX-BLE-TD", "set ble device " + ( (dev==null)? "null" : dev.getName() ) );
+  }
+
+  static boolean isBleDevice() { return bleDevice != null; }
 
   public static int deviceType() { return (deviceA == null)? 0 : deviceA.mType; }
   public static String deviceAddress() { return (deviceA == null)? null : deviceA.mAddress; }
@@ -59,6 +81,11 @@ public class TDInstance
   static boolean isContinuousMode() 
   {
     return TDSetting.isConnectionModeContinuous() || deviceType() == Device.DISTO_SAP5;
+  }
+
+  static boolean hasDeviceRemoteControl() 
+  {
+    return deviceA != null && ( deviceA.isX310() || deviceA.isBric() ); 
   }
 
   // FIXME VitualDistoX
@@ -81,6 +108,8 @@ public class TDInstance
     deviceB = tmp;
     return true;
   }
+  
+  static boolean isDivingMode() { return datamode == SurveyInfo.DATAMODE_DIVING; }
 
   public static SharedPreferences getPrefs() { return PreferenceManager.getDefaultSharedPreferences( context ); }
 

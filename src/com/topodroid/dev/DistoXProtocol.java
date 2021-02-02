@@ -264,7 +264,7 @@ class DistoXProtocol extends TopoDroidProtocol
       // mError = DISTOX_ERR_OFF;
       return DISTOX_ERR_OFF;
     }
-    return DISTOX_PACKET_NONE;
+    return DataType.PACKET_NONE;
   }
 
   /** write a command to the out channel

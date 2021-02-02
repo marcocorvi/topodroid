@@ -36,14 +36,17 @@ class BleOpChrtWrite extends BleOperation
     bytes = Arrays.copyOf( b, b.length );
   }
 
+  String name() { return "ChrtWrite"; }
+
   @Override 
   void execute()
   {
     if ( mPipe == null ) { 
-      TDLog.Error( "BRIC error: null pipe" );
+      TDLog.Error( "BleOp chrt write error: null pipe" );
       return;
     }
-    boolean ret = mPipe.writeChrt( mSrvUuid, mChrtUuid, bytes );
-    Log.v("BRIC", "exec chrt write: ret " + ret );
+    // boolean ret = 
+      mPipe.writeChrt( mSrvUuid, mChrtUuid, bytes );
+    // Log.v("DistoX-BLE-B", "BleOp exec chrt write: ret " + ret );
   }
 }

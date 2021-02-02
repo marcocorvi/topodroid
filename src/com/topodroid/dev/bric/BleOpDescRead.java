@@ -24,9 +24,11 @@ class BleOpDescRead extends BleOperation
     super( ctx, pipe );
   }
 
+  String name() { return "DescRead"; }
+
   @Override 
   void execute()
   {
-    Log.v("BRIC", "exec desc read");
+    Log.v("DistoX-BLE-B", "BleOp exec desc read");
   }
 }

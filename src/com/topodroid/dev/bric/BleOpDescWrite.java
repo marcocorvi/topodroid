@@ -29,9 +29,11 @@ class BleOpDescWrite extends BleOperation
     bytes = Arrays.copyOf( b, b.length );
   }
 
+  String name() { return "DescWrite"; }
+
   @Override 
   void execute()
   {
-    Log.v("BRIC", "exec desc write");
+    Log.v("DistoX-BLE-B", "BleOp exec desc write");
   }
 }

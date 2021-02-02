@@ -24,9 +24,11 @@ class BleOpMtuRequest extends BleOperation
     super( ctx, pipe );
   }
 
+  String name() { return "MtuReq"; }
+
   @Override 
   void execute()
   {
-    Log.v("BRIC", "exec MTU request" );
+    Log.v("DistoX-BLE-B", "BleOp exec MTU request" );
   }
 }

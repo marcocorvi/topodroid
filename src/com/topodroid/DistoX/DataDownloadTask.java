@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.calib.CalibInfo;
+import com.topodroid.dev.ConnectionState;
 
 import android.util.Log;
 
@@ -88,7 +89,7 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
         unlock();
       }
       app.mDataDownloader.setDownload( false );
-      app.mDataDownloader.notifyConnectionStatus( DataDownloader.STATUS_OFF );
+      app.mDataDownloader.notifyConnectionStatus( ConnectionState.CONN_DISCONNECTED );
     }
     // Log.v("DistoX", "data download task post exec");
   }

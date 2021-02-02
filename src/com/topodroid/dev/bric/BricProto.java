@@ -12,6 +12,7 @@
 package com.topodroid.dev.bric;
 
 import com.topodroid.dev.Device;
+import com.topodroid.dev.DataType;
 import com.topodroid.dev.TopoDroidProtocol;
 import com.topodroid.DistoX.TopoDroidApp;
 import com.topodroid.utils.TDLog;
@@ -30,6 +31,7 @@ import android.bluetooth.BluetoothGattCallback;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -40,6 +42,7 @@ public class BricProto extends TopoDroidProtocol
   private ConcurrentLinkedQueue< BleOperation > mOps;
   private BricComm mComm;
   private Handler mLister;
+  private byte[] mLastTime;
 
   private Context mContext;
   BleCallback mCallback;
@@ -52,6 +55,8 @@ public class BricProto extends TopoDroidProtocol
   // float mRoll;
   // float mDip;
   int   mLastIndex;
+  short mYear;
+  char  mMonth, mDay, mHour, mMinute, mSecond, mCentisecond;
 
 
   public BricProto( Context ctx, TopoDroidApp app, Handler lister, Device device, BricComm comm )
@@ -61,17 +66,7 @@ public class BricProto extends TopoDroidProtocol
     mComm   = comm;
     mIndex  = -1;
     mLastIndex = -1;
-  }
-
-  public boolean sendCommand( byte cmd )
-  {
-    switch ( cmd ) {
-      case BricConst.CMD_SCAN:  return mComm.sendCommand( BricConst.COMMAND_SCAN ); 
-      case BricConst.CMD_SHOT:  return mComm.sendCommand( BricConst.COMMAND_SHOT ); 
-      case BricConst.CMD_LASER: return mComm.sendCommand( BricConst.COMMAND_LASER );
-      case BricConst.CMD_OFF:   return mComm.sendCommand( BricConst.COMMAND_OFF );  
-    }
-    return false;
+    mLastTime = null;
   }
 
 
@@ -79,6 +74,7 @@ public class BricProto extends TopoDroidProtocol
   // DATA
   void addMeasPrim( byte[] bytes ) 
   {
+    // Log.v("DistoX-BLE-B", "BRIC proto: meas_prim " );
     mDistance = BricConst.getDistance( bytes );
     mBearing  = BricConst.getAzimuth( bytes );
     mClino    = BricConst.getClino( bytes );
@@ -86,6 +82,7 @@ public class BricProto extends TopoDroidProtocol
 
   void addMeasMeta( byte[] bytes ) 
   {
+    // Log.v("DistoX-BLE-B", "BRIC proto: meas_meta " );
     mIndex = BricConst.getIndex( bytes );
     mRoll  = BricConst.getRoll( bytes );
     mDip   = BricConst.getDip( bytes );
@@ -93,14 +90,48 @@ public class BricProto extends TopoDroidProtocol
 
   void addMeasErr( byte[] bytes ) 
   {
+    // Log.v("DistoX-BLE-B", "BRIC proto: meas_err " );
   }
+
+  void setLastTime( byte[] bytes )
+  {
+    // Log.v("DistoX-BLE-B", "BRIC proto: set last time " + BleUtils.bytesToString( bytes ) );
+    mLastTime = Arrays.copyOfRange( bytes, 0, bytes.length );
+  }
+
+  void clearLastTime() { mLastTime = null; }
+
+  byte[] getLastTime() { return mLastTime; }
   
   void processData()
   {
-    if ( mIndex == mLastIndex ) return;
-    Log.v("BRIC", "process data index " + mIndex + " last " + mLastIndex );
-    mLastIndex = mIndex;
-    // TODO send data to the app / mLister
+    if ( mIndex == mLastIndex ) {
+      // Log.v("DistoX-BLE-B", "BRIC proto: skip data index " + mIndex + " last " + mLastIndex );
+      return;
+    }
+    // Log.v("DistoX-BLE-B", "BRIC proto: process data index " + mIndex + " last " + mLastIndex );
+    if ( mIndex != mLastIndex ) {
+      mLastIndex = mIndex;
+      // Log.v("DistoX-BLE-B", "BRIC proto send data to the app thru comm");
+      mComm.handleRegularPacket( DataType.PACKET_DATA, mLister, DataType.DATA_SHOT );
+    }
+  }
+
+  byte[] mPrevBytes = new byte[4]; // from TopoDroidProtocol double ... 
+
+  void addMeasPrimAndProcess( byte[] bytes )
+  {
+    boolean same_time = true;
+    for ( int k=0; k<4; ++k ) { // check only hour, minute, second, and centisecond
+      if ( mPrevBytes[k] != bytes[4+k] ) same_time = false;
+      mPrevBytes[k] = bytes[4+k];
+    }
+    if ( ! same_time ) {
+      mDistance = BricConst.getDistance( bytes );
+      mBearing  = BricConst.getAzimuth( bytes );
+      mClino    = BricConst.getClino( bytes );
+      mComm.handleRegularPacket( DataType.PACKET_DATA, mLister, DataType.DATA_SHOT );
+    }
   }
 
 }

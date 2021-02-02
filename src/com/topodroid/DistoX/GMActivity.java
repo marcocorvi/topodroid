@@ -894,7 +894,7 @@ public class GMActivity extends Activity
 
   private void doBluetooth( Button b )
   {
-    if ( TDLevel.overAdvanced && TDInstance.deviceType() == Device.DISTO_X310 ) {
+    if ( TDLevel.overAdvanced && TDInstance.hasDeviceRemoteControl() ) {
       CutNPaste.showPopupBT( this, this, mApp, b, true );
     } else {
       mApp.resetComm();
@@ -902,8 +902,11 @@ public class GMActivity extends Activity
     }
   }
 
+  // no GMActivity for BLE devices
   public void enableBluetoothButton( boolean enable )
   {
+    // if ( diving ) return;
+    // if ( TDInstance.isBleDevice() ) enable = true; // always enabled for BLE
     TDandroid.setButtonBackground( mButton1[BTN_BT], enable ? mBMbluetooth : mBMbluetooth_no );
     mButton1[BTN_BT].setEnabled( enable );
   }
@@ -918,7 +921,7 @@ public class GMActivity extends Activity
     if ( b == mButton1[ BTN_BT ] ) {
       // Log.v("DistoX", "BT button long click");
       // enableBluetoothButton(false);
-      new DeviceX310TakeShot( this, (TDSetting.mCalibShotDownload ? new ListerHandler(this) : null), mApp, 1, DataType.CALIB ).execute();
+      new DeviceX310TakeShot( this, (TDSetting.mCalibShotDownload ? new ListerHandler(this) : null), mApp, 1, DataType.DATA_CALIB ).execute();
       return true;
     }
     return false;
@@ -957,7 +960,7 @@ public class GMActivity extends Activity
         enableWrite( false );
         setTitleColor( TDColor.CONNECTED );
         ListerHandler handler = new ListerHandler( this ); // FIXME_LISTER
-        new DataDownloadTask( mApp, handler, this, DataType.CALIB ).execute();
+        new DataDownloadTask( mApp, handler, this, DataType.DATA_CALIB ).execute();
         TDandroid.setButtonBackground( mButton1[ BTN_DOWNLOAD ], mBMdownload_on );
         enableButtons( false );
       }

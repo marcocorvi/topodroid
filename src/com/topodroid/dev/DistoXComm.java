@@ -102,16 +102,16 @@ public class DistoXComm extends TopoDroidComm
           if ( DeviceUtil.ACTION_ACL_CONNECTED.equals( action ) ) {
             // TDLog.Log( TDLog.LOG_BT, "[C] ACL_CONNECTED " + device + " addr " + mAddress );
             mApp.mDataDownloader.updateConnected( true );
-            mApp.notifyStatus( DataDownloader.STATUS_ON );
+            mApp.notifyStatus( ConnectionState.CONN_CONNECTED );
           } else if ( DeviceUtil.ACTION_ACL_DISCONNECT_REQUESTED.equals( action ) ) {
             // TDLog.Log( TDLog.LOG_BT, "[C] ACL_DISCONNECT_REQUESTED " + device + " addr " + mAddress );
             mApp.mDataDownloader.updateConnected( false );
-            mApp.notifyStatus( DataDownloader.STATUS_OFF );
+            mApp.notifyStatus( ConnectionState.CONN_DISCONNECTED );
             closeSocket( );
           } else if ( DeviceUtil.ACTION_ACL_DISCONNECTED.equals( action ) ) {
             // TDLog.Log( TDLog.LOG_BT, "[C] ACL_DISCONNECTED " + device + " addr " + mAddress );
             mApp.mDataDownloader.updateConnected( false );
-            mApp.notifyStatus( DataDownloader.STATUS_OFF );
+            mApp.notifyStatus( ConnectionState.CONN_DISCONNECTED );
             closeSocket( );
             mApp.notifyDisconnected( data_type );
           }
@@ -126,8 +126,8 @@ public class DistoXComm extends TopoDroidComm
             TDLog.Log( TDLog.LOG_BT, "BOND STATE CHANGED unpaired (BONDED --> BONDING) " + device );
             if ( mBTSocket != null ) {
               // TDLog.Error( "[*] socket is not null: close and retry connect ");
-              mApp.mDataDownloader.setConnected( DataDownloader.STATUS_OFF );
-              mApp.notifyStatus( DataDownloader.STATUS_OFF );
+              mApp.mDataDownloader.setConnected( ConnectionState.CONN_DISCONNECTED );
+              mApp.notifyStatus( ConnectionState.CONN_DISCONNECTED );
               closeSocket( );
               mApp.notifyDisconnected( data_type );
               connectSocket( mAddress, data_type ); // returns immediately if mAddress == null
@@ -400,7 +400,7 @@ public class DistoXComm extends TopoDroidComm
   /** connect the socket to the device
    * @param address   remote devioce address
    */
-  protected boolean connectSocketAny( String address ) { return connectSocket( address, DataType.ALL); }
+  protected boolean connectSocketAny( String address ) { return connectSocket( address, DataType.DATA_ALL); }
 
   protected boolean connectSocket( String address, int data_type )
   {
