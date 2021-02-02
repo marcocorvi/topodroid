@@ -386,19 +386,19 @@
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Милиметровая-бумага</string>
 
-    <!-- TODO string name="start_scan">Start scan</string -->
-    <!-- TODO string name="stop_scan">Stop scan</string -->
-    <!-- TODO string name="title_scan">BLE scan</string -->
+    <string name="start_scan">Начать сканирование</string>
+    <string name="stop_scan">Остановить сканирование</string>
+    <string name="title_scan">Сканировать BLE</string>
     <string name="ble_scan_failed">Сбой сканирования BLE</string>
     <string name="ble_gatt_failure">Сбой BLE</string>
     <string name="ble_no_remote">Нет беспроводного устройства</string>
-    <!-- TODO string name="ble_control">Control</string -->
-    <!-- TODO string name="ble_connect">Connect</string -->
-    <!-- TODO string name="ble_disconnect">Disconnect</string -->
-    <!-- TODO string name="bric_scan">Scan</string -->
-    <!-- TODO string name="bric_shot">Shot</string -->
-    <!-- TODO string name="bric_laser">Laser</string -->
-    <!-- TODO string name="bric_off">Off</string -->
+    <string name="ble_control">Управление</string>
+    <string name="ble_connect">Подключить</string>
+    <string name="ble_disconnect">Отключить</string>
+    <string name="bric_scan">Сканировать</string>
+    <string name="bric_shot">Измерить</string>
+    <string name="bric_laser">Лазер</string>
+    <string name="bric_off">Выкл</string>
 
 
     <string name="popup_join_pt">Привязать к ближайшей точке</string>
