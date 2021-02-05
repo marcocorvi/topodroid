@@ -1,13 +1,13 @@
 
 <html><body>
-<h4>DistoX DEVICE SELECT</h4>
+<h4>DEVICE SELECT</h4>
 
 TopoDroid supports the following device:
 <ul>
 <li>DistoX (first version)</li>
 <li>DistoX2 (second version)</li>
 <li>SAP5 (Shetland Attack Pony), only models with bluetooth [T]</li>
-<LI>BRIC [T]</li>
+<LI>BRIC4 [T]</li>
 </ul>
 
 All devices must be paired with the Android.<br><p>
@@ -15,12 +15,57 @@ All devices must be paired with the Android.<br><p>
 Normally TopoDroid works with only one device. 
 The data can be downloaded continuously (<i>continuous</i> mode) or in batch (<i>on-demand</i> mode).
 The difference between the two modes is that the <i>continuous</i> mode remains active when the data download
-is finished, or the connection with the device is lost, while the <i>on-demand</i> mode is closed. <br>
+is finished, or the connection with the device is lost, while the <i>on-demand</i> mode is closed. <br><p>
+
 SAP5 and BRIC download the data only in continuous mode.<br><p>
 
 With DistoX's TopoDroid can work with more than one device at once, although 
 the data are still downloaded from only one device at a tine.<br>
 The <i>data download mode</i> must be set to <i>multi</i>.
 When it is so a long-tap on the <i>download</i> button brings up a dialog to choose from which DistoX to download the data.<br><p>
+
+<b>Shetland Attack Pony</b><br>
+
+TopoDroid supports the model of the Shetland Attack Pony, version 5 (SAP5), with bluetooth.<br>
+The device must have been previously "paired" with Android, using the <i>Settings</i> app.
+The PIN is "000000" (six zeros).<br>
+Afterward the SAP is listed among the known devices in the <i>Device Window</i>.
+It appears as "SAP XX MAC-address", where "XX" is the two-letter code of the SAP, for example "HG".<br>
+To select the SAP as current device tap on the its entry in the list.<br><p> 
+
+While connected, the SAP5 will transfer the reading of a shot values to the app, whether or not the shot data
+are stored or discarded on the device.<br>
+If not connected the values are not transferred to the app.<br>
+Upon reconnection the SAP5 does <u>not</u> transfer the shot data stored while not connected.<br><p>
+
+The SAP keeps in its internal memory the data that have been "stored".
+These can be retrieved as a Survex file, using the SAP PonyTrainer program.<br><p>
+
+The calibration of the SAP5 is done by the device and does not require an external program.<br><p> 
+
+<b>BRIC4</b><br>
+
+TopoDroid supports the BRIC version 4.<br>
+The device must have been previously "paired" with Android, using the <i>Settings</i> app.<br>
+Afterward the BRIC is listed among the known devices in the <i>Device Window</i>.
+It appears as "BRIC code MAC-address", where the code is the four-digit code of the BRIC, for example "0039".<br>
+To select the BRIC as current device tap on the its entry in the list.<br><p> 
+
+Once connected to a client, the BRIC remembers the connection, even if turned off, therefore it stays
+"always connected".<br>
+When TopoDroid is connected, shot readings are immediately transferred to the app.
+If TopoDroid is not connected, the data are kept in memory, and transferred to the app when it is
+next connected.<br><p>
+
+The BRIC stores the data in internal memory in CSV files. If connected to a PC via USB, the device
+appears as external memory and the CSV files can be copied to the PC.<br><p>
+
+The calibration of the BRIC4 is done by the device and does not require an external program.<br><p> 
+
+The BRIC4 can be controlled from the app. In particular it is possible to turn the laser on/off, and to take
+shots. The BRIC4 has also a "scan mode" in which readings are taken continuosly, about two every second.<br><p>
+
+
+
 
 </body></html>
