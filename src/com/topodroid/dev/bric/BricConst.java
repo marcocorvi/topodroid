@@ -12,6 +12,8 @@
 package com.topodroid.dev.bric;
 
 import java.util.UUID; 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class BricConst
 {
@@ -52,6 +54,8 @@ public class BricConst
   static float getTemp( byte[] bytes )     { return BleUtils.getFloat( bytes, 12 ); }
   static int   getType( byte[] bytes )     { return BleUtils.getChar(  bytes, 18 ); }
   static short getSamples( byte[] bytes )  { return BleUtils.getShort( bytes, 16 ); }
+
+  // get the timestamp in msec
   static long  getTimestamp( byte[] bytes ) 
   {
     int yy = BleUtils.getShort( bytes, 0 );
@@ -60,8 +64,10 @@ public class BricConst
     int HH = BleUtils.getChar( bytes, 4 );
     int MM = BleUtils.getChar( bytes, 5 );
     int SS = BleUtils.getShort( bytes, 6 );
-    // TODO
-    return 0;
+    int CS = BleUtils.getShort( bytes, 7 ); // centiseconds
+    Calendar date = new GregorianCalendar();
+    date.set( yy, mm, dd, HH, MM, SS );
+    return date.getTimeInMillis() + 10 * CS;
   }
 
 }

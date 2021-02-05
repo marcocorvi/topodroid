@@ -175,6 +175,7 @@ public class TopoDroidApp extends Application
   // }
   public void notifyStatus( final int status )
   { 
+    // Log.v("DistoX-BLE-A", "notify status " + status );
     if ( mActivity == null ) return;
     mActivity.runOnUiThread( new Runnable() { 
       public void run () { 
@@ -632,12 +633,12 @@ public class TopoDroidApp extends Application
       } else if ( TDInstance.isDeviceSap() ) {
         String address = TDInstance.deviceAddress();
         BluetoothDevice bt_device = TDInstance.getBleDevice();
-        Log.v("DistoX-BLE-A", "create sap comm [1] address " + address + " BT " + ((bt_device==null)? "null" : bt_device.getAddress() ) );
+        // Log.v("DistoX-BLE-A", "create sap comm [1] address " + address + " BT " + ((bt_device==null)? "null" : bt_device.getAddress() ) );
         mComm = new SapComm( this, address, bt_device );
       } else if ( TDInstance.isDeviceBric() ) {
         String address = TDInstance.deviceAddress();
         BluetoothDevice bt_device = TDInstance.getBleDevice();
-        Log.v("DistoX-BLE-A", "create bric comm [1] address " + address + " BT " + ((bt_device==null)? "null" : bt_device.getAddress() ) );
+        // Log.v("DistoX-BLE-A", "create bric comm [1] address " + address + " BT " + ((bt_device==null)? "null" : bt_device.getAddress() ) );
         mComm = new BricComm( this, this, address, bt_device );
       // } else if ( TDInstance.isDeviceBlex() ) {
       //   address = TDInstance.deviceAddress();
@@ -1963,7 +1964,7 @@ public class TopoDroidApp extends Application
   public boolean sendBricCommand( int cmd )
   {
     if ( mComm != null && mComm instanceof BricComm ) {
-      Log.v("DistoX-BLE-T", "TD app send bric command " + cmd );
+      // Log.v("DistoX-BLE-T", "TD app send bric command " + cmd );
       return mComm.sendCommand( cmd );
     }
     return false;

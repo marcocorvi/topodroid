@@ -25,30 +25,30 @@ import java.util.Arrays;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-class BleUtils
+public class BleUtils
 {
   // ------------------------------------------------------------------------------
   // UTIILS
 
-  final static String STANDARD_UUID =  "-0000-1000-8000-00805f9b34fb";
+  public final static String STANDARD_UUID =  "-0000-1000-8000-00805f9b34fb";
 
-  final static UUID CCCD_UUID = UUID.fromString("00002902-0000-1000-8000-00805f9b34fb");
+  public final static UUID CCCD_UUID = UUID.fromString("00002902-0000-1000-8000-00805f9b34fb");
   
-  static String uuidToString( UUID uuid )
+  public static String uuidToString( UUID uuid )
   {
     String ret = uuid.toString();
     if ( ret.endsWith( STANDARD_UUID ) ) return ret.substring(0,8);
     return ret;
   }
 
-  static String uuidToShortString( UUID uuid )
+  public static String uuidToShortString( UUID uuid )
   {
     String ret = uuid.toString().substring(0,8);
     if ( ret.startsWith("0000") ) return ret.substring(4,8);
     return ret;
   }
 
-  static UUID toUuid( String str ) 
+  public static UUID toUuid( String str ) 
   { 
     if ( str.length() <= 4 ) {
       return UUID.fromString( ( "0000" + str + STANDARD_UUID) );
@@ -58,7 +58,7 @@ class BleUtils
     return UUID.fromString( str );
   }
 
-  static String deviceToString( BluetoothDevice device )
+  public static String deviceToString( BluetoothDevice device )
   {
     String name = device.getName();
     if ( name == null ) name = "--";
@@ -67,7 +67,7 @@ class BleUtils
 
   // ------------------------------------------------------------------------------
   // DEBUG
-  static String chrtPropString( BluetoothGattCharacteristic chrt )
+  public static String chrtPropString( BluetoothGattCharacteristic chrt )
   {
     int prop = chrt.getProperties();
     String B = isChrtPBcast(prop)? "B" : ".";
@@ -87,7 +87,7 @@ class BleUtils
     return " props(" + prop + ") " + B + I + N + " " + r + w + s + n + " w-type " + wtype;
   } 
 
-  static String chrtPermString( BluetoothGattCharacteristic chrt )
+  public static String chrtPermString( BluetoothGattCharacteristic chrt )
   {
     int perm = chrt.getPermissions();
     boolean r = isChrtRead(perm)  || isChrtReadEnc(perm);
@@ -95,7 +95,7 @@ class BleUtils
     return " perms(" + perm + ") " + (r? "R" : ".") + (w? "W" : ".");
   } 
 
-  static String descPermString( BluetoothGattDescriptor desc )
+  public static String descPermString( BluetoothGattDescriptor desc )
   {
     int perm = desc.getPermissions();
     boolean r = isDescRead(perm)  || isDescReadEnc(perm);
@@ -103,7 +103,7 @@ class BleUtils
     return " perms(" + perm + ") " + (r? "R" : ".") + (w? "W" : ".");
   } 
 
-  static String bytesToString( byte[] bytes )
+  public static String bytesToString( byte[] bytes )
   {
     if ( bytes == null ) return "null";
     StringBuilder sb = new StringBuilder();
@@ -112,21 +112,21 @@ class BleUtils
   }
 
   // ------------------------------------------------------------------------------
-  static boolean isChrtPBcast( int prop )       { return (prop & BluetoothGattCharacteristic.PROPERTY_BROADCAST) != 0; }
-  static boolean isChrtPIndicate( int prop )    { return (prop & BluetoothGattCharacteristic.PROPERTY_INDICATE) != 0; }
-  static boolean isChrtPNotify( int prop )      { return (prop & BluetoothGattCharacteristic.PROPERTY_NOTIFY) != 0; }
-  static boolean isChrtPRead( int prop )        { return (prop & BluetoothGattCharacteristic.PROPERTY_READ) != 0; }
-  static boolean isChrtPWrite( int prop )       { return (prop & BluetoothGattCharacteristic.PROPERTY_WRITE) != 0; }
-  static boolean isChrtPWriteSign( int prop )   { return (prop & BluetoothGattCharacteristic.PROPERTY_SIGNED_WRITE) != 0; }
-  static boolean isChrtPWriteNoResp( int prop ) { return (prop & BluetoothGattCharacteristic.PROPERTY_WRITE_NO_RESPONSE) != 0; }
+  public static boolean isChrtPBcast( int prop )       { return (prop & BluetoothGattCharacteristic.PROPERTY_BROADCAST) != 0; }
+  public static boolean isChrtPIndicate( int prop )    { return (prop & BluetoothGattCharacteristic.PROPERTY_INDICATE) != 0; }
+  public static boolean isChrtPNotify( int prop )      { return (prop & BluetoothGattCharacteristic.PROPERTY_NOTIFY) != 0; }
+  public static boolean isChrtPRead( int prop )        { return (prop & BluetoothGattCharacteristic.PROPERTY_READ) != 0; }
+  public static boolean isChrtPWrite( int prop )       { return (prop & BluetoothGattCharacteristic.PROPERTY_WRITE) != 0; }
+  public static boolean isChrtPWriteSign( int prop )   { return (prop & BluetoothGattCharacteristic.PROPERTY_SIGNED_WRITE) != 0; }
+  public static boolean isChrtPWriteNoResp( int prop ) { return (prop & BluetoothGattCharacteristic.PROPERTY_WRITE_NO_RESPONSE) != 0; }
 
-  static boolean canChrtPNotify( BluetoothGattCharacteristic chrt )
+  public static boolean canChrtPNotify( BluetoothGattCharacteristic chrt )
   { 
     int prop = chrt.getProperties();
     return ( isChrtPIndicate( prop ) || isChrtPNotify( prop ) );
   }
 
-  static byte[] getChrtPNotify( BluetoothGattCharacteristic chrt )
+  public static byte[] getChrtPNotify( BluetoothGattCharacteristic chrt )
   { 
     int prop = chrt.getProperties();
     if ( isChrtPIndicate( prop ) ) return BluetoothGattDescriptor.ENABLE_INDICATION_VALUE;
@@ -134,18 +134,18 @@ class BleUtils
     return null;
   }
 
-  static boolean canChrtPRead( BluetoothGattCharacteristic chrt )
+  public static boolean canChrtPRead( BluetoothGattCharacteristic chrt )
   { 
     return isChrtPRead( chrt.getProperties() );
   }
 
-  static boolean canChrtPWrite( BluetoothGattCharacteristic chrt )
+  public static boolean canChrtPWrite( BluetoothGattCharacteristic chrt )
   { 
     int prop = chrt.getProperties();
     return isChrtPWrite(prop) || isChrtPWriteSign(prop) || isChrtPWriteNoResp(prop);
   }
 
-  static int getChrtWriteType( BluetoothGattCharacteristic chrt )
+  public static int getChrtWriteType( BluetoothGattCharacteristic chrt )
   {
     int prop = chrt.getProperties();
     if (  isChrtPWrite(prop) ) return BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT;
@@ -153,74 +153,74 @@ class BleUtils
     return -1;
   }
 
-  static boolean isChrtWDflt( int type )         { return (type & BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT) != 0; }
-  static boolean isChrtWNoResp( int type )       { return (type & BluetoothGattCharacteristic.WRITE_TYPE_NO_RESPONSE) != 0; }
-  static boolean isChrtWSign( int type )         { return (type & BluetoothGattCharacteristic.WRITE_TYPE_SIGNED) != 0; }
+  public static boolean isChrtWDflt( int type )         { return (type & BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT) != 0; }
+  public static boolean isChrtWNoResp( int type )       { return (type & BluetoothGattCharacteristic.WRITE_TYPE_NO_RESPONSE) != 0; }
+  public static boolean isChrtWSign( int type )         { return (type & BluetoothGattCharacteristic.WRITE_TYPE_SIGNED) != 0; }
 
-  static boolean isChrtRead( int perm )          { return (perm & BluetoothGattCharacteristic.PERMISSION_READ) != 0; }
-  static boolean isChrtWrite( int perm )         { return (perm & BluetoothGattCharacteristic.PERMISSION_WRITE) != 0; }
-  static boolean isChrtReadWrite( int perm )     { return isChrtRead( perm ) && isChrtWrite( perm ); }
-  static boolean isChrtReadEnc( int perm )       { return (perm & BluetoothGattCharacteristic.PERMISSION_READ_ENCRYPTED) != 0; }
-  static boolean isChrtWriteEnc( int perm )      { return (perm & BluetoothGattCharacteristic.PERMISSION_WRITE_ENCRYPTED) != 0; }
-  static boolean isChrtWriteSign( int perm )     { return (perm & BluetoothGattCharacteristic.PERMISSION_WRITE_SIGNED) != 0; }
-  static boolean isChrtReadEncMitm( int perm )   { return (perm & BluetoothGattCharacteristic.PERMISSION_READ_ENCRYPTED_MITM) != 0; }
-  static boolean isChrtWriteEncMitm( int perm )  { return (perm & BluetoothGattCharacteristic.PERMISSION_WRITE_ENCRYPTED_MITM) != 0; }
-  static boolean isChrtWriteSignMitm( int perm ) { return (perm & BluetoothGattCharacteristic.PERMISSION_WRITE_SIGNED_MITM) != 0; }
+  public static boolean isChrtRead( int perm )          { return (perm & BluetoothGattCharacteristic.PERMISSION_READ) != 0; }
+  public static boolean isChrtWrite( int perm )         { return (perm & BluetoothGattCharacteristic.PERMISSION_WRITE) != 0; }
+  public static boolean isChrtReadWrite( int perm )     { return isChrtRead( perm ) && isChrtWrite( perm ); }
+  public static boolean isChrtReadEnc( int perm )       { return (perm & BluetoothGattCharacteristic.PERMISSION_READ_ENCRYPTED) != 0; }
+  public static boolean isChrtWriteEnc( int perm )      { return (perm & BluetoothGattCharacteristic.PERMISSION_WRITE_ENCRYPTED) != 0; }
+  public static boolean isChrtWriteSign( int perm )     { return (perm & BluetoothGattCharacteristic.PERMISSION_WRITE_SIGNED) != 0; }
+  public static boolean isChrtReadEncMitm( int perm )   { return (perm & BluetoothGattCharacteristic.PERMISSION_READ_ENCRYPTED_MITM) != 0; }
+  public static boolean isChrtWriteEncMitm( int perm )  { return (perm & BluetoothGattCharacteristic.PERMISSION_WRITE_ENCRYPTED_MITM) != 0; }
+  public static boolean isChrtWriteSignMitm( int perm ) { return (perm & BluetoothGattCharacteristic.PERMISSION_WRITE_SIGNED_MITM) != 0; }
 
-  static boolean isChrtRead( BluetoothGattCharacteristic chrt )
+  public static boolean isChrtRead( BluetoothGattCharacteristic chrt )
   { 
     int perm = chrt.getPermissions();
     return isChrtRead( perm ) || isChrtReadEnc( perm ) || isChrtReadEncMitm( perm );
   }
 
-  static boolean isChrtWrite( BluetoothGattCharacteristic chrt )
+  public static boolean isChrtWrite( BluetoothGattCharacteristic chrt )
   { 
     int perm = chrt.getPermissions();
     return isChrtWrite( perm ) || isChrtWriteSign( perm ) || isChrtWriteSignMitm( perm ) || isChrtWriteEnc( perm ) || isChrtWriteEncMitm( perm );
   }
 
-  static boolean isDescRead( int perm )          { return (perm & BluetoothGattDescriptor.PERMISSION_READ) != 0; }
-  static boolean isDescWrite( int perm )         { return (perm & BluetoothGattDescriptor.PERMISSION_WRITE) != 0; }
-  static boolean isDescReadWrite( int perm )     { return isDescRead( perm ) && isDescWrite( perm ); }
-  static boolean isDescReadEnc( int perm )       { return (perm & BluetoothGattDescriptor.PERMISSION_READ_ENCRYPTED) != 0; }
-  static boolean isDescWriteEnc( int perm )      { return (perm & BluetoothGattDescriptor.PERMISSION_WRITE_ENCRYPTED) != 0; }
-  static boolean isDescWriteSign( int perm )     { return (perm & BluetoothGattDescriptor.PERMISSION_WRITE_SIGNED) != 0; }
-  static boolean isDescReadEncMitm( int perm )   { return (perm & BluetoothGattDescriptor.PERMISSION_READ_ENCRYPTED_MITM) != 0; }
-  static boolean isDescWriteEncMitm( int perm )  { return (perm & BluetoothGattDescriptor.PERMISSION_WRITE_ENCRYPTED_MITM) != 0; }
-  static boolean isDescWriteSignMitm( int perm ) { return (perm & BluetoothGattDescriptor.PERMISSION_WRITE_SIGNED_MITM) != 0; }
+  public static boolean isDescRead( int perm )          { return (perm & BluetoothGattDescriptor.PERMISSION_READ) != 0; }
+  public static boolean isDescWrite( int perm )         { return (perm & BluetoothGattDescriptor.PERMISSION_WRITE) != 0; }
+  public static boolean isDescReadWrite( int perm )     { return isDescRead( perm ) && isDescWrite( perm ); }
+  public static boolean isDescReadEnc( int perm )       { return (perm & BluetoothGattDescriptor.PERMISSION_READ_ENCRYPTED) != 0; }
+  public static boolean isDescWriteEnc( int perm )      { return (perm & BluetoothGattDescriptor.PERMISSION_WRITE_ENCRYPTED) != 0; }
+  public static boolean isDescWriteSign( int perm )     { return (perm & BluetoothGattDescriptor.PERMISSION_WRITE_SIGNED) != 0; }
+  public static boolean isDescReadEncMitm( int perm )   { return (perm & BluetoothGattDescriptor.PERMISSION_READ_ENCRYPTED_MITM) != 0; }
+  public static boolean isDescWriteEncMitm( int perm )  { return (perm & BluetoothGattDescriptor.PERMISSION_WRITE_ENCRYPTED_MITM) != 0; }
+  public static boolean isDescWriteSignMitm( int perm ) { return (perm & BluetoothGattDescriptor.PERMISSION_WRITE_SIGNED_MITM) != 0; }
 
-  static boolean isDescRead( BluetoothGattDescriptor desc )
+  public static boolean isDescRead( BluetoothGattDescriptor desc )
   { 
     int perm = desc.getPermissions();
     return isDescRead( perm ) || isDescReadEnc( perm ) || isDescReadEncMitm( perm );
   }
 
-  static boolean isDescWrite( BluetoothGattDescriptor desc )
+  public static boolean isDescWrite( BluetoothGattDescriptor desc )
   { 
     int perm = desc.getPermissions();
     return isDescWrite( perm ) || isDescWriteSign( perm ) || isDescWriteSignMitm( perm ) || isDescWriteEnc( perm ) || isDescWriteEncMitm( perm );
   }
 
   // ---------------------------------------------------------------------------------
-  static float getFloat( byte[] bytes, int offset )
+  public static float getFloat( byte[] bytes, int offset )
   {
     if ( offset+4 > bytes.length ) return 0;
     return ByteBuffer.wrap( bytes ).order(ByteOrder.LITTLE_ENDIAN).getFloat( offset );
   }
 
-  static int getInt( byte[] bytes, int offset )
+  public static int getInt( byte[] bytes, int offset )
   {
     if ( offset+4 > bytes.length ) return 0;
     return ByteBuffer.wrap( bytes ).order(ByteOrder.LITTLE_ENDIAN).getInt( offset );
   }
 
-  static short getShort( byte[] bytes, int offset )
+  public static short getShort( byte[] bytes, int offset )
   {
     if ( offset+2 > bytes.length ) return 0;
     return ByteBuffer.wrap( bytes ).order(ByteOrder.LITTLE_ENDIAN).getShort( offset );
   }
 
-  static int getChar( byte[] bytes, int offset )
+  public static int getChar( byte[] bytes, int offset )
   {
     if ( offset >= bytes.length ) return 0;
     int i = bytes[offset];

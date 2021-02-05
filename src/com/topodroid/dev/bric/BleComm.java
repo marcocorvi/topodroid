@@ -11,7 +11,6 @@
  */
 package com.topodroid.dev.bric;
 
-
 import android.content.Context;
 
 import android.bluetooth.BluetoothDevice;
@@ -44,7 +43,8 @@ public interface BleComm
   public boolean readChrt( UUID srvUuid, UUID chrtUuid );
   public boolean writeChrt( UUID srv_uuid, UUID chrt_uuid, byte[] bytes );
 
-  public boolean enablePNotify( UUID srcUuid, BluetoothGattCharacteristic chrt );
+  // public boolean enablePNotify( UUID srcUuid, BluetoothGattCharacteristic chrt );
+  public boolean enablePNotify( UUID srcUuid, UUID chrtUuid );
 
   public void connectGatt( Context ctx, BluetoothDevice device );
   public void disconnectGatt();
@@ -58,4 +58,6 @@ public interface BleComm
   // public void addService( BluetoothGattService srv );
   // public void addChrt( UUID srv_uuid, BluetoothGattCharacteristic chrt );
   // public void addDesc( UUID srv_uuid, UUID chrt_uuid, BluetoothGattDescriptor desc );
+
+  public void notifyStatus( int status );
 }

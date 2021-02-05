@@ -77,9 +77,8 @@ class SapProtocol extends TopoDroidProtocol
   }
 
   // @param crtr   GATT read characteristic
-  public int handleRead( BluetoothGattCharacteristic chrt )
+  public int handleRead( byte[] bytes )
   {
-    byte[] bytes = chrt.getValue();
     // Log.v("DistoX-BLE-S", "SAP proto read bytes " + bytes.length );
     byte[] buffer = new byte[8];
     System.arraycopy( bytes, 0, buffer, 0, 8 );
@@ -96,7 +95,7 @@ class SapProtocol extends TopoDroidProtocol
   {
     // Log.v("DistoX-BLE-S", "SAP proto notify: read " + read );
     if ( read ) {
-      return handleRead( chrt );
+      return handleRead( chrt.getValue() );
     } 
     return handleWrite( chrt );
   }

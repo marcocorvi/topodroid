@@ -78,9 +78,11 @@ public class TDInstance
   static boolean isDeviceSap()    { return deviceA != null && deviceA.isSap(); }
   static boolean isDeviceBric()   { return deviceA != null && deviceA.isBric(); }
 
+  static boolean isDeviceBLE()    { return deviceA != null && ( deviceA.isBric() || deviceA.isSap() ); }
+
   static boolean isContinuousMode() 
   {
-    return TDSetting.isConnectionModeContinuous() || deviceType() == Device.DISTO_SAP5;
+    return TDSetting.isConnectionModeContinuous() || isDeviceBLE();
   }
 
   static boolean hasDeviceRemoteControl() 

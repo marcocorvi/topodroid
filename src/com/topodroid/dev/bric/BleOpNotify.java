@@ -26,15 +26,24 @@ class BleOpNotify extends BleOperation
 {
   boolean mEnable;
   UUID mSrvUuid;
-  // UUID mChrtUuid;
-  BluetoothGattCharacteristic mChrt;
+  UUID mChrtUuid;
+  // BluetoothGattCharacteristic mChrt = null;
 
-  BleOpNotify( Context ctx, BleComm pipe, UUID srvUuid, BluetoothGattCharacteristic chrt, boolean enable )
+  // BleOpNotify( Context ctx, BleComm pipe, UUID srvUuid, BluetoothGattCharacteristic chrt, boolean enable )
+  // {
+  //   super( ctx, pipe );
+  //   mSrvUuid  = srvUuid;
+  //   mChrtUuid = chrt.getUuid();
+  //   mChrt = chrt;
+  //   mEnable   = enable;
+  // }
+
+  BleOpNotify( Context ctx, BleComm pipe, UUID srvUuid, UUID chrtUuid, boolean enable )
   {
     super( ctx, pipe );
     mSrvUuid  = srvUuid;
-    // mChrtUuid = chrtUuid;
-    mChrt = chrt;
+    mChrtUuid = chrtUuid;
+    // mChrt     = null;
     mEnable   = enable;
   }
 
@@ -49,9 +58,9 @@ class BleOpNotify extends BleOperation
       return;
     }
     if ( mEnable ) {
-      mPipe.enablePNotify( mSrvUuid, mChrt );
+      mPipe.enablePNotify( mSrvUuid, mChrtUuid );
     } else {
-      // mPipe.disablePNotify( mSrvUuid, mChrt );
+      // mPipe.disablePNotify( mSrvUuid, mChrtUuid );
     }
   }
 }

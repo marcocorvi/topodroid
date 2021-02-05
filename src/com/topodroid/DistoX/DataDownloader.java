@@ -78,6 +78,7 @@ public class DataDownloader
   boolean toggleDownload()
   {
     mDownload = ! mDownload;
+    mConnected = mDownload ? ConnectionState.CONN_WAITING : ConnectionState.CONN_DISCONNECTED;
     return mDownload;
     // Log.v("DistoX", "toggle download to " + mDownload );
   }
@@ -145,7 +146,7 @@ public class DataDownloader
           connected = ConnectionState.CONN_CONNECTED;
         }
         // Log.v( "DistoX-BLE-DD", "**** connect device returns " + connected );
-        if ( TDInstance.isDeviceSap() && connected == ConnectionState.CONN_CONNECTED ) {
+        if ( TDInstance.isDeviceBLE() && connected == ConnectionState.CONN_CONNECTED ) {
           mConnected = connected;
           mApp.notifyStatus( ConnectionState.CONN_WAITING );
         } else {
