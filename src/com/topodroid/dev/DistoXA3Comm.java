@@ -41,7 +41,7 @@ public class DistoXA3Comm extends DistoXComm
    */
   protected DistoXProtocol createProtocol( DataInputStream in, DataOutputStream out )
   {
-    return (new DistoXA3Protocol( in, out, TDInstance.deviceA, mApp ));
+    return (new DistoXA3Protocol( in, out, TDInstance.getDeviceA(), mApp ));
   }
   // -------------------------------------------------------- 
 

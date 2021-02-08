@@ -209,7 +209,7 @@ class DistoXProtocol extends TopoDroidProtocol
     int min_available = 1; // FIXME 8 should work in every case
 
     // TDLog.Log( TDLog.LOG_PROTO, "Protocol read packet no-timeout " + (no_timeout?"true":"false") );
-    // Log.v( "DistoX-BLEZ", "Proto read packet no-timeout " + (no_timeout?"true":"false") );
+    // Log.v( "DistoX-BLE", "DistoX proto: read packet no-timeout " + (no_timeout?"true":"false") );
     try {
       final int maxtimeout = 8;
       int timeout = 0;
@@ -230,7 +230,7 @@ class DistoXProtocol extends TopoDroidProtocol
         }
       }
       // TDLog.Log( TDLog.LOG_PROTO, "Protocol read packet available " + available );
-      // Log.v( "DistoX-BLEZ", "VD Proto read packet available " + available );
+      // Log.v( "DistoX-BLE", "DistoX proto: read packet available " + available );
       // if ( available > 0 ) 
       if ( available >= min_available ) {
         if ( no_timeout || ! TDSetting.mZ6Workaround ) {

@@ -30,11 +30,7 @@ import java.util.Collections;
 
 import java.io.File;
 
-import android.media.AudioManager;
-import android.media.ToneGenerator;
-
 import android.content.Context;
-import android.os.Vibrator;
 
 public class TDUtil
 {
@@ -321,29 +317,6 @@ public class TDUtil
       Thread.sleep( msec );
     } catch ( InterruptedException e ) { return false; }
     return true;
-  }
-
-  // HEPTIC FEEDBACK ------------------------------------------
-
-  public static void ringTheBell( int duration )
-  {
-    // Log.v("DistoXX", "bell ...");
-    // ToneGenerator toneG = new ToneGenerator( AudioManager.STREAM_ALARM, ToneGenerator.MAX_VOLUME );
-    ToneGenerator toneG = new ToneGenerator( AudioManager.STREAM_ALARM, TDSetting.mBeepVolume );
-    // for ( int i=0; i<2; ++i ) {
-      toneG.startTone( ToneGenerator.TONE_PROP_PROMPT, duration ); 
-      // TDUtil.slowDown( duration );
-    // }
-  }
-
-  public static void vibrate( Context ctx, int duration )
-  {
-    Vibrator vibrator = (Vibrator)ctx.getSystemService( Context.VIBRATOR_SERVICE );
-    try {
-      vibrator.vibrate(duration);
-    } catch ( NullPointerException e ) {
-      // TODO
-    }
   }
 
   // @param surveyname   name of the survey

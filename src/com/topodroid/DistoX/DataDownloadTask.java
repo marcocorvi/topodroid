@@ -80,7 +80,7 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
   protected void onPostExecute( Integer res )
   {
     // TDLog.Log( TDLog.LOG_COMM, "onPostExecute res " + res );
-    // Log.v( "DistoX-BLE5", "data download post execute: res " + res );
+    // Log.v( "DistoX-BLE", "Data Download Task: post execute: res " + res );
     TopoDroidApp app = mApp.get();
     if ( app != null ) {
       if ( res != null ) {
@@ -91,7 +91,6 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
       app.mDataDownloader.setDownload( false );
       app.mDataDownloader.notifyConnectionStatus( ConnectionState.CONN_DISCONNECTED );
     }
-    // Log.v("DistoX", "data download task post exec");
   }
 
   private synchronized boolean lock()

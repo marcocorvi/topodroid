@@ -22,13 +22,13 @@ import android.util.Log;
 import java.util.UUID;
 import java.util.Arrays;
 
-class BleOpChrtWrite extends BleOperation 
+public class BleOpChrtWrite extends BleOperation 
 {
   byte[] bytes;
   UUID   mSrvUuid;
   UUID   mChrtUuid;
 
-  BleOpChrtWrite( Context ctx, BleComm pipe, UUID srv_uuid, UUID chrt_uuid, byte[] b )
+  public BleOpChrtWrite( Context ctx, BleComm pipe, UUID srv_uuid, UUID chrt_uuid, byte[] b )
   {
     super( ctx, pipe );
     mSrvUuid  = srv_uuid;
@@ -36,10 +36,10 @@ class BleOpChrtWrite extends BleOperation
     bytes = Arrays.copyOf( b, b.length );
   }
 
-  String name() { return "ChrtWrite"; }
+  // public String name() { return "ChrtWrite"; }
 
   @Override 
-  void execute()
+  public void execute()
   {
     if ( mPipe == null ) { 
       TDLog.Error( "BleOp chrt write error: null pipe" );
@@ -47,6 +47,6 @@ class BleOpChrtWrite extends BleOperation
     }
     // boolean ret = 
       mPipe.writeChrt( mSrvUuid, mChrtUuid, bytes );
-    // Log.v("DistoX-BLE-B", "BleOp exec chrt write: ret " + ret );
+    // Log.v("DistoX-BLE", "BleOp exec chrt write: ret " + ret );
   }
 }

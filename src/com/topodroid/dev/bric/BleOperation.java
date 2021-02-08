@@ -15,18 +15,18 @@ import android.content.Context;
 
 // import android.bluetooth.BluetoothDevice;
 
-abstract class BleOperation 
+abstract public class BleOperation 
 {
   protected Context mContext;
   protected BleComm mPipe;
 
-  BleOperation( Context ctx, BleComm pipe )
+  public BleOperation( Context ctx, BleComm pipe )
   {
     mContext = ctx;
     mPipe    = pipe;
   }
 
-  String name() { return "Op"; }
+  // public String name() { return "Op"; }
 
-  abstract void execute();
+  abstract public void execute();
 }

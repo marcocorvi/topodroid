@@ -13,6 +13,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFeedback;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.ExtendType;
 
@@ -37,9 +38,6 @@ class StationName
     mSid     = sid;
   }
 
-  private static final int TRIPLE_SHOT_BELL_TIME = 200; // ms
-  private static final int TRIPLE_SHOT_VIBRATE_TIME = 200; // ms
-
   boolean assignStations( List< DBlock > list, Set<String> sts )
   {
     return false;
@@ -51,13 +49,9 @@ class StationName
   }
 
   // ----------------------------------------------------------------
-  protected void legFeedback( )
+  protected void legFeedback( ) 
   {
-    if ( TDSetting.mTripleShot == 1 ) {
-      TDUtil.ringTheBell( TRIPLE_SHOT_BELL_TIME );
-    } else if ( TDSetting.mTripleShot == 2 ) {
-      TDUtil.vibrate( mContext, TRIPLE_SHOT_VIBRATE_TIME );
-    }
+    TDFeedback.legFeedback( mContext );
   }
 
   // ----------------------------------------------------------------

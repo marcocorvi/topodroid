@@ -14,7 +14,7 @@ package com.topodroid.DistoX;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.dev.ConnectionState;
 
-// import android.util.Log;
+import android.util.Log;
 
 import android.os.AsyncTask;
 
@@ -59,6 +59,7 @@ class ReconnectTask extends AsyncTask< String, Integer, Integer >
   protected void onPostExecute( Integer res )
   {
     // mDownloader.notifyConnectionStatus( mDownloader.isConnected()? ConnectionState.CONN_CONNECTED : ConnectionState.CONN_WAITING );
+    Log.v("DistoX-BLE", "Reconnect Task done");
     unlock();
   }
 

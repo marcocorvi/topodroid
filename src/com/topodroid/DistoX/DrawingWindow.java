@@ -1021,7 +1021,7 @@ public class DrawingWindow extends ItemDrawer
     StringBuilder sb = new StringBuilder();
     if ( TDSetting.isConnectionModeMulti() /* || TDSetting.isConnectionModeDouble() */ ) {
       sb.append( "{" );
-      if ( TDInstance.deviceA != null ) sb.append( TDInstance.deviceA.getNickname() );
+      if ( TDInstance.getDeviceA() != null ) sb.append( TDInstance.getDeviceA().getNickname() );
       sb.append( "} " );
     }
     // sb.append( mApp.getConnectionStateTitleStr() ); // IF_COSURVEY
@@ -5375,7 +5375,7 @@ public class DrawingWindow extends ItemDrawer
     Button b = (Button)view;
     if ( TDLevel.overAdvanced && b == mButton1[ BTN_DOWNLOAD ] ) {
       if (  ! mDataDownloader.isDownloading() && TDSetting.isConnectionModeMulti() && TopoDroidApp.mDData.getDevices().size() > 1 ) {
-        if ( TDSetting.mSecondDistoX && TDInstance.deviceB != null ) {
+        if ( TDSetting.mSecondDistoX && TDInstance.getDeviceB() != null ) {
           mApp.switchSecondDevice();
           setTheTitle();
           // TDToast.make( String.format( getResources().getString(R.string.using), TDInstance.deviceNickname() ) );
@@ -5519,7 +5519,7 @@ public class DrawingWindow extends ItemDrawer
         // setConnectionStatus( ConnectionState.CONN_WAITING ); // FIXME DistoXDOWN was not commented
         resetFixedPaint();
         updateReference();
-        if ( TDInstance.deviceA == null ) {
+        if ( TDInstance.getDeviceA() == null ) {
           // DBlock last_blk = null; // mApp_mData.selectLastLegShot( TDInstance.sid );
           (new ShotNewDialog( mActivity, mApp, this, null, -1L )).show();
         } else {
@@ -6647,7 +6647,7 @@ public class DrawingWindow extends ItemDrawer
 
   public void setConnectionStatus( int status )
   { 
-    if ( TDInstance.deviceA == null ) {
+    if ( TDInstance.getDeviceA() == null ) {
       mBTstatus = ConnectionState.CONN_DISCONNECTED;
       TDandroid.setButtonBackground( mButton1[ BTN_DOWNLOAD ], mBMadd );
       TDandroid.setButtonBackground( mButton1[ BTN_BLUETOOTH ], mBMbluetooth_no );
@@ -6678,7 +6678,7 @@ public class DrawingWindow extends ItemDrawer
   public void enableBluetoothButton( boolean enable )
   {
     if ( TDInstance.isDivingMode() ) return;
-    if ( TDInstance.isBleDevice() ) enable = true;
+    if ( TDInstance.hasBleDevice() ) enable = true;
     TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], enable ? mBMbluetooth : mBMbluetooth_no );
     mButton1[BTN_BLUETOOTH].setEnabled( enable );
   }

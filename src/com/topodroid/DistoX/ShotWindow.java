@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFeedback;
 import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDStatus;
@@ -402,7 +403,7 @@ public class ShotWindow extends Activity
     StringBuilder sb = new StringBuilder();
     if ( TDSetting.isConnectionModeMulti() /* || TDSetting.isConnectionModeDouble() */ ) {
       sb.append( "{" );
-      if ( TDInstance.deviceA != null ) sb.append( TDInstance.deviceA.getNickname() );
+      if ( TDInstance.getDeviceA() != null ) sb.append( TDInstance.getDeviceA().getNickname() );
       sb.append( "} " );
     }
     // sb.append( mApp.getConnectionStateTitleStr() ); // IF_COSURVEY
@@ -1244,6 +1245,7 @@ public class ShotWindow extends Activity
     
     restoreInstanceFromData();
     updateDisplay( );
+    TDFeedback.reset();
 
     if ( mDataDownloader != null ) {
       mDataDownloader.onResume();
@@ -1364,7 +1366,7 @@ public class ShotWindow extends Activity
       if ( ! TDInstance.isDivingMode() && b == mButton1[ BTN_DOWNLOAD ] ) { // MULTI-DISTOX or SECOND-DISTOX
         if ( TDInstance.isDeviceDistoX() ) {
           if ( ! mDataDownloader.isDownloading() && TDSetting.isConnectionModeMulti() && TopoDroidApp.mDData.getDevices().size() > 1 ) {
-            if ( TDSetting.mSecondDistoX && TDInstance.deviceB != null ) {
+            if ( TDSetting.mSecondDistoX && TDInstance.getDeviceB() != null ) {
               mApp.switchSecondDevice();
               setTheTitle();
               // TDToast.make( String.format( getResources().getString(R.string.using), TDInstance.deviceNickname() ) );
@@ -1425,7 +1427,7 @@ public class ShotWindow extends Activity
       // int k2 = 0;
       if ( ! TDInstance.isDivingMode() ) {
         if ( k1 < mNrButton1 && b == mButton1[k1++] ) {        // DOWNLOAD
-          if ( TDInstance.deviceA != null ) {
+          if ( TDInstance.getDeviceA() != null ) {
             // mSearch = null; // invalidate search
             // if ( mBTstatus == ConnectionState.CONN_DISCONNECTED ) {
             //   TDToast.make( R.string.connecting );
@@ -1433,12 +1435,14 @@ public class ShotWindow extends Activity
             // TDLog.Log( TDLog.LOG_INPUT, "Download button, mode " + TDSetting.mConnectionMode );
             
             // toggle must come first in the test
-            mApp.notifyLed( mDataDownloader.toggleDownload() && mBTstatus == ConnectionState.CONN_DISCONNECTED );
+            boolean downloading = mDataDownloader.toggleDownload();
+            TDFeedback.notifyFeedback( this, downloading && mBTstatus == ConnectionState.CONN_DISCONNECTED );
+            mApp.notifyStatus( downloading ? ConnectionState.CONN_WAITING : ConnectionState.CONN_DISCONNECTED );
             // Log.v( "DistoXDOWN", "Download, conn mode " + TDSetting.mConnectionMode + " download status " + mDataDownloader.getStatus() );
             // setConnectionStatus( mDataDownloader.getStatus() );
             mDataDownloader.doDataDownload( DataType.DATA_SHOT );
           } else {
-            Log.v("DistoX-BLE-5", "null device A");
+            Log.v("DistoX-BLE", "Shot Window: null device A");
           }
 	  return;
         } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // BT RESET
@@ -2123,7 +2127,7 @@ public class ShotWindow extends Activity
   public void setConnectionStatus( int status )
   { 
     if ( TDInstance.isDivingMode() ) return;
-    if ( TDInstance.deviceA == null ) {
+    if ( TDInstance.getDeviceA() == null ) {
       mBTstatus = ConnectionState.CONN_DISCONNECTED;
       // mButton1[ BTN_DOWNLOAD ].setVisibility( View.GONE );
       TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload_no );
@@ -2135,7 +2139,7 @@ public class ShotWindow extends Activity
         // mButton1[ BTN_DOWNLOAD ].setVisibility( View.VISIBLE );
         switch ( status ) {
           case ConnectionState.CONN_CONNECTED:
-            mApp.notifyLed( true );
+            TDFeedback.notifyFeedback( this, true );
             TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload_on );
             if ( TDInstance.isDeviceBric() ) {
               TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], mBMbluetooth );
@@ -2148,7 +2152,7 @@ public class ShotWindow extends Activity
             TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], mBMbluetooth_no );
             break;
           default:
-            mApp.notifyLed( false );
+            TDFeedback.notifyFeedback( this, false );
             TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload );
             TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], mBMbluetooth );
         }
@@ -2159,7 +2163,7 @@ public class ShotWindow extends Activity
   public void enableBluetoothButton( boolean enable )
   {
     if ( TDInstance.isDivingMode() ) return;
-    if ( TDInstance.isBleDevice() ) enable = true;
+    if ( TDInstance.hasBleDevice() ) enable = true;
     TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], (enable ? mBMbluetooth : mBMbluetooth_no) );
     mButton1[BTN_BLUETOOTH].setEnabled( enable );
   }

@@ -273,8 +273,8 @@ public class DeviceActivity extends Activity
     // TDLog.Debug("device activity on create");
     mApp = (TopoDroidApp) getApplication();
     mApp_mDData  = TopoDroidApp.mDData;
-    mCurrDevice  = TDInstance.deviceA;
-    mCurrDeviceB = TDInstance.deviceB;
+    // mCurrDevice  = TDInstance.getDeviceA(); // in onResume
+    // mCurrDeviceB = TDInstance.getDeviceB();
     mHasBLE      = TDandroid.checkBluetoothLE( this ); // FIXME_SCAN_BRIC
 
     // mAddress = mCurrDevice.mAddress;
@@ -325,7 +325,7 @@ public class DeviceActivity extends Activity
     mList.setDividerHeight( 2 );
     // TDLog.Debug("device activity layout done");
 
-    setState();
+    // setState();
     // TDLog.Debug("device activity state done");
 
     mImage = (Button) findViewById( R.id.handle );
@@ -360,24 +360,30 @@ public class DeviceActivity extends Activity
           String model = device.getName();
           if ( model == null ) {
             TDLog.Error( "WARNING. Null name for device " + addr );
-          } else if ( model.startsWith( "DistoX", 0 ) ) {
-            String name  = Device.modelToName( model );
-            mApp_mDData.insertDevice( addr, model, name );
-            dev = mApp_mDData.getDevice( addr );
-          } else if ( TDLevel.overExpert && model.startsWith( "Shetland", 0 ) ) { // FIXME SHETLAND
-            String name  = Device.modelToName( model );
-            Log.v("DistoX-BLEX", "model <" + model + "> name <" + name + ">" );
-            mApp_mDData.insertDevice( addr, model, name );
-            dev = mApp_mDData.getDevice( addr );
-          } else if ( TDLevel.overExpert && model.startsWith( "BRIC", 0 ) ) { // FIXME BRIC
-            String name  = Device.modelToName( model );
-            Log.v("DistoX-BLEX", "model <" + model + "> name <" + name + ">" );
-            mApp_mDData.insertDevice( addr, model, name );
-            dev = mApp_mDData.getDevice( addr );
-          // } else if ( model.startsWith( "Ble", 0 ) ) { // FIXME BLEX
-          //   String name  = Device.modelToName( model );
-          //   mApp_mDData.insertDevice( addr, model, name );
-          //   dev = mApp_mDData.getDevice( addr );
+          } else {
+            String name = Device.modelToName( model );
+            // Log.v("DistoX-BLE", "Device Activity: model <" + model + "> name <" + name + ">" );
+            if ( model.startsWith( "DistoX", 0 ) ) {
+              mApp_mDData.insertDevice( addr, model, name );
+              dev = mApp_mDData.getDevice( addr );
+            } else if ( model.startsWith( "Shetland", 0 ) ) { // FIXME SHETLAND
+              if ( TDLevel.overExpert ) {
+                mApp_mDData.insertDevice( addr, model, name );
+                dev = mApp_mDData.getDevice( addr );
+              }
+            } else if ( model.startsWith( "BRIC", 0 ) ) { // FIXME BRIC
+              if ( TDLevel.overExpert ) {
+                mApp_mDData.insertDevice( addr, model, name );
+                dev = mApp_mDData.getDevice( addr );
+              }
+            // } else if ( model.startsWith( "Ble", 0 ) ) { // FIXME BLEX
+            //   mApp_mDData.insertDevice( addr, model, name );
+            //   dev = mApp_mDData.getDevice( addr );
+            }
+          }
+        } else {
+          if ( ! TDLevel.overExpert ) { // drop SAP and BRIC
+            if ( dev.isSap() || dev.isBric() ) dev = null;
           }
         }
         if ( dev != null ) {
@@ -423,13 +429,14 @@ public class DeviceActivity extends Activity
 
       // FIXME VirtualDistoX
       // String address = ( vals[0].equals("X000") )? Device.ZERO_ADDRESS : vals[2];
+      String model   = vals[0];
       String address = vals[2];
 
       // if ( vals.length != 3 ) { TODO } // FIXME
       // Log.v("DistoX", "Addr/Name <" + vals[2] + ">");
       if ( mCurrDevice == null || ! ( address.equals( mCurrDevice.mAddress ) || address.equals( mCurrDevice.mNickname ) ) ) {
-        mApp.setDevice( address, null );
-        mCurrDevice = TDInstance.deviceA;
+        mApp.setDevicePrimary( address, model, null );
+        mCurrDevice = TDInstance.getDeviceA();
         mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
         setState();
         showDistoXButtons();
@@ -445,8 +452,8 @@ public class DeviceActivity extends Activity
     //   mApp.setDeviceB( null, null );
     // }
     if ( mCurrDevice == null ) return;
-    mApp.setDevice( null, null );
-    mCurrDevice = TDInstance.deviceA;
+    mApp.setDevicePrimary( null, null, null );
+    mCurrDevice = TDInstance.getDeviceA();
     mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
     enableButtons( false );
     setState();
@@ -562,7 +569,7 @@ public class DeviceActivity extends Activity
         new CalibToggleTask( this, mApp ).execute();
       }
     } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // CALIBRATIONS
-      if ( TDInstance.deviceA == null ) {
+      if ( TDInstance.getDeviceA() == null ) {
         TDToast.makeBad( R.string.no_device_address );
       } else {
         (new CalibListDialog( this, this /*, mApp */ )).show();
@@ -622,6 +629,9 @@ public class DeviceActivity extends Activity
     registerReceiver( mPairReceiver, new IntentFilter( DeviceUtil.ACTION_BOND_STATE_CHANGED ) );
     mApp.resumeComm();
     mDeviceActivityVisible = true;
+    mCurrDevice  = TDInstance.getDeviceA();
+    mCurrDeviceB = TDInstance.getDeviceB();
+    setState();
     // TDLog.Debug("device activity on resume done" );
   }
 
@@ -751,13 +761,13 @@ public class DeviceActivity extends Activity
     String address = device.getAddress();
     // if ( mCurrDevice == null || ! address.equals( mCurrDevice.mAddress ) ) { // N.B. address != null
       mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
-      mApp.setDevice( address, device );
-      mCurrDevice = TDInstance.deviceA;
+      mApp.setDevicePrimary( address, null, device );
+      mCurrDevice = TDInstance.getDeviceA();
       // showDistoXButtons();
       setState();
     // }
     updateList();
-    // Log.v("DistoX-BLEX", "add ble device " + mCurrDevice.mName + "/" + mCurrDevice.mAddress + "/" + mCurrDevice.mModel );
+    // Log.v("DistoX-BLE", "Device Activity: add ble device " + mCurrDevice.mName + "/" + mCurrDevice.mAddress + "/" + mCurrDevice.mModel );
   }
 
   public void onActivityResult( int request, int result, Intent intent ) 
@@ -774,9 +784,9 @@ public class DeviceActivity extends Activity
             TDLog.Error( "onActivityResult REQUEST DEVICE: null address");
           } else if ( mCurrDevice == null || ! address.equals( mCurrDevice.mAddress ) ) { // N.B. address != null
             mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
-            mApp.setDevice( address, null );
+            mApp.setDevicePrimary( address, null, null );
             DeviceUtil.checkPairing( address );
-            mCurrDevice = TDInstance.deviceA;
+            mCurrDevice = TDInstance.getDeviceA();
             showDistoXButtons();
             setState();
           }
@@ -946,7 +956,7 @@ public class DeviceActivity extends Activity
   {  
     if ( mCurrDeviceB == null || ! address.equals( mCurrDeviceB.mAddress ) ) {
       mApp.setDeviceB( address );
-      mCurrDeviceB = TDInstance.deviceB;
+      mCurrDeviceB = TDInstance.getDeviceB();
       mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
       setState();
     }
@@ -1004,7 +1014,7 @@ public class DeviceActivity extends Activity
   // from ScanBLEDialoag
   public void setBLEDevice( BluetoothDevice bt_device )
   {
-    Log.v("DistoX-BLEX", "TODO set bluetooth LE device");
+    Log.v("DistoX-BLE", "Device Activity: TODO set bluetooth LE device");
     TDToast.make( "TODO set bluetooth LE device" );
     // set bt_device as current
   }

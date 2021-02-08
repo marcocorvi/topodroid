@@ -45,6 +45,9 @@ public class BricConst
   public final static int CMD_SHOT  = 3;
   public final static int CMD_LASER = 4;
 
+  public final static int CMD_SPLAY = 11;
+  public final static int CMD_LEG   = 12;
+
   static float getDistance( byte[] bytes ) { return BleUtils.getFloat( bytes,  8 ); }
   static float getAzimuth( byte[] bytes )  { return BleUtils.getFloat( bytes, 12 ); }
   static float getClino( byte[] bytes )    { return BleUtils.getFloat( bytes, 16 ); }

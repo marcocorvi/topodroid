@@ -44,28 +44,49 @@ public class TDInstance
   public static int     datamode = 0;      // current value of survey datamode
   // FIXME static int    extend = 90;  // current value of survey extend
 
-  public static Device  deviceA = null;
-  static Device  deviceB = null; // second-DistoX
+  private static Device  deviceA = null;
+  private static Device  deviceB = null; // second-DistoX
 
-  private static BluetoothDevice bleDevice = null; // FIXME BLE_5
+  public static Device getDeviceA() 
+  { 
+    if ( TDLevel.overExpert ) return deviceA;
+    if ( isDeviceBLE( deviceA ) ) return null;
+    return deviceA;
+  }
+
+  public static Device getDeviceB() 
+  { 
+    if ( TDLevel.overExpert ) return deviceB;
+    if ( isDeviceBLE( deviceB ) ) return null;
+    return deviceB;
+  }
+
+  public static void setDeviceA( Device device ) { deviceA = device; }
+  public static void setDeviceB( Device device ) { deviceB = device; }
+
+  // the bluetooth device is necessary for the cstr of SAP/BRIC comm
+  private static BluetoothDevice mBleDevice = null; 
 
   static BluetoothDevice getBleDevice()
   {
-    if ( bleDevice == null ) {
-      BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-      bleDevice = adapter.getRemoteDevice( TDInstance.deviceAddress() );
-    }
-    Log.v("DistoX-BLE-TD", "get ble device " + ((bleDevice == null)? "null" : bleDevice.getName() ) );
-    return bleDevice;
+    if ( mBleDevice == null ) initBleDevice();
+    Log.v("DistoX-BLE", "TD Instance: get ble device " + ((mBleDevice == null)? "null" : mBleDevice.getName() ) );
+    return mBleDevice;
+  }
+
+  static void initBleDevice( )
+  {
+    BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+    mBleDevice = adapter.getRemoteDevice( TDInstance.deviceAddress() );
   }
 
   static void setBleDevice( BluetoothDevice dev ) 
   { 
-    bleDevice = dev;
-    Log.v("DistoX-BLE-TD", "set ble device " + ( (dev==null)? "null" : dev.getName() ) );
+    mBleDevice = dev;
+    Log.v("DistoX-BLE", "TD Instance: set ble device " + ( (dev==null)? "null" : dev.getName() ) );
   }
 
-  static boolean isBleDevice() { return bleDevice != null; }
+  static boolean hasBleDevice() { return mBleDevice != null; }
 
   public static int deviceType() { return (deviceA == null)? 0 : deviceA.mType; }
   public static String deviceAddress() { return (deviceA == null)? null : deviceA.mAddress; }
@@ -79,6 +100,7 @@ public class TDInstance
   static boolean isDeviceBric()   { return deviceA != null && deviceA.isBric(); }
 
   static boolean isDeviceBLE()    { return deviceA != null && ( deviceA.isBric() || deviceA.isSap() ); }
+  private static boolean isDeviceBLE( Device device )    { return device != null && ( device.isBric() || device.isSap() ); }
 
   static boolean isContinuousMode() 
   {

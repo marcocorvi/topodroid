@@ -21,24 +21,24 @@ import android.util.Log;
 
 import java.util.UUID;
 
-class BleOpChrtRead extends BleOperation 
+public class BleOpChrtRead extends BleOperation 
 {
   UUID mSrvUuid;
   UUID mChrtUuid;
 
-  BleOpChrtRead( Context ctx, BleComm pipe, UUID srv_uuid, UUID chrt_uuid )
+  public BleOpChrtRead( Context ctx, BleComm pipe, UUID srv_uuid, UUID chrt_uuid )
   {
     super( ctx, pipe );
     mSrvUuid  = srv_uuid;
     mChrtUuid = chrt_uuid;
   }
 
-  String name() { return "ChrtRead"; }
+  // public String name() { return "ChrtRead"; }
 
   @Override 
-  void execute()
+  public void execute()
   {
-    // Log.v("DistoX-BLE_B", "BleOp exec chrt read");
+    // Log.v("DistoX-BLE", "BleOp exec chrt read");
     if ( mPipe == null ) { 
       TDLog.Error("BleOp chrt read: ERROR null pipe" );
       return;

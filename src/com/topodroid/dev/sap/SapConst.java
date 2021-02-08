@@ -26,7 +26,7 @@ class SapConst
   static final String SAP5_CHRT_WRITE_UUID_STR = "6e400003-b5a3-f393-e0a9-e50e24dcca9e"; // SAP receive (from app to pony)
 
   static final UUID SAP5_SERVICE_UUID    = UUID.fromString( SAP5_SRV_UUID_STR );
-  static final UUID SAP5_CHAR_READ_UUID  = UUID.fromString( SAP5_CHRT_READ_UUID_STR );
-  static final UUID SAP5_CHAR_WRITE_UUID = UUID.fromString( SAP5_CHRT_WRITE_UUID_STR );
+  static final UUID SAP5_CHRT_READ_UUID  = UUID.fromString( SAP5_CHRT_READ_UUID_STR );
+  static final UUID SAP5_CHRT_WRITE_UUID = UUID.fromString( SAP5_CHRT_WRITE_UUID_STR );
 
 }

@@ -13,7 +13,7 @@
  */
 package com.topodroid.dev.sap;
 
-// import com.topodroid.dev.bric.BleCallback;
+import com.topodroid.dev.bric.BleCallback;
 import com.topodroid.dev.bric.BleUtils;
 import com.topodroid.dev.ConnectionState;
 
@@ -50,29 +50,37 @@ class SapCallback extends BluetoothGattCallback
   public void onConnectionStateChange( BluetoothGatt gatt, int status, int state )
   {
     // super.onConnectionStateChange( gatt, status, state );
-    if ( status == BluetoothGatt.GATT_FAILURE ) {
-      // Log.v("DistoX-BLE-S", "SAP callback FAIL state changed");
-      mSapComm.disconnected();
-      return;
-    } 
-    if ( status != BluetoothGatt.GATT_SUCCESS ) {
-      // Log.v("DistoX-BLE-S", "SAP callback state changed: unsuccessful"); // apparently this is ok
-      // mSapComm.disconnected();
-      mSapComm.notifyStatus( ConnectionState.CONN_WAITING );
-      return;
-    } 
-    if ( state == BluetoothProfile.STATE_CONNECTED ) {
-      // Log.v("DistoX-BLE-S", "SAP callback conn state changed: connected");
-      if ( ! gatt.discoverServices() ) {
-        // Log.v("DistoX-BLE-S", "SAP callback FAIL service discovery");
-        mSapComm.notifyStatus( ConnectionState.CONN_DISCONNECTED );
-      } else {
-        mSapComm.notifyStatus( ConnectionState.CONN_CONNECTED );
+    if ( BleCallback.isSuccess( status, "onConnectionStateChange" ) ) {
+      if ( state == BluetoothProfile.STATE_CONNECTED ) {
+        // Log.v("DistoX-BLE", "SAP callback: conn state changed: connected");
+        if ( ! gatt.discoverServices() ) {
+          // Log.v("DistoX-BLE", "SAP callback FAIL service discovery");
+          mSapComm.notifyStatus( ConnectionState.CONN_DISCONNECTED );
+        } else {
+          mSapComm.notifyStatus( ConnectionState.CONN_CONNECTED );
+        }
+      } else if ( state == BluetoothProfile.STATE_DISCONNECTED ) {
+        // Log.v("DistoX-BLE", "SAP callback conn state changed: disconnected");
+        mSapComm.disconnected();
       }
-    } else if ( state == BluetoothProfile.STATE_DISCONNECTED ) {
-      // Log.v("DistoX-BLE-S", "SAP callback conn state changed: disconnected");
-      mSapComm.disconnected();
-    }
+    } else {
+      if ( status == BluetoothGatt.GATT_INSUFFICIENT_ENCRYPTION 
+        || status == BluetoothGatt.GATT_INSUFFICIENT_AUTHENTICATION 
+        || status == BleCallback.CONNECTION_TIMEOUT 
+        || status == BleCallback.CONNECTION_133 ) {
+        Log.v("DistoX-BLE", "SAP callback FAIL state changed - status " + status + " reconnect ");
+        // mSapComm.notifyStatus( ConnectionState.CONN_WAITING );
+        mSapComm.reconnectDevice();
+      } else if ( status == BluetoothGatt.GATT_FAILURE ) {
+        Log.v("DistoX-BLE", "SAP callback FAIL state changed - GATT failure  disconnect" );
+        mSapComm.notifyStatus( ConnectionState.CONN_DISCONNECTED );
+        mSapComm.disconnected();
+      } else {
+        Log.v("DistoX-BLE", "SAP callback FAIL state changed - status " + status + " disconnect " );
+        mSapComm.notifyStatus( ConnectionState.CONN_DISCONNECTED );
+        mSapComm.disconnected();
+      }
+    } 
   }
 
   @Override
@@ -80,20 +88,20 @@ class SapCallback extends BluetoothGattCallback
   {
     // super.onServicesDiscovered( gatt, status );
     if ( status != BluetoothGatt.GATT_SUCCESS ) {
-      Log.v("DistoX-BLE-S", "SAP callback FAIL service discover");
+      Log.v("DistoX-BLE", "SAP callback FAIL service discover");
       mSapComm.failure( status );
       return;
     }
-    // Log.v("DistoX-BLE-S", "SAP callback service discovered ok" );
+    // Log.v("DistoX-BLE", "SAP callback service discovered ok" );
     mGatt = gatt;
     BluetoothGattService srv = gatt.getService( SapConst.SAP5_SERVICE_UUID );
 
-    mReadChrt  = srv.getCharacteristic( SapConst.SAP5_CHAR_READ_UUID );
-    mWriteChrt = srv.getCharacteristic( SapConst.SAP5_CHAR_WRITE_UUID );
+    mReadChrt  = srv.getCharacteristic( SapConst.SAP5_CHRT_READ_UUID );
+    mWriteChrt = srv.getCharacteristic( SapConst.SAP5_CHRT_WRITE_UUID );
 
     // boolean write_has_write = BleUtils.isChrtRWrite( mWriteChrt.getProperties() );
     // boolean write_has_write_no_response = BleUtils.isChrtRWriteNoResp( mWriteChrt.getProperties() );
-    // Log.v("DistoX-BLE-S", "SAP callback W-chrt has write " + write_has_write );
+    // Log.v("DistoX-BLE", "SAP callback W-chrt has write " + write_has_write );
 
     mWriteChrt.setWriteType( BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT );
     mWriteInitialized = gatt.setCharacteristicNotification( mWriteChrt, true );
@@ -102,22 +110,22 @@ class SapCallback extends BluetoothGattCallback
 
     BluetoothGattDescriptor readDesc = mReadChrt.getDescriptor( BleUtils.CCCD_UUID );
     if ( readDesc == null ) {
-      Log.v("DistoX-BLE-S", "SAP callback FAIL no R-desc CCCD ");
+      Log.v("DistoX-BLE", "SAP callback FAIL no R-desc CCCD ");
       mSapComm.failure( -1 );
       return;
     }
 
     // boolean read_has_write  = BleUtils.isChrtPWrite( mReadChrt.getProperties() );
-    // Log.v("DistoX-BLE-S", "SAP callback R-chrt has write " + read_has_write );
+     // Log.v("DistoX-BLE", "SAP callback R-chrt has write " + read_has_write );
 
     byte[] notify = BleUtils.getChrtPNotify( mReadChrt );
     if ( notify == null ) {
-      Log.v("DistoX-BLE-S", "SAP callback FAIL no indicate/notify R-property ");
+      Log.v("DistoX-BLE", "SAP callback FAIL no indicate/notify R-property ");
       mSapComm.failure( -2 );
     } else {
       readDesc.setValue( notify );
       if ( ! gatt.writeDescriptor( readDesc ) ) {
-        Log.v("DistoX-BLE-S", "SAP callback ERROR writing readDesc");
+        Log.v("DistoX-BLE", "SAP callback ERROR writing readDesc");
         mSapComm.failure( -3 );
       }
     }
@@ -127,15 +135,15 @@ class SapCallback extends BluetoothGattCallback
   public void onDescriptorWrite( BluetoothGatt gatt, BluetoothGattDescriptor desc, int status ) 
   {
     if ( status != BluetoothGatt.GATT_SUCCESS ) {
-      Log.v("DistoX-BLE-S", "SAP callback FAIL on descriptor write");
+      Log.v("DistoX-BLE", "SAP callback FAIL on descriptor write");
       mSapComm.error( status );
     } else if ( desc.getCharacteristic() == mReadChrt ) { // everything is ok
       // tell the comm it is connected
       mSapComm.connected( true );
     } else if ( desc.getCharacteristic() == mWriteChrt ) { // should not happen
-      Log.v("DistoX-BLE-S", "SAP callback ERROR write-descriptor write: ?? should not happen");
+      Log.v("DistoX-BLE", "SAP callback ERROR write-descriptor write: ?? should not happen");
     } else {
-      Log.v("DistoX-BLE-S", "SAP callback ERROR unknown descriptor write");
+      Log.v("DistoX-BLE", "SAP callback ERROR unknown descriptor write " + desc.getUuid().toString() );
       super.onDescriptorWrite( gatt, desc, status );
     }
   }
@@ -147,14 +155,14 @@ class SapCallback extends BluetoothGattCallback
       super.onCharacteristicWrite( gatt, chrt, status );
       return;
     } else if ( status != BluetoothGatt.GATT_SUCCESS ) {
-      Log.v("DistoX-BLE-S", "SAP callback FAIL on char write");
+      Log.v("DistoX-BLE", "SAP callback: FAIL on char write");
       mSapComm.error( status );
     } else if ( ! mWriteInitialized ) {
-      Log.v("DistoX-BLE-S", "SAP callback ERROR write-uninitialized chrt" );
+      Log.v("DistoX-BLE", "SAP callback: ERROR write-uninitialized chrt" );
       return;
     } else {
+      // Log.v("DistoX-BLE", "SAP callback: on char write ok");
       String uuid_str = BleUtils.uuidToShortString( chrt.getUuid() );
-      Log.v("DistoX-BLE-S", "SAP callback on char write ok");
       mSapComm.writtenChrt( uuid_str, chrt.getValue() );
     }
   }
@@ -166,13 +174,13 @@ class SapCallback extends BluetoothGattCallback
       super.onCharacteristicRead( gatt, chrt, status );
       return;
     } else if ( status != BluetoothGatt.GATT_SUCCESS ) {
-      Log.v("DistoX-BLE-S", "SAP callback FAIL on char read");
+      Log.v("DistoX-BLE", "SAP callback: FAIL on char read");
       mSapComm.error( status );
     } else if ( ! mReadInitialized ) {
-      Log.v("DistoX-BLE-S", "SAP callback ERROR read-uninitialized chrt");
+      Log.v("DistoX-BLE", "SAP callback: ERROR read-uninitialized chrt");
       mSapComm.error( -1 );
     } else {
-      Log.v("DistoX-BLE-S", "SAP callback on char read ok");
+      // Log.v("DistoX-BLE", "SAP callback: on char read ok");
       String uuid_str = BleUtils.uuidToShortString( chrt.getUuid() );
       mSapComm.readedChrt( uuid_str, chrt.getValue() );
     }
@@ -182,10 +190,10 @@ class SapCallback extends BluetoothGattCallback
   public void onCharacteristicChanged( BluetoothGatt gatt, BluetoothGattCharacteristic chrt )
   {
     if ( chrt == mReadChrt ) {
-      // Log.v("DistoX-BLE-S", "SAP callback read chrt changed");
+      // Log.v("DistoX-BLE", "SAP callback: read chrt changed");
       mSapComm.changedChrt( chrt );
     } else if ( chrt == mWriteChrt ) {
-      Log.v("DistoX-BLE-S", "SAP callback write chrt changed");
+      Log.v("DistoX-BLE", "SAP callback: write chrt changed");
       mSapComm.changedChrt( chrt );
     } else {
       super.onCharacteristicChanged( gatt, chrt );
@@ -195,7 +203,7 @@ class SapCallback extends BluetoothGattCallback
   // FROM BleCallback
   void closeGatt()
   { 
-    Log.v("DistoX-BLE-S", "SAP callback close GATT");
+    Log.v("DistoX-BLE", "SAP callback: close GATT");
     mWriteInitialized = false; 
     mReadInitialized  = false; 
     if ( mGatt != null ) {
@@ -207,11 +215,11 @@ class SapCallback extends BluetoothGattCallback
 
   void disconnectGatt()
   {
-    Log.v("DistoX-BLE-S", "SAP callback disconnect GATT");
+    Log.v("DistoX-BLE", "SAP callback: disconnect GATT");
     mWriteInitialized = false; 
     mReadInitialized  = false; 
     if ( mGatt != null ) {
-      // Log.v("DistoX-BLE-B", "BLE callback: disconnect gatt");
+      // Log.v("DistoX-BLE", "SAP callback: disconnect gatt");
       mGatt.disconnect();
       // FIXME mGapp.close();
       mGatt = null;
@@ -221,7 +229,7 @@ class SapCallback extends BluetoothGattCallback
   void connectGatt( Context ctx, BluetoothDevice device )
   {
     disconnectGatt();
-    // Log.v("DistoX-BLE-B", "BLE callback: connect gatt");
+    // Log.v("DistoX-BLE", "SAP callback: connect gatt");
     if ( Build.VERSION.SDK_INT < 23 ) {
       mGatt = device.connectGatt( ctx, mAutoConnect, this );
     } else {

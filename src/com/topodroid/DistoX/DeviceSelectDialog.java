@@ -92,7 +92,7 @@ class DeviceSelectDialog extends MyDialog
       // String model = device.mName;
       // String name  = device.mName;
       // String nick  = device.mNickname;
-      if ( device.isBT() ) {
+      if ( device.isBT() ) { // FIXME BLE : only classic BT
         array_adapter.add( device.toString() );
       }
     }
@@ -114,9 +114,10 @@ class DeviceSelectDialog extends MyDialog
 
     // FIXME VirtualDistoX
     // String address = ( vals[0].equals("X000") )? Device.ZERO_ADDRESS : vals[2];
+    String model   = vals[0];
     String address = vals[2];
 
-    mApp.setDevice( address, null ); // FIXME BLEX only BT devices
+    mApp.setDevicePrimary( address, model, null ); // FIXME BLEX only BT devices
     mLister.setTheTitle();
     mDownloader.toggleDownload();
     mLister.setConnectionStatus( mDownloader.getStatus() );

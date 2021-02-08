@@ -23,6 +23,7 @@ import java.lang.ref.WeakReference;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.AsyncTask;
 
 import android.widget.PopupWindow;
 import android.widget.Button;
@@ -304,10 +305,8 @@ class CutNPaste
       textview3 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
+            app.sendBricCommand( BricConst.CMD_SPLAY );
             dismissPopupBT();
-            app.sendBricCommand( BricConst.CMD_LASER );
-            TDUtil.slowDown(200);
-            app.sendBricCommand( BricConst.CMD_SHOT );
           }
         } );
       ww = textview3.getPaint().measureText( text );
@@ -319,13 +318,8 @@ class CutNPaste
       textview4 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
+            app.sendBricCommand( BricConst.CMD_LEG );
             dismissPopupBT();
-            for (int k = 0; k < TDSetting.mMinNrLegShots; ++k ) {
-              if ( k > 0 ) TDUtil.slowDown(500);
-              app.sendBricCommand( BricConst.CMD_LASER );
-              TDUtil.slowDown(200);
-              app.sendBricCommand( BricConst.CMD_SHOT );
-            }
           }
         } );
       ww = textview4.getPaint().measureText( text );

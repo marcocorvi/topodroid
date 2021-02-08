@@ -235,8 +235,8 @@ public class DistoXComm extends TopoDroidComm
   }
 
   /** must be overridden to call create proper protocol
-   * new DistoX310Protocol( in, out, TDInstance.deviceA, mApp ); // mApp = context
-   * new DistoXA3Protocol( in, out, TDInstance.deviceA, mApp ); // mApp = context
+   * new DistoX310Protocol( in, out, TDInstance.getDeviceA(), mApp ); // mApp = context
+   * new DistoXA3Protocol( in, out, TDInstance.getDeviceA(), mApp ); // mApp = context
    */
   protected DistoXProtocol createProtocol( DataInputStream in, DataOutputStream out ) { return null; }
 
@@ -339,7 +339,7 @@ public class DistoXComm extends TopoDroidComm
       if ( mBTSocket != null ) {
         // TDLog.Log( TDLog.LOG_COMM, "[6a] create Socket OK: create I/O streams");
         // mBTSocket.setSoTimeout( 200 ); // BlueToothSocket does not have timeout 
-        if ( TDInstance.deviceA == null ) {
+        if ( TDInstance.getDeviceA() == null ) {
           TDLog.Error( "[6b] create Socket on null device ");
           mAddress = null;
           try {
@@ -460,7 +460,7 @@ public class DistoXComm extends TopoDroidComm
   protected boolean startCommThread( int to_read, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
   {
     // TDLog.Log( TDLog.LOG_COMM, "start RFcomm thread: to_read " + to_read );
-    // Log.v("DistoX-BLEZ", "start comm thread: to read " + to_read );
+    // Log.v("DistoX-BLE", "DistoX comm: start comm thread: to read " + to_read );
     if ( mBTSocket != null ) {
       if ( mCommThread == null ) {
         mCommThread = new CommThread( TopoDroidComm.COMM_RFCOMM, mProtocol, to_read, lister, data_type );
@@ -497,6 +497,7 @@ public class DistoXComm extends TopoDroidComm
   public void disconnectRemoteDevice( )
   {
     // TDLog.Log( TDLog.LOG_COMM, "disconnect remote device ");
+    Log.v( "DistoX-BLE", "DistoX comm: disconnect remote device ");
     super.disconnectRemoteDevice();
     // cancelCommThread();
     // closeProtocol();
@@ -598,12 +599,15 @@ public class DistoXComm extends TopoDroidComm
   {
     if ( mCommThread != null ) {
       // TDLog.Log( TDLog.LOG_COMM, "DistoX Comm connect: already connected");
+      // Log.v( "DistoX-BLE", "DistoX comm: connect device - comm thread not null");
       return true;
     }
     if ( ! connectSocket( address, data_type ) ) {
-      // TDLog.Log( TDLog.LOG_COMM, "DistoX Comm connect: failed");
+      TDLog.Log( TDLog.LOG_COMM, "DistoX Comm connect: failed");
+      // Log.v( "DistoX-BLE", "DistoX comm: connect device - failed socket");
       return false;
     }
+    // Log.v( "DistoX-BLE", "DistoX comm: connect device - start thread");
     startCommThread( -2, lister, data_type );
     return true;
   }
@@ -611,6 +615,7 @@ public class DistoXComm extends TopoDroidComm
   public void disconnectDevice()
   {
     // TDLog.Log( TDLog.LOG_COMM, "disconnect device");
+    Log.v( "DistoX-BLE", "DistoX comm: disconnect device ");
     cancelCommThread();
     destroySocket( );
   }
@@ -628,10 +633,11 @@ public class DistoXComm extends TopoDroidComm
   {
     if ( ! isCommThreadNull() ) {
       TDLog.Error( "download data: RFcomm thread not null");
-      Log.v( "DistoX-BLE5", "download data: RFcomm thread not null");
+      // Log.v( "DistoX-BLE", "DistoX comm: download data: RFcomm thread not null");
       return TopoDroidProtocol.DISTOX_ERR_CONNECTED;
     }
     
+    // Log.v( "DistoX-BLE", "DistoX comm: download data: ok");
     int ret = -1; // failure
     if ( connectSocket( address, data_type ) ) {
       DistoXProtocol protocol = (DistoXProtocol)mProtocol;

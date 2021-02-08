@@ -82,7 +82,7 @@ public class TopoDroidProtocol
 
   protected TopoDroidProtocol( Device device, Context context )
   {
-    // Log.v("DistoX-BLE-TP", "topodroid proto: type " + device.mType + " addr " + device.mAddress );
+    // Log.v("DistoX-BLE", "TD proto: type " + device.mType + " addr " + device.mAddress );
     mDeviceType    = device.mType;
     mDeviceAddress = device.mAddress;
     mPacketLogger  = new PacketLogger( context );
@@ -160,7 +160,7 @@ public class TopoDroidProtocol
     //     String.format("%02x %02x %02x %02x %02x %02x %02x %02x", buffer[0], buffer[1], buffer[2],
     //     buffer[3], buffer[4], buffer[5], buffer[6], buffer[7] ) );
     // }
-    // Log.v( "DistoX-BLE-TP", "handle packet type " + type + " " + 
+    // Log.v( "DistoX-BLE", "TD proto: handle packet type " + type + " " + 
     //     String.format("%02x %02x %02x %02x %02x %02x %02x %02x", buffer[0], buffer[1], buffer[2],
     //     buffer[3], buffer[4], buffer[5], buffer[6], buffer[7] ) );
 
@@ -192,15 +192,13 @@ public class TopoDroidProtocol
             }
             break;
           case Device.DISTO_BRIC4: 
-            Log.v("DistoX-BLE-TP", "did not handle packet BLE");
+            // TDLog.Error("TD proto: does not handle packet BLE");
+            Log.v("DistoX-BLE", "TD proto: does not handle packet BLE");
             break;
           case Device.DISTO_SAP5: 
-            // Log.v("DistoX-BLE-TP", "handle packet SAP");
+            // Log.v("DistoX-BLE", "TD proto: handle packet SAP");
             mDistance = d / 1000.0;
             break;
-          // case Device.DISTO_BLEX: // FIXME BLEX
-          //   // Log.v("DistoX-BLE-TP", "did not handle packet BLE");
-          //   break;
           default:
             mDistance = d / 1000.0;
             break;
@@ -215,7 +213,7 @@ public class TopoDroidProtocol
         //   TDLog.DoLog( "Proto packet D " +
         //     String.format(Locale.US, " %7.2f %6.1f %6.1f (%6.1f)", mDistance, mBearing, mClino, mRoll ) );
         // }
-        // Log.v( "DistoX-BLE-TP", String.format(Locale.US, "Packet-D %7.2f %6.1f %6.1f (%6.1f)", mDistance, mBearing, mClino, mRoll ) );
+        // Log.v( "DistoX-BLE", String.format(Locale.US, "TD proto: Packet-D %7.2f %6.1f %6.1f (%6.1f)", mDistance, mBearing, mClino, mRoll ) );
         return DataType.PACKET_DATA;
       case 0x02: // G
         mGX = MemoryOctet.toInt( buffer[2], buffer[1] );
@@ -288,7 +286,7 @@ public class TopoDroidProtocol
   // @param data_type  packet data type (to filter packet of different type)
   int readPacket( boolean no_timeout, int data_type )
   {
-    Log.v("DistoX-BLE-TP", "TD proto read_packet returns NONE");
+    Log.v("DistoX-BLE", "TD proto: read_packet returns NONE");
     return DataType.PACKET_NONE;
   }
 

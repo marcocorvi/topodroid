@@ -118,7 +118,7 @@ public class Device
   // nickname can be null
   public Device( String addr, String model, int h, int t, String name, String nickname )
   {
-    // Log.v("DistoX-BLEX", "device " + addr + " " + model + " " + name );
+    // Log.v("DistoX-BLE", "Device: " + addr + " " + model + " " + name );
     mAddress = addr;
     mModel = model;
     mType = modelToType( model );
@@ -131,7 +131,7 @@ public class Device
   // nickname can be null
   public Device( String addr, String model, String name, String nickname )
   {
-    // Log.v("DistoX-BLEX", "device " + addr + " " + model + " " + name );
+    // Log.v("DistoX-BLE", "Device: " + addr + " " + model + " " + name );
     mAddress = addr;
     mModel = model;
     mType = modelToType( model );

@@ -112,7 +112,7 @@ public class TopoDroidComm
       mHasG  = false;
 
       // TDLog.Log( TDLog.LOG_COMM, "RF comm thread running ... to_read " + toRead );
-      // Log.v( "DistoX-BLE-TC", "RF comm thread ... to_read " + toRead );
+      // Log.v( "DistoX-BLE", "TD comm: RF thread ... to_read " + toRead );
       if ( mType == COMM_RFCOMM ) {
         while ( doWork && mNrPacketsRead /* .get() */ != toRead ) {
           // TDLog.Log( TDLog.LOG_COMM, "RF comm loop: read " + getNrReadPackets() + " to-read " + toRead );
@@ -140,7 +140,7 @@ public class TopoDroidComm
           }
         }
       } else { // if ( mType == COMM_GATT ) 
-        // Log.v("DistoX-BLE-TC", "TD comm -> proto read_pckets");
+        // Log.v("DistoX-BLEC", "TD comm: proto read_pckets");
         mProtocol.readPacket( true, mDataType ); // start reading a packet
       }
       // TDLog.Log( TDLog.LOG_COMM, "RF comm thread run() exiting");
@@ -156,9 +156,9 @@ public class TopoDroidComm
   // @param data_type unused
   public void handleRegularPacket( int res, Handler lister, int data_type )
   {
-    // Log.v( "DistoX-BLE-TC", "Comm PACKET " + res + "/" + DataType.PACKET_DATA + " type " + data_type );
+    // Log.v( "DistoX-BLE", "TD comm: PACKET " + res + "/" + DataType.PACKET_DATA + " type " + data_type );
     if ( res == DataType.PACKET_DATA ) {
-      // Log.v("DistoX-BLE-TC", "packet DATA");
+      // Log.v("DistoX-BLE", "TD comm: packet DATA");
       // mNrPacketsRead.incrementAndGet(); // FIXME_ATOMIC_INT
       ++mNrPacketsRead;
       double d = mProtocol.mDistance;
@@ -168,7 +168,7 @@ public class TopoDroidComm
       // extend is unset to start
       // long extend = TDAzimuth.computeLegExtend( b ); // ExtendType.EXTEND_UNSET; FIXME_EXTEND 
       // TDLog.Log( TDLog.LOG_COMM, "Comm D PACKET " + d + " " + b + " " + c );
-      Log.v("DistoX-BLE-TC", "Comm D PACKET " + d + " " + b + " " + c );
+      Log.v("DistoX-BLE", "TD comm: D PACKET " + d + " " + b + " " + c );
       // NOTE type=0 shot is DistoX-type
       long status = ( d > TDSetting.mMaxShotLength )? TDStatus.OVERSHOOT : TDStatus.NORMAL;
       mLastShotId = TopoDroidApp.mData.insertDistoXShot( TDInstance.sid, -1L, d, b, c, r, ExtendType.EXTEND_IGNORE, status, TDInstance.deviceAddress() );
@@ -182,7 +182,7 @@ public class TopoDroidComm
           TDUtil.slowDown( TDSetting.mWaitData );
         }
       } else {
-        Log.v("DistoX-BLE-TC", "null Lister");
+        Log.v("DistoX-BLE", "TD comm: null Lister");
       }
       // if ( lister != null ) {
       //   DBlock blk = new DBlock( );
@@ -194,13 +194,13 @@ public class TopoDroidComm
       //   lister.updateBlockList( blk );
       // }
     } else if ( res == DataType.PACKET_G ) {
-      // Log.v("DistoX-BLE-TC", "packet G");
+      // Log.v("DistoX-BLE", "TD comm: packet G");
       /// TDLog.Log( TDLog.LOG_COMM, "Comm G PACKET" );
       // mNrPacketsRead.incrementAndGet(); // FIXME_ATOMIC_INT
       ++mNrPacketsRead;
       mHasG = true;
     } else if ( res == DataType.PACKET_M ) {
-      // Log.v("DistoX-BLE-TC", "packet M");
+      // Log.v("DistoX-BLE", "TD comm: packet M");
       // TDLog.Log( TDLog.LOG_COMM, "Comm M PACKET" );
       // mNrPacketsRead.incrementAndGet(); // FIXME_ATOMIC_INT
       ++mNrPacketsRead;
@@ -226,7 +226,7 @@ public class TopoDroidComm
       }
       mHasG = false;
     } else if ( res == DataType.PACKET_REPLY ) {
-      // Log.v("DistoX-BLE-TC", "packet REPLY");
+      // Log.v("DistoX-BLE", "TD comm: packet REPLY");
       // TODO handle packet reply
       //
       // byte[] addr = mProtocol.getAddress();
@@ -251,7 +251,7 @@ public class TopoDroidComm
       //   // mTail = (int)( reply[2] | ( (int)(reply[3]) << 8 ) );
       // }
     } else if ( res == DataType.PACKET_VECTOR ) {
-      // Log.v("DistoX-BLE-TC", "packet VECTOR");
+      // Log.v("DistoX-BLE", "TD comm: packet VECTOR");
       // vector packet do count
       // mNrPacketsRead.incrementAndGet(); // FIXME_ATOMIC_INT
       ++mNrPacketsRead;
@@ -383,8 +383,8 @@ public class TopoDroidComm
    */
   public int downloadData( String address, Handler /* ILister */ lister, int data_type )
   {
-    // TDLog.Error("generic download data always fails");
-    Log.v("DistoX-BLE-TC", "generic download data always fails");
+    TDLog.Error("TD comm: generic download data always fails");
+    // Log.v("DistoX-BLE", "TD comm: generic download data always fails");
     return -1;
   }
 

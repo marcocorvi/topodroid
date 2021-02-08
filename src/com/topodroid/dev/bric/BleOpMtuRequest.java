@@ -17,18 +17,18 @@ import android.content.Context;
 
 import android.util.Log;
 
-class BleOpMtuRequest extends BleOperation 
+public class BleOpMtuRequest extends BleOperation 
 {
-  BleOpMtuRequest( Context ctx, BleComm pipe )
+  public BleOpMtuRequest( Context ctx, BleComm pipe )
   {
     super( ctx, pipe );
   }
 
-  String name() { return "MtuReq"; }
+  // public String name() { return "MtuReq"; }
 
   @Override 
-  void execute()
+  public void execute()
   {
-    Log.v("DistoX-BLE-B", "BleOp exec MTU request" );
+    Log.v("DistoX-BLE", "BleOp exec MTU request" );
   }
 }

@@ -17,19 +17,19 @@ import android.content.Context;
 
 import android.util.Log;
 
-class BleOpDisconnect extends BleOperation 
+public class BleOpDisconnect extends BleOperation 
 {
-  BleOpDisconnect( Context ctx, BleComm pipe )
+  public BleOpDisconnect( Context ctx, BleComm pipe )
   {
     super( ctx, pipe );
   }
 
-  String name() { return "Disconnect"; }
+  // public String name() { return "Disconnect"; }
 
   @Override 
-  void execute()
+  public void execute()
   {
-    // Log.v("DistoX-BLE_B", "BleOp exec disconnect");
+    // Log.v("DistoX-BLE", "BleOp exec disconnect");
     if ( mPipe == null ) { 
       TDLog.Error("BleOp disconnect error: null pipe" );
       return;

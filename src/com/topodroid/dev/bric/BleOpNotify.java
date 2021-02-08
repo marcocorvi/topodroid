@@ -22,7 +22,7 @@ import android.util.Log;
 
 import java.util.UUID;
 
-class BleOpNotify extends BleOperation 
+public class BleOpNotify extends BleOperation 
 {
   boolean mEnable;
   UUID mSrvUuid;
@@ -38,7 +38,7 @@ class BleOpNotify extends BleOperation
   //   mEnable   = enable;
   // }
 
-  BleOpNotify( Context ctx, BleComm pipe, UUID srvUuid, UUID chrtUuid, boolean enable )
+  public BleOpNotify( Context ctx, BleComm pipe, UUID srvUuid, UUID chrtUuid, boolean enable )
   {
     super( ctx, pipe );
     mSrvUuid  = srvUuid;
@@ -47,12 +47,12 @@ class BleOpNotify extends BleOperation
     mEnable   = enable;
   }
 
-  String name() { return "Notify"; }
+  // public String name() { return "Notify"; }
 
   @Override 
-  void execute()
+  public void execute()
   {
-    // Log.v("DistoX-BLE-B", "BleOp exec notify " + mEnable );
+    // Log.v("DistoX-BLE", "BleOp exec notify " + mEnable );
     if ( mPipe == null ) { 
       TDLog.Error("BleOp notify error: null pipe" );
       return;

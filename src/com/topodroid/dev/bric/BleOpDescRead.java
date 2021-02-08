@@ -17,18 +17,18 @@ import android.content.Context;
 
 import android.util.Log;
 
-class BleOpDescRead extends BleOperation 
+public class BleOpDescRead extends BleOperation 
 {
-  BleOpDescRead( Context ctx, BleComm pipe )
+  public BleOpDescRead( Context ctx, BleComm pipe )
   {
     super( ctx, pipe );
   }
 
-  String name() { return "DescRead"; }
+  // public String name() { return "DescRead"; }
 
   @Override 
-  void execute()
+  public void execute()
   {
-    Log.v("DistoX-BLE-B", "BleOp exec desc read");
+    Log.v("DistoX-BLE", "BleOp exec desc read");
   }
 }

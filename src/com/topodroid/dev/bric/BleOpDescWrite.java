@@ -19,21 +19,21 @@ import android.util.Log;
 
 import java.util.Arrays;
 
-class BleOpDescWrite extends BleOperation 
+public class BleOpDescWrite extends BleOperation 
 {
   byte[] bytes;
 
-  BleOpDescWrite( Context ctx, BleComm pipe, byte[] b )
+  public BleOpDescWrite( Context ctx, BleComm pipe, byte[] b )
   {
     super( ctx, pipe );
     bytes = Arrays.copyOf( b, b.length );
   }
 
-  String name() { return "DescWrite"; }
+  // public String name() { return "DescWrite"; }
 
   @Override 
-  void execute()
+  public void execute()
   {
-    Log.v("DistoX-BLE-B", "BleOp exec desc write");
+    Log.v("DistoX-BLE", "BleOp exec desc write");
   }
 }

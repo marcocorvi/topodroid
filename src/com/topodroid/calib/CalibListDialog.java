@@ -93,7 +93,7 @@ public class CalibListDialog extends MyDialog
 
   private void updateList()
   {
-    if ( TopoDroidApp.mDData != null && TDInstance.deviceA != null ) {
+    if ( TopoDroidApp.mDData != null && TDInstance.getDeviceA() != null ) {
       List< String > list = TopoDroidApp.mDData.selectDeviceCalibs( TDInstance.deviceAddress() );
       mArrayAdapter.clear();
       for ( String item : list ) {

@@ -19,22 +19,22 @@ import android.bluetooth.BluetoothDevice;
 
 import android.util.Log;
 
-class BleOpConnect extends BleOperation 
+public class BleOpConnect extends BleOperation 
 {
   BluetoothDevice mDevice;
 
-  BleOpConnect( Context ctx, BleComm pipe, BluetoothDevice device )
+  public BleOpConnect( Context ctx, BleComm pipe, BluetoothDevice device )
   {
     super( ctx, pipe );
     mDevice = device;
   }
 
-  String name() { return "Connect"; }
+  // public String name() { return "Connect"; }
 
   @Override 
-  void execute()
+  public void execute()
   {
-    // Log.v("DistoX-BLE-B", "BleOp exec connect");
+    // Log.v("DistoX-BLE", "BleOp exec connect");
     if ( mPipe == null ) { 
       TDLog.Error("BleOp connect error: null pipe" );
       return;
