@@ -1,21 +1,17 @@
-/* @file InfoReadX310Task.java
+/* @file InfoReadA3Task.java
  *
  * @author marco corvi
  * @date apr 2016
  *
- * @brief TopoDroid DistoX info X310 read task
+ * @brief TopoDroid DistoX info A3 read task
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.dev;
+package com.topodroid.dev.distox1;
 
 import com.topodroid.DistoX.TopoDroidApp;
-import com.topodroid.DistoX.R;
-import com.topodroid.DistoX.TDToast;
-
-// import android.util.Log;
 
 import java.lang.ref.WeakReference;
 
@@ -23,18 +19,20 @@ import java.lang.ref.WeakReference;
 import android.os.AsyncTask;
 // import android.content.Context;
 
-public class InfoReadX310Task extends AsyncTask<Void, Integer, Boolean>
+// import android.util.Log;
+
+public class InfoReadA3Task extends AsyncTask<Void, Integer, Boolean>
 {
-  private final WeakReference<TopoDroidApp>   mApp; // FIXME LEAK
-  private final WeakReference<DeviceX310InfoDialog>  mDialog;
-  private DeviceX310Info mInfo = null;
+  private final WeakReference<TopoDroidApp>  mApp; // FIXME LEAK
+  private final WeakReference<DeviceA3InfoDialog> mDialog;
+  private DeviceA3Info mInfo = null;
   // int mType; // DistoX type
   private String mAddress;
 
-  public InfoReadX310Task( TopoDroidApp app, DeviceX310InfoDialog dialog, String address )
+  public InfoReadA3Task( TopoDroidApp app, DeviceA3InfoDialog dialog, String address )
   {
     mApp      = new WeakReference<TopoDroidApp>( app );
-    mDialog   = new WeakReference<DeviceX310InfoDialog>( dialog );
+    mDialog   = new WeakReference<DeviceA3InfoDialog>( dialog );
     mAddress  = address;
   }
 
@@ -42,7 +40,7 @@ public class InfoReadX310Task extends AsyncTask<Void, Integer, Boolean>
   protected Boolean doInBackground(Void... v)
   {
     if ( mApp.get() == null ) return null;
-    mInfo = mApp.get().readDeviceX310Info( mAddress );
+    mInfo = mApp.get().readDeviceA3Info( mAddress );
     return ( mInfo != null );
   }
 
@@ -56,8 +54,6 @@ public class InfoReadX310Task extends AsyncTask<Void, Integer, Boolean>
   {
     if ( result && mDialog.get() != null ) {
       mDialog.get().updateInfo( mInfo );
-    } else {
-      TDToast.makeBad( R.string.read_failed );
     }
   }
 

@@ -25,7 +25,7 @@ import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPrefCat;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.DataType;
-import com.topodroid.dev.DeviceX310TakeShot;
+import com.topodroid.dev.distox2.DeviceX310TakeShot;
 import com.topodroid.calib.CBlock;
 import com.topodroid.calib.CBlockAdapter;
 import com.topodroid.calib.CalibComputer;

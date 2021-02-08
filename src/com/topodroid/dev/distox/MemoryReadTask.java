@@ -9,7 +9,9 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.dev;
+package com.topodroid.dev.distox;
+
+import com.topodroid.dev.Device;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.packetX.MemoryOctet;

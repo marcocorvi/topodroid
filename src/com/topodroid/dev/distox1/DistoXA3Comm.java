@@ -9,12 +9,15 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.dev;
+package com.topodroid.dev.distox1;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.packetX.MemoryOctet;
 import com.topodroid.DistoX.TDInstance;
 import com.topodroid.DistoX.TopoDroidApp;
+import com.topodroid.dev.Device;
+import com.topodroid.dev.distox.DistoXComm;
+import com.topodroid.dev.distox.DistoXProtocol;
 
 import android.util.Log;
 
@@ -39,7 +42,7 @@ public class DistoXA3Comm extends DistoXComm
    *        device  TDInstance.deviceA
    *        app     context
    */
-  protected DistoXProtocol createProtocol( DataInputStream in, DataOutputStream out )
+  public DistoXProtocol createProtocol( DataInputStream in, DataOutputStream out )
   {
     return (new DistoXA3Protocol( in, out, TDInstance.getDeviceA(), mApp ));
   }

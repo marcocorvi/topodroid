@@ -9,7 +9,7 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.dev;
+package com.topodroid.dev.distox;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
@@ -17,6 +17,17 @@ import com.topodroid.DistoX.DataDownloader;
 import com.topodroid.DistoX.TDUtil;
 import com.topodroid.DistoX.TDInstance;
 import com.topodroid.DistoX.TopoDroidApp;
+
+import com.topodroid.dev.Device;
+import com.topodroid.dev.DeviceUtil;
+import com.topodroid.dev.CommThread;
+import com.topodroid.dev.TopoDroidComm;
+import com.topodroid.dev.TopoDroidProtocol;
+import com.topodroid.dev.ConnectionState;
+import com.topodroid.dev.DataType;
+// import com.topodroid.dev.distox.DistoX;
+import com.topodroid.dev.distox1.DeviceA3Details;
+import com.topodroid.dev.distox2.DeviceX310Details;
 
 import android.util.Log;
 
@@ -34,8 +45,6 @@ import java.util.UUID;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
-
-// import android.app.Activity;
 
 // import android.os.Bundle;
 import android.os.Handler;
@@ -170,7 +179,7 @@ public class DistoXComm extends TopoDroidComm
 
 // --------------------------------------------------
 
-  protected DistoXComm( TopoDroidApp app )
+  public DistoXComm( TopoDroidApp app )
   {
     super( app );
     // mAddress   = null; done by TopoDroidComm
@@ -463,7 +472,7 @@ public class DistoXComm extends TopoDroidComm
     // Log.v("DistoX-BLE", "DistoX comm: start comm thread: to read " + to_read );
     if ( mBTSocket != null ) {
       if ( mCommThread == null ) {
-        mCommThread = new CommThread( TopoDroidComm.COMM_RFCOMM, mProtocol, to_read, lister, data_type );
+        mCommThread = new CommThread( TopoDroidComm.COMM_RFCOMM, this, /* mProtocol, */ to_read, lister, data_type );
         mCommThread.start();
         // TDLog.Log( TDLog.LOG_COMM, "startRFcommThread started");
       } else {
@@ -514,7 +523,7 @@ public class DistoXComm extends TopoDroidComm
   protected boolean setCalibMode( boolean turn_on )
   {
     // return sendCommand( turn_on? 0x31 : 0x30 ); 
-    return sendCommand( turn_on? Device.CALIB_ON : Device.CALIB_OFF );
+    return sendCommand( turn_on? DistoX.CALIB_ON : DistoX.CALIB_OFF );
   }
 
   /** Toggle device calibration mode - must be overridden
@@ -634,7 +643,7 @@ public class DistoXComm extends TopoDroidComm
     if ( ! isCommThreadNull() ) {
       TDLog.Error( "download data: RFcomm thread not null");
       // Log.v( "DistoX-BLE", "DistoX comm: download data: RFcomm thread not null");
-      return TopoDroidProtocol.DISTOX_ERR_CONNECTED;
+      return DistoX.DISTOX_ERR_CONNECTED;
     }
     
     // Log.v( "DistoX-BLE", "DistoX comm: download data: ok");
@@ -650,7 +659,7 @@ public class DistoXComm extends TopoDroidComm
         if ( to_read == 0 ) {
           ret = to_read;
 	} else if ( to_read < 0 ) {
-	  int error_code = (protocol == null)? TopoDroidProtocol.DISTOX_ERR_PROTOCOL
+	  int error_code = (protocol == null)? DistoX.DISTOX_ERR_PROTOCOL
                          : protocol.getErrorCode();
 	  if ( error_code < 0 ) {
             ret = error_code;

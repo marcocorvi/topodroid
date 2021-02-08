@@ -9,10 +9,10 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.dev;
+package com.topodroid.dev.distox2;
 
 import com.topodroid.prefs.TDSetting;
-// import com.topodroid.dev.Device;
+import com.topodroid.dev.Device;
 import com.topodroid.DistoX.ILister;
 import com.topodroid.DistoX.ListerHandler;
 import com.topodroid.DistoX.TopoDroidApp;

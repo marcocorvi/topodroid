@@ -11,13 +11,17 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.dev;
+package com.topodroid.dev.distox;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.packetX.MemoryOctet;
 import com.topodroid.DistoX.TDPath;
 import com.topodroid.DistoX.TDUtil;
+import com.topodroid.dev.Device;
+import com.topodroid.dev.DataType;
+import com.topodroid.dev.TopoDroidProtocol;
+// import com.topodroid.dev.distox.DistoX;
 
 import android.util.Log;
 
@@ -25,26 +29,18 @@ import android.util.Log;
 
 import java.io.IOException;
 import java.io.EOFException;
-// import java.io.FileNotFoundException;
-// import java.io.File;
-// import java.io.FileInputStream;
-// import java.io.FileOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+
 // import java.util.UUID;
 import java.util.List;
-// import java.util.Locale;
-// import java.lang.reflect.Field;
-// import java.net.Socket;
-
-// import android.os.CountDownTimer;
 
 import android.content.Context;
 
 import java.nio.channels.ClosedByInterruptException;
 // import java.nio.ByteBuffer;
 
-class DistoXProtocol extends TopoDroidProtocol
+public class DistoXProtocol extends TopoDroidProtocol
 {
   // protected Socket  mSocket = null;
   protected DataInputStream  mIn;
@@ -63,7 +59,7 @@ class DistoXProtocol extends TopoDroidProtocol
   
   //-----------------------------------------------------
 
-  protected DistoXProtocol( DataInputStream in, DataOutputStream out, Device device, Context context )
+  public DistoXProtocol( DataInputStream in, DataOutputStream out, Device device, Context context )
   {
     super( device, context );
 
@@ -99,7 +95,7 @@ class DistoXProtocol extends TopoDroidProtocol
   }
 
   @Override
-  void closeIOstreams()
+  public void closeIOstreams()
   {
     if ( mIn != null ) {
       try { mIn.close(); } catch ( IOException e ) { }
@@ -203,7 +199,7 @@ class DistoXProtocol extends TopoDroidProtocol
    * @return packet type (if successful)
    */
   @Override
-  int readPacket( boolean no_timeout, int data_type )
+  public int readPacket( boolean no_timeout, int data_type )
   {
     // int min_available = ( mDeviceType == Device.DISTO_X000)? 8 : 1; // FIXME 8 should work in every case // FIXME VirtualDistoX
     int min_available = 1; // FIXME 8 should work in every case
@@ -261,8 +257,8 @@ class DistoXProtocol extends TopoDroidProtocol
     } catch (IOException e ) {
       // this is OK: the DistoX has been turned off
       TDLog.Debug( "Proto read packet IOException " + e.toString() + " OK distox turned off" );
-      // mError = DISTOX_ERR_OFF;
-      return DISTOX_ERR_OFF;
+      // mError = DistoX.DISTOX_ERR_OFF;
+      return DistoX.DISTOX_ERR_OFF;
     }
     return DataType.PACKET_NONE;
   }
@@ -291,17 +287,17 @@ class DistoXProtocol extends TopoDroidProtocol
   }
 
   // must be overridden
-  int getHeadMinusTail( int head, int tail ) { return 0; }
+  public int getHeadMinusTail( int head, int tail ) { return 0; }
 
   /** read the number of data to download
    * @param command command to send to the DistoX
    * @return number of data to download
    */
   @Override
-  int readToRead( byte[] command )
+  public int readToRead( byte[] command )
   {
     int ret = 0;
-    mError = DISTOX_ERR_OK;
+    mError = DistoX.DISTOX_ERR_OK;
     try {
       mOut.write( command, 0, 3 );
       // if ( TDSetting.mPacketLog ) logPacket3( 1L, command );
@@ -312,8 +308,8 @@ class DistoXProtocol extends TopoDroidProtocol
       // checkDataType( mBuffer[0], data_type );
 
       if ( ( mBuffer[0] != (byte)( 0x38 ) ) || ( mBuffer[1] != command[1] ) || ( mBuffer[2] != command[2] ) ) {
-	mError = DISTOX_ERR_HEADTAIL;
-	return DISTOX_ERR_HEADTAIL;
+	mError = DistoX.DISTOX_ERR_HEADTAIL;
+	return DistoX.DISTOX_ERR_HEADTAIL;
       }
       int head = MemoryOctet.toInt( mBuffer[4], mBuffer[3] );
       int tail = MemoryOctet.toInt( mBuffer[6], mBuffer[5] );
@@ -329,12 +325,12 @@ class DistoXProtocol extends TopoDroidProtocol
       return ret;
     } catch ( EOFException e ) {
       // TDLog.Error( "Proto read-to-read Head-Tail read() failed" );
-      mError = DISTOX_ERR_HEADTAIL_EOF;
-      return DISTOX_ERR_HEADTAIL_EOF;
+      mError = DistoX.DISTOX_ERR_HEADTAIL_EOF;
+      return DistoX.DISTOX_ERR_HEADTAIL_EOF;
     } catch (IOException e ) {
       // TDLog.Error( "Proto read-to-read Head-Tail read() failed" );
-      mError = DISTOX_ERR_HEADTAIL_IO;
-      return DISTOX_ERR_HEADTAIL_IO;
+      mError = DistoX.DISTOX_ERR_HEADTAIL_IO;
+      return DistoX.DISTOX_ERR_HEADTAIL_IO;
     }
   }
 
@@ -375,7 +371,7 @@ class DistoXProtocol extends TopoDroidProtocol
    * @return 4-byte array with memory data
    */
   @Override
-  byte[] readMemory( int addr )
+  public byte[] readMemory( int addr )
   {
     mBuffer[0] = (byte)( 0x38 );
     mBuffer[1] = (byte)( addr & 0xff );
@@ -411,7 +407,7 @@ class DistoXProtocol extends TopoDroidProtocol
    * @return the number of read octets 
    */
   @Override
-  int readMemory( int start, int end, List< MemoryOctet > data )
+  public int readMemory( int start, int end, List< MemoryOctet > data )
   {
     if ( start < 0 ) start = 0;
     if ( end > 0x8000 ) end = 0x8000;
@@ -465,7 +461,7 @@ class DistoXProtocol extends TopoDroidProtocol
    * @return true if successful
    */
   @Override
-  boolean writeCalibration( byte[] calib )
+  public boolean writeCalibration( byte[] calib )
   { 
     if ( calib == null ) return false;
     int  len  = calib.length;
@@ -515,7 +511,7 @@ class DistoXProtocol extends TopoDroidProtocol
    * called only by DistoXComm.readCoeff (TopoDroidComm.readCoeff)
    */
   @Override
-  boolean readCalibration( byte[] calib )
+  public boolean readCalibration( byte[] calib )
   {
     if ( calib == null ) return false;
     int  len  = calib.length;

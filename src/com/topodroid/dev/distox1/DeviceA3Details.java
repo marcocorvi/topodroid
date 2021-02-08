@@ -10,7 +10,9 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.dev;
+package com.topodroid.dev.distox1;
+
+
 
 public class DeviceA3Details
 {
@@ -29,6 +31,6 @@ public class DeviceA3Details
 
   public static boolean checkHeadTail( int[] ht ) 
   {
-    return ( ht[0] < 0 || ht[0] >= DeviceA3Details.MAX_ADDRESS_A3 || ht[1] < 0 || ht[1] >= DeviceA3Details.MAX_ADDRESS_A3 );
+    return ( ht[0] < 0 || ht[0] >= MAX_ADDRESS_A3 || ht[1] < 0 || ht[1] >= MAX_ADDRESS_A3 );
   }
 }

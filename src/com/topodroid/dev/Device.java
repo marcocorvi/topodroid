@@ -18,12 +18,6 @@ import android.util.Log;
 public class Device
 {
   // commands
-  static final int CALIB_OFF        = 0x30;
-  static final int CALIB_ON         = 0x31;
-  static final int SILENT_ON        = 0x32;
-  static final int SILENT_OFF       = 0x33;
-  static final int DISTOX_OFF       = 0x34;
-  static final int DISTOX_35        = 0x35;
   public static final int LASER_ON         =  1; // 0x36
   public static final int LASER_OFF        =  0; // 0x37
   public static final int MEASURE          =  2; // 0x38

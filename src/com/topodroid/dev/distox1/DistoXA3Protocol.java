@@ -11,11 +11,13 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.dev;
+package com.topodroid.dev.distox1;
 
 import com.topodroid.utils.TDLog;
 // import com.topodroid.prefs.TDSetting;
 import com.topodroid.packetX.MemoryOctet;
+import com.topodroid.dev.Device;
+import com.topodroid.dev.distox.DistoXProtocol;
 
 import android.util.Log;
 
@@ -23,17 +25,9 @@ import android.util.Log;
 
 import java.io.IOException;
 import java.io.EOFException;
-// import java.io.FileNotFoundException;
-// import java.io.File;
-// import java.io.FileInputStream;
-// import java.io.FileOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 // import java.util.UUID;
-// import java.util.List;
-// import java.util.Locale;
-// import java.lang.reflect.Field;
-// import java.net.Socket;
 
 // import android.os.CountDownTimer;
 
@@ -42,11 +36,11 @@ import android.content.Context;
 // import java.nio.channels.ClosedByInterruptException;
 // import java.nio.ByteBuffer;
 
-class DistoXA3Protocol extends DistoXProtocol
+public class DistoXA3Protocol extends DistoXProtocol
 {
   //-----------------------------------------------------
 
-  DistoXA3Protocol( DataInputStream in, DataOutputStream out, Device device, Context context )
+  public DistoXA3Protocol( DataInputStream in, DataOutputStream out, Device device, Context context )
   {
     super( in, out, device, context );
   }
@@ -57,7 +51,7 @@ class DistoXA3Protocol extends DistoXProtocol
    * @return true if successful
    */
   // @Override
-  boolean swapA3HotBit( int addr, boolean on_off ) // only A3
+  public boolean swapA3HotBit( int addr, boolean on_off ) // only A3
   {
     try {
       mBuffer[0] = (byte) 0x38;
@@ -124,7 +118,7 @@ class DistoXA3Protocol extends DistoXProtocol
   // PACKETS I/O ------------------------------------------------------------------------
 
   @Override
-  int getHeadMinusTail( int head, int tail )
+  public int getHeadMinusTail( int head, int tail )
   {
     return ( head >= tail )? (head-tail)/8 : ((DeviceA3Details.MAX_ADDRESS_A3 - tail) + head)/8; 
   }

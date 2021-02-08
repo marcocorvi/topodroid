@@ -44,17 +44,8 @@ public class TopoDroidProtocol
 
   protected static final UUID MY_UUID = UUID.fromString( "00001101-0000-1000-8000-00805F9B34FB" );
 
-
-  static final int DISTOX_ERR_OK           =  0; // OK: no error
-  static final int DISTOX_ERR_HEADTAIL     = -1;
-  static final int DISTOX_ERR_HEADTAIL_IO  = -2;
-  static final int DISTOX_ERR_HEADTAIL_EOF = -3;
-  static final int DISTOX_ERR_CONNECTED    = -4;
-  static final int DISTOX_ERR_OFF          = -5; // distox has turned off
-  static final int DISTOX_ERR_PROTOCOL     = -6; // protocol is null
-
   protected int  mError; // readToRead error code
-  int getErrorCode() { return mError; }
+  public int getErrorCode() { return mError; }
 
   public double mDistance;
   public double mBearing;
@@ -73,14 +64,14 @@ public class TopoDroidProtocol
   // protected byte[] mRequest_Buffer;  // request buffer
   // private byte[] mReplyBuffer;    // reply data
   
-  int mMaxTimeout = 8;
+  public int mMaxTimeout = 8;
 
   // int    getType() { return mDeviceType; }
   // byte[] getAddress() { return mDeviceAddress; }
 
   //-----------------------------------------------------
 
-  protected TopoDroidProtocol( Device device, Context context )
+  public TopoDroidProtocol( Device device, Context context )
   {
     // Log.v("DistoX-BLE", "TD proto: type " + device.mType + " addr " + device.mAddress );
     mDeviceType    = device.mType;
@@ -94,7 +85,7 @@ public class TopoDroidProtocol
     // mRequest_Buffer = new byte[8];
   }
 
-  void closeIOstreams() { }
+  public void closeIOstreams() { }
 
   // PACKET LOGGER ----------------------------------------------------------------
   protected void logPacket( long dir, byte[] buf )
@@ -284,7 +275,7 @@ public class TopoDroidProtocol
   // must be overridden
   // @param no_timeout
   // @param data_type  packet data type (to filter packet of different type)
-  int readPacket( boolean no_timeout, int data_type )
+  public int readPacket( boolean no_timeout, int data_type )
   {
     Log.v("DistoX-BLE", "TD proto: read_packet returns NONE");
     return DataType.PACKET_NONE;
@@ -304,13 +295,13 @@ public class TopoDroidProtocol
    *
    * must be overridden - default returns 0
    */
-  int readToRead( byte[] command ) { return 0; }
+  public int readToRead( byte[] command ) { return 0; }
 
   /** read 4 bytes at a memory location
    * @param addr    memory address to read
    * @return 4-byte array with memory data
    */
-  byte[] readMemory( int addr ) { return null; }
+  public byte[] readMemory( int addr ) { return null; }
 
   /** read memory data between two addresses
    * @param start    start address (inclusive)
@@ -318,13 +309,13 @@ public class TopoDroidProtocol
    * @param data     array-list of MemoryOctet to fill with read data
    * @return the number of read octets 
    */
-  int readMemory( int start, int end, List< MemoryOctet > data ) { return 0; }
+  public int readMemory( int start, int end, List< MemoryOctet > data ) { return 0; }
 
   /** write calibration coeffs to the DistoX
    * @param calib    array of 48 (52) bytes with the coefficients
    * @return true if successful
    */
-  boolean writeCalibration( byte[] calib ) { return false; }
+  public boolean writeCalibration( byte[] calib ) { return false; }
 
   /** read calibration coeffs from the DistoX
    * @param calib    array of 48 (52) bytes to store the coefficients
@@ -332,6 +323,6 @@ public class TopoDroidProtocol
    *
    * called only by DistoXComm.readCoeff (TopoDroidComm.readCoeff)
    */
-  boolean readCalibration( byte[] calib ) { return false; }
+  public boolean readCalibration( byte[] calib ) { return false; }
 
 }

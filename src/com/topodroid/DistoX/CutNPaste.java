@@ -16,7 +16,7 @@ import com.topodroid.utils.TDColor;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.DataType;
-import com.topodroid.dev.DeviceX310TakeShot;
+import com.topodroid.dev.distox2.DeviceX310TakeShot;
 import com.topodroid.dev.bric.BricConst;
 
 import java.lang.ref.WeakReference;

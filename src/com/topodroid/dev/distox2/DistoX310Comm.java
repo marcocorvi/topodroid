@@ -9,13 +9,17 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.dev;
+package com.topodroid.dev.distox2;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.packetX.MemoryOctet;
 import com.topodroid.DistoX.TDInstance;
 import com.topodroid.DistoX.TDUtil;
 import com.topodroid.DistoX.TopoDroidApp;
+import com.topodroid.dev.Device;
+import com.topodroid.dev.distox.DistoX;
+import com.topodroid.dev.distox.DistoXComm;
+import com.topodroid.dev.distox.DistoXProtocol;
 
 import android.util.Log;
 
@@ -43,7 +47,7 @@ public class DistoX310Comm extends DistoXComm
    *        device  TDInstance.deviceA
    *        app     context
    */
-  protected DistoXProtocol createProtocol( DataInputStream in, DataOutputStream out )
+  public DistoXProtocol createProtocol( DataInputStream in, DataOutputStream out )
   {
     return (new DistoX310Protocol( in, out, TDInstance.getDeviceA(), mApp ));
   }
@@ -60,26 +64,26 @@ public class DistoX310Comm extends DistoXComm
   {
     if ( connectSocket( address, data_type ) ) {
       switch ( what ) {
-        case Device.DISTOX_OFF:
-          sendCommand( (byte)Device.DISTOX_OFF );
+        case DistoX.DISTOX_OFF:
+          sendCommand( (byte)DistoX.DISTOX_OFF );
           break;
         case Device.LASER_ON:
-          sendCommand( 0x36 );
+          sendCommand( (byte)DistoX.LASER_ON );
           break;
         case Device.LASER_OFF:
-          sendCommand( 0x37 );
+          sendCommand( (byte)DistoX.LASER_OFF );
           break;
         case Device.MEASURE:
-          // sendCommand( 0x38 );
+          // sendCommand( (byte)DistoX.MEASURE );
           // break;
         case Device.MEASURE_DOWNLOAD:
-          sendCommand( 0x38 );
+          sendCommand( (byte)DistoX.MEASURE );
           break;
-        case Device.CALIB_OFF:
-          sendCommand( (byte)Device.CALIB_OFF );
+        case DistoX.CALIB_OFF:
+          sendCommand( (byte)DistoX.CALIB_OFF );
           break;
-        case Device.CALIB_ON:
-          sendCommand( (byte)Device.CALIB_ON );
+        case DistoX.CALIB_ON:
+          sendCommand( (byte)DistoX.CALIB_ON );
           break;
       }
       if ( mCommThread == null && to_read > 0 ) {

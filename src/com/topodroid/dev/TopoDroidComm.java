@@ -21,6 +21,7 @@ import com.topodroid.DistoX.TopoDroidApp;
 import com.topodroid.DistoX.Lister;
 // import com.topodroid.DistoX.DBlock;
 import com.topodroid.common.ExtendType;
+import com.topodroid.dev.distox.DistoX;
 
 import android.util.Log;
 
@@ -39,19 +40,19 @@ import android.os.Message;
 
 public class TopoDroidComm
 {
-  static final int COMM_RFCOMM = 0;
-  static final int COMM_GATT   = 1;
+  public static final int COMM_RFCOMM = 0;
+  public static final int COMM_GATT   = 1;
 
-  protected static final String SERVICE_STRING = "00001101-0000-1000-8000-00805F9B34FB";
-  protected static final UUID   SERVICE_UUID = UUID.fromString( SERVICE_STRING );
+  public static final String SERVICE_STRING = "00001101-0000-1000-8000-00805F9B34FB";
+  public static final UUID   SERVICE_UUID = UUID.fromString( SERVICE_STRING );
 
-  protected TopoDroidApp mApp;
-  protected String mAddress;
-  protected TopoDroidProtocol mProtocol;
+  public TopoDroidApp mApp;
+  public String mAddress;
+  public TopoDroidProtocol mProtocol;
 
-  protected boolean mBTConnected;
+  public boolean mBTConnected;
 
-  byte[] mCoeff;
+  public byte[] mCoeff;
 
 // -----------------------------------------------------------
 
@@ -59,97 +60,13 @@ public class TopoDroidComm
   protected volatile int mNrPacketsRead;
 
   // int getNrPacketsRead() { return ( mNrPacketsRead == null )? 0 : mNrPacketsRead.get(); } // FIXME_ATOMIC_INT 
-  int getNrReadPackets() { return mNrPacketsRead; }
+  public int  getNrReadPackets() { return mNrPacketsRead; }
+  public void setNrReadPackets( int nr ) { mNrPacketsRead = nr; }
+
   // void incNrReadPackets() { ++mNrPacketsRead; }
   // void resetNrReadPackets() { mNrPacketsRead = 0; }
 
   public boolean isConnected() { return mBTConnected; }
-
-  protected class CommThread extends Thread
-  {
-    int mType;
-
-    private TopoDroidProtocol mProtocol;
-    private int toRead; // number of packet to read
-    // private ILister mLister;
-    Handler mLister = null; // FIXME_LISTER
-    // private long mLastShotId;   // last shot id
-
-    private volatile boolean doWork = true;
-    private int mDataType;   // packet datatype 
-
-    void cancelWork()
-    {
-      if ( mProtocol != null ) mProtocol.mMaxTimeout = 0;
-      doWork = false;
-    }
-
-    /** 
-     * @param protocol    communication protocol
-     * @param to_read     number of data to read (use -1 to read forever until timeout or an exception)
-     * @param lister      optional data lister
-     * @param data_type   packet datatype (either shot or calib)
-     */
-    CommThread( int type, TopoDroidProtocol protocol, int to_read, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
-    {
-      mType  = type;
-      toRead = to_read;
-      mProtocol = protocol;
-      mLister   = lister;
-      mDataType = data_type;
-      // reset nr of read packets 
-      // mNrPacketsRead = new AtomicInteger( 0 ); // FIXME_ATOMIC_INT
-      mNrPacketsRead = 0;
-      // mLastShotId = 0;
-    }
-
-    /** This thread blocks on read_Packet (socket read) and when a packet arrives 
-     * it handles it
-     */
-    public void run()
-    {
-      doWork = true;
-      mHasG  = false;
-
-      // TDLog.Log( TDLog.LOG_COMM, "RF comm thread running ... to_read " + toRead );
-      // Log.v( "DistoX-BLE", "TD comm: RF thread ... to_read " + toRead );
-      if ( mType == COMM_RFCOMM ) {
-        while ( doWork && mNrPacketsRead /* .get() */ != toRead ) {
-          // TDLog.Log( TDLog.LOG_COMM, "RF comm loop: read " + getNrReadPackets() + " to-read " + toRead );
-          
-          int res = mProtocol.readPacket( (toRead >= 0), mDataType );
-          // TDLog.Log( TDLog.LOG_COMM, "RF comm read_packet returns " + res );
-          if ( res == DataType.PACKET_NONE ) {
-            if ( toRead == -1 ) {
-              doWork = false;
-            } else {
-              // TDLog.Log( TDLog.LOG_COMM, "RF comm sleeping 1000 " );
-              TDUtil.slowDown( TDSetting.mWaitConn, "RF comm thread sleep interrupt");
-            }
-          } else if ( res == TopoDroidProtocol.DISTOX_ERR_OFF ) {
-            // TDLog.Error( "RF comm read_packet returns ERR_OFF " );
-            // if ( TDSetting.mCommType == 1 && TDSetting.mAutoReconnect ) { // FIXME ACL_DISCONNECT
-            //   mApp.mDataDownloader.setConnected( false );
-            //   mApp.notifyStatus();
-            //   closeSocket( );
-            //   mApp.notifyDisconnected();
-            // }
-            doWork = false;
-          } else {
-            handleRegularPacket( res, mLister, mDataType );
-          }
-        }
-      } else { // if ( mType == COMM_GATT ) 
-        // Log.v("DistoX-BLEC", "TD comm: proto read_pckets");
-        mProtocol.readPacket( true, mDataType ); // start reading a packet
-      }
-      // TDLog.Log( TDLog.LOG_COMM, "RF comm thread run() exiting");
-      mCommThread = null;
-
-      // FIXME_COMM
-      // mApp.notifyConnState( );
-    }
-  }
 
   // @param res    packet type (as returned by handlePacket / or set by Protocol )
   // @param lister data lister
@@ -198,7 +115,7 @@ public class TopoDroidComm
       /// TDLog.Log( TDLog.LOG_COMM, "Comm G PACKET" );
       // mNrPacketsRead.incrementAndGet(); // FIXME_ATOMIC_INT
       ++mNrPacketsRead;
-      mHasG = true;
+      setHasG( true );
     } else if ( res == DataType.PACKET_M ) {
       // Log.v("DistoX-BLE", "TD comm: packet M");
       // TDLog.Log( TDLog.LOG_COMM, "Comm M PACKET" );
@@ -224,7 +141,7 @@ public class TopoDroidComm
         //   } );
         // }
       }
-      mHasG = false;
+      setHasG( false );
     } else if ( res == DataType.PACKET_REPLY ) {
       // Log.v("DistoX-BLE", "TD comm: packet REPLY");
       // TODO handle packet reply
@@ -238,9 +155,9 @@ public class TopoDroidComm
       // if ( addr[0] == (byte)0x00 && addr[1] == (byte)0x80 ) { // 0x8000
       //   // TDLog.Log( TDLog.LOG_DISTOX, "toggle reply" );
       //   // if ( (reply[0] & CALIB_BIT) == 0 ) {
-      //   //     mProtocol.sendCommand( (byte)Device.CALIB_ON );
+      //   //     mProtocol.sendCommand( (byte)DistoX.CALIB_ON );
       //   // } else {
-      //   //     mProtocol.sendCommand( (byte)Device.CALIB_OFF );
+      //   //     mProtocol.sendCommand( (byte)DistoX.CALIB_OFF );
       //   // }
       // } else if ( ( addr[1] & (byte)0x80) == (byte)0x80 ) { // REPLY TO READ/WRITE-CALIBs
       //   // TDLog.Log( TDLog.LOG_DISTOX, "write reply" );
@@ -272,16 +189,23 @@ public class TopoDroidComm
     }
   }
 
-  protected CommThread mCommThread;
+  public CommThread mCommThread = null;
+
+  public boolean isCommThreadNull( ) { return ( mCommThread == null ); }
+
+  void doneCommThread() { mCommThread = null; }
+
   boolean mHasG = false;
   long mLastShotId;   // last shot id
 
-  protected TopoDroidComm( TopoDroidApp app )
+  public void setHasG( boolean has_g ) { mHasG = has_g; }
+
+  public TopoDroidComm( TopoDroidApp app )
   {
     mApp          = app;
     mProtocol     = null;
     mAddress      = null;
-    mCommThread   = null;
+    // mCommThread   = null;
     mBTConnected  = false;
     // TDLog.Log( TDLog.LOG_COMM, "TopoDroid Comm cstr");
   }
@@ -338,8 +262,6 @@ public class TopoDroidComm
     closeProtocol();
   }
 
-  public boolean isCommThreadNull( ) { return ( mCommThread == null ); }
-
   public boolean sendCommand( int cmd )
   {
     // TDLog.Log( TDLog.LOG_COMM, "VD comm send cmd " + cmd );
@@ -386,6 +308,16 @@ public class TopoDroidComm
     TDLog.Error("TD comm: generic download data always fails");
     // Log.v("DistoX-BLE", "TD comm: generic download data always fails");
     return -1;
+  }
+
+  int readingPacket( boolean to_read, int data_type )
+  {
+    return mProtocol.readPacket( to_read, data_type );
+  }
+
+  void cancelWork() 
+  {
+    if ( mProtocol != null ) mProtocol.mMaxTimeout = 0;
   }
 
 }

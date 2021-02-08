@@ -9,7 +9,7 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.dev;
+package com.topodroid.dev.distox2;
 
 import com.topodroid.ui.MyDialog;
 import com.topodroid.dev.Device;

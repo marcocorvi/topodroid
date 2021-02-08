@@ -9,7 +9,7 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.dev;
+package com.topodroid.dev.distox2;
 
 public class DeviceX310Details
 {
@@ -25,7 +25,7 @@ public class DeviceX310Details
 
   // head-tail command
   // final static int mHeadTailAddress = 0xe008;
-  static final byte[] HeadTail = { 0x38, 0x08, (byte)0xe0 }; // address 0xe008
+  public static final byte[] HeadTail = { 0x38, 0x08, (byte)0xe0 }; // address 0xe008
 
   public static boolean boundHeadTail( int[] ht )
   {

@@ -11,9 +11,11 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.dev;
+package com.topodroid.dev.distox2;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.dev.Device;
+import com.topodroid.dev.distox.DistoXProtocol;
 // import com.topodroid.prefs.TDSetting;
 import com.topodroid.packetX.MemoryOctet;
 import com.topodroid.DistoX.TDPath;
@@ -43,11 +45,11 @@ import android.content.Context;
 // import java.nio.channels.ClosedByInterruptException;
 // import java.nio.ByteBuffer;
 
-class DistoX310Protocol extends DistoXProtocol
+public class DistoX310Protocol extends DistoXProtocol
 {
   //-----------------------------------------------------
 
-  DistoX310Protocol( DataInputStream in, DataOutputStream out, Device device, Context context )
+  public DistoX310Protocol( DataInputStream in, DataOutputStream out, Device device, Context context )
   {
     super( in, out, device, context );
   }
@@ -55,7 +57,7 @@ class DistoX310Protocol extends DistoXProtocol
   // PACKETS I/O ------------------------------------------------------------------------
 
   @Override
-  int getHeadMinusTail( int head, int tail )
+  public int getHeadMinusTail( int head, int tail )
   {
     // head = head segment index ---- X310 specific code
     // tail = tail packet index
@@ -123,7 +125,7 @@ class DistoX310Protocol extends DistoXProtocol
   // each data takes 18 bytes
 
   // @Override
-  int readX310Memory( int start, int end, List< MemoryOctet > data )
+  public int readX310Memory( int start, int end, List< MemoryOctet > data )
   {
     // Log.v( "DistoX-PROTO", "memory start " + start + " end " + end );
     int cnt = 0;
@@ -285,7 +287,7 @@ class DistoX310Protocol extends DistoXProtocol
   // }
 
   // @Override
-  int uploadFirmware( String filepath )
+  public int uploadFirmware( String filepath )
   {
     TDLog.LogFile( "Firmware upload: protocol starts. file " + filepath );
     byte[] buf = new byte[259];
@@ -352,7 +354,7 @@ class DistoX310Protocol extends DistoXProtocol
   }
 
   // @Override
-  int dumpFirmware( String filepath )
+  public int dumpFirmware( String filepath )
   {
     TDLog.LogFile( "Firmware dump: output filepath " + filepath );
     byte[] buf = new byte[256];
