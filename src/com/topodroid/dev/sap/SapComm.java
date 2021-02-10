@@ -22,12 +22,13 @@ import com.topodroid.dev.ConnectionState;
 import com.topodroid.dev.DataType;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.TopoDroidComm;
-import com.topodroid.dev.bric.BleUtils;
-import com.topodroid.dev.bric.BleComm;
-import com.topodroid.dev.bric.BleOperation;
-import com.topodroid.dev.bric.BleOpConnect;
-import com.topodroid.dev.bric.BleOpDisconnect;
-import com.topodroid.dev.bric.BleOpChrtRead;
+import com.topodroid.dev.ble.BleUtils;
+import com.topodroid.dev.ble.BleComm;
+import com.topodroid.dev.ble.BleCallback;
+import com.topodroid.dev.ble.BleOperation;
+import com.topodroid.dev.ble.BleOpConnect;
+import com.topodroid.dev.ble.BleOpDisconnect;
+import com.topodroid.dev.ble.BleOpChrtRead;
 
 import android.util.Log;
 
@@ -61,7 +62,7 @@ public class SapComm extends TopoDroidComm
   private Context         mContext;
   private String          mRemoteAddress;
   private BluetoothDevice mRemoteBtDevice;
-  private SapCallback mCallback;
+  private BleCallback mCallback;
   private SapProtocol mSapProto;
   // private int mDataType = DataType.DATA_SHOT;
   private int mDataType;
@@ -110,7 +111,7 @@ public class SapComm extends TopoDroidComm
       Log.v("DistoX-BLE", "SAP comm: connect remote addr " + mRemoteBtDevice.getAddress() + " " + device.mAddress );
       notifyStatus( ConnectionState.CONN_WAITING );
       mSapProto = new SapProtocol( this, device, context );
-      mCallback = new SapCallback( this );
+      mCallback = new BleCallback( this, true ); // auto_connect true
       mProtocol = mSapProto;
       enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) );
       doNextOp();
@@ -205,7 +206,7 @@ public class SapComm extends TopoDroidComm
     mConnectionMode = -1;
     mBTConnected = false;
     closeChrt();
-    mCallback.closeGatt();
+    mCallback.disconnectCloseGatt();
     notifyStatus( ConnectionState.CONN_DISCONNECTED );
     mDisconnecting = false;
   }
@@ -257,11 +258,11 @@ public class SapComm extends TopoDroidComm
 
   private void writeChrt( )
   {
-    if ( mSapProto.handleWrite( mWriteChrt ) > 0 ) {
-      mCallback.writeCharacteristic( mWriteChrt );
-    } else {
-      // done with the buffer writing
-    }
+    byte[] bytes = mSapProto.handleWrite( );
+    if ( bytes != null ) {
+      // mCallback.writeCharacteristic( mWriteChrt );
+      mCallback.writeChrt( SapConst.SAP5_SERVICE_UUID, SapConst.SAP5_CHRT_WRITE_UUID, bytes );
+    } // else // done with the buffer writing
   }
 
   // -------------------------------------------------------------------------------
@@ -305,14 +306,17 @@ public class SapComm extends TopoDroidComm
     // Log.v("DistoX-BLE", "SAP comm: changedChrt" );
     String uuid_str = chrt.getUuid().toString();
     if ( uuid_str.equals( SapConst.SAP5_CHRT_READ_UUID_STR ) ) {
-      int res = mSapProto.handleNotify( chrt, true ); // true = READ
+      int res = mSapProto.handleReadNotify( chrt );
       if ( res == DataType.PACKET_DATA ) {
         // mSapProto.handleWrite( mWriteChrt ); // ACKNOWLEDGMENT
         handleRegularPacket( res, mLister, DataType.DATA_SHOT );
       }
       // readSapPacket();
     } else if ( uuid_str.equals( SapConst.SAP5_CHRT_WRITE_UUID_STR ) ) {
-      mSapProto.handleNotify( chrt, false ); // false = WRITE
+      byte[] bytes = mSapProto.handleWriteNotify( chrt );
+      if ( bytes != null ) {
+        mCallback.writeChrt( SapConst.SAP5_SERVICE_UUID, SapConst.SAP5_CHRT_WRITE_UUID, bytes );
+      }
     }
   }
 
@@ -321,7 +325,7 @@ public class SapComm extends TopoDroidComm
   {
     // Log.v("DistoX-BLE", "SAP comm: readedChrt" );
     if ( ! mReadInitialized ) { error(-1); return; }
-    if ( ! uuid_str.equals( SapConst.SAP5_CHRT_READ_UUID_SHORT_STR ) ) { error(-2); return; }
+    if ( ! uuid_str.equals( SapConst.SAP5_CHRT_READ_UUID_STR ) ) { error(-2); return; }
     int res = mSapProto.handleRead( bytes ); 
     if ( res != DataType.PACKET_DATA ) { error(-3); return; }
     ++ mNrPacketsRead;
@@ -404,13 +408,15 @@ public class SapComm extends TopoDroidComm
   public boolean writeChrt( UUID srv_uuid, UUID chrt_uuid, byte[] bytes )
   {
     Log.v("DistoX-BLE", "SAP comm: ##### writeChrt TODO ..." );
-    return mCallback.writeCharacteristic( mWriteChrt );
+    // return mCallback.writeCharacteristic( mWriteChrt );
+    return mCallback.writeChrt( srv_uuid, chrt_uuid, bytes );
   }
 
   public boolean readChrt( UUID srv_uuid, UUID chrt_uuid )
   {
     Log.v("DistoX-BLE", "SAP comm: ##### readChrt" );
-    return mCallback.readCharacteristic( mReadChrt );
+    // return mCallback.readCharacteristic( mReadChrt );
+    return mCallback.readChrt( srv_uuid, chrt_uuid );
   }
 
   public void error( int status )

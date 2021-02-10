@@ -10,7 +10,7 @@
  * --------------------------------------------------------
  *
  */
-package com.topodroid.dev.bric;
+package com.topodroid.dev.ble;
 
 // import com.topodroid.prefs.TDSetting;
 

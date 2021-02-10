@@ -14,6 +14,14 @@ package com.topodroid.dev.bric;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.ConnectionState;
 import com.topodroid.dev.TopoDroidComm;
+import com.topodroid.dev.ble.BleComm;
+import com.topodroid.dev.ble.BleCallback;
+import com.topodroid.dev.ble.BleOperation;
+import com.topodroid.dev.ble.BleOpConnect;
+import com.topodroid.dev.ble.BleOpDisconnect;
+import com.topodroid.dev.ble.BleOpNotify;
+import com.topodroid.dev.ble.BleOpChrtRead;
+import com.topodroid.dev.ble.BleOpChrtWrite;
 import com.topodroid.DistoX.TDInstance;
 import com.topodroid.DistoX.TDToast;
 import com.topodroid.DistoX.TopoDroidApp;
@@ -74,16 +82,16 @@ public class BricComm extends TopoDroidComm
           // Log.v("DistoX-BLE", "Queue buffer type " + buffer.type );
           switch ( buffer.type ) {
             case DATA_PRIM:
-              BricDebug.logMeasPrim( buffer.data );
+              // BricDebug.logMeasPrim( buffer.data );
               ((BricProto)mProtocol).addMeasPrim( buffer.data );
               // ((BricProto)mProtocol).addMeasPrimAndProcess( buffer.data );
               break;
             case DATA_META:
-              BricDebug.logMeasMeta( buffer.data );
+              // BricDebug.logMeasMeta( buffer.data );
               ((BricProto)mProtocol).addMeasMeta( buffer.data );
               break;
             case DATA_ERR:
-              BricDebug.logMeasErr( buffer.data );
+              // BricDebug.logMeasErr( buffer.data );
               ((BricProto)mProtocol).addMeasErr( buffer.data );
               ((BricProto)mProtocol).processData(); 
               break;
@@ -109,7 +117,7 @@ public class BricComm extends TopoDroidComm
   /*
   private void addService( BluetoothGattService srv ) 
   { 
-    String srv_uuid = BleUtils.uuidToShortString( srv.getUuid() );
+    String srv_uuid = srv.getUuid().toString();
     // Log.v("DistoX-BLE", "Bric comm add S: " + srv_uuid );
   }
   */
@@ -121,7 +129,7 @@ public class BricComm extends TopoDroidComm
   {
     int ret;
     UUID chrtUuid = chrt.getUuid();
-    String chrt_uuid = BleUtils.uuidToShortString( chrtUuid );
+    String chrt_uuid = chrtUuid.toString();
     // Log.v("DistoX-BLE", "Bric comm ***** add chrt " + chrtUuid );
     if ( chrt_uuid.equals( BricConst.MEAS_PRIM ) ) {
       ret = enqueueOp( new BleOpNotify( mContext, this, srvUuid, chrt, true ) );
@@ -140,7 +148,7 @@ public class BricComm extends TopoDroidComm
   /*
   private void addDesc( UUID srv_uuid, UUID chrt_uuid, BluetoothGattDescriptor desc ) 
   {
-    String desc_uuid = BleUtils.uuidToShortString( desc.getUuid() );
+    String desc_uuid = desc.getUuid().toString();
     // Log.v("DistoX-BLE", "Bric comm add     +D: " + desc_uuid );
   }
   */
@@ -161,18 +169,18 @@ public class BricComm extends TopoDroidComm
           // addService() does not do anything
           // addService( service );
           UUID srv_uuid = service.getUuid();
-          // Log.v("DistoX-BLE", "BRIC comm Srv  " + BleUtils.uuidToString( srv_uuid ) );
+          // Log.v("DistoX-BLE", "BRIC comm Srv  " + srv_uuid.toString() );
           List< BluetoothGattCharacteristic> chrts = service.getCharacteristics();
           for ( BluetoothGattCharacteristic chrt : chrts ) {
             addChrt( srv_uuid, chrt );
 
             // addDesc() does not do anything
             // UUID chrt_uuid = chrt.getUuid();
-            // // Log.v("DistoX-BLE", "BRIC comm Chrt " + BleUtils.uuidToString( chrt_uuid ) + BleUtils.chrtPermString(chrt) + BleUtils.chrtPropString(chrt) );
+            // // Log.v("DistoX-BLE", "BRIC comm Chrt " + chrt_uuid.toString() + BleUtils.chrtPermString(chrt) + BleUtils.chrtPropString(chrt) );
             // List< BluetoothGattDescriptor> descs = chrt.getDescriptors();
             // for ( BluetoothGattDescriptor desc : descs ) {
             //   addDesc( srv_uuid, chrt_uuid, desc );
-            //   // Log.v("DistoX-BLE", "BRIC comm Desc " + BleUtils.uuidToString( desc.getUuid() ) + BleUtils.descPermString( desc ) );
+            //   // Log.v("DistoX-BLE", "BRIC comm Desc " + desc.getUuid().toString() + BleUtils.descPermString( desc ) );
             // }
           }
         }
@@ -256,7 +264,7 @@ public class BricComm extends TopoDroidComm
   {
     // Log.v("DistoX-BLE", "BRIC comm changed char ======> " + chrt.getUuid() );
     int ret;
-    String chrt_uuid = BleUtils.uuidToShortString( chrt.getUuid() );
+    String chrt_uuid = chrt.getUuid().toString();
     if ( chrt_uuid.equals( BricConst.MEAS_PRIM ) ) {
       mQueue.put( DATA_PRIM, chrt.getValue() );
       ret = enqueueOp( new BleOpChrtRead( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_META_UUID ) );
@@ -336,7 +344,7 @@ public class BricComm extends TopoDroidComm
     notifyStatus( ConnectionState.CONN_WAITING );
     mReconnect = true;
     mProtocol = new BricProto( mContext, mApp, lister, device, this );
-    mCallback = new BleCallback( this );
+    mCallback = new BleCallback( this, false ); // auto_connect false
     mOps = new ConcurrentLinkedQueue< BleOperation >();
     mPendingCommands = 0;
     clearPending();
@@ -370,7 +378,7 @@ public class BricComm extends TopoDroidComm
     mPendingCommands = 0;
     clearPending();
     // closeDevice();
-    mCallback.disconnectAndCloseGatt();
+    mCallback.closeGatt();
     if ( mReconnect ) {
       // Log.v("DistoX-BLE", "BRIC comm ***** reconnect Device = [4a] status WAITING" );
       notifyStatus( ConnectionState.CONN_WAITING );
@@ -401,7 +409,7 @@ public class BricComm extends TopoDroidComm
   {
     Log.v("DistoX-BLE", "BRIC comm ***** disconnect GATT = [6] status DISCONNECTED" );
     notifyStatus( ConnectionState.CONN_DISCONNECTED );
-    mCallback.disconnectAndCloseGatt();
+    mCallback.closeGatt();
   }
 
   @Override
@@ -411,7 +419,7 @@ public class BricComm extends TopoDroidComm
     mReconnect = false;
     if ( mBTConnected ) {
       notifyStatus( ConnectionState.CONN_DISCONNECTED );
-      mCallback.disconnectAndCloseGatt();
+      mCallback.closeGatt();
     }
   }
 

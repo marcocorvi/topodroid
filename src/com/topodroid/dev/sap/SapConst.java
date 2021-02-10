@@ -13,7 +13,7 @@
  */
 package com.topodroid.dev.sap;
 
-import com.topodroid.dev.bric.BleUtils;
+// import com.topodroid.dev.ble.BleUtils;
 
 import java.util.UUID;
 
@@ -28,9 +28,5 @@ class SapConst
   static final UUID SAP5_SERVICE_UUID    = UUID.fromString( SAP5_SRV_UUID_STR );
   static final UUID SAP5_CHRT_READ_UUID  = UUID.fromString( SAP5_CHRT_READ_UUID_STR );
   static final UUID SAP5_CHRT_WRITE_UUID = UUID.fromString( SAP5_CHRT_WRITE_UUID_STR );
-
-  static final String SAP5_SRV_UUID_SHORT_STR        = BleUtils.uuidToShortString( SAP5_SERVICE_UUID );
-  static final String SAP5_CHRT_READ_UUID_SHORT_STR  = BleUtils.uuidToShortString( SAP5_CHRT_READ_UUID );
-  static final String SAP5_CHRT_WRITE_UUID_SHORT_STR = BleUtils.uuidToShortString( SAP5_CHRT_WRITE_UUID );
 
 }

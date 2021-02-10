@@ -11,11 +11,13 @@
  */
 package com.topodroid.dev.bric;
 
+import com.topodroid.dev.ble.BleUtils;
+
 import android.util.Log;
 
 class BricDebug
 {
-
+/*
   static void logMeasPrim( byte[] bytes )
   {
     Log.v("DistoX-BLE", "BRIC debug MeasPrim: " + bytes.length + " date " 
@@ -52,5 +54,5 @@ class BricDebug
       Log.v("DistoX-BLE", "BRIC debug: " + msg + " " + BleUtils.bytesToString( bytes ) );
     }
   }
-
+*/
 }

@@ -9,7 +9,7 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.dev.bric;
+package com.topodroid.dev.ble;
 
 import android.bluetooth.BluetoothDevice;
 // import android.bluetooth.BluetoothProfile;
@@ -34,30 +34,6 @@ public class BleUtils
 
   public final static UUID CCCD_UUID = UUID.fromString("00002902-0000-1000-8000-00805f9b34fb");
   
-  public static String uuidToString( UUID uuid )
-  {
-    String ret = uuid.toString();
-    if ( ret.endsWith( STANDARD_UUID ) ) return ret.substring(0,8);
-    return ret;
-  }
-
-  public static String uuidToShortString( UUID uuid )
-  {
-    String ret = uuid.toString().substring(0,8);
-    if ( ret.startsWith("0000") ) return ret.substring(4,8);
-    return ret;
-  }
-
-  public static UUID toUuid( String str ) 
-  { 
-    if ( str.length() <= 4 ) {
-      return UUID.fromString( ( "0000" + str + STANDARD_UUID) );
-    } else if ( str.length() <= 8 ) {
-      return UUID.fromString( (str + STANDARD_UUID) );
-    }
-    return UUID.fromString( str );
-  }
-
   public static String deviceToString( BluetoothDevice device )
   {
     String name = device.getName();

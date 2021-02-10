@@ -9,7 +9,7 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.dev.bric;
+package com.topodroid.dev.ble;
 
 import com.topodroid.utils.TDLog;
 

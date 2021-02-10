@@ -1,15 +1,15 @@
-/* @file BleOpDescRead.java
+/* @file BleOpDescWrite.java
  *
  * @author marco corvi
  * @date jan 2021
  *
- * @brief Bluetooth LE descriptor read operation 
+ * @brief Bluetooth LE descriptor write operation 
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.dev.bric;
+package com.topodroid.dev.ble;
 
 import com.topodroid.utils.TDLog; 
 
@@ -17,18 +17,23 @@ import android.content.Context;
 
 import android.util.Log;
 
-public class BleOpDescRead extends BleOperation 
+import java.util.Arrays;
+
+public class BleOpDescWrite extends BleOperation 
 {
-  public BleOpDescRead( Context ctx, BleComm pipe )
+  byte[] bytes;
+
+  public BleOpDescWrite( Context ctx, BleComm pipe, byte[] b )
   {
     super( ctx, pipe );
+    bytes = Arrays.copyOf( b, b.length );
   }
 
-  // public String name() { return "DescRead"; }
+  // public String name() { return "DescWrite"; }
 
   @Override 
   public void execute()
   {
-    Log.v("DistoX-BLE", "BleOp exec desc read");
+    Log.v("DistoX-BLE", "BleOp exec desc write");
   }
 }

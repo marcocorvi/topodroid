@@ -37,7 +37,7 @@ import com.topodroid.dev.distox1.DeviceA3MemoryDialog;
 import com.topodroid.dev.distox1.DeviceA3InfoDialog;
 import com.topodroid.dev.distox1.InfoReadA3Task;
 import com.topodroid.dev.distox1.DeviceA3Details;
-import com.topodroid.dev.bric.BleScanDialog;
+// import com.topodroid.dev.ble.BleScanDialog;
 import com.topodroid.calib.CalibCoeffDialog;
 import com.topodroid.calib.CalibImportDialog;
 import com.topodroid.calib.CalibListDialog;
@@ -137,9 +137,9 @@ public class DeviceActivity extends Activity
   // static final private int IDX_MEMORY = 5;
 
   private static final int[] menus = {
-                        R.string.menu_scan,
-                        R.string.menu_scan_ble, // FIXME_SCAN_BRIC
-                        R.string.menu_pair,
+                        // R.string.menu_scan,
+                        // R.string.menu_scan_ble, // FIXME_SCAN_BRIC
+                        // R.string.menu_pair,
                         R.string.menu_detach,
                         R.string.menu_firmware,
                         R.string.menu_packets,
@@ -158,9 +158,9 @@ public class DeviceActivity extends Activity
                         // R.string.help_remote
                      };
   private static final int[] help_menus = {
-                        R.string.help_scan,
-                        R.string.help_scan_ble, // FIXME_SCAN_BRIC
-                        R.string.help_pair,
+                        // R.string.help_scan,
+                        // R.string.help_scan_ble, // FIXME_SCAN_BRIC
+                        // R.string.help_pair,
                         R.string.help_detach,
                         R.string.help_firmware,
                         R.string.help_packets,
@@ -831,10 +831,10 @@ public class DeviceActivity extends Activity
   {
     ArrayAdapter< String > nemu_adapter = new ArrayAdapter<>(this, R.layout.menu );
 
-    int k = 0;
-    if ( TDLevel.overBasic    ) nemu_adapter.add( res.getString( menus[k] ) );         // SCAN
-    ++k; if ( TDLevel.overExpert && mHasBLE ) nemu_adapter.add( res.getString( menus[k] ) ); // FIXME_SCAN_BRIC
-    ++k; if ( TDLevel.overBasic    ) nemu_adapter.add( res.getString( menus[k] ) );
+    int k = -1;
+    // ++k; if ( TDLevel.overBasic    ) nemu_adapter.add( res.getString( menus[k] ) );         // SCAN
+    // ++k; if ( TDLevel.overExpert && mHasBLE ) nemu_adapter.add( res.getString( menus[k] ) ); // FIXME_SCAN_BRIC
+    // ++k; if ( TDLevel.overBasic    ) nemu_adapter.add( res.getString( menus[k] ) );
     ++k; if ( TDLevel.overNormal   ) nemu_adapter.add( res.getString( menus[k] ) );
     ++k; if ( TDLevel.overAdvanced ) nemu_adapter.add( res.getString( menus[k] ) );
     ++k; if ( TDLevel.overExpert && TDSetting.mPacketLog ) nemu_adapter.add( res.getString( menus[k] ) ); // PACKET_LOG
@@ -855,19 +855,19 @@ public class DeviceActivity extends Activity
   {
     closeMenu();
     int p = 0;
-    if ( TDLevel.overBasic && p++ == pos ) { // SCAN
-      Intent scanIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DeviceList.class );
-      scanIntent.putExtra( TDTag.TOPODROID_DEVICE_ACTION, DeviceList.DEVICE_SCAN );
-      startActivityForResult( scanIntent, TDRequest.REQUEST_DEVICE );
-      TDToast.makeLong(R.string.wait_scan );
+    // if ( TDLevel.overBasic && p++ == pos ) { // SCAN
+    //   Intent scanIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DeviceList.class );
+    //   scanIntent.putExtra( TDTag.TOPODROID_DEVICE_ACTION, DeviceList.DEVICE_SCAN );
+    //   startActivityForResult( scanIntent, TDRequest.REQUEST_DEVICE );
+    //   TDToast.makeLong(R.string.wait_scan );
 
-    } else if ( TDLevel.overExpert && mHasBLE && p++ == pos ) { // FIXME_SCAN_BRIC
-      BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-      (new BleScanDialog( this, this, adapter, null )).show();
-    } else if ( TDLevel.overBasic && p++ == pos ) { // PAIR
-      pairDevice();
-
-    } else if ( TDLevel.overNormal && p++ == pos ) { // DETACH
+    // } else if ( TDLevel.overExpert && mHasBLE && p++ == pos ) { // FIXME_SCAN_BRIC
+    //   BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+    //   (new BleScanDialog( this, this, adapter, null )).show();
+    // } else if ( TDLevel.overBasic && p++ == pos ) { // PAIR
+    //   pairDevice();
+    // } else 
+    if ( TDLevel.overNormal && p++ == pos ) { // DETACH
       detachDevice();
 
     } else if ( TDLevel.overAdvanced && p++ == pos ) { // FIRMWARE

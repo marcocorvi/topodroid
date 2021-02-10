@@ -11,6 +11,8 @@
  */
 package com.topodroid.dev.bric;
 
+import com.topodroid.dev.ble.BleUtils;
+
 import java.util.UUID; 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -23,17 +25,17 @@ public class BricConst
   public final static String MEAS_ERR  = "58d3";
   public final static String LAST_TIME = "58d4";
  
-  public final static UUID MEAS_SRV_UUID  = BleUtils.toUuid( MEAS_SRV );
-  public final static UUID MEAS_PRIM_UUID = BleUtils.toUuid( MEAS_PRIM );
-  public final static UUID MEAS_META_UUID = BleUtils.toUuid( MEAS_META );
-  public final static UUID MEAS_ERR_UUID  = BleUtils.toUuid( MEAS_ERR );
-  public final static UUID LAST_TIME_UUID = BleUtils.toUuid( LAST_TIME );
+  public final static UUID MEAS_SRV_UUID  = UUID.fromString( MEAS_SRV );
+  public final static UUID MEAS_PRIM_UUID = UUID.fromString( MEAS_PRIM );
+  public final static UUID MEAS_META_UUID = UUID.fromString( MEAS_META );
+  public final static UUID MEAS_ERR_UUID  = UUID.fromString( MEAS_ERR );
+  public final static UUID LAST_TIME_UUID = UUID.fromString( LAST_TIME );
 
   public final static String CTRL_SRV  = "58e0";
   public final static String CTRL_CHRT = "58e1";
 
-  public final static UUID CTRL_SRV_UUID  = BleUtils.toUuid( CTRL_SRV );
-  public final static UUID CTRL_CHRT_UUID = BleUtils.toUuid( CTRL_CHRT );
+  public final static UUID CTRL_SRV_UUID  = UUID.fromString( CTRL_SRV );
+  public final static UUID CTRL_CHRT_UUID = UUID.fromString( CTRL_CHRT );
 
   public final static byte[] COMMAND_OFF   = { (byte)0x70, (byte)0x6f, (byte)0x77, (byte)0x65, (byte)0x72, (byte)0x20, (byte)0x6f, (byte)0x66, (byte)0x66 };
   public final static byte[] COMMAND_SCAN  = { (byte)0x73, (byte)0x63, (byte)0x61, (byte)0x6e };

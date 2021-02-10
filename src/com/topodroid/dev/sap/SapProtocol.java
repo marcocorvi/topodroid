@@ -60,7 +60,7 @@ class SapProtocol extends TopoDroidProtocol
 
   // @param crtr   GATT write characteristic
   // @return number of bytes set into the write characteristic
-  public int handleWrite( BluetoothGattCharacteristic chrt )
+  public byte[] handleWrite( )
   {
     Log.v("DistoX-BLE", "SAP proto: write - pending " + mWriteBuffer.size() );
     byte[] bytes = null;
@@ -69,11 +69,7 @@ class SapProtocol extends TopoDroidProtocol
         bytes = mWriteBuffer.remove(0);
       }
     }
-    if ( bytes != null && bytes.length > 0 ) {
-      chrt.setValue( bytes );
-      return bytes.length;
-    }
-    return 0;
+    return bytes;
   }
 
   // @param crtr   GATT read characteristic
@@ -90,14 +86,14 @@ class SapProtocol extends TopoDroidProtocol
   }
 
   // @param chrt   Sap Gatt characteristic
-  // @param read   whether the chrt is read or write
-  public int handleNotify( BluetoothGattCharacteristic chrt, boolean read )
+  public int handleReadNotify( BluetoothGattCharacteristic chrt )
   {
-    // Log.v("DistoX-BLE", "SAP proto: notify: read " + read );
-    if ( read ) {
-      return handleRead( chrt.getValue() );
-    } 
-    return handleWrite( chrt );
+    return handleRead( chrt.getValue() );
+  }
+
+  public byte[] handleWriteNotify( BluetoothGattCharacteristic chrt )
+  {
+    return handleWrite( );
   }
 
 }
