@@ -66,6 +66,15 @@ public class SapComm extends TopoDroidComm
   // private int mDataType = DataType.DATA_SHOT;
   private int mDataType;
 
+  BluetoothGattCharacteristic mReadChrt  = null;
+  BluetoothGattCharacteristic mWriteChrt = null;
+  private boolean mReadInitialized  = false;
+  private boolean mWriteInitialized = false;
+
+  BluetoothGattCharacteristic getReadChrt() { return mReadChrt; }
+  BluetoothGattCharacteristic getWriteChrt() { return mWriteChrt; }
+
+
   public SapComm( TopoDroidApp app, String address, BluetoothDevice bt_device ) 
   {
     super( app );
@@ -124,6 +133,7 @@ public class SapComm extends TopoDroidComm
     mDisconnecting = true;
     enqueueOp( new BleOpDisconnect( mContext, this ) );
     doNextOp();
+    // closeChrt();
     // mCallback.disconnectGatt();
     notifyStatus( ConnectionState.CONN_WAITING );
     // mDisconnecting = false;
@@ -194,9 +204,16 @@ public class SapComm extends TopoDroidComm
     mDisconnecting = true;
     mConnectionMode = -1;
     mBTConnected = false;
+    closeChrt();
     mCallback.closeGatt();
     notifyStatus( ConnectionState.CONN_DISCONNECTED );
     mDisconnecting = false;
+  }
+
+  private void closeChrt()
+  {
+    mWriteInitialized = false; 
+    mReadInitialized  = false; 
   }
 
   // -------------------------------------------------------------------------------------
@@ -233,138 +250,15 @@ public class SapComm extends TopoDroidComm
   // }
 
   // ================================================================
-  public void connectGatt( Context ctx, BluetoothDevice device )
-  {
-    // Log.v("DistoX-BLE", "SAP connect Gatt" );
-    mCallback.connectGatt( ctx, device );
-  }
-
-  public void disconnectGatt()
-  {
-    Log.v("DistoX-BLE", "SAP comm: disconnect Gatt" );
-    mCallback.disconnectGatt();
-    notifyStatus( ConnectionState.CONN_WAITING );
-    mDisconnecting = false;
-  }
-
-  public boolean writeChrt( UUID srv_uuid, UUID chrt_uuid, byte[] bytes )
-  {
-    // Log.v("DistoX-BLE", "SAP comm: writeChrt TODO ..." );
-    return mCallback.writeCharacteristic( mCallback.getWriteChrt() );
-  }
-
-  public boolean readChrt( UUID srv_uuid, UUID chrt_uuid )
-  {
-    // Log.v("DistoX-BLE", "SAP comm: readChrt" );
-    return mCallback.readCharacteristic( );
-  }
-
-  public void changedMtu( int mtu ) { }
-  public void readedRemoteRssi( int rssi ) { }
-
-  public void changedChrt( BluetoothGattCharacteristic chrt )
-  {
-    // Log.v("DistoX-BLE", "SAP comm: changedChrt" );
-    String uuid_str = chrt.getUuid().toString();
-    if ( uuid_str.equals( SapConst.SAP5_CHRT_READ_UUID_STR ) ) {
-      int res = mSapProto.handleNotify( chrt, true ); // true = READ
-      if ( res == DataType.PACKET_DATA ) {
-        // mSapProto.handleWrite( mWriteChrt ); // ACKNOWLEDGMENT
-        handleRegularPacket( res, mLister, DataType.DATA_SHOT );
-      }
-      // readSapPacket();
-    } else if ( uuid_str.equals( SapConst.SAP5_CHRT_WRITE_UUID_STR ) ) {
-      mSapProto.handleNotify( chrt, false ); // false = WRITE
-    }
-  }
-
-  public void readedChrt( String uuid_str, byte[] bytes )
-  {
-    // Log.v("DistoX-BLE", "SAP comm: readedChrt" );
-    int res = mSapProto.handleRead( bytes ); // FIXME bytes
-    if ( res == DataType.PACKET_DATA ) {
-      ++ mNrPacketsRead;
-      handleRegularPacket( res, mLister, DataType.DATA_SHOT );
-    }
-  }
-
-  public void writtenChrt( String uuid_str, byte[] bytes )
-  {
-    // Log.v("DistoX-BLE", "SAP comm: writtenChrt" );
-    // Log.v("DistoX-BLE", "SAP comm: written chrt ...");
-    writeChrt( ); // try to write again
-  }
-
-  public void readedDesc( String uuid_str, byte[] bytes )
-  {
-    Log.v("DistoX-BLE", "SAP comm: readedDesc" );
-  }
-  public void writtenDesc( String uuid_str, byte[] bytes )
-  {
-    Log.v("DistoX-BLE", "SAP comm: writtenDesc" );
-  }
-
-  public void completedReliableWrite()
-  {
-    Log.v("DistoX-BLE", "SAP comm: realiable write" );
-  }
-  public void disconnected()
-  {
-    Log.v("DistoX-BLE", "SAP comm: disconnected ...");
-    // if ( mDisconnecting ) return;
-    mDisconnecting = false;
-    mConnectionMode = -1;
-    mBTConnected = false;
-    notifyStatus( ConnectionState.CONN_DISCONNECTED );
-  }
-
-  public void servicesDiscovered( BluetoothGatt gatt )
-  {
-    Log.v("DistoX-BLE", "SAP comm: service discovered" );
-  }
-
-  public boolean enablePNotify( UUID srcUuid, UUID chrtUuid )
-  {
-    Log.v("DistoX-BLE", "SAP comm: enable P notify");
-    return true;
-  }
-
-  public void error( int status )
-  {
-    Log.v("DistoX-BLE", "SAP comm: error " + status );
-  }
-
-  public void failure( int status )
-  {
-    Log.v("DistoX-BLE", "SAP comm: failure " + status );
-    switch ( status ) {
-      case -1:
-        // Log.v("DistoX-BLE", "SAP comm: FAIL no R-desc CCCD ");
-        break;
-      case -2:
-        // Log.v("DistoX-BLE", "SAP comm: FAIL no indicate/notify R-property ");
-        break;
-      case -3:
-        // Log.v("DistoX-BLE", "SAP comm: ERROR writing readDesc");
-        break;
-      default:
-    }
-  }
 
   // public void addService( BluetoothGattService srv );
   // public void addChrt( UUID srv_uuid, BluetoothGattCharacteristic chrt );
   // public void addDesc( UUID srv_uuid, UUID chrt_uuid, BluetoothGattDescriptor desc );
 
-  public void notifyStatus( int status )
-  {
-    mApp.notifyStatus( status );
-  }
-
   private void writeChrt( )
   {
-    BluetoothGattCharacteristic chrt = mCallback.getWriteChrt();
-    if ( mSapProto.handleWrite( chrt ) > 0 ) {
-      mCallback.writeCharacteristic( chrt );
+    if ( mSapProto.handleWrite( mWriteChrt ) > 0 ) {
+      mCallback.writeCharacteristic( mWriteChrt );
     } else {
       // done with the buffer writing
     }
@@ -397,6 +291,175 @@ public class SapComm extends TopoDroidComm
     if ( mPendingOp != null ) {
       mPendingOp.execute();
     } 
+  }
+  // -------------------------------------------------------------------------------
+  // BleComm interface
+
+  public void changedMtu( int mtu ) { }
+
+  public void readedRemoteRssi( int rssi ) { }
+
+
+  public void changedChrt( BluetoothGattCharacteristic chrt )
+  {
+    // Log.v("DistoX-BLE", "SAP comm: changedChrt" );
+    String uuid_str = chrt.getUuid().toString();
+    if ( uuid_str.equals( SapConst.SAP5_CHRT_READ_UUID_STR ) ) {
+      int res = mSapProto.handleNotify( chrt, true ); // true = READ
+      if ( res == DataType.PACKET_DATA ) {
+        // mSapProto.handleWrite( mWriteChrt ); // ACKNOWLEDGMENT
+        handleRegularPacket( res, mLister, DataType.DATA_SHOT );
+      }
+      // readSapPacket();
+    } else if ( uuid_str.equals( SapConst.SAP5_CHRT_WRITE_UUID_STR ) ) {
+      mSapProto.handleNotify( chrt, false ); // false = WRITE
+    }
+  }
+
+  // @param uuid_str short UUID string
+  public void readedChrt( String uuid_str, byte[] bytes )
+  {
+    // Log.v("DistoX-BLE", "SAP comm: readedChrt" );
+    if ( ! mReadInitialized ) { error(-1); return; }
+    if ( ! uuid_str.equals( SapConst.SAP5_CHRT_READ_UUID_SHORT_STR ) ) { error(-2); return; }
+    int res = mSapProto.handleRead( bytes ); 
+    if ( res != DataType.PACKET_DATA ) { error(-3); return; }
+    ++ mNrPacketsRead;
+    handleRegularPacket( res, mLister, DataType.DATA_SHOT );
+  }
+
+  public void writtenChrt( String uuid_str, byte[] bytes )
+  {
+    // Log.v("DistoX-BLE", "SAP comm: writtenChrt" );
+    // Log.v("DistoX-BLE", "SAP comm: written chrt ...");
+    if ( ! mWriteInitialized ) { error(-4); return; }
+    writeChrt( ); // try to write again
+  }
+
+  public void readedDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
+  {
+    Log.v("DistoX-BLE", "SAP comm: readedDesc" );
+  }
+  public void writtenDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
+  {
+    Log.v("DistoX-BLE", "SAP comm: ====== written desc " + uuid_str + " " + uuid_chrt_str );
+    connected( true );
+  }
+
+  public void completedReliableWrite()
+  {
+    Log.v("DistoX-BLE", "SAP comm: realiable write" );
+  }
+
+  public void disconnected()
+  {
+    Log.v("DistoX-BLE", "SAP comm: disconnected ...");
+    // if ( mDisconnecting ) return;
+    mDisconnecting = false;
+    mConnectionMode = -1;
+    mBTConnected = false;
+    notifyStatus( ConnectionState.CONN_DISCONNECTED );
+  }
+
+  public int servicesDiscovered( BluetoothGatt gatt )
+  {
+    Log.v("DistoX-BLE", "SAP comm: service discovered" );
+    BluetoothGattService srv = gatt.getService( SapConst.SAP5_SERVICE_UUID );
+
+    mReadChrt  = srv.getCharacteristic( SapConst.SAP5_CHRT_READ_UUID );
+    mWriteChrt = srv.getCharacteristic( SapConst.SAP5_CHRT_WRITE_UUID );
+
+    // boolean write_has_write = BleUtils.isChrtRWrite( mWriteChrt.getProperties() );
+    // boolean write_has_write_no_response = BleUtils.isChrtRWriteNoResp( mWriteChrt.getProperties() );
+    // Log.v("DistoX-BLE", "SAP callback W-chrt has write " + write_has_write );
+
+    mWriteChrt.setWriteType( BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT );
+    mWriteInitialized = gatt.setCharacteristicNotification( mWriteChrt, true );
+
+    mReadInitialized = gatt.setCharacteristicNotification( mReadChrt, true );
+
+    BluetoothGattDescriptor readDesc = mReadChrt.getDescriptor( BleUtils.CCCD_UUID );
+    if ( readDesc == null ) {
+      Log.v("DistoX-BLE", "SAP callback FAIL no R-desc CCCD ");
+      return -1;
+    }
+
+    // boolean read_has_write  = BleUtils.isChrtPWrite( mReadChrt.getProperties() );
+     // Log.v("DistoX-BLE", "SAP callback R-chrt has write " + read_has_write );
+
+    byte[] notify = BleUtils.getChrtPNotify( mReadChrt );
+    if ( notify == null ) {
+      Log.v("DistoX-BLE", "SAP callback FAIL no indicate/notify R-property ");
+      return -2;
+    } else {
+      readDesc.setValue( notify );
+      if ( ! gatt.writeDescriptor( readDesc ) ) {
+        Log.v("DistoX-BLE", "SAP callback ERROR writing readDesc");
+        return -3;
+      }
+    }
+    return 0;
+  } 
+
+  public boolean writeChrt( UUID srv_uuid, UUID chrt_uuid, byte[] bytes )
+  {
+    Log.v("DistoX-BLE", "SAP comm: ##### writeChrt TODO ..." );
+    return mCallback.writeCharacteristic( mWriteChrt );
+  }
+
+  public boolean readChrt( UUID srv_uuid, UUID chrt_uuid )
+  {
+    Log.v("DistoX-BLE", "SAP comm: ##### readChrt" );
+    return mCallback.readCharacteristic( mReadChrt );
+  }
+
+  public void error( int status )
+  {
+    Log.v("DistoX-BLE", "SAP comm: error " + status );
+  }
+
+  public void failure( int status )
+  {
+    Log.v("DistoX-BLE", "SAP comm: failure " + status );
+    switch ( status ) {
+      case -1:
+        // Log.v("DistoX-BLE", "SAP comm: FAIL no R-desc CCCD ");
+        break;
+      case -2:
+        // Log.v("DistoX-BLE", "SAP comm: FAIL no indicate/notify R-property ");
+        break;
+      case -3:
+        // Log.v("DistoX-BLE", "SAP comm: ERROR writing readDesc");
+        break;
+      default:
+    }
+  }
+
+  public boolean enablePNotify( UUID srcUuid, UUID chrtUuid )
+  {
+    Log.v("DistoX-BLE", "SAP comm: enable P notify");
+    return true;
+  }
+
+  public void connectGatt( Context ctx, BluetoothDevice device )
+  {
+    // Log.v("DistoX-BLE", "SAP connect Gatt" );
+    closeChrt();
+    mCallback.connectGatt( ctx, device );
+  }
+
+  public void disconnectGatt()
+  {
+    Log.v("DistoX-BLE", "SAP comm: disconnect Gatt" );
+    closeChrt();
+    mCallback.disconnectGatt();
+    notifyStatus( ConnectionState.CONN_WAITING );
+    mDisconnecting = false;
+  }
+
+  public void notifyStatus( int status )
+  {
+    mApp.notifyStatus( status );
   }
 
 }

@@ -30,21 +30,21 @@ public interface BleComm
 
   public void changedChrt( BluetoothGattCharacteristic chrt );
 
-  public void readedChrt( String uuid_str, byte[] bytes );
+  public void readedChrt(  String uuid_str, byte[] bytes );
   public void writtenChrt( String uuid_str, byte[] bytes );
-  public void readedDesc( String uuid_str, byte[] bytes );
-  public void writtenDesc( String uuid_str, byte[] bytes );
+  public void readedDesc(  String uuid_str, String uuid_chrt_str, byte[] bytes );
+  public void writtenDesc( String uuid_str, String uuid_chrt_str, byte[] bytes );
 
   public void completedReliableWrite();
   public void disconnected();
 
-  public void servicesDiscovered( BluetoothGatt gatt );
+  public int servicesDiscovered( BluetoothGatt gatt );
 
-  public boolean readChrt( UUID srvUuid, UUID chrtUuid );
+  public boolean readChrt(  UUID srv_uuid, UUID chrt_uuid );
   public boolean writeChrt( UUID srv_uuid, UUID chrt_uuid, byte[] bytes );
 
   // public boolean enablePNotify( UUID srcUuid, BluetoothGattCharacteristic chrt );
-  public boolean enablePNotify( UUID srcUuid, UUID chrtUuid );
+  public boolean enablePNotify( UUID src_uuid, UUID chrt_uuid );
 
   public void connectGatt( Context ctx, BluetoothDevice device );
   public void disconnectGatt();

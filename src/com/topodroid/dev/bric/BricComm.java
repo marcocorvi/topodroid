@@ -150,7 +150,7 @@ public class BricComm extends TopoDroidComm
   // clearPending() which starts a new action if there is one waiting
 
   // from onServicesDiscovered
-  public void servicesDiscovered( BluetoothGatt gatt )
+  public int servicesDiscovered( BluetoothGatt gatt )
   {
     // Log.v("DistoX-BLE", "BRIC comm service discovered");
     /*
@@ -188,7 +188,7 @@ public class BricComm extends TopoDroidComm
     notifyStatus( ConnectionState.CONN_CONNECTED ); 
 
     clearPending();
-
+    return 0;
   }
 
   // from onCharacteristicRead
@@ -223,14 +223,14 @@ public class BricComm extends TopoDroidComm
   }
 
   // from onDescriptorRead
-  public void readedDesc( String uuid_str, byte[] bytes )
+  public void readedDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
   {
     // BricDebug.log( "BRIC comm RD " + uuid_str, bytes );
     clearPending();
   }
 
   // from onDescriptorWrite
-  public void writtenDesc( String uuid_str, byte[] bytes )
+  public void writtenDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
   {
     // BricDebug.log( "BRIC comm WD " + uuid_str, bytes );
     clearPending();

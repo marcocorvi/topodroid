@@ -35,15 +35,85 @@ class SapCallback extends BluetoothGattCallback
   SapComm mSapComm; // TO BECOME BleComm mComm inherited
   // BluetoothGatt mGatt; // inherited
   static final boolean mAutoConnect = true; // this is false in BleCallback
-  BluetoothGattCharacteristic mReadChrt  = null;
-  BluetoothGattCharacteristic mWriteChrt = null;
-  private boolean mReadInitialized  = false;
-  private boolean mWriteInitialized = false;
   private BluetoothGatt mGatt;
+
+  // BluetoothGattCharacteristic mReadChrt  = null;
+  // BluetoothGattCharacteristic mWriteChrt = null;
+  // private boolean mReadInitialized  = false;
+  // private boolean mWriteInitialized = false;
 
   SapCallback( SapComm comm ) 
   { 
     mSapComm  = comm;
+  }
+
+  @Override
+  public void onCharacteristicChanged( BluetoothGatt gatt, BluetoothGattCharacteristic chrt )
+  {
+    mSapComm.changedChrt( chrt );
+    /*
+    if ( chrt == mReadChrt ) {
+      // Log.v("DistoX-BLE", "SAP callback: read chrt changed");
+      mSapComm.changedChrt( chrt );
+    } else if ( chrt == mWriteChrt ) {
+      Log.v("DistoX-BLE", "SAP callback: write chrt changed");
+      mSapComm.changedChrt( chrt );
+    } else {
+      super.onCharacteristicChanged( gatt, chrt );
+    }
+    */
+  }
+
+  @Override
+  public void onCharacteristicRead( BluetoothGatt gatt, BluetoothGattCharacteristic chrt, int status )
+  {
+    // if ( chrt != mReadChrt ) {
+    //   super.onCharacteristicRead( gatt, chrt, status );
+    //   return;
+    // } 
+    if ( status != BluetoothGatt.GATT_SUCCESS ) {
+      Log.v("DistoX-BLE", "SAP callback: FAIL on char read");
+      mSapComm.error( status );
+    } else {
+      String uuid_str = BleUtils.uuidToShortString( chrt.getUuid() );
+      mSapComm.readedChrt( uuid_str, chrt.getValue() );
+      /*
+      if ( ! mReadInitialized ) {
+        Log.v("DistoX-BLE", "SAP callback: ERROR read-uninitialized chrt");
+        mSapComm.error( -1 );
+      } else {
+        // Log.v("DistoX-BLE", "SAP callback: on char read ok");
+        String uuid_str = BleUtils.uuidToShortString( chrt.getUuid() );
+        mSapComm.readedChrt( uuid_str, chrt.getValue() );
+      }
+      */
+    }
+  }
+      
+  @Override
+  public void onCharacteristicWrite( BluetoothGatt gatt, BluetoothGattCharacteristic chrt, int status )
+  {
+    // if ( chrt != mWriteChrt ) {
+    //   super.onCharacteristicWrite( gatt, chrt, status );
+    //   return;
+    // } 
+    if ( status != BluetoothGatt.GATT_SUCCESS ) {
+      Log.v("DistoX-BLE", "SAP callback: FAIL on char write");
+      mSapComm.error( status );
+    } else {
+      String uuid_str = BleUtils.uuidToShortString( chrt.getUuid() );
+      mSapComm.writtenChrt( uuid_str, chrt.getValue() );
+      /*
+      if ( ! mWriteInitialized ) {
+        Log.v("DistoX-BLE", "SAP callback: ERROR write-uninitialized chrt" );
+        return;
+      } else {
+        // Log.v("DistoX-BLE", "SAP callback: on char write ok");
+        String uuid_str = BleUtils.uuidToShortString( chrt.getUuid() );
+        mSapComm.writtenChrt( uuid_str, chrt.getValue() );
+      }
+      */
+    }
   }
 
   @Override
@@ -93,7 +163,16 @@ class SapCallback extends BluetoothGattCallback
       return;
     }
     // Log.v("DistoX-BLE", "SAP callback service discovered ok" );
-    mGatt = gatt;
+    int ret = mSapComm.servicesDiscovered( gatt );
+    if ( ret == 0 ) {
+      mGatt = gatt;
+    } else {
+      if ( gatt != null ) gatt.close();
+      mGatt = null;
+      mSapComm.failure( ret );
+    }
+
+    /*
     BluetoothGattService srv = gatt.getService( SapConst.SAP5_SERVICE_UUID );
 
     mReadChrt  = srv.getCharacteristic( SapConst.SAP5_CHRT_READ_UUID );
@@ -129,6 +208,7 @@ class SapCallback extends BluetoothGattCallback
         mSapComm.failure( -3 );
       }
     }
+    */
   }
 
   @Override
@@ -137,66 +217,21 @@ class SapCallback extends BluetoothGattCallback
     if ( status != BluetoothGatt.GATT_SUCCESS ) {
       Log.v("DistoX-BLE", "SAP callback FAIL on descriptor write");
       mSapComm.error( status );
-    } else if ( desc.getCharacteristic() == mReadChrt ) { // everything is ok
-      // tell the comm it is connected
-      mSapComm.connected( true );
-    } else if ( desc.getCharacteristic() == mWriteChrt ) { // should not happen
-      Log.v("DistoX-BLE", "SAP callback ERROR write-descriptor write: ?? should not happen");
     } else {
-      Log.v("DistoX-BLE", "SAP callback ERROR unknown descriptor write " + desc.getUuid().toString() );
-      super.onDescriptorWrite( gatt, desc, status );
-    }
-  }
-      
-  @Override
-  public void onCharacteristicWrite( BluetoothGatt gatt, BluetoothGattCharacteristic chrt, int status )
-  {
-    if ( chrt != mWriteChrt ) {
-      super.onCharacteristicWrite( gatt, chrt, status );
-      return;
-    } else if ( status != BluetoothGatt.GATT_SUCCESS ) {
-      Log.v("DistoX-BLE", "SAP callback: FAIL on char write");
-      mSapComm.error( status );
-    } else if ( ! mWriteInitialized ) {
-      Log.v("DistoX-BLE", "SAP callback: ERROR write-uninitialized chrt" );
-      return;
-    } else {
-      // Log.v("DistoX-BLE", "SAP callback: on char write ok");
-      String uuid_str = BleUtils.uuidToShortString( chrt.getUuid() );
-      mSapComm.writtenChrt( uuid_str, chrt.getValue() );
-    }
-  }
-
-  @Override
-  public void onCharacteristicRead( BluetoothGatt gatt, BluetoothGattCharacteristic chrt, int status )
-  {
-    if ( chrt != mReadChrt ) {
-      super.onCharacteristicRead( gatt, chrt, status );
-      return;
-    } else if ( status != BluetoothGatt.GATT_SUCCESS ) {
-      Log.v("DistoX-BLE", "SAP callback: FAIL on char read");
-      mSapComm.error( status );
-    } else if ( ! mReadInitialized ) {
-      Log.v("DistoX-BLE", "SAP callback: ERROR read-uninitialized chrt");
-      mSapComm.error( -1 );
-    } else {
-      // Log.v("DistoX-BLE", "SAP callback: on char read ok");
-      String uuid_str = BleUtils.uuidToShortString( chrt.getUuid() );
-      mSapComm.readedChrt( uuid_str, chrt.getValue() );
-    }
-  }
-
-  @Override
-  public void onCharacteristicChanged( BluetoothGatt gatt, BluetoothGattCharacteristic chrt )
-  {
-    if ( chrt == mReadChrt ) {
-      // Log.v("DistoX-BLE", "SAP callback: read chrt changed");
-      mSapComm.changedChrt( chrt );
-    } else if ( chrt == mWriteChrt ) {
-      Log.v("DistoX-BLE", "SAP callback: write chrt changed");
-      mSapComm.changedChrt( chrt );
-    } else {
-      super.onCharacteristicChanged( gatt, chrt );
+      String uuid_str = BleUtils.uuidToShortString( desc.getUuid() );
+      String uuid_chrt_str = BleUtils.uuidToShortString( desc.getCharacteristic().getUuid() );
+      mSapComm.writtenDesc( uuid_str, uuid_chrt_str, desc.getValue() );
+      /*
+      if ( desc.getCharacteristic() == mSapComm.getReadChrt() ) { // everything is ok
+        // tell the comm it is connected
+        mSapComm.connected( true );
+      } else if ( desc.getCharacteristic() == mSapComm.getWriteChrt() ) { // should not happen
+        Log.v("DistoX-BLE", "SAP callback ERROR write-descriptor write: ?? should not happen");
+      } else {
+        Log.v("DistoX-BLE", "SAP callback ERROR unknown descriptor write " + desc.getUuid().toString() );
+        super.onDescriptorWrite( gatt, desc, status );
+      }
+      */
     }
   }
 
@@ -204,8 +239,8 @@ class SapCallback extends BluetoothGattCallback
   void closeGatt()
   { 
     Log.v("DistoX-BLE", "SAP callback: close GATT");
-    mWriteInitialized = false; 
-    mReadInitialized  = false; 
+    // mWriteInitialized = false; 
+    // mReadInitialized  = false; 
     if ( mGatt != null ) {
       mGatt.disconnect();
       mGatt.close();
@@ -216,8 +251,8 @@ class SapCallback extends BluetoothGattCallback
   void disconnectGatt()
   {
     Log.v("DistoX-BLE", "SAP callback: disconnect GATT");
-    mWriteInitialized = false; 
-    mReadInitialized  = false; 
+    // mWriteInitialized = false; 
+    // mReadInitialized  = false; 
     if ( mGatt != null ) {
       // Log.v("DistoX-BLE", "SAP callback: disconnect gatt");
       mGatt.disconnect();
@@ -239,15 +274,15 @@ class SapCallback extends BluetoothGattCallback
 
   boolean writeCharacteristic( BluetoothGattCharacteristic chrt ) 
   {
-    return mGatt != null && mGatt.writeCharacteristic( mWriteChrt ); // assume chrt == mWriteChrt
+    return mGatt != null && mGatt.writeCharacteristic( chrt ); 
   }
 
-  boolean readCharacteristic( ) 
+  boolean readCharacteristic( BluetoothGattCharacteristic chrt ) 
   {
-    return mGatt != null && mGatt.readCharacteristic( mReadChrt ); // assume chrt == mWriteChrt
+    return mGatt != null && mGatt.readCharacteristic( chrt ); 
   }
 
   // FUDGE
-  BluetoothGattCharacteristic getWriteChrt( ) { return mWriteChrt; }
+  // BluetoothGattCharacteristic getWriteChrt( ) { return mWriteChrt; }
 
 }
