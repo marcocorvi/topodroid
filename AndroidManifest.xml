@@ -157,11 +157,11 @@
           >
         </activity>
 
-        <activity android:name=".DeviceList"
+        <!-- activity android:name=".DeviceList"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
           >
-        </activity>
+        </activity -->
 
         <activity android:name=".DrawingWindow"
 	  android:theme="@style/Theme.FullScreen"
