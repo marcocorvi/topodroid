@@ -19,11 +19,11 @@ import java.util.GregorianCalendar;
 
 public class BricConst
 {
-  public final static String MEAS_SRV  = "58d0";
-  public final static String MEAS_PRIM = "58d1";
-  public final static String MEAS_META = "58d2";
-  public final static String MEAS_ERR  = "58d3";
-  public final static String LAST_TIME = "58d4";
+  public final static String MEAS_SRV  = "000058d0" + BleUtils.STANDARD_UUID;
+  public final static String MEAS_PRIM = "000058d1" + BleUtils.STANDARD_UUID;
+  public final static String MEAS_META = "000058d2" + BleUtils.STANDARD_UUID;
+  public final static String MEAS_ERR  = "000058d3" + BleUtils.STANDARD_UUID;
+  public final static String LAST_TIME = "000058d4" + BleUtils.STANDARD_UUID;
  
   public final static UUID MEAS_SRV_UUID  = UUID.fromString( MEAS_SRV );
   public final static UUID MEAS_PRIM_UUID = UUID.fromString( MEAS_PRIM );
@@ -31,8 +31,8 @@ public class BricConst
   public final static UUID MEAS_ERR_UUID  = UUID.fromString( MEAS_ERR );
   public final static UUID LAST_TIME_UUID = UUID.fromString( LAST_TIME );
 
-  public final static String CTRL_SRV  = "58e0";
-  public final static String CTRL_CHRT = "58e1";
+  public final static String CTRL_SRV  = "000058e0" + BleUtils.STANDARD_UUID;
+  public final static String CTRL_CHRT = "000058e1" + BleUtils.STANDARD_UUID;
 
   public final static UUID CTRL_SRV_UUID  = UUID.fromString( CTRL_SRV );
   public final static UUID CTRL_CHRT_UUID = UUID.fromString( CTRL_CHRT );

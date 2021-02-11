@@ -240,7 +240,7 @@ class DrawingSvgWalls extends DrawingSvgBase
       out.write( "      " + end_grp ); // walls_shp
       out.flush();
 
-      out.write( walls_sym ); out.write( group_mode_close );
+      out.write( walls_sym ); out.write( group_mode_open );
       for ( Scrap scrap : plot.getScraps() ) {
         ArrayList<DrawingPath> paths = new ArrayList<>();
         scrap.addCommandsToList( paths );
