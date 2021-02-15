@@ -45,7 +45,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
                       TDNum num, DrawingCommandManager command,
                       long type, String name, String ext, boolean toast, GeoReference station )
     {
-      // Log.v("DistoX-C3D", "export plot to file cstr. " + name + " fixed " + fixed );
+      // Log.v("DistoX-C3D", "export plot to file cstr. " + type + " " + name + "  " + ((station == null)? "no geo" : station.toString() ) );
       // FIXME assert( ext != null );
       mFormat    = context.getResources().getString(R.string.saved_file_1);
       mInfo      = info;

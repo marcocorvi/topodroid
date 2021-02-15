@@ -292,7 +292,7 @@ class CutNPaste
       textview2 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
-            app.sendBricCommand( BricConst.CMD_LASER );
+            app.sendBricCommand( BricConst.CMD_SCAN );
             dismissPopupBT();
           }
         } );

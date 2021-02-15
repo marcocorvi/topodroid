@@ -13,20 +13,32 @@ package com.topodroid.DistoX;
 
 // import android.util.Log;
 
-class GeoReference
+public class GeoReference
 {
   final float e;
   final float s;
   final float v;
-  final double eradius;
+  final double eradius; // NOTE R-radius is not used 
   final double sradius;
+  final float  declination;
 
-  GeoReference( float e0, float s0, float v0, double er, double sr )
+  public GeoReference( float e0, float s0, float v0, double er, double sr, float decl )
   {
     e = e0;
     s = s0;
     v = v0;
     eradius = er;
     sradius = sr;
+    declination = decl;
+  }
+
+  public String toString()
+  {
+    StringBuilder sb = new StringBuilder();
+    sb.append( "Geo: E " + e );
+    sb.append( " S " + s );
+    sb.append( " V " + v );
+    sb.append( " d " + declination );
+    return sb.toString();
   }
 }

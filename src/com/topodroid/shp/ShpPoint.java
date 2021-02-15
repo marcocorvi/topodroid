@@ -40,19 +40,21 @@ public class ShpPoint extends ShpObject
   }
 
   // write headers for POINT
-  public boolean writePoints( List< DrawingPointPath > pts, double x0, double y0, double xscale, double yscale ) throws IOException
+  public boolean writePoints( List< DrawingPointPath > pts, double x0, double y0, double xscale, double yscale, float cd, float sd ) throws IOException
   {
     int n_pts = (pts != null)? pts.size() : 0;
     // Log.v("DistoX", "SHP write points " + n_pts );
     if ( n_pts == 0 ) return false;
 
-    int n_fld = 3;
+    int n_fld = 5;
     String[] fields = new String[ n_fld ];
     fields[0] = "name";
     fields[1] = "orient";
     fields[2] = "levels";
-    byte[]   ftypes = { BYTEC, BYTEC, BYTEC };
-    int[]    flens  = { 16, 6, 6 };
+    fields[3] = "scrap";
+    fields[4] = "text";
+    byte[]   ftypes = { BYTEC, BYTEC, BYTEC, BYTEC, BYTEC };
+    int[]    flens  = { 16, 6, 6, 6, 128 };
 
     int shpRecLen = getShpRecordLength( );
     int shxRecLen = getShxRecordLength( );
@@ -63,7 +65,7 @@ public class ShpPoint extends ShpObject
     int shxLength = 50 + n_pts * shxRecLen;
     int dbfLength = 33 + n_fld * 32 + n_pts * dbfRecLen; // [Bytes]
 
-    setBoundsPoints( pts, x0, y0, xscale, yscale );
+    setBoundsPoints( pts, x0, y0, xscale, yscale, cd, sd );
     // Log.v("DistoX", "POINTZ " + pts.size() + " len " + shpLength + " / " + shxLength + " / " + dbfLength );
     // Log.v("DistoX", "bbox X " + xmin + " " + xmax );
 
@@ -82,13 +84,18 @@ public class ShpPoint extends ShpObject
       shpBuffer.order(ByteOrder.LITTLE_ENDIAN);   
       shpBuffer.putInt( SHP_POINT );
       // Log.v("DistoX", "POINTZ " + cnt + ": " + pt.e + " " + pt.s + " " + pt.v + " offset " + offset );
-      shpBuffer.putDouble( x0 + xscale*(pt.cx - DrawingUtil.CENTER_X) );
-      shpBuffer.putDouble( y0 - yscale*(pt.cy - DrawingUtil.CENTER_Y) );
+      float x = DrawingUtil.declinatedX( pt.cx, pt.cy, cd, sd );
+      float y = DrawingUtil.declinatedY( pt.cx, pt.cy, cd, sd );
+      shpBuffer.putDouble( x0 + xscale * x );
+      shpBuffer.putDouble( y0 - yscale * y );
 
       writeShxRecord( offset, shpRecLen );
       fields[0] = pt.getThName( );
       fields[1] = Integer.toString( (int)pt.mOrientation ); 
       fields[2] = Integer.toString( pt.mLevel );
+      fields[3] = Integer.toString( pt.mScrap ); 
+      fields[4] = pt.getPointText(); 
+      if ( fields[3] == null ) fields[3] = "";
       writeDBaseRecord( n_fld, fields, flens );
       ++cnt;
     }
@@ -101,21 +108,21 @@ public class ShpPoint extends ShpObject
   @Override protected int getShpRecordLength( ) { return 14; }
     
   // Utility: set the bounding box of the set of geometries
-  private void setBoundsPoints( List< DrawingPointPath > pts, double x0, double y0, double xscale, double yscale ) 
+  private void setBoundsPoints( List< DrawingPointPath > pts, double x0, double y0, double xscale, double yscale, float cd, float sd ) 
   {
     if ( pts.size() == 0 ) {
       xmin = xmax = ymin = ymax = zmin = zmax = 0.0;
       return;
     }
     DrawingPointPath pt = pts.get(0);
-    double xx = x0+xscale*(pt.cx - DrawingUtil.CENTER_X);
-    double yy = y0-yscale*(pt.cy - DrawingUtil.CENTER_Y);
-    initBBox( xx, yy );
+    float x = DrawingUtil.declinatedX( pt.cx, pt.cy, cd, sd );
+    float y = DrawingUtil.declinatedY( pt.cx, pt.cy, cd, sd );
+    initBBox( x0 + xscale * x, y0 - yscale * y );
     for ( int k=pts.size() - 1; k>0; --k ) {
       pt = pts.get(k);
-      xx = x0+xscale*(pt.cx - DrawingUtil.CENTER_X);
-      yy = y0-yscale*(pt.cy - DrawingUtil.CENTER_Y);
-      updateBBox( xx, yy );
+      x = DrawingUtil.declinatedX( pt.cx, pt.cy, cd, sd );
+      y = DrawingUtil.declinatedY( pt.cx, pt.cy, cd, sd );
+      updateBBox( x0 + xscale * x, y0 - yscale * y );
     }
   }
 }

@@ -112,7 +112,7 @@ public class DrawingPointPath extends DrawingPath
     setCenter( x, y );
     // mScale   = PointScale.SCALE_NONE;
     mOrientation = 0.0;
-    mOptions = options;
+    mOptions   = options;
     mPointText = text; // getTextFromOptions( options ); // this can also reset mOptions
     mLevel     = BrushManager.getPointLevel( type );
 
@@ -396,7 +396,7 @@ public class DrawingPointPath extends DrawingPath
     resetPath( 1.0f );
   }
 
-  String getPointText() { return mPointText; }
+  public String getPointText() { return mPointText; }
 
   void setPointText( String text )
   {

@@ -186,4 +186,15 @@ public class DrawingUtil
     // Log.v("DistoX-GRID", "grid sizes " + surface.getGrid1Size() + " " + surface.getGrid10Size() );
   }
 
+  public static float declinatedX( float x, float y, float cd, float sd ) 
+  {
+    return cd * ( x - DrawingUtil.CENTER_X ) - sd * ( y - DrawingUtil.CENTER_Y );
+  }
+
+  public static float declinatedY( float x, float y, float cd, float sd ) 
+  {
+    return cd * ( y - DrawingUtil.CENTER_Y ) + sd * ( x - DrawingUtil.CENTER_X );
+  }
+
+
 }

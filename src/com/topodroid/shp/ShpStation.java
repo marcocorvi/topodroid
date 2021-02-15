@@ -45,7 +45,7 @@ public class ShpStation extends ShpObject
   }
 
   // write headers for POINT
-  public boolean writeStations( List< DrawingStationName > pts, double x0, double y0, double xscale, double yscale ) throws IOException
+  public boolean writeStations( List< DrawingStationName > pts, double x0, double y0, double xscale, double yscale, float cd, float sd ) throws IOException
   {
     int n_pts = (pts != null)? pts.size() : 0;
     // Log.v("DistoX", "SHP write stations " + n_pts );
@@ -66,7 +66,7 @@ public class ShpStation extends ShpObject
     int shxLength = 50 + n_pts * shxRecLen;
     int dbfLength = 33 + n_fld * 32 + n_pts * dbfRecLen; // [Bytes]
 
-    setBoundsPoints( pts, x0, y0, xscale, yscale );
+    setBoundsPoints( pts, x0, y0, xscale, yscale, cd, sd );
     // Log.v("DistoX", "POINT station " + pts.size() + " len " + shpLength + " / " + shxLength + " / " + dbfLength );
     // Log.v("DistoX", "bbox X " + xmin + " " + xmax );
 
@@ -85,8 +85,10 @@ public class ShpStation extends ShpObject
       shpBuffer.order(ByteOrder.LITTLE_ENDIAN);   
       shpBuffer.putInt( SHP_POINT );
       // Log.v("DistoX", "POINT station " + cnt + ": " + st.e + " " + st.s + " " + st.v + " offset " + offset );
-      shpBuffer.putDouble( x0 + xscale*(st.cx - DrawingUtil.CENTER_X) );
-      shpBuffer.putDouble( y0 - yscale*(st.cy - DrawingUtil.CENTER_Y) );
+      float x = DrawingUtil.declinatedX( st.cx, st.cy, cd, sd );
+      float y = DrawingUtil.declinatedY( st.cx, st.cy, cd, sd );
+      shpBuffer.putDouble( x0 + xscale * x );
+      shpBuffer.putDouble( y0 - yscale * y );
 
       writeShxRecord( offset, shpRecLen );
       fields[0] = st.getName();
@@ -102,21 +104,21 @@ public class ShpStation extends ShpObject
   @Override protected int getShpRecordLength( ) { return 14; }
     
   // Utility: set the bounding box of the set of geometries
-  private void setBoundsPoints( List< DrawingStationName > pts, double x0, double y0, double xscale, double yscale ) 
+  private void setBoundsPoints( List< DrawingStationName > pts, double x0, double y0, double xscale, double yscale, float cd, float sd ) 
   {
     if ( pts.size() == 0 ) {
       xmin = xmax = ymin = ymax = zmin = zmax = 0.0;
       return;
     }
     DrawingStationName st = pts.get(0);
-    double xx = x0+xscale*(st.cx - DrawingUtil.CENTER_X);
-    double yy = y0-yscale*(st.cy - DrawingUtil.CENTER_Y);
-    initBBox( xx, yy );
+    float x = DrawingUtil.declinatedX( st.cx, st.cy, cd, sd );
+    float y = DrawingUtil.declinatedY( st.cx, st.cy, cd, sd );
+    initBBox( x0 + xscale * x, y0 - yscale * y );
     for ( int k=pts.size() - 1; k>0; --k ) {
       st = pts.get(k);
-      xx = x0+xscale*(st.cx - DrawingUtil.CENTER_X);
-      yy = y0-yscale*(st.cy - DrawingUtil.CENTER_Y);
-      updateBBox( xx, yy );
+      x = DrawingUtil.declinatedX( st.cx, st.cy, cd, sd );
+      y = DrawingUtil.declinatedY( st.cx, st.cy, cd, sd );
+      updateBBox( x0 + xscale * x, y0 - yscale * y );
     }
   }
 }

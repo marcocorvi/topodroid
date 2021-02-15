@@ -66,8 +66,8 @@ public class DrawingPath extends RectF
   private float mCosine; // cosine value for splays (= cos of angle between splay and leg)
                          // x-sections: angle between splay and plane-normal
   String mPlotName;      // full plotname, ie, survey-plot (only for Overview window)
-  public int mLevel;     // canvas levels flag
-  int mScrap;            // plot scrap
+  public int mLevel;     // canvas levels flag (public for export classes)
+  public int mScrap;     // plot scrap (public for export classes)
 
   public float cx, cy; // midpoint scene coords
   float deltaX, deltaY, len2; // used for Cave3D export

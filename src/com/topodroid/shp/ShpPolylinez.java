@@ -54,7 +54,7 @@ public class ShpPolylinez extends ShpObject
     fields[3] = "flag";
     fields[4] = "comment";
     byte[]   ftypes = { BYTEC, BYTEC, BYTEC, BYTEC, BYTEC }; // use only strings
-    int[]    flens  = { 8, 16, 16, 8, 32 };
+    int[]    flens  = { 8, 16, 16, 8, 128 };
 
     int shpRecLen = getShpRecordLength( );
     int shxRecLen = getShxRecordLength( );
