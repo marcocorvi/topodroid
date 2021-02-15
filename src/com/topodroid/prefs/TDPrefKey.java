@@ -747,8 +747,8 @@ public class TDPrefKey
 
   // ------------------------------------------------------------------------------
   public static String[] EXPORT_DXF = {
-    // "DISTOX_DXF_SCALE",           // default DXF scale (export)
-    "DISTOX_DXF_BLOCKS",             // whether to export point items as Blocks in DXF export
+    // "DISTOX_DXF_SCALE",     // default DXF scale (export)
+    "DISTOX_DXF_BLOCKS",       // whether to export point items as Blocks in DXF export
     "DISTOX_ACAD_VERSION",     // 23 31 
   };
   static int[] EXPORT_DXFtitle = {
