@@ -50,13 +50,14 @@ public class ShpSegment extends ShpObject
     if ( nrs == 0 ) return false;
     // Log.v("DistoX", "SHOT cd " + cd + " sd " + sd + " Xscale " + xscale + " Yscale " + yscale );
 
-    int n_fld = 3; // type from to flag comment
+    int n_fld = 4; // type from to flag comment
     String[] fields = new String[ n_fld ];
     fields[0] = "type";
     fields[1] = "from";
     fields[2] = "to";
-    byte[]   ftypes = { BYTEC, BYTEC, BYTEC }; // use only strings
-    int[]    flens  = { 8, 16, 16 };
+    fields[3] = "flag";
+    byte[]   ftypes = { BYTEC, BYTEC, BYTEC, BYTEC }; // use only strings
+    int[]    flens  = { 8, 16, 16, 6 };
 
     int shpLength = 50 + nrs * getShpRecordLength( );
     int shxRecLen = getShxRecordLength( );
@@ -82,24 +83,31 @@ public class ShpSegment extends ShpObject
     int offset = 50;
     if ( sgms != null && nrs > 0 ) {
       for ( DrawingPath sgm : sgms ) {
+        boolean write = false;
 	DBlock blk = sgm.mBlock;
 	if ( sgm.mType == DrawingPath.DRAWING_PATH_FIXED ) {
+          write = true;
           fields[0] = "leg";
 	  fields[1] = blk.mFrom;
 	  fields[2] = blk.mTo;
-	} else if ( sgm.mType == DrawingPath.DRAWING_PATH_AREA ) {
+          fields[3] = Long.toString( blk.getFlag() );
+	} else if ( sgm.mType == DrawingPath.DRAWING_PATH_SPLAY ) {
+          write = true;
           fields[0] = "splay";
 	  fields[1] = blk.mFrom;
 	  fields[2] = "-";
+          fields[3] = Long.toString( blk.getFlag() );
 	}
-	int shp_len = getShpRecordLength( );
+        if ( write ) {
+	  int shp_len = getShpRecordLength( );
 
-        writeShpRecord( cnt, shp_len, sgm, x0, y0, xscale, yscale, cd, sd );
-        writeShxRecord( offset, shp_len );
-        writeDBaseRecord( n_fld, fields, flens );
+          writeShpRecord( cnt, shp_len, sgm, x0, y0, xscale, yscale, cd, sd );
+          writeShxRecord( offset, shp_len );
+          writeDBaseRecord( n_fld, fields, flens );
 
-        offset += shp_len;
-        ++cnt;
+          offset += shp_len;
+          ++cnt;
+        }
       }
     }
     // Log.v("DistoX", "shots done records" );

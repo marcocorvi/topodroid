@@ -45,7 +45,7 @@ public class DBlock
   // shot data:
   public long   mId;
   public long   mTime;
-  private long   mSurveyId;
+  private long  mSurveyId;
   // private String mName;
   public String mFrom;     // N.B. mfrom and mTo must be not null - can be empty
   public String mTo;
@@ -107,7 +107,7 @@ public class DBlock
   void resetFlag( long flag ) { mFlag = flag; }
   void setFlag( long flag ) { mFlag |= flag; }
   // void clearFlag( long flag ) { mFlag &= ~flag; }
-  long getFlag() { return mFlag; }
+  public long getFlag() { return mFlag; }
   public int  getReducedFlag() { return (int)(0x07 & mFlag); } // survey-surface-duplicate-commented part of the flag
 
   // ------------------------------------------------------------------

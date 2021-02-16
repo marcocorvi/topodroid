@@ -20,18 +20,21 @@ public class GeoReference
   final float v;
   final double eradius; // NOTE R-radius is not used 
   final double sradius;
+  // final double yfactor;
   final float  declination;
 
-  public GeoReference( float e0, float s0, float v0, double er, double sr, float decl )
+  public GeoReference( float e0, float s0, float v0, double er, double sr, /* double yf, */ float decl )
   {
     e = e0;
     s = s0;
     v = v0;
     eradius = er;
     sradius = sr;
+    // yfactor = yf;
     declination = decl;
   }
 
+  // DEBUG method
   public String toString()
   {
     StringBuilder sb = new StringBuilder();
