@@ -51,6 +51,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class BricComm extends TopoDroidComm
                       implements BleComm
 {
+  private final static boolean PRIMARY_ONLY = false;
+
   private ConcurrentLinkedQueue< BleOperation > mOps;
   private int mPendingCommands;
   final static int DATA_PRIM = 1;
@@ -83,17 +85,24 @@ public class BricComm extends TopoDroidComm
           switch ( buffer.type ) {
             case DATA_PRIM:
               // BricDebug.logMeasPrim( buffer.data );
-              ((BricProto)mProtocol).addMeasPrim( buffer.data );
-              // ((BricProto)mProtocol).addMeasPrimAndProcess( buffer.data );
+              if ( PRIMARY_ONLY ) {
+                ((BricProto)mProtocol).addMeasPrimAndProcess( buffer.data );
+              } else {
+                ((BricProto)mProtocol).addMeasPrim( buffer.data );
+              }
               break;
             case DATA_META:
               // BricDebug.logMeasMeta( buffer.data );
-              ((BricProto)mProtocol).addMeasMeta( buffer.data );
+              if ( ! PRIMARY_ONLY ) {
+                ((BricProto)mProtocol).addMeasMeta( buffer.data );
+              }
               break;
             case DATA_ERR:
               // BricDebug.logMeasErr( buffer.data );
-              ((BricProto)mProtocol).addMeasErr( buffer.data );
-              ((BricProto)mProtocol).processData(); 
+              if ( ! PRIMARY_ONLY ) {
+                ((BricProto)mProtocol).addMeasErr( buffer.data );
+                ((BricProto)mProtocol).processData(); 
+              }
               break;
             default:
           }
@@ -202,11 +211,15 @@ public class BricComm extends TopoDroidComm
   // from onCharacteristicRead
   public void readedChrt( String uuid_str, byte[] bytes )
   {
-    // Log.v("DistoX-BLE", "BRIC comm chrt readed " + uuid_str );
+    Log.v("DistoX-BLE", "BRIC comm chrt readed " + uuid_str );
     int ret;
     if ( uuid_str.equals( BricConst.MEAS_PRIM ) ) { // this is not executed: PRIM is read from onCharcateristicChanged
       mQueue.put( DATA_PRIM, bytes ); 
-      ret = enqueueOp( new BleOpChrtRead( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_META_UUID ) );
+      if ( ! PRIMARY_ONLY ) {
+        ret = enqueueOp( new BleOpChrtRead( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_META_UUID ) );
+      } else {
+        doPendingCommand();
+      }
     } else if ( uuid_str.equals( BricConst.MEAS_META ) ) {
       mQueue.put( DATA_META, bytes );
       ret = enqueueOp( new BleOpChrtRead( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_ERR_UUID ) );
@@ -262,13 +275,14 @@ public class BricComm extends TopoDroidComm
   // MEAS_META, MEAS_ERR, and LAST_TIME are not change-notified 
   public void changedChrt( BluetoothGattCharacteristic chrt )
   {
-    // Log.v("DistoX-BLE", "BRIC comm changed char ======> " + chrt.getUuid() );
+    Log.v("DistoX-BLE", "BRIC comm changed char ======> " + chrt.getUuid() );
     int ret;
     String chrt_uuid = chrt.getUuid().toString();
     if ( chrt_uuid.equals( BricConst.MEAS_PRIM ) ) {
       mQueue.put( DATA_PRIM, chrt.getValue() );
-      ret = enqueueOp( new BleOpChrtRead( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_META_UUID ) );
-      // ret = enqueueOp( new BleOpChrtRead( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_ERR_UUID ) );
+      if ( ! PRIMARY_ONLY ) {
+        ret = enqueueOp( new BleOpChrtRead( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_ERR_UUID ) );
+      }
     } else if ( chrt_uuid.equals( BricConst.MEAS_META ) ) { 
       // mQueue.put( DATA_META, chrt.getValue() );
     } else if ( chrt_uuid.equals( BricConst.MEAS_ERR  ) ) {
@@ -445,13 +459,16 @@ public class BricComm extends TopoDroidComm
       case BricConst.CMD_OFF:   command = Arrays.copyOfRange( BricConst.COMMAND_OFF,   0, 9 ); break;
 
       case BricConst.CMD_SPLAY: 
+        Log.v("DistoX-BLE", "BRIC comm send cmd SPLAY");
         mPendingCommands += 1;
         break;
       case BricConst.CMD_LEG: 
+        Log.v("DistoX-BLE", "BRIC comm send cmd LEG");
         mPendingCommands += 3;
         break;
     }
     if ( command != null ) {
+      Log.v("DistoX-BLE", "BRIC comm send cmd " + cmd );
       enqueueOp( new BleOpChrtWrite( mContext, this, BricConst.CTRL_SRV_UUID, BricConst.CTRL_CHRT_UUID, command ) );
       doNextOp();
     } else {
@@ -468,12 +485,12 @@ public class BricComm extends TopoDroidComm
         byte[] cmd1 = Arrays.copyOfRange( BricConst.COMMAND_LASER, 0, 5 );
         enqueueOp( new BleOpChrtWrite( mContext, comm, BricConst.CTRL_SRV_UUID, BricConst.CTRL_CHRT_UUID, cmd1 ) );
         doNextOp();
-        TDUtil.slowDown( 300 );
+        TDUtil.slowDown( 600 );
         Log.v("DistoX-BLE", "BRIC comm: enqueue SHOT cmd");
         byte[] cmd2 = Arrays.copyOfRange( BricConst.COMMAND_SHOT, 0, 4 );
         enqueueOp( new BleOpChrtWrite( mContext, comm, BricConst.CTRL_SRV_UUID, BricConst.CTRL_CHRT_UUID, cmd2 ) );
         doNextOp();
-        TDUtil.slowDown( 400 );
+        TDUtil.slowDown( 800 );
       }
     } ).start();
   }
