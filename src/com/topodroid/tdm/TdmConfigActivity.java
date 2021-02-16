@@ -59,7 +59,7 @@ public class TdmConfigActivity extends Activity
                               , OnItemClickListener
                               , IExporter
 {
-  int mNrButton1 = TDPath.BELOW_ANDROID_11 ? 5 : 4; 
+  int mNrButton1 = 5; // TDPath.BELOW_ANDROID_11 ? 5 : 4; 
   private static int izons[] = { 
     R.drawable.iz_add,
     R.drawable.iz_drop,
@@ -398,7 +398,8 @@ public class TdmConfigActivity extends Activity
       startTdmSurveysActivity();
     } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // EQUATES
       (new TdmEquatesDialog( this, mTdmConfig, null )).show();
-    } else if ( TDPath.BELOW_ANDROID_11 && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // 3D
+    // } else if ( TDPath.BELOW_ANDROID_11 && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // 3D
+    } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // 3D
       try {
         // Log.v("DistoX-TdManager", "Cave3D of " + mTdmConfig.getFilepath() );
         Intent intent = new Intent( "Cave3D.intent.action.Launch" );

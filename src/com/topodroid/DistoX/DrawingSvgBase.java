@@ -271,12 +271,13 @@ class DrawingSvgBase
   static protected void toSvg( PrintWriter pw, DrawingPointPath point, String color, float xoff, float yoff )
   {
     int idx = point.mPointType;
+    float scale = point.getScaleValue();
     String name = point.getThName( );
     pw.format("<!-- point %s -->\n", name );
     if ( name.equals("label") ) {
       DrawingLabelPath label = (DrawingLabelPath)point;
       printPointWithXY( pw, "<text", xoff+point.cx, yoff+point.cy );
-      pw.format(Locale.US, " style=\"fill:black;stroke:black;stroke-width:%.2f\">%s</text>\n", TDSetting.mSvgLabelStroke, label.mPointText );
+      pw.format(Locale.US, " style=\"fill:black;stroke:black;stroke-width:%.2f\">%s</text>\n", TDSetting.mSvgLabelStroke * scale, label.mPointText );
     // } else if ( name.equals("continuation") ) {
     //   printPointWithXY( pw, "<text", xoff+point.cx, yoff+point.cy );
     //   pw.format(Locale.US, " style=\"fill:none;stroke:black;stroke-width:%.2f\">\?</text>\n", TDSetting.mSvgLabelStroke );
@@ -288,13 +289,14 @@ class DrawingSvgBase
     } else {
       SymbolPoint sp = (SymbolPoint)BrushManager.getPointByIndex( idx );
       if ( sp != null ) {
+        
         pw.format(Locale.US, "<g style=\"fill:none;stroke:%s;stroke-width:%.2f\" >\n", color, TDSetting.mSvgPointStroke );
         // pw.format(Locale.US, "<g transform=\"translate(%.2f,%.2f), scale(%d), rotate(%.2f)\">\n", 
         //   (xoff+point.cx)*TDSetting.mToSvg, (yoff+point.cy)*TDSetting.mToSvg, POINT_SCALE, point.mOrientation );
 
         float o = (float)(point.mOrientation);
-        float s = POINT_SCALE * TDMath.sind( o );
-        float c = POINT_SCALE * TDMath.cosd( o );
+        float s = POINT_SCALE * TDMath.sind( o ) * scale;
+        float c = POINT_SCALE * TDMath.cosd( o ) * scale;
         pw.format(Locale.US, "<g transform=\"matrix(%.2f,%.2f,%.2f,%.2f,%.2f,%.2f)\">\n", 
           c, s, -s, c, (xoff+point.cx)*TDSetting.mToSvg, (yoff+point.cy)*TDSetting.mToSvg );
 
@@ -303,7 +305,7 @@ class DrawingSvgBase
         pw.format( end_grp );
       } else {
         printPointWithCXCY( pw, "<circle", xoff+point.cx, yoff+point.cy );
-        pw.format(Locale.US, " r=\"%d\" ", POINT_RADIUS );
+        pw.format(Locale.US, " r=\"%d\" ", POINT_RADIUS * scale );
         pw.format(Locale.US, " style=\"fill:none;stroke:black;stroke-width:%.2f\" />\n", TDSetting.mSvgPointStroke );
       }
     }

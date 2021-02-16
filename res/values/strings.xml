@@ -931,7 +931,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="export_bgcolor">White background</string>
     <string name="export_config">Config file</string>
     <string name="export_csv_rawdata">Raw data</string>
-    <string name="export_dxf_blocks">DXF blocks</string>
+    <string name="export_dxf_blocks">Splay endpoints</string>
     <string name="export_dxf_version">Version</string>
     <string name="export_georeference">Georeference</string>
     <string name="export_grid">Grid</string>

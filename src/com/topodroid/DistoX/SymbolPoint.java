@@ -440,9 +440,56 @@ class SymbolPoint extends Symbol
             mPath.cubicTo( x0*unit, y0*unit, x1*unit, y1*unit, x2*unit, y2*unit );
 	    pv4.format(Locale.US, "C %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f ", x00, y00, x0*dxfScale, y0*dxfScale, x1*dxfScale, y1*dxfScale, x2*dxfScale, y2*dxfScale );
 
+            DrawingDxf.printString( pw, 0, "LINE" );
+            DrawingDxf.printString( pw, 8, pname );
+            DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbLine" );
+            DrawingDxf.printXYZ( pw, x00, -y00, 0.0f, 0 ); // prev point
+            DrawingDxf.printXYZ( pw, x0*dxfScale, -y0*dxfScale, 0.0f, 1 ); // current point
+            DrawingDxf.printString( pw, 0, "LINE" );
+            DrawingDxf.printString( pw, 8, pname );
+            DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbLine" );
+            DrawingDxf.printXYZ( pw, x0*dxfScale, -y0*dxfScale, 0.0f, 0 ); // prev point
+            DrawingDxf.printXYZ( pw, x1*dxfScale, -y1*dxfScale, 0.0f, 1 ); // current point
+            DrawingDxf.printString( pw, 0, "LINE" );
+            DrawingDxf.printString( pw, 8, pname );
+            DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbLine" );
+            DrawingDxf.printXYZ( pw, x1*dxfScale, -y1*dxfScale, 0.0f, 0 ); // prev point
+            DrawingDxf.printXYZ( pw, x2*dxfScale, -y2*dxfScale, 0.0f, 1 ); // current point
+
             x00 /= dxfScale;
             y00 /= dxfScale;
 
+            /*
+            float xm = (x00 + x2)/2;
+            float ym = (y00 + y2)/2;
+            float dx = x2 - x00;
+            float dy = y2 - y00;
+            float lhs = (x0-xm)*(x0-xm) + (y0-ym)*(y0-ym) + (x1-xm)*(x1-xm) + (y1-ym)*(y1-ym)
+                      - (x00-xm)*(x00-xm) - (y00-ym)*(y00-ym) - (x2-xm)*(x2-xm) + (y2-ym)*(y2-ym);
+            float rhs = dy * (x00-xm) - dx * (y00-ym) + dy * (x2-xm) - dx * (y2-ym)
+                      - dy * (x0-xm) + dx * (y0-ym) - dy * (x1-xm) + dx * (y1-ym);
+            float t = lhs/(2*rhs);
+            float cx = xm + dy * t;
+            float cy = ym - dx * t;
+            float a1 = (float)Math.atan2( -y2 + cy, x2 - cx );
+            float a2 = (float)Math.atan2( -y00 + cy, x00 - cx );
+            float r  = (float)Math.sqrt( (x2-cx)*(x2-cx) + (y2-cy)*(y2-cy) );
+            // counterclockwise from P2 to P00
+            //           cx*dxfScale, -cy*dxfScale, 0.0f,        // CENTER
+            //           r*dxfScale, 0.0, 0.0f,                  // ENDPOINT OF MAJOR AXIS - CENTER
+            //           e,                                      // RATIO MINOR/MAJOR
+            //           a1, a2 );                               // START and END ANGLES [rad]
+            DrawingDxf.printString( pw, 0, "ARC" );
+            DrawingDxf.printString( pw, 8, pname );
+            DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbCircle" );
+            DrawingDxf.printXYZ( pw, cx*dxfScale, -cy*dxfScale, 0.0f, 0 );
+            DrawingDxf.printFloat( pw, 40, r*dxfScale );
+            DrawingDxf.printString( pw, 100, "AcDbArc" );
+            DrawingDxf.printFloat( pw, 50, a1 * TDMath.RAD2DEG );
+            DrawingDxf.printFloat( pw, 51, a2 * TDMath.RAD2DEG );
+            */ 
+
+            /*
             float dx = TDMath.abs( x00 - x2 );
             float dy = TDMath.abs( y00 - y2 );
 
@@ -569,6 +616,7 @@ class SymbolPoint extends Symbol
             DrawingDxf.printString( pw, 100, "AcDbArc" );
             DrawingDxf.printFloat( pw, 50, a1 * TDMath.RAD2DEG );
             DrawingDxf.printFloat( pw, 51, a2 * TDMath.RAD2DEG );
+            */
     
             x00 = x2 * dxfScale;
             y00 = y2 * dxfScale;

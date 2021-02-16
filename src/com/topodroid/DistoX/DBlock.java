@@ -56,7 +56,7 @@ public class DBlock
   public float mAcceleration;
   public float mMagnetic;
   public float mDip;       // degrees
-  public float mDepth;     // depth at from station
+  public float mDepth;     // depth at from station (diving mode)
   public String mComment;
 
   int  mExtend;

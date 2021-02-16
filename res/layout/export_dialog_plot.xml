@@ -235,11 +235,11 @@
         android:layout_marginRight="@dimen/marginh"
       />
     </RadioGroup>
-    <CheckBox android:id="@+id/dxf_blocks"
+    <!-- CheckBox android:id="@+id/dxf_blocks"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:text="@string/export_dxf_blocks"
-      />
+      / -->
      
   </LinearLayout>
 

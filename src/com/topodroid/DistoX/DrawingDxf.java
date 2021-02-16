@@ -17,7 +17,7 @@ import com.topodroid.math.BezierCurve;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
 
-// import android.util.Log;
+import android.util.Log;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
@@ -483,7 +483,7 @@ class DrawingDxf
       // printInt( pw, 71, 0 );        // text generation flag (optional 0)
       // printFloat( pw, 72, 0 );      // H-align (optional 0)
       // printFloat( pw, 73, 0 );      // V-align
-      printString( pw, 1, label );
+      printString( pw, 1, label );    
       // printString( pw, 7, style );  // style, optional (dftl STANDARD)
       printString( pw, 100, "AcDbText");
     // }
@@ -1196,8 +1196,9 @@ class DrawingDxf
   static private int toDxf( PrintWriter pw, int handle, DrawingPointPath point, float scale, float xoff, float yoff )
   { // FIXME point scale factor is 0.3
     if ( point == null ) return handle;
-    if ( point.mPointType == BrushManager.getPointLabelIndex() ) {
+    if ( BrushManager.isPointLabel( point.mPointType ) ) {
       DrawingLabelPath label = (DrawingLabelPath)point;
+      // Log.v("DistoX", "LABEL PATH label <" + label.mPointText + ">" );
       return printText( pw, handle, label.mPointText,  (point.cx+xoff)*scale, -(point.cy+yoff)*scale, 360.0f-(float)label.mOrientation,
                         LABEL_SCALE, "POINT", style_dejavu, xoff, yoff );
     }

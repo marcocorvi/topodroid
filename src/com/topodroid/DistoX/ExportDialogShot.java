@@ -56,7 +56,7 @@ public class ExportDialogShot extends MyDialog
   private LinearLayout mLayoutTherion;
   private LinearLayout mLayoutVTopo;
   private LinearLayout mLayoutCsv;
-  // private LinearLayout mLayoutDxf;
+  private LinearLayout mLayoutDxf;
   private LinearLayout mLayoutKml;
   private LinearLayout mLayoutShp;
 
@@ -88,7 +88,7 @@ public class ExportDialogShot extends MyDialog
     mLayoutTherion = (LinearLayout) findViewById( R.id.layout_therion );
     mLayoutVTopo   = (LinearLayout) findViewById( R.id.layout_vtopo );
     mLayoutCsv     = (LinearLayout) findViewById( R.id.layout_csv );
-    // mLayoutDxf     = (LinearLayout) findViewById( R.id.layout_dxf );
+    mLayoutDxf     = (LinearLayout) findViewById( R.id.layout_dxf );
     mLayoutKml     = (LinearLayout) findViewById( R.id.layout_kml );
     mLayoutShp     = (LinearLayout) findViewById( R.id.layout_shp );
 
@@ -145,7 +145,7 @@ public class ExportDialogShot extends MyDialog
     mLayoutTherion.setVisibility( View.GONE );
     mLayoutVTopo.setVisibility( View.GONE );
     mLayoutCsv.setVisibility( View.GONE );
-    // mLayoutDxf.setVisibility( View.GONE );
+    mLayoutDxf.setVisibility( View.GONE );
     mLayoutKml.setVisibility( View.GONE );
     mLayoutShp.setVisibility( View.GONE );
     switch ( mSelectedPos ) {
@@ -155,7 +155,7 @@ public class ExportDialogShot extends MyDialog
       case 8: mLayoutTherion.setVisibility( View.VISIBLE ); break;
       case 11: mLayoutVTopo.setVisibility( View.VISIBLE ); break;
       case 14: mLayoutCsv.setVisibility( View.VISIBLE ); break;
-      // case 15: mLayoutDxf.setVisibility( View.VISIBLE ); break;
+      case 15: mLayoutDxf.setVisibility( View.VISIBLE ); break;
       case 16: 
       case 18: mLayoutKml.setVisibility( View.VISIBLE ); break;
       case 19: if ( TDLevel.overExpert) mLayoutShp.setVisibility( View.VISIBLE ); break;
@@ -206,12 +206,12 @@ public class ExportDialogShot extends MyDialog
           TDSetting.mCsvRaw = ((CheckBox) findViewById( R.id.csv_rawdata )).isChecked();
         }
         break;
-      // case 15: // DXF
-      //   {
-      //     TDSetting.mDxfBlocks = ((CheckBox) findViewById( R.id.dxf_blocks )).isChecked();
-      //     // TDSetting.mAcadVersion
-      //   }
-      //   break;
+      case 15: // DXF
+        {
+          TDSetting.mDxfBlocks = ((CheckBox) findViewById( R.id.dxf_blocks )).isChecked();
+          // TDSetting.mAcadVersion
+        }
+        break;
       case 16: // KML
       case 18: // GeoJSON
         {
@@ -247,7 +247,7 @@ public class ExportDialogShot extends MyDialog
 
     ((CheckBox) findViewById( R.id.csv_rawdata )).setChecked( TDSetting.mCsvRaw );
 
-    // ((CheckBox) findViewById( R.id.dxf_blocks )).setChecked( TDSetting.mDxfBlocks );
+    ((CheckBox) findViewById( R.id.dxf_blocks )).setChecked( TDSetting.mDxfBlocks );
 
     ((CheckBox) findViewById( R.id.kml_splays )).setChecked( TDSetting.mKmlSplays );
     ((CheckBox) findViewById( R.id.kml_stations )).setChecked( TDSetting.mKmlStations );
