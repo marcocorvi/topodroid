@@ -15,22 +15,20 @@ package com.topodroid.DistoX;
 
 public class GeoReference
 {
-  final float e;
-  final float s;
-  final float v;
+  final float e;  // data-reduced East value
+  final float s;  // data-reduced South value
+  final float v;  // data-reduced Vertical value (upward ?)
   final double eradius; // NOTE R-radius is not used 
   final double sradius;
-  // final double yfactor;
   final float  declination;
 
-  public GeoReference( float e0, float s0, float v0, double er, double sr, /* double yf, */ float decl )
+  public GeoReference( float e0, float s0, float v0, double er, double sr, float decl )
   {
     e = e0;
     s = s0;
     v = v0;
     eradius = er;
     sradius = sr;
-    // yfactor = yf;
     declination = decl;
   }
 

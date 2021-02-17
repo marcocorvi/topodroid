@@ -33,6 +33,9 @@ import java.io.IOException;
 class DrawingShp
 {
   // @param basepath   TopoDroid/shp/survey-plot
+  // @param plot       sketch items
+  // @param type       sketch type
+  // @param station    WGS84 data of the sketch origin 
   // @return true if successful
   static boolean writeShp( String basepath, DrawingCommandManager plot, long type, GeoReference station )
   {

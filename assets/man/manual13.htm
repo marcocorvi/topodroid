@@ -295,6 +295,7 @@ Settings:<ul style="margin-top=0">
 
 <b id="shp">Shapefile</b> (.shp .shx .dbf)<br>
 Survey data can be exported as shapefile if you have georeferenced at least a station.
+The data are exported in the WGS84 reference system.
 There is a shapefile for the stations and one for the shots (both legs and splays).
 If the survey contains disjoint pieces, a shapefile is exported for each pieces with a georeferenced station.
 Data are corrected with the magnetic declination.
@@ -453,6 +454,7 @@ Finally the setting "levels" affects PNG exports: if levels are used the export 
 
 <b id="shp2">Shapefile</b> (.shp)<br>
 Sketches can be exported as shapefile, with stations, shots, and lines.
+The data are in the WGS84 reference system.
 Each item has three files: the shape data file, the shape index file, and the database file.
 The files comprising the shapefile export are zip-compressed and the zip file is saved in the
 folder "shp" with extension ".shz".<br><p>
