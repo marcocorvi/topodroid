@@ -34,19 +34,22 @@ public class Geodetic
   // RADIUS_WE = EARTH_A / W; // principal radius of curvature in the prime vertical plane
   // RADIUS_NS = EARTH_A * EARTH_1E2 / W;
 
-  static public double meridianRadiusExact( double latitude )
-  {
-    double s = Math.sin( latitude * Math.PI/180 );
-    double W = Math.sqrt( 1 - EARTH_E2 * s * s );
-    return (EARTH_A * EARTH_1E2 / W) * Math.PI/180.0;
-  }
+  // exact meridian radius 
+  // static public double meridianRadiusExact( double latitude )
+  // {
+  //   double s = Math.sin( latitude * Math.PI/180 );
+  //   double W = Math.sqrt( 1 - EARTH_E2 * s * s );
+  //   return (EARTH_A * EARTH_1E2 / W) * Math.PI / 180;
+  // }
 
-  static public double parallelRadiusExact( double latitude )
-  {
-    double s = Math.sin( latitude * Math.PI/180 );
-    double W = Math.sqrt( 1 - EARTH_E2 * s * s );
-    return (EARTH_A / W) * Math.PI/180.0;
-  }
+  // exact parallel radius
+  // static public double parallelRadiusExact( double latitude )
+  // {
+  //   double s = Math.sin( latitude * Math.PI/180 );
+  //   double c = Math.sin( latitude * Math.PI/180 );
+  //   double W = Math.sqrt( 1 - EARTH_E2 * s * s );
+  //   return (EARTH_A / W) * c * Math.PI / 180;
+  // }
 
   // ---------------------------------------------------
   // approximation

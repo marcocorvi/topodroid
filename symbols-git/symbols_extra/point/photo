@@ -7,7 +7,7 @@ name-fr photo
 name-sk fotografia
 name-ro fotografie
 name-de Foto
-th_name photo
+th_name u:photo
 orientation yes
 has_text yes
 color 0xffffff

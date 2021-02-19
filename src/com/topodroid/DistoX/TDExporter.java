@@ -621,8 +621,11 @@ class TDExporter
     double lng = origin.lng;
     double asl = ellipsoid_altitude ? origin.alt 
                                     : origin.asl; // KML uses Geoid altitude (unless altitudeMode is set)
-    double s_radius = 1 / Geodetic.meridianRadiusExact( lat );
-    double e_radius = 1 / Geodetic.parallelRadiusExact( lat );
+    double s_radius = 1 / Geodetic.meridianRadiusApprox( lat );
+    double e_radius = 1 / Geodetic.parallelRadiusApprox( lat );
+    // double s_radius_e = 1 / Geodetic.meridianRadiusExact( lat );
+    // double e_radius_e = 1 / Geodetic.parallelRadiusExact( lat );
+    // Log.v("DistoX", "radius S " + (s_radius / s_radius_e) + " E " + (e_radius / e_radius_a ) );
 
     mERadius = e_radius; // save radii factors for getGeolocalizedStation
     mSRadius = s_radius;

@@ -4,7 +4,7 @@ name human-bones
 name-pt ossos_humanos
 name-ru человеческие_кости
 name-ro oase-umane
-th_name human-bones
+th_name u:human-bones
 group paleo
 orientation no
 color 0xc2c2c2

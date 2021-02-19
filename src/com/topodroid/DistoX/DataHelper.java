@@ -1957,7 +1957,10 @@ public class DataHelper extends DataSetObservable
   // positive id used for blocks audios
   long nextAudioNegId( long sid )
   {
-    return minId( AUDIO_TABLE, sid );
+    long id = minId( AUDIO_TABLE, sid );
+    // Log.v("DistoX", "Min audio id " + id );
+    insertAudio( sid, id, 0, TDUtil.currentDate() );
+    return id;
   }
 
   private ContentValues makeAudioContentValues( long sid, long id, long bid, String date )
@@ -2033,6 +2036,18 @@ public class DataHelper extends DataSetObservable
     try {
       myDB.delete( AUDIO_TABLE, WHERE_SID_SHOTID, new String[]{ Long.toString(sid), Long.toString(bid) } );
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } catch (SQLiteException e) { logError("photo delete", e); }
+  }
+
+  // delete a neg audio record 
+  // @param sid   survey id
+  // @param id    audio id (neg)
+  void deleteNegAudio( long sid, long id )
+  {
+    if ( myDB == null ) return;
+    try {
+      myDB.delete( AUDIO_TABLE, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e ); 
     } catch (SQLiteException e) { logError("photo delete", e); }
   }
 
@@ -3783,6 +3798,7 @@ public class DataHelper extends DataSetObservable
     return id;
   }
 
+  // used only for AUDIO table to get negative indices
   private long minId( String table, long sid )
   {
     if ( myDB == null ) return -2L;

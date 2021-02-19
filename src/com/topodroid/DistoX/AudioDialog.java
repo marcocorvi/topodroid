@@ -17,7 +17,7 @@ import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.TDLayout;
 import com.topodroid.prefs.TDSetting;
 
-// import android.util.Log;
+import android.util.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -74,8 +74,8 @@ class AudioDialog extends MyDialog
     mBid = bid;
     // mAudio = mApp.mData.getAudio( TDInstance.sid, mBid );
     mFilepath = TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString(mBid) );
-    File file = new File( mFilepath );
-    hasFile = file.exists();
+    Log.v("DistoX", "audio dialog " + bid + " file: " + mFilepath );
+    hasFile = (new File( mFilepath )).exists();
   }
 
 

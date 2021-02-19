@@ -1881,6 +1881,7 @@ public class DrawingWindow extends ItemDrawer
     mFormatClosure = getResources().getString(R.string.format_closure );
 
     audioCheck = TDandroid.checkMicrophone( mActivity );
+    // Log.v("DistoX", "Micrphone perm : " + audioCheck );
 
     mZoomBtnsCtrlOn = (TDSetting.mZoomCtrl > 1);  // do before setting content
     mPointScale = PointScale.SCALE_M;
@@ -3012,7 +3013,7 @@ public class DrawingWindow extends ItemDrawer
       TDUtil.deleteFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString( photo.mId ) ) );
     } else if ( BrushManager.isPointAudio( point.mPointType ) ) {
       DrawingAudioPath audio = (DrawingAudioPath)point;
-      mApp_mData.deleteAudio( TDInstance.sid, audio.mId );
+      mApp_mData.deleteNegAudio( TDInstance.sid, audio.mId );
       TDUtil.deleteFile( TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString( audio.mId ) ) );
     } else if ( BrushManager.isPointSection( point.mPointType ) ) {
       mDrawingSurface.clearXSectionOutline( TDUtil.replacePrefix( TDInstance.survey, point.getOption( TDString.OPTION_SCRAP ) ) );
@@ -3709,7 +3710,6 @@ public class DrawingWindow extends ItemDrawer
 	    if ( shift < radius ) {
               xs = mSaveX/mZoom - mOffset.x;
               ys = mSaveY/mZoom - mOffset.y;
-              // Log.v("DistoXO", "insert point type " + mCurrentPoint + " x " + x_shift + " y " + y_shift + " R " + radius );
               if ( BrushManager.isPointLabel( mCurrentPoint ) ) {
                 new DrawingLabelDialog( mActivity, this, xs, ys ).show();
               } else if ( BrushManager.isPointPhoto( mCurrentPoint ) ) {
@@ -4298,11 +4298,11 @@ public class DrawingWindow extends ItemDrawer
 
     private void addAudioPoint( float x, float y )
     {
-      // Log.v("DistoX-C", "addAudio " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      // Log.v("DistoX-C", "add Audio Point " + x + " " + y );
       assert( mLastLinePath == null );
       // mMediaComment = ""; // audio point do not have comment
       if ( ! audioCheck ) {
-	// TODO TDToast.makeWarn( R.string.no_feature_audio );
+	TDToast.makeWarn( R.string.no_feature_audio );
 	return;
       }
       if ( mLandscape ) {
@@ -5630,9 +5630,9 @@ public class DrawingWindow extends ItemDrawer
                 if ( audioCheck ) {
                   DrawingAudioPath audio = (DrawingAudioPath)point;
                   new AudioDialog( mActivity, this, audio.mId ).show();
-                // } else {
-	               // TODO TDToast.makeWarn( R.string.no_feature_audio );
-		        }
+                } else {
+	          TDToast.makeWarn( R.string.no_feature_audio );
+		}
               } else {
                 new DrawingPointDialog( mActivity, this, point ).show();
               }
