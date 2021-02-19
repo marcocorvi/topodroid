@@ -61,38 +61,38 @@ public class TDNum
 
   // ------------------------------------------------------
   // BOUNDING BOX 
-  private float mSmin; // south
-  private float mSmax;
-  private float mEmin; // east
-  private float mEmax;
-  private float mHmin; // horizontal
-  private float mHmax;
+  private double mSmin; // south
+  private double mSmax;
+  private double mEmin; // east
+  private double mEmax;
+  private double mHmin; // horizontal
+  private double mHmax;
 
-  public float surveyNorth() { return (mSmin < 0)? -mSmin : 0; }
-  public float surveySouth() { return mSmax; }
-  public float surveyWest() { return (mEmin < 0)? -mEmin : 0; }
-  public float surveyEast() { return mEmax; }
-  public float surveySmin() { return mSmin; }
-  public float surveySmax() { return mSmax; }
-  public float surveyEmin() { return mEmin; }
-  public float surveyEmax() { return mEmax; }
-  public float surveyHmin() { return mHmin; }
-  public float surveyHmax() { return mHmax; }
-  public float surveyVmin() { return mVmin; }
-  public float surveyVmax() { return mVmax; }
+  public float surveyNorth() { return (float)( (mSmin < 0)? -mSmin : 0 ); }
+  public float surveySouth() { return (float)( mSmax ); }
+  public float surveyWest()  { return (float)( (mEmin < 0)? -mEmin : 0 ); }
+  public float surveyEast()  { return (float)( mEmax ); }
+  public float surveySmin()  { return (float)( mSmin ); }
+  public float surveySmax()  { return (float)( mSmax ); }
+  public float surveyEmin()  { return (float)( mEmin ); }
+  public float surveyEmax()  { return (float)( mEmax ); }
+  public float surveyHmin()  { return (float)( mHmin ); }
+  public float surveyHmax()  { return (float)( mHmax ); }
+  public float surveyVmin()  { return (float)( mVmin ); }
+  public float surveyVmax()  { return (float)( mVmax ); }
 
   private void resetBBox()
   {
-    mSmin = 0.0f; // clear BBox
-    mSmax = 0.0f;
-    mEmin = 0.0f;
-    mEmax = 0.0f;
-    mHmin = 0.0f;
-    mHmax = 0.0f;
-    mTup   = 0.0f;
-    mTdown = 0.0f;
-    mVmin = 0.0f;
-    mVmax = 0.0f;
+    mSmin  = 0; // clear BBox
+    mSmax  = 0;
+    mEmin  = 0;
+    mEmax  = 0;
+    mHmin  = 0;
+    mHmax  = 0;
+    mTup   = 0;
+    mTdown = 0;
+    mVmin  = 0;
+    mVmax  = 0;
   }
 
   private void updateBBox( NumSurveyPoint s )
@@ -100,7 +100,7 @@ public class TDNum
     if ( s.s < mSmin ) mSmin = s.s; else if ( s.s > mSmax ) mSmax = s.s;
     if ( s.e < mEmin ) mEmin = s.e; else if ( s.e > mEmax ) mEmax = s.e;
     if ( s.h < mHmin ) mHmin = s.h; else if ( s.h > mHmax ) mHmax = s.h;
-    float t = - s.v;
+    double t = - s.v;
     if ( t < mTdown ) mTdown = t; else if ( t > mTup ) mTup = t;
   }
 
@@ -108,31 +108,31 @@ public class TDNum
   // STATISTICS
 
   /* statistics - not including survey shots */
-  private float mVmin;    // Z vertical (downwards)
-  private float mVmax;
-  private float mTup;     // Z station depth (pos. upwards)
-  private float mTdown;   //                 (neg. downwards)
-  private float mLength;  // survey length 
-  private float mExtLen;  // survey "extended" length (on extended profile)
-  private float mProjLen; // survey projected length (on horiz plane)
-  private float mUnattachedLength;
+  private double mVmin;    // Z vertical (downwards)
+  private double mVmax;
+  private double mTup;     // Z station depth (pos. upwards)
+  private double mTdown;   //                 (neg. downwards)
+  private double mLength;  // survey length 
+  private double mExtLen;  // survey "extended" length (on extended profile)
+  private double mProjLen; // survey projected length (on horiz plane)
+  private double mUnattachedLength;
   private int mDupNr;  // number of duplicate shots
   private int mSurfNr; // number of surface shots
-  private float mInLegErrSum0; // angular error distribution of the data withn the legs - accumulators
-  private float mInLegErrSum1;
-  private float mInLegErrSum2;
-  private float mInLegErr1;    // statistics
-  private float mInLegErr2;
+  private double mInLegErrSum0; // angular error distribution of the data withn the legs - accumulators
+  private double mInLegErrSum1;
+  private double mInLegErrSum2;
+  private double mInLegErr1;    // statistics
+  private double mInLegErr2;
 
   private int mLenCnt;
 
   private void resetStats()
   {
-    mLenCnt = 0;
-    mLength  = 0.0f;
-    mExtLen  = 0.0f;
-    mProjLen = 0.0f;
-    mUnattachedLength = 0.0f;
+    mLenCnt  = 0;
+    mLength  = 0;
+    mExtLen  = 0;
+    mProjLen = 0;
+    mUnattachedLength = 0;
     mDupNr   = 0;
     mSurfNr  = 0;
     mInLegErrSum0 = mInLegErrSum1 = mInLegErrSum2 = 0;
@@ -147,7 +147,7 @@ public class TDNum
       DBlock blk1 = ts.blocks.get(i);
       for ( int j = i+1; j < size; ++j ) {
         DBlock blk2 = ts.blocks.get(j);
-        float e = blk1.relativeAngle( blk2 );
+        double e = blk1.relativeAngle( blk2 );
         mInLegErrSum0 += 1;
         mInLegErrSum1 += e;
         mInLegErrSum2 += e*e;
@@ -159,11 +159,11 @@ public class TDNum
   {
     if ( mInLegErrSum0 > 0 ) {
       mInLegErr1 = mInLegErrSum1 / mInLegErrSum0;
-      mInLegErr2 = (float)Math.sqrt( mInLegErrSum2/mInLegErrSum0 - mInLegErr1*mInLegErr1 );
+      mInLegErr2 = Math.sqrt( mInLegErrSum2/mInLegErrSum0 - mInLegErr1*mInLegErr1 );
     }
   }
 
-  private void addToStats( boolean d, boolean s, float l, float e, float h )
+  private void addToStats( boolean d, boolean s, double l, double e, double h )
   {
     if ( d ) ++mDupNr;
     if ( s ) ++mSurfNr;
@@ -175,7 +175,7 @@ public class TDNum
     }
   }
 
-  private void addToStats( boolean d, boolean s, float l, float e, float h, float v )
+  private void addToStats( boolean d, boolean s, double l, double e, double h, double v )
   {
     if ( d ) ++mDupNr;
     if ( s ) ++mSurfNr;
@@ -197,15 +197,15 @@ public class TDNum
   public int loopNr()      { return mClosures.size(); }
   public int unattachedShotsNr() { return mUnattachedShots.size(); }
 
-  public float surveyLength()  { return mLength; }
-  public float surveyExtLen()  { return mExtLen; }
-  public float surveyProjLen() { return mProjLen; }
-  public float surveyTop()     { return mTup; }   // top must be positive
-  public float surveyBottom()  { return mTdown; } // bottom must be negative
-  public float unattachedLength() { return mUnattachedLength; }
+  public float surveyLength()     { return (float)mLength; }
+  public float surveyExtLen()     { return (float)mExtLen; }
+  public float surveyProjLen()    { return (float)mProjLen; }
+  public float surveyTop()        { return (float)mTup; }   // top must be positive
+  public float surveyBottom()     { return (float)mTdown; } // bottom must be negative
+  public float unattachedLength() { return (float)mUnattachedLength; }
 
-  public float angleErrorMean()   { return mInLegErr1; } // radians
-  public float angleErrorStddev() { return mInLegErr2; } // radians
+  public float angleErrorMean()   { return (float)mInLegErr1; } // radians
+  public float angleErrorStddev() { return (float)mInLegErr2; } // radians
 
   // -------------------------------------------------------
   // SURVEY DATA 
@@ -277,7 +277,7 @@ public class TDNum
     return ret;
   }
 
-  public NumStation getClosestStation( long type, float x, float y ) { return mStations.getClosestStation( type, x, y ); }
+  public NumStation getClosestStation( long type, double x, double y ) { return mStations.getClosestStation( type, x, y ); }
 
   /** FIXME there is a problem here:               ,-----B---
    * if the reduction tree has a branch, say 0----A
@@ -884,10 +884,10 @@ public class TDNum
           if ( s1.has3DCoords() && ! s2.has3DCoords() ) { // reset s2 values from the shot
             // float d = sh2.length() * sh2.mDirection; // FIXME DIRECTION
             float d = sh2.length();
-            float v = - d * TDMath.sind( c2 );
-            float h =   d * TDMath.cosd( c2 );
-            float e =   h * TDMath.sind( b2 );
-            float s = - h * TDMath.cosd( b2 );
+            double v = - d * TDMath.sinDd( c2 );
+            double h =   d * TDMath.cosDd( c2 );
+            double e =   h * TDMath.sinDd( b2 );
+            double s = - h * TDMath.cosDd( b2 );
             s2.e = s1.e + e;
             s2.s = s1.s + s;
             s2.v = s1.v + v;
@@ -897,10 +897,10 @@ public class TDNum
           } else if ( s2.has3DCoords() && ! s1.has3DCoords() ) { // reset s1 values from the shot
             // float d = - sh2.length() * sh2.mDirection; // FIXME DIRECTION
             float d = - sh2.length();
-            float v = - d * TDMath.sind( c2 );
-            float h =   d * TDMath.cosd( c2 );
-            float e =   h * TDMath.sind( b2 );
-            float s = - h * TDMath.cosd( b2 );
+            double v = - d * TDMath.sinDd( c2 );
+            double h =   d * TDMath.cosDd( c2 );
+            double e =   h * TDMath.sinDd( b2 );
+            double s = - h * TDMath.cosDd( b2 );
             s1.e = s2.e + e;
             s1.s = s2.s + s;
             s1.v = s2.v + v;
@@ -1472,9 +1472,9 @@ public class TDNum
 
     for (int y=0; y<ls; ++y ) { // compute the closure compensation values
       NumCycle cy = indep_cycles.get(y);
-      cy.ce = 0.0f; // corrections
-      cy.cs = 0.0f;
-      cy.cv = 0.0f;
+      cy.ce = 0; // corrections
+      cy.cs = 0;
+      cy.cv = 0;
       for (int x=0; x<ls; ++x ) {
         NumCycle cx = indep_cycles.get(x);
         cy.ce += aa[ y*ls + x] * cx.e;
@@ -1485,9 +1485,9 @@ public class TDNum
     
     for (int x=0; x<bs; ++x ) { // correct branches
       NumBranch bx = branches.get(x);
-      float e = 0.0f;
-      float s = 0.0f;
-      float v = 0.0f;
+      double e = 0;
+      double s = 0;
+      double v = 0;
       for (int y=0; y<ls; ++y ) {
         NumCycle cy = indep_cycles.get(y);
         e += alpha[ y*bs + x ] * cy.ce;
@@ -1506,32 +1506,32 @@ public class TDNum
    * @param b         closure azimuth
    * @param c         closure clino
    */
-  private String getClosureError( String format, NumStation at, NumStation fr, float d, float b, float c, NumShortpath short_path, float length )
+  private String getClosureError( String format, NumStation at, NumStation fr, float d, float b, float c, NumShortpath short_path, double length )
   {
-    // float tv = - d * TDMath.sind( c );
-    // float th =   d * TDMath.cosd( c );
-    // float te =   th * TDMath.sind( b );
-    // float ts = - th * TDMath.cosd( b );
+    // double tv =  - d * TDMath.sinDd( c );
+    // double th =    d * TDMath.cosDd( c );
+    // double te =   th * TDMath.sinDd( b );
+    // double ts = - th * TDMath.cosDd( b );
     // // FROM + T - AT
     // Log.v("DistoX-LOOP", "closure at   " + at.name + " " + at.e + " " + at.s + " " + at.v );
     // Log.v("DistoX-LOOP", "closure from " + fr.name + " " + fr.e + " " + fr.s + " " + fr.v );
     // Log.v("DistoX-LOOP", "closure diff " + (fr.e-at.e) + " " + (fr.s-at.s) + " " + (fr.v-at.v) );
     // Log.v("DistoX-LOOP", "closure " + te + " " + ts + " " + tv );
 
-    float dv = TDMath.abs( fr.v - d * TDMath.sind(c) - at.v );  // closure vertical error
-    float h0 = d * TDMath.abs( TDMath.cosd(c) );
-    float ds = TDMath.abs( fr.s - h0 * TDMath.cosd( b ) - at.s ); // closure south error
-    float de = TDMath.abs( fr.e + h0 * TDMath.sind( b ) - at.e ); // closure east error
-    float dh = ds*ds + de*de;
-    float dl = TDMath.sqrt( dh + dv*dv );
-    dh = TDMath.sqrt( dh );
+    double dv = Math.abs( fr.v - d * TDMath.sinDd(c) - at.v );  // closure vertical error
+    double h0 = d * Math.abs( TDMath.cosDd(c) );
+    double ds = Math.abs( fr.s - h0 * TDMath.cosDd( b ) - at.s ); // closure south error
+    double de = Math.abs( fr.e + h0 * TDMath.sinDd( b ) - at.e ); // closure east error
+    double dh = ds*ds + de*de;
+    double dl = Math.sqrt( dh + dv*dv );
+    dh = Math.sqrt( dh );
 
     int nr     = 1 + short_path.mNr;
-    float len  = length + short_path.mDist;
-    float len2 = length*length + short_path.mDist2;
-    float error = (dl*100) / len;
-    // float angle = dl / TDMath.sqrt( len2 ) * TDMath.RAD2DEG;
-    float angle = TDMath.sqrt( nr ) * dl / len * TDMath.RAD2DEG;
+    double len  = length + short_path.mDist;
+    double len2 = length*length + short_path.mDist2;
+    double error = (dl*100) / len;
+    // double angle = dl / TDMath.sqrt( len2 ) * TDMath.RAD2DEG;
+    double angle = TDMath.sqrt( nr ) * dl / len * TDMath.RAD2DEG;
 
     // return String.format(Locale.US, "%s-%s %.1f/%.1f m [%.1f %.1f] %.1f%% (%.2f &#00b0;)", fr.name, at.name,  dl, len, dh, dv, error, angle );
     return String.format(Locale.US, format, fr.name, at.name, nr, dl, len, dh, dv, error, angle );
@@ -1644,14 +1644,14 @@ public class TDNum
   {
     if ( s <= 0 ) {
       NumStation st = getStation( blk.mFrom );
-      return new TDVector( st.e, st.s, st.v );
+      return new TDVector( (float)st.e, (float)st.s, (float)st.v );
     } else if ( s >= 1 ) {
       NumStation st = getStation( blk.mTo );
-      return new TDVector( st.e, st.s, st.v );
+      return new TDVector( (float)st.e, (float)st.s, (float)st.v );
     }
     NumStation st1 = getStation( blk.mFrom );
     NumStation st2 = getStation( blk.mTo );
-    return new TDVector( st1.e + (st2.e-st1.e)*s, st1.s + (st2.s-st1.s)*s, st1.v + ( st2.v - st1.v)*s);
+    return new TDVector( (float)( st1.e + (st2.e-st1.e)*s ), (float)( st1.s + (st2.s-st1.s)*s ), (float)( st1.v + ( st2.v - st1.v)*s ) );
   }
 
   /** shortest-path algo

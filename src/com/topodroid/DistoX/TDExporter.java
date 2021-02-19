@@ -587,7 +587,7 @@ class TDExporter
     if ( nums == null ) return null;
     for ( TDNum num : nums ) {
       for ( NumStation st : num.getStations() ) {
-        if ( station.equals( st.name ) ) return new GeoReference( st.ge, st.gs, st.gv, mERadius, mSRadius, decl );
+        if ( station.equals( st.name ) ) return new GeoReference( st.e, st.s, st.v, mERadius, mSRadius, decl );
       }
     }
     return null;
@@ -631,19 +631,19 @@ class TDExporter
 
 
     for ( NumStation st : num.getStations() ) {
-      st.gs = (lat - st.s * s_radius);
-      st.ge = (lng + st.e * e_radius); 
-      st.gv = (asl - st.v) * asl_factor;
+      st.s = (lat - st.s * s_radius);
+      st.e = (lng + st.e * e_radius); 
+      st.v = (asl - st.v) * asl_factor;
     }
     for ( NumStation cst : num.getClosureStations() ) {
-      cst.gs = (lat - cst.s * s_radius);
-      cst.ge = (lng + cst.e * e_radius); 
-      cst.gv = (asl - cst.v) * asl_factor;
+      cst.s = (lat - cst.s * s_radius);
+      cst.e = (lng + cst.e * e_radius); 
+      cst.v = (asl - cst.v) * asl_factor;
     }
     for ( NumSplay sp : num.getSplays() ) {
-      sp.gs = (lat - sp.s * s_radius);
-      sp.ge = (lng + sp.e * e_radius); 
-      sp.gv = (asl - sp.v) * asl_factor;
+      sp.s = (lat - sp.s * s_radius);
+      sp.e = (lng + sp.e * e_radius); 
+      sp.v = (asl - sp.v) * asl_factor;
     }
   }
 
@@ -749,7 +749,7 @@ class TDExporter
             pw.format(multigeometry);
             pw.format(altitudeMode);
               pw.format(point_id, st.name );
-              pw.format(Locale.US, coordinates3, st.ge, st.gs, st.gv );
+              pw.format(Locale.US, coordinates3, st.e, st.s, st.v );
               pw.format(point_end);
             pw.format(multigeometry_end);
             pw.format(placemark_end);
@@ -768,7 +768,7 @@ class TDExporter
             pw.format(linestring_id, from.name, to.name );
             // pw.format("      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
             // pw.format("      <extrude>1</extrude>\n"); // extends the line down to the ground
-            pw.format(Locale.US, coordinates6, from.ge, from.gs, from.gv, to.ge, to.gs, to.gv );
+            pw.format(Locale.US, coordinates6, from.e, from.s, from.v, to.e, to.s, to.v );
             pw.format(linestring_end);
           // } else {
           //   // Log.v("DistoX", "missing coords " + from.name + " " + from.hasExtend() + " " + to.name + " " + to.hasExtend() );
@@ -788,7 +788,7 @@ class TDExporter
             pw.format(linestring);
             // pw.format("      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
             // pw.format("      <extrude>1</extrude>\n"); // extends the line down to the ground
-            pw.format(Locale.US, coordinates6, from.ge, from.gs, from.gv, sp.ge, sp.gs, sp.gv );
+            pw.format(Locale.US, coordinates6, from.e, from.s, from.v, sp.e, sp.s, sp.v );
             pw.format(linestring_end);
           }
           pw.format(multigeometry_end);
@@ -919,7 +919,7 @@ class TDExporter
             pw.format("      %s \"centerline\",\n", item );
             pw.format("      %s \"%s %s\",\n", name, from.name, to.name );
             pw.format("      %s \"LineString\",\n", geom );
-            pw.format(Locale.US, "      %s [ [ %.8f, %.8f, %.1f ], [ %.8f, %.8f, %.1f ] ]\n", coords, from.ge, from.gs, from.gv, to.ge, to.gs, to.gv );
+            pw.format(Locale.US, "      %s [ [ %.8f, %.8f, %.1f ], [ %.8f, %.8f, %.1f ] ]\n", coords, from.e, from.s, from.v, to.e, to.s, to.v );
             pw.format("    },\n");
           }
         }
@@ -934,7 +934,7 @@ class TDExporter
             pw.format("      %s \"splay\",\n", item );
             pw.format("      %s \"%s\",\n", name, from.name );
             pw.format("      %s \"LineString\",\n", geom );
-            pw.format(Locale.US, "     %s [ [ %.8f, %.8f, %.1f ], [ %.8f, %.8f, %.1f ] ]\n", coords, from.ge, from.gs, from.gv, sp.ge, sp.gs, sp.gv );
+            pw.format(Locale.US, "     %s [ [ %.8f, %.8f, %.1f ], [ %.8f, %.8f, %.1f ] ]\n", coords, from.e, from.s, from.v, sp.e, sp.s, sp.v );
             pw.format("    },\n");
           }
         }
@@ -948,7 +948,7 @@ class TDExporter
             pw.format("      %s \"station\",\n", item );
             pw.format("      %s \"%s\",\n", name, st.name );
             pw.format("      %s \"Point\",\n", geom );
-            pw.format(Locale.US, "      %s [ %.8f %.8f %.1f ]\n", coords, st.ge, st.gs, st.gv );
+            pw.format(Locale.US, "      %s [ %.8f %.8f %.1f ]\n", coords, st.e, st.s, st.v );
             pw.format("    },\n");
           }
         }
@@ -1022,9 +1022,9 @@ class TDExporter
           NumStation from = sh.from;
           NumStation to   = sh.to;
           if ( from != last ) {
-            pw.format(Locale.US, "%.8f, %.8f,1, %.1f,%d,,\r\n", from.ge, from.gs, from.gv, days );
+            pw.format(Locale.US, "%.8f, %.8f,1, %.1f,%d,,\r\n", from.e, from.s, from.v, days );
           }
-          pw.format(Locale.US, "%.8f,%.8f,0,%.1f,%d,,\r\n", to.ge, to.gs, to.gv, days );
+          pw.format(Locale.US, "%.8f,%.8f,0,%.1f,%d,,\r\n", to.e, to.s, to.v, days );
           last = to;
         }
       }

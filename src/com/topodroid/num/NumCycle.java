@@ -38,8 +38,8 @@ class NumCycle
   private ArrayList< NumCycleBranch > branches;
   // private ArrayList< NumNode >   nodes;
   // int[]       dirs; // branch direction in the cycle
-  float e, s, v;    // displacement = closure error
-  float ce, cs, cv; // corrections
+  double e, s, v;    // displacement = closure error
+  double ce, cs, cv; // corrections
 
   int size() { return branches.size(); }
 
@@ -74,9 +74,9 @@ class NumCycle
   // assumes that branches errors have been computed
   void computeError()
   {
-    e = 0.0f;
-    s = 0.0f;
-    v = 0.0f;
+    e = 0;
+    s = 0;
+    v = 0;
     // for ( int k=0; k<mSize; ++k ) {
     for ( NumCycleBranch branch : branches ) {
       NumBranch br = branch.mBranch;

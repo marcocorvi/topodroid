@@ -80,12 +80,12 @@ public class NumStation extends NumSurveyPoint
 
     // TDLog.Log( TopoDroiaLog.LOC_NUM, "NumStation cstr " + id + " from " + from + " (extend " + extend + ")" );
     name = id;
-    v = from.v - d * TDMath.sind( c );
-    float h0 = d * TDMath.abs( TDMath.cosd( c ) );
+    v = from.v - d * TDMath.sinDd( c );
+    double h0 = d * Math.abs( TDMath.cosDd( c ) );
     assert( extend <= 2 ); // 2020-07-29 PREREQ
     h = from.h + extend * h0;
-    s = from.s - h0 * TDMath.cosd( b );
-    e = from.e + h0 * TDMath.sind( b );
+    s = from.s - h0 * TDMath.cosDd( b );
+    e = from.e + h0 * TDMath.sinDd( b );
     mDuplicate = false;
     mHas3DCoords = true;
     mHasExtend = has_extend && from.mHasExtend;

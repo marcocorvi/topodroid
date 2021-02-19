@@ -108,14 +108,14 @@ public class NumShot
     float c = clino();
     // float dv = mLength * TDMath.sin( mClino * TDMath.M_PI / 180 );
     // float dh = mLength * TDMath.cos( mClino * TDMath.M_PI / 180 );
-    float dv = l * TDMath.sind( c );
-    float dh = l * TDMath.cosd( c );
+    double dv = l * TDMath.sinDd( c );
+    double dh = l * TDMath.cosDd( c );
     st.v = sf.v - dv; // v is downward
     st.h = sf.h + firstBlock.getReducedExtend() * dh;
     // float dn = dh * TDMath.cos( (mBearing-mAnomaly) * TDMath.M_PI / 180 );
     // float de = dh * TDMath.sin( (mBearing-mAnomaly) * TDMath.M_PI / 180 );
-    float dn = dh * TDMath.cosd( b - mAnomaly );
-    float de = dh * TDMath.sind( b - mAnomaly );
+    double dn = dh * TDMath.cosDd( b - mAnomaly );
+    double de = dh * TDMath.sinDd( b - mAnomaly );
     st.e = sf.e + de;
     st.s = sf.s - dn;
   }

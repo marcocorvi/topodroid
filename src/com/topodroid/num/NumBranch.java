@@ -32,8 +32,8 @@ public class NumBranch
   NumNode n1;
   NumNode n2;
   public ArrayList< NumShot > shots;
-  public float e, s, v; // east, south, vert closure-error
-  public float len;     // branch length
+  public double e, s, v; // east, south, vert closure-error
+  public double len;     // branch length
 
   // void dump()
   // {
@@ -50,16 +50,16 @@ public class NumBranch
     n2 = null;
     shots = new ArrayList<>();
     use = 0;
-    e = 0.0f;
-    s = 0.0f;
-    v = 0.0f;
-    len = 0.0f;
+    e = 0;
+    s = 0;
+    v = 0;
+    len = 0;
   }
 
   void addShot( NumShot shot )
   {
     shots.add( shot );
-    // float d = shot.length();
+    // double d = shot.length();
     // len += d;
   }
 
@@ -76,15 +76,15 @@ public class NumBranch
       len += d;
       // d *= sh.mDirection * sh.mBranchDir; // FIXME DIRCETION
       d *= sh.mBranchDir;
-      v -= d * TDMath.sind(c);
-      float h0 = d * TDMath.abs( TDMath.cosd(c) );
-      s -= h0 * TDMath.cosd(b);
-      e += h0 * TDMath.sind(b);
+      v -= d * TDMath.sinDd( c );
+      double h0 = d * Math.abs( TDMath.cosDd( c ) );
+      s -= h0 * TDMath.cosDd( b );
+      e += h0 * TDMath.sinDd( b );
       // TDLog.Log( TDLog.LOG_NUM, "Br sh " + sh.from.name + "-" + sh.to.name + " Br Err " + e + " " + s );
     }
   }
 
-  void compensateError( float e0, float s0, float v0 )
+  void compensateError( double e0, double s0, double v0 )
   {
     e0 /= len;
     s0 /= len;
@@ -94,21 +94,21 @@ public class NumBranch
       float d = sh.length();
       float b = sh.bearing(); // degrees
       float c = sh.clino();
-      float v1 = -d * TDMath.sind(c);
-      float h1 =  d * TDMath.abs( TDMath.cosd(c) );
-      float s1 = -h1 * TDMath.cosd(b);
-      float e1 =  h1 * TDMath.sind(b);
-      // float l = d * sh.mDirection * sh.mBranchDir; // FIXME DIRECTION
-      float l = d * sh.mBranchDir;
+      double v1 =  -d * TDMath.sinDd( c );
+      double h1 =   d * Math.abs( TDMath.cosDd( c ) );
+      double s1 = -h1 * TDMath.cosDd( b );
+      double e1 =  h1 * TDMath.sinDd( b );
+      // double l = d * sh.mDirection * sh.mBranchDir; // FIXME DIRECTION
+      double l = d * sh.mBranchDir;
       e1 += e0*l;
       s1 += s0*l;
       v1 += v0*l;
      
-      h1 = TDMath.sqrt( e1*e1 + s1*s1 );
-      b = TDMath.atan2d( e1, -s1 ); // + 90.0f * (1 - sh.mDirection); // FIXME PRE-DIRECTION
+      h1 = Math.sqrt( e1*e1 + s1*s1 );
+      b = TDMath.atan2Fd( e1, -s1 ); // + 90.0f * (1 - sh.mDirection); // FIXME PRE-DIRECTION
       if ( b < 0 ) b += 360;
-      c = TDMath.atan2d( -v1, h1 ); // * sh.mDirection; // FIXME PRE-DIRECTION
-      d = TDMath.sqrt( h1*h1 + v1*v1 );
+      c = TDMath.atan2Fd( -v1, h1 ); // * sh.mDirection; // FIXME PRE-DIRECTION
+      d = TDMath.sqrtF( h1*h1 + v1*v1 );
       sh.reset( d, b, c );
     }
   }

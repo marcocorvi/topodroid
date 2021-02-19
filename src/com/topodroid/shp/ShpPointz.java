@@ -78,9 +78,9 @@ public class ShpPointz extends ShpObject
       shpBuffer.order(ByteOrder.LITTLE_ENDIAN);   
       shpBuffer.putInt( SHP_POINTZ );
       // Log.v("DistoX", "POINTZ " + cnt + ": " + pt.e + " " + pt.s + " " + pt.v + " offset " + offset );
-      shpBuffer.putDouble( pt.ge );
-      shpBuffer.putDouble( pt.gs );
-      shpBuffer.putDouble( pt.gv );
+      shpBuffer.putDouble( pt.e );
+      shpBuffer.putDouble( pt.s );
+      shpBuffer.putDouble( pt.v );
       shpBuffer.putDouble( 0.0 );
 
       writeShxRecord( offset, shpRecLen );
@@ -104,10 +104,10 @@ public class ShpPointz extends ShpObject
       return;
     }
     NumStation pt = pts.get(0);
-    initBBox( pt.ge, pt.gs, pt.gv );
+    initBBox( pt.e, pt.s, pt.v );
     for ( int k=pts.size() - 1; k>0; --k ) {
       pt = pts.get(k);
-      updateBBox( pt.ge, pt.gs, pt.gv );
+      updateBBox( pt.e, pt.s, pt.v );
     }
   }
 }

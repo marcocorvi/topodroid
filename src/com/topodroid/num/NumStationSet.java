@@ -162,13 +162,13 @@ class NumStationSet
     mStations = new ArrayList<>();
   }
 
-  NumStation getClosestStation( long type, float x, float y ) 
+  NumStation getClosestStation( long type, double x, double y ) 
   {
     NumStation ret = null;
-    float dist2 = 16000000; // max 100 m 
+    double dist2 = 16000000; // max 100 m 
     if ( type == PlotType.PLOT_PLAN ) {
       for ( NumStation st : mStations ) {
-        float d2 = (st.e-x)*(st.e-x) + (st.s-y)*(st.s-y);
+        double d2 = (st.e-x)*(st.e-x) + (st.s-y)*(st.s-y);
         if ( d2 < dist2 ) {
           dist2 = d2;
           ret = st;
@@ -176,7 +176,7 @@ class NumStationSet
       }
     } else if ( PlotType.isProfile( type ) ) {
       for ( NumStation st : mStations ) {
-        float d2 = (st.h-x)*(st.h-x) + (st.v-y)*(st.v-y);
+        double d2 = (st.h-x)*(st.h-x) + (st.v-y)*(st.v-y);
         if ( d2 < dist2 ) {
           dist2 = d2;
           ret = st;

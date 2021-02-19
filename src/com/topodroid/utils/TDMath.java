@@ -37,6 +37,20 @@ public class TDMath
   static public float asind( float x )  { return (float)( RAD2DEG * Math.asin( x ) ); }
   static public float sqrt( float x )   { return (float)Math.sqrt( x ); }
 
+  static public double cosD(  double x  ) { return Math.cos( x ); }
+  static public double cosDd( double xd ) { return Math.cos( xd * DEG2RAD ); }
+  static public double sinD(  double x  ) { return Math.sin( x ); }
+  static public double sinDd( double xd ) { return Math.sin( xd * DEG2RAD ); }
+  static public double atan2D(  double y, double x ) { return Math.atan2( y, x ); }
+  static public double atan2Dd( double y, double x ) { return RAD2DEG * Math.atan2( y, x ); }
+  static public double acosD( double x )   { return Math.acos( x ); }
+  static public double acosDd( double x )  { return RAD2DEG * Math.acos( x ); }
+  static public double asinDd( double x )  { return RAD2DEG * Math.asin( x ); }
+
+  static public float atan2F(  double y, double x ) { return (float)Math.atan2( y, x ); }
+  static public float atan2Fd( double y, double x ) { return (float)( RAD2DEG * Math.atan2( y, x ) ); }
+  static public float sqrtF( double x )   { return (float)Math.sqrt( x ); }
+
   static public int in360( int f )
   {
     while ( f >= 360 ) f -= 360;

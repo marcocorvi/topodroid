@@ -23,7 +23,7 @@ class NumNode
   NumStation station; // station of this node
   ArrayList< NumShot > shots; // station shots
   // private ArrayList< NumBranch > branches; // TODO STILL_TO_USE
-  float e, s, v; // east, south, vert 3D position
+  double e, s, v; // east, south, vert 3D position
 
   NumNode( int t, NumStation st )
   {

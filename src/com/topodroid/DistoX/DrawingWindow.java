@@ -880,17 +880,17 @@ public class DrawingWindow extends ItemDrawer
    * @param splay   whether the shot is a splay
    * @param selectable whether the shot is selectable
    */
-  private void addFixedLine( long type, DBlock blk, float x1, float y1, float x2, float y2,
+  private void addFixedLine( long type, DBlock blk, double x1, double y1, double x2, double y2,
                              float cosine, boolean splay, boolean selectable )
   {
-    DrawingPath dpath = makeFixedLine( type, blk, x1, y1, x2, y2, cosine, splay );
+    DrawingPath dpath = makeFixedLine( type, blk, (float)x1, (float)y1, (float)x2, (float)y2, cosine, splay );
     mDrawingSurface.addFixedPath( dpath, splay, selectable );
   }
 
-  private void appendFixedLine( long type, DBlock blk, float x1, float y1, float x2, float y2,
+  private void appendFixedLine( long type, DBlock blk, double x1, double y1, double x2, double y2,
                                 float cosine, boolean splay, boolean selectable )
   {
-    DrawingPath dpath = makeFixedLine( type, blk, x1, y1, x2, y2, cosine, splay );
+    DrawingPath dpath = makeFixedLine( type, blk, (float)x1, (float)y1, (float)x2, (float)y2, cosine, splay );
     int typ = PlotType.isPlan( type )? DrawingSurface.DRAWING_PLAN : DrawingSurface.DRAWING_PROFILE;
     mDrawingSurface.appendFixedPath( typ, dpath, splay, selectable );
   }
@@ -1286,10 +1286,10 @@ public class DrawingWindow extends ItemDrawer
         // resetReference( mPlot2 );
         // return;
       } else { // if ( type == PlotType.PLOT_PROJECTED ) 
-        float cosp = TDMath.cosd( mPlot2.azimuth );
-        float sinp = TDMath.sind( mPlot2.azimuth );
+        double cosp = TDMath.cosDd( mPlot2.azimuth );
+        double sinp = TDMath.sinDd( mPlot2.azimuth );
         mZoom     = mPlot2.zoom;
-	float xx = st.e * cosp + st.s * sinp;
+	double xx = st.e * cosp + st.s * sinp;
         mOffset.x = TopoDroidApp.mDisplayWidth/(2 * mZoom)  - DrawingUtil.toSceneX( xx, st.v );
         mOffset.y = TopoDroidApp.mDisplayHeight/(2 * mZoom) - DrawingUtil.toSceneY( xx, st.v );
         saveReference( mPlot2, mPid2 );
@@ -1421,7 +1421,7 @@ public class DrawingWindow extends ItemDrawer
     } 
     else                                        // ------------- PROJECTED PROFILE ---------------
     { // if ( type == PlotType.PLOT_PROJECTED ) 
-      float h1, h2;
+      double h1, h2;
       for ( NumShot sh : shots ) {
         // Log.v("DistoX", "shot " + sh.from.name + "-" + sh.to.name + " from " + sh.from.show() + " to " + sh.to.show() );
         NumStation st1 = sh.from;
@@ -6104,11 +6104,11 @@ public class DrawingWindow extends ItemDrawer
               }
               mDrawingSurface.appendDrawingStationName( mPlot2.type, st0, DrawingUtil.toSceneX(st0.h, st0.v), DrawingUtil.toSceneY(st0.h, st0.v), true );
             } else if ( PlotType.isProfile( mPlot2.type ) ) {
-              float cosp = TDMath.cosd( mPlot2.azimuth );
-              float sinp = TDMath.sind( mPlot2.azimuth );
-              float h1 = st1.e * cosp + st1.s * sinp;
-              float h2 = st2.e * cosp + st2.s * sinp;
-              float h0 = StationPolicy.isSurveyBackward() ? h1 : h2;
+              double cosp = TDMath.cosDd( mPlot2.azimuth );
+              double sinp = TDMath.sinDd( mPlot2.azimuth );
+              double h1 = st1.e * cosp + st1.s * sinp;
+              double h2 = st2.e * cosp + st2.s * sinp;
+              double h0 = StationPolicy.isSurveyBackward() ? h1 : h2;
               appendFixedLine( mPlot2.type, leg, h1, st1.v, h2, st2.v, sh.getReducedExtend(), false, true );
               mDrawingSurface.appendDrawingStationName( mPlot2.type, st0, DrawingUtil.toSceneX(h0, st0.v), DrawingUtil.toSceneY(h0, st0.v), true );
             } 
@@ -6126,10 +6126,10 @@ public class DrawingWindow extends ItemDrawer
                     appendFixedLine( mPlot2.type, blk2, st.h, st.v, sp.h, sp.v, sp.getCosine(), true, true );
                   }
                 } else if ( PlotType.isProfile( mPlot2.type ) ) {
-                  float cosp = TDMath.cosd( mPlot2.azimuth );
-                  float sinp = TDMath.sind( mPlot2.azimuth );
-                  float h1 = st.e * cosp + st.s * sinp;
-                  float h2 = sp.e * cosp + sp.s * sinp;
+                  double cosp = TDMath.cosDd( mPlot2.azimuth );
+                  double sinp = TDMath.sinDd( mPlot2.azimuth );
+                  double h1 = st.e * cosp + st.s * sinp;
+                  double h2 = sp.e * cosp + sp.s * sinp;
                   appendFixedLine( mPlot2.type, blk2, h1, st.v, h2, sp.v, sp.getCosine(), true, true );
                 }
               }
@@ -6731,22 +6731,22 @@ public class DrawingWindow extends ItemDrawer
     NumStation st2 = mNum.getStation( station2 );
     float x0, y0, x1, y1;
     if ( mType == PlotType.PLOT_PLAN ) {
-      x0 = st1.e;
-      y0 = st1.s;
-      x1 = st2.e;
-      y1 = st2.s;
+      x0 = (float)st1.e;
+      y0 = (float)st1.s;
+      x1 = (float)st2.e;
+      y1 = (float)st2.s;
     } else {
-      x0 = st1.h;
-      y0 = st1.v;
-      x1 = st2.h;
-      y1 = st2.v;
+      x0 = (float)st1.h;
+      y0 = (float)st1.v;
+      x1 = (float)st2.h;
+      y1 = (float)st2.v;
     }
     float x2 = x1 - x0;
     float y2 = y1 - y0;
     float x22  = x2 * x2;
     float len2 = x2 * x2 + y2 * y2 + 0.0001f;
-    float len  = (float)Math.sqrt( len2 );
-    PointF uu = new PointF( x2 / len, y2 / len );
+    float len  = TDMath.sqrt( len2 );
+    PointF uu = new PointF( (x2 / len), (y2 / len) );
     PointF vv = new PointF( -uu.y, uu.x );
 
     // Log.v("DistoX", "X0 " + x0 + " " + y0 + " X1 " + x1 + " " + y1 );
@@ -6773,8 +6773,8 @@ public class DrawingWindow extends ItemDrawer
         boolean ok = false;
         if ( st == st1 ) {
           if ( Math.abs( sp.getBlock().mClino - cl ) < TDSetting.mWallsPlanThr ) {
-            xs = sp.e;
-            ys = sp.s;
+            xs = (float)sp.e;
+            ys = (float)sp.s;
             if ( allSplay ) { 
               ok = true;
             } else {
@@ -6786,14 +6786,14 @@ public class DrawingWindow extends ItemDrawer
           }
         } else if ( st == st2 ) {
           if ( Math.abs( sp.getBlock().mClino + cl ) < TDSetting.mWallsPlanThr ) {
-            xs = sp.e;
-            ys = sp.s;
+            xs = (float)sp.e;
+            ys = (float)sp.s;
             if ( allSplay ) { 
               ok = true;
             } else {
               xs -= x0;
               ys -= y0;
-              float proj = ( xs*x2 + ys*y2 )/len2;
+              double proj = ( xs*x2 + ys*y2 )/len2;
               ok = ( proj >= 0 && proj <= 1 );
             }
           }
@@ -6804,8 +6804,8 @@ public class DrawingWindow extends ItemDrawer
           } else {
             // xs = (float)(sp.e) - x0;
             // yv = (float)(sp.s) - y0;
-            float u = xs * uu.x + ys * uu.y;
-            float v = xs * vv.x + ys * vv.y;
+            float u = ( xs * uu.x + ys * uu.y );
+            float v = ( xs * vv.x + ys * vv.y );
             if ( v > 0 ) {
               if (pos != null) pos.add( new PointF(u,v) );
             } else {
@@ -6820,22 +6820,22 @@ public class DrawingWindow extends ItemDrawer
         if ( st == st1 || st == st2 ) {
           boolean ok = false;
           if ( Math.abs( sp.getBlock().mClino ) > TDSetting.mWallsExtendedThr ) { // FIXME
-            xs = sp.h;
-            ys = sp.v;
+            xs = (float)sp.h;
+            ys = (float)sp.v;
             if ( allSplay ) { 
               ok = true;
             } else {
               xs -= x0;
               ys -= y0;
-              float proj = ( xs*x2 )/ x22;
+              double proj = ( xs*x2 )/ x22;
               ok = ( proj >= 0 && proj <= 1 );
             }
             if ( ok ) {
               if ( allSplay ) {
                 if (sites != null) sites.add( new DLNSite( xs, ys ) );
               } else {
-                float u = xs * uu.x + ys * uu.y;
-                float v = xs * vv.x + ys * vv.y;
+                float u = ( xs * uu.x + ys * uu.y );
+                float v = ( xs * vv.x + ys * vv.y );
                 // Log.v("WALL", "Splay " + x2 + " " + y2 + " --> " + u + " " + v);
                 if ( /* allSplay || */ v > 0 ) { // allSplay is false
                   if (pos != null) pos.add( new PointF(u,v) );
@@ -6863,9 +6863,9 @@ public class DrawingWindow extends ItemDrawer
     modified();
   }
 
-  private void addPointsToLine( DrawingLinePath line, float x0, float y0, float xx, float yy )
+  private void addPointsToWallLine( DrawingLinePath line, float x0, float y0, float xx, float yy )
   {
-    float ll = (float)Math.sqrt( (xx-x0)*(xx-x0) + (yy-y0)*(yy-y0) ) / 20;
+    double ll = Math.sqrt( (xx-x0)*(xx-x0) + (yy-y0)*(yy-y0) ) / 20;
     if ( ll > TDSetting.mWallsXStep ) {
       int n = 1 + (int)ll;
       float dx = (xx-x0) / n;
@@ -6892,7 +6892,7 @@ public class DrawingWindow extends ItemDrawer
         side = hp.side;
         float xx2 = DrawingUtil.toSceneX( side.mP2.x, side.mP2.y );
         float yy2 = DrawingUtil.toSceneY( side.mP2.x, side.mP2.y );
-        addPointsToLine( path, xx, yy, xx2, yy2 );
+        addPointsToWallLine( path, xx, yy, xx2, yy2 );
         xx = xx2;
         yy = yy2;
       } 
@@ -6911,7 +6911,7 @@ public class DrawingWindow extends ItemDrawer
         side = hn.side;
         float xx2 = DrawingUtil.toSceneX( side.mP2.x, side.mP2.y );
         float yy2 = DrawingUtil.toSceneY( side.mP2.x, side.mP2.y );
-        addPointsToLine( path, xx, yy, xx2, yy2 );
+        addPointsToWallLine( path, xx, yy, xx2, yy2 );
         xx = xx2;
         yy = yy2;
       } 
@@ -6922,7 +6922,7 @@ public class DrawingWindow extends ItemDrawer
   }
 
   /*
-  void makeDlnWall( ArrayList< DLNSite > sites, float x0, float y0, float x1, float y1, float len, PointF uu, PointF vv )
+  void makeDlnWall( ArrayList< DLNSite > sites, double x0, double y0, double x1, double y1, double len, PointF uu, PointF vv )
   {
     DLNWall dln_wall = new DLNWall( new Point2D(x0,y0), new Point2D(x1,y1) );
     dln_wall.compute( sites );
@@ -6936,7 +6936,7 @@ public class DrawingWindow extends ItemDrawer
     for ( int k=0; k<size; ++k ) {
       float xx2 = DrawingUtil.toSceneX( side.mP2.x, side.mP2.y );
       float yy2 = DrawingUtil.toSceneY( side.mP2.x, side.mP2.y );
-      addPointsToLine( path, xx, yy, xx2, yy2 );
+      addPointsToWallLine( path, xx, yy, xx2, yy2 );
       xx = xx2;
       yy = yy2;
       hull = hull.next;
@@ -6958,8 +6958,8 @@ public class DrawingWindow extends ItemDrawer
     } else if ( size == 1 ) {
       PointF p = pts.get(0);
       if ( p.x > 0 && p.x < len ) { // wall from--p--to
-	    float x2 = x0 + uu.x * p.x + vv.x * p.y;
-	    float y2 = y0 + uu.y * p.x + vv.y * p.y;
+	float x2 = x0 + uu.x * p.x + vv.x * p.y;
+	float y2 = y0 + uu.y * p.x + vv.y * p.y;
         xx = DrawingUtil.toSceneX( x2, y2 ); 
         yy = DrawingUtil.toSceneY( x2, y2 );
         x0 = DrawingUtil.toSceneX( x0, y0 );
@@ -6968,8 +6968,8 @@ public class DrawingWindow extends ItemDrawer
         y1 = DrawingUtil.toSceneY( x1, y1 );
         DrawingLinePath path = new DrawingLinePath( BrushManager.getLineWallIndex(), mDrawingSurface.scrapIndex() );
         path.addStartPoint( x0, y0 );
-        addPointsToLine( path, x0, y0, xx, yy );
-        addPointsToLine( path, xx, yy, x1, y1 );
+        addPointsToWallLine( path, x0, y0, xx, yy );
+        addPointsToWallLine( path, xx, yy, x1, y1 );
         if ( mLandscape ) path.landscapeToPortrait();
         path.computeUnitNormal();
         mDrawingSurface.addDrawingPath( path );
@@ -6989,7 +6989,7 @@ public class DrawingWindow extends ItemDrawer
 	y2 = y0 + uu.y * p1.x + vv.y * p1.y;
         float xx2 = DrawingUtil.toSceneX( x2, y2 );
         float yy2 = DrawingUtil.toSceneY( x2, y2 );
-        addPointsToLine( path, xx, yy, xx2, yy2 );
+        addPointsToWallLine( path, xx, yy, xx2, yy2 );
         xx = xx2;
         yy = yy2;
       }
@@ -7037,17 +7037,17 @@ public class DrawingWindow extends ItemDrawer
     
     // convex-hull: remove points "inside" (with smaller |Y| )
     if ( size > 2 ) {
-      float x0 = pts.get(0).x;
-      float y0 = Math.abs( pts.get(0).y );
+      double x0 = pts.get(0).x;
+      double y0 = Math.abs( pts.get(0).y );
       for ( int k = 0; k < pts.size()-1; ++k ) {
         int hh = k+1;
-        float x1 = pts.get(hh).x;
-        float y1 = Math.abs( pts.get(hh).y );
-        float s0 = (y1-y0)/(x1-x0); // N.B. x1 >= x0 + 0.1
+        double x1 = pts.get(hh).x;
+        double y1 = Math.abs( pts.get(hh).y );
+        double s0 = (y1-y0)/(x1-x0); // N.B. x1 >= x0 + 0.1
           for ( int h=hh+1; h<pts.size(); ++h ) {
           x1 = pts.get(h).x;
           y1 = Math.abs( pts.get(h).y );
-          float s1 = (y1-y0)/(x1-x0); 
+          double s1 = (y1-y0)/(x1-x0); 
           if ( s1 > s0 + TDSetting.mWallsConcave ) { // allow small concavities
             hh = h;
           }
@@ -7164,13 +7164,13 @@ public class DrawingWindow extends ItemDrawer
     if ( mType == PlotType.PLOT_PLAN ) {
       mOutlinePlot1 = plot;
       st0 = mNum.getStation( mPlot1.start );
-      xdelta = st.e - st0.e; // FIXME SCALE FACTORS ???
-      ydelta = st.s - st0.s;
+      xdelta = (float)(st.e - st0.e); // FIXME SCALE FACTORS ???
+      ydelta = (float)(st.s - st0.s);
     } else if ( mType == PlotType.PLOT_EXTENDED ) {
       mOutlinePlot2 = plot;
       st0 = mNum.getStation( mPlot2.start );
-      xdelta = st.h - st0.h;
-      ydelta = st.v - st0.v;
+      xdelta = (float)(st.h - st0.h);
+      ydelta = (float)(st.v - st0.v);
     } else {
       return;
     }
@@ -7279,11 +7279,11 @@ public class DrawingWindow extends ItemDrawer
     float xdelta = 0.0f;
     float ydelta = 0.0f;
     if ( mType == PlotType.PLOT_PLAN ) {
-      xdelta = st1.e - st0.e; // FIXME SCALE FACTORS ???
-      ydelta = st1.s - st0.s;
+      xdelta = (float)( st1.e - st0.e ); // FIXME SCALE FACTORS ???
+      ydelta = (float)( st1.s - st0.s );
     } else if ( mType == PlotType.PLOT_EXTENDED ) {
-      xdelta = st1.h - st0.h;
-      ydelta = st1.v - st0.v;
+      xdelta = (float)( st1.h - st0.h );
+      ydelta = (float)( st1.v - st0.v );
     } else {
       return;
     }

@@ -245,7 +245,7 @@ public class OverviewWindow extends ItemDrawer
 
     // splay = false
     // selectable = false
-    private void addFixedLine( DBlock blk, float x1, float y1, float x2, float y2, 
+    private void addFixedLine( DBlock blk, double x1, double y1, double x2, double y2, 
                                // float xoff, float yoff,
                                boolean splay )
     {
@@ -264,7 +264,7 @@ public class OverviewWindow extends ItemDrawer
         dpath.setPathPaint( BrushManager.fixedShotPaint );
       }
       // DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2, xoff, yoff );
-      DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2, splay );
+      DrawingUtil.makeDrawingPath( dpath, (float)x1, (float)y1, (float)x2, (float)y2, splay );
       mOverviewSurface.addFixedPath( dpath, splay, false ); // false: non-selectable
     }
 
@@ -605,11 +605,11 @@ public class OverviewWindow extends ItemDrawer
           NumStation st = mNum.getStation( start );
           if ( st == null ) continue;
           if ( type == PlotType.PLOT_PLAN ) {
-            xdelta = st.e - mStartStation.e; // FIXME SCALE FACTORS ???
-            ydelta = st.s - mStartStation.s;
+            xdelta = (float)(st.e - mStartStation.e); // FIXME SCALE FACTORS ???
+            ydelta = (float)(st.s - mStartStation.s);
           } else {
-            xdelta = st.h - mStartStation.h;
-            ydelta = st.v - mStartStation.v;
+            xdelta = (float)(st.h - mStartStation.h);
+            ydelta = (float)(st.v - mStartStation.v);
           }
         }
         xdelta *= DrawingUtil.SCALE_FIX;

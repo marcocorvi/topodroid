@@ -15,20 +15,20 @@ import com.topodroid.math.TDVector;
 
 public class NumSurveyPoint
 {
-  public float s; // south Y downward ( world coordinate )
-  public float e; // east X rightward
-  public float v; // Z vertical downward
-  public float h; // horizontal rightward
+  public double s; // south Y downward ( world coordinate )
+  public double e; // east X rightward
+  public double v; // Z vertical downward
+  public double h; // horizontal rightward
 
   // ########## geolocalized 
-  public double gs; 
-  public double ge; 
-  public double gv; 
+  // public double gs; 
+  // public double ge; 
+  // public double gv; 
 
   NumSurveyPoint()
   {
-    s = e = v = h = 0.0f;
-    gs = ge = gv = 0;
+    s = e = v = h = 0;
+    // gs = ge = gv = 0;
   }
 
   public TDVector toVector() { return new TDVector( (float)e, (float)s, (float)v); }

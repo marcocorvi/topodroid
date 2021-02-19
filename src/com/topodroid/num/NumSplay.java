@@ -33,10 +33,10 @@ public class NumSplay extends NumSurveyPoint
   {
     from = f;
     v = from.v - d * TDMath.sind( c );
-    float h0 = d * TDMath.abs( TDMath.cosd( c ) );
+    double h0 = d * Math.abs( TDMath.cosDd( c ) );
     h = from.h + cosine * h0;
-    s = from.s - h0 * TDMath.cosd( b + decl );
-    e = from.e + h0 * TDMath.sind( b + decl );
+    s = from.s - h0 * TDMath.cosDd( b + decl );
+    e = from.e + h0 * TDMath.sinDd( b + decl );
     mBlock  = blk;
     mDecl   = decl;
     mCosine = cosine;

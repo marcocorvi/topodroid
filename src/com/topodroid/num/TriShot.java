@@ -93,13 +93,13 @@ class TriShot
     // float ret = 0.0f;
     // for ( DBlock b : blocks ) ret += b.mLength; 
     // return ret / blocks.size();
-    return mAvgLeg.length();
+    return (float)mAvgLeg.length();
   }
 
   // horizontal length (good only for DATAMODE_NORMAL)
-  float h()
+  double h()
   {
-    float hh = mAvgLeg.length() * TDMath.cosd( mAvgLeg.clino() );
+    double hh = mAvgLeg.length() * TDMath.cosDd( mAvgLeg.clino() );
     // if ( hh < 0 ) {
     //   Log.v("DistoX-TRI", "block " + blocks.get(0).mId + " neg H " + hh );
     // }
@@ -109,10 +109,10 @@ class TriShot
 
   // vertical length - with sign (only for DATAMODE_NORMAL)
   // depth           for DATAMODE_DIVING
-  float v()
+  double v()
   {
     if ( TDInstance.datamode == SurveyInfo.DATAMODE_NORMAL ) {
-      return mAvgLeg.length() * TDMath.sind( mAvgLeg.clino() );
+      return mAvgLeg.length() * TDMath.sinDd( mAvgLeg.clino() );
     } else { // SurveyInfo.DATAMODE_DIVING
       return mAvgLeg.clino();
     }
@@ -134,7 +134,7 @@ class TriShot
     // }
     // return TDMath.in360( ret/size );
 
-    float ret = mAvgLeg.bearing();
+    float ret = (float)mAvgLeg.bearing();
     if ( reversed == -1 ) { 
       // ret += 180; if (ret >= 360) ret -= 360;
       ret = TDMath.add180( ret );
@@ -155,7 +155,7 @@ class TriShot
     // for ( DBlock b : blocks ) ret += b.mClino;
     // return ret / blocks.size();
 
-    return reversed * mAvgLeg.clino(); 
+    return (float)( reversed * mAvgLeg.clino() ); 
   }
 
   // void Dump()
