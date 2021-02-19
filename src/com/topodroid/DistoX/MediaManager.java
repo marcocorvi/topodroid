@@ -41,21 +41,26 @@ class MediaManager
     mAudioFile = null;
   }
 
-  void prepareNextPhoto( long sid, String comment, int camera )
+  long prepareNextPhoto( long sid, String comment, int camera )
   {
     mShotId       = sid;
     mComment = comment;
     mCamera  = camera;
     mPhotoId = mData.nextPhotoId( TDInstance.sid );
     mImageFile = new File( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhotoId) ) ); // photo file is "survey/id.jpg"
+    return mPhotoId;
   }
 
-  void prepareNextAudioNeg( long sid, String comment )
+  // @param sid        shot id
+  // @param comment    
+  // @return the next audio negative ID
+  long prepareNextAudioNeg( long sid, String comment )
   {
-    mShotId       = sid;
+    mShotId  = sid;
     mComment = comment;
-    mAudioId = mData.nextAudioNegId( TDInstance.sid );
-    mAudioFile = new File( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhotoId) ) ); // photo file is "survey/id.jpg"
+    mAudioId = mData.nextAudioNegId( TDInstance.sid ); // negative id's are for sketch audios
+    mAudioFile = new File( TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString(mAudioId) ) ); // audio file is "survey/id.wav"
+    return mAudioId;
   }
 
   boolean isTopoDroidCamera() { return (mCamera == PhotoInfo.CAMERA_TOPODROID); }

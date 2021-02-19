@@ -575,9 +575,8 @@ class TDExporter
     }
   }
 
-  // =======================================================================
-  // KML export Keyhole Markup Language
-  //   NOTE shot flags are ignored
+  // ####################################################################################################################################
+  // geographic exports - use (ge, gs, gv)
 
   static GeoReference getGeolocalizedStation( long sid, DataHelper data, float asl_factor, boolean ellipsoid_altitude, String station )
   {
@@ -588,7 +587,7 @@ class TDExporter
     if ( nums == null ) return null;
     for ( TDNum num : nums ) {
       for ( NumStation st : num.getStations() ) {
-        if ( station.equals( st.name ) ) return new GeoReference( st.e, st.s, st.v, mERadius, mSRadius, decl );
+        if ( station.equals( st.name ) ) return new GeoReference( st.ge, st.gs, st.gv, mERadius, mSRadius, decl );
       }
     }
     return null;
@@ -622,31 +621,35 @@ class TDExporter
     double lng = origin.lng;
     double asl = ellipsoid_altitude ? origin.alt 
                                     : origin.asl; // KML uses Geoid altitude (unless altitudeMode is set)
-    double s_radius = 1 / Geodetic.meridianRadiusApprox( lat );
-    double e_radius = 1 / Geodetic.parallelRadiusApprox( lat );
+    double s_radius = 1 / Geodetic.meridianRadiusExact( lat );
+    double e_radius = 1 / Geodetic.parallelRadiusExact( lat );
 
     mERadius = e_radius; // save radii factors for getGeolocalizedStation
     mSRadius = s_radius;
 
     // Log.v("DistoX", "st cnt " + NumStation.cnt + " size " + num.getStations().size() );
 
+
     for ( NumStation st : num.getStations() ) {
-      st.s = (float)(lat - st.s * s_radius);
-      st.e = (float)(lng + st.e * e_radius);
-      st.v = (float)(asl - st.v) * asl_factor;
+      st.gs = (lat - st.s * s_radius);
+      st.ge = (lng + st.e * e_radius); 
+      st.gv = (asl - st.v) * asl_factor;
     }
     for ( NumStation cst : num.getClosureStations() ) {
-      cst.s = (float)(lat - cst.s * s_radius);
-      cst.e = (float)(lng + cst.e * e_radius);
-      cst.v = (float)(asl - cst.v) * asl_factor;
+      cst.gs = (lat - cst.s * s_radius);
+      cst.ge = (lng + cst.e * e_radius); 
+      cst.gv = (asl - cst.v) * asl_factor;
     }
     for ( NumSplay sp : num.getSplays() ) {
-      sp.s = (float)(lat - sp.s * s_radius);
-      sp.e = (float)(lng + sp.e * e_radius);
-      sp.v = (float)(asl - sp.v) * asl_factor;
+      sp.gs = (lat - sp.s * s_radius);
+      sp.ge = (lng + sp.e * e_radius); 
+      sp.gv = (asl - sp.v) * asl_factor;
     }
   }
 
+  // ====================================================================================================================================
+  // KML export Keyhole Markup Language
+  //   NOTE shot flags are ignored
   static int exportSurveyAsKml( long sid, DataHelper data, SurveyInfo info, File file )
   {
     final String name          = "<name>%s</name>\n";
@@ -746,7 +749,7 @@ class TDExporter
             pw.format(multigeometry);
             pw.format(altitudeMode);
               pw.format(point_id, st.name );
-              pw.format(Locale.US, coordinates3, st.e, st.s, st.v );
+              pw.format(Locale.US, coordinates3, st.ge, st.gs, st.gv );
               pw.format(point_end);
             pw.format(multigeometry_end);
             pw.format(placemark_end);
@@ -765,7 +768,7 @@ class TDExporter
             pw.format(linestring_id, from.name, to.name );
             // pw.format("      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
             // pw.format("      <extrude>1</extrude>\n"); // extends the line down to the ground
-            pw.format(Locale.US, coordinates6, from.e, from.s, from.v, to.e, to.s, to.v );
+            pw.format(Locale.US, coordinates6, from.ge, from.gs, from.gv, to.ge, to.gs, to.gv );
             pw.format(linestring_end);
           // } else {
           //   // Log.v("DistoX", "missing coords " + from.name + " " + from.hasExtend() + " " + to.name + " " + to.hasExtend() );
@@ -785,7 +788,7 @@ class TDExporter
             pw.format(linestring);
             // pw.format("      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
             // pw.format("      <extrude>1</extrude>\n"); // extends the line down to the ground
-            pw.format(Locale.US, coordinates6, from.e, from.s, from.v, sp.e, sp.s, sp.v );
+            pw.format(Locale.US, coordinates6, from.ge, from.gs, from.gv, sp.ge, sp.gs, sp.gv );
             pw.format(linestring_end);
           }
           pw.format(multigeometry_end);
@@ -803,7 +806,8 @@ class TDExporter
       return 0;
     }
   }
-  // =======================================================================
+  // =====================================================================================================================
+  // SHP
 
   // @param sid      survey ID
   // @param data     database helper object
@@ -831,7 +835,6 @@ class TDExporter
             String filepath = filename + "/stations-" + nr;
             ++ nr;
             List< NumStation > stations = num.getStations();
-            // Log.v("DistoX", "SHP export " + filepath + " stations " + stations.size() );
             ShpPointz shp = new ShpPointz( filepath, files );
             shp.setYYMMDD( info.date );
             success &= shp.writeStations( stations );
@@ -874,7 +877,7 @@ class TDExporter
     return filename;
   }
 
-  // =======================================================================
+  // ===================================================================================================
   // GEO JASON GeoJSON export
   //   NOTE shot flags are ignored
 
@@ -916,7 +919,7 @@ class TDExporter
             pw.format("      %s \"centerline\",\n", item );
             pw.format("      %s \"%s %s\",\n", name, from.name, to.name );
             pw.format("      %s \"LineString\",\n", geom );
-            pw.format(Locale.US, "      %s [ [ %.8f, %.8f, %.1f ], [ %.8f, %.8f, %.1f ] ]\n", coords, from.e, from.s, from.v, to.e, to.s, to.v );
+            pw.format(Locale.US, "      %s [ [ %.8f, %.8f, %.1f ], [ %.8f, %.8f, %.1f ] ]\n", coords, from.ge, from.gs, from.gv, to.ge, to.gs, to.gv );
             pw.format("    },\n");
           }
         }
@@ -931,7 +934,7 @@ class TDExporter
             pw.format("      %s \"splay\",\n", item );
             pw.format("      %s \"%s\",\n", name, from.name );
             pw.format("      %s \"LineString\",\n", geom );
-            pw.format(Locale.US, "     %s [ [ %.8f, %.8f, %.1f ], [ %.8f, %.8f, %.1f ] ]\n", coords, from.e, from.s, from.v, sp.e, sp.s, sp.v );
+            pw.format(Locale.US, "     %s [ [ %.8f, %.8f, %.1f ], [ %.8f, %.8f, %.1f ] ]\n", coords, from.ge, from.gs, from.gv, sp.ge, sp.gs, sp.gv );
             pw.format("    },\n");
           }
         }
@@ -945,7 +948,7 @@ class TDExporter
             pw.format("      %s \"station\",\n", item );
             pw.format("      %s \"%s\",\n", name, st.name );
             pw.format("      %s \"Point\",\n", geom );
-            pw.format(Locale.US, "      %s [ %.8f %.8f %.1f ]\n", coords, st.e, st.s, st.v );
+            pw.format(Locale.US, "      %s [ %.8f %.8f %.1f ]\n", coords, st.ge, st.gs, st.gv );
             pw.format("    },\n");
           }
         }
@@ -969,7 +972,7 @@ class TDExporter
   static int exportSurveyAsPlt( long sid, DataHelper data, SurveyInfo info, File file )
   {
     // Log.v("DistoX", "export as trackfile: " + file.getName() );
-    List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), TDUtil.M2FT, false );
+    List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), TDUtil.M2FT, false ); // false: ... 
     if ( nums == null || nums.size() == 0 ) {
       TDLog.Error( "Failed PLT export: no geolocalized station");
       return 2;
@@ -1019,9 +1022,9 @@ class TDExporter
           NumStation from = sh.from;
           NumStation to   = sh.to;
           if ( from != last ) {
-            pw.format(Locale.US, "%.8f, %.8f,1, %.1f,%d,,\r\n", from.e, from.s, from.v, days );
+            pw.format(Locale.US, "%.8f, %.8f,1, %.1f,%d,,\r\n", from.ge, from.gs, from.gv, days );
           }
-          pw.format(Locale.US, "%.8f,%.8f,0,%.1f,%d,,\r\n", to.e, to.s, to.v, days );
+          pw.format(Locale.US, "%.8f,%.8f,0,%.1f,%d,,\r\n", to.ge, to.gs, to.gv, days );
           last = to;
         }
       }
@@ -1035,6 +1038,7 @@ class TDExporter
     }
   }
 
+  // #############################################################################################################
   // =======================================================================
   // POCKETTOPO EXPORT PocketTopo
   //   NOTE shot flags are ignored
@@ -3829,7 +3833,6 @@ class TDExporter
       return 1;
     } catch ( IOException e ) {
       TDLog.Error( "Failed Polygon export: " + e.getMessage() );
-      Log.v("DistoX-POLYGON", "Failed export: " + e.getMessage() );
       return 0;
     }
   }

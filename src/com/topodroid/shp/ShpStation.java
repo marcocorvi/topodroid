@@ -35,7 +35,7 @@ import java.nio.channels.FileChannel;
 
 import java.util.List;
 
-// import android.util.Log;
+import android.util.Log;
 
 public class ShpStation extends ShpObject
 {
@@ -45,10 +45,9 @@ public class ShpStation extends ShpObject
   }
 
   // write headers for POINT
-  public boolean writeStations( List< DrawingStationName > pts, double x0, double y0, double xscale, double yscale, float cd, float sd ) throws IOException
+  public boolean writeStations( List< DrawingStationName > pts, double x0, double y0, double xscale, double yscale, double cd, double sd ) throws IOException
   {
     int n_pts = (pts != null)? pts.size() : 0;
-    // Log.v("DistoX", "SHP write stations " + n_pts );
     if ( n_pts == 0 ) return false;
 
     int n_fld = 1;
@@ -84,9 +83,9 @@ public class ShpStation extends ShpObject
       writeShpRecordHeader( cnt, shpRecLen );
       shpBuffer.order(ByteOrder.LITTLE_ENDIAN);   
       shpBuffer.putInt( SHP_POINT );
-      // Log.v("DistoX", "POINT station " + cnt + ": " + st.e + " " + st.s + " " + st.v + " offset " + offset );
-      float x = DrawingUtil.declinatedX( st.cx, st.cy, cd, sd );
-      float y = DrawingUtil.declinatedY( st.cx, st.cy, cd, sd );
+      NumStation nst = st.getNumStation();
+      double x = DrawingUtil.declinatedX( st.cx, st.cy, cd, sd );
+      double y = DrawingUtil.declinatedY( st.cx, st.cy, cd, sd );
       shpBuffer.putDouble( x0 + xscale * x );
       shpBuffer.putDouble( y0 - yscale * y );
 
@@ -104,15 +103,15 @@ public class ShpStation extends ShpObject
   @Override protected int getShpRecordLength( ) { return 14; }
     
   // Utility: set the bounding box of the set of geometries
-  private void setBoundsPoints( List< DrawingStationName > pts, double x0, double y0, double xscale, double yscale, float cd, float sd ) 
+  private void setBoundsPoints( List< DrawingStationName > pts, double x0, double y0, double xscale, double yscale, double cd, double sd ) 
   {
     if ( pts.size() == 0 ) {
       xmin = xmax = ymin = ymax = zmin = zmax = 0.0;
       return;
     }
     DrawingStationName st = pts.get(0);
-    float x = DrawingUtil.declinatedX( st.cx, st.cy, cd, sd );
-    float y = DrawingUtil.declinatedY( st.cx, st.cy, cd, sd );
+    double x = DrawingUtil.declinatedX( st.cx, st.cy, cd, sd );
+    double y = DrawingUtil.declinatedY( st.cx, st.cy, cd, sd );
     initBBox( x0 + xscale * x, y0 - yscale * y );
     for ( int k=pts.size() - 1; k>0; --k ) {
       st = pts.get(k);

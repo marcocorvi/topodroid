@@ -4310,19 +4310,19 @@ public class DrawingWindow extends ItemDrawer
       } else {
         mMediaManager.setPoint( x, y );
       }
-      mMediaManager.prepareNextAudioNeg( -1, "" );
+      long audio_id = mMediaManager.prepareNextAudioNeg( -1, "" );
       // mMediaId = mApp_mData.nextAudioNegId( TDInstance.sid );
       // File file = new File( TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString(mMediaId) ) );
       // TODO RECORD AUDIO
-      new AudioDialog( mActivity, this, mMediaManager.getAudioId() ).show();
+      new AudioDialog( mActivity, this, audio_id ).show();
     }
 
     // @from IAudioInserter
-    public void deletedAudio( long bid )
+    public void deletedAudio( long audio_id )
     {
       // Log.v("DistoX-C", "deleteAudio " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
       assert( mLastLinePath == null );
-      DrawingAudioPath audio = mDrawingSurface.getAudioPoint( bid );
+      DrawingAudioPath audio = mDrawingSurface.getAudioPoint( audio_id );
       deletePoint( audio ); // if audio == null doesn't do anything
     }
 
@@ -4333,12 +4333,12 @@ public class DrawingWindow extends ItemDrawer
     // }
 
     // @from IAudioInserter
-    public void stopRecordAudio( long bid )
+    public void stopRecordAudio( long audio_id )
     {
-      DrawingAudioPath audio = mDrawingSurface.getAudioPoint( bid );
+      DrawingAudioPath audio = mDrawingSurface.getAudioPoint( audio_id );
       if ( audio == null ) {
         // assert bid == mMediaManager.getAudioId()
-        audio = new DrawingAudioPath( mMediaManager.getX(), mMediaManager.getY(), mPointScale, null, bid, mDrawingSurface.scrapIndex() );
+        audio = new DrawingAudioPath( mMediaManager.getX(), mMediaManager.getY(), mPointScale, null, audio_id, mDrawingSurface.scrapIndex() );
 	audio.mLandscape = mLandscape;
         mDrawingSurface.addDrawingPath( audio );
         modified();

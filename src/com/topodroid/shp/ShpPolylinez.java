@@ -99,9 +99,9 @@ public class ShpPolylinez extends ShpObject
       NumStation p2 = new NumStation( "-" );
       for ( NumSplay lm : lms ) {
         NumStation p1 = lm.from;
-        p2.e = lm.e;
-        p2.s = lm.s;
-        p2.v = lm.v;
+        p2.ge = lm.ge;
+        p2.gs = lm.gs;
+        p2.gv = lm.gv;
         int offset = 50 + cnt * shpRecLen; 
         ++cnt;
 
@@ -125,9 +125,9 @@ public class ShpPolylinez extends ShpObject
     writeShpRecordHeader( cnt, len );
     shpBuffer.order(ByteOrder.LITTLE_ENDIAN);   
     shpBuffer.putInt( SHP_POLYLINEZ );
-    double xmin = p1.e; double xmax = p2.e; if ( xmin > xmax ) { xmin=p2.e; xmax=p1.e; }
-    double ymin = p1.s; double ymax = p2.s; if ( ymin > ymax ) { ymin=p2.s; ymax=p1.s; }
-    double zmin = p1.v; double zmax = p2.v; if ( zmin > zmax ) { zmin=p2.v; zmax=p1.v; }
+    double xmin = p1.ge; double xmax = p2.ge; if ( xmin > xmax ) { xmin=p2.ge; xmax=p1.ge; }
+    double ymin = p1.gs; double ymax = p2.gs; if ( ymin > ymax ) { ymin=p2.gs; ymax=p1.gs; }
+    double zmin = p1.gv; double zmax = p2.gv; if ( zmin > zmax ) { zmin=p2.gv; zmax=p1.gv; }
     shpBuffer.putDouble( xmin );
     shpBuffer.putDouble( ymin );
     shpBuffer.putDouble( xmax );
@@ -135,14 +135,14 @@ public class ShpPolylinez extends ShpObject
     shpBuffer.putInt( 1 ); // one part: number of parts
     shpBuffer.putInt( 2 ); // two points: total number of points
     shpBuffer.putInt( 0 ); // part 0 starts with point 0 (and ends with point 1)
-    shpBuffer.putDouble( p1.e );
-    shpBuffer.putDouble( p1.s );
-    shpBuffer.putDouble( p2.e );
-    shpBuffer.putDouble( p2.s );
+    shpBuffer.putDouble( p1.ge );
+    shpBuffer.putDouble( p1.gs );
+    shpBuffer.putDouble( p2.ge );
+    shpBuffer.putDouble( p2.gs );
     shpBuffer.putDouble( zmin );
     shpBuffer.putDouble( zmax );
-    shpBuffer.putDouble( p1.v );
-    shpBuffer.putDouble( p2.v );
+    shpBuffer.putDouble( p1.gv );
+    shpBuffer.putDouble( p2.gv );
     shpBuffer.putDouble( 0.0 );
     shpBuffer.putDouble( 0.0 );
     shpBuffer.putDouble( 0.0 );
@@ -162,34 +162,34 @@ public class ShpPolylinez extends ShpObject
     if ( nrs > 0 ) {
       NumShot ln = lns.get(0);
       NumStation pt = ln.from;
-      initBBox( pt.e, pt.s, pt.v );
+      initBBox( pt.ge, pt.gs, pt.gv );
       pt = ln.to;
-      updateBBox( pt.e, pt.s, pt.v );
+      updateBBox( pt.ge, pt.gs, pt.gv );
       for ( int k=1; k<nrs; ++k ) {
         ln = lns.get(k);
         pt = ln.from;
-        updateBBox( pt.e, pt.s, pt.v );
+        updateBBox( pt.ge, pt.gs, pt.gv );
         pt = ln.to;
-        updateBBox( pt.e, pt.s, pt.v );
+        updateBBox( pt.ge, pt.gs, pt.gv );
       }
       if ( mrs > 0 ) {
         for ( int k=0; k<mrs; ++k ) {
           NumSplay lm = lms.get(k);
           pt = lm.from;
-          updateBBox( pt.e, pt.s, pt.v );
-          updateBBox( lm.e, lm.s, lm.v );
+          updateBBox( pt.ge, pt.gs, pt.gv );
+          updateBBox( lm.ge, lm.gs, lm.gv );
         }
       }
     } else { // mrs > 0
       NumSplay lm = lms.get(0);
       NumStation pt = lm.from;
-      initBBox( pt.e, pt.s, pt.v );
-      updateBBox( lm.e, lm.s, lm.v );
+      initBBox( pt.ge, pt.gs, pt.gv );
+      updateBBox( lm.ge, lm.gs, lm.gv );
       for ( int k=1; k<mrs; ++k ) {
         lm = lms.get(k);
         pt = lm.from;
-        updateBBox( pt.e, pt.s, pt.v );
-        updateBBox( lm.e, lm.s, lm.v );
+        updateBBox( pt.ge, pt.gs, pt.gv );
+        updateBBox( lm.ge, lm.gs, lm.gv );
       }
     }
   }
@@ -202,13 +202,13 @@ public class ShpPolylinez extends ShpObject
   //   }
   //   NumSplay ln = lns.get(0);
   //   NumStation pt = ln.from;
-  //   initBBox( pt.e, pt.s, pt.v );
-  //   updateBBox( ln.e, ln.s, ln.v );
+  //   initBBox( pt.ge, pt.gs, pt.gv );
+  //   updateBBox( ln.ge, ln.gs, ln.gv );
   //   for ( int k=lns.size() - 1; k>0; --k ) {
   //     ln = lns.get(k);
   //     pt = ln.from;
-  //     updateBBox( pt.e, pt.s, pt.v );
-  //     updateBBox( ln.e, ln.s, ln.v );
+  //     updateBBox( pt.ge, pt.gs, pt.gv );
+  //     updateBBox( ln.ge, ln.gs, ln.gv );
   //   }
   // }
 

@@ -3797,7 +3797,7 @@ public class DataHelper extends DataSetObservable
       }
       if (!cursor.isClosed()) cursor.close();
     }
-    return id - 1L;
+    return id - 1L; // decrement
   }
   
   boolean moveShotsBetweenSurveys( long old_sid, long old_id, long new_sid )

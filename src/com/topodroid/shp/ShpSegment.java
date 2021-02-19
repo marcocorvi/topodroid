@@ -44,7 +44,7 @@ public class ShpSegment extends ShpObject
 
   // @param x0 x-offset
   // @param y0 y-offset
-  public boolean writeSegments( List< DrawingPath > sgms, double x0, double y0, double xscale, double yscale, float cd, float sd ) throws IOException
+  public boolean writeSegments( List< DrawingPath > sgms, double x0, double y0, double xscale, double yscale, double cd, double sd ) throws IOException
   {
     int nrs = ( sgms != null )? sgms.size() : 0;
     if ( nrs == 0 ) return false;
@@ -115,12 +115,12 @@ public class ShpSegment extends ShpObject
     return true;
   }
 
-  private void writeShpRecord( int cnt, int len, DrawingPath sgm, double x0, double y0, double xscale, double yscale, float cd, float sd )
+  private void writeShpRecord( int cnt, int len, DrawingPath sgm, double x0, double y0, double xscale, double yscale, double cd, double sd )
   {
-    float x1 = DrawingUtil.declinatedX( sgm.x1, sgm.y1, cd, sd );
-    float y1 = DrawingUtil.declinatedY( sgm.x1, sgm.y1, cd, sd );
-    float x2 = DrawingUtil.declinatedX( sgm.x2, sgm.y2, cd, sd );
-    float y2 = DrawingUtil.declinatedY( sgm.x2, sgm.y2, cd, sd );
+    double x1 = DrawingUtil.declinatedX( sgm.x1, sgm.y1, cd, sd );
+    double y1 = DrawingUtil.declinatedY( sgm.x1, sgm.y1, cd, sd );
+    double x2 = DrawingUtil.declinatedX( sgm.x2, sgm.y2, cd, sd );
+    double y2 = DrawingUtil.declinatedY( sgm.x2, sgm.y2, cd, sd );
 
     double xmin, ymin, xmax, ymax;
     {
@@ -159,15 +159,15 @@ public class ShpSegment extends ShpObject
   // @Override 
   protected int getShpRecordLength( ) { return 28 + 2 * 8; }
 
-  private void setBoundsLines( List< DrawingPath > sgms, double x0, double y0, double xscale, double yscale, float cd, float sd )
+  private void setBoundsLines( List< DrawingPath > sgms, double x0, double y0, double xscale, double yscale, double cd, double sd )
   {
     int nrs = ( sgms != null )? sgms.size() : 0;
     if ( nrs > 0 ) {
       DrawingPath sgm = sgms.get(0);
-      float x1 = DrawingUtil.declinatedX( sgm.x1, sgm.y1, cd, sd );
-      float y1 = DrawingUtil.declinatedY( sgm.x1, sgm.y1, cd, sd );
-      float x2 = DrawingUtil.declinatedX( sgm.x2, sgm.y2, cd, sd );
-      float y2 = DrawingUtil.declinatedY( sgm.x2, sgm.y2, cd, sd );
+      double x1 = DrawingUtil.declinatedX( sgm.x1, sgm.y1, cd, sd );
+      double y1 = DrawingUtil.declinatedY( sgm.x1, sgm.y1, cd, sd );
+      double x2 = DrawingUtil.declinatedX( sgm.x2, sgm.y2, cd, sd );
+      double y2 = DrawingUtil.declinatedY( sgm.x2, sgm.y2, cd, sd );
 
       initBBox( x0 + xscale * x1, y0 - yscale * y1 );
       updateBBox( x0 + xscale * x2, y0 - yscale * y2 );

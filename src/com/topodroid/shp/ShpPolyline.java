@@ -48,17 +48,17 @@ public class ShpPolyline extends ShpObject
     // mPathType = path_type;
   }
 
-  public void writeLines( List< DrawingPointLinePath > lns, double x0, double y0, double xscale, double yscale, float cd, float sd ) throws IOException
+  public void writeLines( List< DrawingPointLinePath > lns, double x0, double y0, double xscale, double yscale, double cd, double sd ) throws IOException
   {
     writwPointLines( lns, DrawingPath.DRAWING_PATH_LINE, x0, y0, xscale, yscale, cd, sd );
   }
 
-  public void writeAreas( List< DrawingPointLinePath > lns, double x0, double y0, double xscale, double yscale, float cd, float sd ) throws IOException
+  public void writeAreas( List< DrawingPointLinePath > lns, double x0, double y0, double xscale, double yscale, double cd, double sd ) throws IOException
   {
     writwPointLines( lns, DrawingPath.DRAWING_PATH_AREA, x0, y0, xscale, yscale, cd, sd );
   }
 
-  private boolean writwPointLines( List< DrawingPointLinePath > lns, int path_type, double x0, double y0, double xscale, double yscale, float cd, float sd ) throws IOException
+  private boolean writwPointLines( List< DrawingPointLinePath > lns, int path_type, double x0, double y0, double xscale, double yscale, double cd, double sd ) throws IOException
   {
     int nrs = ( lns != null )? lns.size() : 0;
     if ( nrs == 0 ) return false;
@@ -135,12 +135,12 @@ public class ShpPolyline extends ShpObject
     return true;
   }
 
-  private void writeShpRecord( int cnt, int len, DrawingPointLinePath ln, int close, double x0, double y0, double xscale, double yscale, float cd, float sd )
+  private void writeShpRecord( int cnt, int len, DrawingPointLinePath ln, int close, double x0, double y0, double xscale, double yscale, double cd, double sd )
   {
     double xmin, ymin, xmax, ymax;
     LinePoint pt = ln.first();
-    float x = DrawingUtil.declinatedX( pt.x, pt.y, cd, sd );
-    float y = DrawingUtil.declinatedY( pt.x, pt.y, cd, sd );
+    double x = DrawingUtil.declinatedX( pt.x, pt.y, cd, sd );
+    double y = DrawingUtil.declinatedY( pt.x, pt.y, cd, sd );
     {
       xmin = xmax =  x;
       ymin = ymax = -y;
@@ -186,14 +186,14 @@ public class ShpPolyline extends ShpObject
   // @Override 
   protected int getShpRecordLength( int npt ) { return 28 + npt * 8; }
 
-  private void setBoundsLines( List< DrawingPointLinePath > lns, double x0, double y0, double xscale, double yscale, float cd, float sd )
+  private void setBoundsLines( List< DrawingPointLinePath > lns, double x0, double y0, double xscale, double yscale, double cd, double sd )
   {
     int nrs = ( lns != null )? lns.size() : 0;
     if ( nrs > 0 ) {
       DrawingPointLinePath ln = lns.get(0);
       LinePoint pt = ln.first();
-      float x = DrawingUtil.declinatedX( pt.x, pt.y, cd, sd );
-      float y = DrawingUtil.declinatedY( pt.x, pt.y, cd, sd );
+      double x = DrawingUtil.declinatedX( pt.x, pt.y, cd, sd );
+      double y = DrawingUtil.declinatedY( pt.x, pt.y, cd, sd );
       initBBox( x0 + xscale * x, y0 - yscale * y );
       for ( pt = pt.mNext; pt != null; pt = pt.mNext ) {
         x = DrawingUtil.declinatedX( pt.x, pt.y, cd, sd );

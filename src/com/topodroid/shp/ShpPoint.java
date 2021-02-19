@@ -40,7 +40,7 @@ public class ShpPoint extends ShpObject
   }
 
   // write headers for POINT
-  public boolean writePoints( List< DrawingPointPath > pts, double x0, double y0, double xscale, double yscale, float cd, float sd ) throws IOException
+  public boolean writePoints( List< DrawingPointPath > pts, double x0, double y0, double xscale, double yscale, double cd, double sd ) throws IOException
   {
     int n_pts = (pts != null)? pts.size() : 0;
     // Log.v("DistoX", "SHP write points " + n_pts );
@@ -84,8 +84,8 @@ public class ShpPoint extends ShpObject
       shpBuffer.order(ByteOrder.LITTLE_ENDIAN);   
       shpBuffer.putInt( SHP_POINT );
       // Log.v("DistoX", "POINTZ " + cnt + ": " + pt.e + " " + pt.s + " " + pt.v + " offset " + offset );
-      float x = DrawingUtil.declinatedX( pt.cx, pt.cy, cd, sd );
-      float y = DrawingUtil.declinatedY( pt.cx, pt.cy, cd, sd );
+      double x = DrawingUtil.declinatedX( pt.cx, pt.cy, cd, sd );
+      double y = DrawingUtil.declinatedY( pt.cx, pt.cy, cd, sd );
       shpBuffer.putDouble( x0 + xscale * x );
       shpBuffer.putDouble( y0 - yscale * y );
 
@@ -108,15 +108,15 @@ public class ShpPoint extends ShpObject
   @Override protected int getShpRecordLength( ) { return 14; }
     
   // Utility: set the bounding box of the set of geometries
-  private void setBoundsPoints( List< DrawingPointPath > pts, double x0, double y0, double xscale, double yscale, float cd, float sd ) 
+  private void setBoundsPoints( List< DrawingPointPath > pts, double x0, double y0, double xscale, double yscale, double cd, double sd ) 
   {
     if ( pts.size() == 0 ) {
       xmin = xmax = ymin = ymax = zmin = zmax = 0.0;
       return;
     }
     DrawingPointPath pt = pts.get(0);
-    float x = DrawingUtil.declinatedX( pt.cx, pt.cy, cd, sd );
-    float y = DrawingUtil.declinatedY( pt.cx, pt.cy, cd, sd );
+    double x = DrawingUtil.declinatedX( pt.cx, pt.cy, cd, sd );
+    double y = DrawingUtil.declinatedY( pt.cx, pt.cy, cd, sd );
     initBBox( x0 + xscale * x, y0 - yscale * y );
     for ( int k=pts.size() - 1; k>0; --k ) {
       pt = pts.get(k);

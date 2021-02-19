@@ -91,7 +91,7 @@ public class DrawingStationName extends DrawingPointPath
   }
 
   public String getName() { return mName; }
-  NumStation getNumStation() { return mStation; }
+  public NumStation getNumStation() { return mStation; }
 
   // @implements IDrawingLink
   public float getLinkX() { return cx; }

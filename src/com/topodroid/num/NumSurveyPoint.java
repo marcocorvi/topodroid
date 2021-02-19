@@ -20,14 +20,18 @@ public class NumSurveyPoint
   public float v; // Z vertical downward
   public float h; // horizontal rightward
 
+  // ########## geolocalized 
+  public double gs; 
+  public double ge; 
+  public double gv; 
+
   NumSurveyPoint()
   {
-    s = 0.0f;
-    e = 0.0f;
-    v = 0.0f;
-    h = 0.0f;
+    s = e = v = h = 0.0f;
+    gs = ge = gv = 0;
   }
 
-  public TDVector toVector() { return new TDVector(e,s,v); }
+  public TDVector toVector() { return new TDVector( (float)e, (float)s, (float)v); }
 
 }
+

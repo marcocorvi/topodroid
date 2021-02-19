@@ -37,16 +37,22 @@ public class DrawingUtil
 
   // float toSceneX( float x, float y ) { return x; } 
   // float toSceneY( float x, float y ) { return y; } 
-  public static float toSceneX( float x, float y ) { return CENTER_X + x * SCALE_FIX; }
-  public static float toSceneY( float x, float y ) { return CENTER_Y + y * SCALE_FIX; }
+  // public static float toSceneX( double x, double y ) { return (float)(CENTER_X + x * SCALE_FIX); }
+  // public static float toSceneY( double x, double y ) { return (float)(CENTER_Y + y * SCALE_FIX); }
+  public static float toSceneX( float x, float y ) { return (CENTER_X + x * SCALE_FIX); }
+  public static float toSceneY( float x, float y ) { return (CENTER_Y + y * SCALE_FIX); }
 
   // float sceneToWorldX( float x, float y ) { return x; } 
   // float sceneToWorldY( float x, float y ) { return y; }
-  public static float sceneToWorldX( float x, float y ) { return (x - CENTER_X)/SCALE_FIX; }
-  public static float sceneToWorldY( float x, float y ) { return (y - CENTER_Y)/SCALE_FIX; }
+  // public static float sceneToWorldX( double x, double y ) { return (float)((x - CENTER_X)/SCALE_FIX); }
+  // public static float sceneToWorldY( double x, double y ) { return (float)((y - CENTER_Y)/SCALE_FIX); }
+  public static float sceneToWorldX( float x, float y ) { return ((x - CENTER_X)/SCALE_FIX); }
+  public static float sceneToWorldY( float x, float y ) { return ((y - CENTER_Y)/SCALE_FIX); }
     
   // int toBoundX( float x, float y ) { return Math.round(x); } 
   // int toBoundY( float x, float y ) { return Math.round(y); }
+  // private static int toBoundX( double x, double y ) { return Math.round(x); }
+  // private static int toBoundY( double x, double y ) { return Math.round(y); }
   private static int toBoundX( float x, float y ) { return Math.round(x); }
   private static int toBoundY( float x, float y ) { return Math.round(y); }
 
@@ -186,12 +192,12 @@ public class DrawingUtil
     // Log.v("DistoX-GRID", "grid sizes " + surface.getGrid1Size() + " " + surface.getGrid10Size() );
   }
 
-  public static float declinatedX( float x, float y, float cd, float sd ) 
+  public static double declinatedX( double x, double y, double cd, double sd ) 
   {
     return cd * ( x - DrawingUtil.CENTER_X ) - sd * ( y - DrawingUtil.CENTER_Y );
   }
 
-  public static float declinatedY( float x, float y, float cd, float sd ) 
+  public static double declinatedY( double x, double y, double cd, double sd ) 
   {
     return cd * ( y - DrawingUtil.CENTER_Y ) + sd * ( x - DrawingUtil.CENTER_X );
   }

@@ -20,8 +20,9 @@ import com.topodroid.shp.ShpStation;
 import com.topodroid.shp.ShpSegment;
 // import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
+import com.topodroid.num.NumStation;
 
-// import android.util.Log;
+import android.util.Log;
 
 
 import java.util.List;
@@ -48,9 +49,9 @@ class DrawingShp
     float cd = 1;
     float sd = 0;
     if ( station != null ) {
-      xoff = station.e;
-      yoff = station.s;
-      xscale = ShpObject.SCALE * station.sradius; // use only S-radius
+      xoff = station.ge;
+      yoff = station.gs;
+      xscale = ShpObject.SCALE * station.eradius; // use only S-radius FIXME
       yscale = ShpObject.SCALE * station.sradius;
       cd = TDMath.cosd( station.declination );
       sd = TDMath.sind( station.declination );
@@ -106,8 +107,6 @@ class DrawingShp
       ShpStation shp_station = new ShpStation( basepath + "/station", files );
       shp_station.writeStations( stations, xoff, yoff, xscale, yscale, cd, sd );
 
-      // Log.v("DistoX", "SHP export stations " + stations.size() + " points " + points.size() );
-      
       Archiver zipper = new Archiver( );
       zipper.compressFiles( basepath + ".shz", files );
       TDUtil.deleteDir( basepath ); // delete temporary shapedir
