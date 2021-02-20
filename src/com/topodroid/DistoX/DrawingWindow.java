@@ -4314,7 +4314,7 @@ public class DrawingWindow extends ItemDrawer
       // mMediaId = mApp_mData.nextAudioNegId( TDInstance.sid );
       // File file = new File( TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString(mMediaId) ) );
       // TODO RECORD AUDIO
-      new AudioDialog( mActivity, this, audio_id ).show();
+      new AudioDialog( mActivity, this, audio_id, null ).show();
     }
 
     // @from IAudioInserter
@@ -5629,7 +5629,7 @@ public class DrawingWindow extends ItemDrawer
               } else if ( BrushManager.isPointAudio( point.mPointType ) ) {
                 if ( audioCheck ) {
                   DrawingAudioPath audio = (DrawingAudioPath)point;
-                  new AudioDialog( mActivity, this, audio.mId ).show();
+                  new AudioDialog( mActivity, this, audio.mId, null ).show();
                 } else {
 	          TDToast.makeWarn( R.string.no_feature_audio );
 		}

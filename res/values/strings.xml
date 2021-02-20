@@ -957,6 +957,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="export_point_stroke">Point stroke</string -->
     <!-- UNUSED string name="export_label_stroke">Label stroke</string -->
 
+    <string name="audio_id_shot">Recording: shot %1$s %2$s</string>
+    <string name="audio_id_plot">Recording: sketch%1$d</string>
     <string name="audio_paused">Paused</string>
     <string name="audio_playing">Playing</string>
     <string name="audio_recording">Recording</string>

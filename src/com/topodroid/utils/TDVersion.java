@@ -26,7 +26,7 @@ public class TDVersion
 {
   // symbol version of installed symbols is stored in the database
   // symbol version of the current  symbols is in the app
-  public static final String SYMBOL_VERSION = "35";
+  public static final String SYMBOL_VERSION = "36";
   
   // database version
   public static final String DB_VERSION = "42"; // FIXME agrees with Cave3DThParser values

@@ -2364,7 +2364,7 @@ public class ShotWindow extends Activity
   // ------------------------------------------------------------------
   void startAudio( DBlock blk )
   {
-    (new AudioDialog( mActivity, /* this */ null, blk.mId )).show();
+    (new AudioDialog( mActivity, /* this */ null, blk.mId, blk )).show();
   }
 
 }

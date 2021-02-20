@@ -38,6 +38,7 @@ import android.view.View;
 // import android.view.WindowManager;
 
 import android.widget.Button;
+import android.widget.TextView;
 
 class AudioDialog extends MyDialog
                   implements View.OnClickListener
@@ -63,10 +64,11 @@ class AudioDialog extends MyDialog
   private boolean hasFile;
   private boolean canRec;
   private boolean canPlay;
+  private DBlock  mBlk;
   // AudioInfo mAudio;
 
   // @param bid    block Id
-  AudioDialog( Context ctx, IAudioInserter parent, long bid )
+  AudioDialog( Context ctx, IAudioInserter parent, long bid, DBlock blk )
   {
     super( ctx, R.string.AudioDialog );
 
@@ -74,8 +76,9 @@ class AudioDialog extends MyDialog
     mBid = bid;
     // mAudio = mApp.mData.getAudio( TDInstance.sid, mBid );
     mFilepath = TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString(mBid) );
-    Log.v("DistoX", "audio dialog " + bid + " file: " + mFilepath );
+    // Log.v("DistoX", "audio dialog " + bid + " file: " + mFilepath );
     hasFile = (new File( mFilepath )).exists();
+    mBlk    = blk;
   }
 
 
@@ -94,6 +97,11 @@ class AudioDialog extends MyDialog
     // mBtnClose = (Button) findViewById( R.id.audio_close );
     // mBtnClose.setOnClickListener( this );
     ( (Button) findViewById( R.id.audio_close ) ).setOnClickListener( this );
+    if ( mBlk != null ) {
+      ( (TextView) findViewById( R.id.audio_id ) ).setText( String.format( mContext.getResources().getString( R.string.audio_id_shot ), mBlk.mFrom, mBlk.mTo ) );
+    } else { 
+      ( (TextView) findViewById( R.id.audio_id ) ).setText( String.format( mContext.getResources().getString( R.string.audio_id_plot ), mBid ) );
+    }
 
     mBtnRec    = new MyStateBox( mContext, R.drawable.iz_audio_rec, R.drawable.iz_audio_rec_on );
     mBtnPlay   = new MyStateBox( mContext, R.drawable.iz_audio_play_off, R.drawable.iz_audio_play, R.drawable.iz_audio_stop );

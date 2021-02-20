@@ -1,5 +1,10 @@
 README symbols
 
+IMPORTANT 
+Do not change therion names (the value of th_name) of the following symbols
+- point audio
+- point photo
+
 Symbol files are parsed by the program when if loads the symbol libraries.
 There are three libraries, one for points, one for lines and one for areas.
 Symbol files must follow a strict syntax, which is detailed in the documentation of the 
@@ -13,92 +18,7 @@ In particular symbol files contains information used in the Therion and cSurvey 
 
 Therion:
 therion name
+For symbols not supported by therion use the "u:name" syntax
 
-cSurvey:
-points:
-lines:  level type category pen
-areas:  
+cSurvey directives are no longer needed.
 
-level: 2 for livel lines, 5 for walls
-type:  1 open curves, 3 closed areas, 4 walls
-category: 1 walls, 2 border, 3 floor-lines (contour, slope, pits)
-pen: 2
-
-More specifically:
-LEVELS
-            Base = 0
-            Soil = 1
-            WaterAndFloorMorphologies = 2
-            RocksAndConcretion = 3
-            CeilingMorphologies = 4
-            Borders = 5
-            Signs = 6
-TYPES
-            Items = 0    // intenal use
-            FreeHandLine = 1
-            Area = 2    // not used
-            FreeHandArea = 3
-            InvertedFreeHandArea = 4
-            Clipart = 5
-            Sign = 6
-            Image = 7
-            Text = 8
-            CrossSection = 9
-            Quota = 10
-            Sketch = 11
-            Attachment = 12
-            Legend = 13
-            Scale = 14
-            Compass = 15
-            InformationBoxText = 16
-            CrossSectionMarker = 29
-            Group = 50      // internal use
-            Marker = 96     // internal use
-            Trigpoint = 97  // internal use
-            Segment = 98    // internal use
-            Generic = 99    // internal use
-CATEGORIES (NB hex codes)
-            None = &H0
-            CaveBorder = &H1
-            Border = &H2
-            LevelLine = &H3
-            Rock = &H20
-            Concretion = &H21
-            Soil = &H30
-            WaterArea = &H40
-            Sign = &H50
-            Text = &H51
-            Quota = &H52
-            Compass = &H53
-            CrossSection = &H60
-            Image = &H70
-            Sketch = &H71
-PENS
-            None = 0
-            CavePen = 1
-            PresumedCavePen = 8
-            TooNarrowCavePen = 25
-            UnderlyingCavePen = 26
-            Pen = 2
-            PresumedPen = 3
-            CliffUpPen = 4
-            PresumedCliffUpPen = 13
-            CliffDownPen = 5
-            PresumedCliffDownPen = 14
-            GradientUpPen = 6
-            PresumedGradientUpPen = 15
-            GradientDownPen = 7
-            PresumedGradientDownPen = 16
-            GenericPen = 9
-            PresumedGenericPen = 17
-            TightPen = 10
-            PresumedTightPen = 18
-            OverhangUpPen = 11
-            PresumedOverhangUpPen = 19
-            OverhangDownPen = 12
-            PresumedOverhangDownPen = 20
-            MeanderPen = 21
-            PresumedMeanderPen = 22
-            IcePen = 23
-            PresumedIcePen = 24
-            Custom = 99

@@ -948,6 +948,8 @@ WARNUNG. Ab v.5.0.60 wird ein "TopoDroid"-Ordner automatisch verwendet wenn es e
     <!-- UNUSED string name="export_point_stroke">Point stroke</string -->
     <!-- UNUSED string name="export_label_stroke">Label stroke</string -->
   
+    <!-- TODO string name="audio_id_shot">Recording: shot %1$s %2$s</string -->
+    <!-- TODO string name="audio_id_plot">Recording: sketch%1$d</string -->
     <string name="audio_paused">Pause</string>
     <string name="audio_playing">Abspielen</string>
     <string name="audio_recording">Aufnehmen</string>
