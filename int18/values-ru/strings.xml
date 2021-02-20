@@ -934,8 +934,8 @@
     <!-- UNUSED string name="export_point_stroke">Point stroke</string -->
     <!-- UNUSED string name="export_label_stroke">Label stroke</string -->
   
-    <!-- TODO string name="audio_id_shot">Recording: shot %1$s %2$s</string -->
-    <!-- TODO string name="audio_id_plot">Recording: sketch%1$d</string -->
+    <string name="audio_id_shot">Запись: замер %1$s %2$s</string>
+    <string name="audio_id_plot">Запись: абрис%1$d</string>
     <string name="audio_paused">Пауза</string>
     <string name="audio_playing">Воспроизведение</string>
     <string name="audio_recording">Запись</string>
