@@ -15,6 +15,8 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDRequest;
+import com.topodroid.utils.TDLocale;
+
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
@@ -529,7 +531,7 @@ public class MainWindow extends Activity
     setContentView(R.layout.topodroid_activity);
     mApp = (TopoDroidApp) getApplication();
     mActivity = this;
-    TopoDroidApp.mActivity = this;
+    TopoDroidApp.mMainActivity = this;
     mApp_mData       = TopoDroidApp.mData;
     // mApp_mCosurvey   = TopoDroidApp.mCosurvey; // IF_COSURVEY
 
@@ -836,7 +838,7 @@ public class MainWindow extends Activity
   public synchronized void onResume() 
   {
     super.onResume();
-    // mApp.resetLocale(); // FIXME-LOCALE
+    if ( TDLocale.FIXME_LOCALE ) TDLocale.resetLocale();
 
     // TDLog.Profile("TDActivity onResume");
     // TDLog.Log( TDLog.LOG_MAIN, "onResume " );
@@ -943,7 +945,8 @@ public class MainWindow extends Activity
   protected void attachBaseContext( Context ctx )
   {
     TDInstance.context = ctx;
-    super.attachBaseContext( TopoDroidApp.resetLocale( ) );
+    TDLocale.resetLocale( );
+    super.attachBaseContext( TDInstance.context );
   }
 
 
@@ -953,7 +956,7 @@ public class MainWindow extends Activity
     Bundle extras = (intent != null )? intent.getExtras() : null;
     switch ( request ) {
       case TDRequest.REQUEST_ENABLE_BT:
-        // mApp.resetLocale(); // OK-LOCALE apparently this does not affect locale
+        // TDLocale.resetLocale(); // OK-LOCALE apparently this does not affect locale
         if ( result == Activity.RESULT_OK ) {
           // nothing to do: scanBTDEvices() is called by menu CONNECT
         } else if ( say_not_enabled ) {

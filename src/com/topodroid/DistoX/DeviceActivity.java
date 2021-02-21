@@ -626,6 +626,8 @@ public class DeviceActivity extends Activity
   {
     super.onResume();
     // TDLog.Debug("device activity on resume" );
+    // if ( TDLocale.FIXME_LOCALE ) TDLocale.resetLocale(); 
+
     registerReceiver( mPairReceiver, new IntentFilter( DeviceUtil.ACTION_BOND_STATE_CHANGED ) );
     mApp.resumeComm();
     mDeviceActivityVisible = true;

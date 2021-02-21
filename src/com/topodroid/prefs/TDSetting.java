@@ -13,6 +13,7 @@ package com.topodroid.prefs;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLocale;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.utils.TDString;
 // import com.topodroid.utils.TDColor;
@@ -738,9 +739,9 @@ public class TDSetting
     mKeyboard      = prefs.getBoolean( keyMain[4], bool(defMain[4]) );  // DISTOX_MKEYBOARD
     mNoCursor      = prefs.getBoolean( keyMain[5], bool(defMain[5]) );  // DISTOX_NO_CURSOR
     mLocalManPages = handleLocalUserMan( /* my_app, */ prefs.getString( keyMain[6], defMain[6] ), false ); // DISTOX_LOCAL_MAN
-    TopoDroidApp.setLocale( prefs.getString( keyMain[7], TDString.EMPTY ), false ); // DISTOX_LOCALE
+    setLocale( prefs.getString( keyMain[7], TDString.EMPTY ), false ); // DISTOX_LOCALE
     mOrientation = Integer.parseInt( prefs.getString( keyMain[8], defMain[8] ) ); // DISTOX_ORIENTATION choice: 0, 1, 2
-    // TopoDroidApp.setLocale( prefs.getString( keyMain[7], defMain[7] ), false ); // DISTOX_LOCALE
+    // setLocale( prefs.getString( keyMain[7], defMain[7] ), false ); // DISTOX_LOCALE
     // TDLog.Profile("locale");
     // boolean co_survey = prefs.getBoolean( keyMain[8], bool(defMain[8]) );        // DISTOX_COSURVEY 
 
@@ -1154,7 +1155,7 @@ public class TDSetting
     } else if ( k.equals( key[ 6 ] ) ) {           // DISTOX_LOCAL_MAN (choice)
       mLocalManPages = handleLocalUserMan( /* hlp.getApp(), */ tryStringValue( hlp, k, v, def[6] ), true );
     } else if ( k.equals( key[ 7 ] ) ) {           // DISTOX_LOCALE (choice)
-      TopoDroidApp.setLocale( tryStringValue( hlp, k, v, def[7] ), true );
+      setLocale( tryStringValue( hlp, k, v, def[7] ), true );
     } else if ( k.equals( key[ 8 ] ) ) {           // DISTOX_ORIENTATION (choice)
       mOrientation = tryIntValue( hlp, k, v, def[8] );
       TopoDroidApp.setScreenOrientation( );
@@ -2393,6 +2394,19 @@ public class TDSetting
     }
     // Log.v("DistoX", "set survey stations. policy " + policy );
     return true;
+  }
+
+  private static void setLocale( String locale, boolean load_symbols )
+  {
+    TDLocale.setLocale( locale );
+    Resources res = TDInstance.getResources();
+    if ( load_symbols ) {
+      BrushManager.reloadPointLibrary( TDInstance.context, res ); // reload symbols
+      BrushManager.reloadLineLibrary( res );
+      BrushManager.reloadAreaLibrary( res );
+    }
+    TopoDroidApp.setMenuAdapter(); 
+    TDPrefActivity.reloadPreferences();
   }
 
   // void clearPreferences()

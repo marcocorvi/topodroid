@@ -14,6 +14,7 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDVersion;
+import com.topodroid.utils.TDLocale;
 import com.topodroid.utils.TDString;
 // import com.topodroid.utils.TDStatus;
 import com.topodroid.ui.MyHorizontalListView;
@@ -54,8 +55,6 @@ import java.io.InputStream;
 import java.io.FileOutputStream;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipEntry;
-
-import java.util.Locale;
 
 import java.util.List;
 import java.util.Set;
@@ -104,7 +103,6 @@ import android.widget.Button;
 // import android.graphics.BitmapFactory;
 // import android.graphics.drawable.BitmapDrawable;
 
-
 import android.util.DisplayMetrics;
 
 import android.bluetooth.BluetoothDevice;
@@ -121,8 +119,6 @@ public class TopoDroidApp extends Application
   static boolean mCheckManualTranslation = false;
   // static String mManual;  // manual url
 
-  static Locale mLocale;
-  static String mLocaleStr;
   static int mCheckPerms;
 
   static String mClipboardText = null; // text clipboard
@@ -166,8 +162,8 @@ public class TopoDroidApp extends Application
 
   // public void notifyStatus( )
   // { 
-  //   if ( mActivity == null ) return;
-  //   mActivity.runOnUiThread( new Runnable() { 
+  //   if ( mMainActivity == null ) return;
+  //   mMainActivity.runOnUiThread( new Runnable() { 
   //     public void run () { 
   //       mListerSet.setConnectionStatus( mDataDownloader.getStatus() );
   //     }
@@ -176,8 +172,8 @@ public class TopoDroidApp extends Application
   public void notifyStatus( final int status )
   { 
     // Log.v("DistoX-BLE", "App: notify status " + status );
-    if ( mActivity == null ) return;
-    mActivity.runOnUiThread( new Runnable() { 
+    if ( mMainActivity == null ) return;
+    mMainActivity.runOnUiThread( new Runnable() { 
       public void run () { 
         mListerSet.setConnectionStatus( status );
       }
@@ -209,10 +205,10 @@ public class TopoDroidApp extends Application
   public static DeviceHelper mDData = null;      // device/calib database
 
   // public static TDPrefHelper mPrefHlp      = null;
-  static SurveyWindow mSurveyWindow    = null; // FIXME ref mActivity
-  public static ShotWindow mShotWindow = null; // FIXME ref mActivity - public for prefs/TDSetting
+  static SurveyWindow mSurveyWindow    = null; // FIXME ref Survey Activity
+  public static ShotWindow mShotWindow = null; // FIXME ref Shot Activity - public for prefs/TDSetting
   static DrawingWindow mDrawingWindow  = null; // FIXME currently not used
-  static MainWindow mActivity          = null; // FIXME ref mActivity
+  static MainWindow mMainActivity      = null; // FIXME ref Main Activity
 
   static long lastShotId( ) { return mData.getLastShotId( TDInstance.sid ); }
   static StationName mStationName = null;
@@ -275,9 +271,9 @@ public class TopoDroidApp extends Application
     return (int)( TDSetting.mSizeButtons * context.getResources().getSystem().getDisplayMetrics().density );
   }
   
-  public static void resetButtonBar() { if ( mActivity != null ) mActivity.resetButtonBar(); }
-  public static void setMenuAdapter( ) { if ( mActivity != null ) mActivity.setMenuAdapter( TDInstance.getResources() ); }
-  public static void setScreenOrientation() { if ( mActivity != null ) TDandroid.setScreenOrientation( mActivity  ); }
+  public static void resetButtonBar() { if ( mMainActivity != null ) mMainActivity.resetButtonBar(); }
+  public static void setMenuAdapter( ) { if ( mMainActivity != null ) mMainActivity.setMenuAdapter( TDInstance.getResources() ); }
+  public static void setScreenOrientation() { if ( mMainActivity != null ) TDandroid.setScreenOrientation( mMainActivity  ); }
 
   // UNUSED was called by HelpEntry
   // static int getDefaultSize( Context context )
@@ -834,7 +830,8 @@ public class TopoDroidApp extends Application
   protected void attachBaseContext( Context ctx )
   {
     TDInstance.context = ctx;
-    super.attachBaseContext( resetLocale( ) );
+    TDLocale.resetLocale();
+    super.attachBaseContext( TDInstance.context );
   }
 
   @Override
@@ -843,52 +840,8 @@ public class TopoDroidApp extends Application
     super.onConfigurationChanged( cfg );
     // boolean landscape = cfg.orientation == Configuration.ORIENTATION_LANDSCAPE;
     // Log.v("DistoX-ConfigChange", "TopoDroid app " + landscape );
-    resetLocale( );
-    DisplayMetrics dm = getResources().getDisplayMetrics();
-    setDisplayParams( dm /* , landscape */ );
-  }
-
-  // called by MainWindow
-  static Context resetLocale( )
-  {
-    // mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
-    Resources res = TDInstance.getResources();
-    DisplayMetrics dm = res.getDisplayMetrics();
-    /* FIXME-23 */
-    if ( android.os.Build.VERSION.SDK_INT >= 17 ) {
-      Configuration conf = new Configuration( res.getConfiguration() );
-      conf.setLocale( mLocale );
-      // TDInstance.context = TDInstance.context.createConfigurationContext( conf );
-      res.updateConfiguration( conf, dm );
-    } else {
-      Configuration conf = res.getConfiguration();
-      conf.locale = mLocale; 
-      res.updateConfiguration( conf, dm );
-    }
-    /* */
-    /* FIXME-16 FIXME-8 
-      Configuration conf = res.getConfiguration();
-      conf.locale = mLocale; 
-      res.updateConfiguration( conf, dm );
-    /* */
-    return TDInstance.context;
-  }
-
-  public static void setLocale( String locale, boolean load_symbols )
-  {
-    mLocaleStr = locale;
-    mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
-    // Log.v("DistoXPref", "set locale str <" + locale + "> " + mLocale.toString() );
-
-    Resources res = TDInstance.getResources();
-    resetLocale( );
-    if ( load_symbols ) {
-      BrushManager.reloadPointLibrary( TDInstance.context, res ); // reload symbols
-      BrushManager.reloadLineLibrary( res );
-      BrushManager.reloadAreaLibrary( res );
-    }
-    if ( mActivity != null ) mActivity.setMenuAdapter( res );
-    TDPrefActivity.reloadPreferences();
+    TDLocale.resetLocale( );
+    setDisplayParams( getResources().getDisplayMetrics() /* , landscape */ );
   }
 
   public static void setCWD( String cwd, String cbd )
@@ -907,7 +860,7 @@ public class TopoDroidApp extends Application
     TDPath.setPaths( TDInstance.cwd, TDInstance.cbd );
     mData.openDatabase( TDInstance.context );
 
-    if ( mActivity != null ) mActivity.setTheTitle( );
+    if ( mMainActivity != null ) mMainActivity.setTheTitle( );
   }
 
 // -----------------------------------------------------------------
@@ -1330,7 +1283,7 @@ public class TopoDroidApp extends Application
       createComm();
     }
     TDPrefHelper.update( TDSetting.keyDeviceName(), address ); 
-    if ( mActivity != null ) mActivity.setButtonDevice();
+    if ( mMainActivity != null ) mMainActivity.setButtonDevice();
   }
 
   // TODO BLE for the second DistoX
@@ -2114,7 +2067,7 @@ public class TopoDroidApp extends Application
     // Log.v( "DistoX", "connStateChanged()" );
     if ( mSurveyWindow != null ) mSurveyWindow.setTheTitle();
     if ( mShotWindow  != null) mShotWindow.setTheTitle();
-    if ( mActivity != null ) mActivity.setTheTitle();
+    if ( mMainActivity != null ) mMainActivity.setTheTitle();
   }
 
   static void connectRemoteTopoDroid( BluetoothDevice device )
@@ -2167,7 +2120,7 @@ public class TopoDroidApp extends Application
   {
     if ( mSurveyWindow != null ) mSurveyWindow.updateDisplay();
     if ( mShotWindow  != null) mShotWindow.updateDisplay();
-    if ( mActivity != null ) mActivity.updateDisplay();
+    if ( mMainActivity != null ) mMainActivity.updateDisplay();
   }
 
   void clearSurveyReferences()

@@ -16,6 +16,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.utils.TDColor;
+import com.topodroid.utils.TDLocale;
 import com.topodroid.num.TDNum;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.NumShot;
@@ -506,7 +507,7 @@ public class OverviewWindow extends ItemDrawer
     protected synchronized void onResume()
     {
       super.onResume();
-      // mApp.resetLocale(); // FIXME-LOCALE
+      if ( TDLocale.FIXME_LOCALE ) TDLocale.resetLocale(); 
       doResume();
     }
 

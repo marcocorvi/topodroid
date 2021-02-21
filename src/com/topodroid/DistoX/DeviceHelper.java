@@ -137,7 +137,9 @@ public class DeviceHelper extends DataSetObservable
   private void handleDiskIOError( SQLiteDiskIOException e )
   {
     TDLog.Error("DB disk error " + e.getMessage() );
-    TopoDroidApp.mActivity.runOnUiThread( new Runnable() { public void run() { TDToast.makeBad( R.string.disk_io_error ); } } );
+    if ( TopoDroidApp.mMainActivity != null ) {
+      TopoDroidApp.mMainActivity.runOnUiThread( new Runnable() { public void run() { TDToast.makeBad( R.string.disk_io_error ); } } );
+    }
   }
 
   private boolean doUpdate( String table, ContentValues cv, String where, String[] args, String msg )

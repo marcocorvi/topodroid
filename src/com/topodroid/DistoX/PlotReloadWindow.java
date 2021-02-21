@@ -14,6 +14,7 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDTag;
+import com.topodroid.utils.TDLocale;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
@@ -339,7 +340,7 @@ public class PlotReloadWindow extends ItemDrawer
   protected synchronized void onResume()
   {
     super.onResume();
-    // mApp.resetLocale(); // FIXME-LOCALE
+    if ( TDLocale.FIXME_LOCALE ) TDLocale.resetLocale(); 
     doResume();
   }
 

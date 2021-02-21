@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDStatus;
+// import com.topodroid.utils.TDLocale;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
@@ -313,7 +314,7 @@ public class FixedActivity extends Activity
 
   public void onActivityResult( int reqCode, int resCode, Intent intent )
   {
-    // mApp.resetLocale(); // OK-LOCALE
+    // TDLocale.resetLocale(); // OK-LOCALE
     if ( resCode == RESULT_OK ) {
       if ( reqCode == CRS_CONVERSION_REQUEST ) {
         if ( mFixedDialog != null ) {

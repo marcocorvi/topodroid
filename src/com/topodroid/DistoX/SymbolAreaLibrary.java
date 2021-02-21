@@ -12,8 +12,9 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLocale;
 
-import java.util.Locale;
+// import java.util.Locale;
 // import java.util.ArrayList;
 // import java.util.TreeSet;
 import java.io.File;
@@ -122,7 +123,7 @@ class SymbolAreaLibrary extends SymbolLibrary
 
   void loadUserAreas()
   {
-    String locale = "name-" + TopoDroidApp.mLocale.toString().substring(0,2);
+    String locale = "name-" + TDLocale.getLocaleCode(); // TopoDroidApp.mLocale.toString().substring(0,2);
     String iso = "ISO-8859-1";
     // String iso = "UTF-8";
     // if ( locale.equals( "name-es" ) ) iso = "ISO-8859-1";

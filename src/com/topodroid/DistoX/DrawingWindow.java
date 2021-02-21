@@ -18,6 +18,7 @@ import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDRequest;
+import com.topodroid.utils.TDLocale;
 import com.topodroid.num.TDNum;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.NumShot;
@@ -2314,7 +2315,7 @@ public class DrawingWindow extends ItemDrawer
   protected synchronized void onResume()
   {
     super.onResume();
-    // mApp.resetLocale(); FIXME-LOCALE
+    if ( TDLocale.FIXME_LOCALE ) TDLocale.resetLocale(); 
     // Log.v("DistoX", "Drawing Activity onResume " + ((mDataDownloader!=null)?"with DataDownloader":"") );
     doResume();
     if ( mDataDownloader != null ) {

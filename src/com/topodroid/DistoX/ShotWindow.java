@@ -18,6 +18,7 @@ import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.utils.TDRequest;
+import com.topodroid.utils.TDLocale;
 import com.topodroid.math.TDMatrix;
 import com.topodroid.math.TDVector;
 import com.topodroid.ui.MyButton;
@@ -929,9 +930,9 @@ public class ShotWindow extends Activity
       TopoDroidApp.mSurveyWindow = null;
     }
     if ( new_survey == null ) {
-      TopoDroidApp.mActivity.startSplitSurvey( old_sid, old_id ); // SPLIT SURVEY
+      TopoDroidApp.mMainActivity.startSplitSurvey( old_sid, old_id ); // SPLIT SURVEY
     } else {
-      TopoDroidApp.mActivity.startMoveSurvey( old_sid, old_id, new_survey ); // MOVE SURVEY
+      TopoDroidApp.mMainActivity.startMoveSurvey( old_sid, old_id, new_survey ); // MOVE SURVEY
     }
   }
 
@@ -994,7 +995,7 @@ public class ShotWindow extends Activity
     TDLog.Log( TDLog.LOG_DEBUG, "on Activity Result: request " + reqCode + " result " + resCode );
     switch ( reqCode ) {
       case TDRequest.CAPTURE_IMAGE_SHOTWINDOW:
-        // mApp.resetLocale(); // FIXME-LOCALE
+        if ( TDLocale.FIXME_LOCALE ) TDLocale.resetLocale(); 
         if ( resCode == Activity.RESULT_OK ) { // RESULT_OK = -1 (0xffffffff)
           // (new PhotoCommentDialog(this, this, mShotId) ).show();
           Bundle extras = intent.getExtras();
@@ -1237,7 +1238,7 @@ public class ShotWindow extends Activity
   {
     super.onResume();
     // Log.v("DistoXLIFE", "ShotWindow onResume()" );
-    // mApp.resetLocale(); // FIXME-LOCALE
+    if ( TDLocale.FIXME_LOCALE ) TDLocale.resetLocale(); 
 
     // FIXME NOTIFY register ILister
     // if ( mApp.mComm != null ) { mApp.mComm.resume(); }

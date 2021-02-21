@@ -14,6 +14,7 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDStatus;
+import com.topodroid.utils.TDLocale;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
@@ -314,7 +315,7 @@ public class SurveyWindow extends Activity
   public synchronized void onResume() 
   {
     super.onResume();
-    // mApp.resetLocale(); // FIXME-LOCALE
+    if ( TDLocale.FIXME_LOCALE ) TDLocale.resetLocale(); 
     doSetDeclination( mApp_mData.getSurveyDeclination( TDInstance.sid ) );
   }
 
