@@ -18,7 +18,7 @@ import com.topodroid.shp.ShpPoint;
 import com.topodroid.shp.ShpPolyline;
 import com.topodroid.shp.ShpStation;
 import com.topodroid.shp.ShpSegment;
-// import com.topodroid.prefs.TDSetting;
+import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
 import com.topodroid.num.NumStation;
 
@@ -48,7 +48,7 @@ class DrawingShp
     double yscale = ShpObject.SCALE;
     float cd = 1;
     float sd = 0;
-    if ( station != null ) {
+    if ( station != null && TDSetting.mShpGeoref ) {
       xoff = station.ge;
       yoff = station.gs;
       xscale = ShpObject.SCALE * station.eradius; // use only S-radius FIXME

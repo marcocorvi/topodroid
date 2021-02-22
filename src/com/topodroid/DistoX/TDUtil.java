@@ -271,6 +271,7 @@ public class TDUtil
     return String.format(Locale.US, "%04d.%02d.%02d", y, m+1, d );
   }
 
+  // NOTE month 0=Jan.
   public static int year()  { return (new GregorianCalendar()).get( Calendar.YEAR ); }
   public static int month() { return (new GregorianCalendar()).get( Calendar.MONTH ); }
   public static int day()   { return (new GregorianCalendar()).get( Calendar.DAY_OF_MONTH); }

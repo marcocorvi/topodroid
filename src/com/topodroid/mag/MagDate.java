@@ -19,20 +19,27 @@
  */
 package com.topodroid.mag;
 
+import android.util.Log;
+
 // MAGtype_Date;
 class MagDate
 {
     static private int[] MonthDays = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
     private int Year;
-    private int Month;
+    private int Month; // 0 = Jan.
     private int Day;
     double DecimalYear; /* decimal years */
 
+  // void debugDate()
+  // {
+  //   Log.v("DistoX", "Date " + Year + " " + Month + " " + Day + " " + DecimalYear );
+  // }
+
   MagDate( int y, int m, int d )
   {
-    Year = y;
+    Year  = y;
     Month = m;
-    Day = d;
+    Day   = d;
     DecimalYear = toDecimalYear( y, m, d );
   }
 
@@ -45,7 +52,6 @@ class MagDate
     int yds = 365;
     if ((Year % 4 == 0 && Year % 100 != 0) || Year % 400 == 0) {
       MonthDays[2] = 29;
-      // ExtraDay = 1;
       yds = 366;
     } else {
       MonthDays[2] = 28;
@@ -53,8 +59,8 @@ class MagDate
     Day = (int)(yds * f);
     Month = 1;
     while ( Day > MonthDays[Month]) {
-    	Day -= MonthDays[Month];
-    	Month ++;
+      Day -= MonthDays[Month];
+      Month ++;
     }
   }
 

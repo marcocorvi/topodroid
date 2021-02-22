@@ -70,8 +70,8 @@ public class TDPrefCat
     R.string.title_settings_csx,
     R.string.title_settings_tro,
     R.string.title_settings_svg,      // 13
-    R.string.title_settings_dxf,
     R.string.title_settings_shp,
+    R.string.title_settings_dxf,
     R.string.title_settings_png,
     R.string.title_settings_kml,      // 17
     R.string.title_settings_csv,

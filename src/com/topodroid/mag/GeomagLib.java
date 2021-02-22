@@ -22,6 +22,8 @@ package com.topodroid.mag;
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 
+import android.util.Log;
+
 class GeomagLib
 {
   /* The main subroutine that calls a sequence of WMM sub-functions to calculate the magnetic
@@ -39,10 +41,21 @@ class GeomagLib
     // int NumTerms = ((nmax + 1) * (nmax + 2)) / 2; 
     MagHarmonic sph_vars  = sphericalHarmonicVariables( ellip, spherical, nmax ); // Spherical Harmonic vars
     MagLegendre legendre  = associatedLegendreFunction( spherical, nmax );        // Compute ALF  
+    // legendre.debugLegendre();
+
+    // model.debugModel();
+
     MagVector sumSphCoeff = summation( legendre, model, sph_vars, spherical );    // Accumulate sph. harm. coeffs 
+    // sumSphCoeff.debugVector( "sum sph coeff" );
+
     MagVector sumSecVarCoeff = sumSecVar( legendre, model, sph_vars, spherical ); //Sum Sec. Var. Coeffs 
+    // sumSecVarCoeff.debugVector( "sum sec var coeff" );
+
     MagVector result    = rotateVector( spherical, geodetic, sumSphCoeff);     // Computed Magn. fld to Geodeitic coords
+    // result.debugVector( "result" );
     MagVector resultSV  = rotateVector( spherical, geodetic, sumSecVarCoeff);  // sec. var. fld comps to Geodetic coords
+    // resultSV.debugVector( "result SV" );
+
     MagElement elems   = calculateGeoMagneticElements( result );             // Geomagn. elems Eq. 19 , WMM Tech rep
     calculateSecularVariationElements( resultSV, elems );                     // sec var of each of the Geomagn elems
     return elems;
@@ -467,6 +480,7 @@ class GeomagLib
     double sin_phi = Math.sin( TDMath.DEG2RAD * spherical.phig ); // sin  (geocentric latitude)
 
     if (nMax <= 16 || (1 - Math.abs(sin_phi)) < 1.0e-10 ) { // If nMax is less tha 16 or at the poles
+      // Log.v("DistoX", "Legendre Pcup Low");
       return MAG_PcupLow( sin_phi, nMax );
     } 
     return MAG_PcupHigh( sin_phi, nMax );
@@ -489,6 +503,7 @@ class GeomagLib
    */
   private MagHarmonic sphericalHarmonicVariables( MagEllipsoid ellip, MagSpherical spherical, int nMax )
   {
+    // Log.v("DistoX", "N " + nMax + " " + spherical.r + " " + spherical.lambda + " " + spherical.phig );
     MagHarmonic vars = new MagHarmonic( nMax );
     double cos_lambda = Math.cos(TDMath.DEG2RAD * spherical.lambda);
     double sin_lambda = Math.sin(TDMath.DEG2RAD * spherical.lambda);
@@ -510,6 +525,7 @@ class GeomagLib
       vars.cos_mlambda[m] = vars.cos_mlambda[m - 1] * cos_lambda - vars.sin_mlambda[m - 1] * sin_lambda;
       vars.sin_mlambda[m] = vars.cos_mlambda[m - 1] * sin_lambda + vars.sin_mlambda[m - 1] * cos_lambda;
     }
+    // vars.debugHarmonic();
     return vars;
   }
 
@@ -724,6 +740,7 @@ class GeomagLib
         }
       }
     }
+    // legendre.debugLegendre();
     // Compute the ration between the the Schmidt quasi-normalized associated Legendre
     // functions and the Gauss-normalized version. 
 
@@ -753,6 +770,8 @@ class GeomagLib
         // The sign is changed since the new WMM routines use derivative with respect to latitude insted of co-latitude 
       }
     }
+    // legendre.debugLegendre();
+    // legendre.ddebugLegendre();
     return legendre;
   } 
 
@@ -881,6 +900,7 @@ class GeomagLib
                     * legendre.dPcup[index];
         }
     }
+    // ret.debugVector("sum [1] " + model.nMax );
 
     double cos_phi = Math.cos( TDMath.DEG2RAD * spherical.phig );
     if ( Math.abs(cos_phi) > 1.0e-10) {
@@ -893,6 +913,7 @@ class GeomagLib
          */
         specialSummation(model, sph_vars, spherical, ret);
     }
+    // ret.debugVector("sum [2] " + model.nMax );
     return ret;
   } /*summation */
 

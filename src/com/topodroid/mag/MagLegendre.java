@@ -19,6 +19,8 @@
  */
 package com.topodroid.mag;
 
+import java.util.Locale;
+import android.util.Log;
 
 // MAGtype_LegendreFunction;
 class MagLegendre
@@ -33,4 +35,29 @@ class MagLegendre
     Pcup  = new double[ nTerms + 1 ];
     dPcup = new double[ nTerms + 1 ];
   }
-}
+ 
+  // void debugLegendre()
+  // {
+  //   for ( int n=0; n<=12; ++n ) {
+  //     StringBuilder sb = new StringBuilder();
+  //     for ( int m=0; m<=n; ++m ) {
+  //       int idx = (n * (n+1))/2 + m;
+  //       sb.append( String.format(Locale.US, "%.8f ", Pcup[idx] ) );
+  //     }
+  //     Log.v("DistoX", sb.toString() );
+  //   }
+  // }
+ 
+  // void ddebugLegendre()
+  // {
+  //   for ( int n=0; n<=12; ++n ) {
+  //     StringBuilder sb = new StringBuilder();
+  //     for ( int m=0; m<=n; ++m ) {
+  //       int idx = (n * (n+1))/2 + m;
+  //       sb.append( String.format(Locale.US, "%.8f ", dPcup[idx] ) );
+  //     }
+  //     Log.v("DistoX", sb.toString() );
+  //   }
+  // }
+
+}     

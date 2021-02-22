@@ -24,9 +24,9 @@ class WMMcoeff
   int n;
   int m;
   // main-G, main-H, var-G, var-H
-  float v0, v1, v2, v3;
+  double v0, v1, v2, v3;
 
-  WMMcoeff( int nn, int mm, float vv0, float vv1, float vv2, float vv3 )
+  WMMcoeff( int nn, int mm, double vv0, double vv1, double vv2, double vv3 )
   {
     n = nn;
     m = mm;

@@ -19,6 +19,9 @@
  */
 package com.topodroid.mag;
 
+import android.util.Log;
+import java.util.Locale;
+
 // MAGtype_MagneticModel;
 class  MagModel
 {
@@ -36,25 +39,54 @@ class  MagModel
   double[] Secular_Var_Coeff_G; /* CD - Gauss coefficients of secular geomagnetic model (nT/yr) */
   double[] Secular_Var_Coeff_H; /* CD - Gauss coefficients of secular geomagnetic model (nT/yr) */
 
+  void setEpoch( MagDate date )
+  {
+    epoch = date.DecimalYear;
+    CoefficientFileEndDate = epoch + 5;
+  }
+
   void setCoeffs( WMMcoeff[] data )
   {
-	int len = data.length;
+    // Log.v("DistoX", "model set coeff nTerms " + nTerms  + " size " + data.length );
+    int len = data.length;
     for ( int k = 0; k<len; ++k ) {
       WMMcoeff wmm = data[k];
       if ( wmm == null ) continue;
       int index = wmm.index();
       if ( index > nTerms ) {
-    	  System.out.println("index > nTerms " + index  + " size " + data.length );
+    	Log.e("DistoX", ">>>> index > nTerms " + index  + " size " + data.length );
       }
       Main_Field_Coeff_G[ index ]  = wmm.v0;
       Main_Field_Coeff_H[ index ]  = wmm.v1;
       Secular_Var_Coeff_G[ index ] = wmm.v2;
       Secular_Var_Coeff_H[ index ] = wmm.v3;
     }
+    // debugCoeff( Main_Field_Coeff_G );
+    // debugCoeff( Main_Field_Coeff_H );
   }
+
+  // void debugModel()
+  // {
+  //   debugCoeff( Main_Field_Coeff_G );
+  //   debugCoeff( Main_Field_Coeff_H );
+  // }
+
+  // void debugCoeff( double[] coeff )
+  // {
+  //   Log.v("DistoX", "MaG Model " + nTerms + " max " + nMax );
+  //   for ( int n=0; n<=nMax; ++n ) {
+  //     StringBuilder sb = new StringBuilder();
+  //     for ( int m=0; m<=n; ++m ) {
+  //       int k = (n *(n+1))/2+m;
+  //       sb.append( String.format(Locale.US, "%.8f ", coeff[k] ) );
+  //     }
+  //     Log.v("DistoX", sb.toString() );
+  //   }
+  // }
     
   MagModel( int nt, int nm, int nmsv )
   {
+    // Log.v("DistoX", "MaG Model cstr " + nt + " " + nm + " " + nmsv );
     nTerms = nt;
     nMax   = nm;
     nMaxSecVar = nmsv;
@@ -76,10 +108,12 @@ class  MagModel
       Secular_Var_Coeff_H[i] = 0;
     }
   }
+
   /* This function assigns the first nMax degrees of the Source model to the Assignee model,
    * leaving the other coefficients untouched*/
   void assignCoeffs( MagModel Source, int nMax, int nMaxSecVar)
   {
+    // Log.v("DistoX", "MaG Model assign coeffs " + nMax + " " + nMaxSecVar );
     // assert(nMax <= Source.nMax);
     // assert(nMax <= Assignee.nMax);
     // assert(nMaxSecVar <= Source.nMaxSecVar);
@@ -124,7 +158,10 @@ class  MagModel
    */
   MagModel getTimelyModifyModel( MagDate date )
   {
-    float dy = (float)(date.DecimalYear - epoch);
+    double dy = (date.DecimalYear - epoch);
+    // Log.v("DistoX", "MaG Model get time-modified model " + dy );
+    // date.debugDate();
+
     MagModel ret = new MagModel( nTerms, nMax, nMaxSecVar );
     ret.ModelName   = ModelName;
     ret.EditionDate = EditionDate;
@@ -145,6 +182,7 @@ class  MagModel
         }
       }
     }
+    // ret.debugModel();
     return ret;
   } /* MAG_TimelyModifyMagneticModel */
 }

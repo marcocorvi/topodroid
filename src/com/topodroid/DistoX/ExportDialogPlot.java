@@ -175,7 +175,12 @@ public class ExportDialogPlot extends MyDialog
 
   private void setOptions()
   {
-    switch ( mSelectedPos ) {
+    int selected = mSelectedPos;
+    if ( mParentType == 1 ) {
+      if ( selected > 0 ) ++selected;
+      if ( selected == 1 || selected > 4 ) return;
+    }
+    switch ( selected ) {
       case 0: // Therion
         {
           TDSetting.mTherionSplays = ((CheckBox) findViewById( R.id.therion_splays )).isChecked();
@@ -218,6 +223,7 @@ public class ExportDialogPlot extends MyDialog
       case 4: // Shapefile
         {
           TDSetting.mShpGeoref = ((CheckBox) findViewById( R.id.shp_georeference )).isChecked();
+          // Log.v("DistoX", "shapefile set georef " + TDSetting.mShpGeoref );
         }
         break;
       case 5: // PNG

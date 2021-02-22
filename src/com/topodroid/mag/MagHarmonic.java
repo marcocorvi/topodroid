@@ -19,6 +19,8 @@
  */
 package com.topodroid.mag;
 
+import android.util.Log;
+
 // MAGtype_SphericalHarmonicVariables
 class MagHarmonic
 {
@@ -34,4 +36,11 @@ class MagHarmonic
     cos_mlambda =  new double[ nMax + 1 ];
     sin_mlambda =  new double[ nMax + 1 ];
   }
+
+  // void debugHarmonic()
+  // {
+  //   for (int n=0; n<=nMax; ++n ) {
+  //     Log.v("DistoX", n + " " + RelativeRadiusPower[n] + " " + cos_mlambda[n] + " " + sin_mlambda[n] );
+  //   }
+  // }
 }

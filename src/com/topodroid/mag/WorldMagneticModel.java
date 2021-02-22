@@ -28,7 +28,7 @@ import java.io.IOException;
 
 import android.content.Context;
 
-// import android.util.Log;
+import android.util.Log;
 
 public class WorldMagneticModel
 {
@@ -36,21 +36,23 @@ public class WorldMagneticModel
   // private int numTerms;
   private MagModel mModel;
   private static MagDate  mStartEpoch = null;
-  private static float[]    mGeoidHeightBuffer = null;
+  private static float[]  mGeoidHeightBuffer = null;
   private static WMMcoeff[] mWmmCoeff = null;
   private MagEllipsoid mEllip;
   private MagGeoid     mGeoid;
 
   public WorldMagneticModel( Context context )
   {
+    // Log.v("DistoX", "WMM cstr" );
     int n_max = 12;
     int n_terms = MagUtil.CALCULATE_NUMTERMS( n_max );
     loadWMM( context, n_terms );
     loadEGM9615( context );
 
     mModel = new MagModel( n_terms, n_max, n_max );
-    mModel.epoch = 2015.0;
-    mModel.CoefficientFileEndDate = mModel.epoch + 5;
+    mModel.setEpoch( mStartEpoch );
+    // mModel.epoch = 2020.0;
+    // mModel.CoefficientFileEndDate = mModel.epoch + 5;
     mModel.setCoeffs( mWmmCoeff );
     mEllip = new MagEllipsoid(); // default values
     mGeoid = new MagGeoid( mGeoidHeightBuffer );
@@ -58,12 +60,14 @@ public class WorldMagneticModel
 
   public MagElement computeMagElement( double latitude, double longitude, double height, int year, int month, int day )
   {
+    // Log.v("DistoX", "Mag date " + year + " " + month + " " + day );
     MagDate date = new MagDate( year, month, day );
     return doComputeMagElement( latitude, longitude, height, date );
   }
 
   public MagElement computeMagElement( double latitude, double longitude, double height, double dec_year )
   {
+    Log.v("DistoX", "Mag date " + dec_year );
     MagDate date = new MagDate( dec_year );
     return doComputeMagElement( latitude, longitude, height, date );
   }
@@ -109,6 +113,9 @@ public class WorldMagneticModel
 
     MagSpherical spherical = mEllip.geodeticToSpherical( geodetic ); // geodetic to Spherical Eqs. 17-18 
     MagModel timedModel    = mModel.getTimelyModifyModel( date );
+
+    // date.debugDate();
+    // timedModel.debugModel();
 
     GeomagLib geomag = new GeomagLib();
 
@@ -203,7 +210,7 @@ public class WorldMagneticModel
         // for ( int k=0; k < N; ++k ) {
         //   fis.read( bval );
         //   int ival = byteToInt( bval );
-        //   float val = ival / 1000.0f;
+        //   double val = ival / 1000.0f;
         //   mGeoidHeightBuffer[k] = val;
         // }
         // fis.close();
@@ -268,6 +275,7 @@ public class WorldMagneticModel
 
   static private void loadWMM( Context context, int num_terms )
   {
+    // Log.v("DistoX", "WMM load WMM coeff " + num_terms );
     {
       if ( mWmmCoeff != null ) return;
       mWmmCoeff = new WMMcoeff[ num_terms ];
@@ -278,7 +286,7 @@ public class WorldMagneticModel
         BufferedReader br = new BufferedReader( fr );
         String line = br.readLine().trim();
         String[] vals = line.split(" ");
-        float start = Float.parseFloat( vals[0] );
+        double start = Double.parseDouble( vals[0] );
         // System.out.println("Start Epoch " + start );
         mStartEpoch = new MagDate( start );
         for ( ; ; ) {
@@ -290,16 +298,16 @@ public class WorldMagneticModel
           ++j; while ( vals[j].length() == 0 ) ++j;
           int m = Integer.parseInt( vals[j] );
           ++j; while ( vals[j].length() == 0 ) ++j;
-          float v0 = Float.parseFloat( vals[j] );
+          double v0 = Double.parseDouble( vals[j] );
           ++j; while ( vals[j].length() == 0 ) ++j;
-          float v1 = Float.parseFloat( vals[j] );
+          double v1 = Double.parseDouble( vals[j] );
           ++j; while ( vals[j].length() == 0 ) ++j;
-          float v2 = Float.parseFloat( vals[j] );
+          double v2 = Double.parseDouble( vals[j] );
           ++j; while ( vals[j].length() == 0 ) ++j;
-          float v3 = Float.parseFloat( vals[j] );
+          double v3 = Double.parseDouble( vals[j] );
           int index = WMMcoeff.index( n, m );
-          // System.out.println(" N,M " + n + " " + m + " " + v0 + " " + v1 );
           mWmmCoeff[index] = new WMMcoeff( n, m, v0, v1, v2, v3 );
+          // Log.v("DistoX", "WMM N,M " + n + " " + m + " " + v0 + " " + v1 + " " + v2 + " " + v3 );
         }
         fr.close();
       } catch( IOException e ) {

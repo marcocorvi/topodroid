@@ -30,7 +30,7 @@ import java.nio.channels.FileChannel;
 
 import java.util.List;
 
-// import android.util.Log;
+import android.util.Log;
 
 public class ShpPoint extends ShpObject
 {
@@ -66,7 +66,7 @@ public class ShpPoint extends ShpObject
     int dbfLength = 33 + n_fld * 32 + n_pts * dbfRecLen; // [Bytes]
 
     setBoundsPoints( pts, x0, y0, xscale, yscale, cd, sd );
-    // Log.v("DistoX", "POINTZ " + pts.size() + " len " + shpLength + " / " + shxLength + " / " + dbfLength );
+    // Log.v("DistoX", "POINT " + pts.size() + " len " + shpLength + " / " + shxLength + " / " + dbfLength );
     // Log.v("DistoX", "bbox X " + xmin + " " + xmax );
 
     open();
@@ -75,7 +75,7 @@ public class ShpPoint extends ShpObject
     shpBuffer = writeShapeHeader( shpBuffer, SHP_POINT, shpLength );
     shxBuffer = writeShapeHeader( shxBuffer, SHP_POINT, shxLength );
     writeDBaseHeader( n_pts, dbfRecLen, n_fld, fields, ftypes, flens );
-    // Log.v("DistoX", "POINTZ done headers");
+    // Log.v("DistoX", "POINT done headers - nr " + pts.size() );
 
     int cnt = 0;
     for ( DrawingPointPath pt : pts ) {
@@ -83,7 +83,7 @@ public class ShpPoint extends ShpObject
       writeShpRecordHeader( cnt, shpRecLen );
       shpBuffer.order(ByteOrder.LITTLE_ENDIAN);   
       shpBuffer.putInt( SHP_POINT );
-      // Log.v("DistoX", "POINTZ " + cnt + ": " + pt.e + " " + pt.s + " " + pt.v + " offset " + offset );
+      // Log.v("DistoX", "POINT " + cnt + ": " + pt.cx + " " + pt.cy + " cd " + cd + " sd " + sd + " scale " + xscale + " " + yscale );
       double x = DrawingUtil.declinatedX( pt.cx, pt.cy, cd, sd );
       double y = DrawingUtil.declinatedY( pt.cx, pt.cy, cd, sd );
       shpBuffer.putDouble( x0 + xscale * x );
@@ -96,10 +96,11 @@ public class ShpPoint extends ShpObject
       fields[3] = Integer.toString( pt.mScrap ); 
       fields[4] = pt.getPointText(); 
       if ( fields[3] == null ) fields[3] = "";
+      if ( fields[4] == null ) fields[4] = "";
       writeDBaseRecord( n_fld, fields, flens );
       ++cnt;
     }
-    // Log.v("DistoX", "POINTZ done records");
+    // Log.v("DistoX", "POINT done records");
     close();
     return true;
   }
