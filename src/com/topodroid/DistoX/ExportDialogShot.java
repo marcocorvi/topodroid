@@ -221,7 +221,9 @@ public class ExportDialogShot extends MyDialog
         break;
       case 19: // Shapefile
         {
-          TDSetting.mShpGeoref = ((CheckBox) findViewById( R.id.shp_georeference )).isChecked();
+          TDSetting.mKmlSplays = ((CheckBox) findViewById( R.id.shp_splays )).isChecked();
+          TDSetting.mKmlStations = ((CheckBox) findViewById( R.id.shp_stations )).isChecked();
+          // TDSetting.mShpGeoref = ((CheckBox) findViewById( R.id.shp_georeference )).isChecked();
         }
         break;
     }
@@ -252,7 +254,9 @@ public class ExportDialogShot extends MyDialog
     ((CheckBox) findViewById( R.id.kml_splays )).setChecked( TDSetting.mKmlSplays );
     ((CheckBox) findViewById( R.id.kml_stations )).setChecked( TDSetting.mKmlStations );
 
-    ((CheckBox) findViewById( R.id.shp_georeference )).setChecked( TDSetting.mShpGeoref );
+    ((CheckBox) findViewById( R.id.shp_splays )).setChecked( TDSetting.mKmlSplays );
+    ((CheckBox) findViewById( R.id.shp_stations )).setChecked( TDSetting.mKmlStations );
+    // ((CheckBox) findViewById( R.id.shp_georeference )).setChecked( TDSetting.mShpGeoref );
 
   }
 

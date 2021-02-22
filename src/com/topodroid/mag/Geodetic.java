@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date june 2020
  *
- * @brief TopoDroid geodetic data and functions
+ * @brief TopoDroid WGS84 geodetic data and functions
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -17,45 +17,125 @@ package com.topodroid.mag;
 
 public class Geodetic
 {
-  static public final double EARTH_A = 6378137.0; // meter
+  static public final double EARTH_A = 6378137.0;          // a - semimajor axis [meter]
   static public final double EARTH_B = 6356752;
+  static public final double EARTH_BA = EARTH_B / EARTH_A; // b/a
   static private final double EARTH_C = Math.sqrt( EARTH_A * EARTH_A - EARTH_B * EARTH_B );
-  static private final double EARTH_E = EARTH_C / EARTH_A;
-  // F = 1 - B/A, flattening = 298.257223563
+  static private final double EARTH_E = EARTH_C / EARTH_A; // e - eccentricity
+  static private final double FLATTENING = 298.257223563; // F = 1/( 1 - B/A ), 
   // 2 * F - F*F = ( 1 + B/A )*( 1 - B/A ) 
   //             = (1 - B^2/A^2) 
   //             = C^2 / A^2
   //             = E^2
 
-  static private final double EARTH_E2 = EARTH_E * EARTH_E;
-  static private final double EARTH_1E2 = 1.0 - EARTH_E2; // (1- e^2)
+  static private final double EARTH_E2 = EARTH_E * EARTH_E; // e^2
+  static private final double EARTH_1E2 = 1.0 - EARTH_E2;   // (1- e^2)
   // double s = Math.sin( latitude * Math.PI/180 );
   // double W = Math.sqrt( 1 - EARTH_E2 * s * s );
   // RADIUS_WE = EARTH_A / W; // principal radius of curvature in the prime vertical plane
   // RADIUS_NS = EARTH_A * EARTH_1E2 / W;
 
-  // exact meridian radius 
-  // static public double meridianRadiusExact( double latitude )
-  // {
-  //   double s = Math.sin( latitude * Math.PI/180 );
-  //   double W = Math.sqrt( 1 - EARTH_E2 * s * s );
-  //   return (EARTH_A * EARTH_1E2 / W) * Math.PI / 180;
-  // }
+  double mLat; // phi latitude
+  double mLng; // longitude
+  double mPsi; // psi = atan( (b/a) tg( mLat ) )
+  double mN;   // grand normal
+  double sw;   // sin(lng)
+  double cw;
+  double sphi;
+  double cphi;
+  double spsi;
+  double cpsi;
 
-  // exact parallel radius
-  // static public double parallelRadiusExact( double latitude )
-  // {
-  //   double s = Math.sin( latitude * Math.PI/180 );
-  //   double c = Math.sin( latitude * Math.PI/180 );
-  //   double W = Math.sqrt( 1 - EARTH_E2 * s * s );
-  //   return (EARTH_A / W) * c * Math.PI / 180;
-  // }
+  // the following four functions are from
+  // K.M. Borokowski "Accurate algoritms to transform geocentric to geodetic coordinates" 
+  // Bull. Geod. 63 (1989) 50-56
+  // 
+  // R = A cos(psi) + H cos(phi)
+  // Z = B sin(psi) + H sin(phi)
+  //
+  // A tan(psi) = B tan(phi)
+  // ==> A sin(psi) cos(phi) = B cos(psi) sin(phi)
+  //
+  // H = ( R - A cos(psi) ) cos(phi) + ( Z - B sin(psi) ) sin(phi) 
+  // ==> ( R - A cos(psi) ) sin(phi) = ( Z - B sin(psi) ) cos(phi)
+  // ==> ( R - A cos(psi) ) A sin(psi) =  ( Z - B sin(psi) ) B cos(psi) 
+  // ==> R A sin(psi) - Z B cos(psi) = ( A^2 - B^2 ) sin(psi) cos(psi)
+  //                                 = C^2 sin(psi) cos(psi)
+  // let tan(w) = (B Z)/(A R)
+  // ==> 2 sin*( psi - w ) = K sin(2 psi)
+  // where K = C^2 /sqrt( (AR)^2 + (BZ)^2 )
+
+  // R = ( N + h ) * cos( lat )
+  // @param phi latitude [deg]
+  // @param h   height [m]
+  public static double geocentricR( double phi, double h ) 
+  { 
+    phi = phi * Math.PI/180.0;
+    double psi = Math.atan( EARTH_BA * Math.tan( phi ) );
+    return EARTH_A * Math.cos(psi) + h * Math.cos(phi); 
+  }
+
+  // Z = ( N (1-e^2) + h ) * sin( lat )
+  // @param phi latitude [deg]
+  // @param h   height [m]
+  public static double geocentricZ( double phi, double h ) 
+  { 
+    phi = phi * Math.PI/180.0;
+    double psi = Math.atan( EARTH_BA * Math.tan( phi ) );
+    return EARTH_A * Math.sin(psi) + h * Math.sin(phi);
+  }
+
+  // compute the geodetic latitude (in degrees)
+  public static double geodeticLat( double r, double z )
+  {
+    if ( r <= 0 ) return 0;
+    // A * ( 1 - (1-B/A) ) = A * B/A = B
+    double b = EARTH_B * ( ( z < 0 )? -1 : 1 );
+    double e = ( ( z + b ) * b / EARTH_A - EARTH_A ) / r;
+    double f = ( ( z - b ) * b / EARTH_A + EARTH_A ) / r;
+    double p = ( 1 + e * f ) * 4.0 / 3.0;
+    double q = 2 * ( e*e - f*f );
+    double d = p*p*p  + q*q;
+    double v = 0;
+    if ( d > 0 ) {
+      double s = Math.sqrt( d ) + q;
+      if ( s > 0 ) {
+        s = Math.exp( Math.log(s) / 3 );
+      } else {
+        s = - Math.exp( Math.log(-s) / 3 );
+      }
+      v = p / s - s;
+      v = - ( 2 * q + v*v*v ) / ( 3 * p );
+    } else {
+      double p1 = Math.sqrt( -p );
+      v = 2 * p1 * Math.cos( Math.acos( q/(p*p1) )/3 );
+    }
+    double g = 0.5 * ( e + Math.sqrt( e*e + v ) );
+    double t = Math.sqrt( g*g + (f - v*g)/(2*g - e) ) - g;
+    double phi = Math.atan( (1 - t*t)*EARTH_A / (2*b*t) );
+    // double h = ( r - a * t) * Math.cos( phi ) + ( z - b ) * Math.sin( phi );
+    return phi * 180.0 / Math.PI;
+  }
+
+  //  t^2 + 2 * b/a * tan(phi) * t - 1 = 0
+  // Note phi [deg] must have been obtained using geodeticLat()
+  public static double geodeticHeight( double r, double z, double phi )
+  {
+    phi = phi * Math.PI / 180;
+    double B = Math.tan( phi ) * EARTH_BA; // b/a * tan(phi)
+    double t = - B + Math.sqrt( 1 + B * B );
+    return ( r - EARTH_A * t) * Math.cos( phi ) + ( z - EARTH_B ) * Math.sin( phi );
+  }
+    
+
+ 
+
 
   // ---------------------------------------------------
   // approximation
 
-  static private final double EARTH_RADIUS1 = (6378137 * Math.PI / 180.0f); // semimajor axis [m]
-  static private final double EARTH_RADIUS2 = (6356752 * Math.PI / 180.0f);
+  static private final double EARTH_RADIUS1 = (6378137 * Math.PI / 180.0); // semimajor axis [m]
+  static private final double EARTH_RADIUS2 = (6356752 * Math.PI / 180.0);
 
   static public double meridianRadiusApprox( double latitude )
   {
