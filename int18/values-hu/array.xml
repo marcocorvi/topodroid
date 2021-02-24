@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-  <!-- TODO string-array name="orientation">
-     <item name="unspecified">unspecified</item>
-     <item name="portrait">portrait</item>
-     <item name="landscape">landscape</item>
-  </string-array -->
+  <string-array name="orientation">
+     <item name="unspecified">határozatlan</item>
+     <item name="portrait">álló</item>
+     <item name="landscape">fekvő</item>
+  </string-array>
 
-  <!-- TODO string-array name="splayDash">
-     <item name="none">none</item>
-     <item name="plan">clino</item>
-     <item name="profile">azimuth</item>
-     <item name="view">view</item>
-  </string-array -->
+  <string-array name="splayDash">
+     <item name="none">nincs</item>
+     <item name="plan">lejtés</item>
+     <item name="profile">irány</item>
+     <item name="view">nézet</item>
+  </string-array>
 
-  <!-- TODO string-array name="feedbackMode">
-     <item name="none">none</item>
-     <item name="sound">sound</item>
-     <item name="heptic">haptic</item>
-  </string-array -->
+  <string-array name="feedbackMode">
+     <item name="none">nincs</item>
+     <item name="sound">hang</item>
+     <item name="heptic">rezgés</item>
+  </string-array>
 
-  <!-- TODO string-array name="canvasLevels">
-     <item name="none">none</item>
-     <item name="class">by symbol</item>
-     <item name="instance">by item</item>
-  </string-array -->
+  <string-array name="canvasLevels">
+     <item name="none">nincs</item>
+     <item name="class">szimbólumok</item>
+     <item name="instance">tételek</item>
+  </string-array>
 
-  <!-- TODO string-array name="csvSeparator">
-     <item name="comma">comma</item>
+  <string-array name="csvSeparator">
+     <item name="comma">vessző</item>
      <item name="pipe">pipe</item>
      <item name="tab">tab</item>
-  </string-array -->
+  </string-array>
 
-  <!-- TODO string-array name="lineContinue">
+  <string-array name="lineContinue">
      <item name="none">none</item>
-     <item name="start">join with start point</item>
-     <item name="end">join with end point</item>
-     <item name="both">join with both ends</item>
-     <item name="continue">continue</item>
-  </string-array -->
-  <!-- FIXME string-array name="unitGrid">
+     <item name="start">kapcsolódás a kezdő ponthoz</item>
+     <item name="end">kapcsolódás a végponthoz</item>
+     <item name="both">kapcsolódás mindkét véghez</item>
+     <item name="continue">folytatás</item>
+  </string-array>
+  <string-array name="unitGrid">
      <item name="meter">méter</item>
      <item name="yard">yard</item>
      <item name="two_tf">2 láb</item>
      <item name="ten_cm">10 cm</item>
-  </string-array -->
+  </string-array>
 
-  <!-- TODO string-array name="unitMeasure">
-     <item name="grid_cell">grid cell</item>
+  <string-array name="unitMeasure">
+     <item name="grid_cell">háló méret</item>
      <item name="meter">meter</item>
      <item name="tf">feet</item>
-  </string-array -->
+  </string-array>
 
-  <!-- TODO string-array name="loopClosure">
+  <string-array name="loopClosure">
      <item name="none">Nincs</item>
      <item name="normal">Normál</item>
      <item name="triangles">Háromszögek</item>
-  </string-array -->
+  </string-array>
 
   <string-array name="survexEol">
      <item name="lf">Linux</item>
@@ -154,11 +154,11 @@
      <item name="file">File napló</item>
   </string-array -->
 
-  <!-- TODO string-array name="connMode">
+  <string-array name="connMode">
      <item name="batch">Ha szükséges</item>
      <item name="continuous">Folyamatos</item>
      <item name="multi">Multi</item>
-  </string-array -->
+  </string-array>
 
   <string-array name="sockType">
      <item name="default">Alapbeállítás</item>
@@ -287,10 +287,10 @@
      <!-- item name="minimum">Minimum</item -->
   </string-array>
 
-  <!-- TODO string-array name="rawCData">
+  <string-array name="rawCData">
      <item name="none">Nincs</item>
      <item name="dec">Decimális</item>
      <item name="hex">Hexadecimális</item>
-  </string-array -->
+  </string-array>
 
 </resources>
