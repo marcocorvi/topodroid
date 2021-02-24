@@ -367,24 +367,24 @@ public class DeviceActivity extends Activity
               mApp_mDData.insertDevice( addr, model, name );
               dev = mApp_mDData.getDevice( addr );
             } else if ( model.startsWith( "Shetland", 0 ) ) { // FIXME SHETLAND
-              if ( TDLevel.overExpert ) {
+              // if ( TDLevel.overExpert ) {
                 mApp_mDData.insertDevice( addr, model, name );
                 dev = mApp_mDData.getDevice( addr );
-              }
+              // }
             } else if ( model.startsWith( "BRIC", 0 ) ) { // FIXME BRIC
-              if ( TDLevel.overExpert ) {
+              // if ( TDLevel.overExpert ) {
                 mApp_mDData.insertDevice( addr, model, name );
                 dev = mApp_mDData.getDevice( addr );
-              }
+              // }
             // } else if ( model.startsWith( "Ble", 0 ) ) { // FIXME BLEX
             //   mApp_mDData.insertDevice( addr, model, name );
             //   dev = mApp_mDData.getDevice( addr );
             }
           }
         } else {
-          if ( ! TDLevel.overExpert ) { // drop SAP and BRIC
-            if ( dev.isSap() || dev.isBric() ) dev = null;
-          }
+          // if ( ! TDLevel.overExpert ) { // drop SAP and BRIC
+          //   if ( dev.isSap() || dev.isBric() ) dev = null;
+          // }
         }
         if ( dev != null ) {
           // // TDLog.Error( "device " + name );
@@ -1016,7 +1016,7 @@ public class DeviceActivity extends Activity
   // from ScanBLEDialoag
   public void setBLEDevice( BluetoothDevice bt_device )
   {
-    Log.v("DistoX-BLE", "Device Activity: TODO set bluetooth LE device");
+    // Log.v("DistoX-BLE", "Device Activity: TODO set bluetooth LE device");
     TDToast.make( "TODO set bluetooth LE device" );
     // set bt_device as current
   }

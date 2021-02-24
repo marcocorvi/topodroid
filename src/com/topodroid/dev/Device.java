@@ -72,7 +72,7 @@ public class Device
 
   public static String modelToName( String model )
   {
-    Log.v("BRIC", "model to name <" + model + ">");
+    // Log.v("BRIC", "model to name <" + model + ">");
     if ( model.startsWith("DistoX-") ) {
       return model.replace("DistoX-", "" );
     } 

@@ -55,7 +55,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class BricComm extends TopoDroidComm
                       implements BleComm
 {
-  private final static boolean PRIMARY_ONLY = false;
+  private final static boolean PRIMARY_ONLY = true;
 
   private ConcurrentLinkedQueue< BleOperation > mOps;
   private int mPendingCommands;
@@ -215,7 +215,7 @@ public class BricComm extends TopoDroidComm
   // from onCharacteristicRead
   public void readedChrt( String uuid_str, byte[] bytes )
   {
-    Log.v("DistoX-BLE", "BRIC comm chrt readed " + uuid_str );
+    // Log.v("DistoX-BLE", "BRIC comm chrt readed " + uuid_str );
     int ret;
     if ( uuid_str.equals( BricConst.MEAS_PRIM ) ) { // this is not executed: PRIM is read from onCharcateristicChanged
       mQueue.put( DATA_PRIM, bytes ); 
@@ -279,7 +279,7 @@ public class BricComm extends TopoDroidComm
   // MEAS_META, MEAS_ERR, and LAST_TIME are not change-notified 
   public void changedChrt( BluetoothGattCharacteristic chrt )
   {
-    Log.v("DistoX-BLE", "BRIC comm changed char ======> " + chrt.getUuid() );
+    // Log.v("DistoX-BLE", "BRIC comm changed char ======> " + chrt.getUuid() );
     int ret;
     String chrt_uuid = chrt.getUuid().toString();
     if ( chrt_uuid.equals( BricConst.MEAS_PRIM ) ) {
@@ -303,7 +303,7 @@ public class BricComm extends TopoDroidComm
   // from onReliableWriteCompleted
   public void completedReliableWrite() 
   { 
-    Log.v("DistoX-BLE", "BRUC comm: reliable write" );
+    // Log.v("DistoX-BLE", "BRUC comm: reliable write" );
     clearPending();
   }
 
@@ -334,7 +334,7 @@ public class BricComm extends TopoDroidComm
         reconnectDevice();
         break;
       default:
-        Log.v("DistoX-BLE", "BRIC comm ***** ERROR " + status + ": reconnecting ...");
+        TDLog.Error("BRIC comm ***** ERROR " + status + ": reconnecting ...");
         reconnectDevice();
     }
     clearPending();
@@ -344,7 +344,7 @@ public class BricComm extends TopoDroidComm
   {
     // notifyStatus( ConnectionState.CONN_DISCONNECTED ); // this will be called by disconnected
     clearPending();
-    Log.v("DistoX-BLE", "BRIC comm Failure: disconnecting ...");
+    // Log.v("DistoX-BLE", "BRIC comm Failure: disconnecting ...");
     closeDevice();
   }
     
@@ -366,7 +366,7 @@ public class BricComm extends TopoDroidComm
     mOps = new ConcurrentLinkedQueue< BleOperation >();
     mPendingCommands = 0;
     clearPending();
-    Log.v("DistoX-BLE", "BRIC comm ***** connect Device = [3a] status WAITING" );
+    // Log.v("DistoX-BLE", "BRIC comm ***** connect Device = [3a] status WAITING" );
     int ret = enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) ); // exec connectGatt()
     // Log.v("DistoX-BLE", "BRIC comm connects ... " + ret);
     doNextOp();
@@ -383,7 +383,7 @@ public class BricComm extends TopoDroidComm
   @Override
   public boolean connectDevice( String address, Handler /* ILister */ lister, int data_type )
   {
-    Log.v("DistoX-BLE", "BRIC comm ***** connect Device");
+    // Log.v("DistoX-BLE", "BRIC comm ***** connect Device");
     mNrPacketsRead = 0;
     mDataType      = data_type;
     return connectBricDevice( TDInstance.getDeviceA(), lister, data_type );
@@ -415,7 +415,7 @@ public class BricComm extends TopoDroidComm
   // from onConnectionStateChange STATE_DISCONNECTED
   public void disconnected()
   {
-    Log.v("DistoX-BLE", "BRIC comm ***** disconnected = [5] status DISCONNECTED" );
+    // Log.v("DistoX-BLE", "BRIC comm ***** disconnected = [5] status DISCONNECTED" );
     clearPending();
     mOps.clear(); 
     mPendingCommands = 0;
@@ -425,7 +425,7 @@ public class BricComm extends TopoDroidComm
 
   public void disconnectGatt()  // called from BleOpDisconnect
   {
-    Log.v("DistoX-BLE", "BRIC comm ***** disconnect GATT = [6] status DISCONNECTED" );
+    // Log.v("DistoX-BLE", "BRIC comm ***** disconnect GATT = [6] status DISCONNECTED" );
     notifyStatus( ConnectionState.CONN_DISCONNECTED );
     mCallback.closeGatt();
   }
@@ -433,7 +433,7 @@ public class BricComm extends TopoDroidComm
   @Override
   public void disconnectDevice()
   {
-    Log.v("DistoX-BLE", "BRIC comm ***** disconnect device = connected:" + mBTConnected );
+    // Log.v("DistoX-BLE", "BRIC comm ***** disconnect device = connected:" + mBTConnected );
     mReconnect = false;
     if ( mBTConnected ) {
       notifyStatus( ConnectionState.CONN_DISCONNECTED );

@@ -230,7 +230,7 @@ public class BleCallback extends BluetoothGattCallback
   // FROM SapCallback
   public void disconnectCloseGatt( )
   { 
-    Log.v("DistoX-BLE", "BLE callback: close GATT");
+    // Log.v("DistoX-BLE", "BLE callback: close GATT");
     // mWriteInitialized = false; 
     // mReadInitialized  = false; 
     if ( mGatt != null ) {
@@ -242,7 +242,7 @@ public class BleCallback extends BluetoothGattCallback
 
   public void disconnectGatt()
   {
-    Log.v("DistoX-BLE", "SAP callback: disconnect GATT");
+    // Log.v("DistoX-BLE", "SAP callback: disconnect GATT");
     // mWriteInitialized = false; 
     // mReadInitialized  = false; 
     if ( mGatt != null ) {

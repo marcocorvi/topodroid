@@ -70,7 +70,7 @@ public class TDInstance
   static BluetoothDevice getBleDevice()
   {
     if ( mBleDevice == null ) initBleDevice();
-    Log.v("DistoX-BLE", "TD Instance: get ble device " + ((mBleDevice == null)? "null" : mBleDevice.getName() ) );
+    // Log.v("DistoX-BLE", "TD Instance: get ble device " + ((mBleDevice == null)? "null" : mBleDevice.getName() ) );
     return mBleDevice;
   }
 
@@ -83,7 +83,7 @@ public class TDInstance
   static void setBleDevice( BluetoothDevice dev ) 
   { 
     mBleDevice = dev;
-    Log.v("DistoX-BLE", "TD Instance: set ble device " + ( (dev==null)? "null" : dev.getName() ) );
+    // Log.v("DistoX-BLE", "TD Instance: set ble device " + ( (dev==null)? "null" : dev.getName() ) );
   }
 
   static boolean hasBleDevice() { return mBleDevice != null; }

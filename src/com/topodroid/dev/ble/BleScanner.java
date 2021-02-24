@@ -13,6 +13,7 @@
 package com.topodroid.dev.ble;
 
 // import com.topodroid.prefs.TDSetting;
+import com.topodroid.utils.TDLog;
 
 import android.util.Log;
 
@@ -72,7 +73,7 @@ public class BleScanner
     // if ( adapter == null ) return false;
 
     if ( mScanning ) {
-      Log.v("DistoX-BLE", "BLE scanner already scanning");
+      TDLog.Error("BLE scanner already scanning");
       return true; // already scanning
     }
     mScanning = true;
@@ -104,7 +105,7 @@ public class BleScanner
 
         @Override public void onScanFailed( int error )
         {
-          Log.v("DistoX-BLE", "BLE scanner on scan fail");
+          TDLog.Error("BLE scanner on scan fail");
           mParent.notifyBleScan( null );
         }
       };

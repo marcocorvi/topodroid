@@ -184,7 +184,7 @@ public class TopoDroidProtocol
             break;
           case Device.DISTO_BRIC4: 
             // TDLog.Error("TD proto: does not handle packet BLE");
-            Log.v("DistoX-BLE", "TD proto: does not handle packet BLE");
+            Log.e("DistoX-BLE", "TD proto: does not handle packet BLE");
             break;
           case Device.DISTO_SAP5: 
             // Log.v("DistoX-BLE", "TD proto: handle packet SAP");

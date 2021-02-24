@@ -445,7 +445,7 @@ public class TopoDroidApp extends Application
 
   void disconnectRemoteDevice( boolean force )
   {
-    Log.v( "DistoX-BLE", "App: disconnect remote device. force " + force );
+    // Log.v( "DistoX-BLE", "App: disconnect remote device. force " + force );
     // TDLog.Log( TDLog.LOG_COMM, "App disconnect RemoteDevice listers " + mListerSet.size() + " force " + force );
     if ( force || mListerSet.size() == 0 ) {
       if ( mComm != null && mComm.isConnected() ) {
@@ -456,7 +456,7 @@ public class TopoDroidApp extends Application
 
   private void deleteComm() // FIXME BLE5
   {
-    Log.v( "DistoX-BLE", "App: delete comm");
+    // Log.v( "DistoX-BLE", "App: delete comm");
     if ( mComm != null ) {
       if ( mComm.isConnected() ) {
         mComm.disconnectRemoteDevice(); 
@@ -475,20 +475,20 @@ public class TopoDroidApp extends Application
   // @param data_type data type ...
   public boolean connectDevice( String address, int data_type ) 
   {
-    Log.v( "DistoX-BLE", "App: connect address " + address + " comm is " + ((mComm==null)? "null" : "non-null") );
+    // Log.v( "DistoX-BLE", "App: connect address " + address + " comm is " + ((mComm==null)? "null" : "non-null") );
     return mComm != null && mComm.connectDevice( address, mListerSet, data_type ); // FIXME_LISTER
   }
 
   public void disconnectComm()
   {
-    Log.v( "DistoX-BLE", "App: disconnect. comm is " + ((mComm==null)? "null" : "non-null") );
+    // Log.v( "DistoX-BLE", "App: disconnect. comm is " + ((mComm==null)? "null" : "non-null") );
     if ( mComm != null ) mComm.disconnectDevice();
   }
 
   public void notifyConnectionState( int state )
   {
     // TODO
-    Log.v("DistoX-BLE", "App: notify conn state " + state + " TODO" );
+    // Log.v("DistoX-BLE", "App: notify conn state " + state + " TODO" );
   }
   // end FIXME_COMM
 
@@ -624,20 +624,20 @@ public class TopoDroidApp extends Application
     //   mComm = new VirtualDistoXComm( this, mVirtualDistoX );
     // } else {
       if ( TDInstance.isDeviceX310() ) {
-        Log.v("DistoX-BLE", "App: create DistoX2 comm");
+        // Log.v("DistoX-BLE", "App: create DistoX2 comm");
         mComm = new DistoX310Comm( this );
       } else if ( TDInstance.isDeviceA3() ) {
-        Log.v("DistoX-BLE", "App: create DistoX1 comm");
+        // Log.v("DistoX-BLE", "App: create DistoX1 comm");
         mComm = new DistoXA3Comm( this );
       } else if ( TDInstance.isDeviceSap() ) {
         String address = TDInstance.deviceAddress();
         BluetoothDevice bt_device = TDInstance.getBleDevice();
-        Log.v("DistoX-BLE", "App: create SAP comm");
+        // Log.v("DistoX-BLE", "App: create SAP comm");
         mComm = new SapComm( this, address, bt_device );
       } else if ( TDInstance.isDeviceBric() ) {
         String address = TDInstance.deviceAddress();
         BluetoothDevice bt_device = TDInstance.getBleDevice();
-        Log.v("DistoX-BLE", "App: create BRIC comm");
+        // Log.v("DistoX-BLE", "App: create BRIC comm");
         mComm = new BricComm( this, this, address, bt_device );
       // } else if ( TDInstance.isDeviceBlex() ) {
       //   address = TDInstance.deviceAddress();
@@ -1251,12 +1251,12 @@ public class TopoDroidApp extends Application
   { 
     deleteComm();
     if ( address == null ) { // null, ..., ...
-      Log.v("DistoX-BLE", "App: set Primary dev: clear");
+      // Log.v("DistoX-BLE", "App: set Primary dev: clear");
       TDInstance.setDeviceA( null );
       address = TDString.EMPTY;
     } else {
       if ( model != null ) { // addr, model, ...
-        Log.v("DistoX-BLE", "App: set Primary dev: addr " + address + " model " + model );
+        // Log.v("DistoX-BLE", "App: set Primary dev: addr " + address + " model " + model );
         TDInstance.setDeviceA( new Device( address, model, 0, 0, null, null ) );
         if ( Device.isBle( TDInstance.deviceType() ) ) TDInstance.initBleDevice();
       } else if ( bt_device != null ) { // addr, null, dev
@@ -1264,16 +1264,16 @@ public class TopoDroidApp extends Application
         // address, model, head, tail, name, nickname
         TDInstance.setDeviceA( new Device( address, model, 0, 0, null, null ) );
         TDInstance.setBleDevice( bt_device );
-        Log.v("DistoX-BLE", "App: create ble comm [2] address " + address + " model " + model + " device " + (bt_device==null? "null" : bt_device.getAddress() ) );
+        // Log.v("DistoX-BLE", "App: create ble comm [2] address " + address + " model " + model + " device " + (bt_device==null? "null" : bt_device.getAddress() ) );
         if ( TDInstance.isDeviceSap() ) {
-          Log.v("DistoX-BLE", "App: create SAP comm [2]");
+          // Log.v("DistoX-BLE", "App: create SAP comm [2]");
           mComm = new SapComm( this, address, bt_device ); 
         } else if ( TDInstance.isDeviceBric() ) {
-          Log.v("DistoX-BLE", "App: create BRIC comm [2]");
+          // Log.v("DistoX-BLE", "App: create BRIC comm [2]");
           mComm = new BricComm( this, this, address, bt_device );
         }
       } else { // addr, null, null
-        Log.v("DistoX-BLE", "App: Primary dev: sddress " + address );
+        // Log.v("DistoX-BLE", "App: Primary dev: sddress " + address );
         // boolean create = Device.isBle( TDInstance.deviceType() );
         TDInstance.setDeviceA( mDData.getDevice( address ) );
         // TDInstance.setBleDevice( null );

@@ -62,7 +62,7 @@ class SapProtocol extends TopoDroidProtocol
   // @return number of bytes set into the write characteristic
   public byte[] handleWrite( )
   {
-    Log.v("DistoX-BLE", "SAP proto: write - pending " + mWriteBuffer.size() );
+    // Log.v("DistoX-BLE", "SAP proto: write - pending " + mWriteBuffer.size() );
     byte[] bytes = null;
     synchronized ( mWriteBuffer ) {
       while ( ! mWriteBuffer.isEmpty() ) {
