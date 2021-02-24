@@ -1251,12 +1251,10 @@ public class TopoDroidApp extends Application
   { 
     deleteComm();
     if ( address == null ) { // null, ..., ...
-      // Log.v("DistoX-BLE", "App: set Primary dev: clear");
       TDInstance.setDeviceA( null );
       address = TDString.EMPTY;
     } else {
       if ( model != null ) { // addr, model, ...
-        // Log.v("DistoX-BLE", "App: set Primary dev: addr " + address + " model " + model );
         TDInstance.setDeviceA( new Device( address, model, 0, 0, null, null ) );
         if ( Device.isBle( TDInstance.deviceType() ) ) TDInstance.initBleDevice();
       } else if ( bt_device != null ) { // addr, null, dev
@@ -1264,16 +1262,12 @@ public class TopoDroidApp extends Application
         // address, model, head, tail, name, nickname
         TDInstance.setDeviceA( new Device( address, model, 0, 0, null, null ) );
         TDInstance.setBleDevice( bt_device );
-        // Log.v("DistoX-BLE", "App: create ble comm [2] address " + address + " model " + model + " device " + (bt_device==null? "null" : bt_device.getAddress() ) );
         if ( TDInstance.isDeviceSap() ) {
-          // Log.v("DistoX-BLE", "App: create SAP comm [2]");
           mComm = new SapComm( this, address, bt_device ); 
         } else if ( TDInstance.isDeviceBric() ) {
-          // Log.v("DistoX-BLE", "App: create BRIC comm [2]");
           mComm = new BricComm( this, this, address, bt_device );
         }
       } else { // addr, null, null
-        // Log.v("DistoX-BLE", "App: Primary dev: sddress " + address );
         // boolean create = Device.isBle( TDInstance.deviceType() );
         TDInstance.setDeviceA( mDData.getDevice( address ) );
         // TDInstance.setBleDevice( null );

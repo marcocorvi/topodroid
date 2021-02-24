@@ -49,15 +49,15 @@ public class TDInstance
 
   public static Device getDeviceA() 
   { 
-    if ( TDLevel.overExpert ) return deviceA;
-    if ( isDeviceBLE( deviceA ) ) return null;
+    // if ( TDLevel.overExpert ) return deviceA;
+    // if ( isDeviceBLE( deviceA ) ) return null;
     return deviceA;
   }
 
   public static Device getDeviceB() 
   { 
-    if ( TDLevel.overExpert ) return deviceB;
-    if ( isDeviceBLE( deviceB ) ) return null;
+    // if ( TDLevel.overExpert ) return deviceB;
+    // if ( isDeviceBLE( deviceB ) ) return null;
     return deviceB;
   }
 
