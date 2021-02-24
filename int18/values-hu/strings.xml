@@ -1130,8 +1130,8 @@ Koppintson a "Bezárás" gombra, hogy ne végezzen semmilyen műveletet.
   <string name="pref_vtopo_splays_title">VisualTopo segédmérések</string>
   <string name="pref_vtopo_splays_summary">Segédmérések exportja a VisualTopo fájlokba</string>
   <string name="pref_vtopo_lrud_title">BJFL a kezdőpontnál</string>
-  <TODO string name="pref_vtopo_lrud_summary">VisualTopo BJFL a kezdőpontnál</string>
-  <UNUSED string name="pref_trobot_names_title">TopoRobot pontnevek</string>
+  <string name="pref_vtopo_lrud_summary">VisualTopo BJFL a kezdőpontnál</string>
+  <!-- UNUSED string name="pref_trobot_names_title">TopoRobot pontnevek</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Pontnevek a TopoRobot program stílusában</string -->
   <string name="pref_ortho_lrud_title">BJFL segédpontok szöge</string>
   <string name="pref_ortho_lrud_summary">A segédmérések és poligonmérések minmális szöge BJFL felmérésnél</string>
@@ -1158,7 +1158,7 @@ Koppintson a "Bezárás" gombra, hogy ne végezzen semmilyen műveletet.
   <string name="pref_svg_labelstroke_title">SVG felirat tulajdonság</string>
   <string name="pref_svg_labelstroke_summary">Szöveg vastagság az SVG-ben</string>
   <string name="pref_svg_linestroke_title">SVG vonal tulajdonság</string>
-  <tring name="pref_svg_linestroke_summary">Vonal vastagság az SVG-ben</string>
+  <string name="pref_svg_linestroke_summary">Vonal vastagság az SVG-ben</string>
   <string name="pref_svg_gridstroke_title">SVG háló tulajdonság</string>
   <string name="pref_svg_gridstroke_summary">Háló vonalak vastagsága az SVG-ben</string>
   <string name="pref_svg_shotstroke_title">SVG poligon tulajdonság</string>
