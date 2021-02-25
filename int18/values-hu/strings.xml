@@ -42,7 +42,7 @@ Tap <b>Bezár</b> nem változtat.
 	    Ha problémákat tapasztal a DistoX csatlakozással, próbálja meg beállítani a nem biztonságos kapcsolatot.\n\n
 	    A vázlatok bemutatásának más beállításai is vannak (ikonméret, címkeméret, vonalvastagság stb.); később beállíthatja őket.
     </string>
-    <string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet</string>
+    <!-- DONT_TRANSLATE string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet</string -->
 
     <string name="POINT">PONT</string>
     <string name="LINE">VONAL</string>
@@ -1087,17 +1087,17 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_cat_drawing">VÁZLATKÉSZÍTÉS</string>
   <string name="pref_cat_import_export">IMPORT_EXPORT</string>
   <string name="pref_cat_exportimport">IMPORT</string>
-  <string name="pref_cat_exportsvx" translatable="false">Survex</string>
-  <string name="pref_cat_exportth"  translatable="false">Therion</string>
-  <string name="pref_cat_exportdat" translatable="false">Compass</string>
-  <string name="pref_cat_exporttro" translatable="false">VisualTopo</string>
-  <string name="pref_cat_exportsvg" translatable="false">SVG</string>
-  <string name="pref_cat_exportdxf" translatable="false">DXF</string>
-  <string name="pref_cat_exportshp" translatable="false">Shapefile</string>
-  <string name="pref_cat_exportpng" translatable="false">PNG</string>
-  <string name="pref_cat_exportkml" translatable="false">KML/GeoJSON</string>
-  <string name="pref_cat_exportcsx" translatable="false">cSurvey</string>
-  <string name="pref_cat_exportcsv" translatable="false">CSV</string>
+  <!-- DONT_TRANSLATE string name="pref_cat_exportsvx" translatable="false">Survex</string -->
+  <!-- DONT_TRANSLATE string name="pref_cat_exportth"  translatable="false">Therion</string -->
+  <!-- DONT_TRANSLATE string name="pref_cat_exportdat" translatable="false">Compass</string -->
+  <!-- DONT_TRANSLATE string name="pref_cat_exporttro" translatable="false">VisualTopo</string -->
+  <!-- DONT_TRANSLATE string name="pref_cat_exportsvg" translatable="false">SVG</string -->
+  <!-- DONT_TRANSLATE string name="pref_cat_exportdxf" translatable="false">DXF</string -->
+  <!-- DONT_TRANSLATE string name="pref_cat_exportshp" translatable="false">Shapefile</string -->
+  <!-- DONT_TRANSLATE string name="pref_cat_exportpng" translatable="false">PNG</string -->
+  <!-- DONT_TRANSLATE string name="pref_cat_exportkml" translatable="false">KML/GeoJSON</string -->
+  <!-- DONT_TRANSLATE string name="pref_cat_exportcsx" translatable="false">cSurvey</string -->
+  <!-- DONT_TRANSLATE string name="pref_cat_exportcsv" translatable="false">CSV</string -->
 
   <string name="pref_cat_calib">KALIBRÁCIÓK</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
@@ -1531,6 +1531,7 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_algo_min_delta_title">Min-algo delta</string>
   <string name="pref_algo_min_delta_summary">Min-algo group G^M.x súlyozása</string>
 
+<!-- DONT_TRANSLATE
   <string name="pref_log_stream_summary" translatable="false">Log output stream</string>
   <string name="pref_log_stream_title" translatable="false">Log stream</string>
   <string name="pref_log_append" translatable="false">append logs</string>
@@ -1558,11 +1559,12 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_log_ptopo" translatable="false">PocketTopo</string>
   <string name="pref_log_sensor" translatable="false">Sensors</string>
   <string name="pref_log_shot" translatable="false">Shots</string>
-  <!-- UNUSED string name="pref_log_sync" translatable="false">Cosurveying</string -->
+  <! - - UNUSED string name="pref_log_sync" translatable="false">Cosurveying</string - - >
   <string name="pref_log_survey" translatable="false">Surveys</string>
   <string name="pref_log_therion" translatable="false">Therion</string>
   <string name="pref_log_units" translatable="false">Units</string>
   <string name="pref_log_zip" translatable="false">ZIP</string>
+-->
 
   <!-- UNUSED string name="line_bezier">Bezier</string -->
   <!-- UNUSED string name="line_fine">fine</string -->
