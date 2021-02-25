@@ -1406,21 +1406,21 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_line_units_title">Vonal mértékegység</string>
   <string name="pref_line_units_summary">Rajz vonal mértékegység</string>
   <string name="pref_linesnap_title">Vonal/felület illesztés</string>
-  <!-- TODO string name="pref_linesnap_summary">Enable line/area snap action</string -->
-  <!-- TODO string name="pref_linecurve_title">Smooth/Straigten segment</string -->
-  <!-- TODO string name="pref_linecurve_summary">Smooth/Straighten line segment action</string -->
-  <!-- TODO string name="pref_linestraight_title">Straigten lines</string -->
-  <!-- TODO string name="pref_linestraight_summary">Straighten whole line action</string -->
-  <!-- TODO string name="pref_path_multiselect_title">Path multiselection</string -->
-  <!-- TODO string name="pref_path_multiselect_summary">Path multiselection action</string -->
-  <!-- TODO string name="pref_composite_actions_title">Composite actions</string -->
-  <!-- TODO string name="pref_composite_actions_summary">Enable line/area long-tap actions</string -->
-  <!-- TODO string name="pref_plane_interpolation_title">Plane interpolation</string -->
-  <!-- TODO string name="pref_plane_interpolation_summary">Plane interpolation action</string -->
-  <!-- TODO string name="pref_plot_split_title">Sketch split/merge</string -->
-  <!-- TODO string name="pref_plot_split_summary">Sketch split and merge actions</string -->
-  <!-- TODO string name="pref_stylus_size_title">Stylus size</string -->
-  <!-- TODO string name="pref_stylus_size_summary">Stylus size [0: ignore]</string -->
+  <string name="pref_linesnap_summary">Vonal/terület megfordításának engedélyezése</string>
+  <string name="pref_linecurve_title">Sima/Kiegyenesített szakasz</string>
+  <string name="pref_linecurve_summary">Sima/Kiegyenesített vonal szakasz lehetőség</string>
+  <string name="pref_linestraight_title">Kiegyenesített vonal</string>
+  <string name="pref_linestraight_summary">Egyenesítse az egész vonalat</string>
+  <string name="pref_path_multiselect_title">Útvonalas többes kiválasztás</string>
+  <string name="pref_path_multiselect_summary">Útvonalas többes kiválasztás lehetőség</string>
+  <string name="pref_composite_actions_title">Összetett lehetőség</string>
+  <string name="pref_composite_actions_summary">Vonal/terület hosszú érintés akciók</string>
+  <string name="pref_plane_interpolation_title">Felület interpoláció</string>
+  <string name="pref_plane_interpolation_summary">Felület interpoláció akciók</string>
+  <string name="pref_plot_split_title">Vázlat felosztás / egyesítés</string>
+  <string name="pref_plot_split_summary">Vázlat felosztás és egyesítés akciók</string>
+  <string name="pref_stylus_size_title">Toll méret</string>
+  <string name="pref_stylus_size_summary">Toll méret [0: nincs]</string>
   <string name="pref_fixed_thickness_title">Poligonvonal vastagsága</string>
   <string name="pref_fixed_thickness_summary">Poligonvonal vastagsága</string>
   <!-- UNUSED string name="pref_device_title">Device</string -->
@@ -1429,30 +1429,30 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_checkBT_summary">Ellenőrzi a Bluetooth-t indításkor</string>
   <string name="pref_checkAttached_title">Középvonal ellenőrzése</string>
   <string name="pref_checkAttached_summary">Ellenőrzi, hogy a mérési pontok kapcsolódnak-e egymáshoz</string>
-  <!-- TODO string name="pref_checkExtend_title">Leg extend check</string -->
-  <!-- TODO string name="pref_checkExtend_summary">Check if leg extends are set</string -->
+  <string name="pref_checkExtend_title">Alappont mérés kiterítés ellenőrzés</string>
+  <string name="pref_checkExtend_summary">Ellenőrizze, hogy a kiterítés be van-e állítva</string>
   <string name="pref_backup_number_title">Háttérmentésekszáma</string>
   <string name="pref_backup_number_summary">Automatikusan mentett vázlatok száma</string>
   <string name="pref_backup_interval_title">Háttérmentések intervalluma</string>
   <string name="pref_backup_interval_summary">Minimum intervallum két háttérmentés között [s]</string>
-  <!-- TODO string name="pref_backups_clear_title">Backups clear</string -->
-  <!-- TODO string name="pref_backups_clear_summary">Enable sketch backups clear menu</string -->
+  <string name="pref_backups_clear_title">Mentés törlése</string>
+  <string name="pref_backups_clear_summary">Vázlat biztonsági mentés törlésének engedélyezése menüből</string>
   <!-- UNUSED string name="pref_xtherion_areas_title">xtherion areas</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Save areas a la xtherion</string -->
   <string name="pref_therion_splays_title">Therion segédpontok</string>
   <string name="pref_therion_splays_summary">Rendeljen u:splay sorokat a th2 fájlokhoz</string>
-  <!-- TODO string name="pref_th2_scale_title">Therion scale</string -->
-  <!-- TODO string name="pref_th2_scale_summary">Scale of th2/xvi export</string -->
-  <!-- TODO string name="pref_th2_xvi_title">xvi image</string -->
-  <!-- TODO string name="pref_th2_xvi_summary">Insert xvi image in th2</string -->
+  <string name="pref_th2_scale_title">Therion méretarány</string>
+  <string name="pref_th2_scale_summary">Méretarány a th2/xvi exportnál</string>
+  <string name="pref_th2_xvi_title">xvi kép</string>
+  <string name="pref_th2_xvi_summary">Xvi kép berakása th2-be</string>
   <string name="pref_autoStations_title">Mérési pontok</string>
   <string name="pref_autoStations_summary">Automatikusan hozzáadja a mérési pontokat a th2/png fájlokhoz</string>
-  <!-- TODO string name="pref_auto_xsections_title">Auto X-sections</string -->
-  <!-- TODO string name="pref_auto_xsections_summary">Add x-sections automatically to save/export [csx/svg/dxf/xvi]</string -->
-  <!-- TODO string name="pref_saved_stations_title">Saved stations</string -->
-  <!-- TODO string name="pref_saved_stations_summary">Color saved stations orange</string -->
-  <!-- TODO string name="pref_legonly_update_title">Legs-only refresh</string -->
-  <!-- TODO string name="pref_legonly_update_summary">Redraw midline only on legs download</string -->
+  <string name="pref_auto_xsections_title">Autómatikus kereszszelvény</string>
+  <string name="pref_auto_xsections_summary">Kereszmetszet hozzáadás autómatikusan mentés/exportálásnál [csx/svg/dxf/xvi]</string>
+  <string name="pref_saved_stations_title">Mentett pont</string>
+  <string name="pref_saved_stations_summary">Mentett pont narancs színű</string>
+  <string name="pref_legonly_update_title">Csak poligon újrarajzolás</string>
+  <string name="pref_legonly_update_summary">Poligon újra rajzolás csak pligon mérés letöltésekor</string>
   <string name="pref_full_affine_title">Affin transzformáció</string>
   <string name="pref_full_affine_summary">Vázlat affin transformáció engedélyezése</string>
   <string name="pref_loopClosure_title">Hurokzárás</string>
@@ -1463,20 +1463,20 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_swapLR_summary">Bal-Jobb cseréje a Compassba exportálásnál</string>
   <string name="pref_LRExtend_title">Bal és jobb irányú kiterjedés becslése</string>
   <string name="pref_LRExtend_summary">Bal/Jobb irányú kiterjedés becslése (Compass/VisualTopo import</string>
-  <!-- TODO string name="pref_diving_mode_title">Diving mode</string -->
-  <!-- TODO string name="pref_diving_mode_summary">Enable diving mode</string -->
-  <!-- TODO string name="pref_splay_classes_title">Splay classes</string -->
-  <!-- TODO string name="pref_splay_classes_summary">Enable splay classes and coloring</string -->
-  <!-- TODO string name="pref_splay_color_title">Splay coloring</string -->
-  <!-- TODO string name="pref_splay_color_summary">Enable splay coloring</string -->
+  <string name="pref_diving_mode_title">Búvár mód</string>
+  <string name="pref_diving_mode_summary">Búvár mód engedélyezése</string>
+  <string name="pref_splay_classes_title">Segédmérés osztályozása</string>
+  <string name="pref_splay_classes_summary">Segédmérés osztályozás engedélyezése</string>
+  <string name="pref_splay_color_title">Segédmérés szinezés</string>
+  <string name="pref_splay_color_summary">Segédmérés szinezés engedélyezése</string>
   <string name="pref_splay_as_dot_title">Segédmérés végpont</string>
   <string name="pref_splay_as_dot_summary">Segédmérés megjelenítése végponttal</string>
   <!-- UNUSED string name="pref_splay_active_title">Splay at active station</string -->
   <!-- UNUSED string name="pref_splay_active_summary">Enable splay at the active station</string -->
-  <!-- TODO string name="pref_plot_shift_title">Sketch shift/scale</string -->
-  <!-- TODO string name="pref_plot_shift_summary">Enable sketch shift and scale</string -->
-  <!-- TODO string name="pref_splay_alpha_title">Splay transparency</string -->
-  <!-- TODO string name="pref_splay_alpha_summary">Splay transparency [0: transparent, 100: opaque]</string -->
+  <string name="pref_plot_shift_title">Vázlat mozgatás/nagyítás</string>
+  <string name="pref_plot_shift_summary">Vázlat mosgatás és nagyítás engedélyezése</string>
+  <string name="pref_splay_alpha_title">Segédmérés átlátszóság</string>
+  <string name="pref_splay_alpha_summary">Segédmérés átlátszóság [0: átlátszó, 100: áttetsző]</string>
 
   <string name="pref_picker_type_title">Rajzeszköz választó</string>
   <string name="pref_picker_type_summary">Rajzeszköz választó típusa</string>
@@ -1577,11 +1577,11 @@ Tap <b>Bezár</b> nem változtat.
   <!-- UNUSED string name="alt_ortho">orthometric</string -->
   <!-- UNUSED string name="splay_extend">estimate splay extend</string -->
 
-    <!-- TODO string name="perms_mandatory">TopoDroid cannot run without these permissions:</string -->
-    <!-- TODO string name="perms_optional">TopoDroid may fail without these permissions:</string -->
-    <!-- TODO string name="perm_location">\nLocation</string -->
-    <!-- TODO string name="perm_camera">\nCamera</string -->
-    <!-- TODO string name="perm_microphone">\nMicrophone</string -->
+    <string name="perms_mandatory">A TopoDroid nem futtatható a következő engedélyek nélkül:</string>
+    <string name="perms_optional">A TopoDroid hibázhat a következő engedélyek nélkül:</string>
+    <string name="perm_location">\nHelymeghatározás</string>
+    <string name="perm_camera">\nKamera</string>
+    <string name="perm_microphone">\nMikrofon</string>
 
     <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">
@@ -1596,7 +1596,7 @@ Tap <b>Bezár</b> nem változtat.
 \n
     </string>
 
-<!-- FIRMWARE DIALOG STRINGS CAN BE LEFT UNTRANSLATED : mark OK untranslated strings -->
+<!-- FIRMWARE DIALOG STRINGS CAN BE LEFT UNTRANSLATED -->
   <string name="firmware_title">Firmware Frissítés</string>
   <string name="firmware_file_title">Firmware Fájlok</string>
   <string name="firmware_text">
@@ -1626,18 +1626,18 @@ Tap <b>Bezár</b> nem változtat.
     <string name="no_extra">Hiányzó extra fájl</string>
     <string name="no_path">Hiányzó elérési út</string>
     <string name="no_equate">Nincs egyezés</string>
-    <!-- TODO string name="no_surveys">Nincs mérés</string -->
-    <!-- TODO string name="no_tdconfig">Missing tdconfig file</string -->
-    <!-- TODO string name="no_th_file">No Therion file</string -->
+    <string name="no_surveys">Nincs mérés</string>
+    <string name="no_tdconfig">Hiányzó tdconfig fájl</string>
+    <string name="no_th_file">Nem Therion fájl</string>
     <string name="file_exists">Létező fájl</string>
-    <!-- TODO string name="file_create_fail">File create fail</string -->
-    <!-- TODO string name="oom">Warning. Out of memory</string -->
+    <string name="file_create_fail">Fájl létrehozás hiba</string>
+    <string name="oom">Fifyelem! Megtelt a memória</string>
 
     <string name="ask_delete_tdconfig">TdConfig fájl törlése</string>
-    <!-- TODO string name="ask_remove_equate">Remove equate %1$s ?</string -->
-    <!-- TODO string name="equate_no_station">No station selected</string -->
-    <!-- TODO string name="equate_no_stations">Too few stations</string -->
-    <!-- TODO string name="equate_no_nearby">No station nearby</string -->
+    <string name="ask_remove_equate">Azonosság megszüntetés %1$s ?</string>
+    <string name="equate_no_station">Nincs kiválasztott pont</string>
+    <string name="equate_no_stations">Zúl kevés pont</string>
+    <string name="equate_no_nearby">Nincs közelben pont</string>
 
     <string name="menu_new">ÚJ</string>
     <string name="menu_equate">AZONOSSÁG HOZZÁADÁSA</string>
@@ -1647,10 +1647,10 @@ Tap <b>Bezár</b> nem változtat.
     <string name="overwrite">felülírja</string>
 
     <!-- OK string name="title_help">TopoDroid Manager v. %1$s</string -->
-    <string name="title_export_settings">Import/ beállítások</string>
-    <!-- TODO string name="title_export">Export project as &#8230;</string -->
-    <!-- TODO string name="title_equates">Project Equates</string -->
-    <!-- TODO string name="title_equate_new">Add equate &#8230;</string -->
+    <string name="title_export_settings">Import/export beállítások</string>
+    <string name="title_export">Projekt exportálva a &#8230;</string>
+    <string name="title_equates">Projekt azonos pontok</string>
+    <string name="title_equate_new">Azonos pont hozzáadás &#8230;</string>
     <string name="title_cwd">Jelenlegi munka könyvtár</string>
     <string name="title_settings">TdManager beállítások</string>
     <string name="title_drop">Eldobja a mérést?</string>
