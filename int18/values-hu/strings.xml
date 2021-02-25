@@ -2,60 +2,59 @@
 <resources>
     <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string>
     <string name="no_manual">Nem lehet letölteni a felhasználói kézikönyvet az internetről</string>
-    <!-- TODO string name="user_man_ok">Installed user manual translation</string -->
-    <!-- TODO string name="user_man_fail">Failed to install user manual translation</string -->
+    <string name="user_man_ok">Installált felhasználói kézikönyv fordítás</string>
+    <string name="user_man_fail">Hiba a felhasználói kézikönyv fordítás installálásakor</string>
 
-    <!-- TODO string name="path11_title">IMPORTANT - Android 11</string -->
-    <!-- TODO string name="path11_text">
-Starting with Android 11 the app folders must be under "Documents".\n
-There is nothing to do for a new install of the app on Android-11.\n
-For an old install, before a system upgrade to Android-11, make a backup of your data, copy your "TopoDroid" folder under "Documents"
-and hard-restart TopoDroid.\n\n
-WARNING. From v. 5.0.60 "TopoDroid" uses the folder under Documents if it exists, even on Android-10 and below.\n\n
-Tap "Move" to move your TopoDroid folder to Documents.\n\n
-Tap "Close" not to take any action.
-</string -->
-    <!-- TODO string name="button_no_again">Don\'t ask again</string -->
-    <!-- TODO string name="path11_move">Moved to folder Documents/TopoDroid.\nPlease restart TopoDroid</string -->
-    <!-- TODO string name="path11_not_move">Failed to move to folder Documents/TopoDroid</string -->
+    <string name="path11_title">FONTOS - Android 11</string>
+    <string name="path11_text">
+Az Android 11-től kezdődően az alkalmazásmappáknak a "Documents" alatt kell lenniük.\n
+Nincs mit tenni az alkalmazás új telepítésével az Android-11 rendszeren.\n
+Régi telepítés esetén az Android-11 rendszerre történő frissítés előtt készítsen biztonsági másolatot az adatokról, másolja a "TopoDroid" mappát a "Documents" alá
+és indítsa újra a TopoDroid programot.\n\n
+FIGYELEM. 5.0.60-tól kezdődően a "TopoDroid" a Dokumentumok alatt lévő mappát használja, ha létezik, még az Android-10 és az alatti verziókon is.\n\n
+Tap <b>Mozgat</b> átteszi a TopoDroid könyvtárat a Documents alá.\n\n
+Tap <b>Bezár</b> nem változtat.
+</string>
+    <string name="button_no_again">Ne kérdezzen többet</string>
+    <string name="path11_move">Áthelyezi a mappát a Documents/TopoDroid helyre.\nIndítsd újra a TopoDroid-ot</string>
+    <string name="path11_not_move">Nem sikerült áthelyezni a Documents/TopoDroid helyre</string>
 
     <string name="app_name">TopoDroid</string>
-    <!-- TODO string name="tdm_title">TopoDroid Manager</string -->
+    <string name="tdm_title">TopoDroid Manager</string>
     <string name="double_back">Nyomd meg a vissza gombot újra a kilépéshez</string>
 
-    <!-- TODO string name="new_survey_label">New survey</string -->
-    <!-- TODO string name="distox_label">DistoX</string -->
+    <string name="new_survey_label">Új mérés</string>
+    <string name="distox_label">DistoX</string>
 
     <!-- UNUSED string name="version_ask">A TopoDroid frissítése.\nSzeretnéd újratelepíteni a rajzeszközöket?</string -->
     <string name="symbols_ask">Telepíted a rajzeszközök következő verzióját v.%1$s?\n(Jelenlegi v.%2$s)</string>
 
-    <!-- TODO string name="setup_textsize_title">TopoDroid setup. Text size</string -->
-    <!-- TODO string name="setup_buttonsize_title">TopoDroid setup. Button size</string -->
-    <!-- TODO string name="setup_drawingunit_title">TopoDroid setup. Icons size</string -->
-    <!-- TODO string name="setup_done_title">TopoDroid setup. Done</string -->
-    <!-- TODO string name="setup_buttonsample">Button size</string -->
+    <string name="setup_textsize_title">TopoDroid beállítások. Szöveg méret</string>
+    <string name="setup_buttonsize_title">TopoDroid beállítások. Gomb méret</string>
+    <string name="setup_drawingunit_title">TopoDroid beállítások. Ikon méret</string>
+    <string name="setup_done_title">TopoDroid beállítások. Kész</string>
+    <string name="setup_buttonsample">Gomb méret</string>
 
-    <!-- TODO string name="setup_textsize">Set the text size.\nYou can always change this later thru the main window settings.</string -->
-    <!-- TODO string name="setup_buttonsize">Set the button size.\nYou can always change this later thru the main window settings.</string -->
-    <!-- TODO string name="setup_drawingunit">Set the sketch icon size.\nYou can always change this later thru the sketch window settings.</string -->
-    <!-- TODO string name="setup_done">The basic setup in done.\n\n
-	    If you experience problems with the DistoX connection, try and set the insecure socket.\n\n
-	    Other settings concern the presentation in the sketching window (icon size, label size, line width, etc.)
-	    you should set them to your needs./n/n
-    </string -->
-    <!-- OK string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
+    <string name="setup_textsize">Állítsa be a szöveg méretét.\nEzt később bármikor megváltoztathatja a főablak beállításain keresztül.</string>
+    <string name="setup_buttonsize">Állítsa be a gombok méretét.\nEzt később bármikor megváltoztathatja a főablak beállításain keresztül.</string>
+    <string name="setup_drawingunit">Állítsa be a vázlat ikonok méretét.\nEzt később bármikor megváltoztathatja a főablak beállításain keresztül.</string>
+    <string name="setup_done">Az alapbeállítás kész.\n\n
+	    Ha problémákat tapasztal a DistoX csatlakozással, próbálja meg beállítani a nem biztonságos kapcsolatot.\n\n
+	    A vázlatok bemutatásának más beállításai is vannak (ikonméret, címkeméret, vonalvastagság stb.); később beállíthatja őket.
+    </string>
+    <string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet</string>
 
     <string name="POINT">PONT</string>
     <string name="LINE">VONAL</string>
     <string name="AREA">TERÜLET</string>
     <string name="HELP">SEGÍTSÉG</string>
     <string name="STATION">MÉRÉSI PONT</string>
-    <!-- TODO string name="UP">UPWARD</string -->
-    <!-- TODO string name="DOWN">DOWNWARD</string -->
+    <string name="UP">FELFELÉ</string>
+    <string name="DOWN">LEFELÉ</string>
 
-    <!-- TODO string name="xsplay">X</string -->
-    <!-- TODO string name="hsplay">H</string -->
-    <!-- TODO string name="vsplay">V</string -->
+    <string name="xsplay">X</string>
+    <string name="hsplay">H</string>
+    <string name="vsplay">V</string>
 
     <string name="cut">VÁGÁS</string>
     <string name="copy">MÁSOLÁS</string>
@@ -68,19 +67,19 @@ Tap "Close" not to take any action.
 
     <string name="thp_user">felhasználó</string>
     <string name="thp_label">felirat</string>
-    <!-- TODO string name="thp_section">section</string -->
-    <!-- TODO string name="thp_station">station</string -->
-    <!-- UNUSED string name="thp_danger">danger</string -->
+    <string name="thp_section">metszet</string>
+    <string name="thp_station">mérési pont</string>
+    <!-- UNUSED string name="thp_danger">veszély</string -->
     <string name="thl_user">felhasználó</string>
     <string name="thl_wall">fal</string>
-    <!-- TODO string name="thl_section">section</string -->
+    <string name="thl_section">metszet</string>
     <string name="tha_user">felhasználó</string>
     <string name="tha_water">víz</string>
 
     <string name="make_walls">Falak</string>
     <string name="missing_station">Hiányzó mérési pont</string>
     <string name="station_not_found">Mérési pont nem található</string>
-    <!-- TODO string name="shot_not_found">No shot found</string -->
+    <string name="shot_not_found">Mérés nem található</string>
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->
     <!-- UNUSED string name="missing_line">LINE</string -->
@@ -92,7 +91,7 @@ Tap "Close" not to take any action.
     <string name="failed_snap_to_line">Nincs közeli vonal-pont, melyhez a terület határa illeszthető</string>
     <string name="failed_snap_to_point">Nincs közeli pont, amihez a pont illeszthető</string>
     <string name="failed_snap_to_splays">Nincs közeli segédpont, amihez a vonal illeszthető</string>
-    <!-- TODO string name="failed_append_to_line">Failed to append to another line</string -->
+    <string name="failed_append_to_line">Nem sikerült másik vonalhoz kapcsolni</string>
 
     <string name="calibration_title">Eszközök kalibrálása</string>
     <string name="calibration_length">Mérőszalag</string>
@@ -102,11 +101,11 @@ Tap "Close" not to take any action.
     <string name="calib_new">Új kalibráció</string>
     <string name="calib_exists">Kalibráció neve foglalt</string>
     <string name="calib_delete">Kalibráció törlése</string>
-    <string name="calib_device_mismatch">FIGYELEM: A kalibrációs fájl másik eszközzel készült</string>
+    <string name="calib_device_mismatch">FIGYELEM: A kalibrációs eszköz nem egyezik</string>
     <string name="calib_no_name">Név megadása kötelező</string>
-    <!-- TODO string name="calib_no_coeff">Calibration coefficients not set</string -->
+    <string name="calib_no_coeff">Kalibrációs állandók nincsenek beállítva</string>
     <!-- REMOVE string name="calib_gm_policy">Eljárás</string -->
-    <!-- TODO string name="calib_gm_policy">Group policy</string -->
+    <string name="calib_gm_policy">Csoportosítási szabály</string>
     <string name="calib_gm_undelete">Helyreállítja a kalibrációs adatokat?</string>
     <string name="calib_saved">Mentett kalibráció</string>
     <string name="calib_updated">Az eszköz kalibrációja frissítve</string>
@@ -118,8 +117,8 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="connect_failed">Failed connect</string -->
     <!-- UNUSED string name="data"> data</string -->
     <string name="using">%1$s használata</string>
-    <!-- OLD string name="calib_error">Átlagos hiba: %1$.4f fok</string -->
-    <!-- TODO string name="calib_error">Average error: %1$.2f degrees (BH delta %2$.3f)</string -->
+    <string name="calib_error">Átlagos hiba: %1$.2f fok (BH delta %2$.3f)</string>
+	<string name="calib_validate_error">Átlagos hiba: %1$.2f fok</string>
     <string name="calib_stddev">Hiba szórása:  %1$.4f fok</string>
     <string name="calib_max_error">Max. hiba: %1$.4f fok</string>
     <string name="calib_ave_std">Pontosság: %1$.4f ± %2$.4f fok</string>
@@ -142,10 +141,11 @@ Tap "Close" not to take any action.
     <string name="device_none">Nincs kiválasztva DistoX</string>
     <!-- UNUSED string name="device_paired">Device is paired</string -->
     <string name="device_reset">DistoX memóriájának újraindítása</string>
-    <!-- TODO string name="device_clear">Clear DistoX memory</string -->
+    <string name="device_clear">DistoX memóriájának törlése</string>
     <string name="device_code">DistoX kódja %1$4d</string>
     <string name="device_firmware">Firmware verzió: %1$d.%2$d</string>
     <string name="device_hardware">Hardware verzió: %1$d.%2$d</string>
+	<!-- UNUSED string name="device_memory">Memory  %1$02x.%2$02x</string -->
     <string name="device_status_angle_grad">Szög mértékegysége: újfok</string>
     <string name="device_status_angle_degree">Szög mértékegysége: fok</string>
     <string name="device_status_compass_on">Iránytű/lejtszögmérő: be</string>
@@ -170,24 +170,24 @@ Tap "Close" not to take any action.
     <string name="extend_right">Jobb</string>
     <string name="extend_vert">Vertikális</string>
     <!-- UNUSED string name="external_prompt">Enter measurement</string -->
-    <string name="splay_at_to">BJFL a mérési pontnál</string>
+    <string name="splay_at_to">BJFL a következő pontnál</string>
     <string name="lrud">BJFL</string>
-    <!-- TODO string name="strike_dip">Strike %1$.0f Dip %2$.0f</string -->
-
+    <string name="strike_dip">Strike %1$.0f Dip %2$.0f</string>
+      <!-- mi ez? -->
     <string name="few_data">Nincs elegendő adat</string>
     <string name="few_iter">Iteráció nem sikerült</string>
     <string name="few_groups">Nincs elegendő csoportosítható adat</string>
-    <!-- TODO string name="found_groups">Found %1$d groups</string -->
-    <!-- TODO string name="regroup">No regroup</string -->
-    <!-- UNUSED string name="few_plots">Not enough sketches</string -->
+    <string name="found_groups">%1$d Magtalált csoport</string>
+    <string name="regroup">Nincs újracsoportosítás</string>
+    <!-- UNUSED string name="few_plots">Nincs elég vázlat</string -->
     <string name="few_calibs">Nincs elegendő kalibráció</string>
     <string name="getting_info">DistoX információk letöltése &#8230;</string>
 
     <string name="calib_import_title">Kalibráció importálása</string>
     <string name="import_title">Felmérés importálása</string>
-    <!-- UNUSED string name="import_wait">Importing file &#8230; please wait &#8230;</string -->
+    <!-- UNUSED string name="import_wait">Fájl importálása &#8230; kérjük várjál &#8230;</string -->
     <string name="import_already">A felmérés már importálva</string>
-    <!-- TODO string name="import_bad">Invalid import file</string -->
+    <string name="import_bad">Hibás importálható fájl</string>
     <string name="import_none">Nincs importálható fájl</string>
     <string name="import_failed">Fájl importálása nem sikerült</string>
     <string name="file_not_found">Fájl nem található</string>
@@ -198,19 +198,21 @@ Tap "Close" not to take any action.
     <string name="import_calib_no_data">Kalib. fájl: nincs adat</string>
     <string name="import_calib_io_error">Kalib. fájl: olvasási hiba</string>
     <string name="import_zip_ok">Zip fájl importálása sikerült</string>
-    <!-- TODO string name="import_zip_newer">Imported zip from more recent version</string -->
+    <string name="import_zip_newer">Importált zip az újabb verzióból</string>
     <!-- UNUSED string name="import_zip_wait">A zip fájl importálása több időt vesz igénybe. Kérem várjon &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Saving sketch &#8230; please wait &#8230;</string -->
     <string name="MT_points_none">Nincs MobileTopographer pont</string>
  
-    <!-- TODO string name="pleasewait">Please wait</string -->
-    <!-- TODO string name="processing">processing &#8230;</string -->
+    <string name="pleasewait">Kérjük várjál</string>
+    <string name="processing">feldolgozva &#8230;</string>
 
     <!-- UNUSED string name="head_tail">Memory: </string -->
     <string name="head_tail_failed">Nem sikerült kiolvasni a DistoX memória indexét</string>
     <string name="head_tail_store_failed">Nem sikerült eltárolni a DistoX memória indexét</string>
     <!-- UNUSED string name="pairing_failed">Pairing failed</string -->
 
+    <string name="datamode_normal">Normál adat-móde</string>
+    <string name="datamode_diving">Búvár adat-móde</string>
     <string name="illegal_data_value">Helytelen adat érték</string>
 
     <string name="photo_title">FÉNYKÉP</string>
@@ -229,15 +231,17 @@ Tap "Close" not to take any action.
     <string name="loop_closure_errors">Hurokzárási hibák</string>
     <string name="loop_none">nincs hurok</string>
     <!-- UNUSED string name="long_lat">Long-Lat</string -->
-
-    <!-- TODO string name="error_m">Error [m]</string -->
-    <!-- TODO string name="fmt_error_m">Error %1$.1f m</string -->
-    <!-- TODO string name="fmt_h_geoid">Error %1$.0f m</string -->
-    <!-- TODO string name="fmt_h_ellipsoid">Error %1$.0f m</string -->
+    <!-- UNUSED string name="multistation_plane">Multiple-station plane</string -->
+	
+    <string name="error_m">Hiba [m]</string>
+    <string name="fmt_error_m">Hiba %1$.1f m</string>
+    <string name="fmt_h_geoid">Hiba %1$.0f m</string>
+    <string name="fmt_h_ellipsoid">Hiba %1$.0f m</string>
     <!-- UNUSED string name="depth_error">Waring. Data depth error</string -->
 
     <string name="error_azimuth_required">Azimut szükséges</string>
     <string name="error_length_required">Hossz szükséges</string>
+	<string name="error_depth_required">Mélység szükséges</string>
     <string name="error_clino_required">Lejtszög szükséges</string>
     <string name="error_comment_required">Megjegyzés szükséges</string>
     <string name="error_begin_required">Kezdő hivatkozás szükséges</string>
@@ -248,13 +252,14 @@ Tap "Close" not to take any action.
     <string name="error_group_non_integer">A csoport számnak egész számnak kell lennie</string>
     <string name="error_alt_required">Magassági adat szükséges</string>
     <string name="error_invalid_number">Érvénytelen szám</string>
-    <!-- TODO string name="error_invalid_name">Invalid name</string -->
+    <string name="error_invalid_name">Érvénytelen név</string>
     <string name="error_lat_required">Szélességi adat szükséges</string>
     <string name="error_long_required">Hosszúsági adat szükséges</string>
-    <!-- TODO string name="error_name_exists">Existing project</string -->
-    <!-- TODO string name="error_name_invalid">Invalid project name</string -->
+    <string name="error_name_exists">Létező projekt</string>
+    <string name="error_name_invalid">Érvénytelen projekt név</string>
     <string name="error_name_required">Név szükséges</string>
-    <!-- TODO string name="error_dir_exists">Directory already exists</string -->
+	
+    <string name="error_dir_exists">A konyvtár már létezik</string>
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Referencia állomás szükséges</string>
     <!-- UNUSED string name="error_station_already_fixed">Station already with coordinates</string -->
@@ -281,42 +286,43 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="barrier_del">Következő mérések mutatása</string -->
     <!-- UNUSED string name="hidden_add">Előző mérések elrejtése</string -->
     <!-- UNUSED string name="hidden_del">Előző mérések mutatása</string -->
-    <!-- TODO string name="hidden_show">Show shots beyond station</string -->
+    <string name="hidden_show">Fixpont előtti mérések mutatása</string>
     <!-- UNUSED string name="splays_toggle">Mutassa a fix pontokat </string -->
-    <!-- TODO string name="splays_on_off">Splays</string -->
-    <string name="splays">segédpontok</string>
-    <!-- TODO string name="legs">Legs</string -->
+    <string name="splays_on_off">Segédmérések</string>
+    <string name="splays">segédmérések is</string>
+    <string name="legs">Poligon mérések</string>
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
-    <!-- TODO string name="fmt_id">ID %1$s</string -->
-    <!-- TODO string name="fmt_latitude">Latitude %1$s</string -->
-    <!-- TODO string name="fmt_longitude">Longitude %1$s</string -->
-    <!-- TODO string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string --> 
+    <string name="fmt_id">Azonosító %1$s</string>
+    <string name="fmt_latitude">Szélesség %1$s</string>
+    <string name="fmt_longitude">Hosszúság %1$s</string>
+    <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string> 
+	
     <string name="fixed">csavarral állandósított</string>
     <string name="painted">felfestett</string>
 
-    <!-- TODO string name="cbd_title">Base directory</string -->
-    <!-- TODO string name="cwd">TopoDroid project directory</string -->
-    <!-- TODO string name="empty_cwd">Empty project name</string -->
-    <!-- TODO string name="bad_cbd">Base directory inexistent or not writable</string -->
+    <string name="cbd_title">Kezdő könyvtár</string>
+    <string name="cwd">TopoDroid projekt könyvtár</string>
+    <string name="empty_cwd">Hiányzó projekt név</string>
+    <string name="bad_cbd">Kezdő könyvtár nem létezik vagy nem írható</string>
     <string name="bad_cwd">Projekt neve nem lehet elérési útvonal</string>
     <string name="bad_line">Rossz vonaltípus</string>
     <string name="bad_point">Rossz pont típus</string>
 
-    <!-- TODO string name="no_audio">No audio record</string -->
+    <string name="no_audio">Nincs hang felvétel</string>
     <string name="no_bt">Nincs bluetooth</string>
     <string name="no_calib">Nincs kalibráció</string>
     <string name="no_calib_check">Nincs kalibrációt ell. mérés</string>
     <string name="no_calibration">Nincs kalibráció kiválasztva</string>
     <string name="no_capture_app">Nincs app fénykép készítéshez</string>
     <string name="no_cave3d">Cave3D nincs telepítve</string>
-    <!-- TODO string name="no_data_reduction">No data reduction</string -->
+    <string name="no_data_reduction">Nincs adat redukálás</string>
     <string name="no_db">Nincs adatbázis</string>
     <string name="no_device_address">Nincs kiválasztott eszköz</string>
     <string name="no_device_found">Nem talált eszközt</string>
-    <!-- TODO string name="no_feature_audio">Audio not supported</string -->
+    <string name="no_feature_audio">Hang nem támogatott</string>
     <string name="no_gms">Nincsenek kalibrációs adatok.\nTöltsd le az adatokat </string>
     <string name="no_geo_station">Hiba: nincs geolokalizált mérésipont</string>
-    <!-- TODO string name="no_leg_first">Selection does not start with a leg</string -->
+    <string name="no_leg_first">A kiválasztás nem poligon méréssel kezdődik</string>
     <string name="no_leg_intersection">A szelvény nem keresztez poligont</string>
     <string name="no_location_data">Nincs hely adat</string>
     <string name="no_paired_device">Nincs párosított eszköz.\nKeress és párosíts egy DistoX-et</string>
@@ -337,20 +343,20 @@ Tap "Close" not to take any action.
     <string name="menu_3d">3D</string>
     <string name="menu_about">INFO</string>
     <string name="menu_area">TERÜLET</string>
-    <!-- TODO string name="menu_audio">AUDIO</string -->
+    <string name="menu_audio">HANG</string>
     <!-- UNUSED string name="menu_attach">KAPCSOL</string -->
     <!-- UNUSED string name="menu_attached">ÖSSZEKAPCSOLT</string -->
     <!-- UNUSED string name="menu_ready">KÉSZ</string -->
-    <!-- TODO string name="menu_backups">CLEAR BACKUPS</string -->
+    <string name="menu_backups">MENTÉSEK TÖRLÉSE</string>
     <string name="menu_calib_check">KALIBR. ELLENŐRZÉS</string>
     <string name="menu_close">BEZÁR</string>
-    <!-- UNUSED string name="menu_clear">CLEAR</string -->
-    <!-- TODO string name="menu_color">CLEAR COLOR</string -->
+    <!-- UNUSED string name="menu_clear">TÖRLÉS</string -->
+    <string name="menu_color">SZÍN TÖRLÉS</string>
     <string name="menu_delete">TÖRÖL</string>
     <string name="menu_detach">SZÉTKAPCSOL</string>
     <!-- UNUSED string name="menu_display">KÉPERNYŐ</string -->
-    <!-- TODO string name="menu_show_deleted">SHOW DELETED</string -->
-    <!-- TODO string name="menu_hide_deleted">HIDE DELETED</string -->
+    <string name="menu_show_deleted">TÖRÖLTEK MUTATÁSA</string>
+    <string name="menu_hide_deleted">TÖRÖLTEK ELREJTÉSE</string>
     <string name="menu_distox">DISTOX</string>
     <string name="menu_export">EXPORTÁLÁS</string>
     <string name="menu_firmware">FIRMWARE</string>
@@ -358,57 +364,61 @@ Tap "Close" not to take any action.
     <string name="menu_reload">ÚJRATÖLT</string>
     <string name="menu_rename_delete">ÁTNEVEZ/TÖRÖL</string>
     <string name="menu_rename">ÁTNEVEZ</string>
-    <!-- TODO string name="menu_plot_scrap">SCRAPS</string -->
+    <string name="menu_plot_scrap">VARIÁCIÓK</string>
     <string name="menu_switch">ÁTKAPCSOL/</string>
     <string name="menu_help">SÚGÓ</string>
     <!-- UNUSED string name="menu_join_survey">EGYÜTTES FELMÉRÉS</string -->
     <string name="menu_logs">EMLÉKEZTETŐK</string>
     <string name="menu_manual_calibration">KALIBRÁCIÓ</string>
     <string name="menu_options">BEÁLLÍTÁSOK</string>
-    <string name="menu_overview">ÁTTEKINTÉS</string>
-    <!-- TODO string name="menu_packets">PACKETS</string -->
+    <string name="menu_overview">ÁTTEKINTŐ</string>
+    <string name="menu_packets">CSOMAGOK</string>
     <string name="menu_pair">PÁROSÍTÁS</string>
     <string name="menu_palette">PALETTA</string>
     <string name="menu_photo">FOTÓ</string>
     <string name="menu_sensor">SZENZOR</string>
     <string name="menu_scan">KERESÉS</string>
-    <!-- TODO string name="menu_scan_ble">SCAN BTLE</string -->
+    <string name="menu_scan_ble">BTLE KERESÉS</string>
     <!-- UNUSED string name="menu_station">STATIONS</string -->
     <string name="menu_stats">STATISZTIKA</string>
     <string name="menu_survey">FELMÉRÉSI INFORMÁCIÓK</string>
     <!-- UNUSED string name="menu_sync">SZINKRONIZÁLÁS</string -->
     <!-- UNUSED string name="menu_tdr2th2">TH2 SKETCHES</string -->
+	<!-- UPDATES string name="menu_updates">CHECK UPDATES</string -->
     <string name="menu_validate">ELLENŐRZÉS</string>
     <string name="menu_zoom_fit">ABLAK KITÖLTÉSE</string>
 
     <!-- FIXED_ZOOM -->
-    <!-- TODO string name="zoom_fixed">Graph-paper</string -->
+    <string name="zoom_fixed">Rajz felület</string>
 
-    <!-- TODO string name="start_scan">Start scan</string -->
-    <!-- TODO string name="stop_scan">Stop scan</string -->
-    <!-- TODO string name="title_scan">BLE scan</string -->
-    <!-- TODO string name="ble_scan_failed">BLE scan failed</string -->
-    <!-- TODO string name="ble_gatt_failure">BLE failure</string -->
-    <!-- TODO string name="ble_no_remote">No remote device</string -->
-    <!-- TODO string name="ble_control">Control</string -->
-    <!-- TODO string name="ble_connect">Connect</string -->
-    <!-- TODO string name="ble_disconnect">Disconnect</string -->
-    <!-- TODO string name="bric_scan">Scan</string -->
-    <!-- TODO string name="bric_shot">Shot</string -->
-    <!-- TODO string name="bric_laser">Laser</string -->
-    <!-- TODO string name="bric_off">Off</string -->
+    <string name="start_scan">Keresés indítás</string>
+    <string name="stop_scan">Keresés leállítás</string>
+    <string name="title_scan">BTLE keresés</string>
+    <string name="ble_scan_failed">BTLE keresés eredménytelen</string>
+    <string name="ble_gatt_failure">BTLE hiba</string>
+    <string name="ble_no_remote">Nincs távoli eszköz</string>
+    <string name="ble_control">Ellenőrzés</string>
+    <string name="ble_connect">Kapcsolódás</string>
+    <string name="ble_disconnect">Szétkapcsolás</string>
+    <string name="bric_scan">Keresés</string>
+    <string name="bric_shot">Mérés</string>
+    <string name="bric_laser">Lézer</string>
+    <string name="bric_off">Ki</string>
 
-
-    <string name="popup_join_pt">Ugrás a legközelebbi pontra</string>
-    <string name="popup_snap_ln">Ugrás a legközelebbi vonalra</string>
-    <string name="popup_snap_to_splays">Ugrás a legközelebbi segédpontra</string>
+    <string name="popup_join_pt">Kapcsolás a legközelebbi pontra</string>
+    <string name="popup_snap_ln">Mozgatás a legközelebbi vonalra</string>
+    <string name="popup_snap_to_splays">Mozgatás a legközelebbi segédpontra</string>
     <string name="popup_split_pt">Pont duplázása</string>
-    <!-- TODO string name="popup_split_pts">Adds points</string -->
+    <string name="popup_split_pts">Pont hozzáadása</string>
     <string name="popup_split_ln">Vonal elmetszése pontnál</string>
     <string name="popup_sharp_pt">Szakasz kiegyenesítése</string>
     <string name="popup_curve_pt">Szakasz simítása</string>
     <string name="popup_remove_pt">Pont eltávolítása</string>
-    <!-- TODO string name="popup_append_line">Append to line</string -->
+    <string name="popup_append_line">Kapcsolódás vonalhoz</string>
+	<string name="popup_multiselect">Többes választás</string>
+    <string name="popup_delete">Törlés</string>
+    <string name="popup_decimate">Tizedel</string>
+    <string name="popup_join">Kapcsol</string>
 
     <string name="popup_erase_all">Minden törlése</string>
     <string name="popup_erase_point">Pontok törlése</string>
@@ -428,8 +438,8 @@ Tap "Close" not to take any action.
     <string name="popup_cont_both">Mindkét pont</string>
     <string name="popup_cont_continue">Folytat</string>
 
-    <!-- TODO string name="connection_error">Connection error</string -->
-    <!-- TODO string name="connecting">Connecting &#8230;</string -->
+    <string name="connection_error">Kapcsolódási hiba</string>
+    <string name="connecting">Kapcsolódás &#8230;</string>
     <!-- UNUSED string name="connected_none">Nincs kapcsolat</string -->
     <!-- UNUSED string name="connected_already">Már összekapcsolt</string -->
 
@@ -439,7 +449,7 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="not_implemented">Not implemented yet</string -->
     <string name="null_bitmap">Kép létrehozása nem sikerült [OOM error]</string>
     <string name="photo">fotó</string>
-    <!-- TODO string name="photo_camera">TopoDroid camera</string -->
+    <string name="photo_camera">TopoDroid kamera</string>
     <string name="photo_comment_prompt">Írj megjegyzést a fotóhoz</string>
     <string name="photo_azimuth_clino">Irányszög: %1$.1f Lejtszög %2$.1f</string>
     <!-- UNUSED string name="photo_name">station/name</string -->
@@ -454,7 +464,7 @@ Tap "Close" not to take any action.
     <string name="item_delete">Törlöd az %1$s elemet?</string>
     <string name="splay_delete">Törlöd a %1$s segédmérést?</string>
     <string name="plot_duplicate_name">Vázlat nevének megkettőzése</string>
-    <!-- TODO string name="plot_dangling">Dangling sketch</string -->
+    <string name="plot_dangling">Lógó vázlat</string>
     <!-- UNUSED string name="plot_name">Sketch name</string -->
     <string name="plot_new">Új vázlat</string>
     <string name="plot_not_found">Vázlat nem található</string>
@@ -463,8 +473,9 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="plot_recover">Reload sketch from backup?</string -->
     <string name="plot_start">Felmérés kezdőpontja</string>
     <!-- UNUSED string name="plot_view">Viewed station</string -->
-    <!-- UNUSED string name="read_fail_with_code">Read failure: error code </string -->
+        <string name="read_fail_with_code">Olvasási hiba: hiba kód </string>
     <string name="read_failed">DistoX kiolvasása nem sikerült</string>
+	<string name="swap_hotbit_ok">Kicserélt első bit</string>
     <!-- UNUSED string name="reading_file_failed">Failed file-read</string -->
 
     <string name="saved_file_1">Mentett fájl %1$s</string>
@@ -478,9 +489,9 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="converted_tdr2th2">Converted sketches binary files to th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Overwrite th2 sketch files ?</string -->
     <string name="section_area">A keresztszelvény területe: %1$.1f</string>
-    <!-- TODO string name="section_name">section comment</string -->
+    <string name="section_name">metszet megjegyzés</string>
     <string name="scrap_outline">Körvonal vázlat létrehozása</string>
-    <!-- TODO string name="scrap_string">Sketch scrap: %1$d / %2$d</string -->
+    <string name="scrap_string">Vázlat variáció: %1$d / %2$d</string>
 
     <!-- UNUSED string name="sensor">sensor</string -->
     <string name="sensor_gravity">gravitációs szenzor</string>
@@ -519,35 +530,38 @@ Tap "Close" not to take any action.
     <string name="survey_exists">A felmérés már létezik</string>
     <!-- UNUSED string name="survey_date">yyyy.mm.dd</string -->
     <string name="survey_delete">Törli a felmérést?</string>
-    <!-- TODO string name="survey_move">Move shots to survey %1$s ?</string -->
+    <string name="survey_move">Mérések mozhatása a %1$s felmérésbe?</string>
     <string name="survey_split">Felosztja a felmérést?</string>
     <string name="survey_not_attached">FIGYELEM: nem kapcsolódó mérések</string>
-    <!-- TODO string name="survey_not_extend">WARNING: unset shot extends</string -->
-    <!-- TODO string name="survey_not_attached_extend">WARNING: unattached shots and unset extends</string -->
-    <!-- TODO string name="saturated_coeffs">WARNING: saturated calibration coefficients</string -->
-    <!-- TODO string name="out_of_memory">WARNING: out of memory !</string -->
-    <!-- TODO string name="disk_io_error">CRITICAL: disk i/o error !</string -->
+    <string name="survey_not_extend">FIGYELEM: nincs beállítva a mérés kiterítése</string>
+    <string name="survey_not_attached_extend">FIGYELEM: nincs kapcsolódó mérés és kiterítés</string>
+	<string name="survey_no_data_reduction">FIGYELEM: nincs adat redukálás</string>
+    <string name="saturated_coeffs">FIGYELEM: telített kalibrácoós eggyütthatók</string>
+    <string name="out_of_memory">FIGYELEM: megtelt a memória!</string>
+    <string name="disk_io_error">KRITIKUS: diszk i/o hiba!</string>
     
-    <!-- TODO string name="toporobot_warning">TopoRobot policy is exterimental !</string -->
-    <!-- TODO string name="anomaly_warning">Magnatic anomaly compensation is expert !</string -->
-    <!-- TODO string name="tripod_warning">Tripod policy is advanced !</string -->
-    <!-- TODO string name="coverage_warning">Angle coverage below %1$d %%\nWrite coefficients?</string -->
-    <!-- TODO string name="delta_warning">Average error above %1$.1f\nWrite coefficients?</string -->
-    <!-- UNUSED string name="sap_warning">Warning\n\nSAP surveys attain only UISv2 grade 3.</string -->
+    <string name="toporobot_warning">TopoRobot házirend kísérleti jellegű!</string>
+    <string name="anomaly_warning">Mágneses anomáliák kompenzációja szükséges!</string>
+    <string name="tripod_warning">Állvány szabályok módosultak!</string>
+    <string name="coverage_warning">Szögek különbsége %1$d %% alatt van\nKiírja az eggyütthatókat?</string>
+    <string name="delta_warning">Átlag hiba %1$.1f alatt van\nKiírja az eggyütthatókat?</string>
+    <!-- UNUSED string name="sap_warning">Figyelem\n\nSAP felmérések csak az UISv2 3 fokozatát érik el.</string -->
 
-    <!-- TODO string name="cover_data">Raw data distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_calib">Calibrated data distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_g">G distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_m">M distribution: %1$.2f %%</string -->
-
+	
+    <string name="cover_data">Nyers adatok eloszlása: %1$.2f %%</string>
+    <string name="cover_calib">Kalibrációs adatok eloszlása: %1$.2f %%</string>
+    <string name="cover_g">G eloszlás: %1$.2f %%</string>
+    <string name="cover_m">M eloszlás: %1$.2f %%</string>
+	
+    <string name="empty_clipboard">Üres vágólap</string>
     <string name="cannot_rename">A felmérés nem nevezhető át</string>
     <string name="declination">Mágn. dekl.</string>
     <string name="description">leírás</string>
     <string name="name">név</string>
     <string name="team">csoport</string>
-    <!-- TODO string name="init_station">start station</string -->
-    <!-- TODO string name="second_device">second device</string -->
-    <!-- TODO string name="start_station">start station [%1$s]</string -->
+    <string name="init_station">induló pont</string>
+    <string name="second_device">második eszköz</string>
+    <string name="start_station">induló pont [%1$s]</string>
     <!-- UNUSED string name="toggle_device">Toggle device calibration mode</string -->
     <string name="toggle_failed">Nem sikerült átkapcsolni a DistoX-et</string>
     <string name="toggle_ok">DistoX átkapcsolva kalibrációs üzemmódba</string>
@@ -565,22 +579,23 @@ Tap "Close" not to take any action.
     <string name="zip_saved">Mentve</string>
     <string name="zip_failed">Nem sikerült a felmérés tömörítése</string>
     <string name="unzip_fail">Nem sikerült a felmérés kitömörítése</string>
-    <!-- TODO string name="unzip_fail_sqlite">Failed SQL: delete survey and retry</string -->
+    <string name="unzip_fail_sqlite">Sikertelen SQL: törölje a felmérést és próbálkozzon újra</string>
     <string name="unzip_fail_survey">Kitömörítés nem sikerült: felmérés neve nem megfelelő</string>
     <string name="unzip_fail_db">Kitömörítés nem sikerült: adatbázis verzió nem megfelelő</string>
     <string name="unzip_fail_td">Kitömörítés nem sikerült: TopoDroid verzió nem megfelelő</string>
     <!-- UNUSED string name="zoom_in_out">Zoom in/out</string -->
 
+	
     <string name="survey_info">Felmérés info</string>
     <string name="stat_stddev_m">M norm. szór. %1$.1f százalék</string>
     <string name="stat_stddev_g">G norm. szór. %1$.1f százalék</string>
     <string name="stat_stddev_dip">Lejtszög norm. szór. %1$.1f fok (átlag %2$.1f fok)</string>
-    <string name="stat_component">Statistikai komponensek %1$d</string>
+    <string name="stat_component">Statisztikai komponensek %1$d</string>
     <string name="stat_depth">Mélység %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Kettőzött mérés %1$d # %2$d %3$.1f %4$s</string>
     <string name="stat_leg">Poligonmérések %1$d %2$.1f %3$.1f %4$.1f %5$s</string>
     <string name="stat_length">Hossz  %1$.1f %2$s</string>
-    <!-- TODO string name="stat_extlen">3D length %1$.1f %2$s</string -->
+    <string name="stat_extlen">3D hossz %1$.1f %2$s</string>
     <string name="stat_projlen">Vízszintes vetület %1$.1f %2$s</string>
     <string name="stat_loop">Hurkok %1$d</string>
     <string name="stat_origin">Nulla pont: %1$s</string>
@@ -588,13 +603,13 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="stat_shot">Mérések  %1$d,   Megkettőzött %2$d,   Felszín %3$d</string -->
     <string name="stat_splay">Segédpontok %1$d # %2$d</string>
     <string name="stat_station">Mérési pontok %1$d # %2$d</string>
-    <!-- TODO string name="stat_dangling">Dangling shots %1$d %2$.1f %3$s</string -->
+    <string name="stat_dangling">Lógó mérések %1$d %2$.1f %3$s</string>
     <string name="stat_surface">Felszíni mérések %1$d # %2$d %3$.1f %4$s</string>
     <string name="stat_wens">Ny %1$.0f  K %2$.0f  É %3$.0f  D %4$.0f [%5$s]</string>
     <string name="stat_angle_error">Szöghibák %1$.2f ± %2$.2f</string>
     <string name="shot_title">MÉRÉS %1$s - %2$s</string>
     <string name="shot_data">H %1$.2f  I %2$.1f  L %3$.1f</string>
-    <!-- TODO string name="survey_split_move_title">Survey split/move</string -->
+    <string name="survey_split_move_title">Mérés elvág/mozgat</string>
 
     <string name="survey_stat_duplicate">Kettőzött mérés %1$d %2$.1f %3$s</string>
     <string name="survey_stat_splay">Segédpontok %1$d</string>
@@ -615,6 +630,10 @@ Tap "Close" not to take any action.
     <string name="h_section">Horizontális keresztszelvény</string>
     <!-- UNUSED string name="landscape">landscape</string -->
 
+    <string name="display_view">Képernyő</string>
+    <string name="plan_view">alaprajz</string>
+    <string name="profile_view">oldalnézet</string>
+
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Nem sikerült a DistoX memóriájának kiolvasása</string>
     <string name="distox_err_headtail_io">A DistoX memóriája nem elérhető (I/O hiba)</string>
@@ -625,30 +644,31 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="ask_reset">Visszaállítja a DistoX memóriáját? (Reset)</string -->
     <!-- UNUSED string name="ask_close_survey">Close survey?</string -->
     <string name="ask_gps_service">Bekapcsolja a GPS-t?</string>
-    <!-- TODO string name="ask_backups_clear">Delete sketch backups?</string -->
-    <!-- TODO string name="ask_manual_update">Update user manual translation?\nCurrent v. %1$d Installed v. %2$d</string -->
+    <string name="ask_backups_clear">Törli a vázlat mentéseket?</string>
+    <string name="ask_manual_update">Felülírja a felhasználói kézikönyv fordítását?\nJelenlegi v. %1$d Installált v. %2$d</string>
 
     <!-- UNUSED string name="button_add"       >Hozzáad       </string -->
-    <!-- TODO string name="button_apply"     >Apply</string -->
-    <string name="button_back"      >Vissza    </string>
-    <string name="button_cancel"    >Kilép     </string>
-    <!-- TODO string name="button_change"    >Change    </string -->
-    <string name="button_close"     >Bezár     </string>
-    <!-- TODO string name="button_create"    >Create    </string -->
-    <!-- TODO string name="button_color"     >Color</string -->
-    <string name="button_convert"   >Átalakít  </string>
+    <string name="button_apply"     >Alkalmaz</string>
+    <string name="button_back"      >Vissza</string>
+    <string name="button_cancel"    >Kilép</string>
+    <string name="button_change"    >Változtat</string>
+	<string name="button_clipboard" >Vágólap</string>
+    <string name="button_close"     >Bezár</string>
+    <string name="button_create"    >Létrehoz</string>
+    <string name="button_color"     >Szín</string>
+    <string name="button_convert"   >Átalakít</string>
     <string name="button_current"   >Jelenlegi</string>
-    <string name="button_delete"    >Töröl     </string>
-    <!-- TODO string name="button_duplicate" >Duplicate </string -->
-    <!-- TODO string name="button_surface"   >Surface   </string -->
-    <!-- TODO string name="button_no_extend" >No extend </string -->
+    <string name="button_delete"    >Töröl</string>
+    <string name="button_duplicate" >Megdupláz </string>
+    <string name="button_surface"   >Felület</string>
+    <string name="button_no_extend" >Nincs kiterítés </string>
     <string name="button_eval"      >Kiértékel </string>
-    <!-- TODO string name="button_evalg"     >G      </string -->
-    <!-- TODO string name="button_evalm"     >M      </string -->
+    <string name="button_evalg"     >G</string>
+    <string name="button_evalm"     >M</string>
     <string name="button_eval_cal"  >Kiértékelés kalibrációval</string>
     <string name="button_gps_start" >GPS       </string>
-    <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
-    <!-- TODO string name="button_manual"    >User Manual</string -->
+    <!-- UNUSED string name="button_gps_stop"  >Állj      </string -->
+    <string name="button_manual"    >Felhasználói Kézikönyv</string>
     <!-- UNUSED string name="button_measure"   >Measure   </string -->
     <!-- UNUSED string name="button_photo"   >Fotó</string -->
     <!-- UNUSED string name="button_sensor"  >Sensors</string -->
@@ -656,72 +676,71 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Vázlat</string>
     <string name="button_more"    >Több</string>
-    <!-- TODO string name="button_move"    >Move</string -->
-    <!-- TODO string name="button_next"    >Next</string -->
-    <!-- TODO string name="button_prev"    >Prevous</string -->
-    <!-- TODO string name="button_new"     >New scrap</string -->
-    <!-- TODO string name="button_skip"    >Skip</string -->
-    <!-- TODO string name="button_done"    >Done</string -->
+    <string name="button_move"    >Mozgat</string>
+    <string name="button_next"    >Következő</string>
+    <string name="button_prev"    >Előző</string>
+    <string name="button_new"     >Új variáció</string>
+    <string name="button_skip"    >Átugor</string>
+    <string name="button_done"    >Kész</string>
     <string name="button_lrud"    >BJFL hozzáadása</string>
     <string name="button_ok"        >OK     </string>
-    <!-- TODO string name="button_off"       >off</string -->
-    <!-- TODO string name="button_on"        >on</string -->
+    <string name="button_off"       >ki</string>
+    <string name="button_on"        >be</string>
     <string name="button_open"      >Megnyit</string>
     <string name="button_read"      >Olvas  </string>
-    <!-- UNUSED string name="button_redo"      >Redo      </string -->
-    <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
+    <!-- UNUSED string name="button_redo"      >Újra      </string -->
+    <!-- UNUSED string name="button_regroup"   >Újra csoport</string -->
     <string name="button_dump"      >Biztonsági tár</string>
     <string name="button_rename"    >Átnevez    </string>
-    <!-- TODO string name="button_renumber"  >Renumber</string -->
-    <!-- TODO string name="button_bedding"   >Bedding plane</string -->
+    <string name="button_renumber"  >Átszámoz</string>
+    <string name="button_bedding"   >Alap sík</string>
     <string name="button_replace"   >Cserél   </string>
     <string name="button_reset"     >Visszaállít</string>
     <string name="button_left"      >BAL</string>
     <string name="button_right"     >JOBB</string>
     <string name="button_clear"     >Töröl</string>
-    <!-- TODO string name="button_clear_day" >Clear 1d  </string -->
-    <!-- TODO string name="button_clear_week">Clear 7d  </string -->
-    <!-- TODO string name="button_clear_memory">Clear memory</string -->
+    <string name="button_clear_day" >Töröl 1nap</string>
+    <string name="button_clear_week">Töröl 7nap</string>
+    <string name="button_clear_memory">Memória törlés</string>
     <string name="button_save"      >Ment</string>
     <!-- UNUSED string name="button_select"    >Select    </string -->
     <string name="button_search"    >Keres    </string>
     <string name="button_merge"     >Egyesít     </string>
-    <!-- TODO string name="button_saved"     >Saved station</string -->
+    <string name="button_saved"     >Mentett pont</string>
     <string name="button_split"     >Megoszt     </string>
-    <!-- TODO string name="button_station"   >Center at</string -->
+    <string name="button_station"   >Központ:</string>
     <string name="button_store"     >Tárol</string>
-    <!-- TODO string name="button_swap"      >Swap      </string -->
-    <!-- UNUSED string name="button_start"     >Start</string -->
-    <!-- UNUSED string name="button_stop"      >Stop</string -->
+    <string name="button_swap"      >Csere      </string>
+    <!-- UNUSED string name="button_start"     >Indít</string -->
+    <!-- UNUSED string name="button_stop"      >Állj</string -->
     <string name="button_upload"    >Feltölt</string>
     <string name="button_view"      >Megtekint</string>
     <!-- UNUSED string name="button_zoomfit"   >Zoom fit  </string -->
     <!-- UNUSED string name="button_landscape" >Landscape </string -->
     <!-- UNUSED string name="button_portrait"  >Portrait  </string -->
-    <!-- TODO string name="button_splays">Splays</string -->
+    <string name="button_splays">Segédmérések</string>
 
 
     <string name="button_write"     >Feltölt</string>
-    <string name="button_xsection"  >Keresztszelvény</string>
-    <!-- TODO string name="xsection">X-Section</string -->
+    <string name="button_xsection"  >Keresztmetszet</string>
+    <string name="xsection">Kereszmetszetek</string>
 
     <string name="mode_leg">Poligonmérések</string>
     <string name="mode_splay">Segédmérések</string>
-    <!-- TODO string name="mode_latest">Latest splays</string -->
+    <string name="mode_latest">Utolsó mérés</string>
     <string name="mode_station">Mérési pontok</string>
     <string name="mode_grid">Rács</string>
     <string name="mode_fixed">Rögzített referenciapontok</string>
     <string name="mode_outline">Csak körvonal</string>
     <string name="mode_scale_ref">Vonalas lépték</string>
 
-    <!-- TODO string name="layer_floor">Floor</string -->
-    <!-- TODO string name="layer_fill">Fills</string -->
-    <!-- TODO string name="layer_ceil">Ceiling</string -->
-    <!-- TODO string name="layer_arti">Artifacts</string -->
-    <!-- UNUSED string name="layer_form">Forms</string -->
-    <!-- UNUSED string name="layer_water">Water</string -->
-    <!-- UNUSED string name="layer_text">Text</string -->
-
+    <string name="layer_floor">Fekü</string>
+    <string name="layer_fill">Kitöltés</string>
+    <string name="layer_ceil">Főte</string>
+    <string name="layer_arti">Műtárgyak</string>
+    <!-- UNUSED string name="layer_form">Formák</string -->
+    <!-- UNUSED string name="layer_water">Víz</string -->
+    <!-- UNUSED string name="layer_text">Szöveg</string -->
 
     <!-- UNUSED string name="remote_title">Device Remote Control</string -->
     <string name="remote_on">Lézer BE</string>
@@ -733,22 +752,25 @@ Tap "Close" not to take any action.
     <string name="popup_do_splay">Segéd mérés</string>
     <string name="popup_do_leg">Poligon mérések</string>
     <string name="popup_do_gm_data">Kalibr. mérés</string>
+	<string name="popup_do_laser">Lézer</string>
+    <string name="popup_do_scan">Scan mérés</string>
+
 
     <!-- UNUSED string name="btn_3d">3D</string -->
-    <!-- TODO string name="btn_export">Export</string -->
+    <string name="btn_export">Export</string>
     <string name="btn_import">Importálás</string>
     <string name="btn_install">Telepítés</string>
 
     <string name="symbol_archeo">Régészet</string>
-    <!-- TODO string name="symbol_anthro">Anthro</string -->
+    <string name="symbol_anthro">Antropogén</string>
     <string name="symbol_bio">Biológia</string>
     <string name="symbol_geo">Geológia</string>
-    <!-- TODO string name="symbol_karst">Karst</string -->
+    <string name="symbol_karst">Karszt</string>
     <string name="symbol_mine">Bányászat</string>
     <string name="symbol_paleo">Őslénytan</string>
     <string name="symbol_speleo">Barlangászat</string>
     <string name="symbol_extra">Barlangászat (2)</string>
-
+	
     <string name="symbol_reload">Rajz eszközök</string>
 
     <!-- UNUSED string name="length">Hossz [m]</string -->
@@ -760,56 +782,57 @@ Tap "Close" not to take any action.
     <string name="error_distribution">hiba eloszlás</string>
     <string name="angle_distribution">szögeloszlás</string>
 
-    <!-- TODO string name="btn_horizontal">Horizontal</string -->
+    <string name="btn_horizontal">Vízszintes</string>
 
     <string name="split_nothing">Nem megosztható</string>
     <string name="flip_shots">Mérések_megfordítása </string>
     <string name="copy_items">Tételek másolása</string>
 
-    <!-- TODO string name="man_preface">Preface</string -->
-    <!-- TODO string name="man_intro">1. Introduction</string -->
-    <!-- TODO string name="man_main">2. Main window</string -->
-    <!-- TODO string name="man_device">3. Device window</string -->
-    <!-- TODO string name="man_calib">4. Calibration window</string -->
-    <!-- TODO string name="man_gm">5. Calibration data</string -->
-    <!-- TODO string name="man_survey">6. Survey data</string -->
-    <!-- TODO string name="man_shot">7. Shot list</string -->
-    <!-- TODO string name="man_info">8. Survey info</string -->
-    <!-- TODO string name="man_sketch">9. Sketch window</string -->
-    <!-- TODO string name="man_draw">10. Sketch drawing</string -->
-    <!-- TODO string name="man_xsection">11. Cross-sections</string -->
-    <!-- TODO string name="man_overview">12. Overview window</string -->
-    <!-- TODO string name="man_export">13. Import/export</string -->
-    <!-- TODO string name="man_project">14. Cave projects</string -->
-    <!-- TODO string name="man_threed">15. 3D viewer</string -->
-    <!-- TODO string name="man_index">16. Index</string -->
-    <!-- TODO string name="man_website">* Website</string -->
+    <string name="man_preface">Előszó</string>
+    <string name="man_intro">1. Bevezetés</string>
+    <string name="man_main">2. Fő ablak</string>
+    <string name="man_device">3. Eszköz ablak</string>
+    <string name="man_calib">4. Kalibrációs ablak</string>
+    <string name="man_gm">5. Kalibrációs adatok</string>
+    <string name="man_survey">6. Mérési adatok</string>
+    <string name="man_shot">7. Mérési jegyzőkönyv</string>
+    <string name="man_info">8. Mérési információ</string>
+    <string name="man_sketch">9. Vázlat ablak</string>
+    <string name="man_draw">10. Vázlat rajz</string>
+    <string name="man_xsection">11. Kereszmetszet</string>
+    <string name="man_overview">12. Áttekintő ablak</string>
+    <string name="man_export">13. Import/export</string>
+    <string name="man_project">14. Barlang projekt</string>
+    <string name="man_threed">15. 3D názet</string>
+    <string name="man_index">16. Tárgymutató</string>
+    <string name="man_website">* Weboldal</string>
 
     <string name="help_help">Ez a súgó</string>
     <!-- UNUSED string name="help_manual">User manual</string -->
     <string name="help_measure">Távolságmérés</string>
     <string name="help_measure_type">Mérési mód: fix pont vagy vonallánc</string>
-    <!-- TODO string name="help_measure_undo">Drop the last polyline point</string -->
+    <string name="help_measure_undo">Utolsó mérési pont eldobása</string>
     
-    <!-- TODO string name="help_audio">Audio records list</string -->
-    <!-- TODO string name="help_backups">Delete sketch backups</string -->
+    <string name="help_audio">Hang felvétel lista</string>
+    <string name="help_backups">Vázlat mentések törlése</string>
     <string name="help_calib_check">Kalibr. ell. mérések</string>
     <string name="help_close">Súgó bezárása</string>
     <string name="help_coeff">Mutassa a kalibrációs együtthatókat</string>
-    <!-- TODO string name="help_color">Clear splay colors</string -->
+    <string name="help_color">Mérés szín törlése</string>
     <string name="help_continue">Vonal folytatása</string>
     <!-- UNUSED string name="help_contour">Körvonal szerkesztése</string -->
     <string name="help_current_station">Elmentett mérési pontok</string>
     <string name="help_azimuth">Hivatkozás bővítése</string>
-    <!-- TODO string name="help_refresh">Refresh display</string -->
+    <string name="help_refresh">Képernyő frissítés</string>
     <string name="help_device">Eszköz aktivitás bevitele </string>
     <string name="help_add_topodroid">Új felmérés/kalibráció létrehozása</string>
     <string name="help_import">ZIP archívum, vagy felmérés importálása</string>
     <string name="help_symbol">Rajzeszközök engedélyezése/tiltása</string>
-    <!-- TODO string name="help_therion">Cave project manager</string -->
+    <string name="help_therion">Barlang projekt szervező</string>
+	    <string name="help_cave3d">Cave3D, 3D nézet</string>
     <!-- UNUSED string name="help_database">Database viewer app (SQliteViewer)</string -->
     <string name="help_prefs">Preferenciák szerkesztése</string>
-    <string name="help_log">Naplózási beállítások engedélyezése/tiltása</string>
+    <string name="help_log">Naplózási beállítások</string>
     <!-- UNUSED string name="help_join_survey">Együttes felmérés</string -->
     <string name="help_info_topodroid">TopoDroid információk</string>
     <string name="help_download">Adatok letöltése</string>
@@ -818,7 +841,7 @@ Tap "Close" not to take any action.
     <string name="help_display_calib">Törölt mérések láthatóak/nem </string>
     <string name="help_validate">Kalibráció érvényesítése</string>
     <string name="help_overview">Aktivitás áttekintése</string>
-    <!-- TODO string name="help_packets">DistoX packets dialog</string -->
+    <string name="help_packets">DistoX csomag párbeszédpanel</string>
     <string name="help_plot">Vázlat aktivitás megtekintése</string>
     <string name="help_note">Felmérési jegyzetek szerkesztése</string>
     <string name="help_bluetooth">Bluetooth kapcsolat újraindítása</string>
@@ -827,19 +850,20 @@ Tap "Close" not to take any action.
     <string name="help_info_shot">Felmérési statisztikák</string>
     <string name="help_survey_info">Felmérési információk</string>
     <string name="help_undelete">Törölt elemek visszaállítása</string>
-    <string name="help_photo">Fényképek párbeszédpanel</string>
-    <string name="help_sensor">Mérések párbeszédpanel</string>
+	<!-- UPDATES string name="help_updates">Check for app version updates</string -->
+    <string name="help_photo">Fényképek</string>
+    <string name="help_sensor">Mérések</string>
     <string name="help_3d">3D nézőke (Cave3D)</string>
     <!-- UNUSED string name="help_move">Mozgatás/zoom mód</string -->
     <string name="help_draw">Rajz mód</string>
     <string name="help_edit">Szerkesztés mód</string>
-    <string name="help_refs">Vázlat referencia kiválasztása</string>
+    <string name="help_refs">Vázlat referencia</string>
     <string name="help_rename">Felmérés nevének megváltoztatása</string>
-    <string name="help_plot_rename">Vázlat nevének megváltoztatása</string>
-    <!-- TODO string name="help_plot_scrap">Sketch scraps</string -->
+    <string name="help_plot_rename">Vázlat átnevezése/törlése</string>
+    <string name="help_plot_scrap">Vázlat variációk</string>
     <string name="help_plot_switch">Vázlat nézet átváltása</string>
     <string name="help_search">Mérési pont keresése</string>
-    <string name="help_stats">Felmérési statisztikák párbeszédpanel</string>
+    <string name="help_stats">Felmérési statisztikák</string>
     <string name="help_save_plot">Vázlat exportálása</string>
     <!-- UNUSED string name="help_tdr2th2">Convert sketch binary files to th2</string -->
     <string name="help_toggle_plot">Váltás az alaprajzi és oldalnézet között</string>
@@ -851,23 +875,25 @@ Tap "Close" not to take any action.
     <string name="help_range">Vonalelem mozgatása</string>
     <!-- UNUSED string name="help_clear">Clear selection</string -->
     <string name="help_eraser">Radír mód</string>
-    <!-- TODO string name="help_select_mode">Selection tool</string -->
-    <string name="help_erase_mode">Radír típus</string>
+    <string name="help_select_mode">Választó eszközök</string>
+    <string name="help_erase_mode">Radír eszköz</string>
     <string name="help_erase_size">Radír mérete [S/M/L]</string>
-    <!-- TODO string name="help_select_size">Select tool size [S/M/L]</string -->
+    <string name="help_select_size">Kiválasztás mérete [S/M/L]</string>
     <string name="help_previous">Előző elem a kiválasztásban</string>
     <string name="help_next">Következő elem a kiválasztásban</string>
     <string name="help_recover">Vázlat újratöltése biztonsági mentésből</string>
-    <!-- TODO string name="help_reload_prev">Display newer backup</string -->
-    <!-- TODO string name="help_reload_next">Display older backup</string -->
-    <!-- TODO string name="help_reload_plot">Reload sketch backup</string -->
+    <string name="help_reload_prev">Legújabb képernyő mentés</string>
+    <string name="help_reload_next">Legrégebbi képernyő mentés</string>
+    <string name="help_reload_plot">Vázlat mentés újratöltése</string>
     <string name="help_zoom_fit">Vázlat képernyőméretre igazítása</string>
    
     <string name="help_line_point">Vonal műveletek: egyesítés, felosztás, vágás, törlés</string>
+	
     <!-- UNUSED string name="help_to_point">A kijelölt pont átmozgatása a legközelebbi pontba</string -->
     <!-- UNUSED string name="help_split_point">Pont kétfelé osztása [vonal/terület]</string -->
     <!-- UNUSED string name="help_split_line">Vonal kétfelé osztása adott pontnál</string -->
     <!-- UNUSED string name="help_kink">Egyenes vonal felvétele a pontból [vonal/terület]</string -->
+	
     <string name="help_manual_calibration">Kézi eszközök kalibrálása</string>
     <string name="help_note_plot">A kiválasztott vázlat-elem tulajdonságainak szerkesztése</string>
     <!-- UNUSED string name="help_save">Save changes to survey info</string -->
@@ -883,7 +909,7 @@ Tap "Close" not to take any action.
     <string name="help_read">DistoX kalibrációs együtthatójának kiolvasása és megjelenítése</string>
     <string name="help_info_device">Eszköz információ</string>
     <string name="help_scan">Újabb DistoX-ek keresése</string>
-    <!-- TODO string name="help_scan_ble">Scan for BTLE devices</string -->
+    <string name="help_scan_ble">BTLE eszköz keresése</string>
     <string name="help_pair">Párosítás a kiválasztott DistoX-el</string>
     <string name="help_open_calib">Kalibráció megnyitása</string>
     <string name="help_export_calib">Kalibráció exportálása</string>
@@ -892,35 +918,36 @@ Tap "Close" not to take any action.
     <string name="help_compute">Kalibráció számítása</string>
     <string name="help_write">Kalibrációs együttható feltöltése a DistoX-be</string>
 
-    <!-- TODO string name="help_add_project">Add cave project</string -->
-    <!-- TODO string name="help_add_surveys">Add surveys</string -->
-    <!-- TODO string name="help_drop_surveys">Drop surveys</string -->
-    <!-- TODO string name="help_view_surveys">Display surveys</string -->
-    <!-- TODO string name="help_view_equates">List equates</string -->
-    <!-- TODO string name="help_export_config">Export project</string -->
-    <!-- TODO string name="help_delete_config">Delete project</string -->
-    <!-- TODO string name="help_add_equate">Add surveys equate</string -->
-    <!-- TODO string name="help_equates">List surveys equates</string -->
+    <string name="help_add_project">Barlang projekt hozzáadása</string>
+    <string name="help_add_surveys">Mérés hozzáadása</string>
+    <string name="help_drop_surveys">Mérés eldobása</string>
+    <string name="help_view_surveys">Mérések megjelenítése</string>
+    <string name="help_view_equates">Azonosságok listázása</string>
+    <string name="help_export_config">Projekt Exportálás</string>
+    <string name="help_delete_config">Projekt törlése</string>
+    <string name="help_add_equate">Mérések azonos pontjainak hozzáadása</string>
+    <string name="help_equates">Azonos pontok listázása</string>
 
-    <!-- TODO string name="export_bgcolor">Background color</string -->
-    <!-- TODO string name="export_config">Config file</string -->
-    <!-- TODO string name="export_csv_rawdata">Raw data</string -->
-    <!-- TODO string name="export_dxf_blocks">DXF blocks</string -->
-    <!-- TODO string name="export_georeference">Georeference</string -->
-    <!-- TODO string name="export_grid">Grid</string -->
-    <!-- TODO string name="export_linedir">Line direction</string -->
-    <!-- TODO string name="export_lrud">LRUD</string -->
-    <!-- TODO string name="export_lrud_from">LRUD at FROM station</string -->
-    <!-- TODO string name="export_maps">Maps before data</string -->
-    <!-- TODO string name="export_prefix">Cave-prefix in station names</string -->
-    <!-- TODO string name="export_roundtrip">Roundtrip</string -->
-    <!-- TODO string name="export_scale_png">Resolution</string -->
-    <!-- TODO string name="export_scale_th">Scale 1 :</string -->
-    <!-- TODO string name="export_splays">Splays</string -->
-    <!-- TODO string name="export_splays_named">Named splays</string -->
-    <!-- TODO string name="export_stations">Stations</string -->
-    <!-- TODO string name="export_swap_lr">Swap L/R</string -->
-    <!-- TODO string name="export_xvi">Xvi images</string -->
+    <string name="export_bgcolor">Fehér háttér</string>
+    <string name="export_config">Konfigurációa állomány</string>
+    <string name="export_csv_rawdata">Nyers adat</string>
+    <string name="export_dxf_blocks">Segédmérés végpont</string>
+	<string name="export_dxf_version">Verzió</string>
+    <string name="export_georeference">Georeferencia</string>
+    <string name="export_grid">Háló</string>
+    <string name="export_linedir">Vonal irány</string>
+    <string name="export_lrud">JBFL</string>
+    <string name="export_lrud_from">JBFL a kezdő ponton</string>
+    <string name="export_maps">Térkép az adatok előtt</string>
+    <string name="export_prefix">Barlang-előtag a pont neveknél</string>
+    <string name="export_roundtrip">Körzárás</string><!--Roundtrip-->
+    <string name="export_scale_png">Felbontás</string>
+    <string name="export_scale_th">Skála 1 :</string>
+    <string name="export_splays">Segédmérések</string>
+    <string name="export_splays_named">Elnevezett segédmérések</string>
+    <string name="export_stations">Mérési pontok</string>
+    <string name="export_swap_lr">Bal/Jobb megcserélése</string>
+    <string name="export_xvi">Xvi képek</string>
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
     <!-- UNUSED string name="export_station_stroke">Station stroke</string -->
@@ -930,45 +957,45 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="export_point_stroke">Point stroke</string -->
     <!-- UNUSED string name="export_label_stroke">Label stroke</string -->
   
-    <!-- TODO string name="audio_id_shot">Recording: shot %1$s %2$s</string -->
-    <!-- TODO string name="audio_id_plot">Recording: sketch%1$d</string -->
-    <!-- TODO string name="audio_paused">Paused</string -->
-    <!-- TODO string name="audio_playing">Playing</string -->
-    <!-- TODO string name="audio_recording">Recording</string -->
-    <!-- TODO string name="audio_delete">Delete ?</string -->
-    <!-- TODO string name="audio_overwrite">Overwrite ?</string -->
-    <!-- UNUSED string name="playing">Playing %1$s</string -->
+    <string name="audio_id_shot">Felvétel: mérés %1$s %2$s</string>
+    <string name="audio_id_plot">Felvétel: vázlat%1$d</string>
+    <string name="audio_paused">Szünet</string>
+    <string name="audio_playing">Lejátszás</string>
+    <string name="audio_recording">Felvétel</string>
+    <string name="audio_delete">Törli?</string>
+    <string name="audio_overwrite">Felülírja?</string>
+    <!-- UNUSED string name="playing">Lejátszás %1$s</string -->
   
-    <!-- TODO string name="import_functional">Import only functional settings</string -->
-    <!-- TODO string name="import_lrud">Import LRUD</string -->
-    <!-- TODO string name="import_leg_first">Leg before LRUD splays</string -->
-    <!-- TODO string name="import_diving_datamode">Diving datamode</string -->
+    <string name="import_functional">Csak a funkcionális beállítások betöltése</string>
+    <string name="import_lrud">Import BJFL</string>
+    <string name="import_leg_first">Poligon mérés a BJFL előtt</string>
+    <string name="import_diving_datamode">Merülési adatmód</string>
 
     <string name="title_azimut">Vonatkozási rendszer</string>
     <string name="title_audio">Hangjegyzet</string>
-    <!-- TODO string name="title_audio_list">Audio records</string -->
+    <string name="title_audio_list">Hang felvétel</string>
     <string name="title_calib">Kalibrációk</string>
     <string name="title_calib_check">Kalir. ell. mérések</string>
-    <!-- UNUSED string name="title_check">Calibration-check</string -->
+    <!-- UNUSED string name="title_check">Kalibrációs ellenőrzés</string -->
     <string name="title_coverage">Kalibrációs adatok eloszlása</string>
     <string name="title_coeff">Kalibrációs együtthatók</string>
-    <!-- TODO string name="title_color_picker">Pick a color</string -->
+    <string name="title_color_picker">Válassz színt</string>
     <!-- UNUSED string name="title_contour">Körvonal</string -->
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Elmentett mérési pontok</string>
-    <!-- TODO string name="title_search">Station/Leg search</string -->
-    <!-- TODO string name="title_dangling">Unattached shots</string -->
+    <string name="title_search">Pont/Mérés keresés</string>
+    <string name="title_dangling">Csatolatlan mérés</string>
     <string name="title_device">DistoX-ek</string>
     <string name="title_device_select">Válaszd ki a DistoX-et</string>
     <string name="title_discover">DistoX eszközök keresése &#8230; várj!</string>
     <!-- UNUSED string name="title_draw">Rajzolás</string -->
     <string name="title_draw_area">TERÜLET %1$s</string>
     <string name="title_draw_line">VONAL %1$s</string>
-    <!-- TODO string name="title_draw_line_no_stations">LINE %1$s: no stations</string -->
+    <string name="title_draw_line_no_stations">VONAL %1$s: nincsenek mérési pontok</string>
     <string name="title_draw_point">PONT %1$s</string>
     <string name="title_edit">Szerkesztés</string>
-    <!-- TODO string name="title_edit_user_station">Edit user station </string -->
-    <!-- TODO string name="title_edit_station">Edit station </string -->
+    <string name="title_edit_user_station">Felhasználói pont módosítás </string>
+    <string name="title_edit_station">Pont módosítás </string>
     <string name="title_erase">Radír</string>
     <string name="title_fixed">Helymeghatározások</string>
     <string name="title_fixed_edit">Helymeghatározás szerkesztése</string>
@@ -979,13 +1006,14 @@ Tap "Close" not to take any action.
     <string name="title_mode">Megjelenítési mód</string>
     <string name="title_move">Mozgatás</string>
     <string name="title_note">Felmérési jegyzetek</string>
-    <!-- TODO string name="title_packet_dialog">Packets</string -->
-    <string name="title_photo">Fénykép/Méretek</string>
+    <string name="title_packet_dialog">Csomagok</string>
+    <string name="title_photo">További mérés változtatások</string>
     <string name="title_photo_comment">Fénykép magyarázat</string>
+	<string name="title_photo_view">Fénykép</string>
     <string name="title_plot_save">Vázlat exportálása</string>
     <!-- UNUSED string name="title_plot_merge">Vázlatban egyesít</string -->
     <string name="title_plot_reload">Vázlat újratöltése</string>
-    <!-- TODO string name="title_plot_scraps">Sketch scraps</string -->
+    <string name="title_plot_scraps">Vázlat variációk</string>
     <string name="title_profile_flip">Nézeti vázlat 180 fokos forgatása</string>
     <string name="title_projection">Vetített oldalnézet irányszöge %1$d</string>
     <string name="title_refs">Vázlat hivatkozásai</string>
@@ -993,40 +1021,40 @@ Tap "Close" not to take any action.
     <string name="title_scraps_outline">Körvonal felvázolása</string>
     <!-- UNUSED string name="title_select">Kiválaszt</string -->
 
-    <!-- TODO string name="title_settings_main">TopoDroid main settings</string -->
-    <!-- TODO string name="title_settings_export">TopoDroid import/export settings</string -->
-    <!-- TODO string name="title_settings_import">TopoDroid import settings</string -->
-    <!-- TODO string name="title_settings_csv">CSV export settings</string -->
-    <!-- TODO string name="title_settings_svx">Survex export settings</string -->
-    <!-- TODO string name="title_settings_th">Therion export settings</string -->
-    <!-- TODO string name="title_settings_dat">Compass export settings</string -->
-    <!-- TODO string name="title_settings_csx">cSurvey export settings</string -->
-    <!-- TODO string name="title_settings_tro">VisualTopo export settings</string -->
-    <!-- TODO string name="title_settings_svg">SVG export settings</string -->
-    <!-- TODO string name="title_settings_dxf">DXF export settings</string -->
-    <!-- TODO string name="title_settings_shp">Shapefile export settings</string -->
-    <!-- TODO string name="title_settings_png">PNG export settings</string -->
-    <!-- TODO string name="title_settings_kml">KML export settings</string -->
+    <string name="title_settings_main">TopoDroid fő beállítások</string>
+    <string name="title_settings_export">TopoDroid import/export beállítások</string>
+    <string name="title_settings_import">TopoDroid import beállítások</string>
+    <string name="title_settings_csv">CSV export beállítások</string>
+    <string name="title_settings_svx">Survex export beállítások</string>
+    <string name="title_settings_th">Therion export beállítások</string>
+    <string name="title_settings_dat">Compass export beállítások</string>
+    <string name="title_settings_csx">cSurvey export beállítások</string>
+    <string name="title_settings_tro">VisualTopo export beállítások</string>
+    <string name="title_settings_svg">SVG export beállítások</string>
+    <string name="title_settings_dxf">DXF export beállítások</string>
+    <string name="title_settings_shp">Shapefile export beállítások</string>
+    <string name="title_settings_png">PNG export beállítások</string>
+    <string name="title_settings_kml">KML export beállítások</string>
 
-    <!-- TODO string name="title_settings_sketch">TopoDroid 3d sketch settings</string -->
-    <!-- TODO string name="title_settings_survey">TopoDroid survey settings</string -->
-    <!-- TODO string name="title_settings_splay">TopoDroid splay settings</string -->
-    <!-- TODO string name="title_settings_shot">TopoDroid shot data settings</string -->
-    <!-- TODO string name="title_settings_units">TopoDroid units settings</string -->
-    <!-- TODO string name="title_settings_location">TopoDroid location settings</string -->
-    <!-- TODO string name="title_settings_accuracy">TopoDroid accuracy settings</string -->
-    <!-- TODO string name="title_settings_plot">TopoDroid sketch settings</string -->
-    <!-- TODO string name="title_settings_screen">TopoDroid canvas settings</string -->
-    <!-- TODO string name="title_settings_point">TopoDroid point settings</string -->
-    <!-- TODO string name="title_settings_line">TopoDroid line settings</string -->
-    <!-- TODO string name="title_settings_walls">TopoDroid autowalls settings</string -->
-    <!-- TODO string name="title_settings_draw">TopoDroid drawing settings</string -->
-    <!-- TODO string name="title_settings_erase">TopoDroid erasing settings</string -->
-    <!-- TODO string name="title_settings_edit">TopoDroid editing settings</string -->
-    <!-- TODO string name="title_settings_device">TopoDroid device settings</string -->
-    <!-- TODO string name="title_settings_calib">TopoDroid calibration settings</string -->
-    <!-- TODO string name="title_settings_geek">TopoDroid geek flags settings</string -->
-    <!-- TODO string name="title_settings_log">TopoDroid log settings</string -->
+    <string name="title_settings_sketch">TopoDroid 3d vázlat beállítások</string>
+    <string name="title_settings_survey">TopoDroid mérés beállítások</string>
+    <string name="title_settings_splay">TopoDroid segédmérés beállítások</string>
+    <string name="title_settings_shot">TopoDroid mérési adat beállítások</string>
+    <string name="title_settings_units">TopoDroid mértékegység beállítások</string>
+    <string name="title_settings_location">TopoDroid területi beállítások</string>
+    <string name="title_settings_accuracy">TopoDroid pontossági beállítások</string>
+    <string name="title_settings_plot">TopoDroid vázlat beállítások</string>
+    <string name="title_settings_screen">TopoDroid rajzlap beállítások</string>
+    <string name="title_settings_point">TopoDroid pont beállítások</string>
+    <string name="title_settings_line">TopoDroid vonal beállítások</string>
+    <string name="title_settings_walls">TopoDroid autofal beállítások</string>
+    <string name="title_settings_draw">TopoDroid rajzolás beállítások</string>
+    <string name="title_settings_erase">TopoDroid törlés beállítások</string>
+    <string name="title_settings_edit">TopoDroid módosítás beállítások</string>
+    <string name="title_settings_device">TopoDroid készülék beállítások</string>
+    <string name="title_settings_calib">TopoDroid kalibrációs beállítások</string>
+    <string name="title_settings_geek">TopoDroid geek flags beállítások</string>
+    <string name="title_settings_log">TopoDroid naplózás beállítások</string>
 
     <string name="title_shift">Váltás</string>
     <string name="title_shot_delete">Mérés törlése?</string>
@@ -1040,146 +1068,158 @@ Tap "Close" not to take any action.
     <string name="title_survey_export">felmérés exportálása</string>
     <string name="title_survey_rename">Felmérés átnevezése</string>
     <string name="title_plot_rename">Vázlat átnevezése</string>
-    <!-- TODO string name="title_plot_zoomfit">Zoom fit / Orientation</string -->
+    <string name="title_plot_zoomfit">Zoom teljes / Irány</string>
     <string name="title_calib_export">Kalibráció exportálása</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-    <!-- TODO string name="title_import_tro">VisualTopo import options</string -->
-    <!-- TODO string name="title_import_dat">Compass import options</string -->
+    <string name="title_import_tro">VisualTopo import opciók</string>
+    <string name="title_import_dat">Compass import opciók</string>
 
-  <!-- TODO string name="pref_export_settings">Export settings</string -->
-  <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
+  <string name="exported_settings">Beállítások exportálása %1$s</string>
+  <string name="imported_settings">mportált beállítások</string>
+  <string name="imported_settings_failed">Nem sikerült a beállítások importálása</string>
+  <string name="export_settings_failed">Nem sikerült a beállítások exportálása</string>
+  <string name="pref_export_settings">Beállítások exportálása fájlba</string>
+ <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
   <string name="pref_cat_survey">FELMÉRÉSI ADAT</string>
-  <!-- TODO string name="pref_cat_splay">SPLAY DATA</string -->
+  <string name="pref_cat_splay">SEGÉGMÉRÉS ADAT</string>
   <string name="pref_cat_drawing">VÁZLATKÉSZÍTÉS</string>
   <string name="pref_cat_import_export">IMPORT_EXPORT</string>
-  <!-- TODO string name="pref_cat_exportimport">IMPORT</string -->
-  <!-- OK string name="pref_cat_exportth">Therion</string -->
-  <!-- OK string name="pref_cat_exportdat">Compass</string -->
-  <!-- OK string name="pref_cat_exporttro">VisualTopo</string -->
-  <!-- OK string name="pref_cat_exportsvg">SVG</string -->
-  <!-- OK string name="pref_cat_exportdxf">DXF</string -->
-  <!-- OK string name="pref_cat_exportshp">Shapefile</string -->
-  <!-- OK string name="pref_cat_exportpng">PNG</string -->
-  <!-- OK string name="pref_cat_exportkml">KML/GeoJSON</string -->
-  <!-- OK string name="pref_cat_exportcsv">CSV</string -->
+  <string name="pref_cat_exportimport">IMPORT</string>
+  <string name="pref_cat_exportsvx" translatable="false">Survex</string>
+  <string name="pref_cat_exportth"  translatable="false">Therion</string>
+  <string name="pref_cat_exportdat" translatable="false">Compass</string>
+  <string name="pref_cat_exporttro" translatable="false">VisualTopo</string>
+  <string name="pref_cat_exportsvg" translatable="false">SVG</string>
+  <string name="pref_cat_exportdxf" translatable="false">DXF</string>
+  <string name="pref_cat_exportshp" translatable="false">Shapefile</string>
+  <string name="pref_cat_exportpng" translatable="false">PNG</string>
+  <string name="pref_cat_exportkml" translatable="false">KML/GeoJSON</string>
+  <string name="pref_cat_exportcsx" translatable="false">cSurvey</string>
+  <string name="pref_cat_exportcsv" translatable="false">CSV</string>
 
   <string name="pref_cat_calib">KALIBRÁCIÓK</string>
+  <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
   <string name="pref_cat_device">ESZKÖZÖK</string>
-  <!-- TODO string name="pref_cat_geek">GEEK FLAGS</string -->
-  <!-- UNUSED string name="pref_cat_sketch">3D MODELLEK</string -->
+  <string name="pref_cat_geek">SAJÁT BEÁLLÍTÁSOK</string>
   <!-- UNUSED string name="pref_cat_log">NAPLÓZÁSOK</string -->
 
   <string name="pref_locale_title">Nyelv</string>
   <string name="pref_locale_summary">Nyelv</string>
-  <!-- TODO string name="pref_orientation_title">Screen orientation</string -->
-  <!-- TODO string name="pref_orientation_summary">App screen orientation</string -->
+  <string name="pref_orientation_title">Képernyő irány</string>
+  <string name="pref_orientation_summary">App képernyő irány</string>
 
   <string name="pref_raw_data_title">Nyers adat</string>
   <string name="pref_raw_data_summary">Mutassa a nyers adatot</string>
-  <!-- TODO string name="pref_calib_shot_download_title">Download remote data</string -->
-  <!-- TODO string name="pref_calib_shot_download_summary">Download remote calib data immediately</string -->
+  <string name="pref_calib_shot_download_title">Távoli adat letöltés</string>
+  <string name="pref_calib_shot_download_summary">Azonnal töltse le a kalibrációs adatokat</string>
   <!-- UNUSED string name="pref_bootloader_title">Bootloader</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Enable bootloader</string -->
   <string name="pref_mkeyboard_title">Billentyűzet</string>
   <string name="pref_mkeyboard_summary">Engedélyezze az egyedi billentyűzeteket</string>
-  <!-- TODO string name="pref_no_cursor_title">No keyboard cursor</string -->
-  <!-- TODO string name="pref_no_cursor_summary">Disable custom-keyboard cursor</string -->
-  <!-- TODO string name="pref_local_help_title">Translated manual</string -->
-  <!-- TODO string name="pref_local_help_summary">Enable translated manual</string -->
+  <string name="pref_no_cursor_title">Nincs billentyűzet kurzor</string>
+  <string name="pref_no_cursor_summary">Billentyűzet kurzor letiltása</string>
+  <string name="pref_local_help_title">Lefordított kézikönyv</string>
+  <string name="pref_local_help_summary">Lefordított kézikönyv engedélyezése</string>
   <!-- UNUSED string name="pref_cosurvey_title">Együttes felmérés</string -->
   <!-- UNUSED string name="pref_cosurvey_summary">Együttes felmérés engedélyezése</string -->
+  <string name="pref_import_datamode_title">Import adatmód</string>
+  <string name="pref_import_datamode_summary">Adatmód a mérés importáláshoz</string>
   <string name="pref_export_shots_title">Adat export alapbeállítás</string>
   <string name="pref_export_shots_summary">Adat export formátum alapbeállítása</string>
   <string name="pref_export_plot_title">Vázlat export alapbeállítás</string>
   <string name="pref_export_plot_summary">Vázlat Export formátum alapbeállítása</string>
 
-  <!-- TODO string name="pref_therion_config_title">Therion config file</string -->
-  <!-- TODO string name="pref_therion_config_summary">Create Therion config file</string -->
+  <string name="pref_therion_config_title">Therion config file</string>
+  <string name="pref_therion_config_summary">Therion config file készítése</string>
   <string name="pref_therion_maps_title">Először a therion térképek</string>
   <string name="pref_therion_maps_summary">Therion térképek a felmérési adatok előtt</string>
   <string name="pref_extra_buttons_title">Engedélyezett funkciók</string>
   <string name="pref_extra_buttons_summary">Engedélyezett funkciók minősítése</string>
   <string name="pref_size_buttons_title">Gombok mérete</string>
   <string name="pref_size_buttons_summary">Fejléc gombok mérete</string>
-  <!-- TODO string name="pref_with_sensors_title">Sensors</string -->
-  <!-- TODO string name="pref_with_sensors_summary">Enable "sensors" data</string -->
-  <!-- TODO string name="pref_with_android_azimuth_title">Android compass</string -->
-  <!-- TODO string name="pref_with_android_azimuth_summary">Enable Android compass/clino</string -->
-  <!-- TODO string name="pref_with_levels_title">Layers</string -->
-  <!-- TODO string name="pref_with_levels_summary">Use canvas layers</string -->
-  <!-- TODO string name="pref_palettes_title">Palettes</string -->
-  <!-- TODO string name="pref_palettes_summary">Enable additional palettes</string -->
-  <!-- TODO string name="pref_packet_logger_title">Packets log</string -->
-  <!-- TODO string name="pref_packet_logger_summary">Enable packets logging</string -->
+  <string name="pref_with_sensors_title">Szenzorok</string>
+  <string name="pref_with_sensors_summary">"szenzor" adatok engedélyezése</string>
+  <!-- UNUSED string name="pref_tdmanager_title">TdManager</string -->
+  <!-- UNUSED string name="pref_tdmanager_summary">Use TdManager</string -->
+  <string name="pref_with_android_azimuth_title">Android iránytű</string>
+  <string name="pref_with_android_azimuth_summary">Android iránytű/lejtszögmérő engedélyezése</string>
+  <string name="pref_with_levels_title">Rétegek</string>
+  <string name="pref_with_levels_summary">Rajzlap rétegek használata</string>
+  <!-- UNUSED string name="pref_with_rename_title">Survey renaming</string -->
+  <!-- UNUSED string name="pref_with_rename_summary">Enable "survey renaming" menu</string -->
+  <string name="pref_palettes_title">Paletták</string>
+  <string name="pref_palettes_summary">Hozzáadott paletták engedélyezése</string>
+  <string name="pref_packet_logger_title">Csomag naplózás</string>
+  <string name="pref_packet_logger_summary">Csomag naplózás engedélyezése</string>
 
-  <!-- TODO string name="pref_bezier_step_title">Point spacing</string -->
-  <!-- TODO string name="pref_bezier_step_summary">Distance between points on an export line [m]</string -->
+  <string name="pref_bezier_step_title">Pont távolság</string>
+  <string name="pref_bezier_step_summary">Pontok közötti távolság az exportált vonalon [m]</string>
   <string name="pref_leg_shots_title">Minimális poligon mérés</string>
   <string name="pref_leg_shots_summary">Poligon mérések minmális száma poligonhosszanként</string>
-  <!-- TODO string name="pref_recent_timeout_title">Recent data timeout</string -->
-  <!-- TODO string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent [s]</string -->
-  <!-- TODO string name="pref_triple_shot_title">Leg-shot bell</string -->
-  <!-- TODO string name="pref_triple_shot_summary">Sound feedback on leg-shot recognition</string -->
-  <!-- TODO string name="pref_connect_feedback_title">Connect feedback</string -->
-  <!-- TODO string name="pref_connect_feedback_summary">Feedback on device connect</string -->
+  <string name="pref_recent_timeout_title">Legutolsó adat időkorlát</string>
+  <string name="pref_recent_timeout_summary">Időkorlát ami után az adatok már nem frissek [s]</string>
+  <string name="pref_triple_shot_title">Poligon mérés csengetés</string>
+  <string name="pref_triple_shot_summary">Hang visszajelzés a poligon mérés felismerésről</string>
+  <string name="pref_connect_feedback_title">Kapcsolat visszajelzés</string>
+  <string name="pref_connect_feedback_summary">Visszajelzés az eszköz kapcsolatról</string>
   <string name="pref_station_prefix_title">Pontnév előtag cSurvey programhoz</string>
   <string name="pref_station_prefix_summary">cSurvey pontnév előtagok exportálása</string>
-  <!-- TODO string name="pref_compass_splays_title">Compass splays</string -->
-  <!-- TODO string name="pref_compass_splays_summary">Export splays in Compass files</string -->
-  <!-- TODO string name="pref_vtopo_splays_title">VisualTopo splays</string -->
-  <!-- TODO string name="pref_vtopo_splays_summary">Export splays in VisualTopo files</string -->
-  <!-- TODO string name="pref_vtopo_lrud_title">LRUD at From</string -->
-  <!-- TODO string name="pref_vtopo_lrud_summary">VisualTopo LRUD at From station</string -->
+  <string name="pref_compass_splays_title">Compass segédmérések</string>
+  <string name="pref_compass_splays_summary">Segédmérések exportja a Compass fájlokba</string>
+  <string name="pref_vtopo_splays_title">VisualTopo segédmérések</string>
+  <string name="pref_vtopo_splays_summary">Segédmérések exportja a VisualTopo fájlokba</string>
+  <string name="pref_vtopo_lrud_title">BJFL a kezdőpontnál</string>
+  <string name="pref_vtopo_lrud_summary">VisualTopo BJFL a kezdőpontnál</string>
   <!-- UNUSED string name="pref_trobot_names_title">TopoRobot pontnevek</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Pontnevek a TopoRobot program stílusában</string -->
   <string name="pref_ortho_lrud_title">BJFL segédpontok szöge</string>
   <string name="pref_ortho_lrud_summary">A segédmérések és poligonmérések minmális szöge BJFL felmérésnél</string>
-  <!-- TODO string name="pref_lrud_vertical_title">UD min splay clino</string -->
-  <!-- TODO string name="pref_lrud_vertical_summary">LRUD up/down minimum splay clino</string -->
-  <!-- TODO string name="pref_lrud_horizontal_title">LR max splay clino</string -->
-  <!-- TODO string name="pref_lrud_horizontal_summary">LRUD left/right maximum splay clino</string -->
-  <string name="pref_survex_eol_title">Survex/Topo line vonalvégződés</string>
-  <string name="pref_survex_eol_summary">Survex/Topo line vonalvégződés</string>
+  <string name="pref_lrud_vertical_title">FL segédmérés lejtés min</string>
+  <string name="pref_lrud_vertical_summary">BJFL fel/le segédmérés lejtés minimum</string>
+  <string name="pref_lrud_horizontal_title">BJ segédmérés lejtés max</string>
+  <string name="pref_lrud_horizontal_summary">BJFL bal/jobb segédmérés lejtés maximum</string>
+  <string name="pref_survex_eol_title">Survex/Topo sor végződés</string>
+  <string name="pref_survex_eol_summary">Survex/Topo sor végződés</string>
   <string name="pref_survex_splay_title">Survex segédpontok</string>
-  <string name="pref_survex_splay_summary">Poligonpont megadása segéd-mérésekhez survex programban.</string>
-  <string name="pref_survex_lrud_title">Survex BJFL</string>
-  <string name="pref_survex_lrud_summary">BJFL értékek hozzáadása Survex exportnál</string>
-  <string name="pref_svg_grid_title">SVG-kép rácshálója</string>
-  <string name="pref_svg_grid_summary">Rácsháló hozzáadása SVG-képhez</string>
-  <!-- TODO string name="pref_svg_roundtrip_title">SVG round-trip</string -->
-  <!-- TODO string name="pref_svg_roundtrip_summary">Round-trip ready SVG export</string -->
-  <!-- TODO string name="pref_svg_splays_title">SVG splays</string -->
-  <!-- TODO string name="pref_svg_splays_summary">Include splays into SVG export</string -->
+  <string name="pref_survex_splay_summary">Végpont megadása segéd-mérésekhez survex programban.</string>
+  <string name="pref_survex_lrud_title">Survex/Therion BJFL</string>
+  <string name="pref_survex_lrud_summary">BJFL értékek hozzáadása Survex/Therion exportnál</string>
+  <string name="pref_svg_grid_title">Rácsháló</string>
+  <string name="pref_svg_grid_summary">Rácsháló hozzáadása SVG/PNG-képhez</string>
+  <string name="pref_svg_roundtrip_title">SVG zárt vonal</string> <!-- round-trip -->
+  <string name="pref_svg_roundtrip_summary">Zárt vonal SVG export</string>
+  <string name="pref_svg_splays_title">SVG segédmérések</string>
+  <string name="pref_svg_splays_summary">Segédmérések az SVG exportban</string>
   <!-- UNUSED string name="pref_svg_in_html_title">SVG HTML-ben</string -->
   <!-- UNUSED string name="pref_svg_in_html_summary">HTML-be beágyazott SVG-kép exportálása</string -->
-  <!-- TODO string name="pref_svg_pointstroke_title">SVG point stroke</string -->
-  <!-- TODO string name="pref_svg_pointstroke_summary">Width of point symbols in SVG</string -->
-  <!-- TODO string name="pref_svg_labelstroke_title">SVG label stroke</string -->
-  <!-- TODO string name="pref_svg_labelstroke_summary">Width of label text in SVG</string -->
-  <!-- TODO string name="pref_svg_linestroke_title">SVG line stroke</string -->
-  <!-- TODO string name="pref_svg_linestroke_summary">Width of lines in SVG</string -->
-  <!-- TODO string name="pref_svg_gridstroke_title">SVG grid stroke</string -->
-  <!-- TODO string name="pref_svg_gridstroke_summary">Width of grid lines in SVG</string -->
-  <!-- TODO string name="pref_svg_shotstroke_title">SVG shot stroke</string -->
-  <!-- TODO string name="pref_svg_shotstroke_summary">Width of shot segments in SVG</string -->
-  <!-- TODO string name="pref_svg_linedirstroke_title">SVG orientation stroke</string -->
-  <!-- TODO string name="pref_svg_linedirstroke_summary">Width of line orientation in SVG</string -->
+  <string name="pref_svg_pointstroke_title">SVG pont tulajdonság</string>
+  <string name="pref_svg_pointstroke_summary">Pont szimbólum vastagsága az SVG-ben</string>
+  <string name="pref_svg_labelstroke_title">SVG felirat tulajdonság</string>
+  <string name="pref_svg_labelstroke_summary">Szöveg vastagság az SVG-ben</string>
+  <string name="pref_svg_linestroke_title">SVG vonal tulajdonság</string>
+  <string name="pref_svg_linestroke_summary">Vonal vastagság az SVG-ben</string>
+  <string name="pref_svg_gridstroke_title">SVG háló tulajdonság</string>
+  <string name="pref_svg_gridstroke_summary">Háló vonalak vastagsága az SVG-ben</string>
+  <string name="pref_svg_shotstroke_title">SVG poligon tulajdonság</string>
+  <string name="pref_svg_shotstroke_summary">Mérési vonalak vastagsága az SVG-ben</string>
+  <string name="pref_svg_linedirstroke_title">SVG irány tulajdonság</string>
+  <string name="pref_svg_linedirstroke_summary">Vonal irány vastagság az SVG-ben</string>
   <string name="pref_svg_line_dir_title">SVG vonal irány</string>
   <string name="pref_svg_line_dir_summary">Vonal irány jelző tüskék hozzáadása SVG exportálásnál</string>
-  <!-- TODO string name="pref_svg_stationsize_title">Station size</string -->
-  <!-- TODO string name="pref_svg_stationsize_summary">Station names text size</string -->
+  <string name="pref_svg_stationsize_title">Fixpont méret</string>
+  <string name="pref_svg_stationsize_summary">Fixpont név szöveg mérete</string>
   <string name="pref_kml_stations_title">KML mérési pontokkal</string>
   <string name="pref_kml_stations_summary">Mérési pontok hozzáadása KML-fájlhoz</string>
   <string name="pref_kml_splays_title">KML segédmérésekkel</string>
   <string name="pref_kml_splays_summary">segédmérések hozzáadása KML-fájlhoz</string>
-  <!-- TODO string name="pref_csv_raw_title">Raw CSV</string -->
-  <!-- TODO string name="pref_csv_raw_summary">Export raw data to CSV</string -->
-  <!-- TODO string name="pref_csv_sep_title">CSV separator</string -->
-  <!-- TODO string name="pref_csv_sep_summary">CSV fields separator</string -->
-  <!-- TODO string name="pref_csv_eol_title">CSV eol</string -->
-  <!-- TODO string name="pref_csv_eol_summary">CSV records separator</string -->
+  <string name="pref_csv_raw_title">Nyers CSV</string>
+  <string name="pref_csv_raw_summary">Nyers adatok exportja CSV fájlokba</string>
+  <string name="pref_csv_sep_title">CSV határoló</string>
+  <string name="pref_csv_sep_summary">CSV mező határoló</string>
+  <string name="pref_csv_eol_title">CSV sorvége</string>
+  <string name="pref_csv_eol_summary">CSV sor elválasztó</string>
 
   <string name="pref_sock_type_title">Csatlakozás</string>
   <string name="pref_sock_type_summary">Csatlakozás létrehozása</string>
@@ -1187,6 +1227,7 @@ Tap "Close" not to take any action.
   <!-- UNUSED string name="pref_device_type_summary">Model of the DistoX</string -->
   <!-- UNUSED string name="pref_comm_retry_title">Connection retry</string -->
   <!-- UNUSED string name="pref_comm_retry_summary">Connection retries number</string -->
+  <!-- UNUSED string name="pref_comm_retry_dialogtitle">Connection retries number</string -->
   <string name="pref_wait_laser_title">Lézer szünet[ms]</string>
   <string name="pref_wait_laser_summary">Szünet a lézer bekapcsolása után [ms]</string>
   <string name="pref_wait_shot_title">Mérési szünet [ms]</string>
@@ -1196,15 +1237,15 @@ Tap "Close" not to take any action.
   <string name="pref_wait_conn_title">Szünet adatok készenléte után [ms]</string>
   <string name="pref_wait_conn_summary">Várakozás az adatok elkészültére [ms]</string>
   <string name="pref_conn_mode_title">Adatkapcsolat típusa</string>
-  <string name="pref_conn_mode_summary">A DistoX-el való kapcsolat típusa</string>
+  <string name="pref_conn_mode_summary">A DistoX-el való kapcsolat típusa adatletöltéshez</string>
   <!-- UNUSED string name="pref_auto_reconnect_title">Automatikus újrakapcsolódás</string -->
   <!-- UNUSED string name="pref_auto_reconnect_summary">Újrakapcsolódás, ha a kapcsolat megszakad</string -->
-  <!-- TODO string name="pref_second_distox_title">Two-DistoX survey</string -->
-  <!-- TODO string name="pref_second_distox_summary">Surveying with two DistoX</string -->
+  <string name="pref_second_distox_title">Két DistoX mérés</string>
+  <string name="pref_second_distox_summary">Mérés két DistoX-el</string>
   <string name="pref_auto_pair_title">Atomatikus párosítás</string>
   <string name="pref_auto_pair_summary">Párosítás a talált eszközzel</string>
-  <!-- TODO string name="pref_head_tail_title">Number of new data</string -->
-  <!-- TODO string name="pref_head_tail_summary">Get the number of data before downloading them</string -->
+  <string name="pref_head_tail_title">Új adatok száma</string>
+  <string name="pref_head_tail_summary">Adatok számának lekérdezése letöltés előtt</string>
   <string name="pref_socket_delay_title">Kapcsolódási késleltetés</string>
   <string name="pref_socket_delay_summary">Kapcsolódási késleltetés a párosításhoz [0.1 sec]</string>
   <string name="pref_z6_workaround_title">Áthidaló megoldás Z6-hoz</string>
@@ -1223,8 +1264,8 @@ Tap "Close" not to take any action.
   <string name="pref_shot_units_title">MÉRTÉKEGYSÉGEK</string>
   <string name="pref_cwd_title">Munkakönyvtár</string>
   <!-- UNUSED string name="pref_cwd_summary">TopoDroid work directory</string -->
-  <string name="pref_pt_color_map_title">PocketTopo színes térkép</string>
-  <string name="pref_pt_color_map_summary">PocketTopo színes térkép (PocketTopo import)</string>
+  <string name="pref_pt_color_map_title">PocketTopo szín jelkulcs</string>
+  <string name="pref_pt_color_map_summary">PocketTopo szín jelkulcs (PocketTopo import)</string>
   <string name="pref_text_size_title">Betűméret</string>
   <string name="pref_text_size_summary">Lista elemek betűmérete</string>
   <string name="pref_closeness_title">Kijelölési sugár</string>
@@ -1232,29 +1273,31 @@ Tap "Close" not to take any action.
   <string name="pref_eraseness_title">Radír méret</string>
   <string name="pref_eraseness_message">Vázlat elemek törlésének sugara</string>
   <string name="pref_min_shift_title">Elmozdulás érzékenyég</string>
-  <string name="pref_min_shift_message">Elmozdulás érzékenyég</string>
+  <string name="pref_min_shift_message">Maximális mozgatási sebesség [pxl/step]</string>
   <string name="pref_pointing_title">Mutató sugara</string>
-  <string name="pref_pointing_message">Mutató sugara</string>
-  <!-- TODO string name="pref_dash_splay_title">Splay dash coherence</string -->
-  <!-- TODO string name="pref_dash_splay_message">Splays dashed coherently between plan and profile</string -->
+  <string name="pref_pointing_message">Lenyomás/felengedés érzékenység a pont kiválasztáskor</string>
+  <string name="pref_dash_splay_title">Segédmérés szaggatás összefüggés</string>
+  <string name="pref_dash_splay_message">Segédmérések szaggatásának összefüggése az alaprajz és az oldalnézet között</string>
   <string name="pref_vert_splay_title">Segédmérések megszaggatásának lejtszög küszöbértéke</string>
   <string name="pref_vert_splay_message">Ennél nagyobb lejtszögű segédmérések szaggatott vonallal jelöltek</string>
-  <!-- TODO string name="pref_horiz_splay_title">Splay dash azimuth threshold</string -->
-  <!-- TODO string name="pref_horiz_splay_message">Splay off azimuth more than this are dashed</string -->
-  <!-- TODO string name="pref_section_splay_title">Splay dash angle threshold</string -->
-  <!-- TODO string name="pref_section_splay_message">Over this angle with the section plane, splays are dashed</string -->
-  <!-- TODO string name="pref_data_backup_title">Data auto-export</string -->
-  <!-- TODO string name="pref_data_backup_summary">Automatic data export (need default format)</string -->
-  <!-- TODO string name="pref_zipped_symbols_title">Zipped symbols files</string -->
-  <!-- TODO string name="pref_zipped_symbols_summary">Store/load symbol files to/from zip archive</string -->
-  <!-- TODO string name="pref_fixed_origin_title">Sketch origin</string -->
-  <!-- TODO string name="pref_fixed_origin_summary">Fixed sketch origin</string -->
+  <string name="pref_horiz_splay_title">Segédmérés szaggatás irány határérték</string>
+  <string name="pref_horiz_splay_message">Segédmérés iránya ami felett szaggatott</string>
+  <string name="pref_section_splay_title">Segédmérés irány szaggatás határérték</string>
+  <string name="pref_section_splay_message">Ha nagyobb ennél a szögnél a metszet sikban akkor a segédmérések szaggatottak</string>
+  <string name="pref_data_backup_title">Adat autómatikus export</string>
+  <string name="pref_data_backup_summary">Automatkus adat export(alapértelmezett formátumra van szükség)</string>
+  <string name="pref_editable_stations_title">Átírható pontszám</string>
+  <string name="pref_editable_stations_summary">Módosíthatók a pont nevek a jegyzőkönyvben</string>
+  <string name="pref_zipped_symbols_title">Tömörített szimbólum fájl</string>
+  <string name="pref_zipped_symbols_summary">Szimbólum fájlok tárolása/beolvasása zip archívumokba/ból</string>
+  <string name="pref_fixed_origin_title">Vázlat kezdőpont</string>
+  <string name="pref_fixed_origin_summary">Rögzített vázlat kezdőpont</string>
   <string name="pref_shared_xsections_title">Megosztott keresztszelvények</string>
   <string name="pref_shared_xsections_summary">Az adott mérési pont keresztszelvényei több vázlatban közösek</string>
   <string name="xsections_shared">Megosztott keresztszelvények</string>
   <string name="xsections_private">Saját keresztszelvények</string>
-  <!-- TODO string name="pref_reduce_angle_title">Straightening angle</string -->
-  <!-- TODO string name="pref_reduce_angle_summary">Minimal segment-angle straightening lines</string -->
+  <string name="pref_reduce_angle_title">Simítási szög</string>
+  <string name="pref_reduce_angle_summary">Minimális segmens-szög síma vonalaknál</string>
 
 
   <string name="pref_survey_stations_title">Pontelnevezési szabályok</string>
@@ -1265,6 +1308,7 @@ Tap "Close" not to take any action.
   <string name="pref_mag_thr_summary">Eltérések tűrése százalékban a megismételt mérések mágneses térerősségében</string>
   <string name="pref_dip_thr_title">Max. eltérés a mágneses lehajlásban</string>
   <string name="pref_dip_thr_summary">Eltérések tűrése százalékban a megismételt mérések mágneses lehajlásában</string>
+  
   <string name="pref_leg_title">Poligonmérések tűrése</string>
   <string name="pref_leg_summary">Ismételt poligonmérések közötti tűrés</string>
   <string name="pref_max_shot_title">Maximális poligonmérés hossz</string>
@@ -1273,8 +1317,8 @@ Tap "Close" not to take any action.
   <string name="pref_min_leg_summary">Mérés minmális hossza [m]</string>
   <string name="pref_backsight_title">Visszamérés(Irányzék?)</string>
   <string name="pref_backsight_summary">Visszamérés(Irányzék?) mező az új mérés párbeszéd ablakban</string>
-  <!-- TODO string name="pref_backshot_title">Backshot DistoX</string -->
-  <!-- TODO string name="pref_backshot_summary">Swap stations to DistoX backshots</string -->
+  <string name="pref_backshot_title">DistoX visszamérés</string>
+  <string name="pref_backshot_summary">Megcsaeréli a pontokat DistoX visszamérésnél</string>
   <string name="pref_prev_next_title">Előző/Köv. gombok</string>
   <string name="pref_prev_next_summary">Előző/Köv. gombok a mérés párbeszéd ablakban</string>
   <!-- UNUSED string name="pref_mag_anomaly_title">Mágneses anomália</string -->
@@ -1309,19 +1353,18 @@ Tap "Close" not to take any action.
   <!-- UNUSED string name="pref_dxf_scale_summary">DXF vázlat méretarányának értéke</string -->
   <string name="pref_dxf_blocks_title">Segédmérés végpontjai DXF-ben</string>
   <string name="pref_dxf_blocks_summary">Segédmérés végpontjai DXF-ben</string>
-  <!-- TODO string name="pref_shp_georef_title">Georeferenced sketch plan export</string -->
-  <!-- TODO string name="pref_shp_georef_summary">Sketch plan exported in WGS84 long-lat</string -->
-  <!-- TODO string name="imported_settings">Imported settings</string -->
+  <string name="pref_shp_georef_title">Georeferált alaprajz vázlat export</string>
+  <string name="pref_shp_georef_summary">Alaprajz vázlat exportálása WGS84 long-lat rendszerbe</string>
   <string name="pref_thumbnail_title">Miniatűrök mérete</string>
   <string name="pref_thumbnail_summary">Fotó-miniatűrök mérete</string>
   <string name="pref_shot_timer_title">Irányszög mérés időzítése</string>
   <string name="pref_shot_timer_summary">Hány másodpercig várjon, mielőtt megméri az irányszöget</string>
   <string name="pref_beep_volume_title">Időzítő hangereje</string>
   <string name="pref_beep_volume_summary">Időzítő csipogásának hány százalékos a hangereje</string>
-  <!-- TODO string name="pref_extend_frac_title">Fractional extend</string -->
-  <!-- TODO string name="pref_extend_frac_summary">Whether "extend" can have a decimal part</string -->
-  <!-- TODO string name="pref_recent_shot_title">Recent shots</string -->
-  <!-- TODO string name="pref_recent_shot_summary">Whether to highlight recent shots</string -->
+  <string name="pref_extend_frac_title">Részleges kiterítés</string>
+  <string name="pref_extend_frac_summary">A "kiterítés" lehet-e tizedes rész</string>
+  <string name="pref_recent_shot_title">Legutóbbi mérés</string>
+  <string name="pref_recent_shot_summary">Az utolsó mérés kiemelése</string>
   <string name="pref_drawing_unit_title">Pont eszközök méretaránya</string>
   <string name="pref_drawing_unit_summary">Pont eszközök méretaránya</string>
   <string name="pref_unscaled_points_title">Pont jelkulcsok nem nagyíthatóak</string>
@@ -1330,16 +1373,18 @@ Tap "Close" not to take any action.
   <string name="pref_segment_message">Minimális távolság egy vonalon lévő pontok között</string>
   <string name="pref_linestyle_title">Vonalstílus</string>
   <string name="pref_linestyle_summary">Vonal rajzstílusa</string>
-  <!-- TODO string name="pref_linecontinue_title">Line continue</string -->
-  <!-- TODO string name="pref_linecontinue_summary">Line default continue-mode</string -->
+  <string name="pref_linecontinue_title">Vonal folytatás</string>
+  <string name="pref_linecontinue_summary">Vonal alapértelmezett folytatési mód</string>
   <string name="pref_lineacc_title">Interpoláció pontossága</string>
   <string name="pref_lineacc_summary">Négyzetes Bezier interpoláció pontossága</string>
   <string name="pref_linecorner_title">Bezier szöglet küszöbérték</string>
   <string name="pref_linecorner_summary">Küszöbérték szöglet detektáláshoz Bezier interpolációnál</string>
-  <!-- TODO string name="pref_weeddistance_title">Weeding point distance</string -->
-  <!-- TODO string name="pref_weeddistance_summary">Max distance from segment to weed points [m]</string -->
-  <!-- TODO string name="pref_weedlength_title">Point weeding segment length</string -->
-  <!-- TODO string name="pref_weedlength_summary">Max length of a line segment</string -->
+  <string name="pref_weeddistance_title">Összaolvasztott pont távolság</string>
+  <string name="pref_weeddistance_summary">Maximális távolság a vonal és az összehúzott pont között [m]</string>
+  <string name="pref_weedlength_title">Összeolvasztott szegmens hossz</string>
+  <string name="pref_weedlength_summary">Maximális vonal szegmens hossz [m]</string>
+  <string name="pref_weedbuffer_title">Szegmens összeolvasztási puffer</string>
+  <string name="pref_weedbuffer_summary">Puffer a vonal szegmens körül [pxl]</string>
   <string name="pref_calib_algo_title">Algoritmus</string>
   <string name="pref_calib_algo_summary">Kalibrációs algoritmus</string>
   <string name="pref_group_by_title">Csoportosítási szabály</string>
@@ -1358,24 +1403,24 @@ Tap "Close" not to take any action.
   <string name="pref_dot_radius_message">Zöld pontok mérete</string>
   <string name="pref_line_thickness_title">Vonalvastagság</string>
   <string name="pref_line_thickness_summary">Rajzolt vonal vastagsága</string>
-  <!-- TODO string name="pref_line_units_title">Line units</string -->
-  <!-- TODO string name="pref_line_units_summary">Drawing line units</string -->
-  <!-- TODO string name="pref_linesnap_title">Line/Area snap</string -->
-  <!-- TODO string name="pref_linesnap_summary">Enable line/area snap action</string -->
-  <!-- TODO string name="pref_linecurve_title">Smooth/Straigten segment</string -->
-  <!-- TODO string name="pref_linecurve_summary">Smooth/Straighten line segment action</string -->
-  <!-- TODO string name="pref_linestraight_title">Straigten lines</string -->
-  <!-- TODO string name="pref_linestraight_summary">Straighten whole line action</string -->
-  <!-- TODO string name="pref_path_multiselect_title">Path multiselection</string -->
-  <!-- TODO string name="pref_path_multiselect_summary">Path multiselection action</string -->
-  <!-- TODO string name="pref_composite_actions_title">Composite actions</string -->
-  <!-- TODO string name="pref_composite_actions_summary">Enable line/area long-tap actions</string -->
-  <!-- TODO string name="pref_plane_interpolation_title">Plane interpolation</string -->
-  <!-- TODO string name="pref_plane_interpolation_summary">Plane interpolation action</string -->
-  <!-- TODO string name="pref_plot_split_title">Sketch split/merge</string -->
-  <!-- TODO string name="pref_plot_split_summary">Sketch split and merge actions</string -->
-  <!-- TODO string name="pref_stylus_size_title">Stylus size</string -->
-  <!-- TODO string name="pref_stylus_size_summary">Stylus size [0: ignore]</string -->
+  <string name="pref_line_units_title">Vonal mértékegység</string>
+  <string name="pref_line_units_summary">Rajz vonal mértékegység</string>
+  <string name="pref_linesnap_title">Vonal/felület illesztés</string>
+  <string name="pref_linesnap_summary">Vonal/terület megfordításának engedélyezése</string>
+  <string name="pref_linecurve_title">Sima/Kiegyenesített szakasz</string>
+  <string name="pref_linecurve_summary">Sima/Kiegyenesített vonal szakasz lehetőség</string>
+  <string name="pref_linestraight_title">Kiegyenesített vonal</string>
+  <string name="pref_linestraight_summary">Egyenesítse az egész vonalat</string>
+  <string name="pref_path_multiselect_title">Útvonalas többes kiválasztás</string>
+  <string name="pref_path_multiselect_summary">Útvonalas többes kiválasztás lehetőség</string>
+  <string name="pref_composite_actions_title">Összetett lehetőség</string>
+  <string name="pref_composite_actions_summary">Vonal/terület hosszú érintés akciók</string>
+  <string name="pref_plane_interpolation_title">Felület interpoláció</string>
+  <string name="pref_plane_interpolation_summary">Felület interpoláció akciók</string>
+  <string name="pref_plot_split_title">Vázlat felosztás / egyesítés</string>
+  <string name="pref_plot_split_summary">Vázlat felosztás és egyesítés akciók</string>
+  <string name="pref_stylus_size_title">Toll méret</string>
+  <string name="pref_stylus_size_summary">Toll méret [0: nincs]</string>
   <string name="pref_fixed_thickness_title">Poligonvonal vastagsága</string>
   <string name="pref_fixed_thickness_summary">Poligonvonal vastagsága</string>
   <!-- UNUSED string name="pref_device_title">Device</string -->
@@ -1384,30 +1429,32 @@ Tap "Close" not to take any action.
   <string name="pref_checkBT_summary">Ellenőrzi a Bluetooth-t indításkor</string>
   <string name="pref_checkAttached_title">Középvonal ellenőrzése</string>
   <string name="pref_checkAttached_summary">Ellenőrzi, hogy a mérési pontok kapcsolódnak-e egymáshoz</string>
-  <!-- TODO string name="pref_checkExtend_title">Leg extend check</string -->
-  <!-- TODO string name="pref_checkExtend_summary">Check if leg extends are set</string -->
+  <string name="pref_checkExtend_title">Alappont mérés kiterítés ellenőrzés</string>
+  <string name="pref_checkExtend_summary">Ellenőrizze, hogy a kiterítés be van-e állítva</string>
   <string name="pref_backup_number_title">Háttérmentésekszáma</string>
   <string name="pref_backup_number_summary">Automatikusan mentett vázlatok száma</string>
   <string name="pref_backup_interval_title">Háttérmentések intervalluma</string>
   <string name="pref_backup_interval_summary">Minimum intervallum két háttérmentés között [s]</string>
-  <!-- TODO string name="pref_backups_clear_title">Backups clear</string -->
-  <!-- TODO string name="pref_backups_clear_summary">Enable sketch backups clear menu</string -->
+  <string name="pref_backups_clear_title">Mentés törlése</string>
+  <string name="pref_backups_clear_summary">Vázlat biztonsági mentés törlésének engedélyezése menüből</string>
   <!-- UNUSED string name="pref_xtherion_areas_title">xtherion areas</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Save areas a la xtherion</string -->
   <string name="pref_therion_splays_title">Therion segédpontok</string>
   <string name="pref_therion_splays_summary">Rendeljen u:splay sorokat a th2 fájlokhoz</string>
-  <!-- TODO string name="pref_th2_scale_title">Therion scale</string -->
-  <!-- TODO string name="pref_th2_scale_summary">Scale of th2/xvi export</string -->
-  <!-- TODO string name="pref_th2_xvi_title">xvi image</string -->
-  <!-- TODO string name="pref_th2_xvi_summary">Insert xvi image in th2</string -->
-  <string name="pref_autoStations_title">Therion formátumú mérési pontok</string>
-  <string name="pref_autoStations_summary">Automatikusan hozzáadja a mérési pontokat a Therion fájlokhoz</string>
-  <!-- TODO string name="pref_auto_xsections_title">Auto X-sections</string -->
-  <!-- TODO string name="pref_auto_xsections_summary">Add x-sections automatically to save/export [csx/svg/dxf/xvi]</string -->
-  <!-- TODO string name="pref_saved_stations_title">Saved stations</string -->
-  <!-- TODO string name="pref_saved_stations_summary">Color saved stations orange</string -->
-  <!-- TODO string name="pref_legonly_update_title">Legs-only refresh</string -->
-  <!-- TODO string name="pref_legonly_update_summary">Redraw midline only on legs download</string -->
+  <string name="pref_th2_scale_title">Therion méretarány</string>
+  <string name="pref_th2_scale_summary">Méretarány a th2/xvi exportnál</string>
+  <string name="pref_th2_xvi_title">xvi kép</string>
+  <string name="pref_th2_xvi_summary">Xvi kép berakása th2-be</string>
+  <string name="pref_autoStations_title">Mérési pontok</string>
+  <string name="pref_autoStations_summary">Automatikusan hozzáadja a mérési pontokat a th2/png fájlokhoz</string>
+  <string name="pref_auto_xsections_title">Autómatikus kereszszelvény</string>
+  <string name="pref_auto_xsections_summary">Kereszmetszet hozzáadás autómatikusan mentés/exportálásnál [csx/svg/dxf/xvi]</string>
+  <string name="pref_saved_stations_title">Mentett pont</string>
+  <string name="pref_saved_stations_summary">Mentett pont narancs színű</string>
+  <string name="pref_legonly_update_title">Csak poligon újrarajzolás</string>
+  <string name="pref_legonly_update_summary">Poligon újra rajzolás csak pligon mérés letöltésekor</string>
+  <string name="pref_full_affine_title">Affin transzformáció</string>
+  <string name="pref_full_affine_summary">Vázlat affin transformáció engedélyezése</string>
   <string name="pref_loopClosure_title">Hurokzárás</string>
   <string name="pref_loopClosure_summary">Hurokzárási hiba kiegyenlítése</string>
   <!-- UNUSED string name="pref_splayExtend_title">Estimate splay extend</string -->
@@ -1416,21 +1463,25 @@ Tap "Close" not to take any action.
   <string name="pref_swapLR_summary">Bal-Jobb cseréje a Compassba exportálásnál</string>
   <string name="pref_LRExtend_title">Bal és jobb irányú kiterjedés becslése</string>
   <string name="pref_LRExtend_summary">Bal/Jobb irányú kiterjedés becslése (Compass/VisualTopo import</string>
-  <!-- TODO string name="pref_diving_mode_title">Diving mode</string -->
-  <!-- TODO string name="pref_diving_mode_summary">Enable diving mode</string -->
-  <!-- TODO string name="pref_splay_classes_title">Splay classes</string -->
-  <!-- TODO string name="pref_splay_classes_summary">Enable splay classes and coloring</string -->
-  <!-- TODO string name="pref_splay_color_title">Splay coloring</string -->
-  <!-- TODO string name="pref_splay_color_summary">Enable splay coloring</string -->
-  <!-- TODO string name="pref_plot_shift_title">Sketch shift/scale</string -->
-  <!-- TODO string name="pref_plot_shift_summary">Enable sketch shift and scale</string -->
-  <!-- TODO string name="pref_splay_alpha_title">Splay transparency</string -->
-  <!-- TODO string name="pref_splay_alpha_summary">Splay transparency [0: transparent, 100: opaque]</string -->
+  <string name="pref_diving_mode_title">Búvár mód</string>
+  <string name="pref_diving_mode_summary">Búvár mód engedélyezése</string>
+  <string name="pref_splay_classes_title">Segédmérés osztályozása</string>
+  <string name="pref_splay_classes_summary">Segédmérés osztályozás engedélyezése</string>
+  <string name="pref_splay_color_title">Segédmérés szinezés</string>
+  <string name="pref_splay_color_summary">Segédmérés szinezés engedélyezése</string>
+  <string name="pref_splay_as_dot_title">Segédmérés végpont</string>
+  <string name="pref_splay_as_dot_summary">Segédmérés megjelenítése végponttal</string>
+  <!-- UNUSED string name="pref_splay_active_title">Splay at active station</string -->
+  <!-- UNUSED string name="pref_splay_active_summary">Enable splay at the active station</string -->
+  <string name="pref_plot_shift_title">Vázlat mozgatás/nagyítás</string>
+  <string name="pref_plot_shift_summary">Vázlat mosgatás és nagyítás engedélyezése</string>
+  <string name="pref_splay_alpha_title">Segédmérés átlátszóság</string>
+  <string name="pref_splay_alpha_summary">Segédmérés átlátszóság [0: átlátszó, 100: áttetsző]</string>
 
   <string name="pref_picker_type_title">Rajzeszköz választó</string>
   <string name="pref_picker_type_summary">Rajzeszköz választó típusa</string>
-  <!-- TODO string name="pref_triple_toolbar_title">Triple bottom bar</string -->
-  <!-- TODO string name="pref_triple_toolbar_summary">Triple drawing tools bar</string -->
+  <string name="pref_triple_toolbar_title">Hármas alsó sor</string>
+  <string name="pref_triple_toolbar_summary">Hármas alsó rajzeszköz sor</string>
   <!-- UNUSED string name="pref_section_stations_title">Keresztszelvény pontjai</string -->
   <!-- UNUSED string name="pref_section_stations_summary">Keresztszelvény viszonyítási pontjai</string -->
   <string name="pref_station_size_title">Pontnév betűmérete</string>
@@ -1441,6 +1492,8 @@ Tap "Close" not to take any action.
   <string name="pref_side_drag_summary">Vonszolás engedélyezése a vázlat nézetben</string>
   <string name="pref_unit_grid_title">Vázlat rácsegységei</string>
   <string name="pref_unit_grid_summary">Vázlat rácshálójának méretezése</string>
+  <string name="pref_unit_measure_title">Vonalzó egység</string>
+  <string name="pref_unit_measure_summary">Vinalzó hosszúság mértékegysége</string>
   <!-- UNUSED string name="pref_recent_nr_title">Utoljára használt eszközök száma</string -->
   <!-- UNUSED string name="pref_recent_nr_summary">Utoljára használt eszközök száma az eszközválasztón</string -->
   <string name="pref_area_border_title">Területhatár láthatósága</string>
@@ -1478,39 +1531,38 @@ Tap "Close" not to take any action.
   <string name="pref_algo_min_delta_title">Min-algo delta</string>
   <string name="pref_algo_min_delta_summary">Min-algo group G^M.x súlyozása</string>
 
-<!-- LEAVE LOG STUFF IN ENGLISH
-  <string name="pref_log_stream_summary">Naplózás a system log-ba</string>
-  <string name="pref_log_stream_title">Naplózás</string>
-  <string name="pref_log_bt">Bluetooth</string>
-  <string name="pref_log_bezier">Bézier görbe</string>
-  <string name="pref_log_calib">Kalibráció</string>
-  <string name="pref_log_comm">BT kapcsolat</string>
-  <string name="pref_log_csurvey">cSurvey</string>
-  <string name="pref_log_data">Felmérési adat</string>
-  <string name="pref_log_db">Adatbázis</string>
-  <string name="pref_log_debug">Hibakeresés</string>
-  <string name="pref_log_device">Eszköz ablak</string>
-  <string name="pref_log_distox">DistoX</string>
-  <string name="pref_log_err">Hiba</string>
-  <string name="pref_log_fixed">GPS pontok</string>
-  <string name="pref_log_input">Felhasználói adatbevitel</string>
-  <string name="pref_log_io">Sketch i/o</string>
-  <string name="pref_log_loc">Helyszín</string>
-  <string name="pref_log_num">Adat redukció</string>
-  <string name="pref_log_path">File paths</string>
-  <string name="pref_log_perm">Permissions</string>
-  <string name="pref_log_photo">Fotó</string>
-  <string name="pref_log_plot">Vázlatok</string>
-  <string name="pref_log_proto">DistoX protokol</string>
-  <string name="pref_log_ptopo">PocketTopo</string>
-  <string name="pref_log_sensor">Szenzorok</string>
-  <string name="pref_log_shot">Mérések</string>
-  <string name="pref_log_sync">Együttes felmérés</string>
-  <string name="pref_log_survey">Felmérések</string>
-  <string name="pref_log_therion">Therion</string>
-  <string name="pref_log_units">Mértékegységek</string>
-  <string name="pref_log_zip">ZIP</string>
--->
+  <string name="pref_log_stream_summary" translatable="false">Log output stream</string>
+  <string name="pref_log_stream_title" translatable="false">Log stream</string>
+  <string name="pref_log_append" translatable="false">append logs</string>
+  <string name="pref_log_bt" translatable="false">Bluetooth</string>
+  <string name="pref_log_bezier" translatable="false">Bezier curves</string>
+  <string name="pref_log_calib" translatable="false">Calibration</string>
+  <string name="pref_log_comm" translatable="false">BT communication</string>
+  <string name="pref_log_csurvey" translatable="false">cSurvey</string>
+  <string name="pref_log_data" translatable="false">Survey data</string>
+  <string name="pref_log_db" translatable="false">Database</string>
+  <string name="pref_log_debug" translatable="false">Debug</string>
+  <string name="pref_log_device" translatable="false">Device window</string>
+  <string name="pref_log_distox" translatable="false">DistoX</string>
+  <string name="pref_log_err" translatable="false">Error</string>
+  <string name="pref_log_fixed" translatable="false">GPS points</string>
+  <string name="pref_log_input" translatable="false">User input</string>
+  <string name="pref_log_io" translatable="false">Sketch i/o</string>
+  <string name="pref_log_loc" translatable="false">Location</string>
+  <string name="pref_log_num" translatable="false">Data reduction</string>
+  <string name="pref_log_path" translatable="false">File paths</string>
+  <string name="pref_log_perm" translatable="false">Permissions</string>
+  <string name="pref_log_photo" translatable="false">Photo</string>
+  <string name="pref_log_plot" translatable="false">Sketches</string>
+  <string name="pref_log_proto" translatable="false">DistoX protocol</string>
+  <string name="pref_log_ptopo" translatable="false">PocketTopo</string>
+  <string name="pref_log_sensor" translatable="false">Sensors</string>
+  <string name="pref_log_shot" translatable="false">Shots</string>
+  <!-- UNUSED string name="pref_log_sync" translatable="false">Cosurveying</string -->
+  <string name="pref_log_survey" translatable="false">Surveys</string>
+  <string name="pref_log_therion" translatable="false">Therion</string>
+  <string name="pref_log_units" translatable="false">Units</string>
+  <string name="pref_log_zip" translatable="false">ZIP</string>
 
   <!-- UNUSED string name="line_bezier">Bezier</string -->
   <!-- UNUSED string name="line_fine">fine</string -->
@@ -1525,11 +1577,11 @@ Tap "Close" not to take any action.
   <!-- UNUSED string name="alt_ortho">orthometric</string -->
   <!-- UNUSED string name="splay_extend">estimate splay extend</string -->
 
-    <!-- TODO string name="perms_mandatory">TopoDroid cannot run without these permissions:</string -->
-    <!-- TODO string name="perms_optional">TopoDroid may fail without these permissions:</string -->
-    <!-- TODO string name="perm_location">\nLocation</string -->
-    <!-- TODO string name="perm_camera">\nCamera</string -->
-    <!-- TODO string name="perm_microphone">\nMicrophone</string -->
+    <string name="perms_mandatory">A TopoDroid nem futtatható a következő engedélyek nélkül:</string>
+    <string name="perms_optional">A TopoDroid hibázhat a következő engedélyek nélkül:</string>
+    <string name="perm_location">\nHelymeghatározás</string>
+    <string name="perm_camera">\nKamera</string>
+    <string name="perm_microphone">\nMikrofon</string>
 
     <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">
@@ -1540,10 +1592,11 @@ Tap "Close" not to take any action.
 \nDokumentumok: http://sites.google.com/site/speleoapps
 \nHozzászólások, bug bejelentés, új funkció igények: marco.corvi@gmail.com
 \nA magyar fordítás Sűrű Péter munkája. Lektorálták: Pataki Róbert; Nagy András; Köblös Gabriella; Perényi Katalin
+\n kiegészítette: Holl Balázs
 \n
     </string>
 
-<!-- FIRMWARE DIALOG STRINGS CAN BE LEFT UNTRANSLATED : mark OK untranslated strings -->
+<!-- FIRMWARE DIALOG STRINGS CAN BE LEFT UNTRANSLATED -->
   <string name="firmware_title">Firmware Frissítés</string>
   <string name="firmware_file_title">Firmware Fájlok</string>
   <string name="firmware_text">
@@ -1565,46 +1618,46 @@ Tap "Close" not to take any action.
    <string name="ask_upload_not_compatible">Firmware fájl nem tűnik megfelelőnek \nMindenképpen feltölti?</string>
    <string name="firmware_file_dumped">Mentett firmware fájl %1$s méret %2$d</string>
    <string name="firmware_file_uploaded">Feltöltött firmware fájl %1$s írás %2$d / %3$d</string>
-   <!-- TODO string name="firmware_not_supported">Device does not support firmware functions</string -->
+   <string name="firmware_not_supported">Az eszköz nem támogatja a firmware funkciókat</string>
 
-    <!-- TODO string name="project">Project %1$s</string -->
-    <!-- TODO string name="no_editor">Editor not found</string -->
-    <!-- TODO string name="no_file">File not found</string -->
-    <!-- TODO string name="no_extra">Missing file extra</string -->
-    <!-- TODO string name="no_path">Missing filepath</string -->
-    <!-- TODO string name="no_equate">No equate</string -->
-    <!-- TODO string name="no_surveys">No surveys</string -->
-    <!-- TODO string name="no_tdconfig">Missing tdconfig file</string -->
-    <!-- TODO string name="no_th_file">No Therion file</string -->
-    <!-- TODO string name="file_exists">File exists</string -->
-    <!-- TODO string name="file_create_fail">File create fail</string -->
-    <!-- TODO string name="oom">Warning. Out of memory</string -->
+    <string name="project">Projekt %1$s</string>
+    <string name="no_editor">Nincs szövegszerkesztő</string>
+    <string name="no_file">A fájl nem található</string>
+    <string name="no_extra">Hiányzó extra fájl</string>
+    <string name="no_path">Hiányzó elérési út</string>
+    <string name="no_equate">Nincs egyezés</string>
+    <string name="no_surveys">Nincs mérés</string>
+    <string name="no_tdconfig">Hiányzó tdconfig fájl</string>
+    <string name="no_th_file">Nem Therion fájl</string>
+    <string name="file_exists">Létező fájl</string>
+    <string name="file_create_fail">Fájl létrehozás hiba</string>
+    <string name="oom">Fifyelem! Megtelt a memória</string>
 
-    <!-- TODO string name="ask_delete_tdconfig">Delete TdConfig file</string -->
-    <!-- TODO string name="ask_remove_equate">Remove equate %1$s ?</string -->
-    <!-- TODO string name="equate_no_station">No station selected</string -->
-    <!-- TODO string name="equate_no_stations">Too few stations</string -->
-    <!-- TODO string name="equate_no_nearby">No station nearby</string -->
+    <string name="ask_delete_tdconfig">TdConfig fájl törlése</string>
+    <string name="ask_remove_equate">Azonosság megszüntetés %1$s ?</string>
+    <string name="equate_no_station">Nincs kiválasztott pont</string>
+    <string name="equate_no_stations">Zúl kevés pont</string>
+    <string name="equate_no_nearby">Nincs közelben pont</string>
 
-    <!-- TODO string name="menu_new">NEW</string -->
-    <!-- TODO string name="menu_equate">ADD EQUATE</string -->
-    <!-- TODO string name="menu_equates">EQUATES</string -->
-    <!-- TODO string name="menu_save">SAVE</string -->
+    <string name="menu_new">ÚJ</string>
+    <string name="menu_equate">AZONOSSÁG HOZZÁADÁSA</string>
+    <string name="menu_equates">AZONOS PONTOK</string>
+    <string name="menu_save">MENTÉS</string>
 
-    <!-- TODO string name="overwrite">overwrite</string -->
+    <string name="overwrite">felülírja</string>
 
-    <!-- TODO string name="title_help">TopoDroid Manager v. %1$s</string -->
-    <!-- TODO string name="title_export_settings">Settings import/export</string -->
-    <!-- TODO string name="title_export">Export project as &#8230;</string -->
-    <!-- TODO string name="title_equates">Project Equates</string -->
-    <!-- TODO string name="title_equate_new">Add equate &#8230;</string -->
-    <!-- TODO string name="title_cwd">Current Work Directory</string -->
-    <!-- TODO string name="title_settings">TdManager Settings</string -->
-    <!-- TODO string name="title_drop">Drop surveys ?</string -->
-    <!-- TODO string name="title_tdconfig">Enter project name</string -->
-    <!-- TODO string name="title_surveys">Surveys</string -->
+    <!-- OK string name="title_help">TopoDroid Manager v. %1$s</string -->
+    <string name="title_export_settings">Import/export beállítások</string>
+    <string name="title_export">Projekt exportálva a &#8230;</string>
+    <string name="title_equates">Projekt azonos pontok</string>
+    <string name="title_equate_new">Azonos pont hozzáadás &#8230;</string>
+    <string name="title_cwd">Jelenlegi munka könyvtár</string>
+    <string name="title_settings">TdManager beállítások</string>
+    <string name="title_drop">Eldobja a mérést?</string>
+    <string name="title_tdconfig">Adja meg a projekt nevét</string>
+    <string name="title_surveys">Mérések</string>
 
-    <!-- TODO string name="exported">Saved file %1$s</string -->
-    <!-- TODO string name="export_failed">Failed export</string -->
+    <string name="exported">Mentett fájl %1$s</string>
+    <string name="export_failed">Hibás export</string>
    
 </resources>
