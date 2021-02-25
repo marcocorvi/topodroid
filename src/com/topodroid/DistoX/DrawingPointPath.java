@@ -341,7 +341,7 @@ public class DrawingPointPath extends DrawingPath
     }
   }
 
-  int getScale() { return mScale; }
+  public int getScale() { return mScale; }
 
   float getScaleValue() // FIX Asenov
   {

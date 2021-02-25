@@ -46,15 +46,16 @@ public class ShpPoint extends ShpObject
     // Log.v("DistoX", "SHP write points " + n_pts );
     if ( n_pts == 0 ) return false;
 
-    int n_fld = 5;
+    int n_fld = 6;
     String[] fields = new String[ n_fld ];
     fields[0] = "name";
     fields[1] = "orient";
-    fields[2] = "levels";
-    fields[3] = "scrap";
-    fields[4] = "text";
+    fields[2] = "scale";
+    fields[3] = "levels";
+    fields[4] = "scrap";
+    fields[5] = "text";
     byte[]   ftypes = { BYTEC, BYTEC, BYTEC, BYTEC, BYTEC };
-    int[]    flens  = { 16, 6, 6, 6, 128 };
+    int[]    flens  = { 16, 6, 6, 6, 6, 128 };
 
     int shpRecLen = getShpRecordLength( );
     int shxRecLen = getShxRecordLength( );
@@ -92,9 +93,10 @@ public class ShpPoint extends ShpObject
       writeShxRecord( offset, shpRecLen );
       fields[0] = pt.getThName( );
       fields[1] = Integer.toString( (int)pt.mOrientation ); 
-      fields[2] = Integer.toString( pt.mLevel );
-      fields[3] = Integer.toString( pt.mScrap ); 
-      fields[4] = pt.getPointText(); 
+      fields[2] = Integer.toString( pt.getScale() );
+      fields[3] = Integer.toString( pt.mLevel );
+      fields[4] = Integer.toString( pt.mScrap ); 
+      fields[5] = pt.getPointText(); 
       if ( fields[3] == null ) fields[3] = "";
       if ( fields[4] == null ) fields[4] = "";
       writeDBaseRecord( n_fld, fields, flens );

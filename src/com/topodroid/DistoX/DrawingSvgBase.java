@@ -275,9 +275,14 @@ class DrawingSvgBase
     String name = point.getThName( );
     pw.format("<!-- point %s -->\n", name );
     if ( name.equals("label") ) {
+      float o = (float)(point.mOrientation);
+      float s = POINT_SCALE * TDMath.sind( o ) * scale;
+      float c = POINT_SCALE * TDMath.cosd( o ) * scale;
       DrawingLabelPath label = (DrawingLabelPath)point;
       printPointWithXY( pw, "<text", xoff+point.cx, yoff+point.cy );
-      pw.format(Locale.US, " style=\"fill:black;stroke:black;stroke-width:%.2f\">%s</text>\n", TDSetting.mSvgLabelStroke * scale, label.mPointText );
+      pw.format(Locale.US, " style=\"fill:black;stroke:black;stroke-width:%.2f\"", TDSetting.mSvgLabelStroke * scale );
+      pw.format(Locale.US, " transform=\"matrix(%.2f,%.2f,%.2f,%.2f,%.2f,%.2f)\">", c, s, -s, c, (xoff+point.cx)*TDSetting.mToSvg, (yoff+point.cy)*TDSetting.mToSvg );
+      pw.format( "%s</text>\n", label.mPointText );
     // } else if ( name.equals("continuation") ) {
     //   printPointWithXY( pw, "<text", xoff+point.cx, yoff+point.cy );
     //   pw.format(Locale.US, " style=\"fill:none;stroke:black;stroke-width:%.2f\">\?</text>\n", TDSetting.mSvgLabelStroke );
