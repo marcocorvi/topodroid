@@ -4325,12 +4325,12 @@ public class DataHelper extends DataSetObservable
                      "INSERT into %s values( %d, \"%s\", \"%s\", \"%s\", %.4f, \"%s\", \"%s\", %d, %d, %d );\n",
                      SURVEY_TABLE,
                      sid,
-                     cursor.getString(0),
-                     cursor.getString(1),
-                     cursor.getString(2),
+                     TDString.escape( cursor.getString(0) ),
+                     TDString.escape( cursor.getString(1) ),
+                     TDString.escape( cursor.getString(2) ),
                      cursor.getDouble(3),     // declination
-                     cursor.getString(4),     // comment
-                     cursor.getString(5),     // init_station
+                     TDString.escape( cursor.getString(4) ),     // comment
+                     TDString.escape( cursor.getString(5) ),     // init_station
                      (int)cursor.getLong(6),  // xstation
                      (int)cursor.getLong(7),  // datamode
                      (int)cursor.getLong(8)   // extend
@@ -4352,7 +4352,8 @@ public class DataHelper extends DataSetObservable
                      sid,
                      cursor.getLong(0),   // id
                      cursor.getLong(1),   // shotid
-                     cursor.getString(2) ); // date
+                     TDString.escape( cursor.getString(2) ) // date
+                    );
          } while (cursor.moveToNext());
        }
        if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
@@ -4371,9 +4372,9 @@ public class DataHelper extends DataSetObservable
                      cursor.getLong(0),   // id
                      cursor.getLong(1),   // shotid
                      cursor.getLong(2),   // status
-                     cursor.getString(3), // title
-                     cursor.getString(4), // date
-                     cursor.getString(5), // comment
+                     TDString.escape( cursor.getString(3) ), // title
+                     TDString.escape( cursor.getString(4) ), // date
+                     TDString.escape( cursor.getString(5) ), // comment
                      cursor.getLong(6)
            );
          } while (cursor.moveToNext());
@@ -4391,18 +4392,18 @@ public class DataHelper extends DataSetObservable
              PLOT_TABLE,
              sid,
              cursor.getLong(0),    // plot id
-             cursor.getString(1),  // name
+             TDString.escape( cursor.getString(1) ),  // name
              cursor.getLong(2),    // type
              cursor.getLong(3),    // status
-             cursor.getString(4),  // start
-             cursor.getString(5),  // view
+             TDString.escape( cursor.getString(4) ),  // start
+             TDString.escape( cursor.getString(5) ),  // view
              cursor.getDouble(6),  // X offset
              cursor.getDouble(7),
              cursor.getDouble(8),  // zoom
              cursor.getDouble(9),  // azimuth
              cursor.getDouble(10), // clino
-             cursor.getString(11), // hide
-             cursor.getString(12), // nick
+             TDString.escape( cursor.getString(11) ), // hide
+             TDString.escape( cursor.getString(12) ), // nick
              cursor.getLong(13),   // orientation
              cursor.getLong(14)    // maxscrap
            );
@@ -4421,11 +4422,11 @@ public class DataHelper extends DataSetObservable
                      SKETCH_TABLE,
                      sid,
                      cursor.getLong(0),
-                     cursor.getString(1),
+                     TDString.escape( cursor.getString(1) ),
                      cursor.getLong(2),
-                     cursor.getString(3),
-                     cursor.getString(4),
-                     cursor.getString(5),
+                     TDString.escape( cursor.getString(3) ),
+                     TDString.escape( cursor.getString(4) ),
+                     TDString.escape( cursor.getString(5) ),
                      cursor.getDouble(6),
                      cursor.getDouble(7),
                      cursor.getDouble(8),
@@ -4460,8 +4461,8 @@ public class DataHelper extends DataSetObservable
                      SHOT_TABLE,
                      sid,
                      cursor.getLong(0),
-                     cursor.getString(1),
-                     cursor.getString(2),
+                     TDString.escape( cursor.getString(1) ),
+                     TDString.escape( cursor.getString(2) ),
                      cursor.getDouble(3),
                      cursor.getDouble(4),
                      cursor.getDouble(5),
@@ -4473,12 +4474,12 @@ public class DataHelper extends DataSetObservable
                      cursor.getLong(11),    // flag
                      cursor.getLong(12),    // leg
                      cursor.getLong(13),    // status
-                     cursor.getString(14),  // comment
+                     TDString.escape( cursor.getString(14) ),  // comment
                      cursor.getLong(15),    // type
                      cursor.getLong(16),    // millis
                      0, // cursor.getLong(17) // COLOR is not exported
 		     cursor.getDouble(18),  // stretch
-                     cursor.getString(19)   // address
+                     TDString.escape( cursor.getString(19) )   // address
            );
          } while (cursor.moveToNext());
        }
@@ -4495,15 +4496,15 @@ public class DataHelper extends DataSetObservable
              FIXED_TABLE,
              sid,
              cursor.getLong(0),
-             cursor.getString(1),
+             TDString.escape( cursor.getString(1) ),
              cursor.getDouble(2),
              cursor.getDouble(3),
              cursor.getDouble(4),
              cursor.getDouble(5),
-             cursor.getString(6),
+             TDString.escape( cursor.getString(6) ),
              cursor.getLong(7),   // status
              cursor.getLong(8),   // source
-             cursor.getString(9), // cs_name
+             TDString.escape( cursor.getString(9) ), // cs_name
              cursor.getDouble(10),
              cursor.getDouble(11),
              cursor.getDouble(12),
@@ -4525,8 +4526,8 @@ public class DataHelper extends DataSetObservable
              "INSERT into %s values( %d, 0, \"%s\", \"%s\", %d );\n",
              STATION_TABLE,
              sid, 
-             cursor.getString(0),
-             cursor.getString(1),
+             TDString.escape( cursor.getString(0) ),
+             TDString.escape( cursor.getString(1) ),
              cursor.getLong(2) );
          } while (cursor.moveToNext());
        }
@@ -4545,11 +4546,11 @@ public class DataHelper extends DataSetObservable
                      cursor.getLong(0),
                      cursor.getLong(1),
                      cursor.getLong(2),
-                     cursor.getString(3),
-                     cursor.getString(4),
-                     cursor.getString(5),
-                     cursor.getString(6),
-                     cursor.getString(7)
+                     TDString.escape( cursor.getString(3) ),
+                     TDString.escape( cursor.getString(4) ),
+                     TDString.escape( cursor.getString(5) ),
+                     TDString.escape( cursor.getString(6) ),
+                     TDString.escape( cursor.getString(7) )
                     );
          } while (cursor.moveToNext());
        }
@@ -4590,12 +4591,12 @@ public class DataHelper extends DataSetObservable
        // scanline0.skipSpaces( );
        if ( table.equals(SURVEY_TABLE) ) { 
          long skip_sid = scanline0.longValue( );
-         name          = scanline0.stringValue( );
-         date          = scanline0.stringValue( );
-         String team   = scanline0.stringValue( );
+         name          = TDString.unescape( scanline0.stringValue( ) );
+         date          = TDString.unescape( scanline0.stringValue( ) );
+         String team   = TDString.unescape( scanline0.stringValue( ) );
          double decl   = ( db_version > 14 )? scanline0.doubleValue( ) : 0;
-         comment       = scanline0.stringValue( );
-         String init_station = ( db_version > 22)? scanline0.stringValue( ) : "0";
+         comment       = TDString.unescape( scanline0.stringValue( ) );
+         String init_station = ( db_version > 22)? TDString.unescape( scanline0.stringValue( ) ) : "0";
          int xsections = ( db_version > 29)? (int)( scanline0.longValue( ) )
                                            : SurveyInfo.XSECTION_SHARED; // old at-sationx-sections were "shared"
 	 int datamode  = ( db_version > 36)? (int)( scanline0.longValue( ) ) : SurveyInfo.DATAMODE_NORMAL;
@@ -4627,7 +4628,7 @@ public class DataHelper extends DataSetObservable
 	     {
                shotid = scanline1.longValue( );
                if ( shotid >= 0 ) {
-                 date   = scanline1.stringValue( );
+                 date   = TDString.unescape( scanline1.stringValue( ) );
                  cv = makeAudioContentValues( sid, id, shotid, date );
                  myDB.insert( AUDIO_TABLE, null, cv ); 
                  // TDLog.Log( TDLog.LOG_DB, "load from file photo " + sid + " " + id + " " + title + " " + name );
@@ -4639,11 +4640,11 @@ public class DataHelper extends DataSetObservable
                id      = scanline1.longValue( );
                shotid  = scanline1.longValue( );
                status  = scanline1.longValue( );
-               title   = scanline1.stringValue( );
-               date    = scanline1.stringValue( );
-               comment = scanline1.stringValue( );
-               String type  = scanline1.stringValue( );
-               String value = scanline1.stringValue( );
+               title   = TDString.unescape( scanline1.stringValue( ) );
+               date    = TDString.unescape( scanline1.stringValue( ) );
+               comment = TDString.unescape( scanline1.stringValue( ) );
+               String type  = TDString.unescape( scanline1.stringValue( ) );
+               String value = TDString.unescape( scanline1.stringValue( ) );
                if ( shotid >= 0 ) {
                  cv = makeSensorContentValues( sid, id, shotid, status, title, date, comment, type, value );
                  myDB.insert( SENSOR_TABLE, null, cv ); 
@@ -4655,9 +4656,9 @@ public class DataHelper extends DataSetObservable
              {
                shotid  = scanline1.longValue( );
                if ( shotid >= 0 ) {
-                 title   = scanline1.stringValue( );
-                 date    = scanline1.stringValue( );
-                 comment = scanline1.stringValue( );
+                 title   = TDString.unescape( scanline1.stringValue( ) );
+                 date    = TDString.unescape( scanline1.stringValue( ) );
+                 comment = TDString.unescape( scanline1.stringValue( ) );
                  long camera = (db_version > 39)? scanline1.longValue( ) : 0 ;
                  cv = makePhotoContentValues( sid, id, shotid, TDStatus.NORMAL, title, date, comment, camera );
                  myDB.insert( PHOTO_TABLE, null, cv ); 
@@ -4666,18 +4667,18 @@ public class DataHelper extends DataSetObservable
              }
 	     else if ( table.equals(PLOT_TABLE) ) // ---------- PLOTS
 	     {
-               name         = scanline1.stringValue( );
+               name         = TDString.unescape( scanline1.stringValue( ) );
                long type    = scanline1.longValue( ); if ( db_version <= 20 ) if ( type == 3 ) type = 5;
                status       = scanline1.longValue( );
-               String start = scanline1.stringValue( );
-               String view  = scanline1.stringValue( );
+               String start = TDString.unescape( scanline1.stringValue( ) );
+               String view  = TDString.unescape( scanline1.stringValue( ) );
                double xoffset = scanline1.doubleValue( );
                double yoffset = scanline1.doubleValue( );
                double zoom  = scanline1.doubleValue( );
                double azimuth = scanline1.doubleValue( );
                double clino = ( db_version > 20 )? scanline1.doubleValue( ) : 0;
-               String hide  = ( db_version > 24 )? scanline1.stringValue( ) : TDString.EMPTY;
-               String nick  = ( db_version > 30 )? scanline1.stringValue( ) : TDString.EMPTY;
+               String hide  = ( db_version > 24 )? TDString.unescape( scanline1.stringValue( ) ) : TDString.EMPTY;
+               String nick  = ( db_version > 30 )? TDString.unescape( scanline1.stringValue( ) ) : TDString.EMPTY;
 	       int orientation = (db_version > 32 )? (int)(scanline1.longValue()) : 0; // default PlotInfo.ORIENTATION_PORTRAIT
 	       int maxscrap = (db_version > 41 )? (int)(scanline1.longValue()) : 0; // default 0
                // if ( insertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation, false ) < 0 ) { success = false; }
@@ -4690,11 +4691,11 @@ public class DataHelper extends DataSetObservable
 /* FIXME_SKETCH_3D *
 	     else if ( table.equals(SKETCH_TABLE) ) // -------------- SKETCHES
 	     {
-               name         = scanline1.stringValue( );
+               name         = TDString.unescape( scanline1.stringValue( ) );
                status       = scanline1.longValue( );
-               String start = scanline1.stringValue( );
-               String st1   = scanline1.stringValue( );
-               String st2   = scanline1.stringValue( );
+               String start = TDString.unescape( scanline1.stringValue( ) );
+               String st1   = TDString.unescape( scanline1.stringValue( ) );
+               String st2   = TDString.unescape( scanline1.stringValue( ) );
                double xofft  = scanline1.doubleValue( );
                double yofft  = scanline1.doubleValue( );
                double zoomt  = scanline1.doubleValue( );
@@ -4717,8 +4718,8 @@ public class DataHelper extends DataSetObservable
  * END_SKETCH_3D */
 	     else if ( table.equals(SHOT_TABLE) ) // ------------ SHOTS
              {
-               String from = scanline1.stringValue( );
-               String to   = scanline1.stringValue( );
+               String from = TDString.unescape( scanline1.stringValue( ) );
+               String to   = TDString.unescape( scanline1.stringValue( ) );
                double d    = scanline1.doubleValue( );
                double b    = scanline1.doubleValue( );
                double c    = scanline1.doubleValue( );
@@ -4730,13 +4731,13 @@ public class DataHelper extends DataSetObservable
                long flag   = scanline1.longValue( );
                long leg    = scanline1.longValue( );
                status      = scanline1.longValue( );
-               comment     = scanline1.stringValue( );
+               comment     = TDString.unescape( scanline1.stringValue( ) );
                // FIXME N.B. shot_type is not saved before 22
                long type   = 0; if ( db_version > 21 ) type   = scanline1.longValue( );
 	       long millis = 0; if ( db_version > 31 ) millis = scanline1.longValue( );
 	       long color  = 0; if ( db_version > 33 ) color  = scanline1.longValue( );
 	       double stretch = 0; if ( db_version > 35 ) stretch = scanline1.doubleValue( );
-	       String addr = ""; if ( db_version > 37 ) addr =scanline1.stringValue( );
+	       String addr = ""; if ( db_version > 37 ) addr = TDString.unescape( scanline1.stringValue( ) );
 
                // if ( doInsertShot( sid, id, millis, color, from, to, d, b, c, r, extend, stretch, flag, leg, status, type, comment, addr, false ) >= 0 ) {
                //   success &= updateShotAMDR( id, sid, acc, mag, dip, r, false );
@@ -4752,19 +4753,19 @@ public class DataHelper extends DataSetObservable
              }
 	     else if ( table.equals(FIXED_TABLE) )
 	     {
-               station    = scanline1.stringValue( );
+               station    = TDString.unescape( scanline1.stringValue( ) );
                double lng = scanline1.doubleValue( );
                double lat = scanline1.doubleValue( );
                double alt = scanline1.doubleValue( );
                double asl = scanline1.doubleValue( );
-               comment    = scanline1.stringValue( );
+               comment    = TDString.unescape( scanline1.stringValue( ) );
                status     = scanline1.longValue( );
                long source = scanline1.longValue( );
                double cs_lng = 0;
                double cs_lat = 0;
                double cs_alt = 0;
 	       long cs_n_dec = 2;
-               String cs = scanline1.stringValue( );
+               String cs = TDString.unescape( scanline1.stringValue( ) );
                if ( cs.length() > 0 ) {
                  cs_lng = scanline1.doubleValue( );
                  cs_lat = scanline1.doubleValue( );
@@ -4785,8 +4786,8 @@ public class DataHelper extends DataSetObservable
                // N.B. ONLY IF db_version > 19
                // TDLog.Error( "v <" + v + ">" );
                // TDLog.Log( TDLog.LOG_DB, "load from file station " + sid + " " + name + " " + comment + " " + flag  );
-               name    = scanline1.stringValue( );
-               comment = scanline1.stringValue( );
+               name    = TDString.unescape( scanline1.stringValue( ) );
+               comment = TDString.unescape( scanline1.stringValue( ) );
                long flag = ( db_version > 25 )? scanline1.longValue() : 0;
                // success &= insertStation( sid, name, comment, flag );
                cv = makeStationContentValues( sid, name, comment, flag );

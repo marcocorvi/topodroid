@@ -31,4 +31,14 @@ public class TDString
   public static final String NINETYONE = "91";
 
   public static final String OPTION_SCRAP = "-scrap";
+
+  public static String escape( String str )
+  {
+    return str.replace('"', '\u001b' );
+  }
+
+  public static String unescape( String str )
+  {
+    return str.replace('\u001b', '"' );
+  }
 }
