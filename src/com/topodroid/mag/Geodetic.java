@@ -56,18 +56,18 @@ public class Geodetic
     return s_radius * Math.cos( alat * Math.PI / 180 );
   }
 
-   // -----------------------------------------------------------------------------------
-   //E. J. KRAKIWSKY, D. B. THOMSON: GEODETIC POSITION COMPUTATIONS
-   //https://www2.unb.ca/gge/Pubs/LN39.pdf
+  // -----------------------------------------------------------------------------------
+  // E. J. KRAKIWSKY, D. B. THOMSON: GEODETIC POSITION COMPUTATIONS
+  // https://www2.unb.ca/gge/Pubs/LN39.pdf
   // exact
 
   // get the meridian radius times PI/180
   static public double meridianRadiusExact( double latitude )
   {
     double alat = Math.abs( latitude );
-	double s = Math.sin( alat * Math.PI / 180.0 );
+    double s = Math.sin( alat * Math.PI / 180.0 );
     double W = Math.sqrt( 1 - EARTH_E2 * s * s );
-    //RADIUS_WE = EARTH_A / W; // principal radius of curvature in the prime vertical plane (N)
+    // RADIUS_WE = EARTH_A / W; // principal radius of curvature in the prime vertical plane (N)
     double RADIUS_NS = EARTH_A * EARTH_1E2 / ( W * W * W ); // ! W3 meridian radius of curvature (M)
     return (RADIUS_NS * Math.PI / 180.0);
   }
@@ -76,10 +76,10 @@ public class Geodetic
   static public double parallelRadiusExact( double latitude )
   {
     double alat = Math.abs( latitude );
-	double s = Math.sin( alat * Math.PI / 180.0 );
+    double s = Math.sin( alat * Math.PI / 180.0 );
     double W = Math.sqrt( 1 - EARTH_E2 * s * s );
     double RADIUS_WE = EARTH_A / W; // principal radius of curvature in the prime vertical plane (N)
-    //RADIUS_NS = EARTH_A * EARTH_1E2 / ( W * W * W );    
+    // RADIUS_NS = EARTH_A * EARTH_1E2 / ( W * W * W );    
     return (RADIUS_WE * Math.cos( alat * Math.PI / 180 ) * Math.PI / 180.0);
   }
  
