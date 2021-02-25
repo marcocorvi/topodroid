@@ -651,7 +651,7 @@ public class TopoDroidApp extends Application
   void doBluetoothButton( Context ctx, ILister lister, Button b )
   {
     if ( TDInstance.isDeviceBric() ) {
-      if ( TDLevel.overAdvanced ) {
+      if ( TDLevel.overExpert ) { // FIXME BRIC_TESTER
         CutNPaste.showPopupBT( ctx, lister, this, b, false );
       } else {
         doBluetoothReset( lister );

@@ -1341,7 +1341,7 @@ public class ShotWindow extends Activity
   }
 
   // --------------------------------------------------------------
-  void doBluetooth( Button b ) // BLUETOOTH
+  private void doBluetooth( Button b ) // BLUETOOTH
   {
     mApp.doBluetoothButton( mActivity, this, b );
   }
