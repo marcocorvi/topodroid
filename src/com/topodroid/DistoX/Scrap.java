@@ -394,6 +394,21 @@ class Scrap
     return false;
   }
 
+  boolean removeLinePointFromSelection( DrawingLinePath line, LinePoint point )
+  {
+    if ( point == null ) return false;
+    int size = line.size();
+    if ( size <= 2 ) return false;
+    syncClearSelected();
+    synchronized( TDPath.mCommandsLock ) {
+      line.remove( point );
+    }
+    synchronized( TDPath.mSelectionLock ) {
+      mSelection.removeLineLastPoint( line, point );
+    }
+    return true;
+  }
+
   /* Split the line at the point lp
    * The erase command is updated with the removal of the original line and the insert
    * of the two new pieces

@@ -69,13 +69,13 @@ Editing an orientable point, its icon can be rotated also with the side-drag (if
 
 A survey shot (leg or splay) has a green dot in the middle to select it. When a leg is selected, a horizontal yellow segment is also displayed on the side opposite to the leg "extend", or on both sides if the leg is extended vertically. The leg extend can be set by tapping the left or right end of this segment, or the middle.<br><p>
 
-<h4>Point-wise edit actions [A]</h4>
+<h4>Pointwise edit actions [A]</h4>
 
 The second to the right button applies only to drawing items and has a drop-down menu of advanced editing actions, for either points [P],
 or lines (except "section" lines) [L], or areas [A].
 <ul style="margin-top=0">
-<li><i>Snap to nearby point</i> [P,L,A]: move the point to coincide with the closest nearby point (no action if there is no nearby point)</li>
-<li><i>Snap to nearby splays/line</i> [L:T]. Lines are deformed to pass through the splay endpoints that are close enough. For areas the point is moved to coincide with the closest line point, and the pieces of the area border before and after it are replaced with pieces of border that follow the line path. It requires the proper setting enabled</li>
+<li><i>Snap to nearby point</i> [P,L,A]: move the point to coincide with the nearest point of the current scrap. No action if there is no nearby point</li>
+<li><i>Snap to nearby splays/line</i> [L,A:T]. Lines are deformed to pass through the splay endpoints that are close enough. If an area point is close to a line point, and the pieces of the area border before and after it are replaced with pieces that follow the line path. This feature requires the proper setting enabled</li>
 <li><i>Insert</i> point(s) [L:A]. When a single point is selected, the new point is inserted "after" the selected point, and it is added to the selection set, and you can select it with the Prev-Next buttons. When a range is selected, new points are inserted between every two points of the range. A <u>long-tap</u> moves the selected point to the nearest point and inserts another point, "after" the selected point [T/G]</li>
 <li><i>Cut</i> [L] the line at the point, thus making two lines</li>
 <li><i>Straighten</i> [L:T] the line segment removing the control points</li>
@@ -84,6 +84,8 @@ or lines (except "section" lines) [L], or areas [A].
 <li><i>Append</i> [L:T, except "section"] to another line of same type. Only for line end-points and the other line end-point must be close to the selected point.</li>
 <li>enter <i>multiselection</i> mode [P,L,A:T]
 </ul><br><p>
+
+Point "snap" 
 
 <h4>Multiselection mode [T]</h4>
 This mode allows to select several objects of the same type (point/line/area) and act on them all:

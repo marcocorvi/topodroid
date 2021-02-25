@@ -294,6 +294,21 @@ class Selection
     return spmin;
   }
 
+  private SelectionPoint getBucketLinePoint( DrawingLinePath line, LinePoint pt )
+  {
+    float dmin = 1f;
+    for ( SelectionBucket bucket : mBuckets ) {
+      if ( bucket.contains( pt.x, pt.y, dmin, dmin ) ) {
+        for ( SelectionPoint sp2 : bucket.mPoints ) {
+	  if ( sp2.type() != DrawingPath.DRAWING_PATH_LINE ) continue;
+          if ( (DrawingLinePath)sp2.mItem != line ) continue;
+	  if ( sp2.mPoint == pt ) return sp2;
+        }
+      }
+    }
+    return null;
+  }
+
   SelectionPoint getNearestPoint( SelectionPoint sp, float x, float y, float dmin )
   {
     SelectionPoint spmin = getBucketNearestPoint( sp, x, y, dmin );
@@ -331,6 +346,12 @@ class Selection
       }
     }
     return spmin;
+  }
+
+  void removeLineLastPoint( DrawingLinePath line, LinePoint pt )
+  {
+    SelectionPoint sp = getBucketLinePoint( line, pt );
+    if ( sp != null ) removePoint( sp );
   }
 
   void removePoint( SelectionPoint sp ) // synchronized by CommandManager

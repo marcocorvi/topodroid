@@ -207,7 +207,17 @@ public class DrawingPointLinePath extends DrawingPath
     retracePath();
   }
 
-  void setClosed( boolean closed ) { mClosed = closed; }
+  // @return true if the path has been opened and the last point need to be removed
+  boolean setClosed( boolean closed ) 
+  { 
+    if ( closed == mClosed ) return false;
+    if ( mClosed && isPathClosed() ) {
+      if ( mSize < 3 ) return false;
+    }
+    mClosed = closed; 
+    // return removeLastPoint();
+    return ! mClosed;
+  }
   public boolean isClosed() { return mClosed; }
 
   boolean isPathClosed() 
@@ -217,6 +227,18 @@ public class DrawingPointLinePath extends DrawingPath
     float dy = (mFirst.y - mLast.y)/3;
     return ( dx*dx + dy*dy < 1.0e-7 );
   }
+
+  // @return true if the last point has been removed
+  // private boolean removeLastPoint()
+  // {
+  //   LinePoint last = mLast.mPrev;
+  //   if ( last == null ) return false;
+  //   last.mNext = null;
+  //   mLast = last;
+  //   -- mSize;
+  //   retracePath();
+  //   return true;
+  // }
 
   void setVisible( boolean visible ) { mVisible = visible; }
   public boolean isVisible() { return mVisible; }
@@ -240,6 +262,7 @@ public class DrawingPointLinePath extends DrawingPath
     lp.mNext = null;
     lp.mPrev = null;
     -- mSize;
+    retracePath();
     computeUnitNormal();
   }
 

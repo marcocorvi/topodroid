@@ -276,7 +276,10 @@ class DrawingLineDialog extends MyDialog
         mParent.closeLine( mLine );
         mLine.setClosed( true );
       } else {
-        mLine.setClosed( false );
+        LinePoint last = mLine.last();
+        if ( mLine.setClosed( false ) ) {
+          mParent.removeLinePointFromSelection( mLine, last );
+        }
       }
 
       if ( TDSetting.mWithLevels  > 0 ) setLevel();

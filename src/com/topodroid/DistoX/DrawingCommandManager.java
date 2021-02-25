@@ -755,6 +755,8 @@ class DrawingCommandManager
 
   boolean removeLinePoint( DrawingPointLinePath line, LinePoint point, SelectionPoint sp ) { return mCurrentScrap.removeLinePoint( line, point, sp ); }
 
+  boolean removeLinePointFromSelection( DrawingLinePath line, LinePoint point ) { return mCurrentScrap.removeLinePointFromSelection( line, point ); }
+
   List< DrawingPath > splitPlot( ArrayList< PointF > border, boolean remove ) { return mCurrentScrap.splitPlot( border, remove ); }
     
 

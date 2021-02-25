@@ -3037,6 +3037,14 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  // used to remove the last point of a line
+  void removeLinePointFromSelection( DrawingLinePath line, LinePoint point )
+  {
+    if (  mDrawingSurface.removeLinePointFromSelection(line, point ) ) {
+      modified();
+    }
+  }
+
 
   // @param xs_id      section-line id 
   // @param scrap_name xsection scrap_name = survey_name + "-" + xsection_id

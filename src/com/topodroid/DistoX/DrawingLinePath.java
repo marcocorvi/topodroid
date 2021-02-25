@@ -210,6 +210,7 @@ public class DrawingLinePath extends DrawingPointLinePath
       }
     }
   }
+
   /** 
    * @param exclude whether to exclude splitting-point
    */

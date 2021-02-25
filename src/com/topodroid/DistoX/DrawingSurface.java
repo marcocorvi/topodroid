@@ -282,6 +282,9 @@ class DrawingSurface extends SurfaceView
   boolean removeLinePoint( DrawingPointLinePath line, LinePoint point, SelectionPoint sp ) 
   { return commandManager.removeLinePoint(line, point, sp); }
 
+  boolean removeLinePointFromSelection( DrawingLinePath line, LinePoint point ) 
+  { return commandManager.removeLinePointFromSelection( line, point ); }
+
   // N.B. this must be called only by plan or profile
   // p is the path of sp
   void deleteSplay( DrawingPath p, SelectionPoint sp )

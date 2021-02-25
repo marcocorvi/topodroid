@@ -130,7 +130,7 @@ The <b>edit</b> [A] mode has, besides the green buttons:
 <ul style="margin-top=0">
 <li><img src="btn_edit.png"> type of selectable items: all, points, lines, areas, shots, stations</li>
 <li><img src="btn_size.png"> size of the selection tool [S, M, L]</li>
-<li><img src="btn_point.png"> point-wise and special actions</li>
+<li><img src="btn_point.png"> pointwise and special actions</li>
 <li><img src="btn_item.png"> item properties edit</li>
 <li><img src="btn_delete.png"> delete the item from the sketch (it asks for confirmation, and can be "undone").</li>
 <li><img src="btn_range.png"> range selection: either pointwise or local (only for lines and areas).</li>
@@ -258,13 +258,16 @@ If you export the drawing in dxf with DXF version 6 do not use splines because t
 
 <h4>Line joining</h4>
 The <i>join</i> button is a multi-state button.
+Line joining can be done only with other lines of the scraps.
+The lines that are joined must belong to the same group. If you need to "join" two points of lines of different groups
+you should move one point to coincide with the other.<br>
 <ul>
 <li><i>off</i>: the lines of the current type cannot be joined</li>
 <li><i>no</i>: the current type line will not be joined</li>
-<li><i>start</i>: the current type line will be joined to a line of the same group if its start-point is close to one of that line endpoints</li>
-<li><i>end</i>: the current type line will be joined to a line of the same group by its end-point</li>
-<li><i>both</i>: the current type line will be joined to a line of the same group by both its start and its end-point</li>
-<li><i>continue</i>: the current type line will continue a line of the same group if its start-point is close enough to an endpoint of that line</li>
+<li><i>start</i>: the current type line will be joined to a line if its start-point is close to one of that line endpoints</li>
+<li><i>end</i>: the current type line will be joined to a line by its end-point</li>
+<li><i>both</i>: the current type line will be joined to a line by both its start and its end-point</li>
+<li><i>continue</i>: the current type line will continue a line if its start-point is close enough to an endpoint of that line</li>
 </ul>
 <br>
 
