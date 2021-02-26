@@ -36,7 +36,7 @@ public class Geodetic
   // RADIUS_NS = EARTH_A * EARTH_1E2 / W;
     
   // -----------------------------------------------------------------------------------
-  // approximation
+  /* approximation
 
   static private final double EARTH_RADIUS1 = (EARTH_A * Math.PI / 180.0); // semimajor axis [m]
   static private final double EARTH_RADIUS2 = (EARTH_B * Math.PI / 180.0);
@@ -55,6 +55,7 @@ public class Geodetic
     double s_radius = ((90 - alat) * EARTH_RADIUS1 + alat * EARTH_RADIUS2)/90;
     return s_radius * Math.cos( alat * Math.PI / 180 );
   }
+  */
 
   // -----------------------------------------------------------------------------------
   // E. J. KRAKIWSKY, D. B. THOMSON: GEODETIC POSITION COMPUTATIONS
@@ -62,7 +63,9 @@ public class Geodetic
   // exact
 
   // get the meridian radius times PI/180
-  static public double meridianRadiusExact( double latitude )
+  // @param latitude   latitude [deg]
+  // @param height     ellipsoidic altitude [m]
+  static public double meridianRadiusExact( double latitude, double height )
   {
     double alat = Math.abs( latitude );
     double s = Math.sin( alat * Math.PI / 180.0 );
@@ -73,7 +76,9 @@ public class Geodetic
   }
 
   // get the parallel radius times PI/180 - horizontal X-Y radius
-  static public double parallelRadiusExact( double latitude )
+  // @param latitude   latitude [deg]
+  // @param height     ellipsoidic altitude [m]
+  static public double parallelRadiusExact( double latitude, double height )
   {
     double alat = Math.abs( latitude );
     double s = Math.sin( alat * Math.PI / 180.0 );
@@ -82,7 +87,6 @@ public class Geodetic
     // RADIUS_NS = EARTH_A * EARTH_1E2 / ( W * W * W );    
     return (RADIUS_WE * Math.cos( alat * Math.PI / 180 ) * Math.PI / 180.0);
   }
- 
   
   // UNUSED -----------------------------------------------------------------------------
   /*
