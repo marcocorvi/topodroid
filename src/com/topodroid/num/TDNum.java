@@ -552,9 +552,11 @@ public class TDNum
       sf.addAzimuth( ts.b(), aext );
       if ( st != null ) { // loop-closure -: need the loop length to compute the fractional closure error
         // do close loop also on duplicate shots
-        NumShortpath short_path = shortestPath( sf, st); 
         if ( format != null ) {
-          mClosures.add( getClosureError( format, st, sf, ts.d(), ts.b(), ts.c(), short_path, Math.abs( ts.d() ) ) );
+          NumShortpath short_path = shortestPath( sf, st); 
+          if ( short_path != null ) {
+            mClosures.add( getClosureError( format, st, sf, ts.d(), ts.b(), ts.c(), short_path, Math.abs( ts.d() ) ) );
+          }
         }
         if ( /* TDSetting.mAutoStations || */ TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) { // do not close loop
           addOpenLoopShot( sf, ts, iext, aext, fext, anomaly ); // keep loop open: new station( id=ts.to, from=sf, ... )
@@ -828,10 +830,12 @@ public class TDNum
             sf.addAzimuth( ts.b(), aext );
             if ( st != null ) { // loop-closure -: need the loop length to compute the fractional closure error
               // do close loop also on duplicate shots
-              NumShortpath short_path = shortestPath( sf, st); 
 	      if ( format != null ) {
-                mClosures.add( getClosureError( format, st, sf, ts.d(), ts.b(), ts.c(), short_path, Math.abs( ts.d() ) ) );
-	      }
+                NumShortpath short_path = shortestPath( sf, st); 
+                if ( short_path != null ) {
+                  mClosures.add( getClosureError( format, st, sf, ts.d(), ts.b(), ts.c(), short_path, Math.abs( ts.d() ) ) );
+	        }
+              }
               if ( /* TDSetting.mAutoStations || */ TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) { // do not close loop
                 addOpenLoopShot( sf, ts, iext, aext, fext, anomaly ); // keep loop open: new station( id=ts.to, from=sf, ... )
               } else { // Log.v("DistoXL", "close loop at " + sf.name + " " + st.name );
@@ -1664,7 +1668,7 @@ public class TDNum
   private NumShortpath shortestPath( NumStation s1, NumStation s2 )
   {
     // Log.v("DistoX-LOOP", "shortest path " + s1.name + " " + s2.name );
-    Stack<NumStation> stack = new Stack<NumStation>();
+    Stack< NumStation > stack = new Stack<NumStation>();
     mStations.initShortestPath( 100000.0f );
 
     s1.mShortpathDist.resetShortpath( 0, 0, 0 ); // clear 
@@ -1681,7 +1685,7 @@ public class TDNum
           NumShortpath etp = e.to.mShortpathDist;
           if ( etp != null ) {
             float d = sp.mDist + len;
-            if ( d < etp.mDist ) {
+            if ( d < etp.mDist - 0.001f ) { // at least 1 mm shorter
 	      // Log.v("DistoX-LOOP", "set short dist T " + e.to.name + " : " + d );
               etp.resetShortpath( sp.mNr+1, d, sp.mDist2 + len*len );
               // e.to.path = from;
@@ -1692,7 +1696,7 @@ public class TDNum
           NumShortpath efp = e.from.mShortpathDist;
 	  if ( efp != null ) {
             float d = sp.mDist + len;
-            if ( d < efp.mDist ) {
+            if ( d < efp.mDist - 0.001f ) { // at least 1 mm shorter
 	      // Log.v("DistoX-LOOP", "set short dist F " + e.from.name + " : " + d );
               efp.resetShortpath( sp.mNr+1, d, sp.mDist2 + len*len );
               // e.from.path = from;
