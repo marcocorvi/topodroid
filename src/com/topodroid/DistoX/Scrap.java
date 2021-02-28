@@ -342,9 +342,15 @@ class Scrap
     if ( size == 2 ) return;
     syncClearSelected();
 
+    boolean splitted = false;
     DrawingLinePath line1 = new DrawingLinePath( line.mLineType, mScrapIdx );
     DrawingLinePath line2 = new DrawingLinePath( line.mLineType, mScrapIdx );
-    if ( line.splitAt( lp, line1, line2, false ) ) {
+    try {
+      splitted = line.splitAt( lp, line1, line2, false );
+    } catch ( OutOfMemoryError e ) {
+      TDLog.Error("OOM " + e.getMessage() );
+    }
+    if ( splitted ) {
       synchronized( TDPath.mCommandsLock ) {
         mCurrentStack.remove( line );
         mCurrentStack.add( line1 );
@@ -355,6 +361,8 @@ class Scrap
         mSelection.insertLinePath( line1 );
         mSelection.insertLinePath( line2 );
       }
+    } else {
+      TDLog.Error("FAILED split line");
     }
     // checkLines();
   }
@@ -419,7 +427,13 @@ class Scrap
   {
     DrawingLinePath line1 = new DrawingLinePath( line.mLineType, mScrapIdx );
     DrawingLinePath line2 = new DrawingLinePath( line.mLineType, mScrapIdx );
-    if ( line.splitAt( lp, line1, line2, true ) ) {
+    boolean splitted = false;
+    try {
+      splitted = line.splitAt( lp, line1, line2, true );
+    } catch ( OutOfMemoryError e ) {
+      TDLog.Error("OOM " + e.getMessage() );
+    }
+    if ( splitted ) {
       // Log.v("DistoX", "split " + line.size() + " ==> " + line1.size() + " " + line2.size() );
       // synchronized( TDPath.mCommandsLock ) // not neceessary: called in synchronized context
       {
@@ -439,10 +453,8 @@ class Scrap
         if ( line1.size() > 1 ) mSelection.insertLinePath( line1 );
         if ( line2.size() > 1 ) mSelection.insertLinePath( line2 );
       }
-    // } else {
-      // FIXME 
-      // TDLog.Error( "FAILED splitAt " + lp.x + " " + lp.y );
-      // line.dump();
+    } else {
+      TDLog.Error( "FAILED do split line " + lp.x + " " + lp.y );
     }
     // checkLines();
   }
@@ -898,22 +910,32 @@ class Scrap
   void addLineToLine( DrawingLinePath line1, DrawingLinePath line0 )
   {
     // Log.v("DistoX", "add line to line" );
-    DrawingLinePath line = new DrawingLinePath( line0.mLineType, line0.mScrap );
-    boolean prepend = line0.mFirst.distance( line1.mFirst ) < line0.mLast.distance( line1.mFirst );
-    if ( prepend ) {
-      line.appendReversedLinePoints( line1 );
-      line.appendLinePoints( line0 );
+    DrawingLinePath line = new DrawingLinePath( line0.mLineType, mScrapIdx );
+    boolean added = false;
+    try {
+      boolean prepend = line0.mFirst.distance( line1.mFirst ) < line0.mLast.distance( line1.mFirst );
+      if ( prepend ) {
+        line.appendReversedLinePoints( line1 );
+        line.appendLinePoints( line0 );
+      } else {
+        line.appendLinePoints( line0 );
+        line.appendLinePoints( line1 );
+      }
+      added = true;
+    } catch ( OutOfMemoryError e ) {
+      TDLog.Error("OOM " + e.getMessage() );
+    }
+    if ( added ) {
+      synchronized( TDPath.mCommandsLock ) {
+        mCurrentStack.remove( line0 );
+        mCurrentStack.add( line );
+      }
+      synchronized( TDPath.mSelectionLock ) {
+        mSelection.removePath( line0 );
+        mSelection.insertPath( line );
+      }
     } else {
-      line.appendLinePoints( line0 );
-      line.appendLinePoints( line1 );
-    }
-    synchronized( TDPath.mCommandsLock ) {
-      mCurrentStack.remove( line0 );
-      mCurrentStack.add( line );
-    }
-    synchronized( TDPath.mSelectionLock ) {
-      mSelection.removePath( line0 );
-      mSelection.insertPath( line );
+      TDLog.Error( "FAILED add line to line ");
     }
 
     /*
@@ -1148,10 +1170,11 @@ class Scrap
     DrawingLinePath line2 = (DrawingLinePath)spmin.mItem;
 
     //
-    boolean reversed1 = ( pt1 == line1.mLast );
-    boolean reversed2 = ( pt2 == line2.mFirst );
-    DrawingLinePath line = new DrawingLinePath( line2.mLineType, line2.mScrap );
-    synchronized( TDPath.mCommandsLock ) {
+    DrawingLinePath line = new DrawingLinePath( line2.mLineType, mScrapIdx );
+    boolean appended = false;
+    try {
+      boolean reversed1 = ( pt1 == line1.mLast );
+      boolean reversed2 = ( pt2 == line2.mFirst );
       // Log.v("DistoX", "Line1 reversed " + reversed1 + " Line2 reversed " + reversed2 );
       if ( reversed2 ) {
         if ( reversed1 ) {
@@ -1168,18 +1191,26 @@ class Scrap
           line.appendLinePoints( line1 );
         }
       }
-      mCurrentStack.remove( line1 );
-      mCurrentStack.remove( line2 );
-      mCurrentStack.add( line );
+      appended = true;
+    } catch ( OutOfMemoryError e ) {
+      TDLog.Error("OOM " + e.getMessage() );
     }
-    synchronized ( TDPath.mSelectionLock ) {
-      mSelection.removePath( line2 );
-      mSelection.removePath( line1 );
-      mSelection.insertPath( line );
-      mSelected.clear();
+    if ( appended ) {
+      synchronized( TDPath.mCommandsLock ) {
+        mCurrentStack.remove( line1 );
+        mCurrentStack.remove( line2 );
+        mCurrentStack.add( line );
+      }
+      synchronized ( TDPath.mSelectionLock ) {
+        mSelection.removePath( line2 );
+        mSelection.removePath( line1 );
+        mSelection.insertPath( line );
+        mSelected.clear();
+      }
+    } else {
+      TDLog.Error( "FAILED append hot item to nearest line");
     }
     /*
-
     synchronized ( TDPath.mSelectionLock ) {
       mSelection.removePath( line2 );
       mSelection.removePath( line1 );
