@@ -282,6 +282,40 @@ public class DrawingLinePath extends DrawingPointLinePath
     return true;
   }
 
+  void appendLinePoints( DrawingLinePath line )
+  {
+    if ( line == null ) return;
+    LinePoint pt = line.mFirst;
+    while ( pt != null ) {
+      if ( pt.has_cp ) {
+        addPoint3( pt.x1, pt.y1, pt.x2, pt.y2, pt.x, pt.y );
+      } else {
+        addPoint( pt.x, pt.y );
+      }
+      pt = pt.mNext;
+    }
+  }
+
+  void appendReversedLinePoints( DrawingLinePath line )
+  {
+    if ( line == null ) return;
+    boolean with_cp = false;
+    LinePoint pt = line.mLast;
+    float x1 = pt.x, y1=pt.y, x2=pt.x, y2=pt.y;
+    while ( pt != null ) {
+      if ( with_cp ) {
+         addPoint3( x2, y2, x1, y1, pt.x, pt.y );
+      } else {
+         addPoint( pt.x, pt.y );
+      }
+      with_cp = pt.has_cp;
+      if ( with_cp ) {
+        x1 = pt.x1; y1 = pt.y1; x2 = pt.x2; y2 = pt.y2;
+      }
+      pt = pt.mPrev;
+    }
+  }
+
   void setReversed( boolean reversed )
   {
     if ( reversed != mReversed ) {

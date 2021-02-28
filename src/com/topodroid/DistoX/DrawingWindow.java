@@ -3298,8 +3298,8 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  // lp1    is the line (being drawn) to modify
-  // lp2    is used to get the line to join/continue
+  // lp1    is the line (being drawn) to modify - a copy of the current linepath
+  // lp2    is used to get the line to join/continue - initialized to the current linepath
   // return true is the line lp1 must be added to the sketch
   private boolean tryToJoin( DrawingLinePath lp1, DrawingLinePath lp2 )
   {
@@ -3307,6 +3307,7 @@ public class DrawingWindow extends ItemDrawer
     if ( lp2 == null ) return true;
 
     if ( mContinueLine == CONT_CONTINUE ) {
+      // Log.v("DistoX", "Try to continue " + lp1.toString() + " " + lp2.toString() );
       if ( mLastLinePath != null
            && mCurrentLine == mLastLinePath.mLineType 
            && mDrawingSurface.modifyLine( mLastLinePath, lp2, mZoom, mSelectSize ) ) {
@@ -3327,6 +3328,7 @@ public class DrawingWindow extends ItemDrawer
     //     return false;
     //   }
     } else {
+      // Log.v("DistoX", "Try to join " + lp1.toString() + " " + lp2.toString() );
       DrawingLinePath line1 = null;
       DrawingLinePath line2 = null;
       if ( mContinueLine == CONT_START || mContinueLine == CONT_BOTH ) {
@@ -5573,10 +5575,12 @@ public class DrawingWindow extends ItemDrawer
         // }
         // redoBtn.setEnabled( true );
         // canRedo = true;/
+        mLastLinePath = null;
         modified();
       } else if ( b == mButton2[k2++] || b == mButton5[k5++] ) { // REDO
         if ( mDrawingSurface.hasMoreRedo() ) {
           mDrawingSurface.redo();
+          mLastLinePath = null;
         }
       } else if ( b == mButton2[k2++] ) { // pointBtn
         if ( ! TDSetting.mTripleToolbar ) {

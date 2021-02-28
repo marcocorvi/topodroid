@@ -839,9 +839,16 @@ class Scrap
   boolean modifyLine( DrawingLinePath line, DrawingLinePath line2, float zoom, float size )
   {
     LinePoint lp1 = line.mFirst; 
-    if ( lp1 == null ) return false; // sanity check
-    if ( line2 == null || line2.size() < 3 ) return false;
+    if ( lp1 == null ) {
+      // Log.v("DistoX", "modify line no start point");
+      return false; // sanity check
+    }
+    if ( line2 == null || line2.size() < 3 ) {
+      // Log.v("DistoX", "modify line line2 null or short");
+      return false;
+    }
     float delta = size / zoom;
+    // Log.v("DistoX", "modify line: delta " + delta );
     LinePoint first = line2.mFirst;
     LinePoint last  = line2.mLast;
     for ( ; lp1 != null; lp1 = lp1.mNext ) {
@@ -881,22 +888,42 @@ class Scrap
           mSelection.insertPath( line );
         }
         return true;
-      }
+      } 
     }
     return false;
   }
 
   /** add the points of the first line to the second line
    */
-  void addLineToLine( DrawingLinePath line, DrawingLinePath line0 )
+  void addLineToLine( DrawingLinePath line1, DrawingLinePath line0 )
   {
+    // Log.v("DistoX", "add line to line" );
+    DrawingLinePath line = new DrawingLinePath( line0.mLineType, line0.mScrap );
+    boolean prepend = line0.mFirst.distance( line1.mFirst ) < line0.mLast.distance( line1.mFirst );
+    if ( prepend ) {
+      line.appendReversedLinePoints( line1 );
+      line.appendLinePoints( line0 );
+    } else {
+      line.appendLinePoints( line0 );
+      line.appendLinePoints( line1 );
+    }
+    synchronized( TDPath.mCommandsLock ) {
+      mCurrentStack.remove( line0 );
+      mCurrentStack.add( line );
+    }
+    synchronized( TDPath.mSelectionLock ) {
+      mSelection.removePath( line0 );
+      mSelection.insertPath( line );
+    }
+
+    /*
     synchronized( TDPath.mSelectionLock ) {
       mSelection.removePath( line0 );
     }
     synchronized( TDPath.mCommandsLock ) {
-      boolean reverse = line0.mFirst.distance( line.mFirst ) < line0.mLast.distance( line.mFirst );
+      boolean reverse = line0.mFirst.distance( line1.mFirst ) < line0.mLast.distance( line1.mFirst );
       if ( reverse ) line0.reversePath();
-      line0.append( line );
+      line0.append( line1 );
       if ( reverse ) {
         line0.reversePath();
         line0.computeUnitNormal();
@@ -905,6 +932,7 @@ class Scrap
     synchronized( TDPath.mSelectionLock ) {
       mSelection.insertPath( line0 );
     }
+    */
     // checkLines();
   }
 
@@ -1118,6 +1146,40 @@ class Scrap
 
     LinePoint pt2 = spmin.mPoint; // MERGE this line with "linemin"
     DrawingLinePath line2 = (DrawingLinePath)spmin.mItem;
+
+    //
+    boolean reversed1 = ( pt1 == line1.mLast );
+    boolean reversed2 = ( pt2 == line2.mFirst );
+    DrawingLinePath line = new DrawingLinePath( line2.mLineType, line2.mScrap );
+    synchronized( TDPath.mCommandsLock ) {
+      // Log.v("DistoX", "Line1 reversed " + reversed1 + " Line2 reversed " + reversed2 );
+      if ( reversed2 ) {
+        if ( reversed1 ) {
+          line.appendReversedLinePoints( line1 );
+        } else {
+          line.appendLinePoints( line1 );
+        }
+        line.appendLinePoints( line2 );
+      } else { 
+        line.appendLinePoints( line2 );
+        if ( reversed1 ) {
+          line.appendReversedLinePoints( line1 );
+        } else {
+          line.appendLinePoints( line1 );
+        }
+      }
+      mCurrentStack.remove( line1 );
+      mCurrentStack.remove( line2 );
+      mCurrentStack.add( line );
+    }
+    synchronized ( TDPath.mSelectionLock ) {
+      mSelection.removePath( line2 );
+      mSelection.removePath( line1 );
+      mSelection.insertPath( line );
+      mSelected.clear();
+    }
+    /*
+
     synchronized ( TDPath.mSelectionLock ) {
       mSelection.removePath( line2 );
       mSelection.removePath( line1 );
@@ -1148,6 +1210,7 @@ class Scrap
       mSelection.insertPath( line2 );
       mSelected.clear();
     }
+    */
     return true;
   }
 
