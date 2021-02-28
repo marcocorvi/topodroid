@@ -1083,7 +1083,7 @@ Tap <b>Bezár</b> nem változtat.
  <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
   <string name="pref_cat_survey">FELMÉRÉSI ADAT</string>
-  <string name="pref_cat_splay">SEGÉGMÉRÉS ADAT</string>
+  <string name="pref_cat_splay">SEGÉDMÉRÉS ADAT</string>
   <string name="pref_cat_drawing">VÁZLATKÉSZÍTÉS</string>
   <string name="pref_cat_import_export">IMPORT_EXPORT</string>
   <string name="pref_cat_exportimport">IMPORT</string>
