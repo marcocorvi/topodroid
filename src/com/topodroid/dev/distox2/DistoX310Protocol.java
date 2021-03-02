@@ -397,7 +397,7 @@ public class DistoX310Protocol extends DistoXProtocol
           //   if ( buf[k] != (byte)0xff ) last = false;
           // }
           // if ( last ) break;
-          int k = 0;
+          int k = 0; // check there is a byte that is not 0xFF
           for ( ; k<256; ++k ) {
             if ( buf[k] != (byte)0xff ) break;
           }
@@ -417,6 +417,42 @@ public class DistoX310Protocol extends DistoXProtocol
     }
     TDLog.LogFile( "Firmware dump: result is " + (ok? "OK" : "FAIL") + " count " + cnt );
     return ( ok ? cnt : -cnt );
+  }
+
+  // read a block (256 bytes) of firmware from the DistoX
+  // @param nr    block index (starting at 0)
+  // @Override
+  public byte[] readFirmwareBlock( int nr )
+  {
+    TDLog.LogFile( "Firmware read block " + nr );
+    byte[] buf = new byte[256];
+
+    boolean ok = true;
+    int addr = nr;
+    try {
+      buf[0] = (byte)0x3a;
+      buf[1] = (byte)( addr & 0xff );
+      buf[2] = 0; // not necessary
+      mOut.write( buf, 0, 3 );
+      // if ( TDSetting.mPacketLog ) logPacket3( 1L, buf );
+
+      mIn.readFully( mBuffer, 0, 8 );
+      // if ( TDSetting.mPacketLog ) logPacket( 0L );
+      // Log.v( "DistoX-DATA_TYPE", "dump firmware: " + String.format(" %02x", mBuffer[0] ) );
+
+      int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
+      if ( mBuffer[0] != (byte)0x3a || addr != reply_addr ) {
+        TDLog.LogFile( "Firmware dump: fail buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr );
+        ok = false;
+      } else {
+        TDLog.LogFile( "Firmware dump: reply addr ok");
+      }
+
+      mIn.readFully( buf, 0, 256 );
+    } catch ( IOException e ) { 
+      ok = false;
+    }
+    return buf;
   }
 
 }
