@@ -4,6 +4,7 @@ symbol line
   name-pt passarela_de_pedra
   name-ru каменная_дорожка
   name-ro trotuar-piatră
+  name-hu kő_járda
 th_name u:walkway-stone
   group trail
   color 0x7f7f7f 0x66
