@@ -4,6 +4,7 @@ name walkway
 name-pt passarela
 name-ru дорожка
 name-ro trotuar
+name-hu sétaút
 th_name walkway
 group trail
 orientation no
