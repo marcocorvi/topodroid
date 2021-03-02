@@ -4,6 +4,7 @@ name walkway-stone
 name-pt passarela_de_pedra
 name-ru бетонная_дорожка
 name-ro trotuar-piatră
+name-hu kő-járda
 th_name u:walkway-stone
 group trail
 orientation no
