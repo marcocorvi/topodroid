@@ -4,6 +4,7 @@ name bridge
 name-pt ponte
 name-ru мост
 name-ro pod
+name-hu híd
 th_name bridge
 group trail
 orientation no
