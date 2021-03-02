@@ -3,6 +3,7 @@ symbol point
 name wheelchair
 name-pt cadeira_de_rodas
 name-ro scaun-cu-rotile
+name-hu kerekesszék
 th_name wheelchair
 orientation no
 color 0xffffff
