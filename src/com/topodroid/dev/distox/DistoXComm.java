@@ -278,8 +278,18 @@ public class DistoXComm extends TopoDroidComm
         }
         mBTSocket = null;
       }
-
-      mBTDevice = DeviceUtil.getRemoteDevice( address );
+      try {
+        mBTDevice = DeviceUtil.getRemoteDevice( address );
+      } catch ( IllegalArgumentException e ) {
+        TDLog.Error( "create Socket failed to get remode device - address " + address );
+        mBTDevice = null;
+        if ( mProtocol != null ) mProtocol.closeIOstreams();
+        mProtocol = null;
+        mAddress = null;
+        mBTConnected = false; // socket is created but not connected
+        return;
+      }
+      
       // FIXME PAIRING
       // TDLog.Log( TDLog.LOG_BT, "[1] device state " + mBTDevice.getBondState() );
       if ( ! DeviceUtil.isPaired( mBTDevice ) ) {

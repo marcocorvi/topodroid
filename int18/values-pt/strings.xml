@@ -1573,6 +1573,8 @@ Tap "Close" not to take any action.
    <string name="ask_upload_not_compatible">Arquivo firmware não parece estar correto.\Ainda assim enviar?</string>
    <string name="firmware_file_dumped">Arquivo firmware salvo %1$s tamanho %2$d</string>
    <string name="firmware_file_uploaded">Arquivo firmware enviado %1$s escrito %2$d / %3$d</string>
+   <!-- TODO string name="firmware_file_dump_fail">Failed firmware dump</string -->
+   <!-- TODO string name="firmware_file_upload_fail">Failed firmware upload</string -->
    <string name="firmware_not_supported">Dispositivo não suporte funções relativas à firmware</string>
 
     <!-- TODO string name="project">Project %1$s</string -->

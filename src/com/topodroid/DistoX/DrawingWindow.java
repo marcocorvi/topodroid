@@ -74,7 +74,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.AsyncTask;
+// import android.os.AsyncTask;
 // /* fixme-23 */
 // import android.os.Build;
 // import java.lang.reflect.Method;

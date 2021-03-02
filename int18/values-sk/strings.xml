@@ -1612,6 +1612,8 @@ DO NOT REMOVE THIS LINE -->
    <string name="ask_upload_not_compatible">Firmware nevyzerá korektne.\n Napriek tomu nahrať?</string>
    <string name="firmware_file_dumped">Firmware uložený %1$s veľkosť %2$d</string>
    <string name="firmware_file_uploaded">Firmware  %1$s úspešne nahraný %2$d / %3$d</string>
+   <!-- TODO string name="firmware_file_dump_fail">Failed firmware dump</string -->
+   <!-- TODO string name="firmware_file_upload_fail">Failed firmware upload</string -->
    <string name="firmware_not_supported">Zariadenie nepodporuje funkcie firmwéru</string>
 
    <string name="project">Projekt %1$s</string>

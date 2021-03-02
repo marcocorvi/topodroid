@@ -1567,6 +1567,8 @@ Tap "Close" not to take any action.
    <string name="ask_upload_not_compatible">Il file non sembra corretto.\nCaricare ugualmente?</string>
    <string name="firmware_file_dumped">iSalvato file %1$s - %2$d B</string>
    <string name="firmware_file_uploaded">Caricato firmware %1$s scritti %2$d / %3$d B</string>
+   <!-- TODO string name="firmware_file_dump_fail">Failed firmware dump</string -->
+   <!-- TODO string name="firmware_file_upload_fail">Failed firmware upload</string -->
    <string name="firmware_not_supported">Dispositivo senza funzioni firmware</string>
 
     <string name="project">Progetto %1$s</string>

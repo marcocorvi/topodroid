@@ -1577,6 +1577,8 @@ it is correct but i need to use english to tell a user which log to enable when 
    <string name="ask_upload_not_compatible">Firmware el archivo no parece correcto. \n¿Quiere probar a cargarlo?</string>
    <string name="firmware_file_dumped">Archivo de firmware guardado %1$s tamaño %2$d</string>
    <string name="firmware_file_uploaded">Archivo de firmware cargado %1$s escribir %2$d / %3$d</string>
+   <!-- TODO string name="firmware_file_dump_fail">Failed firmware dump</string -->
+   <!-- TODO string name="firmware_file_upload_fail">Failed firmware upload</string -->
    <string name="firmware_not_supported">El dispositivo no admite funciones de firmware</string>
 
     <!-- TODO string name="project">Project %1$s</string -->

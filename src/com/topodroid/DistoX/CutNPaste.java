@@ -23,7 +23,7 @@ import java.lang.ref.WeakReference;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.os.AsyncTask;
+// import android.os.AsyncTask;
 
 import android.widget.PopupWindow;
 import android.widget.Button;

@@ -1565,6 +1565,8 @@ Tap "Close" not to take any action.
    <string name="ask_upload_not_compatible">Файлът с фърмуер не изглежда коректен.\nПродължаване с качването?</string>
    <string name="firmware_file_dumped">Записан файл %1$s с размер %2$d</string>
    <string name="firmware_file_uploaded">Качен файл %1$s с размер %2$d / %3$d</string>
+   <!-- TODO string name="firmware_file_dump_fail">Failed firmware dump</string -->
+   <!-- TODO string name="firmware_file_upload_fail">Failed firmware upload</string -->
    <!-- TODO string name="firmware_not_supported">Device does not support firmware functions</string -->
 
     <!-- TODO string name="project">Project %1$s</string -->

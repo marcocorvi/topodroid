@@ -1900,22 +1900,32 @@ public class TopoDroidApp extends Application
 
   int dumpFirmware( String filename )
   {
+    // FIXME ASYNC_FIRMWARE_TASK
+    // if ( mComm == null || TDInstance.getDeviceA() == null ) return;
+    // if ( ! (mComm instanceof DistoX310Comm) ) return;
+    // (new FirmwareTask( (DistoX310Comm)mComm, FirmwareTask.FIRMWARE_READ, filename )).execute( );
+
     if ( mComm == null || TDInstance.getDeviceA() == null ) return -1;
-    try {
-      DistoX310Comm comm = (DistoX310Comm)mComm;
-      return comm.dumpFirmware( TDInstance.deviceAddress(), TDPath.getBinFile(filename) );
-    } catch ( ClassCastException e ) {
-      TDLog.Error("read A3 memory: class cast exception");
-    }
-    return -1;
+    if ( ! (mComm instanceof DistoX310Comm) ) return -1;
+    return ((DistoX310Comm)mComm).dumpFirmware( TDInstance.deviceAddress(), TDPath.getBinFile(filename) );
   }
 
   int uploadFirmware( String filename )
   {
-    if ( mComm == null || TDInstance.getDeviceA() == null ) {
-      TDLog.Error( "Comm or Device null");
-      return -1;
-    }
+    // FIXME ASYNC_FIRMWARE_TASK
+    // if ( mComm == null || TDInstance.getDeviceA() == null ) return;
+    // if ( ! (mComm instanceof DistoX310Comm) ) return;
+    // String pathname = TDPath.getBinFile( filename );
+    // TDLog.LogFile( "Firmware upload address " + TDInstance.deviceAddress() );
+    // TDLog.LogFile( "Firmware upload file " + pathname );
+    // if ( ! pathname.endsWith( "bin" ) ) {
+    //   TDLog.LogFile( "Firmware upload file does not end with \"bin\"");
+    //   return;
+    // }
+    // (new FirmwareTask( (DistoX310Comm)mComm, FirmwareTask.FIRMWARE_WRITE, filename )).execute( ); 
+
+    if ( mComm == null || TDInstance.getDeviceA() == null ) return -1;
+    if ( ! (mComm instanceof DistoX310Comm) ) return -1;
     String pathname = TDPath.getBinFile( filename );
     TDLog.LogFile( "Firmware upload address " + TDInstance.deviceAddress() );
     TDLog.LogFile( "Firmware upload file " + pathname );
@@ -1923,13 +1933,7 @@ public class TopoDroidApp extends Application
       TDLog.LogFile( "Firmware upload file does not end with \"bin\"");
       return 0;
     }
-    try { 
-      DistoX310Comm comm = (DistoX310Comm)mComm;
-      return comm.uploadFirmware( TDInstance.deviceAddress(), pathname );
-    } catch ( ClassCastException e ) {
-      TDLog.Error("read A3 memory: class cast exception");
-    }
-    return -1;
+    return ((DistoX310Comm)mComm).uploadFirmware( TDInstance.deviceAddress(), pathname );
   }
 
   // ----------------------------------------------------------------------

@@ -189,7 +189,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="import_already">Survey already imported</string>
     <string name="import_bad">Invalid import file</string>
     <string name="import_none">No file to import</string>
-    <string name="import_failed">File import failed</string>
+    <string name="import_failed">Failed file import</string>
     <string name="file_not_found">File not found</string>
     <string name="import_calib_ok">Successfully imported calibration</string>
     <string name="import_calib_no_header">Calibration file: bad header</string>
@@ -209,7 +209,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="head_tail">Memory: </string -->
     <string name="head_tail_failed">Failed to read DistoX memory index</string>
     <string name="head_tail_store_failed">Failed to store DistoX memory index</string>
-    <!-- UNUSED string name="pairing_failed">Pairing failed</string -->
+    <!-- UNUSED string name="pairing_failed">Failed pairing</string -->
 
     <string name="datamode_normal">Normal data-mode</string>
     <string name="datamode_diving">Diving data-mode</string>
@@ -394,7 +394,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="start_scan">Start scan</string>
     <string name="stop_scan">Stop scan</string>
     <string name="title_scan">BLE scan</string>
-    <string name="ble_scan_failed">BLE scan failed</string>
+    <string name="ble_scan_failed">Failed BLE scan</string>
     <string name="ble_gatt_failure">BLE failure</string>
     <string name="ble_no_remote">No remote device</string>
     <string name="ble_control">Control</string>
@@ -1617,6 +1617,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
    <string name="ask_upload_not_compatible">Firmware file does not look correct.\nUpload anyways?</string>
    <string name="firmware_file_dumped">Saved firmware file %1$s size %2$d</string>
    <string name="firmware_file_uploaded">Uploaded firmware file %1$s written %2$d / %3$d</string>
+   <string name="firmware_file_dump_fail">Failed firmware dump</string>
+   <string name="firmware_file_upload_fail">Failed firmware upload</string>
    <string name="firmware_not_supported">Device does not support firmware functions</string>
 
     <string name="project">Project %1$s</string>
@@ -1629,7 +1631,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="no_tdconfig">Missing tdconfig file</string>
     <string name="no_th_file">No Therion file</string>
     <string name="file_exists">File exists</string>
-    <string name="file_create_fail">File create fail</string>
+    <string name="file_create_fail">Failed file create</string>
     <string name="oom">Warning. Out of memory</string>
 
     <string name="ask_delete_tdconfig">Delete TdConfig file</string>

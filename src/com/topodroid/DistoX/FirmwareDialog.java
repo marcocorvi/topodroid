@@ -161,9 +161,16 @@ class FirmwareDialog extends MyDialog
         @Override
         public void onClick( DialogInterface dialog, int btn ) {
           TDLog.LogFile( "Firmware dumping to file " + filename );
+          // FIXME ASYNC_FIRMWARE_TASK
+          // mApp.dumpFirmware( filename );
           int ret = mApp.dumpFirmware( filename );
           TDLog.LogFile( "Firmware dump to " + filename + " result: " + ret );
-          TDToast.makeLong( String.format( mRes.getString(R.string.firmware_file_dumped), filename, ret ) );
+          if ( ret > 0 ) {
+            TDToast.makeLong( String.format( mRes.getString(R.string.firmware_file_dumped), filename, ret ) );
+          } else {
+            TDToast.makeLong( R.string.firmware_file_dump_fail );
+          }
+
           // finish(); 
         }
       }
@@ -184,11 +191,18 @@ class FirmwareDialog extends MyDialog
         public void onClick( DialogInterface dialog, int btn ) {
           String pathname = TDPath.getBinFile( filename );
           TDLog.LogFile( "Firmware uploading from path " + pathname );
+          // FIXME ASYNC_FIRMWARE_TASK
+          // mApp.uploadFirmware( filename );
           File file = new File( pathname ); // file must exists
           long len = file.length();
           int ret  = mApp.uploadFirmware( filename );
           TDLog.LogFile( "Firmware upload result: written " + ret + " bytes of " + len );
-          TDToast.makeLong( String.format( mRes.getString(R.string.firmware_file_uploaded), filename, ret, len ) );
+          if ( ret > 0 ) {
+            TDToast.makeLong( String.format( mRes.getString(R.string.firmware_file_uploaded), filename, ret, len ) );
+          } else {
+            TDToast.makeLong( R.string.firmware_file_upload_fail );
+          }
+
           // finish(); 
         }
       }
