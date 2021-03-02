@@ -1593,8 +1593,8 @@ Tap <b>Bezár</b> nem változtat.
 \nFelhasználói kézikönyv: MENÜ gomb
 \nDokumentumok: http://sites.google.com/site/speleoapps
 \nHozzászólások, bug bejelentés, új funkció igények: marco.corvi@gmail.com
-\nA magyar fordítás Sűrű Péter munkája. Lektorálták: Pataki Róbert; Nagy András; Köblös Gabriella; Perényi Katalin
-\n kiegészítette: Holl Balázs
+\nA magyar fordítás Sűrű Péter munkája.
+\n kiegészítette: Holl Balázs (holl.balazs.TopoDroid@gmail.com)
 \n
     </string>
 
@@ -1620,8 +1620,8 @@ Tap <b>Bezár</b> nem változtat.
    <string name="ask_upload_not_compatible">Firmware fájl nem tűnik megfelelőnek \nMindenképpen feltölti?</string>
    <string name="firmware_file_dumped">Mentett firmware fájl %1$s méret %2$d</string>
    <string name="firmware_file_uploaded">Feltöltött firmware fájl %1$s írás %2$d / %3$d</string>
-   <!-- TODO string name="firmware_file_dump_fail">Failed firmware dump</string -->
-   <!-- TODO string name="firmware_file_upload_fail">Failed firmware upload</string -->
+   <string name="firmware_file_dump_fail">Firmware letöltés sikertelen</string>
+   <string name="firmware_file_upload_fail">Firmware feltöltés sikertelen</string>
    <string name="firmware_not_supported">Az eszköz nem támogatja a firmware funkciókat</string>
 
     <string name="project">Projekt %1$s</string>
