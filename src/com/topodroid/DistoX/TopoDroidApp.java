@@ -1898,7 +1898,7 @@ public class TopoDroidApp extends Application
   //   return mComm.readFirmwareHardware( TDInstance.getDeviceA().mAddress );
   // }
 
-  int dumpFirmware( String filename )
+  public int dumpFirmware( String filename )
   {
     // FIXME ASYNC_FIRMWARE_TASK
     // if ( mComm == null || TDInstance.getDeviceA() == null ) return;
@@ -1910,7 +1910,7 @@ public class TopoDroidApp extends Application
     return ((DistoX310Comm)mComm).dumpFirmware( TDInstance.deviceAddress(), TDPath.getBinFile(filename) );
   }
 
-  int uploadFirmware( String filename )
+  public int uploadFirmware( String filename )
   {
     // FIXME ASYNC_FIRMWARE_TASK
     // if ( mComm == null || TDInstance.getDeviceA() == null ) return;

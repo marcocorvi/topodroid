@@ -33,6 +33,7 @@ import com.topodroid.dev.distox.IMemoryDialog;
 import com.topodroid.dev.distox2.DeviceX310MemoryDialog;
 import com.topodroid.dev.distox2.DeviceX310InfoDialog;
 import com.topodroid.dev.distox2.InfoReadX310Task;
+import com.topodroid.dev.distox2.FirmwareDialog;
 import com.topodroid.dev.distox1.DeviceA3MemoryDialog;
 import com.topodroid.dev.distox1.DeviceA3InfoDialog;
 import com.topodroid.dev.distox1.InfoReadA3Task;

@@ -9,9 +9,9 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.DistoX;
+package com.topodroid.dev.distox2;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 
 import android.util.Log;
 
@@ -23,7 +23,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 // import java.io.FileNotFoundException;
 
-class FirmwareUtils
+public class FirmwareUtils
 {
   // sigmature is 64 bytes after the first 2048
   static final private byte[] signature2 = {
@@ -84,7 +84,7 @@ class FirmwareUtils
   // return <= 0 (failure) or one of
   //    2100 2200 2300 2400 2412 2500 2501 2512 2630
   //
-  static int readFirmwareFirmware( File fp )
+  public static int readFirmwareFirmware( File fp )
   {
     FileInputStream fis = null;
     try {
@@ -172,7 +172,7 @@ class FirmwareUtils
     return -99; // failed on byte[7]
   }
 
-  static boolean firmwareChecksum( int fw_version, File fp )
+  public static boolean firmwareChecksum( int fw_version, File fp )
   {
     int len = 0;
     switch ( fw_version ) {

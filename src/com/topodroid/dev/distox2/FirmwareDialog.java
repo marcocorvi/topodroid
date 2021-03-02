@@ -11,11 +11,15 @@
  *
  * this class is intsantiated only by DeviceActivity
  */
-package com.topodroid.DistoX;
+package com.topodroid.dev.distox2;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
-
+import com.topodroid.DistoX.TopoDroidApp;
+import com.topodroid.DistoX.TopoDroidAlertDialog;
+import com.topodroid.DistoX.TDToast;
+import com.topodroid.DistoX.TDPath;
+import com.topodroid.DistoX.R;
 
 import android.util.Log;
 
@@ -41,7 +45,7 @@ import android.widget.EditText;
 
 import android.text.method.KeyListener;
 
-class FirmwareDialog extends MyDialog
+public class FirmwareDialog extends MyDialog
                      implements View.OnClickListener
 {
   private RadioButton mBtnDump;
@@ -55,7 +59,7 @@ class FirmwareDialog extends MyDialog
   private final Resources mRes;
   private KeyListener    mETkeyListener;
 
-  FirmwareDialog( Context context, Resources res, TopoDroidApp app )
+  public FirmwareDialog( Context context, Resources res, TopoDroidApp app )
   {
     super( context, R.string.FirmwareDialog );
     mRes     = res;
@@ -91,7 +95,7 @@ class FirmwareDialog extends MyDialog
     
   }
 
-  void setFile( String filename )
+  public void setFile( String filename )
   {
     mETfile.setText( filename );
   }

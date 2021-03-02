@@ -543,7 +543,7 @@ public class TDPath
   static String getC3dFile( String name )    { return PATH_C3D + name; }
 
   public static String getDumpFile( String name )   { return PATH_DUMP + name; }
-  static String getBinFile( String name )    { return PATH_BIN + name; }
+  public static String getBinFile( String name )    { return PATH_BIN + name; }
   static String getCCsvFile( String name )   { return PATH_CCSV + name; }
   public static String getManFile( String name )    { return PATH_MAN + name; }
   public static String getManPath( )    { return PATH_MAN; }
@@ -678,7 +678,7 @@ public class TDPath
   }
 
   static File[] getZipFiles() { return getFiles( PATH_ZIP, new String[] { ZIP } ); } // DistoX-SAF
-  static File[] getBinFiles() { return getFiles( PATH_BIN, new String[] { } ); }
+  public static File[] getBinFiles() { return getFiles( PATH_BIN, new String[] { } ); }
 
   // static String getSurveyPhotoFile( String survey, String name ) { return APP_FOTO_PATH + survey + "/" + name; }
 
@@ -718,7 +718,7 @@ public class TDPath
   }
 
   static void checkCCsvDir() { checkDirs( PATH_CCSV ); }
-  static void checkBinDir()  { checkDirs( PATH_BIN ); }
+  public static void checkBinDir()  { checkDirs( PATH_BIN ); }
   // static void checkManDir() { checkDirs( PATH_MAN ); }
 
   static void rotateBackups( String filename, int rotate ) // filename has suffix BCK_SUFFIX

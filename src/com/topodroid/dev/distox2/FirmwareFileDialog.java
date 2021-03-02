@@ -11,11 +11,14 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.DistoX;
+package com.topodroid.dev.distox2;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
-
+import com.topodroid.DistoX.TDPath;
+import com.topodroid.DistoX.TDToast;
+import com.topodroid.DistoX.TDUtil;
+import com.topodroid.DistoX.R;
 
 import java.io.File;
 // import java.util.Set;
@@ -40,7 +43,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.content.Context;
 
 
-class FirmwareFileDialog extends MyDialog
+public class FirmwareFileDialog extends MyDialog
                          implements OnItemClickListener
 { 
   private final FirmwareDialog mParent;
@@ -49,7 +52,7 @@ class FirmwareFileDialog extends MyDialog
   private ListView mList;
   // private TextView mTVfile;
 
-  FirmwareFileDialog( Context context, FirmwareDialog parent )
+  public FirmwareFileDialog( Context context, FirmwareDialog parent )
   {
     super( context, R.string.FirmwareFileDialog );
     mParent = parent;
