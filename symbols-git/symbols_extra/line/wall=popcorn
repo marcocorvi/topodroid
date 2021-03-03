@@ -1,7 +1,7 @@
 encoding utf-8
 symbol line
 name wall_popcorn
-name-hu borsokoves fal
+name-hu borsóköves_fal
 th_name wall:popcorn
 group wall
 color 0xff0000 0xff
