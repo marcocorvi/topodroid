@@ -4,6 +4,7 @@ name abyss-entrance
 name-pt entrada_em_abismo
 name-ru вход_в_пропасть
 name-ro intrare-prăpastie
+name-hu zsomboly_bejárat
 th_name abyss-entrance
 group wall
 color 0xff00ff 0xff
