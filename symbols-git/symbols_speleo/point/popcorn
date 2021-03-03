@@ -15,7 +15,7 @@ name-hu borsókő
 name-sk pizolity
 name-ro coralit
 th_name popcorn
-orientation no
+orientation yes
 color 0xccff66
 path
   moveTo -7 4
