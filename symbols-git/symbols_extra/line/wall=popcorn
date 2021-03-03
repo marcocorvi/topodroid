@@ -1,0 +1,27 @@
+encoding utf-8
+symbol line
+name wall_popcorn
+name-hu borsokoves fal
+th_name wall:popcorn
+group wall
+color 0xff0000 0xff
+width 1
+roundtrip 1
+effect
+  moveTo 0 0
+  lineTo 4 -2
+  lineTo 8 -2
+  lineTo 12 0
+  lineTo 12 -2
+  lineTo 8 -6
+  lineTo 4 -6
+  lineTo 0 -2
+  lineTo 0 0
+  lineTo 0 4
+  lineTo 12 4
+  lineTo 12 7
+  lineTo 0 7
+  lineTo 0 3
+endeffect
+endsymbol
+
