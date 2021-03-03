@@ -7,6 +7,7 @@ name-ru стена_в_натеках
 name-fr paroi_stalagmitique
 name-ro perete_crustă_calcit
 name-de Sinterwand
+name-hu cseppkőfal
 th_name wall:flowstone
 group wall
 color 0xff0000 0xff
