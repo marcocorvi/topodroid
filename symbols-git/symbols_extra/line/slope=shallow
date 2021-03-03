@@ -7,6 +7,7 @@ name-ru склон_пологий
 name-fr pente_douce
 name-ro pantă_mică
 name-de Leichte_Steigung
+name-hu enyhe_lejtő
 th_name slope:shallow
 group slope
 color 0xfff5cc 0xff
