@@ -11,7 +11,7 @@
  */
 package com.topodroid.dev.distox2;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 
 import android.util.Log;
 
@@ -88,7 +88,7 @@ public class FirmwareUtils
   {
     FileInputStream fis = null;
     try {
-      // TDLog.Log( TDLog.LOG_IO, "read firmware file " + file.getPath() );
+      TDLog.Log( TDLog.LOG_IO, "read firmware file " + fp.getPath() );
       fis = new FileInputStream( fp );
       DataInputStream dis = new DataInputStream( fis );
       if ( dis.skipBytes( 2048 ) != 2048 ) {
@@ -202,7 +202,7 @@ public class FirmwareUtils
       // Log.v("DistoX-FW", "check " + fw_version + ": IO exception " + e.getMessage() );
       return false;
     }
-    // Log.v("DistoX-FW", "check " + fw_version + ": " + String.format("%08x", check) );
+    Log.v("DistoX-FW", "check " + fw_version + ": " + String.format("%08x", check) );
     switch ( fw_version ) {
       case 2100: return ( check == 0xf58b194b );
       case 2200: return ( check == 0x4d66d466 );
@@ -240,5 +240,39 @@ public class FirmwareUtils
   //   }
   //   return ret;
   // }
+
+  // say if the file fw code is compatible with some known hardware
+  // the real hardware is not known at this point - therefore can only check the firmware file signature
+  static boolean isCompatible( int fw )
+  {
+    return ( fw == 2100 || fw == 2200 || fw == 2300 || fw == 2400 || fw == 2500 || fw == 2412 || fw == 2501 || fw == 2512 ) 
+        || ( fw == 2630 );
+  }
+
+  // @param signature   256-byte signature block on the DistoX
+  // @param filepath    pathname of the firmware file 
+  static boolean checkSignature( byte[] signature, String filepath )
+  {
+    File fp = new File( filepath );
+    FileInputStream fis = null;
+    try {
+      fis = new FileInputStream( fp );
+      DataInputStream dis = new DataInputStream( fis );
+      if ( dis.skipBytes( 2048 ) != 2048 ) {
+        return false; // skip 8 bootloader blocks
+      }
+      byte[] buf = new byte[256];
+      if ( dis.read( buf, 0, 256 ) != 256 ) {
+        return false;
+      }
+      // TODO check buf against signature - return false if failed
+    } catch ( IOException e ) {
+    } finally {
+      try {
+        if ( fis != null ) fis.close();
+      } catch ( IOException e ) { }
+    }
+    return true;
+  }
 
 }

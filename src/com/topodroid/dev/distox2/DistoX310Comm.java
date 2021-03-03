@@ -187,6 +187,19 @@ public class DistoX310Comm extends DistoXComm
   // ====================================================================================
   // FIRMWARE
 
+  public byte[] readFirmwareSignature( String address )
+  {
+    byte[] ret = null;
+    if ( connectSocketAny( address ) ) {
+      if ( mProtocol instanceof DistoX310Protocol ) {
+        Log.v("DistoX-FW", "comm firmware signature");
+        ret = ((DistoX310Protocol)mProtocol).readFirmwareBlock( 8 );
+      }
+    }
+    destroySocket( );
+    return ret;
+  }
+
   public int dumpFirmware( String address, String filepath )
   {
     int ret = 0;
@@ -206,6 +219,14 @@ public class DistoX310Comm extends DistoXComm
     int ret = 0;
     if ( connectSocketAny( address ) ) {
       if ( mProtocol instanceof DistoX310Protocol ) {
+        // TODO check that the signature of the current firmware hw-agree with that of the file firmware
+        // byte[] signature = ((DistoX310Protocol)mProtocol).readFirmwareBlock( 8 ); 
+        // if ( FirmwareUtil.checkSignature( signature, filepath ) ) {
+        //   ret = ((DistoX310Protocol)mProtocol).uploadFirmware( filepath );
+        // } else { 
+        //   ret = -1;
+        // }
+
         ret = ((DistoX310Protocol)mProtocol).uploadFirmware( filepath );
       } else {
         ret = -1;

@@ -1604,8 +1604,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
 \n[3] Make sure the upload firmware version is compatible with the DistoX hardware version.
 \n[4] Put the DistoX2 in bootloader mode: press PLUS and MINUS while switching on with DIST key.
 \n[5] Tap the OK button.
-\n[6] Confirm to continue and wait till the process is done.
-\n[7] Turn off the DistoX2 with the CLR key.
+\n[6] Read the message before you confirm to continue.
+\n[7] Wait till the process is done.
+\n[8] Turn off the DistoX2 with the CLR key.
 \n
    </string>
    <string name="firmware_none">no firmware file</string>
@@ -1615,6 +1616,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
    <string name="ask_dump">Dump firmware?</string>
    <string name="ask_upload">Upload firmware?</string>
    <string name="ask_upload_not_compatible">Firmware file does not look correct.\nUpload anyways?</string>
+   <string name="ask_upload_no_sign">Could not check hardware.\nUpload firmware anyways?</string>
+   <string name="ask_upload_no_sign_not_compatible">Could not get hardware.\nFirmware file does not look correct.\nUpload anyways?</string>
+   <string name="ask_upload_bad_sign">WARNING: incompatible hardware.\nUpload firmware anyways?</string>
+   <string name="ask_upload_bad_sign_not_compatible">WARNING: incompatible hardware.\nFirmware file does not look correct.\nUpload anyways?</string>
    <string name="firmware_file_dumped">Saved firmware file %1$s size %2$d</string>
    <string name="firmware_file_uploaded">Uploaded firmware file %1$s written %2$d / %3$d</string>
    <string name="firmware_file_dump_fail">Failed firmware dump</string>
