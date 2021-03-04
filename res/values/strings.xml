@@ -1599,6 +1599,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="firmware_title">Firmware Updater</string>
   <string name="firmware_file_title">Firmware Files</string>
   <string name="firmware_text">
+READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
+\nThis is only a reminder:
 \n[1] Select either to upload a firmware or to dump the firmware to a file.
 \n[2] Choose the file to upload or save. Firmware files are in the bin directory.
 \n[3] Make sure the upload firmware version is compatible with the DistoX hardware version.

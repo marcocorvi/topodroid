@@ -1449,6 +1449,7 @@ public class TopoDroidApp extends Application
 
   static private void installFirmware( boolean overwrite )
   {
+    Log.v("DistoX-FW", "install firmware " + overwrite );
     InputStream is = TDInstance.getResources().openRawResource( R.raw.firmware );
     firmwareUncompress( is, overwrite );
     try { is.close(); } catch ( IOException e ) { }
@@ -1557,7 +1558,7 @@ public class TopoDroidApp extends Application
 
   static private void firmwareUncompress( InputStream fis, boolean overwrite )
   {
-    // Log.v(TAG, "firmware uncompress ...");
+    Log.v("DistoX-FW", "firmware uncompress ...");
     TDPath.checkBinDir( );
     try {
       // byte buffer[] = new byte[36768];
@@ -1566,6 +1567,7 @@ public class TopoDroidApp extends Application
       ZipInputStream zin = new ZipInputStream( fis );
       while ( ( ze = zin.getNextEntry() ) != null ) {
         String filepath = ze.getName();
+        Log.v("DistoX-FW", "firmware uncompress path " + filepath );
         if ( ze.isDirectory() ) continue;
         if ( ! filepath.endsWith("bin") ) continue;
         String pathname =  TDPath.getBinFile( filepath );
