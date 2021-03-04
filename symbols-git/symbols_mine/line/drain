@@ -8,6 +8,7 @@ name-ru водосток
 name-fr drainage
 name-sk odtok
 name-ro drenaj
+name-hu csatorna
 th_name u:drain
 group water-flow
 color 0x3399ff
