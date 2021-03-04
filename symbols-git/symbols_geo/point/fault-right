@@ -8,6 +8,7 @@ name-ru нарушение_праостороннее
 name-fr faille_dextre
 name-ro falie-dreapta
 name-de Rechtsverwerfung
+name-hu törés_jobb
 th_name u:fault-right
 group fault
 color 0xff6666
