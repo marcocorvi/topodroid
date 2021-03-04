@@ -8,6 +8,7 @@ name-bg по-високо_разположена_стена
 name-fr voûte
 name-ro perete_deasupra
 name-de Wand_oberhalb
+name-hu felső_járat
 th_name wall:overlying
 group wall
 color 0xff0000 0x99

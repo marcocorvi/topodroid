@@ -7,6 +7,7 @@ name-ru склон_отвесный
 name-fr pente_abrupte
 name-ro pantă_medie
 name-de Mittlere_Steigung
+name-hu közepes_lejtő
 th_name slope:sheer
 group slope
 color 0x997a00 0xff

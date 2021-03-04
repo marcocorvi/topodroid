@@ -7,6 +7,7 @@ name-ru стена_в_гальке
 name-fr paroi_de_galets
 name-ro perete_galeți
 name-de Kieswand
+name-hu kavicsfal
 th_name wall:pebbles
 group wall
 color 0xff0000 0xff
