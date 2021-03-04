@@ -25,8 +25,186 @@ import java.io.IOException;
 
 public class FirmwareUtils
 {
+  private static final int SIGNATURE_SIZE = 64;
+
+  public static final int HW_NONE    = 0;
+  public static final int HW_HEEB    = 1;
+  public static final int HW_LANDOLF = 2;
+
+  // ------------------------------------------------------------------------------
+  static int getHardware( int fw ) 
+  {
+    if ( fw == 2100 || fw == 2200 || fw == 2300 || fw == 2400 || fw == 2500 || fw == 2412 || fw == 2501 || fw == 2512 ) return HW_HEEB;
+    if ( fw == 2610 || fw == 2630 ) return HW_LANDOLF;
+    return HW_NONE;
+  }
+
+  // say if the file fw code is compatible with some known hardware
+  // the real hardware is not known at this point - therefore can only check the firmware file signature
+  static boolean isCompatible( int fw )
+  {
+    return getHardware( fw ) != HW_NONE;
+  }
+
+  // try to guess firmware version reading bytes from the file
+  // return <= 0 (failure) or one of
+  //    2100 2200 2300 2400 2412 2500 2501 2512
+  //    2610 2630
+  //
+
+  public static int readFirmwareFirmware( File fp )
+  {
+    FileInputStream fis = null;
+    try {
+      // TDLog.Log( TDLog.LOG_IO, "read firmware file " + fp.getPath() );
+      Log.v( "DistoX-FW", "read firmware file " + fp.getPath() );
+      fis = new FileInputStream( fp );
+      DataInputStream dis = new DataInputStream( fis );
+      if ( dis.skipBytes( 2048 ) != 2048 ) {
+        Log.v("DistoX-FW", "failed skip 2048");
+        return 0; // skip 8 bootloader blocks
+      }
+      byte[] buf = new byte[SIGNATURE_SIZE];
+      if ( dis.read( buf, 0, SIGNATURE_SIZE ) != SIGNATURE_SIZE ) {
+        Log.v("DistoX-FW", "failed read first block");
+        return 0;
+      }
+      if ( verifySignatureHeeb( buf ) == SIGNATURE_SIZE ) {
+        Log.v("DistoX-FW", "HEEB fw " + readFirmwareHeeb( buf ) );
+        return readFirmwareHeeb( buf );
+      }
+
+      if ( dis.skipBytes( 1984 ) != 1984 ) {
+        Log.v("DistoX-FW", "failed skip 1984");
+        return 0; // skip 8 bootloader blocks
+      }
+      if ( dis.read( buf, 0, SIGNATURE_SIZE ) != SIGNATURE_SIZE ) {
+        Log.v("DistoX-FW", "failed read second block");
+        return 0;
+      }
+      if ( verifySignatureLandolf( buf ) == SIGNATURE_SIZE ) {
+        Log.v("DistoX-FW", "LANDOLF fw " + readFirmwareLandolf( buf ) );
+        return readFirmwareLandolf( buf );
+      }
+    } catch ( IOException e ) {
+    } finally {
+      try {
+        if ( fis != null ) fis.close();
+      } catch ( IOException e ) { }
+    }
+    return 0;
+  }
+
+  public static boolean firmwareChecksum( int fw_version, File fp )
+  {
+    int len = 0;
+    switch ( fw_version ) {
+      case 2100: len = 15220; break;
+      case 2200: len = 15232; break;
+      case 2300: len = 15952; break;
+      case 2400: len = 16224; break;
+      case 2500: len = 17496; break;
+      case 2412: len = 16504; break;
+      case 2501: len = 17540; break;
+      case 2512: len = 17792; break;
+      case 2610: len = 25040; break;
+      case 2630: len = 25568; break;
+    }
+    if ( len == 0 ) return false; // bad firmware version
+    len /= 4; // number of int to read
+
+    int checksum = 0;
+    try {
+      // TDLog.Log( TDLog.LOG_IO, "read firmware file " + file.getPath() );
+      FileInputStream fis = new FileInputStream( fp );
+      DataInputStream dis = new DataInputStream( fis );
+      for ( ; len > 0; --len ) {
+        checksum ^= dis.readInt();
+      }
+      fis.close();
+    } catch ( IOException e ) {
+      // Log.v("DistoX-FW", "check " + fw_version + ": IO exception " + e.getMessage() );
+      return false;
+    }
+    // Log.v("DistoX-FW", "check " + fw_version + ": " + String.format("%08x", checksum) );
+    switch ( fw_version ) {
+      case 2100: return ( checksum == 0xf58b194b );
+      case 2200: return ( checksum == 0x4d66d466 );
+      case 2300: return ( checksum == 0x6523596a );
+      case 2400: return ( checksum == 0x0f8a2bc1 );
+      case 2412: return ( checksum == 0xfddd95a0 ); // continuous
+      case 2500: return ( checksum == 0x463c0306 );
+      case 2501: return ( checksum == 0x20e9a198 ); // 4-calib data double beep
+      case 2512: return ( checksum == 0x1ecb8dc0 ); // continuous
+      case 2610: return ( checksum == 0xcae98256 );
+      case 2630: return ( checksum == 0x1b1488c5 );
+    }
+    return false;
+  }
+
+  // check 64 bytes on the device
+  // @param signature   256-byte signature block on the DistoX af offset 2048
+  static int getDeviceHardware( byte[] signature )
+  {
+    if ( verifySignatureHeeb( signature ) == SIGNATURE_SIZE ) {
+      Log.v("DistoX-FW", "device hw HEEB" );
+      return HW_HEEB;
+    }
+    if ( verifySignatureLandolf( signature ) == SIGNATURE_SIZE ) {
+      Log.v("DistoX-FW", "device hw LANDOLF" );
+      return HW_LANDOLF;
+    }
+    return HW_NONE;
+  }
+
+  // static int readFirmwareAddress( DataInputStream  dis, DataOutputStream dos )
+  // {
+  //   int ret = -1;
+  //   byte[] buf = new byte[256];
+  //   try {
+  //     int addr = 0;
+  //     buf[0] = (byte)0x3a;
+  //     buf[1] = (byte)( addr & 0xff );
+  //     buf[2] = 0; // not necessary
+  //     dos.write( buf, 0, 3 );
+  //     dis.readFully( mBuffer, 0, 8 );
+  //     int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
+  //     if ( mBuffer[0] == (byte)0x3a && addr == reply_addr ) {
+  //       dis.readFully( buf, 0, 256 );
+  //       // Log.v("DistoX", "HARDWARE " + buf[0x40] + " " + buf[0x41] + " " + buf[0x42] + " " + buf[0x43] );
+  //       ret = (int)(buf[0x40]) + ((int)(buf[0x41])<<8); // major * 10 + minor
+  //       // FIXME  ((int)(buf[0x42]))<<16 + ((int)(buf[0x43]))<<24;
+  //     }
+  //   } catch ( IOException e ) {
+  //     // TODO
+  //   }
+  //   return ret;
+  // }
+
+  // ---------------------------------------------------------------
+  // FIRMWARE SIGNATURES
+  //    od -x -j 2048 -N 64 <firmware_file>
+  // use -j 4096 for 2.6 firmwares
+  //
+  // Firmare21.bin
+  // byte index     1 0   3 2   5 4 ...
+  //      0004000  4803  4685  f003 <f834> 4800  4700 <08f5> 0800
+  //      0004020 <0c40> 2000  2300  e002  2301  2200  46c0  b5f0
+  //      0004040  07db  4e27  f000  f83b  1b00  1b49  4e25  f000
+  //      0004060  f835  f000  f834  4e24  f000  f830  1b00  1b49
+  // Firmware263.bin
+  // byte index     1 0   3 2   5 4 ...
+  //      0010000  4803  4685  f000  f8a2  4800  4700 <5da9> 0800
+  //      0010020 <13c0> 2000  2300  e002  2301  2200  46c0  b5f0
+  //      0010040  07db  4e27  f000  f83b  1b00  1b49  4e25  f000
+  //      0010060  f835  f000  f834  4e24  f000  f830  1b00  1b49
+
   // sigmature is 64 bytes after the first 2048
-  static final private byte[] signature2 = {
+  //                                   2.1   2.2   2.3   2.4  2.4c   2.5  2.5c  2.51
+  // signatures differ in bytes 7- 6  f834  f83a  f990  fa0a  fe94  fb7e  fc10  f894
+  //                             -12    d5    d5    d5    f5    f5    d5    d5    d5
+  //                           17-16  0c40  0c40  0c50  0c30  0c38  0c40  0c48  0c40
+  static final private byte[] signatureHeeb = {
     (byte)0x03, (byte)0x48, (byte)0x85, (byte)0x46, (byte)0x03, (byte)0xf0, (byte)0x34, (byte)0xf8,
     (byte)0x00, (byte)0x48, (byte)0x00, (byte)0x47, (byte)0xf5, (byte)0x08, (byte)0x00, (byte)0x08,
     (byte)0x40, (byte)0x0c, (byte)0x00, (byte)0x20, (byte)0x00, (byte)0x23, (byte)0x02, (byte)0xe0,
@@ -36,22 +214,21 @@ public class FirmwareUtils
     (byte)0x35, (byte)0xf8, (byte)0x00, (byte)0xf0, (byte)0x34, (byte)0xf8, (byte)0x24, (byte)0x4e,
     (byte)0x00, (byte)0xf0, (byte)0x30, (byte)0xf8, (byte)0x00, (byte)0x1b, (byte)0x49, (byte)0x1b
   };
-  static final private byte[] signature6 = {
-    (byte)0x09, (byte)0xd1, (byte)0x20, (byte)0x78, (byte)0x09, (byte)0x49, (byte)0x08, (byte)0x70,
-    (byte)0x01, (byte)0x20, (byte)0x07, (byte)0x49, (byte)0x08, (byte)0x60, (byte)0xff, (byte)0x20,
-    (byte)0x03, (byte)0x30, (byte)0x04, (byte)0x49, (byte)0x08, (byte)0x60, (byte)0x64, (byte)0x1c,
-    (byte)0x00, (byte)0xbf, (byte)0x28, (byte)0x46, (byte)0x6d, (byte)0x1e, (byte)0x00, (byte)0x28,
-    (byte)0xac, (byte)0xdc, (byte)0x30, (byte)0xbd, (byte)0x54, (byte)0x01, (byte)0x00, (byte)0x20,
-    (byte)0x50, (byte)0x01, (byte)0x00, (byte)0x20, (byte)0xb0, (byte)0x0a, (byte)0x00, (byte)0x20,
-    (byte)0xf8, (byte)0xb5, (byte)0x07, (byte)0x46, (byte)0x0d, (byte)0x46, (byte)0xee, (byte)0x1c,
-    (byte)0x00, (byte)0x24, (byte)0x03, (byte)0xe0, (byte)0x69, (byte)0x46, (byte)0x0e, (byte)0x55
+
+  // sigmature is 64 bytes after the first 4096
+  //                        2.61  2.63
+  //                 13-12  5ba1  5da9
+  //                   -16    b8    c0
+  static final private byte[] signatureLandolf = {
+    (byte)0x03, (byte)0x48, (byte)0x85, (byte)0x46, (byte)0x00, (byte)0xf0, (byte)0xa2, (byte)0xf8,
+    (byte)0x00, (byte)0x48, (byte)0x00, (byte)0x47, (byte)0xa1, (byte)0x5b, (byte)0x00, (byte)0x08,
+    (byte)0xb8, (byte)0x13, (byte)0x00, (byte)0x20, (byte)0x00, (byte)0x23, (byte)0x02, (byte)0xe0,
+    (byte)0x01, (byte)0x23, (byte)0x00, (byte)0x22, (byte)0xc0, (byte)0x46, (byte)0xf0, (byte)0xb5,
+    (byte)0xdb, (byte)0x07, (byte)0x27, (byte)0x4e, (byte)0x00, (byte)0xf0, (byte)0x3b, (byte)0xf8,
+    (byte)0x00, (byte)0x1b, (byte)0x49, (byte)0x1b, (byte)0x25, (byte)0x4e, (byte)0x00, (byte)0xf0,
+    (byte)0x35, (byte)0xf8, (byte)0x00, (byte)0xf0, (byte)0x34, (byte)0xf8, (byte)0x24, (byte)0x4e,
+    (byte)0x00, (byte)0xf0, (byte)0x30, (byte)0xf8, (byte)0x00, (byte)0x1b, (byte)0x49, (byte)0x1b
   };
-
-
-  //                                   2.1   2.2   2.3   2.4  2.4c   2.5  2.5c  2.51
-  // signatures differ in bytes 7- 6  f834  f83a  f990  fa0a  fe94  fb7e  fc10  f894
-  //                             -12  08d5  08d5  08d5  08f5  08f5  08d5  08d5  08d5
-  //                           17-16  0c40  0c40  0c50  0c30  0c38  0c40  0c48  0c40
 
   // static boolean areCompatible( int hw, int fw )
   // {
@@ -63,63 +240,34 @@ public class FirmwareUtils
   //   return false;
   // }
 
-  private static int computeSignature2( byte[] buf )
+  // verify the 64-byte signature block
+  // @param buf   signature block at 2048-offset
+  private static int verifySignatureHeeb( byte[] buf )
   {
-    for ( int k=0; k<64; ++k ) {
+    for ( int k=0; k<SIGNATURE_SIZE; ++k ) {
       if ( k==6 || k==7 || k==12 || k==16 || k==17 ) continue;
-      if ( buf[k] != signature2[k] ) return -k;
+      if ( buf[k] != signatureHeeb[k] ) return -k;
     }
-    return 64; // success
+    return SIGNATURE_SIZE; // success
   }
 
-  private static int computeSignature6( byte[] buf )
+  // @param buf   signature block at 4096-offset
+  private static int verifySignatureLandolf( byte[] buf )
   {
-    for ( int k=0; k<64; ++k ) {
-      if ( buf[k] != signature6[k] ) return -k;
+    for ( int k=0; k<SIGNATURE_SIZE; ++k ) {
+      if ( k==12 || k==13 || k==16) continue;
+      if ( buf[k] != signatureLandolf[k] ) return -k;
     }
-    return 64; // success
+    return SIGNATURE_SIZE; // success
   }
 
-  // try to guess firmware version reading bytes from the file
-  // return <= 0 (failure) or one of
-  //    2100 2200 2300 2400 2412 2500 2501 2512 2630
-  //
-  public static int readFirmwareFirmware( File fp )
-  {
-    FileInputStream fis = null;
-    try {
-      TDLog.Log( TDLog.LOG_IO, "read firmware file " + fp.getPath() );
-      fis = new FileInputStream( fp );
-      DataInputStream dis = new DataInputStream( fis );
-      if ( dis.skipBytes( 2048 ) != 2048 ) {
-        // Log.v("DistoX", "failed skip");
-        return 0; // skip 8 bootloader blocks
-      }
-      byte[] buf = new byte[64];
-      if ( dis.read( buf, 0, 64 ) != 64 ) {
-        // Log.v("DistoX", "failed read");
-        return 0;
-      }
-      if ( computeSignature2( buf ) == 64 ) {
-        return readFirmware2( buf );
-      }
-      if ( computeSignature6( buf ) == 64 ) {
-        return readFirmware6( buf );
-      }
-    } catch ( IOException e ) {
-    } finally {
-      try {
-        if ( fis != null ) fis.close();
-      } catch ( IOException e ) { }
-    }
-    return 0;
-  }
 
+  // guess the firmware version from a 64-byte block read from the file
   //                                   2.1   2.2   2.3   2.4  2.4c   2.5  2.5c  2.51
   // signatures differ in bytes 7- 6  f834  f83a  f990  fa0a  fe94  fb7e  fc10  fb94
   //                             -12  08d5  08d5  08d5  08f5  08f5  08d5  08d5  08d5
   //                           17-16  0c40  0c40  0c50  0c30  0c38  0c40  0c48  0c40
-  private static int readFirmware2( byte[] buf )
+  private static int readFirmwareHeeb( byte[] buf )
   {
     if ( buf[7] == (byte)0xf8 ) {       // 2.1 2.2
       if ( buf[6] == (byte)0x34 ) {     // 2.1
@@ -159,120 +307,14 @@ public class FirmwareUtils
     return -99; // failed on byte[7]
   }
 
-  // FIXME it is not clear which bytes can be used to identify a firmware 2.6.X
-  //       neither if this is a suitable block
-  private static int readFirmware6( byte[] buf )
+  //                        261    263
+  //                 12-13  a1 5b  a9 5d
+  //                 16     b8     c0
+  private static int readFirmwareLandolf( byte[] buf )
   {
-    if ( buf[7] == (byte)0x70 ) { // 2.6.3
-      if ( buf[6] == (byte)0x08 ) {
-        return ( buf[16] == (byte)0x03 && buf[12] == (byte)0x08 )? 2630 : -2630;
-      }
-      return -266;
-    }
-    return -99; // failed on byte[7]
-  }
-
-  public static boolean firmwareChecksum( int fw_version, File fp )
-  {
-    int len = 0;
-    switch ( fw_version ) {
-      case 2100: len = 15220; break;
-      case 2200: len = 15232; break;
-      case 2300: len = 15952; break;
-      case 2400: len = 16224; break;
-      case 2500: len = 17496; break;
-      case 2412: len = 16504; break;
-      case 2501: len = 17540; break;
-      case 2512: len = 17792; break;
-      case 2630: len = 25568; break;
-    }
-    if ( len == 0 ) return false; // bad formware version
-    len /= 4; // number of int to read
-
-    int check = 0;
-    try {
-      // TDLog.Log( TDLog.LOG_IO, "read firmware file " + file.getPath() );
-      FileInputStream fis = new FileInputStream( fp );
-      DataInputStream dis = new DataInputStream( fis );
-      for ( ; len > 0; --len ) {
-        check ^= dis.readInt();
-      }
-      fis.close();
-    } catch ( IOException e ) {
-      // Log.v("DistoX-FW", "check " + fw_version + ": IO exception " + e.getMessage() );
-      return false;
-    }
-    Log.v("DistoX-FW", "check " + fw_version + ": " + String.format("%08x", check) );
-    switch ( fw_version ) {
-      case 2100: return ( check == 0xf58b194b );
-      case 2200: return ( check == 0x4d66d466 );
-      case 2300: return ( check == 0x6523596a );
-      case 2400: return ( check == 0x0f8a2bc1 );
-      case 2412: return ( check == 0xfddd95a0 ); // continuous
-      case 2500: return ( check == 0x463c0306 );
-      case 2501: return ( check == 0x20e9a198 ); // 4-calib data double beep
-      case 2512: return ( check == 0x1ecb8dc0 ); // continuous
-      case 2630: return ( check == 0x1b1488c5 );
-    }
-    return false;
-  }
-
-  // static int readFirmwareAddress( DataInputStream  dis, DataOutputStream dos )
-  // {
-  //   int ret = -1;
-  //   byte[] buf = new byte[256];
-  //   try {
-  //     int addr = 0;
-  //     buf[0] = (byte)0x3a;
-  //     buf[1] = (byte)( addr & 0xff );
-  //     buf[2] = 0; // not necessary
-  //     dos.write( buf, 0, 3 );
-  //     dis.readFully( mBuffer, 0, 8 );
-  //     int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
-  //     if ( mBuffer[0] == (byte)0x3a && addr == reply_addr ) {
-  //       dis.readFully( buf, 0, 256 );
-  //       // Log.v("DistoX", "HARDWARE " + buf[0x40] + " " + buf[0x41] + " " + buf[0x42] + " " + buf[0x43] );
-  //       ret = (int)(buf[0x40]) + ((int)(buf[0x41])<<8); // major * 10 + minor
-  //       // FIXME  ((int)(buf[0x42]))<<16 + ((int)(buf[0x43]))<<24;
-  //     }
-  //   } catch ( IOException e ) {
-  //     // TODO
-  //   }
-  //   return ret;
-  // }
-
-  // say if the file fw code is compatible with some known hardware
-  // the real hardware is not known at this point - therefore can only check the firmware file signature
-  static boolean isCompatible( int fw )
-  {
-    return ( fw == 2100 || fw == 2200 || fw == 2300 || fw == 2400 || fw == 2500 || fw == 2412 || fw == 2501 || fw == 2512 ) 
-        || ( fw == 2630 );
-  }
-
-  // @param signature   256-byte signature block on the DistoX
-  // @param filepath    pathname of the firmware file 
-  static boolean checkSignature( byte[] signature, String filepath )
-  {
-    File fp = new File( filepath );
-    FileInputStream fis = null;
-    try {
-      fis = new FileInputStream( fp );
-      DataInputStream dis = new DataInputStream( fis );
-      if ( dis.skipBytes( 2048 ) != 2048 ) {
-        return false; // skip 8 bootloader blocks
-      }
-      byte[] buf = new byte[256];
-      if ( dis.read( buf, 0, 256 ) != 256 ) {
-        return false;
-      }
-      // TODO check buf against signature - return false if failed
-    } catch ( IOException e ) {
-    } finally {
-      try {
-        if ( fis != null ) fis.close();
-      } catch ( IOException e ) { }
-    }
-    return true;
+    if ( buf[12] == (byte)0xa1 &&  buf[13] == (byte)0x5b && buf[16] == (byte)0xb8 ) return 2610;
+    if ( buf[12] == (byte)0xa9 &&  buf[13] == (byte)0x5d && buf[16] == (byte)0xc0 ) return 2630;
+    return -99; 
   }
 
 }

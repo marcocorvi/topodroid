@@ -25,6 +25,7 @@ import android.util.Log;
 
 // import java.nio.ByteBuffer;
 
+import java.io.File;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.util.List;
@@ -187,13 +188,18 @@ public class DistoX310Comm extends DistoXComm
   // ====================================================================================
   // FIRMWARE
 
-  public byte[] readFirmwareSignature( String address )
+  // @param expected device hardware
+  public byte[] readFirmwareSignature( String address, int hw )
   {
     byte[] ret = null;
+    int blk = ( hw == FirmwareUtils.HW_HEEB )? 8
+            : ( hw == FirmwareUtils.HW_LANDOLF )? 16
+            : 0;
+    if ( blk == 0 ) return null;
     if ( connectSocketAny( address ) ) {
       if ( mProtocol instanceof DistoX310Protocol ) {
-        Log.v("DistoX-FW", "comm firmware signature");
-        ret = ((DistoX310Protocol)mProtocol).readFirmwareBlock( 8 );
+        Log.v("DistoX-FW", "comm firmware signature hw " + hw);
+        ret = ((DistoX310Protocol)mProtocol).readFirmwareBlock( blk );
       }
     }
     destroySocket( );
@@ -227,10 +233,16 @@ public class DistoX310Comm extends DistoXComm
         //   ret = -1;
         // }
 
+        // FIXME DRY_RUN
+        // ret = ((DistoX310Protocol)mProtocol).uploadFirmwareDryRun( filepath );
+        // Log.v("DistoX-FW", "Comm Firmware upoad dry run " + ret );
+        
         ret = ((DistoX310Protocol)mProtocol).uploadFirmware( filepath );
       } else {
         ret = -1;
       }
+    } else {
+      Log.v("DistoX-FW", "Comm Firmware upoad socket failure");
     }
     destroySocket( );
     return ret;

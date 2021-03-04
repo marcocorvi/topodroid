@@ -1898,7 +1898,8 @@ public class TopoDroidApp extends Application
   //   return mComm.readFirmwareHardware( TDInstance.getDeviceA().mAddress );
   // }
 
-  public byte[] readFirmwareSignature( )
+  // @param hw expected device hardware
+  public byte[] readFirmwareSignature( int hw )
   {
     // FIXME ASYNC_FIRMWARE_TASK
     // if ( mComm == null || TDInstance.getDeviceA() == null ) return;
@@ -1907,7 +1908,7 @@ public class TopoDroidApp extends Application
 
     if ( mComm == null || TDInstance.getDeviceA() == null ) return null;
     if ( ! (mComm instanceof DistoX310Comm) ) return null;
-    return ((DistoX310Comm)mComm).readFirmwareSignature( TDInstance.deviceAddress() );
+    return ((DistoX310Comm)mComm).readFirmwareSignature( TDInstance.deviceAddress(), hw );
   }
 
   public int dumpFirmware( String filename )
@@ -1930,10 +1931,6 @@ public class TopoDroidApp extends Application
     // String pathname = TDPath.getBinFile( filename );
     // TDLog.LogFile( "Firmware upload address " + TDInstance.deviceAddress() );
     // TDLog.LogFile( "Firmware upload file " + pathname );
-    // if ( ! pathname.endsWith( "bin" ) ) {
-    //   TDLog.LogFile( "Firmware upload file does not end with \"bin\"");
-    //   return;
-    // }
     // (new FirmwareTask( (DistoX310Comm)mComm, FirmwareTask.FIRMWARE_WRITE, filename )).execute( ); 
 
     if ( mComm == null || TDInstance.getDeviceA() == null ) return -1;
@@ -1941,12 +1938,6 @@ public class TopoDroidApp extends Application
     String pathname = TDPath.getBinFile( filename );
     TDLog.LogFile( "Firmware upload address " + TDInstance.deviceAddress() );
     TDLog.LogFile( "Firmware upload file " + pathname );
-    // Log.v("DistoX-FW", "Firmware upload address " + TDInstance.deviceAddress() );
-    // Log.v("DistoX-FW", "Firmware upload file " + pathname );
-    if ( ! pathname.endsWith( "bin" ) ) {
-      TDLog.LogFile( "Firmware upload file does not end with \"bin\"");
-      return 0;
-    }
     return ((DistoX310Comm)mComm).uploadFirmware( TDInstance.deviceAddress(), pathname );
   }
 

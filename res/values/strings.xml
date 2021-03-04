@@ -1609,6 +1609,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
 \n[8] Turn off the DistoX2 with the CLR key.
 \n
    </string>
+   <string name="firmware_wait_dump">Reading firmware &#8230; wait</string>
+   <string name="firmware_wait_check">Checking hardware &#8230; wait</string>
+   <string name="firmware_wait_upload">Uploading firmware &#8230; wait</string>
    <string name="firmware_none">no firmware file</string>
    <string name="firmware_file">firmware file</string>
    <string name="firmware_file_exists">Existing firmware file</string>

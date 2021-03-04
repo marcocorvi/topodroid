@@ -286,6 +286,15 @@ public class DistoX310Protocol extends DistoXProtocol
   //   return start - cnt;
   // }
 
+  // DRY_RUN
+  // public int uploadFirmwareDryRun( String filepath )
+  // {
+  //   File fp = new File( filepath );
+  //   int len = (int)( fp.length() );
+  //   Log.v("DistoX-FW", "Protocol Firmware upload: file " + filepath + " dry run - length " + len );
+  //   return len;
+  // }
+
   // @Override
   public int uploadFirmware( String filepath )
   {
@@ -367,7 +376,7 @@ public class DistoX310Protocol extends DistoXProtocol
       FileOutputStream fos = new FileOutputStream( fp );
       DataOutputStream dos = new DataOutputStream( fos );
       for ( int addr = 0; ; ++ addr ) {
-        TDLog.LogFile( "Firmware dump: addr " + addr + " count " + cnt );
+        // TDLog.LogFile( "Firmware dump: addr " + addr + " count " + cnt );
         try {
           buf[0] = (byte)0x3a;
           buf[1] = (byte)( addr & 0xff );
@@ -381,11 +390,11 @@ public class DistoX310Protocol extends DistoXProtocol
 
           int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
           if ( mBuffer[0] != (byte)0x3a || addr != reply_addr ) {
-            TDLog.LogFile( "Firmware dump: fail at " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr );
+            TDLog.LogFile( "Firmware dump: fail at " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr + " addr " + addr );
             ok = false;
             break;
-          } else {
-            TDLog.LogFile( "Firmware dump: reply addr ok");
+          // } else {
+          //   TDLog.LogFile( "Firmware dump: reply addr ok");
           }
 
           mIn.readFully( buf, 0, 256 );
@@ -424,9 +433,7 @@ public class DistoX310Protocol extends DistoXProtocol
   // @Override
   public byte[] readFirmwareBlock( int nr )
   {
-    TDLog.LogFile( "Firmware read block " + nr );
     byte[] buf = new byte[256];
-
     boolean ok = true;
     int addr = nr;
     try {
@@ -442,10 +449,10 @@ public class DistoX310Protocol extends DistoXProtocol
 
       int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
       if ( mBuffer[0] != (byte)0x3a || addr != reply_addr ) {
-        TDLog.LogFile( "Firmware dump: fail buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr );
+        TDLog.LogFile( "Firmware read block " + nr + ": fail buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr );
         ok = false;
       } else {
-        TDLog.LogFile( "Firmware dump: reply addr ok");
+        TDLog.LogFile( "Firmware read block " + nr + ": ok");
       }
 
       mIn.readFully( buf, 0, 256 );
