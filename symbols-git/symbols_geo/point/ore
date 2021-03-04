@@ -7,6 +7,7 @@ name-ru руда
 name-fr minerai
 name-ro minereu
 name-de Mineral
+name-hu ásvány
 th_name u:ore
 group mineral
 color 0x66ff99
