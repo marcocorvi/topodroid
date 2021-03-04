@@ -1119,33 +1119,44 @@ class DrawingDxf
           else if ( path.mType == DrawingPath.DRAWING_PATH_POINT )
           {
             DrawingPointPath point = (DrawingPointPath) path;
+	    String name = point.getThName( );
             int idx = 1 + point.mPointType;
-            if ( mVersion13 ) {
-              if ( BrushManager.isPointSection( point.mPointType ) ) {
-		if ( TDSetting.mAutoXSections ) {
-                  // FIXME GET_OPTION
-                  // String scrapfile = point.mOptions.substring( 7 ) + ".tdr";
-                  String scrapname = TDUtil.replacePrefix( TDInstance.survey, point.getOption( TDString.OPTION_SCRAP ) );
-                  if ( scrapname != null ) {
-                    String scrapfile = scrapname + ".tdr";
-                    handle = tdrToDxf( pw5, handle, scrapfile, 
-                           scale, point.cx, point.cy, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
+	    if ( name.equals("label")) {
+              DrawingLabelPath label = (DrawingLabelPath)point;
+              printString(pw5, 0, "TEXT");
+              printString(pw5, 8, "P_" + th_name);
+              printFloat(pw5, 40, point.getScaleValue() * 1.4f);
+              printString(pw5, 1, label);
+              printFloat(pw5, 50, 360.0f - (float)(point.mOrientation));
+              printXYZ(pw5, (point.cx + xoff) * scale, -(point.cy + yoff) * scale, 0, 0);
+            } else {
+              if ( mVersion13 ) {
+                if ( BrushManager.isPointSection( point.mPointType ) ) {
+	          if ( TDSetting.mAutoXSections ) {
+                    // FIXME GET_OPTION
+                    // String scrapfile = point.mOptions.substring( 7 ) + ".tdr";
+                    String scrapname = TDUtil.replacePrefix( TDInstance.survey, point.getOption( TDString.OPTION_SCRAP ) );
+                    if ( scrapname != null ) {
+                      String scrapfile = scrapname + ".tdr";
+                      handle = tdrToDxf( pw5, handle, scrapfile, 
+                             scale, point.cx, point.cy, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
+                    }
                   }
+                } else {
+                  handle = toDxf( pw5, handle, point, scale, xoff, yoff );
                 }
               } else {
-                handle = toDxf( pw5, handle, point, scale, xoff, yoff );
+                String th_name = point.getThName().replace(':','-');
+                printString( pw5, 0, "INSERT" );
+                printString( pw5, 8, "P_" + th_name );
+                printString( pw5, 2, "B_" + th_name );
+                printFloat( pw5, 41, point.getScaleValue()*1.4f ); // FIX Asenov
+                printFloat( pw5, 42, point.getScaleValue()*1.4f );
+                printFloat( pw5, 50, 360.0f-(float)(point.mOrientation) );
+                printXYZ( pw5, (point.cx+xoff)*scale, -(point.cy+yoff)*scale, 0, 0 );
               }
-            } else {
-              String th_name = point.getThName().replace(':','-');
-              printString( pw5, 0, "INSERT" );
-              printString( pw5, 8, "P_" + th_name );
-              printString( pw5, 2, "B_" + th_name );
-              printFloat( pw5, 41, point.getScaleValue()*1.4f ); // FIX Asenov
-              printFloat( pw5, 42, point.getScaleValue()*1.4f );
-              printFloat( pw5, 50, 360.0f-(float)(point.mOrientation) );
-              printXYZ( pw5, (point.cx+xoff)*scale, -(point.cy+yoff)*scale, 0, 0 );
             }
-          }
+	  }
           out.write( sw5.getBuffer().toString() );
           out.flush();
         }
