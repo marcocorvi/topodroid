@@ -8,6 +8,7 @@ name-ru нарушение_левостороннее
 name-fr faille_senestre
 name-ro falie-stânga
 name-de Linksverwerfung
+name-hu törés_bal
 th_name u:fault-left
 group fault
 color 0xff6666
