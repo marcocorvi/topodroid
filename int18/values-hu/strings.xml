@@ -593,10 +593,11 @@ Tap <b>Bezár</b> nem változtat.
     <string name="stat_component">Statisztikai komponensek %1$d</string>
     <string name="stat_depth">Mélység %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Kettőzött mérés %1$d # %2$d %3$.1f %4$s</string>
-    <string name="stat_leg">Poligonmérések %1$d %2$.1f %3$.1f %4$.1f %5$s</string>
-    <string name="stat_length">Hossz  %1$.1f %2$s</string>
+    <string name="stat_leg">Poligonmérések %1$d Hossz %2$.1f %3$.1f vetület %4$.1f %5$s</string>
+    <string name="stat_length">Vázlat hossz  %1$.1f %2$s</string>
     <string name="stat_extlen">3D hossz %1$.1f %2$s</string>
     <string name="stat_projlen">Vízszintes vetület %1$.1f %2$s</string>
+    <string name="stat_cycle">Ismétléseks %1$d</string>
     <string name="stat_loop">Hurkok %1$d</string>
     <string name="stat_origin">Kezdő pont: %1$s</string>
     <string name="stat_azimuth">Oldalnézet vetítési iránya: %1$.1f</string>
@@ -625,7 +626,6 @@ Tap <b>Bezár</b> nem változtat.
     <string name="extended">HOSSZMETSZET</string>
     <string name="profile">VET. HOSSZMETSZET </string>
     <string name="extended_profile">Kiterített Hosszmetszet</string>
-
     <!-- UNUSED string name="v_section">V-SECTION</string -->
     <string name="h_section">Horizontális keresztszelvény</string>
     <!-- UNUSED string name="landscape">landscape</string -->
