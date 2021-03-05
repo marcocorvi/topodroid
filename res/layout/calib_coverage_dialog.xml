@@ -94,15 +94,21 @@
     android:layout_marginTop="@dimen/marginvbig"
     android:gravity="left"
     >
-      <Button android:id="@+id/button_help"
-          style="@style/button_empty"
-          android:text="@string/button_help"
-      />
-    <Button android:id="@+id/coverage_back"
-      android:layout_gravity="left"
-      style="@style/button_default"
-      android:text="@string/button_close"
+    <Button android:id="@+id/button_help"
+      style="@style/button_empty"
+      android:text="@string/button_help"
     />
+    <LinearLayout 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:gravity="right"
+      >
+      <Button android:id="@+id/coverage_back"
+        android:layout_gravity="left"
+        style="@style/button_default"
+        android:text="@string/button_close"
+      />
+    </LinearLayout>
   </LinearLayout>
 
 </LinearLayout>

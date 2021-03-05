@@ -35,38 +35,45 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
+      android:gravity="left"
       >
       <Button android:id="@+id/button_help"
           style="@style/button_empty"
           android:text="@string/button_help"
       />
-      <Button android:id="@+id/btn_minus"
-        android:layout_width="0dp"
-        android:layout_weight="20"
-        android:layout_marginRight="@dimen/marginh"
-        style="@style/button_default"
-	android:text="@string/dash"
-      />
-      <EditText android:id="@+id/textform"
-        style="@style/edit_number"
-        android:layout_width="0dp"
-        android:layout_weight="40"
-        android:layout_marginRight="@dimen/marginh"
-        android:imeOptions="actionDone"
-      />
-      <Button android:id="@+id/btn_plus"
-        android:layout_width="0dp"
-        android:layout_weight="20"
-        android:layout_marginRight="@dimen/marginh"
-        style="@style/button_default"
-	android:text="@string/plus"
-      />
-      <Button android:id="@+id/btn_ok"
-        android:layout_width="0dp"
-        android:layout_weight="20"
-        style="@style/button_default"
-        android:text="@string/button_ok"
-      />
+      <LinearLayout 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        >
+        <Button android:id="@+id/btn_minus"
+          android:layout_width="0dp"
+          android:layout_weight="20"
+          android:layout_marginRight="@dimen/marginh"
+          style="@style/button_default"
+          android:text="@string/dash"
+        />
+        <EditText android:id="@+id/textform"
+          style="@style/edit_number"
+          android:layout_width="0dp"
+          android:layout_weight="40"
+          android:layout_marginRight="@dimen/marginh"
+          android:imeOptions="actionDone"
+        />
+        <Button android:id="@+id/btn_plus"
+          android:layout_width="0dp"
+          android:layout_weight="20"
+          android:layout_marginRight="@dimen/marginh"
+          style="@style/button_default"
+          android:text="@string/plus"
+        />
+        <Button android:id="@+id/btn_ok"
+          android:layout_width="0dp"
+          android:layout_weight="20"
+          style="@style/button_default"
+          android:text="@string/button_ok"
+        />
+      </LinearLayout>
     </LinearLayout>
   </LinearLayout>
 

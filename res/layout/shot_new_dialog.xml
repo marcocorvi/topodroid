@@ -266,27 +266,32 @@
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
       android:layout_marginTop="@dimen/marginvbig"
-      android:layout_gravity="right"
-      android:gravity="right"
+      android:gravity="left"
       >
       <Button android:id="@+id/button_help"
           style="@style/button_empty"
           android:text="@string/button_help"
       />
-      <Button android:id="@+id/button_cancel_name"
-        style="@style/button_default"
-        android:text="@string/button_cancel"
-        android:layout_marginRight="@dimen/marginh"
-      />
-      <Button android:id="@+id/button_save_shot_name"
-        style="@style/button_default"
-        android:text="@string/button_save"
-        android:layout_marginRight="@dimen/marginh"
-      />
-      <Button android:id="@+id/button_ok_shot_name"
-        style="@style/button_default"
-        android:text="@string/button_ok"
-      />
+      <LinearLayout 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        >
+        <Button android:id="@+id/button_cancel_name"
+          style="@style/button_default"
+          android:text="@string/button_cancel"
+          android:layout_marginRight="@dimen/marginh"
+        />
+        <Button android:id="@+id/button_save_shot_name"
+          style="@style/button_default"
+          android:text="@string/button_save"
+          android:layout_marginRight="@dimen/marginh"
+        />
+        <Button android:id="@+id/button_ok_shot_name"
+          style="@style/button_default"
+          android:text="@string/button_ok"
+        />
+    </LinearLayout>
   </LinearLayout>
    					  
 

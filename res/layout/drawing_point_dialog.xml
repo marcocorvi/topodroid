@@ -171,27 +171,32 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal" 
     android:layout_marginTop="@dimen/marginv"
-    android:layout_gravity="right"
-    android:gravity="right"
+    android:gravity="left"
     >
-      <Button android:id="@+id/button_help"
-          style="@style/button_empty"
-          android:text="@string/button_help"
+    <Button android:id="@+id/button_help"
+      style="@style/button_empty"
+      android:text="@string/button_help"
+    />
+    <LinearLayout 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:gravity="right"
+      >
+      <Button android:id="@+id/button_cancel"
+        style="@style/button_default"
+        android:text="@string/button_cancel"
+        android:layout_marginRight="@dimen/marginh"
       />
-    <Button android:id="@+id/button_cancel"
-      style="@style/button_default"
-      android:text="@string/button_cancel"
-      android:layout_marginRight="@dimen/marginh"
-    />
-    <Button android:id="@+id/button_ok"
-      style="@style/button_default"
-      android:text="@string/button_save"
-      android:layout_marginRight="@dimen/marginh"
-    />
-    <Button android:id="@+id/button_draw"
-      style="@style/button_default"
-      android:text="@string/button_plot"
-    />
+      <Button android:id="@+id/button_ok"
+        style="@style/button_default"
+        android:text="@string/button_save"
+        android:layout_marginRight="@dimen/marginh"
+      />
+      <Button android:id="@+id/button_draw"
+        style="@style/button_default"
+        android:text="@string/button_plot"
+      />
+    </LinearLayout>
   </LinearLayout>
 
 </LinearLayout>

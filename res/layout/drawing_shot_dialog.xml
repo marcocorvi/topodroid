@@ -146,39 +146,44 @@
     android:layout_height="wrap_content"
     android:layout_below="@id/layout3b"
     android:orientation="horizontal" 
-    android:layout_gravity="right" 
-    android:gravity="right" 
+    android:gravity="left" 
     >
-      <Button android:id="@+id/button_help"
-          style="@style/button_empty"
-          android:text="@string/button_help"
-      />
+    <Button android:id="@+id/button_help"
+        style="@style/button_empty"
+        android:text="@string/button_help"
+    />
     <LinearLayout 
-      android:layout_margin="0dp"
-      android:layout_width="wrap_content" 
+      android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:background="@drawable/button_border"
-      android:layout_marginRight="@dimen/marginh"
+      android:gravity="right"
       >
-      <Button android:id="@+id/btn_color"
+      <LinearLayout 
+        android:layout_margin="0dp"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_border"
+        android:layout_marginRight="@dimen/marginh"
+        >
+        <Button android:id="@+id/btn_color"
+          style="@style/button_default"
+          android:text="@string/button_color"
+        />
+      </LinearLayout>
+      <Button android:id="@+id/btn_cancel"
         style="@style/button_default"
-        android:text="@string/button_color"
+        android:text="@string/button_cancel"
+        android:layout_marginRight="@dimen/marginh"
+      />
+      <Button android:id="@+id/btn_ok"
+        style="@style/button_default"
+        android:text="@string/button_save"
+        android:layout_marginRight="@dimen/marginh"
+      />
+      <Button android:id="@+id/walls"
+        style="@style/button_default"
+        android:text="@string/make_walls"
       />
     </LinearLayout>
-    <Button android:id="@+id/btn_cancel"
-      style="@style/button_default"
-      android:text="@string/button_cancel"
-      android:layout_marginRight="@dimen/marginh"
-    />
-    <Button android:id="@+id/btn_ok"
-      style="@style/button_default"
-      android:text="@string/button_save"
-      android:layout_marginRight="@dimen/marginh"
-    />
-    <Button android:id="@+id/walls"
-      style="@style/button_default"
-      android:text="@string/make_walls"
-    />
   </LinearLayout>
 
 

@@ -21,24 +21,30 @@
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:layout_gravity="right"
-      android:gravity="right"
+      android:gravity="left"
       android:orientation="horizontal"
       >
       <Button android:id="@+id/button_help"
           style="@style/button_empty"
           android:text="@string/button_help"
       />
-      <Button android:id="@+id/button_import"
-        style="@style/button_default"
-        android:layout_height="match_parent"
-        android:layout_marginRight="@dimen/marginh"
-        android:text="@string/btn_import"
-      />
-      <Button android:id="@+id/button_reset"
-        style="@style/button_default"
-        android:layout_height="match_parent"
-        android:text="@string/button_reset"
-      />
+      <LinearLayout
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        >
+        <Button android:id="@+id/button_import"
+          style="@style/button_default"
+          android:layout_height="match_parent"
+          android:layout_marginRight="@dimen/marginh"
+          android:text="@string/btn_import"
+        />
+        <Button android:id="@+id/button_reset"
+          style="@style/button_default"
+          android:layout_height="match_parent"
+          android:text="@string/button_reset"
+        />
+      </LinearLayout>
     </LinearLayout>
 
   </LinearLayout>

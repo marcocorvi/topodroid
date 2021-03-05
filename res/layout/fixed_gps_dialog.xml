@@ -32,52 +32,57 @@
       />
 
     <LinearLayout android:id="@+id/help"
-        android:layout_below="@id/comment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:orientation="horizontal"
-        android:layout_marginTop="@dimen/marginvbig"
-        >
+      android:layout_below="@id/comment"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" 
+      android:orientation="horizontal"
+      android:layout_marginTop="@dimen/marginvbig"
+      android:gravity="left"
+      >
       <Button android:id="@+id/button_help"
           style="@style/button_empty"
           android:text="@string/button_help"
       />
-      <!-- Button android:id="@+id/button_cancel"
-        style="@style/button_default"
-        android:text="@string/button_cancel"
-        / -->
       <LinearLayout 
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="left"
-        >
-      <Button android:id="@+id/button_loc"
-        android:layout_gravity="left"
-        style="@style/button_default"
-        android:text="@string/button_gps_start"
-        />
-
-      <Button android:id="@+id/button_view"
-        android:layout_gravity="left"
-        android:text="@string/button_view"
-        style="@style/button_default"
-        />
-      </LinearLayout>
-
-      <LinearLayout 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="right"
         >
-      <Button android:id="@+id/button_add"
-        android:layout_gravity="right"
-        style="@style/button_default"
-        android:text="@string/button_save"
-        />
-      </LinearLayout>
+        <!-- Button android:id="@+id/button_cancel"
+          style="@style/button_default"
+          android:text="@string/button_cancel"
+          / -->
+        <LinearLayout 
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="left"
+          >
+          <Button android:id="@+id/button_loc"
+            android:layout_gravity="left"
+            style="@style/button_default"
+            android:text="@string/button_gps_start"
+            />
+          <Button android:id="@+id/button_view"
+            android:layout_gravity="left"
+            android:text="@string/button_view"
+            style="@style/button_default"
+            />
+        </LinearLayout>
 
+        <LinearLayout 
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="right"
+          >
+          <Button android:id="@+id/button_add"
+            android:layout_gravity="right"
+            style="@style/button_default"
+            android:text="@string/button_save"
+            />
+        </LinearLayout>
+      </LinearLayout>
     </LinearLayout>
 
     <TextView android:id="@+id/longitude"

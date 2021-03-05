@@ -40,15 +40,21 @@
     android:layout_marginBottom="@dimen/marginvbig"
     android:gravity="right"
     >
-      <Button android:id="@+id/button_help"
-          style="@style/button_empty"
-          android:text="@string/button_help"
-      />
-    <Button
-      style="@style/button_default"
-      android:id="@+id/firmware_ok"
-      android:text="@string/button_ok"
+    <Button android:id="@+id/button_help"
+        style="@style/button_empty"
+        android:text="@string/button_help"
     />
+    <LinearLayout 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:gravity="right"
+      >
+      <Button
+        style="@style/button_default"
+        android:id="@+id/firmware_ok"
+        android:text="@string/button_ok"
+      />
+    </LinearLayout>
   </LinearLayout>
 
   <ScrollView

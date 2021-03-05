@@ -21,38 +21,44 @@
     >
 
     <ImageView android:id="@+id/histogram1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:layout_marginBottom="@dimen/marginv"
-        android:contentDescription="@string/error_distribution"
-        />
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="left"
+      android:layout_marginBottom="@dimen/marginv"
+      android:contentDescription="@string/error_distribution"
+      />
 
     <ImageView android:id="@+id/histogram2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginBottom="@dimen/marginv"
-        android:contentDescription="@string/error_distribution"
-        />
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="right"
+      android:layout_marginBottom="@dimen/marginv"
+      android:contentDescription="@string/error_distribution"
+      />
   </LinearLayout>
 
   <LinearLayout android:id="@+id/help"
-      android:layout_width="match_parent" 
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" 
+    android:layout_gravity="right"
+    android:gravity="left"
+    android:layout_marginTop="@dimen/marginvbig" 
+    >
+    <Button android:id="@+id/button_help"
+        style="@style/button_empty"
+        android:text="@string/button_help"
+    />
+    <LinearLayout 
+      android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:orientation="horizontal" 
-      android:layout_gravity="right"
       android:gravity="right"
-      android:layout_marginTop="@dimen/marginvbig" 
       >
-      <Button android:id="@+id/button_help"
-          style="@style/button_empty"
-          android:text="@string/button_help"
-      />
       <Button android:id="@+id/button_close"
           style="@style/button_default"
           android:text="@string/button_close"
       />
+    </LinearLayout>
   </LinearLayout>
    					  
 

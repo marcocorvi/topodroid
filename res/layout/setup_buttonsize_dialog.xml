@@ -73,24 +73,31 @@
     android:orientation="horizontal"
     android:layout_marginTop="@dimen/marginv"
     android:layout_marginBottom="@dimen/marginv"
+    android:gravity="left"
     >
-      <Button android:id="@+id/button_help"
-          style="@style/button_empty"
-          android:text="@string/button_help"
+    <Button android:id="@+id/button_help"
+        style="@style/button_empty"
+        android:text="@string/button_help"
+    />
+    <LinearLayout 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:gravity="right"
+      >
+      <Button android:id="@+id/btn_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/marginh"
+        style="@style/button_default"
+        android:text="@string/button_next"
       />
-    <Button android:id="@+id/btn_next"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginRight="@dimen/marginh"
-      style="@style/button_default"
-      android:text="@string/button_next"
-    />
-    <Button android:id="@+id/btn_skip"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginRight="@dimen/marginh"
-      style="@style/button_default"
-      android:text="@string/button_skip"
-    />
+      <Button android:id="@+id/btn_skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/marginh"
+        style="@style/button_default"
+        android:text="@string/button_skip"
+      />
+    </LinearLayout>
   </LinearLayout>
 </LinearLayout>

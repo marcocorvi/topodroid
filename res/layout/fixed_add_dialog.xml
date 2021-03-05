@@ -123,16 +123,22 @@
   />
 
   <LinearLayout android:id="@+id/help"
-      android:layout_below="@id/edit_comment"
-      android:layout_width="match_parent" 
+    android:layout_below="@id/edit_comment"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" 
+    android:layout_marginTop="@dimen/marginvbig"
+    android:gravity="left"
+    >
+    <Button android:id="@+id/button_help"
+        style="@style/button_empty"
+        android:text="@string/button_help"
+    />
+    <LinearLayout 
+      android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:orientation="horizontal" 
-      android:layout_marginTop="@dimen/marginvbig"
+      android:gravity="right"
       >
-      <Button android:id="@+id/button_help"
-          style="@style/button_empty"
-          android:text="@string/button_help"
-      />
       <Button android:id="@+id/button_clipboard"
         style="@style/button_default"
         android:text="@string/button_clipboard"
@@ -151,11 +157,12 @@
         android:layout_height="wrap_content"
         android:gravity="right"
         >
-      <Button android:id="@+id/button_ok"
-        style="@style/button_default"
-        android:text="@string/button_save"
-        />
+        <Button android:id="@+id/button_ok"
+          style="@style/button_default"
+          android:text="@string/button_save"
+          />
       </LinearLayout>
+    </LinearLayout>
   </LinearLayout>
 
   <android.inputmethodservice.KeyboardView android:id="@+id/keyboardview"

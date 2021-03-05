@@ -71,8 +71,7 @@
     <LinearLayout android:id="@+id/help"
        android:layout_width="wrap_content" 
        android:layout_height="wrap_content"
-       android:layout_gravity="right"
-       android:gravity="right"
+       android:gravity="left"
        android:orientation="horizontal"
        android:layout_marginTop="@dimen/marginvbig"
        >
@@ -80,20 +79,26 @@
           style="@style/button_empty"
           android:text="@string/button_help"
       />
-      <Button android:id="@+id/btn_back"
-        style="@style/button_default"
-        android:layout_marginRight="@dimen/marginh"
-        android:text="@string/button_cancel"
-        />
-      <Button android:id="@+id/btn_delete"
-        style="@style/button_default"
-        android:layout_marginRight="@dimen/marginh"
-        android:text="@string/button_delete"
-        />
-      <Button android:id="@+id/btn_rename"
-        style="@style/button_default"
-        android:text="@string/button_apply"
-        />
+      <LinearLayout 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        >
+        <Button android:id="@+id/btn_back"
+          style="@style/button_default"
+          android:layout_marginRight="@dimen/marginh"
+          android:text="@string/button_cancel"
+          />
+        <Button android:id="@+id/btn_delete"
+          style="@style/button_default"
+          android:layout_marginRight="@dimen/marginh"
+          android:text="@string/button_delete"
+          />
+        <Button android:id="@+id/btn_rename"
+          style="@style/button_default"
+          android:text="@string/button_apply"
+          />
+      </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

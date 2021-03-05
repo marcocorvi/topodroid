@@ -108,8 +108,7 @@
     <LinearLayout android:id="@+id/help"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_gravity="right"
-      android:gravity="right"
+      android:gravity="left"
       android:orientation="horizontal"
       android:layout_marginTop="@dimen/marginv"
       >
@@ -117,10 +116,16 @@
           style="@style/button_empty"
           android:text="@string/button_help"
       />
-      <Button android:id="@+id/btn_back"
-        style="@style/button_default"
-        android:text="@string/button_close"
-        />
+      <LinearLayout
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        >
+        <Button android:id="@+id/btn_back"
+          style="@style/button_default"
+          android:text="@string/button_close"
+          />
+      </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

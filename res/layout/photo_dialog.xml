@@ -18,17 +18,22 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_marginTop="@dimen/marginvbig"
-    android:layout_gravity="right"
-    android:gravity="right"
+    android:gravity="left"
     >
-      <Button android:id="@+id/button_help"
-          style="@style/button_empty"
-          android:text="@string/button_help"
-      />
-    <Button android:id="@+id/photo_back"
-      style="@style/button_default"
-      android:text="@string/button_close"
+    <Button android:id="@+id/button_help"
+        style="@style/button_empty"
+        android:text="@string/button_help"
     />
+    <LinearLayout 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:gravity="right"
+      >
+      <Button android:id="@+id/photo_back"
+        style="@style/button_default"
+        android:text="@string/button_close"
+      />
+    </LinearLayout>
   </LinearLayout>
 
 </LinearLayout>

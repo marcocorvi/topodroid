@@ -185,7 +185,7 @@
     <LinearLayout android:id="@+id/help"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
-      android:gravity="right"
+      android:gravity="left"
       android:orientation="horizontal" 
       android:layout_marginTop="@dimen/marginv"
       >
@@ -193,16 +193,22 @@
           style="@style/button_empty"
           android:text="@string/button_help"
       />
-      <Button android:id="@+id/btn_saved"
-        style="@style/button_default"
-        android:text="@string/button_saved"
-        android:layout_gravity="left"
-        />
-      <Button android:id="@+id/btn_cancel"
-        style="@style/button_default"
-        android:text="@string/button_cancel"
-        android:layout_gravity="right"
-        />
+      <LinearLayout 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        >
+        <Button android:id="@+id/btn_saved"
+          style="@style/button_default"
+          android:text="@string/button_saved"
+          android:layout_gravity="left"
+          />
+        <Button android:id="@+id/btn_cancel"
+          style="@style/button_default"
+          android:text="@string/button_cancel"
+          android:layout_gravity="right"
+          />
+      </LinearLayout>
     </LinearLayout>
    					  
 </LinearLayout>

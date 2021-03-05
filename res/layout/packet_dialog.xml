@@ -68,30 +68,36 @@
     android:layout_gravity="left"
     android:paddingBottom="@dimen/paddingv"
     >  
-      <Button android:id="@+id/button_help"
-          style="@style/button_empty"
-          android:text="@string/button_help"
-      />
-    <!-- Button android:id="@+id/clear"
-      style="@style/button_default"
-      android:layout_marginRight="@dimen/marginh"
-      android:text="@string/button_clar"
-      / -->
-    <Button android:id="@+id/clear_day"
-      style="@style/button_default"
-      android:layout_marginRight="@dimen/marginh"
-      android:text="@string/button_clear_day"
-      />
-    <Button android:id="@+id/clear_week"
-      style="@style/button_default"
-      android:layout_marginRight="@dimen/marginh"
-      android:text="@string/button_clear_week"
-      />
-    <Button android:id="@+id/cancel"
-      style="@style/button_default"
-      android:layout_marginRight="@dimen/marginh"
-      android:text="@string/button_back"
-      />
+    <Button android:id="@+id/button_help"
+        style="@style/button_empty"
+        android:text="@string/button_help"
+    />
+    <LinearLayout 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:gravity="right"
+      >
+      <!-- Button android:id="@+id/clear"
+        style="@style/button_default"
+        android:layout_marginRight="@dimen/marginh"
+        android:text="@string/button_clar"
+        / -->
+      <Button android:id="@+id/clear_day"
+        style="@style/button_default"
+        android:layout_marginRight="@dimen/marginh"
+        android:text="@string/button_clear_day"
+        />
+      <Button android:id="@+id/clear_week"
+        style="@style/button_default"
+        android:layout_marginRight="@dimen/marginh"
+        android:text="@string/button_clear_week"
+        />
+      <Button android:id="@+id/cancel"
+        style="@style/button_default"
+        android:layout_marginRight="@dimen/marginh"
+        android:text="@string/button_back"
+        />
+    </LinearLayout>
   </LinearLayout>
    					  
 </LinearLayout>

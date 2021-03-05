@@ -90,23 +90,28 @@
       android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/marginvbig"
       android:orientation="horizontal" 
-      android:layout_gravity="right"
-      android:gravity="right"
+      android:gravity="left"
       >
       <Button android:id="@+id/button_help"
           style="@style/button_empty"
           android:text="@string/button_help"
       />
-      <Button android:id="@+id/button_coeff_back"
-        android:layout_gravity="left"
-        style="@style/button_default"
-        android:text="@string/button_close"
-      />
-      <Button android:id="@+id/button_coeff_write"
-        style="@style/button_default"
-        android:text="@string/button_write"
-        android:textColor="@color/textdelete"
-      />
+      <LinearLayout 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        >
+        <Button android:id="@+id/button_coeff_back"
+          android:layout_gravity="left"
+          style="@style/button_default"
+          android:text="@string/button_close"
+        />
+        <Button android:id="@+id/button_coeff_write"
+          style="@style/button_default"
+          android:text="@string/button_write"
+          android:textColor="@color/textdelete"
+        />
+      </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
