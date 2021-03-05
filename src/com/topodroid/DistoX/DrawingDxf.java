@@ -1124,7 +1124,7 @@ class DrawingDxf
 	    if ( name.equals("label") ) {
               DrawingLabelPath label = (DrawingLabelPath)point;
               printString(pw5, 0, "TEXT");
-              printString(pw5, 8, "P_" + th_name);
+              // FIXME printString(pw5, 8, "P_" + th_name);
               printFloat(pw5, 40, point.getScaleValue() * 1.4f);
               printString(pw5, 1, label.mPointText);
               printFloat(pw5, 50, 360.0f - (float)(point.mOrientation));
