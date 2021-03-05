@@ -1575,6 +1575,8 @@
    <string name="ask_dump">Выгрузить прошивку?</string>
    <string name="ask_upload">Загрузить прошивку?</string>
    <string name="ask_upload_not_compatible">Невозможно проверить совместимость ПО.\nЗагрузить прошивку?</string>
+   <!-- TODO string name="firmware_upload_no_sign">Failed to check the DistoX hardware</string -->
+   <!-- TODO string name="firmware_upload_bad_sign">Incompatible DistoX hardware</string -->
    <string name="firmware_file_dumped">Сохраненный файл прошивки %1$s размер %2$d</string>
    <string name="firmware_file_uploaded">Загружен файл прошивки %1$s записано %2$d / %3$d</string>
    <!-- TODO string name="firmware_file_dump_fail">Failed firmware dump</string -->

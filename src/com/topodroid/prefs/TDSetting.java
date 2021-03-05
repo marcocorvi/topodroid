@@ -240,6 +240,8 @@ public class TDSetting
   public static boolean mAutoPair      = false;
   public static int mConnectSocketDelay = 0; // wait time if not paired [0.1 sec]
 
+  public static boolean mFirmwareSanity = true; // enforce firmware sanity checks
+
   // public static final boolean CHECK_BT = true;
   public static int mCheckBT = 1;        // BT: 0 disabled, 1 check on start, 2 enabled
 
@@ -825,6 +827,7 @@ public class TDSetting
     mWaitConn       = tryInt( prefs,    keyGDev[ 3],      defGDev[ 3] );   // DISTOX_WAIT_CONN
     mWaitLaser      = tryInt( prefs,    keyGDev[ 4],      defGDev[ 4] );   // DISTOX_WAIT_LASER
     mWaitShot       = tryInt( prefs,    keyGDev[ 5],      defGDev[ 5] );   // DISTOX_WAIT_SHOT
+    mFirmwareSanity = prefs.getBoolean( keyGDev[ 6], bool(defGDev[ 6]) );  // DISTOX_FIRMWARE_SANITY
 
     String[] keyImport = TDPrefKey.EXPORT_import;
     String[] defImport = TDPrefKey.EXPORT_importdef;
@@ -1495,6 +1498,8 @@ public class TDSetting
       mWaitShot  = tryIntValue( hlp, k, v, def[5] );
       if ( mWaitShot <   500 ) { mWaitShot =   500; ret = Integer.toString( mWaitShot ); }
       if ( mWaitShot > 10000 ) { mWaitShot = 10000; ret = Integer.toString( mWaitShot ); }
+    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_FIRMWARE_SANITY
+      mFirmwareSanity = tryBooleanValue( hlp, k, v, bool(def[6]) );
     } else {
       TDLog.Error("missing DEVICE key: " + k );
     }

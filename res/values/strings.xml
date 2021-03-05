@@ -1251,6 +1251,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_socket_delay_summary">Connection delay to allow pairing [0.1 sec]</string>
   <string name="pref_z6_workaround_title">Z6 workaround</string>
   <string name="pref_z6_workaround_summary">Z6 workaround data-download</string>
+  <string name="pref_firmware_sanity_title">Firmware check</string>
+  <string name="pref_firmware_sanity_summary">Enforce firmware sanity checks</string>
   <string name="pref_crs_title">C R S </string>
   <string name="pref_crs_summary">CRS name, as in Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
@@ -1622,10 +1624,8 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
    <string name="ask_dump">Dump firmware?</string>
    <string name="ask_upload">Upload firmware?</string>
    <string name="ask_upload_not_compatible">Firmware file does not look correct.\nUpload anyways?</string>
-   <string name="ask_upload_no_sign">Could not check hardware.\nUpload firmware anyways?</string>
-   <string name="ask_upload_no_sign_not_compatible">Could not get hardware.\nFirmware file does not look correct.\nUpload anyways?</string>
-   <string name="ask_upload_bad_sign">WARNING: incompatible hardware.\nUpload firmware anyways?</string>
-   <string name="ask_upload_bad_sign_not_compatible">WARNING: incompatible hardware.\nFirmware file does not look correct.\nUpload anyways?</string>
+   <string name="firmware_upload_no_sign">Failed to check the DistoX hardware</string>
+   <string name="firmware_upload_bad_sign">Incompatible DistoX hardware</string>
    <string name="firmware_file_dumped">Saved firmware file %1$s size %2$d</string>
    <string name="firmware_file_uploaded">Uploaded firmware file %1$s written %2$d / %3$d</string>
    <string name="firmware_file_dump_fail">Failed firmware dump</string>

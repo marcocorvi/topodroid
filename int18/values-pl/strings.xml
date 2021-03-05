@@ -1587,6 +1587,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
    <string name="ask_dump">Zrzucić oprogramowanie układowe?</string>
    <string name="ask_upload">Przesłać oprogramowanie układowe?</string>
    <string name="ask_upload_not_compatible">Plik oprogramowania układowego nie wygląda poprawnie.\nZaładować mino to?</string>
+   <!-- TODO string name="firmware_upload_no_sign">Failed to check the DistoX hardware</string -->
+   <!-- TODO string name="firmware_upload_bad_sign">Incompatible DistoX hardware</string -->
    <string name="firmware_file_dumped">Zapisany plik oprogramowania układowego %1$s rozmiar %2$d</string>
    <string name="firmware_file_uploaded">Przesłany plik oprogramowania układowego %1$s zapisany %2$d / %3$d</string>
    <!-- TODO string name="firmware_file_dump_fail">Failed firmware dump</string -->

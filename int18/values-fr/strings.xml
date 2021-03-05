@@ -1569,6 +1569,8 @@ Tap "Close" not to take any action.
    <string name="ask_dump">Sauvegarder le firmware ?</string>
    <string name="ask_upload">Envoyer le firmware ?</string>
    <string name="ask_upload_not_compatible">Le firmware semble incorrect.\nEnvoyer quand même ?</string>
+   <!-- TODO string name="firmware_upload_no_sign">Failed to check the DistoX hardware</string -->
+   <!-- TODO string name="firmware_upload_bad_sign">Incompatible DistoX hardware</string -->
    <string name="firmware_file_dumped">Firmware sauvegardé dans : %1$s taille %2$d</string>
    <string name="firmware_file_uploaded">Firmware %1$s envoyé  %2$d / %3$d écrits</string>  
    <!-- TODO string name="firmware_file_dump_fail">Failed firmware dump</string -->

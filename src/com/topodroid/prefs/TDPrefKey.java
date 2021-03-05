@@ -1611,6 +1611,7 @@ public class TDPrefKey
     "DISTOX_WAIT_CONN",            // msec wait after getting "NO PACKET"
     "DISTOX_WAIT_LASER",           // msec wait after command "laser ON"
     "DISTOX_WAIT_SHOT",       // 11 // msec wait after command "take shot"
+    "DISTOX_FIRMWARE_SANITY",       // enforce firmware sanity checks
     null
   };
 
@@ -1621,6 +1622,7 @@ public class TDPrefKey
     R.string.pref_wait_conn_title,
     R.string.pref_wait_laser_title,
     R.string.pref_wait_shot_title,
+    R.string.pref_firmware_sanity_title,
     -1
   };
 
@@ -1631,6 +1633,7 @@ public class TDPrefKey
     R.string.pref_wait_conn_summary,
     R.string.pref_wait_laser_summary,
     R.string.pref_wait_shot_summary,
+    R.string.pref_firmware_sanity_summary,
     -1
   };
 
@@ -1641,6 +1644,7 @@ public class TDPrefKey
     "500",
     "1000",
     "2000",
+    TRUE,
     null
   };
 

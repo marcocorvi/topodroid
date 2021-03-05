@@ -200,17 +200,14 @@ public class FirmwareDialog extends MyDialog
     // TDToast.makeLong( R.string.firmware_wait_check );
     byte[] signature = mApp.readFirmwareSignature( hw );
 
-    String title = "";
     if ( signature == null ) { // could not get firmware signature
-      title = mRes.getString( compatible? R.string.ask_upload_no_sign : R.string.ask_upload_no_sign_not_compatible );
-    } else {
-      int device_hw = FirmwareUtils.getDeviceHardware( signature );
-      if ( device_hw == hw ) { // signature OK
-        title = mRes.getString( compatible? R.string.ask_upload : R.string.ask_upload_not_compatible );
-      } else { // signature NOT OK
-        title = mRes.getString( compatible? R.string.ask_upload_bad_sign : R.string.ask_upload_bad_sign_not_compatible );
-      }
+      TDToast.makeLong( R.string.firmware_upload_no_sign );
+      return;
+    } else if ( hw != FirmwareUtils.getDeviceHardware( signature ) ) {
+      TDToast.makeLong( R.string.firmware_upload_bad_sign );
+      return;
     }
+    String title = mRes.getString( compatible? R.string.ask_upload : R.string.ask_upload_not_compatible );
 
     TopoDroidAlertDialog.makeAlert( mContext, mRes, title,
       new DialogInterface.OnClickListener() {
