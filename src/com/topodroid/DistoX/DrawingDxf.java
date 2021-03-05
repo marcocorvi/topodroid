@@ -1119,12 +1119,13 @@ class DrawingDxf
           else if ( path.mType == DrawingPath.DRAWING_PATH_POINT )
           {
             DrawingPointPath point = (DrawingPointPath) path;
-	    String name = point.getThName( );
+	    String name = point.getThName();
+	    String th_name = point.getThName().replace(':','-');
             int idx = 1 + point.mPointType;
 	    if ( name.equals("label") ) {
               DrawingLabelPath label = (DrawingLabelPath)point;
               printString(pw5, 0, "TEXT");
-              // FIXME printString(pw5, 8, "P_" + th_name);
+              printString(pw5, 8, "P_" + th_name);
               printFloat(pw5, 40, point.getScaleValue() * 1.4f);
               printString(pw5, 1, label.mPointText);
               printFloat(pw5, 50, 360.0f - (float)(point.mOrientation));
@@ -1146,7 +1147,7 @@ class DrawingDxf
                   handle = toDxf( pw5, handle, point, scale, xoff, yoff );
                 }
               } else {
-                String th_name = point.getThName().replace(':','-');
+                // String th_name = point.getThName().replace(':','-');
                 printString( pw5, 0, "INSERT" );
                 printString( pw5, 8, "P_" + th_name );
                 printString( pw5, 2, "B_" + th_name );
