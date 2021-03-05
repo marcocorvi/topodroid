@@ -40,6 +40,10 @@
     android:layout_marginBottom="@dimen/marginvbig"
     android:gravity="right"
     >
+      <Button android:id="@+id/button_help"
+          style="@style/button_empty"
+          android:text="@string/button_help"
+      />
     <Button
       style="@style/button_default"
       android:id="@+id/firmware_ok"

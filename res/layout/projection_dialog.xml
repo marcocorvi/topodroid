@@ -36,6 +36,10 @@
       android:layout_height="wrap_content"
       android:orientation="horizontal"
       >
+      <Button android:id="@+id/button_help"
+          style="@style/button_empty"
+          android:text="@string/button_help"
+      />
       <Button android:id="@+id/btn_minus"
         android:layout_width="0dp"
         android:layout_weight="20"

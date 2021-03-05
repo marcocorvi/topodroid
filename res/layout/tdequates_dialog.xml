@@ -22,6 +22,10 @@
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
       >
+      <Button android:id="@+id/button_help"
+          style="@style/button_empty"
+          android:text="@string/button_help"
+      />
       <Button android:id="@+id/button_back"
         style="@style/button_default"
         android:layout_marginRight="@dimen/marginh"

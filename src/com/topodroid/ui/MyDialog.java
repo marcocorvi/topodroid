@@ -25,6 +25,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 // import android.view.View.OnKeyListener;
+import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.KeyEvent;
 import android.view.Gravity;
@@ -32,6 +33,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import android.widget.LinearLayout;
+import android.widget.Button;
 
 
 public class MyDialog extends Dialog
@@ -60,17 +62,28 @@ public class MyDialog extends Dialog
 
   private void setHelpLayout()
   {
-    if ( mHelpPage != null ) {
-      LinearLayout help = (LinearLayout) findViewById( R.id.help );
-      if ( help != null ) {
-        help.setBackgroundColor( 0xff333333 );
-        help.setOnLongClickListener( new OnLongClickListener() {
+    Button btn_help = (Button) findViewById( R.id.button_help );
+    if ( btn_help != null ) {
+      if ( mHelpPage != null ) {
+        btn_help.setOnClickListener( new android.view.View.OnClickListener() {
           @Override
-          public boolean onLongClick( View v ) {
+          public void onClick( View v ) {
             if ( mHelpPage != null ) UserManualActivity.showHelpPage( mContext, mHelpPage );
-            return true;
           }
         } );
+        LinearLayout help = (LinearLayout) findViewById( R.id.help );
+        if ( help != null ) {
+          help.setBackgroundColor( 0xff333333 );
+          // help.setOnLongClickListener( new OnLongClickListener() {
+          //   @Override
+          //   public boolean onLongClick( View v ) {
+          //     if ( mHelpPage != null ) UserManualActivity.showHelpPage( mContext, mHelpPage );
+          //     return true;
+          //   }
+          // } );
+        }
+      } else {
+        btn_help.setVisibility( View.GONE );
       }
     }
   }

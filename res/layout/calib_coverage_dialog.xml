@@ -94,6 +94,10 @@
     android:layout_marginTop="@dimen/marginvbig"
     android:gravity="left"
     >
+      <Button android:id="@+id/button_help"
+          style="@style/button_empty"
+          android:text="@string/button_help"
+      />
     <Button android:id="@+id/coverage_back"
       android:layout_gravity="left"
       style="@style/button_default"

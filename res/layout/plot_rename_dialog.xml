@@ -76,6 +76,10 @@
        android:orientation="horizontal"
        android:layout_marginTop="@dimen/marginvbig"
        >
+      <Button android:id="@+id/button_help"
+          style="@style/button_empty"
+          android:text="@string/button_help"
+      />
       <Button android:id="@+id/btn_back"
         style="@style/button_default"
         android:layout_marginRight="@dimen/marginh"

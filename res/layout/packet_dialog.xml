@@ -68,6 +68,10 @@
     android:layout_gravity="left"
     android:paddingBottom="@dimen/paddingv"
     >  
+      <Button android:id="@+id/button_help"
+          style="@style/button_empty"
+          android:text="@string/button_help"
+      />
     <!-- Button android:id="@+id/clear"
       style="@style/button_default"
       android:layout_marginRight="@dimen/marginh"

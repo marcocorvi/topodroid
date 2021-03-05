@@ -93,6 +93,10 @@
       android:layout_gravity="right"
       android:gravity="right"
       >
+      <Button android:id="@+id/button_help"
+          style="@style/button_empty"
+          android:text="@string/button_help"
+      />
       <Button android:id="@+id/button_coeff_back"
         android:layout_gravity="left"
         style="@style/button_default"

@@ -149,6 +149,10 @@
     android:layout_gravity="right" 
     android:gravity="right" 
     >
+      <Button android:id="@+id/button_help"
+          style="@style/button_empty"
+          android:text="@string/button_help"
+      />
     <LinearLayout 
       android:layout_margin="0dp"
       android:layout_width="wrap_content" 

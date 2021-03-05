@@ -71,6 +71,10 @@
          android:layout_marginTop="@dimen/marginvbig"
          android:layout_gravity="left"
          >
+      <Button android:id="@+id/button_help"
+          style="@style/button_empty"
+          android:text="@string/button_help"
+      />
       <Button android:id="@+id/button_close"
             style="@style/button_default"
             android:text="@string/button_close"

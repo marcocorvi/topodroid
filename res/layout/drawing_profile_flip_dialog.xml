@@ -20,6 +20,10 @@
     android:layout_gravity="right"
     android:gravity="right"
     >
+      <Button android:id="@+id/button_help"
+          style="@style/button_empty"
+          android:text="@string/button_help"
+      />
     <Button android:id="@+id/button_ok"
       android:layout_height="match_parent"
       style="@style/button_default"

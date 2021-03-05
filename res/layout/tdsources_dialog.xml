@@ -13,6 +13,10 @@
       android:layout_gravity="bottom"
       android:gravity="bottom"
       >
+      <Button android:id="@+id/button_help"
+          style="@style/button_empty"
+          android:text="@string/button_help"
+      />
       <Button android:id="@+id/back"
         style="@style/button_default"
         android:layout_marginRight="@dimen/marginh"
