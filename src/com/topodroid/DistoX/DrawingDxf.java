@@ -1121,12 +1121,12 @@ class DrawingDxf
             DrawingPointPath point = (DrawingPointPath) path;
 	    String name = point.getThName( );
             int idx = 1 + point.mPointType;
-	    if ( name.equals("label")) {
+	    if ( name.equals("label") ) {
               DrawingLabelPath label = (DrawingLabelPath)point;
               printString(pw5, 0, "TEXT");
               printString(pw5, 8, "P_" + th_name);
               printFloat(pw5, 40, point.getScaleValue() * 1.4f);
-              printString(pw5, 1, label);
+              printString(pw5, 1, label.mPointText);
               printFloat(pw5, 50, 360.0f - (float)(point.mOrientation));
               printXYZ(pw5, (point.cx + xoff) * scale, -(point.cy + yoff) * scale, 0, 0);
             } else {

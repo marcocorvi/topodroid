@@ -8,6 +8,7 @@ name-fr doline_d'effondrement
 name-ro puț_dolină
 name-de Dolinenschacht
 th_name u:doline-pit
+name-hu dolina-gödör
 group doline
 color 0x66cc33 0xff
 width 8

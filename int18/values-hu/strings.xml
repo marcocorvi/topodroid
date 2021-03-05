@@ -278,8 +278,8 @@ Tap <b>Bezár</b> nem változtat.
     <!-- UNUSED string name="reversed">megfordított</string -->
     <string name="options">beállítások</string>
     <string name="outline">körvonal</string>
-    <string name="out">kint</string>
-    <string name="in">bent</string>
+    <string name="out">külső</string>
+    <string name="in">belső</string>
     <!-- UNUSED string name="none">none</string -->
     <!-- UNUSED string name="barrier_add">Következő mérések elrejtése</string -->
     <string name="hide_from">Elrejtés innen</string>
@@ -593,12 +593,13 @@ Tap <b>Bezár</b> nem változtat.
     <string name="stat_component">Statisztikai komponensek %1$d</string>
     <string name="stat_depth">Mélység %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Kettőzött mérés %1$d # %2$d %3$.1f %4$s</string>
-    <string name="stat_leg">Poligonmérések %1$d %2$.1f %3$.1f %4$.1f %5$s</string>
-    <string name="stat_length">Hossz  %1$.1f %2$s</string>
+    <string name="stat_leg">Poligonmérések %1$d Hossz %2$.1f %3$.1f vetület %4$.1f %5$s</string>
+    <string name="stat_length">Vázlat hossz  %1$.1f %2$s</string>
     <string name="stat_extlen">3D hossz %1$.1f %2$s</string>
     <string name="stat_projlen">Vízszintes vetület %1$.1f %2$s</string>
+    <string name="stat_cycle">Ismétléseks %1$d</string>
     <string name="stat_loop">Hurkok %1$d</string>
-    <string name="stat_origin">Nulla pont: %1$s</string>
+    <string name="stat_origin">Kezdő pont: %1$s</string>
     <string name="stat_azimuth">Oldalnézet vetítési iránya: %1$.1f</string>
     <!-- UNUSED string name="stat_shot">Mérések  %1$d,   Megkettőzött %2$d,   Felszín %3$d</string -->
     <string name="stat_splay">Segédpontok %1$d # %2$d</string>
@@ -625,7 +626,6 @@ Tap <b>Bezár</b> nem változtat.
     <string name="extended">HOSSZMETSZET</string>
     <string name="profile">VET. HOSSZMETSZET </string>
     <string name="extended_profile">Kiterített Hosszmetszet</string>
-
     <!-- UNUSED string name="v_section">V-SECTION</string -->
     <string name="h_section">Horizontális keresztszelvény</string>
     <!-- UNUSED string name="landscape">landscape</string -->
@@ -1016,7 +1016,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="title_plot_scraps">Vázlat variációk</string>
     <string name="title_profile_flip">Nézeti vázlat 180 fokos forgatása</string>
     <string name="title_projection">Vetített oldalnézet irányszöge %1$d</string>
-    <string name="title_refs">Vázlat hivatkozásai</string>
+    <string name="title_refs">Vázlat rajzelemek</string>
     <string name="title_scraps">Felmérés vázlatok</string>
     <string name="title_scraps_outline">Körvonal felvázolása</string>
     <!-- UNUSED string name="title_select">Kiválaszt</string -->
@@ -1300,7 +1300,7 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_reduce_angle_summary">Minimális segmens-szög síma vonalaknál</string>
 
 
-  <string name="pref_survey_stations_title">Pontelnevezési szabályok</string>
+  <string name="pref_survey_stations_title">Mérési pont szabályok</string>
   <string name="pref_survey_stations_summary">Mérési pontok automatikus elnevezésének szabálya</string>
   <string name="pref_accel_thr_title">Max. eltérés a nehézségi gyorsulásban</string>
   <string name="pref_accel_thr_summary">Eltérések tűrése százalékban a megismételt mérések nehézségi gyorsulás értékében</string>
@@ -1315,8 +1315,8 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_max_shot_summary">Mérés maximális hossza [m]</string>
   <string name="pref_min_leg_title">Minimális poligonmérés hossz</string>
   <string name="pref_min_leg_summary">Mérés minmális hossza [m]</string>
-  <string name="pref_backsight_title">Visszamérés(Irányzék?)</string>
-  <string name="pref_backsight_summary">Visszamérés(Irányzék?) mező az új mérés párbeszéd ablakban</string>
+  <string name="pref_backsight_title">Visszamérés</string>
+  <string name="pref_backsight_summary">Visszamérés mező az új mérés párbeszéd ablakban</string>
   <string name="pref_backshot_title">DistoX visszamérés</string>
   <string name="pref_backshot_summary">Megcsaeréli a pontokat DistoX visszamérésnél</string>
   <string name="pref_prev_next_title">Előző/Köv. gombok</string>
@@ -1427,7 +1427,7 @@ Tap <b>Bezár</b> nem változtat.
   <!-- UNUSED string name="pref_device_summary">DistoX address name</string -->
   <string name="pref_checkBT_title">Bluetooth</string>
   <string name="pref_checkBT_summary">Ellenőrzi a Bluetooth-t indításkor</string>
-  <string name="pref_checkAttached_title">Középvonal ellenőrzése</string>
+  <string name="pref_checkAttached_title">Poligon ellenőrzése</string>
   <string name="pref_checkAttached_summary">Ellenőrzi, hogy a mérési pontok kapcsolódnak-e egymáshoz</string>
   <string name="pref_checkExtend_title">Alappont mérés kiterítés ellenőrzés</string>
   <string name="pref_checkExtend_summary">Ellenőrizze, hogy a kiterítés be van-e állítva</string>
@@ -1439,8 +1439,8 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_backups_clear_summary">Vázlat biztonsági mentés törlésének engedélyezése menüből</string>
   <!-- UNUSED string name="pref_xtherion_areas_title">xtherion areas</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Save areas a la xtherion</string -->
-  <string name="pref_therion_splays_title">Therion segédpontok</string>
-  <string name="pref_therion_splays_summary">Rendeljen u:splay sorokat a th2 fájlokhoz</string>
+  <string name="pref_therion_splays_title">Segédpontok</string>
+  <string name="pref_therion_splays_summary">Rendeljen segédméréseket a th2/PNG fájlokhoz</string>
   <string name="pref_th2_scale_title">Therion méretarány</string>
   <string name="pref_th2_scale_summary">Méretarány a th2/xvi exportnál</string>
   <string name="pref_th2_xvi_title">xvi kép</string>

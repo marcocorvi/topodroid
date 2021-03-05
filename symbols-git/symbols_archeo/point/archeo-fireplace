@@ -1,0 +1,17 @@
+encoding utf-8
+symbol point
+name fireplace
+name-hu tűzrakóhely
+th_name u:archeo-fireplace
+group archeo
+orientation no
+color 0xff0000
+path
+  moveTo -8 0
+  lineTo 8 0
+
+  moveTo -6 0
+  cubicTo -4 2 4 2 6 0
+
+endpath
+endsymbol
