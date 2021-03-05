@@ -25,39 +25,39 @@ import java.util.UUID;
 
 public interface BleComm
 {
-  public void changedMtu( int mtu );
-  public void readedRemoteRssi( int rssi );
+  void changedMtu( int mtu );
+  void readedRemoteRssi( int rssi );
 
-  public void changedChrt( BluetoothGattCharacteristic chrt );
+  void changedChrt( BluetoothGattCharacteristic chrt );
 
-  public void readedChrt(  String uuid_str, byte[] bytes );
-  public void writtenChrt( String uuid_str, byte[] bytes );
-  public void readedDesc(  String uuid_str, String uuid_chrt_str, byte[] bytes );
-  public void writtenDesc( String uuid_str, String uuid_chrt_str, byte[] bytes );
+  void readedChrt(  String uuid_str, byte[] bytes );
+  void writtenChrt( String uuid_str, byte[] bytes );
+  void readedDesc(  String uuid_str, String uuid_chrt_str, byte[] bytes );
+  void writtenDesc( String uuid_str, String uuid_chrt_str, byte[] bytes );
 
-  public void completedReliableWrite();
-  public void disconnected();
+  void completedReliableWrite();
+  void disconnected();
 
-  public int servicesDiscovered( BluetoothGatt gatt );
+  int servicesDiscovered( BluetoothGatt gatt );
 
-  public boolean readChrt(  UUID srv_uuid, UUID chrt_uuid );
-  public boolean writeChrt( UUID srv_uuid, UUID chrt_uuid, byte[] bytes );
+  boolean readChrt(  UUID srv_uuid, UUID chrt_uuid );
+  boolean writeChrt( UUID srv_uuid, UUID chrt_uuid, byte[] bytes );
 
-  // public boolean enablePNotify( UUID srcUuid, BluetoothGattCharacteristic chrt );
-  public boolean enablePNotify( UUID src_uuid, UUID chrt_uuid );
+  // boolean enablePNotify( UUID srcUuid, BluetoothGattCharacteristic chrt );
+  boolean enablePNotify( UUID src_uuid, UUID chrt_uuid );
 
-  public void connectGatt( Context ctx, BluetoothDevice device );
-  public void disconnectGatt();
+  void connectGatt( Context ctx, BluetoothDevice device );
+  void disconnectGatt();
 
   // recoverable error
-  public void error( int status );
+  void error( int status );
 
   // unrecoverable error
-  public void failure( int status );
+  void failure( int status );
 
-  // public void addService( BluetoothGattService srv );
-  // public void addChrt( UUID srv_uuid, BluetoothGattCharacteristic chrt );
-  // public void addDesc( UUID srv_uuid, UUID chrt_uuid, BluetoothGattDescriptor desc );
+  // void addService( BluetoothGattService srv );
+  // void addChrt( UUID srv_uuid, BluetoothGattCharacteristic chrt );
+  // void addDesc( UUID srv_uuid, UUID chrt_uuid, BluetoothGattDescriptor desc );
 
-  public void notifyStatus( int status );
+  void notifyStatus( int status );
 }

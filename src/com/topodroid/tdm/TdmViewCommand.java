@@ -107,8 +107,7 @@ public class TdmViewCommand
   // oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
 
   /** add a fixed path (called by DrawingSurface::addFixedPath)
-   * @param path       path
-   * @param selectable whether the path is selectable
+   * @param sh    shot
    */
   public void addShot( TdmShot sh )
   {

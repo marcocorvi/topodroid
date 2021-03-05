@@ -587,10 +587,10 @@ public class MainWindow extends Activity
       if ( mApp_mCheckPerms < 0 ) finish();
     } else {
       if ( mApp.mWelcomeScreen ) {
-        mApp.setBooleanPreference( "DISTOX_WELCOME_SCREEN", false );
+        TopoDroidApp.setBooleanPreference( "DISTOX_WELCOME_SCREEN", false );
         mApp.mWelcomeScreen = false;
         if ( mApp.mSetupScreen ) {
-          mApp.setBooleanPreference( "DISTOX_SETUP_SCREEN", false );
+          TopoDroidApp.setBooleanPreference( "DISTOX_SETUP_SCREEN", false );
           mApp.mSetupScreen = false;
           doNextSetup( SETUP_WELCOME );
         } else {

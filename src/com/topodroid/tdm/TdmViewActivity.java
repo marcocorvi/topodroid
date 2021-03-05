@@ -260,7 +260,7 @@ public class TdmViewActivity extends Activity
 
       // Log.v( "DistoX-TdManager", "TdmView nr. surveys " + surveys.size() + " equates " + equates.size() );
 
-      int color[] = new int[6];
+      int[] color = new int[6];
       color[0] = 0xffffffff;
       color[1] = 0xffff00ff;
       color[2] = 0xffffff00;
@@ -281,7 +281,7 @@ public class TdmViewActivity extends Activity
 
     private void dumpEvent( MotionEventWrap ev )
     {
-      String name[] = { "DOWN", "UP", "MOVE", "CANCEL", "OUTSIDE", "PTR_DOWN", "PTR_UP", "7?", "8?", "9?" };
+      String[] name = { "DOWN", "UP", "MOVE", "CANCEL", "OUTSIDE", "PTR_DOWN", "PTR_UP", "7?", "8?", "9?" };
       StringBuilder sb = new StringBuilder();
       int action = ev.getAction();
       int actionCode = action & MotionEvent.ACTION_MASK;
@@ -469,7 +469,7 @@ public class TdmViewActivity extends Activity
   // -------------------------------------------------
   boolean onMenu;
   int mNrButton1 = 2;
-  private static int izons[] = { 
+  private static int[] izons = { 
     R.drawable.iz_equate,
     R.drawable.iz_equates,
     // R.drawable.iz_exit,
@@ -480,7 +480,7 @@ public class TdmViewActivity extends Activity
   };
 
   int mNrMenus   = 2;
-  private static int menus[] = { 
+  private static int[] menus = { 
     // R.string.menu_equate,
     // R.string.menu_equates,
     R.string.menu_close,

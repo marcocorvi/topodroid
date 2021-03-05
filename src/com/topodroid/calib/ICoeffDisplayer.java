@@ -16,7 +16,7 @@ import com.topodroid.math.TDVector;
 
 public interface ICoeffDisplayer
 {
-    public void displayCoeff( TDVector bg, TDMatrix ag, TDVector bm, TDMatrix am, TDVector nL );
-    public void enableButtons( boolean b );
-    public boolean isActivityFinishing();
+  void displayCoeff( TDVector bg, TDMatrix ag, TDVector bm, TDMatrix am, TDVector nL );
+  void enableButtons( boolean b );
+  boolean isActivityFinishing();
 }

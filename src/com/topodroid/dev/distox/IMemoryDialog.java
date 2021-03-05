@@ -17,5 +17,5 @@ import java.util.ArrayList;
 
 public interface IMemoryDialog
 {
-  public void updateList( ArrayList<MemoryOctet> memory );
+  void updateList( ArrayList<MemoryOctet> memory );
 }

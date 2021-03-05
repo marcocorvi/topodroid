@@ -116,7 +116,7 @@ public class CWDActivity extends Activity
 
     if ( TDPath.checkBasePath( dir_name, base_name ) ) {
       TDLog.Log( TDLog.LOG_PATH, "dir name <" + dir_name + "> base dir <" + base_name + ">" );
-      mApp.setCWDPreference( dir_name, base_name );
+      TopoDroidApp.setCWDPreference( dir_name, base_name );
       Intent intent = new Intent();
       intent.putExtra( TDTag.TOPODROID_CWD, dir_name );
       setResult( RESULT_OK, intent );

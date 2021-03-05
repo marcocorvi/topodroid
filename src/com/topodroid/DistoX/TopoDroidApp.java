@@ -790,9 +790,9 @@ public class TopoDroidApp extends Application
       // FIXME INSTALL_SYMBOL installSymbols( false ); // this updates symbol_version in the database
       if ( mDData.getValue( "symbol_version" ) == null ) {
         // Log.v("DistoX-PATH", "symbol version " + symbol_version );
-        thisApp.installSymbols( true );
+        installSymbols( true );
       }
-      thisApp.installFirmware( false );
+      installFirmware( false );
       // installUserManual( );
       mCheckManualTranslation = true;
     }

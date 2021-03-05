@@ -160,8 +160,10 @@ class SetupDrawingUnitDialog extends MyDialog
        mParent.doNextSetup( -1 );
        dismiss();
      } else if ( b == mBtnNext ) {
-       mParent.getApp().setDrawingUnitIcons( mSize );
-       mParent.getApp().setDrawingUnitLines( mSize ); // FIXME_LINE_UNITS dialog
+       // mParent.getApp().setDrawingUnitIcons( mSize );
+       // mParent.getApp().setDrawingUnitLines( mSize ); // FIXME_LINE_UNITS dialog
+       TopoDroidApp.setDrawingUnitIcons( mSize );
+       TopoDroidApp.setDrawingUnitLines( mSize ); // FIXME_LINE_UNITS dialog
        mParent.doNextSetup( mSetup + 1 );
        dismiss();
      } else if ( b == mBtnPlus ) {

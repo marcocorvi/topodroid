@@ -22,7 +22,7 @@ public interface ILister
    *   - ShotNewDialog.onClick
    *   - ListerHandler.handleMessage Lister.LIST_REFRESH
    */
-  public void refreshDisplay( int nr, boolean toast );
+  void refreshDisplay( int nr, boolean toast );
 
   /** 
    * @param blk_id id (of the data-block) from which to update the list
@@ -30,7 +30,7 @@ public interface ILister
    *  updateBlockList is called by
    *   - ListerHandler.handleMessage Lister.BLOCK_ID
    */
-  public void updateBlockList( long blk_id );
+  void updateBlockList( long blk_id );
 
   /**
    * @param status   current status ( 0: off,  1: on,  2: wait )A
@@ -48,7 +48,7 @@ public interface ILister
    * ShotWindow: change button[0] background
    * SketchWindow: nothing (TODO)
    */
-  public void setConnectionStatus( int status ); 
+  void setConnectionStatus( int status ); 
  
   // void notifyDisconnected();
 
@@ -63,17 +63,17 @@ public interface ILister
    * ShotWindow
    * SketchWindow: TODO
    */
-  public void setRefAzimuth( float azimuth, long fixed_extend );
+  void setRefAzimuth( float azimuth, long fixed_extend );
 
   /** set the title
    *
    */
-  public void setTheTitle();
+  void setTheTitle();
 
   /** enable/disable theBluetooth button
    * @param enable whether to enable or disable
    */
-  public void enableBluetoothButton( boolean enable );
+  void enableBluetoothButton( boolean enable );
 
 }
 

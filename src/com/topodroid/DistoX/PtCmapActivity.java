@@ -32,7 +32,7 @@ import android.view.KeyEvent;
 public class PtCmapActivity extends Activity
                             implements OnClickListener
 {
-  private TopoDroidApp mApp;
+  // private TopoDroidApp mApp;
 
   static private String[] mCmapLine = { "wall", "border", "pit", "rock-border", "arrow", "contour", "user" };
   static private String[] mCmapPoint = { "air-draught", "water-flow", "stalactite", "blocks", "debris", "pebbles", "clay" };
@@ -88,7 +88,7 @@ public class PtCmapActivity extends Activity
     }
     String cmap = sb.toString();
 
-    mApp.setPtCmapPreference( cmap );
+    TopoDroidApp.setPtCmapPreference( cmap );
     Intent intent = new Intent();
     intent.putExtra( TDTag.TOPODROID_CMAP, cmap );
     setResult( RESULT_OK, intent );
@@ -105,7 +105,7 @@ public class PtCmapActivity extends Activity
     TDandroid.setScreenOrientation( this );
 
     setContentView(R.layout.pt_cmap_activity);
-    mApp = (TopoDroidApp) getApplication();
+    // mApp = (TopoDroidApp) getApplication();
 
     getWindow().setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN );
 

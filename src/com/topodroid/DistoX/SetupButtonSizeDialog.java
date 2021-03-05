@@ -123,7 +123,8 @@ class SetupButtonSizeDialog extends MyDialog
        mParent.doNextSetup( -1 );
        dismiss();
      } else if ( b == mBtnNext ) {
-       mParent.getApp().setButtonSize( mSize );
+       // mParent.getApp().setButtonSize( mSize );
+       TopoDroidApp.setButtonSize( mSize );
        mParent.resetButtonBar();
        mParent.doNextSetup( mSetup + 1 );
        dismiss();

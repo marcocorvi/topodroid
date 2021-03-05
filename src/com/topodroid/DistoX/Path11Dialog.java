@@ -49,11 +49,11 @@ class Path11Dialog extends Dialog
   {
     if ( v.getId() == R.id.btn_close ) {
       if ( ((CheckBox)findViewById(R.id.btn_no_again)).isChecked() ) {
-        mApp.setPath11NoAgain();
+        TopoDroidApp.setPath11NoAgain();
       }
     } else if ( v.getId() == R.id.btn_move ) {
       if ( ((CheckBox)findViewById(R.id.btn_no_again)).isChecked() ) {
-        mApp.setPath11NoAgain();
+        TopoDroidApp.setPath11NoAgain();
       }
       mParent.moveToPath11();
     }

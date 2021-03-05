@@ -120,7 +120,7 @@ public class TdManagerActivity extends Activity
   // -------------------------------------------------
   boolean onMenu = false;
   int mNrButton1 = 1;
-  private static int izons[] = { 
+  private static int[] izons = { 
     R.drawable.iz_plus,
   };
   private static final int[] help_icons = { 
@@ -128,7 +128,7 @@ public class TdManagerActivity extends Activity
   };
 
   int mNrMenus   = 2;
-  private static int menus[] = { 
+  private static int[] menus = { 
     R.string.menu_close,
     // R.string.menu_options,
     R.string.menu_help,
@@ -306,9 +306,9 @@ public class TdManagerActivity extends Activity
     mList.invalidate();
   }
 
-  /** deletes a tdconfig file
-   * @param filename tdconfig filename
-   */
+  // deletes a tdconfig file
+  //  @param filename tdconfig filename
+  //
   // void deleteTdmConfig( String filepath )
   // {
   //   File file = new File( filepath );

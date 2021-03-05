@@ -38,7 +38,8 @@ public class CommThread extends Thread
   }
 
   /** 
-   * @param protocol    communication protocol
+   * @param type        communication type
+   * @param comm        communication class
    * @param to_read     number of data to read (use -1 to read forever until timeout or an exception)
    * @param lister      optional data lister
    * @param data_type   packet datatype (either shot or calib)

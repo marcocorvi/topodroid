@@ -60,7 +60,7 @@ public class TdmConfigActivity extends Activity
                               , IExporter
 {
   int mNrButton1 = 5; // TDPath.BELOW_ANDROID_11 ? 5 : 4; 
-  private static int izons[] = { 
+  private static int[] izons = { 
     R.drawable.iz_add,
     R.drawable.iz_drop,
     R.drawable.iz_view,
@@ -77,7 +77,7 @@ public class TdmConfigActivity extends Activity
 
   boolean onMenu;
   int mNrMenus   = 4;
-  private static int menus[] = { 
+  private static int[] menus = { 
     R.string.menu_close,
     R.string.menu_export,
     R.string.menu_delete,

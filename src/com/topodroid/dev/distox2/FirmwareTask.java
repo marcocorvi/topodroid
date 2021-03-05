@@ -42,9 +42,9 @@ public class FirmwareTask extends AsyncTask< Void, Void, Integer >
  
 
   /**
-   * @param app       TopoDroid app
-   * @param lister    data lister
-   * @param data_downloader data downloader
+   * @param comm      communication class
+   * @param mode      task mode
+   * @param filename  file name
    */
   public FirmwareTask( /* TopoDroidApp app, */ DistoX310Comm comm, int mode, String filename )
   {

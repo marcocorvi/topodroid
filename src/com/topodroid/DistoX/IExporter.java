@@ -13,6 +13,6 @@ package com.topodroid.DistoX;
 
 public interface IExporter 
 {
-  public void doExport( String type );
+  void doExport( String type );
 }
 
