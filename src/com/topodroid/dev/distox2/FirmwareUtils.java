@@ -29,13 +29,13 @@ public class FirmwareUtils
 
   public static final int HW_NONE    = 0;
   public static final int HW_HEEB    = 1;
-  public static final int HW_LANDOLF = 2;
+  public static final int HW_LANDOLT = 2;
 
   // ------------------------------------------------------------------------------
   static int getHardware( int fw ) 
   {
     if ( fw == 2100 || fw == 2200 || fw == 2300 || fw == 2400 || fw == 2500 || fw == 2412 || fw == 2501 || fw == 2512 ) return HW_HEEB;
-    if ( fw == 2610 || fw == 2630 ) return HW_LANDOLF;
+    if ( fw == 2610 || fw == 2630 ) return HW_LANDOLT;
     return HW_NONE;
   }
 
@@ -83,7 +83,7 @@ public class FirmwareUtils
         return 0;
       }
       if ( verifySignatureLandolf( buf ) == SIGNATURE_SIZE ) {
-        Log.v("DistoX-FW", "LANDOLF fw " + readFirmwareLandolf( buf ) );
+        Log.v("DistoX-FW", "LANDOLT fw " + readFirmwareLandolf( buf ) );
         return readFirmwareLandolf( buf );
       }
     } catch ( IOException e ) {
@@ -151,8 +151,8 @@ public class FirmwareUtils
       return HW_HEEB;
     }
     if ( verifySignatureLandolf( signature ) == SIGNATURE_SIZE ) {
-      Log.v("DistoX-FW", "device hw LANDOLF" );
-      return HW_LANDOLF;
+      Log.v("DistoX-FW", "device hw LANDOLT" );
+      return HW_LANDOLT;
     }
     return HW_NONE;
   }

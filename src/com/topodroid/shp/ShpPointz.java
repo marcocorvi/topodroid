@@ -29,7 +29,7 @@ import java.nio.channels.FileChannel;
 
 import java.util.List;
 
-// import android.util.Log;
+import android.util.Log;
 
 public class ShpPointz extends ShpObject
 {
@@ -77,7 +77,7 @@ public class ShpPointz extends ShpObject
       writeShpRecordHeader( cnt, shpRecLen );
       shpBuffer.order(ByteOrder.LITTLE_ENDIAN);   
       shpBuffer.putInt( SHP_POINTZ );
-      // Log.v("DistoX", "POINTZ " + cnt + ": " + pt.e + " " + pt.s + " " + pt.v + " offset " + offset );
+      Log.v("DistoX", "POINTZ " + cnt + ": " + pt.e + " " + pt.s + " " + pt.v + " offset " + offset );
       shpBuffer.putDouble( pt.e );
       shpBuffer.putDouble( pt.s );
       shpBuffer.putDouble( pt.v );

@@ -193,7 +193,7 @@ public class DistoX310Comm extends DistoXComm
   {
     byte[] ret = null;
     int blk = ( hw == FirmwareUtils.HW_HEEB )? 8
-            : ( hw == FirmwareUtils.HW_LANDOLF )? 16
+            : ( hw == FirmwareUtils.HW_LANDOLT )? 16
             : 0;
     if ( blk == 0 ) return null;
     if ( connectSocketAny( address ) ) {
