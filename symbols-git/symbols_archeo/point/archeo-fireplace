@@ -2,7 +2,7 @@ encoding utf-8
 symbol point
 name fireplace
 name-hu tűzrakóhely
-th_name u:archeo-fireplace
+th_name u:fireplace
 group archeo
 orientation no
 color 0xff0000
