@@ -15,6 +15,7 @@ package com.topodroid.dev.distox2;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
+import com.topodroid.prefs.TDSetting;
 import com.topodroid.DistoX.TopoDroidApp;
 import com.topodroid.DistoX.TopoDroidAlertDialog;
 import com.topodroid.DistoX.TDToast;
@@ -138,7 +139,7 @@ public class FirmwareDialog extends MyDialog
           File fp = new File( TDPath.getBinFile( filename ) );
           if ( fp.exists() ) {
             TDToast.makeBad( R.string.firmware_file_exists );
-            return;    
+            return;
           }
           askDump( filename );
         } else if ( mBtnUpload.isChecked() ) {
@@ -202,10 +203,10 @@ public class FirmwareDialog extends MyDialog
 
     if ( signature == null ) { // could not get firmware signature
       TDToast.makeLong( R.string.firmware_upload_no_sign );
-      return;
+      if ( TDSetting.mFirmwareSanity ) return;    
     } else if ( hw != FirmwareUtils.getDeviceHardware( signature ) ) {
       TDToast.makeLong( R.string.firmware_upload_bad_sign );
-      return;
+      if ( TDSetting.mFirmwareSanity ) return;    
     }
     String title = mRes.getString( compatible? R.string.ask_upload : R.string.ask_upload_not_compatible );
 

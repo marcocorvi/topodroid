@@ -20,4 +20,11 @@ while ( $line = <XX> ) {
 }
 close XX;
 
-
+# open( XX, "$ARGV[0]" );
+# $nr_line = 0;
+# while ( $line = <XX> ) {
+#   $nr_line ++;
+#   next if not $line =~ /\%.\$/;
+#   print "$nr_line: $line"
+# }
+# close XX;

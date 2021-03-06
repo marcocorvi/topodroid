@@ -118,7 +118,6 @@
     <!-- UNUSED string name="connect_failed">Ошибка соединения</string -->
     <!-- UNUSED string name="data">данные</string -->
     <string name="using">Использую %1$s</string>
-    <!-- OLD string name="calib_error">Средн. Ошибка: %1$.4f градуса</string -->
     <string name="calib_error">Средн. Ошибка: %1$.2f градуса (BH дельта %2$.3f)</string>
     <string name="calib_stddev">Ст-откл ошибок: %1$.4f градуса</string>
     <string name="calib_max_error">Макс. ошибка: %1$.4f градуса</string>

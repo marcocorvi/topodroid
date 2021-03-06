@@ -54,7 +54,7 @@ public class ShpPoint extends ShpObject
     fields[3] = "levels";
     fields[4] = "scrap";
     fields[5] = "text";
-    byte[]   ftypes = { BYTEC, BYTEC, BYTEC, BYTEC, BYTEC };
+    byte[]   ftypes = { BYTEC, BYTEC, BYTEC, BYTEC, BYTEC, BYTEC };
     int[]    flens  = { 16, 6, 6, 6, 6, 128 };
 
     int shpRecLen = getShpRecordLength( );
@@ -99,6 +99,7 @@ public class ShpPoint extends ShpObject
       fields[5] = pt.getPointText(); 
       if ( fields[3] == null ) fields[3] = "";
       if ( fields[4] == null ) fields[4] = "";
+      if ( fields[5] == null ) fields[5] = "";
       writeDBaseRecord( n_fld, fields, flens );
       ++cnt;
     }

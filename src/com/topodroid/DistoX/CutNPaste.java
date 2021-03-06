@@ -299,6 +299,19 @@ class CutNPaste
       ww = textview2.getPaint().measureText( text );
       if ( ww > w ) w = ww;
 
+      // ----- SHOT MEASURE
+      //
+      text = res.getString( R.string.popup_do_shot );
+      textview3 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+        new View.OnClickListener( ) {
+          public void onClick(View v) {
+            app.sendBricCommand( BricConst.CMD_SHOT );
+            dismissPopupBT();
+          }
+        } );
+      ww = textview3.getPaint().measureText( text );
+      if ( ww > w ) w = ww;
+/*
       // ----- MEASURE ONE SPLAY AND DOWNLOAD IT IF MODE IS CONTINUOUS
       //
       text = res.getString( R.string.popup_do_splay );
@@ -324,7 +337,7 @@ class CutNPaste
         } );
       ww = textview4.getPaint().measureText( text );
       if ( ww > w ) w = ww;
-
+*/
     }
     int iw = (int)(w + 10);
     textview0.setWidth( iw );
