@@ -23,6 +23,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:textSize="@dimen/textsizehuge"
+      android:gravity="left"
       />
     <LinearLayout android:id="@+id/help"
       android:layout_width="match_parent"
@@ -30,13 +31,13 @@
       android:orientation="vertical"
       android:layout_marginRight="@dimen/marginh"
       android:layout_alignParentRight="true"
-      android:gravity="left"
+      android:gravity="right"
       >
+      <!--
       <Button android:id="@+id/button_help"
           style="@style/button_empty"
           android:text="@string/button_help"
       />
-      <!--
       <LinearLayout 
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content"

@@ -15,16 +15,18 @@ class AudioInfo
 {
   private final long sid;       // survey id
   final long id;        // audio id
-  final long shotid;    // shot id
+  final long fileIdx;    // shot id
   private final String mDate;
 
-  AudioInfo( long _sid, long _id, long _shotid, String dt )
+  AudioInfo( long _sid, long _id, long fileidx, String dt )
   {
-    sid    = _sid;
-    id     = _id;
-    shotid = _shotid;
-    mDate = dt;
+    sid     = _sid;
+    id      = _id;
+    fileIdx = fileidx;
+    mDate   = dt;
   }
+
+  int getFileNumber() { return (int)fileIdx; }
 
   // String getAudioName() 
   // {

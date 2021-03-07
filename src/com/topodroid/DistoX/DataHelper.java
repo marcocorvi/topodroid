@@ -1572,10 +1572,10 @@ public class DataHelper extends DataSetObservable
 
         AudioInfo audio = getAudio( old_sid, old_id ); // transfer audio
         if ( audio != null ) {
-          where[1] = Long.toString( audio.shotid );
+          where[1] = Long.toString( audio.fileIdx );
           myDB.update( AUDIO_TABLE, cv, WHERE_SID_SHOTID, where );
-          String oldname = TDPath.getSurveyAudioFile( old_survey.name, Long.toString(audio.shotid) );
-          String newname = TDPath.getSurveyAudioFile( new_survey.name, Long.toString(audio.shotid) );
+          String oldname = TDPath.getSurveyAudioFile( old_survey.name, Long.toString(audio.fileIdx) );
+          String newname = TDPath.getSurveyAudioFile( new_survey.name, Long.toString(audio.fileIdx) );
           TDUtil.renameFile( oldname, newname );
         }
 
@@ -1982,6 +1982,10 @@ public class DataHelper extends DataSetObservable
     return id;
   }
 
+  // update or insert audio record
+  // @param sid  survey id
+  // @param bid  shot-id or sketch audio index
+  // @param date date
   void setAudio( long sid, long bid, String date )
   {
     if ( myDB == null ) return; // false;
@@ -2030,13 +2034,15 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
+  // @param sid survey id
+  // @param bid shot-id is positive, sketch audio index if negative
   void deleteAudio( long sid, long bid )
   {
     if ( myDB == null ) return;
     try {
       myDB.delete( AUDIO_TABLE, WHERE_SID_SHOTID, new String[]{ Long.toString(sid), Long.toString(bid) } );
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } catch (SQLiteException e) { logError("photo delete", e); }
+    } catch (SQLiteException e) { logError("audio delete", e); }
   }
 
   // delete a neg audio record 

@@ -14,7 +14,7 @@ package com.topodroid.DistoX;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.utils.TDLog;
 
-// import android.util.Log;
+import android.util.Log;
 
 import android.os.Bundle;
 import android.content.Context;
@@ -29,6 +29,7 @@ import android.view.View;
 import android.media.MediaPlayer;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,6 +41,7 @@ class AudioListDialog extends MyDialog
   // private Button   mButtonCancel;
 
   private List< AudioInfo > mAudios;
+  private List< AudioInfo > mSurveyAudios;
   private List< DBlock > mShots;
   private MediaPlayer mMP = null;
 
@@ -49,19 +51,20 @@ class AudioListDialog extends MyDialog
   AudioListDialog( Context context, List< AudioInfo > audios, List< DBlock > shots )
   {
     super( context, R.string.AudioListDialog );
-    mAudios = audios;
+    mSurveyAudios = audios;
     mShots  = shots;
   }
 
 
   private String getAudioDescription( AudioInfo audio )
   {
-    if ( audio.shotid >= 0 ) {
-      for ( DBlock blk : mShots ) if ( blk.mId == audio.shotid ) {
+    if ( audio.fileIdx >= 0 ) {
+      for ( DBlock blk : mShots ) if ( blk.mId == audio.fileIdx ) {
         return audio.getFullString( blk.mFrom + " " + blk.mTo );
       }
     }
-    return audio.getFullString( "- -" );
+    // return audio.getFullString( "- -" );
+    return null;
   }
 
 // -------------------------------------------------------------------
@@ -77,9 +80,14 @@ class AudioListDialog extends MyDialog
     mList.setDividerHeight( 2 );
     // ArrayList< String > names = new ArrayList<>();
     ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
-    for ( AudioInfo af : mAudios ) { 
+    ArrayList< AudioInfo > mAudios = new ArrayList<>();
+    for ( AudioInfo af : mSurveyAudios ) { 
       // names.add( getAudioDescription( af );
-      arrayAdapter.add( getAudioDescription( af ) );
+      String desc = getAudioDescription( af );
+      if ( desc != null ) {
+        arrayAdapter.add( desc );
+        mAudios.add( af );
+      }
     }
     mList.setAdapter( arrayAdapter );
     
@@ -95,7 +103,7 @@ class AudioListDialog extends MyDialog
   @Override
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
-    // play audio at pos
+    // Log.v("DistoX", "play audio at pos " + pos );
     playAudio( pos );
   }
 
@@ -103,11 +111,16 @@ class AudioListDialog extends MyDialog
   {
     AudioInfo audio = mAudios.get( pos );
     if ( audio != null ) { 
-      String filepath = TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString( audio.id ) );
+      String filepath = TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString( audio.fileIdx ) );
       File file = new File( filepath );
+      // Log.v("DistoX", "play audio file " + file.getPath() );
       if ( file.exists() ) {
         startPlay( filepath );
+      // } else {
+      //   // TDLog.Error("audio file does not exist");
       }
+    // } else {
+    //   // TDLog.Error("null audio info");
     }
   }
 

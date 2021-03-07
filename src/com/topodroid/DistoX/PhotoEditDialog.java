@@ -40,7 +40,7 @@ class PhotoEditDialog extends MyDialog
   private Button   mButtonDelete;
   // private Button   mButtonCancel;
   // private int mOrientation = 0;
-  private String mDate = "";
+  // private String mDate = "";
   private boolean mAtShot;
 
   private TDImage mTdImage = null;
@@ -84,7 +84,7 @@ class PhotoEditDialog extends MyDialog
 
     ((TextView) findViewById( R.id.photo_azimuth )).setText(
        String.format( mContext.getResources().getString( R.string.photo_azimuth_clino ), a, c ) );
-    ((TextView) findViewById( R.id.photo_date )).setText( mDate );
+    ((TextView) findViewById( R.id.photo_date )).setText( mPhoto.mDate );
 
     if ( mPhoto.mComment != null ) {
       mETcomment.setText( mPhoto.mComment );
