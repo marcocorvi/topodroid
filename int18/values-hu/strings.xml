@@ -364,7 +364,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="menu_reload">ÚJRATÖLT</string>
     <string name="menu_rename_delete">ÁTNEVEZ/TÖRÖL</string>
     <string name="menu_rename">ÁTNEVEZ</string>
-    <string name="menu_plot_scrap">VARIÁCIÓK</string>
+    <string name="menu_plot_scrap">SZINTEK</string>
     <string name="menu_switch">ÁTKAPCSOL/</string>
     <string name="menu_help">SÚGÓ</string>
     <!-- UNUSED string name="menu_join_survey">EGYÜTTES FELMÉRÉS</string -->
@@ -491,7 +491,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="section_area">A keresztszelvény területe: %1$.1f</string>
     <string name="section_name">metszet megjegyzés</string>
     <string name="scrap_outline">Körvonal vázlat létrehozása</string>
-    <string name="scrap_string">Vázlat variáció: %1$d / %2$d</string>
+    <string name="scrap_string">Vázlat szint: %1$d / %2$d</string>
 
     <!-- UNUSED string name="sensor">sensor</string -->
     <string name="sensor_gravity">gravitációs szenzor</string>
@@ -679,7 +679,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="button_move"    >Mozgat</string>
     <string name="button_next"    >Következő</string>
     <string name="button_prev"    >Előző</string>
-    <string name="button_new"     >Új variáció</string>
+    <string name="button_new"     >Új szint</string>
     <string name="button_skip"    >Átugor</string>
     <string name="button_done"    >Kész</string>
     <string name="button_lrud"    >BJFL hozzáadása</string>
@@ -860,7 +860,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="help_refs">Vázlat referencia</string>
     <string name="help_rename">Felmérés nevének megváltoztatása</string>
     <string name="help_plot_rename">Vázlat átnevezése/törlése</string>
-    <string name="help_plot_scrap">Vázlat variációk</string>
+    <string name="help_plot_scrap">Vázlat szintek</string>
     <string name="help_plot_switch">Vázlat nézet átváltása</string>
     <string name="help_search">Mérési pont keresése</string>
     <string name="help_stats">Felmérési statisztikák</string>
@@ -1013,7 +1013,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="title_plot_save">Vázlat exportálása</string>
     <!-- UNUSED string name="title_plot_merge">Vázlatban egyesít</string -->
     <string name="title_plot_reload">Vázlat újratöltése</string>
-    <string name="title_plot_scraps">Vázlat variációk</string>
+    <string name="title_plot_scraps">Vázlat szintek</string>
     <string name="title_profile_flip">Nézeti vázlat 180 fokos forgatása</string>
     <string name="title_projection">Vetített oldalnézet irányszöge %1$d</string>
     <string name="title_refs">Vázlat rajzelemek</string>
