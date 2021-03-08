@@ -668,6 +668,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="button_eval_cal"  >Kiértékelés kalibrációval</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Állj      </string -->
+    <!-- TODO string name="button_help">Help</string -->
     <string name="button_manual"    >Felhasználói Kézikönyv</string>
     <!-- UNUSED string name="button_measure"   >Measure   </string -->
     <!-- UNUSED string name="button_photo"   >Fotó</string -->
@@ -752,8 +753,10 @@ Tap <b>Bezár</b> nem változtat.
     <string name="popup_do_splay">Segéd mérés</string>
     <string name="popup_do_leg">Poligon mérések</string>
     <string name="popup_do_gm_data">Kalibr. mérés</string>
-	<string name="popup_do_laser">Lézer</string>
+    <string name="popup_do_laser">Lézer</string>
     <string name="popup_do_scan">Scan mérés</string>
+    <!-- TODO string name="popup_do_shot">Shot</string -->
+    <!-- TODO string name="popup_do_clear">Clear</string -->
 
 
     <!-- UNUSED string name="btn_3d">3D</string -->
@@ -1250,6 +1253,8 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_socket_delay_summary">Kapcsolódási késleltetés a párosításhoz [0.1 sec]</string>
   <string name="pref_z6_workaround_title">Áthidaló megoldás Z6-hoz</string>
   <string name="pref_z6_workaround_summary">Áthidaló megoldás adatletöltéshez Z6-ból</string>
+  <!-- TODO string name="pref_firmware_sanity_title">Firmware check</string -->
+  <!-- TODO string name="pref_firmware_sanity_summary">Enforce firmware sanity checks</string -->
   <string name="pref_crs_title">Koordinátarendszer</string>
   <string name="pref_crs_summary">Írd be a koordinátarendszer nevét Proj.4 szerint</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
@@ -1611,6 +1616,9 @@ Tap <b>Bezár</b> nem változtat.
 \n[7] Kapcsold ki a DistoX2-t a CLR gombbal.
 \n
    </string>
+   <!-- UNUSED string name="firmware_wait_dump">Reading firmware &#8230; wait</string -->
+   <!-- UNUSED string name="firmware_wait_check">Checking hardware &#8230; wait</string -->
+   <!-- UNUSED string name="firmware_wait_upload">Uploading firmware &#8230; wait</string -->
    <string name="firmware_none">nincs firmware fájl</string>
    <string name="firmware_file">firmware fájl</string>
    <string name="firmware_file_exists">Meglévő firmware fájl</string>

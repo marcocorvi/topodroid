@@ -286,31 +286,45 @@ class CutNPaste
       float ww = textview1.getPaint().measureText( text );
       if ( ww > w ) w = ww;
 
-      // ----- SCAN MEASURE 
-      //
-      text = res.getString( R.string.popup_do_scan );
-      textview2 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
-        new View.OnClickListener( ) {
-          public void onClick(View v) {
-            app.sendBricCommand( BricConst.CMD_SCAN );
-            dismissPopupBT();
-          }
-        } );
-      ww = textview2.getPaint().measureText( text );
-      if ( ww > w ) w = ww;
-
-      // ----- SHOT MEASURE
+      // ----- SHOT MEASURE 
       //
       text = res.getString( R.string.popup_do_shot );
-      textview3 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+      textview2 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
             app.sendBricCommand( BricConst.CMD_SHOT );
             dismissPopupBT();
           }
         } );
+      ww = textview2.getPaint().measureText( text );
+      if ( ww > w ) w = ww;
+
+      // ----- SCAN MEASURE
+      //
+      text = res.getString( R.string.popup_do_scan );
+      textview3 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+        new View.OnClickListener( ) {
+          public void onClick(View v) {
+            app.sendBricCommand( BricConst.CMD_SCAN );
+            dismissPopupBT();
+          }
+        } );
       ww = textview3.getPaint().measureText( text );
       if ( ww > w ) w = ww;
+
+      // ----- CLEAR MEMORY
+      //
+      text = res.getString(R.string.popup_do_clear);
+      textview4 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+        new View.OnClickListener( ) {
+          public void onClick(View v) {
+            app.sendBricCommand( BricConst.CMD_CLEAR );
+            dismissPopupBT();
+          }
+        } );
+      float ww = textview4.getPaint().measureText( text );
+      if ( ww > w ) w = ww;
+
 /*
       // ----- MEASURE ONE SPLAY AND DOWNLOAD IT IF MODE IS CONTINUOUS
       //

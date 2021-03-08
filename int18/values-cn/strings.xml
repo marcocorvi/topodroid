@@ -662,6 +662,7 @@ Tap "Close" not to take any action.
     <string name="button_eval_cal"  >校准复运算</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
+    <!-- TODO string name="button_help">Help</string -->
     <string name="button_manual"    >用户手册</string>
     <!-- UNUSED string name="button_measure"   >Measure   </string -->
     <!-- UNUSED string name="button_photo"   >Photo</string -->
@@ -747,6 +748,10 @@ Tap "Close" not to take any action.
     <string name="popup_do_splay">侧线测量</string>
     <string name="popup_do_leg">主线测量</string>
     <string name="popup_do_gm_data">校准测量</string>
+    <!-- TODO string name="popup_do_laser">Laser</string -->
+    <!-- TODO string name="popup_do_scan">Scan</string -->
+    <!-- TODO string name="popup_do_shot">Shot</string -->
+    <!-- TODO string name="popup_do_clear">Clear</string -->
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_export">输出</string>
@@ -1234,6 +1239,8 @@ Tap "Close" not to take any action.
   <string name="pref_socket_delay_summary">允许配对的连接延迟 [0.1 秒]</string>
   <string name="pref_z6_workaround_title">Z6 工作区</string>
   <string name="pref_z6_workaround_summary">Z6 工作区数据下载</string>
+  <!-- TODO string name="pref_firmware_sanity_title">Firmware check</string -->
+  <!-- TODO string name="pref_firmware_sanity_summary">Enforce firmware sanity checks</string -->
   <string name="pref_crs_title">C R S </string>
   <string name="pref_crs_summary">CRS 名称,类属于Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
@@ -1586,6 +1593,9 @@ Tap "Close" not to take any action.
 \n[7] 按住CLR键关闭DistoX2。
 \n
    </string>
+   <!-- UNUSED string name="firmware_wait_dump">Reading firmware &#8230; wait</string -->
+   <!-- UNUSED string name="firmware_wait_check">Checking hardware &#8230; wait</string -->
+   <!-- UNUSED string name="firmware_wait_upload">Uploading firmware &#8230; wait</string -->
    <string name="firmware_none">无固件文件</string>
    <string name="firmware_file">固件文件</string>
    <string name="firmware_file_exists">现有固件文件</string>

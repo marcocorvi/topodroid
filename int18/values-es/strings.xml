@@ -653,6 +653,7 @@ Tap "Close" not to take any action.
     <!-- TODO string name="button_eval_cal"  >Eval w. calib.</string -->
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
+    <!-- TODO string name="button_help">Help</string -->
     <!-- TODO string name="button_manual"    >User Manual</string -->
     <!-- UNUSED string name="button_measure"   >Medida   </string -->
     <!-- UNUSED string name="button_photo"   >Fotos</string -->
@@ -738,6 +739,10 @@ Tap "Close" not to take any action.
     <string name="popup_do_splay">Tomas radiales</string>
     <string name="popup_do_leg">Tomas principales</string>
     <string name="popup_do_gm_data">Toma calib.</string>
+    <!-- TODO string name="popup_do_laser">Laser</string -->
+    <!-- TODO string name="popup_do_scan">Scan</string -->
+    <!-- TODO string name="popup_do_shot">Shot</string -->
+    <!-- TODO string name="popup_do_clear">Clear</string -->
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <!-- TODO string name="btn_export">Export</string -->
@@ -1226,6 +1231,8 @@ Tap "Close" not to take any action.
   <string name="pref_socket_delay_summary">La conexión tarda mucho para emparejarse [0.1 sec]</string>
   <string name="pref_z6_workaround_title">Solución Z6</string>
   <string name="pref_z6_workaround_summary">Descarga de datos de solución Z6</string>
+  <!-- TODO string name="pref_firmware_sanity_title">Firmware check</string -->
+  <!-- TODO string name="pref_firmware_sanity_summary">Enforce firmware sanity checks</string -->
   <string name="pref_crs_title">CRS</string>
   <string name="pref_crs_summary">Introducir el CRS nombrar como en Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">Promedio GPS</string -->
@@ -1568,6 +1575,9 @@ it is correct but i need to use english to tell a user which log to enable when 
 \n[7] Apague el DistoX2 con la tecla CLR.
 \n
    </string>
+   <!-- UNUSED string name="firmware_wait_dump">Reading firmware &#8230; wait</string -->
+   <!-- UNUSED string name="firmware_wait_check">Checking hardware &#8230; wait</string -->
+   <!-- UNUSED string name="firmware_wait_upload">Uploading firmware &#8230; wait</string -->
    <string name="firmware_none">sin archivo de firmware</string>
    <string name="firmware_file">Archivo firmware</string>
    <string name="firmware_file_exists">Existe archivo firmware</string>

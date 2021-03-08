@@ -669,6 +669,7 @@ Tap "Close" not to take any action.
     <string name="button_eval_cal"  >Vyhodnotiť kalibr.</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
+    <!-- TODO string name="button_help">Help</string -->
     <string name="button_manual"    >Používateľský Manuál</string>
     <!-- UNUSED string name="button_measure"   >Measure   </string -->
     <!-- UNUSED string name="button_photo"   >Photo</string -->
@@ -753,6 +754,10 @@ Tap "Close" not to take any action.
     <string name="popup_do_splay">Pomocná zámera</string>
     <string name="popup_do_leg">Hlavné zámery</string>
     <string name="popup_do_gm_data">Zámera kalibrácie</string>
+    <!-- TODO string name="popup_do_laser">Laser</string -->
+    <!-- TODO string name="popup_do_scan">Scan</string -->
+    <!-- TODO string name="popup_do_shot">Shot</string -->
+    <!-- TODO string name="popup_do_clear">Clear</string -->
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_export">Export</string>
@@ -1247,6 +1252,8 @@ Tap "Close" not to take any action.
   <string name="pref_socket_delay_summary">Oneskorenie pred pokusom o pripojenie k DistoX [0.1 sec]</string>
   <string name="pref_z6_workaround_title">Dátová cesta Z6</string>
   <string name="pref_z6_workaround_summary">Nastavenie pre telefóny Z6</string>
+  <!-- TODO string name="pref_firmware_sanity_title">Firmware check</string -->
+  <!-- TODO string name="pref_firmware_sanity_summary">Enforce firmware sanity checks</string -->
   <string name="pref_crs_title">C R S </string>
   <string name="pref_crs_summary">Názov CRS ako v Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
@@ -1603,6 +1610,9 @@ DO NOT REMOVE THIS LINE -->
 \n   NAHRATIE NEKOMPATIBILNÉHO FIRMWARU MÔŽE VÁŽNE POŠKODIŤ DISTOX!!!
 \n	  
    </string>
+   <!-- UNUSED string name="firmware_wait_dump">Reading firmware &#8230; wait</string -->
+   <!-- UNUSED string name="firmware_wait_check">Checking hardware &#8230; wait</string -->
+   <!-- UNUSED string name="firmware_wait_upload">Uploading firmware &#8230; wait</string -->
    <string name="firmware_none">Žiadny firmware súbor</string>
    <string name="firmware_file">Firmware súbor</string>
    <string name="firmware_file_exists">Existujúci firmware súbor</string>

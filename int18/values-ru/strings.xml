@@ -649,6 +649,7 @@
     <string name="button_eval_cal"  >Вычислить с учетом калиб.</string>
     <!-- OK string name="button_gps_start" >GPS       </string -->
     <!-- UNUSED string name="button_gps_stop"  >Стоп      </string -->
+    <!-- TODO string name="button_help">Help</string -->
     <string name="button_manual"    >Руководство</string>
     <!-- UNUSED string name="button_measure"   >Изменить   </string -->
     <!-- UNUSED string name="button_photo"   >Фото</string -->
@@ -734,6 +735,10 @@
     <string name="popup_do_splay">Сделать замер</string>
     <string name="popup_do_leg">Сделать три замера</string>
     <string name="popup_do_gm_data">Калибр. замер</string>
+    <!-- TODO string name="popup_do_laser">Laser</string -->
+    <!-- TODO string name="popup_do_scan">Scan</string -->
+    <!-- TODO string name="popup_do_shot">Shot</string -->
+    <!-- TODO string name="popup_do_clear">Clear</string -->
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_export">Экспорт</string>
@@ -1217,6 +1222,8 @@
   <string name="pref_socket_delay_summary">Задержка подключения при сопряжении [0.1 сек]</string>
   <string name="pref_z6_workaround_title">Решение для Z6</string>
   <string name="pref_z6_workaround_summary">Решение проблемы загрузки данных с телефонов Z6</string>
+  <!-- TODO string name="pref_firmware_sanity_title">Firmware check</string -->
+  <!-- TODO string name="pref_firmware_sanity_summary">Enforce firmware sanity checks</string -->
   <string name="pref_crs_title">CRS - система координат </string>
   <string name="pref_crs_summary">Введите название CRS точно также как в программе Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">Осреднение данных GPS </string -->
@@ -1567,6 +1574,9 @@
 \n[7] Выключите DistoX2 используя кнопку CLR.
 \n
    </string>
+   <!-- UNUSED string name="firmware_wait_dump">Reading firmware &#8230; wait</string -->
+   <!-- UNUSED string name="firmware_wait_check">Checking hardware &#8230; wait</string -->
+   <!-- UNUSED string name="firmware_wait_upload">Uploading firmware &#8230; wait</string -->
    <string name="firmware_none">отсутствует файл прошивки</string>
    <string name="firmware_file">файл прошивки</string>
    <string name="firmware_file_exists">Существующий файл прошивки</string>

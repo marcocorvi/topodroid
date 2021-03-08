@@ -459,11 +459,11 @@ public class BricComm extends TopoDroidComm
   {
     byte[] command = null;
     switch ( cmd ) {
-      case BricConst.CMD_SCAN:  command = Arrays.copyOfRange( BricConst.COMMAND_SCAN,  0, 4 ); break;
-      case BricConst.CMD_SHOT:  command = Arrays.copyOfRange( BricConst.COMMAND_SHOT,  0, 4 ); break;
-      case BricConst.CMD_LASER: command = Arrays.copyOfRange( BricConst.COMMAND_LASER, 0, 5 ); break;
-      case BricConst.CMD_OFF:   command = Arrays.copyOfRange( BricConst.COMMAND_OFF,   0, 9 ); break;
-
+      case BricConst.CMD_SCAN:  command = Arrays.copyOfRange( BricConst.COMMAND_SCAN,  0,  4 ); break;
+      case BricConst.CMD_SHOT:  command = Arrays.copyOfRange( BricConst.COMMAND_SHOT,  0,  4 ); break;
+      case BricConst.CMD_LASER: command = Arrays.copyOfRange( BricConst.COMMAND_LASER, 0,  5 ); break;
+      case BricConst.CMD_CLEAR: command = Arrays.copyOfRange( BricConst.COMMAND_CLEAR, 0, 12 ); break;
+      case BricConst.CMD_OFF:   command = Arrays.copyOfRange( BricConst.COMMAND_OFF,   0,  9 ); break;
 /*
       case BricConst.CMD_SPLAY: 
         Log.v("DistoX-BLE", "BRIC comm send cmd SPLAY");

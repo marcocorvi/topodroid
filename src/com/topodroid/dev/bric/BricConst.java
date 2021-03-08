@@ -41,11 +41,13 @@ public class BricConst
   public final static byte[] COMMAND_SCAN  = { (byte)0x73, (byte)0x63, (byte)0x61, (byte)0x6e };
   public final static byte[] COMMAND_SHOT  = { (byte)0x73, (byte)0x68, (byte)0x6f, (byte)0x74 };
   public final static byte[] COMMAND_LASER = { (byte)0x6c, (byte)0x61, (byte)0x73, (byte)0x65, (byte)0x72 };
+  public final static byte[] COMMAND_CLEAR = { (byte)0x63, (byte)0x6c, (byte)0x65, (byte)0x61, (byte)0x72, (byte)0x20, (byte)0x6d, (byte)0x65, (byte)0x6d, (byte)0x6f, (byte)0x72, (byte)0x79 };
 
   public final static int CMD_OFF   = 1;
   public final static int CMD_SCAN  = 2;
   public final static int CMD_SHOT  = 3;
   public final static int CMD_LASER = 4;
+  public final static int CMD_CLEAR = 5;
 
   public final static int CMD_SPLAY = 11;
   public final static int CMD_LEG   = 12;
