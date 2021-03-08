@@ -222,12 +222,6 @@
 	  <!-- android:screenOrientation="portrait" -->
         </activity>
 
-        <activity android:name=".PhotoActivity"
-	  android:theme="@style/Theme.FullScreen"
-          android:configChanges="orientation|screenSize"
-          >
-        </activity>
-
         <activity android:name=".SensorListActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
