@@ -65,6 +65,7 @@ public class MyDialog extends Dialog
     Button btn_help = (Button) findViewById( R.id.button_help );
     if ( btn_help != null ) {
       if ( mHelpPage != null ) {
+        // Log.v("DistoX", "set help page " + mHelpPage );
         btn_help.setOnClickListener( new android.view.View.OnClickListener() {
           @Override
           public void onClick( View v ) {
@@ -83,8 +84,11 @@ public class MyDialog extends Dialog
           // } );
         }
       } else {
+        // Log.v("DistoX", "no help page");
         btn_help.setVisibility( View.GONE );
       }
+    // } else {
+    //   // Log.v("DistoX", "null button help");
     }
   }
 

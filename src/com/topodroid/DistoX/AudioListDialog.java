@@ -19,13 +19,15 @@ import android.util.Log;
 import android.os.Bundle;
 import android.content.Context;
 
-// import android.widget.Button;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.media.MediaPlayer;
 
 import java.util.List;
@@ -36,7 +38,10 @@ import java.io.IOException;
 
 class AudioListDialog extends MyDialog
                   implements OnItemClickListener
+                  // , OnClickListener
+                  , OnItemLongClickListener
 {
+  private ShotWindow mParent;
   private ListView mList;
   // private Button   mButtonCancel;
 
@@ -48,9 +53,10 @@ class AudioListDialog extends MyDialog
   /**
    * @param context   context
    */
-  AudioListDialog( Context context, List< AudioInfo > audios, List< DBlock > shots )
+  AudioListDialog( Context context, ShotWindow parent, List< AudioInfo > audios, List< DBlock > shots )
   {
     super( context, R.string.AudioListDialog );
+    mParent = parent;
     mSurveyAudios = audios;
     mShots  = shots;
   }
@@ -67,6 +73,14 @@ class AudioListDialog extends MyDialog
     return null;
   }
 
+  private DBlock getAudioBlock( AudioInfo audio )
+  {
+    if ( audio.fileIdx >= 0 ) {
+      for ( DBlock blk : mShots ) if ( blk.mId == audio.fileIdx ) return blk;
+    }
+    return null;
+  }
+
 // -------------------------------------------------------------------
   @Override
   protected void onCreate(Bundle savedInstanceState) 
@@ -77,10 +91,11 @@ class AudioListDialog extends MyDialog
 
     mList = (ListView) findViewById( R.id.list );
     mList.setOnItemClickListener( this );
+    mList.setOnItemLongClickListener( this );
     mList.setDividerHeight( 2 );
     // ArrayList< String > names = new ArrayList<>();
+    mAudios = new ArrayList< AudioInfo >();
     ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
-    ArrayList< AudioInfo > mAudios = new ArrayList<>();
     for ( AudioInfo af : mSurveyAudios ) { 
       // names.add( getAudioDescription( af );
       String desc = getAudioDescription( af );
@@ -91,20 +106,29 @@ class AudioListDialog extends MyDialog
     }
     mList.setAdapter( arrayAdapter );
     
-    // ( (Button) findViewById(R.id.photo_back ) ).setOnClickListener( this );
+    ( (Button) findViewById(R.id.button_back ) ).setOnClickListener( new View.OnClickListener() {
+      @Override public void onClick(View v) 
+      {
+        // Log.v("DistoX", "audio list on click");
+        dismiss();
+      }
+    } );
   }
-
-  // @Override
-  // public void onClick(View v) 
-  // {
-  //   dismiss();
-  // }
 
   @Override
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
     // Log.v("DistoX", "play audio at pos " + pos );
     playAudio( pos );
+  }
+
+  @Override
+  public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id)
+  {
+    DBlock blk = getAudioBlock( mAudios.get( pos ) );
+    if ( blk == null ) return false;
+    mParent.startAudio( blk );
+    return true;
   }
 
   private void playAudio( int pos )

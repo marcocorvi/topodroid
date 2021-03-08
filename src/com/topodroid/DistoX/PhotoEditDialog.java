@@ -30,7 +30,8 @@ import android.view.View;
 class PhotoEditDialog extends MyDialog
                       implements View.OnClickListener
 {
-  private final PhotoActivity mParent;
+  // private final PhotoActivity mParent;
+  private final PhotoListDialog mParent;
   private PhotoInfo mPhoto;
   private String mFilename;
 
@@ -48,7 +49,7 @@ class PhotoEditDialog extends MyDialog
   /**
    * @param context   context
    */
-  PhotoEditDialog( Context context, PhotoActivity parent, PhotoInfo photo )
+  PhotoEditDialog( Context context, PhotoListDialog parent, PhotoInfo photo )
   {
     super( context, R.string.PhotoEditDialog );
     // Log.v("DistoXPHOTO", "photo edit dialog id " + photo.id );

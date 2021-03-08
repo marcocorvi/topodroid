@@ -360,7 +360,8 @@ public class SurveyWindow extends Activity
       mActivity.startActivity( new Intent( mActivity, FixedActivity.class ) );
       // FIXME update declination
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // PHOTO CAMERA
-      mActivity.startActivity( new Intent( mActivity, PhotoActivity.class ) );
+      // mActivity.startActivity( new Intent( mActivity, PhotoActivity.class ) );
+      (new PhotoListDialog( this, mApp_mData )).show();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // SENSORS DATA
       // if ( TDSetting.mWithSensors )
         mActivity.startActivity( new Intent( mActivity, SensorListActivity.class ) );

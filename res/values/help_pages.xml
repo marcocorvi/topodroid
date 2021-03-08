@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <string name="PhotoActivity" translatable="false">page_photo_list.htm</string>
+  <!-- string name="PhotoActivity" translatable="false">page_photo_list.htm</string -->
+  <string name="PhotoListDialog" translatable="false">page_photo_list.htm</string>
   <string name="PtCmapActivity" translatable="false">page_pt_cmap.htm</string>
   <string name="SensorActivity" translatable="false">page_sensors.htm</string>
   <string name="SensorListActivity" translatable="false">page_sensors_list.htm</string>

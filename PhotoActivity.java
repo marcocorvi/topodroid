@@ -33,19 +33,21 @@ import android.app.Activity;
 // import android.content.Intent;
 
 import android.view.View;
-// import android.view.View.OnClickListener;
+import android.view.View.OnClickListener;
 import android.view.KeyEvent;
 
 // import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.ListView;
-// import android.widget.Button;
+import android.widget.Button;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.LinearLayout;
 // import android.preference.PreferenceManager;
 
 public class PhotoActivity extends Activity
                            implements OnItemClickListener
+                           , OnClickListener
                            , ILister
 {
   // private TopoDroidApp mApp;
@@ -164,6 +166,21 @@ public class PhotoActivity extends Activity
     mList.setDividerHeight( 2 );
 
     updateDisplay( );
+
+    ( (Button)findViewById( R.id.button_help )).setOnClickListener( this );
+    ( (Button)findViewById( R.id.button_back )).setOnClickListener( this );
+    LinearLayout help = (LinearLayout) findViewById( R.id.help );
+    if ( help != null ) help.setBackgroundColor( 0xff222222 );
+  }
+
+  @Override
+  public void onClick( View v ) 
+  {
+    if ( v.getId() == R.id.button_help ) {
+      doHelpPage();
+    } else if ( v.getId() == R.id.button_back ) {
+      super.onBackPressed();
+    }
   }
 
   // @Override
@@ -215,8 +232,7 @@ public class PhotoActivity extends Activity
     // Log.v("DistoX", "photo activity on key down, code: " + code );
     switch ( code ) {
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
-        String help_page = getResources().getString( R.string.PhotoActivity );
-        /* if ( help_page != null ) */ UserManualActivity.showHelpPage( this, help_page );
+        doHelpPage();
         return true;
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         super.onBackPressed();
@@ -227,6 +243,12 @@ public class PhotoActivity extends Activity
         // TDLog.Error( "key down: code " + code );
     }
     return false;
+  }
+
+  public void doHelpPage()
+  {
+    String help_page = getResources().getString( R.string.PhotoActivity );
+    /* if ( help_page != null ) */ UserManualActivity.showHelpPage( this, help_page );
   }
 
   public void enableBluetoothButton( boolean enable ) { } 

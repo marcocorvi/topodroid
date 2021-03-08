@@ -786,12 +786,13 @@ public class ShotWindow extends Activity
       }
       // updateDisplay( );
     } else if ( TDLevel.overNormal && p++ == pos ) { // PHOTO
-      mActivity.startActivity( new Intent( mActivity, PhotoActivity.class ) );
+      // mActivity.startActivity( new Intent( mActivity, PhotoActivity.class ) );
+      (new PhotoListDialog( this, mApp_mData )).show();
     } else if ( TDLevel.overExpert && p++ == pos ) { // AUDIO
       List< AudioInfo > audios = mApp_mData.selectAllAudios( TDInstance.sid );
       if ( audios.size() > 0 ) {  
         List< DBlock > shots = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.NORMAL );
-        (new AudioListDialog( this, audios, shots )).show();
+        (new AudioListDialog( this, this, audios, shots )).show();
       } else { 
         TDToast.makeWarn( R.string.no_audio );
       }
