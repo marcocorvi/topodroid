@@ -322,7 +322,7 @@ class CutNPaste
             dismissPopupBT();
           }
         } );
-      float ww = textview4.getPaint().measureText( text );
+      ww = textview4.getPaint().measureText( text );
       if ( ww > w ) w = ww;
 
 /*
