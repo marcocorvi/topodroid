@@ -25,6 +25,8 @@ import java.util.Arrays;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
+import android.util.Log;
+
 public class BleUtils
 {
   // ------------------------------------------------------------------------------
@@ -87,6 +89,16 @@ public class BleUtils
     return sb.toString();
   }
 
+  public static String bytesToAscii( byte[] bytes )
+  {
+    if ( bytes == null ) return null;
+    StringBuilder sb = new StringBuilder();
+    for ( int k=0; k<bytes.length; ++k ) {
+      sb.append( (char)(bytes[k]) );
+    }
+    return sb.toString();
+  }
+
   // ------------------------------------------------------------------------------
   public static boolean isChrtPBcast( int prop )       { return (prop & BluetoothGattCharacteristic.PROPERTY_BROADCAST) != 0; }
   public static boolean isChrtPIndicate( int prop )    { return (prop & BluetoothGattCharacteristic.PROPERTY_INDICATE) != 0; }
@@ -107,6 +119,14 @@ public class BleUtils
     int prop = chrt.getProperties();
     if ( isChrtPIndicate( prop ) ) return BluetoothGattDescriptor.ENABLE_INDICATION_VALUE;
     if ( isChrtPNotify( prop ) ) return BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE;
+    return null;
+  }
+
+  public static byte[] getChrtPIndicate( BluetoothGattCharacteristic chrt )
+  {
+    int prop = chrt.getProperties();
+    if ( isChrtPIndicate( prop ) ) return BluetoothGattDescriptor.ENABLE_INDICATION_VALUE;
+    Log.v("DistoX", "char is not INDICATE " + chrt.getUuid().toString() );
     return null;
   }
 

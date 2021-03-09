@@ -94,6 +94,13 @@ Tap "Close" not to take any action.
     <string name="failed_snap_to_splays">No se puede cerrar la línea</string>
     <string name="failed_append_to_line">No se puede agregar a otra línea</string>
 
+    <!-- TODO string name="bric_device">Device %1$s</string -->
+    <!-- TODO string name="bric_ble">BLE %1$s</string -->
+    <!-- TODO string name="bric_fw">Firmware %1$s</string -->
+    <!-- TODO string name="bric_hw">Hardware %1$s</string -->
+    <!-- TODO string name="bric_battery">Battery %1$d</string -->
+    <!-- TODO string name="bric_battery_wait">Battery &#8230;</string -->
+
     <string name="calibration_title">Calibración de instrumentos</string>
     <string name="calibration_length">Cinta</string>
     <string name="calibration_azimuth">Brújula</string>

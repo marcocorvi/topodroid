@@ -94,6 +94,13 @@ Tap "Close" not to take any action.
     <string name="failed_snap_to_splays">Nici o radiere apropiată la care să se fixeze/alipească linia</string>
     <string name="failed_append_to_line">Nu a putut fi alipită la o altă linie</string>
 
+    <!-- TODO string name="bric_device">Device %1$s</string -->
+    <!-- TODO string name="bric_ble">BLE %1$s</string -->
+    <!-- TODO string name="bric_fw">Firmware %1$s</string -->
+    <!-- TODO string name="bric_hw">Hardware %1$s</string -->
+    <!-- TODO string name="bric_battery">Battery %1$d</string -->
+    <!-- TODO string name="bric_battery_wait">Battery &#8230;</string -->
+
     <string name="calibration_title">Calibrare instrumente</string>
     <string name="calibration_length">Distanță</string>
     <string name="calibration_azimuth">Busolă</string>

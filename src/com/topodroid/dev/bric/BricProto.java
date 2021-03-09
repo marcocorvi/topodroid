@@ -106,20 +106,20 @@ public class BricProto extends TopoDroidProtocol
       if ( mPrimToDo ) {        // and there is a previous Prim unprocessed
         processData();
       }
-      // Log.v("DistoX-BLE", "BRIC proto: meas_prim " );
+      // Log.v("DistoX", "BRIC proto: meas_prim " );
       mTime     = mThisTime;
       mDistance = BricConst.getDistance( bytes );
       mBearing  = BricConst.getAzimuth( bytes );
       mClino    = BricConst.getClino( bytes );
       mPrimToDo = true;
     } else {
-      Log.v("DistoX-BLE", "BRIC proto: add Prim - repeated primary" );
+      Log.v("DistoX", "BRIC proto: add Prim - repeated primary" );
     }
   }
 
   void addMeasMeta( byte[] bytes ) 
   {
-    // Log.v("DistoX-BLE", "BRIC proto: add Meta " );
+    // Log.v("DistoX", "BRIC proto: add Meta " );
     mIndex = BricConst.getIndex( bytes );
     mRoll  = BricConst.getRoll( bytes );
     mDip   = BricConst.getDip( bytes );
@@ -127,17 +127,17 @@ public class BricProto extends TopoDroidProtocol
 
   void addMeasErr( byte[] bytes ) 
   {
-    // Log.v("DistoX-BLE", "BRIC proto: add Err " );
+    // Log.v("DistoX", "BRIC proto: add Err " );
   }
   
   void processData()
   {
     if ( mPrimToDo ) {
-      // Log.v("DistoX-BLE", "BRIC proto send data to the app thru comm");
+      // Log.v("DistoX", "BRIC proto send data to the app thru comm");
       mComm.handleRegularPacket( DataType.PACKET_DATA, mLister, DataType.DATA_SHOT );
       mPrimToDo = false;
     } else {
-      Log.v("DistoX-BLE", "BRIC proto: process - PrimToDo false: ... skip");
+      Log.v("DistoX", "BRIC proto: process - PrimToDo false: ... skip");
     }
   }
 
@@ -145,20 +145,20 @@ public class BricProto extends TopoDroidProtocol
   {
     mTime = mThisTime;
     if ( checkPrim( bytes ) ) { // if Prim is new
-      // Log.v("DistoX-BLE", "BRIC proto: add Prim " );
+      // Log.v("DistoX", "BRIC proto: add Prim " );
       mTime     = mThisTime;
       mDistance = BricConst.getDistance( bytes );
       mBearing  = BricConst.getAzimuth( bytes );
       mClino    = BricConst.getClino( bytes );
       mComm.handleRegularPacket( DataType.PACKET_DATA, mLister, DataType.DATA_SHOT );
     } else {
-      Log.v("DistoX-BLE", "BRIC proto: add+process - Prim repeated: ... skip");
+      Log.v("DistoX", "BRIC proto: add+process - Prim repeated: ... skip");
     }
   }
 
   void setLastTime( byte[] bytes )
   {
-    // Log.v("DistoX-BLE", "BRIC proto: set last time " + BleUtils.bytesToString( bytes ) );
+    // Log.v("DistoX", "BRIC proto: set last time " + BleUtils.bytesToString( bytes ) );
     mLastTime = Arrays.copyOfRange( bytes, 0, bytes.length );
   }
 

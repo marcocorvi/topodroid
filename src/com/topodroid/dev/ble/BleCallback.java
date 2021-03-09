@@ -64,9 +64,9 @@ public class BleCallback extends BluetoothGattCallback
       String uuid_str = chrt.getUuid().toString();
       mComm.readedChrt( uuid_str, chrt.getValue() );
     } else if ( status == BluetoothGatt.GATT_READ_NOT_PERMITTED ) {
-      mComm.error( status );
+      mComm.error( status, chrt.getUuid().toString() );
     } else {
-      mComm.error( status );
+      mComm.error( status, chrt.getUuid().toString() );
     }
   }
 
@@ -79,9 +79,9 @@ public class BleCallback extends BluetoothGattCallback
     } else 
     if ( status == BluetoothGatt.GATT_INVALID_ATTRIBUTE_LENGTH 
       || status == BluetoothGatt.GATT_WRITE_NOT_PERMITTED ) {
-      mComm.error( status );
+      mComm.error( status, chrt.getUuid().toString() );
     } else {
-      mComm.failure( status );
+      mComm.failure( status, chrt.getUuid().toString() );
     }
   }
   
@@ -101,7 +101,7 @@ public class BleCallback extends BluetoothGattCallback
         mGatt = null;
         mComm.disconnected(); // this calls notifyStatus( CONN_DISCONNECTED );
       } else {
-        // Log.v("DistoX-BLE", "BLE callback: on Connection State Change new state " + newState );
+        // Log.v("DistoX", "BLE callback: on Connection State Change new state " + newState );
       }
     } else {
       mComm.notifyStatus( ConnectionState.CONN_WAITING );
@@ -112,10 +112,10 @@ public class BleCallback extends BluetoothGattCallback
         // TODO
         // device.createBond();
         // device.connectGatt();
-        mComm.error( status );
+        mComm.error( status, "onConnectionStateChange" );
         // mComm.reconnectDevice();
       } else { // status == BluetoothGatt.GATT_FAILURE
-        mComm.failure( status );
+        mComm.failure( status, "onConnectionStateChange" );
         // mComm.notifyStatus( ConnectionState.CONN_DISCONNECTED );
         // mComm.disconnected();
       }
@@ -126,7 +126,7 @@ public class BleCallback extends BluetoothGattCallback
   public void onServicesDiscovered(BluetoothGatt gatt, int status)
   {
     // super.onServicesDiscovered( gatt, status );
-    // Log.v("DistoX-BLE", "BLE callback: on Services Discovered " + status );
+    // Log.v("DistoX", "BLE callback: on Services Discovered " + status );
     if ( isSuccess( status, "onServicesDiscovered" ) ) {
       int ret = mComm.servicesDiscovered( gatt ); // calls notifyStatus( ... CONNECTED )
       if ( ret == 0 ) {
@@ -134,75 +134,75 @@ public class BleCallback extends BluetoothGattCallback
       } else {
         if ( gatt != null ) gatt.close();
         mGatt = null;
-        mComm.failure( ret );
+        mComm.failure( ret, "onServicesDiscovered" );
       }
     } else {
-      // Log.v("DistoX-BLE", "BLE callback: service discover faiure");
-      mComm.failure( status );
+      // Log.v("DistoX", "BLE callback: service discover faiure");
+      mComm.failure( status, "onServicesDiscovered" );
     }
   }
 
   @Override
   public void onDescriptorRead(BluetoothGatt gatt, BluetoothGattDescriptor desc, int status)
   {
-    // Log.v("DistoX-BLE", "BLE callback: onDescriptorRead " + desc.getUuuid() + " " + status );
+    // Log.v("DistoX", "BLE callback: onDescriptorRead " + desc.getUuuid() + " " + status );
     if ( isSuccess( status, "onDescriptorRead" ) ) {
       String uuid_str = desc.getUuid().toString();
       String uuid_chrt_str = desc.getCharacteristic().getUuid().toString();
       mComm.readedDesc( uuid_str, uuid_chrt_str, desc.getValue() );
     } else {
-      // Log.v("DistoX-BLE", "BLE callback: desc read error");
-      mComm.error( status );
+      // Log.v("DistoX", "BLE callback: desc read error");
+      mComm.error( status, desc.getUuid().toString() );
     }
   }
 
   @Override
   public void onDescriptorWrite(BluetoothGatt gatt, BluetoothGattDescriptor desc, int status)
   {
-    // Log.v("DistoX-BLE", "BLE callback: onDescriptorWrite " + desc.getUuid() + " " + status );
+    // Log.v("DistoX", "BLE callback: onDescriptorWrite " + desc.getUuid() + " " + status );
     if ( isSuccess( status, "onDescriptorWrite" ) ) {
       String uuid_str = desc.getUuid().toString();
       String uuid_chrt_str = desc.getCharacteristic().getUuid().toString();
       mComm.writtenDesc( uuid_str, uuid_chrt_str, desc.getValue() );
     } else {
-      // Log.v("DistoX-BLE", "BLE callback: desc write error");
-      mComm.error( status );
+      // Log.v("DistoX", "BLE callback: desc write error");
+      mComm.error( status, desc.getUuid().toString() );
     }
   }
 
   @Override
   public void onMtuChanged(BluetoothGatt gatt, int mtu, int status)
   { 
-    // Log.v("DistoX-BLE", "BLE callback: onMtuChanged " + status );
+    // Log.v("DistoX", "BLE callback: onMtuChanged " + status );
     if ( isSuccess( status, "onMtuChanged" ) ) {
       mComm.changedMtu( mtu );
     } else {
-      // Log.v("DistoX-BLE", "BLE callback: MTU change error");
-      mComm.error( status );
+      // Log.v("DistoX", "BLE callback: MTU change error");
+      mComm.error( status, "onMtuChange" );
     }
   }
 
   @Override
   public void onReadRemoteRssi(BluetoothGatt gatt, int rssi, int status)
   { 
-    // Log.v("DistoX-BLE", "BLE callback: onReadRemoteRssi " + status );
+    // Log.v("DistoX", "BLE callback: onReadRemoteRssi " + status );
     if ( isSuccess( status, "onReadRemoteRssi" ) ) {
       mComm.readedRemoteRssi( rssi );
     } else {
-      // Log.v("DistoX-BLE", "BLE callback: read RSSI error");
-      mComm.error( status );
+      // Log.v("DistoX", "BLE callback: read RSSI error");
+      mComm.error( status, "onReadRemoteRssi" );
     }
   }
 
   @Override
   public void onReliableWriteCompleted(BluetoothGatt gatt, int status)
   { 
-    // Log.v("DistoX-BLE", "BLE callback: onReliableWriteCompleted " + status );
+    // Log.v("DistoX", "BLE callback: onReliableWriteCompleted " + status );
     if ( isSuccess( status, "onReliableWriteCompleted" ) ) {
       mComm.completedReliableWrite();
     } else {
-      // Log.v("DistoX-BLE", "BLE callback: reliable write error");
-      mComm.error( status );
+      // Log.v("DistoX", "BLE callback: reliable write error");
+      mComm.error( status, "onReliableWriteCompleted" );
     }
   }
 
@@ -218,7 +218,7 @@ public class BleCallback extends BluetoothGattCallback
   public void connectGatt( Context ctx, BluetoothDevice device )
   {
     closeGatt();
-    // Log.v("DistoX-BLE", "BLE callback: connect gatt");
+    // Log.v("DistoX", "BLE callback: connect gatt");
     // device.connectGatt( ctx, mAutoConnect, this );
     if ( Build.VERSION.SDK_INT < 23 ) {
       mGatt = device.connectGatt( ctx, mAutoConnect, this );
@@ -230,7 +230,7 @@ public class BleCallback extends BluetoothGattCallback
   // FROM SapCallback
   public void disconnectCloseGatt( )
   { 
-    // Log.v("DistoX-BLE", "BLE callback: close GATT");
+    // Log.v("DistoX", "BLE callback: close GATT");
     // mWriteInitialized = false; 
     // mReadInitialized  = false; 
     if ( mGatt != null ) {
@@ -242,11 +242,11 @@ public class BleCallback extends BluetoothGattCallback
 
   public void disconnectGatt()
   {
-    // Log.v("DistoX-BLE", "SAP callback: disconnect GATT");
+    // Log.v("DistoX", "BLE callback: disconnect GATT");
     // mWriteInitialized = false; 
     // mReadInitialized  = false; 
     if ( mGatt != null ) {
-      // Log.v("DistoX-BLE", "SAP callback: disconnect gatt");
+      // Log.v("DistoX", "BLE callback: disconnect gatt");
       mGatt.disconnect();
       // FIXME mGapp.close();
       mGatt = null;
@@ -269,14 +269,14 @@ public class BleCallback extends BluetoothGattCallback
       TDLog.Error("BLE callback: failed descr set value" );
       return false;
     }
-    // Log.v("DistoX-BLE", "BLE callback: set notification: " + chrt.getUuid().toString() );
+    Log.v("DistoX", "BLE callback: set notification: " + chrt.getUuid().toString() + " " + value );
     return mGatt.writeDescriptor( desc );
   }
 
   /*
   boolean enableNotify( UUID srvUuid, UUID chrtUuid )
   {
-    Log.v("DistoX-BLE", "BLE callback enable notify " + chrtUuid.toString() );
+    Log.v("DistoX", "BLE callback enable notify " + chrtUuid.toString() );
     BluetoothGattCharacteristic chrt = getNotifyChrt( srvUuid, chrtUuid );
     return ( chrt != null ) && enableNotify( chrt );
   }
@@ -286,7 +286,7 @@ public class BleCallback extends BluetoothGattCallback
   {
     BluetoothGattService srv = mGatt.getService( srvUuid );
     if ( srv  == null ) {
-      // Log.v("DistoX-BLE", "BLE callback enablePNotify null service " + srvUuid );
+      TDLog.Error("BLE callback enablePNotify null service " + srvUuid );
       return false;
     }
     return enablePNotify( srvUuid, srv.getCharacteristic( chrtUuid ) );
@@ -294,7 +294,7 @@ public class BleCallback extends BluetoothGattCallback
 
   public boolean enablePNotify( UUID srvUuid, BluetoothGattCharacteristic chrt )
   {
-    // Log.v("DistoX-BLE", "BLE callback enable P notify " + srvUuid + " " + chrt.getUuid() );
+    // Log.v("DistoX", "BLE callback enable P notify " + srvUuid + " " + chrt.getUuid() );
     if ( chrt == null ) {
       TDLog.Error("BLE callback: enable notify null chrt");
       return false;
@@ -313,10 +313,36 @@ public class BleCallback extends BluetoothGattCallback
   //   return setNotification( chrt, BluetoothGattDescriptor.DISABLE_NOTIFICATION_VALUE );
   // }
 
+  public boolean enablePIndicate( UUID srvUuid, UUID chrtUuid ) 
+  {
+    BluetoothGattService srv = mGatt.getService( srvUuid );
+    if ( srv  == null ) {
+      TDLog.Error("BLE callback enablePIndicate null service " + srvUuid );
+      return false;
+    }
+    return enablePIndicate( srvUuid, srv.getCharacteristic( chrtUuid ) );
+  }
+
+  public boolean enablePIndicate( UUID srvUuid, BluetoothGattCharacteristic chrt )
+  {
+    // Log.v("DistoX", "BLE callback enable P notify " + srvUuid + " " + chrt.getUuid() );
+    if ( chrt == null ) {
+      TDLog.Error("BLE callback: enable indicate null chrt");
+      return false;
+    }
+    byte[] enable = BleUtils.getChrtPIndicate( chrt );
+    if ( enable == null ) {
+      TDLog.Error("BLE callback: enable indicate null enable");
+      return false;
+    }
+    return setNotification( chrt, enable );
+  }
+
   // ----------------------------------------------------------------
 
   public boolean readChrt( UUID srvUuid, UUID chrtUuid )
   {
+    Log.v("DistoX", "BLE callback: read chrt");
     BluetoothGattCharacteristic chrt = getReadChrt( srvUuid, chrtUuid );
     return chrt != null && mGatt.readCharacteristic( chrt );
   }
@@ -325,12 +351,12 @@ public class BleCallback extends BluetoothGattCallback
   {
     BluetoothGattCharacteristic chrt = getWriteChrt( srvUuid, chrtUuid );
     if ( chrt == null ) {
-      // Log.v("DistoX-BLE", "BLE callback writeChrt null chrt ");
+      // Log.v("DistoX", "BLE callback writeChrt null chrt ");
       return false;
     }
     int write_type = BleUtils.getChrtWriteType( chrt );
     if ( write_type < 0 ) {
-      // Log.v("DistoX-BLE", "BLE callback writeChrt neg type " + write_type );
+      // Log.v("DistoX", "BLE callback writeChrt neg type " + write_type );
       return false;
     }
     chrt.setWriteType( write_type );
@@ -385,30 +411,41 @@ public class BleCallback extends BluetoothGattCallback
     return chrt;
   }
 
-  private BluetoothGattCharacteristic getReadChrt( UUID srvUuid, UUID chrtUuid )
+  public BluetoothGattCharacteristic getReadChrt( UUID srvUuid, UUID chrtUuid )
+  {
+    if ( mGatt == null ) {
+      Log.v("DistoX", "BLE callback: null gatt");
+      return null;
+    }
+    BluetoothGattService srv = mGatt.getService( srvUuid );
+    if ( srv  == null ) {
+      Log.v("DistoX", "BLE callback: null service");
+      return null;
+    }
+    BluetoothGattCharacteristic chrt = srv.getCharacteristic( chrtUuid );
+    if ( chrt == null ) {
+      Log.v("DistoX", "BLE callback: null read chrt");
+      return null;
+    }
+    if ( ! BleUtils.canChrtPRead( chrt ) ) {
+      Log.v("DistoX", "BLE callback: chrt without read property");
+      return null;
+    }
+    return chrt;
+  }
+
+  public BluetoothGattCharacteristic getWriteChrt( UUID srvUuid, UUID chrtUuid )
   {
     if ( mGatt == null ) return null;
     BluetoothGattService srv = mGatt.getService( srvUuid );
     if ( srv  == null ) return null;
     BluetoothGattCharacteristic chrt = srv.getCharacteristic( chrtUuid );
-    if ( chrt == null || ! BleUtils.canChrtPRead( chrt ) ) return null;
-    return chrt;
-  }
-
-  private BluetoothGattCharacteristic getWriteChrt( UUID srvUuid, UUID chrtUuid )
-  {
-    if ( mGatt == null ) {
-      return null;
-    }
-    BluetoothGattService srv = mGatt.getService( srvUuid );
-    if ( srv  == null ) {
-      return null;
-    }
-    BluetoothGattCharacteristic chrt = srv.getCharacteristic( chrtUuid );
     if ( chrt == null ) {
+      Log.v("DistoX", "BLE callback: null write chrt");
       return null;
     }
     if ( ! BleUtils.canChrtPWrite( chrt ) ) {
+      Log.v("DistoX", "BLE callback: chrt without write property");
       return null;
     }
     return chrt;

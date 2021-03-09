@@ -44,16 +44,17 @@ public interface BleComm
   boolean writeChrt( UUID srv_uuid, UUID chrt_uuid, byte[] bytes );
 
   // boolean enablePNotify( UUID srcUuid, BluetoothGattCharacteristic chrt );
+  boolean enablePIndicate( UUID src_uuid, UUID chrt_uuid );
   boolean enablePNotify( UUID src_uuid, UUID chrt_uuid );
 
   void connectGatt( Context ctx, BluetoothDevice device );
   void disconnectGatt();
 
   // recoverable error
-  void error( int status );
+  void error( int status, String extra );
 
   // unrecoverable error
-  void failure( int status );
+  void failure( int status, String extra );
 
   // void addService( BluetoothGattService srv );
   // void addChrt( UUID srv_uuid, BluetoothGattCharacteristic chrt );

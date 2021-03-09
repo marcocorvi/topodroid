@@ -93,6 +93,13 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="failed_snap_to_splays">No close splay to snap the line to</string>
     <string name="failed_append_to_line">Failed to attach to another line</string>
 
+    <string name="bric_device">Device %1$s</string>
+    <string name="bric_ble">BLE %1$s</string>
+    <string name="bric_fw">Firmware %1$s</string>
+    <string name="bric_hw">Hardware %1$s</string>
+    <string name="bric_battery">Battery %1$d</string>
+    <string name="bric_battery_wait">Battery &#8230;</string>
+
     <string name="calibration_title">Instruments calibration</string>
     <string name="calibration_length">Tape</string>
     <string name="calibration_azimuth">Compass</string>

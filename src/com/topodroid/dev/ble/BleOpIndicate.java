@@ -1,9 +1,9 @@
-/* @file BleOpNotify.java
+/* @file BleOpIndicate.java
  *
  * @author marco corvi
  * @date jan 2021
  *
- * @brief Bluetooth LE notify operation 
+ * @brief Bluetooth LE indicate operation 
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -22,14 +22,14 @@ import android.util.Log;
 
 import java.util.UUID;
 
-public class BleOpNotify extends BleOperation 
+public class BleOpIndicate extends BleOperation 
 {
   boolean mEnable;
   UUID mSrvUuid;
   UUID mChrtUuid;
   // BluetoothGattCharacteristic mChrt = null;
 
-  // BleOpNotify( Context ctx, BleComm pipe, UUID srvUuid, BluetoothGattCharacteristic chrt, boolean enable )
+  // BleOpIndicate( Context ctx, BleComm pipe, UUID srvUuid, BluetoothGattCharacteristic chrt, boolean enable )
   // {
   //   super( ctx, pipe );
   //   mSrvUuid  = srvUuid;
@@ -38,7 +38,7 @@ public class BleOpNotify extends BleOperation
   //   mEnable   = enable;
   // }
 
-  public BleOpNotify( Context ctx, BleComm pipe, UUID srvUuid, UUID chrtUuid, boolean enable )
+  public BleOpIndicate( Context ctx, BleComm pipe, UUID srvUuid, UUID chrtUuid, boolean enable )
   {
     super( ctx, pipe );
     mSrvUuid  = srvUuid;
@@ -52,13 +52,13 @@ public class BleOpNotify extends BleOperation
   @Override 
   public void execute()
   {
-    Log.v("DistoX", "BleOp exec notify " + mEnable + " " + mChrtUuid.toString() );
+    Log.v("DistoX", "BleOp exec indicate " + mEnable + " " + mChrtUuid.toString() );
     if ( mPipe == null ) { 
       TDLog.Error("BleOp notify error: null pipe " + mChrtUuid.toString() );
       return;
     }
     if ( mEnable ) {
-      mPipe.enablePNotify( mSrvUuid, mChrtUuid );
+      mPipe.enablePIndicate( mSrvUuid, mChrtUuid );
     } else {
       // mPipe.disablePNotify( mSrvUuid, mChrtUuid );
     }

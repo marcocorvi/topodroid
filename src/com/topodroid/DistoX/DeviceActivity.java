@@ -39,6 +39,8 @@ import com.topodroid.dev.distox1.DeviceA3InfoDialog;
 import com.topodroid.dev.distox1.InfoReadA3Task;
 import com.topodroid.dev.distox1.DeviceA3Details;
 // import com.topodroid.dev.ble.BleScanDialog;
+import com.topodroid.dev.bric.BricInfoDialog;
+import com.topodroid.dev.bric.InfoReadBricTask;
 import com.topodroid.calib.CalibCoeffDialog;
 import com.topodroid.calib.CalibImportDialog;
 import com.topodroid.calib.CalibListDialog;
@@ -106,9 +108,9 @@ public class DeviceActivity extends Activity
 
   private static final int[] izonsno = {
                         0,
+                        0,
                         R.drawable.iz_toggle_no,
                         R.drawable.iz_compute_no,
-                        0,
                         R.drawable.iz_read_no,
                         0,
                         // R.drawable.iz_remote_no
@@ -116,9 +118,9 @@ public class DeviceActivity extends Activity
 
   private static final int[] izons = {
                         R.drawable.iz_bt,
+                        R.drawable.iz_info,
                         R.drawable.iz_toggle,
                         R.drawable.iz_compute,
-                        R.drawable.iz_info,
                         R.drawable.iz_read,
                         R.drawable.iz_sdcard,
 			R.drawable.iz_empty
@@ -131,9 +133,10 @@ public class DeviceActivity extends Activity
   private BitmapDrawable mBMread;
   private BitmapDrawable mBMread_no;
 
-  static final private int IDX_TOGGLE = 1;
-  static final private int IDX_CALIB  = 2;
-  // static final private int IDX_INFO   = 3;
+  // static final private int IDX_BT     = 0;
+  static final private int IDX_INFO   = 1;
+  static final private int IDX_TOGGLE = 2;
+  static final private int IDX_CALIB  = 3;
   static final private int IDX_READ   = 4;
   // static final private int IDX_MEMORY = 5;
 
@@ -151,9 +154,9 @@ public class DeviceActivity extends Activity
 
   private static final int[] help_icons = {
                         R.string.help_bluetooth,
+                        R.string.help_info_device,
                         R.string.help_toggle,
                         R.string.title_calib,
-                        R.string.help_info_device,
                         R.string.help_read,
                         R.string.help_sdcard
                         // R.string.help_remote
@@ -290,8 +293,8 @@ public class DeviceActivity extends Activity
     /* int size = */ TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
     Resources res = getResources();
-    mNrButton1 = 3;
-    if ( TDLevel.overNormal ) mNrButton1 += 2; // CALIB-READ INFO
+    mNrButton1 = 4;
+    if ( TDLevel.overNormal )   mNrButton1 += 1; // CALIB-READ
     if ( TDLevel.overAdvanced ) mNrButton1 += 1; // MEMORY
     mButton1 = new Button[ mNrButton1 + 1 ];
 
@@ -518,11 +521,11 @@ public class DeviceActivity extends Activity
   {
     if ( TDInstance.isDeviceDistoX() ) {
       for ( int k=1; k<mNrButton1; ++k ) mButton1[k].setVisibility( View.VISIBLE );
+    } else if ( TDInstance.isDeviceBric() ) {
+      mButton1[IDX_INFO].setVisibility( View.VISIBLE );
+      for ( int k=2; k<mNrButton1; ++k ) mButton1[k].setVisibility( View.GONE );
     } else {
       for ( int k=1; k<mNrButton1; ++k ) mButton1[k].setVisibility( View.GONE );
-      // if ( TDInstance.isDeviceSap() ) {
-      //   TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.sap_warning );
-      // }
     }
   }
 
@@ -562,6 +565,25 @@ public class DeviceActivity extends Activity
       mApp.resetComm();
       setState();
       TDToast.make( R.string.bt_reset );
+    } else if ( k < mNrButton1 && b == mButton1[k++] ) {    // INFO TDLevel.overNormal
+      if ( mCurrDevice == null ) {
+        TDToast.makeBad( R.string.no_device_address );
+      } else {
+        // setTitleColor( TDColor.CONNECTED ); // USELESS
+        if ( mCurrDevice.mType == Device.DISTO_A3 ) {
+          new DeviceA3InfoDialog( this, this, mCurrDevice ).show();
+        } else if ( mCurrDevice.mType == Device.DISTO_X310 ) {
+          new DeviceX310InfoDialog( this, this, mCurrDevice ).show();
+        } else if ( mCurrDevice.mType == Device.DISTO_BRIC4 ) {
+          BricInfoDialog info = new BricInfoDialog( this, getResources(), mCurrDevice );
+          info.show();
+          (new InfoReadBricTask( mApp, info )).execute();
+        } else {
+          TDLog.Error( "Unknown device type " + mCurrDevice.mType );
+        }
+        // setTitleColor( TDColor.TITLE_NORMAL );
+      }
+
     } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // CALIBRATION MODE TOGGLE
       if ( mCurrDevice == null ) { 
         TDToast.makeBad( R.string.no_device_address );
@@ -575,22 +597,6 @@ public class DeviceActivity extends Activity
       } else {
         (new CalibListDialog( this, this /*, mApp */ )).show();
       }
-
-    } else if ( k < mNrButton1 && b == mButton1[k++] ) {    // INFO TDLevel.overNormal
-      if ( mCurrDevice == null ) {
-        TDToast.makeBad( R.string.no_device_address );
-      } else {
-        // setTitleColor( TDColor.CONNECTED ); // USELESS
-        if ( mCurrDevice.mType == Device.DISTO_A3 ) {
-          new DeviceA3InfoDialog( this, this, mCurrDevice ).show();
-        } else if ( mCurrDevice.mType == Device.DISTO_X310 ) {
-          new DeviceX310InfoDialog( this, this, mCurrDevice ).show();
-        } else {
-          TDLog.Error( "Unknown DistoX type " + mCurrDevice.mType );
-        }
-        // setTitleColor( TDColor.TITLE_NORMAL );
-      }
-
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {   // CALIB_READ TDLevel.overNormal
       if ( mCurrDevice == null ) { 
         TDToast.makeBad( R.string.no_device_address );
@@ -608,7 +614,7 @@ public class DeviceActivity extends Activity
         } else if ( mCurrDevice.mType == Device.DISTO_X310 ) {
           new DeviceX310MemoryDialog( this, this ).show();
         } else {
-          TDToast.makeBad( "Unknown DistoX type " + mCurrDevice.mType );
+          TDToast.makeBad( "Unknown device type " + mCurrDevice.mType );
         }
       }
 

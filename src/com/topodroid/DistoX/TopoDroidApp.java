@@ -25,6 +25,7 @@ import com.topodroid.packetX.MemoryOctet;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.ConnectionState;
 import com.topodroid.dev.TopoDroidComm;
+import com.topodroid.dev.DataType;
 import com.topodroid.dev.distox1.DistoXA3Comm;
 import com.topodroid.dev.distox1.DeviceA3Info;
 import com.topodroid.dev.distox2.DistoX310Comm;
@@ -32,6 +33,7 @@ import com.topodroid.dev.distox2.DeviceX310Info;
 import com.topodroid.dev.distox2.DeviceX310Details;
 import com.topodroid.dev.sap.SapComm;
 import com.topodroid.dev.bric.BricComm;
+import com.topodroid.dev.bric.BricInfoDialog;
 import com.topodroid.dev.PairingRequest;
 import com.topodroid.common.LegType;
 import com.topodroid.common.ExtendType;
@@ -1875,6 +1877,19 @@ public class TopoDroidApp extends Application
     if ( mComm != null && mComm instanceof BricComm ) {
       // Log.v("DistoX-BLE", "App: send bric command " + cmd );
       return mComm.sendCommand( cmd );
+    }
+    return false;
+  }
+
+  public boolean getBricInfo( BricInfoDialog info )
+  {
+    if ( mComm != null && mComm instanceof BricComm ) {
+      BricComm comm = (BricComm)mComm;
+      connectDevice( TDInstance.deviceAddress(), DataType.DATA_ALL );
+      TDUtil.yieldDown(4000);
+      comm.registerInfo( info );
+      info.getInfo( comm );
+      // disconnectComm();
     }
     return false;
   }
