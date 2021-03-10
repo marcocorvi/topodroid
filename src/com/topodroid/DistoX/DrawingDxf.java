@@ -554,7 +554,7 @@ class DrawingDxf
         writeString( out, 9, "$FILLMODE" );    writeInt( out, 70, 1 ); // 
         writeString( out, 9, "$QTEXTMODE" );   writeInt( out, 70, 0 ); // 
         writeString( out, 9, "$REGENMODE" );   writeInt( out, 70, 1 ); // 
-        writeString( out, 9, "$MIRRMODE" );    writeInt( out, 70, 0 ); // not handled by DraftSight
+        //writeString( out, 9, "$MIRRMODE" );    writeInt( out, 70, 0 ); // not handled by DraftSight, not handled by AutoCAD
         writeString( out, 9, "$UNITMODE" );    writeInt( out, 70, 0 ); // 
 
         writeString( out, 9, "$TEXTSIZE" );    writeInt( out, 40, 5 ); // default text size
@@ -787,7 +787,7 @@ class DrawingDxf
           int flag = 0;
           int color = 1;
           // if ( ! mVersion13 ) { handle = 40; }
-          // handle = inc(handle); printLayer( pw2, handle, "0",       flag, 0, lt_continuous ); // LAYER "0" .. FIXME DraftSight
+          handle = inc(handle); printLayer( pw2, handle, "0",       flag, 0, lt_continuous ); // LAYER "0" .. FIXME DraftSight ..must be AutoCAD
           handle = inc(handle); printLayer( pw2, handle, "LEG",     flag, color, lt_continuous ); ++color; // red
           handle = inc(handle); printLayer( pw2, handle, "SPLAY",   flag, color, lt_continuous ); ++color; // yellow
           handle = inc(handle); printLayer( pw2, handle, "STATION", flag, color, lt_continuous ); ++color; // green
@@ -916,6 +916,7 @@ class DrawingDxf
           handle = inc(handle);
           writeBeginTable( out, "BLOCK_RECORD", handle, BrushManager.getPointLibSize() );
           {
+	    //writeString( out, 2, "*Model_Space" ); //missing AutoCAD record...not work
             for ( int n = 0; n < BrushManager.getPointLibSize(); ++ n ) {
               String th_name = BrushManager.getPointThName(n).replace(':','-');
               writeString( out, 0, "BLOCK_RECORD" );
