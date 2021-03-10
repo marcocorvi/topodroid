@@ -93,12 +93,12 @@ Tap <b>Bezár</b> nem változtat.
     <string name="failed_snap_to_splays">Nincs közeli segédpont, amihez a vonal illeszthető</string>
     <string name="failed_append_to_line">Nem sikerült másik vonalhoz kapcsolni</string>
 
-    <!-- TODO string name="bric_device">Device %1$s</string -->
-    <!-- TODO string name="bric_ble">BLE %1$s</string -->
-    <!-- TODO string name="bric_fw">Firmware %1$s</string -->
-    <!-- TODO string name="bric_hw">Hardware %1$s</string -->
-    <!-- TODO string name="bric_battery">Battery %1$d</string -->
-    <!-- TODO string name="bric_battery_wait">Battery &#8230;</string -->
+    <string name="bric_device">Eszköz %1$s</string>
+    <string name="bric_ble">BLE %1$s</string>
+    <string name="bric_fw">Firmware %1$s</string>
+    <string name="bric_hw">Hardware %1$s</string>
+    <string name="bric_battery">Akku %1$d</string>
+    <string name="bric_battery_wait">Akku &#8230;</string>
 
     <string name="calibration_title">Eszközök kalibrálása</string>
     <string name="calibration_length">Mérőszalag</string>
