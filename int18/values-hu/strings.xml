@@ -834,14 +834,14 @@ Tap <b>Bezár</b> nem változtat.
     <string name="help_current_station">Elmentett mérési pontok</string>
     <string name="help_azimuth">Hivatkozás bővítése</string>
     <string name="help_refresh">Képernyő frissítés</string>
-    <string name="help_device">Eszköz aktivitás bevitele </string>
+    <string name="help_device">Műszer funkciók</string>
     <string name="help_add_topodroid">Új felmérés/kalibráció létrehozása</string>
     <string name="help_import">ZIP archívum, vagy felmérés importálása</string>
     <string name="help_symbol">Rajzeszközök engedélyezése/tiltása</string>
     <string name="help_therion">Barlang projekt szervező</string>
 	    <string name="help_cave3d">Cave3D, 3D nézet</string>
     <!-- UNUSED string name="help_database">Database viewer app (SQliteViewer)</string -->
-    <string name="help_prefs">Preferenciák szerkesztése</string>
+    <string name="help_prefs">Program beállítások szerkesztése</string>
     <string name="help_log">Naplózási beállítások</string>
     <!-- UNUSED string name="help_join_survey">Együttes felmérés</string -->
     <string name="help_info_topodroid">TopoDroid információk</string>
@@ -850,9 +850,9 @@ Tap <b>Bezár</b> nem változtat.
     <string name="help_display">Képernyő mód választása</string>
     <string name="help_display_calib">Törölt mérések láthatóak/nem </string>
     <string name="help_validate">Kalibráció érvényesítése</string>
-    <string name="help_overview">Aktivitás áttekintése</string>
+    <string name="help_overview">Funkciók áttekintése</string>
     <string name="help_packets">DistoX csomag párbeszédpanel</string>
-    <string name="help_plot">Vázlat aktivitás megtekintése</string>
+    <string name="help_plot">Vázlat funkciók megtekintése</string>
     <string name="help_note">Felmérési jegyzetek szerkesztése</string>
     <string name="help_bluetooth">Bluetooth kapcsolat újraindítása</string>
     <string name="help_remote">DistoX távirányítása</string>
@@ -917,7 +917,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="help_toggle">Váltás a DistoX kalibrációs és normál módja között</string>
     <string name="help_sdcard">DistoX memória funkciók</string>
     <string name="help_read">DistoX kalibrációs együtthatójának kiolvasása és megjelenítése</string>
-    <string name="help_info_device">Eszköz információ</string>
+    <string name="help_info_device">Műszer információ</string>
     <string name="help_scan">Újabb DistoX-ek keresése</string>
     <string name="help_scan_ble">BTLE eszköz keresése</string>
     <string name="help_pair">Párosítás a kiválasztott DistoX-el</string>
