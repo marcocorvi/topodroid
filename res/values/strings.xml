@@ -835,7 +835,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_azimuth">"Extend" reference</string>
     <string name="help_refresh">Refresh display</string>
     <string name="help_device">Device activity</string>
-    <string name="help_add_topodroid">New survey/calibration</string>
+    <string name="help_add_topodroid">New survey</string>
     <string name="help_import">Import zip archive or survey file</string>
     <string name="help_symbol">Drawing tools sets</string>
     <string name="help_therion">Cave project manager</string>

@@ -11,6 +11,8 @@
  */
 package com.topodroid.dev.ble;
 
+import com.topodroid.utils.TDLog;
+
 import android.bluetooth.BluetoothDevice;
 // import android.bluetooth.BluetoothProfile;
 // import android.bluetooth.BluetoothGatt;
@@ -108,6 +110,12 @@ public class BleUtils
   public static boolean isChrtPWriteSign( int prop )   { return (prop & BluetoothGattCharacteristic.PROPERTY_SIGNED_WRITE) != 0; }
   public static boolean isChrtPWriteNoResp( int prop ) { return (prop & BluetoothGattCharacteristic.PROPERTY_WRITE_NO_RESPONSE) != 0; }
 
+  public static boolean canChrtPIndicate( BluetoothGattCharacteristic chrt )
+  { 
+    int prop = chrt.getProperties();
+    return isChrtPIndicate( prop );
+  }
+
   public static boolean canChrtPNotify( BluetoothGattCharacteristic chrt )
   { 
     int prop = chrt.getProperties();
@@ -126,7 +134,7 @@ public class BleUtils
   {
     int prop = chrt.getProperties();
     if ( isChrtPIndicate( prop ) ) return BluetoothGattDescriptor.ENABLE_INDICATION_VALUE;
-    Log.v("DistoX", "char is not INDICATE " + chrt.getUuid().toString() );
+    TDLog.Error("char is not INDICATE " + chrt.getUuid().toString() );
     return null;
   }
 

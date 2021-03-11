@@ -1612,6 +1612,7 @@ public class TDPrefKey
     "DISTOX_WAIT_LASER",           // msec wait after command "laser ON"
     "DISTOX_WAIT_SHOT",       // 11 // msec wait after command "take shot"
     "DISTOX_FIRMWARE_SANITY",       // enforce firmware sanity checks
+    "DISTOX_BRIC_MODE",
     null
   };
 
@@ -1623,6 +1624,7 @@ public class TDPrefKey
     R.string.pref_wait_laser_title,
     R.string.pref_wait_shot_title,
     R.string.pref_firmware_sanity_title,
+    R.string.pref_bric_mode_title,
     -1
   };
 
@@ -1634,6 +1636,7 @@ public class TDPrefKey
     R.string.pref_wait_laser_summary,
     R.string.pref_wait_shot_summary,
     R.string.pref_firmware_sanity_summary,
+    R.string.pref_bric_mode_title,
     -1
   };
 
@@ -1645,6 +1648,7 @@ public class TDPrefKey
     "1000",
     "2000",
     TRUE,
+    TDString.THREE,
     null
   };
 

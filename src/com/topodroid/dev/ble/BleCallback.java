@@ -64,8 +64,10 @@ public class BleCallback extends BluetoothGattCallback
       String uuid_str = chrt.getUuid().toString();
       mComm.readedChrt( uuid_str, chrt.getValue() );
     } else if ( status == BluetoothGatt.GATT_READ_NOT_PERMITTED ) {
+      TDLog.Error("BLE callback on char read NOT PERMITTED - perms " + BleUtils.isChrtRead( chrt ) + " " + chrt.getPermissions() );
       mComm.error( status, chrt.getUuid().toString() );
     } else {
+      TDLog.Error("BLE callback on char read generic error");
       mComm.error( status, chrt.getUuid().toString() );
     }
   }
@@ -269,7 +271,7 @@ public class BleCallback extends BluetoothGattCallback
       TDLog.Error("BLE callback: failed descr set value" );
       return false;
     }
-    Log.v("DistoX", "BLE callback: set notification: " + chrt.getUuid().toString() + " " + value );
+    // Log.v("DistoX", "BLE callback: set notification: " + chrt.getUuid().toString() + " " + value );
     return mGatt.writeDescriptor( desc );
   }
 
@@ -299,6 +301,7 @@ public class BleCallback extends BluetoothGattCallback
       TDLog.Error("BLE callback: enable notify null chrt");
       return false;
     }
+    // Log.v("DistoX", "BLE callback: notify chrt " + chrt.getUuid().toString() + " notifyable " + BleUtils.canChrtPNotify( chrt ) );
     byte[] enable = BleUtils.getChrtPNotify( chrt );
     if ( enable == null ) {
       TDLog.Error("BLE callback: enable notify null enable");
@@ -330,6 +333,7 @@ public class BleCallback extends BluetoothGattCallback
       TDLog.Error("BLE callback: enable indicate null chrt");
       return false;
     }
+    // Log.v("DistoX", "BLE callback: indicate chrt " + chrt.getUuid().toString() + " indicatable " + BleUtils.canChrtPIndicate( chrt ) );
     byte[] enable = BleUtils.getChrtPIndicate( chrt );
     if ( enable == null ) {
       TDLog.Error("BLE callback: enable indicate null enable");
@@ -342,8 +346,8 @@ public class BleCallback extends BluetoothGattCallback
 
   public boolean readChrt( UUID srvUuid, UUID chrtUuid )
   {
-    Log.v("DistoX", "BLE callback: read chrt");
     BluetoothGattCharacteristic chrt = getReadChrt( srvUuid, chrtUuid );
+    // Log.v("DistoX", "BLE callback: read chrt " + chrtUuid.toString() + " readable " + BleUtils.canChrtPRead( chrt ) );
     return chrt != null && mGatt.readCharacteristic( chrt );
   }
 
@@ -414,21 +418,21 @@ public class BleCallback extends BluetoothGattCallback
   public BluetoothGattCharacteristic getReadChrt( UUID srvUuid, UUID chrtUuid )
   {
     if ( mGatt == null ) {
-      Log.v("DistoX", "BLE callback: null gatt");
+      // Log.v("DistoX", "BLE callback: null gatt");
       return null;
     }
     BluetoothGattService srv = mGatt.getService( srvUuid );
     if ( srv  == null ) {
-      Log.v("DistoX", "BLE callback: null service");
+      // Log.v("DistoX", "BLE callback: null service");
       return null;
     }
     BluetoothGattCharacteristic chrt = srv.getCharacteristic( chrtUuid );
     if ( chrt == null ) {
-      Log.v("DistoX", "BLE callback: null read chrt");
+      // Log.v("DistoX", "BLE callback: null read chrt");
       return null;
     }
     if ( ! BleUtils.canChrtPRead( chrt ) ) {
-      Log.v("DistoX", "BLE callback: chrt without read property");
+      TDLog.Error("BLE callback: chrt " + chrtUuid.toString() + " without read property");
       return null;
     }
     return chrt;
@@ -441,11 +445,11 @@ public class BleCallback extends BluetoothGattCallback
     if ( srv  == null ) return null;
     BluetoothGattCharacteristic chrt = srv.getCharacteristic( chrtUuid );
     if ( chrt == null ) {
-      Log.v("DistoX", "BLE callback: null write chrt");
+      // Log.v("DistoX", "BLE callback: null write chrt");
       return null;
     }
     if ( ! BleUtils.canChrtPWrite( chrt ) ) {
-      Log.v("DistoX", "BLE callback: chrt without write property");
+      TDLog.Error("BLE callback: chrt " + chrtUuid.toString() + " without write property");
       return null;
     }
     return chrt;

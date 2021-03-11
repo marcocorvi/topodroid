@@ -52,7 +52,7 @@ public class BleOpIndicate extends BleOperation
   @Override 
   public void execute()
   {
-    Log.v("DistoX", "BleOp exec indicate " + mEnable + " " + mChrtUuid.toString() );
+    // Log.v("DistoX", "BleOp exec indicate " + mEnable + " " + mChrtUuid.toString() );
     if ( mPipe == null ) { 
       TDLog.Error("BleOp notify error: null pipe " + mChrtUuid.toString() );
       return;

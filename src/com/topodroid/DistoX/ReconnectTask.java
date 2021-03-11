@@ -23,11 +23,13 @@ class ReconnectTask extends AsyncTask< String, Integer, Integer >
   private DataDownloader mDownloader;
   private ReconnectTask  running;
   private int mDataType; // data type, passed to data_douwnloader try_connect()
+  private int mDelay = 0;
 
-  ReconnectTask( DataDownloader downloader, int data_type )
+  ReconnectTask( DataDownloader downloader, int data_type, int delay )
   {
     mDownloader = downloader;
     mDataType = data_type;
+    mDelay = delay;
     running = null;
   }
 
@@ -39,7 +41,7 @@ class ReconnectTask extends AsyncTask< String, Integer, Integer >
     if ( TDSetting.mAutoReconnect && TDInstance.isContinuousMode() ) {
       while ( mDownloader.needReconnect() ) {
         try {
-          Thread.sleep( 500 );
+          if ( mDelay > 0 ) Thread.sleep( mDelay );
           // Log.v("DistoX", "notify disconnected: try reconnect status " + mDownloader.isDownloading() );
           mDownloader.tryConnect( mDataType ); 
         } catch ( InterruptedException e ) { }
@@ -59,7 +61,7 @@ class ReconnectTask extends AsyncTask< String, Integer, Integer >
   protected void onPostExecute( Integer res )
   {
     // mDownloader.notifyConnectionStatus( mDownloader.isConnected()? ConnectionState.CONN_CONNECTED : ConnectionState.CONN_WAITING );
-    Log.v("DistoX-BLE", "Reconnect Task done");
+    Log.v("DistoX", "Reconnect Task done with delay " + mDelay );
     unlock();
   }
 
