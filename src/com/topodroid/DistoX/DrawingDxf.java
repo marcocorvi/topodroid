@@ -405,7 +405,8 @@ class DrawingDxf
     }
     if ( closed ) np++;
 
-    int ncp = 4 * np - 4; // np + 3 * (np-1) - 1; // 4 * NP - 4
+    //int ncp = 4 * np - 4; // np + 3 * (np-1) - 1; // 4 * NP - 4
+    int ncp = 3 * np - 2; // control points: 1 + 3 * (NP - 1) = 3 NP - 2 //for (p=...
     int nk  = 3 * np + 2; // ncp + 4 - (np - 2);  // 3 * NP + 2
     printInt( pw, 70, 1064 ); // flags 1064 = 1024 + 32 + 8
     printInt( pw, 71, 3 );    // degree of the spline
