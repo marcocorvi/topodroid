@@ -375,7 +375,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="menu_switch">ÁTKAPCSOL/</string>
     <string name="menu_help">SÚGÓ</string>
     <!-- UNUSED string name="menu_join_survey">EGYÜTTES FELMÉRÉS</string -->
-    <string name="menu_logs">EMLÉKEZTETŐK</string>
+    <string name="menu_logs">NAPLÓK</string>
     <string name="menu_manual_calibration">KALIBRÁCIÓ</string>
     <string name="menu_options">BEÁLLÍTÁSOK</string>
     <string name="menu_overview">ÁTTEKINTŐ</string>
