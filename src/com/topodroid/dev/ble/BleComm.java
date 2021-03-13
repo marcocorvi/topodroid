@@ -39,6 +39,7 @@ public interface BleComm
   void disconnected();
 
   int servicesDiscovered( BluetoothGatt gatt );
+  void subscribeServices();
 
   boolean readChrt(  UUID srv_uuid, UUID chrt_uuid );
   boolean writeChrt( UUID srv_uuid, UUID chrt_uuid, byte[] bytes );

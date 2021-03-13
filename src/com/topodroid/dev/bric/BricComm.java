@@ -307,19 +307,41 @@ public class BricComm extends TopoDroidComm
     */
 
     enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_PRIM_UUID, true ) );
+    doNextOp();
+
     if ( TDSetting.mBricMode == MODE_ALL ) {
       enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_META_UUID, true ) );
       enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_ERR_UUID, true ) );
     }
     // enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.LAST_TIME_UUID, true ) );
-    doNextOp();
+    // doNextOp();
+
 
     mBTConnected = true;
-    // Log.v("DistoX", "BRIC comm [1] status CONNECTED" );
+    Log.v("DistoX", "BRIC comm discovered services status CONNECTED" );
     notifyStatus( ConnectionState.CONN_CONNECTED ); 
 
     clearPending();
     return 0;
+  }
+
+  public void subscribeServices()
+  {
+    enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_PRIM_UUID, true ) );
+    doNextOp();
+
+    if ( TDSetting.mBricMode == MODE_ALL ) {
+      enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_META_UUID, true ) );
+      enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_ERR_UUID, true ) );
+    }
+    // enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.LAST_TIME_UUID, true ) );
+    // doNextOp();
+
+    mBTConnected = true;
+    Log.v("DistoX", "BRIC comm subscribed services" );
+    notifyStatus( ConnectionState.CONN_CONNECTED ); 
+
+    clearPending();
   }
 
 /*
@@ -601,6 +623,7 @@ public class BricComm extends TopoDroidComm
   // ----------------- SEND COMMAND -------------------------------
   public boolean sendCommand( int cmd )
   {
+    if ( ! isConnected() ) return false;
     byte[] command = null;
     switch ( cmd ) {
       case BricConst.CMD_SCAN:  command = Arrays.copyOfRange( BricConst.COMMAND_SCAN,  0,  4 ); break;

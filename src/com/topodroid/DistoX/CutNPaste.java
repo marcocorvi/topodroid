@@ -197,6 +197,7 @@ class CutNPaste
     Button textview2 = null;
     Button textview3 = null;
     Button textview4 = null;
+    Button textview5 = null;
     // Log.v("DistoX-BLE-CnP", "device type " + TDInstance.deviceType() );
 
     if ( TDInstance.deviceType() == Device.DISTO_X310 ) {
@@ -325,6 +326,19 @@ class CutNPaste
       ww = textview4.getPaint().measureText( text );
       if ( ww > w ) w = ww;
 
+      // ----- TURN OFF
+      //
+      text = res.getString(R.string.popup_do_off);
+      textview5 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+        new View.OnClickListener( ) {
+          public void onClick(View v) {
+            app.sendBricCommand( BricConst.CMD_OFF );
+            dismissPopupBT();
+          }
+        } );
+      ww = textview5.getPaint().measureText( text );
+      if ( ww > w ) w = ww;
+
 /*
       // ----- MEASURE ONE SPLAY AND DOWNLOAD IT IF MODE IS CONTINUOUS
       //
@@ -359,7 +373,10 @@ class CutNPaste
       if ( textview1 != null) textview1.setWidth( iw );
       if ( textview2 != null) textview2.setWidth( iw );
       if ( textview3 != null) textview3.setWidth( iw );
-      if ( ! gm_data ) if ( textview4 != null ) textview4.setWidth( iw );
+      if ( ! gm_data ) {
+        if ( textview4 != null ) textview4.setWidth( iw );
+        if ( textview5 != null ) textview5.setWidth( iw );
+      }
     }
 
     FontMetrics fm = textview0.getPaint().getFontMetrics();

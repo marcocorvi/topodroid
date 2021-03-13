@@ -97,7 +97,12 @@ public class BleCallback extends BluetoothGattCallback
         // (new Handler( Looper.getMainLooper() )).post( new Runnable() {
         //   public void run() { gatt.discoverServices(); }
         // } );
+
+        // if ( mGatt != null ) mGatt.close(); // FIXME_BRIC
+        // mGatt = gatt;
+        // mComm.subscribeServices();
         gatt.discoverServices();
+
       } else if ( newState == BluetoothProfile.STATE_DISCONNECTED ) {
         if ( gatt != null ) gatt.close();
         mGatt = null;

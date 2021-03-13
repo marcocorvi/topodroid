@@ -652,23 +652,25 @@ public class TopoDroidApp extends Application
 
   void doBluetoothButton( Context ctx, ILister lister, Button b )
   {
-    if ( TDInstance.isDeviceBric() ) {
-      if ( TDLevel.overExpert ) { // FIXME BRIC_TESTER
-        CutNPaste.showPopupBT( ctx, lister, this, b, false );
+    if ( TDLevel.overAdvanced ) {
+      if ( TDInstance.isDeviceBric() ) {
+        if ( mComm != null && mComm.isConnected() ) { // FIXME BRIC_TESTER
+          CutNPaste.showPopupBT( ctx, lister, this, b, false );
+          return;
+        }
+      } else if ( TDInstance.isDeviceSap() ) {
       } else {
-        doBluetoothReset( lister );
+        if ( ! mDataDownloader.isDownloading() ) {
+          if ( TDInstance.hasDeviceRemoteControl() && ! TDSetting.isConnectionModeMulti()) {
+            CutNPaste.showPopupBT( ctx, lister, this, b, false );
+            return;
+          }
+        } else { // downloading: nothing
+          return;
+        }
       }
-    } else if ( ! mDataDownloader.isDownloading() ) {
-      if ( TDLevel.overAdvanced
-             && TDInstance.hasDeviceRemoteControl()
-	     && ! TDSetting.isConnectionModeMulti()
-	  ) {
-        CutNPaste.showPopupBT( ctx, lister, this, b, false );
-      } else {
-        doBluetoothReset( lister );
-      }
-    // } else { // downloading: nothing
     }
+    doBluetoothReset( lister );
   }
 
   private void doBluetoothReset( ILister lister )
@@ -1872,13 +1874,17 @@ public class TopoDroidApp extends Application
 
   // --------------------------------------------------------
 
-  public boolean sendBricCommand( int cmd )
-  {
+  public void sendBricCommand( int cmd )
+  { 
+    // boolean ret = false;
     if ( mComm != null && mComm instanceof BricComm ) {
       // Log.v("DistoX", "App: send bric command " + cmd );
-      return mComm.sendCommand( cmd );
+      mComm.sendCommand( cmd );
+      // TDToast( R.string.bric_command_fail ); // should never happen to fail
+    // } else {
+    //   TDLog.Error("Comm is null or not BRIC");
     }
-    return false;
+    // return ret;
   }
 
   public boolean getBricInfo( BricInfoDialog info )

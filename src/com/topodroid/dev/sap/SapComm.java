@@ -478,4 +478,6 @@ public class SapComm extends TopoDroidComm
     mApp.notifyStatus( status );
   }
 
+  public void subscribeServices() { }
+
 }

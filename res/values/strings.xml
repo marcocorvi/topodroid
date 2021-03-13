@@ -764,7 +764,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="popup_do_scan">Scan</string>
     <string name="popup_do_shot">Shot</string>
     <string name="popup_do_clear">Clear</string>
-
+    <string name="popup_do_off">Off</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_export">Export</string>
