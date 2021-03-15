@@ -326,30 +326,25 @@ public class FixedActivity extends Activity
         if ( mFixedDialog != null ) {
           Bundle bundle = intent.getExtras();
           if ( bundle != null ) {
-            String cs = bundle.getString( "cs_to" );
-            // String title = String.format(Locale.US, "%.2f %.2f %.2f",
-            //    bundle.getDouble( "longitude"),
-            //    bundle.getDouble( "latitude"),
-            //    bundle.getDouble( "altitude") );
-            // TDLog.Log( TDLog.LOG_LOC, "CONV. RESULT " + title );
-            // mFixedDialog.setTitle( title );
-            // mFixedDialog.setCSto( cs );
+            String cs  = bundle.getString( "cs_to" );
             double lng = bundle.getDouble( "longitude");
             double lat = bundle.getDouble( "latitude");
             double alt = bundle.getDouble( "altitude");
 	    long   n_dec = bundle.containsKey( "decimals" )? bundle.getLong( "decimals" ) : 2;
             TopoDroidApp.mData.updateFixedCS(  mFixedDialog.getFixedId(), TDInstance.sid, cs, lng, lat, alt, n_dec );
             mFixedDialog.setConvertedCoords( cs, lng, lat, alt, n_dec );
-            mFixedDialog = null;
           }
+          mFixedDialog = null;
         }
       } else if ( reqCode == CRS_INPUT_REQUEST ) {
-        Bundle bundle = intent.getExtras();
-        if ( bundle != null ) {
-          mFixedAddDialog.setCoords(
-            bundle.getDouble( "longitude"),
-            bundle.getDouble( "latitude"),
-            bundle.getDouble( "altitude") );
+        if ( mFixedAddDialog != null ) {
+          Bundle bundle = intent.getExtras();
+          if ( bundle != null ) {
+            mFixedAddDialog.setCoords(
+              bundle.getDouble( "longitude"),
+              bundle.getDouble( "latitude"),
+              bundle.getDouble( "altitude") );
+          }
           mFixedAddDialog = null;
         }
       }
