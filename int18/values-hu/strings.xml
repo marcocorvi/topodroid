@@ -318,7 +318,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="no_audio">Nincs hang felvétel</string>
     <string name="no_bt">Nincs bluetooth</string>
     <string name="no_calib">Nincs kalibráció</string>
-    <string name="no_calib_check">Nincs kalibrációt ell. mérés</string>
+    <string name="no_calib_check">Nincs kalibrációt ellenőrző mérés</string>
     <string name="no_calibration">Nincs kalibráció kiválasztva</string>
     <string name="no_capture_app">Nincs app fénykép készítéshez</string>
     <string name="no_cave3d">Cave3D nincs telepítve</string>
