@@ -100,7 +100,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="bric_battery">Akku %1$d</string>
     <string name="bric_battery_wait">Akku &#8230;</string>
 
-    <string name="calibration_title">Eszközök kalibrálása</string>
+    <string name="calibration_title">Műszerek kalibrálása</string>
     <string name="calibration_length">Mérőszalag</string>
     <string name="calibration_azimuth">Tájoló</string>
     <string name="calibration_clino">Lejtszögmérő</string>
@@ -1145,8 +1145,8 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_therion_config_summary">Therion config file készítése</string>
   <string name="pref_therion_maps_title">Először a therion térképek</string>
   <string name="pref_therion_maps_summary">Therion térképek a felmérési adatok előtt</string>
-  <string name="pref_extra_buttons_title">Engedélyezett funkciók</string>
-  <string name="pref_extra_buttons_summary">Engedélyezett funkciók minősítése</string>
+  <string name="pref_extra_buttons_title">>Engedélyezett funkciók</string>
+  <string name="pref_extra_buttons_summary">Engedélyezett funkciók beállítása</string>
   <string name="pref_size_buttons_title">Gombok mérete</string>
   <string name="pref_size_buttons_summary">Fejléc gombok mérete</string>
   <string name="pref_with_sensors_title">Szenzorok</string>
