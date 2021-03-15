@@ -134,7 +134,8 @@ public class BricProto extends TopoDroidProtocol
   {
     if ( mPrimToDo ) {
       // Log.v("DistoX", "BRIC proto send data to the app thru comm");
-      mComm.handleRegularPacket( DataType.PACKET_DATA, mLister, DataType.DATA_SHOT );
+      // mComm.handleRegularPacket( DataType.PACKET_DATA, mLister, DataType.DATA_SHOT );
+      mComm.handleBricPacket( mIndex, mLister, DataType.DATA_SHOT );
       mPrimToDo = false;
     } else {
       Log.v("DistoX", "BRIC proto: process - PrimToDo false: ... skip");

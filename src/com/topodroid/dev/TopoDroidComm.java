@@ -68,6 +68,32 @@ public class TopoDroidComm
 
   public boolean isConnected() { return mBTConnected; }
 
+  public void handleBricPacket( long index, Handler lister, int data_type )
+  {
+    // Log.v( "DistoX", "TD comm: PACKET " + res + "/" + DataType.PACKET_DATA + " type " + data_type );
+    // Log.v("DistoX", "TD comm: packet DATA");
+    // mNrPacketsRead.incrementAndGet(); // FIXME_ATOMIC_INT
+    ++mNrPacketsRead;
+    double d = mProtocol.mDistance;
+    double b = mProtocol.mBearing;
+    double c = mProtocol.mClino;
+    double r = mProtocol.mRoll;
+    long status = ( d > TDSetting.mMaxShotLength )? TDStatus.OVERSHOOT : TDStatus.NORMAL;
+    mLastShotId = TopoDroidApp.mData.insertDistoXShot( TDInstance.sid, index, d, b, c, r, ExtendType.EXTEND_IGNORE, status, TDInstance.deviceAddress() );
+    if ( lister != null ) { // FIXME_LISTER sendMessage with mLastShotId only
+      Message msg = lister.obtainMessage( Lister.LIST_UPDATE );
+      Bundle bundle = new Bundle();
+      bundle.putLong( Lister.BLOCK_ID, mLastShotId );
+      msg.setData(bundle);
+      lister.sendMessage(msg);
+      if ( TDInstance.deviceType() == Device.DISTO_A3 && TDSetting.mWaitData > 10 ) {
+        TDUtil.slowDown( TDSetting.mWaitData );
+      }
+    } else {
+      Log.v("DistoX", "TD comm: null Lister");
+    }
+  }
+
   // @param res    packet type (as returned by handlePacket / or set by Protocol )
   // @param lister data lister
   // @param data_type unused

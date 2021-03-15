@@ -34,11 +34,13 @@ public class TDString
 
   public static String escape( String str )
   {
+    if ( str == null ) return "";
     return str.replace('"', '\u001b' );
   }
 
   public static String unescape( String str )
   {
+    if ( str == null ) return "";
     return str.replace('\u001b', '"' );
   }
 }

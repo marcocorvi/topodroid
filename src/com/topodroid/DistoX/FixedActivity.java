@@ -273,6 +273,12 @@ public class FixedActivity extends Activity
   private FixedDialog mFixedDialog = null;
   private FixedAddDialog mFixedAddDialog = null;
 
+  void clearConvertedCoords( FixedInfo fxd ) 
+  {
+    TopoDroidApp.mData.updateFixedCS( fxd.id, TDInstance.sid, null, 0, 0, 0, 2L );
+    fxd.clearConverted();
+  }
+
   void tryProj4( FixedDialog dialog, String cs_to, FixedInfo fxd )
   {
     if ( cs_to == null ) return;

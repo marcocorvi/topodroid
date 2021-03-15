@@ -52,11 +52,7 @@ class FixedInfo extends MagLatLong
     asl = h_geoid;
     comment = cmt;
     source  = src;
-    cs = null;
-    cs_lng = 0;
-    cs_lat = 0;
-    cs_alt = 0;
-    cs_n_dec = 2L;
+    clearConverted();
   }
 
   FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid,
@@ -87,6 +83,15 @@ class FixedInfo extends MagLatLong
       cs_alt = alt_cs;
       cs_n_dec = (n_dec >= 0)? n_dec : 0;
     }
+  }
+
+  void clearConverted()
+  {
+    cs = null;
+    cs_lng = 0;
+    cs_lat = 0;
+    cs_alt = 0;
+    cs_n_dec = 2L;
   }
 
   boolean hasCSCoords() { return ( cs != null && cs.length() > 0 ); }

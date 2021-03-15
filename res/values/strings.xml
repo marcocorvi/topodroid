@@ -663,6 +663,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="button_close"     >Close</string>
     <string name="button_create"    >Create</string>
     <string name="button_color"     >Color</string>
+    <string name="button_clear_convert">Clear convert</string>
     <string name="button_convert"   >Convert</string>
     <string name="button_current"   >Active</string>
     <string name="button_delete"    >Delete</string>

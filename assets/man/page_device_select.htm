@@ -34,9 +34,14 @@ It appears as "SAP XX MAC-address", where "XX" is the two-letter code of the SAP
 To select the SAP as current device tap on the its entry in the list.<br><p> 
 
 While connected, the SAP5 will transfer the reading of a shot values to the app, whether or not the shot data
-are stored or discarded on the device.<br>
-If not connected the values are not transferred to the app.<br>
-Upon reconnection the SAP5 does <u>not</u> transfer the shot data stored while not connected.<br><p>
+are stored or discarded on the device.<br><p>
+
+The SAP5 data transmission protocol does not include acknowledgment of the reception of the data. Therefore
+<ul>
+<li>if SAP5 is not connected the shot values are <u>not transferred</u> to the app.</li>
+<li>upon reconnection the SAP5 does <u>not</u> transfer the shot data stored while not connected.</li>
+</ul>
+<br><p>
 
 The SAP keeps in its internal memory the data that have been "stored".
 These can be retrieved as a Survex file, using the SAP PonyTrainer program.<br><p>
@@ -56,6 +61,14 @@ Once connected to a client, the BRIC remembers the connection, even if turned of
 When TopoDroid is connected, shot readings are immediately transferred to the app.
 If TopoDroid is not connected, the data are kept in memory, and transferred to the app when it is
 next connected.<br><p>
+
+The BRIC4 data transmission protocol includes acknowledgment by Android,
+but it does <u>not</u> include acknowledgment of the reception of the datai by the app. 
+Therefore
+<ul>
+<li>upon reconnection the BRIC4 sends all the data in a burst and it is possible that the very first data
+are acknowledged by Android, but are <u>not delivered</u> to the app.</li>
+</ul><br><p> 
 
 The BRIC stores the data in internal memory in CSV files. If connected to a PC via USB, the device
 appears as external memory and the CSV files can be copied to the PC.<br><p>

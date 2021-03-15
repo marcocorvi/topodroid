@@ -71,9 +71,10 @@ class FixedDialog extends MyDialog
   // private Button   mButtonWmm;
   private Button   mButtonSave;
 
+  private Button   mButtonClearConvert;
   private Button   mButtonConvert;
   private TextView mTVcrs;
-  private TextView mTVcs_coords;
+  private TextView mTVcs_coords; // converted coords
 
   private MyKeyboard mKeyboard;
   private boolean editable;
@@ -144,6 +145,7 @@ class FixedDialog extends MyDialog
     mButtonDecl = (CheckBox) findViewById( R.id.fix_save_decl );
     mButtonView = (Button) findViewById( R.id.fix_view );
 
+    mButtonClearConvert = (Button) findViewById( R.id.fix_clear_convert );
     mButtonConvert = (Button) findViewById( R.id.fix_convert );
     mTVcrs         = (TextView) findViewById( R.id.fix_crs );
     mTVcs_coords   = (TextView) findViewById( R.id.fix_cs_coords );
@@ -196,6 +198,7 @@ class FixedDialog extends MyDialog
     mButtonDrop.setOnClickListener( this );
     mButtonView.setOnClickListener( this );
     mButtonSave.setOnClickListener( this );
+    mButtonClearConvert.setOnClickListener( this );
     mButtonConvert.setOnClickListener( this );
     // mButtonCancel.setOnClickListener( this );
 
@@ -244,6 +247,11 @@ class FixedDialog extends MyDialog
           mParent.updateFixedData( mFxd, lng, lat, alt, asl );
         }
       }
+    } else if ( b == mButtonClearConvert ) {
+      mTVcrs.setText( "" );
+      mTVcs_coords.setText( "" );
+      mParent.clearConvertedCoords( mFxd );
+      return;
     } else if ( b == mButtonConvert ) {
       String cs_to = mFxd.hasCSCoords() ? mFxd.cs : TDSetting.mCRS;
       mParent.tryProj4( this, cs_to, mFxd );
