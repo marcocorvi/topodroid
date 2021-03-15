@@ -93,7 +93,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="failed_snap_to_splays">Nincs közeli segédpont, amihez a vonal illeszthető</string>
     <string name="failed_append_to_line">Nem sikerült másik vonalhoz kapcsolni</string>
 
-    <string name="bric_device">Eszköz %1$s</string>
+    <string name="bric_device">Műszer %1$s</string>
     <string name="bric_ble">BLE %1$s</string>
     <string name="bric_fw">Firmware %1$s</string>
     <string name="bric_hw">Hardware %1$s</string>
@@ -108,14 +108,14 @@ Tap <b>Bezár</b> nem változtat.
     <string name="calib_new">Új kalibráció</string>
     <string name="calib_exists">Kalibráció neve foglalt</string>
     <string name="calib_delete">Kalibráció törlése</string>
-    <string name="calib_device_mismatch">FIGYELEM: A kalibrációs eszköz nem egyezik</string>
+    <string name="calib_device_mismatch">FIGYELEM: A kalibrációs műszer nem egyezik</string>
     <string name="calib_no_name">Név megadása kötelező</string>
     <string name="calib_no_coeff">Kalibrációs állandók nincsenek beállítva</string>
     <!-- REMOVE string name="calib_gm_policy">Eljárás</string -->
     <string name="calib_gm_policy">Csoportosítási szabály</string>
     <string name="calib_gm_undelete">Helyreállítja a kalibrációs adatokat?</string>
     <string name="calib_saved">Mentett kalibráció</string>
-    <string name="calib_updated">Az eszköz kalibrációja frissítve</string>
+    <string name="calib_updated">A műszer kalibrációja frissítve</string>
     <string name="calib_compute_groups">Kalibrációs mérések csoportosítása &#8230;</string>
     <string name="calib_compute_coeffs">Kalibrációs együttható számítása &#8230;</string>
     <!-- UNUSED string name="calib_read_coeffs">Reading calibration coefficients &#8230;</string -->
@@ -141,10 +141,10 @@ Tap <b>Bezár</b> nem változtat.
    
     <!-- UNUSED string name="device_algo_failed">Az algoritmus automatikus kiválasztása nem sikerült\nLineáris eljárás használata</string -->
     <string name="device_address">Cím %1$s</string>
-    <!-- UNUSED string name="device_busy">Az eszköz használatban</string -->
+    <!-- UNUSED string name="device_busy">A műszer használatban</string -->
     <string name="device_illegal_addr">Helytelen memória cím</string>
-    <string name="device_info">Eszköz információ</string>
-    <!-- UNUSED string name="device_model_set">Valóban meg akarja változtatni az eszköz típusát?</string -->
+    <string name="device_info">Műszer információ</string>
+    <!-- UNUSED string name="device_model_set">Valóban meg akarja változtatni a műszer típusát?</string -->
     <string name="device_none">Nincs kiválasztva DistoX</string>
     <!-- UNUSED string name="device_paired">Device is paired</string -->
     <string name="device_reset">DistoX memóriájának újraindítása</string>
@@ -201,7 +201,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="import_calib_ok">Kalibráció importálása sikerült</string>
     <string name="import_calib_no_header">Kalibr. fájl: hibás fejléc</string>
     <string name="import_calib_already">Kalib. már létezik</string>
-    <string name="import_calib_mismatch">Kalib.-eszköz nem egyezik</string>
+    <string name="import_calib_mismatch">Kalib. műszer nem egyezik</string>
     <string name="import_calib_no_data">Kalib. fájl: nincs adat</string>
     <string name="import_calib_io_error">Kalib. fájl: olvasási hiba</string>
     <string name="import_zip_ok">Zip fájl importálása sikerült</string>
@@ -324,15 +324,15 @@ Tap <b>Bezár</b> nem változtat.
     <string name="no_cave3d">Cave3D nincs telepítve</string>
     <string name="no_data_reduction">Nincs adat redukálás</string>
     <string name="no_db">Nincs adatbázis</string>
-    <string name="no_device_address">Nincs kiválasztott eszköz</string>
-    <string name="no_device_found">Nem talált eszközt</string>
+    <string name="no_device_address">Nincs kiválasztott műszer</string>
+    <string name="no_device_found">Nem talált műszert</string>
     <string name="no_feature_audio">Hang nem támogatott</string>
     <string name="no_gms">Nincsenek kalibrációs adatok.\nTöltsd le az adatokat </string>
     <string name="no_geo_station">Hiba: nincs geolokalizált mérésipont</string>
     <string name="no_leg_first">A kiválasztás nem poligon méréssel kezdődik</string>
     <string name="no_leg_intersection">A szelvény nem keresztez poligont</string>
     <string name="no_location_data">Nincs hely adat</string>
-    <string name="no_paired_device">Nincs párosított eszköz.\nKeress és párosíts egy DistoX-et</string>
+    <string name="no_paired_device">Nincs párosított műszer.\nKeress és párosíts egy DistoX-et</string>
     <string name="no_photos">A felméréshez nincsen fotó</string>
     <string name="no_plots">A felméréshez nincsen vázlat.\nHasználd a Hozzáad gombot, hogy létrehozz egyet</string>
     <string name="no_profile_overview">Nincs áttekintő a vetített szelvényekhez</string>
@@ -403,7 +403,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="title_scan">BTLE keresés</string>
     <string name="ble_scan_failed">BTLE keresés eredménytelen</string>
     <string name="ble_gatt_failure">BTLE hiba</string>
-    <string name="ble_no_remote">Nincs távoli eszköz</string>
+    <string name="ble_no_remote">Nincs távoli műszer</string>
     <string name="ble_control">Ellenőrzés</string>
     <string name="ble_connect">Kapcsolódás</string>
     <string name="ble_disconnect">Szétkapcsolás</string>
@@ -567,7 +567,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="name">név</string>
     <string name="team">csoport</string>
     <string name="init_station">induló pont</string>
-    <string name="second_device">második eszköz</string>
+    <string name="second_device">második műszer</string>
     <string name="start_station">induló pont [%1$s]</string>
     <!-- UNUSED string name="toggle_device">Toggle device calibration mode</string -->
     <string name="toggle_failed">Nem sikerült átkapcsolni a DistoX-et</string>
@@ -645,7 +645,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="distox_err_headtail">Nem sikerült a DistoX memóriájának kiolvasása</string>
     <string name="distox_err_headtail_io">A DistoX memóriája nem elérhető (I/O hiba)</string>
     <string name="distox_err_headtail_eof">DA fájl sérült, vagy nem kompatibilis (EOF hiba)</string>
-    <string name="distox_err_connected">Az eszköz már kapcsolatban</string>
+    <string name="distox_err_connected">A műszer már kapcsolatban</string>
 
     <!-- UNUSED string name="ask_close">Close TopoDroid?</string -->
     <!-- UNUSED string name="ask_reset">Visszaállítja a DistoX memóriáját? (Reset)</string -->
@@ -801,7 +801,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="man_preface">Előszó</string>
     <string name="man_intro">1. Bevezetés</string>
     <string name="man_main">2. Fő ablak</string>
-    <string name="man_device">3. Eszköz ablak</string>
+    <string name="man_device">3. Műszer ablak</string>
     <string name="man_calib">4. Kalibrációs ablak</string>
     <string name="man_gm">5. Kalibrációs adatok</string>
     <string name="man_survey">6. Mérési adatok</string>
@@ -904,7 +904,7 @@ Tap <b>Bezár</b> nem változtat.
     <!-- UNUSED string name="help_split_line">Vonal kétfelé osztása adott pontnál</string -->
     <!-- UNUSED string name="help_kink">Egyenes vonal felvétele a pontból [vonal/terület]</string -->
 	
-    <string name="help_manual_calibration">Kézi eszközök kalibrálása</string>
+    <string name="help_manual_calibration">Kézi műszerek kalibrálása</string>
     <string name="help_note_plot">A kiválasztott vázlat-elem tulajdonságainak szerkesztése</string>
     <!-- UNUSED string name="help_save">Save changes to survey info</string -->
     <string name="help_save_calib">Változtatások mentése a kalibrációs információkhoz</string>
@@ -919,7 +919,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="help_read">DistoX kalibrációs együtthatójának kiolvasása és megjelenítése</string>
     <string name="help_info_device">Műszer információ</string>
     <string name="help_scan">Újabb DistoX-ek keresése</string>
-    <string name="help_scan_ble">BTLE eszköz keresése</string>
+    <string name="help_scan_ble">BTLE műszer keresése</string>
     <string name="help_pair">Párosítás a kiválasztott DistoX-el</string>
     <string name="help_open_calib">Kalibráció megnyitása</string>
     <string name="help_export_calib">Kalibráció exportálása</string>
@@ -997,7 +997,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="title_dangling">Csatolatlan mérés</string>
     <string name="title_device">DistoX-ek</string>
     <string name="title_device_select">Válaszd ki a DistoX-et</string>
-    <string name="title_discover">DistoX eszközök keresése &#8230; várj!</string>
+    <string name="title_discover">DistoX műszerek keresése &#8230; várj!</string>
     <!-- UNUSED string name="title_draw">Rajzolás</string -->
     <string name="title_draw_area">TERÜLET %1$s</string>
     <string name="title_draw_line">VONAL %1$s</string>
@@ -1111,7 +1111,7 @@ Tap <b>Bezár</b> nem változtat.
 
   <string name="pref_cat_calib">KALIBRÁCIÓK</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
-  <string name="pref_cat_device">ESZKÖZÖK</string>
+  <string name="pref_cat_device">MŰSZEREK</string>
   <string name="pref_cat_geek">SAJÁT BEÁLLÍTÁSOK</string>
   <!-- UNUSED string name="pref_cat_log">NAPLÓZÁSOK</string -->
 
@@ -1173,7 +1173,7 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_triple_shot_title">Poligon mérés csengetés</string>
   <string name="pref_triple_shot_summary">Hang visszajelzés a poligon mérés felismerésről</string>
   <string name="pref_connect_feedback_title">Kapcsolat visszajelzés</string>
-  <string name="pref_connect_feedback_summary">Visszajelzés az eszköz kapcsolatról</string>
+  <string name="pref_connect_feedback_summary">Visszajelzés a műszer kapcsolatról</string>
   <string name="pref_station_prefix_title">Pontnév előtag cSurvey programhoz</string>
   <string name="pref_station_prefix_summary">cSurvey pontnév előtagok exportálása</string>
   <string name="pref_compass_splays_title">Compass segédmérések</string>
@@ -1253,7 +1253,7 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_second_distox_title">Két DistoX mérés</string>
   <string name="pref_second_distox_summary">Mérés két DistoX-el</string>
   <string name="pref_auto_pair_title">Atomatikus párosítás</string>
-  <string name="pref_auto_pair_summary">Párosítás a talált eszközzel</string>
+  <string name="pref_auto_pair_summary">Párosítás a talált műszerrel</string>
   <string name="pref_head_tail_title">Új adatok száma</string>
   <string name="pref_head_tail_summary">Adatok számának lekérdezése letöltés előtt</string>
   <string name="pref_socket_delay_title">Kapcsolódási késleltetés</string>
@@ -1505,7 +1505,7 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_unit_grid_title">Vázlat rácsegységei</string>
   <string name="pref_unit_grid_summary">Vázlat rácshálójának méretezése</string>
   <string name="pref_unit_measure_title">Vonalzó egység</string>
-  <string name="pref_unit_measure_summary">Vinalzó hosszúság mértékegysége</string>
+  <string name="pref_unit_measure_summary">Vonalzó hosszúság mértékegysége</string>
   <!-- UNUSED string name="pref_recent_nr_title">Utoljára használt eszközök száma</string -->
   <!-- UNUSED string name="pref_recent_nr_summary">Utoljára használt eszközök száma az eszközválasztón</string -->
   <string name="pref_area_border_title">Területhatár láthatósága</string>
@@ -1639,7 +1639,7 @@ Tap <b>Bezár</b> nem változtat.
    <string name="firmware_file_uploaded">Feltöltött firmware fájl %1$s írás %2$d / %3$d</string>
    <string name="firmware_file_dump_fail">Firmware letöltés sikertelen</string>
    <string name="firmware_file_upload_fail">Firmware feltöltés sikertelen</string>
-   <string name="firmware_not_supported">Az eszköz nem támogatja a firmware funkciókat</string>
+   <string name="firmware_not_supported">A műszer nem támogatja a firmware funkciókat</string>
 
     <string name="project">Projekt %1$s</string>
     <string name="no_editor">Nincs szövegszerkesztő</string>
