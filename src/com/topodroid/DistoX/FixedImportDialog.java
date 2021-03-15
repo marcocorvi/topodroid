@@ -176,29 +176,7 @@ class FixedImportDialog extends MyDialog
         String[] vals = line.split(",");
         int len = vals.length;
         if ( len >= 4 ) {
-          // StringBuilder sb = new StringBuilder();
-          // sb.append( vals[len-3].trim() );
-          // sb.append( " " );
-          // sb.append( vals[len-4].trim() );
-          // sb.append( " " );
-          // sb.append( vals[len-2].trim() );
-          // sb.append( " " );
-          // sb.append( vals[len-1].trim() );
-		  
-          // int k=0;
-          // String name = vals[k];
-          // while ( ++k < len-4 ) {
-          //    name = name + "," + vals[k];
-          // }
-          // mArrayAdapter.add( sb.toString() );
-          String sb = vals[ len - 3 ].trim() +
-              " " +
-              vals[ len - 4 ].trim() +
-              " " +
-              vals[ len - 2 ].trim() +
-              " " +
-              vals[ len - 1 ].trim();
-          mArrayAdapter.add( sb );
+          mArrayAdapter.add( line.trim() ); // add the whole line - needed for item click processing
           ret ++;
         }
       }
@@ -261,16 +239,17 @@ class FixedImportDialog extends MyDialog
       return;
     }
     String item = ((TextView) view).getText().toString();
-    String[] vals = item.split(" ");
-    if ( vals.length == 4 ) {
-      String lngstr = vals[0].trim();
-      String latstr = vals[1].trim();
-      String altstr = vals[2].trim();
-      String aslstr = vals[3].trim();
-      mHGeo = Double.parseDouble( aslstr );
-      mHEll = Double.parseDouble( altstr );
+    String[] vals = item.split(",");
+    int len = vals.length;
+    if ( len >= 4 ) {
+      String lngstr = vals[len-3].trim();
+      String latstr = vals[len-4].trim();
+      String altstr = vals[len-2].trim();
+      String aslstr = vals[len-1].trim();
       mLng  = Double.parseDouble( lngstr );
       mLat  = Double.parseDouble( latstr );
+      mHEll = Double.parseDouble( altstr );
+      mHGeo = Double.parseDouble( aslstr );
       mTVlat.setText( latstr );
       mTVlng.setText( lngstr );
       mTVhell.setText( altstr );
