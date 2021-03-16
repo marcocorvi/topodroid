@@ -698,7 +698,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="button_read"      >Olvas  </string>
     <!-- UNUSED string name="button_redo"      >Újra      </string -->
     <!-- UNUSED string name="button_regroup"   >Újra csoport</string -->
-    <string name="button_dump"      >Biztonsági tár</string>
+    <string name="button_dump"      >Letöltés</string>
     <string name="button_rename"    >Átnevez    </string>
     <string name="button_renumber"  >Átszámoz</string>
     <string name="button_bedding"   >Alap sík</string>
