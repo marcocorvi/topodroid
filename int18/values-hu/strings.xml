@@ -120,9 +120,9 @@ Tap <b>Bezár</b> nem változtat.
     <string name="calib_compute_coeffs">Kalibrációs együttható számítása &#8230;</string>
     <!-- UNUSED string name="calib_read_coeffs">Reading calibration coefficients &#8230;</string -->
     <string name="calib_write_coeffs">Kalibrációs együttható felülírása &#8230;</string>
-    <string name="calib_validation">Jóváhagyja  %1$s vs %2$s</string>
-    <!-- UNUSED string name="connect_failed">Failed connect</string -->
-    <!-- UNUSED string name="data"> data</string -->
+    <string name="calib_validation">%1$s és %2$s összehasonlítása</string>
+    <!-- UNUSED string name="connect_failed">Hibás kapcsolat</string -->
+    <!-- UNUSED string name="data"> adat</string -->
     <string name="using">%1$s használata</string>
     <string name="calib_error">Átlagos hiba: %1$.2f fok (BH delta %2$.3f)</string>
 	<string name="calib_validate_error">Átlagos hiba: %1$.2f fok</string>
@@ -675,7 +675,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="button_eval_cal"  >Kiértékelés kalibrációval</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Állj      </string -->
-    <!-- TODO string name="button_help">Help</string -->
+    <string name="button_help">Súgó</string>
     <string name="button_manual"    >Felhasználói Kézikönyv</string>
     <!-- UNUSED string name="button_measure"   >Measure   </string -->
     <!-- UNUSED string name="button_photo"   >Fotó</string -->
@@ -762,8 +762,8 @@ Tap <b>Bezár</b> nem változtat.
     <string name="popup_do_gm_data">Kalibr. mérés</string>
     <string name="popup_do_laser">Lézer</string>
     <string name="popup_do_scan">Scan mérés</string>
-    <!-- TODO string name="popup_do_shot">Shot</string -->
-    <!-- TODO string name="popup_do_clear">Clear</string -->
+    <string name="popup_do_shot">Mérés</string>
+    <string name="popup_do_clear">Törlés</string>
 
 
     <!-- UNUSED string name="btn_3d">3D</string -->
@@ -1260,8 +1260,8 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_socket_delay_summary">Kapcsolódási késleltetés a párosításhoz [0.1 sec]</string>
   <string name="pref_z6_workaround_title">Áthidaló megoldás Z6-hoz</string>
   <string name="pref_z6_workaround_summary">Áthidaló megoldás adatletöltéshez Z6-ból</string>
-  <!-- TODO string name="pref_firmware_sanity_title">Firmware check</string -->
-  <!-- TODO string name="pref_firmware_sanity_summary">Enforce firmware sanity checks</string -->
+  <string name="pref_firmware_sanity_title">Firmware ellenőrzés</string>
+  <string name="pref_firmware_sanity_summary">Firmware biztonsági ellenőrzés végrehajtva</string>
   <string name="pref_crs_title">Koordinátarendszer</string>
   <string name="pref_crs_summary">Írd be a koordinátarendszer nevét Proj.4 szerint</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
@@ -1633,8 +1633,8 @@ Tap <b>Bezár</b> nem változtat.
    <string name="ask_dump">Készít biztonsági másolatot a firmware-ről?</string>
    <string name="ask_upload">Feltölti a firmware-t?</string>
    <string name="ask_upload_not_compatible">Firmware fájl nem tűnik megfelelőnek \nMindenképpen feltölti?</string>
-   <!-- TODO string name="firmware_upload_no_sign">Failed to check the DistoX hardware</string -->
-   <!-- TODO string name="firmware_upload_bad_sign">Incompatible DistoX hardware</string -->
+   <string name="firmware_upload_no_sign">DistoX hardware ellenőrzés hiba</string>
+   <string name="firmware_upload_bad_sign">Incompatibilis DistoX hardware</string>
    <string name="firmware_file_dumped">Mentett firmware fájl %1$s méret %2$d</string>
    <string name="firmware_file_uploaded">Feltöltött firmware fájl %1$s írás %2$d / %3$d</string>
    <string name="firmware_file_dump_fail">Firmware letöltés sikertelen</string>
