@@ -49,8 +49,8 @@ Tap <b>Bezár</b> nem változtat.
     <string name="AREA">TERÜLET</string>
     <string name="HELP">SEGÍTSÉG</string>
     <string name="STATION">MÉRÉSI PONT</string>
-    <string name="UP">FELFELÉ</string>
-    <string name="DOWN">LEFELÉ</string>
+    <string name="UP">FENT</string>
+    <string name="DOWN">LENT</string>
 
     <string name="xsplay">X</string>
     <string name="hsplay">H</string>
@@ -659,21 +659,22 @@ Tap <b>Bezár</b> nem változtat.
     <string name="button_back"      >Vissza</string>
     <string name="button_cancel"    >Kilép</string>
     <string name="button_change"    >Változtat</string>
-	<string name="button_clipboard" >Vágólap</string>
+    <string name="button_clipboard" >Vágólap</string>
     <string name="button_close"     >Bezár</string>
     <string name="button_create"    >Létrehoz</string>
     <string name="button_color"     >Szín</string>
+    <string name="button_clear_convert">Átal. törlés</string>
     <string name="button_convert"   >Átalakít</string>
     <string name="button_current"   >Jelenlegi</string>
     <string name="button_delete"    >Töröl</string>
     <string name="button_duplicate" >Megdupláz </string>
     <string name="button_surface"   >Felület</string>
     <string name="button_no_extend" >Nincs kiterítés </string>
-    <string name="button_eval"      >Kiértékel </string>
+    <string name="button_eval"      >Nyers</string>
     <string name="button_evalg"     >G</string>
     <string name="button_evalm"     >M</string>
-    <string name="button_eval_cal"  >Kiértékelés kalibrációval</string>
-    <string name="button_gps_start" >GPS       </string>
+    <string name="button_eval_cal"  >Kalibrált</string>
+    <string name="button_gps_start" >GPS</string>
     <!-- UNUSED string name="button_gps_stop"  >Állj      </string -->
     <string name="button_help">Súgó</string>
     <string name="button_manual"    >Felhasználói Kézikönyv</string>
