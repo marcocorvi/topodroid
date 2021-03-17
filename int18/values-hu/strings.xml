@@ -372,7 +372,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="menu_rename_delete">ÁTNEVEZ/TÖRÖL</string>
     <string name="menu_rename">ÁTNEVEZ</string>
     <string name="menu_plot_scrap">SZINTEK</string>
-    <string name="menu_switch">ÁTKAPCSOL/</string>
+    <string name="menu_switch">VÁLT/BEZÁR</string>
     <string name="menu_help">SÚGÓ</string>
     <!-- UNUSED string name="menu_join_survey">EGYÜTTES FELMÉRÉS</string -->
     <string name="menu_logs">NAPLÓK</string>
