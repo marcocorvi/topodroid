@@ -1343,7 +1343,7 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_team_summary">Alapértelmezett felmérő csoport</string>
     
   <string name="pref_ethr_title">Segédmérések függőleges küszöbértéke</string>
-  <string name="pref_ethr_summary">szögtartomány 90 fok körül a függőleges kiterjesztéshez [fok]</string>
+  <string name="pref_ethr_summary">szögtartomány 90 fok körül a függőleges kiterítéshez [fok]</string>
   <string name="pref_vthr_title">Poligon függőleges küszöbértéke </string>
   <string name="pref_vthr_summary">Poligon lejtszögének küszöbértéke BJFL és NyKÉD között</string>
 
