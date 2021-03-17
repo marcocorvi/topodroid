@@ -49,8 +49,8 @@ Tap <b>Bezár</b> nem változtat.
     <string name="AREA">TERÜLET</string>
     <string name="HELP">SEGÍTSÉG</string>
     <string name="STATION">MÉRÉSI PONT</string>
-    <string name="UP">FELFELÉ</string>
-    <string name="DOWN">LEFELÉ</string>
+    <string name="UP">FENT</string>
+    <string name="DOWN">LENT</string>
 
     <string name="xsplay">X</string>
     <string name="hsplay">H</string>
@@ -120,9 +120,9 @@ Tap <b>Bezár</b> nem változtat.
     <string name="calib_compute_coeffs">Kalibrációs együttható számítása &#8230;</string>
     <!-- UNUSED string name="calib_read_coeffs">Reading calibration coefficients &#8230;</string -->
     <string name="calib_write_coeffs">Kalibrációs együttható felülírása &#8230;</string>
-    <string name="calib_validation">Jóváhagyja  %1$s vs %2$s</string>
-    <!-- UNUSED string name="connect_failed">Failed connect</string -->
-    <!-- UNUSED string name="data"> data</string -->
+    <string name="calib_validation">%1$s és %2$s összehasonlítása</string>
+    <!-- UNUSED string name="connect_failed">Hibás kapcsolat</string -->
+    <!-- UNUSED string name="data"> adat</string -->
     <string name="using">%1$s használata</string>
     <string name="calib_error">Átlagos hiba: %1$.2f fok (BH delta %2$.3f)</string>
 	<string name="calib_validate_error">Átlagos hiba: %1$.2f fok</string>
@@ -372,7 +372,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="menu_rename_delete">ÁTNEVEZ/TÖRÖL</string>
     <string name="menu_rename">ÁTNEVEZ</string>
     <string name="menu_plot_scrap">SZINTEK</string>
-    <string name="menu_switch">ÁTKAPCSOL/</string>
+    <string name="menu_switch">VÁLT/BEZÁR</string>
     <string name="menu_help">SÚGÓ</string>
     <!-- UNUSED string name="menu_join_survey">EGYÜTTES FELMÉRÉS</string -->
     <string name="menu_logs">NAPLÓK</string>
@@ -596,7 +596,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="survey_info">Felmérés info</string>
     <string name="stat_stddev_m">M norm. szór. %1$.1f százalék</string>
     <string name="stat_stddev_g">G norm. szór. %1$.1f százalék</string>
-    <string name="stat_stddev_dip">Lejtszög norm. szór. %1$.1f fok (átlag %2$.1f fok)</string>
+    <string name="stat_stddev_dip">Inklináció norm. szór. %1$.1f fok (átlag %2$.1f fok)</string>
     <string name="stat_component">Statisztikai komponensek %1$d</string>
     <string name="stat_depth">Mélység %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Kettőzött mérés %1$d # %2$d %3$.1f %4$s</string>
@@ -659,23 +659,24 @@ Tap <b>Bezár</b> nem változtat.
     <string name="button_back"      >Vissza</string>
     <string name="button_cancel"    >Kilép</string>
     <string name="button_change"    >Változtat</string>
-	<string name="button_clipboard" >Vágólap</string>
+    <string name="button_clipboard" >Vágólap</string>
     <string name="button_close"     >Bezár</string>
     <string name="button_create"    >Létrehoz</string>
     <string name="button_color"     >Szín</string>
+    <string name="button_clear_convert">Átal. törlés</string>
     <string name="button_convert"   >Átalakít</string>
     <string name="button_current"   >Jelenlegi</string>
     <string name="button_delete"    >Töröl</string>
     <string name="button_duplicate" >Megdupláz </string>
     <string name="button_surface"   >Felület</string>
     <string name="button_no_extend" >Nincs kiterítés </string>
-    <string name="button_eval"      >Kiértékel </string>
+    <string name="button_eval"      >Nyers</string>
     <string name="button_evalg"     >G</string>
     <string name="button_evalm"     >M</string>
-    <string name="button_eval_cal"  >Kiértékelés kalibrációval</string>
-    <string name="button_gps_start" >GPS       </string>
+    <string name="button_eval_cal"  >Kalibrált</string>
+    <string name="button_gps_start" >GPS</string>
     <!-- UNUSED string name="button_gps_stop"  >Állj      </string -->
-    <!-- TODO string name="button_help">Help</string -->
+    <string name="button_help">Súgó</string>
     <string name="button_manual"    >Felhasználói Kézikönyv</string>
     <!-- UNUSED string name="button_measure"   >Measure   </string -->
     <!-- UNUSED string name="button_photo"   >Fotó</string -->
@@ -762,8 +763,8 @@ Tap <b>Bezár</b> nem változtat.
     <string name="popup_do_gm_data">Kalibr. mérés</string>
     <string name="popup_do_laser">Lézer</string>
     <string name="popup_do_scan">Scan mérés</string>
-    <!-- TODO string name="popup_do_shot">Shot</string -->
-    <!-- TODO string name="popup_do_clear">Clear</string -->
+    <string name="popup_do_shot">Mérés</string>
+    <string name="popup_do_clear">Törlés</string>
 
 
     <!-- UNUSED string name="btn_3d">3D</string -->
@@ -981,7 +982,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="import_leg_first">Poligon mérés a BJFL előtt</string>
     <string name="import_diving_datamode">Merülési adatmód</string>
 
-    <string name="title_azimut">Vonatkozási rendszer</string>
+    <string name="title_azimut">Kiterítés vonatkozási iránya</string>
     <string name="title_audio">Hangjegyzet</string>
     <string name="title_audio_list">Hang felvétel</string>
     <string name="title_calib">Kalibrációk</string>
@@ -1260,8 +1261,8 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_socket_delay_summary">Kapcsolódási késleltetés a párosításhoz [0.1 sec]</string>
   <string name="pref_z6_workaround_title">Áthidaló megoldás Z6-hoz</string>
   <string name="pref_z6_workaround_summary">Áthidaló megoldás adatletöltéshez Z6-ból</string>
-  <!-- TODO string name="pref_firmware_sanity_title">Firmware check</string -->
-  <!-- TODO string name="pref_firmware_sanity_summary">Enforce firmware sanity checks</string -->
+  <string name="pref_firmware_sanity_title">Firmware ellenőrzés</string>
+  <string name="pref_firmware_sanity_summary">Firmware biztonsági ellenőrzés végrehajtva</string>
   <string name="pref_crs_title">Koordinátarendszer</string>
   <string name="pref_crs_summary">Írd be a koordinátarendszer nevét Proj.4 szerint</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
@@ -1335,14 +1336,14 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_prev_next_summary">Előző/Köv. gombok a mérés párbeszéd ablakban</string>
   <!-- UNUSED string name="pref_mag_anomaly_title">Mágneses anomália</string -->
   <!-- UNUSED string name="pref_mag_anomaly_summary">Helyi mágneses anomália kiegyenlítése</string -->
-  <string name="pref_azimuth_manual_title">Állítható vonatkozási rendszer</string>
-  <string name="pref_azimuth_manual_summary">Állítható, vagy fix B/J vonatkozási rendszer</string>
+  <string name="pref_azimuth_manual_title">Állítható kiterítési rendszer</string>
+  <string name="pref_azimuth_manual_summary">Állítható, vagy fix B/J kiterítési rendszer</string>
 
   <string name="pref_team_title">Csoport</string>
   <string name="pref_team_summary">Alapértelmezett felmérő csoport</string>
     
   <string name="pref_ethr_title">Segédmérések függőleges küszöbértéke</string>
-  <string name="pref_ethr_summary">szögtartomány 90 fok körül a függőleges kiterjesztéshez [fok]</string>
+  <string name="pref_ethr_summary">szögtartomány 90 fok körül a függőleges kiterítéshez [fok]</string>
   <string name="pref_vthr_title">Poligon függőleges küszöbértéke </string>
   <string name="pref_vthr_summary">Poligon lejtszögének küszöbértéke BJFL és NyKÉD között</string>
 
@@ -1524,9 +1525,9 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_walls_type_title">Kontúr típusa</string>
   <string name="pref_walls_type_summary">Kontúr típusa</string>
   <string name="pref_walls_plan_thr_title">Alaprajzi segédmérés szöge</string>
-  <string name="pref_walls_plan_thr_summary">Alaprajzi kontúrhoz felhasznált legnagyobb lejtszögű segédmérés [deg]</string>
+  <string name="pref_walls_plan_thr_summary">Alaprajzi kontúrhoz felhasznált legnagyobb lejtszögű segédmérés [fok]</string>
   <string name="pref_walls_extended_thr_title">Oldalnézeti segédmérés szöge</string>
-  <string name="pref_walls_extended_thr_summary">Oldalnézet kontúrjához felhasznált legnagyobb lejtésszögű segédmérés [deg]</string>
+  <string name="pref_walls_extended_thr_summary">Oldalnézet kontúrjához felhasznált legnagyobb lejtésszögű segédmérés [fok]</string>
   <string name="pref_walls_xclose_title">Felbontás</string>
   <string name="pref_walls_xclose_summary">Segédpontok maximális felbontása [m]</string>
   <string name="pref_walls_concave_title">Homorúság</string>
@@ -1633,8 +1634,8 @@ Tap <b>Bezár</b> nem változtat.
    <string name="ask_dump">Készít biztonsági másolatot a firmware-ről?</string>
    <string name="ask_upload">Feltölti a firmware-t?</string>
    <string name="ask_upload_not_compatible">Firmware fájl nem tűnik megfelelőnek \nMindenképpen feltölti?</string>
-   <!-- TODO string name="firmware_upload_no_sign">Failed to check the DistoX hardware</string -->
-   <!-- TODO string name="firmware_upload_bad_sign">Incompatible DistoX hardware</string -->
+   <string name="firmware_upload_no_sign">DistoX hardware ellenőrzés hiba</string>
+   <string name="firmware_upload_bad_sign">Incompatibilis DistoX hardware</string>
    <string name="firmware_file_dumped">Mentett firmware fájl %1$s méret %2$d</string>
    <string name="firmware_file_uploaded">Feltöltött firmware fájl %1$s írás %2$d / %3$d</string>
    <string name="firmware_file_dump_fail">Firmware letöltés sikertelen</string>
