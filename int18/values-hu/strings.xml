@@ -596,7 +596,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="survey_info">Felmérés info</string>
     <string name="stat_stddev_m">M norm. szór. %1$.1f százalék</string>
     <string name="stat_stddev_g">G norm. szór. %1$.1f százalék</string>
-    <string name="stat_stddev_dip">Lejtszög norm. szór. %1$.1f fok (átlag %2$.1f fok)</string>
+    <string name="stat_stddev_dip">Inklináció norm. szór. %1$.1f fok (átlag %2$.1f fok)</string>
     <string name="stat_component">Statisztikai komponensek %1$d</string>
     <string name="stat_depth">Mélység %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Kettőzött mérés %1$d # %2$d %3$.1f %4$s</string>
@@ -1525,9 +1525,9 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_walls_type_title">Kontúr típusa</string>
   <string name="pref_walls_type_summary">Kontúr típusa</string>
   <string name="pref_walls_plan_thr_title">Alaprajzi segédmérés szöge</string>
-  <string name="pref_walls_plan_thr_summary">Alaprajzi kontúrhoz felhasznált legnagyobb lejtszögű segédmérés [deg]</string>
+  <string name="pref_walls_plan_thr_summary">Alaprajzi kontúrhoz felhasznált legnagyobb lejtszögű segédmérés [fok]</string>
   <string name="pref_walls_extended_thr_title">Oldalnézeti segédmérés szöge</string>
-  <string name="pref_walls_extended_thr_summary">Oldalnézet kontúrjához felhasznált legnagyobb lejtésszögű segédmérés [deg]</string>
+  <string name="pref_walls_extended_thr_summary">Oldalnézet kontúrjához felhasznált legnagyobb lejtésszögű segédmérés [fok]</string>
   <string name="pref_walls_xclose_title">Felbontás</string>
   <string name="pref_walls_xclose_summary">Segédpontok maximális felbontása [m]</string>
   <string name="pref_walls_concave_title">Homorúság</string>
