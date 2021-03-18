@@ -393,7 +393,7 @@ Tap <b>Bezár</b> nem változtat.
     <!-- UNUSED string name="menu_tdr2th2">TH2 SKETCHES</string -->
 	<!-- UPDATES string name="menu_updates">CHECK UPDATES</string -->
     <string name="menu_validate">ELLENŐRZÉS</string>
-    <string name="menu_zoom_fit">ABLAK KITÖLTÉSE</string>
+    <string name="menu_zoom_fit">ABLAK NAGYÍTÁS</string>
 
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Rajz felület</string>
