@@ -691,7 +691,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="button_new"     >Új szint</string>
     <string name="button_skip"    >Átugor</string>
     <string name="button_done"    >Kész</string>
-    <string name="button_lrud"    >BJFL hozzáadása</string>
+    <string name="button_lrud"    >+BJFL</string>
     <string name="button_ok"        >OK     </string>
     <string name="button_off"       >ki</string>
     <string name="button_on"        >be</string>
