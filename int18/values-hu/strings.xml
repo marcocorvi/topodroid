@@ -412,9 +412,9 @@ Tap <b>Bezár</b> nem változtat.
     <string name="bric_laser">Lézer</string>
     <string name="bric_off">Ki</string>
 
-    <string name="popup_join_pt">Kapcsolás a legközelebbi pontra</string>
-    <string name="popup_snap_ln">Mozgatás a legközelebbi vonalra</string>
-    <string name="popup_snap_to_splays">Mozgatás a legközelebbi segédpontra</string>
+    <string name="popup_join_pt">Kapcsolás pontra</string>
+    <string name="popup_snap_ln">Kapcsolás vonalra</string>
+    <string name="popup_snap_to_splays">Kapcsolás segédpontra</string>
     <string name="popup_split_pt">Pont duplázása</string>
     <string name="popup_split_pts">Pont hozzáadása</string>
     <string name="popup_split_ln">Vonal elmetszése pontnál</string>
@@ -422,7 +422,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="popup_curve_pt">Szakasz simítása</string>
     <string name="popup_remove_pt">Pont eltávolítása</string>
     <string name="popup_append_line">Kapcsolódás vonalhoz</string>
-	<string name="popup_multiselect">Többes választás</string>
+    <string name="popup_multiselect">Többes választás</string>
     <string name="popup_delete">Törlés</string>
     <string name="popup_decimate">Tizedel</string>
     <string name="popup_join">Kapcsol</string>
