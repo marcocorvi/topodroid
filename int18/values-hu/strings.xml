@@ -468,7 +468,7 @@ Tap <b>Bezár</b> nem változtat.
     <!-- UNUSED string name="photo_survey">split survey</string -->
     <!-- UNUSED string name="picture_no_station">Station name required</string -->
     <string name="plot_delete">Törlöd a vázlatot?</string>
-    <string name="item_delete">Törlöd az %1$s elemet?</string>
+    <string name="item_delete">Törlöd a %1$s elemet?</string>
     <string name="splay_delete">Törlöd a %1$s segédmérést?</string>
     <string name="plot_duplicate_name">Vázlat nevének megkettőzése</string>
     <string name="plot_dangling">Lógó vázlat</string>
