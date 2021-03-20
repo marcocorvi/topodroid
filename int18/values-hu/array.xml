@@ -251,7 +251,7 @@
      <item name="two">Normál</item>
      <item name="three">Durva</item>
      <item name="bezier">Bézier</item>
-     <item name="simplified">Simplified</item> <!-- TODO -->
+     <item name="simplified">Ritkított</item>
   </string-array>
 
   <string-array name="groupBy">
