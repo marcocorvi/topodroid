@@ -12,8 +12,8 @@ C\'e\' nulla da fare per una nuova installazione della app su Android 11.\n
 Per una vecchia installazione, prima di un aggornamento di sistema ad Android 11,\n
  fate un salvataggio dei vostri dati, copiate la vostra cartella "Topodroid" sotto "Documents" e fate ripartire Topodroid.\n\n 
 ATTENZIONE: Dalla v. 5.0.60 "TopoDroid" usa la cartella sotto "Documents", se esiste, anche su Android 10 e precedenti.\n
-Tap "Move" to move your TopoDroid folder to Documents.\n\n
-Tap "Close" not to take any action.
+Tap "Muovi" per spostare la cartella TopoDroid in Documenti.\n\n
+Tap "Chiudi" per fare nulla.
 </string>
     <string name="button_no_again">Non chiedere di nuovo</string>
     <string name="path11_move">Spostata nella cartella Documents/TopoDroid.\nFar ripartire TopoDroid</string>
@@ -93,12 +93,12 @@ Tap "Close" not to take any action.
     <string name="failed_snap_to_splays">Nessun splay vicino su cui agganciare il bordo</string>
     <string name="failed_append_to_line">Errore: collegamento linee</string>
 
-    <!-- TODO string name="bric_device">Device %1$s</string -->
-    <!-- TODO string name="bric_ble">BLE %1$s</string -->
-    <!-- TODO string name="bric_fw">Firmware %1$s</string -->
-    <!-- TODO string name="bric_hw">Hardware %1$s</string -->
-    <!-- TODO string name="bric_battery">Battery %1$d</string -->
-    <!-- TODO string name="bric_battery_wait">Battery &#8230;</string -->
+    <string name="bric_device">Dispositivo %1$s</string>
+    <string name="bric_ble">BLE %1$s</string>
+    <string name="bric_fw">Firmware %1$s</string>
+    <string name="bric_hw">Hardware %1$s</string>
+    <string name="bric_battery">Batteria %1$d</string>
+    <string name="bric_battery_wait">Batteria &#8230;</string>
 
     <string name="calibration_title">Strumenti di calibrazione</string>
     <string name="calibration_length">Fettuccia</string>
@@ -388,19 +388,19 @@ Tap "Close" not to take any action.
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Carta millimetrata</string>
 
-    <!-- TODO string name="start_scan">Start scan</string -->
-    <!-- TODO string name="stop_scan">Stop scan</string -->
-    <!-- TODO string name="title_scan">BLE scan</string -->
-    <string name="ble_scan_failed">Scan BLE fallita</string>
+    <string name="start_scan">Inizia scansione</string>
+    <string name="stop_scan">Termina scansione</string>
+    <string name="title_scan">Scansione BLE</string>
+    <string name="ble_scan_failed">Scansione BLE fallita</string>
     <string name="ble_gatt_failure">Guasto BLE</string>
     <string name="ble_no_remote">No dispositivo remoto</string>
-    <!-- TODO string name="ble_control">Control</string -->
-    <!-- TODO string name="ble_connect">Connect</string -->
-    <!-- TODO string name="ble_disconnect">Disconnect</string -->
-    <!-- TODO string name="bric_scan">Scan</string -->
-    <!-- TODO string name="bric_shot">Shot</string -->
-    <!-- TODO string name="bric_laser">Laser</string -->
-    <!-- TODO string name="bric_off">Off</string -->
+    <string name="ble_control">Controllo</string>
+    <string name="ble_connect">Connessione</string>
+    <string name="ble_disconnect">Disconnessione</string>
+    <string name="bric_scan">Scansione</string>
+    <string name="bric_shot">Tiro</string>
+    <string name="bric_laser">Laser</string>
+    <string name="bric_off">SpentoOff</string>
 
 
     <string name="popup_join_pt">Sposta al punto vicino</string>
@@ -651,7 +651,7 @@ Tap "Close" not to take any action.
     <string name="button_eval_cal"  >Calcola con calibr.</string>
     <!-- OK string name="button_gps_start" >GPS       </string -->
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
-    <!-- TODO string name="button_help">Help</string -->
+    <string name="button_help">Aiuto</string>
     <string name="button_manual"    >Manuale utente</string>
     <!-- UNUSED string name="button_measure"   >Misura    </string -->
     <!-- UNUSED string name="button_photo"   >Foto</string -->
@@ -737,10 +737,10 @@ Tap "Close" not to take any action.
     <string name="popup_do_splay">Splay</string>
     <string name="popup_do_leg">Battuta</string>
     <string name="popup_do_gm_data">Tiro di calib.</string>
-    <!-- TODO string name="popup_do_laser">Laser</string -->
-    <!-- TODO string name="popup_do_scan">Scan</string -->
-    <!-- TODO string name="popup_do_shot">Shot</string -->
-    <!-- TODO string name="popup_do_clear">Clear</string -->
+    <string name="popup_do_laser">Laser</string>
+    <string name="popup_do_scan">Scansione</string>
+    <string name="popup_do_shot">Tiro</string>
+    <string name="popup_do_clear">Pulisci</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_export">Esporta</string>
@@ -940,8 +940,8 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="export_point_stroke">Point stroke</string -->
     <!-- UNUSED string name="export_label_stroke">Label stroke</string -->
   
-    <!-- TODO string name="audio_id_shot">Recording: shot %1$s %2$s</string -->
-    <!-- TODO string name="audio_id_plot">Recording: sketch%1$d</string -->
+    <string name="audio_id_shot">Registra: tiro %1$s %2$s</string>
+    <string name="audio_id_plot">Registra: disegno %1$d</string>
     <string name="audio_paused">In pausa</string>
     <string name="audio_playing">Riproduzione</string>
     <string name="audio_recording">Registrazione</string>
@@ -1222,8 +1222,8 @@ Tap "Close" not to take any action.
   <string name="pref_socket_delay_summary">Ritardo di connessione per permettere la associazione [0.1 sec]</string>
   <string name="pref_z6_workaround_title">Dati modo Z6</string>
   <string name="pref_z6_workaround_summary">Scaricamento dati modo Z6</string>
-  <!-- TODO string name="pref_firmware_sanity_title">Firmware check</string -->
-  <!-- TODO string name="pref_firmware_sanity_summary">Enforce firmware sanity checks</string -->
+  <string name="pref_firmware_sanity_title">Verifica Firmware</string>
+  <string name="pref_firmware_sanity_summary">Effettua verifiche sanita\' firmware</string>
   <string name="pref_crs_title">C R S </string>
   <string name="pref_crs_summary">Nome CRS, come in Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
@@ -1582,12 +1582,12 @@ Tap "Close" not to take any action.
    <string name="ask_dump">Salva firmware?</string>
    <string name="ask_upload">Carica firmware?</string>
    <string name="ask_upload_not_compatible">Il file non sembra corretto.\nCaricare ugualmente?</string>
-   <!-- TODO string name="firmware_upload_no_sign">Failed to check the DistoX hardware</string -->
-   <!-- TODO string name="firmware_upload_bad_sign">Incompatible DistoX hardware</string -->
+   <string name="firmware_upload_no_sign">Errore nella verifica dell\'HW del DistoX</string>
+   <string name="firmware_upload_bad_sign">HW del DistoX incompatibile</string>
    <string name="firmware_file_dumped">iSalvato file %1$s - %2$d B</string>
    <string name="firmware_file_uploaded">Caricato firmware %1$s scritti %2$d / %3$d B</string>
-   <!-- TODO string name="firmware_file_dump_fail">Failed firmware dump</string -->
-   <!-- TODO string name="firmware_file_upload_fail">Failed firmware upload</string -->
+   <string name="firmware_file_dump_fail">Errore nello scarico del firmware</string>
+   <string name="firmware_file_upload_fail">Errore caricamento firmware</string>
    <string name="firmware_not_supported">Dispositivo senza funzioni firmware</string>
 
     <string name="project">Progetto %1$s</string>
