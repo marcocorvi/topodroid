@@ -982,7 +982,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="import_leg_first">Poligon mérés a BJFL előtt</string>
     <string name="import_diving_datamode">Merülési adatmód</string>
 
-    <string name="title_azimut">Kiterítés vonatkozási iránya</string>
+    <string name="title_azimut">Kiterítés referencia iránya</string>
     <string name="title_audio">Hangjegyzet</string>
     <string name="title_audio_list">Hang felvétel</string>
     <string name="title_calib">Kalibrációk</string>
