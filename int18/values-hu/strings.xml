@@ -393,7 +393,7 @@ Tap <b>Bezár</b> nem változtat.
     <!-- UNUSED string name="menu_tdr2th2">TH2 SKETCHES</string -->
 	<!-- UPDATES string name="menu_updates">CHECK UPDATES</string -->
     <string name="menu_validate">ELLENŐRZÉS</string>
-    <string name="menu_zoom_fit">ABLAK KITÖLTÉSE</string>
+    <string name="menu_zoom_fit">ABLAK NAGYÍTÁS</string>
 
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Rajz felület</string>
@@ -412,9 +412,9 @@ Tap <b>Bezár</b> nem változtat.
     <string name="bric_laser">Lézer</string>
     <string name="bric_off">Ki</string>
 
-    <string name="popup_join_pt">Kapcsolás a legközelebbi pontra</string>
-    <string name="popup_snap_ln">Mozgatás a legközelebbi vonalra</string>
-    <string name="popup_snap_to_splays">Mozgatás a legközelebbi segédpontra</string>
+    <string name="popup_join_pt">Kapcsolás pontra</string>
+    <string name="popup_snap_ln">Kapcsolás vonalra</string>
+    <string name="popup_snap_to_splays">Kapcsolás segédpontra</string>
     <string name="popup_split_pt">Pont duplázása</string>
     <string name="popup_split_pts">Pont hozzáadása</string>
     <string name="popup_split_ln">Vonal elmetszése pontnál</string>
@@ -422,7 +422,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="popup_curve_pt">Szakasz simítása</string>
     <string name="popup_remove_pt">Pont eltávolítása</string>
     <string name="popup_append_line">Kapcsolódás vonalhoz</string>
-	<string name="popup_multiselect">Többes választás</string>
+    <string name="popup_multiselect">Többes választás</string>
     <string name="popup_delete">Törlés</string>
     <string name="popup_decimate">Tizedel</string>
     <string name="popup_join">Kapcsol</string>
@@ -468,7 +468,7 @@ Tap <b>Bezár</b> nem változtat.
     <!-- UNUSED string name="photo_survey">split survey</string -->
     <!-- UNUSED string name="picture_no_station">Station name required</string -->
     <string name="plot_delete">Törlöd a vázlatot?</string>
-    <string name="item_delete">Törlöd az %1$s elemet?</string>
+    <string name="item_delete">Törlöd a %1$s elemet?</string>
     <string name="splay_delete">Törlöd a %1$s segédmérést?</string>
     <string name="plot_duplicate_name">Vázlat nevének megkettőzése</string>
     <string name="plot_dangling">Lógó vázlat</string>
@@ -597,7 +597,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="stat_stddev_m">M norm. szór. %1$.1f százalék</string>
     <string name="stat_stddev_g">G norm. szór. %1$.1f százalék</string>
     <string name="stat_stddev_dip">Inklináció norm. szór. %1$.1f fok (átlag %2$.1f fok)</string>
-    <string name="stat_component">Statisztikai komponensek %1$d</string>
+    <string name="stat_component">Különálló felmérések %1$d</string>
     <string name="stat_depth">Mélység %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Kettőzött mérés %1$d # %2$d %3$.1f %4$s</string>
     <string name="stat_leg">Poligonmérések %1$d Hossz %2$.1f %3$.1f vetület %4$.1f %5$s</string>
@@ -691,7 +691,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="button_new"     >Új szint</string>
     <string name="button_skip"    >Átugor</string>
     <string name="button_done"    >Kész</string>
-    <string name="button_lrud"    >BJFL hozzáadása</string>
+    <string name="button_lrud"    >+BJFL</string>
     <string name="button_ok"        >OK     </string>
     <string name="button_off"       >ki</string>
     <string name="button_on"        >be</string>
