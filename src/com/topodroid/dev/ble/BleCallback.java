@@ -42,18 +42,29 @@ public class BleCallback extends BluetoothGattCallback
   public final static int CONNECTION_133     = 133;
 
   private BleComm mComm;
+  // private BleChrtChanged mChrtChanged;
   private BluetoothGatt mGatt = null;
   private boolean mAutoConnect = false;
 
   public BleCallback( BleComm comm, boolean auto_connect )
   {
-    mComm = comm;
+    mComm        = comm;
+    // mChrtChanged = comm;
     mAutoConnect = auto_connect;
   }
+
+  // public BleCallback( BleComm comm, BleChrtChanged chrt_changed, boolean auto_connect )
+  // {
+  //   mComm        = comm;
+  //   mChrtChanged = chrt_changed;
+  //   mAutoConnect = auto_connect;
+  // }
+
 
   @Override
   public void onCharacteristicChanged( BluetoothGatt gatt, BluetoothGattCharacteristic chrt )
   {
+    // if ( mChrtChanged != null ) { mChrtChanged.changedChrt( chrt ); } else { mComm.changedChrt( chrt ); }
     mComm.changedChrt( chrt );
   }
 
@@ -100,7 +111,7 @@ public class BleCallback extends BluetoothGattCallback
 
         // if ( mGatt != null ) mGatt.close(); // FIXME_BRIC
         // mGatt = gatt;
-        // mComm.subscribeServices();
+        mComm.connected();
         gatt.discoverServices();
 
       } else if ( newState == BluetoothProfile.STATE_DISCONNECTED ) {

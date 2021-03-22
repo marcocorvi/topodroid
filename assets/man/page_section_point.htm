@@ -1,18 +1,17 @@
 <html>
 <body>
 
-<h4>SKETCH POINT</h4>
+<h4>SKETCH SECTION POINT</h4>
 
-This dialog is opened when you select a point symbol and tap the
+This dialog is opened when you select a section-point item and tap the
 <i>Edit</i> button in the <u>sketch window</u> (in "edit" mode).<br><p>
 
 Point properties:
 <ul>
 <li><b>size</b> (XS, S, M, L, XL)</li>
-<li><b>orientation</b>, if the point is orientable</li>
 <li><b>layers</b>, the canvas views on which the point is displayed [T]</li>
-<li><b>text</b>, if the point has text associated</li>
-<li>additional Therion <b>options</b></li>
+<li>Therion <b>options</b>: the sketch point has always the "-scrap" option followed by the name of the x-section</li>
+<li><b>x-section</b> checkbox to display the xsection outline in the sketch</li>
 </ul>
 <br><p>
 
@@ -25,11 +24,12 @@ The selectable point will nevertheless be shown in edit mode, so that the point 
 
 <b>Save</b> confirms the changes and closes the dialog.<br><p>
 
-With <i>side-drag</i> enabled, the point orientation can be changed also by sliding up and down on the left and right sides of the canvas.<br><p>
+The <b>Sketch</b> button to open the x-section sketch, if it exists.
+Changes to the xsections sketch are not propagated to the outline in the sketch: to update it,
+close the outline and open it again.
+<br><p>
 
 The <i>BACK</i> key closes the dialog without saving the changes.<br><p>
-
-<a href="page_section_point.htm">Section</a> point dialog<br><p>
 
 </body>
 </html>

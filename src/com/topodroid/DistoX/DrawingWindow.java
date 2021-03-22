@@ -481,7 +481,7 @@ public class DrawingWindow extends ItemDrawer
 
   private int mHotItemType     = -1;
   private boolean mHasSelected = false;
-  private boolean inLinePoint  = false;
+  private boolean hasPointActions  = false;
 
   // ZOOM
   static final float ZOOM_INC = 1.4f;
@@ -548,11 +548,11 @@ public class DrawingWindow extends ItemDrawer
   // -------------------------------------------------------------
   // STATUS items
 
-  private String mName;   // current-plot name
-  private String mName1;          // first name (PLAN)
-  private String mName2;          // second name (EXTENDED/PROJECTED)
-  private String mName3;          // third name (SECTION)
-  private String mFullName1;      // accessible by the SaveThread
+  private String mName;      // current-plot name
+  private String mName1;     // first name (PLAN)
+  private String mName2;     // second name (EXTENDED/PROJECTED)
+  private String mName3;     // third name (SECTION)
+  private String mFullName1; // accessible by the SaveThread
   private String mFullName2;
   private String mFullName3;
 
@@ -1020,6 +1020,9 @@ public class DrawingWindow extends ItemDrawer
   public void setTheTitle()
   {
     StringBuilder sb = new StringBuilder();
+    sb.append(mName);
+    sb.append(": ");
+    
     if ( TDSetting.isConnectionModeMulti() /* || TDSetting.isConnectionModeDouble() */ ) {
       sb.append( "{" );
       if ( TDInstance.getDeviceA() != null ) sb.append( TDInstance.getDeviceA().getNickname() );
@@ -1027,8 +1030,8 @@ public class DrawingWindow extends ItemDrawer
     }
     // sb.append( mApp.getConnectionStateTitleStr() ); // IF_COSURVEY
     // sb.append( mLandscape ? titleLandscape : titlePortrait );
-    sb.append(" ");
-    
+    // sb.append(" ");
+ 
     Resources res = getResources();
     if ( mMode == MODE_DRAW ) { 
       if ( mSymbol == SymbolType.POINT ) {
@@ -1511,7 +1514,7 @@ public class DrawingWindow extends ItemDrawer
   private void setButton3Item( SelectionPoint pt )
   {
     boolean deletable = false;
-    inLinePoint  = false;
+    hasPointActions  = false;
     BitmapDrawable bm = mBMjoin_no;
     String title = getResources().getString( R.string.title_edit );
     if ( pt != null ) {
@@ -1526,17 +1529,18 @@ public class DrawingWindow extends ItemDrawer
           break;
         case DrawingPath.DRAWING_PATH_POINT:
           mActivity.setTitle( title + " " + BrushManager.getPointName( ((DrawingPointPath)item).mPointType ) );
+          hasPointActions = true;
 	  deletable = true;
           break;
         case DrawingPath.DRAWING_PATH_LINE:
           mActivity.setTitle( title + " " + BrushManager.getLineName( ((DrawingLinePath)item).mLineType ) );
-          inLinePoint = true;
+          hasPointActions = true;
           bm = mBMjoin;
 	  deletable = true;
           break;
         case DrawingPath.DRAWING_PATH_AREA:
           mActivity.setTitle( title + " " + BrushManager.getAreaName( ((DrawingAreaPath)item).mAreaType ) );
-          inLinePoint = true;
+          hasPointActions = true;
           bm = mBMjoin;
 	  deletable = true;
           break;
@@ -1972,8 +1976,6 @@ public class DrawingWindow extends ItemDrawer
     // redoBtn.setEnabled(false);
     // undoBtn.setEnabled(false); // let undo always be there
 
-    setTheTitle();
-
     // mBezierInterpolator = new BezierInterpolator( );
 
     Bundle extras = getIntent().getExtras();
@@ -2150,6 +2152,8 @@ public class DrawingWindow extends ItemDrawer
     // }
 
     // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on create done");
+
+    setTheTitle();
   }
 
   // ------------------------------------- PUSH / POP INFO --------------------------------
@@ -2164,7 +2168,7 @@ public class DrawingWindow extends ItemDrawer
     mShiftDrawing = false;
     // mContinueLine = TDSetting.mContinueLine; // do not reset cont-mode
     resetModified();
-    setMode( MODE_MOVE );
+    setMode( MODE_MOVE ); // this setTheTitle() as well
     mTouchMode    = MODE_MOVE;
     setMenuAdapter( getResources(), mType );
   }
@@ -2545,7 +2549,9 @@ public class DrawingWindow extends ItemDrawer
     // float X2 = Y0 * Z1 - Y1 * Z0; 
     // float Y2 = Z0 * X1 - Z1 * X0;
     // float Z2 = X0 * Y1 - X1 * Y0;
-    TDVector V0 = new TDVector( ma, mc );
+
+    TDVector V0 = new TDVector( ma, mc ); // normal to the x-section plane
+    // V1,V2 are the frame of reference in the x-section plane
     TDVector V1 = new TDVector( - (float)Math.sin( ma ), (float)Math.cos( ma ), 0 );
     TDVector V2 = V0.cross( V1 );
 
@@ -3821,7 +3827,7 @@ public class DrawingWindow extends ItemDrawer
         mSplitBorder.add( new PointF( xs, ys ) );
         // Log.v("DistoX-S", "*** split border size " + mSplitBorder.size() );
         doSplitPlot( );
-        setMode( MODE_MOVE );
+        setMode( MODE_MOVE ); // this setTheTitle() as well
       // } else { // MODE_MOVE
 /* F for the moment do not create X-Sections
         if ( Math.abs(xc - mDownX) < 10 && Math.abs(yc - mDownY) < 10 ) {
@@ -4706,21 +4712,18 @@ public class DrawingWindow extends ItemDrawer
       mLastLinePath = null;
       switch ( mMode ) {
         case MODE_MOVE:
-          setTheTitle();
           mLayoutTools.setVisibility( View.INVISIBLE );
           mDrawingSurface.setDisplayPoints( false );
           mListView.setAdapter( mButtonView1.mAdapter );
           mListView.invalidate();
           break;
         case MODE_DRAW:
-          setTheTitle();
           mLayoutTools.setVisibility( View.VISIBLE );
           mDrawingSurface.setDisplayPoints( false );
           mListView.setAdapter( mButtonView2.mAdapter );
           mListView.invalidate();
           break;
         case MODE_ERASE:
-          setTheTitle();
           mLayoutTools.setVisibility( View.INVISIBLE );
           mDrawingSurface.setDisplayPoints( false );
           mListView.setAdapter( mButtonView5.mAdapter );
@@ -4728,7 +4731,6 @@ public class DrawingWindow extends ItemDrawer
           break;
         case MODE_EDIT:
           clearSelected();
-          setTheTitle();
           mLayoutTools.setVisibility( View.INVISIBLE );
           mDrawingSurface.setDisplayPoints( true );
           mListView.setAdapter( mButtonView3.mAdapter );
@@ -4737,6 +4739,7 @@ public class DrawingWindow extends ItemDrawer
         default:
           break;
       }
+      setTheTitle();
     }
 
     /** erase mode popup menu
@@ -4891,7 +4894,7 @@ public class DrawingWindow extends ItemDrawer
         }
 
 	// CLEAR MULTISELECTION
-        text = getString(R.string.popup_multiselect);
+        text = getString(R.string.popup_finish);
         myTextView8 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
           new View.OnClickListener( ) {
             public void onClick(View v) {
@@ -5267,6 +5270,7 @@ public class DrawingWindow extends ItemDrawer
       // TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], mBMextend );
       mDrawingSurface.setManager( DrawingSurface.DRAWING_SECTION, (int)mType );
       resetReference( mPlot3 );
+      setTheTitle();
     } 
 
     private void setPlotType2( boolean compute )
@@ -5289,6 +5293,7 @@ public class DrawingWindow extends ItemDrawer
       // } else {
       //   TDLog.Error("Null app mShotWindow on recent plot type2");
       // }
+      setTheTitle();
     } 
 
     // called by setPlotType, switchPlotType and doRecover
@@ -5312,6 +5317,7 @@ public class DrawingWindow extends ItemDrawer
       // } else {
       //   TDLog.Error("Null app mShotWindow on recent plot type1");
       // }
+      setTheTitle();
     }
 
     private void flipBlock( DBlock blk )
@@ -5611,8 +5617,8 @@ public class DrawingWindow extends ItemDrawer
           setButtonSelectSize( mSelectScale + 1 ); // toggle select size
         }
       } else if ( b == mButton3[k3++] ) { // ITEM/POINT EDITING: move, split, remove, etc.
-        // Log.v( TopoDroidApp.TAG, "Button3[5] inLinePoint " + inLinePoint );
-        if ( inLinePoint ) {
+        // Log.v( TopoDroidApp.TAG, "Button3[5] hasPointActions " + hasPointActions );
+        if ( hasPointActions ) {
           makePopupEdit( b, dismiss );
         // } else {
           // SelectionPoint sp = mDrawingSurface.hotItem();
@@ -5646,6 +5652,8 @@ public class DrawingWindow extends ItemDrawer
                 } else {
 	          TDToast.makeWarn( R.string.no_feature_audio );
 		}
+              } else if ( BrushManager.isPointSection( point.mPointType ) ) {
+                new DrawingPointSectionDialog( mActivity, this, point ).show();
               } else {
                 new DrawingPointDialog( mActivity, this, point ).show();
               }

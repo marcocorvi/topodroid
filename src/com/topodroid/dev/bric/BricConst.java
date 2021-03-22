@@ -55,7 +55,7 @@ public class BricConst
   static float getDistance( byte[] bytes ) { return BleUtils.getFloat( bytes,  8 ); }
   static float getAzimuth( byte[] bytes )  { return BleUtils.getFloat( bytes, 12 ); }
   static float getClino( byte[] bytes )    { return BleUtils.getFloat( bytes, 16 ); }
-  static int   getIndex( byte[] bytes )    { return BleUtils.getChar(  bytes,  0 ); }
+  static int   getIndex( byte[] bytes )    { return BleUtils.getInt(   bytes,  0 ); }
   static float getDip( byte[] bytes )      { return BleUtils.getFloat( bytes,  4 ); }
   static float getRoll( byte[] bytes )     { return BleUtils.getFloat( bytes,  8 ); }
   static float getTemp( byte[] bytes )     { return BleUtils.getFloat( bytes, 12 ); }

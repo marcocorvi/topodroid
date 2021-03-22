@@ -23,11 +23,12 @@ import android.util.Log;
 
 import java.util.UUID;
 
-public interface BleComm
+public interface BleComm // extends BleChrtChanged
 {
   void changedMtu( int mtu );
   void readedRemoteRssi( int rssi );
 
+  // BleChrtChanged
   void changedChrt( BluetoothGattCharacteristic chrt );
 
   void readedChrt(  String uuid_str, byte[] bytes );
@@ -37,9 +38,9 @@ public interface BleComm
 
   void completedReliableWrite();
   void disconnected();
+  void connected();
 
   int servicesDiscovered( BluetoothGatt gatt );
-  void subscribeServices();
 
   boolean readChrt(  UUID srv_uuid, UUID chrt_uuid );
   boolean writeChrt( UUID srv_uuid, UUID chrt_uuid, byte[] bytes );

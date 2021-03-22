@@ -55,6 +55,7 @@
   <string name="DrawingLineSectionDialog" translatable="false">manual11.htm</string>
   <string name="DrawingModeDialog" translatable="false">page_drawing_refs.htm</string>
   <string name="DrawingPointDialog" translatable="false">page_drawing_point.htm</string>
+  <string name="DrawingPointSectionDialog" translatable="false">page_section_point.htm</string>
   <string name="DrawingProfileFlipDialog" translatable="false">page_shift.htm</string>
   <string name="DrawingShotDialog" translatable="false">page_drawing_shot.htm</string>
   <string name="DrawingStationDialog" translatable="false">page_sketch_station.htm</string>

@@ -53,7 +53,7 @@ public class BricProto extends TopoDroidProtocol
   BleCallback mCallback;
 
   // data struct
-  private int   mIndex;
+  private int   mIndex = -1;
   private long  mThisTime; // data timestamp [msec]
   long mTime = 0;          // timestamp of data that must be processed
   // float mDistance; // from TopoDroidProtocol double ...
@@ -74,7 +74,7 @@ public class BricProto extends TopoDroidProtocol
     mComm   = comm;
     mIndex  = -1;
     mLastTime = null;
-    mLastPrim = new byte[20];
+    mLastPrim = null; // new byte[20];
   }
 
 
@@ -83,21 +83,16 @@ public class BricProto extends TopoDroidProtocol
   /* check if the bytes coincide with the last Prim
    * @return true if the bytes are equal to the last Prim
    * @note the last Prim is always filled with the new bytes on exit
+   *       and mThisTime is set to the new timestamp
    */ 
   private boolean checkPrim( byte[] bytes )
   {
+    if ( Arrays.equals( mLastPrim, bytes ) ) {
+      return false;
+    }
     mThisTime = BricConst.getTimestamp( bytes ); // first 8 bytes
-    if ( mTime != mThisTime ) {
-      for ( int h=0; h<20; ++h ) mLastPrim[h] = bytes[h];
-      return true;
-    }
-    for ( int k=8; k<20; ++k ) { // data bytes
-      if ( bytes[k] != mLastPrim[k] ) {
-        for ( int h=k; h<20; ++h ) mLastPrim[h] = bytes[h];
-        return true;
-      }
-    }
-    return false;
+    mLastPrim = Arrays.copyOf( bytes, 20 );
+    return true;
   }
 
   void addMeasPrim( byte[] bytes ) 
@@ -112,6 +107,7 @@ public class BricProto extends TopoDroidProtocol
       mBearing  = BricConst.getAzimuth( bytes );
       mClino    = BricConst.getClino( bytes );
       mPrimToDo = true;
+      // Log.v("DistoX", "BRIC proto: added Prim" );
     } else {
       Log.v("DistoX", "BRIC proto: add Prim - repeated primary" );
     }
@@ -132,19 +128,20 @@ public class BricProto extends TopoDroidProtocol
   
   void processData()
   {
+    // Log.v("DistoX", "BRIC proto process data - prim todo " + mPrimToDo + " index " + mIndex );
     if ( mPrimToDo ) {
       // Log.v("DistoX", "BRIC proto send data to the app thru comm");
       // mComm.handleRegularPacket( DataType.PACKET_DATA, mLister, DataType.DATA_SHOT );
       mComm.handleBricPacket( mIndex, mLister, DataType.DATA_SHOT );
       mPrimToDo = false;
     } else {
-      Log.v("DistoX", "BRIC proto: process - PrimToDo false: ... skip");
+      Log.v("DistoX", "BRIC proto: process - PrimToDo false: ... skip at " + mIndex);
     }
   }
 
   void addMeasPrimAndProcess( byte[] bytes )
   {
-    mTime = mThisTime;
+    // mTime = mThisTime;
     if ( checkPrim( bytes ) ) { // if Prim is new
       // Log.v("DistoX", "BRIC proto: add Prim " );
       mTime     = mThisTime;

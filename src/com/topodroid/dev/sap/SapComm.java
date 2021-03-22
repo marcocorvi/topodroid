@@ -28,6 +28,7 @@ import com.topodroid.dev.Device;
 import com.topodroid.dev.TopoDroidComm;
 import com.topodroid.dev.ble.BleUtils;
 import com.topodroid.dev.ble.BleComm;
+// import com.topodroid.dev.ble.BleChrtChanged;
 import com.topodroid.dev.ble.BleCallback;
 import com.topodroid.dev.ble.BleOperation;
 import com.topodroid.dev.ble.BleOpConnect;
@@ -55,7 +56,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 // -----------------------------------------------------------------------------
 public class SapComm extends TopoDroidComm
-                     implements BleComm
+                     implements BleComm // , BleChrtChanged
 {
   // -----------------------------------------------
   // BluetoothAdapter   mAdapter;
@@ -162,6 +163,9 @@ public class SapComm extends TopoDroidComm
       // TODO
     }
   }
+
+  // BleComm interface
+  public void connected() { connected( true ); }
 
   void reconnectDevice()
   {
@@ -477,7 +481,5 @@ public class SapComm extends TopoDroidComm
   {
     mApp.notifyStatus( status );
   }
-
-  public void subscribeServices() { }
 
 }

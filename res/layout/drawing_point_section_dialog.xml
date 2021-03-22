@@ -99,64 +99,20 @@
     / -->
   </LinearLayout>
 
-  <LinearLayout 
-    style="@style/base_padding"
-    android:layout_width="match_parent" 
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    >
-    <!-- Button android:id="@+id/left"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
-      android:layout_marginLeft="@dimen/marginv"
-      android:layout_marginRight="@dimen/marginv"
-      android:background="@drawable/ic_undo"
-    / -->
-    <ImageView android:id="@+id/image"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content" 
-      android:singleLine="true"
-      android:paddingLeft="@dimen/paddingbig"
-      android:paddingRight="@dimen/paddingbig"
-      android:contentDescription="@string/orientation"
-    />
-    <!-- TextView android:id="@+id/value"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:singleLine="true"
-       android:paddingLeft="@dimen/paddingbig"
-       android:paddingRight="@dimen/paddingbig"
-    / --> 
-    <!-- Button android:id="@+id/right"
-       android:layout_width="wrap_content" 
-       android:layout_height="wrap_content" 
-       android:singleLine="true"
-       android:paddingLeft="@dimen/paddingbig"
-       android:paddingRight="@dimen/paddingbig"
-       android:background="@drawable/ic_redo"
-    / -->
-    <SeekBar android:id="@+id/seekbar"
-      android:layout_width="match_parent"
-      android:layout_height="20dp" 
-      android:max="360"
-      android:background="#666666"
-      android:progressDrawable="@drawable/progress2"
-    />
-  </LinearLayout>
 
-  <EditText android:id="@+id/point_text"
-    style="@style/edit_text_light"
-    android:layout_width="match_parent" 
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/marginv"
-    android:inputType="text"
-  />
-  <EditText android:id="@+id/point_options"
+  <TextView android:id="@+id/point_options"
     style="@style/edit_text_light"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:hint="@string/options"
     android:layout_marginBottom="@dimen/marginv"
+  />
+
+  <CheckBox android:id="@+id/point_xsection"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:text="@string/xsection"
+    android:layout_marginTop="@dimen/marginv"
   />
 
   <LinearLayout android:id="@+id/help"
@@ -184,6 +140,10 @@
         style="@style/button_default"
         android:text="@string/button_save"
         android:layout_marginRight="@dimen/marginh"
+      />
+      <Button android:id="@+id/button_draw"
+        style="@style/button_default"
+        android:text="@string/button_plot"
       />
     </LinearLayout>
   </LinearLayout>
