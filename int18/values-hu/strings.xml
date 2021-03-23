@@ -734,18 +734,18 @@ Tap <b>Bezár</b> nem változtat.
     <string name="button_xsection"  >Keresztmetszet</string>
     <string name="xsection">Kereszmetszetek</string>
 
-    <string name="mode_leg">Poligonmérések</string>
-    <string name="mode_splay">Segédmérések</string>
+    <string name="mode_leg">Poligonok</string>
+    <string name="mode_splay">Sünök</string>
     <string name="mode_latest">Utolsó mérés</string>
     <string name="mode_station">Mérési pontok</string>
     <string name="mode_grid">Rács</string>
-    <string name="mode_fixed">Rögzített referenciapontok</string>
+    <string name="mode_fixed">Fix ref.</string>
     <string name="mode_outline">Csak körvonal</string>
     <string name="mode_scale_ref">Vonalas lépték</string>
 
-    <string name="layer_floor">Fekü</string>
+    <string name="layer_floor">Alljat</string>
     <string name="layer_fill">Kitöltés</string>
-    <string name="layer_ceil">Főte</string>
+    <string name="layer_ceil">Plafon</string>
     <string name="layer_arti">Műtárgyak</string>
     <!-- UNUSED string name="layer_form">Formák</string -->
     <!-- UNUSED string name="layer_water">Víz</string -->
@@ -982,7 +982,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="import_leg_first">Poligon mérés a BJFL előtt</string>
     <string name="import_diving_datamode">Merülési adatmód</string>
 
-    <string name="title_azimut">Kiterítés vonatkozási iránya</string>
+    <string name="title_azimut">Kiterítés referencia iránya</string>
     <string name="title_audio">Hangjegyzet</string>
     <string name="title_audio_list">Hang felvétel</string>
     <string name="title_calib">Kalibrációk</string>

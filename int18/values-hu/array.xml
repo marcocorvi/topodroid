@@ -215,7 +215,7 @@
      <item name="recent">Utoljára használt</item>
      <item name="list">Lista</item>
      <item name="grid">Rács</item>
-     <item name="grid3">3D Rács</item>
+     <item name="grid3">3-as Rács</item>
   </string-array>
 
   <!-- UNUSED string-array name="sectionStations">
