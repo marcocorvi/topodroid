@@ -739,7 +739,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="mode_latest">Utolsó mérés</string>
     <string name="mode_station">Mérési pontok</string>
     <string name="mode_grid">Rács</string>
-    <string name="mode_fixed">Rögzített referenciapontok</string>
+    <string name="mode_fixed">Fix ref.</string>
     <string name="mode_outline">Csak körvonal</string>
     <string name="mode_scale_ref">Vonalas lépték</string>
 
