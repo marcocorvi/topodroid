@@ -2568,4 +2568,15 @@ class Scrap
     return Math.abs( angle ) > 3.28; 
   }
 
+  DrawingSpecialPath getDrawingSpecialPath( int type )
+  {
+    for ( ICanvasCommand cmd : mCurrentStack ) {
+      if ( cmd instanceof DrawingSpecialPath ) {
+        DrawingSpecialPath special = (DrawingSpecialPath)cmd;
+        if ( special.isType( type ) ) return special;
+      }
+    }
+    return null;
+  }
+
 }

@@ -61,6 +61,7 @@ public class BricComm extends TopoDroidComm
 {
   private final static int MODE_PRIM_ONLY = 1;
   private final static int MODE_ALL       = 3;
+  public  final static int MODE_ALL_ZERO  = 4;
   // private final static int mBricMode = MODE_PRIM_ONLY;
 
   private BricInfoDialog mBricInfoDialog = null;
@@ -124,14 +125,14 @@ public class BricComm extends TopoDroidComm
             case DATA_META:
               // Log.v("DistoX", "BRIC comm: Queue buffer META");
               // BricDebug.logMeasMeta( buffer.data );
-              if ( TDSetting.mBricMode == MODE_ALL ) {
+              if ( TDSetting.mBricMode >= MODE_ALL ) {
                 ((BricProto)mProtocol).addMeasMeta( buffer.data );
               }
               break;
             case DATA_ERR:
               // Log.v("DistoX", "BRIC comm: Queue buffer ERR");
               // BricDebug.logMeasErr( buffer.data );
-              if ( TDSetting.mBricMode == MODE_ALL ) {
+              if ( TDSetting.mBricMode >= MODE_ALL ) {
                 ((BricProto)mProtocol).addMeasErr( buffer.data );
                 ((BricProto)mProtocol).processData(); 
               }
@@ -311,7 +312,7 @@ public class BricComm extends TopoDroidComm
     // doNextOp();
     // clearPending();
 
-    if ( TDSetting.mBricMode == MODE_ALL ) {
+    if ( TDSetting.mBricMode >= MODE_ALL ) {
       enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_META_UUID, true ) );
       // doNextOp();
       clearPending();
@@ -337,7 +338,7 @@ public class BricComm extends TopoDroidComm
     enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_PRIM_UUID, true ) );
     clearPending();
 
-    if ( TDSetting.mBricMode == MODE_ALL ) {
+    if ( TDSetting.mBricMode >= MODE_ALL ) {
       enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_META_UUID, true ) );
       enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_ERR_UUID, true ) );
     }
@@ -356,7 +357,7 @@ public class BricComm extends TopoDroidComm
   {
     enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_PRIM_UUID, true ) );
     doNextOp();
-    if ( TDSetting.mBricMode == MODE_ALL ) {
+    if ( TDSetting.mBricMode >= MODE_ALL ) {
       // Log.v("DistoX", "BRIC comm: mode ALL register all for notify");
       enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_META_UUID, true ) );
       enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_ERR_UUID, true ) );

@@ -16,6 +16,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.num.TDNum;
+import com.topodroid.math.TDVector;
 // import com.topodroid.prefs.TDSetting;
 
 import android.graphics.Canvas;
@@ -489,6 +490,25 @@ public class DrawingLinePath extends DrawingPointLinePath
     }
     if ( isClosed() ) {
       mFirst.toCave3D( pw, type, cmd, num );
+    }
+    pw.format( Locale.US, "ENDLINE\n" );
+  }
+
+  @Override
+  void toCave3D( PrintWriter pw, int type, TDVector V1, TDVector V2 )
+  {
+    if ( size() < 2 ) return;
+    String name = getThName();
+    int color   = BrushManager.getLineColor( mLineType );
+    float red   = ((color >> 16)&0xff)/255.0f;
+    float green = ((color >>  8)&0xff)/255.0f;
+    float blue  = ((color      )&0xff)/255.0f;
+    pw.format( Locale.US, "LINE %s %.2f %.2f %.2f\n", name, red, green, blue );
+    for ( LinePoint pt = mFirst; pt != null; pt = pt.mNext ) {
+      pt.toCave3D( pw, type, V1, V2 );
+    }
+    if ( isClosed() ) {
+      mFirst.toCave3D( pw, type, V1, V2 );
     }
     pw.format( Locale.US, "ENDLINE\n" );
   }

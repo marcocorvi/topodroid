@@ -18,6 +18,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.num.TDNum;
+import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
 
 // import android.util.Log;
@@ -627,5 +628,14 @@ public class DrawingPath extends RectF
   }
 
   void toCave3D( PrintWriter pw, int type, DrawingCommandManager cmd, TDNum num ) { }
+
+  void toCave3D( PrintWriter pw, int type, TDVector V1, TDVector v2 ) { }
+
+  static TDVector getCave3D( float x, float y, TDVector V1, TDVector V2 )
+  {
+    float x0 = DrawingUtil.sceneToWorldX( x, y );
+    float y0 = DrawingUtil.sceneToWorldY( x, y );
+    return V1.times(x0).plus( V2.times(y0) );
+  }
 
 }

@@ -94,6 +94,29 @@ public class TopoDroidComm
     }
   }
 
+  public void handleZeroPacket( long index, Handler lister, int data_type )
+  {
+    // Log.v( "DistoX", "TD comm: PACKET " + res + "/" + DataType.PACKET_DATA + " type " + data_type );
+    // Log.v("DistoX", "TD comm: packet DATA");
+    // mNrPacketsRead.incrementAndGet(); // FIXME_ATOMIC_INT
+    ++mNrPacketsRead;
+    double r = mProtocol.mRoll;
+    long status = TDStatus.NORMAL;
+    mLastShotId = TopoDroidApp.mData.insertDistoXShot( TDInstance.sid, index, 0, 0, 0, r, ExtendType.EXTEND_IGNORE, status, TDInstance.deviceAddress() );
+    if ( lister != null ) { // FIXME_LISTER sendMessage with mLastShotId only
+      Message msg = lister.obtainMessage( Lister.LIST_UPDATE );
+      Bundle bundle = new Bundle();
+      bundle.putLong( Lister.BLOCK_ID, mLastShotId );
+      msg.setData(bundle);
+      lister.sendMessage(msg);
+      if ( TDInstance.deviceType() == Device.DISTO_A3 && TDSetting.mWaitData > 10 ) {
+        TDUtil.slowDown( TDSetting.mWaitData );
+      }
+    } else {
+      Log.v("DistoX", "TD comm: null Lister");
+    }
+  }
+
   // @param res    packet type (as returned by handlePacket / or set by Protocol )
   // @param lister data lister
   // @param data_type unused

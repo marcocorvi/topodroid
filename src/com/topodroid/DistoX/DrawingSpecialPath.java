@@ -13,8 +13,9 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.math.TDVector;
 
-// import android.util.Log;
+import android.util.Log;
 
 import android.graphics.Canvas;
 import android.graphics.Path;
@@ -26,6 +27,8 @@ import java.io.PrintWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+
+import java.util.Locale;
  
 class DrawingSpecialPath extends DrawingPath
 {
@@ -33,6 +36,8 @@ class DrawingSpecialPath extends DrawingPath
   static final int SPECIAL_DOT = 1; // leg x-section dot reference
 
   private int mType; // type of special path
+
+  boolean isType( int type ) { return mType == type; }
 
   // FIXME-COPYPATH
   // @Override
@@ -61,6 +66,7 @@ class DrawingSpecialPath extends DrawingPath
       float ccy = y + dis.readFloat();
       int lvl   = ( version >= 401090 )? dis.readInt() : DrawingLevel.LEVEL_DEFAULT;
       int scrap = ( version >= 401160 )? dis.readInt() : DrawingLevel.LEVEL_DEFAULT;
+      // Log.v("DistoX", "Drawing Special Path load data stream T " + t + " X " + ccx + " Y " + ccy );
       return new DrawingSpecialPath( t, ccx, ccy, lvl, scrap );
     } catch ( IOException e ) {
       TDLog.Error( "SPECIAL in error " + e.getMessage() );
@@ -193,6 +199,22 @@ class DrawingSpecialPath extends DrawingPath
     } catch ( IOException e ) {
       TDLog.Error( "POINT out error " + e.toString() );
     }
+  }
+
+  // @Override
+  // void toCave3D( PrintWriter pw, int type, TDVector V1, TDVector V2 )
+  // {
+  //   if ( mType == SPECIAL_DOT ) {
+  //     // cx,cy are in pixels divide by 20 to write coords in meters
+  //     TDVector vv = DrawingPath.getCave3D( cx, cy, V1, V2 )
+  //     pw.format( Locale.US, "POINT dot 0.0 %f %f %f\n",  vv.x,  vv.y, -vv.z );
+  //   }
+  // }
+
+  // return the Cave3D vector position of this special point
+  TDVector getCave3D( TDVector V1, TDVector V2 )
+  {
+    return DrawingPath.getCave3D( cx, cy, V1, V2 );
   }
 
 }

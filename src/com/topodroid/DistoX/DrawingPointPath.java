@@ -588,8 +588,8 @@ public class DrawingPointPath extends DrawingPath
   {
     // cx,cy are in pixels divide by 20 to write coords in meters
     String name  = getThName();
-    float x = (cx - 100)/20.0f;
-    float y = (cy - 120)/20.0f;
+    float x = DrawingUtil.sceneToWorldX( cx, cy );
+    float y = DrawingUtil.sceneToWorldY( cx, cy );
     float v = 0;
     TDVector vv = cmd.getCave3Dv( cx, cy, num );
     if ( type == PlotType.PLOT_PLAN ) {
@@ -600,6 +600,15 @@ public class DrawingPointPath extends DrawingPath
       y = vv.y;
     }
     pw.format( Locale.US, "POINT %s %.1f %f %f %f\n", name, mOrientation, x, -y, -v );
+  }
+
+  @Override
+  void toCave3D( PrintWriter pw, int type, TDVector V1, TDVector V2 )
+  {
+    // cx,cy are in pixels divide by 20 to write coords in meters
+    String name  = getThName();
+    TDVector vv = DrawingPath.getCave3D( cx, cy, V1, V2 );
+    pw.format( Locale.US, "POINT %s %.1f %f %f %f\n", name, mOrientation, vv.x,  vv.y, -vv.z );
   }
 
 }

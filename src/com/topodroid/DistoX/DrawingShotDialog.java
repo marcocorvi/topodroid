@@ -58,6 +58,9 @@ class DrawingShotDialog extends MyDialog
   private EditText mETto;
   private EditText mETcomment;
 
+  private boolean hideColorBtn   = true;;
+  private boolean hideStretchBar = true;
+
   private CheckBox mRBleft;
   private CheckBox mRBvert;
   private CheckBox mRBright;
@@ -80,7 +83,7 @@ class DrawingShotDialog extends MyDialog
   private int mColor;    // bock color
   private DrawingPath mPath;
   private int mFlag; // can barrier/hidden FROM and TO
-  private int mIntExtend;
+  private int mIntExtend; // used to set the progress in the Stretch Bar
   private float mStretch; // FIXME_STRETCH use a slider
 
   // 0x01 can barrier FROM
@@ -142,12 +145,15 @@ class DrawingShotDialog extends MyDialog
     // mRBsurf = (CheckBox) findViewById( R.id.surface );
     // mRBbackshot  = (CheckBox) findViewById( R.id.backshot );
 
+    hideStretchBar = true;
+    hideColorBtn   = true;
     mBtnColor = (Button) findViewById( R.id.btn_color );
     if ( TDLevel.overExpert ) {
       if ( mBlock.isSplay() ) {
 	if ( TDSetting.mSplayColor ) {
           mBtnColor.setBackgroundColor( mColor ); 
           mBtnColor.setOnClickListener( this );
+          hideColorBtn = false;
 	}
       } else if ( mParent.isExtendedProfile() && mBlock.isMainLeg() ) {
 	if ( TDSetting.mExtendFrac ) {
@@ -156,44 +162,45 @@ class DrawingShotDialog extends MyDialog
 	    BitmapDrawable background = new BitmapDrawable( mContext.getResources(), bitmap );
             TDandroid.setSeekBarBackground( mStretchBar, background ); 
 	  }
+          hideStretchBar = false;
           mStretchBar.setProgress( (int)(150 + 100 * mIntExtend + 100 * mStretch ) );
           mStretchBar.setOnSeekBarChangeListener( new OnSeekBarChangeListener() {
-              public void onProgressChanged( SeekBar stretchbar, int progress, boolean fromUser) {
-                if ( fromUser ) {
-	  	if ( progress < 100 )      { 
-                    mIntExtend = -1;
-	  	  mRBleft.setChecked(  true );
-	  	  mRBvert.setChecked(  false );
-	  	  mRBright.setChecked( false );
-	  	  mStretch = (progress- 50)/100.0f; 
-	  	} else if ( progress > 200 ) {
-                    mIntExtend = 1;
-	  	  mRBleft.setChecked(  false );
-	  	  mRBvert.setChecked(  false );
-	  	  mRBright.setChecked( true );
-	  	  mStretch = (progress-250)/100.0f;
-	          } else { 
-                    mIntExtend = 0;
-	  	  mRBleft.setChecked(  false );
-	  	  mRBvert.setChecked(  true );
-	  	  mRBright.setChecked( false );
-	  	  mStretch = (progress-150)/100.0f;
-	         	}
-                  // mStretch = (progress - 100)/200.0f;
-                  if ( mStretch < -0.5f ) mStretch = -0.5f;
-                  if ( mStretch >  0.5f ) mStretch =  0.5f;
-                }
+            public void onProgressChanged( SeekBar stretchbar, int progress, boolean fromUser) {
+              if ( fromUser ) {
+	        if ( progress < 100 ) { 
+                  mIntExtend = -1;
+	          mRBleft.setChecked(  true );
+	          mRBvert.setChecked(  false );
+	          mRBright.setChecked( false );
+	          mStretch = (progress- 50)/100.0f; 
+	        } else if ( progress > 200 ) {
+                  mIntExtend = 1;
+	          mRBleft.setChecked(  false );
+	          mRBvert.setChecked(  false );
+	          mRBright.setChecked( true );
+	          mStretch = (progress-250)/100.0f;
+	        } else { 
+                  mIntExtend = 0;
+	          mRBleft.setChecked(  false );
+	          mRBvert.setChecked(  true );
+	          mRBright.setChecked( false );
+	          mStretch = (progress-150)/100.0f;
+	        }
+                // mStretch = (progress - 100)/200.0f;
+                if ( mStretch < -0.5f ) mStretch = -0.5f;
+                if ( mStretch >  0.5f ) mStretch =  0.5f;
               }
-              public void onStartTrackingTouch(SeekBar stretchbar) { }
-              public void onStopTrackingTouch(SeekBar stretchbar) { }
+            }
+            public void onStartTrackingTouch(SeekBar stretchbar) { }
+            public void onStopTrackingTouch(SeekBar stretchbar) { }
           } );
           mStretchBar.setEnabled( true );
 	}
       }
     }
 
-    if ( ! TDSetting.mSplayColor ) mBtnColor.setVisibility( View.GONE );
-    if ( ! TDSetting.mExtendFrac ) mStretchBar.setVisibility( View.GONE );
+    if ( hideColorBtn ) mBtnColor.setVisibility( View.GONE );
+    if ( hideStretchBar ) mStretchBar.setVisibility( View.GONE );
 
     LinearLayout layout3  = (LinearLayout) findViewById( R.id.layout3 );
     LinearLayout layout3b = (LinearLayout) findViewById( R.id.layout3b );
@@ -337,7 +344,7 @@ class DrawingShotDialog extends MyDialog
   @Override
   public void colorChanged( int color )
   {
-    if ( ! TDSetting.mSplayColor ) return;
+    if ( hideColorBtn ) return;
     mColor = color;
     mParent.updateBlockColor( mBlock, mColor );
     mBtnColor.setBackgroundColor( mColor );
@@ -351,13 +358,13 @@ class DrawingShotDialog extends MyDialog
 
     Button b = (Button)view;
 
-    if ( TDSetting.mSplayColor && b == mBtnColor ) {
+    if ( (! hideColorBtn) && b == mBtnColor ) {
       new MyColorPicker( mContext, this, mColor ).show();
       return;
     } else if ( b == mRBleft ) {
       mRBvert.setChecked( false );
       mRBright.setChecked( false );
-      if ( TDSetting.mExtendFrac ) {
+      if ( ! hideStretchBar ) {
         mIntExtend = mRBleft.isChecked() ? -1 : 0;
         mStretch = 0;
         mStretchBar.setProgress(  150+100*mIntExtend );
@@ -365,7 +372,7 @@ class DrawingShotDialog extends MyDialog
     } else if ( b == mRBvert ) {
       mRBleft.setChecked( false );
       mRBright.setChecked( false );
-      if ( TDSetting.mExtendFrac ) {
+      if ( ! hideStretchBar ) {
         mIntExtend = 0;
         mStretch = 0;
         mStretchBar.setProgress( 150 );
@@ -373,7 +380,7 @@ class DrawingShotDialog extends MyDialog
     } else if ( b == mRBright ) {
       mRBleft.setChecked( false );
       mRBvert.setChecked( false );
-      if ( TDSetting.mExtendFrac ) {
+      if ( ! hideStretchBar ) {
         mIntExtend = mRBright.isChecked() ? 1 : 0;
         mStretch = 0;
         mStretchBar.setProgress(  150+100*mIntExtend );

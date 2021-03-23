@@ -265,8 +265,8 @@ public class LinePoint extends Point2D
   {
     // x: east, y:south, v:down
     // cx, cy are in pixels divide by 20 to write coords in meters
-    float x0 = (x - 100)/20.0f;
-    float y0 = (y - 120)/20.0f;
+    float x0 = DrawingUtil.sceneToWorldX( x, y );
+    float y0 = DrawingUtil.sceneToWorldY( x, y );
     float v0 = 0;
     TDVector vv = cmd.getCave3Dv( x, y, num );
     if ( type == PlotType.PLOT_PLAN ) {
@@ -279,4 +279,11 @@ public class LinePoint extends Point2D
     pw.format( Locale.US, "%f %f %f\n", x0, -y0, -v0 );
   }
 
+  void toCave3D( PrintWriter pw, int type, TDVector V1, TDVector V2 )
+  {
+    // cx,cy are in pixels divide by 20 to write coords in meters
+    TDVector vv = DrawingPath.getCave3D( x, y, V1, V2 );
+    // pw.format( Locale.US, "%f %f %f\n", vv.x, -vv.y, -vv.z );
+    pw.format( Locale.US, "%f %f %f\n", vv.x, vv.y, -vv.z );
+  }
 }

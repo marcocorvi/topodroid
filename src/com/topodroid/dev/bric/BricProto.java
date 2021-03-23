@@ -19,6 +19,7 @@ import com.topodroid.dev.ble.BleCallback;
 // import com.topodroid.dev.ble.BleUtils;
 import com.topodroid.DistoX.TopoDroidApp;
 import com.topodroid.utils.TDLog;
+import com.topodroid.prefs.TDSetting;
 
 import android.os.Looper;
 import android.os.Handler;
@@ -53,6 +54,7 @@ public class BricProto extends TopoDroidProtocol
   BleCallback mCallback;
 
   // data struct
+  private int   mLastIndex = -1;
   private int   mIndex = -1;
   private long  mThisTime; // data timestamp [msec]
   long mTime = 0;          // timestamp of data that must be processed
@@ -73,6 +75,7 @@ public class BricProto extends TopoDroidProtocol
     mLister = lister;
     mComm   = comm;
     mIndex  = -1;
+    mLastIndex = -1;
     mLastTime = null;
     mLastPrim = null; // new byte[20];
   }
@@ -134,6 +137,13 @@ public class BricProto extends TopoDroidProtocol
       // mComm.handleRegularPacket( DataType.PACKET_DATA, mLister, DataType.DATA_SHOT );
       mComm.handleBricPacket( mIndex, mLister, DataType.DATA_SHOT );
       mPrimToDo = false;
+      mLastIndex = mIndex;
+    } else if ( mIndex != mLastIndex ) {
+      Log.v("DistoX", "BRIC proto: process - PrimToDo false: ... skip at " + mIndex + " prev " + mLastIndex );
+      if ( TDSetting.mBricMode == BricComm.MODE_ALL_ZERO ) {
+        mComm.handleZeroPacket( mIndex, mLister, DataType.DATA_SHOT );
+      }
+      mLastIndex = mIndex;
     } else {
       Log.v("DistoX", "BRIC proto: process - PrimToDo false: ... skip at " + mIndex);
     }

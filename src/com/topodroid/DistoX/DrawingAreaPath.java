@@ -16,6 +16,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
+import com.topodroid.math.TDVector;
 // import com.topodroid.prefs.TDSetting;
 
 import com.topodroid.num.TDNum;
@@ -460,6 +461,24 @@ public class DrawingAreaPath extends DrawingPointLinePath
       pt.toCave3D( pw, type, cmd, num );
     }
     mFirst.toCave3D( pw, type, cmd, num );
+    pw.format( Locale.US, "ENDAREA\n" );
+  }
+
+  @Override
+  void toCave3D( PrintWriter pw, int type, TDVector V1, TDVector V2 )
+  {
+    if ( size() < 2 ) return;
+    String name = getThName();
+    int color   = BrushManager.getAreaColor( mAreaType );
+    float red   = ((color >> 16)&0xff)/255.0f;
+    float green = ((color >>  8)&0xff)/255.0f;
+    float blue  = ((color      )&0xff)/255.0f;
+    float alpha = ((color >> 24)&0xff)/255.0f;
+    pw.format( Locale.US, "AREA %s %.2f %.2f %.2f %.2f\n", name, red, green, blue, alpha );
+    for ( LinePoint pt = mFirst; pt != null; pt = pt.mNext ) {
+      pt.toCave3D( pw, type, V1, V2 );
+    }
+    mFirst.toCave3D( pw, type, V1, V2 );
     pw.format( Locale.US, "ENDAREA\n" );
   }
 

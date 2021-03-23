@@ -60,7 +60,7 @@ public class TDAzimuth
   static boolean isFixedExtend() { return mFixedExtend != 0; }
 
   // commented use for manually entered shots, 
-  // commenetd used by by Compass/VisualTopo parser
+  // used by by Compass/VisualTopo parser
   public static long computeSplayExtend( double bearing )
   {
     while ( bearing < mRefAzimuth ) bearing += 360;

@@ -1120,7 +1120,7 @@ public class DrawingWindow extends ItemDrawer
   private void doSaveTdr( )
   {
     if ( mDrawingSurface != null ) {
-      // Log.v("DistoX", "do save type " + mType );
+      // Log.v("DistoX-SAVE", "do save TDR type " + mType );
       // Modified = true; // force saving: Modified is checked before spawning the saving task
       startSaveTdrTask( mType, PlotSave.SAVE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP );
 
@@ -1166,6 +1166,10 @@ public class DrawingWindow extends ItemDrawer
    */
   private void startSaveTdrTask( final long type, int suffix, int maxTasks, int rotate )
   {
+    if ( ( suffix == PlotSave.TOGGLE || suffix == PlotSave.MODIFIED ) && ! mModified ) {
+      return;
+    }
+    // Log.v("DistoX-SAVE", "start save TDR task - suffix " + suffix + " modified " + mModified );
     PlotSaveData psd1 = null;
     PlotSaveData psd2 = null;
     if ( type == -1 ) {
@@ -2256,6 +2260,7 @@ public class DrawingWindow extends ItemDrawer
     TDInstance.setRecentPlot( name, tt );
 
     PlotInfo p1 = mApp_mData.getPlotInfo( TDInstance.sid, name+"p" );
+    // Log.v("DistoX-SAVE", "name " + name + " info " + p1.name + " " + p1.id + " pid " + mPid1 + " " + mPid2 );
     if ( mPid1 == p1.id ) {
       if ( tt != mType ) { // switch plot type
         startSaveTdrTask( mType, PlotSave.TOGGLE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP ); 
@@ -2447,7 +2452,7 @@ public class DrawingWindow extends ItemDrawer
   // called by onCreate, switchPlotType, onBackPressed and pushInfo
   private void doStart( boolean do_load, float tt )
   {
-    // Log.v("DistoX-C", "doStart " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    // Log.v("DistoX-C", "do start " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     assert( mLastLinePath == null); // not needed - guaranteed by callers
     mIntersectionT = tt;
     // Log.v("DistoX", "do start() tt " + tt );
@@ -2493,7 +2498,7 @@ public class DrawingWindow extends ItemDrawer
     // X_SECTION, XH_SECTION: mFrom != null, mTo == null, splays only 
 
     if ( PlotType.isAnySection( mType ) ) {
-      // Log.v("DistoX-GRID", "doStart section" );
+      // Log.v("DistoX-GRID", "do start section" );
       // FIXME MOVED_BACK_IN DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
       makeSectionReferences( list, tt, 0 );
     // } else {
@@ -2515,7 +2520,7 @@ public class DrawingWindow extends ItemDrawer
   private void makeSectionReferences( List< DBlock > list, float tt, int skip )
   {
 
-    // Log.v("DistoX-SPLAY", "makeSectionReferences blocks " + list.size() + " skip " + skip );
+    // Log.v("DistoX-SPLAY", "make section references blocks " + list.size() + " skip " + skip );
     assert( mLastLinePath == null); // not needed - guaranteed by callers
 
     mDrawingSurface.newReferences( DrawingSurface.DRAWING_SECTION, (int)mType );
@@ -2685,7 +2690,7 @@ public class DrawingWindow extends ItemDrawer
 
   private boolean loadFiles( long type, List< DBlock > list )
   {
-    // Log.v("DistoX-C", "loadFiles " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    // Log.v("DistoX-C", "load files " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     assert( mLastLinePath == null ); // guaranteed when called
     // Log.v("DistoX", "load files()" );
     
@@ -5247,9 +5252,9 @@ public class DrawingWindow extends ItemDrawer
 
     private void switchPlotType()
     {
-      // Log.v("DistoX-C", "switchPlotType " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      // Log.v("DistoX-SAVE", "switch plot type ");
       mLastLinePath = null; // necessary
-      doSaveTdr( ); // this sets Modified = false after spawning the saving task
+      if ( mModified ) doSaveTdr( ); // this sets Modified = false after spawning the saving task
       updateReference();
       if ( mType == PlotType.PLOT_PLAN ) {
         setPlotType2( false );
@@ -5554,6 +5559,7 @@ public class DrawingWindow extends ItemDrawer
 
       } else if ( b == mButton1[k1++] ) { // TOGGLE PLAN/EXTENDED
         if ( PlotType.isSketch2D( mType ) ) { 
+          // Log.v("DistoX-SAVE", "saving TOGGLE ...");
           startSaveTdrTask( mType, PlotSave.TOGGLE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP ); 
           // mDrawingSurface.clearDrawing();
           switchPlotType();
@@ -5904,6 +5910,9 @@ public class DrawingWindow extends ItemDrawer
             doSaveWithExt( num, manager, type, mFullName2, ext, true ); 
           } else if ( type == PlotType.PLOT_PLAN ) {
             doSaveWithExt( num, manager, type, mFullName1, ext, true ); 
+          } else {
+            // Log.v("DistoX", "save xsection as c3d");
+            doSaveWithExt( num, manager, type, mFullName3, ext, true ); 
           }
         } else {
 	  DrawingCommandManager manager1 = mDrawingSurface.getManager( mPlot1.type );
@@ -6486,7 +6495,8 @@ public class DrawingWindow extends ItemDrawer
       case TDConst.DISTOX_EXPORT_TNL: saveWithExt( mType, "xml" ); break; // , true ); break;
       case TDConst.DISTOX_EXPORT_C3D: 
         // Log.v("DistoX-C3D", "export c3d");
-        if ( ! PlotType.isAnySection( mType ) ) saveWithExt( mType, "c3d" );
+        // if ( ! PlotType.isAnySection( mType ) )
+          saveWithExt( mType, "c3d" );
         break;
     }
   }

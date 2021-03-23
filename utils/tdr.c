@@ -306,8 +306,9 @@ int main( int argc, char ** argv )
     return 0;
   }
 
+  pos = ftell( fp );
   while ( done == 0 && fread( &ch, sc, 1, fp ) != 0 ) {
-    // printf("Section <%c>\n", ch);
+    printf("Section %d <%c>\n", pos, ch);
     // { char cc; scanf("%c\n", &cc); }
     switch ( ch ) {
       case 'V':

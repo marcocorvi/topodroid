@@ -22,7 +22,7 @@ import com.topodroid.ui.MyButton;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
 
-// import android.util.Log;
+import android.util.Log;
 
 import java.util.List;
 
@@ -209,6 +209,7 @@ class DrawingStationDialog extends MyDialog
               float b1 = leg1.mBearing;
               float c0 = leg0.mClino;
               float c1 = leg1.mClino;
+              // Log.v("DistoX", "legs " + leg0.mFrom + " " + leg0.mTo + " .. " + leg1.mFrom + " " + leg1.mTo );
 
               String from = leg0.mFrom;
               if ( from.equals( mStationName ) ) {
@@ -219,7 +220,7 @@ class DrawingStationDialog extends MyDialog
               }
               String to = leg1.mTo;
               if ( to.equals( mStationName ) ) {
-                to = leg0.mFrom;
+                to = leg1.mFrom;
                 // b1 += 180; if ( b1 >= 360 ) b1 -= 360;
                 b1 = TDMath.add180( b1 );
                 c1 = -c1;

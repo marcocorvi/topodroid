@@ -18,6 +18,8 @@ import com.topodroid.num.NumStation;
 import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
+import com.topodroid.utils.TDMath;
+import com.topodroid.math.TDVector;
 // import com.topodroid.common.PointScale;
 
 import android.util.Log;
@@ -34,6 +36,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.StringWriter;
 import java.io.PrintWriter;
+// import java.nio.channels.FileChannel;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -687,6 +690,8 @@ public class DrawingIO
           fis = new FileInputStream( filename );
           BufferedInputStream bfis = new BufferedInputStream( fis );
           dis = new DataInputStream( bfis );
+
+          // FileChannel channel = fis.getChannel();
         // } else {
         //   // Log.v("DistoX-IO", "cache hit " + filename );
         //   ByteArrayInputStream bis = new ByteArrayInputStream( bos.toByteArray() );
@@ -695,7 +700,7 @@ public class DrawingIO
         boolean todo = true;
         while ( todo ) {
           int what = dis.read();
-          // Log.v("DistoX", "Read " + what );
+          // Log.v("DistoX", " read " + what );
           path = null;
           switch ( what ) {
             case 'V':
@@ -2155,6 +2160,33 @@ public class DrawingIO
     }
   }
 
+  static void exportCave3DXSection (
+      int type,
+      PrintWriter pw,
+      // DrawingCommandManager manager,
+      String scrap_name,
+      int azimuth, int clino,
+      Scrap scrap,
+      TDVector center, TDVector V1, TDVector V2 
+  )
+  {
+    // XYZefoffsets are on the header-line
+    azimuth = 0;
+    pw.format(Locale.US, "SCRAP %s %d %d %f %f %f\n", scrap_name, type, azimuth, /* clino, */ center.x, center.y, center.z );
+    // synchronized( scraps ) { // FIXME
+      // pw.format("N %d\n", scrap.mScrapIdx );
+      List< ICanvasCommand > cstack = scrap.mCurrentStack;
+      synchronized( TDPath.mCommandsLock ) {
+        for ( ICanvasCommand cmd : cstack ) {
+          if ( cmd.commandType() != 0 ) continue;
+          DrawingPath p = (DrawingPath) cmd;
+          if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) continue; // safety check: should not happen
+          p.toCave3D( pw, type, V1, V2 );
+        }
+      }
+    // }
+  }
+
   // interface for ExportPlotToFile
   // bw is flushed and closed by the caller
   static boolean exportCave3D( BufferedWriter bw, DrawingCommandManager manager, TDNum num, PlotInfo plot, FixedInfo fix, String fullname )
@@ -2183,10 +2215,52 @@ public class DrawingIO
       yoff = (float)(fix.lat + fixed.s);
       zoff = (float)(fix.alt + fixed.v);
     }
-    int proj_dir = (int)(plot.azimuth);
+    int azimuth = (int)(plot.azimuth);
 
-    PrintWriter pw = new PrintWriter( bw );
-    manager.exportCave3D( plot.type, pw, num, fullname, proj_dir, xoff, yoff, zoff );
+    if ( PlotType.isAnySection( plot.type ) ) {
+      if ( plot.start == null || plot.start.length() == 0 ) return false;
+      NumStation start = num.getStation( plot.start );
+      if ( start == null ) return false;
+
+      int clino = (int)(plot.clino);
+      // Log.v("DistoX", "azimuth " + azimuth + " clino " + clino );
+      float cc = TDMath.cosd( clino ); 
+      float sc = TDMath.sind( clino ); 
+      float ca = TDMath.cosd( azimuth );
+      float sa = TDMath.sind( azimuth );
+      TDVector V0 = new TDVector( cc * sa, cc * ca, sc );
+      TDVector V1 = new TDVector( ca, -sa, 0 );
+      TDVector V2 = V1.cross( V0 ); // new TDVector( -sc * sa, -sc * ca, cc );
+
+      // Log.v("DistoX", "fixed at " + fixed.name + " " + fixed.e + " " + fixed.s + " " + fixed.v );
+      // Log.v("DistoX", "start at " + start.name + " " + start.e + " " + start.s + " " + start.v );
+      // offset of xsection origin (xoff, yoff, zoff)
+      float ratio = 0;
+      NumStation view  = num.getStation( plot.view  );
+      TDVector viewed = null;
+      if ( view != null ) {
+        xoff += view.e-fixed.e;
+        yoff -= view.s-fixed.s;
+        zoff -= view.v-fixed.v;
+        viewed = new TDVector( (float)(start.e - view.e), -(float)(start.s - view.s), -(float)(start.v - view.v) );
+        float d3 = viewed.LengthSquared();
+        float dd = V0.dot( viewed );
+        ratio = TDMath.sqrt( (d3 - dd*dd) ); // world coordinates
+        // Log.v("DistoX", "view  at " + view.name + " " + view.e + " " + view.s + " " + view.v + " length " + viewed.Length() );
+        // Log.v("DistoX", "viewed  " + viewed.x + " " + viewed.y + " " + viewed.z + " length " + viewed.Length() );
+      } else {
+        xoff += start.e-fixed.e;
+        yoff -= start.s-fixed.s;
+        zoff -= start.v-fixed.v;
+      }
+      TDVector center = new TDVector( xoff, yoff, zoff );
+      // Log.v("DistoX", "center  " + center.x + " " + center.y + " " + center.z );
+      PrintWriter pw = new PrintWriter( bw );
+      manager.exportCave3DXSection( plot.type, pw, fullname, azimuth, clino, center, V1, V2, viewed, ratio );
+    } else {
+      PrintWriter pw = new PrintWriter( bw );
+      manager.exportCave3D( plot.type, pw, num, fullname, azimuth, xoff, yoff, zoff );
+    }
     return true;
   }
 

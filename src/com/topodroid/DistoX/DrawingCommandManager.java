@@ -14,8 +14,10 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.ui.TDGreenDot;
 import com.topodroid.num.TDNum;
+import com.topodroid.utils.TDMath;
 import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.common.PlotType;
 
 import android.util.Log;
 
@@ -1653,6 +1655,7 @@ class DrawingCommandManager
     }
   }
 
+
   // @pre must have called prepareCave3Dlegs() before
   // given a point (x,y) find the closest leg and return it (=best)
   // and the abscissa (smin) of the closest point on the leg 
@@ -1691,6 +1694,47 @@ class DrawingCommandManager
   {
     prepareCave3Dlegs();
     DrawingIO.exportCave3D( type, pw, this, num, scrap_name, proj_dir, mScraps, xoff, yoff, zoff );
+  }
+
+  boolean exportCave3DXSection( int type, PrintWriter pw, String scrap_name, int azimuth, int clino, 
+    TDVector center, TDVector V1, TDVector V2, TDVector viewed, float ratio )
+  {
+    Scrap scrap = null;
+    // Log.v("DistoX", "[1] center " + center.x + " " + center.y + " " + center.z + " ratio " + ratio );
+    // Log.v("DistoX", "V0 " + V0.x + " " + V0.y + " " + V0.z );
+    // Log.v("DistoX", "V1 " + V1.x + " " + V1.y + " " + V1.z );
+    // Log.v("DistoX", "V2 " + V2.x + " " + V2.y + " " + V2.z );
+    if ( PlotType.isXSection( type ) ) { // station-XSection center at (xoff, yoff, zoff )
+      scrap = mScraps.get( 0 );
+    } else { // leg XSection 
+      DrawingSpecialPath dot = null;
+      for ( Scrap scrap1 : mScraps ) {
+        dot = scrap1.getDrawingSpecialPath( DrawingSpecialPath.SPECIAL_DOT );
+        if ( dot != null ) {
+          TDVector vv = dot.getCave3D( V1, V2 ); // (x,y,-z)
+          // center.minusEqual( vv );
+          center.x -= vv.x;
+          center.y -= vv.y;
+          // Log.v("DistoX", "VV " + vv.x + " " + vv.y + " " + vv.z );
+          // Log.v("DistoX", "[2] center " + center.x + " " + center.y + " " + center.z );
+          scrap = scrap1;
+          break;
+        }
+      }
+      if ( dot == null ) return false;
+      float x = dot.cx - DrawingUtil.CENTER_X;
+      float y = dot.cy - DrawingUtil.CENTER_Y;
+      float dist = TDMath.sqrt( x*x + y*y )/DrawingUtil.SCALE_FIX; // world coords
+      // Log.v("DistoX", "dot dist " + dist + " --> " + (dist/ratio) );
+      TDVector dv = viewed.times( dist/ratio );
+      // center.plusEqual( dv );
+      center.x += dv.x;
+      center.y += dv.y;
+      // Log.v("DistoX", "[3] center " + center.x + " " + center.y + " " + center.z );
+    }
+    if ( scrap == null ) return false;
+    DrawingIO.exportCave3DXSection( type, pw, scrap_name, azimuth, clino, scrap, center, V1, V2 );
+    return true;
   }
 
 }

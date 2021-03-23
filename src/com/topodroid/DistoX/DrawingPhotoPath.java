@@ -14,7 +14,7 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 
-// import android.util.Log;
+import android.util.Log;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -59,6 +59,7 @@ class DrawingPhotoPath extends DrawingPointPath
 
   static DrawingPhotoPath loadDataStream( int version, DataInputStream dis, float x, float y )
   {
+    // Log.v("DistoX", "Drawing Photo Path load data stream");
     float ccx, ccy;
     int scale;
     float orientation = 0;
