@@ -197,7 +197,7 @@
      <item name="bulgarian">Български</item>
      <item name="chinese">中文</item>
      <item name="ukrainian">Українська</item>
-     <item name="hungarian">Hungarian</item>
+     <item name="hungarian">Magyar</item>
   </string-array>
   <string-array name="localeValue" translatable="false">
      <item name="default"></item>
@@ -225,7 +225,7 @@
      <item name="spanish">Español</item>
      <item name="italian">Italiano</item>
      <item name="russian">Русский</item>
-     <item name="hungarian">Hungarian</item>
+     <item name="hungarian">Magyar</item>
      <!-- item name="slovak">Slovenčina</item -->
   </string-array>
   <string-array name="localUserManValue" translatable="false">
