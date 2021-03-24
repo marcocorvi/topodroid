@@ -1700,9 +1700,12 @@ public class TDPrefKey
   public static String[] LOG = {
     "DISTOX_LOG_STREAM", // 0
     "DISTOX_LOG_APPEND",
+
     "DISTOX_LOG_DEBUG",
     "DISTOX_LOG_ERR", 
+    "DISTOX_LOG_MAIN",
     "DISTOX_LOG_PERM",  
+    "DISTOX_LOG_PREFS",  
     "DISTOX_LOG_INPUT",  // 5
     "DISTOX_LOG_PATH",
     "DISTOX_LOG_IO", 
@@ -1716,8 +1719,11 @@ public class TDPrefKey
     "DISTOX_LOG_UNITS",   // 15
     "DISTOX_LOG_DATA",
     "DISTOX_LOG_SHOT",
+    "DistoX_LOG_NAME",
     "DISTOX_LOG_SURVEY",
-    "DISTOX_LOG_NUM",  
+    "DISTOX_LOG_NOTE",
+    "DISTOX_LOG_STATS",
+    "DISTOX_LOG_NUM",
     "DISTOX_LOG_FIXED",   // 20
     "DISTOX_LOG_LOC", 
     "DISTOX_LOG_PHOTO",
@@ -1733,14 +1739,17 @@ public class TDPrefKey
   };
 
   static int[] LOGtitle = {
+     0,
      R.string.pref_log_append,  
      R.string.pref_log_debug,   
      R.string.pref_log_err,     
-     R.string.pref_log_perm,    
+     R.string.pref_log_main,    
+     R.string.pref_log_perm,
+     R.string.pref_log_prefs,
      R.string.pref_log_input,   
      R.string.pref_log_path,    
-     R.string.pref_log_io,      
-     R.string.pref_log_bt,      
+     R.string.pref_log_io,
+     R.string.pref_log_bt,
      R.string.pref_log_comm,    
      R.string.pref_log_distox,  
      R.string.pref_log_proto,   
@@ -1750,7 +1759,10 @@ public class TDPrefKey
      R.string.pref_log_units,   
      R.string.pref_log_data,    
      R.string.pref_log_shot,    
+     R.string.pref_log_name,    
      R.string.pref_log_survey,  
+     R.string.pref_log_note,    
+     R.string.pref_log_stats,    
      R.string.pref_log_num,     
      R.string.pref_log_fixed,   
      R.string.pref_log_loc,     

@@ -39,40 +39,41 @@ public class TDLog
   static private FileWriter  mLogFile = null;
   static private long mMillis;
 
-  static public boolean LOG_BEZIER = false;
-  static public boolean LOG_BT     = false;   // bluetooth
-  static public boolean LOG_CALIB  = false;
-  static public boolean LOG_COMM   = false;   // connection
-  static public boolean LOG_CSURVEY = false;
-  static public boolean LOG_DATA   = false;   // shot data
-  static public boolean LOG_DB     = false;   // sqlite database
   static public boolean LOG_DEBUG  = false;
-  static public boolean LOG_DEVICE = false;
-  static public boolean LOG_DISTOX = false;   // DistoX packets
   static public boolean LOG_ERR    = true;
-  static public boolean LOG_FIXED  = false;
-  static public boolean LOG_INPUT  = false;   // user input
-  static public boolean LOG_LOC    = false;   // location manager
-  static public boolean LOG_NOTE   = false;   // annotation
   static public boolean LOG_MAIN   = false;   // main app
-  static public boolean LOG_NAME   = false;   // names
-  static public boolean LOG_NUM    = false;  
-  static public boolean LOG_PATH   = false;
-  static public boolean LOG_PLOT   = false;
-  static public boolean LOG_PHOTO  = false;   // photos
-  static public boolean LOG_PREFS  = false;   // preferences
-  static public boolean LOG_PROTO  = false;   // protocol
-  static public boolean LOG_PTOPO  = false;   // PocketTopo
-  static public boolean LOG_SENSOR = false;   // sensors and measures
-  static public boolean LOG_SHOT   = false;   // shot
-  static public boolean LOG_STATS  = false;
-  static public boolean LOG_SURVEY = false;
-  static public boolean LOG_THERION= false;
-  static public boolean LOG_ZIP    = false;   // archive
-  static public boolean LOG_UNITS  = false;
-  static public boolean LOG_SYNC   = false;
   static public boolean LOG_PERM   = false;
+  static public boolean LOG_PREFS  = false;   // preferences
+  static public boolean LOG_INPUT  = false;   // user input
+  static public boolean LOG_PATH   = false;
   static public boolean LOG_IO     = false;
+  static public boolean LOG_BT     = false;   // bluetooth
+  static public boolean LOG_COMM   = false;   // connection
+  static public boolean LOG_DISTOX = false;   // DistoX packets
+  static public boolean LOG_PROTO  = false;   // protocol
+  static public boolean LOG_DEVICE = false;
+  static public boolean LOG_CALIB  = false;
+  static public boolean LOG_DB     = false;   // sqlite database
+  static public boolean LOG_UNITS  = false;
+  static public boolean LOG_DATA   = false;   // shot data
+  static public boolean LOG_SHOT   = false;   // shot
+  static public boolean LOG_NAME   = false;   // names
+  static public boolean LOG_SURVEY = false;
+  static public boolean LOG_NOTE   = false;   // annotation
+  static public boolean LOG_STATS  = false;
+  static public boolean LOG_NUM    = false;  
+  static public boolean LOG_FIXED  = false;
+  static public boolean LOG_LOC    = false;   // location manager
+  static public boolean LOG_PHOTO  = false;   // photos
+  static public boolean LOG_SENSOR = false;   // sensors and measures
+  static public boolean LOG_PLOT   = false;
+  static public boolean LOG_BEZIER = false;
+  static public boolean LOG_THERION= false;
+  static public boolean LOG_CSURVEY = false;
+  static public boolean LOG_PTOPO  = false;   // PocketTopo
+  static public boolean LOG_ZIP    = false;   // archive
+
+  // static public boolean LOG_SYNC   = false;
 
   static private char tf( boolean b ) { return b? 'T' : 'F'; }
 
@@ -82,8 +83,8 @@ public class TDLog
     pw.printf("Log stream %d\n", mLogStream ); // THIS MUST BE THE FIRST LINE
     pw.printf("ERROR %c, DEBUG %c, MAIN %c, PREFS %c, PERM %c, DB %c \n",
       tf(LOG_ERR), tf(LOG_DEBUG), tf(LOG_MAIN), tf(LOG_PREFS), tf(LOG_PERM), tf(LOG_DB) );
-    pw.printf("BT %c, COMM %c, DISTOX %c, DEVICE %c, PROTO %c, SYNC %c \n",
-      tf(LOG_BT), tf(LOG_COMM), tf(LOG_DISTOX), tf(LOG_DEVICE), tf(LOG_PROTO), tf(LOG_SYNC) );
+    pw.printf("BT %c, COMM %c, DISTOX %c, DEVICE %c, PROTO %c \n",
+      tf(LOG_BT), tf(LOG_COMM), tf(LOG_DISTOX), tf(LOG_DEVICE), tf(LOG_PROTO) ); // , tf(LOG_SYNC) );
     pw.printf("CALIB %c \n",
       tf(LOG_CALIB) );
     pw.printf("DATA %c, FIXED %c, INPUT %c, LOC %c, NOTE %c, NAME %c, SHOT %c, STATS %c, SURVEY %c, UNITS %c \n",
@@ -254,7 +255,9 @@ public class TDLog
     
     LOG_DEBUG   = prefs.getBoolean( log_key[lk++], false );
     LOG_ERR     = prefs.getBoolean( log_key[lk++], true );
+    LOG_MAIN    = prefs.getBoolean( log_key[lk++], false );
     LOG_PERM    = prefs.getBoolean( log_key[lk++], false );
+    LOG_PREFS   = prefs.getBoolean( log_key[lk++], false );
     LOG_INPUT   = prefs.getBoolean( log_key[lk++], false );
     LOG_PATH    = prefs.getBoolean( log_key[lk++], false );
     LOG_IO      = prefs.getBoolean( log_key[lk++], false );
@@ -268,7 +271,10 @@ public class TDLog
     LOG_UNITS   = prefs.getBoolean( log_key[lk++], false );
     LOG_DATA    = prefs.getBoolean( log_key[lk++], false );
     LOG_SHOT    = prefs.getBoolean( log_key[lk++], false );
+    LOG_NAME    = prefs.getBoolean( log_key[lk++], false );
     LOG_SURVEY  = prefs.getBoolean( log_key[lk++], false );
+    LOG_NOTE    = prefs.getBoolean( log_key[lk++], false );
+    LOG_STATS   = prefs.getBoolean( log_key[lk++], false );
     LOG_NUM     = prefs.getBoolean( log_key[lk++], false );
     LOG_FIXED   = prefs.getBoolean( log_key[lk++], false );
     LOG_LOC     = prefs.getBoolean( log_key[lk++], false );
@@ -305,9 +311,13 @@ public class TDLog
       LOG_DEBUG = b;
     } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_ERR",
       LOG_ERR = b;
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_MAIN"
+      LOG_MAIN = b;
     } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_PERM"
       LOG_PERM = b;
-    } else if ( k.equals( log_key[ lk++ ] )) { // "DISTOX_LOG_INPUT",        
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_PREFS"
+      LOG_PREFS = b;
+    } else if ( k.equals( log_key[ lk++ ] )) { // "DISTOX_LOG_INPUT",
       LOG_INPUT = b;
     } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_PATH"
       LOG_PATH = b;
@@ -331,10 +341,16 @@ public class TDLog
       LOG_UNITS = b;
     } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_DATA",
       LOG_DATA = b;
-    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_SHOT"        
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_SHOT"
       LOG_SHOT = b;
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_NOTE"
+      LOG_NOTE = b;
     } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_SURVEY"
       LOG_SURVEY = b;
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_NOTE"
+      LOG_NOTE = b;
+    } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_STATS"
+      LOG_STATS = b;
     } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_NUM"
       LOG_NUM = b;
     } else if ( k.equals( log_key[ lk++ ] ) ) { // "DISTOX_LOG_FIXED",

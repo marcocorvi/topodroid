@@ -67,7 +67,7 @@ public class UserManDownload extends AsyncTask< String, Integer, Integer >
           while ( ( ze = zin.getNextEntry() ) != null ) {
             String name = ze.getName();
             if ( ! ze.isDirectory() ) { // normal file
-              // TDLog.Error( "Zip entry \"" + name + "\"" );
+              TDLog.Log( TDLog.LOG_PREFS, "Zip entry \"" + name + "\"" );
               int pos = name.lastIndexOf('/');
 	      if ( pos > 0 ) name = name.substring(pos+1);
 	      if ( ! name.startsWith("README") ) {
@@ -78,15 +78,17 @@ public class UserManDownload extends AsyncTask< String, Integer, Integer >
                 }
                 fos.close();
 	      }
-            // } else { // ze directory: not really an error
-            //   TDLog.Error( "Zip dir entry \"" + name + "\"" );
+            } else { // ze directory: not really an error
+              TDLog.Log( TDLog.LOG_PREFS, "Zip dir entry \"" + name + "\"" );
 	    }
 	  }
           ret = 1;
         } else {
           TDLog.Error("ERROR could not mkdirs" );
         }
-      }
+      } else {
+        TDLog.Error("HTTP error : " + response );
+      } 
       http.disconnect();
     } catch ( MalformedURLException e1 ) {
       TDLog.Error( "ERROR bad URL: " + e1.toString() );

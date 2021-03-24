@@ -1158,6 +1158,7 @@ public class TDSetting
     } else if ( k.equals( key[ 5 ] ) ) {           // DISTOX_NO_CURSOR(bool)
       mNoCursor = tryBooleanValue( hlp, k, v, bool(def[5]) );
     } else if ( k.equals( key[ 6 ] ) ) {           // DISTOX_LOCAL_MAN (choice)
+      // Log.v("DistoX", "handle local man pages - key " + k + " default " + def[6] );
       mLocalManPages = handleLocalUserMan( /* hlp.getApp(), */ tryStringValue( hlp, k, v, def[6] ), true );
     } else if ( k.equals( key[ 7 ] ) ) {           // DISTOX_LOCALE (choice)
       setLocale( tryStringValue( hlp, k, v, def[7] ), true );
@@ -2479,6 +2480,7 @@ public class TDSetting
 	       };
         String url = TDInstance.getResources().getString( res[idx] );
        	if ( url != null && url.length() > 0 ) {
+          TDLog.Log( TDLog.LOG_PREFS, "idx " + idx + " url " + url );
           // try do download the zip
           (new UserManDownload( /* my_app, */ url )).execute();
 	}
@@ -2649,7 +2651,7 @@ public class TDSetting
       String line;
       while ( ( line = br.readLine() ) != null ) {
         String[] vals = line.replaceAll(",", "").replaceAll("\\s+", " ").split(" ");
-        Log.v("DistoX", line );
+        // Log.v("DistoX", line );
         if ( line.startsWith("TopoDroid" ) ) {
           if ( vals.length < 4 ) return false;
           if ( getInt( vals, 3, 0 ) < 500053 ) return false;

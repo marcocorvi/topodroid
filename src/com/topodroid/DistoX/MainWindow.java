@@ -1059,7 +1059,7 @@ public class MainWindow extends Activity
     }
   }
 
-  // check whether ask user to update manual translation
+  // check whether to ask user to update manual translation
   private void checkManualTranslation()
   {
     File manifest = new File( TDPath.getManFile( "manifest" ) );
@@ -1104,11 +1104,18 @@ public class MainWindow extends Activity
         } else if ( "es".equals( lang ) ) {
           res = R.string.man_version_es;
           man = R.string.user_man_es;
+        } else if ( "hu".equals( lang ) ) {
+          res = R.string.man_version_hu;
+          man = R.string.user_man_hu;
+        // } else if ( "sl".equals( lang ) ) {
+        //   res = R.string.man_version_sl;
+        //   man = R.string.user_man_sl;
         }
         if ( res > 0 ) {
           int current = Integer.parseInt( getResources().getString( res ) );
           if ( current > version ) { // prompt user
             final String url = getResources().getString( man );
+            TDLog.Log( TDLog.LOG_PREFS, "User Manual lang " + lang + " res " + res + " url " + url );
             String msg = String.format( getResources().getString( R.string.ask_manual_update ), current, version );
             TopoDroidAlertDialog.makeAlert( this, getResources(), msg, 
               new DialogInterface.OnClickListener() {

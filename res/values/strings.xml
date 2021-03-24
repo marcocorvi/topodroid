@@ -1549,35 +1549,41 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_log_stream_summary" translatable="false">Log output stream</string>
   <string name="pref_log_stream_title" translatable="false">Log stream</string>
   <string name="pref_log_append" translatable="false">append logs</string>
-  <string name="pref_log_bt" translatable="false">Bluetooth</string>
-  <string name="pref_log_bezier" translatable="false">Bezier curves</string>
-  <string name="pref_log_calib" translatable="false">Calibration</string>
-  <string name="pref_log_comm" translatable="false">BT communication</string>
-  <string name="pref_log_csurvey" translatable="false">cSurvey</string>
-  <string name="pref_log_data" translatable="false">Survey data</string>
-  <string name="pref_log_db" translatable="false">Database</string>
+
   <string name="pref_log_debug" translatable="false">Debug</string>
-  <string name="pref_log_device" translatable="false">Device window</string>
-  <string name="pref_log_distox" translatable="false">DistoX</string>
   <string name="pref_log_err" translatable="false">Error</string>
-  <string name="pref_log_fixed" translatable="false">GPS points</string>
-  <string name="pref_log_input" translatable="false">User input</string>
-  <string name="pref_log_io" translatable="false">Sketch i/o</string>
-  <string name="pref_log_loc" translatable="false">Location</string>
-  <string name="pref_log_num" translatable="false">Data reduction</string>
-  <string name="pref_log_path" translatable="false">File paths</string>
+  <string name="pref_log_main" translatable="false">Main</string>
   <string name="pref_log_perm" translatable="false">Permissions</string>
-  <string name="pref_log_photo" translatable="false">Photo</string>
-  <string name="pref_log_plot" translatable="false">Sketches</string>
+  <string name="pref_log_prefs" translatable="false">Preferences</string>
+  <string name="pref_log_input" translatable="false">User input</string>
+  <string name="pref_log_path" translatable="false">File paths</string>
+  <string name="pref_log_io" translatable="false">Sketch i/o</string>
+  <string name="pref_log_bt" translatable="false">Bluetooth</string>
+  <string name="pref_log_comm" translatable="false">BT communication</string>
+  <string name="pref_log_distox" translatable="false">DistoX</string>
   <string name="pref_log_proto" translatable="false">DistoX protocol</string>
-  <string name="pref_log_ptopo" translatable="false">PocketTopo</string>
-  <string name="pref_log_sensor" translatable="false">Sensors</string>
-  <string name="pref_log_shot" translatable="false">Shots</string>
-  <!-- UNUSED string name="pref_log_sync" translatable="false">Cosurveying</string -->
-  <string name="pref_log_survey" translatable="false">Surveys</string>
-  <string name="pref_log_therion" translatable="false">Therion</string>
+  <string name="pref_log_device" translatable="false">Device window</string>
+  <string name="pref_log_calib" translatable="false">Calibration</string>
+  <string name="pref_log_db" translatable="false">Database</string>
   <string name="pref_log_units" translatable="false">Units</string>
+  <string name="pref_log_data" translatable="false">Survey data</string>
+  <string name="pref_log_shot" translatable="false">Shots</string>
+  <string name="pref_log_name" translatable="false">Naming</string>
+  <string name="pref_log_survey" translatable="false">Surveys</string>
+  <string name="pref_log_note" translatable="false">Notes</string>
+  <string name="pref_log_stats" translatable="false">Stats</string>
+  <string name="pref_log_num" translatable="false">Data reduction</string>
+  <string name="pref_log_fixed" translatable="false">GPS points</string>
+  <string name="pref_log_loc" translatable="false">Location</string>
+  <string name="pref_log_photo" translatable="false">Photo</string>
+  <string name="pref_log_sensor" translatable="false">Sensors</string>
+  <string name="pref_log_plot" translatable="false">Sketches</string>
+  <string name="pref_log_bezier" translatable="false">Bezier curves</string>
+  <string name="pref_log_therion" translatable="false">Therion</string>
+  <string name="pref_log_csurvey" translatable="false">cSurvey</string>
+  <string name="pref_log_ptopo" translatable="false">PocketTopo</string>
   <string name="pref_log_zip" translatable="false">ZIP</string>
+  <!-- UNUSED string name="pref_log_sync" translatable="false">Cosurveying</string -->
 
   <!-- UNUSED string name="line_bezier">Bezier</string -->
   <!-- UNUSED string name="line_fine">fine</string -->
