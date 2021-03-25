@@ -47,7 +47,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="POINT">PONT</string>
     <string name="LINE">VONAL</string>
     <string name="AREA">TERÜLET</string>
-    <string name="HELP">SEGÍTSÉG</string>
+    <string name="HELP">SÚGÓ</string>
     <string name="STATION">MÉRÉSI PONT</string>
     <string name="UP">FENT</string>
     <string name="DOWN">LENT</string>
@@ -1602,7 +1602,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="welcome_text">
 \nTopoDroid egy Nyílt forráskódú Android alkalmazás DistoX-el történő barlangfelmérésre.
 \n\nNINCS GARANCIA: A SZOFTWER HASZNÁLATÁVAL ÖN ELFOGADJA AZT, HOGY A SZERZŐ NEM VÁLALL FELELŐSSÉGET A SZÁMÍTÓGÉPRENDSZERÉBEN VAGY MÁS ESZKÖZBEN KELETKEZŐ KÁRÉRT VAGY ADATVESZTÉSÉRT.
-\n\nSEGÍTSÉG: menü "segítség"
+\n\nSEGÍTSÉG: menü "súgó"
 \nFelhasználói kézikönyv: MENÜ gomb
 \nDokumentumok: http://sites.google.com/site/speleoapps
 \nHozzászólások, bug bejelentés, új funkció igények: marco.corvi@gmail.com
