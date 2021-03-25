@@ -4,7 +4,7 @@ name walkway-soil
 name-pt passarela_de_terra
 name-ru земляная_дорожка
 name-ro trotuar-sol
-name-hu földes-járda
+name-hu járda_földes
 th_name u:walkway-soil
 group trail
 orientation no
