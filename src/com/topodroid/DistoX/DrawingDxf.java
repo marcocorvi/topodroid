@@ -788,7 +788,7 @@ class DrawingDxf
           int flag = 0;
           int color = 1;
           // if ( ! mVersion13 ) { handle = 40; }
-          handle = inc(handle); printLayer( pw2, handle, "0",       flag, 0, lt_continuous ); // LAYER "0" .. FIXME DraftSight ..must be AutoCAD
+          handle = inc(handle); printLayer( pw2, handle, "0",       flag, color, lt_continuous ); // LAYER "0" .. FIXME DraftSight ..must be AutoCAD
           handle = inc(handle); printLayer( pw2, handle, "LEG",     flag, color, lt_continuous ); ++color; // red
           handle = inc(handle); printLayer( pw2, handle, "SPLAY",   flag, color, lt_continuous ); ++color; // yellow
           handle = inc(handle); printLayer( pw2, handle, "STATION", flag, color, lt_continuous ); ++color; // green
