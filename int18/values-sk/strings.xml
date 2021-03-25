@@ -1666,6 +1666,7 @@ DO NOT REMOVE THIS LINE -->
     <string name="title_export">Export projekt ako &#8230;</string>
     <string name="title_equates">Projekt Porovnanie</string>
     <string name="title_equate_new">Pridaj Porovnanie &#8230;</string>
+    <!-- TODO string name="title_equate_with">Equate %1$s and %2$s</string -->
     <string name="title_cwd">Aktuálny Pracovný Adresár</string>
     <string name="title_settings">TdManager Nastavenia</string>
     <string name="title_drop">Zahodiť Mapovania ?</string>

@@ -579,7 +579,8 @@ public class TdmViewActivity extends Activity
         while ( len > 0 && st.charAt( len - 1 ) == '.' ) -- len;
         final String st2 = st.substring(0,len);
 
-        String title = "Equate " + st1 + " with " + st2;
+        // String title = "Equate " + st1 + " with " + st2;
+        String title = String.format( getResources().getString( R.string.title_equate_with ), st1, st2 );
         TopoDroidAlertDialog.makeAlert( this, getResources(), title, 
           new DialogInterface.OnClickListener() {
             @Override public void onClick( DialogInterface dialog, int btn ) {

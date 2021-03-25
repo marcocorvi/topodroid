@@ -1619,8 +1619,9 @@ Tap "Chiudi" per fare nulla.
     <string name="title_help">Gestore TopoDroid v. %1$s</string>
     <string name="title_export_settings">Impostazioni importa/esporta</string>
     <string name="title_export">Esporta progetto come &#8230;</string>
-    <string name="title_equates">Progetto Equivalenti</string>
-    <string name="title_equate_new">Aggiungi equivalente &#8230;</string>
+    <string name="title_equates">Collegamenti</string>
+    <string name="title_equate_new">Aggiungi collegamento &#8230;</string>
+    <string name="title_equate_with">Collega %1$s e %2$s</string>
     <string name="title_cwd">Cartella di lavoro corrente</string>
     <string name="title_settings">Impostazioni TdManager</string>
     <string name="title_drop">Cancello rilievi ?</string>

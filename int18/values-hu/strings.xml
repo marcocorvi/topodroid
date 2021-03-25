@@ -1673,6 +1673,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="title_export">Projekt exportálva a &#8230;</string>
     <string name="title_equates">Projekt azonos pontok</string>
     <string name="title_equate_new">Azonos pont hozzáadás &#8230;</string>
+    <!-- TODO string name="title_equate_with">Equate %1$s and %2$s</string -->
     <string name="title_cwd">Jelenlegi munka könyvtár</string>
     <string name="title_settings">TdManager beállítások</string>
     <string name="title_drop">Eldobja a mérést?</string>

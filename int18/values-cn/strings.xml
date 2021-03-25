@@ -1650,6 +1650,7 @@ Tap "Close" not to take any action.
     <string name="title_export">项目输出 &#8230;</string>
     <string name="title_equates">相同项目</string>
     <string name="title_equate_new">添加相同 &#8230;</string>
+    <!-- TODO string name="title_equate_with">Equate %1$s and %2$s</string -->
     <string name="title_cwd">当前工作目录</string>
     <string name="title_settings">TdManager设置</string>
     <string name="title_drop">停止测量 ?</string>

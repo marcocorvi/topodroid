@@ -1624,6 +1624,7 @@ Tap "Close" not to take any action.
     <string name="title_export">Exportă proiectul ca &#8230;</string>
     <string name="title_equates">Vize echivalente Proiect</string>
     <string name="title_equate_new">Adaugă viză echivalentă &#8230;</string>
+    <!-- TODO string name="title_equate_with">Equate %1$s and %2$s</string -->
     <string name="title_cwd">Director de lucru actual</string>
     <string name="title_settings">Parametri TdManager</string>
     <string name="title_drop">Înlătură cartări ?</string>

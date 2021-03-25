@@ -1625,6 +1625,7 @@ Tap "Close" not to take any action.
     <!-- TODO string name="title_export">Export project as &#8230;</string -->
     <!-- TODO string name="title_equates">Project Equates</string -->
     <!-- TODO string name="title_equate_new">Add equate &#8230;</string -->
+    <!-- TODO string name="title_equate_with">Equate %1$s and %2$s</string -->
     <!-- TODO string name="title_cwd">Current Work Directory</string -->
     <!-- TODO string name="title_settings">TdManager Settings</string -->
     <!-- TODO string name="title_drop">Drop surveys ?</string -->
