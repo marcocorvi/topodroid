@@ -1098,15 +1098,15 @@ public class MainWindow extends Activity
         } else if ( "it".equals( lang ) ) {
           res = R.string.man_version_it;
           man = R.string.user_man_it;
-        // } else if ( "fr".equals( lang ) ) {
-        //   res = R.string.man_version_fr;
-        //   man = R.string.user_man_fr;
         } else if ( "es".equals( lang ) ) {
           res = R.string.man_version_es;
           man = R.string.user_man_es;
         } else if ( "hu".equals( lang ) ) {
           res = R.string.man_version_hu;
           man = R.string.user_man_hu;
+        } else if ( "fr".equals( lang ) ) {
+          res = R.string.man_version_fr;
+          man = R.string.user_man_fr;
         // } else if ( "sl".equals( lang ) ) {
         //   res = R.string.man_version_sl;
         //   man = R.string.user_man_sl;
