@@ -933,11 +933,11 @@ Tap <b>Bezár</b> nem változtat.
     <string name="help_add_surveys">Mérés hozzáadása</string>
     <string name="help_drop_surveys">Mérés eldobása</string>
     <string name="help_view_surveys">Mérések megjelenítése</string>
-    <string name="help_view_equates">Azonosságok listázása</string>
+    <string name="help_view_equates">Megeggyező listázása</string>
     <string name="help_export_config">Projekt Exportálás</string>
     <string name="help_delete_config">Projekt törlése</string>
-    <string name="help_add_equate">Mérések azonos pontjainak hozzáadása</string>
-    <string name="help_equates">Azonos pontok listázása</string>
+    <string name="help_add_equate">Mérések megeggyező pontjainak hozzáadása</string>
+    <string name="help_equates">Megeggyező pontok listázása</string>
 
     <string name="export_bgcolor">Fehér háttér</string>
     <string name="export_config">Konfigurációa állomány</string>
@@ -1656,14 +1656,14 @@ Tap <b>Bezár</b> nem változtat.
     <string name="oom">Fifyelem! Megtelt a memória</string>
 
     <string name="ask_delete_tdconfig">TdConfig fájl törlése</string>
-    <string name="ask_remove_equate">Azonosság megszüntetés %1$s ?</string>
+    <string name="ask_remove_equate">Megeggyezés megszüntetés %1$s ?</string>
     <string name="equate_no_station">Nincs kiválasztott pont</string>
     <string name="equate_no_stations">Zúl kevés pont</string>
     <string name="equate_no_nearby">Nincs közelben pont</string>
 
     <string name="menu_new">ÚJ</string>
-    <string name="menu_equate">AZONOSSÁG HOZZÁADÁSA</string>
-    <string name="menu_equates">AZONOS PONTOK</string>
+    <string name="menu_equate">MEGEGGYEZÉSEK HOZZÁADÁSA</string>
+    <string name="menu_equates">MEGEGGYEZŐ PONTOK</string>
     <string name="menu_save">MENTÉS</string>
 
     <string name="overwrite">felülírja</string>
@@ -1671,8 +1671,8 @@ Tap <b>Bezár</b> nem változtat.
     <!-- OK string name="title_help">TopoDroid Manager v. %1$s</string -->
     <string name="title_export_settings">Import/export beállítások</string>
     <string name="title_export">Projekt exportálva a &#8230;</string>
-    <string name="title_equates">Projekt azonos pontok</string>
-    <string name="title_equate_new">Azonos pont hozzáadás &#8230;</string>
+    <string name="title_equates">Projekt megeggyező pontok</string>
+    <string name="title_equate_new">Megeggyező pont hozzáadás &#8230;</string>
     <string name="title_cwd">Jelenlegi munka könyvtár</string>
     <string name="title_settings">TdManager beállítások</string>
     <string name="title_drop">Eldobja a mérést?</string>
