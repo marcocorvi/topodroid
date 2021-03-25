@@ -11,7 +11,7 @@ name-ru водоток_сезонный
 name-bg течаща_вода
 name-ua водотік
 name-fa جریان_آب
-name-hu vízfolyás
+name-hu vízfolyás_időszakos
 name-ro curs_intermitent
 th_name water-flow:intermittent
 group water-flow
