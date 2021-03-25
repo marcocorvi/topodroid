@@ -4,7 +4,7 @@ name walkway-metalic
 name-pt passarela_metálica
 name-ru металлический_настил
 name-ro trotuar-metalic
-name-hu fém-járda
+name-hu járda_fém
 th_name u:walkway-metalic
 group trail
 orientation no
