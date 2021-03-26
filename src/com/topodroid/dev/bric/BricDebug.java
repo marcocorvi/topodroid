@@ -52,7 +52,7 @@ class BricDebug
   {
     StringBuilder sb = new StringBuilder();
     for ( int k=0; k<bytes.length; ++k ) sb.append( String.format(" %02x", bytes[k] ) );
-    Log.v("DistoX", "BRIC debug Info " + bytes.length + ": " + sb.toString() );
+    Log.v("DistoX", "BRIC debug Info " + bytes.length + ": hex " + sb.toString() );
   }
 
   static void logAscii( byte[] bytes )

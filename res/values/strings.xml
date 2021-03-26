@@ -99,6 +99,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="bric_hw">Hardware %1$s</string>
     <string name="bric_battery">Battery %1$d</string>
     <string name="bric_battery_wait">Battery &#8230;</string>
+    <string name="bric_reset_time">Reset time</string>
+    <string name="bric_clear_memory">Clear memory</string>
+    <string name="bric_future_time">Refusing to reset to a future time</string>
+    <string name="bric_ask_memory_clear">Clear BRIC memory ?</string>
 
     <string name="calibration_title">Instruments calibration</string>
     <string name="calibration_length">Tape</string>
@@ -147,7 +151,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="device_model_set">DO YOU REALLY WANT TO CHANGE THE MODEL OF THE DEVICE</string -->
     <string name="device_none">No DistoX selected</string>
     <!-- UNUSED string name="device_paired">Device is paired</string -->
-    <string name="device_reset">Reset DistoX memory</string>
+    <string name="device_reset">Reset DistoX memory ?</string>
     <string name="device_clear">Clear DistoX memory</string>
     <string name="device_code">DistoX code %1$4d</string>
     <string name="device_firmware">Firmware  %1$d.%2$d</string>
@@ -411,6 +415,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="bric_shot">Shot</string>
     <string name="bric_laser">Laser</string>
     <string name="bric_off">Off</string>
+    <string name="bric_memory">BRIC memory</string>
 
     <string name="popup_join_pt">Snap to point</string>
     <string name="popup_snap_ln">Snap to line</string>

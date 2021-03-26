@@ -99,6 +99,10 @@ Tap "Chiudi" per fare nulla.
     <string name="bric_hw">Hardware %1$s</string>
     <string name="bric_battery">Batteria %1$d</string>
     <string name="bric_battery_wait">Batteria &#8230;</string>
+    <!-- TODO string name="bric_reset_time">Reset time</string -->
+    <!-- TODO string name="bric_clear_memory">Clear memory</string -->
+    <!-- TODO string name="bric_future_time">Refusing to reset to a future time</string -->
+    <!-- TODO string name="bric_ask_memory_clear">Clear BRIC memory ?</string -->
 
     <string name="calibration_title">Strumenti di calibrazione</string>
     <string name="calibration_length">Fettuccia</string>
@@ -400,7 +404,8 @@ Tap "Chiudi" per fare nulla.
     <string name="bric_scan">Scansione</string>
     <string name="bric_shot">Tiro</string>
     <string name="bric_laser">Laser</string>
-    <string name="bric_off">SpentoOff</string>
+    <string name="bric_off">Spegni</string>
+    <string name="bric_memory">Memoria interna BRIC</string>
 
 
     <string name="popup_join_pt">Sposta al punto vicino</string>

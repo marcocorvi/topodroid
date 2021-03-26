@@ -100,6 +100,10 @@
     <string name="bric_hw">Аппаратное обеспечение %1$s</string>
     <string name="bric_battery">Батарея %1$d</string>
     <string name="bric_battery_wait">Батарея &#8230;</string>
+    <!-- TODO string name="bric_reset_time">Reset time</string -->
+    <!-- TODO string name="bric_clear_memory">Clear memory</string -->
+    <!-- TODO string name="bric_future_time">Refusing to reset to a future time</string -->
+    <!-- TODO string name="bric_ask_memory_clear">Clear BRIC memory ?</string -->
 
     <string name="calibration_title">Корекция измерений выполненых вручную</string>
     <string name="calibration_length">Рулетка</string>
@@ -405,6 +409,7 @@
     <string name="bric_shot">Измерить</string>
     <string name="bric_laser">Лазер</string>
     <string name="bric_off">Выкл</string>
+    <!-- TODO string name="bric_memory">BRIC memory</string -->
 
 
     <string name="popup_join_pt">Привязать к ближайшей точке</string>

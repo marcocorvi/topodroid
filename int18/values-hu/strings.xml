@@ -99,6 +99,10 @@ Tap <b>Bezár</b> nem változtat.
     <string name="bric_hw">Hardware %1$s</string>
     <string name="bric_battery">Akku %1$d</string>
     <string name="bric_battery_wait">Akku &#8230;</string>
+    <!-- TODO string name="bric_reset_time">Reset time</string -->
+    <!-- TODO string name="bric_clear_memory">Clear memory</string -->
+    <!-- TODO string name="bric_future_time">Refusing to reset to a future time</string -->
+    <!-- TODO string name="bric_ask_memory_clear">Clear BRIC memory ?</string -->
 
     <string name="calibration_title">Műszerek kalibrálása</string>
     <string name="calibration_length">Mérőszalag</string>
@@ -411,6 +415,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="bric_shot">Mérés</string>
     <string name="bric_laser">Lézer</string>
     <string name="bric_off">Ki</string>
+    <!-- TODO string name="bric_memory">BRIC memory</string -->
 
     <string name="popup_join_pt">Kapcsolás pontra</string>
     <string name="popup_snap_ln">Kapcsolás vonalra</string>

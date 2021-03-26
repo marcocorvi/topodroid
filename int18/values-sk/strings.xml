@@ -100,6 +100,10 @@ Tap "Close" not to take any action.
     <!-- TODO string name="bric_hw">Hardware %1$s</string -->
     <!-- TODO string name="bric_battery">Battery %1$d</string -->
     <!-- TODO string name="bric_battery_wait">Battery &#8230;</string -->
+    <!-- TODO string name="bric_reset_time">Reset time</string -->
+    <!-- TODO string name="bric_clear_memory">Clear memory</string -->
+    <!-- TODO string name="bric_future_time">Refusing to reset to a future time</string -->
+    <!-- TODO string name="bric_ask_memory_clear">Clear BRIC memory ?</string -->
 
     <string name="calibration_title">Kalibrácia nástrojov</string>
     <string name="calibration_length">Dĺžka</string>
@@ -412,6 +416,7 @@ Tap "Close" not to take any action.
     <!-- TODO string name="bric_shot">Shot</string -->
     <!-- TODO string name="bric_laser">Laser</string -->
     <!-- TODO string name="bric_off">Off</string -->
+    <!-- TODO string name="bric_memory">BRIC memory</string -->
 
 
     <string name="popup_join_pt">Prichytiť na blízky bod</string>

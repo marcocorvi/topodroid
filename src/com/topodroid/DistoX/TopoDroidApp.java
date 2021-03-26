@@ -1892,13 +1892,36 @@ public class TopoDroidApp extends Application
     if ( mComm != null && mComm instanceof BricComm ) {
       BricComm comm = (BricComm)mComm;
       connectDevice( TDInstance.deviceAddress(), DataType.DATA_ALL );
-      TDUtil.yieldDown(4000);
-      comm.registerInfo( info );
-      info.getInfo( comm );
-      // disconnectComm();
+      TDUtil.yieldDown(4000); // FIXME was 4000
+      if ( comm.isConnected() ) {
+        comm.registerInfo( info );
+        info.getInfo( comm );
+        // disconnectComm();
+      } else {
+        Log.v("DistoX", "failed to connect BRIC");
+      }
     }
     return false;
   }
+
+  public boolean setBricMemory( byte[] bytes )
+  {
+    Log.v("DistoX", "set BRIC memory - bytes ... " + ( (bytes == null)? "null" : bytes[6] + " " + bytes[7] ) );
+    boolean ret = false;
+    if ( mComm != null && mComm instanceof BricComm ) {
+      BricComm comm = (BricComm)mComm;
+      connectDevice( TDInstance.deviceAddress(), DataType.DATA_ALL );
+      TDUtil.yieldDown(4000);
+      if ( comm.isConnected() ) {
+        ret = comm.setMemory( bytes );
+        disconnectComm();
+      } else {
+        Log.v("DistoX", "failed to connect BRIC");
+      }
+    }
+    return ret;
+  }
+
 
   /** 
    * @param what      what to do

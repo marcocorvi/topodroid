@@ -230,4 +230,17 @@ public class BleUtils
     int i = bytes[offset];
     return ( i < 0 )? i+256 : i;
   }
+
+  public static void putShort( byte[] bytes, int offset, short s )
+  {
+    if ( offset+2 > bytes.length ) return;
+    bytes[offset  ] = (byte)( s & 0xff );
+    bytes[offset+1] = (byte)( (s>>8) & 0xff );
+  }
+
+  public static void putChar( byte[] bytes, int offset, int c )
+  {
+    if ( offset >= bytes.length ) return;
+    bytes[offset] = (byte)c;
+  }
 }

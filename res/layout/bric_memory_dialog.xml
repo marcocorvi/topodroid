@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+  style="@style/base_padding"
+  android:layout_width="match_parent" 
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  >
+  <LinearLayout 
+      style="@style/base_padding"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      >
+
+    <EditText android:id="@+id/bric_year" 
+      android:layout_marginLeft="@dimen/marginhsmall"
+      android:layout_width="0dp"
+      android:layout_weight="2"
+      android:layout_height="wrap_content" 
+      android:ems="25"
+      android:singleLine="true"
+    />
+    <EditText android:id="@+id/bric_month" 
+      android:layout_marginLeft="@dimen/marginhsmall"
+      android:layout_width="0dp"
+      android:layout_weight="1"
+      android:layout_height="wrap_content" 
+      android:ems="25"
+      android:singleLine="true"
+    />
+    <EditText android:id="@+id/bric_day" 
+      android:layout_marginLeft="@dimen/marginhsmall"
+      android:layout_width="0dp"
+      android:layout_weight="1"
+      android:layout_height="wrap_content" 
+      android:ems="25"
+      android:singleLine="true"
+    />
+    <EditText android:id="@+id/bric_hour" 
+      android:layout_marginLeft="@dimen/marginhsmall"
+      android:layout_width="0dp"
+      android:layout_weight="1"
+      android:layout_height="wrap_content" 
+      android:ems="25"
+      android:singleLine="true"
+    />
+    <EditText android:id="@+id/bric_minute" 
+      android:layout_marginLeft="@dimen/marginhsmall"
+      android:layout_width="0dp"
+      android:layout_weight="1"
+      android:layout_height="wrap_content" 
+      android:ems="25"
+      android:singleLine="true"
+    />
+    <EditText android:id="@+id/bric_second" 
+      android:layout_marginLeft="@dimen/marginhsmall"
+      android:layout_width="0dp"
+      android:layout_weight="1"
+      android:layout_height="wrap_content" 
+      android:ems="25"
+      android:singleLine="true"
+    />
+    <!-- EditText android:id="@+id/bric_centisecond" 
+      android:layout_marginLeft="@dimen/marginhsmall"
+      android:layout_width="0dp"
+      android:layout_weight="1"
+      android:layout_height="wrap_content" 
+      android:ems="25"
+      android:singleLine="true"
+    / -->
+
+   </LinearLayout>
+
+   <Button android:id="@+id/button_reset"
+      style="@style/button_default"
+      android:layout_marginTop="@dimen/marginvbig"
+      android:text="@string/bric_reset_time"
+   />
+
+   <Button android:id="@+id/button_clear"
+      style="@style/button_default"
+      android:layout_marginTop="@dimen/marginvbig"
+      android:text="@string/bric_clear_memory"
+   />
+
+   <LinearLayout android:id="@+id/help"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/marginvbig"
+      android:gravity="left"
+      >
+    <Button android:id="@+id/button_help"
+        style="@style/button_empty"
+        android:text="@string/button_help"
+    />
+    <LinearLayout
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:gravity="right"
+      >
+      <Button android:id="@+id/button_cancel"
+        style="@style/button_default"
+        android:text="@string/button_close"
+        />
+    </LinearLayout>
+  </LinearLayout>
+
+</LinearLayout>

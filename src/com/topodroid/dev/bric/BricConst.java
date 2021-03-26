@@ -13,6 +13,8 @@ package com.topodroid.dev.bric;
 
 import com.topodroid.dev.ble.BleUtils;
 
+import android.util.Log;
+
 import java.util.UUID; 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -70,11 +72,30 @@ public class BricConst
     int dd = BleUtils.getChar( bytes, 3 );
     int HH = BleUtils.getChar( bytes, 4 );
     int MM = BleUtils.getChar( bytes, 5 );
-    int SS = BleUtils.getShort( bytes, 6 );
-    int CS = BleUtils.getShort( bytes, 7 ); // centiseconds
+    int SS = BleUtils.getChar( bytes, 6 );
+    int CS = BleUtils.getChar( bytes, 7 ); // centiseconds
+    // Log.v("DistoX", "BRIC time " + String.format("%4d-%02d-%02d %2d:%02d:%02d.%02d", yy, mm, dd, HH, MM, SS, CS ) );
     Calendar date = new GregorianCalendar();
     date.set( yy, mm, dd, HH, MM, SS );
     return date.getTimeInMillis() + 10 * CS;
+  }
+
+  static byte[] makeTimeBytes( short year, char month, char day, char hour, char minute, char second, char centisecond )
+  {
+    byte[] ret = new byte[8];
+    setTimeBytes( ret, year, month, day, hour, minute, second, centisecond );
+    return ret;
+  }
+
+  static void setTimeBytes( byte[] ret, short year, char month, char day, char hour, char minute, char second, char centisecond )
+  {
+    BleUtils.putShort( ret, 0, year );
+    BleUtils.putChar( ret, 2, month );
+    BleUtils.putChar( ret, 3, day );
+    BleUtils.putChar( ret, 4, hour );
+    BleUtils.putChar( ret, 5, minute );
+    BleUtils.putChar( ret, 6, second );
+    BleUtils.putChar( ret, 7, centisecond );
   }
 
 }

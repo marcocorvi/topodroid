@@ -39,6 +39,8 @@ import com.topodroid.dev.distox1.DeviceA3InfoDialog;
 import com.topodroid.dev.distox1.InfoReadA3Task;
 import com.topodroid.dev.distox1.DeviceA3Details;
 // import com.topodroid.dev.ble.BleScanDialog;
+import com.topodroid.dev.bric.BricMemoryDialog;
+import com.topodroid.dev.bric.MemoryBricTask;
 import com.topodroid.dev.bric.BricInfoDialog;
 import com.topodroid.dev.bric.InfoReadBricTask;
 import com.topodroid.calib.CalibCoeffDialog;
@@ -138,7 +140,7 @@ public class DeviceActivity extends Activity
   static final private int IDX_TOGGLE = 2;
   static final private int IDX_CALIB  = 3;
   static final private int IDX_READ   = 4;
-  // static final private int IDX_MEMORY = 5;
+  static final private int IDX_MEMORY = 5;
 
   private static final int[] menus = {
                         // R.string.menu_scan,
@@ -523,7 +525,7 @@ public class DeviceActivity extends Activity
       for ( int k=1; k<mNrButton1; ++k ) mButton1[k].setVisibility( View.VISIBLE );
     } else if ( TDInstance.isDeviceBric() ) {
       mButton1[IDX_INFO].setVisibility( View.VISIBLE );
-      for ( int k=2; k<mNrButton1; ++k ) mButton1[k].setVisibility( View.GONE );
+      for ( int k=2; k<mNrButton1; ++k ) mButton1[k].setVisibility( (k == IDX_MEMORY )? View.VISIBLE : View.GONE );
     } else {
       for ( int k=1; k<mNrButton1; ++k ) mButton1[k].setVisibility( View.GONE );
     }
@@ -613,6 +615,8 @@ public class DeviceActivity extends Activity
           new DeviceA3MemoryDialog( this, this ).show();
         } else if ( mCurrDevice.mType == Device.DISTO_X310 ) {
           new DeviceX310MemoryDialog( this, this ).show();
+        } else if ( mCurrDevice.mType == Device.DISTO_BRIC4 ) {
+          (new BricMemoryDialog( this, this, getResources() )).show();
         } else {
           TDToast.makeBad( "Unknown device type " + mCurrDevice.mType );
         }
@@ -620,6 +624,25 @@ public class DeviceActivity extends Activity
 
     }
     setState();
+  }
+
+  public void doBricMemoryReset( int yy, int mm, int dd, int HH, int MM, int SS )
+  {
+    Log.v("DistoX", "Device activity - BRIC memory reset " + yy + " " + mm + " " + dd + " " + HH + " " + MM + " " + SS );
+    new MemoryBricTask( mApp, yy, mm, dd, HH, MM, SS  ).execute();
+  }
+
+  public void doBricMemoryClear()
+  {
+    Log.v("DistoX", "Device activity - BRIC memory clear ");
+    TopoDroidAlertDialog.makeAlert( this, getResources(), getResources().getString(R.string.bric_ask_memory_clear),
+      new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick( DialogInterface dialog, int btn ) {
+          new MemoryBricTask( mApp ).execute();
+        }
+      }
+    );
   }
 
   @Override
@@ -750,7 +773,7 @@ public class DeviceActivity extends Activity
     // Log.v(TopoDroidApp.TAG, "reset device from " + head_tail[0] + " to " + head_tail[1] );
     if ( checkA3headtail( head_tail ) ) {
       // TODO ask confirm
-      TopoDroidAlertDialog.makeAlert( this, getResources(), getResources().getString( R.string.device_reset ) + " ?",
+      TopoDroidAlertDialog.makeAlert( this, getResources(), getResources().getString( R.string.device_reset ),
         new DialogInterface.OnClickListener() {
           @Override
           public void onClick( DialogInterface dialog, int btn ) {

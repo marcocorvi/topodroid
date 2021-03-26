@@ -177,6 +177,20 @@ public class BricComm extends TopoDroidComm
   // @param info   info dialog, use null to unregister
   public void registerInfo( BricInfoDialog info ) { mBricInfoDialog = info; }
 
+  public boolean setMemory( byte[] bytes )
+  {
+    if ( bytes == null ) { // CLEAR
+      Log.v("DistoX", "BRIC clear memory");
+      return sendCommand( BricConst.CMD_CLEAR );
+    } else { // LAST TIME
+      Log.v("DistoX", "BRIC reset memory ... ");
+      enqueueOp( new BleOpChrtWrite( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.LAST_TIME_UUID, bytes ) );
+      clearPending();
+      return true;
+    }
+    // return false;
+  }
+
   // this is run by BleOpChrtRead
   public boolean readChrt( UUID srvUuid, UUID chrtUuid ) 
   { 
@@ -277,6 +291,10 @@ public class BricComm extends TopoDroidComm
   // callback action completions - these methods must clear the pending action by calling
   // clearPending() which starts a new action if there is one waiting
 
+  // TRIAL 20210325
+  // final byte[] zero12 = { (byte)0x30, (byte)0x30, (byte)0x30, (byte)0x30, (byte)0x30, (byte)0x30,
+  //                         (byte)0x30, (byte)0x30, (byte)0x30, (byte)0x30, (byte)0x30, (byte)0x30 };
+
   // from onServicesDiscovered
   public int servicesDiscovered( BluetoothGatt gatt )
   {
@@ -312,12 +330,12 @@ public class BricComm extends TopoDroidComm
     // doNextOp();
     // clearPending();
 
+    // THIS IS THE BEST 
     if ( TDSetting.mBricMode >= MODE_ALL ) {
       enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_META_UUID, true ) );
-      // doNextOp();
-      clearPending();
+      // clearPending();
       enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_ERR_UUID, true ) );
-      clearPending();
+      // clearPending();
     }
     // enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.LAST_TIME_UUID, true ) );
     
@@ -329,28 +347,38 @@ public class BricComm extends TopoDroidComm
     // Log.v("DistoX", "BRIC comm discovered services status CONNECTED" );
     notifyStatus( ConnectionState.CONN_CONNECTED ); 
 
+    // TRIAL 20210325
+    // enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.LAST_TIME_UUID, true ) );
+    // mReadingTime = true;
+    // // int ret = enqueueOp( new BleOpChrtRead( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.LAST_TIME_UUID ) );
+    // int ret = enqueueOp( new BleOpChrtWrite( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.LAST_TIME_UUID, zero12 ) );
+    // clearPending();
+
     return 0;
   }
 
-/*
+  /* TRIAL 20210325
+  boolean mReadingTime;
+
   private void subscribeServices()
   {
-    enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_PRIM_UUID, true ) );
-    clearPending();
-
     if ( TDSetting.mBricMode >= MODE_ALL ) {
       enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_META_UUID, true ) );
+      clearPending();
       enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_ERR_UUID, true ) );
+      clearPending();
     }
     // enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.LAST_TIME_UUID, true ) );
-    doNextOp();
-    // clearPending();
+
+    enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_PRIM_UUID, true ) );
+    // doNextOp();
+    clearPending();
 
     mBTConnected = true;
     Log.v("DistoX", "BRIC comm ++++++++++++++++ subscribed services" );
     notifyStatus( ConnectionState.CONN_CONNECTED ); 
   }
-*/
+  */
 
 /*
   public void setupNotifications( )
@@ -384,7 +412,14 @@ public class BricComm extends TopoDroidComm
       ret = enqueueOp( new BleOpChrtRead( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.LAST_TIME_UUID ) );
       */
     } else if ( uuid_str.equals( BricConst.LAST_TIME  ) ) {
-      mQueue.put( DATA_TIME, bytes );
+      // TRIAL 20210325 : reading TIME always returns 0x30 0x30 ... 0x30 (12 bytes)
+      // if ( mReadingTime ) {
+      //   mReadingTime = false;
+      //   BricDebug.logString( bytes );
+      //   subscribeServices();
+      // } else {
+        mQueue.put( DATA_TIME, bytes );
+      // }
     // } else if ( uuid_str.equals( BleConst.INFO_23 ) ) { // ???
     //   mQueue.put( DATA_INFO_23, bytes );
     // } else if ( uuid_str.equals( BleConst.INFO_24 ) ) { // device name
@@ -416,9 +451,13 @@ public class BricComm extends TopoDroidComm
   // from onCharacteristicWrite
   public void writtenChrt( String uuid_str, byte[] bytes )
   {
-    // Log.v("DistoX", "BRIC comm chrt written " + uuid_str + " " + BleUtils.bytesToString( bytes ) );
+    Log.v("DistoX", "BRIC comm chrt written " + uuid_str + " " + BleUtils.bytesToString( bytes ) );
     // BricDebug.log( "BRIC comm WC " + uuid_str, bytes );
     clearPending();
+    // TRIAL 20210325
+    // mReadingTime = false;
+    // BricDebug.logString( bytes );
+    // subscribeServices();
   }
 
   // from onDescriptorRead

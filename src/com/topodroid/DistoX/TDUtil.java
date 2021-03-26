@@ -190,6 +190,11 @@ public class TDUtil
     return sdf.format( new Date() );
   }
 
+  public static String currentDateTimeBric()
+  {
+    SimpleDateFormat sdf = new SimpleDateFormat( "yyyy MM dd hh mm ss", Locale.US );
+    return sdf.format( new Date() );
+  }
 
   public static String getDateString( String format )
   {

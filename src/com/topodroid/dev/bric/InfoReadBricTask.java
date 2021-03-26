@@ -36,8 +36,7 @@ public class InfoReadBricTask extends AsyncTask<Void, Integer, Boolean>
   protected Boolean doInBackground(Void... v)
   {
     if ( mApp.get() == null ) return false;
-    mApp.get().getBricInfo( mDialog.get() );
-    return true;
+    return mApp.get().getBricInfo( mDialog.get() );
   }
 
   // @Override
