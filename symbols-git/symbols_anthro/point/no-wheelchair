@@ -3,7 +3,7 @@ symbol point
 name no-wheelchair
 name-pt cadeira_de_rodas_(não_acessível)
 name-ro fără-scaun-cu-rotile
-name-hu nem-kerekesszék
+name-hu kerekesszék_nélkül
 th_name no-wheelchair
 orientation no
 color 0xffffff
