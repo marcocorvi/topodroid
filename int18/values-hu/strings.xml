@@ -99,10 +99,10 @@ Tap <b>Bezár</b> nem változtat.
     <string name="bric_hw">Hardware %1$s</string>
     <string name="bric_battery">Akku %1$d</string>
     <string name="bric_battery_wait">Akku &#8230;</string>
-    <!-- TODO string name="bric_reset_time">Reset time</string -->
-    <!-- TODO string name="bric_clear_memory">Clear memory</string -->
-    <!-- TODO string name="bric_future_time">Refusing to reset to a future time</string -->
-    <!-- TODO string name="bric_ask_memory_clear">Clear BRIC memory ?</string -->
+    <string name="bric_reset_time">Reset idő</string>
+    <string name="bric_clear_memory">Memória törlés</string>
+    <string name="bric_future_time">Nem lehet vissaállítani jövőbeli időpontra</string>
+    <string name="bric_ask_memory_clear">Töröljük a BRIC memóriáját?</string>
 
     <string name="calibration_title">Műszerek kalibrálása</string>
     <string name="calibration_length">Mérőszalag</string>
@@ -415,7 +415,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="bric_shot">Mérés</string>
     <string name="bric_laser">Lézer</string>
     <string name="bric_off">Ki</string>
-    <!-- TODO string name="bric_memory">BRIC memory</string -->
+    <string name="bric_memory">BRIC memória</string>
 
     <string name="popup_join_pt">Kapcsolás pontra</string>
     <string name="popup_snap_ln">Kapcsolás vonalra</string>
@@ -1678,7 +1678,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="title_export">Projekt exportálása a &#8230;</string>
     <string name="title_equates">Projekt megeggyező pontok</string>
     <string name="title_equate_new">Megeggyező pont hozzáadás &#8230;</string>
-    <!-- TODO string name="title_equate_with">Equate %1$s and %2$s</string -->
+    <string name="title_equate_with">Megeggező %1$s és %2$s</string>
     <string name="title_cwd">Jelenlegi munka könyvtár</string>
     <string name="title_settings">TdManager beállítások</string>
     <string name="title_drop">Eldobja a mérést?</string>
