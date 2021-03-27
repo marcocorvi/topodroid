@@ -716,10 +716,10 @@ Tap <b>Bezár</b> nem változtat.
     <string name="button_reset"     >Visszaállít</string>
     <string name="button_left"      >BAL</string>
     <string name="button_right"     >JOBB</string>
-    <string name="button_clear"     >Töröl</string>
-    <string name="button_clear_day" >Töröl 1nap</string>
-    <string name="button_clear_week">Töröl 7nap</string>
-    <string name="button_clear_memory">Memória törlés</string>
+    <string name="button_clear"     >Tisztít</string>
+    <string name="button_clear_day" >Tisztít 1nap</string>
+    <string name="button_clear_week">Tisztít 7nap</string>
+    <string name="button_clear_memory">Memória tisztítás</string>
     <string name="button_save"      >Ment</string>
     <!-- UNUSED string name="button_select"    >Select    </string -->
     <string name="button_search"    >Keres    </string>
