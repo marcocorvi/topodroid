@@ -9,11 +9,11 @@
     <string name="path11_text">
 A partire da Android 11 le cartelle della app dovranno essere sotto "Documents".\n
 C\'e\' nulla da fare per una nuova installazione della app su Android 11.\n 
-Per una vecchia installazione, prima di un aggornamento di sistema ad Android 11,\n
+Per una vecchia installazione, prima di un aggiornamento di sistema ad Android 11,\n
  fate un salvataggio dei vostri dati, copiate la vostra cartella "Topodroid" sotto "Documents" e fate ripartire Topodroid.\n\n 
 ATTENZIONE: Dalla v. 5.0.60 "TopoDroid" usa la cartella sotto "Documents", se esiste, anche su Android 10 e precedenti.\n
-Tap "Muovi" per spostare la cartella TopoDroid in Documenti.\n\n
-Tap "Chiudi" per fare nulla.
+Tap <b>Muovi</b> per spostare la cartella TopoDroid in Documenti.\n\n
+Tap <b>Chiudi</b> per fare nulla.
 </string>
     <string name="button_no_again">Non chiedere di nuovo</string>
     <string name="path11_move">Spostata nella cartella Documents/TopoDroid.\nFar ripartire TopoDroid</string>
@@ -99,10 +99,10 @@ Tap "Chiudi" per fare nulla.
     <string name="bric_hw">Hardware %1$s</string>
     <string name="bric_battery">Batteria %1$d</string>
     <string name="bric_battery_wait">Batteria &#8230;</string>
-    <!-- TODO string name="bric_reset_time">Reset time</string -->
-    <!-- TODO string name="bric_clear_memory">Clear memory</string -->
-    <!-- TODO string name="bric_future_time">Refusing to reset to a future time</string -->
-    <!-- TODO string name="bric_ask_memory_clear">Clear BRIC memory ?</string -->
+    <string name="bric_reset_time">Reset ora</string>
+    <string name="bric_clear_memory">Pulisci memoria</string>
+    <string name="bric_future_time">Orario nel futuro, reset non possibile</string>
+    <string name="bric_ask_memory_clear">Pulisco la memoria BRIC?</string>
     <!-- TODO string name="bric_reset_ok">Resetted time</string -->
     <!-- TODO string name="bric_reset_fail">Time reset failed</string -->
     <!-- TODO string name="bric_clear_ok">Cleared memory </string -->
