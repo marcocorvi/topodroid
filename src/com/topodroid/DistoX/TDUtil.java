@@ -186,15 +186,22 @@ public class TDUtil
 
   public static String currentDateTime()
   {
-    SimpleDateFormat sdf = new SimpleDateFormat( "yyyy.MM.dd-hh:mm", Locale.US );
+    SimpleDateFormat sdf = new SimpleDateFormat( "yyyy.MM.dd-HH:mm", Locale.US );
     return sdf.format( new Date() );
   }
 
   public static String currentDateTimeBric()
   {
-    SimpleDateFormat sdf = new SimpleDateFormat( "yyyy MM dd hh mm ss", Locale.US );
+    SimpleDateFormat sdf = new SimpleDateFormat( "yyyy MM dd HH mm ss", Locale.US );
     return sdf.format( new Date() );
   }
+
+  public static String currentMinuteSecond()
+  {
+    SimpleDateFormat sdf = new SimpleDateFormat( "mm:ss", Locale.US );
+    return sdf.format( new Date() );
+  }
+
 
   public static String getDateString( String format )
   {

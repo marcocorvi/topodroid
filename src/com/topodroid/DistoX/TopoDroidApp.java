@@ -1251,7 +1251,7 @@ public class TopoDroidApp extends Application
   static void setBooleanPreference( String preference, boolean val ) { TDPrefHelper.update( preference, val ); }
 
   // FIXME_DEVICE_STATIC
-  void setDevicePrimary( String address, String model, BluetoothDevice bt_device )
+  void setDevicePrimary( String address, String model, String name, BluetoothDevice bt_device )
   { 
     deleteComm();
     if ( address == null ) { // null, ..., ...
@@ -1259,12 +1259,12 @@ public class TopoDroidApp extends Application
       address = TDString.EMPTY;
     } else {
       if ( model != null ) { // addr, model, ...
-        TDInstance.setDeviceA( new Device( address, model, 0, 0, null, null ) );
+        TDInstance.setDeviceA( new Device( address, model, 0, 0, name, null ) );
         if ( Device.isBle( TDInstance.deviceType() ) ) TDInstance.initBleDevice();
       } else if ( bt_device != null ) { // addr, null, dev
         model = Device.typeToString( TDInstance.deviceType() );
         // address, model, head, tail, name, nickname
-        TDInstance.setDeviceA( new Device( address, model, 0, 0, null, null ) );
+        TDInstance.setDeviceA( new Device( address, model, 0, 0, name, null ) );
         TDInstance.setBleDevice( bt_device );
         if ( TDInstance.isDeviceSap() ) {
           mComm = new SapComm( this, address, bt_device ); 
@@ -1891,12 +1891,15 @@ public class TopoDroidApp extends Application
   {
     if ( mComm != null && mComm instanceof BricComm ) {
       BricComm comm = (BricComm)mComm;
-      connectDevice( TDInstance.deviceAddress(), DataType.DATA_ALL );
-      TDUtil.yieldDown(4000); // FIXME was 4000
+      boolean disconnect = comm.isConnected();
+      if ( ! disconnect ) {
+        connectDevice( TDInstance.deviceAddress(), DataType.DATA_ALL );
+        TDUtil.yieldDown(4000); // FIXME was 4000
+      }
       if ( comm.isConnected() ) {
         comm.registerInfo( info );
         info.getInfo( comm );
-        // disconnectComm();
+        if ( disconnect ) disconnectComm();
       } else {
         Log.v("DistoX", "failed to connect BRIC");
       }
@@ -1906,15 +1909,18 @@ public class TopoDroidApp extends Application
 
   public boolean setBricMemory( byte[] bytes )
   {
-    Log.v("DistoX", "set BRIC memory - bytes ... " + ( (bytes == null)? "null" : bytes[6] + " " + bytes[7] ) );
+    Log.v("DistoX", "set BRIC memory - ... " + ( (bytes == null)? "clear" : bytes[4] + ":" + bytes[5] + ":" + bytes[6] ) );
     boolean ret = false;
     if ( mComm != null && mComm instanceof BricComm ) {
       BricComm comm = (BricComm)mComm;
-      connectDevice( TDInstance.deviceAddress(), DataType.DATA_ALL );
-      TDUtil.yieldDown(4000);
+      boolean disconnect = comm.isConnected();
+      if ( ! disconnect ) {
+        connectDevice( TDInstance.deviceAddress(), DataType.DATA_ALL );
+        TDUtil.yieldDown(4000);
+      }
       if ( comm.isConnected() ) {
         ret = comm.setMemory( bytes );
-        disconnectComm();
+        if ( disconnect ) disconnectComm();
       } else {
         Log.v("DistoX", "failed to connect BRIC");
       }

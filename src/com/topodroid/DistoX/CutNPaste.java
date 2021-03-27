@@ -313,23 +313,10 @@ class CutNPaste
       ww = textview3.getPaint().measureText( text );
       if ( ww > w ) w = ww;
 
-      // ----- CLEAR MEMORY
-      //
-      text = res.getString(R.string.popup_do_clear);
-      textview4 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
-        new View.OnClickListener( ) {
-          public void onClick(View v) {
-            app.sendBricCommand( BricConst.CMD_CLEAR );
-            dismissPopupBT();
-          }
-        } );
-      ww = textview4.getPaint().measureText( text );
-      if ( ww > w ) w = ww;
-
       // ----- TURN OFF
       //
       text = res.getString(R.string.popup_do_off);
-      textview5 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+      textview4 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
             app.sendBricCommand( BricConst.CMD_OFF );
@@ -369,15 +356,15 @@ class CutNPaste
     }
     int iw = (int)(w + 10);
     textview0.setWidth( iw );
-    if ( TDInstance.deviceType() == Device.DISTO_X310 ) {
+    // if ( TDInstance.deviceType() == Device.DISTO_X310 ) {
       if ( textview1 != null) textview1.setWidth( iw );
       if ( textview2 != null) textview2.setWidth( iw );
       if ( textview3 != null) textview3.setWidth( iw );
-      if ( ! gm_data ) {
+    //   if ( ! gm_data ) {
         if ( textview4 != null ) textview4.setWidth( iw );
         if ( textview5 != null ) textview5.setWidth( iw );
-      }
-    }
+    //   }
+    // }
 
     FontMetrics fm = textview0.getPaint().getFontMetrics();
     int ih = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.70);

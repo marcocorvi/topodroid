@@ -60,6 +60,7 @@
       android:ems="25"
       android:singleLine="true"
     />
+
     <!-- EditText android:id="@+id/bric_centisecond" 
       android:layout_marginLeft="@dimen/marginhsmall"
       android:layout_width="0dp"
@@ -71,27 +72,56 @@
 
    </LinearLayout>
 
-   <Button android:id="@+id/button_reset"
+  <LinearLayout 
+    style="@style/base_padding"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+    <Button android:id="@+id/button_reset"
       style="@style/button_default"
       android:layout_marginTop="@dimen/marginvbig"
       android:text="@string/bric_reset_time"
-   />
-
-   <Button android:id="@+id/button_clear"
-      style="@style/button_default"
-      android:layout_marginTop="@dimen/marginvbig"
-      android:text="@string/bric_clear_memory"
-   />
-
-   <LinearLayout android:id="@+id/help"
-      android:layout_width="match_parent"
+    />
+    <LinearLayout 
+      style="@style/base_padding"
+      android:layout_width="match_parent" 
       android:layout_height="wrap_content"
-      android:layout_marginTop="@dimen/marginvbig"
-      android:gravity="left"
+      android:orientation="horizontal"
+      android:gravity="right"
       >
+      <TextView android:id="@+id/time_minute" 
+        android:layout_marginLeft="@dimen/marginhsmall"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content" 
+        android:ems="25"
+        android:singleLine="true"
+      />
+      <TextView android:id="@+id/time_second" 
+        android:layout_marginLeft="@dimen/marginhsmall"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content" 
+        android:ems="25"
+        android:singleLine="true"
+      />
+    </LinearLayout>
+  </LinearLayout>
+
+  <Button android:id="@+id/button_clear"
+    style="@style/button_default"
+    android:layout_marginTop="@dimen/marginvbig"
+    android:text="@string/bric_clear_memory"
+  />
+
+  <LinearLayout android:id="@+id/help"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/marginvbig"
+    android:gravity="left"
+    >
     <Button android:id="@+id/button_help"
-        style="@style/button_empty"
-        android:text="@string/button_help"
+      style="@style/button_empty"
+      android:text="@string/button_help"
     />
     <LinearLayout
       android:layout_width="fill_parent" 

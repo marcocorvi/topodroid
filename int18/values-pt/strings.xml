@@ -107,6 +107,10 @@ Tap "Close" not to take any action.
     <!-- TODO string name="bric_clear_memory">Clear memory</string -->
     <!-- TODO string name="bric_future_time">Refusing to reset to a future time</string -->
     <!-- TODO string name="bric_ask_memory_clear">Clear BRIC memory ?</string -->
+    <!-- TODO string name="bric_reset_ok">Resetted time</string -->
+    <!-- TODO string name="bric_reset_fail">Time reset failed</string -->
+    <!-- TODO string name="bric_clear_ok">Cleared memory </string -->
+    <!-- TODO string name="bric_clear_fail">Memory clear failed</string -->
 
     <string name="calibration_title">Calibração de instrumentos</string>
     <string name="calibration_length">Trena</string>
@@ -364,7 +368,7 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="menu_display">DISPLAY</string -->
     <string name="menu_show_deleted">MOSTRAR APAGADOS</string>
     <string name="menu_hide_deleted">ESCONDER APAGADOS</string>
-    <string name="menu_distox">DISTOX</string>
+    <!-- TODO string name="menu_device">DEVICE</string -->
     <string name="menu_export">EXPORTAR</string>
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_recover">RESTAURAR</string>
@@ -1466,6 +1470,8 @@ Tap "Close" not to take any action.
   <string name="pref_side_drag_summary">Habilitar o arrastamento lateral na área de desenho do croqui</string>
   <string name="pref_unit_grid_title">Unidades croqui</string>
   <string name="pref_unit_grid_summary">Tamanho dos intervalos na grade do croqui</string>
+  <!-- TODO string name="pref_unit_measure_title">Ruler units</string -->
+  <!-- TODO string name="pref_unit_measure_summary">Length units of measure-tool</string -->
   <!-- UNUSED string name="pref_recent_nr_title">Número símbolos recentes</string -->
   <!-- UNUSED string name="pref_recent_nr_summary">Número de símbolos mais recentes na janela de seleção</string -->
   <string name="pref_area_border_title">Visibilidade borda área</string>

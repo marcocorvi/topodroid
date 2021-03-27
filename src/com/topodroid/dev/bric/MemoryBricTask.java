@@ -12,8 +12,8 @@
 package com.topodroid.dev.bric;
 
 import com.topodroid.DistoX.TopoDroidApp;
-// import com.topodroid.DistoX.R;
-// import com.topodroid.DistoX.TDToast;
+import com.topodroid.DistoX.R;
+import com.topodroid.DistoX.TDToast;
 
 import android.util.Log;
 
@@ -30,7 +30,7 @@ public class MemoryBricTask extends AsyncTask<Void, Integer, Boolean>
   {
     mApp = new WeakReference<TopoDroidApp>( app );
     bytes = null;
-    Log.v("DistoX", "BRIC memory - clear ");
+    // Log.v("DistoX", "BRIC memory - clear ");
   }
 
   public MemoryBricTask( TopoDroidApp app, int yy, int mm, int dd, int HH, int MM, int SS ) // reset
@@ -39,7 +39,7 @@ public class MemoryBricTask extends AsyncTask<Void, Integer, Boolean>
     bytes = new byte[12];
     for ( int k=0; k<12; ++k ) bytes[k] = (byte)0x30;
     BricConst.setTimeBytes( bytes, (short)yy, (char)mm, (char)dd, (char)HH, (char)MM, (char)SS, (char)0 );
-    Log.v("DistoX", "BRIC memory - reset ");
+    // Log.v("DistoX", "BRIC memory - reset ");
   }
 
 
@@ -50,7 +50,7 @@ public class MemoryBricTask extends AsyncTask<Void, Integer, Boolean>
       Log.v("DistoX", "BRIC memory - null app");
       return false;
     }
-    Log.v("DistoX", "BRIC memory - sending bytes " + ((bytes == null)? "null" : "non-null" ) );
+    // Log.v("DistoX", "BRIC memory - sending bytes " + ((bytes == null)? "null" : "non-null" ) );
     return mApp.get().setBricMemory( bytes );
   }
 
@@ -59,10 +59,15 @@ public class MemoryBricTask extends AsyncTask<Void, Integer, Boolean>
   // {
   // }
 
-  // @Override
-  // protected void onPostExecute( Boolean result )
-  // {
-  // }
+  @Override
+  protected void onPostExecute( Boolean result )
+  {
+    if ( bytes != null ) {
+      TDToast.make( result ? R.string.bric_reset_ok : R.string.bric_reset_fail );
+    } else {
+      TDToast.make( result ? R.string.bric_clear_ok : R.string.bric_clear_fail );
+    }
+  }
 
 }
 

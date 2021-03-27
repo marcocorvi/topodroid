@@ -980,6 +980,8 @@
   <!-- TODO string name="pref_side_drag_summary">Enable side-drag on the sketch window</string -->
   <!-- TODO string name="pref_unit_grid_title">Sketch units</string -->
   <!-- TODO string name="pref_unit_grid_summary">Sketch grid cell size</string -->
+  <!-- TODO string name="pref_unit_measure_title">Ruler units</string -->
+  <!-- TODO string name="pref_unit_measure_summary">Length units of measure-tool</string -->
   <!-- TODO string name="pref_recent_nr_title">Recent tools number</string -->
   <!-- TODO string name="pref_recent_nr_summary">Number of the most recent tools in the item picker</string -->
   <!-- TODO string name="pref_area_border_title">Area border visibility</string -->

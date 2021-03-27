@@ -104,6 +104,10 @@ Tap "Close" not to take any action.
     <!-- TODO string name="bric_clear_memory">Clear memory</string -->
     <!-- TODO string name="bric_future_time">Refusing to reset to a future time</string -->
     <!-- TODO string name="bric_ask_memory_clear">Clear BRIC memory ?</string -->
+    <!-- TODO string name="bric_reset_ok">Resetted time</string -->
+    <!-- TODO string name="bric_reset_fail">Time reset failed</string -->
+    <!-- TODO string name="bric_clear_ok">Cleared memory </string -->
+    <!-- TODO string name="bric_clear_fail">Memory clear failed</string -->
 
     <string name="calibration_title">Calibrare instrumente</string>
     <string name="calibration_length">Distanță</string>
@@ -363,7 +367,7 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="menu_display">AFIȘAJ</string -->
     <string name="menu_show_deleted">ARATĂ ȘTERSE</string>
     <string name="menu_hide_deleted">ASCUNDE ȘTERSE</string>
-    <string name="menu_distox">DISTOX</string>
+    <!-- TODO string name="menu_device">DEVICE</string -->
     <string name="menu_export">EXPORT</string>
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_recover">RECUPERARE</string>
@@ -1464,6 +1468,8 @@ Tap "Close" not to take any action.
   <string name="pref_side_drag_summary">Activează tragerea pe marginile ferestrei de schițare</string>
   <string name="pref_unit_grid_title">Unități schițare</string>
   <string name="pref_unit_grid_summary">Mărime celule ale caroiajului schiței</string>
+  <!-- TODO string name="pref_unit_measure_title">Ruler units</string -->
+  <!-- TODO string name="pref_unit_measure_summary">Length units of measure-tool</string -->
   <!-- UNUSED string name="pref_recent_nr_title">Număr unelte recente</string -->
   <!-- UNUSED string name="pref_recent_nr_summary">Numărul de unelte recente în selectorul de elemente de desen</string -->
   <string name="pref_area_border_title">Vizibilitate margine suprafațe</string>

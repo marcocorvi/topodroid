@@ -104,6 +104,10 @@
     <!-- TODO string name="bric_clear_memory">Clear memory</string -->
     <!-- TODO string name="bric_future_time">Refusing to reset to a future time</string -->
     <!-- TODO string name="bric_ask_memory_clear">Clear BRIC memory ?</string -->
+    <!-- TODO string name="bric_reset_ok">Resetted time</string -->
+    <!-- TODO string name="bric_reset_fail">Time reset failed</string -->
+    <!-- TODO string name="bric_clear_ok">Cleared memory </string -->
+    <!-- TODO string name="bric_clear_fail">Memory clear failed</string -->
 
     <string name="calibration_title">Корекция измерений выполненых вручную</string>
     <string name="calibration_length">Рулетка</string>
@@ -363,7 +367,7 @@
     <!-- UNUSED string name="menu_display">Показать</string -->
     <string name="menu_show_deleted">ПОКАЗАТЬ УДАЛЕННЫЕ</string>
     <string name="menu_hide_deleted">СКРЫТЬ УДАЛЕННЫЕ</string>
-    <!-- OK string name="menu_distox">DISTOX</string -->
+    <!-- TODO string name="menu_device">DEVICE</string -->
     <string name="menu_export">Экспорт</string>
     <string name="menu_firmware">Прошивка</string>
     <string name="menu_recover">Восстановить</string>
@@ -1471,6 +1475,8 @@
   <string name="pref_side_drag_summary">Включить перетаскивание за край в окне абриса</string>
   <string name="pref_unit_grid_title">Единицы изм. сетки на абрисах</string>
   <string name="pref_unit_grid_summary">Единицы измерения шага сетки на абрисах</string>
+  <!-- TODO string name="pref_unit_measure_title">Ruler units</string -->
+  <!-- TODO string name="pref_unit_measure_summary">Length units of measure-tool</string -->
   <!-- UNUSED string name="pref_recent_nr_title">Кол-во. недавних инструментов</string -->
   <!-- UNUSED string name="pref_recent_nr_summary">Кол-во элементов в списке недавно использованных инструментов</string -->
   <string name="pref_area_border_title">Прозрачность границ области</string> 

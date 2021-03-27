@@ -115,7 +115,7 @@ public class BricComm extends TopoDroidComm
           switch ( buffer.type ) {
             case DATA_PRIM:
               // Log.v("DistoX", "BRIC comm: Queue buffer PRIM");
-              // BricDebug.logMeasPrim( buffer.data );
+              BricDebug.logMeasPrim( buffer.data );
               if ( TDSetting.mBricMode == MODE_PRIM_ONLY ) {
                 ((BricProto)mProtocol).addMeasPrimAndProcess( buffer.data );
               } else {
@@ -124,14 +124,14 @@ public class BricComm extends TopoDroidComm
               break;
             case DATA_META:
               // Log.v("DistoX", "BRIC comm: Queue buffer META");
-              // BricDebug.logMeasMeta( buffer.data );
+              BricDebug.logMeasMeta( buffer.data );
               if ( TDSetting.mBricMode >= MODE_ALL ) {
                 ((BricProto)mProtocol).addMeasMeta( buffer.data );
               }
               break;
             case DATA_ERR:
               // Log.v("DistoX", "BRIC comm: Queue buffer ERR");
-              // BricDebug.logMeasErr( buffer.data );
+              BricDebug.logMeasErr( buffer.data );
               if ( TDSetting.mBricMode >= MODE_ALL ) {
                 ((BricProto)mProtocol).addMeasErr( buffer.data );
                 ((BricProto)mProtocol).processData(); 
@@ -194,13 +194,14 @@ public class BricComm extends TopoDroidComm
   // this is run by BleOpChrtRead
   public boolean readChrt( UUID srvUuid, UUID chrtUuid ) 
   { 
-    // Log.v("DistoX", "BRIC comm: read chsr " + chrtUuid.toString() );
+    Log.v("DistoX", "BRIC comm: read chsr " + chrtUuid.toString() );
     return mCallback.readChrt( srvUuid, chrtUuid ); 
   }
 
   // this is run by BleOpChrtWrite
   public boolean writeChrt( UUID srvUuid, UUID chrtUuid, byte[] bytes )
   { 
+    Log.v("DistoX", "BRIC comm: write chsr " + chrtUuid.toString() );
     return mCallback.writeChrt( srvUuid, chrtUuid, bytes ); 
   }
 
@@ -298,7 +299,7 @@ public class BricComm extends TopoDroidComm
   // from onServicesDiscovered
   public int servicesDiscovered( BluetoothGatt gatt )
   {
-    // Log.v("DistoX", "BRIC comm service discovered");
+    Log.v("DistoX", "BRIC comm service discovered");
     /*
     // (new Handler( Looper.getMainLooper() )).post( new Runnable() {
     //   public void run() {
@@ -344,7 +345,7 @@ public class BricComm extends TopoDroidComm
     clearPending();
 
     mBTConnected = true;
-    // Log.v("DistoX", "BRIC comm discovered services status CONNECTED" );
+    Log.v("DistoX", "BRIC comm discovered services status CONNECTED" );
     notifyStatus( ConnectionState.CONN_CONNECTED ); 
 
     // TRIAL 20210325
@@ -397,7 +398,7 @@ public class BricComm extends TopoDroidComm
   // from onCharacteristicRead
   public void readedChrt( String uuid_str, byte[] bytes )
   {
-    // Log.v("DistoX", "BRIC comm: readed chrt " + uuid_str );
+    Log.v("DistoX", "BRIC comm: readed chrt " + uuid_str );
     int ret;
     if ( uuid_str.equals( BricConst.MEAS_PRIM ) ) { // this is not executed: PRIM is read from onCharcateristicChanged
       mQueue.put( DATA_PRIM, bytes ); 
@@ -452,7 +453,6 @@ public class BricComm extends TopoDroidComm
   public void writtenChrt( String uuid_str, byte[] bytes )
   {
     Log.v("DistoX", "BRIC comm chrt written " + uuid_str + " " + BleUtils.bytesToString( bytes ) );
-    // BricDebug.log( "BRIC comm WC " + uuid_str, bytes );
     clearPending();
     // TRIAL 20210325
     // mReadingTime = false;
@@ -463,15 +463,14 @@ public class BricComm extends TopoDroidComm
   // from onDescriptorRead
   public void readedDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
   {
-    // BricDebug.log( "BRIC comm RD " + uuid_str, bytes );
+    Log.v("DistoX", "BRIC comm desc readed " + uuid_chrt_str + " " + BleUtils.bytesToString( bytes ) );
     clearPending();
   }
 
   // from onDescriptorWrite
   public void writtenDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
   {
-    // BricDebug.log( "BRIC comm WD " + uuid_str, bytes );
-    // Log.v("DistoX", "BRIC comm W desc " + uuid_chrt_str );
+    Log.v("DistoX", "BRIC comm desc written " + uuid_chrt_str );
     clearPending();
   }
 
@@ -493,7 +492,7 @@ public class BricComm extends TopoDroidComm
   // MEAS_META, MEAS_ERR, and LAST_TIME are change-notified 
   public void changedChrt( BluetoothGattCharacteristic chrt )
   {
-    // Log.v("DistoX", "BRIC comm changed char ======> " + chrt.getUuid() );
+    Log.v("DistoX", "BRIC comm changed char ======> " + chrt.getUuid() );
     int ret;
     String chrt_uuid = chrt.getUuid().toString();
     if ( chrt_uuid.equals( BricConst.MEAS_PRIM ) ) {

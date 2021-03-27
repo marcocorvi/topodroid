@@ -157,7 +157,7 @@ public class ShotWindow extends Activity
                         R.string.menu_audio,
                         R.string.menu_sensor,
                         R.string.menu_3d,
-                        R.string.menu_distox,
+                        R.string.menu_device,
                         R.string.menu_options,
                         R.string.menu_help
                      };
@@ -811,6 +811,10 @@ public class ShotWindow extends Activity
       // }
     } else if ( TDLevel.overNormal && (! TDInstance.isDivingMode()) && p++ == pos ) { // DEVICE
       if ( DeviceUtil.isAdapterEnabled() ) {
+        // referrer
+        // Intent intent = new Intent( mActivity, com.topodroid.DistoX.DeviceActivity.class );
+        // intent.putExtra( TDTag.TOPODROID_DEVICE_REF, Integer.toString( DeviceActivity.REFERRER_SHOT ) );
+        // mActivity.startActivity( intent );
         mActivity.startActivity( new Intent( Intent.ACTION_VIEW ).setClass( mActivity, DeviceActivity.class ) );
       }
     } else  if ( p++ == pos ) { // OPTIONS
@@ -1365,7 +1369,7 @@ public class ShotWindow extends Activity
       ret = true;
     } else {
       mDataAdapter.clearSearch();
-      if ( ! TDInstance.isDivingMode() && b == mButton1[ BTN_DOWNLOAD ] ) { // MULTI-DISTOX or SECOND-DISTOX
+      if ( ! TDInstance.isDivingMode() && b == mButton1[ BTN_DOWNLOAD ] ) { // MULTI-DEVICE or SECOND-DEVICE
         if ( TDInstance.isDeviceDistoX() ) {
           if ( ! mDataDownloader.isDownloading() && TDSetting.isConnectionModeMulti() && TopoDroidApp.mDData.getDevices().size() > 1 ) {
             if ( TDSetting.mSecondDistoX && TDInstance.getDeviceB() != null ) {
@@ -2088,7 +2092,7 @@ public class ShotWindow extends Activity
     if ( TDLevel.overExpert ) menu_adapter.add( res.getString( menus[k] ) ); k++; // menu_audio  
     if ( TDSetting.mWithSensors && TDLevel.overNormal ) menu_adapter.add( res.getString( menus[k] ) ); k++; // menu_sensor
     if ( /* TDPath.BELOW_ANDROID_11 && */ TDLevel.overBasic  ) menu_adapter.add( res.getString( menus[k] ) ); k++; // menu_3d
-    if ( TDLevel.overNormal && ! TDInstance.isDivingMode() ) menu_adapter.add( res.getString( menus[k] ) ); k++; // menu_distox
+    if ( TDLevel.overNormal && ! TDInstance.isDivingMode() ) menu_adapter.add( res.getString( menus[k] ) ); k++; // menu_device
     menu_adapter.add( res.getString( menus[k++] ) );  // menu_options
     menu_adapter.add( res.getString( menus[k++] ) );  // menu_help
     mMenu.setAdapter( menu_adapter );

@@ -103,6 +103,10 @@ Tap "Chiudi" per fare nulla.
     <!-- TODO string name="bric_clear_memory">Clear memory</string -->
     <!-- TODO string name="bric_future_time">Refusing to reset to a future time</string -->
     <!-- TODO string name="bric_ask_memory_clear">Clear BRIC memory ?</string -->
+    <!-- TODO string name="bric_reset_ok">Resetted time</string -->
+    <!-- TODO string name="bric_reset_fail">Time reset failed</string -->
+    <!-- TODO string name="bric_clear_ok">Cleared memory </string -->
+    <!-- TODO string name="bric_clear_fail">Memory clear failed</string -->
 
     <string name="calibration_title">Strumenti di calibrazione</string>
     <string name="calibration_length">Fettuccia</string>
@@ -359,7 +363,7 @@ Tap "Chiudi" per fare nulla.
     <!-- UNUSED string name="menu_display">DISPLAY</string -->
     <string name="menu_show_deleted">MOSTRA CANCELLATI</string>
     <string name="menu_hide_deleted">NASCONDI CANCELLATI</string>
-    <!-- OK string name="menu_distox">DISTOX</string -->
+    <!-- TODO string name="menu_device">DEVICE</string -->
     <string name="menu_export">ESPORTA</string>
     <!-- OK string name="menu_firmware">FIRMWARE</string -->
     <string name="menu_recover">RECUPERA</string>
@@ -1461,6 +1465,8 @@ Tap "Chiudi" per fare nulla.
   <string name="pref_side_drag_summary">Abilita side-drag sul rilievo</string>
   <string name="pref_unit_grid_title">Unità di misura disegno</string>
   <string name="pref_unit_grid_summary">Dimensione celle della griglia</string>
+  <string name="pref_unit_measure_title">Unita` distanze</string>
+  <string name="pref_unit_measure_summary">Unita` di misura distanze</string>
   <!-- UNUSED string name="pref_recent_nr_title">Numero di strumenti recenti</string -->
   <!-- UNUSED string name="pref_recent_nr_summary">Numero di strumenti recenti nel raccoglitore</string -->
   <string name="pref_area_border_title">Visibilità bordi area</string> 

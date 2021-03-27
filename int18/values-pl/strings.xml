@@ -105,6 +105,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- TODO string name="bric_clear_memory">Clear memory</string -->
     <!-- TODO string name="bric_future_time">Refusing to reset to a future time</string -->
     <!-- TODO string name="bric_ask_memory_clear">Clear BRIC memory ?</string -->
+    <!-- TODO string name="bric_reset_ok">Resetted time</string -->
+    <!-- TODO string name="bric_reset_fail">Time reset failed</string -->
+    <!-- TODO string name="bric_clear_ok">Cleared memory </string -->
+    <!-- TODO string name="bric_clear_fail">Memory clear failed</string -->
 
     <string name="calibration_title">Kalibracja przyrządów</string>
     <string name="calibration_length">Długość</string>
@@ -368,7 +372,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="menu_display">WYŚWIETL</string -->
     <!-- TODO string name="menu_show_deleted">SHOW DELETED</string -->
     <!-- TODO string name="menu_hide_deleted">HIDE DELETED</string -->
-    <string name="menu_distox">DISTOX</string>
+    <!-- TODO string name="menu_device">DEVICE</string -->
     <string name="menu_export">EKSPORT</string>
     <string name="menu_firmware">OPROGRAMOWANIE</string>
     <string name="menu_recover">ODZYSKIWANIE</string>
@@ -1483,6 +1487,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_side_drag_summary">Włącz przyciaganie z boku w okinie szkicu</string>
   <string name="pref_unit_grid_title">Jednostki szkicu</string>
   <string name="pref_unit_grid_summary">Rozmiar komórki siatki szkicu</string>
+  <!-- TODO string name="pref_unit_measure_title">Ruler units</string -->
+  <!-- TODO string name="pref_unit_measure_summary">Length units of measure-tool</string -->
   <!-- UNUSED string name="pref_recent_nr_title">Osttani numer narzędzia</string -->
   <!-- UNUSED string name="pref_recent_nr_summary">Liczba ostatnich narzędzi w selektorze do rysowania</string -->
   <string name="pref_area_border_title">Widocznośc granicy pola</string>

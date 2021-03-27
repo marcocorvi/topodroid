@@ -110,7 +110,7 @@ public class BricProto extends TopoDroidProtocol
       mBearing  = BricConst.getAzimuth( bytes );
       mClino    = BricConst.getClino( bytes );
       mPrimToDo = true;
-      // Log.v("DistoX", "BRIC proto: added Prim" );
+      Log.v("DistoX", "BRIC proto: added Prim " + mDistance + " " + mBearing + " " + mClino );
     } else {
       Log.v("DistoX", "BRIC proto: add Prim - repeated primary" );
     }
@@ -118,22 +118,22 @@ public class BricProto extends TopoDroidProtocol
 
   void addMeasMeta( byte[] bytes ) 
   {
-    // Log.v("DistoX", "BRIC proto: add Meta " );
     mIndex = BricConst.getIndex( bytes );
     mRoll  = BricConst.getRoll( bytes );
     mDip   = BricConst.getDip( bytes );
+    Log.v("DistoX", "BRIC proto: added Meta " + mIndex );
   }
 
   void addMeasErr( byte[] bytes ) 
   {
-    // Log.v("DistoX", "BRIC proto: add Err " );
+    Log.v("DistoX", "BRIC proto: added Err " );
   }
   
   void processData()
   {
     // Log.v("DistoX", "BRIC proto process data - prim todo " + mPrimToDo + " index " + mIndex );
     if ( mPrimToDo ) {
-      // Log.v("DistoX", "BRIC proto send data to the app thru comm");
+      Log.v("DistoX", "BRIC proto: process - PrimToDo true: " + mIndex + " prev " + mLastIndex );
       // mComm.handleRegularPacket( DataType.PACKET_DATA, mLister, DataType.DATA_SHOT );
       mComm.handleBricPacket( mIndex, mLister, DataType.DATA_SHOT );
       mPrimToDo = false;

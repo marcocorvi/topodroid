@@ -105,6 +105,10 @@ Tap "Close" not to take any action.
     <!-- TODO string name="bric_clear_memory">Clear memory</string -->
     <!-- TODO string name="bric_future_time">Refusing to reset to a future time</string -->
     <!-- TODO string name="bric_ask_memory_clear">Clear BRIC memory ?</string -->
+    <!-- TODO string name="bric_reset_ok">Resetted time</string -->
+    <!-- TODO string name="bric_reset_fail">Time reset failed</string -->
+    <!-- TODO string name="bric_clear_ok">Cleared memory </string -->
+    <!-- TODO string name="bric_clear_fail">Memory clear failed</string -->
 
     <string name="calibration_title">Калбриране на инструменти</string>
     <string name="calibration_length">Рулетка</string>
@@ -363,7 +367,7 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="menu_display">Дисплей</string -->
     <!-- TODO string name="menu_show_deleted">SHOW DELETED</string -->
     <!-- TODO string name="menu_hide_deleted">HIDE DELETED</string -->
-    <string name="menu_distox">DistoX</string>
+    <!-- TODO string name="menu_device">Device</string -->
     <string name="menu_export">Експортиране</string>
     <string name="menu_firmware">Фърмуер</string>
     <string name="menu_recover">Възстановяване</string>
@@ -1462,6 +1466,8 @@ Tap "Close" not to take any action.
   <string name="pref_side_drag_summary">Скролиране с дърпане на страничната част на скицата</string>
   <string name="pref_unit_grid_title">Мерни единици на скицата</string>
   <string name="pref_unit_grid_summary">Размер на квадрат от мрежата</string>
+  <!-- TODO string name="pref_unit_measure_title">Ruler units</string -->
+  <!-- TODO string name="pref_unit_measure_summary">Length units of measure-tool</string -->
   <!-- UNUSED string name="pref_recent_nr_title">Брой последни инструменти</string -->
   <!-- UNUSED string name="pref_recent_nr_summary">Брой показвани последни инструменти в прозореца</string -->
   <string name="pref_area_border_title">Видима граница на площ</string> 

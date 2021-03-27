@@ -104,6 +104,10 @@ Tap "Close" not to take any action.
     <!-- TODO string name="bric_clear_memory">Clear memory</string -->
     <!-- TODO string name="bric_future_time">Refusing to reset to a future time</string -->
     <!-- TODO string name="bric_ask_memory_clear">Clear BRIC memory ?</string -->
+    <!-- TODO string name="bric_reset_ok">Resetted time</string -->
+    <!-- TODO string name="bric_reset_fail">Time reset failed</string -->
+    <!-- TODO string name="bric_clear_ok">Cleared memory </string -->
+    <!-- TODO string name="bric_clear_fail">Memory clear failed</string -->
 
     <string name="calibration_title">Kalibrácia nástrojov</string>
     <string name="calibration_length">Dĺžka</string>
@@ -369,7 +373,7 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="menu_display">DISPLAY</string -->
     <string name="menu_show_deleted">ZOBRAZIŤ VYMAZANÉ</string>
     <string name="menu_hide_deleted">SKRYŤ VYMAZANÉ</string>
-    <string name="menu_distox">DISTOX</string>
+    <!-- TODO string name="menu_device">DEVICE</string -->
     <string name="menu_export">EXPORTOVAŤ</string>
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_recover">OBNOVIŤ</string>
@@ -1506,6 +1510,8 @@ Tap "Close" not to take any action.
   <string name="pref_side_drag_summary">Povolí bočný presun krezby v nákrese - po povolení voľby Bočný Posun v režime Kreslenia</string>
   <string name="pref_unit_grid_title">Jednotky nákresu</string>
   <string name="pref_unit_grid_summary">Výber Jednotiek mriežky pri kreslení</string>
+  <!-- TODO string name="pref_unit_measure_title">Ruler units</string -->
+  <!-- TODO string name="pref_unit_measure_summary">Length units of measure-tool</string -->
   <string name="pref_unit_measure_title">Jednotky Pravítka</string>
   <string name="pref_unit_measure_summary">Výber Jednotiek, ktoré používa Pravítko pri meraní</string>
   <!-- UNUSED string name="pref_recent_nr_title">Najpoužívanejšie Symboly</string -->

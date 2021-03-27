@@ -112,7 +112,7 @@ public class Device
   // nickname can be null
   public Device( String addr, String model, int h, int t, String name, String nickname )
   {
-    // Log.v("DistoX-BLE", "Device: " + addr + " " + model + " " + name );
+    // Log.v("DistoX", "[1] Device: " + addr + " " + model + " " + name );
     mAddress = addr;
     mModel = model;
     mType = modelToType( model );
@@ -125,7 +125,7 @@ public class Device
   // nickname can be null
   public Device( String addr, String model, String name, String nickname )
   {
-    // Log.v("DistoX-BLE", "Device: " + addr + " " + model + " " + name );
+    // Log.v("DistoX", "[2] Device: " + addr + " " + model + " " + name );
     mAddress = addr;
     mModel = model;
     mType = modelToType( model );
@@ -137,10 +137,12 @@ public class Device
 
   private String fromName( String name )
   {
+    // Log.v("DistoX", "from name <" + name + "> model <" + mModel + ">" );
     if ( name != null ) name = name.trim();
     if ( name == null || name.length() == 0 || name.equals("null") ){
       name = mModel;
     }
+    if ( name.startsWith("DistoX-") ) return name.replace("DistoX-", "");
     if ( name.startsWith("SAP5_" ) ) return name.replace("SAP5_", "");
     if ( name.startsWith("BRIC-" ) ) return name.replace("BRIC-", "");
     return name;
@@ -158,6 +160,7 @@ public class Device
 
   public String toString() 
   { 
+    // Log.v("DistoX", "to String <" + mName + "> type <" + mType + "> <" + typeString[ mType ] +">" );
     if ( mNickname != null && mNickname.length() > 0 ) {
       return typeString[ mType ] + " " + mName + " " + mNickname;
     }

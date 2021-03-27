@@ -130,7 +130,7 @@ class PacketData
 
   public String toString()
   {
-    // SimpleDateFormat df = new SimpleDateFormat("yyyy.mm.dd hh:mm:ss");
+    // SimpleDateFormat df = new SimpleDateFormat("yyyy.mm.dd HH:mm:ss");
     // String date = df.format( millis );
     // // Log.v("DistoXP", date + " type " + type );
     // // return String.format("%s: %s (%d %c) %s", address, date, dir, mTypes[type], dataToString() );

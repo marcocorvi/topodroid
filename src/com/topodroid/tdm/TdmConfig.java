@@ -13,6 +13,7 @@ package com.topodroid.tdm;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDVersion;
+import com.topodroid.DistoX.TDUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,7 +24,7 @@ import java.io.BufferedReader;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.text.SimpleDateFormat;
+// import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Iterator;
 
@@ -156,11 +157,12 @@ class TdmConfig extends TdmFile
   void setSave() { mSave = true; }
 
   // ---------------------------------------------------------------
-  static String currentDate()
-  {
-    SimpleDateFormat sdf = new SimpleDateFormat( "yyyy.MM.dd", Locale.US );
-    return sdf.format( new Date() );
-  }
+  // this is TDUtil.currentDate()
+  // static String currentDate()
+  // {
+  //   SimpleDateFormat sdf = new SimpleDateFormat( "yyyy.MM.dd", Locale.US );
+  //   return sdf.format( new Date() );
+  // }
 
   // ---------------------------------------------------------------
 
@@ -192,7 +194,7 @@ class TdmConfig extends TdmFile
     try {
       FileWriter fw = new FileWriter( filepath );
       PrintWriter pw = new PrintWriter( fw );
-      pw.format("# created by TopoDroid Manager %s - %s\n", TDVersion.string(), currentDate() );
+      pw.format("# created by TopoDroid Manager %s - %s\n", TDVersion.string(), TDUtil.currentDate() );
       pw.format("source\n");
       pw.format("  survey %s\n", mSurveyName );
       for ( TdmInput input : mInputs ) {
@@ -299,7 +301,7 @@ class TdmConfig extends TdmFile
     try {
       FileWriter fw = new FileWriter( filepath );
       PrintWriter pw = new PrintWriter( fw );
-      pw.format("# created by TopoDroid Manager %s - %s\n", TDVersion.string(), currentDate() );
+      pw.format("# created by TopoDroid Manager %s - %s\n", TDVersion.string(), TDUtil.currentDate() );
       pw.format("source\n");
       pw.format("  survey %s\n", mSurveyName );
       for ( TdmInput input : mInputs ) {
@@ -347,7 +349,7 @@ class TdmConfig extends TdmFile
     try {
       FileWriter fw = new FileWriter( filepath );
       PrintWriter pw = new PrintWriter( fw );
-      pw.format("; created by TopoDroid Manager %s - %s\n", TDVersion.string(), currentDate() );
+      pw.format("; created by TopoDroid Manager %s - %s\n", TDVersion.string(), TDUtil.currentDate() );
       // TODO EXPORT
       for ( TdmInput s : mInputs ) {
         String path = "../svx/" + s.getSurveyName() + ".svx";

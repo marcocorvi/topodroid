@@ -103,6 +103,10 @@ Tap "Close" not to take any action.
     <!-- TODO string name="bric_clear_memory">Clear memory</string -->
     <!-- TODO string name="bric_future_time">Refusing to reset to a future time</string -->
     <!-- TODO string name="bric_ask_memory_clear">Clear BRIC memory ?</string -->
+    <!-- TODO string name="bric_reset_ok">Resetted time</string -->
+    <!-- TODO string name="bric_reset_fail">Time reset failed</string -->
+    <!-- TODO string name="bric_clear_ok">Cleared memory </string -->
+    <!-- TODO string name="bric_clear_fail">Memory clear failed</string -->
 
     <string name="calibration_title">设备校准</string>
     <string name="calibration_length">卷尺</string>
@@ -366,7 +370,7 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="menu_display">DISPLAY</string -->
     <string name="menu_show_deleted">显示已删除</string>
     <string name="menu_hide_deleted">隐藏已删除</string>
-    <string name="menu_distox">DISTOX</string>
+    <!-- TODO string name="menu_device">Device</string -->
     <string name="menu_export">输出</string>
     <string name="menu_firmware">固件</string>
     <string name="menu_recover">恢复</string>
@@ -1489,6 +1493,8 @@ Tap "Close" not to take any action.
   <string name="pref_side_drag_summary">启用草图窗口中的边框拖动</string>
   <string name="pref_unit_grid_title">草图参考单位</string>
   <string name="pref_unit_grid_summary">草图网格参考单格尺寸</string>
+  <!-- TODO string name="pref_unit_measure_title">Ruler units</string -->
+  <!-- TODO string name="pref_unit_measure_summary">Length units of measure-tool</string -->
   <!-- UNUSED string name="pref_recent_nr_title">最近的工具数量</string -->
   <!-- UNUSED string name="pref_recent_nr_summary">项目选择器中最新使用工具的数量</string -->
   <string name="pref_area_border_title">区边界的可见性</string>

@@ -115,9 +115,10 @@ class DeviceSelectDialog extends MyDialog
     // FIXME VirtualDistoX
     // String address = ( vals[0].equals("X000") )? Device.ZERO_ADDRESS : vals[2];
     String model   = vals[0];
+    String name    = vals[1];
     String address = vals[2];
 
-    mApp.setDevicePrimary( address, model, null ); // FIXME BLEX only BT devices
+    mApp.setDevicePrimary( address, model, name, null ); // FIXME BLEX only BT devices
     mLister.setTheTitle();
     mDownloader.toggleDownload();
     mLister.setConnectionStatus( mDownloader.getStatus() );

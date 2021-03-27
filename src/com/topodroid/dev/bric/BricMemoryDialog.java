@@ -21,11 +21,16 @@ import android.widget.Button;
 
 import android.view.View;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class BricMemoryDialog extends MyDialog
                               implements View.OnClickListener
 {
   private final Resources mRes;
   private final DeviceActivity mParent;
+  private Timer mTimer = null;
+  private TimerTask mTask;
 
   private EditText et_year;
   private EditText et_month;
@@ -34,6 +39,8 @@ public class BricMemoryDialog extends MyDialog
   private EditText et_minute;
   private EditText et_second;
   // private EditText et_centisecond;
+  private TextView tv_minute;
+  private TextView tv_second;
 
   int current_year;
   int current_month;
@@ -62,6 +69,19 @@ public class BricMemoryDialog extends MyDialog
     et_minute = (EditText) findViewById( R.id.bric_minute );
     et_second = (EditText) findViewById( R.id.bric_second );
     // et_centisecond = (EditText) findViewById( R.id.bric_battery );
+
+    tv_minute = (TextView) findViewById( R.id.time_minute );
+    tv_second = (TextView) findViewById( R.id.time_second );
+
+    mTask = new TimerTask() {
+      @Override public void run() {
+        String[] mmss = TDUtil.currentMinuteSecond().split(":");
+        tv_minute.setText( mmss[0] );
+        tv_second.setText( mmss[1] );
+      }
+    };
+    mTimer = new Timer();
+    mTimer.schedule( mTask, 100, 500 );
 
     String[] time = TDUtil.currentDateTimeBric().split(" ");
     for ( int k=1; k<6; ++k ) { // make it pretty
@@ -151,8 +171,18 @@ public class BricMemoryDialog extends MyDialog
         TDToast.makeWarn( R.string.bric_future_time );
       } 
     } else if ( view.getId() == R.id.button_clear ) {
-      Log.v("DistoX", "BRIC memory dialog : clear ");
+      // Log.v("DistoX", "BRIC memory dialog : clear ");
       mParent.doBricMemoryClear( );
+    }
+    onBackPressed();
+  }
+
+  @Override
+  public void onBackPressed()
+  {
+    if ( mTimer != null ) {
+      mTimer.cancel();
+      mTimer = null;
     }
     dismiss();
   }
