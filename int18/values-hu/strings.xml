@@ -674,7 +674,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="button_color"     >Szín</string>
     <string name="button_clear_convert">Átal. törlés</string>
     <string name="button_convert"   >Átalakít</string>
-    <string name="button_current"   >Jelenlegi</string>
+    <string name="button_current"   >Aktív</string>
     <string name="button_delete"    >Töröl</string>
     <string name="button_duplicate" >Megdupláz </string>
     <string name="button_surface"   >Felület</string>
