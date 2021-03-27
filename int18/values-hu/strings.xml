@@ -101,12 +101,12 @@ Tap <b>Bezár</b> nem változtat.
     <string name="bric_battery_wait">Akku &#8230;</string>
     <string name="bric_reset_time">Reset idő</string>
     <string name="bric_clear_memory">Memória törlés</string>
-    <string name="bric_future_time">Nem lehet vissaállítani jövőbeli időpontra</string>
+    <string name="bric_future_time">Nem lehet visszaállítani jövőbeli időpontra</string>
     <string name="bric_ask_memory_clear">Töröljük a BRIC memóriáját?</string>
-    <!-- TODO string name="bric_reset_ok">Resetted time</string -->
-    <!-- TODO string name="bric_reset_fail">Time reset failed</string -->
-    <!-- TODO string name="bric_clear_ok">Cleared memory </string -->
-    <!-- TODO string name="bric_clear_fail">Memory clear failed</string -->
+    <string name="bric_reset_ok">Visszaállított idóő</string>
+    <string name="bric_reset_fail">Idő visszaállítás sikertelen</string>
+    <string name="bric_clear_ok">Memória törölve </string>
+    <string name="bric_clear_fail">Memória törlés sikertelen</string>
 
     <string name="calibration_title">Műszerek kalibrálása</string>
     <string name="calibration_length">Mérőszalag</string>
@@ -372,7 +372,7 @@ Tap <b>Bezár</b> nem változtat.
     <!-- UNUSED string name="menu_display">KÉPERNYŐ</string -->
     <string name="menu_show_deleted">TÖRÖLTEK MUTATÁSA</string>
     <string name="menu_hide_deleted">TÖRÖLTEK ELREJTÉSE</string>
-    <!-- TODO string name="menu_device">DEVICE</string -->
+    <string name="menu_device">MŰSZER</string>
     <string name="menu_export">EXPORTÁLÁS</string>
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_recover">HELYREÁLLÍT</string>
