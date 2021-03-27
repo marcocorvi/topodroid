@@ -312,8 +312,8 @@ Tap <b>Bezár</b> nem változtat.
     <string name="fmt_longitude">Hosszúság %1$s</string>
     <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string> 
 	
-    <string name="fixed">csavarral állandósított</string>
-    <string name="painted">felfestett</string>
+    <string name="fixed">csavar</string>
+    <string name="painted">festett</string>
 
     <string name="cbd_title">Kezdő könyvtár</string>
     <string name="cwd">TopoDroid projekt könyvtár</string>
