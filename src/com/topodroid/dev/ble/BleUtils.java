@@ -100,6 +100,14 @@ public class BleUtils
     }
     return sb.toString();
   }
+  
+  public static String bytesToHexString( byte[] bytes )
+  {
+    StringBuilder sb = new StringBuilder();
+    for ( int k=0; k<bytes.length; ++k ) sb.append( String.format(" %02x", bytes[k] ) );
+    return sb.toString();
+  }
+
 
   // ------------------------------------------------------------------------------
   public static boolean isChrtPBcast( int prop )       { return (prop & BluetoothGattCharacteristic.PROPERTY_BROADCAST) != 0; }

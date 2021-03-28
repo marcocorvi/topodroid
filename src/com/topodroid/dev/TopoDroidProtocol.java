@@ -75,7 +75,7 @@ public class TopoDroidProtocol
   {
     // Log.v("DistoX", "TD proto: type " + device.mType + " addr " + device.mAddress );
     mDeviceType    = device.mType;
-    mDeviceAddress = device.mAddress;
+    mDeviceAddress = device.getAddress();
     mPacketLogger  = new PacketLogger( context );
 
     // allocated buffers

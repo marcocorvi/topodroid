@@ -19,7 +19,7 @@ Tap <b>Close</b> not to take any action.
     <string name="path11_move">Moved to folder Documents/TopoDroid.\nPlease restart TopoDroid</string>
     <string name="path11_not_move">Failed to move to folder Documents/TopoDroid</string>
 
-    <string name="app_name">TopoDroid</string>
+    <string name="app_name" translatable="false">TopoDroid</string>
     <string name="tdm_title">TopoDroid Manager</string>
     <string name="double_back">Click BACK again to exit</string>
 

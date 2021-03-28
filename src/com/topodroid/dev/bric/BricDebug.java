@@ -12,6 +12,7 @@
 package com.topodroid.dev.bric;
 
 import com.topodroid.dev.ble.BleUtils;
+import com.topodroid.utils.TDLog;
 
 import android.util.Log;
 
@@ -20,8 +21,7 @@ class BricDebug
 
   static void logMeasPrim( byte[] bytes )
   {
-    Log.v("DistoX", "BRIC debug MeasPrim: " + bytes.length + " date " 
-      + BleUtils.getShort( bytes, 0 ) + "." + BleUtils.getChar( bytes, 2 ) + "." + BleUtils.getChar( bytes, 3 ) + " Distance " 
+    TDLog.Log( TDLog.LOG_PROTO, "BRIC debug MeasPrim: " + bytes.length + " " + BricConst.getTimeString( bytes ) + " Distance "
       + BleUtils.getFloat( bytes, 8 ) + " Azimuth " + BleUtils.getFloat( bytes, 12 ) + " Clino " + BleUtils.getFloat( bytes, 16 ) 
     );
   }
@@ -34,7 +34,7 @@ class BricDebug
 
   static void logMeasMeta( byte[] bytes )
   {
-    Log.v("DistoX", "BRIC debug MeasMeta: " + bytes.length + " Idx " 
+    TDLog.Log( TDLog.LOG_PROTO, "BRIC debug MeasMeta: " + bytes.length + " Idx " 
       + BleUtils.getInt( bytes, 0 ) + " dip " + BleUtils.getFloat( bytes, 4 ) + " roll " + BleUtils.getFloat( bytes, 8 ) + " temp " 
       + BleUtils.getFloat( bytes, 12 ) + " samples " + BleUtils.getShort( bytes, 16 ) + " type " + BleUtils.getChar( bytes, 18 ) 
     );
@@ -42,23 +42,25 @@ class BricDebug
 
   static void logMeasErr( byte[] bytes )
   {
-    Log.v("DistoX", "BRIC debug MeasErr: " + bytes.length + " Err1 " 
-      + BleUtils.getChar( bytes, 0 ) + ": " + BleUtils.getFloat( bytes, 1 ) + " " + BleUtils.getFloat( bytes, 5 ) + " Err2 " 
-      + BleUtils.getChar( bytes, 9 ) + ": " + BleUtils.getFloat( bytes, 10 ) + " " + BleUtils.getFloat( bytes, 14 ) 
-    );
+    // Log.v("DistoX", "BRIC debug MeasErr: " + bytes.length + " Err1 " 
+    //   + BleUtils.getChar( bytes, 0 ) + ": " + BleUtils.getFloat( bytes, 1 ) + " " + BleUtils.getFloat( bytes, 5 ) + " Err2 " 
+    //   + BleUtils.getChar( bytes, 9 ) + ": " + BleUtils.getFloat( bytes, 10 ) + " " + BleUtils.getFloat( bytes, 14 ) 
+    // );
+    TDLog.Log( TDLog.LOG_PROTO, "BRIC debug MeasErr: " + bytes.length + " " + BricConst.errorString( bytes ) );
   }
+
 
   static void logString( byte[] bytes )
   {
     StringBuilder sb = new StringBuilder();
     for ( int k=0; k<bytes.length; ++k ) sb.append( String.format(" %02x", bytes[k] ) );
-    Log.v("DistoX", "BRIC debug Info " + bytes.length + ": hex " + sb.toString() );
+    TDLog.Log( TDLog.LOG_PROTO, "BRIC debug Info " + bytes.length + ": hex " + sb.toString() );
   }
 
   static void logAscii( byte[] bytes )
   {
     if ( bytes != null ) {
-      Log.v("DistoX", "BRIC debug: " + BleUtils.bytesToAscii( bytes ) );
+      TDLog.Log( TDLog.LOG_PROTO, "BRIC debug: " + BleUtils.bytesToAscii( bytes ) );
     }
   }
 

@@ -11,9 +11,13 @@
  */
 package com.topodroid.dev.bric;
 
+import com.topodroid.dev.ble.BleUtils;
+
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.Condition;
+
+import android.util.Log;
 
 class BricQueue
 {
@@ -26,6 +30,7 @@ class BricQueue
 
   void put( int type, byte[] bytes )
   {
+    // Log.v("DistoX", "BRIC queue put " + BleUtils.bytesToHexString( bytes ) );
     BricBuffer buffer = new BricBuffer( type, bytes );
     mLock.lock();
     try {

@@ -19,7 +19,7 @@ Tap <b>Chiudi</b> per fare nulla.
     <string name="path11_move">Spostata nella cartella Documents/TopoDroid.\nFar ripartire TopoDroid</string>
     <string name="path11_not_move">Errore nello spostare alla cartella Documents/TopoDroid</string>
 
-    <string name="app_name">TopoDroid</string>
+    <!-- OK string name="app_name">TopoDroid</string -->
     <string name="tdm_title">Gestione TopoDroid</string>
     <string name="double_back">Per uscire premi INDIETRO di nuovo</string>
 

@@ -310,7 +310,7 @@ public class DeviceActivity extends Activity
     // mCurrDeviceB = TDInstance.getDeviceB();
     mHasBLE      = TDandroid.checkBluetoothLE( this ); // FIXME_SCAN_BRIC
 
-    // mAddress = currDeviceA().mAddress;
+    // mAddress = currDeviceA().getAddress();
     // mAddress = getIntent().getExtras().getString(   TDTag.TOPODROID_DEVICE_ADDR );
 
     setContentView(R.layout.device_activity);
@@ -468,7 +468,7 @@ public class DeviceActivity extends Activity
 
       // if ( vals.length != 3 ) { TODO } // FIXME
       // Log.v("DistoX", "Addr/Name <" + vals[2] + ">");
-      if ( currDeviceA() == null || ! ( address.equals( currDeviceA().mAddress ) || address.equals( currDeviceA().mNickname ) ) ) {
+      if ( currDeviceA() == null || ! address.equals( currDeviceA().hasAddressOrNickname( address ) ) ) {
         mApp.setDevicePrimary( address, model, name, null );
         // mCurrDevice = TDInstance.getDeviceA();
         mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
@@ -497,7 +497,7 @@ public class DeviceActivity extends Activity
   private void pairDevice()
   {
     if ( currDeviceA() == null ) return;
-    BluetoothDevice device = DeviceUtil.getRemoteDevice( currDeviceA().mAddress );
+    BluetoothDevice device = DeviceUtil.getRemoteDevice( currDeviceA().getAddress() );
     if ( device == null ) return;
     switch ( DeviceUtil.pairDevice( device ) ) {
       case -1: // failure
@@ -603,6 +603,7 @@ public class DeviceActivity extends Activity
         if ( currDeviceA().mType == Device.DISTO_A3 ) {
           new DeviceA3InfoDialog( this, this, currDeviceA() ).show();
         } else if ( currDeviceA().mType == Device.DISTO_X310 ) {
+          currDeviceA().dump();
           new DeviceX310InfoDialog( this, this, currDeviceA() ).show();
         } else if ( currDeviceA().mType == Device.DISTO_BRIC4 ) {
           BricInfoDialog info = new BricInfoDialog( this, getResources(), currDeviceA() );
@@ -718,7 +719,7 @@ public class DeviceActivity extends Activity
   public boolean readDeviceHeadTail( byte[] command, int[] head_tail )
   {
     // TDLog.Log( TDLog.LOG_DEVICE, "onClick mBtnHeadTail. Is connected " + mApp.isConnected() );
-    if ( mApp.readA3HeadTail( currDeviceA().mAddress, command, head_tail ) == null ) {
+    if ( mApp.readA3HeadTail( currDeviceA().getAddress(), command, head_tail ) == null ) {
       TDToast.makeBad( R.string.head_tail_failed );
       return false;
     }
@@ -742,8 +743,8 @@ public class DeviceActivity extends Activity
     int to   = head_tail[0]; // head
     if ( ! checkA3headtail( head_tail ) ) return;
     // Log.v("DistoX-HT", "do reset from " + from + " to " + to );
-    int n = mApp.swapA3HotBit( currDeviceA().mAddress, from, to, on_off );
-    // ( new SwapHotBitTask( mApp, Device.DISTO_A3, currDeviceA().mAddress, head_tail, on_off ) ).execute();
+    int n = mApp.swapA3HotBit( currDeviceA().getAddress(), from, to, on_off );
+    // ( new SwapHotBitTask( mApp, Device.DISTO_A3, currDeviceA().getAddress(), head_tail, on_off ) ).execute();
     if ( n < 0 ) {
       TDLog.Error("failed reset A3 device HeadTail");
     }
@@ -751,46 +752,46 @@ public class DeviceActivity extends Activity
 
   public void storeDeviceHeadTail( int[] head_tail )
   {
-    // Log.v(TopoDroidApp.TAG, "store HeadTail " + currDeviceA().mAddress + " : " + head_tail[0] + " " + head_tail[1] );
-    if ( ! mApp_mDData.updateDeviceHeadTail( currDeviceA().mAddress, head_tail ) ) {
+    // Log.v(TopoDroidApp.TAG, "store HeadTail " + currDeviceA().getAddress() + " : " + head_tail[0] + " " + head_tail[1] );
+    if ( ! mApp_mDData.updateDeviceHeadTail( currDeviceA().getAddress(), head_tail ) ) {
       TDToast.makeBad( R.string.head_tail_store_failed );
     }
   }
 
   public void retrieveDeviceHeadTail( int[] head_tail )
   {
-    // Log.v(TopoDroidApp.TAG, "store Head Tail " + currDeviceA().mAddress + " : " + head_tail[0] + " " + head_tail[1] );
-    mApp_mDData.getDeviceHeadTail( currDeviceA().mAddress, head_tail );
+    // Log.v(TopoDroidApp.TAG, "store Head Tail " + currDeviceA().getAddress() + " : " + head_tail[0] + " " + head_tail[1] );
+    mApp_mDData.getDeviceHeadTail( currDeviceA().getAddress(), head_tail );
   }
 
   public void readX310Info( DeviceX310InfoDialog dialog )
   {
-    ( new InfoReadX310Task( mApp, dialog, currDeviceA().mAddress ) ).execute();
+    ( new InfoReadX310Task( mApp, dialog, currDeviceA().getAddress() ) ).execute();
   }
 
   public void readA3Info( DeviceA3InfoDialog dialog )
   {
-    ( new InfoReadA3Task( mApp, dialog, currDeviceA().mAddress ) ).execute();
+    ( new InfoReadA3Task( mApp, dialog, currDeviceA().getAddress() ) ).execute();
   }
 
   // @param head_tail indices
   public void readX310Memory( IMemoryDialog dialog, int[] head_tail, String dumpfile )
   {
-    ( new MemoryReadTask( mApp, dialog, Device.DISTO_X310, currDeviceA().mAddress, head_tail, dumpfile ) ).execute();
+    ( new MemoryReadTask( mApp, dialog, Device.DISTO_X310, currDeviceA().getAddress(), head_tail, dumpfile ) ).execute();
   }
  
   // @param head_tail addresses
   public void readA3Memory( IMemoryDialog dialog, int[] head_tail, String dumpfile )
   {
     if ( checkA3headtail( head_tail ) ) {
-      ( new MemoryReadTask( mApp, dialog, Device.DISTO_A3, currDeviceA().mAddress, head_tail, dumpfile ) ).execute();
+      ( new MemoryReadTask( mApp, dialog, Device.DISTO_A3, currDeviceA().getAddress(), head_tail, dumpfile ) ).execute();
     }
   }
 
   // X310 data memory is read-only
   // void resetX310DeviceHeadTail( final int[] head_tail )
   // {
-  //   int n = mApp.resetX310Memory( currDeviceA().mAddress, head_tail[0], head_tail[1] );
+  //   int n = mApp.resetX310Memory( currDeviceA().getAddress(), head_tail[0], head_tail[1] );
   //   TDToast.make("X310 memory reset " + n + " data" );
   // }
 
@@ -820,7 +821,7 @@ public class DeviceActivity extends Activity
     if ( device == null ) return;
     String address = device.getAddress();
     String name    = device.getName();
-    // if ( currDeviceA() == null || ! address.equals( currDeviceA().mAddress ) ) { // N.B. address != null
+    // if ( currDeviceA() == null || ! address.equals( currDeviceA().getAddress() ) ) { // N.B. address != null
       mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
       mApp.setDevicePrimary( address, null, name, device );
       // mCurrDevice = TDInstance.getDeviceA();
@@ -828,7 +829,7 @@ public class DeviceActivity extends Activity
       setState();
     // }
     updateList();
-    // Log.v("DistoX-BLE", "Device Activity: add ble device " + currDeviceA().mName + "/" + currDeviceA().mAddress + "/" + currDeviceA().mModel );
+    // Log.v("DistoX-BLE", "Device Activity: add ble device " + currDeviceA().mName + "/" + currDeviceA().getAddress() + "/" + currDeviceA().mModel );
   }
 
   public void onActivityResult( int request, int result, Intent intent ) 
@@ -843,7 +844,7 @@ public class DeviceActivity extends Activity
           // TDLog.Log(TDLog.LOG_DISTOX, "OK " + address );
           if ( address == null ) {
             TDLog.Error( "onActivityResult REQUEST DEVICE: null address");
-          } else if ( currDeviceA() == null || ! address.equals( currDeviceA().mAddress ) ) { // N.B. address != null
+          } else if ( currDeviceA() == null || ! address.equals( currDeviceA().getAddress() ) ) { // N.B. address != null
             mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
             mApp.setDevicePrimary( address, null, null, null );
             DeviceUtil.checkPairing( address );
@@ -1015,7 +1016,7 @@ public class DeviceActivity extends Activity
     
   void setSecondDevice( String address )
   {  
-    if ( currDeviceB() == null || ! address.equals( currDeviceB().mAddress ) ) {
+    if ( currDeviceB() == null || ! address.equals( currDeviceB().getAddress() ) ) {
       mApp.setDeviceB( address );
       // mCurrDeviceB = TDInstance.getDeviceB();
       mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
@@ -1047,7 +1048,7 @@ public class DeviceActivity extends Activity
       TDToast.makeBad(R.string.file_not_found );
     } else {
       // FIXME_SYNC this is sync ... ok because calib file is small
-      switch ( TDExporter.importCalibFromCsv( mApp_mDData, filename, currDeviceA().mAddress ) ) {
+      switch ( TDExporter.importCalibFromCsv( mApp_mDData, filename, currDeviceA().getAddress() ) ) {
         case 0:
           TDToast.make(R.string.import_calib_ok );
           break;

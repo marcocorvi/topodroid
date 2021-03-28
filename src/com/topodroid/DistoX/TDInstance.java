@@ -89,9 +89,9 @@ public class TDInstance
   static boolean hasBleDevice() { return mBleDevice != null; }
 
   public static int deviceType() { return (deviceA == null)? 0 : deviceA.mType; }
-  public static String deviceAddress() { return (deviceA == null)? null : deviceA.mAddress; }
+  public static String deviceAddress() { return (deviceA == null)? null : deviceA.getAddress(); }
   public static String deviceNickname() { return (deviceA == null)? "- - -" : deviceA.getNickname(); }
-  public static boolean isDeviceAddress( String addr ) { return deviceA != null && deviceA.mAddress.equals( addr ); }
+  public static boolean isDeviceAddress( String addr ) { return deviceA != null && deviceA.getAddress().equals( addr ); }
 
   static boolean isDeviceA3()     { return deviceA != null && deviceA.isA3(); }
   static boolean isDeviceX310()   { return deviceA != null && deviceA.isX310(); }
@@ -113,13 +113,13 @@ public class TDInstance
   }
 
   // FIXME VitualDistoX
-  // static boolean isDeviceZeroAddress( ) { return ( deviceA == null || deviceA.mAddress.equals( Device.ZERO_ADDRESS ) ); }
+  // static boolean isDeviceZeroAddress( ) { return ( deviceA == null || deviceA.getAddress().equals( Device.ZERO_ADDRESS ) ); }
   static boolean isDeviceZeroAddress( ) { return ( deviceA == null ); }
 
   // FIXME second-DistoX
   static int secondDeviceType() { return (deviceB == null)? 0 : deviceB.mType; }
-  static String secondDeviceAddress() { return (deviceB == null)? null : deviceB.mAddress; }
-  static boolean isSecondDeviceAddress( String addr ) { return deviceB != null && deviceB.mAddress.equals( addr ); }
+  static String secondDeviceAddress() { return (deviceB == null)? null : deviceB.getAddress(); }
+  static boolean isSecondDeviceAddress( String addr ) { return deviceB != null && deviceB.getAddress().equals( addr ); }
 
   static String recentPlot = null;
   static long   recentPlotType = PlotType.PLOT_PLAN;
@@ -148,8 +148,8 @@ public class TDInstance
     b.putString(  "TOPODROID_CALIB",  calib  );
     b.putLong(    "TOPODROID_SECOND_LAST_SHOT_ID", secondLastShotId );
     b.putBoolean( "TOPODROID_XSECTIONS", xsections );
-    b.putString(  "TOPODROID_DEVICE", ( (deviceA == null)? "" : deviceA.mAddress)  );
-    b.putString(  "TOPODROID_SECOND_DEVICE", ( (deviceB == null)? "" : deviceB.mAddress)  );
+    b.putString(  "TOPODROID_DEVICE", ( (deviceA == null)? "" : deviceA.getAddress())  );
+    b.putString(  "TOPODROID_SECOND_DEVICE", ( (deviceB == null)? "" : deviceB.getAddress())  );
     return b;
   }
 

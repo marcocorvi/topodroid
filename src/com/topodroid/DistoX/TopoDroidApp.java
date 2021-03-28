@@ -217,7 +217,7 @@ public class TopoDroidApp extends Application
 
   // static Device mDevice = null;
   // static int deviceType() { return (mDevice == null)? 0 : mDevice.mType; }
-  // static String distoAddress() { return (mDevice == null)? null : mDevice.mAddress; }
+  // static String distoAddress() { return (mDevice == null)? null : mDevice.getAddress(); }
 
   // FIXME VirtualDistoX
   // VirtualDistoX mVirtualDistoX = new VirtualDistoX();
@@ -332,7 +332,7 @@ public class TopoDroidApp extends Application
   {
     CalibInfo info = mDData.selectCalibInfo( TDInstance.cid  );
     // TDLog.Log( TDLog.LOG_CALIB, "info.device " + ((info == null)? "null" : info.device) );
-    // TDLog.Log( TDLog.LOG_CALIB, "device " + ((mDevice == null)? "null" : mDevice.mAddress) );
+    // TDLog.Log( TDLog.LOG_CALIB, "device " + ((mDevice == null)? "null" : mDevice.getAddress()) );
     return ( TDInstance.getDeviceA() == null || ( info != null && info.device.equals( TDInstance.deviceAddress() ) ) );
   }
 
@@ -388,19 +388,19 @@ public class TopoDroidApp extends Application
     if ( device != null && device == TDInstance.getDeviceA() ) {
       if ( device.mType != model ) {
         if ( Device.isA3( model ) ) {
-          mDData.updateDeviceModel( device.mAddress, "DistoX" );
+          mDData.updateDeviceModel( device.getAddress(), "DistoX" );
           device.mType = model;
         } else if ( Device.isX310( model ) ) {
-          mDData.updateDeviceModel( device.mAddress, "DistoX-0000" );
+          mDData.updateDeviceModel( device.getAddress(), "DistoX-0000" );
           device.mType = model;
         } else if ( Device.isSap( model ) ) {
-          mDData.updateDeviceModel( device.mAddress, "Shetland-0000" );
+          mDData.updateDeviceModel( device.getAddress(), "Shetland-0000" );
           device.mType = model;
         } else if ( Device.isBric( model ) ) {
-          mDData.updateDeviceModel( device.mAddress, "BRIC-0000" );
+          mDData.updateDeviceModel( device.getAddress(), "BRIC-0000" );
           device.mType = model;
         // } else if ( Device.isX000( model ) ) { // FIXME VirtualDistoX
-        //   mDData.updateDeviceModel( device.mAddress, "DistoX0" );
+        //   mDData.updateDeviceModel( device.getAddress(), "DistoX0" );
         //   device.mType = model;
         }
       }
@@ -414,7 +414,7 @@ public class TopoDroidApp extends Application
   static void setDeviceName( Device device, String nickname )
   {
     if ( device != null /* && device == TDInstance.getDeviceA() */ ) {
-      mDData.updateDeviceNickname( device.mAddress, nickname );
+      mDData.updateDeviceNickname( device.getAddress(), nickname );
       device.mNickname = nickname;
     }
   }
@@ -520,13 +520,16 @@ public class TopoDroidApp extends Application
 
   public DeviceX310Info readDeviceX310Info( String address )
   {
+    Log.v( "DistoX", "read info - address " + address );
     DeviceX310Info info = new DeviceX310Info();
     byte[] ret = readMemory( address, 0x8008 );
     if ( ret == null ) {
       TDLog.Error("Failed read 8008");
+      // Log.v( "DistoX", "read 8008 failed");
       return null;
     }
     // TDLog.Log( TDLog.LOG_COMM, "Addr 8008 (code): " + ret[0] + " " + ret[1] );
+    // Log.v( "DistoX", "read 8008 (code): " + ret[0] + " " + ret[1] );
     info.mCode = String.format( getResources().getString( R.string.device_code ), MemoryOctet.toInt( ret[1], ret[0] ) );
 
     // ret = readMemory( address, 0xe000 );
@@ -1259,8 +1262,12 @@ public class TopoDroidApp extends Application
       address = TDString.EMPTY;
     } else {
       if ( model != null ) { // addr, model, ...
-        TDInstance.setDeviceA( new Device( address, model, 0, 0, name, null ) );
-        if ( Device.isBle( TDInstance.deviceType() ) ) TDInstance.initBleDevice();
+        // TDInstance.setDeviceA( new Device( address, model, 0, 0, name, null ) );
+        // if ( Device.isBle( TDInstance.deviceType() ) ) TDInstance.initBleDevice();
+        Device device = mDData.getDevice( address );
+        if ( device == null ) device = new Device( address, model, 0, 0, name, null );
+        TDInstance.setDeviceA( device );
+        if ( device.isBLE() ) TDInstance.initBleDevice();
       } else if ( bt_device != null ) { // addr, null, dev
         model = Device.typeToString( TDInstance.deviceType() );
         // address, model, head, tail, name, nickname
@@ -1320,8 +1327,8 @@ public class TopoDroidApp extends Application
       TDLog.Error( "Comm or Device null ");
     } else {
       // TDLog.Log( TDLog.LOG_DATA, "Download Data Batch() device " + TDInstance.deviceAddress() + " comm " + mComm.toString() );
-      // Log.v( "DistoX", "App: Download Data Batch() device " + TDInstance.deviceAddress() + " " + TDInstance.getDeviceA().mAddress + " comm " + mComm.toString() );
-      ret = mComm.downloadData( TDInstance.getDeviceA().mAddress, lister, data_type );
+      // Log.v( "DistoX", "App: Download Data Batch() device " + TDInstance.deviceAddress() + " " + TDInstance.getDeviceA().getAddress() + " comm " + mComm.toString() );
+      ret = mComm.downloadData( TDInstance.getDeviceA().getAddress(), lister, data_type );
       // FIXME BATCH
       // if ( ret > 0 && TDSetting.mSurveyStations > 0 ) {
       //   // FIXME TODO select only shots after the last leg shots
@@ -1947,7 +1954,7 @@ public class TopoDroidApp extends Application
 
   // int readFirmwareHardware()
   // {
-  //   return mComm.readFirmwareHardware( TDInstance.getDeviceA().mAddress );
+  //   return mComm.readFirmwareHardware( TDInstance.getDeviceA().getAddress() );
   // }
 
   // @param hw expected device hardware

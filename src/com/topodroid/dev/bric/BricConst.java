@@ -80,6 +80,24 @@ public class BricConst
     return date.getTimeInMillis() + 10 * CS;
   }
 
+  static String getTimeString( byte[] bytes ) 
+  {
+    StringBuilder sb = new StringBuilder();
+    sb.append( Integer.toString( BleUtils.getShort( bytes, 0 ) ) );
+    sb.append( "-" );
+    sb.append( Integer.toString( BleUtils.getChar( bytes, 2 ) ) );
+    sb.append( "-" );
+    sb.append( Integer.toString( BleUtils.getChar( bytes, 3 ) ) );
+    sb.append( " " );
+    sb.append( Integer.toString( BleUtils.getChar( bytes, 4 ) ) );
+    sb.append( ":" );
+    sb.append( Integer.toString( BleUtils.getChar( bytes, 5 ) ) );
+    sb.append( ":" );
+    sb.append( Integer.toString( BleUtils.getChar( bytes, 6 ) ) );
+    // int CS = BleUtils.getChar( bytes, 7 ); // centiseconds
+    return sb.toString();
+  }
+
   static byte[] makeTimeBytes( short year, char month, char day, char hour, char minute, char second, char centisecond )
   {
     byte[] ret = new byte[8];
@@ -96,6 +114,70 @@ public class BricConst
     BleUtils.putChar( ret, 5, minute );
     BleUtils.putChar( ret, 6, second );
     BleUtils.putChar( ret, 7, centisecond );
+  }
+
+  static final int ERR_NONE       = 0; // no error
+  static final int ERR_ACC_1      = 1;
+  static final int ERR_ACC_2      = 2;
+  static final int ERR_MAG_1      = 3;
+  static final int ERR_MAG_2      = 4;
+  static final int ERR_ACC_D      = 5; // accelerometer disparity
+  static final int ERR_MAG_D      = 6; // magnetometers disparity
+  static final int ERR_LSR        = 7; // target moved
+  static final int ERR_LSR_WEAK   = 8; // weak signal
+  static final int ERR_LSR_STRONG = 9; // strong signal
+  static final int ERR_LSR_0XAA   =10; // pattern error
+  static final int ERR_LSR_TIME   =11; // timeout
+  static final int ERR_LSR_ERROR  =12; // unrecognized error
+  static final int ERR_LSR_MSGID  =13; // wring message
+  static final int ERR_CLINO      =14;
+  static final int ERR_AZIMUTH    =15;
+
+  static String errorString( byte[] bytes )
+  {
+    StringBuilder sb = new StringBuilder();
+    sb.append( "[1] " );
+    int err   = BleUtils.getChar( bytes, 0 );
+    float val1=0;
+    float val2=0;
+    if ( err != ERR_NONE && (err < 7 || err > 10) ) {
+      val1 = BleUtils.getFloat( bytes, 1 );
+      if ( err == 5 || err == 6 ) val2 = BleUtils.getFloat( bytes, 5 );
+    }
+    sb.append( errorString( err, val1, val2 ) );
+    
+    if ( bytes.length <= 9 ) return sb.toString();
+    err = BleUtils.getChar( bytes, 9 );
+    if ( err != ERR_NONE && (err < 7 || err > 10) ) {
+      val1 = BleUtils.getFloat( bytes, 10 );
+      if ( err == 5 || err == 6 ) val2 = BleUtils.getFloat( bytes, 14 );
+    }
+    sb.append( " [2] " );
+    sb.append( errorString( err, val1, val2 ) );
+    return sb.toString();
+  }
+
+  private static String errorString( int code, float v1, float v2 )
+  {
+    switch ( code ) {
+      case ERR_NONE       : return "No error";  // no error
+      case ERR_ACC_1      : return "Acc-1 high " + v1;
+      case ERR_ACC_2      : return "Acc-2 high " + v1;
+      case ERR_MAG_1      : return "Mag-1 high " + v1;
+      case ERR_MAG_2      : return "Mag-2 high " + v1;
+      case ERR_ACC_D      : return "Acc delta " + v1 + " axis " + v2; // accelerometer disparity
+      case ERR_MAG_D      : return "Mag delta " + v1 + " axis " + v2; // magnetometers disparity
+      case ERR_LSR        : return "Target moved";  // target moved
+      case ERR_LSR_WEAK   : return "Weak signal";  // weak signal
+      case ERR_LSR_STRONG : return "Strong signal";  // strong signal
+      case ERR_LSR_0XAA   : return "Pattern error";  // pattern error
+      case ERR_LSR_TIME   : return "Timeout " + v1;  // timeout
+      case ERR_LSR_ERROR  : return "Laser error " + v1;  // unrecognized error
+      case ERR_LSR_MSGID  : return "Wrong msg ID " + v1;  // wrong message
+      case ERR_CLINO      : return "Clino " + v1; 
+      case ERR_AZIMUTH    : return "Azimuth " + v1; 
+    }
+    return "";
   }
 
 }

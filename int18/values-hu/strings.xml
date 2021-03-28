@@ -19,7 +19,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="path11_move">Áthelyezi a mappát a Documents/TopoDroid helyre.\nIndítsd újra a TopoDroid-ot</string>
     <string name="path11_not_move">Nem sikerült áthelyezni a Documents/TopoDroid helyre</string>
 
-    <string name="app_name">TopoDroid</string>
+    <!-- OK string name="app_name">TopoDroid</string -->
     <string name="tdm_title">TopoDroid Manager</string>
     <string name="double_back">Nyomd meg a vissza gombot újra a kilépéshez</string>
 

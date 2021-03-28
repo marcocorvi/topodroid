@@ -69,7 +69,7 @@ class DeviceNameDialog extends MyDialog
 
     mTVmodel.setText( mDevice.mModel );
     mTVname.setText( mDevice.mName );
-    mTVaddress.setText( mDevice.mAddress );
+    mTVaddress.setText( mDevice.getAddress() );
     if ( mDevice.mNickname != null && mDevice.mNickname.length() > 0 ) {
       mETnickname.setText( mDevice.mNickname );
     }
@@ -91,7 +91,7 @@ class DeviceNameDialog extends MyDialog
         mParent.setDeviceName( mDevice, nickname );
       }
       if ( mCBsecondDevice.isChecked() ) {
-        mParent.setSecondDevice( mDevice.mAddress );
+        mParent.setSecondDevice( mDevice.getAddress() );
       }
     // } else if ( b == mBTback ) {
     //   /* nothing */

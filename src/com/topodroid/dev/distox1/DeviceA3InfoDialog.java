@@ -79,7 +79,7 @@ public class DeviceA3InfoDialog extends MyDialog
     tv_statusCalib   = (TextView) findViewById( R.id.tv_status_calib );
     tv_statusSilent  = (TextView) findViewById( R.id.tv_status_silent );
 
-    tv_address.setText( String.format( res.getString( R.string.device_address ), mDevice.mAddress ) );
+    tv_address.setText( String.format( res.getString( R.string.device_address ), mDevice.getAddress() ) );
 
     tv_serial.setText( res.getString( R.string.getting_info ) );
     // tv_statusAngle.setText(   TDString.EMPTY );

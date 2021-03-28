@@ -50,7 +50,7 @@ public class BricInfoDialog extends MyDialog
     tv_hw      = (TextView) findViewById( R.id.bric_hw );
     tv_battery = (TextView) findViewById( R.id.bric_battery );
 
-    tv_address.setText( String.format( mRes.getString( R.string.device_address ), mDevice.mAddress ) );
+    tv_address.setText( String.format( mRes.getString( R.string.device_address ), mDevice.getAddress() ) );
     tv_device.setText( String.format( mRes.getString( R.string.bric_device ), "..." )) ;
     tv_ble.setText( String.format( mRes.getString( R.string.bric_ble ), "..." ) );
     tv_fw.setText( String.format( mRes.getString( R.string.bric_fw ), "..." ) );

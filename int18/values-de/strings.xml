@@ -18,7 +18,7 @@ WARNUNG. Ab v.5.0.60 wird ein "TopoDroid"-Ordner automatisch verwendet wenn es e
     <string name="path11_move">Verschoben nach Documents/TopoDroid.\nBitte TopoDroid neu starten.</string>
     <string name="path11_not_move">Fehler beim verschieben nach Documents/TopoDroid</string>
 
-    <string name="app_name">TopoDroid</string>
+    <!-- OK string name="app_name">TopoDroid</string -->
     <string name="tdm_title">TopoDroid Manager</string>
     <string name="double_back">Erneut ZURÜCK drücken zum verlassen</string>
 

@@ -19,7 +19,7 @@ Tap "Close" not to take any action.
     <!-- TODO string name="path11_move">Moved to folder Documents/TopoDroid.\nPlease restart TopoDroid</string -->
     <!-- TODO string name="path11_not_move">Failed to move to folder Documents/TopoDroid</string -->
 
-    <string name="app_name">TopoDroid</string>
+    <!-- OK string name="app_name">TopoDroid</string -->
     <string name="tdm_title">TopoDroid管理</string>
     <string name="double_back">再次点击返回键退出</string>
 

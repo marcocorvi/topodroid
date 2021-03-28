@@ -19,7 +19,7 @@
     <string name="path11_move">Переместил в папку Documents/TopoDroid.\nПожалуйста перезапустите TopoDroid</string>
     <string name="path11_not_move">Не удалось переместить в папку Documents/TopoDroid</string>
 
-    <string name="app_name">TopoDroid</string>
+    <!-- OK string name="app_name">TopoDroid</string -->
     <string name="tdm_title">TopoDroid Manager</string>
     <string name="double_back">Нажмите "НАЗАД" еще раз для выхода</string>
 

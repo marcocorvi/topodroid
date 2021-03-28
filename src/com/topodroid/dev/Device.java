@@ -26,7 +26,7 @@ public class Device
   // FIXME VirtualDistoX
   // static final String ZERO_ADDRESS = "00-00-00-00-00-00";
 
-  public String mAddress;  // device mac address
+  private String mAddress;  // device mac address
   public String mModel;    // device model (type string)
   public String mName;     // device name (X310 only)
   public String mNickname;  // device nickname
@@ -49,6 +49,14 @@ public class Device
   {
     if ( type < 0 || type >= typeString.length ) return null;
     return typeString[ type ];
+  }
+
+  public String getAddress() { return mAddress; }
+
+  // check if this device has given address or nickname
+  public boolean hasAddressOrNickname( String addr )
+  {
+    return mAddress.equals( addr ) || ( mNickname != null && mNickname.equals( addr ) );
   }
 
   public boolean isBT( )  { return mType == DISTO_X310  || mType == DISTO_A3; }
@@ -112,7 +120,7 @@ public class Device
   // nickname can be null
   public Device( String addr, String model, int h, int t, String name, String nickname )
   {
-    // Log.v("DistoX", "[1] Device: " + addr + " " + model + " " + name );
+    Log.v("DistoX", "[1] Device: " + addr + " " + model + " " + name + " addr " + addr );
     mAddress = addr;
     mModel = model;
     mType = modelToType( model );
@@ -125,7 +133,7 @@ public class Device
   // nickname can be null
   public Device( String addr, String model, String name, String nickname )
   {
-    // Log.v("DistoX", "[2] Device: " + addr + " " + model + " " + name );
+    Log.v("DistoX", "[2] Device: " + addr + " " + model + " " + name + " addr " + addr );
     mAddress = addr;
     mModel = model;
     mType = modelToType( model );
@@ -133,6 +141,12 @@ public class Device
     mNickname = nickname;
     mHead = 0;
     mTail = 0;
+  }
+
+  public void dump()
+  {
+    Log.v("DistoX", "Device addr " + mAddress + " model " + mModel + " type " + mType + " name " + mName 
+      + " nick " + ((mNickname == null)? "null" : mNickname ) );
   }
 
   private String fromName( String name )

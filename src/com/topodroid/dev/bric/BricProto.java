@@ -110,9 +110,9 @@ public class BricProto extends TopoDroidProtocol
       mBearing  = BricConst.getAzimuth( bytes );
       mClino    = BricConst.getClino( bytes );
       mPrimToDo = true;
-      Log.v("DistoX", "BRIC proto: added Prim " + mDistance + " " + mBearing + " " + mClino );
+      TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: added Prim " + mDistance + " " + mBearing + " " + mClino );
     } else {
-      Log.v("DistoX", "BRIC proto: add Prim - repeated primary" );
+      TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: add Prim - repeated primary" );
     }
   }
 
@@ -121,31 +121,31 @@ public class BricProto extends TopoDroidProtocol
     mIndex = BricConst.getIndex( bytes );
     mRoll  = BricConst.getRoll( bytes );
     mDip   = BricConst.getDip( bytes );
-    Log.v("DistoX", "BRIC proto: added Meta " + mIndex );
+    TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: added Meta " + mIndex );
   }
 
   void addMeasErr( byte[] bytes ) 
   {
-    Log.v("DistoX", "BRIC proto: added Err " );
+    TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: added Err " );
   }
   
   void processData()
   {
     // Log.v("DistoX", "BRIC proto process data - prim todo " + mPrimToDo + " index " + mIndex );
     if ( mPrimToDo ) {
-      Log.v("DistoX", "BRIC proto: process - PrimToDo true: " + mIndex + " prev " + mLastIndex );
+      TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: process - PrimToDo true: " + mIndex + " prev " + mLastIndex );
       // mComm.handleRegularPacket( DataType.PACKET_DATA, mLister, DataType.DATA_SHOT );
       mComm.handleBricPacket( mIndex, mLister, DataType.DATA_SHOT );
       mPrimToDo = false;
       mLastIndex = mIndex;
     } else if ( mIndex != mLastIndex ) {
-      Log.v("DistoX", "BRIC proto: process - PrimToDo false: ... skip at " + mIndex + " prev " + mLastIndex );
+      TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: process - PrimToDo false: ... skip at " + mIndex + " prev " + mLastIndex );
       if ( TDSetting.mBricMode == BricComm.MODE_ALL_ZERO ) {
         mComm.handleZeroPacket( mIndex, mLister, DataType.DATA_SHOT );
       }
       mLastIndex = mIndex;
     } else {
-      Log.v("DistoX", "BRIC proto: process - PrimToDo false: ... skip at " + mIndex);
+      TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: process - PrimToDo false: ... skip at " + mIndex);
     }
   }
 
@@ -160,7 +160,7 @@ public class BricProto extends TopoDroidProtocol
       mClino    = BricConst.getClino( bytes );
       mComm.handleRegularPacket( DataType.PACKET_DATA, mLister, DataType.DATA_SHOT );
     } else {
-      Log.v("DistoX", "BRIC proto: add+process - Prim repeated: ... skip");
+      TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: add+process - Prim repeated: ... skip");
     }
   }
 
