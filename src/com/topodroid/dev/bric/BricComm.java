@@ -348,10 +348,8 @@ public class BricComm extends TopoDroidComm
 
     // THIS IS THE BEST 
     // it looks as if there are pending data, after connection, the very first prim is not sent 
-    
-    enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_PRIM_UUID, true ) );
-    doNextOp();
-
+    // enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_PRIM_UUID, true ) );
+    // doNextOp();
     if ( TDSetting.mBricMode >= MODE_ALL ) {
       enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_META_UUID, true ) );
       // clearPending();
@@ -359,10 +357,9 @@ public class BricComm extends TopoDroidComm
       // clearPending();
     }
     // enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.LAST_TIME_UUID, true ) );
-    
-    // enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_PRIM_UUID, true ) );
-    // doNextOp();
-    clearPending();
+    enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_PRIM_UUID, true ) );
+    doNextOp();
+    // clearPending();
 
     mBTConnected = true;
     // Log.v("DistoX", "BRIC comm discovered services status CONNECTED" );
