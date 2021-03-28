@@ -101,12 +101,12 @@ Tap <b>Bezár</b> nem változtat.
     <string name="bric_battery_wait">Akku &#8230;</string>
     <string name="bric_reset_time">Reset idő</string>
     <string name="bric_clear_memory">Memória törlés</string>
-    <string name="bric_future_time">Nem lehet vissaállítani jövőbeli időpontra</string>
+    <string name="bric_future_time">Nem lehet visszaállítani jövőbeli időpontra</string>
     <string name="bric_ask_memory_clear">Töröljük a BRIC memóriáját?</string>
-    <!-- TODO string name="bric_reset_ok">Resetted time</string -->
-    <!-- TODO string name="bric_reset_fail">Time reset failed</string -->
-    <!-- TODO string name="bric_clear_ok">Cleared memory </string -->
-    <!-- TODO string name="bric_clear_fail">Memory clear failed</string -->
+    <string name="bric_reset_ok">Visszaállított idóő</string>
+    <string name="bric_reset_fail">Idő visszaállítás sikertelen</string>
+    <string name="bric_clear_ok">Memória törölve </string>
+    <string name="bric_clear_fail">Memória törlés sikertelen</string>
 
     <string name="calibration_title">Műszerek kalibrálása</string>
     <string name="calibration_length">Mérőszalag</string>
@@ -312,8 +312,8 @@ Tap <b>Bezár</b> nem változtat.
     <string name="fmt_longitude">Hosszúság %1$s</string>
     <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string> 
 	
-    <string name="fixed">csavarral állandósított</string>
-    <string name="painted">felfestett</string>
+    <string name="fixed">csavar</string>
+    <string name="painted">festett</string>
 
     <string name="cbd_title">Kezdő könyvtár</string>
     <string name="cwd">TopoDroid projekt könyvtár</string>
@@ -372,7 +372,7 @@ Tap <b>Bezár</b> nem változtat.
     <!-- UNUSED string name="menu_display">KÉPERNYŐ</string -->
     <string name="menu_show_deleted">TÖRÖLTEK MUTATÁSA</string>
     <string name="menu_hide_deleted">TÖRÖLTEK ELREJTÉSE</string>
-    <!-- TODO string name="menu_device">DEVICE</string -->
+    <string name="menu_device">MŰSZER</string>
     <string name="menu_export">EXPORTÁLÁS</string>
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_recover">HELYREÁLLÍT</string>
@@ -674,7 +674,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="button_color"     >Szín</string>
     <string name="button_clear_convert">Átal. törlés</string>
     <string name="button_convert"   >Átalakít</string>
-    <string name="button_current"   >Jelenlegi</string>
+    <string name="button_current"   >Aktív</string>
     <string name="button_delete"    >Töröl</string>
     <string name="button_duplicate" >Megdupláz </string>
     <string name="button_surface"   >Felület</string>
@@ -716,10 +716,10 @@ Tap <b>Bezár</b> nem változtat.
     <string name="button_reset"     >Visszaállít</string>
     <string name="button_left"      >BAL</string>
     <string name="button_right"     >JOBB</string>
-    <string name="button_clear"     >Töröl</string>
-    <string name="button_clear_day" >Töröl 1nap</string>
-    <string name="button_clear_week">Töröl 7nap</string>
-    <string name="button_clear_memory">Memória törlés</string>
+    <string name="button_clear"     >Tisztít</string>
+    <string name="button_clear_day" >Tisztít 1nap</string>
+    <string name="button_clear_week">Tisztít 7nap</string>
+    <string name="button_clear_memory">Memória tisztítás</string>
     <string name="button_save"      >Ment</string>
     <!-- UNUSED string name="button_select"    >Select    </string -->
     <string name="button_search"    >Keres    </string>
