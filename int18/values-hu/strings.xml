@@ -80,7 +80,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="missing_station">Hiányzó mérési pont</string>
     <string name="station_not_found">Mérési pont nem található</string>
     <string name="shot_not_found">Mérés nem található</string>
-    <!-- TODO string name="bad_sibling">Bad shot sibling</string -->
+    <string name="bad_sibling">Rossz mérés testvér</string>
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->
     <!-- UNUSED string name="missing_line">LINE</string -->
