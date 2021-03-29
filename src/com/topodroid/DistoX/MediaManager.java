@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+
 import android.util.Log;
 
 import java.io.File;
@@ -92,12 +94,12 @@ class MediaManager
         mData.insertPhoto( TDInstance.sid, mPhotoId, mShotId, "", TDUtil.currentDate(), mComment, mCamera );
         ret = true;
       } catch ( FileNotFoundException e ) {
-        Log.v("DistoX-PHOTO", "cannot save photo: file not found");
+        TDLog.Error("cannot save photo: file not found");
       } catch ( IOException e ) {
-        Log.v("DistoX-PHOTO", "cannot save photo: i/o error");
+       TDLog.Error("cannot save photo: i/o error");
       }
     } else {
-      Log.v("DistoX-PHOTO", "cannot save photo: null file" );
+      TDLog.Error("cannot save photo: null file" );
     }
     mImageFile = null;
     return ret;

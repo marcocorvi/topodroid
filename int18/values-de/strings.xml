@@ -79,6 +79,7 @@ WARNUNG. Ab v.5.0.60 wird ein "TopoDroid"-Ordner automatisch verwendet wenn es e
     <string name="missing_station">Kein Messpunkt</string>
     <string name="station_not_found">Messpunkt nicht gefunden</string>
     <string name="shot_not_found">Keine Messung gefunden</string>
+    <!-- TODO string name="bad_sibling">Bad shot sibling</string -->
     <!-- UNUSED string name="missing_area">FLÄCHE</string -->
     <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->
     <!-- UNUSED string name="missing_line">LINIE</string -->
@@ -530,7 +531,6 @@ WARNUNG. Ab v.5.0.60 wird ein "TopoDroid"-Ordner automatisch verwendet wenn es e
     <string name="shot_info">Manuelle Messung erfassen</string>
     <!-- UNUSED string name="shot_length">Länge</string -->
     <string name="shot_note">Notizen</string>
-    <!-- UNUSED string name="shot_not_found">nicht gefunden</string -->
     <string name="shot_reverse">Richtung umkehren</string>
     <string name="shot_to">bis</string>
 

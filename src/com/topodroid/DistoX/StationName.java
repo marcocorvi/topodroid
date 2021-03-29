@@ -138,6 +138,9 @@ class StationName
   {
     TDLog.Log( TDLog.LOG_SHOT, blk.mId + " set name " + from + "-" + to + " bckleg " + is_backleg );
     blk.setBlockName( from, to, is_backleg );
+    if ( mData.checkSiblings( blk.mId, mSid, from, to, blk.mLength, blk.mBearing, blk.mClino ) ) { // bad sibling
+      TDToast.makeWarn( R.string.bad_sibling );
+    }
     mData.updateShotName( blk.mId, mSid, from, to );
   }
 
@@ -146,6 +149,9 @@ class StationName
     // Log.v( "DistoX-BLOCK", "set block " + blk.mId + " name " + from + " " + to );
     TDLog.Log( TDLog.LOG_SHOT, blk.mId + " set name " + from + "-" + to );
     blk.setBlockName( from, to );
+    if ( mData.checkSiblings( blk.mId, mSid, from, to, blk.mLength, blk.mBearing, blk.mClino ) ) { // bad sibling
+      TDToast.makeWarn( R.string.bad_sibling );
+    }
     mData.updateShotName( blk.mId, mSid, from, to );
   }
 

@@ -841,7 +841,7 @@ public class OverviewWindow extends ItemDrawer
 
     float x_canvas = event.getX();
     float y_canvas = event.getY();
-    Log.v("DistoX-TOUCH", "touch canvas " + x_canvas + " " + y_canvas + " center_y " + (DrawingUtil.CENTER_Y*2-20) ); 
+    // Log.v("DistoX-TOUCH", "touch canvas " + x_canvas + " " + y_canvas + " center_y " + (DrawingUtil.CENTER_Y*2-20) ); 
 
     // if ( mZoomBtnsCtrlOn && y_canvas > DrawingUtil.CENTER_Y*2-20 ) {
     //   mZoomBtnsCtrl.setVisible( true );

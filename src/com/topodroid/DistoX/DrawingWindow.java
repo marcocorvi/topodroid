@@ -2914,6 +2914,9 @@ public class DrawingWindow extends ItemDrawer
 
     block.mFrom = from;
     block.mTo   = to;
+    if ( mApp_mData.checkSiblings( block.mId, mSid, from, to, block.mLength, block.mBearing, block.mClino ) ) { // bad sibling
+      TDToast.makeWarn( R.string.bad_sibling );
+    }
     mApp_mData.updateShotName( block.mId, mSid, from, to );
     doComputeReferences( true );
     mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );

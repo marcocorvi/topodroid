@@ -82,6 +82,7 @@ Tap "Close" not to take any action.
     <string name="missing_station">Липсващ репер</string>
     <string name="station_not_found">Реперът не е намерен</string>
     <!-- TODO string name="shot_not_found">No shot found</string -->
+    <!-- TODO string name="bad_sibling">Bad shot sibling</string -->
     <!-- UNUSED string name="missing_area">Площ</string -->
     <!-- UNUSED string name="missing_hint">Разрешете липсващите символи или ги инсталирайте</string -->
     <!-- UNUSED string name="missing_line">Линия</string -->
@@ -521,7 +522,6 @@ Tap "Close" not to take any action.
     <string name="shot_info">Въведете данни за отсечката</string>
     <!-- string name="shot_length">length</string -->
     <string name="shot_note">бележка</string>
-    <!-- UNUSED string name="shot_not_found">Не е намерена отсечка</string -->
     <string name="shot_reverse">обръщане</string>
     <string name="shot_to">до</string>
 

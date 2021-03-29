@@ -80,6 +80,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="missing_station">Missing station</string>
     <string name="station_not_found">Station not found</string>
     <string name="shot_not_found">No shot found</string>
+    <string name="bad_sibling">Bad shot sibling</string>
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->
     <!-- UNUSED string name="missing_line">LINE</string -->
@@ -533,7 +534,6 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="shot_info">Enter shot data</string>
     <!-- UNUSED string name="shot_length">length</string -->
     <string name="shot_note">note</string>
-    <!-- UNUSED string name="shot_not_found">Found no shot</string -->
     <string name="shot_reverse">reverse</string>
     <string name="shot_to">to</string>
 

@@ -81,6 +81,7 @@ Tap "Close" not to take any action.
     <string name="missing_station">Falta Estación</string>
     <string name="station_not_found">Estación no encontrada</string>
     <string name="shot_not_found">No se encontró ninguna toma</string>
+    <!-- TODO string name="bad_sibling">Bad shot sibling</string -->
     <!-- UNUSED string name="missing_area">Área</string -->
     <!-- UNUSED string name="missing_hint">Por favor, instale los símbolos con TdSymbol</string -->
     <!-- UNUSED string name="missing_line">Línea</string -->
@@ -518,7 +519,6 @@ Tap "Close" not to take any action.
     <string name="shot_info">Introducir datos Toma</string>
     <!-- UNUSED string name="shot_length">Longitud de la toma</string -->
     <string name="shot_note">Nota de toma</string>
-    <!-- UNUSED string name="shot_not_found">No se encontraron tomas</string -->
     <string name="shot_reverse">Toma Inversa</string>
     <string name="shot_to">Toma hasta</string>
 <!-- NOT USED -->

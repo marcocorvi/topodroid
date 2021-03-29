@@ -520,7 +520,7 @@ public class TopoDroidApp extends Application
 
   public DeviceX310Info readDeviceX310Info( String address )
   {
-    Log.v( "DistoX", "read info - address " + address );
+    // Log.v( "DistoX", "read info - address " + address );
     DeviceX310Info info = new DeviceX310Info();
     byte[] ret = readMemory( address, 0x8008 );
     if ( ret == null ) {
@@ -1460,7 +1460,7 @@ public class TopoDroidApp extends Application
 
   static private void installFirmware( boolean overwrite )
   {
-    Log.v("DistoX-FW", "install firmware " + overwrite );
+    // Log.v("DistoX-FW", "install firmware " + overwrite );
     InputStream is = TDInstance.getResources().openRawResource( R.raw.firmware );
     firmwareUncompress( is, overwrite );
     try { is.close(); } catch ( IOException e ) { }
@@ -1569,7 +1569,7 @@ public class TopoDroidApp extends Application
 
   static private void firmwareUncompress( InputStream fis, boolean overwrite )
   {
-    Log.v("DistoX-FW", "firmware uncompress ...");
+    // Log.v("DistoX-FW", "firmware uncompress ...");
     TDPath.checkBinDir( );
     try {
       // byte buffer[] = new byte[36768];
@@ -1578,7 +1578,7 @@ public class TopoDroidApp extends Application
       ZipInputStream zin = new ZipInputStream( fis );
       while ( ( ze = zin.getNextEntry() ) != null ) {
         String filepath = ze.getName();
-        Log.v("DistoX-FW", "firmware uncompress path " + filepath );
+        // Log.v("DistoX-FW", "firmware uncompress path " + filepath );
         if ( ze.isDirectory() ) continue;
         if ( ! filepath.endsWith("bin") ) continue;
         String pathname =  TDPath.getBinFile( filepath );
@@ -1635,7 +1635,11 @@ public class TopoDroidApp extends Application
     resetCurrentOrLastStation( );
     long millis = java.lang.System.currentTimeMillis()/1000;
     distance = distance / TDSetting.mUnitLength;
+    // Log.v( "DistoX", "[2] dupl.-shot Data " + distance + " " + bearing + " " + clino );
     long id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, distance, bearing, clino, 0.0f, extend, 0.0, LegType.NORMAL, 1 );
+    if ( mData.checkSiblings( id, TDInstance.sid, from, to, distance, bearing, clino ) ) {
+      TDToast.makeWarn( R.string.bad_sibling );
+    }
     mData.updateShotName( id, TDInstance.sid, from, to );
     mData.updateShotFlag( id, TDInstance.sid, DBlock.FLAG_DUPLICATE );
     return id;
@@ -1822,6 +1826,7 @@ public class TopoDroidApp extends Application
         boolean horizontal = ( Math.abs( clino ) > TDSetting.mVThreshold );
         // TDLog.Log( TDLog.LOG_SHOT, "manual-shot SID " + TDInstance.sid + " LRUD " + left + " " + right + " " + up + " " + down);
         if ( StationPolicy.mShotAfterSplays ) {
+          // Log.v( "DistoX", "[1] manual-shot Data " + distance + " " + bearing + " " + clino );
           at = addManualSplays( at, splay_station, left, right, up, down, bearing, horizontal, false );
 
           if ( at >= 0L ) {
@@ -1831,10 +1836,14 @@ public class TopoDroidApp extends Application
           }
           // String name = from + "-" + to;
           mData.updateShotName( id, TDInstance.sid, from, to );
+          if ( mData.checkSiblings( id, TDInstance.sid, from, to, distance, bearing, clino ) ) {
+            TDToast.makeWarn( R.string.bad_sibling );
+          }
           // mData.updateShotExtend( id, TDInstance.sid, extend0, stretch0 );
           // mData.updateShotExtend( id, TDInstance.sid, ExtendType.EXTEND_IGNORE, 1 ); // FIXME WHY ???
           // FIXME updateDisplay( );
         } else {
+          // Log.v( "DistoX", "[2] manual-shot Data " + distance + " " + bearing + " " + clino );
           if ( at >= 0L ) {
             id = mData.insertManualShotAt( TDInstance.sid, at, millis, 0, distance, bearing, clino, 0.0f, extend0, 0.0, LegType.NORMAL, 1 );
             ++ at;
@@ -1843,6 +1852,9 @@ public class TopoDroidApp extends Application
           }
           // String name = from + "-" + to;
           mData.updateShotName( id, TDInstance.sid, from, to );
+          if ( mData.checkSiblings( id, TDInstance.sid, from, to, distance, bearing, clino ) ) {
+            TDToast.makeWarn( R.string.bad_sibling );
+          }
           // mData.updateShotExtend( id, TDInstance.sid, extend0, stretch0 );
           // mData.updateShotExtend( id, TDInstance.sid, ExtendType.EXTEND_IGNORE, 1 );  // FIXME WHY ???
           // FIXME updateDisplay( );
@@ -1908,7 +1920,7 @@ public class TopoDroidApp extends Application
         info.getInfo( comm );
         if ( disconnect ) disconnectComm();
       } else {
-        Log.v("DistoX", "failed to connect BRIC");
+        TDLog.Error("Failed to connect BRIC");
       }
     }
     return false;

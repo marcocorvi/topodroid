@@ -82,6 +82,7 @@ Tap "Close" not to take any action.
     <string name="missing_station">Station manquante</string>
     <string name="station_not_found">Station introuvable</string>
     <!-- TODO string name="shot_not_found">No shot found</string -->
+    <!-- TODO string name="bad_sibling">Bad shot sibling</string -->
     <!-- UNUSED string name="missing_area">ZONE</string -->
     <!-- UNUSED string name="missing_hint">Merci d\'installer les symboles avec TdSymbol</string -->
     <!-- UNUSED string name="missing_line">LIGNE</string -->
@@ -520,7 +521,6 @@ Tap "Close" not to take any action.
     <string name="shot_info">Saisir les infos de visée</string>
     <!-- UNUSED string name="shot_length">longueur</string -->
     <string name="shot_note">Note</string>
-    <!-- UNUSED string name="shot_not_found">Aucune visée trouvée</string -->
     <string name="shot_reverse">Inverse</string>
     <string name="shot_to">À ou VERS</string>
 

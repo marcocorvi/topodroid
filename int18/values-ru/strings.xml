@@ -81,6 +81,7 @@
     <string name="missing_station">Отсутствует пикет</string>
     <string name="station_not_found">Пикет не обнаружен</string>
     <string name="shot_not_found">Замеры не найдены</string>
+    <!-- TODO string name="bad_sibling">Bad shot sibling</string -->
     <!-- UNUSED string name="missing_area">ОБЛАСТЬ</string -->
     <!-- UNUSED string name="missing_hint">Пожалуйста, подключите недостающие инструменты, либо установите их.</string -->
     <!-- UNUSED string name="missing_line">ЛИНИЯ</string -->
@@ -522,7 +523,6 @@
     <string name="shot_info">Введите данные измерений</string>
     <!-- UNUSED string name="shot_length">длина</string -->
     <string name="shot_note">заметки</string>
-    <!-- UNUSED string name="shot_not_found">Сегмент не найден</string -->
     <string name="shot_reverse">развернуть</string>
     <string name="shot_to">№ НА</string>
 

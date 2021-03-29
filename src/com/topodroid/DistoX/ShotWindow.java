@@ -961,8 +961,8 @@ public class ShotWindow extends Activity
         ++id;
         DBlock b = mApp_mData.selectShot( id, TDInstance.sid );
         if ( b != null && b.isSecLeg() ) { //  DBlock.BLOCK_SEC_LEG --> leg-flag = 0
-          mApp_mData.updateShot( id, TDInstance.sid, blk.mFrom, blk.mTo, blk.getIntExtend(), blk.getFlag(), 0, blk.mComment );
-          mApp_mData.updateShotStatus( id, TDInstance.sid, 0 ); // status normal
+          mApp_mData.updateShotNameAndDataStatus( id, TDInstance.sid, blk.mFrom, blk.mTo, blk.getIntExtend(), blk.getFlag(), 0, blk.mComment, 0 );
+          // mApp_mData.updateShotStatus( id, TDInstance.sid, 0 ); // status normal
         }
       }
     }
@@ -1448,7 +1448,7 @@ public class ShotWindow extends Activity
             // setConnectionStatus( mDataDownloader.getStatus() );
             mDataDownloader.doDataDownload( DataType.DATA_SHOT );
           } else {
-            Log.v("DistoX-BLE", "Shot Window: null device A");
+            TDLog.Error("Shot Window: null device A");
           }
 	  return;
         } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // BT RESET
@@ -1625,8 +1625,8 @@ public class ShotWindow extends Activity
           ++id;
           DBlock b = mApp_mData.selectShot( id, TDInstance.sid );
           if ( b != null && b.isSecLeg() ) { // DBlock.BLOCK_SEC_LEG --> leg-flag 0
-            mApp_mData.updateShot( id, TDInstance.sid, blk.mFrom, blk.mTo, blk.getIntExtend(), blk.getFlag(), 0, blk.mComment );
-            mApp_mData.updateShotStatus( id, TDInstance.sid, 0 ); // status normal
+            mApp_mData.updateShotNameAndDataStatus( id, TDInstance.sid, blk.mFrom, blk.mTo, blk.getIntExtend(), blk.getFlag(), 0, blk.mComment, 0 );
+            // mApp_mData.updateShotStatus( id, TDInstance.sid, 0 ); // status normal
           }
         }
       }
@@ -1766,6 +1766,7 @@ public class ShotWindow extends Activity
   {
     // Log.v("DistoX", "update shot DBC length " + d );
     mApp_mData.updateShotDistanceBearingClino( blk.mId, TDInstance.sid, d, b, c );
+    checkSiblings( blk, blk.mFrom, blk.mTo, d, b, c );
     blk.mLength  = d;
     blk.mBearing = b;
     blk.mClino   = c;
@@ -1776,9 +1777,10 @@ public class ShotWindow extends Activity
   {
     // Log.v("DistoX", "update shot DBC length " + d );
     mApp_mData.updateShotDepthBearingDistance( blk.mId, TDInstance.sid, p, b, d );
-    blk.mDepth   = p;
-    blk.mBearing = b;
+    checkSiblings( blk, blk.mFrom, blk.mTo, d, b, p );
     blk.mLength  = d;
+    blk.mBearing = b;
+    blk.mDepth   = p;
     mDataAdapter.updateBlockView( blk.mId );
   }
 
@@ -1791,7 +1793,7 @@ public class ShotWindow extends Activity
 
     blk.setBlockName( from, to, (leg == LegType.BACK) );
 
-    int ret = mApp_mData.updateShot( blk.mId, TDInstance.sid, from, to, extend, flag, leg, comment );
+    int ret = mApp_mData.updateShotNameAndData( blk.mId, TDInstance.sid, from, to, extend, flag, leg, comment );
 
     if ( ret == -1 ) {
       TDToast.makeBad( R.string.no_db );
@@ -1865,6 +1867,14 @@ public class ShotWindow extends Activity
     mApp_mData.updateShotName( bid, TDInstance.sid, from, to );
   }
 
+  private void checkSiblings( DBlock blk,  String from, String to, float d, float b, float c )
+  {
+    if ( ! blk.isLeg() ) return;
+    if ( mApp_mData.checkSiblings( blk.mId, TDInstance.sid, from, to, d, b, c ) ) { // bad sibling
+      TDToast.makeWarn( R.string.bad_sibling );
+    }
+  }
+
   // only called by MultishotDialog
   // @param blks    list of blocks to renumber
   // @param from    FROM station to assign to first block
@@ -1881,6 +1891,7 @@ public class ShotWindow extends Activity
       mApp.assignStationsAfter( blk, blks /*, stations */ );
       updateDisplay();
       // mList.invalidate();
+      checkSiblings( blk, from, to, blk.mLength, blk.mBearing, blk.mClino );
     } else if ( blk.isSplay() ) { // FIXME RENUMBER ONLY SPLAYS
       for ( DBlock b : blks ) {
         if ( b == blk ) continue;
@@ -1903,6 +1914,7 @@ public class ShotWindow extends Activity
       // Log.v("DistoX", "swap block to <" + from + "-" + to + ">" );
       blk.setBlockName( from, to );
       // updateShotName( blk.mId, from, to );
+      checkSiblings( blk, from, to, blk.mLength, blk.mBearing, blk.mClino );
     }
     mApp_mData.updateShotsName( blks, TDInstance.sid );
     updateDisplay();
@@ -2035,7 +2047,7 @@ public class ShotWindow extends Activity
       if ( b.mId == blk.mId ) {
         blk.setBlockName( from, to );
         // FIXME leg should be LegType.NORMAL
-        int ret = mApp_mData.updateShot( blk.mId, TDInstance.sid, from, to, extend, flag, leg, comment );
+        int ret = mApp_mData.updateShotNameAndData( blk.mId, TDInstance.sid, from, to, extend, flag, leg, comment );
 
         if ( ret == -1 ) {
           TDToast.makeBad( R.string.no_db );
@@ -2052,7 +2064,6 @@ public class ShotWindow extends Activity
       } else {
         b.setBlockName( from, to );
         updateShotName( b.mId, from, to ); // FIXME use
-	// mApp_mData.updateShotNames( splays, TDInstance.sid );
       }
       mDataAdapter.updateBlockView( b.mId );
     }

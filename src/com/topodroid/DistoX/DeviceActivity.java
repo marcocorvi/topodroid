@@ -603,7 +603,7 @@ public class DeviceActivity extends Activity
         if ( currDeviceA().mType == Device.DISTO_A3 ) {
           new DeviceA3InfoDialog( this, this, currDeviceA() ).show();
         } else if ( currDeviceA().mType == Device.DISTO_X310 ) {
-          currDeviceA().dump();
+          // currDeviceA().dump();
           new DeviceX310InfoDialog( this, this, currDeviceA() ).show();
         } else if ( currDeviceA().mType == Device.DISTO_BRIC4 ) {
           BricInfoDialog info = new BricInfoDialog( this, getResources(), currDeviceA() );

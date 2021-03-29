@@ -84,6 +84,7 @@ Tap "Close" not to take any action.
     <string name="missing_station">Base inexistente</string>
     <string name="station_not_found">Base não encontrada</string>
     <string name="shot_not_found">Medida não encontrada</string>
+    <!-- TODO string name="bad_sibling">Bad shot sibling</string -->
     <!-- UNUSED string name="missing_area">ÁREA</string -->
     <!-- UNUSED string name="missing_hint">Habilite ou instale os símbolos que estão faltando</string -->
     <!-- UNUSED string name="missing_line">LINHA</string -->
@@ -522,7 +523,6 @@ Tap "Close" not to take any action.
     <string name="shot_info">Inserir medida manualmente</string>
     <!-- UNUSED string name="shot_length">comprimento</string -->
     <string name="shot_note">comentário</string>
-    <!-- UNUSED string name="shot_not_found">Nenhuma visada encontrada</string -->
     <string name="shot_reverse">inverter</string>
     <string name="shot_to">para</string>
 

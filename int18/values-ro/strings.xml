@@ -81,6 +81,7 @@ Tap "Close" not to take any action.
     <string name="missing_station">Stație lipsă</string>
     <string name="station_not_found">Stație negăsită</string>
     <string name="shot_not_found">Nu există măsurători</string>
+    <!-- TODO string name="bad_sibling">Bad shot sibling</string -->
     <!-- UNUSED string name="missing_area">ZONĂ</string -->
     <!-- UNUSED string name="missing_hint">Activează uneltele lipsă sau reinstalează-le</string -->
     <!-- UNUSED string name="missing_line">LINIE</string -->
@@ -522,7 +523,6 @@ Tap "Close" not to take any action.
     <string name="shot_info">Introdu valorile măsurătorii</string>
     <!-- UNUSED string name="shot_length">lungime</string -->
     <string name="shot_note">notă</string>
-    <!-- UNUSED string name="shot_not_found">Nu a fost găsită nici o măsurătoare</string -->
     <string name="shot_reverse">inversează</string>
     <string name="shot_to">la</string>
 

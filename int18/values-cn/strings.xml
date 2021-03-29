@@ -80,6 +80,7 @@ Tap "Close" not to take any action.
     <string name="missing_station">测点丢失</string>
     <string name="station_not_found">未发现测点</string>
     <string name="shot_not_found">未发现测线数据</string>
+    <!-- TODO string name="bad_sibling">Bad shot sibling</string -->
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->
     <!-- UNUSED string name="missing_line">LINE</string -->
@@ -531,7 +532,6 @@ Tap "Close" not to take any action.
     <string name="shot_info">进入测量数据</string>
     <!-- UNUSED string name="shot_length">length</string -->
     <string name="shot_note">注释</string>
-    <!-- UNUSED string name="shot_not_found">Found no shot</string -->
     <string name="shot_reverse">反测</string>
     <string name="shot_to">到</string>
 

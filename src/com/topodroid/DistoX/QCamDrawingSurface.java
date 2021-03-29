@@ -165,7 +165,7 @@ public class QCamDrawingSurface extends SurfaceView
       int max = params.getMaxZoom();
       int zoom = params.getZoom() + delta_zoom;
       if ( zoom > 0 && zoom < max ) {
-        Log.v("DistoX-QCAM", "set zoom " + zoom + "/" + max );
+        // Log.v("DistoX-QCAM", "set zoom " + zoom + "/" + max );
         params.setZoom( zoom );
         mCamera.setParameters( params );
       }

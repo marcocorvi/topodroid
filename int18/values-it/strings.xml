@@ -80,6 +80,7 @@ Tap <b>Chiudi</b> per fare nulla.
     <string name="missing_station">Caposaldo assente</string>
     <string name="station_not_found">Caposaldo non trovato</string>
     <string name="shot_not_found">Trovato nessun tiro</string>
+    <!-- TODO string name="bad_sibling">Bad shot sibling</string -->
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Installa i prototipi grafici con TdSymbol</string -->
     <!-- UNUSED string name="missing_line">LINEA</string -->
@@ -518,7 +519,6 @@ Tap <b>Chiudi</b> per fare nulla.
     <string name="shot_info">Scrivi i dati</string>
     <!-- UNUSED string name="shot_length">lunghezza</string -->
     <string name="shot_note">nota</string>
-    <!-- UNUSED string name="shot_not_found">Nessuna misura trovata</string -->
     <string name="shot_reverse">inverso</string>
     <string name="shot_to">a</string>
 

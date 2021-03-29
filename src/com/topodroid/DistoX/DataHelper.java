@@ -1044,7 +1044,7 @@ public class DataHelper extends DataSetObservable
     doExecShotSQL( id, sw );
   }
 
-  int updateShot( long id, long sid, String fStation, String tStation,
+  int updateShotNameAndData( long id, long sid, String fStation, String tStation,
                   long extend, long flag, long leg, String comment )
   {
     if ( myDB == null ) return -1;
@@ -1070,6 +1070,27 @@ public class DataHelper extends DataSetObservable
     return 0;
   }
 
+  int updateShotNameAndDataStatus( long id, long sid, String fStation, String tStation,
+                  long extend, long flag, long leg, String comment, int status )
+  {
+    if ( myDB == null ) return -1;
+    // if ( makesCycle( id, sid, fStation, tStation ) ) return -2;
+    if ( tStation == null ) tStation = TDString.EMPTY;
+    StringWriter sw = new StringWriter();
+    PrintWriter pw = new PrintWriter( sw );
+    if ( comment != null ) {
+      pw.format( Locale.US,
+        "UPDATE shots SET fStation=\"%s\", tStation=\"%s\", extend=%d, flag=%d, leg=%d, comment=\"%s\", status=%d WHERE surveyId=%d AND id=%d",
+        fStation, tStation, extend, flag, leg, comment, status, sid, id );
+    } else {
+      pw.format( Locale.US,
+        "UPDATE shots SET fStation=\"%s\", tStation=\"%s\", extend=%d, flag=%d, leg=%d, status=%d WHERE surveyId=%d AND id=%d",
+        fStation, tStation, extend, flag, leg, status, sid, id );
+    }
+    doExecShotSQL( id, sw );
+    return 0;
+  }
+
   private void shiftShotsId( long sid, long id )
   {
     StringWriter sw = new StringWriter();
@@ -1089,9 +1110,56 @@ public class DataHelper extends DataSetObservable
   //   return cnt >= 2;
   // }
 
+  // return false if there are no conflicting siblings
+  boolean checkSiblings( long id0, long sid, String from, String to, float d0, float b0, float c0 )
+  {
+    float thr_a = 15;
+    float thr_d = 0.25f;
+    boolean ret = false;
+    // Log.v("DistoX", "check " + id0 + " siblings " + from + " " + to + " " + d0 + " " + b0 + " " + c0 );
+    Cursor cursor = myDB.rawQuery( qShotsByStations, new String[] { Long.toString( sid ), from, to } );
+    if (cursor.moveToFirst()) {
+      cursor.moveToFirst();
+      do { 
+        if ( cursor.getLong( 0 ) != id0 ) {
+          // Log.v("DistoX", "[1]-sibling " + cursor.getLong(0) + " " + cursor.getDouble(1) + " " + cursor.getDouble(2) + " " + cursor.getDouble(3) );
+          double b1 = Math.abs(cursor.getDouble( 2 ) - b0);
+          if ( b1 > 180 ) b1 = Math.abs( b1 - 360 );
+          if ( ( Math.abs( cursor.getDouble( 1 ) - d0 ) > thr_d*d0 )
+            || ( b1 > thr_a ) 
+            || ( Math.abs( cursor.getDouble( 3 ) - c0 ) > thr_a ) ) {
+            ret = true;
+            break;
+          }
+        }
+      } while (cursor.moveToNext());
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    if ( ! ret ) {
+      cursor = myDB.rawQuery( qShotsByStations, new String[] { Long.toString( sid ), to, from } );
+      if ( cursor.moveToFirst() ) {
+        do { 
+          if ( cursor.getLong( 0 ) != id0 ) {
+            // Log.v("DistoX", "[2]-sibling " + cursor.getLong(0) + " " + cursor.getDouble(1) + " " + cursor.getDouble(2) + " " + cursor.getDouble(3) );
+            double b1 = Math.abs(cursor.getDouble( 2 ) + 180 - b0);
+            if ( b1 > 180 ) b1 = Math.abs( b1 - 360 );
+            if ( ( Math.abs( cursor.getDouble( 1 ) - d0 ) > thr_d*d0 )
+              || ( b1 > thr_a ) 
+              || ( Math.abs( cursor.getDouble( 3 ) + c0 ) > thr_a ) ) {
+              ret = true;
+              break;
+            }
+          }
+        } while (cursor.moveToNext());
+      }
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return ret;
+  }
 
   void updateShotName( long id, long sid, String fStation, String tStation )
   {
+    // Log.v("DistoX", "update shot " + id + " name " + fStation + " " + tStation );
     if ( myDB == null ) return;
     if ( fStation == null ) fStation = TDString.EMPTY;
     if ( tStation == null ) tStation = TDString.EMPTY;
@@ -1102,6 +1170,7 @@ public class DataHelper extends DataSetObservable
     doExecShotSQL( id, sw );
   }
 
+  // used internally to merge to next leg
   private void updateShotNameAndLeg( long id, long sid, String fStation, String tStation, int leg )
   {
     if ( myDB == null ) return;
@@ -1208,13 +1277,13 @@ public class DataHelper extends DataSetObservable
     doExecShotSQL( id, sw );
   }
 
-  void updateShotStatus( long id, long sid, long status )
-  {
-    StringWriter sw = new StringWriter();
-    PrintWriter pw = new PrintWriter( sw );
-    pw.format( Locale.US, "UPDATE shots SET status=%d WHERE surveyId=%d AND id=%d", status, sid, id );
-    doExecShotSQL( id, sw );
-  }
+  // void updateShotStatus( long id, long sid, long status )
+  // {
+  //   StringWriter sw = new StringWriter();
+  //   PrintWriter pw = new PrintWriter( sw );
+  //   pw.format( Locale.US, "UPDATE shots SET status=%d WHERE surveyId=%d AND id=%d", status, sid, id );
+  //   doExecShotSQL( id, sw );
+  // }
 
   void deleteShot( long id, long sid, int status )
   {
@@ -1373,21 +1442,24 @@ public class DataHelper extends DataSetObservable
   public long insertDistoXShot( long sid, long id, double d, double b, double c, double r, long extend, long status, String addr )
   { // 0L=leg, status, 0L=type DISTOX
     // stretch = 0.0;
-    return doInsertShot( sid, id, System.currentTimeMillis()/1000, 0L, "", "",  d, b, c, r, extend, 0.0, DBlock.FLAG_SURVEY, 0L, status, 0L, "", addr );
+    // return doInsertShot( sid, id, System.currentTimeMillis()/1000, 0L, "", "",  d, b, c, r, extend, 0.0, DBlock.FLAG_SURVEY, 0L, status, 0L, "", addr );
+    return doSimpleInsertShot( sid, id, System.currentTimeMillis()/1000, 0L, d, b, c, r, extend, 0.0, 0L, status, 0L, addr );
   }
 
   public long insertShot( long sid, long id, long millis, long color, double d, double b, double c, double r,
 		   long extend, double stretch, long leg,
                    long shot_type, String addr )
   { // leg, 0L=status, type 
-    return doInsertShot( sid, id, millis, color, "", "",  d, b, c, r, extend, stretch, DBlock.FLAG_SURVEY, leg, 0L, shot_type, "", addr );
+    // return doInsertShot( sid, id, millis, color, "", "",  d, b, c, r, extend, stretch, DBlock.FLAG_SURVEY, leg, 0L, shot_type, "", addr );
+    return doSimpleInsertShot( sid, id, millis, color, d, b, c, r, extend, stretch, leg, 0L, shot_type, addr );
   }
 
   long insertManualShot( long sid, long id, long millis, long color, double d, double b, double c, double r,
 		   long extend, double stretch, long leg,
                    long shot_type )
   { // leg, 0L=status, type 
-    return doInsertShot( sid, id, millis, color, "", "",  d, b, c, r, extend, stretch, DBlock.FLAG_SURVEY, leg, 0L, shot_type, "", "" );
+    // return doInsertShot( sid, id, millis, color, "", "",  d, b, c, r, extend, stretch, DBlock.FLAG_SURVEY, leg, 0L, shot_type, "", "" );
+    return doSimpleInsertShot( sid, id, millis, color, d, b, c, r, extend, stretch, leg, 0L, shot_type, "" );
   }
 
   void resetShotColor( long sid )
@@ -1660,7 +1732,9 @@ public class DataHelper extends DataSetObservable
   }
 
   // return the new-shot id
-  // called by ConnectionHandler too
+  // It was called by ConnectionHandler too
+  // @note always called with from="", to="", and comment=""
+  /*
   private long doInsertShot( long sid, long id, long millis, long color, String from, String to,
                           double d, double b, double c, double r, 
                           long extend, double stretch, long flag, long leg, long status, long shot_type,
@@ -1678,6 +1752,29 @@ public class DataHelper extends DataSetObservable
     if (addr == null) addr = "";
     ContentValues cv = makeShotContentValues( sid, id, millis, color, from, to, d, b, c, r, 0.0, 0.0, 0.0,
 		    extend, stretch, flag, leg, status, shot_type, comment, addr );
+    doInsert( SHOT_TABLE, cv, "insert" );
+    return id;
+  }
+  */
+
+  // return the new-shot id
+  // diInsertShot() called with from="", to="", and comment="", flag=DBlock.FLAG_SURVEY
+  private long doSimpleInsertShot( long sid, long id, long millis, long color, 
+                          double d, double b, double c, double r, 
+                          long extend, double stretch, long leg, long status, long shot_type, String addr )
+  {
+    // TDLog.Log( TDLog.LOG_DB, "insert shot <" + id + "> " + from + "-" + to + " extend " + extend );
+    // Log.v("DistoX-SHOT", "do insert shot id " + id + " d " + d + " b " + b + " c " + c );
+    if ( myDB == null ) return -1L;
+    if ( id == -1L ) {
+      ++ myNextId;
+      id = myNextId;
+    } else {
+      myNextId = id;
+    }
+    if (addr == null) addr = "";
+    ContentValues cv = makeShotContentValues( sid, id, millis, color, "", "", d, b, c, r, 0.0, 0.0, 0.0,
+		    extend, stretch, DBlock.FLAG_SURVEY, leg, status, shot_type, "", addr );
     doInsert( SHOT_TABLE, cv, "insert" );
     return id;
   }
@@ -1828,6 +1925,7 @@ public class DataHelper extends DataSetObservable
   // SELECT STATEMENTS
 
   private static final String qShotStations = "select fStation, tStation from shots where surveyId=? AND id=? ";
+  private static final String qShotsByStations = "select id, distance, bearing, clino from shots where surveyId=? AND status=0 AND fStation=? AND tStation=? ";
   private static final String qSensors1     = "select id, shotId, title, date, comment, type, value from sensors where surveyId=? AND status=? ";
   private static final String qSensors2     = "select id, shotId, title, date, comment, type, value from sensors where surveyId=? AND shotId=? ";
   private static final String qShotAudio    = "select id, date from audios where surveyId=? AND shotId=? ";
@@ -2502,7 +2600,7 @@ public class DataHelper extends DataSetObservable
               }
             }
           }
-          updateShot( blk.mId, sid, from, to, extend, flag, leg, comment );
+          updateShotNameAndData( blk.mId, sid, from, to, extend, flag, leg, comment );
           blk.mFrom = from;
           blk.mTo   = to;
           blk.setExtend( (int)extend, 0 );

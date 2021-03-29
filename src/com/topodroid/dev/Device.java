@@ -120,7 +120,7 @@ public class Device
   // nickname can be null
   public Device( String addr, String model, int h, int t, String name, String nickname )
   {
-    Log.v("DistoX", "[1] Device: " + addr + " " + model + " " + name + " addr " + addr );
+    // Log.v("DistoX", "[1] Device: " + addr + " " + model + " " + name + " addr " + addr );
     mAddress = addr;
     mModel = model;
     mType = modelToType( model );
@@ -133,7 +133,7 @@ public class Device
   // nickname can be null
   public Device( String addr, String model, String name, String nickname )
   {
-    Log.v("DistoX", "[2] Device: " + addr + " " + model + " " + name + " addr " + addr );
+    // Log.v("DistoX", "[2] Device: " + addr + " " + model + " " + name + " addr " + addr );
     mAddress = addr;
     mModel = model;
     mType = modelToType( model );
@@ -143,11 +143,13 @@ public class Device
     mTail = 0;
   }
 
+  /*
   public void dump()
   {
     Log.v("DistoX", "Device addr " + mAddress + " model " + mModel + " type " + mType + " name " + mName 
       + " nick " + ((mNickname == null)? "null" : mNickname ) );
   }
+  */
 
   private String fromName( String name )
   {

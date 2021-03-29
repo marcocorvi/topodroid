@@ -61,7 +61,7 @@ class ReconnectTask extends AsyncTask< String, Integer, Integer >
   protected void onPostExecute( Integer res )
   {
     // mDownloader.notifyConnectionStatus( mDownloader.isConnected()? ConnectionState.CONN_CONNECTED : ConnectionState.CONN_WAITING );
-    Log.v("DistoX", "Reconnect Task done with delay " + mDelay );
+    // Log.v("DistoX", "Reconnect Task done with delay " + mDelay );
     unlock();
   }
 
