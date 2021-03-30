@@ -1138,7 +1138,7 @@ Tap <b>Bezár</b> nem változtat.
   <!-- UNUSED string name="pref_bootloader_summary">Enable bootloader</string -->
   <string name="pref_mkeyboard_title">Billentyűzet</string>
   <string name="pref_mkeyboard_summary">Engedélyezze az egyedi billentyűzeteket</string>
-  <string name="pref_no_cursor_title">Nincs billentyűzet kurzor</string>
+  <string name="pref_no_cursor_title">Billentyűzet kurzor</string>
   <string name="pref_no_cursor_summary">Billentyűzet kurzor letiltása</string>
   <string name="pref_local_help_title">Lefordított kézikönyv</string>
   <string name="pref_local_help_summary">Lefordított kézikönyv engedélyezése</string>
@@ -1146,9 +1146,9 @@ Tap <b>Bezár</b> nem változtat.
   <!-- UNUSED string name="pref_cosurvey_summary">Együttes felmérés engedélyezése</string -->
   <string name="pref_import_datamode_title">Import adatmód</string>
   <string name="pref_import_datamode_summary">Adatmód a mérés importáláshoz</string>
-  <string name="pref_export_shots_title">Adat export alapbeállítás</string>
+  <string name="pref_export_shots_title">Adat export</string>
   <string name="pref_export_shots_summary">Adat export formátum alapbeállítása</string>
-  <string name="pref_export_plot_title">Vázlat export alapbeállítás</string>
+  <string name="pref_export_plot_title">Vázlat export</string>
   <string name="pref_export_plot_summary">Vázlat Export formátum alapbeállítása</string>
 
   <string name="pref_therion_config_title">Therion config file</string>
@@ -1196,9 +1196,9 @@ Tap <b>Bezár</b> nem változtat.
   <!-- UNUSED string name="pref_trobot_names_summary">Pontnevek a TopoRobot program stílusában</string -->
   <string name="pref_ortho_lrud_title">BJFL segédpontok szöge</string>
   <string name="pref_ortho_lrud_summary">A segédmérések és poligonmérések minmális szöge BJFL felmérésnél</string>
-  <string name="pref_lrud_vertical_title">FL segédmérés lejtés min</string>
+  <string name="pref_lrud_vertical_title">FL lejtés minimum</string>
   <string name="pref_lrud_vertical_summary">BJFL fel/le segédmérés lejtés minimum</string>
-  <string name="pref_lrud_horizontal_title">BJ segédmérés lejtés max</string>
+  <string name="pref_lrud_horizontal_title">BJ lejtés maximum</string>
   <string name="pref_lrud_horizontal_summary">BJFL bal/jobb segédmérés lejtés maximum</string>
   <string name="pref_survex_eol_title">Survex/Topo sor végződés</string>
   <string name="pref_survex_eol_summary">Survex/Topo sor végződés</string>
@@ -1285,8 +1285,8 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_shot_data_title">MÉRÉSI ADAT</string>
   <string name="pref_shot_units_title">MÉRTÉKEGYSÉGEK</string>
   <string name="pref_cwd_title">Munkakönyvtár</string>
-  <!-- UNUSED string name="pref_cwd_summary">TopoDroid work directory</string -->
-  <string name="pref_pt_color_map_title">PocketTopo szín jelkulcs</string>
+  <!-- UNUSED string name="pref_cwd_summary">TopoDroid munka könyvtár</string -->
+  <string name="pref_pt_color_map_title">PocketTopo jelkulcs</string>
   <string name="pref_pt_color_map_summary">PocketTopo szín jelkulcs (PocketTopo import)</string>
   <string name="pref_text_size_title">Betűméret</string>
   <string name="pref_text_size_summary">Lista elemek betűmérete</string>
@@ -1483,7 +1483,7 @@ Tap <b>Bezár</b> nem változtat.
   <!-- UNUSED string name="pref_splayExtend_summary">Estimate splay extend</string -->
   <string name="pref_swapLR_title">Bal-Jobb cseréje a Compass-ban</string>
   <string name="pref_swapLR_summary">Bal-Jobb cseréje a Compassba exportálásnál</string>
-  <string name="pref_LRExtend_title">Bal és jobb irányú kiterjedés becslése</string>
+  <string name="pref_LRExtend_title">Bal és jobb kiterjedés</string>
   <string name="pref_LRExtend_summary">Bal/Jobb irányú kiterjedés becslése (Compass/VisualTopo import</string>
   <string name="pref_diving_mode_title">Búvár mód</string>
   <string name="pref_diving_mode_summary">Búvár mód engedélyezése</string>
