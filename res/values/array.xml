@@ -5,14 +5,16 @@
   <string-array name="bricMode">
      <item name="prim_only">Prim. only</item>
      <!-- item name="sequence">Sequence</item -->
-     <item name="all">All notify</item>
+     <item name="all">All with index </item>
      <!-- item name="all_zero">All + Zero</ite -->
+     <item name="no_index">All except index</item>
   </string-array>
   <string-array name="bricModeValue">
      <item name="prim_only">1</item>
      <!-- item name="sequence">2</item -->
      <item name="all">3</item>
      <!-- item name="all_zero">4</item -->
+     <item name="no_index">5</item>
   </string-array>
   
   <string-array name="orientation">

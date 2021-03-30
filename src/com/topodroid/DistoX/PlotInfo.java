@@ -39,6 +39,7 @@ public class PlotInfo
   int csxIndex = -1;  // numerical index for cSurvey xsection exports
   int orientation = ORIENTATION_PORTRAIT;
   int maxscrap; // max index of a scrap
+  float intercept = -1; //x-section leg intercept (-1 if undefined, 0 for station intercepts)
 
   // boolean isPortrait()  { return orientation == ORIENTATION_PORTRAIT; }
   boolean isLandscape() { return orientation == ORIENTATION_LANDSCAPE; }

@@ -18,12 +18,15 @@ import com.topodroid.dev.Device;
 import com.topodroid.dev.DataType;
 import com.topodroid.dev.distox2.DeviceX310TakeShot;
 import com.topodroid.dev.bric.BricConst;
+import com.topodroid.dev.bric.MemoryBricTask;
 
 import java.lang.ref.WeakReference;
 
 import android.content.Context;
 import android.content.res.Resources;
 // import android.os.AsyncTask;
+
+import android.content.DialogInterface;
 
 import android.widget.PopupWindow;
 import android.widget.Button;
@@ -170,8 +173,10 @@ class CutNPaste
 
   /** show BT mPopup under button b
    * @param b button
+   * @param gm_data  if called from GM-activity
+   * @param do_clear if add button to clear memory (BRIC only)
    */
-  static PopupWindow showPopupBT( final Context context, final ILister ilister, final TopoDroidApp app, View b, boolean gm_data )
+  static PopupWindow showPopupBT( final Context context, final ILister ilister, final TopoDroidApp app, View b, boolean gm_data, boolean do_clear )
   {
     final ListerHandler lister = new ListerHandler( ilister );
     LinearLayout popup_layout  = new LinearLayout( context );
@@ -323,8 +328,25 @@ class CutNPaste
             dismissPopupBT();
           }
         } );
-      ww = textview5.getPaint().measureText( text );
+      ww = textview4.getPaint().measureText( text );
       if ( ww > w ) w = ww;
+
+      if ( do_clear ) { // ----- CLEAR MEMORY
+        text = res.getString(R.string.popup_do_clear);
+        textview5 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+          new View.OnClickListener( ) {
+            public void onClick(View v) {
+              TopoDroidAlertDialog.makeAlert( context, res, R.string.bric_ask_memory_clear, new DialogInterface.OnClickListener() {
+                @Override public void onClick( DialogInterface dialog, int btn ) {
+                  new MemoryBricTask( app ).execute();
+                }
+              } );
+              dismissPopupBT();
+            }
+          } );
+        ww = textview5.getPaint().measureText( text );
+        if ( ww > w ) w = ww;
+      }
 
 /*
       // ----- MEASURE ONE SPLAY AND DOWNLOAD IT IF MODE IS CONTINUOUS

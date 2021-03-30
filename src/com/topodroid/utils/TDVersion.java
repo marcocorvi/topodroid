@@ -29,9 +29,13 @@ public class TDVersion
   public static final String SYMBOL_VERSION = "36";
   
   // database version
-  public static final String DB_VERSION = "42"; // FIXME agrees with Cave3DThParser values
-  public static final int DATABASE_VERSION = 42;
+  public static final String DB_VERSION = "43"; // FIXME agrees with Cave3DThParser values
+  public static final int DATABASE_VERSION = 43;
   public static final int DATABASE_VERSION_MIN = 21; // was 14
+  public static final int DEVICE_DATABASE_VERSION = 27;
+  // public static final int DEVICE_DATABASE_VERSION_MIN = 21; // was 14
+  public static final int PACKET_DATABASE_VERSION = 1;
+  public static final int PACKET_DATABASE_VERSION_MIN = 1; // was 14
 
   // TopoDroid version: this is loaded from the Manifest
   private static String VERSION = "0.0.0"; 

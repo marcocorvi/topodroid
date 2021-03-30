@@ -653,19 +653,23 @@ public class TopoDroidApp extends Application
     // }
   }
 
-  void doBluetoothButton( Context ctx, ILister lister, Button b )
+  void doBluetoothButton( Context ctx, ILister lister, Button b, int nr_shots )
   {
     if ( TDLevel.overAdvanced ) {
       if ( TDInstance.isDeviceBric() ) {
+        Log.v("DistoX", "bt button over advanced : BRIC");
         if ( mComm != null && mComm.isConnected() ) { // FIXME BRIC_TESTER
-          CutNPaste.showPopupBT( ctx, lister, this, b, false );
+          CutNPaste.showPopupBT( ctx, lister, this, b, false, (nr_shots == 0) );
           return;
         }
-      } else if ( TDInstance.isDeviceSap() ) {
-      } else {
+      } else if ( TDInstance.isDeviceSap() ) { // SAP5
+        Log.v("DistoX", "bt button over advanced : SAP");
+        /* nothing */
+      } else { // DistoX
+        Log.v("DistoX", "bt button over advanced : DistoX");
         if ( ! mDataDownloader.isDownloading() ) {
           if ( TDInstance.hasDeviceRemoteControl() && ! TDSetting.isConnectionModeMulti()) {
-            CutNPaste.showPopupBT( ctx, lister, this, b, false );
+            CutNPaste.showPopupBT( ctx, lister, this, b, false, (nr_shots == 0) );
             return;
           }
         } else { // downloading: nothing
@@ -673,6 +677,7 @@ public class TopoDroidApp extends Application
         }
       }
     }
+    Log.v("DistoX", "bt button not over advanced");
     doBluetoothReset( lister );
   }
 

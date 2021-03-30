@@ -68,7 +68,7 @@ public class TopoDroidComm
 
   public boolean isConnected() { return mBTConnected; }
 
-  public void handleBricPacket( long index, Handler lister, int data_type )
+  public void handleBricPacket( long index, Handler lister, int data_type, float clino, float azimuth )
   {
     // Log.v( "DistoX", "TD comm: PACKET " + res + "/" + DataType.PACKET_DATA + " type " + data_type );
     // Log.v("DistoX", "TD comm: packet DATA");
@@ -78,8 +78,10 @@ public class TopoDroidComm
     double b = mProtocol.mBearing;
     double c = mProtocol.mClino;
     double r = mProtocol.mRoll;
+    double dip  = mProtocol.mDip;
     long status = ( d > TDSetting.mMaxShotLength )? TDStatus.OVERSHOOT : TDStatus.NORMAL;
     mLastShotId = TopoDroidApp.mData.insertDistoXShot( TDInstance.sid, index, d, b, c, r, ExtendType.EXTEND_IGNORE, status, TDInstance.deviceAddress() );
+    TopoDroidApp.mData.updateShotAMDR( mLastShotId, TDInstance.sid, clino, azimuth, dip, r, false );
     if ( lister != null ) { // FIXME_LISTER sendMessage with mLastShotId only
       Message msg = lister.obtainMessage( Lister.LIST_UPDATE );
       Bundle bundle = new Bundle();

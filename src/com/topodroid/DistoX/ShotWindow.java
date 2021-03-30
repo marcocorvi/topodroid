@@ -1348,7 +1348,7 @@ public class ShotWindow extends Activity
   // --------------------------------------------------------------
   private void doBluetooth( Button b ) // BLUETOOTH
   {
-    mApp.doBluetoothButton( mActivity, this, b );
+    mApp.doBluetoothButton( mActivity, this, b, mDataAdapter.getCount() );
   }
 
   @Override 
@@ -1648,7 +1648,7 @@ public class ShotWindow extends Activity
   {
     DBlock ret = null;
     long id = 0;
-    for ( int k=0; k<mDataAdapter.size(); ++k ) {
+    for ( int k=0; k<mDataAdapter.getCount(); ++k ) {
       DBlock b = mDataAdapter.get(k);
       if ( b == null ) return null;
       if ( b.isTypeBlank() ) {
@@ -1689,35 +1689,35 @@ public class ShotWindow extends Activity
       mNextPos = mShotPos;
     }
 	// OLD CODE
-	// while ( mNextPos < mDataAdapter.size() && blk != mDataAdapter.get(mNextPos) ) ++ mNextPos;
+	// while ( mNextPos < mDataAdapter.getCount() && blk != mDataAdapter.get(mNextPos) ) ++ mNextPos;
     // ++ mNextPos; // one position after blk
-    // while ( mNextPos < mDataAdapter.size() ) {
+    // while ( mNextPos < mDataAdapter.getCount() ) {
     //   DBlock b = mDataAdapter.get(mNextPos);
     //   int t = b.getBlockType();
     //   if ( t == DBlock.BLOCK_MAIN_LEG ) {
     //     return b;
     //   } else if (    DBlock.isTypeBlank( t )
-    //               && mNextPos+1 < mDataAdapter.size()
+    //               && mNextPos+1 < mDataAdapter.getCount()
     //               && b.isRelativeDistance( mDataAdapter.get(mNextPos+1) ) ) {
     //     return b;
     //   }
     //   ++ mNextPos;
     // }
     // NEW CODE
-    for ( ; mNextPos < mDataAdapter.size(); ++ mNextPos ) {
+    for ( ; mNextPos < mDataAdapter.getCount(); ++ mNextPos ) {
       DBlock b = mDataAdapter.get(mNextPos);
       if ( b == null ) return null;
       if ( b == blk ) break;
     }
     // start at one position after blk
-    for ( ++mNextPos; mNextPos < mDataAdapter.size(); ++mNextPos ) {
+    for ( ++mNextPos; mNextPos < mDataAdapter.getCount(); ++mNextPos ) {
       DBlock b = mDataAdapter.get(mNextPos);
       if ( b == null ) return null;
       // int t = b.getBlockType();
       if ( b.isMainLeg() ) { // t == DBlock.BLOCK_MAIN_LEG 
         return b;
       } else if (    b.isTypeBlank( )
-                  && mNextPos+1 < mDataAdapter.size()
+                  && mNextPos+1 < mDataAdapter.getCount()
                   && b.isRelativeDistance( mDataAdapter.get(mNextPos+1) ) ) {
         return b;
       }
@@ -2158,15 +2158,11 @@ public class ShotWindow extends Activity
           case ConnectionState.CONN_CONNECTED:
             TDFeedback.notifyFeedback( this, true );
             TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload_on );
-            if ( TDInstance.isDeviceBric() ) {
-              TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], mBMbluetooth );
-            } else {
-              TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], mBMbluetooth_no );
-            }
+            TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], (TDInstance.isDeviceBric() ? mBMbluetooth : mBMbluetooth_no ) );
             break;
           case ConnectionState.CONN_WAITING:
             TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload_wait );
-            TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], mBMbluetooth_no );
+            TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], (TDInstance.isDeviceBric() ? mBMbluetooth : mBMbluetooth_no ) );
             break;
           default:
             TDFeedback.notifyFeedback( this, false );

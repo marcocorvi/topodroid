@@ -16,6 +16,7 @@
 package com.topodroid.packetX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDVersion;
 import com.topodroid.DistoX.TDPath;
 
 // import android.util.Log;
@@ -47,9 +48,9 @@ import java.util.Locale;
 
 public class PacketLogger extends DataSetObservable
 {
-  static final String DB_VERSION = "1";
-  static final int DATABASE_VERSION = 1;
-  // static final int DATABASE_VERSION_MIN = 1;
+  // static final String PACKET_DB_VERSION = "1";
+  // static final int PACKET_DATABASE_VERSION = 1;
+  // static final int PACKET_DATABASE_VERSION_MIN = 1;
 
   // private static final String CONFIG_TABLE = "configs";
   private static final String PACKET_TABLE = "packets";
@@ -267,9 +268,9 @@ public class PacketLogger extends DataSetObservable
 
       DistoXOpenHelper(Context context, String database_name ) 
       {
-         super(context, database_name, null, DATABASE_VERSION);
+         super(context, database_name, null, TDVersion.PACKET_DATABASE_VERSION);
          // Log.v("DistoX", "PACKET DB NAME " + database_name );
-         // TDLog.Log( TDLog.LOG_DB, "createTables ... " + database_name + " version " + DATABASE_VERSION );
+         // TDLog.Log( TDLog.LOG_DB, "createTables ... " + database_name + " version " + TDVersion.PACKET_DATABASE_VERSION );
       }
 
       @Override

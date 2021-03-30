@@ -133,6 +133,30 @@ public class BricConst
   static final int ERR_CLINO      =14;
   static final int ERR_AZIMUTH    =15;
 
+  private static int getErrorCode( byte[] bytes, int off )
+  {
+    int ret = BleUtils.getChar( bytes, off );
+    if ( ret == 5 || ret == 6 ) {
+      float val2 = BleUtils.getFloat( bytes, off+5 );
+      if ( val2 < 0.5f ) return ret;
+      if ( val2 < 1.5f ) return 32 + ret; 
+      if ( val2 < 2.5f ) return 34 + ret; 
+      if ( val2 < 3.5f ) return 36 + ret; 
+    }
+    return ret;
+  }
+
+  private static float getErrorValue( byte[] bytes, int code, int off )
+  {
+    if ( code == 0 || ( code >= 7 && code <= 10 ) ) return 0;
+    return BleUtils.getFloat( bytes, off );
+  }
+
+  static int firstErrorCode( byte[] bytes ) { return getErrorCode( bytes, 0 ); }
+  static int secondErrorCode( byte[] bytes ) { return getErrorCode( bytes, 9 ); }
+  static float firstErrorValue( byte[] bytes, int code ) { return getErrorValue( bytes, code, 1 ); }
+  static float secondErrorValue( byte[] bytes, int code ) { return getErrorValue( bytes, code, 10 ); }
+
   static String errorString( byte[] bytes )
   {
     StringBuilder sb = new StringBuilder();

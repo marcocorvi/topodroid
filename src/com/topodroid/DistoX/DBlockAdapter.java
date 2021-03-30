@@ -503,7 +503,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   @Override
   public int getCount() { return mItems.size(); }
 
-  public int size() { return mItems.size(); }
+  // replaced by getCount()
+  // public int size() { return mItems.size(); }
 
   @Override
   public int getItemViewType(int pos) { return AdapterView.ITEM_VIEW_TYPE_IGNORE; }

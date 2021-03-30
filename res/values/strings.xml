@@ -1303,7 +1303,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_dash_splay_title">Splay dashing</string>
   <string name="pref_dash_splay_message">Splay-dash by plan, by profile, or independently</string>
   <string name="pref_vert_splay_title">Splay dash clino-threshold</string>
-  <string name="pref_vert_splay_message">Minimum clinof for dashed splays</string>
+  <string name="pref_vert_splay_message">Minimum clino for dashed splays</string>
   <string name="pref_horiz_splay_title">Splay dash azimuth-threshold</string>
   <string name="pref_horiz_splay_message">Minimum off azimuth for dashed splays</string>
   <string name="pref_section_splay_title">Splay dash angle-threshold</string>

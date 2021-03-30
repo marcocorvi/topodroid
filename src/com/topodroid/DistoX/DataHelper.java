@@ -158,7 +158,7 @@ public class DataHelper extends DataSetObservable
   static final private String[] mPlotFieldsFull =
     { "id", "name", "type", "status", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide", "nick", "orientation", "maxscrap" };
   static final private String[] mPlotFields =
-    { "id", "name", "type", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide", "nick", "orientation", "maxscrap" };
+    { "id", "name", "type", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide", "nick", "orientation", "maxscrap", "intercept" };
 
   static final private String[] mSketchFields =
     { "id", "name", "start", "st1", "st2",
@@ -1850,6 +1850,32 @@ public class DataHelper extends DataSetObservable
     // doStatement( updatePlotViewStmt, "plt view" );
   }
 
+  // for X-sections hide stores the value of incercept TT
+  void updatePlotIntercept( long pid, long sid, float intercept )
+  {
+    if ( myDB == null ) return; // false;
+    StringWriter sw = new StringWriter();
+    PrintWriter  pw = new PrintWriter( sw );
+    pw.format( Locale.US, "UPDATE plots set intercept=%f WHERE surveyId=%d AND id=%d", intercept, sid, pid );
+    doExecSQL( sw, "plt intercept" );
+  }
+
+  float selectPlotIntercept( long pid, long sid )
+  {
+    if ( myDB == null ) return -1;
+    float ret = -1;
+    Cursor cursor = myDB.query( PLOT_TABLE,
+       		         new String[] { "intercept" }, // columns
+                                WHERE_SID_ID,
+                                new String[] { Long.toString(sid), Long.toString(pid) },
+                                null, null, null );
+    if ( cursor.moveToFirst() ) {
+      ret = (float)cursor.getDouble(0);
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return ret;
+  }
+
   void updatePlotHide( long pid, long sid, String hide )
   {
     if ( myDB == null ) return; // false;
@@ -2413,6 +2439,7 @@ public class DataHelper extends DataSetObservable
      plot.nick    = cursor.getString(11);
      plot.orientation = (int)(cursor.getLong(12));
      plot.maxscrap = (int)(cursor.getLong(13));
+     plot.intercept = (float)(cursor.getDouble(14));
      return plot;
    }
 
@@ -5144,19 +5171,20 @@ public class DataHelper extends DataSetObservable
      DistoXOpenHelper(Context context, String database_name ) 
      {
         super(context, database_name, null, TDVersion.DATABASE_VERSION);
-        // TDLog.Log( TDLog.LOG_DB, "createTables ... " + database_name + " version " + TDVersion.DATABASE_VERSION );
+        TDLog.Log( TDLog.LOG_DB, "DB open helper ... " + database_name + " version " + TDVersion.DATABASE_VERSION );
+        Log.v( "DistoX", "DB open helper ... " + database_name + " version " + TDVersion.DATABASE_VERSION );
      }
 
      @Override
      public void onCreate(SQLiteDatabase db) 
      {
        createTables( db );
-       // TDLog.Log( TDLog.LOG_DB, "DistoXOpenHelper onCreate done db " + db );
      }
 
      private void createTables( SQLiteDatabase db )
      {
-        try {
+       TDLog.Log( TDLog.LOG_DB, "BD open helper - create tables");
+       try {
           // db.setLockingEnabled( false );
           db.beginTransaction();
           db.execSQL( 
@@ -5260,8 +5288,9 @@ public class DataHelper extends DataSetObservable
             +   " clino REAL, "
             +   " hide TEXT, "
             +   " nick TEXT, "
-            +   " orientation INTEGER, "
-            +   " maxscrap INTEGER "
+            +   " orientation INTEGER default 0, "
+            +   " maxscrap INTEGER default 0, "
+            +   " intercept REAL default -1"
             // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
             // +   " ON DELETE CASCADE "
             +   ")"
@@ -5366,7 +5395,7 @@ public class DataHelper extends DataSetObservable
      public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
      {  
         // FIXME this is called at each start when the database file exists
-        TDLog.Log( TDLog.LOG_DB, "onUpgrade old " + oldVersion + " new " + newVersion );
+        TDLog.Log( TDLog.LOG_DB, "DB open helper - upgrade old " + oldVersion + " new " + newVersion );
         switch ( oldVersion ) {
           case 14: 
             db.execSQL( "ALTER TABLE surveys ADD COLUMN declination REAL default 0" );
@@ -5441,6 +5470,8 @@ public class DataHelper extends DataSetObservable
 	   case 41:
              db.execSQL( "ALTER TABLE plots ADD COLUMN maxscrap INTEGER default 0" );
 	   case 42:
+             db.execSQL( "ALTER TABLE plots ADD COLUMN intercept REAL default -1" );
+	   case 43:
              /* current version */
            default:
              break;

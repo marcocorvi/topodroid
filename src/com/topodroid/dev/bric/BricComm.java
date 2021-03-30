@@ -64,8 +64,9 @@ public class BricComm extends TopoDroidComm
 {
   private final static int MODE_PRIM_ONLY = 1;
   private final static int MODE_ALL       = 3;
-  public  final static int MODE_ALL_ZERO  = 4;
-  // private final static int mBricMode = MODE_PRIM_ONLY;
+  // public  final static int MODE_ALL_ZERO  = 4;
+  public  final static int MODE_NO_INDEX  = 5;
+  // public  final static int MODE_ZERO_NO_INDEX = 6;
 
   private BricInfoDialog mBricInfoDialog = null;
   // private BricChrtChanged mChrtChanged = null;
@@ -120,7 +121,7 @@ public class BricComm extends TopoDroidComm
           switch ( buffer.type ) {
             case DATA_PRIM:
               // Log.v("DistoX", "BRIC comm: Queue buffer PRIM");
-              BricDebug.logMeasPrim( buffer.data );
+              // BricDebug.logMeasPrim( buffer.data );
               if ( TDSetting.mBricMode == MODE_PRIM_ONLY ) {
                 ((BricProto)mProtocol).addMeasPrimAndProcess( buffer.data );
               } else {
@@ -129,14 +130,14 @@ public class BricComm extends TopoDroidComm
               break;
             case DATA_META:
               // Log.v("DistoX", "BRIC comm: Queue buffer META");
-              BricDebug.logMeasMeta( buffer.data );
+              // BricDebug.logMeasMeta( buffer.data );
               if ( TDSetting.mBricMode >= MODE_ALL ) {
                 ((BricProto)mProtocol).addMeasMeta( buffer.data );
               }
               break;
             case DATA_ERR:
               // Log.v("DistoX", "BRIC comm: Queue buffer ERR");
-              BricDebug.logMeasErr( buffer.data );
+              // BricDebug.logMeasErr( buffer.data );
               if ( TDSetting.mBricMode >= MODE_ALL ) {
                 ((BricProto)mProtocol).addMeasErr( buffer.data );
                 ((BricProto)mProtocol).processData(); 

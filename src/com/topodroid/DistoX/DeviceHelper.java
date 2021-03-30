@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
+import com.topodroid.utils.TDVersion;
 import com.topodroid.dev.Device;
 import com.topodroid.calib.CBlock;
 import com.topodroid.calib.CalibInfo;
@@ -40,9 +41,9 @@ import java.util.List;
 public class DeviceHelper extends DataSetObservable
 {
 
-  // static final private String DB_VERSION = "27";
-  static final private int DATABASE_VERSION = 27;
-  // static final private int DATABASE_VERSION_MIN = 21;
+  // static final private String DEVICE_DB_VERSION = "27";
+  // static final private int DEVICE_DATABASE_VERSION = 27;
+  // static final private int DEVICE_DATABASE_VERSION_MIN = 21;
 
   static final private String ERROR_NULL_DB = "null device DB ";
 
@@ -1192,9 +1193,9 @@ public class DeviceHelper extends DataSetObservable
 
       DistoXOpenHelper(Context context, String database_name ) 
       {
-         super(context, database_name, null, DATABASE_VERSION);
+         super(context, database_name, null, TDVersion.DEVICE_DATABASE_VERSION);
          // Log.v("DistoX", "DB NAME " + database_name );
-         // TDLog.Log( TDLog.LOG_DB, "createTables ... " + database_name + " version " + DATABASE_VERSION );
+         // TDLog.Log( TDLog.LOG_DB, "createTables ... " + database_name + " version " + TDVersion.DEVICE_DATABASE_VERSION );
       }
 
       @Override

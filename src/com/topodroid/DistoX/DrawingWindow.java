@@ -2442,8 +2442,13 @@ public class DrawingWindow extends ItemDrawer
       list = mApp_mData.selectShotsAt( mSid, mFrom, false ); // select only splays
     }
     if ( list != null && list.size() > mSectionSkip ) {
-      // Log.v("DistoX-GRID", "doRestart section" );
-      makeSectionReferences( list, mIntersectionT, mSectionSkip );
+      // Log.v("DistoX-GRID", "doRestart section T " + mIntersectionT + " " + mPlot3.intercept);
+      if ( mIntersectionT != mPlot3.intercept ) {
+        Log.v("DistoX", "do restart section - update intercept T " + mIntersectionT + " " + mPlot3.intercept);
+        mPlot3.intercept = mIntersectionT;
+        mApp_mData.updatePlotIntercept( mPlot3.id, TDInstance.sid, mIntersectionT );
+      }
+      makeSectionReferences( list, mPlot3.intercept, mSectionSkip );
     }
   }
 
@@ -2455,7 +2460,6 @@ public class DrawingWindow extends ItemDrawer
     // Log.v("DistoX-C", "do start " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     assert( mLastLinePath == null); // not needed - guaranteed by callers
     mIntersectionT = tt;
-    // Log.v("DistoX", "do start() tt " + tt );
     // TDLog.Log( TDLog.LOG_PLOT, "do Start() " + mName1 + " " + mName2 );
     mCurrentPoint = ( BrushManager.isPointEnabled( "label" ) )?  1 : 0;
     mCurrentLine  = ( BrushManager.isLineEnabled( "wall" ) )?  1 : 0;
@@ -2498,9 +2502,14 @@ public class DrawingWindow extends ItemDrawer
     // X_SECTION, XH_SECTION: mFrom != null, mTo == null, splays only 
 
     if ( PlotType.isAnySection( mType ) ) {
-      // Log.v("DistoX-GRID", "do start section" );
+      // Log.v("DistoX-GRID", "do start section T " + tt + " " + mPlot3.intercept );
+      if ( tt != mPlot3.intercept ) {
+        Log.v("DistoX", "do start section - update plot intercaept T " + tt + " " + mPlot3.intercept );
+        mApp_mData.updatePlotIntercept( mPlot3.id, TDInstance.sid, tt );
+        mPlot3.intercept = tt;
+      }
       // FIXME MOVED_BACK_IN DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
-      makeSectionReferences( list, tt, 0 );
+      makeSectionReferences( list, mPlot3.intercept, 0 );
     // } else {
     //   Log.v("DistoX-PLOT", "try to highlight [1] ");
     //   if ( mApp.hasHighlighted() ) mDrawingSurface.highlights( mApp ); 
@@ -2520,17 +2529,18 @@ public class DrawingWindow extends ItemDrawer
   private void makeSectionReferences( List< DBlock > list, float tt, int skip )
   {
 
-    // Log.v("DistoX-SPLAY", "make section references blocks " + list.size() + " skip " + skip );
     assert( mLastLinePath == null); // not needed - guaranteed by callers
 
     mDrawingSurface.newReferences( DrawingSurface.DRAWING_SECTION, (int)mType );
-    // Log.v("DistoX", "Section " + mClino + " " + mAzimuth );
+    Log.v("DistoX", "section list " + list.size() + " tt " + tt + " skip " + skip + " azimuth " + mAzimuth + " clino " + mClino );
     DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface ); // FIXME_SK moved out
     mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)mType );
     float xfrom=0;
     float yfrom=0;
+    float zfrom=0;
     float xto=0;
     float yto=0;
+    float zto=0;
     // normal, horizontal and cross-product
     float mc = mClino   * TDMath.DEG2RAD;
     float ma = mAzimuth * TDMath.DEG2RAD;
@@ -2564,6 +2574,9 @@ public class DrawingWindow extends ItemDrawer
     DBlock blk = null;
     float xn = 0;  // X-North // Rotate as NORTH is upward
     float yn = -1; // Y-North
+    float xtt = 0; // x-section center
+    float ytt = 0;
+    float ztt = 0;
     if ( skip == 0 ) {
       if ( PlotType.isSection( mType ) ) {
         if ( mType == PlotType.PLOT_H_SECTION ) {
@@ -2619,11 +2632,14 @@ public class DrawingWindow extends ItemDrawer
           mDrawingSurface.addDrawingStationName( mFrom, DrawingUtil.toSceneX(xfrom, yfrom), DrawingUtil.toSceneY(xfrom, yfrom) );
           mDrawingSurface.addDrawingStationName( mTo, DrawingUtil.toSceneX(xto, yto), DrawingUtil.toSceneY(xto, yto) );
           if ( tt >= 0 && tt <= 1 ) {
-            float xtt = xfrom + tt * ( xto - xfrom );
-            float ytt = yfrom + tt * ( yto - yfrom );
+            zfrom =  dist * v.dot(V0);
+            xtt = xfrom + tt * ( xto - xfrom );
+            ytt = yfrom + tt * ( yto - yfrom );
+            ztt = zfrom + tt * ( zto - zfrom );
             if ( mLandscape ) { float t=xtt; xtt=-ytt; ytt=t; }
             // Log.v("DistoX", "TT " + tt + " " + xtt + " " + xfrom + " " + xto );
             // makeXSectionLegPoint( xtt, ytt );
+
             DrawingSpecialPath path = new DrawingSpecialPath( DrawingSpecialPath.SPECIAL_DOT, DrawingUtil.toSceneX(xtt,ytt), DrawingUtil.toSceneY(xtt,ytt), DrawingLevel.LEVEL_DEFAULT, mDrawingSurface.scrapIndex() );
             mDrawingSurface.addDrawingDotPath( path );
           }
@@ -2632,6 +2648,13 @@ public class DrawingWindow extends ItemDrawer
         mDrawingSurface.addDrawingStationName( mFrom, DrawingUtil.toSceneX(xfrom, yfrom), DrawingUtil.toSceneY(xfrom, yfrom) );
       }
     }
+    Log.v("DistoX", "From " + xfrom + " " + yfrom + " " + zfrom );
+    Log.v("DistoX", "To   " + xto + " " + yto + " " + zto );
+    Log.v("DistoX", "TT   " + xtt + " " + ytt + " " + ztt );
+
+    // using distance of splay endpoint from xsection plane
+    // V0 = normal to the plane
+    // (xtt,ytt,ztt) center of the plane
 
     int cnt = 0;
     for ( DBlock b : list ) { // repeat for splays
@@ -2641,9 +2664,15 @@ public class DrawingWindow extends ItemDrawer
         continue;
       }
   
+      // float x0 = xto;
+      // float y0 = yto;
+      float z0 = zto;
       int splay_station = 3; // could use a boolean
       if ( b.mFrom.equals( mFrom ) ) {
         splay_station = 1;
+        // x0 = xfrom;
+        // y0 = yfrom;
+        z0 = zfrom;
         // if ( TDSetting.mSectionStations == 2 ) continue;
       } else if ( b.mFrom.equals( mTo ) ) {
         splay_station = 2;
@@ -2666,6 +2695,13 @@ public class DrawingWindow extends ItemDrawer
       float x =  d * v.dot(V1);
       float y = -d * v.dot(V2);
       float a = 90 - (float)(Math.acos( v.dot(V0) ) * TDMath.RAD2DEG); // cos-angle with the normal
+
+      // splay endpoint
+      // x0 += v.dot(V1);
+      // y0 += v.dot(V2);
+      z0 += v.dot(V0);
+      float zdiff = z0 - ztt;
+      Log.v("DistoX", "xsection splay at " + b.mFrom + " z0 " + z0  + " distance " + zdiff );
       
       if ( mType == PlotType.PLOT_H_SECTION ) { // Rotate as NORTH is upward
         float xx = -yn * x + xn * y;
@@ -4212,7 +4248,7 @@ public class DrawingWindow extends ItemDrawer
         mDrawingSurface.addDrawingPath( section_pt );
       }
 
-      // Log.v("DistoX", "line section dialog TT " + tt );
+      Log.v("DistoX", "line section dialog TT " + tt );
       new DrawingLineSectionDialog( mActivity, this, /* mApp, */ h_section, false, section_id, currentLine, from, to, azimuth, clino, tt ).show();
 
     } else { // many legs in profile view
@@ -5364,7 +5400,7 @@ public class DrawingWindow extends ItemDrawer
   private void doBluetooth( Button b, int dismiss )
   {
     if ( dismiss == DISMISS_BT ) return;
-    mApp.doBluetoothButton( mActivity, this, b );
+    mApp.doBluetoothButton( mActivity, this, b, -1 );
   }
 
   private void setButtonAzimuth()
@@ -5822,10 +5858,11 @@ public class DrawingWindow extends ItemDrawer
     void makePlotXSection( DrawingLinePath line, String id, long type, String from, String to, String nick,
                           float azimuth, float clino, float tt )
     {
-      // Log.v("DistoX", "make section: " + id + " <" + from + "-" + to + "> azimuth " + azimuth + " clino " + clino + " tt " + tt );
+      Log.v("DistoX", "make section: " + id + " <" + from + "-" + to + "> azimuth " + azimuth + " clino " + clino + " tt " + tt );
       long pid = prepareXSection( id, type, from, to, nick, azimuth, clino );
       if ( pid >= 0 ) {
-        // Log.v("DistoX", "push info: " + type + " <" + mSectionName + "> TT " + tt );
+        Log.v("DistoX", "push info: " + type + " <" + mSectionName + "> TT " + tt );
+        mApp_mData.updatePlotIntercept( pid, TDInstance.sid, tt );
         pushInfo( type, mSectionName, from, to, azimuth, clino, tt );
         zoomFit( mDrawingSurface.getBitmapBounds() );
       }
@@ -5842,7 +5879,7 @@ public class DrawingWindow extends ItemDrawer
 
       PlotInfo pi = mApp_mData.getPlotInfo( TDInstance.sid, name );
       if ( pi != null ) {
-        pushInfo( pi.type, pi.name, pi.start, pi.view, pi.azimuth, pi.clino, -1 );
+        pushInfo( pi.type, pi.name, pi.start, pi.view, pi.azimuth, pi.clino, pi.intercept );
         zoomFit( mDrawingSurface.getBitmapBounds() );
       }
     }
@@ -6549,7 +6586,9 @@ public class DrawingWindow extends ItemDrawer
         mDrawingSurface.modeloadDataStream( tdr, null, false /*, null */ ); // sections are not cached
         setPlotType3( );
         // FIXME MOVED_BACK_IN DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
-        makeSectionReferences( mApp_mData.selectAllShots( mSid, TDStatus.NORMAL ), -1, 0 );
+        float tt = mApp_mData.selectPlotIntercept( mSid, mPlot3.id );
+        Log.v("DistoX-GRID", "do section T " + tt );
+        makeSectionReferences( mApp_mData.selectAllShots( mSid, TDStatus.NORMAL ), tt, 0 );
       } else {
         TDLog.Error("null Plot 3");
       }

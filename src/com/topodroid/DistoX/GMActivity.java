@@ -895,7 +895,7 @@ public class GMActivity extends Activity
   private void doBluetooth( Button b )
   {
     if ( TDLevel.overAdvanced && TDInstance.hasDeviceRemoteControl() ) {
-      CutNPaste.showPopupBT( this, this, mApp, b, true );
+      CutNPaste.showPopupBT( this, this, mApp, b, true, false );
     } else {
       mApp.resetComm();
       TDToast.make( R.string.bt_reset );

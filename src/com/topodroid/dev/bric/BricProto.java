@@ -49,6 +49,10 @@ public class BricProto extends TopoDroidProtocol
   private byte[] mLastTime;       // content of LastTime payload
   private byte[] mLastPrim;   // used to check if the coming Prim is new
   private boolean mPrimToDo = false;
+  private int mErr1; // first error code
+  private int mErr2; // second error code
+  private float mErrVal1;
+  private float mErrVal2;
 
   private Context mContext;
   BleCallback mCallback;
@@ -110,6 +114,8 @@ public class BricProto extends TopoDroidProtocol
       mBearing  = BricConst.getAzimuth( bytes );
       mClino    = BricConst.getClino( bytes );
       mPrimToDo = true;
+      mErr1 = 0;
+      mErr2 = 0;
       TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: added Prim " + mDistance + " " + mBearing + " " + mClino );
     } else {
       TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: add Prim - repeated primary" );
@@ -127,6 +133,10 @@ public class BricProto extends TopoDroidProtocol
   void addMeasErr( byte[] bytes ) 
   {
     TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: added Err " );
+    mErr1 = BricConst.firstErrorCode( bytes );
+    mErr2 = BricConst.secondErrorCode( bytes );
+    mErrVal1 = BricConst.firstErrorValue( bytes, mErr1 );
+    mErrVal2 = BricConst.secondErrorValue( bytes, mErr2 );
   }
   
   void processData()
@@ -135,14 +145,22 @@ public class BricProto extends TopoDroidProtocol
     if ( mPrimToDo ) {
       TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: process - PrimToDo true: " + mIndex + " prev " + mLastIndex );
       // mComm.handleRegularPacket( DataType.PACKET_DATA, mLister, DataType.DATA_SHOT );
-      mComm.handleBricPacket( mIndex, mLister, DataType.DATA_SHOT );
+      int index = ( TDSetting.mBricMode == BricComm.MODE_NO_INDEX )? -1 : mIndex;
+      float clino = 0;
+      float azimuth = 0;
+      if ( mErr1 >= 14 || mErr2 >= 14 ) { 
+        clino   = ( mErr1 == 14 )? mErrVal1 : (mErr2 == 14)? mErrVal2 : 0;
+        azimuth = ( mErr1 == 15 )? mErrVal1 : (mErr2 == 15)? mErrVal2 : 0;
+      }
+      mComm.handleBricPacket( index, mLister, DataType.DATA_SHOT, clino, azimuth );
       mPrimToDo = false;
       mLastIndex = mIndex;
     } else if ( mIndex != mLastIndex ) {
       TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: process - PrimToDo false: ... skip at " + mIndex + " prev " + mLastIndex );
-      if ( TDSetting.mBricMode == BricComm.MODE_ALL_ZERO ) {
-        mComm.handleZeroPacket( mIndex, mLister, DataType.DATA_SHOT );
-      }
+      // if ( TDSetting.mBricMode == BricComm.MODE_ALL_ZERO || TDSetting.mBricMode == BricComm.MODE_ZERO_NO_INDEX ) {
+      //   int index = ( TDSetting.mBricMode == BricComm.MODE_ZERO_NO_INDEX )? -1 : mIndex;
+      //   mComm.handleZeroPacket( mIndex, mLister, DataType.DATA_SHOT );
+      // }
       mLastIndex = mIndex;
     } else {
       TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: process - PrimToDo false: ... skip at " + mIndex);
@@ -173,6 +191,8 @@ public class BricProto extends TopoDroidProtocol
   void clearLastTime() { mLastTime = null; }
 
   byte[] getLastTime() { return mLastTime; }
+
+  
 
 }
 
