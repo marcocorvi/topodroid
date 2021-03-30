@@ -1383,8 +1383,8 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_shot_timer_summary">Hány másodpercig várjon, mielőtt megméri az irányszöget</string>
   <string name="pref_beep_volume_title">Időzítő hangereje</string>
   <string name="pref_beep_volume_summary">Időzítő csipogásának hány százalékos a hangereje</string>
-  <string name="pref_extend_frac_title">Részleges kiterítés</string>
-  <string name="pref_extend_frac_summary">A "kiterítés" lehet-e tizedes rész</string>
+  <string name="pref_extend_frac_title">Arányos kiterítés</string>
+  <string name="pref_extend_frac_summary">A "kiterítés"-nek lehet-e tizedes része</string>
   <string name="pref_recent_shot_title">Legutóbbi mérés</string>
   <string name="pref_recent_shot_summary">Az utolsó mérés kiemelése</string>
   <string name="pref_drawing_unit_title">Pont eszközök méretaránya</string>
