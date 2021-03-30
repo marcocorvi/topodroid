@@ -1178,7 +1178,7 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_bezier_step_summary">Pontok közötti távolság az exportált vonalon [m]</string>
   <string name="pref_leg_shots_title">Minimális poligon mérés</string>
   <string name="pref_leg_shots_summary">Poligon mérések minmális száma poligonhosszanként</string>
-  <string name="pref_recent_timeout_title">Legutolsó adat időkorlát</string>
+  <string name="pref_recent_timeout_title">Legutolsó adat</string>
   <string name="pref_recent_timeout_summary">Időkorlát ami után az adatok már nem frissek [s]</string>
   <string name="pref_triple_shot_title">Poligon mérés jelzés</string>
   <string name="pref_triple_shot_summary">Hang visszajelzés a poligon mérés felismerésről</string>
@@ -1298,13 +1298,13 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_min_shift_message">Maximális mozgatási sebesség [pxl/step]</string>
   <string name="pref_pointing_title">Mutató sugara</string>
   <string name="pref_pointing_message">Lenyomás/felengedés érzékenység a pont kiválasztáskor</string>
-  <string name="pref_dash_splay_title">Segédmérés szaggatás összefüggés</string>
+  <string name="pref_dash_splay_title">Sün szaggatás összhang</string>
   <string name="pref_dash_splay_message">Segédmérések szaggatásának összefüggése az alaprajz és az oldalnézet között</string>
-  <string name="pref_vert_splay_title">Segédmérések megszaggatásának lejtszög küszöbértéke</string>
-  <string name="pref_vert_splay_message">Ennél nagyobb lejtszögű segédmérések szaggatott vonallal jelöltek</string>
-  <string name="pref_horiz_splay_title">Segédmérés szaggatás irány határérték</string>
+  <string name="pref_vert_splay_title">Sün lejtszög szaggatás</string>
+  <string name="pref_vert_splay_message">Ennél nagyobb lejtszögű segédmérések szaggatott vonallal jelennek meg</string>
+  <string name="pref_horiz_splay_title">Sün irány szaggatás</string>
   <string name="pref_horiz_splay_message">Segédmérés iránya ami felett szaggatott</string>
-  <string name="pref_section_splay_title">Segédmérés irány szaggatás határérték</string>
+  <string name="pref_section_splay_title">Sün metszet irány</string>
   <string name="pref_section_splay_message">Ha nagyobb ennél a szögnél a metszet sikban akkor a segédmérések szaggatottak</string>
   <string name="pref_data_backup_title">Adat autómatikus export</string>
   <string name="pref_data_backup_summary">Automatkus adat export(alapértelmezett formátumra van szükség)</string>
@@ -1356,7 +1356,7 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_vthr_title">Poligon függőleges küszöbe</string>
   <string name="pref_vthr_summary">Poligon lejtszögének küszöbértéke BJFL és NyKÉD között</string>
 
-  <string name="pref_plan_vthr_title">Segédmérések alaprajzi vetületének küszöbértéke</string>
+  <string name="pref_plan_vthr_title">Sün alaprajzi küszöb</string>
   <string name="pref_plan_vthr_summary">Magas lejtszögértékű segédmérések elrejtése az alaprajzi vetületen</string>
   <string name="pref_init_station_title">Kezdőpont neve</string>
   <string name="pref_init_station_summary">Alapértelmezett Kezdőpont név</string>
@@ -1379,7 +1379,7 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_shp_georef_summary">Alaprajz vázlat exportálása WGS84 long-lat rendszerbe</string>
   <string name="pref_thumbnail_title">Miniatűrök mérete</string>
   <string name="pref_thumbnail_summary">Fotó-miniatűrök mérete</string>
-  <string name="pref_shot_timer_title">Irányszög mérés időzítése</string>
+  <string name="pref_shot_timer_title">Mérés időzítése</string>
   <string name="pref_shot_timer_summary">Hány másodpercig várjon, mielőtt megméri az irányszöget</string>
   <string name="pref_beep_volume_title">Időzítő hangereje</string>
   <string name="pref_beep_volume_summary">Időzítő csipogásának hány százalékos a hangereje</string>
