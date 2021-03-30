@@ -2664,14 +2664,14 @@ public class DrawingWindow extends ItemDrawer
         continue;
       }
   
-      // float x0 = xto;
-      // float y0 = yto;
+      float x0 = xto;
+      float y0 = yto;
       float z0 = zto;
       int splay_station = 3; // could use a boolean
       if ( b.mFrom.equals( mFrom ) ) {
         splay_station = 1;
-        // x0 = xfrom;
-        // y0 = yfrom;
+        x0 = xfrom;
+        y0 = yfrom;
         z0 = zfrom;
         // if ( TDSetting.mSectionStations == 2 ) continue;
       } else if ( b.mFrom.equals( mTo ) ) {
@@ -2694,14 +2694,14 @@ public class DrawingWindow extends ItemDrawer
       TDVector v = new TDVector(  b.mBearing * TDMath.DEG2RAD, b.mClino * TDMath.DEG2RAD);
       float x =  d * v.dot(V1);
       float y = -d * v.dot(V2);
-      float a = 90 - (float)(Math.acos( v.dot(V0) ) * TDMath.RAD2DEG); // cos-angle with the normal
+      // float a = 90 - (float)(Math.acos( v.dot(V0) ) * TDMath.RAD2DEG); // cos-angle with the normal
 
       // splay endpoint
-      // x0 += v.dot(V1);
-      // y0 += v.dot(V2);
-      z0 += v.dot(V0);
-      float zdiff = z0 - ztt;
-      Log.v("DistoX", "xsection splay at " + b.mFrom + " z0 " + z0  + " distance " + zdiff );
+      x0 += d * v.dot(V1) - xtt;
+      y0 += d * v.dot(V2) - ytt;
+      z0 += d * v.dot(V0) - ztt;
+      float d0 = ( x0*x0 + y0*y0 + z0*z0 );
+      float a = (d0 > 0)? 90 - (float)(Math.abs( z0 ) / Math.sqrt( d0 )) : 90;
       
       if ( mType == PlotType.PLOT_H_SECTION ) { // Rotate as NORTH is upward
         float xx = -yn * x + xn * y;
