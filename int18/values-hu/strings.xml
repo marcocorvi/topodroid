@@ -1314,10 +1314,10 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_zipped_symbols_summary">Szimbólum fájlok tárolása/beolvasása zip archívumokba/ból</string>
   <string name="pref_fixed_origin_title">Vázlat kezdőpont</string>
   <string name="pref_fixed_origin_summary">Rögzített vázlat kezdőpont</string>
-  <string name="pref_shared_xsections_title">Megosztott keresztszelvények</string>
+  <string name="pref_shared_xsections_title">Megosztott metszet</string>
   <string name="pref_shared_xsections_summary">Az adott mérési pont keresztszelvényei több vázlatban közösek</string>
-  <string name="xsections_shared">Megosztott keresztszelvények</string>
-  <string name="xsections_private">Saját keresztszelvények</string>
+  <string name="xsections_shared">Megosztott metszet</string>
+  <string name="xsections_private">Saját metszet</string>
   <string name="pref_reduce_angle_title">Simítási szög</string>
   <string name="pref_reduce_angle_summary">Minimális segmens-szög síma vonalaknál</string>
 
@@ -1333,10 +1333,10 @@ Tap <b>Bezár</b> nem változtat.
   
   <string name="pref_leg_title">Poligonmérések tűrése</string>
   <string name="pref_leg_summary">Ismételt poligonmérések közötti tűrés</string>
-  <string name="pref_max_shot_title">Maximális poligonmérés hossz</string>
-  <string name="pref_max_shot_summary">Mérés maximális hossza [m]</string>
-  <string name="pref_min_leg_title">Minimális poligonmérés hossz</string>
-  <string name="pref_min_leg_summary">Mérés minmális hossza [m]</string>
+  <string name="pref_max_shot_title">Maximális hossz</string>
+  <string name="pref_max_shot_summary">Poligon-mérés maximális hossza [m]</string>
+  <string name="pref_min_leg_title">Minimális hossz</string>
+  <string name="pref_min_leg_summary">Poligon-mérés minmális hossza [m]</string>
   <string name="pref_backsight_title">Visszamérés</string>
   <string name="pref_backsight_summary">Visszamérés mező az új mérés párbeszéd ablakban</string>
   <string name="pref_backshot_title">DistoX visszamérés</string>
@@ -1351,9 +1351,9 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_team_title">Csoport</string>
   <string name="pref_team_summary">Alapértelmezett felmérő csoport</string>
     
-  <string name="pref_ethr_title">Segédmérések függőleges küszöbértéke</string>
+  <string name="pref_ethr_title">Sünök függőleges küszöbe</string>
   <string name="pref_ethr_summary">szögtartomány 90 fok körül a függőleges kiterítéshez [fok]</string>
-  <string name="pref_vthr_title">Poligon függőleges küszöbértéke </string>
+  <string name="pref_vthr_title">Poligon függőleges küszöbe</string>
   <string name="pref_vthr_summary">Poligon lejtszögének küszöbértéke BJFL és NyKÉD között</string>
 
   <string name="pref_plan_vthr_title">Segédmérések alaprajzi vetületének küszöbértéke</string>
@@ -1373,7 +1373,7 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_acad_version_summary">DXF verzió</string>
   <!-- UNUSED string name="pref_dxf_scale_title">DXF vázlat méretaránya</string -->
   <!-- UNUSED string name="pref_dxf_scale_summary">DXF vázlat méretarányának értéke</string -->
-  <string name="pref_dxf_blocks_title">Segédmérés végpontjai DXF-ben</string>
+  <string name="pref_dxf_blocks_title">Segédmérés végpontjai</string>
   <string name="pref_dxf_blocks_summary">Segédmérés végpontjai DXF-ben</string>
   <string name="pref_shp_georef_title">Georeferált vázlat export</string>
   <string name="pref_shp_georef_summary">Alaprajz vázlat exportálása WGS84 long-lat rendszerbe</string>
