@@ -1180,7 +1180,7 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_leg_shots_summary">Poligon mérések minmális száma poligonhosszanként</string>
   <string name="pref_recent_timeout_title">Legutolsó adat időkorlát</string>
   <string name="pref_recent_timeout_summary">Időkorlát ami után az adatok már nem frissek [s]</string>
-  <string name="pref_triple_shot_title">Poligon mérés csengetés</string>
+  <string name="pref_triple_shot_title">Poligon mérés jelzés</string>
   <string name="pref_triple_shot_summary">Hang visszajelzés a poligon mérés felismerésről</string>
   <string name="pref_connect_feedback_title">Kapcsolat visszajelzés</string>
   <string name="pref_connect_feedback_summary">Visszajelzés a műszer kapcsolatról</string>
@@ -1268,8 +1268,8 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_head_tail_summary">Adatok számának lekérdezése letöltés előtt</string>
   <string name="pref_socket_delay_title">Kapcsolódási késleltetés</string>
   <string name="pref_socket_delay_summary">Kapcsolódási késleltetés a párosításhoz [0.1 sec]</string>
-  <string name="pref_z6_workaround_title">Áthidaló megoldás Z6-hoz</string>
-  <string name="pref_z6_workaround_summary">Áthidaló megoldás adatletöltéshez Z6-ból</string>
+  <string name="pref_z6_workaround_title">Áthidaló megoldás</string>
+  <string name="pref_z6_workaround_summary">Áthidaló megoldás adatletöltéshez Z6-hoz</string>
   <string name="pref_firmware_sanity_title">Firmware ellenőrzés</string>
   <string name="pref_firmware_sanity_summary">Firmware biztonsági ellenőrzés végrehajtva</string>
   <string name="pref_crs_title">Koordinátarendszer</string>
@@ -1324,11 +1324,11 @@ Tap <b>Bezár</b> nem változtat.
 
   <string name="pref_survey_stations_title">Mérési pont szabályok</string>
   <string name="pref_survey_stations_summary">Mérési pontok automatikus elnevezésének szabálya</string>
-  <string name="pref_accel_thr_title">Max. eltérés a nehézségi gyorsulásban</string>
+  <string name="pref_accel_thr_title">Max. G hiba</string>
   <string name="pref_accel_thr_summary">Eltérések tűrése százalékban a megismételt mérések nehézségi gyorsulás értékében</string>
-  <string name="pref_mag_thr_title">Max. eltérés a mágneses mezőben</string>
+  <string name="pref_mag_thr_title">Max. M hiba</string>
   <string name="pref_mag_thr_summary">Eltérések tűrése százalékban a megismételt mérések mágneses térerősségében</string>
-  <string name="pref_dip_thr_title">Max. eltérés a mágneses lehajlásban</string>
+  <string name="pref_dip_thr_title">Max. INCL hiba</string>
   <string name="pref_dip_thr_summary">Eltérések tűrése százalékban a megismételt mérések mágneses lehajlásában</string>
   
   <string name="pref_leg_title">Poligonmérések tűrése</string>
@@ -1345,7 +1345,7 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_prev_next_summary">Előző/Köv. gombok a mérés párbeszéd ablakban</string>
   <!-- UNUSED string name="pref_mag_anomaly_title">Mágneses anomália</string -->
   <!-- UNUSED string name="pref_mag_anomaly_summary">Helyi mágneses anomália kiegyenlítése</string -->
-  <string name="pref_azimuth_manual_title">Állítható kiterítési rendszer</string>
+  <string name="pref_azimuth_manual_title">Kiterítési rendszer</string>
   <string name="pref_azimuth_manual_summary">Állítható, vagy fix B/J kiterítési rendszer</string>
 
   <string name="pref_team_title">Csoport</string>
@@ -1363,8 +1363,8 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_station_names_title">Mérési pontok nevei</string>
   <string name="pref_station_names_summary">Mérési pontok elnevezésének típusai</string>
 
-  <string name="pref_hthr_title">Keresztszelvény vízszintes küszöbértéke</string>
-  <string name="pref_hthr_summary">Küszöbérték vízszintes keresztszelvényekhez </string>
+  <string name="pref_hthr_title">Metszet vízszintes küszöb</string>
+  <string name="pref_hthr_summary">Küszöbérték vízszintes keresztszelvényekhez</string>
   <string name="pref_bitmap_scale_title">PNG képek felbontása</string>
   <string name="pref_bitmap_scale_summary">Vázlatok PNG képének felbontása</string>
   <string name="pref_bitmap_bgcolor_title">PNG kép háttérszíne</string>
@@ -1389,7 +1389,7 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_recent_shot_summary">Az utolsó mérés kiemelése</string>
   <string name="pref_drawing_unit_title">Pont eszközök méretaránya</string>
   <string name="pref_drawing_unit_summary">Pont eszközök méretaránya</string>
-  <string name="pref_unscaled_points_title">Pont jelkulcsok nem nagyíthatóak</string>
+  <string name="pref_unscaled_points_title">Pont nagyítás</string>
   <string name="pref_unscaled_points_summary">A pont tipusú jelkulcs elemek nem nagyíthatóak</string>
   <string name="pref_segment_title">Vonal-pont távolság</string>
   <string name="pref_segment_message">Minimális távolság egy vonalon lévő pontok között</string>
@@ -1419,7 +1419,7 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_iter_summary">Iterációk maximális száma</string>
   <string name="pref_label_size_title">Címke méret</string>
   <string name="pref_label_size_summary">Címkék mérete</string>
-  <string name="pref_arrow_length_title">Keresztszelvény-jelölő mérete</string>
+  <string name="pref_arrow_length_title">Metszet-jelölő</string>
   <string name="pref_arrow_length_message">Keresztszelvény-jelölő mérete</string>
   <string name="pref_dot_radius_title">Zöld pontok mérete</string>
   <string name="pref_dot_radius_message">Zöld pontok mérete</string>
@@ -1451,8 +1451,8 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_checkBT_summary">Ellenőrzi a Bluetooth-t indításkor</string>
   <string name="pref_checkAttached_title">Poligon ellenőrzése</string>
   <string name="pref_checkAttached_summary">Ellenőrzi, hogy a mérési pontok kapcsolódnak-e egymáshoz</string>
-  <string name="pref_checkExtend_title">Alappont mérés kiterítés ellenőrzés</string>
-  <string name="pref_checkExtend_summary">Ellenőrizze, hogy a kiterítés be van-e állítva</string>
+  <string name="pref_checkExtend_title">Kiterítés ellenőrzés</string>
+  <string name="pref_checkExtend_summary">Ellenőrizze, hogy a kiterítés be van-e állítva a poligon méréseknél</string>
   <string name="pref_backup_number_title">Háttérmentésekszáma</string>
   <string name="pref_backup_number_summary">Automatikusan mentett vázlatok száma</string>
   <string name="pref_backup_interval_title">Háttérmentések intervalluma</string>
@@ -1518,7 +1518,7 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_unit_measure_summary">Vonalzó hosszúság mértékegysége</string>
   <!-- UNUSED string name="pref_recent_nr_title">Utoljára használt eszközök száma</string -->
   <!-- UNUSED string name="pref_recent_nr_summary">Utoljára használt eszközök száma az eszközválasztón</string -->
-  <string name="pref_area_border_title">Területhatár láthatósága</string>
+  <string name="pref_area_border_title">Területhatár</string>
   <string name="pref_area_border_summary">Területhatár alapértelmezett láthatósága</string>
   <string name="pref_auto_section_pt_title">Szelvény pontok</string>
   <string name="pref_auto_section_pt_summary">Szelvénypontok hozzáadása a szelvényvonalhoz</string>
