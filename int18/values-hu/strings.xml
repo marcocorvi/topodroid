@@ -1254,7 +1254,7 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_wait_shot_summary">Szünet mérés után [ms]</string>
   <string name="pref_wait_data_title">Adat szünet [ms]</string>
   <string name="pref_wait_data_summary">Szünet adatletöltés után [ms]</string>
-  <string name="pref_wait_conn_title">Szünet adatok készenléte után [ms]</string>
+  <string name="pref_wait_conn_title">Adat idő</string>
   <string name="pref_wait_conn_summary">Várakozás az adatok elkészültére [ms]</string>
   <string name="pref_conn_mode_title">Adatkapcsolat típusa</string>
   <string name="pref_conn_mode_summary">A DistoX-el való kapcsolat típusa adatletöltéshez</string>
@@ -1266,7 +1266,7 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_auto_pair_summary">Párosítás a talált műszerrel</string>
   <string name="pref_head_tail_title">Új adatok száma</string>
   <string name="pref_head_tail_summary">Adatok számának lekérdezése letöltés előtt</string>
-  <string name="pref_socket_delay_title">Kapcsolódási késleltetés</string>
+  <string name="pref_socket_delay_title">Késleltetés</string>
   <string name="pref_socket_delay_summary">Kapcsolódási késleltetés a párosításhoz [0.1 sec]</string>
   <string name="pref_z6_workaround_title">Áthidaló megoldás</string>
   <string name="pref_z6_workaround_summary">Áthidaló megoldás adatletöltéshez Z6-hoz</string>
@@ -1310,7 +1310,7 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_data_backup_summary">Automatkus adat export(alapértelmezett formátumra van szükség)</string>
   <string name="pref_editable_stations_title">Átírható pontszám</string>
   <string name="pref_editable_stations_summary">Módosíthatók a pont nevek a jegyzőkönyvben</string>
-  <string name="pref_zipped_symbols_title">Tömörített szimbólum fájl</string>
+  <string name="pref_zipped_symbols_title">Tömörített szimbólum</string>
   <string name="pref_zipped_symbols_summary">Szimbólum fájlok tárolása/beolvasása zip archívumokba/ból</string>
   <string name="pref_fixed_origin_title">Vázlat kezdőpont</string>
   <string name="pref_fixed_origin_summary">Rögzített vázlat kezdőpont</string>
@@ -1533,9 +1533,9 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_plot_walls_title">AUTOMATA Kontúr</string>
   <string name="pref_walls_type_title">Kontúr típusa</string>
   <string name="pref_walls_type_summary">Kontúr típusa</string>
-  <string name="pref_walls_plan_thr_title">Alaprajzi segédmérés szöge</string>
+  <string name="pref_walls_plan_thr_title">Alaprajzi sün szög</string>
   <string name="pref_walls_plan_thr_summary">Alaprajzi kontúrhoz felhasznált legnagyobb lejtszögű segédmérés [fok]</string>
-  <string name="pref_walls_extended_thr_title">Oldalnézeti segédmérés szöge</string>
+  <string name="pref_walls_extended_thr_title">Oldalnézeti süns szög</string>
   <string name="pref_walls_extended_thr_summary">Oldalnézet kontúrjához felhasznált legnagyobb lejtésszögű segédmérés [fok]</string>
   <string name="pref_walls_xclose_title">Felbontás</string>
   <string name="pref_walls_xclose_summary">Segédpontok maximális felbontása [m]</string>
