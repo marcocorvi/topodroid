@@ -1153,7 +1153,7 @@ Tap <b>Bezár</b> nem változtat.
 
   <string name="pref_therion_config_title">Therion config file</string>
   <string name="pref_therion_config_summary">Therion config file készítése</string>
-  <string name="pref_therion_maps_title">Először a therion térképek</string>
+  <string name="pref_therion_maps_title">Therion térképek elöl</string>
   <string name="pref_therion_maps_summary">Therion térképek a felmérési adatok előtt</string>
   <string name="pref_extra_buttons_title">>Engedélyezett funkciók</string>
   <string name="pref_extra_buttons_summary">Engedélyezett funkciók beállítása</string>
@@ -1184,7 +1184,7 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_triple_shot_summary">Hang visszajelzés a poligon mérés felismerésről</string>
   <string name="pref_connect_feedback_title">Kapcsolat visszajelzés</string>
   <string name="pref_connect_feedback_summary">Visszajelzés a műszer kapcsolatról</string>
-  <string name="pref_station_prefix_title">Pontnév előtag cSurvey programhoz</string>
+  <string name="pref_station_prefix_title">cSurvey Pontnév előtag</string>
   <string name="pref_station_prefix_summary">cSurvey pontnév előtagok exportálása</string>
   <string name="pref_compass_splays_title">Compass segédmérések</string>
   <string name="pref_compass_splays_summary">Segédmérések exportja a Compass fájlokba</string>
@@ -1200,7 +1200,7 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_lrud_vertical_summary">BJFL fel/le segédmérés lejtés minimum</string>
   <string name="pref_lrud_horizontal_title">BJ lejtés maximum</string>
   <string name="pref_lrud_horizontal_summary">BJFL bal/jobb segédmérés lejtés maximum</string>
-  <string name="pref_survex_eol_title">Survex/Topo sor végződés</string>
+  <string name="pref_survex_eol_title">Survex/Topo végződés</string>
   <string name="pref_survex_eol_summary">Survex/Topo sor végződés</string>
   <string name="pref_survex_splay_title">Survex segédpontok</string>
   <string name="pref_survex_splay_summary">Végpont megadása segéd-mérésekhez survex programban.</string>
@@ -1375,7 +1375,7 @@ Tap <b>Bezár</b> nem változtat.
   <!-- UNUSED string name="pref_dxf_scale_summary">DXF vázlat méretarányának értéke</string -->
   <string name="pref_dxf_blocks_title">Segédmérés végpontjai DXF-ben</string>
   <string name="pref_dxf_blocks_summary">Segédmérés végpontjai DXF-ben</string>
-  <string name="pref_shp_georef_title">Georeferált alaprajz vázlat export</string>
+  <string name="pref_shp_georef_title">Georeferált vázlat export</string>
   <string name="pref_shp_georef_summary">Alaprajz vázlat exportálása WGS84 long-lat rendszerbe</string>
   <string name="pref_thumbnail_title">Miniatűrök mérete</string>
   <string name="pref_thumbnail_summary">Fotó-miniatűrök mérete</string>
@@ -1481,8 +1481,8 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_loopClosure_summary">Hurokzárási hiba kiegyenlítése</string>
   <!-- UNUSED string name="pref_splayExtend_title">Estimate splay extend</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Estimate splay extend</string -->
-  <string name="pref_swapLR_title">Bal-Jobb cseréje a Compass-ban</string>
-  <string name="pref_swapLR_summary">Bal-Jobb cseréje a Compassba exportálásnál</string>
+  <string name="pref_swapLR_title">Bal-Jobb a Compass-ban</string>
+  <string name="pref_swapLR_summary">Bal-Jobb cseréje a Compass exportálásnál</string>
   <string name="pref_LRExtend_title">Bal és jobb kiterjedés</string>
   <string name="pref_LRExtend_summary">Bal/Jobb irányú kiterjedés becslése (Compass/VisualTopo import</string>
   <string name="pref_diving_mode_title">Búvár mód</string>
