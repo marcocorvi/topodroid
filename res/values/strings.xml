@@ -1561,7 +1561,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
   <string name="pref_log_debug" translatable="false">Debug</string>
   <string name="pref_log_err" translatable="false">Error</string>
-  <string name="pref_log_main" translatable="false">Main</string>
+  <string name="pref_log_main" translatable="false">Main window</string>
   <string name="pref_log_perm" translatable="false">Permissions</string>
   <string name="pref_log_prefs" translatable="false">Preferences</string>
   <string name="pref_log_input" translatable="false">User input</string>
@@ -1569,21 +1569,21 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_log_io" translatable="false">Sketch i/o</string>
   <string name="pref_log_bt" translatable="false">Bluetooth</string>
   <string name="pref_log_comm" translatable="false">BT communication</string>
-  <string name="pref_log_distox" translatable="false">DistoX</string>
-  <string name="pref_log_proto" translatable="false">DistoX protocol</string>
+  <string name="pref_log_distox" translatable="false">BT device</string>
+  <string name="pref_log_proto" translatable="false">BT protocol</string>
   <string name="pref_log_device" translatable="false">Device window</string>
   <string name="pref_log_calib" translatable="false">Calibration</string>
   <string name="pref_log_db" translatable="false">Database</string>
   <string name="pref_log_units" translatable="false">Units</string>
-  <string name="pref_log_data" translatable="false">Survey data</string>
-  <string name="pref_log_shot" translatable="false">Shots</string>
-  <string name="pref_log_name" translatable="false">Naming</string>
+  <string name="pref_log_data" translatable="false">Shot data</string>
+  <string name="pref_log_shot" translatable="false">Shot management</string>
+  <string name="pref_log_name" translatable="false">Station naming</string>
   <string name="pref_log_survey" translatable="false">Surveys</string>
-  <string name="pref_log_note" translatable="false">Notes</string>
-  <string name="pref_log_stats" translatable="false">Stats</string>
+  <string name="pref_log_note" translatable="false">Survey notes</string>
+  <string name="pref_log_stats" translatable="false">Statistics</string>
   <string name="pref_log_num" translatable="false">Data reduction</string>
-  <string name="pref_log_fixed" translatable="false">GPS points</string>
-  <string name="pref_log_loc" translatable="false">Location</string>
+  <string name="pref_log_fixed" translatable="false">Fixed points</string>
+  <string name="pref_log_loc" translatable="false">Geolocation</string>
   <string name="pref_log_photo" translatable="false">Photo</string>
   <string name="pref_log_sensor" translatable="false">Sensors</string>
   <string name="pref_log_plot" translatable="false">Sketches</string>

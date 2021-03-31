@@ -2,12 +2,57 @@
 
 <h4>TopoDroid LOGGING</h4>
 
-<div style="font-size=90%">
-Logging is important to solve problems when the program does not behave as expected. For example when the outcome of a computation does not agree with that obtained by other means, or a user input is not properly parsed. There are several log-flags to limit the logs to those necessary to find the cause of the problem. By default only "error" (i.e., when the program detects something that should not have happened) are logged.<br><p>
+Logging is important to solve problems when the program does not behave as expected. For example when the outcome of a computation does not agree with that obtained by other means, or a user input is not properly parsed.<br><p>
 
+Logging is controlled fron the "Log" menu of the main window.<br>
+The log messages can be sent either to <i>system</i> log-stream,
+or to a log file, which is save in the base TopoDroid folder. 
+The sytem log  can be inspacted from a PC via USB with programs such as "adb".
+The log file can be opened in "append-mode", with log messages appended to the existing logs, or
+"overwrite mode".<br><p>
+
+There are several log-flags to limit the logs to those necessary to find the cause of the problem. By default only "error" (i.e., when the program detects something that should not have happened) are logged.<br><p>
+
+<div style="font-size=90%">
 Logs [E] are different from software crashes. Crashes are due to the program misbehaving in the system, and are detected by the system, that ends the program. You should report crashes (and ANR) via Google Play so that a stack trace is attached and they can be fixed more easily.<br>
 
 Refer to TopoDroid website for how to have crashes and ANR reported.<br><p>
 </div>
+
+<b>Log flags</b><br>
+<ul>
+<li>Debug</li>
+<li>Error</li>
+<li>Main window</li>
+<li>Permissions</li>
+<li>Preferences</li>
+<li>User input</li>
+<li>File paths</li>
+<li>Sketch i/o</li>
+<li>Bluetooth</li>
+<li>BT communication</li>
+<li>BT device</li>
+<li>BT protocol</li>
+<li>Device window</li>
+<li>Calibration</li>
+<li>Database</li>
+<li>Units</li>
+<li>Shot data</li>
+<li>Shot management</li>
+<li>Station namings</li>
+<li>Survey note</li>
+<li>Statistics</li>
+<li>Data reduction</li>
+<li>Fixed points</li>
+<li>Geolocation</li>
+<li>Photo</li>
+<li>Sensors</li>
+<li>Sketches</li>
+<li>Bezier curves</li>
+<li>Therion import/export</li>
+<li>cSurvey export</li>
+<li>PocketTopo import</li>
+<li>ZIP archives</li>
+</ul>
 
 </body></html>
