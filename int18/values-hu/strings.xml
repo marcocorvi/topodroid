@@ -968,7 +968,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="export_stations">Mérési pontok</string>
     <string name="export_swap_lr">Bal/Jobb megcserélése</string>
     <string name="export_xvi">Xvi képek</string>
-    <!-- TODO string name="export_with_xsections">Include X-sections</string -->
+    <string name="export_with_xsections">Metszetekkel együtt</string>
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
     <!-- UNUSED string name="export_station_stroke">Station stroke</string -->
