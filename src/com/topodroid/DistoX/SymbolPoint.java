@@ -17,6 +17,8 @@ import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDColor;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.math.BezierCurve;
+import com.topodroid.math.Point2D;
 
 import android.util.Log;
 
@@ -440,6 +442,8 @@ class SymbolPoint extends Symbol
             mPath.cubicTo( x0*unit, y0*unit, x1*unit, y1*unit, x2*unit, y2*unit );
 	    pv4.format(Locale.US, "C %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f ", x00, y00, x0*dxfScale, y0*dxfScale, x1*dxfScale, y1*dxfScale, x2*dxfScale, y2*dxfScale );
 
+            /*
+            // cubicTo 3 Line segment
             DrawingDxf.printString( pw, 0, "LINE" );
             DrawingDxf.printString( pw, 8, pname );
             DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbLine" );
@@ -455,6 +459,46 @@ class SymbolPoint extends Symbol
             DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbLine" );
             DrawingDxf.printXYZ( pw, x1*dxfScale, -y1*dxfScale, 0.0f, 0 ); // prev point
             DrawingDxf.printXYZ( pw, x2*dxfScale, -y2*dxfScale, 0.0f, 1 ); // current point
+            */
+
+            // cubicTo 8 Polyline segment
+            DrawingDxf.printString( pw, 0, "POLYLINE" );
+            // handle = DrawingDxf.inc(handle);
+            DrawingDxf.printString( pw, 8, pname );
+            DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbLine" );
+            // DrawingDxf.printInt(  pw, 39, 1 ); // line thickness
+            // DrawingDxf.printInt(  pw, 40, 1 ); // start width
+            // DrawingDxf.printInt(  pw, 41, 1 ); // end width
+            DrawingDxf.printInt( pw, 66, 1 ); // group 1
+            DrawingDxf.printInt( pw, 70, 8 + 0 ); // polyline flag 8 = 3D polyline, 1 = closed 
+            DrawingDxf.printInt( pw, 75, 0 ); // 6 cubic spline, 5 quad spline, 0
+            DrawingDxf.printXYZ( pw, 0.0f, 0.0f, 0.0f, 0 ); // position
+            BezierCurve bc = new BezierCurve( x00, -y00, x0*dxfScale, -y0*dxfScale, x1*dxfScale, -y1*dxfScale, x2*dxfScale, -y2*dxfScale );
+            DrawingDxf.printString( pw, 0, "VERTEX" ); 
+            DrawingDxf.printString( pw, 8, pname ); // layer
+            DrawingDxf.printXYZ( pw, x00, -y00, 0.0f, 0 );
+            for ( int n=1; n < 8; ++n ) { //8 point
+              Point2D pb = bc.evaluate( (float)n / (float)8 );
+              // handle = DrawingDxf.printLinePoint( pw, scale, handle, pname, pb.x, pb.y );
+              DrawingDxf.printString( pw, 0, "VERTEX" );
+              DrawingDxf.printString( pw, 8, pname );
+              DrawingDxf.printXYZ( pw, pb.x, pb.y, 0.0f, 0 );
+            }
+            // handle = DrawingDxf.printLinePoint( pw, scale, handle, pname, x2*dxfScale, -y2*dxfScale );
+            DrawingDxf.printString( pw, 0, "VERTEX" );
+            DrawingDxf.printString( pw, 8, pname );
+            DrawingDxf.printXYZ( pw, x2*dxfScale, -y2*dxfScale, 0.0f, 0 ); 
+            // x0 = x3;
+            // y0 = y3;
+            //pw.printf("  0%sSEQEND%s", DrawingDxf.EOL, DrawingDxf.EOL );
+            DrawingDxf.printString( pw, 0, "SEQEND" );
+            /*
+            if ( TDSetting.mAcadVersion >= 13 ) {
+                handle = DrawingDxf.inc(handle);
+                DrawingDxf.printHex( pw, 5, handle );
+            }
+            */
+            // Polyline end
 
             x00 /= dxfScale;
             y00 /= dxfScale;

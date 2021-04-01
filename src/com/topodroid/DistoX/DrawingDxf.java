@@ -162,7 +162,8 @@ class DrawingDxf
     out.write( SPACE + code + EOL + val + EOL );
   }
 
-  static private void printInt(  PrintWriter pw, int code, int val )
+  // used by SymbolPoint
+  static void printInt(  PrintWriter pw, int code, int val )
   {
     pw.printf( "  %d%s%d%s", code, EOL, val, EOL );
   }
