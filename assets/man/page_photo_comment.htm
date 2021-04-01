@@ -21,7 +21,17 @@ This is a simple implementation of a camera.
 Its unique feature is that it stores the azimuth and inclination of the device in exif tags in the image file. 
 The azimuth is stored as GPS_LONGITUDE and the inclination as GPS_LATITUDE (with sign).
 <br>
-The date/time is also stored in the exif tags.
+The following exif tags are set by TopoDroid:
+<ul>
+<li><i>Software</i>: "TopoDroid" and its version, separated by a space</li>
+<li><i>Orientation</i>:</li>
+<li><i>Datatime</i>: timestamp</li>
+<li><i>GPS latitude</i>: inclination</li>
+<li><i>GPS latitude ref</i>: "N"</li>
+<li><i>GPS longitude</i>: azimuth</li>
+<li><i>GPS longitude ref</i>: "E"</li>
+<li><i>Image description</i>: azimuth and inclination in 1/100&deg;, separaated by a space</li>
+</ul>
 <br><p>
 
 The camera has three buttons on the lower right.

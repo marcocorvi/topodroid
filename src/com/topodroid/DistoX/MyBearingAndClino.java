@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDVersion;
 
 // import android.util.Log;
 
@@ -72,17 +73,6 @@ public class MyBearingAndClino implements IBearingAndClino
       return false;
     }
     setExifBearingAndClino( mFile, mBearing, mClino, mOrientation );
-    // ExifInterface exif = new ExifInterface( mFile.getPath() );
-    // String.format(Locale.US, "%.2f %.2f", mBearing, mClino );
-    // // Log.v("DistoX", "save. orientation " + mOrientation );
-    // int rot = getExifOrientation( mOrientation );
-    // exif.setAttribute( ExifInterface.TAG_ORIENTATION, String.format(Locale.US, "%d", rot) );
-    // exif.setAttribute( ExifInterface.TAG_DATETIME, TDUtil.currentDateTime() );
-    // exif.setAttribute( ExifInterface.TAG_GPS_LATITUDE, String.format(Locale.US, "%d/100", (int)(mClino*100) ) );
-    // exif.setAttribute( ExifInterface.TAG_GPS_LATITUDE_REF, "N" );
-    // exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE, String.format(Locale.US, "%d/100", (int)(mBearing*100) ) );
-    // exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE_REF, "E" );
-    // exif.saveAttributes();
     return true;
   }
 
@@ -93,6 +83,7 @@ public class MyBearingAndClino implements IBearingAndClino
       ExifInterface exif = new ExifInterface( file.getPath() );
       // String.format(Locale.US, "%.2f %.2f", b, c );
       int rot = getExifOrientation( o );
+      exif.setAttribute( ExifInterface.TAG_SOFTWARE, "TopoDroid " + TDVersion.string() );
       exif.setAttribute( ExifInterface.TAG_ORIENTATION, String.format(Locale.US, "%d", rot) );
       exif.setAttribute( ExifInterface.TAG_DATETIME, TDUtil.currentDateTime() );
       exif.setAttribute( ExifInterface.TAG_GPS_LATITUDE, String.format(Locale.US, "%d/100", (int)(c*100) ) );
@@ -100,7 +91,7 @@ public class MyBearingAndClino implements IBearingAndClino
       exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE, String.format(Locale.US, "%d/100", (int)(b*100) ) );
       exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE_REF, "E" );
       // FIXME-GPS_LATITUDE work-around for tag GPS Latitude not supported correctly
-      exif.setAttribute( "UserComment", String.format(Locale.US, "%d %d", (int)(b*100), (int)(c*100) ) );
+      exif.setAttribute( ExifInterface.TAG_IMAGE_DESCRIPTION, String.format(Locale.US, "%d %d", (int)(b*100), (int)(c*100) ) );
       exif.saveAttributes();
     } catch ( IOException e ) {
       TDLog.Error( "IO exception " + e.getMessage() );
