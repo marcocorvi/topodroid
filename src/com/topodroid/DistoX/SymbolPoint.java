@@ -442,26 +442,7 @@ class SymbolPoint extends Symbol
             mPath.cubicTo( x0*unit, y0*unit, x1*unit, y1*unit, x2*unit, y2*unit );
 	    pv4.format(Locale.US, "C %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f ", x00, y00, x0*dxfScale, y0*dxfScale, x1*dxfScale, y1*dxfScale, x2*dxfScale, y2*dxfScale );
 
-            /*
-            // cubicTo 3 Line segment
-            DrawingDxf.printString( pw, 0, "LINE" );
-            DrawingDxf.printString( pw, 8, pname );
-            DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbLine" );
-            DrawingDxf.printXYZ( pw, x00, -y00, 0.0f, 0 ); // prev point
-            DrawingDxf.printXYZ( pw, x0*dxfScale, -y0*dxfScale, 0.0f, 1 ); // current point
-            DrawingDxf.printString( pw, 0, "LINE" );
-            DrawingDxf.printString( pw, 8, pname );
-            DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbLine" );
-            DrawingDxf.printXYZ( pw, x0*dxfScale, -y0*dxfScale, 0.0f, 0 ); // prev point
-            DrawingDxf.printXYZ( pw, x1*dxfScale, -y1*dxfScale, 0.0f, 1 ); // current point
-            DrawingDxf.printString( pw, 0, "LINE" );
-            DrawingDxf.printString( pw, 8, pname );
-            DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbLine" );
-            DrawingDxf.printXYZ( pw, x1*dxfScale, -y1*dxfScale, 0.0f, 0 ); // prev point
-            DrawingDxf.printXYZ( pw, x2*dxfScale, -y2*dxfScale, 0.0f, 1 ); // current point
-            */
-
-            // cubicTo 8 Polyline segment
+            // cubic to 8-segment polyline
             DrawingDxf.printString( pw, 0, "POLYLINE" );
             // handle = DrawingDxf.inc(handle);
             DrawingDxf.printString( pw, 8, pname );
@@ -498,184 +479,15 @@ class SymbolPoint extends Symbol
                 DrawingDxf.printHex( pw, 5, handle );
             }
             */
-            // Polyline end
 
-            x00 /= dxfScale;
-            y00 /= dxfScale;
+            // x00 /= dxfScale; // not needed
+            // y00 /= dxfScale;
 
-            /*
-            float xm = (x00 + x2)/2;
-            float ym = (y00 + y2)/2;
-            float dx = x2 - x00;
-            float dy = y2 - y00;
-            float lhs = (x0-xm)*(x0-xm) + (y0-ym)*(y0-ym) + (x1-xm)*(x1-xm) + (y1-ym)*(y1-ym)
-                      - (x00-xm)*(x00-xm) - (y00-ym)*(y00-ym) - (x2-xm)*(x2-xm) + (y2-ym)*(y2-ym);
-            float rhs = dy * (x00-xm) - dx * (y00-ym) + dy * (x2-xm) - dx * (y2-ym)
-                      - dy * (x0-xm) + dx * (y0-ym) - dy * (x1-xm) + dx * (y1-ym);
-            float t = lhs/(2*rhs);
-            float cx = xm + dy * t;
-            float cy = ym - dx * t;
-            float a1 = (float)Math.atan2( -y2 + cy, x2 - cx );
-            float a2 = (float)Math.atan2( -y00 + cy, x00 - cx );
-            float r  = (float)Math.sqrt( (x2-cx)*(x2-cx) + (y2-cy)*(y2-cy) );
-            // counterclockwise from P2 to P00
-            //           cx*dxfScale, -cy*dxfScale, 0.0f,        // CENTER
-            //           r*dxfScale, 0.0, 0.0f,                  // ENDPOINT OF MAJOR AXIS - CENTER
-            //           e,                                      // RATIO MINOR/MAJOR
-            //           a1, a2 );                               // START and END ANGLES [rad]
-            DrawingDxf.printString( pw, 0, "ARC" );
-            DrawingDxf.printString( pw, 8, pname );
-            DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbCircle" );
-            DrawingDxf.printXYZ( pw, cx*dxfScale, -cy*dxfScale, 0.0f, 0 );
-            DrawingDxf.printFloat( pw, 40, r*dxfScale );
-            DrawingDxf.printString( pw, 100, "AcDbArc" );
-            DrawingDxf.printFloat( pw, 50, a1 * TDMath.RAD2DEG );
-            DrawingDxf.printFloat( pw, 51, a2 * TDMath.RAD2DEG );
-            */ 
-
-            /*
-            float dx = TDMath.abs( x00 - x2 );
-            float dy = TDMath.abs( y00 - y2 );
-
-            float a1 = 0.0f;
-            float a2 = 0.0f;
-            // float zz = 1.0f;
-            float cx = 0.0f;
-            float cy = 0.0f;
-            float r = TDMath.abs( x00-x2 );
-            float e = TDMath.abs( r /(y00-y2) );
-
-            if ( x00 > x2 ) {
-              if ( y00 > y2 ) {
-                if ( Math.abs(x1-x00) > Math.abs(y1-y00) ) { // clockwise
-                  cx = x00;
-                  cy = y2;
-                  a1 = TDMath.M_PI;
-                  a2 = 3 * TDMath.M_PI2;
-                } else { // counter-clockwise
-                  cx = x2;
-                  cy = y00;
-                  a1 = 0.0f;
-                  a2 = TDMath.M_PI2;
-                }
-              } else if ( y00 < y2 ) {
-                if ( Math.abs(x1-x00) > Math.abs(y1-y00) ) { // counter-clockwise
-                  cx = x00;
-                  cy = y2;
-                  a1 = TDMath.M_PI2;
-                  a2 = TDMath.M_PI;
-                } else {
-                  cx = x2;
-                  cy = y00;
-                  a1 = 3 * TDMath.M_PI2;
-                  a2 = 2 * TDMath.M_PI;
-                }
-              } else { // y00 == y2 : semicircle
-                cx = ( x00 + x2 ) /2;
-                cy = y00;
-                r /= 2;
-                e = 1.0f;
-                if ( y1 > y00 ) { // down
-                  a1 = TDMath.M_PI;
-                } else {
-                  a1 = 0.0f;
-                }
-                a2 = a1 + TDMath.M_PI;
-              }
-            } else if ( x00 < x2 ) {
-              if ( y00 > y2 ) {
-                if ( Math.abs(x1-x00) > Math.abs(y1-y00) ) { // counter-clockwise
-                  cx = x00;
-                  cy = y2;
-                  a1 = 3 * TDMath.M_PI2;
-                  a2 = 2 * TDMath.M_PI;
-                } else {
-                  cx = x2;
-                  cy = y00;                   
-                  a1 = TDMath.M_PI2;
-                  a2 = TDMath.M_PI;
-                }
-              } else if ( y00 < y2 ) {
-                if ( Math.abs(x1-x00) > Math.abs(y1-y00) ) { // counter-clockwise
-                  cx = x00;
-                  cy = y2;
-                  a1 = 0.0f;
-                  a2 = TDMath.M_PI2;
-                } else {
-                  cx = x2;
-                  cy = y00;
-                  a1 = TDMath.M_PI;
-                  a2 = 3 * TDMath.M_PI2;
-                }
-              } else { // y00 == y2 : semicircle
-                cx = ( x00 + x2 ) / 2;
-                cy = y00;
-                r /= 2;
-                e = 1.0f;
-                if ( y1 > y00 ) { // down
-                  a1 = TDMath.M_PI;
-                } else {
-                  a1 = 0.0f;
-                }
-                a2 = a1 + TDMath.M_PI;
-              }
-            } else { // x00 == x2 : semicircle
-              cx = x00;
-              cy = ( y00 + y2 ) / 2;
-              r = TDMath.abs( y00-y2 ) / 2;
-              e = 1.0f;
-              if ( y00 > y2 ) {
-                if ( x1 < x00 ) { // left
-                  a1 = TDMath.M_PI2;
-                } else {
-                  a1 = 3 * TDMath.M_PI2;
-                }
-              } else {
-                if ( x1 < x00 ) {
-                  a1 = 3 * TDMath.M_PI2;
-                } else {
-                  a1 = TDMath.M_PI2;
-                }
-              }
-              a2 = a1 + TDMath.M_PI;
-            }
-
-            // Log.v(TopoDroidApp.TAG, mName + " cubic " + x00 + " " + y00 + " " + x0 + " " + y0 + " " + x1 + " " + y1 + " " + x2 + " " + y2 );
-            // Log.v(TopoDroidApp.TAG, mName + " " + cx + " " + cy + " R " + r + " E " + e + " angles " + a1 + " " + a2 );
-
-            // DrawingDxf.printString( pw, 0, "ELLIPSE" );
-            // DrawingDxf.printString( pw, 8, pname );
-            // DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbEllipse" );
-            // pw.printf(Locale.US,
-            //           "  10\n%.2f\n  20\n%.2f\n  30\n%.2f\n  11\n%.2f\n  21\n%.2f\n  31\n%.2f\n  40\n%.2f\n  41\n%.2f\n  42\n%.2f\n",
-            //           cx*dxfScale, -cy*dxfScale, 0.0f,        // CENTER
-            //           r*dxfScale, 0.0, 0.0f,                  // ENDPOINT OF MAJOR AXIS - CENTER
-            //           e,                                      // RATIO MINOR/MAJOR
-            //           a1, a2 );                               // START and END ANGLES [rad]
-            DrawingDxf.printString( pw, 0, "ARC" );
-            DrawingDxf.printString( pw, 8, pname );
-            DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbCircle" );
-            DrawingDxf.printXYZ( pw, cx*dxfScale, -cy*dxfScale, 0.0f, 0 );
-            DrawingDxf.printFloat( pw, 40, r*dxfScale );
-            DrawingDxf.printString( pw, 100, "AcDbArc" );
-            DrawingDxf.printFloat( pw, 50, a1 * TDMath.RAD2DEG );
-            DrawingDxf.printFloat( pw, 51, a2 * TDMath.RAD2DEG );
-            */
-    
             x00 = x2 * dxfScale;
             y00 = y2 * dxfScale;
 
             pv1.format(Locale.US, "C %.2f %.2f %.2f %.2f %.2f %.2f ",
                x0*csxdxfScale, y0*csxdxfScale, x1*csxdxfScale, y1*csxdxfScale, x2*csxdxfScale, y2*csxdxfScale );
-          
-            // FIXME
-            // DrawingDxf.printString( pw, 0, "LINE" );
-            // DrawingDxf.printString( pw, 8, pname );
-            // DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbLine" );
-            // DrawingDxf.printXYZ( pw, x00, -y00, 0.0f, 0 );
-            // x00 = x2 * dxfScale;
-            // y00 = y2 * dxfScale;
-            // DrawingDxf.printXYZ( pw, x00, -y00, 0.0f, 1 );
           }
         } catch ( NumberFormatException e ) {
           TDLog.Error( path + " parse cubicTo error" );

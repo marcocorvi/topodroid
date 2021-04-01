@@ -8,7 +8,7 @@ name-fr pente_abrupte
 name-ro pantă_medie
 name-de Mittlere_Steigung
 name-hu közepes_lejtő
-th_name slope:sheer
+th_name slope_sheer
 group slope
 color 0x997a00 0xff
 effect
