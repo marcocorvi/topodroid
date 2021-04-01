@@ -959,6 +959,7 @@ Tap "Close" not to take any action.
     <string name="export_stations">测量点</string>
     <string name="export_swap_lr">左右交换 L/R</string>
     <string name="export_xvi">Xvi 图像</string>
+    <!-- TODO string name="export_with_xsections">Include X-sections</string -->
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
     <!-- UNUSED string name="export_station_stroke">Station stroke</string -->

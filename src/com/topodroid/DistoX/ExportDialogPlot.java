@@ -202,6 +202,7 @@ public class ExportDialogPlot extends MyDialog
       case 2: // DXF
         {
           // TDSetting.mDxfBlocks = ((CheckBox) findViewById( R.id.dxf_blocks )).isChecked();
+          TDSetting.mAutoXSections = ((CheckBox) findViewById( R.id.dxf_xsections )).isChecked();
           // TDSetting.mAcadVersion
           if ( ((RadioButton) findViewById( R.id.acad_12 )).isChecked() ) {
             TDSetting.mAcadVersion = 13;
@@ -214,10 +215,11 @@ public class ExportDialogPlot extends MyDialog
         break;
       case 3: // SVG
         {
-          TDSetting.mSvgRoundTrip = ((CheckBox) findViewById( R.id.svg_roundtrip )).isChecked();
-          TDSetting.mSvgGrid      = ((CheckBox) findViewById( R.id.svg_grid )).isChecked();
+          TDSetting.mSvgRoundTrip  = ((CheckBox) findViewById( R.id.svg_roundtrip )).isChecked();
+          TDSetting.mSvgGrid       = ((CheckBox) findViewById( R.id.svg_grid )).isChecked();
           TDSetting.mSvgLineDirection   = ((CheckBox) findViewById( R.id.svg_linedir )).isChecked();
-          TDSetting.mSvgSplays    = ((CheckBox) findViewById( R.id.svg_splays )).isChecked();
+          TDSetting.mSvgSplays     = ((CheckBox) findViewById( R.id.svg_splays )).isChecked();
+          TDSetting.mAutoXSections = ((CheckBox) findViewById( R.id.svg_xsections )).isChecked();
         }
         break;
       case 4: // Shapefile
@@ -249,12 +251,14 @@ public class ExportDialogPlot extends MyDialog
     ((CheckBox) findViewById( R.id.csurvey_prefix )).setChecked( TDSetting.mExportStationsPrefix );
     
     // ((CheckBox) findViewById( R.id.dxf_blocks )).setChecked( TDSetting.mDxfBlocks );
+    ((CheckBox) findViewById( R.id.dxf_xsections )).setChecked( TDSetting.mAutoXSections );
     // TDSetting.mAcadVersion
     
     ((CheckBox) findViewById( R.id.svg_roundtrip )).setChecked( TDSetting.mSvgRoundTrip );
     ((CheckBox) findViewById( R.id.svg_grid )).setChecked( TDSetting.mSvgGrid );
     ((CheckBox) findViewById( R.id.svg_linedir )).setChecked( TDSetting.mSvgLineDirection );
     ((CheckBox) findViewById( R.id.svg_splays )).setChecked( TDSetting.mSvgSplays );
+    ((CheckBox) findViewById( R.id.svg_xsections )).setChecked( TDSetting.mAutoXSections );
     
     ((CheckBox) findViewById( R.id.shp_georeference )).setChecked( TDSetting.mShpGeoref );
 

@@ -944,6 +944,7 @@ Tap "Close" not to take any action.
     <!-- TODO string name="export_stations">Stations</string -->
     <!-- TODO string name="export_swap_lr">Swap L/R</string -->
     <!-- TODO string name="export_xvi">Xvi images</string -->
+    <!-- TODO string name="export_with_xsections">Include X-sections</string -->
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
     <!-- UNUSED string name="export_station_stroke">Station stroke</string -->

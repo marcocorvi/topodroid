@@ -966,6 +966,7 @@ Tap "Close" not to take any action.
     <string name="export_stations">Staničenia</string>
     <string name="export_swap_lr">Vymeniť L/R</string>
     <string name="export_xvi">Xvi obrázky</string>
+    <!-- TODO string name="export_with_xsections">Include X-sections</string -->
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
     <!-- UNUSED string name="export_station_stroke">Station stroke</string -->
