@@ -1002,7 +1002,7 @@ public class TopoDroidApp extends Application
       BufferedReader br = new BufferedReader( fr );
       // first line is version
       line = br.readLine().trim();
-      ret = TDVersion.check( line );
+      ret = checkVersionLine( line );
       if ( ret < 0 ) return ret;
 
       line = br.readLine().trim();
@@ -1032,6 +1032,80 @@ public class TopoDroidApp extends Application
     return ret;
   }
 
+  private static int checkVersionLine( String version_line )
+  {
+    int ret = 0;
+    int version_code = 0;
+    String[] vers = version_line.split(" ");
+    for ( int k=1; k<vers.length; ++ k ) {
+      if ( vers[k].length() > 0 ) {
+        try {
+          version_code = Integer.parseInt( vers[k] );
+          break;
+        } catch ( NumberFormatException e ) { }
+      }
+    }
+    if ( version_code == 0 ) {
+      String[] ver = vers[0].split("\\.");
+      int major = 0;
+      int minor = 0;
+      int sub   = 0;
+      char vch  = ' '; // char order: ' ' < A < B < ... < a < b < ... < '}' 
+      if ( ver.length > 2 ) { // M.m.sv version code
+        try {
+          major = Integer.parseInt( ver[0] );
+          minor = Integer.parseInt( ver[1] );
+        } catch ( NumberFormatException e ) {
+          TDLog.Error( "parse error: major/minor " + ver[0] + " " + ver[1] );
+          return -2;
+        }
+        int k = 0;
+        while ( k < ver[2].length() ) {
+          char ch = ver[2].charAt(k);
+          if ( ch < '0' || ch > '9' ) { vch = ch; break; }
+          sub = 10 * sub + (int)(ch - '0');
+          ++k;
+        }
+        // Log.v( "DistoX", "Version " + major + " " + minor + " " + sub );
+        if (    ( major <  TDVersion.MAJOR_MIN )
+             || ( major == TDVersion.MAJOR_MIN && minor < TDVersion.MINOR_MIN )
+             || ( major == TDVersion.MAJOR_MIN && minor == TDVersion.MINOR_MIN && sub < TDVersion.SUB_MIN ) 
+          ) {
+          TDLog.Log( TDLog.LOG_ZIP, "TopoDroid version mismatch: " + version_line + " < " + TDVersion.MAJOR_MIN + "." + TDVersion.MINOR_MIN + "." + TDVersion.SUB_MIN );
+          return -2;
+        }
+        if (    ( major > TDVersion.MAJOR ) 
+             || ( major == TDVersion.MAJOR && minor > TDVersion.MINOR )
+             || ( major == TDVersion.MAJOR && minor == TDVersion.MINOR && sub > TDVersion.SUB ) ) {
+          ret = 1; 
+        } else if ( major == TDVersion.MAJOR && minor == TDVersion.MINOR && sub == TDVersion.SUB && vch > ' ' ) {
+          if ( TDVersion.VCH == ' ' ) { 
+            ret = 1;
+          } else if ( TDVersion.VCH <= 'Z' && ( vch >= 'a' || vch < TDVersion.VCH ) ) { // a-z or vch(A-Z) < VCH
+            ret = 1;
+          } else if ( TDVersion.VCH >= 'a' && vch < TDVersion.VCH ) { // A-Z < a-z 
+            ret = 1;
+          }
+        }
+
+      } else { // version code
+        try {
+          version_code = Integer.parseInt( ver[0] );
+          if ( version_code < TDVersion.CODE_MIN ) {
+            TDLog.Log( TDLog.LOG_ZIP, "TopoDroid version mismatch: " + version_line + " < " + TDVersion.CODE_MIN );
+            return -2;
+          }
+        } catch ( NumberFormatException e ) {
+          TDLog.Error( "parse error: version code " + ver[0] );
+          return -2;
+        }
+        if ( version_code > TDVersion.VERSION_CODE ) ret = 1;
+      }
+    } else {
+      if ( version_code > TDVersion.VERSION_CODE ) ret = 1;
+    }
+    return ret;
+  }
 
   // ----------------------------------------------------------
   // SURVEY AND CALIBRATION
