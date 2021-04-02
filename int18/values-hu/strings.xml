@@ -842,7 +842,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="help_continue">Vonal folytatása</string>
     <!-- UNUSED string name="help_contour">Körvonal szerkesztése</string -->
     <string name="help_current_station">Elmentett mérési pontok</string>
-    <string name="help_azimuth">Hivatkozás bővítése</string>
+    <string name="help_azimuth">Kiterítési irány</string>
     <string name="help_refresh">Képernyő frissítés</string>
     <string name="help_device">Műszer funkciók</string>
     <string name="help_add_topodroid">Új felmérés/kalibráció létrehozása</string>
