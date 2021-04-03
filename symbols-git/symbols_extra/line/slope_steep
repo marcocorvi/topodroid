@@ -7,7 +7,7 @@ name-ru склон_крутой
 name-ro pantă_abruptă
 name-de Steile_Steigung
 name-hu meredek_lejtő
-th_name slope_steep
+th_name u:slope_steep
 group slope
 color 0xffe066 0xff
 effect
