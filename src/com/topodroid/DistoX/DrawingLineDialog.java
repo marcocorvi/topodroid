@@ -143,7 +143,8 @@ class DrawingLineDialog extends MyDialog
     mBtnReduce = new MyStateBox( mContext, R.drawable.iz_reduce_no,  R.drawable.iz_reduce_ok, R.drawable.iz_reduce_ok2 );
     mBtnClose  = new MyCheckBox( mContext, size, R.drawable.iz_close_ok, R.drawable.iz_close_no );
     mReversed.setChecked( mLine.isReversed() );
-    mBtnClose.setChecked( mLine.isPathClosed() );
+    // mBtnClose.setChecked( mLine.isPathClosed() );
+    mBtnClose.setChecked( mLine.isClosed() );
 
     LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 0, 10, 20, 10 );
 
@@ -272,15 +273,7 @@ class DrawingLineDialog extends MyDialog
         mParent.rockLine( mLine );
       }
 
-      if ( mBtnClose.isChecked() ) {
-        mParent.closeLine( mLine );
-        mLine.setClosed( true );
-      } else {
-        LinePoint last = mLine.last();
-        if ( mLine.setClosed( false ) ) {
-          mParent.removeLinePointFromSelection( mLine, last );
-        }
-      }
+      mLine.setClosed( mBtnClose.isChecked() );
 
       if ( TDSetting.mWithLevels  > 0 ) setLevel();
  

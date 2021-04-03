@@ -3095,7 +3095,6 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-
   // @param xs_id      section-line id 
   // @param scrap_name xsection scrap_name = survey_name + "-" + xsection_id
   void deleteLine( DrawingLinePath line ) 
