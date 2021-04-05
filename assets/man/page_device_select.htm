@@ -17,7 +17,7 @@ The data can be downloaded continuously (<i>continuous</i> mode) or in batch (<i
 The difference between the two modes is that the <i>continuous</i> mode remains active when the data download
 is finished, or the connection with the device is lost, while the <i>on-demand</i> mode is closed. <br><p>
 
-SAP5 and BRIC download the data only in continuous mode.<br><p>
+SAP5 and BRIC4 download the data only in continuous mode.<br><p>
 
 With DistoX's TopoDroid can work with more than one device at once, although 
 the data are still downloaded from only one device at a tine.<br>
@@ -52,25 +52,24 @@ The calibration of the SAP5 is done by the device and does not require an extern
 
 TopoDroid supports the BRIC version 4.<br>
 The device must have been previously "paired" with Android, using the <i>Settings</i> app.<br>
-Afterward the BRIC is listed among the known devices in the <i>Device Window</i>.
-It appears as "BRIC code MAC-address", where the code is the four-digit code of the BRIC, for example "0039".<br>
-To select the BRIC as current device tap on the its entry in the list.<br><p> 
+Afterward the BRIC4 is listed among the known devices in the <i>Device Window</i>.
+It appears as "BRIC4 code MAC-address", where the code is the four-digit code of the BRIC4, for example "0039".<br>
+To select the BRIC4 as current device tap on the its entry in the list.<br><p> 
 
-Once connected to a client, the BRIC remembers the connection, even if turned off, therefore it stays
+Once connected to a client, the BRIC4 remembers the connection, even if turned off, therefore it stays
 "always connected".<br>
 When TopoDroid is connected, shot readings are immediately transferred to the app.
 If TopoDroid is not connected, the data are kept in memory, and transferred to the app when it is
 next connected.<br><p>
 
 The BRIC4 data transmission protocol includes acknowledgment by Android,
-but it does <u>not</u> include acknowledgment of the reception of the datai by the app. 
-Therefore
-<ul>
-<li>upon reconnection the BRIC4 sends all the data in a burst and it is possible that the very first data
-are acknowledged by Android, but are <u>not delivered</u> to the app.</li>
-</ul><br><p> 
+but it does <u>not</u> include acknowledgment of the reception of the data by the app. 
+The protocol has a few seconds delay between the connection and the first data transfer, 
+and TopoDroid has a one-second delay after the last data, for closing the connection.
+By this means usually no shot is lost, although there is <u>no guarantee</u>.
+<br><p> 
 
-The BRIC stores the data in internal memory in CSV files. If connected to a PC via USB, the device
+The BRIC4 stores the data in internal memory in CSV files. If connected to a PC via USB, the device
 appears as external memory and the CSV files can be copied to the PC.<br><p>
 
 The calibration of the BRIC4 is done by the device and does not require an external program.<br><p> 
@@ -80,8 +79,11 @@ shots. The BRIC4 has also a "scan mode" in which readings are taken continuosly,
 
 TopoDroid can follow two different data protocols (accprding to a setting in the "custom" set).
 Receive only the primary data (distance, azimuth and clino), or receive the complete data.
-The former do not include the BRIC data ID number, and TopoDroid assign an incremental ID to the shots.
-The complete data include the BRIC ID number and TopoDroid uses it as ID in its database.
+The former do not include the BRIC4 data ID number, and TopoDroid assign an incremental ID to the shots.
+The complete data include the BRIC4 ID number and TopoDroid uses it as ID in its database.
+<br><p>
+
+When the complete data are received TopoDroid records the BRIC4 error codes and values in the shot comment.
 <br><p>
 
 

@@ -39,8 +39,8 @@ public class BricMemoryDialog extends MyDialog
   private EditText et_minute;
   private EditText et_second;
   // private EditText et_centisecond;
-  private TextView tv_minute;
-  private TextView tv_second;
+  private TextView tv_minute = null;
+  private TextView tv_second = null;
 
   int current_year;
   int current_month;
@@ -49,11 +49,25 @@ public class BricMemoryDialog extends MyDialog
   int current_minute;
   int current_second;
 
+
   public BricMemoryDialog( Context ctx, DeviceActivity parent, Resources res )
   {
     super( ctx, R.string.BricMemoryDialog );
+    // Log.v("DistoX", "Bric Memory Dialog cstr");
     mParent = parent;
     mRes    = res;
+  }
+
+  public void updateMMSS()
+  {
+    mParent.runOnUiThread( new Runnable(){
+      public void run() {
+        String[] mmss = TDUtil.currentMinuteSecond().split(":");
+        // Log.v("DistoX", "timer tick " + mmss[0] + ":" + mmss[1] );
+        if ( tv_minute != null ) tv_minute.setText( mmss[0] );
+        if ( tv_second != null ) tv_second.setText( mmss[1] );
+      }
+    } );
   }
 
   @Override
@@ -73,31 +87,31 @@ public class BricMemoryDialog extends MyDialog
     tv_minute = (TextView) findViewById( R.id.time_minute );
     tv_second = (TextView) findViewById( R.id.time_second );
 
-    mTask = new TimerTask() {
-      @Override public void run() {
-        String[] mmss = TDUtil.currentMinuteSecond().split(":");
-        tv_minute.setText( mmss[0] );
-        tv_second.setText( mmss[1] );
-      }
-    };
-    mTimer = new Timer();
-    mTimer.schedule( mTask, 100, 500 );
-
     String[] time = TDUtil.currentDateTimeBric().split(" ");
     for ( int k=1; k<6; ++k ) { // make it pretty
       if ( time[k].charAt(0) == '0' ) time[k] = time[k].replaceFirst("0", " ");
     }
-    et_year   .setText( time[0] ); current_year   = getInt( time[0], 0, 4000 );
-    et_month  .setText( time[1] ); current_month  = getInt( time[1], 1, 12 );
-    et_day    .setText( time[2] ); current_day    = getInt( time[2], 1, 31 );
-    et_hour   .setText( time[3] ); current_hour   = getInt( time[3], 0, 23 );
-    et_minute .setText( time[4] ); current_minute = getInt( time[4], 0, 59 );
-    et_second .setText( time[5] ); current_second = getInt( time[5], 0, 59 );
+    et_year  .setText( time[0] ); current_year   = getInt( time[0], 0, 4000 );
+    et_month .setText( time[1] ); current_month  = getInt( time[1], 1, 12 );
+    et_day   .setText( time[2] ); current_day    = getInt( time[2], 1, 31 );
+    et_hour  .setText( time[3] ); current_hour   = getInt( time[3], 0, 23 );
+    et_minute.setText( time[4] ); current_minute = getInt( time[4], 0, 59 );
+    et_second.setText( time[5] ); current_second = getInt( time[5], 0, 59 );
+    tv_minute.setText( time[4] );
+    tv_second.setText( time[5] );
     
     ((Button)findViewById( R.id.button_reset )).setOnClickListener( this );
     ((Button)findViewById( R.id.button_clear )).setOnClickListener( this );
     ((Button)findViewById( R.id.button_cancel )).setOnClickListener( this );
-    // Log.v("DistoX", "Bric info dialog created");
+
+    mTask = new TimerTask() {
+      @Override public void run() {
+        updateMMSS();
+      }
+    };
+    mTimer = new Timer();
+    mTimer.schedule( mTask, 1100, 1000 );
+    // Log.v("DistoX", "Bric memory dialog created");
   }
 
   private int getText( EditText et, int min, int max )
@@ -115,7 +129,7 @@ public class BricMemoryDialog extends MyDialog
       if ( v > max ) return max;
       return v;
     } catch ( NumberFormatException e ) {
-      Log.v("DistoX", "parser Number Format Error <" + s + "> " );
+      Log.e("DistoX", "parser Number Format Error <" + s + "> " );
     }
     return min;
   }
