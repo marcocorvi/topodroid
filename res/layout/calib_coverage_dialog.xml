@@ -80,6 +80,11 @@
       android:layout_marginRight="@dimen/marginh"
       android:text="@string/button_evalm"
     />
+    <Button android:id="@+id/coverage_roll"
+      style="@style/button_default"
+      android:layout_marginRight="@dimen/marginh"
+      android:text="@string/button_evalroll"
+    />
 
     <Button android:id="@+id/coverage_eval_cal"
       style="@style/button_default"

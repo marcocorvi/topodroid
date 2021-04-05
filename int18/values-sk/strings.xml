@@ -569,6 +569,7 @@ Tap "Close" not to take any action.
     <string name="cover_calib">Distribúcia kalibračných dát: %1$.2f %%</string>
     <string name="cover_g">G Distribúcia: %1$.2f %%</string>
     <string name="cover_m">M Distribúcia: %1$.2f %%</string>
+    <!-- TODO string name="cover_r">Roll distribution: %1$.2f %%</string -->
 	
     <string name="empty_clipboard">Prázdna schránka</string>
     <string name="cannot_rename">Nedá sa premenovať názov mapovania</string>
@@ -682,6 +683,7 @@ Tap "Close" not to take any action.
     <string name="button_eval"      >Vyhodnotiť   </string>
     <string name="button_evalg"     >G      </string>
     <string name="button_evalm"     >M      </string>
+    <!-- TODO string name="button_evalroll"  >Roll</string -->
     <string name="button_eval_cal"  >Vyhodnotiť kalibr.</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->

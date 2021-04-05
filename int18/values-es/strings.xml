@@ -561,6 +561,7 @@ Tap "Close" not to take any action.
     <!-- TODO string name="cover_calib">Calibrated data distribution: %1$.2f %%</string -->
     <!-- TODO string name="cover_g">G distribution: %1$.2f %%</string -->
     <!-- TODO string name="cover_m">M distribution: %1$.2f %%</string -->
+    <!-- TODO string name="cover_r">Roll distribution: %1$.2f %%</string -->
 
     <string name="cannot_rename">No se puede cambiar el nombre de la topografía</string>
     <string name="declination">Declinación magnética </string>
@@ -666,6 +667,7 @@ Tap "Close" not to take any action.
     <string name="button_eval"      >Eval      </string>
     <string name="button_evalg"     >G      </string>
     <string name="button_evalm"     >M      </string>
+    <!-- TODO string name="button_evalroll"  >Roll</string -->
     <!-- TODO string name="button_eval_cal"  >Eval w. calib.</string -->
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->

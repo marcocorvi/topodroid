@@ -58,6 +58,7 @@ public class CalibCoverageDialog extends MyDialog
   private Button mBtnEval;
   private Button mBtnEvalG;
   private Button mBtnEvalM;
+  private Button mBtnEvalRoll;
   private Button mBtnEvalCal;
   private Button mBtnBack;
 
@@ -92,16 +93,18 @@ public class CalibCoverageDialog extends MyDialog
     initLayout( R.layout.calib_coverage_dialog, R.string.title_coverage );
 
     mText  = (TextView) findViewById( R.id.coverage_value );
-    mImageUp   = (ImageView) findViewById( R.id.coverage_image_up );
-    mImageDown = (ImageView) findViewById( R.id.coverage_image_down );
-    mBtnEval    = (Button) findViewById( R.id.coverage_eval );
-    mBtnEvalG   = (Button) findViewById( R.id.coverage_g   );
-    mBtnEvalM   = (Button) findViewById( R.id.coverage_m   );
-    mBtnEvalCal = (Button) findViewById( R.id.coverage_eval_cal );
+    mImageUp     = (ImageView) findViewById( R.id.coverage_image_up );
+    mImageDown   = (ImageView) findViewById( R.id.coverage_image_down );
+    mBtnEval     = (Button) findViewById( R.id.coverage_eval );
+    mBtnEvalG    = (Button) findViewById( R.id.coverage_g   );
+    mBtnEvalM    = (Button) findViewById( R.id.coverage_m   );
+    mBtnEvalRoll = (Button) findViewById( R.id.coverage_roll );
+    mBtnEvalCal  = (Button) findViewById( R.id.coverage_eval_cal );
     mBtnBack    = (Button) findViewById( R.id.coverage_back );
     mBtnEval.setOnClickListener( this );
     mBtnEvalG.setOnClickListener( this );
     mBtnEvalM.setOnClickListener( this );
+    mBtnEvalRoll.setOnClickListener( this );
     if ( mCalib != null ) {
       mBtnEvalCal.setOnClickListener( this );
     } else {
@@ -137,6 +140,10 @@ public class CalibCoverageDialog extends MyDialog
       mCoverageValue = mCoverage.evalCoverageGM( mList, 1 );
       fillImage();
       reset( R.string.cover_m );
+    } else if ( id == R.id.coverage_roll ) { 
+      mCoverageValue = mCoverage.evalCoverageRoll( mList, null );
+      fillImage();
+      reset( R.string.cover_r );
     } else if ( id == R.id.coverage_eval_cal ) {
       if ( mCalib.GetAG() != null ) {
         mCoverageValue = mCoverage.evalCoverage( mList, mCalib );
@@ -188,8 +195,8 @@ public class CalibCoverageDialog extends MyDialog
 	  // if ( j2off+i21 >= t_dim || j2off+i22 >= t_dim ) {
 	  //         Log.v("DistoX-COVER", "OOB north " + i0 + " " + j0 + " J " + j1 + " " + j2 + " I11 " + i11 + " " + i21 );
 	  // }
-          float v1 = angles[j1off+i11].mValue * (1-d1) + angles[j1off+i12].mValue * d1;
-          float v2 = angles[j2off+i21].mValue * (1-d2) + angles[j2off+i22].mValue * d2;
+          float v1 = angles[j1off+i11].getValue() * (1-d1) + angles[j1off+i12].getValue() * d1;
+          float v2 = angles[j2off+i21].getValue() * (1-d2) + angles[j2off+i22].getValue() * d2;
           float v = v1 * (1-d) + v2 * d;
           // int off = (j0*WIDTH + (ioff + ix))*BYTES;
           int green = ( v > 254 )? 254 : (int)(254*v);
@@ -215,8 +222,8 @@ public class CalibCoverageDialog extends MyDialog
 	  // if ( j2off+i21 >= t_dim || j2off+i22 >= t_dim ) {
 	  //         Log.v("DistoX-COVER", "OOB south " + i0 + " " + j0 + " J " + j1 + " " + j2 + " I11 " + i11 + " " + i21 );
 	  // }
-          v1 = angles[j1off+i11].mValue * (1-d1) + angles[j1off+i12].mValue * d1;
-          v2 = angles[j2off+i21].mValue * (1-d2) + angles[j2off+i22].mValue * d2;
+          v1 = angles[j1off+i11].getValue() * (1-d1) + angles[j1off+i12].getValue() * d1;
+          v2 = angles[j2off+i21].getValue() * (1-d2) + angles[j2off+i22].getValue() * d2;
           v = v1 * (1-d) + v2 * d;
           // int off = (j0*WIDTH + (ioff + ix))*BYTES;
           green = ( v > 254 )? 254 : (int)(254*v);

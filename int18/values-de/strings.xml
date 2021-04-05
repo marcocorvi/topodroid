@@ -564,6 +564,7 @@ WARNUNG. Ab v.5.0.60 wird ein "TopoDroid"-Ordner automatisch verwendet wenn es e
     <string name="cover_calib">Kalibrierte Daten Verteilung: %1$.2f %%</string>
     <string name="cover_g">G Verteilung: %1$.2f %%</string>
     <string name="cover_m">M Verteilung: %1$.2f %%</string>
+    <!-- TODO string name="cover_r">Roll distribution: %1$.2f %%</string -->
 
     <string name="cannot_rename">Kann Vermessung nicht umbenennen</string>
     <string name="declination">Magnetische Deklination</string>
@@ -676,6 +677,7 @@ WARNUNG. Ab v.5.0.60 wird ein "TopoDroid"-Ordner automatisch verwendet wenn es e
     <string name="button_eval"      >Auswerten </string>
     <string name="button_evalg"     >Beschleunigung      </string>
     <string name="button_evalm"     >Magnetisches Feld      </string>
+    <!-- TODO string name="button_evalroll"  >Roll</string -->
     <string name="button_eval_cal"  >Auswerten mit Kalibr.</string>
     <string name="button_gps_start" >GPS</string>
     <!-- UNUSED string name="button_gps_stop"  >Anhalten      </string -->

@@ -566,6 +566,7 @@ Tap "Close" not to take any action.
     <string name="cover_calib">校准数据分布: %1$.2f %%</string>
     <string name="cover_g">G 分布: %1$.2f %%</string>
     <string name="cover_m">M 分布: %1$.2f %%</string>
+    <!-- TODO string name="cover_r">Roll distribution: %1$.2f %%</string -->
 
     <string name="empty_clipboard">清空剪贴板</string>
     <string name="cannot_rename">不能重命名测量</string>
@@ -675,6 +676,7 @@ Tap "Close" not to take any action.
     <string name="button_eval"      >复运算      </string>
     <string name="button_evalg"     >G      </string>
     <string name="button_evalm"     >M      </string>
+    <!-- TODO string name="button_evalroll"  >Roll</string -->
     <string name="button_eval_cal"  >校准复运算</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->

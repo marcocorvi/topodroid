@@ -564,6 +564,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- TODO string name="cover_calib">Calibrated data distribution: %1$.2f %%</string -->
     <!-- TODO string name="cover_g">G distribution: %1$.2f %%</string -->
     <!-- TODO string name="cover_m">M distribution: %1$.2f %%</string -->
+    <!-- TODO string name="cover_r">Roll distribution: %1$.2f %%</string -->
 
 
     <string name="cannot_rename">Nie można zmienić nazwy ciągu</string>
@@ -672,6 +673,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- TODO string name="button_eval"      >Eval      </string -->
     <string name="button_evalg"     >G      </string>
     <string name="button_evalm"     >M      </string>
+    <!-- TODO string name="button_evalroll"  >Roll</string -->
     <!-- TODO string name="button_eval_cal"  >Eval w. calib.</string -->
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->

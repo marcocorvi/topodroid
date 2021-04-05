@@ -552,6 +552,7 @@ Tap <b>Chiudi</b> per fare nulla.
     <string name="cover_calib">Distribuzione dati calibrati: %1$.2f %%</string>
     <string name="cover_g">Distribuzione dati G: %1$.2f %%</string>
     <string name="cover_m">Distribuzione dati M: %1$.2f %%</string>
+    <!-- TODO string name="cover_r">Roll distribution: %1$.2f %%</string -->
 
     <string name="cannot_rename">Rinomina rilievo non riuscita</string>
     <string name="declination">decl. magn.</string>
@@ -657,6 +658,7 @@ Tap <b>Chiudi</b> per fare nulla.
     <string name="button_eval"      >Calcola   </string>
     <!-- FT_NO_TR string name="button_evalg"     >G      </string -->
     <!-- FT_NO_TR string name="button_evalm"     >M      </string -->
+    <!-- TODO string name="button_evalroll"  >Roll</string -->
     <string name="button_eval_cal"  >Calcola con calibr.</string>
     <!-- OK string name="button_gps_start" >GPS       </string -->
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->

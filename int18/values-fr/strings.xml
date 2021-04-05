@@ -554,6 +554,7 @@ Tap "Close" not to take any action.
     <!-- TODO string name="cover_calib">Calibrated data distribution: %1$.2f %%</string -->
     <!-- TODO string name="cover_g">G distribution: %1$.2f %%</string -->
     <!-- TODO string name="cover_m">M distribution: %1$.2f %%</string -->
+    <!-- TODO string name="cover_r">Roll distribution: %1$.2f %%</string -->
 
     <string name="cannot_rename">Impossible de renommer le relevé</string>
     <string name="declination">Déclinaison magnétique</string>
@@ -660,6 +661,7 @@ Tap "Close" not to take any action.
     <string name="button_eval"      >Évaluation      </string>
     <string name="button_evalg"     >G      </string>
     <string name="button_evalm"     >M      </string>
+    <!-- TODO string name="button_evalroll"  >Roll</string -->
     <string name="button_eval_cal"  >Évaluation avec étalonnage</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->

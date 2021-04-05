@@ -22,18 +22,83 @@ import java.util.List;
 
 public class CalibCoverage
 {
+  private static final int[] ROLL_3 = {
+    0x0c07, 0x080f, 0x001f, 0x003e, 0x007c, 0x00f8, 0x01f0, 0x03e0, 0x07c0, 0x0f80, 0x0f01, 0x0e03
+  };
+  private static final int[] ROLL_2 = {
+    0x0803, 0x0007, 0x000e, 0x001c, 0x0038, 0x0070, 0x00e0, 0x01c0, 0x0380, 0x0700, 0x0e00, 0x0c01
+  };
+  private static final int[] ROLL_1 = {
+    0x0001, 0x0002, 0x0004, 0x0008, 0x0010, 0x0020, 0x0040, 0x0080, 0x0100, 0x0200, 0x0400, 0x0800
+  };
+
   class Direction
   {
     final float mCompass;
     final float mClino;
-    float mValue;
+    private float mValue;
+    private int   mRoll;
 
     Direction( float cm, float cl, float v )
     {
       mCompass = cm;
       mClino = cl;
       mValue = v;
+      mRoll  = 0; // 12 bits
     }
+
+    void resetValue( ) { mValue = 1.0f; }
+
+    float getValue() { return mValue; }
+
+    void updateValue( float v, int cnt )
+    {
+      mValue -= (cnt >= 4)? v : v * cnt * 0.25f;
+      if ( mValue < 0.0f ) mValue = 0.0f;
+    }
+
+    // @param rm roll [degrees]
+    void updateRoll3( float r )
+    {
+      int ir = (int)(r/15); // 0=[0..15), 1=[15..30), 2=[30..45), 3=[45..60), ...
+      if ( ir <= 0 || ir >= 23 ) { 
+        ir = 0;
+      } else if ( ir > 0 ) {
+        ir = (ir + 1)/2;
+      }
+      mRoll |= ROLL_3[ir];
+    }
+
+    void updateRoll2( float r )
+    {
+      int ir = (int)(r/15); // 0=[0..15), 1=[15..30), 2=[30..45), 3=[45..60), ...
+      if ( ir <= 0 || ir >= 23 ) { 
+        ir = 0;
+      } else if ( ir > 0 ) {
+        ir = (ir + 1)/2;
+      }
+      mRoll |= ROLL_2[ir];
+    }
+
+    void updateRoll1( float r )
+    {
+      int ir = (int)(r/15); // 0=[0..15), 1=[15..30), 2=[30..45), 3=[45..60), ...
+      if ( ir <= 0 || ir >= 23 ) { 
+        ir = 0;
+      } else if ( ir > 0 ) {
+        ir = (ir + 1)/2;
+      }
+      mRoll |= ROLL_1[ir];
+    }
+
+    float  getRollValue() 
+    {
+      int res = 0;
+      for (int k=0; k<12; ++k ) if ( (mRoll & (1<<k)) == 0 ) res++;
+      mValue = res/12.0f;
+      return mValue;
+    }
+      
   }
 
   static final int DIM_Y       =  37;
@@ -110,14 +175,31 @@ public class CalibCoverage
     return (float)(x1*x2 + y1*y2 + z1*z2); // cosine of the angle
   }
 
-  private void updateDirections( float compass, float clino, int cnt )
+  private void updateDirectionValues( float compass, float clino, int cnt )
   {
     for (int j=0; j<t_dim; ++j ) {
       float c = cosine( compass, clino, angles[j].mCompass, angles[j].mClino );
       if ( c > 0.0 ) {
         c = c * c;
-        angles[j].mValue -= (cnt >= 4)? c*c : c*c * cnt * 0.25f;
-        if ( angles[j].mValue < 0.0f ) angles[j].mValue = 0.0f;
+        angles[j].updateValue( c*c, cnt );
+        // angles[j].mValue -= (cnt >= 4)? c*c : c*c * cnt * 0.25f;
+        // if ( angles[j].mValue < 0.0f ) angles[j].mValue = 0.0f;
+      }
+    }
+  }
+
+  private void updateRollValues( float compass, float clino, float roll )
+  {
+    for (int j=0; j<t_dim; ++j ) {
+      float c = cosine( compass, clino, angles[j].mCompass, angles[j].mClino );
+      if ( c > 0.8 ) {
+        angles[j].updateRoll3( roll );
+      } else if ( c > 0.5 ) {
+        angles[j].updateRoll2( roll );
+      } else if ( c > 0.0 ) {
+        angles[j].updateRoll1( roll );
+        // angles[j].mValue -= (cnt >= 4)? c*c : c*c * cnt * 0.25f;
+        // if ( angles[j].mValue < 0.0f ) angles[j].mValue = 0.0f;
       }
     }
   }
@@ -204,7 +286,7 @@ public class CalibCoverage
   public float evalCoverage( List< CBlock > clist, CalibAlgo transform )
   {
 
-    for (int j=0; j<t_dim; ++j ) angles[j].mValue = 1.0f;
+    for (int j=0; j<t_dim; ++j ) angles[j].resetValue( );
 
     long old_grp = 0;
     float compass_avg = 0.0f;
@@ -234,7 +316,7 @@ public class CalibCoverage
         if ( cnt_avg > 0 ) {
           compass_avg /= cnt_avg;
           clino_avg   /= cnt_avg;
-          updateDirections( compass_avg, clino_avg, cnt_avg );
+          updateDirectionValues( compass_avg, clino_avg, cnt_avg );
         }
         clino_avg   = clino;
         compass_avg = compass;
@@ -245,12 +327,42 @@ public class CalibCoverage
     if ( cnt_avg > 0 ) {
       compass_avg /= cnt_avg;
       clino_avg   /= cnt_avg;
-      updateDirections( compass_avg, clino_avg, cnt_avg );
+      updateDirectionValues( compass_avg, clino_avg, cnt_avg );
     }
 
     mCoverage = 0.0f;
     for (int j=0; j<t_dim; ++j ) {
-      mCoverage += angles[j].mValue;
+      mCoverage += angles[j].getValue();
+    }
+    mCoverage = 100.0f * ( 1.0f - mCoverage/t_dim );
+    return mCoverage;
+  }
+
+  public float evalCoverageRoll( List< CBlock > clist, CalibAlgo transform )
+  {
+
+    for (int j=0; j<t_dim; ++j ) angles[j].resetValue( );
+
+    long old_grp = 0;
+    float compass_avg = 0.0f;
+    float clino_avg   = 0.0f;
+    int cnt_avg = 0;
+    for ( CBlock b : clist ) {
+      if ( b.mGroup == 0 ) continue;
+      if ( transform == null ) {
+        b.computeBearingAndClino( );
+      } else {
+        b.computeBearingAndClino( transform );
+      }
+      float compass = b.mBearing * TDMath.DEG2RAD;
+      float clino   = b.mClino   * TDMath.DEG2RAD;
+      float roll    = b.mRoll;
+      updateRollValues( compass, clino, roll );
+    }
+
+    mCoverage = 0.0f;
+    for (int j=0; j<t_dim; ++j ) {
+      mCoverage += angles[j].getRollValue();
     }
     mCoverage = 100.0f * ( 1.0f - mCoverage/t_dim );
     return mCoverage;
@@ -260,7 +372,7 @@ public class CalibCoverage
   // @param mode   0: G,  1: M
   public float evalCoverageGM( List< CBlock > clist, int mode ) 
   {
-    for (int j=0; j<t_dim; ++j ) angles[j].mValue = 1.0f;
+    for (int j=0; j<t_dim; ++j ) angles[j].resetValue( );
 
     long old_grp = 0;
     float compass_avg = 0.0f;
@@ -273,11 +385,11 @@ public class CalibCoverage
       TDVector v = ( mode == 0 )? new TDVector( b.gx/f, b.gy/f, b.gz/f ) : new TDVector( b.mx/f, b.my/f, b.mz/f );
       float compass = TDMath.atan2( v.x, v.y ); if ( compass < 0 ) compass += TDMath.M_2PI;
       float clino   = TDMath.atan2( v.z, TDMath.sqrt( v.x * v.x + v.y * v.y ) );
-      updateDirections( compass, clino, 1 );
+      updateDirectionValues( compass, clino, 1 );
     }
     mCoverage = 0.0f;
     for (int j=0; j<t_dim; ++j ) {
-      mCoverage += angles[j].mValue;
+      mCoverage += angles[j].getValue();
     }
     mCoverage = 100.0f * ( 1.0f - mCoverage/t_dim );
     return mCoverage;

@@ -556,6 +556,7 @@ Tap "Close" not to take any action.
     <string name="cover_calib">Distribuție date calibrate: %1$.2f %%</string>
     <string name="cover_g">Distribuție G: %1$.2f %%</string>
     <string name="cover_m">Distribuție M: %1$.2f %%</string>
+    <!-- TODO string name="cover_r">Roll distribution: %1$.2f %%</string -->
 
     <string name="cannot_rename">Cartarea nu paote fi redenumită</string>
     <string name="declination">Magn. decl.</string>
@@ -662,6 +663,7 @@ Tap "Close" not to take any action.
     <string name="button_eval"      >Evaluează </string>
     <string name="button_evalg"     >G         </string>
     <string name="button_evalm"     >M         </string>
+    <!-- TODO string name="button_evalroll"  >Roll</string -->
     <string name="button_eval_cal"  >Evaluează calib. w.</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
