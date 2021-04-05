@@ -1246,6 +1246,7 @@ class DrawingDxf
   static private int toDxf( PrintWriter pw, int handle, DrawingAreaPath area, float scale, float xoff, float yoff )
   {
     if ( area == null ) return handle;
+    float bezier_step = TDSetting.getBezierStep();
     // Log.v("DistoX", "area size " + area.size() );
     String layer = "A_" + area.getThName( ).replace(':','-');
     if ( mVersion13 && checkSpline( area ) ) {
@@ -1273,10 +1274,37 @@ class DrawingDxf
                                          // polyline: has-bulge
         printInt( pw, 73, 1 );          // is-closed flag
         printInt( pw, 93, area.size() ); // nr. of points (not polyline) vertices (polyline)
-        for (LinePoint p = area.mFirst; p != null; p = p.mNext ) { 
-          printXY( pw, (p.x+xoff)*scale, -(p.y+yoff)*scale, 0 );
+      // bezier interpolation
+      LinePoint p = area.mFirst;
+      float x0 = p.x;
+      float y0 = p.y;
+      printXY( pw, (p.x+xoff)*scale, -(p.y+yoff)*scale, 0 );
+      for ( p = p.mNext; p != null; p = p.mNext ) {
+        float x3 = p.x;
+        float y3 = p.y;
+        if ( p.has_cp ) { // FIXME this converts the cubic with a thickly interpolated polyline
+          float x1 = p.x1;
+          float y1 = p.y1;
+          float x2 = p.x2;
+          float y2 = p.y2;
+          float len = (x1-x0)*(x1-x0) + (x2-x1)*(x2-x1) + (x3-x2)*(x3-x2) + (x3-x0)*(x3-x0)
+                  + (y1-y0)*(y1-y0) + (y2-y1)*(y2-y1) + (y3-y2)*(y3-y2) + (y3-y0)*(y3-y0);
+          int np = (int)( TDMath.sqrt( len ) * bezier_step + 0.5f );
+          if ( np > 1 ) {
+            BezierCurve bc = new BezierCurve( x0, y0, x1, y1, x2, y2, x3, y3 );
+            for ( int n=1; n < np; ++n ) {
+              Point2D pb = bc.evaluate( (float)n / (float)np );
+              printXY( pw, (p.x+xoff)*scale, -(p.y+yoff)*scale, 0 );
+            }
+          }
         }
-        // printXY( pw, area.mFirst.x * scale, -area.mFirst.y * scale, 0 );
+        printXY( pw, (p.x+xoff)*scale, -(p.y+yoff)*scale, 0 );
+        x0 = x3;
+        y0 = y3;
+      }
+      // bezier interpolation
+
+      // printXY( pw, area.mFirst.x * scale, -area.mFirst.y * scale, 0 );
         printInt( pw, 97, 0 );            // nr. source boundary objects
       printInt( pw, 75, 0 );            // hatch style: 0:normal, 1:outer, 2:ignore
       printInt( pw, 76, 0 );            // hatch pattern type: 0:user, 1:predefined, 2:custom

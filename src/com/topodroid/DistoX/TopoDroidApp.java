@@ -481,10 +481,10 @@ public class TopoDroidApp extends Application
     return mComm != null && mComm.connectDevice( address, mListerSet, data_type ); // FIXME_LISTER
   }
 
-  public void disconnectComm()
+  public boolean disconnectComm()
   {
     // Log.v( "DistoX", "App: disconnect. comm is " + ((mComm==null)? "null" : "non-null") );
-    if ( mComm != null ) mComm.disconnectDevice();
+    return ( mComm == null ) || mComm.disconnectDevice();
   }
 
   public void notifyConnectionState( int state )

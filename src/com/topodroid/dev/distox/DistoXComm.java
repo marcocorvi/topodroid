@@ -615,12 +615,14 @@ public class DistoXComm extends TopoDroidComm
     return true;
   }
 
-  public void disconnectDevice()
+  @Override
+  public boolean disconnectDevice()
   {
     // TDLog.Log( TDLog.LOG_COMM, "disconnect device");
     // Log.v( "DistoX-BLE", "DistoX comm: disconnect device ");
     cancelCommThread();
     destroySocket( );
+    return true;
   }
 
   // -------------------------------------------------------------------------------------

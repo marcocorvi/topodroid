@@ -68,7 +68,7 @@ public class TopoDroidComm
 
   public boolean isConnected() { return mBTConnected; }
 
-  public void handleBricPacket( long index, Handler lister, int data_type, float clino, float azimuth )
+  public void handleBricPacket( long index, Handler lister, int data_type, float clino, float azimuth, String comment )
   {
     // Log.v( "DistoX", "TD comm: PACKET " + res + "/" + DataType.PACKET_DATA + " type " + data_type );
     // Log.v("DistoX", "TD comm: packet DATA");
@@ -80,8 +80,10 @@ public class TopoDroidComm
     double r = mProtocol.mRoll;
     double dip  = mProtocol.mDip;
     long status = ( d > TDSetting.mMaxShotLength )? TDStatus.OVERSHOOT : TDStatus.NORMAL;
+    // TODO split the data insert in three places: one for each data packet
     mLastShotId = TopoDroidApp.mData.insertDistoXShot( TDInstance.sid, index, d, b, c, r, ExtendType.EXTEND_IGNORE, status, TDInstance.deviceAddress() );
     TopoDroidApp.mData.updateShotAMDR( mLastShotId, TDInstance.sid, clino, azimuth, dip, r, false );
+    if ( comment != null ) TopoDroidApp.mData.updateShotComment( mLastShotId, TDInstance.sid, comment );
     if ( lister != null ) { // FIXME_LISTER sendMessage with mLastShotId only
       Message msg = lister.obtainMessage( Lister.LIST_UPDATE );
       Bundle bundle = new Bundle();
@@ -344,7 +346,7 @@ public class TopoDroidComm
     return false;
   }
 
-  public void disconnectDevice() { }
+  public boolean disconnectDevice() { return true; }
 
   // -------------------------------------------------------------------------------------
   // ON-DEMAND DATA DOWNLOAD

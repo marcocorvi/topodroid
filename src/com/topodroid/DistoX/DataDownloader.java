@@ -119,8 +119,9 @@ public class DataDownloader
     // Log.v("DistoX", "stop Download Data() connected " + mConnected );
     // if ( ! mConnected ) return;
     // if ( TDSetting.isConnectionModeBatch() ) {
-      mApp.disconnectComm();
-      notifyConnectionStatus( ConnectionState.CONN_DISCONNECTED );
+      if ( mApp.disconnectComm() ) {
+        notifyConnectionStatus( ConnectionState.CONN_DISCONNECTED );
+      }
     // }
   }
 

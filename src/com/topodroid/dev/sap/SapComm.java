@@ -205,11 +205,11 @@ public class SapComm extends TopoDroidComm
   }
 
   @Override
-  public void disconnectDevice() 
+  public boolean disconnectDevice() 
   {
     // Log.v("DistoX", "SAP comm: disconnect device");
-    if ( mDisconnecting ) return;
-    if ( ! mBTConnected ) return;
+    if ( mDisconnecting ) return true;
+    if ( ! mBTConnected ) return true;
     mDisconnecting = true;
     mConnectionMode = -1;
     mBTConnected = false;
@@ -217,6 +217,7 @@ public class SapComm extends TopoDroidComm
     mCallback.disconnectCloseGatt();
     notifyStatus( ConnectionState.CONN_DISCONNECTED );
     mDisconnecting = false;
+    return true;
   }
 
   private void closeChrt()

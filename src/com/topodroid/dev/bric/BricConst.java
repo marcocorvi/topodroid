@@ -152,15 +152,23 @@ public class BricConst
     return BleUtils.getFloat( bytes, off );
   }
 
+  private static float getErrorSecondValue( byte[] bytes, int code, int off )
+  {
+    if ( code <= 4 || code >= 7 ) return 0;
+    return BleUtils.getFloat( bytes, off );
+  }
+
   static int firstErrorCode( byte[] bytes ) { return getErrorCode( bytes, 0 ); }
   static int secondErrorCode( byte[] bytes ) { return getErrorCode( bytes, 9 ); }
   static float firstErrorValue( byte[] bytes, int code ) { return getErrorValue( bytes, code, 1 ); }
   static float secondErrorValue( byte[] bytes, int code ) { return getErrorValue( bytes, code, 10 ); }
+  static float firstErrorSecondValue( byte[] bytes, int code ) { return getErrorSecondValue( bytes, code, 5 ); }
+  static float secondErrorSecondValue( byte[] bytes, int code ) { return getErrorSecondValue( bytes, code, 14 ); }
 
   static String errorString( byte[] bytes )
   {
     StringBuilder sb = new StringBuilder();
-    sb.append( "[1] " );
+    sb.append( "1: " );
     int err   = BleUtils.getChar( bytes, 0 );
     float val1=0;
     float val2=0;
@@ -176,30 +184,30 @@ public class BricConst
       val1 = BleUtils.getFloat( bytes, 10 );
       if ( err == 5 || err == 6 ) val2 = BleUtils.getFloat( bytes, 14 );
     }
-    sb.append( " [2] " );
+    sb.append( " 2: " );
     sb.append( errorString( err, val1, val2 ) );
     return sb.toString();
   }
 
-  private static String errorString( int code, float v1, float v2 )
+  static String errorString( int code, float v1, float v2 )
   {
     switch ( code ) {
-      case ERR_NONE       : return "No error";  // no error
-      case ERR_ACC_1      : return "Acc-1 high " + v1;
-      case ERR_ACC_2      : return "Acc-2 high " + v1;
-      case ERR_MAG_1      : return "Mag-1 high " + v1;
-      case ERR_MAG_2      : return "Mag-2 high " + v1;
-      case ERR_ACC_D      : return "Acc delta " + v1 + " axis " + v2; // accelerometer disparity
-      case ERR_MAG_D      : return "Mag delta " + v1 + " axis " + v2; // magnetometers disparity
-      case ERR_LSR        : return "Target moved";  // target moved
-      case ERR_LSR_WEAK   : return "Weak signal";  // weak signal
-      case ERR_LSR_STRONG : return "Strong signal";  // strong signal
-      case ERR_LSR_0XAA   : return "Pattern error";  // pattern error
-      case ERR_LSR_TIME   : return "Timeout " + v1;  // timeout
-      case ERR_LSR_ERROR  : return "Laser error " + v1;  // unrecognized error
-      case ERR_LSR_MSGID  : return "Wrong msg ID " + v1;  // wrong message
-      case ERR_CLINO      : return "Clino " + v1; 
-      case ERR_AZIMUTH    : return "Azimuth " + v1; 
+      case ERR_NONE       : return "[" + code + "]: No error";  // no error
+      case ERR_ACC_1      : return "[" + code + "]: Acc-1 high " + v1;
+      case ERR_ACC_2      : return "[" + code + "]: Acc-2 high " + v1;
+      case ERR_MAG_1      : return "[" + code + "]: Mag-1 high " + v1;
+      case ERR_MAG_2      : return "[" + code + "]: Mag-2 high " + v1;
+      case ERR_ACC_D      : return "[" + code + "]: Acc delta " + v1 + " axis " + v2; // accelerometer disparity
+      case ERR_MAG_D      : return "[" + code + "]: Mag delta " + v1 + " axis " + v2; // magnetometers disparity
+      case ERR_LSR        : return "[" + code + "]: Target moved";  // target moved
+      case ERR_LSR_WEAK   : return "[" + code + "]: Weak signal";  // weak signal
+      case ERR_LSR_STRONG : return "[" + code + "]: Strong signal";  // strong signal
+      case ERR_LSR_0XAA   : return "[" + code + "]: Pattern error";  // pattern error
+      case ERR_LSR_TIME   : return "[" + code + "]: Timeout " + v1;  // timeout
+      case ERR_LSR_ERROR  : return "[" + code + "]: Laser error " + v1;  // unrecognized error
+      case ERR_LSR_MSGID  : return "[" + code + "]: Wrong msg ID " + v1;  // wrong message
+      case ERR_CLINO      : return "[" + code + "]: Clino " + v1; 
+      case ERR_AZIMUTH    : return "[" + code + "]: Azimuth " + v1; 
     }
     return "";
   }

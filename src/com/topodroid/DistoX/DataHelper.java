@@ -1267,7 +1267,7 @@ public class DataHelper extends DataSetObservable
     doExecShotSQL( id, sw );
   }
 
-  void updateShotComment( long id, long sid, String comment )
+  public void updateShotComment( long id, long sid, String comment )
   {
     // if ( myDB == null ) return;
     if ( comment == null ) comment = TDString.EMPTY;

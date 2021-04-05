@@ -53,6 +53,9 @@ public class BricProto extends TopoDroidProtocol
   private int mErr2; // second error code
   private float mErrVal1;
   private float mErrVal2;
+  // private float mErrSecondVal1;
+  // private float mErrSecondVal2;
+  private String mComment = null;
 
   private Context mContext;
   BleCallback mCallback;
@@ -137,6 +140,9 @@ public class BricProto extends TopoDroidProtocol
     mErr2 = BricConst.secondErrorCode( bytes );
     mErrVal1 = BricConst.firstErrorValue( bytes, mErr1 );
     mErrVal2 = BricConst.secondErrorValue( bytes, mErr2 );
+    // mErrSecondVal1 = BricConst.firstErrorSecondValue( bytes, mErr1 );
+    // mErrSecondVal2 = BricConst.secondErrorSecondValue( bytes, mErr2 );
+    mComment = ( mErr1 > 0 || mErr2 > 0 )? BricConst.errorString( bytes ) : null;
   }
   
   void processData()
@@ -152,7 +158,8 @@ public class BricProto extends TopoDroidProtocol
         clino   = ( mErr1 == 14 )? mErrVal1 : (mErr2 == 14)? mErrVal2 : 0;
         azimuth = ( mErr1 == 15 )? mErrVal1 : (mErr2 == 15)? mErrVal2 : 0;
       }
-      mComm.handleBricPacket( index, mLister, DataType.DATA_SHOT, clino, azimuth );
+
+      mComm.handleBricPacket( index, mLister, DataType.DATA_SHOT, clino, azimuth, mComment );
       mPrimToDo = false;
       mLastIndex = mIndex;
     } else if ( mIndex != mLastIndex ) {
