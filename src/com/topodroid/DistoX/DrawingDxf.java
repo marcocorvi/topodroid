@@ -517,7 +517,8 @@ class DrawingDxf
 
     try {
       // header
-      writeComment( out, "DXF created by TopoDroid v. " + TDVersion.string() );
+      writeComment( out, "DXF created by TopoDroid v. " + TDVersion.string() 
+        + " " + TDSetting.mAcadVersion + " " + (TDSetting.mAutoStations? "T ":"F ") + (TDSetting.mAutoXSections? "T ":"F ") + TDSetting.getBezierStep() );
       writeSection( out, "HEADER" );
 
       xmin -= 2;  xmax += 2;
@@ -566,7 +567,7 @@ class DrawingDxf
         writeString( out, 9, "$CECOLOR" );     writeInt( out, 62, 256 ); // 
 
         writeString( out, 9, "$MEASUREMENT" ); writeInt( out, 70, 1 ); // drawing units 1=metric
-        writeString( out, 9, "$INSUNITS" );    writeInt( out, 70, 4 ); // defaulty draing units 0=unitless 4=mm
+        writeString( out, 9, "$INSUNITS" );    writeInt( out, 70, 4 ); // defaulty drawing units 0=unitless 4=mm
         writeString( out, 9, "$DIMASSOC" );    writeInt( out, 280, 0 ); // 0=no association
       }
       writeEndSection( out );
