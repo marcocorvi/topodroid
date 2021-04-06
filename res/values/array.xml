@@ -145,9 +145,9 @@
   </string-array>
 
   <string-array name="acadVersion" translatable="false">
-     <item name="9">DXF 6</item>
-     <item name="13">DXF 12</item>
-     <item name="16">DXF 16</item>
+     <item name="9">R12 (AC1009)</item>
+     <item name="13">R13 (AC1012</item>
+     <item name="16">R16 (AC1016)</item>
   </string-array>
   <string-array name="acadVersionValue" translatable="false">
      <item name="9">9</item>

@@ -1237,10 +1237,10 @@ class DrawingDxf
     String layer = "L_" + line.getThName( ).replace(':','-');
     int flag = 0;
     if ( mVersion13 && checkSpline( line ) ) {
-      return printSpline( pw, line, scale, handle, layer, false, xoff, yoff );
+      return printSpline( pw, line, scale, handle, layer, line.isClosed(), xoff, yoff );
     } 
     // return printLWPolyline( pw5, line, scale, handle, layer, false );
-    return printPolyline( pw, line, scale, handle, layer, false, xoff, yoff );
+    return printPolyline( pw, line, scale, handle, layer, line.isClosed(), xoff, yoff );
   }
 
   static private int toDxf( PrintWriter pw, int handle, DrawingAreaPath area, float scale, float xoff, float yoff )
