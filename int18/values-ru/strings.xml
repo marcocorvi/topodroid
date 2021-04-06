@@ -556,7 +556,7 @@
     <string name="cover_calib">Распределение откалиброванных данных: %1$.2f %%</string>
     <string name="cover_g">G распределение: %1$.2f %%</string>
     <string name="cover_m">M распределение: %1$.2f %%</string>
-    <!-- TODO string name="cover_r">Roll distribution: %1$.2f %%</string -->
+    <string name="cover_r">Распределение разворотов: %1$.2f %%</string>
 
     <string name="cannot_rename">Не могу перименовать съёмку</string>
     <string name="declination">Магн. скл.</string>
@@ -663,7 +663,7 @@
     <string name="button_eval"      >Вычислить    </string>
     <string name="button_evalg"     >G      </string>
     <string name="button_evalm"     >M      </string>
-    <!-- TODO string name="button_evalroll"  >Roll</string -->
+    <string name="button_evalroll"  >Разворот</string>
     <string name="button_eval_cal"  >Вычислить с учетом калиб.</string>
     <!-- OK string name="button_gps_start" >GPS       </string -->
     <!-- UNUSED string name="button_gps_stop"  >Стоп      </string -->
