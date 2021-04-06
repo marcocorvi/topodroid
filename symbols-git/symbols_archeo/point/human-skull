@@ -2,7 +2,7 @@ encoding utf-8
 symbol point
 name human-skull
 name-hu emberi_koponya
-th_name human-skull
+th_name u:human-skull
 group archeo
 orientation no
 color 0xc2c2c2

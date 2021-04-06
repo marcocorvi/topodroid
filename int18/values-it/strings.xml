@@ -80,7 +80,7 @@ Tap <b>Chiudi</b> per fare nulla.
     <string name="missing_station">Caposaldo assente</string>
     <string name="station_not_found">Caposaldo non trovato</string>
     <string name="shot_not_found">Trovato nessun tiro</string>
-    <!-- TODO string name="bad_sibling">Bad shot sibling</string -->
+    <string name="bad_sibling">Tiro gemello non corretto</string>
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Installa i prototipi grafici con TdSymbol</string -->
     <!-- UNUSED string name="missing_line">LINEA</string -->
@@ -104,10 +104,10 @@ Tap <b>Chiudi</b> per fare nulla.
     <string name="bric_clear_memory">Pulisci memoria</string>
     <string name="bric_future_time">Orario nel futuro, reset non possibile</string>
     <string name="bric_ask_memory_clear">Pulisco la memoria BRIC?</string>
-    <!-- TODO string name="bric_reset_ok">Resetted time</string -->
-    <!-- TODO string name="bric_reset_fail">Time reset failed</string -->
-    <!-- TODO string name="bric_clear_ok">Cleared memory </string -->
-    <!-- TODO string name="bric_clear_fail">Memory clear failed</string -->
+    <string name="bric_reset_ok">Reset orario fatto</string>
+    <string name="bric_reset_fail">Reset orario fallito</string>
+    <string name="bric_clear_ok">Pulitura memoria fatta</string>
+    <string name="bric_clear_fail">Pulitura memoria fallita</string>
 
     <string name="calibration_title">Strumenti di calibrazione</string>
     <string name="calibration_length">Fettuccia</string>
@@ -122,6 +122,7 @@ Tap <b>Chiudi</b> per fare nulla.
     <string name="calib_no_coeff">Coefficienti di calibrazione non impostati</string>
     <string name="calib_gm_policy">Metodo di raggruppamento dati</string>
     <string name="calib_gm_undelete">Ripristina dato calibrazione?</string>
+    <string name="calib_offgroup_data">Possibili %1$d dati non raggruppati</string>
     <string name="calib_saved">Salvata calibrazione</string>
     <string name="calib_updated">Aggiornata calibrazione</string>
     <string name="calib_compute_groups">Raggruppamento dati in corso</string>
@@ -131,8 +132,9 @@ Tap <b>Chiudi</b> per fare nulla.
     <string name="calib_validation">Validatione di %1$s vs %2$s</string>
     <!-- UNUSED string name="connect_failed">Comunicazione DistoX fallita</string -->
     <!-- UNUSED string name="data"> dati</string -->
-    <string name="using">Usando %1$s</string>
+    <string name="using">Uso %1$s</string>
     <string name="calib_error">Errore %1$.2f gradi (BH delta %2$.2f)</string>
+    <string name="calib_validate_error">Errore medio: %1$.2f gradi</string>
     <string name="calib_stddev">Errore stddev: %1$.4f gradi</string>
     <string name="calib_max_error">Errore massimo %1$.4f gradi</string>
     <string name="calib_ave_std">Accuratezza: %1$.4f %2$.4f gradi</string>
@@ -159,6 +161,7 @@ Tap <b>Chiudi</b> per fare nulla.
     <string name="device_code">Codice DistoX %1$4d</string>
     <string name="device_firmware">Firmware %1$d.%2$d</string>
     <string name="device_hardware">Hardware %1$d.%2$d</string>
+    <!-- UNUSED string name="device_memory">Memory  %1$02x.%2$02x</string -->
     <string name="device_status_angle_grad">Unita\' angoli: gradienti</string>
     <string name="device_status_angle_degree">Unita\' angoli: gradi</string>
     <string name="device_status_compass_on">Bussola/clino: on</string>
@@ -223,7 +226,9 @@ Tap <b>Chiudi</b> per fare nulla.
     <string name="head_tail_failed">Lettura memoria DistoX fallita</string>
     <string name="head_tail_store_failed">Memorizzazione memoria DistoX fallita</string>
     <!-- UNUSED string name="pairing_failed">Pairing failed</string -->
-
+    
+    <string name="datamode_normal">Modo dati normale</string>
+    <string name="datamode_diving">Modo dati profondo</string>
     <string name="illegal_data_value">Dati non corretti</string>
 
     <string name="photo_title">FOTO</string>
@@ -251,6 +256,7 @@ Tap <b>Chiudi</b> per fare nulla.
 
     <string name="error_azimuth_required">Azimuth mancante</string>
     <string name="error_length_required">Lunghezza mancante</string>
+    <string name="error_depth_required">Profondita\' mancante</string>
     <string name="error_clino_required">Inclinazione mancante</string>
     <string name="error_comment_required">Commento mancante</string>
     <string name="error_begin_required">Indirizzo iniziale mancante</string>
@@ -364,7 +370,7 @@ Tap <b>Chiudi</b> per fare nulla.
     <!-- UNUSED string name="menu_display">DISPLAY</string -->
     <string name="menu_show_deleted">MOSTRA CANCELLATI</string>
     <string name="menu_hide_deleted">NASCONDI CANCELLATI</string>
-    <!-- TODO string name="menu_device">DEVICE</string -->
+    <string name="menu_device">DISPOSITIVO</string>
     <string name="menu_export">ESPORTA</string>
     <!-- OK string name="menu_firmware">FIRMWARE</string -->
     <string name="menu_recover">RECUPERA</string>
@@ -412,7 +418,6 @@ Tap <b>Chiudi</b> per fare nulla.
     <string name="bric_off">Spegni</string>
     <string name="bric_memory">Memoria interna BRIC</string>
 
-
     <string name="popup_join_pt">Sposta al punto vicino</string>
     <string name="popup_snap_ln">Segui la linea vicina</string>
     <string name="popup_snap_to_splays">Collega agli splay vicini</string>
@@ -423,6 +428,11 @@ Tap <b>Chiudi</b> per fare nulla.
     <string name="popup_curve_pt">Rendi curvo</string>
     <string name="popup_remove_pt">Elimina punto</string>
     <string name="popup_append_line">Collega alla linea</string>
+    <string name="popup_multiselect">Selezione multipla</string>
+    <string name="popup_finish">Fine</string>
+    <string name="popup_delete">Cancella</string>
+    <string name="popup_decimate">Decima</string>
+    <string name="popup_join">Unisci</string>
 
     <string name="popup_erase_all">Cancella tutto</string>
     <string name="popup_erase_point">Cancella punti</string>
@@ -552,8 +562,9 @@ Tap <b>Chiudi</b> per fare nulla.
     <string name="cover_calib">Distribuzione dati calibrati: %1$.2f %%</string>
     <string name="cover_g">Distribuzione dati G: %1$.2f %%</string>
     <string name="cover_m">Distribuzione dati M: %1$.2f %%</string>
-    <!-- TODO string name="cover_r">Roll distribution: %1$.2f %%</string -->
-
+    <string name="cover_r">Distributione rotazioni: %1$.2f %%</string>
+    
+    <string name="empty_clipboard">No appunti</string>
     <string name="cannot_rename">Rinomina rilievo non riuscita</string>
     <string name="declination">decl. magn.</string>
     <string name="description">descrizione</string>
@@ -628,6 +639,10 @@ Tap <b>Chiudi</b> per fare nulla.
     <string name="h_section">SEZIONE ORIZZ.</string>
     <!-- UNUSED string name="landscape">panorama</string -->
 
+    <string name="display_view">visualizza</string>
+    <string name="plan_view">pianta</string>
+    <string name="profile_view">sezione</string>
+
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Lettura memoria DistoX fallita</string>
     <string name="distox_err_headtail_io">Memoria DistoX errore I/O</string>
@@ -646,9 +661,11 @@ Tap <b>Chiudi</b> per fare nulla.
     <string name="button_back"      >Indietro  </string>
     <string name="button_cancel"    >Annulla   </string>
     <string name="button_change"    >Cambia    </string>
+    <string name="button_clipboard" >Appunti</string>
     <string name="button_close"     >Chiudi    </string>
     <string name="button_create"    >Crea      </string>
     <string name="button_color"     >Colore</string>
+    <string name="button_clear_convert">Pulisci conversione</string>
     <string name="button_convert"   >Converti  </string>
     <string name="button_current"   >Corrente   </string>
     <string name="button_delete"    >Elimina   </string>
@@ -656,9 +673,9 @@ Tap <b>Chiudi</b> per fare nulla.
     <string name="button_surface"   >Superfice   </string>
     <string name="button_no_extend" >Manca Extend</string>
     <string name="button_eval"      >Calcola   </string>
-    <!-- FT_NO_TR string name="button_evalg"     >G      </string -->
-    <!-- FT_NO_TR string name="button_evalm"     >M      </string -->
-    <!-- TODO string name="button_evalroll"  >Roll</string -->
+    <!-- UNUSED string name="button_evalg"     >G      </string -->
+    <!-- UNUSED string name="button_evalm"     >M      </string -->
+    <string name="button_evalroll"  >Rotazione</string>
     <string name="button_eval_cal"  >Calcola con calibr.</string>
     <!-- OK string name="button_gps_start" >GPS       </string -->
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
@@ -826,6 +843,7 @@ Tap <b>Chiudi</b> per fare nulla.
     <string name="help_import">Importa zip o file dati rilievo</string>
     <string name="help_symbol">Attiva/disattiva prototipi grafici</string>
     <string name="help_therion">Gestore progetti di grotta</string>
+    <string name="help_cave3d">Cave3D, visualizzatore 3D</string>
     <!-- UNUSED string name="help_database">App database (SQliteViewer)</string -->
     <string name="help_prefs">Preferenze</string>
     <string name="help_log">Attiva/disattiva opzioni di log</string>
@@ -927,6 +945,7 @@ Tap <b>Chiudi</b> per fare nulla.
     <string name="export_config">File di configurazione</string>
     <string name="export_csv_rawdata">Dati grezzi</string>
     <string name="export_dxf_blocks">Blocchi DXF</string>
+    <string name="export_dxf_version">Versione</string>
     <string name="export_georeference">Georeferenza</string>
     <string name="export_grid">Griglia</string>
     <string name="export_linedir">Linea direzione</string>
@@ -942,7 +961,7 @@ Tap <b>Chiudi</b> per fare nulla.
     <string name="export_stations">Capisaldi</string>
     <string name="export_swap_lr">Scambia L/R</string>
     <string name="export_xvi">Immagini Xvi</string>
-    <!-- TODO string name="export_with_xsections">Include X-sections</string -->
+    <string name="export_with_xsections">Includere X-section</string>
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
     <!-- UNUSED string name="export_station_stroke">Station stroke</string -->
@@ -1074,8 +1093,12 @@ Tap <b>Chiudi</b> per fare nulla.
     <string name="title_import_tro">VisualTopo: Imposta import</string>
     <string name="title_import_dat">Compass: Imposta import</string>
 
+  <string name="exported_settings">Impostazioni esportate %1$s</string>
+  <string name="imported_settings">Impostazioni importate</string>
+  <string name="imported_settings_failed">Importazione impostazioni fallita</string>
+  <string name="export_settings_failed">Esportazione impostazioni fallita</string>
   <string name="pref_export_settings">Impostazioni Export</string>
-  <!-- UNUSED string name="pref_tcsx">Esporta per cSurvey-1.20</string -->
+  <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
   <string name="pref_cat_survey">OPZIONI RILIEVO</string>
   <string name="pref_cat_splay">DATI SPLAY</string>
@@ -1643,7 +1666,6 @@ Tap <b>Chiudi</b> per fare nulla.
     <string name="title_surveys">Rilievi</string>
 
     <string name="exported">Salvato file %1$s</string>
-  <string name="imported_settings">Impostazioni importate</string>
     <string name="export_failed">Esportazione fallita</string>
 
 </resources>
