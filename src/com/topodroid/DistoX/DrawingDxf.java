@@ -397,7 +397,6 @@ class DrawingDxf
                                     String layer, boolean closed, float xoff, float yoff )
   {
     float bezier_step = TDSetting.getBezierStep();
-    int close = (closed ? 1 : 0 );
     printString( pw, 0, "POLYLINE" );
     handle = inc(handle);
     printAcDb( pw, handle, AcDbEntity, AcDbPolyline );
@@ -406,10 +405,11 @@ class DrawingDxf
     // printInt(  pw, 40, 1 ); // start width
     // printInt(  pw, 41, 1 ); // end width
     printInt( pw, 66, 1 ); // group 1
-    printInt( pw, 70, 8 + close ); // polyline flag 8 = 3D polyline, 1 = closed 
-    printInt( pw, 75, 0 ); // 6 cubic spline, 5 quad spline, 0
+    printInt( pw, 70, 8 + (closed? 1:0) ); // polyline flag 8 = 3D polyline, 1 = closed  // inlined close in 5.1.20
+    // printInt( pw, 75, 0 ); // 6 cubic spline, 5 quad spline, 0 (optional, default 0) // commented in 5.1.20
 
-    // handle = printInterpolatedPolyline( pw, line, scale, handle, layer, closed, xoff, yoff );
+    handle = printInterpolatedPolyline( pw, line, scale, handle, layer, closed, xoff, yoff );
+    /* commented in 5.1.20
     LinePoint p = line.mFirst;
     float x0 = xoff + p.x;
     float y0 = yoff + p.y;
@@ -441,6 +441,7 @@ class DrawingDxf
       p = line.mFirst;
       handle = printLinePoint( pw, scale, handle, layer, xoff+p.x, yoff+p.y );
     }
+    */
 
     pw.printf("  0%sSEQEND%s", EOL, EOL );
     if ( mVersion13 ) {
@@ -538,7 +539,7 @@ class DrawingDxf
 */
       
     Log.v("DistoX", "Spline P " + np + " Cp " + ncp + " K " + nk );
-    printInt( pw, 70, 8+(closed?1:0) ); // flags 8 (planar) + 1 (if closed)
+    printInt( pw, 70, 8+(closed?1:0) ); // flags  1: closed, 2: periodic, 4: rational, 8: planar, 16 linear
     printInt( pw, 71, 3 );    // degree of the spline
     printInt( pw, 72, nk );   // nr. of knots
     printInt( pw, 73, ncp );  // nr. of control pts
@@ -623,6 +624,42 @@ class DrawingDxf
       // printString( pw, 7, style );  // style, optional (dftl STANDARD)
       printString( pw, 100, "AcDbText");
     // }
+    return handle;
+  }
+
+  static private int writeSpaceBlockRecord( BufferedWriter out, String name, int handle ) throws IOException
+  {
+     writeString( out, 0, "BLOCK_RECORD" );
+     handle = inc(handle);
+     writeAcDb( out, handle, AcDbSymbolTR, "AcDbBlockTableRecord" );
+     writeString( out, 2, name );
+     writeInt( out, 70, 0 );
+     writeInt( out, 280, 1 );
+     writeInt( out, 281, 0 );
+     writeInt( out, 330, 1 );
+     return handle;
+  }
+
+  static private int writeSpaceBlock( BufferedWriter out, String name, int handle ) throws IOException
+  {
+    writeString( out, 0, "BLOCK" );
+    handle = inc(handle);
+    writeAcDb( out, handle, AcDbEntity, "AcDbBlockBegin" );
+    // writeInt( out, 330, handle );
+    writeString( out, 8, "0" );
+    writeString( out, 2, name );
+    writeInt( out, 70, 0 );       // flag 0=none, 1=anonymous, 2=non-conts attr, 4=xref, 8=xref overlay,
+    writeInt( out, 10, 0 ); 
+    writeInt( out, 20, 0 ); 
+    writeInt( out, 30, 0 ); 
+    writeString( out, 3, name );
+    writeString( out, 1, "" );
+    writeString( out, 0, "ENDBLK" );
+    if ( mVersion13 ) {
+      handle = inc(handle);
+      writeAcDb( out, handle, AcDbEntity, "AcDbBlockEnd");
+      writeString( out, 8, "0");
+    }
     return handle;
   }
 
@@ -1053,23 +1090,8 @@ class DrawingDxf
           handle = inc(handle);
           writeBeginTable( out, "BLOCK_RECORD", handle, BrushManager.getPointLibSize() );
           {
-            writeString( out, 0, "BLOCK_RECORD" );
-            handle = inc(handle);
-            writeAcDb( out, handle, AcDbSymbolTR, "AcDbBlockTableRecord" );
-            writeString( out, 2, "*Model_Space" );
-            writeInt( out, 70, 0 );
-            writeInt( out, 280, 1 );
-            writeInt( out, 281, 0 );
-            writeInt( out, 330, 1 );
-
-            writeString( out, 0, "BLOCK_RECORD" );
-            handle = inc(handle);
-            writeAcDb( out, handle, AcDbSymbolTR, "AcDbBlockTableRecord" );
-            writeString( out, 2, "*Paper Space" );
-            writeInt( out, 70, 0 );
-            writeInt( out, 280, 1 );
-            writeInt( out, 281, 0 );
-            writeInt( out, 330, 1 );
+            handle = writeSpaceBlockRecord( out, "*Model_Space", handle );
+            handle = writeSpaceBlockRecord( out, "*Paper_Space", handle );
 
             for ( int n = 0; n < BrushManager.getPointLibSize(); ++ n ) {
               String th_name = BrushManager.getPointThName(n).replace(':','-');
@@ -1089,34 +1111,11 @@ class DrawingDxf
       
       writeSection( out, "BLOCKS" );
       {
-        writeString( out, 0, "BLOCK" );
-        handle = inc(handle);
-        writeAcDb( out, handle, AcDbEntity, "AcDbBlockBegin" );
-        // writeInt( out, 330, handle );
-        writeString( out, 8, "0" );
-        writeString( out, 2, "*ModelSpace" );
-        writeInt( out, 70, 0 );       // flag 0=none, 1=anonymous, 2=non-conts attr, 4=xref, 8=xref overlay,
-        writeInt( out, 10, 0 ); 
-        writeInt( out, 20, 0 ); 
-        writeInt( out, 30, 0 ); 
-        writeString( out, 3, "*ModelSpace" );
-        writeString( out, 1, "" );
-        writeString( out, 0, "ENDBLK" );
-        
-        writeString( out, 0, "BLOCK" );
-        handle = inc(handle);
-        writeAcDb( out, handle, AcDbEntity, "AcDbBlockBegin" );
-        // writeInt( out, 330, handle );
-        writeString( out, 8, "0" );
-        writeString( out, 2, "*PaperSpace" );
-        writeInt( out, 70, 0 );       // flag 0=none, 1=anonymous, 2=non-conts attr, 4=xref, 8=xref overlay,
-        writeInt( out, 10, 0 ); 
-        writeInt( out, 20, 0 ); 
-        writeInt( out, 30, 0 ); 
-        writeString( out, 3, "*PaperSpace" );
-        writeString( out, 1, "" );
-        writeString( out, 0, "ENDBLK" );
-        
+        if ( mVersion13 ) {
+          handle = writeSpaceBlock( out, "*Model_Space", handle );
+          handle = writeSpaceBlock( out, "*Paper_Space", handle );
+        }
+
         // // 8 layer (0), 2 block name,
         for ( int n = 0; n < BrushManager.getPointLibSize(); ++ n ) {
           SymbolPoint pt = (SymbolPoint)BrushManager.getPointByIndex(n);
