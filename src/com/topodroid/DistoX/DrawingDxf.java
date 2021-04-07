@@ -274,6 +274,125 @@ class DrawingDxf
     return handle;
   }
 
+  static private int countInterpolatedPolylinePoints(  DrawingPointLinePath line, boolean closed )
+  {
+    float bezier_step = TDSetting.getBezierStep();
+    int npt = 0;
+    LinePoint p = line.mFirst;
+    float x0 = p.x;
+    float y0 = p.y;
+    ++ npt;
+    for ( p = p.mNext; p != null; p = p.mNext ) { 
+      float x3 = p.x;
+      float y3 = p.y;
+      if ( p.has_cp ) { // FIXME this converts the cubic with a thickly interpolated polyline
+        float x1 = p.x1;
+        float y1 = p.y1;
+        float x2 = p.x2;
+        float y2 = p.y2;
+	float len = (x1-x0)*(x1-x0) + (x2-x1)*(x2-x1) + (x3-x2)*(x3-x2) + (x3-x0)*(x3-x0)
+	          + (y1-y0)*(y1-y0) + (y2-y1)*(y2-y1) + (y3-y2)*(y3-y2) + (y3-y0)*(y3-y0);
+	int np = (int)( TDMath.sqrt( len ) * bezier_step + 0.5f );
+	if ( np > 1 ) npt += np-1;
+      } 
+      ++npt;
+      x0 = x3;
+      y0 = y3;
+    }
+    if ( closed ) ++npt;
+    return npt;
+  }
+
+      /*
+      p = area.mFirst;
+      x0 = p.x;
+      y0 = p.y;
+      printXY( pw, (p.x+xoff)*scale, -(p.y+yoff)*scale, 0 );
+      for ( p = p.mNext; p != null; p = p.mNext ) {
+        float x3 = p.x;
+        float y3 = p.y;
+        if ( p.has_cp ) { // FIXME this converts the cubic with a thickly interpolated polyline
+          float x1 = p.x1;
+          float y1 = p.y1;
+          float x2 = p.x2;
+          float y2 = p.y2;
+          float len = (x1-x0)*(x1-x0) + (x2-x1)*(x2-x1) + (x3-x2)*(x3-x2) + (x3-x0)*(x3-x0)
+                  + (y1-y0)*(y1-y0) + (y2-y1)*(y2-y1) + (y3-y2)*(y3-y2) + (y3-y0)*(y3-y0);
+          int np = (int)( TDMath.sqrt( len ) * bezier_step + 0.5f );
+          if ( np > 1 ) {
+            BezierCurve bc = new BezierCurve( x0, y0, x1, y1, x2, y2, x3, y3 );
+            for ( int n=1; n < np; ++n ) {
+              Point2D pb = bc.evaluate( (float)n / (float)np );
+              printXY( pw, (p.x+xoff)*scale, -(p.y+yoff)*scale, 0 );
+            }
+          }
+        }
+        printXY( pw, (p.x+xoff)*scale, -(p.y+yoff)*scale, 0 );
+        x0 = x3;
+        y0 = y3;
+      }
+      p = area.mFirst;
+      x0 = p.x;
+      y0 = p.y;
+      printXY( pw, (p.x+xoff)*scale, -(p.y+yoff)*scale, 0 );
+      */
+  static private int printInterpolatedPolyline(  PrintWriter pw, DrawingPointLinePath line, float scale, int handle,
+                                    String layer, boolean closed, float xoff, float yoff )
+  {
+    float bezier_step = TDSetting.getBezierStep();
+    LinePoint p = line.mFirst;
+    float x0 = xoff + p.x;
+    float y0 = yoff + p.y;
+    if ( layer != null ) {
+      handle = printLinePoint( pw, scale, handle, layer, x0, y0 );
+    } else {
+      printXY( pw, x0*scale, -y0*scale, 0 );
+    }
+    for ( p = p.mNext; p != null; p = p.mNext ) { 
+      float x3 = xoff + p.x;
+      float y3 = yoff + p.y;
+      if ( p.has_cp ) { // FIXME this converts the cubic with a thickly interpolated polyline
+        float x1 = xoff + p.x1;
+        float y1 = yoff + p.y1;
+        float x2 = xoff + p.x2;
+        float y2 = yoff + p.y2;
+	float len = (x1-x0)*(x1-x0) + (x2-x1)*(x2-x1) + (x3-x2)*(x3-x2) + (x3-x0)*(x3-x0)
+	          + (y1-y0)*(y1-y0) + (y2-y1)*(y2-y1) + (y3-y2)*(y3-y2) + (y3-y0)*(y3-y0);
+	int np = (int)( TDMath.sqrt( len ) * bezier_step + 0.5f );
+	if ( np > 1 ) {
+	  BezierCurve bc = new BezierCurve( x0, y0, x1, y1, x2, y2, x3, y3 );
+          if ( layer != null ) {
+	    for ( int n=1; n < np; ++n ) {
+	      Point2D pb = bc.evaluate( (float)n / (float)np );
+              handle = printLinePoint( pw, scale, handle, layer, pb.x, pb.y );
+            }
+          } else {
+	    for ( int n=1; n < np; ++n ) {
+	      Point2D pb = bc.evaluate( (float)n / (float)np );
+              printXY( pw, (pb.x+xoff)*scale, -(pb.y+yoff)*scale, 0 );
+            }
+          }
+        }
+      } 
+      if ( layer != null ) {
+        handle = printLinePoint( pw, scale, handle, layer, x3, y3 );
+      } else {
+        printXY( pw, x3*scale, -y3*scale, 0 );
+      }
+      x0 = x3;
+      y0 = y3;
+    }
+    if ( closed ) {
+      p = line.mFirst;
+      if ( layer != null ) {
+        handle = printLinePoint( pw, scale, handle, layer, xoff+p.x, yoff+p.y );
+      } else {
+        printXY( pw, (p.x+xoff)*scale, -(p.y+yoff)*scale, 0 );
+      }
+    }
+    return handle;
+  }
+
   static private int printPolyline( PrintWriter pw, DrawingPointLinePath line, float scale, int handle,
                                     String layer, boolean closed, float xoff, float yoff )
   {
@@ -289,11 +408,12 @@ class DrawingDxf
     printInt( pw, 66, 1 ); // group 1
     printInt( pw, 70, 8 + close ); // polyline flag 8 = 3D polyline, 1 = closed 
     printInt( pw, 75, 0 ); // 6 cubic spline, 5 quad spline, 0
+
+    // handle = printInterpolatedPolyline( pw, line, scale, handle, layer, closed, xoff, yoff );
     LinePoint p = line.mFirst;
     float x0 = xoff + p.x;
     float y0 = yoff + p.y;
     handle = printLinePoint( pw, scale, handle, layer, x0, y0 );
-
     for ( p = p.mNext; p != null; p = p.mNext ) { 
       float x3 = xoff + p.x;
       float y3 = yoff + p.y;
@@ -321,6 +441,7 @@ class DrawingDxf
       p = line.mFirst;
       handle = printLinePoint( pw, scale, handle, layer, xoff+p.x, yoff+p.y );
     }
+
     pw.printf("  0%sSEQEND%s", EOL, EOL );
     if ( mVersion13 ) {
       handle = inc(handle);
@@ -1274,6 +1395,9 @@ class DrawingDxf
         printInt( pw, 72, 0 );          // not-polyline edge type (0: default) 1:line 2:arc 3:ellipse-arec 4:spline
                                          // polyline: has-bulge
         printInt( pw, 73, 1 );          // is-closed flag
+
+        int npt = countInterpolatedPolylinePoints( area, true );
+        /* 
         int npt = 0;
         LinePoint p = area.mFirst;
         float x0 = p.x;
@@ -1297,9 +1421,12 @@ class DrawingDxf
           y0 = y3;
         }
         ++npt;
+        */
         printInt( pw, 93, npt ); // nr. of points (not polyline) vertices (polyline)
         // printInt( pw, 93, area.size() ); // nr. of points (not polyline) vertices (polyline)
       // bezier interpolation
+      printInterpolatedPolyline( pw, area, scale, 0, null, true, xoff, yoff );
+      /*
       p = area.mFirst;
       x0 = p.x;
       y0 = p.y;
@@ -1331,6 +1458,7 @@ class DrawingDxf
       x0 = p.x;
       y0 = p.y;
       printXY( pw, (p.x+xoff)*scale, -(p.y+yoff)*scale, 0 );
+      */
       // bezier interpolation
 
       // printXY( pw, area.mFirst.x * scale, -area.mFirst.y * scale, 0 );
