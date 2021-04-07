@@ -525,12 +525,20 @@ class DrawingDxf
       d = (float)Math.sqrt( xt*xt + yt*yt );
       printXYZ( pw, xt/d, -yt/d, 0, 3 );
     }
-    if ( closed ) np++;
 
     //int ncp = 4 * np - 4; // np + 3 * (np-1) - 1; // 4 * NP - 4
     int ncp = 3 * np - 2; // control points: 1 + 3 * (NP - 1) = 3 NP - 2 //for (p=...
     int nk  = 3 * np + 2; // ncp + 4 - (np - 2);  // 3 * NP + 2
-    printInt( pw, 70, 1064 ); // flags 1064 = 1024 + 32 + 8
+/*
+    if ( closed ) {
+      nk  += 3;
+      ncp += 3;
+      np  += 1;
+    }
+*/
+      
+    Log.v("DistoX", "Spline P " + np + " Cp " + ncp + " K " + nk );
+    printInt( pw, 70, 8+(closed?1:0) ); // flags 8 (planar) + 1 (if closed)
     printInt( pw, 71, 3 );    // degree of the spline
     printInt( pw, 72, nk );   // nr. of knots
     printInt( pw, 73, ncp );  // nr. of control pts
@@ -560,18 +568,23 @@ class DrawingDxf
       xt = p.x;
       yt = p.y;
     }
+/*
     if ( closed ) {
       p = line.mFirst;
       printXYZ( pw, (xt+xoff) * scale, -(yt+yoff) * scale, 0.0f, 0 );
       printXYZ( pw, (p.x+xoff) * scale, -(p.y+yoff) * scale, 0.0f, 0 );
     }
+*/
+
     for ( p = line.mFirst; p != null; p = p.mNext ) { 
       printXYZ( pw, (p.x+xoff) * scale, -(p.y+yoff) * scale, 0.0f, 1 );  // fit points: NP
     }
+/*
     if ( closed ) {
       p = line.mFirst;
       printXYZ( pw, (p.x+xoff) * scale, -(p.y+yoff) * scale, 0.0f, 1 );  // fit points: NP
     }
+*/
     return handle;
   }
 
@@ -1040,15 +1053,32 @@ class DrawingDxf
           handle = inc(handle);
           writeBeginTable( out, "BLOCK_RECORD", handle, BrushManager.getPointLibSize() );
           {
-	    //writeString( out, 2, "*Model_Space" ); //missing AutoCAD record...not work
+            writeString( out, 0, "BLOCK_RECORD" );
+            handle = inc(handle);
+            writeAcDb( out, handle, AcDbSymbolTR, "AcDbBlockTableRecord" );
+            writeString( out, 2, "*Model_Space" );
+            writeInt( out, 70, 0 );
+            writeInt( out, 280, 1 );
+            writeInt( out, 281, 0 );
+            writeInt( out, 330, 1 );
+
+            writeString( out, 0, "BLOCK_RECORD" );
+            handle = inc(handle);
+            writeAcDb( out, handle, AcDbSymbolTR, "AcDbBlockTableRecord" );
+            writeString( out, 2, "*Paper Space" );
+            writeInt( out, 70, 0 );
+            writeInt( out, 280, 1 );
+            writeInt( out, 281, 0 );
+            writeInt( out, 330, 1 );
+
             for ( int n = 0; n < BrushManager.getPointLibSize(); ++ n ) {
               String th_name = BrushManager.getPointThName(n).replace(':','-');
               writeString( out, 0, "BLOCK_RECORD" );
               handle = inc(handle);
               writeAcDb( out, handle, AcDbSymbolTR, "AcDbBlockTableRecord" );
               writeString( out, 8, "P_" + th_name );
-              writeString( out, 2, "B_" + th_name );
-              writeInt( out, 70, 0 );              // flag
+              writeString( out, 2, "B_" + th_name ); // block name
+              writeInt( out, 70, 0 );                // block insertion units
             }
           }
           writeEndTable( out );
@@ -1059,6 +1089,34 @@ class DrawingDxf
       
       writeSection( out, "BLOCKS" );
       {
+        writeString( out, 0, "BLOCK" );
+        handle = inc(handle);
+        writeAcDb( out, handle, AcDbEntity, "AcDbBlockBegin" );
+        // writeInt( out, 330, handle );
+        writeString( out, 8, "0" );
+        writeString( out, 2, "*ModelSpace" );
+        writeInt( out, 70, 0 );       // flag 0=none, 1=anonymous, 2=non-conts attr, 4=xref, 8=xref overlay,
+        writeInt( out, 10, 0 ); 
+        writeInt( out, 20, 0 ); 
+        writeInt( out, 30, 0 ); 
+        writeString( out, 3, "*ModelSpace" );
+        writeString( out, 1, "" );
+        writeString( out, 0, "ENDBLK" );
+        
+        writeString( out, 0, "BLOCK" );
+        handle = inc(handle);
+        writeAcDb( out, handle, AcDbEntity, "AcDbBlockBegin" );
+        // writeInt( out, 330, handle );
+        writeString( out, 8, "0" );
+        writeString( out, 2, "*PaperSpace" );
+        writeInt( out, 70, 0 );       // flag 0=none, 1=anonymous, 2=non-conts attr, 4=xref, 8=xref overlay,
+        writeInt( out, 10, 0 ); 
+        writeInt( out, 20, 0 ); 
+        writeInt( out, 30, 0 ); 
+        writeString( out, 3, "*PaperSpace" );
+        writeString( out, 1, "" );
+        writeString( out, 0, "ENDBLK" );
+        
         // // 8 layer (0), 2 block name,
         for ( int n = 0; n < BrushManager.getPointLibSize(); ++ n ) {
           SymbolPoint pt = (SymbolPoint)BrushManager.getPointByIndex(n);
@@ -1393,7 +1451,7 @@ class DrawingDxf
       // boundary data
         printInt( pw, 92, 2 );          // flag. 1:external 2:polyline 4:derived 8:text 16:outer
         printInt( pw, 72, 0 );          // not-polyline edge type (0: default) 1:line 2:arc 3:ellipse-arec 4:spline
-                                         // polyline: has-bulge
+                                        // polyline: has-bulge
         printInt( pw, 73, 1 );          // is-closed flag
 
         int npt = countInterpolatedPolylinePoints( area, true );
@@ -1422,7 +1480,7 @@ class DrawingDxf
         }
         ++npt;
         */
-        printInt( pw, 93, npt ); // nr. of points (not polyline) vertices (polyline)
+        printInt( pw, 93, npt ); // nr. of points (not polyline) - nr. vertices (polyline)
         // printInt( pw, 93, area.size() ); // nr. of points (not polyline) vertices (polyline)
       // bezier interpolation
       printInterpolatedPolyline( pw, area, scale, 0, null, true, xoff, yoff );
@@ -1462,7 +1520,7 @@ class DrawingDxf
       // bezier interpolation
 
       // printXY( pw, area.mFirst.x * scale, -area.mFirst.y * scale, 0 );
-        printInt( pw, 97, 0 );            // nr. source boundary objects
+        printInt( pw, 97, 1 );            // nr. source boundary objects
       printInt( pw, 75, 0 );            // hatch style: 0:normal, 1:outer, 2:ignore
       printInt( pw, 76, 1 );            // hatch pattern type: 0:user, 1:predefined, 2:custom
       printFloat( pw, 52, 0f );         // hatch pattern angle (only pattern fill)
