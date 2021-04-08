@@ -54,6 +54,8 @@ public class TopoDroidProtocol
   public double mAcceleration; // G intensity
   public double mMagnetic;     // M intensity
   public double mDip;          // magnetic dip
+  public int    mType;         // measurement type
+  public int    mSamples;      // measurement samples
   public byte mRollHigh; // high byte of roll
   public long mGX, mGY, mGZ;
   public long mMX, mMY, mMZ;

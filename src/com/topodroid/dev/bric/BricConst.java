@@ -60,9 +60,9 @@ public class BricConst
   static int   getIndex( byte[] bytes )    { return BleUtils.getInt(   bytes,  0 ); }
   static float getDip( byte[] bytes )      { return BleUtils.getFloat( bytes,  4 ); }
   static float getRoll( byte[] bytes )     { return BleUtils.getFloat( bytes,  8 ); }
-  static float getTemp( byte[] bytes )     { return BleUtils.getFloat( bytes, 12 ); }
-  static int   getType( byte[] bytes )     { return BleUtils.getChar(  bytes, 18 ); }
-  static short getSamples( byte[] bytes )  { return BleUtils.getShort( bytes, 16 ); }
+  static float getTemp( byte[] bytes )     { return BleUtils.getFloat( bytes, 12 ); }  // internal temperature
+  static short getSamples( byte[] bytes )  { return BleUtils.getShort( bytes, 16 ); }  // measurement samples
+  static int   getType( byte[] bytes )     { return BleUtils.getChar(  bytes, 18 ); }  // measurement type
 
   // get the timestamp in msec
   static long  getTimestamp( byte[] bytes ) 

@@ -187,7 +187,8 @@ public class TDSetting
   // public static float mDxfScale    = 1.0f;
   public static int mBitmapBgcolor = 0x000000;
 
-  public static int mAcadVersion = 9;      // AutoCAD version 9, or 13, or 16
+  public static int mAcadVersion = 9;       // AutoCAD version 9, or 13, or 16
+  public static boolean mAcadSpline = true; // interpolated cubics
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // LOCATION
@@ -924,6 +925,7 @@ public class TDSetting
     // mDxfScale    = tryFloat( prefs,    keyExpDxf[ ],      defExpDxf[ ] );  // DISTOX_DXF_SCALE
     mDxfBlocks   =  prefs.getBoolean(     keyExpDxf[0], bool(defExpDxf[0]) ); // DISTOX_DXF_BLOCKS
     mAcadVersion = tryInt(   prefs,       keyExpDxf[1],      defExpDxf[1] );  // DISTOX_ACAD_VERSION choice: 9, 13, 16
+    mAcadSpline  =  prefs.getBoolean(     keyExpDxf[2], bool(defExpDxf[2]) ); // DISTOX_ACAD_SPLINE
   
     String[] keyExpShp = TDPrefKey.EXPORT_SHP;
     String[] defExpShp = TDPrefKey.EXPORT_SHPdef;
@@ -1766,6 +1768,8 @@ public class TDSetting
       mDxfBlocks = tryBooleanValue( hlp, k, v, bool(def[ 0 ]) );
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_ACAD_VERSION (choice)
       try { mAcadVersion = tryIntValue( hlp, k, v, def[ 1 ] ); } catch ( NumberFormatException e) { }
+    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_ACAD_SPLINE (bool)
+      mAcadSpline = tryBooleanValue( hlp, k, v, bool(def[ 2 ]) );
     } else {
       TDLog.Error("missing EXPORT DXF key: " + k );
     }
@@ -2519,7 +2523,7 @@ public class TDSetting
       pw.printf(Locale.US, "Therion: config %c, maps %c, stations %c, splays %c, xvi %c, scale %.2f \n",
         tf(mTherionConfig), tf(mTherionMaps), tf(mAutoStations), tf(mTherionSplays), tf(mTherionXvi), mToTherion );
       pw.printf(Locale.US, "PNG scale %.2f, bg_color %d \n", mBitmapScale, (mBitmapBgcolor & 0xffffff) );
-      pw.printf(Locale.US, "DXF: acad_version %d, blocks %c \n", mAcadVersion, tf(mDxfBlocks) );
+      pw.printf(Locale.US, "DXF: acad_version %d, blocks %c, spline %c \n", mAcadVersion, tf(mDxfBlocks), tf(mAcadSpline) );
       pw.printf(Locale.US, "SVG: shot %.1f, label %.1f, station %d, point %.1f, round-trip %c, grid %c %.1f, line %.1f, dir %c %.1f, splays %c \n",
         mSvgShotStroke, mSvgLabelStroke, mSvgStationSize, mSvgPointStroke,
         tf(mSvgRoundTrip), tf(mSvgGrid), mSvgGridStroke, mSvgLineStroke, tf(mSvgLineDirection), mSvgLineDirStroke, tf(mSvgSplays) );
@@ -2793,6 +2797,7 @@ public class TDSetting
           if ( vals.length > 4 ) {
             mAcadVersion = getInt( vals, 2, 9 ); setPreference( editor, "DISTOX_ACAD_VERSION", mAcadVersion );
             mDxfBlocks   = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_DXF_BLOCKS", mDxfBlocks );
+            mAcadSpline  = getBoolean( vals, 6 ); setPreference( editor, "DISTOX_ACAD_SPLINE", mAcadSpline );
           }
           continue;
         }

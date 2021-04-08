@@ -127,9 +127,11 @@ public class BricProto extends TopoDroidProtocol
 
   void addMeasMeta( byte[] bytes ) 
   {
-    mIndex = BricConst.getIndex( bytes );
-    mRoll  = BricConst.getRoll( bytes );
-    mDip   = BricConst.getDip( bytes );
+    mIndex   = BricConst.getIndex( bytes );
+    mRoll    = BricConst.getRoll( bytes );
+    mDip     = BricConst.getDip( bytes );
+    mType    = BricConst.getType( bytes );
+    mSamples = BricConst.getSamples( bytes );
     TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: added Meta " + mIndex );
   }
 
@@ -145,9 +147,10 @@ public class BricProto extends TopoDroidProtocol
     mComment = ( mErr1 > 0 || mErr2 > 0 )? BricConst.errorString( bytes ) : null;
   }
   
+  // TODO use mType
   void processData()
   {
-    // Log.v("DistoX", "BRIC proto process data - prim todo " + mPrimToDo + " index " + mIndex );
+    Log.v("DistoX", "BRIC proto process data - prim todo " + mPrimToDo + " index " + mIndex + " type " + mType );
     if ( mPrimToDo ) {
       TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: process - PrimToDo true: " + mIndex + " prev " + mLastIndex );
       // mComm.handleRegularPacket( DataType.PACKET_DATA, mLister, DataType.DATA_SHOT );

@@ -393,10 +393,8 @@ class DrawingDxf
     return handle;
   }
 
-  static private int printPolyline( PrintWriter pw, DrawingPointLinePath line, float scale, int handle,
-                                    String layer, boolean closed, float xoff, float yoff )
+  static private int printPolylineHeader( PrintWriter pw, int handle, String layer, boolean closed )
   {
-    float bezier_step = TDSetting.getBezierStep();
     printString( pw, 0, "POLYLINE" );
     handle = inc(handle);
     printAcDb( pw, handle, AcDbEntity, AcDbPolyline );
@@ -407,9 +405,39 @@ class DrawingDxf
     printInt( pw, 66, 1 ); // group 1
     printInt( pw, 70, 8 + (closed? 1:0) ); // polyline flag 8 = 3D polyline, 1 = closed  // inlined close in 5.1.20
     // printInt( pw, 75, 0 ); // 6 cubic spline, 5 quad spline, 0 (optional, default 0) // commented in 5.1.20
+    return handle;
+  }
+
+  static private int printPolylineFooter( PrintWriter pw, int handle )
+  {
+    pw.printf("  0%sSEQEND%s", EOL, EOL );
+    if ( mVersion13 ) {
+      handle = inc(handle);
+      printHex( pw, 5, handle );
+    }
+    return handle;
+  }
+
+  static private int printPolyline( PrintWriter pw, DrawingPointLinePath line, float scale, int handle,
+                                    String layer, boolean closed, float xoff, float yoff )
+  {
+    handle = printPolylineHeader( pw, handle, layer, closed );
+    /* commented 5.1.22
+    printString( pw, 0, "POLYLINE" );
+    handle = inc(handle);
+    printAcDb( pw, handle, AcDbEntity, AcDbPolyline );
+    printString( pw, 8, layer );
+    // printInt(  pw, 39, 1 ); // line thickness
+    // printInt(  pw, 40, 1 ); // start width
+    // printInt(  pw, 41, 1 ); // end width
+    printInt( pw, 66, 1 ); // group 1
+    printInt( pw, 70, 8 + (closed? 1:0) ); // polyline flag 8 = 3D polyline, 1 = closed  // inlined close in 5.1.20
+    // printInt( pw, 75, 0 ); // 6 cubic spline, 5 quad spline, 0 (optional, default 0) // commented in 5.1.20
+    */
 
     handle = printInterpolatedPolyline( pw, line, scale, handle, layer, closed, xoff, yoff );
     /* commented in 5.1.20
+    // float bezier_step = TDSetting.getBezierStep();
     LinePoint p = line.mFirst;
     float x0 = xoff + p.x;
     float y0 = yoff + p.y;
@@ -443,11 +471,14 @@ class DrawingDxf
     }
     */
 
+    handle = printPolylineFooter( pw, handle );
+    /* commented 5.1.22
     pw.printf("  0%sSEQEND%s", EOL, EOL );
     if ( mVersion13 ) {
       handle = inc(handle);
       printHex( pw, 5, handle );
     }
+    */
     return handle;
   }
 
@@ -1416,10 +1447,18 @@ class DrawingDxf
     String layer = "L_" + line.getThName( ).replace(':','-');
     int flag = 0;
     if ( mVersion13 && checkSpline( line ) ) {
-      return printSpline( pw, line, scale, handle, layer, line.isClosed(), xoff, yoff );
-    } 
-    // return printLWPolyline( pw5, line, scale, handle, layer, false );
-    return printPolyline( pw, line, scale, handle, layer, line.isClosed(), xoff, yoff );
+      if ( TDSetting.mAcadSpline ) {
+        handle = printPolylineHeader( pw, handle, layer, line.isClosed() );
+        handle = printInterpolatedPolyline( pw, line, scale, handle, layer, line.isClosed(), xoff, yoff );
+        handle = printPolylineFooter( pw, handle );
+      } else {
+        handle = printSpline( pw, line, scale, handle, layer, line.isClosed(), xoff, yoff );
+      }
+    } else {
+      // handle = printLWPolyline( pw5, line, scale, handle, layer, false );
+      handle = printPolyline( pw, line, scale, handle, layer, line.isClosed(), xoff, yoff );
+    }
+    return handle;
   }
 
   static private int toDxf( PrintWriter pw, int handle, DrawingAreaPath area, float scale, float xoff, float yoff )
@@ -1429,7 +1468,13 @@ class DrawingDxf
     // Log.v("DistoX", "area size " + area.size() );
     String layer = "A_" + area.getThName( ).replace(':','-');
     if ( mVersion13 && checkSpline( area ) ) {
-      handle = printSpline( pw, area, scale, handle, layer, true, xoff, yoff );
+      if ( TDSetting.mAcadSpline ) {
+        handle = printPolylineHeader( pw, handle, layer, true );
+        handle = printInterpolatedPolyline( pw, area, scale, handle, layer, true, xoff, yoff );
+        handle = printPolylineFooter( pw, handle );
+      } else {
+        handle = printSpline( pw, area, scale, handle, layer, true, xoff, yoff );
+      }
     } else {
       // handle = printLWPolyline( pw5, line, scale, handle, layer, true );
       handle = printPolyline( pw, area, scale, handle, layer, true, xoff, yoff );

@@ -722,7 +722,8 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     return new TDPref[ ] {
       // makeEdt( cat, key[ ]  tit[ ], dsc[ ], X, def[ ], FLOAT,  ctx, hlp ),
       makeCbx( cat, key[0], tit[0], dsc[0], N, def[0],         ctx, hlp ),
-      makeLst( cat, key[1], tit[1], dsc[1], E, def[1], R.array.acadVersion, R.array.acadVersionValue, ctx, hlp )
+      makeLst( cat, key[1], tit[1], dsc[1], E, def[1], R.array.acadVersion, R.array.acadVersionValue, ctx, hlp ),
+      makeCbx( cat, key[2], tit[2], dsc[2], T, def[2],         ctx, hlp )
     };
   }
 

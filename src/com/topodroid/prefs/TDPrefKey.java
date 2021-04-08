@@ -750,21 +750,25 @@ public class TDPrefKey
     // "DISTOX_DXF_SCALE",     // default DXF scale (export)
     "DISTOX_DXF_BLOCKS",       // whether to export point items as Blocks in DXF export
     "DISTOX_ACAD_VERSION",     // 23 31 
+    "DISTOX_ACAD_SPLINE",
   };
   static int[] EXPORT_DXFtitle = {
     // R.string.pref_dxf_scale_title,
     R.string.pref_dxf_blocks_title,
     R.string.pref_acad_version_title,
+    R.string.pref_acad_spline_title,
   };
   static int[] EXPORT_DXFdesc = {
     // R.string.pref_dxf_scale_summary,
     R.string.pref_dxf_blocks_summary,
     R.string.pref_acad_version_summary,
+    R.string.pref_acad_spline_summary,
   };
   public static String[] EXPORT_DXFdef = {
     // "1.0",
     TRUE,
     "9",
+    TRUE,
   };
 
   // ------------------------------------------------------------------------------

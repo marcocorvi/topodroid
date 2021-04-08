@@ -1376,6 +1376,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_bitmap_bgcolor_summary">Background color of PNG image of sketches</string>
   <string name="pref_acad_version_title">DXF version</string>
   <string name="pref_acad_version_summary">DXF version</string>
+  <string name="pref_acad_spline_title">DXF splines</string>
+  <string name="pref_acad_spline_summary">DXF interpolated cubics</string>
   <!-- UNUSED string name="pref_dxf_scale_title">DXF sketch scale</string -->
   <!-- UNUSED string name="pref_dxf_scale_summary">DXF sketch scale factor</string -->
   <string name="pref_dxf_blocks_title">DXF splay endpoints</string>
