@@ -421,6 +421,7 @@ class SymbolPoint extends Symbol
             // DrawingDxf.printXYZ( pw, x00, -y00, 0.0f, 0 ); // prev point
             // DrawingDxf.printXYZ( pw, x01, -y01, 0.0f, 1 ); // current point
             mDxf.startLine(pname );
+	    mDxf.addHandle(); //HB20210409_001
             mDxf.addAcDbLine();
             mDxf.addLine( x00, -y00, x01, -y01 );
 
@@ -547,6 +548,7 @@ class SymbolPoint extends Symbol
             // DrawingDxf.printXYZ( pw, x0*dxfScale, -y0*dxfScale, 0.0f, 0 );
             // DrawingDxf.printFloat( pw, 40, x1*dxfScale );
             mDxf.startCircle( pname );
+	    mDxf.addHandle(); //HB20210409_001
             mDxf.addAcDbCircle();
             mDxf.addCircle( x0*dxfScale, -y0*dxfScale, x1*dxfScale );
 
@@ -614,6 +616,7 @@ class SymbolPoint extends Symbol
             // DrawingDxf.printFloat( pw, 50, x2 );                                         // ANGLES
             // DrawingDxf.printFloat( pw, 51, x2+y2 );
             mDxf.startArc( pname );
+	    mDxf.addHandle(); //HB20210409_001
             mDxf.addAcDbCircle(); // FIXME ???
             mDxf.addCircle(  (x0+x1)/2*dxfScale, -(y0+y1)/2*dxfScale, x1*dxfScale );
             mDxf.addArcAngles( x2, y2 );
