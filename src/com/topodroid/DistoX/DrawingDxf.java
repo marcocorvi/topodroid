@@ -43,7 +43,7 @@ class DrawingDxf
   private static boolean mVersion16 = false;
   private static boolean doHandle   = true;
 
-  static private int inc( int h ) { ++h; if ( h == 0x0105 ) ++h; return h; }
+  static int inc( int h ) { ++h; if ( h == 0x0105 ) ++h; return h; }
 
   static final private float POINT_SCALE   = 10.0f; // scale of point icons: only ACAD_6
   // the next three are for text
@@ -80,7 +80,7 @@ class DrawingDxf
     out.write( "  999" + EOL + comment + EOL );
   }
 
-  static private void writeHex( BufferedWriter out, int code, int handle ) throws IOException // mVersion13
+  static void writeHex( BufferedWriter out, int code, int handle ) throws IOException // mVersion13
   {
     if ( mVersion13 && doHandle ) {
       StringWriter sw = new StringWriter();

@@ -110,7 +110,7 @@ public class TDPath
 
   private static String PATH_BIN  = PATH_DEFAULT + "bin/";    // Firmwares  
   private static String PATH_CCSV = PATH_DEFAULT + "ccsv/";  // calib CSV text
-  private static String PATH_MAN  = PATH_DEFAULT + "man/"; // User Manual
+  // private static String PATH_MAN  = TDInstance.context.getFileDir(); // PATH_DEFAULT + "man/"; // User Manual
 
   private static String APP_SYMBOL_PATH = PATH_DEFAULT + "symbol/";
   private static String APP_POINT_PATH  = APP_SYMBOL_PATH + "point/";
@@ -371,7 +371,7 @@ public class TDPath
     // Log.v("DistoX-PATH11", "set default paths from " + PATH_DEFAULT );
 
     PATH_BIN  = PATH_DEFAULT + "bin/";
-    PATH_MAN  = PATH_DEFAULT + "man/";   
+    // PATH_MAN  = PATH_DEFAULT + "man/";   
     PATH_CCSV = PATH_DEFAULT + "ccsv/"; 
     PATH_DUMP = PATH_DEFAULT + "dump/"; 
 
@@ -393,7 +393,7 @@ public class TDPath
   {
     // Log.v("DistoX", "check default paths from " + PATH_DEFAULT );
     checkDirs( PATH_BIN );
-    checkDirs( PATH_MAN );
+    // checkDirs( PATH_MAN );
     checkDirs( PATH_CCSV );
     checkDirs( PATH_DUMP );
     symbolsCheckDirs();
@@ -545,8 +545,11 @@ public class TDPath
   public static String getDumpFile( String name )   { return PATH_DUMP + name; }
   public static String getBinFile( String name )    { return PATH_BIN + name; }
   static String getCCsvFile( String name )   { return PATH_CCSV + name; }
-  public static String getManFile( String name )    { return PATH_MAN + name; }
-  public static String getManPath( )    { return PATH_MAN; }
+  // public static String getManFile( String name )    { return PATH_MAN + name; }
+  // public static String getManPath( )    { return PATH_MAN; }
+  public static File getManFile( String name )    { return new File( getManPath(), name ); }
+  public static File getManPath( )    { return new File( TDInstance.context.getFilesDir(), "man" ); }
+  public static String getManFileName( String name )    { return "man/" + name; }
 
   static String getNoteFile( String name )   { return APP_NOTE_PATH + name; }
 

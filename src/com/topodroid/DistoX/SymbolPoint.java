@@ -365,9 +365,9 @@ class SymbolPoint extends Symbol
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter( sw ); // DXF writer
     StringWriter sv1 = new StringWriter();
-    PrintWriter pv1  = new PrintWriter( sv1 ); // CSX path writer
-    StringWriter sv2 = new StringWriter();
-    PrintWriter pv2  = new PrintWriter( sv2 ); // CSX circle writer
+    PrintWriter pv1  = new PrintWriter( sv1 ); // SVG path writer
+    // StringWriter sv2 = new StringWriter();
+    // PrintWriter pv2  = new PrintWriter( sv2 ); // CSX circle writer
     StringWriter sv3 = new StringWriter();
     PrintWriter pv3  = new PrintWriter( sv3 ); // SVG circle writer
     StringWriter sv4 = new StringWriter();
@@ -513,9 +513,9 @@ class SymbolPoint extends Symbol
 	    pv4.format(Locale.US, "C %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f ", 
               (x0-x1)*dxfScale, y0*dxfScale, (x0-x1)*dxfScale, (y0+x1)*dxfScale, (x0+x1)*dxfScale, (y0+x1)*dxfScale, (x0+x1)*dxfScale, y0*dxfScale );
 
-            pv2.format(Locale.US,
-              "&lt;circle cx=&quot;%.2f&quot; cy=&quot;%.2f&quot; r=&quot;%.2f&quot; /&gt;",
-              x0*csxdxfScale, y0*csxdxfScale, x1*csxdxfScale );
+            // pv2.format(Locale.US,
+            //   "&lt;circle cx=&quot;%.2f&quot; cy=&quot;%.2f&quot; r=&quot;%.2f&quot; /&gt;",
+            //   x0*csxdxfScale, y0*csxdxfScale, x1*csxdxfScale );
             pv3.format(Locale.US,
               "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"%.2f\" />",
               x0*csxdxfScale, y0*csxdxfScale, x1*csxdxfScale );

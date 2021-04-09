@@ -18,9 +18,17 @@ import com.topodroid.DistoX.TDPath;
 import com.topodroid.DistoX.TDToast;
 import com.topodroid.DistoX.R;
 
-// import android.util.Log;
+import android.util.Log;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.IOException;
+
+import java.net.URI;
+import java.net.URL;
+import java.net.MalformedURLException;
 import java.util.Locale;
 
 import android.app.Activity;
@@ -42,42 +50,113 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import android.webkit.WebView;
+import android.webkit.WebSettings;
 import android.webkit.WebViewClient;
 
 public class UserManualActivity extends Activity
                                 implements OnItemClickListener, OnClickListener
 {
+  private static final String NEEDLE = "DistoX/files/man";
   private WebView mTVtext;
   private int mCloseOnBack = 0;
 
-  private void load( String filename )
+  private void load( WebView view, String filename )
   {
     ++mCloseOnBack;
     // String filepath = TDPath.getManFile( filename );
-    // mTVtext.loadUrl( filepath );
-    String page = TDPath.getManFile( filename );
-    if ( ! ( TDSetting.mLocalManPages && (new File(page)).exists() ) ) {
-      page = "/android_asset/man/" + filename;
-    }
-    mTVtext.loadUrl( "file://" + page );
-  }
+    // view.loadUrl( filepath );
+    // setWebViewSettings( mTVtext );
+    Log.v("DistoX", "MAN-0 filename " + filename );
 
-  private void getManualFromWeb()
-  {
-    String manual = getResources().getString( R.string.topodroid_man );
-    if ( manual.startsWith("http") ) {
-      try {
-        startActivity( new Intent( Intent.ACTION_VIEW, Uri.parse( manual )));
-      } catch ( ActivityNotFoundException e ) {
-        TDToast.makeBad( R.string.no_manual );
+    if ( filename.startsWith("file:///data" ) ) {
+      if ( TDSetting.mLocalManPages ) {
+        int pos = filename.indexOf( NEEDLE );
+        Log.v("DistoX", "MAN-1 filename " + filename + " index " + pos );
+        if ( pos > 0 ) {
+          String name = filename.substring( pos + NEEDLE.length() );
+          String pagename = TDPath.getManFileName( name );
+          File pagefile = TDPath.getManFile( name );
+          Log.v("DistoX", "MAN-2 pagefile " + pagefile.getPath() );
+          Log.v("DistoX", "MAN-2 pagename " + pagename );
+          loadLocal( view, pagefile );
+        } 
+      }
+    } else {
+      String pagename = TDPath.getManFileName( filename );
+      File pagefile = TDPath.getManFile( filename );
+      Log.v("DistoX", "MAN-3 filename " + filename );
+      Log.v("DistoX", "MAN-3 pagename " + pagename );
+      if ( ! ( TDSetting.mLocalManPages && pagefile.exists() ) ) {
+        String page = "/android_asset/man/" + filename;
+        view.loadUrl( "file://" + page );
+      } else {
+        loadLocal( view, pagefile );
       }
     }
   }
+   
+  private void loadLocal( WebView view, File pagefile )
+  {
+    // view.loadUrl( "file://" + page );
+    StringBuilder pagedata = new StringBuilder();
+    String encoding = "UTF-8";
+    String mime = "text/html";
+    String baseurl = "file://" + pagefile.getPath();
+    Log.v("DistoX", "MAN-4 baseurl " + baseurl );
+    try {
+      FileReader fr = new FileReader( pagefile );
+      encoding = fr.getEncoding();
+      BufferedReader br = new BufferedReader( fr );
+      String line;
+      while ( ( line = br.readLine() ) != null ) {
+        pagedata.append( line );
+      }
+      fr.close();
+    } catch (IOException e ) {}
+    view.loadDataWithBaseURL( baseurl, pagedata.toString(), mime, encoding, null );
+
+    // try { 
+    //   URI pageuri = pagefile.toURI();
+    //   Log.v("DistoX", "MAN url " +  pageuri.toURL().toString() );
+    //   view.loadUrl( pageuri.toURL().toString() );
+    // } catch ( MalformedURLException e ) {
+    //   Log.v("DistoX", "MAN error " + e.getMessage() );
+    // }
+  }
+
+  // private void getManualFromWeb()
+  // {
+  //   String manual = getResources().getString( R.string.topodroid_man );
+  //   if ( manual.startsWith("http") ) {
+  //     viewUrl( manual );
+  //   }
+  // }
+ 
+  // private void viewUrl( String uri_string )
+  // {
+  //   try {
+  //     startActivity( new Intent( Intent.ACTION_VIEW, Uri.parse( uri_string )));
+  //   } catch ( ActivityNotFoundException e ) {
+  //     TDToast.makeBad( R.string.no_manual );
+  //   }
+  // }
 
 // -------------------------------------------------------------------
   // SlidingDrawer mDrawer;
   private ImageView     mImage;
   private ListView      mList;
+
+  private void setWebViewSettings( WebView view )
+  {
+    // WebSettings ws = view.getSettings();
+    // view.getSettings().setAllowContentAccess( true );
+    // view.getSettings().setAllowFileAccess( true );
+    // view.getSettings().setBlockNetworkImage( false );
+    // view.getSettings().setBlockNetworkLoads( false );
+    // view.getSettings().setLoadsImagesAutomatically( true ); 
+    view.getSettings().setJavaScriptEnabled( false ); // no JS
+    view.getSettings().setSupportZoom( true ); 
+  }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) 
@@ -95,21 +174,22 @@ public class UserManualActivity extends Activity
 
     setContentView(R.layout.distox_manual_dialog);
     mTVtext   = (WebView) findViewById(R.id.manual_text );
+ 
+    setWebViewSettings( mTVtext );
 
     mTVtext.setWebViewClient( new WebViewClient() {
       @Override 
       public boolean shouldOverrideUrlLoading( WebView view, String url ) {
         ++mCloseOnBack;
-        view.loadUrl( url );
+        // view.loadUrl( url );
+        Log.v("DistoX", "Web client " + url );
+        load( view, url );
         return false;
       }
     } );
-    // WebSettings ws = mTVtext.getSettings();
-    mTVtext.getSettings().setJavaScriptEnabled( false ); // no JS
-    mTVtext.getSettings().setSupportZoom( true ); 
 
     setTitle( R.string.title_manual );
-    load( page );
+    load( mTVtext, page );
 
     mImage  = (ImageView) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
@@ -165,9 +245,10 @@ public class UserManualActivity extends Activity
     mList.setVisibility( View.GONE );
     if ( pos <= 16 ) {
       mCloseOnBack = 0;
-      load( String.format(Locale.US, "manual%02d.htm", pos ) );
+      load( mTVtext, String.format(Locale.US, "manual%02d.htm", pos ) );
     } else {
-      getManualFromWeb();
+      // getManualFromWeb();
+      TDToast.makeBad( R.string.no_manual );
     }
   }
 

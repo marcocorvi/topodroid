@@ -1062,7 +1062,7 @@ public class MainWindow extends Activity
   // check whether to ask user to update manual translation
   private void checkManualTranslation()
   {
-    File manifest = new File( TDPath.getManFile( "manifest" ) );
+    File manifest = TDPath.getManFile( "manifest" );
     if ( manifest.exists() ) {
       String lang = null;
       int version = -1;
