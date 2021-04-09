@@ -69,10 +69,10 @@ class DrawingDxf
   static final private String AcDbPolyline = "AcDbPolyline";
   static final private String AcDbDictionary = "AcDbDictionary";
 
-  static final private String EOL = "\r\n";
-  static final private String EOL100 = "  100\r\n";
-  static final private String EOLSPACE = "\r\n  ";
-  static final private String SPACE = "  ";
+  static final public String EOL = "\r\n";
+  static final public String EOL100 = "  100\r\n";
+  static final public String EOLSPACE = "\r\n  ";
+  static final public String SPACE = "  ";
  
 
   static private void writeComment( BufferedWriter out, String comment ) throws IOException
@@ -183,7 +183,7 @@ class DrawingDxf
     out.write( SPACE + b10 + EOL + x + EOLSPACE + b20 + EOL + y + EOLSPACE + b30 + EOL + z + EOL );
   }
 
-  static private void printXY( PrintWriter pw, float x, float y, int base )
+  static void printXY( PrintWriter pw, float x, float y, int base )
   {
     pw.printf(Locale.US, "  %d%s%.2f%s  %d%s%.2f%s", base+10, EOL, x, EOL, base+20, EOL, y, EOL );
   }

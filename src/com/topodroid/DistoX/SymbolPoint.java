@@ -495,17 +495,28 @@ class SymbolPoint extends Symbol
          //    }
          //    */
             mDxf.startPolyline( pname );
-            mDxf.addAcDbLine();
+            mDxf.addHandle();
+            mDxf.addAcDbPolyline();
             mDxf.headerPolyline( 0, 0, false );
             BezierCurve bc = new BezierCurve( x00, -y00, x0*dxfScale, -y0*dxfScale, x1*dxfScale, -y1*dxfScale, x2*dxfScale, -y2*dxfScale );
-            mDxf.addVertex( pname, x00, -y00 );
+            mDxf.startVertex( pname );
+            mDxf.addHandle();
+            mDxf.addAcDbVertex();
+            mDxf.addVertexData( x00, -y00 );
             for ( int n=1; n < 8; ++n ) { //8 point
               Point2D pb = bc.evaluate( (float)n / (float)8 );
-              mDxf.addVertex( pname, pb.x, pb.y );
+              mDxf.startVertex( pname );
+              mDxf.addHandle();
+              mDxf.addAcDbVertex();
+              mDxf.addVertexData( pb.x, pb.y );
             }
-            mDxf.addVertex( pname, x2*dxfScale, -y2*dxfScale );
-            mDxf.closeSeq();
+            mDxf.startVertex( pname );
+            mDxf.addHandle();
+            mDxf.addAcDbVertex();
+            mDxf.addVertexData( x2*dxfScale, -y2*dxfScale );
 
+            mDxf.closeSeq();
+            mDxf.addHandle();
 
             // x00 /= dxfScale; // not needed
             // y00 /= dxfScale;
