@@ -97,8 +97,8 @@ class SymbolPointDxf
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter( sw ); // DXF writer
-    DrawingDxf.printXYZ( pw, x0, -y0, 0.0f, 0 ); // prev point
-    DrawingDxf.printXYZ( pw, x1, -y1, 0.0f, 1 ); // current point
+    DrawingDxf.printXYZ( pw, x0, y0, 0.0f, 0 ); // prev point
+    DrawingDxf.printXYZ( pw, x1, y1, 0.0f, 1 ); // current point
     addToken( new DxfToken( 9, sw.toString() ) );
   }
 

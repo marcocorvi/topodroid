@@ -46,7 +46,8 @@ class SymbolPoint extends Symbol
   Path   mPath;
   Path   mOrigPath; // PRIVATE
   String mName;
-  private String mDxf; // PRIVATE
+  // private String mDxf; // PRIVATE
+  private SymbolPointDxf mDxf;
   private String mSvg;
   private String mXvi;
 
@@ -80,7 +81,8 @@ class SymbolPoint extends Symbol
   @Override public String getName( ) { return mName; }
   @Override public String getThName( ) { return mThName; }
 
-  String getDxf( ) { return mDxf; }
+  // String getDxf( ) { return mDxf; }
+  SymbolPointDxf getDxf() { return mDxf; }
   String getSvg( ) { return mSvg; }
   String getXvi( ) { return mXvi; }
 
@@ -350,14 +352,19 @@ class SymbolPoint extends Symbol
    */
   private void makePointPath( String path )
   {
+    mDxf = new SymbolPointDxf();
     if ( path == null ) {
       mPath = new Path();
       mPath.moveTo(0,0);
       String pname = "P_" + mThName.replace(':', '-');
-      mDxf  = "  0\nLINE\n  8\n" + pname + "\n" 
-            + "  100\nAcDbEntity\n  100\nAcDbLine\n"
-            + "  10\n0.0\n  20\n0.0\n  30\n0.0\n"
-            + "  11\n1.0\n  21\n0.0\n  31\n0.0\n"; // 1 mm long
+      // mDxf  = "  0\nLINE\n  8\n" + pname + "\n" 
+      //       + "  100\nAcDbEntity\n  100\nAcDbLine\n"
+      //       + "  10\n0.0\n  20\n0.0\n  30\n0.0\n"
+      //       + "  11\n1.0\n  21\n0.0\n  31\n0.0\n"; // 1 mm long
+      mDxf.startLine( pname );
+      mDxf.addAcDbLine();
+      mDxf.addLine( 0, 0, 1, 0 );
+
       mSvg = "";
       mXvi = "";
       return;
@@ -406,15 +413,22 @@ class SymbolPoint extends Symbol
           if ( k < s ) { 
             y0 = Float.parseFloat( vals[k] ); 
             mPath.lineTo( x0*unit, y0*unit );
-            DrawingDxf.printString( pw, 0, "LINE" );
-            DrawingDxf.printString( pw, 8, pname );
-            DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbLine" );
-            DrawingDxf.printXYZ( pw, x00, -y00, 0.0f, 0 ); // prev point
+            float x01 = x0 * dxfScale;
+            float y01 = y0 * dxfScale;
+            // DrawingDxf.printString( pw, 0, "LINE" );
+            // DrawingDxf.printString( pw, 8, pname );
+            // DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbLine" );
+            // DrawingDxf.printXYZ( pw, x00, -y00, 0.0f, 0 ); // prev point
+            // DrawingDxf.printXYZ( pw, x01, -y01, 0.0f, 1 ); // current point
+            mDxf.startLine(pname );
+            mDxf.addAcDbLine();
+            mDxf.addLine( x00, -y00, x01, -y01 );
+
 	    pv4.format(Locale.US, "L %.2f %.2f", x00, y00 );
-            x00 = x0 * dxfScale;
-            y00 = y0 * dxfScale;
-            DrawingDxf.printXYZ( pw, x00, -y00, 0.0f, 1 ); // current point
-	    pv4.format(Locale.US, " %.2f %.2f ", x00, y00 );
+	    pv4.format(Locale.US, " %.2f %.2f ", x01, y01 );
+            
+            x00 = x01;
+            y00 = y01;
             
             pv1.format(Locale.US, "L %.2f %.2f ", x00*csxScale, y00*csxScale );
           }
@@ -442,43 +456,56 @@ class SymbolPoint extends Symbol
             mPath.cubicTo( x0*unit, y0*unit, x1*unit, y1*unit, x2*unit, y2*unit );
 	    pv4.format(Locale.US, "C %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f ", x00, y00, x0*dxfScale, y0*dxfScale, x1*dxfScale, y1*dxfScale, x2*dxfScale, y2*dxfScale );
 
+           
             // cubic to 8-segment polyline
-            DrawingDxf.printString( pw, 0, "POLYLINE" );
-            // handle = DrawingDxf.inc(handle);
-            DrawingDxf.printString( pw, 8, pname );
-            DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbLine" );
-            // DrawingDxf.printInt(  pw, 39, 1 ); // line thickness
-            // DrawingDxf.printInt(  pw, 40, 1 ); // start width
-            // DrawingDxf.printInt(  pw, 41, 1 ); // end width
-            DrawingDxf.printInt( pw, 66, 1 ); // group 1
-            DrawingDxf.printInt( pw, 70, 8 + 0 ); // polyline flag 8 = 3D polyline, 1 = closed 
-            DrawingDxf.printInt( pw, 75, 0 ); // 6 cubic spline, 5 quad spline, 0
-            DrawingDxf.printXYZ( pw, 0.0f, 0.0f, 0.0f, 0 ); // position
+         //    DrawingDxf.printString( pw, 0, "POLYLINE" );
+         //    // handle = DrawingDxf.inc(handle);
+         //    DrawingDxf.printString( pw, 8, pname );
+         //    DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbLine" );
+         //    // DrawingDxf.printInt(  pw, 39, 1 ); // line thickness
+         //    // DrawingDxf.printInt(  pw, 40, 1 ); // start width
+         //    // DrawingDxf.printInt(  pw, 41, 1 ); // end width
+         //    DrawingDxf.printInt( pw, 66, 1 ); // group 1
+         //    DrawingDxf.printInt( pw, 70, 8 + 0 ); // polyline flag 8 = 3D polyline, 1 = closed 
+         //    DrawingDxf.printInt( pw, 75, 0 ); // 6 cubic spline, 5 quad spline, 0
+         //    DrawingDxf.printXYZ( pw, 0.0f, 0.0f, 0.0f, 0 ); // position
+         //    BezierCurve bc = new BezierCurve( x00, -y00, x0*dxfScale, -y0*dxfScale, x1*dxfScale, -y1*dxfScale, x2*dxfScale, -y2*dxfScale );
+         //    DrawingDxf.printString( pw, 0, "VERTEX" ); 
+         //    DrawingDxf.printString( pw, 8, pname ); // layer
+         //    DrawingDxf.printXYZ( pw, x00, -y00, 0.0f, 0 );
+         //    for ( int n=1; n < 8; ++n ) { //8 point
+         //      Point2D pb = bc.evaluate( (float)n / (float)8 );
+         //      // handle = DrawingDxf.printLinePoint( pw, scale, handle, pname, pb.x, pb.y );
+         //      DrawingDxf.printString( pw, 0, "VERTEX" );
+         //      DrawingDxf.printString( pw, 8, pname );
+         //      DrawingDxf.printXYZ( pw, pb.x, pb.y, 0.0f, 0 );
+         //    }
+         //    // handle = DrawingDxf.printLinePoint( pw, scale, handle, pname, x2*dxfScale, -y2*dxfScale );
+         //    DrawingDxf.printString( pw, 0, "VERTEX" );
+         //    DrawingDxf.printString( pw, 8, pname );
+         //    DrawingDxf.printXYZ( pw, x2*dxfScale, -y2*dxfScale, 0.0f, 0 ); 
+         //    // x0 = x3;
+         //    // y0 = y3;
+         //    //pw.printf("  0%sSEQEND%s", DrawingDxf.EOL, DrawingDxf.EOL );
+         //    DrawingDxf.printString( pw, 0, "SEQEND" );
+         //    /*
+         //    if ( TDSetting.mAcadVersion >= 13 ) {
+         //        handle = DrawingDxf.inc(handle);
+         //        DrawingDxf.printHex( pw, 5, handle );
+         //    }
+         //    */
+            mDxf.startPolyline( pname );
+            mDxf.addAcDbLine();
+            mDxf.headerPolyline( 0, 0, false );
             BezierCurve bc = new BezierCurve( x00, -y00, x0*dxfScale, -y0*dxfScale, x1*dxfScale, -y1*dxfScale, x2*dxfScale, -y2*dxfScale );
-            DrawingDxf.printString( pw, 0, "VERTEX" ); 
-            DrawingDxf.printString( pw, 8, pname ); // layer
-            DrawingDxf.printXYZ( pw, x00, -y00, 0.0f, 0 );
+            mDxf.addVertex( pname, x00, -y00 );
             for ( int n=1; n < 8; ++n ) { //8 point
               Point2D pb = bc.evaluate( (float)n / (float)8 );
-              // handle = DrawingDxf.printLinePoint( pw, scale, handle, pname, pb.x, pb.y );
-              DrawingDxf.printString( pw, 0, "VERTEX" );
-              DrawingDxf.printString( pw, 8, pname );
-              DrawingDxf.printXYZ( pw, pb.x, pb.y, 0.0f, 0 );
+              mDxf.addVertex( pname, pb.x, pb.y );
             }
-            // handle = DrawingDxf.printLinePoint( pw, scale, handle, pname, x2*dxfScale, -y2*dxfScale );
-            DrawingDxf.printString( pw, 0, "VERTEX" );
-            DrawingDxf.printString( pw, 8, pname );
-            DrawingDxf.printXYZ( pw, x2*dxfScale, -y2*dxfScale, 0.0f, 0 ); 
-            // x0 = x3;
-            // y0 = y3;
-            //pw.printf("  0%sSEQEND%s", DrawingDxf.EOL, DrawingDxf.EOL );
-            DrawingDxf.printString( pw, 0, "SEQEND" );
-            /*
-            if ( TDSetting.mAcadVersion >= 13 ) {
-                handle = DrawingDxf.inc(handle);
-                DrawingDxf.printHex( pw, 5, handle );
-            }
-            */
+            mDxf.addVertex( pname, x2*dxfScale, -y2*dxfScale );
+            mDxf.closeSeq();
+
 
             // x00 /= dxfScale; // not needed
             // y00 /= dxfScale;
@@ -502,11 +529,15 @@ class SymbolPoint extends Symbol
           if ( k < s ) {
             x1 = Float.parseFloat( vals[k] );                 // radius
             mPath.addCircle( x0*unit, y0*unit, x1*unit, Path.Direction.CCW );
-            DrawingDxf.printString( pw, 0, "CIRCLE" );
-            DrawingDxf.printString( pw, 8, pname );
-            DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbCircle" );
-            DrawingDxf.printXYZ( pw, x0*dxfScale, -y0*dxfScale, 0.0f, 0 );
-            DrawingDxf.printFloat( pw, 40, x1*dxfScale );
+
+            // DrawingDxf.printString( pw, 0, "CIRCLE" );
+            // DrawingDxf.printString( pw, 8, pname );
+            // DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbCircle" );
+            // DrawingDxf.printXYZ( pw, x0*dxfScale, -y0*dxfScale, 0.0f, 0 );
+            // DrawingDxf.printFloat( pw, 40, x1*dxfScale );
+            mDxf.startCircle( pname );
+            mDxf.addAcDbCircle();
+            mDxf.addCircle( x0*dxfScale, -y0*dxfScale, x1*dxfScale );
 
 	    pv4.format(Locale.US, "C %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f ", 
               (x0-x1)*dxfScale, y0*dxfScale, (x0-x1)*dxfScale, (y0-x1)*dxfScale, (x0+x1)*dxfScale, (y0-x1)*dxfScale, (x0+x1)*dxfScale, y0*dxfScale );
@@ -562,14 +593,19 @@ class SymbolPoint extends Symbol
             //           x1*dxfScale, -(y0+y1)/2*dxfScale, 0.0f,                        // ENDPOINT OF MAJOR AXIS
             //           (y1-y0)/(x1-x0),                                              // RATIO MINOR/MAJOR
             //           x2*TDMath.DEG2RAD, (x2+y2)*TDMath.DEG2RAD );  // START and END PARAMS
-            DrawingDxf.printString( pw, 0, "ARC" );
-            DrawingDxf.printString( pw, 8, pname );
-            DrawingDxf.printAcDb(pw, -1, "AcDbEntity", "AcDbCircle" );
-            DrawingDxf.printXYZ( pw, (x0+x1)/2*dxfScale, -(y0+y1)/2*dxfScale, 0.0f, 0 ); // CENTER
-            DrawingDxf.printFloat( pw, 40, x1*dxfScale );                                // RADIUS
-            DrawingDxf.printString( pw, 100, "AcDbArc" );
-            DrawingDxf.printFloat( pw, 50, x2 );                                         // ANGLES
-            DrawingDxf.printFloat( pw, 51, x2+y2 );
+
+            // DrawingDxf.printString( pw, 0, "ARC" );
+            // DrawingDxf.printString( pw, 8, pname );
+            // DrawingDxf.printAcDb(pw, -1, "AcDbEntity", "AcDbCircle" );
+            // DrawingDxf.printXYZ( pw, (x0+x1)/2*dxfScale, -(y0+y1)/2*dxfScale, 0.0f, 0 ); // CENTER
+            // DrawingDxf.printFloat( pw, 40, x1*dxfScale );                                // RADIUS
+            // DrawingDxf.printString( pw, 100, "AcDbArc" );
+            // DrawingDxf.printFloat( pw, 50, x2 );                                         // ANGLES
+            // DrawingDxf.printFloat( pw, 51, x2+y2 );
+            mDxf.startArc( pname );
+            mDxf.addAcDbCircle(); // FIXME ???
+            mDxf.addCircle(  (x0+x1)/2*dxfScale, -(y0+y1)/2*dxfScale, x1*dxfScale );
+            mDxf.addArcAngles( x2, y2 );
 
 	    // TODO arcTo for XVI
 
@@ -592,7 +628,7 @@ class SymbolPoint extends Symbol
         }
       }
     }
-    mDxf = sw.getBuffer().toString();
+    // mDxf = sw.getBuffer().toString();
     mSvg = "<path d=\"" + sv1.getBuffer().toString() + "\"/> " + sv3.getBuffer().toString();
     mXvi = sv4.getBuffer().toString();
   }

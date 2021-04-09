@@ -1159,8 +1159,9 @@ class DrawingDxf
           writeInt( out, 70, 0 );       // flag 0=none, 1=anonymous, 2=non-conts attr, 4=xref, 8=xref overlay,
                                         // 16=ext. dependent, 32=ext. resolved (ignored), 64=referenced xref (ignored)
           writeXYZ( out, 0, 0, 0, 0 );
-          out.write( pt.getDxf() );
-          // out.write( BrushManager.mPointLib.getPoint(n).getDxf() );
+          // out.write( pt.getDxf() );
+          SymbolPointDxf point_dxf = pt.getDxf();
+          handle = point_dxf.writeDxf( out, 13, handle );
 
           writeString( out, 0, "ENDBLK" );
           if ( mVersion13 ) {
