@@ -66,26 +66,26 @@ public class UserManualActivity extends Activity
     // String filepath = TDPath.getManFile( filename );
     // view.loadUrl( filepath );
     // setWebViewSettings( mTVtext );
-    Log.v("DistoX", "MAN-0 filename " + filename );
+    // Log.v("DistoX", "MAN-0 filename " + filename );
 
     if ( filename.startsWith("file:///data" ) ) {
       if ( TDSetting.mLocalManPages ) {
         int pos = filename.indexOf( NEEDLE );
-        Log.v("DistoX", "MAN-1 filename " + filename + " index " + pos );
+        // Log.v("DistoX", "MAN-1 filename " + filename + " index " + pos );
         if ( pos > 0 ) {
           String name = filename.substring( pos + NEEDLE.length() );
           String pagename = TDPath.getManFileName( name );
           File pagefile = TDPath.getManFile( name );
-          Log.v("DistoX", "MAN-2 pagefile " + pagefile.getPath() );
-          Log.v("DistoX", "MAN-2 pagename " + pagename );
+          // Log.v("DistoX", "MAN-2 pagefile " + pagefile.getPath() );
+          // Log.v("DistoX", "MAN-2 pagename " + pagename );
           loadLocal( view, pagefile );
         } 
       }
     } else {
       String pagename = TDPath.getManFileName( filename );
       File pagefile = TDPath.getManFile( filename );
-      Log.v("DistoX", "MAN-3 filename " + filename );
-      Log.v("DistoX", "MAN-3 pagename " + pagename );
+      // Log.v("DistoX", "MAN-3 filename " + filename );
+      // Log.v("DistoX", "MAN-3 pagename " + pagename );
       if ( ! ( TDSetting.mLocalManPages && pagefile.exists() ) ) {
         String page = "/android_asset/man/" + filename;
         view.loadUrl( "file://" + page );
@@ -102,7 +102,7 @@ public class UserManualActivity extends Activity
     String encoding = "UTF-8";
     String mime = "text/html";
     String baseurl = "file://" + pagefile.getPath();
-    Log.v("DistoX", "MAN-4 baseurl " + baseurl );
+    // Log.v("DistoX", "MAN-4 baseurl " + baseurl );
     try {
       FileReader fr = new FileReader( pagefile );
       encoding = fr.getEncoding();
@@ -189,7 +189,7 @@ public class UserManualActivity extends Activity
       public boolean shouldOverrideUrlLoading( WebView view, String url ) {
         ++mCloseOnBack;
         // view.loadUrl( url );
-        Log.v("DistoX", "Web client " + url );
+        // Log.v("DistoX", "Web client " + url );
         load( view, url );
         return false;
       }
