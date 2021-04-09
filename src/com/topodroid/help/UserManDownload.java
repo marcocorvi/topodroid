@@ -33,6 +33,8 @@ import java.util.zip.ZipEntry;
 import android.os.AsyncTask;
 import android.content.Context;
 
+import android.util.Log;
+
 public class UserManDownload extends AsyncTask< String, Integer, Integer >
 {
   // private final Context mContext; // unused 
@@ -72,13 +74,17 @@ public class UserManDownload extends AsyncTask< String, Integer, Integer >
               int pos = name.lastIndexOf('/');
 	      if ( pos > 0 ) name = name.substring(pos+1);
 	      if ( ! name.startsWith("README") ) {
-	        FileOutputStream fos = new FileOutputStream( TDPath.getManFile( name ) );
+                File file = TDPath.getManFile( name );
+	        FileOutputStream fos = new FileOutputStream( file );
 	        // FileOutputStream fos = TDInstance.context.openFileOutput( TDPath.getManFileName( name ), Context.MODE_PRIVATE );
+                // int size = 0;
                 int c;
                 while ( ( c = zin.read( buffer ) ) != -1 ) {
                   fos.write(buffer, 0, c);
+                  // size += c;
                 }
                 fos.close();
+                // if ( file.getPath().endsWith("png") ) Log.v("DistoX", "File " + file.getPath() + " " + size );
 	      }
             } else { // ze directory: not really an error
               TDLog.Log( TDLog.LOG_PREFS, "Zip dir entry \"" + name + "\"" );

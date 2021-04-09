@@ -357,11 +357,9 @@ class SymbolPoint extends Symbol
       mPath = new Path();
       mPath.moveTo(0,0);
       String pname = "P_" + mThName.replace(':', '-');
-      // mDxf  = "  0\nLINE\n  8\n" + pname + "\n" 
-      //       + "  100\nAcDbEntity\n  100\nAcDbLine\n"
-      //       + "  10\n0.0\n  20\n0.0\n  30\n0.0\n"
-      //       + "  11\n1.0\n  21\n0.0\n  31\n0.0\n"; // 1 mm long
+
       mDxf.startLine( pname );
+      mDxf.addHandle();
       mDxf.addAcDbLine();
       mDxf.addLine( 0, 0, 1, 0 );
 
@@ -415,12 +413,9 @@ class SymbolPoint extends Symbol
             mPath.lineTo( x0*unit, y0*unit );
             float x01 = x0 * dxfScale;
             float y01 = y0 * dxfScale;
-            // DrawingDxf.printString( pw, 0, "LINE" );
-            // DrawingDxf.printString( pw, 8, pname );
-            // DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbLine" );
-            // DrawingDxf.printXYZ( pw, x00, -y00, 0.0f, 0 ); // prev point
-            // DrawingDxf.printXYZ( pw, x01, -y01, 0.0f, 1 ); // current point
+
             mDxf.startLine(pname );
+            mDxf.addHandle();
             mDxf.addAcDbLine();
             mDxf.addLine( x00, -y00, x01, -y01 );
 
@@ -541,12 +536,8 @@ class SymbolPoint extends Symbol
             x1 = Float.parseFloat( vals[k] );                 // radius
             mPath.addCircle( x0*unit, y0*unit, x1*unit, Path.Direction.CCW );
 
-            // DrawingDxf.printString( pw, 0, "CIRCLE" );
-            // DrawingDxf.printString( pw, 8, pname );
-            // DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbCircle" );
-            // DrawingDxf.printXYZ( pw, x0*dxfScale, -y0*dxfScale, 0.0f, 0 );
-            // DrawingDxf.printFloat( pw, 40, x1*dxfScale );
             mDxf.startCircle( pname );
+            mDxf.addHandle();
             mDxf.addAcDbCircle();
             mDxf.addCircle( x0*dxfScale, -y0*dxfScale, x1*dxfScale );
 
@@ -614,6 +605,7 @@ class SymbolPoint extends Symbol
             // DrawingDxf.printFloat( pw, 50, x2 );                                         // ANGLES
             // DrawingDxf.printFloat( pw, 51, x2+y2 );
             mDxf.startArc( pname );
+            mDxf.addHandle();
             mDxf.addAcDbCircle(); // FIXME ???
             mDxf.addCircle(  (x0+x1)/2*dxfScale, -(y0+y1)/2*dxfScale, x1*dxfScale );
             mDxf.addArcAngles( x2, y2 );

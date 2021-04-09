@@ -27,6 +27,9 @@ import java.util.ArrayList;
 
 class SymbolPointDxf
 {
+  final static int BY_BLOCK = 0;
+  final static int BY_LAYER = 256;
+
   private class DxfToken
   {
     int version;
@@ -128,6 +131,7 @@ class SymbolPointDxf
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter( sw ); // DXF writer
+    DrawingDxf.printInt( pw, 62, BY_LAYER ); // color 0: by_block, 256: by_layer
     DrawingDxf.printXYZ( pw, x0, y0, 0.0f, 0 ); // prev point
     DrawingDxf.printXYZ( pw, x1, y1, 0.0f, 1 ); // current point
     addToken( new DxfToken( 9, sw.toString(), "Line data" ) );
@@ -148,6 +152,7 @@ class SymbolPointDxf
     // DrawingDxf.printInt(  pw, 39, 1 ); // line thickness
     // DrawingDxf.printInt(  pw, 40, 1 ); // start width
     // DrawingDxf.printInt(  pw, 41, 1 ); // end width
+    DrawingDxf.printInt( pw, 62, BY_LAYER ); // color 0: by_block, 256: by_layer
     DrawingDxf.printInt( pw, 66, 1 ); // group 1
     DrawingDxf.printInt( pw, 70, 8 + (closed? 1 : 0) ); // polyline flag 8 = 3D polyline, 1 = closed 
     // DrawingDxf.printInt( pw, 75, 0 ); // 6 cubic spline, 5 quad spline, 0 is the default
@@ -177,6 +182,7 @@ class SymbolPointDxf
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter( sw ); // DXF writer
+    DrawingDxf.printInt( pw, 62, BY_LAYER ); // color 0: by_block, 256: by_layer
     DrawingDxf.printXYZ( pw, x, y, 0.0f, 0 );
     DrawingDxf.printFloat( pw, 40, r );
     addToken( new DxfToken( 9, sw.toString(), "Circle data" ) );
@@ -191,10 +197,23 @@ class SymbolPointDxf
     addToken( new DxfToken( 9, sw.toString(), "Arc data" ) );
   }
 
-  void addEllipse( float a1, float a2 )
+  // FIXME TODO
+  // @param x0,y0 left endpoint
+  // @param x1,y1 right endpoint
+  // @param r     aspect ratio
+  // @param a1,a2 angles
+  void addEllipse( float x0, float y0, float x1, float y1, float r, float a1, float a2 ) 
   {
+    float xc = (x0+x1)/2;
+    float yc = (y0+y1)/2;
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter( sw ); // DXF writer
+    DrawingDxf.printInt( pw, 62, BY_LAYER ); // color 0: by_block, 256: by_layer
+    DrawingDxf.printXYZ( pw, xc, yc, 0.0f, 0 ); // CENTER
+    DrawingDxf.printXYZ( pw, x0, yc, 0.0f, 1 ); // LEFT VERTEX
+    DrawingDxf.printFloat( pw, 40, r  );        // ASPECT_RATIO
+    DrawingDxf.printFloat( pw, 41, a1 );        // ANGLES
+    DrawingDxf.printFloat( pw, 42, a1+a2 );
     // pw.printf(Locale.US,
     //           "  10\n%.2f\n  20\n%.2f\n  30\n%.2f\n  11\n%.2f\n  21\n%.2f\n  31\n%.2f\n  40\n%.2f\n  41\n%.2f\n  42\n%.2f\n",
     //           (x0+x1)/2*dxfScale, -(y0+y1)/2*dxfScale, 0.0f,                 // CENTER

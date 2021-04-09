@@ -153,7 +153,14 @@ public class UserManualActivity extends Activity
     // view.getSettings().setAllowFileAccess( true );
     // view.getSettings().setBlockNetworkImage( false );
     // view.getSettings().setBlockNetworkLoads( false );
-    // view.getSettings().setLoadsImagesAutomatically( true ); 
+    view.getSettings().setLoadsImagesAutomatically( true ); 
+    // view.getSettings().setDomStorageEnabled( true ); // does not solve problem with images
+    // view.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+    view.getSettings().setAllowFileAccess( true );
+    view.getSettings().setAllowContentAccess( true );
+    view.getSettings().setAllowFileAccessFromFileURLs( true );
+    view.getSettings().setAllowUniversalAccessFromFileURLs( true );
+
     view.getSettings().setJavaScriptEnabled( false ); // no JS
     view.getSettings().setSupportZoom( true ); 
   }
@@ -185,6 +192,12 @@ public class UserManualActivity extends Activity
         Log.v("DistoX", "Web client " + url );
         load( view, url );
         return false;
+      }
+
+      @Override
+      public void onReceivedError(WebView view, int errorCode, String description, String failingUrl)
+      {
+        Log.e("DistoX", "Load Error: " + description + " url " + failingUrl );
       }
     } );
 
