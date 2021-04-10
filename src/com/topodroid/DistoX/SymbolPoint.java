@@ -19,6 +19,7 @@ import com.topodroid.utils.TDColor;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.math.BezierCurve;
 import com.topodroid.math.Point2D;
+// import com.topodroid.dxf.SymbolPointDxf;
 
 import android.util.Log;
 
@@ -46,7 +47,6 @@ class SymbolPoint extends Symbol
   Path   mPath;
   Path   mOrigPath; // PRIVATE
   String mName;
-  // private String mDxf; // PRIVATE
   private SymbolPointDxf mDxf;
   private String mSvg;
   private String mXvi;
@@ -81,7 +81,6 @@ class SymbolPoint extends Symbol
   @Override public String getName( ) { return mName; }
   @Override public String getThName( ) { return mThName; }
 
-  // String getDxf( ) { return mDxf; }
   SymbolPointDxf getDxf() { return mDxf; }
   String getSvg( ) { return mSvg; }
   String getXvi( ) { return mXvi; }
@@ -358,10 +357,7 @@ class SymbolPoint extends Symbol
       mPath.moveTo(0,0);
       String pname = "P_" + mThName.replace(':', '-');
 
-      mDxf.startLine( pname );
-      mDxf.addHandle();
-      mDxf.addAcDbLine();
-      mDxf.addLine( 0, 0, 1, 0 );
+      mDxf.line( pname, 0, 0, 1, 0 );
 
       mSvg = "";
       mXvi = "";
@@ -414,10 +410,7 @@ class SymbolPoint extends Symbol
             float x01 = x0 * dxfScale;
             float y01 = y0 * dxfScale;
 
-            mDxf.startLine(pname );
-            mDxf.addHandle();
-            mDxf.addAcDbLine();
-            mDxf.addLine( x00, -y00, x01, -y01 );
+            mDxf.line(pname, x00, -y00, x01, -y01 );
 
 	    pv4.format(Locale.US, "L %.2f %.2f", x00, y00 );
 	    pv4.format(Locale.US, " %.2f %.2f ", x01, y01 );
@@ -489,30 +482,23 @@ class SymbolPoint extends Symbol
          //        DrawingDxf.printHex( pw, 5, handle );
          //    }
          //    */
-            mDxf.startPolyline( pname );
-            mDxf.addHandle();
-            mDxf.addAcDbPolyline();
-            mDxf.headerPolyline( 0, 0, false );
-            BezierCurve bc = new BezierCurve( x00, -y00, x0*dxfScale, -y0*dxfScale, x1*dxfScale, -y1*dxfScale, x2*dxfScale, -y2*dxfScale );
-            mDxf.startVertex( pname );
-            mDxf.addHandle();
-            mDxf.addAcDbVertex();
-            mDxf.addVertexData( x00, -y00 );
-            for ( int n=1; n < 8; ++n ) { //8 point
-              Point2D pb = bc.evaluate( (float)n / (float)8 );
-              mDxf.startVertex( pname );
-              mDxf.addHandle();
-              mDxf.addAcDbVertex();
-              mDxf.addVertexData( pb.x, pb.y );
-            }
-            mDxf.startVertex( pname );
-            mDxf.addHandle();
-            mDxf.addAcDbVertex();
-            mDxf.addVertexData( x2*dxfScale, -y2*dxfScale );
+           int np = 8; // 8+1 points
+           float[] xx = new float[ np+1 ];
+           float[] yy = new float[ np+1 ];
+           xx[0] =  x00;
+           yy[0] = -y00;
+           BezierCurve bc = new BezierCurve( x00, -y00, x0*dxfScale, -y0*dxfScale, x1*dxfScale, -y1*dxfScale, x2*dxfScale, -y2*dxfScale );
+           for ( int n=1; n < np; ++n ) { 
+             Point2D pb = bc.evaluate( (float)n / (float)np );
+             // Log.v("DistoX", "point " + n + " " + pb.x + " " + pb.y );
+             xx[n] = pb.x;
+             yy[n] = pb.y;
+           }
+           xx[np] =  x2*dxfScale;
+           yy[np] = -y2*dxfScale;
 
-            mDxf.closeSeq();
-            mDxf.addHandle();
-
+           mDxf.polyline( pname, xx, yy );
+      
             // x00 /= dxfScale; // not needed
             // y00 /= dxfScale;
 
@@ -536,10 +522,7 @@ class SymbolPoint extends Symbol
             x1 = Float.parseFloat( vals[k] );                 // radius
             mPath.addCircle( x0*unit, y0*unit, x1*unit, Path.Direction.CCW );
 
-            mDxf.startCircle( pname );
-            mDxf.addHandle();
-            mDxf.addAcDbCircle();
-            mDxf.addCircle( x0*dxfScale, -y0*dxfScale, x1*dxfScale );
+            mDxf.circle( pname, x0*dxfScale, -y0*dxfScale, x1*dxfScale );
 
 	    pv4.format(Locale.US, "C %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f ", 
               (x0-x1)*dxfScale, y0*dxfScale, (x0-x1)*dxfScale, (y0-x1)*dxfScale, (x0+x1)*dxfScale, (y0-x1)*dxfScale, (x0+x1)*dxfScale, y0*dxfScale );
@@ -586,29 +569,7 @@ class SymbolPoint extends Symbol
             y2 = Float.parseFloat( vals[k] ); 
             mPath.arcTo( new RectF(x0*unit, y0*unit, x1*unit, y1*unit), x2, y2 );
 
-            // DrawingDxf.printString( pw, 0, "ELLIPSE" );
-            // DrawingDxf.printString( pw, 8, pname );
-            // DrawingDxf.printAcDb(pw, -1, "AcDbEntity", AcDbEllipse" );
-            // pw.printf(Locale.US,
-            //           "  10\n%.2f\n  20\n%.2f\n  30\n%.2f\n  11\n%.2f\n  21\n%.2f\n  31\n%.2f\n  40\n%.2f\n  41\n%.2f\n  42\n%.2f\n",
-            //           (x0+x1)/2*dxfScale, -(y0+y1)/2*dxfScale, 0.0f,                 // CENTER
-            //           x1*dxfScale, -(y0+y1)/2*dxfScale, 0.0f,                        // ENDPOINT OF MAJOR AXIS
-            //           (y1-y0)/(x1-x0),                                              // RATIO MINOR/MAJOR
-            //           x2*TDMath.DEG2RAD, (x2+y2)*TDMath.DEG2RAD );  // START and END PARAMS
-
-            // DrawingDxf.printString( pw, 0, "ARC" );
-            // DrawingDxf.printString( pw, 8, pname );
-            // DrawingDxf.printAcDb(pw, -1, "AcDbEntity", "AcDbCircle" );
-            // DrawingDxf.printXYZ( pw, (x0+x1)/2*dxfScale, -(y0+y1)/2*dxfScale, 0.0f, 0 ); // CENTER
-            // DrawingDxf.printFloat( pw, 40, x1*dxfScale );                                // RADIUS
-            // DrawingDxf.printString( pw, 100, "AcDbArc" );
-            // DrawingDxf.printFloat( pw, 50, x2 );                                         // ANGLES
-            // DrawingDxf.printFloat( pw, 51, x2+y2 );
-            mDxf.startArc( pname );
-            mDxf.addHandle();
-            mDxf.addAcDbCircle(); // FIXME ???
-            mDxf.addCircle(  (x0+x1)/2*dxfScale, -(y0+y1)/2*dxfScale, x1*dxfScale );
-            mDxf.addArcAngles( x2, y2 );
+            mDxf.arc( pname, (x0+x1)/2*dxfScale, -(y0+y1)/2*dxfScale, x1*dxfScale, x2, y2 );
 
 	    // TODO arcTo for XVI
 
@@ -631,7 +592,6 @@ class SymbolPoint extends Symbol
         }
       }
     }
-    // mDxf = sw.getBuffer().toString();
     mSvg = "<path d=\"" + sv1.getBuffer().toString() + "\"/> " + sv3.getBuffer().toString();
     mXvi = sv4.getBuffer().toString();
   }
