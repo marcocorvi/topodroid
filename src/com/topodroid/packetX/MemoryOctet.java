@@ -126,9 +126,8 @@ public class MemoryOctet
           boolean backsight = ( (data[0] & BIT_BACKSIGHT) == BIT_BACKSIGHT);
           int acc = toInt( data[2], data[1] );
           int mag = toInt( data[4], data[3] );
-          double dip = toInt( data[5], data[6] );
-          dip = dip * 90.0  / 16384.0; // 90/0x4000;
-          if ( dip >= 32768 ) { dip = (65536 - dip) * (-90.0) / 16384.0; }
+          int idip = toInt( data[5], data[6] );
+          double dip = ( idip >= 32768 )? (65536 - idip) * (-90.0) / 16384.0 : idip * 90.0  / 16384.0; // 90/0x4000;
           pw.format(Locale.US, "%4d %c %d %d %.2f %02x", index, backsight? 'V' : 'v', acc, mag, dip, data[0] ); // is data[7] important ?
           break;
         default:

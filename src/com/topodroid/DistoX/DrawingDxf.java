@@ -85,7 +85,7 @@ class DrawingDxf
     return npt;
   }
 
-  static private int printInterpolatedPolyline(  PrintWriter pw, DrawingPointLinePath line, float scale, int handle,
+  static private int printInterpolatedPolyline(  PrintWriter pw, DrawingPointLinePath line, float scale, int handle, int ref,
                                     String layer, boolean closed, float xoff, float yoff )
   {
     float bezier_step = TDSetting.getBezierStep();
@@ -93,7 +93,7 @@ class DrawingDxf
     float x0 = xoff + p.x;
     float y0 = yoff + p.y;
     if ( layer != null ) {
-      handle = DXF.printLinePoint( pw, scale, handle, layer, x0, y0 );
+      handle = DXF.printLinePoint( pw, scale, handle, ref, layer, x0, y0 );
     } else {
       DXF.printXY( pw, x0*scale, -y0*scale, 0 );
     }
@@ -113,7 +113,7 @@ class DrawingDxf
           if ( layer != null ) {
 	    for ( int n=1; n < np; ++n ) {
 	      Point2D pb = bc.evaluate( (float)n / (float)np );
-              handle = DXF.printLinePoint( pw, scale, handle, layer, pb.x, pb.y );
+              handle = DXF.printLinePoint( pw, scale, handle, ref, layer, pb.x, pb.y );
             }
           } else {
 	    for ( int n=1; n < np; ++n ) {
@@ -124,7 +124,7 @@ class DrawingDxf
         }
       } 
       if ( layer != null ) {
-        handle = DXF.printLinePoint( pw, scale, handle, layer, x3, y3 );
+        handle = DXF.printLinePoint( pw, scale, handle, ref, layer, x3, y3 );
       } else {
         DXF.printXY( pw, x3*scale, -y3*scale, 0 );
       }
@@ -134,7 +134,7 @@ class DrawingDxf
     if ( closed ) {
       p = line.mFirst;
       if ( layer != null ) {
-        handle = DXF.printLinePoint( pw, scale, handle, layer, xoff+p.x, yoff+p.y );
+        handle = DXF.printLinePoint( pw, scale, handle, ref, layer, xoff+p.x, yoff+p.y );
       } else {
         DXF.printXY( pw, (p.x+xoff)*scale, -(p.y+yoff)*scale, 0 );
       }
@@ -146,7 +146,7 @@ class DrawingDxf
                                     String layer, boolean closed, float xoff, float yoff )
   {
     handle = DXF.printPolylineHeader( pw, handle, layer, closed );
-    handle = printInterpolatedPolyline( pw, line, scale, handle, layer, closed, xoff, yoff );
+    handle = printInterpolatedPolyline( pw, line, scale, handle, handle, layer, closed, xoff, yoff );
     handle = DXF.printPolylineFooter( pw, handle );
     return handle;
   }
@@ -731,7 +731,7 @@ class DrawingDxf
     if ( DXF.mVersion13 && checkSpline( line ) ) {
       if ( TDSetting.mAcadSpline ) {
         handle = DXF.printPolylineHeader( pw, handle, layer, line.isClosed() );
-        handle = printInterpolatedPolyline( pw, line, scale, handle, layer, line.isClosed(), xoff, yoff );
+        handle = printInterpolatedPolyline( pw, line, scale, handle, handle, layer, line.isClosed(), xoff, yoff );
         handle = DXF.printPolylineFooter( pw, handle );
       } else {
         handle = printSpline( pw, line, scale, handle, layer, line.isClosed(), xoff, yoff );
@@ -752,7 +752,7 @@ class DrawingDxf
     if ( DXF.mVersion13 && checkSpline( area ) ) {
       if ( TDSetting.mAcadSpline ) {
         handle = DXF.printPolylineHeader( pw, handle, layer, true );
-        handle = printInterpolatedPolyline( pw, area, scale, handle, layer, true, xoff, yoff );
+        handle = printInterpolatedPolyline( pw, area, scale, handle, handle, layer, true, xoff, yoff );
         handle = DXF.printPolylineFooter( pw, handle );
       } else {
         handle = printSpline( pw, area, scale, handle, layer, true, xoff, yoff );
@@ -764,7 +764,7 @@ class DrawingDxf
     if ( DXF.mVersion13 ) {
       int npt = countInterpolatedPolylinePoints( area, true );
       handle = DXF.printHatchHeader( pw, handle, layer, npt );
-      printInterpolatedPolyline( pw, area, scale, 0, null, true, xoff, yoff );
+      printInterpolatedPolyline( pw, area, scale, 0, handle, null, true, xoff, yoff );
       handle = DXF.printHatchFooter( pw, handle );
     }
     return handle;

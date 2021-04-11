@@ -263,7 +263,7 @@ class SymbolPointDxf
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter( sw ); // DXF writer
     pw.printf( DXF.EOL100 +  "AcDbVertex" + DXF.EOL );
-    // pw.printf( DXF.EOL100 + "AcDb3dPolylineVertex" + DXF.EOL );
+    pw.printf( DXF.EOL100 + "AcDb3dPolylineVertex" + DXF.EOL );
     pw.printf( "  70" + DXF.EOL + "32" + DXF.EOL );
     addToken( new NormalToken( TOKEN_ACDB, 13, sw.toString() ) );
   }
