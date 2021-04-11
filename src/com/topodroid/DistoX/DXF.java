@@ -59,6 +59,7 @@ public class DXF
   static final String AcDbText     = "AcDbText";
   static final String AcDbLine     = "AcDbLine";
   static final String AcDbPolyline = "AcDbPolyline";
+  static final String AcDbVertex   = "AcDbVertex";
   static final String AcDbDictionary = "AcDbDictionary";
 
   static final String EOL = "\r\n";
@@ -139,6 +140,15 @@ public class DXF
       if ( hex >= 0 ) printHex( pw, 5, hex );
       if ( ref >= 0 ) printHex( pw, 330, ref );
       pw.printf( EOL100 + acdb1 + EOL + EOL100 + acdb2 + EOL );
+    }
+  }
+
+  static void printAcDb( PrintWriter pw, int hex, int ref, String acdb1, String acdb2, String acdb3 ) // mVersion13
+  {
+    if ( mVersion13 ) {
+      if ( hex >= 0 ) printHex( pw, 5, hex );
+      if ( ref >= 0 ) printHex( pw, 330, ref );
+      pw.printf( EOL100 + acdb1 + EOL + EOL100 + acdb2 + EOL + EOL100 + acdb3 + EOL );
     }
   }
 
@@ -263,12 +273,12 @@ public class DXF
   static int printLinePoint( PrintWriter pw, float scale, int handle, int ref, String layer, float x, float y )
   {
     printString( pw, 0, "VERTEX" );
+    printString( pw, 8, layer );
     if ( mVersion13 ) {
       handle = inc(handle);
-      printAcDb( pw, handle, ref, "AcDbVertex", "AcDb3dPolylineVertex" );
+      printAcDb( pw, handle, ref, AcDbEntity, AcDbVertex, "AcDb3dPolylineVertex" );
       printInt( pw, 70, 32 ); // flag 32 = 3D polyline vertex
     }
-    printString( pw, 8, layer );
     printXYZ( pw, x * scale, -y * scale, 0.0f, 0 );
     return handle;
   }
