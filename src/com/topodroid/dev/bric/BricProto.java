@@ -130,9 +130,9 @@ public class BricProto extends TopoDroidProtocol
     mIndex   = BricConst.getIndex( bytes );
     mRoll    = BricConst.getRoll( bytes );
     mDip     = BricConst.getDip( bytes );
-    mType    = BricConst.getType( bytes );
+    mType    = BricConst.getType( bytes ); // 0: regular shot, 1: scan shot
     mSamples = BricConst.getSamples( bytes );
-    TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: added Meta " + mIndex );
+    TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: added Meta " + mIndex + " type " + mType );
   }
 
   void addMeasErr( byte[] bytes ) 
@@ -162,7 +162,8 @@ public class BricProto extends TopoDroidProtocol
         azimuth = ( mErr1 == 15 )? mErrVal1 : (mErr2 == 15)? mErrVal2 : 0;
       }
 
-      mComm.handleBricPacket( index, mLister, DataType.DATA_SHOT, clino, azimuth, mComment );
+      int data_type = ( mType == 1 )? DataType.DATA_SCAN : DataType.DATA_SHOT;
+      mComm.handleBricPacket( index, mLister, data_type, clino, azimuth, mComment );
       mPrimToDo = false;
       mLastIndex = mIndex;
     } else if ( mIndex != mLastIndex ) {

@@ -1439,6 +1439,13 @@ public class DataHelper extends DataSetObservable
     return insertImportShots( sid, id, shots );
   }
 
+  public long insertBricShot( long sid, long id, double d, double b, double c, double r, double mag, double acc, double dip, long extend, int leg, long status, String comment, String addr )
+  { // 0L=leg, status, 0L=type DISTOX
+    // stretch = 0.0;
+    // return doInsertShot( sid, id, System.currentTimeMillis()/1000, 0L, "", "",  d, b, c, r, extend, 0.0, DBlock.FLAG_SURVEY, 0L, status, 0L, "", addr );
+    return doCompleteInsertShot( sid, id, System.currentTimeMillis()/1000, 0L, d, b, c, r, mag, acc, dip, extend, 0.0, leg, status, comment, 0L, addr );
+  }
+
   public long insertDistoXShot( long sid, long id, double d, double b, double c, double r, long extend, long status, String addr )
   { // 0L=leg, status, 0L=type DISTOX
     // stretch = 0.0;
@@ -1758,7 +1765,24 @@ public class DataHelper extends DataSetObservable
   */
 
   // return the new-shot id
-  // diInsertShot() called with from="", to="", and comment="", flag=DBlock.FLAG_SURVEY
+  // doInsertShot() called with from="", to="", and comment="", flag=DBlock.FLAG_SURVEY
+  //
+  // @param sid           survey ID
+  // @param id            shot id
+  // @param millis        timestamp
+  // param color          splay color
+  // @param d, b, c, r    distance, bearing, clino, roll
+  // @param extend
+  // @param stretch       fractional extend
+  // @param leg           "leg" type
+  // @param status        shot status
+  // @param shot_type     either DISTOX or MANUAL
+  // @param addr          device address
+  //
+  // FROM and TO are set to ""
+  // mag, acc, dip are set to 0
+  // comment is set to ""
+  // flag is set to SURVEY
   private long doSimpleInsertShot( long sid, long id, long millis, long color, 
                           double d, double b, double c, double r, 
                           long extend, double stretch, long leg, long status, long shot_type, String addr )
@@ -1775,6 +1799,26 @@ public class DataHelper extends DataSetObservable
     if (addr == null) addr = "";
     ContentValues cv = makeShotContentValues( sid, id, millis, color, "", "", d, b, c, r, 0.0, 0.0, 0.0,
 		    extend, stretch, DBlock.FLAG_SURVEY, leg, status, shot_type, "", addr );
+    doInsert( SHOT_TABLE, cv, "insert" );
+    return id;
+  }
+
+  private long doCompleteInsertShot( long sid, long id, long millis, long color, 
+                          double d, double b, double c, double r, double mag, double acc, double dip,
+                          long extend, double stretch, long leg, long status, String comment, long shot_type, String addr )
+  {
+    // TDLog.Log( TDLog.LOG_DB, "insert shot <" + id + "> " + from + "-" + to + " extend " + extend );
+    // Log.v("DistoX-SHOT", "do insert shot id " + id + " d " + d + " b " + b + " c " + c );
+    if ( myDB == null ) return -1L;
+    if ( id == -1L ) {
+      ++ myNextId;
+      id = myNextId;
+    } else {
+      myNextId = id;
+    }
+    if (addr == null) addr = "";
+    ContentValues cv = makeShotContentValues( sid, id, millis, color, "", "", d, b, c, r, mag, acc, dip,
+		    extend, stretch, DBlock.FLAG_SURVEY, leg, status, shot_type, comment, addr );
     doInsert( SHOT_TABLE, cv, "insert" );
     return id;
   }

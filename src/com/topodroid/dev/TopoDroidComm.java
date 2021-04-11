@@ -21,6 +21,7 @@ import com.topodroid.DistoX.TopoDroidApp;
 import com.topodroid.DistoX.Lister;
 // import com.topodroid.DistoX.DBlock;
 import com.topodroid.common.ExtendType;
+import com.topodroid.common.LegType;
 import com.topodroid.dev.distox.DistoX;
 
 import android.util.Log;
@@ -68,7 +69,10 @@ public class TopoDroidComm
 
   public boolean isConnected() { return mBTConnected; }
 
-  public void handleBricPacket( long index, Handler lister, int data_type, float clino, float azimuth, String comment )
+  // @param index      bric shot index
+  // @param lister
+  // @param data_type bric datatype (0: normal, 1: scan )
+  public void handleBricPacket( long index, Handler lister, int data_type, float clino_error, float azimuth_error, String comment )
   {
     // Log.v( "DistoX", "TD comm: PACKET " + res + "/" + DataType.PACKET_DATA + " type " + data_type );
     // Log.v("DistoX", "TD comm: packet DATA");
@@ -81,9 +85,13 @@ public class TopoDroidComm
     double dip  = mProtocol.mDip;
     long status = ( d > TDSetting.mMaxShotLength )? TDStatus.OVERSHOOT : TDStatus.NORMAL;
     // TODO split the data insert in three places: one for each data packet
-    mLastShotId = TopoDroidApp.mData.insertDistoXShot( TDInstance.sid, index, d, b, c, r, ExtendType.EXTEND_IGNORE, status, TDInstance.deviceAddress() );
-    TopoDroidApp.mData.updateShotAMDR( mLastShotId, TDInstance.sid, clino, azimuth, dip, r, false );
-    if ( comment != null ) TopoDroidApp.mData.updateShotComment( mLastShotId, TDInstance.sid, comment );
+
+    int leg = ( data_type == DataType.DATA_SCAN )? LegType.SCAN : LegType.NORMAL;
+    if ( comment == null ) comment = "";
+    mLastShotId = TopoDroidApp.mData.insertBricShot( TDInstance.sid, index, d, b, c, r, clino_error, azimuth_error, dip, ExtendType.EXTEND_IGNORE, leg, status, comment, TDInstance.deviceAddress() );
+    // TopoDroidApp.mData.updateShotAMDR( mLastShotId, TDInstance.sid, clino_error, azimuth_error, dip, r, false );
+    // if ( comment != null ) TopoDroidApp.mData.updateShotComment( mLastShotId, TDInstance.sid, comment );
+    
     if ( lister != null ) { // FIXME_LISTER sendMessage with mLastShotId only
       Message msg = lister.obtainMessage( Lister.LIST_UPDATE );
       Bundle bundle = new Bundle();

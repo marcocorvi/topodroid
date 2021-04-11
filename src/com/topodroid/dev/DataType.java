@@ -22,6 +22,7 @@ public class DataType
   public final static int DATA_SHOT  = 1;   // shot data packets
   public final static int DATA_CALIB = 2;   // calib data packets
   public final static int DATA_MEM   = 3;   // memory packet
+  public final static int DATA_SCAN  = 4;   // scan data packets
 
   static int of( byte b ) 
   {

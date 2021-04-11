@@ -145,11 +145,16 @@ public class QCamDrawingSurface extends SurfaceView
   {
     boolean ret = false;
     if ( mCamera != null ) {
-      mCamera.getParameters().setRotation( orientation );
-      mCamera.takePicture( mShutter, mRaw, null, mJpeg);
-      ret = true;
+      try {
+        mCamera.getParameters().setRotation( orientation );
+        mCamera.takePicture( mShutter, mRaw, null, mJpeg);
+        ret = true;
+      } catch ( RuntimeException e ) {
+        TDLog.Error("camera runtime exception " + e.getMessage() );
+      }
     }
-    mQCam.enableButtons( true );
+    // mQCam.enableButtons( true );
+    mQCam.enableButtons( ret );
     return ret;
   }
 

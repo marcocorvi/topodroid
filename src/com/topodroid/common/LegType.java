@@ -20,6 +20,7 @@ public class LegType
   public static final int BACK    = 3; 
   public static final int HSPLAY  = 4; // horizontal splay
   public static final int VSPLAY  = 5; // vertical splay
+  public static final int SCAN    = 6; // scan splay
 
   public static int nextSplayClass( int type ) 
   {
