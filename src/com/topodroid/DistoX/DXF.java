@@ -39,9 +39,10 @@ import android.graphics.RectF;
 
 public class DXF
 {
+  static boolean mVersion9  = false;
   static boolean mVersion13 = false;
-  static boolean mVersion16 = false;
-  static boolean doHandle   = true;
+  static boolean mVersion14 = false;
+  static boolean mVersion13_14 = false;
 
   public static int inc( int h ) { ++h; if ( h == 0x0105 ) ++h; return h; }
 
@@ -60,6 +61,9 @@ public class DXF
   static final String AcDbLine     = "AcDbLine";
   static final String AcDbPolyline = "AcDbPolyline";
   static final String AcDbVertex   = "AcDbVertex";
+  static final String AcDbCircle   = "AcDbCircle";
+  static final String AcDbArc      = "AcDbArc";
+  static final String AcDbEllipse  = "AcDbEllipse";
   static final String AcDbDictionary = "AcDbDictionary";
 
   static final String EOL = "\r\n";
@@ -74,9 +78,9 @@ public class DXF
     out.write( "  999" + EOL + comment + EOL );
   }
 
-  static void writeHex( BufferedWriter out, int code, int handle ) throws IOException // mVersion13
+  static void writeHex( BufferedWriter out, int code, int handle ) throws IOException 
   {
-    if ( mVersion13 && doHandle ) {
+    if ( mVersion13_14 ) {
       StringWriter sw = new StringWriter();
       PrintWriter pw  = new PrintWriter(sw);
       pw.printf("  %d%s%X%s", code, EOL, handle, EOL );
@@ -84,72 +88,100 @@ public class DXF
     }
   }
 
-  static void printHex( PrintWriter pw, int code, int handle ) // mVersion13
+  static void printHex( PrintWriter pw, int code, int handle ) 
   {
-    if ( mVersion13 && doHandle ) {
+    if ( mVersion13_14 ) {
       pw.printf("  %d%s%X%s", code, EOL, handle, EOL );
     }
   }
 
-  static void writeAcDb( BufferedWriter out, int hex, String acdb1 ) throws IOException // mVersion13
+  static int writeAcDb( BufferedWriter out, int hex, String acdb1 ) throws IOException 
   {
-    if ( mVersion13 ) {
-      if ( hex >= 0 ) writeHex( out, 5, hex );
+    if ( mVersion13_14 ) {
+      if ( hex >= 0 ) {
+        hex = inc(hex);
+        writeHex( out, 5, hex ); 
+      }
       out.write( EOL100 + acdb1 + EOL );
     }
+    return hex;
   }
 
-  static void writeAcDb( BufferedWriter out, int hex, String acdb1, String acdb2 ) throws IOException // mVersion13
+  static int writeAcDb( BufferedWriter out, int hex, String acdb1, String acdb2 ) throws IOException 
   {
-    if ( mVersion13 ) {
-      if ( hex >= 0 ) writeHex( out, 5, hex );
+    if ( mVersion13_14 ) {
+      if ( hex >= 0 ) {
+        hex = inc( hex );
+        writeHex( out, 5, hex );
+      }
       out.write( EOL100 + acdb1 + EOL+ EOL100 + acdb2 + EOL );
     }
+    return hex;
   }
 
 
-  static void printAcDb( PrintWriter pw, int hex, String acdb1 ) // mVersion13
+  static int printAcDb( PrintWriter pw, int hex, String acdb1 )
   {
-    if ( mVersion13 ) {
-      if ( hex >= 0 ) printHex( pw, 5, hex );
+    if ( mVersion13_14 ) {
+      if ( hex >= 0 ) {
+        hex = inc( hex );
+        printHex( pw, 5, hex );
+      }
       pw.printf( EOL100 + acdb1 + EOL );
     }
+    return hex;
   }
 
-  static void printAcDb( PrintWriter pw, int hex, int ref, String acdb1 ) // mVersion13
+  static int printAcDb( PrintWriter pw, int hex, int ref, String acdb1 ) 
   {
-    if ( mVersion13 ) {
-      if ( hex >= 0 ) printHex( pw, 5, hex );
+    if ( mVersion13_14 ) {
+      if ( hex >= 0 ) {
+        hex = inc( hex );
+        printHex( pw, 5, hex );
+      }
       if ( ref >= 0 ) printHex( pw, 330, ref );
       pw.printf( EOL100 + acdb1 + EOL );
     }
+    return hex;
   }
 
 
-  static void printAcDb( PrintWriter pw, int hex, String acdb1, String acdb2 ) // mVersion13
+  static int printAcDb( PrintWriter pw, int hex, String acdb1, String acdb2 ) 
   {
-    if ( mVersion13 ) {
-      if ( hex >= 0 ) printHex( pw, 5, hex );
+    if ( mVersion13_14 ) {
+      if ( hex >= 0 ) {
+        hex = inc( hex );
+        printHex( pw, 5, hex );
+      }
       pw.printf( EOL100 + acdb1 + EOL + EOL100 + acdb2 + EOL );
     }
+    return hex;
   }
 
-  static void printAcDb( PrintWriter pw, int hex, int ref, String acdb1, String acdb2 ) // mVersion13
+  static int printAcDb( PrintWriter pw, int hex, int ref, String acdb1, String acdb2 )
   {
-    if ( mVersion13 ) {
-      if ( hex >= 0 ) printHex( pw, 5, hex );
+    if ( mVersion13_14 ) {
+      if ( hex >= 0 ) {
+        hex = inc( hex );
+        printHex( pw, 5, hex );
+      }
       if ( ref >= 0 ) printHex( pw, 330, ref );
       pw.printf( EOL100 + acdb1 + EOL + EOL100 + acdb2 + EOL );
     }
+    return hex;
   }
 
-  static void printAcDb( PrintWriter pw, int hex, int ref, String acdb1, String acdb2, String acdb3 ) // mVersion13
+  static int printAcDb( PrintWriter pw, int hex, int ref, String acdb1, String acdb2, String acdb3 )
   {
-    if ( mVersion13 ) {
-      if ( hex >= 0 ) printHex( pw, 5, hex );
+    if ( mVersion13_14 ) {
+      if ( hex >= 0 ) {
+        hex = inc( hex );
+        printHex( pw, 5, hex );
+      }
       if ( ref >= 0 ) printHex( pw, 330, ref );
       pw.printf( EOL100 + acdb1 + EOL + EOL100 + acdb2 + EOL + EOL100 + acdb3 + EOL );
     }
+    return hex;
   }
 
   static void writeString(  BufferedWriter out, int code, String name ) throws IOException
@@ -234,12 +266,13 @@ public class DXF
     writeString(out, 0, "ENDSEC" );
   }
 
-  static void writeBeginTable(  BufferedWriter out, String name, int handle, int num ) throws IOException
+  static int writeBeginTable(  BufferedWriter out, String name, int handle, int num ) throws IOException
   {
     writeString(out, 0, "TABLE" );
     writeString(out, 2, name );
-    writeAcDb( out, handle, "AcDbSymbolTable" );
+    handle = writeAcDb( out, handle, "AcDbSymbolTable" );
     if ( num >= 0 ) writeInt(out, 70, num );
+    return handle;
   }
   
   static void writeEndTable(  BufferedWriter out ) throws IOException
@@ -247,22 +280,23 @@ public class DXF
     writeString( out, 0, "ENDTAB");
   }
 
-  static void printLayer( PrintWriter pw2, int handle, String name, int flag, int color, String linetype )
+  static int printLayer( PrintWriter pw2, int handle, String name, int flag, int color, String linetype )
   {
     name = name.replace(":", "-");
     printString( pw2, 0, "LAYER" );
-    printAcDb( pw2, handle, AcDbSymbolTR, "AcDbLayerTableRecord");
+    handle = printAcDb( pw2, handle, AcDbSymbolTR, "AcDbLayerTableRecord");
     printString( pw2, 2, name );  // layer name
     printInt( pw2, 70, flag );    // layer flag
     printInt( pw2, 62, color );   // layer color
     printString( pw2, 6, linetype ); // linetype name
-    // if ( mVersion13 ) {
+    // if ( mVersion13_14 ) {
     //   printInt( pw2, 330, 2 );       // softpointer id/handle to owner dictionary 
     //   printInt( pw2, 370, -3 );      // lineweight enum value
     //   printString( pw2, 390, "F" );  // hardpointer id/handle or plotstylename object
     //   // printInt( pw2, 347, 46 );
     //   // printInt( pw2, 348, 0 );
     // }
+    return handle;
   }
 
   // static void printEndText( PrintWriter pw, String style )
@@ -274,9 +308,8 @@ public class DXF
   {
     printString( pw, 0, "VERTEX" );
     printString( pw, 8, layer );
-    if ( mVersion13 ) {
-      handle = inc(handle);
-      printAcDb( pw, handle, ref, AcDbEntity, AcDbVertex, "AcDb3dPolylineVertex" );
+    if ( mVersion13_14 ) {
+      handle = printAcDb( pw, handle, ref, AcDbEntity, AcDbVertex, "AcDb3dPolylineVertex" );
       printInt( pw, 70, 32 ); // flag 32 = 3D polyline vertex
     }
     printXYZ( pw, x * scale, -y * scale, 0.0f, 0 );
@@ -286,8 +319,9 @@ public class DXF
   static int printLine(PrintWriter pw, float scale, int handle, String layer, float x1, float y1, float x2, float y2)
   {
     printString( pw, 0, "LINE" );
-    handle = inc(handle);
-    printAcDb( pw, handle, AcDbEntity, AcDbLine );
+    if ( mVersion13_14 ) {
+      handle = printAcDb( pw, handle, AcDbEntity, AcDbLine );
+    }
     printString( pw, 8, layer );
     // printInt(  pw, 39, 0 );         // line thickness
     printXYZ( pw, x1*scale, y1*scale, 0.0f, 0 );
@@ -298,8 +332,9 @@ public class DXF
   static int printPolylineHeader( PrintWriter pw, int handle, String layer, boolean closed )
   {
     printString( pw, 0, "POLYLINE" );
-    handle = inc(handle);
-    printAcDb( pw, handle, AcDbEntity, AcDbPolyline );
+    if ( mVersion13_14 ) {
+      handle = printAcDb( pw, handle, AcDbEntity, AcDbPolyline );
+    }
     printString( pw, 8, layer );
     // printInt(  pw, 39, 1 ); // line thickness
     // printInt(  pw, 40, 1 ); // start width
@@ -313,7 +348,7 @@ public class DXF
   static int printPolylineFooter( PrintWriter pw, int handle )
   {
     pw.printf("  0%sSEQEND%s", EOL, EOL );
-    if ( mVersion13 ) {
+    if ( mVersion13_14 ) {
       handle = inc(handle);
       printHex( pw, 5, handle );
     }
@@ -325,8 +360,7 @@ public class DXF
   // {
   //   int close = (closed ? 1 : 0 );
   //   printString( pw, 0, "LWPOLYLINE" );
-  //   handle = inc(handle);
-  //       printAcDb( pw, handle, AcDbEntity, AcDbPolyline );
+  //   handle = printAcDb( pw, handle, AcDbEntity, AcDbPolyline );
   //   printString( pw, 8, layer );
   //   printInt( pw, 38, 0 ); // elevation
   //   printInt( pw, 39, 1 ); // thickness
@@ -341,10 +375,9 @@ public class DXF
 
   static int printHatchHeader( PrintWriter pw, int handle, String layer, int npt )
   {
-    if ( mVersion13 ) {
+    if ( mVersion13_14 ) {
       printString( pw, 0, "HATCH" );    // entity type HATCH
-      handle = inc(handle);
-      printAcDb( pw, handle, AcDbEntity, "AcDbHatch" );
+      handle = printAcDb( pw, handle, AcDbEntity, "AcDbHatch" );
       // printString( pw5, 8, "AREA" );  // layer (color BYLAYER)
       printString( pw, 8, layer );      // layer (color BYLAYER)
       printString( pw, 2, "_USER" );    // hatch pattern name
@@ -366,7 +399,7 @@ public class DXF
 
   static int printHatchFooter( PrintWriter pw, int handle )
   {
-    if ( mVersion13 ) {
+    if ( mVersion13_14 ) {
       // printXY( pw, area.mFirst.x * scale, -area.mFirst.y * scale, 0 );
         printInt( pw, 97, 1 );            // nr. source boundary objects
       printInt( pw, 75, 0 );            // hatch style: 0:normal, 1:outer, 2:ignore
@@ -406,10 +439,10 @@ public class DXF
   static int printText( PrintWriter pw, int handle, String label, float x, float y, float angle, float scale,
                         String layer, String style, float xoff, float yoff )
   {
-    // if ( false && mVersion13 ) { // FIXME TEXT in AC1012
+    // if ( false && mVersion13_14 ) { // FIXME TEXT in AC1012
     //   // int idx = 1 + point.mPointType;
     //   printString( pw, 0, "INSERT" );
-    //   handle = inc(handle); printAcDb( pw, handle, "AcDbBlockReference" );
+    //   handle = printAcDb( pw, handle, "AcDbBlockReference" );
     //   printString( pw, 8, "POINT" );
     //   printString( pw, 2, "P_label" ); // block_name );
     //   printFloat( pw, 41, POINT_SCALE );
@@ -419,7 +452,7 @@ public class DXF
     // } else {
       printString( pw, 0, "TEXT" );
       // printString( pw, 2, block );
-      handle = inc(handle); printAcDb( pw, handle, AcDbEntity, AcDbText );
+      handle = printAcDb( pw, handle, AcDbEntity, AcDbText );
       printString( pw, 8, layer );
       // printString( pw, 7, style_dejavu ); // style (optional)
       // pw.printf("%s\%s 0%s", "\"10\"", EOL, EOL );
@@ -436,7 +469,8 @@ public class DXF
       // printFloat( pw, 73, 0 );      // V-align
       printString( pw, 1, label );    
       // printString( pw, 7, style );  // style, optional (dftl STANDARD)
-      printString( pw, 100, "AcDbText");
+
+      printString( pw, 100, "AcDbText"); 
     // }
     return handle;
   }
@@ -444,8 +478,7 @@ public class DXF
   static int writeSpaceBlockRecord( BufferedWriter out, String name, int handle ) throws IOException
   {
      writeString( out, 0, "BLOCK_RECORD" );
-     handle = inc(handle);
-     writeAcDb( out, handle, AcDbSymbolTR, "AcDbBlockTableRecord" );
+     handle = writeAcDb( out, handle, AcDbSymbolTR, "AcDbBlockTableRecord" );
      writeString( out, 2, name );
      writeInt( out, 70, 0 );
      writeInt( out, 280, 1 );
@@ -457,9 +490,10 @@ public class DXF
   static int writeSpaceBlock( BufferedWriter out, String name, int handle ) throws IOException
   {
     writeString( out, 0, "BLOCK" );
-    handle = inc(handle);
-    writeAcDb( out, handle, AcDbEntity, "AcDbBlockBegin" );
-    // writeInt( out, 330, handle );
+    if ( mVersion13_14 ) {
+      handle = writeAcDb( out, handle, AcDbEntity, "AcDbBlockBegin" );
+      // writeInt( out, 330, handle );
+    }
     writeString( out, 8, "0" );
     writeString( out, 2, name );
     writeInt( out, 70, 0 );       // flag 0=none, 1=anonymous, 2=non-conts attr, 4=xref, 8=xref overlay,
@@ -469,9 +503,8 @@ public class DXF
     writeString( out, 3, name );
     writeString( out, 1, "" );
     writeString( out, 0, "ENDBLK" );
-    if ( mVersion13 ) {
-      handle = inc(handle);
-      writeAcDb( out, handle, AcDbEntity, "AcDbBlockEnd");
+    if ( mVersion13_14 ) {
+      handle = writeAcDb( out, handle, AcDbEntity, "AcDbBlockEnd");
       writeString( out, 8, "0");
     }
     return handle;
@@ -484,9 +517,9 @@ public class DXF
     // ACAD versions: 1006 (R10) 1009 (R11 R12) 1012 (R13) 1014 (R14)
     //                1015 (2000) 1018 (2004) 1021 (2007) 1024 (2010)  
     writeString( out, 9, "$ACADVER" );
-    writeString( out, 1, ( mVersion13? "AC1012" : "AC1009" ) );
+    writeString( out, 1, ( mVersion14? "Ac1014" : mVersion13? "AC1012" : "AC1009" ) );
     // writeString( out, 9, "$ACADMAINTVER" ); writeInt( out, 70, 105 ); // ignored
-    if ( mVersion13 ) {
+    if ( mVersion13_14 ) {
       writeString( out, 9, "$HANDSEED" );    writeHex( out, 5, 0xffff );
       writeString( out, 9, "$DWGCODEPAGE" ); writeString( out, 3, "ANSI_1251" );
     }
@@ -499,13 +532,13 @@ public class DXF
       printXYZ( pw1, 0.0f, 0.0f, 0.0f, 0 ); // FIXME (0,0,0)
       printString( pw1, 9, "$EXTMIN" ); printXYZ( pw1, xmin, ymin, 0.0f, 0 );
       printString( pw1, 9, "$EXTMAX" ); printXYZ( pw1, xmax, ymax, 0.0f, 0 );
-      if ( mVersion13 ) {
+      if ( mVersion13_14 ) {
         printString( pw1, 9, "$LIMMIN" ); printXY( pw1, 0.0f, 0.0f, 0 );
         printString( pw1, 9, "$LIMMAX" ); printXY( pw1, 420.0f, 297.0f, 0 );
       }
       out.write( sw1.getBuffer().toString() );
     }
-    if ( mVersion13 ) {
+    if ( mVersion13_14 ) {
       writeString( out, 9, "$DIMSCALE" );    writeString( out, 40, "1.0" ); // 
       writeString( out, 9, "$DIMTXT" );      writeString( out, 40, "2.5" ); // 
       writeString( out, 9, "$LTSCALE" );     writeInt( out, 40, 1 ); // 
@@ -533,7 +566,7 @@ public class DXF
 
   static int writeClassesSection( BufferedWriter out, int handle ) throws IOException
   {
-    if ( mVersion13 ) {
+    if ( mVersion13_14 ) {
       writeSection( out, "CLASSES" );
       writeEndSection( out );
     }
@@ -544,11 +577,11 @@ public class DXF
   static int writeVportTable( BufferedWriter out, int handle,
              float xmin, float ymin, float xmax, float ymax ) throws IOException
   {
-    if ( mVersion13 ) {
-      handle = inc(handle); writeBeginTable( out, "VPORT", handle, 1 ); // 1 VPORT
+    if ( mVersion13_14 ) {
+      handle = writeBeginTable( out, "VPORT", handle, 1 ); // 1 VPORT
       {
         writeString( out, 0, "VPORT" );
-        handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbViewportTableRecord" );
+        handle = writeAcDb( out, handle, AcDbSymbolTR, "AcDbViewportTableRecord" );
         writeString( out, 2, "*Active" ); // name
         writeInt( out, 70, 0 );  // flags:
         writeXY( out, (int)xmin, (int)ymin, 0 ); // lower-left cormer
@@ -602,13 +635,12 @@ public class DXF
 
   static int writeStylesTable( BufferedWriter out, int handle ) throws IOException
   {
-    if ( mVersion13 ) {
+    if ( mVersion13_14 ) {
       int nr_styles = 2;
-      handle = inc(handle);
-      writeBeginTable( out, "STYLE", handle, nr_styles );  // 2 styles
+      handle = writeBeginTable( out, "STYLE", handle, nr_styles );  // 2 styles
       {
         writeString( out, 0, "STYLE" );
-        handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbTextStyleTableRecord" );
+        handle = writeAcDb( out, handle, AcDbSymbolTR, "AcDbTextStyleTableRecord" );
         writeString( out, 2, standard );  // name
         writeInt( out, 70, 0 );           // flag (1: shape, 4:vert text, ... )
         writeStringZero( out, 40 );     // text-height: not fixed
@@ -620,7 +652,7 @@ public class DXF
         writeStringEmpty( out, 4 );
 
         writeString( out, 0, "STYLE" );
-        handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbTextStyleTableRecord" );
+        handle = writeAcDb( out, handle, AcDbSymbolTR, "AcDbTextStyleTableRecord" );
         p_style = handle;
         writeString( out, 2, style_dejavu );  // name
         writeInt( out, 70, 0 );               // flag
@@ -642,17 +674,17 @@ public class DXF
 
   static int writeLTypesTable( BufferedWriter out, int handle ) throws IOException
   {
-    if ( mVersion13 ) { handle = inc(handle); } else { handle = 5; }
+    if ( mVersion9 ) { handle = 5; } // necessary ???
+    int ltypenr    = mVersion13_14 ? 5 : 1; // linetype number
+    handle = writeBeginTable( out, "LTYPE", handle, ltypenr ); 
     int ltypeowner = handle;
-    int ltypenr    = mVersion13 ? 5 : 1; // linetype number
-    writeBeginTable( out, "LTYPE", handle, ltypenr ); 
     // FIXME this line might be a problem with AutoCAD
     // writeInt( out, 330, 0 ); // table has no owner
     {
       // int flag = 64;
-      if ( mVersion13 ) {
+      if ( mVersion13_14 ) {
         writeString( out, 0, "LTYPE" );
-        handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
+        handle = writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
         writeString( out, 2, lt_byBlock );
         writeInt( out, 330, ltypeowner );
         writeInt( out, 70, 0 );
@@ -662,7 +694,7 @@ public class DXF
         writeStringZero( out, 40 );
 
         writeString( out, 0, "LTYPE" );
-        handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
+        handle = writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
         writeString( out, 2, lt_byLayer );
         writeInt( out, 330, ltypeowner );
         writeInt( out, 70, 0 );
@@ -672,7 +704,7 @@ public class DXF
         writeStringZero( out, 40 );
 
         writeString( out, 0, "LTYPE" );
-        handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
+        handle = writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
         writeString( out, 2, lt_continuous );
         writeInt( out, 330, ltypeowner );
         writeInt( out, 70, 0 );
@@ -681,9 +713,9 @@ public class DXF
         writeInt( out, 73, 0 );
         writeStringZero( out, 40 );
 
-        if ( ! mVersion16 ) {
+        if ( mVersion13 ) {
           writeString( out, 0, "LTYPE" );
-          handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
+          handle = writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
           writeString( out, 2, lt_center );
           writeInt( out, 330, ltypeowner );
           writeInt( out, 70, 0 );
@@ -697,7 +729,7 @@ public class DXF
           writeString( out, 49, "-0.25" ); writeInt( out, 74, 0 );
 
           writeString( out, 0, "LTYPE" );
-          handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
+          handle = writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
           writeString( out, 2, lt_ticks );
           writeInt( out, 330, ltypeowner );
           writeInt( out, 70, 0 );
@@ -718,7 +750,7 @@ public class DXF
         }
 
         // writeString( out, 0, "LTYPE" );
-        // handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
+        // handle = writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
         // writeString( out, 2, lt_tick );
         // writeInt( out, 330, ltypeowner );
         // writeInt( out, 70, 0 );
@@ -739,7 +771,7 @@ public class DXF
 
       } else {
         writeString( out, 0, "LTYPE" );
-        writeAcDb( out, 14, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
+        /* handle = */ writeAcDb( out, 14, AcDbSymbolTR, "AcDbLinetypeTableRecord" ); // unnecessary
         writeString( out, 2, lt_continuous );
         writeInt( out, 70, 64 );
         writeString( out, 3, "Solid line" );
@@ -754,20 +786,17 @@ public class DXF
 
   static int writeExtraTables( BufferedWriter out, int handle ) throws IOException
   {
-    handle = inc(handle);
-    writeBeginTable( out, "VIEW", handle, 0 ); // no VIEW
+    handle = writeBeginTable( out, "VIEW", handle, 0 ); // no VIEW
     writeEndTable( out );
 
-    handle = inc(handle);
-    writeBeginTable( out, "UCS", handle, 0 ); // no UCS
+    handle = writeBeginTable( out, "UCS", handle, 0 ); // no UCS
     writeEndTable( out );
     
-    handle = inc(handle);
-    writeBeginTable( out, "APPID", handle, 1 );
+    handle = writeBeginTable( out, "APPID", handle, 1 );
     {
       writeString( out, 0, "APPID" );
-      if ( mVersion13 ) { handle = inc(handle); } else { handle = 12; }
-      writeAcDb( out, handle, AcDbSymbolTR, "AcDbRegAppTableRecord" );
+      if ( mVersion9 ) { handle = 11; } // incremented before writing
+      handle = writeAcDb( out, handle, AcDbSymbolTR, "AcDbRegAppTableRecord" );
       writeString( out, 2, "ACAD" ); // applic. name
       writeInt( out, 70, 0 );        // flag
     }
@@ -777,15 +806,15 @@ public class DXF
 
   static int writeDimstyleTable( BufferedWriter out, int handle ) throws IOException
   {
-    if ( mVersion13 ) {
-      handle = inc(handle); writeBeginTable( out, "DIMSTYLE", handle, 1 );
+    if ( mVersion13_14 ) {
+      handle = writeBeginTable( out, "DIMSTYLE", handle, 1 );
       // writeString( out, 100, "AcDbDimStyleTable" );
       // writeInt( out, 71, 0 ); // DIMTOL
       {
         writeString( out, 0, "DIMSTYLE" );
         handle = inc(handle);
         writeHex( out, 105, handle ); 
-        writeAcDb( out, -1, AcDbSymbolTR, "AcDbDimStyleTableRecord" );
+        writeAcDb( out, -1, AcDbSymbolTR, "AcDbDimStyleTableRecord" ); // do i need handle ?
         writeString( out, 2, standard );
         writeStringEmpty( out, 3 );
         writeStringEmpty( out, 4 );
@@ -851,15 +880,23 @@ public class DXF
     PrintWriter pwx  = new PrintWriter(swx);
 
     printString( pwx, 0, "DICTIONARY" );
-    int saved = handle = inc(handle);
-    printAcDb( pwx, handle, AcDbDictionary );
+    handle = printAcDb( pwx, handle, AcDbDictionary );
+    int saved = handle;
     // printInt( pwx, 280, 0 );
     printInt( pwx, 281, 1 );
     printString( pwx, 3, "ACAD_GROUP" );
-    handle = inc(handle); printHex( pwx, 350, handle );
+    if ( mVersion13_14 ) {
+      handle = inc(handle);
+      printHex( pwx, 350, handle );
+    }
 
     printString( pwx, 0, "DICTIONARY" );
-    handle = inc(handle); printAcDb( pwx, handle, AcDbDictionary );
+    // handle = printAcDb( pwx, handle, AcDbDictionary );
+    if ( mVersion13_14 ) {
+      printHex( pwx, 5, handle );
+      pwx.printf( EOL100 + AcDbDictionary + EOL );
+    }
+
     // printInt( pwx, 280, 0 );
     printInt( pwx, 281, 1 );
     printHex( pwx, 330, saved );

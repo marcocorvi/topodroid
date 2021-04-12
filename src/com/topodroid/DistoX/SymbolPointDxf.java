@@ -45,8 +45,9 @@ class SymbolPointDxf
     addAcDbPolyline();
     headerPolyline( 0, 0, false );
     for ( int k=0; k<xx.length; ++k ) {
-      startVertex( pname );
+      startVertex( null ); // null layer
       addHandlePointer();
+      addAcDbEntity( pname ); // layer
       addAcDbVertex();
       addVertexData( xx[k], yy[k] );
     }
@@ -65,10 +66,10 @@ class SymbolPointDxf
 
   // DXF.printString( pw, 0, "ARC" );
   // DXF.printString( pw, 8, pname );
-  // DXF.printAcDb(pw, -1, "AcDbEntity", "AcDbCircle" );
+  // DXF.printAcDb(pw, -1, DXF.AcDbEntity, DXF.AcDbCircle );
   // DXF.printXYZ( pw, (x0+x1)/2*dxfScale, -(y0+y1)/2*dxfScale, 0.0f, 0 ); // CENTER
   // DXF.printFloat( pw, 40, x1*dxfScale );                                // RADIUS
-  // DXF.printString( pw, 100, "AcDbArc" );
+  // DXF.printString( pw, 100, DXF.AcDbArc );
   // DXF.printFloat( pw, 50, x2 );                                         // ANGLES
   // DXF.printFloat( pw, 51, x2+y2 );
   public void arc( String pname, float x, float y, float r, float a1, float a2 )
@@ -82,7 +83,7 @@ class SymbolPointDxf
 
   // DXF.printString( pw, 0, "ELLIPSE" );
   // DXF.printString( pw, 8, pname );
-  // DXF.printAcDb(pw, -1, "AcDbEntity", AcDbEllipse" );
+  // DXF.printAcDb(pw, -1, DXF.AcDbEntity, DXF.AcDbEllipse );
   // pw.printf(Locale.US,
   //           "  10\n%.2f\n  20\n%.2f\n  30\n%.2f\n  11\n%.2f\n  21\n%.2f\n  31\n%.2f\n  40\n%.2f\n  41\n%.2f\n  42\n%.2f\n",
   //           (x0+x1)/2*dxfScale, -(y0+y1)/2*dxfScale, 0.0f,                 // CENTER
@@ -116,6 +117,7 @@ class SymbolPointDxf
   private final static int TOKEN_ELLIPSE  = 5;
   private final static int TOKEN_VERTEX   = 6;
   private final static int TOKEN_SEQEND   = 7;
+  private final static int TOKEN_ENTITY   = 8; // entity and layer
 
   private final static int TOKEN_HANDLE   = 11;
   private final static int TOKEN_POINTER  = 12;
@@ -149,6 +151,32 @@ class SymbolPointDxf
     int write( BufferedWriter out, int version, int handle, int ref ) throws IOException
     {
       if ( string != null ) out.write( string );
+      return handle;
+    }
+  }
+
+  // Entity token does not affect handle
+  private class EntityToken extends DxfToken
+  {
+    String layer;
+
+    EntityToken( String l )
+    {
+      super( TOKEN_ENTITY, 13 );
+      layer = l;
+    }
+
+    int write( BufferedWriter out, int version, int handle, int ref ) throws IOException
+    {
+      StringWriter sw = new StringWriter();
+      PrintWriter pw  = new PrintWriter(sw);
+      if ( version >= this.version ) {
+        pw.printf("  100%s%s%s", DXF.EOL, DXF.AcDbEntity, DXF.EOL );
+      }
+      if ( layer != null ) {
+        pw.printf("  8%s%s%s", DXF.EOL, layer, DXF.EOL );
+      }
+      out.write( sw.getBuffer().toString() );
       return handle;
     }
   }
@@ -233,7 +261,7 @@ class SymbolPointDxf
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter( sw ); // DXF writer
     DXF.printString( pw, 0, name );
-    DXF.printString( pw, 8, pname );
+    if ( pname != null) DXF.printString( pw, 8, pname );
     addToken( new NormalToken( type, 9, sw.toString() ) );
   }
 
@@ -248,26 +276,27 @@ class SymbolPointDxf
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter( sw ); // DXF writer
-    // DXF.printAcDb( pw, -1, "AcDbEntity", acdbitem );
-    pw.printf( DXF.EOL100 +  "AcDbEntity" + DXF.EOL + DXF.EOL100 + acdbitem + DXF.EOL );
+    pw.printf( DXF.EOL100 +  DXF.AcDbEntity + DXF.EOL + DXF.EOL100 + acdbitem + DXF.EOL );
     addToken( new NormalToken( TOKEN_ACDB, 13, sw.toString() ) );
   }
 
-  private void addAcDbLine( )    { addAcDb( "AcDbLine" ); }
-  private void addAcDbPolyline() { addAcDb( "AcDbPolyline" ); }
-  private void addAcDbCircle( )  { addAcDb( "AcDbCircle" ); }
-  private void addAcDbArc( )     { addAcDb( "AcDbArc" ); }
-  private void addAcDbEllipse()  { addAcDb( "AcDbEllipse" ); }
+  private void addAcDbLine( )    { addAcDb( DXF.AcDbLine ); }
+  private void addAcDbPolyline() { addAcDb( DXF.AcDbPolyline ); }
+  private void addAcDbCircle( )  { addAcDb( DXF.AcDbCircle ); }
+  private void addAcDbArc( )     { addAcDb( DXF.AcDbArc ); }
+  private void addAcDbEllipse()  { addAcDb( DXF.AcDbEllipse ); }
   private void addAcDbVertex() 
   { 
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter( sw ); // DXF writer
-    pw.printf( DXF.EOL100 + DXF.AcDbEntity + DXF.EOL );
+    // pw.printf( DXF.EOL100 + DXF.AcDbEntity + DXF.EOL );
     pw.printf( DXF.EOL100 + DXF.AcDbVertex + DXF.EOL );
     pw.printf( DXF.EOL100 + "AcDb3dPolylineVertex" + DXF.EOL );
     pw.printf( "  70" + DXF.EOL + "32" + DXF.EOL );
     addToken( new NormalToken( TOKEN_ACDB, 13, sw.toString() ) );
   }
+
+  private void addAcDbEntity( String layer ) { addToken( new EntityToken( layer ) ); }
 
   private void addHandle()        { addToken( new HandleToken( ) ); }
   private void addHandlePointer() { addToken( new HandlePointerToken( ) ); }

@@ -156,8 +156,7 @@ class DrawingDxf
   // {
   //   int close = (closed ? 1 : 0 );
   //   DXF.printString( pw, 0, "LWPOLYLINE" );
-  //   handle = DXF.inc(handle);
-  //       DXF.printAcDb( pw, handle, DXF.AcDbEntity, DXF.AcDbPolyline );
+  //   handle = DXF.printAcDb( pw, handle, DXF.AcDbEntity, DXF.AcDbPolyline );
   //   DXF.printString( pw, 8, layer );
   //   DXF.printInt( pw, 38, 0 ); // elevation
   //   DXF.printInt( pw, 39, 1 ); // thickness
@@ -172,7 +171,7 @@ class DrawingDxf
 
   static private boolean checkSpline( DrawingPointLinePath line )
   {
-    if ( DXF.mVersion13 ) {
+    if ( DXF.mVersion13_14 ) {
       for ( LinePoint p = line.mFirst; p != null; p = p.mNext ) {
         if ( p.has_cp ) {
           return true;
@@ -187,7 +186,7 @@ class DrawingDxf
   {
     // Log.v("DistoXdxf", "print spline");
     DXF.printString( pw, 0, "SPLINE" );
-    handle = DXF.inc(handle); DXF.printAcDb( pw, handle, DXF.AcDbEntity, "AcDbSpline" );
+    handle = DXF.printAcDb( pw, handle, DXF.AcDbEntity, "AcDbSpline" );
     DXF.printString( pw, 8, layer );
     DXF.printString( pw, 6, DXF.lt_continuous );
     DXF.printFloat( pw, 48, 1.0f ); // scale 
@@ -292,8 +291,10 @@ class DrawingDxf
 
   static void writeDxf( BufferedWriter out, TDNum num, /* DrawingUtil util, */ DrawingCommandManager plot, long type )
   {
-    DXF.mVersion13 = (TDSetting.mAcadVersion >= 13);
-    DXF.mVersion16 = (TDSetting.mAcadVersion >= 16);
+    DXF.mVersion9  = (TDSetting.mAcadVersion ==  9);
+    DXF.mVersion13 = (TDSetting.mAcadVersion == 13);
+    DXF.mVersion14 = (TDSetting.mAcadVersion == 16);
+    DXF.mVersion13_14 = DXF.mVersion13 || DXF.mVersion14;
     
     float scale = 1.0f/DrawingUtil.SCALE_FIX; // TDSetting.mDxfScale; 
     float xoff = 0;
@@ -337,8 +338,8 @@ class DrawingDxf
       SymbolAreaLibrary arealib   = BrushManager.getAreaLib();
       // nr_layers += 1 + linelib.size() + arealib.size();
       nr_layers += 1 + BrushManager.getLineLibSize() + BrushManager.getAreaLibSize();
-      if ( DXF.mVersion13 ) { handle = DXF.inc(handle); } else { handle = 2; }
-      DXF.writeBeginTable( out, "LAYER", handle, nr_layers );
+      if ( DXF.mVersion9 ) { handle = 2; }
+      handle = DXF.writeBeginTable( out, "LAYER", handle, nr_layers );
       {
         StringWriter sw2 = new StringWriter();
         PrintWriter pw2  = new PrintWriter(sw2);
@@ -346,29 +347,29 @@ class DrawingDxf
         // 2 layer name, 70 flag (64), 62 color code, 6 line type
         int flag = 0;
         int color = 1;
-        // if ( ! DXF.mVersion13 ) { handle = 40; }
-        handle = DXF.inc(handle); DXF.printLayer( pw2, handle, "0",       flag, 7, DXF.lt_continuous ); // LAYER "0" .. FIXME DraftSight ..must be AutoCAD white
-        handle = DXF.inc(handle); DXF.printLayer( pw2, handle, "LEG",     flag, color, DXF.lt_continuous ); ++color; // red
-        handle = DXF.inc(handle); DXF.printLayer( pw2, handle, "SPLAY",   flag, color, DXF.lt_continuous ); ++color; // yellow
-        handle = DXF.inc(handle); DXF.printLayer( pw2, handle, "STATION", flag, color, DXF.lt_continuous ); ++color; // green
-        handle = DXF.inc(handle); DXF.printLayer( pw2, handle, "LINE",    flag, color, DXF.lt_continuous ); ++color; // cyan
-        handle = DXF.inc(handle); DXF.printLayer( pw2, handle, "POINT",   flag, color, DXF.lt_continuous ); ++color; // blue
-        handle = DXF.inc(handle); DXF.printLayer( pw2, handle, "AREA",    flag, color, DXF.lt_continuous ); ++color; // magenta
-        handle = DXF.inc(handle); DXF.printLayer( pw2, handle, "REF",     flag, color, DXF.lt_continuous ); ++color; // white
+        // if ( ! DXF.mVersion13_14 ) { handle = 40; }
+        handle = DXF.printLayer( pw2, handle, "0",       flag, 7, DXF.lt_continuous ); // LAYER "0" .. FIXME DraftSight ..must be AutoCAD white
+        handle = DXF.printLayer( pw2, handle, "LEG",     flag, color, DXF.lt_continuous ); ++color; // red
+        handle = DXF.printLayer( pw2, handle, "SPLAY",   flag, color, DXF.lt_continuous ); ++color; // yellow
+        handle = DXF.printLayer( pw2, handle, "STATION", flag, color, DXF.lt_continuous ); ++color; // green
+        handle = DXF.printLayer( pw2, handle, "LINE",    flag, color, DXF.lt_continuous ); ++color; // cyan
+        handle = DXF.printLayer( pw2, handle, "POINT",   flag, color, DXF.lt_continuous ); ++color; // blue
+        handle = DXF.printLayer( pw2, handle, "AREA",    flag, color, DXF.lt_continuous ); ++color; // magenta
+        handle = DXF.printLayer( pw2, handle, "REF",     flag, color, DXF.lt_continuous ); ++color; // white
         
         color = 10;
         if ( linelib != null ) { // always true
           for ( Symbol line : linelib.getSymbols() ) {
             String lname = "L_" + line.getThName().replace(':','-');
             String ltype = DXF.lt_continuous;
-            if ( DXF.mVersion13 && ! DXF.mVersion16 ) {
+            if ( DXF.mVersion13 ) {
               if ( lname.equals("L_pit") ) { 
                 ltype = DXF.lt_ticks;
               } else if ( lname.equals("L_border" ) ) {
                 ltype = DXF.lt_center;
               }
             }
-            handle = DXF.inc(handle); DXF.printLayer( pw2, handle, lname, flag, color, ltype ); 
+            handle = DXF.printLayer( pw2, handle, lname, flag, color, ltype ); 
             if ( ++color >= 256 ) color = 1;
           }
         }
@@ -377,7 +378,7 @@ class DrawingDxf
         if ( arealib != null ) { // always true
           for ( Symbol s : arealib.getSymbols() ) {
             String aname = "A_" + s.getThName().replace(':','-');
-            handle = DXF.inc(handle); DXF.printLayer( pw2, handle, aname, flag, color, DXF.lt_continuous ); 
+            handle = DXF.printLayer( pw2, handle, aname, flag, color, DXF.lt_continuous ); 
             if ( ++color >= 256 ) color = 1;
           }
         }
@@ -385,7 +386,7 @@ class DrawingDxf
         if ( pointlib != null ) { // always true
           for ( Symbol point : pointlib.getSymbols() ) {
             String pname = "P_" + point.getThName().replace(':','-');
-            handle = DXF.inc(handle); DXF.printLayer( pw2, handle, pname, flag, color, DXF.lt_continuous ); 
+            handle = DXF.printLayer( pw2, handle, pname, flag, color, DXF.lt_continuous ); 
             if ( ++color >= 256 ) color = 1;
           }
         }
@@ -396,9 +397,8 @@ class DrawingDxf
       handle = DXF.writeExtraTables( out, handle );
       handle = DXF.writeDimstyleTable( out, handle );
 
-      if ( DXF.mVersion13 ) {
-        handle = DXF.inc(handle);
-        DXF.writeBeginTable( out, "BLOCK_RECORD", handle, BrushManager.getPointLibSize() );
+      if ( DXF.mVersion13_14 ) {
+        handle = DXF.writeBeginTable( out, "BLOCK_RECORD", handle, BrushManager.getPointLibSize() );
         {
           handle = DXF.writeSpaceBlockRecord( out, "*Model_Space", handle );
           handle = DXF.writeSpaceBlockRecord( out, "*Paper_Space", handle );
@@ -406,9 +406,8 @@ class DrawingDxf
           for ( int n = 0; n < BrushManager.getPointLibSize(); ++ n ) {
             String th_name = BrushManager.getPointThName(n).replace(':','-');
             DXF.writeString( out, 0, "BLOCK_RECORD" );
-            handle = DXF.inc(handle);
+            handle = DXF.writeAcDb( out, handle, DXF.AcDbSymbolTR, "AcDbBlockTableRecord" );
             point_record_handle[ n ] = handle;
-            DXF.writeAcDb( out, handle, DXF.AcDbSymbolTR, "AcDbBlockTableRecord" );
             DXF.writeString( out, 8, "P_" + th_name );
             DXF.writeString( out, 2, "B_" + th_name ); // block name
             DXF.writeInt( out, 70, 0 );                // block insertion units
@@ -422,7 +421,7 @@ class DrawingDxf
       
       DXF.writeSection( out, "BLOCKS" );
       {
-        if ( DXF.mVersion13 ) {
+        if ( DXF.mVersion13_14 ) {
           handle = DXF.writeSpaceBlock( out, "*Model_Space", handle );
           handle = DXF.writeSpaceBlock( out, "*Paper_Space", handle );
         }
@@ -432,8 +431,9 @@ class DrawingDxf
           SymbolPoint pt = (SymbolPoint)BrushManager.getPointByIndex(n);
 	  String th_name = pt.getThName().replace(':','-');
           DXF.writeString( out, 0, "BLOCK" );
-          handle = DXF.inc(handle);
-          DXF.writeAcDb( out, handle, DXF.AcDbEntity, "AcDbBlockBegin" );
+          if ( DXF.mVersion13_14 ) {
+            handle = DXF.writeAcDb( out, handle, DXF.AcDbEntity, "AcDbBlockBegin" );
+          }
           // DXF.writeString( out, 8, "P_" + th_name );
           DXF.writeString( out, 2, "B_" + th_name ); // block name, can be repeated with '3'
           DXF.writeInt( out, 70, 0 );       // flag 0=none, 1=anonymous, 2=non-conts attr, 4=xref, 8=xref overlay,
@@ -444,9 +444,8 @@ class DrawingDxf
           handle = point_dxf.writeDxf( out, 13, handle, point_record_handle[n] );
 
           DXF.writeString( out, 0, "ENDBLK" );
-          if ( DXF.mVersion13 ) {
-            handle = DXF.inc(handle);
-            DXF.writeAcDb( out, handle, DXF.AcDbEntity, "AcDbBlockEnd");
+          if ( DXF.mVersion13_14 ) {
+            handle = DXF.writeAcDb( out, handle, DXF.AcDbEntity, "AcDbBlockEnd");
             // DXF.writeString( out, 8, "POINT" );
             DXF.writeString( out, 8, "P_" + th_name );
           }
@@ -473,8 +472,7 @@ class DrawingDxf
         // out.write( sw9.getBuffer().toString() );
 	
         // DXF.printString( pw9, 0, "LINE" );
-        // handle = DXF.inc(handle);
-        // DXF.printAcDb( pw9, handle, DXF.AcDbEntity, DXF.AcDbLine );
+        // handle = DXF.printAcDb( pw9, handle, DXF.AcDbEntity, DXF.AcDbLine );
         // DXF.printString( pw9, 8, "REF" );
         // // DXF.printInt(  pw9, 39, 0 );         // line thickness
         // DXF.printXYZ( pw9, xmin, -ymax, 0.0f, 0 );
@@ -484,8 +482,7 @@ class DrawingDxf
         // StringWriter sw8 = new StringWriter();
         // PrintWriter pw8  = new PrintWriter(sw8);
         // DXF.printString( pw8, 0, "LINE" );
-        // handle = DXF.inc(handle);
-        // DXF.printAcDb( pw8, handle, DXF.AcDbEntity, DXF.AcDbLine );
+        // handle = DXF.printAcDb( pw8, handle, DXF.AcDbEntity, DXF.AcDbLine );
         // DXF.printString( pw8, 8, "REF" );
         // // DXF.printInt(  pw8, 39, 0 );         // line thickness
         // DXF.printXYZ( pw8, xmin, -ymax, 0.0f, 0 );
@@ -511,8 +508,7 @@ class DrawingDxf
             StringWriter sw4 = new StringWriter();
             PrintWriter pw4  = new PrintWriter(sw4);
             DXF.printString( pw4, 0, "LINE" );
-            handle = DXF.inc(handle);
-                        DXF.printAcDb( pw4, handle, DXF.AcDbEntity, DXF.AcDbLine );
+            handle = DXF.printAcDb( pw4, handle, DXF.AcDbEntity, DXF.AcDbLine );
             DXF.printString( pw4, 8, "LEG" );
             // DXF.printInt( pw4, 39, 2 );         // line thickness
 
@@ -552,7 +548,7 @@ class DrawingDxf
             //   NumStation f = num.getStation( blk.mFrom );
 
             //   DXF.printString( pw41, 0, "LINE" );
-            //   handle = DXF.inc(handle); DXF.printAcDb( pw41, handle, DXF.AcDbEntity, DXF.AcDbLine );
+            //   handle = DXF.printAcDb( pw41, handle, DXF.AcDbEntity, DXF.AcDbLine );
             //   DXF.printString( pw41, 8, "SPLAY" );
             //   // DXF.printInt( pw41, 39, 1 );         // line thickness
 
@@ -576,8 +572,7 @@ class DrawingDxf
             // // }
 
             DXF.printString( pw41, 0, "LINE" );
-            handle = DXF.inc(handle);
-            DXF.printAcDb( pw41, handle, DXF.AcDbEntity, DXF.AcDbLine );
+            handle = DXF.printAcDb( pw41, handle, DXF.AcDbEntity, DXF.AcDbLine );
             DXF.printString( pw41, 8, "SPLAY" );
             // DXF.printInt( pw41, 39, 1 );         // line thickness
             DXF.printXYZ( pw41, scale*(xoff + sh.x1), -scale*(yoff + sh.y1), 0.0f, 0 );
@@ -625,7 +620,7 @@ class DrawingDxf
               DXF.printFloat(pw5, 50, 360.0f - (float)(point.mOrientation));
               DXF.printXYZ(pw5, (point.cx + xoff) * scale, -(point.cy + yoff) * scale, 0, 0);
             } else {
-              if ( DXF.mVersion13 ) {
+              if ( DXF.mVersion13_14 ) {
                 if ( BrushManager.isPointSection( point.mPointType ) ) {
 	          if ( TDSetting.mAutoXSections ) {
                     // FIXME GET_OPTION
@@ -674,7 +669,7 @@ class DrawingDxf
         }
       }
       DXF.writeEndSection( out );
-      if ( DXF.mVersion13 ) {
+      if ( DXF.mVersion13_14 ) {
         handle = DXF.writeSectionObjects( out, handle );
       }
       DXF.writeString( out, 0, "EOF" );
@@ -713,7 +708,7 @@ class DrawingDxf
     String th_name = point.getThName().replace(':','-');
     // int idx = 1 + point.mPointType;
     DXF.printString( pw, 0, "INSERT" );
-    handle = DXF.inc(handle); DXF.printAcDb( pw, handle, "AcDbBlockReference" );
+    handle = DXF.printAcDb( pw, handle, "AcDbBlockReference" );
     DXF.printString( pw, 8, "P_" + th_name );
     DXF.printString( pw, 2, "B_" + th_name );
     DXF.printFloat( pw, 41, point.getScaleValue()*1.4f ); // FIX Asenov
@@ -728,7 +723,7 @@ class DrawingDxf
     if ( line == null ) return handle;
     String layer = "L_" + line.getThName( ).replace(':','-');
     int flag = 0;
-    if ( DXF.mVersion13 && checkSpline( line ) ) {
+    if ( DXF.mVersion13_14 && checkSpline( line ) ) {
       if ( TDSetting.mAcadSpline ) {
         handle = DXF.printPolylineHeader( pw, handle, layer, line.isClosed() );
         handle = printInterpolatedPolyline( pw, line, scale, handle, handle, layer, line.isClosed(), xoff, yoff );
@@ -749,7 +744,7 @@ class DrawingDxf
     float bezier_step = TDSetting.getBezierStep();
     // Log.v("DistoX", "area size " + area.size() );
     String layer = "A_" + area.getThName( ).replace(':','-');
-    if ( DXF.mVersion13 && checkSpline( area ) ) {
+    if ( DXF.mVersion13_14 && checkSpline( area ) ) {
       if ( TDSetting.mAcadSpline ) {
         handle = DXF.printPolylineHeader( pw, handle, layer, true );
         handle = printInterpolatedPolyline( pw, area, scale, handle, handle, layer, true, xoff, yoff );
@@ -761,7 +756,7 @@ class DrawingDxf
       // handle = printLWPolyline( pw5, line, scale, handle, layer, true );
       handle = printPolyline( pw, area, scale, handle, layer, true, xoff, yoff );
     }
-    if ( DXF.mVersion13 ) {
+    if ( DXF.mVersion13_14 ) {
       int npt = countInterpolatedPolylinePoints( area, true );
       handle = DXF.printHatchHeader( pw, handle, layer, npt );
       printInterpolatedPolyline( pw, area, scale, 0, handle, null, true, xoff, yoff );
