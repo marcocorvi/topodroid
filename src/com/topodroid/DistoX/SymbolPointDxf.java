@@ -44,9 +44,10 @@ class SymbolPointDxf
     addHandle( DXF.ACAD_12 );
     addColor( DXF.lt_byLayer );
     addAcDbPolyline();
-    headerPolyline( 0, 0 );
+    headerPolyline( );
     addPolylineNPoints( xx.length );
     addPolylineClosed( false );
+    addPolylinePosition( 0, 0, 0 );
     for ( int k=0; k<xx.length; ++k ) {
       startVertex( null ); // null layer
       addHandlePointer( DXF.ACAD_12 );
@@ -132,6 +133,7 @@ class SymbolPointDxf
   private final static int TOKEN_FLAG     = 15;
   private final static int TOKEN_DATA     = 16;
   private final static int TOKEN_NPOINTS  = 17;
+  private final static int TOKEN_POSITION = 18;
 
   private abstract class DxfToken
   {
@@ -270,6 +272,28 @@ class SymbolPointDxf
       return handle;
     }
   }
+   
+  private class PositionToken extends DxfToken
+  {
+    float x, y, z;
+
+    PositionToken( int version, float xx, float yy, float zz )
+    {
+      super( TOKEN_POSITION, version );
+      x = xx;
+      y = yy;
+      z = zz;
+    }
+
+    int write( BufferedWriter out, int version, int handle, int ref ) throws IOException
+    {
+      if ( version != DXF.ACAD_14 ) {
+        // DXF.printInt( pw, 43, 0 ); 
+        out.write( String.format( "  10%s%.2f%s  20%s%.2f%s  30%s%.2f%s", DXF.EOL, x, DXF.EOL, DXF.EOL, y, DXF.EOL, DXF.EOL, z, DXF.EOL ) );
+      }
+      return handle;
+    }
+  }
 
   // Entity token does not affect handle - used only for VERTEX
   private class EntityToken extends DxfToken
@@ -374,11 +398,19 @@ class SymbolPointDxf
   }
 
   private void startLine( String layer )     { startItem( TOKEN_LINE,     DXF.ACAD_9, "LINE",     layer ); }
-  private void startPolyline( String layer ) { startItem( TOKEN_POLYLINE, DXF.ACAD_9, "POLYLINE", layer ); }
   private void startCircle( String layer )   { startItem( TOKEN_CIRCLE,   DXF.ACAD_9, "CIRCLE",   layer ); }
   private void startArc( String layer )      { startItem( TOKEN_ARC,      DXF.ACAD_9, "ARC",      layer ); }
   private void startEllipse( String layer )  { startItem( TOKEN_ELLIPSE,  DXF.ACAD_9, "ELLIPSE",  layer ); }
   private void startVertex( String layer )   { startItem( TOKEN_VERTEX,   DXF.ACAD_9, "VERTEX",   layer ); } // skip on ACAD_14
+
+  private void startPolyline( String layer )
+  { // startItem( TOKEN_POLYLINE, DXF.ACAD_9, "POLYLINE", layer ); 
+    StringWriter sw = new StringWriter();
+    PrintWriter pw  = new PrintWriter( sw ); // DXF writer
+    DXF.printString( pw, 0, "POLYLINE" );
+    if ( layer != null) DXF.printString( pw, 8, layer );
+    addToken( new PolylineToken( TOKEN_POLYLINE, DXF.ACAD_9, sw.toString() ) );
+  }
     
   private void addAcDb( String acdbitem )
   {
@@ -446,19 +478,22 @@ class SymbolPointDxf
     addToken( new DataToken( DXF.ACAD_9, x0, y0 ) );
   }
 
-  private void headerPolyline( float x, float y )
+  private void headerPolyline( )
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter( sw ); // DXF writer
     // DXF.printInt(  pw, 39, 1 ); // line thickness
     // DXF.printInt(  pw, 40, 1 ); // start width
     // DXF.printInt(  pw, 41, 1 ); // end width
-    DXF.printInt( pw, 43, 0 );  // ADDED 2021
     DXF.printInt( pw, 62, BY_LAYER ); // color 0: by_block, 256: by_layer
     DXF.printInt( pw, 66, 1 ); // group 1
     // DXF.printInt( pw, 75, 0 ); // 6 cubic spline, 5 quad spline, 0 is the default
-    DXF.printXYZ( pw, x, y, 0.0f, 0 ); // position
     addToken( new NormalToken( TOKEN_POLYLINE, DXF.ACAD_9, sw.toString() ) );
+  }
+
+  private void addPolylinePosition( float x, float y, float z )
+  {
+    addToken( new PositionToken( DXF.ACAD_9, x, y, z ) );
   }
 
   private void addPolylineNPoints( int npt )
@@ -468,6 +503,7 @@ class SymbolPointDxf
 
   private void addPolylineClosed( boolean closed )
   {
+    addToken( new NormalToken( TOKEN_POLYLINE, DXF.ACAD_12, String.format("  43%s0%s", DXF.EOL, DXF.EOL ) ) );
     addToken( new FlagToken( true, closed ) );
   }
 

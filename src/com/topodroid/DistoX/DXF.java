@@ -542,7 +542,7 @@ public class DXF
     // ACAD versions: 1006 (R10) 1009 (R11 R12) 1012 (R13) 1014 (R14)
     //                1015 (2000) 1018 (2004) 1021 (2007) 1024 (2010)  
     writeString( out, 9, "$ACADVER" );
-    writeString( out, 1, ( mVersion14? "Ac1014" : mVersion13? "AC1012" : "AC1009" ) );
+    writeString( out, 1, ( mVersion14? "AC1014" : mVersion13? "AC1012" : "AC1009" ) );
     // writeString( out, 9, "$ACADMAINTVER" ); writeInt( out, 70, 105 ); // ignored
     if ( mVersion13_14 ) {
       writeString( out, 9, "$HANDSEED" );    writeHex( out, 5, 0xffff );
