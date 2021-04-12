@@ -17,6 +17,7 @@ import com.topodroid.prefs.TDSetting;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.DataType;
 import com.topodroid.dev.distox2.DeviceX310TakeShot;
+import com.topodroid.dev.bric.BricMode; // MODE
 import com.topodroid.dev.bric.BricConst;
 import com.topodroid.dev.bric.MemoryBricTask;
 
@@ -307,16 +308,18 @@ class CutNPaste
 
       // ----- SCAN MEASURE
       //
-      text = res.getString( R.string.popup_do_scan );
-      textview3 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
-        new View.OnClickListener( ) {
-          public void onClick(View v) {
-            app.sendBricCommand( BricConst.CMD_SCAN );
-            dismissPopupBT();
-          }
-        } );
-      ww = textview3.getPaint().measureText( text );
-      if ( ww > w ) w = ww;
+      if ( TDSetting.mBricMode != BricMode.MODE_ALL ) {
+        text = res.getString( R.string.popup_do_scan );
+        textview3 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+          new View.OnClickListener( ) {
+            public void onClick(View v) {
+              app.sendBricCommand( BricConst.CMD_SCAN );
+              dismissPopupBT();
+            }
+          } );
+        ww = textview3.getPaint().measureText( text );
+        if ( ww > w ) w = ww;
+      }
 
       // ----- TURN OFF
       //

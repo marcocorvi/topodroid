@@ -32,6 +32,7 @@ import com.topodroid.DistoX.StationPolicy;
 import com.topodroid.DistoX.SurveyInfo;
 import com.topodroid.DistoX.TDToast;
 import com.topodroid.DistoX.R;
+import com.topodroid.dev.bric.BricMode; // MODE
 
 
 import android.util.Log;
@@ -242,7 +243,7 @@ public class TDSetting
   public static int mConnectSocketDelay = 0; // wait time if not paired [0.1 sec]
 
   public static boolean mFirmwareSanity = true; // enforce firmware sanity checks
-  public static int mBricMode = 3; // ALL_INDICATE
+  public static int mBricMode = BricMode.MODE_NO_INDEX;
 
   // public static final boolean CHECK_BT = true;
   public static int mCheckBT = 1;        // BT: 0 disabled, 1 check on start, 2 enabled

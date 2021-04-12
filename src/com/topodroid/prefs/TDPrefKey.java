@@ -1652,7 +1652,7 @@ public class TDPrefKey
     "1000",
     "2000",
     TRUE,
-    TDString.THREE,
+    TDString.FIVE,
     null
   };
 

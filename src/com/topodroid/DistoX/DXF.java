@@ -123,6 +123,19 @@ public class DXF
     return hex;
   }
 
+  static int writeAcDb( BufferedWriter out, int hex, int ref, String acdb1, String acdb2 ) throws IOException 
+  {
+    if ( mVersion13_14 ) {
+      if ( hex >= 0 ) {
+        hex = inc( hex );
+        writeHex( out, 5, hex );
+      }
+      if ( ref >= 0 ) writeHex( out, 330, ref );
+      out.write( EOL100 + acdb1 + EOL+ EOL100 + acdb2 + EOL );
+    }
+    return hex;
+  }
+
 
   static int printAcDb( PrintWriter pw, int hex, String acdb1 )
   {
@@ -317,9 +330,11 @@ public class DXF
       printString( pw, 8, layer );
       if ( mVersion13 ) {
         handle = printAcDb( pw, handle, ref, AcDbEntity, AcDbVertex, "AcDb3dPolylineVertex" );
-        printInt( pw, 70, 32 ); // flag 32 = 3D polyline vertex
       }
       printXYZ( pw, x * scale, -y * scale, 0.0f, 0 );
+      if ( mVersion13 ) {
+        printInt( pw, 70, 32 ); // flag 32 = 3D polyline vertex
+      }
     }
     return handle;
   }
@@ -351,15 +366,21 @@ public class DXF
     } else {
       printString( pw, 0, "POLYLINE" );
       if ( mVersion13 ) {
-        handle = printAcDb( pw, handle, AcDbEntity, AcDbPolyline );
+        // handle = printAcDb( pw, handle, AcDbEntity, AcDbPolyline );
+        handle = printAcDb( pw, handle, AcDbEntity );
+        printString( pw, 8, layer );
+        printString( pw, 100, AcDbPolyline );
+        printInt( pw, 66, 1 ); // group 1
+        printInt( pw, 70, 8 + (closed? 1:0) ); // polyline flag 8 = 3D polyline, 1 = closed  // inlined close in 5.1.20
+      } else { // mVersion9 
+        printString( pw, 8, layer );
+        // printInt(  pw, 39, 1 ); // line thickness
+        // printInt(  pw, 40, 1 ); // start width
+        // printInt(  pw, 41, 1 ); // end width
+        printInt( pw, 66, 1 ); // group 1
+        printInt( pw, 70, 8 + (closed? 1:0) ); // polyline flag 8 = 3D polyline, 1 = closed  // inlined close in 5.1.20
+        // printInt( pw, 75, 0 ); // 6 cubic spline, 5 quad spline, 0 (optional, default 0) // commented in 5.1.20
       }
-      printString( pw, 8, layer );
-      // printInt(  pw, 39, 1 ); // line thickness
-      // printInt(  pw, 40, 1 ); // start width
-      // printInt(  pw, 41, 1 ); // end width
-      printInt( pw, 66, 1 ); // group 1
-      printInt( pw, 70, 8 + (closed? 1:0) ); // polyline flag 8 = 3D polyline, 1 = closed  // inlined close in 5.1.20
-      // printInt( pw, 75, 0 ); // 6 cubic spline, 5 quad spline, 0 (optional, default 0) // commented in 5.1.20
     }
     return handle;
   }
@@ -459,7 +480,7 @@ public class DXF
   }
 
 
-  static int printText( PrintWriter pw, int handle, String label, float x, float y, float angle, float scale,
+  static int printText( PrintWriter pw, int handle, int ref, String label, float x, float y, float angle, float scale,
                         String layer, String style, float xoff, float yoff )
   {
     // if ( false && mVersion13_14 ) { // FIXME TEXT in AC1012
@@ -475,8 +496,10 @@ public class DXF
     // } else {
       printString( pw, 0, "TEXT" );
       // printString( pw, 2, block );
-      handle = printAcDb( pw, handle, AcDbEntity, AcDbText );
+      handle = printAcDb( pw, handle, ref, AcDbEntity );
       printString( pw, 8, layer );
+      printAcDb( pw, -1, AcDbText );
+      
       // printString( pw, 7, style_dejavu ); // style (optional)
       // pw.printf("%s\%s 0%s", "\"10\"", EOL, EOL );
       printXYZ( pw, x, y, 0, 0 );
@@ -493,7 +516,7 @@ public class DXF
       printString( pw, 1, label );    
       // printString( pw, 7, style );  // style, optional (dftl STANDARD)
 
-      // printString( pw, 100, "AcDbText"); 
+      printAcDb( pw, -1, AcDbText );
     // }
     return handle;
   }

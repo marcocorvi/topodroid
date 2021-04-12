@@ -61,12 +61,6 @@ import java.util.TimerTask;
 public class BricComm extends TopoDroidComm
                       implements BleComm
 {
-  private final static int MODE_PRIM_ONLY = 1;
-  private final static int MODE_ALL       = 3;
-  // public  final static int MODE_ALL_ZERO  = 4;
-  public  final static int MODE_NO_INDEX  = 5;
-  // public  final static int MODE_ZERO_NO_INDEX = 6;
-
   private BricInfoDialog mBricInfoDialog = null;
   // private BricChrtChanged mChrtChanged = null;
 
@@ -122,7 +116,7 @@ public class BricComm extends TopoDroidComm
             case DATA_PRIM:
               // Log.v("DistoX", "BRIC comm: Queue buffer PRIM");
               // BricDebug.logMeasPrim( buffer.data );
-              if ( TDSetting.mBricMode == MODE_PRIM_ONLY ) {
+              if ( TDSetting.mBricMode == BricMode.MODE_PRIM_ONLY ) {
                 ((BricProto)mProtocol).addMeasPrimAndProcess( buffer.data );
               } else {
                 ((BricProto)mProtocol).addMeasPrim( buffer.data );
@@ -131,14 +125,14 @@ public class BricComm extends TopoDroidComm
             case DATA_META:
               // Log.v("DistoX", "BRIC comm: Queue buffer META");
               // BricDebug.logMeasMeta( buffer.data );
-              if ( TDSetting.mBricMode >= MODE_ALL ) {
+              if ( TDSetting.mBricMode >= BricMode.MODE_ALL ) {
                 ((BricProto)mProtocol).addMeasMeta( buffer.data );
               }
               break;
             case DATA_ERR:
               // Log.v("DistoX", "BRIC comm: Queue buffer ERR");
               // BricDebug.logMeasErr( buffer.data );
-              if ( TDSetting.mBricMode >= MODE_ALL ) {
+              if ( TDSetting.mBricMode >= BricMode.MODE_ALL ) {
                 ((BricProto)mProtocol).addMeasErr( buffer.data );
                 ((BricProto)mProtocol).processData(); 
               }
@@ -342,7 +336,7 @@ public class BricComm extends TopoDroidComm
     // it looks as if there are pending data, after connection, the very first prim is not sent 
     // enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_PRIM_UUID, true ) );
     // doNextOp();
-    if ( TDSetting.mBricMode >= MODE_ALL ) {
+    if ( TDSetting.mBricMode >= BricMode.MODE_ALL ) {
       enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_META_UUID, true ) );
       // clearPending();
       enqueueOp( new BleOpNotify( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.MEAS_ERR_UUID, true ) );
