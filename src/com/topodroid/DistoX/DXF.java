@@ -39,6 +39,10 @@ import android.graphics.RectF;
 
 public class DXF
 {
+  final static int ACAD_9  =  9;
+  final static int ACAD_12 = 13;
+  final static int ACAD_14 = 16;
+
   static boolean mVersion9  = false;
   static boolean mVersion13 = false;
   static boolean mVersion14 = false;
@@ -306,13 +310,17 @@ public class DXF
   // }
   static int printLinePoint( PrintWriter pw, float scale, int handle, int ref, String layer, float x, float y )
   {
-    printString( pw, 0, "VERTEX" );
-    printString( pw, 8, layer );
-    if ( mVersion13_14 ) {
-      handle = printAcDb( pw, handle, ref, AcDbEntity, AcDbVertex, "AcDb3dPolylineVertex" );
-      printInt( pw, 70, 32 ); // flag 32 = 3D polyline vertex
+    if ( mVersion14 ) {
+      printXY( pw, x * scale, -y * scale, 0 );
+    } else {
+      printString( pw, 0, "VERTEX" );
+      printString( pw, 8, layer );
+      if ( mVersion13 ) {
+        handle = printAcDb( pw, handle, ref, AcDbEntity, AcDbVertex, "AcDb3dPolylineVertex" );
+        printInt( pw, 70, 32 ); // flag 32 = 3D polyline vertex
+      }
+      printXYZ( pw, x * scale, -y * scale, 0.0f, 0 );
     }
-    printXYZ( pw, x * scale, -y * scale, 0.0f, 0 );
     return handle;
   }
 
@@ -329,28 +337,43 @@ public class DXF
     return handle;
   }
 
-  static int printPolylineHeader( PrintWriter pw, int handle, String layer, boolean closed )
+  static int printPolylineHeader( PrintWriter pw, int handle, String layer, boolean closed, int npt )
   {
-    printString( pw, 0, "POLYLINE" );
-    if ( mVersion13_14 ) {
+    if ( mVersion14 ) {
+      printString( pw, 0, "LWPOLYLINE" );
       handle = printAcDb( pw, handle, AcDbEntity, AcDbPolyline );
+      printString( pw, 8, layer );
+      printString( pw, 6, lt_byLayer );
+      printInt( pw, 43, 0 ); // width 0: constant
+      printInt( pw, 62, 256 );
+      printInt( pw, 70, (closed? 1:0) ); // polyline flag 8 = 3D polyline, 1 = closed  // inlined close in 5.1.20
+      printInt( pw, 90, npt );
+    } else {
+      printString( pw, 0, "POLYLINE" );
+      if ( mVersion13 ) {
+        handle = printAcDb( pw, handle, AcDbEntity, AcDbPolyline );
+      }
+      printString( pw, 8, layer );
+      // printInt(  pw, 39, 1 ); // line thickness
+      // printInt(  pw, 40, 1 ); // start width
+      // printInt(  pw, 41, 1 ); // end width
+      printInt( pw, 66, 1 ); // group 1
+      printInt( pw, 70, 8 + (closed? 1:0) ); // polyline flag 8 = 3D polyline, 1 = closed  // inlined close in 5.1.20
+      // printInt( pw, 75, 0 ); // 6 cubic spline, 5 quad spline, 0 (optional, default 0) // commented in 5.1.20
     }
-    printString( pw, 8, layer );
-    // printInt(  pw, 39, 1 ); // line thickness
-    // printInt(  pw, 40, 1 ); // start width
-    // printInt(  pw, 41, 1 ); // end width
-    printInt( pw, 66, 1 ); // group 1
-    printInt( pw, 70, 8 + (closed? 1:0) ); // polyline flag 8 = 3D polyline, 1 = closed  // inlined close in 5.1.20
-    // printInt( pw, 75, 0 ); // 6 cubic spline, 5 quad spline, 0 (optional, default 0) // commented in 5.1.20
     return handle;
   }
 
   static int printPolylineFooter( PrintWriter pw, int handle )
   {
-    pw.printf("  0%sSEQEND%s", EOL, EOL );
-    if ( mVersion13_14 ) {
-      handle = inc(handle);
-      printHex( pw, 5, handle );
+    if ( mVersion14 ) {
+      // nothing 
+    } else {
+      pw.printf("  0%sSEQEND%s", EOL, EOL );
+      if ( mVersion13 ) {
+        handle = inc(handle);
+        printHex( pw, 5, handle );
+      }
     }
     return handle;
   }
@@ -470,7 +493,7 @@ public class DXF
       printString( pw, 1, label );    
       // printString( pw, 7, style );  // style, optional (dftl STANDARD)
 
-      printString( pw, 100, "AcDbText"); 
+      // printString( pw, 100, "AcDbText"); 
     // }
     return handle;
   }
@@ -483,7 +506,9 @@ public class DXF
      writeInt( out, 70, 0 );
      writeInt( out, 280, 1 );
      writeInt( out, 281, 0 );
-     writeInt( out, 330, 1 );
+     if ( mVersion13_14 ) {
+       writeInt( out, 330, 1 );
+     }
      return handle;
   }
 
@@ -899,7 +924,9 @@ public class DXF
 
     // printInt( pwx, 280, 0 );
     printInt( pwx, 281, 1 );
-    printHex( pwx, 330, saved );
+    if ( mVersion13_14 ) {
+      printHex( pwx, 330, saved );
+    }
 
     out.write( swx.getBuffer().toString() );
     out.flush();

@@ -145,7 +145,8 @@ class DrawingDxf
   static private int printPolyline( PrintWriter pw, DrawingPointLinePath line, float scale, int handle,
                                     String layer, boolean closed, float xoff, float yoff )
   {
-    handle = DXF.printPolylineHeader( pw, handle, layer, closed );
+    int npt = countInterpolatedPolylinePoints( line, closed );
+    handle = DXF.printPolylineHeader( pw, handle, layer, closed, npt );
     handle = printInterpolatedPolyline( pw, line, scale, handle, handle, layer, closed, xoff, yoff );
     handle = DXF.printPolylineFooter( pw, handle );
     return handle;
@@ -291,9 +292,9 @@ class DrawingDxf
 
   static void writeDxf( BufferedWriter out, TDNum num, /* DrawingUtil util, */ DrawingCommandManager plot, long type )
   {
-    DXF.mVersion9  = (TDSetting.mAcadVersion ==  9);
-    DXF.mVersion13 = (TDSetting.mAcadVersion == 13);
-    DXF.mVersion14 = (TDSetting.mAcadVersion == 16);
+    DXF.mVersion9  = (TDSetting.mAcadVersion == DXF.ACAD_9);
+    DXF.mVersion13 = (TDSetting.mAcadVersion == DXF.ACAD_12);
+    DXF.mVersion14 = (TDSetting.mAcadVersion == DXF.ACAD_14);
     DXF.mVersion13_14 = DXF.mVersion13 || DXF.mVersion14;
     
     float scale = 1.0f/DrawingUtil.SCALE_FIX; // TDSetting.mDxfScale; 
@@ -441,7 +442,7 @@ class DrawingDxf
           DXF.writeXYZ( out, 0, 0, 0, 0 );
           // out.write( pt.getDxf() );
           SymbolPointDxf point_dxf = pt.getDxf();
-          handle = point_dxf.writeDxf( out, 13, handle, point_record_handle[n] );
+          handle = point_dxf.writeDxf( out, TDSetting.mAcadVersion, handle, point_record_handle[n] );
 
           DXF.writeString( out, 0, "ENDBLK" );
           if ( DXF.mVersion13_14 ) {
@@ -725,7 +726,8 @@ class DrawingDxf
     int flag = 0;
     if ( DXF.mVersion13_14 && checkSpline( line ) ) {
       if ( TDSetting.mAcadSpline ) {
-        handle = DXF.printPolylineHeader( pw, handle, layer, line.isClosed() );
+        int npt = countInterpolatedPolylinePoints( line, line.isClosed() );
+        handle = DXF.printPolylineHeader( pw, handle, layer, line.isClosed(), npt );
         handle = printInterpolatedPolyline( pw, line, scale, handle, handle, layer, line.isClosed(), xoff, yoff );
         handle = DXF.printPolylineFooter( pw, handle );
       } else {
@@ -746,7 +748,8 @@ class DrawingDxf
     String layer = "A_" + area.getThName( ).replace(':','-');
     if ( DXF.mVersion13_14 && checkSpline( area ) ) {
       if ( TDSetting.mAcadSpline ) {
-        handle = DXF.printPolylineHeader( pw, handle, layer, true );
+        int npt = countInterpolatedPolylinePoints( area, true );
+        handle = DXF.printPolylineHeader( pw, handle, layer, true, npt );
         handle = printInterpolatedPolyline( pw, area, scale, handle, handle, layer, true, xoff, yoff );
         handle = DXF.printPolylineFooter( pw, handle );
       } else {
