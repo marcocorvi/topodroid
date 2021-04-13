@@ -254,14 +254,14 @@
      <item name="nonlinear">Нелинейный</item>
   </string-array>
 
-  <!-- FIXME string-array name="rawCData">
+  <string-array name="rawCData">
      <item name="none">Нет</item>
      <item name="dec">Десятичный</item>
      <item name="hex">Шестнадцатиричный</item>
-     <item name="decg">G Decimal</item>
-     <item name="hexg">G Hex</item>
-     <item name="decm">M Decimal</item>
-     <item name="hexm">M Hex</item>
-  </string-array -->
+     <item name="decg">G Десятичный</item>
+     <item name="hexg">G Шестнадцатиричный</item>
+     <item name="decm">M Десятичный</item>
+     <item name="hexm">M Шестнадцатиричный</item>
+  </string-array>
 
 </resources>
