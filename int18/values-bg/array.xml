@@ -262,9 +262,13 @@
      <item name="nonlinear">Нелинеен</item>
   </string-array>
 
-  <string-array name="rawCData">
+  <!-- FIXME string-array name="rawCData">
      <item name="none">Скрити</item>
      <item name="dec">Десетични</item>
      <item name="hex">Шестнайсетични</item>
-  </string-array>
+     <item name="decg">G Decimal</item>
+     <item name="hexg">G Hex</item>
+     <item name="decm">M Decimal</item>
+     <item name="hexm">M Hex</item>
+  </string-array -->
 </resources>

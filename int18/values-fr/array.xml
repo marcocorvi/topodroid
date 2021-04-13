@@ -284,10 +284,14 @@
      <item name="nonlinear">Non-linéaire</item>
   </string-array>
 
-  <string-array name="rawCData">
+  <!-- FIXME string-array name="rawCData">
      <item name="none">Aucune</item>
      <item name="dec">Décimale</item>
      <item name="hex">Hexadécimale</item>
-  </string-array>
+     <item name="decg">G Decimal</item>
+     <item name="hexg">G Hex</item>
+     <item name="decm">M Decimal</item>
+     <item name="hexm">M Hex</item>
+  </string-array -->
 
 </resources>

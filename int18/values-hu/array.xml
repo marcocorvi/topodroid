@@ -287,10 +287,14 @@
      <!-- item name="minimum">Minimum</item -->
   </string-array>
 
-  <string-array name="rawCData">
+  <!-- FIXME string-array name="rawCData">
      <item name="none">Nincs</item>
      <item name="dec">Decimális</item>
      <item name="hex">Hexadecimális</item>
-  </string-array>
+     <item name="decg">G Decimal</item>
+     <item name="hexg">G Hex</item>
+     <item name="decm">M Decimal</item>
+     <item name="hexm">M Hex</item>
+  </string-array -->
 
 </resources>

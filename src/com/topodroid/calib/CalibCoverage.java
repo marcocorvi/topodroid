@@ -101,13 +101,19 @@ public class CalibCoverage
       
   }
 
-  static final int DIM_Y       =  37;
-  static final int DIM_Y2      =  18; // (DIM_Y-1)/2
-  static final int DELTA_Y     =   5;
-  static final int AZIMUTH_BIT =  32;
+  static final int DELTA_Y     =   3; // degrres
+  static final int DIM_Y       =  1 + 180 / DELTA_Y;
+  static final int DIM_Y2      =  180 / ( 2 * DELTA_Y );
+  static final int AZIMUTH_BIT =  360 / DELTA_Y;
 
-  private final int[] clino_angles;
-  private final int[] t_size;
+  private final int[] clino_angles; // clino angles, from +90 to -90 in steps by 5: 5*36 = 180
+                                    // angle[0] = 90, angle[1] = 85, ... angle[36] = -90
+  private final int[] t_size;       // t_size[0] = 1,                    t_size[36] = 1 : one cell at the poles
+                                    // t_size[1] = 32,                   t_size[35] = 32 
+                                    // t_size[2] = 62,                   t_size[34] = 64
+                                    // ...
+                                    // t_size[17] = 17*32                t_size[19] = 17*32
+                                    // t_size[18] = 18*32
   private final int[] t_offset;
   private int t_dim;
 
@@ -137,19 +143,20 @@ public class CalibCoverage
     }
     t_size[ 0 ] = t_size[DIM_Y-1] = 1;
     for ( i=1; i<DIM_Y2; ++i ) {
-      t_size[i] = t_size[DIM_Y-1-i] = AZIMUTH_BIT * i;
+      t_size[i] = t_size[DIM_Y-1-i] = (int)( AZIMUTH_BIT * Math.cos( (DIM_Y2-i)*Math.PI/(2.0*DIM_Y2) ) + 0.5 );
     }
-    t_size[ DIM_Y2 ] = AZIMUTH_BIT * DIM_Y2; // max azimuth steps 54 at clino 0
+    t_size[ DIM_Y2 ] = AZIMUTH_BIT; // max azimuth steps 54 at clino 0
 
     t_offset[0] = 0;
     for ( i=1; i<DIM_Y; ++i ) {
       t_offset[i] = t_offset[i-1] + t_size[i-1];
       // Log.v("DistoX", "J " + i + " off " + t_offset[i] + " size " + t_size[i] );
     }
-    t_dim = t_offset[DIM_Y-1] + t_size[DIM_Y-1];
+    t_dim = t_offset[DIM_Y-1] + t_size[DIM_Y-1]; // size of the table
     // Log.v("DistoX", "dim " + t_dim );
 
-    angles = new Direction [ t_dim ];
+    angles = new Direction [ t_dim ]; // table
+
     for (int k = 0; k<DIM_Y; ++k ){
       float clino = clino_angles[k] * TDMath.DEG2RAD;
       for (int j=t_offset[k]; j<t_offset[k]+t_size[k]; ++j ) {

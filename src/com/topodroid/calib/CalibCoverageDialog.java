@@ -39,10 +39,10 @@ public class CalibCoverageDialog extends MyDialog
                           implements View.OnClickListener
 {
   private static final int STEP_Y      =   1; // 180 / HEIGHT
-  private static final float DELTA_YF  =   5.0f;
+  private static final float DELTA_YF  =   CalibCoverage.DELTA_Y;
   private static final int WIDTH       = 180;
   private static final int HEIGHT      = 180;
-  private static final int DELTA_W     =  20;
+  private static final int DELTA_W     =  20; // extra bitmap width 
 
   private float mCoverageValue;
   private float[] mDeviations;
@@ -167,18 +167,30 @@ public class CalibCoverageDialog extends MyDialog
     int H1 = HEIGHT;     // 180
     float H2 = (float)H1 / 2;   // 90
     // int W2 = WIDTH / 2 + DELTA_W;  // 180 + 20
+    // int j1min = 1000; // DEBUG
+    // int j1max = -1000;
+    // int upperj2max = 0;
+    // int belowj2min = 37;
+
     for (int j0=0; j0<=H1; ++j0) {
-      float j = j0 - H2; 
+      float j = j0 - H2;  // pixel (i,j) j-index
       for (int i0=0; i0<=H1; ++i0) {
-        float i = i0 - H2;  // range -90 .. +90
-	float clino = TDMath.sqrt(i*i + j*j);
-	if ( clino < H2 ) {
-	  int iclino = (int)( (H2 - clino) * STEP_Y ); // range [0,90)
+        float i = i0 - H2;  // range -90 .. +90 :pixel (i,j) i-index
+	float radius = TDMath.sqrt(i*i + j*j);
+	if ( radius < H2 ) { // if pixel is inside the circle
+	  int iclino = (int)( (radius) * STEP_Y ); // range [0,90)
           float compass = ( TDMath.atan2( i, -j ) + TDMath.M_PI ) / TDMath.M_2PI; // range [0, 1]
-	  // UP HEMISPHERE
+	  // UP HEMISPHERE iliear interpolation:
+          //   j2:    i21 - i22    ...  d2
+          //          /       \         d
+          //   j1:  i11 ----- i12  ...  d1
 	  int j1 = iclino / CalibCoverage.DELTA_Y;   // range 0..8
+          // if ( j1 < j1min ) j1min = j1;
+          // if ( j1 > j1max ) j1max = j1;
 	  int j2 = j1 + 1;              //     d
-          float d = (iclino%CalibCoverage.DELTA_Y) / DELTA_YF;  // j1 ------ iclino ------------ j2
+          // if ( j2 > upperj2max ) upperj2max = j2;
+
+          float d = (iclino % CalibCoverage.DELTA_Y) / DELTA_YF;  // j1 ------ iclino ------------ j2
 	  int j1off = t_offset[j1];
 	  int j2off = t_offset[j2];
 	  float c1 = ( compass * t_size[j1] );
@@ -186,8 +198,8 @@ public class CalibCoverageDialog extends MyDialog
           int i11 = (int)(c1) % t_size[j1]; // index in [0, t_size)
           int i21 = (int)(c2) % t_size[j2];
           int i12 = (i11 + 1) % t_size[j1];
-          float d1 = c1 - i11;
           int i22 = (i21 + 1) % t_size[j2];
+          float d1 = c1 - i11;
           float d2 = c2 - i21;
 	  // if ( j1off+i11 >= t_dim || j1off+i12 >= t_dim ) {
 	  //         Log.v("DistoX-COVER", "OOB north " + i0 + " " + j0 + " J " + j1 + " " + j2 + " I11 " + i11 + " " + i21 );
@@ -206,6 +218,7 @@ public class CalibCoverageDialog extends MyDialog
 	  // DOWN HEMISPHERE
 	  j1 = CalibCoverage.DIM_Y - 1 - j1;  // range 18 .. 0
 	  j2 = CalibCoverage.DIM_Y - 1 - j2;
+          // if ( j2 < belowj2min ) belowj2min = j2;
 	  j1off = t_offset[j1];
 	  j2off = t_offset[j2];
 	  c1 = ( compass * t_size[j1] );
@@ -213,8 +226,8 @@ public class CalibCoverageDialog extends MyDialog
           i11 = (int)(c1) % t_size[j1]; // index in [0, t_size)
           i21 = (int)(c2) % t_size[j2];
           i12 = (i11 + 1) % t_size[j1];
-          d1 = c1 - i11;
           i22 = (i21 + 1) % t_size[j2];
+          d1 = c1 - i11;
           d2 = c2 - i21;
 	  // if ( j1off+i11 >= t_dim || j1off+i12 >= t_dim ) {
 	  //         Log.v("DistoX-COVER", "OOB south " + i0 + " " + j0 + " J " + j1 + " " + j2 + " I11 " + i11 + " " + i21 );
@@ -233,6 +246,11 @@ public class CalibCoverageDialog extends MyDialog
         }
       }
     }
+    // Log.v("DistoX", " upperJ2min " + upperj2max + " belowJ2max " + belowj2min );
+    // Log.v("DistoX", " J1min " + j1min + " J1max " + j1max + " DIM_Y " + CalibCoverage.DIM_Y + " " + CalibCoverage.DIM_Y2 );
+    // prints 0 18 37 18 
+    // therefore upper hemisphere ranges [ 0, 1] [ 1, 2] ... [18,19]
+    //           lower hemisphere ranges [36,35] [35,34] ... [18,17]
   }
 
 }

@@ -293,11 +293,15 @@
      <!-- item name="minimum">Minimum</item -->
   </string-array>
 
-  <string-array name="rawCData">
+  <!-- FOXME string-array name="rawCData">
      <item name="none">Nici unul</item>
      <item name="dec">Decimal</item>
      <item name="hex">Hexazecimal</item>
-  </string-array>
+     <item name="decg">G Decimal</item>
+     <item name="hexg">G Hex</item>
+     <item name="decm">M Decimal</item>
+     <item name="hexm">M Hex</item>
+  </string-array -->
 
   <!-- UNUSED string-array name="modelType">
      <item name="none">Nici unul</item>

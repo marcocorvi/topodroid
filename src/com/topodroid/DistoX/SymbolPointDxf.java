@@ -272,6 +272,7 @@ class SymbolPointDxf
       if ( version == DXF.ACAD_12 ) {
         out.write( String.format( "  100%s%s%s", DXF.EOL, DXF.AcDb3dPolyline, DXF.EOL ) );
       } else if ( version == DXF.ACAD_14 ) {
+        out.write( String.format( "  100%s%s%s", DXF.EOL, DXF.AcDbEntity, DXF.EOL ) ); // ACAD_14 skips EntityToken
         out.write( String.format( "  100%s%s%s", DXF.EOL, DXF.AcDbPolyline, DXF.EOL ) );
       }
       return handle;

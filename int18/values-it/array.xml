@@ -264,6 +264,10 @@
      <item name="none">Nessuno</item>
      <item name="dec">Decimali</item>
      <item name="hex">Esadecimali</item>
+     <item name="decg">G decimali</item>
+     <item name="hexg">G esadecimali</item>
+     <item name="decm">M decimali</item>
+     <item name="hexm">M esadecimali</item>
   </string-array>
 
 </resources>

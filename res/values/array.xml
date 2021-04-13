@@ -630,11 +630,19 @@
      <item name="none">None</item>
      <item name="dec">Decimal</item>
      <item name="hex">Hex</item>
+     <item name="decg">G Decimal</item>
+     <item name="hexg">G Hex</item>
+     <item name="decm">M Decimal</item>
+     <item name="hexm">M Hex</item>
   </string-array>
   <string-array name="rawCDataValue" translatable="false">
      <item name="none">0</item>
      <item name="dec">1</item>
      <item name="hex">2</item>
+     <item name="decg">11</item>
+     <item name="hexg">12</item>
+     <item name="decm">21</item>
+     <item name="hexm">22</item>
   </string-array>
 
   <!-- FIXME_SKETCH_3D string-array name="modelType">
