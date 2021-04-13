@@ -1027,15 +1027,15 @@ public class TDNum
     return false;
   }
 
-  // this is calle dto remove the last splay added
+  // this is called to remove the last splay added
   private void removeSplay( TriSplay ts )
   {
     int sz = mSplays.size() - 1;
-    while ( sz >= 0 ) {
-      NumSplay sp = mSplays.get( sz );
+    for ( int k = sz; k >= 0; --k ) {
+      NumSplay sp = mSplays.get( k );
       if ( sp.getBlock() == ts.block ) {
         // Log.v("DistoX-DATA", "removing splay " + sz + " for " + ts.block.mId );
-        mSplays.remove( sz );
+        mSplays.remove( k );
         break;
       }
     }

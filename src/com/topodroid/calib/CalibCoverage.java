@@ -192,11 +192,11 @@ public class CalibCoverage
   {
     for (int j=0; j<t_dim; ++j ) {
       float c = cosine( compass, clino, angles[j].mCompass, angles[j].mClino );
-      if ( c > 0.8 ) {
+      if ( c > 0.9 ) { // was 0.8
         angles[j].updateRoll3( roll );
-      } else if ( c > 0.5 ) {
+      } else if ( c > 0.8 ) { // was 0.5
         angles[j].updateRoll2( roll );
-      } else if ( c > 0.0 ) {
+      } else if ( c > 0.5 ) { // was 0.0
         angles[j].updateRoll1( roll );
         // angles[j].mValue -= (cnt >= 4)? c*c : c*c * cnt * 0.25f;
         // if ( angles[j].mValue < 0.0f ) angles[j].mValue = 0.0f;

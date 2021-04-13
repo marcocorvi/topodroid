@@ -64,9 +64,11 @@ public class DXF
   static final String AcDbText     = "AcDbText";
   static final String AcDbLine     = "AcDbLine";
   static final String AcDbPolyline = "AcDbPolyline";
+  static final String AcDb3dPolyline = "AcDb3dPolyline";
   static final String AcDbVertex   = "AcDbVertex";
   static final String AcDbCircle   = "AcDbCircle";
   static final String AcDbArc      = "AcDbArc";
+  static final String AcDbHatch    = "AcDbHatch";
   static final String AcDbEllipse  = "AcDbEllipse";
   static final String AcDbDictionary = "AcDbDictionary";
 
@@ -162,6 +164,23 @@ public class DXF
     return hex;
   }
 
+  static int printAcDbModelSpace( PrintWriter pw, int hex, int ref, String layer, String acdb1 ) 
+  {
+    if ( mVersion13_14 ) {
+      if ( hex >= 0 ) {
+        hex = inc( hex );
+        printHex( pw, 5, hex );
+      }
+      if ( ref >= 0 ) printHex( pw, 330, ref );
+      pw.printf( "  999\r\n*Model_Space-handle\r\n" );
+      pw.printf( EOL100 + AcDbEntity + EOL );
+    } 
+    pw.printf("  8" + EOL + layer + EOL );
+    if ( mVersion13_14 ) {
+      pw.printf( EOL100 + acdb1 + EOL );
+    }
+    return hex;
+  }
 
   static int printAcDb( PrintWriter pw, int hex, String acdb1, String acdb2 ) 
   {
@@ -352,7 +371,7 @@ public class DXF
     return handle;
   }
 
-  static int printPolylineHeader( PrintWriter pw, int handle, String layer, boolean closed, int npt )
+  static int printPolylineHeader( PrintWriter pw, int handle, int ref, String layer, boolean closed, int npt )
   {
     if ( mVersion14 ) {
       printString( pw, 0, "LWPOLYLINE" );
@@ -366,10 +385,10 @@ public class DXF
     } else {
       printString( pw, 0, "POLYLINE" );
       if ( mVersion13 ) {
-        // handle = printAcDb( pw, handle, AcDbEntity, AcDbPolyline );
         handle = printAcDb( pw, handle, AcDbEntity );
         printString( pw, 8, layer );
-        printString( pw, 100, AcDbPolyline );
+        printString( pw, 100, AcDb3dPolyline );
+        printInt( pw, 62, 256 ); // color
         printInt( pw, 66, 1 ); // group 1
         printInt( pw, 70, 8 + (closed? 1:0) ); // polyline flag 8 = 3D polyline, 1 = closed  // inlined close in 5.1.20
       } else { // mVersion9 
@@ -385,7 +404,7 @@ public class DXF
     return handle;
   }
 
-  static int printPolylineFooter( PrintWriter pw, int handle )
+  static int printPolylineFooter( PrintWriter pw, int handle, int ref, String layer )
   {
     if ( mVersion14 ) {
       // nothing 
@@ -394,6 +413,9 @@ public class DXF
       if ( mVersion13 ) {
         handle = inc(handle);
         printHex( pw, 5, handle );
+        printHex( pw, 330, ref );
+        printString( pw, 100, AcDbEntity );
+        printString( pw, 8, layer );
       }
     }
     return handle;
@@ -417,41 +439,46 @@ public class DXF
   //   return handle;
   // }
 
-  static int printHatchHeader( PrintWriter pw, int handle, String layer, int npt )
+  static int printHatchHeader( PrintWriter pw, int handle, int ref, String layer, int npt )
   {
     if ( mVersion13_14 ) {
       printString( pw, 0, "HATCH" );    // entity type HATCH
-      handle = printAcDb( pw, handle, AcDbEntity, "AcDbHatch" );
+      handle = printAcDb( pw, handle, AcDbEntity );
       // printString( pw5, 8, "AREA" );  // layer (color BYLAYER)
       printString( pw, 8, layer );      // layer (color BYLAYER)
-      printString( pw, 2, "_USER" );    // hatch pattern name
+      printString( pw, 6, lt_byLayer ); // line color BYLAYER
+      printInt( pw, 62, 256 );
+      printAcDb( pw, -1, AcDbHatch );
 
       printXYZ( pw, 0f, 0f, 0f, 0 );
       printXYZ( pw, 0f, 0f, 1f, 200 );  // extrusion direction, default 0,0,1
+      printString( pw, 2, "_USER" );    // hatch pattern name
+
       printInt( pw, 70, 1 );            // 1:solid fill, 0:pattern-fill
       printInt( pw, 71, 0 );            // 1:associative 0:non-associative
       printInt( pw, 91, 1 );            // nr. boundary paths (loops): 1
       // boundary data
-        printInt( pw, 92, 2 );          // flag. 1:external 2:polyline 4:derived 8:text 16:outer
+        printInt( pw, 92, 7 );          // flag. 1:external 2:polyline 4:derived 8:text 16:outer
         printInt( pw, 72, 0 );          // not-polyline edge type (0: default) 1:line 2:arc 3:ellipse-arec 4:spline
                                         // polyline: has-bulge
         printInt( pw, 73, 1 );          // is-closed flag
-        printInt( pw, 93, npt ); // nr. of points (not polyline) - nr. vertices (polyline)
+        printInt( pw, 93, npt );        // nr. of edges (only if not polyline) - nr. vertices (polyline) - maybe this is not necessary
     }
     return handle;
   }
 
-  static int printHatchFooter( PrintWriter pw, int handle )
+  static int printHatchFooter( PrintWriter pw, int handle, int ref )
   {
     if ( mVersion13_14 ) {
       // printXY( pw, area.mFirst.x * scale, -area.mFirst.y * scale, 0 );
-        printInt( pw, 97, 1 );            // nr. source boundary objects
+        printInt( pw, 97, 0 );            // nr. source boundary objects
       printInt( pw, 75, 0 );            // hatch style: 0:normal, 1:outer, 2:ignore
       printInt( pw, 76, 1 );            // hatch pattern type: 0:user, 1:predefined, 2:custom
-      printFloat( pw, 52, 0f );         // hatch pattern angle (only pattern fill)
-      printFloat( pw, 41, 1f );         // hatch pattern scale (only pattern fill)
-      printInt( pw, 77, 0 );            // hatch pattern double flag, 0: not double, 1: double (pattern fill only)
-      printInt( pw, 78, 1 );            // nr. pattern definition lines
+
+      // printFloat( pw, 52, 0f );         // hatch pattern angle (only pattern fill)
+      // printFloat( pw, 41, 1f );         // hatch pattern scale (only pattern fill)
+      // printInt( pw, 77, 0 );            // hatch pattern double flag, 0: not double, 1: double (pattern fill only)
+      // printInt( pw, 78, 1 );            // nr. pattern definition lines
       /* here goes pattern data
         printFloat( pw, 53, 45f );        // pattern line angle
         printFloat( pw, 43, 0f );         // pattern base point
@@ -475,6 +502,8 @@ public class DXF
       // printFloat( pw, 462, 0.5f );  // color tint
       // printFloat( pw, 463, 0f ); // reserved
       // printString( pw, 470, "LINEAR" );  // default
+
+      // printAcDb( pw, -1, AcDbHatch ); // not necessary
     }
     return handle;
   }
@@ -942,14 +971,14 @@ public class DXF
     // handle = printAcDb( pwx, handle, AcDbDictionary );
     if ( mVersion13_14 ) {
       printHex( pwx, 5, handle );
+      if ( mVersion13_14 ) {
+        printHex( pwx, 330, saved );
+      }
       pwx.printf( EOL100 + AcDbDictionary + EOL );
     }
 
     // printInt( pwx, 280, 0 );
     printInt( pwx, 281, 1 );
-    if ( mVersion13_14 ) {
-      printHex( pwx, 330, saved );
-    }
 
     out.write( swx.getBuffer().toString() );
     out.flush();

@@ -244,10 +244,10 @@ class SymbolPointDxf
 
     int write( BufferedWriter out, int version, int handle, int ref ) throws IOException
     {
-      if ( version == DXF.ACAD_14 ) {
-        out.write( String.format( "  0%sAcDbPolyline%s", DXF.EOL, DXF.EOL ) );
-      } else if ( version == DXF.ACAD_12 ) {
-        out.write( String.format( "  100%sAcDb3dPolyline%s", DXF.EOL, DXF.EOL ) );
+      if ( version == DXF.ACAD_12 ) {
+        out.write( String.format( "  100%s%s%s", DXF.EOL, DXF.AcDb3dPolyline, DXF.EOL ) );
+      } else if ( version == DXF.ACAD_14 ) {
+        out.write( String.format( "  100%s%s%s", DXF.EOL, DXF.AcDbPolyline, DXF.EOL ) );
       }
       return handle;
     }
@@ -444,7 +444,7 @@ class SymbolPointDxf
   private void addAcDbEllipse()  { addAcDb( DXF.AcDbEllipse ); }
 
   private void startPolyline( ) { addToken( new PolylineToken( DXF.ACAD_9 ) ); }
-  private void addAcDbPolyline() { addToken( new PolylineAcDbToken( DXF.ACAD_9 ) ); }
+  private void addAcDbPolyline() { addToken( new PolylineAcDbToken( DXF.ACAD_12 ) ); }
 
   private void addAcDbVertex( int version ) 
   { 
