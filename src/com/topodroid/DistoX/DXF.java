@@ -530,7 +530,7 @@ public class DXF
       printAcDb( pw, -1, AcDbText );
       
       // printString( pw, 7, style_dejavu ); // style (optional)
-      // pw.printf("%s\%s 0%s", "\"10\"", EOL, EOL );
+      // pw.printf("%s%s  0%s", "\"10\"", EOL, EOL );
       printXYZ( pw, x, y, 0, 0 );
       // printXYZ( pw, 0, 0, 1, 1 );   // second alignmenmt (otional)
       // printXYZ( pw, 0, 0, 1, 200 ); // extrusion (otional 0 0 1)

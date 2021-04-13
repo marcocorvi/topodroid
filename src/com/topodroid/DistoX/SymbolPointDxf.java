@@ -34,7 +34,7 @@ class SymbolPointDxf
   {
     startLine( layer );
     addHandle( DXF.ACAD_12 );
-    addAcDbLine();
+    addAcDbLine( false );
     addLine( x0, y0, x1, y1 );
   }
 
@@ -70,8 +70,7 @@ class SymbolPointDxf
   public void circle( String layer, float x, float y, float r )
   {
     startCircle( layer );
-    addHandle( DXF.ACAD_12 );
-    addAcDbCircle();
+    addAcDbCircle( true );
     addCircle( x, y, r );
   }
 
@@ -87,9 +86,9 @@ class SymbolPointDxf
   public void arc( String layer, float x, float y, float r, float a1, float a2 )
   {
     startArc( layer );
-    addHandle( DXF.ACAD_12 );
-    addAcDbCircle(); // FIXME ???
+    addAcDbCircle( true ); 
     addCircle( x, y, r );
+    addAcDbArc( true ); 
     addArcAngles( a1, a2 );
   }
 
@@ -217,6 +216,32 @@ class SymbolPointDxf
     }
   }
 
+  private class NameToken extends DxfToken
+  {
+    String name;
+    String layer;
+
+    NameToken( int v, String n, String l )
+    {
+      super( TOKEN_ARC, v );
+      name  = n;
+      layer = l;
+    }
+
+    int write( BufferedWriter out, int version, int handle, int ref ) throws IOException
+    {
+      out.write( String.format( "  0%s%s%s", DXF.EOL, name, DXF.EOL ) );
+      if ( version == DXF.ACAD_12 || version == DXF.ACAD_14 ) {
+        handle = DXF.inc(handle);
+        out.write( String.format( "  5%s%X%s", DXF.EOL, handle, DXF.EOL ) );
+        if ( ref >= 0 ) out.write( String.format( "  330%s%X%s", DXF.EOL, ref, DXF.EOL ) );
+        out.write( String.format( "  100%sAcDbEntity%s", DXF.EOL, DXF.EOL ) );
+      }
+      if ( layer != null ) out.write( String.format( "  8%s%s%s", DXF.EOL, layer, DXF.EOL ) );
+      return handle;
+    }
+  }
+
   private class PolylineToken extends DxfToken
   {
     PolylineToken( int v )
@@ -268,7 +293,7 @@ class SymbolPointDxf
     {
       StringWriter sw = new StringWriter();
       PrintWriter pw  = new PrintWriter(sw);
-      pw.printf("  10%s%.2f%s  20%s%.2f%s", DXF.EOL, x, DXF.EOL, DXF.EOL, y, DXF.EOL );
+      pw.printf(Locale.US, "  10%s%.2f%s  20%s%.2f%s", DXF.EOL, x, DXF.EOL, DXF.EOL, y, DXF.EOL );
       if ( version != DXF.ACAD_14 ) {
         pw.printf("  30%s0.00%s", DXF.EOL, DXF.EOL );
       }
@@ -313,7 +338,7 @@ class SymbolPointDxf
     {
       if ( version != DXF.ACAD_14 ) {
         // DXF.printInt( pw, 43, 0 ); 
-        out.write( String.format( "  10%s%.2f%s  20%s%.2f%s  30%s%.2f%s", DXF.EOL, x, DXF.EOL, DXF.EOL, y, DXF.EOL, DXF.EOL, z, DXF.EOL ) );
+        out.write( String.format(Locale.US, "  10%s%.2f%s  20%s%.2f%s  30%s%.2f%s", DXF.EOL, x, DXF.EOL, DXF.EOL, y, DXF.EOL, DXF.EOL, z, DXF.EOL ) );
       }
       return handle;
     }
@@ -424,24 +449,25 @@ class SymbolPointDxf
   }
 
   private void startLine( String layer )     { startItem( TOKEN_LINE,     DXF.ACAD_9, "LINE",     layer ); }
-  private void startCircle( String layer )   { startItem( TOKEN_CIRCLE,   DXF.ACAD_9, "CIRCLE",   layer ); }
-  private void startArc( String layer )      { startItem( TOKEN_ARC,      DXF.ACAD_9, "ARC",      layer ); }
-  private void startEllipse( String layer )  { startItem( TOKEN_ELLIPSE,  DXF.ACAD_9, "ELLIPSE",  layer ); }
   private void startVertex( String layer )   { startItem( TOKEN_VERTEX,   DXF.ACAD_9, "VERTEX",   layer ); } // skip on ACAD_14
 
+  private void startEllipse( String layer )  { addToken( new NameToken( DXF.ACAD_9, "ELLIPSE", layer ) ); }
+  private void startCircle( String layer )   { addToken( new NameToken( DXF.ACAD_9, "CIRCLE", layer ) ); }
+  private void startArc( String layer )      { addToken( new NameToken( DXF.ACAD_9, "ARC", layer ) ); }
     
-  private void addAcDb( String acdbitem )
+  private void addAcDb( String acdbitem, boolean acdb_only )
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter( sw );
-    pw.printf( DXF.EOL100 +  DXF.AcDbEntity + DXF.EOL + DXF.EOL100 + acdbitem + DXF.EOL );
+    if ( ! acdb_only ) pw.printf( DXF.EOL100 +  DXF.AcDbEntity + DXF.EOL );
+    pw.printf( DXF.EOL100 + acdbitem + DXF.EOL );
     addToken( new NormalToken( TOKEN_ACDB, DXF.ACAD_12, sw.toString() ) );
   }
 
-  private void addAcDbLine( )    { addAcDb( DXF.AcDbLine ); }
-  private void addAcDbCircle( )  { addAcDb( DXF.AcDbCircle ); }
-  private void addAcDbArc( )     { addAcDb( DXF.AcDbArc ); }
-  private void addAcDbEllipse()  { addAcDb( DXF.AcDbEllipse ); }
+  private void addAcDbLine( boolean acdb_only )    { addAcDb( DXF.AcDbLine, acdb_only ); }
+  private void addAcDbCircle( boolean acdb_only )  { addAcDb( DXF.AcDbCircle, acdb_only ); }
+  private void addAcDbArc( boolean acdb_only )     { addAcDb( DXF.AcDbArc, acdb_only ); }
+  private void addAcDbEllipse( boolean acdb_only ) { addAcDb( DXF.AcDbEllipse, acdb_only ); }
 
   private void startPolyline( ) { addToken( new PolylineToken( DXF.ACAD_9 ) ); }
   private void addAcDbPolyline() { addToken( new PolylineAcDbToken( DXF.ACAD_12 ) ); }
@@ -558,8 +584,8 @@ class SymbolPointDxf
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter( sw ); // DXF writer
-    DXF.printFloat( pw, 50, a1 );     // ANGLES
-    DXF.printFloat( pw, 51, a1+a2 );
+    DXF.printFloat( pw, 50, 180+a1 );     // ANGLES
+    DXF.printFloat( pw, 51, 180+a1+a2 );
     addToken( new NormalToken( TOKEN_ARC, DXF.ACAD_9, sw.toString() ) );
   }
 
@@ -578,8 +604,8 @@ class SymbolPointDxf
     DXF.printXYZ( pw, xc, yc, 0.0f, 0 ); // CENTER
     DXF.printXYZ( pw, x0, yc, 0.0f, 1 ); // LEFT VERTEX
     DXF.printFloat( pw, 40, r  );        // ASPECT_RATIO
-    DXF.printFloat( pw, 41, a1 );        // ANGLES
-    DXF.printFloat( pw, 42, a1+a2 );
+    DXF.printFloat( pw, 41, 180+a1 );    // ANGLES
+    DXF.printFloat( pw, 42, 180+a1+a2 );
     // pw.printf(Locale.US,
     //           "  10\n%.2f\n  20\n%.2f\n  30\n%.2f\n  11\n%.2f\n  21\n%.2f\n  31\n%.2f\n  40\n%.2f\n  41\n%.2f\n  42\n%.2f\n",
     //           (x0+x1)/2*dxfScale, -(y0+y1)/2*dxfScale, 0.0f,                 // CENTER

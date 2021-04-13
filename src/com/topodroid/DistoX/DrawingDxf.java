@@ -434,13 +434,14 @@ class DrawingDxf
         }
 
         // // 8 layer (0), 2 block name,
-        int block_handle = 0;
         for ( int n = 0; n < BrushManager.getPointLibSize(); ++ n ) {
+          int block_handle = -1;
           SymbolPoint pt = (SymbolPoint)BrushManager.getPointByIndex(n);
 	  String th_name = pt.getThName().replace(':','-');
           DXF.writeString( out, 0, "BLOCK" );
           if ( DXF.mVersion13_14 ) {
-            handle = DXF.writeAcDb( out, handle, DXF.AcDbEntity, "AcDbBlockBegin" );
+            // handle = DXF.writeAcDb( out, handle, DXF.AcDbEntity, "AcDbBlockBegin" );
+            handle = DXF.writeAcDb( out, handle, point_record_handle[n], DXF.AcDbEntity, "AcDbBlockBegin" );
             block_handle = handle;
           }
           // DXF.writeString( out, 8, "P_" + th_name );
@@ -450,7 +451,8 @@ class DrawingDxf
           DXF.writeXYZ( out, 0, 0, 0, 0 );
           // out.write( pt.getDxf() );
           SymbolPointDxf point_dxf = pt.getDxf();
-          handle = point_dxf.writeDxf( out, TDSetting.mAcadVersion, handle, point_record_handle[n] );
+          // handle = point_dxf.writeDxf( out, TDSetting.mAcadVersion, handle, point_record_handle[n] );
+          handle = point_dxf.writeDxf( out, TDSetting.mAcadVersion, handle, block_handle );
 
           DXF.writeString( out, 0, "ENDBLK" );
           if ( DXF.mVersion13_14 ) {
@@ -728,7 +730,7 @@ class DrawingDxf
     }
 
     String th_name = point.getThName().replace(':','-');
-    Log.v("DistoX", "POINT PATH <" + th_name + "> " + String.format("%X %X", ref_handle, model_record_handle) );
+    // Log.v("DistoX", "POINT PATH <" + th_name + "> " + String.format("%X %X", ref_handle, model_record_handle) );
     // int idx = 1 + point.mPointType;
     DXF.printString( pw, 0, "INSERT" );
     handle = DXF.printAcDbModelSpace( pw, handle, model_record_handle, ("P_"+th_name), "AcDbBlockReference" );
