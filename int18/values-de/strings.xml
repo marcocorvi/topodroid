@@ -681,7 +681,7 @@ WARNUNG. Ab v.5.0.60 wird ein "TopoDroid"-Ordner automatisch verwendet wenn es e
     <string name="button_eval_cal"  >Auswerten mit Kalibr.</string>
     <string name="button_gps_start" >GPS</string>
     <!-- UNUSED string name="button_gps_stop"  >Anhalten      </string -->
-    <!-- TODO string name="button_help">Help</string -->
+    <!-- DONT TRANSLATE string name="button_help">?</string -->
     <string name="button_manual"    >Handbuch</string>
     <!-- UNUSED string name="button_measure"   >Messung   </string -->
     <!-- UNUSED string name="button_photo"   >Foto</string -->

@@ -292,16 +292,16 @@
       <Button android:id="@+id/btn_back"
         style="@style/button_default"
         android:text="@string/button_cancel"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginRight="@dimen/marginhsmall"
       />
       <Button android:id="@+id/btn_save"
         style="@style/button_default"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginRight="@dimen/marginhsmall"
         android:text="@string/button_save"
       />
       <Button android:id="@+id/btn_more"
         style="@style/button_default"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginRight="@dimen/marginhsmall"
         android:text="@string/button_more"
       />
       <Button android:id="@+id/btn_ok"

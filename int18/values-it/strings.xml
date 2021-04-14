@@ -679,7 +679,7 @@ Tap <b>Chiudi</b> per fare nulla.
     <string name="button_eval_cal"  >Calcola con calibr.</string>
     <!-- OK string name="button_gps_start" >GPS       </string -->
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
-    <string name="button_help">Aiuto</string>
+    <!-- DONT TRANSLATE string name="button_help">?</string -->
     <string name="button_manual"    >Manuale utente</string>
     <!-- UNUSED string name="button_measure"   >Misura    </string -->
     <!-- UNUSED string name="button_photo"   >Foto</string -->

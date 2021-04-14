@@ -687,7 +687,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="button_eval_cal"  >Kalibrált</string>
     <string name="button_gps_start" >GPS</string>
     <!-- UNUSED string name="button_gps_stop"  >Állj      </string -->
-    <string name="button_help">Súgó</string>
+    <!-- DONT TRANSLATE string name="button_help">Súgó</string -->
     <string name="button_manual"    >Felhasználói Kézikönyv</string>
     <!-- UNUSED string name="button_measure"   >Measure   </string -->
     <!-- UNUSED string name="button_photo"   >Fotó</string -->

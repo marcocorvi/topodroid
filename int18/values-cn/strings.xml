@@ -680,7 +680,7 @@ Tap "Close" not to take any action.
     <string name="button_eval_cal"  >校准复运算</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
-    <!-- TODO string name="button_help">Help</string -->
+    <!-- DONT TRANSLATE string name="button_help">?</string -->
     <string name="button_manual"    >用户手册</string>
     <!-- UNUSED string name="button_measure"   >Measure   </string -->
     <!-- UNUSED string name="button_photo"   >Photo</string -->

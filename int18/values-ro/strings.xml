@@ -667,7 +667,7 @@ Tap "Close" not to take any action.
     <string name="button_eval_cal"  >Evaluează calib. w.</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
-    <!-- TODO string name="button_help">Help</string -->
+    <!-- DONT TRANSLATE string name="button_help">?</string -->
     <string name="button_manual"    >Manual</string>
     <!-- UNUSED string name="button_measure"   >Măsoară   </string -->
     <!-- UNUSED string name="button_photo"   >Foto</string -->

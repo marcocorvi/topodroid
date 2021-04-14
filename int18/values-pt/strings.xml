@@ -666,7 +666,7 @@ Tap "Close" not to take any action.
     <string name="button_eval_cal"  >Calcular c/ calib.</string>
     <!-- OK string name="button_gps_start" >GPS       </string -->
     <!-- UNUSED string name="button_gps_stop"  >Parar     </string -->
-    <!-- TODO string name="button_help">Help</string -->
+    <!-- DONT TRANSLATE string name="button_help">?</string -->
     <string name="button_manual"    >Manual do Usuário</string>
     <!-- UNUSED string name="button_measure"   >Medir   </string -->
     <!-- UNUSED string name="button_photo"   >Foto</string -->

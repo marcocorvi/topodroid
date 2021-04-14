@@ -665,7 +665,7 @@ Tap "Close" not to take any action.
     <string name="button_eval_cal"  >Оц./кал.  </string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
-    <!-- TODO string name="button_help">Help</string -->
+    <!-- DONT TRANSLATE string name="button_help">?</string -->
     <!-- TODO string name="button_manual"    >User Manual</string -->
     <!-- string name="button_measure"   >Measure   </string -->
     <!-- UNUSED string name="button_photo"   >Снимка</string -->

@@ -671,7 +671,7 @@ Tap "Close" not to take any action.
     <!-- TODO string name="button_eval_cal"  >Eval w. calib.</string -->
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
-    <!-- TODO string name="button_help">Help</string -->
+    <!-- DONT TRANSLATE string name="button_help">?</string -->
     <!-- TODO string name="button_manual"    >User Manual</string -->
     <!-- UNUSED string name="button_measure"   >Medida   </string -->
     <!-- UNUSED string name="button_photo"   >Fotos</string -->
