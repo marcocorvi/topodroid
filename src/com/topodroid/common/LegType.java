@@ -29,6 +29,7 @@ public class LegType
       case XSPLAY: return HSPLAY;
       case HSPLAY: return VSPLAY;
       case VSPLAY: return NORMAL;
+      case SCAN:   return SCAN;   // scan do not cycle
     }
     return INVALID;
   }

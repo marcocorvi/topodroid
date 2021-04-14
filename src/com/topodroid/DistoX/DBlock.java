@@ -123,6 +123,7 @@ public class DBlock
   private static final int BLOCK_X_SPLAY    = 6; // FIXME_X_SPLAY cross splay
   private static final int BLOCK_H_SPLAY    = 7; // FIXME_H_SPLAY horizontal splay
   private static final int BLOCK_V_SPLAY    = 8; // FIXME_V_SPLAY vertical splay
+  private static final int BLOCK_SCAN       = 9; // FIXME_S_SPLAY scan splay
 
   // block type to leg type table
   private static final long[] legOfBlockType = {
@@ -135,6 +136,7 @@ public class DBlock
     LegType.XSPLAY, // 2
     LegType.HSPLAY, // 4
     LegType.VSPLAY, // 5
+    LegType.SCAN,   // 6
   };
 
   static final int[] blockOfSplayLegType = {
@@ -144,6 +146,7 @@ public class DBlock
     -1, //  BLOCK_BACK_LEG, // should never occor
     BLOCK_H_SPLAY,
     BLOCK_V_SPLAY,
+    BLOCK_SCAN,
   };
 
   // block type to color table
@@ -157,6 +160,7 @@ public class DBlock
     TDColor.GREEN,        // 5 FIXME_X_SPLAY X splay
     TDColor.DARK_BLUE,    // 7 H_SPLAY
     TDColor.DEEP_BLUE,    // 8 V_SPLAY
+    TDColor.YELLOW_GREEN, // 9 SCAN
     TDColor.GREEN
   };
 
@@ -185,6 +189,7 @@ public class DBlock
   public boolean isXSplay()     { return mBlockType == BLOCK_X_SPLAY; }
   public boolean isHSplay()     { return mBlockType == BLOCK_H_SPLAY; }
   public boolean isVSplay()     { return mBlockType == BLOCK_V_SPLAY; }
+  public boolean isScan()       { return mBlockType == BLOCK_SCAN; }
 
   long getLegType() { return legOfBlockType[ mBlockType ]; }
   // {
@@ -205,6 +210,7 @@ public class DBlock
        case LegType.BACK:   mBlockType = BLOCK_BACK_LEG; break;
        case LegType.HSPLAY: mBlockType = BLOCK_H_SPLAY;  break;
        case LegType.VSPLAY: mBlockType = BLOCK_V_SPLAY;  break;
+       case LegType.SCAN:   mBlockType = BLOCK_SCAN;     break;
        default: /* nothing */
      }
   }

@@ -150,7 +150,7 @@ public class BricProto extends TopoDroidProtocol
   // TODO use mType
   void processData()
   {
-    Log.v("DistoX", "BRIC proto process data - prim todo " + mPrimToDo + " index " + mIndex + " type " + mType );
+    // Log.v("DistoX", "BRIC proto process data - prim todo " + mPrimToDo + " index " + mIndex + " type " + mType );
     if ( mPrimToDo ) {
       TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: process - PrimToDo true: " + mIndex + " prev " + mLastIndex );
       // mComm.handleRegularPacket( DataType.PACKET_DATA, mLister, DataType.DATA_SHOT );
@@ -180,9 +180,8 @@ public class BricProto extends TopoDroidProtocol
 
   void addMeasPrimAndProcess( byte[] bytes )
   {
-    // mTime = mThisTime;
     if ( checkPrim( bytes ) ) { // if Prim is new
-      // Log.v("DistoX", "BRIC proto: add Prim " );
+      // Log.v("DistoX", "BRIC proto: add Prim and process" );
       mTime     = mThisTime;
       mDistance = BricConst.getDistance( bytes );
       mBearing  = BricConst.getAzimuth( bytes );

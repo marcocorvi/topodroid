@@ -43,7 +43,7 @@ class StationNameDefault extends StationName
     if ( survey_stations <= 0 ) return false; // assign always false with no policy
 
     boolean ret = false;
-    // Log.v("DistoX-DATA", "assign station after " + blk0.mId + " list " + list.size() + " sts " + ((sts!=null)?sts.size():"-") );
+    Log.v("DistoX-DATA", "assign station after " + blk0.mId + " list " + list.size() + " sts " + ((sts!=null)?sts.size():"-") );
     ArrayList< DBlock > unassigned = new ArrayList<>();
     // TDLog.Log( TDLog.LOG_DATA, "assign stations after " + list.size() + " " + (sts!=null? sts.size():0) );
 
@@ -88,7 +88,10 @@ class StationNameDefault extends StationName
 
     for ( DBlock blk : list ) {
       if ( blk.mId == blk0.mId ) continue;
-      if ( blk.isSplay() ) {
+      if ( blk.isScan() ) {
+        setSplayName( blk, station );
+	sts.add( station );
+      } else if ( blk.isSplay() ) {
         setSplayName( blk, station );
 	sts.add( station );
         // TDLog.Log( TDLog.LOG_DATA, "splay " + blk.mId + " S<" + station + "> bs " + bs );
@@ -163,7 +166,7 @@ class StationNameDefault extends StationName
   boolean assignStations( List< DBlock > list, Set<String> sts )
   { 
     // TDLog.Log( TDLog.LOG_DATA, "assign stations: list " + list.size() + " sts " + (sts!=null? sts.size():0) );
-    // Log.v( "DistoX-DATA", "assign stations: list " + list.size() + " sts " + (sts!=null? sts.size():"-") );
+    Log.v( "DistoX-DATA", "assign stations: list " + list.size() + " sts " + (sts!=null? sts.size():"-") );
 
     int survey_stations = StationPolicy.mSurveyStations;
     if ( survey_stations <= 0 ) return false; // assign always false with no policy
@@ -196,6 +199,12 @@ class StationNameDefault extends StationName
     for ( DBlock blk : list ) {
       // TDLog.Log( TDLog.LOG_SHOT, blk.mId + " <" + blk.mFrom + "-" + blk.mTo + "> F " + from + " T " + to + " S " + station );
       if ( blk.mFrom.length() == 0 ) {
+        if ( blk.isScan() ) {
+          nrLegShots = 0;
+          setSplayName( blk, station );
+          prev = null;
+          continue;
+        }
         // TDLog.Log( TDLog.LOG_DATA, blk.mId + " EMPTY FROM. prev " + ( (prev==null)? "null" : prev.mId ) );
         if ( blk.mTo.length() == 0 ) {
           if ( prev == null ) {

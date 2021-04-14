@@ -35,6 +35,7 @@ public class TDColor
   public static final int ORANGE       = 0xffdbd100;
   public static final int LIGHT_GREEN  = 0xff24ff24;
   public static final int YELLOW       = 0xffffff6d;
+  public static final int YELLOW_GREEN = 0xff99cc3d;
   public static final int FIXED_RED    = 0xffff3333;
   public static final int FIXED_YELLOW = 0xffffff33;
   public static final int FIXED_ORANGE = 0xffff9966;

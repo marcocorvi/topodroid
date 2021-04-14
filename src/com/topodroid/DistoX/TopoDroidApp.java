@@ -222,7 +222,7 @@ public class TopoDroidApp extends Application
   // FIXME VirtualDistoX
   // VirtualDistoX mVirtualDistoX = new VirtualDistoX();
 
-  static void notifyUpdateDisplay( long blk_id, boolean got_leg )
+  static void notifyDrawingUpdateDisplay( long blk_id, boolean got_leg )
   {
     if ( mDrawingWindow != null ) mDrawingWindow.notifyUpdateDisplay( blk_id, got_leg );
   }

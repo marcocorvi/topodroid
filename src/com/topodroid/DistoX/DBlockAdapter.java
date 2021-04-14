@@ -203,7 +203,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   //
   boolean addDataBlock( DBlock blk ) 
   {
-    if ( hasBlock( blk.mId ) ) return false;
+    if ( ! blk.isScan() && hasBlock( blk.mId ) ) return false;
     mItems.add( blk );
     // notifyDataSetChanged();
     return true;
@@ -225,12 +225,17 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     }
   }
 
+  // @return true if the block was already in the list
   private boolean hasBlock( long id )
   {
+    // Log.v("DistoX", "Data Adapter items size " + mItems.size() + " block id " + id );
+    if ( id < 0 ) return false;
     int size = mItems.size();
     if ( size == 0 ) return false;
-    return ( id >= 0 && id <= mItems.get(size-1).mId );
-
+    DBlock last_blk = mItems.get( size-1 );
+    // Log.v("DistoX", "Data Adapter ID " + id + " last_blk " + last_blk.mId + " scan " + last_blk.isScan() );
+    if ( last_blk.isScan() ) return false;
+    return ( id <= last_blk.mId )? true : false;
     // for ( DBlock b : mItems ) if ( b.mId == id ) return true;
     // return false;
   }

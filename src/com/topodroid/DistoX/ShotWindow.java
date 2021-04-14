@@ -430,12 +430,18 @@ public class ShotWindow extends Activity
   @Override
   synchronized public void updateBlockList( long blk_id )
   {
-    // Log.v("DistoX-DATA", "Shot window: update block list. Id: " + blk_id );
-    DBlock blk = mApp_mData.selectShot( blk_id, TDInstance.sid );
-    if ( blk != null && mDataAdapter != null ) {
-      // FIXME 3.3.0
-      if ( mDataAdapter.addDataBlock( blk ) ) { // avoid double block-adding
-        boolean ret = false;
+    DBlock blk = mApp_mData.selectLastShot( blk_id, TDInstance.sid );
+    if ( blk == null || mDataAdapter == null ) {
+      // Log.v("DistoX-DATA", "null block");
+      return;
+    }
+    // Log.v("DistoX-DATA", "Shot window: update block list. Id: " + blk_id + " is scan: " +  blk.isScan() );
+    // FIXME 3.3.0
+    boolean add_block = mDataAdapter.addDataBlock( blk ); // avoid double block-adding
+    if ( add_block ) {
+      boolean scan = blk.isScan();
+      boolean ret = false;
+      if ( ! scan ) { // normal data
         mSurveyAccuracy.addBlockAMD( blk );
         if ( StationPolicy.doBacksight() || StationPolicy.doTripod() ) {
           ret = mApp.assignStationsAll( mDataAdapter.mItems );
@@ -443,30 +449,28 @@ public class ShotWindow extends Activity
           ret = mApp.assignStationsAll( mDataAdapter.getItemsForAssign() );
         }
         // mApp_mData.getShotName( TDInstance.sid, blk );
+        // Log.v("DistoX-DATA", "shot window block " + blk.mId + " station assign return " + ret );
+      }
 
-        mList.post( new Runnable() {
-          @Override public void run() {
-            // Log.v("DistoX", "notify data set changed");
-            mDataAdapter.notifyDataSetChanged(); // THIS IS IMPORTANT TO REFRESH THE DATA LIST
-            mList.setSelection( mDataAdapter.getCount() - 1 );
-          }
-        } );
-	// mList.invalidate();
-	// mDataAdapter.reviseLatest();
-        if ( ret ) { // always update when a leg is received 
-          // Log.v("DistoX-DATA", "shot window got a leg. ret " + ret );
-          TopoDroidApp.notifyUpdateDisplay( blk_id, ret );
-        } else if ( ! StationPolicy.isSurveyBackward1() ) {
-          if ( TDLevel.overExpert || ! TDSetting.mLegOnlyUpdate ) {
-            TopoDroidApp.notifyUpdateDisplay( blk_id, ret );
-          }
+      mList.post( new Runnable() {
+        @Override public void run() {
+          // Log.v("DistoX", "shot window notify data set changed " + mDataAdapter.getCount() );
+          mDataAdapter.notifyDataSetChanged(); // THIS IS IMPORTANT TO REFRESH THE DATA LIST
+          mList.setSelection( mDataAdapter.getCount() - 1 );
         }
-      } else {
-        // TDLog.Error( "block already-added " + blk.mId ); // this is not an error
-        // Log.v("DistoX-DATA", "block already added " + blk.mId );
+      } );
+      // mList.invalidate();
+      // mDataAdapter.reviseLatest();
+      if ( ret || scan ) { // always update when a leg is received 
+        // Log.v("DistoX-DATA", "shot window got a leg. ret " + ret );
+        TopoDroidApp.notifyDrawingUpdateDisplay( blk_id, ret );
+      } else if ( ! StationPolicy.isSurveyBackward1() ) {
+        if ( TDLevel.overExpert || ! TDSetting.mLegOnlyUpdate ) {
+          TopoDroidApp.notifyDrawingUpdateDisplay( blk_id, ret );
+        }
       }
     // } else {
-    //   Log.v("DistoX-DATA", "null block");
+    //   Log.v("DistoX", "block " + blk_id + " already on the list");
     }
   }
 
@@ -997,7 +1001,7 @@ public class ShotWindow extends Activity
   @Override
   protected void onActivityResult( int reqCode, int resCode, Intent intent )
   {
-    TDLog.Log( TDLog.LOG_DEBUG, "on Activity Result: request " + reqCode + " result " + resCode );
+    // TDLog.Log( TDLog.LOG_DEBUG, "on Activity Result: request " + reqCode + " result " + resCode );
     switch ( reqCode ) {
       case TDRequest.CAPTURE_IMAGE_SHOTWINDOW:
         if ( TDLocale.FIXME_LOCALE ) TDLocale.resetLocale(); 

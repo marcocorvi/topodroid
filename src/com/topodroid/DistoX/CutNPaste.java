@@ -308,7 +308,7 @@ class CutNPaste
 
       // ----- SCAN MEASURE
       //
-      if ( TDSetting.mBricMode != BricMode.MODE_ALL ) {
+      if ( TDSetting.mBricMode != BricMode.MODE_PRIM_ONLY ) {
         text = res.getString( R.string.popup_do_scan );
         textview3 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
           new View.OnClickListener( ) {
@@ -319,7 +319,7 @@ class CutNPaste
           } );
         ww = textview3.getPaint().measureText( text );
         if ( ww > w ) w = ww;
-      }
+      // }
 
       // ----- TURN OFF
       //
