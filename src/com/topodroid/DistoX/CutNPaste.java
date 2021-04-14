@@ -319,7 +319,7 @@ class CutNPaste
           } );
         ww = textview3.getPaint().measureText( text );
         if ( ww > w ) w = ww;
-      // }
+      }
 
       // ----- TURN OFF
       //

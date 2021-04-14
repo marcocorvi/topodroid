@@ -111,6 +111,7 @@ public class BricComm extends TopoDroidComm
         for ( ; ; ) {
           // Log.v("DistoX", "BRIC comm: Queue size " + mQueue.size );
           BricBuffer buffer = mQueue.get();
+          if ( buffer == null ) continue;
           // Log.v("DistoX", "BRIC comm: Queue buffer type " + buffer.type );
           switch ( buffer.type ) {
             case DATA_PRIM:
