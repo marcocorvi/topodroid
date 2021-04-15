@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.ui.MyCheckBox;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.TDLayout;
@@ -552,9 +553,9 @@ class ShotNewDialog extends MyDialog
         if ( mJpegData != null ) { 
           // Log.v("DistoX", "save Jpeg image size " + mJpegData.length );
           long photo_id = TopoDroidApp.mData.nextPhotoId( TDInstance.sid );
-          File imagefile = new File( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(photo_id ) ) );
+          File imagefile = TDFile.getFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(photo_id ) ) );
           try {
-            FileOutputStream fos = new FileOutputStream( imagefile );
+            FileOutputStream fos = TDFile.getFileOutputStream( imagefile );
             fos.write( mJpegData );
             fos.flush();
             fos.close();

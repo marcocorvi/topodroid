@@ -16,6 +16,7 @@ package com.topodroid.DistoX;
 import com.topodroid.math.TDVector;
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
 import com.topodroid.common.PointScale;
@@ -467,7 +468,7 @@ public class DrawingPointPath extends DrawingPath
       exportTCsxXSection( pw, section, survey, cave, branch );
       pw.format("    </crosssection>\n" );
       String filename = TDPath.getSurveyJpgFile( TDInstance.survey, section.name );
-      File imagefile = new File( filename );
+      File imagefile = TDFile.getFile( filename );
       if ( imagefile.exists() ) {
         byte[] buf = TDExporter.readFileBytes( imagefile );
         if ( buf != null ) {

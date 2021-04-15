@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.ui.MyDialog;
 // import com.topodroid.prefs.TDSetting;
@@ -164,7 +165,7 @@ public class PhotoListDialog extends MyDialog
   public void dropPhoto( PhotoInfo photo )
   {
     mApp_mData.deletePhoto( photo.sid, photo.id );
-    TDUtil.deleteFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(photo.id) ) );
+    TDFile.deleteFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(photo.id) ) );
     updateDisplay( ); // FIXME
   }
 

@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFeedback;
 import com.topodroid.utils.TDTag;
@@ -984,7 +985,7 @@ public class ShotWindow extends Activity
   // void deletePhoto( PhotoInfo photo ) 
   // {
   //   mApp_mData.deletePhoto( TDInstance.sid, photo.id );
-  //   File imagefile = new File( mApp.getSurveyJpgFile( Long.toString(photo.id) ) );
+  //   File imagefile = TDFile.getFile( mApp.getSurveyJpgFile( Long.toString(photo.id) ) );
   //   try {
   //     imagefile.delete();
   //   } catch ( IOException e ) { }

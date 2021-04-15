@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDTag;
+import com.topodroid.utils.TDFile;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.help.UserManualActivity;
 
@@ -57,7 +58,7 @@ public class CWDActivity extends Activity
   private EditText mETcwd;
   private TextView mTVcbd;
   private Button mBtnOK;
-  private Button mBtnChange;
+  // private Button mBtnChange;
   private Button mBtnCancel;
   private LinearLayout mLayoutcbd;
   
@@ -83,7 +84,7 @@ public class CWDActivity extends Activity
     }
 
     // make sure base_dir exists and is writable
-    File base_dir = new File( base_name );
+    File base_dir = TDFile.getFile( base_name );
     try {
       if ( ! ( base_dir.exists() && base_dir.canWrite() ) ) {
         TDToast.makeBad( R.string.bad_cbd );
@@ -114,6 +115,7 @@ public class CWDActivity extends Activity
       dir_name = "TopoDroid" + dir_name.substring(9);
     }
 
+    /*
     if ( TDPath.checkBasePath( dir_name, base_name ) ) {
       TDLog.Log( TDLog.LOG_PATH, "dir name <" + dir_name + "> base dir <" + base_name + ">" );
       TopoDroidApp.setCWDPreference( dir_name, base_name );
@@ -123,6 +125,7 @@ public class CWDActivity extends Activity
     } else {
       setResult( RESULT_CANCELED );
     }
+    */
     return true;
   }
     
@@ -170,8 +173,8 @@ public class CWDActivity extends Activity
       finish();
     } else if ( b == mBtnCancel ) {
       finish();
-    } else if ( b == mBtnChange ) {
-      new CBDdialog( this, this, mBaseName ).show();
+    // } else if ( b == mBtnChange ) {
+    //   new CBDdialog( this, this, mBaseName ).show();
     }
   }
   
@@ -197,12 +200,12 @@ public class CWDActivity extends Activity
     mBtnOK.setOnClickListener( this );
     mBtnCancel = (Button) findViewById( R.id.button_cancel );
     mBtnCancel.setOnClickListener( this );
-    mBtnChange = (Button) findViewById( R.id.button_change );
-    if ( TDPath.BELOW_ANDROID_10 && TDLevel.overExpert ) {
-      mBtnChange.setOnClickListener( this );
-    } else {
-      mBtnChange.setVisibility( View.GONE );
-    }
+    // mBtnChange = (Button) findViewById( R.id.button_change );
+    // if ( TDPath.BELOW_ANDROID_10 && TDLevel.overExpert ) {
+    //   mBtnChange.setOnClickListener( this );
+    // } else {
+    //   mBtnChange.setVisibility( View.GONE );
+    // }
 
     updateDisplay();
 

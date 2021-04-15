@@ -17,6 +17,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDStatus;
@@ -1564,10 +1565,10 @@ public class DataHelper extends DataSetObservable
     List< PlotInfo > plots = selectPlotsAtStation( old_sid, station );
     for ( PlotInfo plot : plots ) {
       transferPlot( sid, old_sid, plot.id );
-      TDUtil.renameFile( TDPath.getTh2File( old_survey_name + "-" + plot.name + ".th2" ),
+      TDFile.renameFile( TDPath.getTh2File( old_survey_name + "-" + plot.name + ".th2" ),
                          TDPath.getTh2File( new_survey_name + "-" + plot.name + ".th2" ) );
 
-      TDUtil.renameFile( TDPath.getTdrFile( old_survey_name + "-" + plot.name + ".tdr" ),
+      TDFile.renameFile( TDPath.getTdrFile( old_survey_name + "-" + plot.name + ".tdr" ),
                          TDPath.getTdrFile( new_survey_name + "-" + plot.name + ".tdr" ) );
     }
   }
@@ -1581,7 +1582,7 @@ public class DataHelper extends DataSetObservable
       transferSketch( sid, old_sid, sketch.id );
       String oldfile = TDPath.getTdr3File( old_survey_name + "-" + sketch.name + ".tdr3" );
       String newfile = TDPath.getTdr3File( new_survey_name + "=" + sketch.name + ".tdr3" );
-      TDUtil.renameFile( oldfile, newfile );
+      TDFile.renameFile( oldfile, newfile );
     }
   }
    * END_SKETCH_3D */
@@ -1656,7 +1657,7 @@ public class DataHelper extends DataSetObservable
           myDB.update( AUDIO_TABLE, cv, WHERE_SID_SHOTID, where );
           String oldname = TDPath.getSurveyAudioFile( old_survey.name, Long.toString(audio.fileIdx) );
           String newname = TDPath.getSurveyAudioFile( new_survey.name, Long.toString(audio.fileIdx) );
-          TDUtil.renameFile( oldname, newname );
+          TDFile.renameFile( oldname, newname );
         }
 
         List< PhotoInfo > photos = selectPhotoAtShot( old_sid, old_id ); // transfer photos
@@ -1665,7 +1666,7 @@ public class DataHelper extends DataSetObservable
           myDB.update( PHOTO_TABLE, cv, WHERE_SID_ID, where );
           String oldname = TDPath.getSurveyJpgFile( old_survey.name, Long.toString(photo.id) );
           String newname = TDPath.getSurveyJpgFile( new_survey.name, Long.toString(photo.id) );
-          TDUtil.renameFile( oldname, newname );
+          TDFile.renameFile( oldname, newname );
         }
 
         ++ myNextId;
@@ -4506,7 +4507,7 @@ public class DataHelper extends DataSetObservable
      if ( myDB == null ) return;
      try {
        TDPath.checkPath( filename );
-       FileWriter fw = new FileWriter( filename ); // DistoX-SAF
+       FileWriter fw = TDFile.getFileWriter( filename ); // DistoX-SAF
        PrintWriter pw = new PrintWriter( fw );
        Cursor cursor = myDB.query( SURVEY_TABLE, 
                             new String[] { "name", "day", "team", "declination", "comment", "init_station", "xsections", "datamode", "extend" },
@@ -4768,7 +4769,7 @@ public class DataHelper extends DataSetObservable
      String line;
      try {
        // TDLog.Log( TDLog.LOG_IO, "load survey from sql file " + filename );
-       FileReader fr = new FileReader( filename ); // DistoX-SAF
+       FileReader fr = TDFile.getFileReader( filename ); // DistoX-SAF
        BufferedReader br = new BufferedReader( fr );
        // first line is survey
        line = br.readLine();

@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDLocale;
 import com.topodroid.ui.MyButton;
@@ -188,7 +189,7 @@ public class PlotReloadWindow extends ItemDrawer
     String filetdr = filename + ".tdr";
 
     long millis = System.currentTimeMillis();
-    File file = new File( tdr );
+    File file = TDFile.getFile( tdr );
     if ( file.exists() ) {
       String age = TDUtil.getAge( millis - file.lastModified() );
       String name = age + " [" + Long.toString(file.length()) + "] ()";
@@ -197,7 +198,7 @@ public class PlotReloadWindow extends ItemDrawer
     }
     tdr = tdr + TDPath.BCK_SUFFIX;
     filetdr = filetdr + TDPath.BCK_SUFFIX;
-    file = new File( tdr );
+    file = TDFile.getFile( tdr );
     if ( file.exists() ) {
       String age = TDUtil.getAge( millis - file.lastModified() );
       String name = age + " [" + Long.toString(file.length()) + "] (" + TDPath.BCK_SUFFIX + ")";
@@ -206,7 +207,7 @@ public class PlotReloadWindow extends ItemDrawer
     }
     for ( int i=0; i< TDPath.NR_BACKUP; ++i ) {
       String tdr1 = tdr + Integer.toString(i);
-      file = new File( tdr1 );
+      file = TDFile.getFile( tdr1 );
       if ( file.exists() ) {
         String age = TDUtil.getAge( millis - file.lastModified() );
         String name = age + " [" + Long.toString(file.length()) + "] (" +  TDPath.BCK_SUFFIX + Integer.toString(i) + ")";

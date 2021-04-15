@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.ui.MyCheckBox;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.TDLayout;
@@ -161,7 +162,7 @@ class DrawingLineSectionDialog extends MyDialog
 
     if ( mPlotInfo != null ) { // check the photo
       mFilename = TDPath.getSurveyJpgFile( TDInstance.survey, mPlotInfo.name );
-      File imagefile = new File( mFilename );
+      File imagefile = TDFile.getFile( mFilename );
       if ( imagefile.exists() ) {
 	mTdImage = new TDImage( mFilename );
         tv_azimuth.setText( String.format( mContext.getResources().getString( R.string.photo_azimuth_clino ), mTdImage.azimuth(), mTdImage.clino() ) );

@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDColor;
 import com.topodroid.prefs.TDSetting;
 
@@ -205,9 +206,9 @@ class SymbolArea extends Symbol
     int[] pxl = null;
 
     try {
-      // FileReader fr = new FileReader( filename );
+      // FileReader fr = TDFile.getFileReader( filename );
       // TDLog.Log( TDLog.LOG_IO, "read symbol area file <" + filename + ">" );
-      FileInputStream fr = new FileInputStream( filename );
+      FileInputStream fr = TDFile.getFileInputStream( filename );
       BufferedReader br = new BufferedReader( new InputStreamReader( fr, iso ) );
       boolean insymbol = false;
       String line;

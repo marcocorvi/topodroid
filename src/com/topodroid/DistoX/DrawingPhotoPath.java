@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.prefs.TDSetting;
 
 import android.util.Log;
@@ -109,7 +110,7 @@ class DrawingPhotoPath extends DrawingPointPath
 //   @Override
 //   void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
 //   { 
-//     File photofile = new File( TDPath.getSurveyJpgFile( survey, Long.toString(mId) ) );
+//     File photofile = TDFile.getFile( TDPath.getSurveyJpgFile( survey, Long.toString(mId) ) );
 //     if ( photofile.exists() ) {
 //       byte[] buf = TDExporter.readFileBytes( photofile );
 //       if ( buf != null ) {
@@ -135,7 +136,7 @@ class DrawingPhotoPath extends DrawingPointPath
   @Override
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
   { 
-    File photofile = new File( TDPath.getSurveyJpgFile( survey, Long.toString(mId) ) );
+    File photofile = TDFile.getFile( TDPath.getSurveyJpgFile( survey, Long.toString(mId) ) );
     if ( photofile.exists() ) {
       byte[] buf = TDExporter.readFileBytes( photofile );
       if ( buf != null ) {

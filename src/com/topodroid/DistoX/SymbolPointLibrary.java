@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDLocale;
 
 // import android.util.Log;
@@ -132,7 +133,7 @@ class SymbolPointLibrary extends SymbolLibrary
     // if ( locale.equals( "name-es" ) ) iso = "ISO-8859-1";
     // Charset.forName("ISO-8859-1")
 
-    File dir = new File( TDPath.getSymbolPointDir() );
+    File dir = TDFile.getFile( TDPath.getSymbolPointDir() );
     if ( dir.exists() ) {
       int systemNr = mSymbols.size();
       File[] files = dir.listFiles();
@@ -198,7 +199,7 @@ class SymbolPointLibrary extends SymbolLibrary
     if ( symbol == null ) {
       String filename = thname.startsWith("u:")? thname.substring(2) : thname ;
       // Log.v( "DistoX", "load missing point " + thname + " filename " + filename );
-      File file = new File( TDPath.getSymbolSavePointPath( filename ) );
+      File file = TDFile.getFile( TDPath.getSymbolSavePointPath( filename ) );
       if ( ! file.exists() ) return false;
       symbol = new SymbolPoint( file.getPath(), file.getName(), locale, iso );
       if ( symbol.mThName == null || symbol.mThName.length() == 0 ) return false;

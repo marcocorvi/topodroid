@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDLocale;
 
 // import android.util.Log;
@@ -101,7 +102,7 @@ class SymbolLineLibrary extends SymbolLibrary
     // String iso = "UTF-8";
     // if ( locale.equals( "name-es" ) ) iso = "ISO-8859-1";
 
-    File dir = new File( TDPath.getSymbolLineDir() );
+    File dir = TDFile.getFile( TDPath.getSymbolLineDir() );
     if ( dir.exists() ) {
       int systemNr = mSymbols.size();
       File[] files = dir.listFiles();
@@ -158,7 +159,7 @@ class SymbolLineLibrary extends SymbolLibrary
     if ( symbol == null ) {
       String filename = thname.startsWith("u:")? thname.substring(2) : thname; 
       // Log.v( "DistoX", "load missing line " + thname + " filename " + filename );
-      File file = new File( TDPath.getSymbolSaveLinePath( filename ) );
+      File file = TDFile.getFile( TDPath.getSymbolSaveLinePath( filename ) );
       if ( ! file.exists() ) return false;
       symbol = new SymbolLine( file.getPath(), file.getName(), locale, iso );
       addSymbol( symbol );

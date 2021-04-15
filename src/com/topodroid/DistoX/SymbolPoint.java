@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDColor;
@@ -180,9 +181,9 @@ class SymbolPoint extends Symbol
     int cnt   = 0;
 
     try {
-      // FileReader fr = new FileReader( pathname );
+      // FileReader fr = TDFile.getFileReader( pathname );
       // TDLog.Log( TDLog.LOG_IO, "read symbol point file <" + filename + ">" );
-      FileInputStream fr = new FileInputStream( pathname );
+      FileInputStream fr = TDFile.getFileInputStream( pathname );
       BufferedReader br = new BufferedReader( new InputStreamReader( fr, iso ) );
       String line;
       line = br.readLine();

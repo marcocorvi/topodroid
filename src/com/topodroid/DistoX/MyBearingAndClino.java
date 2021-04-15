@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDVersion;
 
 // import android.util.Log;
@@ -64,7 +65,7 @@ public class MyBearingAndClino implements IBearingAndClino
   {
     if ( data == null ) return false; // FIXME crash 2020-08-09
     try {
-      FileOutputStream fos = new FileOutputStream( mFile );
+      FileOutputStream fos = TDFile.getFileOutputStream( mFile );
       fos.write( data );
       fos.flush();
       fos.close();

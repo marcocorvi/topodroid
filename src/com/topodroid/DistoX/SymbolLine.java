@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDColor;
 import com.topodroid.prefs.TDSetting;
 
@@ -176,9 +177,9 @@ class SymbolLine extends Symbol
     float ymin=0, ymax=0;
 
     try {
-      // FileReader fr = new FileReader( filename );
+      // FileReader fr = TDFile.getFileReader( filename );
       // TDLog.Log( TDLog.LOG_IO, "read symbol line file <" + filename + ">" );
-      FileInputStream fr = new FileInputStream( filename );
+      FileInputStream fr = TDFile.getFileInputStream( filename );
       BufferedReader br = new BufferedReader( new InputStreamReader( fr, iso ) );
       String line;
       boolean insymbol = false;

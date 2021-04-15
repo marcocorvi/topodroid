@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.ui.MyDialog;
 
 // import java.io.File;
@@ -56,7 +57,7 @@ class DistoXAnnotations extends MyDialog // Activity
   {
     // TDLog.Log( TDLog.LOG_IO, "annotations read from file " + mFilename );
     try {
-      FileReader fr = new FileReader( mFilename );
+      FileReader fr = TDFile.getFileReader( mFilename );
       BufferedReader br = new BufferedReader( fr );
       String line = br.readLine();
       while ( line != null ) {
@@ -74,7 +75,7 @@ class DistoXAnnotations extends MyDialog // Activity
     // TDLog.Log( TDLog.LOG_IO, "annotations save to file " + mFilename );
     try {
       TDPath.checkPath( mFilename );
-      FileWriter fw = new FileWriter( mFilename, false );
+      FileWriter fw = TDFile.getFileWriter( mFilename, false );
       PrintWriter pw = new PrintWriter( fw );
       pw.format( "%s", mETtext.getText() );
       fw.flush();
@@ -90,7 +91,7 @@ class DistoXAnnotations extends MyDialog // Activity
     // TDLog.Log( TDLog.LOG_IO, "annotations append to file " + filename );
     try {
       TDPath.checkPath( filename );
-      FileWriter fw = new FileWriter( filename, true );
+      FileWriter fw = TDFile.getFileWriter( filename, true );
       PrintWriter pw = new PrintWriter( fw );
       pw.format( "%s", text );
       fw.flush();

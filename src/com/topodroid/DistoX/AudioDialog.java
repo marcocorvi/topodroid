@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.ui.MyStateBox;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.TDLayout;
@@ -77,7 +78,7 @@ class AudioDialog extends MyDialog
     // mAudio = mApp.mData.getAudio( TDInstance.sid, mBid );
     mFilepath = TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString(mBid) );
     // Log.v("DistoX", "audio dialog " + bid + " file: " + mFilepath );
-    hasFile = (new File( mFilepath )).exists();
+    hasFile = (TDFile.getFile( mFilepath )).exists();
     mBlk    = blk;
   }
 
@@ -138,7 +139,7 @@ class AudioDialog extends MyDialog
           mAction = ACTION_DELETE;
           mBtnConfirm.setText(  R.string.audio_delete );
           return;
-          // File file = new File( mFilepath );
+          // File file = TDFile.getFile( mFilepath );
           // file.delete();
           // mApp.mData.dropAudio( TDInstance.sid, mBid );
         }
@@ -202,7 +203,7 @@ class AudioDialog extends MyDialog
 
   private void deleteAudio()
   {
-    TDUtil.deleteFile( mFilepath );
+    TDFile.deleteFile( mFilepath );
     TopoDroidApp.mData.deleteAudio( TDInstance.sid, mBid );
     if ( mParent != null ) mParent.deletedAudio( mBid );
   }

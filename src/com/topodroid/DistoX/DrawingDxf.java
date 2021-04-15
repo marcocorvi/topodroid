@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDString;
+import com.topodroid.utils.TDFile;
 import com.topodroid.math.Point2D;
 import com.topodroid.math.BezierCurve;
 import com.topodroid.prefs.TDSetting;
@@ -799,7 +800,7 @@ class DrawingDxf
   {
     try {
       // TDLog.Log( TDLog.LOG_IO, "tdr to dxf. scrapfile " + scrapfile );
-      FileInputStream fis = new FileInputStream( TDPath.getTdrFile( scrapfile ) );
+      FileInputStream fis = TDFile.getFileInputStream( TDPath.getTdrFile( scrapfile ) );
       BufferedInputStream bfis = new BufferedInputStream( fis );
       DataInputStream dis = new DataInputStream( bfis );
       int version = DrawingIO.skipTdrHeader( dis );

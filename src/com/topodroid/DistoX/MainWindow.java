@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDRequest;
@@ -682,7 +683,7 @@ public class MainWindow extends Activity
         } );
         if ( files != null ) {
           for (File f : files) {
-            TDUtil.deleteFile( f );
+            TDFile.deleteFile( f );
           }
         }
       }
@@ -1067,7 +1068,7 @@ public class MainWindow extends Activity
       String lang = null;
       int version = -1;
       try {
-        FileReader fr = new FileReader( manifest );
+        FileReader fr = TDFile.getFileReader( manifest );
         BufferedReader br = new BufferedReader( fr );
         while ( lang == null || version < 0 ) {
           String line = br.readLine();

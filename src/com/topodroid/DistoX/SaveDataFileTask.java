@@ -11,6 +11,7 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
@@ -160,7 +161,7 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
       }
       File temp = null;
       try {
-        temp = File.createTempFile( "tmp", null, new File( dirname ) );
+        temp = File.createTempFile( "tmp", null, TDFile.getFile( dirname ) );
       } catch ( IOException e ) { return null; }
 
       switch ( mType ) {
@@ -250,7 +251,7 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
         filename = "";
       }
       synchronized( TDPath.mFilesLock ) {
-        File file = new File( pathname );
+        File file = TDFile.getFile( pathname );
         temp.renameTo( file );
       }
     }

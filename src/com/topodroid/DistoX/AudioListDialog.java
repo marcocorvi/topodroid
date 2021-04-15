@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.ui.MyDialog;
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 
 import android.util.Log;
 
@@ -136,7 +137,7 @@ class AudioListDialog extends MyDialog
     AudioInfo audio = mAudios.get( pos );
     if ( audio != null ) { 
       String filepath = TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString( audio.fileIdx ) );
-      File file = new File( filepath );
+      File file = TDFile.getFile( filepath );
       // Log.v("DistoX", "play audio file " + file.getPath() );
       if ( file.exists() ) {
         startPlay( filepath );

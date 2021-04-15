@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.utils.TDLocale;
 import com.topodroid.utils.TDString;
@@ -963,7 +964,7 @@ public class TopoDroidApp extends Application
     try {
       String filename = TDPath.getManifestFile();
       TDPath.checkPath( filename );
-      FileWriter fw = new FileWriter( filename );
+      FileWriter fw = TDFile.getFileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
       pw.format( "%s %d\n",  TDVersion.string(), TDVersion.code() );
       pw.format( "%s\n", TDVersion.DB_VERSION );
@@ -998,7 +999,7 @@ public class TopoDroidApp extends Application
     int version_code = 0;
     int ret = 0;
     try {
-      FileReader fr = new FileReader( filename );
+      FileReader fr = TDFile.getFileReader( filename );
       BufferedReader br = new BufferedReader( fr );
       // first line is version
       line = br.readLine().trim();
@@ -1122,57 +1123,57 @@ public class TopoDroidApp extends Application
         List< PlotInfo > plots = mData.selectAllPlots( sid );
         for ( PlotInfo p : plots ) {
           // Therion
-          TDUtil.renameFile( TDPath.getSurveyPlotTh2File( TDInstance.survey, p.name ), TDPath.getSurveyPlotTh2File( name, p.name ) );
+          TDFile.renameFile( TDPath.getSurveyPlotTh2File( TDInstance.survey, p.name ), TDPath.getSurveyPlotTh2File( name, p.name ) );
           // Tdr
-          TDUtil.renameFile( TDPath.getSurveyPlotTdrFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotTdrFile( name, p.name ) );
+          TDFile.renameFile( TDPath.getSurveyPlotTdrFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotTdrFile( name, p.name ) );
           // rename exported plots: dxf png svg csx
-          TDUtil.renameFile( TDPath.getSurveyPlotDxfFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotDxfFile( name, p.name ) );
-          TDUtil.renameFile( TDPath.getSurveyPlotShzFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotShzFile( name, p.name ) );
-          TDUtil.renameFile( TDPath.getSurveyPlotSvgFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotSvgFile( name, p.name ) );
-          // TDUtil.renameFile( TDPath.getSurveyPlotHtmFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotHtmFile( name, p.name ) );
-          TDUtil.renameFile( TDPath.getSurveyPlotTnlFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotTnlFile( name, p.name ) );
-          TDUtil.renameFile( TDPath.getSurveyPlotPngFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotPngFile( name, p.name ) );
-          TDUtil.renameFile( TDPath.getSurveyPlotCsxFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotCsxFile( name, p.name ) );
-          TDUtil.renameFile( TDPath.getSurveyPlotXviFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotXviFile( name, p.name ) );
+          TDFile.renameFile( TDPath.getSurveyPlotDxfFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotDxfFile( name, p.name ) );
+          TDFile.renameFile( TDPath.getSurveyPlotShzFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotShzFile( name, p.name ) );
+          TDFile.renameFile( TDPath.getSurveyPlotSvgFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotSvgFile( name, p.name ) );
+          // TDFile.renameFile( TDPath.getSurveyPlotHtmFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotHtmFile( name, p.name ) );
+          TDFile.renameFile( TDPath.getSurveyPlotTnlFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotTnlFile( name, p.name ) );
+          TDFile.renameFile( TDPath.getSurveyPlotPngFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotPngFile( name, p.name ) );
+          TDFile.renameFile( TDPath.getSurveyPlotCsxFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotCsxFile( name, p.name ) );
+          TDFile.renameFile( TDPath.getSurveyPlotXviFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotXviFile( name, p.name ) );
         }
       }
       /* FIXME_SKETCH_3D *
       { // rename sketch files: th3
         List< Sketch3dInfo > sketches = mData.selectAllSketches( sid );
         for ( Sketch3dInfo s : sketches ) {
-          TDUtil.renameFile( TDPath.getSurveySketchOutFile( TDInstance.survey, s.name ), TDPath.getSurveySketchOutFile( name, s.name ) );
+          TDFile.renameFile( TDPath.getSurveySketchOutFile( TDInstance.survey, s.name ), TDPath.getSurveySketchOutFile( name, s.name ) );
         }
       }
        * FIXME_SKETCH_3D */
       // rename exported files: csv csx dat dxf kml plt srv svx th top tro 
-        TDUtil.renameFile( TDPath.getSurveyThFile( TDInstance.survey ), TDPath.getSurveyThFile( name ) );
-        TDUtil.renameFile( TDPath.getSurveyCsvFile( TDInstance.survey ), TDPath.getSurveyCsvFile( name ) );
-        TDUtil.renameFile( TDPath.getSurveyCsxFile( TDInstance.survey ), TDPath.getSurveyCsxFile( name ) );
-        TDUtil.renameFile( TDPath.getSurveyCavFile( TDInstance.survey ), TDPath.getSurveyCavFile( name ) );
-        TDUtil.renameFile( TDPath.getSurveyCaveFile( TDInstance.survey ), TDPath.getSurveyCaveFile( name ) );
-        TDUtil.renameFile( TDPath.getSurveyDatFile( TDInstance.survey ), TDPath.getSurveyDatFile( name ) );
-        TDUtil.renameFile( TDPath.getSurveyDxfFile( TDInstance.survey ), TDPath.getSurveyDxfFile( name ) );
-        TDUtil.renameFile( TDPath.getSurveyGrtFile( TDInstance.survey ), TDPath.getSurveyGrtFile( name ) );
-        TDUtil.renameFile( TDPath.getSurveyGtxFile( TDInstance.survey ), TDPath.getSurveyGtxFile( name ) );
-        TDUtil.renameFile( TDPath.getSurveyKmlFile( TDInstance.survey ), TDPath.getSurveyKmlFile( name ) );
-        TDUtil.renameFile( TDPath.getSurveyJsonFile( TDInstance.survey ), TDPath.getSurveyJsonFile( name ) );
-        TDUtil.renameFile( TDPath.getSurveyPltFile( TDInstance.survey ), TDPath.getSurveyPltFile( name ) );
-        TDUtil.renameFile( TDPath.getSurveyShzFile( TDInstance.survey ), TDPath.getSurveyShzFile( name ) );
-        TDUtil.renameFile( TDPath.getSurveySrvFile( TDInstance.survey ), TDPath.getSurveySrvFile( name ) );
-        TDUtil.renameFile( TDPath.getSurveySurFile( TDInstance.survey ), TDPath.getSurveySurFile( name ) );
-        TDUtil.renameFile( TDPath.getSurveySvxFile( TDInstance.survey ), TDPath.getSurveySvxFile( name ) );
-        TDUtil.renameFile( TDPath.getSurveyTopFile( TDInstance.survey ), TDPath.getSurveyTopFile( name ) );
-        TDUtil.renameFile( TDPath.getSurveyTrbFile( TDInstance.survey ), TDPath.getSurveyTrbFile( name ) );
-        TDUtil.renameFile( TDPath.getSurveyTroFile( TDInstance.survey ), TDPath.getSurveyTroFile( name ) );
+        TDFile.renameFile( TDPath.getSurveyThFile( TDInstance.survey ), TDPath.getSurveyThFile( name ) );
+        TDFile.renameFile( TDPath.getSurveyCsvFile( TDInstance.survey ), TDPath.getSurveyCsvFile( name ) );
+        TDFile.renameFile( TDPath.getSurveyCsxFile( TDInstance.survey ), TDPath.getSurveyCsxFile( name ) );
+        TDFile.renameFile( TDPath.getSurveyCavFile( TDInstance.survey ), TDPath.getSurveyCavFile( name ) );
+        TDFile.renameFile( TDPath.getSurveyCaveFile( TDInstance.survey ), TDPath.getSurveyCaveFile( name ) );
+        TDFile.renameFile( TDPath.getSurveyDatFile( TDInstance.survey ), TDPath.getSurveyDatFile( name ) );
+        TDFile.renameFile( TDPath.getSurveyDxfFile( TDInstance.survey ), TDPath.getSurveyDxfFile( name ) );
+        TDFile.renameFile( TDPath.getSurveyGrtFile( TDInstance.survey ), TDPath.getSurveyGrtFile( name ) );
+        TDFile.renameFile( TDPath.getSurveyGtxFile( TDInstance.survey ), TDPath.getSurveyGtxFile( name ) );
+        TDFile.renameFile( TDPath.getSurveyKmlFile( TDInstance.survey ), TDPath.getSurveyKmlFile( name ) );
+        TDFile.renameFile( TDPath.getSurveyJsonFile( TDInstance.survey ), TDPath.getSurveyJsonFile( name ) );
+        TDFile.renameFile( TDPath.getSurveyPltFile( TDInstance.survey ), TDPath.getSurveyPltFile( name ) );
+        TDFile.renameFile( TDPath.getSurveyShzFile( TDInstance.survey ), TDPath.getSurveyShzFile( name ) );
+        TDFile.renameFile( TDPath.getSurveySrvFile( TDInstance.survey ), TDPath.getSurveySrvFile( name ) );
+        TDFile.renameFile( TDPath.getSurveySurFile( TDInstance.survey ), TDPath.getSurveySurFile( name ) );
+        TDFile.renameFile( TDPath.getSurveySvxFile( TDInstance.survey ), TDPath.getSurveySvxFile( name ) );
+        TDFile.renameFile( TDPath.getSurveyTopFile( TDInstance.survey ), TDPath.getSurveyTopFile( name ) );
+        TDFile.renameFile( TDPath.getSurveyTrbFile( TDInstance.survey ), TDPath.getSurveyTrbFile( name ) );
+        TDFile.renameFile( TDPath.getSurveyTroFile( TDInstance.survey ), TDPath.getSurveyTroFile( name ) );
 
       { // rename note file: note
-        TDUtil.renameFile( TDPath.getSurveyNoteFile( TDInstance.survey ), TDPath.getSurveyNoteFile( name ) );
+        TDFile.renameFile( TDPath.getSurveyNoteFile( TDInstance.survey ), TDPath.getSurveyNoteFile( name ) );
       }
       { // rename photo folder: photo
-        TDUtil.renameFile( TDPath.getSurveyPhotoDir( TDInstance.survey ), TDPath.getSurveyPhotoDir( name ) );
+        TDFile.renameFile( TDPath.getSurveyPhotoDir( TDInstance.survey ), TDPath.getSurveyPhotoDir( name ) );
       }
       { // rename audio folder: audio
-        TDUtil.renameFile( TDPath.getSurveyAudioDir( TDInstance.survey ), TDPath.getSurveyAudioDir( name ) );
+        TDFile.renameFile( TDPath.getSurveyAudioDir( TDInstance.survey ), TDPath.getSurveyAudioDir( name ) );
       }
       TDInstance.survey = name;
       return true;
@@ -1566,11 +1567,11 @@ public class TopoDroidApp extends Application
   {
     String[] lines = { "blocks", "debris", "clay", "contour", "presumed", "sand", "ice", "section", "wall:sand" };
     for ( String line : lines ) {
-      TDUtil.deleteFile( TDPath.getSymbolLinePath( line ) );
+      TDFile.deleteFile( TDPath.getSymbolLinePath( line ) );
     }
     String[] points = { "breakdown-choke", "low-end", "paleo-flow", "section" };
     for ( String point : points ) {
-      TDUtil.deleteFile( TDPath.getSymbolPointPath( point ) );
+      TDFile.deleteFile( TDPath.getSymbolPointPath( point ) );
     }
   }
 
@@ -1620,15 +1621,15 @@ public class TopoDroidApp extends Application
           }
           String pathname = TDPath.getSymbolFile( filepath );
           // Log.v("DistoX-PATH", "uncompress symbol " + pathname );
-          File file = new File( pathname );
+          File file = TDFile.getFile( pathname );
           if ( overwrite || ! file.exists() ) {
             // APP_SAVE SYMBOLS LOAD_MISSING
             // if ( file.exists() ) {
-            //   if ( ! file.renameTo( new File( TDPath.getSymbolSaveFile( filepath ) ) ) ) TDLog.Error("File rename error");
+            //   if ( ! file.renameTo( TDFile.getFile( TDPath.getSymbolSaveFile( filepath ) ) ) ) TDLog.Error("File rename error");
             // }
 
             TDPath.checkPath( pathname );
-            FileOutputStream fout = new FileOutputStream( pathname );
+            FileOutputStream fout = TDFile.getFileOutputStream( pathname );
             int c;
             while ( ( c = zin.read( buffer ) ) != -1 ) {
               fout.write(buffer, 0, c); // offset 0 in buffer
@@ -1661,10 +1662,10 @@ public class TopoDroidApp extends Application
         if ( ze.isDirectory() ) continue;
         if ( ! filepath.endsWith("bin") ) continue;
         String pathname =  TDPath.getBinFile( filepath );
-        File file = new File( pathname );
+        File file = TDFile.getFile( pathname );
         if ( overwrite || ! file.exists() ) {
           TDPath.checkPath( pathname );
-          FileOutputStream fout = new FileOutputStream( pathname );
+          FileOutputStream fout = TDFile.getFileOutputStream( pathname );
           int c;
           while ( ( c = zin.read( buffer ) ) != -1 ) {
             fout.write(buffer, 0, c); // offset 0 in buffer
@@ -2126,7 +2127,7 @@ public class TopoDroidApp extends Application
   // static void viewPhoto( Context ctx, String filename )
   // {
   //   // Log.v("DistoX", "photo <" + filename + ">" );
-  //   File file = new File( filename );
+  //   File file = TDFile.getFile( filename );
   //   if ( file.exists() ) {
   //     // FIXME create a dialog like QCam that displays the JPEG file
   //     //

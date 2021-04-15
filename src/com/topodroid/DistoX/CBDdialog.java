@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.ui.MyDialog;
 
 import java.io.File;
@@ -90,7 +91,7 @@ class CBDdialog extends MyDialog
     mTVcbd.setText( mBasename );
 
     ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>( mContext, R.layout.menu );
-    File base = new File( mBasename );
+    File base = TDFile.getFile( mBasename );
     File[] dirs = base.listFiles( new FileFilter() {
       public boolean accept( File pathname ) { 
         if ( pathname.getName().startsWith(".") ) return false;
@@ -104,7 +105,7 @@ class CBDdialog extends MyDialog
     } );
     String parent_name = base.getParent();
     if ( parent_name != null ) {
-      // File parent_path = new File( parent_name );
+      // File parent_path = TDFile.getFile( parent_name );
       // try {
       //   if ( parent_path.canWrite() ) mArrayAdapter.add( ".." );
       // } catch ( SecurityException e ) { }
@@ -140,7 +141,7 @@ class CBDdialog extends MyDialog
 	return;
       }
       subdir = mBasename + "/" + subdir;
-      File dir = new File( subdir );
+      File dir = TDFile.getFile( subdir );
       if ( dir.exists() ) {
         mETsubdir.setError( mContext.getResources().getString( R.string.error_dir_exists ) );
 	return;
@@ -160,7 +161,7 @@ class CBDdialog extends MyDialog
     }
     String item = ((TextView) view).getText().toString();
     if ( item.equals("..") ) {
-      File base = new File( mBasename );
+      File base = TDFile.getFile( mBasename );
       String parent_name = base.getParent();
       if ( parent_name != null ) mBasename = parent_name;
     } else {

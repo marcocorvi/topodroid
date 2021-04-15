@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 
 import android.util.Log;
 
@@ -49,7 +50,7 @@ class MediaManager
     mComment = comment;
     mCamera  = camera;
     mPhotoId = mData.nextPhotoId( TDInstance.sid );
-    mImageFile = new File( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhotoId) ) ); // photo file is "survey/id.jpg"
+    mImageFile = TDFile.getFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhotoId) ) ); // photo file is "survey/id.jpg"
     return mPhotoId;
   }
 
@@ -61,7 +62,7 @@ class MediaManager
     mShotId  = sid;
     mComment = comment;
     mAudioId = mData.nextAudioNegId( TDInstance.sid ); // negative id's are for sketch audios
-    mAudioFile = new File( TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString(mAudioId) ) ); // audio file is "survey/id.wav"
+    mAudioFile = TDFile.getFile( TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString(mAudioId) ) ); // audio file is "survey/id.wav"
     return mAudioId;
   }
 
@@ -87,7 +88,7 @@ class MediaManager
     boolean ret = false;
     if ( mImageFile != null ) {
       try {
-        FileOutputStream fos = new FileOutputStream( mImageFile );
+        FileOutputStream fos = TDFile.getFileOutputStream( mImageFile );
         bitmap.compress( Bitmap.CompressFormat.JPEG, compression, fos );
         fos.flush();
         fos.close();

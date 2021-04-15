@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 
 // import java.lang.ref.WeakReference;
 
@@ -63,7 +64,7 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
     // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
     File temp = null;
     try {
-      temp = File.createTempFile( "tmp", null, new File( mDirname ) );
+      temp = File.createTempFile( "tmp", null, TDFile.getFile( mDirname ) );
     } catch ( IOException e ) { 
       // Log.v("DistoX-SAVE", "cannot create temp file with " + mFullname );
       TDLog.Error("cannot create temp file with " + mFullname );
@@ -75,7 +76,7 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
     if ( res == 1 ) {
       synchronized( TDPath.mFilesLock ) {
         // TDPath.checkDirs( TDPath.PATH_CSX ); // private
-        File file = new File( mFilename );
+        File file = TDFile.getFile( mFilename );
         temp.renameTo( file );
       }
       return mFilename;

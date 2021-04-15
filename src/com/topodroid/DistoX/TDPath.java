@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 
 import android.util.Log;
 
@@ -99,9 +100,9 @@ public class TDPath
     BELOW_ANDROID_4 ? null : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath();
   static final String EXTERNAL_STORAGE_PATH =  // app base path
     BELOW_ANDROID_4 ? EXTERNAL_STORAGE_PATH_10
-      : ( new File( EXTERNAL_STORAGE_PATH_11, "TopoDroid" ).exists() )? EXTERNAL_STORAGE_PATH_11
+      : ( TDFile.getFile( EXTERNAL_STORAGE_PATH_11, "TopoDroid" ).exists() )? EXTERNAL_STORAGE_PATH_11
         : BELOW_ANDROID_10 ? EXTERNAL_STORAGE_PATH_10
-          : ( BELOW_ANDROID_11  && new File( EXTERNAL_STORAGE_PATH_10, "TopoDroid").exists() )? EXTERNAL_STORAGE_PATH_10 
+          : ( BELOW_ANDROID_11  && TDFile.getFile( EXTERNAL_STORAGE_PATH_10, "TopoDroid").exists() )? EXTERNAL_STORAGE_PATH_10 
             : EXTERNAL_STORAGE_PATH_11;
 
   private static String PATH_BASEDIR  = EXTERNAL_STORAGE_PATH;
@@ -195,7 +196,7 @@ public class TDPath
   {
     // Log.v("DistoX-PATH11", "check base path: BASE " + PATH_BASEDIR + " basedir " + basedir + " path " + path );
     setBaseDir( basedir );
-    File dir = new File( PATH_BASEDIR, path ); // DistoX-SAF
+    File dir = TDFile.getFile( PATH_BASEDIR, path ); // DistoX-SAF
     if ( ! dir.exists() ) {
       if ( ! dir.mkdirs() ) TDLog.Error("mkdir error");
     }
@@ -209,26 +210,26 @@ public class TDPath
 
   static boolean hasPath10() 
   {
-    return (new File( EXTERNAL_STORAGE_PATH_10, "TopoDroid" )).exists();
+    return (TDFile.getFile( EXTERNAL_STORAGE_PATH_10, "TopoDroid" )).exists();
   }
 
   static boolean hasPath11() 
   {
     if ( BELOW_ANDROID_4 ) return false;
-    return ( new File( EXTERNAL_STORAGE_PATH_11, "TopoDroid" )).exists();
+    return ( TDFile.getFile( EXTERNAL_STORAGE_PATH_11, "TopoDroid" )).exists();
   }
 
   static boolean moveToPath11()
   { 
     if ( BELOW_ANDROID_4 ) return false;
     // Log.v("DistoX-PATH11", "move to path11");
-    File path11 = new File( EXTERNAL_STORAGE_PATH_11, "TopoDroid" );
+    File path11 = TDFile.getFile( EXTERNAL_STORAGE_PATH_11, "TopoDroid" );
     if ( path11.exists() ) return false;
 
-    File path = new File( PATH_BASE );
+    File path = TDFile.getFile( PATH_BASE );
     if ( ! path.exists() ) return false;
 
-    File dir11 = new File( EXTERNAL_STORAGE_PATH_11 );
+    File dir11 = TDFile.getFile( EXTERNAL_STORAGE_PATH_11 );
     if ( ! dir11.exists() ) dir11.mkdirs();
     path.renameTo( path11 );
 
@@ -281,7 +282,7 @@ public class TDPath
 
     File dir = null; // DistoX-SAF
     if ( base != null && ! hasPath11() ) {
-      dir = new File( base );
+      dir = TDFile.getFile( base );
       try {
         if ( ! dir.exists() ) dir.mkdirs();
         if ( dir.exists() && dir.canWrite() ) {
@@ -297,7 +298,7 @@ public class TDPath
     // TDLog.Log( TDLog.LOG_PATH, "set paths. path basedir " + PATH_BASEDIR );
     if ( path != null ) {
       String cwd = PATH_BASEDIR + "/" + path;
-      dir = new File( PATH_BASEDIR, path ); // DistoX-SAF
+      dir = TDFile.getFile( PATH_BASEDIR, path ); // DistoX-SAF
       try {
         if ( ! dir.exists() ) dir.mkdirs();
         //   if ( ! dir.mkdirs() ) TDLog.Error("mkdir error");
@@ -309,7 +310,7 @@ public class TDPath
     // DistoX-SAF comment this block
     TDLog.Log( TDLog.LOG_PATH, "set paths. path base " + PATH_BASE );
     // Log.v( "DistoX-SAF", "set paths. path base " + PATH_BASE );
-    dir = new File( PATH_BASE );
+    dir = TDFile.getFile( PATH_BASE );
     if ( ! dir.exists() ) {
       // Log.v("DistoX-SAF", "path base " + PATH_BASE + " does not exist" );
       if ( ! dir.mkdirs() ) {
@@ -402,7 +403,7 @@ public class TDPath
   private static void clearSymbolsDir( String dirname )
   {
     // Log.v("DistoX", "clear " + dirname );
-    File dir = new File( dirname );
+    File dir = TDFile.getFile( dirname );
     File [] files = dir.listFiles();
     if ( files == null ) return;
     for ( int i=0; i<files.length; ++i ) {
@@ -427,7 +428,7 @@ public class TDPath
   public static void checkPath( String filename )
   {
     if ( filename == null ) return;
-    checkPath( new File( filename ) ); // DistoX-SAF
+    checkPath( TDFile.getFile( filename ) ); // DistoX-SAF
   }
 
   static private void checkPath( File fp ) // DistoX-SAF
@@ -445,14 +446,14 @@ public class TDPath
 
   public static File getLogFile() // DistoX-SAF
   {
-    File logfile = new File( PATH_DEFAULT + "log.txt" );
+    File logfile = TDFile.getFile( PATH_DEFAULT + "log.txt" );
     checkPath( logfile );
     return logfile;
   }
 
   public static File getSettingsFile() // DistoX-SAF
   {
-    File file = new File( PATH_DEFAULT + "settings.txt" );
+    File file = TDFile.getFile( PATH_DEFAULT + "settings.txt" );
     checkPath( file );
     return file;
   }
@@ -463,7 +464,7 @@ public class TDPath
 
   public static File[] scanTdconfigDir() // DistoX-SAF
   {
-    File dir = new File( PATH_TDCONFIG );
+    File dir = TDFile.getFile( PATH_TDCONFIG );
     if ( ! dir.exists() ) {
       if ( ! dir.mkdirs() ) {
         TDLog.Error("mkdir error");
@@ -490,19 +491,19 @@ public class TDPath
   // LOAD_MISSING
   // static String getSymbolSaveFile( String name ) { return APP_SYMBOL_SAVE_PATH + name; }
 
-  static boolean hasTdrDir() { return (new File( PATH_TDR )).exists(); } // DistoX-SAF
-  // static boolean hasTdr3Dir() { return (new File( PATH_TDR3 )).exists(); }
-  static boolean hasTh2Dir() { return (new File( PATH_TH2 )).exists(); }
-  // static boolean hasTh3Dir() { return (new File( PATH_TH3 )).exists(); }
-  // static boolean hasPngDir() { return (new File( PATH_PNG )).exists(); }
-  //static boolean hasDxfDir() { return (new File( PATH_DXF )).exists(); }
-  // static boolean hasKmlDir() { return (new File( PATH_KML )).exists(); }
-  // static boolean hasJsonDir() { return (new File( PATH_JSON )).exists(); }
-  // static boolean hasPltDir() { return (new File( PATH_PLT )).exists(); }
-  // static boolean hasSvgDir() { return (new File( PATH_SVG )).exists(); }
-  // static boolean hasXviDir() { return (new File( PATH_XVI )).exists(); }
+  static boolean hasTdrDir() { return (TDFile.getFile( PATH_TDR )).exists(); } // DistoX-SAF
+  // static boolean hasTdr3Dir() { return (TDFile.getFile( PATH_TDR3 )).exists(); }
+  static boolean hasTh2Dir() { return (TDFile.getFile( PATH_TH2 )).exists(); }
+  // static boolean hasTh3Dir() { return (TDFile.getFile( PATH_TH3 )).exists(); }
+  // static boolean hasPngDir() { return (TDFile.getFile( PATH_PNG )).exists(); }
+  //static boolean hasDxfDir() { return (TDFile.getFile( PATH_DXF )).exists(); }
+  // static boolean hasKmlDir() { return (TDFile.getFile( PATH_KML )).exists(); }
+  // static boolean hasJsonDir() { return (TDFile.getFile( PATH_JSON )).exists(); }
+  // static boolean hasPltDir() { return (TDFile.getFile( PATH_PLT )).exists(); }
+  // static boolean hasSvgDir() { return (TDFile.getFile( PATH_SVG )).exists(); }
+  // static boolean hasXviDir() { return (TDFile.getFile( PATH_XVI )).exists(); }
 
-  static File getTdrDir() { return new File( PATH_TDR ); } // DistoX-SAF
+  static File getTdrDir() { return TDFile.getFile( PATH_TDR ); } // DistoX-SAF
 
   static String getDirFile( String name )    { return PATH_BASE + name; }
   static String getImportFile( String name ) { return PATH_IMPORT + name; }
@@ -547,8 +548,8 @@ public class TDPath
   static String getCCsvFile( String name )   { return PATH_CCSV + name; }
   // public static String getManFile( String name )    { return PATH_MAN + name; }
   // public static String getManPath( )    { return PATH_MAN; }
-  public static File getManFile( String name )    { return new File( getManPath(), name ); }
-  public static File getManPath( )    { return new File( TDInstance.context.getFilesDir(), "man" ); }
+  public static File getManFile( String name )    { return TDFile.getFile( getManPath(), name ); }
+  public static File getManPath( )    { return TDFile.getFile( TDInstance.context.getFilesDir(), "man" ); }
   public static String getManFileName( String name )    { return "man/" + name; }
 
   static String getNoteFile( String name )   { return APP_NOTE_PATH + name; }
@@ -588,7 +589,7 @@ public class TDPath
     return directory + name;
   }
 
-  static File getTmpDir() { return new File( APP_TMP_PATH ); } // DistoX-SAF
+  static File getTmpDir() { return TDFile.getFile( APP_TMP_PATH ); } // DistoX-SAF
 
   static String getSurveyNoteFile( String title ) { return getFile( APP_NOTE_PATH, title, TXT ); }
   static String getTmpFileWithExt( String name ) { return getFile( APP_TMP_PATH, name, TMP ); }
@@ -633,7 +634,7 @@ public class TDPath
 
   private static File[] getFiles( String dirname, final String[] ext ) // DistoX-SAF
   {
-    File dir = new File( dirname );
+    File dir = TDFile.getFile( dirname );
     if ( dir.exists() ) {
       return dir.listFiles( new FileFilter() {
           public boolean accept( File pathname ) { 
@@ -655,7 +656,7 @@ public class TDPath
 
   static File[] getTopoDroidFiles( String basename ) // DistoX-SAF
   {
-    File dir = new File( basename );
+    File dir = TDFile.getFile( basename );
     return dir.listFiles( new FileFilter() {
       public boolean accept( File pathname ) { 
         if ( ! pathname.isDirectory() ) return false;
@@ -666,7 +667,7 @@ public class TDPath
 
   // private static File[] getFiles( String dirname, final String extension )
   // {
-  //   File dir = new File( dirname );
+  //   File dir = TDFile.getFile( dirname );
   //   if ( dir.exists() ) {
   //     return dir.listFiles( new FileFilter() {
   //         public boolean accept( File pathname ) { return pathname.getName().endsWith( extension ); }
@@ -690,19 +691,19 @@ public class TDPath
 
   static String getSurveyJpgFile( String survey, String id )
   {
-    TDUtil.makeDir( APP_FOTO_PATH + survey + "/" );
+    TDFile.makeDir( APP_FOTO_PATH + survey + "/" );
     return APP_FOTO_PATH + survey + "/" + id + ".jpg";
   }
 
   static String getSurveyAudioFile( String survey, String id )
   {
-    TDUtil.makeDir( APP_AUDIO_PATH + survey + "/" );
+    TDFile.makeDir( APP_AUDIO_PATH + survey + "/" );
     return APP_AUDIO_PATH + survey + "/" + id + ".wav";
   }
 
   static private void checkDirs( String path )
   {
-    TDUtil.makeDir( path );
+    TDFile.makeDir( path );
   }
 
   static void symbolsCheckDirs()
@@ -728,31 +729,29 @@ public class TDPath
   {
     if ( rotate <= 0 ) return;
     for ( int i=rotate-1; i>0; --i ) {
-      TDUtil.moveFile( filename + Integer.toString(i-1), filename + Integer.toString(i) );
+      TDFile.moveFile( filename + Integer.toString(i-1), filename + Integer.toString(i) );
     }
-    TDUtil.moveFile( filename, filename + "0"  );
+    TDFile.moveFile( filename, filename + "0"  );
   }
 
   static void renamePlotFiles( String old_name, String new_name )
   {
     String old_tdr = TDPath.getTdrFile( old_name + ".tdr" );
     String new_tdr = TDPath.getTdrFile( new_name + ".tdr" );
-    TDUtil.renameFile( old_tdr, new_tdr );
+    TDFile.renameFile( old_tdr, new_tdr );
     old_tdr = old_tdr + TDPath.BCK_SUFFIX;
     new_tdr = new_tdr + TDPath.BCK_SUFFIX;
     for ( int i=0; ; ++i ) {
-      File file1 = new File( old_tdr + Integer.toString(i) ); // DistoX-SAF
-      File file2 = new File( new_tdr + Integer.toString(i) );
+      File file1 = TDFile.getFile( old_tdr + Integer.toString(i) ); // DistoX-SAF
+      File file2 = TDFile.getFile( new_tdr + Integer.toString(i) );
       if ( ( ! file1.exists() ) || file2.exists() ) break;
       if ( ! file1.renameTo( file2 ) ) TDLog.Error("file rename failed");
     }
   }
 
-  static void deleteFile( String filename ) { TDUtil.deleteFile( filename ); }
-
   static void deleteSurveyFiles( String survey )
   {
-    File imagedir = new File( getSurveyPhotoDir( survey ) ); // DistoX-SAF
+    File imagedir = TDFile.getFile( getSurveyPhotoDir( survey ) ); // DistoX-SAF
     if ( imagedir.exists() ) {
       File[] files = imagedir.listFiles();
       if ( files != null ) {
@@ -761,55 +760,55 @@ public class TDPath
       if ( ! imagedir.delete() ) TDLog.Error("Dir delete error");
     }
 
-    TDUtil.deleteFile( getSurveyNoteFile( survey ) );
+    TDFile.deleteFile( getSurveyNoteFile( survey ) );
     
-    // TDUtil.deleteFile( getSurveyTlxFile( survey ) );
+    // TDFile.deleteFile( getSurveyTlxFile( survey ) );
 
-    TDUtil.deleteFile( getCavFile( survey + CAV ) );
-    TDUtil.deleteFile( getCaveFile( survey + CAVE ) );
-    TDUtil.deleteFile( getCsvFile( survey + CSV ) );
-    TDUtil.deleteFile( getCsxFile( survey + CSX ) );
-    TDUtil.deleteFile( getDatFile( survey + DAT ) );
-    TDUtil.deleteFile( getDxfFile( survey + DXF ) );
-    TDUtil.deleteFile( getGrtFile( survey + GRT ) );
-    TDUtil.deleteFile( getGtxFile( survey + GTX ) );
-    TDUtil.deleteFile( getKmlFile( survey + KML ) );
-    TDUtil.deleteFile( getJsonFile( survey + JSON ) );
-    TDUtil.deleteFile( getPltFile( survey + PLT ) );
-    TDUtil.deleteFile( getShzFile( survey + SHZ ) );
+    TDFile.deleteFile( getCavFile( survey + CAV ) );
+    TDFile.deleteFile( getCaveFile( survey + CAVE ) );
+    TDFile.deleteFile( getCsvFile( survey + CSV ) );
+    TDFile.deleteFile( getCsxFile( survey + CSX ) );
+    TDFile.deleteFile( getDatFile( survey + DAT ) );
+    TDFile.deleteFile( getDxfFile( survey + DXF ) );
+    TDFile.deleteFile( getGrtFile( survey + GRT ) );
+    TDFile.deleteFile( getGtxFile( survey + GTX ) );
+    TDFile.deleteFile( getKmlFile( survey + KML ) );
+    TDFile.deleteFile( getJsonFile( survey + JSON ) );
+    TDFile.deleteFile( getPltFile( survey + PLT ) );
+    TDFile.deleteFile( getShzFile( survey + SHZ ) );
     // deleteShpFiles( survey ); // SHP stations/shots/splays shp/shx/dbf
-    TDUtil.deleteFile( getSrvFile( survey + SRV ) );
-    TDUtil.deleteFile( getSurFile( survey + SUR ) );
-    TDUtil.deleteFile( getSvgFile( survey + SVG ) );
-    TDUtil.deleteFile( getSvxFile( survey + SVX ) );
-    TDUtil.deleteFile( getThFile(  survey + TH  ) );
-    TDUtil.deleteFile( getTopFile( survey + TOP ) );
-    // TDUtil.deleteFile( getTnlFile( survey + TNL ) );
-    TDUtil.deleteFile( getTrbFile( survey + TRB ) );
-    TDUtil.deleteFile( getTroFile( survey + TRO ) );
+    TDFile.deleteFile( getSrvFile( survey + SRV ) );
+    TDFile.deleteFile( getSurFile( survey + SUR ) );
+    TDFile.deleteFile( getSvgFile( survey + SVG ) );
+    TDFile.deleteFile( getSvxFile( survey + SVX ) );
+    TDFile.deleteFile( getThFile(  survey + TH  ) );
+    TDFile.deleteFile( getTopFile( survey + TOP ) );
+    // TDFile.deleteFile( getTnlFile( survey + TNL ) );
+    TDFile.deleteFile( getTrbFile( survey + TRB ) );
+    TDFile.deleteFile( getTroFile( survey + TRO ) );
   }
 
   static void deleteSurveyOverviewFiles( String survey )
   {
-    TDUtil.deleteFile( getDxfFile( survey + "-p" + DXF ) );
-    TDUtil.deleteFile( getShzFile( survey + "-p" + SHZ ) );
-    TDUtil.deleteFile( getSvgFile( survey + "-p" + SVX ) );
-    TDUtil.deleteFile( getTh2File( survey + "-p" + TH2  ) );
-    TDUtil.deleteFile( getXviFile( survey + "-p" + XVI ) );
+    TDFile.deleteFile( getDxfFile( survey + "-p" + DXF ) );
+    TDFile.deleteFile( getShzFile( survey + "-p" + SHZ ) );
+    TDFile.deleteFile( getSvgFile( survey + "-p" + SVX ) );
+    TDFile.deleteFile( getTh2File( survey + "-p" + TH2  ) );
+    TDFile.deleteFile( getXviFile( survey + "-p" + XVI ) );
 
-    TDUtil.deleteFile( getDxfFile( survey + "-s" + DXF ) );
-    TDUtil.deleteFile( getShzFile( survey + "-s" + SHZ ) );
-    TDUtil.deleteFile( getSvgFile( survey + "-s" + SVX ) );
-    TDUtil.deleteFile( getTh2File( survey + "-s" + TH2  ) );
-    TDUtil.deleteFile( getXviFile( survey + "-s" + XVI ) );
+    TDFile.deleteFile( getDxfFile( survey + "-s" + DXF ) );
+    TDFile.deleteFile( getShzFile( survey + "-s" + SHZ ) );
+    TDFile.deleteFile( getSvgFile( survey + "-s" + SVX ) );
+    TDFile.deleteFile( getTh2File( survey + "-s" + TH2  ) );
+    TDFile.deleteFile( getXviFile( survey + "-s" + XVI ) );
   }
 
   // static private void deleteShpFiles( String survey )
   // {
-  //   File dir = new File( getShpPath( survey ) );
+  //   File dir = TDFile.getFile( getShpPath( survey ) );
   //   if ( dir.exists() ) {
   //     for ( String filename : dir.list() ) {
-  //       (new File( dir, filename )).delete();
+  //       (TDFile.getFile( dir, filename )).delete();
   //     }
   //     dir.delete();
   //   }
@@ -827,20 +826,20 @@ public class TDPath
 
   static void deleteBackups( String filename ) // filename has suffix BCK_SUFFIX
   {
-    TDUtil.deleteFile( filename );
+    TDFile.deleteFile( filename );
     for ( int i=NR_BACKUP-1; i>=0; --i ) {
-      TDUtil.deleteFile( filename + Integer.toString(i) );
+      TDFile.deleteFile( filename + Integer.toString(i) );
     }
   }
 
   static void deletePlotFileWithBackups( String filename )
   {
-    TDUtil.deleteFile( filename );
+    TDFile.deleteFile( filename );
     String filepath = filename + TDPath.BCK_SUFFIX;
-    TDUtil.deleteFile( filepath );
+    TDFile.deleteFile( filepath );
     for ( int i = 0; i < NR_BACKUP; ++i ) {
       filepath = filename + TDPath.BCK_SUFFIX + Integer.toString(i);
-      TDUtil.deleteFile( filepath );
+      TDFile.deleteFile( filepath );
     }
   }
 
@@ -848,18 +847,18 @@ public class TDPath
   {
     for ( PlotInfo p : plots ) {
       // String filename = getSurveyPlotTh2File( survey, p.name );
-      // TDUtil.deleteFile( filename );
+      // TDFile.deleteFile( filename );
       // deleteBackups( filename + BCK_SUFFIX );
       String filename = getSurveyPlotTdrFile( survey, p.name );
-      TDUtil.deleteFile( filename );
+      TDFile.deleteFile( filename );
       deleteBackups( filename + BCK_SUFFIX );
-      TDUtil.deleteFile( getSurveyPlotCsxFile( survey, p.name ) );
-      TDUtil.deleteFile( getSurveyPlotDxfFile( survey, p.name ) );
-      TDUtil.deleteFile( getSurveyPlotPngFile( survey, p.name ) );
-      TDUtil.deleteFile( getSurveyPlotSvgFile( survey, p.name ) );
-      TDUtil.deleteFile( getSurveyPlotShzFile( survey, p.name ) );
-      TDUtil.deleteFile( getSurveyPlotTh2File( survey, p.name ) );
-      TDUtil.deleteFile( getSurveyPlotXviFile( survey, p.name ) );
+      TDFile.deleteFile( getSurveyPlotCsxFile( survey, p.name ) );
+      TDFile.deleteFile( getSurveyPlotDxfFile( survey, p.name ) );
+      TDFile.deleteFile( getSurveyPlotPngFile( survey, p.name ) );
+      TDFile.deleteFile( getSurveyPlotSvgFile( survey, p.name ) );
+      TDFile.deleteFile( getSurveyPlotShzFile( survey, p.name ) );
+      TDFile.deleteFile( getSurveyPlotTh2File( survey, p.name ) );
+      TDFile.deleteFile( getSurveyPlotXviFile( survey, p.name ) );
     }
   }
 
@@ -868,12 +867,12 @@ public class TDPath
   {
     if ( hasTh3Dir() ) {
       for ( Sketch3dInfo s : sketches ) {
-        TDUtil.deleteFile( getTh3FileWithExt( survey + "-" + s.name + TH3 ) );
+        TDFile.deleteFile( getTh3FileWithExt( survey + "-" + s.name + TH3 ) );
       }
     }
     if ( hasTdr3Dir() ) {
       for ( Sketch3dInfo s : sketches ) {
-        TDUtil.deleteFile( getTdr3FileWithExt( survey + "-" + s.name + TDR3 ) );
+        TDFile.deleteFile( getTdr3FileWithExt( survey + "-" + s.name + TDR3 ) );
       }
     }
   }

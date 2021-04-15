@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDString;
 import com.topodroid.num.TDNum;
 import com.topodroid.num.NumStation;
@@ -445,7 +446,7 @@ class DrawingXvi
     // TDLog.Log( TDLog.LOG_IO, "trd to xvi. scrap file " + scrapfile );
     // Log.v( "DistoXX", "trd to xvi. scrap file " + scrapfile + " shift " + dx + " " + dy + " offset " + xoff + " " + yoff );
     try {
-      FileInputStream fis = new FileInputStream( TDPath.getTdrFile( scrapfile ) );
+      FileInputStream fis = TDFile.getFileInputStream( TDPath.getTdrFile( scrapfile ) );
       BufferedInputStream bfis = new BufferedInputStream( fis );
       DataInputStream dis = new DataInputStream( bfis );
       int version = DrawingIO.skipTdrHeader( dis );

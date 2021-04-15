@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.num.NumStation;
@@ -90,7 +91,7 @@ public class DrawingIO
   //   {
   //     try {
   //       TDLog.Log( TDLog.LOG_IO, "load plot from Therion file " + filename );
-  //       FileReader fr = new FileReader( filename );
+  //       FileReader fr = TDFile.getFileReader( filename );
   //       BufferedReader br = new BufferedReader( fr );
   //       String line = null;
   //       while ( (line = readLine(br)) != null ) {
@@ -504,7 +505,7 @@ public class DrawingIO
   {
     TDLog.Log( TDLog.LOG_IO, "export Therion " + fullname + " file " + file.getPath() );
     try {
-      FileWriter fw = new FileWriter( file );
+      FileWriter fw = TDFile.getFileWriter( file );
       BufferedWriter bw = new BufferedWriter( fw );
       manager.exportTherion( type, bw, fullname, projname, proj_dir, multisketch );
       bw.flush();
@@ -518,7 +519,7 @@ public class DrawingIO
   public static void exportDataStream( DrawingCommandManager manager, int type, File file, String fullname, int proj_dir )
   {
     try {
-      FileOutputStream fos = new FileOutputStream( file );
+      FileOutputStream fos = TDFile.getFileOutputStream( file );
 
       // ByteArrayOutputStream bos = new ByteArrayOutputStream( 4096 );
       BufferedOutputStream bfos = new BufferedOutputStream( fos );
@@ -543,7 +544,7 @@ public class DrawingIO
   public static void exportDataStream( List< DrawingPath > paths, int type, File file, String fullname, int proj_dir, int scrap )
   {
     try {
-      FileOutputStream fos = new FileOutputStream( file );
+      FileOutputStream fos = TDFile.getFileOutputStream( file );
 
       // ByteArrayOutputStream bos = new ByteArrayOutputStream( 4096 );
       BufferedOutputStream bfos = new BufferedOutputStream( fos );
@@ -660,7 +661,7 @@ public class DrawingIO
     // int project_dir = 0;
     // float north_x1, north_y1, north_x2, north_y2;
 
-    File file = new File( filename );
+    File file = TDFile.getFile( filename );
     if ( ! file.exists() ) return false;
 
     FileInputStream fis; // = null;
@@ -687,7 +688,7 @@ public class DrawingIO
         // ByteArrayOutputStream bos = mTdrCache.get( file.getName() );
         // if ( bos == null ) {
           TDLog.Log( TDLog.LOG_IO, "load tdr file " + filename );
-          fis = new FileInputStream( filename );
+          fis = TDFile.getFileInputStream( filename );
           BufferedInputStream bfis = new BufferedInputStream( fis );
           dis = new DataInputStream( bfis );
 
@@ -830,7 +831,7 @@ public class DrawingIO
     boolean in_scrap = false;
     // int scrap_index = 0;
 
-    File file = new File( filename );
+    File file = TDFile.getFile( filename );
     FileInputStream fis; // = null;
     DataInputStream dis; // = null;
 
@@ -842,7 +843,7 @@ public class DrawingIO
         // ByteArrayOutputStream bos = mTdrCache.get( file.getName() );
         // if ( bos == null ) {
           TDLog.Log( TDLog.LOG_IO, "load outline tdr file " + filename );
-          fis = new FileInputStream( filename );
+          fis = TDFile.getFileInputStream( filename );
           BufferedInputStream bfis = new BufferedInputStream( fis );
           dis = new DataInputStream( bfis );
         // } else {
@@ -1363,7 +1364,7 @@ public class DrawingIO
 
     if ( TDSetting.mExportPlotFormat != TDConst.DISTOX_EXPORT_TH2 ) {
       for ( XSectionScrap xsection : xsections ) { // write xsection scraps
-        File file = new File( TDPath.getTdrFileWithExt( xsection.name ) );
+        File file = TDFile.getFile( TDPath.getTdrFileWithExt( xsection.name ) );
         dataStreamToTherion( file, out, null, null, false, true, xsection.x, xsection.y );
       }
     }
@@ -1533,7 +1534,7 @@ public class DrawingIO
 
     // Log.v("DistoXX", "multisketch sections " + xsections.size() );
     for ( XSectionScrap xsection : xsections ) { // write xsection scraps
-      File file = new File( TDPath.getTdrFileWithExt( xsection.name ) );
+      File file = TDFile.getFile( TDPath.getTdrFileWithExt( xsection.name ) );
       dataStreamToTherion( file, out, null, null, false, true, xsection.x, xsection.y );
     }
   }
@@ -1549,7 +1550,7 @@ public class DrawingIO
   // { 
   //   int scrap_index = 0;
   //   try {
-  //     FileInputStream fis = new FileInputStream( file );
+  //     FileInputStream fis = TDFile.getFileInputStream( file );
   //     DataInputStream dis = new DataInputStream( fis );
   //     boolean todo = true;
   //     int version = 0;
@@ -1652,7 +1653,7 @@ public class DrawingIO
     {
       try {
         TDLog.Log( TDLog.LOG_IO, "tdr to Therion. file " + file.getPath() );
-        FileInputStream fis = new FileInputStream( file );
+        FileInputStream fis = TDFile.getFileInputStream( file );
         DataInputStream dis = new DataInputStream( fis );
         boolean todo = true;
         while ( todo ) {
@@ -1803,7 +1804,7 @@ public class DrawingIO
 
   static private void doExportAnyCsxXSection( PrintWriter pw, String filename, String survey, String cave, String branch, /* String session, */ String bind /*, int format */ )
   {
-    File file = new File( filename );
+    File file = TDFile.getFile( filename );
     if ( ! file.exists() ) return;
     int version = 0;
     // boolean in_scrap = false;
@@ -1819,7 +1820,7 @@ public class DrawingIO
     {
       try {
         TDLog.Log( TDLog.LOG_IO, "export cSurvey. X-section file " + filename );
-        FileInputStream fis = new FileInputStream( file );
+        FileInputStream fis = TDFile.getFileInputStream( file );
         DataInputStream dis = new DataInputStream( fis );
         boolean todo = true;
         while ( todo ) {

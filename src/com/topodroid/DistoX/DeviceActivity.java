@@ -14,6 +14,7 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDTag;
+import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDRequest;
 import com.topodroid.math.TDMatrix;
@@ -1043,7 +1044,7 @@ public class DeviceActivity extends Activity
   public void importCalibFile( String name )
   {
     String filename = TDPath.getCCsvFile( name );
-    File file = new File( filename );
+    File file = TDFile.getFile( filename );
     if ( ! file.exists() ) {
       TDToast.makeBad(R.string.file_not_found );
     } else {

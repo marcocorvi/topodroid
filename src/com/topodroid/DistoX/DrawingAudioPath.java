@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.prefs.TDSetting;
 
 import java.io.File;
@@ -105,7 +106,7 @@ class DrawingAudioPath extends DrawingPointPath
 //   void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
 //   { 
 //     // Log.v("DistoX", "audio point " + mId + " survey " + survey );
-//     File audiofile = new File( TDPath.getSurveyAudioFile( survey, Long.toString( mId ) ) );
+//     File audiofile = TDFile.getFile( TDPath.getSurveyAudioFile( survey, Long.toString( mId ) ) );
 //     if ( audiofile.exists() ) {
 //       byte[] buf = TDExporter.readFileBytes( audiofile );
 //       if ( buf != null ) {
@@ -129,7 +130,7 @@ class DrawingAudioPath extends DrawingPointPath
   @Override
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
   { 
-    File audiofile = new File( TDPath.getSurveyAudioFile( survey, Long.toString( mId ) ) );
+    File audiofile = TDFile.getFile( TDPath.getSurveyAudioFile( survey, Long.toString( mId ) ) );
     if ( audiofile.exists() ) {
       byte[] buf = TDExporter.readFileBytes( audiofile );
       if ( buf != null ) {

@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDLocale;
 
 // import java.util.Locale;
@@ -129,7 +130,7 @@ class SymbolAreaLibrary extends SymbolLibrary
     // if ( locale.equals( "name-es" ) ) iso = "ISO-8859-1";
     // Log.v("DistoX", "area user symbols. locale <" + locale + ">");
 
-    File dir = new File( TDPath.getSymbolAreaDir() );
+    File dir = TDFile.getFile( TDPath.getSymbolAreaDir() );
     if ( dir.exists() ) {
       int systemNr = size();
       File[] files = dir.listFiles();
@@ -175,7 +176,7 @@ class SymbolAreaLibrary extends SymbolLibrary
     // APP_SAVE SYMBOLS
     if ( symbol == null ) {
       String filename = thname.startsWith("u:")? thname.substring(2) : thname; 
-      File file = new File( TDPath.getSymbolSaveAreaPath( filename ) );
+      File file = TDFile.getFile( TDPath.getSymbolSaveAreaPath( filename ) );
       if ( ! file.exists() ) return false;
       symbol = new SymbolArea( file.getPath(), file.getName(), locale, iso );
       addSymbol( symbol );

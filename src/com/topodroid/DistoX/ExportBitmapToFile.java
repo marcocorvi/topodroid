@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -51,8 +52,8 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
     boolean exec()
     {
       try {
-        File temp = File.createTempFile( "tmp", null, new File( TDPath.getPngFile("") ) );
-        final FileOutputStream out = new FileOutputStream( temp );
+        File temp = File.createTempFile( "tmp", null, TDFile.getFile( TDPath.getPngFile("") ) );
+        final FileOutputStream out = TDFile.getFileOutputStream( temp );
         mBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
         out.flush();
         out.close();
@@ -60,7 +61,7 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
         filename = TDPath.getPngFileWithExt( mFullName );
         synchronized( TDPath.mFilesLock ) {
           TDPath.checkPath( filename );
-          File file = new File( filename );
+          File file = TDFile.getFile( filename );
           temp.renameTo( file );
         }
         return true;

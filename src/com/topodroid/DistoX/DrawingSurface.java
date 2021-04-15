@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.num.NumStation;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
@@ -786,7 +787,7 @@ class DrawingSurface extends SurfaceView
   // boolean addloadTherion( String th2, float xdelta, float ydelta, SymbolsPalette missingSymbols )
   // {
   //   SymbolsPalette localPalette = BrushManager.preparePalette();
-  //   if ( (new File(th2)).exists() ) {
+  //   if ( (TDFile.getFile(th2)).exists() ) {
   //     return DrawingIO.doLoadTherion( this, th2, xdelta, ydelta, missingSymbols, localPalette );
   //   }
   //   return false;
@@ -806,7 +807,7 @@ class DrawingSurface extends SurfaceView
   {
     boolean ret = false;
     SymbolsPalette localPalette = BrushManager.preparePalette();
-    if ( (new File(tdr)).exists() ) {
+    if ( (TDFile.getFile(tdr)).exists() ) {
       ret = DrawingIO.doLoadDataStream( this, tdr, xdelta, ydelta, /* missingSymbols, */ localPalette, null, false, plotName );
     }
     return ret;
@@ -819,7 +820,7 @@ class DrawingSurface extends SurfaceView
     SymbolsPalette localPalette = BrushManager.preparePalette();
     // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.resetSymbolLists();
     if ( tdr1 != null ) {
-      if ( (new File( tdr1 )).exists() ) {
+      if ( (TDFile.getFile( tdr1 )).exists() ) {
         ret = DrawingIO.doLoadDataStream( this, tdr1, 0, 0, /* missingSymbols, */ localPalette, null, false, null ); // no plot_name
         if ( ret ) {
           BrushManager.makeEnabledListFromPalette( localPalette, false );

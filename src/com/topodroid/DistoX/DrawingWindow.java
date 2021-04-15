@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDStatus;
@@ -3061,11 +3062,11 @@ public class DrawingWindow extends ItemDrawer
     if ( BrushManager.isPointPhoto( point.mPointType ) ) {
       DrawingPhotoPath photo = (DrawingPhotoPath)point;
       mApp_mData.deletePhoto( TDInstance.sid, photo.mId );
-      TDUtil.deleteFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString( photo.mId ) ) );
+      TDFile.deleteFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString( photo.mId ) ) );
     } else if ( BrushManager.isPointAudio( point.mPointType ) ) {
       DrawingAudioPath audio = (DrawingAudioPath)point;
       mApp_mData.deleteNegAudio( TDInstance.sid, audio.mId );
-      TDUtil.deleteFile( TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString( audio.mId ) ) );
+      TDFile.deleteFile( TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString( audio.mId ) ) );
     } else if ( BrushManager.isPointSection( point.mPointType ) ) {
       mDrawingSurface.clearXSectionOutline( TDUtil.replacePrefix( TDInstance.survey, point.getOption( TDString.OPTION_SCRAP ) ) );
     }
@@ -3116,7 +3117,7 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.deleteSectionLine( line, scrap_name );
     TDPath.deletePlotFileWithBackups( TDPath.getTh2File( scrap_name + ".th2" ) );
     TDPath.deletePlotFileWithBackups( TDPath.getTdrFile( scrap_name + ".tdr" ) );
-    TDPath.deleteFile( TDPath.getJpgFile( TDInstance.survey, xs_id + ".jpg" ) );
+    TDFile.deleteFile( TDPath.getJpgFile( TDInstance.survey, xs_id + ".jpg" ) );
     // section point is deleted automatically
     // deleteSectionPoint( xs_id ); // delete section point and possibly clear section outline
     mDrawingSurface.clearXSectionOutline( scrap_name ); // clear outline if any
@@ -4351,7 +4352,7 @@ public class DrawingWindow extends ItemDrawer
     mMediaManager.prepareNextPhoto( -1, ((comment == null)? "" : comment), PhotoInfo.CAMERA_UNDEFINED );
     // mMediaComment = (comment == null)? "" : comment;
     // mMediaId = mApp_mData.nextPhotoId( TDInstance.sid );
-    // File imagefile = new File( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mMediaId) ) );
+    // File imagefile = TDFile.getFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mMediaId) ) );
     // TODO TD_XSECTION_PHOTO
     doTakePointPhoto( mMediaManager.getImagefile(), true, -1L ); // with inserter, no pid
   }
@@ -4372,7 +4373,7 @@ public class DrawingWindow extends ItemDrawer
       }
       long audio_id = mMediaManager.prepareNextAudioNeg( -1, "" );
       // mMediaId = mApp_mData.nextAudioNegId( TDInstance.sid );
-      // File file = new File( TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString(mMediaId) ) );
+      // File file = TDFile.getFile( TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString(mMediaId) ) );
       // TODO RECORD AUDIO
       new AudioDialog( mActivity, this, audio_id, null ).show();
     }
@@ -4433,8 +4434,8 @@ public class DrawingWindow extends ItemDrawer
       st.resetXSection();
       mApp_mData.deletePlotByName( xs_id, TDInstance.sid );
       // drop the files
-      TDUtil.deleteFile( TDPath.getSurveyPlotTdrFile( TDInstance.survey, xs_id ) );
-      TDUtil.deleteFile( TDPath.getSurveyPlotTh2File( TDInstance.survey, xs_id ) );
+      TDFile.deleteFile( TDPath.getSurveyPlotTdrFile( TDInstance.survey, xs_id ) );
+      TDFile.deleteFile( TDPath.getSurveyPlotTh2File( TDInstance.survey, xs_id ) );
       // TODO delete backup files
 
       deleteSectionPoint( xs_id ); 
@@ -5839,7 +5840,7 @@ public class DrawingWindow extends ItemDrawer
       long pid = prepareXSection( id, type, from, to, nick, azimuth, clino );
       if ( pid >= 0 ) {
         // imageFile := PHOTO_DIR / surveyId / photoId .jpg
-        File imagefile = new File( TDPath.getSurveyJpgFile( TDInstance.survey, id ) );
+        File imagefile = TDFile.getFile( TDPath.getSurveyJpgFile( TDInstance.survey, id ) );
         // TODO TD_XSECTION_PHOTO
         doTakePointPhoto( imagefile, false, pid ); // without inserter
       }
@@ -5994,13 +5995,13 @@ public class DrawingWindow extends ItemDrawer
     // private rotateBackups( String filename )
     // {
     //   String filename2 = filename + "4"; // last backup
-    //   File file2 = new File( filename2 );
+    //   File file2 = TDFile.getFile( filename2 );
     //   for ( int i=3; i>=0; --i ) { 
-    //     File file1 = new File( filename + Integer.toString(i) );
+    //     File file1 = TDFile.getFile( filename + Integer.toString(i) );
     //     if ( file1.exists() ) file1.renameTo( file2 );
     //     file2 = file1;
     //   }
-    //   File file = new File( filename );
+    //   File file = TDFile.getFile( filename );
     //   if ( file.exists() ) file.renameTo( file2 );
     // }
 

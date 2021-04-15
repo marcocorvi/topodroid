@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 
 import android.util.Log;
 
@@ -196,7 +197,7 @@ class SymbolLibrary
 
   //   Symbol symbol = getSymbolByFilename( fname );
   //   if ( symbol == null ) {
-  //     File file = new File( filename );
+  //     File file = TDFile.getFile( filename );
   //     if ( ! file.exists() ) return false;
   //     symbol = new Symbol( file.getPath(), locale, iso );
   //     mSymbols.add( symbol );

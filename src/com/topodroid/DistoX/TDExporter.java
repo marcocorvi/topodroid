@@ -28,6 +28,7 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDVersion;
+import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.math.TDVector;
 import com.topodroid.math.TDMatrix;
@@ -110,7 +111,7 @@ class TDExporter
       int read = 0;
       try {
         // TDLog.Log( TDLog.LOG_IO, "read file bytes: " + file.getPath() );
-        FileInputStream fis = new FileInputStream( file );
+        FileInputStream fis = TDFile.getFileInputStream( file );
         BufferedInputStream bis = new BufferedInputStream( fis );
         while ( read < len ) {
           read += bis.read( buf, read, len-read );
@@ -212,7 +213,7 @@ class TDExporter
     pw.format("      <attachments>\n");
     if ( audio != null ) {
       // Log.v("DistoX", "audio " + audio.id + " " + audio.shotid + " blk " + bid );
-      File audiofile = new File( TDPath.getSurveyAudioFile( survey, Long.toString(bid) ) );
+      File audiofile = TDFile.getFile( TDPath.getSurveyAudioFile( survey, Long.toString(bid) ) );
       if ( audiofile.exists() ) {
         byte[] buf = readFileBytes( audiofile );
         if ( buf != null ) {
@@ -223,7 +224,7 @@ class TDExporter
     }
     String photodir = TDPath.getSurveyPhotoDir( survey );
     for ( PhotoInfo photo : photos ) {
-      File photofile = new File( TDPath.getSurveyJpgFile( survey, Long.toString(photo.id) ) );
+      File photofile = TDFile.getFile( TDPath.getSurveyJpgFile( survey, Long.toString(photo.id) ) );
       if ( photofile.exists() ) {
         byte[] buf = readFileBytes( photofile );
         if ( buf != null ) {
@@ -286,7 +287,7 @@ class TDExporter
     }
 
     try {
-      FileWriter fw  = new FileWriter( file );
+      FileWriter fw  = TDFile.getFileWriter( file );
       PrintWriter pw = new PrintWriter( fw );
       String date = TDUtil.getDateString( "yyyy-MM-dd" );
 
@@ -691,7 +692,7 @@ class TDExporter
     // now write the KML
     try {
       // TDLog.Log( TDLog.LOG_IO, "export KML " + file );
-      FileWriter fw  = new FileWriter( file );
+      FileWriter fw  = TDFile.getFileWriter( file );
       PrintWriter pw = new PrintWriter( fw );
 
       pw.format("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
@@ -828,7 +829,7 @@ class TDExporter
     try {
       // TDLog.Log( TDLog.LOG_IO, "export SHP " + filename );
       // TDPath.checkPath( filename );
-      File dir = new File( filename );
+      File dir = TDFile.getFile( filename );
       if ( (dir != null) && ( dir.exists() || dir.mkdirs() ) ) {
         ArrayList< File > files = new ArrayList<>();
         int nr = 0;
@@ -870,7 +871,7 @@ class TDExporter
 
         Archiver zipper = new Archiver( );
         zipper.compressFiles( filename + ".shz", files );
-        TDUtil.deleteDir( filename ); // delete temporary shapedir
+        TDFile.deleteDir( filename ); // delete temporary shapedir
       }
     } catch ( IOException e ) {
       TDLog.Error( "Failed SHP export: " + e.getMessage() );
@@ -901,7 +902,7 @@ class TDExporter
     // now write the GeoJSON
     try {
       // TDLog.Log( TDLog.LOG_IO, "export GeoJSON " + file.getName() );
-      FileWriter fw  = new FileWriter( file );
+      FileWriter fw  = TDFile.getFileWriter( file );
       PrintWriter pw = new PrintWriter( fw );
 
       pw.format("const geojsonObject = {\n");
@@ -983,7 +984,7 @@ class TDExporter
     // now write the PLT file
     try {
       // TDLog.Log( TDLog.LOG_IO, "export trackfile " + file.getName() );
-      FileWriter fw = new FileWriter( file );
+      FileWriter fw = TDFile.getFileWriter( file );
       PrintWriter pw = new PrintWriter( fw );
 
       pw.format("OziExplorer Track Point File Version 2.1\r\n");
@@ -1108,7 +1109,7 @@ class TDExporter
     // }
 
     try {
-      FileOutputStream fos = new FileOutputStream( file );
+      FileOutputStream fos = TDFile.getFileOutputStream( file );
       ptfile.write( fos );
       fos.close();
       return 1;
@@ -1150,7 +1151,7 @@ class TDExporter
   {
     if ( plots.size() == 0 ) return;
     for ( PlotInfo plt : plots ) {
-      File plot_file = new File( TDPath.getSurveyPlotTh2File( info.name, plt.name ) );
+      File plot_file = TDFile.getFile( TDPath.getSurveyPlotTh2File( info.name, plt.name ) );
       if ( plot_file.exists() ) {
         if ( TDSetting.mTherionConfig ) {
           pw.format("  input \"../th2/%s-%s.th2\"\n", info.name, plt.name );
@@ -1164,7 +1165,7 @@ class TDExporter
       if ( PlotType.isSketch2D( plt.type ) ) {
         int scrap_nr = plt.maxscrap;
         // Log.v("DistoX-EXP", plt.name + " is 2D sketch - scraps " + scrap_nr );
-        File plot_file = new File( TDPath.getSurveyPlotTh2File( info.name, plt.name ) );
+        File plot_file = TDFile.getFile( TDPath.getSurveyPlotTh2File( info.name, plt.name ) );
         if ( plot_file.exists() ) {
           pw.format("  # map m%s -projection %s\n", plt.name, PlotType.projName( plt.type ) );
           pw.format("  #   %s-%s\n", info.name, plt.name );
@@ -1191,10 +1192,10 @@ class TDExporter
   {
     if ( TDSetting.mTherionConfig ) { // craete thconfig
       synchronized( TDPath.mFilesLock ) {
-        File dir = new File( TDPath.getThconfigDir() );
+        File dir = TDFile.getFile( TDPath.getThconfigDir() );
         if ( ! dir.exists() ) dir.mkdirs();
         try {
-          FileWriter fcw = new FileWriter( TDPath.getSurveyThConfigFile( info.name ) );
+          FileWriter fcw = TDFile.getFileWriter( TDPath.getSurveyThConfigFile( info.name ) );
           BufferedWriter bcw = new BufferedWriter( fcw );
           PrintWriter pcw = new PrintWriter( bcw );
           pcw.format("# %s created by TopoDroid v %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
@@ -1235,7 +1236,7 @@ class TDExporter
     List< CurrentStation > stations = data.getStations( sid );
     try {
       // TDLog.Log( TDLog.LOG_IO, "export Therion " + file.getName() );
-      FileWriter fw = new FileWriter( file );
+      FileWriter fw = TDFile.getFileWriter( file );
       BufferedWriter bw = new BufferedWriter( fw );
       PrintWriter pw = new PrintWriter( bw );
 
@@ -1620,7 +1621,7 @@ class TDExporter
     // float decl = info.getDeclination(); // DECLINATION not used
     try {
       // TDLog.Log( TDLog.LOG_IO, "export Survex " + file.getName() );
-      FileWriter fw = new FileWriter( file );
+      FileWriter fw = TDFile.getFileWriter( file );
       PrintWriter pw = new PrintWriter( fw );
 
       pw.format("; %s created by TopoDroid v %s", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
@@ -1945,7 +1946,7 @@ class TDExporter
     char sep = TDSetting.mCsvSeparator;
     String newline = TDSetting.mSurvexEol;
     try {
-      FileWriter  fw = new FileWriter( file );
+      FileWriter  fw = TDFile.getFileWriter( file );
       PrintWriter pw = new PrintWriter( fw );
       pw.format("# %s [*] created by TopoDroid v %s%s", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string(), newline );
       pw.format("# %s%s", info.name, newline );
@@ -1983,7 +1984,7 @@ class TDExporter
     String uas = ( ua < 1.01f )? "degrees" : "grads";
     try {
       // TDLog.Log( TDLog.LOG_IO, "export CSV " + file.getName() );
-      FileWriter fw = new FileWriter( file );
+      FileWriter fw = TDFile.getFileWriter( file );
       PrintWriter pw = new PrintWriter( fw );
 
       pw.format("# %s created by TopoDroid v %s%s", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string(), newline );
@@ -2100,7 +2101,7 @@ class TDExporter
 
   // public String exportSurveyAsTlx( long sid, DataHelper data, SurveyInfo info, String filename ) // FIXME args
   // {
-  //   File dir = new File( TopoDroidApp.APP_TLX_PATH );
+  //   File dir = TDFile.getFile( TopoDroidApp.APP_TLX_PATH );
   //   if (!dir.exists()) {
   //     dir.mkdirs();
   //   }
@@ -2109,7 +2110,7 @@ class TDExporter
   //   checkShotsClino( list );
   //   try {
   //     TDPath.checkPath( filename );
-  //     FileWriter fw = new FileWriter( filename );
+  //     FileWriter fw = TDFile.getFileWriter( filename );
   //     PrintWriter pw = new PrintWriter( fw );
   //     pw.format("tlx2\n");
   //     pw.format("# %s created by TopoDroid v %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
@@ -2427,7 +2428,7 @@ class TDExporter
     checkShotsClino( list );
     try {
       // TDLog.Log( TDLog.LOG_IO, "export Compass " + file.getName() );
-      FileWriter fw = new FileWriter( file );
+      FileWriter fw = TDFile.getFileWriter( file );
       PrintWriter pw = new PrintWriter( fw );
   
       // FIXME 
@@ -2581,7 +2582,7 @@ class TDExporter
     char[] line = new char[ TRB_LINE_LENGTH ];
     try {
       // TDLog.Log( TDLog.LOG_IO, "export TopoRobot " + file.getName() );
-      FileWriter fw = new FileWriter( file );
+      FileWriter fw = TDFile.getFileWriter( file );
       PrintWriter pw = new PrintWriter( fw );
   
       // FIXME 
@@ -2818,7 +2819,7 @@ class TDExporter
     checkShotsClino( list );
     try {
       // TDLog.Log( TDLog.LOG_IO, "export WinKarst " + file.getName() );
-      FileWriter fw = new FileWriter( file );
+      FileWriter fw = TDFile.getFileWriter( file );
       PrintWriter pw = new PrintWriter( fw );
   
       // FIXME 
@@ -2946,7 +2947,7 @@ class TDExporter
     String date = info.date.replace( '.', '-' );
     try {
       // TDLog.Log( TDLog.LOG_IO, "export GHTopo " + file.getName() );
-      FileWriter fw = new FileWriter( file );
+      FileWriter fw = TDFile.getFileWriter( file );
       PrintWriter pw = new PrintWriter( fw );
 
       pw.format("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<GHTopo>\n");
@@ -3116,7 +3117,7 @@ class TDExporter
   {
     try {
       // TDLog.Log( TDLog.LOG_IO, "export Grottolf " + file.getName() );
-      FileWriter fw = new FileWriter( file );
+      FileWriter fw = TDFile.getFileWriter( file );
       PrintWriter pw = new PrintWriter( fw );
   
       pw.format("%s\n", info.name );
@@ -3227,7 +3228,7 @@ class TDExporter
 
     try {
       // TDLog.Log( TDLog.LOG_IO, "export Walls " + file.getName() );
-      FileWriter fw = new FileWriter( file );
+      FileWriter fw = TDFile.getFileWriter( file );
       PrintWriter pw = new PrintWriter( fw );
   
       pw.format("; %s\n", info.name );
@@ -3481,7 +3482,7 @@ class TDExporter
 
     try {
       // TDLog.Log( TDLog.LOG_IO, "export Topo " + file.getName() );
-      FileWriter fw = new FileWriter( file );
+      FileWriter fw = TDFile.getFileWriter( file );
       PrintWriter pw = new PrintWriter( fw );
 
       pw.format("#cave %s%s", info.name, eol );
@@ -3630,7 +3631,7 @@ class TDExporter
 
     try {
       // TDLog.Log( TDLog.LOG_IO, "export Polygon " + file.getName() );
-      FileWriter fw = new FileWriter( file );
+      FileWriter fw = TDFile.getFileWriter( file );
       PrintWriter pw = new PrintWriter( fw );
 
       pw.format("POLYGON Cave Surveying Software"); printPolygonEOL( pw );
@@ -3851,7 +3852,7 @@ class TDExporter
     // Log.v( TAG, "export SurveyAsDxf " + file.getName() );
     try {
       // TDLog.Log( TDLog.LOG_IO, "export DXF " + file.getName() );
-      FileWriter fw = new FileWriter( file );
+      FileWriter fw = TDFile.getFileWriter( file );
       PrintWriter out = new PrintWriter( fw );
       // TODO
       out.printf(Locale.US, "999\nDXF created by TopoDroid v %s - %s ", TDVersion.string(), TDUtil.getDateString("yyyy.MM.dd") );
@@ -4076,7 +4077,7 @@ class TDExporter
     List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
     try {
       // TDLog.Log( TDLog.LOG_IO, "export VisualTopo " + file.getName() );
-      FileWriter fw = new FileWriter( file );
+      FileWriter fw = TDFile.getFileWriter( file );
       PrintWriter pw = new PrintWriter( fw );
 
       StringWriter sw = new StringWriter();
@@ -4200,7 +4201,7 @@ class TDExporter
     try {
       // TDLog.Log( TDLog.LOG_IO, "export calibration " + filename );
       TDPath.checkPath( filename );
-      FileWriter fw = new FileWriter( filename );
+      FileWriter fw = TDFile.getFileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
 
       pw.format("# %s created by TopoDroid v %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
@@ -4281,7 +4282,7 @@ class TDExporter
     try {
       // TDLog.Log( TDLog.LOG_IO, "import calibration file " + filename );
       TDPath.checkPath( filename );
-      FileReader fr = new FileReader( filename );
+      FileReader fr = TDFile.getFileReader( filename );
       BufferedReader br = new BufferedReader( fr );
     
       String line = br.readLine();

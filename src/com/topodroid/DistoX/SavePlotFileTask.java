@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
@@ -119,14 +120,14 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
       // first pass: export
       if ( mSuffix == PlotSave.EXPORT ) {
         if ( mManager != null ) {
-          File file2 = new File( TDPath.getTh2FileWithExt( mFullName ) );
+          File file2 = TDFile.getFile( TDPath.getTh2FileWithExt( mFullName ) );
           DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false ); // single sketch
         }
       } else if ( mSuffix == PlotSave.SAVE ) {
         switch ( TDSetting.mExportPlotFormat ) { // auto-export format
           case TDConst.DISTOX_EXPORT_TH2:
             if ( mManager != null ) {
-              File file2 = new File( TDPath.getTh2FileWithExt( mFullName ) );
+              File file2 = TDFile.getFile( TDPath.getTh2FileWithExt( mFullName ) );
               DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false ); // single sketch
             }
             break;
@@ -185,7 +186,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         }
       } else if ( mSuffix == PlotSave.OVERVIEW ) {
 	Log.v("DistoXX", "save plot file OVERVIEW " + mFullName );
-        File file = new File( TDPath.getTh2FileWithExt( mFullName ) );
+        File file = TDFile.getFile( TDPath.getTh2FileWithExt( mFullName ) );
         DrawingIO.exportTherion( mManager, mType, file, mFullName, PlotType.projName( mType ), mProjDir, true ); // multi-sketch
 	return true;
       }
@@ -211,7 +212,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         }
 
         String tempname1 = TDPath.getTmpFileWithExt( Integer.toString(mSuffix) + Long.toString(now) );
-        File file1 = new File( tempname1 );
+        File file1 = TDFile.getFile( tempname1 );
         // TDLog.Log( TDLog.LOG_PLOT, "saving binary " + mFullName );
         // Log.v( "DistoX", "saving binary " + mFullName );
         if ( mSuffix == PlotSave.CREATE ) {
@@ -231,13 +232,13 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
           // TDLog.Log( TDLog.LOG_PLOT, "save binary completed" + mFullName );
           // Log.v( "DistoX", "save binary completed" + mFullName );
           String filename1 = TDPath.getTdrFileWithExt( mFullName );
-          File file0 = new File( filename1 );
+          File file0 = TDFile.getFile( filename1 );
           if ( file0.exists() ) {
-            if ( ! file0.renameTo( new File( filename1 + TDPath.BCK_SUFFIX ) ) ) {
+            if ( ! file0.renameTo( TDFile.getFile( filename1 + TDPath.BCK_SUFFIX ) ) ) {
               TDLog.Error("failed rename " + filename1 + TDPath.BCK_SUFFIX );
             }
           }
-          if ( ! file1.renameTo( new File( filename1 ) ) ) {
+          if ( ! file1.renameTo( TDFile.getFile( filename1 ) ) ) {
             TDLog.Error("failed rename " + filename1 );
           }
         }

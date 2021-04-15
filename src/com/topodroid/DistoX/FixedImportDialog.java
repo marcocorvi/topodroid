@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
 
@@ -141,8 +142,8 @@ class FixedImportDialog extends MyDialog
   {
     mArrayAdapter.clear();
 
-    File dir = new File( POINTLISTS );
-    if ( ! dir.exists() ) dir = new File( POINTLISTS_PRO );
+    File dir = TDFile.getFile( POINTLISTS );
+    if ( ! dir.exists() ) dir = TDFile.getFile( POINTLISTS_PRO );
     if ( ! dir.exists() ) return 0;
 
     File[] files = dir.listFiles();
@@ -165,8 +166,8 @@ class FixedImportDialog extends MyDialog
     int ret = 0;
     try {
       // TDLog.Log( TDLog.LOG_IO, "read GPS points file " + filename );
-      File file = new File( dir, filename );
-      FileReader fr = new FileReader( file );
+      File file = TDFile.getFile( dir, filename );
+      FileReader fr = TDFile.getFileReader( file );
       BufferedReader br = new BufferedReader( fr );
       for ( ; ; ) {
         String line = br.readLine();

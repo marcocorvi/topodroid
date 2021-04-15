@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
 
@@ -89,7 +90,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
         }
         boolean ret = true;
         // if ( filename != null ) { // always true
-          // final FileOutputStream out = new FileOutputStream( filename );
+          // final FileOutputStream out = TDFile.getFileOutputStream( filename );
           // Log.v("DistoX-SAVE", "Export to File: " + filename );
           TDLog.Log( TDLog.LOG_IO, "export plot to file " + filename );
           if ( mExt.equals("shp") ) { 
@@ -98,8 +99,8 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
 	      DrawingShp.writeShp( filename, mCommand, mType, mStation );
             }
 	  } else {
-            File temp = File.createTempFile( "tmp", null, new File( dirname ) );
-            final FileWriter fw = new FileWriter( temp );
+            File temp = File.createTempFile( "tmp", null, TDFile.getFile( dirname ) );
+            final FileWriter fw = TDFile.getFileWriter( temp );
             BufferedWriter bw = new BufferedWriter( fw );
             if ( mExt.equals("dxf") ) {
               DrawingDxf.writeDxf( bw, mNum, mCommand, mType );
@@ -121,7 +122,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
             bw.close();
             synchronized( TDPath.mFilesLock ) { 
               TDPath.checkPath( filename );
-              File file = new File( filename );
+              File file = TDFile.getFile( filename );
               temp.renameTo( file );
             }
 	  }

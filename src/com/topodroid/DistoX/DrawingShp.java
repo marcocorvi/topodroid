@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDMath;
 import com.topodroid.shp.ShpObject;
 import com.topodroid.shp.ShpPoint;
@@ -58,7 +59,7 @@ class DrawingShp
     }
 
     try {
-      dir = new File( basepath );
+      dir = TDFile.getFile( basepath );
       if ( ! dir.exists() && ! dir.mkdir() ) {
         TDLog.Error("mkdir error");
         return false;
@@ -109,13 +110,13 @@ class DrawingShp
 
       Archiver zipper = new Archiver( );
       zipper.compressFiles( basepath + ".shz", files );
-      TDUtil.deleteDir( basepath ); // delete temporary shapedir
+      TDFile.deleteDir( basepath ); // delete temporary shapedir
 
     } catch ( IOException e ) {
       TDLog.Error( "SHP io-exception " + e.getMessage() );
       return false;
     } finally {
-      TDUtil.deleteDir( dir );
+      TDFile.deleteDir( dir );
     }
     return true;
   }
