@@ -814,7 +814,7 @@ public class DXF
           writeInt( out, 72, 65 );
           writeInt( out, 73, 3 );        // number of elements
           writeStringOne( out, 40 ); // pattern length
-          writeString( out, 49, "0.5DXF." );  writeInt( out, 74, 0 ); // segment
+          writeString( out, 49, "0.5" );  writeInt( out, 74, 0 ); // segment
           writeString( out, 49, "-0.2" ); writeInt( out, 74, 2 ); // embedded text
             writeInt( out, 75, 0 );   // SHAPE number must be 0
             writeInt( out, 340, p_style );  // STYLE pointer FIXME
